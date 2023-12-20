@@ -39,7 +39,7 @@ You can access the Top SQL page using either of the following methods:
 
   ![Top SQL](/media/dashboard/top-sql-access.png)
 
-* Visit <http://127.0.0.1:2379/dashboard/#/topsql> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
+* Visit [http://127.0.0.1:2379/dashboard/#/topsql](http://127.0.0.1:2379/dashboard/#/topsql) in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
 
 ## Enable Top SQL
 

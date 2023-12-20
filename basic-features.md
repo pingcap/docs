@@ -57,10 +57,10 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Invisible indexes](/sql-statements/sql-statement-add-index.md) | Y | Y | Y | Y | Y | Y | Y | Y | N |
 | [Composite `PRIMARY KEY`](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Unique indexes](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Clustered index on integer `PRIMARY KEY`](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Clustered index on composite or non-integer key](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | N |
+| [Clustered index on integer `PRIMARY KEY`](/clustered-indexes.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Clustered index on composite or non-integer key](/clustered-indexes.md) | Y | Y | Y | Y | Y | Y | Y | Y | N |
 | [Multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes) | Y | N | N | N | N | N | N | N | N |
-| [Foreign key](/constraints.md#foreign-key) | Y | N | N | N | N | N | N | N | N |
+| [Foreign key](/constraints.md#foreign-key) | E | N | N | N | N | N | N | N | N |
 | [TiFlash late materialization](/tiflash/tiflash-late-materialization.md) | Y | N | N | N | N | N | N | N | N |
 
 ## SQL statements
@@ -71,7 +71,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | `INSERT ON DUPLICATE KEY UPDATE` | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | `LOAD DATA INFILE` | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | `SELECT INTO OUTFILE` | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| `INNER JOIN`, LEFT\|RIGHT [OUTER] JOIN | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| `INNER JOIN`, <code>LEFT\|RIGHT [OUTER] JOIN</code> | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | `UNION`, `UNION ALL` | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [`EXCEPT` and `INTERSECT` operators](/functions-and-operators/set-operators.md) | Y | Y | Y | Y | Y | Y | Y | Y | N |
 | `GROUP BY`, `ORDER BY` | Y | Y | Y | Y | Y | Y | Y | Y | Y |

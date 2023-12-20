@@ -7,6 +7,10 @@ summary: An overview of the usage of SHOW DRAINER STATUS for the TiDB database.
 
 The `SHOW DRAINER STATUS` statement displays the status information for all Drainer nodes in the cluster.
 
+> **Note:**
+>
+> This feature is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+
 ## Examples
 
 {{< copyable "sql" >}}

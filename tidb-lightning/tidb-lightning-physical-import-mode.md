@@ -5,7 +5,7 @@ summary: Learn about the physical import mode in TiDB Lightning.
 
 # Physical Import Mode
 
-Physical import mode is an efficient and fast import mode that inserts data directly into TiKV nodes as key-value pairs without going through the SQL interface. When using the physical import mode, a single instance of Lightning can import up to 10 TiB of data. The supported amount of imported data theoretically increases as the number of Lightning instances increases. It is verified by users that [parallel importing](/tidb-lightning/tidb-lightning-distributed-import.md) based on Lightning can effectively handle up to 20 TiB of data.
+Physical import mode is an efficient and fast import mode that inserts data directly into TiKV nodes as key-value pairs without going through the SQL interface. When using the physical import mode, a single instance of Lightning can import up to 10 TiB of data. The supported amount of imported data theoretically increases as the number of Lightning instances increases. It is verified by users that [parallel importing](/tidb-lightning/tidb-lightning-distributed-import.md) based on Lightning can effectively handle up to 50 TiB of data.
 
 Before you use the physical import mode, make sure to read [Requirements and restrictions](#requirements-and-restrictions).
 
@@ -93,3 +93,9 @@ It is recommended that you allocate CPU more than 32 cores and memory greater th
 - When you use TiDB Lightning with TiCDC, note the following:
 
     - TiCDC cannot capture the data inserted in the physical import mode.
+
+- When you use TiDB Lightning with BR, note the following:
+
+    - When BR backs up snapshots of tables that are being imported by TiDB Lightning, it might result in inconsistent backup data for those tables.
+    - When BR backs up data using AWS EBS volume snapshots, TiDB Lightning might fail to import data.
+    - Point-in-time recovery (PITR) cannot back up data imported by TiDB Lightning.

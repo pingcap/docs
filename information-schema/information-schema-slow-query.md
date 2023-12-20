@@ -7,13 +7,9 @@ summary: Learn the `SLOW_QUERY` INFORMATION_SCHEMA table.
 
 The `SLOW_QUERY` table provides the slow query information of the current node, which is the parsing result of the TiDB slow log file. The column names in the table are corresponding to the field names in the slow log.
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
-> The `SLOW_QUERY` table is unavailable for [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
-
-</CustomContent>
+> This table is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 
 <CustomContent platform="tidb">
 
@@ -110,9 +106,15 @@ The output is as follows:
 74 rows in set (0.001 sec)
 ```
 
+The maximum statement length of the `Query` column is limited by the [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40) system variable.
+
 ## CLUSTER_SLOW_QUERY table
 
 The `CLUSTER_SLOW_QUERY` table provides the slow query information of all nodes in the cluster, which is the parsing result of the TiDB slow log files. You can use the `CLUSTER_SLOW_QUERY` table the way you do with `SLOW_QUERY`. The table schema of the `CLUSTER_SLOW_QUERY` table differs from that of the `SLOW_QUERY` table in that an `INSTANCE` column is added to `CLUSTER_SLOW_QUERY`. The `INSTANCE` column represents the TiDB node address of the row information on the slow query.
+
+> **Note:**
+>
+> This table is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 
 <CustomContent platform="tidb">
 
@@ -222,9 +224,9 @@ The output is as follows:
 | id                         | estRows  | task      | access object            | operator info                                        |
 +----------------------------+----------+-----------+--------------------------+------------------------------------------------------+
 | StreamAgg_7                | 1.00     | root      |                          | funcs:count(1)->Column#75                            |
-| └─TableReader_13       | 10.00    | root      |                          | data:Selection_12                                    |
-|   └─Selection_12       | 10.00    | cop[tidb] |                          | eq(INFORMATION_SCHEMA.cluster_slow_query.user, "u1") |
-|     └─TableFullScan_11 | 10000.00 | cop[tidb] | table:CLUSTER_SLOW_QUERY | keep order:false, stats:pseudo                       |
+| └─TableReader_13           | 10.00    | root      |                          | data:Selection_12                                    |
+|   └─Selection_12           | 10.00    | cop[tidb] |                          | eq(INFORMATION_SCHEMA.cluster_slow_query.user, "u1") |
+|     └─TableFullScan_11     | 10000.00 | cop[tidb] | table:CLUSTER_SLOW_QUERY | keep order:false, stats:pseudo                       |
 +----------------------------+----------+-----------+--------------------------+------------------------------------------------------+
 4 rows in set (0.00 sec)
 ```

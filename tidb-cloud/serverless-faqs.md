@@ -28,9 +28,9 @@ For each organization in TiDB Cloud, you can create a maximum of five TiDB Serve
 
 Some of TiDB Cloud features are partially supported or not supported on TiDB Serverless. For more information, see [TiDB Serverless Limitations and Quotas](/tidb-cloud/serverless-limitations.md).
 
-### When will TiDB serverless be available on cloud platforms other than AWS, such as GCP or Azure?
+### When will TiDB serverless be available on cloud platforms other than AWS, such as Google Cloud or Azure?
 
-We are actively working on expanding TiDB Serverless to other cloud platforms, including GCP and Azure. However, we do not have an exact timeline for now as we currently focus on filling gaps and ensuring seamless functionality across all environments. Rest assured, we are working hard to make TiDB Serverless available on more cloud platforms, and we will keep our community updated as we progress.
+We are actively working on expanding TiDB Serverless to other cloud platforms, including Google Cloud and Azure. However, we do not have an exact timeline for now as we currently focus on filling gaps and ensuring seamless functionality across all environments. Rest assured, we are working hard to make TiDB Serverless available on more cloud platforms, and we will keep our community updated as we progress.
 
 ### I created a Developer Tier cluster before TiDB Serverless was available. Can I still use my cluster?
 
@@ -86,6 +86,10 @@ A spike in RU usage can occur due to necessary background jobs in TiDB. These jo
 ### What happens when my cluster exhausts its free quota or exceeds its spending limit?
 
 Once a cluster reaches its free quota or spending limit, the cluster will enforce throttling measures on its read and write operations. These operations will be limited until the quota is increased or the usage is reset at the start of a new month. For more information, see [TiDB Serverless Limitations and Quotas](/tidb-cloud/serverless-limitations.md#usage-quota).
+
+### Why do I observe spikes in RU usage while importing data?
+
+During the data import process of a TiDB Serverless cluster, RU consumption occurs only when the data is successfully imported, which leads to spikes in RU usage.
 
 ## Security FAQs
 

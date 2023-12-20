@@ -7,6 +7,10 @@ summary: An overview of the usage of LOAD STATS for the TiDB database.
 
 The `LOAD STATS` statement is used to load the statistics into TiDB.
 
+> **Note:**
+>
+> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+
 ## Synopsis
 
 ```ebnf+diagram

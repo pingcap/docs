@@ -92,7 +92,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/status
 
 ```json
 {
-  "version": "v7.1.1",
+  "version": "v7.1.2",
   "git_hash": "10413bded1bdb2850aa6d7b94eb375102e9c44dc",
   "id": "d2912e63-3349-447c-90ba-72a4e04b5e9e",
   "pid": 1447,
@@ -321,17 +321,18 @@ The `mounter` parameter is described as follows:
 
 The `sink` parameters are described as follows:
 
-| Parameter name | Description |
-|:-----------------|:---------------------------------------|
-| `column_selectors`      | The column selector configuration. (Optional)                                              |
-| `csv`                   | The CSV configuration. (Optional)                                         |
-| `date_separator`        | `STRING` type. Indicates the date separator type of the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. (Optional)      |
-| `dispatchers`           | An configuration array for event dispatching. (Optional)                                                     |
-| `encoder_concurrency`   | `INT` type. The number of encoder threads in the MQ sink. The default value is `16`. (Optional)               |
-| `protocol`              | `STRING` type. For MQ sinks, you can specify the protocol format of the message. The following protocols are currently supported: `canal-json`, `open-protocol`, `canal`, `avro`, and `maxwell`. |
-| `schema_registry`       | `STRING` type. The schema registry address. (Optional)                                                  |
-| `terminator`            | `STRING` type. The terminator is used to separate two data change events. The default value is null, which means `"\r\n"` is used as the terminator. (Optional)                |
-| `transaction_atomicity` | `STRING` type. The atomicity level of the transaction. (Optional)  |
+| Parameter name | Description                                                                                                                                                                                                    |
+|:-----------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `column_selectors`      | The column selector configuration. (Optional)                                                                                                                                                                  |
+| `csv`                   | The CSV configuration. (Optional)                                                                                                                                                                              |
+| `date_separator`        | `STRING` type. Indicates the date separator type of the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. (Optional) |
+| `dispatchers`           | An configuration array for event dispatching. (Optional)                                                                                                                                                       |
+| `encoder_concurrency`   | `INT` type. The number of encoder threads in the MQ sink. The default value is `16`. (Optional)                                                                                                                |
+| `protocol`              | `STRING` type. For MQ sinks, you can specify the protocol format of the message. The following protocols are currently supported: `canal-json`, `open-protocol`, `canal`, `avro`, and `maxwell`.               |
+| `schema_registry`       | `STRING` type. The schema registry address. (Optional)                                                                                                                                                         |
+| `terminator`            | `STRING` type. The terminator is used to separate two data change events. The default value is null, which means `"\r\n"` is used as the terminator. (Optional)                                                |
+| `transaction_atomicity` | `STRING` type. The atomicity level of the transaction. (Optional)                                                                                                                                              |
+| `only_output_updated_columns` | `BOOLEAN` type. For MQ sinks using the `canal-json` or `open-protocol` protocol, you can specify whether only output the modified columns. The default value is `false`. (Optional) |
 
 `sink.column_selectors` is an array. The parameters are described as follows:
 

@@ -184,6 +184,21 @@ This section provides a detailed description of these key metrics on the **TiKV-
 
 ![TiKV Dashboard - Storage metrics](/media/tikv-dashboard-storage.png)
 
+### Flow Control
+
+- Scheduler flow: The scheduler traffic on each TiKV instance in real time.
+- Scheduler discard ratio: The rejection ratio of scheduler requests on each TiKV instance. If this ratio is greater than 0, it indicates that flow control exists. When `Compaction pending bytes` exceeds its threshold, TiKV will linearly increase the `Scheduler discard ratio` based on the exceeded portion. The client will retry the rejected requests automatically.
+- Throttle duration: The blocked duration for the execution of the scheduler requests when flow control is triggered due to too many L0 files. If this metric has values, it indicates that flow control exists.
+- Scheduler throttled CF: The CF that triggers RocksDB throttling when the flow control threshold is reached.
+- Flow controller actions: The actions that trigger RocksDB throttling when the flow control threshold is reached.
+- Flush/L0 flow: The traffic of flush and L0 compaction for different CFs of RocksDB on each TiKV instance.
+- Flow control factors: The factors related to triggering RocksDB throttling.
+- Compaction pending bytes: The size of the RocksDB data awaiting compaction in real time on each TiKV instance.
+- Txn command throttled duration: The blocked duration for commands related to transactions due to throttling. Under normal circumstances, this metric is 0.
+- Non-txn command throttled duration: The blocked duration for other commands due to throttling. Under normal circumstances, this metric is 0.
+
+![TiKV Dashboard - Flow Control metrics](/media/tikv-dashboard-flow-control.png)
+
 ### Scheduler
 
 - Scheduler stage total: The number of commands at each stage per second. There should not be a lot of errors in a short time.
@@ -405,6 +420,20 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Deadlock detector leader: The information of the node where the deadlock detector leader is located
 - Total pessimistic locks memory size: The memory size occupied by the in-memory pessimistic locks
 - In-memory pessimistic locking result: The result of only saving pessimistic locks to memory. `full` means the number of times that the pessimistic lock is not saved to memory because the memory limit is exceeded.
+
+### Resolved-TS
+
+- Resolved-TS worker CPU: The CPU utilization of the resolved-ts worker threads
+- Advance-TS worker CPU: The CPU utilization of the advance-ts worker threads
+- Scan lock worker CPU: The CPU utilization of the scan lock worker threads
+- Max gap of resolved-ts: The maximum time difference between the resolved-ts of all active Regions in this TiKV and the current time
+- Max gap of safe-ts: The maximum time difference between the safe-ts of all active Regions in this TiKV and the current time
+- Min Resolved TS Region: The ID of the Region whose resolved-ts is the minimal
+- Min Safe TS Region: The ID of the Region whose safe-ts is the minimal
+- Check Leader Duration: The distribution of time spent on processing leader requests. The duration is from sending requests to receiving responses in leader
+- Max gap of resolved-ts in Region leaders: The maximum time difference between the resolved-ts of all active Regions in this TiKV and the current time, only for Region leaders
+- Min Leader Resolved TS Region: The ID of the Region whose resolved-ts is the minimal, only for Region leaders
+- Lock heap size: The size of the heap that tracks locks in the resolved-ts module
 
 ### Memory
 

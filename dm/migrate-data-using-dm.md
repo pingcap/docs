@@ -182,7 +182,7 @@ tiup dmctl --master-addr 172.16.10.71:8261 stop-task test
 
 ## Step 8: Monitor the task and check logs
 
-Assuming that Prometheus, Alertmanager, and Grafana are successfully deployed along with the DM cluster deployment using TiUP, and the Grafana address is `172.16.10.71`. To view the alert information related to DM, you can open <http://172.16.10.71:9093> in a browser and enter into Alertmanager; to check monitoring metrics, go to <http://172.16.10.71:3000>, and choose the DM dashboard.
+Assuming that Prometheus, Alertmanager, and Grafana are successfully deployed along with the DM cluster deployment using TiUP, and the Grafana address is `172.16.10.71`. To view the alert information related to DM, you can open [http://172.16.10.71:9093](http://172.16.10.71:9093) in a browser and enter into Alertmanager; to check monitoring metrics, go to [http://172.16.10.71:3000](http://172.16.10.71:3000), and choose the DM dashboard.
 
 While the DM cluster is running, DM-master, DM-worker, and dmctl output the monitoring metrics information through logs. The log directory of each component is as follows:
 

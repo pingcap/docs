@@ -39,7 +39,7 @@ TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. 
 
 ### Data App
 
-A Data App in [Data Service (beta)](#data-service) is a group of endpoints that you can use to access data for a specific application. You can configure authorization settings using API keys to restrict access to endpoints in a Data App.
+A Data App in [Data Service (beta)](#data-service) is a collection of endpoints that you can use to access data for a specific application. You can configure authorization settings using API keys to restrict access to endpoints in a Data App.
 
 For more information, see [Manage a Data App](/tidb-cloud/data-service-manage-data-app.md).
 
@@ -62,6 +62,10 @@ For more information, see [Manage an endpoint](/tidb-cloud/data-service-manage-e
 ### member
 
 A user that has been invited to an organization, with access to the organization and the clusters of this organization.
+
+### MPP
+
+Starting from v5.0, TiDB introduces Massively Parallel Processing (MPP) architecture through TiFlash nodes, which shares the execution workloads of large join queries among TiFlash nodes. When the MPP mode is enabled, TiDB, based on cost, determines whether to use the MPP framework to perform the calculation. In the MPP mode, the join keys are redistributed through the Exchange operation while being calculated, which distributes the calculation pressure to each TiFlash node and speeds up the calculation. For more information, see [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md).
 
 ## N
 
@@ -97,7 +101,7 @@ Project members are users who are invited to join one or more projects of the or
 
 ### Recycle Bin
 
-The place where the data of deleted clusters with valid backups is stored. Once a backed-up cluster is deleted, the existing backup files of the cluster are moved to the recycle bin. For backup files from automatic backups, the recycle bin will retain them for 7 days. For backup files from manual backups, there is no expiration date. To avoid data loss, remember to restore the data to a new cluster in time. Note that if a cluster **has no backup**, the deleted cluster will not be displayed here.
+The place where the data of deleted clusters with valid backups is stored. Once a backed-up TiDB Dedicated cluster is deleted, the existing backup files of the cluster are moved to the recycle bin. For backup files from automatic backups, the recycle bin will retain them for a specified period. You can configure the backup retention in **Backup Settings**, and the default is 7 days. For backup files from manual backups, there is no expiration date. To avoid data loss, remember to restore the data to a new cluster in time. Note that if a cluster **has no backup**, the deleted cluster will not be displayed here.
 
 ### region
 

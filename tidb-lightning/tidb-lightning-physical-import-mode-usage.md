@@ -87,7 +87,7 @@ For the complete configuration file, refer to [the configuration file and comman
 
 Conflicting data refers to two or more records with the same PK/UK column data. When the data source contains conflicting data, the actual number of rows in the table is different from the total number of rows returned by the query using unique index.
 
-TiDB Lightning offers three strategies for detecting conflicting data:
+TiDB Lightning offers the following strategies for detecting conflicting data:
 
 - `remove` (recommended): records and removes all conflicting records from the target table to ensure a consistent state in the target TiDB.
 - `none`: does not detect duplicate records. `none` has the best performance in the two strategies, but might lead to inconsistent data in the target TiDB.
@@ -142,9 +142,11 @@ Starting from v6.2.0, TiDB Lightning implements a mechanism to limit the impact 
 Starting from v7.1.0, you can control the scope of pausing scheduling by using the TiDB Lightning parameter [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md). The default value is `"table"`, which means that the scheduling is paused only for the Region that stores the target table data. When there is no business traffic in the cluster, it is recommended to set this parameter to `"global"` to avoid interference from other scheduling during the import.
 
 <Note>
+
 TiDB Lightning does not support importing data into a table that already contains data.
 
 The TiDB cluster must be v6.1.0 or later versions. For earlier versions, TiDB Lightning keeps the old behavior, which pauses scheduling globally and severely impacts the online application during the import.
+
 </Note>
 
 By default, TiDB Lightning pauses the cluster scheduling for the minimum range possible. However, under the default configuration, the cluster performance still might be affected by fast import. To avoid this, you can configure the following options to control the import speed and other factors that might impact the cluster performance:

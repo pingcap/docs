@@ -42,7 +42,7 @@ You can access the Continuous Profiling page using either of the following metho
 
   ![Access page](/media/dashboard/dashboard-conprof-access.png)
 
-* Visit <http://127.0.0.1:2379/dashboard/#/continuous_profiling> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
+* Visit [http://127.0.0.1:2379/dashboard/#/continuous_profiling](http://127.0.0.1:2379/dashboard/#/continuous_profiling) in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
 
 ## Enable Continuous Profiling
 

@@ -24,7 +24,7 @@ The audit logging feature is disabled by default. To audit a cluster, you need t
 - You are using a TiDB Dedicated cluster. Audit logging is not available for TiDB Serverless clusters.
 - You are in the `Organization Owner` or `Project Owner` role of your organization. Otherwise, you cannot see the database audit-related options in the TiDB Cloud console. For more information, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
 
-## Enable audit logging for AWS or GCP
+## Enable audit logging for AWS or Google Cloud
 
 To allow TiDB Cloud to write audit logs to your cloud bucket, you need to enable audit logging first.
 
@@ -101,13 +101,13 @@ In the TiDB Cloud console, go back to the **Audit Logging** dialog box where you
 > - After enabling audit logging, if you make any new changes to the bucket URI, location, or ARN, you must click **Restart** to load the changes and rerun the **Test Connectivity** check to make the changes effective.
 > - To remove Amazon S3 access from TiDB Cloud, simply delete the trust policy that you added.
 
-### Enable audit logging for GCP
+### Enable audit logging for Google Cloud
 
-To enable audit logging for GCP, take the following steps:
+To enable audit logging for Google Cloud, take the following steps:
 
 #### Step 1. Create a GCS bucket
 
-Specify a Google Cloud Storage (GCS) bucket in your corporate-owned GCP account as a destination to which TiDB Cloud writes audit logs.
+Specify a Google Cloud Storage (GCS) bucket in your corporate-owned Google Cloud account as a destination to which TiDB Cloud writes audit logs.
 
 For more information, see [Creating storage buckets](https://cloud.google.com/storage/docs/creating-buckets) in the Google Cloud Storage documentation.
 
@@ -123,7 +123,7 @@ For more information, see [Creating storage buckets](https://cloud.google.com/st
     2. Select **Settings** > **Audit Settings**. The **Audit Logging** dialog box is displayed.
     3. Click **Show Google Cloud Service Account ID**, and then copy the Service Account ID for later use.
 
-2. In the Google Cloud Platform (GCP) Management Console, go to **IAM & Admin** > **Roles**, and then check whether a role with the following write-only permissions of the storage container exists.
+2. In the Google Cloud console, go to **IAM & Admin** > **Roles**, and then check whether a role with the following write-only permissions of the storage container exists.
 
     - storage.objects.create
     - storage.objects.delete

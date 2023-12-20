@@ -19,7 +19,7 @@ You can use one of the following two methods to access the slow query page:
 
 * After logging in to TiDB Dashboard, click **Slow Queries** in the left navigation menu.
 
-* Visit <http://127.0.0.1:2379/dashboard/#/slow_query> in your browser. Replace `127.0.0.1:2379` with the actual PD address and port.
+* Visit [http://127.0.0.1:2379/dashboard/#/slow_query](http://127.0.0.1:2379/dashboard/#/slow_query) in your browser. Replace `127.0.0.1:2379` with the actual PD address and port.
 
 All data displayed on the slow query page comes from TiDB slow query system tables and slow query logs. See [slow query logs](/identify-slow-queries.md) for details.
 
@@ -59,6 +59,10 @@ Click any item in the list to display detailed execution information of the slow
 
 ### SQL
 
+> **Note:**
+>
+> The maximum length of the query recorded in the `Query` column is limited by the [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40) system variable.
+
 Click the **Expand** button to view the detailed information of an item. Click the **Copy** button to copy the detailed information to the clipboard.
 
 ### Execution plans
@@ -74,7 +78,7 @@ The following figure shows a visual execution plan.
 - The graph shows the execution from left to right, and from top to bottom.
 - Upper nodes are parent operators and lower nodes are child operators.
 - The color of the title bar indicates the component where the operator is executed: yellow stands for TiDB, blue stands for TiKV, and pink stands for TiFlash.
-- The title bar shows the operator name and the text shown below is the basic information of the operator. 
+- The title bar shows the operator name and the text shown below is the basic information of the operator.
 
 Click the node area, and the detailed operator information is displayed on the right sidebar.
 

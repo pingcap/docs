@@ -134,7 +134,7 @@ This section exemplifies how to add a TiDB node to the `10.0.1.5` host.
     tiup cluster display <cluster-name>
     ```
 
-    Access the monitoring platform at <http://10.0.1.5:3000> using your browser to monitor the status of the cluster and the new node.
+    Access the monitoring platform at [http://10.0.1.5:3000](http://10.0.1.5:3000) using your browser to monitor the status of the cluster and the new node.
 
 After the scale-out, the cluster topology is as follows:
 
@@ -190,7 +190,7 @@ This section exemplifies how to add a TiFlash node to the `10.0.1.4` host.
     tiup cluster display <cluster-name>
     ```
 
-    Access the monitoring platform at <http://10.0.1.5:3000> using your browser, and view the status of the cluster and the new node.
+    Access the monitoring platform at [http://10.0.1.5:3000](http://10.0.1.5:3000) using your browser, and view the status of the cluster and the new node.
 
 After the scale-out, the cluster topology is as follows:
 
@@ -242,7 +242,7 @@ This section exemplifies how to add two TiCDC nodes to the `10.0.1.3` and `10.0.
     tiup cluster display <cluster-name>
     ```
 
-    Access the monitoring platform at <http://10.0.1.5:3000> using your browser, and view the status of the cluster and the new nodes.
+    Access the monitoring platform at [http://10.0.1.5:3000](http://10.0.1.5:3000) using your browser, and view the status of the cluster and the new nodes.
 
 After the scale-out, the cluster topology is as follows:
 
@@ -275,7 +275,7 @@ This section exemplifies how to remove a TiKV node from the `10.0.1.5` host.
     ```
     Starting /root/.tiup/components/cluster/v1.11.3/cluster display <cluster-name>
     TiDB Cluster: <cluster-name>
-    TiDB Version: v7.1.1
+    TiDB Version: v7.1.2
     ID              Role         Host        Ports                            Status  Data Dir                Deploy Dir
     --              ----         ----        -----                            ------  --------                ----------
     10.0.1.3:8300   cdc          10.0.1.3    8300                             Up      data/cdc-8300           deploy/cdc-8300
@@ -318,7 +318,7 @@ This section exemplifies how to remove a TiKV node from the `10.0.1.5` host.
 
     If the node to be scaled in becomes `Tombstone`, the scale-in operation succeeds.
 
-    Access the monitoring platform at <http://10.0.1.5:3000> using your browser, and view the status of the cluster.
+    Access the monitoring platform at [http://10.0.1.5:3000](http://10.0.1.5:3000) using your browser, and view the status of the cluster.
 
 The current topology is as follows:
 
@@ -473,7 +473,7 @@ The steps to manually clean up the replication rules in PD are below:
     tiup cluster display <cluster-name>
     ```
 
-    Access the monitoring platform at <http://10.0.1.5:3000> using your browser, and view the status of the cluster and the new nodes.
+    Access the monitoring platform at [http://10.0.1.5:3000](http://10.0.1.5:3000) using your browser, and view the status of the cluster and the new nodes.
 
 After the scale-out, the cluster topology is as follows:
 
@@ -505,7 +505,7 @@ After the scale-out, the cluster topology is as follows:
     tiup cluster display <cluster-name>
     ```
 
-    Access the monitoring platform at <http://10.0.1.5:3000> using your browser, and view the status of the cluster.
+    Access the monitoring platform at [http://10.0.1.5:3000](http://10.0.1.5:3000) using your browser, and view the status of the cluster.
 
 The current topology is as follows:
 

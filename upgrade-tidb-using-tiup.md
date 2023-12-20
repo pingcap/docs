@@ -23,17 +23,18 @@ This document is targeted for the following upgrade paths:
 > **Note:**
 >
 > - If your cluster to be upgraded is v3.1 or an earlier version (v3.0 or v2.1), the direct upgrade to v7.1.0 or a later v7.1.x version is not supported. You need to upgrade your cluster first to v4.0 and then to the target TiDB version.
+> - If your cluster to be upgraded is earlier than v6.2, the upgrade might get stuck when you upgrade the cluster to v6.2 or later versions in some scenarios. You can refer to [How to fix the issue](#how-to-fix-the-issue-that-the-upgrade-gets-stuck-when-upgrading-to-v620-or-later-versions).
 > - TiDB nodes use the value of the [`server-version`](/tidb-configuration-file.md#server-version) configuration item to verify the current TiDB version. Therefore, to avoid unexpected behaviors, before upgrading the TiDB cluster, you need to set the value of `server-version` to empty or the real version of the current TiDB cluster.
 
 ## Upgrade caveat
 
 - TiDB currently does not support version downgrade or rolling back to an earlier version after the upgrade.
-- For the v4.0 cluster managed using TiDB Ansible, you need to import the cluster to TiUP (`tiup cluster`) for new management according to [Upgrade TiDB Using TiUP (v4.0)](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup). Then you can upgrade the cluster to v7.1.1 according to this document.
-- To update versions earlier than v3.0 to v7.1.1:
+- For the v4.0 cluster managed using TiDB Ansible, you need to import the cluster to TiUP (`tiup cluster`) for new management according to [Upgrade TiDB Using TiUP (v4.0)](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup). Then you can upgrade the cluster to v7.1.2 according to this document.
+- To update versions earlier than v3.0 to v7.1.2:
     1. Update this version to 3.0 using [TiDB Ansible](https://docs.pingcap.com/tidb/v3.0/upgrade-tidb-using-ansible).
     2. Use TiUP (`tiup cluster`) to import the TiDB Ansible configuration.
     3. Update the 3.0 version to 4.0 according to [Upgrade TiDB Using TiUP (v4.0)](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup).
-    4. Upgrade the cluster to v7.1.1 according to this document.
+    4. Upgrade the cluster to v7.1.2 according to this document.
 - Support upgrading the versions of TiDB Binlog, TiCDC, TiFlash, and other components.
 - When upgrading TiFlash from versions earlier than v6.3.0 to v6.3.0 and later versions, note that the CPU must support the AVX2 instruction set under the Linux AMD64 architecture and the ARMv8 instruction set architecture under the Linux ARM64 architecture. For details, see the description in [v6.3.0 Release Notes](/releases/release-6.3.0.md#others).
 - For detailed compatibility changes of different versions, see the [Release Notes](/releases/release-notes.md) of each version. Modify your cluster configuration according to the "Compatibility Changes" section of the corresponding release notes.
@@ -47,10 +48,11 @@ This section introduces the preparation works needed before upgrading your TiDB 
 
 Review compatibility changes in TiDB release notes. If any changes affect your upgrade, take actions accordingly.
 
-The following provides compatibility changes you need to know when you upgrade from v7.0.0 to the current version (v7.1.1). If you are upgrading from v6.6.0 or earlier versions to the current version, you might also need to check the compatibility changes introduced in intermediate versions in the corresponding [release notes](/releases/release-notes.md).
+The following provides compatibility changes you need to know when you upgrade from v7.0.0 to the current version (v7.1.2). If you are upgrading from v6.6.0 or earlier versions to the current version, you might also need to check the compatibility changes introduced in intermediate versions in the corresponding [release notes](/releases/release-notes.md).
 
 - TiDB v7.1.0 [compatibility changes](/releases/release-7.1.0.md#compatibility-changes)
 - TiDB v7.1.1 [compatibility changes](/releases/release-7.1.1.md#compatibility-changes)
+- TiDB v7.1.2 [compatibility changes](/releases/release-7.1.2.md#compatibility-changes)
 
 ### Step 2: Upgrade TiUP or TiUP offline mirror
 
@@ -125,7 +127,7 @@ Now, the offline mirror has been upgraded successfully. If an error occurs durin
 > Skip this step if one of the following situations applies:
 >
 > + You have not modified the configuration parameters of the original cluster. Or you have modified the configuration parameters using `tiup cluster` but no more modification is needed.
-> + After the upgrade, you want to use v7.1.1's default parameter values for the unmodified configuration items.
+> + After the upgrade, you want to use v7.1.2's default parameter values for the unmodified configuration items.
 
 1. Enter the `vi` editing mode to edit the topology file:
 
@@ -141,7 +143,7 @@ Now, the offline mirror has been upgraded successfully. If an error occurs durin
 
 > **Note:**
 >
-> Before you upgrade the cluster to v7.1.1, make sure that the parameters you have modified in v4.0 are compatible in v7.1.1. For details, see [TiKV Configuration File](/tikv-configuration-file.md).
+> Before you upgrade the cluster to v7.1.2, make sure that the parameters you have modified in v4.0 are compatible in v7.1.2. For details, see [TiKV Configuration File](/tikv-configuration-file.md).
 
 ### Step 4: Check the health status of the current cluster
 
@@ -185,12 +187,12 @@ If your application has a maintenance window for the database to be stopped for 
 tiup cluster upgrade <cluster-name> <version>
 ```
 
-For example, if you want to upgrade the cluster to v7.1.1:
+For example, if you want to upgrade the cluster to v7.1.2:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup cluster upgrade <cluster-name> v7.1.1
+tiup cluster upgrade <cluster-name> v7.1.2
 ```
 
 > **Note:**
@@ -218,7 +220,7 @@ tiup cluster upgrade <cluster-name> v7.1.1
     tiup cluster stop <cluster-name>
     ```
 
-2. Use the `upgrade` command with the `--offline` option to perform the offline upgrade. Fill in the name of your cluster for `<cluster-name>` and the version to upgrade to for `<version>`, such as `v7.1.1`.
+2. Use the `upgrade` command with the `--offline` option to perform the offline upgrade. Fill in the name of your cluster for `<cluster-name>` and the version to upgrade to for `<version>`, such as `v7.1.2`.
 
     {{< copyable "shell-regular" >}}
 
@@ -247,7 +249,7 @@ tiup cluster display <cluster-name>
 ```
 Cluster type:       tidb
 Cluster name:       <cluster-name>
-Cluster version:    v7.1.1
+Cluster version:    v7.1.2
 ```
 
 ## FAQ
@@ -276,9 +278,33 @@ Re-execute the `tiup cluster upgrade` command to resume the upgrade. The upgrade
     tiup cluster replay <audit-id>
     ```
 
+### How to fix the issue that the upgrade gets stuck when upgrading to v6.2.0 or later versions?
+
+Starting from v6.2.0, TiDB enables the [concurrent DDL framework](/ddl-introduction.md#how-the-online-ddl-asynchronous-change-works-in-tidb) by default to execute concurrent DDLs. This framework changes the DDL job storage from a KV queue to a table queue. This change might cause the upgrade to get stuck in some scenarios. The following are some scenarios that might trigger this issue and the corresponding solutions:
+
+- Upgrade gets stuck due to plugin loading
+
+    During the upgrade, loading certain plugins that require executing DDL statements might cause the upgrade to get stuck.
+
+    **Solution**: avoid loading plugins during the upgrade. Instead, load plugins only after the upgrade is completed.
+
+- Upgrade gets stuck due to using the `kill -9` command for offline upgrade
+
+    - Precautions: avoid using the `kill -9` command to perform the offline upgrade. If it is necessary, restart the new version TiDB node after 2 minutes.
+    - If the upgrade is already stuck, restart the affected TiDB node. If the issue has just occurred, it is recommended to restart the node after 2 minutes.
+
+- Upgrade gets stuck due to DDL Owner change
+
+    In multi-instance scenarios, network or hardware failures might cause DDL Owner change. If there are unfinished DDL statements in the upgrade phase, the upgrade might get stuck.
+
+    **Solution**:
+
+    1. Terminate the stuck TiDB node (avoid using `kill -9`).
+    2. Restart the new version TiDB node.
+
 ### The evict leader has waited too long during the upgrade. How to skip this step for a quick upgrade?
 
-You can specify `--force`. Then the processes of transferring PD leader and evicting TiKV leader are skipped during the upgrade. The cluster is directly restarted to update the version, which has a great impact on the cluster that runs online. In the following command, `<version>` is the version to upgrade to, such as `v7.1.1`.
+You can specify `--force`. Then the processes of transferring PD leader and evicting TiKV leader are skipped during the upgrade. The cluster is directly restarted to update the version, which has a great impact on the cluster that runs online. In the following command, `<version>` is the version to upgrade to, such as `v7.1.2`.
 
 {{< copyable "shell-regular" >}}
 
@@ -293,5 +319,5 @@ You can upgrade the tool version by using TiUP to install the `ctl` component of
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup install ctl:v7.1.1
+tiup install ctl:v7.1.2
 ```

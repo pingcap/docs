@@ -7,7 +7,7 @@ summary: Learn how to scale your TiDB Cloud cluster.
 
 > **Note:**
 >
-> - You cannot scale a [TiDB Serverless cluster](/tidb-cloud/select-cluster-tier.md#tidb-serverless).
+> - [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) scales automatically based on your application's workload changes. However, you cannot manually scale a TiDB Serverless cluster.
 > - When a cluster is in the **MODIFYING** status, you cannot perform any new scaling operations on it.
 
 You can scale a TiDB cluster in the following dimensions:
@@ -20,10 +20,9 @@ For information about how to determine the size of your TiDB cluster, see [Deter
 
 > **Note:**
 >
-> If the vCPU and RAM size of TiDB or TiKV is set as **2 vCPU, 8 GiB (Beta)** or **4 vCPU, 16 GiB**, note the following restrictions. To bypass these restrictions, you can [increase the vCPU and RAM](#change-vcpu-and-ram) first.
+> If the vCPU and RAM size of TiDB or TiKV is set as **4 vCPU, 16 GiB**, note the following restrictions. To bypass these restrictions, you can [increase the vCPU and RAM](#change-vcpu-and-ram) first.
 >
 > - The node number of TiDB can only be set to 1 or 2, and the node number of TiKV is fixed to 3.
-> - 2 vCPU TiDB can only be used with 2 vCPU TiKV, and 2 vCPU TiKV can only be used with 2 vCPU TiDB.
 > - 4 vCPU TiDB can only be used with 4 vCPU TiKV, and 4 vCPU TiKV can only be used with 4 vCPU TiDB.
 > - TiFlash is unavailable.
 
@@ -58,7 +57,7 @@ You can increase or decrease vCPU and RAM of TiDB, TiKV, or TiFlash nodes.
 >
 > - Changing vCPU and RAM is only available to the following clusters:
 >     - Hosted on AWS and created after 2022/12/31.
->     - Hosted on GCP and created after 2023/04/26.
+>     - Hosted on Google Cloud and created after 2023/04/26.
 > - AWS has a cooldown period of vCPU and RAM changes. If your TiDB cluster is hosted on AWS, after changing the storage or vCPU and RAM of TiKV or TiFlash, you must wait at least six hours before you can change it again.
 
 To change the vCPU and RAM of TiDB, TiKV, or TiFlash nodes, take the following steps:

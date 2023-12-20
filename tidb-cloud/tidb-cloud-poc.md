@@ -5,7 +5,7 @@ summary: Learn about how to perform a Proof of Concept (PoC) with TiDB Cloud.
 
 # Perform a Proof of Concept (PoC) with TiDB Cloud
 
-TiDB Cloud is a Database-as-a-Service (DBaaS) product that delivers everything great about TiDB in a fully managed cloud database. It helps you focus on your applications, instead of the complexities of your database. TiDB Cloud is currently available on both Amazon Web Services (AWS) and Google Cloud Platform (GCP).
+TiDB Cloud is a Database-as-a-Service (DBaaS) product that delivers everything great about TiDB in a fully managed cloud database. It helps you focus on your applications, instead of the complexities of your database. TiDB Cloud is currently available on both Amazon Web Services (AWS) and Google Cloud.
 
 Initiating a proof of concept (PoC) is the best way to determine whether TiDB Cloud is the best fit for your business needs. It will also get you familiar with the key features of TiDB Cloud in a short time. By running performance tests, you can see whether your workload can run efficiently on TiDB Cloud. You can also evaluate the efforts required to migrate your data and adapt configurations.
 
@@ -81,7 +81,7 @@ Once a dedicated PoC cluster is created, you are ready to load data and perform 
 For a newly created cluster, note the following configurations:
 
 - The default time zone (the **Create Time** column on the Dashboard) is UTC. You can change it to your local time zone by following [Set the Local Time Zone](/tidb-cloud/manage-user-access.md#set-the-time-zone-for-your-organization).
-- The default backup setting on a new cluster is full database backup on a daily basis. You can specify a preferred backup time or back up data manually. For the default backup time and more details, see [Back up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md#backup).
+- The default backup setting on a new cluster is full database backup on a daily basis. You can specify a preferred backup time or back up data manually. For the default backup time and more details, see [Back up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup).
 
 ## Step 4. Adapt your schemas and SQL
 
@@ -130,7 +130,7 @@ You can import data in various formats to TiDB Cloud:
 
 Now you have created the environment, adapted the schemas, and imported data. It is time to test your workload.
 
-Before testing the workload, consider performing a manual backup, so that you can restore the database to its original state if needed. For more information, see [Back up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md#backup).
+Before testing the workload, consider performing a manual backup, so that you can restore the database to its original state if needed. For more information, see [Back up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup).
 
 After kicking off the workload, you can observe the system using the following methods:
 
@@ -175,7 +175,7 @@ Now the workload testing is finished, you can explore more features, for example
 
 - Backup
 
-    To avoid vendor lock-in, you can use daily full backup to migrate data to a new cluster and use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data. For more information, see [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md#backup) and [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore-serverless.md#backup).
+    To avoid vendor lock-in, you can use daily full backup to migrate data to a new cluster and use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data. For more information, see [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) and [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore-serverless.md#backup).
 
 ## Step 8. Clean up the environment and finish the PoC
 

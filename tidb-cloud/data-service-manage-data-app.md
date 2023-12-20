@@ -5,7 +5,7 @@ summary: Learn how to create, view, modify, and delete a Data App in the TiDB Cl
 
 # Manage a Data App
 
-A Data App in Data Service (beta) is a group of endpoints that you can use to access data for a specific application. You can configure authorization settings using API keys to restrict access to endpoints in a Data App.
+A Data App in Data Service (beta) is a collection of endpoints that you can use to access data for a specific application. You can configure authorization settings using API keys to restrict access to endpoints in a Data App.
 
 This document describes how to manage your Data Apps in the TiDB Cloud console. On the [**Data Service**](https://tidbcloud.com/console/data-service) page, you can manage all Data Apps, endpoints, and API keys.
 
@@ -20,6 +20,10 @@ To create a Data App for your project, perform the following steps:
     > If this is the first Data App in your project, click **Create Data App** in the middle of the page.
 
 2. Enter a name, a description, and select clusters that you want the Data App to access.
+
+    > **Note:**
+    >
+    > By default, the Data App type is **Standard Data App**. If you want to create a **Chat2Query Data App**, refer to [Get Started with Chat2Query API](/tidb-cloud/use-chat2query-api.md) instead of this document.
 
 3. (Optional) To automatically deploy endpoints of the Data App to your preferred GitHub repository and branch, enable **Connect to GitHub**, and then do the following:
 
@@ -56,6 +60,23 @@ You can edit the name, version, and description of a Data App. To edit Data App 
 ### Manage GitHub connection
 
 For more information, see [Deploy automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
+
+### Integrate your Data App with GPTs
+
+You can integrate your Data App with [GPTs](https://openai.com/blog/introducing-gpts) to enhance your applications with intelligent capabilities.
+
+To integrate your Data App with GPTs, perform the following steps:
+
+1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+2. In the left pane, locate your target Data App and click the name of your target Data App to view its details.
+3. In the **Integration with GPTs** area, click **Get Configuration**.
+4. In the displayed dialog box, you can see the following fields:
+
+    - **API Specification URL**: copy the URL of the OpenAPI Specification of your Data App. For more information, see [Use the OpenAPI Specification](#use-the-openapi-specification).
+    - **API Key**: enter the API key of your Data App. If you do not have an API key yet, click **Create API Key** to create one. For more information, see [Create an API key](/tidb-cloud/data-service-api-key.md#create-an-api-key).
+    - **API Key Encoded**: copy the base64 encoded string equivalent to the API key you have provided.
+
+5. Use the copied API Specification URL and the encoded API key in your GPT configuration.
 
 ### Manage linked data sources
 

@@ -13,7 +13,7 @@ You can use one of the following two methods to access the Resource Manager page
 
 * After logging in to TiDB Dashboard, click **Resource Manager** in the left navigation menu.
 
-* Visit <http://127.0.0.1:2379/dashboard/#/resource_manager> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
+* Visit [http://127.0.0.1:2379/dashboard/#/resource_manager](http://127.0.0.1:2379/dashboard/#/resource_manager) in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
 
 ## Resource Manager page
 
@@ -37,9 +37,9 @@ The Resource Manager page contains the following three sections:
 Before resource planning, you need to know the overall capacity of the cluster. TiDB provides two methods to estimate the capacity of [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru#what-is-request-unit-ru) in the current cluster:
 
 - [Estimate capacity based on hardware deployment](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
-    
+
     TiDB accepts the following workload types:
-    
+
     - `tpcc`: applies to workloads with heavy data write. It is estimated based on a workload model similar to `TPC-C`.
     - `oltp_write_only`: applies to workloads with heavy data write. It is estimated based on a workload model similar to `sysbench oltp_write_only`.
     - `oltp_read_write`: applies to workloads with even data read and write. It is estimated based on a workload model similar to `sysbench oltp_read_write`.

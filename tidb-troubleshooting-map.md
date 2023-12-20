@@ -423,9 +423,9 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 - 6.1.5 Inconsistent data in upstream and downstream
 
-    - Some TiDB nodes do not enable binlog. For v3.0.6 or later versions, you can check the binlog status of all the nodes by accessing the <http://127.0.0.1:10080/info/all> interface. For versions earlier than v3.0.6, you can check the binlog status by viewing the configuration file.
+    - Some TiDB nodes do not enable binlog. For v3.0.6 or later versions, you can check the binlog status of all the nodes by accessing the [http://127.0.0.1:10080/info/all](http://127.0.0.1:10080/info/all) interface. For versions earlier than v3.0.6, you can check the binlog status by viewing the configuration file.
 
-    - Some TiDB nodes go into the `ignore binlog` status. For v3.0.6 or later versions, you can check the binlog status of all the nodes by accessing the <http://127.0.0.1:10080/info/all> interface. For versions earlier than v3.0.6, check the TiDB log to see whether it contains the `ignore binlog` keyword.
+    - Some TiDB nodes go into the `ignore binlog` status. For v3.0.6 or later versions, you can check the binlog status of all the nodes by accessing the [http://127.0.0.1:10080/info/all](http://127.0.0.1:10080/info/all) interface. For versions earlier than v3.0.6, check the TiDB log to see whether it contains the `ignore binlog` keyword.
 
     - The value of the timestamp column is inconsistent in upstream and downstream.
 

@@ -15,7 +15,7 @@ You can use one of the following two methods to access the Key Visualizer page:
 
     ![Access Key Visualizer](/media/dashboard/dashboard-keyviz-access-v650.png)
 
-* Visit <http://127.0.0.1:2379/dashboard/#/keyviz> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
+* Visit [http://127.0.0.1:2379/dashboard/#/keyviz](http://127.0.0.1:2379/dashboard/#/keyviz) in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
 
 ## Interface demonstration
 
