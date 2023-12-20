@@ -42,5 +42,3 @@ From the output, you can see that `ADD` is a reserved keyword and `USER` is a no
 +------+----------+
 2 rows in set (0.00 sec)
 ```
-
-Here you can see that `ADD` is a reserved keyword and `USER` is a non-reserved keyword.
