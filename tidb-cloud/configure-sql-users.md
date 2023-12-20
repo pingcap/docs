@@ -9,6 +9,7 @@ This document describes how to manage database users and roles using the **SQL U
 
 > **Note:**
 >
+> - The **SQL Users** page is in beta and is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for the SQL Users page" in the **Description** field and click **Send**.
 > - Database users and roles are independent of [organization and project users and roles](/tidb-cloud/manage-user-access.md). Database users are used to access databases in a TiDB cluster, while organization and project users are used to access organizations and projects in the [TiDB Cloud console](https://tidbcloud.com/).
 > - In addition to the **SQL Users** page, you can also manage database users and roles by connecting to your cluster with a SQL client and writing SQL statements. For more information, see [TiDB User Account Management](https://docs.pingcap.com/tidb/dev/user-account-management).
 
@@ -26,7 +27,7 @@ In TiDB Cloud, you can grant both a built-in role and multiple custom roles (if 
 
 - Custom roles
 
-    In addition to a built-in role, if your cluster has custom roles that are created using the [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md) statement, you can also grant custom roles to a SQL user when you create or edit SQL users in the TiDB Cloud console.
+    In addition to a built-in role, if your cluster has custom roles that are created using the [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md) statement, you can also grant these custom roles to a SQL user when you create or edit SQL users in the TiDB Cloud console.
 
 After a SQL user is granted both a built-in role and multiple custom roles, the user's permissions will be the union of all the permissions from these roles.
 
