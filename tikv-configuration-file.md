@@ -1037,12 +1037,12 @@ Configuration items related to Raftstore.
 >
 > Periodic full compaction is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
-+ Sets the specific times for initiating periodic full compaction. You can specify multiple time schedules in an array. For example, `periodic-full-compact-start-times = ["03:00", "23:00"]` indicates that TiKV performs full compaction at 03:00 AM and 23:00 PM, based on the local time zone of the TiKV node. `periodic-full-compact-start-times = ["03:00 +0000", "23:00 +0000"]` indicates that TiKV performs full compaction at 03:00 AM and 23:00 PM in UTC time.
++ Sets the specific times that TiKV initiates periodic full compaction. You can specify multiple time schedules in an array. For example, `periodic-full-compact-start-times = ["03:00", "23:00"]` indicates that TiKV performs full compaction daily at 03:00 AM and 23:00 PM, based on the local time zone of the TiKV node. `periodic-full-compact-start-times = ["03:00 +0000", "23:00 +0000"]` indicates that TiKV performs full compaction daily at 03:00 AM and 23:00 PM in UTC time.
 + Default value: `[]`, which means periodic full compaction is disabled by default.
 
 ### `periodic-full-compact-start-max-cpu` <span class="version-mark">New in v7.6.0</span>
 
-+ Controls the CPU usage threshold at which TiKV performs periodic full compaction.
++ Limits the maximum CPU usage rate for TiKV periodic full compaction.
 + Default value: `0.1`, which means that the maximum CPU usage for periodic compaction processes is 10%.
 
 ## coprocessor
