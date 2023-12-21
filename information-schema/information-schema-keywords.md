@@ -5,7 +5,7 @@ summary: Learn the `KEYWORDS` INFORMATION_SCHEMA table.
 
 # KEYWORDS
 
-Starting from v7.6.0, TiDB provides the `KEYWORDS` table. You can use this table to get information about [keywords](/keywords.md).
+Starting from v7.6.0, TiDB provides the `KEYWORDS` table. You can use this table to get information about [keywords](/keywords.md) in TiDB.
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -23,11 +23,15 @@ The output is as follows:
 +----------+--------------+------+------+---------+-------+
 2 rows in set (0.00 sec)
 ```
+Field description:
+
+- `WORD`: The keyword.
+- `RESERVED`: Whether the keyword is reserved.
 
 The following statement queries the information about `ADD` and `USER` keywords:
 
 ```sql
-SELECT * FROM keywords WHERE WORD IN ('ADD','USER');
+SELECT * FROM INFORMATION_SCHEMA.KEYWORDS WHERE WORD IN ('ADD','USER');
 ```
 
 From the output, you can see that `ADD` is a reserved keyword and `USER` is a non-reserved keyword.
