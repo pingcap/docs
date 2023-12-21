@@ -70,7 +70,9 @@ To integrate your Data App with GPTs, perform the following steps:
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, locate your target Data App and click the name of your target Data App to view its details.
 3. In the **Integration with GPTs** area, click **Get Configuration**.
-![Get Configuration](/media/tidb-cloud/data-service/GPTs1.png)
+
+    ![Get Configuration](/media/tidb-cloud/data-service/GPTs1.png)
+
 4. In the displayed dialog box, you can see the following fields:
 
     a. **API Specification URL**: copy the URL of the OpenAPI Specification of your Data App. For more information, see [Use the OpenAPI Specification](#use-the-openapi-specification).
