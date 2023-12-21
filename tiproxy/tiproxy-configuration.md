@@ -61,7 +61,7 @@ Configuration for SQL port.
 
 + Default Value: `0`
 + Support hot-reload: yes
-+ TiProxy can accept `max-connections` connections at most. `0` means no limitation.
++ Each TiProxy instance can accept `max-connections` connections at most. `0` means no limitation.
 
 #### `conn-buffer-size`
 
@@ -72,7 +72,7 @@ Configuration for SQL port.
 #### `pd-addrs`
 
 + Default Value: `127.0.0.1:2379`
-+ Automatically discover TiDB instances and set them as backend.
++ The PD addresses TiProxy connects to. TiProxy discovers TiDB instances by fetching the TiDB list from the PD. It is set automatically when TiProxy is deployed by TiUP or TiDB Operator.
 
 #### `proxy-protocol`
 
@@ -84,7 +84,7 @@ Configuration for SQL port.
 
 + Default Value: `true`
 + Support hot-reload: yes
-+ Require TLS on backend instances.
++ Require TLS between TiProxy and TiDB servers. If the TiDB server doesn't support TLS, clients will report an error when connecting to TiProxy.
 
 ### api
 
