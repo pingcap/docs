@@ -80,6 +80,7 @@ Configuration for SQL port.
 
 + Default Value: ``
 + Support hot-reload: yes
++ Possible Values: `v2`
 + Enable proxy protocol handling on the port. You can specify `v2` to handle proxy protocol version 2. `v1` is not supported.
 
 #### `require-backend-tls`
