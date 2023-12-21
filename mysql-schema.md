@@ -97,7 +97,7 @@ Currently, the `help_topic` is NULL.
 
 * `dist_framework_meta`: the metadata of the Distributed eXecution Framework (DXF) task scheduler
 * `tidb_global_task`: the metadata of the current DXF task
-* `tidb_global_task_history`: the metadata of the historical DXF tasks
+* `tidb_global_task_history`: the metadata of the historical DXF tasks, including both succeeded and failed tasks
 * `tidb_background_subtask`: the metadata of the current DXF subtask
 * `tidb_background_subtask_history`: the metadata of the historical DXF subtasks
 
