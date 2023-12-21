@@ -272,7 +272,7 @@ The way that TiCDC implements the Canal-JSON data format, including the `Update`
 Starting from v6.5.6 and v7.1.3, TiCDC Canal-JSON supports compatibility with the data format of the official Canal. When creating a changefeed, you can set `content-compatible=true` in `sink-uri` to enable this feature. In this mode, TiCDC outputs Canal-JSON format data that is compatible with the official Canal. The specific changes are as follows:
 
 * The `mysqlType` field contains the full information of the type parameter for each type.
-* An Event of `Update` Type only outputs the modified column data.
+* An Event of `Update` Type only outputs data of the modified columns.
 
 ### Event of `Update` Type
 
