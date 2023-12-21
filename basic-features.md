@@ -71,7 +71,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | `INSERT ON DUPLICATE KEY UPDATE` | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | `LOAD DATA INFILE` | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | `SELECT INTO OUTFILE` | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| `INNER JOIN`, LEFT\|RIGHT [OUTER] JOIN | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| `INNER JOIN`, <code>LEFT\|RIGHT [OUTER] JOIN</code> | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | `UNION`, `UNION ALL` | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [`EXCEPT` and `INTERSECT` operators](/functions-and-operators/set-operators.md) | Y | Y | Y | Y | Y | Y | Y | Y | N |
 | `GROUP BY`, `ORDER BY` | Y | Y | Y | Y | Y | Y | Y | Y | Y |
@@ -124,7 +124,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | Concurrent DDL statements | Y | Y | N | N | N | N | N | N | N |
 | [Acceleration of `ADD INDEX` and `CREATE INDEX`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) | Y | Y | N | N | N | N | N | N | N |
 | [Metadata lock](/metadata-lock.md) | Y | Y | N | N | N | N | N | N | N |
-| [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) | Y | Y | N | N | N | N | N | N | N |
+| [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) | Y | Y | N | N | N | N | N | N | N |
 
 ## Transactions
 

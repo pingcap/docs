@@ -19,7 +19,7 @@ In this document, you will learn how to migrate the authentication scheme of you
 
 > **Note:**
 >
-> - The Cloud Organization SSO feature is in beta and is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for Cloud Organization SSO" in the **Description** field and click **Send**.
+> - The Cloud Organization SSO feature is in beta and is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for Cloud Organization SSO" in the **Description** field and click **Submit**.
 > - If your current TiDB login URL starts with `https://tidbcloud.com/enterprise/`, it means that Cloud Organization SSO is already enabled for your organization.
 
 ## Before you begin
@@ -157,6 +157,10 @@ In TiDB Cloud, the OIDC authentication method is disabled by default. After enab
 ### Configure the SAML authentication method
 
 If you have an identity provider that uses the SAML identity protocol, you can enable the SAML authentication method for TiDB Cloud login.
+
+> **Note:**
+>
+> TiDB Cloud uses email addresses as unique identifiers for different users. Therefore, ensure that the `email` attribute for your organization members is configured in your identity provider.
 
 In TiDB Cloud, the SAML authentication method is disabled by default. After enabling Cloud Organization Cloud, you can enable and configure the SAML authentication method as follows:
 
