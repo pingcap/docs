@@ -617,6 +617,10 @@
     - [Data Check for Tables with Different Schema/Table Names](/sync-diff-inspector/route-diff.md)
     - [Data Check in the Sharding Scenario](/sync-diff-inspector/shard-diff.md)
     - [Data Check in the DM Replication Scenario](/sync-diff-inspector/dm-diff.md)
+  - TiProxy
+    - [Configuration](/tiproxy/tiproxy-configuration.md)
+    - [Command Line](/tiproxy/tiproxy-command-line-flags.md)
+    - [Metrics](/tiproxy/tiproxy-grafana.md)
 - Reference
   - Cluster Architecture
     - [Overview](/tidb-architecture.md)
@@ -651,7 +655,6 @@
     - [tidb-server](/tidb-configuration-file.md)
     - [tikv-server](/tikv-configuration-file.md)
     - [tiflash-server](/tiflash/tiflash-configuration.md)
-    - [tiproxy-server](/tiproxy/tiproxy-configuration.md)
     - [pd-server](/pd-configuration-file.md)
   - CLI
     - [tikv-ctl](/tikv-control.md)
@@ -662,7 +665,6 @@
     - [tidb-server](/command-line-flags-for-tidb-configuration.md)
     - [tikv-server](/command-line-flags-for-tikv-configuration.md)
     - [tiflash-server](/tiflash/tiflash-command-line-flags.md)
-    - [tiproxy-server](/tiproxy/tiproxy-command-line-flags.md)
     - [pd-server](/command-line-flags-for-pd-configuration.md)
   - Key Monitoring Metrics
     - [Overview](/grafana-overview-dashboard.md)
@@ -671,7 +673,6 @@
     - [PD](/grafana-pd-dashboard.md)
     - [TiKV](/grafana-tikv-dashboard.md)
     - [TiFlash](/tiflash/monitor-tiflash.md)
-    - [TiProxy](/tiproxy/tiproxy-grafana.md)
     - [TiCDC](/ticdc/monitor-ticdc.md)
     - [Resource Control](/grafana-resource-control-dashboard.md)
   - Security
