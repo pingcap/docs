@@ -23,6 +23,7 @@ The output is as follows:
 +----------+--------------+------+------+---------+-------+
 2 rows in set (0.00 sec)
 ```
+
 Field description:
 
 - `WORD`: The keyword.
