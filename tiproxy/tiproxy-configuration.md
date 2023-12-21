@@ -49,6 +49,7 @@ Configuration for SQL port.
 
 + Default Value: `0`
 + Support hot-reload: yes
++ Unit: second
 + When the HTTP status is unhealthy, the SQL port accepts new connections for the last `graceful-wait-before-shutdown` seconds. After that, it rejects new connections and drains clients. It is recommended to set it to `0` when there are no other proxies (e.g. NLB) between the client and TiProxy.
 
 #### `graceful-close-conn-timeout`
@@ -66,8 +67,9 @@ Configuration for SQL port.
 #### `conn-buffer-size`
 
 + Default Value: `0`
-+ Support hot-reload: yes
-+ This configuration item lets you decide the connection buffer size in bytes, e.g. `1024` means 1K buffer. The minimum size is `1K`, and the maximum size is `16M`. It is a tradeoff between memory and performance. By default, when it is `0`, TiProxy will manage the buffer size automatically. However, a larger buffer might yield better performance results. 
++ Support hot-reload: yes, but for new connections
++ Range: `[1024, 16777216]`
++ This configuration item lets you decide the connection buffer size in bytes, e.g. `1024` means 1K buffer. The minimum size is `1K`, and the maximum size is `16M`. It is a tradeoff between memory and performance. By default, when it is `0`, TiProxy will use a buffer of default size. However, a larger buffer might yield better performance results. 
 
 #### `pd-addrs`
 
