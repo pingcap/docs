@@ -1,7 +1,6 @@
 ---
 title: TiProxy Monitoring Metrics
 summary: Learn the monitoring items of TiProxy.
-aliases: ['/docs/dev/tiproxy/monitor-tiproxy/','/docs/dev/reference/tiproxy/monitor/']
 ---
 
 # TiProxy Monitoring Metrics
