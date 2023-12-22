@@ -1,7 +1,6 @@
 ---
 title: TiProxy Deployment Topology
 summary: Learn the deployment topology of TiProxy based on the minimal TiDB topology.
-aliases: ['/docs/dev/tiproxy-deployment-topology/']
 ---
 
 # TiProxy Deployment Topology
