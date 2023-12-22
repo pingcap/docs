@@ -90,4 +90,4 @@ Currently, the `help_topic` is NULL.
 - `GLOBAL_VARIABLES`: global system variable table
 - `expr_pushdown_blacklist`: the blocklist for expression pushdown
 - `opt_rule_blacklist`: the blocklist for logical optimization rules
-- `table_cache_meta`: the metadata of cached tables
+- `tidb_timers`: the metadata of internal timers

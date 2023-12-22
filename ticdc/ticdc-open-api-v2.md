@@ -92,7 +92,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/status
 
 ```json
 {
-  "version": "v7.1.2",
+  "version": "v7.1.3",
   "git_hash": "10413bded1bdb2850aa6d7b94eb375102e9c44dc",
   "id": "d2912e63-3349-447c-90ba-72a4e04b5e9e",
   "pid": 1447,
@@ -147,7 +147,7 @@ This interface is used to submit a replication task to TiCDC. If the request is 
   "changefeed_id": "string",
   "replica_config": {
     "bdr_mode": true,
-    "case_sensitive": true,
+    "case_sensitive": false,
     "check_gc_safe_point": true,
     "consistent": {
       "flush_interval": 0,
@@ -266,7 +266,7 @@ The descriptions of the `replica_config` parameters are as follows.
 | Parameter name | Description |
 | :------------------------ | :----------------------------------------------------- |
 | `bdr_mode`                | `BOOLEAN` type. Determines whether to enable [bidirectional replication](/ticdc/ticdc-bidirectional-replication.md). The default value is `false`. (Optional)               |
-| `case_sensitive`          | `BOOLEAN` type. Determines whether to be case-sensitive when filtering table names. The default value is `true`. (Optional)   |
+| `case_sensitive`          | `BOOLEAN` type. Determines whether to be case-sensitive when filtering table names. Starting from v6.5.6 and v7.1.3, the default value changes from `true` to `false`. (Optional)   |
 | `check_gc_safe_point`     | `BOOLEAN` type. Determines whether to check that the start time of the replication task is earlier than the GC time. The default value is `true`. (Optional)                                  |
 | `consistent`              | The configuration parameters of redo log. (Optional) |
 | `enable_old_value`        | `BOOLEAN` type. Determines whether to output the old value (that is, the value before the update). The default value is `true`. (Optional)         |
@@ -288,6 +288,11 @@ The `consistent` parameters are described as follows:
 | `level`          | `STRING` type. The consistency level of the replicated data. (Optional)    |
 | `max_log_size`   | `UINT64` type. The maximum value of redo log. (Optional)      |
 | `storage`        | `STRING` type. The destination address of the storage. (Optional)            |
+| `use_file_backend` | `BOOL` type. Specifies whether to store the redo log in a local file. (Optional) |
+| `encoding_worker_num` | `INT` type. The number of encoding and decoding workers in the redo module. (Optional)             |
+| `flush_worker_num`    | `INT` type. The number of flushing workers in the redo module. (Optional)             |
+| `compression`         | `STRING` type. The behavior to compress redo log files. Available options are `""` and `"lz4"`. The default value is `""`, which means no compression. (Optional) |
+| `flush_concurrency`   | `INT` type. The concurrency for uploading a single file. The default value is `1`, which means concurrency is disabled. (Optional)                                     |
 
 The `filter` parameters are described as follows:
 
@@ -333,6 +338,7 @@ The `sink` parameters are described as follows:
 | `terminator`            | `STRING` type. The terminator is used to separate two data change events. The default value is null, which means `"\r\n"` is used as the terminator. (Optional)                                                |
 | `transaction_atomicity` | `STRING` type. The atomicity level of the transaction. (Optional)                                                                                                                                              |
 | `only_output_updated_columns` | `BOOLEAN` type. For MQ sinks using the `canal-json` or `open-protocol` protocol, you can specify whether only output the modified columns. The default value is `false`. (Optional) |
+| `cloud_storage_config` | The storage sink configuration. (Optional) |
 
 `sink.column_selectors` is an array. The parameters are described as follows:
 
@@ -345,10 +351,11 @@ The `sink.csv` parameters are described as follows:
 
 | Parameter name | Description |
 |:-----------------|:---------------------------------------|
-| `delimiter`         | `STRING` type. The character used to separate fields in the CSV file. The value must be an ASCII character and defaults to `,`.     |
-| `include_commit_ts` | `BOOLEAN` type. Whether to include commit-ts in CSV rows. The default value is `false`. |
-| `null`              | `STRING` type. The character that is displayed when a CSV column is null. The default value is `\N`. |
-| `quote`             | `STRING` type. The quotation character used to surround fields in the CSV file. If the value is empty, no quotation is used. The default value is `"`. |
+| `delimiter`              | `STRING` type. The character used to separate fields in the CSV file. The value must be an ASCII character and defaults to `,`.     |
+| `include_commit_ts`      | `BOOLEAN` type. Whether to include commit-ts in CSV rows. The default value is `false`. |
+| `null`                   | `STRING` type. The character that is displayed when a CSV column is null. The default value is `\N`. |
+| `quote`                  | `STRING` type. The quotation character used to surround fields in the CSV file. If the value is empty, no quotation is used. The default value is `"`. |
+| `binary_encoding_method` | `STRING` type. The encoding method of binary data, which can be `"base64"` or `"hex"`. The default value is `"base64"`. |
 
 `sink.dispatchers`: for the sink of MQ type, you can use this parameter to configure the event dispatcher. The following dispatchers are supported: `default`, `ts`, `rowid`, and `table`. The dispatcher rules are as follows:
 
@@ -364,6 +371,17 @@ The `sink.csv` parameters are described as follows:
 | `matcher`   | `STRING ARRAY` type. It has the same matching syntax as the filter rule does. |
 | `partition` | `STRING` type. The target partition for dispatching events.    |
 | `topic`     | `STRING` type. The target topic for dispatching events.        |
+
+`sink.cloud_storage_config`  parameters are described as follows:
+
+| Parameter name | Description |
+|:-----------------|:---------------------------------------|
+| `worker_count`   | `INT` type. The concurrency for saving data changes to the downstream cloud storage.  |
+| `flush_interval`   | `STRING` type. The interval for saving data changes to the downstream cloud storage. |
+| `file_size`   | `INT` type. A data change file is saved to the cloud storage when the number of bytes in this file exceeds the value of this parameter. |
+| `file_expiration_days`   | `INT` type. The duration to retain files, which takes effect only when `date-separator` is configured as `day`. |
+| `file_cleanup_cron_spec`   | `STRING` type. The running cycle of the scheduled cleanup task, compatible with the crontab configuration, with a format of `<Second> <Minute> <Hour> <Day of the month> <Month> <Day of the week (Optional)>`. |
+| `flush_concurrency`   | `INT` type. The concurrency for uploading a single file. |
 
 ### Example
 
@@ -384,7 +402,7 @@ If the request is successful, `200 OK` is returned. If the request fails, an err
   "checkpoint_ts": 0,
   "config": {
     "bdr_mode": true,
-    "case_sensitive": true,
+    "case_sensitive": false,
     "check_gc_safe_point": true,
     "consistent": {
       "flush_interval": 0,
@@ -588,7 +606,7 @@ To modify the changefeed configuration, follow the steps of `pause the replicati
 {
   "replica_config": {
     "bdr_mode": true,
-    "case_sensitive": true,
+    "case_sensitive": false,
     "check_gc_safe_point": true,
     "consistent": {
       "flush_interval": 0,

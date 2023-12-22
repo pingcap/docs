@@ -761,6 +761,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 - Setting this variable to `ON` requires you to connect to TiDB from a session that has TLS enabled. This helps prevent lock-out scenarios when TLS is not configured correctly.
 - This setting was previously a `tidb.toml` option (`security.require-secure-transport`), but changed to a system variable starting from TiDB v6.1.0.
+- For v7.1.2 or later v7.1 patch versions, when Security Enhanced Mode (SEM) is enabled, setting this variable to `ON` is prohibited to avoid potential connectivity issues for users.
 
 ### skip_name_resolve <span class="version-mark">New in v5.2.0</span>
 
@@ -1395,7 +1396,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Type: Integer
 - Default value: `64`
 - Range: `[1, 256]`
-- This variable controls the concurrency of [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md).
+- This variable controls the concurrency of [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md).
 
 ### tidb_ddl_reorg_batch_size
 
@@ -3049,7 +3050,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `-1`
 - Range: `[-1, 256]`
 - Unit: Threads
-- This variable is used to set the maximum concurrency for TiFlash to execute a request. The default value is `-1`, indicating that this system variable is invalid. When the value is `0`, the maximum number of threads is automatically configured by TiFlash.
+- This variable is used to set the maximum concurrency for TiFlash to execute a request. The default value is `-1`, indicating that this system variable is invalid and the maximum concurrency depends on the setting of the TiFlash configuration `profiles.default.max_threads`. When the value is `0`, the maximum number of threads is automatically configured by TiFlash.
 
 ### tidb_mem_oom_action <span class="version-mark">New in v6.1.0</span>
 
@@ -4177,7 +4178,7 @@ SHOW WARNINGS;
 - For DBaaS providers of TiDB, if a TiDB cluster is a downstream database of another database, to make the TiDB cluster read-only, you might need to use `tidb_restricted_read_only` with [Security Enhanced Mode](#tidb_enable_enhanced_security) enabled, which prevents your customers from using [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) to make the cluster writable. To achieve this, you need to enable [Security Enhanced Mode](#tidb_enable_enhanced_security), use an admin user with the `SYSTEM_VARIABLES_ADMIN` and `RESTRICTED_VARIABLES_ADMIN` privileges to control `tidb_restricted_read_only`, and let your database users use the root user with the `SUPER` privilege to control [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) only.
 - This variable controls the read-only status of the entire cluster. When the variable is `ON`, all TiDB servers in the entire cluster are in the read-only mode. In this case, TiDB only executes the statements that do not modify data, such as `SELECT`, `USE`, and `SHOW`. For other statements such as `INSERT` and `UPDATE`, TiDB rejects executing those statements in the read-only mode.
 - Enabling the read-only mode using this variable only ensures that the entire cluster finally enters the read-only status. If you have changed the value of this variable in a TiDB cluster but the change has not yet propagated to other TiDB servers, the un-updated TiDB servers are still **not** in the read-only mode.
-- When this variable is enabled, the SQL statements being executed are not affected. TiDB only performs the read-only check for the SQL statements **to be** executed.
+- TiDB checks the read-only flag before SQL statements are executed. Since v6.2.0, the flag is also checked before SQL statements are committed. This helps prevent the case where long-running [auto commit](/transaction-overview.md#autocommit) statements might modify data after the server has been placed in read-only mode.
 - When this variable is enabled, TiDB handles the uncommitted transactions in the following ways:
     - For uncommitted read-only transactions, you can commit the transactions normally.
     - For uncommitted transactions that are not read-only, SQL statements that perform write operations in these transactions are rejected.
@@ -4587,7 +4588,18 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Integer
 - Default value: `4096`
 - Range: `[0, 2147483647]`
-- This variable is used to control the length of the SQL string in [statement summary tables](/statement-summary-tables.md).
+
+<CustomContent platform="tidb">
+
+- This variable is used to control the length of the SQL string in [statement summary tables](/statement-summary-tables.md), the [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md) table, and the [TiDB Dashboard](/dashboard/dashboard-intro.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- This variable is used to control the length of the SQL string in [statement summary tables](/statement-summary-tables.md) and the [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md) table.
+
+</CustomContent>
 
 ### tidb_stmt_summary_max_stmt_count <span class="version-mark">New in v4.0</span>
 

@@ -157,6 +157,10 @@ In TiDB Cloud, the OIDC authentication method is disabled by default. After enab
 
 If you have an identity provider that uses the SAML identity protocol, you can enable the SAML authentication method for TiDB Cloud login.
 
+> **Note:**
+>
+> TiDB Cloud uses email addresses as unique identifiers for different users. Therefore, ensure that the `email` attribute for your organization members is configured in your identity provider.
+
 In TiDB Cloud, the SAML authentication method is disabled by default. After enabling Cloud Organization Cloud, you can enable and configure the SAML authentication method as follows:
 
 1. Get the following information from your identity provider for TiDB Cloud Organization SSO:
