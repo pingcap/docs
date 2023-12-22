@@ -41,7 +41,7 @@ Before using the DM tool, note the following restrictions:
 
 + Database version requirements
 
-    - MySQL version 5.5 ~ 5.7
+    - MySQL version 5.6,5.7
     - MySQL version 8.0 (experimental features)
     - MariaDB version >= 10.1.2 (experimental features)
 
