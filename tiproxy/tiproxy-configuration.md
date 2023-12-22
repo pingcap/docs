@@ -1,9 +1,9 @@
 ---
-title: Configure TiProxy
+title: TiProxy Configuration File
 summary: Learn how to configure TiProxy.
 ---
 
-# Configure TiProxy
+# TiProxy Configuration File
 
 This document introduces the configuration parameters related to the deployment and use of TiProxy. The following is an example configuration:
 
@@ -42,50 +42,51 @@ Configuration for SQL port.
 
 #### `addr`
 
-+ Default Value: `0.0.0.0:6000`
++ Default value: `0.0.0.0:6000`
 + SQL gateway address. The format is `<ip>:<port>`.
 
 #### `graceful-wait-before-shutdown`
 
-+ Default Value: `0`
++ Default value: `0`
 + Support hot-reload: yes
 + Unit: second
 + When the HTTP status is unhealthy, the SQL port accepts new connections for the last `graceful-wait-before-shutdown` seconds. After that, it rejects new connections and drains clients. It is recommended to set it to `0` when there are no other proxies (e.g. NLB) between the client and TiProxy.
 
 #### `graceful-close-conn-timeout`
 
-+ Default Value: `15`
++ Default value: `15`
 + Support hot-reload: yes
++ Unit: second
 + Close connections when they have completed their current transactions (also known as draining clients) within `graceful-close-conn-timeout` seconds. It is recommended to set this timeout longer than the lifecycle of a transaction.
 
 #### `max-connections`
 
-+ Default Value: `0`
++ Default value: `0`
 + Support hot-reload: yes
 + Each TiProxy instance can accept `max-connections` connections at most. `0` means no limitation.
 
 #### `conn-buffer-size`
 
-+ Default Value: `0`
++ Default value: `0`
 + Support hot-reload: yes, but for new connections
 + Range: `[1024, 16777216]`
 + This configuration item lets you decide the connection buffer size in bytes, e.g. `1024` means 1K buffer. The minimum size is `1K`, and the maximum size is `16M`. It is a tradeoff between memory and performance. By default, when it is `0`, TiProxy will use a buffer of default size. However, a larger buffer might yield better performance results. 
 
 #### `pd-addrs`
 
-+ Default Value: `127.0.0.1:2379`
++ Default value: `127.0.0.1:2379`
 + The PD addresses TiProxy connects to. TiProxy discovers TiDB instances by fetching the TiDB list from the PD. It is set automatically when TiProxy is deployed by TiUP or TiDB Operator.
 
 #### `proxy-protocol`
 
-+ Default Value: ``
++ Default value: ``
 + Support hot-reload: yes
-+ Possible Values: `v2`
++ Possible values: `v2`
 + Enable proxy protocol handling on the port. You can specify `v2` to handle proxy protocol version 2. `v1` is not supported.
 
 #### `require-backend-tls`
 
-+ Default Value: `true`
++ Default value: `true`
 + Support hot-reload: yes
 + Require TLS between TiProxy and TiDB servers. If the TiDB server doesn't support TLS, clients will report an error when connecting to TiProxy.
 
@@ -95,19 +96,20 @@ Configurations for HTTP gateway.
 
 #### `addr`
 
-+ Default Value: `0.0.0.0:3090`
++ Default value: `0.0.0.0:3090`
 + API gateway address. You can specify `ip:port`.
 
 #### `proxy-protocol`
 
-+ Default Value: ``
++ Default value: ``
++ Possible values: `v2`
 + Enable proxy protocol handling on the port. You can specify `v2` to handle proxy protocol version 2. `v1` is not supported.
 
 ### log
 
 #### `level`
 
-+ Default Value: `info`
++ Default value: `info`
 + Support hot-reload: yes
 + You can specify:
 
@@ -119,25 +121,25 @@ Configurations for HTTP gateway.
 
 #### `filename`
 
-+ Default Value: ``
++ Default value: ``
 + Support hot-reload: yes
 + Log file path. Non empty value will enable logging to file.
 
 #### `max-size`
 
-+ Default Value: `300`
++ Default value: `300`
 + Support hot-reload: yes
 + Specifies the maximum size, in megabytes, for log files. Logs will be rotated.
 
 #### `max-days`
 
-+ Default Value: `3`
++ Default value: `3`
 + Support hot-reload: yes
 + Specifies the maximum number of days to keep old log files. Outdated log files are deleted after surpassing this period.
 
 #### `max-backups`
 
-+ Default Value: `3`
++ Default value: `3`
 + Support hot-reload: yes
 + Specifies the maximum number of log files to be retained. Surplus log files will be automatically deleted when an excessive number is reached.
 
