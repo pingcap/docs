@@ -19,8 +19,7 @@ In this document, you will learn how to migrate the authentication scheme of you
 
 > **Note:**
 >
-> - The Cloud Organization SSO feature is only available for paid organizations.
-> - If your current TiDB login URL starts with `https://tidbcloud.com/enterprise/`, it means that Cloud Organization SSO is already enabled for your organization.
+> The Cloud Organization SSO feature is only available for paid organizations.
 
 ## Before you begin
 
