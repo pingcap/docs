@@ -26,17 +26,17 @@ TiProxy has four panel groups. The metrics on these panels indicate the current 
 - Connection Count: the number of clients connected to each TiProxy instance
 - Create Connection OPM: the number of creating connections on each TiProxy instance every minute
 - Disconnection OPM: the number of disconnections for each reason every minute. Reasons include:
-  - success: the client disconnects normally
-  - client network break: the client does not send a `QUIT` command before it disconnects. It may also be caused by a network problem or the client shutting down
-  - client handshake fail: the client fails to handshake with TiProxy
-  - auth fail: the access is denied by TiDB
-  - SQL error: TiDB returns other SQL errors
-  - proxy shutdown: TiProxy is shutting down
-  - malformed packet: TiProxy fails to parse the MySQL packet
-  - get backend fail: TiProxy fails to find an available backend for the connection
-  - proxy error: other TiProxy errors
-  - backend network break: fails to read from or write to the TiDB. This may be caused by a network problem or the TiDB server shutting down
-  - backend handshake fail: TiProxy fails to handshake with the TiDB server
+    - success: the client disconnects normally
+    - client network break: the client does not send a `QUIT` command before it disconnects. It may also be caused by a network problem or the client shutting down
+    - client handshake fail: the client fails to handshake with TiProxy
+    - auth fail: the access is denied by TiDB
+    - SQL error: TiDB returns other SQL errors
+    - proxy shutdown: TiProxy is shutting down
+    - malformed packet: TiProxy fails to parse the MySQL packet
+    - get backend fail: TiProxy fails to find an available backend for the connection
+    - proxy error: other TiProxy errors
+    - backend network break: fails to read from or write to the TiDB. This may be caused by a network problem or the TiDB server shutting down
+    - backend handshake fail: TiProxy fails to handshake with the TiDB server
 - Goroutine Count: the number of Goroutines on each TiProxy instance
 
 ## Query-Summary
