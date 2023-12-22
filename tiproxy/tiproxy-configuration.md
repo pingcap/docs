@@ -26,8 +26,6 @@ skip-ca = true
 skip-ca = true
 ```
 
-# ignore-wrong-namespace = true
-
 ## Configure the `tiproxy.toml` file
 
 This section introduces the configuration parameters of TiProxy.
