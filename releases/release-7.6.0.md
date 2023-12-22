@@ -65,19 +65,19 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
 ### Data migration
 
-* TiCDC supports replicating DDL statements in bi-directional replication mode [#10301](https://github.com/pingcap/tiflow/issues/10301) @[asddongmen](https://github.com/asddongmen)
+* TiCDC supports replicating DDL statements in bi-directional replication mode [#10301](https://github.com/pingcap/tiflow/issues/10301) @[asddongmen](https://github.com/asddongmen) **tw@hfxsd** <!--1460-->
 
     Starting from v7.6.0 TiCDC supports replication of DDL statements with bi-directional replication configured. Previously, replicating DDL statements was not supported by TiCDC, so users of TiCDC's bi-directional replication had to apply DDL statements to both TiDB clusters separately. With this feature, TiCDC allows for a cluster to be assigned the primary BDR role, and for DDL statements at that cluster to be replicated to the downstream cluster.
 
     For more information, see [documentation](/ticdc/ticdc-bidirectional-replication.md).
 
-* TiCDC supports querying the downstream synchronization status of a changefeed [#10289](https://github.com/pingcap/tiflow/issues/10289) @[hongyunyan](https://github.com/hongyunyan)
+* TiCDC supports querying the downstream synchronization status of a changefeed [#10289](https://github.com/pingcap/tiflow/issues/10289) @[hongyunyan](https://github.com/hongyunyan) **tw@qiancai** <!--1627-->
 
     Starting from v7.6.0 TiCDC introduces a new API to support querying the downstream synchronization status of a changefeed. With this API, users can query a TiCDC changefeed about its synchronization status. This allows users to determine whether the upstream information received by TiCDC has been synchronized to the downstream system successfully.
 
     For more information, see [documentation](/ticdc/ticdc-open-api-v2.md).
 
-* TiCDC adds support for two character delimmeters with CSV output protocol [#9969](https://github.com/pingcap/tiflow/issues/9969) @[zhangjinpeng1987](https://github.com/zhangjinpeng1987)
+* TiCDC adds support for two character delimmeters with CSV output protocol [#9969](https://github.com/pingcap/tiflow/issues/9969) @[zhangjinpeng1987](https://github.com/zhangjinpeng1987) **tw@qiancai** <!--1653-->
 
     Starting from v7.6.0 TiCDC allows the CSV output protocol delimiters to specified as 1 or 2 characters long. With this change, users can configure TiCDC to generate file output using 2 character delimeters (such as `||` or `$^`) to separate fields in the output.
 
