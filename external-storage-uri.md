@@ -84,9 +84,3 @@ The following is an example of an Azure Blob Storage URI for TiDB Lightning and 
 ```shell
 azure://external/testfolder?account-name=${account-name}&account-key=${account-key}
 ```
-
-The following is an example of an Azure Blob Storage URI for [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md). In this example, you need to specify a specific filename `test.csv`.
-
-```shell
-azure://external/test.csv?account-name=${account-name}&account-key=${account-key}
-```
