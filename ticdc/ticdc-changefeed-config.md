@@ -67,6 +67,13 @@ enable-old-value = true
 # Note: This configuration item only takes effect if the downstream is TiDB.
 # sync-point-retention = "1h"
 
+<<<<<<< HEAD
+=======
+# Starting from v6.5.6, v7.1.3, and v7.5.0, this configuration item specifies the SQL mode used when parsing DDL statements. Multiple modes are separated by commas.
+# The default value is the same as the default SQL mode of TiDB.
+# sql-mode = "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+
+>>>>>>> fa0df9184f (changefeed: add the info about configuring SQL mode (#15862))
 [mounter]
 # The number of threads with which the mounter decodes KV data. The default value is 16.
 # worker-num = 16
