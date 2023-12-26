@@ -23,7 +23,7 @@ protocol = "csv"
 terminator = "\n"
 
 [sink.csv]
-delimiter = ','
+delimiter = ',' # Before v7.6.0, delimiter can only be set to a single character. In v7.6.0 and later versions, it can be set to 1-3 characters.
 quote = '"'
 null = '\N'
 include-commit-ts = true
