@@ -48,7 +48,7 @@ In addition, the rational use of the resource control feature can reduce the num
 
 > **Note:**
 >
-> - It is recommended to deploy computing and storage nodes that are independent to assess the effectiveness of resource management.  Scheduling and other cluster resource-sensitive features are hardly working properly on the deployment created by `tiup playground`, where the resource are shared across instances. 
+> - To assess the effectiveness of resource management, it is recommended to deploy the cluster on independent computing and storage nodes. Scheduling and other cluster resource-sensitive features are hardly working properly on the deployment created by `tiup playground`, where the resources are shared across instances. 
 
 ## Limitations
 
@@ -408,7 +408,7 @@ You can get more information about runaway queries from the following system tab
 >
 > This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://docs.pingcap.com/tidb/stable/support) on GitHub.
 > 
-> The background task management in resource control is based on TiKV's dynamic adjustment of resource quotas for CPU/IO utilization. Therefore, it relies on the available resource quota of each instance. If multiple components or instances are deployed on a single server, it is mandatory to set appropriate resource quota for each instance through `cgroup`. Deployment with shared resources are challenging to demonstrate the expected behavior.
+> The background task management in resource control is based on TiKV's dynamic adjustment of resource quotas for CPU/IO utilization. Therefore, it relies on the available resource quota of each instance. If multiple components or instances are deployed on a single server, it is mandatory to set the appropriate resource quota for each instance through `cgroup`. It is difficult to achieve the expected effect in deployment with shared resources like TiUP Playground.
 
 Background tasks, such as data backup and automatic statistics collection, are low-priority but consume many resources. These tasks are usually triggered periodically or irregularly. During execution, they consume a lot of resources, thus affecting the performance of online high-priority tasks.
 
