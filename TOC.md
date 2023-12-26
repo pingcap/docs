@@ -618,9 +618,12 @@
     - [Data Check in the Sharding Scenario](/sync-diff-inspector/shard-diff.md)
     - [Data Check in the DM Replication Scenario](/sync-diff-inspector/dm-diff.md)
   - TiProxy
+    - [Overview](/tiproxy/tiproxy-overview.md)
     - [Configuration](/tiproxy/tiproxy-configuration.md)
     - [Command Line](/tiproxy/tiproxy-command-line-flags.md)
     - [Metrics](/tiproxy/tiproxy-grafana.md)
+    - [Troubleshooting](/tiproxy/troubleshoot-tiproxy.md)
+    - [Performance Test](/tiproxy/tiproxy-performance-test.md)
 - Reference
   - Cluster Architecture
     - [Overview](/tidb-architecture.md)
