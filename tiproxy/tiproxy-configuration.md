@@ -114,7 +114,6 @@ Configurations for HTTP gateway.
 #### `encoder`
 
 + Default value: `tidb`
-+ Support hot-reload: yes
 + You can specify:
 
     + `tidb`: format used by TiDB. For details, refer to [Unified Log Format](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md).
