@@ -24,7 +24,7 @@ TiProxy has four panel groups. The metrics on these panels indicate the current 
 - Memory Usage: the memory usage of each TiProxy instance
 - Uptime: the runtime of each TiProxy instance since last restart
 - Connection Count: the number of clients connected to each TiProxy instance
-- Create Connection OPM: the number of creating connections on each TiProxy instance every minute
+- Create Connection OPM: the number of connections created on each TiProxy instance every minute
 - Disconnection OPM: the number of disconnections for each reason every minute. Reasons include:
     - success: the client disconnects normally
     - client network break: the client does not send a `QUIT` command before it disconnects. It may also be caused by a network problem or the client shutting down
