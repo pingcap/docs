@@ -1186,7 +1186,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `4`
 - Range: `[1, 256]`
-- This variable is used to set the concurrency of the `scan` operation when to analyze.
+- This variable is used to set the concurrency of the `scan` operation when executing the `ANALYZE` operation.
 
 ### tidb_auto_analyze_ratio
 
