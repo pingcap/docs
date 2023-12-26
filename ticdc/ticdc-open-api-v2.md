@@ -879,7 +879,7 @@ In this example, `sink_checkpoint_ts` is behind `now_ts` in time, either because
 }
 ```
 
-After PD in the upstream cluster fails for a long period of time, querying this API will return an error similar to the preceeding one, which does not provide any information for further judgment. Because PD failures directly affect TiCDC data replication, when encountering such errors, you can assume that TiCDC has completed the data replication as much as possible, but data loss might still occurs to the downstream cluster due to PD failures.
+After PD in the upstream cluster fails for a long period of time, querying this API will return an error similar to the preceding one, which does not provide any information for further judgment. Because PD failures directly affect TiCDC data replication, when encountering such errors, you can assume that TiCDC has completed the data replication as much as possible, but data loss might still occur to the downstream cluster due to PD failures.
 
 ## Pause a replication task
 
