@@ -19,7 +19,11 @@ This TiDB statement is not applicable to TiDB Cloud.
 
 `IMPORT INTO` supports importing data from files stored in Amazon S3, GCS, and the TiDB local storage.
 
+<<<<<<< HEAD
 - For data files stored in Amazon S3, GCS, or Azure Blob Storage, `IMPORT INTO` supports running in the [TiDB backend task distributed execution framework](/tidb-distributed-execution-framework.md).
+=======
+- For data files stored in Amazon S3 or GCS, `IMPORT INTO` supports running in the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md).
+>>>>>>> 7752b8ad60 (Removed unsupported Azure Blob storage via import into (#15859))
 
     - When this framework is enabled ([tidb_enable_dist_task](/system-variables.md#tidb_enable_dist_task-new-in-v710) is `ON`), `IMPORT INTO` splits a data import job into multiple sub-jobs and distributes these sub-jobs to different TiDB nodes for execution to improve the import efficiency.
     - When this framework is disabled, `IMPORT INTO` only supports running on the TiDB node where the current user is connected.
@@ -94,9 +98,9 @@ In the left side of the `SET` expression, you can only reference a column name t
 
 ### fileLocation
 
-It specifies the storage location of the data file, which can be an Amazon S3, GCS, or Azure Blob Storage URI path, or a TiDB local file path.
+It specifies the storage location of the data file, which can be an Amazon S3 or GCS URI path, or a TiDB local file path.
 
-- Amazon S3, GCS, or Azure Blob Storage URI path: for URI configuration details, see [URI Formats of External Storage Services](/external-storage-uri.md).
+- Amazon S3 or GCS URI path: for URI configuration details, see [URI Formats of External Storage Services](/external-storage-uri.md).
 - TiDB local file path: it must be an absolute path, and the file extension must be `.csv`, `.sql`, or `.parquet`. Make sure that the files corresponding to this path are stored on the TiDB node connected by the current user, and the user has the `FILE` privilege.
 
 > **Note:**
@@ -240,7 +244,7 @@ Assume that there are three files named `file-01.csv`, `file-02.csv`, and `file-
 IMPORT INTO t FROM '/path/to/file-*.csv'
 ```
 
-### Import data files from Amazon S3, GCS, or Azure Blob Storage
+### Import data files from Amazon S3 or GCS
 
 - Import data files from Amazon S3:
 
@@ -254,13 +258,7 @@ IMPORT INTO t FROM '/path/to/file-*.csv'
     IMPORT INTO t FROM 'gs://import/test.csv?credentials-file=${credentials-file-path}';
     ```
 
-- Import data files from Azure Blob Storage:
-
-    ```sql
-    IMPORT INTO t FROM 'azure://import/test.csv?credentials-file=${credentials-file-path}';
-    ```
-
-For details about the URI path configuration for Amazon S3, GCS, or Azure Blob Storage, see [URI Formats of External Storage Services](/external-storage-uri.md).
+For details about the URI path configuration for Amazon S3 or GCS, see [URI Formats of External Storage Services](/external-storage-uri.md).
 
 ### Calculate column values using SetClause
 
