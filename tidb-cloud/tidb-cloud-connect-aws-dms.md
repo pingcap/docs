@@ -49,7 +49,7 @@ To [connect to a TiDB Dedicated cluster via public endpoint](/tidb-cloud/connect
 
 - Deploy the replication instance in public subnets and enable **Public accessible**. For more information, see [Configuration for internet access](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access).
    
-2. Deploy the replication instance in private subnets and route traffic in the private subnets to public subnets. In this case, you need at least three subnets, two private subnets, and one public subnet. The two private subnets form a subnet group where the replication instance lives. Then you need to create a NAT gateway in the public subnet and route traffic of the two private subnets to the NAT gateway. For more information, see [Access the internet from a private subnet](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access).
+- Deploy the replication instance in private subnets and route traffic in the private subnets to public subnets. In this case, you need at least three subnets, two private subnets, and one public subnet. The two private subnets form a subnet group where the replication instance lives. Then you need to create a NAT gateway in the public subnet and route traffic of the two private subnets to the NAT gateway. For more information, see [Access the internet from a private subnet](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access).
 
 To connect to a TiDB Dedicated cluster via private endpoint, [set up a private endpoint](/tidb-cloud/set-up-private-endpoint-connections.md) first and deploy the replication instance to private subnets.
 
@@ -102,10 +102,11 @@ For connectivity, the steps for using TiDB Cloud clusters as a source or as a ta
 
 4. Fill in the **Endpoint identifier** and ARN, and then select **Source engine** or **Target engine** as **MySQL**.
 
+5. Choose **Provide access information manually** and fill in cluster information: 
+
 <SimpleTab>
 <div label="TiDB Serverless">
 
-5. Choose **Provide access information manually** and fill in TiDB Serverless cluster information:
    - **Server name**: `HOST` of TiDB Serverless cluster.
    - **Port**: `PORT` of TiDB Serverless cluster.
    - **User name**: User of TiDB Serverless cluster for migration. Make sure it meets DMS requirements.
@@ -113,13 +114,10 @@ For connectivity, the steps for using TiDB Cloud clusters as a source or as a ta
    - **Secure Socket Layer (SSL) mode**: If you are connecting via public endpoint, it is highly recommended to set the mode to **verify-full** to ensure transport security. If you are connecting via private endpoint, you can set the mode to **none**.
    - **CA certificate**: [ISRG Root X1 certificate](https://letsencrypt.org/certs/isrgrootx1.pem). For more information, see [TLS Connections to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md).
   
-    ![Provide access information manually](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-4.png)
-
 </div>
 
 <div label="TiDB Dedicated">
 
-5. Choose **Provide access information manually** and fill in TiDB Dedicated cluster information:
    - **Server name**: `HOST` of TiDB Dedicated cluster.
    - **Port**: `PORT` of TiDB Dedicated cluster.
    - **User name**: User of TiDB Dedicated cluster for migration. Make sure it meets DMS requirements.
@@ -127,10 +125,10 @@ For connectivity, the steps for using TiDB Cloud clusters as a source or as a ta
    - **Secure Socket Layer (SSL) mode**: If you are connecting via public endpoint, we highly recommend setting it to **verify-full** to ensure transport security. If you are connecting via private endpoint, you can set it to **none**.
    - **CA certificate**: Get the CA certificate according to [TLS Connections to TiDB Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md).
 
-    ![Provide access information manually](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-4.png)
-
 </div>
 </SimpleTab>
+
+ ![Provide access information manually](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-4.png)
 
 6. If the endpoint to be created is a **Target endpoint**, set **Extra connection attributes** to `Initstmt=SET FOREIGN_KEY_CHECKS=0;`.
 
