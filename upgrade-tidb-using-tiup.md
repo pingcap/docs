@@ -29,12 +29,12 @@ summary: Learn how to upgrade TiDB using TiUP.
 ## アップグレードに関する注意事項 {#upgrade-caveat}
 
 -   TiDB は現在、バージョンのダウングレードや、アップグレード後の以前のバージョンへのロールバックをサポートしていません。
--   TiDB Ansible を使用して管理されている v4.0 クラスターの場合、 [TiUP (v4.0) を使用して TiDB をアップグレードする](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup)に従って新しい管理を行うためにクラスターをTiUP ( `tiup cluster` ) にインポートする必要があります。その後、このドキュメントに従ってクラスターを v7.1.2 にアップグレードできます。
--   v3.0 より前のバージョンを v7.1.2 に更新するには:
+-   TiDB Ansible を使用して管理されている v4.0 クラスターの場合、 [TiUP (v4.0) を使用して TiDB をアップグレードする](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup)に従って新しい管理を行うためにクラスターをTiUP ( `tiup cluster` ) にインポートする必要があります。その後、このドキュメントに従ってクラスターを v7.1.3 にアップグレードできます。
+-   v3.0 より前のバージョンを v7.1.3 に更新するには:
     1.  [TiDB Ansible](https://docs.pingcap.com/tidb/v3.0/upgrade-tidb-using-ansible)を使用してこのバージョンを 3.0 に更新します。
     2.  TiUP ( `tiup cluster` ) を使用して、TiDB Ansible 構成をインポートします。
     3.  [TiUP (v4.0) を使用して TiDB をアップグレードする](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup)に従って、3.0 バージョンを 4.0 に更新します。
-    4.  このドキュメントに従ってクラスターを v7.1.2 にアップグレードします。
+    4.  このドキュメントに従ってクラスターを v7.1.3 にアップグレードします。
 -   TiDB Binlog、 TiCDC、 TiFlash、およびその他のコンポーネントのバージョンのアップグレードをサポートします。
 -   TiFlash をv6.3.0 より前のバージョンから v6.3.0 以降のバージョンにアップグレードする場合、CPU は Linux AMD64アーキテクチャでは AVX2 命令セットをサポートし、Linux ARM64アーキテクチャでは ARMv8 命令セットアーキテクチャをサポートする必要があることに注意してください。詳細については、 [v6.3.0 リリースノート](/releases/release-6.3.0.md#others)の説明を参照してください。
 -   さまざまなバージョンの互換性の変更の詳細については、各バージョンの[リリースノート](/releases/release-notes.md)を参照してください。対応するリリース ノートの「互換性の変更」セクションに従って、クラスター構成を変更します。
@@ -48,11 +48,12 @@ summary: Learn how to upgrade TiDB using TiUP.
 
 TiDB リリース ノートで互換性の変更を確認してください。変更がアップグレードに影響を与える場合は、それに応じて対処してください。
 
-以下に、v7.0.0 から現在のバージョン (v7.1.2) にアップグレードするときに知っておく必要がある互換性の変更点を示します。 v6.6.0 以前のバージョンから現在のバージョンにアップグレードする場合は、対応する[リリースノート](/releases/release-notes.md)の中間バージョンで導入された互換性の変更も確認する必要がある場合があります。
+以下に、v7.0.0 から現在のバージョン (v7.1.3) にアップグレードするときに知っておく必要がある互換性の変更点を示します。 v6.6.0 以前のバージョンから現在のバージョンにアップグレードする場合は、対応する[リリースノート](/releases/release-notes.md)の中間バージョンで導入された互換性の変更も確認する必要がある場合があります。
 
 -   TiDB v7.1.0 [互換性の変更](/releases/release-7.1.0.md#compatibility-changes)
 -   TiDB v7.1.1 [互換性の変更](/releases/release-7.1.1.md#compatibility-changes)
 -   TiDB v7.1.2 [互換性の変更](/releases/release-7.1.2.md#compatibility-changes)
+-   TiDB v7.1.3 [互換性の変更](/releases/release-7.1.3.md#compatibility-changes)
 
 ### ステップ 2: TiUPまたはTiUPオフライン ミラーをアップグレードする {#step-2-upgrade-tiup-or-tiup-offline-mirror}
 
@@ -131,11 +132,11 @@ tiup update cluster
 
 > **注記：**
 >
-> クラスターを v7.1.2 にアップグレードする前に、v4.0 で変更したパラメーターが v7.1.2 でも互換性があることを確認してください。詳細は[TiKVコンフィグレーションファイル](/tikv-configuration-file.md)を参照してください。
+> クラスターを v7.1.3 にアップグレードする前に、v4.0 で変更したパラメーターが v7.1.3 でも互換性があることを確認してください。詳細は[TiKVコンフィグレーションファイル](/tikv-configuration-file.md)を参照してください。
 
 ### ステップ 4: 現在のクラスターの健全性ステータスを確認する {#step-4-check-the-health-status-of-the-current-cluster}
 
-アップグレード中の未定義の動作やその他の問題を回避するには、アップグレード前に現在のクラスターのリージョンの正常性状態をチェックすることをお勧めします。これを行うには、 `check`サブコマンドを使用します。
+アップグレード中の未定義の動作やその他の問題を回避するには、アップグレード前に現在のクラスターのリージョンの健全性ステータスを確認することをお勧めします。これを行うには、 `check`サブコマンドを使用します。
 
 ```shell
 tiup cluster check <cluster-name> --cluster
@@ -161,7 +162,7 @@ tiup cluster check <cluster-name> --cluster
 
 クラスターは、オンライン アップグレードとオフライン アップグレードの 2 つの方法のいずれかでアップグレードできます。
 
-デフォルトでは、 TiUPクラスタはオンライン方式を使用して TiDB クラスターをアップグレードします。つまり、TiDB クラスターはアップグレード プロセス中にもサービスを提供できます。オンライン方式では、アップグレードして再起動する前に、各ノードでリーダーが 1 つずつ移行されます。したがって、大規模なクラスターの場合、アップグレード操作全体が完了するまでに長い時間がかかります。
+デフォルトでは、 TiUPクラスタはオンライン方式を使用して TiDB クラスターをアップグレードします。これは、TiDB クラスターがアップグレード プロセス中に引き続きサービスを提供できることを意味します。オンライン方式では、アップグレードして再起動する前に、各ノードでリーダーが 1 つずつ移行されます。したがって、大規模なクラスターの場合、アップグレード操作全体が完了するまでに長い時間がかかります。
 
 アプリケーションにメンテナンスのためにデータベースを停止するためのメンテナンス期間がある場合は、オフライン アップグレード方法を使用してアップグレード操作を迅速に実行できます。
 
@@ -171,10 +172,10 @@ tiup cluster check <cluster-name> --cluster
 tiup cluster upgrade <cluster-name> <version>
 ```
 
-たとえば、クラスターを v7.1.2 にアップグレードする場合は、次のようにします。
+たとえば、クラスターを v7.1.3 にアップグレードする場合は、次のようにします。
 
 ```shell
-tiup cluster upgrade <cluster-name> v7.1.2
+tiup cluster upgrade <cluster-name> v7.1.3
 ```
 
 > **注記：**
@@ -200,7 +201,7 @@ tiup cluster upgrade <cluster-name> v7.1.2
     tiup cluster stop <cluster-name>
     ```
 
-2.  オフライン アップグレードを実行するには、 `upgrade`コマンドと`--offline`オプションを使用します。 `<cluster-name>`の場合はクラスターの名前を入力し、 `<version>`の場合はアップグレードするバージョン ( `v7.1.2`など) を入力します。
+2.  オフライン アップグレードを実行するには、 `upgrade`コマンドと`--offline`オプションを使用します。 `<cluster-name>`の場合はクラスターの名前を入力し、 `<version>`の場合はアップグレードするバージョン ( `v7.1.3`など) を入力します。
 
     ```shell
     tiup cluster upgrade <cluster-name> <version> --offline
@@ -222,7 +223,7 @@ tiup cluster display <cluster-name>
 
     Cluster type:       tidb
     Cluster name:       <cluster-name>
-    Cluster version:    v7.1.2
+    Cluster version:    v7.1.3
 
 ## FAQ {#faq}
 
@@ -272,7 +273,7 @@ v6.2.0 以降、TiDB ではデフォルトで[同時 DDL フレームワーク](
 
 ### エビクト リーダーがアップグレード中に長時間待機しすぎました。この手順をスキップして簡単にアップグレードするにはどうすればよいですか? {#the-evict-leader-has-waited-too-long-during-the-upgrade-how-to-skip-this-step-for-a-quick-upgrade}
 
-`--force`を指定できます。その後、アップグレード中に PD リーダーの転送プロセスと TiKV リーダーの削除プロセスがスキップされます。バージョンを更新するためにクラスターが直接再起動されます。これは、オンラインで実行されるクラスターに大きな影響を与えます。次のコマンドの`<version>` 、アップグレード後のバージョンです ( `v7.1.2`など)。
+`--force`を指定できます。その後、アップグレード中に PD リーダーの転送プロセスと TiKV リーダーの削除プロセスがスキップされます。バージョンを更新するためにクラスターが直接再起動されます。これは、オンラインで実行されるクラスターに大きな影響を与えます。次のコマンドの`<version>` 、アップグレード後のバージョンです ( `v7.1.3`など)。
 
 ```shell
 tiup cluster upgrade <cluster-name> <version> --force
@@ -283,5 +284,5 @@ tiup cluster upgrade <cluster-name> <version> --force
 TiUPを使用して、対応するバージョンの`ctl`コンポーネントをインストールすることで、ツールのバージョンをアップグレードできます。
 
 ```shell
-tiup install ctl:v7.1.2
+tiup install ctl:v7.1.3
 ```

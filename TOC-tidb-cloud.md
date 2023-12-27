@@ -254,7 +254,8 @@
 -   Security
     -   ID アクセス制御
         -   [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)
-        -   [SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)
+        -   [基本的な SSO 認証](/tidb-cloud/tidb-cloud-sso-authentication.md)
+        -   [組織のSSO認証](/tidb-cloud/tidb-cloud-org-sso-authentication.md)
         -   [ID アクセス管理](/tidb-cloud/manage-user-access.md)
     -   ネットワークアクセス制御
         -   TiDB サーバーレス
@@ -392,7 +393,7 @@
             -   [`EXECUTE`](/sql-statements/sql-statement-execute.md)
             -   [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)
             -   [`EXPLAIN`](/sql-statements/sql-statement-explain.md)
-            -   [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md)
+            -   [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)
             -   [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)
             -   [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)
             -   [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)

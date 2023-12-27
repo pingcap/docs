@@ -51,7 +51,7 @@ TiDB Cloud は、 TiDB がサポートするほぼすべてのワークロード
 | `LOAD DATA INFILE`               | `LOAD DATA LOCAL INFILE`のみサポート | `LOAD DATA LOCAL INFILE`のみサポート   |
 | `CHANGE DRAINER`                 | サポートされていません[^7]                | サポートされていません[^7]                  |
 | `CHANGE PUMP`                    | サポートされていません[^7]                | サポートされていません[^7]                  |
-| `FLASHBACK CLUSTER TO TIMESTAMP` | サポートされています                     | サポートされていません[^3]                  |
+| `FLASHBACK CLUSTER`              | サポートされています                     | サポートされていません[^3]                  |
 | `LOAD STATS`                     | サポートされています                     | サポートされていません                      |
 | `SELECT ... INTO OUTFILE`        | サポートされていません[^4]                | サポートされていません[^4]                  |
 | `SET CONFIG`                     | サポートされていません[^4]                | サポートされていません[^4]                  |

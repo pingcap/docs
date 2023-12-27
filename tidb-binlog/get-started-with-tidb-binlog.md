@@ -42,7 +42,7 @@ sudo yum install -y mariadb-server
 ```
 
 ```bash
-curl -L https://download.pingcap.org/tidb-community-server-v7.1.2-linux-amd64.tar.gz | tar xzf -
+curl -L https://download.pingcap.org/tidb-community-server-v7.1.3-linux-amd64.tar.gz | tar xzf -
 cd tidb-latest-linux-amd64
 ```
 
@@ -341,7 +341,7 @@ pkill drainer
 
 「NodeID」に`binlogctl`を指定すると、個々のノードを制御できます。この場合、drainerの NodeID は「localhost.localdomain:8249」、Pumpの NodeID は「localhost.localdomain:8250」です。
 
-このチュートリアルでの`binlogctl`の主な使用は、クラスターの再起動の場合に行われる可能性があります。 TiDB クラスター内のすべてのプロセスを終了し、(ダウンストリームの MySQL/MariaDBサーバーまたはDrainerを除く) 再起動しようとすると、 PumpはDrainerに接続できず、 Drainerがまだ「オンライン」であると信じているため、起動を拒否します。
+このチュートリアルでの`binlogctl`の主な使用は、おそらくクラスターの再起動の場合です。 TiDB クラスター内のすべてのプロセスを終了し、(ダウンストリームの MySQL/MariaDBサーバーまたはDrainerを除く) 再起動しようとすると、 PumpはDrainerに接続できず、 Drainerがまだ「オンライン」であると信じているため、起動を拒否します。
 
 この問題には 3 つの解決策があります。
 

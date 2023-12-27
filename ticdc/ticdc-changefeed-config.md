@@ -16,7 +16,7 @@ cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://ro
 ```shell
 Create changefeed successfully!
 ID: simple-replication-task
-Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2022-12-19T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":true,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v6.5.0"}
+Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2023-12-21T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":false,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v7.1.3"}
 ```
 
 -   `--changefeed-id` : レプリケーション タスクの ID。形式は`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`正規表現と一致する必要があります。この ID が指定されていない場合、TiCDC は UUID (バージョン 4 形式) を ID として自動的に生成します。
@@ -44,9 +44,9 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 # memory-quota = 1073741824
 
 # Specifies whether the database names and tables in the configuration file are case-sensitive.
-# The default value is true.
+# Starting from v6.5.6 and v7.1.3, the default value changes from true to false.
 # This configuration item affects configurations related to filter and sink.
-case-sensitive = true
+case-sensitive = false
 
 # Specifies whether to output the old value. New in v4.0.5. Since v5.0, the default value is `true`.
 enable-old-value = true
@@ -67,6 +67,10 @@ enable-old-value = true
 # The default value is "24h".
 # Note: This configuration item only takes effect if the downstream is TiDB.
 # sync-point-retention = "1h"
+
+# Starting from v6.5.6 and v7.1.3, this configuration item specifies the SQL mode used when parsing DDL statements. Multiple modes are separated by commas.
+# The default value is the same as the default SQL mode of TiDB.
+# sql-mode = "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
 
 [mounter]
 # The number of threads with which the mounter decodes KV data. The default value is 16.
@@ -186,9 +190,21 @@ flush-interval = 2000
 # The storage URI of the redo log.
 # The default value is empty.
 storage = ""
-# Specifies whether to store the redo log in a file.
+# Specifies whether to store the redo log in a local file.
 # The default value is false.
 use-file-backend = false
+# The number of encoding and decoding workers in the redo module.
+# The default value is 16.
+encoding-worker-num = 16
+# The number of flushing workers in the redo module.
+# The default value is 8.
+flush-worker-num = 8
+# The behavior to compress redo log files.
+# Available options are "" and "lz4". The default value is "", which means no compression.
+compression = ""
+# The concurrency for uploading a single redo file.
+# The default value is 1, which means concurrency is disabled.
+flush-concurrency = 1
 
 [integrity]
 # Whether to enable the checksum validation for single-row data. The default value is "none", which means to disable the feature. Value options are "none" and "correctness".
@@ -212,4 +228,24 @@ sasl-oauth-scopes = ["producer.kafka", "consumer.kafka"]
 sasl-oauth-grant-type = "client_credentials"
 # The audience in the Kafka SASL OAUTHBEARER authentication. The default value is empty. This parameter is optional when the OAUTHBEARER authentication is used.
 sasl-oauth-audience = "kafka"
+
+[sink.cloud-storage-config]
+# The concurrency for saving data changes to the downstream cloud storage. 
+# The default value is 16.
+worker-count = 16
+# The interval for saving data changes to the downstream cloud storage.
+# The default value is "2s".
+flush-interval = "2s"
+# A data change file is saved to the cloud storage when the number of bytes in this file exceeds `file-size`.
+# The default value is 67108864 (this is, 64 MiB).
+file-size = 67108864
+# The duration to retain files, which takes effect only when `date-separator` is configured as `day`. Assume that `file-expiration-days = 1` and `file-cleanup-cron-spec = "0 0 0 * * *"`, then TiCDC performs daily cleanup at 00:00:00 for files saved beyond 24 hours. For example, at 00:00:00 on 2023/12/02, TiCDC cleans up files generated before 2023/12/01, while files generated on 2023/12/01 remain unaffected.
+# The default value is 0, which means file cleanup is disabled. 
+file-expiration-days = 0
+# The running cycle of the scheduled cleanup task, compatible with the crontab configuration, with a format of `<Second> <Minute> <Hour> <Day of the month> <Month> <Day of the week (Optional)>`
+# The default value is "0 0 2 * * *", which means that the cleanup task is executed every day at 2 AM.
+file-cleanup-cron-spec = "0 0 2 * * *"
+# The concurrency for uploading a single file.
+# The default value is 1, which means concurrency is disabled.
+flush-concurrency = 1
 ```

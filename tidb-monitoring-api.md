@@ -27,7 +27,7 @@ summary: Learn the API of TiDB monitoring services.
 curl http://127.0.0.1:10080/status
 {
     connections: 0,  # The current number of clients connected to the TiDB server.
-    version: "5.7.25-TiDB-v7.1.2",  # The TiDB version number.
+    version: "5.7.25-TiDB-v7.1.3",  # The TiDB version number.
     git_hash: "778c3f4a5a716880bcd1d71b257c8165685f0d70"  # The Git Hash of the current TiDB code.
 }
 ```
@@ -41,13 +41,13 @@ curl http://127.0.0.1:10080/schema_storage/mysql/stats_histograms
 ```
 
     {
-        "table_schema": "mysql", 
-        "table_name": "stats_histograms", 
-        "table_rows": 0, 
-        "avg_row_length": 0, 
-        "data_length": 0, 
-        "max_data_length": 0, 
-        "index_length": 0, 
+        "table_schema": "mysql",
+        "table_name": "stats_histograms",
+        "table_rows": 0,
+        "avg_row_length": 0,
+        "data_length": 0,
+        "max_data_length": 0,
+        "index_length": 0,
         "data_free": 0
     }
 
@@ -57,13 +57,13 @@ curl http://127.0.0.1:10080/schema_storage/test
 
     [
         {
-            "table_schema": "test", 
-            "table_name": "test", 
-            "table_rows": 0, 
-            "avg_row_length": 0, 
-            "data_length": 0, 
-            "max_data_length": 0, 
-            "index_length": 0, 
+            "table_schema": "test",
+            "table_name": "test",
+            "table_rows": 0,
+            "avg_row_length": 0,
+            "data_length": 0,
+            "max_data_length": 0,
+            "index_length": 0,
             "data_free": 0
         }
     ]

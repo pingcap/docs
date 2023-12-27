@@ -16,7 +16,7 @@ PITR を使用すると、前述の要件を満たすことができます。
 
 ## TiDB クラスターとBRをデプロイ {#deploy-the-tidb-cluster-and-br}
 
-PITR を使用するには、TiDB クラスター &gt;= v6.2.0 をデプロイし、 BR をTiDB クラスターと同じバージョンに更新する必要があります。このドキュメントでは例として v7.1.2 を使用します。
+PITR を使用するには、TiDB クラスター &gt;= v6.2.0 をデプロイし、 BR をTiDB クラスターと同じバージョンに更新する必要があります。このドキュメントでは例として v7.1.3 を使用します。
 
 次の表は、TiDB クラスターで PITR を使用する場合に推奨されるハードウェア リソースを示しています。
 
@@ -43,13 +43,13 @@ TiUPを使用してBR をインストールまたはアップグレードしま�
 -   インストール：
 
     ```shell
-    tiup install br:v7.1.2
+    tiup install br:v7.1.3
     ```
 
 -   アップグレード:
 
     ```shell
-    tiup update br:v7.1.2
+    tiup update br:v7.1.3
     ```
 
 ## バックアップstorageの構成 (Amazon S3) {#configure-backup-storage-amazon-s3}

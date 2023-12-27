@@ -14,13 +14,13 @@ TiDB バージョン: 6.5.4
 ## 互換性の変更 {#compatibility-changes}
 
 -   `Cursor Fetch`を使用して大きな結果セットをフェッチすると、TiDB がメモリを大量に消費する問題を修正するために、TiDB は自動的に結果セットをディスクに書き込み、メモリ[#43233](https://github.com/pingcap/tidb/issues/43233) @ [ヤンケオ](https://github.com/YangKeao)を解放します。
--   RocksDB の定期的な圧縮をデフォルトで無効にすることで、TiKV RocksDB のデフォルトの動作が v6.5.0 より前のバージョンの動作と一致するようになりました。この変更により、アップグレード後の大量の圧縮によって引き起こされる潜在的なパフォーマンスへの影響が防止されます。さらに、TiKV では 2 つの新しい構成項目[`rocksdb.[defaultcf|writecf|lockcf].periodic-compaction-seconds`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#periodic-compaction-seconds-new-in-v654)および[`rocksdb.[defaultcf|writecf|lockcf].ttl`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#ttl-new-in-v654)が導入され、RocksDB [#15355](https://github.com/tikv/tikv/issues/15355) @ [リククスサシネーター](https://github.com/LykxSassinator)の定期的な圧縮を手動で構成できるようになります。
+-   RocksDB の定期的な圧縮をデフォルトで無効にし、TiKV RocksDB のデフォルトの動作が v6.5.0 より前のバージョンの動作と一致するようにしました。この変更により、アップグレード後の大量の圧縮によって引き起こされる潜在的なパフォーマンスへの影響が防止されます。さらに、TiKV では 2 つの新しい構成項目[`rocksdb.[defaultcf|writecf|lockcf].periodic-compaction-seconds`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#periodic-compaction-seconds-new-in-v654)および[`rocksdb.[defaultcf|writecf|lockcf].ttl`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#ttl-new-in-v654)が導入され、RocksDB [#15355](https://github.com/tikv/tikv/issues/15355) @ [リククスサシネーター](https://github.com/LykxSassinator)の定期的な圧縮を手動で構成できるようになります。
 
 ## 改善点 {#improvements}
 
 -   TiDB
 
-    -   代入式[#46081](https://github.com/pingcap/tidb/issues/46081) @ [ゲンリキ](https://github.com/gengliqi)を含む`LOAD DATA`ステートメントのパフォーマンスを最適化します。
+    -   代入式[#46081](https://github.com/pingcap/tidb/issues/46081) @ [ゲンリチ](https://github.com/gengliqi)を含む`LOAD DATA`ステートメントのパフォーマンスを最適化します。
     -   ディスク[#45125](https://github.com/pingcap/tidb/issues/45125) @ [ヤンケオ](https://github.com/YangKeao)からダンプされたチャンクを読み取るパフォーマンスを最適化します。
     -   PD スケジューリング[#6493](https://github.com/tikv/pd/issues/6493) @ [Jmポテト](https://github.com/JmPotato)を一時停止する`halt-scheduling`構成項目を追加します。
 
@@ -79,7 +79,7 @@ TiDB バージョン: 6.5.4
     -   CTE と相関サブクエリを同時に使用すると、不正なクエリ結果またはpanicが発生する可能性がある問題を修正します[#44649](https://github.com/pingcap/tidb/issues/44649) [#38170](https://github.com/pingcap/tidb/issues/38170) [#44774](https://github.com/pingcap/tidb/issues/44774) @ [ウィノロス](https://github.com/winoros) @ [グオシャオゲ](https://github.com/guo-shaoge)
     -   TTL タスクが時間[#40109](https://github.com/pingcap/tidb/issues/40109) @ [ヤンケオ](https://github.com/YangKeao)で統計更新をトリガーできない問題を修正
     -   GC Resolve Locks ステップで一部の悲観的ロック[#45134](https://github.com/pingcap/tidb/issues/45134) @ [ミョンケミンタ](https://github.com/MyonKeminta)が見逃される可能性がある問題を修正します。
-    -   メモリトラッカー[#44612](https://github.com/pingcap/tidb/issues/44612) @ [wshwsh12](https://github.com/wshwsh12)の潜在的なメモリリークの問題を修正
+    -   バイナリ プロトコルを使用して TiDB に接続し、多数の`PREPARE`ステートメントと`EXECUTE`ステートメントを実行すると、メモリリークと時間が増加し続ける問題を修正します[#44612](https://github.com/pingcap/tidb/issues/44612) @ [wshwsh12](https://github.com/wshwsh12)
     -   `INFORMATION_SCHEMA.DDL_JOBS`テーブルの`QUERY`列のデータ長が列定義[#42440](https://github.com/pingcap/tidb/issues/42440) @ [ティエンチャイアマオ](https://github.com/tiancaiamao)を超える場合がある問題を修正
     -   多数のリージョンがあるにもかかわらず、 `Prepare`または`Execute` [#39605](https://github.com/pingcap/tidb/issues/39605) @ [djshow832](https://github.com/djshow832)を使用して一部の仮想テーブルをクエリするときにテーブル ID をプッシュダウンできない場合の PD OOM の問題を修正します。
     -   パーティションテーブル[#41638](https://github.com/pingcap/tidb/issues/41638) @ [シュイファングリーンアイズ](https://github.com/xuyifangreeneyes)に新しいインデックスを追加した後、パーティションテーブルテーブルで統計の自動収集が正しくトリガーされないことがある問題を修正します。
@@ -156,7 +156,7 @@ TiDB バージョン: 6.5.4
 
         -   ダウンストリームでエラーが発生し、 [#9450](https://github.com/pingcap/tiflow/issues/9450) @ [ひっくり返る](https://github.com/hicqu)を再試行すると、レプリケーション タスクが停止する可能性がある問題を修正します。
         -   Kafka [#9504](https://github.com/pingcap/tiflow/issues/9504) @ [3エースショーハンド](https://github.com/3AceShowHand)と同期するときに、再試行間隔が短いためにレプリケーション タスクが失敗する問題を修正します。
-        -   アップストリーム[#9430](https://github.com/pingcap/tiflow/issues/9430) @ [スドジ](https://github.com/sdojjy)の 1 つのトランザクションで複数の一意のキー行を変更すると、TiCDC が同期書き込みの競合を引き起こす可能性がある問題を修正します。
+        -   アップストリーム[#9430](https://github.com/pingcap/tiflow/issues/9430) @ [スドジ](https://github.com/sdojjy)の 1 つのトランザクションで複数の一意のキー行を変更するときに、TiCDC が同期書き込みの競合を引き起こす可能性がある問題を修正します。
         -   TiCDC が名前変更 DDL 操作を誤って同期する可能性がある問題を修正します[#9488](https://github.com/pingcap/tiflow/issues/9488) [#9378](https://github.com/pingcap/tiflow/issues/9378) [#9531](https://github.com/pingcap/tiflow/issues/9531) @ [東門](https://github.com/asddongmen)
         -   ダウンストリームで短期間の障害が発生したときにレプリケーション タスクが停止する可能性がある問題を修正します[#9542](https://github.com/pingcap/tiflow/issues/9542) [#9272](https://github.com/pingcap/tiflow/issues/9272) [#9582](https://github.com/pingcap/tiflow/issues/9582) [#9592](https://github.com/pingcap/tiflow/issues/9592) @ [ひっくり返る](https://github.com/hicqu)
         -   TiCDC ノードのステータスが[#9354](https://github.com/pingcap/tiflow/issues/9354) @ [スドジ](https://github.com/sdojjy)に変化したときに発生する可能性があるpanicの問題を修正しました。
@@ -165,7 +165,7 @@ TiDB バージョン: 6.5.4
         -   一部の TiCDC ノードがネットワーク[#9344](https://github.com/pingcap/tiflow/issues/9344) @ [CharlesCheung96](https://github.com/CharlesCheung96)から分離されている場合に発生する可能性があるデータの不整合の問題を修正します。
         -   REDO ログが有効で、ダウンストリーム[#9172](https://github.com/pingcap/tiflow/issues/9172) @ [CharlesCheung96](https://github.com/CharlesCheung96)で例外が発生した場合にレプリケーション タスクが停止する可能性がある問題を修正します。
         -   PD [#9294](https://github.com/pingcap/tiflow/issues/9294) @ [東門](https://github.com/asddongmen)が一時的に利用できないために変更フィードが失敗する問題を修正
-        -   データを TiDB または MySQL [#9180](https://github.com/pingcap/tiflow/issues/9180) @ [東門](https://github.com/asddongmen)にレプリケートするときに、ダウンストリーム双方向レプリケーション関連の変数を頻繁に設定することによって発生するダウンストリーム ログが多すぎる問題を修正します。
+        -   TiDB または MySQL [#9180](https://github.com/pingcap/tiflow/issues/9180) @ [東門](https://github.com/asddongmen)にデータをレプリケートするときに、ダウンストリーム双方向レプリケーション関連の変数を頻繁に設定することによって発生するダウンストリーム ログが多すぎる問題を修正します。
         -   Avro プロトコルが`Enum` type 値[#9259](https://github.com/pingcap/tiflow/issues/9259) @ [3エースショーハンド](https://github.com/3AceShowHand)を誤って識別する問題を修正
 
     -   TiDB データ移行 (DM)

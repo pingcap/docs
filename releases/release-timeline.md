@@ -9,6 +9,7 @@ summary: Learn about the TiDB release timeline.
 
 | バージョン                                            | リリース日      |
 | :----------------------------------------------- | :--------- |
+| [7.1.3](/releases/release-7.1.3.md)              | 2023-12-21 |
 | [6.5.6](/releases/release-6.5.6.md)              | 2023-12-07 |
 | [7.1.2](/releases/release-7.1.2.md)              | 2023-10-25 |
 | [6.5.5](/releases/release-6.5.5.md)              | 2023-09-21 |

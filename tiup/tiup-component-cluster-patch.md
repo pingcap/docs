@@ -28,7 +28,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 1.  次の変数を決定します。
 
     -   `${component}` : 置換されるコンポーネントの名前 ( `tidb` 、 `tikv` 、または`pd`など)。
-    -   `${version}` :コンポーネントのバージョン ( `v7.1.2`や`v6.5.5`など)。
+    -   `${version}` :コンポーネントのバージョン ( `v7.1.3`や`v6.5.5`など)。
     -   `${os}` : オペレーティング システム ( `linux` )。
     -   `${arch}` :コンポーネントが実行されるプラットフォーム ( `amd64` 、 `arm64` )。
 

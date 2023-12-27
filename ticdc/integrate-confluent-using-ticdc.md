@@ -44,26 +44,22 @@ TiDB v6.1.0 以降、TiCDC は、Avro 形式での Confluent への増分デー�
 
     作成後、以下に示すようにキー ペア ファイルが生成されます。
 
-    ```
-    === Confluent Cloud API key: xxx-xxxxx ===
+        === Confluent Cloud API key: xxx-xxxxx ===
 
-    API key:
-    L5WWA4GK4NAT2EQV
+        API key:
+        L5WWA4GK4NAT2EQV
 
-    API secret:
-    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        API secret:
+        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-    Bootstrap server:
-    xxx-xxxxx.ap-east-1.aws.confluent.cloud:9092
-    ```
+        Bootstrap server:
+        xxx-xxxxx.ap-east-1.aws.confluent.cloud:9092
 
 2.  スキーマ レジストリ エンドポイントを記録します。
 
     Confluent Cloud コンソールで、 **[スキーマ レジストリ]** &gt; **[API エンドポイント]**を選択します。スキーマ レジストリ エンドポイントを記録します。以下は例です。
 
-    ```
-    https://yyy-yyyyy.us-east-2.aws.confluent.cloud
-    ```
+        https://yyy-yyyyy.us-east-2.aws.confluent.cloud
 
 3.  スキーマ レジストリ API キーを作成します。
 
@@ -71,13 +67,11 @@ TiDB v6.1.0 以降、TiCDC は、Avro 形式での Confluent への増分デー�
 
     作成後、以下に示すようにキー ペア ファイルが生成されます。
 
-    ```
-    === Confluent Cloud API key: yyy-yyyyy ===
-    API key:
-    7NBH2CAFM2LMGTH7
-    API secret:
-    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-    ```
+        === Confluent Cloud API key: yyy-yyyyy ===
+        API key:
+        7NBH2CAFM2LMGTH7
+        API secret:
+        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
     この手順は、Confluent CLI を使用して実行することもできます。詳細は[Confluent CLI を Confluent クラウドクラスタに接続する](https://docs.confluent.io/confluent-cli/current/connect.html)を参照してください。
 
@@ -87,19 +81,17 @@ TiDB v6.1.0 以降、TiCDC は、Avro 形式での Confluent への増分デー�
 
     Avro および Confluent Connector の要求に応じて、各テーブルの増分データは独立したトピックに送信され、主キー値に基づいてイベントごとにパーティションがディスパッチされる必要があります。したがって、次の内容で変更フィード構成ファイル`changefeed.conf`を作成する必要があります。
 
-    ```
-    [sink]
-    dispatchers = [
-    {matcher = ['*.*'], topic = "tidb_{schema}_{table}", partition="index-value"},
-    ]
-    ```
+        [sink]
+        dispatchers = [
+        {matcher = ['*.*'], topic = "tidb_{schema}_{table}", partition="index-value"},
+        ]
 
     設定ファイルの`dispatchers`の詳細については、 [Kafka シンクのトピックおよびパーティション ディスパッチャーのルールをカスタマイズする](/ticdc/ticdc-sink-to-kafka.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink)を参照してください。
 
 2.  変更フィードを作成して増分データを Confluent Cloud にレプリケートします。
 
     ```shell
-    tiup ctl:v<CLUSTER_VERSION> cdc changefeed create --server="http://127.0.0.1:8300" --sink-uri="kafka://<broker_endpoint>/ticdc-meta?protocol=avro&replication-factor=3&enable-tls=true&auto-create-topic=true&sasl-mechanism=plain&sasl-user=<broker_api_key>&sasl-password=<broker_api_secret>" --schema-registry="https://<schema_registry_api_key>:<schema_registry_api_secret>@<schema_registry_endpoint>" --changefeed-id="confluent-changefeed" --config changefeed.conf
+    tiup cdc:v<CLUSTER_VERSION> cli changefeed create --server="http://127.0.0.1:8300" --sink-uri="kafka://<broker_endpoint>/ticdc-meta?protocol=avro&replication-factor=3&enable-tls=true&auto-create-topic=true&sasl-mechanism=plain&sasl-user=<broker_api_key>&sasl-password=<broker_api_secret>" --schema-registry="https://<schema_registry_api_key>:<schema_registry_api_secret>@<schema_registry_endpoint>" --changefeed-id="confluent-changefeed" --config changefeed.conf
     ```
 
     次のフィールドの値を、 [ステップ 2. アクセスキーペアを作成する](#step-2-create-an-access-key-pair)で作成または記録された値に置き換える必要があります。
@@ -114,7 +106,7 @@ TiDB v6.1.0 以降、TiCDC は、Avro 形式での Confluent への増分デー�
     値を置き換える前に、 [HTML URL エンコーディングのリファレンス](https://www.w3schools.com/tags/ref_urlencode.asp)に基づいて`<schema_registry_api_secret>`をエンコードする必要があることに注意してください。前述のフィールドをすべて置き換えると、構成ファイルは次のようになります。
 
     ```shell
-    tiup ctl:v<CLUSTER_VERSION> cdc changefeed create --server="http://127.0.0.1:8300" --sink-uri="kafka://xxx-xxxxx.ap-east-1.aws.confluent.cloud:9092/ticdc-meta?protocol=avro&replication-factor=3&enable-tls=true&auto-create-topic=true&sasl-mechanism=plain&sasl-user=L5WWA4GK4NAT2EQV&sasl-password=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" --schema-registry="https://7NBH2CAFM2LMGTH7:xxxxxxxxxxxxxxxxxx@yyy-yyyyy.us-east-2.aws.confluent.cloud" --changefeed-id="confluent-changefeed" --config changefeed.conf
+    tiup cdc:v<CLUSTER_VERSION> cli changefeed create --server="http://127.0.0.1:8300" --sink-uri="kafka://xxx-xxxxx.ap-east-1.aws.confluent.cloud:9092/ticdc-meta?protocol=avro&replication-factor=3&enable-tls=true&auto-create-topic=true&sasl-mechanism=plain&sasl-user=L5WWA4GK4NAT2EQV&sasl-password=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" --schema-registry="https://7NBH2CAFM2LMGTH7:xxxxxxxxxxxxxxxxxx@yyy-yyyyy.us-east-2.aws.confluent.cloud" --changefeed-id="confluent-changefeed" --config changefeed.conf
     ```
 
     -   コマンドを実行して変更フィードを作成します。
@@ -132,7 +124,7 @@ TiDB v6.1.0 以降、TiCDC は、Avro 形式での Confluent への増分デー�
 3.  変更フィードを作成した後、次のコマンドを実行して変更フィードのステータスを確認します。
 
     ```shell
-    tiup ctl:v<CLUSTER_VERSION> cdc changefeed list --server="http://127.0.0.1:8300"
+    tiup cdc:v<CLUSTER_VERSION> cli changefeed list --server="http://127.0.0.1:8300"
     ```
 
     チェンジフィードを管理するには、 [TiCDC 変更フィードの管理](/ticdc/ticdc-manage-changefeed.md)を参照してください。
@@ -173,7 +165,7 @@ Snowflake はクラウド ネイティブのデータ ウェアハウスです�
 
     Snowflake コントロール コンソールで、 **[データ]** &gt; **[データベース]**を選択します。 `TPCC`という名前のデータベースと`TiCDC`という名前のスキーマを作成します。
 
-2.  Confluent Cloud コンソールで、 **[データ統合]** &gt; **[コネクタ]** &gt; **[Snowflake シンク]**を選択します。以下のページが表示されます。
+2.  Confluent Cloud コンソールで、 **[データ統合**] &gt; **[コネクタ]** &gt; **[Snowflake シンク]**を選択します。以下のページが表示されます。
 
     ![Add snowflake sink connector](/media/integrate/add-snowflake-sink-connector.png)
 
@@ -193,76 +185,66 @@ Snowflake はクラウド ネイティブのデータ ウェアハウスです�
 
 ### Snowflake で TiDB テーブルのデータ レプリカを作成する {#create-data-replicas-of-tidb-tables-in-snowflake}
 
-前のセクションでは、TiDB 増分データの変更ログが Snowflake にレプリケートされました。このセクションでは、これらの変更ログを Snowflake の TASK および STREAM 機能を使用してイベント タイプ`INSERT` 、 `UPDATE` 、および`DELETE`に応じて処理し、上流と同じ構造のテーブルに書き込み、データを作成する方法について説明します。 Snowflake の TiDB テーブルのレプリカ。以下に`ITEM`テーブルを例に挙げます。
+前のセクションでは、TiDB 増分データの変更ログが Snowflake にレプリケートされました。このセクションでは、これらの変更ログを Snowflake の TASK および STREAM 機能を使用してイベント タイプ`INSERT` 、 `UPDATE` 、および`DELETE`に応じて処理し、アップストリームと同じ構造のテーブルに書き込み、データを作成する方法について説明します。 Snowflake の TiDB テーブルのレプリカ。以下に`ITEM`テーブルを例に挙げます。
 
 `ITEM`テーブルの構造は次のとおりです。
 
-```
-CREATE TABLE `item` (
-  `i_id` int(11) NOT NULL,
-  `i_im_id` int(11) DEFAULT NULL,
-  `i_name` varchar(24) DEFAULT NULL,
-  `i_price` decimal(5,2) DEFAULT NULL,
-  `i_data` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`i_id`)
-);
-```
+    CREATE TABLE `item` (
+      `i_id` int(11) NOT NULL,
+      `i_im_id` int(11) DEFAULT NULL,
+      `i_name` varchar(24) DEFAULT NULL,
+      `i_price` decimal(5,2) DEFAULT NULL,
+      `i_data` varchar(50) DEFAULT NULL,
+      PRIMARY KEY (`i_id`)
+    );
 
 Snowflake には、 Confluent Snowflake シンク コネクタによって自動的に作成される`TIDB_TEST_ITEM`という名前のテーブルがあります。テーブル構造は次のとおりです。
 
-```
-create or replace TABLE TIDB_TEST_ITEM (
-        RECORD_METADATA VARIANT,
-        RECORD_CONTENT VARIANT
-);
-```
+    create or replace TABLE TIDB_TEST_ITEM (
+            RECORD_METADATA VARIANT,
+            RECORD_CONTENT VARIANT
+    );
 
 1.  Snowflake で、TiDB と同じ構造のテーブルを作成します。
 
-    ```
-    create or replace table TEST_ITEM (
-        i_id INTEGER primary key,
-        i_im_id INTEGER,
-        i_name VARCHAR,
-        i_price DECIMAL(36,2),
-        i_data VARCHAR
-    );
-    ```
+        create or replace table TEST_ITEM (
+            i_id INTEGER primary key,
+            i_im_id INTEGER,
+            i_name VARCHAR,
+            i_price DECIMAL(36,2),
+            i_data VARCHAR
+        );
 
 2.  以下のように`TIDB_TEST_ITEM`のストリームを作成し、 `append_only` ～ `true`を設定します。
 
-    ```
-    create or replace stream TEST_ITEM_STREAM on table TIDB_TEST_ITEM append_only=true;
-    ```
+        create or replace stream TEST_ITEM_STREAM on table TIDB_TEST_ITEM append_only=true;
 
     このようにして、作成されたストリームはリアルタイムで`INSERT`イベントのみをキャプチャします。具体的には、TiDB の`ITEM`に対して新しい変更ログが生成されると、その変更ログは`TIDB_TEST_ITEM`に挿入され、ストリームによってキャプチャされます。
 
 3.  ストリーム内のデータを処理します。イベントの種類に応じて、 `TEST_ITEM`テーブルのストリームデータを挿入、更新、削除します。
 
-    ```
-    --Merge data into the TEST_ITEM table
-    merge into TEST_ITEM n
-      using
-          -- Query TEST_ITEM_STREAM
-          (SELECT RECORD_METADATA:key as k, RECORD_CONTENT:val as v from TEST_ITEM_STREAM) stm
-          -- Match the stream with table on the condition that i_id is equal
-          on k:i_id = n.i_id
-      -- If the TEST_ITEM table contains a record that matches i_id and v is empty, delete this record
-      when matched and IS_NULL_VALUE(v) = true then
-          delete
+        --Merge data into the TEST_ITEM table
+        merge into TEST_ITEM n
+          using
+              -- Query TEST_ITEM_STREAM
+              (SELECT RECORD_METADATA:key as k, RECORD_CONTENT:val as v from TEST_ITEM_STREAM) stm
+              -- Match the stream with table on the condition that i_id is equal
+              on k:i_id = n.i_id
+          -- If the TEST_ITEM table contains a record that matches i_id and v is empty, delete this record
+          when matched and IS_NULL_VALUE(v) = true then
+              delete
 
-      -- If the TEST_ITEM table contains a record that matches i_id and v is not empty, update this record
-      when matched and IS_NULL_VALUE(v) = false then
-          update set n.i_data = v:i_data, n.i_im_id = v:i_im_id, n.i_name = v:i_name, n.i_price = v:i_price
+          -- If the TEST_ITEM table contains a record that matches i_id and v is not empty, update this record
+          when matched and IS_NULL_VALUE(v) = false then
+              update set n.i_data = v:i_data, n.i_im_id = v:i_im_id, n.i_name = v:i_name, n.i_price = v:i_price
 
-      -- If the TEST_ITEM table does not contain a record that matches i_id, insert this record
-      when not matched then
-          insert
-              (i_data, i_id, i_im_id, i_name, i_price)
-          values
-              (v:i_data, v:i_id, v:i_im_id, v:i_name, v:i_price)
-    ;
-    ```
+          -- If the TEST_ITEM table does not contain a record that matches i_id, insert this record
+          when not matched then
+              insert
+                  (i_data, i_id, i_im_id, i_name, i_price)
+              values
+                  (v:i_data, v:i_id, v:i_im_id, v:i_name, v:i_price)
+        ;
 
     前の例では、Snowflake の`MERGE INTO`ステートメントを使用してストリームとテーブルを特定の条件で照合し、レコードの削除、更新、挿入などの対応する操作を実行します。この例では、次の 3 つのシナリオに 3 つの`WHERE`句が使用されています。
 
@@ -272,47 +254,43 @@ create or replace TABLE TIDB_TEST_ITEM (
 
 4.  ステップ 3 のステートメントを定期的に実行して、データが常に最新であることを確認します。 Snowflake の`SCHEDULED TASK`の機能も使用できます。
 
-    ```
-    -- Create a TASK to periodically execute the MERGE INTO statement
-    create or replace task STREAM_TO_ITEM
-        warehouse = test
-        -- Execute the TASK every minute
-        schedule = '1 minute'
-    when
-        -- Skip the TASK when there is no data in TEST_ITEM_STREAM
-        system$stream_has_data('TEST_ITEM_STREAM')
-    as
-    -- Merge data into the TEST_ITEM table. The statement is the same as that in the preceding example
-    merge into TEST_ITEM n
-      using
-          (select RECORD_METADATA:key as k, RECORD_CONTENT:val as v from TEST_ITEM_STREAM) stm
-          on k:i_id = n.i_id
-      when matched and IS_NULL_VALUE(v) = true then
-          delete
-      when matched and IS_NULL_VALUE(v) = false then
-          update set n.i_data = v:i_data, n.i_im_id = v:i_im_id, n.i_name = v:i_name, n.i_price = v:i_price
-      when not matched then
-          insert
-              (i_data, i_id, i_im_id, i_name, i_price)
-          values
-              (v:i_data, v:i_id, v:i_im_id, v:i_name, v:i_price)
-    ;
-    ```
+        -- Create a TASK to periodically execute the MERGE INTO statement
+        create or replace task STREAM_TO_ITEM
+            warehouse = test
+            -- Execute the TASK every minute
+            schedule = '1 minute'
+        when
+            -- Skip the TASK when there is no data in TEST_ITEM_STREAM
+            system$stream_has_data('TEST_ITEM_STREAM')
+        as
+        -- Merge data into the TEST_ITEM table. The statement is the same as that in the preceding example
+        merge into TEST_ITEM n
+          using
+              (select RECORD_METADATA:key as k, RECORD_CONTENT:val as v from TEST_ITEM_STREAM) stm
+              on k:i_id = n.i_id
+          when matched and IS_NULL_VALUE(v) = true then
+              delete
+          when matched and IS_NULL_VALUE(v) = false then
+              update set n.i_data = v:i_data, n.i_im_id = v:i_im_id, n.i_name = v:i_name, n.i_price = v:i_price
+          when not matched then
+              insert
+                  (i_data, i_id, i_im_id, i_name, i_price)
+              values
+                  (v:i_data, v:i_id, v:i_im_id, v:i_name, v:i_price)
+        ;
 
 現時点では、特定の ETL 機能を備えたデータ チャネルが確立されました。このデータ チャネルを通じて、TiDB の増分データ変更ログを Snowflake にレプリケートし、TiDB のデータ レプリカを維持し、Snowflake でデータを使用できます。
 
 最後のステップは、テーブル`TIDB_TEST_ITEM`内の不要なデータを定期的にクリーンアップすることです。
 
-```
--- Clean up the TIDB_TEST_ITEM table every two hours
-create or replace task TRUNCATE_TIDB_TEST_ITEM
-    warehouse = test
-    schedule = '120 minute'
-when
-    system$stream_has_data('TIDB_TEST_ITEM')
-as
-    TRUNCATE table TIDB_TEST_ITEM;
-```
+    -- Clean up the TIDB_TEST_ITEM table every two hours
+    create or replace task TRUNCATE_TIDB_TEST_ITEM
+        warehouse = test
+        schedule = '120 minute'
+    when
+        system$stream_has_data('TIDB_TEST_ITEM')
+    as
+        TRUNCATE table TIDB_TEST_ITEM;
 
 ## データをksqlDBと統合する {#integrate-data-with-ksqldb}
 

@@ -63,7 +63,7 @@ v6.6.0-DMR の主な新機能と改善点は次のとおりです。
 
     詳細については、 [ドキュメンテーション](/explain-mpp.md#mpp-version-and-exchange-data-compression)を参照してください。
 
--   TiFlash は、 ステイル読み取り機能[#4483](https://github.com/pingcap/tiflash/issues/4483) @ [へへへん](https://github.com/hehechen)をサポートします。
+-   TiFlash は、 ステイル読み取り機能[#4483](https://github.com/pingcap/tiflash/issues/4483) @ [へへへん](https://github.com/hehechen)をサポートしています。
 
     ステイル読み取り機能は v5.1.1 から一般提供 (GA) されており、特定のタイムスタンプまたは指定された時間範囲内の履歴データを読み取ることができます。古い読み取りでは、ローカル TiKV レプリカからデータを直接読み取ることで、読み取りレイテンシーを短縮し、クエリのパフォーマンスを向上させることができます。 v6.6.0 より前では、 TiFlash はステイル読み取りをサポートしていません。テーブルにTiFlashレプリカがある場合でも、 ステイル読み取り はその TiKV レプリカのみを読み取ることができます。
 
@@ -124,9 +124,9 @@ v6.6.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   `FLASHBACK CLUSTER TO TIMESTAMP`ステートメント[#14088](https://github.com/tikv/tikv/pull/14088) @ [定義2014](https://github.com/Defined2014) @ [Jmポテト](https://github.com/JmPotato)による DDL 操作のロールバックのサポート
 
-    [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md)ステートメントは、ガベージ コレクション (GC) の有効期間内の指定された時点へのクラスター全体の復元をサポートします。 TiDB v6.6.0 では、この機能により DDL 操作のロールバックのサポートが追加されています。これを使用すると、クラスター上での DML または DDL の誤操作をすばやく元に戻したり、数分以内にクラスターをロールバックしたり、タイムライン上でクラスターを複数回ロールバックして、特定のデータ変更がいつ発生したかを判断したりすることができます。
+    [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)ステートメントは、ガベージ コレクション (GC) の有効期間内の指定された時点へのクラスター全体の復元をサポートします。 TiDB v6.6.0 では、この機能により DDL 操作のロールバックのサポートが追加されています。これを使用すると、クラスター上での DML または DDL の誤操作をすばやく元に戻したり、数分以内にクラスターをロールバックしたり、タイムライン上でクラスターを複数回ロールバックして、特定のデータ変更がいつ発生したかを判断したりすることができます。
 
-    詳細については、 [ドキュメンテーション](/sql-statements/sql-statement-flashback-to-timestamp.md)を参照してください。
+    詳細については、 [ドキュメンテーション](/sql-statements/sql-statement-flashback-cluster.md)を参照してください。
 
 ### SQL {#sql}
 
@@ -138,7 +138,7 @@ v6.6.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   MySQL 互換の複数値インデックスのサポート (実験的) [#39592](https://github.com/pingcap/tidb/issues/39592) @ [ションジウェイ](https://github.com/xiongjiwei) @ [qw4990](https://github.com/qw4990)
 
-    TiDB は、v6.6.0 で MySQL 互換の複数値インデックスを導入します。 JSON 列内の配列の値をフィルター処理するのは一般的な操作ですが、通常のインデックスではそのような操作を高速化することはできません。配列に複数値のインデックスを作成すると、フィルタリングのパフォーマンスが大幅に向上します。 JSON列の配列に多値インデックス`JSON_OVERLAPS()`ある場合、多値インデックスを使用して`MEMBER OF()`関数で検索条件を絞り込むことができるため、I/O `JSON_CONTAINS()`量が大幅に削減され、動作速度が向上します。
+    TiDB は、v6.6.0 で MySQL 互換の複数値インデックスを導入します。 JSON 列内の配列の値をフィルター処理するのは一般的な操作ですが、通常のインデックスではそのような操作を高速化することはできません。配列に複数値のインデックスを作成すると、フィルタリングのパフォーマンスが大幅に向上します。 JSON列の配列に多値インデックス`JSON_OVERLAPS()`ある場合、多値インデックスを使用して`MEMBER OF()`関数で検索条件を絞り込むことができるため、I/O消費量`JSON_CONTAINS()`大幅に削減され、動作速度が向上します。
 
     多値インデックスの導入により、TiDB の JSON データ型サポートがさらに強化され、TiDB と MySQL 8.0 の互換性も向上します。
 
@@ -166,7 +166,7 @@ v6.6.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   TiDB Data Migration (DM) は、TiDB Lightning の物理インポート モードと統合され、完全な移行 (実験的) @ [ランス6716](https://github.com/lance6716)のパフォーマンスが最大 10 倍向上します。
 
-    v6.6.0 では、DM の完全移行機能がTiDB Lightningの物理インポート モードと統合されており、これにより DM は完全データ移行のパフォーマンスを最大 10 倍向上させ、大規模なデータ ボリュームのシナリオで移行時間を大幅に短縮できます。
+    v6.6.0 では、DM の完全移行機能がTiDB Lightningの物理インポート モードと統合されており、これにより DM は完全データ移行のパフォーマンスを最大 10 倍向上させ、大規模なデータ ボリュームのシナリオでの移行時間を大幅に短縮できます。
 
     v6.6.0 より前のバージョンでは、大規模なデータ ボリュームのシナリオでは、高速完全データ移行のためにTiDB Lightningで物理インポート タスクを個別に構成し、次に増分データ移行に DM を使用する必要がありましたが、これは複雑な構成でした。 v6.6.0 以降、 TiDB Lightningタスクを構成することなく、大量のデータを移行できるようになりました。 1 つの DM タスクで移行を完了できます。
 
@@ -202,7 +202,7 @@ v6.6.0-DMR の主な新機能と改善点は次のとおりです。
 
     -   v1.4.6 では、 [GORM MySQL ドライバー](https://github.com/go-gorm/mysql) TiDB [#104](https://github.com/go-gorm/mysql/pull/104)の`AUTO_RANDOM`属性に適合します。
     -   v1.4.6 では、TiDB に接続するときに、 `AutoMigrate` [#105](https://github.com/go-gorm/mysql/pull/105)の間に`Unique`フィールドの`Unique`属性を変更できない問題[GORM MySQL ドライバー](https://github.com/go-gorm/mysql)修正されます。
-    -   [GORM ドキュメント](https://github.com/go-gorm/gorm.io) TiDB をデフォルトのデータベースとして挙げています[#638](https://github.com/go-gorm/gorm.io/pull/638)
+    -   [GORM ドキュメント](https://github.com/go-gorm/gorm.io)デフォルトのデータベースとして TiDB を示しています[#638](https://github.com/go-gorm/gorm.io/pull/638)
 
     詳細については、 [GORM ドキュメント](https://gorm.io/docs/index.html)を参照してください。
 
@@ -280,7 +280,7 @@ v6.6.0-DMR の主な新機能と改善点は次のとおりです。
 
 ### テレメトリー {#telemetry}
 
--   2023 年 2 月 20 日以降、TiDB および TiDB ダッシュボード (v6.6.0 を含む) の新しいバージョンでは、 [テレメトリ機能](/telemetry.md)がデフォルトで無効になります。デフォルトのテレメトリ構成を使用する以前のバージョンからアップグレードする場合、アップグレード後にテレメトリ機能は無効になります。特定のバージョンについては、 [TiDB リリース タイムライン](/releases/release-timeline.md)を参照してください。
+-   2023 年 2 月 20 日以降、TiDB および TiDB ダッシュボード (v6.6.0 を含む) の新しいバージョンでは、 [テレメトリー機能](/telemetry.md)がデフォルトで無効になります。デフォルトのテレメトリ構成を使用する以前のバージョンからアップグレードする場合、アップグレード後にテレメトリ機能は無効になります。特定のバージョンについては、 [TiDB リリース タイムライン](/releases/release-timeline.md)を参照してください。
 -   v1.11.3 以降、新しくデプロイされたTiUPではテレメトリ機能がデフォルトで無効になっています。 TiUPの以前のバージョンから v1.11.3 以降のバージョンにアップグレードした場合、テレメトリ機能はアップグレード前と同じステータスを維持します。
 
 ## 互換性の変更 {#compatibility-changes}
@@ -327,8 +327,8 @@ v6.6.0-DMR の主な新機能と改善点は次のとおりです。
 | [`tidb_pessimistic_txn_aggressive_locking`](https://docs.pingcap.com/tidb/v6.6/system-variables#tidb_pessimistic_txn_aggressive_locking-new-in-v660) | 新しく追加された | この変数は、悲観的トランザクションに対して拡張された悲観的ロック ウェイクアップ モデルを使用するかどうかを制御します。デフォルト値`OFF`は、デフォルトではこのようなウェイクアップ モデルを悲観的トランザクションに使用しないことを意味します。                                                                                                                                |
 | [`tidb_stmt_summary_enable_persistent`](/system-variables.md#tidb_stmt_summary_enable_persistent-new-in-v660)                                        | 新しく追加された | この変数は読み取り専用です。 [ステートメントの概要の永続性](/statement-summary-tables.md#persist-statements-summary)を有効にするかどうかを制御します。この変数の値は設定項目[`tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660)と同じです。             |
 | [`tidb_stmt_summary_filename`](/system-variables.md#tidb_stmt_summary_filename-new-in-v660)                                                          | 新しく追加された | この変数は読み取り専用です。 [ステートメントの概要の永続化](/statement-summary-tables.md#persist-statements-summary)が有効な場合に永続データが書き込まれるファイルを指定します。この変数の値は設定項目[`tidb_stmt_summary_filename`](/tidb-configuration-file.md#tidb_stmt_summary_filename-new-in-v660)と同じです。                  |
-| [`tidb_stmt_summary_file_max_backups`](/system-variables.md#tidb_stmt_summary_file_max_backups-new-in-v660)                                          | 新しく追加された | この変数は読み取り専用です。 [ステートメントの概要の永続化](/statement-summary-tables.md#persist-statements-summary)が有効な場合に保持できるデータ ファイルの最大数を指定します。この変数の値は設定項目[`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660)と同じです。 |
-| [`tidb_stmt_summary_file_max_days`](/system-variables.md#tidb_stmt_summary_file_max_days-new-in-v660)                                                | 新しく追加された | この変数は読み取り専用です。 [ステートメントの概要の永続化](/statement-summary-tables.md#persist-statements-summary)が有効な場合、永続データ ファイルを保持する最大日数を指定します。この変数の値は設定項目[`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660)と同じです。     |
+| [`tidb_stmt_summary_file_max_backups`](/system-variables.md#tidb_stmt_summary_file_max_backups-new-in-v660)                                          | 新しく追加された | この変数は読み取り専用です。 [ステートメントの概要の永続性](/statement-summary-tables.md#persist-statements-summary)が有効な場合に保持できるデータ ファイルの最大数を指定します。この変数の値は設定項目[`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660)と同じです。 |
+| [`tidb_stmt_summary_file_max_days`](/system-variables.md#tidb_stmt_summary_file_max_days-new-in-v660)                                                | 新しく追加された | この変数は読み取り専用です。 [ステートメントの概要の永続性](/statement-summary-tables.md#persist-statements-summary)が有効な場合、永続データ ファイルを保持する最大日数を指定します。この変数の値は設定項目[`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660)と同じです。     |
 | [`tidb_stmt_summary_file_max_size`](/system-variables.md#tidb_stmt_summary_file_max_size-new-in-v660)                                                | 新しく追加された | この変数は読み取り専用です。 [ステートメントの概要の永続性](/statement-summary-tables.md#persist-statements-summary)が有効な場合、永続データ ファイルの最大サイズを指定します。この変数の値は設定項目[`tidb_stmt_summary_file_max_size`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660)と同じです。        |
 
 ### コンフィグレーションファイルのパラメータ {#configuration-file-parameters}
@@ -542,7 +542,7 @@ v6.6.0-DMR の主な新機能と改善点は次のとおりです。
         -   S3storage障害[#8089](https://github.com/pingcap/tiflow/issues/8089) @ [CharlesCheung96](https://github.com/CharlesCheung96)に対して REDO ログが許容できる期間が不十分である問題を修正
         -   TiKV または TiCDC ノード[#8174](https://github.com/pingcap/tiflow/issues/8174) @ [ひっくり返る](https://github.com/hicqu)をスケールインまたはスケールアウトするときなど、特殊なシナリオで変更フィードが停止する可能性がある問題を修正します。
         -   TiKV ノード[#14092](https://github.com/tikv/tikv/issues/14092) @ [オーバーヴィーナス](https://github.com/overvenus)間のトラフィックが高すぎる問題を修正
-        -   プルベースのシンクが有効になっている場合の、CPU 使用率、メモリ制御、およびスループットに関する[#8157](https://github.com/pingcap/tiflow/issues/8157) [#8142](https://github.com/pingcap/tiflow/issues/8142) [#8001](https://github.com/pingcap/tiflow/issues/8001) [#5928](https://github.com/pingcap/tiflow/issues/5928) [ひっくり返る](https://github.com/hicqu) @ [こんにちはラスティン](https://github.com/hi-rustin)
+        -   プルベースのシンクが有効になっている場合の、CPU 使用率、メモリ制御、およびスループットに関する TiCDC のパフォーマンスの問題を修正します[#8157](https://github.com/pingcap/tiflow/issues/8157) [#8142](https://github.com/pingcap/tiflow/issues/8142) [#8001](https://github.com/pingcap/tiflow/issues/8001) [#5928](https://github.com/pingcap/tiflow/issues/5928) [ひっくり返る](https://github.com/hicqu) @ [こんにちはラスティン](https://github.com/hi-rustin)
 
     -   TiDB データ移行 (DM)
 

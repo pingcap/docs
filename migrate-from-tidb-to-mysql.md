@@ -50,7 +50,7 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
 
 環境をセットアップした後、 [Dumpling](/dumpling-overview.md)を使用して上流の TiDB クラスターから完全なデータをエクスポートできます。
 
-> **ノート：**
+> **注記：**
 >
 > 本番クラスターでは、GC を無効にしてバックアップを実行すると、クラスターのパフォーマンスに影響を与える可能性があります。この手順はオフピーク時間に完了することをお勧めします。
 
@@ -64,9 +64,7 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
     MySQL [test]> SET GLOBAL tidb_gc_enable=FALSE;
     ```
 
-    ```
-    Query OK, 0 rows affected (0.01 sec)
-    ```
+        Query OK, 0 rows affected (0.01 sec)
 
     変更が有効であることを確認するには、値`tidb_gc_enable`をクエリします。
 
@@ -74,14 +72,12 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
     MySQL [test]> SELECT @@global.tidb_gc_enable;
     ```
 
-    ```
-    +-------------------------+：
-    | @@global.tidb_gc_enable |
-    +-------------------------+
-    |                       0 |
-    +-------------------------+
-    1 row in set (0.00 sec)
-    ```
+        +-------------------------+：
+        | @@global.tidb_gc_enable |
+        +-------------------------+
+        |                       0 |
+        +-------------------------+
+        1 row in set (0.00 sec)
 
 2.  バックアップデータ。
 
@@ -97,14 +93,12 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
         cat dumpling_output/metadata
         ```
 
-        ```
-        Started dump at: 2022-06-28 17:49:54
-        SHOW MASTER STATUS:
-                Log: tidb-binlog
-                Pos: 434217889191428107
-                GTID:
-        Finished dump at: 2022-06-28 17:49:57
-        ```
+            Started dump at: 2022-06-28 17:49:54
+            SHOW MASTER STATUS:
+                    Log: tidb-binlog
+                    Pos: 434217889191428107
+                    GTID:
+            Finished dump at: 2022-06-28 17:49:57
 
 3.  データを復元します。
 
@@ -160,7 +154,7 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
     上流クラスターで次のコマンドを実行して、上流クラスターから下流クラスターへの変更フィードを作成します。
 
     ```shell
-    tiup ctl:v<CLUSTER_VERSION> cdc changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://root:@127.0.0.1:3306" --changefeed-id="upstream-to-downstream" --start-ts="434217889191428107"
+    tiup cdc:v<CLUSTER_VERSION> cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://root:@127.0.0.1:3306" --changefeed-id="upstream-to-downstream" --start-ts="434217889191428107"
     ```
 
     このコマンドのパラメータは次のとおりです。
@@ -182,9 +176,7 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
     MySQL [test]> SET GLOBAL tidb_gc_enable=TRUE;
     ```
 
-    ```
-    Query OK, 0 rows affected (0.01 sec)
-    ```
+        Query OK, 0 rows affected (0.01 sec)
 
     変更が有効であることを確認するには、値`tidb_gc_enable`をクエリします。
 
@@ -192,14 +184,12 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
     MySQL [test]> SELECT @@global.tidb_gc_enable;
     ```
 
-    ```
-    +-------------------------+
-    | @@global.tidb_gc_enable |
-    +-------------------------+
-    |                       1 |
-    +-------------------------+
-    1 row in set (0.00 sec)
-    ```
+        +-------------------------+
+        | @@global.tidb_gc_enable |
+        +-------------------------+
+        |                       1 |
+        +-------------------------+
+        1 row in set (0.00 sec)
 
 ## ステップ 4. サービスを移行する {#step-4-migrate-services}
 
@@ -214,18 +204,16 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
     tiup cdc cli changefeed list
     ```
 
-    ```
-    [
-      {
-        "id": "upstream-to-downstream",
-        "summary": {
-        "state": "stopped",  # Ensure that the status is stopped
-        "tso": 434218657561968641,
-        "checkpoint": "2022-06-28 18:38:45.685", # This time should be later than the time of stopping writing
-        "error": null
-        }
-      }
-    ]
-    ```
+        [
+          {
+            "id": "upstream-to-downstream",
+            "summary": {
+            "state": "stopped",  # Ensure that the status is stopped
+            "tso": 434218657561968641,
+            "checkpoint": "2022-06-28 18:38:45.685", # This time should be later than the time of stopping writing
+            "error": null
+            }
+          }
+        ]
 
 2.  書き込みサービスをダウンストリーム クラスターに移行した後、一定期間観察します。下流クラスターが安定している場合は、上流クラスターを破棄できます。

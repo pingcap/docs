@@ -28,7 +28,7 @@ PD Controlを使用するには、 `tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd
 
 > **注記：**
 >
-> リンク内の`{version}`は、TiDB のバージョン番号を示します。たとえば、 `amd64`アーキテクチャの`v7.1.2`のダウンロード リンクは`https://download.pingcap.org/tidb-community-server-v7.1.2-linux-amd64.tar.gz`です。
+> リンク内の`{version}`は、TiDB のバージョン番号を示します。たとえば、 `amd64`アーキテクチャの`v7.1.3`のダウンロード リンクは`https://download.pingcap.org/tidb-community-server-v7.1.3-linux-amd64.tar.gz`です。
 
 ### ソースコードからコンパイルする {#compile-from-source-code}
 
@@ -174,7 +174,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 "5.2.2"
 ```
 
--   `max-snapshot-count`単一ストアが同時に受信または送信するスナップショットの最大数を制御します。スケジューラは、通常のアプリケーション リソースの占有を避けるために、この構成によって制限されます。レプリカの追加またはバランシングの速度を向上させる必要がある場合は、この値を増やします。
+-   `max-snapshot-count` 、単一ストアが同時に受信または送信するスナップショットの最大数を制御します。スケジューラは、通常のアプリケーション リソースの占有を避けるために、この構成によって制限されます。レプリカの追加またはバランシングの速度を向上させる必要がある場合は、この値を増やします。
 
     ```bash
     config set max-snapshot-count 64  // Set the maximum number of snapshots to 64
@@ -289,13 +289,13 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set tolerant-size-ratio 20        // Set the size of the buffer area to about 20 times of the average Region Size
     ```
 
--   `low-space-ratio`ストアスペースが不十分であるとみなされるしきい値を制御します。ノードが占めるスペースの割合が指定された値を超える場合、PD は該当するノードへのデータの移行を可能な限り回避しようとします。同時に、PD は主に、対応するノードのディスク容量を使い果たさないように、残りの容量をスケジュールします。
+-   `low-space-ratio`ストアスペースが不十分であるとみなされるしきい値を制御します。ノードが占めるスペースの割合が指定された値を超えると、PD は該当するノードへのデータの移行を可能な限り回避しようとします。同時に、PD は主に、対応するノードのディスク容量を使い果たさないように、残りの容量をスケジュールします。
 
     ```bash
     config set low-space-ratio 0.9              // Set the threshold value of insufficient space to 0.9
     ```
 
--   `high-space-ratio`十分なストア スペースとみなされるしきい値を制御します。この設定は、 `region-score-formula-version`が`v1`に設定されている場合にのみ有効になります。ノードが占有する容量の割合が指定値未満の場合、PD は残りの容量を無視し、主に実際のデータ量をスケジュールします。
+-   `high-space-ratio`十分なストア スペースとみなされるしきい値を制御します。この設定は、 `region-score-formula-version`が`v1`に設定されている場合にのみ有効になります。ノードが占有する領域の割合が指定値未満の場合、PD は残りの領域を無視し、主に実際のデータ量をスケジュールします。
 
     ```bash
     config set high-space-ratio 0.5             // Set the threshold value of sufficient space to 0.5
@@ -615,7 +615,7 @@ time: 43.12698ms
 
 このコマンドを使用して、指定された範囲`[startkey, endkey)`内のすべてのリージョンをクエリします。 `endKey`を含まない範囲はサポートされます。
 
-`limit`パラメータはキーの数を制限します。デフォルト値`limit` `16`で、値`-1`は無制限のキーを意味します。
+`limit`パラメータはキーの数を制限します。デフォルト値`limit`は`16`で、値`-1`は無制限のキーを意味します。
 
 使用法：
 

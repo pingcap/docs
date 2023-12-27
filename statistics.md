@@ -120,9 +120,9 @@ Count-Min Sketch はハッシュ構造であるため、ハッシュの衝突が
 `WITH NUM SAMPLES`と`WITH FLOAT_NUM SAMPLERATE`サンプルを収集する 2 つの異なるアルゴリズムに対応します。
 
 -   `WITH NUM SAMPLES` 、TiDB の貯留層サンプリング方法で実装されるサンプリング セットのサイズを指定します。テーブルが大きい場合、この方法を使用して統計を収集することはお勧めできません。貯留層サンプリングの中間結果セットには冗長な結果が含まれるため、メモリなどのリソースにさらなる負荷がかかります。
--   `WITH FLOAT_NUM SAMPLERATE` 、v5.3.0 で導入されたサンプリング方法です。値範囲`(0, 1]`では、このパラメータはサンプリング レートを指定します。これは、TiDB のベルヌーイ サンプリングの方法で実装されており、大規模なテーブルのサンプリングに適しており、収集効率とリソース使用率が向上します。
+-   `WITH FLOAT_NUM SAMPLERATE` v5.3.0 で導入されたサンプリング方法です。値範囲`(0, 1]`では、このパラメータはサンプリング レートを指定します。これは、TiDB のベルヌーイ サンプリングの方法で実装されており、大規模なテーブルのサンプリングに適しており、収集効率とリソース使用率が向上します。
 
-v5.3.0 より前では、TiDB はリザーバー サンプリング方式を使用して統計を収集します。 v5.3.0 以降、TiDB バージョン 2 統計では、デフォルトでベルヌーイ サンプリング法を使用して統計が収集されます。貯留層サンプリング方法を再利用するには、 `WITH NUM SAMPLES`ステートメントを使用します。
+v5.3.0 より前では、TiDB はリザーバー サンプリング方式を使用して統計を収集します。 v5.3.0 以降、TiDB バージョン 2 統計では、デフォルトでベルヌーイ サンプリング法を使用して統計が収集されます。貯留層サンプリング方法を再利用するには、 `WITH NUM SAMPLES`ステートメントを使用できます。
 
 現在のサンプリング レートは、適応アルゴリズムに基づいて計算されます。 [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)を使用してテーブル内の行数を確認できる場合、この行数を使用して 100,000 行に対応するサンプリング レートを計算できます。この数値を確認できない場合は、 [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)表の`TABLE_KEYS`列を別の参照として使用して、サンプリング レートを計算できます。
 
@@ -138,7 +138,7 @@ v5.3.0 より前では、TiDB はリザーバー サンプリング方式を使�
 
 > **注記：**
 >
-> 通常、 `STATS_META`は`TABLE_KEYS`よりも信頼性が高くなります。ただし、 TiDB Cloudコンソールを介してデータをインポートした後 ( [サンプルデータのインポート](/tidb-cloud/import-sample-data.md)参照)、 `STATS_META`の結果は`0`になります。この状況に対処するには、 `STATS_META`の結果が`TABLE_KEYS`の結果よりはるかに小さい場合に、 `TABLE_KEYS`使用してサンプリング レートを計算します。
+> 通常、 `STATS_META`は`TABLE_KEYS`よりも信頼性が高くなります。ただし、 TiDB Cloudコンソールを介してデータをインポートした後 ( [サンプルデータのインポート](/tidb-cloud/import-sample-data.md)参照)、 `STATS_META`の結果は`0`になります。この状況に対処するには、 `STATS_META`の結果が`TABLE_KEYS`の結果よりはるかに小さい場合、 `TABLE_KEYS`使用してサンプリング レートを計算します。
 
 </CustomContent>
 
@@ -146,7 +146,7 @@ v5.3.0 より前では、TiDB はリザーバー サンプリング方式を使�
 
 ほとんどの場合、SQL ステートメントを実行するとき、オプティマイザーは一部の列 ( `WHERE` 、 `JOIN` 、 `ORDER BY` 、および`GROUP BY`ステートメントの列など) の統計のみを使用します。これらの列は`PREDICATE COLUMNS`と呼ばれます。
 
-テーブルに多くの列がある場合、すべての列の統計を収集すると、大きなオーバーヘッドが発生する可能性があります。オーバーヘッドを軽減するために、オプティマイザで使用する特定の列または`PREDICATE COLUMNS`列のみの統計を収集できます。
+テーブルに多くの列がある場合、すべての列の統計を収集すると、大きなオーバーヘッドが発生する可能性があります。オーバーヘッドを軽減するために、オプティマイザで使用する特定の列または`PREDICATE COLUMNS`の列のみの統計を収集できます。
 
 > **注記：**
 >
@@ -389,7 +389,7 @@ TiDB v6.0 以降、TiDB は、 `KILL`ステートメントを使用してバッ�
 
     <CustomContent platform="tidb">
 
-    -   [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610)が`true` (デフォルトでは`true` ) の場合、 `KILL TIDB ${id};`ステートメントを直接実行できます。9 は、前のステップ`ID`取得したバックグラウンド`ANALYZE`タスクの`${id}`です。
+    -   [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610)が`true` (デフォルトでは`true` ) の場合、 `KILL TIDB ${id};`ステートメントを直接実行できます。9 は、前のステップで`ANALYZE` `ID` `${id}` 。
     -   `enable-global-kill`が`false`の場合、クライアントを使用してバックエンド`ANALYZE`タスクを実行している TiDB インスタンスに接続し、その後`KILL TIDB ${id};`ステートメントを実行する必要があります。クライアントを使用して別の TiDB インスタンスに接続する場合、またはクライアントと TiDB クラスターの間にプロキシがある場合、 `KILL`ステートメントはバックグラウンド`ANALYZE`タスクを終了できません。
 
     </CustomContent>
@@ -437,7 +437,7 @@ v5.4.0 以降、TiDB は一部の`ANALYZE`構成の永続化をサポートし�
 
 <CustomContent platform="tidb">
 
-`ANALYZE`構成永続機能はデフォルトで有効`ON`なっています (デフォルトでは、システム変数`tidb_analyze_version`は`2`は`tidb_persist_analyze_options`です)。
+`ANALYZE`構成永続機能はデフォルトで有効になっています (デフォルトでは、システム変数`tidb_analyze_version`は`2` `tidb_persist_analyze_options` `ON`です)。
 
 </CustomContent>
 
@@ -449,7 +449,13 @@ v5.4.0 以降、TiDB は一部の`ANALYZE`構成の永続化をサポートし�
 
 この機能を使用すると、ステートメントを手動で実行するときに`ANALYZE`ステートメントで指定された永続性構成を記録できます。一度記録されると、次回 TiDB が自動的に統計を更新するか、これらの構成を指定せずに統計を手動で収集するときに、TiDB は記録された構成に従って統計を収集します。
 
-永続構成を指定して`ANALYZE`ステートメントを手動で複数回実行すると、TiDB は、最新の`ANALYZE`ステートメントで指定された新しい構成を使用して、以前に記録された永続構成を上書きします。
+auto analyze操作に使用される特定のテーブルに保持されている構成をクエリするには、次の SQL ステートメントを使用できます。
+
+```sql
+SELECT sample_num, sample_rate, buckets, topn, column_choice, column_ids FROM mysql.analyze_options opt JOIN information_schema.tables tbl ON opt.table_id = tbl.tidb_table_id WHERE tbl.table_schema = '{db_name}' AND tbl.table_name = '{table_name}';
+```
+
+TiDB は、最新の`ANALYZE`ステートメントで指定された新しい構成を使用して、以前に記録された永続構成を上書きします。たとえば、 `ANALYZE TABLE t WITH 200 TOPN;`を実行すると、上位 200 の値が`ANALYZE`ステートメントに設定されます。続いて`ANALYZE TABLE t WITH 0.1 SAMPLERATE;`を実行すると、 `ANALYZE TABLE t WITH 200 TOPN, 0.1 SAMPLERATE;`と同様に、自動`ANALYZE`ステートメントの上位 200 個の値とサンプリング レート 0.1 が設定されます。
 
 #### ANALYZE 構成の永続性を無効にする {#disable-analyze-configuration-persistence}
 
@@ -711,7 +717,7 @@ v7.1.0 以降、TiDB では軽量統計初期化のために[`lite-init-stats`](
 -   `lite-init-stats`の値が`true`の場合、統計の初期化では、インデックスまたは列のヒストグラム、TopN、または Count-Min スケッチがメモリにロードされません。
 -   `lite-init-stats`の値が`false`の場合、統計の初期化では、インデックスと主キーのヒストグラム、TopN、および Count-Min スケッチがメモリにロードされますが、非主キー列のヒストグラム、TopN、または Count-Min スケッチはメモリにロードされません。オプティマイザーが特定のインデックスまたは列のヒストグラム、TopN、および Count-Min スケッチを必要とする場合、必要な統計が同期または非同期でメモリにロードされます。
 
-デフォルト値の`lite-init-stats` `false`で、これは軽量統計の初期化を無効にすることを意味します。 `lite-init-stats`から`true`設定すると、不必要な統計のロードが回避されるため、統計の初期化が高速化され、TiDBメモリの使用量が削減されます。
+デフォルト値の`lite-init-stats`は`false`で、これは軽量統計の初期化を無効にすることを意味します。 `lite-init-stats`から`true`設定すると、不必要な統計のロードが回避されるため、統計の初期化が高速化され、TiDBメモリの使用量が削減されます。
 
 </CustomContent>
 

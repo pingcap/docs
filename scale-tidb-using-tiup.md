@@ -244,7 +244,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
         Starting /root/.tiup/components/cluster/v1.11.3/cluster display <cluster-name>
         TiDB Cluster: <cluster-name>
-        TiDB Version: v7.1.2
+        TiDB Version: v7.1.3
         ID              Role         Host        Ports                            Status  Data Dir                Deploy Dir
         --              ----         ----        -----                            ------  --------                ----------
         10.0.1.3:8300   cdc          10.0.1.3    8300                             Up      data/cdc-8300           deploy/cdc-8300

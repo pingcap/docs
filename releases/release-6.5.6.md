@@ -17,9 +17,10 @@ TiDB バージョン: 6.5.6
 -   [`tidb_opt_enable_hash_join`](https://docs.pingcap.com/tidb/v6.5/system-variables#tidb_opt_enable_hash_join-new-in-v656)システム変数を導入して、オプティマイザがテーブル[#46695](https://github.com/pingcap/tidb/issues/46695) @ [コードプレイ](https://github.com/coderplay)のハッシュ結合を選択するかどうかを制御します。
 -   さらにテストを行った後、 TiCDC Changefeed構成項目[`case-sensitive`](/ticdc/ticdc-changefeed-config.md)のデフォルト値が`true`から`false`に変更されました。これは、デフォルトでは、TiCDC 構成ファイル内のテーブル名とデータベース名は大文字と小文字が区別されないことを意味します[#10047](https://github.com/pingcap/tiflow/issues/10047) @ [スドジ](https://github.com/sdojjy)
 -   TiCDC Changefeed、次の新しい構成項目が導入されています。
-    -   [`encoding-worker-num`](/ticdc/ticdc-changefeed-config.md)および[`flush-worker-num`](/ticdc/ticdc-changefeed-config.md) : さまざまなマシン[#10048](https://github.com/pingcap/tiflow/issues/10048) @ [CharlesCheung96](https://github.com/CharlesCheung96)の仕様に基づいて、REDO モジュールにさまざまな同時実行パラメータを設定できます。
-    -   [`compression`](/ticdc/ticdc-changefeed-config.md) : REDO ログ ファイル[#10176](https://github.com/pingcap/tiflow/issues/10176) @ [スドジ](https://github.com/sdojjy)の圧縮動作を構成できます。
-    -   [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md) : データをオブジェクトstorage[#10109](https://github.com/pingcap/tiflow/issues/10109) @ [CharlesCheung96](https://github.com/CharlesCheung96)にレプリケートするときに、履歴データの自動クリーンアップを設定できます。
+    -   [`sql-mode`](https://docs.pingcap.com/tidb/v6.5/ticdc-changefeed-config) : TiCDC がデータ[#9876](https://github.com/pingcap/tiflow/issues/9876) @ [東門](https://github.com/asddongmen)を複製するときに TiCDC が DDL ステートメントを解析するために使用する[SQLモード](https://docs.pingcap.com/tidb/v6.5/ticdc-ddl#sql-mode)を設定できるようにします。
+    -   [`encoding-worker-num`](https://docs.pingcap.com/tidb/v6.5/ticdc-changefeed-config)および[`flush-worker-num`](https://docs.pingcap.com/tidb/v6.5/ticdc-changefeed-config) : さまざまなマシン[#10048](https://github.com/pingcap/tiflow/issues/10048) @ [CharlesCheung96](https://github.com/CharlesCheung96)の仕様に基づいて、REDO モジュールにさまざまな同時実行パラメータを設定できます。
+    -   [`compression`](https://docs.pingcap.com/tidb/v6.5/ticdc-changefeed-config) : REDO ログ ファイル[#10176](https://github.com/pingcap/tiflow/issues/10176) @ [スドジ](https://github.com/sdojjy)の圧縮動作を構成できます。
+    -   [`sink.cloud-storage-config`](https://docs.pingcap.com/tidb/v6.5/ticdc-changefeed-config) : データをオブジェクトstorage[#10109](https://github.com/pingcap/tiflow/issues/10109) @ [CharlesCheung96](https://github.com/CharlesCheung96)にレプリケートするときに、履歴データの自動クリーンアップを設定できます。
 
 ## 改善点 {#improvements}
 

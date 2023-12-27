@@ -73,11 +73,17 @@ Data Service のデータ アプリ (ベータ版) は、特定のアプリケ�
 
 3.  **[GPT との統合]**領域で、 **[コンフィグレーションの取得]**をクリックします。
 
+    ![Get Configuration](/media/tidb-cloud/data-service/GPTs1.png)
+
 4.  表示されたダイアログ ボックスには、次のフィールドが表示されます。
 
-    -   **API 仕様 URL** : データ アプリの OpenAPI 仕様の URL をコピーします。詳細については、 [OpenAPI仕様を使用する](#use-the-openapi-specification)を参照してください。
-    -   **API キー**: データ アプリの API キーを入力します。 API キーをまだ持っていない場合は、 **「API キーの作成**」をクリックして作成します。詳細については、 [APIキーを作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)を参照してください。
-    -   **API Key Encoded** : 指定した API キーと同等の Base64 エンコード文字列をコピーします。
+    ａ． **API 仕様 URL** : データ アプリの OpenAPI 仕様の URL をコピーします。詳細については、 [OpenAPI仕様を使用する](#use-the-openapi-specification)を参照してください。
+
+    b. **API キー**: データ アプリの API キーを入力します。 API キーをまだ持っていない場合は、 **「API キーの作成**」をクリックして作成します。詳細については、 [APIキーを作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)を参照してください。
+
+    c. **API Key Encoded** : 指定した API キーと同等の Base64 エンコード文字列をコピーします。
+
+    ![GPTs Dialog Box](/media/tidb-cloud/data-service/GPTs2.png)
 
 5.  コピーした API 仕様 URL とエンコードされた API キーを GPT 構成で使用します。
 

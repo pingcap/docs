@@ -45,19 +45,17 @@ summary: Learn how to replicate TiDB data to Apache Kafka and Apache Flink using
 
     Flink の要求に応じて、各テーブルの増分データを独立したトピックに送信する必要があり、主キー値に基づいてイベントごとにパーティションをディスパッチする必要があります。したがって、次の内容で変更フィード構成ファイル`changefeed.conf`を作成する必要があります。
 
-    ```
-    [sink]
-    dispatchers = [
-    {matcher = ['*.*'], topic = "tidb_{schema}_{table}", partition="index-value"},
-    ]
-    ```
+        [sink]
+        dispatchers = [
+        {matcher = ['*.*'], topic = "tidb_{schema}_{table}", partition="index-value"},
+        ]
 
     設定ファイルの`dispatchers`の詳細については、 [Kafka シンクのトピックおよびパーティション ディスパッチャーのルールをカスタマイズする](/ticdc/ticdc-sink-to-kafka.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink)を参照してください。
 
 2.  増分データを Kafka にレプリケートするための変更フィードを作成します。
 
     ```shell
-    tiup ctl:v<CLUSTER_VERSION> cdc changefeed create --server="http://127.0.0.1:8300" --sink-uri="kafka://127.0.0.1:9092/kafka-topic-name?protocol=canal-json" --changefeed-id="kafka-changefeed" --config="changefeed.conf"
+    tiup cdc:v<CLUSTER_VERSION> cli changefeed create --server="http://127.0.0.1:8300" --sink-uri="kafka://127.0.0.1:9092/kafka-topic-name?protocol=canal-json" --changefeed-id="kafka-changefeed" --config="changefeed.conf"
     ```
 
     -   チェンジフィードが正常に作成されると、以下に示すように、チェンジフィード ID などのチェンジフィード情報が表示されます。
@@ -73,13 +71,13 @@ summary: Learn how to replicate TiDB data to Apache Kafka and Apache Flink using
     本番環境では、Kafka クラスターに複数のブローカー ノードがあります。したがって、複数のブローカーのアドレスをシンク UIR に追加できます。これにより、Kafka クラスターへの安定したアクセスが保証されます。 Kafka クラスターがダウンしても、チェンジフィードは引き続き機能します。 Kafka クラスターに 3 つのブローカー ノードがあり、IP アドレスがそれぞれ 127.0.0.1:9092、127.0.0.2:9092、および 127.0.0.3:9092 であるとします。次のシンク URI を使用して変更フィードを作成できます。
 
     ```shell
-    tiup ctl:v<CLUSTER_VERSION> cdc changefeed create --server="http://127.0.0.1:8300" --sink-uri="kafka://127.0.0.1:9092,127.0.0.2:9092,127.0.0.3:9092/kafka-topic-name?protocol=canal-json&partition-num=3&replication-factor=1&max-message-bytes=1048576" --config="changefeed.conf"
+    tiup cdc:v<CLUSTER_VERSION> cli changefeed create --server="http://127.0.0.1:8300" --sink-uri="kafka://127.0.0.1:9092,127.0.0.2:9092,127.0.0.3:9092/kafka-topic-name?protocol=canal-json&partition-num=3&replication-factor=1&max-message-bytes=1048576" --config="changefeed.conf"
     ```
 
 3.  変更フィードを作成した後、次のコマンドを実行して変更フィードのステータスを確認します。
 
     ```shell
-    tiup ctl:v<CLUSTER_VERSION> cdc changefeed list --server="http://127.0.0.1:8300"
+    tiup cdc:v<CLUSTER_VERSION> cli changefeed list --server="http://127.0.0.1:8300"
     ```
 
     チェンジフィードを管理するには、 [TiCDC 変更フィードの管理](/ticdc/ticdc-manage-changefeed.md)を参照してください。
@@ -107,7 +105,7 @@ summary: Learn how to replicate TiDB data to Apache Kafka and Apache Flink using
     ./bin/kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --from-beginning --topic `${topic-name}`
     ```
 
-この時点で、TiDB データベースの増分データは Kafka に正常にレプリケートされます。次に、Flink を使用して Kafka データを使用できます。あるいは、特定のサービス シナリオ向けに Kafka コンシューマー クライアントを自分で開発することもできます。
+この時点で、TiDB データベースの増分データは Kafka に正常にレプリケートされます。次に、Flink を使用して Kafka データを使用できます。あるいは、特定のサービス シナリオ向けに Kafka コンシューマ クライアントを自分で開発することもできます。
 
 ## (オプション) ステップ 4. Kafka データを消費するように Flink を構成する {#optional-step-4-configure-flink-to-consume-kafka-data}
 

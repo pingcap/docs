@@ -145,7 +145,7 @@ npm install mysql2 dotenv --save
 
     > **注記**
     >
-    > パブリック エンドポイントを使用して TiDB Dended に接続する場合は、TLS 接続を有効にすることをお勧めします。
+    > パブリック エンドポイントを使用して TiDB D dedicated に接続する場合は、TLS 接続を有効にすることをお勧めします。
     >
     > TLS 接続を有効にするには、 `TIDB_ENABLE_SSL`を`true`に変更し、 `TIDB_CA_PATH`使用して接続ダイアログからダウンロードした CA 証明書のファイル パスを指定します。
 
@@ -187,7 +187,7 @@ npm start
 
 接続が成功すると、コンソールには次のように TiDB クラスターのバージョンが出力されます。
 
-    🔌 Connected to TiDB cluster! (TiDB version: 5.7.25-TiDB-v7.1.0)
+    🔌 Connected to TiDB cluster! (TiDB version: 5.7.25-TiDB-v7.1.3)
     ⏳ Loading sample game data...
     ✅ Loaded sample game data.
 
@@ -241,7 +241,7 @@ void main();
 
 > **注記**
 >
-> TiDB サーバーレスの場合、パブリック エンドポイントを使用する場合は`TIDB_ENABLE_SSL`経由の TLS 接続を有効にする**必要があります**。ただし、Node.js はデフォルトで組み込みの[Mozilla CA 証明書](https://wiki.mozilla.org/CA/Included_Certificates)を使用し、TiDB Serverless によって信頼されるため、 `TIDB_CA_PATH`経由で SSL CA 証明書を指定する必要は**ありません**。
+> TiDB サーバーレスの場合、パブリック エンドポイントを使用する場合は`TIDB_ENABLE_SSL`経由の TLS 接続を有効にする**必要があります**。ただし、Node.js はデフォルトで組み込みの[Mozilla CA 証明書](https://wiki.mozilla.org/CA/Included_Certificates)を使用し、TiDB Serverless によって信頼されているため、 `TIDB_CA_PATH`経由で SSL CA 証明書を指定する必要は**ありません**。
 
 ### データの挿入 {#insert-data}
 
@@ -302,7 +302,7 @@ console.log(rsh.affectedRows);
 
 -   node-mysql2 ドライバーの使用法については[node-mysql2 のドキュメント](https://github.com/sidorares/node-mysql2#readme)から学びましょう。
 -   [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) で TiDB [取引](/develop/dev-guide-transaction-overview.md) [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md) [データを更新する](/develop/dev-guide-update-data.md)ベスト プラクティス[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)学習[データの削除](/develop/dev-guide-delete-data.md)ます。
--   プロフェッショナルを通じて[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
+-   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## 助けが必要？ {#need-help}
 

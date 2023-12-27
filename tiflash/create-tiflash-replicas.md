@@ -143,13 +143,13 @@ TiFlashレプリカが追加される前に、各 TiKV インスタンスはフ�
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 add-peer
     ```
 
-    > 前述のコマンドでは、 `v<CLUSTER_VERSION>`実際のクラスターのバージョンに置き換える必要があります。たとえば、 `v7.1.2`と`<PD_ADDRESS>:2379`任意の PD ノードのアドレスに置き換えます。例えば：
+    > 前述のコマンドでは、 `v<CLUSTER_VERSION>`実際のクラスターのバージョンに置き換える必要があります。たとえば、 `v7.1.3`と`<PD_ADDRESS>:2379`任意の PD ノードのアドレスに置き換えます。例えば：
     >
     > ```shell
-    > tiup ctl:v7.1.2 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
+    > tiup ctl:v7.1.3 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
     > ```
 
-    数分以内に、 TiFlashノードの CPU およびディスク IO リソースの使用量が大幅に増加することがわかり、 TiFlashはレプリカをより速く作成するはずです。同時に、TiKV ノードの CPU およびディスク IO リソースの使用量も増加します。
+    数分以内に、 TiFlashノードの CPU およびディスク IO リソースの使用量が大幅に増加することがわかり、 TiFlash はレプリカをより速く作成するはずです。同時に、TiKV ノードの CPU およびディスク IO リソースの使用量も増加します。
 
     この時点で TiKV ノードとTiFlashノードにまだ予備のリソースがあり、オンライン サービスのレイテンシーが大幅に増加しない場合は、制限をさらに緩和することができます (たとえば、元の速度を 3 倍にする)。
 
@@ -252,6 +252,6 @@ TiFlashレプリカが追加される前に、各 TiKV インスタンスはフ�
 
 <CustomContent platform="tidb">
 
-ラベルを使用したレプリカのスケジュール設定の詳細については、 [トポロジ ラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md) 、 [1 つの地域展開における複数のデータセンター](/multi-data-centers-in-one-city-deployment.md) 、および[2 つの地域に配置された 3 つのデータ センター](/three-data-centers-in-two-cities-deployment.md)を参照してください。
+ラベルを使用したレプリカのスケジュール設定の詳細については、 [トポロジーラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md) 、 [1 つの地域展開における複数のデータセンター](/multi-data-centers-in-one-city-deployment.md) 、および[2 つの地域に配置された 3 つのデータ センター](/three-data-centers-in-two-cities-deployment.md)を参照してください。
 
 </CustomContent>

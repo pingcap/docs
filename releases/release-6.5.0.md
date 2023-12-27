@@ -25,7 +25,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 には�
 -   [インデックス加速度](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)機能が一般公開 (GA) され、インデックス追加のパフォーマンスが v6.1.0 と比較して約 10 倍向上しました。
 -   TiDB グローバルメモリコントロールが GA になり、 [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)を介してメモリ消費のしきい値を制御できるようになります。
 -   高性能でグローバルに単調な[`AUTO_INCREMENT`](/auto-increment.md#mysql-compatibility-mode)カラム属性が GA となり、MySQL と互換性があります。
--   [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md)は TiCDC および PITR と互換性があり、GA になりました。
+-   [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)は TiCDC および PITR と互換性があり、GA になりました。
 -   より正確な[コストモデル バージョン 2](/cost-model.md#cost-model-version-2)一般提供し、 `AND` for [インデックスのマージ](/explain-index-merge.md)で接続された式をサポートすることにより、TiDB オプティマイザーを強化します。
 -   `JSON_EXTRACT()`機能のTiFlashへのプッシュダウンをサポートします。
 -   パスワード コンプライアンスの監査要件を満たす[パスワード管理](/password-management.md)ポリシーをサポートします。
@@ -52,9 +52,9 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 には�
 
 -   `FLASHBACK CLUSTER TO TIMESTAMP` (GA) [#37197](https://github.com/pingcap/tidb/issues/37197) [#13303](https://github.com/tikv/tikv/issues/13303) @ [定義2014](https://github.com/Defined2014) @ [bb7133](https://github.com/bb7133) @ [Jmポテト](https://github.com/JmPotato) @ [コナー1996](https://github.com/Connor1996) @ [ヒューシャープ](https://github.com/HuSharp) @ [カルビンネオ](https://github.com/CalvinNeo)を使用した、特定の時点へのクラスターの復元のサポート
 
-    v6.4.0 以降、TiDB は実験的機能として[`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md)ステートメントを導入しました。このステートメントを使用すると、ガベージ コレクション (GC) の有効期間内の特定の時点にクラスターを復元できます。 v6.5.0 では、この機能は TiCDC および PITR と互換性があり、GA になりました。この機能は、DML の誤った操作を簡単に元に戻し、数分で元のクラスターを復元し、さまざまな時点でデータをロールバックしてデータが変更された正確な時間を判断するのに役立ちます。
+    v6.4.0 以降、TiDB は実験的機能として[`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)ステートメントを導入しました。このステートメントを使用すると、ガベージ コレクション (GC) の有効期間内の特定の時点にクラスターを復元できます。 v6.5.0 では、この機能は TiCDC および PITR と互換性があり、GA になりました。この機能は、DML の誤った操作を簡単に元に戻し、数分で元のクラスターを復元し、さまざまな時点でデータをロールバックしてデータが変更された正確な時間を判断するのに役立ちます。
 
-    詳細については、 [ドキュメンテーション](/sql-statements/sql-statement-flashback-to-timestamp.md)を参照してください。
+    詳細については、 [ドキュメンテーション](/sql-statements/sql-statement-flashback-cluster.md)を参照してください。
 
 -   `INSERT` 、 `REPLACE` 、 `UPDATE` 、 `DELETE` [#33485](https://github.com/pingcap/tidb/issues/33485) @ [エキシウム](https://github.com/ekexium)を含む非トランザクション DML ステートメントを完全にサポートします。
 
@@ -149,7 +149,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 には�
 
 -   [インデックスのマージ](/glossary.md#index-merge) `AND` [#39333](https://github.com/pingcap/tidb/issues/39333) @ [グオシャオゲ](https://github.com/guo-shaoge) @ [時間と運命](https://github.com/time-and-fate) @ [ハイランフー](https://github.com/hailanwhu)で接続された式をサポートします
 
-    v6.5.0 より前では、TiDB は`OR`で接続されたフィルター条件に対するインデックス マージの使用のみをサポートしていました。 v6.5.0 以降、TiDB は`WHERE`句の`AND`で接続されたフィルタ条件のインデックス マージの使用をサポートしました。このように、TiDB のインデックス マージは、クエリ フィルター条件のより一般的な組み合わせをカバーできるようになり、union ( `OR` ) 関係に限定されなくなりました。現在の v6.5.0 バージョンは、オプティマイザによって自動的に選択された`OR`条件でのインデックス マージのみをサポートします。 `AND`条件のインデックス マージを有効にするには、 [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)ヒントを使用する必要があります。
+    v6.5.0 より前では、TiDB は`OR`で接続されたフィルター条件に対するインデックス マージの使用のみをサポートしていました。 v6.5.0 以降、TiDB は`WHERE`句の`AND`で接続されたフィルタ条件のインデックス マージの使用をサポートしました。このようにして、TiDB のインデックス マージは、クエリ フィルター条件のより一般的な組み合わせをカバーできるようになり、union ( `OR` ) 関係に限定されなくなりました。現在の v6.5.0 バージョンは、オプティマイザによって自動的に選択された`OR`条件でのインデックス マージのみをサポートします。 `AND`条件のインデックス マージを有効にするには、 [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)ヒントを使用する必要があります。
 
     インデックスのマージの詳細については、 [v5.4.0 リリースノート](/releases/release-5.4.0.md#performance)および[インデックスのマージについて説明する](/explain-index-merge.md)を参照してください。
 
@@ -175,7 +175,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 には�
 
 -   [パーティション化されたテーブル](/partitioned-table.md)から TiKV [#26166](https://github.com/pingcap/tidb/issues/26166) @ [ウィノロス](https://github.com/winoros)までのソート操作のプッシュダウンをサポート
 
-    [パーティションテーブル](/partitioned-table.md)機能は v6.1.0 以降 GA になっていますが、TiDB は継続的にパフォーマンスを向上させています。 v6.5.0 では、TiDB は、計算とフィルタリングのために`ORDER BY`や`LIMIT`の並べ替え操作を TiKV にプッシュダウンすることをサポートします。これにより、パーティション化されたテーブルを使用する場合、ネットワーク I/O オーバーヘッドが削減され、SQL パフォーマンスが向上します。
+    [パーティションテーブル](/partitioned-table.md)機能は v6.1.0 以降 GA になっていますが、TiDB は継続的にパフォーマンスを向上させています。 v6.5.0 では、TiDB は、計算とフィルタリングのために`ORDER BY`や`LIMIT`の並べ替え操作を TiKV にプッシュダウンすることをサポートします。これにより、パーティション分割テーブルを使用する場合、ネットワーク I/O オーバーヘッドが削減され、SQL パフォーマンスが向上します。
 
 -   オプティマイザーは、より正確なコスト モデル バージョン 2 (GA) [#35240](https://github.com/pingcap/tidb/issues/35240) @ [qw4990](https://github.com/qw4990)を導入します。
 
@@ -281,7 +281,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 には�
 
     TiDB クラスターのテスト シナリオでは、TiCDC のパフォーマンスが大幅に向上しました。具体的には、 [Kafka へのデータの複製](/replicate-data-to-kafka.md)のシナリオでは、単一の TiCDC が処理できる最大行変更は 30K 行/秒に達し、レプリケーションのレイテンシーは10 秒に短縮されます。 TiKV および TiCDC のローリング アップグレード中であっても、レプリケーションのレイテンシーは 30 秒未満です。
 
-    災害復旧 (DR) シナリオでは、TiCDC REDO ログと同期ポイントが有効になっている場合、TiCDC スループットを 4000 行/秒から 35000 行/秒に向上させることができ、レプリケーションのレイテンシーを2 秒に制限できます。
+    災害復旧 (DR) シナリオでは、TiCDC REDO ログと同期ポイントが有効になっている場合、TiCDC スループットを 4000 行/秒から 35000 行/秒に向上させることができ、レプリケーションのレイテンシーを 2 秒に制限できます。
 
 ### バックアップと復元 {#backup-and-restore}
 
@@ -289,7 +289,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 には�
 
     TiDB スナップショット バックアップは、チェックポイントからのバックアップの再開をサポートしています。バックアップと復元 (BR) で回復可能なエラーが発生すると、バックアップが再試行されます。ただし、再試行が数回失敗すると、 BR は終了します。チェックポイント バックアップ機能を使用すると、数十分にわたるネットワーク障害など、より長時間の回復可能な障害の再試行が可能になります。
 
-    BR終了後 1 時間以内にシステムを障害から回復しないと、バックアップ対象のスナップショット データが GC メカニズムによって再利用され、バックアップが失敗する可能性があることに注意してください。詳細については、 [ドキュメンテーション](/br/br-checkpoint-backup.md#backup-retry-must-be-prior-to-gc)を参照してください。
+    BR終了後 1 時間以内にシステムを障害から回復しないと、バックアップされるスナップショット データが GC メカニズムによって再利用され、バックアップが失敗する可能性があることに注意してください。詳細については、 [ドキュメンテーション](/br/br-checkpoint-backup.md#backup-retry-must-be-prior-to-gc)を参照してください。
 
 -   PITR パフォーマンスが大幅に向上 @ [ジョッカウ](https://github.com/joccau)
 
@@ -333,7 +333,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 には�
 | `tidb_ttl_job_run_interval`                                                                                               | 新しく追加された | この変数は、バックグラウンドでの TTL ジョブのスケジュール間隔を制御するために使用されます。たとえば、現在の値が`1h0m0s`に設定されている場合、TTL 属性を持つ各テーブルは、1 時間ごとに期限切れのデータをクリーンアップします。                                                                                                                                                                                                                                  |
 | [`tidb_ttl_job_schedule_window_start_time`](/system-variables.md#tidb_ttl_job_schedule_window_start_time-new-in-v650)     | 新しく追加された | この変数は、バックグラウンドでの TTL ジョブのスケジュール ウィンドウの開始時間を制御するために使用されます。この変数の値を変更する場合は、ウィンドウが小さいと期限切れデータのクリーンアップが失敗する可能性があることに注意してください。                                                                                                                                                                                                                                  |
 | [`tidb_ttl_job_schedule_window_end_time`](/system-variables.md#tidb_ttl_job_schedule_window_end_time-new-in-v650)         | 新しく追加された | この変数は、バックグラウンドでの TTL ジョブのスケジュール ウィンドウの終了時刻を制御するために使用されます。この変数の値を変更する場合は、ウィンドウが小さいと期限切れデータのクリーンアップが失敗する可能性があることに注意してください。                                                                                                                                                                                                                                  |
-| [`tidb_ttl_scan_batch_size`](/system-variables.md#tidb_ttl_scan_batch_size-new-in-v650)                                   | 新しく追加された | この変数は、TTL ジョブの期限切れデータのスキャンに使用される各`SELECT`ステートメントの`LIMIT`値を設定するために使用されます。                                                                                                                                                                                                                                                                                  |
+| [`tidb_ttl_scan_batch_size`](/system-variables.md#tidb_ttl_scan_batch_size-new-in-v650)                                   | 新しく追加された | この変数は、TTL ジョブで期限切れデータをスキャンするために使用される各`SELECT`ステートメントの`LIMIT`値を設定するために使用されます。                                                                                                                                                                                                                                                                              |
 | [`tidb_ttl_scan_worker_count`](/system-variables.md#tidb_ttl_scan_worker_count-new-in-v650)                               | 新しく追加された | この変数は、各 TiDB ノードでの TTL スキャン ジョブの最大同時実行数を設定するために使用されます。                                                                                                                                                                                                                                                                                                    |
 | [`validate_password.check_user_name`](/system-variables.md#validate_passwordcheck_user_name-new-in-v650)                  | 新しく追加された | パスワード複雑度チェックのチェック項目です。パスワードがユーザー名と一致するかどうかをチェックします。この変数は、 [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)が有効な場合にのみ有効になります。デフォルト値は`ON`です。                                                                                                                                                                           |
 | [`validate_password.dictionary`](/system-variables.md#validate_passworddictionary-new-in-v650)                            | 新しく追加された | パスワード複雑度チェックのチェック項目です。パスワードが辞書内の単語と一致するかどうかをチェックします。この変数は、 [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)が有効で、 [`validate_password.policy`](/system-variables.md#validate_passwordpolicy-new-in-v650)が`2` (STRONG) に設定されている場合にのみ有効です。デフォルト値は`""`です。                                                               |
@@ -346,29 +346,29 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 には�
 
 ### コンフィグレーションファイルのパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                            | 種類の変更    | 説明                                                                                                                                                 |
-| -------------- | ---------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| TiDB           | [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409)                       | 廃止されました  | v6.5.0 以降、この構成項目は非推奨になりました。代わりに、システム変数[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)を使用してメモリをグローバルに管理します。 |
-| TiDB           | [`disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650) | 新しく追加された | パスワードの有効期限が切れたときに、TiDB がクライアント接続を切断するかどうかを決定します。デフォルト値は`true`で、パスワードの有効期限が切れるとクライアント接続が切断されることを意味します。                                              |
-| TiKV           | `raw-min-ts-outlier-threshold`                                                                             | 削除されました  | この構成項目は v6.4.0 で非推奨となり、v6.5.0 で削除されました。                                                                                                            |
-| TiKV           | [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval)                                       | 修正済み     | CDCレイテンシーを短縮するために、デフォルト値が`1s`から`200ms`に変更されました。                                                                                                    |
-| TiKV           | [`memory-use-ratio`](/tikv-configuration-file.md#memory-use-ratio-new-in-v650)                             | 新しく追加された | PITR ログ リカバリでの合計システムメモリに対する利用可能なメモリの比率を示します。                                                                                                       |
-| TiCDC          | [`sink.terminator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)                 | 新しく追加された | 2 つのデータ変更イベントを区切るために使用される行ターミネータを示します。デフォルトでは値は空であり、 `\r\n`が使用されることを意味します。                                                                         |
-| TiCDC          | [`sink.date-separator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)             | 新しく追加された | ファイルディレクトリの日付区切り文字のタイプを示します。値のオプションは`none` 、 `year` 、 `month` 、および`day`です。 `none`はデフォルト値で、日付が区切られていないことを意味します。                                     |
-| TiCDC          | [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | 新しく追加された | パーティションを区切り文字列として使用するかどうかを指定します。デフォルト値は`false`で、テーブル内のパーティションが別のディレクトリに格納されないことを意味します。                                                             |
-| TiCDC          | [`sink.csv.delimiter`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)              | 新しく追加された | フィールド間の区切り文字を示します。値は ASCII 文字である必要があり、デフォルトは`,`です。                                                                                                 |
-| TiCDC          | [`sink.csv.quote`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)                  | 新しく追加された | フィールドを囲む引用符。デフォルト値は`"`です。値が空の場合、引用符は使用されません。                                                                                                       |
-| TiCDC          | [`sink.csv.null`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)                   | 新しく追加された | CSV列がnullの場合に表示される文字を指定します。デフォルト値は`\N`です。                                                                                                          |
-| TiCDC          | [`sink.csv.include-commit-ts`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)      | 新しく追加された | CSV 行に commit-ts を含めるかどうかを指定します。デフォルト値は`false`です。                                                                                                  |
+| コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                            | 種類の変更      | 説明                                                                                                                                                 |
+| -------------- | ---------------------------------------------------------------------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| TiDB           | [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409)                       | 廃止されました    | v6.5.0 以降、この構成項目は非推奨になりました。代わりに、システム変数[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)を使用してメモリをグローバルに管理します。 |
+| TiDB           | [`disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650) | 新しく追加された   | パスワードの有効期限が切れたときに、TiDB がクライアント接続を切断するかどうかを決定します。デフォルト値は`true`で、パスワードの有効期限が切れるとクライアント接続が切断されることを意味します。                                              |
+| TiKV           | `raw-min-ts-outlier-threshold`                                                                             | 削除されました    | この構成項目は v6.4.0 で非推奨となり、v6.5.0 で削除されました。                                                                                                            |
+| TiKV           | [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval)                                       | 修正済み       | CDCレイテンシーを短縮するために、デフォルト値が`1s`から`200ms`に変更されました。                                                                                                    |
+| TiKV           | [`memory-use-ratio`](/tikv-configuration-file.md#memory-use-ratio-new-in-v650)                             | 新しく追加された   | PITR ログ リカバリでの合計システムメモリに対する利用可能なメモリの比率を示します。                                                                                                       |
+| TiCDC          | [`sink.terminator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)                 | 新たに追加されました | 2 つのデータ変更イベントを区切るために使用される行ターミネータを示します。デフォルトでは値は空であり、 `\r\n`が使用されることを意味します。                                                                         |
+| TiCDC          | [`sink.date-separator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)             | 新しく追加された   | ファイルディレクトリの日付区切り文字のタイプを示します。値のオプションは`none` 、 `year` 、 `month` 、および`day`です。 `none`はデフォルト値で、日付が区切られていないことを意味します。                                     |
+| TiCDC          | [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | 新しく追加された   | パーティションを区切り文字列として使用するかどうかを指定します。デフォルト値は`false`で、テーブル内のパーティションが別のディレクトリに格納されないことを意味します。                                                             |
+| TiCDC          | [`sink.csv.delimiter`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)              | 新しく追加された   | フィールド間の区切り文字を示します。値は ASCII 文字である必要があり、デフォルトは`,`です。                                                                                                 |
+| TiCDC          | [`sink.csv.quote`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)                  | 新しく追加された   | フィールドを囲む引用符。デフォルト値は`"`です。値が空の場合、引用符は使用されません。                                                                                                       |
+| TiCDC          | [`sink.csv.null`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)                   | 新しく追加された   | CSV列がnullの場合に表示される文字を指定します。デフォルト値は`\N`です。                                                                                                          |
+| TiCDC          | [`sink.csv.include-commit-ts`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)      | 新しく追加された   | CSV 行に commit-ts を含めるかどうかを指定します。デフォルト値は`false`です。                                                                                                  |
 
 ### その他 {#others}
 
 -   v6.5.0 以降、 `mysql.user`テーブルには`Password_reuse_history`と`Password_reuse_time`という 2 つの新しい列が追加されます。
--   v6.5.0 以降、 [インデックス加速度](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)機能はデフォルトで有効になっています。この機能は[単一の`ALTER TABLE`ステートメントで複数の列またはインデックスを変更する](/sql-statements/sql-statement-alter-table.md)と完全な互換性はありません。インデックス アクセラレーションを使用して一意のインデックスを追加する場合は、同じステートメント内の他の列やインデックスを変更しないようにする必要があります。この機能は[PITR (ポイントインタイムリカバリ)](/br/br-pitr-guide.md)とも互換性がありません。インデックス アクセラレーション機能を使用する場合は、PITR バックアップ タスクがバックグラウンドで実行されていないことを確認する必要があります。そうしないと、予期しない結果が発生する可能性があります。詳細については、 [ドキュメンテーション](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)を参照してください。
+-   v6.5.0 以降、 [インデックス加速度](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)機能はデフォルトで有効になります。この機能は[単一の`ALTER TABLE`ステートメントで複数の列またはインデックスを変更する](/sql-statements/sql-statement-alter-table.md)と完全な互換性はありません。インデックス アクセラレーションを使用して一意のインデックスを追加する場合は、同じステートメント内の他の列やインデックスを変更しないようにする必要があります。この機能は[PITR (ポイントインタイムリカバリ)](/br/br-pitr-guide.md)とも互換性がありません。インデックス アクセラレーション機能を使用する場合は、PITR バックアップ タスクがバックグラウンドで実行されていないことを確認する必要があります。そうしないと、予期しない結果が発生する可能性があります。詳細については、 [ドキュメンテーション](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)を参照してください。
 
 ## 廃止された機能 {#deprecated-feature}
 
-v6.5.0 以降、v4.0.7 で導入された`AMEND TRANSACTION`メカニズムは非推奨になり、 [メタデータロック](/metadata-lock.md)に置き換えられます。
+v6.5.0 以降、v4.0.7 で導入された`AMEND TRANSACTION`メカニズムは非推奨となり、 [メタデータロック](/metadata-lock.md)に置き換えられます。
 
 ## 改善点 {#improvements}
 
@@ -405,7 +405,7 @@ v6.5.0 以降、v4.0.7 で導入された`AMEND TRANSACTION`メカニズムは�
 
 -   TiFlash
 
-    -   SQL 側でバッチ処理がないシナリオでの書き込みパフォーマンスが向上します[#6404](https://github.com/pingcap/tiflash/issues/6404) @ [リデジュ](https://github.com/lidezhu)
+    -   SQL 側でバッチ処理がないシナリオでの書き込みパフォーマンスが向上します[#6404](https://github.com/pingcap/tiflash/issues/6404) @ [リデズ](https://github.com/lidezhu)
     -   `explain analyze`出力[#5926](https://github.com/pingcap/tiflash/issues/5926) @ [ホンユニャン](https://github.com/hongyunyan)に TableFullScan の詳細を追加します。
 
 -   ツール

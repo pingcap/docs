@@ -157,7 +157,7 @@ SET @@global.tidb_ttl_job_schedule_window_end_time = '05:00 +0000';
 
 <CustomContent platform="tidb-cloud">
 
-> **ノート：**
+> **注記：**
 >
 > このセクションは、TiDB セルフホスト型にのみ適用されます。現在、 TiDB Cloud はTTL メトリクスを提供していません。
 
@@ -225,7 +225,7 @@ TiDB は、TTL に関するランタイム情報を定期的に収集し、Grafa
               status: finished
     ```
 
-    列`table_id`はパーティションテーブルの ID で、列`parent_table_id`はテーブルの ID であり、 `infomation_schema.tables`の ID に対応します。 `table_schema` `table_name`データベース、テーブル`partition_name` 、パーティション名に対応します。 `create_time` 、 `finish_time` 、 `ttl_expire`は、ＴＴＬタスクの作成時刻、終了時刻、有効期限を示す。 `expired_rows`と`deleted_rows` 、期限切れの行の数と正常に削除された行の数を示します。
+    列`table_id`はパーティションテーブルの ID で、列`parent_table_id`はテーブルの ID であり、 `infomation_schema.tables`の ID に対応します。 `table_schema` `table_name`データベース、テーブル名、パーティション名に対応します`partition_name` `create_time` 、 `finish_time` 、 `ttl_expire`は、ＴＴＬタスクの作成時刻、終了時刻、有効期限を示す。 `expired_rows`と`deleted_rows` 、期限切れの行の数と正常に削除された行の数を示します。
 
 ## TiDB ツールとの互換性 {#compatibility-with-tidb-tools}
 
@@ -239,11 +239,11 @@ TTL は、他の TiDB 移行、バックアップ、およびリカバリ ツー
 
 ## SQLとの互換性 {#compatibility-with-sql}
 
-| 機能名                                                                                         | 説明                                                                                                                                                                                   |
-| :------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)                       | `FLASHBACK TABLE`指定すると、テーブルの`TTL_ENABLE`属性が`OFF`に設定されます。これにより、TiDB がフラッシュバック後に期限切れのデータをすぐに削除するのを防ぎます。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。                          |
-| [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)                 | `FLASHBACK DATABASE`指定すると、テーブルの`TTL_ENABLE`属性が`OFF`に設定され、 `TTL_ENABLE`属性は変更されません。これにより、TiDB がフラッシュバック後に期限切れのデータをすぐに削除するのを防ぎます。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。 |
-| [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) | `FLASHBACK CLUSTER TO TIMESTAMP`指定すると、システム変数[`TIDB_TTL_JOB_ENABLE`](/system-variables.md#tidb_ttl_job_enable-new-in-v650) `OFF`に設定され、 `TTL_ENABLE`属性の値は変更されません。                      |
+| 機能名                                                                         | 説明                                                                                                                                                                                   |
+| :-------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)       | `FLASHBACK TABLE`指定すると、テーブルの`TTL_ENABLE`属性が`OFF`に設定されます。これにより、TiDB がフラッシュバック後に期限切れのデータをすぐに削除するのを防ぎます。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。                          |
+| [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) | `FLASHBACK DATABASE`指定すると、テーブルの`TTL_ENABLE`属性が`OFF`に設定され、 `TTL_ENABLE`属性は変更されません。これにより、TiDB がフラッシュバック後に期限切れのデータをすぐに削除するのを防ぎます。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。 |
+| [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)   | `FLASHBACK CLUSTER`指定すると、システム変数[`TIDB_TTL_JOB_ENABLE`](/system-variables.md#tidb_ttl_job_enable-new-in-v650) `OFF`に設定され、 `TTL_ENABLE`属性の値は変更されません。                                   |
 
 ## 制限事項 {#limitations}
 

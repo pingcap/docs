@@ -59,15 +59,21 @@ TiDB バージョン: 6.1.0
 
 ### パフォーマンス {#performance}
 
--   カスタマイズされたリージョンサイズのサポート (実験的)
+-   カスタマイズされたリージョンサイズをサポート
 
-    リージョンをより大きなサイズに設定すると、リージョンの数が効果的に減り、リージョンの管理が容易になり、クラスターのパフォーマンスと安定性が向上します。この機能では、リージョン内のより小さな範囲であるバケットの概念が導入されます。リージョンがより大きなサイズに設定されている場合、クエリ単位としてバケットを使用すると、同時クエリのパフォーマンスを最適化できます。バケットをクエリ単位として使用すると、ホット リージョンのサイズを動的に調整して、スケジューリングの効率と負荷バランスを確保することもできます。この機能は現在実験的です。本番環境での使用はお勧めできません。
+    v6.1.0 以降、 [`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size)を構成してリージョンをより大きなサイズに設定できるようになりました。これにより、リージョンの数が効果的に削減され、リージョンの管理が容易になり、クラスターのパフォーマンスと安定性が向上します。
 
-    [ユーザードキュメント](/tune-region-performance.md) [#11515](https://github.com/tikv/tikv/issues/11515)
+    [ユーザードキュメント](/tune-region-performance.md#use-region-split-size-to-adjust-region-size) [#11515](https://github.com/tikv/tikv/issues/11515)
+
+-   バケットを使用した同時実行性の向上をサポート (実験的)
+
+    リージョン をより大きなサイズに設定した後、クエリの同時実行性をさらに向上させるために、TiDB では、リージョン内のより小さな範囲であるバケットの概念を導入しています。リージョンがより大きなサイズに設定されている場合、クエリ単位としてバケットを使用すると、同時クエリのパフォーマンスを最適化できます。バケットをクエリ単位として使用すると、ホットスポット リージョンのサイズを動的に調整して、スケジューリングの効率と負荷バランスを確保することもできます。この機能は現在実験的です。本番環境での使用はお勧めできません。
+
+    [ユーザードキュメント](/tune-region-performance.md#use-bucket-to-increase-concurrency) [#11515](https://github.com/tikv/tikv/issues/11515)
 
 -   Raft Engine をデフォルトのログstorageエンジンとして使用する
 
-    v6.1.0 以降、TiDB はログのデフォルトのstorageエンジンとしてRaft Engineを使用します。 RocksDB と比較して、 Raft Engine はTiKV I/O 書き込みトラフィックを最大 40% 削減し、CPU 使用率を 10% 削減すると同時に、特定の負荷の下でフォアグラウンドレイテンシーを約 5% 向上させ、テール レイテンシーを 20% 削減します。
+    v6.1.0 以降、TiDB はログのデフォルトのstorageエンジンとしてRaft Engineを使用します。 RocksDB と比較して、 Raft Engine はTiKV I/O 書き込みトラフィックを最大 40% 削減し、CPU 使用率を 10% 削減すると同時に、特定の負荷の下でフォアグラウンド スループットを約 5% 向上させ、テールレイテンシーを 20% 削減します。
 
     [ユーザードキュメント](/tikv-configuration-file.md#raft-engine) [#95](https://github.com/tikv/raft-engine/issues/95)
 
@@ -240,7 +246,7 @@ TiDB バージョン: 6.1.0
 | [tidb_max_auto_analyze_time](/system-variables.md#tidb_max_auto_analyze_time-new-in-v610)                                     | 新しく追加された | この変数は、auto analyzeの最大実行時間を指定するために使用されます。                                                                                                    |
 | [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)                                       | 新しく追加された | この変数は、リクエストを実行するためのTiFlash の最大同時実行数を設定するために使用されます。                                                                                          |
 | [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)                                                 | 新しく追加された | この設定は以前は`tidb.toml`オプション ( `oom-action` ) でしたが、TiDB v6.1.0 以降はシステム変数に変更されました。                                                               |
-| [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)                                           | 新しく追加された | この変数は[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)ユーザーによる手動実行や TiDB バックグラウンドでの自動分析タスクなど、TiDB が統計を更新するときの最大メモリ使用量を制御します。 |
+| [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)                                           | 新しく追加された | この変数は、ユーザーによる手動実行や TiDB バックグラウンドでの自動分析タスクなど、TiDB が統計を更新するときの最大メモリ使用量[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)制御します。 |
 | [`tidb_nontransactional_ignore_error`](/system-variables.md#tidb_nontransactional_ignore_error-new-in-v610)                   | 新しく追加された | この変数は、非トランザクション DML ステートメントでエラーが発生した場合に、ただちにエラーを返すかどうかを指定します。                                                                               |
 | [`tidb_prepared_plan_cache_memory_guard_ratio`](/system-variables.md#tidb_prepared_plan_cache_memory_guard_ratio-new-in-v610) | 新しく追加された | この設定は以前は`tidb.toml`オプション ( `prepared-plan-cache.memory-guard-ratio` ) でしたが、TiDB v6.1.0 以降はシステム変数に変更されました。                                   |
 | [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610)                             | 新しく追加された | この設定は以前は`tidb.toml`オプション ( `prepared-plan-cache.capacity` ) でしたが、TiDB v6.1.0 以降はシステム変数に変更されました。                                             |
@@ -381,9 +387,9 @@ TiDB バージョン: 6.1.0
 -   TiKV
 
     -   TiKV インスタンスがオフラインになったときにRaftログラグが増加する問題を修正[#12161](https://github.com/tikv/tikv/issues/12161)
-    -   マージ対象のターゲットリージョンが無効なため、TiKV がパニックを起こして予期せずピアを破棄する問題を修正します[#12232](https://github.com/tikv/tikv/issues/12232)
+    -   マージ対象のターゲットリージョンが無効であるため、TiKV がパニックを起こして予期せずピアを破棄する問題を修正します[#12232](https://github.com/tikv/tikv/issues/12232)
     -   v5.3.1 または v5.4.0 から v6.0.0 以降のバージョン[#12269](https://github.com/tikv/tikv/issues/12269)にアップグレードするときに、TiKV が`failed to load_latest_options`エラーを報告する問題を修正します。
-    -   メモリリソースが不足している場合にRaftログを追加することによって引き起こされる OOM の問題を修正します[#11379](https://github.com/tikv/tikv/issues/11379)
+    -   メモリリソースが不足している場合にRaftログを追加することによって発生する OOM の問題を修正します[#11379](https://github.com/tikv/tikv/issues/11379)
     -   ピアの破棄とリージョン[#12368](https://github.com/tikv/tikv/issues/12368)のバッチ分割の間の競合によって引き起こされる TiKVpanicの問題を修正します。
     -   `stats_monitor`デッド ループに陥った後、短時間で TiKVメモリ使用量が急増する問題を修正[#12416](https://github.com/tikv/tikv/issues/12416)
     -   Follower Read [#12478](https://github.com/tikv/tikv/issues/12478)を使用すると TiKV が`invalid store ID 0`エラーを報告する問題を修正

@@ -124,9 +124,9 @@ summary: Learn about the feature overview of TiDB.
 | 同時実行の DDL ステートメント                                                                             |  Y  |   Y   |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [`ADD INDEX`と`CREATE INDEX`の高速化](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) |  Y  |   Y   |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [メタデータロック](/metadata-lock.md)                                                                 |  Y  |   Y   |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
-| [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md)   |  Y  |   Y   |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
+| [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)                     |  Y  |   Y   |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 
-## トランザクション {#transactions}
+## 取引 {#transactions}
 
 | 取引                                                                    | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 | --------------------------------------------------------------------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |

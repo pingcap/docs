@@ -92,7 +92,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/status
 
 ```json
 {
-  "version": "v7.1.2",
+  "version": "v7.1.3",
   "git_hash": "10413bded1bdb2850aa6d7b94eb375102e9c44dc",
   "id": "d2912e63-3349-447c-90ba-72a4e04b5e9e",
   "pid": 1447,
@@ -147,7 +147,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
   "changefeed_id": "string",
   "replica_config": {
     "bdr_mode": true,
-    "case_sensitive": true,
+    "case_sensitive": false,
     "check_gc_safe_point": true,
     "consistent": {
       "flush_interval": 0,
@@ -266,7 +266,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | パラメータ名                    | 説明                                                                                                                                                                           |
 | :------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `bdr_mode`                | `BOOLEAN`タイプ。 [双方向レプリケーション](/ticdc/ticdc-bidirectional-replication.md)を有効にするかどうかを決定します。デフォルト値は`false`です。 (オプション)                                                             |
-| `case_sensitive`          | `BOOLEAN`タイプ。テーブル名をフィルタリングするときに大文字と小文字を区別するかどうかを決定します。デフォルト値は`true`です。 (オプション)                                                                                               |
+| `case_sensitive`          | `BOOLEAN`タイプ。テーブル名をフィルタリングするときに大文字と小文字を区別するかどうかを決定します。 v6.5.6 および v7.1.3 以降、デフォルト値は`true`から`false`に変更されます。 (オプション)                                                           |
 | `check_gc_safe_point`     | `BOOLEAN`タイプ。レプリケーション タスクの開始時刻が GC 時刻よりも前であることを確認するかどうかを決定します。デフォルト値は`true`です。 (オプション)                                                                                       |
 | `consistent`              | REDO ログの構成パラメータ。 (オプション)                                                                                                                                                     |
 | `enable_old_value`        | `BOOLEAN`タイプ。古い値（更新前の値）を出力するかどうかを決定します。デフォルト値は`true`です。 (オプション)                                                                                                              |
@@ -282,12 +282,17 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 
 `consistent`パラメータは次のように説明されます。
 
-| パラメータ名           | 説明                                           |
-| :--------------- | :------------------------------------------- |
-| `flush_interval` | `UINT64`タイプ。 REDO ログ ファイルをフラッシュする間隔。 (オプション) |
-| `level`          | `STRING`タイプ。レプリケートされたデータの整合性レベル。 (オプション)     |
-| `max_log_size`   | `UINT64`タイプ。 REDOログの最大値。 (オプション)             |
-| `storage`        | `STRING`タイプ。storageの宛先アドレス。 (オプション)          |
+| パラメータ名                | 説明                                                                                             |
+| :-------------------- | :--------------------------------------------------------------------------------------------- |
+| `flush_interval`      | `UINT64`タイプ。 REDO ログ ファイルをフラッシュする間隔。 (オプション)                                                   |
+| `level`               | `STRING`タイプ。レプリケートされたデータの整合性レベル。 (オプション)                                                       |
+| `max_log_size`        | `UINT64`タイプ。 REDOログの最大値。 (オプション)                                                               |
+| `storage`             | `STRING`タイプ。storageの宛先アドレス。 (オプション)                                                            |
+| `use_file_backend`    | `BOOL`タイプ。 REDO ログをローカル ファイルに保存するかどうかを指定します。 (オプション)                                           |
+| `encoding_worker_num` | `INT`タイプ。 REDO モジュール内のエンコードおよびデコード ワーカーの数。 (オプション)                                             |
+| `flush_worker_num`    | `INT`タイプ。 REDO モジュール内のフラッシュ ワーカーの数。 (オプション)                                                    |
+| `compression`         | `STRING`タイプ。 REDO ログ ファイルを圧縮する動作。利用可能なオプションは`""`と`"lz4"`です。デフォルト値は`""`で、圧縮しないことを意味します。 (オプション) |
+| `flush_concurrency`   | `INT`タイプ。単一ファイルをアップロードする際の同時実行数。デフォルト値は`1`で、同時実行が無効であることを意味します。 (オプション)                        |
 
 `filter`パラメータは次のように説明されます。
 
@@ -333,6 +338,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `terminator`                  | `STRING`タイプ。ターミネータは、2 つのデータ変更イベントを区切るために使用されます。デフォルト値は null です。これは、 `"\r\n"`がターミネータとして使用されることを意味します。 (オプション)                       |
 | `transaction_atomicity`       | `STRING`タイプ。トランザクションのアトミックレベル。 (オプション)                                                                                             |
 | `only_output_updated_columns` | `BOOLEAN`タイプ。 `canal-json`または`open-protocol`プロトコルを使用する MQ シンクの場合、変更された列のみを出力するかどうかを指定できます。デフォルト値は`false`です。 (オプション)                |
+| `cloud_storage_config`        | storageシンクの構成。 (オプション)                                                                                                             |
 
 `sink.column_selectors`は配列です。パラメータは次のように説明されます。
 
@@ -343,18 +349,19 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 
 `sink.csv`パラメータは次のように説明されます。
 
-| パラメータ名              | 説明                                                                          |
-| :------------------ | :-------------------------------------------------------------------------- |
-| `delimiter`         | `STRING`タイプ。 CSV ファイル内のフィールドを区切るために使用される文字。値は ASCII 文字である必要があり、デフォルトは`,`です。 |
-| `include_commit_ts` | `BOOLEAN`タイプ。 CSV 行に commit-t を含めるかどうか。デフォルト値は`false`です。                    |
-| `null`              | `STRING`タイプ。 CSV 列が null の場合に表示される文字。デフォルト値は`\N`です。                         |
-| `quote`             | `STRING`タイプ。 CSV ファイル内のフィールドを囲むために使用される引用符。値が空の場合、引用符は使用されません。デフォルト値は`"`です。 |
+| パラメータ名                   | 説明                                                                          |
+| :----------------------- | :-------------------------------------------------------------------------- |
+| `delimiter`              | `STRING`タイプ。 CSV ファイル内のフィールドを区切るために使用される文字。値は ASCII 文字である必要があり、デフォルトは`,`です。 |
+| `include_commit_ts`      | `BOOLEAN`タイプ。 CSV 行に commit-t を含めるかどうか。デフォルト値は`false`です。                    |
+| `null`                   | `STRING`タイプ。 CSV 列が null の場合に表示される文字。デフォルト値は`\N`です。                         |
+| `quote`                  | `STRING`タイプ。 CSV ファイル内のフィールドを囲むために使用される引用符。値が空の場合、引用符は使用されません。デフォルト値は`"`です。 |
+| `binary_encoding_method` | `STRING`タイプ。バイナリ データのエンコード方式。 `"base64"`または`"hex"`です。デフォルト値は`"base64"`です。   |
 
 `sink.dispatchers` : MQ タイプのシンクの場合、このパラメーターを使用してイベント ディスパッチャーを構成できます。次のディスパッチャーがサポートされています: `default` 、 `ts` 、 `rowid` 、および`table` 。ディスパッチャのルールは次のとおりです。
 
 -   `default` : 複数の一意のインデックス (主キーを含む) が存在する場合、イベントはテーブル モードで送出されます。一意のインデックス (または主キー) が 1 つだけ存在する場合、イベントは ROWID モードで送出されます。 Old Value 機能が有効になっている場合、イベントはテーブル モードでディスパッチされます。
 -   `ts` : 行変更の commitT を使用してハッシュ値を作成し、イベントをディスパッチします。
--   `rowid` : 選択した HandleKey 列の名前と値を使用して、ハッシュ値を作成し、イベントをディスパッチします。
+-   `rowid` : 選択した HandleKey 列の名前と値を使用してハッシュ値を作成し、イベントをディスパッチします。
 -   `table` : テーブルのスキーマ名とテーブル名を使用してハッシュ値を作成し、イベントをディスパッチします。
 
 `sink.dispatchers`は配列です。パラメータは次のように説明されます。
@@ -365,9 +372,20 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `partition` | `STRING`タイプ。イベントをディスパッチするためのターゲット パーティション。 |
 | `topic`     | `STRING`タイプ。イベントをディスパッチする対象のトピック。          |
 
+`sink.cloud_storage_config`パラメータは次のように説明されます。
+
+| パラメータ名                   | 説明                                                                                                                                                 |
+| :----------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `worker_count`           | `INT`タイプ。データをダウンストリームのクラウドstorageに保存するための同時実行性が変わります。                                                                                              |
+| `flush_interval`         | `STRING`タイプ。ダウンストリームのクラウドstorageにデータを保存する間隔が変わります。                                                                                                 |
+| `file_size`              | `INT`タイプ。データ変更ファイルのバイト数がこのパラメータの値を超えると、データ変更ファイルがクラウドstorageに保存されます。                                                                               |
+| `file_expiration_days`   | `INT`タイプ。ファイルを保持する期間。 `date-separator`が`day`として構成されている場合にのみ有効になります。                                                                                |
+| `file_cleanup_cron_spec` | `STRING`タイプ。スケジュールされたクリーンアップ タスクの実行サイクル。crontab 構成と互換性があり、形式は`<Second> <Minute> <Hour> <Day of the month> <Month> <Day of the week (Optional)>`です。 |
+| `flush_concurrency`      | `INT`タイプ。単一ファイルをアップロードする際の同時実行数。                                                                                                                   |
+
 ### 例 {#example}
 
-次のリクエストは、ID が`test5`および`sink_uri` `blackhome://`タスクを作成します。
+次のリクエストは、ID が`test5`および`sink_uri` `blackhome://`レプリケーション タスクを作成します。
 
 ```shell
 curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v2/changefeeds -d '{"changefeed_id":"test5","sink_uri":"blackhole://"}'
@@ -384,7 +402,7 @@ curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v2
   "checkpoint_ts": 0,
   "config": {
     "bdr_mode": true,
-    "case_sensitive": true,
+    "case_sensitive": false,
     "check_gc_safe_point": true,
     "consistent": {
       "flush_interval": 0,
@@ -519,7 +537,7 @@ curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v2
 | `resolved_ts`     | `UINT64`タイプ。レプリケーション タスクにより ts が解決されました。                                               |
 | `sink_uri`        | `STRING`タイプ。レプリケーション タスクのシンク URI。                                                      |
 | `start_ts`        | `UINT64`タイプ。レプリケーション タスクが ts を開始します。                                                   |
-| `state`           | `STRING`タイプ。レプリケーションタスクのステータス。 `normal` 、または`finished` `failed` `error` `stopped`なります。 |
+| `state`           | `STRING`タイプ。レプリケーションタスクのステータス。 `normal` 、または`finished` `failed` `stopped` `error`なります。 |
 | `target_ts`       | `UINT64`タイプ。レプリケーションタスクのターゲット ts。                                                      |
 | `task_status`     | レプリケーションタスクのディスパッチの詳細なステータス。                                                           |
 
@@ -588,7 +606,7 @@ curl -X DELETE http://127.0.0.1:8300/api/v2/changefeeds/test1
 {
   "replica_config": {
     "bdr_mode": true,
-    "case_sensitive": true,
+    "case_sensitive": false,
     "check_gc_safe_point": true,
     "consistent": {
       "flush_interval": 0,

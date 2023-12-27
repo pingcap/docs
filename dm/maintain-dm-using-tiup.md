@@ -344,7 +344,7 @@ tiup dmctl --master-addr master1:8261 operate-source create /tmp/source1.yml
 
 次に、 `--native-ssh`コマンド ライン フラグを使用して、システム ネイティブのコマンド ライン ツールを有効にします。
 
--   クラスターをデプロイ。 `tiup dm deploy <cluster-name> <version> <topo> --native-ssh` . `<cluster-name>`にはクラスターの名前を、 `<version>`にはデプロイする DM バージョン ( `v7.1.2`など)、 `<topo>`にはトポロジ ファイル名を入力します。
+-   クラスターをデプロイ。 `tiup dm deploy <cluster-name> <version> <topo> --native-ssh` . `<cluster-name>`にはクラスターの名前を、 `<version>`にはデプロイする DM バージョン ( `v7.1.3`など)、 `<topo>`にはトポロジ ファイル名を入力します。
 -   クラスターを開始します。 `tiup dm start <cluster-name> --native-ssh` .
 -   クラスターのアップグレード: `tiup dm upgrade ... --native-ssh`
 

@@ -181,7 +181,7 @@ bundle add mysql2 dotenv
 
 接続が成功すると、コンソールには次のように TiDB クラスターのバージョンが出力されます。
 
-    🔌 Connected to TiDB cluster! (TiDB version: 5.7.25-TiDB-v7.1.0)
+    🔌 Connected to TiDB cluster! (TiDB version: 5.7.25-TiDB-v7.1.3)
     ⏳ Loading sample game data...
     ✅ Loaded sample game data.
 
