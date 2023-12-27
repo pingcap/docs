@@ -63,8 +63,6 @@ As changes to one documentation version often apply to other documentation versi
 
 - If most of your changes apply to multiple documentation versions but some differences exist among versions, besides adding the cherry-pick labels to all the target versions, you also need to add the `requires-version-specific-change` label as a reminder to the PR reviewer. After your PR is merged and ti-chi-bot creates the corresponding cherry-pick PRs, you can still make changes to these cherry-pick PRs.
 
-- If most of your changes apply to multiple docs versions but some differences exist among versions, you still can use cherry-pick labels to let ti-chi-bot create PRs to other versions. After the PR to another version is successfully submitted by ti-chi-bot, you can make changes to that PR.
-
 ## How to contribute
 
 Please perform the following steps to create your Pull Request to this repository. If don't like to use commands, you can also use [GitHub Desktop](https://desktop.github.com/), which is easier to get started.
