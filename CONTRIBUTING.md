@@ -8,6 +8,7 @@ Welcome to [TiDB](https://github.com/pingcap/tidb) documentation! We are excited
 
 - **Dates/Time:** January 9 at 08:00 UTC ([your local time](https://www.timeanddate.com/worldclock/fixedtime.html?msg=TiDB+Docs+Dash+2024%3A+Start&iso=20240109T08&p1=1440))  – January 12 at 07:59 UTC ([your local time](https://www.timeanddate.com/worldclock/fixedtime.html?msg=TiDB+Docs+Dash+2024%3A+End&iso=20240112T0759&p1=1440))
 - **Event details**: <https://www.pingcap.com/event/tidb-docs-dash/>
+- **Issue list**: <https://github.com/orgs/pingcap/projects/51/views/3>
 - **Participation introduction**: <https://github.com/pingcap/docs/issues/15479>
 
 In addition to the issues and tasks in the event, you can also start from any one of the following items to help improve [TiDB Docs at the PingCAP website](https://docs.pingcap.com/tidb/stable):
@@ -61,7 +62,7 @@ As changes to one documentation version often apply to other documentation versi
 
 - If your changes apply to multiple documentation versions, instead of creating multiple PRs, you can just create one PR based on the latest applicable branch (such as `master`), and then add one or several `needs-cherry-pick-release-<version>` labels to the PR according to the applicable documentation versions. Then, after the PR is merged, ti-chi-bot will automatically create the corresponding cherry-pick PRs based on the branches of the specified versions.
 
-- If most of your changes apply to multiple documentation versions but some differences exist among versions, besides adding the cherry-pick labels to all the target versions, you also need to add the `requires-version-specific-change` label as a reminder to the PR reviewer. After your PR is merged and ti-chi-bot creates the corresponding cherry-pick PRs, you can still make changes to these cherry-pick PRs.
+- If most of your changes apply to multiple documentation versions but some differences exist among versions, in addition to the cherry-pick labels for all the target versions, you also need to add the `requires-version-specific-change` label as a reminder to the PR reviewer. After your PR is merged and ti-chi-bot creates the corresponding cherry-pick PRs, you can still make changes to these cherry-pick PRs.
 
 ## How to contribute
 
