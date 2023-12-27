@@ -92,9 +92,6 @@ To connect to a TiDB Dedicated cluster via VPC peering, [set up a VPC peering co
 
 For connectivity, the steps for using TiDB Cloud clusters as a source or as a target are similar, but DMS does have some different database setting requirements for source and target. For more information, see [Using MySQL as a source](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.html) or [Using MySQL as a target](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.html). When using a TiDB Cloud cluster as a source, you can only **Migrate existing data** because TiDB does not support MySQL binlog.
 
-<SimpleTab>
-<div label="TiDB Serverless">
-
 1. Go to the [Endpoints](https://console.aws.amazon.com/dms/v2/home#endpointList) page in the AWS DMS console, and switch to the corresponding region.
 
     ![Create endpoint](/media/tidb-cloud/integration-aws-dms-3.png)
@@ -104,6 +101,9 @@ For connectivity, the steps for using TiDB Cloud clusters as a source or as a ta
 3. Select **Source endpoint** or **Target endpoint**.
 
 4. Fill in the **Endpoint identifier** and ARN, and then select **Source engine** or **Target engine** as **MySQL**.
+
+<SimpleTab>
+<div label="TiDB Serverless">
 
 5. Choose **Provide access information manually** and fill in TiDB Serverless cluster information:
    - **Server name**: `HOST` of TiDB Serverless cluster.
@@ -115,22 +115,9 @@ For connectivity, the steps for using TiDB Cloud clusters as a source or as a ta
   
     ![Provide access information manually](/media/tidb-cloud/integration-aws-dms-4.png)
 
-6. If the endpoint to be created is a **Target endpoint**, set **Extra connection attributes** to `Initstmt=SET FOREIGN_KEY_CHECKS=0;`.
-
-7. Configure the **KMS Key** and **Tags** if needed. Click **Create endpoint** to finish the instance creation.
 </div>
 
 <div label="TiDB Dedicated">
-
-1. Go to the [Endpoints](https://console.aws.amazon.com/dms/v2/home#endpointList) page in the AWS DMS console, and switch to the corresponding region.
-   
-    ![Create endpoint](/media/tidb-cloud/integration-aws-dms-3.png)
-
-2. Click **Create endpoint** to create the target database endpoint.
-
-3. Select **Source endpoint** or **Target endpoint**.
-
-4. Fill in the **Endpoint identifier** and ARN, and then select **Source engine** or **Target engine** as **MySQL**.
 
 5. Choose **Provide access information manually** and fill in TiDB Dedicated cluster information:
    - **Server name**: `HOST` of TiDB Dedicated cluster.
@@ -142,8 +129,9 @@ For connectivity, the steps for using TiDB Cloud clusters as a source or as a ta
 
     ![Provide access information manually](/media/tidb-cloud/integration-aws-dms-4.png)
 
-6. If it's **Target endpoint**, set **Extra connection attributes** to `Initstmt=SET FOREIGN_KEY_CHECKS=0;`.
-
-7. Configure the **KMS Key** and **Tags** if needed. Click **Create endpoint** to finish the instance creation.
 </div>
 </SimpleTab>
+
+6. If the endpoint to be created is a **Target endpoint**, set **Extra connection attributes** to `Initstmt=SET FOREIGN_KEY_CHECKS=0;`.
+
+7. Configure the **KMS Key** and **Tags** if needed. Click **Create endpoint** to finish the instance creation.

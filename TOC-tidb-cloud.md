@@ -285,6 +285,7 @@
     - [v1beta1](https://docs.pingcap.com/tidbcloud/api/v1beta1)
     - [v1beta](https://docs.pingcap.com/tidbcloud/api/v1beta)
 - Integrations
+  - [AWS DMS](/tidb-cloud/integrate-tidbcloud-with-aws-dms.md)
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
   - [Amazon AppFlow](/develop/dev-guide-aws-appflow-integration.md)
   - [Cloudflare](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)
