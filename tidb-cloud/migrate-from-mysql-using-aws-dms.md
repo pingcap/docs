@@ -181,7 +181,7 @@ If you encounter any issues or failures during the migration, you can check the 
 
 ## See also
 
-- If you want a more general reference on how to connect AWS DMS to TiDB Serverless or TiDB Dedicated, see [Integrate TiDB Cloud with AWS DMS](/tidb-cloud/integrate-tidbcloud-with-aws-dms.md).
+- If you want a more general reference on how to connect AWS DMS to TiDB Serverless or TiDB Dedicated, see [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md).
 
 - If you want to migrate from MySQL-compatible databases, such as Aurora MySQL and Amazon Relational Database Service (RDS), to TiDB Cloud, it is recommended to use [Data Migration on TiDB Cloud](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
 
