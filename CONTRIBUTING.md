@@ -163,4 +163,4 @@ If your change fits one of the following situations, **CHOOSE THE AFFECTED RELEA
 
 ## Contact
 
-Join the [TiDB Internals forum](https://internals.tidb.io/) for discussion.
+Join [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) for discussion.
