@@ -19,11 +19,7 @@ This TiDB statement is not applicable to TiDB Cloud.
 
 `IMPORT INTO` supports importing data from files stored in Amazon S3, GCS, and the TiDB local storage.
 
-<<<<<<< HEAD
-- For data files stored in Amazon S3, GCS, or Azure Blob Storage, `IMPORT INTO` supports running in the [TiDB backend task distributed execution framework](/tidb-distributed-execution-framework.md).
-=======
 - For data files stored in Amazon S3 or GCS, `IMPORT INTO` supports running in the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md).
->>>>>>> 7752b8ad60 (Removed unsupported Azure Blob storage via import into (#15859))
 
     - When this framework is enabled ([tidb_enable_dist_task](/system-variables.md#tidb_enable_dist_task-new-in-v710) is `ON`), `IMPORT INTO` splits a data import job into multiple sub-jobs and distributes these sub-jobs to different TiDB nodes for execution to improve the import efficiency.
     - When this framework is disabled, `IMPORT INTO` only supports running on the TiDB node where the current user is connected.
