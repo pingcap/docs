@@ -74,7 +74,7 @@ For TiDB Dedicated, your clients can connect to clusters via public endpoint, pr
 
 5. Configure the storage in the **Allocated storage (GiB)** field.
 
-6. Configure connectivity and security. Check previous section for network configuration.
+6. Configure connectivity and security. You can check [the previous section](#network-configuration) for network configuration.
     - **Network type - new**: select **IPv4**.
     - **Virtual private cloud (VPC) for IPv4**: select the VPC that you need.
     - **Replication subnet group**: choose a subnet group for your replication instance.
