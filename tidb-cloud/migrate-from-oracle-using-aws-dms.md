@@ -91,7 +91,7 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
 > **Note:**
 >
-> If you want a more thorough reference on creating AWS DMS replication instance to work with TiDB Serverless, refer to [Integrate TiDB Cloud with AWS DMS](/tidb-cloud/integrate-tidbcloud-with-aws-dms.md).
+> For detailed steps on creating an AWS DMS replication instance to work with TiDB Serverless, see [Integrate TiDB Cloud with AWS DMS](/tidb-cloud/integrate-tidbcloud-with-aws-dms.md).
 
 ## Step 6. Create DMS endpoints
 
@@ -109,7 +109,7 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
 > **Note:**
 >
-> If you want a more thorough reference on creating TiDB Serverelss DMS endpoint, refer to [Integrate TiDB Cloud with AWS DMS](/tidb-cloud/integrate-tidbcloud-with-aws-dms.md).
+> For detailed steps on creating a TiDB Serverless DMS endpoint, see [Integrate TiDB Cloud with AWS DMS](/tidb-cloud/integrate-tidbcloud-with-aws-dms.md).
 
 ## Step 7. Migrate the schema
 
