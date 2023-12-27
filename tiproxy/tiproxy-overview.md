@@ -120,7 +120,8 @@ When using TiUP to change the TiProxy configuration, if the configuration item t
 
 - TiProxy only supports TiDB v6.5.0 and later versions.
 - TiProxy's TLS connection has incompatible features with TiDB. For details, see [Security](#security).
-- TiUP supports TiProxy from v1.14.1, and TiDB Operator supports TiProxy from v1.5.2.
+- TiDB Dashboard and Grafana support TiProxy from v7.6.0.
+- TiUP supports TiProxy from v1.14.1, and TiDB Operator supports TiProxy from v1.5.1.
 - Because the interface provided by the status port of TiProxy is different from that of TiDB server, when using [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to import data, the target database should be the address of TiDB server, not the address of TiProxy.
 
 ## Security

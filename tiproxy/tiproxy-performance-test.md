@@ -9,8 +9,8 @@ This report tests the performance of TiProxy in the OLTP scenario of Sysbench an
 
 The results are as follows:
 
-- The QPS upper limit of TiProxy is affected by the type of load. Under the basic load of Sysbench and the same CPU usage, the QPS of TiProxy is about 20% to 40% lower than that of HAProxy.
-- The number of TiDB server instances that TiProxy can hold varies according to the type of load. Under the basic load of Sysbench, a TiProxy can hold 4 to 10 TiDB server instances of the same model.
+- The QPS upper limit of TiProxy is affected by the type of workload. Under the basic workloads of Sysbench and the same CPU usage, the QPS of TiProxy is about 20% to 40% lower than that of HAProxy.
+- The number of TiDB server instances that TiProxy can hold varies according to the type of workload. Under the basic workloads of Sysbench, a TiProxy can hold 4 to 10 TiDB server instances of the same model.
 - The performance of TiProxy is more affected by the number of vCPUs, compared to HAProxy. When the returned data is 10,000 rows and the CPU usage is the same, the QPS of TiProxy is about 30% lower than that of HAProxy.
 - The performance of TiProxy increases almost linearly with the number of vCPUs. Therefore, increasing the number of vCPUs can effectively improve the QPS upper limit.
 
@@ -78,11 +78,11 @@ listen tidb-cluster                         # Configure database load balancing.
     server tidb-3 10.9.64.166:4000 check inter 2000 rise 2 fall 3
 ```
 
-## Basic load test
+## Basic workload test
 
 ### Test plan
 
-This test aims to compare the QPS of TiProxy and HAProxy under four types of loads: point select, read only, write only, and read write. Each type of load is tested with different concurrency to compare the QPS of TiProxy and HAProxy.
+This test aims to compare the QPS of TiProxy and HAProxy under four types of workloads: point select, read only, write only, and read write. Each type of workload is tested with different concurrency to compare the QPS of TiProxy and HAProxy.
 
 The following command is used to perform the test:
 

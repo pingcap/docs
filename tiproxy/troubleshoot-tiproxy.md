@@ -25,7 +25,7 @@ You can troubleshoot the issue by following these steps:
 
 You can troubleshoot the issue by following these steps:
 
-1. Whether the [TiProxy limitations](/tiproxy/tiproxy-overview.md#limitations) is not met. You can further confirm this by checking the TiProxy log.
+1. Whether the [TiProxy limitations](/tiproxy/tiproxy-overview.md#limitations) are not met. You can further confirm this by checking the TiProxy log.
 2. Whether [`security.session-token-signing-cert`](/tidb-configuration-file.md#session-token-signing-cert), [`security.session-token-signing-key`](/tidb-configuration-file.md#session-token-signing-key), and [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) are correctly configured on TiDB.
 
 ## Unbalanced CPU usage on TiDB server

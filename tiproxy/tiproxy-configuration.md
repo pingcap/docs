@@ -41,6 +41,7 @@ Configuration for SQL port.
 #### `addr`
 
 + Default value: `0.0.0.0:6000`
++ Support hot-reload: no
 + SQL gateway address. The format is `<ip>:<port>`.
 
 #### `graceful-wait-before-shutdown`
@@ -48,14 +49,14 @@ Configuration for SQL port.
 + Default value: `0`
 + Support hot-reload: yes
 + Unit: second
-+ When the HTTP status is unhealthy, the SQL port accepts new connections for the last `graceful-wait-before-shutdown` seconds. After that, it rejects new connections and drains clients. It is recommended to set it to `0` when there are no other proxies (e.g. NLB) between the client and TiProxy.
++ When TiProxy shuts down, the HTTP status returns unhealthy but the SQL port still accepts new connections for `graceful-wait-before-shutdown` seconds. After that, it rejects new connections and drains clients. It is recommended to set it to `0` when there are no other proxies (e.g. NLB) between the client and TiProxy.
 
 #### `graceful-close-conn-timeout`
 
 + Default value: `15`
 + Support hot-reload: yes
 + Unit: second
-+ Close connections when they have completed their current transactions (also known as draining clients) within `graceful-close-conn-timeout` seconds. It is recommended to set this timeout longer than the lifecycle of a transaction.
++ When TiProxy shuts down, it closes connections when they have completed their current transactions (also known as draining clients) within `graceful-close-conn-timeout` seconds. After that, all the connections are closed at once. `graceful-close-conn-timeout` happens after `graceful-wait-before-shutdown`. It is recommended to set this timeout longer than the lifecycle of a transaction.
 
 #### `max-connections`
 
@@ -65,27 +66,28 @@ Configuration for SQL port.
 
 #### `conn-buffer-size`
 
-+ Default value: `0`
++ Default value: `32768`
 + Support hot-reload: yes, but for new connections
 + Range: `[1024, 16777216]`
-+ This configuration item lets you decide the connection buffer size in bytes, e.g. `1024` means 1K buffer. The minimum size is `1K`, and the maximum size is `16M`. It is a tradeoff between memory and performance. By default, when it is `0`, TiProxy will use a buffer of default size. However, a larger buffer might yield better performance results. 
++ This configuration item lets you decide the connection buffer size. Each connection uses one read buffer and one write buffer. It is a tradeoff between memory and performance. A larger buffer might yield better performance results but consume more memory. When it is `0`, TiProxy uses the default buffer size.
 
 #### `pd-addrs`
 
 + Default value: `127.0.0.1:2379`
++ Support hot-reload: no
 + The PD addresses TiProxy connects to. TiProxy discovers TiDB instances by fetching the TiDB list from the PD. It is set automatically when TiProxy is deployed by TiUP or TiDB Operator.
 
 #### `proxy-protocol`
 
 + Default value: ``
-+ Support hot-reload: yes
-+ Possible values: `v2`
-+ Enable proxy protocol handling on the port. You can specify `v2` to handle proxy protocol version 2. `v1` is not supported.
++ Support hot-reload: yes, but for new connections
++ Possible values: ``, `v2`
++ Enable the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) on the port. By enabling the PROXY protocol, TiProxy can pass the real client IP address to TiDB. `v2` indicates using the PROXY protocol version 2, and `` indicates disabling the PROXY protocol. If the PROXY protocol is enabled on TiProxy, you need to also enable the [PROXY protocol](/tidb-configuration-file/#proxy-protocol) on the TiDB server.
 
 #### `require-backend-tls`
 
 + Default value: `true`
-+ Support hot-reload: yes
++ Support hot-reload: yes, but for new connections
 + Require TLS between TiProxy and TiDB servers. If the TiDB server doesn't support TLS, clients will report an error when connecting to TiProxy.
 
 ### api
@@ -95,13 +97,14 @@ Configurations for HTTP gateway.
 #### `addr`
 
 + Default value: `0.0.0.0:3090`
++ Support hot-reload: no
 + API gateway address. You can specify `ip:port`.
 
 #### `proxy-protocol`
 
 + Default value: ``
-+ Possible values: `v2`
-+ Enable proxy protocol handling on the port. You can specify `v2` to handle proxy protocol version 2. `v1` is not supported.
++ Possible values: ``, `v2`
++ Enable the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) on the port. `v2` indicates using the PROXY protocol version 2, and `` indicates disabling the PROXY protocol.
 
 ### log
 
@@ -127,13 +130,14 @@ Configurations for HTTP gateway.
 
 + Default value: ``
 + Support hot-reload: yes
-+ Log file path. Non empty value will enable logging to file.
++ Log file path. Non empty value will enable logging to file. When TiProxy is deployed with TiUP, the filename is set automatically.
 
 #### `max-size`
 
 + Default value: `300`
 + Support hot-reload: yes
-+ Specifies the maximum size, in megabytes, for log files. Logs will be rotated.
++ Unit: MB
++ Specifies the maximum size for log files. A log file will be rotated if its size exceeds this limit.
 
 #### `max-days`
 
@@ -168,7 +172,7 @@ TLS object fields:
 + `key`: specifies the private key
 + `auto-certs`: mostly used for tests. It generates certificates if no certificate/key is specified.
 + `skip-ca`: skips verifying certificates using CA on client object or skips server-side verification on server object.
-+ `min-tls-version`: sets the minimum TLS version.
++ `min-tls-version`: sets the minimum TLS version. Possible values are `1.0`、`1.1`、`1.2`, and `1.3`. The default value is `1.1`, which allows v1.1 or higher TLS versions.
 + `rsa-key-size`: sets the RSA key size when `auto-certs` is enabled.
 + `autocert-expire-duration`: sets the default expiration duration for auto-generated certificates.
 
@@ -182,7 +186,7 @@ For client TLS object:
 
 For server TLS object:
 
-+ You must set either `cert`/`key` or `auto-certs` to generate a temporary certificate, mainly for testing purposes.
++ You can set either `cert`/`key` or `auto-certs` to support TLS connections. Otherwise, TiProxy doesn't support TLS connections.
 + Optionally, if `ca` is not empty, it enables server-side client verification. The client must provide their certificates. Alternatively, if both `skip-ca` is true and `ca` is not empty, the server will only verify client certificates if they provide one.
 
 #### `cluster-tls`
