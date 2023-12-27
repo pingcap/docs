@@ -827,7 +827,7 @@ This API is a synchronous interface. If the request is successful, the synchroni
 |:----------------|:----------------------------|
 | `changefeed_id` | The ID of the replication task (changefeed) to be queried. |
 
-### Example
+### Examples
 
 The following request queries the synchronization status of the replication task with the ID `test1`.
 
@@ -850,12 +850,12 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeed/test1/synced
 
 The parameters are described as follows:
 
-- `synced`: whether this replication task is completed. `true` means the task is completed. `false` means potential incompleteness, in which case you need to check both the `info` field and other fields for the specific status.
+- `synced`: whether this replication task is completed. `true` means the task is completed, and `false` means potential incompleteness. If it is `false`, you need to check both the `info` field and other fields for the specific status.
 - `sink_checkpoint_ts`: the checkpoint-ts value of the sink module, in PD time.
 - `puller_resolved_ts`: the resolved-ts value of the puller module, in PD time.
 - `last_synced_ts`: the commit-ts value of the latest data processed by TiCDC, in PD time.
 - `now_ts`: current PD time.
-- `info`: some information to assist in determining the synchronization status, especially when `synced` is `false`.
+- `info`: supplementary information to assist in determining the synchronization status, especially when `synced` is `false`.
 
 **Example 2: The synchronization is not completed**
 
@@ -870,7 +870,7 @@ The parameters are described as follows:
 }
 ```
 
-This example shows the query result of an ongoing replication task. By checking both the `synced` and `info` fields, you can learn that the replication task is not completed yet and further waiting is expected.
+This example shows the query result of an ongoing replication task. By checking both `synced` and `info` fields, you can learn that the replication task is not completed yet and further waiting is expected.
 
 **Example 3: The synchronization status needs further check**
 
@@ -885,7 +885,7 @@ This example shows the query result of an ongoing replication task. By checking 
 }
 ```
 
-This API enables you to query the synchronization status even when the upstream cluster encounters disasters. In some cases, you might not be able to directly determine whether the current data replication task of TiCDC is completed or not. In this case, you can query this API, and then check both the `info` field in the result and the current status of the upstream cluster to learn the specific status.
+This API enables you to query the synchronization status even when the upstream cluster encounters disasters. In certain situations, you might not be able to directly determine whether the current data replication task of TiCDC is completed or not. In such cases, you can query this API, and then check both the `info` field in the result and the current status of the upstream cluster to learn the specific status.
 
 In this example, `sink_checkpoint_ts` is behind `now_ts` in time, either because TiCDC is still catching up with data replication, or because the PD or TiKV has failed. If this is due to TiCDC still catching up with data replication, it means that the replication task is not completed yet. If this is due to a PD or TiKV failure, it means that the replication task is completed. Therefore, you need to check the `info` field to assist in determining the cluster status.
 
@@ -898,7 +898,7 @@ In this example, `sink_checkpoint_ts` is behind `now_ts` in time, either because
 }
 ```
 
-After PD in the upstream cluster fails for a long period of time, querying this API will return an error similar to the preceding one, which does not provide any information for further judgment. Because PD failures directly affect TiCDC data replication, when encountering such errors, you can assume that TiCDC has completed the data replication as much as possible, but data loss might still occur to the downstream cluster due to PD failures.
+In cases where PD in the upstream cluster fails for a long period of time, querying this API might return an error similar to the preceding one, which provides no information for further check. Because PD failures directly affect TiCDC data replication, when getting such errors, you can assume that TiCDC has completed the data replication as much as possible, but data loss might still occur to the downstream cluster due to PD failures.
 
 ## Pause a replication task
 
