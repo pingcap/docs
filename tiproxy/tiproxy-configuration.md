@@ -109,7 +109,7 @@ Configurations for HTTP gateway.
 
 + Default value: `info`
 + Support hot-reload: yes
-+ Possible values: `debug`, `info`, `warn`, `panic`
++ Possible values: `debug`, `info`, `warn`, `error`, `panic`
 + Specify log level. With `panic` level, TiProxy will panic on errors.
 
 #### `encoder`
