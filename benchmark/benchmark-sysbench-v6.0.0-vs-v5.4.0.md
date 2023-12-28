@@ -1,6 +1,6 @@
 ---
 title: TiDB Sysbench Performance Test Report -- v6.0.0 vs. v5.4.0
-summary: TiDB v6.0.0 shows a 16.17% improvement in read-write workload performance compared to v5.4.0. Other workloads show similar performance between the two versions. The test environment includes AWS EC2 instances and the software versions used are PD v5.4.0 and v6.0.0, TiDB v5.4.0 and v6.0.0, TiKV v5.4.0 and v6.0.0, and Sysbench 1.1.0-df89d34. The parameter configurations for TiDB, TiKV, and global variables are also provided. The test plan involves deploying TiDB, importing tables, executing statements, and performing stress tests via HAProxy. Test results show performance comparisons for point select, update non-index, update index, and read-write workloads.
+summary: TiDB v6.0.0 shows a 16.17% improvement in read-write workload performance compared to v5.4.0. Other workloads show similar performance between the two versions. Test results show performance comparisons for point select, update non-index, update index, and read-write workloads.
 ---
 
 # TiDB Sysbench Performance Test Report -- v6.0.0 vs. v5.4.0
