@@ -96,7 +96,7 @@ For details, see [CREATE INDEX - Expression index](/sql-statements/sql-statement
 
 Garbage collection (GC) is the memory resource management mechanism in TiDB. When old data in dynamic memory is no longer needed, it is cleaned up to free up memory.
 
-For details, see [GC Overview](/garbage-collection-overview.md).
+For details, see [GC Overview](/garbage-collection-overview.md) and [GC Configuration](/garbage-collection-configuration.md).
 
 ## H
 
