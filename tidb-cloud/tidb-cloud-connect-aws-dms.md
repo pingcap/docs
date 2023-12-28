@@ -25,7 +25,7 @@ You are expected to have a TiDB Cloud account and a TiDB Serverless or TiDB Dedi
 
 ## Network configuration
 
-Before creating DMS resources, you need to configure network properly to ensure DMS can communicate with TiDB Cloud clusters. If you are unfamiliar with AWS, contact AWS Support. We give several possible configurations here.
+Before creating DMS resources, you need to configure network properly to ensure DMS can communicate with TiDB Cloud clusters. If you are unfamiliar with AWS, contact AWS Support. The following provides several possible configurations for your reference.
 
 <SimpleTab>
 
