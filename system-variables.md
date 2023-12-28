@@ -1945,7 +1945,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
-- This variable controls whether spill could be triggered in parallel HashAgg. When it's `true`, parallel HashAgg will support the disk spill. This variable will be aborted when this feature is official released.
+- This variable controls whether spill could be triggered in parallel HashAgg. When it's `ON`, parallel HashAgg will support the disk spill. This variable will be aborted when this feature is official released.
 
 ### tidb_enable_enhanced_security
 
