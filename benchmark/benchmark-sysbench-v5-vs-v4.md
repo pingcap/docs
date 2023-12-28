@@ -1,6 +1,6 @@
 ---
 title: TiDB Sysbench Performance Test Report -- v5.0 vs. v4.0
-summary: TiDB v5.0 outperforms v4.0 in Sysbench performance tests. Point Select performance improved by 2.7%, Update Non-index by 81%, Update Index by 28%, and Read Write by 9%. The test aimed to compare performance in the OLTP scenario using AWS EC2. Hardware and software configurations were specified for both versions. Test plan included data preparation and execution. Test results were presented in tables and graphs.
+summary: TiDB v5.0 outperforms v4.0 in Sysbench performance tests. Point Select performance improved by 2.7%, Update Non-index by 81%, Update Index by 28%, and Read Write by 9%. The test aimed to compare performance in the OLTP scenario using AWS EC2. Test results were presented in tables and graphs.
 ---
 
 # TiDB Sysbench Performance Test Report -- v5.0 vs. v4.0
@@ -109,7 +109,7 @@ set global tidb_hashagg_partial_concurrency=1;
 set global tidb_enable_async_commit = 1;
 set global tidb_enable_1pc = 1;
 set global tidb_guarantee_linearizability = 0;
-set global tidb_enable_clustered_index = 1; 
+set global tidb_enable_clustered_index = 1;
 
 ```
 
