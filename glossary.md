@@ -147,6 +147,10 @@ Starting from v5.0, TiDB introduces Massively Parallel Processing (MPP) architec
 
 The "original value" in the incremental change log output by TiCDC. You can specify whether the incremental change log output by TiCDC contains the "original value".
 
+### Online analytical processing (OLAP)
+
+Online Analytical Processing (OLAP) refers to the use of database systems to perform analysis of data for business intelligence and decision-making purposes.
+
 ### Online transactional processing (OLTP)
 
 Online transactional processing (OLTP) refers to the use of computer systems to process transactional data.
