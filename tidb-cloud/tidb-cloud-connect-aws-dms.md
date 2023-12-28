@@ -111,23 +111,23 @@ For connectivity, the steps for using TiDB Cloud clusters as a source or as a ta
 
     <div label="TiDB Serverless">
 
-   - **Server name**: `HOST` of TiDB Serverless cluster.
-   - **Port**: `PORT` of TiDB Serverless cluster.
-   - **User name**: User of TiDB Serverless cluster for migration. Make sure it meets DMS requirements.
-   - **Password**: Password of the TiDB Serverless cluster user.
-   - **Secure Socket Layer (SSL) mode**: If you are connecting via public endpoint, it is highly recommended to set the mode to **verify-full** to ensure transport security. If you are connecting via private endpoint, you can set the mode to **none**.
-   - **CA certificate**: [ISRG Root X1 certificate](https://letsencrypt.org/certs/isrgrootx1.pem). For more information, see [TLS Connections to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md).
+    - **Server name**: `HOST` of TiDB Serverless cluster.
+    - **Port**: `PORT` of TiDB Serverless cluster.
+    - **User name**: User of TiDB Serverless cluster for migration. Make sure it meets DMS requirements.
+    - **Password**: Password of the TiDB Serverless cluster user.
+    - **Secure Socket Layer (SSL) mode**: If you are connecting via public endpoint, it is highly recommended to set the mode to **verify-full** to ensure transport security. If you are connecting via private endpoint, you can set the mode to **none**.
+    - **CA certificate**: [ISRG Root X1 certificate](https://letsencrypt.org/certs/isrgrootx1.pem). For more information, see [TLS Connections to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md).
 
     </div>
 
     <div label="TiDB Dedicated">
 
-   - **Server name**: `HOST` of TiDB Dedicated cluster.
-   - **Port**: `PORT` of TiDB Dedicated cluster.
-   - **User name**: User of TiDB Dedicated cluster for migration. Make sure it meets DMS requirements.
-   - **Password**: Password of TiDB Dedicated cluster user.
-   - **Secure Socket Layer (SSL) mode**: If you are connecting via public endpoint, we highly recommend setting it to **verify-full** to ensure transport security. If you are connecting via private endpoint, you can set it to **none**.
-   - **CA certificate**: Get the CA certificate according to [TLS Connections to TiDB Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md).
+    - **Server name**: `HOST` of TiDB Dedicated cluster.
+    - **Port**: `PORT` of TiDB Dedicated cluster.
+    - **User name**: User of TiDB Dedicated cluster for migration. Make sure it meets DMS requirements.
+    - **Password**: Password of TiDB Dedicated cluster user.
+    - **Secure Socket Layer (SSL) mode**: If you are connecting via public endpoint, we highly recommend setting it to **verify-full** to ensure transport security. If you are connecting via private endpoint, you can set it to **none**.
+    - **CA certificate**: Get the CA certificate according to [TLS Connections to TiDB Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md).
 
     </div>
     </SimpleTab>
