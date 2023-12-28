@@ -121,7 +121,9 @@ tiup br restore full \
 
 ### Restore tables in the `mysql` schema
 
-Starting from BR v5.1.0, when you back up snapshots, BR automatically backs up the **system tables** in the `mysql` schema, but does not restore these system tables by default. Starting from v6.2.0, BR adds `--with-sys-table` to support restoring **data in some system tables**. Starting from v7.6.0, BR enables `--with-sys-table` by default, which means that BR supports restoring **data in some system tables** by default.
+- Starting from BR v5.1.0, when you back up snapshots, BR automatically backs up the **system tables** in the `mysql` schema, but does not restore these system tables by default. 
+- Starting from v6.2.0, BR lets you specify `--with-sys-table` to restore **data in some system tables**. 
+- Starting from v7.6.0, BR enables `--with-sys-table` by default, which means that BR restores **data in some system tables** by default.
 
 **BR can restore data in the following system tables:**
 
