@@ -171,8 +171,7 @@ tiup br restore full \
 
 When you restore data related to system privilege, note the following:
 
-- BR does not restore user data with `user` as `cloud_admin` and `host` as `'%'`. This user is reserved for TiDB Cloud. Do not create a user or role named `cloud_admin` in your cluster, because the user privileges related to `cloud_admin` cannot be restored correctly.
-- Before v7.6.0, BR does not restore user data with `user` as `cloud_admin` and `host` as `'%'`. This user is reserved for TiDB Cloud. Starting from v7.6.0, BR supports restoring all user data including `cloud_admin` by default.
+- Before v7.6.0, BR does not restore user data with `user` as `cloud_admin` and `host` as `'%'`. This user is reserved for TiDB Cloud. Starting from v7.6.0, BR supports restoring all user data (including `cloud_admin`) by default.
 - Before restoring data, BR checks whether the system tables in the target cluster are compatible with those in the backup data. "Compatible" means that all the following conditions are met:
 
     - The target cluster has the same system tables as the backup data.
