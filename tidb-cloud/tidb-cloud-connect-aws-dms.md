@@ -64,7 +64,7 @@ For TiDB Dedicated, your clients can connect to clusters via public endpoint, pr
 
 1. In the AWS DMS console, go to the [**Replication instances**](https://console.aws.amazon.com/dms/v2/home#replicationInstances) page and switch to the corresponding region. It is recommended to use the same region for AWS DMS as TiDB Cloud.
 
-   ![Create replication instance](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-1.png)
+   ![Create replication instance](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-replication-instances.png)
 
 2. Click **Create replication instance**.
 
@@ -84,7 +84,7 @@ For TiDB Dedicated, your clients can connect to clusters via public endpoint, pr
     - **Replication subnet group**: select a subnet group for your replication instance.
     - **Public accessible**: set it based on your network configuration.
 
-    ![Connectivity and security](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-2.png)
+    ![Connectivity and security](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-connectivity-security.png)
 
 7. Configure the **Advanced settings**, **Maintenance**, and **Tags** sections if needed, and then click **Create replication instance** to finish the instance creation.
 
@@ -98,7 +98,7 @@ For connectivity, the steps for using TiDB Cloud clusters as a source or as a ta
 
 1. In the AWS DMS console, go to the [**Endpoints**](https://console.aws.amazon.com/dms/v2/home#endpointList) page and switch to the corresponding region.
 
-    ![Create endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-3.png)
+    ![Create endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-create-endpoint.png)
 
 2. Click **Create endpoint** to create the target database endpoint.
 
@@ -133,7 +133,7 @@ For connectivity, the steps for using TiDB Cloud clusters as a source or as a ta
     </div>
     </SimpleTab>
 
-     ![Provide access information manually](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-4.png)
+     ![Provide access information manually](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-configure-endpoint.png)
 
 6. If you create the endpoint as a **Target endpoint**, expand the **Endpoint settings** section, select the **Use endpoint connection attributes** checkbox, and then set **Extra connection attributes** to `Initstmt=SET FOREIGN_KEY_CHECKS=0;`.
 
