@@ -28,6 +28,7 @@ You are expected to have a TiDB Cloud account and a TiDB Serverless or TiDB Dedi
 Before creating DMS resources, you need to configure network properly to ensure DMS can communicate with TiDB Cloud clusters. If you are unfamiliar with AWS, contact AWS Support. We give several possible configurations here.
 
 <SimpleTab>
+
 <div label="TiDB Serverless">
 
 For TiDB Serverless, your clients can connect to clusters via public endpoint or private endpoint.
@@ -39,6 +40,7 @@ For TiDB Serverless, your clients can connect to clusters via public endpoint or
     - Deploy the replication instance in private subnets and route traffic in the private subnets to public subnets. In this case, you need at least three subnets, two private subnets, and one public subnet. The two private subnets form a subnet group where the replication instance lives. Then you need to create a NAT gateway in the public subnet and route traffic of the two private subnets to the NAT gateway. For more information, see [Access the internet from a private subnet](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access).
 
 - To connect to a TiDB Serverless cluster via private endpoint, [set up a private endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) first and deploy the replication instance to private subnets.
+
 </div>
 
 <div label="TiDB Dedicated">
@@ -54,6 +56,7 @@ For TiDB Dedicated, your clients can connect to clusters via public endpoint, pr
 - To connect to a TiDB Dedicated cluster via private endpoint, [set up a private endpoint](/tidb-cloud/set-up-private-endpoint-connections.md) first and deploy the replication instance to private subnets.
 
 - To connect to a TiDB Dedicated cluster via VPC peering, [set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) first and deploy the replication instance to private subnets.
+
 </div>
 </SimpleTab>
 
