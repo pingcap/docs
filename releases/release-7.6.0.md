@@ -59,11 +59,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
     更多信息，请参考[用户文档](/sql-prepared-plan-cache.md)。
 
-* 建表的性能提升 10 倍 [#49752](https://github.com/pingcap/tidb/issues/49752) @[gmhdbjd](https://github.com/gmhdbjd) **tw@hfxsd** <!--1408-->
+* Improve the performance of creating tables by 10 times [#49752](https://github.com/pingcap/tidb/issues/49752) @[gmhdbjd](https://github.com/gmhdbjd) **tw@hfxsd** <!--1408-->
 
-    在之前的版本里，用户将上游数据库上万张表迁移到 TiDB 时， TiDB 需要消耗较长的时间来创建这些表，效率较低。在 7.6 版本引入新的 DDL 架构，可通过系统参数 tidb_ddl_v2 开启，新版本的 DDL 相比之前版本的 DDL 在批量建表的性能有 10 倍的提升，可大大减少用户建表的时间。
+    In previous versions, when migrating tens of thousands of tables from the upstream database to TiDB, it is time-consuming and inefficient for TiDB to create these tables. Starting from v7.6.0, TiDB introduces a new DDL architecture. You can enable it by configuring the system variable `tidb_ddl_v2`. Compared with previous versions, the new version of the DDL improves the performance of creating batch tables by 10 times, and significantly reduces time for creating tables.
 
-    更多信息，请参考[用户文档](链接)。
+    For more information, see [documentation]( ).
 
 * 优化器增强对多值索引的支持 [#47759](https://github.com/pingcap/tidb/issues/47759) [#46539](https://github.com/pingcap/tidb/issues/46539) @[Arenatlx](https://github.com/Arenatlx) @[time-and-fate](https://github.com/time-and-fate) **tw@ran-huang** <!--1405/1584-->
 
@@ -152,11 +152,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
     更多信息，请参考[用户文档](/system-variables.md#tidb_txn_entry_size_limit-从-v760-版本开始引入) 。
 
-* 增强 Bi-directional replication(BDR) 对 DDL 的同步 [#48519](https://github.com/pingcap/tidb/issues/48519) @[okJiang](https://github.com/okJiang) **tw@hfxsd** <!--1521/1525-->
-
-    在使用 TiCDC 对多个 TiDB 集群进行双向同步时，为了避免 DDL 循环同步，禁止了 DDL 的同步。7.6 版本引入 BDR Role 后，集群可以通过正确设置 BDR Role，使某些 DDL 正常同步。
-
-    更多信息，请参考[用户文档](链接)。
 
 * 全局排序功能成为正式功能（GA)，提升 `Add Index` 和 `Import Into` 的性能和稳定性 [#45719](https://github.com/pingcap/tidb/issues/45719) @[wjhuang2016](https://github.com/wjhuang2016) @[D3Hunter](https://github.com/D3Hunter) **tw@ran-huang** <!--1580/1579-->
 
@@ -176,28 +171,28 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
 ### Observability
 
-* 资源管控相关观测性增强 [#49318](https://github.com/pingcap/tidb/issues/49318) @[glorv](https://github.com/glorv) @[bufferflies](https://github.com/bufferflies) @[nolouch](https://github.com/nolouch) **tw@hfxsd** <!--1668-->
+* Enhance observability related to resource control [#49318](https://github.com/pingcap/tidb/issues/49318) @[glorv](https://github.com/glorv) @[bufferflies](https://github.com/bufferflies) @[nolouch](https://github.com/nolouch) **tw@hfxsd** <!--1668-->
 
-    随着更多客户利用资源组对业务应用进行隔离，资源管控提供了更丰富的基于资源组的数据，协助客户对资源组的负载，以及资源组设置进行观测。确保发生问题时能够快速发现并缩小诊断范围。其中包括：
+    As more and more users use resource groups to isolate applications, Resource Control provides richer resource group-based data to assist you in observing resource group loads, resource group settings, and to ensure that you can quickly identify and accurately diagnose problems, including:
 
-    * [慢日志](/identify-slow-queries.md) 增加资源组名称，RU消耗，以及对等待资源耗时。
-    * [Statement Summary Tables](/statement-summary-tables.md) 增加资源组名称，RU消耗，以及对等待资源耗时。
-    * 增加变量[`ru_by_last_statement`]()，用来立即获取前一条 SQL 的RU消耗。
-    * 增加基于资源组的数据库指标：QPS/TPS，执行时间(P999/P99/P95)，失败次数，连接数。
+    * [Slow Queries](/identify-slow-queries.md): add the resource group name, RU consumption, and time for waiting for resources.
+    * [Statement Summary Tables](/statement-summary-tables.md): add the resource group name, RU consumption, and time for waiting for resources.
+    * Add a system variable [`ru_by_last_statement`](), used to immediately get the RU consumption of the previous SQL.
+    * Add database metrics based on resource groups: QPS/TPS, execution time (P999/P99/P95), number of failures, number of connections.
 
-    请参考[慢日志](/identify-slow-queries.md)，[Statement Summary Tables](/statement-summary-tables.md)，[资源管控 (Resource Control) 监控指标详解](/grafana-resource-control-dashboard.md)。
+    For more information, see [Identify Slow Queries](/identify-slow-queries.md), [Statement Summary Tables](/statement-summary-tables.md), and [Key Monitoring Metrics of Resource Control](/grafana-resource-control-dashboard.md).
 
 ### Data migration
 
-* DataMigration（DM）迁移 MySQL8.0 的功能成为正式功能（GA） [#issue号](链接) @[lyzx2001](https://github.com/lyzx2001) **tw@hfxsd** <!--1617-->
+* Data Migration (DM) support for migrating MySQL 8.0 become generally available (GA) [#issue号](链接) @[lyzx2001](https://github.com/lyzx2001) **tw@hfxsd** <!--1617-->
 
-    之前 DM 迁移 MySQL8.0 仅为实验特性，不可用于生产环境。本次对该功能的稳定性，兼容性做了增强，可在生产环境帮助用户平滑、快速地将数据从 MySQL 8.0 迁移到 TiDB。
+    Previously, using DM to migrate data from MySQL 8.0 is an experimental feature and is not available for production environments. TiDB v7.6.0 enhances the stability and compatibility of this feature to help you smoothly and quickly migrate data from MySQL 8.0 to TiDB in production environments. In v7.6.0, this feature becomes generally available (GA).
 
-    更多信息，请参考[用户文档](链接)。
+    For more information, see [documentation]( ).
 
-* TiCDC supports replicating DDL statements in bi-directional replication mode [#10301](https://github.com/pingcap/tiflow/issues/10301) @[asddongmen](https://github.com/asddongmen) **tw@hfxsd** <!--1460-->
+* TiCDC supports replicating DDL statements in bi-directional replication (BDR) mode [#10301](https://github.com/pingcap/tiflow/issues/10301) [#48519](https://github.com/pingcap/tidb/issues/48519) @[okJiang](https://github.com/okJiang) @[asddongmen](https://github.com/asddongmen) **tw@hfxsd** <!--1460-->
 
-    Starting from v7.6.0 TiCDC supports replication of DDL statements with bi-directional replication configured. Previously, replicating DDL statements was not supported by TiCDC, so users of TiCDC's bi-directional replication had to apply DDL statements to both TiDB clusters separately. With this feature, TiCDC allows for a cluster to be assigned the primary BDR role, and for DDL statements at that cluster to be replicated to the downstream cluster.
+    Starting from v7.6.0, TiCDC supports replication of DDL statements with bi-directional replication configured. Previously, replicating DDL statements was not supported by TiCDC, so users of TiCDC's bi-directional replication had to apply DDL statements to both TiDB clusters separately. With this feature, TiCDC allows for a cluster to be assigned the `PRIMARY` BDR role, and for DDL statements at that cluster to be replicated to the downstream cluster.
 
     For more information, see [documentation](/ticdc/ticdc-bidirectional-replication.md).
 
