@@ -72,3 +72,33 @@ Additionally, the [FLUSH STATUS](/sql-statements/sql-statement-flush-status.md) 
 - Scope: SESSION | GLOBAL
 - Type: String
 - The UUID of the server.
+
+### tidb_gc_last_run_time
+
+- Scope: SESSION | GLOBAL
+- Type: String
+- The timestamp of the last run of [GC](/garbage-collection-overview.md).
+
+### tidb_gc_leader_desc
+
+- Scope: SESSION | GLOBAL
+- Type: String
+- Information about [GC](/garbage-collection-overview.md) leader, including the hostname and process id (pid).
+
+### tidb_gc_leader_lease
+
+- Scope: SESSION | GLOBAL
+- Type: String
+- The timestamp of the [GC](/garbage-collection-overview.md) lease.
+
+### tidb_gc_leader_uuid
+
+- Scope: SESSION | GLOBAL
+- Type: String
+- The UUID of the [GC](/garbage-collection-overview.md) leader.
+
+### tidb_gc_safe_point
+
+- Scope: SESSION | GLOBAL
+- Type: String
+- The timestamp of the [GC](/garbage-collection-overview.md) safe point.
