@@ -1,6 +1,7 @@
 ---
 title: Select Your Cluster Tier
 summary: Learn how to select your cluster tier on TiDB Cloud.
+aliases: ['/tidbcloud/developer-tier-cluster']
 ---
 
 # Select Your Cluster Tier

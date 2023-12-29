@@ -1,6 +1,7 @@
 ---
 title: TiDB Serverless FAQs
 summary: Learn about the most frequently asked questions (FAQs) relating to TiDB Serverless.
+aliases: ['/tidbcloud/serverless-tier-faqs']
 ---
 
 # TiDB Serverless FAQs
@@ -85,6 +86,10 @@ A spike in RU usage can occur due to necessary background jobs in TiDB. These jo
 ### What happens when my cluster exhausts its free quota or exceeds its spending limit?
 
 Once a cluster reaches its free quota or spending limit, the cluster will enforce throttling measures on its read and write operations. These operations will be limited until the quota is increased or the usage is reset at the start of a new month. For more information, see [TiDB Serverless Limitations and Quotas](/tidb-cloud/serverless-limitations.md#usage-quota).
+
+### Why do I observe spikes in RU usage while importing data?
+
+During the data import process of a TiDB Serverless cluster, RU consumption occurs only when the data is successfully imported, which leads to spikes in RU usage.
 
 ## Security FAQs
 

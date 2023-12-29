@@ -9,8 +9,8 @@ TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data servic
 
 > **Note:**
 >
-> - To use the changefeed feature, make sure that your TiDB Dedicated cluster version is v6.4.0 or later.
-> - Currently, TiDB Cloud only allows up to 5 changefeeds per cluster.
+> - Currently, TiDB Cloud only allows up to 100 changefeeds per cluster.
+> - Currently, TiDB Cloud only allows up to 100 table filter rules per changefeed.
 > - For [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless), the changefeed feature is unavailable.
 
 To access the changefeed feature, navigate to the cluster overview page of your TiDB cluster, and then click **Changefeed** in the left navigation pane. The changefeed page is displayed.
@@ -21,7 +21,7 @@ On the changefeed page, you can create a changefeed, view a list of existing cha
 
 To create a changefeed, refer to the tutorials:
 
-- [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md) (Beta)
+- [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
 - [Sink to MySQL](/tidb-cloud/changefeed-sink-to-mysql.md)
 - [Sink to TiDB Cloud](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
 - [Sink to cloud storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
@@ -65,8 +65,10 @@ It takes about 10 minutes to complete the scaling process (during which the chan
 
     TiDB Cloud populates the changefeed configuration by default. You can modify the following configurations:
 
-    - MySQL sink: **MySQL Connection** and **Table Filter**.
-    - Kafka sink: all configurations.
+    - Apache Kafka sink: all configurations.
+    - MySQL sink: **MySQL Connection**, **Table Filter**, and **Event Filter**.
+    - TiDB Cloud sink: **TiDB Cloud Connection**, **Table Filter**, and **Event Filter**.
+    - Cloud storage sink: **Storage Endpoint**, **Table Filter**, and **Event Filter**.
 
 4. After editing the configuration, click **...** > **Resume** to resume the corresponding changefeed.
 
@@ -94,4 +96,4 @@ The states are described as follows:
 - `DELETING`: the replication task is being deleted.
 - `DELETED`: the replication task is deleted.
 - `WARNING`: the replication task returns a warning. The replication cannot continue due to some recoverable errors. The changefeed in this state keeps trying to resume until the state transfers to `RUNNING`. The changefeed in this state blocks [GC operations](https://docs.pingcap.com/tidb/stable/garbage-collection-overview).
-- `FAILED`: the replication task fails. Due to some unrecoverable errors, the replication task cannot resume and cannot be recovered. The changefeed in this state does not block GC operations.
+- `FAILED`: the replication task fails. Due to some errors, the replication task cannot resume and cannot be recovered automatically. If the issues are resolved before the garbage collection (GC) of the incremental data, you can manually resume the failed changefeed. The default Time-To-Live (TTL) duration for incremental data is 24 hours, which means that the GC mechanism does not delete any data within 24 hours after the changefeed is interrupted.
