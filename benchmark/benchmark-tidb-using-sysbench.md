@@ -1,5 +1,6 @@
 ---
 title: How to Test TiDB Using Sysbench
+summary: TiDB performance can be optimized by using Sysbench 1.0 or later. Configure TiDB and TiKV with higher log levels for better performance. Adjust Sysbench configuration and import data to optimize performance. Address common issues related to proxy use and CPU utilization rates.
 ---
 
 # How to Test TiDB Using Sysbench
