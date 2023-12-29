@@ -5,7 +5,7 @@ summary: Learn the command-line startup flags of TiProxy.
 
 # TiProxy Command-Line Flags
 
-This document introduces the command-line flags that you can use when you launch TiProxy. It also introduce flags of `tiproxyctl`.
+This document introduces the command-line flags that you can use when you launch TiProxy. It also introduces flags of `tiproxyctl`.
 
 ## TiProxy Server
 
@@ -21,13 +21,13 @@ This section lists the flags of the server program `tiproxy`.
 
 + Specifies the log format of TiProxy.
 + Default: `""`
-+ Fallback to the same format as TiDB when empty.
++ Fall back to the same format as TiDB when empty.
 
 ### `--log_level string`
 
 + Specifies the log level of TiProxy.
 + Default: `""`
-+ Fallback to `"info"` when empty.
++ Fall back to `"info"` when empty.
 
 ## TiProxy control
 
@@ -35,7 +35,7 @@ This section lists the flags of the client program `tiproxyctl`.
 
 ### `--log_encoder string`
 
-+ Specifies the log format of tiproxyctl.
++ Specifies the log format of `tiproxyctl`.
 + Default: `"tidb"`
 + It defaults to the same log format of TiDB. However, you can also specify it as one of the following:
 
@@ -58,7 +58,7 @@ This section lists the flags of the client program `tiproxyctl`.
 
 + Specifies whether to skip TLS CA verification when dialing to the server.
 + Default: `false`
-+ Useful for testing.
++ Used for testing.
 
 ### `--ca string`
 

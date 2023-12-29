@@ -41,9 +41,9 @@ TiProxy has four panel groups. The metrics on these panels indicate the current 
 
 ## Query-Summary
 
-- Duration: average, p95, p99 SQL statement execution duration. It includes the duration of SQL statement execution on TiDB servers, so it is higher than the duration on the TiDB Grafana panel
-- P99 Duration By Instance: p99 statement execution duration of each TiProxy instance
-- P99 Duration By Backend: p99 statement execution duration of the statements that are executed on each TiDB instance
+- Duration: average, P95, P99 SQL statement execution duration. It includes the duration of SQL statement execution on TiDB servers, so it is higher than the duration on the TiDB Grafana panel
+- P99 Duration By Instance: P99 statement execution duration of each TiProxy instance
+- P99 Duration By Backend: P99 statement execution duration of the statements that are executed on each TiDB instance
 - CPS by Instance: command per second of each TiProxy instance
 - CPS by Backend: command per second of each TiDB instance
 - CPS by CMD: command per second grouped by SQL command type
@@ -52,7 +52,7 @@ TiProxy has four panel groups. The metrics on these panels indicate the current 
 
 - Backend Connections: connection counts between each TiDB instance and each TiProxy instance. For example, `10.24.31.1:6000 | 10.24.31.2:4000` indicates the connections between TiProxy instance `10.24.31.1:6000` and TiDB instance `10.24.31.2:4000`
 - Session Migration OPM: the number of session migrations that happened every minute, recording sessions on which TiDB instance migrated to the other. For example, `succeed: 10.24.31.2:4000 => 10.24.31.3:4000` indicates the number of sessions that are successfully migrated from TiDB instance `10.24.31.2:4000` to TiDB instance `10.24.31.3:4000`
-- Session Migration Duration: average, p95, p99 session migration duration.
+- Session Migration Duration: average, P95, P99 session migration duration.
 
 ## Backend
 

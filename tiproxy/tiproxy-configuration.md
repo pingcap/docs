@@ -32,7 +32,7 @@ This section introduces the configuration parameters of TiProxy.
 
 > **Tip:**
 >
-> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration). Normally the modification leads to a restart. Because TiProxy will do configuration hot-reloading, you can skip restart by executing `tiup cluster reload --skip-restart`.
+> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration). Normally the modification leads to a restart. Because TiProxy supports hot-reloading, you can skip restart by executing `tiup cluster reload --skip-restart`.
 
 ### proxy
 
@@ -41,6 +41,7 @@ Configuration for SQL port.
 #### `addr`
 
 + Default value: `0.0.0.0:6000`
++ Support hot-reload: no
 + Support hot-reload: no
 + SQL gateway address. The format is `<ip>:<port>`.
 
@@ -67,7 +68,7 @@ Configuration for SQL port.
 #### `conn-buffer-size`
 
 + Default value: `32768`
-+ Support hot-reload: yes, but for new connections
++ Support hot-reload: yes, but only for new connections
 + Range: `[1024, 16777216]`
 + This configuration item lets you decide the connection buffer size. Each connection uses one read buffer and one write buffer. It is a tradeoff between memory and performance. A larger buffer might yield better performance results but consume more memory. When it is `0`, TiProxy uses the default buffer size.
 
@@ -80,14 +81,14 @@ Configuration for SQL port.
 #### `proxy-protocol`
 
 + Default value: ``
-+ Support hot-reload: yes, but for new connections
++ Support hot-reload: yes, but only for new connections
 + Possible values: ``, `v2`
 + Enable the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) on the port. By enabling the PROXY protocol, TiProxy can pass the real client IP address to TiDB. `v2` indicates using the PROXY protocol version 2, and `` indicates disabling the PROXY protocol. If the PROXY protocol is enabled on TiProxy, you need to also enable the [PROXY protocol](/tidb-configuration-file/#proxy-protocol) on the TiDB server.
 
 #### `require-backend-tls`
 
 + Default value: `true`
-+ Support hot-reload: yes, but for new connections
++ Support hot-reload: yes, but only for new connections
 + Require TLS between TiProxy and TiDB servers. If the TiDB server doesn't support TLS, clients will report an error when connecting to TiProxy.
 
 ### api
@@ -103,6 +104,7 @@ Configurations for HTTP gateway.
 #### `proxy-protocol`
 
 + Default value: ``
++ Support hot-reload: no
 + Possible values: ``, `v2`
 + Enable the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) on the port. `v2` indicates using the PROXY protocol version 2, and `` indicates disabling the PROXY protocol.
 
@@ -170,7 +172,7 @@ TLS object fields:
 + `ca`: specifies the CA
 + `cert`: specifies the certificate
 + `key`: specifies the private key
-+ `auto-certs`: mostly used for tests. It generates certificates if no certificate/key is specified.
++ `auto-certs`: mostly used for tests. It generates certificates if no certificate or key is specified.
 + `skip-ca`: skips verifying certificates using CA on client object or skips server-side verification on server object.
 + `min-tls-version`: sets the minimum TLS version. Possible values are `1.0`、`1.1`、`1.2`, and `1.3`. The default value is `1.1`, which allows v1.1 or higher TLS versions.
 + `rsa-key-size`: sets the RSA key size when `auto-certs` is enabled.
@@ -181,12 +183,12 @@ Objects are classified into client or server objects by their names.
 For client TLS object:
 
 - You must set either `ca` or `skip-ca` to skip verifying server certificates.
-- Optionally, you can set `cert`/`key` to pass server-side client verification.
+- Optionally, you can set `cert` or `key` to pass server-side client verification.
 - Useless fields: auto-certs.
 
 For server TLS object:
 
-+ You can set either `cert`/`key` or `auto-certs` to support TLS connections. Otherwise, TiProxy doesn't support TLS connections.
++ You can set either `cert` or `key` or `auto-certs` to support TLS connections. Otherwise, TiProxy doesn't support TLS connections.
 + Optionally, if `ca` is not empty, it enables server-side client verification. The client must provide their certificates. Alternatively, if both `skip-ca` is true and `ca` is not empty, the server will only verify client certificates if they provide one.
 
 #### `cluster-tls`

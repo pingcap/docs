@@ -68,7 +68,6 @@ defaults                                    # Default configuration.
     timeout client 30000s                   # The timeout period for the client to be inactive after the data transmission is completed.
     timeout server 30000s                   # The timeout period for the server to be inactive.
 
-
 listen tidb-cluster                         # Configure database load balancing.
     bind 0.0.0.0:3390                       # Floating IP address and listening port.
     mode tcp                                # HAProxy uses layer 4, the transport layer.
