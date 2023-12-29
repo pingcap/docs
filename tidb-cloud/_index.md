@@ -1,5 +1,6 @@
 ---
 title: TiDB Cloud Documentation
+aliases: ['/tidbcloud/privacy-policy', '/tidbcloud/terms-of-service', '/tidbcloud/service-level-agreement']
 hide_sidebar: true
 hide_commit: true
 ---
@@ -71,6 +72,8 @@ hide_commit: true
 [From CSV Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
 
 [From Apache Parquet Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
+
+[With MySQL CLI](https://docs.pingcap.com/tidbcloud/import-with-mysql-cli)
 
 </LearningPath>
 
