@@ -135,6 +135,6 @@ For connectivity, the steps for using TiDB Cloud clusters as a source or as a ta
 
      ![Provide access information manually](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-configure-endpoint.png)
 
-6. If you create the endpoint as a **Target endpoint**, expand the **Endpoint settings** section, select the **Use endpoint connection attributes** checkbox, and then set **Extra connection attributes** to `Initstmt=SET FOREIGN_KEY_CHECKS=0;`.
+6. If you want to create the endpoint as a **Target endpoint**, expand the **Endpoint settings** section, select the **Use endpoint connection attributes** checkbox, and then set **Extra connection attributes** to `Initstmt=SET FOREIGN_KEY_CHECKS=0;`.
 
 7. Configure the **KMS Key** and **Tags** sections if needed. Click **Create endpoint** to finish the instance creation.
