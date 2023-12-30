@@ -150,15 +150,15 @@ TiProxy cannot keep the client connection in the following scenarios:
 - TiProxy performs scaling in, upgrade, or restart. Once TiProxy is offline, the client connection is broken.
 - TiDB actively disconnects the connection. For example, when a session does not send a request for a period of time longer than `wait_timeout`, TiDB actively disconnects the connection, and TiProxy also disconnects the client connection.
 
-TiProx cannot migrate connections in the following scenarios, and thus cannot keep the client connection or achieve load balancing:
+TiProxy cannot migrate connections in the following scenarios, and thus cannot keep the client connection or achieve load balancing:
 
 - The duration of a single statement or a single transaction exceeds the [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) configured on the TiDB server.
 - The session uses the cursor to read data, and the cursor is not closed or the data is not read within the [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) configured on the TiDB server.
 - The session creates a [local temporary table](/temporary-tables.md#local-temporary-tables).
 - The session holds a [user-level lock](/functions-and-operators/locking-functions.md).
 - The session holds a [table lock](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md).
-- The session creates a [prepared statement](/develop/dev-guide-prepared-statement.md), and the prepared statement is invalid. For example, the table related to the prepared statement is deleted after the prepared statement is created.
-- The session creates a session-level [execution plan binding](/sql-plan-management.md#sql-binding), and the binding is invalid. For example, the table related to the binding is deleted after the binding is created.
+- The session creates a [prepared statement](/develop/dev-guide-prepared-statement.md), and the prepared statement is invalid. For example, the table related to the prepared statement is dropped after the prepared statement is created.
+- The session creates a session-level [execution plan binding](/sql-plan-management.md#sql-binding), and the binding is invalid. For example, the table related to the binding is dropped after the binding is created.
 - After the session is created, the user used by the session is deleted or the username is changed.
 
 ## Supported connectors
