@@ -848,7 +848,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeed/test1/synced
 }
 ```
 
-The parameters are described as follows:
+The response includes the following fields:
 
 - `synced`: whether this replication task is completed. `true` means the task is completed, and `false` means potential incompleteness. If it is `false`, you need to check both the `info` field and other fields for the specific status.
 - `sink_checkpoint_ts`: the checkpoint-ts value of the sink module, in PD time.
