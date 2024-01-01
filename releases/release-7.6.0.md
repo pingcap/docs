@@ -31,33 +31,29 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
 * TiDB 提供支持落盘的并发 HashAgg 算法（实验特性） [#35637](https://github.com/pingcap/tidb/issues/35637) @[xzhangxian1008](https://github.com/xzhangxian1008) **tw@qiancai** <!--1365-->
 
-    在之前的版本中，TiDB 的 HashAgg 算子的并发算法不支持落盘，所有数据必须在内存中进行处理。这导致数据量较大、超过内存总量，需要使用 HashAgg 的落盘功能时，必须选择非并发算法，从而无法通过并发提升性能。在 7.6.0 版本中，TiDB 提供支持落盘的并发 HashAgg 算法。在任意并发条件下，HashAgg 算子都可以根据内存使用情况自动触发数据落盘，从而兼顾性能和处理数据量。目前，该功能作为实验特性，引入变量 `tidb_enable_concurrent_hashagg_spill` 控制是否启用支持落盘的并发 HashAgg 算法。当该变量设置为 `true` 时，HashAgg 将使用支持落盘的并发算法。该变量将在功能正式发布时废弃。
+    在之前的 TiDB 版本中， HashAgg 算子的并发算法不支持数据落盘，所有数据都必须在内存中进行处理，导致内存需要处理的数据量较大、超过内存总量。当需要使用 HashAgg 的落盘功能时，TiDB 只能选择非并发算法，从而无法通过并发提升性能。
+
+    在 v7.6.0 中，TiDB 提供支持落盘的并发 HashAgg 算法。在任意并发条件下，HashAgg 算子都可以根据内存使用情况自动触发数据落盘，从而兼顾性能和数据处理量。目前，该功能作为实验特性，引入变量 `tidb_enable_concurrent_hashagg_spill` 控制是否启用支持落盘的并发 HashAgg 算法。当该变量设置为 `ON` 时，HashAgg 将使用支持落盘的并发算法。该变量将在功能正式发布时废弃。
 
     更多信息，请参考[用户文档](链接)。
 
 * 支持下推以下字符串函数到 TiKV [#48170](https://github.com/pingcap/tidb/issues/48170) @[gengliqi](https://github.com/gengliqi) **tw@qiancai** <!--1607-->
 
-    * `LOWER`
-    * `UPPER`
+    * `LOWER()`
+    * `UPPER()`
 
     更多信息，请参考[用户文档](/functions-and-operators/expressions-pushed-down.md)。
 
 * 新增支持下推以下 JSON 函数到 TiFlash [#48350](https://github.com/pingcap/tidb/issues/48350) [#48986](https://github.com/pingcap/tidb/issues/48986) [#48994](https://github.com/pingcap/tidb/issues/48994) [#49345](https://github.com/pingcap/tidb/issues/49345) [#49392](https://github.com/pingcap/tidb/issues/49392) @[SeaRise](https://github.com/SeaRise) @[yibin87](https://github.com/yibin87) **tw@qiancai** <!--1608-->
 
-    * `JSON_UNQUOTE`
-    * `JSON_ARRAY`
-    * `JSON_DEPTH`
-    * `JSON_VALID`
-    * `JSON_KEYS`
-    * `JSON_CONTAINS_PATH`
+    * `JSON_UNQUOTE()`
+    * `JSON_ARRAY()`
+    * `JSON_DEPTH()`
+    * `JSON_VALID()`
+    * `JSON_KEYS()`
+    * `JSON_CONTAINS_PATH()`
 
     更多信息，请参考[用户文档](/tiflash/tiflash-supported-pushdown-calculations.md)。
-
-* 包含分区表的执行计划可以被缓存 [#issue号](链接) @[mjonss](https://github.com/mjonss) **tw@qiancai** <!--1662-->
-
-    执行计划缓存是提升交易系统性能的有效手段。 自 7.6.0 开始， TiDB 解除了分区表的执行计划无法进入执行计划缓存的限制， 包含分区表的 SQL 语句能够从执行计划缓存中受益。 这将进一步提升分区表在 TiDB 的应用场景， 客户可以更多的利用分区技术降低数据读取的数量，提升数据库性能。
-
-    更多信息，请参考[用户文档](/sql-prepared-plan-cache.md)。
 
 * Improve the performance of creating tables by 10 times [#49752](https://github.com/pingcap/tidb/issues/49752) @[gmhdbjd](https://github.com/gmhdbjd) **tw@hfxsd** <!--1408-->
 
