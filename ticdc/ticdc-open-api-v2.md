@@ -794,7 +794,7 @@ The meanings of the JSON response body are the same as those in the [Create a re
 
 ## Query whether a specific replication task is completed
 
-This API is a synchronous interface. If the request is successful, the synchronization status of the specified replication task (changefeed) is returned, including whether the task is completed and some more detailed information.
+This API is a synchronous interface. If the request is successful, it returns the synchronization status of the specified replication task (changefeed), including whether the task is completed and additional details.
 
 ### Request URI
 
@@ -851,7 +851,7 @@ The parameters are described as follows:
 }
 ```
 
-This example shows the query result of an ongoing replication task. By checking both `synced` and `info` fields, you can learn that the replication task is not completed yet and further waiting is expected.
+This example shows the response of an ongoing replication task. By checking both `synced` and `info` fields, you can learn that the replication task is not completed yet and further waiting is expected.
 
 **Example 3: The synchronization status needs further check**
 
@@ -866,7 +866,7 @@ This example shows the query result of an ongoing replication task. By checking 
 }
 ```
 
-This API enables you to query the synchronization status even when the upstream cluster encounters disasters. In certain situations, you might not be able to directly determine whether the current data replication task of TiCDC is completed or not. In such cases, you can query this API, and then check both the `info` field in the result and the current status of the upstream cluster to learn the specific status.
+This API enables you to query the synchronization status even when the upstream cluster encounters disasters. In certain situations, you might not be able to directly determine whether the current data replication task of TiCDC is completed or not. In such cases, you can request this API, and then check both the `info` field in the result and the current status of the upstream cluster to determine the specific status.
 
 In this example, `sink_checkpoint_ts` is behind `now_ts` in time, either because TiCDC is still catching up with data replication, or because the PD or TiKV has failed. If this is due to TiCDC still catching up with data replication, it means that the replication task is not completed yet. If this is due to a PD or TiKV failure, it means that the replication task is completed. Therefore, you need to check the `info` field to assist in determining the cluster status.
 
