@@ -31,7 +31,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
 * The concurrent HashAgg algorithm of TiDB supports disk spill (experimental) [#35637](https://github.com/pingcap/tidb/issues/35637) @[xzhangxian1008](https://github.com/xzhangxian1008) **tw@qiancai** <!--1365-->
 
-    In earlier versions of TiDB, the concurrency algorithm of the HashAgg operator does not support disk spill. When the execution plan of a SQL statement contains the concurrent HashAgg operator, all the data of that SQL statement can only be processed in memory. In such cases, TiDB needs to process a larger amount of data in memory, which might even exceed the total amount of memory. When the disk spill feature of HashAgg is triggered, TiDB can only select the non-concurrent algorithm, which does not improve performance through concurrency.
+    In earlier versions of TiDB, the concurrency algorithm of the HashAgg operator does not support disk spill. When the execution plan of a SQL statement contains the concurrent HashAgg operator, all the data of that SQL statement can only be processed in memory. In such cases, TiDB needs to process a large amount of data in memory, which might even exceed the total amount of memory. When the disk spill feature of HashAgg is triggered, TiDB can only select the non-concurrent algorithm, which does not improve performance through concurrency.
 
      In v7.6.0, the concurrent HashAgg algorithm of TiDB supports disk spill. Under any concurrent conditions, the HashAgg operator can automatically trigger data spill based on memory usage, thus balancing performance and data throughput. Currently, as an experimental feature, TiDB introduces the `tidb_enable_concurrent_hashagg_spill` variable to control whether to enable the concurrent HashAgg algorithm. When this variable is `ON`, it means enabled. This variable will be deprecated when the feature is generally available.
 
@@ -44,7 +44,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
     For more information, see [documentation](/functions-and-operators/expressions-pushed-down.md).
 
-* Support pushing down the following JSON functions to TiFlash  [#48350](https://github.com/pingcap/tidb/issues/48350) [#48986](https://github.com/pingcap/tidb/issues/48986) [#48994](https://github.com/pingcap/tidb/issues/48994) [#49345](https://github.com/pingcap/tidb/issues/49345) [#49392](https://github.com/pingcap/tidb/issues/49392) @[SeaRise](https://github.com/SeaRise) @[yibin87](https://github.com/yibin87) **tw@qiancai** <!--1608-->
+* Support pushing down the following JSON functions to TiFlash [#48350](https://github.com/pingcap/tidb/issues/48350) [#48986](https://github.com/pingcap/tidb/issues/48986) [#48994](https://github.com/pingcap/tidb/issues/48994) [#49345](https://github.com/pingcap/tidb/issues/49345) [#49392](https://github.com/pingcap/tidb/issues/49392) @[SeaRise](https://github.com/SeaRise) @[yibin87](https://github.com/yibin87) **tw@qiancai** <!--1608-->
 
     * `JSON_UNQUOTE()`
     * `JSON_ARRAY()`
