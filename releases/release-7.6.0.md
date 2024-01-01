@@ -29,22 +29,22 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
     更多信息，请参考[用户文档](链接)。
 
-* TiDB 提供支持落盘的并发 HashAgg 算法（实验特性） [#35637](https://github.com/pingcap/tidb/issues/35637) @[xzhangxian1008](https://github.com/xzhangxian1008) **tw@qiancai** <!--1365-->
+* The concurrent HashAgg algorithm of TiDB supports disk spill (experimental) [#35637](https://github.com/pingcap/tidb/issues/35637) @[xzhangxian1008](https://github.com/xzhangxian1008) **tw@qiancai** <!--1365-->
 
-    在之前的 TiDB 版本中， HashAgg 算子的并发算法不支持数据落盘，所有数据都必须在内存中进行处理，导致内存需要处理的数据量较大、超过内存总量。当需要使用 HashAgg 的落盘功能时，TiDB 只能选择非并发算法，从而无法通过并发提升性能。
+    In earlier versions of TiDB, the concurrency algorithm of the HashAgg operator does not support disk spill. When the execution plan of a SQL statement contains the concurrent HashAgg operator, all the data of that SQL statement can only be processed in memory. In such cases, TiDB needs to process a larger amount of data in memory, which might even exceed the total amount of memory. When the disk spill feature of HashAgg is triggered, TiDB can only select the non-concurrent algorithm, which does not improve performance through concurrency.
 
-    在 v7.6.0 中，TiDB 提供支持落盘的并发 HashAgg 算法。在任意并发条件下，HashAgg 算子都可以根据内存使用情况自动触发数据落盘，从而兼顾性能和数据处理量。目前，该功能作为实验特性，引入变量 `tidb_enable_concurrent_hashagg_spill` 控制是否启用支持落盘的并发 HashAgg 算法。当该变量设置为 `ON` 时，HashAgg 将使用支持落盘的并发算法。该变量将在功能正式发布时废弃。
+     In v7.6.0, the concurrent HashAgg algorithm of TiDB supports disk spill. Under any concurrent conditions, the HashAgg operator can automatically trigger data spill based on memory usage, thus balancing performance and data throughput. Currently, as an experimental feature, TiDB introduces the `tidb_enable_concurrent_hashagg_spill` variable to control whether to enable the concurrent HashAgg algorithm. When this variable is `ON`, it means enabled. This variable will be deprecated when the feature is generally available.
 
-    更多信息，请参考[用户文档](链接)。
+    For more information, see [documentation](/system-variables.md#tidb_enable_concurrent_hashagg_spill-new-in-v760).
 
-* 支持下推以下字符串函数到 TiKV [#48170](https://github.com/pingcap/tidb/issues/48170) @[gengliqi](https://github.com/gengliqi) **tw@qiancai** <!--1607-->
+* Support pushing down the following string functions to TiKV [#48170](https://github.com/pingcap/tidb/issues/48170) @[gengliqi](https://github.com/gengliqi) **tw@qiancai** <!--1607-->
 
     * `LOWER()`
     * `UPPER()`
 
-    更多信息，请参考[用户文档](/functions-and-operators/expressions-pushed-down.md)。
+    For more information, see [documentation](/functions-and-operators/expressions-pushed-down.md).
 
-* 新增支持下推以下 JSON 函数到 TiFlash [#48350](https://github.com/pingcap/tidb/issues/48350) [#48986](https://github.com/pingcap/tidb/issues/48986) [#48994](https://github.com/pingcap/tidb/issues/48994) [#49345](https://github.com/pingcap/tidb/issues/49345) [#49392](https://github.com/pingcap/tidb/issues/49392) @[SeaRise](https://github.com/SeaRise) @[yibin87](https://github.com/yibin87) **tw@qiancai** <!--1608-->
+* Support pushing down the following JSON functions to TiFlash  [#48350](https://github.com/pingcap/tidb/issues/48350) [#48986](https://github.com/pingcap/tidb/issues/48986) [#48994](https://github.com/pingcap/tidb/issues/48994) [#49345](https://github.com/pingcap/tidb/issues/49345) [#49392](https://github.com/pingcap/tidb/issues/49392) @[SeaRise](https://github.com/SeaRise) @[yibin87](https://github.com/yibin87) **tw@qiancai** <!--1608-->
 
     * `JSON_UNQUOTE()`
     * `JSON_ARRAY()`
@@ -53,7 +53,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
     * `JSON_KEYS()`
     * `JSON_CONTAINS_PATH()`
 
-    更多信息，请参考[用户文档](/tiflash/tiflash-supported-pushdown-calculations.md)。
+    For more information, see [documentation](/tiflash/tiflash-supported-pushdown-calculations.md).
 
 * Improve the performance of creating tables by 10 times [#49752](https://github.com/pingcap/tidb/issues/49752) @[gmhdbjd](https://github.com/gmhdbjd) **tw@hfxsd** <!--1408-->
 
@@ -116,13 +116,15 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
 ### DB operations
 
-* 闪回功能支持精确 TSO [#48372](https://github.com/pingcap/tidb/issues/48372) @[BornChanger](https://github.com/BornChanger/BornChanger) **tw@qiancai** <!--1615-->
+* `FLASHBACK CLUSTER` supports specifying a precise TSO [#48372](https://github.com/pingcap/tidb/issues/48372) @[BornChanger](https://github.com/BornChanger/BornChanger) **tw@qiancai** <!--1615-->
 
-    TiDB v7.6.0 提供了更加强大和精确的闪回功能，不仅支持回溯到过去指定的时间点，还可以通过 `FLASHBACK CLUSTER TO TSO` 精确地指定恢复的 [TSO](tso.md) 时间戳，实现更加灵活的数据恢复。例如，此功能可和 TiCDC 联合使用，允许下游 TiDB 集群在暂停数据同步、开启预上线读写测试后，优雅快速地回溯到暂停的 TSO 时间戳并继续通过 TiCDC 同步数据，简化了预上线验证流程和数据管理。
+    In TiDB v7.6.0, the flashback feature is more powerful and precise. It not only supports rolling back a cluster to a specified historical timestamp but also enables you to specify a precise recovery [TSO](tso.md) using `FLASHBACK CLUSTER TO TSO`, thereby increasing flexibility in data recovery. For example, you can use this feature with TiCDC. After pausing data replication and conducting pre-online read-write tests in your downstream TiDB cluster, this feature allows the cluster to gracefully and quickly flashback to the paused TSO and continue to replicate data via TiCDC. This streamlines the pre-online validation process and simplifies data management.
 
     ```sql
     FLASHBACK CLUSTER TO TSO 445494839813079041;
     ````
+
+    For more information, see [documentation](/sql-statements/sql-statement-flashback-cluster.md).
 
 * 支持自动终止长时间未提交的空闲事务 [#48714](https://github.com/pingcap/tidb/pull/48714) @[crazycs520](https://github.com/crazycs520) **tw@Oreoxmt** <!--1598-->
 
@@ -194,9 +196,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
 * TiCDC supports querying the downstream synchronization status of a changefeed [#10289](https://github.com/pingcap/tiflow/issues/10289) @[hongyunyan](https://github.com/hongyunyan) **tw@qiancai** <!--1627-->
 
-    Starting from v7.6.0 TiCDC introduces a new API to support querying the downstream synchronization status of a changefeed. With this API, users can query a TiCDC changefeed about its synchronization status. This allows users to determine whether the upstream information received by TiCDC has been synchronized to the downstream system completely.
+    Starting from v7.6.0, TiCDC introduces a new API to query the downstream synchronization status of a changefeed. With this API, you can determine whether the upstream data received by TiCDC has been synchronized to the downstream system completely.
 
-    For more information, see [documentation](/ticdc/ticdc-open-api-v2.md).
+    For more information, see [documentation](/ticdc/ticdc-open-api-v2.md#query-whether-a-specific-replication-task-is-completed).
 
 * TiCDC adds support for three character delimiters with CSV output protocol [#9969](https://github.com/pingcap/tiflow/issues/9969) @[zhangjinpeng1987](https://github.com/zhangjinpeng1987) **tw@hfxsd** <!--1653-->
 
@@ -244,7 +246,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
 + TiDB
 
-    - 终止查询时及时通知 TiKV 以避免执行未开始的数据扫描任务 [#issue](链接) @[wshwsh12](https://github.com/wshwsh12) **tw@qiancai** <!--1634-->
+    - Notify TiKV promptly when terminating a query, which avoids TiKV executing data scan tasks that are not started yet [#issue](链接) @[wshwsh12](https://github.com/wshwsh12) **tw@qiancai** <!--1634-->
     - When a non-binary collation is set and the query condition includes `LIKE`, the optimizer generates an `IndexRangeScan` to improve the execution efficiency [#48181](https://github.com/pingcap/tidb/issues/48181) @[time-and-fate](https://github.com/time-and-fate)
 
 ## Bug fixes
