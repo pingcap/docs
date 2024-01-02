@@ -41,7 +41,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
     <td>Full support for the TiProxy service, easily deployable via deployment tooling, to manage and maintain connections to TiDB so that they live through rolling restarts or upgrades or scaling events.</td>
   </tr>
   <tr>
-    <td><a href="">Data Migration (DM) officially supports MySQL 8.0</a>  {/* tw@hfxsd */}</td>
+    <td><a href="">Data Migration (DM) officially supports MySQL 8.0 (GA)</a>  {/* tw@hfxsd */}</td>
     <td>In previous migration scenarios from MySQL 8.0 with numerous tables using DM, extensive manual modification of table creation statements was required. Starting from v7.6.0, you can directly configure alternative charsets and collations in DM. DM seamlessly manages these adjustments in the downstream, ensuring a much smoother migration process from MySQL 8.0.</td>
   </tr>
 </tbody>
