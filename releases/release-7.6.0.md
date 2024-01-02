@@ -32,8 +32,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
     <td>A new 2-phase region scatter algorithm for preparing a snapshot restore to a cluster was introduced. In clusters with many TiKV nodes, this dramatically improves the cluster resource efficiency by more evenly distributing loading across the nodes, more effectively using per-node network bandwidth. In several real world cases, this causes a 1,000% acceleration of restore speeds.</td>
   </tr>
   <tr>
-    <td><a href="">Up to 10x acceleration of batch table creation</a>  {/* tw@hfxsd */}</td>
-    <td>With the introduction of a new DDL architecture in version 7.6, the performance of batch table creation in the new version's DDL has improved by up to 10x, significantly reducing the time required for users to create many tables. This is especially significant in SaaS scenarios, notorious for high numbers of tables (e.g. Tens to hundreds of thousands).</td>
+    <td><a href="">Achieve up to 10 times faster for creating tables in batch</a>  {/* tw@hfxsd */}</td>
+    <td>With the implementation of the new DDL architecture in v7.6.0, the performance of batch table creation has witnessed a remarkable improvement, up to 10 times faster. This substantial enhancement drastically reduces the time needed for creating numerous tables. This acceleration is particularly noteworthy in SaaS scenarios, where the prevalence of high volumes of tables, ranging from tens to hundreds of thousands, is a common challenge.</td>
   </tr>
   <tr>
     <td rowspan="2">Reliability and Availability<br></td>
@@ -42,7 +42,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
   </tr>
   <tr>
     <td><a href="">Data Migration (DM) officially supports MySQL 8.0</a>  {/* tw@hfxsd */}</td>
-    <td>In migrations scenarios from MySQL 8.0, where there are numerous tables to be migrated using DM (Data Migration), users would otherwise need to manually modify a large number of table creation statements. Starting from v7.6, you can configure alternative charsets and collations directly in via the DM tool. DM will handle these in the downstream such that the migration from MySQL 8.0 is much smoother.</td>
+    <td>In previous migration scenarios from MySQL 8.0 with numerous tables using DM, extensive manual modification of table creation statements was required. Starting from v7.6.0, you can directly configure alternative charsets and collations in DM. DM seamlessly manages these adjustments in the downstream, ensuring a much smoother migration process from MySQL 8.0.</td>
   </tr>
 </tbody>
 </table>
