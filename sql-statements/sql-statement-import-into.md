@@ -9,9 +9,9 @@ The `IMPORT INTO` statement is used to import data in formats such as `CSV`, `SQ
 
 > **Note:**
 >
-> This statement is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 
-`IMPORT INTO` supports importing data from files stored in Amazon S3, GCS, and the TiDB local storage.
+For TiDB Self-Hosted, `IMPORT INTO` supports importing data from files stored in Amazon S3, GCS, and the TiDB local storage. For [TiDB Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-dedicated), `IMPORT INTO` supports importing data from files stored in Amazon S3 and GCS.
 
 - For data files stored in Amazon S3 or GCS, `IMPORT INTO` supports running in the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md).
 
@@ -22,7 +22,7 @@ The `IMPORT INTO` statement is used to import data in formats such as `CSV`, `SQ
 
 ## Restrictions
 
-- Currently, `IMPORT INTO` supports importing data within 10 TiB.
+- For TiDB Self-Hosted, `IMPORT INTO` supports importing data within 10 TiB. For [TiDB Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-dedicated), `IMPORT INTO` supports importing data within 50 GiB.
 - `IMPORT INTO` only supports importing data into existing empty tables in the database.
 - `IMPORT INTO` does not support transactions or rollback. Executing `IMPORT INTO` within an explicit transaction (`BEGIN`/`END`) will return an error.
 - The execution of `IMPORT INTO` blocks the current connection until the import is completed. To execute the statement asynchronously, you can add the `DETACHED` option.
