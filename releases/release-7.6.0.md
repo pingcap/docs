@@ -216,7 +216,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
 ### Data migration
 
-* Data Migration (DM) support for migrating MySQL 8.0 become generally available (GA) [#issue号](链接) @[lyzx2001](https://github.com/lyzx2001) **tw@hfxsd** <!--1617-->
+* Data Migration (DM) support for migrating MySQL 8.0 become generally available (GA) [#49981](https://github.com/pingcap/tidb/issues/49981) @[lyzx2001](https://github.com/lyzx2001) **tw@hfxsd** <!--1617-->
 
     Previously, using DM to migrate data from MySQL 8.0 is an experimental feature and is not available for production environments. TiDB v7.6.0 enhances the stability and compatibility of this feature to help you smoothly and quickly migrate data from MySQL 8.0 to TiDB in production environments. In v7.6.0, this feature becomes generally available (GA).
 
