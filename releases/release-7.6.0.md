@@ -42,7 +42,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
   </tr>
   <tr>
     <td><a href="">Data Migration (DM) officially supports MySQL 8.0 (GA)</a>  {/* tw@hfxsd */}</td>
-    <td>In previous migration scenarios from MySQL 8.0 with numerous tables using DM, extensive manual modification of table creation statements was required. Starting from v7.6.0, you can directly configure alternative charsets and collations in DM. DM seamlessly manages these adjustments in the downstream, ensuring a much smoother migration process from MySQL 8.0.</td>
+    <td>Previously, using DM to migrate data from MySQL 8.0 is an experimental feature and is not available for production environments. TiDB v7.6.0 enhances the stability and compatibility of this feature to help you smoothly and quickly migrate data from MySQL 8.0 to TiDB in production environments. In v7.6.0, this feature becomes generally available (GA).</td>
   </tr>
 </tbody>
 </table>
