@@ -40,13 +40,92 @@ Return number of characters in argument.
 
 Synonym for `CHAR_LENGTH()`.
 
-### [`CONCAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat)
+### [`CONCAT(str1,str2,...)`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat)
 
-Return concatenated string.
+The `CONCAT()` function is used to concatenate one or more arguments.
 
-### [`CONCAT_WS()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat-ws)
+```sql
+SELECT CONCAT('TiDB', NULL, 'Server');
++--------------------------------+
+| CONCAT('TiDB', NULL, 'Server') |
++--------------------------------+
+|                           NULL |
++--------------------------------+
+```
 
-Return concatenate with separator.
+`CONCAT()` returns `NULL` if any argument is `NULL`.
+
+```sql
+SELECT CONCAT('TiDB', ' ', 'Server', '-', 1, true);
++---------------------------------------------+
+| CONCAT('TiDB', ' ', 'Server', '-', 1, true) |
++---------------------------------------------+
+|                              TiDB Server-11 |
++---------------------------------------------+
+```
+
+Otherwise, concatenation can be performed by placing the strings next to each other
+
+```sql
+SELECT CONCAT('TiDB', ' ', 'Server', '-', 1, true);
++---------------------------------------------+
+| CONCAT('TiDB', ' ', 'Server', '-', 1, true) |
++---------------------------------------------+
+|                              TiDB Server-11 |
++---------------------------------------------+
+```
+
+### [`CONCAT_WS(separator,str1,str2,...)`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat-ws)
+
+The `CONCAT_WS()` function is used to concatenate one or more arguments with the separator and is a form of CONCAT() with th separator.
+The first argument is the separator, while the rest of the argument is used for concatenation.
+
+```sql
+SELECT CONCAT_WS(',', 'TiDB Server', 'TiKV', 'PD');
++---------------------------------------------+
+| CONCAT_WS(',', 'TiDB Server', 'TiKV', 'PD') |
++---------------------------------------------+
+|                         TiDB Server,TiKV,PD |
++---------------------------------------------+
+```
+
+- `CONCAT_WS()` returns the concatenation of the rest of the argument if the separator is `EMPTY` string.
+- `CONCAT_WS()` returns `NULL` if the separator is `NULL`.
+
+```sql
+SELECT CONCAT_WS('', 'TiDB Server', 'TiKV', 'PD');
++--------------------------------------------+
+| CONCAT_WS('', 'TiDB Server', 'TiKV', 'PD') |
++--------------------------------------------+
+|                          TiDB ServerTiKVPD |
++--------------------------------------------+
+
+SELECT CONCAT_WS(NULL, 'TiDB Server', 'TiKV', 'PD');
++----------------------------------------------+
+| CONCAT_WS(NULL, 'TiDB Server', 'TiKV', 'PD') |
++----------------------------------------------+
+|                                         NULL |
++----------------------------------------------+
+```
+
+- `CONCAT_WS()` skips `NULL` arguments after the separator argument.
+- `CONCAT_WS()` does not skips `EMPTY` string  after the separator argument.
+
+```sql
+SELECT CONCAT_WS(',', 'TiDB Server', NULL, 'PD');
++-------------------------------------------+
+| CONCAT_WS(',', 'TiDB Server', NULL, 'PD') |
++-------------------------------------------+
+|                            TiDB Server,PD |
++-------------------------------------------+
+
+SELECT CONCAT_WS(',', 'TiDB Server', '', 'PD');
++-----------------------------------------+
+| CONCAT_WS(',', 'TiDB Server', '', 'PD') |
++-----------------------------------------+
+|                         TiDB Server,,PD |
++-----------------------------------------+
+```
 
 ### [`ELT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_elt)
 
@@ -269,8 +348,7 @@ The value options of `match_type` between TiDB and MySQL are:
 - Value options in TiDB are `"c"`, `"i"`, `"m"`, and `"s"`, and value options in MySQL are `"c"`, `"i"`, `"m"`, `"n"`, and `"u"`.
 - The `"s"` in TiDB corresponds to `"n"` in MySQL. When `"s"` is set in TiDB, the `.` character also matches line terminators (`\n`).
 
-    For example, the `SELECT REGEXP_LIKE(a, b, "n") FROM t1` in MySQL is the same as the `SELECT REGEXP_LIKE(a, b, "s") FROM t1` in TiDB.
-
+  For example, the `SELECT REGEXP_LIKE(a, b, "n") FROM t1` in MySQL is the same as the `SELECT REGEXP_LIKE(a, b, "s") FROM t1` in TiDB.
 - TiDB does not support `"u"`, which means Unix-only line endings in MySQL.
 
 ### Data type compatibility
