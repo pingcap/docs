@@ -38,7 +38,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
   <tr>
     <td rowspan="2">Reliability and Availability<br></td>
     <td><a href="https://docs.pingcap.com/tidb/v7.6/tiproxy/tiproxy-overview">TiProxy support</a>  {/* tw@ran-huang */}</td>
-    <td>Full support for the TiProxy service, easily deployable via deployment tooling, to manage and maintain connections to TiDB so that they live through rolling restarts or upgrades or scaling events.</td>
+    <td>Full support for the TiProxy service, easily deployable via deployment tooling, to manage and maintain connections to TiDB so that they live through rolling restarts, upgrades, or scaling events.</td>
   </tr>
   <tr>
     <td><a href="">Data Migration (DM) officially supports MySQL 8.0 (GA)</a>  {/* tw@hfxsd */}</td>
@@ -95,14 +95,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
     For more information, see [documentation]( ).
 
-* 优化器增强对多值索引的支持 [#47759](https://github.com/pingcap/tidb/issues/47759) [#46539](https://github.com/pingcap/tidb/issues/46539) @[Arenatlx](https://github.com/Arenatlx) @[time-and-fate](https://github.com/time-and-fate) **tw@ran-huang** <!--1405/1584-->
+* The optimizer enhances support for multi-valued indexes [#47759](https://github.com/pingcap/tidb/issues/47759) [#46539](https://github.com/pingcap/tidb/issues/46539) @[Arenatlx](https://github.com/Arenatlx) @[time-and-fate](https://github.com/time-and-fate) **tw@ran-huang** <!--1405/1584-->
 
-    TiDB 自 v6.6.0 开始引入[多值索引](/sql-statements/sql-statement-create-index.md#多值索引)，提升对 JSON 数据类型的检索性能。在 v7.6.0，优化器增强了对多值索引的支持能力，在复杂使用场景中，能够正确识别和利用多值索引对查询进行优化。
+    Starting from v6.6.0, TiDB introduced [multi-value indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes) to improve query performance for JSON data types. In v7.6.0, the optimizer enhances its support for multi-valued indexes and can correctly identify and utilize them to optimize queries in complex scenarios.
 
-    * 多值索引上的统计信息会被收集，并应用于优化器估算，当一条 SQL 可能选择到数个多值索引时，能够识别开销更小的索引。
-    * 当出现用 OR 连接的多个 "member of" 条件时，优化器能够为每个 DNF Item（member of 条件） 匹配一个有效的 Index Partial Path 路径，然后将多条路径以 Union 的方式综合起来组成 `Index Merge` 来做更高效的条件过滤和数据读取。
+    * Statistics on multi-valued indexes are collected and applied by the optimizer for estimation. When a SQL statement might select multiple multi-valued indexes, the optimizer can identify the index with lower cost.
+    * When there are multiple `member of` conditions connected by `OR`, the optimizer is able to match an effective index partial path for each DNF item (a `member of` condition) and combine multiple paths using Union to form an `Index Merge`. This allows more efficient condition filtering and data querying.
 
-    更多信息，请参考[用户文档](/sql-statements/sql-statement-create-index.md#多值索引)。
+    For more information, see [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-indexes).
 
 ### Reliability
 
@@ -127,16 +127,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
 ### Availability
 
-* 支持代理组件 TiProxy （实验特性） [#413](https://github.com/pingcap/tiproxy/issues/413) @[djshow832](https://github.com/djshow832) @[xhebox](https://github.com/xhebox) **tw@ran-huang** <!--1596-->
+* Support the proxy component TiProxy (Experimental) [#413](https://github.com/pingcap/tiproxy/issues/413) @[djshow832](https://github.com/djshow832) @[xhebox](https://github.com/xhebox) **tw@ran-huang** <!--1596-->
 
-    TiProxy 是 TiDB 的官方代理组件，放置在客户端和 TiDB server 之间，为 TiDB 提供负载均衡、连接保持功能，让 TiDB 集群的负载更加均衡，以及维护操作时不影响用户对数据库的连接访问。
+    TiProxy is the official proxy component of TiDB, located between the client and TiDB server. It provides load balancing and connection persistence functions for TiDB, making the workload of the TiDB cluster more balanced and not affecting user access to the database during maintenance operations.
 
-    * 在 TiDB 集群进行滚动重启、滚动升级、缩容等维护操作时，TiDB server 会发生变动，客户端对发生变动的 TiDB server 的连接将被中断。TiProxy 可以在这些维护操作过程中，平滑的将连接迁移至其他 TiDB server，从而让客户端不受到影响。
-    * 所有客户端对 TiDB server 的连接都无法动态迁移至其他 TiDB server。当多个 TiDB server 的负载不均衡时，可能出现整体集群资源充足，但是个别 TiDB server 资源耗尽导致延迟大幅度增加的情况。TiProxy 提供连接动态迁移功能，在客户端无感的前提下，将连接从一个 TiDB server 迁移至其他 TiDB server，从而实现 TiDB 集群的负载均衡。
+    - During maintenance operations such as rolling restarts, rolling upgrades, and scaling-in in a TiDB cluster, changes occur in the TiDB servers which result in interruptions in connections between clients and the TiDB servers. By using TiProxy, connections can be smoothly migrated to other TiDB servers during these maintenance operations so that clients are not affected.
+     - Client connections to a TiDB server cannot be dynamically migrated to other TiDB servers. When the workload of multiple TiDB servers is unbalanced, it might result in a situation where the overall cluster resources are sufficient, but certain TiDB servers experience resource exhaustion leading to a significant increase in latency. To address this issue, TiProxy provides connection dynamic migration, which allows connections to be migrated from one TiDB server to another without any impact on the clients, thereby achieving load balancing for the TiDB cluster.
 
-    TiProxy 被集成至 TiUP、TiOperator、Dashboard 等 TiDB 的基本组件中，可以方便的进行配置、部署、运维。
+    TiProxy has been integrated into TiUP, TiDB Operator, and TiDB Dashboard, making it easy to configure, deploy and maintain.
 
-    更多信息，请参考[用户文档](/tiproxy/tiproxy-overview.md)。
+    For more information, see [documentation](/tiproxy/tiproxy-overview.md).
 
 ### SQL
 
@@ -185,13 +185,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
     更多信息，请参考[用户文档](/system-variables.md#tidb_txn_entry_size_limit-从-v760-版本开始引入) 。
 
 
-* 全局排序功能成为正式功能（GA)，提升 `Add Index` 和 `Import Into` 的性能和稳定性 [#45719](https://github.com/pingcap/tidb/issues/45719) @[wjhuang2016](https://github.com/wjhuang2016) @[D3Hunter](https://github.com/D3Hunter) **tw@ran-huang** <!--1580/1579-->
+* The global sort feature becomes generally available (GA), improving the performance and stability of `ADD INDEX` and `ADD INDEX` [#45719](https://github.com/pingcap/tidb/issues/45719) @[wjhuang2016](https://github.com/wjhuang2016) @[D3Hunter](https://github.com/D3Hunter) **tw@ran-huang** <!--1580/1579-->
 
-    在 v7.4.0 以前，使用[分布式并行执行框架](https://docs.pingcap.com/zh/tidb/v7.4/tidb-distributed-execution-framework)执行 ADD INDEX 或 IMPORT INTO 等任务时，由于 TiDB 本地存储空间有限，只能对部分数据进行局部排序后再导入到 TiKV，这导导入到 TiKV 的数据范围有较多的重叠，需要额外的资源进行处理，降低了 TiKV 的性能和稳定性。
+    Prior to v7.4.0, when executing tasks such as `ADD INDEX` or `IMPORT INTO` using the [distributed execution framework](/tidb-distributed-execution-framework.md), due to limited local storage space in TiDB, only a portion of the data could be sorted locally before importing it into TiKV. The data imported into TiKV had a significant overlap range and required additional resources for processing, which reduced the performance and stability of TiKV.
 
-    随着 v7.4.0 引入全局排序特性，可以将数据暂时存储在外部存储（如 S3）中进行全局排序后再导入到 TiKV 中。这一改进降低了 TiKV 对资源的额外消耗，并显著提高了 ADD INDEX 和 IMPORT INTO 等操作的性能和稳定性。该功能在 7.6 版本成为正式功能（GA）。
+    With the introduction of the global sort feature in v7.4.0, data can be temporarily stored in external storage (such as S3) for global sorting before being imported into TiKV. This improvement reduces resource consumption of TiKV and significantly improves the performance and stability of operations like `ADD INDEX` and `IMPORT INTO`. This feature becomes GA in v7.6.0.
 
-    更多信息，请参考[用户文档](链接)。
+    For more information, see [documentation](/tidb-global-sort.md).
 
 * BR 默认恢复用户账号等系统表数据 [#48567](https://github.com/pingcap/tidb/issues/48567) @[BornChanger](https://github.com/BornChanger) **tw@Oreoxmt** <!--1570/1628-->
 
