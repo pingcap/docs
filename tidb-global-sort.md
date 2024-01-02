@@ -12,13 +12,9 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 >
 > This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
-> Currently, this feature is only applicable to TiDB Dedicated clusters. You cannot use it on TiDB Serverless clusters.
-
-</CustomContent>
+> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 
 ## Overview
 
