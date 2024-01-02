@@ -21,7 +21,7 @@ TiProxy provides connection migration, service discovery, and quick deployment.
 
 TiProxy can migrate connections from one TiDB server to another without breaking the client connection.
 
-As shown in the following figure, the client originally connects to TiDB 1 through TiProxy. After the connection migration, the client actually connects to TiDB 2. When TiDB 1 is about to be offline or the number of connections on TiDB 1 exceeds the set threshold, the connection migration is triggered. The client is unaware of the connection migration.
+As shown in the following figure, the client originally connects to TiDB 1 through TiProxy. After the connection migration, the client actually connects to TiDB 2. When TiDB 1 is about to be offline or the ratio of connections on TiDB 1 to connections on TiDB 2 exceeds the set threshold, the connection migration is triggered. The client is unaware of the connection migration.
 
 ![TiProxy connection migration](/media/tiproxy/tiproxy-session-migration.png)
 
