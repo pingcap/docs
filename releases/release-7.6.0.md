@@ -37,7 +37,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
   </tr>
   <tr>
     <td rowspan="2">Reliability and Availability<br></td>
-    <td><a href="https://docs.pingcap.com/tidb/v7.6/tiproxy/tiproxy-overview">TiProxy support</a>  {/* tw@ran-huang */}</td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.6/tiproxy/tiproxy-overview">Support TiProxy (Experimental)</a>  {/* tw@ran-huang */}</td>
     <td>Full support for the TiProxy service, easily deployable via deployment tooling, to manage and maintain connections to TiDB so that they live through rolling restarts, upgrades, or scaling events.</td>
   </tr>
   <tr>
@@ -132,7 +132,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
     TiProxy is the official proxy component of TiDB, located between the client and TiDB server. It provides load balancing and connection persistence functions for TiDB, making the workload of the TiDB cluster more balanced and not affecting user access to the database during maintenance operations.
 
     - During maintenance operations such as rolling restarts, rolling upgrades, and scaling-in in a TiDB cluster, changes occur in the TiDB servers which result in interruptions in connections between clients and the TiDB servers. By using TiProxy, connections can be smoothly migrated to other TiDB servers during these maintenance operations so that clients are not affected.
-     - Client connections to a TiDB server cannot be dynamically migrated to other TiDB servers. When the workload of multiple TiDB servers is unbalanced, it might result in a situation where the overall cluster resources are sufficient, but certain TiDB servers experience resource exhaustion leading to a significant increase in latency. To address this issue, TiProxy provides connection dynamic migration, which allows connections to be migrated from one TiDB server to another without any impact on the clients, thereby achieving load balancing for the TiDB cluster.
+    - Client connections to a TiDB server cannot be dynamically migrated to other TiDB servers. When the workload of multiple TiDB servers is unbalanced, it might result in a situation where the overall cluster resources are sufficient, but certain TiDB servers experience resource exhaustion leading to a significant increase in latency. To address this issue, TiProxy provides dynamic migration for connection, which allows connections to be migrated from one TiDB server to another without any impact on the clients, thereby achieving load balancing for the TiDB cluster.
 
     TiProxy has been integrated into TiUP, TiDB Operator, and TiDB Dashboard, making it easy to configure, deploy and maintain.
 
@@ -185,11 +185,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
     更多信息，请参考[用户文档](/system-variables.md#tidb_txn_entry_size_limit-从-v760-版本开始引入) 。
 
 
-* The global sort feature becomes generally available (GA), improving the performance and stability of `ADD INDEX` and `ADD INDEX` [#45719](https://github.com/pingcap/tidb/issues/45719) @[wjhuang2016](https://github.com/wjhuang2016) @[D3Hunter](https://github.com/D3Hunter) **tw@ran-huang** <!--1580/1579-->
+* The global sort feature becomes generally available (GA), improving the performance and stability of `ADD INDEX` and `IMPORT INTO` [#45719](https://github.com/pingcap/tidb/issues/45719) @[wjhuang2016](https://github.com/wjhuang2016) @[D3Hunter](https://github.com/D3Hunter) **tw@ran-huang** <!--1580/1579-->
 
-    Prior to v7.4.0, when executing tasks such as `ADD INDEX` or `IMPORT INTO` using the [distributed execution framework](/tidb-distributed-execution-framework.md), due to limited local storage space in TiDB, only a portion of the data could be sorted locally before importing it into TiKV. The data imported into TiKV had a significant overlap range and required additional resources for processing, which reduced the performance and stability of TiKV.
+    Prior to v7.4.0, when executing tasks such as `ADD INDEX` or `IMPORT INTO` using the [Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md), due to limited local storage space in TiDB, only a portion of the data could be sorted locally before importing it into TiKV. The data imported into TiKV had a significant overlap range and required additional resources for processing, which reduced the performance and stability of TiKV.
 
-    With the introduction of the global sort feature in v7.4.0, data can be temporarily stored in external storage (such as S3) for global sorting before being imported into TiKV. This improvement reduces resource consumption of TiKV and significantly improves the performance and stability of operations like `ADD INDEX` and `IMPORT INTO`. This feature becomes GA in v7.6.0.
+    With the introduction of the global sort feature in v7.4.0, data can be temporarily stored in external storage (such as S3) for global sorting before being imported into TiKV. This improvement reduces resource consumption of TiKV and significantly improves the performance and stability of operations such as `ADD INDEX` and `IMPORT INTO`. This feature becomes GA in v7.6.0.
 
     For more information, see [documentation](/tidb-global-sort.md).
 
