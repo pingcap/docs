@@ -709,6 +709,8 @@ tispark_workers:
 
 - `resource_control`: Resource control for the service. If this field is configured, the field content is merged with the `resource_control` content in `global` (if the two fields overlap, the content of this field takes effect). Then, a systemd configuration file is generated and sent to the machine specified in `host`. The configuration rules of `resource_control` are the same as the `resource_control` content in `global`.
 
+- `additional_scrape_conf`: Customized Prometheus scrape configuration. For more information, see [Customize Prometheus scrape configuration](/tiup/customized-montior-in-tiup-environment.md#customize-prometheus-scrape-configuration).
+
 For the above fields, you cannot modify these configured fields after the deployment:
 
 - `host`
