@@ -7,12 +7,6 @@ summary: An overview of the usage of SHOW IMPORT in TiDB.
 
 The `SHOW IMPORT` statement is used to show the IMPORT jobs created in TiDB. This statement can only show jobs created by the current user.
 
-<!-- Support note for TiDB Cloud:
-
-This TiDB statement is not applicable to TiDB Cloud.
-
--->
-
 ## Required privileges
 
 - `SHOW IMPORT JOBS`: if a user has the `SUPER` privilege, this statement shows all import jobs in TiDB. Otherwise, this statement only shows jobs created by the current user.
