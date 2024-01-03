@@ -404,7 +404,8 @@ Transaction-related fields:
 
 Fields related to Resource Control:
 
-- `Max_QUEUED_RC_TIME`: the maximum waiting time for available RU when executing SQL statements.
+- `AVG_QUEUED_RC_TIME`: the average waiting time for available RU when executing SQL statements.
+- `MAX_QUEUED_RC_TIME`: the maximum waiting time for available RU when executing SQL statements.
 - `AVG_REQUEST_UNIT_WRITE`: the average number of write RUs consumed by SQL statements.
 - `MAX_REQUEST_UNIT_WRITE`: the maximum number of write RUs consumed by SQL statements.
 - `AVG_REQUEST_UNIT_READ`: the average number of read RUs consumed by SQL statements.
