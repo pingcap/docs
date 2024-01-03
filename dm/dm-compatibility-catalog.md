@@ -19,7 +19,7 @@ DM supports migrating data from different sources to TiDB clusters. Based on the
 |MySQL ≤ 5.5|Not tested||
 |MySQL 5.6|GA||
 |MySQL 5.7|GA||
-|MySQL 8.0|Experimental||
+|MySQL 8.0|GA|Povide basic support for binlog transaction compression [Transaction_payload_event](https://dev.mysql.com/doc/dev/mysql-server/8.1.0/classbinary__log_1_1Transaction__ payload__event.html). Scenarios such as merging and migrating data from sharded tables, and checkpoint are not yet fully supported.|
 |MariaDB < 10.1.2|Incompatible|Incompatible with binlog of the time type|
 |MariaDB 10.1.2 ~ 10.5.10|Experimental||
 |MariaDB > 10.5.10|Incompatible|Permission errors reported in the check procedure|

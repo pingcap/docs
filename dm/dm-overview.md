@@ -64,6 +64,10 @@ Before using the DM tool, note the following restrictions:
 
     - DM does not support migrating `charset=GBK` tables to TiDB clusters earlier than v5.4.0.
 
++ Binlog compatibility
+
+    - DM supports the MySQL 8.0 new feature binlog [Transaction_payload_event](https://dev.mysql.com/doc/dev/mysql-server/8.1.0/classbinary__log_1_1Transaction__payload__event.html). Scenarios such as merging and migrating data from sharded tables, and checkpoint are not yet fully supported.
+
 ## Contributing
 
 You are welcome to participate in the DM open sourcing project. Your contribution would be highly appreciated. For more details, see [CONTRIBUTING.md](https://github.com/pingcap/tiflow/blob/master/dm/CONTRIBUTING.md).
