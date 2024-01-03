@@ -16,13 +16,13 @@ For comparisons between functions and syntax of Oracle and TiDB, see [Comparison
 
 ## Supported functions
 
-### [`ASCII(str)`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ascii)
+### [`ASCII()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ascii)
 
-The `ASCII(str)` function is used to get the ASCII value of the leftmost character in a given string (`str`).
+The `ASCII(str)` function is used to get the ASCII value of the leftmost character in the given argument. The argument can be either a string or a number.
 
-- If `str` is not empty, the function returns the ASCII value of the leftmost character.
-- If `str` is an empty string, the function returns 0.
-- If `str` is `NULL`, the function returns `NULL`.
+- If the argument is not empty, the function returns the ASCII value of the leftmost character.
+- If the argument is an empty string, the function returns `0`.
+- If the argument is `NULL`, the function returns `NULL`.
 
 > **Note:**
 >
@@ -41,26 +41,67 @@ SELECT ASCII('A');
 ```
 
 ```sql
-SELECT ASCII('');
+SELECT ASCII('TiDB');
 
-+------------+
-| ASCII('')  |
-+------------+
-|          0 |
-+------------+
++---------------+
+| ASCII('TiDB') |
++---------------+
+|            84 |
++---------------+
 ```
 
 ```sql
-SELECT ASCII('TiDB');
+SELECT ASCII(23);
 
-+------------+
-| ASCII('T') |
-+------------+
-|         84 |
-+------------+
++-----------+
+| ASCII(23) |
++-----------+
+|        50 |
++-----------+
 ```
 
 ### [`BIN()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bin)
+
+The `BIN()` function is used to convert the given argument into a string representation of its binary value. The argument can be either a string or a number.
+
+- If the argument is a positive number, the function returns a string representation of its binary value.
+- If the argument is a negative number, the function converts the absolute value of the argument to its binary representation, inverts each bit of the binary value (changing `0` to `1` and `1` to `0`), and then adds `1` to the inverted value.
+- If the argument is a string containing only digits, the function returns the result according to those digits. For example, the results for `"123"` and `123` are the same.
+- If the argument is a string and its first character is not a digit (such as `"q123"`), the function returns `0`.
+- If the argument is a string that consists of digits and non-digits, the function returns the result according to the consecutive digits at the beginning of the argument. For instance, the results for `"123q123"` and `123` are the same.
+- If the argument is `NULL`, the function returns `NULL`.
+
+Examples:
+
+```sql
+SELECT BIN(123);
+
++----------+
+| BIN(123) |
++----------+
+| 1111011  |
++----------+
+```
+
+```sql
+SELECT BIN(-7);
+
++------------------------------------------------------------------+
+| BIN(-7)                                                          |
++------------------------------------------------------------------+
+| 1111111111111111111111111111111111111111111111111111111111111001 |
++------------------------------------------------------------------+
+```
+
+```sql
+SELECT BIN("123q123");
+
++----------------+
+| BIN("123q123") |
++----------------+
+| 1111011        |
++----------------+
+```
 
 Return a string containing binary representation of a number.
 
@@ -317,7 +358,7 @@ The value options of `match_type` between TiDB and MySQL are:
 
 The difference between TiDB and MySQL support for the binary string type:
 
-- MySQL does not support binary strings in regular expression functions since 8.0.22. For more details, refer to [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/regexp.html). But in practice, regular functions can work in MySQL when all parameters or return types are binary strings. Otherwise, an error will be reported.
+- MySQL does not support binary strings in regular expression functions since 8.0.22. For more details, refer to [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/regexp.html). But in practice, regular functions can work in MySQL when all arguments or return types are binary strings. Otherwise, an error will be reported.
 - Currently, TiDB prohibits using binary strings and an error will be reported under any circumstances.
 
 ### Other compatibility
