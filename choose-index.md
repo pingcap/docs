@@ -274,7 +274,7 @@ tidb> EXPLAIN SELECT /*+ use_index_merge(t3, idx, idx2) */ * FROM t3 WHERE ((a=1
 
 ### Partially supported scenarios
 
-For `AND`/`ON` conditions composed of multiple expressions where each `item` condition correspond to multiple different indexes, the specific index to be used varies:
+For `AND`/`ON` conditions composed of multiple expressions where each `item` condition corresponds to multiple different indexes, the specific index to be used varies:
 
 * If the path of a single item is also index merge, as long as its logic is consistent with the logic of the external `AND`/`OR`, it can be merged with the external index merge.
 * If the path of a single item is also index merge, and it has only one index partial path, then it can be merged with the external index merge regardless of whether its own index merge logic is `AND`/`OR`.
