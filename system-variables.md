@@ -336,15 +336,9 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: `67108864`
-<<<<<<< HEAD
 - Range: `[1024, 1073741824]`. The value should be an integer multiple of 1024. If the value is not divisible by 1024, a warning will be prompted and the value will be rounded down. For example, when the value is set to 1025, the actual value in TiDB is 1024.
 - The maximum packet size allowed by the server and the client in one transmission of packets, in bytes.
-=======
-- Range: `[1024, 1073741824]`
-- The value should be an integer multiple of 1024. If the value is not divisible by 1024, a warning will be prompted and the value will be rounded down. For example, when the value is set to 1025, the actual value in TiDB is 1024.
-- The maximum packet size allowed by the server and the client in one transmission of packets.
 - In the `SESSION` scope, this variable is read-only.
->>>>>>> 8e7694ebe0 (system-variable: indicate that max_allowed_packet is ready only in the session scope (#15946))
 - This variable is compatible with MySQL.
 
 ### max_connections
