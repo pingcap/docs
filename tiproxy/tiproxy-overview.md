@@ -51,6 +51,8 @@ TiProxy is not suitable for the following scenarios:
 - Sensitive to cost: If the TiDB cluster uses hardware load balancers, virtual IP, or the load balancer provided by Kubernetes, adding TiProxy will increase the cost. In addition, if you deploy the TiDB cluster across availability zones on the cloud, adding TiProxy will also increase the traffic cost across availability zones.
 - TiDB server failover: TiProxy can keep the client connection only when the TiDB server is offline or restarted as planned. If the TiDB server is offline unexpectedly, the connection is still broken.
 
+It is recommended that you use TiProxy for the scenarios that TiProxy is suitable for and use HAProxy or other proxies when your application is sensitive to performance.
+
 ## Installation and usage
 
 This section describes how to deploy and change TiProxy using TiUP. For how to deploy TiProxy using TiDB Operator in Kubernetes, see [TiDB Operator documentation](https://docs.pingcap.com/tidb-in-kubernetes/stable).
