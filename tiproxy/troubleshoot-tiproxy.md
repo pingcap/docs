@@ -17,7 +17,7 @@ You can troubleshoot the issue by following these steps:
 4. If the client reports `Verify TiDB capability failed, please upgrade TiDB`, check if the TiDB server version is v6.5.0 or later.
 5. If the client reports `TiProxy fails to connect to TiDB, please make sure TiDB is available`, check if the TiProxy node can connect to the TiDB server.
 6. If the client reports `Require TLS enabled on TiDB when require-backend-tls=true`, check if TiDB is correctly configured with TLS certificates.
-7. If the client reports `TiProxy fails to connect to TiDB, please make sure TiDB proxy-protocol is set correctly`, check if [`proxy.proxy-protocol`](/tiproxy/tiproxy-configuration.md#proxy-protocol) is enabled on TiProxy and [`proxy-protocol`](/tidb-configuration-file/#proxy-protocol) is not enabled on the TiDB server.
+7. If the client reports `TiProxy fails to connect to TiDB, please make sure TiDB proxy-protocol is set correctly`, check if [`proxy.proxy-protocol`](/tiproxy/tiproxy-configuration.md#proxy-protocol) is enabled on TiProxy and [`proxy-protocol`](/tidb-configuration-file.md#proxy-protocol) is not enabled on the TiDB server.
 8. Check if TiProxy is configured with [`max-connections`](/tiproxy/tiproxy-configuration.md#max-connections) and if the number of connections on TiProxy exceeds the maximum connection limit.
 9. Check the TiProxy log for error messages.
 
