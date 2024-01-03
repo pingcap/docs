@@ -51,17 +51,17 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
 ### Performance
 
-* BR 快照恢复速度最大提升 10 倍 [#33937](https://github.com/pingcap/tidb/issues/33937) @[3pointer](https://github.com/3pointer) **tw@Oreoxmt** <!--1647-->
+* BR improves snapshot restore speed by up to 10 times [#33937](https://github.com/pingcap/tidb/issues/33937) @[3pointer](https://github.com/3pointer) **tw@Oreoxmt** <!--1647-->
 
-    随着 TiDB 集群规模的不断扩大，在故障时快速恢复集群以减少业务中断时间变得愈发关键。`br` v7.6.0 之前的版本中， `region` 打散算法一直是性能恢复的瓶颈。然而，在 `br` v7.6.0 中，我们对 `region` 打散算法进行了优化，迅速地将恢复任务拆分成大量小任务并批量散布到所有的 TiKV 节点。通过充分利用每个 TiKV 节点的所有资源，我们成功实现了并行快速恢复，在大规模 `region` 场景下，将集群快照恢复速度提升了 10 倍。
+    As the TiDB cluster scales up, it becomes increasingly crucial to quickly restore the cluster from failures to minimize business downtime. Before v7.6.0, the Region scattering algorithm is a primary bottleneck in performance restoration. In v7.6.0, BR optimizes the Region scattering algorithm, which quickly splits the restore task into a large number of small tasks and scatters them to all TiKV nodes in batches. The new parallel recovery algorithm fully utilizes the resources of each TiKV node, thereby achieving a rapid parallel recovery. In internal tests, the snapshot restore speed of the cluster is improved by about 10 times in large-scale Region scenarios.
 
-    我们为用户提供了 `--granularity` 命令行参数，通过设置该参数可以启用新的并行恢复算法。例如：(命令行参数例子待研发提供)
+    To use the new parallel recovery algorithm, you can configure the `--granularity` command line parameter of `br`. For example:
 
     ```sql
 
     ```
 
-    更多信息，请参考[用户文档](链接)。
+    For more information, see [documentation](链接).
 
 * The concurrent HashAgg algorithm of TiDB supports disk spill (experimental) [#35637](https://github.com/pingcap/tidb/issues/35637) @[xzhangxian1008](https://github.com/xzhangxian1008) **tw@qiancai** <!--1365-->
 
@@ -106,24 +106,23 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
 ### Reliability
 
-* 跨数据库绑定执行计划 [#48875](https://github.com/pingcap/tidb/issues/48875) @[qw4990](https://github.com/qw4990) **tw@Oreoxmt** <!--1613-->
+* Cross-database execution plan binding [#48875](https://github.com/pingcap/tidb/issues/48875) @[qw4990](https://github.com/qw4990) **tw@Oreoxmt** <!--1613-->
 
-    我们看到越来越多的用户运行 TiDB 支撑其 SaaS 平台。SaaS 平台的一种普遍的建模方式，是把平台上每个租户的数据存入不同的“数据库”，而业务逻辑完全相同。这样我们能看到上百个数据库拥有相同的表和索引定义，运行类似的 SQL 语句。在这种场景下，当我们要对一条 SQL 语句的执行计划进行绑定(SQL Binding)，这条绑定通常对运行在其他数据库的 SQL 也有帮助。
+    When running SaaS services on TiDB, it is common practice to store data for each tenant in separate databases for easier data maintenance and management. This results in hundreds of databases with the same table and index definitions, and similar SQL statements. In such scenario, when you create an execution plan binding for a SQL statement, this binding usually applies to the SQL statements in other databases as well.
 
-    针对这种应用场景，TiDB 引入了 "通用绑定" (Universal SQL Binding) 进行跨数据库绑定。 用一个执行计划绑定匹配模式相同的 SQL，即使他们运行在不同数据库上。比如，当我们创建了下面绑定，无论 `t1` 和 `t2` 位于哪个数据库，TiDB 都会尝试用此绑定的规则来生成执行计划，而不需要为每个数据库上的 SQL 单独创建。
+    For this scenario, TiDB v7.6.0 introduces the cross-database binding feature, which supports binding the same execution plan to SQL statements with the same schema, even if they are in different databases. For example, you can use the wildcard `*` to represent the database name when creating a binding, as shown below. In this case, TiDB will try to use this binding to generate an execution plan for SQL statements in any database, without the need to create a binding for each database.
 
     ```sql
-    CREATE GLOBAL UNIVERSAL BINDING for
-        SELECT * FROM t1, t2 WHERE t1.id = t2.id
+    CREATE GLOBAL BINDING FOR
     USING
-        SELECT /*+ merge_join(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
+        SELECT /*+ merge_join(t1, t2) */ t1.id, t2.amount FROM *.t1, *.t2 WHERE t1.id = t2.id;
     ```
 
-    "通用绑定" 还能够有效缓解 Saas 场景中一个常见问题。SaaS 客户的数据及负载可能因为客户业务本身的需要而剧烈变化，通常 SaaS 服务商无法预测。在这个场景下，由于统计信息无法及时更新，数据量由小及大的快速变化经常会引发 SQL 性能问题。为解决这个问题，SaaS 服务商可以用 "通用绑定" 固定大数据量客户已经验证过的执行计划，所有客户的执行计划都会被固定。 针对 SaaS 平台，这一功能的引入为客户带来了显著的便利和体验提升。
+    In addition, cross-database binding can effectively mitigate SQL performance issues caused by uneven distribution and rapid changes in user data and workload. SaaS providers can use cross-database binding to fix execution plans validated by users with large data volumes, thereby fixing execution plans for all users. For SaaS providers, this feature provides significant convenience and experience improvements.
 
-    由于 "通用绑定" 会引入一个很小的系统开销（小于1%）， 默认将其关闭。 有需要的用户通过设置变量 [`tidb_opt_enable_universal_binding`]() 为 `YES` 开启。
+    Due to the system overhead (less than 1%) introduced by cross-database binding, TiDB disables this feature by default. To use cross-database binding, you need to first enable the [`tidb_opt_enable_fuzzy_binding`](/system-variables.md#tidb_opt_enable_fuzzy_binding-new-in-v760) system variable.
 
-    更多信息，请参考[用户文档](/sql-plan-management.md)。
+    For more information, see [documentation](/sql-plan-management.mdcross-database-binding).
 
 ### Availability
 
@@ -140,13 +139,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
 ### SQL
 
-* LOAD DATA 支持显示事务和回滚 [#49079](https://github.com/pingcap/tidb/pull/49079) @[ekexium](https://github.com/ekexium) **tw@Oreoxmt** <!--1422-->
+* `LOAD DATA` supports explicit transactions and rollbacks [#49079](https://github.com/pingcap/tidb/pull/49079) @[ekexium](https://github.com/ekexium) **tw@Oreoxmt** <!--1422-->
 
-    在 TiDB v7.6.0 之前，使用 `LOAD DATA` 语句来批量导入数据时，提交方式经历了一些变化。在 TiDB v4.0.0 之前，每导入 20000 行数据就会进行一次提交；从 v4.0.0 到 v6.6.0 版本，默认在一个事务中提交所有行，但也支持通过设置 [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) 参数实现分批次提交；自 TiDB v7.0.0 起，仅支持导入后一次性提交数据，[`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) 参数不再生效。与 MySQL 的 `LOAD DATA` 相比，TiDB v7.6.0 之前的 `LOAD DATA` 在不同版本的事务行为都存在差异，因此在使用该语句时，用户需要额外的调整。
+    Before TiDB v7.6.0, when you use the `LOAD DATA` statement to import data in batches, its transactional behavior has undergone several changes. Specifically, before v4.0.0, `LOAD DATA` commits every 20000 rows. From v4.0.0 to v6.6.0, TiDB commits all rows in one transaction by default and also supports committing every fixed number of rows by setting the [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) system variable. Starting from v7.0.0, `tidb_dml_batch_size` no longer takes effect on `LOAD DATA` and TiDB commits all rows in one transaction. Compared with MySQL, the transactional behavior of `LOAD DATA` varies across different version before TiDB v7.6.0, requiring additional adjustments by users.
 
-    从 TiDB v7.6.0 版本起，TiDB 的 `LOAD DATA` 的事务行为和其他普通 DML 一致。特别是和 MySQL 的事务行为一致， 事务内的`LOAD DATA` 语句本身不再自动提交当前事务，也不会开启新事务，并且事务内的 `LOAD DATA` 语句可以被显式提交或者回滚。此外，`LOAD DATA` 语句还受 TiDB 事务模式设置（乐观/悲观）影响。这些改进使得用户在从 MySQL 到 TiDB 迁移时不再需要额外的适配工作，让数据导入体验更加一致和可控。
+    Starting from v7.6.0, TiDB processes `LOAD DATA` in transactions in the same way as other DML statements, especially in the same way as MySQL. The `LOAD DATA` statement in a transaction no longer automatically commits the current transaction or starts a new transaction. Moreover, it can be explicitly committed or rolled back. Additionally, the `LOAD DATA` statement is affected by the TiDB transaction mode setting (optimistic or pessimistic transaction). These improvements simplify the migration process from MySQL to TiDB and offer a more unified and controllable data import experience.
 
-    更多信息，请参考[用户文档](/sql-statements/sql-statement-load-data.md)。
+    For more information, see [documentation](/sql-statements/sql-statement-load-data.md).
 
 ### DB operations
 
@@ -160,15 +159,15 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
     For more information, see [documentation](/sql-statements/sql-statement-flashback-cluster.md).
 
-* 支持自动终止长时间未提交的空闲事务 [#48714](https://github.com/pingcap/tidb/pull/48714) @[crazycs520](https://github.com/crazycs520) **tw@Oreoxmt** <!--1598-->
+* Support automatically terminating long-running idle transactions [#48714](https://github.com/pingcap/tidb/pull/48714) @[crazycs520](https://github.com/crazycs520) **tw@Oreoxmt** <!--1598-->
 
-    我们经常碰到这样的情况，由于网络异常断开或者应用程序的小问题，有时 `commit / rollback` 语句无法正常传送到数据库，导致锁没有被释放，从而触发了事务锁等待问题和数据库的连接数的快速上涨。在测试环境，这种情况经常发生，线上环境偶尔也会出现，而且有的时候很难诊断。因此，TiDB v7.6.0 版本开始支持通过设置 [`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-从-v760-版本开始引入) 参数，自动终止长时间运行的空闲事务，以防止这种情况的发生。该参数单位是秒，当一个事务空闲时间超过设定的阈值时，系统会自动强制结束该事务的数据库连接并回滚事务。
+    In scenarios where network disconnection or application failure occur, `COMMIT`/`ROLLBACK` statements might fail to be transmitted to the database. This could lead to delayed release of database locks, causing transaction lock waits and a rapid increase in database connections. Such issues are common in test environments, but can also occur occasionally in production environments and are sometimes difficult to diagnose. To avoid these issues, TiDB v7.6.0 introduces the [`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760) system variable, which automatically terminates long-running idle transactions. When a user session is in a transactional state and remains idle for a duration exceeding the value of this variable, TiDB will terminate the database connection of the transaction and roll back it.
 
-    更多信息，请参考[用户文档](/system-variables.md#tidb_idle_transaction_timeout-从-v760-版本开始引入)。
+    For more information, see [documentation](/system-variables.md#tidb_idle_transaction_timeout-从-v760-版本开始引入).
 
-* 简化执行计划绑定的语法 [#48876](https://github.com/pingcap/tidb/issues/48876) @[qw4990](https://github.com/qw4990) **tw@Oreoxmt** <!--1613-->
+* Simplify the syntax for creating execution plan bindings [#48876](https://github.com/pingcap/tidb/issues/48876) @[qw4990](https://github.com/qw4990) **tw@Oreoxmt** <!--1613-->
 
-    TiDB 在新版本中简化的创建执行计划绑定的语法。 在命令中无需提供原 SQL 语句， TiDB 会根据带有 hint 的语句识别出原 SQL。 提升了创建执行计划绑定的便利性。 例如：
+    TiDB v7.6.0 simplifies the syntax for creating execution plan bindings. When creating an execution plan binding, you no longer need to provide the original SQL statement. TiDB identifies the original SQL statement based on the statement with hints. This improvement enhances the convenience of creating execution plan bindings. For example:
 
     ```sql
     CREATE GLOBAL BINDING
@@ -176,13 +175,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
     SELECT /*+ merge_join(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
     ```
 
-    更多信息，请参考[用户文档](/sql-plan-management.md)。
+    For more information, see [documentation](/sql-plan-management.md).
 
-* 支持动态调整单行记录大小限制 [#49237](https://github.com/pingcap/tidb/pull/49237) @[zyguan](https://github.com/zyguan) **tw@Oreoxmt** <!--1452-->
+* Support dynamically modifying the size limit of a single row record in TiDB [#49237](https://github.com/pingcap/tidb/pull/49237) @[zyguan](https://github.com/zyguan) **tw@Oreoxmt** <!--1452-->
 
-    TiDB v7.6.0 之前，事务中单行记录的大小受 TiDB 的配置文件参数 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-从-v50-版本开始引入) 限制。如果超出该限制，TiDB 将返回 `entry too large` 错误。在这种情况下，用户需要修改 TiDB 配置文件并重启 TiDB 才能够生效。为了降低用户的管理成本，TiDB 从 v7.6.0 开始新增了系统变量 [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-从-v760-版本开始引入)，支持动态修改该配置项的值。该变量的默认值为 `0`，表示默认使用 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-从-v50-版本开始引入) 的值。但如果设置为非 `0` 值，就会优先使用该变量作为事务中的单行记录大小的限制。这一改进旨在使用户更灵活地调整系统配置，而无需重启 TiDB 生效。
+    Before v7.6.0, the size of a single row record in a transaction is limited by the TiDB configuration item [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50). If the size limit is exceeded, TiDB returns the `entry too large` error. In this case, you need to manually modify the TiDB configuration file and restart TiDB to make the modification take effect. To reduce the management overhead for users, TiDB v7.6.0 introduces the system variable [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760), which supports dynamically modifying the value of the `txn-entry-size-limit` configuration item. The default value of this variable is `0`, which means that TiDB uses the value of the configuration item `txn-entry-size-limit` by default. When this variable is set to a non-zero value, TiDB limits the size of a row record in transactions to the value of this variable. This improvement enhances the flexibility for users to adjust system configurations without restarting TiDB.
 
-    更多信息，请参考[用户文档](/system-variables.md#tidb_txn_entry_size_limit-从-v760-版本开始引入) 。
+    For more information, see [documentation](/system-variables.md#tidb_txn_entry_size_limit-从-v760-版本开始引入).
 
 
 * The global sort feature becomes generally available (GA), improving the performance and stability of `ADD INDEX` and `IMPORT INTO` [#45719](https://github.com/pingcap/tidb/issues/45719) @[wjhuang2016](https://github.com/wjhuang2016) @[D3Hunter](https://github.com/D3Hunter) **tw@ran-huang** <!--1580/1579-->
@@ -193,13 +192,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
     For more information, see [documentation](/tidb-global-sort.md).
 
-* BR 默认恢复用户账号等系统表数据 [#48567](https://github.com/pingcap/tidb/issues/48567) @[BornChanger](https://github.com/BornChanger) **tw@Oreoxmt** <!--1570/1628-->
+* BR restores system tables by default, such as user data [#48567](https://github.com/pingcap/tidb/issues/48567) @[BornChanger](https://github.com/BornChanger) **tw@Oreoxmt** <!--1570/1628-->
 
-    `br` 备份恢复工具从 v5.1.0 开始引入了对 **mysql schema** 下的系统表数据的默认自动备份，但默认情况下不会恢复系统表数据。随后，在 `br` v6.2.0 版本中，我们引入了新的恢复参数 `--with-sys-table`，使用户在恢复数据的同时选择性地恢复部分系统表相关数据，提供了更多的操作灵活性。
+    Starting from v5.1.0, when you back up snapshots, BR automatically backs up system tables in the `mysql` schema, but does not restore these system tables by default. In v6.2.0, BR adds the parameter `--with-sys-table` to support restoring data in some system tables, providing more flexibility in operations.
 
-    为了进一步简化用户的管理成本，同时为用户提供更直观的默认行为。从 `br` v7.6.0 开始，我们决定将恢复参数 `--with-sys-table` 的默认值设置为开启，并取消 `cloud_admin` 账号过滤。这意味着， `br` 默认支持在数据恢复时同时恢复部分系统表相关数据，特别是用户账号和表的统计信息数据。这一改进旨在使备份恢复操作更加直观且符合用户期望，减轻用户手动配置的负担，提升整体操作体验。
+    To further reduce the management overhead for users and provide more intuitive default behavior, starting from v7.6.0, BR enables the parameter `--with-sys-table` by default and supports restoring user data for the `cloud_admin` user. This means that BR restores some system tables during restoration by default, especially user account and table statistics data. This improvement makes backup and restore operations more intuitive and align with user expectations, thereby reducing the burden of manual configuration and improving the overall operation experience.
 
-    更多信息，请参考[用户文档](/br/br-snapshot-guide.md)。
+    For more information, see [documentation](/br/br-snapshot-guide.md).
 
 ### Observability
 
