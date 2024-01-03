@@ -41,8 +41,7 @@ Before using the DM tool, note the following restrictions:
 
 + Database version requirements
 
-    - MySQL version 5.5 ~ 5.7
-    - MySQL version 8.0 (experimental features)
+    - MySQL version 5.5 ~ 8.0
     - MariaDB version >= 10.1.2 (experimental features)
 
     > **Note:**
@@ -66,7 +65,7 @@ Before using the DM tool, note the following restrictions:
 
 + Binlog compatibility
 
-    - DM supports the MySQL 8.0 new feature binlog [Transaction_payload_event](https://dev.mysql.com/doc/dev/mysql-server/8.1.0/classbinary__log_1_1Transaction__payload__event.html). Scenarios such as merging and migrating data from sharded tables, and checkpoint are not yet fully supported.
+    - DM does not support the MySQL 8.0 new feature binlog [Transaction_payload_event](https://dev.mysql.com/doc/dev/mysql-server/8.1.0/classbinary__log_1_1Transaction__payload__event.html).
 
 ## Contributing
 
