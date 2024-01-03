@@ -20,7 +20,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Upgrade the default TiDB version of new [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters from [v7.1.1](https://docs.pingcap.com/tidb/v7.1/release-7.1.1) to [v7.5.0](https://docs.pingcap.com/tidb/stable/release-7.5.0).
 
-- The feature of [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) dual region backup is now in General Availability (GA).
+- The dual region backup feature for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) is now in General Availability (GA).
 
     By using this feature, you can replicate backups across geographic regions within AWS/Google Cloud. This feature provides an additional layer of data protection and disaster recovery capabilities.
 
