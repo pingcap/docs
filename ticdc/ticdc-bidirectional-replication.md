@@ -112,7 +112,7 @@ To solve the problem of replicable DDLs and non-replicable DDLs, TiDB introduces
 
 ### Replication scenarios of non-replicable DDLs
 
-1. Set the BDR role of all TiDB clusters to `LOCAL_ONLY` (default) and then execute `ADMIN SET BDR ROLE LOCAL_ONLY`.
+1. Execute `ADMIN SET BDR ROLE LOCAL_ONLY` on all TiDB clusters to set the BDR role to `LOCAL_ONLY` (default).
 2. Stop writing data to the tables that need to execute DDLs in all clusters.
 3. Wait until all writes to the corresponding tables in all clusters are replicated to other clusters, and then manually execute all DDLs on each TiDB cluster.
 4. Wait until the DDLs are completed, and then resume writing data.
