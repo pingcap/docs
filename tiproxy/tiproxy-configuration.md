@@ -42,7 +42,6 @@ Configuration for SQL port.
 
 + Default value: `0.0.0.0:6000`
 + Support hot-reload: no
-+ Support hot-reload: no
 + SQL gateway address. The format is `<ip>:<port>`.
 
 #### `graceful-wait-before-shutdown`
