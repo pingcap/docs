@@ -1,7 +1,6 @@
 ---
 title: TiDB Cloud Release Notes in 2023
 summary: Learn about the release notes of TiDB Cloud in 2023.
-aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 ---
 
 # TiDB Cloud Release Notes in 2023
@@ -131,7 +130,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **API changes**
 
-- Introduce a TiDB Cloud Billing API endpoint to retrieve the bill for the given month of a specific organization. 
+- Introduce a TiDB Cloud Billing API endpoint to retrieve the bill for the given month of a specific organization.
 
     This Billing API endpoint is released in TiDB Cloud API v1beta1, which is the latest API version of TiDB Cloud. For more information, refer to the [API documentation (v1beta1)](https://docs.pingcap.com/tidbcloud/api/v1beta1#tag/Billing).
 
