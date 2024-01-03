@@ -22,6 +22,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - The dual region backup feature for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) is now in General Availability (GA).
 
-    By using this feature, you can replicate backups across geographic regions within AWS/Google Cloud. This feature provides an additional layer of data protection and disaster recovery capabilities.
+    By using this feature, you can replicate backups across geographic regions within AWS or Google Cloud. This feature provides an additional layer of data protection and disaster recovery capabilities.
 
     For more information, see [Dual region backup](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup).
