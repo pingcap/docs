@@ -112,7 +112,7 @@ tiup ctl:v<CLUSTER_VERSION> tikv
 
 特に明記されていない限り、すべてのコマンドはリモート モードとローカル モードの両方をサポートします。
 
-さらに、 `tikv-ctl`は 2 つの単純なコマンド`--to-hex`および`--to-escaped`があり、これらはキーの形式に単純な変更を加えるために使用されます。
+さらに、 `tikv-ctl` 2 つの単純なコマンド`--to-hex`および`--to-escaped`があり、これらはキーの形式に単純な変更を加えるために使用されます。
 
 通常、キーの`escaped`形式を使用します。例えば：
 
@@ -125,7 +125,7 @@ AAFF
 
 > **注記：**
 >
-> コマンド ラインでキーの`escaped`形式を指定する場合は、二重引用符で囲む必要があります。そうしないと、bash がバックスラッシュを使用してしまい、間違った結果が返されます。
+> コマンドラインでキーの`escaped`形式を指定する場合は、二重引用符で囲む必要があります。そうしないと、bash がバックスラッシュを使用してしまい、間違った結果が返されます。
 
 ## サブコマンド、いくつかのオプション、フラグ {#subcommands-some-options-and-flags}
 
@@ -135,7 +135,7 @@ AAFF
 
 `raft`サブコマンドを使用して、特定の時点でのRaftステート マシンのステータスを表示します。ステータス情報には 2 つの部分が含まれます。3 つの構造体 ( **RegionalLocalState** 、 **RaftLocalState** 、および**RegionApplyState** ) と、ログの特定の部分の対応するエントリです。
 
-上記の情報を取得するには、それぞれ`region`および`log`サブコマンドを使用します。 2 つのサブコマンドは両方とも、リモート モードとローカル モードを同時にサポートします。
+上記の情報を取得するには、それぞれ`region`サブコマンドと`log`サブコマンドを使用します。 2 つのサブコマンドは両方とも、リモート モードとローカル モードを同時にサポートします。
 
 `region`サブコマンドの場合:
 
@@ -346,7 +346,7 @@ tikv-ctl --data-dir /path/to/tikv tombstone -p 127.0.0.1:2379 -r <region_id>,<re
 > -   `tombstone`コマンドはローカル モードのみをサポートします。
 > -   `-p`オプションの引数は、 `http`プレフィックスを付けずに PD エンドポイントを指定します。 PD エンドポイントを指定すると、PD が安全に Tombstone に切り替えることができるかどうかがクエリされます。
 
-### <code>consistency-check</code>リクエストを TiKV に送信する {#send-a-code-consistency-check-code-request-to-tikv}
+### TiKV に<code>consistency-check</code>リクエストを送信する {#send-a-code-consistency-check-code-request-to-tikv}
 
 `consistency-check`コマンドを使用して、特定のリージョンの対応するRaft内のレプリカ間の整合性チェックを実行します。チェックが失敗すると、TiKV 自体がパニックになります。 `--host`で指定された TiKV インスタンスがリージョンリーダーではない場合、エラーが報告されます。
 
@@ -513,7 +513,7 @@ tikv-ctl ldb --hex manifest_dump --path=/tmp/db/MANIFEST-000001
 
 `--column_family=<string>`コマンド ラインを使用して、クエリの対象となるカラムファミリーを指定できます。
 
-`--try_load_options`データベース オプション ファイルをロードしてデータベースを開きます。データベースの実行中は、このオプションを常にオンにしておくことが推奨されます。デフォルトのオプションでデータベースを開くと、LSM ツリーが破損する可能性があり、自動的に回復できません。
+`--try_load_options`データベース オプション ファイルをロードしてデータベースを開きます。データベースの実行中は、このオプションを常にオンにしておくことが推奨されます。デフォルトのオプションでデータベースを開くと、LSM ツリーが破損する可能性があり、自動的には回復できません。
 
 ### 暗号化メタデータをダンプする {#dump-encryption-metadata}
 
@@ -596,9 +596,9 @@ tikv-ctl --data-dir </path/to/tikv> bad-ssts --pd <endpoint>
     overlap region:
     RegionInfo { region: id: 4 end_key: 7480000000000000FF0500000000000000F8 region_epoch { conf_ver: 1 version: 2 } peers { id: 5 store_id: 1 }, leader: Some(id: 5 store_id: 1) }
 
-    suggested operations:
-    tikv-ctl ldb --db=data/tikv-21107/db unsafe_remove_sst_file "data/tikv-21107/db/000014.sst"
-    tikv-ctl --db=data/tikv-21107/db tombstone -r 4 --pd <endpoint>
+    refer operations:
+    tikv-ctl ldb --db=/path/to/tikv/db unsafe_remove_sst_file 000014
+    tikv-ctl --data-dir=/path/to/tikv tombstone -r 4 --pd <endpoint>
     --------------------------------------------------------
     corruption analysis has completed
 

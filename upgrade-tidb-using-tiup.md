@@ -16,7 +16,7 @@ summary: Learn how to upgrade TiDB using TiUP.
 >
 > 1.  TiFlash を5.3 より前のバージョンから 5.3 以降にオンラインでアップグレードすることはできません。代わりに、最初に初期バージョンのすべてのTiFlashインスタンスを停止してから、クラスターをオフラインでアップグレードする必要があります。他のコンポーネント (TiDB や TiKV など) がオンライン アップグレードをサポートしていない場合は、 [オンラインアップグレード](#online-upgrade)の警告の指​​示に従ってください。
 > 2.  アップグレード プロセス中に DDL ステートメントを実行し**ないでください**。そうしないと、未定義の動作の問題が発生する可能性があります。
-> 3.  DDL ステートメントがクラスター内で実行されているときは、TiDB クラスターをアップグレードし**ないでください**(通常は、 `ADD INDEX`や列タイプの変更など、時間のかかる DDL ステートメントの場合)。アップグレードの前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDB クラスターに進行中の DDL ジョブがあるかどうかを確認することをお勧めします。クラスターに DDL ジョブがある場合、クラスターをアップグレードするには、DDL の実行が完了するまで待つか、クラスターをアップグレードする前に[`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルします。
+> 3.  DDL ステートメントがクラスター内で実行されているときは、TiDB クラスターをアップグレードし**ないでください**(通常は、 `ADD INDEX`や列タイプの変更などの時間のかかる DDL ステートメントの場合)。アップグレードの前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDB クラスターに進行中の DDL ジョブがあるかどうかを確認することをお勧めします。クラスターに DDL ジョブがある場合、クラスターをアップグレードするには、DDL の実行が完了するまで待つか、クラスターをアップグレードする前に[`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルします。
 >
 > アップグレード前の TiDB バージョンが v7.1.0 以降の場合、前述の警告 2 および 3 は無視できます。詳細については、 [TiDB のスムーズなアップグレード](/smooth-upgrade-tidb.md)を参照してください。
 
@@ -134,7 +134,14 @@ tiup update cluster
 >
 > クラスターを v7.1.3 にアップグレードする前に、v4.0 で変更したパラメーターが v7.1.3 でも互換性があることを確認してください。詳細は[TiKVコンフィグレーションファイル](/tikv-configuration-file.md)を参照してください。
 
-### ステップ 4: 現在のクラスターの健全性ステータスを確認する {#step-4-check-the-health-status-of-the-current-cluster}
+### ステップ 4: クラスターの DDL とバックアップのステータスを確認する {#step-4-check-the-ddl-and-backup-status-of-the-cluster}
+
+アップグレード中の未定義の動作やその他の予期しない問題を回避するために、アップグレード前に次の項目を確認することをお勧めします。
+
+-   クラスタDDL: [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)ステートメントを実行して、進行中の DDL ジョブがあるかどうかを確認することをお勧めします。 「はい」の場合は、その実行を待つか、アップグレードを実行する前に[`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)ステートメントを実行してキャンセルします。
+-   クラスタのバックアップ: [`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md)ステートメントを実行して、クラスター内に進行中のバックアップまたは復元タスクがあるかどうかを確認することをお勧めします。 「はい」の場合は、アップグレードを実行する前に完了するまで待ちます。
+
+### ステップ 5: 現在のクラスターの健全性ステータスを確認する {#step-5-check-the-health-status-of-the-current-cluster}
 
 アップグレード中の未定義の動作やその他の問題を回避するには、アップグレード前に現在のクラスターのリージョンの健全性ステータスを確認することをお勧めします。これを行うには、 `check`サブコマンドを使用します。
 
@@ -146,13 +153,6 @@ tiup cluster check <cluster-name> --cluster
 
 -   結果が「すべてのリージョンが正常です」の場合は、現在のクラスター内のすべてのリージョンが正常であるため、アップグレードを続行できます。
 -   結果が「リージョンが完全に正常ではありません: m miss-peer, n pending-peer」で、「他の操作の前に異常なリージョンを修正してください。」となった場合。プロンプトが表示されると、現在のクラスター内の一部のリージョンが異常です。チェック結果が「すべてのリージョンが正常」になるまで、異常のトラブルシューティングを行う必要があります。その後、アップグレードを続行できます。
-
-### ステップ 5: クラスターの DDL とバックアップのステータスを確認する {#step-5-check-the-ddl-and-backup-status-of-the-cluster}
-
-アップグレード中の未定義の動作やその他の予期しない問題を回避するために、アップグレード前に次の項目を確認することをお勧めします。
-
--   クラスタDDL: [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)ステートメントを実行して、進行中の DDL ジョブがあるかどうかを確認することをお勧めします。 「はい」の場合は、その実行を待つか、アップグレードを実行する前に[`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)ステートメントを実行してキャンセルします。
--   クラスタのバックアップ: [`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md)ステートメントを実行して、クラスター内に進行中のバックアップまたは復元タスクがあるかどうかを確認することをお勧めします。 「はい」の場合は、アップグレードを実行する前に完了するまで待ちます。
 
 ## TiDB クラスターをアップグレードする {#upgrade-the-tidb-cluster}
 

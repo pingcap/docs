@@ -359,7 +359,7 @@ index-serial-scan-concurrency = 20
 checksum-table-concurrency = 2
 
 # The default SQL mode used to parse and execute the SQL statements.
-sql-mode = "ONLY_FULL_GROUP_BY,NO_ENGINE_SUBSTITUTION"
+sql-mode = "ONLY_FULL_GROUP_BY,NO_AUTO_CREATE_USER"
 # Sets maximum packet size allowed for SQL connections.
 # Set this to 0 to automatically fetch the `max_allowed_packet` variable from server on every connection.
 max-allowed-packet = 67_108_864
@@ -433,7 +433,7 @@ log-progress = "5m"
 | -d*ディレクトリ*                                                                 | 読み取るデータ ダンプのディレクトリまたは[外部storageURI](/external-storage-uri.md)                                  | `mydumper.data-source-dir`     |
 | -L*レベル*                                                                    | ログレベル: デバッグ、情報、警告、エラー、致命的 (デフォルト = 情報)                                                         | `lightning.log-level`          |
 | -f*ルール*                                                                    | [テーブルフィルタールール](/table-filter.md) (複数指定可)                                                       | `mydumper.filter`              |
-| --バック*<a href="/tidb-lightning/tidb-lightning-overview.md">エンド バックエンド</a>* | インポートモードを選択します。 `local`は物理インポート モードを指します。 `tidb`論理インポート モードを指します。                              | `local`                        |
+| --バック*<a href="/tidb-lightning/tidb-lightning-overview.md">エンド バックエンド</a>* | インポートモードを選択します。 `local`物理インポート モードを指します。 `tidb`論理インポート モードを指します。                               | `local`                        |
 | --log-file*ファイル*                                                           | ログファイルのパス。デフォルトでは`/tmp/lightning.log.{timestamp}`です。 「-」に設定すると、ログ ファイルが stdout に出力されることを意味します。 | `lightning.log-file`           |
 | --status-addr *ip:ポート*                                                     | TiDB Lightningサーバーのリスニング アドレス                                                                  | `lightning.status-port`        |
 | --importer*ホスト:ポート*                                                        | TiKV輸入業者の住所                                                                                    | `tikv-importer.addr`           |
@@ -470,6 +470,6 @@ log-progress = "5m"
 | --checkpoint-error-ignore*テーブル名*  | 指定されたテーブルに関連するチェックポイントに記録されたエラーを無視します。          |
 | --checkpoint-remove*テーブル名*        | テーブルのチェックポイントを無条件に削除します。                        |
 
-*テーブル名は、*形式`` `db`.`tbl` `` (逆引用符を含む) の修飾テーブル名、またはキーワード「all」のいずれかである必要があります。
+*テーブル名は、*形式`` `db`.`tbl` ``の修飾テーブル名 (逆引用符を含む)、またはキーワード「all」のいずれかである必要があります。
 
 さらに、上記のセクションで説明した`tidb-lightning`のすべてのパラメータは`tidb-lightning-ctl`でも有効です。

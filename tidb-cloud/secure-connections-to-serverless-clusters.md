@@ -45,7 +45,7 @@ TiDB サーバーレスは、クライアントと TiDB サーバーレス ク�
 
 クライアントがJavaや Go などのシステムのルート CA ストアをデフォルトで使用する場合、CA ルートのパスを指定しなくても TiDB サーバーレス クラスターに安全に簡単に接続できます。ただし、一部のドライバーと ORM はシステム ルート CA ストアを使用しません。このような場合は、ドライバーまたは ORM の CA ルート パスをシステムのルート CA ストアに構成する必要があります。たとえば、macOS 上の Python で TiDB サーバーレス クラスターに[mysqlクライアント](https://github.com/PyMySQL/mysqlclient)を使用して接続する場合、引数`ssl`に`ca: /etc/ssl/cert.pem`設定する必要があります。
 
-DBeaver など、内部に複数の証明書を含む証明書ファイルを受け入れない GUI クライアントを使用している場合は、 [ISRG ルート X1](https://letsencrypt.org/certs/isrgrootx1.pem.txt)証明書をダウンロードする必要があります。
+DBeaver など、内部に複数の証明書を含む証明書ファイルを受け入れない GUI クライアントを使用している場合は、 [ISRG ルート X1](https://letsencrypt.org/certs/isrgrootx1.pem)証明書をダウンロードする必要があります。
 
 ### ルート証明書のデフォルトのパス {#root-certificate-default-path}
 
@@ -73,9 +73,9 @@ DBeaver など、内部に複数の証明書を含む証明書ファイルを受
 
 **ウィンドウズ**
 
-Windows は、CA ルートへの特定のパスを提供しません。代わりに、 [レジストリ](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/local-machine-and-current-user-certificate-stores)を使用して証明書を保存します。このため、Windows で CA ルート パスを指定するには、次の手順を実行します。
+Windows は CA ルートへの特定のパスを提供しません。代わりに、 [レジストリ](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/local-machine-and-current-user-certificate-stores)を使用して証明書を保存します。このため、Windows で CA ルート パスを指定するには、次の手順を実行します。
 
-1.  [ISRG ルート X1 証明書](https://letsencrypt.org/certs/isrgrootx1.pem.txt)をダウンロードし、希望のパス ( `<path_to_ca>`など) に保存します。
+1.  [ISRG ルート X1 証明書](https://letsencrypt.org/certs/isrgrootx1.pem)をダウンロードし、希望のパス ( `<path_to_ca>`など) に保存します。
 2.  TiDB サーバーレス クラスターに接続する場合は、パス ( `<path_to_ca>` ) を CA ルート パスとして使用します。
 
 ## よくある質問 {#faqs}

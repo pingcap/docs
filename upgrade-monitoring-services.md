@@ -12,7 +12,7 @@ TiDB クラスターをデプロイする場合、 TiUP はクラスターの監
 > **注記：**
 >
 > -   TiUPを使用せずに監視サービスが[手動でデプロイされる](/deploy-monitoring-services.md)の場合は、このドキュメントを参照せずに直接アップグレードできます。
-> -   TiDB と監視サービスの新しいバージョンとの互換性はテストされていないため、アップグレード後に一部の機能が期待どおりに動作しない可能性があります。問題がある場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を作成してください。
+> -   新しいバージョンの監視サービスと TiDB の互換性はテストされていないため、アップグレード後に一部の機能が期待どおりに動作しない可能性があります。問題がある場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を作成してください。
 > -   このドキュメントのアップグレード手順は、 TiUPバージョン 1.9.0 以降に適用されます。したがって、アップグレードする前にTiUP のバージョンを確認してください。
 > -   TiUPを使用して TiDB クラスターをアップグレードすると、 TiUP はモニタリング サービスをデフォルト バージョンに再デプロイします。 TiDB のアップグレード後に、モニタリング サービスのアップグレードをやり直す必要があります。
 
@@ -41,7 +41,7 @@ TiDB との互換性を高めるために、TiDB インストール パッケー
 2.  `./prometheus-v{version}-linux-amd64`ディレクトリを再圧縮し、新しい圧縮パッケージに`prometheus-v{new-version}.tar.gz`という名前を付けます。必要に応じて`{new-version}`を指定できます。
 
     ```bash
-    cd prometheus-v{version}-linux-amd64.tar.gz
+    cd prometheus-v{version}-linux-amd64
     tar -zcvf ../prometheus-v{new-version}.tar.gz ./
     ```
 
@@ -53,7 +53,7 @@ TiDB との互換性を高めるために、TiDB インストール パッケー
 tiup cluster patch <cluster-name> prometheus-v{new-version}.tar.gz -R prometheus
 ```
 
-アップグレード後、Prometheusサーバーのホームページ (通常は`http://<Prometheus-server-host-name>:9090` ) に移動し、上部のナビゲーション メニューで**[ステータス]**をクリックし、 **[ランタイムとビルド情報]**ページを開いて Prometheus のバージョンを確認し、アップグレードが成功したかどうかを確認できます。 。
+アップグレード後、Prometheusサーバーのホームページ (通常は`http://<Prometheus-server-host-name>:9090` ) に移動し、上部のナビゲーション メニューで**[ステータス]**をクリックし、[**ランタイムとビルド情報]**ページを開いて Prometheus のバージョンを確認し、アップグレードが成功したかどうかを確認できます。 。
 
 ## グラファナをアップグレードする {#upgrade-grafana}
 
@@ -81,7 +81,7 @@ TiDB との互換性を高めるために、TiDB インストール パッケー
 2.  `./grafana-v{version}-linux-amd64`ディレクトリを再圧縮し、新しい圧縮パッケージに`grafana-v{new-version}.tar.gz`という名前を付けます。必要に応じて`{new-version}`を指定できます。
 
     ```bash
-    cd grafana-v{version}-linux-amd64.tar.gz
+    cd grafana-v{version}-linux-amd64
     tar -zcvf ../grafana-v{new-version}.tar.gz ./
     ```
 

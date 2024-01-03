@@ -27,7 +27,7 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
     [TiCDC ハンドル レプリケーションの中断](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)を参照してください。
 
-## <code>cdc_resolvedts_high_delay</code> {#code-cdc-resolvedts-high-delay-code}
+### <code>cdc_resolvedts_high_delay</code> {#code-cdc-resolvedts-high-delay-code}
 
 -   アラート ルール:
 

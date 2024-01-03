@@ -221,7 +221,7 @@
         -   [AWS DMS を使用した Amazon RDS for Oracle からの移行](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
     -   データをTiDB Cloudにインポートする
         -   [ローカルファイルをインポートする](/tidb-cloud/tidb-cloud-import-local-files.md)
-        -   [サンプルデータ（SQLファイル）のインポート](/tidb-cloud/import-sample-data.md)
+        -   [サンプルデータ(SQLファイル)のインポート](/tidb-cloud/import-sample-data.md)
         -   [Amazon S3 または GCS から CSV ファイルをインポートする](/tidb-cloud/import-csv-files.md)
         -   [Amazon S3 または GCS から Apache Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files.md)
         -   [MySQL CLI を使用したインポート](/tidb-cloud/import-with-mysql-cli.md)
@@ -231,6 +231,7 @@
         -   [データをインポートするための CSV 構成](/tidb-cloud/csv-config-for-import-data.md)
         -   [Amazon S3 からのデータインポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
         -   [データ移行の事前チェック エラー、移行エラー、およびアラート](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md)
+        -   [AWS DMS をTiDB Cloudクラスターに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 -   データを探索する
     -   [Chat2Query (ベータ版)](/tidb-cloud/explore-data-with-chat2query.md)
 -   データサービス（ベータ版）
@@ -280,7 +281,7 @@
     -   [支払い方法の設定](/tidb-cloud/tidb-cloud-billing.md#payment-method)
     -   [AWS または GCP Marketplace からの請求](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace)
     -   [チェンジフィードの請求](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
-    -   [データ移行の請求](/tidb-cloud/tidb-cloud-billing-dm.md)
+    -   [データ移行の料金請求](/tidb-cloud/tidb-cloud-billing-dm.md)
 -   API
     -   [APIの概要](/tidb-cloud/api-overview.md)
     -   APIリファレンス
@@ -508,7 +509,7 @@
         -   [生成された列](/generated-columns.md)
         -   [SQLモード](/sql-mode.md)
         -   [テーブルの属性](/table-attributes.md)
-        -   取引
+        -   トランザクション
             -   [概要](/transaction-overview.md)
             -   [分離レベル](/transaction-isolation-levels.md)
             -   [楽観的なトランザクション](/optimistic-transaction.md)
