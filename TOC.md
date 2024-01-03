@@ -620,8 +620,8 @@
   - TiProxy
     - [Overview](/tiproxy/tiproxy-overview.md)
     - [Configuration](/tiproxy/tiproxy-configuration.md)
-    - [Command Line](/tiproxy/tiproxy-command-line-flags.md)
-    - [Metrics](/tiproxy/tiproxy-grafana.md)
+    - [Command Line Parameters](/tiproxy/tiproxy-command-line-flags.md)
+    - [Monitoring Metrics](/tiproxy/tiproxy-grafana.md)
     - [Troubleshooting](/tiproxy/troubleshoot-tiproxy.md)
     - [Performance Test](/tiproxy/tiproxy-performance-test.md)
 - Reference
