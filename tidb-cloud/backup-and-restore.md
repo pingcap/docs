@@ -94,12 +94,11 @@ To configure the backup schedule, perform the following steps:
         > - After you delete a cluster, the automatic backup files will be retained for a specified period, as set in backup retention. You need to delete the backup files accordingly.
         > - After you delete a cluster, the existing manual backup files will be retained until you manually delete them, or your account is closed.
 
-### Turn on dual region backup (beta)
+### Turn on dual region backup
 
 > **Note:**
 >
-> - The dual region backup feature is currently in beta.
-> - TiDB Dedicated clusters hosted on Google Cloud work seamlessly with Google Cloud Storage. Similar to Google Cloud Storage, **TiDB Dedicated supports dual-region pairing only within the same multi-region code as Google dual-region storage**. For example, in Asia, currently you must pair Tokyo and Osaka together for dual-region storage. For more information, refer to [Dual-regions](https://cloud.google.com/storage/docs/locations#location-dr).
+> TiDB Dedicated clusters hosted on Google Cloud work seamlessly with Google Cloud Storage. Similar to Google Cloud Storage, **TiDB Dedicated supports dual-region pairing only within the same multi-region code as Google dual-region storage**. For example, in Asia, currently you must pair Tokyo and Osaka together for dual-region storage. For more information, refer to [Dual-regions](https://cloud.google.com/storage/docs/locations#location-dr).
 
 TiDB Dedicated supports dual region backup by replicating backups from your cluster region to another different region. After you enable this feature, all backups are automatically replicated to the specified region. This provides cross-region data protection and disaster recovery capabilities. It is estimated that approximately 99% of the data can be replicated to the secondary region within an hour.
 
@@ -137,7 +136,7 @@ To turn off auto backup, perform the following steps:
 
 5. Click **Confirm** again to save changes.
 
-### Turn off dual region backup (beta)
+### Turn off dual region backup
 
 > **Tip**
 >
