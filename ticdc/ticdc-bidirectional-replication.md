@@ -87,11 +87,12 @@ Non-replicable DDLs include:
 
 ## DDL replication
 
-To solve the problem of replicable DDLs and non-replicable DDLs, TiDB introduces three BDR roles:
+To solve the problem of replicable DDLs and non-replicable DDLs, TiDB introduces the following BDR roles:
 
-- `LOCAL_ONLY` (default): you can execute any DDL, but the DDLs executed after you enable `bdr_mode=true` in TiCDC will not be replicated by TiCDC.
 - `PRIMARY`: you can execute replicable DDLs, but cannot execute non-replicable DDLs. Replicable DDLs will be replicated to the downstream by TiCDC.
 - `SECONDARY`: you cannot execute replicable DDLs or non-replicable DDLs, but can execute the DDLs replicated by TiCDC.
+
+When no BDR role is set, you can execute any DDL. But after you set `bdr_mode=true` on TiCDC, the executed DDL will not be replicated by TiCDC.
 
 > **Warning:**
 >
@@ -112,7 +113,7 @@ To solve the problem of replicable DDLs and non-replicable DDLs, TiDB introduces
 
 ### Replication scenarios of non-replicable DDLs
 
-1. Execute `ADMIN SET BDR ROLE LOCAL_ONLY` on all TiDB clusters to set the BDR role to `LOCAL_ONLY` (default).
+1. Execute `ADMIN UNSET BDR ROLE` on all TiDB clusters to cancel the BDR role.
 2. Stop writing data to the tables that need to execute DDLs in all clusters.
 3. Wait until all writes to the corresponding tables in all clusters are replicated to other clusters, and then manually execute all DDLs on each TiDB cluster.
 4. Wait until the DDLs are completed, and then resume writing data.
