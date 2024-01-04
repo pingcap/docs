@@ -106,7 +106,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Support [dual region backup (beta)](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup-beta) for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters deployed on AWS.
+- Support [dual region backup (beta)](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup) for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters deployed on AWS.
 
     You can now replicate backups across geographic regions within your cloud provider. This feature provides an additional layer of data protection and disaster recovery capabilities.
 
