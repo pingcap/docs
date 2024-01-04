@@ -87,12 +87,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     - (dup): release-7.1.3.md > 错误修复> TiDB - Fix the issue that queries containing CTEs report `runtime error: index out of range [32] with length 32` when `tidb_max_chunk_size` is set to a small value [#48808](https://github.com/pingcap/tidb/issues/48808) @[guo-shaoge](https://github.com/guo-shaoge)
     - (dup): release-7.1.3.md > 错误修复> TiDB - Fix the issue that TiDB server might panic during graceful shutdown [#36793](https://github.com/pingcap/tidb/issues/36793) @[bb7133](https://github.com/bb7133)
     <!-- tw@ran-huang -->
-    - 修复导入早期版本 TiDB 导出的统计信息时，统计信息可能数据错误的问题 [#42931](https://github.com/pingcap/tidb/issues/42931) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
-    - 修复构造统计信息时因为 Golang 隐式转换算法导致统计信息误差过大的问题[#49801](https://github.com/pingcap/tidb/issues/49801) @[qw4990](https://github.com/qw4990)
-    - 修复特定情况优化器将 TiFlash 选择路径错误转化为 TableDual 的问题 [#49285](https://github.com/pingcap/tidb/issues/49285) @[AilinKid](https://github.com/AilinKid)
-    - 修复 ENUM/SET 在 Parse 非法值时会直接使 SQL 语句报错的问题[#49487](https://github.com/pingcap/tidb/issues/49487) @[winoros](https://github.com/winoros)
-    - 修复包含递归 CTE 的 UPDATE/DELETE 语句可能会产生错误结果的问题 [#48969](https://github.com/pingcap/tidb/issues/48969) @[winoros](https://github.com/winoros)
-    - 修复有后导空格的数据时，在 LIKE 中使用 `_` 通配符可能会导致查询结果出错的问题 [#48983](https://github.com/pingcap/tidb/issues/48983) @[time-and-fate](https://github.com/time-and-fate)
+    - Fix the issue of possible statistics data errors when importing statistics exported from early versions of TiDB [#42931](https://github.com/pingcap/tidb/issues/42931) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
+    - Fix the issue of excessive statistical error in constructing statistics caused by Golang's implicit conversion algorithm [#49801](https://github.com/pingcap/tidb/issues/49801) @[qw4990](https://github.com/qw4990)
+    - Fix the issue that the optimizer incorrectly converts TiFlash selection path to TableDual in specific scenarios [#49285](https://github.com/pingcap/tidb/issues/49285) @[AilinKid](https://github.com/AilinKid)
+    - Fix the issue that parsing illegal values of `ENUM` or `SET` types would directly cause SQL statement errors [#49487](https://github.com/pingcap/tidb/issues/49487) @[winoros](https://github.com/winoros)
+    - Fix the issue that `UPDATE`/`DELETE` statements containing recursive CTEs might produce incorrect results [#48969](https://github.com/pingcap/tidb/issues/48969) @[winoros](https://github.com/winoros)
+    - Fix the issue that using the `_` wildcard in `LIKE` when the data contains trailing spaces can result in incorrect query results [#48983](https://github.com/pingcap/tidb/issues/48983) @[time-and-fate](https://github.com/time-and-fate)
     <!-- tw@hfxsd -->
     - Fix the issue that a query containing the IndexHashJoin operator gets stuck when memory exceeds `tidb_mem_quota_query` [#49033](https://github.com/pingcap/tidb/issues/49033) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - Fix the issue that `LIMIT` and `OPRDERBY` might be invalid in nested `UNION` queries [#49377](https://github.com/pingcap/tidb/issues/49377) @[AilinKid](https://github.com/AilinKid)
