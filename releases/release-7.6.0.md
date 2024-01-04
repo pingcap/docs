@@ -55,7 +55,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
     As the TiDB cluster scales up, it becomes increasingly crucial to quickly restore the cluster from failures to minimize business downtime. Before v7.6.0, the Region scattering algorithm is a primary bottleneck in performance restoration. In v7.6.0, BR optimizes the Region scattering algorithm, which quickly splits the restore task into a large number of small tasks and scatters them to all TiKV nodes in batches. The new parallel recovery algorithm fully utilizes the resources of each TiKV node, thereby achieving a rapid parallel recovery. In internal tests, the snapshot restore speed of the cluster is improved by about 10 times in large-scale Region scenarios.
 
-    To use the new parallel recovery algorithm, you can configure the `--granularity` command line parameter of `br`. For example:
+    The new parallel recovery algorithm is an experimental feature. To use this feature, you can configure the `--granularity` command line parameter of `br`. For example:
 
     ```sql
 
