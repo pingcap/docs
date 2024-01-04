@@ -41,7 +41,7 @@ Before using the DM tool, note the following restrictions:
 
 + Database version requirements
 
-    - MySQL version 5.5 ~ 8.0
+    - MySQL version 5.6 ~ 8.0
     - MariaDB version >= 10.1.2 (experimental features)
 
     > **Note:**
@@ -65,7 +65,7 @@ Before using the DM tool, note the following restrictions:
 
 + Binlog compatibility
 
-    - DM does not support the MySQL 8.0 new feature binlog [Transaction_payload_event](https://dev.mysql.com/doc/dev/mysql-server/8.1.0/classbinary__log_1_1Transaction__payload__event.html).
+    - DM does not support the MySQL 8.0 new feature binlog [Transaction_payload_event](https://dev.mysql.com/doc/dev/mysql-server/8.1.0/classbinary__log_1_1Transaction__payload__event.html). Using binlog Transaction_payload_event may result in data inconsistency of upstream and downstream.
 
 ## Contributing
 
