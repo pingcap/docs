@@ -122,16 +122,16 @@ To solve the problem of replicable DDLs and non-replicable DDLs, TiDB introduces
 
 After the application has stopped writing data, you can insert a special record into each cluster. By checking the two special records, you can make sure that data in two clusters are consistent.
 
-After the check is completed, you can stop the changefeed to stop bi-directional replication.
+After the check is completed, you can stop the changefeed to stop bi-directional replication, and execute `ADMIN UNSET BDR ROLE` on all TiDB clusters.
 
 ## Limitations
 
 - Use BDR role only in the following scenarios:
 
     - 1 `PRIMARY` cluster and n `SECONDARY` clusters (replication scenarios of replicable DDLs)
-    - n `LOCAL_ONLY` clusters (replication scenarios of non-replicable DDLs)
+    - n clusters that have no BDR roles (replication scenarios of non-replicable DDLs)
 
-    **Note that do not set the BDR role to other scenarios, for example, setting `PRIMARY`, `SECONDARY`, and `LOCAL_ONLY` at the same time. If you set the BDR role incorrectly, TiDB cannot guarantee data correctness.**
+    **Note that do not set the BDR role to other scenarios, for example, setting `PRIMARY`, `SECONDARY`, and no BDR roles at the same time. If you set the BDR role incorrectly, TiDB cannot guarantee data correctness.**
 
 - Usually do not use `AUTO_INCREMENT` or `AUTO_RANDOM` to avoid data conflicts in the replicated tables. If you need to use `AUTO_INCREMENT` or `AUTO_RANDOM`, you can set different `auto_increment_increment` and `auto_increment_offset` for different clusters to ensure that different clusters can be assigned different primary keys. For example, if there are three TiDB servers (A, B, and C) in bi-directional replication, you can set them as follows:
 
