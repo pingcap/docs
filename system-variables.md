@@ -4868,7 +4868,7 @@ SHOW WARNINGS;
 > **Note:**
 >
 > - If `tidb_service_scope` is not set for any TiDB node in a cluster, the DXF schedules all TiDB nodes to execute background tasks. If you are concerned about performance impact on current business, you can set `tidb_service_scope` to `background` for a few of the TiDB nodes. Only those nodes will execute background tasks.
-> - For newly scaled nodes, the DXF tasks are not executed by default to avoid consuming the resources of the scaled node. If you want this scaled node to execute background tasks, you need to manually set `tidb_service_scop` of this node to `background`.
+> - For newly scaled nodes, the DXF tasks are not executed by default to avoid consuming the resources of the scaled node. If you want this scaled node to execute background tasks, you need to manually set `tidb_service_scope` of this node to `background`.
 
 </CustomContent>
 
@@ -4885,7 +4885,7 @@ SHOW WARNINGS;
 > **Note:**
 >
 > - If `tidb_service_scope` is not set for any TiDB node in a cluster, the DXF schedules all TiDB nodes to execute background tasks. If you are concerned about performance impact on current business, you can set `tidb_service_scope` to `background` for a few of the TiDB nodes. Only those nodes will execute background tasks.
-> - For newly scaled nodes, the DXF tasks are not executed by default to avoid consuming the resources of the scaled node. If you want this scaled node to execute background tasks, you need to manually set `tidb_service_scop` of this node to `background`.
+> - For newly scaled nodes, the DXF tasks are not executed by default to avoid consuming the resources of the scaled node. If you want this scaled node to execute background tasks, you need to manually set `tidb_service_scope` of this node to `background`.
 
 </CustomContent>
 
