@@ -20,7 +20,7 @@ actions:
                     action: pull_request
                     condition:
                         "created_at >= 01-09-2024 08:00:00 & created_at <= 01-12-2024 07:59:00
-                        & merged = true & merged_at <= 2024-01-19 20:00:00
+                        & merged = true & merged_at <= 2024-01-26 20:00:00
                         & labels in {'2024-tidb-docs-dash','contribution'}"
                     value: 10
     - action:
@@ -57,7 +57,7 @@ actions:
                     actor: author
                     action: pull_request
                     condition:
-                        "created_at >= 01-09-2024 08:00:00 & created_at <= 01-11-2024
+                        "created_at >= 01-09-2024 08:00:00 & created_at <= 01-12-2024 07:59:00
                         & labels in !['2024-tidb-docs-dash']
                         & labels in ['contribution']"
                     value: 2
@@ -70,13 +70,13 @@ actions:
                     action: pull_request
                     condition:
                         "created_at >= 01-09-2024 08:00:00 & created_at <= 01-12-2024 07:59:00
-                        & merged = true & merged_at <= 2024-01-19 20:00:00
+                        & merged = true & merged_at <= 2024-01-26 20:00:00
                         & labels in !['2024-tidb-docs-dash']
                         & labels in ['contribution']"
                     value: 5
     - action:
           type: point
-          name: bonus
+          name: bonus_issue_comment
           triggers:
               - trigger:
                     actor: author
@@ -86,16 +86,19 @@ actions:
                         & emojis in ['THUMBS_UP']
                         & reactors in ['rpaik', 'lilin90', 'qiancai', 'hfxsd', 'ran-huang', 'Oreoxmt','Yan-yyCL','dveeden']
                         & labels in ['tidb-docs-dash-bonus']"
-                    value: 1
-                    operator: "|"
+                    value: 5
+    - action:
+          type: point
+          name: bonus_pr
+          triggers:
               - trigger:
                     actor: author
                     action: pull_request
                     condition:
                         "created_at >= 01-09-2024 08:00:00 & created_at <= 01-12-2024 07:59:00
-                        & merged = true & merged_at <= 2024-01-19 20:00:00
+                        & merged = true & merged_at <= 2024-01-26 20:00:00
                         & labels in ['contribution','tidb-docs-dash-bonus']"
-                    value: 1
+                    value: 20
 achievements:
     - achievement:
           name: Docs Dash 1st Place
@@ -106,7 +109,7 @@ achievements:
               - trigger:
                     actor: author
                     action: point
-                    condition: rank(1) & sum(docs_dash_pr_submitted, docs_dash_pr_merged, docs_dash_issue_contribution, pr_submitted, pr_merged, issue_contribution, bonus)
+                    condition: rank(1) & sum(docs_dash_pr_submitted, docs_dash_pr_merged, docs_dash_issue_contribution, pr_submitted, pr_merged, issue_contribution, bonus_issue_comment, bonus_pr)
     - achievement:
           name: Docs Dash 2nd Place
           icon: https://raw.githubusercontent.com/pingcap/docs/master/.vaunt/2nd_place.png
@@ -116,7 +119,7 @@ achievements:
               - trigger:
                     actor: author
                     action: point
-                    condition: rank(2) & sum(docs_dash_pr_submitted, docs_dash_pr_merged, docs_dash_issue_contribution, pr_submitted, pr_merged, issue_contribution, bonus)
+                    condition: rank(2) & sum(docs_dash_pr_submitted, docs_dash_pr_merged, docs_dash_issue_contribution, pr_submitted, pr_merged, issue_contribution, bonus_issue_comment, bonus_pr)
     - achievement:
           name: Docs Dash 3rd Place
           icon: https://raw.githubusercontent.com/pingcap/docs/master/.vaunt/3rd_place.png
@@ -126,7 +129,7 @@ achievements:
               - trigger:
                     actor: author
                     action: point
-                    condition: rank(3) & sum(docs_dash_pr_submitted, docs_dash_pr_merged, docs_dash_issue_contribution, pr_submitted, pr_merged, issue_contribution, bonus)
+                    condition: rank(3) & sum(docs_dash_pr_submitted, docs_dash_pr_merged, docs_dash_issue_contribution, pr_submitted, pr_merged, issue_contribution, bonus_issue_comment, bonus_pr)
     - achievement:
           name: Docs Dash 4th Place
           icon: https://raw.githubusercontent.com/pingcap/docs/master/.vaunt/4th_place.png
@@ -136,7 +139,7 @@ achievements:
               - trigger:
                     actor: author
                     action: point
-                    condition: rank(4) & sum(docs_dash_pr_submitted, docs_dash_pr_merged, docs_dash_issue_contribution, pr_submitted, pr_merged, issue_contribution, bonus)
+                    condition: rank(4) & sum(docs_dash_pr_submitted, docs_dash_pr_merged, docs_dash_issue_contribution, pr_submitted, pr_merged, issue_contribution, bonus_issue_comment, bonus_pr)
     - achievement:
           name: Docs Dash 5th Place
           icon: https://raw.githubusercontent.com/pingcap/docs/master/.vaunt/5th_place.png
@@ -146,7 +149,7 @@ achievements:
               - trigger:
                     actor: author
                     action: point
-                    condition: rank(5) & sum(docs_dash_pr_submitted, docs_dash_pr_merged, docs_dash_issue_contribution, pr_submitted, pr_merged, issue_contribution, bonus)
+                    condition: rank(5) & sum(docs_dash_pr_submitted, docs_dash_pr_merged, docs_dash_issue_contribution, pr_submitted, pr_merged, issue_contribution, bonus_issue_comment, bonus_pr)
     - achievement:
           name: Contributor
           icon: https://raw.githubusercontent.com/pingcap/docs/master/.vaunt/contributor.png
@@ -156,4 +159,4 @@ achievements:
               - trigger:
                     actor: author
                     action: point
-                    condition: sum(docs_dash_pr_submitted, docs_dash_pr_merged, docs_dash_issue_contribution, pr_submitted, pr_merged, issue_contribution, bonus) >= 1
+                    condition: sum(docs_dash_pr_submitted, docs_dash_pr_merged, docs_dash_issue_contribution, pr_submitted, pr_merged, issue_contribution, bonus_issue_comment, bonus_pr) >= 1
