@@ -13,16 +13,19 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
 ## Compatibility changes
 
-None
+<!-- tw@Oreoxmt -->
+
++ Introduce the system variable [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v657-and-v710) to provide a more fine-grained control over the optimizer and helps to prevent performance regression after upgrading caused by behavior changes in the optimizer [#43169](https://github.com/pingcap/tidb/issues/43169) @[qw4990](https://github.com/qw4990)
++ Introduce the TiDB configuration item [`performance.force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710) to control whether to wait for statistics initialization to finish before providing services during TiDB startup [#43385](https://github.com/pingcap/tidb/issues/43385) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
++ To reduce the overhead of log printing, TiFlash changes the default value of `logger.level` from `"debug"` to `"info"` [#8568](https://github.com/pingcap/tiflash/issues/8568) @[xzhangxian1008](https://github.com/xzhangxian1008)
 
 ## Improvements
 
 + TiDB
     <!-- tw@Oreoxmt -->
     - (dup): release-7.4.0.md > 改进提升> TiDB - Optimize memory usage and performance for `ANALYZE` operations on partitioned tables [#47071](https://github.com/pingcap/tidb/issues/47071) [#47104](https://github.com/pingcap/tidb/issues/47104) [#46804](https://github.com/pingcap/tidb/issues/46804) @[hawkingrei](https://github.com/hawkingrei)
-    - Plan Cache 支持主键的 `IN (....)` 语法[#44830](https://github.com/pingcap/tidb/issues/44830) @[qw4990](https://github.com/qw4990)
-    - 提供 TiDB 等待统计信息加载完成才开始对外提供服务的开关 [#43385](https://github.com/pingcap/tidb/issues/43385) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
-    - 增强特定情况 OUTER JOIN 转 INNER JOIN 的能力 [#49616](https://github.com/pingcap/tidb/issues/49616) @[qw4990](https://github.com/qw4990)
+    - Support Plan Cache to cache execution plans with the `PointGet` operator generated during physical optimization using Optimizer Fix Controls [#44830](https://github.com/pingcap/tidb/issues/44830) @[qw4990](https://github.com/qw4990)
+    - Enhance the ability to convert `OUTER JOIN` to `INNER JOIN` in specific scenarios [#49616](https://github.com/pingcap/tidb/issues/49616) @[qw4990](https://github.com/qw4990)
 
 + TiKV
 
@@ -37,9 +40,7 @@ None
 + TiFlash
 
     <!-- tw@Oreoxmt -->
-    - 减少磁盘性能抖动对读取延迟的影响 [#8583](https://github.com/pingcap/tiflash/issues/8583) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 日志等级默认调整为 "info" 减少日志打印的开销 [#8568](https://github.com/pingcap/tiflash/issues/8568) @[xzhangxian1008](https://github.com/xzhangxian1008)
-
+    - Reduce the impact of disk performance jitter on read latency [#8583](https://github.com/pingcap/tiflash/issues/8583) @[JaySon-Huang](https://github.com/JaySon-Huang)
 + Tools
 
     + Backup & Restore (BR)
@@ -113,10 +114,10 @@ None
 
 + TiFlash <!-- tw@Oreoxmt -->
 
-    - (dup): release-7.1.3.md > 错误修复> TiFlash - 修复在执行 `FLASHBACK DATABASE` 后 TiFlash 副本的数据仍会被 GC 回收的问题 [#8450](https://github.com/pingcap/tiflash/issues/8450) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - (dup): release-7.1.3.md > 错误修复> TiFlash - 修复当查询遇到内存限制后发生内存泄漏的问题 [#8447](https://github.com/pingcap/tiflash/issues/8447) @[JinheLin](https://github.com/JinheLin)
-    - 修复 Grafana 中部分面板的最大分位数耗时显示不正确的问题 [#8076](https://github.com/pingcap/tiflash/issues/8076) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 修复慢查询导致内存使用显著上涨的问题 [#8564](https://github.com/pingcap/tiflash/issues/8564) @[JinheLin](https://github.com/JinheLin)
+    - (dup): release-7.1.3.md > 错误修复> TiFlash - Fix the issue that data of TiFlash replicas would still be garbage collected after executing `FLASHBACK DATABASE` [#8450](https://github.com/pingcap/tiflash/issues/8450) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - (dup): release-7.1.3.md > 错误修复> TiFlash - Fix the issue of memory leak when TiFlash encounters memory limitation during query [#8447](https://github.com/pingcap/tiflash/issues/8447) @[JinheLin](https://github.com/JinheLin)
+    - (dup): Fix incorrect display of maximum percentile time for some panels in Grafana [#8076](https://github.com/pingcap/tiflash/issues/8076) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix the issue that the memory usage increases significantly due to slow queries [#8564](https://github.com/pingcap/tiflash/issues/8564) @[JinheLin](https://github.com/JinheLin)
 
 + Tools
 
