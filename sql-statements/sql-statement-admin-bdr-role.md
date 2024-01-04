@@ -1,12 +1,13 @@
 ---
-title: ADMIN [SET|SHOW] BDR ROLE
-summary: An overview of the usage of ADMIN [SET|SHOW] BDR ROLE for the TiDB database.
+title: ADMIN [SET|SHOW|UNSET] BDR ROLE
+summary: An overview of the usage of ADMIN [SET|SHOW|UNSET] BDR ROLE for the TiDB database.
 ---
 
-# ADMIN [SET|SHOW] BDR ROLE
+# ADMIN [SET|SHOW|UNSET] BDR ROLE
 
-- Use `ADMIN SET BDR ROLE` to set the BDR role of the cluster. Currently, you can set three BDR roles for a TiDB cluster: `PRIMARY`, `SECONDARY`, and `LOCAL_ONLY` (default). For more information about BDR roles, see [DDL Synchronization in TiCDC Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md#ddl-replication).
+- Use `ADMIN SET BDR ROLE` to set the BDR role of the cluster. Currently, you can set the following BDR roles for a TiDB cluster: `PRIMARY` and `SECONDARY`. For more information about BDR roles, see [DDL Synchronization in TiCDC Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md#ddl-replication).
 - Use `ADMIN SHOW BDR ROLE` to show the BDR role of the cluster.
+- Use `ADMIN UNSET BDR ROLE` to cancel the BDR role of the cluster.
 
 > **Warning:**
 >
@@ -19,12 +20,15 @@ AdminShowBDRRoleStmt ::=
     'ADMIN' 'SHOW' 'BDR' 'ROLE'
 
 AdminSetBDRRoleStmt ::=
-    'ADMIN' 'SET' 'BDR' 'ROLE' ('PRIMARY' | 'SECONDARY' | 'LOCAL_ONLY')
+    'ADMIN' 'SET' 'BDR' 'ROLE' ('PRIMARY' | 'SECONDARY')
+
+AdminUnsetBDRRoleStmt ::=
+    'ADMIN' 'UNSET' 'BDR' 'ROLE'
 ```
 
 ## Examples
 
-The default BDR role of a TiDB cluster is `LOCAL_ONLY`. Run the folloiwng command to show the BDR role of the cluster.
+By default, a TiDB cluster has no BDR role. Run the folloiwng command to show the BDR role of the cluster.
 
 ```sql
 ADMIN SHOW BDR ROLE;
@@ -34,7 +38,7 @@ ADMIN SHOW BDR ROLE;
 +------------+
 | BDR_ROLE   |
 +------------+
-| local_only |
+|            |
 +------------+
 1 row in set (0.01 sec)
 ```
@@ -57,6 +61,26 @@ ADMIN SHOW BDR ROLE;
 | primary  |
 +----------+
 1 row in set (0.00 sec)
+```
+
+Run the following command to cancel the BDR role of the cluster.
+
+```sql
+ADMIN UNSET BDR ROLE;
+```
+
+```sql
+Query OK, 0 rows affected (0.01 sec)
+```
+
+```sql
+ADMIN SHOW BDR ROLE;
++----------+
+| BDR_ROLE |
++----------+
+|          |
++----------+
+1 row in set (0.01 sec)
 ```
 
 ## MySQL compatibility
