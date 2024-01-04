@@ -37,7 +37,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
   </tr>
   <tr>
     <td rowspan="2">Reliability and Availability<br></td>
-    <td><a href="https://docs.pingcap.com/tidb/v7.6/tiproxy/tiproxy-overview">Support TiProxy (Experimental)</a>  {/* tw@ran-huang */}</td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.6/tiproxy/tiproxy-overview">Support TiProxy (experimental)</a>  {/* tw@ran-huang */}</td>
     <td>Full support for the TiProxy service, easily deployable via deployment tooling, to manage and maintain connections to TiDB so that they live through rolling restarts, upgrades, or scaling events.</td>
   </tr>
   <tr>
