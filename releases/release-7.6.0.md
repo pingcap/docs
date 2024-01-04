@@ -24,12 +24,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 <tbody>
   <tr>
     <td rowspan="3">Scalability and Performance<br></td>
-    <td><a href="https://docs.pingcap.com/tidb/v7.6/sql-plan-management#universal-binding">Universal SQL binding</a> {/* tw@Oreoxmt */}</td>
-    <td>In use cases with hundreds or thousands of same-schema databases -- such as SaaS data platforms storing a database per customer with equivalent business logic -- having up-to-date stats at all times is challenging. For this, SQL bindings can be used to lock in performance. However, doing so across so many tables is infeasible. Therefore, universal SQL bindings allow for broadcasting bindings across all schema-equivalent databases.</td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.6/sql-plan-management#cross-database-binding">Cross-database SQL binding</a> {/* tw@Oreoxmt */}</td>
+    <td>When working with hundreds or thousands of databases with the same schema, such as in SaaS data platforms that maintain separate databases for each customer running similar logic, keeping statistics current at all times can be difficult. SQL bindings can improve performance in these cases, but applying bindings to so many tables is impractical. TiDB v7.6.0 introduces cross-database SQL bindings that enable broadcasting bindings across all schema-equivalent databases.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v7.6/br-snapshot-guide#restore-cluster-snapshots">Up to 10x acceleration to snapshot restore</a> {/* tw@Oreoxmt */}</td>
-    <td>A new 2-phase region scatter algorithm for preparing a snapshot restore to a cluster was introduced. In clusters with many TiKV nodes, this dramatically improves the cluster resource efficiency by more evenly distributing loading across the nodes, more effectively using per-node network bandwidth. In several real world cases, this causes a 1,000% acceleration of restore speeds.</td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.6/br-snapshot-guide#restore-cluster-snapshots">Achieve up to 10 times faster for snapshot restore (experimental)</a> {/* tw@Oreoxmt */}</td>
+    <td>BR v7.6.0 introduces an experimental two-phase Region scatter algorithm to prepare snapshot restores for clusters. In clusters with many TiKV nodes, this algorithm significantly improves cluster resource efficiency by more evenly distributing load across nodes and better utilizing per-node network bandwidth. In several real-world cases, this improvement accelerates restore speed by about 10 times.</td>
   </tr>
   <tr>
     <td><a href="">Achieve up to 10 times faster for creating tables in batch (experimental)</a>  {/* tw@hfxsd */}</td>
@@ -51,9 +51,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
 ### Performance
 
-* BR improves snapshot restore speed by up to 10 times [#33937](https://github.com/pingcap/tidb/issues/33937) @[3pointer](https://github.com/3pointer) **tw@Oreoxmt** <!--1647-->
+* BR improves snapshot restore speed by up to 10 times (experimental) [#33937](https://github.com/pingcap/tidb/issues/33937) @[3pointer](https://github.com/3pointer) **tw@Oreoxmt** <!--1647-->
 
-    As the TiDB cluster scales up, it becomes increasingly crucial to quickly restore the cluster from failures to minimize business downtime. Before v7.6.0, the Region scattering algorithm is a primary bottleneck in performance restoration. In v7.6.0, BR optimizes the Region scattering algorithm, which quickly splits the restore task into a large number of small tasks and scatters them to all TiKV nodes in batches. The new parallel recovery algorithm fully utilizes the resources of each TiKV node, thereby achieving a rapid parallel recovery. In internal tests, the snapshot restore speed of the cluster is improved by about 10 times in large-scale Region scenarios.
+    As the TiDB cluster scales up, it becomes increasingly crucial to quickly restore the cluster from failures to minimize business downtime. Before v7.6.0, the Region scattering algorithm is a primary bottleneck in performance restoration. In v7.6.0, BR optimizes the Region scattering algorithm, which quickly splits the restore task into a large number of small tasks and scatters them to all TiKV nodes in batches. The new parallel recovery algorithm fully utilizes the resources of each TiKV node, thereby achieving a rapid parallel recovery. In several real-world cases, the snapshot restore speed of the cluster is improved by about 10 times in large-scale Region scenarios.
 
     The new parallel recovery algorithm is an experimental feature. To use this feature, you can configure the `--granularity` command line parameter of `br`. For example:
 
