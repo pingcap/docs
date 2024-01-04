@@ -104,7 +104,9 @@ achievements:
           name: Docs Dash 1st Place
           icon: https://raw.githubusercontent.com/pingcap/docs/master/.vaunt/1st_place.png
           description: 1st place contributor award for Docs Dash!
-          award: 01-27-2024
+          type: once
+          metadata:
+              date: 01-27-2024
           triggers:
               - trigger:
                     actor: author
@@ -114,7 +116,9 @@ achievements:
           name: Docs Dash 2nd Place
           icon: https://raw.githubusercontent.com/pingcap/docs/master/.vaunt/2nd_place.png
           description: 2nd place contributor award for Docs Dash!
-          award: 01-27-2024
+          type: once
+          metadata:
+              date: 01-27-2024
           triggers:
               - trigger:
                     actor: author
@@ -124,7 +128,9 @@ achievements:
           name: Docs Dash 3rd Place
           icon: https://raw.githubusercontent.com/pingcap/docs/master/.vaunt/3rd_place.png
           description: 3rd place contributor award for Docs Dash!
-          award: 01-27-2024
+          type: once
+          metadata:
+              date: 01-27-2024
           triggers:
               - trigger:
                     actor: author
@@ -134,7 +140,9 @@ achievements:
           name: Docs Dash 4th Place
           icon: https://raw.githubusercontent.com/pingcap/docs/master/.vaunt/4th_place.png
           description: 4th place contributor award for Docs Dash!
-          award: 01-27-2024
+          type: once
+          metadata:
+              date: 01-27-2024
           triggers:
               - trigger:
                     actor: author
@@ -144,7 +152,9 @@ achievements:
           name: Docs Dash 5th Place
           icon: https://raw.githubusercontent.com/pingcap/docs/master/.vaunt/5th_place.png
           description: 5th place contributor award for Docs Dash!
-          award: 01-27-2024
+          type: once
+          metadata:
+              date: 01-27-2024
           triggers:
               - trigger:
                     actor: author
@@ -154,7 +164,9 @@ achievements:
           name: Contributor
           icon: https://raw.githubusercontent.com/pingcap/docs/master/.vaunt/contributor.png
           description: Contributor award for Docs Dash!
-          award: 01-27-2024
+          type: once
+          metadata:
+              date: 01-27-2024
           triggers:
               - trigger:
                     actor: author
