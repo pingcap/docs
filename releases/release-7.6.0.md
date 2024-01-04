@@ -32,7 +32,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
     <td>A new 2-phase region scatter algorithm for preparing a snapshot restore to a cluster was introduced. In clusters with many TiKV nodes, this dramatically improves the cluster resource efficiency by more evenly distributing loading across the nodes, more effectively using per-node network bandwidth. In several real world cases, this causes a 1,000% acceleration of restore speeds.</td>
   </tr>
   <tr>
-    <td><a href="">Achieve up to 10 times faster for creating tables in batch</a>  {/* tw@hfxsd */}</td>
+    <td><a href="">Achieve up to 10 times faster for creating tables in batch (experimental)</a>  {/* tw@hfxsd */}</td>
     <td>With the implementation of the new DDL architecture in v7.6.0, the performance of batch table creation has witnessed a remarkable improvement, up to 10 times faster. This substantial enhancement drastically reduces the time needed for creating numerous tables. This acceleration is particularly noteworthy in SaaS scenarios, where the prevalence of high volumes of tables, ranging from tens to hundreds of thousands, is a common challenge.</td>
   </tr>
   <tr>
