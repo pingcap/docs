@@ -63,7 +63,7 @@ Replicable DDLs include:
 
 ### 不可复制的 DDL
 
-Non-replicable DDLs are the DDLs that have a great impact on the business and cannot be directly replicated to other TiDB clusters in bi-directional replication through TiCDC. Non-replicable DDLs must be executed through specific operations.
+Non-replicable DDLs are the DDLs that have a great impact on the business, and might cause data inconsistency between clusters. Non-replicable DDLs cannot be directly replicated to other TiDB clusters in bi-directional replication through TiCDC. Non-replicable DDLs must be executed through specific operations.
 
 Non-replicable DDLs include:
 
@@ -119,6 +119,10 @@ When no BDR role is set, you can execute any DDL. But after you set `bdr_mode=tr
 4. Wait until the DDLs are completed, and then resume writing data.
 5. Follow the steps in [Replication scenarios of replicable DDLs](#replication-scenarios-of-replicable-ddls) to switch back to the replication scenario of replicable DDLs.
 
+> **Warning:**
+>
+> Do not execute any other DDLs during this time.
+
 ## Stop bi-directional replication
 
 After the application has stopped writing data, you can insert a special record into each cluster. By checking the two special records, you can make sure that data in two clusters are consistent.
@@ -130,15 +134,15 @@ After the check is completed, you can stop the changefeed to stop bi-directional
 - Use BDR role only in the following scenarios:
 
     - 1 `PRIMARY` cluster and n `SECONDARY` clusters (replication scenarios of replicable DDLs)
-    - n clusters that have no BDR roles (replication scenarios of non-replicable DDLs)
+    - n clusters that have no BDR roles (replication scenarios in which you can manually execute non-replicable DDLs on each cluster)
 
-    **Note that do not set the BDR role to other scenarios, for example, setting `PRIMARY`, `SECONDARY`, and no BDR roles at the same time. If you set the BDR role incorrectly, TiDB cannot guarantee data correctness.**
+    **Note that do not set the BDR role to other scenarios, for example, setting `PRIMARY`, `SECONDARY`, and no BDR roles at the same time. If you set the BDR role incorrectly, TiDB cannot guarantee data correctness and consistency during data replication.**
 
-- Usually do not use `AUTO_INCREMENT` or `AUTO_RANDOM` to avoid data conflicts in the replicated tables. If you need to use `AUTO_INCREMENT` or `AUTO_RANDOM`, you can set different `auto_increment_increment` and `auto_increment_offset` for different clusters to ensure that different clusters can be assigned different primary keys. For example, if there are three TiDB servers (A, B, and C) in bi-directional replication, you can set them as follows:
+- Usually do not use `AUTO_INCREMENT` or `AUTO_RANDOM` to avoid data conflicts in the replicated tables. If you need to use `AUTO_INCREMENT` or `AUTO_RANDOM`, you can set different `auto_increment_increment` and `auto_increment_offset` for different clusters to ensure that different clusters can be assigned different primary keys. For example, if there are three TiDB clusters (A, B, and C) in bi-directional replication, you can set them as follows:
 
-    - In A, set `auto_increment_increment=3` and `auto_increment_offset=2000`
-    - In B, set `auto_increment_increment=3` and `auto_increment_offset=2001`
-    - In C, set `auto_increment_increment=3` and `auto_increment_offset=2002`
+    - In Cluster A, set `auto_increment_increment=3` and `auto_increment_offset=2000`
+    - In Cluster B, set `auto_increment_increment=3` and `auto_increment_offset=2001`
+    - In Cluster C, set `auto_increment_increment=3` and `auto_increment_offset=2002`
 
     This way, A, B, and C will not conflict with each other in the implicitly assigned `AUTO_INCREMENT` ID and `AUTO_RANDOM` ID. If you need to add a cluster in BDR mode, you need to temporarily stop writing data of the related application, set the appropriate values for `auto_increment_increment` and `auto_increment_offset` on all clusters, and then resume writing data of the related application.
 
