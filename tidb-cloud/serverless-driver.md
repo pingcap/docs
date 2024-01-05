@@ -59,6 +59,33 @@ try {
 }
 ```
 
+### Custom column type decoders
+
+In case you want change the returning column value format, you could provide a decoder config to `connect` method:
+
+```ts
+import { connect, ColumnType } from '@tidbcloud/serverless';
+
+const conn = connect({
+  url: 'mysql://[username]:[password]@[host]/[database]',
+  decoders: {
+    // serverless driver returns BIGINT field as text value by default, with this decoder you could change it to js builtin BigInt type.
+    [ColumnType.BIGINT]: (rawValue: string) => BigInt(rawValue),
+    
+    // serverless driver return DATETIME field as text in 'yyyy-MM-dd HH:mm:ss' format, with this decoder you could transform the text value to js native Date object.
+    [ColumnType.DATETIME]: (rawValue: string) => new Date(rawValue),
+  }
+})
+
+// You could also provide decoders config in execute method to override the connection config
+conn.execute(`select ...`, [], {
+  decoders: {
+    // ...
+  }
+})
+```
+
+
 ## Edge examples
 
 Here are some examples of using the serverless driver in edge environments. For a complete example, you can also try this [live demo](https://github.com/tidbcloud/car-sales-insight).
@@ -152,16 +179,17 @@ You can configure TiDB Cloud serverless driver at both the connection level and 
 
 At the connection level, you can make the following configurations:
 
-| Name         | Type       | Default value | Description                                                                                                                                                                  |
-|--------------|------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `username`   | string     | N/A           | Username of TiDB Serverless                                                                                                                                                  |
-| `password`   | string     | N/A           | Password of TiDB Serverless                                                                                                                                                  |
-| `host`       | string     | N/A           | Hostname of TiDB Serverless                                                                                                                                                  |
-| `database`   | string     | `test`        | Database of TiDB Serverless                                                                                                                                                  |
-| `url`        | string     | N/A           | The URL for the database, in the `mysql://[username]:[password]@[host]/[database]` format, where `database` can be skipped if you intend to connect to the default database. |
-| `fetch`      | function   | global fetch  | Custom fetch function. For example, you can use the `undici` fetch in node.js.                                                                                               |
-| `arrayMode`  | bool       | `false`       | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.                                                                         |
-| `fullResult` | bool       | `false`       | Whether to return full result object instead of just rows. To get more detailed results, set it to `true`.                                                                   |
+| Name         | Type     | Default value | Description                                                                                                                                                                                                                      |
+|--------------|----------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `username`   | string   | N/A           | Username of TiDB Serverless                                                                                                                                                                                                      |
+| `password`   | string   | N/A           | Password of TiDB Serverless                                                                                                                                                                                                      |
+| `host`       | string   | N/A           | Hostname of TiDB Serverless                                                                                                                                                                                                      |
+| `database`   | string   | `test`        | Database of TiDB Serverless                                                                                                                                                                                                      |
+| `url`        | string   | N/A           | The URL for the database, in the `mysql://[username]:[password]@[host]/[database]` format, where `database` can be skipped if you intend to connect to the default database.                                                     |
+| `fetch`      | function | global fetch  | Custom fetch function. For example, you can use the `undici` fetch in node.js.                                                                                                                                                   |
+| `arrayMode`  | bool     | `false`       | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.                                                                                                                             |
+| `fullResult` | bool     | `false`       | Whether to return full result object instead of just rows. To get more detailed results, set it to `true`.                                                                                                                       |
+| `decoders`   | object   | `{}`          | Custom decoders config for column types. The object key should be the the column type name. The value should be function taking the raw string value received by serverless driver as argument, and returning the decoded value. |
 
 **Database URL**
 
@@ -200,10 +228,11 @@ const conn = connect(config)
 
 At the SQL level, you can configure the following options:
 
-| Option       | Type | Default value | Description                                                                                                |
-|--------------|------|---------------|------------------------------------------------------------------------------------------------------------|
-| `arrayMode`  | bool | `false`       | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.       |
-| `fullResult` | bool | `false`       | Whether to return full result object instead of just rows. To get more detailed results, set it to `true`. |
+| Option       | Type   | Default value | Description                                                                                                        |
+|--------------|--------|---------------|--------------------------------------------------------------------------------------------------------------------|
+| `arrayMode`  | bool   | `false`       | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.               |
+| `fullResult` | bool   | `false`       | Whether to return full result object instead of just rows. To get more detailed results, set it to `true`.         |
+| `decoders`   | object | `{}`          | Same as connection level `decoders` option. (Will merge and override but not replace the connection level config.) |
 
 For example:
 
