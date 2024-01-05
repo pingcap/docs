@@ -47,7 +47,6 @@ If you want to speed up the writing process, compact data of the whole TiKV clus
 >
 > Starting from TiDB 7.6.0, the newly created empty cluster will by default enable Titan. And existing clusters' upgrade to TiDB 7.6.0 would keep the original configuration--- if the titan is not explicityly enabled, then it would still use RocksDB. 
 
-
 > **Warning:**
 >
 > When Titan is disabled, RocksDB cannot read data that has been migrated to Titan. If Titan is incorrectly disabled on a TiKV instance with Titan already enabled (mistakenly set `rocksdb.titan.enabled` to `false`), TiKV will fail to start, and the `You have disabled titan when its data directory is not empty` error appears in the TiKV log. To correctly disabled Titan, see [Disable Titan](#disable-titan).
@@ -153,7 +152,6 @@ To fully disable Titan for all existing and future data, you can follow these st
     ```bash
     tikv-ctl --pd <PD_ADDR> compact-cluster --bottommost force
     ```
-
 
 3. After the compaction is finished, you should wait for the **Blob file count** metrics under **TiKV-Details**/**Titan - kv** to decrease to `0`.
 
