@@ -29,7 +29,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/v7.6/br-snapshot-guide#restore-cluster-snapshots">Achieve up to 10 times faster for snapshot restore (experimental)</a> {/* tw@Oreoxmt */}</td>
-    <td>BR v7.6.0 introduces an experimental two-phase Region scatter algorithm to prepare snapshot restores for clusters. In clusters with many TiKV nodes, this algorithm significantly improves cluster resource efficiency by more evenly distributing load across nodes and better utilizing per-node network bandwidth. In several real-world cases, this improvement accelerates restore speed by about 10 times.</td>
+    <td>BR v7.6.0 introduces an experimental two-phase Region scatter algorithm to prepare snapshot restores for clusters. In clusters with many TiKV nodes, this algorithm significantly improves cluster resource efficiency by more evenly distributing load across nodes and better utilizing per-node network bandwidth. In several real-world cases, this improvement accelerates restore speed by about up to 10 times.</td>
   </tr>
   <tr>
     <td><a href="">Achieve up to 10 times faster for creating tables in batch (experimental)</a>  {/* tw@hfxsd */}</td>
@@ -55,13 +55,20 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
     As the TiDB cluster scales up, it becomes increasingly crucial to quickly restore the cluster from failures to minimize business downtime. Before v7.6.0, the Region scattering algorithm is a primary bottleneck in performance restoration. In v7.6.0, BR optimizes the Region scattering algorithm, which quickly splits the restore task into a large number of small tasks and scatters them to all TiKV nodes in batches. The new parallel recovery algorithm fully utilizes the resources of each TiKV node, thereby achieving a rapid parallel recovery. In several real-world cases, the snapshot restore speed of the cluster is improved by about 10 times in large-scale Region scenarios.
 
-    The new parallel recovery algorithm is an experimental feature. To use this feature, you can configure the `--granularity` command line parameter of `br`. For example:
+    The new parallel recovery algorithm is an experimental feature. To use this feature, you can configure the `--granularity=coarse-grained` command line parameter of `br`. You can also control the concurrency of the restore tasks on each TiKV node by setting the `--tikv-max-restore-concurrency` parameter. For example:
 
-    ```sql
-
+    ```bash
+    br restore full \
+    --pd "${PDIP}:2379" \
+    --storage "s3://${Bucket}/${Folder}" \
+    --s3.region "${region}" \
+    --granularity "coarse-grained" \
+    --tikv-max-restore-concurrency 128 \
+    --send-credentials-to-tikv=true \
+    --log-file restorefull.log
     ```
 
-    For more information, see [documentation](链接).
+    For more information, see [documentation](/br/br-snapshot-guide.md#restore-cluster-snapshots).
 
 * The concurrent HashAgg algorithm of TiDB supports disk spill (experimental) [#35637](https://github.com/pingcap/tidb/issues/35637) @[xzhangxian1008](https://github.com/xzhangxian1008) **tw@qiancai** <!--1365-->
 
