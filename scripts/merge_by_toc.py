@@ -116,6 +116,7 @@ def replace_link_wrap(chapter, name):
             or link.endswith(".svg")
             or link.endswith(".gif")
             or link.endswith(".jpg")
+            or link.endswith(".PNG")
         ):
             # special handing for pic
             img_link = re.sub(r"[\.\/]*media\/", "./media/", link, count=0, flags=0)

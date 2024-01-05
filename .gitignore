@@ -15,3 +15,5 @@ gen
 /node_modules/
 
 tmp/
+doc.md
+output.pdf

@@ -67,6 +67,7 @@ $if(listings)$
 
 \usepackage{xcolor}
 \usepackage{listings}
+\newcommand{\passthrough}[1]{#1}
 \lstset{
     basicstyle=\ttfamily,
     keywordstyle=\color[rgb]{0.13,0.29,0.53}\bfseries,
@@ -115,7 +116,7 @@ $endif$
 \hypersetup{breaklinks=true,
             bookmarks=true,
             pdfauthor={$author-meta$},
-            pdftitle={$title-meta$},
+            pdftitle="TiDB User Manual"
             colorlinks=true,
             citecolor=$if(citecolor)$$citecolor$$else$blue$endif$,
             urlcolor=$if(urlcolor)$$urlcolor$$else$blue$endif$,
