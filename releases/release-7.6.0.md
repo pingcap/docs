@@ -243,7 +243,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
 * TiCDC adds support for three character delimiters with CSV output protocol [#9969](https://github.com/pingcap/tiflow/issues/9969) @[zhangjinpeng1987](https://github.com/zhangjinpeng1987) **tw@hfxsd** <!--1653-->
 
-    Starting from v7.6.0 TiCDC allows the CSV output protocol delimiters to specified as 1-3 characters long. With this change, users can configure TiCDC to generate file output using 2 character delimiters (such as `||` or `$^`) or 3 character delimiters(such as `|@|`) to separate fields in the output.
+    Starting from v7.6.0 TiCDC allows the CSV output protocol delimiters to specified as 1-3 characters long. With this change, you can configure TiCDC to generate file output using two character delimiters (such as `||` or `$^`) or three character delimiters (such as `|@|`) to separate fields in the output.
 
     For more information, see [documentation](/ticdc/ticdc-csv.md).
 
