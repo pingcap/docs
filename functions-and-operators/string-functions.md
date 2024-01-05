@@ -68,7 +68,7 @@ The `BIN()` function is used to convert the given argument into a string represe
 - If the argument is a negative number, the function converts the absolute value of the argument to its binary representation, inverts each bit of the binary value (changing `0` to `1` and `1` to `0`), and then adds `1` to the inverted value.
 - If the argument is a string containing only digits, the function returns the result according to those digits. For example, the results for `"123"` and `123` are the same.
 - If the argument is a string and its first character is not a digit (such as `"q123"`), the function returns `0`.
-- If the argument is a string that consists of digits and non-digits, the function returns the result according to the consecutive digits at the beginning of the argument. For instance, the results for `"123q123"` and `123` are the same.
+- If the argument is a string that consists of digits and non-digits, the function returns the result according to the consecutive digits at the beginning of the argument. For example, the results for `"123q123"` and `123` are the same.
 - If the argument is `NULL`, the function returns `NULL`.
 
 Examples:
