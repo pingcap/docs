@@ -2627,7 +2627,6 @@ Query OK, 0 rows affected (0.09 sec)
     * The cluster has a large number of Regions, and the PD leader itself is under heavy load due to the overhead of handling heartbeats and scheduling. CPU resources are exhausted.
     * The TiDB cluster has many TiDB instances, and there is a high concurrency of requests for Region information, which puts significant CPU pressure on the PD leader.
 
-
 ### tidb_enable_unsafe_substitute <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION | GLOBAL
