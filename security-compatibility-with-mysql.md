@@ -107,9 +107,9 @@ The implementation mechanisms are consistent between TiDB and MySQL. Both use th
 
 ## Authentication plugin status
 
-TiDB supports multiple authentication methods. These methods can be specified on a per user basis using [`CREATE USER`](/sql-statements/sql-statement-create-user.md) and [`ALTER USER`](/sql-statements/sql-statement-create-user.md). These methods are compatible with the authentication methods of MySQL with the same names.
+TiDB supports multiple authentication methods. These methods can be specified on a per user basis using [`CREATE USER`](/sql-statements/sql-statement-create-user.md) and [`ALTER USER`](/sql-statements/sql-statement-alter-user.md). These methods are compatible with the authentication methods of MySQL with the same names.
 
-You can use one of the following supported authentication methods in the table. To specify a default method that the server advertises when the client-server connection is being established, set the [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin) variable. `tidb_sm3_password` is the SM3 authentication method only supported in TiDB. Therefore, to authenticate using this method, you must connect to TiDB using [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3). `tidb_auth_token` is a JSON Web Token (JWT) based authentication method used only in TiDB Cloud.
+You can use one of the following supported authentication methods in the table. To specify a default method that the server advertises when the client-server connection is being established, set the [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin) variable. `tidb_sm3_password` is the SM3 authentication method only supported in TiDB. Therefore, to authenticate using this method, you must connect to TiDB using [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3). `tidb_auth_token` is a JSON Web Token (JWT) based authentication method used in TiDB Cloud, which can be used for self-hosted after configuration.
 
 <CustomContent platform="tidb">
 
@@ -139,3 +139,9 @@ The support for TLS authentication is configured differently. For detailed infor
 | ed25519 (MariaDB)            | No               |
 | GSSAPI (MariaDB)             | No               |
 | FIDO                         | No               |
+
+### `tidb_auth_token`
+
+`tidb_auth_token` is a JSON Web Token (JWT) based authentication method used in TiDB Cloud, which can be used for self-hosted after configuration. Different from authentication based on password like `mysql_native_password` or `caching_sha2_password`, when creating users in `tidb_auth_token`, no custom password is needed. When authenticating users with `tidb_auth_token` for logging to TiDB, a signed token is required instead of password, which simplifying the authentication process and improving the security.
+
+JWT consists of 3 parts: Header, Payload, and Signature.
