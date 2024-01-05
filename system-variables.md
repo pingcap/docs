@@ -2615,6 +2615,19 @@ Query OK, 0 rows affected (0.09 sec)
 >
 > Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, enabling the TSO Follower Proxy might increase the execution latency in TiDB and affect the QPS performance of the cluster.
 
+### pd_enable_follower_handle_region <span class="version-mark">New in v7.6.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable is used to enable the Active PD Follower feature (currently applicable only for requests related to Region information). When the value is `OFF`, TiDB will only obtain Region information from the PD leader. After this feature is enabled, TiDB will evenly distribute the requests related to Region information to all PD servers. PD followers can also directly handle Region requests, thereby reducing the CPU pressure on the PD leader.
+- Scenarios for enabling Active PD Follower:
+    * The cluster has a large number of Regions, and the PD leader itself is under heavy load due to the overhead of handling heartbeats and scheduling. CPU resources are exhausted.
+    * The TiDB cluster has many TiDB instances, and there is a high concurrency of requests for Region information, which puts significant CPU pressure on the PD leader.
+
+
 ### tidb_enable_unsafe_substitute <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION | GLOBAL
