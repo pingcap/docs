@@ -1328,8 +1328,8 @@ Configuration items related to Titan.
 
 ### `enabled`
 
-+ Enables or disables Titan
-+ Default value: `false`
++ Enables or disables Titan.
++ Default value:  In TiDB 7.6.0 or newer version, the default value is `true` in newly created cluster. In other cases, it's `false`. So if you upgrade to TiDB 7.6.0 from older TiBD version, it would keep the original setting if it's set explictly or be false if it's not set. 
 
 ### `dirname`
 
@@ -1627,11 +1627,19 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 >
 > The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
 
+### `zstd-dict-size`
+
++ The zstd compression dictionary size. By default it's `0KB` which means zstd compression is based on single value, while RocksDB's comression unit is block (32KB size by default). So when zstd dictionary compression is off and the average value is less than 32KB, Titan's compression ratio is smaller than RocksDB. Using Json data as an example, Titan store size could be 30% to 50% more than RocksDB size. Users could set zstd-dict-size (e.g. 16KB) to enable zstd dictionary compression which can achieve similar compression ratio of RocksDB. Though, zstd dictionary compression can lead to 10% performance regression. 
++ 
++ Default value: "0KB"`
++ Unit: KB|MB|GB 
+
 ### `blob-cache-size`
 
 + The cache size of a Blob file
 + Default value: `"0GB"`
 + Minimum value: `0`
++ Recommended value: After TiKv runs for a while, set the RocksDB block cache (`storage.block-cache.capacity`) to have 95%+ block cache hit rate. Then the `blob-cache-size` is set with `total memory size * 50% - block cache size`. Block cache hit rate is more important than blob cache hit rate. If `storage.block-cache.capacity` is too small, the overall performance would not be good due to low block cache hit rate.  
 + Unit: KB|MB|GB
 
 ### `min-gc-batch-size`
@@ -1674,7 +1682,7 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 + Specifies the running mode of Titan.
 + Optional values:
     + `normal`: Writes data to the blob file when the value size exceeds `min-blob-size`.
-    + `read_only`: Refuses to write new data to the blob file, but still reads the original data from the blob file.
+    + `read-only`: Refuses to write new data to the blob file, but still reads the original data from the blob file.
     + `fallback`: Writes data in the blob file back to LSM.
 + Default value: `normal`
 
