@@ -76,6 +76,17 @@ actions:
                     value: 5
     - action:
           type: point
+          name: issue_created
+          triggers:
+              - trigger:
+                    actor: author
+                    action: issue
+                    condition:
+                        "created_at >= 01-09-2024 08:00:00 & created_at <= 01-12-2024 07:59:00
+                        & labels in ['contribution']"
+                    value: 1
+    - action:
+          type: point
           name: bonus_issue_comment
           triggers:
               - trigger:
@@ -111,7 +122,7 @@ achievements:
               - trigger:
                     actor: author
                     action: point
-                    condition: rank(1) & sum(docs_dash_pr_submitted, docs_dash_pr_merged, docs_dash_issue_contribution, pr_submitted, pr_merged, issue_contribution, bonus_issue_comment, bonus_pr)
+                    condition: rank(1) & sum(docs_dash_pr_submitted, docs_dash_pr_merged, docs_dash_issue_contribution, pr_submitted, pr_merged, issue_contribution, issue_created, bonus_issue_comment, bonus_pr)
     - achievement:
           name: Docs Dash 2nd Place
           icon: https://raw.githubusercontent.com/pingcap/docs/master/.vaunt/2nd_place.png
@@ -123,7 +134,7 @@ achievements:
               - trigger:
                     actor: author
                     action: point
-                    condition: rank(2) & sum(docs_dash_pr_submitted, docs_dash_pr_merged, docs_dash_issue_contribution, pr_submitted, pr_merged, issue_contribution, bonus_issue_comment, bonus_pr)
+                    condition: rank(2) & sum(docs_dash_pr_submitted, docs_dash_pr_merged, docs_dash_issue_contribution, pr_submitted, pr_merged, issue_contribution, issue_created, bonus_issue_comment, bonus_pr)
     - achievement:
           name: Docs Dash 3rd Place
           icon: https://raw.githubusercontent.com/pingcap/docs/master/.vaunt/3rd_place.png
@@ -135,7 +146,7 @@ achievements:
               - trigger:
                     actor: author
                     action: point
-                    condition: rank(3) & sum(docs_dash_pr_submitted, docs_dash_pr_merged, docs_dash_issue_contribution, pr_submitted, pr_merged, issue_contribution, bonus_issue_comment, bonus_pr)
+                    condition: rank(3) & sum(docs_dash_pr_submitted, docs_dash_pr_merged, docs_dash_issue_contribution, pr_submitted, pr_merged, issue_contribution, issue_created, bonus_issue_comment, bonus_pr)
     - achievement:
           name: Docs Dash 4th Place
           icon: https://raw.githubusercontent.com/pingcap/docs/master/.vaunt/4th_place.png
@@ -147,7 +158,7 @@ achievements:
               - trigger:
                     actor: author
                     action: point
-                    condition: rank(4) & sum(docs_dash_pr_submitted, docs_dash_pr_merged, docs_dash_issue_contribution, pr_submitted, pr_merged, issue_contribution, bonus_issue_comment, bonus_pr)
+                    condition: rank(4) & sum(docs_dash_pr_submitted, docs_dash_pr_merged, docs_dash_issue_contribution, pr_submitted, pr_merged, issue_contribution, issue_created, bonus_issue_comment, bonus_pr)
     - achievement:
           name: Docs Dash 5th Place
           icon: https://raw.githubusercontent.com/pingcap/docs/master/.vaunt/5th_place.png
@@ -159,7 +170,7 @@ achievements:
               - trigger:
                     actor: author
                     action: point
-                    condition: rank(5) & sum(docs_dash_pr_submitted, docs_dash_pr_merged, docs_dash_issue_contribution, pr_submitted, pr_merged, issue_contribution, bonus_issue_comment, bonus_pr)
+                    condition: rank(5) & sum(docs_dash_pr_submitted, docs_dash_pr_merged, docs_dash_issue_contribution, pr_submitted, pr_merged, issue_contribution, issue_created, bonus_issue_comment, bonus_pr)
     - achievement:
           name: Contributor
           icon: https://raw.githubusercontent.com/pingcap/docs/master/.vaunt/contributor.png
@@ -171,4 +182,4 @@ achievements:
               - trigger:
                     actor: author
                     action: point
-                    condition: sum(docs_dash_pr_submitted, docs_dash_pr_merged, docs_dash_issue_contribution, pr_submitted, pr_merged, issue_contribution, bonus_issue_comment, bonus_pr) >= 1
+                    condition: sum(docs_dash_pr_submitted, docs_dash_pr_merged, docs_dash_issue_contribution, pr_submitted, pr_merged, issue_contribution, issue_created, bonus_issue_comment, bonus_pr) >= 1
