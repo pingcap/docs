@@ -77,7 +77,7 @@ const conn = connect({
   }
 })
 
-// You could also provide decoders config in execute method to override the connection config
+// You could also provide decoders config in SQL level to override the decoders in connection config
 conn.execute(`select ...`, [], {
   decoders: {
     // ...
