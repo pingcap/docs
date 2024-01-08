@@ -498,8 +498,8 @@ In these scenarios, cross-database binding can effectively mitigate SQL performa
 To use cross-database binding, you only need to use `*` to represent the database name. For example:
 
 ```sql
-CREATE GLOBAL BINDING USING SELECT /*+ use_index(t, a) */ * FROM *.t; -- Create a GLOBAL scope cross-database binding.
 CREATE GLOBAL BINDING USING SELECT /*+ use_index(t, a) */ * FROM t; -- Create a GLOBAL scope standard binding.
+CREATE GLOBAL BINDING USING SELECT /*+ use_index(t, a) */ * FROM *.t; -- Create a GLOBAL scope cross-database binding.
 SHOW GLOBAL BINDINGS;
 ```
 
