@@ -1626,7 +1626,7 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 + The cache size of a Blob file
 + Default value: `"0GB"`
 + Minimum value: `0`
-+ Recommended value: It is recommended that after the database has stabilized, set the RocksDB block cache (`storage.block-cache.capacity`) to just above 95% of the Block Cache hit rate based on monitoring, and `blob-cache-size` to `total memory size * 50% - block cache size`. This is to ensure that the block cache is large enough to cache the entire RocksDB, while keeping the blob cache as large as possible. However, do not set the value of the blob cache too large. Otherwise the block cache hit rate will drop significantly.
++ Recommended value: It is recommended that after the database has stabilized, set the RocksDB block cache (`storage.block-cache.capacity`) to just above 95% of the Block Cache hit rate based on monitoring, and `blob-cache-size` to `(total memory size) * 50% - (size of block cache)`. This is to ensure that the block cache is large enough to cache the entire RocksDB, while keeping the blob cache as large as possible. However, do not set the value of the blob cache too large. Otherwise the block cache hit rate will drop significantly.
 + Unit: KB|MB|GB
 
 ### `min-gc-batch-size`
