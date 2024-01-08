@@ -38,7 +38,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 - Possible values: `ON`, `OFF`
 - For filters such as `c = 10 and (a = 'xx' or (a = 'kk' and b = 1))`, this variable controls whether to try to build more comprehensive scan ranges for `IndexRangeScan`.
 
-### [`44830`](https://github.com/pingcap/tidb/issues/44830) <span class="version-mark">New in v7.3.0</span>
+### [`44830`](https://github.com/pingcap/tidb/issues/44830) <span class="version-mark">New in v6.5.7</span>
 
 - Default value: `OFF`
 - Possible values: `ON`, `OFF`
