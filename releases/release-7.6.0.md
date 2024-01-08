@@ -25,7 +25,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
   <tr>
     <td rowspan="3">Scalability and Performance<br></td>
     <td><a href="https://docs.pingcap.com/tidb/v7.6/sql-plan-management#cross-database-binding">Cross-database SQL binding</a> {/* tw@Oreoxmt */}</td>
-    <td>When working with hundreds or thousands of databases with the same schema, such as in SaaS data platforms that maintain separate databases for each customer running similar logic, keeping statistics current at all times can be difficult. SQL bindings can improve performance in these cases, but applying bindings to so many tables is impractical. TiDB v7.6.0 introduces cross-database SQL bindings that enable broadcasting bindings across all schema-equivalent databases.</td>
+    <td>When managing hundreds of databases with the same schema, it is often necessary to apply SQL bindings across these schemas. For example, in SaaS or PaaS data platforms, each user typically operates separate databases with the same schema and runs similar SQL queries on them. In this case, it is impractical to bind SQL for each schema one by one. TiDB v7.6.0 introduces cross-database SQL bindings that enable matching bindings across all schema-equivalent databases.</td>
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/v7.6/br-snapshot-guide#restore-cluster-snapshots">Achieve up to 10 times faster for snapshot restore (experimental)</a> {/* tw@Oreoxmt */}</td>
