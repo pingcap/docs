@@ -2969,7 +2969,7 @@ mysql> desc select count(distinct a) from test.t;
 - This variable is used to control whether the optimizer selects hash joins for tables. The value is `ON` by default. If it is set to `OFF`, the optimizer avoids selecting hash joins when generating execution plans, unless no other join algorithm is available.
 - If both the system variable `tidb_opt_enable_hash_join` and the `HASH_JOIN` hint are configured, the `HASH_JOIN` hint takes precedence. Even if `tidb_opt_enable_hash_join` is set to `OFF`, when you specify a `HASH_JOIN` hint in a query, the TiDB optimizer still enforces a hash join plan.
 
-### tidb_opt_fix_control <span class="version-mark">New in v6.5.7</span>
+### tidb_opt_fix_control <span class="version-mark">New in v6.5.3</span>
 
 <CustomContent platform="tidb">
 
