@@ -929,7 +929,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 <CustomContent platform="tidb-cloud">
 
-- If you enable this variable and are using TiDB Data Migration (DM) to migrate data, it is recommended that you set `sql_require_ primary_key` to `OFF` in the `session` part in the [DM Task Configuration File](https://docs.pingcap.com/tidb/stable/task-configuration-file-full#task-configuration-file-template-advanced). Otherwise it will cause the DM fail to create tasks.
+- If you enable this variable and are using TiDB Data Migration (DM) to migrate data, it is recommended that you set `sql_require_ primary_key` to `OFF` in the `session` level in the [DM Task Configuration File](https://docs.pingcap.com/tidb/stable/task-configuration-file-full#task-configuration-file-template-advanced). Otherwise it will cause DM to fail to create tasks.
 
 </CustomContent>
 
