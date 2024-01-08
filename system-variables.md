@@ -2991,7 +2991,7 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `""`
 - This variable is used to control some internal behaviors of the optimizer.
 - The optimizer's behavior might vary depending on user scenarios or SQL statements. This variable provides a more fine-grained control over the optimizer and helps to prevent performance regression after upgrading caused by behavior changes in the optimizer.
-- For a more detailed introduction, see [Optimizer Fix Controls](https://docs.pingcap.com/tidb/v6.5/optimizer-fix-controls).
+- For a more detailed introduction, see [Optimizer Fix Controls](https://docs.pingcap.com/tidbcloud/optimizer-fix-controls).
 
 </CustomContent>
 
