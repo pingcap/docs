@@ -55,9 +55,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     - Fix the issue that TiDB server might panic during graceful shutdown [#36793](https://github.com/pingcap/tidb/issues/36793) @[bb7133](https://github.com/bb7133)
     - Fix the issue of possible statistics data errors when importing statistics exported from early versions of TiDB [#42931](https://github.com/pingcap/tidb/issues/42931) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - Fix the issue of excessive statistical error in constructing statistics caused by Golang's implicit conversion algorithm [#49801](https://github.com/pingcap/tidb/issues/49801) @[qw4990](https://github.com/qw4990)
-    - Fix the issue that the optimizer incorrectly converts TiFlash selection path to TableDual in specific scenarios [#49285](https://github.com/pingcap/tidb/issues/49285) @[AilinKid](https://github.com/AilinKid)
+    - Fix the issue that the optimizer incorrectly converts TiFlash selection path to the DUAL table in specific scenarios [#49285](https://github.com/pingcap/tidb/issues/49285) @[AilinKid](https://github.com/AilinKid)
     - Fix the issue that parsing invalid values of `ENUM` or `SET` types would directly cause SQL statement errors [#49487](https://github.com/pingcap/tidb/issues/49487) @[winoros](https://github.com/winoros)
-    - Fix the issue that `UPDATE` or `DELETE` statements containing 'WITH RECURSIVE' CTEs might produce incorrect results [#48969](https://github.com/pingcap/tidb/issues/48969) @[winoros](https://github.com/winoros)
+    - Fix the issue that `UPDATE` or `DELETE` statements containing `WITH RECURSIVE` CTEs might produce incorrect results [#48969](https://github.com/pingcap/tidb/issues/48969) @[winoros](https://github.com/winoros)
     - Fix the issue that using the `_` wildcard in `LIKE` when the data contains trailing spaces can result in incorrect query results [#48983](https://github.com/pingcap/tidb/issues/48983) @[time-and-fate](https://github.com/time-and-fate)
     - Fix the issue that a query containing the IndexHashJoin operator gets stuck when memory exceeds `tidb_mem_quota_query` [#49033](https://github.com/pingcap/tidb/issues/49033) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - Fix the issue that `LIMIT` and `OPRDERBY` might be invalid in nested `UNION` queries [#49377](https://github.com/pingcap/tidb/issues/49377) @[AilinKid](https://github.com/AilinKid)
@@ -68,13 +68,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
 + TiKV
 
-    - Fix the issue that damaged SST files might be spreaded to other TiKV nodes [#15986](https://github.com/tikv/tikv/issues/15986) @[Connor1996](https://github.com/Connor1996)
+    - Fix the issue that damaged SST files might be spread to other TiKV nodes [#15986](https://github.com/tikv/tikv/issues/15986) @[Connor1996](https://github.com/Connor1996)
     - Fix the issue that Resolved TS in stale read might cause TiKV OOM issues when tracking large transactions [#14864](https://github.com/tikv/tikv/issues/14864) @[overvenus](https://github.com/overvenus)
-    - Fix the issue that TiKV reports the `ServerIsBusy` error because it can not append the raft log [#15800](https://github.com/tikv/tikv/issues/15800) @[tonyxuqqi](https://github.com/tonyxuqqi)
+    - Fix the issue that TiKV reports the `ServerIsBusy` error because it cannot append the raft log [#15800](https://github.com/tikv/tikv/issues/15800) @[tonyxuqqi](https://github.com/tonyxuqqi)
 
 + PD
 
-    - Fix the issue that the location-labels set by Placement Rules in SQL are not scheduled as expected under specific conditions [#6637](https://github.com/tikv/pd/issues/6637) @[rleungx](https://github.com/rleungx)
+    - Fix the issue that the `location-labels` set by Placement Rules in SQL are not scheduled as expected under specific conditions [#6637](https://github.com/tikv/pd/issues/6637) @[rleungx](https://github.com/rleungx)
     - Fix the issue that the orphan peer is deleted when the number of replicas does not meet the requirements [#7584](https://github.com/tikv/pd/issues/7584) @[bufferflies](https://github.com/bufferflies)
 
 + TiFlash
