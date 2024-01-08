@@ -135,7 +135,7 @@ For backward compatibility, the TiKV snapshots are still in the RocksDB format d
 
 The `min-blob-size` is the basis for whether a value is stored in Titan or not. If the value is greater than or equal to `min-blob-size`, it will be stored in Titan. Otherwise it will be in RocksDB's native format. If `min-blob-size` is set too small or too large, it can cause performance degradation. The following are test results for performance of `min-blob-size` under a few workloads.
 
-| Value size(Bytes)      | pointget | pointget(titan)| scan100 | scan100(titan)| scan10000 | scan10000(titan)| update | update(titan) |
+| Value size (Bytes)      | pointget | pointget (Titan)| scan100 | scan100 (Titan)| scan10000 | scan10000 (Titan)| `UPDATE` | `UPDATE` (Titan) |
 | ---------------- | ---------| -------------- | --------| ------------- | --------- | --------------- | ------ | ------------ |
 | 256 | 156198 | 153487 | 15961 |6489 |269 |119 |30047 |35181 |
 |500 |161142 |160234 |16131 |9267 |223 |99.1 |24162 |33113 |

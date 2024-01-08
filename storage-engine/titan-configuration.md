@@ -39,13 +39,13 @@ Titan is compatible with RocksDB, so you can directly enable Titan on the existi
     enabled = true
     ```
 
-After Titan is enabled, the existing data stored in RocksDB is not immediately moved to the Titan engine. As new data is written to the TiKV foreground and RocksDB performs compaction, the values are progressively separated from keys and written to Titan. Similarly, SST files imported by existing data migration, incremental data migration, or TiDB Lightning are in RocksDB format, and the data is not imported directly into Titan. As compaction proceeds, the large values in the processed SSTs are separated into Titan. You can view the **TiKV Details** -> **Titan kv** -> **blob file size** panel to confirm the size of the data stored in Titan.
+After Titan is enabled, the existing data stored in RocksDB is not immediately moved to the Titan engine. As new data is written to the TiKV foreground and RocksDB performs compaction, the values are progressively separated from keys and written to Titan. Similarly, SST files imported by existing data migration, incremental data migration, or TiDB Lightning are in RocksDB format, and the data is not imported directly into Titan. As compaction proceeds, the large values in the processed SST files are separated into Titan. You can view the **TiKV Details** -> **Titan kv** -> **blob file size** panel to confirm the size of the data stored in Titan.
 
-If you want to speed up the writing process, compact data of the whole TiKV cluster manually using tikv-ctl. For details, see [manual compaction](/tikv-control.md#compact-data-of-the-whole-tikv-cluster-manually). Because RocksDB has the Block cache and the access pattern in compaction is sequential read, the block cache hit rate can be very high. In the test, by using tikv-ctl, a volume of 670 GiB TiKV data can be converted to Titan in less than one hour.  
+If you want to speed up the writing process, compact data of the whole TiKV cluster manually using tikv-ctl. For details, see [manual compaction](/tikv-control.md#compact-data-of-the-whole-tikv-cluster-manually). Because RocksDB has the Block cache and the access pattern in compaction is sequential read, the block cache hit rate can be very high. In the test, by using tikv-ctl, a volume of 670 GiB TiKV data can be converted to Titan in one hour.  
 
 > **Note:**
 >
-> Starting from v7.6.0, Titan is enabled by default on the newly created cluster. Existing clusters that are upgraded from earlier versions to v7.6.0 keep the original configuration, which means that if Titan is not explicityly enabled, then it still uses RocksDB. 
+> Starting from v7.6.0, Titan is enabled by default on the newly created cluster. Existing clusters that are upgraded from earlier versions to v7.6.0 keep the original configuration, which means that if Titan is not explicitly enabled, it still uses RocksDB. 
 
 > **Warning:**
 >
@@ -68,21 +68,21 @@ To adjust Titan-related parameters using TiUP, refer to [Modify the configuratio
 
 + Value size threshold.
 
-    When the size of the value written to the foreground is smaller than the threshold, this value is stored in RocksDB; otherwise, this value is stored in the blob file of Titan. Based on the distribution of value sizes, if you increase the threshold, more values are stored in RocksDB and TiKV performs better in reading small values. If you decrease the threshold, more values go to Titan, which further reduces RocksDB compactions. In the [test](/storage-engine/titan-overview.md#min-blob-sizes-performance-implications), 1 KB is a balanced threshold that has far better write throughput with about 10% scan throughput regression compared with RocksDB. 
+    When the size of the value written to the foreground is smaller than the threshold, this value is stored in RocksDB; otherwise, this value is stored in the blob file of Titan. Based on the distribution of value sizes, if you increase the threshold, more values are stored in RocksDB and TiKV performs better in reading small values. If you decrease the threshold, more values go to Titan, which further reduces RocksDB compactions. According to the [test](/storage-engine/titan-overview.md#performance-implications-of-min-blob-size), 1 KB is a balanced threshold that has far better write throughput with about 10% scan throughput regression compared with RocksDB. 
 
     ```toml
     [rocksdb.defaultcf.titan]
     min-blob-size = "1KB"
     ```
 
-+ The algorithm used for compressing values in Titan, which takes value as the unit. Starting from TiDB v7.6.0, the default compression is `zstd`.
++ The algorithm used for compressing values in Titan, which takes value as the unit. Starting from TiDB v7.6.0, the default compression algorithm is `zstd`.
 
     ```toml
     [rocksdb.defaultcf.titan]
     blob-file-compression = "zstd"
     ```
 
-+ By default, `zstd-dict-size` is `0KB`, which means Titan's compression is based on single values. But RocksDB compression is based on blocks (`32 KB` by default). When the average size of Titan values is less than `32 KB`, Titan's compression ratio is smaller than RocksdDB. Taking JSON as an example, Titan store size can be 30% to 50% bigger than RocksDB. The actual compression ratio depends on the value content and the similiarity among different values. You can set `zstd-dict-size` (for example, set it to `16 KB`) to enable zstd dictionary compression to increase the compression ratio. Though the zstd dictionary compression can achieve similar compression ratio of RocksDB, it can lead to about 10% throughput regression in a typical read-write workload.
++ By default, `zstd-dict-size` is `0KB`, which means Titan's compression is based on single values. But RocksDB compression is based on blocks (`32KB` by default). When the average size of Titan values is less than `32KB`, Titan's compression ratio is smaller than RocksdDB. Taking JSON as an example, Titan store size can be 30% to 50% bigger than RocksDB. The actual compression ratio depends on the value content and the similiarity among different values. You can set `zstd-dict-size` (for example, set it to `16KB`) to enable zstd dictionary compression to increase the compression ratio. Though the zstd dictionary compression can achieve similar compression ratio of RocksDB, it can lead to about 10% throughput regression in a typical read-write workload.
 
     ```toml
     [rocksdb.defaultcf.titan]
@@ -129,7 +129,7 @@ To disable Titan, you can configure the `rocksdb.defaultcf.titan.blob-run-mode` 
 - When the option is set to `read-only`, all newly written values are written into RocksDB, regardless of the value size.
 - When the option is set to `fallback`, all newly written values are written into RocksDB, regardless of the value size. Also, all compacted values stored in the Titan blob file are automatically moved back to RocksDB.
 
-To fully disable Titan for all existing and future data, you can follow these steps. Note that in general you can skip Step 2 because it can greatly impact online traffic performance. In fact even without Step 2, the data convertion consumes extra IO and CPU and thus performance will degrade (sometimes as much as 50%) when TiKV's IO or CPU resources are limited.  
+To fully disable Titan for all existing and future data, you can follow these steps. Note that in general you can skip Step 2 because it can greatly impact online traffic performance. In fact even without Step 2, the data convertion consumes extra I/O and CPU resources, and performance will degrade (sometimes as much as 50%) when TiKV's I/O or CPU resources are limited.  
 
 1. Update the configuration of the TiKV nodes you wish to disable Titan for. You can update configuration in two methods:
 
@@ -164,7 +164,7 @@ To fully disable Titan for all existing and future data, you can follow these st
 
 ### Data convertion speed from Titan to RocksDB
 
-Because the values in Titan Blob files are not contiguous, and Titan's cache is at the value level, the Blob Cache does not help during compaction. The speed from Titan to RocksDB is an order of magnitude slower than the speed from RocksDB to Titan. In the test, it takes 12 hours for a volume of 800 GiB Titan data on a TiKV node to be converted to RocksDB by tikv-ctl to do full compaction.
+Because the values in Titan Blob files are not contiguous, and Titan's cache is at the value level, the Blob Cache does not help during compaction. The speed from Titan to RocksDB is an order of magnitude slower than the speed from RocksDB to Titan. In the test, it takes 12 hours to convert a volume of 800 GiB Titan data on a TiKV node to RocksDB by tikv-ctl in a full compaction.
 
 ## Level Merge (experimental)
 
