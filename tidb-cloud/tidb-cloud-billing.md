@@ -78,6 +78,28 @@ The billing details page shows the billing summary by project and by service. Yo
 > - The total amount in the monthly bill is rounded off to the 2nd decimal place.
 > - The total amount in the daily usage details is accurate to the 6th decimal place.
 
+## Billing profile
+
+Paid organizations can create a billing profile. Information in this profile will be used to determine the tax calculation. There are four fields in the billing profile.
+
+### Company name (optional)
+
+If this field is specified, this name will appear on invoices instead of your organization name.
+
+### Billing email (optional)
+
+If this field is specified, invoices and other billing-related notifications will be sent to this email address.
+
+### Primary business address
+
+This is the address of the company that purchases TiDB Cloud services. It is used to calculate any applicable taxes.
+
+### Business tax ID (optional)
+
+If you are VAT/GST registered business, please fill in a valid VAT/GST ID and we will not charge you VAT/GST as applicable
+
+If your business is registered for VAT/GST, fill in a valid VAT/GST ID. By providing this information, we will exempt you from charging VAT/GST if applicable. This is important for businesses operating in regions where VAT/GST registration allows for certain tax exemptions or refunds.
+
 ## Credits
 
 TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. One credit is equivalent to one U.S. dollar. You can use credits to pay TiDB cluster fees before the credits become expired.
