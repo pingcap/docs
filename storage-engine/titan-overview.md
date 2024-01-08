@@ -31,7 +31,7 @@ The prerequisites for enabling Titan are as follows:
 - No range query will be performed or you do not need a high performance of range query. Because the data stored in Titan is not well-ordered, its performance of range query is poorer than that of RocksDB, especially for the query of a large range. According PingCAP's internal test, Titan's range query performance is 40% to a few times lower than that of RocksDB.
 - Sufficient disk space (consider reserving a space twice of the RocksDB disk consumption with the same data volume). This is because Titan reduces write amplification at the cost of disk space. In addition, Titan compresses values one by one, and its compression rate is lower than that of RocksDB. RocksDB compresses blocks one by one. Therefore, Titan consumes more storage space than RocksDB, which is expected and normal. In some situations, Titan's storage consumption can be twice that of RocksDB.
 
-In TiDB 7.6.0, a few optimizations are made to Titan and thus it's enabled by default for newly created clusters. Because small KV data would still be stored in RocksDB even Titan is enabled. So there's no harm to enable the Titan in the configuration. 
+Starting from v7.6.0, Titan is improved and is enabled by default for newly created clusters. Because small KV datasets will still be stored in RocksDB even Titan is enabled, you can enable Titan in the configuration. 
 
 If you want to improve the performance of Titan, see the blog post [Titan: A RocksDB Plugin to Reduce Write Amplification](https://pingcap.com/blog/titan-storage-engine-design-and-implementation/).
 
@@ -127,13 +127,13 @@ Range Merge is an optimized approach of GC based on Level Merge. However, the bo
 
 Therefore, the Range Merge operation is needed to keep the number of sorted runs within a certain level. At the time of OnCompactionComplete, Titan counts the number of sorted runs in a range. If the number is large, Titan marks the corresponding blob file as ToMerge and rewrites it in the next compaction.
 
-### Scale-out and Scale-in
+### Scale out and scale in
 
-For backward compatibility, when TiKV sends snapshot to another TiKV in either scale-out or scale-in operation, the snapshot itself is in RocksDB format. And therefore the initial data format for a newly create TiKv node is RocksDB, which means it could have smaller store size meanwhile compaction's write amplification is larger. And later during the compaction, the RocksDB data would be gradually converted to Titan. 
+For backward compatibility, the TiKV snapshots are still in the RocksDB format during scaling up and scaling down. Because the scaled nodes are all from RocksDB at the beginning, they carry the characteristics of RocksDB, such as higher compression rate than the old TiKV nodes, smaller store size, and relatively larger write amplification in compaction. These SST files in RocksDB format will be gradually converted to Titan format after compaction.
 
-### min-blob-size's performance implications
+### Performance implications of `min-blob-size`
 
-When Titan is enabled, if a value size is no less than `min-blob-size`, it would be stored in Titan. Otherwise, it's stored in RocksDB. Either too big or too small `min-blob-sizesize` would lead to poor performance in some workloads. Below are our test results for different `min-blob-size`'s performance under a few workloads.
+The `min-blob-size` is the basis for whether a value is stored in Titan or not. If the value is greater than or equal to `min-blob-size`, it will be stored in Titan. Otherwise it will be in RocksDB's native format. If `min-blob-size` is set too small or too large, it can cause performance degradation. The following are test results for performance of `min-blob-size` under a few workloads.
 
 | Value size(Bytes)      | pointget | pointget(titan)| scan100 | scan100(titan)| scan10000 | scan10000(titan)| update | update(titan) |
 | ---------------- | ---------| -------------- | --------| ------------- | --------- | --------------- | ------ | ------------ |
@@ -146,7 +146,7 @@ When Titan is enabled, if a value size is no less than `min-blob-size`, it would
 |1024K| 1165 | 1165 | 11.7 |11.7 | NA |NA |32.3 | 233 |
 
 > **Note:**
-> >
-> > scan100 means scan 100 records and scan10000 means scan 10000 records.
+> 
+> `scan100` means to scan 100 records and `scan10000` means to scan 10000 records.
 
-When value size is 2 KB, Titan's performance is better in all workloads above. When the size is 1 KB, Titan lags only in scan10000 workload by 15%, but gains 50% in update. Therefore, the default value of `min-blob-size` is 1 KB. User can choose the proper `min-blob-size` according to the workloads.
+In this table, when the value size is 2 KB, Titan performance is the best in all workloads. When the size is 1 KB, Titan lags only in `scan10000` workload by 15%, but gains 50% in `UPDATE`. Therefore, the appropriate default value of `min-blob-size` is `1 KB`. You can choose a proper value for `min-blob-size` according to the workloads.
