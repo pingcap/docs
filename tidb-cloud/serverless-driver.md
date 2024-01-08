@@ -59,32 +59,6 @@ try {
 }
 ```
 
-### Custom column type decoders
-
-In case you want change the returning column value format, you could provide a decoder config to `connect` method:
-
-```ts
-import { connect, ColumnType } from '@tidbcloud/serverless';
-
-const conn = connect({
-  url: 'mysql://[username]:[password]@[host]/[database]',
-  decoders: {
-    // serverless driver returns BIGINT field as text value by default, with this decoder you could change it to js builtin BigInt type.
-    [ColumnType.BIGINT]: (rawValue: string) => BigInt(rawValue),
-    
-    // serverless driver return DATETIME field as text in 'yyyy-MM-dd HH:mm:ss' format, with this decoder you could transform the text value to js native Date object.
-    [ColumnType.DATETIME]: (rawValue: string) => new Date(rawValue),
-  }
-})
-
-// You could also provide decoders config in SQL level to override the decoders in connection config
-conn.execute(`select ...`, [], {
-  decoders: {
-    // ...
-  }
-})
-```
-
 
 ## Edge examples
 
@@ -252,6 +226,32 @@ The `isolation` option can only be used in the `begin` function. Here is an exam
 ```ts
 const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]'})
 const tx = await conn.begin({isolation:"READ COMMITTED"})
+```
+
+### Custom column type decoders
+
+In case you want change the returning column value format, you could provide a decoder config to `connect` method:
+
+```ts
+import { connect, ColumnType } from '@tidbcloud/serverless';
+
+const conn = connect({
+  url: 'mysql://[username]:[password]@[host]/[database]',
+  decoders: {
+    // serverless driver returns BIGINT field as text value by default, with this decoder you could change it to js builtin BigInt type.
+    [ColumnType.BIGINT]: (rawValue: string) => BigInt(rawValue),
+    
+    // serverless driver return DATETIME field as text in 'yyyy-MM-dd HH:mm:ss' format, with this decoder you could transform the text value to js native Date object.
+    [ColumnType.DATETIME]: (rawValue: string) => new Date(rawValue),
+  }
+})
+
+// You could also provide decoders config in SQL level to override the decoders in connection config
+conn.execute(`select ...`, [], {
+  decoders: {
+    // ...
+  }
+})
 ```
 
 ## Features
