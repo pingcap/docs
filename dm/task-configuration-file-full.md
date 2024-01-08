@@ -44,6 +44,7 @@ target-database:                # Configuration of the downstream database insta
     sql_mode: "ANSI_QUOTES,NO_ZERO_IN_DATE,NO_ZERO_DATE" # Since DM v2.0.0, if this item does not appear in the configuration file, DM automatically fetches a proper value for "sql_mode" from the downstream TiDB. Manual configuration of this item has a higher priority.
     tidb_skip_utf8_check: 1                     # Since DM v2.0.0, if this item does not appear in the configuration file, DM automatically fetches a proper value for "tidb_skip_utf8_check" from the downstream TiDB. Manual configuration of this item has a higher priority.
     tidb_constraint_check_in_place: 0
+    sql_require_primary_key: OFF                #  During the creation of a DM task, several metadata tables are created in TiDB, some of which have no primary key. If this parameter is enabled, these metadata tables without primary keys cannot be created. Therefore, you need to set this parameter to `OFF` from the session level.
   security:                       # The TLS configuration of the downstream TiDB
     ssl-ca: "/path/to/ca.pem"
     ssl-cert: "/path/to/cert.pem"
