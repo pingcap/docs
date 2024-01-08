@@ -96,8 +96,6 @@ This is the address of the company that purchases TiDB Cloud services. It is use
 
 ### Business tax ID (optional)
 
-If you are VAT/GST registered business, please fill in a valid VAT/GST ID and we will not charge you VAT/GST as applicable
-
 If your business is registered for VAT/GST, fill in a valid VAT/GST ID. By providing this information, we will exempt you from charging VAT/GST if applicable. This is important for businesses operating in regions where VAT/GST registration allows for certain tax exemptions or refunds.
 
 ## Credits
