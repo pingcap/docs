@@ -921,6 +921,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - This variable controls whether to enforce the requirement that a table has a primary key. After this variable is enabled, attempting to create or alter a table without a primary key will produce an error.
 - This feature is based on the similarly named [`sql_require_primary_key`](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_sql_require_primary_key) in MySQL 8.0.
 - It is strongly recommended to enable this variable when using TiCDC. This is because replicating changes to a MySQL sink requires that tables have a primary key.
+- When enabling this variable and using TiDB Data Migration (DM) for data migration, set it to 'OFF' in the 'session' parameter of the DM task configuration to avoid DM task creation failure.
 
 ### sql_select_limit <span class="version-mark">New in v4.0.2</span>
 
