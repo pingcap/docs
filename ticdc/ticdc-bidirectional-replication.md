@@ -61,7 +61,7 @@ Replicable DDLs include:
 - `CREATE VIEW`
 - `DROP VIEW`
 
-### 不可复制的 DDL
+### Non-replicable DDLs
 
 Non-replicable DDLs are the DDLs that have a great impact on the business, and might cause data inconsistency between clusters. Non-replicable DDLs cannot be directly replicated to other TiDB clusters in bi-directional replication through TiCDC. Non-replicable DDLs must be executed through specific operations.
 
@@ -121,7 +121,7 @@ When no BDR role is set, you can execute any DDL. But after you set `bdr_mode=tr
 
 > **Warning:**
 >
-> Do not execute any other DDLs during this time.
+> After you execute `ADMIN UNSET BDR ROLE` on all TiDB clusters, none of the DDLs are replicated by TiCDC. You need to manually execute the DDLs on each cluster separately.
 
 ## Stop bi-directional replication
 
