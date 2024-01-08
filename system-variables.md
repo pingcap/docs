@@ -2975,7 +2975,6 @@ mysql> desc select count(distinct a) from test.t;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: String
 - Default value: `""`
 - This variable is used to control some internal behaviors of the optimizer.
@@ -2988,7 +2987,6 @@ mysql> desc select count(distinct a) from test.t;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: String
 - Default value: `""`
 - This variable is used to control some internal behaviors of the optimizer.
