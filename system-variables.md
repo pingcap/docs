@@ -2971,6 +2971,8 @@ mysql> desc select count(distinct a) from test.t;
 
 ### tidb_opt_fix_control <span class="version-mark">New in v6.5.7</span>
 
+<CustomContent platform="tidb">
+
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
@@ -2979,6 +2981,21 @@ mysql> desc select count(distinct a) from test.t;
 - This variable is used to control some internal behaviors of the optimizer.
 - The optimizer's behavior might vary depending on user scenarios or SQL statements. This variable provides a more fine-grained control over the optimizer and helps to prevent performance regression after upgrading caused by behavior changes in the optimizer.
 - For a more detailed introduction, see [Optimizer Fix Controls](/optimizer-fix-controls.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: String
+- Default value: `""`
+- This variable is used to control some internal behaviors of the optimizer.
+- The optimizer's behavior might vary depending on user scenarios or SQL statements. This variable provides a more fine-grained control over the optimizer and helps to prevent performance regression after upgrading caused by behavior changes in the optimizer.
+- For a more detailed introduction, see [Optimizer Fix Controls](https://docs.pingcap.com/tidb/v6.5/optimizer-fix-controls).
+
+</CustomContent>
 
 ### tidb_opt_force_inline_cte <span class="version-mark">New in v6.3.0</span>
 
