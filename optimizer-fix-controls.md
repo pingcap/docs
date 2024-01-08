@@ -44,7 +44,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 - Possible values: `ON`, `OFF`
 - This variable controls whether Plan Cache is allowed to cache execution plans with the `PointGet` operator generated during physical optimization.
 
-### [`44855`](https://github.com/pingcap/tidb/issues/44855) <span class="version-mark">New in v7.3.0</span>
+### [`44855`](https://github.com/pingcap/tidb/issues/44855) <span class="version-mark">New in v6.5.7</span>
 
 - Default value: `OFF`
 - Possible values: `ON`, `OFF`
