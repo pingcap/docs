@@ -45,7 +45,7 @@ If you want to speed up the writing process, compact data of the whole TiKV clus
 
 > **Note:**
 >
-> Starting from v7.6.0, Titan is enabled by default on the newly created cluster. Existing clusters that are upgraded from earlier versions to v7.6.0 keep the original configuration, which means that if Titan is not explicitly enabled, it still uses RocksDB. 
+> Starting from v7.6.0, Titan is enabled by default on the newly created clusters. Existing clusters that are upgraded from earlier versions to v7.6.0 retain the original configuration, which means that if Titan is not explicitly enabled, it still uses RocksDB. 
 
 > **Warning:**
 >
@@ -82,7 +82,7 @@ To adjust Titan-related parameters using TiUP, refer to [Modify the configuratio
     blob-file-compression = "zstd"
     ```
 
-+ By default, `zstd-dict-size` is `0KB`, which means Titan's compression is based on single values. But RocksDB compression is based on blocks (`32KB` by default). When the average size of Titan values is less than `32KB`, Titan's compression ratio is smaller than RocksdDB. Taking JSON as an example, Titan store size can be 30% to 50% bigger than RocksDB. The actual compression ratio depends on the value content and the similiarity among different values. You can set `zstd-dict-size` (for example, set it to `16KB`) to enable zstd dictionary compression to increase the compression ratio. Though the zstd dictionary compression can achieve similar compression ratio of RocksDB, it can lead to about 10% throughput regression in a typical read-write workload.
++ By default, `zstd-dict-size` is `0KB`, which means Titan's compression is based on single values. But RocksDB compression is based on blocks (`32KB` by default). When the average size of Titan values is less than `32KB`, Titan's compression ratio is smaller than RocksdDB. Taking JSON as an example, Titan store size can be 30% to 50% bigger than RocksDB. The actual compression ratio depends on the value content and the similiarity among different values. You can set `zstd-dict-size` (for example, set it to `16KB`) to enable the zstd dictionary compression to increase the compression ratio. Though the zstd dictionary compression can achieve similar compression ratio of RocksDB, it can lead to about 10% throughput regression in a typical read-write workload.
 
     ```toml
     [rocksdb.defaultcf.titan]
@@ -144,8 +144,7 @@ To fully disable Titan for all existing and future data, you can follow these st
 
     > **Note:**
     >
-    > When `discardable-ratio=1`, it means TiKV will only recycle a Titan blob file when all its data are moved to RocksDB. That means before the convertion completes, these Titan blob files won't be deleted. And therefore, if a TiKV node does not have sufficent disk size to store both Titan and RocksDB data, the parameter should keep the default value instead of `1.0`. However if the disk size is big enough, `discardable-ratio = 1.0` can help to reduce the blob file GC and the disk IO. 
-    >
+    > Use the default value `0.5` for [`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio) when there is not enough disk space to hold both Titan and RocksDB data. In general, it is recommended to use the default value if the free disk space is less than 50%. This is because when `discardable-ratio = 1.0`, the RocksDB data keeps growing. At the same time, the recovery of Titan's original blob file requires all the data in that file to be migrated to RocksDB, which is a slow process. If the disk size is big enough, setting `discardable-ratio = 1.0` can reduce the GC of the blob file itself during compaction, which saves bandwidth.
 
 2. [Optional] Perform a full compaction using tikv-ctl. This process will consume a large amount of I/O and CPU resources.
 
