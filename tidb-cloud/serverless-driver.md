@@ -240,7 +240,7 @@ const conn = connect({
     // TiDB Cloud serverless driver returns the `BIGINT` type as text value by default. With this decoder, you can convert it to the JavaScript builtin `BigInt` type.
     [ColumnType.BIGINT]: (rawValue: string) => BigInt(rawValue),
     
-    // serverless driver return DATETIME field as text in 'yyyy-MM-dd HH:mm:ss' format, with this decoder you could transform the text value to js native Date object.
+    // TiDB Cloud serverless driver returns the `DATETIME` type as the text value in the 'yyyy-MM-dd HH:mm:ss' format. With this decoder, you can convert the text value to the JavaScript native `Date` object.
     [ColumnType.DATETIME]: (rawValue: string) => new Date(rawValue),
   }
 })
