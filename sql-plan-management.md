@@ -486,16 +486,16 @@ SHOW binding_cache status;
 
 ## Cross-database binding
 
-TiDB supports cross-database binding using the wildcard `*` to represent a database. This feature is introduced in v7.6.0. To use the cross-database binding feature, you need to first enable the [`tidb_opt_enable_fuzzy_binding`](/system-variables.md#tidb_opt_enable_fuzzy_binding-new-in-v760) system variable.
+In the SQL statement used to create a binding, TiDB supports cross-database binding using the wildcard `*` to represent a database. This feature is introduced in v7.6.0. To use the cross-database binding feature, you need to first enable the [`tidb_opt_enable_fuzzy_binding`](/system-variables.md#tidb_opt_enable_fuzzy_binding-new-in-v760) system variable.
 
 You can use cross-database binding to simplify the process of fixing execution plans in scenarios where data is categorized and stored across different databases, and each database maintains identical object definitions and executes similar application logic. The following are some common use cases:
 
 * When you run SaaS or PaaS services on TiDB, where the data of each tenant is stored in separate databases for easier data maintenance and management.
 * When you performed database sharding in a single instance and retained the original database schema after migrating to TiDB, that is, the data in the original instance is categorized and stored by database.
 
-In these scenarios, cross-database binding can effectively mitigate SQL performance issues caused by uneven distribution and rapid changes in user data and workload. SaaS providers can use cross-database binding to fix execution plans validated by users with large data volumes, thereby avoiding potential performance issues due to the rapid growth of users with small data volumes.
+In these scenarios, cross-database binding can effectively mitigate SQL performance issues caused by uneven distribution and rapid changes in user data and workload. SaaS providers can use cross-database binding to fix execution plans validated by applications with large data volumes, thereby avoiding potential performance issues due to the rapid growth of applications with small data volumes.
 
-To use cross-database binding, you only need to use `*` to represent the database name. For example:
+To use cross-database binding, you only need to use `*` to represent the database name when creating a binding. For example:
 
 ```sql
 CREATE GLOBAL BINDING USING SELECT /*+ use_index(t, a) */ * FROM t; -- Create a GLOBAL scope standard binding.
@@ -584,11 +584,11 @@ Apart from the creation syntax, cross-database bindings share the same deletion 
 
     ```sql
     SHOW GLOBAL BINDINGS;
-    +----------------------------------+------------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+-----------------+--------+------------------------------------------------------------------+-------------+
-    | Original_sql                     | Bind_sql                                                                     | Default_db | Status  | Create_time             | Update_time             | Charset | Collation       | Source | Sql_digest                                                       | Plan_digest |
-    +----------------------------------+------------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+-----------------+--------+------------------------------------------------------------------+-------------+
-    | select * from ( `*` . `t1` ) join `*` . `t2` | SELECT /*+ use_index(`t1` `a`) use_index(`t2` `a`)*/ * FROM (`*` . `t1`) JOIN `*` . `t2` |            | enabled | 2023-12-29 14:22:28.144 | 2023-12-29 14:22:28.144 | utf8    | utf8_general_ci | manual | ea8720583e80644b58877663eafb3579700e5f918a748be222c5b741a696daf4 |             |
-    +----------------------------------+------------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+-----------------+--------+------------------------------------------------------------------+-------------+
+        +----------------------------------------------+------------------------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
+    | Original_sql                                 | Bind_sql                                                                                 | Default_db | Status  | Create_time             | Update_time             | Charset | Collation          | Source | Sql_digest                                                       | Plan_digest |
+    +----------------------------------------------+------------------------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
+    | select * from ( `*` . `t1` ) join `*` . `t2` | SELECT /*+ use_index(`t1` `a`) use_index(`t2` `a`)*/ * FROM (`*` . `t1`) JOIN `*` . `t2` |            | enabled | 2023-12-29 14:22:28.144 | 2023-12-29 14:22:28.144 | utf8    | utf8_general_ci    | manual | ea8720583e80644b58877663eafb3579700e5f918a748be222c5b741a696daf4 |             |
+    +----------------------------------------------+------------------------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
     ```
 
 6. Delete the cross-database binding:
