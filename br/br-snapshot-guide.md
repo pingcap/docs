@@ -215,7 +215,6 @@ The impact of backup on cluster performance can be reduced by limiting the backu
      --log-file restorefull.log
 ```
 
-
 ## See also
 
 * [TiDB Backup and Restore Use Cases](/br/backup-and-restore-use-cases.md)
