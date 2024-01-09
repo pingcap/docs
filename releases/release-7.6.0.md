@@ -269,6 +269,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 ### System tables
 
 - Add a new system table [`INFORMATION_SCHEMA.KEYWORDS`](/information-schema/information-schema-keywords.md) to display the information of all keywords supported by TiDB. **tw@Oreoxmt**
+- Add a new system table [`mysql.request_unit_by_group`](/mysql-schema.md#system-tables-related-to-resource-control) to store the historical records of the RU consumption of each resource group. **tw@hfxsd**
 
 ## Offline package changes
 
