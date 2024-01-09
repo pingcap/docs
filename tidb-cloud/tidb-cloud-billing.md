@@ -80,9 +80,9 @@ The billing details page shows the billing summary by project and by service. Yo
 
 ## Billing profile
 
-Paid organizations can create a billing profile. Information in this profile will be used to determine the tax calculation. 
+Paid organizations can create a billing profile. Information in this profile will be used to determine the tax calculation.
 
-To update the billing profile of your organization, click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner and then click **Billing** > **Billing Profile**.
+To view or update the billing profile of your organization, click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner and then click **Billing** > **Billing Profile**.
 
 There are four fields in the billing profile.
 
