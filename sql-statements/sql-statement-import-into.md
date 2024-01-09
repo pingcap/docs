@@ -36,6 +36,7 @@ For TiDB Self-Hosted, `IMPORT INTO` supports importing data from files stored in
 - When the [Global Sort](/tidb-global-sort.md) feature is used for data import, the data size of a single row after encoding must not exceed 32 MiB.
 - When the Global Sort feature is used for data import, if the target TiDB cluster is deleted before the import task is completed, temporary data used for global sorting might remain on Amazon S3. In this case, you need to delete the residual data manually to avoid increasing S3 storage costs.
 - Ensure that the data to be imported does not contain any records with primary key or non-null unique index conflicts. Otherwise, the conflicts can result in import task failures.
+- For the executed `IMPORT INTO` tasks based on scheduled by the Distributed eXecution Framework (DXF), if the task is already running, it is unsupported to be scheduled on a new TiDB nodes. If the TiDB nodes executing the import tasks is restart, the TiDB nodes will no longer execute the import task, but transfer to other TiDB nodes to continue executing. If import local TiDB nodes data, it will not failover to other TiDB nodes after the tasks exception.
 - Known issue: the `IMPORT INTO` task might fail if the PD address in the TiDB node configuration file is inconsistent with the current PD topology of the cluster. This inconsistency can arise in situations such as that PD was scaled in previously, but the TiDB configuration file was not updated accordingly or the TiDB node was not restarted after the configuration file update.
 
 ## Prerequisites for import
@@ -149,7 +150,8 @@ The supported options are described as follows:
 
 > **Note:**
 >
-> The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
+> - The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
+> - Because TiDB Lightning cannot concurrently decompress a single large compressed file, the size of the compressed file affects the import speed. It is recommended that a source file is no greater than 256 MiB after decompression.
 
 ## Global Sort
 
