@@ -237,7 +237,7 @@ import { connect, ColumnType } from '@tidbcloud/serverless';
 const conn = connect({
   url: 'mysql://[username]:[password]@[host]/[database]',
   decoders: {
-    // TiDB Cloud serverless driver returns the `BIGINT` type as text value by default. With this decoder, you can convert it to the JavaScript builtin `BigInt` type.
+    // By default, TiDB Cloud serverless driver returns the BIGINT type as text value. This decoder converts BIGINT to the JavaScript built-in BigInt type.
     [ColumnType.BIGINT]: (rawValue: string) => BigInt(rawValue),
     
     // By default, TiDB Cloud serverless driver returns the DATETIME type as the text value in the 'yyyy-MM-dd HH:mm:ss' format. This decoder converts the DATETIME text to the JavaScript native Date object.
