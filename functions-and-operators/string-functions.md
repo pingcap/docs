@@ -134,8 +134,8 @@ SELECT CustomerName, CHAR_LENGTH(CustomerName) AS LenghtOfName FROM Customers;
 
 | CustomerName|LengthOfName  |
 |-------------|--------------|
-| Albert Einstein | 15
-| Robert Oppenheimer | 18
+| Albert Einstein | 15 |
+| Robert Oppenheimer | 18 |
 ```
 > **Note:**
 >
