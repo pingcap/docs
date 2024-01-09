@@ -95,7 +95,8 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [Prepared statement cache](/sql-prepared-plan-cache.md) | Y | Y | Y | Y | Y | Y | Y | E | E | E | E |
 | [Non-prepared statement cache](/sql-non-prepared-plan-cache.md) | Y | Y | E | N | N | N | N | N | N | N | N |
-| [SQL plan management (SPM)](/sql-plan-management.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [SQL binding](/sql-plan-management.md#sql-binding) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Cross-database binding](/sql-plan-management.md#cross-database-binding) | Y | N | N | N | N | N | N | N | N | N | N |
 | [Create bindings according to historical execution plans](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan) | Y | Y | Y | E | N | N | N | N | N | N | N |
 | [Coprocessor cache](/coprocessor-cache.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | E |
 | [Stale Read](/stale-read.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | N | N |
