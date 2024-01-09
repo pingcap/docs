@@ -162,7 +162,7 @@ At the connection level, you can make the following configurations:
 | `fetch`      | function | global fetch  | Custom fetch function. For example, you can use the `undici` fetch in node.js.                                                                                                                                                   |
 | `arrayMode`  | bool     | `false`       | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.                                                                                                                             |
 | `fullResult` | bool     | `false`       | Whether to return full result object instead of just rows. To get more detailed results, set it to `true`.                                                                                                                       |
-| `decoders`   | object   | `{}`          | The `decoders` object is a collection of key-value pairs, which enables you to customize the decoding process for different column types. In each pair, you can specify a column type as the key and specify a corresponding function as the value. This function takes the raw string value received from TiDB Cloud serverless driver as an argument and returns the decoded value. |
+| `decoders`   | object   | `{}`          | A collection of key-value pairs, which enables you to customize the decoding process for different column types. In each pair, you can specify a column type as the key and specify a corresponding function as the value. This function takes the raw string value received from TiDB Cloud serverless driver as an argument and returns the decoded value. |
 
 **Database URL**
 
@@ -205,7 +205,7 @@ At the SQL level, you can configure the following options:
 |--------------|--------|---------------|--------------------------------------------------------------------------------------------------------------------|
 | `arrayMode`  | bool   | `false`       | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.               |
 | `fullResult` | bool   | `false`       | Whether to return full result object instead of just rows. To get more detailed results, set it to `true`.         |
-| `decoders`   | object | `{}`          | The `decoders` object is a collection of key-value pairs, which enables you to customize the decoding process for different column types. In each pair, you can specify a column type as the key and specify a corresponding function as the value. This function takes the raw string value received from TiDB Cloud serverless driver as an argument and returns the decoded value. If you have configured `decoders` at both the connection and SQL levels, the key-value pairs with different keys configured at the connection level will be merged to the SQL level to take effect. If the same key (this is, column type) is specified at both levels, the value at the SQL level takes precedence. |
+| `decoders`   | object | `{}`          | A collection of key-value pairs, which enables you to customize the decoding process for different column types. In each pair, you can specify a column type as the key and specify a corresponding function as the value. This function takes the raw string value received from TiDB Cloud serverless driver as an argument and returns the decoded value. If you have configured `decoders` at both the connection and SQL levels, the key-value pairs with different keys configured at the connection level will be merged to the SQL level to take effect. If the same key (this is, column type) is specified at both levels, the value at the SQL level takes precedence. |
 
 For example:
 
@@ -229,7 +229,7 @@ const tx = await conn.begin({isolation:"READ COMMITTED"})
 
 ### Customize column type decoders
 
-To customize the format of returned column values, you can configure the `decoder` option in the `connect` method as follows:
+To customize the format of returned column values, you can configure the `decoder` option in the `connect()` method as follows:
 
 ```ts
 import { connect, ColumnType } from '@tidbcloud/serverless';
@@ -240,12 +240,12 @@ const conn = connect({
     // TiDB Cloud serverless driver returns the `BIGINT` type as text value by default. With this decoder, you can convert it to the JavaScript builtin `BigInt` type.
     [ColumnType.BIGINT]: (rawValue: string) => BigInt(rawValue),
     
-    // TiDB Cloud serverless driver returns the `DATETIME` type as the text value in the 'yyyy-MM-dd HH:mm:ss' format. With this decoder, you can convert the text value to the JavaScript native `Date` object.
+    // By default, TiDB Cloud serverless driver returns the DATETIME type as the text value in the 'yyyy-MM-dd HH:mm:ss' format. This decoder converts the DATETIME text to the JavaScript native Date object.
     [ColumnType.DATETIME]: (rawValue: string) => new Date(rawValue),
   }
 })
 
-// You can also configure the `decoder` option at the SQL level to override the decoders with the same keys at the connection level.
+// You can also configure the decoder option at the SQL level to override the decoders with the same keys at the connection level.
 conn.execute(`select ...`, [], {
   decoders: {
     // ...
