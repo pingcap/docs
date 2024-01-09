@@ -206,7 +206,7 @@ At the SQL level, you can configure the following options:
 |--------------|--------|---------------|--------------------------------------------------------------------------------------------------------------------|
 | `arrayMode`  | bool   | `false`       | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.               |
 | `fullResult` | bool   | `false`       | Whether to return full result object instead of just rows. To get more detailed results, set it to `true`.         |
-| `decoders`   | object | `{}`          | Custom decoders config for column types. The object key should be the the column type name. The value should be a function taking the raw string value received by serverless driver as argument, and returning the decoded value. (It will merge the decoder in the connection level configurations for the diffierent key and replace for the same key) |
+| `decoders`   | object | `{}`          | The `decoders` object is a collection of key-value pairs, which enables you to customize the decoding process for different column types. In each pair, you can specify a column type as the key and specify a corresponding function as the value. This function takes the raw string value received from TiDB Cloud serverless driver as an argument and returns the decoded value. If you have configured `decoders` at both the connection and SQL levels, the key-value pairs with different keys configured at the connection level will be merged to the SQL level to take effect. If the same key (this is, column type) is specified at both levels, the value at the SQL level takes precedence. |
 
 For example:
 
