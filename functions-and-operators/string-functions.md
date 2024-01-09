@@ -137,7 +137,7 @@ SELECT CONCAT('TiDB', NULL, 'Server');
 `CONCAT()` returns `NULL` if any argument is `NULL`.
 
 ```sql
-SELECT CONCAT('TiDB', ' ', 'Server', '-', 1, TURE);
+SELECT CONCAT('TiDB', ' ', 'Server', '-', 1, TRUE);
 +---------------------------------------------+
 | CONCAT('TiDB', ' ', 'Server', '-', 1, true) |
 +---------------------------------------------+
@@ -148,7 +148,7 @@ SELECT CONCAT('TiDB', ' ', 'Server', '-', 1, TURE);
 Otherwise, concatenation can be performed by placing the strings next to each other
 
 ```sql
-SELECT CONCAT('TiDB', ' ', 'Server', '-', 1, TURE);
+SELECT CONCAT('TiDB', ' ', 'Server', '-', 1, TRUE);
 +---------------------------------------------+
 | CONCAT('TiDB', ' ', 'Server', '-', 1, true) |
 +---------------------------------------------+
