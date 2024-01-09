@@ -137,7 +137,7 @@ SELECT CONCAT('TiDB', NULL, 'Server');
 `CONCAT()` returns `NULL` if any argument is `NULL`.
 
 ```sql
-SELECT CONCAT('TiDB', ' ', 'Server', '-', 1, true);
+SELECT CONCAT('TiDB', ' ', 'Server', '-', 1, TURE);
 +---------------------------------------------+
 | CONCAT('TiDB', ' ', 'Server', '-', 1, true) |
 +---------------------------------------------+
@@ -148,7 +148,7 @@ SELECT CONCAT('TiDB', ' ', 'Server', '-', 1, true);
 Otherwise, concatenation can be performed by placing the strings next to each other
 
 ```sql
-SELECT CONCAT('TiDB', ' ', 'Server', '-', 1, true);
+SELECT CONCAT('TiDB', ' ', 'Server', '-', 1, TURE);
 +---------------------------------------------+
 | CONCAT('TiDB', ' ', 'Server', '-', 1, true) |
 +---------------------------------------------+
@@ -158,7 +158,7 @@ SELECT CONCAT('TiDB', ' ', 'Server', '-', 1, true);
 
 ### [`CONCAT_WS(separator,str1,str2,...)`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat-ws)
 
-The `CONCAT_WS()` function is used to concatenate one or more arguments with the separator and is a form of CONCAT() with th separator.
+The `CONCAT_WS()` function is used to concatenate one or more arguments with a separator and is a form of CONCAT() but with a separator.
 The first argument is the separator, while the rest of the argument is used for concatenation.
 
 ```sql
