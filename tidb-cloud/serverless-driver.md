@@ -163,7 +163,7 @@ At the connection level, you can make the following configurations:
 | `fetch`      | function | global fetch  | Custom fetch function. For example, you can use the `undici` fetch in node.js.                                                                                                                                                   |
 | `arrayMode`  | bool     | `false`       | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.                                                                                                                             |
 | `fullResult` | bool     | `false`       | Whether to return full result object instead of just rows. To get more detailed results, set it to `true`.                                                                                                                       |
-| `decoders`   | object   | `{}`          | Custom decoders config for column types. The object key should be the the column type name. The value should be function taking the raw string value received by serverless driver as argument, and returning the decoded value. |
+| `decoders`   | object   | `{}`          | The `decoders` object is a collection of key-value pairs, which enables you to customize the decoding process for different column types. In each pair, you can specify a column type as the key and specify a corresponding function as the value. This function takes the raw string value received from TiDB Cloud serverless driver as an argument and returns the decoded value. |
 
 **Database URL**
 
