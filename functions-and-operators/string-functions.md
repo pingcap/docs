@@ -441,6 +441,7 @@ The value options of `match_type` between TiDB and MySQL are:
 - The `"s"` in TiDB corresponds to `"n"` in MySQL. When `"s"` is set in TiDB, the `.` character also matches line terminators (`\n`).
 
   For example, the `SELECT REGEXP_LIKE(a, b, "n") FROM t1` in MySQL is the same as the `SELECT REGEXP_LIKE(a, b, "s") FROM t1` in TiDB.
+
 - TiDB does not support `"u"`, which means Unix-only line endings in MySQL.
 
 ### Data type compatibility
