@@ -26,7 +26,7 @@ Ensure that you have `SUPER` privilege when setting SQL mode at `GLOBAL` level, 
 | `PIPES_AS_CONCAT` | Treats "\|\|" as a string concatenation operator (`+`) (the same as `CONCAT()`), not as an `OR` (full support) |
 | `ANSI_QUOTES` | Treats `"` as an identifier. If `ANSI_QUOTES` is enabled, only single quotes are treated as string literals, and double quotes are treated as identifiers. Therefore, double quotes cannot be used to quote strings. (full support)|
 | `IGNORE_SPACE` | If this mode is enabled, the system ignores space. For example: "user" and "user " are the same. (full support)|
-| `ONLY_FULL_GROUP_BY` | If columns not processed by aggregate functions or not included in `GROUP BY` appear in `SELECT`, `HAVING`, or `ORDER BY`, the SQL query is considered invalid because it is abnormal for such columns to be displayed by query (full support). |
+| `ONLY_FULL_GROUP_BY` | If columns neither use an aggregate functions nor are included in `GROUP BY` appear in `SELECT`, `HAVING`, or `ORDER BY`, the SQL query is considered invalid because it is likely an incorrect result. |
 | `NO_UNSIGNED_SUBTRACTION` | Does not mark the result as `UNSIGNED` if an operand has no symbol in subtraction. (full support)|
 | `NO_DIR_IN_CREATE` | Ignores all `INDEX DIRECTORY` and `DATA DIRECTORY` directives when a table is created. This option is only useful for secondary replication servers (syntax support only) |
 | `NO_KEY_OPTIONS` | When you use the `SHOW CREATE TABLE` statement, MySQL-specific syntaxes such as `ENGINE` are not exported. Consider this option when migrating across DB types using mysqldump. (syntax support only)|
