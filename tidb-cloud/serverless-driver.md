@@ -59,7 +59,6 @@ try {
 }
 ```
 
-
 ## Edge examples
 
 Here are some examples of using the serverless driver in edge environments. For a complete example, you can also try this [live demo](https://github.com/tidbcloud/car-sales-insight).
