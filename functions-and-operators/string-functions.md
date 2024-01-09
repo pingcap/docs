@@ -123,7 +123,7 @@ Synonym for `CHAR_LENGTH()`.
 
 ### [`CONCAT(str1,str2,...)`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat)
 
-The `CONCAT()` function is used to concatenate one or more arguments.
+The `CONCAT()` function concatenates one or more arguments.
 ```sql
 SELECT CONCAT('TiDB', ' ', 'Server', '-', 1, TRUE);
 
