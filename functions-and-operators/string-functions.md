@@ -139,7 +139,7 @@ SELECT CONCAT('TiDB', NULL, 'Server');
 ```sql
 SELECT CONCAT('TiDB', ' ', 'Server', '-', 1, TRUE);
 +---------------------------------------------+
-| CONCAT('TiDB', ' ', 'Server', '-', 1, true) |
+| CONCAT('TiDB', ' ', 'Server', '-', 1, TRUE) |
 +---------------------------------------------+
 |                              TiDB Server-11 |
 +---------------------------------------------+
@@ -150,7 +150,7 @@ Otherwise, concatenation can be performed by placing the strings next to each ot
 ```sql
 SELECT CONCAT('TiDB', ' ', 'Server', '-', 1, TRUE);
 +---------------------------------------------+
-| CONCAT('TiDB', ' ', 'Server', '-', 1, true) |
+| CONCAT('TiDB', ' ', 'Server', '-', 1, TRUE) |
 +---------------------------------------------+
 |                              TiDB Server-11 |
 +---------------------------------------------+
