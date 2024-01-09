@@ -227,7 +227,7 @@ const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]'})
 const tx = await conn.begin({isolation:"READ COMMITTED"})
 ```
 
-### Custom column type decoders
+### Customize column type decoders
 
 In case you want change the returning column value format, you could provide a decoder config to `connect` method:
 
