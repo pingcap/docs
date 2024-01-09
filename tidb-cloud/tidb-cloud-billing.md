@@ -180,7 +180,7 @@ The fee is deducted from a bound credit card according to your cluster usage. To
     3. Under the **Payment Method** tab, click **Add a New Card**.
     4. Fill in the credit card information and credit card address, and then click **Save Card**.
 
-        If you do not specify a primary business address in [**Billing profile**](#billing-profile), the credit card address will be used as your primary business address for tax calculation.
+        If you do not specify a primary business address in [**Billing profile**](#billing-profile), the credit card address will be used as your primary business address for tax calculation. You can update your primary business address in **Billing profile** anytime.
 
 > **Note:**
 >
