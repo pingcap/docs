@@ -160,8 +160,6 @@ If you are in the `Organization Owner` or `Organization Billing Admin` role of y
 >
 > If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), you can pay through your AWS account or Google Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud console.
 
-### Add a credit card
-
 The fee is deducted from a bound credit card according to your cluster usage. To add a valid credit card, you can use either of the following methods:
 
 - When you are creating a cluster:
@@ -180,7 +178,9 @@ The fee is deducted from a bound credit card according to your cluster usage. To
 
     2. Click **Billing**.
     3. Under the **Payment Method** tab, click **Add a New Card**.
-    4. Fill in the billing address and card information, and then click **Save**.
+    4. Fill in the credit card information and credit card address, and then click **Save Card**.
+
+        If you do not specify a primary business address in [**Billing profile**](#billing-profile), the credit card address will be used as your primary business address for tax calculation.
 
 > **Note:**
 >
@@ -199,22 +199,6 @@ To set the default credit card, perform the following steps:
 2. Click **Billing**.
 3. Click the **Payment Method** tab.
 4. Select a credit card in the credit card list, and click **Set as default**.
-
-### Edit billing profile information
-
-The billing profile information includes the business legal address and tax registration information. By providing your tax registration number, certain taxes might be exempted from your invoice.
-
-To edit the billing profile information, perform the following steps:
-
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
-
-    > **Note:**
-    >
-    > If you are in multiple organizations, switch to your target organization by clicking its name.
-
-2. Click **Billing**.
-3. Click the **Payment Method** tab.
-4. Edit the billing profile information, and then click **Save**.
 
 ## Contract
 
