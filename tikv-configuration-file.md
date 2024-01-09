@@ -1621,7 +1621,7 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 
 + The compression algorithm used in a Blob file
 + Optional values: `"no"`, `"snappy"`, `"zlib"`, `"bzip2"`, `"lz4"`, `"lz4hc"`, `"zstd"`
-+ Default value: `"lz4"`
++ Default value: `"zstd"`
 
 > **Note:**
 >
