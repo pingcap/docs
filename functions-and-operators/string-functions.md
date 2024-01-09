@@ -124,6 +124,7 @@ Synonym for `CHAR_LENGTH()`.
 ### [`CONCAT(str1,str2,...)`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat)
 
 The `CONCAT()` function concatenates one or more arguments.
+
 ```sql
 SELECT CONCAT('TiDB', ' ', 'Server', '-', 1, TRUE);
 
@@ -135,6 +136,7 @@ SELECT CONCAT('TiDB', ' ', 'Server', '-', 1, TRUE);
 ```
 
 `CONCAT()` returns `NULL` if any argument is `NULL`.
+
 ```sql
 SELECT CONCAT('TiDB', NULL, 'Server');
 
@@ -159,8 +161,7 @@ SELECT 'Ti' 'DB' ' ' 'Server';
 
 ### [`CONCAT_WS(separator,str1,str2,...)`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat-ws)
 
-The `CONCAT_WS()`function is similar to the `CONCAT()` function and concatenates one or more arguments, but does this with a separator that is specified by the user.
-The first argument is the separator, while the rest of the argument is used for concatenation.
+The `CONCAT_WS()`function is similar to the `CONCAT()` function and concatenates one or more arguments, but does this with a separator that is specified by the user. The first argument is the separator, while the rest of the argument is used for concatenation.
 
 ```sql
 SELECT CONCAT_WS(',', 'TiDB Server', 'TiKV', 'PD');
@@ -184,6 +185,7 @@ SELECT CONCAT_WS('', 'TiDB Server', 'TiKV', 'PD');
 |                          TiDB ServerTiKVPD |
 +--------------------------------------------+
 ```
+
 ```sql
 SELECT CONCAT_WS(NULL, 'TiDB Server', 'TiKV', 'PD');
 
@@ -206,6 +208,7 @@ SELECT CONCAT_WS(',', 'TiDB Server', NULL, 'PD');
 |                            TiDB Server,PD |
 +-------------------------------------------+
 ```
+
 ```sql
 SELECT CONCAT_WS(',', 'TiDB Server', '', 'PD');
 
