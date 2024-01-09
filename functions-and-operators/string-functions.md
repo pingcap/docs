@@ -148,12 +148,12 @@ SELECT CONCAT('TiDB', ' ', 'Server', '-', 1, TRUE);
 Otherwise, concatenation can be performed by placing the strings next to each other
 
 ```sql
-SELECT CONCAT('TiDB', ' ', 'Server', '-', 1, TRUE);
-+---------------------------------------------+
-| CONCAT('TiDB', ' ', 'Server', '-', 1, TRUE) |
-+---------------------------------------------+
-|                              TiDB Server-11 |
-+---------------------------------------------+
+SELECT 'Ti' 'DB' ' ' 'Server';
++-------------+
+|          Ti |
++-------------+
+| TiDB Server |
++-------------+
 ```
 
 ### [`CONCAT_WS(separator,str1,str2,...)`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat-ws)
