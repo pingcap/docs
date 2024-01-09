@@ -5,7 +5,7 @@ summary: Learn how to use bidirectional replication of TiCDC.
 
 # Bidirectional Replication
 
-Starting from v6.5.0, TiCDC supports bi-directional replication (BDR) among two TiDB clusters. Based on this feature, you can create a multi-active TiDB solution using TiCDC.
+TiCDC supports bi-directional replication (BDR) among two TiDB clusters. Based on this feature, you can create a multi-active TiDB solution using TiCDC.
 
 This section describes how to use bi-directional replication taking two TiDB clusters as an example.
 
@@ -108,12 +108,12 @@ When no BDR role is set, you can execute any DDL. But after you set `bdr_mode=tr
 >
 > To prevent misoperations:
 >
-> - If you try to execute **replicable DDLs** on the secondary clusters, you will get an [Error 8263](/error-codes.md).
-> - No matter you try to execute **replicable DDLs** or **non-replicable DDLs** on the secondary clusters, you will get an [Error 8263](/error-codes.md).
+> - If you try to execute **non-replicable DDLs** on the primary cluster, you will get an [Error 8263](/error-codes.md).
+> - If you try to execute **replicable DDLs** or **non-replicable DDLs** on the secondary clusters, you will get an [Error 8263](/error-codes.md).
 
 ### Replication scenarios of non-replicable DDLs
 
-1. Execute `ADMIN UNSET BDR ROLE` on all TiDB clusters to cancel the BDR role.
+1. Execute `ADMIN UNSET BDR ROLE` on all TiDB clusters to unset the BDR role.
 2. Stop writing data to the tables that need to execute DDLs in all clusters.
 3. Wait until all writes to the corresponding tables in all clusters are replicated to other clusters, and then manually execute all DDLs on each TiDB cluster.
 4. Wait until the DDLs are completed, and then resume writing data.

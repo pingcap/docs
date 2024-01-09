@@ -7,7 +7,7 @@ summary: An overview of the usage of ADMIN [SET|SHOW|UNSET] BDR ROLE for the TiD
 
 - Use `ADMIN SET BDR ROLE` to set the BDR role of the cluster. Currently, you can set the following BDR roles for a TiDB cluster: `PRIMARY` and `SECONDARY`. For more information about BDR roles, see [DDL Synchronization in TiCDC Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md#ddl-replication).
 - Use `ADMIN SHOW BDR ROLE` to show the BDR role of the cluster.
-- Use `ADMIN UNSET BDR ROLE` to cancel the BDR role of the cluster.
+- Use `ADMIN UNSET BDR ROLE` to unset the BDR role of the cluster.
 
 > **Warning:**
 >
@@ -63,7 +63,7 @@ ADMIN SHOW BDR ROLE;
 1 row in set (0.00 sec)
 ```
 
-Run the following command to cancel the BDR role of the cluster.
+Run the following command to unset the BDR role of the cluster.
 
 ```sql
 ADMIN UNSET BDR ROLE;

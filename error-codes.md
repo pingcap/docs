@@ -528,7 +528,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8263
 
-    This DDL cannot be executed under a specific BDR role. Make sure that the cluster is in [bidirectional replication](/ticdc/ticdc-bidirectional-replication.md). If the cluster is not in bidirectional replication, you can use `ADMIN SET BDR ROLE;` to restore the DDL for normal use.
+    This DDL cannot be executed under a specific BDR role. Make sure that the cluster is in [bidirectional replication](/ticdc/ticdc-bidirectional-replication.md). If the cluster is not in bidirectional replication, you can use `ADMIN UNSET BDR ROLE;` to make DDL normal.
 
 * Error Number: 9001
 
