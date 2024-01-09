@@ -263,6 +263,38 @@ Non-transactional DML statements are not yet a replacement for all batch-dml usa
 
 ## Common issues
 
+### After execute multiple table joins statement, encounter an `Unknown column xxx in 'where clause'` error
+
+When concatenate query statements, if the conditions in the 'WHERE' clause involve tables other than the table where [partition column] (# parameter description) is located, it will show the error. For example, in the following SQL statement, the partition column is labeled as `t2. id` and the table where the partition column is located is labeled as `t2`, but the conditions in the `WHERE` clause involve `t2` and `t3`.
+
+```sql
+BATCH ON test.t2.id LIMIT 1 INSERT INTO t SELECT t2.id, t2.v, t3. FROM t2, t3 WHERE t2.id = t3.id
+```
+
+```sql
+(1054, "Unknown column 't3.id' in 'where clause'")
+```
+
+If the error occurs you can print query to confirm by using `DRY RUN QUERY`. For example:
+
+```sql
+BATCH ON test.t2.id LIMIT 1 DRY RUN QUERY INSERT INTO t SELECT t2.id, t2.v, t3. FROM t2, t3 WHERE t2.id = t3.id
+```
+
+Try to avoid the error, you can move the conditions related to other tables in the `WHERE` clause to the `ON` conditions in the `JOIN` clause. For example:
+
+```sql
+BATCH ON test.t2.id LIMIT 1 INSERT INTO t SELECT t2.id, t2.v, t3. FROM t2 JOIN t3 ON t2.id=t3.id
+```
+
+```sql
++----------------+---------------+
+| number of jobs | job status    |
++----------------+---------------+
+| 0              | all succeeded |
++----------------+---------------+
+```
+
 ### The actual batch size is not the same as the specified batch size
 
 During the execution of a non-transactional DML statement, the size of data to be processed in the last batch might be smaller than the specified batch size.
