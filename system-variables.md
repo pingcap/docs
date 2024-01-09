@@ -927,10 +927,6 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 </CustomContent>
 
-<CustomContent platform="tidb-cloud">
-
-</CustomContent>
-
 ### sql_select_limit <span class="version-mark">New in v4.0.2</span>
 
 - Scope: SESSION | GLOBAL
