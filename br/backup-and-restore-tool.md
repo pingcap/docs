@@ -187,6 +187,7 @@ For how to use the command-line tool to perform backup and restore operations, s
 The `BACKUP` statement is still an experimental feature. It is **NOT** recommended that you use it in the production environment. This feature is subject to change or removal without notice. If you find a bug, please [issue feedback] on GitHub (/support.md).
 
 In TiDB v4.0.2 and later versions, you can run the BR tool using SQL statements.
+
 For detailed operations, see the following documents:
 
 - [Backup syntax](/sql-statements/sql-statement-backup.md#backup)
