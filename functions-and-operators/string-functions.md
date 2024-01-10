@@ -179,11 +179,198 @@ Return the length of a string in bytes.
 
 ### [`LIKE`](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_like)
 
-Simple pattern matching.
+The `LIKE` operator is used for simple string matching, the format `expr LIKE pat [ESCAPE 'escape_char']` returns `1(TRUE)` or `0(FALSE)`
+If either `expr` or `pat` is `NULL`, the result will be `NULL`.
+You can use 2 wildcard parameter with`LIKE`:
+- `%` matches any number of characters including 0 characters
+- `_` matches exactly only 1 character, not including 0
+
+```sql
+SELECT NULL LIKE '%' as result;
++--------+
+| result |
++--------+
+|   NULL |
++--------+
+
+SELECT 'sushi!!!' LIKE 'sushi_' AS result;
++--------+
+| result |
++--------+
+|      0 |
++--------+
+
+SELECT '🍣🍺sushi🍣🍺' LIKE '%sushi%' AS result;
++--------+
+| result |
++--------+
+|      1 |
++--------+
+
+SELECT '🍣🍺sushi🍣🍺' LIKE '%🍣%' AS result;
++--------+
+| result |
++--------+
+|      1 |
++--------+
+```
+
+If you don't specify the `ESCAPE` character, `\` will be assumed.
+```sql
+SELECT 'sushi!!!' LIKE 'sushi\_' AS result;
++--------+
+| result |
++--------+
+|      0 |
++--------+
+
+SELECT 'sushi_' LIKE 'sushi\_' AS result;
++--------+
+| result |
++--------+
+|      1 |
++--------+
+```
+
+To specify the different escape character, you can use `ESCAPE` clause.
+```sql
+SELECT 'sushi_' LIKE 'sushi*_' ESCAPE '*' AS result;
++--------+
+| result |
++--------+
+|      1 |
++--------+
+
+SELECT 'sushi!' LIKE 'sushi*_' ESCAPE '*' AS result;
++--------+
+| result |
++--------+
+|      0 |
++--------+
+```
+
+`LIKE` permits numeric expressions.
+```sql
+SELECT 10 LIKE '1%' AS result;
++--------+
+| result |
++--------+
+|      1 |
++--------+
+
+SELECT 10000 LIKE '12%' AS result;
++--------+
+| result |
++--------+
+|      0 |
++--------+
+```
 
 ### [`LOCATE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_locate)
 
-Return the position of the first occurrence of substring.
+`LOCATE(substr, str[, pos])` returns the position of first occurrence of substring in string.
+When you specify `pos`, `LOCATE()` starts seeking at the position `pos`.
+`LOCATE` returns `0` if `substr` not in `str` and returns `NULL` if any arguments are null.
+This function is multi-byte safe and is case-sensitive only if at least one argument is a binary string.
+```sql
+SELECT LOCATE('bar', 'foobarbar');
++----------------------------+
+| LOCATE('bar', 'foobarbar') |
++----------------------------+
+|                          4 |
++----------------------------+
+
+SELECT LOCATE('baz', 'foobarbar');
++----------------------------+
+| LOCATE('baz', 'foobarbar') |
++----------------------------+
+|                          0 |
++----------------------------+
+
+SELECT LOCATE('bar', 'fooBARBAR');
++----------------------------+
+| LOCATE('bar', 'fooBARBAR') |
++----------------------------+
+|                          4 |
++----------------------------+
+
+SELECT LOCATE('bar', 'fooBARBAR', 100);
++---------------------------------+
+| LOCATE('bar', 'fooBARBAR', 100) |
++---------------------------------+
+|                               0 |
++---------------------------------+
+
+SELECT LOCATE('bar', 'fooBARBAR', 5);
++-------------------------------+
+| LOCATE('bar', 'fooBARBAR', 5) |
++-------------------------------+
+|                             7 |
++-------------------------------+
+
+SELECT LOCATE('bar', NULL);
++---------------------+
+| LOCATE('bar', NULL) |
++---------------------+
+|                NULL |
++---------------------+
+
+SELECT LOCATE('い', 'たいでぃーびー');
++----------------------------------------+
+| LOCATE('い', 'たいでぃーびー')         |
++----------------------------------------+
+|                                      2 |
++----------------------------------------+
+
+SELECT LOCATE('い', 'たいでぃーびー', 3);
++-------------------------------------------+
+| LOCATE('い', 'たいでぃーびー', 3)         |
++-------------------------------------------+
+|                                         0 |
++-------------------------------------------+
+
+SELECT LOCATE('🍺', '🍣🍣🍣🍺🍺');
++----------------------------------------+
+| LOCATE('🍺', '🍣🍣🍣🍺🍺')            |
++----------------------------------------+
+|                                      1 |
++----------------------------------------+
+
+SELECT LOCATE('b', 'aBcde');
++----------------------+
+| LOCATE('b', 'aBcde') |
++----------------------+
+|                    2 |
++----------------------+
+
+SELECT LOCATE('b', _binary'aBcde');
++-----------------------------+
+| LOCATE('b', _binary'aBcde') |
++-----------------------------+
+|                           0 |
++-----------------------------+
+
+SELECT LOCATE('B', _binary'aBcde');
++-----------------------------+
+| LOCATE('B', _binary'aBcde') |
++-----------------------------+
+|                           2 |
++-----------------------------+
+
+SELECT LOCATE(_binary'b', 'aBcde');
++-----------------------------+
+| LOCATE(_binary'b', 'aBcde') |
++-----------------------------+
+|                           0 |
++-----------------------------+
+
+SELECT LOCATE(_binary'B', 'aBcde');
++-----------------------------+
+| LOCATE(_binary'B', 'aBcde') |
++-----------------------------+
+|                           2 |
++-----------------------------+
+```
 
 ### [`LOWER()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lower)
 
