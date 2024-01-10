@@ -13,7 +13,7 @@ Starting from v7.6.0, the new version V2 of TiDB DDL supports creating tables qu
 
 ## Compatibility with TiDB tools
 
-- [TiCDC](/ticdc/ticdc-overview.md) does not support using TiDB DDL V2 to create tables.
+- [TiCDC](/ticdc/ticdc-overview.md) does not support replicating the tables that are created by TiDB DDL V2.
 
 ## Limitations
 
