@@ -49,6 +49,10 @@ Data Service (beta) enables you to access TiDB Cloud data via an HTTPS request u
 
 For more information, see [Data Service Overview](/tidb-cloud/data-service-overview.md).
 
+### Direct Customer
+
+A direct customer is an end customer who purchases TiDB Cloud and pays invoices directly from PingCAP. This is distinguished from an [MSP customer](#msp-customer).
+
 ## E
 
 ### Endpoint
@@ -66,6 +70,14 @@ A user that has been invited to an organization, with access to the organization
 ### MPP
 
 Starting from v5.0, TiDB introduces Massively Parallel Processing (MPP) architecture through TiFlash nodes, which shares the execution workloads of large join queries among TiFlash nodes. When the MPP mode is enabled, TiDB, based on cost, determines whether to use the MPP framework to perform the calculation. In the MPP mode, the join keys are redistributed through the Exchange operation while being calculated, which distributes the calculation pressure to each TiFlash node and speeds up the calculation. For more information, see [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md).
+
+### MSP Customer
+
+A managed service provider (MSP) customer is an end customer who purchases TiDB Cloud and pays invoices through the MSP channel. This is distinguished from a [direct customer](#direct-customer).
+
+### MSP Partner
+
+A managed service provider (MSP) is a partner who resells TiDB Cloud and provides value-added services, including but not limited to TiDB Cloud organization management, billing services, and technical support.
 
 ## N
 
