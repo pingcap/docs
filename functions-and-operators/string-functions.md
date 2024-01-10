@@ -173,9 +173,104 @@ Synonym for `LOWER()`.
 
 Return the leftmost number of characters as specified.
 
+* usage: LEFT(`str`, `len`)
+    * len: length of character to return
+    * str: original string to extract characters
+* if `len` is equal or less than 0, the function returns empty string
+* function is multibyte safe.
+* If any argument is `NULL`, the function returns `NULL`.
+
+Examples:
+
+```sql
+SELECT LEFT('ABCED', 3);
++------------------+
+| LEFT('ABCED', 3) |
++------------------+
+| ABC              |
++------------------+
+
+SELECT LEFT('ABCED', 6);
++------------------+
+| LEFT('ABCED', 6) |
++------------------+
+| ABCED            |
++------------------+
+```
+
+```sql
+SELECT LEFT('ABCED', 0);
++------------------+
+| LEFT('ABCED', 0) |
++------------------+
+|                  |
++------------------+
+
+SELECT LEFT('ABCED', -1);
++-------------------+
+| LEFT('ABCED', -1) |
++-------------------+
+|                   |
++-------------------+
+```
+
+```sql
+SELECT LEFT('🍣ABC', 3);
++--------------------+
+| LEFT('🍣ABC', 3)     |
++--------------------+
+| 🍣AB                 |
++--------------------+
+```
+
+```sql
+SELECT LEFT('ABC', NULL);
++-------------------+
+| LEFT('ABC', NULL) |
++-------------------+
+| NULL              |
++-------------------+
+
+SELECT LEFT(NULL, 3);
++------------------------------+
+| LEFT(NULL, 3)                |
++------------------------------+
+| NULL                         |
++------------------------------+
+```
+
 ### [`LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_length)
 
 Return the length of a string in bytes.
+
+* If any argument is `NULL`, the function returns `NULL`.
+
+Examples:
+
+```sql
+SELECT LENGTH('ABC');
++---------------+
+| LENGTH('ABC') |
++---------------+
+|             3 |
++---------------+
+
+SELECT LENGTH('🍣ABC');
++-------------------+
+| LENGTH('🍣ABC')     |
++-------------------+
+|                 7 |
++-------------------+
+```
+
+```sql
+SELECT LENGTH(NULL);
++--------------+
+| LENGTH(NULL) |
++--------------+
+|         NULL |
++--------------+
+```
 
 ### [`LIKE`](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_like)
 
