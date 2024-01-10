@@ -78,6 +78,30 @@ The billing details page shows the billing summary by project and by service. Yo
 > - The total amount in the monthly bill is rounded off to the 2nd decimal place.
 > - The total amount in the daily usage details is accurate to the 6th decimal place.
 
+## Billing profile
+
+Paid organizations can create a billing profile. Information in this profile will be used to determine the tax calculation.
+
+To view or update the billing profile of your organization, click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner and then click **Billing** > **Billing Profile**.
+
+There are four fields in the billing profile.
+
+### Company name (optional)
+
+If this field is specified, this name will appear on invoices instead of your organization name.
+
+### Billing email (optional)
+
+If this field is specified, invoices and other billing-related notifications will be sent to this email address.
+
+### Primary business address
+
+This is the address of the company that purchases TiDB Cloud services. It is used to calculate any applicable taxes.
+
+### Business tax ID (optional)
+
+If your business is registered for VAT/GST, fill in a valid VAT/GST ID. By providing this information, we will exempt you from charging VAT/GST if applicable. This is important for businesses operating in regions where VAT/GST registration allows for certain tax exemptions or refunds.
+
 ## Credits
 
 TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. One credit is equivalent to one U.S. dollar. You can use credits to pay TiDB cluster fees before the credits become expired.
@@ -136,8 +160,6 @@ If you are in the `Organization Owner` or `Organization Billing Admin` role of y
 >
 > If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), you can pay through your AWS account or Google Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud console.
 
-### Add a credit card
-
 The fee is deducted from a bound credit card according to your cluster usage. To add a valid credit card, you can use either of the following methods:
 
 - When you are creating a cluster:
@@ -156,7 +178,9 @@ The fee is deducted from a bound credit card according to your cluster usage. To
 
     2. Click **Billing**.
     3. Under the **Payment Method** tab, click **Add a New Card**.
-    4. Fill in the billing address and card information, and then click **Save**.
+    4. Fill in the credit card information and credit card address, and then click **Save Card**.
+
+        If you do not specify a primary business address in [**Billing profile**](#billing-profile), the credit card address will be used as your primary business address for tax calculation. You can update your primary business address in **Billing profile** anytime.
 
 > **Note:**
 >
@@ -175,22 +199,6 @@ To set the default credit card, perform the following steps:
 2. Click **Billing**.
 3. Click the **Payment Method** tab.
 4. Select a credit card in the credit card list, and click **Set as default**.
-
-### Edit billing profile information
-
-The billing profile information includes the business legal address and tax registration information. By providing your tax registration number, certain taxes might be exempted from your invoice.
-
-To edit the billing profile information, perform the following steps:
-
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
-
-    > **Note:**
-    >
-    > If you are in multiple organizations, switch to your target organization by clicking its name.
-
-2. Click **Billing**.
-3. Click the **Payment Method** tab.
-4. Edit the billing profile information, and then click **Save**.
 
 ## Contract
 
