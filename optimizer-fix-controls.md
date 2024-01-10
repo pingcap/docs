@@ -26,21 +26,13 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 ## Optimizer Fix Controls reference
 
-<<<<<<< HEAD
-### [`44262`](https://github.com/pingcap/tidb/issues/44262) <span class="version-mark">New in v7.1.1</span>
-=======
-### [`44262`](https://github.com/pingcap/tidb/issues/44262) <span class="version-mark">New in v6.5.3 and v7.2.0</span>
->>>>>>> aac7c71a33 (fix: tidb_opt_fix_control is introduced in v6.5.3 (#16023))
+### [`44262`](https://github.com/pingcap/tidb/issues/44262) <span class="version-mark">New in v6.5.3 and v7.1.1</span>
 
 - Default value: `OFF`
 - Possible values: `ON`, `OFF`
 - This variable controls whether to allow the use of [Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode) to access the partitioned table when the [GlobalStats](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode) are missing.
 
-<<<<<<< HEAD
-### [`44389`](https://github.com/pingcap/tidb/issues/44389) <span class="version-mark">New in v7.1.1</span>
-=======
-### [`44389`](https://github.com/pingcap/tidb/issues/44389) <span class="version-mark">New in v6.5.3 and v7.2.0</span>
->>>>>>> aac7c71a33 (fix: tidb_opt_fix_control is introduced in v6.5.3 (#16023))
+### [`44389`](https://github.com/pingcap/tidb/issues/44389) <span class="version-mark">New in v6.5.3 and v7.1.1</span>
 
 - Default value: `OFF`
 - Possible values: `ON`, `OFF`
@@ -53,23 +45,16 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 - To conserve memory, Plan Cache does not cache queries that exceed a specified number of parameters.
 - This variable controls the threshold for the maximum number of parameters. `0` means no limit.
 
-<<<<<<< HEAD
-### [`44855`](https://github.com/pingcap/tidb/issues/44855) <span class="version-mark">New in v7.1.1</span>
-
-- Default value: `OFF`
-- Possible values: `ON`、`OFF`
-=======
-### [`44830`](https://github.com/pingcap/tidb/issues/44830) <span class="version-mark">New in v6.5.7 and v7.3.0</span>
+### [`44830`](https://github.com/pingcap/tidb/issues/44830) <span class="version-mark">New in v6.5.7</span>
 
 - Default value: `OFF`
 - Possible values: `ON`, `OFF`
 - This variable controls whether Plan Cache is allowed to cache execution plans with the `PointGet` operator generated during physical optimization.
 
-### [`44855`](https://github.com/pingcap/tidb/issues/44855) <span class="version-mark">New in v6.5.4 and v7.3.0</span>
+### [`44855`](https://github.com/pingcap/tidb/issues/44855) <span class="version-mark">New in v6.5.4 and v7.1.1</span>
 
 - Default value: `OFF`
 - Possible values: `ON`, `OFF`
->>>>>>> aac7c71a33 (fix: tidb_opt_fix_control is introduced in v6.5.3 (#16023))
 - In some scenarios, when the `Probe` side of an `IndexJoin` operator contains a `Selection` operator, TiDB severely overestimates the row count of `IndexScan`. This might cause suboptimal query plans to be selected instead of `IndexJoin`.
 - To mitigate this issue, TiDB has introduced an improvement. However, due to potential query plan fallback risks, this improvement is disabled by default.
 - This variable controls whether to enable the preceding improvement.
