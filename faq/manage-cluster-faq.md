@@ -130,7 +130,7 @@ This is because the `--initial-cluster` in the PD startup parameter contains a m
 
 ### The `[PD:encryption:ErrEncryptionNewMasterKey]fail to get encryption key from file /root/path/file%!(EXTRA string=open /root/path/file: permission denied)` message is displayed when enabling encryption at rest for PD
  
-Static encryption does not support storing the key file in the `root` directory or its subdirectories. Even with added read permissions, the same error will occur. If you encounter this issue, consider placing the key file in a path outside of the `root` directory.
+Encryption at rest does not support storing the key file in the `root` directory or its subdirectories. Even if you grant read permissions, the same error occurs. To resolve this issue, store the key file in a location outside the `root` directory.
 
 ### What's the maximum tolerance for time synchronization error of PD?
 
