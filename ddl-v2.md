@@ -9,7 +9,7 @@ Starting from v7.6.0, the new version V2 of TiDB DDL supports creating tables qu
 
 > **Warning:**
 >
-> TiDB DDL V2 is currently an experimental feature and is not recommended for use in production environments. This feature might change or be removed without prior notice. If you find any bugs, please provide feedback by creating an issue on GitHub (https://github.com/pingcap/tidb/issues).
+> This variable is currently an experimental feature and it is not recommended to use in a production environment. This feature might change or be removed without prior notice. If you find a bug, please give feedback by raising an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 ## Compatibility with TiDB tools
 
