@@ -556,7 +556,7 @@ Example:
     1 row in set (0.01 sec)
     ```
 
-    `ru_consumption` in the result is the RU consumed by the execution of this SQL statement.
+    In the result, `ru_consumption` is the RUs consumed by the execution of this SQL statement.
 
 #### `EXPLAIN ANALYZE`
 
@@ -564,7 +564,7 @@ You can use the [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyz
 
 #### Slow queries and corresponding system table
 
-When you enable resource control, the [slow query log](/identify-slow-queries.md) of TiDB and the corresponding system table [`INFORMATION_SCHEMA.SLOW_QUERY`](/information-schema/information-schema-slow-query.md) contain the resource group, RU consumption of the corresponding SQL and the time spent waiting for available RUs.
+When you enable resource control, the [slow query log](/identify-slow-queries.md) of TiDB and the corresponding system table [`INFORMATION_SCHEMA.SLOW_QUERY`](/information-schema/information-schema-slow-query.md) contain the resource group, RU consumption of the corresponding SQL, and the time spent waiting for available RUs.
 
 #### `statements_summary`
 
