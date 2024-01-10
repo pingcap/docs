@@ -162,7 +162,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
     In scenarios where network disconnection or application failure occurs, `COMMIT`/`ROLLBACK` statements might fail to be transmitted to the database. This could lead to delayed release of database locks, causing transaction lock waits and a rapid increase in database connections. Such issues are common in test environments but can also occur occasionally in production environments, and they are sometimes difficult to diagnose promptly. To avoid these issues, TiDB v7.6.0 introduces the [`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760) system variable, which automatically terminates long-running idle transactions. When a user session in a transactional state remains idle for a duration exceeding the value of this variable, TiDB will terminate the database connection of the transaction and roll back it.
 
-    For more information, see [documentation](/system-variables.md#tidb_idle_transaction_timeout-从-v760-版本开始引入).
+    For more information, see [documentation](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760).
 
 * Simplify the syntax for creating execution plan bindings [#48876](https://github.com/pingcap/tidb/issues/48876) @[qw4990](https://github.com/qw4990) **tw@Oreoxmt** <!--1613-->
 
@@ -180,7 +180,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
     Before v7.6.0, the size of a single row record in a transaction is limited by the TiDB configuration item [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50). If the size limit is exceeded, TiDB returns the `entry too large` error. In this case, you need to manually modify the TiDB configuration file and restart TiDB to make the modification take effect. To reduce your management overhead, TiDB v7.6.0 introduces the system variable [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760), which supports dynamically modifying the value of the `txn-entry-size-limit` configuration item. The default value of this variable is `0`, which means that TiDB uses the value of the configuration item `txn-entry-size-limit` by default. When this variable is set to a non-zero value, TiDB limits the size of a row record in transactions to the value of this variable. This improvement enhances the flexibility for you to adjust system configurations without restarting TiDB.
 
-    For more information, see [documentation](/system-variables.md#tidb_txn_entry_size_limit-从-v760-版本开始引入).
+    For more information, see [documentation](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760).
 
 
 * The global sort feature becomes generally available (GA), improving the performance and stability of `ADD INDEX` and `IMPORT INTO` [#45719](https://github.com/pingcap/tidb/issues/45719) @[wjhuang2016](https://github.com/wjhuang2016) @[D3Hunter](https://github.com/D3Hunter) **tw@ran-huang** <!--1580/1579-->
@@ -269,7 +269,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 ### System tables
 
 - Add a new system table [`INFORMATION_SCHEMA.KEYWORDS`](/information-schema/information-schema-keywords.md) to display the information of all keywords supported by TiDB. **tw@Oreoxmt**
-- Add a new system table [`mysql.request_unit_by_group`](/mysql-schema.md#system-tables-related-to-resource-control) to store the historical records of the RU consumption of each resource group. **tw@hfxsd**
+- In the system table [`INFORMATION_SCHEMA.SLOW_QUERY`](/information-schema/information-schema-slow-query.md), add the following fields related to Resource Control:
+    - `Resource_group`: the resource group that the statement is bound to.
+    - `Request_unit_read`: the total read RUs consumed by the statement.
+    - `Request_unit_write`: the total write RUs consumed by the statement.
+    - `Time_queued_by_rc`: the total time that the statement waits for available resources.
 
 ## Offline package changes
 
