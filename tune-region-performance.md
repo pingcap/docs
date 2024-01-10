@@ -37,7 +37,7 @@ When the Dumpling tool is used, the Region size should not exceed 1 GiB. In this
 
 After Regions are set to a larger size, if you want to further improve the query concurrency, you can set [`coprocessor.enable-region-bucket`](/tikv-configuration-file.md#enable-region-bucket-new-in-v610) to `true`. When you use this configuration, Regions are divided into buckets. Buckets are smaller ranges within a Region and are used as the unit of concurrent query to improve the scan concurrency. You can control the bucket size using [`coprocessor.region-bucket-size`](/tikv-configuration-file.md#region-bucket-size-new-in-v610).
 
-## Use Active PD Follower feature to enhance the service capability of providing Region information
+## Use Active PD Follower feature to enhance the scalability of PD's Region information query service
 
 > **Warning:**
 >
