@@ -107,11 +107,54 @@ Return a string containing binary representation of a number.
 
 ### [`BIT_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bit-length)
 
-Return length of argument in bits.
+The `BIT_LENGTH()` function is used to return the lenght of a given string in bits. It counts the total number of characters in a given string and then provides the result in bits.
+
+Examples:
+
+```sql
+SELECT BIT_LENGTH("TiDB");
++----------+
+| BIT_LENGTH("TiDB") |
++----------+
+| 8 (T) + 8 (i) + 8 (D) + 8 (B) = 40 bits |
++----------+
+```
+```sql
+SELECT CustomerName, BIT_LENGTH(CustomerName) AS BitLengthOfName FROM Customers;
+| CustomerName|BitLengthOfName |
+|-------------|----------------|
+| Albert Einstein | 120 bits |
+| Robert Oppenheimer | 144 bits |
+```
+
+> **Note:**
+>
+> The second example operates under the assumption that there is a database with a record titled `Customers` and a field inside titled `CustomerName`
 
 ### [`CHAR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char)
 
-Return the character for each integer passed.
+The `CHAR()` function is used to get the character value of a specific number. It performs the opposite function of `ASCII()`. Unlike `ASCII()`, which can get the ASCII value of a specific character, `CHAR()` can get the character of a specific ASCII value.
+
+Examples:
+
+```sql
+SELECT CHAR(65);
+
++------------+
+|  CHAR(65) |
++------------+
+|        A |
++------------+
+```
+```sql
+SELECT CHAR(84);
+
++------------+
+|  CHAR(84) |
++------------+
+|        T |
++------------+
+```
 
 ### [`CHAR_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char-length)
 
