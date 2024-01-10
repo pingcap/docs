@@ -267,7 +267,6 @@ Non-transactional DML statements are not yet a replacement for all batch-dml usa
 
 This error occurs when a query is concatenated in the `WHERE` clause involves tables other than the table in which the [shard column](#parameter-description) is defined. For example: in the following SQL statements, shard column is `t2.id` and it's defined in table `t2`, but `WHERE` clause involves table `t2` and `t3`.
 
-
 ```sql
 BATCH ON test.t2.id LIMIT 1 
 INSERT INTO t 
