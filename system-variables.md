@@ -3469,7 +3469,7 @@ mysql> desc select count(distinct a) from test.t;
 - This variable is used to control whether to enable the [TiFlash late materialization](/tiflash/tiflash-late-materialization.md) feature. Note that TiFlash late materialization does not take effect in the [fast scan mode](/tiflash/use-fastscan.md).
 - When this variable is set to `OFF` to disable the TiFlash late materialization feature, to process a `SELECT` statement with filter conditions (`WHERE` clause), TiFlash scans all the data of the required columns before filtering. When this variable is set to `ON` to enable the TiFlash late materialization feature, TiFlash can first scan the column data related to the filter conditions that are pushed down to the TableScan operator, filter the rows that meet the conditions, and then scan the data of other columns of these rows for further calculations, thereby reducing IO scans and computations of data processing.
 
-### tidb_opt_fix_control <span class="version-mark">New in v6.5.7 and v7.1.0</span>
+### tidb_opt_fix_control <span class="version-mark">New in v6.5.3 and v7.1.0</span>
 
 <CustomContent platform="tidb">
 
