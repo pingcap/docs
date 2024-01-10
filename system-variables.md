@@ -1682,7 +1682,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Unit: Threads
 - This variable is used to set the concurrency of the DDL operation in the `re-organize` phase.
 
-### `tidb_ddl_version`
+### `tidb_ddl_version` <span class="version-mark">New in v7.6.0</span>
 
 > **Warning:**
 >
