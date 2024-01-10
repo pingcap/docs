@@ -147,11 +147,75 @@ Return the index position of the first argument within the second argument.
 
 ### [`FORMAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_format)
 
-Return a number formatted to specified number of decimal places.
+The `FORMAT()` function is used to format a number to a specified number of decimal places, returning a number formatted to the specified decimal places.
+
+The function formats according to the specified number of decimal places. If the specified number of decimal places is greater than the actual number of decimal places in the number, the result will be padded with zeros to the corresponding length.
+
+- This function accepts two parameters: the number to be formatted and the number of decimal places.
+- If the first input parameter is a string and contains only digits, the function will return a result based on that number. For example, `FORMAT('12.34', 1)` and `FORMAT(12.34, 1)` yield the same result.
+- If the first input parameter is a string and the first character of the string is not a digit (e.g., `FORMAT('q12.34', 5)`), the function returns `0.00000`.
+- If the first input parameter is a string consisting of digits and non-digits, the function will return a result based on the continuous digits at the front of the parameter. For example, `FORMAT('12.34q56.78', 1)` yields the same result as `FORMAT('12.34', 1)`.
+- If the second input parameter (number of decimal places) is negative, the function truncates the decimal part and returns an integer.
+- If any of the input parameters is `NULL`, the function returns `NULL`.
+
+Examples:
+
+Formatting the number 12.34 to different decimal places:
+
+```sql
+SELECT FORMAT(12.34, 1);
+
++------------------+
+| FORMAT(12.34, 1) |
++------------------+
+| 12.3             |
++------------------+
+```
+
+```sql
+SELECT FORMAT(12.34, 5);
+
++------------------+
+| FORMAT(12.34, 5) |
++------------------+
+| 12.34000         |
++------------------+
+```
+
+```sql
+SELECT FORMAT(12.34, 2);
+
++------------------+
+| FORMAT(12.34, 2) |
++------------------+
+| 12.34            |
++------------------+
+```
 
 ### [`FROM_BASE64()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_from-base64)
 
-Decode to a base-64 string and return result.
+The `FROM_BASE64()` function is used to decode a string represented in Base-64 encoding, returning its hexadecimal string form.
+
+- This function accepts one parameter: the Base64 encoded string that needs to be decoded.
+- If the input parameter is not a valid Base64 encoded string, the `FROM_BASE64()` function will return `NULL`.
+
+> **Note:**
+>
+> The `FROM_BASE64()` function only processes valid Base64 encoded strings.
+
+Example:
+
+Decoding the Base64 encoded string `'SGVsbG8gVGlEQg=='` (which is the result of encoding `'Hello TiDB'` in Base64).
+
+```sql
+SELECT FROM_BASE64('SGVsbG8gVGlEQg==');
+
++------------------------------------------------------------------+
+| FROM_BASE64('SGVsbG8gVGlEQg==')                                  |
++------------------------------------------------------------------+
+| 0x48656C6C6F2054694442                                           |
++------------------------------------------------------------------+
+```
 
 ### [`HEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_hex)
 
