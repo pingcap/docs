@@ -42,9 +42,9 @@ In upstream clusters where you create log backup tasks, avoid using the TiDB Lig
 
 ### Why is the acceleration of adding indexes feature incompatible with PITR?
 
-Issue: [#38045](https://github.com/pingcap/tidb/issues/38045)
+Issue: [#38045](https://github.com/pingcap/tidb/issues/38045)(fixed in v7.0.0)
 
-Currently, index data created through the [index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) feature cannot be backed up by PITR.
+In versions prior to v7.0.0, index data created through the [index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) feature cannot be backed up by PITR.
 
 Therefore, after PITR recovery is complete, BR will delete the index data created by index acceleration, and then recreate it. If many indexes are created by index acceleration or the index data is large during the log backup, it is recommended to perform a full backup after creating the indexes.
 
@@ -58,13 +58,13 @@ To resolve this issue, you need to manually execute the `br log resume` command 
 
 ### What should I do if the error `execute over region id` is returned when I perform PITR?
 
-Issue: [#37207](https://github.com/pingcap/tidb/issues/37207)
+Issue: [#37207](https://github.com/pingcap/tidb/issues/37207)(fixed in v6.6.0 )
 
-This issue usually occurs when you enable log backup during a full data import and afterward perform a PITR to restore data at a time point during the data import.
+In versions prior to v6.6.0, the error of `execute over region id` may be displayed when PITR restoration is performed. This issue usually occurs when you enable log backup during a full data import and afterward perform a PITR to restore data at a time point during the data import.
 
 Specifically, there is a probability that this issue occurs if there are a large number of hotspot writes for a long time (such as 24 hours) and if the OPS of each TiKV node is larger than 50k/s (you can view the metrics in Grafana: **TiKV-Details** -> **Backup Log** -> **Handle Event Rate**).
 
-It is recommended that you perform a snapshot backup after the data import and perform PITR based on this snapshot backup.
+For versions prior to v6.6.0, it is recommended that you perform a snapshot backup after the data import and perform PITR based on this snapshot backup.
 
 ## After restoring a downstream cluster using the `br restore point` command, data cannot be accessed from TiFlash. What should I do?
 
