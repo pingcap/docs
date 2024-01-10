@@ -242,6 +242,7 @@ SELECT LEFT(NULL, 3);
 ### [`LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_length)
 
 Return the length of a string in bytes.
+
 `LENGTH()` count a multibyte character as multi bytes while `CHAR_LENGTH()` count it as a single code point
 
 * If any argument is `NULL`, the function returns `NULL`.
