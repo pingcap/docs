@@ -115,7 +115,7 @@ Return the character for each integer passed.
 
 ### [`CHAR_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char-length)
 
-The `CHAR_LENGTH()` function is used to get the number of characters in a specified expression. It returns the total number of strings in a specified expression as an integer value. 
+The `CHAR_LENGTH()` function is used to get the number of characters in a specified expression. It returns the total number of characters in a specified expression as an integer value. 
 
 Examples:
 
@@ -137,9 +137,10 @@ SELECT CustomerName, CHAR_LENGTH(CustomerName) AS LenghtOfName FROM Customers;
 | Albert Einstein | 15 |
 | Robert Oppenheimer | 18 |
 ```
+
 > **Note:**
 >
-> The second example operates under the assumption that there is a MySQL database with a record titled `Customers` and a field inside titled `CustomerName`
+> The second example operates under the assumption that there is a database with a record titled `Customers` and a field inside titled `CustomerName`
 
 ### [`CHARACTER_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_character-length)
 
