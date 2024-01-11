@@ -94,13 +94,6 @@ This document only describes the parameters that are not included in command-lin
     + If the configuration item is set to a value other than `0`, TiKV keeps at most the number of old log files specified by `max-backups`. For example, if the value is set to `7`, TiKV keeps up to 7 old log files.
 + Default value: `0`
 
-### `pd.enable-forwarding` <span class="version-mark">New in v5.0.0</span>
-
-+ Controls whether the PD client in TiKV forwards requests to the leader via the followers in the case of possible network isolation.
-+ Default value: `false`
-+ If the environment might have isolated network, enabling this parameter can reduce the window of service unavailability.
-+ If you cannot accurately determine whether isolation, network interruption, or downtime has occurred, using this mechanism has the risk of misjudgment and causes reduced availability and performance. If network failure has never occurred, it is not recommended to enable this parameter.
-
 ## server
 
 + Configuration items related to the server.
@@ -486,6 +479,37 @@ Configuration items related to the I/O rate limiter.
 + Determines which types of I/O operations are counted and restrained below the `max-bytes-per-sec` threshold. Currently, only the write-only mode is supported.
 + Optional value: `"write-only"`
 + Default value: `"write-only"`
+
+## pd
+
+### `enable-forwarding` <span class="version-mark">New in v5.0.0</span>
+
++ Controls whether the PD client in TiKV forwards requests to the leader via the followers in the case of possible network isolation.
++ Default value: `false`
++ If the environment might have isolated network, enabling this parameter can reduce the window of service unavailability.
++ If you cannot accurately determine whether isolation, network interruption, or downtime has occurred, using this mechanism has the risk of misjudgment and causes reduced availability and performance. If network failure has never occurred, it is not recommended to enable this parameter.
+
+### `endpoints`
+
++ The endpoints of PD. When multiple endpoints are specified, you need to separate them using commas.
++ Default value: `["127.0.0.1:2379"]`
+
+### `retry-interval`
+
++ The interval for retrying the PD connection.
++ Default value: `"300ms"`
+
+### `retry-log-every`
+
++ Specified the frequency at which the PD client skips reporting errors when the client observes errors. For example, when the value is `5`, after the PD client observes errors, the client skips reporting errors every 4 times and reports errors every 5th time.
++ To disable this feature, set the value to `1`.
++ Default value: `10`
+
+### `retry-max-count`
+
++ The maximum number of times to retry to initialize PD connection
++ To disable the retry, set its value to `0`. To release the limit on the number of retries, set the value to `-1`.
++ Default value: `-1`
 
 ## raftstore
 
