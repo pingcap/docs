@@ -524,9 +524,16 @@ You can view information about RU consumption.
 
 ### View the RU consumption by SQL
 
-#### Query the system variable `tidb_last_query_info`
+You can view the RU consumption of SQL statements in the following ways:
 
-TiDB provides the system variable [`tidb_last_query_info`](/system-variables.md#tidb_last_query_info-new-in-v4014). This system variable records the information of the last DML statement executed, including the RU consumed by the SQL execution.
+- The system variable `tidb_last_query_info`
+- `EXPLAIN ANALYZE`
+- Slow queries and corresponding system table
+- `statements_summary`
+
+#### View the RUs consumed by the last SQL execution by querying the system variable `tidb_last_query_info`
+
+TiDB provides the system variable [`tidb_last_query_info`](/system-variables.md#tidb_last_query_info-new-in-v4014). This system variable records the information of the last DML statement executed, including the RUs consumed by the SQL execution.
 
 Example:
 
@@ -558,7 +565,7 @@ Example:
 
     In the result, `ru_consumption` is the RUs consumed by the execution of this SQL statement.
 
-#### `EXPLAIN ANALYZE`
+#### View RUs consumed during SQL execution by `EXPLAIN ANALYZE`
 
 You can use the [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption) statement to get the amount of RUs consumed during SQL execution. Note that the amount of RUs is affected by the cache (for example, [coprocessor cache](/coprocessor-cache.md)). When the same SQL is executed multiple times, the amount of RUs consumed by each execution might be different. The RU value does not represent the exact value for each execution, but can be used as a reference for estimation.
 
@@ -566,7 +573,7 @@ You can use the [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyz
 
 When you enable resource control, the [slow query log](/identify-slow-queries.md) of TiDB and the corresponding system table [`INFORMATION_SCHEMA.SLOW_QUERY`](/information-schema/information-schema-slow-query.md) contain the resource group, RU consumption of the corresponding SQL, and the time spent waiting for available RUs.
 
-#### `statements_summary`
+#### View RU statistics by `statements_summary`
 
 The system table [`INFORMATION_SCHEMA.statements_summary`](/statement-summary-tables.md#statements_summary) in TiDB stores the normalized and aggregated statistics of SQL statements. You can use the system table to view and analyze the execution performance of SQL statements. It also contains statistics about resource control, including the resource group name, RU consumption, and the time spent waiting for available RUs. For more details, see [`statements_summary` fields description](/statement-summary-tables.md#statements_summary-fields-description).
 
