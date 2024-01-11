@@ -107,19 +107,137 @@ Return a string containing binary representation of a number.
 
 ### [`BIT_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bit-length)
 
-Return length of argument in bits.
+The `BIT_LENGTH()` function is used to return the length of a given argument in bits. It calculates the length of the argument and then returns the result in bits.
+
+Examples:
+
+```sql
+SELECT BIT_LENGTH("TiDB");
+
++----------+
+| BIT_LENGTH("TiDB") |
++----------+
+|  32 |
++----------+
+```
+
+8 bits per character x 4 characters = 32 bits
+
+```sql
+SELECT CustomerName, BIT_LENGTH(CustomerName) AS BitLengthOfName FROM Customers;
+
+| CustomerName|BitLengthOfName |
+|-------------|----------------|
+| Albert Einstein | 120 |
+| Robert Oppenheimer | 144 |
+```
+
+```sql
+SELECT BIT_LENGTH("PingCap 123");
+
++----------+
+| BIT_LENGTH("PingCap 123") |
++----------+
+| 88 |
++----------+
+```
+
+8 bits per character (space is counted as it is a non-alphanumeric character) x 11 characters = 88 bits
+
+> **Note:**
+>
+> The second example operates under the assumption that there is a [database](https://www.w3schools.com/sql/trymysql.asp?filename=trysql_func_mysql_char_length2) with a table titled `Customers` and a column inside the table titled `CustomerName`
 
 ### [`CHAR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char)
 
-Return the character for each integer passed.
+The `CHAR()` function is used to get the corresponding character value of a specific ASCII value. It performs the opposite function of `ASCII()`. Unlike `ASCII()`, which can get the ASCII value of a specific character, `CHAR()` can get the character of a specific ASCII value.
+
+Examples:
+
+```sql
+SELECT CHAR(65);
+
++------------+
+|  CHAR(65) |
++------------+
+|        A |
++------------+
+```
+
+```sql
+SELECT CHAR(84);
+
++------------+
+|  CHAR(84) |
++------------+
+|        T |
++------------+
+```
+
+> **Note:**
+>
+> The `CHAR()` function can also be used to get the corresponding character values of ASCII values that extend beyond the standard ASCII range (0 - 127). It can also get the corresponding character value of a unicode value.
+
+Further Examples:
+
+```sql
+/*For extended ASCII: */
+
+SELECT CHAR(128);
+
++------------+
+|  CHAR(128) |
++------------+
+|       0x80 |
++------------+
+```
+
+```sql
+/* For Unicode: */
+
+--skip-binary-as-hex
+
+SELECT CHAR(50089);
+
++------------+
+|  CHAR(50089) |
++------------+
+|   é |
++------------+
+```
 
 ### [`CHAR_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char-length)
 
-Return number of characters in argument.
+The `CHAR_LENGTH()` function is used to get the number of characters in a specified expression. It returns the total number of characters in a specified expression as an integer value. 
+
+Examples:
+
+```sql
+SELECT CHAR_LENGTH("TiDB") AS LengthOfString;
+
++----------+
+| LengthOfString |
++----------+
+| 4  |
++----------+
+```
+
+```sql
+SELECT CustomerName, CHAR_LENGTH(CustomerName) AS LenghtOfName FROM Customers;
+
+| CustomerName|LengthOfName  |
+|-------------|--------------|
+| Albert Einstein | 15 |
+| Robert Oppenheimer | 18 |
+```
+
+> **Note:**
+>
+> The second example operates under the assumption that there is a [database](https://www.w3schools.com/sql/trymysql.asp?filename=trysql_func_mysql_char_length2) with a table titled `Customers` and a column inside the table titled `CustomerName`
 
 ### [`CHARACTER_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_character-length)
 
-Synonym for `CHAR_LENGTH()`.
+The `CHARACTER_LENGTH()` function is the same as the `CHAR_LENGTH()` function. Both functions can be used synonymously because they provide the same outputs.
 
 ### [`CONCAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat)
 
