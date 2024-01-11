@@ -61,7 +61,7 @@ You can use the S&P 500 dataset provided as an Interactive Tutorial of TiDB Serv
 
 5. Open Looker Studio and create a Blank Report. Select the' MySQL' connector in the **Add data to report** screen.
 
-6. In the setting pane, configure the following connection parameters:
+6. In the **BASIC** setting pane, configure the following connection parameters:
 
     - **Host Name or IP**: enter the `HOST` parameter from the TiDB Cloud connection dialog.
     - **Port(Optional)**: enter the `PORT` parameter from the TiDB Cloud connection dialog.
