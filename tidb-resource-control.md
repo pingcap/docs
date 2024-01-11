@@ -518,7 +518,7 @@ By default, the task types that are marked as background tasks are `""`, and the
 
 </CustomContent>
 
-## Observability of RU consumption
+## View RU consumption
 
 You can view information about RU consumption.
 
@@ -569,7 +569,7 @@ Example:
 
 You can use the [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption) statement to get the amount of RUs consumed during SQL execution. Note that the amount of RUs is affected by the cache (for example, [coprocessor cache](/coprocessor-cache.md)). When the same SQL is executed multiple times, the amount of RUs consumed by each execution might be different. The RU value does not represent the exact value for each execution, but can be used as a reference for estimation.
 
-#### Slow queries and corresponding system table
+#### Slow queries and the corresponding system table
 
 When you enable resource control, the [slow query log](/identify-slow-queries.md) of TiDB and the corresponding system table [`INFORMATION_SCHEMA.SLOW_QUERY`](/information-schema/information-schema-slow-query.md) contain the resource group, RU consumption of the corresponding SQL, and the time spent waiting for available RUs.
 
