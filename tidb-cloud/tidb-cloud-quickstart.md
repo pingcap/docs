@@ -43,11 +43,10 @@ In Chat2Query, you can either simply type `--` followed by your instructions to 
 2. To try the AI capacity of TiDB Cloud, follow the on-screen instructions to allow PingCAP and OpenAI to use your code snippets for research and service improvement, and then click **Save and Get Started**.
 
 3. In the editor, you can either simply type `--` followed by your instructions to let AI automatically generate SQL queries, or write SQL queries manually.
+   example:
+   If you would like to create a new table test.t with two columns (Column id and Column name), you can just press the Enter key at the end of your instructions. Then the AI will generate a SQL. Press Tab key to accept the AI-generated SQL, or any other key to cancel. Then you can run the SQL.
 
-example:
-If you would like to create a new table test.t with two columns (Column id and Column name), you can just press the Enter key at the end of your instructions. Then the AI will generate a SQL. Press Tab key to accept the AI-generated SQL, or any other key to cancel. Then you can run the SQL.
-```
-<img width="1173" alt="image" src="https://github.com/Jellybeanvino/docs/assets/48083215/5c85e0d9-4af9-4c3e-8c88-cccd6596566f">
+    <img width="1173" alt="image" src="https://github.com/Jellybeanvino/docs/assets/48083215/5c85e0d9-4af9-4c3e-8c88-cccd6596566f">
 
 
     > **Note:**
