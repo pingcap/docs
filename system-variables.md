@@ -779,17 +779,17 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 > **Warning:**
 >
-> The Active PD Follower feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> The [Active PD Follower](/tune-region-performance.md#use-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service) feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
-- This variable controls whether to enable the Active PD Follower feature (currently only applicable for requests related to Region information). When the value is `OFF`, TiDB only obtains Region information from the PD leader. When the value is `ON`, TiDB evenly distributes requests related to Region information to all PD servers. PD followers can also directly handle Region requests, thereby reducing the CPU pressure on the PD leader.
+- This variable controls whether to enable the Active PD Follower feature (currently only applicable to requests for Region information). When the value is `OFF`, TiDB only obtains Region information from the PD leader. When the value is `ON`, TiDB evenly distributes requests for Region information to all PD servers, and PD followers can also handle Region requests, thereby reducing the CPU pressure on the PD leader.
 - Scenarios for enabling Active PD Follower:
-    * In a cluster with a large number of Regions, the PD leader experiences high CPU load due to the overhead of handling heartbeats and scheduling tasks, leading to CPU resource exhaustion.
-    * The TiDB cluster has many TiDB instances, and there is a high concurrency of requests for Region information, leading to high CPU pressure on the PD leader.
+    * In a cluster with a large number of Regions, the PD leader experiences high CPU pressure due to the increased overhead of handling heartbeats and scheduling tasks.
+    * In a TiDB cluster with many TiDB instances, the PD leader experiences high CPU pressure due to a high concurrency of requests for Region information.
 
 ### plugin_dir
 
