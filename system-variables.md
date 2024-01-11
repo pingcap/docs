@@ -2969,6 +2969,32 @@ mysql> desc select count(distinct a) from test.t;
 - This variable is used to control whether the optimizer selects hash joins for tables. The value is `ON` by default. If it is set to `OFF`, the optimizer avoids selecting hash joins when generating execution plans, unless no other join algorithm is available.
 - If both the system variable `tidb_opt_enable_hash_join` and the `HASH_JOIN` hint are configured, the `HASH_JOIN` hint takes precedence. Even if `tidb_opt_enable_hash_join` is set to `OFF`, when you specify a `HASH_JOIN` hint in a query, the TiDB optimizer still enforces a hash join plan.
 
+### tidb_opt_fix_control <span class="version-mark">New in v6.5.3</span>
+
+<CustomContent platform="tidb">
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: String
+- Default value: `""`
+- This variable is used to control some internal behaviors of the optimizer.
+- The optimizer's behavior might vary depending on user scenarios or SQL statements. This variable provides a more fine-grained control over the optimizer and helps to prevent performance regression after upgrading caused by behavior changes in the optimizer.
+- For a more detailed introduction, see [Optimizer Fix Controls](/optimizer-fix-controls.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: String
+- Default value: `""`
+- This variable is used to control some internal behaviors of the optimizer.
+- The optimizer's behavior might vary depending on user scenarios or SQL statements. This variable provides a more fine-grained control over the optimizer and helps to prevent performance regression after upgrading caused by behavior changes in the optimizer.
+- For a more detailed introduction, see [Optimizer Fix Controls](https://docs.pingcap.com/tidbcloud/optimizer-fix-controls).
+
+</CustomContent>
+
 ### tidb_opt_force_inline_cte <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION | GLOBAL
