@@ -480,8 +480,6 @@ Configuration items related to the I/O rate limiter.
 + Optional value: `"write-only"`
 + Default value: `"write-only"`
 
-<<<<<<< HEAD
-=======
 ## pd
 
 ### `enable-forwarding` <span class="version-mark">New in v5.0.0</span>
@@ -513,7 +511,6 @@ Configuration items related to the I/O rate limiter.
 + To disable the retry, set its value to `0`. To release the limit on the number of retries, set the value to `-1`.
 + Default value: `-1`
 
->>>>>>> 796762de66 (move tikv configure item `pd.enable-forwarding` to correct place (#16067))
 ## raftstore
 
 Configuration items related to Raftstore.
