@@ -82,9 +82,7 @@ To get started with Data Service, you can also create your own Data App, and the
 
 An endpoint is a web API that you can customize to execute SQL statements.
 
-After creating a Data App, a default `untitled endpoint` is created for you automatically. You can use the default endpoint to access your TiDB Cloud cluster.
-
-If you want to create a new endpoint, locate the newly created Data App and click **+** **Create Endpoint** to the right of the App name.
+To create a new endpoint, locate the newly created Data App and click **+** **Create Endpoint** to the right of the App name.
 
 #### Configure properties
 
