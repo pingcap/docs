@@ -107,7 +107,7 @@ Return a string containing binary representation of a number.
 
 ### [`BIT_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bit-length)
 
-The `BIT_LENGTH()` function is used to return the lenght of a given argument in bits. It calculates the length of the argument and then returns the result in bits.
+The `BIT_LENGTH()` function is used to return the length of a given argument in bits. It calculates the length of the argument and then returns the result in bits.
 
 Examples:
 
@@ -188,7 +188,7 @@ SELECT CHAR(128);
 ```sql
 /* For Unicode: */
 
-SELECT CHAR (233);
+SELECT CHAR(233);
 
 +------------+
 |  CHAR(233) |
