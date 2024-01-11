@@ -130,7 +130,7 @@ The output is as follows:
 
 ## Implicit allocation rules of IDs
 
-The values implicitly allocated to the `AUTO_RANDOM` column are similar to those of the `AUTO_INCREMENT` column. They are also controlled by the session-level system variables [`auto_increment_increment`](/system-variables.md#auto_increment_increment) and [`auto_increment_offset`](/system-variables.md#auto_increment_offset). The auto-increment bits (ID) of implicitly allocated values comform to the equation `(ID - auto_increment_offset) % auto_increment_increment == 0`.
+TiDB implicitly allocates values to `AUTO_RANDOM` columns similarly to `AUTO_INCREMENT` columns. They are also controlled by the session-level system variables [`auto_increment_increment`](/system-variables.md#auto_increment_increment) and [`auto_increment_offset`](/system-variables.md#auto_increment_offset). The auto-increment bits (ID) of implicitly allocated values conform to the equation `(ID - auto_increment_offset) % auto_increment_increment == 0`.
 
 ## Restrictions
 
