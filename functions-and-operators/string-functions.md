@@ -156,10 +156,78 @@ Decode to a base-64 string and return result.
 ### [`HEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_hex)
 
 Return a hexadecimal representation of a decimal or string value.
+- For a string argument `HEX(str)` returns a hexademical string representation of `str` where each byte of each character in `str` is converted to two hexadecimal digits.
+- The inverse of this operation is performed by the [ `UNHEX()` ](https://docs.pingcap.com/tidb/dev/string-functions#unhex) function.
+- For a numeric argument `HEX(n)` returns a hexadecimal string representation of the value of `n` treated as a longlong (`BIGINT`) number. This is equivalent to [ `CONV(n, 10, 16)` ](https://docs.pingcap.com/tidb/stable/numeric-functions-and-operators#mathematical-functions).
+- For a `NULL` argument, this function returns `NULL`.
+
+```sql
+SELECT X'616263', HEX('abc'), UNHEX(HEX('abc'));
++-----------+------------+-------------------+
+| X'616263' | HEX('abc') | UNHEX(HEX('abc')) |
++-----------+------------+-------------------+
+| abc       | 616263     | abc               |
++-----------+------------+-------------------+
+
+SELECT X'F09F8DA3', HEX('🍣'), UNHEX(HEX('🍣'));
++-------------+-------------+--------------------+
+| X'F09F8DA3' | HEX('🍣')     | UNHEX(HEX('🍣'))     |
++-------------+-------------+--------------------+
+| 🍣            | F09F8DA3    | 🍣                   |
++-------------+-------------+--------------------+
+
+SELECT HEX(255), CONV(HEX(255), 16, 10);
++----------+------------------------+
+| HEX(255) | CONV(HEX(255), 16, 10) |
++----------+------------------------+
+| FF       | 255                    |
++----------+------------------------+
+
+SELECT HEX(NULL);
++-----------+
+| HEX(NULL) |
++-----------+
+| NULL      |
++-----------+
+```
 
 ### [`INSERT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_insert)
 
-Insert a substring at the specified position up to the specified number of characters.
+`INSERT(str, pos, len, newstr)` returns the string `str` with the substring beginning at position `pos` and `len` characters long which is replaced by `newstr`.
+This function is multibyte safe.
+- Returs the original string `str` if `pos` is not within the length of string,
+- Returns the string which is replaced the rest of the string from position `pos` if `len` is not within the length of the rest of string.
+- Returns `NULL` if any argument is `NULL`.
+
+```sql
+SELECT INSERT('He likes tennis', 4, 5, 'plays');
++------------------------------------------+
+| INSERT('He likes tennis', 4, 5, 'plays') |
++------------------------------------------+
+| He plays tennis                          |
++------------------------------------------+
+
+SELECT INSERT('He likes tennis', -1, 5, 'plays');
++-------------------------------------------+
+| INSERT('He likes tennis', -1, 5, 'plays') |
++-------------------------------------------+
+| He likes tennis                           |
++-------------------------------------------+
+
+SELECT INSERT('He likes tennis', 4, 100, 'plays');
++--------------------------------------------+
+| INSERT('He likes tennis', 4, 100, 'plays') |
++--------------------------------------------+
+| He plays                                   |
++--------------------------------------------+
+
+SELECT INSERT('He likes tenis', 10, 100, '🍣');
++-------------------------------------------+
+| INSERT('He likes tenis', 10, 100, '🍣')     |
++-------------------------------------------+
+| He likes 🍣                                 |
++-------------------------------------------+
+```
 
 ### [`INSTR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_instr)
 
