@@ -10,7 +10,7 @@ The `KILL` statement is used to terminate a connection in any TiDB instance in t
 
 > **Note:**
 >
-> Starting from TiDB v6.2.0, `KILL` statement can kill DDL jobs. 
+> Starting from TiDB v6.2.0, `KILL` statement is able to kill DDL jobs. 
 
 ## Synopsis
 
