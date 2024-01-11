@@ -23,7 +23,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 </thead>
 <tbody>
   <tr>
-    <td rowspan="3">Scalability and Performance<br></td>
+    <td rowspan="4">Scalability and Performance<br></td>
     <td><a href="https://docs.pingcap.com/tidb/v7.6/sql-plan-management#cross-database-binding">Cross-database SQL binding</a> {/* tw@Oreoxmt */}</td>
     <td>When managing hundreds of databases with the same schema, it is often necessary to apply SQL bindings across these schemas. For example, in SaaS or PaaS data platforms, each user typically operates separate databases with the same schema and runs similar SQL queries on them. In this case, it is impractical to bind SQL for each schema one by one. TiDB v7.6.0 introduces cross-database SQL bindings that enable matching bindings across all schema-equivalent databases.</td>
   </tr>
@@ -34,6 +34,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
   <tr>
     <td><a href="">Achieve up to 10 times faster for creating tables in batch (experimental)</a>  {/* tw@hfxsd */}</td>
     <td>With the implementation of the new DDL architecture in v7.6.0, the performance of batch table creation has witnessed a remarkable improvement, up to 10 times faster. This substantial enhancement drastically reduces the time needed for creating numerous tables. This acceleration is particularly noteworthy in SaaS scenarios, where the prevalence of high volumes of tables, ranging from tens to hundreds of thousands, is a common challenge.</td>
+  </tr>
+  <tr>
+    <td><a href="https://docs.pingcap.com/tidb/v7.6/tune-region-performance">Use the Active PD Follower feature to enhance the scalability of PD's Region information query service (experimental)</a>  {/* tw@Oreoxmt */}</td>
+    <td>TiDB v7.6.0 introduces an experimental feature "Active PD Follower", which allows PD followers to provide Region information query services. This feature improves the capability of the PD cluster to handle GetRegion and ScanRegions requests in clusters with a large number of TiDB nodes and Regions, thereby reducing the CPU pressure on the PD leader.</td>
   </tr>
   <tr>
     <td rowspan="2">Reliability and Availability<br></td>
@@ -135,6 +139,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
     TiProxy has been integrated into TiUP, TiDB Operator, and TiDB Dashboard, making it easy to configure, deploy and maintain.
 
     For more information, see [documentation](/tiproxy/tiproxy-overview.md).
+
+### Scalability
+
+* Use the Active PD Follower feature to enhance the scalability of PD's Region information query service (experimental) [#7431](https://github.com/tikv/pd/issues/7431) @[CabinfeverB](https://github.com/CabinfeverB) **tw@Oreoxmt** <!--1667-->
+    
+    In a TiDB cluster with a large number of Regions, the PD leader might experience high CPU load due to the increased overhead of handling heartbeats and scheduling tasks. If the cluster has many TiDB instances, and there is a high concurrency of requests for Region information, the CPU pressure on the PD leader increases further and might cause PD services to become unavailable.
+    
+    To ensure high availability, TiDB v7.6.0 supports using the Active PD Follower feature to enhance the scalability of PD's Region information query service. You can enable the Active PD Follower feature by setting the system variable [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-introduced-in-v760) to `ON`. After this feature is enabled, TiDB evenly distributes Region information requests to all PD servers, and PD followers can also directly handle Region requests, thereby reducing the CPU pressure on the PD leader.
+
+    For more information, see [documentation](/tune-region-performance.md).
 
 ### SQL
 
