@@ -37,6 +37,7 @@ If the operation fails to cancel the jobs, specific reasons are displayed.
 > - Only this operation can cancel DDL jobs. All other operations and environment changes (such as machine restart and cluster restart) cannot cancel these jobs.
 > - This operation can cancel multiple DDL jobs at the same time. You can get the ID of DDL jobs using the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md) statement.
 > - If the jobs you want to cancel are finished, the cancellation operation fails.
+> - Starting from v6.2.0, [`KILL`](/sql-statements/sql-statement-kill.md) statement can kill DDL jobs. 
 
 ## MySQL compatibility
 
