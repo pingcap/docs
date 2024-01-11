@@ -8,6 +8,10 @@ aliases: ['/docs/dev/sql-statements/sql-statement-kill/','/docs/dev/reference/sq
 
 The `KILL` statement is used to terminate a connection in any TiDB instance in the current TiDB cluster.
 
+> **Note:**
+>
+> Starting from TiDB v6.2.0, `KILL` statement can kill DDL jobs. 
+
 ## Synopsis
 
 ```ebnf+diagram
