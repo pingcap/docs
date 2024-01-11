@@ -84,6 +84,7 @@ Now, you can use TiDB Serverless as a data source. Let's make a simple chart wit
 1. In the setting pane, select **CUSTOM QUERY**. 
 
 2. Put the SQL below, then click **Add** in the bottom-right corner. 
+
     ```sql
     SELECT sector,
         COUNT(*)                                                                      AS companies,
