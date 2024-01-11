@@ -107,7 +107,7 @@ Return a string containing binary representation of a number.
 
 ### [`BIT_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bit-length)
 
-The `BIT_LENGTH()` function is used to return the lenght of a given string in bits. It counts the total number of characters in a given string and then provides the result in bits.
+The `BIT_LENGTH()` function is used to return the lenght of a given argument in bits. It calculates the length of the argument and then returns the result in bits.
 
 Examples:
 
@@ -119,6 +119,7 @@ SELECT BIT_LENGTH("TiDB");
 | 8 (T) + 8 (i) + 8 (D) + 8 (B) = 40 bits |
 +----------+
 ```
+
 ```sql
 SELECT CustomerName, BIT_LENGTH(CustomerName) AS BitLengthOfName FROM Customers;
 | CustomerName|BitLengthOfName |
@@ -127,13 +128,22 @@ SELECT CustomerName, BIT_LENGTH(CustomerName) AS BitLengthOfName FROM Customers;
 | Robert Oppenheimer | 144 bits |
 ```
 
+```sql
+SELECT BIT_LENGTH("PingCap 123")
++----------+
+| BIT_LENGTH("PingCap 123") |
++----------+
+| 8 (P) + 8 (i) + 8 (n) + 8 (g) + 8 (C) + 8 (a) + 8 (p) + 8 () + 8 (1) + 8 (2) + 8 (3) = 88 bits |
++----------+
+```
+
 > **Note:**
 >
 > The second example operates under the assumption that there is a database with a record titled `Customers` and a field inside titled `CustomerName`
 
 ### [`CHAR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char)
 
-The `CHAR()` function is used to get the character value of a specific number. It performs the opposite function of `ASCII()`. Unlike `ASCII()`, which can get the ASCII value of a specific character, `CHAR()` can get the character of a specific ASCII value.
+The `CHAR()` function is used to get the corresponding character value of a specific ASCII value. It performs the opposite function of `ASCII()`. Unlike `ASCII()`, which can get the ASCII value of a specific character, `CHAR()` can get the character of a specific ASCII value.
 
 Examples:
 
@@ -146,6 +156,7 @@ SELECT CHAR(65);
 |        A |
 +------------+
 ```
+
 ```sql
 SELECT CHAR(84);
 
@@ -153,6 +164,35 @@ SELECT CHAR(84);
 |  CHAR(84) |
 +------------+
 |        T |
++------------+
+```
+> **Note:**
+>
+> The `CHAR()` function can also be used to get the corresponding character values of ASCII values that extend beyond the standard ASCII range (0 - 127). It can also get the corresponding character value of a unicode value.
+
+Further Examples:
+
+```sql
+/*For extended ASCII: */
+
+SELECT CHAR(128);
+
++------------+
+|  CHAR(128) |
++------------+
+|       Ç |
++------------+
+```
+
+```sql
+/* For Unicode: */
+
+SELECT CHAR (233);
+
++------------+
+|  CHAR(233) |
++------------+
+|   é |
 +------------+
 ```
 
