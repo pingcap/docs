@@ -220,8 +220,8 @@ sasl-oauth-scopes = ["producer.kafka", "consumer.kafka"]
 sasl-oauth-grant-type = "client_credentials"
 # The audience in the Kafka SASL OAUTHBEARER authentication. The default value is empty. This parameter is optional when the OAUTHBEARER authentication is used.
 sasl-oauth-audience = "kafka"
-#The following configuration is only required when using Avro as the protocol and AWS Glue Schema Registry:
-#Please refer to the section "Using AWS Glue Schema Registry" in the document "Sync Data to Kafka" at the following link: https://docs.pingcap.com/zh/tidb/dev/ticdc-sink-to-kafka#ticdc-集成-aws-glue-schema-registry
+# The following configuration is only required when using Avro as the protocol and AWS Glue Schema Registry:
+# Please refer to the section "Integrate TiCDC with AWS Glue Schema Registry" in the document "Sync Data to Kafka": https://docs.pingcap.com/zh/tidb/dev/ticdc-sink-to-kafka#integrate-ticdc-with-aws-glue-schema-registry
 # [sink.kafka-config.glue-schema-registry-config]
 # region="us-west-1"  
 # registry-name="ticdc-test"
