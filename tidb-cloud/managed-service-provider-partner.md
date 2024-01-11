@@ -1,6 +1,6 @@
 ---
 title: Managed Service Provider Partner
-summary: Learn how to become a Managed Service Provider Partner.
+summary: Learn how to become a Managed Service Provider (MSP) partner.
 ---
 
 # Managed Service Provider Partner
