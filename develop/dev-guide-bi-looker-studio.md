@@ -108,7 +108,7 @@ If the authentication succeeds, you can see tables in the database.
 
 8. Open Looker Studio and create a Blank Report. Select the' MySQL' connector in the **Add data to report** screen.
 
-9.  In the **BASIC** setting pane, configure the following connection parameters:
+9. In the **BASIC** setting pane, configure the following connection parameters:
 
     - **Host Name or IP**: enter the `HOST` parameter from the TiDB Cloud connection dialog.
     - **Port(Optional)**: enter the `PORT` parameter from the TiDB Cloud connection dialog.
