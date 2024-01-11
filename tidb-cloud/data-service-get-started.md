@@ -114,6 +114,10 @@ You can customize SQL statements for the endpoint in the SQL editor, which is th
 
     In the SQL editor, you can write statements such as table join queries, complex queries, and aggregate functions. You can also simply type `--` followed by your instructions to let AI generate SQL statements automatically.
 
+    > **Note:**
+    >
+    > To try the AI capacity of TiDB Cloud, you need to allow PingCAP and OpenAI to use your code snippets for research and service improvement. For more information, see [Enable or disable AI to generate SQL queries](https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query#enable-or-disable-ai-to-generate-sql-queries).
+
     To define a parameter, you can insert it as a variable placeholder like `${ID}` in the SQL statement. For example, `SELECT * FROM table_name WHERE id = ${ID}`. Then, you can click the **Params** tab on the right pane to change the parameter definition and test values.
 
     > **Note:**
