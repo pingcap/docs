@@ -63,7 +63,7 @@ You can use the S&P 500 dataset provided as an Interactive Tutorial of TiDB Serv
     >
     > If you have created a password before, use the original password or click **Reset Password** to generate a new one.
 
-5. Open Looker Studio and create a Blank Report. Select the' MySQL' connector in the **Add data to report** screen.
+5. Open Looker Studio and create a Blank Report. Select the **MySQL** connector in the **Add data to report** screen.
 
 6. In the **BASIC** setting pane, configure the following connection parameters:
 
@@ -106,7 +106,7 @@ If the authentication succeeds, you can see tables in the database.
 
 7. You can download CA File with the link under **Step 2**. 
 
-8. Open Looker Studio and create a Blank Report. Select the' MySQL' connector in the **Add data to report** screen.
+8. Open Looker Studio and create a Blank Report. Select the **MySQL** connector in the **Add data to report** screen.
 
 9. In the **BASIC** setting pane, configure the following connection parameters:
 
