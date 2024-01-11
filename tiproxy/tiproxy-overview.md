@@ -177,7 +177,7 @@ The following table lists some supported connectors:
 | MySQL Connector/Node.js | 1.0.2      |
 | mysqljs/mysql           | 2.15.0     |
 | node-mysql2             | 1.0.0-rc-6 |
-| mysqlnd                 | 5.4        |
+| PHP | mysqlnd                 | 5.4        |
 | MySQL Connector/Python  | 1.0.7      |
 | PyMySQL                 | 0.7        |
 
