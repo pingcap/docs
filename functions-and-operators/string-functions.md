@@ -167,6 +167,37 @@ The function rounds and formats based on the specified number of decimal places.
 
 **Examples:**
 
+Formatting the number 12.36 to different decimal places:
+
+```sql
+mysql> SELECT FORMAT(12.36, 1);
++------------------+
+| FORMAT(12.36, 1) |
++------------------+
+| 12.4             |
++------------------+
+```
+
+```sql
+mysql> SELECT FORMAT(12.36, 5);
++------------------+
+| FORMAT(12.36, 5) |
++------------------+
+| 12.36000         |
++------------------+
+```
+
+```sql
+mysql> SELECT FORMAT(12.36, 2);
++------------------+
+| FORMAT(12.36, 2) |
++------------------+
+| 12.36            |
++------------------+
+```
+
+### [`FROM_BASE64()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_from-base64)
+
 The `FROM_BASE64()` function is used to decode strings represented in [Base64](https://datatracker.ietf.org/doc/html/rfc4648) and returns a string in its hexadecimal form.
 
 - This function accepts a single argument: the Base64 encoded string to be decoded.
@@ -215,10 +246,6 @@ mysql> SELECT FROM_BASE64('MTIzNDU2');
 | 0x313233343536                                   |
 +--------------------------------------------------+
 ```
-
-### [`FROM_BASE64()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_from-base64)
-
-
 
 ### [`HEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_hex)
 
