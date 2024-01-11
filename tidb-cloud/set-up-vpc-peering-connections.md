@@ -13,41 +13,38 @@ To connect your application to TiDB Cloud via VPC peering, you need to set up [V
 
 VPC peering connection is a networking connection between two VPCs that enables you to route traffic between them using private IP addresses. Instances in either VPC can communicate with each other as if they are within the same network.
 
-Currently, TiDB Cloud only supports VPC peering in the same region for the same project. TiDB clusters of the same project in the same region are created in the same VPC. Therefore, once VPC peering is set up in a region of a project, all the TiDB clusters created in the same region of this project can be connected in your VPC. VPC peering setup differs among cloud providers.
+Currently, TiDB clusters of the same project in the same region are created in the same VPC. Therefore, once VPC peering is set up in a region of a project, all the TiDB clusters created in the same region of this project can be connected in your VPC. VPC peering setup differs among cloud providers.
 
 > **Tip:**
 >
 > To connect your application to TiDB Cloud, you can also set up [private endpoint connection](/tidb-cloud/set-up-private-endpoint-connections.md) with TiDB Cloud, which is secure and private, and does not expose your data to the public internet. It is recommended to use private endpoints over VPC peering connections.
 
-## Prerequisite: Set a Project CIDR
+## Prerequisite: Set a CIDR for this region
 
-Project CIDR (Classless Inter-Domain Routing) is the CIDR block used for network peering in a project.
+CIDR (Classless Inter-Domain Routing) is the CIDR block used for creating VPC for TiDB Dedicated Cluster .
 
-Before adding VPC Peering requests to a region, you need to set a project CIDR for your project's cloud provider (AWS or Google Cloud) to establish a peering link to your application's VPC.
+Before adding VPC Peering requests to a region, you need to set a CIDR for this region , and then create the first Dedicated Cluster in this region. After the first Dedicated Cluster is created, the VPC of the cluster is created, then you can establish a peering link to your application's VPC.
 
-You can set the project CIDR when creating the first TiDB Dedicated of your project. If you want to set the project CIDR before creating the cluster, perform the following operations:
+You can set the CIDR when creating the first Dedicated Cluster. If you want to set the CIDR before creating the cluster, perform the following operations:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
 3. On the **Project Settings** page of your project, click **Network Access** in the left navigation pane, and then click the **Project CIDR** tab.
-4. Click **Add a project CIDR for AWS** or **Add a project CIDR for Google Cloud** according to your cloud provider, specify one of the following network addresses in the **Project CIDR** field, and then click **Confirm**.
+4. Click **Create CIDR** ,then click **AWS CIDR** or **Google Cloud CIDR** according to your cloud provider, specify the Region and CIDR value in the  **Create AWS CIDR** or **Create Google Cloud CIDR**  window , and then click **Confirm**.
 
     > **Note:**
     >
-    > To avoid any conflicts with the CIDR of the VPC where your application is located, you need to set a different project CIDR in this field.
+    > To avoid any conflicts with the CIDR of the VPC where your application is located, you need to set a different project CIDR in this field. TiDB Cloud recommend configuring an IP range size between /16 and /23. The following network addresses are supported:
 
-    - 10.250.0.0/16
-    - 10.250.0.0/17
-    - 10.250.128.0/17
-    - 172.30.0.0/16
-    - 172.30.0.0/17
-    - 172.30.128.0/17
+    - 10.0.0.0 - 10.255.255.255 (10/8 prefix)
+    - 172.16.0.0 - 172.31.255.255 (172.16/12 prefix)
+    - 192.168.0.0 - 192.168.255.255 (192.168/16 prefix)
 
     ![Project-CIDR4](/media/tidb-cloud/Project-CIDR4.png)
 
 5. View the CIDR of the cloud provider and the specific region.
 
-    The region CIDR is inactive by default. To activate the region CIDR, you need to create a cluster in the target region. When the region CIDR is active, you can create VPC Peering for the region.
+    The CIDR is inactive by default. To activate the CIDR, you need to create a cluster in the target region. When the region CIDR is active, you can create VPC Peering for the region.
 
     ![Project-CIDR2](/media/tidb-cloud/Project-CIDR2.png)
 
@@ -183,7 +180,7 @@ You can also use the AWS dashboard to configure the VPC peering connection.
 
         ![Search all route tables related to VPC](/media/tidb-cloud/vpc-peering/aws-vpc-guide-4.png)
 
-    3. Right-click each route table and select **Edit routes**. On the edit page, add a route with a destination to the Project CIDR (by checking the **VPC Peering** configuration page in the TiDB Cloud console) and fill in your peering connection ID in the **Target** column.
+    3. Right-click each route table and select **Edit routes**. On the edit page, add a route with a destination to the TiDB Cloud CIDR (by checking the **VPC Peering** configuration page in the TiDB Cloud console) and fill in your peering connection ID in the **Target** column.
 
         ![Edit all route tables](/media/tidb-cloud/vpc-peering/aws-vpc-guide-5.png)
 
