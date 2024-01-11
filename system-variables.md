@@ -1694,7 +1694,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `1`
 - Value range: `1` or `2`
 - This variable is used to control whether to enable [TiDB DDL V2](/ddl-v2.md). Setting it to `2` enables this feature, and setting it to `1` disables it. The default value is `1`. After you enable it, TiDB uses TiDB DDL V2 to execute DDL statements.
-- Starting from v7.6.0, TiDB supports accelerating table creation by the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) statement.
+- Starting from v7.6.0, TiDB only supports accelerating table creation by the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) statement.
 
 ### tidb_default_string_match_selectivity <span class="version-mark">New in v6.2.0</span>
 
