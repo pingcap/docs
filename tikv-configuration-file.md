@@ -561,6 +561,13 @@ Configuration items related to the I/O rate limiter.
 
 ## pd
 
+### `enable-forwarding` <span class="version-mark">New in v5.0.0</span>
+
++ Controls whether the PD client in TiKV forwards requests to the leader via the followers in the case of possible network isolation.
++ Default value: `false`
++ If the environment might have isolated network, enabling this parameter can reduce the window of service unavailability.
++ If you cannot accurately determine whether isolation, network interruption, or downtime has occurred, using this mechanism has the risk of misjudgment and causes reduced availability and performance. If network failure has never occurred, it is not recommended to enable this parameter.
+
 ### `endpoints`
 
 + The endpoints of PD. When multiple endpoints are specified, you need to separate them using commas.
@@ -582,13 +589,6 @@ Configuration items related to the I/O rate limiter.
 + The maximum number of times to retry to initialize PD connection
 + To disable the retry, set its value to `0`. To release the limit on the number of retries, set the value to `-1`.
 + Default value: `-1`
-
-### `enable-forwarding` <span class="version-mark">New in v5.0.0</span>
-
-+ Controls whether the PD client in TiKV forwards requests to the leader via the followers in the case of possible network isolation.
-+ Default value: `false`
-+ If the environment might have isolated network, enabling this parameter can reduce the window of service unavailability.
-+ If you cannot accurately determine whether isolation, network interruption, or downtime has occurred, using this mechanism has the risk of misjudgment and causes reduced availability and performance. If network failure has never occurred, it is not recommended to enable this parameter.
 
 ## raftstore
 
