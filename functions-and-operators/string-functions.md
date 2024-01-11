@@ -116,7 +116,7 @@ SELECT BIT_LENGTH("TiDB");
 +----------+
 | BIT_LENGTH("TiDB") |
 +----------+
-| 8 (T) + 8 (i) + 8 (D) + 8 (B) = 40 bits |
+| 8 (T) + 8 (i) + 8 (D) + 8 (B) = 32 bits |
 +----------+
 ```
 
@@ -129,7 +129,7 @@ SELECT CustomerName, BIT_LENGTH(CustomerName) AS BitLengthOfName FROM Customers;
 ```
 
 ```sql
-SELECT BIT_LENGTH("PingCap 123")
+SELECT BIT_LENGTH("PingCap 123");
 +----------+
 | BIT_LENGTH("PingCap 123") |
 +----------+
@@ -181,17 +181,19 @@ SELECT CHAR(128);
 +------------+
 |  CHAR(128) |
 +------------+
-|       Ç |
+|       0x80 |
 +------------+
 ```
 
 ```sql
 /* For Unicode: */
 
-SELECT CHAR(233);
+--skip-binary-as-hex
+
+SELECT CHAR(50089);
 
 +------------+
-|  CHAR(233) |
+|  CHAR(50089) |
 +------------+
 |   é |
 +------------+
