@@ -125,4 +125,4 @@ You can see a combo chart below:
 
 ## Need help?
 
-Ask questions on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [create a support ticket](/support.md).
+Ask questions on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [create a support ticket](https://support.pingcap.com/).
