@@ -26,11 +26,11 @@ You can troubleshoot the issue by following these steps:
 You can troubleshoot the issue by following these steps:
 
 1. Whether the [TiProxy limitations](/tiproxy/tiproxy-overview.md#limitations) are not met. You can further confirm this by checking the TiProxy log.
-2. Whether [`security.session-token-signing-cert`](/tidb-configuration-file.md#session-token-signing-cert), [`security.session-token-signing-key`](/tidb-configuration-file.md#session-token-signing-key), and [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) are correctly configured on TiDB.
+2. Whether [`security.session-token-signing-cert`](/tidb-configuration-file.md#session-token-signing-cert-new-in-v640), [`security.session-token-signing-key`](/tidb-configuration-file.md#session-token-signing-key-new-in-v640), and [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) are correctly configured on TiDB.
 
 ## Unbalanced CPU usage on TiDB server
 
-Check if the number of connections on TiDB server is balanced. If not, troubleshoot by following the [TiProxy does not migrate connections](#TiProxy-does-not-migrate-connections) section.
+Check if the number of connections on TiDB server is balanced. If not, troubleshoot by following the [TiProxy does not migrate connections](#tiproxy-does-not-migrate-connections) section.
 
 If the number of connections is balanced, it might be that some connections occupy a high CPU usage while other connections are relatively idle. TiProxy balances connections based on the number of connections on the TiDB server, not the actual load.
 

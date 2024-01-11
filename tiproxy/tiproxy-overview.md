@@ -67,7 +67,7 @@ This section describes how to deploy and change TiProxy using TiUP. For how to d
 
     When using TiProxy, you also need to configure the following items for the TiDB instances:
 
-    - Configure the [`security.session-token-signing-cert`](/tidb-configuration-file.md#session-token-signing-cert) and [`security.session-token-signing-key`](/tidb-configuration-file.md#session-token-signing-key) of TiDB instances to the path of the certificate. Otherwise, the connection cannot be migrated.
+    - Configure the [`security.session-token-signing-cert`](/tidb-configuration-file.md#session-token-signing-cert-new-in-v640) and [`security.session-token-signing-key`](/tidb-configuration-file.md#session-token-signing-key-new-in-v640) of TiDB instances to the path of the certificate. Otherwise, the connection cannot be migrated.
     - Configure the [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) of TiDB instances to a value greater than the longest transaction duration of the application. Otherwise, the client might disconnect when the TiDB server is offline. For details, see [TiProxy usage limitations](#limitations).
 
     A configuration example is as follows:
