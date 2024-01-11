@@ -28,6 +28,11 @@ If this option is not specified, the output default template contains the follow
 - Outputs a detailed topology template that is commented with configurable parameters. To enable this option, add it to the command.
 - If this option is not specified, the simple topology template is output by default.
 
+### --local
+
+- Outputs a simple topology template for local cluster which can used directly, parameter `global` can be modify by user needed.
+- This template will create PD service, TiDB service, TiKV service, monitoring service and Gfafana service.
+
 ### --multi-dc
 
 - Outputs the topology template of multiple data centers. To enable this option, add it to the command.
