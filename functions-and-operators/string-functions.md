@@ -166,6 +166,7 @@ SELECT CHAR(84);
 |        T |
 +------------+
 ```
+
 > **Note:**
 >
 > The `CHAR()` function can also be used to get the corresponding character values of ASCII values that extend beyond the standard ASCII range (0 - 127). It can also get the corresponding character value of a unicode value.
