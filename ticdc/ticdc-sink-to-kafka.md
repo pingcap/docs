@@ -173,7 +173,7 @@ region="us-west-1"
 registry-name="ticdc-test"
 access-key="xxxx"
 secret-access-key="xxxx"
-tokne="xxxx"
+token="xxxx"
 ```
 In the above configuration, `region` and `registry-name` are required fields, while `access-key`, `secret-access-key`, and `token` are optional fields. The best practice is to set the AWS credentials as environment variables or store them in the `~/.aws/credentials` file instead of setting them in the changefeed configuration file.
 
