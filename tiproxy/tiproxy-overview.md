@@ -169,16 +169,16 @@ TiProxy requires that the connector used by the client supports [authentication 
 
 The following table lists some supported connectors:
 
-| Connector               | The minimum supported version |
-|-------------------------|------------|
-| MySQL Connector/J       | 5.1.19     |
-| libmysqlclient          | 5.5.7      |
-| Go SQL Driver           | 1.4.0      |
-| MySQL Connector/Node.js | 1.0.2      |
-| mysqljs/mysql           | 2.15.0     |
-| node-mysql2             | 1.0.0-rc-6 |
-| PHP | mysqlnd                 | 5.4        |
-| MySQL Connector/Python  | 1.0.7      |
-| PyMySQL                 | 0.7        |
+| Language   | Connector              | The minimum supported version |
+|------------|------------------------|------------------------------|
+| Java       | MySQL Connector/J      | 5.1.19                       |
+| C          | libmysqlclient         | 5.5.7                        |
+| Go         | Go SQL Driver          | 1.4.0                        |
+| JavaScript | MySQL Connector/Node.js | 1.0.2                        |
+| JavaScript | mysqljs/mysql          | 2.15.0                       |
+| JavaScript | node-mysql2            | 1.0.0-rc-6                   |
+| PHP        | mysqlnd                | 5.4                          |
+| Python     | MySQL Connector/Python | 1.0.7                        |
+| Python     | PyMySQL                | 0.7                          |
 
 Note that some connectors call the common library to connect to the database, and these connectors are not listed in the table. You can refer to the above table for the required version of the corresponding library. For example, MySQL/Ruby uses libmysqlclient to connect to the database, so it requires that the libmysqlclient used by MySQL/Ruby is version 5.5.7 or later.
