@@ -64,7 +64,7 @@ To get started with Data Service, you can also create your own Data App, and the
 4. (Optional) To automatically deploy endpoints of the Data App to your preferred GitHub repository and branch, enable **Connect to GitHub**, and then do the following:
 
     1. Click **Install on GitHub**, and then follow the on-screen instructions to install **TiDB Cloud Data Service** as an application on your target repository.
-    2. Click **Authorize** to authorize access to the application on GitHub.
+    2. Go back to TiDB Cloud, then click **Authorize** to authorize access to the application on GitHub.
     3. Specify the target repository, branch, and directory where you want to save the configuration files of your Data App.
 
     > **Note:**
