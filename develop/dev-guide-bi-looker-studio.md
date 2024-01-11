@@ -26,10 +26,9 @@ To complete this tutorial, you need:
 
 ## Import Dataset
 
-<SimpleTab>
-
 You can use the S&P 500 dataset provided as an Interactive Tutorial of TiDB Serverless. 
 
+<SimpleTab>
 <div label="TiDB Serverless">
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and click the question mark icon in the bottom-right corner. A Help dialog is displayed. 
@@ -41,6 +40,7 @@ You can use the S&P 500 dataset provided as an Interactive Tutorial of TiDB Serv
 4. After the status changed to **Imported**, you can close this dialog. Click the **Exit Tutorial** button in the bottom-left corner of the dialog. 
 
 </div>
+</SimpleTab>
 
 ## Connect to TiDB cluster
 
@@ -94,13 +94,15 @@ If the authentication succeeds, you can see tables in the database.
     >
     > If you have created a password before, use the original password or click **Regenerate** to generate a new one.
 
-4. Click **Apply** to close the dialog.
-   
-5. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+4. Allow access from Looker Studio by adding `142.251.74.0/23` to **IP Address**, then click **Add to IP list**.
 
-6. Click **Allow Access from Anywhere(Insecure)**.
+    > **Tip:**
+    >
+    > For more details about the connection from Looker Studio, refer to [Connect to MySQL](https://support.google.com/looker-studio/answer/7088031#zippy=%2Cin-this-article).
 
-    For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
+5. Click **Apply** to close the dialog.
+
+6. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
 7. You can download CA File with the link under **Step 2**. 
 
