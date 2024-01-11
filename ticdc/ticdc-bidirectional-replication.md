@@ -69,7 +69,7 @@ Non-replicable DDLs include:
 
 - `DROP DATABASE`
 - `DROP TABLE`
-- `ADD COLUMN`: the column is `null` and does not have a `default value`
+- `ADD COLUMN`: the column is `not null` and does not have a `default value`
 - `DROP COLUMN`
 - `ADD UNIQUE INDEX`
 - `TRUNCATE TABLE`
