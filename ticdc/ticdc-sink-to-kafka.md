@@ -157,7 +157,7 @@ dispatchers = [
 
 For detailed integration guide, see [Quick Start Guide on Integrating TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md).
 
-### Integrate TICDC with AWS Glue Schema Registry
+### Integrate TiCDC with AWS Glue Schema Registry
 
 Starting from v7.4.0, TiCDC supports using the [AWS Glue Schema Registry](https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html) as the Schema Registry when users choose the Avro protocol for data synchronization. The configuration example is as follows:
 
