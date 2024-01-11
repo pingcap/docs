@@ -241,7 +241,7 @@ sasl-oauth-audience = "kafka"
 # registry-name="ticdc-test"
 # access-key="xxxx"
 # secret-access-key="xxxx"
-# tokne="xxxx"
+# token="xxxx"
 
 # The following parameters take effect only when the downstream is Pulsar.
 [sink.pulsar-config]
