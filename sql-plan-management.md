@@ -486,16 +486,16 @@ SHOW binding_cache status;
 
 ## Cross-database binding
 
-In the SQL statement used to create a binding, TiDB supports cross-database binding using the wildcard `*` to represent a database. This feature is introduced in v7.6.0. To use the cross-database binding feature, you need to first enable the [`tidb_opt_enable_fuzzy_binding`](/system-variables.md#tidb_opt_enable_fuzzy_binding-new-in-v760) system variable.
+Starting from v7.6.0, you can create cross-database bindings in TiDB by using the wildcard `*` to represent a database name in the binding creation syntax. Before creating cross-database bindings, you need to first enable the [`tidb_opt_enable_fuzzy_binding`](/system-variables.md#tidb_opt_enable_fuzzy_binding-new-in-v760) system variable.
 
-You can use cross-database binding to simplify the process of fixing execution plans in scenarios where data is categorized and stored across different databases, and each database maintains identical object definitions and executes similar application logic. The following are some common use cases:
+You can use cross-database bindings to simplify the process of fixing execution plans in scenarios where data is categorized and stored across different databases, and each database maintains identical object definitions and executes similar application logic. The following are some common use cases:
 
-* When you run SaaS or PaaS services on TiDB, where the data of each tenant is stored in separate databases for easier data maintenance and management.
-* When you performed database sharding in a single instance and retained the original database schema after migrating to TiDB, that is, the data in the original instance is categorized and stored by database.
+* When you run SaaS or PaaS services on TiDB, where the data of each tenant is stored in separate databases for easier data maintenance and management
+* When you performed database sharding in a single instance and retained the original database schema after migrating to TiDB, that is, the data in the original instance is categorized and stored by database
 
-In these scenarios, cross-database binding can effectively mitigate SQL performance issues caused by uneven distribution and rapid changes in user data and workload. SaaS providers can use cross-database binding to fix execution plans validated by applications with large data volumes, thereby avoiding potential performance issues due to the rapid growth of applications with small data volumes.
+In these scenarios, cross-database binding can effectively mitigate SQL performance issues caused by uneven distribution and rapid changes in user data and workload. SaaS providers can use cross-database bindings to fix execution plans validated by applications with large data volumes, thereby avoiding potential performance issues due to the rapid growth of applications with small data volumes.
 
-To use cross-database binding, you only need to use `*` to represent the database name when creating a binding. For example:
+To create a cross-database binding, you only need to use `*` to represent the database name when creating a binding. For example:
 
 ```sql
 CREATE GLOBAL BINDING USING SELECT /*+ use_index(t, a) */ * FROM t; -- Create a GLOBAL scope standard binding.
@@ -514,9 +514,9 @@ The output is as follows:
 +----------------------------+---------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+-----------------+--------+------------------------------------------------------------------+-------------+
 ```
 
-In the `SHOW GLOBAL BINDINGS` output, the `Default_db` field value of a cross-database binding is empty, and the database name in the `Original_sql` and `Bind_sql` fields is represented as `*`. This binding applies to all `select * from t` queries, not just in a specific database.
+In the `SHOW GLOBAL BINDINGS` output, the `Default_db` field value of a cross-database binding is empty, and the database name in the `Original_sql` and `Bind_sql` fields is represented as `*`. This binding applies to `select * from t` queries in all databases, not just in a specific database.
 
-For the same query, both cross-database and standard bindings can coexist. TiDB matches bindings in the following order: SESSION-level standard bindings > SESSION-level cross-database bindings > GLOBAL-level standard bindings > GLOBAL-level cross-database bindings.
+For the same query, both cross-database and standard bindings can coexist. TiDB matches bindings in the following order: SESSION scope standard bindings > SESSION scope cross-database bindings > GLOBAL scope standard bindings > GLOBAL scope cross-database bindings.
 
 Apart from the creation syntax, cross-database bindings share the same deletion and status change syntax as standard bindings. The following is a detailed usage example.
 
