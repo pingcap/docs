@@ -33,4 +33,4 @@ PingCAP does not send any bills and invoices to MSP customers.
 
 ## Check your history bills
 
-If you have migrated from a direct TiDB Cloud account to an MSP customer account, you can view your history bills prior to the migration by visiting **Billing** > **Bills** in the TiDB Cloud console.
+If you have migrated from a direct TiDB Cloud account to an MSP customer account, you can view your history bills prior to the migration by visiting **Billing** > **Bills** > **History** in the TiDB Cloud console.

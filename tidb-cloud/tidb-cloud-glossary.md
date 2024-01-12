@@ -75,9 +75,9 @@ Starting from v5.0, TiDB introduces Massively Parallel Processing (MPP) architec
 
 A managed service provider (MSP) customer is an end customer who purchases TiDB Cloud and pays invoices through the MSP channel. This is distinguished from a [direct customer](#direct-customer).
 
-### MSP Partner
+### Managed Service Provider (MSP)
 
-A managed service provider (MSP) partner is a partner who resells TiDB Cloud and provides value-added services, including but not limited to TiDB Cloud organization management, billing services, and technical support.
+A managed service provider (MSP) is a partner who resells TiDB Cloud and provides value-added services, including but not limited to TiDB Cloud organization management, billing services, and technical support.
 
 ## N
 
