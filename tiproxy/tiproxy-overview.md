@@ -77,31 +77,35 @@ This section describes how to deploy and change TiProxy using TiUP. For how to d
       tidb:
         security.session-token-signing-cert: "/var/sess/cert.pem"
         security.session-token-signing-key: "/var/sess/key.pem"
+        security.ssl-ca: "/var/ssl/ca.pem"
+        security.ssl-cert: "/var/ssl/cert.pem"
+        security.ssl-key: "/var/ssl/key.pem"
         graceful-wait-before-shutdown: 15
     ```
 
 3. Configure the TiProxy instances.
 
-    To ensure the high availability of TiProxy, it is recommended to deploy at least two TiProxy instances. You can use hardware load balancers or configure virtual IP to distribute traffic to each TiProxy instance.
+    To ensure the high availability of TiProxy, it is recommended to deploy at least two TiProxy instances. You can use hardware load balancers to distribute traffic to each TiProxy instance, or configure virtual IP to route the traffic to available TiProxy instances.
 
     When selecting the model and number of TiProxy instances, consider the following factors:
 
     - For the workload type and maximum QPS, see [TiProxy Performance Test Report](/tiproxy/tiproxy-performance-test.md).
     - Because the number of TiProxy instances is less than that of TiDB servers, the network bandwidth of TiProxy is more likely to become a bottleneck than that of TiDB servers. Therefore, you also need to consider the network bandwidth. For example, in AWS, the baseline network bandwidth of the same series of EC2 is not proportional to the number of CPU cores. For details, see [Network performance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/compute-optimized-instances.html#compute-network-performance). In such cases, when the network bandwidth becomes a bottleneck, splitting the TiProxy instance into more and smaller instances can improve QPS.
 
-    It is recommended to enable TLS connections within the cluster to avoid data leakage between TiProxy and TiDB server.
+    It is recommended to specify the version number of TiProxy in the topology configuration so that TiProxy will not be upgraded when you upgrade the TiDB cluster through [`tiup cluster upgrade`](/tiup/tiup-component-cluster-upgrade.md). Otherwise, the client connection might be disconnected during TiProxy upgrade.
 
     To configure TiProxy configuration items, see [TiProxy configuration](/tiproxy/tiproxy-configuration.md).
 
     A configuration example is as follows:
 
     ```yaml
-    global:
-      enable_tls: true
+    component_versions:
+      tiproxy: "v0.2.0"
     server_configs:
       tiproxy:
-        proxy.addr: "0.0.0.0:6000"
-        api.addr: "0.0.0.0:3080"
+        security.server-tls.ca: "/var/ssl/ca.pem"
+        security.server-tls.cert: "/var/ssl/cert.pem"
+        security.server-tls.key: "/var/ssl/key.pem"
     ```
 
 4. Start the cluster.
@@ -117,6 +121,22 @@ This section describes how to deploy and change TiProxy using TiUP. For how to d
 To ensure that TiProxy keeps the client connection, do not restart TiProxy unless necessary. Therefore, most of the TiProxy configuration items can be modified online. For the list of configuration items that support online change, see [TiProxy configuration](/tiproxy/tiproxy-configuration.md).
 
 When using TiUP to change the TiProxy configuration, if the configuration item to be changed supports online change, you can use the [`--skip-restart`](/tiup/tiup-component-cluster-reload.md#--skip-restart) option to avoid restarting TiProxy.
+
+### Upgrade TiProxy
+
+When you deploy TiProxy, it is recommended to specify the version of TiProxy so that TiProxy will not be upgraded when you upgrade the TiDB cluster.
+
+If you need to upgrade TiProxy, add [`--tiproxy-version`](/tiup/tiup-component-cluster-upgrade.md) in the upgrade command to specify the version of TiProxy:
+
+```shell
+tiup cluster upgrade <cluster-name> <version> --tiproxy-version <tiproxy-version>
+```
+
+### Restart the TiDB cluster
+
+When you restart the TiDB cluster using [`tiup cluster restart`](/tiup/tiup-component-cluster-restart.md), TiDB server is not rolling restarted, which causes the client connection to be disconnected. Therefore, avoid using this command.
+
+Instead, when you upgrade the cluster using [`tiup cluster upgrade`](/tiup/tiup-component-cluster-upgrade.md) or update the configuration using [`tiup cluster reload`](/tiup/tiup-component-cluster-reload.md), TiDB server is rolling restarted, so the client connection is not affected.
 
 ## Compatibility with other components
 

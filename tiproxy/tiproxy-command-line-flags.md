@@ -16,21 +16,7 @@ This section lists the flags of the server program `tiproxy`.
 + Specifies the path of the TiProxy configuration file.
 + Type: `string`
 + Default: `""`
-+ You must specify the configuration file. For detailed configuration items, refer to [Configure TiProxy](/tiproxy/tiproxy-configuration.md).
-
-### `--log_encoder`
-
-+ Specifies the log format of TiProxy.
-+ Type: `string`
-+ Default: `""`
-+ Fall back to the same format as TiDB when empty.
-
-### `--log_level`
-
-+ Specifies the log level of TiProxy.
-+ Type: `string`
-+ Default: `""`
-+ Fall back to `"info"` when empty.
++ You must specify the configuration file. For detailed configuration items, refer to [Configure TiProxy](/tiproxy/tiproxy-configuration.md). Note that TiProxy automatically reloads the configuration when the configuration file is modified. Therefore, do not directly modify the configuration file. It is recommended to modify the configuration by executing [`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md) or [`kubectl edit tc`](https://docs.pingcap.com/tidb-in-kubernetes/stable/modify-tidb-configuration).
 
 ## TiProxy control
 
