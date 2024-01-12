@@ -139,11 +139,11 @@ SELECT BIT_LENGTH("PingCap 123");
 +----------+
 ```
 
-8 bits per character (space is counted as it is non-alphanumeric character) x 11 characters = 88 bits
+8 bits per character (space is counted as it is a non-alphanumeric character) x 11 characters = 88 bits
 
 > **Note:**
 >
-> The second example operates under the assumption that there is a database with a record titled `Customers` and a field inside titled `CustomerName`
+> The second example operates under the assumption that there is a database with a row titled `Customers` and a column inside titled `CustomerName`
 
 ### [`CHAR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char)
 
