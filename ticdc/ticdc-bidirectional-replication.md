@@ -46,7 +46,7 @@ Replicable DDLs include:
 
 - `CREATE DATABASE`
 - `CREATE TABLE`
-- `ADD COLUMN`: the column must be `not null` or have a `default value`
+- `ADD COLUMN`: the column can be `null`, or has `not null` and `default value` at the same time
 - `ADD NON-UNIQUE INDEX`
 - `DROP INDEX`
 - `MODIFY COLUMN`: can only modify the `default value` and `comment` of the column
