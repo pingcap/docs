@@ -73,7 +73,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | `INSERT ON DUPLICATE KEY UPDATE` | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | `LOAD DATA INFILE` | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | `SELECT INTO OUTFILE` | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| `INNER JOIN`, LEFT\|RIGHT [OUTER] JOIN | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| `INNER JOIN`, <code>LEFT\|RIGHT [OUTER] JOIN</code> | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | `UNION`, `UNION ALL` | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [`EXCEPT` and `INTERSECT` operators](/functions-and-operators/set-operators.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | N |
 | `GROUP BY`, `ORDER BY` | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
@@ -250,7 +250,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Runaway Queries management](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries) | E | N | N | N | N | N | N | N | N | N |
 | [Background tasks management](/tidb-resource-control.md#manage-background-tasks) | E | N | N | N | N | N | N | N | N | N |
 | [TiFlash Disaggregated Storage and Compute Architecture and S3 Support](/tiflash/tiflash-disaggregated-and-s3.md) | Y | E | N | N | N | N | N | N | N | N |
-| [Selecting TiDB nodes for the distributed framework tasks](/system-variables.md#tidb_service_scope-new-in-v740) | Y | N | N | N | N | N | N | N | N | N |
+| [Selecting TiDB nodes for the Distributed eXecution Framework (DXF) tasks](/system-variables.md#tidb_service_scope-new-in-v740) | Y | N | N | N | N | N | N | N | N | N |
 
 [^1]: TiDB incorrectly treats latin1 as a subset of utf8. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
 
