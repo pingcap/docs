@@ -161,7 +161,6 @@ For detailed integration guide, see [Quick Start Guide on Integrating TiDB with 
 
 Starting from v7.4.0, TiCDC supports using the [AWS Glue Schema Registry](https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html) as the Schema Registry when users choose the Avro protocol for data replication. The configuration example is as follows:
 
-
 ```shell
 ./cdc cli changefeed create --server=127.0.0.1:8300 --changefeed-id="kafka-glue-test" --sink-uri="kafka://127.0.0.1:9092/topic-name?&protocol=avro&replication-factor=3" --config changefeed_glue.toml
 ```
