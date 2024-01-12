@@ -177,7 +177,7 @@ To deploy the endpoint, perform the following steps:
 
 2. Click **Deploy** to confirm the deployment. You will get the **Endpoint has been deployed** prompt if the endpoint is successfully deployed.
 
-    In the left pane, click the name of your Data App. You can click the **Deployments** tab to view the deployed history.
+    To view the deployment history, you can click the name of your Data App in the left pane, and then click the **Deployments** tab on the right pane.
 
 ### Step 5. Call the endpoint
 
