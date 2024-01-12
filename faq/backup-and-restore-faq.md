@@ -297,7 +297,7 @@ Note that even if you configures [table filter](/table-filter.md#syntax), **BR d
 
 ### How to deal with the error of `cannot find rewrite rule` when at restoration?
 
-Please examine whether there are tables in the recovery cluster sharing the same name as other tables in the backup data but having inconsistent structures. This issue often arises due to missing indexes in the tables of the recovery cluster. A recommended approach is to delete such tables in the recovery cluster first and then proceed with the restoration.
+Examine whether there are tables in the restoration cluster sharing the same name as other tables in the backup data but having inconsistent structures. In most cases, this issue is caused by missing indexes in the tables of the restoration cluster. A recommended approach is to delete such tables in the restoration cluster first and then retry restoration.
 
 ## Other things you may want to know about backup and restore
 
