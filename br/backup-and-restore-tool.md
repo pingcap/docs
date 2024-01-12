@@ -170,7 +170,7 @@ Currently, the following methods are supported to use BR:
 
 - Use the command-line tool
 - Use SQL statements
-- Use BR In the Kubernetes environment
+- Use BR in the Kubernetes environment
 
 #### Use the command-line tool
 
