@@ -19,22 +19,22 @@ Currently, TiDB clusters of the same project in the same region are created in t
 >
 > To connect your application to TiDB Cloud, you can also set up [private endpoint connection](/tidb-cloud/set-up-private-endpoint-connections.md) with TiDB Cloud, which is secure and private, and does not expose your data to the public internet. It is recommended to use private endpoints over VPC peering connections.
 
-## Prerequisite: Set a CIDR for this region
+## Prerequisite: Set a CIDR for a region
 
 CIDR (Classless Inter-Domain Routing) is the CIDR block used for creating VPC for TiDB Dedicated clusters.
 
-Before adding VPC Peering requests to a region, you must set a CIDR for the region and create the initial TiDB Dedicated cluster in that region. Once the first Dedicated cluster is created, the VPC of the cluster will be created, allowing you to establish a peering link to your application's VPC.
+Before adding VPC Peering requests to a region, you must set a CIDR for that region and create an initial TiDB Dedicated cluster in that region. Once the first Dedicated cluster is created, TiDB Cloud will create the VPC of the cluster, allowing you to establish a peering link to your application's VPC.
 
-You can set the CIDR when creating the first Dedicated cluster. If you want to set the CIDR before creating the cluster, perform the following operations:
+You can set the CIDR when creating the first TiDB Dedicated cluster. If you want to set the CIDR before creating the cluster, perform the following operations:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
 3. On the **Project Settings** page of your project, click **Network Access** in the left navigation pane, and then click the **Project CIDR** tab.
-4. Click **Create CIDR**, then click **AWS CIDR** or **Google Cloud CIDR** according to your cloud provider. Specify the Region and CIDR value in the **Create AWS CIDR** or **Create Google Cloud CIDR** window, and then click **Confirm**.
+4. Click **Create CIDR**, and then click **AWS CIDR** or **Google Cloud CIDR** according to your cloud provider. Specify the region and CIDR value in the **Create AWS CIDR** or **Create Google Cloud CIDR** window, and then click **Confirm**.
 
     > **Note:**
     >
-    > To avoid any conflicts with the CIDR of the VPC where your application is located, you need to set a different project CIDR in this field. It is recommended to configure an IP range size between /16 and /23. The following network addresses are supported:
+    > To avoid any conflicts with the CIDR of the VPC where your application is located, you need to set a different project CIDR in this field. It is recommended to configure an IP range size between `/16` and `/23`. Supported network addresses include:
 
     - 10.0.0.0 - 10.255.255.255 (10/8 prefix)
     - 172.16.0.0 - 172.31.255.255 (172.16/12 prefix)
