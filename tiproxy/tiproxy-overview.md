@@ -85,7 +85,7 @@ This section describes how to deploy and change TiProxy using TiUP. For how to d
 
 3. Configure the TiProxy instances.
 
-    To ensure the high availability of TiProxy, it is recommended to deploy at least two TiProxy instances. You can use hardware load balancers to distribute traffic to each TiProxy instance, or configure virtual IP to route the traffic to available TiProxy instances.
+    To ensure the high availability of TiProxy, it is recommended to deploy at least two TiProxy instances. You can use hardware load balancers to distribute traffic to each TiProxy instance, or configure virtual IP to route the traffic to the available TiProxy instance.
 
     When selecting the model and number of TiProxy instances, consider the following factors:
 
@@ -134,9 +134,9 @@ tiup cluster upgrade <cluster-name> <version> --tiproxy-version <tiproxy-version
 
 ### Restart the TiDB cluster
 
-When you restart the TiDB cluster using [`tiup cluster restart`](/tiup/tiup-component-cluster-restart.md), TiDB server is not rolling restarted, which causes the client connection to be disconnected. Therefore, avoid using this command.
+When you restart the TiDB cluster using [`tiup cluster restart`](/tiup/tiup-component-cluster-restart.md), TiDB servers are not rolling restarted, which causes the client connection to be disconnected. Therefore, avoid using this command.
 
-Instead, when you upgrade the cluster using [`tiup cluster upgrade`](/tiup/tiup-component-cluster-upgrade.md) or update the configuration using [`tiup cluster reload`](/tiup/tiup-component-cluster-reload.md), TiDB server is rolling restarted, so the client connection is not affected.
+Instead, when you upgrade the cluster using [`tiup cluster upgrade`](/tiup/tiup-component-cluster-upgrade.md) or reload the configuration using [`tiup cluster reload`](/tiup/tiup-component-cluster-reload.md), TiDB servers are rolling restarted, so the client connection is not affected.
 
 ## Compatibility with other components
 
