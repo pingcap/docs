@@ -43,7 +43,7 @@ This section introduces the configuration of a replication task.
 # memory-quota = 1073741824
 
 # Specifies whether the database names and tables in the configuration file are case-sensitive.
-# Starting from v7.5.0, the default value changes from true to false.
+# Starting from v6.5.6, v7.1.3, and v7.5.0, the default value changes from true to false.
 # This configuration item affects configurations related to filter and sink.
 case-sensitive = false
 
@@ -64,7 +64,7 @@ case-sensitive = false
 # Note: This configuration item only takes effect if the downstream is TiDB.
 # sync-point-retention = "1h"
 
-# Specifies the SQL mode used when parsing DDL statements. Multiple modes are separated by commas.
+# Starting from v6.5.6, v7.1.3, and v7.5.0, this configuration item specifies the SQL mode used when parsing DDL statements. Multiple modes are separated by commas.
 # The default value is the same as the default SQL mode of TiDB.
 # sql-mode = "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
 
