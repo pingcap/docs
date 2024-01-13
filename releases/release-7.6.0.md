@@ -264,6 +264,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
+| [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640) | Modified | Changes the default value from `1` to `128` after further tests.  |
 | [`tidb_analyze_distsql_scan_concurrency`](/system-variables.md#tidb_analyze_distsql_scan_concurrency-new-in-v760)       |    Newly added       |    Sets the concurrency of the `scan` operation when executing the `ANALYZE` operation. The default value is `4`.  | 
 | [`tidb_ddl_version`](/system-variables.md#tidb_ddl_version-new-in-v760)  |  Newly added  | Controls whether to enable [TiDB DDL V2](/ddl-v2.md). Set the value to `2` to enable it and `1` to disable it. The default value is `1`. When TiDB DDL V2 is enabled, DDL statements will be executed using TiDB DDL V2. The execution speed of DDL statements for creating tables is increased by 10 times compared with TiDB DDL V1. |
 | [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760)  |  Newly added   | Controls whether to support creating `Global indexes` for partitioned tables. The default value is `OFF`. `Global index` is currently in the development stage. **It is not recommended to modify the value of this system variable**. |
@@ -293,7 +294,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
 ## Deprecated features
 
-* 实验特性 [执行计划的自动演进绑定](https://docs.pingcap.com/zh/tidb/stable/sql-plan-management#%E8%87%AA%E5%8A%A8%E6%BC%94%E8%BF%9B%E7%BB%91%E5%AE%9A-baseline-evolution) 将在 v8.0.0 被废弃，等同的功能将会在后续版本被重新设计。
+* The [baseline evolution](/sql-plan-management.md#baseline-evolution) feature for execution plans will be deprecated in TiDB v8.0.0. The equivalent functionality will be redesigned in the subsequent versions.
+* The [`tidb_disable_txn_auto_retry`](/system-variables.md#tidb_disable_txn_auto_retry) system variable will be deprecated in TiDB v8.0.0. After that, TiDB will no longer support automatic retries of optimistic transactions.
 
 * 废弃功能 2
 
