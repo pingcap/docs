@@ -163,11 +163,66 @@ Insert a substring at the specified position up to the specified number of chara
 
 ### [`INSTR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_instr)
 
-Return the index of the first occurrence of substring.
+The `INSTR(str, substr)` function is used to get the index of the first occurrence of the second given argument `substr` 
+in the first given argument `str`.
+Each argument can be either a string or a number.
+This function is the same as the two-argument version of [`LOCATE(substr, str)`](https://docs.pingcap.com/tidb/dev/string-functions#locate), but with the order of the arguments reversed.
+
+> **Note:**
+>
+> `INSTR(str, substr)` is case sensitive since TiDB uses binary collations, which differs from MySQL.
+
+- If either argument is a number, the function treats the number as a string.
+- If `substr` is not in `str`, the function returns 0; otherwise, it returns the index of the first occurrence
+of `substr` in `str`.
+- If either argument is NULL, the function returns NULL.
+
+Examples:
+
+```sql
+SELECT INSTR("pingcap.com", "tidb");
+
++------------------------------+
+| INSTR("pingcap.com", "tidb") |
++------------------------------+
+|                            0 |
++------------------------------+
+```
+
+```sql
+SELECT INSTR("pingcap.com/tidb", "tidb");
+
++-----------------------------------+
+| INSTR("pingcap.com/tidb", "tidb") |
++-----------------------------------+
+|                                13 |
++-----------------------------------+
+```
+
+```sql
+SELECT INSTR("pingcap.com/tidb", "TiDB");
+
++-----------------------------------+
+| INSTR("pingcap.com/tidb", "TiDB") |
++-----------------------------------+
+|                                 0 |
++-----------------------------------+
+```
+
+```sql
+SELECT INSTR(0123, "12");
+
++-------------------+
+| INSTR(0123, "12") |
++-------------------+
+|                 1 |
++-------------------+
+```
 
 ### [`LCASE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lcase)
 
-Synonym for `LOWER()`.
+The `LCASE(str)` function is a synonym for [`LOWER(str)`](https://docs.pingcap.com/tidb/dev/string-functions#lower), 
+which returns the given argument `str` with all characters changed to lowercase. 
 
 ### [`LEFT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_left)
 
@@ -187,7 +242,34 @@ Return the position of the first occurrence of substring.
 
 ### [`LOWER()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lower)
 
-Return the argument in lowercase.
+The `LOWER(str)` function is used to convert the given argument `str` with all characters changed to lowercase.
+The argument can be either a string or a number.
+
+- If the argument is a string, the function returns the string in lowercase.
+- If the argument is a number, the function returns the number without leading zeros.
+- If the argument is NULL, the function returns NULL.
+
+Examples:
+
+```sql
+SELECT LOWER("TiDB");
+
++---------------+
+| LOWER("TiDB") |
++---------------+
+| tidb          |
++---------------+
+```
+
+```sql
+SELECT LCASE(-012);
+
++-------------+
+| LCASE(-012) |
++-------------+
+| -12         |
++-------------+
+```
 
 ### [`LPAD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lpad)
 
