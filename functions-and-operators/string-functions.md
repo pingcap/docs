@@ -262,10 +262,10 @@ SELECT LOWER("TiDB");
 ```
 
 ```sql
-SELECT LCASE(-012);
+SELECT LOWER(-012);
 
 +-------------+
-| LCASE(-012) |
+| LOWER(-012) |
 +-------------+
 | -12         |
 +-------------+
