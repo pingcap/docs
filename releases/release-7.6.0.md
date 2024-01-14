@@ -328,7 +328,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
 + PD
 
-    <!--tw@hfxsd 1 条-->
+    <!--tw@ran-huang 1 条-->
     - 提升 PD TSO 在磁盘抖动时的可用性 [#7377](https://github.com/tikv/pd/issues/7377) @[HuSharp](https://github.com/HuSharp)
 
 + TiFlash
@@ -358,12 +358,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
     + TiDB Data Migration (DM)
 
-        <!--tw@hfxsd 1 条-->
+        <!--tw@ran-huang 1 条-->
         - 为 DM OpenAPI 增加了全量导入物理导入相关配置 [#10193](https://github.com/pingcap/tiflow/issues/10193) @[GMHDBJD](https://github.com/GMHDBJD)
 
     + TiDB Lightning
 
-        <!--tw@ran-huang 2 条-->
+        <!--tw@hfxsd 2 条-->
         - 支持配置多个 PD 地址增强稳定性 [#49515](https://github.com/pingcap/tidb/issues/49515) @[mittalrishabh](https://github.com/mittalrishabh)
         - 支持配置 lightning 内部 IO 操作大小提升性能 [#45037](https://github.com/pingcap/tidb/issues/45037) @[mittalrishabh](https://github.com/mittalrishabh)
 
