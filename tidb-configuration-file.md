@@ -426,15 +426,15 @@ Configuration items related to security.
 
 ### `session-token-signing-cert` <span class="version-mark">New in v6.4.0</span>
 
-+ Cert file path, which is used by TiProxy for session migration.
++ The certificate file path, which is used by TiProxy for session migration.
 + Default value: ""
-+ Empty value will fail TiProxy session migration. To enable session migration, all TiDB nodes must set this to the same cert and key. That is, you should store the same cert and key on every TiDB node.
++ Empty value will cause TiProxy session migration to fail. To enable session migration, all TiDB nodes must set this to the same cert certificate and key. This means that you should store the same certificate and key on every TiDB node.
 
 ### `session-token-signing-key` <span class="version-mark">New in v6.4.0</span>
 
-+ Key file path, which is used by TiProxy for session migration.
++ The key file path, which is used by TiProxy for session migration.
 + Default value: ""
-+ Refer descriptions of `session-token-signing-cert`.
++ Refer to the descriptions of [`session-token-signing-cert`](#session-token-signing-cert-new-in-v640).
 
 ## Performance
 
