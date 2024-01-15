@@ -46,7 +46,7 @@ Users can disable the public endpoint of a TiDB Serverless cluster to prevent co
 
 3. Click **Disable** in the confirmation dialog.
 
-After disabling, the **Public** entry in the **Endpoint Type** drop-down list in the connect pane is disabled. If users are still trying to access the cluster from Public Endpoint, an error will be returned.
+After disabling, the `Public` entry in the **Endpoint Type** drop-down list in the connect pane is disabled. If users are still trying to access the cluster from public endpoint, an error will be returned.
 
 > **Note:**
 >
