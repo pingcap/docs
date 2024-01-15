@@ -172,8 +172,8 @@ loaders:
     # range-concurrency: 16
     # Only available for physical import mode. Whether to enable compression when sending KV data to TiKV. Currently, only Gzip compression is supported and can be specified using either "gzip" or "gz". Compression is not enabled by default.
     # compress-kv-pairs: ""
-    # One or more PD server addresses. If no address is specified, use the PD address information from the TiDB query by default. Starting from v7.6.0, TiDB supports setting multiple PD addresses.
-    # pd-addr = "172.16.31.4:2379,56.78.90.12:3456"
+    # One or more PD server addresses. If no address is specified, use the PD address information from the TiDB query by default.
+    # pd-addr: "192.168.0.1:2379"
 
 # Configuration arguments of the sync processing unit.
 syncers:
