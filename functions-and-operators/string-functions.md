@@ -313,6 +313,7 @@ This function is multi-byte safe and is case-sensitive only if at least one argu
 These examples' collation is `utf8mb4_bin` except specify explicitly.
 
 ```sql
+SET collation_connection='utf8mb4_bin';
 SHOW VARIABLES LIKE 'collation_connection';
 +----------------------+-------------+
 | Variable_name        | Value       |
