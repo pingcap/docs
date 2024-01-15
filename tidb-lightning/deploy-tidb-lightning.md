@@ -108,8 +108,8 @@ Refer to the [Download TiDB Tools](/download-ecosystem-tools.md) document to dow
     password = ""
     # Table schema information is fetched from TiDB via this status-port.
     status-port = 10080
-    # An address of pd-server.Starting from v7.6.0, TiDB supports setting multiple PD addresses.
-    pd-addr = "172.16.31.4:2379,56.78.90.12:3456"
+    # An address of pd-server.
+    pd-addr = "172.16.31.4:2379"
     ```
 
     The above only shows the essential settings. See the [Configuration](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global) section for the full list of settings.
