@@ -13,7 +13,7 @@ This document describes how to manage custom domains in your Data App.
 
 Before configuring a custom domain for your Data App, note the following:
 
-- Custom domain requests exclusively support HTTPS for security. Once you successfully configure a custom domain, a Let's Encrypt certificate is automatically applied.
+- Custom domain requests exclusively support HTTPS for security. Once you successfully configure a custom domain, a "Let's Encrypt" certificate is automatically applied.
 - Your custom domain must be unique with the TiDB Cloud Data Service.
 - You can configure only one custom domain for each default domain, which is determined by the region of your cluster.
 
