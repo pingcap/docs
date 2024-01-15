@@ -5,7 +5,9 @@ summary: Learn how to connect to your TiDB Serverless cluster via public endpoin
 
 # Connect to TiDB Serverless via Public Endpoint
 
-This document describes how to connect to your TiDB Serverless cluster via a public endpoint, using a SQL client from your computer.
+This document describes how to connect to your TiDB Serverless cluster via a public endpoint, using a SQL client from your computer, as well as how to disable a public endpoint.
+
+## Connect via a public endpoint
 
 > **Tip:**
 >
