@@ -117,6 +117,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
     For more information, see [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-indexes).
 
+* Support periodic full compaction (experimental) [#12729](https://github.com/tikv/tikv/issues/12729) **tw@Oreoxmt** <!--1610-->
+
+    Starting from v7.6.0, TiDB supports periodic full compaction for TiKV. This feature serves as enhancement to Garbage Collection (GC) to eliminate redundant data versions. In scenarios where application activity shows obvious peaks and valleys, you can use this feature to perform data compaction during idle periods to improve the performance during peak periods.
+
+    You can set the specific times that TiKV initiates periodic full compaction by configuring the TiKV configuration item [`periodic-full-compact-start-times`](/tikv-configuration-file.md#periodic-full-compact-start-times-new-in-v760) and limit the maximum CPU usage rate for TiKV periodic full compaction by configuring [`periodic-full-compact-start-max-cpu`](/tikv-configuration-file.md#periodic-full-compact-start-max-cpu-new-in-v760). The default value of `periodic-full-compact-start-max-cpu` is 100%, which means that periodic full compaction is triggered only when the CPU utilization of TiKV is lower than one CPU core, thereby reducing the impact on application traffic.
+
+    For more information, see [documentation](/tikv-configuration-file.md#periodic-full-compact-start-times-new-in-v760).
+
 ### Reliability
 
 * Cross-database execution plan binding [#48875](https://github.com/pingcap/tidb/issues/48875) @[qw4990](https://github.com/qw4990) **tw@Oreoxmt** <!--1613-->
