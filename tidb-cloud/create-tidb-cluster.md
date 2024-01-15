@@ -65,7 +65,7 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
         > **Note:**
         >
-        > - TiDB Cloud will create a VPC with this CIDR when the first cluster in this region is created. All the subsequent clusters created will use this VPC.
+        > - TiDB Cloud will create a VPC with this CIDR when the first cluster in this region is created. All the subsequent clusters of the same project in this region will use this VPC.
         > - When setting the CIDR, avoid any conflicts with the CIDR of the VPC where your application is located. You cannot modify your CIDR once the VPC is created.
 
 4. Confirm the cluster and billing information on the right side.
