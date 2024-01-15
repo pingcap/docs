@@ -176,10 +176,10 @@ Return the leftmost number of characters as specified.
 * usage: LEFT(`str`, `len`)
     * len: length of character to return
     * str: original string to extract characters
-* if `len` is equal or less than 0, the function returns empty string
+* if `len` is equal or less than 0, the function returns empty string.
+* If `len` is greater than the length of `str`, the function returns the length of `str`. 
 * function is multibyte safe.
 * If any argument is `NULL`, the function returns `NULL`.
-* If `len` is greater than the length of `str`, the function returns `str`.
 
 Examples:
 
