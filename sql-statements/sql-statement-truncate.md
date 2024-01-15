@@ -17,7 +17,7 @@ TruncateTableStmt ::=
     "TRUNCATE" ( "TABLE" )? TableName
 
 TableName ::=
-    ("Identifier" ".")? "Identifier"
+    (Identifier ".")? Identifier
 ```
 
 ## Examples
