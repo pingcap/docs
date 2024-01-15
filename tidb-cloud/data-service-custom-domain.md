@@ -1,27 +1,27 @@
 ---
 title: Custom Domain in Data Service
-summary: Learn how to add and delete a custom domain for a Data App.
+summary: Learn how to use a custom domain to access your Data App in TiDB Cloud Data Service.
 ---
 
 # Custom Domain in Data Service
 
-Custom Domain enables you to replace the TiDB Cloud Data Serivce provided default domain with your own one. 
-Additionally, you have the flexibility to customize the default URL path according to your preferences. 
+TiDB Cloud Data Service provides a default domain `<region>.data.tidbcloud.com` to access each Data App's endpoints. For enhanced personalization and flexibility, you can configure a custom domain for your Data App instead of using the default domain.
 
 This document describes how to manage custom domains in your Data App.
 
+## Before you begin
 
-## Custom domain overview
+Before configuring a custom domain for your Data App, note the following:
 
-- Custom domain requests exclusively support HTTPS. Once you successfully configure your custom domain, a Let's Encrypt certificate will be automatically applied for enhanced security.
-- Custom domains need to be unique within TiDB Cloud Data Service.
-- You can configure a custom domain for each default domain. The default domain is determined by the region of your cluster.
+- Custom domain requests exclusively support HTTPS for security. Once you successfully configure a custom domain, a Let's Encrypt certificate is automatically applied.
+- Your custom domain must be unique with the TiDB Cloud Data Service.
+- You can configure only one custom domain for each default domain, which is determined by the region of your cluster.
 
 ## Manage custom domains
 
-The following sections describe how to add and delete a custom domain for a Data App.
+The following sections describe how to create and remove a custom domain for a Data App.
 
-### Add a custom domain
+### Create a custom domain
 
 To create a custom domain for a Data App, perform the following steps:
 
@@ -29,31 +29,29 @@ To create a custom domain for a Data App, perform the following steps:
 2. In the left pane, click the name of your target Data App to view its details.
 3. In the **Manage Custom Domain** area, click **Add Custom Domain**.
 4. In the **Add Custom Domain** dialog box, do the following:
-    1. Select the default domain you wish to replace.
+    1. Select the default domain you want to replace.
     2. Enter your desired custom domain name.
-    3. (Optional) Configure custom path. This will be the prefix for your endpoints. If left empty, the default path is used.
-5. Preview your Base URL to ensure it meets your expectations. If everything looks correct, click **Save**.
-6. The **DNS Settings** dialog box is displayed. Then you need to add the default domain as a `CNAME` record to your DNS.
+    3. Optional: configure a custom path as the prefix for your endpoints. If **Custom Path** is left empty, the default path is used.
+5. Preview your **Base URL** to ensure it meets your expectations. If it looks correct, click **Save**.
+6. Follow the instructions in the **DNS Settings** dialog to add a `CNAME` record for the default domain in your DNS provider.
 
-After setting up your custom domain, it will initially be in a **Pending** status as the system validates your DNS settings.
-Once the DNS validation is successful, the status of your custom domain will change to **Success**.
+The custom domain is in a **Pending** status initially while the system validates your DNS settings. Once the DNS validation is successful, the status of your custom domain will update to **Success**.
 
 > **Note:**
 >
 > Depending on your DNS provider, it might take up to 24 hours for the DNS record to be validated.
 
-Once your custom domain status changes to **Success**, you will be able to access your endpoint using the new custom domain and path. 
-You can refer to [Call an endpoint](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint) to see how to find the code example. 
-The domain name and path in the code example will be automatically updated to the custom domain when it's status reaches **Success**.
+After your custom domain status is set to **Success**, you can use it to access your endpoint. The code example provided by TiDB Cloud Data Service is automatically updated to your custom domain and path. For more information, see [Call an endpoint](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint).
 
-### Delete a custom domain
+### Remove a custom domain
 
 > **Note:**
 >
-> Before you delete a custom domain, make sure the custom domain is not used anymore.
+> Before you delete a custom domain, make sure that the custom domain is not used anymore.
 
-To delete a custom domain for a Data App, perform the following steps:
+To remove a custom domain for a Data App, perform the following steps:
+
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
-3. In the **Manage Custom Domain** area, locate the Action column, and then click **Delete** in the custom domain row that you want to delete.
+3. In the **Manage Custom Domain** area, locate the **Action** column, and then click **Delete** in the custom domain row that you want to delete.
 4. In the displayed dialog box, confirm the deletion.
