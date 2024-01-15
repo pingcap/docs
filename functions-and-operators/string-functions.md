@@ -179,6 +179,7 @@ Return the leftmost number of characters as specified.
 * if `len` is equal or less than 0, the function returns empty string
 * function is multibyte safe.
 * If any argument is `NULL`, the function returns `NULL`.
+* If `len` is greater than the length of `str`, the function returns `str`.
 
 Examples:
 
