@@ -230,7 +230,7 @@ SELECT CustomerName, CHAR_LENGTH(CustomerName) AS LenghtOfName FROM Customers;
 
 > **Note:**
 >
-> The second example operates under the assumption that there is a database with a row titled `Customers` and a column inside titled `CustomerName`
+> The second example operates under the assumption that there is a [database](https://www.w3schools.com/sql/trymysql.asp?filename=trysql_func_mysql_char_length2) with a row in it titled `Customers` and a column inside the row titled `CustomerName`
 
 ### [`CHARACTER_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_character-length)
 
