@@ -221,7 +221,7 @@ SELECT INSTR(0123, "12");
 
 ### [`LCASE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lcase)
 
-The `LCASE(str)` function is a synonym for [`LOWER(str)`](https://docs.pingcap.com/tidb/dev/string-functions#lower), 
+The `LCASE(str)` function is a synonym for [`LOWER(str)`](/functions-and-operators/string-functions.md#lower), 
 which returns the given argument `str` with all characters changed to lowercase. 
 
 ### [`LEFT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_left)
