@@ -170,7 +170,7 @@ This function is the same as the two-argument version of [`LOCATE(substr, str)`]
 
 > **Note:**
 >
-> `INSTR(str, substr)` is case sensitive since [TiDB uses binary collations by default](/character-set-and-collation.md), which differs from MySQL.
+> `INSTR(str, substr)` is case-sensitive by default, since [TiDB defaults to using binary collations](/character-set-and-collation.md), which differs from MySQL.
 
 - If either argument is a number, the function treats the number as a string.
 - If `substr` is not in `str`, the function returns 0; otherwise, it returns the index of the first occurrence
