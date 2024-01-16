@@ -38,25 +38,25 @@ To connect to a TiDB Serverless cluster via public endpoint, take the following 
 
 ## Disable a public endpoint
 
-If you do not need to use a public endpoint of a TiDB Serverless cluster, you can disable it to prevent connection from the Internet:
+If you do not need to use a public endpoint of a TiDB Serverless cluster, you can disable it to prevent connections from the internet:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
-2. Click **Networking** in the left navigation bar and click **Disable** in the right pane. A confirmation dialog is displayed.
+2. Click **Networking** in the left navigation pane and click **Disable** in the right pane. A confirmation dialog is displayed.
 
 3. Click **Disable** in the confirmation dialog.
 
-After disabling, the `Public` entry in the **Endpoint Type** drop-down list in the connect pane is disabled. If users are still trying to access the cluster from public endpoint, an error will be returned.
+After disabling the public endpoint, the `Public` entry in the **Endpoint Type** drop-down list of the connect dialog is disabled. If users are still trying to access the cluster from the public endpoint, they will get an error.
 
 > **Note:**
 >
-> Disabling the public endpoint does not affect existing connections. It only prevents new connections from the Internet.
+> Disabling the public endpoint does not affect existing connections. It only prevents new connections from the internet.
 
 You can re-enable the public endpoint after disabling it:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
-2. Click **Networking** in the left navigation bar and click **Enable** in the right pane.
+2. Click **Networking** in the left navigation pane and click **Enable** in the right pane.
 
 ## What's next
 
