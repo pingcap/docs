@@ -30,7 +30,7 @@ If this option is not specified, the output default template contains the follow
 
 ### --local
 
-- Outputs a simple topology template for the  local cluster, which can be used directly, and the `global` parameter can be adjusted as needed.
+- Outputs a simple topology template for the local cluster, which can be used directly, and the `global` parameter can be adjusted as needed.
 - This template creates a PD service, a TiDB service, a TiKV service, a monitoring service, and a Grafana service.
 
 ### --multi-dc
