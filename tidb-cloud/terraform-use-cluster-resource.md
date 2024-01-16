@@ -267,7 +267,7 @@ In the results:
 
 > **Note:**
 >
-> Before you begin, make sure that you have set a Project CIDR in the TiDB Cloud console. For more information, see [Set a Project CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr).
+> Before you begin, make sure that you have set a CIDR in the TiDB Cloud console. For more information, see [Set a CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region).
 
 You can create a cluster using the `tidbcloud_cluster` resource.
 

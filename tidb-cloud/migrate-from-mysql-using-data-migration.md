@@ -120,7 +120,7 @@ If your MySQL service is in an AWS VPC, take the following steps:
 
 2. Modify the inbound rules of the security group that the MySQL service is associated with.
 
-    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the inbound rules. Doing so allows the traffic to flow from your TiDB cluster to the MySQL instance.
+    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) to the inbound rules. Doing so allows the traffic to flow from your TiDB cluster to the MySQL instance.
 
 3. If the MySQL URL contains a DNS hostname, you need to allow TiDB Cloud to be able to resolve the hostname of the MySQL service.
 
@@ -140,7 +140,7 @@ If your MySQL service is in a Google Cloud VPC, take the following steps:
 
 3. Modify the ingress firewall rules of the VPC where MySQL is located.
 
-    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the ingress firewall rules. This allows the traffic to flow from your TiDB cluster to the MySQL endpoint.
+    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) to the ingress firewall rules. This allows the traffic to flow from your TiDB cluster to the MySQL endpoint.
 
 </details>
 
