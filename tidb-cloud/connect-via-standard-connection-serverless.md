@@ -42,7 +42,7 @@ If you do not need to use a public endpoint of a TiDB Serverless cluster, you ca
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
-2. Click **Networking** in the left navigation bar and click **Disable** in right pane. A confirmation dialog is displayed.
+2. Click **Networking** in the left navigation bar and click **Disable** in the right pane. A confirmation dialog is displayed.
 
 3. Click **Disable** in the confirmation dialog.
 
@@ -56,7 +56,7 @@ You can re-enable the public endpoint after disabling it:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
-2. Click **Networking** in the left navigation bar and click **Enable** in right pane.
+2. Click **Networking** in the left navigation bar and click **Enable** in the right pane.
 
 ## What's next
 
