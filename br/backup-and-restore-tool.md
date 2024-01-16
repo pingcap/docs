@@ -166,20 +166,11 @@ The following are some recommended operations for using BR for backup and restor
 
 ### How to use BR
 
-Currently, the following methods are supported to run the BR tool:
+Currently, the following methods are supported to use BR:
 
-- Use SQL statements
 - Use the command-line tool
-- Use BR In the Kubernetes environment
-
-#### Use SQL statements
-
-In TiDB v4.0.2 and later versions, you can run the BR tool using SQL statements.
-
-For detailed operations, see the following documents:
-
-- [Backup syntax](/sql-statements/sql-statement-backup.md#backup)
-- [Restore syntax](/sql-statements/sql-statement-restore.md#restore)
+- Use SQL statements
+- Use BR in the Kubernetes environment
 
 #### Use the command-line tool
 
@@ -188,6 +179,19 @@ In TiDB versions above v3.1, you can run the BR tool using the command-line tool
 First, you need to download the binary file of the BR tool. See [download link](/download-ecosystem-tools.md#br-backup-and-restore).
 
 For how to use the command-line tool to perform backup and restore operations, see [Use the BR command-line tool](/br/use-br-command-line-tool.md).
+
+#### Use SQL statements
+
+> **Warning:**
+>
+> The `BACKUP` statement is still an experimental feature. It is **NOT** recommended that you use it in the production environment. This feature is subject to change or removal without notice. If you find a bug, please [report it on GitHub](/support.md).
+
+In TiDB v4.0.2 and later versions, you can run the BR tool using SQL statements.
+
+For detailed operations, see the following documents:
+
+- [Backup syntax](/sql-statements/sql-statement-backup.md#backup)
+- [Restore syntax](/sql-statements/sql-statement-restore.md#restore)
 
 #### In the Kubernetes environment
 
