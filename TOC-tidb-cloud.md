@@ -285,7 +285,7 @@
   - [Billing for Changefeed](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
   - [Billing for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md)
 - Managed Service Provider
-  - [MSP Partner](/tidb-cloud/managed-service-provider-partner.md)
+  - [Managed Service Provider](/tidb-cloud/managed-service-provider.md)
   - [MSP Customer](/tidb-cloud/managed-service-provider-customer.md)
 - API
   - [API Overview](/tidb-cloud/api-overview.md)
