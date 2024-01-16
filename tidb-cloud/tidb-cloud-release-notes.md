@@ -8,6 +8,29 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
+## January 16, 2024
+
+**General changes**
+
+- Enhance CIDR configuration for projects.
+
+    - You can directly set a region-level CIDR for each project.
+    - You can choose your CIDR configurations from a broader range of CIDR values.
+
+    Note: The previous global-level CIDR settings for projects are retired, but all existing regional CIDR in active state remain unaffected. There will be no impact on the network of existing clusters.
+
+    For more information, see [Set a CIDR for a region](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr).
+
+- TiDB Serverless users now have the capability to disable public endpoints for your clusters.
+
+    For more information, see [Disable a Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md#disable-a-public-endpoint).
+
+- [Data Service (beta)](https://tidbcloud.com/console/data-service) supports configuring a custom domain to access endpoints in a Data App.
+
+    By default, TiDB Cloud Data Service provides a domain `<region>.data.tidbcloud.com` to access each Data App's endpoints. For enhanced personalization and flexibility, you can now configure a custom domain for your Data App instead of using the default domain. This feature enables you to use branded URLs for your database services and enhances security.
+
+    For more information, see [Custom domain in Data Service](/tidb-cloud/data-service-custom-domain.md).
+
 ## January 3, 2024
 
 **General changes**
