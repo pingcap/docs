@@ -210,6 +210,16 @@ SELECT INSTR("pingcap.com/tidb", "TiDB");
 ```
 
 ```sql
+SELECT INSTR("pingcap.com/tidb" COLLATE utf8mb4_general_ci, "TiDB");
+
++--------------------------------------------------------------+
+| INSTR("pingcap.com/tidb" COLLATE utf8mb4_general_ci, "TiDB") |
++--------------------------------------------------------------+
+|                                                           13 |
++--------------------------------------------------------------+
+```
+
+```sql
 SELECT INSTR(0123, "12");
 
 +-------------------+
