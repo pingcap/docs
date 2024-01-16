@@ -108,3 +108,7 @@ show config where type = 'tikv' and name like '%enable-compaction-filter%';
 | tikv | 172.16.5.35:20163 | gc.enable-compaction-filter | true  |
 +------+-------------------+-----------------------------+-------+
 ```
+
+> **Note：**
+>
+> The compaction filter may delay the entries to be deleted in some cases, which could lead to performance regression in TiKV scan. And if `next` or `prev` in [`Coprocessor Details->Total Ops Details`](/grafana-tikv-dashboard.md###Coprocessor-Detail) are far more (3x+) than `processed_keys`, then it's recommended to disable compaction filter to speed up the GC. In TiDB 7.1.3 or newer version, TiDB would check each region's redundent version count[`region-compact-min-redundant-rows`](/tikv-configuration-file.md###region-compact-min-redundant-rows) and ratio[`region-compact-redundant-rows-percent`](/tikv-configuration-file.md###region-compact-redundant-rows-percent) to automatic trigger compaction, which would greatly mitigate the issue. And therefore in TiDB 7.1.3 or newer version, it's recommended to tune these parameters instead of disabling compaction filter.
