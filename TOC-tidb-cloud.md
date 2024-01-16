@@ -288,7 +288,10 @@
 - API
   - [API Overview](/tidb-cloud/api-overview.md)
   - API Reference
-    - [v1beta1](https://docs.pingcap.com/tidbcloud/api/v1beta1)
+    - v1beta1
+      - [API Key](https://docs.pingcap.com/tidbcloud/api/v1beta1/apikey)
+      - [Billing](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
+      - [MSP](https://docs.pingcap.com/tidbcloud/api/msp/v1beta1)
     - [v1beta](https://docs.pingcap.com/tidbcloud/api/v1beta)
 - Integrations
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
