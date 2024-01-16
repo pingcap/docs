@@ -156,6 +156,7 @@ Decode to a base-64 string and return result.
 ### [`HEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_hex)
 
 Return a hexadecimal representation of a decimal or string value.
+
 - For a string argument `HEX(str)` returns a hexadecimal string representation of `str` where each byte of each character in `str` is converted to two hexadecimal digits. For example `a` in a UTF-8 or ASCII character set is encoded as a byte with a binary value of 00111101 or 61 in hexadecimal notation.
 - The inverse of this operation is performed by the [`UNHEX()`](/functions-and-operators/string-functions.md#unhex) function.
 - For a numeric argument `HEX(n)` returns a hexadecimal string representation of the value of `n` treated as a longlong (`BIGINT`) number. This is equivalent to [`CONV(n, 10, 16)`](/functions-and-operators/numeric-functions-and-operators#mathematical-functions).
