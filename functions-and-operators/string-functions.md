@@ -166,7 +166,7 @@ Insert a substring at the specified position up to the specified number of chara
 The `INSTR(str, substr)` function is used to get the index of the first occurrence of the second given argument `substr` 
 in the first given argument `str`.
 Each argument can be either a string or a number.
-This function is the same as the two-argument version of [`LOCATE(substr, str)`](https://docs.pingcap.com/tidb/dev/string-functions#locate), but with the order of the arguments reversed.
+This function is the same as the two-argument version of [`LOCATE(substr, str)`](/functions-and-operators/string-functions.md#locate), but with the order of the arguments reversed.
 
 > **Note:**
 >
