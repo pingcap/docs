@@ -238,6 +238,8 @@ To learn more about the inconsistency error and how to bypass the check, see [Tr
 
 ### 4.3 The client reports the `server is busy` error
 
+Since TiDB 5.2 version, TiKV has introduced flow control mechanism to replace the write stall mechanism in RocksDB. flow control is enabled by default, which will automatically disable the write stall mechanism in KvDB, as well as the all those in RaftDB except for memtable. Therefore, client will no longer receive the `server is busy` error message. If you still encounter the error, please check your flow control settings first. We suggest enable flow control by default. for more information about the settings, refer to [flow-control settings](https://docs.pingcap.com/zh/tidb/stable/tikv-configuration-file#storageflow-control). Here below we keep the original `server is busy` troubleshooting instructions for references.
+
 Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV** -> **errors**. `server is busy` is caused by the flow control mechanism of TiKV, which informs `tidb/ti-client` that TiKV is currently under too much pressure and will retry later.
 
 - 4.3.1 TiKV RocksDB encounters `write stall`.
