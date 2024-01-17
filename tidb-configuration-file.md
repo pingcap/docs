@@ -444,7 +444,7 @@ Configuration items related to security.
 
 ### `session-token-signing-key` <span class="version-mark">New in v6.4.0</span>
 
-+ The key file path used by [TiProxy](/tiproxy/tiproxy-overview.md) for session migration.
++ The key file path used by [TiProxy](https://docs.pingcap.com/tidb/v7.6/tiproxy-overview) for session migration.
 + Default value: ""
 + Refer to the descriptions of [`session-token-signing-cert`](#session-token-signing-cert-new-in-v640).
 
