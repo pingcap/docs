@@ -1316,7 +1316,7 @@ Configuration items related to Titan.
 ### `enabled`
 
 + Enables or disables Titan.
-+ Default value:  In TiDB 7.6.0 or newer version, the default value is `true` in newly created cluster. In other cases, it's `false`. So if you upgrade to TiDB 7.6.0 from older TiBD version, it would keep the original setting if it's set explictly or be false if it's not set. 
++ Default value: for v7.5.0 and earlier versions, the default value is `false`. Starting from v7.6.0, the default value is `true` for only new clusters. Existing clusters upgraded to v7.6.0 or later versions will retain the original configuration.
 
 ### `dirname`
 
@@ -1612,7 +1612,7 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 
 + The compression algorithm used in a Blob file
 + Optional values: `"no"`, `"snappy"`, `"zlib"`, `"bzip2"`, `"lz4"`, `"lz4hc"`, `"zstd"`
-+ Default value: `"lz4"`
++ Default value: `"zstd"`
 
 > **Note:**
 >
@@ -1620,9 +1620,9 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 
 ### `zstd-dict-size`
 
-+ The zstd compression dictionary size. By default it's `0KB` which means zstd compression is based on single value, while RocksDB's comression unit is block (32KB size by default). So when zstd dictionary compression is off and the average value is less than 32KB, Titan's compression ratio is smaller than RocksDB. Using Json data as an example, Titan store size could be 30% to 50% more than RocksDB size. Users could set zstd-dict-size (e.g. 16KB) to enable zstd dictionary compression which can achieve similar compression ratio of RocksDB. Though, zstd dictionary compression can lead to 10% performance regression. 
++ The zstd dictionary compression size. The default value is `"0KB"`, which means to disable the zstd dictionary compression. In this case, Titan's compression is based on single values, but RocksDB compression is based on blocks (`32KB` by default). When the average size of Titan values is less than `32KB`, Titan's compression ratio is smaller than RocksdDB. Taking JSON as an example, Titan store size can be 30% to 50% bigger than RocksDB. The actual compression ratio depends on the value content and the similiarity among different values. You can set `zstd-dict-size` (for example, set it to `16KB`) to enable the zstd dictionary compression to increase the compression ratio. The actual store size can be lower than RocksDB. But the zstd dictionary compression can lead to about 10% throughput regression in a typical read-write workload.
 + 
-+ Default value: "0KB"`
++ Default value: `"0KB"`
 + Unit: KB|MB|GB 
 
 ### `blob-cache-size`
@@ -1630,7 +1630,7 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 + The cache size of a Blob file
 + Default value: `"0GB"`
 + Minimum value: `0`
-+ Recommended value: After TiKv runs for a while, set the RocksDB block cache (`storage.block-cache.capacity`) to have 95%+ block cache hit rate. Then the `blob-cache-size` is set with `total memory size * 50% - block cache size`. Block cache hit rate is more important than blob cache hit rate. If `storage.block-cache.capacity` is too small, the overall performance would not be good due to low block cache hit rate.  
++ Recommended value: It is recommended that after the database has stabilized, set the RocksDB block cache (`storage.block-cache.capacity`) to just above 95% of the Block Cache hit rate based on monitoring, and `blob-cache-size` to `(total memory size) * 50% - (size of block cache)`. This is to ensure that the block cache is large enough to cache the entire RocksDB, while keeping the blob cache as large as possible. However, do not set the value of the blob cache too large. Otherwise the block cache hit rate will drop significantly.
 + Unit: KB|MB|GB
 
 ### `min-gc-batch-size`
