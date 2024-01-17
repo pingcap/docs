@@ -1613,9 +1613,13 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 ### `min-blob-size`
 
 + The smallest value stored in a Blob file. Values smaller than the specified size are stored in the LSM-Tree.
-+ Default value: `"1KB"`
++ Default value: `"32KB"`
 + Minimum value: `0`
 + Unit: KB|MB|GB
+
+> **Warning:**
+>
+> When the value is set less than `32KB`, the TiKV scan performance may have regression comparing with RocksDB. But if the workload is more about point get or heavy write, the `min-blob-size` can be tuned to as low as `1KB`. And therefore, starting from v7.6.0, the default value for newly create cluster is `32KB`, but to keep the behavior consistent for upgraded clusters, this parameter will keep the old version's default  `1KB` when it's not explictly set in configuration file.
 
 ### `blob-file-compression`
 

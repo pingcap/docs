@@ -74,6 +74,10 @@ To adjust Titan-related parameters using TiUP, refer to [Modify the configuratio
     [rocksdb.defaultcf.titan]
     min-blob-size = "1KB"
     ```
+    
+> **Warning:**
+>
+> When the value is set less than `32KB`, the TiKV scan performance may have regression comparing with RocksDB. But if the workload is more about point get or heavy write, the `min-blob-size` can be tuned to as low as `1KB`. And therefore, starting from v7.6.0, the default value for newly create cluster is `32KB`, but to keep the behavior consistent for upgraded clusters, this parameter will keep the old version's default  `1KB` when it's not explictly set in configuration file.
 
 + The algorithm used for compressing values in Titan, which takes value as the unit. Starting from TiDB v7.6.0, the default compression algorithm is `zstd`.
 
