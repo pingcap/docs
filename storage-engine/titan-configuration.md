@@ -68,7 +68,7 @@ To adjust Titan-related parameters using TiUP, refer to [Modify the configuratio
 
 + Value size threshold.
 
-    When the size of the value written to the foreground is smaller than the threshold, this value is stored in RocksDB; otherwise, this value is stored in the blob file of Titan. Based on the distribution of value sizes, if you increase the threshold, more values are stored in RocksDB and TiKV performs better in reading small values. If you decrease the threshold, more values go to Titan, which further reduces RocksDB compactions. According to the [test](/storage-engine/titan-overview.md#performance-implications-of-min-blob-size), 1 KB is a balanced threshold that has far better write throughput with about 10% scan throughput regression compared with RocksDB. 
+    When the size of the value written to the foreground is smaller than the threshold, this value is stored in RocksDB; otherwise, this value is stored in the blob file of Titan. Based on the distribution of value sizes, if you increase the threshold, more values are stored in RocksDB and TiKV performs better in reading small values. If you decrease the threshold, more values go to Titan, which further reduces RocksDB compactions. According to the [test](/storage-engine/titan-overview.md#performance-implications-of-min-blob-size), `32 KB` is a conservative threshold that has better write throughput without scan throughput regression compared with RocksDB. If you want further improve write performance and meanwhile accept scan performance regression, the value can be adjust to `1 KB`。
 
     ```toml
     [rocksdb.defaultcf.titan]
@@ -86,7 +86,7 @@ To adjust Titan-related parameters using TiUP, refer to [Modify the configuratio
     blob-file-compression = "zstd"
     ```
 
-+ By default, `zstd-dict-size` is `0KB`, which means Titan's compression is based on single values. But RocksDB compression is based on blocks (`32KB` by default). When the average size of Titan values is less than `32KB`, Titan's compression ratio is smaller than RocksdDB. Taking JSON as an example, Titan store size can be 30% to 50% bigger than RocksDB. The actual compression ratio depends on the value content and the similiarity among different values. You can set `zstd-dict-size` (for example, set it to `16KB`) to enable the zstd dictionary compression to increase the compression ratio. Though the zstd dictionary compression can achieve similar compression ratio of RocksDB, it can lead to about 10% throughput regression in a typical read-write workload.
++ By default, `zstd-dict-size` is `0KB`, which means Titan's compression is based on single values. But RocksDB compression is based on blocks (`32KB` by default). When the average size of Titan values is less than `32KB`, Titan's compression ratio is smaller than RocksdDB. Taking JSON as an example, Titan store size can be 30% to 50% bigger than RocksDB. The actual compression ratio depends on the value content and the similiarity among different values. You can set `zstd-dict-size` (for example, set it to `16KB`) to enable the zstd dictionary compression to increase the compression ratio. Though the zstd dictionary compression can achieve similar compression ratio of RocksDB, it can lead to about 10% throughput regression in some read-write workloads.
 
     ```toml
     [rocksdb.defaultcf.titan]
