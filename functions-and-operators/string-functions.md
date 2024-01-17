@@ -163,10 +163,7 @@ Insert a substring at the specified position up to the specified number of chara
 
 ### [`INSTR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_instr)
 
-The `INSTR(str, substr)` function is used to get the index of the first occurrence of the second given argument `substr` 
-in the first given argument `str`.
-Each argument can be either a string or a number.
-This function is the same as the two-argument version of [`LOCATE(substr, str)`](/functions-and-operators/string-functions.md#locate), but with the order of the arguments reversed.
+The `INSTR(str, substr)` function is used to get the index of the first occurrence of the second given argument `substr` in the first given argument `str`. Each argument can be either a string or a number. This function is the same as the two-argument version of [`LOCATE(substr, str)`](/functions-and-operators/string-functions.md#locate), but with the order of the arguments reversed.
 
 > **Note:**
 >
@@ -231,8 +228,7 @@ SELECT INSTR(0123, "12");
 
 ### [`LCASE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lcase)
 
-The `LCASE(str)` function is a synonym for [`LOWER(str)`](/functions-and-operators/string-functions.md#lower), 
-which returns the given argument `str` with all characters changed to lowercase. 
+The `LCASE(str)` function is a synonym for [`LOWER(str)`](/functions-and-operators/string-functions.md#lower), which returns the given argument `str` with all characters changed to lowercase. 
 
 ### [`LEFT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_left)
 
@@ -252,8 +248,7 @@ Return the position of the first occurrence of substring.
 
 ### [`LOWER()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lower)
 
-The `LOWER(str)` function is used to convert the given argument `str` with all characters changed to lowercase.
-The argument can be either a string or a number.
+The `LOWER(str)` function is used to convert the given argument `str` with all characters changed to lowercase. The argument can be either a string or a number.
 
 - If the argument is a string, the function returns the string in lowercase.
 - If the argument is a number, the function returns the number without leading zeros.
