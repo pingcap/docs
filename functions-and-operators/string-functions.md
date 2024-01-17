@@ -170,8 +170,7 @@ The `INSTR(str, substr)` function is used to get the index of the first occurren
 > `INSTR(str, substr)` is case-sensitive by default, since [TiDB defaults to using binary collations](/character-set-and-collation.md), which differs from MySQL.
 
 - If either argument is a number, the function treats the number as a string.
-- If `substr` is not in `str`, the function returns 0; otherwise, it returns the index of the first occurrence
-of `substr` in `str`.
+- If `substr` is not in `str`, the function returns 0; otherwise, it returns the index of the first occurrence of `substr` in `str`.
 - If either argument is NULL, the function returns NULL.
 
 Examples:
