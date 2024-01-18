@@ -4,6 +4,7 @@ summary: Learn how to become a Managed Service Provider (MSP).
 ---
 
 # Managed Service Provider
+The Managed Service Partner Program is designed to create and support a close working relationship between PingCAP and our partners, to the benefit of our common customers. 
 
 A managed service provider (MSP) is a partner who resells TiDB Cloud and provides value-added services, including but not limited to TiDB Cloud organization management, billing services, and technical support.
 
