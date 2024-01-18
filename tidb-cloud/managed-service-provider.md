@@ -20,7 +20,7 @@ If you are interested in the MSP program and would like to join as a partner, [c
 - Company name
 - Company contact email
 - Company official website URL
-- Company Logo (one SVG file for light mode and one SVG file for dark mode, Horizontal logo with 256 x 48 pixels is preferred
+- Company logo (one SVG file for light mode and one SVG file for dark mode. Horizontal logo with 256 x 48 pixels is preferred)
 
 We will carefully evaluate your request and get back to you soon.
 
