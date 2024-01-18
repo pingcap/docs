@@ -9,7 +9,7 @@ A Managed Service Provider (MSP) customer is a customer who uses the TiDB Cloud 
 
 Compared to the direct TiDB Cloud customer, there are several differences for sign-up and invoice payment:
 - The MSP customer needs to signup TiDB Cloud account from MSP dedicated sign-up page
-- The MSP customer pays invoices through the MSP channel, instead of pay to PingCAP
+- The MSP customer pays invoices through the MSP channel, instead of pay from PingCAP
 
 Other daily operations on TiDB Cloud console are the same for both direct TiDB Cloud customers and MSP customers.
 
