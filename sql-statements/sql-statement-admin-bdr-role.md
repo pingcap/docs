@@ -28,7 +28,7 @@ AdminUnsetBDRRoleStmt ::=
 
 ## Examples
 
-By default, a TiDB cluster has no BDR role. Run the folloiwng command to show the BDR role of the cluster.
+By default, a TiDB cluster has no BDR role. Run the following command to show the BDR role of the cluster.
 
 ```sql
 ADMIN SHOW BDR ROLE;
