@@ -106,7 +106,7 @@ When no BDR role is set, you can execute any DDL. But after you set `bdr_mode=tr
 
 > **Note:**
 >
-> To prevent misoperations:
+> To prevent misuse:
 >
 > - If you try to execute **non-replicable DDLs** on the primary cluster, you will get the [Error 8263](/error-codes.md).
 > - If you try to execute **replicable DDLs** or **non-replicable DDLs** on the secondary clusters, you will get the [Error 8263](/error-codes.md).
