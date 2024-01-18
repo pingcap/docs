@@ -339,24 +339,24 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 + TiKV
 
     <!--tw@ran-huang 4 条-->
-    - 增加查询异步任务的API endpoint `/async_tasks`. [#15759](https://github.com/tikv/tikv/issues/15759) @[YuJuncen](https://github.com/YuJuncen)
-    - 给grpc监控增加优先级的标签，从而显示资源管理中的各个不同优先级的资源组的数据 @[bufferflies](https://github.com/bufferflies)
-    - 支持动态调整参数`readpool.unified.max-tasks-per-worker`的值；支持根据优先级单独核算正在运行的任务数 [#16026](https://github.com/tikv/tikv/issues/16026) @[glorv](https://github.com/glorv)
-    - 支持动态可调的GC线程数，默认值是1。[#16101](https://github.com/tikv/tikv/issues/16101) @[tonyxuqqi](https://github.com/tonyxuqqi)
+    - Add an API endpoint `/async_tasks` for querying asynchronous tasks [#15759](https://github.com/tikv/tikv/issues/15759) @[YuJuncen](https://github.com/YuJuncen)
+    - Add priority labels to gRPC monitoring to display resource group data of different priorities @[bufferflies](https://github.com/bufferflies)
+    - Support dynamically adjusting the value of `readpool.unified.max-tasks-per-worker`, which can calculate the number of running tasks separately based on priority [#16026](https://github.com/tikv/tikv/issues/16026) @[glorv](https://github.com/glorv)
+    -  Support dynamically adjusting the count of GC threads, with a default value of 1 [#16101](https://github.com/tikv/tikv/issues/16101) @[tonyxuqqi](https://github.com/tonyxuqqi)
 
 + PD
 
     <!--tw@ran-huang 1 条-->
-    - 提升 PD TSO 在磁盘抖动时的可用性 [#7377](https://github.com/tikv/pd/issues/7377) @[HuSharp](https://github.com/HuSharp)
+    - Improve the availability of PD TSO during disk jitter [#7377](https://github.com/tikv/pd/issues/7377) @[HuSharp](https://github.com/HuSharp)
 
 + TiFlash
 
     <!--tw@ran-huang 4 条-->
     - (dup): release-6.5.7.md > Improvements> TiFlash - Reduce the impact of disk performance jitter on read latency [#8583](https://github.com/pingcap/tiflash/issues/8583) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 减少后台数据 GC 任务对读、写任务延迟的影响 [#8650](https://github.com/pingcap/tiflash/issues/8650) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 支持在存算分离架构下通过合并相同数据的读取操作，提升多并发下的数据扫描性能 [#6834](https://github.com/pingcap/tiflash/issues/6834) @[JinheLin](https://github.com/JinheLin)
-    - 为减少日志打印的开销，TiFlash 配置项 `logger.level` 默认值由 `"debug"` 改为 `"info"` [#8563](https://github.com/pingcap/tiflash/issues/8563) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 优化 join on 条件中仅包含 join key 等值条件时，semijoin及 leftouter    -semijoin 的执行性能 [#47424](https://github.com/pingcap/tidb/issues/47424) @[gengliqi](https://github.com/gengliqi)
+    - Reduce the impact of background GC tasks on read and write task latency [#8650](https://github.com/pingcap/tiflash/issues/8650) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Support merging identical data reading operations in a storage-compute separation architecture to improve data scanning performance under high concurrency [#6834](https://github.com/pingcap/tiflash/issues/6834) @[JinheLin](https://github.com/JinheLin)
+    - To reduce the cost of logging, the default value of the TiFlash configuration item `logger.level` has been changed from `"debug"` to `"info"` [#8563](https://github.com/pingcap/tiflash/issues/8563) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Optimize the execution performance of `SEMIJOIN` and `LEFT OUTER SEMIJOIN` when only JOIN KEY equality conditions are included in `JOIN ON` [#47424](https://github.com/pingcap/tidb/issues/47424) @[gengliqi](https://github.com/gengliqi)
 
 + Tools
 
@@ -377,7 +377,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
     + TiDB Data Migration (DM)
 
         <!--tw@ran-huang 1 条-->
-        - 为 DM OpenAPI 增加了全量导入物理导入相关配置 [#10193](https://github.com/pingcap/tiflow/issues/10193) @[GMHDBJD](https://github.com/GMHDBJD)
+        - Add configurations for full data physical import to DM OpenAPI [#10193](https://github.com/pingcap/tiflow/issues/10193) @[GMHDBJD](https://github.com/GMHDBJD)
 
     + TiDB Lightning
 
@@ -493,7 +493,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
     + PD
 
     <!--tw@ran-huang 1 条-->
-    - 修复 PD 内 Etcd 健康检查没有移除过期地址的问题 [#7226](https://github.com/tikv/pd/issues/7226) @[iosmanthus](https://github.com/iosmanthus)
+    - Fix the issue that the etcd health check in PD does not remove expired addresses [#7226](https://github.com/tikv/pd/issues/7226) @[iosmanthus](https://github.com/iosmanthus)
     - (dup): release-7.1.3.md > Bug fixes> PD - Fix the issue that when PD leader is transferred and there is a network partition between the new leader and the PD client, the PD client fails to update the information of the leader [#7416](https://github.com/tikv/pd/issues/7416) @[CabinfeverB](https://github.com/CabinfeverB)
     - (dup): release-7.1.3.md > Bug fixes> PD - Fix some security issues by upgrading the version of Gin Web Framework from v1.8.1 to v1.9.1 [#7438](https://github.com/tikv/pd/issues/7438) @[niubell](https://github.com/niubell)
     - (dup): release-6.5.7.md > Bug fixes> PD - Fix the issue that the orphan peer is deleted when the number of replicas does not meet the requirements [#7584](https://github.com/tikv/pd/issues/7584) @[bufferflies](https://github.com/bufferflies)
@@ -504,17 +504,17 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
     - (dup): release-6.5.7.md > Bug fixes> TiFlash - Fix the issue of memory leak when TiFlash encounters memory limitation during query [#8447](https://github.com/pingcap/tiflash/issues/8447) @[JinheLin](https://github.com/JinheLin)
     - (dup): release-6.5.7.md > Bug fixes> TiFlash - Fix the issue that data of TiFlash replicas would still be garbage collected after executing `FLASHBACK DATABASE` [#8450](https://github.com/pingcap/tiflash/issues/8450) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - (dup): release-6.5.7.md > Bug fixes> TiFlash - Fix the issue that the memory usage increases significantly due to slow queries [#8564](https://github.com/pingcap/tiflash/issues/8564) @[JinheLin](https://github.com/JinheLin)
-    - 修复在 `CREATE TABLE` `DROP TABLE` 频繁执行的场景下，部分 tiflash 副本数据无法通过 `RECOVER TABLE` 或 `FLASHBACK TABLE` 恢复的问题 [#1664](https://github.com/pingcap/tiflash/issues/1664) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 修复在查询带有过滤条件类似 `ColumnRef in (Literal, Func...)` 时查询结果出错的问题 [#8631](https://github.com/pingcap/tiflash/issues/8631) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    - 修复在 TiDB 执行并发 DDL 遇到冲突后 TiFlash panic 的问题 [#8578](https://github.com/pingcap/tiflash/issues/8578) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 修复存算分离架构下，可能无法正常选出对象存储数据 GC owner 的问题 [#8519](https://github.com/pingcap/tiflash/issues/8519) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 修复了 lowerUTF8/upperUTF8 不允许大小写字符占据不同字节数的 bug [#8484](https://github.com/pingcap/tiflash/issues/8484) @[gengliqi](https://github.com/gengliqi)
-    - 修复了 TiFlash 处理 enum 偏移量为 0 的问题 [#8311](https://github.com/pingcap/tiflash/issues/8311) @[solotzg](https://github.com/solotzg)
-    - 修复了表达式 `inet_ntoa()` 中的兼容性问题 [#8211](https://github.com/pingcap/tiflash/issues/8211) @[solotzg](https://github.com/solotzg)
-    - 修复了在 stream 读时扫描多个分区表可能导致潜在的 OOM 问题 [#8505](https://github.com/pingcap/tiflash/issues/8505) @[gengliqi](https://github.com/gengliqi)
-    - 避免为成功执行的短查询打印过多的信息日志 [#8592](https://github.com/pingcap/tiflash/issues/8592) @[windtalker](https://github.com/windtalker)
-    - 修复了 TiFlash 在停止时可能崩溃的问题 [#8550](https://github.com/pingcap/tiflash/issues/8550) @[guo-shaoge](https://github.com/guo-shaoge)
-    - 修复了 greatest/leatest 函数在包含常量字符串参数时可能发生的随机无效内存访问问题 [#8604](https://github.com/pingcap/tiflash/issues/8604) @[windtalker](https://github.com/windtalker)
+    - Fix the issue that some TiFlash replica data cannot be recovered through `RECOVER TABLE` or `FLASHBACK TABLE` in scenarios with frequent execution of `CREATE TABLE` and `DROP TABLE` [#1664](https://github.com/pingcap/tiflash/issues/1664) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix the issue that query results are incorrect when querying with filtering conditions like `ColumnRef in (Literal, Func...)` [#8631](https://github.com/pingcap/tiflash/issues/8631) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    - 修复在 TiDB 执行并发 DDL 遇到冲突后 TiFlash panic 的问题 Fix the TiFlash panic issue when TiFlash encounters conflicts during concurrent DDL execution [#8578](https://github.com/pingcap/tiflash/issues/8578) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix the issue that TiFlash might not be able to select the GC owner of object storage data under the disaggregated storage and compute architecture [#8519](https://github.com/pingcap/tiflash/issues/8519) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix the bug that the `lowerUTF8` and `upperUTF8` functions do not allow characters in different cases to occupy different bytes [#8484](https://github.com/pingcap/tiflash/issues/8484) @[gengliqi](https://github.com/gengliqi)
+    - Fix the issue that TiFlash incorrectly handles enum when the enum value is 0 [#8311](https://github.com/pingcap/tiflash/issues/8311) @[solotzg](https://github.com/solotzg)
+    - Fix the incompatibility issue in the `inet_ntoa()` expression [#8211](https://github.com/pingcap/tiflash/issues/8211) @[solotzg](https://github.com/solotzg)
+    - Fix the potential OOM issue that might occur when scanning multiple partitioned tables during stream read [#8505](https://github.com/pingcap/tiflash/issues/8505) @[gengliqi](https://github.com/gengliqi)
+    - Avoid printing excessive info logs for successfully executed short queries [#8592](https://github.com/pingcap/tiflash/issues/8592) @[windtalker](https://github.com/windtalker)
+    - Fix the issue that TiFlash might crash when it is stopped [#8550](https://github.com/pingcap/tiflash/issues/8550) @[guo-shaoge](https://github.com/guo-shaoge)
+    - Fix the random invalid memory access issue that might occur with `GREATEST` or `LEAST` functions containing constant string parameters [#8604](https://github.com/pingcap/tiflash/issues/8604) @[windtalker](https://github.com/windtalker)
 
 + Tools
 
@@ -536,9 +536,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
     + TiDB Data Migration (DM)
 
         <!--tw@ran-huang 3 条-->
-        - 修复 DM 升级后遇到 ”event type truncate not valid“ 错误的问题 [#10282](https://github.com/pingcap/tiflow/issues/10282) @[GMHDBJD](https://github.com/GMHDBJD)
-        - 修复 GTID 模式同步时性能可能会下降的问题 [#9676](https://github.com/pingcap/tiflow/issues/9676) @[feran-morgan-pingcap](https://github.com/feran-morgan-pingcap)
-        - 修复下游表结构包含 `shard_row_id_bits` 时同步任务报错的问题 [#10308](https://github.com/pingcap/tiflow/issues/10308) @[GMHDBJD](https://github.com/GMHDBJD)
+        - Fix the issue that the "event type truncate not valid" is returned after upgrading DM [#10282](https://github.com/pingcap/tiflow/issues/10282) @[GMHDBJD](https://github.com/GMHDBJD)
+        - Fix the performance degradation issue when replicating data in GTID mode [#9676](https://github.com/pingcap/tiflow/issues/9676) @[feran-morgan-pingcap](https://github.com/feran-morgan-pingcap)
+        - Fix the issue of the migration task error when the downstream table structure contains `shard_row_id_bits` [#10308](https://github.com/pingcap/tiflow/issues/10308) @[GMHDBJD](https://github.com/GMHDBJD)
 
     + TiDB Lightning
 
