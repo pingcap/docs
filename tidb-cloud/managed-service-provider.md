@@ -6,12 +6,33 @@ summary: Learn how to become a Managed Service Provider (MSP).
 # Managed Service Provider
 The Managed Service Partner Program is designed to create and support a close working relationship between PingCAP and our partners, to the benefit of our common customers. 
 
+Benefits of the MSP program:
+- Discounts and Incentive Program
+- Enablement training
+- Increased visibility through certification
+- Joint marketing opportunities
+
 A managed service provider (MSP) is a partner who resells TiDB Cloud and provides value-added services, including but not limited to TiDB Cloud organization management, billing services, and technical support.
 
 ## Become an MSP of PingCAP
 
-If you are interested in the MSP program and would like to join as a partner, [contact sales](https://www.pingcap.com/partners/become-a-partner/) to enroll. We will carefully evaluate your request and get back to you soon.
+If you are interested in the MSP program and would like to join as a partner, [contact sales](https://www.pingcap.com/partners/become-a-partner/) to enroll. Please prepare the following info:
+- Company name
+- Company contact email
+- Company official website URL
+- Company Logo (one SVG file for light mode and one SVG file for dark mode, Horizontal logo with 256 x 48 pixels is preferred
+
+We will carefully evaluate your request and get back to you soon.
 
 ## Manage daily tasks for MSP customers
 
-Once you are approved as a PingCAP MSP, you will receive an API key for the [MSP Management API](https://docs.pingcap.com/tidbcloud/api/msp/v1beta1). You can manage your MSP customers' daily tasks via OpenAPI.
+Once you are approved as a PingCAP MSP, you will receive an API key for the [MSP Management API](https://docs.pingcap.com/tidbcloud/api/msp/v1beta1). 
+
+You can use MSP management API to manage daily tasks:
+- Query MSP monthly bill for a given month
+- Query credits applied to MSP 
+- Query discounts applied to MSP 
+- Query monthly bill for a specific MSP customer
+- Create a new signup URL for new MSP customer
+- List all MSP customers 
+- Retrieve MSP customer info by organization ID
