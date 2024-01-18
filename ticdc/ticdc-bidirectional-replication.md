@@ -49,7 +49,7 @@ Replicable DDLs include:
 - `ADD COLUMN`: the column can be `null`, or has `not null` and `default value` at the same time
 - `ADD NON-UNIQUE INDEX`
 - `DROP INDEX`
-- `MODIFY COLUMN`: can only modify the `default value` and `comment` of the column
+- `MODIFY COLUMN`: you can only modify the `default value` and `comment` of the column
 - `ALTER COLUMN DEFAULT VALUE`
 - `MODIFY TABLE COMMENT`
 - `RENAME INDEX`
@@ -73,7 +73,7 @@ Non-replicable DDLs include:
 - `DROP COLUMN`
 - `ADD UNIQUE INDEX`
 - `TRUNCATE TABLE`
-- `MODIFY COLUMN`: modify the attributes of the column except `default value` and `comment`
+- `MODIFY COLUMN`: you can modify the attributes of the column except `default value` and `comment`
 - `RENAME TABLE`
 - `DROP PARTITION`
 - `TRUNCATE PARTITION`
@@ -108,8 +108,8 @@ When no BDR role is set, you can execute any DDL. But after you set `bdr_mode=tr
 >
 > To prevent misoperations:
 >
-> - If you try to execute **non-replicable DDLs** on the primary cluster, you will get an [Error 8263](/error-codes.md).
-> - If you try to execute **replicable DDLs** or **non-replicable DDLs** on the secondary clusters, you will get an [Error 8263](/error-codes.md).
+> - If you try to execute **non-replicable DDLs** on the primary cluster, you will get the [Error 8263](/error-codes.md).
+> - If you try to execute **replicable DDLs** or **non-replicable DDLs** on the secondary clusters, you will get the [Error 8263](/error-codes.md).
 
 ### Replication scenarios of non-replicable DDLs
 
@@ -136,7 +136,7 @@ After the check is completed, you can stop the changefeed to stop bi-directional
     - 1 `PRIMARY` cluster and n `SECONDARY` clusters (replication scenarios of replicable DDLs)
     - n clusters that have no BDR roles (replication scenarios in which you can manually execute non-replicable DDLs on each cluster)
 
-    **Note that do not set the BDR role to other scenarios, for example, setting `PRIMARY`, `SECONDARY`, and no BDR roles at the same time. If you set the BDR role incorrectly, TiDB cannot guarantee data correctness and consistency during data replication.**
+    **Do not set the BDR role in other scenarios, for example, setting `PRIMARY`, `SECONDARY`, and no BDR roles at the same time. If you set the BDR role incorrectly, TiDB cannot guarantee data correctness and consistency during data replication.**
 
 - Usually do not use `AUTO_INCREMENT` or `AUTO_RANDOM` to avoid data conflicts in the replicated tables. If you need to use `AUTO_INCREMENT` or `AUTO_RANDOM`, you can set different `auto_increment_increment` and `auto_increment_offset` for different clusters to ensure that different clusters can be assigned different primary keys. For example, if there are three TiDB clusters (A, B, and C) in bi-directional replication, you can set them as follows:
 
