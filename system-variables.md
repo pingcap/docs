@@ -5371,7 +5371,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `1`
-- Range: `[1, 4294967295]`  The maximum value for versions 7.5 and earlier is 256
+- Range: `[1, 4294967295]`. The maximum value for v7.5.0 and earlier versions is `256`.
 - This variable is used to set the concurrency of scan operations performed when TiDB executes internal SQL statements (such as an automatic update of statistics).
 
 ### tidb_table_cache_lease <span class="version-mark">New in v6.0.0</span>
