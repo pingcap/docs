@@ -285,15 +285,15 @@
   - [Billing from AWS or GCP Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace)
   - [Billing for Changefeed](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
   - [Billing for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md)
-- Managed Service Provider
+- Managed Service Provider Program
   - [Managed Service Provider](/tidb-cloud/managed-service-provider.md)
   - [MSP Customer](/tidb-cloud/managed-service-provider-customer.md)
 - API
   - [API Overview](/tidb-cloud/api-overview.md)
   - API Reference
     - v1beta1
-      - [API Key](https://docs.pingcap.com/tidbcloud/api/v1beta1/apikey)
       - [Billing](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
+      - [IAM](https://docs.pingcap.com/tidbcloud/api/v1beta1/apikey)
       - [MSP](https://docs.pingcap.com/tidbcloud/api/msp/v1beta1)
     - [v1beta](https://docs.pingcap.com/tidbcloud/api/v1beta)
 - Integrations
