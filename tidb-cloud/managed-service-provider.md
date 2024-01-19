@@ -25,6 +25,8 @@ If you are interested in the MSP program and would like to join as a partner, [c
 - Company official website URL
 - Company logo (One SVG file for light mode and one SVG file for dark mode. A horizontal logo with 256 x 48 pixels is preferred)
 
+The information above will be used to generate an exclusive sign-up URL and page with your company logo for your customers. 
+
 We will carefully evaluate your request and get back to you soon.
 
 ## Manage daily tasks for MSP customers
