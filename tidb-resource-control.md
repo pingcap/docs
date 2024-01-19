@@ -579,7 +579,7 @@ When you enable resource control, the [slow query log](/identify-slow-queries.md
 
 <CustomContent platform="tidb-cloud">
 
-When you enable resource control, the system table [`INFORMATION_SCHEMA.SLOW_QUERY`](/information-schema/information-schema-slow-query.md) contain the resource group, RU consumption of the corresponding SQL, and the time spent waiting for available RUs.
+When you enable resource control, the system table [`INFORMATION_SCHEMA.SLOW_QUERY`](/information-schema/information-schema-slow-query.md) contains the resource group, RU consumption of the corresponding SQL, and the time spent waiting for available RUs.
 
 </CustomContent>
 
