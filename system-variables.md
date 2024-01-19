@@ -1085,6 +1085,16 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `OFF`
 - This variable is used to set whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
 
+### tidb_analyze_distsql_scan_concurrency <span class="version-mark">New in v7.6.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `4`
+- Range: `[1, 4294967295]`
+- This variable is used to set the concurrency of the `scan` operation when executing the `ANALYZE` operation.
+
 ### tidb_analyze_partition_concurrency
 
 > **Warning:**
@@ -1682,6 +1692,20 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Unit: Threads
 - This variable is used to set the concurrency of the DDL operation in the `re-organize` phase.
 
+### `tidb_ddl_version` <span class="version-mark">New in v7.6.0</span>
+
+> **Warning:**
+>
+> This variable is currently an experimental feature and it is not recommended to use in a production environment. This feature might change or be removed without prior notice. If you find a bug, please give feedback by raising an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Default value: `1`
+- Value range: `1` or `2`
+- This variable is used to control whether to enable [TiDB DDL V2](/ddl-v2.md). Setting it to `2` enables this feature, and setting it to `1` disables it. The default value is `1`. After you enable it, TiDB uses TiDB DDL V2 to execute DDL statements.
+- Starting from v7.6.0, TiDB only supports accelerating table creation by the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) statement.
+
 ### tidb_default_string_match_selectivity <span class="version-mark">New in v6.2.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -2044,6 +2068,16 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether to enable GC-Aware memory track.
+
+### tidb_enable_global_index <span class="version-mark">New in v7.6.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- Possible values: `OFF`, `ON`
+- This variable controls whether to support creating `Global indexes` for partitioned tables. `Global index` is currently in the development stage. **It is not recommended to modify the value of this system variable**.
 
 ### tidb_enable_non_prepared_plan_cache
 
@@ -3257,6 +3291,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
     - `start_ts`: The start timestamp of the transaction.
     - `for_update_ts`: The `for_update_ts` of the previously executed DML statement. This is an internal term of TiDB used for tests. Usually, you can ignore this information.
     - `error`: The error message, if any.
+    - `ru_consumption`: Consumed [RU](/tidb-resource-control.md#what-is-request-unit-ru) for executing the statement.
 
 ### tidb_last_txn_info <span class="version-mark">New in v4.0.9</span>
 
@@ -5350,7 +5385,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `1`
-- Range: `[1, 256]`
+- Range: `[1, 4294967295]`. The maximum value for v7.5.0 and earlier versions is `256`.
 - This variable is used to set the concurrency of scan operations performed when TiDB executes internal SQL statements (such as an automatic update of statistics).
 
 ### tidb_table_cache_lease <span class="version-mark">New in v6.0.0</span>
