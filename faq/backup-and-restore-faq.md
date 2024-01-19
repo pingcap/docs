@@ -330,7 +330,7 @@ Yes. BR backs up the [`SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS`](/sql-statemen
 
 ## If the recovery process is interrupted, is it necessary to delete the already recovered data and start the recovery again?
 
-No need to do that. From v7.1.0, BR supports resuming data from a breakpoint. If the recovery is interrupted due to unexpected circumstances, simply restart the recovery task, and it will resume from where it left off.
+No, it is not necessary. Starting from v7.1.0, BR supports resuming data from a breakpoint. If the recovery is interrupted due to unexpected circumstances, simply restart the recovery task, and it will resume from where it left off.
 
 ## After the recovery is complete, is it possible to delete a specific table and then recover it again?
 
