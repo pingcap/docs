@@ -19,6 +19,7 @@ Benefits of becoming a managed service provider include:
 ## Become an MSP of PingCAP
 
 If you are interested in the MSP program and would like to join as a partner, [contact sales](https://www.pingcap.com/partners/become-a-partner/) to enroll. Please provide the following information:
+
 - Company name
 - Company contact email
 - Company official website URL
