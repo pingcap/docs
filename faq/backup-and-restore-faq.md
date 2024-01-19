@@ -334,4 +334,4 @@ No, it is not necessary. Starting from v7.1.0, BR supports resuming data from a 
 
 ## After the recovery is complete, is it possible to delete a specific table and then recover it again?
 
-After deleting a specific table, it is possible to recover it again. But remember, you can only use either the `DROP TABLE` or `TRUNCATE TABLE` statement, not the `DELETE FROM` statement. This is because `DELETE FROM` only updates the MVCC version to mark the data to be deleted, and these data are only truly removed after GC.
+Yes, after deleting a specific table, it is possible to recover it again. But note that, you can only recover tables that are deleted using the `DROP TABLE` or `TRUNCATE TABLE` statement, not the `DELETE FROM` statement. This is because `DELETE FROM` only updates the MVCC version to mark the data to be deleted, and the actual data deletion occurs after GC.
