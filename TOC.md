@@ -116,6 +116,7 @@
   - Plan Cluster Topology
     - [Minimal Topology](/minimal-deployment-topology.md)
     - [TiFlash Topology](/tiflash-deployment-topology.md)
+    - [TiProxy Topology](/tiproxy/tiproxy-deployment-topology.md)
     - [TiCDC Topology](/ticdc-deployment-topology.md)
     - [TiDB Binlog Topology](/tidb-binlog-deployment-topology.md)
     - [TiSpark Topology](/tispark-deployment-topology.md)
@@ -616,6 +617,13 @@
     - [Data Check for Tables with Different Schema/Table Names](/sync-diff-inspector/route-diff.md)
     - [Data Check in the Sharding Scenario](/sync-diff-inspector/shard-diff.md)
     - [Data Check in the DM Replication Scenario](/sync-diff-inspector/dm-diff.md)
+  - TiProxy
+    - [Overview](/tiproxy/tiproxy-overview.md)
+    - [Configuration](/tiproxy/tiproxy-configuration.md)
+    - [Command Line Parameters](/tiproxy/tiproxy-command-line-flags.md)
+    - [Monitoring Metrics](/tiproxy/tiproxy-grafana.md)
+    - [Troubleshooting](/tiproxy/troubleshoot-tiproxy.md)
+    - [Performance Test](/tiproxy/tiproxy-performance-test.md)
 - Reference
   - Cluster Architecture
     - [Overview](/tidb-architecture.md)
@@ -710,6 +718,7 @@
       - [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md)
       - [`ADMIN RECOVER INDEX`](/sql-statements/sql-statement-admin-recover.md)
       - [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)
+      - [`ADMIN [SET|SHOW|UNSET] BDR ROLE`](/sql-statements/sql-statement-admin-bdr-role.md)
       - [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
       - [`ADMIN SHOW TELEMETRY`](/sql-statements/sql-statement-admin-show-telemetry.md)
       - [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
@@ -762,7 +771,7 @@
       - [`EXECUTE`](/sql-statements/sql-statement-execute.md)
       - [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)
       - [`EXPLAIN`](/sql-statements/sql-statement-explain.md)
-      - [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md)
+      - [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)
       - [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)
       - [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)
       - [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)
@@ -927,6 +936,7 @@
         - [`INSPECTION_RESULT`](/information-schema/information-schema-inspection-result.md)
         - [`INSPECTION_RULES`](/information-schema/information-schema-inspection-rules.md)
         - [`INSPECTION_SUMMARY`](/information-schema/information-schema-inspection-summary.md)
+        - [`KEYWORDS`](/information-schema/information-schema-keywords.md)
         - [`KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md)
         - [`MEMORY_USAGE`](/information-schema/information-schema-memory-usage.md)
         - [`MEMORY_USAGE_OPS_HISTORY`](/information-schema/information-schema-memory-usage-ops-history.md)
