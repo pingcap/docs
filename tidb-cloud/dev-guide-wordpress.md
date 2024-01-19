@@ -99,7 +99,7 @@ Configure the WordPress database connection to TiDB Serverless.
 
 ### Step 5: Confirm the database connection
 
-1. Close the connection dialog for your cluster on the TiDB Cloud website, and open the **Chat2Query** terminal.
+1. Close the connection dialog for your cluster on the TiDB Cloud console, and open the **Chat2Query** terminal.
 2. Under the **Schemas** tab on the left, click the database you connected to Wordpress.
 3. Confirm that you now see the Wordpress tables (such as `wp_posts` and `wp_comments`) in the list of tables for that database.
 
