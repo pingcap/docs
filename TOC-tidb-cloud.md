@@ -284,9 +284,13 @@
   - [Billing for Changefeed](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
   - [Billing for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md)
 - API
+- API
   - [API Overview](/tidb-cloud/api-overview.md)
   - API Reference
-    - [v1beta1](https://docs.pingcap.com/tidbcloud/api/v1beta1)
+    - v1beta1
+      - [Billing](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
+      - [IAM](https://docs.pingcap.com/tidbcloud/api/v1beta1/apikey)
+      - [MSP](https://docs.pingcap.com/tidbcloud/api/msp/v1beta1)
     - [v1beta](https://docs.pingcap.com/tidbcloud/api/v1beta)
 - Integrations
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
