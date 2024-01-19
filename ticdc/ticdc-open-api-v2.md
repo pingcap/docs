@@ -158,15 +158,6 @@ This interface is used to submit a replication task to TiCDC. If the request is 
     "enable_old_value": true,
     "enable_sync_point": true,
     "filter": {
-      "do_dbs": [
-        "string"
-      ],
-      "do_tables": [
-        {
-          "database_name": "string",
-          "table_name": "string"
-        }
-      ],
       "event_filters": [
         {
           "ignore_delete_value_expr": "string",
@@ -182,15 +173,6 @@ This interface is used to submit a replication task to TiCDC. If the request is 
           "matcher": [
             "string"
           ]
-        }
-      ],
-      "ignore_dbs": [
-        "string"
-      ],
-      "ignore_tables": [
-        {
-          "database_name": "string",
-          "table_name": "string"
         }
       ],
       "ignore_txn_start_ts": [
@@ -297,10 +279,6 @@ The `filter` parameters are described as follows:
 
 | Parameter name | Description |
 |:-----------------|:---------------------------------------|
-| `do_dbs`              | `STRING ARRAY` type. The databases to be replicated. (Optional)                                       |
-| `do_tables`           | The tables to be replicated. (Optional)                                                     |
-| `ignore_dbs`          | `STRING ARRAY` type. The databases to be ignored. (Optional)            |
-| `ignore_tables`       | The tables to be ignored. (Optional)        |
 | `event_filters`       | The configuration to filter events. (Optional)  |
 | `ignore_txn_start_ts` | `UINT64 ARRAY` type. Specifying this will ignore transactions that specify `start_ts`, such as `[1, 2]`. (Optional)   |
 | `rules`               | `STRING ARRAY` type. The rules for table schema filtering, such as `['foo*.*', 'bar*.*']`. For more information, see [Table Filter](/table-filter.md). (Optional)  |
@@ -412,15 +390,6 @@ If the request is successful, `200 OK` is returned. If the request fails, an err
     "enable_old_value": true,
     "enable_sync_point": true,
     "filter": {
-      "do_dbs": [
-        "string"
-      ],
-      "do_tables": [
-        {
-          "database_name": "string",
-          "table_name": "string"
-        }
-      ],
       "event_filters": [
         {
           "ignore_delete_value_expr": "string",
@@ -436,15 +405,6 @@ If the request is successful, `200 OK` is returned. If the request fails, an err
           "matcher": [
             "string"
           ]
-        }
-      ],
-      "ignore_dbs": [
-        "string"
-      ],
-      "ignore_tables": [
-        {
-          "database_name": "string",
-          "table_name": "string"
         }
       ],
       "ignore_txn_start_ts": [
@@ -616,15 +576,6 @@ To modify the changefeed configuration, follow the steps of `pause the replicati
     "enable_old_value": true,
     "enable_sync_point": true,
     "filter": {
-      "do_dbs": [
-        "string"
-      ],
-      "do_tables": [
-        {
-          "database_name": "string",
-          "table_name": "string"
-        }
-      ],
       "event_filters": [
         {
           "ignore_delete_value_expr": "string",
@@ -640,15 +591,6 @@ To modify the changefeed configuration, follow the steps of `pause the replicati
           "matcher": [
             "string"
           ]
-        }
-      ],
-      "ignore_dbs": [
-        "string"
-      ],
-      "ignore_tables": [
-        {
-          "database_name": "string",
-          "table_name": "string"
         }
       ],
       "ignore_txn_start_ts": [
