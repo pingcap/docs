@@ -571,7 +571,17 @@ You can use the [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyz
 
 #### Slow queries and the corresponding system table
 
+<CustomContent platform="tidb">
+
 When you enable resource control, the [slow query log](/identify-slow-queries.md) of TiDB and the corresponding system table [`INFORMATION_SCHEMA.SLOW_QUERY`](/information-schema/information-schema-slow-query.md) contain the resource group, RU consumption of the corresponding SQL, and the time spent waiting for available RUs.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+When you enable resource control, the [slow query log](https://docs.pingcap.com/tidb/stable/identify-slow-queries) of TiDB and the corresponding system table [`INFORMATION_SCHEMA.SLOW_QUERY`](/information-schema/information-schema-slow-query.md) contain the resource group, RU consumption of the corresponding SQL, and the time spent waiting for available RUs.
+
+</CustomContent>
 
 #### View RU statistics by `statements_summary`
 
