@@ -359,8 +359,8 @@ user = "root"
 password = ""
 # Table schema information is fetched from TiDB via this status-port.
 status-port = 10080
-# Address of any PD server from the cluster.
-pd-addr = "172.16.31.4:2379"
+# Address of any PD server from the cluster. Starting from v7.6.0, TiDB supports setting multiple PD addresses.
+pd-addr = "172.16.31.4:2379,56.78.90.12:3456"
 # tidb-lightning imports TiDB as a library and generates some logs itself.
 # This setting controls the log level of the TiDB library.
 log-level = "error"
@@ -374,7 +374,7 @@ index-serial-scan-concurrency = 20
 checksum-table-concurrency = 2
 
 # The default SQL mode used to parse and execute the SQL statements.
-sql-mode = "ONLY_FULL_GROUP_BY,NO_ENGINE_SUBSTITUTION"
+sql-mode = "ONLY_FULL_GROUP_BY,NO_AUTO_CREATE_USER"
 # Sets maximum packet size allowed for SQL connections.
 # Set this to 0 to automatically fetch the `max_allowed_packet` variable from server on every connection.
 max-allowed-packet = 67_108_864

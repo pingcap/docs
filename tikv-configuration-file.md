@@ -105,13 +105,6 @@ This document only describes the parameters that are not included in command-lin
     + If the configuration item is set to a value other than `0`, TiKV keeps at most the number of old log files specified by `max-backups`. For example, if the value is set to `7`, TiKV keeps up to 7 old log files.
 + Default value: `0`
 
-### `pd.enable-forwarding` <span class="version-mark">New in v5.0.0</span>
-
-+ Controls whether the PD client in TiKV forwards requests to the leader via the followers in the case of possible network isolation.
-+ Default value: `false`
-+ If the environment might have isolated network, enabling this parameter can reduce the window of service unavailability.
-+ If you cannot accurately determine whether isolation, network interruption, or downtime has occurred, using this mechanism has the risk of misjudgment and causes reduced availability and performance. If network failure has never occurred, it is not recommended to enable this parameter.
-
 ## server
 
 + Configuration items related to the server.
@@ -568,6 +561,13 @@ Configuration items related to the I/O rate limiter.
 + Default value: `"write-only"`
 
 ## pd
+
+### `enable-forwarding` <span class="version-mark">New in v5.0.0</span>
+
++ Controls whether the PD client in TiKV forwards requests to the leader via the followers in the case of possible network isolation.
++ Default value: `false`
++ If the environment might have isolated network, enabling this parameter can reduce the window of service unavailability.
++ If you cannot accurately determine whether isolation, network interruption, or downtime has occurred, using this mechanism has the risk of misjudgment and causes reduced availability and performance. If network failure has never occurred, it is not recommended to enable this parameter.
 
 ### `endpoints`
 
@@ -1030,6 +1030,20 @@ Configuration items related to Raftstore.
 + If this value is set to `0`, it means that this feature is disabled.
 + Default value: `0.1`
 + Minimum value: `0`
+
+### `periodic-full-compact-start-times` <span class="version-mark">New in v7.6.0</span>
+
+> **Warning:**
+>
+> Periodic full compaction is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ Sets the specific times that TiKV initiates periodic full compaction. You can specify multiple time schedules in an array. For example, `periodic-full-compact-start-times = ["03:00", "23:00"]` indicates that TiKV performs full compaction daily at 03:00 AM and 11:00 PM, based on the local time zone of the TiKV node. `periodic-full-compact-start-times = ["03:00 +0000", "23:00 +0000"]` indicates that TiKV performs full compaction daily at 03:00 AM and 11:00 PM in UTC time.
++ Default value: `[]`, which means periodic full compaction is disabled by default.
+
+### `periodic-full-compact-start-max-cpu` <span class="version-mark">New in v7.6.0</span>
+
++ Limits the maximum CPU usage rate for TiKV periodic full compaction.
++ Default value: `0.1`, which means that the maximum CPU usage for periodic compaction processes is 10%.
 
 ## coprocessor
 
