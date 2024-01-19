@@ -13,7 +13,7 @@ However, for some DDL statements, it is not necessary to strictly follow the onl
 
 > **Warning:**
 >
-> This variable is currently an experimental feature and it is not recommended to use in a production environment. This feature might change or be removed without prior notice. If you find a bug, please give feedback by raising an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> This feature is currently an experimental feature and it is not recommended to use in a production environment. This feature might change or be removed without prior notice. If you find a bug, please give feedback by raising an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 ## Compatibility with TiDB tools
 
@@ -23,7 +23,7 @@ However, for some DDL statements, it is not necessary to strictly follow the onl
 
 You can now use TiDB DDL V2 only in the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) statement, and this statement must not include any foreign key constraints.
 
-## How to use TiDB DDL V2
+## Use TiDB DDL V2
 
 You can enable or disable TiDB DDL V2 by specifying the value of the system variable [`tidb_ddl_version`](/system-variables.md#tidb_ddl_version-new-in-v760) .
 
@@ -39,7 +39,7 @@ To disable TiDB DDL V2, set the value of this variable to `1`:
 SET GLOBAL tidb_ddl_version = 1;
 ```
 
-## Implementation principle of TiDB DDL V2
+## Implementation principle
 
 The detailed implementation principle of TiDB DDL V2 for accelerating table creation is as follows:
 
