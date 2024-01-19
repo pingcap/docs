@@ -5,9 +5,16 @@ summary: Learn how to become a Managed Service Provider (MSP) customer.
 
 # Managed Service Provider Customer
 
-A Managed Service Provider (MSP) customer is a customer who uses the TiDB Cloud Services provided by the Managed Service Provider. The MSP customer need to purchase TiDB Cloud and pay invoices through the MSP channel.
+A Managed Service Provider (MSP) customer is a customer who uses the TiDB Cloud Services provided by the Managed Service Provider. 
 
-This document describes how to become an MSP customer and some common operations for MSP customers.
+Compared to the direct TiDB Cloud customer, there are several differences for sign-up and invoice payment:
+
+- The MSP customer needs to sign up for a TiDB Cloud account from the dedicated sign-up page provided by the MSP.
+- The MSP customer pays invoices through the MSP channel, instead of paying directly to PingCAP.
+
+Other daily operations on the TiDB Cloud console are the same for both direct TiDB Cloud customers and MSP customers.
+
+This document describes how to become an MSP customer and how to check history and future bills for MSP customers.
 
 ## Create a new MSP customer account
 
