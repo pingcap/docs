@@ -15,9 +15,13 @@ However, for some DDL statements, it is not necessary to strictly follow the onl
 >
 > This feature is currently an experimental feature and it is not recommended to use in a production environment. This feature might change or be removed without prior notice. If you find a bug, please give feedback by raising an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
+<CustomContent platform="tidb">
+
 ## Compatibility with TiDB tools
 
 - [TiCDC](/ticdc/ticdc-overview.md) does not support replicating the tables that are created by TiDB DDL V2.
+
+</CustomContent>
 
 ## Limitation
 
