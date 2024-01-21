@@ -297,7 +297,7 @@ ALTER TABLE table_name LAST PARTITION LESS THAN (<expression>)
 - The INTERVAL partitioning feature only involves the `CREATE/ALTER TABLE` syntax. There is no change in metadata, so tables created or altered with the new syntax are still MySQL-compatible.
 - There is no change in the output format of `SHOW CREATE TABLE` to keep MySQL compatibility.
 - The new `ALTER` syntax applies to existing tables conforming to INTERVAL. You do not need to create these tables with the `INTERVAL` syntax.
-- For `RANGE COLUMNS` partitioning, only one column that is in the integer, date, or datetime type can be used as the partitioning key.
+- If you want to use the `INTERVAL` syntax for `RANGE COLUMNS` partitioning, only one column that is in the integer, date, or datetime type can be specified as the partitioning key.
 
 ### List partitioning
 
