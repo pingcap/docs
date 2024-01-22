@@ -302,6 +302,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
 ## Offline package changes
 
+Starting from v7.6.0, the `TiDB-community-server` [binary-package](/binary-package.md) now includes `tiproxy-{version}-linux-{arch}.tar.gz`, which is the installation package for the proxy component [TiProxy](tiproxy/tiproxy-overview.md).
+
 ## Deprecated features
 
 * The [baseline evolution](/sql-plan-management.md#baseline-evolution) feature for execution plans will be deprecated in TiDB v8.0.0. The equivalent functionality will be redesigned in the subsequent versions.
