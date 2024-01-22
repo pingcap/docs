@@ -53,9 +53,7 @@ To edit the custom domain for a Data App, perform the following steps:
 3. In the **Manage Custom Domain** area, locate the **Action** column, and then click **Edit** in the custom domain row that you want to delete.
 4. Edit custom domain or custom path
 5. Preview your **Base URL** to ensure it meets your expectations. If it looks correct, click **Save**.
-6. Similar to the process of creating a custom domain. Follow the instructions in the **DNS Settings** dialog to add a `CNAME` record for the default domain in your DNS provider.
-
-If you change the custom domain, the custom domain is in a **Pending** status initially while the system validates your DNS settings. Once the DNS validation is successful, the status of your custom domain will update to **Success**.
+6. If you have changed the custom domain, it is similar to the process of creating a custom domain. Follow the instructions in the **DNS Settings** dialog to add a `CNAME` record for the default domain in your DNS provider.
 
 ### Remove a custom domain
 
