@@ -233,6 +233,10 @@ strategy = ""
 # This parameter is introduced in v7.1.0.
 # region-check-backoff-limit = 1800
 
+# block-size controls the local sorting file IO lock size in physical import (local backend). You can increase this value when IOPS  is a bottleneck.
+# This parameter is introduced in v7.6.0.
+# block-size = "16KiB"
+
 [mydumper]
 # Block size for file reading. Keep it longer than the longest string of the data source.
 read-block-size = "64KiB" # default value
