@@ -1,7 +1,6 @@
 ---
 title: Three Availability Zones in Two Regions Deployment
 summary: Learn the deployment solution to three availability zones in two regions.
-aliases: ['/docs/dev/three-data-centers-in-two-cities-deployment/']
 ---
 
 # Three Availability Zones in Two Regions Deployment

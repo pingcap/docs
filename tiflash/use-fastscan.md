@@ -1,7 +1,6 @@
 ---
 title: Use FastScan
 summary: Introduces a way to speed up querying in OLAP scenarios by using FastScan.
-aliases: ['/tidb/dev/sql-statement-set-tiflash-mode/','/tidb/dev/dev-guide-use-fastscan/']
 ---
 
 # Use FastScan
