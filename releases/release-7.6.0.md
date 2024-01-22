@@ -291,6 +291,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 | TiKV | [`raftstore.periodic-full-compact-start-times`](/tikv-configuration-file.md#periodic-full-compact-start-times-new-in-v760) | Newly added | Sets the specific times that TiKV initiates periodic full compaction. The default value `[]` means periodic full compaction is disabled by default. |
 | TiKV | [`raftstore.periodic-full-compact-start-max-cpu`](/tikv-configuration-file.md#periodic-full-compact-start-max-cpu-new-in-v760) | Newly added | Limits the maximum CPU usage rate for TiKV periodic full compaction. The default value is `0.1`. |
 | TiKV | [`zstd-dict-size`](/tikv-configuration-file.md#zstd-dict-size) |  Newly added | Specifies the `zstd` dictionary compression size. The default value is `"0KB"`, which means to disable the `zstd` dictionary compression. |
+| TiCDC | [`encoding-worker-num`](/ticdc/ticdc-changefeed-config.md) | Newly added | Controls the number of encoding and decoding workers in the redo module. The default value is 16. |
+| TiCDC | [`flush-worker-num`](/ticdc/ticdc-changefeed-config.md) | Newly added | Controls the number of flushing workers in the redo module. The default value is 8. |
+| TiCDC | [`compression`](/ticdc/ticdc-changefeed-config.md) | Newly added | Controls the behavior to compress redo log files. |
+| TiCDC | [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md) | Newly added | Sets the automatic cleanup of historical data when replicating data to object storage. |
 
 ### System tables
 
