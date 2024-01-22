@@ -59,7 +59,7 @@ Refer to [5 PD issues](#5-pd-issues).
 
 - 3.1.2 TiDB DDL job hangs or executes slowly (use `admin show ddl jobs` to check DDL progress)
 
-    - Cause 1: TiDB introduces [metadata lock](/metadata-lock.md) in v6.3.0 and enables it by default in v6.5.0. If the table involved in the DDL operation has intersections with the table involved in the uncommitted transaction, the DDL operation is blocked until the transaction is committed or rolled back.
+    - Cause 1: TiDB introduces [metadata lock](/metadata-lock.md) in v6.3.0, and enables it by default in v6.5.0 and later versions. If the table involved in the DDL operation has intersections with the table involved in the uncommitted transaction, the DDL operation is blocked until the transaction is committed or rolled back.
 
     - Cause 2: Network issue with other components (PD/TiKV).
 
