@@ -441,10 +441,10 @@ Starting from v7.6.0, the `TiDB-community-server` [binary-package](/binary-packa
     - Fix the issue that when `ALTER TABLE` modifies the type of a column referenced by a foreign key, the change in `INTEGER` length is reported as an error by mistake [#47702](https://github.com/pingcap/tidb/issues/47702) @[yoshikipom](https://github.com/yoshikipom)
     - Fix the issue that in some scenarios the expression index does not detect that the divisor is 0 [#50053](https://github.com/pingcap/tidb/issues/50053) @[lcwangchao](https://github.com/lcwangchao)
     <!--tw@qiancai 以下 26 条-->
-    - Mitigate the issue that TiDB nodes might encounter OOM when dealing with a large number of tables [#50077](https://github.com/pingcap/tidb/issues/50077) @[zimulala](https://github.com/zimulala)
+    - Mitigate the issue that TiDB nodes might encounter OOM errors when dealing with a large number of tables [#50077](https://github.com/pingcap/tidb/issues/50077) @[zimulala](https://github.com/zimulala)
     - Fix the issue that DDL gets stuck in the running state during cluster rolling restart [#50073](https://github.com/pingcap/tidb/issues/50073) @[tangenta](https://github.com/tangenta)
     - Fix the issue that results might be incorrect when accessing global indexes of partitioned tables using `PointGet` or `BatchPointGet` operators [#47539](https://github.com/pingcap/tidb/issues/47539) @[L-maple](https://github.com/L-maple)
-    - Fix the issue that MPP plans might not be selected when indexes on generated columns are set to be visible [#47766](https://github.com/pingcap/tidb/issues/47766) @[AilinKid](https://github.com/AilinKid)
+    - Fix the issue that MPP plans might not be selected when indexes on generated columns are set as visible [#47766](https://github.com/pingcap/tidb/issues/47766) @[AilinKid](https://github.com/AilinKid)
     - Fix the issue that `LIMIT` might not be pushed down to the `OR` type `Index Merge` [#48588](https://github.com/pingcap/tidb/issues/48588) @[AilinKid](https://github.com/AilinKid)
     - Fix the issue that duplicate built-in rows might exist in the `mysql.bind_info` table after BR import [#46527](https://github.com/pingcap/tidb/issues/46527) @[qw4990](https://github.com/qw4990)
     - Fix the issue that statistics for partitioned tables are not updated as expected after partitions are dropped [#48182](https://github.com/pingcap/tidb/issues/48182) @[hi-rustin](https://github.com/hi-rustin)
