@@ -23,7 +23,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 </thead>
 <tbody>
   <tr>
-    <td rowspan="4">Scalability and Performance<br></td>
+    <td rowspan="4">Scalability and Performance</td>
     <td><a href="https://docs.pingcap.com/tidb/v7.6/sql-plan-management#cross-database-binding">Cross-database SQL binding</a> {/* tw@Oreoxmt */}</td>
     <td>When managing hundreds of databases with the same schema, it is often necessary to apply SQL bindings across these schemas. For example, in SaaS or PaaS data platforms, each user typically operates separate databases with the same schema and runs similar SQL queries on them. In this case, it is impractical to bind SQL for each schema one by one. TiDB v7.6.0 introduces cross-database SQL bindings that enable matching bindings across all schema-equivalent databases.</td>
   </tr>
@@ -40,7 +40,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
     <td>TiDB v7.6.0 introduces an experimental feature "Active PD Follower", which allows PD followers to provide Region information query services. This feature improves the capability of the PD cluster to handle GetRegion and ScanRegions requests in clusters with a large number of TiDB nodes and Regions, thereby reducing the CPU pressure on the PD leader.</td>
   </tr>
   <tr>
-    <td rowspan="2">Reliability and Availability<br></td>
+    <td rowspan="2">Reliability and Availability</td>
     <td><a href="https://docs.pingcap.com/tidb/v7.6/tiproxy/tiproxy-overview">Support TiProxy (experimental)</a>  {/* tw@ran-huang */}</td>
     <td>Full support for the TiProxy service, easily deployable via deployment tooling, to manage and maintain connections to TiDB so that they live through rolling restarts, upgrades, or scaling events.</td>
   </tr>
