@@ -8,7 +8,7 @@ To deploy or scale TiDB using TiUP, you need to provide a topology file ([sample
 
 Similarly, to modify the cluster topology, you need to modify the topology file. The difference is that, after the cluster is deployed, you can only modify a part of the fields in the topology file. This document introduces each section of the topology file and each field in each section.
 
-When you deploy a TiDB cluster using TiUP, TiUP also deploys monitoring servers, such as Prometheus, Grafana, and Alertmanager. In the meantime, if you scale out this cluster, TiUP also adds the new nodes into monitoring scope. To customize the configurations of the monitoring servers mentioned above, you can follow the instructions in [Customize Configurations of Monitoring Servers](/tiup/customized-montior-in-tiup-environment.md).
+When you deploy a TiDB cluster using TiUP, TiUP also deploys monitoring servers, such as Prometheus, Grafana, and Alertmanager. In the meantime, if you scale out this cluster, TiUP also adds the new nodes into monitoring scope. To customize the configurations of the preceding monitoring servers, you can follow the instructions in [Customize Configurations of Monitoring Servers](/tiup/customized-montior-in-tiup-environment.md).
 
 ## File structure
 
