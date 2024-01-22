@@ -5,7 +5,8 @@ summary: Learn how to locally customize the output of TiDB Documentation PDF tha
 
 # Self-service generation of TiDB Documentation PDF tutorial
 
-This tutorial provides a method to self-generate TiDB documents in PDF format. Through this method, you can freely sort and delete the contents of TiDB Documentation locally, and customize the output to PDF that meets the needs of specific scenarios.
+This tutorial provides a method to generate TiDB documentation in PDF format. With this method, you can freely sort and delete certain contents in TiDB Documentation locally, and customize the PDF output to meet the needs of specific scenarios.
+
 
 ## Environment preparation
 
