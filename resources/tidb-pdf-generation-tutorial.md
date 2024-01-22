@@ -64,7 +64,7 @@ The following steps take TiDB English documentation as an example to show how to
 
         3. Click the **GitHub.com** tab, select the repository you forked in **Your Repositories**, and then click **Clone** in the lower-right corner.
 
-    - Method 2: Use the following `Git` commands.
+    - Method 2: Use the following `git` commands.
 
 
         ```shell
