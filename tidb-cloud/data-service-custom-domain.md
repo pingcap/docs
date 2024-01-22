@@ -36,12 +36,26 @@ To create a custom domain for a Data App, perform the following steps:
 6. Follow the instructions in the **DNS Settings** dialog to add a `CNAME` record for the default domain in your DNS provider.
 
 The custom domain is in a **Pending** status initially while the system validates your DNS settings. Once the DNS validation is successful, the status of your custom domain will update to **Success**.
-
 > **Note:**
 >
-> Depending on your DNS provider, it might take up to 24 hours for the DNS record to be validated.
+> Depending on your DNS provider, it might take up to 24 hours for the DNS record to be validated. Domains that have not been validated for over 24 hours will show an 'expired' status and can only be deleted.
 
 After your custom domain status is set to **Success**, you can use it to access your endpoint. The code example provided by TiDB Cloud Data Service is automatically updated to your custom domain and path. For more information, see [Call an endpoint](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint).
+
+### Edit the custom domain
+> **Note:**
+>
+> After you complete the changes, the previous custom domain and custom path will become invalid immediately. You may need to wait for the new DNS record to be validated.
+
+To edit the custom domain for a Data App, perform the following steps:
+1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+2. In the left pane, click the name of your target Data App to view its details.
+3. In the **Manage Custom Domain** area, locate the **Action** column, and then click **Edit** in the custom domain row that you want to delete.
+4. Edit custom domain or custom path
+5. Preview your **Base URL** to ensure it meets your expectations. If it looks correct, click **Save**.
+6. Similar to the process of creating a custom domain. Follow the instructions in the **DNS Settings** dialog to add a `CNAME` record for the default domain in your DNS provider.
+
+If you change the custom domain, the custom domain is in a **Pending** status initially while the system validates your DNS settings. Once the DNS validation is successful, the status of your custom domain will update to **Success**.
 
 ### Remove a custom domain
 
