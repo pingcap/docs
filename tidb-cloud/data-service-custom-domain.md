@@ -45,7 +45,7 @@ After your custom domain status is set to **Success**, you can use it to access 
 ### Edit the custom domain
 > **Note:**
 >
-> After you complete the changes, the previous custom domain and custom path will become invalid immediately. You may need to wait for the new DNS record to be validated.
+> After you complete the changes, the previous custom domain and custom path will become invalid immediately. If you have changed custom domain, you need to wait for the new DNS record to be validated.
 
 To edit the custom domain for a Data App, perform the following steps:
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
