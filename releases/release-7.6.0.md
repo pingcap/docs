@@ -5,7 +5,7 @@ summary: Learn about the new features, compatibility changes, improvements, and 
 
 # TiDB 7.6.0 Release Notes
 
-Release date: xx xx, 202x
+Release date: January xx, 2024
 
 TiDB version: 7.6.0
 
@@ -322,9 +322,8 @@ Starting from v7.6.0, the `TiDB-community-server` [binary-package](/binary-packa
 
 ## Improvements
 
-+ TiDB
++ TiDB <!--tw@Oreoxmt 12 条-->
 
-    <!--tw@Oreoxmt 12 条-->
     - When a non-binary collation is set and the query includes `LIKE`, the optimizer generates an `IndexRangeScan` to improve the execution efficiency [#48181](https://github.com/pingcap/tidb/issues/48181) [#49138](https://github.com/pingcap/tidb/issues/49138) @[time-and-fate](https://github.com/time-and-fate)
     - (dup): release-6.5.7.md > Improvements> TiDB - Enhance the ability to convert `OUTER JOIN` to `INNER JOIN` in specific scenarios [#49616](https://github.com/pingcap/tidb/issues/49616) @[qw4990](https://github.com/qw4990)
     - Improve the balance of Distributed eXecution Framework (DXF) tasks in the scenario where nodes are restarted [#47298](https://github.com/pingcap/tidb/issues/47298) @[ywqzzy](https://github.com/ywqzzy)
@@ -338,22 +337,19 @@ Starting from v7.6.0, the `TiDB-community-server` [binary-package](/binary-packa
     - Optimize the TiDB implementation when handling some type conversions and fix related issues [#47945](https://github.com/pingcap/tidb/issues/47945) [#47864](https://github.com/pingcap/tidb/issues/47864) [#47829](https://github.com/pingcap/tidb/issues/47829) [#47816](https://github.com/pingcap/tidb/issues/47816) @[YangKeao](https://github.com/YangKeao) @[lcwangchao](https://github.com/lcwangchao)
     - When obtaining the schema version, TiDB uses the KV timeout feature to read by default, reducing the impact of slow meta Region leader reads on schema version updates [#48125](https://github.com/pingcap/tidb/pull/48125) @[cfzjywxk](https://github.com/cfzjywxk)
 
-+ TiKV
++ TiKV <!--tw@ran-huang 4 条-->
 
-    <!--tw@ran-huang 4 条-->
     - Add an API endpoint `/async_tasks` for querying asynchronous tasks [#15759](https://github.com/tikv/tikv/issues/15759) @[YuJuncen](https://github.com/YuJuncen)
     - Add priority labels to gRPC monitoring to display resource group data of different priorities [#49318](https://github.com/pingcap/tidb/issues/49318) @[bufferflies](https://github.com/bufferflies)
     - Support dynamically adjusting the value of `readpool.unified.max-tasks-per-worker`, which can calculate the number of running tasks separately based on priority [#16026](https://github.com/tikv/tikv/issues/16026) @[glorv](https://github.com/glorv)
     - Support dynamically adjusting the number of GC threads, with a default value of `1` [#16101](https://github.com/tikv/tikv/issues/16101) @[tonyxuqqi](https://github.com/tonyxuqqi)
 
-+ PD
++ PD <!--tw@ran-huang 1 条-->
 
-    <!--tw@ran-huang 1 条-->
     - Improve the availability of PD TSO during disk jitter [#7377](https://github.com/tikv/pd/issues/7377) @[HuSharp](https://github.com/HuSharp)
 
-+ TiFlash
++ TiFlash <!--tw@ran-huang 4 条-->
 
-    <!--tw@ran-huang 4 条-->
     - (dup): release-6.5.7.md > Improvements> TiFlash - Reduce the impact of disk performance jitter on read latency [#8583](https://github.com/pingcap/tiflash/issues/8583) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - Reduce the impact of background GC tasks on read and write task latency [#8650](https://github.com/pingcap/tiflash/issues/8650) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - Support merging identical data reading operations in a storage-compute separation architecture to improve data scanning performance under high concurrency [#6834](https://github.com/pingcap/tiflash/issues/6834) @[JinheLin](https://github.com/JinheLin)
@@ -367,20 +363,17 @@ Starting from v7.6.0, the `TiDB-community-server` [binary-package](/binary-packa
         - (dup): release-7.1.3.md > Improvements> Tools> Backup & Restore (BR) - Introduce a new integration test for Point-In-Time Recovery (PITR) in the `delete range` scenario, enhancing PITR stability  [#47738](https://github.com/pingcap/tidb/issues/47738) @[Leavrth](https://github.com/Leavrth)
         - (dup): release-6.5.7.md > Improvements> Tools> Backup & Restore (BR) - Improve the table creation performance of the `RESTORE` statement in scenarios with large datasets [#48301](https://github.com/pingcap/tidb/issues/48301) @[Leavrth](https://github.com/Leavrth)
 
-    + TiCDC
+    + TiCDC <!--tw@Oreoxmt 3 条-->
 
-        <!--tw@Oreoxmt 3 条-->
         - (dup): release-7.1.3.md > Improvements> Tools> TiCDC - Improve the performance of TiCDC replicating data to object storage by increasing parallelism [#10098](https://github.com/pingcap/tiflow/issues/10098) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - (dup): release-7.1.3.md > Improvements> Tools> TiCDC - Support making TiCDC Canal-JSON content format [compatible with the content format of the official Canal output](https://docs.pingcap.com/tidb/v6.5/ticdc-canal-json#compatibility-with-the-official-canal) by setting `content-compatible=true` in the `sink-uri` configuration [#10106](https://github.com/pingcap/tiflow/issues/10106) @[3AceShowHand](https://github.com/3AceShowHand)
 
-    + TiDB Data Migration (DM)
+    + TiDB Data Migration (DM) <!--tw@ran-huang 1 条-->
 
-        <!--tw@ran-huang 1 条-->
         - Add configurations for full data physical import to DM OpenAPI [#10193](https://github.com/pingcap/tiflow/issues/10193) @[GMHDBJD](https://github.com/GMHDBJD)
 
-    + TiDB Lightning
+    + TiDB Lightning <!--tw@hfxsd 2 条-->
 
-        <!--tw@hfxsd 2 条-->
         - Support configuring multiple PD addresses to enhance stability [#49515](https://github.com/pingcap/tidb/issues/49515) @[mittalrishabh](https://github.com/mittalrishabh)
         - Support configuring the `block-size` parameter to control the size of TiDB Lightning's internal I/O operations to improve performance [#45037](https://github.com/pingcap/tidb/issues/45037) @[mittalrishabh](https://github.com/mittalrishabh)
 
@@ -416,8 +409,7 @@ Starting from v7.6.0, the `TiDB-community-server` [binary-package](/binary-packa
     - (dup): release-6.5.7.md > Bug fixes> TiDB - Fix the issue of excessive statistical error in constructing statistics caused by Golang's implicit conversion algorithm [#49801](https://github.com/pingcap/tidb/issues/49801) @[qw4990](https://github.com/qw4990)
     - (dup): release-6.5.7.md > Bug fixes> TiDB - Fix the issue that Daylight Saving Time is displayed incorrectly in some time zones [#49586](https://github.com/pingcap/tidb/issues/49586) @[overvenus](https://github.com/overvenus)
     - (dup): release-7.1.3.md > Bug fixes> TiDB - Fix the issue that tables with `AUTO_ID_CACHE=1` might lead to gRPC client leaks when there are a large number of tables [#48869](https://github.com/pingcap/tidb/issues/48869) @[tiancaiamao](https://github.com/tiancaiamao)
-    - (dup): release-6.5.7.md > Bug fixes> TiDB - Fix the issue that TiDB server might panic during graceful shutdown [#36793](https://github.com/pingcap/tidb/issues/36793) @[bb7133](https://github.com/bb7133)
-    <!--tw@hfxsd 以下 23 条-->
+    - (dup): release-6.5.7.md > Bug fixes> TiDB - Fix the issue that TiDB server might panic during graceful shutdown [#36793](https://github.com/pingcap/tidb/issues/36793) @[bb7133](https://github.com/bb7133) <!--tw@hfxsd 以下 23 条-->
     - Fix the issue that `ADMIN RECOVER INDEX` reports `ERROR 1105` when processing a table containing `CommonHandle` [#47687](https://github.com/pingcap/tidb/issues/47687) @[Defined2014](https://github.com/Defined2014)
     - Fix the issue that specifying placement rules when executing `ALTER TABLE t PARTITION BY` reports the error `ERROR 8239` [#48630](https://github.com/pingcap/tidb/issues/48630) @[mjonss](https://github.com/mjonss)
     - Fix the issue that the `START_TIME` column type in `INFORMATION_SCHEMA.CLUSTER_INFO` is not valid [#45221](https://github.com/pingcap/tidb/issues/45221) @[dveeden](https://github.com/dveeden)
@@ -439,8 +431,7 @@ Starting from v7.6.0, the `TiDB-community-server` [binary-package](/binary-packa
     - Fix the issue that executing `ADMIN CHECK` after updating the `tidb_mem_quota_query` system variable returns `ERROR 8175` [#49258](https://github.com/pingcap/tidb/issues/49258) @[tangenta](https://github.com/tangenta)
     - Fix the issue that when `ALTER TABLE` modifies the type of a column referenced by a foreign key, the change in `DECIMAL` precision is not reported as an error [#49836](https://github.com/pingcap/tidb/issues/49836) @[yoshikipom](https://github.com/yoshikipom)
     - Fix the issue that when `ALTER TABLE` modifies the type of a column referenced by a foreign key, the change in `INTEGER` length is reported as an error by mistake [#47702](https://github.com/pingcap/tidb/issues/47702) @[yoshikipom](https://github.com/yoshikipom)
-    - Fix the issue that in some scenarios the expression index does not detect that the divisor is 0 [#50053](https://github.com/pingcap/tidb/issues/50053) @[lcwangchao](https://github.com/lcwangchao)
-    <!--tw@qiancai 以下 26 条-->
+    - Fix the issue that in some scenarios the expression index does not detect that the divisor is 0 [#50053](https://github.com/pingcap/tidb/issues/50053) @[lcwangchao](https://github.com/lcwangchao) <!--tw@qiancai 以下 26 条-->
     - Mitigate the issue that TiDB nodes might encounter OOM errors when dealing with a large number of tables [#50077](https://github.com/pingcap/tidb/issues/50077) @[zimulala](https://github.com/zimulala)
     - Fix the issue that DDL gets stuck in the running state during cluster rolling restart [#50073](https://github.com/pingcap/tidb/issues/50073) @[tangenta](https://github.com/tangenta)
     - Fix the issue that results might be incorrect when accessing global indexes of partitioned tables using `PointGet` or `BatchPointGet` operators [#47539](https://github.com/pingcap/tidb/issues/47539) @[L-maple](https://github.com/L-maple)
@@ -468,9 +459,8 @@ Starting from v7.6.0, the `TiDB-community-server` [binary-package](/binary-packa
     - Fix the issue that TiDB might select the wrong partition when querying Hash partitioned tables [#50044](https://github.com/pingcap/tidb/issues/50044) @[Defined2014](https://github.com/Defined2014)
     - Fix the connection error that occurs when you use MariaDB Connector/J with compression enabled [#49845](https://github.com/pingcap/tidb/issues/49845) @[onlyacat](https://github.com/onlyacat)
 
-+ TiKV
++ TiKV <!--tw@Oreoxmt 10 条-->
 
-    <!--tw@Oreoxmt 10 条-->
     - Fix the issue that the damaged SST files might spread to other TiKV nodes and cause TiKV to panic [#15986](https://github.com/tikv/tikv/issues/15986) @[Connor1996](https://github.com/Connor1996) **tw@Oreoxmt** <!--1631-->
     - (dup): release-7.1.3.md > Bug fixes> TiKV - Fix the issue that Online Unsafe Recovery cannot handle merge abort [#15580](https://github.com/tikv/tikv/issues/15580) @[v01dstar](https://github.com/v01dstar)
     - (dup): release-7.1.3.md > Bug fixes> TiKV - Fix the issue that the joint state of DR Auto-Sync might time out when scaling out [#15817](https://github.com/tikv/tikv/issues/15817) @[Connor1996](https://github.com/Connor1996)
@@ -489,17 +479,15 @@ Starting from v7.6.0, the `TiDB-community-server` [binary-package](/binary-packa
     - Fix the issue that TiKV converts the time zone incorrectly for Brazil and Egypt [#16220](https://github.com/tikv/tikv/issues/16220) @[overvenus](https://github.com/overvenus)
     - Fix the issue that TiKV might panic when gRPC threads are checking `is_shutdown` [#16236](https://github.com/tikv/tikv/issues/16236) @[pingyu](https://github.com/pingyu)
 
-    + PD
+    + PD <!--tw@ran-huang 1 条-->
 
-    <!--tw@ran-huang 1 条-->
     - Fix the issue that the etcd health check in PD does not remove expired addresses [#7226](https://github.com/tikv/pd/issues/7226) @[iosmanthus](https://github.com/iosmanthus)
     - (dup): release-7.1.3.md > Bug fixes> PD - Fix the issue that when PD leader is transferred and there is a network partition between the new leader and the PD client, the PD client fails to update the information of the leader [#7416](https://github.com/tikv/pd/issues/7416) @[CabinfeverB](https://github.com/CabinfeverB)
     - (dup): release-7.1.3.md > Bug fixes> PD - Fix some security issues by upgrading the version of Gin Web Framework from v1.8.1 to v1.9.1 [#7438](https://github.com/tikv/pd/issues/7438) @[niubell](https://github.com/niubell)
     - (dup): release-6.5.7.md > Bug fixes> PD - Fix the issue that the orphan peer is deleted when the number of replicas does not meet the requirements [#7584](https://github.com/tikv/pd/issues/7584) @[bufferflies](https://github.com/bufferflies)
 
-+ TiFlash
++ TiFlash <!--tw@ran-huang 11 条-->
 
-    <!--tw@ran-huang 11 条-->
     - (dup): release-6.5.7.md > Bug fixes> TiFlash - Fix the issue of memory leak when TiFlash encounters memory limitation during query [#8447](https://github.com/pingcap/tiflash/issues/8447) @[JinheLin](https://github.com/JinheLin)
     - (dup): release-6.5.7.md > Bug fixes> TiFlash - Fix the issue that data of TiFlash replicas would still be garbage collected after executing `FLASHBACK DATABASE` [#8450](https://github.com/pingcap/tiflash/issues/8450) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - (dup): release-6.5.7.md > Bug fixes> TiFlash - Fix the issue that the memory usage increases significantly due to slow queries [#8564](https://github.com/pingcap/tiflash/issues/8564) @[JinheLin](https://github.com/JinheLin)
@@ -531,9 +519,8 @@ Starting from v7.6.0, the `TiDB-community-server` [binary-package](/binary-packa
         - (dup): release-6.5.6.md > Bug fixes> Tools> TiCDC - Fix the issue that TiCDC server might panic when executing lossy DDL statements in upstream [#9739](https://github.com/pingcap/tiflow/issues/9739) @[hicqu](https://github.com/hicqu)
         - (dup): release-6.5.7.md > Bug fixes> Tools> TiCDC - Fix the issue that `checkpoint-ts` might get stuck when TiCDC replicates data to downstream MySQL [#10334](https://github.com/pingcap/tiflow/issues/10334) @[zhangjinpeng1987](https://github.com/zhangjinpeng1987)
 
-    + TiDB Data Migration (DM)
+    + TiDB Data Migration (DM) <!--tw@ran-huang 3 条-->
 
-        <!--tw@ran-huang 3 条-->
         - Fix the issue that DM encounters "event type truncate not valid" error that causes the upgrade to fail [#10282](https://github.com/pingcap/tiflow/issues/10282) @[GMHDBJD](https://github.com/GMHDBJD)
         - Fix the performance degradation issue when replicating data in GTID mode [#9676](https://github.com/pingcap/tiflow/issues/9676) @[feran-morgan-pingcap](https://github.com/feran-morgan-pingcap)
         - Fix the issue that a migration task error occurs when the downstream table structure contains `shard_row_id_bits` [#10308](https://github.com/pingcap/tiflow/issues/10308) @[GMHDBJD](https://github.com/GMHDBJD)
