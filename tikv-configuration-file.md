@@ -2034,7 +2034,7 @@ Configuration items related to TiDB Lightning import and BR restore.
 ### `num-threads`
 
 + The GC threads count when `enable-compaction-filter` is false.  <span class="version-mark">New in v7.6</span>
-+ 默认值：1
++ Default value: `1`
 
 ## backup
 
