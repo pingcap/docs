@@ -525,7 +525,6 @@ Starting from v7.6.0, the `TiDB-community-server` [binary-package](/binary-packa
     + TiCDC
 
         - (dup): release-7.1.3.md > Bug fixes> Tools> TiCDC - Fix the issue that the `WHERE` clause does not use the primary key as a condition when replicating `DELETE` statements in certain scenarios [#9812](https://github.com/pingcap/tiflow/issues/9812) @[asddongmen](https://github.com/asddongmen)
-        - (dup): release-7.1.3.md > Bug fixes> Tools> TiCDC - Fix the issue that the interval between replicating DDL statements is too long when redo log is enabled [#9960](https://github.com/pingcap/tiflow/issues/9960) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - (dup): release-7.1.3.md > Bug fixes> Tools> TiCDC - Fix the issue that the TiCDC server might panic when replicating data to an object storage service [#10137](https://github.com/pingcap/tiflow/issues/10137) @[sdojjy](https://github.com/sdojjy)
         - (dup): release-6.5.7.md > Bug fixes> Tools> TiCDC - Fix the potential data race issue during `kv-client` initialization [#10095](https://github.com/pingcap/tiflow/issues/10095) @[3AceShowHand](https://github.com/3AceShowHand)
         - (dup): release-7.1.3.md > Bug fixes> Tools> TiCDC - Fix the issue that TiCDC mistakenly closes the connection with TiKV in certain special scenarios [#10239](https://github.com/pingcap/tiflow/issues/10239) @[hicqu](https://github.com/hicqu)
