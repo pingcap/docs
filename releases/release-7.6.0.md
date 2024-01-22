@@ -550,3 +550,26 @@ Starting from v7.6.0, the `TiDB-community-server` [binary-package](/binary-packa
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 ## Contributors
+
+We would like to thank the following contributors from the TiDB community:
+
+- [0o001](https://github.com/0o001) (First-time contributor)
+- [bagechengzi](https://github.com/bagechengzi) (First-time contributor)
+- [feran-morgan-pingcap](https://github.com/feran-morgan-pingcap) (First-time contributor)
+- [highpon](https://github.com/highpon)
+- [jiyfhust](https://github.com/jiyfhust)
+- [L-maple](https://github.com/L-maple)
+- [lkshminarayanan](https://github.com/lkshminarayanan) (First-time contributor)
+- [lyang24](https://github.com/lyang24) (First-time contributor)
+- [mittalrishabh](https://github.com/mittalrishabh)
+- [morgo](https://github.com/morgo)
+- [nkg-](https://github.com/nkg-) (First-time contributor)
+- [onlyacat](https://github.com/onlyacat)
+- [shawn0915](https://github.com/shawn0915)
+- [Smityz](https://github.com/Smityz)
+- [szpnygo](https://github.com/szpnygo) (First-time contributor)
+- [ub-3](https://github.com/ub-3) (First-time contributor)
+- [xiaoyawei](https://github.com/xiaoyawei) (First-time contributor)
+- [yorkhellen](https://github.com/yorkhellen)
+- [yoshikipom](https://github.com/yoshikipom) (First-time contributor)
+- [Zheaoli](https://github.com/Zheaoli)
