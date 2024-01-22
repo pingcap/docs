@@ -1,7 +1,6 @@
 ---
 title: TiFlash Upgrade Guide
 summary: Learn the precautions when you upgrade TiFlash.
-aliases: ['/tidb/dev/tiflash-620-upgrade-guide']
 ---
 
 # TiFlash Upgrade Guide

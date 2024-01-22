@@ -1,7 +1,6 @@
 ---
 title: TiUP Terminology and Concepts
 summary: Explain the terms and concepts of TiUP.
-aliases: ['/docs/dev/tiup/tiup-terminology-and-concepts/']
 ---
 
 # TiUP Terminology and Concepts
