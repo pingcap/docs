@@ -234,7 +234,7 @@ strategy = ""
 # This parameter is introduced in v7.1.0.
 # region-check-backoff-limit = 1800
 
-# block-size controls the local sorting file IO lock size in physical import (local backend). You can increase this value when IOPS  is a bottleneck.
+# In Physical Import Mode, this parameter controls the I/O lock size of the local sorting file. You can increase this value when IOPS  is a bottleneck.
 # This parameter is introduced in v7.6.0. The default value is "16KiB".
 # block-size = "16KiB"
 
