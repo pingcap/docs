@@ -60,7 +60,7 @@ To resolve this issue, you need to manually execute the `br log resume` command 
 
 Issue: [#37207](https://github.com/pingcap/tidb/issues/37207)(fixed in v6.6.0 )
 
-In versions prior to v6.6.0, the error of `execute over region id` may be displayed when PITR restoration is performed. This issue usually occurs when you enable log backup during a full data import and afterward perform a PITR to restore data at a time point during the data import.
+For TiDB versions earlier than v6.6.0, you might encounter the error of `execute over region id` during PITR recovery. This issue usually occurs when you enable log backup during a full data import and afterward perform a PITR to restore data at a time point during the data import.
 
 Specifically, there is a probability that this issue occurs if there are a large number of hotspot writes for a long time (such as 24 hours) and if the OPS of each TiKV node is larger than 50k/s (you can view the metrics in Grafana: **TiKV-Details** -> **Backup Log** -> **Handle Event Rate**).
 
