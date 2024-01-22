@@ -38,7 +38,7 @@ To create a custom domain for a Data App, perform the following steps:
 The custom domain is in a **Pending** status initially while the system validates your DNS settings. Once the DNS validation is successful, the status of your custom domain will update to **Success**.
 > **Note:**
 >
-> Depending on your DNS provider, it might take up to 24 hours for the DNS record to be validated. Domains that have not been validated for over 24 hours will show an 'expired' status and can only be deleted.
+> Depending on your DNS provider, it might take up to 24 hours for the DNS record to be validated. The custom domain that have not been validated for over 24 hours will show an 'expired' status and can only be deleted.
 
 After your custom domain status is set to **Success**, you can use it to access your endpoint. The code example provided by TiDB Cloud Data Service is automatically updated to your custom domain and path. For more information, see [Call an endpoint](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint).
 
