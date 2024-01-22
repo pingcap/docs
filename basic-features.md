@@ -144,6 +144,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Optimistic transactions](/optimistic-transaction.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Repeatable-read isolation (snapshot isolation)](/transaction-isolation-levels.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Read-committed isolation](/transaction-isolation-levels.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Automatically terminating long-running idle transactions](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760) | Y | N | N | N | N | N | N | N | N | N | N |
 
 ## Partitioning
 
