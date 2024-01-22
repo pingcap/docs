@@ -70,7 +70,7 @@ After the preceding configuration is done, when you deploy, scale out, scale in,
             action: drop
     ```
 
-After the preceding configuration is done, when you deploy, scale out, scale in, or reload a TiDB cluster, TiUP adds the `additional_scrape_conf` field to the corresponding parameters of the Prometheus configuration file.
+After the preceding configuration is done, when you deploy, scale out, scale in, or reload a TiDB cluster, TiUP adds the content of the `additional_scrape_conf` field to the corresponding parameters of the Prometheus configuration file.
 
 ## Customize Grafana configurations
 
