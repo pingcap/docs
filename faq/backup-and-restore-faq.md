@@ -64,7 +64,7 @@ For TiDB versions earlier than v6.6.0, you might encounter the error of `execute
 
 Specifically, there is a probability that this issue occurs if there are a large number of hotspot writes for a long time (such as 24 hours) and if the OPS of each TiKV node is larger than 50k/s (you can view the metrics in Grafana: **TiKV-Details** -> **Backup Log** -> **Handle Event Rate**).
 
-For versions prior to v6.6.0, it is recommended that you perform a snapshot backup after the data import and perform PITR based on this snapshot backup.
+For TiDB versions earlier than v6.6.0, it is recommended that you perform a snapshot backup after the data import and perform PITR based on this snapshot backup.
 
 ## After restoring a downstream cluster using the `br restore point` command, data cannot be accessed from TiFlash. What should I do?
 
