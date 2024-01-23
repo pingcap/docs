@@ -7,11 +7,9 @@ summary: Learn how to locally customize the PDF output of TiDB Documentation to 
 
 This tutorial provides a method to generate TiDB documentation in PDF format. With this method, you can freely sort and delete certain contents in TiDB Documentation locally, and customize the PDF output to meet the needs of specific scenarios.
 
-
 ## Environment preparation
 
-The following preparations only need to be performed once when you generate a PDF file for the first time and can be skipped directly for future PDF generations.
-
+The following preparation steps only need to be performed once when you generate a PDF file for the first time and can be skipped directly for future PDF generations.
 
 ### Preparation 1: Install and configure the Docker environment
 
@@ -19,9 +17,7 @@ The following preparations only need to be performed once when you generate a PD
 
 The following steps take macOS or Windows as an example for Docker Desktop installation.
 
-
 1. Install [Docker Desktop](https://docs.docker.com/get-docker/).
-
 
 2. Run the `docker --version` command in macOS Terminal or Windows PowerShell.
 
@@ -35,23 +31,19 @@ The following steps take macOS or Windows as an example for Docker Desktop insta
 
 4. Run the following command in macOS Terminal or Windows PowerShell to pull the Docker image used for building TiDB PDF documentation:
 
-
     ```bash
     docker pull andelf/doc-build:0.1.9
     ```
 
 ### Preparation 2: Clone the TiDB documentation repository to your local disk
 
-
 > Estimated time: 10 minutes.
 
 TiDB English documentation repository: <https://github.com/pingcap/docs>; TiDB Chinese documentation repository: <https://github.com/pingcap/docs-cn>
 
-
 The following steps take TiDB English documentation as an example to show how to clone the repository:
 
 1. Go to the TiDB English documentation repository: <https://github.com/pingcap/docs>.
-
 
 2. Click [**Fork**](https://github.com/pingcap/docs/fork) in the upper-right corner, and wait for the Fork to complete.
 
@@ -61,11 +53,9 @@ The following steps take TiDB English documentation as an example to show how to
 
         1. Install and launch [GitHub Desktop](https://desktop.github.com/).
         2. In GitHub Desktop, click **File** > **Clone Repository**.
-
         3. Click the **GitHub.com** tab, select the repository you forked in **Your Repositories**, and then click **Clone** in the lower-right corner.
 
     - Method 2: Use the following `git` commands.
-
 
         ```shell
         cd $working_dir # Replace `$working_dir` with the directory where you want the repository to be placed. For example, `cd ~/Documents/GitHub`
@@ -80,20 +70,17 @@ The following steps take TiDB English documentation as an example to show how to
 
 > Estimated time: The following operations only take two minutes, but the PDF generation requires waiting for 0.5 to 1 hour.
 
-
 1. Make sure that the files in your local TiDB documentation repository are the latest versions in the upstream GitHub repository.
 
 2. Freely sort or delete the contents in TiDB Documentation according to your needs.
 
-
     1. Open the `TOC.md` file located in the root directory of your local repository.
-    2. Edit the `TOC.md` file. For example, you can remove all unnecessary document chapters titles and links.
-
+    2. Edit the `TOC.md` file. For example, you can remove titles and links of all unnecessary document chapters.
 
 3. Consolidate chapters from all documents into one Markdown file according to the `TOC.md` file.
 
     1. Start the Docker application.
-    2. Run the following command in macOS Terminal or Windows PowerShell, to enter the Docker image for PDF documentation building:
+    2. Run the following command in macOS Terminal or Windows PowerShell to run the Docker image for PDF documentation building:
 
 
         ```bash
@@ -109,9 +96,7 @@ The following steps take TiDB English documentation as an example to show how to
 
         After execution, if `WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested` is returned, you can ignore it.
 
-
     3. Go to the `opt/data` directory.
-
 
         ```bash
         cd /opt/data
@@ -129,7 +114,6 @@ The following steps take TiDB English documentation as an example to show how to
 
 4. Generate the PDF documentation:
 
-
     ```bash
     bash scripts/generate_pdf.sh
     ```
@@ -137,4 +121,3 @@ The following steps take TiDB English documentation as an example to show how to
     **Expected output:**
 
     The time required to generate the PDF file depends on the documentation size. For the complete TiDB documentation, it takes about 1 hour. After the generation is completed, you will see the newly generated PDF file `output.pdf` in the folder where the documentation is located.
-
