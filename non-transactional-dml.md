@@ -330,7 +330,7 @@ Non-transactional DML statements are not yet a replacement for all batch-dml usa
 
 ### Executing multiple table joins statement results in the `Unknown column xxx in 'where clause'` error
 
-This error occurs when a query is concatenated in the `WHERE` clause involves tables other than the table in which the [shard column](#parameter-description) is defined. For example: in the following SQL statements, shard column is `t2.id` and it's defined in table `t2`, but `WHERE` clause involves table `t2` and `t3`.
+This error occurs when the `WHERE` clause concatenated in a query involves tables other than the table in which the [shard column](#parameter-description) is defined. For example, in the following SQL statement, the shard column is `t2.id` and it is defined in table `t2`, but the `WHERE` clause involves table `t2` and `t3`.
 
 ```sql
 BATCH ON test.t2.id LIMIT 1 
@@ -342,7 +342,7 @@ SELECT t2.id, t2.v, t3. FROM t2, t3 WHERE t2.id = t3.id
 (1054, "Unknown column 't3.id' in 'where clause'")
 ```
 
-If the error occurs you can print query to confirm by using `DRY RUN QUERY`. For example:
+If the error occurs, you can print the query statement for confirmation by using `DRY RUN QUERY`. For example:
 
 ```sql
 BATCH ON test.t2.id LIMIT 1 
@@ -350,7 +350,7 @@ DRY RUN QUERY INSERT INTO t
 SELECT t2.id, t2.v, t3. FROM t2, t3 WHERE t2.id = t3.id
 ```
 
-Try to avoid the error, you can move the conditions related to other tables in the `WHERE` clause to the `ON` conditions in the `JOIN` clause. For example:
+To avoid the error, you can move the condition related to other tables in the `WHERE` clause to the `ON` condition in the `JOIN` clause. For example:
 
 ```sql
 BATCH ON test.t2.id LIMIT 1 
