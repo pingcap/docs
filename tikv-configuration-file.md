@@ -1227,7 +1227,7 @@ Configuration items related to RocksDB
 
 ### `rate-bytes-per-sec`
 
-+ The maximum rate permitted by RocksDB's compaction rate limiter
++ When Titan is enabled, this option limits the summed I/O rates of RocksDB compaction and Titan GC. If you find that the I/O and/or CPU consumption of RocksDB compaction and Titan GC is too large, set this option to a suitable value according the disk I/O bandwidth and the actual write traffic.
 + Default value: `10GB`
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
@@ -1328,8 +1328,13 @@ Configuration items related to Titan.
 
 ### `enabled`
 
+> **Note:**
+>
+> - Starting from TiDB v7.6.0, Titan is enabled by default to enhance the performance of writing wide tables and JSON data as well as point queries. The default value of the variable has changed from `false` to `true`, meaning that Titan is now enabled by default for new clusters.
+> - For existing clusters upgraded to v7.6.0 or later versions retain the original configuration, which means that if Titan is not explicitly enabled, it still uses RocksDB.
+
 + Enables or disables Titan.
-+ Default value: for v7.5.0 and earlier versions, the default value is `false`. Starting from v7.6.0, the default value is `true` for only new clusters. Existing clusters upgraded to v7.6.0 or later versions will retain the original configuration.
++ Default value: `true`
 
 ### `dirname`
 
@@ -1343,7 +1348,7 @@ Configuration items related to Titan.
 
 ### `max-background-gc`
 
-+ The maximum number of GC threads in Titan
++ The maximum number of GC threads in Titan. From the **TiKV Details** -> **Thread CPU** -> **RocksDB CPU** panel, if you observe that the Titan GC threads are at full capacity for a long time, consider increasing the size of the Titan GC thread pool.
 + Default value: `4`
 + Minimum value: `1`
 
@@ -1612,14 +1617,16 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 
 ### `min-blob-size`
 
+> **Note:**
+>
+> - Starting from TiDB v7.6.0, the default value for the variable `min-blob-size` has changed from `1KB` to `32KB`. Values exceeding 32KB will now be stored in Titan, while other data continues to be stored in RocksDB.
+> - For existing clusters upgrading to TiDB v7.6.0 or later versions, if the `min-blob-size` was not explicitly set before the upgrade, it will maintain the old default value of 1KB to ensure stability in the configuration after the upgrade.
+> - A value smaller than `32KB` may affect the performance of range scans. However, if the workload primarily involves heavy writes and point queries, you can consider adjusting the `min-blob-size` for improved performance.
+
 + The smallest value stored in a Blob file. Values smaller than the specified size are stored in the LSM-Tree.
 + Default value: `"32KB"`
 + Minimum value: `0`
 + Unit: KB|MB|GB
-
-> **Warning:**
->
-> When the value is set less than `32KB`, the TiKV scan performance may have regression comparing with RocksDB. But if the workload is more about point get or heavy write, the `min-blob-size` can be tuned to as low as `1KB`. And therefore, starting from v7.6.0, the default value for newly create cluster is `32KB`, but to keep the behavior consistent for upgraded clusters, this parameter will keep the old version's default  `1KB` when it's not explictly set in configuration file.
 
 ### `blob-file-compression`
 
@@ -1629,7 +1636,8 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 
 > **Note:**
 >
-> The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
+> - The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
+> - Starting from TiDB v7.6.0, the default value for the variable `blob-file-compression` has changed from `lz4` to `zstd`.
 
 ### `zstd-dict-size`
 
@@ -1662,7 +1670,13 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 
 ### `discardable-ratio`
 
-+ The ratio at which GC is triggered for Blob files. The Blob file can be selected for GC only if the proportion of the invalid values in a Blob file exceeds this ratio.
++ When the ratio of discardable data (the corresponding key has been updated or deleted) in a blob file exceeds the following threshold, Titan GC is triggered. When Titan writes the useful data of this blob file to another file, you can use the `discardable-ratio` value to estimate the upper limits of write amplification and space amplification (assuming the compression is disabled).
+
+    Upper limit of write amplification = 1 / discardable_ratio
+
+    Upper limit of space amplification = 1 / (1 - discardable_ratio)
+
+    From the two equations above, you can see that decreasing the value of `discardable_ratio` can reduce space amplification but causes GC to be more frequent in Titan. Increasing the value reduces Titan GC, the corresponding I/O bandwidth, and CPU consumption but increases disk usage.
 + Default value: `0.5`
 + Minimum value: `0`
 + Maximum value: `1`
