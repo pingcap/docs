@@ -234,6 +234,10 @@ strategy = ""
 # This parameter is introduced in v7.1.0.
 # region-check-backoff-limit = 1800
 
+# In Physical Import Mode, this parameter controls the I/O block size for the local sorting file. You can increase this value when IOPS is a bottleneck.
+# This parameter is introduced in v7.6.0. The default value is "16KiB".
+# block-size = "16KiB"
+
 [mydumper]
 # Block size for file reading. Keep it longer than the longest string of the data source.
 read-block-size = "64KiB" # default value
@@ -359,8 +363,8 @@ user = "root"
 password = ""
 # Table schema information is fetched from TiDB via this status-port.
 status-port = 10080
-# Address of any PD server from the cluster.
-pd-addr = "172.16.31.4:2379"
+# Address of any PD server from the cluster. Starting from v7.6.0, TiDB supports setting multiple PD addresses.
+pd-addr = "172.16.31.4:2379,56.78.90.12:3456"
 # tidb-lightning imports TiDB as a library and generates some logs itself.
 # This setting controls the log level of the TiDB library.
 log-level = "error"

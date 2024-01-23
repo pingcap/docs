@@ -414,7 +414,7 @@ Configuration items related to security.
 ### `tls-version`
 
 - Set the minimum TLS version for MySQL Protocol connections.
-- Default value: "", which allows TLSv1.1 or higher.
+- Default value: "", which allows TLSv1.2 or higher. Before TiDB v7.6.0, the default value allows TLSv1.1 or higher.
 - Optional values: `"TLSv1.0"`, `"TLSv1.1"`, `"TLSv1.2"` and `"TLSv1.3"`
 
 ### `auth-token-jwks` <span class="version-mark">New in v6.4.0</span>
@@ -444,19 +444,15 @@ Configuration items related to security.
 
 ### `session-token-signing-cert` <span class="version-mark">New in v6.4.0</span>
 
-> **Warning:**
->
-> The feature controlled by this parameter is under development. **Do not modify the default value**.
-
++ The certificate file path, which is used by [TiProxy](/tiproxy/tiproxy-overview.md) for session migration.
 + Default value: ""
++ Empty value will cause TiProxy session migration to fail. To enable session migration, all TiDB nodes must set this to the same certificate and key. This means that you should store the same certificate and key on every TiDB node.
 
 ### `session-token-signing-key` <span class="version-mark">New in v6.4.0</span>
 
-> **Warning:**
->
-> The feature controlled by this parameter is under development. **Do not modify the default value**.
-
++ The key file path used by [TiProxy](/tiproxy/tiproxy-overview.md) for session migration.
 + Default value: ""
++ Refer to the descriptions of [`session-token-signing-cert`](#session-token-signing-cert-new-in-v640).
 
 ## Performance
 
