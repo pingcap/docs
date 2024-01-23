@@ -234,7 +234,7 @@ strategy = ""
 # This parameter is introduced in v7.1.0.
 # region-check-backoff-limit = 1800
 
-# In Physical Import Mode, this parameter controls the I/O block size for sorting local files. When the disk IOPS is a bottleneck, you can increase this value to improve performance.
+# In Physical Import Mode, this parameter controls the I/O block size for sorting local files. When the disk IOPS is a bottleneck, you can increase this value to improve data import performance.
 # This parameter is introduced in v7.6.0. The default value is "16KiB". Note that if you only specify a number (for example, `16`), the unit is Byte instead of KiB.
 # block-size = "16KiB"
 
