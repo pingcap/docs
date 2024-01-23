@@ -328,7 +328,7 @@ Non-transactional DML statements are not yet a replacement for all batch-dml usa
 
 ## Common issues
 
-### Executing multiple table joins statement results in the `Unknown column xxx in 'where clause'` error
+### Executing a multiple table joins statement results in the `Unknown column xxx in 'where clause'` error
 
 This error occurs when the `WHERE` clause concatenated in a query involves tables other than the table in which the [shard column](#parameter-description) is defined. For example, in the following SQL statement, the shard column is `t2.id` and it is defined in table `t2`, but the `WHERE` clause involves table `t2` and `t3`.
 
