@@ -1707,7 +1707,7 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 
 + Specifies the running mode of Titan.
 + Optional values:
-    + `normal`: Writes data to the blob file when the value size exceeds `min-blob-size`.
+    + `normal`: Writes data to the blob file when the value size exceeds [`min-blob-size`](#min-blob-size).
     + `read-only`: Refuses to write new data to the blob file, but still reads the original data from the blob file.
     + `fallback`: Writes data in the blob file back to LSM.
 + Default value: `normal`
