@@ -73,9 +73,9 @@ tiup br restore full --pd "${PD_IP}:2379" \
 
 > **Warning:**
 > 
-> The coarse-grained Region scatter algorithm (enabled by setting `--granularity="coarse-grained"`) introduced in v7.6.0 is an experimental feature. It is recommended that you use this feature to accelerate data recovery in clusters with up to 1,000 tables. Note that this feature does not support checkpoint restore.
+> The coarse-grained Region scatter algorithm (enabled by setting `--granularity="coarse-grained"`) is experimental. It is recommended that you use this feature to accelerate data recovery in clusters with up to 1,000 tables. Note that this feature does not support checkpoint restore.
 
-To further improve the restore speed of large clusters, starting from v7.6.0, BR supports a coarse-grained Region scatter algorithm (experimental) for faster parallel recovery. You can enable this algorithm by specifying `--granularity="coarse-grained"`. By optimizing the Region scatter algorithm, BR quickly splits the restore task into a large number of small tasks and scatters them to all TiKV nodes in batches. This new algorithm fully utilizes the resources of each TiKV node, thereby achieving a rapid parallel recovery. 
+To further improve the restore speed of large clusters, starting from v7.6.0, BR supports a coarse-grained Region scatter algorithm (experimental) for faster parallel recovery. You can enable this algorithm by specifying `--granularity="coarse-grained"`. After it is enabled, BR can quickly split the restore task into a large number of small tasks and scatter them to all TiKV nodes in batches, thus fully utilizing the resources of each TiKV node for fast recovery in parallel.
 
 During restore, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the restore task is completed and statistics such as total restore time, average restore speed, and total data size are displayed.
 
