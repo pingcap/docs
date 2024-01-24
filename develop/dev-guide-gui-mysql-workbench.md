@@ -72,10 +72,17 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 6. In the **Setup New Connection** dialog, configure the following connection parameters:
 
     - **Connection Name**: give this connection a meaningful name.
+<<<<<<< HEAD
     - **Hostname**: enter the `host` parameter from the TiDB Cloud connection dialog.
     - **Port**: enter the `port` parameter from the TiDB Cloud connection dialog.
     - **Username**: enter the `user` parameter from the TiDB Cloud connection dialog.
     - **Password**: click **Store in Keychain ...**, enter the password of the TiDB Serverless cluster, and then click **OK** to store the password.
+=======
+    - **Hostname**: enter the `HOST` parameter from the TiDB Cloud connection dialog.
+    - **Port**: enter the `PORT` parameter from the TiDB Cloud connection dialog.
+    - **Username**: enter the `USERNAME` parameter from the TiDB Cloud connection dialog.
+    - **Password**: click **Store in Keychain ...** or **Store in Vault**, enter the password of the TiDB Serverless cluster, and then click **OK** to store the password.
+>>>>>>> ef82e477af (MySQL Workbench: Added the alternative password placeholder on the Setup New Connection dialogue box (#16136))
 
         ![MySQL Workbench: store the password of TiDB Serverless in keychain](/media/develop/mysql-workbench-store-password-in-keychain.png)
 
