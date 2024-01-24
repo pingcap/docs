@@ -135,7 +135,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
     ```sql
     CREATE GLOBAL BINDING FOR
     USING
-        SELECT /*+ merge_join(t1, t2) */ t1.id, t2.amount FROM *.t1, *.t2 WHERE t1.id = t2.id;
+        SELECT /*+ merge_join(t1, t2) */ t1.id, t2.amount
+        FROM *.t1, *.t2
+        WHERE t1.id = t2.id;
     ```
 
     In addition, cross-database binding can effectively mitigate SQL performance issues caused by uneven distribution and rapid changes in user data and workload. SaaS providers can use cross-database binding to fix execution plans validated by users with large data volumes, thereby fixing execution plans for all users. For SaaS providers, this feature provides significant convenience and experience improvements.
