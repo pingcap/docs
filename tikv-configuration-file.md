@@ -1678,9 +1678,9 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 
 + When the ratio of obsolete data (the corresponding key has been updated or deleted) in a Blob file exceeds the following threshold, Titan GC is triggered. When Titan writes the valid data of this Blob file to another file, you can use the `discardable-ratio` value to estimate the upper limits of write amplification and space amplification (assuming the compression is disabled).
 
-    Upper limit of write amplification = 1 / discardable-ratio
+    Upper limit of write amplification = 1 / `discardable-ratio`
 
-    Upper limit of space amplification = 1 / (1 - discardable-ratio)
+    Upper limit of space amplification = 1 / (1 - `discardable-ratio`)
 
     From these two equations, you can see that decreasing the value of `discardable_ratio` can reduce space amplification but results in more frequent GC in Titan. Increasing the value reduces the frequency of Titan GC, thereby lowering the corresponding I/O bandwidth and CPU usage, but increases disk usage.
 
