@@ -82,13 +82,11 @@ The following steps take TiDB English documentation as an example to show how to
     1. Start the Docker application.
     2. Run the following command in macOS Terminal or Windows PowerShell to run the Docker image for PDF documentation building:
 
-
         ```bash
         docker run -it -v ${doc-path}:/opt/data andelf/doc-build:0.1.9
         ```
 
         In the command, `${doc-path}` is the local path of the documentation for PDF generation. For example, if the path is `/Users/${username}/Documents/GitHub/docs`, the command is as follows:
-
 
         ```bash
         docker run -it -v /Users/${username}/Documents/GitHub/docs:/opt/data andelf/doc-build:0.1.9
