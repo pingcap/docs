@@ -133,10 +133,10 @@ SELECT CustomerName, BIT_LENGTH(CustomerName) AS BitLengthOfName FROM Customers;
 ```
 
 ```sql
-SELECT BIT_LENGTH("PingCap 123");
+SELECT BIT_LENGTH("PingCAP 123");
 
 +----------+
-| BIT_LENGTH("PingCap 123") |
+| BIT_LENGTH("PingCAP 123") |
 +----------+
 | 88 |
 +----------+
