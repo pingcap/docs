@@ -4,6 +4,10 @@ title: Release Notes
 
 # TiDB Release Notes
 
+## 7.6
+
+- [7.6.0-DMR](/releases/release-7.6.0.md): 2024-01-25
+
 ## 7.5
 
 - [7.5.0](/releases/release-7.5.0.md): 2023-12-01

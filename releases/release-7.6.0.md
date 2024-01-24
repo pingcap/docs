@@ -5,7 +5,7 @@ summary: Learn about the new features, compatibility changes, improvements, and 
 
 # TiDB 7.6.0 Release Notes
 
-Release date: January xx, 2024
+Release date: January 25, 2024
 
 TiDB version: 7.6.0
 
