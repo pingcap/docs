@@ -305,7 +305,7 @@ The [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-n
 set @@tidb_max_tiflash_threads = 20;
 ```
 
-The following example shows the query result before and after `tidb_max_tiflash_threads` is re-configured. Before `tidb_max_tiflash_threads` is set, the concurrency of request execution for a single TiFlash instance is 8 threads. Since the cluster has a total of 3 TiFlash instances, the total number of threads executed by requests on all TiFlash instances is 24 (8 × 3). After `tidb_max_tiflash_threads` is set to `20`, the total number of threads executed by requests on all TiFlash instances is 60 (20 × 3).
+The following example shows the query result before and after `tidb_max_tiflash_threads` is re-configured. Before `tidb_max_tiflash_threads` is set, the concurrency of request execution for a single TiFlash instance is 8 threads. Since the cluster has a total of 3 TiFlash instances, the total number of threads for request execution on all TiFlash instances is 24 (8 × 3). After `tidb_max_tiflash_threads` is set to `20`, the total number of threads for request execution on all TiFlash instances is 60 (20 × 3).
 
 Before `tidb_max_tiflash_threads` is re-configured:
 
