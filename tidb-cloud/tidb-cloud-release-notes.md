@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Add 32 vCPU as a node size option for TiDB, TiKV, and TiFlash.
 
-    For each 32 vCPU, 128 GiB TiKV node, the node storage ranges from 200 GiB to 6411 GiB.
+    For each `32 vCPU, 128 GiB` TiKV node, the node storage ranges from 200 GiB to 6411 GiB.
 
     It is recommended to use such nodes in the following scenarios:
 
