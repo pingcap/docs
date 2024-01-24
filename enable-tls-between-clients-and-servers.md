@@ -126,7 +126,7 @@ For the official MySQL client, you can also use the `STATUS` or `\s` statement t
 ```
 mysql> \s
 ...
-SSL:			Cipher in use is TLS_AES_128_GCM_SHA256
+SSL:            Cipher in use is TLS_AES_128_GCM_SHA256
 ...
 ```
 

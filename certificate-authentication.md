@@ -372,7 +372,6 @@ SSL:                 Cipher in use is TLS_AES_128_GCM_SHA256
 
 Then execute the following statement:
 
-
 ```sql
 SHOW VARIABLES LIKE '%ssl%';
 ```
