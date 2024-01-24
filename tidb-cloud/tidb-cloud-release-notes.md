@@ -8,6 +8,19 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
+## January 23, 2024
+
+**General changes**
+
+- Add 32 vCPU as a node size option for TiDB, TiKV, and TiFlash.
+
+    For each `32 vCPU, 128 GiB` TiKV node, the node storage ranges from 200 GiB to 6411 GiB.
+
+    It is recommended to use such nodes in the following scenarios:
+
+    - High-workload production environments
+    - Extremely high performance
+
 ## January 16, 2024
 
 **General changes**
