@@ -55,6 +55,8 @@ PrivLevel ::=
 
 UserSpecList ::=
     UserSpec ( ',' UserSpec )*
+
+RequireClauseOpt ::= ('REQUIRE' ('NONE' | 'SSL' | 'X509' | 'ISSUER' Issuer | 'SUBJECT' Subject | 'CIPHER' Cipher | 'SAN' SAN | 'TOKEN_ISSUER' TokenIssuer ) )
 ```
 
 ## Examples
