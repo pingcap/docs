@@ -42,7 +42,7 @@ In upstream clusters where you create log backup tasks, avoid using the TiDB Lig
 
 ### Why is the acceleration of adding indexes feature incompatible with PITR?
 
-Issue: [#38045](https://github.com/pingcap/tidb/issues/38045)(fixed in v7.0.0)
+Issue: [#38045](https://github.com/pingcap/tidb/issues/38045) (fixed in v7.0.0)
 
 For TiDB versions earlier than v7.0.0, index data created through the [index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) feature cannot be backed up by PITR.
 
@@ -58,7 +58,7 @@ To resolve this issue, you need to manually execute the `br log resume` command 
 
 ### What should I do if the error `execute over region id` is returned when I perform PITR?
 
-Issue: [#37207](https://github.com/pingcap/tidb/issues/37207)(fixed in v6.6.0)
+Issue: [#37207](https://github.com/pingcap/tidb/issues/37207) (fixed in v6.6.0)
 
 For TiDB versions earlier than v6.6.0, you might encounter the error of `execute over region id` during PITR recovery. This issue usually occurs when you enable log backup during a full data import and afterward perform a PITR to restore data at a time point during the data import.
 
