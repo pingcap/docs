@@ -5,35 +5,37 @@ summary: Learn how to migrate data from MariaDB to TiDB.
 
 # Migrate Data from MariaDB to TiDB
 
-This document describes how to migrate data from a MariaDB Server installation to a TiDB Cluster.
+This document describes how to migrate data from a MariaDB server installation to a TiDB Cluster.
 
 ## Prerequisites
 
-- [Install Dumpling and TiDB Lightning](/migration-tools.md).
-- Setup [DM](/dm/dm-overview.md)
+- Install [Dumpling](/dumpling-overview.md) and [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md).
+- Set up [Data Migration (DM](/dm/dm-overview.md)
 - Make sure you have the required privileges on the MariaDB server that are required for Dumpling to export data.
 
 Choose the right migration strategy:
 
-The first strategy is a [_Dump and Restore_](#dump-and-restore). This works will all versions of MariaDB. The drawback of this strategy is that it needs more downtime.
+- The first strategy is a [_Dump and Restore_](#dump-and-restore). This works for all versions of MariaDB. The drawback of this strategy is that it needs more downtime.
+- The second strategy is to [_Replicate data_](#replicate-data) from MariaDB to TiDB with DM. DM does not support all versions of MariaDB. Supported versions are listed on the [DM Compatibility Catalog](/dm/dm-compatibility-catalog.md#compatibility-catalog-of-tidb-data-migration).
 
-The second strategy is to [_Replicate data_](#replicate-data) from MariaDB to TiDB with DM (Data Migration). TiDB Data Migration (DM) doesn't support all versions of MariaDB. The list of supported versions is listed on the [DM Compatibility Catalog](/dm/dm-compatibility-catalog.md#compatibility-catalog-of-tidb-data-migration).
+Besides these two strategies, there might be other strategies available specifically to your situation. For example:
 
-Besides these two strategies there might be other strategies available specifically to your situation. For example you might use the functionality of your ORM to re-deploy and migrate your data or you might be able to modify your application to write and read from both MariaDB and TiDB while the migration is ongoing.
+- Use the functionality of your ORM to re-deploy and migrate your data.
+- Modify your application to write and read from both MariaDB and TiDB while the migration is ongoing.
 
-Note that only the first two strategies are discussed here.
+This document only covers the first two strategies.
 
-## Check Compatibility
+## Check compatibility
 
-TiDB is made to be [compatible with MySQL](/mysql-compatibility.md) and MySQL and MariaDB have a lot of functionality in common. However there might be MariaDB specific features that might not be compatible with TiDB that you should be aware of before migrating. 
+TiDB is [compatible with MySQL](/mysql-compatibility.md), and MySQL and MariaDB have a lot of functionality in common. However there might be MariaDB specific features that might not be compatible with TiDB that you should be aware of before migrating.
 
-Besides checking the items in this section we suggest that you also check the [Compatibility & Differences](https://mariadb.com/kb/en/compatibility-differences/) in the MariaDB documentation.
+Besides checking the items in this section, it is recommended that you also check the [Compatibility & Differences](https://mariadb.com/kb/en/compatibility-differences/) in the MariaDB documentation.
 
 ### Authentication
 
-The [security compatibility](/security-compatibility-with-mysql.md) page lists which authentication methods are supported by TiDB. There are a few authentication method's in MariaDB that are not supported in TiDB. This means that you might have to create a new password hash for the account or take other measures that are authentication method specific.
+The [Security Compatibility with MySQL](/security-compatibility-with-mysql.md) document lists authentication methods that TiDB supports. TiDB does not support a few authentication methods in MariaDB. This means that you might have to create a new password hash for the account or take other specific measures.
 
-To check what authentication methods are used you can run the following statement:
+To check what authentication methods are used, you can run the following statement:
 
 ```sql
 SELECT
@@ -56,9 +58,9 @@ GROUP BY
 
 ### System versioned tables
 
-[System versioned tables](https://mariadb.com/kb/en/system-versioned-tables/) are not supported by TiDB. However, TiDB does support [`AS OF TIMESTAMP`](/as-of-timestamp.md) which may replace some of the use cases of system versioned tables.
+TiDB does not support [system versioned tables](https://mariadb.com/kb/en/system-versioned-tables/). However, TiDB does support [`AS OF TIMESTAMP`](/as-of-timestamp.md) which might replace some of the use cases of system versioned tables.
 
-You can check for affected tables with the following statement
+You can check for affected tables with the following statement:
 
 ```sql
 SELECT
@@ -79,7 +81,7 @@ WHERE
 1 row in set (0.005 sec)
 ```
 
-To remove system versioning use the `ALTER TABLE` statement:
+To remove system versioning, execute the `ALTER TABLE` statement:
 
 ```
 MariaDB [test]> ALTER TABLE t DROP SYSTEM VERSIONING;
@@ -89,9 +91,9 @@ Records: 0  Duplicates: 0  Warnings: 0
 
 ### Sequences
 
-Both MariaDB and TiDB support [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md). However this is currently not supported by DM. It is recommended to not create, modify or remove sequences during the migration and to test this specifically after migration.
+Both MariaDB and TiDB support [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md). However, it is currently not supported by DM. It is recommended that you do not create, modify or remove sequences during the migration and test this specifically after migration.
 
-To check if you're using sequences, run the following statement.
+To check if you are using sequences, execute the following statement:
 
 ```sql
 SELECT
@@ -114,9 +116,9 @@ WHERE
 
 ### Storage engines
 
-MariaDB offers storage engines for local data like `InnoDB`, `MyISAM` and `Aria`. While the data format isn't directly supported by TiDB migrating these works fine. However there are also engines that place data outside of the server like the `CONNECT` storage engine and `Spider`. While you can migrate the data of these kinds of tables to TiDB, TiDB doesn't provide the functionality to store data external to the TiDB cluster.
+MariaDB offers storage engines for local data such as `InnoDB`, `MyISAM` and `Aria`. While the data format is not directly supported by TiDB, migrating these works fine. However there are also engines that place data outside of the server such as the `CONNECT` storage engine and `Spider`. While you can migrate such tables to TiDB, TiDB does not provide the functionality to store data outside of the TiDB cluster.
 
-To see what storage engines you're using you can run the following statement:
+To check what storage engines you are using, execute the following statement:
 
 ```sql
 SELECT
@@ -145,13 +147,13 @@ GROUP BY
 
 ### Syntax
 
-MariaDB supports the `RETURNING` keyword for `DELETE`, `INSERT` and `REPLACE` statements. TiDB doesn't support this. You might want to look into your application and query logging to see if you're affected by this.
+MariaDB supports the `RETURNING` keyword for `DELETE`, `INSERT` and `REPLACE` statements. TiDB does not support them. You might want to look into your application and query logging to see if it affects your migration.
 
 ### Data types
 
-MariaDB supports some datatypes that TiDB doesn't support like `UUID`, `INET4` and `INET6`.
+MariaDB supports some datatypes that TiDB doesn't support, such as `UUID`, `INET4` and `INET6`.
 
-To check for these datatypes you can run the following statement
+To check for these datatypes, execute the following statement:
 
 ```sql
 SELECT
@@ -179,9 +181,9 @@ WHERE
 
 ### Character set and collation
 
-TiDB doesn't support the `latin1_swedish_ci` collation that is often used in MariaDB.
+TiDB does not support the `latin1_swedish_ci` collation that is often used in MariaDB.
 
-To see what collations TiDB supports you can run this statement on TiDB:
+To see what collations TiDB supports, execute this statement on TiDB:
 
 ```sql
 SHOW COLLATION;
@@ -245,96 +247,88 @@ ORDER BY
 14 rows in set (0.045 sec)
 ```
 
-See also [Character Set and Collation](/character-set-and-collation.md)
+See also [Character Set and Collation](/character-set-and-collation.md).
 
-## Dump and Restore
+## Dump and restore
 
-This method would assume you would take your application offline, then migrate the data and then re-configure your application to use the migrated data.
+This method assumes that you take your application offline, migrate the data, and then re-configure your application to use the migrated data.
 
-It is strongly recommended to first do this on a test or development instance of your application before doing it in production. This is both to check for possible compatibility issues as to get insight into how much time this would take.
+It is strongly recommended to first do this on a test or development instance of your application before doing it in production. This is both to check for possible compatibility issues as to get insight into how much time the migration will take.
 
-### D1. Stop your application
+1. Stop your application. Take your application offline. This ensures there are no modifications made to the data in MariaDB during or after the migration.
 
-Take your application offline. This ensures there are no modifications made to the data in MariaDB during or after the migration.
+2. Dump the data. For this the first step is to dump data in MariaDB with the `tiup dumpling` command.
 
-### D2. Dump the data
+    ```shell
+    tiup dumpling --port 3306 --host 127.0.0.1 --user root --password secret -F 256MB  -o /data/backup
+    ```
 
-For this the first step is to dump data in MariaDB with the `tiup dumpling` command.
+3. Restore the data. For this step we will use the `tiup tidb-lightning` command. See [Get Started with TiDB Lightning](/get-started-with-tidb-lightning.md) for how to configure TiDB Lightning and how to run it.
 
-```
-tiup dumpling --port 3306 --host 127.0.0.1 --user root --password secret -F 256MB  -o /data/backup
-```
+4. Migrate user accounts and permissions. See [Users and grants](#users-and-grants) for how to migrate your users and permissions.
 
-### D3. Restore the data
+5. Reconfigure your application. You need to change the application configuration so that it can connect to the TiDB server.
 
-For this step we will use the `tiup tidb-lightning` command. Please see [Get Started with TiDB Lightning](/get-started-with-tidb-lightning.md) for how to configure TiDB Lightning and how to run it.
-
-### D4. User accounts and permissions
-
-See [Users and grants](#users-and-grants) below for how to migrate your users and permissions.
-
-### D5. Reconfigure your application
-
-Here you would change the application configuration so that it now connects to the TiDB server.
-
-### D6. Cleanup
-
-Once you have verified that the migration is successful you can make a final backup of the data in MariaDB and stop the server. This also means you can stop and remove the DM cluster.
+6. Clean up. Once you have verified that the migration is successful you can make a final backup of the data in MariaDB and stop the server. This also means you can stop and remove the DM cluster.
 
 ## Replicate data
 
-This method assumes you would setup replication, then stop your application and wait for the replication to catch-up and then re-configure your application to use TiDB.
+This method assumes you would set up replication, stop your application and wait for the replication to catch up, and then re-configure your application to use TiDB.
 
-It is strongly recommended to first test your application before doing this migration in production. 
+It is strongly recommended to first test your application before doing this migration in production.
 
-To use Data Migration (DM) we need to deploy a set of DM services either with  [TiUP Cluster](/dm/deploy-a-dm-cluster-using-tiup.md) or with [TiDB Operator](/tidb-operator-overview.md). After this we will use `dmctl` to configure the DM services.
+To use DM, you need to deploy a set of DM services either with a [TiUP cluster](/dm/deploy-a-dm-cluster-using-tiup.md) or with [TiDB Operator](/tidb-operator-overview.md). After that, use `dmctl` to configure the DM services.
 
-### R1. Prepare
+### Step 1. Prepare
 
 Make sure that binlogs are enabled on MariaDB and that the `binlog_format` is set to `ROW`. It is also recommended to set `binlog_annotate_row_events=OFF` and `log_bin_compress=OFF`.
 
-You will also need an account with the `SUPER` permission or with the `BINLOG MONITOR` and `REPLICATION MASTER ADMIN` permissions. This account also needs read permission for the schemas you're going to migrate.
+You also need an account with the `SUPER` permission or with the `BINLOG MONITOR` and `REPLICATION MASTER ADMIN` permissions. This account also needs read permission for the schemas you are going to migrate.
 
-If you're not using an account with the `SUPER` permission then you might have to add the following to the DM configuration as TiDB doesn't yet know how to check for MariaDB specific permissions.
+If you are not using an account with the `SUPER` permission, then you might have to add the following to the DM configuration, because TiDB does not yet know how to check for MariaDB specific permissions.
 
-```
+```yaml
 ignore-checking-items: ["replication_privilege"]
 ```
 
-### R2. Replication
+### Step 2. Replication
 
 Note that it is not required to first copy the initial data as you would do with MariaDB to MariaDB replication, DM will do this for you.
 
-Please follow the [Quick Start Guide for TiDB Data Migration](/dm/quick-start-with-dm.md) to replicate your data from MariaDB to TiDB.
+Follow the [Quick Start Guide for TiDB Data Migration](/dm/quick-start-with-dm.md) to replicate your data from MariaDB to TiDB.
 
-### R3. User accounts and permissions
+### Step 3. User accounts and permissions
 
-See [Users and grants](#users-and-grants) below for how to migrate your users and permissions.
+See [Users and grants](#users-and-grants) for how to migrate your users and permissions.
 
-### R4. Testing
+### Step 4. Test
 
-Once your data is replicated you can run read-only queries on it to validate it. Please see the section below about [Testing your application](#testing-your-application) for more details on this.
+Once your data is replicated, you can run read-only queries on it to validate it. See the section about [Test your application](#test-your-application) for more details.
 
-### R5. Switchover
+### Step 5. Switch over
 
-First stop your application. Then monitor the replication delay, which should go to 0 seconds. Then you can change the configuration of your application so that it connects to TiDB and start it again.
+To switch over to TiDB, you need to do the following:
 
-To check for replication delay run [`query-status <taskname>`](/dm/dm-query-status.md#detailed-query-result) via `dmctl` and check for `"synced: true"` in the `subTaskStatus`.
+1. Stop your application.
+2. Monitor the replication delay, which should go to 0 seconds.
+3. Change the configuration of your application so that it connects to TiDB and start it again.
 
-### R6. Cleanup
+To check for replication delay, run [`query-status <taskname>`](/dm/dm-query-status.md#detailed-query-result) via `dmctl` and check for `"synced: true"` in the `subTaskStatus`.
 
-Once you have verified that the migration is successful you can make a final backup of the data in MariaDB and stop the server. This also means you can stop and remove the DM cluster.
+### Step 6. Clean up
+
+Once you have verified that the migration is successful, you can make a final backup of the data in MariaDB and stop the server. It also means you can stop and remove the DM cluster.
 
 ## Users and grants
 
-You can use [`pt-show-grants`](https://docs.percona.com/percona-toolkit/pt-show-grants.html), which is part of the Percona Toolkit to export users and grants from MariaDB and load these into TiDB.
+You can use [`pt-show-grants`](https://docs.percona.com/percona-toolkit/pt-show-grants.html). It is part of the Percona Toolkit to export users and grants from MariaDB and load these into TiDB.
 
-## Testing your application
+## Test your application
 
-While it is possible to use generic tools like `sysbench` that you could use for testing it is highly recommended to test something that's specific to your application. You could for example run a copy of your application against a TiDB cluster with a temporary copy of your data. 
+While it is possible to use generic tools such as `sysbench` for testing, it is highly recommended to test some specific features of your application. For example, run a copy of your application against a TiDB cluster with a temporary copy of your data.
 
-This makes sure your application compatibility and performance with TiDB is tested. Please monitor the log files of your application and TiDB to see if there are any warnings that might need to be addressed. This also makes sure that the database driver that your application is using (for example MySQL Connector/J for Java based applications) is tested. You might want to use an application like JMeter to put some load on your application if needed.
+Such a test makes sure your application compatibility and performance with TiDB is verified. You need to monitor the log files of your application and TiDB to see if there are any warnings that might need to be addressed. Make sure that the database driver that your application is using (for example MySQL Connector/J for Java based applications) is tested. You might want to use an application such as JMeter to put some load on your application if needed.
 
-## Validation
+## Validate data
 
 You can use [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) to validate if the data in MariaDB and TiDB are identical.
