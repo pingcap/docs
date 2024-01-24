@@ -464,7 +464,6 @@ Starting from v7.6.0, the `TiDB-community-server` [binary-package](/binary-packa
     - Fix the issue that the blob file size in Titan monitoring is incorrect [#15971](https://github.com/tikv/tikv/issues/15971) @[Connor1996](https://github.com/Connor1996)
     - Fix the issue that replicating large tables using TiCDC might cause TiKV to OOM  [#16035](https://github.com/tikv/tikv/issues/16035) @[overvenus](https://github.com/overvenus)
     - Fix the issue that resolve ts might be blocked for 2 hours [#11847](https://github.com/tikv/tikv/issues/11847) @[overvenus](https://github.com/overvenus)
-    - Fix the issue that the log backup task might encounter memory leak and fail to run properly after startup [#16070](https://github.com/tikv/tikv/issues/16070) @[YuJuncen](https://github.com/YuJuncen)
     - Fix the issue that TiDB and TiKV might produce inconsistent results when processing `DECIMAL` arithmetic multiplication truncation [#16268](https://github.com/tikv/tikv/issues/16268) @[solotzg](https://github.com/solotzg)
     - Fix the issue that `cast_duration_as_time` might return incorrect results [#16211](https://github.com/tikv/tikv/issues/16211) @[gengliqi](https://github.com/gengliqi)
     - Fix the issue that TiKV converts the time zone incorrectly for Brazil and Egypt [#16220](https://github.com/tikv/tikv/issues/16220) @[overvenus](https://github.com/overvenus)
