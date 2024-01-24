@@ -132,6 +132,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Metadata lock](/metadata-lock.md) | Y | Y | Y | Y | N | N | N | N | N | N | N |
 | [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) | Y | Y | Y | Y | N | N | N | N | N | N | N |
 | [Pause](/sql-statements/sql-statement-admin-pause-ddl.md)/[Resume](/sql-statements/sql-statement-admin-resume-ddl.md) DDL | Y | Y | N | N | N | N | N | N | N | N | N |
+| [TiDB DDL V2](/ddl-v2.md) | E | N | N | N | N | N | N | N | N | N | N |
 
 ## Transactions
 
@@ -217,6 +218,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Stream data to Amazon S3, GCS, Azure Blob Storage, and NFS through TiCDC](/ticdc/ticdc-sink-to-cloud-storage.md) | Y | Y | Y | E | N | N | N | N | N | N | N |
 | [TiCDC supports bidirectional replication between two TiDB clusters](/ticdc/ticdc-bidirectional-replication.md) | Y | Y | Y | Y | N | N | N | N | N | N | N |
 | [TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md) | Y | Y | Y | N | N | N | N | N | N | N | N |
+| [DM](/dm/dm-overview.md) supports migrating MySQL 8.0  | Y | E | E | E | E | N | N | N | N | N | N |
 
 ## Management, observability, and tools
 
