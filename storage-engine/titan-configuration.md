@@ -77,7 +77,7 @@ Note that the values in Titan Blob files are not continuous, and Titan's cache i
 
 ## Parameters
 
-By properly configuring Titan parameters, you can effectively improve database performance and resource utilization.
+By properly configuring Titan parameters, you can effectively improve database performance and resource utilization. This section introduces some key parameters you can use.
 
 ### `min-blob-size`
 
