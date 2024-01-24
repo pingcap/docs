@@ -1334,7 +1334,7 @@ Configuration items related to Titan.
 >
 > - To enhance the performance of wide table and JSON data writing and point query, starting from TiDB v7.6.0, the default value changes from `false` to `true`, which means that Titan is enabled by default.
 > - Existing clusters upgraded to v7.6.0 or later versions retain the original configuration, which means that if Titan is not explicitly enabled, it still uses RocksDB.
-> - If the cluster has enabled Titan before upgrading to TiDB v7.6.0 or later versions, Titan will be retained after the upgrade, and the [`min-blob-size`](/tikv-configuration-file.md#min-blob-size) configuration before the upgrade will be retained. If you do not explicitly configure the value before the upgrade, the default value of the old version `1KB` will be retained to ensure the stability of the cluster configuration after the upgrade.
+> - If the cluster has enabled Titan before upgrading to TiDB v7.6.0 or later versions, Titan will be retained after the upgrade, and the [`min-blob-size`](/tikv-configuration-file.md#min-blob-size) configuration before the upgrade will be retained. If you do not explicitly configure the value before the upgrade, the default value of the previous version `1KB` will be retained to ensure the stability of the cluster configuration after the upgrade.
 
 + Enables or disables Titan.
 + Default value: `true`
