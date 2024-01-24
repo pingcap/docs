@@ -1650,7 +1650,6 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 ### `zstd-dict-size`
 
 + The zstd dictionary compression size. The default value is `"0KB"`, which means to disable the zstd dictionary compression. In this case, Titan compresses data based on single values, whereas RocksDB compresses data based on blocks (`32KB` by default). When the average size of Titan values is less than `32KB`, Titan's compression ratio is lower than that of RocksDB. Taking JSON as an example, the store size in Titan can be 30% to 50% larger than that of RocksDB. The actual compression ratio depends on whether the value content is suitable for compression and the similarity among different values. You can enable the zstd dictionary compression to increase the compression ratio by configuring `zstd-dict-size` (for example, set it to `16KB`). The actual store size can be lower than that of RocksDB. But the zstd dictionary compression might lead to about 10% performance regression in specific workloads.
-+ 
 + Default value: `"0KB"`
 + Unit: KB|MB|GB 
 
