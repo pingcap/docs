@@ -113,6 +113,7 @@ Examples:
 
 ```sql
 SELECT BIT_LENGTH("TiDB");
+
 +----------+
 | BIT_LENGTH("TiDB") |
 +----------+
@@ -124,6 +125,7 @@ SELECT BIT_LENGTH("TiDB");
 
 ```sql
 SELECT CustomerName, BIT_LENGTH(CustomerName) AS BitLengthOfName FROM Customers;
+
 | CustomerName|BitLengthOfName |
 |-------------|----------------|
 | Albert Einstein | 120 |
@@ -132,6 +134,7 @@ SELECT CustomerName, BIT_LENGTH(CustomerName) AS BitLengthOfName FROM Customers;
 
 ```sql
 SELECT BIT_LENGTH("PingCap 123");
+
 +----------+
 | BIT_LENGTH("PingCap 123") |
 +----------+
@@ -143,7 +146,7 @@ SELECT BIT_LENGTH("PingCap 123");
 
 > **Note:**
 >
-> The second example operates under the assumption that there is a database with a row titled `Customers` and a column inside titled `CustomerName`
+> The second example operates under the assumption that there is a database with a table titled `Customers` and a column inside the table titled `CustomerName`
 
 ### [`CHAR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char)
 
@@ -230,11 +233,11 @@ SELECT CustomerName, CHAR_LENGTH(CustomerName) AS LenghtOfName FROM Customers;
 
 > **Note:**
 >
-> The second example operates under the assumption that there is a database with a record titled `Customers` and a field inside titled `CustomerName`
+> The second example operates under the assumption that there is a [database](https://www.w3schools.com/sql/trymysql.asp?filename=trysql_func_mysql_char_length2) with a table titled `Customers` and a column inside the table titled `CustomerName`
 
 ### [`CHARACTER_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_character-length)
 
-The `CHARACTER_LENGTH()` function is the same as the `CHAR_LENGTH` function. Both functions can be used synonymously because they give the same outcome.
+The `CHARACTER_LENGTH()` function is the same as the `CHAR_LENGTH()` function. Both functions can be used synonymously because they provide the same outputs.
 
 ### [`CONCAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat)
 
