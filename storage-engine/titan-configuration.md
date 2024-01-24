@@ -107,7 +107,7 @@ You can adjust [`rate-bytes-per-sec`](/tikv-configuration-file.md#rate-bytes-per
 
 ### Titan configuration example
 
-The following is an example of the Titan configuration file. You have the option to either use TiUP to [modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration) or make adjustments in a TiDB cluster [configured within Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster).
+The following is an example of the Titan configuration file. You can either [use TiUP to modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration) or [configure a TiDB cluster on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster).
 
 ```toml
 [rocksdb]
