@@ -83,7 +83,7 @@ By properly configuring Titan parameters, you can effectively improve database p
 
 You can use [`min-blob-size`](/tikv-configuration-file.md#min-blob-size) to set the threshold for the value size to determine which data is stored in RocksDB and which in Titan's blob files. According to the test, `32KB` is a appropriate threshold that has better write throughput without scan throughput regression compared with RocksDB. If you want further improve write performance and accept scan performance regression, you can change the value `1KB`.
 
-### `blob-file-compression` 和 `zstd-dict-size`
+### `blob-file-compression` and `zstd-dict-size`
 
 You can use [`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression) to specify the compression algorithm used for values in Titan. You can also enable the `zstd` dictionary compression through [`zstd-dict-size`](/tikv-configuration-file.md#zstd-dict-size) to improve compression rates.
 
@@ -107,7 +107,7 @@ You can adjust [`rate-bytes-per-sec`](/tikv-configuration-file.md#rate-bytes-per
 
 ### Titan configuration example
 
-The following is an example Titan configuration file. You have the option to either use TiUP to [modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration) or make adjustments in a TiDB cluster [configured within Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster).
+The following is an example of the Titan configuration file. You have the option to either use TiUP to [modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration) or make adjustments in a TiDB cluster [configured within Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster).
 
 ```toml
 [rocksdb]
