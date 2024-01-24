@@ -1036,7 +1036,9 @@ Configuration items related to Raftstore.
 >
 > Periodic full compaction is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
-+ Sets the specific times that TiKV initiates periodic full compaction. You can specify multiple time schedules in an array. For example, `periodic-full-compact-start-times = ["03:00", "23:00"]` indicates that TiKV performs full compaction daily at 03:00 AM and 11:00 PM, based on the local time zone of the TiKV node. `periodic-full-compact-start-times = ["03:00 +0000", "23:00 +0000"]` indicates that TiKV performs full compaction daily at 03:00 AM and 11:00 PM in UTC time.
++ Set the specific times that TiKV initiates periodic full compaction. You can specify multiple time schedules in an array. For example,
+    + `periodic-full-compact-start-times = ["03:00", "23:00"]` indicates that TiKV performs full compaction daily at 03:00 AM and 11:00 PM, based on the local time zone of the TiKV node.
+    + `periodic-full-compact-start-times = ["03:00 +0000", "23:00 +0000"]` indicates that TiKV performs full compaction daily at 03:00 AM and 11:00 PM in UTC time.
 + Default value: `[]`, which means periodic full compaction is disabled by default.
 
 ### `periodic-full-compact-start-max-cpu` <span class="version-mark">New in v7.6.0</span>
@@ -1227,7 +1229,7 @@ Configuration items related to RocksDB
 
 ### `rate-bytes-per-sec`
 
-+ When Titan is enabled, this option limits the summed I/O rates of RocksDB compaction and Titan GC. If you find that the I/O and/or CPU consumption of RocksDB compaction and Titan GC is too large, set this option to a suitable value according the disk I/O bandwidth and the actual write traffic.
++ When Titan is disabled, this option limits the I/O rate of RocksDB compaction to reduce the impact of RocksDB compaction on the foreground read and write performance during traffic peaks. When Titan is enabled, this option limits the summed I/O rates of RocksDB compaction and Titan GC. If you find that the I/O and/or CPU consumption of RocksDB compaction and Titan GC is too large, set this option to a suitable value according the disk I/O bandwidth and the actual write traffic.
 + Default value: `10GB`
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
@@ -1330,8 +1332,9 @@ Configuration items related to Titan.
 
 > **Note:**
 >
-> - Starting from TiDB v7.6.0, Titan is enabled by default to enhance the performance of writing wide tables and JSON data as well as point queries. The default value of the variable has changed from `false` to `true`, meaning that Titan is now enabled by default for new clusters.
-> - For existing clusters upgraded to v7.6.0 or later versions retain the original configuration, which means that if Titan is not explicitly enabled, it still uses RocksDB.
+> - Starting from TiDB v7.6.0, Titan is enabled by default to enhance the performance of writing wide tables and JSON data.
+> - Existing clusters upgraded to v7.6.0 or later versions retain the original configuration, which means that if Titan is not explicitly enabled, it still uses RocksDB.
+> - If the cluster has enabled Titan before upgrading to TiDB v7.6.0 or later versions, Titan will be retained after the upgrade, and the [`min-blob-size`](/tikv-configuration-file.md#min-blob-size) configuration before the upgrade will be retained. If you do not explicitly configure the value before the upgrade, the default value of the old version `1KB` will be retained to ensure the stability of the cluster configuration after the upgrade.
 
 + Enables or disables Titan.
 + Default value: `true`
@@ -1613,15 +1616,19 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 ## rocksdb.defaultcf.titan
 
+> **Note:**
+>
+> Enabling Titan in `rocksdb.defaultcf` is supported, but enabling Titan in `rocksdb.writecf` is not supported.
+
 Configuration items related to `rocksdb.defaultcf.titan`.
 
 ### `min-blob-size`
 
 > **Note:**
 >
-> - Starting from TiDB v7.6.0, the default value for the variable `min-blob-size` has changed from `1KB` to `32KB`. Values exceeding 32KB will now be stored in Titan, while other data continues to be stored in RocksDB.
-> - For existing clusters upgrading to TiDB v7.6.0 or later versions, if the `min-blob-size` was not explicitly set before the upgrade, it will maintain the old default value of 1KB to ensure stability in the configuration after the upgrade.
-> - A value smaller than `32KB` may affect the performance of range scans. However, if the workload primarily involves heavy writes and point queries, you can consider adjusting the `min-blob-size` for improved performance.
+> - Starting from TiDB v7.6.0, Titan is enabled by default for new clusters to enhance the performance of writing wide tables and JSON data. The default value of the [`min-blob-size`](/tikv-configuration-file.md#min-blob-size) threshold is changed from `1KB` to `32KB`. Values exceeding 32KB will now be stored in Titan, while other data continues to be stored in RocksDB.
+> - For existing clusters upgrading to TiDB v7.6.0 or later versions, if you do not explicitly set `min-blob-size` before the upgrade, it will maintain the old default value of `1KB`` to ensure stability in the configuration after the upgrade.
+> - A value smaller than `32KB` might affect the performance of range scans. However, if the workload primarily involves heavy writes and point queries, you can consider decrease the value of `min-blob-size` for better performance.
 
 + The smallest value stored in a Blob file. Values smaller than the specified size are stored in the LSM-Tree.
 + Default value: `"32KB"`
@@ -1629,6 +1636,11 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 + Unit: KB|MB|GB
 
 ### `blob-file-compression`
+
+> **Note:**
+>
+> - Snappy compressed files must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
+> - Starting from TiDB v7.6.0, the default value for the variable `blob-file-compression` has changed from `lz4` to `zstd`.
 
 + The compression algorithm used in a Blob file
 + Optional values: `"no"`, `"snappy"`, `"zlib"`, `"bzip2"`, `"lz4"`, `"lz4hc"`, `"zstd"`
@@ -1676,7 +1688,7 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 
     Upper limit of space amplification = 1 / (1 - discardable_ratio)
 
-    From the two equations above, you can see that decreasing the value of `discardable_ratio` can reduce space amplification but causes GC to be more frequent in Titan. Increasing the value reduces Titan GC, the corresponding I/O bandwidth, and CPU consumption but increases disk usage.
+    From the two equations, you can see that decreasing the value of `discardable_ratio` can reduce space amplification but causes GC to be more frequent in Titan. Increasing the value reduces Titan GC, the corresponding I/O bandwidth, and CPU consumption but increases disk usage.
 + Default value: `0.5`
 + Minimum value: `0`
 + Maximum value: `1`
@@ -2058,9 +2070,9 @@ Configuration items related to TiDB Lightning import and BR restore.
 + The garbage ratio threshold to trigger GC.
 + Default value: `1.1`
 
-### `num-threads`
+### `num-threads` <span class="version-mark">New in v7.6.0</span>
 
-+ The GC threads count when `enable-compaction-filter` is false.  <span class="version-mark">New in v7.6</span>
++ The number of GC threads when `enable-compaction-filter` is `false`.
 + Default value: `1`
 
 ## backup
