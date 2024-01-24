@@ -500,6 +500,9 @@ Starting from v7.6.0, the `TiDB-community-server` [binary-package](/binary-packa
         - Fix the issue that BR generates incorrect URIs for external storage files [#48452](https://github.com/pingcap/tidb/issues/48452) @[3AceShowHand](https://github.com/3AceShowHand)
         - Fix the issue that the log backup task can start but does not work properly if failing to connect to PD during task initialization [#16056](https://github.com/tikv/tikv/issues/16056) @[YuJuncen](https://github.com/YuJuncen)
         - Fix the issue that the log backup task might encounter memory leak and fail to run properly after startup [#16070](https://github.com/tikv/tikv/issues/16070) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue that inserting data into the system table `mysql.gc_delete_range` during the PITR process returns an error [#49346](https://github.com/pingcap/tidb/issues/49346) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that the `Unsupported collation` error is reported when you restore data from backups of an old version [#49466](https://github.com/pingcap/tidb/issues/49466) @[3pointer](https://github.com/3pointer)
+        - Fix the issue that permissions are not updated timely after user tables are recovered through snapshots in certain scenarios [#49394](https://github.com/pingcap/tidb/issues/49394) @[Leavrth](https://github.com/Leavrth)
 
     + TiCDC
 
