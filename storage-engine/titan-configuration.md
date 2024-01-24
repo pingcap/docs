@@ -97,7 +97,7 @@ It is recommended to set the value of `storage.block-cache.capacity` to the stor
 
 The [`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio) parameter and [`max-background-gc`](/tikv-configuration-file.md#max-background-gc) parameter significantly impact Titan's read performance and garbage collection process.
 
-When the ratio of useless data (the corresponding key has been updated or deleted) in a blob file exceeds the threshold set by [`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio), Titan GC is triggered. Reducing this threshold can reduce space amplification but can cause more frequent Titan GC. Increasing this value can reduce Titan GC, I/O bandwidth, and CPU consumption, but increase disk space usage.
+When the ratio of obsolete data (the corresponding key has been updated or deleted) in a blob file exceeds the threshold set by [`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio), Titan GC is triggered. Reducing this threshold can reduce space amplification but can cause more frequent Titan GC. Increasing this value can reduce Titan GC, I/O bandwidth, and CPU consumption, but increase disk space usage.
 
 If you observe that the Titan GC thread is in full load for a long time from **TiKV Details** - **Thread CPU** - **RocksDB CPU**, consider adjusting [`max-background-gc`](/tikv-configuration-file.md#max-background-gc) to increase the Titan GC thread pool size.
 
