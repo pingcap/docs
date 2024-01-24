@@ -1690,6 +1690,7 @@ Configuration items related to `rocksdb.defaultcf.titan`.
     Upper limit of space amplification = 1 / (1 - discardable_ratio)
 
     From the two equations, you can see that decreasing the value of `discardable_ratio` can reduce space amplification but causes GC to be more frequent in Titan. Increasing the value reduces Titan GC, the corresponding I/O bandwidth, and CPU consumption but increases disk usage.
+
 + Default value: `0.5`
 + Minimum value: `0`
 + Maximum value: `1`
