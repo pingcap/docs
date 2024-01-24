@@ -408,7 +408,7 @@ Starting from v7.6.0, the `TiDB-community-server` [binary-package](/binary-packa
     - Fix the issue that specifying placement rules when executing `ALTER TABLE t PARTITION BY` reports the error `ERROR 8239` [#48630](https://github.com/pingcap/tidb/issues/48630) @[mjonss](https://github.com/mjonss)
     - Fix the issue that the `START_TIME` column type in `INFORMATION_SCHEMA.CLUSTER_INFO` is not valid [#45221](https://github.com/pingcap/tidb/issues/45221) @[dveeden](https://github.com/dveeden)
     - Fix the issue that invalid `EXTRA` column type in `INFORMATION_SCHEMA.COLUMNS` leads to the error `Data Too Long, field len 30, data len 45` [#42030](https://github.com/pingcap/tidb/issues/42030) @[tangenta](https://github.com/tangenta)
-    - Fix the issue that `IN (...) ` causes different plan digests in `INFORMATION_SCHEMA.STATEMENTS_SUMMARY` [#33559](https://github.com/pingcap/tidb/issues/33559) @[King-Dylan](https://github.com/King-Dylan)
+    - Fix the issue that `IN (...)` causes different plan digests in `INFORMATION_SCHEMA.STATEMENTS_SUMMARY` [#33559](https://github.com/pingcap/tidb/issues/33559) @[King-Dylan](https://github.com/King-Dylan)
     - Fix the issue that when converting the `TIME` type to the `YEAR` type, the returned result mixes `TIME` and the year [#48557](https://github.com/pingcap/tidb/issues/48557) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that disabling `tidb_enable_collect_execution_info` causes the coprocessor cache to panic [#48212](https://github.com/pingcap/tidb/issues/48212) @[you06](https://github.com/you06)
     - Fix the issue that TiDB crashes when `shuffleExec` quits unexpectedly [#48230](https://github.com/pingcap/tidb/issues/48230) @[wshwsh12](https://github.com/wshwsh12)
