@@ -26,6 +26,7 @@ The supported vCPU and RAM sizes include the following:
 - 4 vCPU, 16 GiB
 - 8 vCPU, 16 GiB
 - 16 vCPU, 32 GiB
+- 32 vCPU, 64 GiB
 
 > **Note:**
 >
@@ -88,6 +89,7 @@ The supported vCPU and RAM sizes include the following:
 - 8 vCPU, 32 GiB
 - 8 vCPU, 64 GiB
 - 16 vCPU, 64 GiB
+- 32 vCPU, 128 GiB
 
 > **Note:**
 >
@@ -169,6 +171,7 @@ The supported node storage of different TiKV vCPUs is as follows:
 | 4 vCPU    | 200 GiB          |     2048 GiB     | 500 GiB              |
 | 8 vCPU    | 200 GiB          |     4096 GiB     | 500 GiB              |
 | 16 vCPU   | 200 GiB          |     6144 GiB     | 500 GiB              |
+| 32 vCPU   | 200 GiB          |     6144 GiB     | 500 GiB              |
 
 > **Note:**
 >
@@ -186,6 +189,7 @@ The supported vCPU and RAM sizes include the following:
 
 - 8 vCPU, 64 GiB
 - 16 vCPU, 128 GiB
+- 32 vCPU, 256 GiB
 
 Note that TiFlash is unavailable when the vCPU and RAM size of TiDB or TiKV is set as **4 vCPU, 16 GiB**.
 
@@ -209,6 +213,7 @@ The supported node storage of different TiFlash vCPUs is as follows:
 |:---------:|:----------------:|:----------------:|:--------------------:|
 | 8 vCPU    | 200 GiB          | 2048 GiB         | 500 GiB              |
 | 16 vCPU   | 200 GiB          | 2048 GiB         | 500 GiB              |
+| 32 vCPU   | 200 GiB          | 2048 GiB         | 500 GiB              |
 
 > **Note:**
 >
