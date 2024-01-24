@@ -26,7 +26,7 @@ For TiDB Self-Hosted, `IMPORT INTO` supports importing data from files stored in
 - `IMPORT INTO` only supports importing data into existing empty tables in the database.
 - `IMPORT INTO` does not support transactions or rollback. Executing `IMPORT INTO` within an explicit transaction (`BEGIN`/`END`) will return an error.
 - The execution of `IMPORT INTO` blocks the current connection until the import is completed. To execute the statement asynchronously, you can add the `DETACHED` option.
-- `IMPORT INTO` does not support working simultaneously with features such as [Backup & Restore](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview), [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md), [acceleration of adding indexes](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630), data import using TiDB Lightning, data replication using TiCDC, or [Point-in-Time Recovery (PITR)](https://docs.pingcap.com/tidb/stable/br-log-architecture).
+- `IMPORT INTO` does not support working simultaneously with features such as [Backup & Restore](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview), [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md), [acceleration of adding indexes](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630), data import using TiDB Lightning, data replication using TiCDC, or [Point-in-Time Recovery (PITR)](https://docs.pingcap.com/tidb/stable/br-log-architecture).
 - Only one `IMPORT INTO` job can run on a cluster at a time. Although `IMPORT INTO` performs a precheck for running jobs, it is not a hard limit. Starting multiple import jobs might work when multiple clients execute `IMPORT INTO` simultaneously, but you need to avoid that because it might result in data inconsistency or import failures.
 - During the data import process, do not perform DDL or DML operations on the target table, and do not execute [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) for the target database. These operations can lead to import failures or data inconsistencies. In addition, it is **NOT** recommended to perform read operations during the import process, as the data being read might be inconsistent. Perform read and write operations only after the import is completed.
 - The import process consumes system resources significantly. For TiDB Self-Hosted, to get better performance, it is recommended to use TiDB nodes with at least 32 cores and 64 GiB of memory. TiDB writes sorted data to the TiDB [temporary directory](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) during import, so it is recommended to configure high-performance storage media for TiDB Self-Hosted, such as flash memory. For more information, see [Physical Import Mode limitations](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode#requirements-and-restrictions).
@@ -36,6 +36,7 @@ For TiDB Self-Hosted, `IMPORT INTO` supports importing data from files stored in
 - When the [Global Sort](/tidb-global-sort.md) feature is used for data import, the data size of a single row after encoding must not exceed 32 MiB.
 - When the Global Sort feature is used for data import, if the target TiDB cluster is deleted before the import task is completed, temporary data used for global sorting might remain on Amazon S3. In this case, you need to delete the residual data manually to avoid increasing S3 storage costs.
 - Ensure that the data to be imported does not contain any records with primary key or non-null unique index conflicts. Otherwise, the conflicts can result in import task failures.
+- If an `IMPORT INTO` task scheduled by the Distributed eXecution Framework (DXF) is already running, it cannot be scheduled to a new TiDB node. If the TiDB node that executes the data import task is restarted, it will no longer execute the data import task, but transfers the task to another TiDB node to continue executing. However, if the imported data is from a local file, the task will not be transferred to another TiDB node to continue executing.
 - Known issue: the `IMPORT INTO` task might fail if the PD address in the TiDB node configuration file is inconsistent with the current PD topology of the cluster. This inconsistency can arise in situations such as that PD was scaled in previously, but the TiDB configuration file was not updated accordingly or the TiDB node was not restarted after the configuration file update.
 
 ## Prerequisites for import
@@ -95,6 +96,7 @@ In the left side of the `SET` expression, you can only reference a column name t
 It specifies the storage location of the data file, which can be an Amazon S3 or GCS URI path, or a TiDB local file path.
 
 - Amazon S3 or GCS URI path: for URI configuration details, see [URI Formats of External Storage Services](/external-storage-uri.md).
+
 - TiDB local file path: it must be an absolute path, and the file extension must be `.csv`, `.sql`, or `.parquet`. Make sure that the files corresponding to this path are stored on the TiDB node connected by the current user, and the user has the `FILE` privilege.
 
 > **Note:**
@@ -149,7 +151,8 @@ The supported options are described as follows:
 
 > **Note:**
 >
-> The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
+> - The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
+> - Because TiDB Lightning cannot concurrently decompress a single large compressed file, the size of the compressed file affects the import speed. It is recommended that a source file is no greater than 256 MiB after decompression.
 
 ## Global Sort
 

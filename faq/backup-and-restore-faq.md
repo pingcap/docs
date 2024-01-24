@@ -10,7 +10,7 @@ This document lists the frequently asked questions (FAQs) and the solutions of T
 
 ## What should I do to quickly recover data after mistakenly deleting or updating data?
 
-TiDB v6.4.0 introduces the flashback feature. You can use this feature to quickly recover data within the GC time to a specified point in time. Therefore, if misoperations occur, you can use this feature to recover data. For details, see [Flashback Cluster](/sql-statements/sql-statement-flashback-to-timestamp.md) and [Flashback Database](/sql-statements/sql-statement-flashback-database.md).
+TiDB v6.4.0 introduces the flashback feature. You can use this feature to quickly recover data within the GC time to a specified point in time. Therefore, if misoperations occur, you can use this feature to recover data. For details, see [Flashback Cluster](/sql-statements/sql-statement-flashback-cluster.md) and [Flashback Database](/sql-statements/sql-statement-flashback-database.md).
 
 ## In TiDB v5.4.0 and later versions, when backup tasks are performed on the cluster under a heavy workload, why does the speed of backup tasks become slow?
 
@@ -29,7 +29,7 @@ When you perform backup tasks on an offline cluster, to speed up the backup, you
 
 ## PITR issues
 
-### What is the difference between [PITR](/br/br-pitr-guide.md) and [cluster flashback](/sql-statements/sql-statement-flashback-to-timestamp.md)?
+### What is the difference between [PITR](/br/br-pitr-guide.md) and [cluster flashback](/sql-statements/sql-statement-flashback-cluster.md)?
 
 From the perspective of use cases, PITR is usually used to restore the data of a cluster to a specified point in time when the cluster is completely out of service or the data is corrupted and cannot be recovered using other solutions. To use PITR, you need a new cluster for data recovery. The cluster flashback feature is specifically designed for the data error scenarios caused by user mis-operations or other factors, which allows you to restore the data of a cluster in-place to the latest timestamp before the data errors occur.
 
@@ -296,6 +296,10 @@ Note that even if you configures [table filter](/table-filter.md#syntax), **BR d
 - System variable tables (`mysql.tidb`, `mysql.global_variables`)
 - [Other system tables](https://github.com/pingcap/tidb/blob/master/br/pkg/restore/systable_restore.go#L31)
 
+### How to deal with the error of `cannot find rewrite rule` during restoration?
+
+Examine whether there are tables in the restoration cluster sharing the same name as other tables in the backup data but having inconsistent structures. In most cases, this issue is caused by missing indexes in the tables of the restoration cluster. A recommended approach is to delete such tables in the restoration cluster first and then retry restoration.
+
 ## Other things you may want to know about backup and restore
 
 ### What is the size of the backup data? Are there replicas of the backup?
@@ -327,3 +331,11 @@ If you do not execute `ANALYZE` on the table, TiDB will fail to select the optim
 ### Does BR back up the `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` information of a table? Does the restored table have multiple Regions?
 
 Yes. BR backs up the [`SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) information of a table. The data of the restored table is also split into multiple Regions.
+
+## If the recovery process is interrupted, is it necessary to delete the already recovered data and start the recovery again?
+
+No, it is not necessary. Starting from v7.1.0, BR supports resuming data from a breakpoint. If the recovery is interrupted due to unexpected circumstances, simply restart the recovery task, and it will resume from where it left off.
+
+## After the recovery is complete, can I delete a specific table and then recover it again?
+
+Yes, after deleting a specific table, you can recover it again. But note that, you can only recover tables that are deleted using the `DROP TABLE` or `TRUNCATE TABLE` statement, not the `DELETE FROM` statement. This is because `DELETE FROM` only updates the MVCC version to mark the data to be deleted, and the actual data deletion occurs after GC.
