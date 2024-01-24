@@ -19,7 +19,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     It is recommended to use such nodes in the following scenarios:
 
     - High-workload production environments
-    - Extreme high performance
+    - Extremely high performance
 
 ## January 16, 2024
 
