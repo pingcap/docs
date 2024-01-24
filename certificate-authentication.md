@@ -366,7 +366,7 @@ mysql  Ver 8.3.0 for Linux on x86_64 (MySQL Community Server - GPL)
 Connection id:       1
 Current database:    test
 Current user:        root@127.0.0.1
-SSL:			     Cipher in use is TLS_AES_128_GCM_SHA256
+SSL:                 Cipher in use is TLS_AES_128_GCM_SHA256
 
 ```
 
