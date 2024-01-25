@@ -7,11 +7,9 @@ summary: Learn how to locally customize the PDF output of TiDB Documentation to 
 
 This tutorial provides a method to generate TiDB documentation in PDF format. With this method, you can flexibly sort or delete certain contents in TiDB Documentation locally, and customize the PDF output to meet the needs of specific scenarios.
 
-
 ## Environment preparation
 
 The following preparation steps only need to be performed once when you generate a PDF file for the first time and can be skipped directly for future PDF generation.
-
 
 ### Preparation 1: Install and configure the Docker environment
 
