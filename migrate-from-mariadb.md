@@ -5,7 +5,7 @@ summary: Learn how to migrate data from MariaDB to TiDB.
 
 # Migrate Data from MariaDB to TiDB
 
-This document describes how to migrate data from a MariaDB server installation to a TiDB Cluster.
+This document describes how to migrate data from a MariaDB server installation to a TiDB cluster.
 
 ## Prerequisites
 
