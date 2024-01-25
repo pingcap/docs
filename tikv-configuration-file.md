@@ -2142,8 +2142,8 @@ Configuration items related to log backup.
 
 ### `initial-scan-rate-limit` <span class="version-mark">New in v6.2.0</span>
 
-+ The rate limit on throughput in an incremental data scan during log backup.
-+ Default value: 60, indicating that the rate limit is 60 MB/s by default.
++ The rate limit on throughput in an incremental data scan during log backup, which means the maximum amount of data that can be read from the disk per second.
++ Default value: 60 MiB
 
 ### `max-flush-interval` <span class="version-mark">New in v6.2.0</span>
 
