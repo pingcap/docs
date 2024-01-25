@@ -265,7 +265,7 @@ It is strongly recommended to first do this on a test or development instance of
 
 3. Restore the data. For this step we will use the `tiup tidb-lightning` command. See [Get Started with TiDB Lightning](/get-started-with-tidb-lightning.md) for how to configure TiDB Lightning and how to run it.
 
-4. Migrate user accounts and permissions. See [Users and grants](#users-and-grants) for how to migrate your users and permissions.
+4. Migrate user accounts and permissions. See [Export users and grants](#export-users-and-grants) for how to migrate your users and permissions.
 
 5. Reconfigure your application. You need to change the application configuration so that it can connect to the TiDB server.
 
@@ -299,7 +299,7 @@ Follow the [Quick Start Guide for TiDB Data Migration](/dm/quick-start-with-dm.m
 
 ### Step 3. Migrate user accounts and permissions
 
-See [Users and grants](#users-and-grants) for how to migrate your users and permissions.
+See [Export users and grants](#export-users-and-grants) for how to migrate your users and permissions.
 
 ### Step 4. Test your data
 
