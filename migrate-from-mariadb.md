@@ -151,7 +151,7 @@ MariaDB supports the `RETURNING` keyword for `DELETE`, `INSERT` and `REPLACE` st
 
 ### Data types
 
-MariaDB supports some datatypes that TiDB doesn't support, such as `UUID`, `INET4` and `INET6`.
+MariaDB supports some data types that TiDB does not support, such as `UUID`, `INET4` and `INET6`.
 
 To check for these datatypes, execute the following statement:
 
@@ -291,19 +291,19 @@ If you are not using an account with the `SUPER` permission, then you might have
 ignore-checking-items: ["replication_privilege"]
 ```
 
-### Step 2. Replication
+### Step 2. Replicate data
 
 Note that it is not required to first copy the initial data as you would do with MariaDB to MariaDB replication, DM will do this for you.
 
 Follow the [Quick Start Guide for TiDB Data Migration](/dm/quick-start-with-dm.md) to replicate your data from MariaDB to TiDB.
 
-### Step 3. User accounts and permissions
+### Step 3. Migrate user accounts and permissions
 
 See [Users and grants](#users-and-grants) for how to migrate your users and permissions.
 
-### Step 4. Test
+### Step 4. Test your data
 
-Once your data is replicated, you can run read-only queries on it to validate it. See the section about [Test your application](#test-your-application) for more details.
+Once your data is replicated, you can run read-only queries on it to validate it. For more information, see [Test your application](#test-your-application).
 
 ### Step 5. Switch over
 
@@ -319,7 +319,7 @@ To check for replication delay, run [`query-status <taskname>`](/dm/dm-query-sta
 
 Once you have verified that the migration is successful, you can make a final backup of the data in MariaDB and stop the server. It also means you can stop and remove the DM cluster.
 
-## Users and grants
+## Export users and grants
 
 You can use [`pt-show-grants`](https://docs.percona.com/percona-toolkit/pt-show-grants.html). It is part of the Percona Toolkit to export users and grants from MariaDB and load these into TiDB.
 
