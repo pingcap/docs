@@ -15,7 +15,7 @@ summary: Learn about the Data Migration tool, the architecture, the key componen
 
 ## Basic features
 
-- **Compatibility with MySQL.** DM is compatible with MySQL 5.7 protocols and most of the features and syntax of MySQL 5.7.
+- **Compatibility with MySQL.** DM is compatible with the MySQL protocol and most of the features and syntax of MySQL 5.7 and MySQL 8.0.
 - **Replicating DML and DDL events.** It supports parsing and replicating DML and DDL events in MySQL binlog.
 - **Migrating and merging MySQL shards.** DM supports migrating and merging multiple MySQL database instances upstream to one TiDB database downstream. It supports customizing replication rules for different migration scenarios. It can automatically detect and handle DDL changes of upstream MySQL shards, which greatly reduces the operational cost.
 - **Various types of filters.** You can predefine event types, regular expressions, and SQL expressions to filter out MySQL binlog events during the data migration process.
@@ -85,5 +85,10 @@ Before v5.4, the DM documentation is independent of the TiDB documentation. To a
 
 > **Note:**
 >
+<<<<<<< HEAD
 > - Since October 2021, DM's GitHub repository has been moved to [pingcap/tiflow](https://github.com/pingcap/tiflow/tree/release-7.5/dm). If you see any issues with DM, submit your issue to the `pingcap/tiflow` repository for feedback.
 > - In earlier versions (v1.0 and v2.0), DM uses version numbers that are independent of TiDB. Since v5.3, DM uses the same version number as TiDB. The next version of DM v2.0 is DM v5.3. There are no compatibility changes from DM v2.0 to v5.3, and the upgrade process is the same as a normal upgrade, only an increase in version number.
+=======
+> - Since October 2021, DM's GitHub repository has been moved to [pingcap/tiflow](https://github.com/pingcap/tiflow/tree/master/dm). If you see any issues with DM, submit your issue to the `pingcap/tiflow` repository for feedback.
+> - In earlier versions (v1.0 and v2.0), DM uses version numbers that are independent of TiDB. Since v5.3, DM uses the same version number as TiDB. The next version of DM v2.0 is DM v5.3. There are no compatibility changes from DM v2.0 to v5.3, and the upgrade process is the same as a normal upgrade, only an increase in version number.
+>>>>>>> f1388d45af (More MySQL 8.x compatibility updates (#16270))
