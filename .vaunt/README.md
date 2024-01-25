@@ -17,6 +17,9 @@ With Vaunt, you can take this identity to the next level by seamlessly
 integrating a dynamic SVG Developer Card and Community Board directly into your GitHub README.
 Let's get started:
 
+See the [GitHub Docs](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme)
+for more information about managing your profile README.
+
 #### Create a New Repository
 
 - In the upper-right corner of any page, click on the "+" icon, then select "New repository"
@@ -33,6 +36,10 @@ Let's get started:
 - Your README file is now open for editing
 
 #### Integrate the Achievement Card
+
+<img src="1st_place.png" alt="1st place achievement" width="200"/>
+<img src="2nd_place.png" alt="2nd place achievement" width="200"/>
+<img src="3rd_place.png" alt="3rd place achievement" width="200"/>
 
 - Add this code to your README file and replace `{{github_username}}` with your username
 
