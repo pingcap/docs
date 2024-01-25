@@ -56,9 +56,9 @@ GROUP BY
 1 row in set (0.002 sec)
 ```
 
-### System versioned tables
+### System-versioned tables
 
-TiDB does not support [system versioned tables](https://mariadb.com/kb/en/system-versioned-tables/). However, TiDB does support [`AS OF TIMESTAMP`](/as-of-timestamp.md) which might replace some of the use cases of system versioned tables.
+TiDB does not support [system-versioned tables](https://mariadb.com/kb/en/system-versioned-tables/). However, TiDB does support [`AS OF TIMESTAMP`](/as-of-timestamp.md) which might replace some of the use cases of system-versioned tables.
 
 You can check for affected tables with the following statement:
 
