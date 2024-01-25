@@ -364,7 +364,7 @@ Starting from v7.6.0, the `TiDB-community-server` [binary-package](/binary-packa
     + TiCDC
 
         - Improve the performance of TiCDC replicating data to object storage by increasing parallelism [#10098](https://github.com/pingcap/tiflow/issues/10098) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - Support making TiCDC Canal-JSON content format [compatible with the content format of the official Canal output](/ticdc/ticdc-canal-json#compatibility-with-the-official-canal) by setting `content-compatible=true` in the `sink-uri` configuration [#10106](https://github.com/pingcap/tiflow/issues/10106) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Support making TiCDC Canal-JSON content format [compatible with the content format of the official Canal output](/ticdc/ticdc-canal-json.md#compatibility-with-the-official-canal) by setting `content-compatible=true` in the `sink-uri` configuration [#10106](https://github.com/pingcap/tiflow/issues/10106) @[3AceShowHand](https://github.com/3AceShowHand)
 
     + TiDB Data Migration (DM)
 
