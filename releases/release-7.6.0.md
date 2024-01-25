@@ -77,6 +77,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
     --storage "s3://${Bucket}/${Folder}" \
     --s3.region "${region}" \
     --granularity "coarse-grained" \
+    --send-credentials-to-tikv=true \    
     --log-file restorefull.log
     ```
 
