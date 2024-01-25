@@ -5,11 +5,13 @@ summary: Learn how to locally customize the PDF output of TiDB Documentation to 
 
 # TiDB Documentation PDF Generation Tutorial
 
-This tutorial provides a method to generate TiDB documentation in PDF format. With this method, you can freely sort and delete certain contents in TiDB Documentation locally, and customize the PDF output to meet the needs of specific scenarios.
+This tutorial provides a method to generate TiDB documentation in PDF format. With this method, you can flexibly sort or delete certain contents in TiDB Documentation locally, and customize the PDF output to meet the needs of specific scenarios.
+
 
 ## Environment preparation
 
-The following preparation steps only need to be performed once when you generate a PDF file for the first time and can be skipped directly for future PDF generations.
+The following preparation steps only need to be performed once when you generate a PDF file for the first time and can be skipped directly for future PDF generation.
+
 
 ### Preparation 1: Install and configure the Docker environment
 
@@ -70,9 +72,9 @@ The following steps take TiDB English documentation as an example to show how to
 
 > Estimated time: The following operations only take two minutes, but the PDF generation requires waiting for 0.5 to 1 hour.
 
-1. Make sure that the files in your local TiDB documentation repository are the latest versions in the upstream GitHub repository.
+1. Make sure that the files in your local TiDB documentation repository are of the latest version in the upstream GitHub repository.
 
-2. Freely sort or delete the contents in TiDB Documentation according to your needs.
+2. Sort or delete the contents in TiDB Documentation according to your needs.
 
     1. Open the `TOC.md` file located in the root directory of your local repository.
     2. Edit the `TOC.md` file. For example, you can remove titles and links of all unnecessary document chapters.
@@ -106,9 +108,9 @@ The following steps take TiDB English documentation as an example to show how to
         python3 scripts/merge_by_toc.py
         ```
 
-       **Expected output:**
+        **Expected output:**
 
-       In the same folder as `TOC.md`, you will see a newly generated `doc.md` file.
+        In the same folder as `TOC.md`, you will see a newly generated `doc.md` file.
 
 4. Generate the PDF documentation:
 
