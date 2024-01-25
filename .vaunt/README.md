@@ -38,8 +38,6 @@ for more information about managing your profile README.
 #### Integrate the Achievement Card
 
 <img src="1st_place.png" alt="1st place achievement" width="200"/>
-<img src="2nd_place.png" alt="2nd place achievement" width="200"/>
-<img src="3rd_place.png" alt="3rd place achievement" width="200"/>
 
 - Add this code to your README file and replace `{{github_username}}` with your username
 
