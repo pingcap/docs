@@ -263,20 +263,20 @@ The meaning and format of `changefeed_id`, `start_ts`, `target_ts`, and `sink_ur
 
 The descriptions of the `replica_config` parameters are as follows.
 
-| Parameter name | Description |
-| :------------------------ | :----------------------------------------------------- |
-| `bdr_mode`                | `BOOLEAN` type. Determines whether to enable [bidirectional replication](/ticdc/ticdc-bidirectional-replication.md). The default value is `false`. (Optional)               |
-| `case_sensitive`          | `BOOLEAN` type. Determines whether to be case-sensitive when filtering table names. Starting from v7.5.0, the default value changes from `true` to `false`. (Optional)   |
-| `check_gc_safe_point`     | `BOOLEAN` type. Determines whether to check that the start time of the replication task is earlier than the GC time. The default value is `true`. (Optional)                                  |
-| `consistent`              | The configuration parameters of redo log. (Optional) |
-| `enable_sync_point`       | `BOOLEAN` type. Determines whether to enable `sync point`. (Optional)         |
-| `filter`                  | The configuration parameters of `filter`. (Optional)           |
-| `force_replicate`         | `BOOLEAN` type. The default value is `false`. When you set it to `true`, the replication task forcibly replicates the tables without unique indexes. (Optional)                |
-| `ignore_ineligible_table` | `BOOLEAN` type. The default value is `false`. When you set it to `true`, the replication task ignores the tables that cannot be replicated. (Optional)                     |
-| `memory_quota`            | `UINT64` type. The memory quota for the replication task. (Optional)           |
-| `mounter`                 | The  configuration parameters of `mounter`. (Optional)               |
-| `sink`                    | The configuration parameters of `sink`. (Optional)                         |
-| `sync_point_interval`     | `STRING` type. Note that the returned value is a time in nanosecond of the `UINT64` type. When the `sync point` feature is enabled, this parameter specifies the interval at which Syncpoint aligns the upstream and downstream snapshots. The default value is `10m` and the minimum value is `30s`. (Optional) |
+| Parameter name | Description                                                                                                                                                                                                                                                                                                                     |
+| :------------------------ |:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `bdr_mode`                | `BOOLEAN` type. Determines whether to enable [bidirectional replication](/ticdc/ticdc-bidirectional-replication.md). The default value is `false`. (Optional)                                                                                                                                                                   |
+| `case_sensitive`          | `BOOLEAN` type. Determines whether to be case-sensitive when filtering table names. Starting from v6.5.6, v7.1.3, and v7.5.0, the default value changes from `true` to `false`. (Optional)                                                                                                                                       |
+| `check_gc_safe_point`     | `BOOLEAN` type. Determines whether to check that the start time of the replication task is earlier than the GC time. The default value is `true`. (Optional)                                                                                                                                                                    |
+| `consistent`              | The configuration parameters of redo log. (Optional)                                                                                                                                                                                                                                                                            |
+| `enable_sync_point`       | `BOOLEAN` type. Determines whether to enable `sync point`. (Optional)                                                                                                                                                                                                                                                           |
+| `filter`                  | The configuration parameters of `filter`. (Optional)                                                                                                                                                                                                                                                                            |
+| `force_replicate`         | `BOOLEAN` type. The default value is `false`. When you set it to `true`, the replication task forcibly replicates the tables without unique indexes. (Optional)                                                                                                                                                                 |
+| `ignore_ineligible_table` | `BOOLEAN` type. The default value is `false`. When you set it to `true`, the replication task ignores the tables that cannot be replicated. (Optional)                                                                                                                                                                          |
+| `memory_quota`            | `UINT64` type. The memory quota for the replication task. (Optional)                                                                                                                                                                                                                                                            |
+| `mounter`                 | The  configuration parameters of `mounter`. (Optional)                                                                                                                                                                                                                                                                          |
+| `sink`                    | The configuration parameters of `sink`. (Optional)                                                                                                                                                                                                                                                                              |
+| `sync_point_interval`     | `STRING` type. Note that the returned value is a time in nanosecond of the `UINT64` type. When the `sync point` feature is enabled, this parameter specifies the interval at which Syncpoint aligns the upstream and downstream snapshots. The default value is `10m` and the minimum value is `30s`. (Optional)                |
 | `sync_point_retention`    | `STRING` type. Note that the returned value is a time in nanosecond of the `UINT64` type. When the `sync point` feature is enabled, this parameter specifies how long the data is retained by Syncpoint in the downstream table. When this duration is exceeded, the data is cleaned up. The default value is `24h`. (Optional) |
 
 The `consistent` parameters are described as follows:
@@ -809,6 +809,95 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds/test1
 ```
 
 The meanings of the JSON response body are the same as those in the [Create a replication task](#create-a-replication-task) section. See that section for details.
+
+## Query whether a specific replication task is completed
+
+This API is a synchronous interface. If the request is successful, it returns the synchronization status of the specified replication task (changefeed), including whether the task is completed and additional details.
+
+### Request URI
+
+`GET /api/v2/changefeed/{changefeed_id}/synced`
+
+### Parameter description
+
+#### Path parameter
+
+| Parameter name  | Description                 |
+|:----------------|:----------------------------|
+| `changefeed_id` | The ID of the replication task (changefeed) to be queried. |
+
+### Examples
+
+The following request queries the synchronization status of the replication task with the ID `test1`.
+
+```shell
+curl -X GET http://127.0.0.1:8300/api/v2/changefeed/test1/synced
+```
+
+**Example 1: The synchronization is completed**
+
+```json
+{
+  "synced": true,
+  "sink_checkpoint_ts": "2023-11-30 15:14:11.015",
+  "puller_resolved_ts": "2023-11-30 15:14:12.215",
+  "last_synced_ts": "2023-11-30 15:08:35.510",
+  "now_ts": "2023-11-30 15:14:11.511",
+  "info": "Data syncing is finished"
+}
+```
+
+The response includes the following fields:
+
+- `synced`: whether this replication task is completed. `true` means the task is completed, and `false` means potential incompleteness. If it is `false`, you need to check both the `info` field and other fields for the specific status.
+- `sink_checkpoint_ts`: the checkpoint-ts value of the sink module, in PD time.
+- `puller_resolved_ts`: the resolved-ts value of the puller module, in PD time.
+- `last_synced_ts`: the commit-ts value of the latest data processed by TiCDC, in PD time.
+- `now_ts`: current PD time.
+- `info`: supplementary information to assist in determining the synchronization status, especially when `synced` is `false`.
+
+**Example 2: The synchronization is not completed**
+
+```json
+{
+  "synced": false,
+  "sink_checkpoint_ts": "2023-11-30 15:26:31.519",
+  "puller_resolved_ts": "2023-11-30 15:26:23.525",
+  "last_synced_ts": "2023-11-30 15:24:30.115",
+  "now_ts": "2023-11-30 15:26:31.511",
+  "info": "The data syncing is not finished, please wait"
+}
+```
+
+This example shows the response of an ongoing replication task. By checking both `synced` and `info` fields, you can learn that the replication task is not completed yet and further waiting is expected.
+
+**Example 3: The synchronization status needs further check**
+
+```json
+{
+  "synced":false,
+  "sink_checkpoint_ts":"2023-12-13 11:45:13.515",
+  "puller_resolved_ts":"2023-12-13 11:45:13.525",
+  "last_synced_ts":"2023-12-13 11:45:07.575",
+  "now_ts":"2023-12-13 11:50:24.875",
+  "info":"Please check whether PD is online and TiKV Regions are all available. If PD is offline or some TiKV regions are not available, it means that the data syncing process is complete. To check whether TiKV regions are all available, you can view 'TiKV-Details' > 'Resolved-Ts' > 'Max Leader Resolved TS gap' on Grafana. If the gap is large, such as a few minutes, it means that some regions in TiKV are unavailable. Otherwise, if the gap is small and PD is online, it means the data syncing is incomplete, so please wait"
+}
+```
+
+This API enables you to query the synchronization status even when the upstream cluster encounters disasters. In certain situations, you might not be able to directly determine whether the current data replication task of TiCDC is completed or not. In such cases, you can request this API, and then check both the `info` field in the response and the current status of the upstream cluster to determine the specific status.
+
+In this example, `sink_checkpoint_ts` is behind `now_ts` in time, either because TiCDC is still catching up with data replication, or because the PD or TiKV has failed. If this is due to TiCDC still catching up with data replication, it means that the replication task is not completed yet. If this is due to a PD or TiKV failure, it means that the replication task is completed. Therefore, you need to check the `info` field to assist in determining the cluster status.
+
+**Example 4: Query error**
+
+```json
+{
+  "error_msg": "[CDC:ErrPDEtcdAPIError]etcd api call error: context deadline exceeded",
+  "error_code": "CDC:ErrPDEtcdAPIError"
+}
+```
+
+In cases where PD in the upstream cluster fails for a long period of time, querying this API might return an error similar to the preceding one, which provides no information for further check. Because PD failures directly affect TiCDC data replication, when getting such errors, you can assume that TiCDC has completed the data replication as much as possible, but data loss might still occur in the downstream cluster due to PD failures.
 
 ## Pause a replication task
 
