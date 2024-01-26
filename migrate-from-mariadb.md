@@ -273,7 +273,7 @@ It is strongly recommended to first do this on a test or development instance of
 
 5. Reconfigure your application. You need to change the application configuration so that it can connect to the TiDB server.
 
-6. Clean up. Once you have verified that the migration is successful you can make a final backup of the data in MariaDB and stop the server. This also means you can stop and remove the DM cluster.
+6. Clean up. Once you have verified that the migration is successful you can make a final backup of the data in MariaDB and stop the server. This also means you can remove tools such as TiUP, Dumpling, and TiDB Lightning.
 
 ## Replicate data
 
