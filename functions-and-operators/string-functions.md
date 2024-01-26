@@ -155,12 +155,11 @@ Decode to a base-64 string and return result.
 
 ### [`HEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_hex)
 
-Return a hexadecimal representation of a decimal or string value.
+The `HEX()` function is used to convert the given argument into a string representation of its hexadecimal value. The argument can be either a string or a number.
 
-- For a string argument `HEX(str)` returns a hexadecimal string representation of `str` where each byte of each character in `str` is converted to two hexadecimal digits. For example `a` in a UTF-8 or ASCII character set is encoded as a byte with a binary value of 00111101 or 61 in hexadecimal notation.
-- The inverse of this operation is performed by the [`UNHEX()`](/functions-and-operators/string-functions.md#unhex) function.
-- For a numeric argument `HEX(n)` returns a hexadecimal string representation of the value of `n` treated as a longlong (`BIGINT`) number. This is equivalent to [`CONV(n, 10, 16)`](/functions-and-operators/numeric-functions-and-operators#mathematical-functions).
-- For a `NULL` argument, this function returns `NULL`.
+- If the argument is a string, `HEX(str)` returns a hexadecimal string representation of `str`. The function converts each byte of each character in `str` into two hexadecimal digits. For example, the character `a` in a UTF-8 or ASCII character set is represented as a binary value of `00111101`, or `61` in hexadecimal notation.
+- If the argument is a number, `HEX(n)` returns a hexadecimal string representation of `n`. The function treats the argument `n` as a `BIGINT` number, equivalent to using `CONV(n, 10, 16)`.
+- If the argument is `NULL`, the function returns `NULL`.
 
 Examples:
 
