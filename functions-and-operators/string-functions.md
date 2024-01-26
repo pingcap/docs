@@ -200,6 +200,8 @@ The `INSERT(str, pos, len, newstr)` function is used to replace a substring in `
 - If `len` exceeds the remaining length of `str` from position `pos`, the function replaces the rest of the string from position `pos`.
 - If any argument is `NULL`, the function returns `NULL`.
 
+Examples:
+
 ```sql
 SELECT INSERT('He likes tennis', 4, 5, 'plays');
 +------------------------------------------+
@@ -207,35 +209,45 @@ SELECT INSERT('He likes tennis', 4, 5, 'plays');
 +------------------------------------------+
 | He plays tennis                          |
 +------------------------------------------+
+```
 
+```sql
 SELECT INSERT('He likes tennis', -1, 5, 'plays');
 +-------------------------------------------+
 | INSERT('He likes tennis', -1, 5, 'plays') |
 +-------------------------------------------+
 | He likes tennis                           |
 +-------------------------------------------+
+```
 
+```sql
 SELECT INSERT('He likes tennis', 4, 100, 'plays');
 +--------------------------------------------+
 | INSERT('He likes tennis', 4, 100, 'plays') |
 +--------------------------------------------+
 | He plays                                   |
 +--------------------------------------------+
+```
 
+```sql
 SELECT INSERT('He likes tenis', 10, 100, '🍣');
 +-------------------------------------------+
 | INSERT('He likes tenis', 10, 100, '🍣')     |
 +-------------------------------------------+
 | He likes 🍣                                 |
 +-------------------------------------------+
+```
 
+```sql
 SELECT INSERT('あああああああ', 2, 3, 'いいい');
 +----------------------------------------------------+
 | INSERT('あああああああ', 2, 3, 'いいい')           |
 +----------------------------------------------------+
 | あいいいあああ                                     |
 +----------------------------------------------------+
+```
 
+```sql
 SELECT INSERT('あああああああ', 2, 3, 'xx');
 +---------------------------------------------+
 | INSERT('あああああああ', 2, 3, 'xx')        |
