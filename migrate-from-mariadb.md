@@ -9,7 +9,6 @@ This document describes how to migrate data from a MariaDB server installation t
 
 ## Prerequisites
 
-
 Choose the right migration strategy:
 
 - The first strategy is to [Dump and restore](#dump-and-restore). This works for all versions of MariaDB. The drawback of this strategy is that it needs more downtime.
