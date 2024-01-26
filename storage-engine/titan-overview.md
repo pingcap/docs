@@ -138,7 +138,7 @@ For backward compatibility, the TiKV snapshots are still in the RocksDB format d
 The following table lists the QPS comparison of the YCSB workload based on different `min-blob-size` values. In each round of testing, the row width of the test data is equal to `min-blob-size`, so that the data is stored in Titan when Titan is enabled.
 
 | Row width (Bytes)      | `Point_Get` |  `Point_Get` (Titan)| scan100 | scan100 (Titan)| scan10000 | scan10000 (Titan)| `UPDATE` | `UPDATE` (Titan) |
-| ---------------- | ---------| -------------- | --------| ------------- | --------- | --------------- | ------ | ------------ |
+| ----------------: | ---------: | --------------: | --------: | -------------: | ---------: | ---------------: | ------: | ------------: |
 | 1KB  | 139255 | 140486 | 25171 | 21854 | 533 | 175 | 17913 | 30767 |
 | 2KB | 114201 |124075 | 12466 |11552 |249 |131 |10369 | 27188 |
 | 4KB | 92385   | 103811 | 7918 | 5937 | 131 | 87 | 5327  | 22653 |
