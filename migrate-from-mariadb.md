@@ -9,9 +9,6 @@ This document describes how to migrate data from a MariaDB server installation t
 
 ## Prerequisites
 
-- Install [Dumpling](/dumpling-overview.md) and [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md).
-- Set up [Data Migration (DM)](/dm/dm-overview.md)
-- Make sure you have the required privileges on the MariaDB server that are required for Dumpling to export data.
 
 Choose the right migration strategy:
 
@@ -24,6 +21,13 @@ Besides these two strategies, there might be other strategies available specific
 - Modify your application to write and read from both MariaDB and TiDB while the migration is ongoing.
 
 This document only covers the first two strategies.
+
+Prepare the following based on the strategy you choose:
+
+- For the first strategy:
+    - Install [Dumpling](/dumpling-overview.md) and [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md).
+    - Make sure you have the [required privileges](/dumpling-overview.md#required-privileges) on the MariaDB server for Dumpling to export data.
+- For the second strategy, set up [Data Migration (DM)](/dm/dm-overview.md).
 
 ## Check compatibility
 
@@ -257,7 +261,7 @@ It is strongly recommended to first do this on a test or development instance of
 
 1. Stop your application. Take your application offline. This ensures there are no modifications made to the data in MariaDB during or after the migration.
 
-2. Dump the data. For this the first step is to dump data in MariaDB with the `tiup dumpling` command.
+2. Dump the data. For this the first step is to dump data in MariaDB with the [`tiup dumpling`](/dumpling-overview.md#use-dumpling-to-export-data) command.
 
     ```shell
     tiup dumpling --port 3306 --host 127.0.0.1 --user root --password secret -F 256MB  -o /data/backup
@@ -290,6 +294,8 @@ If you are not using an account with the `SUPER` permission, then you might have
 ```yaml
 ignore-checking-items: ["replication_privilege"]
 ```
+
+Before you use DM to migrate data from upstream to downstream, a precheck helps detect errors in the upstream database configurations and ensures that the migration goes smoothly. For more information, see [Migration Task Precheck](/dm/dm-precheck.md)
 
 ### Step 2. Replicate data
 
