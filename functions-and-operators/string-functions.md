@@ -162,6 +162,8 @@ Return a hexadecimal representation of a decimal or string value.
 - For a numeric argument `HEX(n)` returns a hexadecimal string representation of the value of `n` treated as a longlong (`BIGINT`) number. This is equivalent to [`CONV(n, 10, 16)`](/functions-and-operators/numeric-functions-and-operators#mathematical-functions).
 - For a `NULL` argument, this function returns `NULL`.
 
+Examples:
+
 ```sql
 SELECT X'616263', HEX('abc'), UNHEX(HEX('abc')), 0x616263;
 +-----------+------------+-------------------+----------+
@@ -169,21 +171,27 @@ SELECT X'616263', HEX('abc'), UNHEX(HEX('abc')), 0x616263;
 +-----------+------------+-------------------+----------+
 | abc       | 616263     | abc               | abc      |
 +-----------+------------+-------------------+----------+
+```
 
+```sql
 SELECT X'F09F8DA3', HEX('🍣'), UNHEX(HEX('🍣')), 0xF09F8DA3;
 +-------------+-------------+--------------------+------------+
 | X'F09F8DA3' | HEX('🍣')     | UNHEX(HEX('🍣'))     | 0xF09F8DA3 |
 +-------------+-------------+--------------------+------------+
 | 🍣            | F09F8DA3    | 🍣                   | 🍣           |
 +-------------+-------------+--------------------+------------+
+```
 
+```sql
 SELECT HEX(255), CONV(HEX(255), 16, 10);
 +----------+------------------------+
 | HEX(255) | CONV(HEX(255), 16, 10) |
 +----------+------------------------+
 | FF       | 255                    |
 +----------+------------------------+
+```
 
+```sql
 SELECT HEX(NULL);
 +-----------+
 | HEX(NULL) |
