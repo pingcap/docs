@@ -48,12 +48,14 @@ To create an API key, perform the following steps:
 
    - `Chat2Query SQL ReadOnly`: only allows the API key to generate SQL statements based on provided instructions and execute `SELECT` SQL statements.
    - `Chat2Query SQL ReadWrite`: allows the API key to generate SQL statements based on provided instructions and execute any SQL statements.
+  
+4. You can also set an expiration time to the key. Click **Expires in**, and then you can set expiration time by select unit `Minutes/Days/Months` and fill in desired time. By selecting `Minutes`, you can fill in number from 1 to 525600; by selecting `Days`, you can fill in number from 1 to 365; by selecting `Months`, you can fill in number from 1 to 12.
 
-4. Click **Next**. The public key and private key are displayed.
+5. Click **Next**. The public key and private key are displayed.
 
     Make sure that you have copied and saved the private key in a secure location. After leaving this page, you will not be able to get the full private key again.
 
-5. Click **Done**.
+6. Click **Done**.
 
 ## Step 3. Call Chat2Query endpoints
 

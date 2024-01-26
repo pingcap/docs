@@ -75,6 +75,8 @@ By default, API keys are never expired. For security considerations, you can cho
 
 - You can check your API keys' status and expiration time in the **Authentication** area of your target Data App.
 
+- Once expired, an API key cannot be activated and edited again.
+
 ## Manage API keys
 
 The following sections describe how to create, edit, delete and manually expire an API key for a Data App.
