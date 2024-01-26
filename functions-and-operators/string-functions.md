@@ -194,12 +194,11 @@ SELECT HEX(NULL);
 
 ### [`INSERT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_insert)
 
-`INSERT(str, pos, len, newstr)` returns the string `str` with the substring beginning at position `pos` and `len` characters long which is replaced by `newstr`.
+The `INSERT(str, pos, len, newstr)` function is used to replace a substring in `str` that starts at position `pos` and is `len` characters long with the string `newstr`. This function is multibyte safe.
 
-This function is multibyte safe.
-- Returs the original string `str` if `pos` is not within the length of string,
-- Returns the string which is replaced the rest of the string from position `pos` if `len` is not within the length of the rest of string.
-- Returns `NULL` if any argument is `NULL`.
+- If `pos` exceeds the length of `str`, the function returns the original string `str` without modification.
+- If `len` exceeds the remaining length of `str` from position `pos`, the function replaces the rest of the string from position `pos`.
+- If any argument is `NULL`, the function returns `NULL`.
 
 ```sql
 SELECT INSERT('He likes tennis', 4, 5, 'plays');
