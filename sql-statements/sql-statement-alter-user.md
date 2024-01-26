@@ -34,7 +34,7 @@ AttributeOption ::= ( 'COMMENT' CommentString | 'ATTRIBUTE' AttributeString )?
 
 ResourceGroupNameOption::= ( 'RESOURCE' 'GROUP' Identifier)?
 
-RequireClauseOpt ::= ('REQUIRE' ('NONE' | 'SSL' | 'X509' | 'ISSUER' Issuer | 'SUBJECT' Subject | 'CIPHER' Cipher | 'SAN' SAN | 'TOKEN_ISSUER' TokenIssuer ) )
+RequireClauseOpt ::= ('REQUIRE' ('NONE' | 'SSL' | 'X509' | 'ISSUER' Issuer | 'SUBJECT' Subject | 'CIPHER' Cipher | 'SAN' SAN | 'TOKEN_ISSUER' TokenIssuer ) )?
 ```
 
 ## Examples
