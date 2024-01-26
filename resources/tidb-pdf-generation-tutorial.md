@@ -55,7 +55,7 @@ The following steps take TiDB English documentation as an example to show how to
         2. In GitHub Desktop, click **File** > **Clone Repository**.
         3. Click the **GitHub.com** tab, select the repository you forked in **Your Repositories**, and then click **Clone** in the lower-right corner.
 
-    - Method 2: Use the following `git` commands.
+    - Method 2: Use the following Git commands.
 
         ```shell
         cd $working_dir # Replace `$working_dir` with the directory where you want the repository to be placed. For example, `cd ~/Documents/GitHub`
