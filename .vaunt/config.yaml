@@ -96,6 +96,7 @@ actions:
                     action: issue_comment
                     condition:
                         "created_at >= 01-09-2024 08:00:00 & created_at <= 01-12-2024 07:59:00
+                        & emojis in ['THUMBS_UP']
                         & reactors in ['rpaik', 'lilin90', 'qiancai', 'hfxsd', 'ran-huang', 'Oreoxmt','Yan-yyCL','dveeden']
                         & labels in ['tidb-docs-dash-bonus']"
                     value: 5
