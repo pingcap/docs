@@ -113,37 +113,42 @@ Examples:
 
 ```sql
 SELECT BIT_LENGTH("TiDB");
-+----------+
+
++--------------------+
 | BIT_LENGTH("TiDB") |
-+----------+
-|  32 |
-+----------+
++--------------------+
+|                 32 |
++--------------------+
 ```
 
 8 bits per character x 4 characters = 32 bits
 
 ```sql
 SELECT CustomerName, BIT_LENGTH(CustomerName) AS BitLengthOfName FROM Customers;
-| CustomerName|BitLengthOfName |
-|-------------|----------------|
-| Albert Einstein | 120 |
-| Robert Oppenheimer | 144 |
-```
 
-```sql
-SELECT BIT_LENGTH("PingCAP 123");
-+----------+
-| BIT_LENGTH("PingCAP 123") |
-+----------+
-| 88 |
-+----------+
++--------------------+-----------------+
+| CustomerName       | BitLengthOfName |
++--------------------+-----------------+
+| Albert Einstein    |             120 |
+| Robert Oppenheimer |             144 |
++--------------------+-----------------+
 ```
-
-8 bits per character (space is counted as it is a non-alphanumeric character) x 11 characters = 88 bits
 
 > **Note:**
 >
-> The second example operates under the assumption that there is a database with a table named `Customers` and a column inside named `CustomerName`.
+> The preceding example operates under the assumption that there is a database with a table named `Customers` and a column inside the table named `CustomerName`.
+
+```sql
+SELECT BIT_LENGTH("PingCAP 123");
+
++---------------------------+
+| BIT_LENGTH("PingCAP 123") |
++---------------------------+
+|                        88 |
++---------------------------+
+```
+
+8 bits per character (space is counted because it is a non-alphanumeric character) x 11 characters = 88 bits
 
 ### [`CHAR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char)
 
@@ -155,9 +160,9 @@ Examples:
 SELECT CHAR(65);
 
 +------------+
-|  CHAR(65) |
+|  CHAR(65)  |
 +------------+
-|        A |
+|          A |
 +------------+
 ```
 
@@ -165,17 +170,13 @@ SELECT CHAR(65);
 SELECT CHAR(84);
 
 +------------+
-|  CHAR(84) |
+|  CHAR(84)  |
 +------------+
-|        T |
+|          T |
 +------------+
 ```
 
-> **Note:**
->
-> The `CHAR()` function can also be used to get the corresponding character of ASCII values that extend beyond the standard ASCII range (0 - 127). It can also get the corresponding character value of a unicode value.
-
-Further Examples:
+The `CHAR()` function can also be used to get the corresponding character of ASCII values that extend beyond the standard ASCII range (`0` - `127`).
 
 ```sql
 /*For extended ASCII: */
@@ -189,6 +190,8 @@ SELECT CHAR(128);
 +------------+
 ```
 
+The `CHAR()` function can also get the corresponding character value of a unicode value.
+
 ```sql
 /* For Unicode: */
 
@@ -196,11 +199,11 @@ SELECT CHAR(128);
 
 SELECT CHAR(50089);
 
-+------------+
++--------------+
 |  CHAR(50089) |
-+------------+
-|   é |
-+------------+
++--------------+
+|            é |
++--------------+
 ```
 
 ### [`CHAR_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char-length)
@@ -212,25 +215,27 @@ Examples:
 ```sql
 SELECT CHAR_LENGTH("TiDB") AS LengthOfString;
 
-+----------+
++----------------+
 | LengthOfString |
-+----------+
-| 4  |
-+----------+
++----------------+
+|              4 |
++----------------+
 ```
 
 ```sql
 SELECT CustomerName, CHAR_LENGTH(CustomerName) AS LenghtOfName FROM Customers;
 
-| CustomerName|LengthOfName  |
-|-------------|--------------|
-| Albert Einstein | 15 |
-| Robert Oppenheimer | 18 |
++--------------------+--------------+
+| CustomerName       | LenghtOfName |
++--------------------+--------------+
+| Albert Einstein    |           15 |
+| Robert Oppenheimer |           18 |
++--------------------+--------------+
 ```
 
 > **Note:**
 >
-> The second example operates under the assumption that there is a database with a table named `Customers` and a column inside the table named `CustomerName`.
+> The preceding example operates under the assumption that there is a database with a table named `Customers` and a column inside the table named `CustomerName`.
 
 ### [`CHARACTER_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_character-length)
 
