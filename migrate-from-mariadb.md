@@ -260,15 +260,15 @@ It is strongly recommended to first do this on a test or development instance of
 
 1. Stop your application. Take your application offline. This ensures there are no modifications made to the data in MariaDB during or after the migration.
 
-2. Dump the data. For this the first step is to dump data in MariaDB with the [`tiup dumpling`](/dumpling-overview.md#use-dumpling-to-export-data) command.
+2. Dump data in MariaDB with the [`tiup dumpling`](/dumpling-overview.md#use-dumpling-to-export-data) command.
 
     ```shell
     tiup dumpling --port 3306 --host 127.0.0.1 --user root --password secret -F 256MB  -o /data/backup
     ```
 
-3. Restore the data. For this step we will use the `tiup tidb-lightning` command. See [Get Started with TiDB Lightning](/get-started-with-tidb-lightning.md) for how to configure TiDB Lightning and how to run it.
+3. Restore the data by using the `tiup tidb-lightning` command. For more information about how to configure TiDB Lightning and how to run it, see [Get Started with TiDB Lightning](/get-started-with-tidb-lightning.md).
 
-4. Migrate user accounts and permissions. See [Export users and grants](#export-users-and-grants) for how to migrate your users and permissions.
+4. Migrate user accounts and permissions. For more information about how to migrate your users and permissions, see [Export users and grants](#export-users-and-grants).
 
 5. Reconfigure your application. You need to change the application configuration so that it can connect to the TiDB server.
 
@@ -278,7 +278,7 @@ It is strongly recommended to first do this on a test or development instance of
 
 This method assumes you would set up replication, stop your application and wait for the replication to catch up, and then re-configure your application to use TiDB.
 
-It is strongly recommended to first test your application before doing this migration in production.
+It is strongly recommended to first do this on a test or development instance of your application before doing it in production. This is both to check for possible compatibility issues as to get insight into how much time the migration will take.
 
 To use DM, you need to deploy a set of DM services either with a [TiUP cluster](/dm/deploy-a-dm-cluster-using-tiup.md) or with [TiDB Operator](/tidb-operator-overview.md). After that, use `dmctl` to configure the DM services.
 
@@ -298,9 +298,9 @@ Before you use DM to migrate data from upstream to downstream, a precheck helps 
 
 ### Step 2. Replicate data
 
-Note that it is not required to first copy the initial data as you would do with MariaDB to MariaDB replication, DM will do this for you.
-
 Follow the [Quick Start Guide for TiDB Data Migration](/dm/quick-start-with-dm.md) to replicate your data from MariaDB to TiDB.
+
+Note that it is not required to first copy the initial data as you would do with MariaDB to MariaDB replication, DM will do this for you.
 
 ### Step 3. Migrate user accounts and permissions
 
