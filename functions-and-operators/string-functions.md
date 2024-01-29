@@ -208,11 +208,11 @@ SELECT CHAR(50089);
 
 ### [`CHAR_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char-length)
 
-Return the character for each integer passed.
+Return number of characters in argument.
 
 ### [`CHARACTER_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_character-length)
 
-Return number of characters in argument.
+Synonym for `CHAR_LENGTH()`.
 
 ### [`CONCAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat)
 
