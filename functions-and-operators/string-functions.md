@@ -248,7 +248,7 @@ SELECT LEFT(NULL, 3);
 
 The `LENGTH()` function returns the length of a string in bytes.
 
-`LENGTH()` counts a multibyte character as multi bytes while `CHAR_LENGTH()` counts a multibyte character as a single code point.
+`LENGTH()` counts a multibyte character as multiple bytes while `CHAR_LENGTH()` counts a multibyte character as a single code point.
 
 If the argument is `NULL`, the function returns `NULL`.
 
