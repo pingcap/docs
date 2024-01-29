@@ -30,52 +30,41 @@ If you have already set up your GitHub profile README, skip the following and go
 
  Your GitHub profile now displays your TiDB Docs Dash badge. For more information about managing your profile README, see [GitHub docs](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme).
 
-#### Integrate the Vaunt Developer Card (Optional)
+## (Optional) Explore more with Vaunt
 
-<p>
-    <a href="https://vaunt.dev">
-        <img src="https://api.vaunt.dev/v1/github/entities/jeff1010322/contributions?format=svg" width="350" />
-    </a>
-</p>
+TiDB Docs Dash badges are granted via [Vaunt](https://vaunt.dev/), a developer relations platform that aims to empower and grow developer communities.
 
-Add this code to your README file and replace `{{github_username}}` with your username
+You can also use Vant to showcase your contributions to open-source projects as follows:
 
-```HTML
-<p>
-    <a href="https://vaunt.dev">
-        <img src="https://api.vaunt.dev/v1/github/entities/{{github_username}}/contributions?format=svg" width="350" />
-    </a>
-</p>
-```
+- Integrate your developer card
 
-#### Integrate Community Boards (Optional)
+    Example card:
 
-[![VauntCommunity](https://api.vaunt.dev/v1/github/entities/pingcap/badges/community)](https://community.vaunt.dev/board/pingcap)
+    <p>
+        <a href="https://vaunt.dev">
+            <img src="https://api.vaunt.dev/v1/github/entities/jeff1010322/contributions?format=svg" width="350" />
+        </a>
+    </p>
 
-Take collaboration to the next level by integrating Vaunt's Community Board.
+    To integrate your developer card, add the following code to your README file and replace `{{github_username}}` with your username.
 
-- Explore [Your Own Community Boards](https://community.vaunt.dev/)
-- Add this code to your README file and replace `{{github_username}}` with your username
+    ```HTML
+    <p>
+        <a href="https://vaunt.dev">
+            <img src="https://api.vaunt.dev/v1/github/entities/{{github_username}}/contributions?format=svg" width="350" />
+        </a>
+    </p>
+    ```
 
-```Markdown
-[![VauntCommunity](https://api.vaunt.dev/v1/github/entities/{{github_username}}/badges/community)](https://community.vaunt.dev/board/{{github_username}})
-```
+- Integrate your community boards
 
-### Commit Changes
+    The community boards provide community statistics, repository insights, and a view into repository achievements.
 
-- Once you've added Vaunt elements to your README, scroll up and commit the changes directly from GitHub.
+    [![VauntCommunity](https://api.vaunt.dev/v1/github/entities/pingcap/badges/community)](https://community.vaunt.dev/board/pingcap)
 
-Your GitHub profile now proudly displays a dynamic Developer Card and Community Board, offering a snapshot of your contributions and achievements.
+    - Explore [your own community boards](https://community.vaunt.dev/).
+    - Add the following code to your README file and replace `{{github_username}}` with your username:
 
-## Install Vaunt on GitHub Marketplace
-
-By integrating Vaunt into your README, you're not just showcasing your code; you're telling the story of your coding journey.
-Unlock the full potential of your GitHub profile with Vaunt and make your mark in the open-source community.
-
-[Install Vaunt](https://github.com/marketplace/vaunt-dev) today and start showcasing more of your contributions!
-
-**TIP**
-
-We recommend installing Vaunt on all owned repositories.
-This ensures that your contributions are counted accurately.
-That said, by default all public contributions will be counted.
+    ```Markdown
+    [![VauntCommunity](https://api.vaunt.dev/v1/github/entities/{{github_username}}/badges/community)](https://community.vaunt.dev/board/{{github_username}})
+    ```
