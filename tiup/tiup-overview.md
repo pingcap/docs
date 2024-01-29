@@ -115,15 +115,15 @@ The output is long but you can focus on only two parts:
     - clean: used to clear the running log of components
     - mirror: used to clone a private mirror from the official mirror
     - telemetry: used to control the telemetry feature
-    - env: used to show the list of system environment variable that related to TiUP
+    - env: used to show the list of system environment variables that related to TiUP
     - history: used to display the historical execution record of TiUP, displays 100 lines by default
     - link: used to link component binary to $TIUP_HOME/bin/
     - unlink: used to unlink component binary to $TIUP_HOME/bin/
     - help: used to print out help information
-    - completion: used to generate the autocompletion script for the specified shell (bash / zsh / fish / powershell)
+    - completion: used to generate the command line autocompletion script for the specified shell (including bash, zsh, fish, and powershell)
 - Available components
     - playground: used to start a TiDB cluster locally
-    - client: used to connect to a TiDB cluster locally
+    - client: client used to connect to TiUP Playground
     - cluster: used to deploy a TiDB cluster for production environments
     - bench: used to stress test the database
 
