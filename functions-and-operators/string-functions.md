@@ -173,13 +173,20 @@ Synonym for `LOWER()`.
 
 Return the leftmost number of characters as specified.
 
-* usage: LEFT(`str`, `len`)
-    * len: length of character to return
-    * str: original string to extract characters
-* if `len` is equal or less than 0, the function returns empty string.
-* If `len` is greater than the length of `str`, the function returns the length of `str`. 
-* function is multibyte safe.
-* If any argument is `NULL`, the function returns `NULL`.
+
+Syntax:
+
+```sql
+LEFT(`str`, `len`)
+```
+
+- `str`: the original string to extract characters.
+- `len`: the length of characters to be returned. 
+
+- If `len` is equal to or less than 0, the function returns an empty string.
+- If `len` is greater than the length of `str`, the function returns the length of `str`. 
+- If `str` contains a multibyte character, the function counts it as a single code point. 
+- If any argument is `NULL`, the function returns `NULL`.
 
 Examples:
 
@@ -244,9 +251,9 @@ SELECT LEFT(NULL, 3);
 
 Return the length of a string in bytes.
 
-`LENGTH()` count a multibyte character as multi bytes while `CHAR_LENGTH()` count it as a single code point
+`LENGTH()` counts a multibyte character as multi bytes while `CHAR_LENGTH()` counts a multibyte character as a single code point.
 
-* If any argument is `NULL`, the function returns `NULL`.
+If the argument is `NULL`, the function returns `NULL`.
 
 Examples:
 
