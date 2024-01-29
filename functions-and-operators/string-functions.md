@@ -171,7 +171,7 @@ Synonym for `LOWER()`.
 
 ### [`LEFT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_left)
 
-Return the leftmost number of characters as specified.
+The `LEFT()` function returns a specified number of characters from the left side of a string.
 
 
 Syntax:
@@ -247,7 +247,7 @@ SELECT LEFT(NULL, 3);
 
 ### [`LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_length)
 
-Return the length of a string in bytes.
+The `LENGTH()` function returns the length of a string in bytes.
 
 `LENGTH()` counts a multibyte character as multi bytes while `CHAR_LENGTH()` counts a multibyte character as a single code point.
 
