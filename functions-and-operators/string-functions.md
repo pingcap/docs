@@ -180,12 +180,10 @@ Syntax:
 LEFT(`str`, `len`)
 ```
 
-- `str`: the original string to extract characters.
+- `str`: the original string to extract characters. If `str` contains a multibyte character, the function counts it as a single code point. 
 - `len`: the length of characters to be returned. 
-
-- If `len` is equal to or less than 0, the function returns an empty string.
-- If `len` is greater than the length of `str`, the function returns the length of `str`. 
-- If `str` contains a multibyte character, the function counts it as a single code point. 
+    - If `len` is equal to or less than 0, the function returns an empty string.
+    - If `len` is greater than the length of `str`, the function returns the length of `str`. 
 - If any argument is `NULL`, the function returns `NULL`.
 
 Examples:
