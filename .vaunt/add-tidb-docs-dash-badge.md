@@ -1,13 +1,8 @@
-# Vaunt
+# How to Add TiDB Docs Dash Badges to your GitHub Profile
 
-## Setup your TiDB Achievement Badges
+Your [GitHub profile](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/about-your-profile) is more than just a collection of repositories; it is your professional identity in the coding world.
 
-Achievement badges you have earned through Vaunt can be displayed on your GitHub profile README.
-This guide will walk you through the steps of adding and editing your profile README if you do not
-already have one.
-
-If you do have a profile already setup see [Integrate the Achievement Card](#integrate-the-achievement-card)
-for instructions on adding the achievement card.
+This guide walks you through the steps of adding [TiDB Docs Dash 2024](https://www.pingcap.com/event/tidb-docs-dash/) badges to your GitHub profile.
 
 ### Adding a Profile README
 
