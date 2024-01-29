@@ -139,11 +139,9 @@ To change the local timezone setting, take the following steps:
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
-3. Click the **Time Zone** tab.
+3. In the **Time Zone** section, click the drop-down list and select your time zone.
 
-4. Click the drop-down list and select your time zone.
-
-5. Click **Save**.
+4. Click **Update**.
 
 ### Invite an organization member
 
@@ -159,7 +157,7 @@ To invite a member to an organization, take the following steps:
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
-3. Click the **User Management** tab, and then select **By Organization**.
+3. Click the **Users** tab in the left navigation pane, and then select **By Organization**.
 
 4. Click **Invite**.
 
@@ -190,7 +188,7 @@ To modify the organization role of a member, take the following steps:
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
-3. Click the **User Management** tab, and then select **By Organization**.
+3. Click the **Users** tab in the left navigation pane, and then select **By Organization**.
 
 4. Click the role of the target member, and then modify the role.
 
@@ -208,7 +206,7 @@ To remove a member from an organization, take the following steps:
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
-3. Click the **User Management** tab, and then select **By Organization**.
+3. Click the **Users** tab in the left navigation pane, and then select **By Organization**.
 
 4. Click **Delete** in the user row that you want to delete.
 
@@ -220,7 +218,7 @@ To check which project you belong to, take the following steps:
 
 1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
-2. Click **Organization Settings**. The **Projects** tab is displayed by default.
+2. Click **Organization Settings**, and then click the **Projects** tab in the left navigation pane. The **Projects** tab is displayed.
 
 > **Tip:**
 >
@@ -238,7 +236,7 @@ To create a new project, take the following steps:
 
 1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
-2. Click **Organization Settings**. The **Projects** tab is displayed by default.
+2. Click **Organization Settings**, and then click the **Projects** tab in the left navigation pane. The **Projects** tab is displayed.
 
 3. Click **Create New Project**.
 
@@ -254,7 +252,7 @@ To rename a project, take the following steps:
 
 1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
-2. Click **Organization Settings**. The **Projects** tab is displayed by default.
+2. Click **Organization Settings**, and then click the **Projects** tab in the left navigation pane. The **Projects** tab is displayed.
 
 3. In the row of your project to be renamed, click **Rename**.
 
