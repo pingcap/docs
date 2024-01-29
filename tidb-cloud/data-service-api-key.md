@@ -57,7 +57,7 @@ Request quotas are subject to rate limits as follows:
 
 By default, API keys never expire. However, for security considerations, you can specify an expiration time for your API key when you [create](#create-an-api-key) or [edit](#edit-an-api-key) the key. 
 
-- An API key is only valid in its expiration time. Once beyond the expiration time, the API key is **expired**, all requests using that key will failed with a `401` error and got a response like this:
+- An API key is valid only before its expiration time. Once expired, all requests using that key will fail with a `401` error, and the response is similar as follows:
 
     ```bash
     HTTP/2 401
