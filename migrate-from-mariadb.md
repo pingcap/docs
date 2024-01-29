@@ -11,8 +11,8 @@ This document describes how to migrate data from a MariaDB server installation t
 
 Choose the right migration strategy:
 
-- The first strategy is to [Dump and restore](#dump-and-restore). This works for all versions of MariaDB. The drawback of this strategy is that it needs more downtime.
-- The second strategy is to [Replicate data](#replicate-data) from MariaDB to TiDB with DM. DM does not support all versions of MariaDB. Supported versions are listed on the [DM Compatibility Catalog](/dm/dm-compatibility-catalog.md#compatibility-catalog-of-tidb-data-migration).
+- The first strategy is to [dump data with Dumpling and restore data with TiDB Lightning](#dump-data-with-dumpling-and-restore-data-with-tidb-lightning). This works for all versions of MariaDB. The drawback of this strategy is that it needs more downtime.
+- The second strategy is to [Replicate data with DM](#replicate-data) from MariaDB to TiDB with DM. DM does not support all versions of MariaDB. Supported versions are listed on the [DM Compatibility Catalog](/dm/dm-compatibility-catalog.md#compatibility-catalog-of-tidb-data-migration).
 
 Besides these two strategies, there might be other strategies available specifically to your situation. For example:
 
@@ -252,7 +252,7 @@ ORDER BY
 
 See also [Character Set and Collation](/character-set-and-collation.md).
 
-## Dump and restore
+## Dump data with Dumpling and restore data with TiDB Lightning
 
 This method assumes that you take your application offline, migrate the data, and then re-configure your application to use the migrated data.
 
@@ -274,7 +274,7 @@ It is strongly recommended to first do this on a test or development instance of
 
 6. Clean up. Once you have verified that the migration is successful you can make a final backup of the data in MariaDB and stop the server. This also means you can remove tools such as TiUP, Dumpling, and TiDB Lightning.
 
-## Replicate data
+## Replicate data with DM
 
 This method assumes you would set up replication, stop your application and wait for the replication to catch up, and then re-configure your application to use TiDB.
 
