@@ -108,7 +108,7 @@ The output is long but you can focus on only two parts:
 
 - Available commands
     - install: used to install a specific version of a component
-    - list: used to view the list of available TiDB components or versions
+    - list: used to view the list of available TiDB components or available versions of a component
     - uninstall: used to uninstall components or versions of a component
     - update: used to update the component version
     - status: used to view the running history of components
