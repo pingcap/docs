@@ -63,7 +63,7 @@ Titan is compatible with RocksDB, so you can directly enable Titan on the existi
 
     For more information, refer to [Configuring a TiDB Cluster in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster).
 
-## Data Conversion
+## Data conversion
 
 > **Warning:**
 >
