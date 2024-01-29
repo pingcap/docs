@@ -73,6 +73,8 @@ The fields in the `TIDB_HOT_REGIONS_HISTORY` table are described as follows:
 * KEY_RATE: The number of keys written and read in the Region.
 * QUERY_RATE: The number of queries written and read in the Region.
 
+For read hot Regions, the reference period of the `FLOW_BYTES`, `KEY_RATE`, and `QUERY_RATE` fields is a store heartbeat cycle, which is controlled by the TiKV configuration item [`pd-store-heartbeat-tick-interval`](/tikv-configuration-file.md#pd-store-heartbeat-tick-interval). For write hot Regions, the reference period of the `QUERY_RATE` field still uses the store heartbeat cycle, and the reference period of the `FLOW_BYTES` and `KEY_RATE` fields is a Region heartbeat cycle, which is controlled by the TiKV configuration item [`pd-heartbeat-tick-interval`](/tikv-configuration-file.md#pd-heartbeat-tick-interval).
+
 > **Note:**
 >
 > `UPDATE_TIME`, `REGION_ID`, `STORE_ID`, `PEER_ID`, `IS_LEARNER`, `IS_LEADER` and `TYPE` fields are pushed down to the PD servers for execution. To reduce the overhead of using the table, you must specify the time range for the search, and specify as many conditions as possible. For example, `select * from tidb_hot_regions_history where store_id = 11 and update_time > '2020-05-18 20:40:00' and update_time < '2020-05-18 21:40:00' and type='write'`.

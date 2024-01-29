@@ -48,3 +48,5 @@ The description of columns in the `TIDB_HOT_REGIONS` table is as follows:
 * `MAX_HOT_DEGREE`: The maximum hot degree of the Region.
 * `REGION_COUNT`: The number of hot Regions in the instance. 
 * `FLOW_BYTES`: The number of bytes written and read in the Region.
+
+For read hot Regions, the reference period of the `FLOW_BYTES` field is a store heartbeat cycle, which is controlled by the TiKV configuration item [`pd-store-heartbeat-tick-interval`](/tikv-configuration-file.md#pd-store-heartbeat-tick-interval). For write hot Regions, the reference period of the `FLOW_BYTES` field is a Region heartbeat cycle, which is controlled by the TiKV configuration item [`pd-heartbeat-tick-interval`](/tikv-configuration-file.md#pd-heartbeat-tick-interval).
