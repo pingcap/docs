@@ -173,7 +173,6 @@ Synonym for `LOWER()`.
 
 The `LEFT()` function returns a specified number of characters from the left side of a string.
 
-
 Syntax:
 
 ```sql
