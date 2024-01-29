@@ -113,7 +113,7 @@ The output is long but you can focus on only two parts:
     - status: used to view the running history of components
     - clean: used to clear the running log of components
     - mirror: used to clone a private mirror from the official mirror
-    - telemetry: used to controls things about telemetry
+    - telemetry: used to control the telemetry feature
     - env: used to show the list of system environment variable that related to TiUP
     - history: used to display the historical execution record of TiUP, displays 100 lines by default
     - link: used to link component binary to $TIUP_HOME/bin/
