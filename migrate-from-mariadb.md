@@ -17,7 +17,7 @@ Choose the right migration strategy:
 Besides these two strategies, there might be other strategies available specifically to your situation. For example:
 
 - Use the functionality of your Object Relational Mapping (ORM) to re-deploy and migrate your data.
-- Modify your application to write and read from both MariaDB and TiDB while the migration is ongoing.
+- Modify your application to write from both MariaDB and TiDB while the migration is ongoing.
 
 This document only covers the first two strategies.
 
