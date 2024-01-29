@@ -179,13 +179,24 @@ Return the length of a string in bytes.
 
 ### [`LIKE`](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_like)
 
-The `LIKE` operator is used for simple string matching, the format `expr LIKE pat [ESCAPE 'escape_char']` returns `1(TRUE)` or `0(FALSE)`
-If either `expr` or `pat` is `NULL`, the result will be `NULL`.
-You can use 2 wildcard parameter with`LIKE`:
-- `%` matches any number of characters including 0 characters
-- `_` matches exactly only 1 character, not including 0
+The `LIKE` operator is used for simple string matching. The expression `expr LIKE pat [ESCAPE 'escape_char']` returns `1` (`TRUE`) or `0` (`FALSE`). If either `expr` or `pat` is `NULL`, the result is `NULL`.
 
-These examples' collation is `utf8mb4_bin` except specify explicitly.
+You can use the following two wildcard parameters with `LIKE`:
+
+- `%` matches any number of characters, including zero characters.
+- `_` matches exactly one character.
+
+The following examples use the `utf8mb4_bin` collation:
+
+```sql
+SET collation_connection='utf8mb4_bin';
+SHOW VARIABLES LIKE 'collation_connection';
++----------------------+-------------+
+| Variable_name        | Value       |
++----------------------+-------------+
+| collation_connection | utf8mb4_bin |
++----------------------+-------------+
+```
 
 ```sql
 SELECT NULL LIKE '%' as result;
@@ -194,21 +205,27 @@ SELECT NULL LIKE '%' as result;
 +--------+
 |   NULL |
 +--------+
+```
 
+```sql
 SELECT 'sushi!!!' LIKE 'sushi_' AS result;
 +--------+
 | result |
 +--------+
 |      0 |
 +--------+
+```
 
+```sql
 SELECT '🍣🍺sushi🍣🍺' LIKE '%sushi%' AS result;
 +--------+
 | result |
 +--------+
 |      1 |
 +--------+
+```
 
+```sql
 SELECT '🍣🍺sushi🍣🍺' LIKE '%🍣%' AS result;
 +--------+
 | result |
@@ -217,7 +234,7 @@ SELECT '🍣🍺sushi🍣🍺' LIKE '%🍣%' AS result;
 +--------+
 ```
 
-If you don't specify the `ESCAPE` character, `\` will be assumed.
+The default escape character is `\`:
 
 ```sql
 SELECT 'sushi!!!' LIKE 'sushi\_' AS result;
@@ -226,7 +243,9 @@ SELECT 'sushi!!!' LIKE 'sushi\_' AS result;
 +--------+
 |      0 |
 +--------+
+```
 
+```sql
 SELECT 'sushi_' LIKE 'sushi\_' AS result;
 +--------+
 | result |
@@ -235,7 +254,7 @@ SELECT 'sushi_' LIKE 'sushi\_' AS result;
 +--------+
 ```
 
-To specify the different escape character, you can use `ESCAPE` clause.
+To specify a different escape character, such as `*`, you can use the `ESCAPE` clause:
 
 ```sql
 SELECT 'sushi_' LIKE 'sushi*_' ESCAPE '*' AS result;
@@ -244,7 +263,9 @@ SELECT 'sushi_' LIKE 'sushi*_' ESCAPE '*' AS result;
 +--------+
 |      1 |
 +--------+
+```
 
+```sql
 SELECT 'sushi!' LIKE 'sushi*_' ESCAPE '*' AS result;
 +--------+
 | result |
@@ -253,7 +274,7 @@ SELECT 'sushi!' LIKE 'sushi*_' ESCAPE '*' AS result;
 +--------+
 ```
 
-`LIKE` permits numeric expressions.
+You can use the `LIKE` operator to match a numeric value:
 
 ```sql
 SELECT 10 LIKE '1%' AS result;
@@ -262,7 +283,9 @@ SELECT 10 LIKE '1%' AS result;
 +--------+
 |      1 |
 +--------+
+```
 
+```sql
 SELECT 10000 LIKE '12%' AS result;
 +--------+
 | result |
@@ -271,36 +294,34 @@ SELECT 10000 LIKE '12%' AS result;
 +--------+
 ```
 
-You can specify collation to use explicitly with `COLLATE`.
-
 ```sql
-SHOW VARIABLES LIKE 'collation_connection';
-+----------------------+-------------+
-| Variable_name        | Value       |
-+----------------------+-------------+
-| collation_connection | utf8mb4_bin |
-+----------------------+-------------+
-
 SELECT '🍣🍺sushi🍣🍺' LIKE '%sushi%' AS result;
 +--------+
 | result |
 +--------+
 |      1 |
 +--------+
+```
 
+```sql
 SELECT '🍣🍺sushi🍣🍺' LIKE '%SUSHI%' AS result;
 +--------+
 | result |
 +--------+
 |      0 |
 +--------+
+```
 
+To specify a collation explicitly, such as `utf8mb4_unicode_ci`, you can use `COLLATE`:
+
+```sql
 SELECT '🍣🍺Sushi🍣🍺' COLLATE utf8mb4_unicode_ci LIKE '%SUSHI%' AS result;
 +--------+
 | result |
 +--------+
 |      1 |
 +--------+
+```
 ```
 
 ### [`LOCATE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_locate)
