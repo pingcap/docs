@@ -6,11 +6,11 @@ aliases: ['/docs/dev/enable-tls-between-clients-and-servers/','/docs/dev/how-to/
 
 # Enable TLS between TiDB Clients and Servers
 
-Non-secure connection between TiDB's server and clients is allowed by default, which enables third parties that monitor channel traffic to know and possibly modify the data sent and received between the server and the client, including query content and query results. If a channel is untrustworthy (such as if the client is connected to the TiDB server via a public network), then a insecure connection is prone to information leakage. In this case, for security reasons, it is recommended to require a connection that is secured with TLS.
+By default, TiDB allows insecure connections between the server and clients. This enables third parties that monitor channel traffic to know and possibly modify the data sent and received between the server and the client, including query content and query results. If a channel is untrustworthy (such as if the client is connected to the TiDB server via a public network), an insecure connection is prone to information leakage. In this case, for security reasons, it is recommended to require a connection that is secured with TLS.
 
 The TiDB server supports secure connections based on the TLS (Transport Layer Security) protocol. The protocol is consistent with MySQL secure connections and is directly supported by existing MySQL clients such as MySQL Client, MySQL Shell and MySQL drivers. TLS is sometimes referred to as SSL (Secure Sockets Layer). Because the SSL protocol has [known security vulnerabilities](https://en.wikipedia.org/wiki/Transport_Layer_Security), TiDB does not support SSL. TiDB supports the following protocols: TLSv1.0, TLSv1.1, TLSv1.2 and TLSv1.3.
 
-When an TLS secured connection is used, the connection has the following security properties:
+When a TLS secured connection is used, the connection has the following security properties:
 
 - Confidentiality: the traffic plaintext is encrypted to avoid eavesdropping
 - Integrity: the traffic plaintext cannot be tampered
@@ -53,12 +53,12 @@ If the certificate parameters are correct, TiDB outputs `mysql protocol server s
 
 ## Configure the MySQL client to use TLS connections
 
-The client of MySQL 5.7 or later versions attempts to establish an TLS connection by default. If the server does not support encrypted connections, it automatically returns to unencrypted connections. The client of MySQL earlier than version 5.7 uses the non-TLS connections by default.
+The client of MySQL 5.7 or later versions attempts to establish a TLS connection by default. If the server does not support encrypted connections, it automatically returns to unencrypted connections. The client of MySQL earlier than version 5.7 uses the non-TLS connections by default.
 
 You can change the connection behavior of the client using the following `--ssl-mode` parameters:
 
 - `--ssl-mode=REQUIRED`: The client requires a TLS connection. The connection cannot be established if the server side does not support TLS connections.
-- In the absence of the `--ssl-mode` parameter: The client attempts to use an TLS connection, but the encrypted connection cannot be established if the server side does not support encrypted connections. Then the client uses an unencrypted connection.
+- In the absence of the `--ssl-mode` parameter: The client attempts to use a TLS connection, but the encrypted connection cannot be established if the server side does not support encrypted connections. Then the client uses an unencrypted connection.
 - `--ssl-mode=DISABLED`: The client uses an unencrypted connection.
 
 MySQL 8.x clients have two SSL modes in addition to this parameter:
