@@ -50,7 +50,7 @@ GROUP BY
   plugin;
 ```
 
-```
+```sql
 +-----------------------+----------+
 | plugin                | COUNT(*) |
 +-----------------------+----------+
@@ -75,7 +75,7 @@ WHERE
   TABLE_TYPE='SYSTEM VERSIONED';
 ```
 
-```
+```sql
 +--------------+------------+
 | TABLE_SCHEMA | TABLE_NAME |
 +--------------+------------+
@@ -86,7 +86,7 @@ WHERE
 
 To remove system versioning, execute the `ALTER TABLE` statement:
 
-```
+```sql
 MariaDB [test]> ALTER TABLE t DROP SYSTEM VERSIONING;
 Query OK, 0 rows affected (0.071 sec)
 Records: 0  Duplicates: 0  Warnings: 0
@@ -108,7 +108,7 @@ WHERE
   TABLE_TYPE='SEQUENCE';
 ```
 
-```
+```sql
 +--------------+------------+
 | TABLE_SCHEMA | TABLE_NAME |
 +--------------+------------+
@@ -133,7 +133,7 @@ GROUP BY
   ENGINE;
 ```
 
-```
+```sql
 +--------------------+----------+
 | ENGINE             | COUNT(*) |
 +--------------------+----------+
@@ -170,7 +170,7 @@ WHERE
   DATA_TYPE IN('INET4','INET6','UUID');
 ```
 
-```
+```sql
 +--------------+------------+-------------+-----------+
 | TABLE_SCHEMA | TABLE_NAME | COLUMN_NAME | DATA_TYPE |
 +--------------+------------+-------------+-----------+
@@ -192,7 +192,7 @@ To see what collations TiDB supports, execute this statement on TiDB:
 SHOW COLLATION;
 ```
 
-```
+```sql
 +--------------------+---------+-----+---------+----------+---------+
 | Collation          | Charset | Id  | Default | Compiled | Sortlen |
 +--------------------+---------+-----+---------+----------+---------+
@@ -228,7 +228,7 @@ ORDER BY
   COLLATION_NAME;
 ```
 
-```
+```sql
 +--------------------+--------------------+----------+
 | TABLE_SCHEMA       | COLLATION_NAME     | COUNT(*) |
 +--------------------+--------------------+----------+
@@ -256,7 +256,11 @@ See also [Character Set and Collation](/character-set-and-collation.md).
 
 This method assumes that you take your application offline, migrate the data, and then re-configure your application to use the migrated data.
 
-It is strongly recommended to first do this on a test or development instance of your application before doing it in production. This is both to check for possible compatibility issues as to get insight into how much time the migration will take.
+> **Note:**
+>
+> It is strongly recommended to first do this on a test or development instance of your application before doing it in production. This is both to check for possible compatibility issues as to get insight into how much time the migration will take.
+
+Perform the following steps to migrate data from MariaDB to TiDB:
 
 1. Stop your application. Take your application offline. This ensures there are no modifications made to the data in MariaDB during or after the migration.
 
@@ -278,9 +282,11 @@ It is strongly recommended to first do this on a test or development instance of
 
 This method assumes you would set up replication, stop your application and wait for the replication to catch up, and then re-configure your application to use TiDB.
 
-It is strongly recommended to first do this on a test or development instance of your application before doing it in production. This is both to check for possible compatibility issues as to get insight into how much time the migration will take.
-
 To use DM, you need to deploy a set of DM services either with a [TiUP cluster](/dm/deploy-a-dm-cluster-using-tiup.md) or with [TiDB Operator](/tidb-operator-overview.md). After that, use `dmctl` to configure the DM services.
+
+> **Note:**
+>
+> It is strongly recommended to first do this on a test or development instance of your application before doing it in production. This is both to check for possible compatibility issues as to get insight into how much time the migration will take.
 
 ### Step 1. Prepare
 
