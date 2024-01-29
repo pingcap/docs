@@ -79,7 +79,7 @@ By default, API keys never expire. However, for security considerations, you can
 
 ## Manage API keys
 
-The following sections describe how to create, edit, delete and manually expire an API key for a Data App.
+The following sections describe how to create, edit, delete, and manually expire an API key for a Data App.
 
 ### Create an API key
 
