@@ -73,7 +73,7 @@ By default, API keys never expire. However, for security considerations, you can
 
 - You can also expire API keys manually. For detailed steps, see [Expire an API key](#expire-an-api-key) and [Expire all API keys](#expire-all-api-keys). Once you manually expire an API key, the expiration takes effect immediately.
 
-- You can check your API keys' status and expiration time in the **Authentication** area of your target Data App.
+- You can check the status and expiration time of your API keys in the **Authentication** area of your target Data App.
 
 - Once expired, an API key cannot be activated and edited again.
 
