@@ -4,24 +4,18 @@ Your [GitHub profile](https://docs.github.com/en/account-and-profile/setting-up-
 
 This guide walks you through the steps of adding [TiDB Docs Dash 2024](https://www.pingcap.com/event/tidb-docs-dash/) badges to your GitHub profile.
 
-### Adding a Profile README
+## Step 1. Create a repository for your profile README
 
-Your GitHub profile is more than just a collection of repositories;
-it's your professional identity in the coding world.
-With Vaunt, you can take this identity to the next level by seamlessly
-integrating a dynamic SVG Developer Card and Community Board directly into your GitHub README.
-Let's get started:
+If you have already set up your GitHub profile README, skip the following and go to [Step 2. Edit your profile README](#step-2-edit-your-profile-readme).
 
-See the [GitHub Docs](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme)
-for more information about managing your profile README.
+1. In the upper-right corner of any GitHub page, click **+**, and then click **New repository**.
 
-#### Create a New Repository
+    <img src="https://docs.github.com/assets/cb-34248/mw-1440/images/help/repository/repo-create-global-nav-update.webp" width="350" />
 
-- In the upper-right corner of any page, click on the "+" icon, then select "New repository"
-- Enter a repository name that matches your GitHub username (e.g., "yourusername")
-- Choose Public for visibility
-- Check the "Initialize this repository with a README file" option
-- Click "Create repository"
+2. Type a repository name that matches your GitHub username. For example, if your username is `ilovetidb`, the repository name must be `ilovetidb`.
+3. Choose **Public** for the repository visibility.
+4. Select **Initialize this repository with a README file**.
+5. Click **Create repository**.
 
 ### Editing a Profile README
 
