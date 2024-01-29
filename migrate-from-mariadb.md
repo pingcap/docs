@@ -12,7 +12,7 @@ This document describes how to migrate data from a MariaDB server installation t
 Choose the right migration strategy:
 
 - The first strategy is to [dump data with Dumpling and restore data with TiDB Lightning](#dump-data-with-dumpling-and-restore-data-with-tidb-lightning). This works for all versions of MariaDB. The drawback of this strategy is that it needs more downtime.
-- The second strategy is to [Replicate data with DM](#replicate-data) from MariaDB to TiDB with DM. DM does not support all versions of MariaDB. Supported versions are listed on the [DM Compatibility Catalog](/dm/dm-compatibility-catalog.md#compatibility-catalog-of-tidb-data-migration).
+- The second strategy is to [Replicate data with DM](#replicate-data-with-dm) from MariaDB to TiDB with DM. DM does not support all versions of MariaDB. Supported versions are listed on the [DM Compatibility Catalog](/dm/dm-compatibility-catalog.md#compatibility-catalog-of-tidb-data-migration).
 
 Besides these two strategies, there might be other strategies available specifically to your situation. For example:
 
