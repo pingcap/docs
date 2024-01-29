@@ -49,7 +49,7 @@ To create an API key, perform the following steps:
    - `Chat2Query SQL ReadOnly`: only allows the API key to generate SQL statements based on provided instructions and execute `SELECT` SQL statements.
    - `Chat2Query SQL ReadWrite`: allows the API key to generate SQL statements based on provided instructions and execute any SQL statements.
   
-4. You can also set an expiration time to the key. Click **Expires in**, and then you can set expiration time by select unit `Minutes/Days/Months` and fill in desired time. By selecting `Minutes`, you can fill in number from 1 to 525600; by selecting `Days`, you can fill in number from 1 to 365; by selecting `Months`, you can fill in number from 1 to 12.
+4. By default, API keys never expire. If you prefer to set an expiration time for the key, click **Expires in**, select a time unit (`Minutes`, `Days`, or `Months`), and then fill in a desired number for the time unit. 
 
 5. Click **Next**. The public key and private key are displayed.
 
