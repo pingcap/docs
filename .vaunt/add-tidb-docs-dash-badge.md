@@ -17,24 +17,18 @@ If you have already set up your GitHub profile README, skip the following and go
 4. Select **Initialize this repository with a README file**.
 5. Click **Create repository**.
 
-### Editing a Profile README
+## Step 2. Edit your profile README
 
-#### Edit Your README
+1. On the GitHub page of your `<github_username>` repository, click **Edit README** above the right sidebar.
+2. Add the following code to your README file, replace `{{github_username}}` with your username, and commit the changes directly.
 
-- After creating the repository, click on "Edit README" above the right sidebar
-- Your README file is now open for editing
+    ```HTML
+    <p>
+      <img src="https://api.vaunt.dev/v1/github/entities/{{github_username}}/achievements?format=svg&limit=3" width="350" />
+    </p>
+    ```
 
-#### Integrate the Achievement Card
-
-<img src="1st_place.png" alt="1st place achievement" width="200"/>
-
-- Add this code to your README file and replace `{{github_username}}` with your username
-
-```HTML
-<p>
-  <img src="https://api.vaunt.dev/v1/github/entities/{{github_username}}/achievements?format=svg&limit=3" width="350" />
-</p>
-```
+ Your GitHub profile now displays your TiDB Docs Dash badge. For more information about managing your profile README, see [GitHub docs](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme).
 
 #### Integrate the Vaunt Developer Card (Optional)
 
