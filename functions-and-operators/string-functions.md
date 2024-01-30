@@ -146,15 +146,15 @@ Return the index position of the first argument within the second argument.
 
 ### [`FORMAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_format)
 
-The `FORMAT()` function is used to round numbers and format them to a specified number of decimal places, returning a number formatted to the specified decimal places.
+The `FORMAT(X,D[,locale])` function is used to format the number X rounded to a format similar to "#,###,###. ##", retaining D decimal places, and returning the result as a string.
 
 The function rounds and formats based on the specified number of decimal places. If the specified number of decimal places is greater than the actual number of decimal places in the number, the result is padded with zeros to the corresponding length.
 
 #### Parameters
 
-- **Number (or Numeric String):** The number to be formatted. It can be a direct numeric value, a numeric string, or a number in scientific notation.
-- **Decimal Places:** The specified number of decimal places for the returned value.
-
+- `X`: the number to be formatted. It can be a direct numeric value, a numeric string, or a number in scientific notation.
+- `D`: the specified number of decimal places for the returned value.
+ `[locale]`: specifies a locale setting to be used for grouping between decimal points, thousands separators, and separators for resultant numbers. The valid locale setting value is the same as the valid value of the [`lc_time_names`](https://dev.mysql.com/doc/refman/8.3/en/server-system-variables.html#sysvar_lc_time_names) system variable. If not specified or the region setting is `NULL`, the `'en_US'` region setting is used by default. This parameter is optional.
 #### Behavior details
 
 - If the first input parameter is a string and contains only digits, the function returns a result based on that number. For example, `FORMAT('12.34', 1)` and `FORMAT(12.34, 1)` return the same result.
