@@ -1,6 +1,11 @@
 ---
 title: Usage Overview of TiDB Backup and Restore
+<<<<<<< HEAD
 summary: Learn about how to deploy the backup and restore tool, and how to use it to back up and restore a TiDB cluster.
+=======
+summary: TiDB Backup and Restore provides best practices for choosing backup methods, managing backup data, and deploying the tool. It recommends using both full and log backups, storing data in recommended storage systems, and setting backup retention periods. The tool can be deployed using the command-line tool, SQL statements, or TiDB Operator on Kubernetes. For detailed usage, refer to the provided documentation.
+aliases: ['/tidb/dev/br-deployment/']
+>>>>>>> 3a568f2144 (*: add summary meta for br, clinic, dashboard, develop, dm docs (#16376))
 ---
 
 # Usage Overview of TiDB Backup and Restore

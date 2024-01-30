@@ -1,6 +1,11 @@
 ---
 title: Key Visualizer Page
+<<<<<<< HEAD
 summary: Learn how to use Key Visualizer to monitor traffic.
+=======
+summary: TiDB Dashboard's Key Visualizer page analyzes and troubleshoots traffic hotspots in the TiDB cluster. It visually shows traffic changes over time, and allows users to zoom in on specific time periods or region ranges. The page also provides settings to adjust brightness, select metrics, and refresh the heatmap. It identifies common heatmap types and offers solutions to address hotspot issues.
+aliases: ['/docs/dev/dashboard/dashboard-key-visualizer/','/docs/dev/key-visualizer-monitoring-tool/']
+>>>>>>> 3a568f2144 (*: add summary meta for br, clinic, dashboard, develop, dm docs (#16376))
 ---
 
 # Key Visualizer Page

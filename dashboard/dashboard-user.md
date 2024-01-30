@@ -1,6 +1,11 @@
 ---
 title: TiDB Dashboard User Management
+<<<<<<< HEAD
 summary: Learn how to create SQL users to access TiDB Dashboard.
+=======
+summary: TiDB Dashboard uses the same user privilege system as TiDB. SQL users need specific privileges to access the dashboard, including PROCESS, SHOW DATABASES, CONFIG, DASHBOARD_CLIENT, and more. It's recommended to create users with only the required privileges to prevent unintended operations. Users with high privileges can also sign in. To create a least-privileged SQL user, grant the necessary privileges and use role-based access control (RBAC) if needed.
+aliases: ['/docs/dev/dashboard/dashboard-user/']
+>>>>>>> 3a568f2144 (*: add summary meta for br, clinic, dashboard, develop, dm docs (#16376))
 ---
 
 # TiDB Dashboard User Management

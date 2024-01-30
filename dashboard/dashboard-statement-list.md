@@ -1,6 +1,11 @@
 ---
 title: SQL Statements Page of TiDB Dashboard
+<<<<<<< HEAD
 summary: View the execution status of all SQL statements in the TiDB cluster.
+=======
+summary: The SQL statements page in TiDB Dashboard shows the execution status of all SQL statements in the cluster. It allows users to analyze long-running SQL statements and provides options to access, filter, display more columns, sort, and change settings. The page also includes a feature to limit the number of stored SQL statements. For more details, visit the TiDB Dashboard documentation.
+aliases: ['/docs/dev/dashboard/dashboard-statement-list/']
+>>>>>>> 3a568f2144 (*: add summary meta for br, clinic, dashboard, develop, dm docs (#16376))
 ---
 
 # SQL Statements Page of TiDB Dashboard

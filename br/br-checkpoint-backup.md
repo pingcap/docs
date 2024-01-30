@@ -1,6 +1,11 @@
 ---
 title: Checkpoint Backup
+<<<<<<< HEAD
 summary: Learn about the checkpoint backup feature, including its application scenarios, implementation details, and usage.
+=======
+summary: TiDB v6.5.0 introduces checkpoint backup feature to continue interrupted backups, reducing the need to start from scratch. It records backed up shards to resume backup progress, but relies on GC mechanism and may require some data to be backed up again. The `br` tool periodically updates `gc-safepoint` to avoid data being garbage collected, and can extend retention period if needed.
+aliases: ["/tidb/dev/br-checkpoint"]
+>>>>>>> 3a568f2144 (*: add summary meta for br, clinic, dashboard, develop, dm docs (#16376))
 ---
 
 # Checkpoint Backup

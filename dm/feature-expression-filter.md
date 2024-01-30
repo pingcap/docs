@@ -1,5 +1,10 @@
 ---
 title: Filter DMLs Using SQL Expressions
+<<<<<<< HEAD
+=======
+aliases: ['/tidb/dev/feature-expression-filter/']
+summary: In incremental data migration, you can filter binlog events using SQL expressions. DM supports filtering data during migration using binlog value filter since v2.0.5. You can configure SQL expressions based on the values in binlog events to determine whether to migrate a row change downstream. For detailed operation and implementation, refer to "Filter DML Events Using SQL Expressions".
+>>>>>>> 3a568f2144 (*: add summary meta for br, clinic, dashboard, develop, dm docs (#16376))
 ---
 
 # Filter DMLs Using SQL Expressions

@@ -1,5 +1,10 @@
 ---
 title: Use TiDB Dashboard behind a Reverse Proxy
+<<<<<<< HEAD
+=======
+aliases: ['/docs/dev/dashboard/dashboard-ops-reverse-proxy/']
+summary: TiDB Dashboard can be safely exposed using a reverse proxy. To do this, get the actual TiDB Dashboard address and configure the reverse proxy using either HAProxy or NGINX. You can also customize the path prefix for the TiDB Dashboard service. To enhance security, consider configuring a firewall.
+>>>>>>> 3a568f2144 (*: add summary meta for br, clinic, dashboard, develop, dm docs (#16376))
 ---
 
 # Use TiDB Dashboard behind a Reverse Proxy
