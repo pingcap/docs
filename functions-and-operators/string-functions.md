@@ -303,15 +303,6 @@ SELECT 10000 LIKE '12%' AS result;
 +--------+
 ```
 
-```sql
-SELECT '🍣🍺sushi🍣🍺' LIKE '%sushi%' AS result;
-+--------+
-| result |
-+--------+
-|      1 |
-+--------+
-```
-
 To specify a collation explicitly, such as `utf8mb4_unicode_ci`, you can use `COLLATE`:
 
 ```sql
