@@ -60,7 +60,7 @@ tiup install tidb-lightning
 
 > **Note:**
 >
-> The import method in this section is only suitable for testing and functional experience. For production environments, please refer to [Migrate Large Datasets from MySQL to TiDB](/migrate-large-mysql-to-tidb.md)
+> The import method in this section is only suitable for testing and functional experience. For production environments, refer to [Migrate Large Datasets from MySQL to TiDB](/migrate-large-mysql-to-tidb.md)
 
 1. Create the configuration file tidb-lightning.toml and fill in the following settings based on your cluster information:
 
