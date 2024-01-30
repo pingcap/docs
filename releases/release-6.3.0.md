@@ -120,7 +120,7 @@ v6.3.0-DMR の主な新機能と改善点は次のとおりです。
 
     TiDB v6.2.0 では、CTE インラインを可能にするオプティマイザーに`MERGE`ヒントが導入され、CTE クエリ結果のコンシューマがTiFlashで並列実行できるようになりました。 v6.3.0 では、セッション内で CTE インラインを許可するためにセッション変数[`tidb_opt_force_inline_cte`](/system-variables.md#tidb_opt_force_inline_cte-new-in-v630)が導入されました。これにより、使いやすさが大幅に向上します。
 
-### 取引 {#transactions}
+### トランザクション {#transactions}
 
 -   悲観的トランザクション[#36579](https://github.com/pingcap/tidb/issues/36579) @ [エキシウム](https://github.com/ekexium)における一意制約のチェックの延期をサポート
 

@@ -109,7 +109,7 @@ TiDB コネクタの詳細については、 [TiDB ソース](https://docs.airby
 
 -   TiDB コネクタは、Change Data Capture (CDC) 機能をサポートしていません。
 -   TiDB 宛先は、デフォルトの正規化モードで`timestamp`タイプを`varchar`タイプに変換します。これは、Airbyte が送信中にタイムスタンプ タイプを文字列に変換し、TiDB が`cast ('2020-07-28 14:50:15+1:00' as timestamp)`をサポートしていないために発生します。
--   一部の大規模な ELT ミッションでは、TiDB のパラメータを[取引制限](/develop/dev-guide-transaction-restraints.md#large-transaction-restrictions)に増やす必要があります。
+-   一部の大規模な ELT ミッションでは、TiDB のパラメータを[大規模トランザクション制限](/develop/dev-guide-transaction-restraints.md#large-transaction-restrictions)に増やす必要があります。
 
 ## こちらも参照 {#see-also}
 

@@ -141,6 +141,6 @@ SELECT * FROM t1;
 
 -   [専念](/sql-statements/sql-statement-commit.md)
 -   [ロールバック](/sql-statements/sql-statement-rollback.md)
--   [取引を開始する](/sql-statements/sql-statement-start-transaction.md)
+-   [トランザクションを開始する](/sql-statements/sql-statement-start-transaction.md)
 -   [TiDB オプティミスティックトランザクションモード](/optimistic-transaction.md)
 -   [TiDB ペシミスティックトランザクションモード](/pessimistic-transaction.md)

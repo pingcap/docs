@@ -135,7 +135,7 @@ ALTER TABLE t ALTER CONSTRAINT c1 NOT ENFORCED;
 
 一意制約とは、一意のインデックスと主キー列内のすべての非 null 値が一意であることを意味します。
 
-### 楽観的な取引 {#optimistic-transactions}
+### 楽観的トランザクション {#optimistic-transactions}
 
 デフォルトでは、楽観的トランザクションの場合、TiDB は実行フェーズおよび厳密にコミット フェーズで一意の制約[怠惰に](/transaction-overview.md#lazy-check-of-constraints)をチェックします。これにより、ネットワーク オーバーヘッドが削減され、パフォーマンスが向上します。
 
@@ -210,7 +210,7 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 
 最初の`INSERT`ステートメントにより、重複キー エラーが発生しました。これにより、追加のネットワーク通信オーバーヘッドが発生し、挿入操作のスループットが低下する可能性があります。
 
-### 悲観的な取引 {#pessimistic-transactions}
+### 悲観的トランザクション {#pessimistic-transactions}
 
 悲観的トランザクションでは、一意のインデックスの挿入または更新を必要とする SQL ステートメントが実行されるときに、TiDB はデフォルトで`UNIQUE`制約をチェックします。
 

@@ -52,13 +52,13 @@ UPDATE {table} SET {update_column} = {update_value} WHERE {filter_column} = {fil
 
 <CustomContent platform="tidb">
 
--   多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、 [一括更新](#bulk-update)使用します。 TiDB は 1 つのトランザクションのサイズを制限しているため (デフォルトでは[txn 合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit) MB)、一度に更新するデータが多すぎると、ロックが長時間保持されすぎたり ( [悲観的取引](/pessimistic-transaction.md) )、競合が発生したり ( [楽観的取引](/optimistic-transaction.md) ) することがあります。
+-   多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、 [一括更新](#bulk-update)使用します。 TiDB は 1 つのトランザクションのサイズを制限しているため (デフォルトでは[txn 合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit) MB)、一度に更新するデータが多すぎると、ロックが長時間保持されすぎたり ( [悲観的トランザクション](/pessimistic-transaction.md) )、競合が発生したり ( [楽観的トランザクション](/optimistic-transaction.md) ) することがあります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、 [一括更新](#bulk-update)使用します。 TiDB はデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているため、一度に更新するデータが多すぎると、ロックが長時間保持されすぎたり ( [悲観的取引](/pessimistic-transaction.md) )、競合が発生したり ( [楽観的取引](/optimistic-transaction.md) ) する可能性があります。
+-   多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、 [一括更新](#bulk-update)使用します。 TiDB はデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているため、一度に更新するデータが多すぎると、ロックが長時間保持されすぎたり ( [悲観的トランザクション](/pessimistic-transaction.md) )、競合が発生したり ( [楽観的トランザクション](/optimistic-transaction.md) ) する可能性があります。
 
 </CustomContent>
 
@@ -164,13 +164,13 @@ VALUES (?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE `score` = ?, `rated_at` = NOW()"
 
 <CustomContent platform="tidb">
 
-ただし、多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、データを繰り返し更新することをお勧めします。つまり、更新が完了するまで、各繰り返しでデータの一部のみを更新します。 。これは、TiDB が単一トランザクションのサイズを制限しているためです (デフォルトでは[txn 合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit) MB)。一度にあまりに多くのデータ更新を行うと、ロックが長時間保持されすぎたり ( [悲観的取引](/pessimistic-transaction.md) )、競合が発生したり ( [楽観的取引](/optimistic-transaction.md) ) します。プログラムまたはスクリプトでループを使用すると、操作を完了できます。
+ただし、多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、データを繰り返し更新することをお勧めします。つまり、更新が完了するまで、各繰り返しでデータの一部のみを更新します。 。これは、TiDB が単一トランザクションのサイズを制限しているためです (デフォルトでは[txn 合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit) MB)。一度にあまりに多くのデータ更新を行うと、ロックが長時間保持されすぎたり ( [悲観的トランザクション](/pessimistic-transaction.md) )、競合が発生したり ( [楽観的トランザクション](/optimistic-transaction.md) ) します。プログラムまたはスクリプトでループを使用すると、操作を完了できます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-ただし、多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、データを繰り返し更新することをお勧めします。つまり、更新が完了するまで、各繰り返しでデータの一部のみを更新します。 。これは、TiDB がデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているためです。一度にあまりに多くのデータ更新を行うと、ロックが長時間保持されすぎたり ( [悲観的取引](/pessimistic-transaction.md) )、競合が発生したり ( [楽観的取引](/optimistic-transaction.md) ) します。プログラムまたはスクリプトでループを使用すると、操作を完了できます。
+ただし、多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、データを繰り返し更新することをお勧めします。つまり、更新が完了するまで、各繰り返しでデータの一部のみを更新します。 。これは、TiDB がデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているためです。一度にあまりに多くのデータ更新を行うと、ロックが長時間保持されすぎたり ( [悲観的トランザクション](/pessimistic-transaction.md) )、競合が発生したり ( [楽観的トランザクション](/optimistic-transaction.md) ) します。プログラムまたはスクリプトでループを使用すると、操作を完了できます。
 
 </CustomContent>
 

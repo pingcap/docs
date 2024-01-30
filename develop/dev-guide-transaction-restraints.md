@@ -705,7 +705,7 @@ mysql> SELECT * FROM T2;
 >
 > v6.2.0 以降、TiDB は`savepoint`機能をサポートします。 TiDB クラスターが v6.2.0 より前の場合、TiDB クラスターは`PROPAGATION_NESTED`動作をサポートしません。アプリケーションが`PROPAGATION_NESTED`伝播動作を使用する**Java Spring**フレームワークに基づいている場合は、アプリケーション側でそれを調整して、ネストされたトランザクションのロジックを削除する必要があります。
 
-## 大規模な取引制限 {#large-transaction-restrictions}
+## 大規模なトランザクション制限 {#large-transaction-restrictions}
 
 基本原則は、トランザクションのサイズを制限することです。 KV レベルでは、TiDB には単一トランザクションのサイズに制限があります。 SQL レベルでは、1 行のデータが 1 つの KV エントリにマップされ、追加のインデックスごとに 1 つの KV エントリが追加されます。 SQL レベルでの制限は次のとおりです。
 

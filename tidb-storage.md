@@ -100,4 +100,4 @@ MVCC の場合、TiKV のキー配列は次のようになります。
 
 ## 分散ACIDトランザクション {#distributed-acid-transaction}
 
-TiKV のトランザクションは、 Google が[パーコレーター](https://research.google.com/pubs/pub36726.html)で使用しているモデルを採用しています。 TiKV の実装はこの論文からインスピレーションを受けており、多くの最適化が施されています。詳細は[取引概要](/transaction-overview.md)参照してください。
+TiKV のトランザクションは、 Google が[パーコレーター](https://research.google.com/pubs/pub36726.html)で使用しているモデルを採用しています。 TiKV の実装はこの論文からインスピレーションを受けており、多くの最適化が施されています。詳細は[トランザクション概要](/transaction-overview.md)参照してください。

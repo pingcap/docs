@@ -42,7 +42,7 @@ TiDB Ansible バージョン: 4.0.0 ベータ版
 -   `Recover Binlog`インターフェイスを最適化して、クライアント[#13740](https://github.com/pingcap/tidb/pull/13740)に戻る前にすべてのトランザクションがコミットされるのを確実に待機します。
 -   HTTP `info/all`インターフェイス[#13025](https://github.com/pingcap/tidb/pull/13025)を介して、クラスター内の TiDB サーバーによって有効になっているbinlogステータスのクエリをサポートします。
 -   悲観的トランザクション モード[#14087](https://github.com/pingcap/tidb/pull/14087)を使用する場合、MySQL 互換の`Read Committed`トランザクション分離レベルをサポートします。
--   大規模な取引をサポートします。トランザクション サイズは、物理メモリのサイズによって制限されます。
+-   大規模なトランザクションをサポートします。トランザクション サイズは、物理メモリのサイズによって制限されます。
     -   [#11999](https://github.com/pingcap/tidb/pull/11999) [#11986](https://github.com/pingcap/tidb/pull/11986) [#11974](https://github.com/pingcap/tidb/pull/11974) [#11817](https://github.com/pingcap/tidb/pull/11817) [#11807](https://github.com/pingcap/tidb/pull/11807)
     -   [#12133](https://github.com/pingcap/tidb/pull/12133) [#12223](https://github.com/pingcap/tidb/pull/12223) [#12980](https://github.com/pingcap/tidb/pull/12980) [#13123](https://github.com/pingcap/tidb/pull/13123) [#13299](https://github.com/pingcap/tidb/pull/13299)
     -   [#13432](https://github.com/pingcap/tidb/pull/13432) [#13599](https://github.com/pingcap/tidb/pull/13599)

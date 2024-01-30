@@ -173,7 +173,7 @@ summary: Learn the configuration items of TiDB Binlog.
 ### 初期コミット-ts {#initial-commit-ts}
 
 -   トランザクションのどのコミット タイムスタンプからレプリケーション プロセスを開始するかを指定します。この構成は、初めてレプリケーション プロセスにあるDrainerノードにのみ適用されます。ダウンストリームにチェックポイントがすでに存在する場合、レプリケーションはチェックポイントに記録された時間に従って実行されます。
--   commit ts (コミット タイムスタンプ) は、TiDB における[取引](/transaction-overview.md#transactions)コミットの特定の時点です。これは、現在のトランザクションの一意の ID として PD から取得される、グローバルに一意で増加するタイムスタンプです。 `initial-commit-ts`構成は、次の一般的な方法で取得できます。
+-   commit ts (コミット タイムスタンプ) は、TiDB における[トランザクション](/transaction-overview.md#transactions)コミットの特定の時点です。これは、現在のトランザクションの一意の ID として PD から取得される、グローバルに一意で増加するタイムスタンプです。 `initial-commit-ts`構成は、次の一般的な方法で取得できます。
     -   BRを使用した場合、 BRでバックアップされたメタデータ(backupmeta)に記録されているバックアップTSから`initial-commit-ts`を取得できます。
     -   Dumplingを使用すると、 Dumplingでバックアップされたメタデータ(メタデータ)に記録されているPosから`initial-commit-ts`を取得でき、
     -   PD Controlが使用されている場合、 `tso`コマンドの出力には`initial-commit-ts`が含まれます。

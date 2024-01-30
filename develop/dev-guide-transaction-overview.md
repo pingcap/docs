@@ -5,7 +5,7 @@ summary: A brief introduction to transactions in TiDB.
 
 # トランザクション概要 {#transaction-overview}
 
-TiDB は完全な分散トランザクションをサポートし、 [楽観的取引](/optimistic-transaction.md)と[悲観的取引](/pessimistic-transaction.md) (TiDB 3.0 で導入) を提供します。この記事では主に、トランザクション ステートメント、楽観的トランザクションと悲観的トランザクション、トランザクション分離レベル、楽観的トランザクションにおけるアプリケーション側のリトライとエラー処理について紹介します。
+TiDB は完全な分散トランザクションをサポートし、 [楽観的トランザクション](/optimistic-transaction.md)と[悲観的トランザクション](/pessimistic-transaction.md) (TiDB 3.0 で導入) を提供します。この記事では主に、トランザクション ステートメント、楽観的トランザクションと悲観的トランザクション、トランザクション分離レベル、楽観的トランザクションにおけるアプリケーション側のリトライとエラー処理について紹介します。
 
 ## 一般的なステートメント {#common-statements}
 
@@ -48,7 +48,7 @@ COMMIT;
 
 ```
 
-### 取引を開始する {#start-a-transaction}
+### トランザクションを開始する {#start-a-transaction}
 
 新しいトランザクションを明示的に開始するには、 `BEGIN`または`START TRANSACTION`を使用できます。
 

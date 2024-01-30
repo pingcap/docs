@@ -13,7 +13,7 @@ summary: Learn the optimistic transaction model in TiDB.
 >
 > v3.0.8 以降、TiDB はデフォルトで[悲観的トランザクション モード](/pessimistic-transaction.md)を使用します。ただし、既存のクラスターを v3.0.7 以前から v3.0.8 以降にアップグレードする場合、これは影響しません。つまり、**新しく作成されたクラスターのみがデフォルトで悲観的トランザクション モードを使用します**。
 
-## 楽観的取引の原則 {#principles-of-optimistic-transactions}
+## 楽観的トランザクションの原則 {#principles-of-optimistic-transactions}
 
 分散トランザクションをサポートするために、TiDB は楽観的トランザクションで 2 フェーズ コミット (2PC) を採用します。手順は次のとおりです。
 
