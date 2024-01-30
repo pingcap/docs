@@ -132,7 +132,6 @@ delta_index_cache_size = 0
     ## The listening address of TiFlash coprocessor services.
     service_addr = "0.0.0.0:3930"
 
-<<<<<<< HEAD
 ## Multiple TiFlash nodes elect a master to add or delete placement rules to PD,
 ## and the configurations in flash.flash_cluster control this process.
 [flash.flash_cluster]
@@ -141,18 +140,6 @@ delta_index_cache_size = 0
     master_ttl = The valid period of the elected master.
     cluster_manager_path = The absolute path of the pd buddy directory.
     log = The pd buddy log path.
-=======
-    ## Introduced in v7.4.0. When the gap between the `applied_index` advanced by the current Raft state machine and the `applied_index` at the last disk spilling exceeds `compact_log_min_gap`, TiFlash executes the `CompactLog` command from TiKV and spills data to disk. Increasing this gap might reduce the disk spilling frequency of TiFlash, thus reducing read latency in random write scenarios, but it might also increase memory overhead. Decreasing this gap might increase the disk spilling frequency of TiFlash, thus alleviating memory pressure in TiFlash. However, at this stage, the disk spilling frequency of TiFlash will not be higher than that of TiKV, even if this gap is set to 0.
-    ## It is recommended to keep the default value.
-    # compact_log_min_gap = 200
-    ## Introduced in v5.0. When the number or the size of rows in the Regions cached by TiFlash exceeds either of the following thresholds, TiFlash executes the `CompactLog` command from TiKV and spills data to disk.
-    ## It is recommended to keep the default value.
-    # compact_log_min_rows = 40960 # 40k
-    # compact_log_min_bytes = 33554432 # 32MB
-
-    ## The following configuration item only takes effect for the TiFlash disaggregated storage and compute architecture mode. For details, see documentation at https://docs.pingcap.com/tidb/dev/tiflash-disaggregated-and-s3.
-    # disaggregated_mode = tiflash_write # The supported mode is `tiflash_write` or `tiflash_compute.
->>>>>>> fde7b8ae22 (tiflash: Clean deprecated configs; align style of flash.proxy (#16071))
 
 [flash.proxy]
     ## The listening address of proxy. If it is left empty, 127.0.0.1:20170 is used by default.
