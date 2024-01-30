@@ -14,7 +14,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 ## Compatibility changes
 
 <--tw @Oreoxmt (1)-->
-- 新增 TiKV 配置项 [`gc.num-threads`](/tikv-configuration-file.md#num-threads-span-classversion-mark从-v760-版本开始引入span)，用于设置当 enable-compaction-filter 为 false 时 GC 的线程个数 [#16101](https://github.com/tikv/tikv/issues/16101) @[tonyxuqqi](https://github.com/tonyxuqqi)
+- Introduce the TiKV configuration item [`gc.num-threads`](/tikv-configuration-file.md#num-threads-span-classversion-marknew-in-v760span) to set the number of GC threads when `enable-compaction-filter` is `false`  [#16101](https://github.com/tikv/tikv/issues/16101) @[tonyxuqqi](https://github.com/tonyxuqqi)
 
 ## Improvements
 
@@ -74,15 +74,17 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 ## Bug fixes
 
 + TiDB
-    <--tw @Oreoxmt (4)-->
+    <--tw @Oreoxmt (6)-->
     - (dup): release-7.6.0.md > 错误修复> TiDB - Fix the issue that enforced sorting might become ineffective when a query uses optimizer hints (such as `STREAM_AGG()`) that enforce sorting and its execution plan contains `IndexMerge` [#49605](https://github.com/pingcap/tidb/issues/49605) @[AilinKid](https://github.com/AilinKid)
     - (dup): release-7.6.0.md > 错误修复> TiDB - Fix the issue that histogram statistics might not be parsed into readable strings when the histogram boundary contains `NULL` [#49823](https://github.com/pingcap/tidb/issues/49823) @[AilinKid](https://github.com/AilinKid)
     - (dup): release-7.6.0.md > 错误修复> TiDB - Fix the issue that hints cannot be used in `REPLACE INTO` statements [#34325](https://github.com/pingcap/tidb/issues/34325) @[YangKeao](https://github.com/YangKeao)
     - (dup): release-7.6.0.md > 错误修复> TiDB - Fix the issue that query results are incorrect due to `STREAM_AGG()` incorrectly handling CI [#49902](https://github.com/pingcap/tidb/issues/49902) @[wshwsh12](https://github.com/wshwsh12)
-    - 缓解表数量或表的分区数量巨大时，TiDB 节点 OOM 的问题 [#50077](https://github.com/pingcap/tidb/issues/50077) @[zimulala](https://github.com/zimulala)
-    - 修复了 DDL owner 网络隔离后分布式框架下 add index 数据不一致的问题 [#49773]([https://github.com/pingcap/tidb/issues/49773]) @[tangenta](https://github.com/tangenta)
-    - 修复含有 Apply 的查询报错 fatal error: concurrent map writes 导致 tidb 崩溃的问题 [#50347](https://github.com/pingcap/tidb/issues/50347) @[SeaRise](https://github.com/SeaRise)
-    - 修复以 COM_STMT_EXECUTE 方式执行的 commit/rollback 无法结束掉已超时事务的问题 [#49151](https://github.com/pingcap/tidb/issues/49151) @[zyguan](https://github.com/zyguan)
+    - Fix the issue that the query result of a range partitioned table is incorrect in some cases due to wrong partition pruning [#50082](https://github.com/pingcap/tidb/issues/49823) @[Defined2014](https://github.com/Defined2014)
+    - Fix the issue that the auto-increment ID allocation reports an error due to concurrent conflicts when using an auto-increment column with `AUTO_ID_CACHE=1` [#50519](https://github.com/pingcap/tidb/issues/50519) @[tiancaiamao](https://github.com/tiancaiamao)
+    - Mitigate the issue that TiDB nodes might encounter OOM errors when dealing with a large number of tables or partitions [#50077](https://github.com/pingcap/tidb/issues/50077) @[zimulala](https://github.com/zimulala)
+    - Fix the issue that data is inconsistent under the TiDB Distributed eXecution Framework (DXF) when executing `ADD INDEX` after the DDL Owner is network isolated [#49773](https://github.com/pingcap/tidb/issues/49773) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that TiDB might panic when a query contains the Apply operator and the `fatal error: concurrent map writes` error occurs [#50347](https://github.com/pingcap/tidb/issues/50347) @[SeaRise](https://github.com/SeaRise)
+    - Fix the issue that the COMMIT or ROLLBACK operation executed through `COM_STMT_EXECUTE` fails to terminate transactions that have timeout [#49151](https://github.com/pingcap/tidb/issues/49151) @[zyguan](https://github.com/zyguan)
 
 + TiKV
 
