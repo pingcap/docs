@@ -73,7 +73,7 @@ tiup install tidb-lightning
     [tikv-importer]
     # Configure the import mode
     backend = "local"
-    # Sets the directory for temporarily storing the sorted key-value pairs.The target directory must be empty.
+    # Sets the directory for temporarily storing the sorted key-value pairs. The target directory must be empty.
     sorted-kv-dir = "/mnt/ssd/sorted-kv-dir"
 
     [mydumper]
