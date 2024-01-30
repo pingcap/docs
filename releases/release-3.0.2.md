@@ -1,5 +1,10 @@
 ---
 title: TiDB 3.0.2 Release Notes
+<<<<<<< HEAD
+=======
+aliases: ['/docs/dev/releases/release-3.0.2/','/docs/dev/releases/3.0.2/']
+summary: TiDB 3.0.2 was released on August 7, 2019, with various fixes and improvements. The release includes fixes for SQL optimizer, SQL execution engine, server, DDL, monitor, TiKV, PD, TiDB Binlog, TiDB Lightning, and TiDB Ansible. Fixes include issues with query plans, query results, error messages, and performance optimizations.
+>>>>>>> 5dcc785b6a (add summary for releases (#16377))
 ---
 
 # TiDB 3.0.2 Release Notes

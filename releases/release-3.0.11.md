@@ -1,5 +1,10 @@
 ---
 title: TiDB 3.0.11 Release Notes
+<<<<<<< HEAD
+=======
+aliases: ['/docs/dev/releases/release-3.0.11/','/docs/dev/releases/3.0.11/']
+summary: TiDB 3.0.11 was released on March 4, 2020. It includes compatibility changes, new features, bug fixes, and updates for TiDB, TiDB Binlog, TiDB Lightning, TiKV, and TiDB Ansible. Some known issues are fixed in new versions, so it is recommended to use the latest 3.0.x version.
+>>>>>>> 5dcc785b6a (add summary for releases (#16377))
 ---
 
 # TiDB 3.0.11 Release Notes

@@ -1,5 +1,10 @@
 ---
 title: TiDB 4.0.1 Release Notes
+<<<<<<< HEAD
+=======
+aliases: ['/docs/dev/releases/release-4.0.1/']
+summary: TiDB 4.0.1 was released on June 12, 2020. New features include support for custom timeout for PD client and new collation framework in TiFlash. Bug fixes address issues with configuration, monitoring metrics, and store information retrieval. Backup & Restore (BR) now includes a version check to avoid compatibility issues.
+>>>>>>> 5dcc785b6a (add summary for releases (#16377))
 ---
 
 # TiDB 4.0.1 Release Notes
