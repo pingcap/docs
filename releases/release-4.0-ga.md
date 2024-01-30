@@ -1,6 +1,13 @@
 ---
 title: TiDB 4.0 GA Release Notes
 aliases: ['/docs/dev/releases/release-4.0-ga/']
+summary: TiDB 4.0.0 GA Release Notes: 
+- Optimized error messages for large-sized transactions
+- Improved usability of `Changefeed` configuration file
+- Added new configuration items and support for various syntax and functions
+- Fixed multiple bugs and issues in TiKV, TiFlash, PD, and Tools
+- Added new monitoring items and support for various features in PD
+- Fixed various issues in Backup & Restore (BR) and TiCDC
 ---
 
 # TiDB 4.0 GA Release Notes
