@@ -34,7 +34,7 @@ If you have already set up your GitHub profile README, skip the following and go
 
 TiDB Docs Dash badges are granted via [Vaunt](https://vaunt.dev/), a developer relations platform that aims to empower and grow developer communities.
 
-You can also use Vaunt to showcase your contributions to open-source projects as follows:
+You can use additional Vaunt features to showcase your contributions to other open source projects as follows:
 
 - Integrate your developer card
 
