@@ -226,6 +226,15 @@ SELECT '🍣🍺sushi🍣🍺' LIKE '%sushi%' AS result;
 ```
 
 ```sql
+SELECT '🍣🍺sushi🍣🍺' LIKE '%SUSHI%' AS result;
++--------+
+| result |
++--------+
+|      0 |
++--------+
+```
+
+```sql
 SELECT '🍣🍺sushi🍣🍺' LIKE '%🍣%' AS result;
 +--------+
 | result |
