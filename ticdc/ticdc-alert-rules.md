@@ -16,7 +16,7 @@ For critical alerts, you need to pay close attention to abnormal monitoring metr
 
 - Alert rule:
 
-    (time() - ticdc_owner_checkpoint_ts / 1000) > 600
+    `(time() - ticdc_owner_checkpoint_ts / 1000) > 600`
 
 - Description:
 
@@ -30,7 +30,7 @@ For critical alerts, you need to pay close attention to abnormal monitoring metr
 
 - Alert rule:
 
-    (time() - ticdc_owner_resolved_ts / 1000) > 300
+    `(time() - ticdc_owner_resolved_ts / 1000) > 300`
 
 - Description:
 
@@ -39,6 +39,20 @@ For critical alerts, you need to pay close attention to abnormal monitoring metr
 - Solution:
 
     See [TiCDC Handle Replication Interruption](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions).
+
+### `ticdc_changefeed_failed`
+
+- Alert rule:
+
+    `(max_over_time(ticdc_owner_status[1m]) == 2) > 0`
+
+- Description:
+
+    A replication task encounters an unrecoverable error and enters the failed state.
+
+- Solution:
+
+    This alert is similar to replication interruption. See [TiCDC Handle Replication Interruption](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions).
 
 ### `ticdc_processor_exit_with_error_count`
 
@@ -132,7 +146,7 @@ Warning alerts are a reminder for an issue or error.
 
 - Alert rule:
 
-    `changes(tikv_cdc_min_resolved_ts[1m]) < 1 and ON (instance) tikv_cdc_region_resolve_status{status="resolved"} > 0`
+    `changes(tikv_cdc_min_resolved_ts[1m]) < 1 and ON (instance) tikv_cdc_region_resolve_status{status="resolved"} > 0 and ON (instance) tikv_cdc_captured_region_total > 0`
 
 - Description:
 
