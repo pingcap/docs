@@ -1,6 +1,6 @@
 ---
 title: Sink to MySQL
-Summary: Learn how to create a changefeed to stream data from TiDB Cloud to MySQL.
+summary: This document explains how to stream data from TiDB Cloud to MySQL using the Sink to MySQL changefeed. It includes restrictions, prerequisites, and steps to create a MySQL sink for data replication. The process involves setting up network connections, loading existing data to MySQL, and creating target tables in MySQL. After completing the prerequisites, users can create a MySQL sink to replicate data to MySQL.
 ---
 
 # Sink to MySQL
