@@ -155,6 +155,7 @@ The function rounds and formats based on the specified number of decimal places.
 - `X`: the number to be formatted. It can be a direct numeric value, a numeric string, or a number in scientific notation.
 - `D`: the specified number of decimal places for the returned value.
  `[locale]`: specifies a locale setting to be used for grouping between decimal points, thousands separators, and separators for resultant numbers. The valid locale setting value is the same as the valid value of the [`lc_time_names`](https://dev.mysql.com/doc/refman/8.3/en/server-system-variables.html#sysvar_lc_time_names) system variable. If not specified or the region setting is `NULL`, the `'en_US'` region setting is used by default. This parameter is optional.
+
 #### Behavior details
 
 - If the first input parameter is a string and contains only digits, the function returns a result based on that number. For example, `FORMAT('12.34', 1)` and `FORMAT(12.34, 1)` return the same result.
