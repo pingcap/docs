@@ -18,7 +18,7 @@ First, you can use [dumpling](/dumpling-overview.md) to export data from MySQL.
 1. Run `tiup --version` to check if TiUP is already installed. If TiUP is installed, skip this step. If TiUP is not installed, run the following command:
 
     ```
-     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
+    curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
 2. Using TiUP to install Dumpling:
