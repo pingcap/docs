@@ -5,7 +5,7 @@ aliases: ['/docs/dev/get-started-with-tidb-lightning/','/docs/dev/how-to/get-sta
 
 # Quick Start for TiDB Lightning
 
-This document provides a quick guide on how to get started with TiDB Lightning, importing MySQL data into a TiDB cluster.
+This document provides a quick guide on getting started with TiDB Lightning by importing MySQL data into a TiDB cluster.
 
 > **Warning:**
 >
