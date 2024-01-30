@@ -139,7 +139,7 @@ To change the local timezone setting, take the following steps:
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
-3. In the **Time Zone** section, click the drop-down list and select your time zone.
+3. In the **Time Zone** section, select your time zone from the drop-down list.
 
 4. Click **Update**.
 
