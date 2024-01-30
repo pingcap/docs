@@ -27,7 +27,7 @@ First, you can use [dumpling](/dumpling-overview.md) to export data from MySQL.
     tiup install dumpling
     ```
 
-3. To export data from MySQL, you can refer to the detailed steps provided in the documentation under the section [Use Dumpling to Export Data](/dumpling-overview.md#Export-to-SQL-files)：
+3. To export data from MySQL, you can refer to the detailed steps provided in [Use Dumpling to Export Data](/dumpling-overview.md#export-to-sql-files)：
 
     ```sh
     tiup dumpling -h 127.0.0.1 -P 3306 -u root -t 16 -F 256MB -B test -f 'test.t[12]' -o /data/my_database/
