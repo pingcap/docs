@@ -160,10 +160,10 @@ delta_index_cache_size = 0
     ## The external access address of addr. If it is left empty, "addr" is used by default.
     ## Should guarantee that other nodes can access through `advertise-addr` when you deploy the cluster on multiple nodes.
     advertise-addr = ""
-    ## The listening address from which the proxy pulls metrics | status information. If it is left empty, 127.0.0.1:20292 is used by default.
+    ## The listening address from which the proxy pulls metrics or status information. If it is left empty, 127.0.0.1:20292 is used by default.
     status-addr = "127.0.0.1:20292"
-    ## The external access address of status-addr. If it is left empty, "status-addr" is used by default.
-    ## Should guarantee that other nodes can access though `advertise-status-addr` when you deploy the cluster on multiple nodes.
+    ## The external access address of status-addr. If it is left empty, the value of "status-addr" is used by default.
+    ## Should guarantee that other nodes can access through `advertise-status-addr` when you deploy the cluster on multiple nodes.
     advertise-status-addr = ""
     ## The data storage path of proxy.
     data-dir = "/tidb-data/tiflash-9000/flash"
