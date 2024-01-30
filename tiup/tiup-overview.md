@@ -115,7 +115,7 @@ The output is long but you can focus on only two parts:
     - mirror: used to clone a private mirror from the official mirror
     - telemetry: used to control the telemetry feature
     - env: used to show the list of system environment variables that related to TiUP
-    - history: used to display the historical execution record of TiUP, displays 100 lines by default
+    - history: used to display the historical execution record of TiUP (100 lines by default)
     - link: used to link component binary to $TIUP_HOME/bin/
     - unlink: used to unlink component binary to $TIUP_HOME/bin/
     - help: used to print out help information
