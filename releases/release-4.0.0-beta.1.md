@@ -1,5 +1,6 @@
 ---
 title: TiDB 4.0.0 Beta.1 Release Notes
+summary: TiDB 4.0.0 Beta.1 was released on February 28, 2020. It includes compatibility changes, new features, and bug fixes. Some highlights include support for SQL performance diagnosis, the `Sequence` function, and TLS support between components. Additionally, TiDB Lightning now has a bug fix for the web interface.
 ---
 
 # TiDB 4.0.0 Beta.1 Release Notes
