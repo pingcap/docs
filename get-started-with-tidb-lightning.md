@@ -42,7 +42,7 @@ First, you can use [dumpling](/dumpling-overview.md) to export data from MySQL.
 
     The full backup data exported will be saved in the `/data/my_database` directory.
 
-## Step 2: Deploy the TiDB Cluster
+## Step 2: Deploy the TiDB cluster
 
 Before starting the data import, you need to deploy a TiDB cluster for the import. If you already have a TiDB cluster, you can skip this step.
 
