@@ -208,7 +208,7 @@ The `FROM_BASE64()` function is used to decode strings represented in [Base64](h
 >
 > The `FROM_BASE64()` function only processes valid Base64 encoded strings.
 
-#### Example
+#### Examples
 
 The following example shows how to decode the Base64 encoded string `'SGVsbG8gVGlEQg=='`. This string is the result of encoding `'Hello TiDB'`, which can be done using the [`TO_BASE64()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_to-base64) function.
 
