@@ -95,7 +95,7 @@ tiup install tidb-lightning
     pd-addr = "172.16.31.3:2379"
     ```
 
-2. Run `tidb-lightning`. To avoid the program exiting due to the `SIGHUP` signal when starting the program directly in the command line using `nohup`, it is recommended to put the `nohup` command in a script. An example is provided below:
+2. Run `tidb-lightning`. To avoid the program exiting due to the `SIGHUP` signal when starting the program directly in the command line using `nohup`, it is recommended to put the `nohup` command in a script. For example:
 
     ```shell
     #!/bin/bash
