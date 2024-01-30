@@ -167,17 +167,10 @@ delta_index_cache_size = 0
     # log-level = "info" 
 
 [logger]
-<<<<<<< HEAD
     ## log level (available options: "trace", "debug", "info", "warn", "error"). The default value is "debug".
     level = "debug"
-    log = TiFlash log path
-    errorlog = TiFlash error log path
-=======
-    ## log level (available options: "trace", "debug", "info", "warn", "error"). The default value is "info".
-    level = "info"
     log = "/tidb-deploy/tiflash-9000/log/tiflash.log"
     errorlog = "/tidb-deploy/tiflash-9000/log/tiflash_error.log"
->>>>>>> fde7b8ae22 (tiflash: Clean deprecated configs; align style of flash.proxy (#16071))
     ## Size of a single log file. The default value is "100M".
     size = "100M"
     ## Maximum number of log files to save. The default value is 10.
