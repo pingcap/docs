@@ -54,7 +54,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
     + TiDB Lightning
         <--tw @hfxsd (1)-->
-        - 优化 Alter table 的性能 [#50105](https://github.com/pingcap/tidb/issues/50105) @[D3Hunter](https://github.com/D3Hunter)
+        - Improve performance of `ALTER TABLE` when importing a large number of tables [#50105](https://github.com/pingcap/tidb/issues/50105) @[D3Hunter](https://github.com/D3Hunter)
 
     + Dumpling
 
@@ -86,9 +86,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     - Fix the issue that TiDB might panic when a query contains the Apply operator and the `fatal error: concurrent map writes` error occurs [#50347](https://github.com/pingcap/tidb/issues/50347) @[SeaRise](https://github.com/SeaRise)
     - Fix the issue that the COMMIT or ROLLBACK operation executed through `COM_STMT_EXECUTE` fails to terminate transactions that have timeout [#49151](https://github.com/pingcap/tidb/issues/49151) @[zyguan](https://github.com/zyguan)
     <--tw @hfxsd (3)-->
-    - 使用 PREPARE 方式执行 SELECT INTO OUTFILE 语句是应该报错而不是执行成功 [#49166](https://github.com/pingcap/tidb/issues/49166) @[qw4990](https://github.com/qw4990)
-    - 修复特别简单的 UNIQUE 索引点查 + ORDER BY 可能执行报错的问题 [#49920](https://github.com/pingcap/tidb/issues/49920) @[jackysp](https://github.com/jackysp)
-    - 修复 multi-statement 模式下，使用索引点查的 DELETE/UPDATE 语句可能会报错的问题 [#50012](https://github.com/pingcap/tidb/issues/50012) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that executing `SELECT INTO OUTFILE` using the `PREPARE` method returns success instead of an error [#49166](https://github.com/pingcap/tidb/issues/49166) @[qw4990](https://github.com/qw4990)
+    - Fix the issue that executing `UNIQUE` index lookup with `ORDER BY` might cause an error [#49920](https://github.com/pingcap/tidb/issues/49920) @[jackysp](https://github.com/jackysp)
+    - Fix the issue that the `DELETE` and `UPDATE` statements using index lookup might report an error when `tidb_multi_statement_mode` mode is enabled [#50012](https://github.com/pingcap/tidb/issues/50012) @[tangenta](https://github.com/tangenta)
     <--tw @ran-huang (3)-->
     - 修复短时间发送大量 DDL 语句时，CREATE TABLE 语句可能不会同步建立该表对心的统计信息元信息的问题 [#36004](https://github.com/pingcap/tidb/issues/36004) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - 修复 LEADING hint 在 UNION ALL 语句中无法生效的问题 [#50067](https://github.com/pingcap/tidb/issues/50067) @[hawkingrei](https://github.com/hawkingrei)
@@ -105,13 +105,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
 + PD
     <--tw @hfxsd (1)-->
-    - 修复 pd-ctl 查询没有 Leader 的 Region 时可能导致 PD Panic 的问题 [#7630](https://github.com/tikv/pd/issues/7630) @[rleungx](https://github.com/rleungx)
+    - Fix the issue that `pd-ctl` querying a Region without a leader might lead to PD to panic [#7630](https://github.com/tikv/pd/issues/7630) @[rleungx](https://github.com/rleungx)
 
 + TiFlash
     <--tw @hfxsd (2)-->
     - (dup): release-7.6.0.md > 错误修复> TiFlash - Fix the issue that the `lowerUTF8` and `upperUTF8` functions do not allow characters in different cases to occupy different bytes [#8484](https://github.com/pingcap/tiflash/issues/8484) @[gengliqi](https://github.com/gengliqi)
-    - 修复在执行 `ALTER TABLE ... MODIFY COLUMN ... NOT NULL` 将可为空的列转为不可为空之后，导致 tiflash panic 的问题 [#8419](https://github.com/pingcap/tiflash/issues/8419) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 修复杀查询导致 TiFlash 上大量任务被同时取消时，由于并发数据冲突导致 TiFlash 崩溃的问题 [#7432](https://github.com/pingcap/tiflash/issues/7432) @[SeaRise](https://github.com/SeaRise)
+    - Fix the issue that after converting nullable columns to non-nullable ones, executing `ALTER TABLE ... MODIFY COLUMN ... NOT NULL` causes TiFlash to panic [#8419](https://github.com/pingcap/tiflash/issues/8419) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix the issue that after killing the query, TiFlash crashes due to concurrent data conflict when a large number of tasks on TiFlash are canceled at the same time [#7432](https://github.com/pingcap/tiflash/issues/7432) @[SeaRise](https://github.com/SeaRise)
 
 + Tools
 
