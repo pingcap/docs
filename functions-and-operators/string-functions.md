@@ -167,7 +167,7 @@ Output:
 +--------------------------------+
 ```
 
-In addition to the `CONCAT()` function, you can concatenate strings by placing them adjacent to each other as in the following example, but this method does not support numeric types.
+In addition to the `CONCAT()` function, you can concatenate strings by placing them adjacent to each other as in the following example. Note that this method does not support numeric types.
 
 ```sql
 SELECT 'Ti' 'DB' ' ' 'Server';
