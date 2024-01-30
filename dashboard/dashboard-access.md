@@ -1,11 +1,6 @@
 ---
 title: Access TiDB Dashboard
-<<<<<<< HEAD
-summary: Learn how to access TiDB Dashboard.
-=======
 summary: To access TiDB Dashboard, visit the specified URL in your browser. For multiple PD instances, replace the address with any PD instance address and port. Use Chrome, Firefox, or Edge browsers of newer versions. Sign in with the TiDB root account or a user-defined SQL user. The session remains valid for 24 hours. Switch between English and Chinese languages. To log out, click the user name and then the Logout button.
-aliases: ['/docs/dev/dashboard/dashboard-access/']
->>>>>>> 3a568f2144 (*: add summary meta for br, clinic, dashboard, develop, dm docs (#16376))
 ---
 
 # Access TiDB Dashboard

@@ -1,10 +1,6 @@
 ---
 title: DM Advanced Task Configuration File
-<<<<<<< HEAD
-=======
-aliases: ['/docs/tidb-data-migration/dev/task-configuration-file-full/','/docs/tidb-data-migration/dev/dm-portal/']
 summary: This document introduces the advanced task configuration file of Data Migration (DM), covering global and instance configuration. The global configuration includes basic and feature settings, while the instance configuration defines subtasks for data migration from one or multiple MySQL instances in the upstream to the same instance in the downstream.
->>>>>>> 3a568f2144 (*: add summary meta for br, clinic, dashboard, develop, dm docs (#16376))
 ---
 
 # DM Advanced Task Configuration File
