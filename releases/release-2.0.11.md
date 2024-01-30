@@ -1,10 +1,6 @@
 ---
 title: TiDB 2.0.11 Release Notes
-<<<<<<< HEAD
-=======
-aliases: ['/docs/dev/releases/release-2.0.11/','/docs/dev/releases/2.0.11/']
 summary: TiDB 2.0.11 and TiDB Ansible 2.0.11 were released on January 3, 2019. The release includes improvements in system compatibility and stability. Fixes include handling errors when PD is in an abnormal condition, compatibility issues with MySQL, error message reporting, prefix index range, and panic issues with the `UPDATE` statement. TiKV also fixed two issues related to Region merge.
->>>>>>> 5dcc785b6a (add summary for releases (#16377))
 ---
 
 # TiDB 2.0.11 Release Notes

@@ -1,10 +1,6 @@
 ---
 title: TiDB 1.0.5 Release Notes
-<<<<<<< HEAD
-=======
-aliases: ['/docs/dev/releases/release-1.0.5/','/docs/dev/releases/105/']
 summary: TiDB 1.0.5 was released on December 26, 2017. Updates include adding max value for Auto_Increment ID, fixing goroutine leak, supporting output of slow queries to separate file, loading TimeZone variable from TiKV, and more. PD fixes include balancing leaders and potential panic during bootstrapping. TiKV fixes slow CPU ID retrieval and supports dynamic-level-bytes parameter. Upgrade order is PD -> TiKV -> TiDB.
->>>>>>> 5dcc785b6a (add summary for releases (#16377))
 ---
 
 # TiDB 1.0.5 Release Notes
