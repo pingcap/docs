@@ -79,7 +79,7 @@ By default, API keys never expire. However, for security considerations, you can
 
 ## Manage API keys
 
-The following sections describe how to create, edit, delete, and manually expire an API key for a Data App.
+The following sections describe how to create, edit, delete, and expire API keys for a Data App.
 
 ### Create an API key
 
@@ -104,7 +104,7 @@ To create an API key for a Data App, perform the following steps:
 
     4. (Optional) Set a desired expiration time for your API key.
 
-        By default, API keys never expire. If you prefer to specify an expiration time for the API key, click **Expires in**, select a time unit (`Minutes`, `Days`, or `Months`), and then fill in a desired number for the time unit. 
+        By default, an API key never expires. If you prefer to specify an expiration time for the API key, click **Expires in**, select a time unit (`Minutes`, `Days`, or `Months`), and then fill in a desired number for the time unit. 
 
 5. Click **Next**. The public key and private key are displayed.
 
