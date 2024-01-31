@@ -54,28 +54,6 @@ In Chat2Query, you can either simply type `--` followed by your instructions to 
 
 4. Run the SQL queries.
 
-    ```
-        use test; 
-        -- create a new table t with id and name 
-        CREATE TABLE
-          `t` (`id` INT, `name` VARCHAR(255));
-        
-        -- add 3 rows 
-        INSERT INTO
-          `t` (`id`, `name`)
-        VALUES
-          (1, 'row1'),
-          (2, 'row2'),
-          (3, 'row3');
-        
-        -- query all
-        SELECT
-          `id`,
-          `name`
-        FROM
-          `t`;
-    ```
-
     <SimpleTab>
     <div label="macOS">
 
@@ -102,7 +80,31 @@ In Chat2Query, you can either simply type `--` followed by your instructions to 
     </div>
     </SimpleTab>
 
-After running the queries, you can immediately see the query logs and results at the bottom of the page.
+After running the queries, you can immediately see the query logs and results at the bottom of the page. 
+To use Chat2Query, execute the following example statements:
+
+```MySQL
+use test;
+
+-- create a new table t with id and name 
+CREATE TABLE
+  `t` (`id` INT, `name` VARCHAR(255));
+
+-- add 3 rows 
+INSERT INTO
+  `t` (`id`, `name`)
+VALUES
+  (1, 'row1'),
+  (2, 'row2'),
+  (3, 'row3');
+
+-- query all
+SELECT
+  `id`,
+  `name`
+FROM
+  `t`;
+```
 
 ## Step 3: Try interactive tutorials
 
