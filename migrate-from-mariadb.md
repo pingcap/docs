@@ -23,14 +23,14 @@ This document only covers the first two strategies.
 
 Prepare the following based on the strategy you choose:
 
-- For the first strategy:
+- For the **dump and restore** strategy:
     - Install [Dumpling](/dumpling-overview.md) and [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md).
     - Make sure you have the [required privileges](/dumpling-overview.md#required-privileges) on the MariaDB server for Dumpling to export data.
-- For the second strategy, set up [Data Migration (DM)](/dm/dm-overview.md).
+- For the **data replication** strategy, set up [Data Migration (DM)](/dm/dm-overview.md).
 
 ## Check compatibility
 
-TiDB is [compatible with MySQL](/mysql-compatibility.md), and MySQL and MariaDB have a lot of functionality in common. However there might be MariaDB specific features that might not be compatible with TiDB that you should be aware of before migrating.
+TiDB is [compatible with MySQL](/mysql-compatibility.md), and MySQL and MariaDB have a lot of functionality in common. However, there might be MariaDB-specific features that might not be compatible with TiDB that you should be aware of before migrating.
 
 Besides checking the items in this section, it is recommended that you also check the [Compatibility & Differences](https://mariadb.com/kb/en/compatibility-differences/) in the MariaDB documentation.
 
@@ -94,7 +94,7 @@ Records: 0  Duplicates: 0  Warnings: 0
 
 ### Sequences
 
-Both MariaDB and TiDB support [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md). However, it is currently not supported by DM. It is recommended that you do not create, modify or remove sequences during the migration and test this specifically after migration.
+Both MariaDB and TiDB support [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md). However, it is currently not supported by DM. It is recommended that you do not create, modify, or remove sequences during the migration and test this specifically after migration.
 
 To check if you are using sequences, execute the following statement:
 
@@ -119,7 +119,7 @@ WHERE
 
 ### Storage engines
 
-MariaDB offers storage engines for local data such as `InnoDB`, `MyISAM` and `Aria`. While the data format is not directly supported by TiDB, migrating these works fine. However there are also engines that place data outside of the server such as the `CONNECT` storage engine and `Spider`. While you can migrate such tables to TiDB, TiDB does not provide the functionality to store data outside of the TiDB cluster.
+MariaDB offers storage engines for local data such as `InnoDB`, `MyISAM` and `Aria`. While the data format is not directly supported by TiDB, migrating these works fine. However, some engines place data outside of the server, such as the `CONNECT` storage engine and `Spider`. While you can migrate such tables to TiDB, TiDB does not provide the functionality to store data outside of the TiDB cluster.
 
 To check what storage engines you are using, execute the following statement:
 
@@ -150,11 +150,11 @@ GROUP BY
 
 ### Syntax
 
-MariaDB supports the `RETURNING` keyword for `DELETE`, `INSERT` and `REPLACE` statements. TiDB does not support them. You might want to look into your application and query logging to see if it affects your migration.
+MariaDB supports the `RETURNING` keyword for `DELETE`, `INSERT`, and `REPLACE` statements. TiDB does not support them. You might want to look into your application and query logging to see if it affects your migration.
 
 ### Data types
 
-MariaDB supports some data types that TiDB does not support, such as `UUID`, `INET4` and `INET6`.
+MariaDB supports some data types that TiDB does not support, such as `UUID`, `INET4`, and `INET6`.
 
 To check for these datatypes, execute the following statement:
 
@@ -213,7 +213,7 @@ SHOW COLLATION;
 13 rows in set (0.0012 sec)
 ```
 
-To check what collations the columns of your current tables are using you can use this statement:
+To check what collations the columns of your current tables are using, you can use this statement:
 
 ```sql
 SELECT
