@@ -147,27 +147,24 @@ Return the index position of the first argument within the second argument.
 
 ### [`FORMAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_format)
 
-The `FORMAT(X,D[,locale])` function is used to format the number X rounded to a format similar to "#,###,###. ##", retaining D decimal places, and returning the result as a string.
+The `FORMAT(X,D[,locale])` function is used to format the number `X` to a format similar to `"#,###,###. ##"`, rounded to `D` decimal places, and return the result as a string.
 
-The function rounds and formats based on the specified number of decimal places. If the specified number of decimal places is greater than the actual number of decimal places in the number, the result is padded with zeros to the corresponding length.
-
-#### Parameters
+Arguments:
 
 - `X`: the number to be formatted. It can be a direct numeric value, a numeric string, or a number in scientific notation.
-- `D`: the specified number of decimal places for the returned value.
+- `D`: the number of decimal places for the returned value. The function rounds the number `X` to `D` decimal places. If `D` is greater than the actual number of decimal places in `X`, the result is padded with zeros to the corresponding length.
  `[locale]`: specifies a locale setting to be used for grouping between decimal points, thousands separators, and separators for resultant numbers. A valid locale value is the same as the valid value of the [`lc_time_names`](https://dev.mysql.com/doc/refman/8.3/en/server-system-variables.html#sysvar_lc_time_names) system variable. If not specified or the region setting is `NULL`, the `'en_US'` region setting is used by default. This parameter is optional.
 
-#### Behavior details
+Behaviors:
 
-- If the first input parameter is a string and contains only digits, the function returns a result based on that number. For example, `FORMAT('12.34', 1)` and `FORMAT(12.34, 1)` return the same result.
-- If the first input parameter is a number represented in scientific notation (using `E/e`), the function returns the result based on that number. For example, `FORMAT('1E2', 3)` returns `100.000`.
-- If the first input parameter is a string starting with non-numeric characters, the function returns zero and a warning `(Code 1292)`. For example, `FORMAT('q12.36', 5)` returns `0.00000`, but also includes a warning `Warning (Code 1292): Truncated incorrect DOUBLE value: 'q12.36'`.
-- If the first input parameter is a string mixing a number and a non-number, the function returns a result based on the consecutive numeric part at the beginning of the parameter, and also includes a warning `(Code 1292)`. For example, `FORMAT('12.36q56.78', 1)` returns the same numeric result as `FORMAT('12.36', 1)`, but includes a warning `Warning (Code 1292): Truncated incorrect DOUBLE value: '12.36q56.78'`.
-- If the second input parameter is zero, the function truncates the decimal part and returns an integer.
-- If the second input parameter is a negative number, the function truncates the decimal part and returns an integer.
-- If any of the input parameters is `NULL`, the function returns `NULL`.
+- If the first argument is a string and contains only numbers, the function returns a result based on that numeric value. For example, `FORMAT('12.34', 1)` and `FORMAT(12.34, 1)` return the same result.
+- If the first argument is a number represented in scientific notation (using `E/e`), the function returns the result based on that number. For example, `FORMAT('1E2', 3)` returns `100.000`.
+- If the first argument is a string starting with non-numeric characters, the function returns zero and a warning `(Code 1292)`. For example, `FORMAT('q12.36', 5)` returns `0.00000`, but also includes a warning `Warning (Code 1292): Truncated incorrect DOUBLE value: 'q12.36'`.
+- If the first argument is a string mixing numbers and non-numbers, the function returns a result based on the consecutive numeric part at the beginning of the argument, and also includes a warning `(Code 1292)`. For example, `FORMAT('12.36q56.78', 1)` returns the same numeric result as `FORMAT('12.36', 1)`, but includes a warning `Warning (Code 1292): Truncated incorrect DOUBLE value: '12.36q56.78'`.
+- If the second argument is zero or a negative number, the function truncates the decimal part and returns an integer.
+- If any of the arguments is `NULL`, the function returns `NULL`.
 
-#### Examples
+Examples:
 
 The following example shows how to format the number 12.36 to different decimal places:
 
@@ -200,18 +197,14 @@ mysql> SELECT FORMAT(12.36, 2);
 
 ### [`FROM_BASE64()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_from-base64)
 
-The `FROM_BASE64()` function is used to decode strings represented in [Base64](https://datatracker.ietf.org/doc/html/rfc4648) and returns a string in its hexadecimal form.
+The `FROM_BASE64()` function is used to decode a [Base64](https://datatracker.ietf.org/doc/html/rfc4648) encoded string and return the decoded result in its hexadecimal form.
 
 - This function accepts a single argument, that is, the Base64 encoded string to be decoded.
-- If the input parameter is not a valid Base64 encoded string, the `FROM_BASE64()` function will return `NULL`.
-
-> **Note:**
->
-> The `FROM_BASE64()` function only processes valid Base64 encoded strings.
+- If the argument is `NULL` or not a valid Base64 encoded string, the `FROM_BASE64()` function returns `NULL`.
 
 #### Examples
 
-The following example shows how to decode the Base64 encoded string `'SGVsbG8gVGlEQg=='`. This string is the result of encoding `'Hello TiDB'`, which can be done using the [`TO_BASE64()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_to-base64) function.
+The following example shows how to decode the Base64 encoded string `'SGVsbG8gVGlEQg=='`. This string is the result of encoding `'Hello TiDB'`, using the [`TO_BASE64()`](#to_base64) function.
 
 ```sql
 mysql> SELECT TO_BASE64('Hello TiDB');
@@ -238,7 +231,7 @@ mysql> SELECT CONVERT(FROM_BASE64('SGVsbG8gVGlEQg==') USING utf8mb4);
 +--------------------------------------------------------+
 ```
 
-The following example shows how to decode the Base64 encoded number `MTIzNDU2`. This string is the result of encoding `123456`, which can be done using the [`TO_BASE64()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_to-base64) function.
+The following example shows how to decode the Base64 encoded number `MTIzNDU2`. This string is the result of encoding `123456`, which can be done using the [`TO_BASE64()`](#to_base64) function.
 
 ```sql
 mysql> SELECT FROM_BASE64('MTIzNDU2');
