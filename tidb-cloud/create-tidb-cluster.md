@@ -27,9 +27,7 @@ If you are an organization owner, you can rename the default project or create a
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), and then click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner.
 
-2. Click **Organization Settings**.
-
-    The **Projects** tab is displayed by default.
+2. Click **Organization Settings**, and click the **Projects** tab in the left navigation pane. The **Projects** tab is displayed.
 
 3. Do one of the following:
 

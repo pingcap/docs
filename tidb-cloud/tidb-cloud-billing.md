@@ -46,7 +46,9 @@ To view the list of invoices, perform the following steps:
     >
     > If you are in multiple organizations, switch to your target organization by clicking its name.
 
-2. Click **Billing**. The invoices page is displayed.
+2. In the left navigation pane, click the **Billing** tab .
+
+3. Click the **Invoices** tab. The invoices page is displayed.
 
 ## Billing details
 
