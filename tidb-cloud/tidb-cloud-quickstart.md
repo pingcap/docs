@@ -84,7 +84,7 @@ After running the queries, you can immediately see the query logs and results at
 
 To let AI generate more SQL statements, you can type more instructions as in the following example:
 
-```MySQL
+```sql
 use test;
 
 -- create a new table t with id and name 
