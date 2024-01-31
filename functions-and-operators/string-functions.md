@@ -165,7 +165,7 @@ Behaviors:
 
 Examples:
 
-The following example shows how to format the number 12.36 to different decimal places:
+The following examples show how to format the number 12.36 to different decimal places:
 
 ```sql
 mysql> SELECT FORMAT(12.36, 1);
