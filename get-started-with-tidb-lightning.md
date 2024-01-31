@@ -1,11 +1,6 @@
 ---
-<<<<<<< HEAD
-title: Get Started with TiDB Lightning
-summary: Learn how to deploy TiDB Lightning and import full backup data to TiDB.
-=======
 title: Quick Start for TiDB Lightning
-aliases: ['/docs/dev/get-started-with-tidb-lightning/','/docs/dev/how-to/get-started/tidb-lightning/']
->>>>>>> cd5f99f5c7 (lightning: update get started doc (#16137))
+summary: Learn how to deploy TiDB Lightning and import full backup data to TiDB.
 ---
 
 # Quick Start for TiDB Lightning
