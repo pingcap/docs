@@ -45,7 +45,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
     + TiCDC
         <--tw @qiancai (1)-->
-        - TiCDC 支持查询 changefeed 的下游同步状态，以确认是否已经将变更完全同步到下游了 [#10289](https://github.com/pingcap/tiflow/issues/10289) @[hongyunyan](https://github.com/hongyunyan)
+        - Support [querying the downstream synchronization status of a changefeed](https://docs.pingcap.com/zh/tidb/v6.5/ticdc-open-api-v2#query-whether-a-specific-replication-task-is-completed), which helps you determine whether the upstream data changes received by TiCDC have been synchronized to the downstream system completely [#10289](https://github.com/pingcap/tiflow/issues/10289) @[hongyunyan](https://github.com/hongyunyan)
 
     + TiDB Data Migration (DM)
 
@@ -94,8 +94,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     - 修复 LEADING hint 在 UNION ALL 语句中无法生效的问题 [#50067](https://github.com/pingcap/tidb/issues/50067) @[hawkingrei](https://github.com/hawkingrei)
     - 修复使用旧接口导致表元信息可能不一致的问题 [#49751](https://github.com/pingcap/tidb/issues/49751) @[hawkingrei](https://github.com/hawkingrei)
     <--tw @qiancai (2)-->
-    - 修复常见 hint 在 UNION ALL 语句中无法正确生效的问题 [#50068](https://github.com/pingcap/tidb/issues/50068) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复 6.5.7 为修复 [#49487](https://github.com/pingcap/tidb/issues/49487) 导致执行过程中遇到 ENUM/SET 类型的非法值时会直接报错的问题 [#49440](https://github.com/pingcap/tidb/issues/49440) @[winoros](https://github.com/winoros)
+    - Fix the issue that common hints do not take effect in `UNION ALL` statements [#50068](https://github.com/pingcap/tidb/issues/50068) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that TiDB returns wrong query results when processing invalid values in `ENUM` or `SET` types. This issue is caused by the fix for [#49487](https://github.com/pingcap/tidb/issues/49487) in v6.5.7 [#49440](https://github.com/pingcap/tidb/issues/49440) in TiDB 6.5.7 @[winoros](https://github.com/winoros)
 
 + TiKV
 
@@ -123,10 +123,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
     + TiCDC
         <--tw @qiancai (4)-->
-        - 修复 changefeed 在 ignore-event 中设置了过滤 add table partition 事件后没有正确同步相关分区的其他 DML 变更事件的问题 [#10524](https://github.com/pingcap/tiflow/issues/10524) @[CharlesCheung96](https://github.com/CharlesCheung96) 
-        - 修复在上游表执行了 truncate partition 后 changefeed 报错的问题  [#10522](https://github.com/pingcap/tiflow/issues/10522) @[sdojjy](https://github.com/sdojjy)
-        - 修复 changefeed 在极端情况下 resolved ts 不推进的问题 [#10157](https://github.com/pingcap/tiflow/issues/10157) @[sdojjy](https://github.com/sdojjy)
-        - 修复 changefeed 在被并发创建时返回 ErrChangeFeedAlreadyExists 错误的问题 [#10430](https://github.com/pingcap/tiflow/issues/10430) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue that after filtering out `add table partition` events is configured in `ignore-event`, TiCDC does not replicate other types of DML changes for related partitions to the downstream [#10524](https://github.com/pingcap/tiflow/issues/10524) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue that the changefeed reports an error after `TRUNCATE PARTITION` is executed on the upstream table [#10522](https://github.com/pingcap/tiflow/issues/10522) @[sdojjy](https://github.com/sdojjy)
+        - Fix the issue that the changefeed `resolved ts` does not advance in extreme cases [#10157](https://github.com/pingcap/tiflow/issues/10157) @[sdojjy](https://github.com/sdojjy)
+        - Fix the issue that TiCDC returns the `ErrChangeFeedAlreadyExists` error when concurrently creating multiple changefeeds [#10430](https://github.com/pingcap/tiflow/issues/10430) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
     + TiDB Data Migration (DM)
 
