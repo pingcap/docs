@@ -82,7 +82,7 @@ In Chat2Query, you can either simply type `--` followed by your instructions to 
 
 After running the queries, you can immediately see the query logs and results at the bottom of the page. 
 
-To let AI generate more SQL statements, you can type more instructions as in the following example:
+To let AI generate more SQL statements, you can type more instructions as shown in the following example:
 
 ```sql
 use test;
