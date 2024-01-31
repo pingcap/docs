@@ -44,7 +44,7 @@ In Chat2Query, you can either simply type `--` followed by your instructions to 
 
 3. In the editor, you can either simply type `--` followed by your instructions to let AI automatically generate SQL queries, or write SQL queries manually.
 
-    For example, to create a new table `test.t` with two columns (column `id` and column `name`), you can type `use test;` to specify the database, type `-- create a new table `t` with id and name` as the instruction, and then press **Enter** to let AI generate a SQL statement accordingly. 
+    For example, to create a new table `test.t` with two columns (column `id` and column `name`), you can type `use test;` to specify the database, type `-- create a new table t with id and name` as the instruction, and then press **Enter** to let AI generate a SQL statement accordingly. 
     
     For the generated statement, you can accept it by pressing **Tab** and then further edit it if needed, or reject it by pressing **Esc**.
 
@@ -81,7 +81,8 @@ In Chat2Query, you can either simply type `--` followed by your instructions to 
     </SimpleTab>
 
 After running the queries, you can immediately see the query logs and results at the bottom of the page. 
-To use Chat2Query, execute the following example statements:
+
+To let AI generate more SQL statements, you can type more instructions as in the following example:
 
 ```MySQL
 use test;
