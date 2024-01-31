@@ -202,7 +202,7 @@ The `FROM_BASE64()` function is used to decode a [Base64](https://datatracker.ie
 - This function accepts a single argument, that is, the Base64 encoded string to be decoded.
 - If the argument is `NULL` or not a valid Base64 encoded string, the `FROM_BASE64()` function returns `NULL`.
 
-#### Examples
+Examples:
 
 The following example shows how to decode the Base64 encoded string `'SGVsbG8gVGlEQg=='`. This string is the result of encoding `'Hello TiDB'`, using the [`TO_BASE64()`](#to_base64) function.
 
