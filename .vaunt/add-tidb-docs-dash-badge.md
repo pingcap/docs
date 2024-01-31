@@ -1,4 +1,4 @@
-# How to Add TiDB Docs Dash Badges to your GitHub Profile
+# How to Add TiDB Docs Dash Badges to Your GitHub Profile
 
 Your [GitHub profile](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/about-your-profile) is more than just a collection of repositories; it is your professional identity in the coding world.
 
@@ -14,7 +14,7 @@ If you have already set up your GitHub profile README, skip the following and go
 
 2. Type a repository name that matches your GitHub username. For example, if your username is `ilovetidb`, the repository name must be `ilovetidb`.
 3. Choose **Public** for the repository visibility.
-4. Select **Initialize this repository with a README file**.
+4. Under **Initialize this repository with:**, select **Add a README file**.
 5. Click **Create repository**.
 
 ## Step 2. Edit your profile README
