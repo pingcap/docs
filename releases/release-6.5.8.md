@@ -95,7 +95,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     - 修复使用旧接口导致表元信息可能不一致的问题 [#49751](https://github.com/pingcap/tidb/issues/49751) @[hawkingrei](https://github.com/hawkingrei)
     <--tw @qiancai (2)-->
     - Fix the issue that common hints do not take effect in `UNION ALL` statements [#50068](https://github.com/pingcap/tidb/issues/50068) @[hawkingrei](https://github.com/hawkingrei)
-    - Fix the issue that TiDB returns wrong query results when processing invalid values in `ENUM` or `SET` types. This issue is caused by the fix for [#49487](https://github.com/pingcap/tidb/issues/49487) in v6.5.7 [#49440](https://github.com/pingcap/tidb/issues/49440) in TiDB 6.5.7 @[winoros](https://github.com/winoros)
+    - Fix the issue that TiDB returns wrong query results when processing `ENUM` or `SET` types by constant propagation [#49440](https://github.com/pingcap/tidb/issues/49440) in TiDB 6.5.7 @[winoros](https://github.com/winoros)
 
 + TiKV
 
