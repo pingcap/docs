@@ -26,10 +26,6 @@ To complete this tutorial, you need:
 - [Git](https://git-scm.com/downloads).
 - A TiDB cluster.
 
-> **Note:**
->
-> For security considerations, it is recommended that you use `VERIFY_IDENTITY` to establish TLS connections to TiDB clusters when connecting over the internet. Both TiDB Serverless and TiDB Dedicated use Subject Alternative Name(SAN) certificates. This requires MySQL Connector/J version greater than or equal to [8.0.22](https://dev.mysql.com/doc/relnotes/connector-j/8.0/en/news-8-0-22.html). 
-
 <CustomContent platform="tidb">
 
 **If you don't have a TiDB cluster, you can create one as follows:**
@@ -39,6 +35,10 @@ To complete this tutorial, you need:
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> For security considerations, it is recommended that you use `VERIFY_IDENTITY` to establish TLS connections to TiDB clusters when connecting over the internet. Both TiDB Serverless and TiDB Dedicated use Subject Alternative Name(SAN) certificates. This requires MySQL  Connector/J version greater than or equal to [8.0.22](https://dev.mysql.com/doc/relnotes/connector-j/8.0/en/news-8-0-22.html).
 
 **If you don't have a TiDB cluster, you can create one as follows:**
 
