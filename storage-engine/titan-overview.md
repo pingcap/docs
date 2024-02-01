@@ -31,6 +31,8 @@ The prerequisites for enabling Titan are as follows:
 - No range query will be performed or you do not need a high performance of range query. Because the data stored in Titan is not well-ordered, its performance of range query is poorer than that of RocksDB, especially for the query of a large range. According PingCAP's internal test, Titan's range query performance is 40% to a few times lower than that of RocksDB.
 - Sufficient disk space (consider reserving a space twice of the RocksDB disk consumption with the same data volume). This is because Titan reduces write amplification at the cost of disk space. In addition, Titan compresses values one by one, and its compression rate is lower than that of RocksDB. RocksDB compresses blocks one by one. Therefore, Titan consumes more storage space than RocksDB, which is expected and normal. In some situations, Titan's storage consumption can be twice that of RocksDB.
 
+Starting from v7.6.0, Titan is enabled by default for newly created clusters. Because small TiKV values remain stored in RocksDB, you can enable Titan in this scenario as well.
+
 If you want to improve the performance of Titan, see the blog post [Titan: A RocksDB Plugin to Reduce Write Amplification](https://pingcap.com/blog/titan-storage-engine-design-and-implementation/).
 
 ## Architecture and implementation
@@ -53,8 +55,8 @@ A blob file mainly consists of blob records, meta blocks, a meta index block, an
 >
 > + The Key-Value pairs in the blob file are stored in order, so that when the Iterator is implemented, the sequential reading performance can be improved via prefetching.
 > + Each blob record keeps a copy of the user key corresponding to the value. This way, when Titan performs Garbage Collection (GC), it can query the user key and identify whether the corresponding value is outdated. However, this process introduces some write amplification.
-> + BlobFile supports compression at the blob record level. Titan supports multiple compression algorithms, such as [Snappy](https://github.com/google/snappy), [LZ4](https://github.com/lz4/lz4), and [Zstd](https://github.com/facebook/zstd). Currently, the default compression algorithm Titan uses is LZ4.
-> + The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
+> + BlobFile supports compression at the blob record level. Titan supports several compression algorithms, such as [Snappy](https://github.com/google/snappy), [`lz4`](https://github.com/lz4/lz4), and [`zstd`](https://github.com/facebook/zstd). In versions prior to v7.6.0, the default compression algorithm is `lz4`. Starting from v7.6.0, the default compression algorithm is `zstd`.
+> + The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants are not supported.
 
 ### TitanTableBuilder
 
@@ -124,3 +126,28 @@ Range Merge is an optimized approach of GC based on Level Merge. However, the bo
 ![RangeMerge](/media/titan/titan-7.png)
 
 Therefore, the Range Merge operation is needed to keep the number of sorted runs within a certain level. At the time of OnCompactionComplete, Titan counts the number of sorted runs in a range. If the number is large, Titan marks the corresponding blob file as ToMerge and rewrites it in the next compaction.
+
+### Scale out and scale in
+
+For backward compatibility, the TiKV snapshots are still in the RocksDB format during scaling. Because the scaled nodes are all from RocksDB at the beginning, they carry the characteristics of RocksDB, such as higher compression rate than the old TiKV nodes, smaller store size, and relatively larger write amplification in compaction. These SST files in RocksDB format will be gradually converted to Titan format after compaction.
+
+### Impact of `min-blob-size` on performance
+
+[`min-blob-size`](/tikv-configuration-file.md#min-blob-size) determines whether a value is stored in Titan. If the value is greater than or equal to `min-blob-size`, it is stored in Titan. Otherwise, it is stored in the native RocksDB format. If `min-blob-size` is too small or too large, the performance will be affected.
+
+The following table lists the QPS comparison of the YCSB workload based on different `min-blob-size` values. In each round of testing, the row width of the test data is equal to `min-blob-size`, so that the data is stored in Titan when Titan is enabled.
+
+| Row width (Bytes)      | `Point_Get` |  `Point_Get` (Titan)| scan100 | scan100 (Titan)| scan10000 | scan10000 (Titan)| `UPDATE` | `UPDATE` (Titan) |
+| ---------------- | ---------| -------------- | --------| ------------- | --------- | --------------- | ------ | ------------ |
+| 1KB  | 139255 | 140486 | 25171 | 21854 | 533 | 175 | 17913 | 30767 |
+| 2KB | 114201 |124075 | 12466 |11552 |249 |131 |10369 | 27188 |
+| 4KB | 92385   | 103811 | 7918 | 5937 | 131 | 87 | 5327  | 22653 |
+| 8KB  |104380  | 130647 | 7365 | 5402 | 86.6 | 68 | 3180 | 16745 |
+| 16KB | 54234  | 54600  | 4937 | 5174 | 55.4 | 58.9 |1753 | 10120 |
+| 32KB | 31035  |31052  | 2705 | 3422 | 38 | 45.3 | 984 | 5844 |
+
+> **Note:**
+>
+> `scan100` means scanning 100 records, and `scan10000` means scanning 10000 records.
+
+From the table, you can see that when the row width is `16KB`, Titan outperforms RocksDB in all YCSB workloads. However, in some extreme scenarios with heavy scan loads, such as running Dumpling, Titan's performance with a row width of `16KB` decreases by 10%. Therefore, if the workload is mainly write and point read, it is recommended that you set `min-blob-size` to `1KB`. If the workload contains a large number of scans, it is recommended that you set `min-blob-size` to at least `16KB`.
