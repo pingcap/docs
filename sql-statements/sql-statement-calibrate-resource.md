@@ -5,7 +5,7 @@ summary: An overview of the usage of CALIBRATE RESOURCE for the TiDB database.
 
 # <code>CALIBRATE RESOURCE</code> {#code-calibrate-resource-code}
 
-`CALIBRATE RESOURCE`ステートメントは、現在のクラスターの[「リクエストユニット(RU)」](/tidb-resource-control#what-is-request-unit-ru)を推定して出力するために使用されます。
+`CALIBRATE RESOURCE`ステートメントは、現在のクラスターの[「リクエストユニット(RU)」](/tidb-resource-control.md#what-is-request-unit-ru)を推定して出力するために使用されます。
 
 > **注記：**
 >
