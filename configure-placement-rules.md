@@ -107,7 +107,8 @@ PD also generates default rules based on the `max-replicas` and `location-labels
 
 > **Note:**
 >
-> After enabling Placement Rules, the previously configured `max-replicas` and `location-labels` no longer take effect. To adjust the replica policy, use the interface related to Placement Rules.
+> - When Placement Rules are enabled and multiple rules exist, the previously configured `max-replicas` and `location-labels` no longer take effect. To adjust the replica policy, use the interface related to Placement Rules.
+> - When Placement Rules are enabled and only one default rule exists, TiDB will automatically update this default rule when `max-replicas` and `location-labels` configurations are changed.
 
 ### Disable Placement Rules
 
