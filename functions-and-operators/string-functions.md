@@ -651,7 +651,7 @@ The `INSTR(str, substr)` function is used to get the position of the first occur
 
 > **Note:**
 >
-> `INSTR(str, substr)` is case-sensitive by default, since [TiDB defaults to using binary collations](/character-set-and-collation.md), which differs from MySQL.
+> The case sensitivity of `INSTR(str, substr)` is determined by the [collations](/character-set-and-collation.md) used in TiDB. Binary collations (with the suffix `_bin`) are case-sensitive, while general collations (with the suffix `_general_ci` or `_ai_ci`, and) are case-insensitive.
 
 - If either argument is a number, the function treats the number as a string.
 - If `substr` is not in `str`, the function returns `0`. Otherwise, it returns the position of the first occurrence of `substr` in `str`.
@@ -680,13 +680,13 @@ SELECT INSTR("pingcap.com/tidb", "tidb");
 ```
 
 ```sql
-SELECT INSTR("pingcap.com/tidb", "TiDB");
+SELECT INSTR("pingcap.com/tidb" COLLATE utf8mb4_bin, "TiDB");
 
-+-----------------------------------+
-| INSTR("pingcap.com/tidb", "TiDB") |
-+-----------------------------------+
-|                                 0 |
-+-----------------------------------+
++-------------------------------------------------------+
+| INSTR("pingcap.com/tidb" COLLATE utf8mb4_bin, "TiDB") |
++-------------------------------------------------------+
+|                                                     0 |
++-------------------------------------------------------+
 ```
 
 ```sql
