@@ -124,6 +124,7 @@ Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` command. The benefi
 | `CLUSTER_STATEMENTS_SUMMARY`                                                            | Provides a cluster-level view of the `STATEMENTS_SUMMARY` table. This table is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters. |
 | `CLUSTER_STATEMENTS_SUMMARY_HISTORY`                                                    | Provides a cluster-level view of the `STATEMENTS_SUMMARY_HISTORY` table. This table is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters. |
 | `CLUSTER_TIDB_TRX` | Provides a cluster-level view of the `TIDB_TRX` table. |
+| `CLUSTER_TIDB_INDEX_USAGE` | Provides a cluster-level view of the `TIDB_INDEX_USAGE` table. |
 | [`CLUSTER_SYSTEMINFO`](/information-schema/information-schema-cluster-systeminfo.md)    | Provides details about kernel parameter configuration for servers in the cluster. This table is not applicable to TiDB Cloud. |
 | [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md) | Provides the lock-waiting information on the TiKV server. |
 | [`DDL_JOBS`](/information-schema/information-schema-ddl-jobs.md)                        | Provides similar output to `ADMIN SHOW DDL JOBS` |
@@ -147,6 +148,7 @@ Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` command. The benefi
 | [`TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md)                | Provides index information about TiDB tables. |
 | [`TIDB_SERVERS_INFO`](/information-schema/information-schema-tidb-servers-info.md)      | Provides a list of TiDB servers (namely, tidb-server component) |
 | [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md) | Provides the information of the transactions that are being executed on the TiDB node. |
+| [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)        | Provides the information of the index usage statistics on the TiDB node. ｜
 | [`TIFLASH_REPLICA`](/information-schema/information-schema-tiflash-replica.md)          | Provides details about TiFlash replicas. |
 | [`TIKV_REGION_PEERS`](/information-schema/information-schema-tikv-region-peers.md)      | Provides details about where regions are stored. |
 | [`TIKV_REGION_STATUS`](/information-schema/information-schema-tikv-region-status.md)    | Provides statistics about regions. |
@@ -198,6 +200,7 @@ Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` command. The benefi
 | [`TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md)                | Provides index information about TiDB tables. |
 | [`TIDB_SERVERS_INFO`](/information-schema/information-schema-tidb-servers-info.md)      | Provides a list of TiDB servers (namely, tidb-server component) |
 | [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md) | Provides the information of the transactions that are being executed on the TiDB node. |
+| [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)        | Provides the information of the index usage statistics on the TiDB node. ｜
 | [`TIFLASH_REPLICA`](/information-schema/information-schema-tiflash-replica.md)          | Provides details about TiFlash replicas. |
 | [`TIKV_REGION_PEERS`](/information-schema/information-schema-tikv-region-peers.md)      | Provides details about where regions are stored. |
 | [`TIKV_REGION_STATUS`](/information-schema/information-schema-tikv-region-status.md)    | Provides statistics about regions. |
