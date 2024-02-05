@@ -280,7 +280,7 @@ BATCH ON id LIMIT 2 DELETE /*+ USE_INDEX(t)*/ FROM t WHERE v < 6;
 -   シャード列にはインデックスを付ける必要があります。インデックスは、単一列インデックス、または結合インデックスの最初の列にすることができます。
 -   [`autocommit`](/system-variables.md#autocommit)モードで使用する必要があります。
 -   バッチdmlが有効な場合は使用できません。
--   [ `tidb_snapshot` ](/read-historyal-data.md#操作フロー)が設定されている場合は使用できません。
+-   [ `tidb_snapshot` ](/read-historical-data.md)が設定されている場合は使用できません。
 -   `prepare`ステートメントと一緒に使用することはできません。
 -   `ENUM` 、 `BIT` 、 `SET` 、 `JSON`タイプはシャード列としてサポートされていません。
 -   [一時テーブル](/temporary-tables.md)ではサポートされていません。
