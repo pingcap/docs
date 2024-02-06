@@ -30,4 +30,4 @@ Empty set (0.00 sec)
 
 This statement is included only for compatibility with MySQL. Executing `SHOW PROFILES` always returns an empty result.
 
-As an alternative, TiDB provides [statement summary tables](/statement-summary-tables.md) to help understand performance issues.
+As an alternative, TiDB provides [statement summary tables](/statement-summary-tables.md) to help understand SQL performance issues.
