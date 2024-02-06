@@ -223,7 +223,10 @@ The application needs to return the connection after finishing using it. It is a
 
 ### Probe configuration
 
-The connection pool maintains persistent connections to TiDB. TiDB does not proactively close client connections by default (unless an error is reported), but generally there will be network proxies such as LVS or HAProxy between the client and TiDB. Usually, these proxies will proactively clean up connections that are idle for a certain period of time (controlled by the proxy's idle configuration). In addition to paying attention to the idle configuration of the proxies, the connection pool also needs to keep alive or probe connections.
+The connection pool maintains persistent connections to TiDB, if the version of TiDB:
+
+- Less than `v5.4`, does not proactively close client connections by default (unless an error is reported);
+- Equal or above than `v5.4`, it defaults to closing client connections after `28800` seconds of inactivity, which means `8` hours. You can control this timeout setting using the TiDB and MySQL compatible `wait_timeout` variable, see the [JDBC Query Timeout](/develop/dev-guide-timeouts-in-tidb.md#jdbc-query-timeout) document for details.
 
 If you often see the following error in your Java application:
 
