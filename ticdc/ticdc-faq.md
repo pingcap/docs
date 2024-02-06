@@ -266,7 +266,7 @@ When upstream write traffic is at peak hours, the downstream may fail to consume
 
 ## Why does replication using TiCDC stall or even stop after data restore using TiDB Lightning and BR from upstream?
 
-Currently, TiCDC is not yet fully compatible with TiDB Lightning and BR. Therefore, please avoid using TiDB Lightning and BR on tables that are replicated by TiCDC. Otherwise, unknown errors might occur, such as TiCDC replication getting stuck, a significant spike in replication latency, or data loss.
+Currently, TiCDC is not yet fully compatible with TiDB Lightning and BR. Therefore, avoid using TiDB Lightning and BR on tables that are replicated by TiCDC. Otherwise, unknown errors might occur, such as TiCDC replication getting stuck, a significant spike in replication latency, or data loss.
 
 If you need to use TiDB Lightning or BR to restore data for some tables replicated by TiCDC, take these steps:
 
