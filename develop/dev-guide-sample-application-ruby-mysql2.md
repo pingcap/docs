@@ -101,10 +101,10 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 6. Edit the `.env` file, set up the environment variables as follows, and replace the corresponding placeholders `<>` with connection parameters in the connection dialog:
 
     ```dotenv
-   DATABASE_HOST=<host>
+   DATABASE_HOST={host}
    DATABASE_PORT=4000
-   DATABASE_USER=<user>
-   DATABASE_PASSWORD=<password>
+   DATABASE_USER={user}
+   DATABASE_PASSWORD={password}
    DATABASE_NAME=test
    DATABASE_ENABLE_SSL=true
     ```
@@ -135,13 +135,13 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 5. Edit the `.env` file, set up the environment variables as follows, and replace the corresponding placeholders `<>` with connection parameters in the connection dialog:
 
     ```dotenv
-    DATABASE_HOST=<host>
+    DATABASE_HOST={host}
     DATABASE_PORT=4000
-    DATABASE_USER=<user>
-    DATABASE_PASSWORD=<password>
+    DATABASE_USER={user}
+    DATABASE_PASSWORD={password}
     DATABASE_NAME=test
     DATABASE_ENABLE_SSL=true
-    DATABASE_SSL_CA=<downloaded_ssl_ca_path>
+    DATABASE_SSL_CA={downloaded_ssl_ca_path}
     ```
 
    > **Note**
@@ -164,10 +164,10 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 2. Edit the `.env` file, set up the environment variables as follows, and replace the corresponding placeholders `<>` with your own TiDB connection information:
 
     ```dotenv
-    DATABASE_HOST=<host>
+    DATABASE_HOST={host}
     DATABASE_PORT=4000
-    DATABASE_USER=<user>
-    DATABASE_PASSWORD=<password>
+    DATABASE_USER={user}
+    DATABASE_PASSWORD={password}
     DATABASE_NAME=test
     ```
 
