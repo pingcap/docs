@@ -56,7 +56,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 
 1. Disable Garbage Collection (GC).
 
-    To ensure that newly written data is not deleted during incremental migration, you should disable GC for the upstream cluster before exporting full data. In this way, history data is not deleted. (This step can be skipped if the TiDB version is later than or equal to v4.0.0 and certain conditions are met. For more details, please refer [here](/dumpling-overview.md#manually-set-the-tidb-gc-time))
+    To ensure that newly written data is not deleted during incremental migration, you should disable GC for the upstream cluster before exporting full data. In this way, history data is not deleted. For TiDB v4.0.0 and later versions, you can skip this step under specific conditions. For more details, see [Manually set the TiDB GC time](/dumpling-overview.md#manually-set-the-tidb-gc-time).
 
     Run the following command to disable GC:
 
