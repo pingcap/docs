@@ -274,11 +274,11 @@ If you need to use TiDB Lightning or BR to restore data for some tables replicat
 
 2. Use TiDB Lightning or BR to restore data separately in the upstream and downstream clusters of TiCDC.
 
-3. After the restoration is complete and data consistency between the upstream and downstream clusters is verified, create a new TiCDC replication task for incremental replication, with the timestamp (TSO) from the upstream backup as the `start-ts` for the task. For example, assuming the snapshot time point of the BR backup in the upstream cluster is `431434047157698561`, you can create a new TiCDC replication task using the following command:
+3. After the restoration is complete and data consistency between the upstream and downstream clusters is verified, create a new TiCDC replication task for incremental replication, with the timestamp (TSO) from the upstream backup as the `start-ts` for the task. For example, assuming the snapshot timestamp of the BR backup in the upstream cluster is `431434047157698561`, you can create a new TiCDC replication task using the following command:
 
-   ```shell
-   cdc cli changefeed create -c "upstream-to-downstream-some-tables" --start-ts=431434047157698561 --sink-uri="mysql://root@127.0.0.1:4000? time-zone="
-   ```
+    ```shell
+    cdc cli changefeed create -c "upstream-to-downstream-some-tables" --start-ts=431434047157698561 --sink-uri="mysql://root@127.0.0.1:4000? time-zone="
+    ```
 
 ## After a changefeed resumes from pause, its replication latency gets higher and higher and returns to normal only after a few minutes. Why?
 
