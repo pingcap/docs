@@ -32,16 +32,19 @@ You can set the CIDR when creating the first TiDB Dedicated cluster. If you want
 3. On the **Project Settings** page of your project, click **Network Access** in the left navigation pane, and then click the **Project CIDR** tab.
 4. Click **Create CIDR**, and then click **AWS CIDR** or **Google Cloud CIDR** according to your cloud provider. Specify the region and CIDR value in the **Create AWS CIDR** or **Create Google Cloud CIDR** window, and then click **Confirm**.
 
+    ![Project-CIDR4](/media/tidb-cloud/Project-CIDR4.png)
+
     > **Note:**
     >
     > - To avoid any conflicts with the CIDR of the VPC where your application is located, you need to set a different project CIDR in this field. 
-    > - For AWS Region, it is recommended to configure an IP range size between `/16` and `/23`. For Google Cloud Region, it is recommended to configure an IP range size between `/16` and `/20`. Supported network addresses include:
-
-    - 10.0.0.0 - 10.255.255.255 (10/8 prefix)
-    - 172.16.0.0 - 172.31.255.255 (172.16/12 prefix)
-    - 192.168.0.0 - 192.168.255.255 (192.168/16 prefix)
-
-    ![Project-CIDR4](/media/tidb-cloud/Project-CIDR4.png)
+    > - For AWS Region, it is recommended to configure an IP range size between `/16` and `/23`. Supported network addresses include:
+    >     - 10.0.0.0 - 10.255.255.255 (10/8 prefix)
+    >     - 172.16.0.0 - 172.31.255.255 (172.16/12 prefix)
+    >     - 192.168.0.0 - 192.168.255.255 (192.168/16 prefix) 
+    
+    > - For Google Cloud Region, it is recommended to configure an IP range size between `/16` and `/20`. Supported network addresses include:
+    >     - 10.0.0.0 - 10.255.255.255 (10/8 prefix)
+    >     - 172.16.0.0 - 172.31.255.255 (172.16/12 prefix)
 
 5. View the CIDR of the cloud provider and the specific region.
 
