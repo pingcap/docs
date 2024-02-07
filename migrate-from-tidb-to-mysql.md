@@ -56,7 +56,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 
 1. Disable Garbage Collection (GC).
 
-    To ensure that newly written data is not deleted during incremental migration, you should disable GC for the upstream cluster before exporting full data. In this way, history data is not deleted. For TiDB v4.0.0 and later versions, you can skip this step under specific conditions. For more details, see [Manually set the TiDB GC time](/dumpling-overview.md#manually-set-the-tidb-gc-time).
+    To ensure that newly written data is not deleted during incremental migration, you should disable GC for the upstream cluster before exporting full data. In this way, history data is not deleted. This is a must step since even though Dumpling may [auto-extend the GC](/dumpling-overview.md#manually-set-the-tidb-gc-time) for TiDB v4.0.0 and later versions, after the Dumpling exits, GC may kick in, leading to failure in migrating the incremental change.
 
     Run the following command to disable GC:
 
@@ -83,7 +83,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
     1 row in set (0.00 sec)
     ```
 
-2. Back up data.
+3. Back up data.
 
     1. Export data in SQL format using Dumpling:
 
@@ -106,7 +106,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
         Finished dump at: 2022-06-28 17:49:57
         ```
 
-3. Restore data.
+4. Restore data.
 
     Use MyLoader (an open-source tool) to import data to the downstream MySQL instance. For details about how to install and use MyLoader, see [MyDumpler/MyLoader](https://github.com/mydumper/mydumper). Note that you need to use MyLoader v0.10 or earlier versions. Higher versions cannot process metadata files exported by Dumpling.
 
@@ -116,7 +116,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
     myloader -h 127.0.0.1 -P 3306 -d ./dumpling_output/
     ```
 
-4. (Optional) Validate data.
+5. (Optional) Validate data.
 
     You can use [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) to check data consistency between upstream and downstream at a certain time.
 
