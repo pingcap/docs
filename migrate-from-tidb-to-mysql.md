@@ -83,7 +83,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
     1 row in set (0.00 sec)
     ```
 
-3. Back up data.
+2. Back up data.
 
     1. Export data in SQL format using Dumpling:
 
@@ -106,7 +106,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
         Finished dump at: 2022-06-28 17:49:57
         ```
 
-4. Restore data.
+3. Restore data.
 
     Use MyLoader (an open-source tool) to import data to the downstream MySQL instance. For details about how to install and use MyLoader, see [MyDumpler/MyLoader](https://github.com/mydumper/mydumper). Note that you need to use MyLoader v0.10 or earlier versions. Higher versions cannot process metadata files exported by Dumpling.
 
@@ -116,7 +116,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
     myloader -h 127.0.0.1 -P 3306 -d ./dumpling_output/
     ```
 
-5. (Optional) Validate data.
+4. (Optional) Validate data.
 
     You can use [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) to check data consistency between upstream and downstream at a certain time.
 
