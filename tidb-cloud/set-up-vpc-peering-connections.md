@@ -39,7 +39,7 @@ You can set the CIDR when creating the first TiDB Dedicated cluster. If you want
 
     - 10.0.0.0 - 10.255.255.255 (10/8 prefix)
     - 172.16.0.0 - 172.31.255.255 (172.16/12 prefix)
-    - 192.168.0.0 - 192.168.255.255 (192.168/16 prefix)
+    - 192.168.0.0 - 192.168.255.255 (192.168/16 prefix, TiDB Cloud only support this network range for AWS Regions.) 
 
     ![Project-CIDR4](/media/tidb-cloud/Project-CIDR4.png)
 
