@@ -273,7 +273,7 @@ Currently, TiCDC is not yet fully compatible with TiDB Lightning and BR. Therefo
 
 If you need to use TiDB Lightning or BR to restore data for some tables replicated by TiCDC, take these steps:
 
-1. Delete the TiCDC replication task related to these tables.
+1. Remove the TiCDC replication task related to these tables.
 
 2. Use TiDB Lightning or BR to restore data separately in the upstream and downstream clusters of TiCDC.
 
