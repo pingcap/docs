@@ -38,15 +38,16 @@ You can set the CIDR when creating the first TiDB Dedicated cluster. If you want
     >
     > - To avoid any conflicts with the CIDR of the VPC where your application is located, you need to set a different project CIDR in this field. 
     > - For AWS Region, it is recommended to configure an IP range size between `/16` and `/23`. Supported network addresses include:
-    >     - 10.0.0.0 - 10.255.255.255 (10/8 prefix)
-    >     - 172.16.0.0 - 172.31.255.255 (172.16/12 prefix)
-    >     - 192.168.0.0 - 192.168.255.255 (192.168/16 prefix) 
-    
-    > - For Google Cloud Region, it is recommended to configure an IP range size between `/16` and `/20`. Supported network addresses include:
-    >     - 10.0.0.0 - 10.255.255.255 (10/8 prefix)
-    >     - 172.16.0.0 - 172.31.255.255 (172.16/12 prefix)
+    >     - 10.250.0.0 - 10.251.255.255 
+    >     - 172.16.0.0 - 172.31.255.255
+    >     - 192.168.0.0 - 192.168.255.255
 
-5. View the CIDR of the cloud provider and the specific region.
+    > - For Google Cloud Region, it is recommended to configure an IP range size between `/19` and `/20`. If you want to configure an IP range size between `/16` and `/18`, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). Supported network addresses include:
+    >     - 10.250.0.0 - 10.251.255.255
+    >     - 172.16.0.0 - 172.16.255.255
+    >     - 172.30.0.0 - 172.31.255.255
+
+5. View the CIDR of the cloud provider and the specific region. 
 
     The CIDR is inactive by default. To activate the CIDR, you need to create a cluster in the target region. When the region CIDR is active, you can create VPC Peering for the region.
 
