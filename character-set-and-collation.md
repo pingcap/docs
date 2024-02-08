@@ -11,7 +11,7 @@ summary: Learn about the supported character sets and collations in TiDB.
 
 文字セットは、記号とエンコーディングのセットです。 TiDB のデフォルトの文字セットは utf8mb4 で、MySQL 8.0 以降のデフォルトと一致します。
 
-照合順序は、文字セット内の文字と文字の並べ替え順序を比較するための一連のルールです。たとえば、バイナリ照合順序では、 `A`と`a`は同等として比較されません。
+照合順序は、文字セット内の文字と文字の並べ替え順序を比較するための一連の規則です。たとえば、バイナリ照合順序では、 `A`と`a`は同等として比較されません。
 
 ```sql
 SET NAMES utf8mb4 COLLATE utf8mb4_bin;
@@ -53,8 +53,6 @@ SELECT 'A' = 'a';
 +-----------+
 1 row in set (0.00 sec)
 ```
-
-TiDB はデフォルトでバイナリ照合順序を使用します。これは、デフォルトで大文字と小文字を区別しない照合順序を使用する MySQL とは異なります。
 
 ## TiDB でサポートされる文字セットと照合順序 {#character-sets-and-collations-supported-by-tidb}
 
@@ -114,6 +112,11 @@ SHOW COLLATION;
 > **注記：**
 >
 > TiDB のデフォルトの照合順序 (サフィックス`_bin`が付くバイナリ照合順序) は、 [MySQL のデフォルトの照合順序](https://dev.mysql.com/doc/refman/8.0/en/charset-charsets.html) (通常はサフィックス`_general_ci`または`_ai_ci`が付く一般的な照合順序) とは異なります。これにより、明示的な文字セットを指定しているが、暗黙的なデフォルト照合順序の選択に依存している場合、互換性のない動作が発生する可能性があります。
+>
+> ただし、TiDB のデフォルトの照合順序は、 [接続照合順序](https://dev.mysql.com/doc/refman/8.0/en/charset-connection.html#charset-connection-system-variables)の設定にも影響されます。たとえば、MySQL 8.x クライアントは、 `utf8mb4`文字セットの接続照合順序としてデフォルトで`utf8mb4_0900_ai_ci`を設定します。
+>
+> -   TiDB v7.4.0 より前では、クライアントが[接続照合順序](https://dev.mysql.com/doc/refman/8.0/en/charset-connection.html#charset-connection-system-variables)として`utf8mb4_0900_ai_ci`を使用する場合、TiDB は TiDBサーバーのデフォルトの照合照合順序`utf8mb4_bin`を使用するようにフォールバックします。これは、TiDB が`utf8mb4_0900_ai_ci`照合順序をサポートしていないためです。
+> -   v7.4.0 以降、クライアントが[接続照合順序](https://dev.mysql.com/doc/refman/8.0/en/charset-connection.html#charset-connection-system-variables)として`utf8mb4_0900_ai_ci`を使用する場合、TiDB はクライアントの設定に従い、デフォルトの照合順序として`utf8mb4_0900_ai_ci`を使用します。
 
 次のステートメントを使用すると、文字セットに対応する照合順序 ( [照合順序の新しいフレームワーク](#new-framework-for-collations)の下) を表示できます。
 
@@ -413,11 +416,11 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 <CustomContent platform="tidb">
 
-照合照合順序の構文サポートとセマンティック サポートは、 [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)構成項目の影響を受けます。構文サポートとセマンティック サポートは異なります。前者は、TiDB が解析および照合順序の設定ができることを示します。後者は、TiDB が文字列を比較するときに照合順序を正しく使用できることを示します。
+照合照合順序の構文サポートとセマンティック サポートは、 [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)構成項目の影響を受けます。構文サポートとセマンティック サポートは異なります。前者は、TiDB が解析および照合順序の設定ができることを示します。後者は、TiDB が文字列を比較するときに照合順序を正しく使用できることを示しています。
 
 </CustomContent>
 
-v4.0 より前では、TiDB は[照合順序の古いフレームワーク](#old-framework-for-collations)のみを提供します。このフレームワークでは、TiDB はほとんどの MySQL 照合順序の構文解析をサポートしていますが、意味的にはすべての照合順序をバイナリ照合順序として受け取ります。
+v4.0 より前では、TiDB は[照合順序の古いフレームワーク](#old-framework-for-collations)のみを提供していました。このフレームワークでは、TiDB はほとんどの MySQL 照合順序の構文解析をサポートしていますが、意味的にはすべての照合順序をバイナリ照合順序として受け取ります。
 
 v4.0 以降、TiDB は[照合順序の新しいフレームワーク](#new-framework-for-collations)をサポートします。このフレームワークでは、TiDB はさまざまな照合順序を意味的に解析し、文字列を比較するときに照合順序に厳密に従います。
 

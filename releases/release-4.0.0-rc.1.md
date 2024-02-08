@@ -1,5 +1,6 @@
 ---
 title: TiDB 4.0 RC.1 Release Notes
+summary: TiDB 4.0 RC.1 was released on April 28, 2020. The release includes compatibility changes, important bug fixes, new features, and bug fixes for TiKV, TiDB, TiFlash, TiCDC, Backup & Restore (BR), and Placement Driver (PD). The bug fixes address issues such as data inconsistency, deadlock, and replication failure. New features include support for sending Coprocessor requests to TiFlash in batches and enabling the load-based split region operation. Additionally, TiFlash now supports pushing down the fromUnixTime and dateFormat functions.
 ---
 
 # TiDB 4.0 RC.1 リリース ノート {#tidb-4-0-rc-1-release-notes}
@@ -137,7 +138,7 @@ TiDB バージョン: 4.0.0-rc.1
 -   PD
 
     -   一部の API が TLS 検証で失敗する可能性がある問題を修正[#2363](https://github.com/pingcap/pd/pull/2363)
-    -   構成 API がプレフィックス[#2354](https://github.com/pingcap/pd/pull/2354)の構成アイテムを受け入れられない問題を修正します。
+    -   構成 API がプレフィックス[#2354](https://github.com/pingcap/pd/pull/2354)の付いた構成アイテムを受け入れられない問題を修正します。
     -   スケジューラが見つからない場合に`500`エラーが返される問題を修正[#2328](https://github.com/pingcap/pd/pull/2328)
     -   `scheduler config balance-hot-region-scheduler list`コマンド[#2321](https://github.com/pingcap/pd/pull/2321)に対して`404`エラーが返される問題を修正
 

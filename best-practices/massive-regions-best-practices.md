@@ -1,6 +1,6 @@
 ---
 title: Best Practices for TiKV Performance Tuning with Massive Regions
-summary: Learn how to tune the performance of TiKV with a massive amount of Regions.
+summary: TiKV performance tuning involves reducing the number of Regions and messages, increasing Raftstore concurrency, enabling Hibernate Region and Region Merge, adjusting Raft base tick interval, increasing TiKV instances, and adjusting Region size. Other issues include slow PD leader switching and outdated PD routing information.
 ---
 
 # 大規模な領域での TiKV性能チューニングのベスト プラクティス {#best-practices-for-tikv-performance-tuning-with-massive-regions}
@@ -102,7 +102,7 @@ I/O リソースと CPU リソースが十分な場合は、単一のマシン�
     [raftstore]
     raft-base-tick-interval = "2s"
 
-上記の構成では、 `raft-base-tick-interval`はRaftstore が各リージョンのRaftステート マシンを駆動する時間間隔です。これは、この時間間隔でRaftstore がRaftステート マシンにティック メッセージを送信することを意味します。この間隔を長くすると、 Raftstoreからのメッセージの数を効果的に減らすことができます。
+上記の構成では、 `raft-base-tick-interval`はRaftstore が各リージョンのRaftステート マシンを駆動する時間間隔です。つまり、この時間間隔でRaftstore がRaftステート マシンにティック メッセージを送信します。この間隔を長くすると、 Raftstoreからのメッセージの数を効果的に減らすことができます。
 
 このティック メッセージ間の間隔によって、 `election timeout`と`heartbeat`の間の間隔も決定されることに注意してください。次の例を参照してください。
 

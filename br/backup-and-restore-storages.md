@@ -1,6 +1,6 @@
 ---
 title: Backup Storages
-summary: Describes the storage URI format used in TiDB backup and restore.
+summary: TiDB supports backup storage to Amazon S3, Google Cloud Storage, Azure Blob Storage, and NFS. You can specify the URI and authentication for different storage services. BR sends credentials to TiKV by default when using S3, GCS, or Azure Blob Storage. You can disable this for cloud environments. The URI format for each storage service is specified, along with authentication methods. Server-side encryption is supported for Amazon S3 and Azure Blob Storage. BR v6.3.0 also supports AWS S3 Object Lock.
 ---
 
 # バックアップストレージ {#backup-storages}

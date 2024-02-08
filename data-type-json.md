@@ -28,7 +28,7 @@ SELECT id FROM city WHERE population >= 100;
 ## 制限 {#restrictions}
 
 -   現在、TiDB は、限られた`JSON`関数のTiFlashへのプッシュダウンのみをサポートしています。詳細については、 [プッシュダウン式](/tiflash/tiflash-supported-pushdown-calculations.md#push-down-expressions)を参照してください。
--   v6.3.0 より前の TiDB バックアップ &amp; リストア (BR) バージョンは、JSON 列を含むデータのリカバリをサポートしていません。 BRのどのバージョンも、JSON 列を含むデータを v6.3.0 より前の TiDB クラスターにリカバリすることをサポートしていません。
+-   TiDB バックアップ &amp; リストア (BR) は、v6.3.0 での JSON 列データのエンコード方法を変更します。したがって、JSON 列を含むデータを v6.3.0 より前の TiDB クラスターに復元するためにBRを使用することはお勧めできません。
 -   `DATE` 、 `DATETIME` 、 `TIME`などの非標準の`JSON`データ型を含むデータをレプリケートするためにレプリケーション ツールを使用しないでください。
 
 ## MySQLの互換性 {#mysql-compatibility}

@@ -12,7 +12,7 @@ Amazon Auroraから寄木細工ファイルをエクスポートする場合は�
 ## 前提条件 {#prerequisites}
 
 -   [TiUPを使用してTiDB Lightningをインストールする](/migration-tools.md) 。
--   [TiDB Lightningに必要なターゲット データベース権限を取得します。](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database) 。
+-   [TiDB Lightningに必要なターゲット データベース権限を取得する](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database) 。
 
 ## ステップ 1. 寄木細工のファイルを準備する {#step-1-prepare-the-parquet-files}
 
@@ -41,7 +41,7 @@ Hive の各テーブルは、 `STORED AS PARQUET LOCATION '/path/in/hdfs'`に注
     DROP TABLE temp;
     ```
 
-3.  Hive からエクスポートされた寄木細工のファイルには`.parquet`接尾辞が付いていない可能性があり、 TiDB Lightningでは正しく識別できません。したがって、ファイルをインポートする前に、エクスポートされたファイルの名前を変更し、接尾辞`.parquet`を追加する必要があります。
+3.  Hive からエクスポートされた寄木細工のファイルには`.parquet`接尾辞が付いていない可能性があり、 TiDB Lightningでは正しく識別できません。したがって、ファイルをインポートする前に、エクスポートされたファイルの名前を変更し、接尾辞`.parquet`追加して、完全なファイル名をTiDB Lightningが認識する形式 (たとえば、 `${db_name}. ${table_name}.parquet`に変更する必要があります。ファイルの種類とパターンの詳細については、 [TiDB Lightningデータ ソース](/tidb-lightning/tidb-lightning-data-source.md)を参照してください。正しい[カスタマイズされた表現](/tidb-lightning/tidb-lightning-data-source.md#match-customized-files)を設定することで、データ ファイルを照合することもできます。
 
 4.  すべての寄木細工のファイルを統一ディレクトリ (たとえば、 `/data/my_datasource/`または`s3://my-bucket/sql-backup`に置きます。 TiDB Lightning は、このディレクトリとそのサブディレクトリ内の`.parquet`ファイルすべてを再帰的に検索します。
 
@@ -125,6 +125,6 @@ pd-addr = "${ip}:${port}" # The address of the PD cluster, e.g.: 172.16.31.3:237
 
     > **注記：**
     >
-    > インポートが成功したかどうかに関係なく、ログの最後の行には`tidb lightning exit`が表示されます。これは、 TiDB Lightning が正常に終了したことを意味しますが、必ずしもインポートが成功したことを意味するわけではありません。
+    > インポートが成功したかどうかに関係なく、ログの最後の行には`tidb lightning exit`が表示されます。これは、 TiDB Lightning が正常に終了したことを意味しますが、インポートが成功したことを必ずしも意味するわけではありません。
 
 インポートが失敗した場合は、 [TiDB LightningFAQ](/tidb-lightning/tidb-lightning-faq.md)のトラブルシューティングを参照してください。

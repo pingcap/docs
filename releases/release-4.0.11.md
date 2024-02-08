@@ -1,5 +1,6 @@
 ---
 title: TiDB 4.0.11 Release Notes
+summary: TiDB 4.0.11 was released on February 26, 2021. New features include support for `utf8_unicode_ci` and `utf8mb4_unicode_ci` collations. Improvements were made to inner joins, Grafana dashboards, and slow query metrics. Bug fixes address issues with collation, type inference, and function errors. TiKV improvements include support for multiple clusters in Grafana dashboards and bug fixes for memory diagnostics and OOM errors. PD fixes member health metrics and store limit persistence issues. TiFlash bug fixes address decimal type results, data loss, and crash issues. Tools like TiCDC, BR, and TiDB Lightning also received bug fixes and improvements.
 ---
 
 # TiDB 4.0.11 リリースノート {#tidb-4-0-11-release-notes}
@@ -71,7 +72,7 @@ TiDB バージョン: 4.0.11
 
     -   異常な`unicode_ci`定数伝播[#22614](https://github.com/pingcap/tidb/pull/22614)の問題を修正
     -   間違った照合順序と強制性を引き起こす可能性がある問題を修正します[#22602](https://github.com/pingcap/tidb/pull/22602)
-    -   不正な照合順序結果を引き起こす可能性がある問題を修正[#22599](https://github.com/pingcap/tidb/pull/22599)
+    -   不正な照合順序結果を引き起こす可能性がある問題を修正します[#22599](https://github.com/pingcap/tidb/pull/22599)
     -   異なる照合順序の定数置換の問題を修正します[#22582](https://github.com/pingcap/tidb/pull/22582)
     -   照合順序[#22531](https://github.com/pingcap/tidb/pull/22531)を使用した場合、 `like`関数が間違った結果を返す場合があるバグを修正
     -   `least`および`greatest`関数における誤った`duration`型推論の問題を修正[#22580](https://github.com/pingcap/tidb/pull/22580)
@@ -117,7 +118,7 @@ TiDB バージョン: 4.0.11
 -   TiKV
 
     -   `PROST=1` [#9604](https://github.com/tikv/tikv/pull/9604)で TiKV のビルドに失敗する問題を修正
-    -   不一致のメモリ診断を修正[#9589](https://github.com/tikv/tikv/pull/9589)
+    -   不一致のメモリ診断を修正します[#9589](https://github.com/tikv/tikv/pull/9589)
     -   部分的な RawKV 復元範囲の終了キーが[#9583](https://github.com/tikv/tikv/pull/9583)を含む問題を修正
     -   TiCDC の増分スキャン中にロールバックされたトランザクションのキーの古い値をロードするときに発生する TiKVpanicの問題を修正します[#9569](https://github.com/tikv/tikv/pull/9569)
     -   異なる設定の変更フィードが 1 つのリージョン[#9565](https://github.com/tikv/tikv/pull/9565)に接続する場合の古い値の構成の不具合を修正
@@ -135,7 +136,7 @@ TiDB バージョン: 4.0.11
 
 -   TiFlash
 
-    -   10進数型に対して`min` `max`結果が間違っているバグを修正
+    -   10進数型の`min` `max`結果が間違っているバグを修正
     -   データ読み取り時にTiFlashがクラッシュする可能性があるバグを修正
     -   DDL 操作後に書き込まれた一部のデータがデータ圧縮後に失われる可能性がある問題を修正
     -   TiFlash がコプロセッサーで 10 進定数を誤って処理する問題を修正

@@ -1,5 +1,6 @@
 ---
 title: TiDB 4.0 GA Release Notes
+summary: TiDB 4.0.0 GA was released on May 28, 2020. This version optimized error messages for large-sized transactions, improved usability of `Changefeed` configuration file, added new configuration items and support for various syntax and functions, fixed multiple bugs and issues in TiKV, TiFlash, PD, and Tools, added new monitoring items and support for various features in PD, and fixed various issues in Backup & Restore (BR) and TiCDC.
 ---
 
 # TiDB 4.0 GA リリース ノート {#tidb-4-0-ga-release-notes}
@@ -33,7 +34,7 @@ TiDB バージョン: 4.0.0
     -   再試行コミットフェーズ[#16849](https://github.com/pingcap/tidb/pull/16849)の`goroutines`の数を制御する`committer-concurrency`構成項目を追加します。
     -   `show table partition regions`構文[#17294](https://github.com/pingcap/tidb/pull/17294)をサポートします。
     -   `tmp-storage-quota`構成項目を追加して、TiDBサーバーが使用する一時ディスク容量を制限します[#15700](https://github.com/pingcap/tidb/pull/15700)
-    -   テーブルの作成および変更時に、パーティションテーブルが一意のプレフィックス インデックスを使用しているかどうかのチェックのサポート[#17213](https://github.com/pingcap/tidb/pull/17213)
+    -   テーブルの作成および変更時にパーティションテーブルが一意のプレフィックスインデックスを使用しているかどうかのチェックをサポート[#17213](https://github.com/pingcap/tidb/pull/17213)
     -   `insert/replace into tbl_name partition` ( `partition_name_list` ) ステートメントをサポートします[#17313](https://github.com/pingcap/tidb/pull/17313)
     -   `Distinct`関数使用時の`collations`の値のチェックをサポート[#17240](https://github.com/pingcap/tidb/pull/17240)
     -   ハッシュ パーティション プルーニング中の`is null`フィルター条件のサポート[#17310](https://github.com/pingcap/tidb/pull/17310)
@@ -110,6 +111,6 @@ TiDB バージョン: 4.0.0
     -   バックアップと復元 (BR)
         -   BR がクラウドstorage[#298](https://github.com/pingcap/br/pull/298)からデータを復元するときに、ネットワークの問題によりデータの復元が失敗する問題を修正します。
     -   TiCDC
-        -   データ競合によって引き起こされるシステムパニックを修正[#565](https://github.com/pingcap/tiflow/pull/565) [#566](https://github.com/pingcap/tiflow/pull/566)
+        -   データ競合によるシステムパニックを修正[#565](https://github.com/pingcap/tiflow/pull/565) [#566](https://github.com/pingcap/tiflow/pull/566)
         -   不適切な処理ロジックによって引き起こされるリソース リークまたはシステムのブロックを修正します[#574](https://github.com/pingcap/tiflow/pull/574) [#586](https://github.com/pingcap/tiflow/pull/586)
         -   CLI が PD [#579](https://github.com/pingcap/tiflow/pull/579)に接続できないためにコマンド ラインがスタックする問題を修正

@@ -1,5 +1,6 @@
 ---
 title: TiDB 3.1 Beta.1 Release Notes
+summary: TiDB 3.1 Beta.1 was released on January 10, 2020. The release includes changes to TiKV, such as renaming backup files and adding incremental backup features. Tools like BR have improved backup progress information and added features for partitioned tables. TiDB Ansible now automatically disables Transparent Huge Pages and adds Grafana monitoring for BR components. Overall, the release focuses on improving backup and restore processes, monitoring, and deployment optimization.
 ---
 
 # TiDB 3.1 ベータ.1 リリースノート {#tidb-3-1-beta-1-release-notes}

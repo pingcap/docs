@@ -1,6 +1,6 @@
 ---
 title: Highly Concurrent Write Best Practices
-summary: Learn best practices for highly-concurrent write-intensive workloads in TiDB.
+summary: This document provides best practices for handling highly-concurrent write-heavy workloads in TiDB. It addresses challenges and solutions for data distribution, hotspot cases, and complex hotspot problems. The article also discusses parameter configuration for optimizing performance.
 ---
 
 # 高度な同時書き込みのベスト プラクティス {#highly-concurrent-write-best-practices}
@@ -75,10 +75,10 @@ SELECT
     '@example.com'
   )
 FROM
-  (WITH RECURSIVE nr(n) AS 
+  (WITH RECURSIVE nr(n) AS
     (SELECT 1                              -- Start CTE at 1
       UNION ALL SELECT n + 1               -- increase n with 1 every loop
-      FROM nr WHERE n < 1000000            -- stop loop at 1_000_000 
+      FROM nr WHERE n < 1000000            -- stop loop at 1_000_000
     ) SELECT n FROM nr
   ) a;
 ```
@@ -141,7 +141,7 @@ SPLIT TABLE table_name [INDEX index_name] BY (value_list) [, (value_list)]
 
 ![Table Region Range](/media/best-practices/table-Region-range.png)
 
-上の図から、行のキーのエンコード規則によれば、可変部分は`rowID`だけです。 TiDB では、 `rowID`は`Int64`整数です。ただし、リージョン分割も実際の状況に基づいて行う必要があるため、 `Int64`の整数範囲を希望の範囲数に均等に分割してから、これらの範囲を別のノードに分散する必要はない場合があります。
+上の図から、行のキーのエンコード規則によれば、可変部分は`rowID`だけです。 TiDB では、 `rowID`は`Int64`整数です。ただし、リージョン分割も実際の状況に基づいて行う必要があるため、 `Int64`の整数範囲を必要な範囲数に均等に分割してから、これらの範囲を別のノードに分散する必要はない場合があります。
 
 `rowID`の書き込みが完全に離散的であれば、上記の方法ではホットスポットは発生しません。行 ID またはインデックスに固定の範囲またはプレフィックスがある場合 (たとえば、データを`[2000w, 5000w)`の範囲に個別に挿入する)、ホットスポットも発生しません。ただし、上記の方法でリージョンを分割した場合、最初は同じリージョンにデータが書き込まれる可能性があります。
 

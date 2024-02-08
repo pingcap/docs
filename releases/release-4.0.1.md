@@ -1,5 +1,6 @@
 ---
 title: TiDB 4.0.1 Release Notes
+summary: TiDB 4.0.1 was released on June 12, 2020. New features include support for custom timeout for PD client and new collation framework in TiFlash. Bug fixes address issues with configuration, monitoring metrics, and store information retrieval. Backup & Restore (BR) now includes a version check to avoid compatibility issues.
 ---
 
 # TiDB 4.0.1 リリースノート {#tidb-4-0-1-release-notes}
@@ -38,13 +39,13 @@ TiDB バージョン: 4.0.1
     -   起動ログの`use-unified-pool`設定が誤って出力される問題を修正[#7946](https://github.com/tikv/tikv/pull/7946)
     -   tikv-ctl が相対パス[#7963](https://github.com/tikv/tikv/pull/7963)をサポートしない問題を修正
     -   ポイントセレクトの監視メトリクスが不正確になるバグを修正[#8033](https://github.com/tikv/tikv/pull/8033)
-    -   ネットワーク分離が解消された後、ピアが破棄されない場合がある問題を修正します[#8006](https://github.com/tikv/tikv/pull/8006)
+    -   ネットワーク分離が解消された後、ピアが破棄されないことがある問題を修正します[#8006](https://github.com/tikv/tikv/pull/8006)
     -   読み取りインデックスのリクエストが古いコミット インデックス[#8043](https://github.com/tikv/tikv/pull/8043)を取得する可能性がある問題を修正
     -   S3 および GCS ストレージによるバックアップと復元の信頼性の向上[#7917](https://github.com/tikv/tikv/pull/7917)
 
 -   PD
 
-    -   状況によっては配置ルールの構成ミスを防止[#2516](https://github.com/pingcap/pd/pull/2516)
+    -   状況によっては配置ルールの誤設定を防止[#2516](https://github.com/pingcap/pd/pull/2516)
     -   配置ルールを削除するとpanic[#2515](https://github.com/pingcap/pd/pull/2515)が発生する可能性がある問題を修正
     -   ストアの使用サイズが0の場合にストア情報が取得できないバグを修正[#2474](https://github.com/pingcap/pd/pull/2474)
 

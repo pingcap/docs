@@ -84,8 +84,22 @@ summary: Learn about the TiDB system tables.
 
 ## メタデータ ロックに関連するシステム テーブル {#system-tables-related-to-metadata-locks}
 
--   `tidb_mdl_view` ：メタデータロックのビュー。これを使用して、現在ブロックされている DDL ステートメントに関する情報を表示できます。
--   `tidb_mdl_info` ：ノード間でメタデータ ロックを同期するために TiDB によって内部的に使用されます。
+-   `tidb_mdl_view` : メタデータ ロックのビュー。これを使用して、現在ブロックされている DDL ステートメントに関する情報を表示できます。
+-   `tidb_mdl_info` : ノード間でメタデータ ロックを同期するために TiDB によって内部的に使用されます。
+
+## DDL ステートメントに関連するシステム テーブル {#system-tables-related-to-ddl-statements}
+
+-   `tidb_ddl_history` : DDL ステートメントの履歴レコード
+-   `tidb_ddl_jobs` : TiDB によって現在実行されている DDL ステートメントのメタデータ
+-   `tidb_ddl_reorg` : TiDB によって現在実行されている物理 DDL ステートメント (インデックスの追加など) のメタデータ
+
+## TiDB Distributed eXecution Framework (DXF) に関連するシステム テーブル {#system-tables-related-to-tidb-distributed-execution-framework-dxf}
+
+-   `dist_framework_meta` : Distributed eXecution Framework (DXF) タスク スケジューラのメタデータ
+-   `tidb_global_task` : 現在の DXF タスクのメタデータ
+-   `tidb_global_task_history` : 成功したタスクと失敗したタスクの両方を含む、履歴 DXF タスクのメタデータ
+-   `tidb_background_subtask` : 現在の DXF サブタスクのメタデータ
+-   `tidb_background_subtask_history` : 過去の DXF サブタスクのメタデータ
 
 ## その他のシステムテーブル {#miscellaneous-system-tables}
 
@@ -98,7 +112,6 @@ summary: Learn about the TiDB system tables.
 -   `GLOBAL_VARIABLES` : グローバル システム変数テーブル
 -   `expr_pushdown_blacklist` : 式プッシュダウンのブロックリスト
 -   `opt_rule_blacklist` : 論理最適化ルールのブロックリスト
--   `table_cache_meta` : キャッシュされたテーブルのメタデータ
 -   `tidb_import_jobs` : [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)のジョブ情報
 -   `tidb_timers` : 内部タイマーのメタデータ
 

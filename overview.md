@@ -37,9 +37,9 @@ summary: Learn about the key features and usage scenarios of TiDB.
 
     TiDB はクラウド用に設計された分散データベースであり、クラウド プラットフォーム上で柔軟な拡張性、信頼性、セキュリティを提供します。ユーザーは、変化するワークロードの要件に合わせて TiDB を柔軟に拡張できます。 TiDB では、各データに少なくとも 3 つのレプリカがあり、データセンター全体の停止に耐えられるように、異なるクラウド アベイラビリティ ゾーンにスケジュールできます。 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/tidb-operator-overview) Kubernetes 上で TiDB を管理し、TiDB クラスターの運用に関連するタスクを自動化するのに役立ち、マネージド Kubernetes を提供するあらゆるクラウドへの TiDB のデプロイが容易になります。フルマネージド TiDB サービスで[TiDB Cloud](https://pingcap.com/tidb-cloud/)は、 [クラウド上の TiDB](https://docs.pingcap.com/tidbcloud/)の機能を最大限に活用するための最も簡単、最も経済的、かつ復元力の高い方法であり、数回クリックするだけで TiDB クラスターを展開して実行できます。
 
--   **MySQL 5.7プロトコルおよび MySQL エコシステムとの互換性**
+-   **MySQL プロトコルおよび MySQL エコシステムとの互換性**
 
-    TiDB は、MySQL 5.7プロトコル、MySQL の共通機能、および MySQL エコシステムと互換性があります。アプリケーションを TiDB に移行する場合、多くの場合、コードを 1 行も変更する必要はありません。または、少量のコードを変更するだけで済みます。さらに、TiDB は、アプリケーション データを TiDB に簡単に移行するのに役立つ一連の[データ移行ツール](/ecosystem-tool-user-guide.md)を提供します。
+    TiDB は、MySQL プロトコル、MySQL の共通機能、および MySQL エコシステムと互換性があります。アプリケーションを TiDB に移行する場合、多くの場合、コードを 1 行も変更する必要はありません。または、少量のコードを変更するだけで済みます。さらに、TiDB は、アプリケーション データを TiDB に簡単に移行するのに役立つ一連の[データ移行ツール](/ecosystem-tool-user-guide.md)を提供します。
 
 ## ユースケース {#use-cases}
 

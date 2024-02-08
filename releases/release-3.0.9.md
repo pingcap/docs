@@ -1,5 +1,6 @@
 ---
 title: TiDB 3.0.9 Release Notes
+summary: TiDB 3.0.9 was released on January 14, 2020. It includes fixes for known issues and new features. Some improvements were made to Executor, Server, DDL, Planner, TiKV, PD, Tools, and TiDB Ansible. Notable changes include support for system variables, monitoring metrics, and optimizations for transaction execution latency. Additionally, support for using backlash in the location label name and automatically creating directories for TiDB Lightning deployment was added.
 ---
 
 # TiDB 3.0.9 リリースノート {#tidb-3-0-9-release-notes}
@@ -20,7 +21,7 @@ TiDB Ansible バージョン: 3.0.9
     -   集計関数を列`ENUM`とコレクション列[#14364](https://github.com/pingcap/tidb/pull/14364)に適用した場合の誤った結果を修正
 -   サーバ
     -   システム変数`auto_increment_increment`および`auto_increment_offset`をサポート[#14396](https://github.com/pingcap/tidb/pull/14396)
-    -   `tidb_tikvclient_ttl_lifetime_reach_total`監視メトリックを追加して、10 分の TTL で悲観的トランザクションの数を監視します[#14300](https://github.com/pingcap/tidb/pull/14300)
+    -   `tidb_tikvclient_ttl_lifetime_reach_total`監視メトリックを追加して、TTL 10 分の悲観的トランザクションの数を監視します[#14300](https://github.com/pingcap/tidb/pull/14300)
     -   SQLクエリの実行中にpanicが発生した場合にSQL情報をログに出力します[#14322](https://github.com/pingcap/tidb/pull/14322)
     -   ステートメント概要テーブルに`plan`フィールドと`plan_digest`フィールドを追加して、実行中の`plan`と`plan`署名[#14285](https://github.com/pingcap/tidb/pull/14285)を記録します。
     -   `stmt-summary.max-stmt-count`設定項目のデフォルト値を`100`から`200`に調整します[#14285](https://github.com/pingcap/tidb/pull/14285)
@@ -29,7 +30,7 @@ TiDB Ansible バージョン: 3.0.9
     -   `primary`列の`alter table ... add index`を使用して作成された匿名インデックスの結果が MySQL [#14310](https://github.com/pingcap/tidb/pull/14310)と一致しない問題を修正
     -   `drop table`構文で`VIEW`が誤って削除される問題を修正[#14052](https://github.com/pingcap/tidb/pull/14052)
 -   プランナー
-    -   `select max(a), min(a) from t`などのステートメントのパフォーマンスを最適化します。 `a`列にインデックスが存在する場合、テーブル全体のスキャンを回避するためにステートメントは`select * from (select a from t order by a desc limit 1) as t1, (select a from t order by a limit 1) as t2`に最適化されます[#14410](https://github.com/pingcap/tidb/pull/14410)
+    -   `select max(a), min(a) from t`などのステートメントのパフォーマンスを最適化します。 `a`列にインデックスが存在する場合、テーブル全体のスキャンを回避するために、ステートメントは`select * from (select a from t order by a desc limit 1) as t1, (select a from t order by a limit 1) as t2`に最適化されます[#14410](https://github.com/pingcap/tidb/pull/14410)
 
 ## TiKV {#tikv}
 
@@ -55,4 +56,4 @@ TiDB Ansible バージョン: 3.0.9
 
 ## TiDB Ansible {#tidb-ansible}
 
--   TiDB Lightning [#1105](https://github.com/pingcap/tidb-ansible/pull/1105)のデプロイメントを最適化するためのディレクトリの自動作成のサポート
+-   TiDB Lightning [#1105](https://github.com/pingcap/tidb-ansible/pull/1105)の展開を最適化するためのディレクトリの自動作成をサポート

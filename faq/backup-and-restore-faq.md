@@ -40,14 +40,6 @@ TiKV は自動調整[動的構成](/tikv-control.md#modify-the-tikv-configuratio
 
 ログ バックアップ タスクを作成するアップストリーム クラスターでは、データのインポートにTiDB Lightning物理モードを使用しないでください。代わりに、 TiDB Lightning論理モードを使用できます。物理モードを使用する必要がある場合は、インポートの完了後にスナップショット バックアップを実行して、PITR をスナップショット バックアップ後の時点に復元できるようにします。
 
-### インデックス追加の高速化機能が PITR と互換性がないのはなぜですか? {#why-is-the-acceleration-of-adding-indexes-feature-incompatible-with-pitr}
-
-問題: [#38045](https://github.com/pingcap/tidb/issues/38045)
-
-現在、 [インデックス加速度](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)機能で作成されたインデックス データは PITR でバックアップできません。
-
-したがって、PITR リカバリの完了後、 BR はインデックス アクセラレーションによって作成されたインデックス データを削除し、再作成します。インデックス アクセラレーションによって多数のインデックスが作成された場合、またはログ バックアップ中にインデックス データが大きい場合は、インデックスの作成後にフル バックアップを実行することをお勧めします。
-
 ### クラスターはネットワーク パーティションの障害から回復しましたが、ログ バックアップ タスクの進行状況のチェックポイントはまだ再開されません。なぜ？ {#the-cluster-has-recovered-from-the-network-partition-failure-but-the-checkpoint-of-the-log-backup-task-progress-still-does-not-resume-why}
 
 問題: [#13126](https://github.com/tikv/tikv/issues/13126)
@@ -55,16 +47,6 @@ TiKV は自動調整[動的構成](/tikv-control.md#modify-the-tikv-configuratio
 クラスター内でネットワーク パーティションに障害が発生すると、バックアップ タスクはログのバックアップを続行できなくなります。一定の再試行時間が経過すると、タスクは`ERROR`状態に設定されます。この時点で、バックアップ タスクは停止しました。
 
 この問題を解決するには、 `br log resume`コマンドを手動で実行してログ バックアップ タスクを再開する必要があります。
-
-### PITR を実行すると、 <code>execute over region id</code>エラーが返された場合はどうすればよいですか? {#what-should-i-do-if-the-error-code-execute-over-region-id-code-is-returned-when-i-perform-pitr}
-
-問題: [#37207](https://github.com/pingcap/tidb/issues/37207)
-
-この問題は通常、完全データ インポート中にログ バックアップを有効にし、その後 PITR を実行してデータ インポート中の特定の時点でデータを復元した場合に発生します。
-
-具体的には、長時間 (24 時間など) に大量のホットスポット書き込みがあり、各 TiKV ノードの OPS が 50k/s を超えている場合に、この問題が発生する可能性があります (メトリクスは次のとおりです)。 Grafana: **TiKV-詳細**-&gt;**バックアップ ログ**-&gt;**ハンドル イベント レート**)。
-
-データのインポート後にスナップショット バックアップを実行し、このスナップショット バックアップに基づいて PITR を実行することをお勧めします。
 
 ## <code>br restore point</code>コマンドを使用してダウンストリーム クラスターを復元した後、 TiFlashからデータにアクセスできなくなります。どうすればいいですか？ {#after-restoring-a-downstream-cluster-using-the-code-br-restore-point-code-command-data-cannot-be-accessed-from-tiflash-what-should-i-do}
 
@@ -168,7 +150,7 @@ v6.0.0 より前では、 BR は[配置ルール](/placement-rules-in-sql.md)を
 
 `--ddl-batch-size` ～ `128` 、またはそれより小さい値を設定すると、バッチで作成されるテーブルの数を減らすことができます。
 
-BRを使用して`1`より大きい[`--ddl-batch-size`](/br/br-batch-create-table.md#use-batch-create-table)の値を持つバックアップ データを復元すると、TiDB はテーブル作成の DDL ジョブを TiKV によって維持される DDL ジョブ キューに書き込みます。現時点では、ジョブ メッセージの最大値はデフォルトで`6 MB`であるため、TiDB によって一度に送信されるすべてのテーブル スキーマの合計サイズは 6 MB を超えてはなりません (この値を変更することは**お勧めできません**。詳細については、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)と 9 を参照してください)。 [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size) ）。したがって、 `--ddl-batch-size`過度に大きな値に設定すると、TiDB によって一度にバッチで送信されるテーブルのスキーマ サイズが指定値を超え、 BRで`entry too large, the max entry size is 6291456, the size of data is 7690800`エラーが報告されます。
+BRを使用して`1`より大きい[`--ddl-batch-size`](/br/br-batch-create-table.md#use-batch-create-table)の値を持つバックアップ データを復元すると、TiDB はテーブル作成の DDL ジョブを TiKV によって維持される DDL ジョブ キューに書き込みます。現時点では、ジョブ メッセージの最大値はデフォルトで`6 MB`であるため、TiDB によって一度に送信されるすべてのテーブル スキーマの合計サイズは 6 MB を超えてはなりません (この値を変更することは**お勧めできません**。詳細については、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)と を参照してください)。 [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size) ）。したがって、 `--ddl-batch-size`過度に大きな値に設定すると、TiDB によって一度にバッチで送信されるテーブルのスキーマ サイズが指定値を超え、 BRで`entry too large, the max entry size is 6291456, the size of data is 7690800`エラーが報告されます。
 
 ### <code>local</code>storageを使用する場合、バックアップ ファイルはどこに保存されますか? {#where-are-the-backed-up-files-stored-when-i-use-code-local-code-storage}
 
@@ -259,7 +241,7 @@ TiKV がバックアップ ディレクトリにアクセスできるかどう�
 
 BR v5.1.0 以降、完全バックアップを実行すると、 BR は**`mysql`スキーマ内のテーブル**をバックアップします。 BR v6.2.0 より前のデフォルト設定では、 BR はユーザー データのみを復元し、 **`mysql`スキーマ**内のテーブルは復元しません。
 
-ユーザーが`mysql`スキーマ (システム テーブルではない) で作成したテーブルを復元するには、 [テーブルフィルター](/table-filter.md#syntax)使用してテーブルを明示的に含めます。次の例は、 BR が通常の復元を実行するときに`mysql.usertable`テーブルを復元する方法を示しています。
+ユーザーが`mysql`スキーマに作成したテーブル (システム テーブルではない) を復元するには、 [テーブルフィルター](/table-filter.md#syntax)を使用してテーブルを明示的に含めます。次の例は、 BR が通常の復元を実行するときに`mysql.usertable`テーブルを復元する方法を示しています。
 
 ```shell
 br restore full -f '*.*' -f '!mysql.*' -f 'mysql.usertable' -s $external_storage_url --with-sys-table
@@ -282,6 +264,10 @@ br restore full -f 'mysql.usertable' -s $external_storage_url --with-sys-table
 -   統計表 ( `mysql.stat_*` )。ただし、統計は復元できます。 [統計のバックアップ](/br/br-snapshot-manual.md#back-up-statistics)を参照してください。
 -   システム変数テーブル ( `mysql.tidb` 、 `mysql.global_variables` )
 -   [その他のシステムテーブル](https://github.com/pingcap/tidb/blob/release-7.5/br/pkg/restore/systable_restore.go#L31)
+
+### 復元中に<code>cannot find rewrite rule</code>エラーに対処するにはどうすればよいですか? {#how-to-deal-with-the-error-of-code-cannot-find-rewrite-rule-code-during-restoration}
+
+バックアップ データ内の他のテーブルと同じ名前を共有しているものの、構造が一貫していないテーブルが復元クラスタ内に存在するかどうかを調べます。ほとんどの場合、この問題は、復元クラスターのテーブルにインデックスがないことが原因で発生します。推奨されるアプローチは、最初に復元クラスター内のそのようなテーブルを削除してから、復元を再試行することです。
 
 ## バックアップと復元についてその他知っておきたいこと {#other-things-you-may-want-to-know-about-backup-and-restore}
 
@@ -314,3 +300,11 @@ v4.0.9 では、 BR はデフォルトで統計をバックアップするため
 ### BR はテーブルの<code>SHARD_ROW_ID_BITS</code>および<code>PRE_SPLIT_REGIONS</code>情報をバックアップしますか?復元されたテーブルには複数のリージョンがありますか? {#does-br-back-up-the-code-shard-row-id-bits-code-and-code-pre-split-regions-code-information-of-a-table-does-the-restored-table-have-multiple-regions}
 
 はい。 BRはテーブルの[`SHARD_ROW_ID_BITS`および`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)情報をバックアップします。復元されたテーブルのデータも複数のリージョンに分割されます。
+
+## リカバリプロセスが中断された場合、すでにリカバリされたデータを削除して、リカバリを再度開始する必要がありますか? {#if-the-recovery-process-is-interrupted-is-it-necessary-to-delete-the-already-recovered-data-and-start-the-recovery-again}
+
+いいえ、その必要はありません。 v7.1.0 以降、 BR はブレークポイントからのデータの再開をサポートします。予期せぬ状況によりリカバリが中断された場合は、リカバリタスクを再起動するだけで、中断したところから再開されます。
+
+## リカバリの完了後、特定のテーブルを削除して、再度リカバリすることはできますか? {#after-the-recovery-is-complete-can-i-delete-a-specific-table-and-then-recover-it-again}
+
+はい、特定のテーブルを削除した後、再度復元できます。ただし、回復できるのは`DROP TABLE`または`TRUNCATE TABLE`ステートメントを使用して削除されたテーブルのみであり、 `DELETE FROM`ステートメントでは回復できないことに注意してください。これは、 `DELETE FROM`削除するデータをマークするために MVCC バージョンを更新するだけであり、実際のデータ削除は GC 後に発生するためです。

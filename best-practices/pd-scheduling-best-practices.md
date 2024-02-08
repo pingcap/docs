@@ -1,6 +1,6 @@
 ---
 title: PD Scheduling Best Practices
-summary: Learn best practice and strategy for PD scheduling.
+summary: This document summarizes PD scheduling best practices, including scheduling process, load balancing, hot regions scheduling, cluster topology awareness, scale-down and failure recovery, region merge, query scheduling status, and control scheduling strategy. It also covers common scenarios such as uneven distribution of leaders/regions, slow node recovery, and troubleshooting TiKV nodes.
 ---
 
 # PD スケジュールのベスト プラクティス {#pd-scheduling-best-practices}
@@ -46,7 +46,7 @@ summary: Learn best practice and strategy for PD scheduling.
     -   リーダーを保留中のピアに転送しないでください
     -   リーダーを直接削除しないでください
     -   さまざまなリージョン ピアの物理的分離を壊さないでください
-    -   ラベルプロパティなどの制約に違反しないでください
+    -   ラベルプロパティなどの制約に違反しないこと
 
 3.  演算子の実行
 
@@ -89,7 +89,7 @@ summary: Learn best practice and strategy for PD scheduling.
 
 クラスタトポロジの認識により、PD はリージョンのレプリカを可能な限り分散できるようになります。これにより、TiKV は高可用性と災害復旧機能を確保します。 PD はバックグラウンドですべての領域を継続的にスキャンします。 PD は、領域の分散が最適ではないことを検出すると、ピアを置き換えて領域を再分散するためのオペレーターを生成します。
 
-領域の分布を確認するコンポーネントは`replicaChecker`です。これは、無効にできない点を除けばスケジューラと似ています。 `location-labels`の構成に基づく`replicaChecker`スケジュール。たとえば、 `[zone,rack,host]`クラスターの 3 層トポロジを定義します。 PD は、最初に異なるゾーンにリージョン ピアをスケジュールするか、ゾーンが不十分な場合 (たとえば、3 つのレプリカに対して 2 つのゾーン) に別のラックに、またはラックが不十分な場合に別のホストにリージョン ピアをスケジュールしようとします。
+領域の分布をチェックするコンポーネントは`replicaChecker`です。これは、無効にできない点を除けばスケジューラと似ています。 `location-labels`の構成に基づく`replicaChecker`スケジュール。たとえば、 `[zone,rack,host]`クラスターの 3 層トポロジを定義します。 PD は、最初に異なるゾーンにリージョン ピアをスケジュールするか、ゾーンが不十分な場合 (たとえば、3 つのレプリカに対して 2 つのゾーン) に別のラックに、またはラックが不十分な場合に別のホストにリージョン ピアをスケジュールしようとします。
 
 ### スケールダウンと障害復旧 {#scale-down-and-failure-recovery}
 

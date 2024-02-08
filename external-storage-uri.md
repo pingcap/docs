@@ -41,7 +41,7 @@ s3://external/testfolder?access-key=${access-key}&secret-access-key=${secret-acc
 以下は、 [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)の Amazon S3 URI の例です。この例では、特定のファイル名`test.csv`を指定する必要があります。
 
 ```shell
-s3://external/test.csv?access-key=${access-key}&secret-access-key=${secret-access-key}"
+s3://external/test.csv?access-key=${access-key}&secret-access-key=${secret-access-key}
 ```
 
 ## GCS URI 形式 {#gcs-uri-format}
@@ -79,14 +79,8 @@ gcs://external/test.csv?credentials-file=${credentials-file-path}
     -   `encryption-scope` : サーバー側の暗号化に[暗号化スコープ](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-scope-manage?tabs=powershell#upload-a-blob-with-an-encryption-scope)を指定します。
     -   `encryption-key` : AES256 暗号化アルゴリズムを使用するサーバー側暗号化に[暗号化キー](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-customer-provided-keys)指定します。
 
-以下は、 TiDB LightningおよびBRの Azure Blob Storage URI の例です。この例では、特定のファイル パス`testfolder`を指定する必要があります。
+以下は、 BRの Azure Blob Storage URI の例です。この例では、特定のファイル パス`testfolder`を指定する必要があります。
 
 ```shell
 azure://external/testfolder?account-name=${account-name}&account-key=${account-key}
-```
-
-以下は、 [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)の Azure Blob Storage URI の例です。この例では、特定のファイル名`test.csv`を指定する必要があります。
-
-```shell
-azure://external/test.csv?account-name=${account-name}&account-key=${account-key}
 ```

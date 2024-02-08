@@ -1,5 +1,6 @@
 ---
 title: TiDB 2.1.8 Release Notes
+summary: TiDB 2.1.8 was released on April 12, 2019. It includes various bug fixes and improvements for TiDB, PD, TiKV, Tools, and TiDB Ansible. Some notable fixes include compatibility issues with MySQL, inaccurate statistics estimation, and performance improvements. The release also adds new configuration items and features for TiDB Binlog Pump and Drainer. Additionally, TiDB Ansible now has version limits for the operating system and rolling updates.
 ---
 
 # TiDB 2.1.8 リリースノート {#tidb-2-1-8-release-notes}
@@ -24,7 +25,7 @@ TiDB Ansible バージョン: 2.1.8
 -   互換性を向上させるために`STR_TO_DATE`機能の`%H`フォーマットをサポート[#9964](https://github.com/pingcap/tidb/pull/9964)
 -   `GROUP_CONCAT`関数を一意のインデックスでグループ化すると結果が不正になる問題を修正[#9969](https://github.com/pingcap/tidb/pull/9969)
 -   オプティマイザー ヒントに一致しないテーブル名が含まれている場合に警告を返します[#9970](https://github.com/pingcap/tidb/pull/9970)
--   ログフォーマットを統一し、分析ツールによるログ収集を容易にする 統一ログフォーマット
+-   ログ形式を統一し、分析ツールによるログ収集を容易にする 統一ログ形式
 -   NULL 値が多いと統計推定が不正確になる問題を修正[#9979](https://github.com/pingcap/tidb/pull/9979)
 -   TIMESTAMP型のデフォルト値が境界値[#9987](https://github.com/pingcap/tidb/pull/9987)の場合にエラーが報告される問題を修正
 -   `time_zone` [＃10000](https://github.com/pingcap/tidb/pull/10000)の値を検証します

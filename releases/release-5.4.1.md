@@ -1,5 +1,6 @@
 ---
 title: TiDB 5.4.1 Release Notes
+summary: "TiDB 5.4.1 Release Notes: This release includes compatibility changes, improvements, and bug fixes for TiDB, TiKV, PD, TiFlash, and various tools. Improvements include support for using the PointGet plan, adding more logs and metrics, and displaying multiple Kubernetes clusters in the Grafana dashboard. Bug fixes address issues such as incorrect handling of date_format, wrong data writing, wrong query results, and various panics and errors. Fixes for TiKV, PD, TiFlash, and tools are also included."
 ---
 
 # TiDB 5.4.1 リリースノート {#tidb-5-4-1-release-notes}
@@ -98,7 +99,7 @@ TiDB v5.4.1 では、製品設計に互換性の変更は導入されていま�
 -   PD
 
     -   `dr-autosync`の`Duration`フィールドを動的に設定できない問題を修正[#4651](https://github.com/tikv/pd/issues/4651)
-    -   大容量のストア（たとえば 2T）が存在する場合、完全に割り当てられた小さなストアを検出できず、バランス演算子が生成されない問題を修正します[#4805](https://github.com/tikv/pd/issues/4805)
+    -   大容量のストア（たとえば 2T）が存在する場合、完全に割り当てられた小さなストアが検出できず、バランス演算子が生成されない問題を修正します[#4805](https://github.com/tikv/pd/issues/4805)
     -   ラベル分布のメトリクスに残留ラベルがある問題を修正します[#4825](https://github.com/tikv/pd/issues/4825)
 
 -   TiFlash

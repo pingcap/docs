@@ -56,10 +56,11 @@ TiDB は MySQL と互換性のあるデータベースであり、 [MySQL ワー
 3.  接続ダイアログの設定が動作環境と一致していることを確認してください。
 
     -   **エンドポイント タイプは**`Public`に設定されます。
-    -   **[接続先] は**`General`に設定されます。
+    -   **ブランチは**`main`に設定されます。
+    -   **[接続先] は**`MySQL Workbench`に設定されます。
     -   **オペレーティング システムが**環境に一致します。
 
-4.  **「パスワードの作成」**をクリックしてランダムなパスワードを作成します。
+4.  **「パスワードの生成」**をクリックして、ランダムなパスワードを作成します。
 
     > **ヒント：**
     >
@@ -67,15 +68,15 @@ TiDB は MySQL と互換性のあるデータベースであり、 [MySQL ワー
 
 5.  MySQL Workbench を起動し、 **MySQL Connections**タイトルの近くにある**+**をクリックします。
 
-    ![MySQL Workbench: add new connection](/media/develop/navicat-add-new-connection.png)
+    ![MySQL Workbench: add new connection](/media/develop/mysql-workbench-add-new-connection.png)
 
 6.  **[新しい接続のセットアップ] ダイアログ**で、次の接続パラメータを構成します。
 
     -   **接続名**: この接続に意味のある名前を付けます。
-    -   **ホスト名**: TiDB Cloud接続ダイアログから`host`パラメータを入力します。
-    -   **ポート**: TiDB Cloud接続ダイアログから`port`パラメータを入力します。
-    -   **ユーザー名**: TiDB Cloud接続ダイアログから`user`パラメータを入力します。
-    -   **パスワード**: **[キーチェーンに保存...]**をクリックし、TiDB サーバーレス クラスターのパスワードを入力し、 **[OK]**をクリックしてパスワードを保存します。
+    -   **ホスト名**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
+    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
+    -   **ユーザー名**: TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力します。
+    -   **パスワード**: **[キーチェーンに保存 ...]**または**[ボールトに保存]**をクリックし、TiDB サーバーレス クラスターのパスワードを入力し、 **[OK]**をクリックしてパスワードを保存します。
 
         ![MySQL Workbench: store the password of TiDB Serverless in keychain](/media/develop/mysql-workbench-store-password-in-keychain.png)
 
@@ -100,14 +101,14 @@ TiDB は MySQL と互換性のあるデータベースであり、 [MySQL ワー
 
 4.  MySQL Workbench を起動し、 **MySQL Connections**タイトルの近くにある**+**をクリックします。
 
-    ![MySQL Workbench: add new connection](/media/develop/navicat-add-new-connection.png)
+    ![MySQL Workbench: add new connection](/media/develop/mysql-workbench-add-new-connection.png)
 
 5.  **[新しい接続のセットアップ] ダイアログ**で、次の接続パラメータを構成します。
 
     -   **接続名**: この接続に意味のある名前を付けます。
-    -   **ホスト名**: TiDB Cloud接続ダイアログから`host`パラメータを入力します。
-    -   **ポート**: TiDB Cloud接続ダイアログから`port`パラメータを入力します。
-    -   **ユーザー名**: TiDB Cloud接続ダイアログから`user`パラメータを入力します。
+    -   **ホスト名**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
+    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
+    -   **ユーザー名**: TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力します。
     -   **パスワード**: **[キーチェーンに保存...]**をクリックし、TiDB 専用クラスターのパスワードを入力し、 **[OK]**をクリックしてパスワードを保存します。
 
         ![MySQL Workbench: store the password of TiDB Dedicated in keychain](/media/develop/mysql-workbench-store-dedicated-password-in-keychain.png)
@@ -125,7 +126,7 @@ TiDB は MySQL と互換性のあるデータベースであり、 [MySQL ワー
 
 1.  MySQL Workbench を起動し、 **MySQL Connections**タイトルの近くにある**+**をクリックします。
 
-    ![MySQL Workbench: add new connection](/media/develop/navicat-add-new-connection.png)
+    ![MySQL Workbench: add new connection](/media/develop/mysql-workbench-add-new-connection.png)
 
 2.  **[新しい接続のセットアップ] ダイアログ**で、次の接続パラメータを構成します。
 
@@ -151,7 +152,7 @@ TiDB は MySQL と互換性のあるデータベースであり、 [MySQL ワー
 ## 次のステップ {#next-steps}
 
 -   MySQL Workbench の詳しい使い方を[MySQL Workbench のドキュメント](https://dev.mysql.com/doc/workbench/en/)から学びましょう。
--   TiDB アプリケーション開発[単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ベスト プラクティスについて[取引](/develop/dev-guide-transaction-overview.md) 、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[データの削除](/develop/dev-guide-delete-data.md) [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)ください。
+-   TiDB アプリケーション開発の[SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)プラクティスについて[取引](/develop/dev-guide-transaction-overview.md) 、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[データの削除](/develop/dev-guide-delete-data.md) [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ください。
 -   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## 助けが必要？ {#need-help}

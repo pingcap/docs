@@ -25,7 +25,7 @@ summary: Learn about the most frequently asked questions (FAQs) relating to TiDB
 
 ### TiDB のアーキテクチャとは何ですか? {#what-is-tidb-s-architecture}
 
-TiDB クラスターには、TiDBサーバー、PD (配置Driver)サーバー、および TiKVサーバー の3 つのコンポーネントがあります。詳細については、 [TiDBアーキテクチャ](/tidb-architecture.md) 、 [TiDBstorage](/tidb-storage.md) 、 [TiDB コンピューティング](/tidb-computing.md) 、および[TiDB スケジューリング](/tidb-scheduling.md)を参照してください。
+TiDB クラスターには、TiDBサーバー、PD (配置Driver)サーバー、および TiKVサーバー の3 つのコンポーネントがあります。詳細については、 [TiDBアーキテクチャ](/tidb-architecture.md) 、 [TiDBstorage](/tidb-storage.md) 、 [TiDB コンピューティング](/tidb-computing.md) 、および[TiDB のスケジューリング](/tidb-scheduling.md)を参照してください。
 
 ### TiDB は MySQL に基づいていますか? {#is-tidb-based-on-mysql}
 
@@ -37,13 +37,13 @@ TiDB クラスターには、TiDBサーバー、PD (配置Driver)サーバー、
 -   TiKV は、実際のデータを保存するために使用される分散 Key-Valuestorageエンジンとして機能します。つまり、TiKV は TiDB のstorageエンジンです。
 -   PD は TiDB のクラスター マネージャーとして機能し、TiKV メタデータを管理し、タイムスタンプを割り当て、データの配置と負荷分散に関する決定を行います。
 
-### TiDBの使い方は簡単ですか? {#is-it-easy-to-use-tidb}
+### TiDBの使い方は簡単ですか？ {#is-it-easy-to-use-tidb}
 
 はい、そうです。必要なサービスがすべて開始されると、MySQLサーバーと同じように簡単に TiDB を使用できるようになります。 MySQL を TiDB に置き換えることで、ほとんどの場合、コードを 1 行も変更することなくアプリケーションを強化できます。一般的な MySQL 管理ツールを使用して TiDB を管理することもできます。
 
 ### TiDB は MySQL とどのように互換性がありますか? {#how-is-tidb-compatible-with-mysql}
 
-現在、TiDB はMySQL 5.7構文の大部分をサポートしていますが、トリガー、ストアド プロシージャ、およびユーザー定義関数はサポートしていません。詳細については、 [MySQLとの互換性](/mysql-compatibility.md)を参照してください。
+現在、TiDB は MySQL 8.0 構文の大部分をサポートしていますが、トリガー、ストアド プロシージャ、およびユーザー定義関数はサポートしていません。詳細については、 [MySQLとの互換性](/mysql-compatibility.md)を参照してください。
 
 ### TiDB は分散トランザクションをサポートしていますか? {#does-tidb-support-distributed-transactions}
 

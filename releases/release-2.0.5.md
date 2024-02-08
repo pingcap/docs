@@ -1,5 +1,6 @@
 ---
 title: TiDB 2.0.5 Release Notes
+summary: TiDB 2.0.5 was released on July 6, 2018, with improvements in system compatibility and stability. New features include the `tidb_disable_txn_auto_retry` system variable. Bug fixes address issues with user login, data insertion, and command compatibility. PD and TiKV also received fixes for various issues.
 ---
 
 # TiDB 2.0.5 リリースノート {#tidb-2-0-5-release-notes}
@@ -23,7 +24,7 @@ title: TiDB 2.0.5 Release Notes
     -   `KILL QUERY`は常に SUPER 権限[#7003](https://github.com/pingcap/tidb/pull/7003)が必要になる問題を修正
     -   ユーザー数が1024 [#6986](https://github.com/pingcap/tidb/pull/6986)超えるとログインに失敗する場合がある問題を修正1
     -   符号なし`float` / `double`データの挿入に関する問題を修正[#6940](https://github.com/pingcap/tidb/pull/6940)
-    -   一部の MariaDB クライアントでのpanicの問題を解決するために`COM_FIELD_LIST`コマンドの互換性を修正しました[#6929](https://github.com/pingcap/tidb/pull/6929)
+    -   一部の MariaDB クライアントでのpanic問題を解決するために`COM_FIELD_LIST`コマンドの互換性を修正しました[#6929](https://github.com/pingcap/tidb/pull/6929)
     -   `CREATE TABLE IF NOT EXISTS LIKE`動作を修正する[#6928](https://github.com/pingcap/tidb/pull/6928)
     -   TopN プッシュダウン[#6923](https://github.com/pingcap/tidb/pull/6923)のプロセスの問題を修正
     -   `Add Index` [#6903](https://github.com/pingcap/tidb/pull/6903)の実行中にエラーが発生した場合の、現在処理中の行の ID レコードの問題を修正しました。

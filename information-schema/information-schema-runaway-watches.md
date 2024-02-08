@@ -7,6 +7,10 @@ summary: Learn the `RUNAWAY_WATCHES` INFORMATION_SCHEMA table.
 
 `RUNAWAY_WATCHES`表は、予想よりも多くのリソースを消費する暴走クエリの監視リストを示しています。詳細については、 [暴走クエリ](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries)を参照してください。
 
+> **注記：**
+>
+> このテーブルは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+
 ```sql
 USE INFORMATION_SCHEMA;
 DESC RUNAWAY_WATCHES;

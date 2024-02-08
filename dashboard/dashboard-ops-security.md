@@ -1,6 +1,6 @@
 ---
 title: Secure TiDB Dashboard
-summary: Learn how to improve the security of TiDB Dashboard.
+summary: TiDB Dashboard requires enhanced security measures, including setting a strong password for the root user, creating a least-privileged user, and using a firewall to block untrusted access. It is also recommended to use a reverse proxy and enable TLS for further security.
 ---
 
 # セキュリティTiDB ダッシュボード {#secure-tidb-dashboard}
@@ -25,7 +25,7 @@ TiDB ダッシュボードにアクセスしてサインインするには、最
 
 > **注記：**
 >
-> TiDB v6.5.0 (以降) およびTiDB Operator v1.4.0 (以降) は、TiDB ダッシュボードを Kubernetes 上の独立したポッドとしてデプロイすることをサポートしています。 TiDB Operatorを使用すると、このポッドの IP アドレスにアクセスして TiDB ダッシュボードを起動できます。このポートは PD の他の特権インターフェイスとは通信せず、外部に提供される場合は追加のファイアウォールは必要ありません。詳細は[TiDB Operatorで TiDB ダッシュボードを独立してデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently)を参照してください。
+> TiDB v6.5.0 (以降) およびTiDB Operator v1.4.0 (以降) は、Kubernetes 上の独立したポッドとして TiDB ダッシュボードをデプロイすることをサポートしています。 TiDB Operatorを使用すると、このポッドの IP アドレスにアクセスして TiDB ダッシュボードを起動できます。このポートは PD の他の特権インターフェイスとは通信せず、外部に提供される場合は追加のファイアウォールは必要ありません。詳細は[TiDB Operatorで TiDB ダッシュボードを独立してデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently)を参照してください。
 
 TiDB ダッシュボードは、PD クライアント ポート (デフォルトは[http://IP:2379/ダッシュボード/](http://IP:2379/dashboard/)を通じてサービスを提供します。 TiDB ダッシュボードには ID 認証が必要ですが、PD クライアント ポートで伝送される PD の他の特権インターフェイス ( [http://IP:2379/pd/api/v1/members](http://IP:2379/pd/api/v1/members)など) は ID 認証を必要とせず、特権操作を実行できます。したがって、PD クライアント ポートを外部ネットワークに直接公開することは非常に危険です。
 
@@ -43,7 +43,7 @@ TiDB ダッシュボードは、PD クライアント ポート (デフォルト
 
 > **警告：**
 >
-> このセクションでは、テスト環境のみを対象とした、安全でないアクセスのソリューションについて説明します。このソリューションを本番環境では使用**しないでください**。
+> このセクションでは、テスト環境のみを対象とした、安全でないアクセスのソリューションについて説明します。このソリューションは本番環境では使用**しないでください**。
 
 テスト環境では、外部アクセス用に TiDB ダッシュボード ポートを開くようにファイアウォールを構成する必要がある場合があります。
 

@@ -145,6 +145,10 @@ PD の API のほとんどは、TiKV クラスターが初期化されている�
 
 これは、PD 起動パラメーターの`--initial-cluster`に、このクラスターに属さないメンバーが含まれているためです。この問題を解決するには、各メンバーの対応するクラスターを確認し、間違ったメンバーを削除してから PD を再起動します。
 
+### PD の保存<code>[PD:encryption:ErrEncryptionNewMasterKey]fail to get encryption key from file /root/path/file%!(EXTRA string=open /root/path/file: permission denied)</code> 」メッセージが表示される {#the-code-pd-encryption-errencryptionnewmasterkey-fail-to-get-encryption-key-from-file-root-path-file-extra-string-open-root-path-file-permission-denied-code-message-is-displayed-when-enabling-encryption-at-rest-for-pd}
+
+保存時の暗号化では、 `root`ディレクトリまたはそのサブディレクトリへのキー ファイルの保存はサポートされていません。読み取り権限を付与しても同様のエラーが発生します。この問題を解決するには、キー ファイルを`root`ディレクトリ以外の場所に保存します。
+
 ### PDの時刻同期誤差の最大許容範囲はどのくらいですか? {#what-s-the-maximum-tolerance-for-time-synchronization-error-of-pd}
 
 PD はあらゆる同期エラーを許容できますが、エラー値が大きいほど、PD によって割り当てられたタイムスタンプと物理時間の間のギャップが大きくなることを意味し、履歴バージョンの読み取りなどの関数に影響します。

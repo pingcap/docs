@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard FAQs
-summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Dashboard.
+summary: This document summarizes FAQs about TiDB Dashboard. It covers access-related, UI-related, and deployment issues, providing solutions for each problem. If further assistance is needed, support can be obtained from PingCAP or the community.
 ---
 
 # TiDB ダッシュボードに関するよくある質問 {#tidb-dashboard-faqs}
@@ -11,7 +11,7 @@ summary: Learn about the frequently asked questions (FAQs) and answers about TiD
 
 ### ファイアウォールまたはリバース プロキシが構成されている場合、TiDB ダッシュボード以外の内部アドレスにリダイレクトされます {#when-the-firewall-or-reverse-proxy-is-configured-i-am-redirected-to-an-internal-address-other-than-tidb-dashboard}
 
-複数の配置Driver(PD) インスタンスがクラスターにデプロイされている場合、PD インスタンスのうちの 1 つだけが実際に TiDB ダッシュボード サービスを実行します。このインスタンスではなく他の PD インスタンスにアクセスすると、ブラウザは別のアドレスにリダイレクトします。ファイアウォールまたはリバース プロキシが TiDB ダッシュボードにアクセスするために適切に構成されていない場合、ダッシュボードにアクセスすると、ファイアウォールまたはリバース プロキシによって保護されている内部アドレスにリダイレクトされる可能性があります。
+複数の配置Driver(PD) インスタンスがクラスターにデプロイされている場合、PD インスタンスのうちの 1 つだけが実際に TiDB ダッシュボード サービスを実行します。このインスタンスではなく他の PD インスタンスにアクセスすると、ブラウザは別のアドレスにリダイレクトします。 TiDB ダッシュボードにアクセスするためにファイアウォールまたはリバース プロキシが適切に構成されていない場合、ダッシュボードにアクセスすると、ファイアウォールまたはリバース プロキシによって保護されている内部アドレスにリダイレクトされる可能性があります。
 
 -   複数の PD インスタンスを使用した TiDB ダッシュボードの動作原理については、 [TiDB ダッシュボードのマルチ PD インスタンスの展開](/dashboard/dashboard-ops-deploy.md)を参照してください。
 -   リバース プロキシを正しく構成する方法については、 [リバース プロキシ経由で TiDB ダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
@@ -29,7 +29,7 @@ summary: Learn about the frequently asked questions (FAQs) and answers about TiD
 
 **「概要」**ページの**「QPS」**および**「レイテンシー」**セクションでは、Prometheus がデプロイされたクラスターが必要です。それ以外の場合は、エラーが表示されます。この問題は、クラスターに Prometheus インスタンスをデプロイすることで解決できます。
 
-Prometheus インスタンスがデプロイされているときに引き続きこの問題が発生する場合は、デプロイメント ツール (TiUPまたはTiDB Operator) が古く、ツールがメトリクス アドレスを自動的にレポートしないため、TiDB ダッシュボードがクエリを実行できないことが考えられます。メトリクス。導入ツールを最新バージョンにアップグレードして、再試行できます。
+Prometheus インスタンスがデプロイされているときに引き続きこの問題が発生する場合は、デプロイメント ツール (TiUPまたはTiDB Operator) が古く、ツールがメトリクス アドレスを自動的にレポートしないため、TiDB ダッシュボードがクエリを実行できなくなっていることが考えられます。メトリクス。導入ツールを最新バージョンにアップグレードして、再試行できます。
 
 デプロイメント ツールがTiUPの場合は、次の手順を実行してこの問題を解決してください。他の展開ツールについては、それらのツールの対応するドキュメントを参照してください。
 
@@ -48,7 +48,7 @@ Prometheus インスタンスがデプロイされているときに引き続き
     tiup cluster start CLUSTER_NAME
     ```
 
-    クラスタが起動している場合でも、このコマンドを実行してください。このコマンドはクラスター内の通常のアプリケーションには影響しませんが、モニタリング メトリックを TiDB ダッシュボードに通常どおり表示できるように、メトリック アドレスを更新してレポートします。
+    クラスタが起動している場合でも、このコマンドを実行してください。このコマンドはクラスター内の通常のアプリケーションには影響しませんが、監視メトリックを TiDB ダッシュボードに通常どおり表示できるように、メトリック アドレスを更新してレポートします。
 
 ### <strong>「遅いクエリ」</strong>ページに<code>invalid connection</code>エラーが表示される {#an-code-invalid-connection-code-error-is-shown-on-the-strong-slow-queries-strong-page}
 

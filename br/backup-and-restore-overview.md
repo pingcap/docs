@@ -1,6 +1,6 @@
 ---
 title: TiDB Backup & Restore Overview
-summary: Learn about the definition and features of TiDB Backup & Restore.
+summary: TiDB Backup & Restore (BR) ensures high availability of clusters and data safety. It supports disaster recovery with a short RPO, handles misoperations, and provides history data auditing. It is recommended to perform backup operations during off-peak hours and store backup data to compatible storage systems. BR supports full backup and log backup, as well as restoring data to any point in time. It is important to use BR of the same major version as the TiDB cluster for backup and restoration.
 ---
 
 # TiDB のバックアップと復元の概要 {#tidb-backup-x26-restore-overview}
@@ -93,7 +93,7 @@ TiDB BR は次の機能を提供します。
 #### パフォーマンスの復元と TiDB クラスターへの影響 {#restore-performance-and-impact-on-tidb-clusters}
 
 -   データの復元はスケーラブルな速度で実行されます。通常、速度は TiKV ノードあたり 100 MiB/秒です。 `br`新しいクラスターへのデータの復元のみをサポートし、ターゲット クラスターのリソースを可能な限り使用します。詳細については、 [パフォーマンスと影響を復元する](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-restore)を参照してください。
--   各 TiKV ノードでは、PITR は 30 GiB/h でログ データを復元できます。詳細については、 [PITR のパフォーマンスと影響](/br/br-pitr-guide.md#performance-and-impact-of-pitr)を参照してください。
+-   各 TiKV ノードでは、PITR は 30 GiB/h でログ データを復元できます。詳細については、 [PITR のパフォーマンスと影響](/br/br-pitr-guide.md#performance-capabilities-of-pitr)を参照してください。
 
 ## バックアップstorage {#backup-storage}
 

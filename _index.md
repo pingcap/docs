@@ -2,6 +2,7 @@
 title: TiDB Introduction
 hide_sidebar: true
 hide_commit: true
+summary: TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. The guide provides information on features, TiFlash, development, deployment, migration, maintenance, monitoring, tuning, tools, and references. It covers everything from quick start to advanced configurations and tools for TiDB.
 ---
 
 <LearningPathContainer platform="tidb" title="TiDB" subTitle="TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. Find the guide, samples, and references you need to use TiDB.">
@@ -96,7 +97,7 @@ hide_commit: true
 
 [OLTP パフォーマンスを調整する](https://docs.pingcap.com/tidb/v7.5/performance-tuning-practices)
 
-[オペレーティング システムの調整](https://docs.pingcap.com/tidb/v7.5/tune-operating-system)
+[オペレーティング システムを調整する](https://docs.pingcap.com/tidb/v7.5/tune-operating-system)
 
 [構成を調整する](https://docs.pingcap.com/tidb/v7.5/configure-memory-usage)
 

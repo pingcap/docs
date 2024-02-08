@@ -1,5 +1,6 @@
 ---
 title: TiDB 3.0.0 Beta.1 Release Notes
+summary: TiDB 3.0.0 Beta.1 was released on March 26, 2019, with improved stability, usability, features, SQL optimizer, statistics, and execution engine. The release includes support for various SQL functions, privilege management, server enhancements, DDL improvements, and PD and TiKV optimizations. Tools like TiDB Binlog, Lightning, and data replication comparison tool have also been updated with new features and improvements.
 ---
 
 # TiDB 3.0.0 ベータ.1 リリースノート {#tidb-3-0-0-beta-1-release-notes}
@@ -66,15 +67,15 @@ TiDB Ansible バージョン: 3.0.0-beta.1
     -   実際のデータ量と統計に基づく推定データ量の差を記録する監視項目`high_error_rate_feedback_total`を追加[#9209](https://github.com/pingcap/tidb/pull/9209)
     -   データベース ディメンションに QPS 監視項目を追加します。これは、構成項目[#9151](https://github.com/pingcap/tidb/pull/9151)を使用して有効にできます。
 -   DDL
-    -   `ddl_error_count_limit`グローバル変数 (デフォルトでは「512」) を追加して、DDL タスクの再試行数を制限します (この数が制限を超えると、DDL タスクはキャンセルされます) [#9295](https://github.com/pingcap/tidb/pull/9295)
-    -   ALTER Algorithm `INPLACE` / `INSTANT` [#8811](https://github.com/pingcap/tidb/pull/8811)をサポート
+    -   `ddl_error_count_limit`グローバル変数 (デフォルトでは「512」) を追加して、DDL タスクの再試行回数を制限します (この回数が制限を超えると、DDL タスクはキャンセルされます) [#9295](https://github.com/pingcap/tidb/pull/9295)
+    -   ALTER アルゴリズム`INPLACE` / `INSTANT` [#8811](https://github.com/pingcap/tidb/pull/8811)をサポート
     -   `SHOW CREATE VIEW`ステートメント[#9309](https://github.com/pingcap/tidb/pull/9309)をサポートします
     -   `SHOW CREATE USER`ステートメント[#9240](https://github.com/pingcap/tidb/pull/9240)をサポートします
 
 ## PD {#pd}
 
 -   [ログ形式](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md)統合してツールによる収集と分析を容易にする
--   シミュレータ
+-   シミュレーター
     -   異なるストアで異なるハートビート間隔をサポート[#1418](https://github.com/pingcap/pd/pull/1418)
     -   データのインポートに関するケースを追加[#1263](https://github.com/pingcap/pd/pull/1263)
 -   ホットスポットのスケジュールを構成可能にする[#1412](https://github.com/pingcap/pd/pull/1412)

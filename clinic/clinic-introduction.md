@@ -1,6 +1,6 @@
 ---
 title: PingCAP Clinic Overview
-summary: Learn about the PingCAP Clinic Diagnostic Service (PingCAP Clinic), including tool components, user scenarios, and implementation principles.
+summary: PingCAP Clinic is a diagnostic service for TiDB clusters deployed using TiUP or TiDB Operator. It helps troubleshoot cluster problems remotely, ensures stable operation, and provides quick cluster status checks. The service includes Diag client for data collection and Clinic Server for online diagnostic reports. Users can troubleshoot problems remotely and quickly check cluster status. Diag collects diagnostic data through various methods, and Clinic Server has limitations on clusters, storage, and data size. The service is free until July 14, 2024. Next steps include using PingCAP Clinic in different environments.
 ---
 
 # PingCAPクリニックの概要 {#pingcap-clinic-overview}
@@ -28,7 +28,7 @@ PingCAPクリニック は、クラスターの問題を診断するために次
 
 -   クラスターの問題をリモートでトラブルシューティングする
 
-    クラスターにすぐに修正できない問題がある場合は、PingCAP またはコミュニティから[支持を得ます](/support.md)できます。リモート アシスタンスについてテクニカル サポートに連絡する場合は、クラスターからさまざまな診断データを保存し、そのデータをサポート スタッフに転送する必要があります。この場合、Diag を使用すると、ワンクリックで診断データを収集できます。 Diag を使用すると、完全な診断データを迅速に収集できるため、複雑な手動データ収集操作を回避できます。データを収集した後、PingCAP テクニカル サポート スタッフがクラスターの問題をトラブルシューティングできるように、そのデータをクリニック サーバーにアップロードできます。 Clinic Server は、アップロードされた診断データ用の安全なstorageを提供し、オンライン診断をサポートするため、トラブルシューティングの効率が大幅に向上します。
+    クラスターにすぐに修正できない問題がある場合は、PingCAP またはコミュニティから[支持を得ます](/support.md)できます。リモート アシスタンスについてテクニカル サポートに問い合わせる場合は、クラスターからさまざまな診断データを保存し、そのデータをサポート スタッフに転送する必要があります。この場合、Diag を使用すると、ワンクリックで診断データを収集できます。 Diag を使用すると、完全な診断データを迅速に収集できるため、複雑な手動データ収集操作を回避できます。データを収集した後、PingCAP テクニカル サポート スタッフがクラスターの問題をトラブルシューティングできるように、そのデータをクリニック サーバーにアップロードできます。 Clinic Server は、アップロードされた診断データ用の安全なstorageを提供し、オンライン診断をサポートするため、トラブルシューティングの効率が大幅に向上します。
 
 -   クラスターのステータスをすばやく確認する
 

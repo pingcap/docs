@@ -1,5 +1,6 @@
 ---
 title: TiDB 3.0.0-rc.3 Release Notes
+summary: TiDB 3.0.0-rc.3 was released on June 21, 2019, with improvements in stability, usability, features, SQL optimizer, statistics, and execution engine. Fixes and new features were added to TiDB, PD, TiKV, and TiDB Ansible. Notable improvements include automatic loading statistics, manual splitting of table and index regions, and support for pessimistic transactions in TiKV.
 ---
 
 # TiDB 3.0.0-rc.3 リリースノート {#tidb-3-0-0-rc-3-release-notes}
@@ -81,7 +82,7 @@ TiDB Ansible バージョン: 3.0.0-rc.3
     -   リーダーの移動および`conf` [#4734](https://github.com/tikv/tikv/pull/4734)の変更時にリクエスト遅延が増加する場合がある問題を修正
     -   古いコマンドが誤って報告される問題を修正[#4682](https://github.com/tikv/tikv/pull/4682)
     -   コマンドが長時間保留される可能性がある問題を修正[#4810](https://github.com/tikv/tikv/pull/4810)
-    -   スナップショット ファイルのディスク[#4807](https://github.com/tikv/tikv/pull/4807)への同期の遅延が原因で、停電後にファイルが破損する問題を修正します[#4850](https://github.com/tikv/tikv/pull/4850)
+    -   スナップショット ファイルとディスク[#4807](https://github.com/tikv/tikv/pull/4807)の同期の遅延が原因で、停電後にファイルが破損する問題を修正します[#4850](https://github.com/tikv/tikv/pull/4850)
 
 -   コプロセッサー
     -   ベクトル計算で上位 N をサポート[#4827](https://github.com/tikv/tikv/pull/4827)

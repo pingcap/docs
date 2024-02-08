@@ -1,6 +1,6 @@
 ---
 title: TiDB Log Backup and PITR Guide
-summary: Learns about how to perform log backup and PITR in TiDB.
+summary: TiDB Log Backup and PITR Guide explains how to back up and restore data using the br command-line tool. It includes instructions for starting log backup, running full backup regularly, and cleaning up outdated data. The guide also provides information on running PITR and the performance capabilities of PITR.
 ---
 
 # TiDB ログのバックアップと PITR ガイド {#tidb-log-backup-and-pitr-guide}
@@ -22,7 +22,7 @@ br コマンドライン ツール (以下`br`とします) を使用してデ�
 
 ```shell
 tiup br log start --task-name=pitr --pd "${PD_IP}:2379" \
---storage 's3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+--storage 's3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
 ```
 
 ログ バックアップ タスクが開始されると、手動で停止するまで TiDB クラスターのバックグラウンドで実行されます。このプロセス中、TiDB 変更ログは、指定されたstorageに小さなバッチで定期的にバックアップされます。ログ バックアップ タスクのステータスをクエリするには、次のコマンドを実行します。
@@ -49,7 +49,7 @@ tiup br log status --task-name=pitr --pd "${PD_IP}:2379"
 
 ```shell
 tiup br backup full --pd "${PD_IP}:2379" \
---storage 's3://backup-101/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+--storage 's3://backup-101/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}'
 ```
 
 ## PITRを実行する {#run-pitr}
@@ -58,8 +58,8 @@ tiup br backup full --pd "${PD_IP}:2379" \
 
 ```shell
 br restore point --pd "${PD_IP}:2379" \
---storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"' \
---full-backup-storage='s3://backup-101/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}"' \
+--storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}' \
+--full-backup-storage='s3://backup-101/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}' \
 --restored-ts '2022-05-15 18:00:00+0800'
 ```
 
@@ -92,7 +92,7 @@ PITR を実行するには、復元ポイントの前に完全バックアップ
 3.  スナップショット バックアップよりも前のログ バックアップ データを削除します`FULL_BACKUP_TS` :
 
     ```shell
-    tiup br log truncate --until=${FULL_BACKUP_TS} --storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+    tiup br log truncate --until=${FULL_BACKUP_TS} --storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
     ```
 
 4.  スナップショット バックアップより前のスナップショット データを削除します`FULL_BACKUP_TS` :
@@ -101,9 +101,7 @@ PITR を実行するには、復元ポイントの前に完全バックアップ
     rm -rf s3://backup-101/snapshot-${date}
     ```
 
-## PITRのパフォーマンスと影響 {#performance-and-impact-of-pitr}
-
-### 能力 {#capabilities}
+## PITRのパフォーマンス機能 {#performance-capabilities-of-pitr}
 
 -   各 TiKV ノードでは、PITR は 280 GB/h の速度でスナップショット データを復元し、30 GB/h のログ データを復元できます。
 -   BR は、古いログ バックアップ データを 600 GB/h の速度で削除します。
@@ -117,16 +115,16 @@ PITR を実行するには、復元ポイントの前に完全バックアップ
 >
 > スナップショットのデータ サイズは、復元されたデータの実際の量ではなく、単一レプリカ内のすべての KV の論理サイズを指します。 BR は、クラスターに構成されたレプリカの数に従って、すべてのレプリカを復元します。レプリカが多ければ多いほど、実際に復元できるデータも多くなります。テスト内のすべてのクラスターのデフォルトのレプリカ番号は 3 です。全体的な復元パフォーマンスを向上させるために、TiKV 構成ファイルの[`import.num-threads`](/tikv-configuration-file.md#import)項目とBRコマンドの[`concurrency`](/br/use-br-command-line-tool.md#common-options)オプションを変更できます。
 
-テストシナリオ 1 ( [TiDB Cloud](https://tidbcloud.com)上):
+テスト シナリオ 1 (on [TiDB Cloud](https://tidbcloud.com) ) は次のとおりです。
 
 -   TiKV ノード数 (8 コア、16 GBメモリ): 21
 -   TiKV構成項目`import.num-threads` ：8
 -   BRコマンドオプション`concurrency` ：128
--   リージョンの数: 183,000
+-   リージョン数: 183,000
 -   クラスター内に作成される新しいログ データ: 10 GB/h
 -   書き込み (挿入/更新/削除) QPS: 10,000
 
-テスト シナリオ 2 (TiDB セルフホスト上):
+テスト シナリオ 2 (TiDB セルフホスト上) は次のとおりです。
 
 -   TiKV ノード数 (8 コア、64 GBメモリ): 6
 -   TiKV構成項目`import.num-threads` ：8

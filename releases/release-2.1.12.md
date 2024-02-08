@@ -1,5 +1,6 @@
 ---
 title: TiDB 2.1.12 Release Notes
+summary: TiDB 2.1.12 was released on June 13, 2019. It includes various bug fixes and improvements, such as fixing issues with data type mismatches, charset altering, and GRANT operations. The release also improves compatibility with MySQL and addresses issues with functions, data conversion, and error reporting. Additionally, PD and TiKV have also been updated to fix issues related to leader election and data availability during leader transfer and power failure.
 ---
 
 # TiDB 2.1.12 リリースノート {#tidb-2-1-12-release-notes}
@@ -29,7 +30,7 @@ TiDB Ansible バージョン: 2.1.12
 -   場合によっては、符号なしヒストグラムが符号付き範囲と一致する問題を修正します[#10695](https://github.com/pingcap/tidb/pull/10695)
 -   統計フィードバックが bigint の署名なし主キー[#10307](https://github.com/pingcap/tidb/pull/10307)に一致する場合、データの読み取りに関するエラーが誤って報告される問題を修正します。
 -   パーティションテーブルの`Show Create Table`の結果が正しく表示されない場合がある問題を修正[#10690](https://github.com/pingcap/tidb/pull/10690)
--   一部の相関サブクエリ[#10670](https://github.com/pingcap/tidb/pull/10670)において、 `GROUP_CONCAT`集計関数の計算結果が正しくない問題を修正
+-   一部の相関サブクエリで`GROUP_CONCAT`集計関数の計算結果が正しくない問題を修正[#10670](https://github.com/pingcap/tidb/pull/10670)
 -   スロークエリのメモリテーブルがスロークエリログを解析すると、結果が誤って表示される場合がある問題を修正[#10776](https://github.com/pingcap/tidb/pull/10776)
 
 ## PD {#pd}

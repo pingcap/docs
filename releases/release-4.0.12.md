@@ -1,5 +1,6 @@
 ---
 title: TiDB 4.0.12 Release Notes
+summary: TiDB 4.0.12 was released on April 2, 2021. New features include tools to check the status of `tiflash replica` for online rolling updates. Improvements were made to TiDB, TiKV, PD, TiFlash, and various tools. Bug fixes were also implemented for TiDB, TiKV, PD, TiFlash, TiCDC, Backup & Restore, and TiDB Lightning.
 ---
 
 # TiDB 4.0.12 リリースノート {#tidb-4-0-12-release-notes}
@@ -28,7 +29,7 @@ TiDB バージョン: 4.0.12
     -   `pre-split`オプション[#22872](https://github.com/pingcap/tidb/pull/22872)を使用せずに切り捨てられたテーブルを分散する
     -   `str_to_date`式[#22812](https://github.com/pingcap/tidb/pull/22812)に 3 つの書式指定子を追加します。
     -   `PREPARE`実行失敗をメトリック モニター[#22672](https://github.com/pingcap/tidb/pull/22672)に`Failed Query OPM`として記録します。
-    -   `tidb_snapshot`が[#22641](https://github.com/pingcap/tidb/pull/22641)に設定されている場合、 `PREPARE`の実行でエラーを報告しません。
+    -   `tidb_snapshot`が[#22641](https://github.com/pingcap/tidb/pull/22641)に設定されている場合、 `PREPARE`実行でエラーを報告しません。
 
 -   TiKV
 

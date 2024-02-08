@@ -71,6 +71,8 @@ cd tidb-java-springboot-jpa-quickstart
 
     -   **エンドポイント タイプは**`Public`に設定されます
 
+    -   **ブランチは**`main`に設定されています
+
     -   **[接続先] は**`General`に設定されています
 
     -   **オペレーティング システムが**環境に一致します。
@@ -79,7 +81,7 @@ cd tidb-java-springboot-jpa-quickstart
     >
     > プログラムが Windows Subsystem for Linux (WSL) で実行されている場合は、対応する Linux ディストリビューションに切り替えます。
 
-4.  **「パスワードの作成」**をクリックしてランダムなパスワードを作成します。
+4.  **「パスワードの生成」**をクリックして、ランダムなパスワードを作成します。
 
     > **ヒント：**
     >
@@ -256,16 +258,14 @@ playerRepository.deleteById(id);
 
 ## 次のステップ {#next-steps}
 
--   Hibernate の詳しい使い方を[Hibernate のドキュメント](https://hibernate.org/orm/documentation)から学びましょう。
-
--   このドキュメントで使用されているサードパーティのライブラリとフレームワークの使用方法の詳細については、その公式ドキュメントを参照してください。
+-   このドキュメントで使用されているサードパーティのライブラリとフレームワークの使用方法の詳細については、公式ドキュメントを参照してください。
 
     -   [Spring Frameworkのドキュメント](https://spring.io/projects/spring-framework)
     -   [Spring Boot のドキュメント](https://spring.io/projects/spring-boot)
     -   [Spring Data JPAのドキュメント](https://spring.io/projects/spring-data-jpa)
     -   [Hibernate のドキュメント](https://hibernate.org/orm/documentation)
 
--   TiDB アプリケーション開発の[SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)プラクティスについて[取引](/develop/dev-guide-transaction-overview.md) 、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[データの削除](/develop/dev-guide-delete-data.md) [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ください。
+-   TiDB アプリケーション開発[単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ベスト プラクティスについて[取引](/develop/dev-guide-transaction-overview.md) 、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[データの削除](/develop/dev-guide-delete-data.md) [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)ください。
 
 -   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 

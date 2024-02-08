@@ -1,5 +1,6 @@
 ---
 title: TiDB 4.0.2 Release Notes
+summary: TiDB 4.0.2 was released on July 1, 2020. The new version includes compatibility changes, new features, improvements, bug fixes, and new changes. Some highlights include support for new aggregate functions, improvements in query latency, and bug fixes related to execution plan, runtime errors, and data replication. Additionally, there are new features and improvements in TiKV, PD, TiFlash, and Tools.
 ---
 
 # TiDB 4.0.2 リリースノート {#tidb-4-0-2-release-notes}
@@ -40,7 +41,7 @@ TiDB バージョン: 4.0.2
     -   サーバー[#17695](https://github.com/pingcap/tidb/pull/17695)のステータス アドレスを示すために、テーブル`INFORMATION_SCHEMA.INSPECTION_RESULT`に`STATUS_ADDRESS`列を追加します。
     -   `MYSQL.BIND_INFO`テーブルに`SOURCE`列を追加して、バインディングの作成方法を示します[#17587](https://github.com/pingcap/tidb/pull/17587)
     -   `PERFORMANCE_SCHEMA.EVENTS_STATEMENTS_SUMMARY_BY_DIGEST`テーブルに`PLAN_IN_CACHE`と`PLAN_CACHE_HITS`列を追加して、SQL ステートメントのプラン キャッシュの使用量を示します[#17493](https://github.com/pingcap/tidb/pull/17493)
-    -   各オペレーターの実行情報を収集し、スロークエリログに情報を記録するかどうかを制御するための`enable-collect-execution-info`構成アイテムと`tidb_enable_collect_execution_info`セッション変数を追加します[#18073](https://github.com/pingcap/tidb/pull/18073) [#18072](https://github.com/pingcap/tidb/pull/18072)
+    -   各オペレーターの実行情報を収集し、スロークエリログに情報を記録するかどうかを制御するために、 `enable-collect-execution-info`構成アイテムと`tidb_enable_collect_execution_info`セッション変数を追加します[#18073](https://github.com/pingcap/tidb/pull/18073) [#18072](https://github.com/pingcap/tidb/pull/18072)
     -   `tidb_slow_log_masking`グローバル変数を追加して、低速クエリ ログ[#17694](https://github.com/pingcap/tidb/pull/17694)のクエリを鈍感にするかどうかを制御します。
     -   `INFORMATION_SCHEMA.INSPECTION_RESULT`テーブルに`storage.block-cache.capacity` TiKV 構成項目[#17671](https://github.com/pingcap/tidb/pull/17671)の診断ルールを追加します。
     -   データをバックアップおよび復元するために`BACKUP`および`RESTORE` SQL ステートメントを追加します[#15274](https://github.com/pingcap/tidb/pull/15274)

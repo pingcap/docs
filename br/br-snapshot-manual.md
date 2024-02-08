@@ -1,6 +1,6 @@
 ---
 title: TiDB Snapshot Backup and Restore Command Manual
-summary: Learn about the commands of TiDB snapshot backup and restore.
+summary: TiDB Snapshot Backup and Restore Command Manual describes commands for backing up and restoring cluster snapshots, databases, and tables. It also covers encrypting backup data and restoring encrypted snapshots. The BR tool supports self-adapting to GC and introduces the --ignore-stats parameter for backing up and restoring statistics. It also supports encrypting backup data and restoring partial data of specified databases or tables.
 ---
 
 # TiDB スナップショットのバックアップおよび復元コマンド マニュアル {#tidb-snapshot-backup-and-restore-command-manual}
@@ -50,7 +50,7 @@ br backup full \
 >
 > BRツールはすでに GC への自己適応をサポートしています。 PD の`safePoint`に`backupTS` (デフォルトでは最新の PD タイムスタンプ) を自動的に登録して、バックアップ中に TiDB の GC セーフ ポイントが先に進まないようにし、GC 構成を手動で設定する必要がなくなります。
 
-バックアップ中、以下に示すように、ターミナルに進行状況バーが表示されます。進行状況バーが 100% まで進むと、バックアップは完了です。
+バックアップ中、以下に示すように、進行状況バーがターミナルに表示されます。進行状況バーが 100% まで進むと、バックアップは完了です。
 
 ```shell
 Full Backup <---------/................................................> 17.12%.

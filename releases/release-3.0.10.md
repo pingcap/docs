@@ -1,5 +1,6 @@
 ---
 title: TiDB 3.0.10 Release Notes
+summary: TiDB 3.0.10 was released on February 20, 2020. It includes various bug fixes and improvements for TiDB, TiKV, PD, and TiDB Ansible. Some notable fixes include wrong Join results, data visibility issues, and system panic problems. TiDB Ansible also added new monitoring items to the dashboard. The release notes recommend using the latest 3.0.x version due to known issues in this release.
 ---
 
 # TiDB 3.0.10 リリースノート {#tidb-3-0-10-release-notes}
@@ -41,7 +42,7 @@ TiDB Ansible バージョン: 3.0.10
 -   ユーザーのログイン失敗を監査ログに記録します[#14620](https://github.com/pingcap/tidb/pull/14620)
 -   悲観的トランザクションのロックキー数を監視する監視項目`tidb_session_ statement_lock_keys_count`を追加[#14634](https://github.com/pingcap/tidb/pull/14634)
 -   JSON 内の`&` 、 `<` 、 `>`などの文字が誤ってエスケープされる問題を修正[#14637](https://github.com/pingcap/tidb/pull/14637)
--   `HashJoin`オペレーションがハッシュ テーブル[#14642](https://github.com/pingcap/tidb/pull/14642)を構築しているときに過剰なメモリ使用量が原因で発生するシステムpanicの問題を修正します。
+-   `HashJoin`操作でハッシュ テーブル[#14642](https://github.com/pingcap/tidb/pull/14642)を構築するときに過剰なメモリ使用量が原因で発生するシステム パニックの問題を修正します。
 -   SQL バインディングが不正なレコードを処理するときに、不正な処理ロジックによって引き起こされるpanicの問題を修正します[#14645](https://github.com/pingcap/tidb/pull/14645)
 -   小数点以下の除算計算[#14673](https://github.com/pingcap/tidb/pull/14673)に切り捨てエラー検出を追加することで、MySQL の非互換性の問題を解決しました。
 -   存在しないテーブルに対するユーザー権限が正常に付与される問題を修正します[#14611](https://github.com/pingcap/tidb/pull/14611)

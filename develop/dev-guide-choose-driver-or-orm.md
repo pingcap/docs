@@ -29,9 +29,10 @@ TiDB は MySQL プロトコルと高い互換性がありますが、一部の�
 
 [MySQL ドキュメント](https://dev.mysql.com/doc/connector-j/en/)に従って、 Java JDBC ドライバーをダウンロードして構成できます。 TiDB v6.3.0 以降では MySQL Connector/J 8.0.33 以降を使用することをお勧めします。
 
-> **ヒント：**
+> **注記：**
 >
-> 8.0.32 より前の Connector/J 8.0 バージョンには[バグ](https://bugs.mysql.com/bug.php?id=106252)あり、v6.3.0 より前の TiDB バージョンを使用するとスレッドがハングする可能性があります。この問題を回避するには、MySQL Connector/J 8.0.32 以降のバージョン、または TiDB JDBC ( *「TiDB-JDBC」*タブを参照) を使用することをお勧めします。
+> -   8.0.32 より前の Connector/J 8.0 バージョンには[バグ](https://bugs.mysql.com/bug.php?id=106252)あり、v6.3.0 より前の TiDB バージョンを使用するとスレッドがハングする可能性があります。この問題を回避するには、MySQL Connector/J 8.0.32 以降のバージョン、または TiDB JDBC ( *「TiDB-JDBC」*タブを参照) を使用することをお勧めします。
+> -   TiDB v7.5.0 で MySQL Connector/J 8.0 を使用している場合は、TiDB 構成項目を[`server-version`](https://docs.pingcap.com/tidb/v7.5/tidb-configuration-file#server-version)から`"5.7.25-TiDB-v7.5.0"`に設定することをお勧めします。 TiDBサーバーがMySQL 8.0.11 以降のバージョンを報告すると、MySQL Connector/J は`information_schema.KEYWORDS`テーブルへのアクセスを試みます。ただし、このテーブルは TiDB v7.5.0 には存在しません。
 
 完全なアプリケーションを構築する方法の例については、 [TiDB と JDBC を使用してシンプルな CRUD アプリを構築する](/develop/dev-guide-sample-application-java-jdbc.md)を参照してください。
 
@@ -245,7 +246,7 @@ GORM を使用して TiDB アプリケーションを構築する例について
 
 サポートレベル:**互換性あり**
 
-[PyMySQL ドキュメント](https://pypi.org/project/PyMySQL/)に従ってドライバーをダウンロードして設定できます。 PyMySQL 1.0.2 以降のバージョンを使用することをお勧めします。
+[PyMySQL ドキュメント](https://pypi.org/project/PyMySQL/)に従ってドライバーをダウンロードして構成できます。 PyMySQL 1.0.2 以降のバージョンを使用することをお勧めします。
 
 PyMySQL を使用して TiDB アプリケーションを構築する例については、 [PyMySQL を使用して TiDB に接続する](/develop/dev-guide-sample-application-python-pymysql.md)を参照してください。
 

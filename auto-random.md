@@ -127,6 +127,10 @@ SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
+## IDの暗黙的な割り当てルール {#implicit-allocation-rules-of-ids}
+
+TiDB は、 `AUTO_INCREMENT`列と同様に`AUTO_RANDOM`列に値を暗黙的に割り当てます。これらは、セッションレベルのシステム変数[`auto_increment_increment`](/system-variables.md#auto_increment_increment)および[`auto_increment_offset`](/system-variables.md#auto_increment_offset)によっても制御されます。暗黙的に割り当てられた値の自動インクリメント ビット (ID) は、式`(ID - auto_increment_offset) % auto_increment_increment == 0`に準拠します。
+
 ## 制限 {#restrictions}
 
 `AUTO_RANDOM`を使用する場合は、次の制限事項に注意してください。

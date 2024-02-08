@@ -1,5 +1,6 @@
 ---
 title: TiDB 2.1 RC3 Release Notes
+summary: TiDB 2.1 RC3 was released on September 29, 2018, with improvements in stability, compatibility, SQL optimizer, and execution engine. The release includes fixes and enhancements for SQL optimizer, execution engine, server, compatibility, expressions, DML, DDL, and PD. TiKV also received performance optimizations, new features, and bug fixes.
 ---
 
 # TiDB 2.1 RC3 リリースノート {#tidb-2-1-rc3-release-notes}
@@ -9,7 +10,7 @@ title: TiDB 2.1 RC3 Release Notes
 ## TiDB {#tidb}
 
 -   SQLオプティマイザー
-    -   ステートメントに埋め込み`LEFT OUTER JOIN` [#7689](https://github.com/pingcap/tidb/pull/7689)が含まれている場合の誤った結果の問題を修正
+    -   ステートメントに埋め込み`LEFT OUTER JOIN` [#7689](https://github.com/pingcap/tidb/pull/7689)が含まれる場合の誤った結果の問題を修正
     -   `JOIN`ステートメントの述語プッシュダウンの最適化ルールを強化[#7645](https://github.com/pingcap/tidb/pull/7645)
     -   `UnionScan`演算子[#7695](https://github.com/pingcap/tidb/pull/7695)の述語プッシュダウンの最適化ルールを修正
     -   `Union`演算子の固有キー プロパティが正しく設定されない問題を修正[#7680](https://github.com/pingcap/tidb/pull/7680)

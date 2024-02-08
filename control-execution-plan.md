@@ -1,5 +1,6 @@
 ---
 title: Control Execution Plan
+summary: This chapter introduces methods to control the generation of execution plans in TiDB. It includes using hints, SQL plan management, and the blocklist of optimization rules. Additionally, system variables and the `tidb_opt_fix_control` variable can be modified to control the execution plan. These methods help prevent performance regression caused by behavior changes in the optimizer after cluster upgrades.
 ---
 
 # 制御実行計画 {#control-execution-plan}
@@ -12,12 +13,12 @@ SQL チューニングの最初の 2 章では、TiDB の実行計画を理解�
 
 <CustomContent platform="tidb">
 
-前述の方法に加えて、実行計画はいくつかのシステム変数にも影響されます。これらの変数をシステム レベルまたはセッション レベルで変更することにより、実行計画の生成を制御できます。 v7.1.0 以降、TiDB は比較的特殊な変数[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v710)を導入します。この変数は複数の制御項目を受け入れて、よりきめ細かい方法でオプティマイザーの動作を制御し、クラスターのアップグレード後のオプティマイザーの動作変更によって引き起こされるパフォーマンスの低下を防ぐことができます。より詳細な紹介については、 [オプティマイザー修正コントロール](/optimizer-fix-controls.md)を参照してください。
+前述の方法に加えて、実行計画はいくつかのシステム変数にも影響されます。これらの変数をシステム レベルまたはセッション レベルで変更することにより、実行計画の生成を制御できます。 v6.5.3 および v7.1.0 以降、TiDB は比較的特殊な変数[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)を導入します。この変数は複数の制御項目を受け入れて、よりきめ細かい方法でオプティマイザーの動作を制御し、クラスターのアップグレード後のオプティマイザーの動作変更によって引き起こされるパフォーマンスの低下を防ぐことができます。より詳細な紹介については、 [オプティマイザー修正コントロール](/optimizer-fix-controls.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-前述の方法に加えて、実行計画はいくつかのシステム変数にも影響されます。これらの変数をシステム レベルまたはセッション レベルで変更することにより、実行計画の生成を制御できます。 v7.1.0 以降、TiDB は比較的特殊な変数[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v710)を導入します。この変数は複数の制御項目を受け入れて、よりきめ細かい方法でオプティマイザーの動作を制御し、クラスターのアップグレード後のオプティマイザーの動作変更によって引き起こされるパフォーマンスの低下を防ぐことができます。より詳細な紹介については、 [オプティマイザー修正コントロール](https://docs.pingcap.com/tidb/v7.2/optimizer-fix-controls)を参照してください。
+前述の方法に加えて、実行計画はいくつかのシステム変数にも影響されます。これらの変数をシステム レベルまたはセッション レベルで変更することにより、実行計画の生成を制御できます。 v6.5.3 および v7.1.0 以降、TiDB は比較的特殊な変数[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)を導入します。この変数は複数の制御項目を受け入れて、よりきめ細かい方法でオプティマイザーの動作を制御し、クラスターのアップグレード後のオプティマイザーの動作変更によって引き起こされるパフォーマンスの低下を防ぐことができます。より詳細な紹介については、 [オプティマイザー修正コントロール](https://docs.pingcap.com/tidb/v7.2/optimizer-fix-controls)を参照してください。
 
 </CustomContent>

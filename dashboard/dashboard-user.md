@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard User Management
-summary: Learn how to create SQL users to access TiDB Dashboard.
+summary: TiDB Dashboard uses the same user privilege system as TiDB. SQL users need specific privileges to access the dashboard, including PROCESS, SHOW DATABASES, CONFIG, DASHBOARD_CLIENT, and more. It's recommended to create users with only the required privileges to prevent unintended operations. Users with high privileges can also sign in. To create a least-privileged SQL user, grant the necessary privileges and use role-based access control (RBAC) if needed.
 ---
 
 # TiDB ダッシュボードのユーザー管理 {#tidb-dashboard-user-management}
@@ -94,7 +94,7 @@ SQL ユーザーが前述の権限要件を満たしていない場合、以下�
     GRANT SHOW DATABASES ON *.* TO 'dashboard_access'@'%';
     GRANT DASHBOARD_CLIENT ON *.* TO 'dashboard_access'@'%';
     GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboard_access'@'%';
-    GRANT SUPER ON *.* TO 'dashboardAdmin'@'%';    
+    GRANT SUPER ON *.* TO 'dashboardAdmin'@'%';
     ```
 
 2.  `dashboard_access`ロールを他のユーザーに付与し、 `dashboard_access`デフォルトのロールとして設定します。

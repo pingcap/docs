@@ -1,11 +1,11 @@
 ---
 title: Backup Auto-Tune
-summary: Learn about the auto-tune feature of TiDB backup and restore, which automatically limits the resources used by backups to reduce the impact on the cluster in case of high cluster resource usage.
+summary: TiDB v5.4.0 introduces the auto-tune feature for backup tasks, which is enabled by default. It limits the resources used by backup tasks to reduce their impact on the cluster. You can enable or disable the feature dynamically without restarting the cluster. However, auto-tune may not completely remove the impact of backup on the cluster due to limitations. Adjusting the number of threads used by backup tasks can help mitigate the impact in certain scenarios.
 ---
 
 # バックアップ自動調整<span class="version-mark">v5.4.0 の新機能</span> {#backup-auto-tune-span-class-version-mark-new-in-v5-4-0-span}
 
-TiDB v5.4.0 より前では、バックアップと復元 (BR) を使用してデータをバックアップする場合、バックアップに使用されるスレッドの数は論理 CPU コアの 75% を占めていました。速度制限がないと、バックアップ プロセスで大量のクラスター リソースが消費される可能性があり、オンライン クラスターのパフォーマンスに大きな影響を与えます。スレッド プールのサイズを調整することでバックアップの影響を軽減できますが、CPU 負荷を観察してスレッド プール サイズを手動で調整するのは面倒な作業です。
+TiDB v5.4.0 より前では、バックアップ &amp; リストア (BR) を使用してデータをバックアップする場合、バックアップに使用されるスレッドの数は論理 CPU コアの 75% を占めていました。速度制限がないと、バックアップ プロセスで大量のクラスター リソースが消費される可能性があり、オンライン クラスターのパフォーマンスに大きな影響を与えます。スレッド プールのサイズを調整することでバックアップの影響を軽減できますが、CPU 負荷を観察してスレッド プール サイズを手動で調整するのは面倒な作業です。
 
 クラスターに対するバックアップ タスクの影響を軽減するために、TiDB v5.4.0 では自動調整機能が導入されており、これはデフォルトで有効になっています。クラスターのリソース使用率が高い場合、 BR はバックアップ タスクで使用されるリソースを自動的に制限し、クラスターへの影響を軽減します。自動調整機能はデフォルトで有効になっています。
 
@@ -80,4 +80,4 @@ tikv-ctl modify-tikv-config -n backup.enable-auto-tune -v <true|false>
 
 ![Grafana dashboard example of backup auto-tune metrics](/media/br/br-auto-throttle.png)
 
-上の画像では、黄色の半透明の領域はバックアップ タスクに使用できるスレッドを表しています。バックアップ タスクの CPU 使用率が黄色の領域を超えていないことがわかります。
+上の画像では、黄色の半透明の領域は、バックアップ タスクに使用できるスレッドを表しています。バックアップ タスクの CPU 使用率が黄色の領域を超えていないことがわかります。

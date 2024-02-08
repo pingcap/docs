@@ -1,6 +1,6 @@
 ---
 title: TiDB Log Backup and PITR Command Manual
-summary: Learn about the commands of TiDB log backup and point-in-time recovery.
+summary: TiDB Log Backup and PITR Command Manual describes commands for log backup and point-in-time recovery. Use `br log` command to start, pause, resume, stop, truncate, and query log backup tasks. Specify parameters like `start-ts`, `task-name`, `--storage`, and `--pd` for log backup. Use `br log metadata` to view backup metadata and `br restore point` for PITR. Be cautious when pausing and resuming backup tasks.
 ---
 
 # TiDB ログ バックアップと PITR コマンド マニュアル {#tidb-log-backup-and-pitr-command-manual}
@@ -368,7 +368,7 @@ Global Flags:
 
 出力例には、共通パラメータのみが示されています。これらのパラメータは次のように説明されます。
 
--   `--full-backup-storage` : スナップショット (フル) バックアップのstorageアドレス。 PITR を使用するには、このパラメータを指定し、復元タイムスタンプより前の最新のスナップショット バックアップを選択します。ログバックアップデータのみをリストアする場合は、このパラメータを省略できます。現在、 BR はログ バックアップ用のstorageとして Amazon S3、GCS、または Azure Blob Storage をサポートしています。詳細は[外部ストレージ サービスの URI 形式](/external-storage-uri.md)を参照してください。
+-   `--full-backup-storage` : スナップショット (フル) バックアップのstorageアドレス。 PITR を使用するには、このパラメータを指定し、復元タイムスタンプより前の最新のスナップショット バックアップを選択します。ログバックアップデータのみをリストアする場合は、このパラメータを省略できます。回復クラスターを初めて初期化するときは、スナップショット バックアップを指定する必要があることに注意してください。現在、 BR はログ バックアップ用のstorageとして Amazon S3、GCS、Azure Blob Storage をサポートしています。詳細は[外部ストレージ サービスの URI 形式](/external-storage-uri.md)を参照してください。
 -   `--restored-ts` : データを復元するタイムスタンプ。このパラメータが指定されていない場合、 BR はログ バックアップで使用可能な最新のタイムスタンプ、つまりバックアップ データのチェックポイントにデータを復元します。
 -   `--start-ts` : ログ バックアップ データを復元する開始タイムスタンプ。ログ バックアップ データのみを復元する必要がある場合は、このパラメータを指定する必要があります。
 -   `--pd` : 復元クラスターの PD アドレス。
@@ -391,5 +391,6 @@ Restore KV Files <--------------------------------------------------------------
 
 > **注記：**
 >
+> -   初めてクラスターを復元するときは、完全なスナップショット データを指定する必要があります。そうしないと、テーブル ID ルールの書き換えにより、新しく作成されたテーブルの一部のデータが正しくなくなる可能性があります。
 > -   一定期間のログバックアップデータを繰り返し復元することはできません。範囲`[t1=10, t2=20)`のログバックアップデータを繰り返しリストアすると、リストアされたデータに不整合が生じる可能性があります。
 > -   異なる期間のログ データを複数のバッチでリストアする場合は、ログ データが連続した順序でリストアされるようにしてください。 `[t1, t2)` 、 `[t2, t3)` 、 `[t3, t4)`のログ バックアップ データを連続した順序でリストアすると、リストアされたデータの整合性が保たれます。ただし、 `[t1, t2)`復元し、その後`[t2, t3)`スキップして`[t3, t4)`を復元すると、復元されたデータに不整合が生じる可能性があります。

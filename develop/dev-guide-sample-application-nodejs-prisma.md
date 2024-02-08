@@ -85,10 +85,11 @@ npm install prisma typescript ts-node @types/node --save-dev
 3.  接続ダイアログの設定が動作環境と一致していることを確認してください。
 
     -   **エンドポイント タイプは**`Public`に設定されます。
-    -   **[接続先] は**`General`に設定されます。
+    -   **ブランチは**`main`に設定されます。
+    -   **[接続先] は**`Prisma`に設定されます。
     -   **[オペレーティング システム] は、**アプリケーションを実行するオペレーティング システムと一致します。
 
-4.  パスワードをまだ設定していない場合は、 **「パスワードの作成」**をクリックしてランダムなパスワードを生成します。
+4.  パスワードをまだ設定していない場合は、 **「パスワードの生成」を**クリックしてランダムなパスワードを生成します。
 
 5.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
 
@@ -96,10 +97,10 @@ npm install prisma typescript ts-node @types/node --save-dev
     cp .env.example .env
     ```
 
-6.  `.env`ファイルを編集し、次のように環境変数`DATABASE_URL`を設定し、接続ダイアログ上の対応するプレースホルダー`{}`接続パラメーターに置き換えます。
+6.  `.env`ファイルを編集し、次のように環境変数`DATABASE_URL`を設定し、接続ダイアログ内の対応するプレースホルダー`{}`を接続文字列に置き換えます。
 
     ```dotenv
-    DATABASE_URL=mysql://{user}:{password}@{host}:4000/test?sslaccept=strict
+    DATABASE_URL={connection_string}
     ```
 
     > **注記**

@@ -1,5 +1,6 @@
 ---
 title: TiDB 5.1.1 Release Notes
+summary: TiDB 5.1.1 was released on July 30, 2021. The release includes compatibility changes, feature enhancements, improvements, bug fixes, and updates to TiDB Dashboard, TiFlash, TiKV, and various tools. Notable changes include default value changes for variables, support for OIDC SSO in TiDB Dashboard, and bug fixes for data loss and panic issues.
 ---
 
 # TiDB 5.1.1 リリースノート {#tidb-5-1-1-release-notes}
@@ -37,8 +38,8 @@ TiDB バージョン: 5.1.1
 
 -   TiDB
 
-    -   ステイル読み取り機能の一般提供 (GA) を発表します
-    -   データ挿入を高速化するために`paramMarker`割り当てを避ける[#26076](https://github.com/pingcap/tidb/pull/26076)
+    -   ステイル読み取り機能の一般提供 (GA) を発表します。
+    -   データ挿入を高速化するために`paramMarker`割り当てを回避します[#26076](https://github.com/pingcap/tidb/pull/26076)
     -   安定した結果モードをサポートして、クエリ結果をより安定させます[#25995](https://github.com/pingcap/tidb/pull/25995)
     -   組み込み関数`json_unquote()`の TiKV [#26265](https://github.com/pingcap/tidb/pull/26265)へのプッシュダウンをサポート
     -   MPP クエリの再試行をサポート[#26480](https://github.com/pingcap/tidb/pull/26480)
@@ -122,8 +123,8 @@ TiDB バージョン: 5.1.1
 
 -   TiFlash
 
-    -   テーブル スキャン タスクの実行時に発生する潜在的なpanicの問題を修正します。
-    -   DAQ リクエストを処理するときにTiFlashが`duplicated region`に関するエラーを発生させるバグを修正
+    -   テーブルスキャンタスクの実行時に発生する潜在的なpanicの問題を修正
+    -   DAQ リクエストを処理するときにTiFlashが`duplicated region`に関するエラーを引き起こすバグを修正
     -   読み取り負荷が高いときに発生するpanicの問題を修正
     -   `DateFormat`関数の実行時に発生する潜在的なpanicの問題を修正
     -   MPP タスクの実行時に発生する潜在的なメモリリークの問題を修正
@@ -132,7 +133,7 @@ TiDB バージョン: 5.1.1
     -   TiDB ダッシュボードがTiFlashのディスク情報を正しく表示できない問題を修正
     -   `SharedQueryBlockInputStream`を分解するときに発生する潜在的なpanicの問題を修正
     -   `MPPTask`を分解するときに発生する潜在的なpanicの問題を修正
-    -   スナップショット経由でデータを同期した後のデータの不整合の潜在的な問題を修正
+    -   スナップショット経由でデータを同期した後のデータ不整合の潜在的な問題を修正
 
 -   ツール
 

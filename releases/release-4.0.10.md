@@ -1,5 +1,6 @@
 ---
 title: TiDB 4.0.10 Release Notes
+summary: TiDB 4.0.10 was released on January 15, 2021. New features include redacting user data from logs and configurable size limits for key-value entries. Bug fixes address concurrency issues, duplicate bindings, and incorrect results. Improvements include optimized metrics and upgraded dependencies. Various tools have also been updated and fixed, such as TiCDC, Dumpling, Backup & Restore, TiDB Binlog, and TiDB Lightning.
 ---
 
 # TiDB 4.0.10 リリースノート {#tidb-4-0-10-release-notes}
@@ -48,7 +49,7 @@ TiDB バージョン: 4.0.10
 
 -   TiDB
 
-    -   バッチクライアントのタイムアウトを引き起こす可能性がある同時実行性のバグを修正します[#22336](https://github.com/pingcap/tidb/pull/22336)
+    -   バッチクライアントのタイムアウトを引き起こす可能性がある同時実行性のバグを修正[#22336](https://github.com/pingcap/tidb/pull/22336)
     -   同時ベースライン キャプチャによって発生する重複バインディングの問題を修正[#22295](https://github.com/pingcap/tidb/pull/22295)
     -   ログ レベルが`'debug'` [#22293](https://github.com/pingcap/tidb/pull/22293)の場合に、SQL ステートメントにバインドされたベースライン キャプチャが機能するようにします。
     -   リージョンのマージが発生したときに GC ロックが正しく解放されるようになりました[#22267](https://github.com/pingcap/tidb/pull/22267)

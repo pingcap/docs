@@ -1,5 +1,6 @@
 ---
 title: TiDB 2.0.2 Release Notes
+summary: TiDB 2.0.2 was released on May 21, 2018, with improvements in system stability. The release includes fixes for Decimal division expression, support for `USE INDEX` syntax in `Delete` statement, and timeout mechanism for writing Binlog in TiDB. PD now filters disconnected nodes in balance leader scheduler, modifies transfer leader operator timeout, and fixes scheduling issues. TiKV fixes Raft log printing, supports configuring gRPC parameters, leader election timeout range, and resolves snapshot intermediate file deletion issue.
 ---
 
 # TiDB 2.0.2 リリースノート {#tidb-2-0-2-release-notes}
@@ -16,7 +17,7 @@ title: TiDB 2.0.2 Release Notes
 ## PD {#pd}
 
 -   バランス リーダー スケジューラが切断されたノードをフィルタリングするようにする
--   転送リーダーオペレーターのタイムアウトを10秒に変更します
+-   転送リーダー オペレーターのタイムアウトを 10 秒に変更します。
 -   クラスターのリージョンが異常な状態にある場合、ラベル スケジューラーがスケジュールを実行しない問題を修正します。
 -   `evict leader scheduler`の不適切なスケジュールの問題を修正します。
 
