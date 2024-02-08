@@ -47,7 +47,7 @@ You can set the CIDR when creating the first TiDB Dedicated cluster. If you want
     >     - 172.16.0.0 - 172.16.255.255
     >     - 172.30.0.0 - 172.31.255.255
 
-5. View the CIDR of the cloud provider and the specific region.
+5. View the CIDR of the cloud provider and the specific region. 
 
     The CIDR is inactive by default. To activate the CIDR, you need to create a cluster in the target region. When the region CIDR is active, you can create VPC Peering for the region.
 
