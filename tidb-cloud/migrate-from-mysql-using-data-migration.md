@@ -93,12 +93,11 @@ The username you use for the downstream TiDB Cloud cluster must have the followi
 | `ALTER`  | Tables |
 | `DROP`   | Databases, Tables |
 | `INDEX`  | Tables |
-| `TRUNCATE`  | Tables |
 
 For example, you can execute the following `GRANT` statement to grant corresponding privileges:
 
 ```sql
-GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'your_user'@'your_IP_address_of_host'
+GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,DROP,INDEX ON *.* TO 'your_user'@'your_IP_address_of_host'
 ```
 
 To quickly test a migration job, you can use the `root` account of the TiDB Cloud cluster.
