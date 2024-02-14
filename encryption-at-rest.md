@@ -7,9 +7,9 @@ summary: Learn how to enable encryption at rest to protect sensitive data.
 
 > **注記：**
 >
-> クラスターが AWS にデプロイされ、EBSstorageを使用する場合は、EBS 暗号化を使用することをお勧めします。 [AWS ドキュメント - EBS 暗号化](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)を参照してください。 AWS でローカル NVMestorageなどの非 EBSstorageを使用している場合、このドキュメントで紹介されている保存時の暗号化を使用することをお勧めします。
+> クラスターが AWS にデプロイされ、EBSstorageを使用する場合は、EBS 暗号化を使用することをお勧めします。 [AWS ドキュメント - EBS 暗号化](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)を参照してください。 AWS でローカル NVMestorageなどの非 EBSstorageを使用している場合は、このドキュメントで紹介されている保存時の暗号化を使用することをお勧めします。
 
-保存時の暗号化とは、データが保存されるときに暗号化されることを意味します。データベースの場合、この機能は TDE (透過的データ暗号化) とも呼ばれます。これは、実行中の暗号化 (TLS) または使用中の暗号化 (めったに使用されない) とは対照的です。保存時の暗号化はさまざまなもの (SSD ドライブ、ファイル システム、クラウド ベンダーなど) で実行される可能性がありますが、TiKV にstorage前に暗号化を実行させることで、攻撃者がデータにアクセスするためにデータベースで認証する必要があることが保証されます。たとえば、攻撃者が物理マシンにアクセスした場合、ディスク上のファイルをコピーしてもデータにアクセスできなくなります。
+保存時の暗号化とは、データが保存されるときに暗号化されることを意味します。データベースの場合、この機能は TDE (透過的データ暗号化) とも呼ばれます。これは、実行中の暗号化 (TLS) または使用中の暗号化 (めったに使用されない) とは対照的です。保管時の暗号化はさまざまなもの (SSD ドライブ、ファイル システム、クラウド ベンダーなど) で実行される可能性がありますが、storage前に TiKV に暗号化を実行させることで、攻撃者がデータにアクセスするためにデータベースで認証する必要があることが保証されます。たとえば、攻撃者が物理マシンにアクセスした場合、ディスク上のファイルをコピーしてもデータにアクセスできなくなります。
 
 ## さまざまな TiDB コンポーネントでの暗号化のサポート {#encryption-support-in-different-tidb-components}
 
@@ -27,11 +27,11 @@ TiKV は現在、コア ダンプから暗号化キーとユーザー データ�
 
 TiKV は、ファイルの絶対パスを使用して暗号化されたデータ ファイルを追跡します。その結果、TiKV ノードの暗号化が有効になったら、ユーザーは`storage.data-dir` 、 `raftstore.raftdb-path` 、 `rocksdb.wal-dir` 、 `raftdb.wal-dir`などのデータ ファイル パス構成を変更する必要はありません。
 
-SM4 暗号化は、TiKV の v6.3.0 以降のバージョンでのみサポートされます。 v6.3.0 より前の TiKV バージョンは、AES 暗号化のみをサポートします。 SM4 暗号化により、スループットが 50% ～ 80% 低下する可能性があります。
+SM4 暗号化は、TiKV の v6.3.0 以降のバージョンでのみサポートされています。 v6.3.0 より前の TiKV バージョンは、AES 暗号化のみをサポートします。 SM4 暗号化により、スループットが 50% ～ 80% 低下する可能性があります。
 
 ### TiFlash {#tiflash}
 
-TiFlash は保存時の暗号化をサポートしています。データキーはTiFlashによって生成されます。 TiFlash ( TiFlashプロキシを含む) に書き込まれるすべてのファイル (データ ファイル、スキーマ ファイル、一時ファイルを含む) は、現在のデータ キーを使用して暗号化されます。暗号化アルゴリズム、暗号化構成 ( TiFlashでサポートされている[`tiflash-learner.toml`ファイル](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)暗号化構成)、および監視メトリクスの意味は、TiKV のものと一致しています。
+TiFlash は保存時の暗号化をサポートしています。データキーはTiFlashによって生成されます。 TiFlash ( TiFlashプロキシを含む) に書き込まれるすべてのファイル (データ ファイル、スキーマ ファイル、一時ファイルを含む) は、現在のデータ キーを使用して暗号化されます。暗号化アルゴリズム、暗号化構成 ( TiFlashでサポートされている[`tiflash-learner.toml`ファイル](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)の場合)、および監視メトリクスの意味は TiKV のものと一致しています。
 
 Grafana を使用してTiFlashを展開した場合は、 **「TiFlash-Proxy-Details** -&gt; **Encryption」**パネルを確認できます。
 
@@ -112,7 +112,7 @@ aws --region us-west-2 kms create-alias --alias-name "alias/tidb-tde" --target-k
     type = "file"
     path = "/path/to/key/file"
 
-ここで`path`キー ファイルへのパスです。ファイルには、16 進文字列としてエンコードされた 256 ビット (または 16 バイト) のキーが含まれており、改行 ( `\n` ) で終わり、他には何も含まれていない必要があります。ファイルの内容の例:
+ここで`path`キー ファイルへのパスです。ファイルには、16 進文字列としてエンコードされた 256 ビット (または 32 バイト) のキーが含まれ、改行 ( `\n` ) で終わり、他には何も含まれていない必要があります。ファイルの内容の例:
 
     3b5896b5be691006e0f71c3040a29495ddcad20b14aff61806940ebd780d3c62
 
@@ -260,7 +260,7 @@ KMS CMK をローテーションするには、 `tiflash-learner.toml`構成フ�
 
 ### TiKV バージョン間の互換性 {#compatibility-between-tikv-versions}
 
-TiFlash は、 v4.0.9 で暗号化されたメタデータの操作も最適化しており、その互換性要件は TiKV の要件と同じです。詳細は[TiKV バージョン間の互換性](#compatibility-between-tikv-versions)を参照してください。
+TiFlash は、v4.0.9 で暗号化されたメタデータ操作も最適化しており、その互換性要件は TiKV の要件と同じです。詳細は[TiKV バージョン間の互換性](#compatibility-between-tikv-versions)を参照してください。
 
 ## BR S3 サーバー側暗号化 {#br-s3-server-side-encryption}
 
