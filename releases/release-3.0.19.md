@@ -1,5 +1,6 @@
 ---
 title: TiDB 3.0.19 Release Notes
+summary: TiDB 3.0.19 was released on September 25, 2020. Compatibility changes include import path and copyright information updates. Improvements were made to mitigate failure recovery impact, support concurrency adjustment, and set nonadjustable values. Bug fixes were made for query errors, privilege checks, type changes, constraint checks, table lock release, operator handling, and panic parsing. Tools like TiDB Lightning also received fixes for process exit timing.
 ---
 
 # TiDB 3.0.19 リリースノート {#tidb-3-0-19-release-notes}
@@ -19,7 +20,7 @@ TiDB バージョン: 3.0.19
 
 -   TiDB
 
-    -   障害回復による QPS パフォーマンスへの影響を軽減[#19764](https://github.com/pingcap/tidb/pull/19764)
+    -   QPS パフォーマンスに対する障害回復の影響を軽減する[#19764](https://github.com/pingcap/tidb/pull/19764)
     -   `union`オペレーター[#19885](https://github.com/pingcap/tidb/pull/19885)の同時実行性の調整をサポート
 
 -   TiKV

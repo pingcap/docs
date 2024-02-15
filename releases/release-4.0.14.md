@@ -1,5 +1,6 @@
 ---
 title: TiDB 4.0.14 Release Notes
+summary: TiDB 4.0.14 was released on July 27, 2021. The release includes compatibility changes, feature enhancements, improvements, bug fixes, and updates to various tools. Some notable changes include default value updates for TiDB and TiKV, support for OIDC SSO in TiDB Dashboard, and bug fixes for TiDB, TiKV, PD, TiFlash, and various tools.
 ---
 
 # TiDB 4.0.14 リリースノート {#tidb-4-0-14-release-notes}
@@ -115,7 +116,7 @@ TiDB バージョン: 4.0.14
 
     -   削除操作[#2572](https://github.com/tikv/pd/issues/2572)を実行するとスケジューラが再表示される場合があるバグを修正
     -   一時構成がロードされる前にスケジューラが起動されたときに発生する可能性があるデータ競合の問題を修正します[#3771](https://github.com/tikv/pd/issues/3771)
-    -   リージョン分散操作[#3761](https://github.com/pingcap/pd/pull/3761)中に発生する可能性がある PDpanicの問題を修正します。
+    -   リージョン分散操作中に発生する可能性がある PDpanicの問題を修正します[#3761](https://github.com/pingcap/pd/pull/3761)
     -   一部の演算子の優先度が正しく設定されない問題を修正[#3703](https://github.com/pingcap/pd/pull/3703)
     -   存在しないストア[#3660](https://github.com/tikv/pd/issues/3660)から`evict-leader`スケジューラを削除するときに発生する可能性がある PDpanicの問題を修正します。
     -   店舗数が多い場合、PDLeaderの再選出が遅い問題を修正[#3697](https://github.com/tikv/pd/issues/3697)

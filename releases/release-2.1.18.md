@@ -1,5 +1,6 @@
 ---
 title: TiDB 2.1.18 Release Notes
+summary: TiDB 2.1.18 was released on November 4, 2019. The release includes various fixes and optimizations for SQL optimizer, SQL engine, server, DDL, monitor, and tools. Some notable improvements include support for using parameters in ORDER BY, GROUP BY, and LIMIT OFFSET, and adding new metrics for monitoring Add Index operation progress. The TiDB Ansible version 2.1.18 also includes updates and new monitoring items for TiDB Binlog.
 ---
 
 # TiDB 2.1.18 リリースノート {#tidb-2-1-18-release-notes}
@@ -52,7 +53,7 @@ TiDB Ansible バージョン: 2.1.18
     -   `CREATE TABLE`ステートメントの外部キー制約にスキーマがない場合、 `No Database selected`エラー[#12678](https://github.com/pingcap/tidb/pull/12678)を返す代わりに、作成されたテーブルのスキーマを使用する必要があるという互換性の問題を修正しました。
     -   `ADMIN CANCEL DDL JOBS` [#12681](https://github.com/pingcap/tidb/pull/12681)を実行すると`invalid list index`エラーが報告される問題を修正
 -   モニター
-    -   バックオフ監視のタイプを追加し、コミット時のバックオフ時間など、以前に記録されていないバックオフ時間を補足します[#12326](https://github.com/pingcap/tidb/pull/12326)
+    -   バックオフ監視のタイプを追加し、 [#12326](https://github.com/pingcap/tidb/pull/12326)時のバックオフ時間など、以前に記録されていないバックオフ時間を補足します。
     -   監視する新しいメトリクスを追加`Add Index`操作の進行状況[#12389](https://github.com/pingcap/tidb/pull/12389)
 
 ## PD {#pd}

@@ -1,5 +1,6 @@
 ---
 title: TiDB 2.0.4 Release Notes
+summary: TiDB 2.0.4 was released on June 15, 2018, with improvements in system compatibility and stability. It includes various enhancements and fixes for TiDB, PD, and TiKV. Some highlights for TiDB are support for `ALTER TABLE t DROP COLUMN a CASCADE` syntax, refining statement type display, and fixing issues related to data conversion and result order. PD now has improved behavior for the `max-pending-peer-count` argument, while TiKV includes the addition of the RocksDB `PerfContext` interface and fixes for slow `reverse-seek` and crash issues.
 ---
 
 # TiDB 2.0.4 リリースノート {#tidb-2-0-4-release-notes}
@@ -19,7 +20,7 @@ title: TiDB 2.0.4 Release Notes
 -   特定のシナリオにおける`Merge Join`オペレーターの間違った結果の問題を修正
 -   Null オブジェクトを String に変換する問題を修正
 -   JSON タイプのデータを JSON タイプにキャストする問題を修正します。
--   `Union` + `OrderBy`の条件でMySQLと結果の順序が一致しない問題を修正
+-   `Union` + `OrderBy`の条件で結果の順序がMySQLと一致しない問題を修正
 -   `Union`ステートメントが`Limit/OrderBy`句をチェックするときのコンプライアンス ルールの問題を修正
 -   `Union All`結果の互換性の問題を修正
 -   述語プッシュダウンのバグを修正

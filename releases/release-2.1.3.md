@@ -1,5 +1,6 @@
 ---
 title: TiDB 2.1.3 Release Notes
+summary: TiDB 2.1.3 and TiDB Ansible 2.1.3 are released with improvements in system stability, SQL optimizer, statistics, and execution engine. Fixes include issues with Prepared Plan Cache, Range computing, `CAST(str AS TIME(N))`, Generated Column, statistics histogram, `Sort Merge Join`, and more. Other improvements include support for Range for `_tidb_rowid` construction queries, `ALLOW_INVALID_DATES` SQL mode, and more. PD and TiKV also have fixes and improvements. TiDB Binlog fixes issues with the Pump client log and data inconsistency caused by unique key containing NULL value.
 ---
 
 # TiDB 2.1.3 リリースノート {#tidb-2-1-3-release-notes}
@@ -14,15 +15,15 @@ title: TiDB 2.1.3 Release Notes
     -   文字列が不正`TIME`形式の場合は`CAST(str AS TIME(N))` null を返すようにします。 `SQL_MODE`が厳密でない場合は[#8966](https://github.com/pingcap/tidb/pull/8966)
     -   `UPDATE`の処理中に生成されたカラムがpanicになる場合がある問題を修正[#8980](https://github.com/pingcap/tidb/pull/8980)
     -   場合によっては統計ヒストグラムの上限オーバーフローの問題を修正します[#8989](https://github.com/pingcap/tidb/pull/8989)
-    -   テーブル全体のスキャンを回避し、クラスターのストレスを軽減するための`_tidb_rowid`構築クエリのサポート範囲[#9059](https://github.com/pingcap/tidb/pull/9059)
-    -   `CAST(AS TIME)`精度が大きすぎる場合はエラーを返す[#9058](https://github.com/pingcap/tidb/pull/9058)
+    -   `_tidb_rowid`構築クエリのサポート範囲。テーブル全体のスキャンを回避し、クラスターのストレスを軽減します。 [#9059](https://github.com/pingcap/tidb/pull/9059)
+    -   `CAST(AS TIME)`精度が大きすぎる場合はエラーを返します[#9058](https://github.com/pingcap/tidb/pull/9058)
     -   デカルト積[#9037](https://github.com/pingcap/tidb/pull/9037)で`Sort Merge Join`使用を許可する
     -   場合によってはpanic後に統計ワーカーが再開できない問題を修正[#9085](https://github.com/pingcap/tidb/pull/9085)
     -   `Sort Merge Join`場合によっては間違った結果を返す問題を修正[#9046](https://github.com/pingcap/tidb/pull/9046)
-    -   `CASE`条項[#8355](https://github.com/pingcap/tidb/pull/8355)で JSON タイプを返すサポート
+    -   `CASE`節[#8355](https://github.com/pingcap/tidb/pull/8355)で JSON タイプを返すサポート
 -   サーバ
     -   コメント[#8766](https://github.com/pingcap/tidb/pull/8766)に非 TiDB ヒントが存在する場合、エラーではなく警告を返します。
-    -   構成された TIMEZONE 値の有効性を確認します[#8879](https://github.com/pingcap/tidb/pull/8879)
+    -   構成された TIMEZONE 値[#8879](https://github.com/pingcap/tidb/pull/8879)の有効性を確認します。
     -   `QueryDurationHistogram`メトリクス項目を最適化して、より多くのステートメント タイプを表示する[#8875](https://github.com/pingcap/tidb/pull/8875)
     -   場合によっては bigint の下限オーバーフローの問題を修正します[#8544](https://github.com/pingcap/tidb/pull/8544)
     -   `ALLOW_INVALID_DATES` SQL モードをサポート[#9110](https://github.com/pingcap/tidb/pull/9110)

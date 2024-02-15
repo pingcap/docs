@@ -1,6 +1,6 @@
 ---
 title: Monitoring and Alert for Backup and Restore
-summary: Learn the monitoring and alert of the backup and restore feature.
+summary: This document describes monitoring and alert for backup and restore, including log backup monitoring, configuration, Grafana configuration, monitoring metrics, and log backup alerts. It covers the recommended alert items and their configurations for PITR.
 ---
 
 # バックアップと復元の監視とアラート {#monitoring-and-alert-for-backup-and-restore}
@@ -56,7 +56,7 @@ summary: Learn the monitoring and alert of the backup and restore feature.
 
 PITR でアラート項目を構成するには、次の手順に従います。
 
-1.  Prometheus が配置されているノード上にアラート ルールの構成ファイル (たとえば、 `pitr.rules.yml` ) を作成します。ファイルには、 [プロメテウスのドキュメント](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/) 、以下の推奨アラート項目、設定サンプルに従ってアラートルールを記述します。
+1.  Prometheus が配置されているノード上にアラート ルールの構成ファイル (たとえば、 `pitr.rules.yml` ) を作成します。ファイルには、 [プロメテウスのドキュメント](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/) 、以下の推奨アラート項目、設定サンプルに従ってアラートルールを記入します。
 2.  Prometheus 構成ファイルの`rule_files`フィールドに、アラート ルール ファイルのパスを追加します。
 3.  `SIGHUP`シグナルを Prometheus プロセス ( `kill -HUP pid` ) に送信するか、HTTP `POST`リクエストを`http://prometheus-addr/-/reload`に送信します (HTTP リクエストを送信する前に、Prometheus の起動時に`--web.enable-lifecycle`パラメーターを追加します)。
 

@@ -1,5 +1,6 @@
 ---
 title: TiDB 5.1.2 Release Notes
+summary: TiDB 5.1.2 was released on September 27, 2021. The release includes compatibility changes, improvements, bug fixes, and updates to various tools such as TiCDC, TiKV, PD, TiFlash, BR, Dumpling, and TiCDC. The release addresses numerous bug fixes and improvements to enhance performance and stability.
 ---
 
 # TiDB 5.1.2 リリースノート {#tidb-5-1-2-release-notes}
@@ -77,13 +78,13 @@ TiDB バージョン: 5.1.2
     -   `FLOAT64`種のオーバーフローチェックが[#23897](https://github.com/pingcap/tidb/issues/23897)と異なる問題を修正
     -   TiDB が`pd is timeout`エラー[#26147](https://github.com/pingcap/tidb/issues/26147)を返すはずなのに`unknow`エラーを返す問題を修正
     -   `case when`式[#26662](https://github.com/pingcap/tidb/issues/26662)の間違った文字セットと照合順序を修正します。
-    -   MPP クエリ[#28148](https://github.com/pingcap/tidb/pull/28148)の潜在的なエラー`can not found column in Schema column`を修正
+    -   MPP クエリ[#28148](https://github.com/pingcap/tidb/pull/28148)の潜在的なエラー`can not found column in Schema column`を修正します。
     -   TiFlashのシャットダウン時に TiDB がpanic可能性があるバグを修正[#28096](https://github.com/pingcap/tidb/issues/28096)
     -   `enum like 'x%'` [#27130](https://github.com/pingcap/tidb/issues/27130)の使用によって引き起こされる誤った範囲の問題を修正
     -   IndexLookupJoin [#27410](https://github.com/pingcap/tidb/issues/27410)で使用した場合の Common Table Expression (CTE) デッドロックの問題を修正
     -   再試行可能なデッドロックが`INFORMATION_SCHEMA.DEADLOCKS`テーブル[#27400](https://github.com/pingcap/tidb/issues/27400)に誤って記録されるバグを修正
     -   `TABLESAMPLE`パーティションテーブルからのクエリ結果が期待どおりに並べ替えられない問題を修正します[#27349](https://github.com/pingcap/tidb/issues/27349)
-    -   未使用の`/debug/sub-optimal-plan` HTTP API [#27265](https://github.com/pingcap/tidb/pull/27265)を削除します。
+    -   未使用の`/debug/sub-optimal-plan` HTTP API を削除します[#27265](https://github.com/pingcap/tidb/pull/27265)
     -   ハッシュパーティションテーブルが符号なしデータを扱う場合、クエリが間違った結果を返すことがあるバグを修正[#26569](https://github.com/pingcap/tidb/issues/26569)
     -   `NO_UNSIGNED_SUBTRACTION`を[#26765](https://github.com/pingcap/tidb/issues/26765)に設定するとパーティションの作成に失敗するバグを修正
     -   `Apply`を`Join` [#26958](https://github.com/pingcap/tidb/issues/26958)に変換するときに`distinct`フラグが欠落する問題を修正
@@ -99,7 +100,7 @@ TiDB バージョン: 5.1.2
     -   TiKV を v3.x からそれ以降のバージョンにアップグレードした後に発生するpanicの問題を修正します[#10902](https://github.com/tikv/tikv/issues/10902)
     -   破損したスナップショット ファイルによって引き起こされる潜在的なディスク フルの問題を修正します[#10813](https://github.com/tikv/tikv/issues/10813)
     -   TiKV コプロセッサーの低速ログでは、リクエストの処理に費やした時間のみを考慮するようにします[#10841](https://github.com/tikv/tikv/issues/10841)
-    -   スロガー スレッドが過負荷になってキューがいっぱいになった場合、スレッドをブロックする代わりにログを削除します[#10841](https://github.com/tikv/tikv/issues/10841)
+    -   スロガー スレッドが過負荷になり、キューがいっぱいになった場合、スレッドをブロックする代わりにログを削除します[#10841](https://github.com/tikv/tikv/issues/10841)
     -   コプロセッサーの処理がタイムアウトしたときに発生するpanicの問題を修正します[#10852](https://github.com/tikv/tikv/issues/10852)
     -   Titan が有効になっている 5.0 より前のバージョンからアップグレードするときに発生する TiKVpanicの問題を修正します[#10842](https://github.com/tikv/tikv/pull/10842)
     -   新しいバージョンの TiKV を v5.0.x にロールバックできない問題を修正します[#10842](https://github.com/tikv/tikv/pull/10842)

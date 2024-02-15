@@ -1,5 +1,6 @@
 ---
 title: TiDB 4.0.3 Release Notes
+summary: TiDB 4.0.3 was released on July 24, 2020. New features include TiDB Dashboard improvements, TiFlash file encryption, and support for various tools. Improvements were made to TiDB, TiKV, PD, and TiDB Dashboard. Bug fixes were also implemented for TiDB, TiKV, PD, TiDB Dashboard, TiFlash, TiCDC, Backup & Restore, Dumpling, TiDB Lightning, and TiDB Binlog.
 ---
 
 # TiDB 4.0.3 リリースノート {#tidb-4-0-3-release-notes}
@@ -123,7 +124,7 @@ TiDB バージョン: 4.0.3
 -   PD
 
     -   サーバーがクラッシュした場合、TSO ストリームの作成がしばらくブロックされる可能性がある問題を修正します[#2648](https://github.com/pingcap/pd/pull/2648)
-    -   `getSchedulers`データ競合が発生する可能性がある問題を修正[#2638](https://github.com/pingcap/pd/pull/2638)
+    -   `getSchedulers`データ競合が発生する可能性がある問題を修正します[#2638](https://github.com/pingcap/pd/pull/2638)
     -   スケジューラを削除するとデッドロックが発生する可能性がある問題を修正[#2637](https://github.com/pingcap/pd/pull/2637)
     -   `balance-leader-scheduler`を有効にした場合に配置ルールが考慮されないバグを修正[#2636](https://github.com/pingcap/pd/pull/2636)
     -   サービス`safepoint`が正しく設定できない場合があり、 BRと団子[#2635](https://github.com/pingcap/pd/pull/2635)が失敗する可能性がある問題を修正

@@ -1,5 +1,6 @@
 ---
 title: TiDB 5.2.1 Release Notes
+summary: TiDB 5.2.1 was released on September 9, 2021. Bug fixes include resolving an error in TiDB caused by a wrong execution plan and fixing the issue of unavailable TiKV caused by Raftstore deadlock when migrating Regions.
 ---
 
 # TiDB 5.2.1 リリースノート {#tidb-5-2-1-release-notes}
@@ -16,4 +17,4 @@ TiDB バージョン: 5.2.1
 
 -   TiKV
 
-    -   リージョンの移行時にRaftstore のデッドロックが原因で TiKV が利用できなくなる問題を修正しました。回避策は、スケジュールを無効にして、利用できない TiKV を再起動することです。 [#10909](https://github.com/tikv/tikv/issues/10909)
+    -   リージョンの移行時にRaftstore のデッドロックが原因で TiKV が利用できなくなる問題を修正します。回避策は、スケジュールを無効にして、利用できない TiKV を再起動することです。 [#10909](https://github.com/tikv/tikv/issues/10909)

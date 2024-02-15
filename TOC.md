@@ -116,7 +116,7 @@
     -   [環境コンフィグレーションチェックリスト](/check-before-deployment.md)
     -   クラスタトポロジの計画
         -   [最小限のトポロジー](/minimal-deployment-topology.md)
-        -   [TiFlashトポロジー](/tiflash-deployment-topology.md)
+        -   [TiFlashトポロジ](/tiflash-deployment-topology.md)
         -   [TiCDC トポロジー](/ticdc-deployment-topology.md)
         -   [TiDBBinlogトポロジ](/tidb-binlog-deployment-topology.md)
         -   [TiSpark トポロジ](/tispark-deployment-topology.md)
@@ -140,6 +140,7 @@
         -   [MySQL から大規模なデータセットを移行する](/migrate-large-mysql-to-tidb.md)
         -   [小規模なデータセットの MySQL シャードを移行およびマージする](/migrate-small-mysql-shards-to-tidb.md)
         -   [大規模なデータセットの MySQL シャードを移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
+        -   [MariaDB からの移行](/migrate-from-mariadb.md)
         -   [CSV ファイルからの移行](/migrate-from-csv-files-to-tidb.md)
         -   [SQL ファイルからの移行](/migrate-from-sql-files-to-tidb.md)
         -   [Parquet ファイルからの移行](/migrate-from-parquet-files-to-tidb.md)
@@ -318,7 +319,7 @@
         -   [高度な同時書き込み](/best-practices/high-concurrency-best-practices.md)
         -   [グラファナの監視](/best-practices/grafana-monitor-best-practices.md)
         -   [PD スケジューリング](/best-practices/pd-scheduling-best-practices.md)
-        -   [大規模な領域を使用した TiKV性能チューニング](/best-practices/massive-regions-best-practices.md)
+        -   [大規模領域を使用した TiKV性能チューニング](/best-practices/massive-regions-best-practices.md)
         -   [3 ノードのハイブリッド展開](/best-practices/three-nodes-hybrid-deployment.md)
         -   [3 つのデータセンター展開におけるローカル読み取り](/best-practices/three-dc-local-read.md)
         -   [UUIDを使用する](/best-practices/uuid.md)
@@ -645,7 +646,11 @@
         -   [データ検証](/tiflash/tiflash-data-validation.md)
         -   [互換性](/tiflash/tiflash-compatibility.md)
         -   [パイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)
+    -   TiDB 分散実行フレームワーク (DXF)
+        -   [導入](/tidb-distributed-execution-framework.md)
+        -   [TiDB グローバル ソート](/tidb-global-sort.md)
     -   [システム変数](/system-variables.md)
+    -   [サーバーステータス変数](/status-variables.md)
     -   コンフィグレーションファイルのパラメータ
         -   [tidbサーバー](/tidb-configuration-file.md)
         -   [tikvサーバー](/tikv-configuration-file.md)
@@ -998,11 +1003,8 @@
     -   [テレメトリー](/telemetry.md)
     -   [エラーコード](/error-codes.md)
     -   [テーブルフィルター](/table-filter.md)
-    -   [トポロジーラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)
+    -   [トポロジ ラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)
     -   [外部ストレージ サービスの URI 形式](/external-storage-uri.md)
-    -   内部コンポーネント
-        -   [TiDB バックエンド タスク分散実行フレームワーク](/tidb-distributed-execution-framework.md)
-        -   [TiDB グローバル ソート](/tidb-global-sort.md)
 -   よくある質問
     -   [FAQの概要](/faq/faq-overview.md)
     -   [TiDB よくある質問](/faq/tidb-faq.md)
@@ -1029,6 +1031,7 @@
     -   v7.2
         -   [7.2.0-DMR](/releases/release-7.2.0.md)
     -   v7.1
+        -   [7.1.3](/releases/release-7.1.3.md)
         -   [7.1.2](/releases/release-7.1.2.md)
         -   [7.1.1](/releases/release-7.1.1.md)
         -   [7.1.0](/releases/release-7.1.0.md)
@@ -1037,6 +1040,9 @@
     -   v6.6
         -   [6.6.0-DMR](/releases/release-6.6.0.md)
     -   v6.5
+        -   [6.5.8](/releases/release-6.5.8.md)
+        -   [6.5.7](/releases/release-6.5.7.md)
+        -   [6.5.6](/releases/release-6.5.6.md)
         -   [6.5.5](/releases/release-6.5.5.md)
         -   [6.5.4](/releases/release-6.5.4.md)
         -   [6.5.3](/releases/release-6.5.3.md)
@@ -1194,7 +1200,7 @@
         -   [2.0](/releases/release-2.0-ga.md)
         -   [2.0 RC5](/releases/release-2.0-rc.5.md)
         -   [2.0 RC4](/releases/release-2.0-rc.4.md)
-        -   [2.0RC3](/releases/release-2.0-rc.3.md)
+        -   [2.0 RC3](/releases/release-2.0-rc.3.md)
         -   [2.0 RC1](/releases/release-2.0-rc.1.md)
         -   [1.1 ベータ版](/releases/release-1.1-beta.md)
         -   [1.1 アルファ](/releases/release-1.1-alpha.md)

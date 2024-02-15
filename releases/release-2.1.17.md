@@ -1,5 +1,6 @@
 ---
 title: TiDB 2.1.17 Release Notes
+summary: "TiDB 2.1.17 Release Notes: New features include `WHERE` clause in `SHOW TABLE REGIONS`, `config-check` feature in TiKV and PD, `remove-tombstone` command in pd-ctl, and `worker-count` and `txn-batch` configuration items in Reparo. Improvements in PD’s scheduling process and TiKV’s starting process. Changed behaviors in TiDB slow query logs and configuration files. Fixes and optimizations in SQL Optimizer, SQL Execution Engine, Server, DDL, Monitor, TiKV, PD, TiDB Binlog, TiDB Lightning, and TiDB Ansible."
 ---
 
 # TiDB 2.1.17 リリースノート {#tidb-2-1-17-release-notes}
@@ -35,7 +36,7 @@ TiDB Ansible バージョン: 2.1.17
     -   `CAST`関数が数値型[#11712](https://github.com/pingcap/tidb/pull/11712)を変換するときに、最初に`UINT`に変換される数値によって引き起こされるいくつかの誤った結果 ( `select cast(13835058000000000000 as double)`など) を修正しました。
     -   `DIV`計算の被除数が小数で、この計算に負の数[#11812](https://github.com/pingcap/tidb/pull/11812)含まれる場合、計算結果が正しくなくなることがある問題を修正
     -   `SELECT` / `EXPLAIN`ステートメントの実行時に一部の文字列が`INT`タイプに変換されることによって引き起こされる MySQL の非互換性の問題を修正する`ConvertStrToIntStrict`関数を追加します[#11892](https://github.com/pingcap/tidb/pull/11892)
-    -   `EXPLAIN ... FOR CONNECTION`を使用した場合に`stmtCtx`の設定が間違っているため、 `Explain`結果が正しくなくなることがある問題[#11978](https://github.com/pingcap/tidb/pull/11978)修正
+    -   `EXPLAIN ... FOR CONNECTION`を使用した場合に`stmtCtx`の設定が間違っているため、 `Explain`結果が正しくなくなる可能性がある問題[#11978](https://github.com/pingcap/tidb/pull/11978)修正
     -   整数の結果がオーバーフローした場合に`unaryMinus`進数以外の結果が発生するために、関数によって返される結果が MySQL と互換性がないという問題を修正します[#11990](https://github.com/pingcap/tidb/pull/11990)
     -   `LOAD DATA`ステートメントの実行時のカウント順序により`last_insert_id()`正しくなくなる可能性がある問題を修正[#11994](https://github.com/pingcap/tidb/pull/11994)
     -   ユーザーが明示的と暗黙的な混合方法で自動インクリメント列データを書き込む場合、 `last_insert_id()`が正しくない可能性がある問題を修正します[#12001](https://github.com/pingcap/tidb/pull/12001)
@@ -50,11 +51,11 @@ TiDB Ansible バージョン: 2.1.17
     -   `Insert Into … Select`構文で`oom-action = "cancel"`と OOM が発生した場合の OOMpanic問題の誤った処理によって引き起こされる接続切断の問題を修正します[#12126](https://github.com/pingcap/tidb/pull/12126)
 -   DDL
     -   `tikvSnapshot`の逆スキャン インターフェイスを追加して、DDL 履歴ジョブを効率的にクエリします。このインターフェースを使用した後、 `ADMIN SHOW DDL JOBS`の実行時間が大幅に短縮されました[#11789](https://github.com/pingcap/tidb/pull/11789)
-    -   `CREATE TABLE ... PRE_SPLIT_REGION`構文を改善します。3 `PRE_SPLIT_REGION = N` [#11797](https://github.com/pingcap/tidb/pull/11797/files)場合、事前分割領域の数を 2^(N-1) から 2^N に変更します。
+    -   `CREATE TABLE ... PRE_SPLIT_REGION`構文を改善します`PRE_SPLIT_REGION = N` [#11797](https://github.com/pingcap/tidb/pull/11797/files)場合、事前分割領域の数を 2^(N-1) から 2^N に変更します。
     -   オンライン ワークロードへの大きな影響を避けるために、 `Add Index`操作のバックグラウンド ワーカー スレッドのデフォルト パラメータ値を減らします[#11875](https://github.com/pingcap/tidb/pull/11875)
-    -   `SPLIT TABLE`構文動作を改善します。領域[#11929](https://github.com/pingcap/tidb/pull/11929)を分割するために`SPLIT TABLE ... REGIONS N`使用される場合、N データリージョンと 1 つのインデックスリージョンを生成します。
+    -   `SPLIT TABLE`構文動作を改善します。領域[#11929](https://github.com/pingcap/tidb/pull/11929)分割に`SPLIT TABLE ... REGIONS N`使用される場合、N データリージョンと 1 つのインデックスリージョンを生成します。
     -   構成ファイルに`split-region-max-num`パラメータ (デフォルトでは`10000` ) を追加して、 `SPLIT TABLE`構文で許可されるリージョンの最大数を調整できるようにします[#12080](https://github.com/pingcap/tidb/pull/12080)
-    -   システムがbinlog [#12121](https://github.com/pingcap/tidb/pull/12121)を書き込むときにこの句`PRE_SPLIT_REGIONS`コメントされていないことが原因で、ダウンストリーム MySQL で`CREATE TABLE`句を解析できない問題を修正します。
+    -   システムがbinlog [#12121](https://github.com/pingcap/tidb/pull/12121)を書き込むときに、この句の`PRE_SPLIT_REGIONS`がコメントされていないことが原因で、ダウンストリーム MySQL で`CREATE TABLE`句を解析できない問題を修正します。
     -   `SHOW TABLE … REGIONS`と`SHOW TABLE .. INDEX … REGIONS`に`WHERE`サブ節を追加します[#12124](https://github.com/pingcap/tidb/pull/12124)
 -   モニター
     -   `connection_transient_failure_count`監視メトリックを追加して、 `tikvclient` [#12092](https://github.com/pingcap/tidb/pull/12092)の gRPC 接続エラーをカウントします。
@@ -83,7 +84,7 @@ TiDB Ansible バージョン: 2.1.17
     -   場合によってはPumpが正常に終了できない不具合を修正[#739](https://github.com/pingcap/tidb-binlog/pull/739)
     -   Pumpの`LevelDB`の処理ロジックを最適化してGC [#720](https://github.com/pingcap/tidb-binlog/pull/720)の実行効率を向上
 -   TiDB Lightning
-    -   チェックポイント[#239](https://github.com/pingcap/tidb-lightning/pull/239)からデータを再インポートすることによって tidb-lightning がクラッシュする可能性があるバグを修正
+    -   チェックポイント[#239](https://github.com/pingcap/tidb-lightning/pull/239)からのデータの再インポートによって tidb-lightning がクラッシュする可能性があるバグを修正
 
 ## TiDB Ansible {#tidb-ansible}
 

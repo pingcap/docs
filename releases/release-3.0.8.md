@@ -1,5 +1,6 @@
 ---
 title: TiDB 3.0.8 Release Notes
+summary: TiDB 3.0.8 was released on December 31, 2019. It includes various fixes and improvements for SQL optimizer, SQL execution engine, DDL, server, transaction, monitor, TiKV, PD, and TiDB Ansible. Notable changes include SQL binding plan fixes, error message optimizations, and support for certificate-based authentication. The default value of `tidb_txn_mode` variable is updated to `"pessimistic"`. PD also received performance optimizations and bug fixes. TiDB Ansible saw various logic optimizations and upgrades.
 ---
 
 # TiDB 3.0.8 リリースノート {#tidb-3-0-8-release-notes}
@@ -21,7 +22,7 @@ TiDB Ansible バージョン: 3.0.8
 -   SQL実行エンジン
     -   `INSERT/REPLACE/UPDATE ... SET ... = DEFAULT`構文でエラーが報告される可能性があり、 `DEFAULT`式の使用と仮想生成列を組み合わせるとエラーが報告される可能性があるという問題を修正します[#13682](https://github.com/pingcap/tidb/pull/13682)
     -   文字列を float [#14011](https://github.com/pingcap/tidb/pull/14011)に変換するときに`INSERT`ステートメントでエラーが報告される可能性がある問題を修正します。
-    -   `HashAgg`エグゼキュータの同時実行値が正しく初期化されていないため、集計操作の効果が低い場合がある問題を修正します[#13811](https://github.com/pingcap/tidb/pull/13811)
+    -   `HashAgg`エグゼキュータの同時実行値が正しく初期化されていないため、集計操作の効率が低い場合がある問題を修正します[#13811](https://github.com/pingcap/tidb/pull/13811)
     -   句が括弧内にある場合に`group by item`の実行でエラーが報告される問題を修正します[#13658](https://github.com/pingcap/tidb/pull/13658)
     -   TiDB が`group by item` [#14014](https://github.com/pingcap/tidb/pull/14014)を誤って計算するため、 `OUTER JOIN`を実行するとエラーが報告される可能性がある問題を修正
     -   範囲を超えるデータが範囲パーティション テーブル[#14107](https://github.com/pingcap/tidb/pull/14107)に書き込まれるときにエラー メッセージが不正確になる問題を修正します。
@@ -104,7 +105,7 @@ TiDB Ansible バージョン: 3.0.8
 
 ## TiDB Ansible {#tidb-ansible}
 
--   簡素化された構成項目[#1053](https://github.com/pingcap/tidb-ansible/pull/1053)を元に戻す
+-   簡略化された構成項目[#1053](https://github.com/pingcap/tidb-ansible/pull/1053)を元に戻す
 -   ローリング アップデート[#1056](https://github.com/pingcap/tidb-ansible/pull/1056)の実行時に TiDB バージョンをチェックするロジックを最適化します。
 -   TiSpark を v2.1.8 にアップグレードする[#1061](https://github.com/pingcap/tidb-ansible/pull/1061)
 -   Grafana [#1065](https://github.com/pingcap/tidb-ansible/pull/1065)でPDロール監視項目が誤って表示される問題を修正

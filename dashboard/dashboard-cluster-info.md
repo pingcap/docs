@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Cluster Information Page
-summary: View the running status of TiDB, TiKV, PD, TiFlash components in the entire cluster and the running status of the host on which these components are located.
+summary: The TiDB Dashboard Cluster Information Page allows users to view the running status of TiDB, TiKV, PD, and TiFlash components in the entire cluster, as well as the running status of the host on which these components are located. Users can access the page by logging in to TiDB Dashboard and clicking on Cluster Info in the left navigation menu, or by visiting a specific URL in their browser. The page provides instance, host, and disk lists, showing detailed information about each component and its running status.
 ---
 
 # TiDB ダッシュボードのクラスタ情報ページ {#tidb-dashboard-cluster-information-page}
@@ -39,7 +39,7 @@ summary: View the running status of TiDB, TiKV, PD, TiFlash components in the en
 -   Up: インスタンスは正常に実行されています。
 -   ダウンまたは到達不能: インスタンスが実行されていないか、対応するホストにネットワークの問題が存在します。
 -   廃棄: インスタンス上のデータは完全に移行され、スケールインが完了しました。このステータスは、TiKV またはTiFlashインスタンスにのみ存在します。
--   離脱中: インスタンス上のデータは移行中であり、スケールインが進行中です。このステータスは、TiKV またはTiFlashインスタンスにのみ存在します。
+-   終了: インスタンス上のデータは移行中であり、スケールインが進行中です。このステータスは、TiKV またはTiFlashインスタンスにのみ存在します。
 -   不明: インスタンスの実行状態は不明です。
 
 > **注記：**

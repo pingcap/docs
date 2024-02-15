@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Monitoring TiDB Using Grafana
-summary: Learn seven tips for efficiently using Grafana to monitor TiDB.
+summary: Best Practices for Monitoring TiDB Using Grafana. Deploy a TiDB cluster using TiUP and add Grafana and Prometheus for monitoring. Use metrics to analyze cluster status and diagnose problems. Prometheus collects metrics from TiDB components, and Grafana displays them. Tips for efficient Grafana use include modifying query expressions, switching Y-axis scale, and using API for query results. The platform is powerful for analyzing and diagnosing TiDB cluster status.
 ---
 
 # Grafana を使用して TiDB をモニタリングするためのベスト プラクティス {#best-practices-for-monitoring-tidb-using-grafana}
@@ -80,7 +80,7 @@ Prometheus は多くのクエリ式と関数をサポートしています。詳
 
 クエリ継続時間を例にとると、Y 軸はデフォルトで 2 進対数スケール (log <sub>2</sub> n) になり、表示のギャップが狭まります。変化を増幅するには、線形スケールに切り替えることができます。次の 2 つの図を比較すると、表示の違いに簡単に気づき、SQL ステートメントの実行が遅い時間を特定できます。
 
-もちろん、線形スケールはすべての状況に適しているわけではありません。たとえば、1 か月間のパフォーマンスの傾向を観察する場合、線形スケールのノイズが存在し、観察が困難になる可能性があります。
+もちろん、線形スケールはすべての状況に適しているわけではありません。たとえば、1 か月間にわたるパフォーマンスの傾向を観察する場合、線形スケールのノイズが存在し、観察が困難になる可能性があります。
 
 Y 軸はデフォルトで 2 進対数スケールを使用します。
 

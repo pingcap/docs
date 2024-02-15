@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Introduction
-summary: Introduce TiDB Dashboard.
+summary: TiDB Dashboard is a Web UI for monitoring, diagnosing, and managing the TiDB cluster. It shows overall running status, component and host status, traffic distribution, SQL statement execution information, slow queries, cluster diagnostics, log search, resource control, and profiling data collection.
 ---
 
 # TiDB ダッシュボードの概要 {#tidb-dashboard-introduction}
@@ -9,7 +9,7 @@ TiDB ダッシュボードは、TiDB クラスターを監視、診断、管理�
 
 > **注記：**
 >
-> TiDB v6.5.0 (以降) およびTiDB Operator v1.4.0 (以降) は、TiDB ダッシュボードを Kubernetes 上の独立したポッドとしてデプロイすることをサポートしています。詳細は[TiDB Operatorで TiDB ダッシュボードを独立してデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently)を参照してください。
+> TiDB v6.5.0 (以降) およびTiDB Operator v1.4.0 (以降) は、Kubernetes 上の独立したポッドとして TiDB ダッシュボードをデプロイすることをサポートしています。詳細は[TiDB Operatorで TiDB ダッシュボードを独立してデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently)を参照してください。
 
 ![TiDB Dashboard interface](/media/dashboard/dashboard-intro.gif)
 
@@ -61,7 +61,7 @@ TiDB ダッシュボードの「ログの検索」ページでは、クラスタ
 
 ## リソース制御のためのクラスター容量の見積もり {#estimate-cluster-capacity-for-resource-control}
 
-[リソース制御](/tidb-resource-control.md)機能を使用してリソース分離を実装するには、クラスター管理者はリソース グループを作成し、各グループのクォータを設定できます。
+[リソース制御](/tidb-resource-control.md)機能を使用してリソース分離を実装するには、クラスター管理者はリソース グループを作成し、各グループのクォータを設定します。
 
 リソースを計画する前に、クラスターの全体的な容量を把握する必要があります。詳細については、 [リソースマネージャーページ](/dashboard/dashboard-resource-manager.md)を参照してください。
 

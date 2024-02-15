@@ -57,10 +57,11 @@ TiDB は MySQL と互換性のあるデータベースであり、 [ナビキャ
 3.  接続ダイアログの設定が動作環境と一致していることを確認してください。
 
     -   **エンドポイント タイプは**`Public`に設定されます。
-    -   **[接続先] は**`General`に設定されます。
+    -   **ブランチは**`main`に設定されます。
+    -   **[接続先] は**`Navicat`に設定されます。
     -   **オペレーティング システムが**環境に一致します。
 
-4.  **「パスワードの作成」**をクリックしてランダムなパスワードを作成します。
+4.  **「パスワードの生成」**をクリックして、ランダムなパスワードを作成します。
 
     > **ヒント：**
     >
@@ -73,14 +74,14 @@ TiDB は MySQL と互換性のあるデータベースであり、 [ナビキャ
 6.  **[新しい接続 (MySQL)]**ダイアログで、次の接続パラメータを構成します。
 
     -   **接続名**: この接続に意味のある名前を付けます。
-    -   **ホスト**: TiDB Cloud接続ダイアログから`host`パラメータを入力します。
-    -   **ポート**: TiDB Cloud接続ダイアログから`port`パラメータを入力します。
-    -   **ユーザー名**: TiDB Cloud接続ダイアログから`user`パラメータを入力します。
+    -   **ホスト**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
+    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
+    -   **ユーザー名**: TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力します。
     -   **パスワード**: TiDB サーバーレスクラスターのパスワードを入力します。
 
     ![Navicat: configure connection general panel for TiDB Serverless](/media/develop/navicat-connection-config-serverless-general.png)
 
-7.  **[SSL]**タブをクリックし、 **[SSL を使用する]** 、 **[認証を使用する**] 、および**[CA に対してサーバー証明書を検証する**] チェックボックスを選択します。次に、 TiDB Cloud接続ダイアログから**CA 証明書**フィールドに`ssl_ca`ファイルを選択します。
+7.  **[SSL]**タブをクリックし、 **[SSL を使用する]** 、 **[認証を使用する**] 、および**[CA に対してサーバー証明書を検証する**] チェックボックスを選択します。次に、 TiDB Cloud接続ダイアログから**CA 証明書**フィールドに`CA`ファイルを選択します。
 
     ![Navicat: configure connection SSL panel for TiDB Serverless](/media/develop/navicat-connection-config-serverless-ssl.png)
 
@@ -108,9 +109,9 @@ TiDB は MySQL と互換性のあるデータベースであり、 [ナビキャ
 6.  **[新しい接続 (MySQL)]**ダイアログで、次の接続パラメータを構成します。
 
     -   **接続名**: この接続に意味のある名前を付けます。
-    -   **ホスト**: TiDB Cloud接続ダイアログから`host`パラメータを入力します。
-    -   **ポート**: TiDB Cloud接続ダイアログから`port`パラメータを入力します。
-    -   **ユーザー名**: TiDB Cloud接続ダイアログから`user`パラメータを入力します。
+    -   **ホスト**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
+    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
+    -   **ユーザー名**: TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力します。
     -   **パスワード**: TiDB 専用クラスターのパスワードを入力します。
 
     ![Navicat: configure connection general panel for TiDB Dedicated](/media/develop/navicat-connection-config-dedicated-general.png)

@@ -1,6 +1,6 @@
 ---
 title: Snapshot Backup and Restore Guide
-summary: Learn about how to back up and restore TiDB snapshots using the br command-line tool.
+summary: This document describes how to back up and restore TiDB snapshots using the br command-line tool. It includes instructions for snapshot backup, restoring data of a specified time point, and restoring a database or table. The document also covers the performance and impact of snapshot backup and restore.
 ---
 
 # スナップショットのバックアップと復元ガイド {#snapshot-backup-and-restore-guide}
@@ -33,7 +33,7 @@ tiup br backup full --pd "${PD_IP}:2379" \
 前述のコマンドでは次のようになります。
 
 -   `--backupts` : スナップショットの時点。形式は[TSO](/glossary.md#tso)またはタイムスタンプ ( `400036290571534337`や`2018-05-11 01:42:23`など) です。このスナップショットのデータがガベージ コレクションされた場合、 `br backup`コマンドはエラーを返し、 `br`は終了します。このパラメータを指定しないままにすると、 `br`バックアップ開始時刻に対応するスナップショットを選択します。
--   `--storage` : バックアップデータのstorageアドレス。スナップショット バックアップは、バックアップstorageとして Amazon S3、Google Cloud Storage、および Azure Blob Storage をサポートします。前述のコマンドでは、例として Amazon S3 を使用しています。詳細については、 [外部ストレージ サービスの URI 形式](/external-storage-uri.md)を参照してください。
+-   `--storage` : バックアップデータのstorageアドレス。スナップショット バックアップは、Amazon S3、Google Cloud Storage、および Azure Blob Storage をバックアップstorageとしてサポートします。前述のコマンドでは、例として Amazon S3 を使用しています。詳細については、 [外部ストレージ サービスの URI 形式](/external-storage-uri.md)を参照してください。
 -   `--ratelimit` : バックアップ タスクを実行する**TiKV ごとの**最大速度。単位は MiB/s です。
 
 バックアップ中、以下に示すように進行状況バーがターミナルに表示されます。進行状況バーが 100% まで進むと、バックアップ タスクが完了し、合計バックアップ時間、平均バックアップ速度、バックアップ データ サイズなどの統計が表示されます。

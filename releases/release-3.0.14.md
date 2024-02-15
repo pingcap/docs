@@ -1,5 +1,6 @@
 ---
 title: TiDB 3.0.14 Release Notes
+summary: TiDB 3.0.14 was released on May 9, 2020. The release includes compatibility changes, important bug fixes, new features, bug fixes, and improvements for TiDB, TiKV, and Tools. Some of the bug fixes include issues with query results, panic occurrences, and incorrect behavior. New features include enhanced syntax support and improved performance.
 ---
 
 # TiDB 3.0.14 リリースノート {#tidb-3-0-14-release-notes}
@@ -53,14 +54,14 @@ TiDB バージョン: 3.0.14
 
 -   TiKV
 
-    -   楽観的トランザクション[#7605](https://github.com/tikv/tikv/pull/7605)に多くの競合と`BatchRollback`条件が存在する場合のパフォーマンスを向上させます。
+    -   多くの競合と`BatchRollback`条件が楽観的トランザクションに存在する場合のパフォーマンスを向上させます[#7605](https://github.com/tikv/tikv/pull/7605)
     -   悲観的トランザクション[#7584](https://github.com/tikv/tikv/pull/7584)に多くの競合が存在する場合、悲観的ロック`waiter`頻繁に起動されるため、パフォーマンスが低下する問題を修正します。
 
 -   ツール
 
     -   TiDB Lightning
 
-        -   tidb-lightning-ctl [#287](https://github.com/pingcap/tidb-lightning/pull/287)の`fetch-mode`サブコマンドを使用した TiKV クラスター モードの印刷をサポート
+        -   tidb-lightning-ctl [#287](https://github.com/pingcap/tidb-lightning/pull/287)の`fetch-mode`サブコマンドを使用した TiKV クラスター モードの印刷のサポート
 
 ## バグの修正 {#bug-fixes}
 

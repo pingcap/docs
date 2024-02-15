@@ -30,7 +30,7 @@ storageエンジンからのデータの読み取りは、SQL 実行中に最も
 
 ## インデックスの選択ルール {#index-selection-rules}
 
-TiDB はルールまたはコストに基づいてインデックスを選択します。ベースのルールには、事前ルールとスカイライン プルーニングが含まれます。インデックスを選択するとき、TiDB は最初に事前ルールを試行します。インデックスが事前ルールを満たす場合、TiDB はこのインデックスを直接選択します。それ以外の場合、TiDB はスカイライン プルーニングを使用して不適切なインデックスを除外し、テーブルにアクセスする各オペレーターのコスト推定に基づいて最低コストのインデックスを選択します。
+TiDB はルールまたはコストに基づいてインデックスを選択します。ベースのルールには、事前ルールとスカイライン プルーニングが含まれます。インデックスを選択するとき、TiDB は最初に事前ルールを試行します。インデックスが事前ルールを満たす場合、TiDB はこのインデックスを直接選択します。それ以外の場合、TiDB はスカイライン プルーニングを使用して不適切なインデックスを除外し、テーブルにアクセスする各オペレーターのコスト推定に基づいてコストが最も低いインデックスを選択します。
 
 ### ルールベースの選択 {#rule-based-selection}
 
@@ -40,7 +40,7 @@ TiDB は、次のヒューリスティック事前ルールを使用してイン
 
 -   ルール 1: インデックスが「完全一致の一意のインデックス + テーブルから行を取得する必要がない (つまり、インデックスによって生成されたプランが IndexReader 演算子であることを意味します)」を満たす場合、TiDB はこのインデックスを直接選択します。
 
--   ルール 2: インデックスが「完全一致を持つ一意のインデックス + テーブルから行を取得する必要性 (つまり、インデックスによって生成されたプランが IndexReader 演算子であることを意味します)」を満たしている場合、TiDB は、行数が最も少ないインデックスを選択します。候補インデックスとしてテーブルから取得されます。
+-   ルール 2: インデックスが「完全一致を持つ一意のインデックス + テーブルから行を取得する必要性 (つまり、インデックスによって生成されたプランが IndexLookupReader 演算子であることを意味します)」を満たす場合、TiDB は、インデックスを取得する行数が最も少ないインデックスを選択します。候補インデックスとしてテーブルから取得されます。
 
 -   ルール 3: インデックスが「通常のインデックス + テーブルから行を取得する必要がない + 読み込む行数が一定のしきい値未満」を満たす場合、TiDB は読み込む行数が最も少ないインデックスを選択します。候補インデックスとして読み込まれます。
 
@@ -235,7 +235,7 @@ mysql> EXPLAIN SELECT /*+ use_index_merge(t2, idx) */ * FROM t2 WHERE a=1 AND JS
 6 rows in set, 1 warning (0.00 sec)
 ```
 
-同じ複数値インデックスにアクセスできる複数の`member of`式で構成される`OR`条件の場合、IndexMerge を使用して複数値インデックスにアクセスできます。
+同じ多値インデックスにアクセスできる複数の`member of`式で構成される`OR`条件の場合、IndexMerge を使用して多値インデックスにアクセスできます。
 
 ```sql
 mysql> CREATE TABLE t3 (a INT, j JSON, INDEX idx(a, (CAST(j AS SIGNED ARRAY))));
@@ -362,7 +362,7 @@ mysql> EXPLAIN SELECT /*+ use_index_merge(t3, idx) */ * FROM t3 WHERE ((1 member
 3 rows in set, 2 warnings (0.00 sec)
 ```
 
-複数値インデックスの現在の実装による制限により、 [`use_index`](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-)を使用すると`Can't find a proper physical plan for this query`エラーが返される可能性がありますが、 [`use_index_merge`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)を使用するとそのようなエラーは返されません。したがって、複数値のインデックスを使用する場合は`use_index_merge`を使用することをお勧めします。
+多値インデックスの現在の実装による制限により、 [`use_index`](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-)を使用すると`Can't find a proper physical plan for this query`エラーが返される可能性がありますが、 [`use_index_merge`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)使用するとそのようなエラーは返されません。したがって、複数値のインデックスを使用する場合は`use_index_merge`を使用することをお勧めします。
 
 ```sql
 mysql> EXPLAIN SELECT /*+ use_index(t3, idx) */ * FROM t3 WHERE ((1 member of (j)) AND (2 member of (j))) OR ((3 member of (j)) AND (4 member of (j)));

@@ -14,11 +14,11 @@ summary: Learn about the Optimizer Fix Controls feature and how to use `tidb_opt
 
 ## <code>tidb_opt_fix_control</code>の概要 {#introduction-to-code-tidb-opt-fix-control-code}
 
-v7.1.0 以降、TiDB はオプティマイザーの動作をよりきめ細かい方法で制御するための[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v710)システム変数を提供します。
+v6.5.3 および v7.1.0 以降、TiDB はオプティマイザーの動作をよりきめ細かい方法で制御する[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)システム変数を提供します。
 
 各修正は、特定の目的のために TiDB オプティマイザーの動作を調整するために使用される制御項目です。これは、動作変更の技術的な詳細を含む GitHub の問題に対応する番号で示されます。たとえば、修正`44262`の場合、修正[問題 44262](https://github.com/pingcap/tidb/issues/44262)で制御される内容を確認できます。
 
-[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v710)システム変数は、複数の修正をカンマ ( `,` ) で区切って 1 つの値として受け入れます。形式は`"<#issue1>:<value1>,<#issue2>:<value2>,...,<#issueN>:<valueN>"`で、 `<#issueN>`は修正番号です。例えば：
+[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)システム変数は、複数の修正をカンマ ( `,` ) で区切って 1 つの値として受け入れます。形式は`"<#issue1>:<value1>,<#issue2>:<value2>,...,<#issueN>:<valueN>"`で、 `<#issueN>`は修正番号です。例えば：
 
 ```sql
 SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
@@ -26,13 +26,13 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 ## オプティマイザー修正コントロールのリファレンス {#optimizer-fix-controls-reference}
 
-### <a href="https://github.com/pingcap/tidb/issues/44262"><code>44262</code></a> <span class="version-mark">v7.2.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-44262-code-44262-code-a-span-class-version-mark-new-in-v7-2-0-span}
+### <a href="https://github.com/pingcap/tidb/issues/44262"><code>44262</code></a> <span class="version-mark">v6.5.3 および v7.2.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-44262-code-44262-code-a-span-class-version-mark-new-in-v6-5-3-and-v7-2-0-span}
 
 -   デフォルト値: `OFF`
 -   可能な値: `ON` 、 `OFF`
 -   この変数は、 [グローバル統計](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)が欠落している場合に、パーティションテーブルにアクセスするために[動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)の使用を許可するかどうかを制御します。
 
-### <a href="https://github.com/pingcap/tidb/issues/44389"><code>44389</code></a> <span class="version-mark">v7.2.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-44389-code-44389-code-a-span-class-version-mark-new-in-v7-2-0-span}
+### <a href="https://github.com/pingcap/tidb/issues/44389"><code>44389</code></a> <span class="version-mark">v6.5.3 および v7.2.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-44389-code-44389-code-a-span-class-version-mark-new-in-v6-5-3-and-v7-2-0-span}
 
 -   デフォルト値: `OFF`
 -   可能な値: `ON` 、 `OFF`
@@ -44,13 +44,13 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 -   可能な値: `[0, 2147483647]`
 -   メモリを節約するために、プラン キャッシュは、この変数で指定された数を超えるパラメーターを持つクエリをキャッシュしません。 `0`制限なしを意味します。
 
-### <a href="https://github.com/pingcap/tidb/issues/44830"><code>44830</code></a> <span class="version-mark">v7.3.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-44830-code-44830-code-a-span-class-version-mark-new-in-v7-3-0-span}
+### <a href="https://github.com/pingcap/tidb/issues/44830"><code>44830</code></a> <span class="version-mark">v6.5.7 および v7.3.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-44830-code-44830-code-a-span-class-version-mark-new-in-v6-5-7-and-v7-3-0-span}
 
 -   デフォルト値: `OFF`
 -   可能な値: `ON` 、 `OFF`
 -   この変数は、プラン キャッシュが物理的な最適化中に生成された`PointGet`演算子を使用して実行プランをキャッシュできるかどうかを制御します。
 
-### <a href="https://github.com/pingcap/tidb/issues/44855"><code>44855</code></a> <span class="version-mark">v7.3.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-44855-code-44855-code-a-span-class-version-mark-new-in-v7-3-0-span}
+### <a href="https://github.com/pingcap/tidb/issues/44855"><code>44855</code></a> <span class="version-mark">v6.5.4 および v7.3.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-44855-code-44855-code-a-span-class-version-mark-new-in-v6-5-4-and-v7-3-0-span}
 
 -   デフォルト値: `OFF`
 -   可能な値: `ON` 、 `OFF`

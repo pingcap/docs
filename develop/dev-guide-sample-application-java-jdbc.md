@@ -36,6 +36,10 @@ TiDB は MySQL 互換データベースであり、JDBC (Java Database Connectiv
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
+> **注記：**
+>
+> セキュリティを考慮して、インターネット経由で接続する場合は、 `VERIFY_IDENTITY`を使用して TiDB クラスターへの TLS 接続を確立することをお勧めします。 TiDB サーバーレスと TiDB 専用はどちらもサブジェクト代替名 (SAN) 証明書を使用します。これには、MySQL Connector/J バージョンが[8.0.22](https://dev.mysql.com/doc/relnotes/connector-j/8.0/en/news-8-0-22.html)以上である必要があります。
+
 **TiDB クラスターがない場合は、次のように作成できます。**
 
 -   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
@@ -71,6 +75,8 @@ cd tidb-java-jdbc-quickstart
 
     -   **エンドポイント タイプは**`Public`に設定されます
 
+    -   **ブランチは**`main`に設定されています
+
     -   **[接続先] は**`General`に設定されています
 
     -   **オペレーティング システムが**環境に一致します。
@@ -79,7 +85,7 @@ cd tidb-java-jdbc-quickstart
     >
     > プログラムが Windows Subsystem for Linux (WSL) で実行されている場合は、対応する Linux ディストリビューションに切り替えます。
 
-4.  **「パスワードの作成」**をクリックしてランダムなパスワードを作成します。
+4.  **「パスワードの生成」**をクリックして、ランダムなパスワードを作成します。
 
     > **ヒント：**
     >
@@ -294,7 +300,7 @@ Javaドライバーはデータベースへの低レベルのアクセスを提�
 ## 次のステップ {#next-steps}
 
 -   MySQL Connector/J の使用法については[MySQL Connector/J のドキュメント](https://dev.mysql.com/doc/connector-j/en/)からご覧ください。
--   TiDB アプリケーション開発の[SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)プラクティスについて[トランザクション](/develop/dev-guide-transaction-overview.md) 、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[データの削除](/develop/dev-guide-delete-data.md) [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ください。
+-   TiDB アプリケーション開発[単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ベスト プラクティスについて[トランザクション](/develop/dev-guide-transaction-overview.md) 、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[データの削除](/develop/dev-guide-delete-data.md) [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)ください。
 -   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 -   Java開発者向けのコースを通じて[Javaから TiDB を操作する](https://eng.edu.pingcap.com/catalog/info/id:212)を学びます。
 

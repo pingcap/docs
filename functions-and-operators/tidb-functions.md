@@ -67,7 +67,7 @@ TIDB_DECODE_KEY(START_KEY): {"_tidb_rowid":1958897,"table_id":"59"}
 次の例では、テーブル`t2`に複合クラスター化主キーがあります。 JSON 出力から、主キーの一部である両方の列の名前と値を含む`handle`が確認できます。
 
 ```sql
-show create table t2\G
+SHOW CREATE TABLE t2\G
 ```
 
 ```sql
@@ -83,7 +83,7 @@ Create Table: CREATE TABLE `t2` (
 ```
 
 ```sql
-select * from information_schema.tikv_region_status where table_name='t2' limit 1\G
+SELECT * FROM information_schema.tikv_region_status WHERE table_name='t2' LIMIT 1\G
 ```
 
 ```sql
@@ -109,7 +109,7 @@ REPLICATIONSTATUS_STATEID: NULL
 ```
 
 ```sql
-select tidb_decode_key('7480000000000000FF3E5F720400000000FF0000000601633430FF3338646232FF2D64FF3531632D3131FF65FF622D386337352DFFFF3830653635303138FFFF61396265000000FF00FB000000000000F9');
+SELECT tidb_decode_key('7480000000000000FF3E5F720400000000FF0000000601633430FF3338646232FF2D64FF3531632D3131FF65FF622D386337352DFFFF3830653635303138FFFF61396265000000FF00FB000000000000F9');
 ```
 
 ```sql
@@ -120,6 +120,36 @@ select tidb_decode_key('7480000000000000FF3E5F720400000000FF0000000601633430FF33
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 1 row in set (0.001 sec)
 ```
+
+テーブルの最初のリージョンは、テーブルの`table_id`のみを持つキーで始まります。テーブルの最後のリージョンは`table_id + 1`で終わります。間にあるリージョンには、 `_tidb_rowid`または`handle`を含む長いキーがあります。
+
+```sql
+SELECT
+  TABLE_NAME,
+  TIDB_DECODE_KEY(START_KEY),
+  TIDB_DECODE_KEY(END_KEY)
+FROM
+  information_schema.TIKV_REGION_STATUS
+WHERE
+  TABLE_NAME='stock'
+  AND IS_INDEX=0
+ORDER BY
+  START_KEY;
+```
+
+```sql
++------------+-----------------------------------------------------------+-----------------------------------------------------------+
+| TABLE_NAME | TIDB_DECODE_KEY(START_KEY)                                | TIDB_DECODE_KEY(END_KEY)                                  |
++------------+-----------------------------------------------------------+-----------------------------------------------------------+
+| stock      | {"table_id":143}                                          | {"handle":{"s_i_id":"32485","s_w_id":"3"},"table_id":143} |
+| stock      | {"handle":{"s_i_id":"32485","s_w_id":"3"},"table_id":143} | {"handle":{"s_i_id":"64964","s_w_id":"5"},"table_id":143} |
+| stock      | {"handle":{"s_i_id":"64964","s_w_id":"5"},"table_id":143} | {"handle":{"s_i_id":"97451","s_w_id":"7"},"table_id":143} |
+| stock      | {"handle":{"s_i_id":"97451","s_w_id":"7"},"table_id":143} | {"table_id":145}                                          |
++------------+-----------------------------------------------------------+-----------------------------------------------------------+
+4 rows in set (0.031 sec)
+```
+
+`TIDB_DECODE_KEY`は、成功すると有効な JSON を返し、デコードに失敗した場合は引数の値を返します。
 
 ### TIDB_DECODE_PLAN {#tidb-decode-plan}
 
@@ -332,7 +362,7 @@ SELECT *, TIDB_ROW_CHECKSUM() FROM t WHERE id = 1;
 
 `CURRENT_RESOURCE_GROUP`関数は、現在のセッションがバインドされているリソース グループ名を表示するために使用されます。 [リソース制御](/tidb-resource-control.md)機能が有効になっている場合、SQL ステートメントで使用できる利用可能なリソースは、バインドされたリソース グループのリソース クォータによって制限されます。
 
-セッションが確立されると、TiDB はログイン ユーザーがデフォルトでバインドされているリソース グループにセッションをバインドします。ユーザーがどのリソース グループにもバインドされていない場合、セッションは`default`リソース グループにバインドされます。セッションが確立されると、ユーザーのバインドされたリソース グループが[ユーザーにバインドされたリソース グループを変更する](/sql-statements/sql-statement-alter-user.md#modify-basic-user-information)によって変更された場合でも、デフォルトではバインドされたリソース グループは変更されません。現在のセッションのバインドされたリソース グループを変更するには、 [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)を使用できます。
+セッションが確立されると、TiDB はログイン ユーザーがデフォルトでバインドされているリソース グループにセッションをバインドします。ユーザーがどのリソース グループにもバインドされていない場合、セッションは`default`リソース グループにバインドされます。セッションが確立されると、ユーザーのバインドされたリソース グループが[ユーザーにバインドされたリソース グループを変更する](/sql-statements/sql-statement-alter-user.md#modify-basic-user-information)によって変更されても、デフォルトではバインドされたリソース グループは変更されません。現在のセッションのバインドされたリソース グループを変更するには、 [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)を使用できます。
 
 #### 例 {#example}
 

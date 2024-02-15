@@ -1,5 +1,6 @@
 ---
 title: TiDB 2.1.13 Release Notes
+summary: TiDB 2.1.13 was released on June 21, 2019. It includes features to scatter row IDs, optimize DDL metadata lifetime, fix OOM issue, update statistics, support Region presplit, improve MySQL compatibility, and fix estimation issues. TiKV fixes incomplete snapshots and adds a feature to check the validity of the block-size configuration. TiDB Binlog fixes wrong offset and adds advertise-addr configuration in Drainer.
 ---
 
 # TiDB 2.1.13 リリースノート {#tidb-2-1-13-release-notes}
@@ -12,7 +13,7 @@ TiDB Ansible バージョン: 2.1.13
 
 ## TiDB {#tidb}
 
--   ホットスポットの問題を軽減するために、列に`AUTO_INCREMENT`属性が含まれる場合に`SHARD_ROW_ID_BITS`を使用して行 ID を分散する機能を追加します[#10788](https://github.com/pingcap/tidb/pull/10788)
+-   ホットスポットの問題を軽減するために、列に`AUTO_INCREMENT`属性が含まれている場合に`SHARD_ROW_ID_BITS`を使用して行 ID を分散する機能を追加します[#10788](https://github.com/pingcap/tidb/pull/10788)
 -   無効な DDL メタデータの存続期間を最適化し、TiDB クラスターのアップグレード後の DDL 操作の通常の実行の回復を高速化します[#10789](https://github.com/pingcap/tidb/pull/10789)
 -   `execdetails.ExecDetails`ポインタ[#10833](https://github.com/pingcap/tidb/pull/10833)によってコプロセッサーリソースを迅速に解放できないことが原因で発生する、同時実行シナリオでの OOM 問題を修正します。
 -   統計[#10772](https://github.com/pingcap/tidb/pull/10772)を更新するかどうかを制御する`update-stats`構成項目を追加します。

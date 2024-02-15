@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Developing Java Applications with TiDB
-summary: Learn the best practices for developing Java applications with TiDB.
+summary: This document introduces best practices for developing Java applications with TiDB, covering database-related components, JDBC usage, connection pool configuration, data access framework, Spring Transaction, and troubleshooting tools. TiDB is highly compatible with MySQL, so most MySQL-based Java application best practices also apply to TiDB.
 ---
 
 # TiDB を使用したJavaアプリケーション開発のベスト プラクティス {#best-practices-for-developing-java-applications-with-tidb}
@@ -69,7 +69,7 @@ OLTP (オンライン トランザクション処理) シナリオの場合、�
 
     クライアントが読み取りを完了するか、 `resultset`閉じる前にクエリでこのようなエラーが発生するのを回避するには、URL に`clobberStreamingResults=true`パラメータを追加します。その後、 `resultset`は自動的に閉じられますが、前のストリーミング クエリで読み取られる結果セットは失われます。
 
--   カーソルフェッチを使用するには、まず正の整数として[`FetchSize`を設定する](http://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html)を設定し、JDBC URL で`useCursorFetch=true`を設定します。
+-   カーソルフェッチを使用するには、まず正の整数として[`FetchSize`を設定する](http://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html)を指定し、JDBC URL で`useCursorFetch=true`を設定します。
 
 TiDB は両方の方法をサポートしていますが、最初の方法を使用することをお勧めします。これは、実装が単純で実行効率が高いためです。
 
@@ -241,13 +241,13 @@ Javaアプリケーションで次のエラーが頻繁に表示される場合:
 MyBatis Mapper は 2 つのパラメータをサポートしています。
 
 -   `select 1 from t where id = #{param1}`は Prepared Statement として`select 1 from t where id =?`に変換されて「準備」され、実パラメータが再利用されます。このパラメーターを前述の Prepare 接続パラメーターとともに使用すると、最高のパフォーマンスが得られます。
--   `select 1 from t where id = ${param2}`テキストファイルとして`select 1 from t where id = 1`に置き換えて実行します。このステートメントが別のパラメータに置き換えられて実行されると、MyBatis はステートメントを「準備」するためのさまざまなリクエストを TiDB に送信します。これにより、TiDB が大量のプリペアド ステートメントをキャッシュする可能性があり、この方法で SQL 操作を実行すると、インジェクションのセキュリティ リスクが発生します。
+-   `select 1 from t where id = ${param2}`テキストファイルとして`select 1 from t where id = 1`に置き換えて実行します。このステートメントが別のパラメータに置き換えられて実行されると、MyBatis はステートメントを「準備する」ための別のリクエストを TiDB に送信します。これにより、TiDB が大量のプリペアド ステートメントをキャッシュする可能性があり、この方法で SQL 操作を実行すると、インジェクションのセキュリティ リスクが発生します。
 
 #### 動的SQLバッチ {#dynamic-sql-batch}
 
 [動的SQL - foreach](http://www.mybatis.org/mybatis-3/dynamic-sql.html#foreach)
 
-複数の`INSERT`ステートメントの`insert ... values(...), (...), ...`形式への自動書き換えをサポートするために、前述したように JDBC で`rewriteBatchedStatements=true`を構成することに加えて、MyBatis は動的 SQL を使用してバッチ挿入を半自動的に生成することもできます。次のマッパーを例として取り上げます。
+複数の`INSERT`ステートメントの`insert ... values(...), (...), ...`形式への自動書き換えをサポートするために、前述のように JDBC で`rewriteBatchedStatements=true`を構成することに加えて、MyBatis は動的 SQL を使用してバッチ挿入を半自動的に生成することもできます。次のマッパーを例として取り上げます。
 
 ```xml
 <insert id="insertTestBatch" parameterType="java.util.List" fetchSize="1">
@@ -299,7 +299,7 @@ Cursor<Post> queryAllPost();
 -   再利用: プリペアド ステートメントは`executor`にキャッシュされるため、JDBC `cachePrepStmts`を使用せずにプリペアド ステートメントの重複呼び出しを減らすことができます。
 -   バッチ: 各更新操作 ( `INSERT` / `DELETE` / `UPDATE` ) は最初にバッチに追加され、トランザクションがコミットされるか`SELECT`が実行されるまで実行されます。 JDBCレイヤーで`rewriteBatchStatements`が有効になっている場合、ステートメントの書き換えが試行されます。そうでない場合は、明細書が 1 つずつ送信されます。
 
-通常、デフォルト値の`ExecutorType`は`Simple`です。 `openSession`を呼び出すときは`ExecutorType`を変更する必要があります。バッチ実行の場合、トランザクションでは`UPDATE`または`INSERT`のステートメントがかなり高速に実行されますが、データの読み取りやトランザクションのコミット時には遅くなることがわかります。これは実際には正常な現象であるため、遅い SQL クエリのトラブルシューティングを行う場合は、これに注意する必要があります。
+通常、デフォルト値の`ExecutorType`は`Simple`です。 `openSession`を呼び出すときは`ExecutorType`を変更する必要があります。バッチ実行の場合、トランザクション内で`UPDATE`または`INSERT`ステートメントはかなり高速に実行されますが、データの読み取りやトランザクションのコミット時には遅くなることがわかります。これは実際には正常な現象であるため、遅い SQL クエリのトラブルシューティングを行う場合は、これに注意する必要があります。
 
 ## 春のトランザクション {#spring-transaction}
 

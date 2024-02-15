@@ -1,6 +1,6 @@
 ---
 title: PingCAP Clinic Diagnostic Data
-summary: Learn what diagnostic data can be collected by PingCAP Clinic Diagnostic Service from the TiDB and DM clusters deployed using TiUP.
+summary: PingCAP Clinic Diagnostic Service collects diagnostic data from TiDB and DM clusters using TiUP. Data types include cluster information, diagnostic data for TiDB, TiKV, PD, TiFlash, TiCDC, Prometheus monitoring, system variables, and node system information. Data is stored in Clinic Server for international and Chinese mainland users. The collected data is only used for troubleshooting cluster problems.
 ---
 
 # PingCAPクリニックの診断データ {#pingcap-clinic-diagnostic-data}
@@ -12,7 +12,7 @@ PingCAPクリニックによって収集された診断データは、クラス�
 クラウドに展開された診断サービスである Clinic Server は、データのstorage場所に応じて 2 つの独立したサービスを提供します。
 
 -   [海外ユーザー向けクリニックサーバー](https://clinic.pingcap.com) : 収集したデータを海外ユーザー向けの Clinic Server にアップロードすると、データは AWS 米国リージョンの PingCAP によってデプロイされた Amazon S3 サービスに保存されます。 PingCAP は厳格なデータ アクセス ポリシーを使用しており、承認されたテクニカル サポートのみがデータにアクセスできます。
--   [中国本土のユーザー向けクリニックサーバー](https://clinic.pingcap.com.cn) : 収集したデータを中国本土のユーザー向けに Clinic Server にアップロードすると、データは中国 (北京) リージョンの PingCAP によって展開された Amazon S3 サービスに保存されます。 PingCAP は厳格なデータ アクセス ポリシーを使用しており、承認されたテクニカル サポートのみがデータにアクセスできます。
+-   [中国本土のユーザー向けクリニックサーバー](https://clinic.pingcap.com.cn) : 収集したデータを中国本土のユーザー向けに Clinic Server にアップロードすると、データは中国 (北京) リージョンの PingCAP によって展開された Amazon S3 サービスに保存されます。 PingCAP は厳格なデータ アクセス ポリシーを使用しており、認定されたテクニカル サポートのみがデータにアクセスできます。
 
 ## TiDB クラスター {#tidb-clusters}
 

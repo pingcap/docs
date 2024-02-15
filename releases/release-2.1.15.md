@@ -1,5 +1,6 @@
 ---
 title: TiDB 2.1.15 Release Notes
+summary: TiDB 2.1.15 was released on July 16, 2019. It includes various bug fixes and improvements, such as fixing issues with functions like DATE_ADD and INSERT, adding new SQL statements like SHOW TABLE REGIONS, and enhancing the Audit plugin. TiKV and PD also received updates to unify log formats and improve accuracy. Additionally, there were optimizations made to TiDB Binlog and TiDB Lightning, and new monitoring items added to TiDB Ansible.
 ---
 
 # TiDB 2.1.15 リリースノート {#tidb-2-1-15-release-notes}
@@ -12,7 +13,7 @@ TiDB Ansible バージョン: 2.1.15
 
 ## TiDB {#tidb}
 
--   マイクロ秒[#11289](https://github.com/pingcap/tidb/pull/11289)を処理するときに、 `DATE_ADD`関数が不正な位置合わせにより間違った結果を返す問題を修正します。
+-   マイクロ秒[#11289](https://github.com/pingcap/tidb/pull/11289)を処理する際に、不正な位置合わせにより`DATE_ADD`関数が間違った結果を返す問題を修正します。
 -   文字列列の空の値が`FLOAT`または`INT`と比較されるとエラーが報告される問題を修正します[#11279](https://github.com/pingcap/tidb/pull/11279)
 -   パラメータが`NULL` [#11249](https://github.com/pingcap/tidb/pull/11249)の場合、 `INSERT`関数が`NULL`値を正しく返せない問題を修正します。
 -   非文字列型かつ長さ`0` [#11215](https://github.com/pingcap/tidb/pull/11215)のインデックス作成時にエラーが発生する問題を修正

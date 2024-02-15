@@ -1,5 +1,6 @@
 ---
 title: TiDB 3.0.1 Release Notes
+summary: "TiDB 3.0.1 Release Notes July 16, 2019. TiDB version 3.0.1. Add support for MAX_EXECUTION_TIME feature. Support auto-adjustment of incremental gap for auto-increment IDs. Add ADMIN PLUGINS ENABLE/DISABLE SQL statement. Prohibit Window Functions from being cached in Prepare Plan Cache. Fix various bugs and issues. TiKV: Add statistics of blob file size. Fix core dump issue. PD: Add enable-grpc-gateway configuration option. Optimize hot Region scheduling strategy. Tools: TiDB Binlog - Optimize Pump GC strategy. TiDB Lightning - Fix import error. TiDB Ansible - Add precheck feature, update monitoring information."
 ---
 
 # TiDB 3.0.1 リリースノート {#tidb-3-0-1-release-notes}
@@ -20,7 +21,7 @@ TiDB Ansible バージョン: 3.0.1
 -   リージョンの分割期間中のデフォルトの動作を、PD のスケジュール[#11166](https://github.com/pingcap/tidb/pull/11166)が完了するまで待機するように変更します。
 -   場合によっては不正確な結果が生じるのを避けるために、ウィンドウ関数が Prepare Plan Cache にキャッシュされることを禁止します[#11048](https://github.com/pingcap/tidb/pull/11048)
 -   `ALTER`ステートメントによる格納された生成列の定義の変更を禁止する[#11068](https://github.com/pingcap/tidb/pull/11068)
--   仮想生成列を保存された生成列への変更を禁止する[#11068](https://github.com/pingcap/tidb/pull/11068)
+-   仮想生成列を保存された生成列に変更することを禁止する[#11068](https://github.com/pingcap/tidb/pull/11068)
 -   インデックス[#11068](https://github.com/pingcap/tidb/pull/11068)を使用して生成された列式の変更を禁止します。
 -   ARM64アーキテクチャでの TiDB のコンパイルのサポート[#11150](https://github.com/pingcap/tidb/pull/11150)
 -   データベースまたはテーブルの照合順序の変更をサポートしますが、データベース/テーブルの文字セットは UTF-8 または utf8mb4 である必要があります[#11086](https://github.com/pingcap/tidb/pull/11086)
@@ -63,8 +64,8 @@ TiDB Ansible バージョン: 3.0.1
 
 -   PD がホット リージョン[#1552](https://github.com/pingcap/pd/pull/1552)をスケジュールすると、スケジュール制限が自動的に 0 に調整される問題を修正します。
 -   etcd [#1596](https://github.com/pingcap/pd/pull/1596)の gRPC ゲートウェイ機能を有効にするための`enable-grpc-gateway`構成オプションを追加します。
--   `store-balance-rate` 、 `hot-region-schedule-limit`およびスケジューラ構成に関連するその他の統計を追加[#1601](https://github.com/pingcap/pd/pull/1601)
--   ホットリージョンのスケジューリング戦略を最適化し、スケジューリング中にレプリカが不足しているリージョンをスキップして、複数のレプリカが同じ IDC [#1609](https://github.com/pingcap/pd/pull/1609)にスケジュールされるのを防ぎます。
+-   `store-balance-rate` 、 `hot-region-schedule-limit`およびスケジューラ構成に関連するその他の統計を追加します[#1601](https://github.com/pingcap/pd/pull/1601)
+-   ホットリージョンのスケジューリング戦略を最適化し、スケジューリング中にレプリカのないリージョンをスキップして、複数のレプリカが同じ IDC [#1609](https://github.com/pingcap/pd/pull/1609)にスケジュールされるのを防ぎます。
 -   リージョンのマージ処理ロジックを最適化し、より小さいサイズのリージョンのマージを優先してリージョンのマージを高速化します[#1613](https://github.com/pingcap/pd/pull/1613)
 -   過剰なスケジュール タスクがシステム リソースを占有し、パフォーマンスに影響を与えることを防ぐために、一度に実行できるホットリージョンスケジュールのデフォルト制限を 64 に調整します[#1616](https://github.com/pingcap/pd/pull/1616)
 -   リージョンのスケジューリング戦略を最適化し、 `Pending`ステータス[#1617](https://github.com/pingcap/pd/pull/1617)のリージョンのスケジューリングに高い優先順位を与えることをサポートします。

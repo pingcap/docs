@@ -1,5 +1,6 @@
 ---
 title: What's New in TiDB 5.0
+summary: TiDB 5.0 introduces MPP architecture, clustered index, async commit, and stability improvements. It also enhances compatibility changes, configuration parameters, and new features. Additionally, it optimizes performance, high availability, disaster recovery, data migration, diagnostics, deployment, and maintenance. Telemetry is added for cluster usage metrics.
 ---
 
 # TiDB 5.0 の新機能 {#what-s-new-in-tidb-5-0}
@@ -301,7 +302,7 @@ TiDB スケジューリング プロセスは、I/O、ネットワーク、CPU�
 
 v5.0 より前では、TiDB はデフォルトでクロステーブルリージョンマージ機能を無効にしています。 v5.0 以降、空のリージョンの数とネットワーク、メモリ、CPU のオーバーヘッドを削減するために、この機能はデフォルトで有効になっています。 `schedule.enable-cross-table-merge`構成項目を変更することで、この機能を無効にできます。
 
-#### システムがデフォルトでデータ圧縮速度を自動的に調整し、バックグラウンド タスクとフォアグラウンドの読み取りおよび書き込みの間の I/O リソースの競合のバランスを取ることができるようにします。 {#enable-the-system-to-automatically-adjust-the-data-compaction-speed-by-default-to-balance-the-contention-for-i-o-resources-between-background-tasks-and-foreground-reads-and-writes}
+#### システムがデフォルトでデータ圧縮速度を自動的に調整できるようにして、バックグラウンド タスクとフォアグラウンドの読み取りおよび書き込みの間の I/O リソースの競合のバランスをとります。 {#enable-the-system-to-automatically-adjust-the-data-compaction-speed-by-default-to-balance-the-contention-for-i-o-resources-between-background-tasks-and-foreground-reads-and-writes}
 
 [ユーザードキュメント](/tikv-configuration-file.md#rate-limiter-auto-tuned-new-in-v50)
 
@@ -341,7 +342,7 @@ SQL BINDING ステートメントを使用して SQL ステートメントを手
 
 TiDB をアップグレードする場合、パフォーマンスのジッターを回避するために、ベースライン キャプチャ機能を有効にして、システムが最新の実行プランを自動的にキャプチャしてバインドし、システム テーブルに保存できるようにすることができます。 TiDB がアップグレードされた後、 `SHOW GLOBAL BINDING`コマンドを実行してバインドされた実行プランをエクスポートし、これらのプランを削除するかどうかを決定できます。
 
-この機能はデフォルトでは無効になっています。これを有効にするには、サーバーを変更するか、グローバル システム変数`tidb_capture_plan_baselines`を`ON`に設定します。この機能が有効な場合、システムはステートメントの概要から少なくとも 2 回出現する SQL ステートメントを`bind-info-lease`ごとにフェッチし (デフォルト値は`3s` )、これらの SQL ステートメントを自動的にキャプチャしてバインドします。
+この機能はデフォルトでは無効になっています。これを有効にするには、サーバーを変更するか、グローバル システム変数`tidb_capture_plan_baselines`を`ON`に設定します。この機能が有効な場合、システムはステートメントの概要から`bind-info-lease` (デフォルト値は`3s` ) ごとに少なくとも 2 回出現する SQL ステートメントをフェッチし、これらの SQL ステートメントを自動的にキャプチャしてバインドします。
 
 ### TiFlashクエリの安定性の向上 {#improve-stability-of-tiflash-queries}
 
@@ -452,7 +453,7 @@ v1.4.0 以降、 TiUP は次の項目を最適化します。
 -   デフォルトでアップグレード中にローリング アップグレードを使用するユーザーのリージョンLeaderの再配置が高速化されるため、TiKV のローリング アップグレードの時間が短縮されます。
 -   ローリング アップグレードを実行する前に、 `check`サブコマンドを使用してリージョンモニターのステータスを確認します。アップグレード前にクラスターが通常の状態であることを確認して、アップグレードが失敗する可能性を減らします。
 
-### ブレークポイント機能をサポートする {#support-the-breakpoint-feature}
+### ブレークポイント機能のサポート {#support-the-breakpoint-feature}
 
 TiUP v1.4.0 より前では、DBA がtiup-cluster を使用して TiDB クラスターをアップグレードする場合、コマンドの実行が中断されると、すべてのアップグレード操作を最初から再実行する必要がありました。
 

@@ -1,5 +1,6 @@
 ---
 title: TiDB 3.0.4 Release Notes
+summary: TiDB 3.0.4 was released on October 8, 2019, with new features including system table for troubleshooting SQL performance issues, improvements in split performance and reverse scan, and fixed issues related to slow query logs and data replication. The release also includes contributions from the community and updates to TiDB, TiKV, PD, and TiDB Ansible.
 ---
 
 # TiDB 3.0.4 リリースノート {#tidb-3-0-4-release-notes}
@@ -30,7 +31,7 @@ TiDB Ansible バージョン: 3.0.4
     -   コメント化されていない TiDB 固有の構文`PRE_SPLIT_REGIONS`により、データ レプリケーション中にダウンストリーム データベースでエラーが発生する可能性がある問題を修正します。
     -   カーソルを使用して`PREPARE` + `EXECUTE`の結果を取得するときにスロー クエリ ログが正しくないという TiDB の問題を修正しました。
     -   隣接する小さなリージョンをマージできないというPDの問題を修正
-    -   プロセスが長時間実行されると、アイドル状態のクラスターでのファイル記述子のリークにより、TiKV プロセスが異常終了する可能性があるという TiKV の問題を修正します。
+    -   プロセスが長時間実行されると、アイドル状態のクラスターでのファイル記述子のリークにより、TiKV プロセスが異常終了する可能性があるという TiKV の問題を修正しました。
 -   貢献者
 
     このリリースにご協力いただいたコミュニティの次の貢献者に感謝します。

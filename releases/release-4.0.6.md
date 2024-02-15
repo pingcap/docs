@@ -1,5 +1,6 @@
 ---
 title: TiDB 4.0.6 Release Notes
+summary: TiDB 4.0.6 was released on September 15, 2020. New features include TiFlash support for outer join and TiDB Dashboard improvements. Tools like TiCDC and TiKV have also been updated. Bug fixes for TiDB, TiKV, PD, TiFlash, and various tools are included in this release.
 ---
 
 # TiDB 4.0.6 リリースノート {#tidb-4-0-6-release-notes}
@@ -37,7 +38,7 @@ TiDB バージョン: 4.0.6
     -   より多くの RPC ランタイム情報を`Cop Runtime`統計[#19264](https://github.com/pingcap/tidb/pull/19264)に記録します。
     -   `metrics_schema`と`performance_schema`でのテーブルの作成を禁止する[#19792](https://github.com/pingcap/tidb/pull/19792)
     -   Union Executor [#19886](https://github.com/pingcap/tidb/pull/19886)の同時実行性の調整をサポート
-    -   ブロードキャスト参加[#19664](https://github.com/pingcap/tidb/pull/19664)の参加をサポート
+    -   ブロードキャスト参加[#19664](https://github.com/pingcap/tidb/pull/19664)への参加をサポート
     -   プロセスリスト[#19829](https://github.com/pingcap/tidb/pull/19829)のSQLダイジェストを追加
     -   自動コミットステートメントの再試行[#19796](https://github.com/pingcap/tidb/pull/19796)のために悲観的トランザクション モードに切り替える
     -   `Str_to_date()` [#19693](https://github.com/pingcap/tidb/pull/19693)の`%r`および`%T`データ形式をサポート

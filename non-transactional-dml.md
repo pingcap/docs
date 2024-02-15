@@ -280,7 +280,7 @@ BATCH ON id LIMIT 2 DELETE /*+ USE_INDEX(t)*/ FROM t WHERE v < 6;
 -   シャード列にはインデックスを付ける必要があります。インデックスは、単一列インデックス、または結合インデックスの最初の列にすることができます。
 -   [`autocommit`](/system-variables.md#autocommit)モードで使用する必要があります。
 -   バッチdmlが有効な場合は使用できません。
--   [ `tidb_snapshot` ](/read-historyal-data.md#操作フロー)が設定されている場合は使用できません。
+-   [`tidb_snapshot`](/read-historical-data.md)を設定した場合は使用できません。
 -   `prepare`ステートメントと一緒に使用することはできません。
 -   `ENUM` 、 `BIT` 、 `SET` 、 `JSON`タイプはシャード列としてサポートされていません。
 -   [一時テーブル](/temporary-tables.md)ではサポートされていません。
@@ -318,6 +318,42 @@ BATCH ON id LIMIT 2 DELETE /*+ USE_INDEX(t)*/ FROM t WHERE v < 6;
 -   安定性: バッチ DML は、不適切な使用によりデータ インデックスの不整合が発生する傾向があります。非トランザクション DML ステートメントは、データ インデックスの不整合を引き起こしません。ただし、不適切に使用すると、非トランザクション DML ステートメントは元のステートメントと同等ではなくなり、アプリケーションで予期しない動作が発生する可能性があります。詳細は[一般的な問題セクション](#non-transactional-delete-has-exceptional-behavior-that-is-not-equivalent-to-ordinary-delete)を参照してください。
 
 ## よくある問題 {#common-issues}
+
+### 複数のテーブル結合ステートメントを実行すると、 <code>Unknown column xxx in &#39;where clause&#39;</code>エラーが発生します {#executing-a-multiple-table-joins-statement-results-in-the-code-unknown-column-xxx-in-where-clause-code-error}
+
+このエラーは、クエリ内で連結された`WHERE`句に[シャード列](#parameter-description)が定義されているテーブル以外のテーブルが含まれる場合に発生します。たとえば、次の SQL ステートメントでは、シャード列は`t2.id`で、 table `t2`に定義されていますが、 `WHERE`句には table `t2`と`t3`が含まれています。
+
+```sql
+BATCH ON test.t2.id LIMIT 1 
+INSERT INTO t 
+SELECT t2.id, t2.v, t3. FROM t2, t3 WHERE t2.id = t3.id
+```
+
+```sql
+(1054, "Unknown column 't3.id' in 'where clause'")
+```
+
+エラーが発生した場合は、 `DRY RUN QUERY`使用して確認のためにクエリ ステートメントを出力できます。例えば：
+
+```sql
+BATCH ON test.t2.id LIMIT 1 
+DRY RUN QUERY INSERT INTO t 
+SELECT t2.id, t2.v, t3. FROM t2, t3 WHERE t2.id = t3.id
+```
+
+このエラーを回避するには、 `WHERE`句の他のテーブルに関連する条件を`JOIN`句の`ON`条件に移動します。例えば：
+
+```sql
+BATCH ON test.t2.id LIMIT 1 
+INSERT INTO t 
+SELECT t2.id, t2.v, t3. FROM t2 JOIN t3 ON t2.id=t3.id
+```
+
+    +----------------+---------------+
+    | number of jobs | job status    |
+    +----------------+---------------+
+    | 0              | all succeeded |
+    +----------------+---------------+
 
 ### 実際のバッチ サイズが指定されたバッチ サイズと同じではありません {#the-actual-batch-size-is-not-the-same-as-the-specified-batch-size}
 

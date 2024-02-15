@@ -1,5 +1,6 @@
 ---
 title: TiDB 2.0.10 Release Notes
+summary: TiDB 2.0.10 and TiDB Ansible 2.0.10 were released on December 18, 2018. The release includes improvements in system compatibility and stability. Fixes include issues with DDL jobs, ORDER BY and UNION clauses, UNCOMPRESS function, ANSI_QUOTES SQL_MODE, select results, and more. PD fixes a possible RaftCluster deadlock issue, while TiKV optimizes leader transfer and fixes redundant Region heartbeats.
 ---
 
 # TiDB 2.0.10 リリースノート {#tidb-2-0-10-release-notes}
@@ -30,7 +31,7 @@ title: TiDB 2.0.10 Release Notes
 
 ## PD {#pd}
 
--   デッドロック[#1370](https://github.com/pingcap/pd/pull/1370)により RaftCluster が停止できない可能性がある問題を修正
+-   デッドロック[#1370](https://github.com/pingcap/pd/pull/1370)が原因で RaftCluster が停止できない可能性がある問題を修正
 
 ## TiKV {#tikv}
 

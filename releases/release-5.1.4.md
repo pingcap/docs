@@ -1,5 +1,6 @@
 ---
 title: TiDB 5.1.4 Release Notes
+summary: "TiDB 5.1.4 Release Notes: Compatibility changes include default value changes for system variables. Improvements in partition pruning, memory usage tracking, and speed of inserting SST files. Bug fixes address memory leaks, configuration issues, and incorrect query results. Tools like TiCDC and TiFlash also receive various fixes and improvements."
 ---
 
 # TiDB 5.1.4 リリースノート {#tidb-5-1-4-release-notes}
@@ -157,7 +158,7 @@ TiDB バージョン: 5.1.4
         -   チェンジフィードチェックポイントラグ[#3010](https://github.com/pingcap/ticdc/issues/3010)の負の値エラーを修正
         -   コンテナ環境の OOM 問題を修正する[#1798](https://github.com/pingcap/tiflow/issues/1798)
         -   複数の TiKV がクラッシュしたとき、または強制再起動中に TiCDC レプリケーションが中断される問題を修正します[#3288](https://github.com/pingcap/ticdc/issues/3288)
-        -   DDL 処理後のメモリリーク問題を修正[#3174](https://github.com/pingcap/ticdc/issues/3174)
+        -   DDL 処理後のメモリリークの問題を修正[#3174](https://github.com/pingcap/ticdc/issues/3174)
         -   ErrGCTTLExceeded エラーが発生したときに変更フィードが十分な速度で失敗しない問題を修正します[#3111](https://github.com/pingcap/ticdc/issues/3111)
         -   上流の TiDB インスタンスが予期せず終了すると、TiCDC レプリケーション タスクが終了する可能性がある問題を修正します[#3061](https://github.com/pingcap/tiflow/issues/3061)
         -   TiKV が同じリージョン[#2386](https://github.com/pingcap/tiflow/issues/2386)に重複したリクエストを送信すると、TiCDC プロセスがパニックになる可能panicがある問題を修正

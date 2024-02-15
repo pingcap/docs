@@ -1,5 +1,6 @@
 ---
 title: TiDB 3.0.13 Release Notes
+summary: TiDB 3.0.13 was released on April 22, 2020. The bug fixes include resolving issues with the `INSERT ... ON DUPLICATE KEY UPDATE` statement and fixing the system getting stuck and becoming unavailable during `Region Merge` in TiKV.
 ---
 
 # TiDB 3.0.13 リリースノート {#tidb-3-0-13-release-notes}

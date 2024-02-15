@@ -1,5 +1,6 @@
 ---
 title: TiDB 5.1.5 Release Notes
+summary: TiDB 5.1.5 was released on December 28, 2022. The release includes compatibility changes and numerous bug fixes for TiDB, TiKV, PD, TiFlash, and various tools. Bug fixes address issues such as panics, wrong results, and incorrect behaviors. Fixes also include issues related to data loss, memory usage, and incorrect metrics.
 ---
 
 # TiDB 5.1.5 リリースノート {#tidb-5-1-5-release-notes}
@@ -21,7 +22,7 @@ TiDB バージョン: 5.1.5
 -   TiDB
 
     -   ウィンドウ関数により TiDB がエラーを報告する代わりにpanicを引き起こす問題を修正します[#30326](https://github.com/pingcap/tidb/issues/30326)
-    -   TiFlash [#37254](https://github.com/pingcap/tidb/issues/37254)のパーティション化されたテーブルで動的モードを有効にしたときに発生する間違った結果を修正しました。
+    -   TiFlash [#37254](https://github.com/pingcap/tidb/issues/37254)のパーティションテーブルで動的モードを有効にしたときに発生する間違った結果を修正しました。
     -   符号なし`BIGINT`引数[#30101](https://github.com/pingcap/tidb/issues/30101)を渡すときの`GREATEST`と`LEAST`の間違った結果を修正
     -   `left join` [#31321](https://github.com/pingcap/tidb/issues/31321)を使用して複数のテーブルのデータを削除した場合の誤った結果を修正
     -   TiDB の`concat(ifnull(time(3)))`の結果が MySQL [#29498](https://github.com/pingcap/tidb/issues/29498)の結果と異なる問題を修正
@@ -53,7 +54,7 @@ TiDB バージョン: 5.1.5
     -   `DATETIME`値に小数と`Z` [#12739](https://github.com/tikv/tikv/issues/12739)が含まれる場合に発生する時刻解析エラーの問題を修正します。
     -   レプリカの読み取りが線形化可能性[#12109](https://github.com/tikv/tikv/issues/12109)に違反する可能性があるバグを修正
     -   Raftstoreがビジー状態の場合にリージョンが重なる可能性があるバグを修正[#13160](https://github.com/tikv/tikv/issues/13160)
-    -   スナップショットの適用が中止されるときに発生する TiKVpanicの問題を修正します[#11618](https://github.com/tikv/tikv/issues/11618)
+    -   スナップショットの適用が中止されたときに発生する TiKVpanicの問題を修正します[#11618](https://github.com/tikv/tikv/issues/11618)
     -   TiKV が 2 年以上実行されている場合にpanicになる可能性があるバグを修正[#11940](https://github.com/tikv/tikv/issues/11940)
     -   リージョンマージ プロセス[#12663](https://github.com/tikv/tikv/issues/12663)でソース ピアがスナップショットによってログを追いつくときに発生する可能性があるpanicの問題を修正します。
     -   空の文字列の型変換を実行すると TiKV がパニックになる問題を修正[#12673](https://github.com/tikv/tikv/issues/12673)
@@ -62,7 +63,7 @@ TiDB バージョン: 5.1.5
     -   リージョン[#12048](https://github.com/tikv/tikv/issues/12048)をマージするときに、ターゲット ピアが初期化されずに破棄されたピアに置き換えられるときに発生する TiKVpanicの問題を修正します。
     -   Follower Read [#12478](https://github.com/tikv/tikv/issues/12478)を使用すると TiKV が`invalid store ID 0`エラーを報告する問題を修正
     -   非同期コミットが有効になっている場合に、悲観的トランザクションで発生する可能性のある重複コミット レコードを修正します[#12615](https://github.com/tikv/tikv/issues/12615)
-    -   1 つのピアが到達不能になった後にRaftstore が大量のメッセージをブロードキャストすることを避けるための`unreachable_backoff`項目の設定をサポートします[#13054](https://github.com/tikv/tikv/issues/13054)
+    -   1 つのピアが到達不能になった後にRaftstore が大量のメッセージをブロードキャストすることを回避するための`unreachable_backoff`項目の設定をサポート[#13054](https://github.com/tikv/tikv/issues/13054)
     -   ネットワークが貧弱な場合、正常にコミットされた楽観的トランザクションが`Write Conflict`エラーを報告する可能性がある問題を修正します[#34066](https://github.com/pingcap/tidb/issues/34066)
     -   ダッシュボード[#13086](https://github.com/tikv/tikv/issues/13086)の`Unified Read Pool CPU`の誤った表現を修正
 
@@ -75,7 +76,7 @@ TiDB バージョン: 5.1.5
     -   いくつかの特殊なケースにおける TSO フォールバックのバグを修正[#4884](https://github.com/tikv/pd/issues/4884)
     -   特定のシナリオ[#5401](https://github.com/tikv/pd/issues/5401)でTiFlash学習者レプリカが作成されないことがある問題を修正します。
     -   ラベル分布のメトリクスに残留ラベルがある問題を修正します[#4825](https://github.com/tikv/pd/issues/4825)
-    -   大容量のストア（たとえば 2T）が存在する場合、完全に割り当てられた小さなストアを検出できず、バランス演算子が生成されない問題を修正します[#4805](https://github.com/tikv/pd/issues/4805)
+    -   大容量のストア（たとえば 2T）が存在する場合、完全に割り当てられた小さなストアが検出できず、バランス演算子が生成されない問題を修正します[#4805](https://github.com/tikv/pd/issues/4805)
     -   `SchedulerMaxWaitingOperator`を`1` [#4946](https://github.com/tikv/pd/issues/4946)に設定するとスケジューラが動作しない問題を修正
 
 -   TiFlash
@@ -83,7 +84,7 @@ TiDB バージョン: 5.1.5
     -   文字列を日時[#3556](https://github.com/pingcap/tiflash/issues/3556)にキャストするときの誤った`microsecond`を修正
     -   TLS が有効になっているときに発生するpanicの問題を修正します[#4196](https://github.com/pingcap/tiflash/issues/4196)
     -   並列集計[#5356](https://github.com/pingcap/tiflash/issues/5356)のエラーによりTiFlashがクラッシュする場合があるバグを修正
-    -   `JOIN`を含むクエリでエラーが発生した場合にハングする可能性がある問題を修正します[#4195](https://github.com/pingcap/tiflash/issues/4195)
+    -   `JOIN`を含むクエリでエラーが発生した場合にハングする可能性がある問題を修正[#4195](https://github.com/pingcap/tiflash/issues/4195)
     -   関数`OR`が間違った結果[#5849](https://github.com/pingcap/tiflash/issues/5849)を返す問題を修正します。
     -   無効なstorageディレクトリ構成が予期せぬ動作を引き起こすバグを修正[#4093](https://github.com/pingcap/tiflash/issues/4093)
     -   多数の INSERT および DELETE 操作後の潜在的なデータの不整合を修正[#4956](https://github.com/pingcap/tiflash/issues/4956)

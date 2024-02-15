@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Metrics Relation Graph
-summary: Learn TiDB Dashboard metrics relation graph.
+summary: TiDB Dashboard introduces a feature called metrics relation graph, which helps users understand the duration of each internal process in a TiDB cluster. After logging in, users can access the graph and see the proportion of each monitoring metric's duration to the total query duration. Each box area represents a monitoring metric and provides information such as the total duration and proportion to the total query duration. The graph also illustrates the parent-child relations between nodes, helping users understand the relations of each monitoring metric.
 ---
 
 # TiDB ダッシュボードのメトリクス関係グラフ {#tidb-dashboard-metrics-relation-graph}
@@ -21,7 +21,7 @@ TiDB ダッシュボードにログインした後、左側のナビゲーショ
 
 ![Metrics relation graph example](/media/dashboard/dashboard-metrics-relation-example.png)
 
-たとえば、監視メトリック`tidb_execute`のノードの意味は次のとおりです。
+たとえば、 `tidb_execute`監視メトリックのノードの意味は次のとおりです。
 
 -   `tidb_execute`モニタリング メトリックの合計期間は 19306.46 秒で、クエリ合計期間の 89.4% を占めます。
 -   `tidb_execute`ノード自体の継続時間は 9070.18 秒で、これは合計クエリ継続時間の 42% を占めます。
@@ -68,7 +68,7 @@ TiDB ダッシュボードにログインした後、左側のナビゲーショ
 
 > **注記：**
 >
-> ノードにその子ノードを指す点線の矢印がある場合、このノード自体の継続時間は不正確です。たとえば、 `tidb_execute`ノードでは、ノード自体の継続時間は 9070.18 秒 ( `9070.18 = 19306.46 - 300.66 - 9935.62` ) です。この式では、 `tidb_cop`子ノードの継続時間は、 `tidb_execute`の子ノードの継続時間には計算されません。しかし実際には、これは真実ではありません。 `tidb_execute`の継続時間である 9070.18 秒には`tidb_cop`継続時間の一部が含まれており、この部分の継続時間は特定できません。
+> ノードにその子ノードを指す点線の矢印がある場合、このノード自体の継続時間は不正確です。たとえば、 `tidb_execute`ノードでは、ノード自体の継続時間は 9070.18 秒 ( `9070.18 = 19306.46 - 300.66 - 9935.62` ) です。この式では、 `tidb_cop`子ノードの継続時間は、 `tidb_execute`の子ノードの継続時間には計算されません。しかし実際には、これは真実ではありません。 `tidb_execute`の継続時間である 9070.18 秒には、 `tidb_cop`継続時間の一部が含まれており、この部分の継続時間は特定できません。
 
 ### <code>tidb_kv_request</code>とその親ノード {#code-tidb-kv-request-code-and-its-parent-nodes}
 

@@ -1,5 +1,6 @@
 ---
 title: TiDB 5.0.2 Release Notes
+summary: TiDB 5.0.2 was released on June 10, 2021. The new version includes compatibility changes, new features, improvements, bug fixes, and updates to various tools such as TiKV, TiFlash, PD, TiCDC, Backup & Restore (BR), and TiDB Lightning. Some notable changes include the deprecation of `--sort-dir` in TiCDC, enabling the Hibernate Region feature in TiKV, and various bug fixes in TiDB, TiKV, PD, TiFlash, and tools like TiCDC, BR, and TiDB Lightning.
 ---
 
 # TiDB 5.0.2 リリースノート {#tidb-5-0-2-release-notes}
@@ -77,13 +78,13 @@ TiDB バージョン: 5.0.2
     -   sql_mode に`ANSI_QUOTES` [#24429](https://github.com/pingcap/tidb/issues/24429)が含まれる場合、数値リテラルが認識されない問題を修正
     -   `INSERT INTO table PARTITION (<partitions>) ... ON DUPLICATE KEY UPDATE`のようなステートメントによる、リストされていないパーティションからのデータの読み取りを禁止します[#24746](https://github.com/pingcap/tidb/issues/24746)
     -   SQL ステートメントに`GROUP BY`と`UNION`両方が含まれる場合に発生する可能性のある`index out of range`エラーを修正[#24281](https://github.com/pingcap/tidb/issues/24281)
-    -   `CONCAT`関数が照合照合順序[#24296](https://github.com/pingcap/tidb/issues/24296)を正しく処理しない問題を修正します。
-    -   `collation_server`グローバル変数が新しいセッション[#24156](https://github.com/pingcap/tidb/pull/24156)で有効にならない問題を修正します。
+    -   `CONCAT`関数が照合順序[#24296](https://github.com/pingcap/tidb/issues/24296)を正しく処理しない問題を修正します。
+    -   `collation_server`グローバル変数が新しいセッションで有効にならない問題を修正[#24156](https://github.com/pingcap/tidb/pull/24156)
 
 -   TiKV
 
     -   古い値の読み取りによって発生する TiCDC OOM 問題を修正[#9996](https://github.com/tikv/tikv/issues/9996) [#9981](https://github.com/tikv/tikv/issues/9981)
-    -   照合順序が`latin1_bin` [#24548](https://github.com/pingcap/tidb/issues/24548)の場合に、クラスター化された主キー列のセカンダリ インデックスに空の値が表示される問題を修正します。
+    -   照合順序が`latin1_bin` [#24548](https://github.com/pingcap/tidb/issues/24548)の場合、クラスター化された主キー列のセカンダリ インデックスの空の値の問題を修正します。
     -   `abort-on-panic`構成を追加します。これにより、panic発生時に TiKV がコア ダンプ ファイルを生成できるようになります。ユーザーは、コア ダンプ[#10216](https://github.com/tikv/tikv/pull/10216)を有効にするために環境を正しく構成する必要があります。
     -   TiKV がビジーでないときに発生する`point get`クエリのパフォーマンス低下の問題を修正します[#10046](https://github.com/tikv/tikv/issues/10046)
 

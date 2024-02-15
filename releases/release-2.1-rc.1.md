@@ -1,5 +1,6 @@
 ---
 title: TiDB 2.1 RC1 Release Notes
+summary: TiDB 2.1 RC1 was released on August 24, 2018, with improvements in stability, SQL optimizer, statistics, and execution engine. The release includes fixes for various issues in SQL optimizer and execution engine. PD introduces version control, rolling update, and region merge features. TiKV supports batch split and row-based region splitting for improved efficiency. Overall, the release focuses on performance optimization and bug fixes.
 ---
 
 # TiDB 2.1 RC1 リリースノート {#tidb-2-1-rc1-release-notes}
@@ -40,9 +41,9 @@ title: TiDB 2.1 RC1 Release Notes
     -   範囲が多すぎるコプロセッサー要求を分割する[#7454](https://github.com/pingcap/tidb/pull/7454)
 -   統計
     -   統計の動的収集メカニズムの最適化[#6796](https://github.com/pingcap/tidb/pull/6796)
-    -   データ更新が頻繁な場合に`Auto Analyze`が動作しない問題を修正[#7022](https://github.com/pingcap/tidb/pull/7022)
+    -   データ更新頻度が高い場合に`Auto Analyze`が動作しない問題を修正[#7022](https://github.com/pingcap/tidb/pull/7022)
     -   統計の動的更新プロセス中の書き込み競合を減らす[#7124](https://github.com/pingcap/tidb/pull/7124)
-    -   統計が正しくない場合のコスト見積もりを最適化する[#7175](https://github.com/pingcap/tidb/pull/7175)
+    -   統計が正しくない場合のコスト見積もりの​​最適化[#7175](https://github.com/pingcap/tidb/pull/7175)
     -   `AccessPath`コスト見積もり戦略を最適化する[#7233](https://github.com/pingcap/tidb/pull/7233)
 -   サーバ
     -   権限情報ロード[#6976](https://github.com/pingcap/tidb/pull/6976)のバグを修正
@@ -84,14 +85,14 @@ title: TiDB 2.1 RC1 Release Notes
     -   `Replace Into`ステートメント[#7027](https://github.com/pingcap/tidb/pull/7027)のパフォーマンスを向上させる
     -   `CURRENT_TIMESTAMP` [#7355](https://github.com/pingcap/tidb/pull/7355)を書き込む際の一貫性のない精度の問題を修正
 -   DDL
-    -   `Schema`が複製されているかどうかのDDL判定方法を改善し、場合によっては誤判定を避けるようにする[#7319](https://github.com/pingcap/tidb/pull/7319)
+    -   場合によっては誤判定を避けるため、DDL で`Schema`が複製されているかどうかを判定する方法を改善しました[#7319](https://github.com/pingcap/tidb/pull/7319)
     -   インデックス追加処理[#6993](https://github.com/pingcap/tidb/pull/6993)の結果`SHOW CREATE TABLE`を修正
     -   非制限`sql-mode` [#7230](https://github.com/pingcap/tidb/pull/7230)では、デフォルト値`text` / `blob` / `json`が NULL になることを許可します
     -   場合によっては`ADD INDEX`問題を修正する[#7142](https://github.com/pingcap/tidb/pull/7142)
     -   `UNIQUE-KEY`インデックス演算の追加速度を大幅に向上[#7132](https://github.com/pingcap/tidb/pull/7132)
     -   UTF-8 文字セット[#7109](https://github.com/pingcap/tidb/pull/7109)のプレフィックス インデックスの切り捨ての問題を修正します。
-    -   環境変数`tidb_ddl_reorg_priority`を追加して、操作`add-index`の優先順位を制御します[#7116](https://github.com/pingcap/tidb/pull/7116)
-    -   `AUTO-INCREMENT` `information_schema.tables` [#7037](https://github.com/pingcap/tidb/pull/7037)表示の問題を修正
+    -   環境変数`tidb_ddl_reorg_priority`を追加して、 `add-index`操作[#7116](https://github.com/pingcap/tidb/pull/7116)の優先順位を制御します。
+    -   `information_schema.tables` [#7037](https://github.com/pingcap/tidb/pull/7037)に`AUTO-INCREMENT`の表示の問題を修正
     -   `admin show ddl jobs <number>`コマンドをサポートし、指定された数の DDL ジョブの出力をサポート[#7028](https://github.com/pingcap/tidb/pull/7028)
     -   DDL ジョブの並列実行のサポート[#6955](https://github.com/pingcap/tidb/pull/6955)
 -   [テーブルパーティション](https://github.com/pingcap/tidb/projects/6) (Experimental)
@@ -147,8 +148,8 @@ title: TiDB 2.1 RC1 Release Notes
     -   既存のデータに基づいて`dynamic_level_bytes`パラメータの動的構成をサポート
     -   ログ形式のカスタマイズをサポート
     -   tikv-fail を tikv-ctl に統合する
-    -   スレッドの I/O メトリックを追加する
+    -   スレッドの I/O メトリクスを追加する
 -   バグの修正
     -   小数関連の問題を修正
-    -   誤って`gRPC max_send_message_len`を設定してしまう問題を修正
+    -   誤って`gRPC max_send_message_len`が設定されてしまう問題を修正
     -   `region_size`の構成ミスによって引き起こされる問題を修正する

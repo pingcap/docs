@@ -1,5 +1,6 @@
 ---
 title: TiDB 3.0.16 Release Notes
+summary: TiDB 3.0.16 was released on July 03, 2020. The release includes improvements such as support for 'is null' filter condition, handling of SQL timeout issues, and removal of sensitive information in slow query logs. Bug fixes include resolving data inconsistency issues, fixing panic issues, and addressing errors in JSON comparison and query results. TiKV and PD also received bug fixes for issues related to store heartbeats, peer removal, and error handling.
 ---
 
 # TiDB 3.0.16 リリースノート {#tidb-3-0-16-release-notes}
@@ -16,7 +17,7 @@ TiDB バージョン: 3.0.16
     -   複数のリージョンのリクエストが同時に失敗した場合の SQL タイムアウトの問題を回避するには、各リージョンに異なる`Backoffer`割り当てます[#17583](https://github.com/pingcap/tidb/pull/17583)
     -   新しく追加されたパーティション[#17668](https://github.com/pingcap/tidb/pull/17668)の個別のリージョンを分割する
     -   `delete`または`update`ステートメントから生成されたフィードバックを破棄します[#17841](https://github.com/pingcap/tidb/pull/17841)
-    -   将来の Go バージョン[#17887](https://github.com/pingcap/tidb/pull/17887)と互換性があるように`json.Unmarshal` in `job.DecodeArgs`の使用法を修正します。
+    -   将来の Go バージョン[#17887](https://github.com/pingcap/tidb/pull/17887)と互換性があるように`json.Unmarshal` in `job.DecodeArgs`の使用法を修正
     -   スロークエリログとステートメント概要テーブル[#18128](https://github.com/pingcap/tidb/pull/18128)の機密情報を削除します。
     -   MySQL の動作を`DateTime`区切り文字[#17499](https://github.com/pingcap/tidb/pull/17499)と一致させます。
     -   MySQL [#17496](https://github.com/pingcap/tidb/pull/17496)と一致する範囲の日付形式で`%h`​​を処理します。

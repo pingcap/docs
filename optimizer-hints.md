@@ -131,8 +131,10 @@ SELECT /*+ NO_MERGE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 `INL_JOIN(t1_name [, tl_name ...])`ヒントは、指定されたテーブルに対してインデックスのネストされたループ結合アルゴリズムを使用するようにオプティマイザーに指示します。このアルゴリズムは、一部のシナリオでは消費するシステム リソースが少なくなり、処理時間が短縮される可能性がありますが、他のシナリオでは逆の結果が生じる可能性があります。外部テーブルが条件`WHERE`でフィルターされた後の結果セットが 10,000 行未満の場合は、このヒントを使用することをお勧めします。例えば：
 
 ```sql
-select /*+ INL_JOIN(t1, t2) */ * from t1, t2 where t1.id = t2.id;
+SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1, t2, t3 WHERE t1.id = t2.id AND t2.id = t3.id;
 ```
+
+前述の SQL ステートメントでは、 `INL_JOIN(t1, t2)`ヒントは、 `t1`と`t2`に対してインデックスのネストされたループ結合アルゴリズムを使用するようにオプティマイザーに指示します。これは、インデックスのネストされたループ結合アルゴリズムが`t1`と`t2`の間で使用されることを意味するものではないことに注意してください。代わりに、ヒントは`t1`と`t2`がそれぞれ別のテーブル ( `t3` ) とのインデックス ネスト ループ結合アルゴリズムを使用することを示しています。
 
 `INL_JOIN()`で指定したパラメータは、クエリ プランを作成するときの内部テーブルの候補テーブルです。たとえば、 `INL_JOIN(t1)` 、TiDB がクエリ プランを作成するための内部テーブルとして`t1`使用のみを考慮することを意味します。候補テーブルに別名がある場合は、その別名を`INL_JOIN()`のパラメータとして使用する必要があります。別名がない場合は、テーブルの元の名前をパラメータとして使用します。たとえば、 `select /*+ INL_JOIN(t1) */ * from t t1, t t2 where t1.a = t2.b;`クエリでは、 `INL_JOIN()`のパラメータとして`t`ではなく、 `t`テーブルのエイリアス`t1`または`t2`を使用する必要があります。
 
@@ -280,7 +282,7 @@ SELECT /*+ BROADCAST_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 このヒントがクエリ ブロックで使用される場合、オプティマイザはサブクエリとその外側のクエリ ブロックの間の相関列の非相関化を実行しようとせず、常に適用演算子を使用してクエリを実行します。
 
-デフォルトでは、TiDB はより高い実行効率を達成するために、相関サブクエリに対して[無相関化を実行する](/correlated-subquery-optimization.md)を試行します。ただし、 [いくつかのシナリオ](/correlated-subquery-optimization.md#restrictions)では、非相関化により実際に実行効率が低下する可能性があります。この場合、このヒントを使用して、非相関化を実行しないようにオプティマイザーに手動で指示できます。例えば：
+デフォルトでは、TiDB はより高い実行効率を達成するために、相関サブクエリに対して[無相関化を実行する](/correlated-subquery-optimization.md)を試行します。ただし、 [いくつかのシナリオ](/correlated-subquery-optimization.md#restrictions)では、非相関化により実際に実行効率が低下する可能性があります。この場合、このヒントを使用して、非相関化を実行しないようにオプティマイザに手動で指示できます。例えば：
 
 ```sql
 create table t1(a int, b int);
@@ -526,7 +528,6 @@ SELECT /*+ LEADING(t1, t2) */ * FROM t1, t2, t3 WHERE t1.id = t2.id and t2.id = 
 -   オプティマイザは、 `LEADING`ヒントで指定された順序に従って結合操作を実行できません。
 -   `straight_join()`ヒントはすでに存在します。
 -   クエリには、デカルト積を伴う外部結合が含まれています。
--   `MERGE_JOIN` 、 `INL_JOIN` 、 `INL_HASH_JOIN` 、 `HASH_JOIN`のヒントのいずれかが同時に使用されます。
 
 上記の状況では、警告が生成されます。
 
@@ -589,7 +590,7 @@ WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * 
     SELECT /* Comment: The name of the current query block is the default @SEL_1 */ * FROM v;
     ```
 
-    ビュー`v`の場合、クエリ ステートメントから始まるリスト ( `ViewName@QueryBlockName [.ViewName@QueryBlockName .ViewName@QueryBlockName ...]` ) の最初のビュー名は`v@SEL_1`です。ビュー`v`の最初のクエリ ブロックは、 `QB_NAME(v_1, v@SEL_1 .@SEL_1)`として宣言することも、 `@SEL_1`を省略して単に`QB_NAME(v_1, v)`として記述することもできます。
+    ビュー`v`の場合、クエリ ステートメントから始まるリスト ( `ViewName@QueryBlockName [.ViewName@QueryBlockName .ViewName@QueryBlockName ...]` ) 内の最初のビュー名は`v@SEL_1`です。ビュー`v`の最初のクエリ ブロックは、 `QB_NAME(v_1, v@SEL_1 .@SEL_1)`として宣言することも、 `@SEL_1`を省略して単に`QB_NAME(v_1, v)`として記述することもできます。
 
     ```sql
     CREATE VIEW v AS SELECT /* Comment: The name of the current query block is the default @SEL_1 */ * FROM t;
@@ -925,7 +926,7 @@ EXPLAIN SELECT /*+ inl_join(t1, t3) */ * FROM t1, t2, t3 WHERE t1.id = t2.id AND
 +---------------------------------+----------+-----------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-前の例では、 `t1`と`t3`は`IndexJoin`によって直接結合されていません。
+前の例では、 `t1`と`t3` `IndexJoin`によって直接結合されていません。
 
 `t1`と`t3`の間で直接`IndexJoin`実行するには、まず[`LEADING(t1, t3)`ヒント](#leadingt1_name--tl_name-)を使用して`t1`と`t3`の結合順序を指定し、次に`INL_JOIN`ヒントを使用して結合アルゴリズムを指定します。例えば：
 
@@ -961,7 +962,7 @@ EXPLAIN SELECT /*+ NO_HASH_JOIN(t1), NO_MERGE_JOIN(t1) */ * FROM t1, t2 WHERE t1
 ERROR 1815 (HY000): Internal : Can't find a proper physical plan for this query
 ```
 
--   システム変数[`tidb_opt_enable_hash_join`](/system-variables.md#tidb_opt_enable_hash_join-new-in-v740) `OFF`に設定され、他のすべての結合タイプも除外されます。
+-   システム変数[`tidb_opt_enable_hash_join`](/system-variables.md#tidb_opt_enable_hash_join-new-in-v656-v712-and-v740) `OFF`に設定され、他のすべての結合タイプも除外されます。
 
 ```sql
 CREATE TABLE t1 (a INT);

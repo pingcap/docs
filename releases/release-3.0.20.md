@@ -1,5 +1,6 @@
 ---
 title: TiDB 3.0.20 Release Notes
+summary: TiDB 3.0.20 was released on December 25, 2020. The release includes compatibility changes, improvements, and bug fixes for TiDB, TiKV, and PD. Some notable bug fixes include addressing issues with incorrect cache of transaction status, inaccurate statistics, and stack overflow.
 ---
 
 # TiDB 3.0.20 リリースノート {#tidb-3-0-20-release-notes}
@@ -52,7 +53,7 @@ TiDB バージョン: 3.0.20
 
 -   TiKV
 
-    -   コミットされたトランザクションでこのキーがロックされ削除された場合、キーが存在することを示すエラーが返される問題を修正します[#8931](https://github.com/tikv/tikv/pull/8931)
+    -   コミットされたトランザクションでこのキーがロックされ削除された場合に、キーが存在することを示すエラーが返される問題を修正します[#8931](https://github.com/tikv/tikv/pull/8931)
 
 -   PD
 

@@ -9,39 +9,50 @@ summary: Learn how to query the status of a data replication task.
 
 ## クエリ結果 {#query-result}
 
-```bash
-» query-status
-```
-
-    {
-        "result": true,     # Whether the query is successful.
-        "msg": "",          # Describes the reason for the unsuccessful query.
-        "tasks": [          # Migration task list.
-            {
-                "taskName": "test",         # The task name.
-                "taskStatus": "Running",    # The status of the task.
-                "sources": [                # The upstream MySQL list.
-                    "mysql-replica-01",
-                    "mysql-replica-02"
-                ]
-            },
-            {
-                "taskName": "test2",
-                "taskStatus": "Paused",
-                "sources": [
-                    "mysql-replica-01",
-                    "mysql-replica-02"
-                ]
-            }
-        ]
-    }
-
-`tasks`の`taskStatus`の詳しい説明は[タスクのステータス](#task-status)を参照してください。
-
 次の手順で`query-status`を使用することをお勧めします。
 
 1.  実行中の各タスクが通常の状態であるかどうかを確認するには、 `query-status`使用します。
 2.  タスクでエラーが発生した場合は、 `query-status <taskName>`コマンドを使用して詳細なエラー情報を確認します。このコマンドの`<taskName>`エラーが発生したタスクの名前を示します。
+
+成功したクエリ結果は次のとおりです。
+
+```bash
+» query-status
+```
+
+```json
+{
+    "result": true,
+    "msg": "",
+    "tasks": [
+        {
+            "taskName": "test",
+            "taskStatus": "Running",
+            "sources": [
+                "mysql-replica-01",
+                "mysql-replica-02"
+            ]
+        },
+        {
+            "taskName": "test2",
+            "taskStatus": "Paused",
+            "sources": [
+                "mysql-replica-01",
+                "mysql-replica-02"
+            ]
+        }
+    ]
+}
+```
+
+クエリ結果の一部のフィールドは次のように説明されます。
+
+-   `result` : クエリが成功したかどうか。
+-   `msg` : クエリが失敗した場合に返されるエラー メッセージ。
+-   `tasks` : 移行タスクのリスト。各タスクには次のフィールドが含まれます。
+    -   `taskName` : タスクの名前。
+    -   `taskStatus` : タスクのステータス。 `taskStatus`の詳しい説明は[タスクのステータス](#task-status)を参照してください。
+    -   `sources` : アップストリーム MySQL データベースのリスト。
 
 ## タスクのステータス {#task-status}
 
@@ -63,64 +74,55 @@ DM 移行タスクのステータスは、DM ワーカーに割り当てられ�
 » query-status test
 ```
 
-```
-» query-status
+```json
 {
-    "result": true,     # Whether the query is successful.
-    "msg": "",          # Describes the cause for the unsuccessful query.
-    "sources": [                            # The upstream MySQL list.
+    "result": true,
+    "msg": "",
+    "sources": [
         {
             "result": true,
             "msg": "",
-            "sourceStatus": {                   # The information of the upstream MySQL databases.
+            "sourceStatus": {
                 "source": "mysql-replica-01",
                 "worker": "worker1",
                 "result": null,
                 "relayStatus": null
             },
-            "subTaskStatus": [              # The information of all subtasks of upstream MySQL databases.
+            "subTaskStatus": [
                 {
-                    "name": "test",         # The name of the subtask.
-                    "stage": "Running",     # The running status of the subtask, including "New", "Running", "Paused", "Stopped", and "Finished".
-                    "unit": "Sync",         # The processing unit of DM, including "Check", "Dump", "Load", and "Sync".
-                    "result": null,         # Displays the error information if a subtask fails.
-                    "unresolvedDDLLockID": "test-`test`.`t_target`",    # The sharding DDL lock ID, used for manually handling the sharding DDL
-                                                                        # lock in the abnormal condition.
-                    "sync": {                   # The replication information of the `Sync` processing unit. This information is about the
-                                                # same component with the current processing unit.
-                        "masterBinlog": "(bin.000001, 3234)",                               # The binlog position in the upstream database.
-                        "masterBinlogGtid": "c0149e17-dff1-11e8-b6a8-0242ac110004:1-14",    # The GTID information in the upstream database.
-                        "syncerBinlog": "(bin.000001, 2525)",                               # The position of the binlog that has been replicated
-                                                                                            # in the `Sync` processing unit.
-                        "syncerBinlogGtid": "",                                             # The binlog position replicated using GTID.
-                        "blockingDDLs": [       # The DDL list that is blocked currently. It is not empty only when all the upstream tables of this
-                                                # DM-worker are in the "synced" status. In this case, it indicates the sharding DDL statements to be executed or that are skipped.
+                    "name": "test",
+                    "stage": "Running",
+                    "unit": "Sync",
+                    "result": null,
+                    "unresolvedDDLLockID": "test-`test`.`t_target`",
+                    "sync": {
+                        "masterBinlog": "(bin.000001, 3234)",
+                        "masterBinlogGtid": "c0149e17-dff1-11e8-b6a8-0242ac110004:1-14",
+                        "syncerBinlog": "(bin.000001, 2525)",
+                        "syncerBinlogGtid": "",
+                        "blockingDDLs": [
                             "USE `test`; ALTER TABLE `test`.`t_target` DROP COLUMN `age`;"
                         ],
-                        "unresolvedGroups": [   # The sharding group that is not resolved.
+                        "unresolvedGroups": [
                             {
-                                "target": "`test`.`t_target`",                  # The downstream database table to be replicated.
+                                "target": "`test`.`t_target`",
                                 "DDLs": [
                                     "USE `test`; ALTER TABLE `test`.`t_target` DROP COLUMN `age`;"
                                 ],
-                                "firstPos": "(bin|000001.000001, 3130)",        # The starting position of the sharding DDL statement.
-                                "synced": [                                     # The upstream sharded table whose executed sharding DDL statement has been read by the `Sync` unit.
+                                "firstPos": "(bin|000001.000001, 3130)",
+                                "synced": [
                                     "`test`.`t2`"
                                     "`test`.`t3`"
                                     "`test`.`t1`"
                                 ],
-                                "unsynced": [                                   # The upstream table that has not executed this sharding DDL
-                                                                                # statement. If any upstream tables have not finished replication,
-                                                                                # `blockingDDLs` is empty.
+                                "unsynced": [
                                 ]
                             }
                         ],
-                        "synced": false         # Whether the incremental replication catches up with the upstream and has the same binlog position as that in the
-                                                # upstream. The save point is not refreshed in real time in the `Sync` background, so `false` of `synced`
-                                                # does not always mean a replication delay exits.
-                        "totalRows": "12",      # The total number of rows that are replicated in this subtask.
-                        "totalRps": "1",        # The number of rows that are replicated in this subtask per second.
-                        "recentRps": "1"        # The number of rows that are replicated in this subtask in the last second.
+                        "synced": false,
+                        "totalRows": "12",
+                        "totalRps": "1",
+                        "recentRps": "1"
                     }
                 }
             ]
@@ -141,11 +143,11 @@ DM 移行タスクのステータスは、DM ワーカーに割り当てられ�
                     "unit": "Load",
                     "result": null,
                     "unresolvedDDLLockID": "",
-                    "load": {                   # The replication information of the `Load` processing unit.
-                        "finishedBytes": "115",          # The number of bytes that have been loaded.
-                        "totalBytes": "452",               # The total number of bytes that need to be loaded.
-                        "progress": "25.44 %",         # The progress of the loading process.
-                        "bps": "2734"                        # The speed of the full loading.
+                    "load": {
+                        "finishedBytes": "115",
+                        "totalBytes": "452",
+                        "progress": "25.44 %",
+                        "bps": "2734"
                     }
                 }
             ]
@@ -163,7 +165,7 @@ DM 移行タスクのステータスは、DM ワーカーに割り当てられ�
                     "name": "test",
                     "stage": "Paused",
                     "unit": "Load",
-                    "result": {                 # The error example.
+                    "result": {
                         "isCanceled": false,
                         "errors": [
                             {
@@ -199,26 +201,65 @@ DM 移行タスクのステータスは、DM ワーカーに割り当てられ�
                     "unit": "Dump",
                     "result": null,
                     "unresolvedDDLLockID": "",
-                    "dump": {                        # The replication information of the `Dump` processing unit.
-                        "totalTables": "10",         # The number of tables to be dumped.
-                        "completedTables": "3",      # The number of tables that have been dumped.
-                        "finishedBytes": "2542",     # The number of bytes that have been dumped.
-                        "finishedRows": "32",        # The number of rows that have been dumped.
-                        "estimateTotalRows": "563",  # The estimated number of rows to be dumped.
-                        "progress": "30.52 %",       # The progress of the dumping process.
-                        "bps": "445"                 # The dumping speed.
+                    "dump": {
+                        "totalTables": "10",
+                        "completedTables": "3",
+                        "finishedBytes": "2542",
+                        "finishedRows": "32",
+                        "estimateTotalRows": "563",
+                        "progress": "30.52 %",
+                        "bps": "445"
                     }
                 }
             ]
         },
     ]
 }
-
 ```
 
-「sources」の「subTaskStatus」の「stage」の状態説明と状態切り替え関係については、 [サブタスクのステータス](#subtask-status)を参照してください。
+返された結果の一部のフィールドは次のように説明されます。
 
-「sources」の「subTaskStatus」の「unresolvedDDLLockID」の操作詳細については、 [シャーディング DDL ロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)を参照してください。
+-   `result` : クエリが成功したかどうか。
+-   `msg` : クエリが失敗した場合に返されるエラー メッセージ。
+-   `sources` : アップストリーム MySQL インスタンスのリスト。各ソースには次のフィールドが含まれます。
+    -   `result`
+    -   `msg`
+    -   `sourceStatus` : 上流の MySQL データベースの情報。
+    -   `subTaskStatus` : 上流の MySQL データベースのすべてのサブタスクの情報。各サブタスクには次のフィールドが含まれる場合があります。
+        -   `name` : サブタスクの名前。
+        -   `stage` : サブタスクのステータス。 「sources」の「subTaskStatus」の「stage」の状態説明と状態切り替え関係については、 [サブタスクのステータス](#subtask-status)を参照してください。
+        -   `unit` : 「チェック」、「ダンプ」、「ロード」、「同期」を含む DM の処理単位。
+        -   `result` : サブタスクが失敗した場合にエラー情報を表示します。
+        -   `unresolvedDDLLockID` : 異常な状態でシャーディング DDL ロックを手動で処理するために使用されるシャーディング DDL ロック ID。 「sources」の「subTaskStatus」の「unresolvedDDLLockID」の操作詳細については、 [シャーディング DDL ロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)を参照してください。
+        -   `sync` : `Sync`プロセッシングユニットのレプリケーション情報。この情報は、現在の処理ユニットと同じコンポーネントに関するものです。
+            -   `masterBinlog` : 上流データベース内のbinlogの位置。
+            -   `masterBinlogGtid` : 上流データベースの GTID 情報。
+            -   `syncerBinlog` : `Sync`処理ユニットで複製されたbinlogの位置。
+            -   `syncerBinlogGtid` : GTID を使用してレプリケートされたbinlogの位置。
+            -   `blockingDDLs` : 現在ブロックされている DDL リスト。この DM ワーカーのすべての上流テーブルが「同期」ステータスにある場合にのみ空ではありません。この場合、実行されるシャーディング DDL ステートメント、またはスキップされるシャーディング DDL ステートメントを示します。
+            -   `unresolvedGroups` : 解決されていないシャーディング グループ。各グループには次のフィールドが含まれます。
+                -   `target` : レプリケートされるダウンストリーム データベース テーブル。
+                -   `DDLs` : DDL ステートメントのリスト。
+                -   `firstPos` : シャーディング DDL ステートメントの開始位置。
+                -   `synced` : 実行されたシャーディング DDL ステートメントが`Sync`ユニットによって読み取られた上流シャーディング テーブル。
+                -   `unsynced` : このシャーディング DDL ステートメントを実行していない上流テーブル。レプリケーションを完了していない上流テーブルがある場合、 `blockingDDLs`は空になります。
+            -   `synced` : 増分レプリケーションがアップストリームに追いつき、アップストリームと同じbinlog位置を持つかどうか。セーブ ポイントは`Sync`バックグラウンドではリアルタイムで更新されないため、 `synced`の`false`は必ずしもレプリケーションの遅延が発生することを意味するわけではありません。
+            -   `totalRows` : このサブタスクでレプリケートされる行の合計数。
+            -   `totalRps` : このサブタスクで 1 秒あたりにレプリケートされる行の数。
+            -   `recentRps` : 最後の 1 秒間にこのサブタスクでレプリケートされた行の数。
+        -   `load` : `Load`プロセッシングユニットのレプリケーション情報。
+            -   `finishedBytes` : ロードされたバイト数。
+            -   `totalBytes` : ロードする必要がある合計バイト数。
+            -   `progress` : ロードプロセスの進行状況。
+            -   `bps` : フルロードの速度。
+        -   `dump` : `Dump`プロセッシングユニットのレプリケーション情報。
+            -   `totalTables` : ダンプするテーブルの数。
+            -   `completedTables` : ダンプされたテーブルの数。
+            -   `finishedBytes` : ダンプされたバイト数。
+            -   `finishedRows` : ダンプされた行の数。
+            -   `estimateTotalRows` : ダンプされる推定行数。
+            -   `progress` : ダンププロセスの進行状況。
+            -   `bps` : ダンプ速度 (バイト/秒)。
 
 ## サブタスクのステータス {#subtask-status}
 

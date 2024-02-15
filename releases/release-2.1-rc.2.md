@@ -1,5 +1,6 @@
 ---
 title: TiDB 2.1 RC2 Release Notes
+summary: TiDB 2.1 RC2 was released on September 14, 2018, with improvements in stability, SQL optimizer, statistics, and execution engine. The release includes enhancements to SQL optimizer, SQL execution engine, statistics, server, compatibility, expressions, DML, DDL, TiKV Go Client, and Table Partition. PD features, improvements, and bug fixes are also included. TiKV performance, improvements, and bug fixes are part of the release as well.
 ---
 
 # TiDB 2.1 RC2 リリースノート {#tidb-2-1-rc2-release-notes}
@@ -25,7 +26,7 @@ title: TiDB 2.1 RC2 Release Notes
 -   統計
     -   自動分析作業が統計[#7550](https://github.com/pingcap/tidb/pull/7550)を繰り返し分析する問題を修正します。
     -   統計に変更がない場合に発生する統計更新エラーを修正[#7530](https://github.com/pingcap/tidb/pull/7530)
-    -   `Analyze`リクエスト[#7496](https://github.com/pingcap/tidb/pull/7496)を構築するときは、RC 分離レベルと低優先度を使用します。
+    -   `Analyze`リクエストを構築するときに RC 分離レベルと低優先度を使用する[#7496](https://github.com/pingcap/tidb/pull/7496)
     -   1 日の特定の期間における統計の自動分析の有効化のサポート[#7570](https://github.com/pingcap/tidb/pull/7570)
     -   統計情報のログ記録時のpanicの問題を修正[#7588](https://github.com/pingcap/tidb/pull/7588)
     -   `ANALYZE TABLE WITH BUCKETS`ステートメント[#7619](https://github.com/pingcap/tidb/pull/7619)を使用したヒストグラム内のバケット数の構成のサポート

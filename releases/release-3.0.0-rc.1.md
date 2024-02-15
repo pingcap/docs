@@ -1,5 +1,6 @@
 ---
 title: TiDB 3.0.0-rc.1 Release Notes
+summary: TiDB 3.0.0-rc.1 was released on May 10, 2019, with improved stability, usability, features, SQL optimizer, statistics, and execution engine. The release includes enhancements to the SQL optimizer, execution engine, server, DDL, PD, TiKV, TiDB Binlog, Lightning, sync-diff-inspector, and TiDB Ansible. Notable improvements include support for SQL Plan Management, memory usage tracking, and control in the execution engine, and the addition of the `pre_split_regions` option for `CREATE TABLE` statements in DDL. The release also includes various bug fixes and performance optimizations.
 ---
 
 # TiDB 3.0.0-rc.1 リリースノート {#tidb-3-0-0-rc-1-release-notes}

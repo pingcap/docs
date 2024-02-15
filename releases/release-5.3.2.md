@@ -1,5 +1,6 @@
 ---
 title: TiDB 5.3.2 Release Notes
+summary: TiDB 5.3.2 was released on June 29, 2022. It is not recommended to use this version due to a known bug, which has been fixed in v5.3.3. The release includes compatibility changes, improvements, and bug fixes for TiDB, PD, TiKV, TiFlash, and various tools like TiDB Data Migration, TiDB Lightning, Backup & Restore, TiCDC, and TiDB Data Migration.
 ---
 
 # TiDB 5.3.2 リリースノート {#tidb-5-3-2-release-notes}
@@ -10,7 +11,7 @@ TiDB バージョン: 5.3.2
 
 > **警告：**
 >
-> このバージョンには既知のバグがあるため、v5.3.2 の使用は推奨されません。詳細は[#12934](https://github.com/tikv/tikv/issues/12934)を参照してください。このバグは v5.3.3 で修正されました。 [v5.3.3](/releases/release-5.3.3.md)を使用することをお勧めします。
+> このバージョンには既知のバグがあるため、v5.3.2 の使用はお勧めできません。詳細は[#12934](https://github.com/tikv/tikv/issues/12934)を参照してください。このバグは v5.3.3 で修正されました。 [v5.3.3](/releases/release-5.3.3.md)を使用することをお勧めします。
 
 ## 互換性の変更 {#compatibility-changes}
 
@@ -85,7 +86,7 @@ TiDB バージョン: 5.3.2
     -   PDリーダー転送[#4769](https://github.com/tikv/pd/issues/4769)直後にスケジューリングが開始できない問題を修正
     -   PDリーダー移転後、削除された墓石ストアが再び表示される問題を修正[#4941](https://github.com/tikv/pd/issues/4941)
     -   いくつかの特殊なケースにおける TSO フォールバックのバグを修正[#4884](https://github.com/tikv/pd/issues/4884)
-    -   大容量のストア（たとえば 2T）が存在する場合、完全に割り当てられた小さなストアを検出できず、バランス演算子が生成されない問題を修正します[#4805](https://github.com/tikv/pd/issues/4805)
+    -   大容量のストア（たとえば 2T）が存在する場合、完全に割り当てられた小さなストアが検出できず、バランス演算子が生成されない問題を修正します[#4805](https://github.com/tikv/pd/issues/4805)
     -   `SchedulerMaxWaitingOperator`を`1` [#4946](https://github.com/tikv/pd/issues/4946)に設定するとスケジューラが動作しない問題を修正
     -   ラベル分布のメトリクスに残留ラベルがある問題を修正します[#4825](https://github.com/tikv/pd/issues/4825)
 
@@ -128,7 +129,7 @@ TiDB バージョン: 5.3.2
         -   BRまたはTiDB Lightningが異常終了した後にスケジューラが再開しない問題を修正[#33546](https://github.com/pingcap/tidb/issues/33546)
         -   空のクエリ[#33322](https://github.com/pingcap/tidb/issues/33322)を含む DDL ジョブによりBR増分リストアが誤ってエラーを返すバグを修正
         -   復元中にリージョンに一貫性がない場合、 BR が十分な回数再試行しない問題を修正[#33419](https://github.com/pingcap/tidb/issues/33419)
-        -   復元操作で回復不能なエラーが発生した場合にBR がスタックするバグを修正[#33200](https://github.com/pingcap/tidb/issues/33200)
+        -   復元操作で回復不可能なエラーが発生した場合にBR がスタックするバグを修正[#33200](https://github.com/pingcap/tidb/issues/33200)
         -   BR がRawKV [#32607](https://github.com/pingcap/tidb/issues/32607)のバックアップに失敗する問題を修正
         -   BR がS3 内部エラーを処理できない問題を修正[#34350](https://github.com/pingcap/tidb/issues/34350)
 
@@ -159,4 +160,4 @@ TiDB バージョン: 5.3.2
 
         -   `auto_increment`列[#27937](https://github.com/pingcap/tidb/issues/27937)の範囲外データが原因でローカル バックエンドのインポートが失敗する問題を修正
         -   事前チェックでローカル ディスク リソースとクラスターの可用性がチェックされない問題を修正します[#34213](https://github.com/pingcap/tidb/issues/34213)
-        -   チェックサム エラー「GC ライフタイムがトランザクション期間よりも短い」を修正します[#32733](https://github.com/pingcap/tidb/issues/32733)
+        -   チェックサム エラー「GC ライフタイムがトランザクション期間よりも短い」 [#32733](https://github.com/pingcap/tidb/issues/32733)を修正

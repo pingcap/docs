@@ -1,6 +1,6 @@
 ---
 title: Slow Queries Page of TiDB Dashboard
-summary: Learn the Slow Queries page of TiDB Dashboard.
+summary: TiDB Dashboard's Slow Queries page allows users to search and view slow queries in the cluster. Queries with an execution time over 300 milliseconds are considered slow. Users can adjust the threshold and access the page through the dashboard or a browser. They can also change filters, display more columns, export queries, and view execution details.
 ---
 
 # TiDB ダッシュボードの「遅いクエリ」ページ {#slow-queries-page-of-tidb-dashboard}
@@ -59,6 +59,10 @@ TiDB ダッシュボードの「スロー クエリ」ページでは、クラ�
 
 ### SQL {#sql}
 
+> **注記：**
+>
+> `Query`列に記録されるクエリの最大長は、 [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40)システム変数によって制限されます。
+
 **「展開」**ボタンをクリックすると、項目の詳細情報が表示されます。 **「コピー」**ボタンをクリックすると、詳細情報がクリップボードにコピーされます。
 
 ### 実行計画 {#execution-plans}
@@ -113,7 +117,7 @@ SQL 実行の基本情報には、テーブル名、インデックス名、実�
 
 > **注記：**
 >
-> 一部の操作は 1 つの SQL ステートメント内で並行して実行される場合があるため、各ステージの累積所要時間は SQL ステートメントの実際の実行時間を超える可能性があります。
+> 一部の操作は単一の SQL ステートメント内で並行して実行される場合があるため、各ステージの累積所要時間は SQL ステートメントの実際の実行時間を超える可能性があります。
 
 ![Execution time](/media/dashboard/dashboard-slow-queries-detail-plans-time.png)
 

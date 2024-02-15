@@ -1,6 +1,6 @@
 ---
 title: Troubleshoot Clusters Using PingCAP Clinic
-summary: Learn how to use the PingCAP Clinic Diagnostic Service to troubleshoot cluster problems remotely and perform a quick check of the cluster status on a TiDB cluster or DM cluster deployed using TiUP.
+summary: PingCAP Clinic Diagnostic Service (PingCAP Clinic) helps troubleshoot TiDB and DM clusters deployed using TiUP. It allows remote troubleshooting and local cluster status checks using Diag client and Clinic Server. Prerequisites include installing Diag, setting an access token, and configuring the region. Troubleshooting remotely involves collecting, viewing, and uploading diagnostic data. Performing a quick check on the cluster status locally involves collecting and diagnosing configuration data. Data upload supports breakpoint upload, and uploaded data is kept on the Clinic Server for a maximum of 180 days.
 ---
 
 # PingCAPクリニックを使用したクラスターのトラブルシューティング {#troubleshoot-clusters-using-pingcap-clinic}
@@ -9,7 +9,7 @@ TiUPを使用してデプロイされた TiDB クラスターおよび DM クラ
 
 > **注記：**
 >
-> -   このドキュメントは、セルフホスト環境でTiUP を使用してデプロイされたクラスターに**のみ**適用されます。 TiDB Operator on Kubernetes を使用してデプロイされたクラスターについては、 [TiDB Operator環境向けPingCAPクリニック](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)参照してください。
+> -   このドキュメントは、セルフホスト環境でTiUP を使用してデプロイされたクラスターに**のみ**適用されます。 TiDB Operator on Kubernetes を使用してデプロイされたクラスターについては、 [TiDB Operator環境向けPingCAPクリニック](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)を参照してください。
 >
 > -   PingCAPクリニック は、 TiDB Ansible を使用してデプロイされたクラスターからのデータ収集を**サポートしていません**。
 
@@ -17,8 +17,8 @@ TiUPを使用してデプロイされた TiDB クラスターおよび DM クラ
 
 -   [クラスターの問題をリモートでトラブルシューティングする](#troubleshoot-cluster-problems-remotely)
 
-    -   クラスターに[支持を得ます](/support.md)問題がある場合、PingCAP から必要な場合は、リモート トラブルシューティングを容易にするために次の操作を実行できます。Diag を使用して診断データを収集し、収集したデータをクリニック サーバーにアップロードし、サーバーへのデータ アクセス リンクを提供します。テクニカルサポートスタッフ。
-    -   クラスターに問題が発生し、問題をすぐに分析できない場合は、Diag を使用してデータを収集し、後で分析するために保存できます。
+    -   クラスターに[支持を得ます](/support.md)問題が発生した場合、PingCAP から必要な場合は、リモート トラブルシューティングを容易にするために次の操作を実行できます。Diag で診断データを収集し、収集したデータをクリニック サーバーにアップロードし、サーバーへのデータ アクセス リンクを提供します。テクニカルサポートスタッフ。
+    -   クラスターに問題が発生し、問題をすぐに分析できない場合は、Diag を使用してデータを収集し、後で分析できるように保存できます。
 
 -   [クラスターのステータスをローカルで簡単にチェックする](#perform-a-quick-check-on-the-cluster-status-locally)
 
@@ -28,7 +28,7 @@ TiUPを使用してデプロイされた TiDB クラスターおよび DM クラ
 
 PingCAPクリニックを使用する前に、Diag ( PingCAPクリニックが提供するデータ収集コンポーネント) をインストールし、データをアップロードする環境を準備する必要があります。
 
-1.  インストール診断。
+1.  インストール診断
 
     -   制御マシンにTiUPをインストールしている場合は、次のコマンドを実行して Diag をインストールします。
 
@@ -205,7 +205,7 @@ Diag を使用すると、 TiUPを使用してデプロイされた TiDB クラ�
 収集されたデータは、データ ソースに基づいて個別のサブディレクトリに保存されます。これらのサブディレクトリには、マシン名とポート番号に基づいて名前が付けられます。各ノードの構成、ログ、およびその他のファイルのstorage場所は、TiDB クラスターの実サーバー内の相対storageパスと同じです。
 
 -   システムとハードウェアの基本情報: in `insight.json`
--   システム`/etc/security/limits.conf` : `limits.conf`の内容
+-   システム`/etc/security/limits.conf` ： `limits.conf`の内容
 -   カーネルパラメータのリスト: in `sysctl.conf`
 -   カーネルログ: `dmesg.log`
 -   データ収集中のネットワーク接続: `ss.txt`

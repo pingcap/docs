@@ -72,7 +72,7 @@ summary: Learn about the feature overview of TiDB.
 | `INSERT ON DUPLICATE KEY UPDATE`                                                                  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | `LOAD DATA INFILE`                                                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | `SELECT INTO OUTFILE`                                                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| `INNER JOIN` 、左|右 [外側] 結合                                                                         |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| `INNER JOIN` , `LEFT|RIGHT [OUTER] JOIN`                                                          |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | `UNION` `UNION ALL`                                                                               |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [`EXCEPT`演算子と`INTERSECT`演算子](/functions-and-operators/set-operators.md)                           |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  N  |
 | `GROUP BY` `ORDER BY`                                                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
@@ -246,10 +246,10 @@ summary: Learn about the feature overview of TiDB.
 | [クラスター間の RawKV レプリケーション](/tikv-configuration-file.md#api-version-new-in-v610)                                  |  E  |  E  |  E  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [グリーンGC](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50)                                               |  E  |  E  |  E  |  E  |  E  |  E  |  E  |  E  |  E  |  N  |
 | [リソース制御](/tidb-resource-control.md)                                                                            |  Y  |  Y  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
-| [暴走クエリの管理](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries) |  E  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
+| [暴走クエリ管理](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries)  |  E  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [バックグラウンドタスク管理](/tidb-resource-control.md#manage-background-tasks)                                             |  E  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [TiFlash の分散型ストレージとコンピューティングアーキテクチャおよび S3 サポート](/tiflash/tiflash-disaggregated-and-s3.md)                      |  Y  |  E  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
-| [分散フレームワークタスク用の TiDB ノードの選択](/system-variables.md#tidb_service_scope-new-in-v740)                              |  Y  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
+| [Distributed eXecution Framework (DXF) タスク用の TiDB ノードの選択](/system-variables.md#tidb_service_scope-new-in-v740) |  Y  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 
 [^1]: TiDB は、latin1 を utf8 のサブセットとして誤って扱います。詳細については[TiDB #18955](https://github.com/pingcap/tidb/issues/18955)参照してください。
 

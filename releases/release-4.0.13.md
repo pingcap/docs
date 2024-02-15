@@ -1,5 +1,6 @@
 ---
 title: TiDB 4.0.13 Release Notes
+summary: TiDB 4.0.13 was released on May 28, 2021. New features include support for changing `AUTO_INCREMENT` to `AUTO_RANDOM` and the addition of `infoschema.client_errors_summary` tables. Improvements were made to TiDB, TiKV, PD, TiFlash, and Tools. Bug fixes were also implemented for TiDB, TiKV, TiFlash, and Tools, addressing various issues such as query results, panics, and memory usage.
 ---
 
 # TiDB 4.0.13 リリースノート {#tidb-4-0-13-release-notes}
@@ -57,7 +58,7 @@ TiDB バージョン: 4.0.13
     -   サブクエリを含む`UPDATE`ステートメントが生成された列[#24658](https://github.com/pingcap/tidb/pull/24658)更新するときに発生するpanicの問題を修正します。
     -   データ読み取りに複数列インデックスを使用する場合に重複したクエリ結果が発生する問題を修正します[#24634](https://github.com/pingcap/tidb/pull/24634)
     -   DIV 式[#24266](https://github.com/pingcap/tidb/pull/24266)の除数として`BIT`型定数を使用すると、間違ったクエリ結果が発生する問題を修正します。
-    -   `NO_ZERO_IN_DATE` SQL モードが DDL ステートメントで設定されたデフォルトの列値に対して有効にならない問題を修正します[#24185](https://github.com/pingcap/tidb/pull/24185)
+    -   `NO_ZERO_IN_DATE` DDL ステートメントで設定されたデフォルトの列値に対して SQL モードが有効にならない問題を修正します[#24185](https://github.com/pingcap/tidb/pull/24185)
     -   `BIT`タイプの列と`INTEGER`タイプの列の間で`UNION`を使用すると、間違ったクエリ結果が発生する問題を修正します[#24026](https://github.com/pingcap/tidb/pull/24026)
     -   `BINARY`タイプと`CHAR`タイプ[#23917](https://github.com/pingcap/tidb/pull/23917)を比較すると、誤って`TableDual`プランが作成されてしまう問題を修正
     -   `insert ignore on duplicate`ステートメントが予期せずテーブル レコード[#23825](https://github.com/pingcap/tidb/pull/23825)を削除する可能性がある問題を修正します。
@@ -70,7 +71,7 @@ TiDB バージョン: 4.0.13
     -   TiFlashバッチ リクエスト[#23700](https://github.com/pingcap/tidb/pull/23700)の実行時に TiDB が誤って`TiKV server timeout`エラーを報告するバグを修正しました。
     -   `IndexJoin`演算子がプレフィックス列インデックス[#23691](https://github.com/pingcap/tidb/pull/23691)で間違った結果を返す問題を修正します。
     -   `BINARY` type 列の照合順序が適切に処理されないため、間違ったクエリ結果が発生する問題を修正します[#23598](https://github.com/pingcap/tidb/pull/23598)
-    -   `UPDATE`ステートメントに`HAVING`句を含む結合クエリが含まれている場合に発生するクエリpanicの問題を修正します[#23575](https://github.com/pingcap/tidb/pull/23575)
+    -   `UPDATE`ステートメントに`HAVING`句を使用した結合クエリが含まれている場合に発生するクエリpanicの問題を修正します[#23575](https://github.com/pingcap/tidb/pull/23575)
     -   比較式[#23474](https://github.com/pingcap/tidb/pull/23474)で定数`NULL`を使用すると、 TiFlashが間違った結果を返す問題を修正します。
     -   `YEAR`型列と`STRING`定数[#23335](https://github.com/pingcap/tidb/pull/23335)を比較するときに間違った結果が表示される問題を修正
     -   `session.group_concat_max_len`の設定が小さすぎると`group_concat`パニックになる問題を修正[#23257](https://github.com/pingcap/tidb/pull/23257)
@@ -84,7 +85,7 @@ TiDB バージョン: 4.0.13
     -   `enable_new_collation`を有効にして`ANALYZE`実行すると発生するpanicを修正[#21299](https://github.com/pingcap/tidb/pull/21299)
     -   SQL ビューが SQL DEFINER [#24531](https://github.com/pingcap/tidb/pull/24531)に関連付けられたデフォルトのロールを正しく処理しない問題を修正します。
     -   DDL ジョブのキャンセルがスタックする問題を修正[#24445](https://github.com/pingcap/tidb/pull/24445)
-    -   `concat`関数が照合照合順序[#24300](https://github.com/pingcap/tidb/pull/24300)を正しく処理しない問題を修正します。
+    -   `concat`関数が照合順序[#24300](https://github.com/pingcap/tidb/pull/24300)を正しく処理しない問題を修正します。
     -   `SELECT`フィールドに`IN`サブクエリがあり、サブクエリの外側に`NULL`タプルが含まれる場合、クエリが間違った結果を返すバグを修正[#24022](https://github.com/pingcap/tidb/pull/24022)
     -   降順で`TableScan`が[#23974](https://github.com/pingcap/tidb/pull/23974)の場合、オプティマイザによってTiFlash が誤って選択されるバグを修正
     -   `point_get`プランが MySQL [#23970](https://github.com/pingcap/tidb/pull/23970)と一致しないカラム名を返すバグを修正

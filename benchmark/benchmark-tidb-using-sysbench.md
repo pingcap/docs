@@ -1,5 +1,6 @@
 ---
 title: How to Test TiDB Using Sysbench
+summary: TiDB performance can be optimized by using Sysbench 1.0 or later. Configure TiDB and TiKV with higher log levels for better performance. Adjust Sysbench configuration and import data to optimize performance. Address common issues related to proxy use and CPU utilization rates.
 ---
 
 # Sysbench を使用して TiDB をテストする方法 {#how-to-test-tidb-using-sysbench}
@@ -127,7 +128,7 @@ sysbench --config-file=config oltp_point_select --tables=32 --table-size=1000000
 
 ### データのウォーミングと統計の収集 {#warming-data-and-collecting-statistics}
 
-データをウォームアップするには、データをディスクからメモリのブロックキャッシュにロードします。ウォームアップされたデータにより、システム全体のパフォーマンスが大幅に向上しました。クラスターを再起動した後、データを一度ウォームアップすることをお勧めします。
+データをウォームアップするには、ディスクからメモリのブロックキャッシュにデータをロードします。ウォームアップされたデータにより、システム全体のパフォーマンスが大幅に向上しました。クラスターを再起動した後、データを一度ウォームアップすることをお勧めします。
 
 ```bash
 sysbench --config-file=config oltp_point_select --tables=32 --table-size=10000000 prewarm

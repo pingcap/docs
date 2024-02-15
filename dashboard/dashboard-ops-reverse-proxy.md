@@ -1,5 +1,6 @@
 ---
 title: Use TiDB Dashboard behind a Reverse Proxy
+summary: TiDB Dashboard can be safely exposed using a reverse proxy. To do this, get the actual TiDB Dashboard address and configure the reverse proxy using either HAProxy or NGINX. You can also customize the path prefix for the TiDB Dashboard service. To enhance security, consider configuring a firewall.
 ---
 
 # リバース プロキシの背後で TiDB ダッシュボードを使用する {#use-tidb-dashboard-behind-a-reverse-proxy}
@@ -12,7 +13,7 @@ title: Use TiDB Dashboard behind a Reverse Proxy
 
 複数の PD インスタンスがクラスターにデプロイされている場合、PD インスタンスのうちの 1 つだけが実際に TiDB ダッシュボードを実行します。したがって、リバース プロキシの上流が正しいアドレスを指していることを確認する必要があります。この仕組みの詳細については、 [複数の PD インスタンスを使用したデプロイメント](/dashboard/dashboard-ops-deploy.md#deployment-with-multiple-pd-instances)を参照してください。
 
-TiUPツールを使用して展開する場合は、次のコマンドを実行して実際の TiDB ダッシュボード アドレスを取得します ( `CLUSTER_NAME`をクラスター名に置き換えます)。
+TiUPツールを使用して展開する場合は、次のコマンドを実行して実際の TiDB ダッシュボード アドレスを取得します ( `CLUSTER_NAME`クラスター名に置き換えます)。
 
 ```shell
 tiup cluster display CLUSTER_NAME --dashboard
@@ -41,7 +42,7 @@ http://192.168.0.123:2379/dashboard/
 
 <details><summary><strong>HAProxy を使用する</strong></summary>
 
-リバース プロキシとして[HAプロキシ](https://www.haproxy.org/)を使用する場合は、次の手順を実行します。
+[HAプロキシ](https://www.haproxy.org/)リバース プロキシとして使用する場合は、次の手順を実行します。
 
 1.  `8033`ポートで TiDB ダッシュボードにリバース プロキシを使用します (たとえば)。 HAProxy 構成ファイルに、次の構成を追加します。
 
@@ -69,7 +70,7 @@ http://192.168.0.123:2379/dashboard/
 
 <details><summary><strong>NGINXを使用する</strong></summary>
 
-リバース プロキシとして[NGINX](https://nginx.org/)を使用する場合は、次の手順を実行します。
+[NGINX](https://nginx.org/)リバース プロキシとして使用する場合は、次の手順を実行します。
 
 1.  `8033`ポートで TiDB ダッシュボードにリバース プロキシを使用します (たとえば)。 NGINX 構成ファイルに、次の構成を追加します。
 

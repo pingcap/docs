@@ -1,5 +1,6 @@
 ---
 title: TiDB 2.0 Release Notes
+summary: TiDB 2.0 GA release on April 27, 2018, brings improvements in MySQL compatibility, SQL optimizer, executor, and stability. Key updates include compact data structure for memory usage reduction, Stream Aggregation operator for empty GROUP BY clause, and support for more MySQL syntaxes. TiKV features include `Region Merge`, `Raw DeleteRange` API, and improved read performance using `ReadPool`. TiSpark 1.0 GA provides distributed computing of TiDB data using Apache Spark, with support for gRPC communication framework, calculation pushdown, index related support, cost-based optimization, and multiple Spark interfaces.
 ---
 
 # TiDB 2.0 リリースノート {#tidb-2-0-release-notes}
@@ -27,7 +28,7 @@ title: TiDB 2.0 Release Notes
     -   `Insert On Duplicate Key Update`ステートメントを最適化してパフォーマンスを 10 倍以上向上させる
     -   `Load Data`最適化するとパフォーマンスが 10 倍以上向上します
     -   より多くのデータ型と関数をTiKV にプッシュダウンする
-    -   物理オペレーターのメモリ使用量の計算、およびメモリ使用量がしきい値を超えた場合の構成ファイルとシステム変数での処理動作の指定をサポートします。
+    -   物理オペレーターのメモリ使用量の計算、およびメモリ使用量がしきい値を超えた場合の構成ファイルおよびシステム変数での処理動作の指定をサポートします。
     -   OOM のリスクを軽減するために、単一の SQL ステートメントによるメモリ使用量の制限をサポートします。
     -   CRUD 操作での暗黙的な RowID の使用のサポート
     -   ポイントクエリのパフォーマンスを向上させる

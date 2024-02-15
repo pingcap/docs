@@ -1,5 +1,6 @@
 ---
 title: TiDB 5.4.2 Release Notes
+summary: TiDB 5.4.2 was released on July 8, 2022. It is not recommended to use this version due to a known bug, which has been fixed in v5.4.3. The release includes improvements to TiDB, TiKV, PD, and various tools, along with bug fixes for each component. These bug fixes address issues related to stability, performance, and error handling.
 ---
 
 # TiDB 5.4.2 リリースノート {#tidb-5-4-2-release-notes}
@@ -61,7 +62,7 @@ TiDB バージョン: 5.4.2
     -   `DATETIME`値に小数と`Z` [#12739](https://github.com/tikv/tikv/issues/12739)が含まれる場合に発生する時刻解析エラーの問題を修正します。
     -   空の文字列の型変換を実行すると TiKV がパニックになる問題を修正[#12673](https://github.com/tikv/tikv/issues/12673)
     -   非同期コミットが有効になっている場合に、悲観的トランザクションで発生する可能性のある重複コミット レコードを修正します[#12615](https://github.com/tikv/tikv/issues/12615)
-    -   Follower Read [#12478](https://github.com/tikv/tikv/issues/12478)の使用時に TiKV が`invalid store ID 0`エラーを報告する問題を修正
+    -   Follower Read [#12478](https://github.com/tikv/tikv/issues/12478)を使用すると TiKV が`invalid store ID 0`エラーを報告する問題を修正
     -   ピアの破棄とリージョン[#12368](https://github.com/tikv/tikv/issues/12368)のバッチ分割の間の競合によって引き起こされる TiKVpanicの問題を修正します。
     -   間違った文字列一致[#12329](https://github.com/tikv/tikv/issues/12329)が原因で tikv-ctl が間違った結果を返す問題を修正
     -   AUFS [#12543](https://github.com/tikv/tikv/issues/12543)で TiKV の起動に失敗する問題を修正

@@ -1,5 +1,6 @@
 ---
 title: TiDB 4.0 RC Release Notes
+summary: TiDB 4.0 RC released on April 8, 2020. It includes compatibility changes, bug fixes, new features, and tools. TiKV supports the `pipelined` feature in pessimistic transactions, improving TPC-C performance by 20%. TiDB adds case-insensitive collation and enhances the `RECOVER TABLE` syntax. TiKV now supports TLS in the HTTP port. PD supports getting default PD configuration information through the HTTP API. Bug fixes include issues with replication, subquery results, and DDL job internal retry. Tools like TiDB Lightning and TiCDC also have bug fixes and new features.
 ---
 
 # TiDB 4.0 RC リリース ノート {#tidb-4-0-rc-release-notes}
@@ -99,5 +100,5 @@ TiUPバージョン：0.0.3
 
         -   MySQL シンクが DDL ステートメント[#353](https://github.com/pingcap/tiflow/pull/353)を実行しているときに、ダウンストリームに`test`スキーマが存在しない場合にエラーが返される問題を修正します。
         -   CDC cli [#351](https://github.com/pingcap/tiflow/pull/351)でのリアルタイム対話モードのサポート
-        -   データ レプリケーション中にアップストリームのテーブルをレプリケートできるかどうかのチェックをサポート[#368](https://github.com/pingcap/tiflow/pull/368)
+        -   データレプリケーション中にアップストリームのテーブルをレプリケートできるかどうかのチェックをサポート[#368](https://github.com/pingcap/tiflow/pull/368)
         -   Kafka [#344](https://github.com/pingcap/tiflow/pull/344)への非同期書き込みをサポート

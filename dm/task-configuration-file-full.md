@@ -1,5 +1,6 @@
 ---
 title: DM Advanced Task Configuration File
+summary: This document introduces the advanced task configuration file of Data Migration (DM), covering global and instance configuration. The global configuration includes basic and feature settings, while the instance configuration defines subtasks for data migration from one or multiple MySQL instances in the upstream to the same instance in the downstream.
 ---
 
 # DM 拡張タスクコンフィグレーションファイル {#dm-advanced-task-configuration-file}
@@ -44,6 +45,7 @@ target-database:                # Configuration of the downstream database insta
     sql_mode: "ANSI_QUOTES,NO_ZERO_IN_DATE,NO_ZERO_DATE" # Since DM v2.0.0, if this item does not appear in the configuration file, DM automatically fetches a proper value for "sql_mode" from the downstream TiDB. Manual configuration of this item has a higher priority.
     tidb_skip_utf8_check: 1                     # Since DM v2.0.0, if this item does not appear in the configuration file, DM automatically fetches a proper value for "tidb_skip_utf8_check" from the downstream TiDB. Manual configuration of this item has a higher priority.
     tidb_constraint_check_in_place: 0
+    sql_require_primary_key: OFF                # Controls whether a table must have a primary key at the session level. During the creation of a DM task, several metadata tables are created in TiDB, and some of them have no primary key. If this parameter is enabled, these metadata tables without primary keys cannot be created, which will cause DM to fail to create the task. In this case, you need to set this parameter to `OFF`.
   security:                       # The TLS configuration of the downstream TiDB
     ssl-ca: "/path/to/ca.pem"
     ssl-cert: "/path/to/cert.pem"
@@ -253,7 +255,7 @@ mysql-instances:
 -   説明: 実行するデータ移行タスクを指定するために使用できるタスク モード。
 -   値: 文字列 ( `full` 、 `incremental` 、または`all` )。
     -   `full` 、アップストリーム データベースの完全バックアップのみを作成し、その後、完全なデータをダウンストリーム データベースにインポートします。
-    -   `incremental` : binlogを使用して、アップストリーム データベースの増分データのみをダウンストリーム データベースにレプリケートします。インスタンス構成の設定項目`meta`で、増分レプリケーションの開始位置を指定できます。
+    -   `incremental` : binlogを使用して、アップストリーム データベースの増分データのみをダウンストリーム データベースにレプリケートします。インスタンス構成の`meta`設定項目で、増分レプリケーションの開始位置を指定できます。
     -   `all` : `full` + `incremental` 。アップストリーム データベースの完全バックアップを作成し、ダウンストリーム データベースに完全なデータをインポートしてから、binlogを使用して、完全バックアップ プロセス中にエクスポートされた位置 (binlog位置) から開始してダウンストリーム データベースへの増分レプリケーションを作成します。
 
 ### 機能構成セット {#feature-configuration-set}

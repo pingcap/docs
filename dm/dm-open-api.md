@@ -764,6 +764,16 @@ curl -X 'POST' \
         "import_threads": 16,
         "data_dir": "./exported_data",
         "consistency": "auto"
+        "import_mode": "physical",
+        "sorting_dir": "./sort_dir",
+        "disk_quota": "80G",
+        "checksum": "required",
+        "analyze": "optional",
+        "range_concurrency": 0,
+        "compress-kv-pairs": "",
+        "pd_addr": "",
+        "on_duplicate_logical": "error",
+        "on_duplicate_physical": "none"
       },
       "incr_migrate_conf": {
         "repl_threads": 16,
@@ -854,6 +864,16 @@ curl -X 'POST' \
       "import_threads": 16,
       "data_dir": "./exported_data",
       "consistency": "auto"
+      "import_mode": "physical",
+      "sorting_dir": "./sort_dir",
+      "disk_quota": "80G",
+      "checksum": "required",
+      "analyze": "optional",
+      "range_concurrency": 0,
+      "compress-kv-pairs": "",
+      "pd_addr": "",
+      "on_duplicate_logical": "error",
+      "on_duplicate_physical": "none"
     },
     "incr_migrate_conf": {
       "repl_threads": 16,
@@ -958,7 +978,17 @@ curl -X 'GET' \
       "export_threads": 4,
       "import_threads": 16,
       "data_dir": "./exported_data",
-      "consistency": "auto"
+      "consistency": "auto",
+      "import_mode": "physical",
+      "sorting_dir": "./sort_dir",
+      "disk_quota": "80G",
+      "checksum": "required",
+      "analyze": "optional",
+      "range_concurrency": 0,
+      "compress-kv-pairs": "",
+      "pd_addr": "",
+      "on_duplicate_logical": "error",
+      "on_duplicate_physical": "none"
     },
     "incr_migrate_conf": {
       "repl_threads": 16,
@@ -1082,7 +1112,17 @@ curl -X 'PUT' \
         "export_threads": 4,
         "import_threads": 16,
         "data_dir": "./exported_data",
-        "consistency": "auto"
+        "consistency": "auto",
+        "import_mode": "physical",
+        "sorting_dir": "./sort_dir",
+        "disk_quota": "80G",
+        "checksum": "required",
+        "analyze": "optional",
+        "range_concurrency": 0,
+        "compress-kv-pairs": "",
+        "pd_addr": "",
+        "on_duplicate_logical": "error",
+        "on_duplicate_physical": "none"
       },
       "incr_migrate_conf": {
         "repl_threads": 16,
@@ -1173,6 +1213,16 @@ curl -X 'PUT' \
       "import_threads": 16,
       "data_dir": "./exported_data",
       "consistency": "auto"
+      "import_mode": "physical",
+      "sorting_dir": "./sort_dir",
+      "disk_quota": "80G",
+      "checksum": "required",
+      "analyze": "optional",
+      "range_concurrency": 0,
+      "compress-kv-pairs": "",
+      "pd_addr": "",
+      "on_duplicate_logical": "error",
+      "on_duplicate_physical": "none"
     },
     "incr_migrate_conf": {
       "repl_threads": 16,
@@ -1192,7 +1242,7 @@ curl -X 'PUT' \
 
 ## レプリケーションタスクを開始する {#start-a-replication-task}
 
-この API は非同期インターフェイスです。リクエストが成功した場合、返される本文のステータス コードは 204 です。タスクの最新のステータスを確認するには、 [レプリケーションタスクの情報を取得する](#get-the-information-of-a-replication-task)を行うことができます。
+この API は非同期インターフェイスです。リクエストが成功した場合、返される本文のステータス コードは 204 です。タスクの最新のステータスを確認するには、 [レプリケーションタスクの情報を取得する](#get-the-information-of-a-replication-task)を実行します。
 
 ### リクエストURI {#request-uri}
 
@@ -1381,7 +1431,17 @@ curl -X 'GET' \
           "export_threads": 4,
           "import_threads": 16,
           "data_dir": "./exported_data",
-          "consistency": "auto"
+          "consistency": "auto",
+          "import_mode": "physical",
+          "sorting_dir": "./sort_dir",
+          "disk_quota": "80G",
+          "checksum": "required",
+          "analyze": "optional",
+          "range_concurrency": 0,
+          "compress-kv-pairs": "",
+          "pd_addr": "",
+          "on_duplicate_logical": "error",
+          "on_duplicate_physical": "none"
         },
         "incr_migrate_conf": {
           "repl_threads": 16,

@@ -1,5 +1,6 @@
 ---
 title: TiDB 2.0.7 Release Notes
+summary: TiDB 2.0.7 was released on September 7, 2018, with improvements in system compatibility and stability. New features include the addition of the `PROCESSLIST` table in `information_schema`. Bug fixes address issues with index usage, join output, and query conditions. TiKV now opens the `dynamic-level-bytes` parameter by default to reduce space amplification, and updates approximate size and keys count after region merging.
 ---
 
 # TiDB 2.0.7 リリースノート {#tidb-2-0-7-release-notes}
@@ -21,9 +22,9 @@ title: TiDB 2.0.7 Release Notes
     -   内側の行が`NULL` [#7301](https://github.com/pingcap/tidb/pull/7301)の場合、 `Merge Join`と`Index Join`誤った結果を出力する問題を修正
     -   `Join`チャンクサイズが小さすぎると誤った結果が出力される問題を修正[#7315](https://github.com/pingcap/tidb/pull/7315)
     -   `range column` [#7379](https://github.com/pingcap/tidb/pull/7379)を含むテーブルを作成するステートメントによって引き起こされるpanicの問題を修正
-    -   `admin check table`が誤って時刻型列[#7457](https://github.com/pingcap/tidb/pull/7457)のエラーを報告する問題を修正
+    -   `admin check table`が時間型列[#7457](https://github.com/pingcap/tidb/pull/7457)のエラーを誤って報告する問題を修正
     -   デフォルト値`current_timestamp`のデータを`=`条件[#7467](https://github.com/pingcap/tidb/pull/7467)を使用してクエリできない問題を修正します。
-    -   `ComStmtSendLongData`コマンドを使用して挿入された長さゼロのパラメータが誤って NULL [#7508](https://github.com/pingcap/tidb/pull/7508)に解析される問題を修正
+    -   `ComStmtSendLongData`コマンドを使用して挿入された長さ 0 のパラメータが誤って NULL [#7508](https://github.com/pingcap/tidb/pull/7508)に解析される問題を修正
     -   特定のシナリオで`auto analyze`が繰り返し実行される問題を修正[#7556](https://github.com/pingcap/tidb/pull/7556)
     -   パーサーが改行文字で終わる 1 行のコメントを解析できない問題を修正します[#7635](https://github.com/pingcap/tidb/pull/7635)
 

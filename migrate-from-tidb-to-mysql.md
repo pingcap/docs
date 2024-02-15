@@ -56,7 +56,7 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
 
 1.  ガベージ コレクション (GC) を無効にします。
 
-    新しく書き込まれたデータが増分移行中に削除されないようにするには、完全なデータをエクスポートする前に、アップストリーム クラスターの GC を無効にする必要があります。これにより、履歴データは削除されません。
+    新しく書き込まれたデータが増分移行中に削除されないようにするには、完全なデータをエクスポートする前に、アップストリーム クラスターの GC を無効にする必要があります。これにより、履歴データは削除されません。 TiDB v4.0.0 以降のバージョンでは、 Dumpling が[GC 時間を自動的に延長する](/dumpling-overview.md#manually-set-the-tidb-gc-time)なる可能性があります。ただし、 Dumpling の終了後に GC プロセスが開始され、増分変更の移行が失敗する可能性があるため、GC を手動で無効にすることが依然として必要です。
 
     次のコマンドを実行して GC を無効にします。
 
@@ -154,7 +154,7 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
     上流クラスターで次のコマンドを実行して、上流クラスターから下流クラスターへの変更フィードを作成します。
 
     ```shell
-    tiup ctl:v<CLUSTER_VERSION> cdc changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://root:@127.0.0.1:3306" --changefeed-id="upstream-to-downstream" --start-ts="434217889191428107"
+    tiup cdc:v<CLUSTER_VERSION> cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://root:@127.0.0.1:3306" --changefeed-id="upstream-to-downstream" --start-ts="434217889191428107"
     ```
 
     このコマンドのパラメータは次のとおりです。

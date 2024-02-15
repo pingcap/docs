@@ -1,5 +1,6 @@
 ---
 title: TiDB 5.2.2 Release Notes
+summary: TiDB 5.2.2 was released on October 29, 2021. The release includes various improvements and bug fixes for TiDB, TiKV, PD, TiCDC, TiFlash, and TiDB Binlog. Improvements include showing affected SQL statements in debug logs, support for showing backup and restore data size, and more. Bug fixes address issues such as plan-cache detection, wrong partition pruning, and various other issues related to query functions, client connections, and data replication.
 ---
 
 # TiDB 5.2.2 リリースノート {#tidb-5-2-2-release-notes}
@@ -107,7 +108,7 @@ TiDB バージョン: 5.2.2
         -   TiKV が同じリージョン[#2386](https://github.com/pingcap/tiflow/issues/2386)に重複したリクエストを送信すると、TiCDC プロセスがパニックになる可能panicがある問題を修正
         -   ダウンストリーム TiDB/MySQL の可用性を確認する際の不要な CPU 消費を修正[#3073](https://github.com/pingcap/tiflow/issues/3073)
         -   TiCDC によって生成される Kafka メッセージの量が`max-message-size` [#2962](https://github.com/pingcap/tiflow/issues/2962)の制限を受けない問題を修正
-        -   Kafka メッセージの書き込み中にエラーが発生すると、TiCDC 同期タスクが一時停止することがある問題を修正します[#2978](https://github.com/pingcap/tiflow/issues/2978)
+        -   Kafka メッセージの書き込み中にエラーが発生したときに TiCDC 同期タスクが一時停止することがある問題を修正します[#2978](https://github.com/pingcap/tiflow/issues/2978)
         -   `force-replicate`が有効な場合、有効なインデックスのない一部のパーティション テーブルが無視される可能性がある問題を修正します[#2834](https://github.com/pingcap/tiflow/issues/2834)
         -   ストック データのスキャンに時間がかかりすぎる場合、TiKV が GC を実行するためにストック データのスキャンが失敗する可能性がある問題を修正します[#2470](https://github.com/pingcap/tiflow/issues/2470)
         -   一部の種類の列をオープン プロトコル形式[#2758](https://github.com/pingcap/tiflow/issues/2758)にエンコードするときに発生する可能性のpanicの問題を修正しました。

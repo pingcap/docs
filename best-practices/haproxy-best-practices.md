@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Using HAProxy in TiDB
-summary: This document describes best practices for configuration and usage of HAProxy in TiDB.
+summary: HAProxy is a free, open-source load balancer and proxy server for TCP and HTTP-based applications. It provides high availability, load balancing, health checks, sticky sessions, SSL support, and monitoring. To deploy HAProxy, ensure hardware and software requirements are met, then install and configure it. Use the latest stable version for best results.
 ---
 
 # TiDB で HAProxy を使用するためのベスト プラクティス {#best-practices-for-using-haproxy-in-tidb}
@@ -45,7 +45,7 @@ HAProxy を展開する前に、ハードウェアとソフトウェアの要件
 
 ### ソフトウェア要件 {#software-requirements}
 
-次のオペレーティング システムを使用して、必要な依存関係がインストールされていることを確認できます。 yum を使用して HAProxy をインストールする場合、依存関係も一緒にインストールされるため、再度個別にインストールする必要はありません。
+次のオペレーティング システムを使用して、必要な依存関係がインストールされていることを確認できます。 yum を使用して HAProxy をインストールすると、依存関係も一緒にインストールされるため、再度個別にインストールする必要はありません。
 
 #### オペレーティングシステム {#operating-systems}
 
@@ -74,7 +74,7 @@ yum -y install epel-release gcc systemd-devel
 
 ## HAProxyのデプロイ {#deploy-haproxy}
 
-HAProxy を使用すると、負荷分散されたデータベース環境を簡単に構成およびセットアップできます。このセクションでは、一般的な展開操作について説明します。実際のシナリオに基づいて[設定ファイル](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html)をカスタマイズできます。
+HAProxy を使用すると、負荷分散されたデータベース環境を簡単に構成およびセットアップできます。このセクションでは、一般的な展開操作について説明します。実際のシナリオに基づいて[設定ファイル](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html)カスタマイズできます。
 
 ### HAProxy をインストールする {#install-haproxy}
 
@@ -198,7 +198,7 @@ listen tidb-cluster                        # Database load balancing.
 `SHOW PROCESSLIST`を使用して送信元 IP アドレスを確認するには、TiDB に接続するように[プロキシプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)を設定する必要があります。
 
 ```yaml
-   server tidb-1 10.9.18.229:4000 send-proxy check inter 2000 rise 2 fall 3       
+   server tidb-1 10.9.18.229:4000 send-proxy check inter 2000 rise 2 fall 3
    server tidb-2 10.9.39.208:4000 send-proxy check inter 2000 rise 2 fall 3
    server tidb-3 10.9.64.166:4000 send-proxy check inter 2000 rise 2 fall 3
 ```
