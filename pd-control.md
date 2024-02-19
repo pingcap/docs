@@ -1110,6 +1110,42 @@ unsafe remove-failed-stores show
 ]
 ```
 
+### `resource-manager [command]`
+
+#### View the controller configuration of Resource Control
+
+```bash
+resource-manager config controller show
+```
+
+```bash
+{
+    "degraded-mode-wait-duration": "0s",
+    "ltb-max-wait-duration": "30s",
+    "request-unit": {                    # Configurations of RU. Do not modify.
+        "read-base-cost": 0.125,
+        "read-per-batch-base-cost": 0.5,
+        "read-cost-per-byte": 0.0000152587890625,
+        "write-base-cost": 1,
+        "write-per-batch-base-cost": 1,
+        "write-cost-per-byte": 0.0009765625,
+        "read-cpu-ms-cost": 0.3333333333333333
+    },
+    "enable-controller-trace-log": "false"
+}
+```
+
+- `ltb-max-wait-duration`: the maximum waiting time of Local Token Bucket (LTB). The default value is `30s`, and the value range is [0, 24h]. If the estimated RU consumption of the SQL request exceeds the current accumulated RU of LTB, you need to wait for a certain period of time. If the estimated waiting time exceeds this maximum waiting time, the application will report an error [`ERROR 8252 (HY000) : Exceeded resource group quota limitation`](/error-codes.md) in advance. Increasing this value can reduce the occurrence of error 8252 in cases of sudden concurrency increase, large transactions, and large queries.
+- `enable-controller-trace-log`: the controller diagnostic log switch.
+
+#### Modify the controller configuration of Resource Control
+
+Modify `ltb-max-wait-duration` as follows:
+
+```bash
+pd-ctl resource-manager config controller set ltb-max-wait-duration 30m
+```
+
 ## Jq formatted JSON output usage
 
 ### Simplify the output of `store`
