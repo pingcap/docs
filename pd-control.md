@@ -1135,12 +1135,12 @@ resource-manager config controller show
 }
 ```
 
-- `ltb-max-wait-duration`: the maximum waiting time of Local Token Bucket (LTB). The default value is `30s`, and the value range is [0, 24h]. If the estimated RU consumption of the SQL request exceeds the current accumulated RU of LTB, you need to wait for a certain period of time. If the estimated waiting time exceeds this maximum waiting time, the application will report an error [`ERROR 8252 (HY000) : Exceeded resource group quota limitation`](/error-codes.md) in advance. Increasing this value can reduce the occurrence of error 8252 in cases of sudden concurrency increase, large transactions, and large queries.
-- `enable-controller-trace-log`: the controller diagnostic log switch.
+- `ltb-max-wait-duration`: the maximum waiting time of Local Token Bucket (LTB). The default value is `30s`, and the value range is `[0, 24h]`. If the estimated [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) consumption of the SQL request exceeds the current accumulated RU of LTB, the request needs to wait for a certain period of time. If the estimated waiting time exceeds this maximum value, an error message [`ERROR 8252 (HY000) : Exceeded resource group quota limitation`](/error-codes.md) is returned to the application in advance. Increasing this value can reduce the occurrence of encountering `ERROR 8252` in cases of sudden concurrency increase, large transactions, and large queries.
+- `enable-controller-trace-log`: control whether to enable the controller diagnostic log.
 
 #### Modify the controller configuration of Resource Control
 
-Modify `ltb-max-wait-duration` as follows:
+To modify the `ltb-max-wait-duration` configuration, use the following command:
 
 ```bash
 pd-ctl resource-manager config controller set ltb-max-wait-duration 30m
