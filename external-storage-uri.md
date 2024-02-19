@@ -38,8 +38,6 @@ The following is an example of an Amazon S3 URI for TiDB Lightning and BR. In th
 s3://external/testfolder?access-key=${access-key}&secret-access-key=${secret-access-key}
 ```
 
-以下是用于 TiCDC 的 `sink-uri` 中的 Amazon S3 URI 示例：
-
 The following is an example of an Amazon S3 URI for TiCDC `sink-uri`.
 
 ```shell
