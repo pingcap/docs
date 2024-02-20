@@ -74,7 +74,9 @@ As we distribute and replicate data in Regions, we have a distributed Key-Value 
 
 ## MVCC
 
-Many databases implement multi-version concurrency control (MVCC), and TiKV is no exception. Imagine the situation where two clients modify the value of a Key at the same time. Without MVCC, the data needs to be locked. In a distributed scenario, it might cause performance and deadlock problems. TiKV's MVCC implementation is achieved by appending a version number to Key. In short, without MVCC, TiKV's data layout can be seen as:
+TiKV supports multi-version concurrency control (MVCC). Consider a scenario where a Client A is writing to a key simultaneously as Client B is reading the same key. Without a multi-version control mechanism, these read and write operations would be mutually exclusive, posing performance issues and deadlocks in distributed scenarios. However, With MVCC, as long as Client B performs a read operation at a logical time earlier than Client A, then Client B can correctly read the original value at the same time Client A performs the write operation. Even if the Key is modified multiple times by multiple write operations, Client B can still read the old value at its logical time.
+
+TiKV MVCC is implemented by appending a version number to the key. Without MVCC, the data layout of TiKV is as follows:
 
 ```
 Key1 -> Value
