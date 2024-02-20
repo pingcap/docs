@@ -8,6 +8,15 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
+## February 20, 2024
+
+**General changes**
+
+- Support creating more TiDB Cloud nodes on Google Cloud.
+
+    - By [configuring a regional CIDR size](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) of `/19` for Google Cloud, you can now create up to 128 TiDB Cloud nodes within any region of a project.
+    - If you want to create more than 128 nodes in any region of a project, you can contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance in customizing an IP range size ranging from `/16` to `/18`.
+
 ## January 23, 2024
 
 **General changes**
