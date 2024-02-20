@@ -1209,7 +1209,7 @@ SUBSTRING_INDEX(str, delim, count)
 ```
 
 - `str`: specifies the string to be processed.
-- `delim`: specifies the delimiter in the string, which is case sensitive.
+- `delim`: specifies the delimiter in the string, which is case-sensitive.
 - `count`: specifies the number of occurrences of the delimiter.
     - If `count` is a positive number, the function returns the substring before the `count` occurrences (counting from the left of the string) of the delimiter.
     - If `count` is a negative number, the function returns the substring after the `count` occurrences (counting from the right of the string) of the delimiter.
@@ -1258,7 +1258,7 @@ TO_BASE64(str)
 ```
 
 - If the argument is not a string, the function converts it to a string before base-64 encoding.
-- If the argument is ``NULL``, the function returns ``NULL``.
+- If the argument is `NULL`, the function returns `NULL`.
 
 Example 1:
 
