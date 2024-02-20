@@ -77,7 +77,7 @@ To enable Cloud Organization SSO, take the following steps:
 
 1. Log in to [TiDB Cloud console](https://tidbcloud.com) as a user with the `Organization Owner` role.
 2. In the lower-left corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-organization" />, and then click **Organization Settings**.
-3. On the **Organization Settings** page, click the **Authentication** tab, and then click **Enable**.
+3. In the left navigation pane, click the **Authentication** tab, and then click **Enable**.
 4. In the dialog, fill in the custom URL for your organization, which must be unique in TiDB Cloud.
 
     > **Note:**
@@ -168,7 +168,7 @@ In TiDB Cloud, the SAML authentication method is disabled by default. After enab
     - Sign on URL
     - Signing Certificate
 
-2. On the **Organization Settings** page, click the **Authentication** tab, locate the row of SAML in the **Authentication Methods** area, and then click <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> to show the SAML method details.
+2. On the **Organization Settings** page, click the **Authentication** tab in the left navigation pane, locate the row of SAML in the **Authentication Methods** area, and then click <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> to show the SAML method details.
 3. In the method details, you can configure the following:
 
     - **Name**
@@ -232,8 +232,9 @@ In TiDB Cloud, the SAML authentication method is disabled by default. After enab
 3. In TiDB Cloud, view groups pushed from your identity provider.
 
     1. In the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com), click <MDSvgIcon name="icon-top-organization" />, and then click **Organization Settings**.
-    2. On the **Organization Settings** page, click the **Groups** tab. The groups synchronized from your identity provider are displayed.
-    3. To view users in a group, click **View**.
+    2. In the left navigation pane, click the **Authentication** tab.
+    3. Click the **Groups** tab. The groups synchronized from your identity provider are displayed.
+    4. To view users in a group, click **View**.
 
 4. In TiDB Cloud, grant roles to the groups pushed from your identity provider.
 

@@ -123,3 +123,28 @@ Test results:
 | Read Only         | 300     | 77238.30 | 4827.39  | 62.14                | 102.97           |
 | Read Write        | 200     | 58241.15 | 2912.06  | 68.67                | 97.55            |
 | Write Only        | 700     | 68829.89 | 11471.65 | 61.01                | 101.13           |
+
+## 32 vCPU performance
+
+Test scales:
+
+- TiDB (32 vCPU, 64 GiB) \* 1; TiKV (32 vCPU, 128 GiB) \* 3
+- TiDB (32 vCPU, 64 GiB) \* 2; TiKV (32 vCPU, 128 GiB) \* 3
+
+Test results:
+
+**TiDB (32 vCPU, 64 GiB) \* 1; TiKV (32 vCPU, 128 GiB) \* 3**
+
+| Transaction model | Threads | QPS      | TPS     | Average latency (ms) | P95 latency (ms) |
+|-------------------|---------|----------|---------|----------------------|------------------|
+| Read Only         | 300     | 83941.16 | 5246    | 57.20                | 87.6             |
+| Read Write        | 250     | 71290.31 | 3565    | 70.10                | 105.0            |
+| Write Only        | 700     | 72199.56 | 12033   | 58.20                | 101.0            |
+
+**TiDB (32 vCPU, 64 GiB) \* 2; TiKV (32 vCPU, 128 GiB) \* 3**
+
+| Transaction model | Threads | QPS       | TPS      | Average latency (ms) | P95 latency (ms) |
+|-------------------|---------|-----------|----------|----------------------|------------------|
+| Read Only         | 650     | 163101.68 | 10194    | 63.8                 | 99.3             |
+| Read Write        | 450     | 123152.74 | 6158     | 73.1                 | 101              |
+| Write Only        | 1200    | 112333.16 | 18722    | 64.1                 | 101              |

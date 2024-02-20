@@ -242,6 +242,7 @@
   - [Manage Data App](/tidb-cloud/data-service-manage-data-app.md)
   - [Manage Endpoint](/tidb-cloud/data-service-manage-endpoint.md)
   - [API Key](/tidb-cloud/data-service-api-key.md)
+  - [Custom Domain](/tidb-cloud/data-service-custom-domain.md)
   - [Run in Postman](/tidb-cloud/data-service-postman-integration.md)
   - [Deploy Automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md)
   - [Use OpenAPI Specification with Next.js](/tidb-cloud/data-service-oas-with-nextjs.md)
@@ -278,15 +279,22 @@
 - Billing
   - [Invoices](/tidb-cloud/tidb-cloud-billing.md#invoices)
   - [Billing Details](/tidb-cloud/tidb-cloud-billing.md#billing-details)
+  - [Billing Profile](/tidb-cloud/tidb-cloud-billing.md#billing-profile)
   - [Credits](/tidb-cloud/tidb-cloud-billing.md#credits)
   - [Payment Method Setting](/tidb-cloud/tidb-cloud-billing.md#payment-method)
   - [Billing from AWS or GCP Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace)
   - [Billing for Changefeed](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
   - [Billing for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md)
+- Managed Service Provider Program
+  - [Managed Service Provider](/tidb-cloud/managed-service-provider.md)
+  - [MSP Customer](/tidb-cloud/managed-service-provider-customer.md)
 - API
   - [API Overview](/tidb-cloud/api-overview.md)
   - API Reference
-    - [v1beta1](https://docs.pingcap.com/tidbcloud/api/v1beta1)
+    - v1beta1
+      - [Billing](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
+      - [IAM](https://docs.pingcap.com/tidbcloud/api/v1beta1/apikey)
+      - [MSP](https://docs.pingcap.com/tidbcloud/api/msp/v1beta1)
     - [v1beta](https://docs.pingcap.com/tidbcloud/api/v1beta)
 - Integrations
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
@@ -598,6 +606,7 @@
     - [Metadata Lock](/metadata-lock.md)
     - [Use UUIDs](/best-practices/uuid.md)
   - [System Variables](/system-variables.md)
+  - [Server Status Variables](/status-variables.md)
   - Storage Engines
     - TiKV
         - [TiKV Overview](/tikv-overview.md)

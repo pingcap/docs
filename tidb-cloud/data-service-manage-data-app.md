@@ -113,6 +113,10 @@ For more information, see [Manage an API key](/tidb-cloud/data-service-api-key.m
 
 For more information, see [Manage an endpoint](/tidb-cloud/data-service-manage-endpoint.md).
 
+### Manage a custom domain
+
+For more information, see [Manage a custom domain](/tidb-cloud/data-service-custom-domain.md).
+
 ### Manage deployments
 
 To manage deployments, perform the following steps:

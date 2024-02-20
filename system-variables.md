@@ -49,7 +49,7 @@ Starting from v7.4.0, you can temporarily modify the value of some `SESSION` var
 
 For more information about the `SET_VAR` hint, see [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value).
 
-## Variable Reference
+## Variable reference
 
 ### allow_auto_random_explicit_insert <span class="version-mark">New in v4.0.3</span>
 
@@ -256,7 +256,7 @@ For more information about the `SET_VAR` hint, see [SET_VAR](/optimizer-hints.md
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 65535]`
-- Controls the step size of `AUTO_INCREMENT` values to be allocated to a column. It is often used in combination with `auto_increment_offset`.
+- Controls the step size of `AUTO_INCREMENT` values to be allocated to a column, and allocation rules for `AUTO_RANDOM` IDs. It is often used in combination with [`auto_increment_offset`](#auto_increment_offset).
 
 ### auto_increment_offset
 
@@ -266,7 +266,7 @@ For more information about the `SET_VAR` hint, see [SET_VAR](/optimizer-hints.md
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 65535]`
-- Controls the initial offset of `AUTO_INCREMENT` values to be allocated to a column. This setting is often used in combination with `auto_increment_increment`. For example:
+- Controls the initial offset of `AUTO_INCREMENT` values to be allocated to a column, and allocation rules for `AUTO_RANDOM` IDs. This setting is often used in combination with [`auto_increment_increment`](#auto_increment_increment). For example:
 
 ```sql
 mysql> CREATE TABLE t1 (a int not null primary key auto_increment);
@@ -921,6 +921,12 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - This feature is based on the similarly named [`sql_require_primary_key`](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_sql_require_primary_key) in MySQL 8.0.
 - It is strongly recommended to enable this variable when using TiCDC. This is because replicating changes to a MySQL sink requires that tables have a primary key.
 
+<CustomContent platform="tidb">
+
+- If you enable this variable and are using TiDB Data Migration (DM) to migrate data, it is recommended that you add `sql_require_ primary_key` to the `session` part in the [DM Task Configuration File](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) and set it to `OFF`. Otherwise, it will cause DM to fail to create tasks.
+
+</CustomContent>
+
 ### sql_select_limit <span class="version-mark">New in v4.0.2</span>
 
 - Scope: SESSION | GLOBAL
@@ -1553,10 +1559,6 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 <CustomContent platform="tidb">
 
-> **Warning:**
->
-> Currently, PITR recovery handles the indexes created by index acceleration during the log backup with extra processing to achieve compatibility. For details, see [Why is the acceleration of adding indexes feature incompatible with PITR?](/faq/backup-and-restore-faq.md#why-is-the-acceleration-of-adding-indexes-feature-incompatible-with-pitr).
-
 > **Note:**
 >
 > * Index acceleration requires a [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) that is writable and has enough free space. If the `temp-dir` is unusable, TiDB falls back to non-accelerated index building. It is recommended to put the `temp-dir` on a SSD disk.
@@ -1570,8 +1572,6 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 > **Warning:**
 >
 > Currently, this feature is not fully compatible with [altering multiple columns or indexes in a single `ALTER TABLE` statement](/sql-statements/sql-statement-alter-table.md). When adding a unique index with the index acceleration, you need to avoid altering other columns or indexes in the same statement.
->
-> Currently, PITR recovery handles the indexes created by index acceleration during the log backup with extra processing to achieve compatibility. For details, see [Why is the acceleration of adding indexes feature incompatible with PITR?](https://docs.pingcap.com/tidb/v7.0/backup-and-restore-faq#why-is-the-acceleration-of-adding-indexes-feature-incompatible-with-pitr).
 
 </CustomContent>
 
@@ -3205,7 +3205,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `32`
 - Range: `[1, 32]`
 - Unit: Rows
-- This variable is used to set the number of rows for the initial chunk during the execution process.
+- This variable is used to set the number of rows for the initial chunk during the execution process. The number of rows for a chunk directly affects the amount of memory required for a single query. You can roughly estimate the memory needed for a single chunk by considering the total width of all columns in the query and the number of rows for the chunk. Combining this with the concurrency of the executor, you can make a rough estimation of the total memory required for a single query. It is recommended that the total memory for a single chunk does not exceed 16 MiB.
 
 ### tidb_isolation_read_engines <span class="version-mark">New in v4.0</span>
 
@@ -3434,7 +3434,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `1024`
 - Range: `[32, 2147483647]`
 - Unit: Rows
-- This variable is used to set the maximum number of rows in a chunk during the execution process. Setting to too large of a value may cause cache locality issues.
+- This variable is used to set the maximum number of rows in a chunk during the execution process. Setting to too large of a value may cause cache locality issues. The recommended value for this variable is no larger than 65536. The number of rows for a chunk directly affects the amount of memory required for a single query. You can roughly estimate the memory needed for a single chunk by considering the total width of all columns in the query and the number of rows for the chunk. Combining this with the concurrency of the executor, you can make a rough estimation of the total memory required for a single query. It is recommended that the total memory for a single chunk does not exceed 16 MiB. When the query involves a large amount of data and a single chunk is insufficient to handle all the data, TiDB processes it multiple times, doubling the chunk size with each processing iteration, starting from [`tidb_init_chunk_size`](#tidb_init_chunk_size) until the chunk size reaches the value of `tidb_max_chunk_size`.
 
 ### tidb_max_delta_schema_count <span class="version-mark">New in v2.1.18 and v3.0.5</span>
 
@@ -3942,7 +3942,7 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `OFF`
 - This variable controls whether the non-recursive [Common Table Expressions (CTE)](/sql-statements/sql-statement-with.md) can be executed on TiFlash MPP. By default, when this variable is disabled, CTE is executed on TiDB, which has a large performance gap compared with enabling this feature.
 
-### tidb_opt_fix_control <span class="version-mark">New in v7.1.0</span>
+### tidb_opt_fix_control <span class="version-mark">New in v6.5.3 and v7.1.0</span>
 
 <CustomContent platform="tidb">
 
@@ -4856,6 +4856,7 @@ SHOW WARNINGS;
 > **Note:**
 >
 > - If `tidb_service_scope` is not set for any TiDB node in a cluster, the DXF schedules all TiDB nodes to execute background tasks. If you are concerned about performance impact on current business, you can set `tidb_service_scope` to `background` for a few of the TiDB nodes. Only those nodes will execute background tasks.
+> - In a cluster with several TiDB nodes, it is strongly recommended to set this system variable to `background` on two or more TiDB nodes. If `tidb_service_scope` is set on a single TiDB node only, when the node is restarted or fails, the task will be rescheduled to other TiDB nodes that lack the `background` setting, which will affect these TiDB nodes.
 > - For newly scaled nodes, the DXF tasks are not executed by default to avoid consuming the resources of the scaled node. If you want this scaled node to execute background tasks, you need to manually set `tidb_service_scop` of this node to `background`.
 
 ### tidb_session_alias <span class="version-mark">New in v7.4.0</span>

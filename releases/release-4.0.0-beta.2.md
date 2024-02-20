@@ -1,5 +1,6 @@
 ---
 title: TiDB 4.0.0 Beta.2 Release Notes
+summary: TiDB 4.0.0 Beta.2 was released on March 18, 2020. The new features include support for persisting dynamically updated configurations, bidirectional data replication, TLS configuration, change data capture, and experimental features like incremental backup. Bug fixes address issues with panic, hibernate regions, replication delay, and compatibility. TiDB Ansible now supports injecting node information to etcd and deploying services on the ARM platform.
 ---
 
 # TiDB 4.0.0 Beta.2 Release Notes

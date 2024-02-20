@@ -1,5 +1,6 @@
 ---
 title: tiup cluster template
+summary: The tiup cluster template command is used to prepare a topology file for cluster deployment. It has options to output default, detailed, local, or multi-dc topology templates. The output can be redirected to the topology file for deployment.
 ---
 
 # tiup cluster template
@@ -16,7 +17,8 @@ If this option is not specified, the output default template contains the follow
 
 - 3 PD instances
 - 3 TiKV instances
-- 1 TiDB instance
+- 3 TiDB instances
+- 2 TiFlash instances
 - 1 Prometheus instance
 - 1 Grafana instance
 - 1 Alertmanager instance
@@ -27,6 +29,11 @@ If this option is not specified, the output default template contains the follow
 
 - Outputs a detailed topology template that is commented with configurable parameters. To enable this option, add it to the command.
 - If this option is not specified, the simple topology template is output by default.
+
+### --local
+
+- Outputs a simple topology template for the local cluster, which can be used directly, and the `global` parameter can be adjusted as needed.
+- This template creates a PD service, a TiDB service, a TiKV service, a Prometheus service, and a Grafana service.
 
 ### --multi-dc
 
