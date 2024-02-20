@@ -77,7 +77,7 @@ The Placement Rules feature is enabled by default in v5.0 and later versions of 
 enable-placement-rules = true
 ```
 
-In this way, PD enables this feature after the cluster is successfully bootstrapped and generates corresponding rules according to the `max-replicas`, `location-labels`, and `isolation-level` configurations:
+In this way, PD enables this feature after the cluster is successfully bootstrapped and generates corresponding rules according to the [`max-replicas`](/pd-configuration-file.md#max-replicas), [`location-labels`](/pd-configuration-file.md#location-labels), and [`isolation-level`](/pd-configuration-file.md#isolation-level) configurations:
 
 {{< copyable "" >}}
 
@@ -121,7 +121,7 @@ pd-ctl config placement-rules disable
 
 > **Note:**
 >
-> After disabling Placement Rules, PD uses the original `max-replicas`, `location-labels`, and `isolation-level` configurations. The modification of rules (when Placement Rules is enabled) will not update these two configurations in real time. In addition, all the rules that have been configured remain in PD and will be used the next time you enable Placement Rules.
+> After disabling Placement Rules, PD uses the original `max-replicas`, `location-labels`, and `isolation-level` configurations. The modification of rules (when Placement Rules is enabled) will not update these three configurations in real time. In addition, all the rules that have been configured remain in PD and will be used the next time you enable Placement Rules.
 
 ### Set rules using pd-ctl
 
