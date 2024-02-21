@@ -201,7 +201,7 @@ The following is a sample configuration when you use token authentication with P
     token-from-file="/data/pulsar/token-file.txt"
     ```
 
-- TLS encrypted authentication
+- mTLS authentication
 
     Sink URI: 
 
