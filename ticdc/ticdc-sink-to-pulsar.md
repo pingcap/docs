@@ -99,15 +99,15 @@ token-from-file="/data/pulsar/token-file.txt"
 basic-user-name="root"
 # Pulsar uses the basic account and password to authenticate the identity. Specify the password.
 basic-password="password"
-# The certificate path on the client when Pulsar uses the mTLS authentication.
+# The certificate path on the client, which is required when Pulsar enables mTLS authentication.
 auth-tls-certificate-path="/data/pulsar/certificate"
-# The private key path on the client when Pulsar uses the mTLS authentication.
+# The private key path on the client, which is required when Pulsar enables mTLS authentication.
 auth-tls-private-key-path="/data/pulsar/certificate.key"
-# The path to the trusted certificate file of the Pulsar TLS authentication. You need to specify this parameter when Pulsar enables mTLS authentication or TLS encryption.
+# The path to the trusted certificate file of the Pulsar TLS authentication, which is required when Pulsar enables mTLS authentication or TLS encrypted transmission.
 tls-trust-certs-file-path="/data/pulsar/tls-trust-certs-file"
-# The path to the encryption private key on the client when Pulsar enables TLS encryption,.
+# The path to the encryption private key on the client, which is required when Pulsar enables TLS encrypted transmission.
 tls-key-file-path="/data/pulsar/tls-key-file"
-# The path to the encryption certificate file on the client when Pulsar enables TLS encryption.
+# The path to the encryption certificate file on the client, which is required when Pulsar enables TLS encrypted transmission.
 tls-certificate-file="/data/pulsar/tls-certificate-file"
 # Pulsar oauth2 issuer-url. For more information, see the Pulsar website: https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication
 oauth2.oauth2-issuer-url="https://xxxx.auth0.com"
