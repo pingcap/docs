@@ -1362,7 +1362,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Warning:**
 >
-> This feature is still in the experimental stage. It is not recommended to enable this feature in production environments.
+> This feature is still in the experimental stage. It is not recommended to enable this feature in production environments. When enabling the TiDB backend task distributed execution framework, if you plan to upgrade TiDB from v7.1.x to v7.5.0 or later, ensure that there are no `ADD INDEX` tasks running before the upgrade.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
