@@ -9,7 +9,7 @@ summary: Use the Dumpling tool to export data from TiDB.
 
 <CustomContent platform="tidb">
 
-`tiup install dumpling`を実行すると、 [TiUP](/tiup/tiup-overview.md)を使用してDumplingを入手できます。その後、 `tiup dumpling ...`使用してDumplingを実行できます。
+`tiup install dumpling`を実行すると、 [TiUP](/tiup/tiup-overview.md)使用してDumplingを入手できます。その後、 `tiup dumpling ...`使用してDumplingを実行できます。
 
 Dumplingインストール パッケージは、 TiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDB ツールをダウンロード](/download-ecosystem-tools.md)を参照してください。
 
@@ -45,7 +45,7 @@ TiDB は、必要に応じて使用できる他のツールも提供します。
 
 > **注記：**
 >
-> PingCAP は以前、TiDB に固有の拡張機能を備えた[マイダンパープロジェクト](https://github.com/maxbube/mydumper)のフォークを維持していました。 v7.5.0 以降、 [マイダンパー](https://docs.pingcap.com/tidb/v4.0/mydumper-overview)は非推奨になり、その機能のほとんどが[Dumpling](/dumpling-overview.md)に置き換えられました。 mydumper の代わりにDumpling を使用することを強くお勧めします。
+> PingCAP は以前、TiDB に固有の拡張機能を備えた[マイダンパープロジェクト](https://github.com/maxbube/mydumper)のフォークを維持していました。 v7.5.0 以降、 [マイダンパー](https://docs.pingcap.com/tidb/v4.0/mydumper-overview)は非推奨となり、その機能のほとんどは[Dumpling](/dumpling-overview.md)に置き換えられました。 mydumper の代わりにDumpling を使用することを強くお勧めします。
 
 Dumplingには以下のようなメリットがあります。
 
@@ -322,7 +322,7 @@ Dumplingが TiDB から大きな単一テーブルをエクスポートしてい
 
 ### TiDB GC 時間を手動で設定する {#manually-set-the-tidb-gc-time}
 
-TiDB (1 TB を超える) からデータをエクスポートする場合、TiDB バージョンが v4.0.0 以降で、 Dumpling がTiDB クラスターの PD アドレスにアクセスできる場合、 Dumpling は元のクラスターに影響を与えることなく GC 時間を自動的に延長します。
+TiDB (1 TB 未満) からデータをエクスポートする場合、TiDB バージョンが v4.0.0 以降で、 Dumpling がTiDB クラスターの PD アドレスにアクセスできる場合、 Dumpling は元のクラスターに影響を与えることなく GC 時間を自動的に延長します。
 
 ただし、次のいずれかのシナリオでは、 Dumpling はGC 時間を自動的に調整できません。
 

@@ -98,13 +98,13 @@ bundle add mysql2 dotenv
     cp .env.example .env
     ```
 
-6.  `.env`ファイルを編集し、次のように環境変数を設定し、接続ダイアログ内の対応するプレースホルダー`<>`接続パラメーターに置き換えます。
+6.  `.env`ファイルを編集し、次のように環境変数を設定し、接続ダイアログ内の対応するプレースホルダー`{}`接続パラメーターに置き換えます。
 
     ```dotenv
-    DATABASE_HOST=<host>
+    DATABASE_HOST={host}
     DATABASE_PORT=4000
-    DATABASE_USER=<user>
-    DATABASE_PASSWORD=<password>
+    DATABASE_USER={user}
+    DATABASE_PASSWORD={password}
     DATABASE_NAME=test
     DATABASE_ENABLE_SSL=true
     ```
@@ -132,16 +132,16 @@ bundle add mysql2 dotenv
     cp .env.example .env
     ```
 
-5.  `.env`ファイルを編集し、次のように環境変数を設定し、接続ダイアログ内の対応するプレースホルダー`<>`接続パラメーターに置き換えます。
+5.  `.env`ファイルを編集し、次のように環境変数を設定し、接続ダイアログ内の対応するプレースホルダー`{}`接続パラメーターに置き換えます。
 
     ```dotenv
-    DATABASE_HOST=<host>
+    DATABASE_HOST={host}
     DATABASE_PORT=4000
-    DATABASE_USER=<user>
-    DATABASE_PASSWORD=<password>
+    DATABASE_USER={user}
+    DATABASE_PASSWORD={password}
     DATABASE_NAME=test
     DATABASE_ENABLE_SSL=true
-    DATABASE_SSL_CA=<downloaded_ssl_ca_path>
+    DATABASE_SSL_CA={downloaded_ssl_ca_path}
     ```
 
     > **注記**
@@ -161,13 +161,13 @@ bundle add mysql2 dotenv
     cp .env.example .env
     ```
 
-2.  `.env`ファイルを編集し、次のように環境変数を設定し、対応するプレースホルダー`<>`独自の TiDB 接続情報に置き換えます。
+2.  `.env`ファイルを編集し、次のように環境変数を設定し、対応するプレースホルダー`{}`独自の TiDB 接続情報に置き換えます。
 
     ```dotenv
-    DATABASE_HOST=<host>
+    DATABASE_HOST={host}
     DATABASE_PORT=4000
-    DATABASE_USER=<user>
-    DATABASE_PASSWORD=<password>
+    DATABASE_USER={user}
+    DATABASE_PASSWORD={password}
     DATABASE_NAME=test
     ```
 
@@ -301,8 +301,8 @@ CA 証明書のパスを手動で指定することは可能ですが、マシ�
 
 ## 次のステップ {#next-steps}
 
--   mysql2 ドライバーの使用法については[mysql2のドキュメント](https://github.com/brianmario/mysql2#readme)から学びましょう。
--   TiDB アプリケーション開発のベスト プラクティスについては、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データの削除](/develop/dev-guide-delete-data.md) 、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)など) で学習してください。
+-   mysql2 ドライバーの使用法については[mysql2のドキュメント](https://github.com/brianmario/mysql2#readme)からご覧ください。
+-   TiDB アプリケーション開発のベスト プラクティスについては、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データの削除](/develop/dev-guide-delete-data.md) 、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md) 、 [トランザクション](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)など) で学習してください。
 -   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## 助けが必要？ {#need-help}

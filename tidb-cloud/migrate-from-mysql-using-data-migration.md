@@ -1,6 +1,7 @@
 ---
 title: Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration
 summary: Learn how to migrate data from MySQL-compatible databases hosted in Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, or a local MySQL instance to TiDB Cloud using Data Migration.
+aliases: ['/tidbcloud/migrate-data-into-tidb','/tidbcloud/migrate-incremental-data-from-mysql']
 ---
 
 # データ移行を使用して MySQL 互換データベースをTiDB Cloudに移行する {#migrate-mysql-compatible-databases-to-tidb-cloud-using-data-migration}
@@ -13,35 +14,35 @@ summary: Learn how to migrate data from MySQL-compatible databases hosted in Ama
 
 ## 制限事項 {#limitations}
 
+### 可用性 {#availability}
+
 -   データ移行機能は、 **TiDB 専用**クラスターでのみ使用できます。
 
--   データ移行機能は、2022 年 11 月 9 日以降に次のリージョンで作成されたプロジェクトのクラスターでのみ使用できます。**プロジェクト**がその日より前に作成された場合、またはクラスターが別のリージョンにある場合、この機能はクラスターでは使用できません。また、 **[データ移行]**タブは、 TiDB Cloudコンソールのクラスター概要ページに表示されません。
-
-    -   AWS オレゴン州 (us-west-2)
-    -   AWS 北バージニア (us-east-1)
-    -   AWS シンガポール (ap-southeast-1)
-    -   AWS 東京 (ap-northeast-1)
-    -   AWS フランクフルト (eu-central-1)
-    -   AWS ソウル (ap-northeast-2)
-    -   Google Cloud オレゴン (us-west1)
-    -   Google Cloud シンガポール (asia-southeast1)
-    -   Google Cloud 東京 (asia-northeast1)
+-   データ移行機能は、2022 年 11 月 9 日以降に[特定の地域](https://www.pingcap.com/tidb-cloud-pricing-details/#dm-cost)で作成されたクラスターでのみ使用できます。**プロジェクト**がその日より前に作成された場合、またはクラスターが別のリージョンにある場合、この機能はクラスターと**[データ移行]**タブでは使用できません。 TiDB Cloudコンソールのクラスター概要ページには表示されません。
 
 -   Amazon Aurora MySQL ライター インスタンスは、既存のデータと増分データ移行の両方をサポートします。 Amazon Aurora MySQL リーダー インスタンスは、既存のデータ移行のみをサポートし、増分データ移行はサポートしません。
 
--   組織ごとに最大 200 個の移行ジョブを作成できます。さらに移行ジョブを作成するには、 [サポートチケットを提出する](/tidb-cloud/tidb-cloud-support.md)を実行する必要があります。
+### 移行ジョブの最大数 {#maximum-number-of-migration-jobs}
+
+組織ごとに最大 200 個の移行ジョブを作成できます。さらに移行ジョブを作成するには、 [サポートチケットを提出する](/tidb-cloud/tidb-cloud-support.md)を実行する必要があります。
+
+### フィルタリングされて削除されたデータベース {#filtered-out-and-deleted-databases}
 
 -   移行するデータベースをすべて選択した場合でも、システム データベースはフィルターで除外され、 TiDB Cloudには移行されません。つまり、 `mysql` 、 `information_schema` 、 `information_schema` 、および`sys`は、この機能を使用して移行されません。
 
+-   TiDB Cloudでクラスターを削除すると、そのクラスター内のすべての移行ジョブが自動的に削除され、回復できなくなります。
+
+### 既存のデータ移行の制限 {#limitations-of-existing-data-migration}
+
 -   既存のデータの移行中に、移行対象のテーブルが重複キーを持つターゲット データベースにすでに存在する場合、重複キーは置き換えられます。
+
+-   データセットのサイズが 1 TiB より小さい場合は、論理モード (デフォルト モード) を使用することをお勧めします。データセットのサイズが 1 TiB より大きい場合、または既存のデータをより速く移行したい場合は、物理モードを使用できます。詳細については、 [既存のデータと増分データを移行する](#migrate-existing-data-and-incremental-data)を参照してください。
+
+### 増分データ移行の制限 {#limitations-of-incremental-data-migration}
 
 -   増分データ移行中に、移行対象のテーブルが重複したキーを持つターゲット データベースにすでに存在する場合、エラーが報告され、移行は中断されます。この状況では、アップストリーム データが正確かどうかを確認する必要があります。 「はい」の場合、移行ジョブの「再開」ボタンをクリックすると、移行ジョブは競合する下流のレコードを上流のレコードに置き換えます。
 
--   TiDB Cloudでクラスターを削除すると、そのクラスター内のすべての移行ジョブが自動的に削除され、回復できなくなります。
-
 -   増分レプリケーション (進行中の変更をクラスターに移行する) 中に、移行ジョブが突然のエラーから回復すると、セーフ モードが 60 秒間開くことがあります。セーフ モードでは、 `INSERT`ステートメントは`REPLACE`として、 `UPDATE`ステートメントは`DELETE`および`REPLACE`として移行され、その後、これらのトランザクションはダウンストリーム クラスターに移行され、突然のエラー中のすべてのデータがダウンストリーム クラスターにスムーズに移行されたことを確認します。このシナリオでは、主キーや非 null の一意のインデックスがないアップストリーム テーブルの場合、データがダウンストリームに繰り返し挿入される可能性があるため、一部のデータがダウンストリーム クラスターで重複する可能性があります。
-
--   データ移行を使用する場合は、データセットのサイズを 1 TiB 未満に保つことをお勧めします。データセットのサイズが 1 TiB より大きい場合、仕様が制限されているため、既存のデータの移行に時間がかかります。
 
 -   次のシナリオでは、移行ジョブに 24 時間以上かかる場合は、データ移行が増分レプリケーション用に連続したバイナリ ログを確実に取得できるように、ソース データベース内のバイナリ ログをパージしないでください。
 
@@ -82,22 +83,21 @@ GRANT SELECT,LOCK TABLES,REPLICATION SLAVE,REPLICATION CLIENT ON *.* TO 'your_us
 
 ダウンストリームTiDB Cloudクラスターに使用するユーザー名には、次の権限が必要です。
 
-| 特権         | 範囲          |
-| :--------- | :---------- |
-| `CREATE`   | データベース、テーブル |
-| `SELECT`   | テーブル        |
-| `INSERT`   | テーブル        |
-| `UPDATE`   | テーブル        |
-| `DELETE`   | テーブル        |
-| `ALTER`    | テーブル        |
-| `DROP`     | データベース、テーブル |
-| `INDEX`    | テーブル        |
-| `TRUNCATE` | テーブル        |
+| 特権       | 範囲          |
+| :------- | :---------- |
+| `CREATE` | データベース、テーブル |
+| `SELECT` | テーブル        |
+| `INSERT` | テーブル        |
+| `UPDATE` | テーブル        |
+| `DELETE` | テーブル        |
+| `ALTER`  | テーブル        |
+| `DROP`   | データベース、テーブル |
+| `INDEX`  | テーブル        |
 
 たとえば、次の`GRANT`ステートメントを実行して、対応する権限を付与できます。
 
 ```sql
-GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'your_user'@'your_IP_address_of_host'
+GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,DROP,INDEX ON *.* TO 'your_user'@'your_IP_address_of_host'
 ```
 
 移行ジョブを迅速にテストするには、 TiDB Cloudクラスターの`root`アカウントを使用できます。
@@ -107,10 +107,6 @@ GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'yo
 移行ジョブを作成する前に、接続方法に従ってネットワーク接続を設定します。 [TiDB 専用クラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
 
 -   ネットワーク接続にパブリック IP (標準接続) を使用する場合は、上流のデータベースがパブリック ネットワーク経由で接続できることを確認してください。
-
--   AWS PrivateLink を使用する場合は、 [AWS のプライベート エンドポイント経由で専用 TiDB に接続する](/tidb-cloud/set-up-private-endpoint-connections.md)に従って設定します。
-
--   Google Cloud Private Service Connect を使用する場合は、 [Google Cloud のプライベート エンドポイント経由で専用 TiDB に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)に従って設定します。
 
 -   AWS VPC ピアリングまたは Google Cloud VPC ネットワーク ピアリングを使用する場合は、次の手順を参照してネットワークを構成してください。
 
@@ -122,7 +118,7 @@ MySQL サービスが AWS VPC 内にある場合は、次の手順を実行し�
 
 2.  MySQL サービスが関連付けられているセキュリティ グループの受信ルールを変更します。
 
-    受信ルールに[TiDB Cloudクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr)を追加する必要があります。これにより、トラフィックが TiDB クラスターから MySQL インスタンスに流れるようになります。
+    受信ルールに[TiDB Cloudクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)を追加する必要があります。これにより、トラフィックが TiDB クラスターから MySQL インスタンスに流れるようになります。
 
 3.  MySQL URL に DNS ホスト名が含まれている場合は、 TiDB Cloud がMySQL サービスのホスト名を解決できるようにする必要があります。
 
@@ -141,7 +137,7 @@ MySQL サービスが Google Cloud VPC 内にある場合は、次の手順を�
 
 3.  MySQL が配置されている VPC のイングレス ファイアウォール ルールを変更します。
 
-    受信ファイアウォール ルールに[TiDB Cloudクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr)を追加する必要があります。これにより、トラフィックが TiDB クラスターから MySQL エンドポイントに流れることが可能になります。
+    受信ファイアウォール ルールに[TiDB Cloudクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)を追加する必要があります。これにより、トラフィックが TiDB クラスターから MySQL エンドポイントに流れることが可能になります。
 
 </details>
 
@@ -202,9 +198,33 @@ MySQL サービスが Google Cloud VPC 内にある場合は、次の手順を�
 
 TiDB Cloudにデータを一度に移行するには、 **[既存のデータ移行]**と**[増分データ移行]**の両方を選択します。これにより、ソース データベースとターゲット データベース間のデータの一貫性が確保されます。
 
+**物理モード**または**論理モード**を使用して、**既存のデータ**を移行できます。
+
+-   デフォルトのモードは**論理モード**です。このモードでは、上流のデータベースからデータを SQL ステートメントとしてエクスポートし、TiDB 上で実行します。このモードでは、移行前のターゲット テーブルは空でも空でなくても構いません。ただし、パフォーマンスは物理モードよりも遅くなります。
+
+-   大規模なデータセットの場合は、**物理モード**を使用することをお勧めします。このモードでは、上流のデータベースからデータをエクスポートして KV ペアとしてエンコードし、TiKV に直接書き込むことでより高速なパフォーマンスを実現します。このモードでは、移行前にターゲット テーブルが空である必要があります。 16 RCU (Replication Capacity Unit) の仕様では、論理モードと比較して約 2.5 倍のパフォーマンスが向上します。他の仕様のパフォーマンスは、論理モードと比較して 20% ～ 50% 向上する可能性があります。パフォーマンス データは参考用であり、シナリオによって異なる場合があることに注意してください。
+
+物理モードは、AWS および Google Cloud にデプロイされた TiDB クラスターで使用できます。
+
+> **注記：**
+>
+> -   物理モードを使用する場合、既存のデータ移行が完了するまで、TiDB クラスターの 2 番目の移行ジョブまたはインポート タスクを作成することはできません。
+> -   物理モードを使用しており、移行ジョブが開始されている場合は、PITR (ポイントインタイム リカバリ) を有効にしたり、クラスター上で変更フィードを設定したりし**ないで**ください。そうしないと、移行ジョブが停止します。 PITR を有効にする必要がある場合、または変更フィードがある場合は、代わりに論理モードを使用してデータを移行します。
+
+物理モードでは、アップストリーム データが可能な限り高速にエクスポートされるため、データ エクスポート中にアップストリーム データベースの QPS および TPS に対してパフォーマンスに[異なる仕様](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)影響があります。次の表は、各仕様のパフォーマンス回帰を示しています。
+
+| 移行仕様   | 最大エクスポート速度  | 上流データベースのパフォーマンス低下 |
+| ------ | ----------- | ------------------ |
+| 2 RCU  | 80.84 MiB/秒 | 15.6%              |
+| 4 RCU  | 214.2 MiB/秒 | 20.0%              |
+| 8 RCU  | 365.5 MiB/秒 | 28.9%              |
+| 16 RCU | 424.6 MiB/秒 | 46.7%              |
+
 ### 既存のデータのみを移行する {#migrate-only-existing-data}
 
 ソース データベースの既存データのみをTiDB Cloudに移行するには、 **[既存のデータの移行]**を選択します。
+
+既存のデータを移行するために物理モードまたは論理モードの使用を選択できます。詳細については、 [既存のデータと増分データを移行する](#migrate-existing-data-and-incremental-data)を参照してください。
 
 ### 増分データのみを移行する {#migrate-only-incremental-data}
 
@@ -250,7 +270,7 @@ TiDB Cloudにデータを一度に移行するには、 **[既存のデータ移
 
 ## ステップ 6: 仕様を選択して移行を開始する {#step-6-choose-a-spec-and-start-migration}
 
-**[仕様を選択して移行を開始]**ページで、パフォーマンス要件に応じて適切な移行仕様を選択します。仕様の詳細については、 [データ移行の仕様](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)を参照してください。
+**「仕様を選択して移行を開始」**ページで、パフォーマンス要件に応じて適切な移行仕様を選択します。仕様の詳細については、 [データ移行の仕様](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)を参照してください。
 
 仕様を選択した後、 **「ジョブを作成して開始」**をクリックして移行を開始します。
 

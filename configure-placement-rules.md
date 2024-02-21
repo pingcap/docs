@@ -75,7 +75,7 @@ TiDB の v5.0 以降のバージョンでは、配置ルール機能がデフォ
 enable-placement-rules = true
 ```
 
-このように、クラスターが正常にブートストラップされた後、PD はこの機能を有効にし、 `max-replicas`および`location-labels`構成に従って対応するルールを生成します。
+このように、クラスターが正常にブートストラップされた後、PD はこの機能を有効にし、 [`max-replicas`](/pd-configuration-file.md#max-replicas) 、 [`location-labels`](/pd-configuration-file.md#location-labels) 、および[`isolation-level`](/pd-configuration-file.md#isolation-level)の構成に従って対応するルールを生成します。
 
 ```json
 {
@@ -96,11 +96,12 @@ enable-placement-rules = true
 pd-ctl config placement-rules enable
 ```
 
-PD は、 `max-replicas`および`location-labels`設定に基づいてデフォルトのルールも生成します。
+PD は、 `max-replicas` 、 `location-labels` 、および`isolation-level`の構成に基づいてデフォルトのルールも生成します。
 
 > **注記：**
 >
-> 配置ルールを有効にすると、以前に設定した`max-replicas`と`location-labels`無効になります。レプリカ ポリシーを調整するには、配置ルールに関連するインターフェイスを使用します。
+> -   配置ルールが有効で、複数のルールが存在する場合、以前に構成された`max-replicas` 、 `location-labels` 、および`isolation-level`無効になります。レプリカ ポリシーを調整するには、配置ルールに関連するインターフェイスを使用します。
+> -   配置ルールが有効で、デフォルト ルールが 1 つだけ存在する場合、 `max-replicas` 、 `location-labels` 、または`isolation-level`構成が変更されると、TiDB はこのデフォルト ルールを自動的に更新します。
 
 ### 配置ルールを無効にする {#disable-placement-rules}
 
@@ -112,7 +113,7 @@ pd-ctl config placement-rules disable
 
 > **注記：**
 >
-> 配置ルールを無効にすると、PD は元の`max-replicas`および`location-labels`設定を使用します。ルールを変更しても (配置ルールが有効な場合)、これら 2 つの構成はリアルタイムでは更新されません。さらに、設定されているすべてのルールは PD に残り、次回配置ルールを有効にするときに使用されます。
+> 配置ルールを無効にした後、PD は元の`max-replicas` 、 `location-labels` 、および`isolation-level`構成を使用します。ルールを変更しても (配置ルールが有効な場合)、これら 3 つの構成はリアルタイムでは更新されません。さらに、設定されているすべてのルールは PD に残り、次回配置ルールを有効にするときに使用されます。
 
 ### pd-ctl を使用してルールを設定する {#set-rules-using-pd-ctl}
 
@@ -218,7 +219,7 @@ pd-ctl config placement save --in=rules.json
 
 ルール グループとグループ内のすべてのルールを同時に表示および変更するには、 `rule-bundle`サブコマンドを実行します。
 
-このサブコマンドでは、グループのクエリに`get {group_id}`が使用され、出力結果にはルール グループとそのグループのルールがネストされた形式で表示されます。
+このサブコマンドでは、 `get {group_id}`を使用してグループをクエリし、出力結果にはルール グループとそのグループのルールがネストされた形式で表示されます。
 
 ```bash
 pd-ctl config placement-rules rule-bundle get pd

@@ -96,7 +96,7 @@ bundle add mysql2 dotenv
 6.  `.env`ファイルを編集し、 `DATABASE_URL`環境変数を次のように設定し、接続ダイアログから接続文字列を変数値としてコピーします。
 
     ```dotenv
-    DATABASE_URL=mysql2://<user>:<password>@<host>:<port>/<database_name>?ssl_mode=verify_identity
+    DATABASE_URL=mysql2://{user}:{password}@{host}:{port}/{database_name}?ssl_mode=verify_identity
     ```
 
     > **注記**
@@ -112,7 +112,7 @@ bundle add mysql2 dotenv
 
 2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3.  **「どこからでもアクセスを許可」**をクリックし、 **「TiDB クラスター CA のダウンロード」**をクリックして CA 証明書をダウンロードします。
+3.  **[どこからでもアクセスを許可]**をクリックし、 **[TiDB クラスター CA のダウンロード]**をクリックして CA 証明書をダウンロードします。
 
     接続文字列の取得方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
 
@@ -125,7 +125,7 @@ bundle add mysql2 dotenv
 5.  `.env`ファイルを編集し、次のように`DATABASE_URL`環境変数を設定し、接続ダイアログから接続文字列を変数値としてコピーし、 `sslca`クエリ パラメータを接続ダイアログからダウンロードした CA 証明書のファイル パスに設定します。
 
     ```dotenv
-    DATABASE_URL=mysql2://<user>:<password>@<host>:<port>/<database>?ssl_mode=verify_identity&sslca=/path/to/ca.pem
+    DATABASE_URL=mysql2://{user}:{password}@{host}:{port}/{database}?ssl_mode=verify_identity&sslca=/path/to/ca.pem
     ```
 
     > **注記**
@@ -145,10 +145,10 @@ bundle add mysql2 dotenv
     cp .env.example .env
     ```
 
-2.  `.env`ファイルを編集し、次のように`DATABASE_URL`環境変数を設定し、 `<user>` 、 `<password>` 、 `<host>` 、 `<port>` 、および`<database>`独自の TiDB 接続情報に置き換えます。
+2.  `.env`ファイルを編集し、次のように`DATABASE_URL`環境変数を設定し、 `{user}` 、 `{password}` 、 `{host}` 、 `{port}` 、および`{database}`独自の TiDB 接続情報に置き換えます。
 
     ```dotenv
-    DATABASE_URL=mysql2://<user>:<password>@<host>:<port>/<database>
+    DATABASE_URL=mysql2://{user}:{password}@{host}:{port}/{database}
     ```
 
     TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
@@ -276,7 +276,7 @@ CA 証明書のパスを手動で指定することは可能ですが、異な�
 ## 次のステップ {#next-steps}
 
 -   ActiveRecord ORM の詳しい使い方を[ActiveRecord のドキュメント](https://guides.rubyonrails.org/active_record_basics.html)から学びましょう。
--   TiDB アプリケーション開発のベスト プラクティスについては、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データの削除](/develop/dev-guide-delete-data.md) 、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)など) で学習してください。
+-   TiDB アプリケーション開発のベスト プラクティスについては、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データの削除](/develop/dev-guide-delete-data.md) 、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md) 、 [トランザクション](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)など) で学習してください。
 -   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## 助けが必要？ {#need-help}

@@ -38,6 +38,16 @@ URI の基本的な形式は次のとおりです。
 s3://external/testfolder?access-key=${access-key}&secret-access-key=${secret-access-key}
 ```
 
+以下は、TiCDC `sink-uri`の Amazon S3 URI の例です。
+
+```shell
+tiup cdc:v7.5.0 cli changefeed create \
+    --server=http://172.16.201.18:8300 \
+    --sink-uri="s3://cdc?endpoint=http://10.240.0.38:9000&access-key=${access-key}&secret-access-key=${secret-access-key}" \
+    --changefeed-id="cdcTest" \
+    --config=cdc_csv.toml
+```
+
 以下は、 [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)の Amazon S3 URI の例です。この例では、特定のファイル名`test.csv`を指定する必要があります。
 
 ```shell

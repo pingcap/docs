@@ -22,7 +22,7 @@ TiUP は当面、サードパーティ コンポーネントをサポートし�
 
 ## TiUPプレイグラウンドとTiUPクラスター コンポーネントの違いは何ですか? {#what-is-the-difference-between-the-tiup-playground-and-tiup-cluster-components}
 
-TiUPプレイグラウンドコンポーネントは主に、Linux または macOS オペレーティング システム上にスタンドアロン開発環境を構築するために使用されます。これにより、迅速に開始し、指定したバージョンのTiUPクラスターを簡単に実行できます。 TiUPクラスターコンポーネントは、主に実本番環境クラスター (通常は大規模クラスター) の展開と維持に使用されます。
+TiUPプレイグラウンドコンポーネントは主に、Linux または macOS オペレーティング システム上にスタンドアロン開発環境を構築するために使用されます。これにより、迅速に開始し、指定したバージョンのTiUPクラスターを簡単に実行できます。 TiUPクラスターコンポーネントは、主に実本番環境クラスター (通常は大規模クラスター) の展開と維持に使用されます。 TiUP Playground によってデプロイされた TiDB クラスターには一部の機能や運用能力が欠けている可能性があるため、完全な機能テストや安定性テストには推奨されません。
 
 ## TiUPクラスターコンポーネントのトポロジ ファイルを作成するにはどうすればよいですか? {#how-do-i-write-the-topology-file-for-the-tiup-cluster-component}
 
@@ -44,7 +44,7 @@ TiUPクラスターコンポーネントを使用すると、同じホスト上�
 
 ## 異なるクラスター間でポートとディレクトリの競合が検出されますか? {#are-port-and-directory-conflicts-detected-among-different-clusters}
 
-複数の異なるクラスターが同じTiUP制御マシンによってデプロイされている場合、デプロイメントおよびスケーリング中にこれらのクラスター間のポートとディレクトリの競合が検出されます。クラスターが異なるTiUP制御マシンによってデプロイされている場合、競合検出は現在サポートされていません。
+複数の異なるクラスターが同じTiUP制御マシンによってデプロイされている場合、デプロイメントおよびスケーリング中にこれらのクラスター間でポートとディレクトリの競合が検出されます。クラスターが異なるTiUP制御マシンによってデプロイされている場合、競合検出は現在サポートされていません。
 
 ## クラスターの展開中に、 TiUP が<code>ssh: handshake failed: read tcp 10.10.10.34:38980 -&gt; 10.10.10.34:3600: read: connection reset by peer</code> {#during-cluster-deployment-tiup-received-an-code-ssh-handshake-failed-read-tcp-10-10-10-34-38980-10-10-10-34-3600-read-connection-reset-by-peer-code-error}
 

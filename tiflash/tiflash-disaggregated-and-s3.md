@@ -64,9 +64,9 @@ TiFlash の分散storageおよびコンピューティングアーキテクチ�
     ```
 
     ```shell
-    tiup cluster scale-in mycuster -R tiflash # Remove all TiFlash nodes
-    tiup cluster display mycluster            # Wait for all TiFlash nodes to enter the Tombstone state
-    tiup cluster prune mycluster              # Remove all TiFlash nodes in the Tombstone state
+    tiup cluster scale-in mycuster -N 'node0,node1...' # Remove all TiFlash nodes
+    tiup cluster display mycluster                     # Wait for all TiFlash nodes to enter the Tombstone state
+    tiup cluster prune mycluster                       # Remove all TiFlash nodes in the Tombstone state
     ```
 
 ## 使用法 {#usage}
@@ -126,7 +126,7 @@ TiFlash の分散storageおよびコンピューティングアーキテクチ�
           storage.remote.cache.capacity: 858993459200           # 800 GiB
     ```
 
-    -   なお、上記`ACCESS_KEY_ID`と`SECRET_ACCESS_KEY`は設定ファイルに直接記述します。環境変数を使用してそれらを個別に構成することも選択できます。両方の方法が設定されている場合は、環境変数の方が優先されます。
+    -   なお、上記`ACCESS_KEY_ID`と`SECRET_ACCESS_KEY`は設定ファイルに直接記述します。環境変数を使用して、それらを個別に構成することも選択できます。両方の方法が設定されている場合は、環境変数の方が優先されます。
 
         環境変数を使用して`ACCESS_KEY_ID`と`SECRET_ACCESS_KEY`構成するには、 TiFlashプロセスがデプロイされているすべてのマシンでTiFlashプロセスを開始するユーザー環境 (通常は`tidb` ) に切り替えてから、 `~/.bash_profile`を変更して次の構成を追加します。
 
@@ -171,7 +171,7 @@ TiFlash の分散storageおよびコンピューティングアーキテクチ�
 
 ## 制限 {#restrictions}
 
--   TiFlash は、**分散されたstorageとコンピューティングアーキテクチャ**と**結合されたstorageとコンピューティングアーキテクチャ**間のインプレース切り替えをサポートしていません。非集約アーキテクチャに切り替える前に、結合アーキテクチャを使用して展開されている既存のTiFlashノードをすべて削除する必要があります。
+-   TiFlash は、**分散されたstorageとコンピューティングアーキテクチャ**と、**結合されたstorageとコンピューティングアーキテクチャ**間のインプレース切り替えをサポートしていません。非集約アーキテクチャに切り替える前に、結合アーキテクチャを使用して展開されている既存のTiFlashノードをすべて削除する必要があります。
 -   あるアーキテクチャから別のアーキテクチャに移行した後、すべてのTiFlashデータを再度レプリケートする必要があります。
 -   同じ TiDB クラスター内では、同じアーキテクチャを持つTiFlashノードのみが許可されます。 2 つのアーキテクチャを 1 つのクラスター内で共存させることはできません。
 -   分離されたstorageとコンピューティングアーキテクチャは、S3 API を使用したオブジェクトstorageのみをサポートしますが、結合されたstorageとコンピューティングアーキテクチャはローカルstorageのみをサポートします。

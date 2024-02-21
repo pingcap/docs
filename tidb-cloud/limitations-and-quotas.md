@@ -13,10 +13,10 @@ TiDB Cloud、 [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)ク
 
 ## クラスタの制限 {#cluster-limits}
 
-| 成分                      | 限界 |
-| :---------------------- | :- |
-| データレプリカの数               | 3  |
-| クロスゾーン展開のアベイラビリティーゾーンの数 | 3  |
+| 成分                                                      | 限界 |
+| :------------------------------------------------------ | :- |
+| 各[データ領域](/tidb-cloud/tidb-cloud-glossary.md#region)部の枚数 | 3  |
+| クロスゾーン展開のアベイラビリティーゾーンの数                                 | 3  |
 
 > **注記：**
 >
@@ -29,3 +29,7 @@ TiDB Cloud、 [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)ク
 | 組織内のすべてのクラスターの合計 TiDB ノードの最大数  | 10           |
 | 組織内のすべてのクラスターの合計 TiKV ノードの最大数  | 15           |
 | 組織内のすべてのクラスターの合計TiFlashノードの最大数 | 5            |
+
+> **注記：**
+>
+> これらの制限またはクォータのいずれかが組織に問題を引き起こす場合は、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。

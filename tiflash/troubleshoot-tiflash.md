@@ -64,7 +64,8 @@ summary: Learn common operations when you troubleshoot a TiFlash cluster.
 
     > **注記：**
     >
-    > [配置ルール](/configure-placement-rules.md)機能を有効にすると、以前に設定した`max-replicas`と`location-labels`は無効になります。レプリカ ポリシーを調整するには、配置ルールに関連するインターフェイスを使用します。
+    > -   [配置ルール](/configure-placement-rules.md)が有効で複数のルールが存在する場合、以前に構成された[`max-replicas`](/pd-configuration-file.md#max-replicas) 、 [`location-labels`](/pd-configuration-file.md#location-labels) 、および[`isolation-level`](/pd-configuration-file.md#isolation-level)有効になりません。レプリカ ポリシーを調整するには、配置ルールに関連するインターフェイスを使用します。
+    > -   [配置ルール](/configure-placement-rules.md)が有効で、デフォルト ルールが 1 つだけ存在する場合、TiDB は、 `max-replicas` 、 `location-labels` 、または`isolation-level`構成が変更されると、このデフォルト ルールを自動的に更新します。
 
 6.  マシン ( TiFlashノードの`store`存在する) の残りのディスク容量が十分であるかどうかを確認します。デフォルトでは、残りのディスク容量が`store`容量 ( `low-space-ratio`パラメータで制御される) の 20% 未満の場合、PD はこのTiFlashノードにデータをスケジュールできません。
 
@@ -110,7 +111,7 @@ TiFlashノードをデプロイし、(ALTER 操作を実行して) レプリケ�
 1.  `ALTER table <tbl_name> set tiflash replica <num>`コマンドを実行してレプリケーションが成功したかどうかを確認し、出力を確認します。
 
     -   出力がある場合は、次のステップに進みます。
-    -   出力がない場合は、 `SELECT * FROM information_schema.tiflash_replica`コマンドを実行して、 TiFlashレプリカが作成されたかどうかを確認します。そうでない場合は、 `ALTER table ${tbl_name} set tiflash replica ${num}`コマンドを再度実行し、他のステートメント ( `add index`など) が実行されたかどうかを確認するか、DDL の実行が成功したかどうかを確認します。
+    -   出力がない場合は、 `SELECT * FROM information_schema.tiflash_replica`コマンドを実行して、 TiFlashレプリカが作成されたかどうかを確認します。そうでない場合は、 `ALTER table ${tbl_name} set tiflash replica ${num}`コマンドを再度実行し、他のステートメント (たとえば、 `add index` ) が実行されたかどうかを確認するか、DDL の実行が成功したかどうかを確認します。
 
 2.  TiFlashリージョンのレプリケーションが正しく実行されているかどうかを確認します。
 
@@ -172,7 +173,7 @@ TiFlashノードをデプロイし、(ALTER 操作を実行して) レプリケ�
 
 ## データレプリケーションが停止する {#data-replication-gets-stuck}
 
-TiFlashでのデータ レプリケーションが正常に開始された後、一定期間経過してもすべてまたは一部のデータのレプリケーションが失敗する場合は、次の手順を実行して問題を確認または解決できます。
+TiFlash上のデータ レプリケーションが正常に開始された後、一定期間経過してもすべてまたは一部のデータがレプリケートされない場合は、次の手順を実行して問題を確認または解決できます。
 
 1.  ディスク容量を確認してください。
 

@@ -218,7 +218,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 
 -   `key-type`クラスターに使用されるキーのエンコーディング タイプを指定します。サポートされているオプションは [&quot;table&quot;、&quot;raw&quot;、&quot;txn&quot;] で、デフォルト値は &quot;table&quot; です。
 
-    -   クラスター内に TiDB インスタンスが存在しない場合、 `key-type`は「raw」または「txn」となり、PD は`enable-cross-table-merge`設定に関係なくテーブル間でリージョンをマージできます。
+    -   クラスター内に TiDB インスタンスが存在しない場合、 `key-type` 「raw」または「txn」となり、PD は`enable-cross-table-merge`設定に関係なくテーブル間でリージョンをマージできます。
     -   クラスター内に TiDB インスタンスが存在する場合、 `key-type` 「テーブル」である必要があります。 PD がテーブル間でリージョンをマージできるかどうかは、 `enable-cross-table-merge`によって決まります。 `key-type`が「未加工」の場合、配置ルールは機能しません。
 
     ```bash
@@ -751,6 +751,42 @@ time: 43.12698ms
 }
 ```
 
+### <code>resource-manager [command]</code> {#code-resource-manager-command-code}
+
+#### Resource Control のコントローラー構成をビュー {#view-the-controller-configuration-of-resource-control}
+
+```bash
+resource-manager config controller show
+```
+
+```bash
+{
+    "degraded-mode-wait-duration": "0s",
+    "ltb-max-wait-duration": "30s",
+    "request-unit": {                    # Configurations of RU. Do not modify.
+        "read-base-cost": 0.125,
+        "read-per-batch-base-cost": 0.5,
+        "read-cost-per-byte": 0.0000152587890625,
+        "write-base-cost": 1,
+        "write-per-batch-base-cost": 1,
+        "write-cost-per-byte": 0.0009765625,
+        "read-cpu-ms-cost": 0.3333333333333333
+    },
+    "enable-controller-trace-log": "false"
+}
+```
+
+-   `ltb-max-wait-duration` : ローカル トークン バケット (LTB) の最大待機時間。デフォルト値は`30s`で、値の範囲は`[0, 24h]`です。 SQL リクエストの推定消費量[リクエストユニット (RU)](/tidb-resource-control.md#what-is-request-unit-ru) LTB の現在の累積 RU を超える場合、リクエストは一定時間待機する必要があります。予想される待ち時間がこの最大値を超える場合には、事前にエラーメッセージ[`ERROR 8252 (HY000) : Exceeded resource group quota limitation`](/error-codes.md)がアプリケーションに返されます。この値を増やすと、同時実行数が突然増加した場合、大規模なトランザクション、および大規模なクエリが発生した場合に、 `ERROR 8252`に遭遇する発生を減らすことができます。
+-   `enable-controller-trace-log` : コントローラー診断ログを有効にするかどうかを制御します。
+
+#### リソース制御のコントローラー構成を変更する {#modify-the-controller-configuration-of-resource-control}
+
+`ltb-max-wait-duration`構成を変更するには、次のコマンドを使用します。
+
+```bash
+pd-ctl resource-manager config controller set ltb-max-wait-duration 30m
+```
+
 ### <code>scheduler [show | add | remove | pause | resume | config | describe]</code> {#code-scheduler-show-add-remove-pause-resume-config-describe-code}
 
 このコマンドを使用して、スケジュール ポリシーを表示および制御します。
@@ -1194,7 +1230,7 @@ store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"en
 ...
 ```
 
-または、[store1、store30、store31] の起動に失敗した場合、store1 でデータを手動で安全に削除できるリージョンを見つけることができます。このようにして、store1 にレプリカがあるが、他の DownPeer がないすべてのリージョンをフィルターで除外できます。
+または、[store1、store30、store31] の起動に失敗した場合、store1 でデータを手動で安全に削除できるリージョンを見つけることができます。このようにして、store1 にレプリカがあるが他の DownPeer がないすべてのリージョンをフィルターで除外できます。
 
 ```bash
 >> region --jq=".regions[] | {id: .id, peer_stores: [.peers[].store_id] | select(length>1 and any(.==1) and all(.!=(30,31)))}"

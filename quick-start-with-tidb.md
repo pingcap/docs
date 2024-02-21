@@ -14,7 +14,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
 > **注記：**
 >
-> このガイドで提供されるデプロイメント方法は、クイック スタート**のみを目的として**おり、本番**向けではありません**。
+> このガイドで提供される展開方法はクイック スタート**のみを目的として**おり、本番や包括的な機能と安定性のテストを**目的としたものでは**ありません。
 >
 > -   セルフホスト型本番クラスタを展開するには、 [本番インストールガイド](/production-deployment-using-tiup.md)を参照してください。
 > -   TiDB を Kubernetes にデプロイするには、 [Kubernetes で TiDB を使ってみる](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started)を参照してください。
