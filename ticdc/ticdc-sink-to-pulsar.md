@@ -142,7 +142,7 @@ send-timeout=30
 
 ### TLS encrypted transmission
 
-Starting from v7.5.1 and v8.0.0, TiCDC supports TLS encrypted transmission for Pulsar. The configuration example is as follows:
+For v7.5.1 and later v7.5 patch versions, TiCDC supports TLS encrypted transmission for Pulsar. The configuration example is as follows:
 
 Sink URI:
 
@@ -223,7 +223,7 @@ The following is a sample configuration when you use token authentication with P
 
 - OAuth2 authentication
 
-    Starting from v7.5.1 and v8.0.0, TiCDC supports the OAuth2 authentication for Pulsar.
+    For v7.5.1 and later v7.5 patch versions, TiCDC supports the OAuth2 authentication for Pulsar.
 
     Sink URI: 
 
