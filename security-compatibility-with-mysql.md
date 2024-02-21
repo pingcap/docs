@@ -144,13 +144,15 @@ The support for TLS authentication is configured differently. For detailed infor
 
 `tidb_auth_token` is a passwordless authentication method based on [JSON Web Token (JWT)](https://datatracker.ietf.org/doc/html/rfc7519). In v6.4.0, `tidb_auth_token` is only used for user authentication in TiDB Cloud. Starting from v6.5.0, you can also configure `tidb_auth_token` as a user authentication method for TiDB Self-Hosted. Different from password-based authentication methods such as `mysql_native_passsword` and `caching_sha2_password`, when creating users using `tidb_auth_token`, there is no need to set or store custom passwords. To log into TiDB, users only need to use a signed token instead of a password, which simplifies the authentication process and improves security.
 
-JWT consists of 3 parts: Header, Payload, and Signature. After being encoded using base64, they are concatenated into a stirng separated by dots (`.`).
+#### JWT
 
-The Header describe the meta data of the JWT, including 3 parameters:
+JWT consists of three parts: Header, Payload, and Signature. After being encoded using base64, they are concatenated into a string separated by dots (`.`) for transmission between the client and server.
 
-* `alg` means the algorithm for signature, default as `RS256`
-* `typ` means the type of token, unified as `JWT`
-* `kid` means the key id for generating token signature
+The Header describes the metadata of the JWT, including 3 parameters:
+
+* `alg`: the algorithm for signature, which is `RS256` by default.
+* `typ`: the type of token, which is `JWT`.
+* `kid`: the key ID for generating token signature.
 
 Here is an example for Header:
 
@@ -162,15 +164,15 @@ Here is an example for Header:
 }
 ```
 
-The Payload is the main part of JWT, which stores the user information in *clains*. These claims are required by `tidb_auth_token` users:
+Payload is the main part of JWT, which stores the user information. Each field in the Payload is called a claim. The claims required for TiDB user authentication are as follows:
 
-* `iss`: if `TOKEN_ISSUER` is not set or set to empty when [`CREATE USER`](/sql-statements/sql-statement-create-user.md), this claim is not required; otherwise this claim should be the same as the setting value
-* `sub`: this claim is required to be the same as the user name
-* `iat`: means `issued at`. In TiDB, it is required not to be later than the time of authentication neither earlier than 15 minutes before authentication
-* `exp`: means `expiration time`. If it is earlier than the time of authentication, the authentication fails
-* `email`: the email can be specified when creating user by `ATTRIBUTE '{"email": "xxxx@pingcap.com"}`. If no email was giving when creating user, this claim should be set as an empty string; or it should be the same as the specified value
+* `iss`: if `TOKEN_ISSUER` is not specified or set to empty when [`CREATE USER`](/sql-statements/sql-statement-create-user.md), this claim is not required; otherwise, `iss` should use the same value as `TOKEN_ISSUER`.
+* `sub`: this claim is required to be the same as the username to be authenticated.
+* `iat`: it means `issued at`, the timestamp when the token is issued. In TiDB, this value must not be later than the authentication time or earlier than 15 minutes before authentication.
+* `exp`: the timestamp when the token expires. If it is earlier than the time of authentication, the authentication fails.
+* `email`: the email can be specified when creating a user by `ATTRIBUTE '{"email": "xxxx@pingcap.com"}`. If no email is specified when a user is created, this claim should be set as an empty string; otherwise, this claim should be the same as the specified value.
 
-Here are some valid Payload examples:
+Here is an example for Payload:
 
 ```json
 {
@@ -182,44 +184,50 @@ Here are some valid Payload examples:
 }
 ```
 
-The Signature signs the above two parts.
+Signature is used to sign the Header and Payload data.
 
 > **Warning:**
 >
-> - The encoding of the Header and Payload in base64 is reversible. Please do not attach any sensitive information in them
-> - The `tidb_auth_token` authentication requires that the client supports [`mysql_clear_password`](https://dev.mysql.com/doc/refman/8.0/en/cleartext-pluggable-authentication.html) plugin to send the token to TiDB in clear text. Therefore, please [enale TLS between clients and servers](/enable-tls-between-clients-and-servers.md) before using `tidb_auth_token`
+> - The encoding of the Header and Payload in base64 is reversible. Do **Not** attach any sensitive information to them.
+> - The `tidb_auth_token` authentication method requires clients to support the [`mysql_clear_password`](https://dev.mysql.com/doc/refman/8.0/en/cleartext-pluggable-authentication.html) plugin to send the token to TiDB in plain text. Therefore, you need to [enale TLS between clients and servers](/enable-tls-between-clients-and-servers.md) before using `tidb_auth_token`.
 
-### Usage guidance
+### Usage
 
-Here are the steps to config and use `tidb_auth_token`:
+To configure and use `tidb_auth_token` as the authentication method for TiDB Self-Hosted users, take the following steps:
 
-1. Config [`auth-token-jwks`](/tidb-configuration-file.md#auth-token-jwks-new-in-v640) and [`auth-token-refresh-interval`](/tidb-configuration-file.md#auth-token-refresh-interval-new-in-v640) in the configuration file
+1. Configure [`auth-token-jwks`](/tidb-configuration-file.md#auth-token-jwks-new-in-v640) and [`auth-token-refresh-interval`](/tidb-configuration-file.md#auth-token-refresh-interval-new-in-v640) in the TiDB configuration file.
 
-    For example, you can get the example JWKS using `wget https://raw.githubusercontent.com/CbcWestwolf/generate_jwt/master/JWKS.json`, then config the path of above JWKS in `config.toml`:
+    For example, you can get an example JWKS using the following command:
+    
+    ```bash
+    wget https://raw.githubusercontent.com/CbcWestwolf/generate_jwt/master/JWKS.json
+    ```
+
+    Then, configure the path of the example JWKS in `config.toml`:
 
     ```toml
     [security]
     auth-token-jwks = "JWKS.json"
     ```
 
-2. Start `tidb-server` and save the JWKS periodly to the path specified by `auth-token-jwks`
-3. Create a user with `tidb_auth_token`, and sepcify `iss` and `email` by `REQUIRE TOKEN_ISSUER` and `ATTRIBUTE '{"email": "xxxx@pingcap.com"}`
+2. Start `tidb-server` and periodically update and save the JWKS to the path specified by `auth-token-jwks`.
+3. Create a user with `tidb_auth_token`, and specify `iss` and `email` as needed using `REQUIRE TOKEN_ISSUER` and `ATTRIBUTE '{"email": "xxxx@pingcap.com"}`.
 
-    For example, create a user `user@pingcap.com` with `tidb_auth_token`
+    For example, create a user `user@pingcap.com` with `tidb_auth_token`:
 
     ```sql
     CREATE USER 'user@pingcap.com' IDENTIFIED WITH 'tidb_auth_token' REQUIRE TOKEN_ISSUER 'issuer-abc' ATTRIBUTE '{"email": "user@pingcap.com"}';
     ```
 
-4. Generate and sign a token used for authentication, authencating with mysql client's `mysql_clear_text` plugin
+4. Generate and sign a token for authentication, and authenticate using the `mysql_clear_text` plugin of the MySQL client.
 
-    Install JWT genration tool by `go install github.com/cbcwestwolf/generate_jwt`. This tool is only used for testing `tidb_auth_token`. For example, 
+    Install the JWT generation tool via `go install github.com/cbcwestwolf/generate_jwt` (this tool is only used for testing `tidb_auth_token`). For example:
 
     ```text
     generate_jwt --kid "the-key-id-0" --sub "user@pingcap.com" --email "user@pingcap.com" --iss "issuer-abc"
     ```
 
-    It prints the public key and token like:
+    It prints the public key and token as follows:
 
     ```text
     -----BEGIN PUBLIC KEY-----
@@ -234,18 +242,18 @@ Here are the steps to config and use `tidb_auth_token`:
     eyJhbGciOiJSUzI1NiIsImtpZCI6InRoZS1rZXktaWQtMCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAcGluZ2NhcC5jb20iLCJleHAiOjE3MDMzMDU0OTQsImlhdCI6MTcwMzMwNDU5NCwiaXNzIjoiaXNzdWVyLWFiYyIsInN1YiI6InVzZXJAcGluZ2NhcC5jb20ifQ.T4QPh2hTB5on5xCuvtWiZiDTuuKvckggNHtNaovm1F4RvwUv15GyOqj9yMstE-wSoV5eLEcPC2HgE6eN1C6yH_f4CU-A6n3dm9F1w-oLbjts7aYCl8OHycVYnq609fNnb8JLsQAmd1Zn9C0JW899-WSOQtvjLqVSPe9prH-cWaBVDQXzUJKxwywQzk9v-Z1Njt9H3Rn9vvwwJEEPI16VnaNK38I7YG-1LN4fAG9jZ6Zwvz7vb_s4TW7xccFf3dIhWTEwOQ5jDPCeYkwraRXU8NC6DPF_duSrYJc7d7Nu9Z2cr-E4i1Rt_IiRTuIIzzKlcQGg7jd9AGEfGe_SowsA-w
     ```
 
-    Copy the above token in the last line for authentication:
+    Copy the preceding token in the last line for login:
 
     ```Shell
     mycli -h 127.0.0.1 -P 4000 -u 'user@pingcap.com' -p '<the-token-generated>'
     ```
 
-    Note that the mysql client here should support `mysql_clear_password` plugin. [mycli](https://www.mycli.net/) supports and enable this plugin default. If using [mysql command-line client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html), an option `--enable-cleartext-plugin` is required to enable this plugin.
+    Ensure that the  MySQL client here supports the `mysql_clear_password` plugin. [mycli](https://www.mycli.net/) supports and enables this plugin by default. If you are using the [mysql command-line client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html), you need to use the `--enable-cleartext-plugin` option to enable this plugin:
 
     ```Shell
     mysql -h 127.0.0.1 -P 4000 -u 'user@pingcap.com' -p'<the-token-generated>' --enable-cleartext-plugin
     ```
 
-    If specifying wrong `--sub` when generating token, like `--sub "wronguser@pingcap.com`, the authentication using this token would fail.
+    If an incorrect `--sub` is specified when the token is generated (such as `--sub "wronguser@pingcap.com"`), the authentication using this token would fail.
 
-You can encode and decode a token with the help of the debugger in [jwt.io](https://jwt.io/).
+You can encode and decode a token using the debugger provided by [jwt.io](https://jwt.io/).
