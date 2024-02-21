@@ -207,6 +207,10 @@ TiDB supports changing the priority on a [global](/system-variables.md#tidb_forc
 
 - `DELAYED`: this statement has normal priority and is the same as the `NO_PRIORITY` setting for `tidb_force_priority`.
 
+> **NOTE:**
+>
+> TiDB started supporting the feature [Resource Control](/tidb-resource-control.md) in v6.6.0. Users can utilize this feature to execute SQLs with different priorities under different resource groups. By configuring proper quotas and priorities for these resource groups, users can gain better scheduling control for SQLs with different priorities. When resource control is enabled, statement priority will no longer take effect. We recommend using [Resource Control](/tidb-resource-control.md) to manage the resource usage between different SQLs.
+
 You can combine the above two parameters with the DML of TiDB to use them. For example:
 
 1. Adjust the priority by writing SQL statements in the database:
