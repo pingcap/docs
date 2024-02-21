@@ -56,8 +56,8 @@ This section describes the key parameter configuration of the TiDB geo-distribut
 - To prevent remote TiKV nodes from launching unnecessary Raft elections, it is required to increase the minimum and maximum number of ticks that the remote TiKV nodes need to launch an election. The two parameters are set to `0` by default.
 
     ```yaml
-    raftstore.raft-min-election-timeout-ticks: 1000
-    raftstore.raft-max-election-timeout-ticks: 1020
+    raftstore.raft-min-election-timeout-ticks: 50
+    raftstore.raft-max-election-timeout-ticks: 60
     ```
 
 #### PD parameters
