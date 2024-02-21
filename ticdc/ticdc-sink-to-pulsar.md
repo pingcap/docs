@@ -217,7 +217,7 @@ The following is a sample configuration when you use token authentication with P
     auth-tls-certificate-path="/data/pulsar/certificate"
     # Private key path of the Pulsar mTLS authentication
     auth-tls-private-key-path="/data/pulsar/certificate.key"
-    # Path to trusted certificate file of the Pulsar mTLS authentication
+    # Path to the trusted certificate file of the Pulsar mTLS authentication
     tls-trust-certs-file-path="/data/pulsar/tls-trust-certs-file"
     ```
 
