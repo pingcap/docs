@@ -99,11 +99,11 @@ token-from-file="/data/pulsar/token-file.txt"
 basic-user-name="root"
 # Pulsar uses the basic account and password to authenticate the identity. Specify the password.
 basic-password="password"
-# The certificate path on the client, which is required when Pulsar enables mTLS authentication.
+# The certificate path on the client, which is required when Pulsar enables the mTLS authentication.
 auth-tls-certificate-path="/data/pulsar/certificate"
-# The private key path on the client, which is required when Pulsar enables mTLS authentication.
+# The private key path on the client, which is required when Pulsar enables the mTLS authentication.
 auth-tls-private-key-path="/data/pulsar/certificate.key"
-# The path to the trusted certificate file of the Pulsar TLS authentication, which is required when Pulsar enables mTLS authentication or TLS encrypted transmission.
+# The path to the trusted certificate file of the Pulsar TLS authentication, which is required when Pulsar enables the mTLS authentication or TLS encrypted transmission.
 tls-trust-certs-file-path="/data/pulsar/tls-trust-certs-file"
 # The path to the encryption private key on the client, which is required when Pulsar enables TLS encrypted transmission.
 tls-key-file-path="/data/pulsar/tls-key-file"
