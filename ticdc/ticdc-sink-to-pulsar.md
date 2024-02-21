@@ -157,7 +157,7 @@ Configuration：
 tls-trust-certs-file-path="/data/pulsar/tls-trust-certs-file"
 ```
 
-If the `tlsRequireTrustedClientCertOnConnect=true` parameter is configured for your Pulsar server, you need to configure the `tls-key-file-path` and `tls-certificate-file` parameters in the changefeed configuration file. For example:
+If the `tlsRequireTrustedClientCertOnConnect=true` parameter is configured for your Pulsar server, you also need to configure the `tls-key-file-path` and `tls-certificate-file` parameters in the changefeed configuration file. For example:
 
 ```toml
 [sink.pulsar-config]
