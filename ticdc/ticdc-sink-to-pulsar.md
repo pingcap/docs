@@ -105,9 +105,9 @@ auth-tls-certificate-path="/data/pulsar/certificate"
 auth-tls-private-key-path="/data/pulsar/certificate.key"
 # The path to the trusted certificate file of the Pulsar TLS authentication, which is required when Pulsar enables the mTLS authentication or TLS encrypted transmission.
 tls-trust-certs-file-path="/data/pulsar/tls-trust-certs-file"
-# The path to the encryption private key on the client, which is required when Pulsar enables TLS encrypted transmission.
+# The path to the encrypted private key on the client, which is required when Pulsar enables TLS encrypted transmission.
 tls-key-file-path="/data/pulsar/tls-key-file"
-# The path to the encryption certificate file on the client, which is required when Pulsar enables TLS encrypted transmission.
+# The path to the encrypted certificate file on the client, which is required when Pulsar enables TLS encrypted transmission.
 tls-certificate-file="/data/pulsar/tls-certificate-file"
 # Pulsar oauth2 issuer-url. For more information, see the Pulsar website: https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication
 oauth2.oauth2-issuer-url="https://xxxx.auth0.com"
@@ -144,13 +144,13 @@ send-timeout=30
 
 Starting from v7.5.1 and v8.0.0, TiCDC supports TLS encrypted transmission for Pulsar. The configuration example is as follows:
 
-Sink URI：
+Sink URI:
 
 ```shell
 --sink-uri="pulsar+ssl://127.0.0.1:6651/persistent://public/default/yktest?protocol=canal-json"
 ```
 
-Configuration：
+Configuration:
 
 ```toml
 [sink.pulsar-config]
