@@ -212,7 +212,6 @@ At the SQL level, you can configure the following options:
 
 To return full result object as arrays, you can configure the `arrayMode` and `fullResult` options as follows:
 
-
 ```ts
 const conn = connect({url: process.env['DATABASE_URL'] || 'mysql://[username]:[password]@[host]/[database]'})
 const results = await conn.execute('select * from test',null,{arrayMode:true,fullResult:true})
