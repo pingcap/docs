@@ -2859,9 +2859,9 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This variable is used to change the default priority for statements executed on a TiDB server. A use case is to ensure that a particular user that is performing OLAP queries receives lower priority than users performing OLTP queries.
 - The default value `NO_PRIORITY` means that the priority for statements is not forced to change.
 
-> **NOTE:**
+> **Note:**
 >
-> TiDB started supporting the feature [Resource Control](/tidb-resource-control.md) in v6.6.0. Users can utilize this feature to execute SQLs with different priorities under different resource groups. By configuring proper quotas and priorities for these resource groups, users can gain better scheduling control for SQLs with different priorities. When resource control is enabled, statement priority will no longer take effect. We recommend using [Resource Control](/tidb-resource-control.md) to manage the resource usage between different SQLs.
+> Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control.md) to manage resource usage for different SQL statements.
 
 ### tidb_gc_concurrency <span class="version-mark">New in v5.0</span>
 
