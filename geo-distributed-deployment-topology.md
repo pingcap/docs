@@ -61,7 +61,7 @@ This section describes the key parameter configuration of the TiDB geo-distribut
     ```
 > **Note:**
 >
-> Configuring larger values for `raftstore.raft-min-election-timeout-ticks` and `raftstore.raft-max-election-timeout-ticks` can significantly decrease the likelihood of a peer on the TiKV becoming the leader. However, in a disaster scenario where some TiKV nodes are offline and the active TiKV node lags behind in Raft logs, only the Region on this specific TiKV can become the leader. In the event that the leader becomes unavailable, the Region on this TiKV node must wait for at least the duration set by `raftstore.raft-min-election-timeout-ticks' to become a new leader. It is advisable not to set these values excessively large to prevent potential impact on the cluster availability in such scenarios.
+> Using `raftstore.raft-min-election-timeout-ticks` and `raftstore.raft-max-election-timeout-ticks` to configure larger tick values for a TiKV node can significantly decrease the likelihood of a peer on the TiKV node becoming the leader. However, in a disaster scenario where some TiKV nodes are offline and the active TiKV node lags behind in Raft logs, only the Region on this specific TiKV node with large tick values can become the leader. In the event that the leader becomes unavailable, the Region on this TiKV node must wait for at least the duration set by `raftstore.raft-min-election-timeout-ticks' to become a new leader. It is advisable not to set these values excessively large to prevent potential impact on the cluster availability in such scenarios.
 #### PD parameters
 
 - The PD metadata information records the topology of the TiKV cluster. PD schedules the Raft Group replicas on the following four dimensions:
