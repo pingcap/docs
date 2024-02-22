@@ -256,7 +256,7 @@ conn.execute(`select ...`, [], {
 >
 > TiDB Cloud serverless driver configuration changes:
 > 
-> - v0.0.7: add the SQL level option`isolation`.
+> - v0.0.7: add the SQL level option `isolation`.
 > - v0.0.10: add the connection level configuration `decoders` and the SQL level option `decoders`.
 
 ## Features
