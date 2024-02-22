@@ -6,8 +6,8 @@ from tempfile import mkstemp
 from shutil import move
 from os import remove
 
-ext_path = r'/Users/grcai/Documents/GitHub/qiancai/docs/releases'  # Specify the directory of the English release notes folder
-main_path = r'/Users/grcai/Documents/GitHub/qiancai/docs/releases/release-7.1.2.md'  # Specify the directory of the English release note file that you are preparing
+ext_path = r'/Users/userid/Documents/GitHub/mygithubid/docs/releases'  # Specify the directory of the English release notes folder
+main_path = r'/Users/userid/Documents/GitHub/mygithubid/docs/releases/release-7.1.2.md'  # Specify the directory of the English release note file that you are preparing
 
 # Get existing release notes from the English release notes folder
 def store_exst_rn(ext_path,main_path):
@@ -80,7 +80,7 @@ def replace_zh_dup_with_en_dup(note_pairs, main_path):
 
     remove(source_file_path)
     move(target_file_path, source_file_path)
-    DupRate = "%.0f%%" % (DupNum/NoteNum*100) #计算 release notes 重复率
+    DupRate = "%.0f%%" % (DupNum/NoteNum*100)
     print (str(DupNum) + " duplicated notes are found in " + str(NoteNum) + " notes. The duplicated rate is " + str(DupRate) + ".")
 
 
