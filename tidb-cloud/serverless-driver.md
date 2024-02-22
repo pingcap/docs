@@ -256,6 +256,7 @@ conn.execute(`select ...`, [], {
 > **Note:**
 >
 > TiDB Cloud serverless driver configuration changes:
+> 
 > - _v0.0.7_: add the SQL level option`isolation`.
 > - _v0.0.10_: add the connection level configuration `decoders` and the SQL level option `decoders`.
 
@@ -314,6 +315,7 @@ The type mapping between TiDB Serverless and Javascript is as follows:
 > **Note:**
 >
 > TiDB Cloud serverless driver data type mapping changes:
+> 
 > - _v0.1.0_: The `BINARY`、`VARBINARY`、`TINYBLOB`、`BLOB`、`MEDIUMBLOB`、`LONGBLOB` and `BIT` types are now returned as a `Uint8Array` instead of a `string`.
 
 ### ORM integrations
