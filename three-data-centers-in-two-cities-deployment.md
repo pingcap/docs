@@ -113,8 +113,8 @@ tikv_servers:
   - host: 10.63.10.34
     config:
       server.labels: { az: "3", replication zone: "5", rack: "5", host: "34" }
-      raftstore.raft-min-election-timeout-ticks: 1000
-      raftstore.raft-max-election-timeout-ticks: 1200
+      raftstore.raft-min-election-timeout-ticks: 50
+      raftstore.raft-max-election-timeout-ticks: 60
 
 monitoring_servers:
   - host: 10.63.10.60
@@ -174,11 +174,15 @@ In the deployment of three AZs in two regions, to optimize performance, you need
 - Optimize the network configuration of the TiKV node in another region (San Francisco). Modify the following TiKV parameters for AZ3 in San Francisco and try to prevent the replica in this TiKV node from participating in the Raft election.
 
     ```yaml
-    raftstore.raft-min-election-timeout-ticks: 1000
-    raftstore.raft-max-election-timeout-ticks: 1200
+    raftstore.raft-min-election-timeout-ticks: 50
+    raftstore.raft-max-election-timeout-ticks: 60
     ```
 
-- Configure scheduling. After the cluster is enabled, use the `tiup ctl:v<CLUSTER_VERSION> pd` tool to modify the scheduling policy. Modify the number of TiKV Raft replicas. Configure this number as planned. In this example, the number of replicas is five.
+> **Note:**
+>
+> Using `raftstore.raft-min-election-timeout-ticks` and `raftstore.raft-max-election-timeout-ticks` to configure larger election timeout ticks for a TiKV node can significantly decrease the likelihood of Regions on that node becoming Leaders. However, in a disaster scenario where some TiKV nodes are offline and the remaining active TiKV nodes lag behind in Raft logs, only Regions on this TiKV node with large election timeout ticks can become Leaders. Because Regions on this TiKV node must wait for at least the duration set by `raftstore.raft-min-election-timeout-ticks' before initiating an election, it is recommended to avoid setting these values excessively large to prevent potential impact on the cluster availability in such scenarios.
+
+- Configure scheduling. After the cluster is enabled, use the `tiup ctl:v{CLUSTER_VERSION} pd` tool to modify the scheduling policy. Modify the number of TiKV Raft replicas. Configure this number as planned. In this example, the number of replicas is five.
 
     ```bash
     config set max-replicas 5
