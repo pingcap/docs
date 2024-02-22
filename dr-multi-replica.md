@@ -74,8 +74,8 @@ In this example, TiDB contains five replicas and three regions. Region 1 is the 
         config:
           server.labels: { Region: "Region3", AZ: "AZ5" }
 
-          raftstore.raft-min-election-timeout-ticks: 1000
-          raftstore.raft-max-election-timeout-ticks: 1200
+          raftstore.raft-min-election-timeout-ticks: 50
+          raftstore.raft-max-election-timeout-ticks: 60
 
     monitoring_servers:
       - host: tidb-dr-test2
