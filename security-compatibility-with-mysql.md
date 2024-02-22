@@ -249,7 +249,7 @@ To configure and use `tidb_auth_token` as the authentication method for TiDB Sel
     mycli -h 127.0.0.1 -P 4000 -u 'user@pingcap.com' -p '<the-token-generated>'
     ```
 
-    Ensure that the  MySQL client here supports the `mysql_clear_password` plugin. [mycli](https://www.mycli.net/) supports and enables this plugin by default. If you are using the [mysql command-line client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html), you need to use the `--enable-cleartext-plugin` option to enable this plugin:
+    Ensure that the MySQL client here supports the `mysql_clear_password` plugin. [mycli](https://www.mycli.net/) supports and enables this plugin by default. If you are using the [mysql command-line client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html), you need to use the `--enable-cleartext-plugin` option to enable this plugin:
 
     ```Shell
     mysql -h 127.0.0.1 -P 4000 -u 'user@pingcap.com' -p'<the-token-generated>' --enable-cleartext-plugin
