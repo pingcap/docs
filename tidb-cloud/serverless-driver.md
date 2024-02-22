@@ -210,6 +210,9 @@ At the SQL level, you can configure the following options:
 
 **arrayMode and fullResult**
 
+To return full result object as arrays, you can configure the `arrayMode` and `fullResult` options as follows:
+
+
 ```ts
 const conn = connect({url: process.env['DATABASE_URL'] || 'mysql://[username]:[password]@[host]/[database]'})
 const results = await conn.execute('select * from test',null,{arrayMode:true,fullResult:true})
@@ -250,8 +253,11 @@ conn.execute(`select ...`, [], {
 })
 ```
 
-- _Changed in v0.0.7_: SQL level option `isolation` is added.
-- _Changed in v0.0.10_: Connection level configuration and SQL level option `decoders` is added.
+> **Note:**
+>
+> TiDB Cloud serverless driver configuration changes:
+> - _v0.0.7_: add the SQL level option`isolation`.
+> - _v0.0.10_: add the connection level configuration `decoders` and the SQL level option `decoders`.
 
 ## Features
 
@@ -304,9 +310,11 @@ The type mapping between TiDB Serverless and Javascript is as follows:
 
 > **Note:**
 >
-> Please use utf8mb4 collation in TiDB Serverless(default is utf8mb4) for the type convert to Javascript string. Because we will use the `utf8` encoding to decode them to string. 
-
-- _Changed in v0.1.0_: The `BINARY`、`VARBINARY`、`TINYBLOB`、`BLOB`、`MEDIUMBLOB`、`LONGBLOB` and `BIT` types are now returned as a `Uint8Array` instead of a `string`.
+> Make sure to use the default `utf8mb4` collation in TiDB Serverless for the type conversion to JavaScript strings, because TiDB Cloud serverless driver uses the `utf8` encoding to decode them to strings. 
+> **Note:**
+>
+> TiDB Cloud serverless driver data type mapping changes:
+>  _Changed in v0.1.0_: The `BINARY`、`VARBINARY`、`TINYBLOB`、`BLOB`、`MEDIUMBLOB`、`LONGBLOB` and `BIT` types are now returned as a `Uint8Array` instead of a `string`.
 
 ### ORM integrations
 
