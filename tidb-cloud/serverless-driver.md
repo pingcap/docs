@@ -260,44 +260,44 @@ DDL is supported and the following SQL statements are supported:  `SELECT`, `SHO
 
 The type mapping between TiDB Serverless and Javascript is as follows:
 
-| TiDB Serverless type | Javascript type (<=v0.0.10) | Javascript type (>=v0.1.0) |
-|----------------------|-----------------------------|----------------------------|
-| TINYINT              | number                      | number                     |
-| UNSIGNED TINYINT     | number                      | number                     |
-| BOOL                 | number                      | number                     |
-| SMALLINT             | number                      | number                     |
-| UNSIGNED SMALLINT    | number                      | number                     |
-| MEDIUMINT            | number                      | number                     |
-| INT                  | number                      | number                     |
-| UNSIGNED INT         | number                      | number                     |
-| YEAR                 | number                      | number                     |
-| FLOAT                | number                      | number                     |
-| DOUBLE               | number                      | number                     |
-| BIGINT               | string                      | string                     |
-| UNSIGNED BIGINT      | string                      | string                     |
-| DECIMAL              | string                      | string                     |
-| CHAR                 | string                      | string                     |
-| VARCHAR              | string                      | string                     |
-| BINARY               | string                      | string                     |
-| VARBINARY            | string                      | Uint8Array                 |
-| TINYTEXT             | string                      | string                     |
-| TEXT                 | string                      | string                     |
-| MEDIUMTEXT           | string                      | string                     |
-| LONGTEXT             | string                      | string                     |
-| TINYBLOB             | string                      | Uint8Array                 |
-| BLOB                 | string                      | Uint8Array                 |
-| MEDIUMBLOB           | string                      | Uint8Array                 |
-| LONGBLOB             | string                      | Uint8Array                 |
-| DATE                 | string                      | string                     |
-| TIME                 | string                      | string                     |
-| DATETIME             | string                      | string                     |
-| TIMESTAMP            | string                      | string                     |
-| ENUM                 | string                      | string                     |
-| SET                  | string                      | string                     |
-| BIT                  | string                      | Uint8Array                 |
-| JSON                 | object                      | object                     |
-| NULL                 | null                        | null                       |
-| Others               | string                      | string                     |
+| TiDB Serverless type | Javascript type (<=`v0.0.10`) | Javascript type (>=`v0.1.0`) |
+|----------------------|-------------------------------|------------------------------|
+| TINYINT              | number                        | number                       |
+| UNSIGNED TINYINT     | number                        | number                       |
+| BOOL                 | number                        | number                       |
+| SMALLINT             | number                        | number                       |
+| UNSIGNED SMALLINT    | number                        | number                       |
+| MEDIUMINT            | number                        | number                       |
+| INT                  | number                        | number                       |
+| UNSIGNED INT         | number                        | number                       |
+| YEAR                 | number                        | number                       |
+| FLOAT                | number                        | number                       |
+| DOUBLE               | number                        | number                       |
+| BIGINT               | string                        | string                       |
+| UNSIGNED BIGINT      | string                        | string                       |
+| DECIMAL              | string                        | string                       |
+| CHAR                 | string                        | string                       |
+| VARCHAR              | string                        | string                       |
+| BINARY               | string                        | string                       |
+| VARBINARY            | string                        | Uint8Array                   |
+| TINYTEXT             | string                        | string                       |
+| TEXT                 | string                        | string                       |
+| MEDIUMTEXT           | string                        | string                       |
+| LONGTEXT             | string                        | string                       |
+| TINYBLOB             | string                        | Uint8Array                   |
+| BLOB                 | string                        | Uint8Array                   |
+| MEDIUMBLOB           | string                        | Uint8Array                   |
+| LONGBLOB             | string                        | Uint8Array                   |
+| DATE                 | string                        | string                       |
+| TIME                 | string                        | string                       |
+| DATETIME             | string                        | string                       |
+| TIMESTAMP            | string                        | string                       |
+| ENUM                 | string                        | string                       |
+| SET                  | string                        | string                       |
+| BIT                  | string                        | Uint8Array                   |
+| JSON                 | object                        | object                       |
+| NULL                 | null                          | null                         |
+| Others               | string                        | string                       |
 
 > **Note:**
 >
