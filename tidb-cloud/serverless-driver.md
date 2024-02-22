@@ -316,7 +316,7 @@ The type mapping between TiDB Serverless and Javascript is as follows:
 >
 > TiDB Cloud serverless driver data type mapping changes:
 > 
-> - _v0.1.0_: The `BINARY`、`VARBINARY`、`TINYBLOB`、`BLOB`、`MEDIUMBLOB`、`LONGBLOB` and `BIT` types are now returned as a `Uint8Array` instead of a `string`.
+> - v0.1.0: the `BINARY`、`VARBINARY`、`TINYBLOB`、`BLOB`、`MEDIUMBLOB`、`LONGBLOB`, and `BIT` types are now returned as a `Uint8Array` instead of a `string`.
 
 ### ORM integrations
 
