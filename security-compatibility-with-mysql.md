@@ -109,7 +109,7 @@ The implementation mechanisms are consistent between TiDB and MySQL. Both use th
 
 TiDB supports multiple authentication methods. These methods can be specified on a per user basis using [`CREATE USER`](/sql-statements/sql-statement-create-user.md) and [`ALTER USER`](/sql-statements/sql-statement-alter-user.md). These methods are compatible with the authentication methods of MySQL with the same names.
 
-You can use one of the following supported authentication methods in the table. To specify a default method that the server advertises when the client-server connection is being established, set the [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin) variable. `tidb_sm3_password` is the SM3 authentication method only supported in TiDB. Therefore, to authenticate using this method, you must connect to TiDB using [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3). `tidb_auth_token` is a JSON Web Token (JWT) based authentication method used in TiDB Cloud, which can also be used for TiDB Self-Hosted after configuration.
+You can use one of the following supported authentication methods in the table. To specify a default method that the server advertises when the client-server connection is being established, set the [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin) variable. `tidb_sm3_password` is the SM3 authentication method only supported in TiDB. Therefore, to authenticate using this method, you must connect to TiDB using [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3). `tidb_auth_token` is a JSON Web Token (JWT)-based authentication method used in TiDB Cloud, and you can also configure it for use in TiDB Self-Hosted.
 
 <CustomContent platform="tidb">
 
@@ -142,7 +142,7 @@ The support for TLS authentication is configured differently. For detailed infor
 
 ### `tidb_auth_token`
 
-`tidb_auth_token` is a passwordless authentication method based on [JSON Web Token (JWT)](https://datatracker.ietf.org/doc/html/rfc7519). In v6.4.0, `tidb_auth_token` is only used for user authentication in TiDB Cloud. Starting from v6.5.0, you can also configure `tidb_auth_token` as a user authentication method for TiDB Self-Hosted. Different from password-based authentication methods such as `mysql_native_passsword` and `caching_sha2_password`, when creating users using `tidb_auth_token`, there is no need to set or store custom passwords. To log into TiDB, users only need to use a signed token instead of a password, which simplifies the authentication process and improves security.
+`tidb_auth_token` is a passwordless authentication method based on [JSON Web Token (JWT)](https://datatracker.ietf.org/doc/html/rfc7519). In v6.4.0, `tidb_auth_token` is only used for user authentication in TiDB Cloud. Starting from v6.5.0, you can also configure `tidb_auth_token` as a user authentication method for TiDB Self-Hosted. Different from password-based authentication methods such as `mysql_native_passsword` and `caching_sha2_password`, when you create users using `tidb_auth_token`, there is no need to set or store custom passwords. To log into TiDB, users only need to use a signed token instead of a password, which simplifies the authentication process and improves security.
 
 #### JWT
 
@@ -170,7 +170,7 @@ Payload is the main part of JWT, which stores the user information. Each field i
 * `sub`: this claim is required to be the same as the username to be authenticated.
 * `iat`: it means `issued at`, the timestamp when the token is issued. In TiDB, this value must not be later than the authentication time or earlier than 15 minutes before authentication.
 * `exp`: the timestamp when the token expires. If it is earlier than the time of authentication, the authentication fails.
-* `email`: the email can be specified when creating a user by `ATTRIBUTE '{"email": "xxxx@pingcap.com"}`. If no email is specified when a user is created, this claim should be set as an empty string; otherwise, this claim should be the same as the specified value.
+* `email`: the email can be specified when creating a user by `ATTRIBUTE '{"email": "xxxx@pingcap.com"}`. If no email is specified when a user is created, this claim must be set as an empty string; otherwise, this claim must be the same as the specified value when the user is created.
 
 Here is an example for Payload:
 
@@ -211,6 +211,7 @@ To configure and use `tidb_auth_token` as the authentication method for TiDB Sel
     ```
 
 2. Start `tidb-server` and periodically update and save the JWKS to the path specified by `auth-token-jwks`.
+
 3. Create a user with `tidb_auth_token`, and specify `iss` and `email` as needed using `REQUIRE TOKEN_ISSUER` and `ATTRIBUTE '{"email": "xxxx@pingcap.com"}`.
 
     For example, create a user `user@pingcap.com` with `tidb_auth_token`:
