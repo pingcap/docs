@@ -310,7 +310,7 @@ The type mapping between TiDB Serverless and Javascript is as follows:
 
 > **Note:**
 >
-> Make sure to use the default `utf8mb4` charset in TiDB Serverless for the type conversion to JavaScript strings, because TiDB Cloud serverless driver uses the `utf8` encoding to decode them to strings. 
+> Make sure to use the default `utf8mb4` charset in TiDB Serverless for the type conversion to JavaScript strings, because TiDB Cloud serverless driver uses the UTF-8 encoding to decode them to strings. 
 
 > **Note:**
 >
