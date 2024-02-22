@@ -179,10 +179,9 @@ In the deployment of three AZs in two regions, to optimize performance, you need
     raftstore.raft-max-election-timeout-ticks: 60
     ```
 
-> Note:
+> **Note:**
 >
-> Setting larger values for `raftstore.raft-min-election-timeout-ticks` and `raftstore.raft-max-election-timeout-ticks` can significantly decrease the likelihood of peers on the target TiKV instance becoming region leaders. However, in a disaster scenario where some TiKV instances are offline and the peers on other instances' Raft logs have fallen behind, it is possible that only the peer on the affected TiKV instance can become a region leader. This peer requires at least raftstore.raft-min-election-timeout-ticks seconds to start a campaign. Therefore, users should avoid setting excessively high configuration values to prevent impacting the cluster's availability in this extreme scenario.
-
+> Configuring larger values for `raftstore.raft-min-election-timeout-ticks` and `raftstore.raft-max-election-timeout-ticks` can significantly decrease the likelihood of a peer on the TiKV becoming the leader. However, in a disaster scenario where some TiKV nodes are offline and the active TiKV node lags behind in Raft logs, only the Region on this specific TiKV can become the leader. In the event that the leader becomes unavailable, the Region on this TiKV node must wait for at least the duration set by `raftstore.raft-min-election-timeout-ticks' to become a new leader. It is advisable not to set these values excessively large to prevent potential impact on the cluster availability in such scenarios.
 
 - Configure scheduling. After the cluster is enabled, use the `tiup ctl:v<CLUSTER_VERSION> pd` tool to modify the scheduling policy. Modify the number of TiKV Raft replicas. Configure this number as planned. In this example, the number of replicas is five.
 
