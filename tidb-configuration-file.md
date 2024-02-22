@@ -529,6 +529,10 @@ Configuration items related to performance.
 - Value options: The default value `NO_PRIORITY` means that the priority for statements is not forced to change. Other options are `LOW_PRIORITY`, `DELAYED`, and `HIGH_PRIORITY` in ascending order.
 - Since v6.1.0, the priority for all statements is determined by the TiDB configuration item [`instance.tidb_force_priority`](/tidb-configuration-file.md#tidb_force_priority) or the system variable [`tidb_force_priority`](/system-variables.md#tidb_force_priority). `force-priority` still takes effect. But if `force-priority` and `instance.tidb_force_priority` are set at the same time, the latter takes effect.
 
+> **Note:**
+>
+> Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control.md) to manage resource usage for different SQL statements.
+
 ### `distinct-agg-push-down`
 
 - Determines whether the optimizer executes the operation that pushes down the aggregation function with `Distinct` (such as `select count(distinct a) from t`) to Coprocessors.
@@ -873,6 +877,10 @@ Configuration items related to read isolation.
 - Default value: `NO_PRIORITY`
 - The default value `NO_PRIORITY` means that the priority for statements is not forced to change. Other options are `LOW_PRIORITY`, `DELAYED`, and `HIGH_PRIORITY` in ascending order.
 - Before v6.1.0, this configuration is set by `force-priority`.
+
+> **Note:**
+>
+> Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control.md) to manage resource usage for different SQL statements.
 
 ### `max_connections`
 
