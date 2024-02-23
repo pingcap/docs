@@ -229,7 +229,7 @@ You can combine the above two parameters with the DML of TiDB to use them. For e
 
 ## What's the trigger strategy for `auto analyze` in TiDB?
 
-When the number of rows in a new table reaches 1000, and the ratio (the number of modified rows / the current total number of rows) is larger than `tidb_auto_analyze_ratio`, the `auto analyze` statement is automatically triggered. The default value of `tidb_auto_analyze_ratio` is `0.5`, indicating that this feature is enabled by default. To ensure safety, its minimum value is `0.3` when the feature is enabled, and it must be smaller than `pseudo-estimate-ratio` whose default value is `0.8`; otherwise pseudo statistics will be used for a period of time. It is recommended to set `tidb_auto_analyze_ratio` to `0.5`.
+When the number of rows in a new table reaches 1000, and the ratio (the number of modified rows / the current total number of rows) is larger than `tidb_auto_analyze_ratio`, the [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) statement is automatically triggered. The default value of `tidb_auto_analyze_ratio` is `0.5`, indicating that this feature is enabled by default. To ensure safety, its minimum value is `0.3` when the feature is enabled, and it must be smaller than `pseudo-estimate-ratio` whose default value is `0.8`; otherwise pseudo statistics will be used for a period of time. It is recommended to set `tidb_auto_analyze_ratio` to `0.5`.
 
 To disable `auto analyze`, use the system variable `tidb_enable_auto_analyze`.
 
