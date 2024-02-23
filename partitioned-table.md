@@ -665,11 +665,11 @@ PARTITION BY KEY(fname, store_id)
 PARTITIONS 4;
 ```
 
-Currently, TiDB does not support creating Key partitioned tables if the partition column list specified in `PARTITION BY KEY` is empty. For example, after you execute the following statement, TiDB will create a non-partitioned table and return an `Unsupported partition type KEY, treat as normal table` warning.
+TiDB also supports creating Key partitioned tables with an empty partition column list specified in `PARTITION BY KEY`, just like MySQL. For example, the following statement will create a partitioned table with the primary key `id` as the partitioning key:
 
 ```sql
 CREATE TABLE employees (
-    id INT NOT NULL,
+    id INT NOT NULL PRIMARY KEY,
     fname VARCHAR(30),
     lname VARCHAR(30),
     hired DATE NOT NULL DEFAULT '1970-01-01',
@@ -681,6 +681,20 @@ CREATE TABLE employees (
 PARTITION BY KEY()
 PARTITIONS 4;
 ```
+
+If there is no primary key but a unique key, the unique key will be used as the partitioning key:
+
+```
+CREATE TABLE k1 (
+    id INT NOT NULL,
+    name VARCHAR(20),
+    UNIQUE KEY (id)
+)
+PARTITION BY KEY()
+PARTITIONS 2;
+```
+
+However, the previous statements will fail if the unique key column is not defined as `NOT NULL`.
 
 #### How TiDB handles Linear Hash partitions
 
