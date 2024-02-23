@@ -798,6 +798,12 @@ Configuration related to the status of TiDB service.
 - Determines whether to transmit the database-related QPS metrics to Prometheus.
 - Default value: `false`
 
+### `record-db-label`
+
+- Determines whether to transmit the database-related QPS metrics to Prometheus.
+- Supports more metircs types than `record-db-qps`, for example, duration and statements.
+- Default value: `false`
+
 ## pessimistic-txn
 
 For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md).
