@@ -64,7 +64,7 @@ When the replication task is unavailable or interrupted, this feature ensures th
 When starting the TiCDC server, you can specify the Time To Live (TTL) duration of GC safepoint by configuring `gc-ttl`. You can also [use TiUP to modify](/ticdc/deploy-ticdc.md#modify-ticdc-cluster-configurations-using-tiup) `gc-ttl`. The default value is 24 hours. In TiCDC, this value means:
 
 - The maximum time the GC safepoint is retained at the PD after the TiCDC service is stopped.
-- The maximum time a replication task can be suspended after the task is interrupted or manually stopped. If the time for a suspended replication task is longer than the value set by `gc-ttl`, the replication task enters the `failed` status, cannot be resumed, and cannot continue to affect the progress of the GC safepoint.
+- When TiKV's GC is blocked by TiCDC's GC safepoint, `gc-ttl` indicates the maximum replication delay of a TiCDC replication task. If the delay of the replication task exceeds the value set by `gc-ttl`, the replication task enters into the `failed` state and reports the `ErrGCTTLExceeded` error. It cannot be recovered, and no longer blocks GC safepoint to advance.
 
 The second behavior above is introduced in TiCDC v4.0.13 and later versions. The purpose is to prevent a replication task in TiCDC from suspending for too long, causing the GC safepoint of the upstream TiKV cluster not to continue for a long time and retaining too many outdated data versions, thus affecting the performance of the upstream cluster.
 
@@ -78,7 +78,13 @@ If a replication task starts after the TiCDC service starts, the TiCDC owner upd
 
 If the replication task is suspended longer than the time specified by `gc-ttl`, the replication task enters the `failed` status and cannot be resumed. The PD corresponding service GC safepoint will continue.
 
-The Time-To-Live (TTL) that TiCDC sets for a service GC safepoint is 24 hours, which means that the GC mechanism does not delete any data if the TiCDC service can be recovered within 24 hours after it is interrupted.
+The default Time-To-Live (TTL) that TiCDC sets for a service GC safepoint is 24 hours, which means that the GC mechanism does not delete the data required by TiCDC for continuing replication if the TiCDC service can be recovered within 24 hours after it is interrupted.
+
+## How to recover a replication task after it fails?
+
+1. Use `cdc cli changefeed query` to query the error information of the replication task and fix the error as soon as possible.
+2. Increase the value of `gc-ttl` to allow more time to fix the error, ensuring that the replication task does not enter the `failed` status due to the replication delay exceeding `gc-ttl` after the error is fixed.
+3. After evaluating the impact on the system, increase the value of [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) in TiDB to block GC and retain data, ensuring that the replication task does not enter the `failed` status due to GC cleaning data after the error is fixed.
 
 ## How to understand the relationship between the TiCDC time zone and the time zones of the upstream/downstream databases?
 
