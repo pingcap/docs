@@ -47,7 +47,7 @@ You can set the CIDR when creating the first TiDB Dedicated cluster. If you want
     >     - 172.16.0.0 - 172.17.255.255
     >     - 172.30.0.0 - 172.31.255.255
 
-    > - TiDB Cloud limits the number of TiDB nodes based on the CIDR block size of the region for a project.
+    > - TiDB Cloud limits the number of TiDB nodes in a region of a project based on the CIDR block size of the region.
 
 5. View the CIDR of the cloud provider and the specific region. 
 
