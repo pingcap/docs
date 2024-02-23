@@ -84,7 +84,7 @@ The default Time-To-Live (TTL) that TiCDC sets for a service GC safepoint is 24 
 
 1. Use `cdc cli changefeed query` to query the error information of the replication task and fix the error as soon as possible.
 2. Increase the value of `gc-ttl` to allow more time to fix the error, ensuring that the replication task does not enter the `failed` status due to the replication delay exceeding `gc-ttl` after the error is fixed.
-3. After evaluating the impact on the system, increase the value of [tidb_gc_life_time](/system-variables.md#tidb_gc_life_time-new-in-v50) in TiDB to prevent GC from retaining data, ensuring that the replication task does not enter the `failed` status due to GC cleaning data after the error is fixed.
+3. After evaluating the impact on the system, increase the value of [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) in TiDB to prevent GC from retaining data, ensuring that the replication task does not enter the `failed` status due to GC cleaning data after the error is fixed.
 
 ## How to understand the relationship between the TiCDC time zone and the time zones of the upstream/downstream databases?
 
