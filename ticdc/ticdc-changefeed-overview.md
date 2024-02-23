@@ -15,7 +15,7 @@ The state of a replication task represents the running status of the replication
 
 The states in the preceding state transfer diagram are described as follows:
 
-- `Normal`: The replication task runs normally and the checkpoint-ts proceeds normally.
+- `Normal`: The replication task runs normally and the checkpoint-ts proceeds normally. A changefeed in this state blocks GC to advance.
 - `Stopped`: The replication task is stopped, because the user manually pauses the changefeed. The changefeed in this state blocks GC operations.
 - `Warning`: The replication task returns an error. The replication cannot continue due to some recoverable errors. The changefeed in this state keeps trying to resume until the state transfers to `Normal`. The maximum retry time is 30 minutes. If it exceeds this time, the changefeed enters a failed state. The changefeed in this state blocks GC operations.
 - `Finished`: The replication task is finished and has reached the preset `TargetTs`. The changefeed in this state does not block GC operations.
@@ -23,7 +23,8 @@ The states in the preceding state transfer diagram are described as follows:
 
 > **Note:**
 >
-> If the changefeed encounters errors with error codes `ErrGCTTLExceeded`, `ErrSnapshotLostByGC`, or `ErrStartTsBeforeGC`, it does not block GC operations.
+> - If GC is blocked by a changefeed, the changefeed will block GC advancement for up to the time specified by `gc-ttl`. After that, the changefeed will be set to the `failed` state, with an error type of `ErrGCTTLExceeded`, and will no longer block GC advancement.
+> - If the changefeed encounters errors with error codes `ErrGCTTLExceeded`, `ErrSnapshotLostByGC`, or `ErrStartTsBeforeGC`, it does not block GC operations.
 
 The numbers in the preceding state transfer diagram are described as follows.
 
