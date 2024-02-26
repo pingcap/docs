@@ -171,7 +171,7 @@ The database connection might hang under certain conditions when using MySQL Con
 
 **Way to avoid**
 
-This bug has been fixed in MySQL Connector/J version `8.0.32`. Please use version `8.0.32` or a higher version. For improved stability and performance, and considering that updates for the `8.0` series have ceased, we strongly recommend upgrading to the latest General Availability (GA) version, which is currently `8.2`.
+This bug has been fixed in MySQL Connector/J version `8.0.32`. Please use version `8.0.32` or a higher version. For improved stability and performance, and considering that updates for the `8.0` series have ceased, we strongly recommend upgrading to the latest General Availability (GA) version, which is currently `8.3`.
 
 TiDB also fixes it in the following ways:
 
