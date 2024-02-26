@@ -26,7 +26,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 
 + TiDB
     <!-- tw:@hfxsd (1) -->
-    - Use `tikv_client_read_timeout` in DDL Schema Reload to reduce the impact of Meta Region Leader read unavailability on the cluster [#48124](https://github.com/pingcap/tidb/issues/48124) @[cfzjywxk](https://github.com/cfzjywxk)
+    - Use `tikv_client_read_timeout` during the DDL schema reload process to reduce the impact of Meta Region Leader read unavailability on the cluster [#48124](https://github.com/pingcap/tidb/issues/48124) @[cfzjywxk](https://github.com/cfzjywxk)
     - (dup): release-7.6.0.md > # Observability * Enhance observability related to resource control [#49318](https://github.com/pingcap/tidb/issues/49318) @[glorv](https://github.com/glorv) @[bufferflies](https://github.com/bufferflies) @[nolouch](https://github.com/nolouch)
 
         As more and more users use resource groups to isolate application workloads, Resource Control provides enhanced data based on resource groups. This helps you monitor resource group workloads and settings, ensuring that you can quickly identify and accurately diagnose problems, including:
@@ -56,7 +56,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 
 + TiFlash
     <!-- tw:@hfxsd (1) -->
-    - Improve the calculation method for [RU (Request Unit)](/tidb-resource-control.md#what-is-request-unit-ru) to make RU values more stable [#8391](https://github.com/pingcap/tiflash/issues/8391) @[guo-shaoge(https://github.com/guo-shaoge)
+    - Improve the calculation method for [RU (Request Unit)](/tidb-resource-control.md#what-is-request-unit-ru) to make RU values more stable [#8391](https://github.com/pingcap/tiflash/issues/8391) @[guo-shaoge](https://github.com/guo-shaoge)
     - (dup): release-6.5.7.md > Improvements> TiFlash - Reduce the impact of disk performance jitter on read latency [#8583](https://github.com/pingcap/tiflash/issues/8583) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - (dup): release-6.5.8.md > Improvements> TiFlash - Reduce the impact of background GC tasks on read and write task latency [#8650](https://github.com/pingcap/tiflash/issues/8650) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
@@ -64,7 +64,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 
     + Backup & Restore (BR)
         <!-- tw:@hfxsd (4) -->
-        - Use better algorithms to improve the speed of merging SST files when restoring data [#50613](https://github.com/pingcap/tidb/issues/50613) @[Leavrth](https://github.com/Leavrth)
+        - Improve the speed of merging SST files when restoring data by using a more efficient algorithm [#50613](https://github.com/pingcap/tidb/issues/50613) @[Leavrth](https://github.com/Leavrth)
         - Support creating databases in batch when restoring data [#50767](https://github.com/pingcap/tidb/issues/50767) @[Leavrth](https://github.com/Leavrth)
         - Support ingesting SST files in batch when restoring data [#16267](https://github.com/tikv/tikv/issues/16267) @[3pointer](https://github.com/3pointer)
         - Print the information of the slowest Region that affects global checkpoint advancement in logs and metrics during log backups [#51046](https://github.com/pingcap/tidb/issues/51046) @[YuJuncen](https://github.com/YuJuncen)
@@ -198,10 +198,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 + PD
     <!-- tw:@hfxsd (5) -->
     - Fix the issue that querying resource groups in batch might cause PD to panic [#7206](https://github.com/tikv/pd/issues/7206) @[nolouch](https://github.com/nolouch)
-    - Fix the issue that PD cannot read resource limitation with systemd [#7628](https://github.com/tikv/pd/issues/7628) @[bufferflies](https://github.com/bufferflies)
-    - Fix the issue that jittery PD disk latency might cause PD to fail to select a new leader [#7251](https://github.com/tikv/pd/issues/7251) @[HuSharp](https://github.com/HuSharp)
-    - Fix the issue that a network partition in PD might cause scheduling not to be started immediately after PD leader change [#7016](https://github.com/tikv/pd/issues/7016) @[HuSharp](https://github.com/HuSharp)
-    - Fix the issue that the PD monitor item `learner-peer-count` does not synchronize the old value after a leader switch [#7728](https://github.com/tikv/pd/issues/7728) @[CabinfeverB](https://github.com/CabinfeverB)
+    - Fix the issue that PD cannot read resource limitations when it is started with `systemd` [#7628](https://github.com/tikv/pd/issues/7628) @[bufferflies](https://github.com/bufferflies)
+    - Fix the issue that continuous jitter in PD disk latency might cause PD to fail to select a new leader [#7251](https://github.com/tikv/pd/issues/7251) @[HuSharp](https://github.com/HuSharp)
+    - Fix the issue that a network partition in PD might cause scheduling not to be started immediately [#7016](https://github.com/tikv/pd/issues/7016) @[HuSharp](https://github.com/HuSharp)
+    - Fix the issue that the PD monitoring item `learner-peer-count` does not synchronize the old value after a leader switch [#7728](https://github.com/tikv/pd/issues/7728) @[CabinfeverB](https://github.com/CabinfeverB)
     - (dup): release-7.1.3.md > Bug fixes> PD - Fix the issue that when PD leader is transferred and there is a network partition between the new leader and the PD client, the PD client fails to update the information of the leader [#7416](https://github.com/tikv/pd/issues/7416) @[CabinfeverB](https://github.com/CabinfeverB)
     - (dup): release-7.1.3.md > Bug fixes> PD - Fix some security issues by upgrading the version of Gin Web Framework from v1.8.1 to v1.9.1 [#7438](https://github.com/tikv/pd/issues/7438) @[niubell](https://github.com/niubell)
     - (dup): release-6.5.7.md > Bug fixes> PD - Fix the issue that the orphan peer is deleted when the number of replicas does not meet the requirements [#7584](https://github.com/tikv/pd/issues/7584) @[bufferflies](https://github.com/bufferflies)
@@ -232,9 +232,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     + Backup & Restore (BR)
         <!-- tw:@hfxsd (4) -->
         - Fix the issue that data restore is slowed down due to absence of a leader on a TiKV node [#50566](https://github.com/pingcap/tidb/issues/50566) @[Leavrth](https://github.com/Leavrth)
-        - Fix the issue that a cluster still needs to be empty after the `--filter` option is specified for full recovery [#51009](https://github.com/pingcap/tidb/issues/51009) @[3pointer](https://github.com/3pointer)
-        - Fix the issue that when resuming from a checkpoint after data restore fails, an error "the target cluster is not fresh" occurs [#50232](https://github.com/pingcap/tidb/issues/50232) @[Leavrth](https://github.com/Leavrth)
-        - Fix the issue that removing a log backup task causes TiDB to crash [#50839](https://github.com/pingcap/tidb/issues/50839) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue that full restore still requires the target cluster to be empty after the `--filter` option is specified [#51009](https://github.com/pingcap/tidb/issues/51009) @[3pointer](https://github.com/3pointer)
+        - Fix the issue that when resuming from a checkpoint after data restore fails, an error `the target cluster is not fresh` occurs [#50232](https://github.com/pingcap/tidb/issues/50232) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that stopping a log backup task causes TiDB to crash [#50839](https://github.com/pingcap/tidb/issues/50839) @[YuJuncen](https://github.com/YuJuncen)
         - (dup): release-6.5.8.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that the `Unsupported collation` error is reported when you restore data from backups of an old version [#49466](https://github.com/pingcap/tidb/issues/49466) @[3pointer](https://github.com/3pointer)
         - (dup): release-6.5.7.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that the log backup task can start but does not work properly if failing to connect to PD during task initialization [#16056](https://github.com/tikv/tikv/issues/16056) @[YuJuncen](https://github.com/YuJuncen)
         - (dup): release-7.1.3.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that BR generates incorrect URIs for external storage files [#48452](https://github.com/pingcap/tidb/issues/48452) @[3AceShowHand](https://github.com/3AceShowHand)
