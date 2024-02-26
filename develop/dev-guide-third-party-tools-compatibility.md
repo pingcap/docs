@@ -161,7 +161,7 @@ When using MySQL Connector/J version `8.0.32` and below, if the `useLocalTransac
 >
 > `useConfigs=maxPerformance` includes a group of configurations. To get the detailed configurations in MySQL Connector/J 8.0 and those in MySQL Connector/J 5.1, see [mysql-connector-j 8.0](https://github.com/mysql/mysql-connector-j/blob/release/8.0/src/main/resources/com/mysql/cj/configurations/maxPerformance.properties) and [mysql-connector-j 5.1](https://github.com/mysql/mysql-connector-j/blob/release/5.1/src/com/mysql/jdbc/configs/maxPerformance.properties) respectively. Please disable `useLocalTransactionState` when using `maxPerformance`. That is, use `useConfigs=maxPerformance&useLocalTransactionState=false`.
 
-This bug has been fixed in MySQL Connector/J version `8.0.33`. Please use version `8.0.33` or a higher version. For improved stability and performance, and considering that updates for the `8.0` series have ceased, we strongly recommend upgrading to the latest General Availability (GA) version, which is currently `8.2`.
+This bug has been fixed in MySQL Connector/J version `8.0.33`. Please use version `8.0.33` or a higher version. For improved stability and performance, and considering that updates for the `8.0` series have ceased, we strongly recommend upgrading to the latest General Availability (GA) version, which is currently `8.3`.
 
 ### Connector is incompatible with the server version earlier than 5.7.5
 
