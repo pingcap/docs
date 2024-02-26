@@ -20,6 +20,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 - TiCDC Changefeed 新增以下配置项：
     - [`compression`](/ticdc/ticdc-changefeed-config.md)：你可以设置 redo log 文件的压缩行为 [#10176](https://github.com/pingcap/tiflow/issues/10176) @[sdojjy](https://github.com/sdojjy)
     - [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md)：你可以设置同步数据到对象存储时自动清理历史数据的功能 [#10109](https://github.com/pingcap/tiflow/issues/10109) @[CharlesCheung96](https://github.com/CharlesCheung96)
+    - [`consistent.flush-concurrency`](/ticdc/ticdc-changefeed-config.md)：支持设置 redo log 上传单个文件的并发数 [#10226](https://github.com/pingcap/tiflow/issues/10226) @[sdojjy](https://github.com/sdojjy)
 
 ## Improvements
 
@@ -62,7 +63,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 + Tools
 
     + Backup & Restore (BR)
-        <!-- tw:@hfxsd (1) -->
+        <!-- tw:@hfxsd (4) -->
         - 使用更优的算法, 提升 restore 过程中 sst 文件合并的速度 [#50613](https://github.com/pingcap/tidb/issues/50613) @[Leavrth](https://github.com/Leavrth)
         - 在 restore 过程中批量创建 database [#50767](https://github.com/pingcap/tidb/issues/50767) @[Leavrth](https://github.com/Leavrth)
         - 在 restore 过程中批量 ingest sst 文件 [#16267](https://github.com/tikv/tikv/issues/16267) @[3pointer](https://github.com/3pointer)
@@ -72,9 +73,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
         - (dup): release-7.6.0.md > Improvements> Tools> Backup & Restore (BR) - Refactor the BR exception handling mechanism to increase tolerance for unknown errors [#47656](https://github.com/pingcap/tidb/issues/47656) @[3pointer](https://github.com/3pointer)
 
     + TiCDC
-
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+        <!-- tw:@hfxsd (1) -->
+        - 支持从 TiDB Dashboard 直接搜索 TiCDC 的日志 [#10263](https://github.com/pingcap/tiflow/issues/10263) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - (dup): release-6.5.8.md > Improvements> Tools> TiCDC - Support [querying the downstream synchronization status of a changefeed](https://docs.pingcap.com/tidb/v6.5/ticdc-open-api-v2#query-whether-a-specific-replication-task-is-completed), which helps you determine whether the upstream data changes received by TiCDC have been synchronized to the downstream system completely [#10289](https://github.com/pingcap/tiflow/issues/10289) @[hongyunyan](https://github.com/hongyunyan)
         - (dup): release-7.1.3.md > Improvements> Tools> TiCDC - Improve the performance of TiCDC replicating data to object storage by increasing parallelism [#10098](https://github.com/pingcap/tiflow/issues/10098) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
@@ -107,7 +107,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 ## Bug fixes
 
 + TiDB
-    <!-- tw:@qiancai (8) -->
+    <!-- tw:@qiancai (16) -->
     - 修复设置全局变量 `tidb_service_scope` 后配置失效的问题 [#49245](https://github.com/pingcap/tidb/issues/49245) @[ywqzzy](https://github.com/ywqzzy)
     - 修复开启压缩时，通讯协议无法处理大于等于 16M 的报文 [#47157](https://github.com/pingcap/tidb/issues/47157) [#47161](https://github.com/pingcap/tidb/issues/47161) @[dveeden](https://github.com/dveeden)
     - 修复 `approx_percentile` 函数可能导致 TiDB panic 的问题 [#40463](https://github.com/pingcap/tidb/issues/40463) @[xzhangxian1008](https://github.com/xzhangxian1008)
@@ -116,6 +116,20 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - 修复 bit 类型在参与一些函数计算时可能会因为 decode 失败导致 query 出错的问题 [#49566](https://github.com/pingcap/tidb/issues/49566), [#50850](https://github.com/pingcap/tidb/issues/50850), [#50855](https://github.com/pingcap/tidb/issues/50855) @[jiyfhust](https://github.com/jiyfhust)
     - 修复 CTE query 内存超限时可能会导致 goroutine 泄露的问题 [#50337](https://github.com/pingcap/tidb/issues/50337) @[guo-shaoge](https://github.com/guo-shaoge)
     - 修复在 TiFlash 延迟物化在有关联列时结果可能出错的问题 [#49241](https://github.com/pingcap/tidb/issues/49241), [#51204](https://github.com/pingcap/tidb/issues/51204) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    - 修复 TiDB 记录历史统计信息时，后台工作线程可能 panic 的问题 [#49076](https://github.com/pingcap/tidb/issues/49076) @[hawkingrei](https://github.com/hawkingrei)
+    - 修复 TiDB 合并分区表全局统计信息的直方图时可能遇到错误失败的问题 [#49023](https://github.com/pingcap/tidb/issues/49023) @[hawkingrei](https://github.com/hawkingrei)
+    - 修复 TiDB 记录历史统计信息时，stats_meta 表的历史信息可能没有被记录的问题 [#49334](https://github.com/pingcap/tidb/issues/49334) @[hi-rustin](https://github.com/hi-rustin)
+    - 修复 Multi Value Index 被错误的选为 Index Join 的被驱动的表的问题 [#50382](https://github.com/pingcap/tidb/issues/50382) @[AilinKid](https://github.com/AilinKid)
+    - 修复 Multi Value Index 无法使用 hint USE_INDEX_MERGE 选中的问题 [#50553](https://github.com/pingcap/tidb/issues/50553) @[AilinKid](https://github.com/AilinKid)
+    - 修复用户访问系统表 `information_schema.analyze_status` 可能报错失败的问题 [#48835](https://github.com/pingcap/tidb/issues/48835) @[hi-rustin](https://github.com/hi-rustin)
+    - 修复 TiDB 错误的消除 Group-by 中的常量值导致结果出错的问题  [#38756](https://github.com/pingcap/tidb/issues/38756) @[hi-rustin](https://github.com/hi-rustin)
+    - 修复 analyze 统计 processed_rows 时可能超过表本身大小的问题 [#50632](https://github.com/pingcap/tidb/issues/50632) @[hawkingrei](https://github.com/hawkingrei)
+    <!-- tw:@Oreoxmt (5) -->
+    - 修复开启 tidb_enable_prepared_plan_cache 之后再关闭，使用 EXECUTE 命令执行以后的 PREPARE STMT 时可能 panic 的问题 [#49344](https://github.com/pingcap/tidb/issues/49344) @[qw4990](https://github.com/qw4990)
+    - 修复使用 NATURAL JOIN 时可能报错 "Column xxx in from clause is ambiguous" 的问题 [#32044](https://github.com/pingcap/tidb/issues/32044) @[AilinKid](https://github.com/AilinKid)
+    - 修复当 JSON 数组为空数组时，使用 Multi Value Index 访问可能得到错误结果的问题 [#50125](https://github.com/pingcap/tidb/issues/50125) @[YangKeao](https://github.com/YangKeao)
+    - 修复使用聚合函数分组计算时，可能报错 "Can't find column xxx" 的问题 [#50926](https://github.com/pingcap/tidb/issues/50926) @[qw4990](https://github.com/qw4990)
+    - 修复使用 SET_VAR 控制字符串类型的变量会失效的问题 [#50507](https://github.com/pingcap/tidb/issues/50507) @[qw4990](https://github.com/qw4990)
     - (dup): release-6.5.7.md > Bug fixes> TiDB - Fix the issue that high CPU usage of TiDB occurs due to long-term memory pressure caused by `tidb_server_memory_limit` [#48741](https://github.com/pingcap/tidb/issues/48741) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - (dup): release-6.5.7.md > Bug fixes> TiDB - Fix the issue that the completion times of two DDL tasks with dependencies are incorrectly sequenced [#49498](https://github.com/pingcap/tidb/issues/49498) @[tangenta](https://github.com/tangenta)
     - (dup): release-7.6.0.md > Bug fixes> TiDB - Fix the issue that illegal optimizer hints might cause valid hints to be ineffective [#49308](https://github.com/pingcap/tidb/issues/49308) @[hawkingrei](https://github.com/hawkingrei)
@@ -168,7 +182,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 
 + TiKV
     <!-- tw:@hfxsd (1) -->
-    - 修复开启 checksum 可能导致 TiKV panic 的问题 [#16371](https://github.com/tikv/tikv/issues/16371) @[cfzjywxk](github.com/cfzjywxk)
+    - 修复开启 checksum 可能导致 TiKV panic 的问题 [#16371](https://github.com/tikv/tikv/issues/16371) @[cfzjywxk](https://github.com/cfzjywxk)
     - (dup): release-6.5.8.md > Bug fixes> TiKV - Fix the issue that TiKV might panic when gRPC threads are checking `is_shutdown` [#16236](https://github.com/tikv/tikv/issues/16236) @[pingyu](https://github.com/pingyu)
     - (dup): release-6.5.8.md > Bug fixes> TiKV - Fix the issue that TiKV converts the time zone incorrectly for Brazil and Egypt [#16220](https://github.com/tikv/tikv/issues/16220) @[overvenus](https://github.com/overvenus)
     - (dup): release-7.1.3.md > Bug fixes> TiKV - Fix the issue that `blob-run-mode` in Titan cannot be updated online [#15978](https://github.com/tikv/tikv/issues/15978) @[tonyxuqqi](https://github.com/tonyxuqqi)
@@ -182,9 +196,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - (dup): release-7.6.0.md > Bug fixes> TiKV - Fix the issue that `cast_duration_as_time` might return incorrect results [#16211](https://github.com/tikv/tikv/issues/16211) @[gengliqi](https://github.com/gengliqi)
 
 + PD
-
-    - note [#issue](https://github.com/tikv/pd/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-    - note [#issue](https://github.com/tikv/pd/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+    <!-- tw:@hfxsd (5) -->
+    - 修复批量查询 Resource Group 可能会导致 PD Panic 的问题 [#7206](https://github.com/tikv/pd/issues/7206) @[nolouch](https://github.com/nolouch)
+    - 修复 PD 在 Systemd 下不能读取 Resource Limitation 的问题 [#7628](https://github.com/tikv/pd/issues/7628) @[bufferflies](https://github.com/bufferflies)
+    - 修复 PD 磁盘时延持续抖动可能导致 PD 选不出新的 Leader 的问题 [#7251](https://github.com/tikv/pd/issues/7251) @[HuSharp](https://github.com/HuSharp)
+    - 修复 PD 存在网络分区时可能导致调度不能立刻触发的问题 [#7016](https://github.com/tikv/pd/issues/7016) @[HuSharp](https://github.com/HuSharp)
+    - 修复 PD 监控项 learner-peer-count 在发生 Leader 切换后未同步旧监控值的问题 [#7728](https://github.com/tikv/pd/issues/7728) @[CabinfeverB](https://github.com/CabinfeverB)
     - (dup): release-7.1.3.md > Bug fixes> PD - Fix the issue that when PD leader is transferred and there is a network partition between the new leader and the PD client, the PD client fails to update the information of the leader [#7416](https://github.com/tikv/pd/issues/7416) @[CabinfeverB](https://github.com/CabinfeverB)
     - (dup): release-7.1.3.md > Bug fixes> PD - Fix some security issues by upgrading the version of Gin Web Framework from v1.8.1 to v1.9.1 [#7438](https://github.com/tikv/pd/issues/7438) @[niubell](https://github.com/niubell)
     - (dup): release-6.5.7.md > Bug fixes> PD - Fix the issue that the orphan peer is deleted when the number of replicas does not meet the requirements [#7584](https://github.com/tikv/pd/issues/7584) @[bufferflies](https://github.com/bufferflies)
@@ -225,9 +242,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
         - (dup): release-6.5.8.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that BR cannot retry when encountering an error while reading file content from S3 [#49942](https://github.com/pingcap/tidb/issues/49942) @[Leavrth](https://github.com/Leavrth)
 
     + TiCDC
-
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+        <!-- tw:@Oreoxmt (4) -->
+        - 修复了开启了 sync-point 情况下 sink 模块遇到错误后不能正确重启的问题 [#10091](https://github.com/pingcap/tiflow/issues/10091) @[hicqu](https://github.com/hicqu)
+        - 修复了使用 storage sink 情况下在存储服务生成的文件的序号可能会回退的问题 [#10352](https://github.com/pingcap/tiflow/issues/10352) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - 修复了 sync-point 表可能被错误的同步的问题 [#10576](https://github.com/pingcap/tiflow/issues/10576) @[asddongmen](https://github.com/asddongmen)
+        - 修复了当使用 Apache Pulsar 作为下游时不能正常启用 OAuth2.0、TLS 和 mTLS 的问题 [#10602](https://github.com/pingcap/tiflow/issues/10602) @[asddongmen](https://github.com/asddongmen)
         - (dup): release-6.5.8.md > Bug fixes> Tools> TiCDC - Fix the issue that TiCDC returns the `ErrChangeFeedAlreadyExists` error when concurrently creating multiple changefeeds [#10430](https://github.com/pingcap/tiflow/issues/10430) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - (dup): release-6.5.8.md > Bug fixes> Tools> TiCDC - Fix the issue that the changefeed `resolved ts` does not advance in extreme cases [#10157](https://github.com/pingcap/tiflow/issues/10157) @[sdojjy](https://github.com/sdojjy)
         - (dup): release-7.1.3.md > Bug fixes> Tools> TiCDC - Fix the issue that TiCDC mistakenly closes the connection with TiKV in certain special scenarios [#10239](https://github.com/pingcap/tiflow/issues/10239) @[hicqu](https://github.com/hicqu)
