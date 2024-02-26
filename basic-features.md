@@ -164,6 +164,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 
 ## Statistics
 
+<<<<<<< HEAD
 | Statistics | 7.5 | 7.1 | 6.5 | 6.1 | 6.0 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [CMSketch](/statistics.md) | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Y | Y | Y |
@@ -179,6 +180,23 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Lock statistics](/statistics.md#lock-statistics) | E | E | E | N | N | N | N | N | N | N |
 | [Lightweight statistics initialization](/statistics.md#load-statistics) | Y | E | N | N | N | N | N | N | N | N |
 | [Show the progress of collecting statistics](/sql-statements/sql-statement-show-analyze-status.md) | Y | N | N | N | N | N | N | N | N | N |
+=======
+| Statistics | 7.6 | 7.5 | 7.1 | 6.5 | 6.1 | 6.0 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| [CMSketch](/statistics.md) | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Y | Y | Y |
+| [Histograms](/statistics.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Extended statistics](/extended-statistics.md) | E | E | E | E | E | E | E | E | E | E | E |
+| Statistics feedback | N | N | N | N | Deprecated | Deprecated | Deprecated | E | E | E | E |
+| [Automatically update statistics](/statistics.md#automatic-update) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Fast Analyze](/system-variables.md#tidb_enable_fast_analyze) | Deprecated | Deprecated | E | E | E | E | E | E | E | E | E |
+| [Dynamic pruning](/partitioned-table.md#dynamic-pruning-mode) | Y | Y | Y | Y | Y | E | E | E | E | E | N |
+| [Collect statistics for `PREDICATE COLUMNS`](/statistics.md#collect-statistics-on-some-columns) | E | E | E | E | E | E | E | N | N | N | N |
+| [Control the memory quota for collecting statistics](/statistics.md#the-memory-quota-for-collecting-statistics) | E | E | E | E | E | N | N | N | N | N | N |
+| [Randomly sample about 10000 rows of data to quickly build statistics](/system-variables.md#tidb_enable_fast_analyze) | Deprecated | Deprecated | E | E | E | E | E | E | E | E | E |
+| [Lock statistics](/statistics.md#lock-statistics) | Y | Y | E | E | N | N | N | N | N | N | N |
+| [Lightweight statistics initialization](/statistics.md#load-statistics) | Y | Y | E | N | N | N | N | N | N | N | N |
+| [Show the progress of collecting statistics](/sql-statements/sql-statement-show-analyze-status.md) | Y | Y | N | N | N | N | N | N | N | N | N |
+>>>>>>> 9786bd2455 (tidb: remove experimental warnings for stats lock (#16593))
 
 ## Security
 
