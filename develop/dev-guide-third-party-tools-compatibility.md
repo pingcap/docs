@@ -168,7 +168,7 @@ This bug has been fixed in MySQL Connector/J 8.0.33. Considering updates for the
 
 **Description**
 
-The database connection might hang under certain conditions when using MySQL Connector/J 8.0.31 an earlier version with a MySQL server < 5.7.5 or a database using the MySQL server < 5.7.5 protocol (such as TiDB earlier than v6.3.0). For more details, see the [Bug Report](https://bugs.mysql.com/bug.php?id=106252).
+The database connection might hang under certain conditions when using MySQL Connector/J 8.0.31 or an earlier version with a MySQL server < 5.7.5 or a database using the MySQL server < 5.7.5 protocol (such as TiDB earlier than v6.3.0). For more details, see the [Bug Report](https://bugs.mysql.com/bug.php?id=106252).
 
 **Way to avoid**
 
