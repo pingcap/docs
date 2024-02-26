@@ -1400,7 +1400,7 @@ Example:
 SELECT upper('bigdata') AS result_upper, upper('null') AS result_null;
 ```
 
-Result:
+Output:
 
 ```sql
 +--------------+-------------+
@@ -1424,7 +1424,7 @@ Example:
 SELECT UNHEX('54694442');
 ```
 
-Result:
+Output:
 
 ```sql
 +--------------------------------------+
