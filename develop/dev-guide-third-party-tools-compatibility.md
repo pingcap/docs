@@ -154,25 +154,25 @@ To ensure data consistency by transaction, you can use `UPDATE` statements to up
 
 **Description**
 
-When using MySQL Connector/J version `8.0.32` and below, if the `useLocalTransactionState` and `rewriteBatchedStatements` parameters are set to `true` at the same time, the transaction might fail to commit. You can reproduce with [this code](https://github.com/Icemap/tidb-java-gitpod/tree/reproduction-local-transaction-state-txn-error).
+When using MySQL Connector/J 8.0.32 or an earlier version, if the `useLocalTransactionState` and `rewriteBatchedStatements` parameters are set to `true` at the same time, the transaction might fail to commit. You can reproduce with [this code](https://github.com/Icemap/tidb-java-gitpod/tree/reproduction-local-transaction-state-txn-error).
 
 **Way to avoid**
 
 > **Note:**
 >
-> `useConfigs=maxPerformance` includes a group of configurations. To get the detailed configurations in MySQL Connector/J 8.0 and those in MySQL Connector/J 5.1, see [mysql-connector-j 8.0](https://github.com/mysql/mysql-connector-j/blob/release/8.0/src/main/resources/com/mysql/cj/configurations/maxPerformance.properties) and [mysql-connector-j 5.1](https://github.com/mysql/mysql-connector-j/blob/release/5.1/src/com/mysql/jdbc/configs/maxPerformance.properties) respectively. Please disable `useLocalTransactionState` when using `maxPerformance`. That is, use `useConfigs=maxPerformance&useLocalTransactionState=false`.
+> `useConfigs=maxPerformance` includes a group of configurations. For detailed configurations in MySQL Connector/J 8.0 and MySQL Connector/J 5.1, see [mysql-connector-j 8.0](https://github.com/mysql/mysql-connector-j/blob/release/8.0/src/main/resources/com/mysql/cj/configurations/maxPerformance.properties) and [mysql-connector-j 5.1](https://github.com/mysql/mysql-connector-j/blob/release/5.1/src/com/mysql/jdbc/configs/maxPerformance.properties) respectively. You need to disable `useLocalTransactionState` when using `maxPerformance`. That is, use `useConfigs=maxPerformance&useLocalTransactionState=false`.
 
-This bug has been fixed in MySQL Connector/J version `8.0.33`. Please use version `8.0.33` or a higher version. For improved stability and performance, and considering that updates for the `8.0` series have ceased, we strongly recommend upgrading to the latest General Availability (GA) version, which is currently `8.3`.
+This bug has been fixed in MySQL Connector/J 8.0.33. Considering updates for the 8.0.x series have ceased, it is strongly recommended to upgrade your MySQL Connector/J to the latest General Availability (GA) version (currently 8.3) for improved stability and performance.
 
 ### Connector is incompatible with the server version earlier than 5.7.5
 
 **Description**
 
-The database connection might hang under certain conditions when using MySQL Connector/J `8.0.31` and below with a MySQL server < 5.7.5 or a database using the MySQL server < 5.7.5 protocol (such as TiDB earlier than v6.3.0). For more details, see the [Bug Report](https://bugs.mysql.com/bug.php?id=106252).
+The database connection might hang under certain conditions when using MySQL Connector/J 8.0.31 an earlier version with a MySQL server < 5.7.5 or a database using the MySQL server < 5.7.5 protocol (such as TiDB earlier than v6.3.0). For more details, see the [Bug Report](https://bugs.mysql.com/bug.php?id=106252).
 
 **Way to avoid**
 
-This bug has been fixed in MySQL Connector/J version `8.0.32`. Please use version `8.0.32` or a higher version. For improved stability and performance, and considering that updates for the `8.0` series have ceased, we strongly recommend upgrading to the latest General Availability (GA) version, which is currently `8.3`.
+This bug has been fixed in MySQL Connector/J 8.0.32. Considering updates for the 8.0.x series have ceased, it is strongly recommended to upgrade your MySQL Connector/J to the latest General Availability (GA) version (currently 8.3) for improved stability and performance.
 
 TiDB also fixes it in the following ways:
 
