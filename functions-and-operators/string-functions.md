@@ -1382,7 +1382,7 @@ The `UPPER()` function is used to convert a string to uppercase letters. This fu
 
 > **Note:**
 >
-> When the string is `NULL`, the `UPPER()` function returns `NULL`.
+> When the string is null, the `UPPER()` function returns `NULL`.
 
 Example:
 
