@@ -158,7 +158,7 @@ If your change fits one of the following situations, **CHOOSE THE AFFECTED RELEA
 
 Currently, the [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud/) is in English only and it is stored in the `release-7.5` branch of [pingcap/docs](https://github.com/pingcap/docs) for reusing the SQL documentation of TiDB. Hence, to create a pull request for TiDB Cloud documentation, make sure that your PR is based on the [release-7.5](https://github.com/pingcap/docs/tree/release-7.5) branch.
 
-If you are editing a document that is provided by both TiDB and TiDB Cloud documentation, you might notice there are some `CustomContent` tags in the document. These `CustomContent` tags are used to show the dedicated content for TiDB or TiDB Cloud.
+If you are editing a document that is provided by both TiDB and TiDB Cloud documentation, you might notice there are some `CustomContent` tags in the document. These `CustomContent` tags are used to show the dedicated content of TiDB or TiDB Cloud.
 
 For example:
 
@@ -194,7 +194,7 @@ In the example:
 - `<CustomContent platform="tidb-cloud">` means that the content in this tag is only applicable to TiDB Cloud and will not be dispalyed on the [TiDB documentation](https://docs.pingcap.com/tidb/stable) website.
 - Lines that are not wrapped by `<CustomContent>` tag are applicable to both TiDB and TiDB Cloud and will be displayed on both documentation websites.
 
-## Guideline for previwing EBNF diagrams
+## Guideline for previewing EBNF diagrams
 
 [TiDB Docs at the PingCAP website](https://docs.pingcap.com/tidb/stable) provide a lot of SQL synopsis diagrams to help users understand the SQL syntax. For example, you can find the synopsis diagrams of `ALTER INDEX` statement [here](https://docs.pingcap.com/tidb/stable/sql-statement-alter-index#synopsis).
 
