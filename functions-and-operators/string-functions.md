@@ -1416,7 +1416,7 @@ The `UNHEX()` function performs the reverse operation of the `HEX()` function. I
 
 > **Note:**
 >
-> The argument string must be a valid hexadecimal value that contains `0`~`9`, `A`~`F`, `a`~`f`. If the argument string is `NULL` or falls outside this range, it returns `NULL`.
+> The argument must be a valid hexadecimal value that contains `0`~`9`, `A`~`F`, or `a`~`f`. If the argument is `NULL` or falls outside this range, the function returns `NULL`.
 
 Example:
 
