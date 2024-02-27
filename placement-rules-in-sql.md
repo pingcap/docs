@@ -232,7 +232,7 @@ You can configure `CONSTRAINTS`, `FOLLOWER_CONSTRAINTS`, and `LEARNER_CONSTRAINT
 | CONSTRAINTS format | Description |
 |----------------------------|-----------------------------------------------------------------------------------------------------------|
 | List format  | If a constraint to be specified applies to all replicas, you can use a key-value list format. Each key starts with `+` or `-`. For example: <br/><ul><li>`[+region=us-east-1]` means placing data on nodes  that have a `region` label as `us-east-1`.</li><li>`[+region=us-east-1,-type=fault]` means placing data on nodes that have a `region` label as `us-east-1` but do not have a `type` label as `fault`.</li></ul><br/>  |
-| Dictionary format | If you need to specify different numbers of replicas for different constraints, you can use the dictionary format. For example: <br/><ul><li>`FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1}";` means placing one Follower in `us-east-1`, one Follower in `us-east-2`, and one Follower in `us-west-1`.</li><li>`FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+type=scale-node": 1,"+region=us-west-1": 1}';` means placing one Follower on a node that is located in the `us-east-1` region and has the `type` label as `scale-node`, and one Follower in `us-west-1`.</li></ul>The dictionary format supports each key starting with `+` or `-` and allows you to configure the special `#reject-leader` attribute. For example, `FOLLOWER_CONSTRAINTS='{"+region=us-east-1":1, "+region=us-east-2": 2, "+region=us-west-1,#reject-leader": 1}'` means that the Leaders elected in `us-west-1` will be evicted as much as possible during disaster recovery.|
+| Dictionary format | If you need to specify different numbers of replicas for different constraints, you can use the dictionary format. For example: <br/><ul><li>`FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1}";` means placing one Follower in `us-east-1`, one Follower in `us-east-2`, and one Follower in `us-west-1`.</li><li>`FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+type=scale-node": 1,"+region=us-west-1": 1}';` means placing one Follower on a node that is located in the `us-east-1` region and has the `type` label as `scale-node`, and one Follower in `us-west-1`.</li></ul>The dictionary format supports each key starting with `+` or `-` and allows you to configure the special `#evict-leader` attribute. For example, `FOLLOWER_CONSTRAINTS='{"+region=us-east-1":1, "+region=us-east-2": 2, "+region=us-west-1,#evict-leader": 1}'` means that the Leaders elected in `us-west-1` will be evicted as much as possible during disaster recovery.|
 
 > **Note:**
 >
@@ -413,10 +413,10 @@ CREATE PLACEMENT POLICY deploy221_primary_east1 LEADER_CONSTRAINTS="[+region=us-
 
 After this placement policy is created and attached to the desired data, the Raft Leader replicas of the data will be placed in the `us-east-1` region specified by the `LEADER_CONSTRAINTS` option, while other replicas of the data will be placed in regions specified by the `FOLLOWER_CONSTRAINTS` option. Note that if the cluster fails, such as a node outage in the `us-east-1` region, a new Leader will still be elected from other regions, even if these regions are specified in `FOLLOWER_CONSTRAINTS`. In other words, ensuring service availability takes the highest priority.
 
-In the event of a failure in the `us-east-1` region, if you do not want to place new Leaders in `us-west-1`, you can configure a special `reject-leader` attribute to evict the newly elected Leaders in that region:
+In the event of a failure in the `us-east-1` region, if you do not want to place new Leaders in `us-west-1`, you can configure a special `evict-leader` attribute to evict the newly elected Leaders in that region:
 
 ```sql
-CREATE PLACEMENT POLICY deploy221_primary_east1 LEADER_CONSTRAINTS="[+region=us-east-1]" FOLLOWER_CONSTRAINTS='{"+region=us-east-1": 1, "+region=us-east-2": 2, "+region=us-west-1,#reject-leader": 1}';
+CREATE PLACEMENT POLICY deploy221_primary_east1 LEADER_CONSTRAINTS="[+region=us-east-1]" FOLLOWER_CONSTRAINTS='{"+region=us-east-1": 1, "+region=us-east-2": 2, "+region=us-west-1,#evict-leader": 1}';
 ```
 
 #### Use `PRIMARY_REGION`
