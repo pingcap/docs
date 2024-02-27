@@ -4,14 +4,7 @@ Welcome to [TiDB](https://github.com/pingcap/tidb) documentation! We are excited
 
 ## What you can contribute
 
-🚀 To provide you with better TiDB documentation, we sincerely invite you to participate in the [2024 TiDB Docs Dash](https://www.pingcap.com/event/tidb-docs-dash/). In this event, you'll have a chance to work with other members of the community while making a meaningful impact on [TiDB documentation](https://docs.pingcap.com/tidb/stable/) and [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud/).
-
-- **Dates/Time:** January 9 at 08:00 UTC ([your local time](https://www.timeanddate.com/worldclock/fixedtime.html?msg=TiDB+Docs+Dash+2024%3A+Start&iso=20240109T08&p1=1440))  – January 12 at 07:59 UTC ([your local time](https://www.timeanddate.com/worldclock/fixedtime.html?msg=TiDB+Docs+Dash+2024%3A+End&iso=20240112T0759&p1=1440))
-- **Event details**: <https://www.pingcap.com/event/tidb-docs-dash/>
-- **Issue list**: <https://github.com/orgs/pingcap/projects/51/views/3>
-- **Participation introduction**: <https://github.com/pingcap/docs/issues/15479>
-
-In addition to the issues and tasks in the event, you can also start from any one of the following items to help improve [TiDB Docs at the PingCAP website](https://docs.pingcap.com/tidb/stable):
+You can start from any one of the following items to help improve [TiDB Docs at the PingCAP website](https://docs.pingcap.com/tidb/stable):
 
 - Fix typos or format (punctuation, space, indentation, code block, etc.)
 - Fix or update inappropriate or outdated descriptions
@@ -160,6 +153,12 @@ If your change fits one of the following situations, **CHOOSE THE AFFECTED RELEA
 - Involves a compatibility change, including changing the default value of a configuration item or a system variable.
 - Fixes format to resolve a display error
 - Fixes broken links
+
+## Guideline for previwing EBNF diagrams
+
+[TiDB Docs at the PingCAP website](https://docs.pingcap.com/tidb/stable) provide a lot of SQL synopsis diagrams to help users understand the SQL syntax. For example, you can find the synopsis diagrams of `ALTER INDEX` statement [here](https://docs.pingcap.com/tidb/stable/sql-statement-alter-index#synopsis).
+
+The source of these synopsis diagrams is written using [extended Backus–Naur form (EBNF)](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form). When preparing the EBNF code for a SQL statement, you can easily preview the EBNF diagram by copying the code to <https://kennytm.github.io/website-docs/dist/> and clicking **Render**.
 
 ## Contact
 
