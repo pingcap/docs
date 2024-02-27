@@ -49,11 +49,11 @@ To enable secure connections with your own certificates in the TiDB server, you 
 
 All the files specified by the parameters are in PEM (Privacy Enhanced Mail) format. Currently, TiDB does not support the import of a password-protected private key, so it is required to provide a private key file without a password. If the certificate or private key is invalid, the TiDB server starts as usual, but the client cannot connect to the TiDB server through a TLS connection.
 
-If the certificate parameters are correct, TiDB outputs `mysql protocol server secure connection is enabled` to the logs on "INFO" level when started.
+If the certificate parameters are correct, TiDB outputs `mysql protocol server secure connection is enabled` to the logs on `"INFO"` level when started.
 
 ## Configure the MySQL client to use TLS connections
 
-The client of MySQL 5.7 or later versions attempts to establish a TLS connection by default. If the server does not support encrypted connections, it automatically returns to unencrypted connections. The client of MySQL earlier than version 5.7 uses the non-TLS connections by default.
+The client of MySQL 5.7 or later versions attempts to establish a TLS connection by default. If the server does not support TLS connections, it automatically returns to unencrypted connections. The client of MySQL earlier than version 5.7 uses the non-TLS connections by default.
 
 You can change the connection behavior of the client using the following `--ssl-mode` parameters:
 
@@ -126,7 +126,7 @@ For the official MySQL client, you can also use the `STATUS` or `\s` statement t
 ```
 mysql> \s
 ...
-SSL:            Cipher in use is TLS_AES_128_GCM_SHA256
+SSL: Cipher in use is TLS_AES_128_GCM_SHA256
 ...
 ```
 
@@ -143,7 +143,7 @@ The crypto policy for your operating system and the client library you are using
 - TLSv1.2
 - TLSv1.3
 
-The [`tls-version`](/tidb-configuration-file.md#tls-version) configuration option can be used to limit the TLS versions that can be used.
+You can use the [`tls-version`](/tidb-configuration-file.md#tls-version) configuration option to limit the TLS versions that can be used.
 
 The actual TLS versions that can be used depend on the OS crypto policy, MySQL client version and the SSL/TLS library that is used by the client.
 
