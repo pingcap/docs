@@ -1387,7 +1387,7 @@ The `UPPER()` function is used to convert a string to uppercase letters. This fu
 Example:
 
 ```sql
-SELECT upper('bigdata') AS result_upper, upper('null') AS result_null;
+SELECT UPPER('bigdata') AS result_upper, UPPER(null) AS result_null;
 ```
 
 Output:
@@ -1408,13 +1408,13 @@ The `WEIGHT_STRING()` function returns the weight string (binary characters) for
 WEIGHT_STRING(str [AS {CHAR|BINARY}(N)])
 ```
 
-- `str`: the input string expression. If it is a non-binary string, such as a `CHAR`, `VARCHAR`, or `TEXT` value, the return value contains the collation weights for the string. If it is a binary string, such as `BINARY`, `VARBINARY`, or `BLOB` values, the return value is the same as the input.
+- `str`: the input string expression. If it is a non-binary string, such as a `CHAR`, `VARCHAR`, or `TEXT` value, the return value contains the collation weights for the string. If it is a binary string, such as a `BINARY`, `VARBINARY`, or `BLOB` value, the return value is the same as the input.
 
-- `AS {CHAR|BINARY}(N)`: optional parameters used to specify the type and length of the output result. `CHAR` represents the character data type, and `BINARY` represents the binary data type. `N` specifies the output length, which is an integer greater than or equal to 1.
+- `AS {CHAR|BINARY}(N)`: optional parameters used to specify the type and length of the output. `CHAR` represents the character data type, and `BINARY` represents the binary data type. `N` specifies the output length, which is an integer greater than or equal to 1.
 
 > **Note:**
 >
-> When `N` is less than the string length, the string will be truncated. When `N` exceeds the string length, `AS CHAR(N)` pads it with spaces to the specified length, and `AS BINARY(N)` pads it with `0x00` to the specified length.
+> If `N` is less than the string length, the string is truncated. If `N` exceeds the string length, `AS CHAR(N)` pads the string with spaces to the specified length, and `AS BINARY(N)` pads the string with `0x00` to the specified length.
 
 Example:
 
