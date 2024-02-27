@@ -156,9 +156,16 @@ If your change fits one of the following situations, **CHOOSE THE AFFECTED RELEA
 
 ## Guideline for contributing to TiDB Cloud docs
 
-Currently, the [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud/) is in English only and it is stored in the `release-7.5` branch of [pingcap/docs](https://github.com/pingcap/docs) for reusing the SQL documentation of TiDB. Hence, to create a pull request for TiDB Cloud documentation, make sure that your PR is based on the [release-7.5](https://github.com/pingcap/docs/tree/release-7.5) branch.
+Currently, the [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud/) is in English only, and it is stored in the `release-7.5` branch of [pingcap/docs](https://github.com/pingcap/docs) for reusing SQL documents and development documents of TiDB v7.5. Hence, to create a pull request for TiDB Cloud documentation, make sure that your PR is based on the [release-7.5](https://github.com/pingcap/docs/tree/release-7.5) branch.
 
-If you are editing a document that is provided by both TiDB and TiDB Cloud documentation, you might notice there are some `CustomContent` tags in the document. These `CustomContent` tags are used to show the dedicated content of TiDB or TiDB Cloud.
+> **Tip::**
+>
+> To learn which TiDB document is reused by TiDB Cloud, check the [TOC file of TiDB Cloud documentation](https://github.com/pingcap/docs/blob/release-7.5/TOC-tidb-cloud.md?plain=1).
+>
+> - If the path of a document in this file starts with `/tidb-cloud/`, it means that this document is only for TiDB Cloud.
+> - If the path of a document in this file does not start with `/tidb-cloud/`, it means that this TiDB document is reused by TiDB Cloud.
+
+If you are editing a document reused by TiDB Cloud, you might notice there are some `CustomContent` tags in the document. These `CustomContent` tags are used to show the dedicated content of TiDB or TiDB Cloud.
 
 For example:
 
@@ -190,8 +197,8 @@ For example:
 
 In the example:
 
-- `<CustomContent platform="tidb">` means that the content in this tag is only applicable to TiDB and will not be dispalyed on the [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud/) website.
-- `<CustomContent platform="tidb-cloud">` means that the content in this tag is only applicable to TiDB Cloud and will not be dispalyed on the [TiDB documentation](https://docs.pingcap.com/tidb/stable) website.
+- `<CustomContent platform="tidb">` means that the content in this tag is only applicable to TiDB and will not be displayed on the [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud/) website.
+- `<CustomContent platform="tidb-cloud">` means that the content in this tag is only applicable to TiDB Cloud and will not be displayed on the [TiDB documentation](https://docs.pingcap.com/tidb/stable) website.
 - Lines that are not wrapped by `<CustomContent>` tag are applicable to both TiDB and TiDB Cloud and will be displayed on both documentation websites.
 
 ## Guideline for previewing EBNF diagrams
