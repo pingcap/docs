@@ -154,7 +154,7 @@ If your change fits one of the following situations, **CHOOSE THE AFFECTED RELEA
 - Fixes format to resolve a display error
 - Fixes broken links
 
-## Guideline for contributing to TiDB Cloud docs
+## Guideline for contributing to TiDB Cloud documentation
 
 Currently, the [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud/) is available only in English, and it is stored in the `release-7.5` branch of [pingcap/docs](https://github.com/pingcap/docs) for reusing SQL documents and development documents of TiDB v7.5. Hence, to create a pull request for TiDB Cloud documentation, make sure that your PR is based on the [release-7.5](https://github.com/pingcap/docs/tree/release-7.5) branch.
 
