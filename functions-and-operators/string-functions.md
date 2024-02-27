@@ -1397,7 +1397,7 @@ The `UCASE()` function is used to convert a string to uppercase letters. This fu
 Example:
 
 ```sql
-SELECT upper('bigdata') AS result_upper, upper('null') AS result_null;
+SELECT UCASE('bigdata') AS result_upper, UCASE('null') AS result_null;
 ```
 
 Output:
