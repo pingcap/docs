@@ -154,6 +154,46 @@ If your change fits one of the following situations, **CHOOSE THE AFFECTED RELEA
 - Fixes format to resolve a display error
 - Fixes broken links
 
+## Guideline for contributing to TiDB Cloud docs
+
+Currently, the [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud/) is in English only and it is stored in the `release-7.5` branch of [pingcap/docs](https://github.com/pingcap/docs) for reusing the SQL documentation of TiDB. Hence, to create a pull request for TiDB Cloud documentation, make sure that your PR is based on the [release-7.5](https://github.com/pingcap/docs/tree/release-7.5) branch.
+
+If you are editing a document that is provided by both TiDB and TiDB Cloud documentation, you might notice there are some `CustomContent` tags in the document. These `CustomContent` tags are used to show the dedicated content for TiDB or TiDB Cloud.
+
+For example:
+
+```Markdown
+## Restrictions
+
+<CustomContent platform="tidb">
+
+* The TiDB memory limit on the `INSERT INTO SELECT` statement can be adjusted using the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query). Starting from v6.5.0, it is not recommended to use [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) to control transaction memory size.
+
+    For more information, see [TiDB memory control](/configure-memory-usage.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+* The TiDB memory limit on the `INSERT INTO SELECT` statement can be adjusted using the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query). Starting from v6.5.0, it is not recommended to use [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) to control transaction memory size.
+
+    For more information, see [TiDB memory control](https://docs.pingcap.com/tidb/stable/configure-memory-usage).
+
+</CustomContent>
+
+* TiDB has no hard limit on the concurrency of the `INSERT INTO SELECT` statement, but it is recommended to consider the following practices:
+
+    * When a "write transaction" is large, such as close to 1 GiB, it is recommended to control concurrency to no more than 10.
+    * When a "write transaction" is small, such as less than 100 MiB, it is recommended to control concurrency to no more than 30.
+    * Determine the concurrency based on testing results and specific circumstances.
+```
+
+In the example:
+
+- `<CustomContent platform="tidb">` means that the content in this tag is only applicable to TiDB and will not be dispalyed on the [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud/) website.
+- `<CustomContent platform="tidb-cloud">` means that the content in this tag is only applicable to TiDB Cloud and will not be dispalyed on the [TiDB documentation](https://docs.pingcap.com/tidb/stable) website.
+- Lines that are not wrapped by `<CustomContent>` tag are applicable to both TiDB and TiDB Cloud and will be displayed on both documentation websites.
+
 ## Guideline for previwing EBNF diagrams
 
 [TiDB Docs at the PingCAP website](https://docs.pingcap.com/tidb/stable) provide a lot of SQL synopsis diagrams to help users understand the SQL syntax. For example, you can find the synopsis diagrams of `ALTER INDEX` statement [here](https://docs.pingcap.com/tidb/stable/sql-statement-alter-index#synopsis).
