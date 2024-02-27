@@ -1392,12 +1392,12 @@ The `UCASE()` function is used to convert a string to uppercase letters. This fu
 
 > **Note:**
 >
-> When the string is `NULL`, the `UCASE()` function returns `NULL`.
+> When the string is null, the `UCASE()` function returns `NULL`.
 
 Example:
 
 ```sql
-SELECT UCASE('bigdata') AS result_upper, UCASE('null') AS result_null;
+SELECT UCASE('bigdata') AS result_upper, UCASE(null) AS result_null;
 ```
 
 Output:
