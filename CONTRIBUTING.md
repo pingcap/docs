@@ -156,7 +156,7 @@ If your change fits one of the following situations, **CHOOSE THE AFFECTED RELEA
 
 ## Guideline for contributing to TiDB Cloud docs
 
-Currently, the [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud/) is in English only, and it is stored in the `release-7.5` branch of [pingcap/docs](https://github.com/pingcap/docs) for reusing SQL documents and development documents of TiDB v7.5. Hence, to create a pull request for TiDB Cloud documentation, make sure that your PR is based on the [release-7.5](https://github.com/pingcap/docs/tree/release-7.5) branch.
+Currently, the [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud/) is available only in English, and it is stored in the `release-7.5` branch of [pingcap/docs](https://github.com/pingcap/docs) for reusing SQL documents and development documents of TiDB v7.5. Hence, to create a pull request for TiDB Cloud documentation, make sure that your PR is based on the [release-7.5](https://github.com/pingcap/docs/tree/release-7.5) branch.
 
 > **Tip::**
 >
@@ -165,7 +165,7 @@ Currently, the [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud/) i
 > - If the path of a document in this file starts with `/tidb-cloud/`, it means that this document is only for TiDB Cloud.
 > - If the path of a document in this file does not start with `/tidb-cloud/`, it means that this TiDB document is reused by TiDB Cloud.
 
-If you are editing a document reused by TiDB Cloud, you might notice there are some `CustomContent` tags in the document. These `CustomContent` tags are used to show the dedicated content of TiDB or TiDB Cloud.
+In some TiDB documents that are reused by TiDB Cloud, you might notice `CustomContent` tags. These `CustomContent` tags are used to show the dedicated content of TiDB or TiDB Cloud.
 
 For example:
 
@@ -197,13 +197,13 @@ For example:
 
 In the example:
 
-- `<CustomContent platform="tidb">` means that the content in this tag is only applicable to TiDB and will not be displayed on the [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud/) website.
-- `<CustomContent platform="tidb-cloud">` means that the content in this tag is only applicable to TiDB Cloud and will not be displayed on the [TiDB documentation](https://docs.pingcap.com/tidb/stable) website.
-- Lines that are not wrapped by `<CustomContent>` tag are applicable to both TiDB and TiDB Cloud and will be displayed on both documentation websites.
+- The content within the `<CustomContent platform="tidb">` tag is only applicable to TiDB and will not be displayed on the [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud/) website.
+- The content within the `<CustomContent platform="tidb-cloud">`tag is only applicable to TiDB Cloud and will not be displayed on the [TiDB documentation](https://docs.pingcap.com/tidb/stable) website.
+- The content that are not wrapped by `<CustomContent>` tag are applicable to both TiDB and TiDB Cloud and will be displayed on both documentation websites.
 
 ## Guideline for previewing EBNF diagrams
 
-[TiDB Docs at the PingCAP website](https://docs.pingcap.com/tidb/stable) provide a lot of SQL synopsis diagrams to help users understand the SQL syntax. For example, you can find the synopsis diagrams of `ALTER INDEX` statement [here](https://docs.pingcap.com/tidb/stable/sql-statement-alter-index#synopsis).
+[TiDB Docs at the PingCAP website](https://docs.pingcap.com/tidb/stable) provide a lot of SQL synopsis diagrams to help users understand the SQL syntax. For example, you can find the synopsis diagrams for the `ALTER INDEX` statement [here](https://docs.pingcap.com/tidb/stable/sql-statement-alter-index#synopsis).
 
 The source of these synopsis diagrams is written using [extended Backus–Naur form (EBNF)](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form). When preparing the EBNF code for a SQL statement, you can easily preview the EBNF diagram by copying the code to <https://kennytm.github.io/website-docs/dist/> and clicking **Render**.
 
