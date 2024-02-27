@@ -1370,11 +1370,51 @@ Remove leading and trailing spaces.
 
 ### [`UCASE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ucase)
 
-Synonym for `UPPER()`.
+The `UCASE()` function is used to convert a string to uppercase letters. This function is equivalent to the `UPPER()` function.
+
+> **Note:**
+>
+> When the string is null, the `UCASE()` function returns `NULL`.
+
+Example:
+
+```sql
+SELECT UCASE('bigdata') AS result_upper, UCASE(null) AS result_null;
+```
+
+Output:
+
+```sql
++--------------+-------------+
+| result_upper | result_null |
++--------------+-------------+
+| BIGDATA      | NULL        |
++--------------+-------------+
+```
 
 ### [`UNHEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_unhex)
 
-Return a string containing hex representation of a number.
+The `UNHEX()` function performs the reverse operation of the `HEX()` function. It treats each pair of characters in the argument as a hexadecimal number and converts it to the character represented by that number, returning the result as a binary string.
+
+> **Note:**
+>
+> The argument must be a valid hexadecimal value that contains `0`–`9`, `A`–`F`, or `a`–`f`. If the argument is `NULL` or falls outside this range, the function returns `NULL`.
+
+Example:
+
+```sql
+SELECT UNHEX('54694442');
+```
+
+Output:
+
+```sql
++--------------------------------------+
+| UNHEX('54694442')                    |
++--------------------------------------+
+| 0x54694442                           |
++--------------------------------------+
+```
 
 ### [`UPPER()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_upper)
 
