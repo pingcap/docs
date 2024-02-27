@@ -27,36 +27,20 @@ The `ASCII(str)` function is used to get the ASCII value of the leftmost charact
 >
 > `ASCII(str)` only works for characters represented using 8 bits of binary digits (one byte).
 
-Examples:
+Example:
 
 ```sql
-SELECT ASCII('A');
-
-+------------+
-| ASCII('A') |
-+------------+
-|         65 |
-+------------+
+SELECT ASCII('A'), ASCII('TiDB'), ASCII(23);
 ```
 
-```sql
-SELECT ASCII('TiDB');
-
-+---------------+
-| ASCII('TiDB') |
-+---------------+
-|            84 |
-+---------------+
-```
+Output:
 
 ```sql
-SELECT ASCII(23);
-
-+-----------+
-| ASCII(23) |
-+-----------+
-|        50 |
-+-----------+
++------------+---------------+-----------+
+| ASCII('A') | ASCII('TiDB') | ASCII(23) |
++------------+---------------+-----------+
+|         65 |            84 |        50 |
++------------+---------------+-----------+
 ```
 
 ### [`BIN()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bin)
@@ -67,42 +51,40 @@ The `BIN()` function is used to convert the given argument into a string represe
 - If the argument is a negative number, the function converts the absolute value of the argument to its binary representation, inverts each bit of the binary value (changing `0` to `1` and `1` to `0`), and then adds `1` to the inverted value.
 - If the argument is a string containing only digits, the function returns the result according to those digits. For example, the results for `"123"` and `123` are the same.
 - If the argument is a string and its first character is not a digit (such as `"q123"`), the function returns `0`.
-- If the argument is a string that consists of digits and non-digits, the function returns the result according to the consecutive digits at the beginning of the argument. For example, the results for `"123q123"` and `123` are the same.
+- If the argument is a string that consists of digits and non-digits, the function returns the result according to the consecutive digits at the beginning of the argument. For example, the results for `"123q123"` and `123` are the same, but `BIN('123q123')` generates a warning like `Truncated incorrect INTEGER value: '123q123'`.
 - If the argument is `NULL`, the function returns `NULL`.
 
-Examples:
+Example 1:
 
 ```sql
-SELECT BIN(123);
-
-+----------+
-| BIN(123) |
-+----------+
-| 1111011  |
-+----------+
+SELECT BIN(123), BIN('123q123');
 ```
+
+Output 1:
+
+```sql
++----------+----------------+
+| BIN(123) | BIN('123q123') |
++----------+----------------+
+| 1111011  | 1111011        |
++----------+----------------+
+```
+
+Example 2:
 
 ```sql
 SELECT BIN(-7);
+```
 
+Output 2:
+
+```sql
 +------------------------------------------------------------------+
 | BIN(-7)                                                          |
 +------------------------------------------------------------------+
 | 1111111111111111111111111111111111111111111111111111111111111001 |
 +------------------------------------------------------------------+
 ```
-
-```sql
-SELECT BIN("123q123");
-
-+----------------+
-| BIN("123q123") |
-+----------------+
-| 1111011        |
-+----------------+
-```
-
-Return a string containing binary representation of a number.
 
 ### [`BIT_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bit-length)
 
@@ -387,11 +369,105 @@ Return the substring as specified.
 
 ### [`SUBSTRING_INDEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substring-index)
 
+<<<<<<< HEAD
 Return a substring from a string before the specified number of occurrences of the delimiter.
 
 ### [`TO_BASE64()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_to-base64)
 
 Return the argument converted to a base-64 string.
+=======
+The `SUBSTRING_INDEX()` function is used to extract a substring from a string based on a specified delimiter and count. This function is particularly useful when dealing with data separated by a specific delimiter, such as parsing CSV data or processing log files.
+
+Syntax:
+
+```sql
+SUBSTRING_INDEX(str, delim, count)
+```
+
+- `str`: specifies the string to be processed.
+- `delim`: specifies the delimiter in the string, which is case-sensitive.
+- `count`: specifies the number of occurrences of the delimiter.
+    - If `count` is a positive number, the function returns the substring before the `count` occurrences (counting from the left of the string) of the delimiter.
+    - If `count` is a negative number, the function returns the substring after the `count` occurrences (counting from the right of the string) of the delimiter.
+    - If `count` is `0`, the function returns an empty string.
+
+Example 1:
+
+```sql
+SELECT SUBSTRING_INDEX('www.tidbcloud.com', '.', 2);
+```
+
+Output 1:
+
+```sql
++-----------------------------------------+
+| SUBSTRING_INDEX('www.tidbcloud.com', '.', 2) |
++-----------------------------------------+
+| www.tidbcloud                                |
++-----------------------------------------+
+```
+
+Example 2:
+
+```sql
+SELECT SUBSTRING_INDEX('www.tidbcloud.com', '.', -1);
+```
+
+Output 2:
+
+```sql
++------------------------------------------+
+| SUBSTRING_INDEX('www.tidbcloud.com', '.', -1) |
++------------------------------------------+
+| com                                      |
++------------------------------------------+
+```
+
+### [`TO_BASE64()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_to-base64)
+
+The `TO_BASE64()` function is used to convert the given argument to a string in the base-64 encoded form and return the result according to the character set and collation of the current connection. A base-64 encoded string can be decoded using the [`FROM_BASE64()`](#from_base64) function.
+
+Syntax:
+
+```sql
+TO_BASE64(str)
+```
+
+- If the argument is not a string, the function converts it to a string before base-64 encoding.
+- If the argument is `NULL`, the function returns `NULL`.
+
+Example 1:
+
+```sql
+SELECT TO_BASE64('abc');
+```
+
+Output 1:
+
+```sql
++------------------+
+| TO_BASE64('abc') |
++------------------+
+| YWJj             |
++------------------+
+```
+
+Example 2:
+
+```sql
+SELECT TO_BASE64(6);
+```
+
+Output 2:
+
+```sql
++--------------+
+| TO_BASE64(6) |
++--------------+
+| Ng==         |
++--------------+
+```
+>>>>>>> 9b750c2003 (Update the introduction to UPPER() and WEIGHT_STRING() (#16534))
 
 ### [`TRANSLATE()`](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/TRANSLATE.html#GUID-80F85ACB-092C-4CC7-91F6-B3A585E3A690)
 
@@ -411,11 +487,60 @@ Return a string containing hex representation of a number.
 
 ### [`UPPER()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_upper)
 
-Convert to uppercase.
+The `UPPER()` function is used to convert a string to uppercase letters. This function is equivalent to the `UCASE()` function.
+
+> **Note:**
+>
+> When the string is null, the `UPPER()` function returns `NULL`.
+
+Example:
+
+```sql
+SELECT UPPER('bigdata') AS result_upper, UPPER(null) AS result_null;
+```
+
+Output:
+
+```sql
++--------------+-------------+
+| result_upper | result_null |
++--------------+-------------+
+| BIGDATA      | NULL        |
++--------------+-------------+
+```
 
 ### [`WEIGHT_STRING()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_weight-string)
 
-Return the weight string for the input string.
+The `WEIGHT_STRING()` function returns the weight string (binary characters) for the input string, primarily used for sorting and comparison operations in multi-character set scenarios. If the argument is `NULL`, it returns `NULL`. The syntax is as follows:
+
+```sql
+WEIGHT_STRING(str [AS {CHAR|BINARY}(N)])
+```
+
+- `str`: the input string expression. If it is a non-binary string, such as a `CHAR`, `VARCHAR`, or `TEXT` value, the return value contains the collation weights for the string. If it is a binary string, such as a `BINARY`, `VARBINARY`, or `BLOB` value, the return value is the same as the input.
+
+- `AS {CHAR|BINARY}(N)`: optional parameters used to specify the type and length of the output. `CHAR` represents the character data type, and `BINARY` represents the binary data type. `N` specifies the output length, which is an integer greater than or equal to 1.
+
+> **Note:**
+>
+> If `N` is less than the string length, the string is truncated. If `N` exceeds the string length, `AS CHAR(N)` pads the string with spaces to the specified length, and `AS BINARY(N)` pads the string with `0x00` to the specified length.
+
+Example:
+
+```sql
+SET NAMES 'utf8mb4';
+SELECT HEX(WEIGHT_STRING('ab' AS CHAR(3))) AS char_result, HEX(WEIGHT_STRING('ab' AS BINARY(3))) AS binary_result;
+```
+
+Output:
+
+```sql
++-------------+---------------+
+| char_result | binary_result |
++-------------+---------------+
+| 6162        | 616200        |
++-------------+---------------+
+```
 
 ## Unsupported functions
 
