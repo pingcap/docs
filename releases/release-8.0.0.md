@@ -29,7 +29,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 By separating PD modules into separately-deployable services, their blast radii are massively mitigated as the cluster scales. Much larger clusters with much larger workloads are possible with this architecture.</td>
   </tr>
   <tr>
-    <td>Pipelined DML (experimental)</td>
+    <td>Pipelined DML for much larger transactions (experimental)</td>
     <td>Large batch DML jobs like huge cleanup jobs, joins, or aggregations can consume tons of memory and were previously limited at very large scales. Pipelined DML is a new feature meant for supporting large batch DML with transaction guarantees more efficiently and mitigating out-of-memory risks. When used for data loading, this is distinct from import, load, and restore operations. </td>
   </tr>
   <tr>
