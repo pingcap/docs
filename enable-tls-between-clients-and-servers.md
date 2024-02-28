@@ -1,11 +1,6 @@
 ---
 title: Enable TLS Between TiDB Clients and Servers
-<<<<<<< HEAD
-summary: Use the encrypted connection to ensure data security.
-=======
 summary: Use secure connections to ensure data security.
-aliases: ['/docs/dev/enable-tls-between-clients-and-servers/','/docs/dev/how-to/secure/enable-tls-clients/','/docs/dev/encrypted-connections-with-tls-protocols/']
->>>>>>> 65c1fd271f (Various TLS related updates (#16267))
 ---
 
 # Enable TLS between TiDB Clients and Servers
