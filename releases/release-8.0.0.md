@@ -24,20 +24,20 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 <tbody>
   <tr>
     <td rowspan="4">Scalability and Performance</td>
-    <td>Disaggregation of PD to improve scale (experimental)</td>
+    <td>Disaggregation of PD to improve scale (experimental) **tw@qiancai** <!--1553, 1558--></td>
     <td>PD (Placement Driver) has a lot of critical modules for the running of TiDB. Each module's resource consumption can increase as certain workloads scale, meaning they can each interfere with other functions in PD, ultimatley impacting quality of service of the cluster. 
 By separating PD modules into separately-deployable services, their blast radii are massively mitigated as the cluster scales. Much larger clusters with much larger workloads are possible with this architecture.</td>
   </tr>
   <tr>
-    <td>Pipelined DML for much larger transactions (experimental)</td>
+    <td>Pipelined DML for much larger transactions (experimental) **tw@Oreoxmt** <!--1694--></td>
     <td>Large batch DML jobs like huge cleanup jobs, joins, or aggregations can consume tons of memory and were previously limited at very large scales. Pipelined DML is a new feature meant for supporting large batch DML with transaction guarantees more efficiently and mitigating out-of-memory risks. When used for data loading, this is distinct from import, load, and restore operations. </td>
   </tr>
   <tr>
-    <td>Acceleration of cluster snapshot restore speed</td>
+    <td>Acceleration of cluster snapshot restore speed **tw@qiancai** <!--1681--></td>
     <td>An optimization to involve all TiKV nodes in the preparation step for cluster restores was introduced to leverage scale such that restore speeds for a cluster are much faster for larger sets of data on larger clusters. Real world tests exhibit restore acceleration of ~300% in slower cases.</td>
   </tr>
   <tr>
-    <td>Enhanced stability of massive number of tables</td>
+    <td>Enhanced stability of massive number of tables **tw@hfxsd** <!--16408--></td>
     <td>SaaS companies using TiDB as the system of record for their multi-tenant applications require storing many tables. Prior to this release, so table counts on the order of a million or more were possible but were likely to degrade experience. 
 Several enhancements were made in this version to mitigate that:
 
@@ -46,7 +46,7 @@ Several enhancements were made in this version to mitigate that:
   </tr>
   <tr>
     <td rowspan="1">DB Operations and Observability</td>
-    <td>Index usage view</td>
+    <td>Index usage view **tw@Oreoxmt** <!--1400--></td>
     <td>TiDB adds a new system table for viewing the usage statistics of indexes, ultimately helping users to evaluate the importance (or lack thereof) of all indexes.</td>
     </td>
   </tr>
