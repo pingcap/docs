@@ -123,7 +123,7 @@ v5.3.0 より前では、TiDB はリザーバー サンプリング方式を使�
 
 > **注記：**
 >
-> 通常、 `STATS_META`は`TABLE_KEYS`よりも信頼性が高くなります。ただし、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)のような方法でデータをインポートした後、 `STATS_META`の結果は`0`になります。この状況に対処するには、 `STATS_META`の結果が`TABLE_KEYS`の結果よりはるかに小さい場合に、 `TABLE_KEYS`使用してサンプリング レートを計算します。
+> 通常、 `STATS_META`は`TABLE_KEYS`よりも信頼性が高くなります。ただし、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)のような方法でデータをインポートした後、 `STATS_META`の結果は`0`になります。この状況に対処するには、 `STATS_META`の結果が`TABLE_KEYS`の結果よりはるかに小さい場合、 `TABLE_KEYS`使用してサンプリング レートを計算します。
 
 </CustomContent>
 
@@ -303,7 +303,7 @@ ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DE
 >
 > -   GlobalStats 更新がトリガーされ、 [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730)が`OFF`の場合:
 >
->     -   一部のパーティションに統計がない場合 (分析されていない新しいパーティションなど)、GlobalStats の生成は中断され、パーティションで利用可能な統計がないことを示す警告メッセージが表示されます。
+>     -   一部のパーティションに統計がない場合 (未分析の新しいパーティションなど)、GlobalStats の生成は中断され、パーティションで利用可能な統計がないことを示す警告メッセージが表示されます。
 >     -   一部の列の統計が特定のパーティションに存在しない場合 (これらのパーティションでの分析に別の列が指定されている)、これらの列の統計が集計されるときに GlobalStats の生成が中断され、特定のパーティションに一部の列の統計が存在しないことを示す警告メッセージが表示されます。パーティション。
 >
 > -   GlobalStats 更新がトリガーされ、 [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730)が`ON`の場合:
@@ -439,7 +439,13 @@ v5.4.0 以降、TiDB は一部の`ANALYZE`構成の永続化をサポートし�
 
 この機能を使用すると、ステートメントを手動で実行するときに`ANALYZE`ステートメントで指定された永続性構成を記録できます。一度記録されると、次回 TiDB が自動的に統計を更新するか、これらの構成を指定せずに統計を手動で収集するときに、TiDB は記録された構成に従って統計を収集します。
 
-永続構成を指定して`ANALYZE`ステートメントを手動で複数回実行すると、TiDB は、最新の`ANALYZE`ステートメントで指定された新しい構成を使用して、以前に記録された永続構成を上書きします。
+auto analyze操作に使用される特定のテーブルに保持されている構成をクエリするには、次の SQL ステートメントを使用できます。
+
+```sql
+SELECT sample_num, sample_rate, buckets, topn, column_choice, column_ids FROM mysql.analyze_options opt JOIN information_schema.tables tbl ON opt.table_id = tbl.tidb_table_id WHERE tbl.table_schema = '{db_name}' AND tbl.table_name = '{table_name}';
+```
+
+TiDB は、最新の`ANALYZE`ステートメントで指定された新しい構成を使用して、以前に記録された永続構成を上書きします。たとえば、 `ANALYZE TABLE t WITH 200 TOPN;`を実行すると、上位 200 の値が`ANALYZE`ステートメントに設定されます。続いて`ANALYZE TABLE t WITH 0.1 SAMPLERATE;`を実行すると、 `ANALYZE TABLE t WITH 200 TOPN, 0.1 SAMPLERATE;`と同様に、自動`ANALYZE`ステートメントの上位 200 個の値とサンプリング レート 0.1 が設定されます。
 
 #### ANALYZE 構成の永続性を無効にする {#disable-analyze-configuration-persistence}
 
@@ -690,7 +696,7 @@ v5.4.0 以降、TiDB には統計の同期ロード機能が導入されまし�
 -   統計の同期ロード機能が同時に処理できる列の最大数を指定するには、TiDB 構成ファイルの[`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540)オプションの値を変更します。デフォルト値は`5`です。
 -   同期ロード統計機能がキャッシュできる列リクエストの最大数を指定するには、TiDB 構成ファイルの[`stats-load-queue-size`](/tidb-configuration-file.md#stats-load-queue-size-new-in-v540)オプションの値を変更します。デフォルト値は`1000`です。
 
-TiDB の起動中、初期統計が完全にロードされる前に実行される SQL ステートメントには最適ではない実行プランが含まれる可能性があり、そのためパフォーマンスの問題が発生します。このような問題を回避するために、TiDB v7.1.0 では構成パラメーター[`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v710)が導入されています。このオプションを使用すると、起動時に統計の初期化が完了した後にのみ TiDB がサービスを提供するかどうかを制御できます。 v7.2.0 以降、このパラメータはデフォルトで有効になっています。
+TiDB の起動中、初期統計が完全にロードされる前に実行される SQL ステートメントには最適ではない実行プランが含まれる可能性があり、そのためパフォーマンスの問題が発生します。このような問題を回避するために、TiDB v7.1.0 では構成パラメーター[`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710)が導入されています。このオプションを使用すると、起動時に統計の初期化が完了した後にのみ TiDB がサービスを提供するかどうかを制御できます。 v7.2.0 以降、このパラメータはデフォルトで有効になっています。
 
 v7.1.0 以降、TiDB では軽量統計初期化のために[`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)が導入されています。
 
@@ -748,10 +754,6 @@ v7.1.0 以降、TiDB では軽量統計初期化のために[`lite-init-stats`](
 `file_name`は、インポートする統計のファイル名です。
 
 ## ロック統計 {#lock-statistics}
-
-> **警告：**
->
-> 統計のロックは、現在のバージョンの実験的機能です。本番環境での使用はお勧めしません。
 
 v6.5.0 以降、TiDB はロック統計をサポートします。テーブルまたはパーティションの統計がロックされると、テーブルの統計を変更できなくなり、そのテーブルに対して`ANALYZE`ステートメントを実行できなくなります。例えば：
 

@@ -36,7 +36,7 @@ SQL の配置ルール機能を使用すると、次のように、粗いもの�
 
 -   メンテナンスを簡素化するために、クラスター内の配置ポリシーの数を 10 以下に制限することをお勧めします。
 -   配置ポリシーが適用されるテーブルとパーティションの合計数を 10,000 以下に制限することをお勧めします。あまりにも多くのテーブルやパーティションにポリシーをアタッチすると、PD の計算ワークロードが増加し、サービスのパフォーマンスに影響を与える可能性があります。
--   他の複雑な配置ポリシーを使用するのではなく、このドキュメントで提供される例に従って SQL の配置ルール機能を使用することをお勧めします。
+-   他の複雑な配置ポリシーを使用するのではなく、このドキュメントで提供されている例に従って SQL の配置ルール機能を使用することをお勧めします。
 
 ## 前提条件 {#prerequisites}
 
@@ -52,8 +52,8 @@ SQL の配置ルール機能を使用すると、次のように、粗いもの�
 
 | 導入方法                 | 例                                                                                                                                       |
 | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 手動展開                 | [トポロジーラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)                                                                    |
-| TiUPによる導入            | [地理的に分散された導入トポロジ](/geo-distributed-deployment-topology.md)                                                                              |
+| 手動展開                 | [トポロジ ラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)                                                                    |
+| TiUPによる展開            | [地理的に分散された導入トポロジ](/geo-distributed-deployment-topology.md)                                                                              |
 | TiDB Operatorを使用した展開 | [Kubernetes で TiDB クラスターを構成する](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#high-data-high-availability) |
 
 > **注記：**
@@ -227,10 +227,10 @@ DROP PLACEMENT POLICY myplacementpolicy;
 
 次のいずれかの形式を使用して、 `CONSTRAINTS` 、 `FOLLOWER_CONSTRAINTS` 、および`LEARNER_CONSTRAINTS`配置オプションを構成できます。
 
-| 制約形式  | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| リスト形式 | 指定する制約がすべてのレプリカに適用される場合は、キーと値のリスト形式を使用できます。各キーは`+`または`-`で始まります。例えば：<br/><ul><li> `[+region=us-east-1]` `region`ラベルを持つノードにデータを`us-east-1`として配置することを意味します。</li><li> `[+region=us-east-1,-type=fault]` `region`ラベルを`us-east-1`として持つが、 `type`ラベルを`fault`として持たないノードにデータを配置することを意味します。</li></ul><br/>                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| 辞書形式  | さまざまな制約に対してさまざまな数のレプリカを指定する必要がある場合は、ディクショナリ形式を使用できます。例えば：<br/><ul><li> `FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1}";` `us-east-1`に 1 人のFollower、 `us-east-2`に 1 人のFollower、 `us-west-1`に 1 人のFollowerを配置することを意味します。</li><li> `FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+type=scale-node": 1,"+region=us-west-1": 1}';` `us-east-1`領域に位置し、 `type`ラベルが`scale-node`であるノードに 1 つのFollowerを配置し、 `us-west-1`に 1 つのFollowerを配置することを意味します。</li></ul>辞書形式では、 `+`または`-`で始まる各キーがサポートされており、特別な`#reject-leader`属性を構成できます。たとえば、 `FOLLOWER_CONSTRAINTS='{"+region=us-east-1":1, "+region=us-east-2": 2, "+region=us-west-1,#reject-leader": 1}'` 、 `us-west-1`で選出されたリーダーが災害復旧中に可能な限り立ち退かせることを意味します。 |
+| 制約形式  | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| リスト形式 | 指定する制約がすべてのレプリカに適用される場合は、キーと値のリスト形式を使用できます。各キーは`+`または`-`で始まります。例えば：<br/><ul><li> `[+region=us-east-1]` `region`ラベルを持つノードにデータを`us-east-1`として配置することを意味します。</li><li> `[+region=us-east-1,-type=fault]` `region`ラベルを`us-east-1`として持つが、 `type`ラベルを`fault`として持たないノードにデータを配置することを意味します。</li></ul><br/>                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| 辞書形式  | さまざまな制約に対してさまざまな数のレプリカを指定する必要がある場合は、ディクショナリ形式を使用できます。例えば：<br/><ul><li> `FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1}";` `us-east-1`に 1 人のFollower、 `us-east-2`に 1 人のFollower、 `us-west-1`に 1 人のFollowerを配置することを意味します。</li><li> `FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+type=scale-node": 1,"+region=us-west-1": 1}';` `us-east-1`領域に位置し、 `type`ラベルが`scale-node`であるノードに 1 つのFollowerを配置し、 `us-west-1`に 1 つのFollowerを配置することを意味します。</li></ul>辞書形式では、 `+`または`-`で始まる各キーがサポートされており、特別な`#evict-leader`属性を構成できます。たとえば、 `FOLLOWER_CONSTRAINTS='{"+region=us-east-1":1, "+region=us-east-2": 2, "+region=us-west-1,#evict-leader": 1}'` 、 `us-west-1`で選出されたリーダーが災害復旧中に可能な限り立ち退かせることを意味します。 |
 
 > **注記：**
 >
@@ -317,7 +317,7 @@ PARTITION BY RANGE( YEAR(purchased) ) (
 -   `p1` `p2`および`p3`パーティションには、テーブル`t1`から継承された`companystandardpolicy`配置ポリシーが適用されます。
 -   テーブル`t1`に配置ポリシーが指定されていない場合、パーティション`p1` 、 `p2` 、および`p3`データベースのデフォルト ポリシーまたはグローバル デフォルト ポリシーを継承します。
 
-これらのパーティションに配置ポリシーをアタッチした後、次の例のように、特定のパーティションの配置ポリシーを変更できます。
+配置ポリシーをこれらのパーティションにアタッチした後、次の例のように、特定のパーティションの配置ポリシーを変更できます。
 
 ```sql
 ALTER TABLE t1 PARTITION p1 PLACEMENT POLICY=storageforhisotrydata;
@@ -365,7 +365,7 @@ CREATE PLACEMENT POLICY singleaz CONSTRAINTS="[+region=us-east-1]" SURVIVAL_PREF
 
 > **注記：**
 >
-> `SURVIVAL_PREFERENCES`は PD の`location-labels`に相当します。詳細については、 [トポロジ ラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)を参照してください。
+> `SURVIVAL_PREFERENCES`は PD の`location-labels`に相当します。詳細については、 [トポロジーラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)を参照してください。
 
 </CustomContent>
 
@@ -373,13 +373,13 @@ CREATE PLACEMENT POLICY singleaz CONSTRAINTS="[+region=us-east-1]" SURVIVAL_PREF
 
 > **注記：**
 >
-> `SURVIVAL_PREFERENCES`は PD の`location-labels`に相当します。詳細については、 [トポロジ ラベルごとにレプリカをスケジュールする](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels)を参照してください。
+> `SURVIVAL_PREFERENCES`は PD の`location-labels`に相当します。詳細については、 [トポロジーラベルごとにレプリカをスケジュールする](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels)を参照してください。
 
 </CustomContent>
 
 ### 複数のデータセンターに 2:2:1 で分散された 5 つのレプリカを持つクラスターを指定します {#specify-a-cluster-with-5-replicas-distributed-2-2-1-across-multiple-data-centers}
 
-2:2:1 の比率で 5 レプリカの分散など、特定のデータ分散が必要な場合は、次の[辞書形式](#constraints-formats)の`CONSTRAINTS`を構成することで、さまざまな制約に応じて異なる数のレプリカを指定できます。
+2:2:1 の比率での 5 レプリカの分散など、特定のデータ分散が必要な場合は、次の[辞書形式](#constraints-formats)の`CONSTRAINTS`を構成することで、さまざまな制約に応じてさまざまな数のレプリカを指定できます。
 
 ```sql
 CREATE PLACEMENT POLICY `deploy221` CONSTRAINTS='{"+region=us-east-1":2, "+region=us-east-2": 2, "+region=us-west-1": 1}';
@@ -411,10 +411,10 @@ CREATE PLACEMENT POLICY deploy221_primary_east1 LEADER_CONSTRAINTS="[+region=us-
 
 この配置ポリシーが作成され、目的のデータにアタッチされた後、データのRaft Leaderレプリカは`LEADER_CONSTRAINTS`オプションで指定された`us-east-1`リージョンに配置され、データの他のレプリカは`FOLLOWER_CONSTRAINTS`オプションで指定されたリージョンに配置されます。 `us-east-1`リージョンでのノード停止など、クラスターに障害が発生した場合、他のリージョンが`FOLLOWER_CONSTRAINTS`で指定されている場合でも、新しいLeaderが他のリージョンから選出されることに注意してください。言い換えれば、サービスの可用性を確保することが最優先されます。
 
-`us-east-1`リージョンで障害が発生した場合に、新しいリーダーを`us-west-1`に配置したくない場合は、特別な`reject-leader`属性を設定して、そのリージョンで新しく選出されたリーダーを排除できます。
+`us-east-1`リージョンで障害が発生した場合に、新しいリーダーを`us-west-1`に配置したくない場合は、特別な`evict-leader`属性を設定して、そのリージョンで新しく選出されたリーダーを排除できます。
 
 ```sql
-CREATE PLACEMENT POLICY deploy221_primary_east1 LEADER_CONSTRAINTS="[+region=us-east-1]" FOLLOWER_CONSTRAINTS='{"+region=us-east-1": 1, "+region=us-east-2": 2, "+region=us-west-1,#reject-leader": 1}';
+CREATE PLACEMENT POLICY deploy221_primary_east1 LEADER_CONSTRAINTS="[+region=us-east-1]" FOLLOWER_CONSTRAINTS='{"+region=us-east-1": 1, "+region=us-east-2": 2, "+region=us-west-1,#evict-leader": 1}';
 ```
 
 #### <code>PRIMARY_REGION</code>を使用する {#use-code-primary-region-code}

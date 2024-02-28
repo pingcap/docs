@@ -32,7 +32,7 @@ TiDB にはコストベースのオプティマイザーが含まれています
 
 ## 特定の SQL ステートメントの実行を防ぐにはどうすればよいですか? {#how-to-prevent-the-execution-of-a-particular-sql-statement}
 
-[`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen)ヒントを使用して[SQLバインディング](/sql-plan-management.md#sql-binding)を作成すると、特定のステートメントの実行時間を小さい値 (1ms など) に制限できます。このようにして、ステートメントはしきい値によって自動的に終了します。
+[SQLバインディング](/sql-plan-management.md#sql-binding)と[`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen)ヒントを作成すると、特定のステートメントの実行時間を小さい値 (1ms など) に制限できます。このようにして、ステートメントはしきい値によって自動的に終了します。
 
 たとえば、 `SELECT * FROM t1, t2 WHERE t1.id = t2.id`の実行を防ぐには、次の SQL バインディングを使用してステートメントの実行時間を 1 ミリ秒に制限します。
 
@@ -60,7 +60,7 @@ DROP GLOBAL BINDING for
 
 ## <code>ORDER BY</code>省略した場合、結果の順序がMySQLと異なります {#the-order-of-results-is-different-from-mysql-when-code-order-by-code-is-omitted}
 
-それはバグではありません。デフォルトのレコードの順序はさまざまな状況に依存しますが、一貫性は保証されません。
+バグではありません。デフォルトのレコードの順序はさまざまな状況に依存しますが、一貫性は保証されません。
 
 クエリは単一スレッドで実行されるため、MySQL の結果の順序は安定しているように見える場合があります。ただし、新しいバージョンにアップグレードすると、クエリ プランが変更される可能性があるのが一般的です。結果の順序が必要な場合は常に`ORDER BY`を使用することをお勧めします。
 
@@ -151,7 +151,7 @@ TiDB は、SESSION または GLOBAL ベースでのシステム[`sql_mode`](/sys
 -   [`GLOBAL`](/sql-statements/sql-statement-set-variable.md)スコープ変数への変更はクラスターの残りのサーバーに伝播し、再起動後も保持されます。これは、各 TiDBサーバーで`sql_mode`値を変更する必要がないことを意味します。
 -   `SESSION`のスコープ変数への変更は、現在のクライアント セッションにのみ影響します。サーバーを再起動すると、変更は失われます。
 
-## エラー: Sqoop を使用してデータを TiDB にバッチで書き込むときに、 <code>java.sql.BatchUpdateExecption:statement count 5001 exceeds the transaction limitation</code> {#error-code-java-sql-batchupdateexecption-statement-count-5001-exceeds-the-transaction-limitation-code-while-using-sqoop-to-write-data-into-tidb-in-batches}
+## エラー: Sqoop を使用して TiDB にデータをバッチで書き込むときに、 <code>java.sql.BatchUpdateExecption:statement count 5001 exceeds the transaction limitation</code> {#error-code-java-sql-batchupdateexecption-statement-count-5001-exceeds-the-transaction-limitation-code-while-using-sqoop-to-write-data-into-tidb-in-batches}
 
 Sqoop では、 `--batch`各バッチで 100 個のステートメントをコミットすることを意味しますが、デフォルトでは各ステートメントに 100 個の SQL ステートメントが含まれます。したがって、SQL ステートメントは 100 * 100 = 10000 となり、単一の TiDB トランザクションで許可されるステートメントの最大数である 5000 を超えます。
 
@@ -182,7 +182,7 @@ Sqoop では、 `--batch`各バッチで 100 個のステートメントをコ�
 
 ## データを削除するとクエリ速度が遅くなるのはなぜですか? {#why-does-the-query-speed-get-slow-after-data-is-deleted}
 
-大量のデータを削除すると、不要なキーが大量に残り、クエリの効率に影響します。この問題を解決するには、 [リージョンのマージ](/best-practices/massive-regions-best-practices.md#method-3-enable-region-merge)機能を使用できます。詳細は[TiDB ベスト プラクティスのデータの削除セクション](https://en.pingcap.com/blog/tidb-best-practice/#write)を参照してください。
+大量のデータを削除すると、無駄なキーが大量に残り、クエリの効率に影響します。この問題を解決するには、 [リージョンのマージ](/best-practices/massive-regions-best-practices.md#method-3-enable-region-merge)機能を使用できます。詳細は[TiDB ベスト プラクティスのデータの削除セクション](https://en.pingcap.com/blog/tidb-best-practice/#write)を参照してください。
 
 ## データを削除した後にstorage領域を再利用するのが遅い場合はどうすればよいですか? {#what-should-i-do-if-it-is-slow-to-reclaim-storage-space-after-deleting-data}
 
@@ -205,6 +205,10 @@ TiDB は、 [グローバル](/system-variables.md#tidb_force_priority)または
 
 -   `DELAYED` : このステートメントは通常の優先順位を持ち、 `tidb_force_priority`の`NO_PRIORITY`設定と同じです。
 
+> **注記：**
+>
+> v6.6.0 以降、TiDB は[リソース制御](/tidb-resource-control.md)をサポートします。この機能を使用すると、異なるリソース グループで異なる優先順位で SQL ステートメントを実行できます。これらのリソース グループに適切なクォータと優先順位を構成することで、異なる優先順位を持つ SQL ステートメントのスケジュール制御を向上させることができます。リソース制御が有効になっている場合、ステートメントの優先順位は無効になります。さまざまな SQL ステートメントのリソース使用量を管理するには、 [リソース制御](/tidb-resource-control.md)を使用することをお勧めします。
+
 上記 2 つのパラメータを TiDB の DML と組み合わせて使用​​できます。例えば：
 
 1.  データベースに SQL ステートメントを記述して優先度を調整します。
@@ -221,11 +225,9 @@ TiDB は、 [グローバル](/system-variables.md#tidb_force_priority)または
 
 ## TiDB での<code>auto analyze</code>のトリガー戦略は何ですか? {#what-s-the-trigger-strategy-for-code-auto-analyze-code-in-tidb}
 
-トリガー戦略: `auto analyze` 、新しいテーブルの行数が 1000 に達し、このテーブルに 1 分間書き込み操作がない場合に自動的にトリガーされます。
+新しいテーブルの行数が 1000 に達し、比率 (変更された行数 / 現在の総行数) が`tidb_auto_analyze_ratio`より大きい場合、 [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)ステートメントが自動的にトリガーされます。デフォルト値`tidb_auto_analyze_ratio`は`0.5`で、この機能がデフォルトで有効であることを示します。安全性を確保するため、この機能が有効な場合の最小値は`0.3`であり、デフォルト値が`0.8`である`pseudo-estimate-ratio`より小さい必要があります。それ以外の場合は、一定期間疑似統計が使用されます。 `tidb_auto_analyze_ratio` ～ `0.5`に設定することをお勧めします。
 
-比率 (変更された行数 / 現在の合計行数) が`tidb_auto_analyze_ratio`より大きい場合、 `analyze`ステートメントが自動的にトリガーされます。デフォルト値の`tidb_auto_analyze_ratio`は 0.5 で、この機能がデフォルトで有効であることを示します。安全性を確保するため、この機能が有効な場合の最小値は 0.3 であり、デフォルト値が 0.8 である`pseudo-estimate-ratio`より小さい必要があります。そうでない場合は、一定期間疑似統計が使用されます。 `tidb_auto_analyze_ratio` ～ 0.5 に設定することをお勧めします。
-
-auto analyzeを無効にするには、システム変数`tidb_enable_auto_analyze`を使用します。
+`auto analyze`無効にするには、システム変数`tidb_enable_auto_analyze`を使用します。
 
 ## オプティマイザーのヒントを使用してオプティマイザーの動作をオーバーライドできますか? {#can-i-use-optimizer-hints-to-override-the-optimizer-behavior}
 
@@ -292,7 +294,7 @@ v6.4.0 以降、TiDB は[メタデータのロック機構](/metadata-lock.md)�
 
 TiDB v6.5.0 より前では、DML ステートメントの実行時に、TiDB が DDL リース (デフォルトでは 45 秒) 内で最新のスキーマのロードに失敗すると、 `Information schema is out of date`エラーが発生する可能性がありました。考えられる原因は次のとおりです。
 
--   この DML を実行した TiDB インスタンスが強制終了され、この DML ステートメントに対応するトランザクションの実行に DDL リースよりも長い時間がかかりました。トランザクションがコミットされたときにエラーが発生しました。
+-   この DML を実行した TiDB インスタンスが強制終了され、この DML ステートメントに対応するトランザクションの実行に DDL リースよりも時間がかかりました。トランザクションがコミットされたときにエラーが発生しました。
 -   この DML ステートメントの実行中に、TiDB は PD または TiKV に接続できませんでした。その結果、TiDB は DDL リース内でスキーマをロードできなかったか、キープアライブ設定が原因で PD から切断されました。
 
 ### 高い同時実行性で DDL ステートメントを実行するとエラーが報告されますか? {#error-is-reported-when-executing-ddl-statements-under-high-concurrency}
@@ -313,7 +315,7 @@ TiDB v6.2.0 より前では、TiDB は、DDL ステートメントのタイプ�
 
 先入れ先出しキューの制限により、DDL 3 は DDL 2 が実行されるまで待機する必要があります。また、同じテーブル上の DDL ステートメントはシリアルに実行する必要があるため、DDL 2 は DDL 1 が実行されるまで待機する必要があります。したがって、DDL 3 は、異なるテーブルで動作する場合でも、DDL 1 が最初に実行されるまで待機する必要があります。
 
-TiDB v6.2.0 以降、TiDB DDL モジュールは同時フレームワークを使用します。同時フレームワークでは、先入れ先出しキューの制限がなくなりました。代わりに、TiDB はすべての DDL タスクから実行できる DDL タスクを選択します。さらに、Reorg ワーカーの数が拡張され、ノードあたり約`CPU/4`になりました。これにより、TiDB は並行フレームワークで複数のテーブルのインデックスを同時に構築できます。
+TiDB v6.2.0 以降、TiDB DDL モジュールは同時フレームワークを使用します。同時フレームワークでは、先入れ先出しキューの制限はなくなりました。代わりに、TiDB はすべての DDL タスクから実行できる DDL タスクを選択します。さらに、Reorg ワーカーの数が拡張され、ノードあたり約`CPU/4`になりました。これにより、TiDB は並行フレームワークで複数のテーブルのインデックスを同時に構築できます。
 
 クラスターが新しいクラスターであっても、以前のバージョンからアップグレードされたクラスターであっても、TiDB は TiDB v6.2 以降のバージョンの同時フレームワークを自動的に使用します。手動で調整する必要はありません。
 
@@ -339,14 +341,14 @@ TiDB v6.2.0 以降、TiDB DDL モジュールは同時フレームワークを�
 
 ### <code>select count(1)</code>を最適化するにはどうすればよいですか? {#how-to-optimize-code-select-count-1-code}
 
-`count(1)`ステートメントは、テーブル内の行の総数をカウントします。並行性の程度を改善すると、速度が大幅に向上します。同時実行性を変更するには、 [`tidb_distsql_scan_concurrency`ドキュメント](/system-variables.md#tidb_distsql_scan_concurrency)を参照してください。ただし、CPU と I/O リソースにも依存します。 TiDB はクエリごとに TiKV にアクセスします。データ量が少ない場合、MySQL はすべてメモリ内にあり、TiDB はネットワーク アクセスを行う必要があります。
+`count(1)`ステートメントは、テーブル内の行の総数をカウントします。並行性の度合いを改善すると、速度が大幅に向上します。同時実行性を変更するには、 [`tidb_distsql_scan_concurrency`ドキュメント](/system-variables.md#tidb_distsql_scan_concurrency)を参照してください。ただし、CPU と I/O リソースにも依存します。 TiDB はすべてのクエリで TiKV にアクセスします。データ量が少ない場合、MySQL はすべてメモリ内にあり、TiDB はネットワーク アクセスを行う必要があります。
 
 推奨事項:
 
 -   ハードウェア構成を改善します。 [ソフトウェアとハ​​ードウェアの要件](/hardware-and-software-requirements.md)を参照してください。
 -   同時実行性を改善します。デフォルト値は 10 です。50 に改善して試してみてください。ただし、通常、改善はデフォルト値の 2 ～ 4 倍です。
 -   データ量が多い場合は`count`をテストしてください。
--   TiKV 構成を最適化します。 [TiKV スレッドのパフォーマンスを調整する](/tune-tikv-thread-performance.md)と[TiKV メモリ パフォーマンスを調整する](/tune-tikv-memory-performance.md)を参照してください。
+-   TiKV 構成を最適化します。 [TiKV スレッドのパフォーマンスを調整する](/tune-tikv-thread-performance.md)と[TiKV メモリ パフォーマンスの調整](/tune-tikv-memory-performance.md)を参照してください。
 -   [コプロセッサーキャッシュ](/coprocessor-cache.md)を有効にします。
 
 ### 現在の DDL ジョブの進行状況を確認するにはどうすればよいですか? {#how-to-view-the-progress-of-the-current-ddl-job}
@@ -368,7 +370,7 @@ ADMIN SHOW DDL;
 ### DDL ジョブを表示するにはどうすればよいですか? {#how-to-view-the-ddl-job}
 
 -   `ADMIN SHOW DDL` : 実行中の DDL ジョブを表示します。
--   `ADMIN SHOW DDL JOBS` : 現在の DDL ジョブ キュー内のすべての結果 (実行中および実行待ちのタスクを含む) と、完了した DDL ジョブ キュー内の最後の 10 件の結果を表示します。
+-   `ADMIN SHOW DDL JOBS` : 現在の DDL ジョブ キュー内のすべての結果 (実行中および実行を待機しているタスクを含む) と、完了した DDL ジョブ キュー内の最後の 10 件の結果を表示します。
 -   `ADMIN SHOW DDL JOBS QUERIES 'job_id' [, 'job_id'] ...` : `job_id`に対応する DDL タスクの元の SQL ステートメントを表示します。 `job_id`実行中の DDL ジョブのみを検索し、DDL 履歴ジョブ キュー内の最後の 10 件の結果を検索します。
 
 ### TiDB は CBO (コストベースの最適化) をサポートしていますか? 「はい」の場合、どの程度ですか? {#does-tidb-support-cbo-cost-based-optimization-if-yes-to-what-extent}
@@ -411,4 +413,4 @@ ADMIN SHOW DDL;
 
 ### TiKV のパフォーマンスを調整する {#tune-tikv-performance}
 
-[TiKV スレッドのパフォーマンスを調整する](/tune-tikv-thread-performance.md)と[TiKV メモリ パフォーマンスを調整する](/tune-tikv-memory-performance.md)を参照してください。
+[TiKV スレッドのパフォーマンスを調整する](/tune-tikv-thread-performance.md)と[TiKV メモリ パフォーマンスの調整](/tune-tikv-memory-performance.md)を参照してください。

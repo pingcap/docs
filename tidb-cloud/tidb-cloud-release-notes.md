@@ -14,8 +14,8 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   Google Cloud 上でのさらに多くのTiDB Cloudノードの作成をサポートします。
 
-    -   Google Cloud の`/19`の[リージョン CIDR サイズの構成](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)により、プロジェクトの任意のリージョン内に最大 128 のTiDB Cloudノードを作成できるようになりました。
-    -   プロジェクトの任意のリージョンに 128 を超えるノードを作成する場合は、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)に問い合わせて、 `/16`から`/18`の範囲の IP 範囲サイズをカスタマイズするための支援を得ることができます。
+    -   Google Cloud の`/19`の[リージョン CIDR サイズの構成](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)により、プロジェクトの任意のリージョン内に最大 124 のTiDB Cloudノードを作成できるようになりました。
+    -   プロジェクトの任意のリージョンに 124 を超えるノードを作成する場合は、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)に問い合わせて、 `/16`から`/18`の範囲の IP 範囲サイズをカスタマイズするための支援を得ることができます。
 
 ## 2024 年 1 月 23 日 {#january-23-2024}
 
@@ -39,7 +39,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
     -   各プロジェクトにリージョンレベルの CIDR を直接設定できます。
     -   より広範囲の CIDR 値から CIDR 構成を選択できます。
 
-    注: プロジェクトの以前のグローバル レベルの CIDR 設定は廃止されましたが、アクティブ状態にあるすべての既存のリージョン CIDR は影響を受けません。既存のクラスターのネットワークには影響はありません。
+    注: プロジェクトの以前のグローバル レベルの CIDR 設定は廃止されましたが、アクティブ状態にある既存のすべてのリージョン CIDR は影響を受けません。既存のクラスターのネットワークには影響はありません。
 
     詳細については、 [リージョンの CIDR を設定する](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)を参照してください。
 

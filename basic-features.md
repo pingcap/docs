@@ -176,7 +176,7 @@ summary: Learn about the feature overview of TiDB.
 | [`PREDICATE COLUMNS`の統計を収集する](/statistics.md#collect-statistics-on-some-columns)         |         E        |         E        |         E        |         E        |         E        |         E        |         N        |  N  |  N  |  N  |
 | [統計を収集するためのメモリ割り当てを制御する](/statistics.md#the-memory-quota-for-collecting-statistics)      |         E        |         E        |         E        |         E        |         N        |         N        |         N        |  N  |  N  |  N  |
 | [約 10,000 行のデータをランダムにサンプリングして統計を迅速に構築します](/system-variables.md#tidb_enable_fast_analyze) |      廃止されました     |         E        |         E        |         E        |         E        |         E        |         E        |  E  |  E  |  E  |
-| [ロック統計](/statistics.md#lock-statistics)                                                  |         E        |         E        |         E        |         N        |         N        |         N        |         N        |  N  |  N  |  N  |
+| [ロック統計](/statistics.md#lock-statistics)                                                  |         Y        |         E        |         E        |         N        |         N        |         N        |         N        |  N  |  N  |  N  |
 | [軽量統計の初期化](/statistics.md#load-statistics)                                               |         Y        |         E        |         N        |         N        |         N        |         N        |         N        |  N  |  N  |  N  |
 | [統計収集の進行状況を表示する](/sql-statements/sql-statement-show-analyze-status.md)                   |         Y        |         N        |         N        |         N        |         N        |         N        |         N        |  N  |  N  |  N  |
 
@@ -217,7 +217,7 @@ summary: Learn about the feature overview of TiDB.
 
 ## 管理、可観測性、およびツール {#management-observability-and-tools}
 
-| 管理、可観測性、およびツール                                                                                                 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+| 管理、可観測性、ツール                                                                                                    | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 | -------------------------------------------------------------------------------------------------------------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | [TiDB ダッシュボード UI](/dashboard/dashboard-intro.md)                                                               |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [TiDB ダッシュボードの継続的プロファイリング](/dashboard/continuous-profiling.md)                                                 |  Y  |  Y  |  Y  |  Y  |  E  |  E  |  N  |  N  |  N  |  N  |
@@ -246,7 +246,7 @@ summary: Learn about the feature overview of TiDB.
 | [クラスター間の RawKV レプリケーション](/tikv-configuration-file.md#api-version-new-in-v610)                                  |  E  |  E  |  E  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [グリーンGC](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50)                                               |  E  |  E  |  E  |  E  |  E  |  E  |  E  |  E  |  E  |  N  |
 | [リソース制御](/tidb-resource-control.md)                                                                            |  Y  |  Y  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
-| [暴走クエリ管理](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries)  |  E  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
+| [暴走クエリの管理](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries) |  E  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [バックグラウンドタスク管理](/tidb-resource-control.md#manage-background-tasks)                                             |  E  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [TiFlash の分散型ストレージとコンピューティングアーキテクチャおよび S3 サポート](/tiflash/tiflash-disaggregated-and-s3.md)                      |  Y  |  E  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [Distributed eXecution Framework (DXF) タスク用の TiDB ノードの選択](/system-variables.md#tidb_service_scope-new-in-v740) |  Y  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |

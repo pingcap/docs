@@ -9,7 +9,7 @@ summary: Learn the TiDB configuration file options that are not involved in comm
 
 # TiDBコンフィグレーションファイル {#tidb-configuration-file}
 
-TiDB 構成ファイルは、コマンドライン パラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/release-7.5/pkg/config/config.toml.example)ダウンロードし、その名前を`config.toml`に変更できます。このドキュメントでは、 [コマンドラインオプション](/command-line-flags-for-tidb-configuration.md)に関係しないオプションのみを説明します。
+TiDB 構成ファイルは、コマンドライン パラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/release-7.5/pkg/config/config.toml.example)ダウンロードし、その名前を`config.toml`に変更できます。このドキュメントでは、 [コマンドラインオプション](/command-line-flags-for-tidb-configuration.md)に関係しないオプションのみについて説明します。
 
 > **ヒント：**
 >
@@ -204,7 +204,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>enable-global-kill</code> <span class="version-mark">v6.1.0 の新機能</span> {#code-enable-global-kill-code-span-class-version-mark-new-in-v6-1-0-span}
 
--   Global Kill (インスタンス間のクエリまたは接続の終了) 機能を有効にするかどうかを制御します。
+-   Global Kill (インスタンス間でのクエリまたは接続の終了) 機能を有効にするかどうかを制御します。
 -   デフォルト値: `true`
 -   値が`true`の場合、 `KILL`と`KILL TIDB`ステートメントの両方でインスタンス間のクエリまたは接続を終了できるため、クエリまたは接続が誤って終了することを心配する必要はありません。クライアントを使用して任意の TiDB インスタンスに接続し、 `KILL`または`KILL TIDB`ステートメントを実行すると、ステートメントはターゲット TiDB インスタンスに転送されます。クライアントと TiDB クラスターの間にプロキシがある場合、ステートメント`KILL`と`KILL TIDB`も実行のためにターゲット TiDB インスタンスに転送されます。
 -   v7.3.0 以降、 `enable-global-kill`と[`enable-32bits-connection-id`](#enable-32bits-connection-id-new-in-v730)両方が`true`に設定されている場合、MySQL コマンド ライン<kbd>Control+C</kbd>を使用してクエリまたは接続を終了できます。詳細については、 [`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
@@ -444,19 +444,15 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>session-token-signing-cert</code> <span class="version-mark">v6.4.0 の新機能</span> {#code-session-token-signing-cert-code-span-class-version-mark-new-in-v6-4-0-span}
 
-> **警告：**
->
-> このパラメータによって制御される機能は開発中です。**デフォルト値は変更しないでください**。
-
+-   証明書ファイルのパス。セッション移行のために[TiProxy](https://docs.pingcap.com/tidb/v7.6/tiproxy-overview)によって使用されます。
 -   デフォルト値: &quot;&quot;
+-   値が空の場合、TiProxy セッションの移行は失敗します。セッション移行を有効にするには、すべての TiDB ノードがこれを同じ証明書とキーに設定する必要があります。これは、すべての TiDB ノードに同じ証明書とキーを保存する必要があることを意味します。
 
 ### <code>session-token-signing-key</code> <span class="version-mark">v6.4.0 の新機能</span> {#code-session-token-signing-key-code-span-class-version-mark-new-in-v6-4-0-span}
 
-> **警告：**
->
-> このパラメータによって制御される機能は開発中です。**デフォルト値は変更しないでください**。
-
+-   [TiProxy](https://docs.pingcap.com/tidb/v7.6/tiproxy-overview)がセッション移行に使用するキー ファイル パス。
 -   デフォルト値: &quot;&quot;
+-   [`session-token-signing-cert`](#session-token-signing-cert-new-in-v640)の説明を参照してください。
 
 ## パフォーマンス {#performance}
 
@@ -551,6 +547,10 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   値のオプション: デフォルト値`NO_PRIORITY`は、ステートメントの優先順位が強制的に変更されないことを意味します。他のオプションは昇順で`LOW_PRIORITY` 、 `DELAYED` 、および`HIGH_PRIORITY`です。
 -   v6.1.0 以降、すべてのステートメントの優先順位は、TiDB 構成項目[`instance.tidb_force_priority`](/tidb-configuration-file.md#tidb_force_priority)またはシステム変数[`tidb_force_priority`](/system-variables.md#tidb_force_priority)によって決定されます。 `force-priority`は引き続き有効です。ただし、 `force-priority`と`instance.tidb_force_priority`同時に設定した場合は、後者が有効になります。
 
+> **注記：**
+>
+> v6.6.0 以降、TiDB は[リソース制御](/tidb-resource-control.md)をサポートします。この機能を使用すると、異なるリソース グループで異なる優先順位で SQL ステートメントを実行できます。これらのリソース グループに適切なクォータと優先順位を構成することで、異なる優先順位を持つ SQL ステートメントのスケジュール制御を向上させることができます。リソース制御が有効になっている場合、ステートメントの優先順位は無効になります。さまざまな SQL ステートメントのリソース使用量を管理するには、 [リソース制御](/tidb-resource-control.md)を使用することをお勧めします。
+
 ### <code>distinct-agg-push-down</code> {#code-distinct-agg-push-down-code}
 
 -   オプティマイザが`Distinct`の集計関数 ( `select count(distinct a) from t`など) をコプロセッサにプッシュダウンする操作を実行するかどうかを決定します。
@@ -587,12 +587,12 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   `lite-init-stats`の値が`true`の場合、統計の初期化では、インデックスまたは列のヒストグラム、TopN、または Count-Min スケッチがメモリにロードされません。 `lite-init-stats`の値が`false`の場合、統計の初期化では、インデックスと主キーのヒストグラム、TopN、および Count-Min スケッチがメモリにロードされますが、非主キー列のヒストグラム、TopN、または Count-Min スケッチはメモリにロードされません。オプティマイザが特定のインデックスまたは列のヒストグラム、TopN、および Count-Min スケッチを必要とする場合、必要な統計が同期または非同期でメモリにロードされます ( [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)によって制御されます)。
 -   `lite-init-stats`から`true`に設定すると、統計の初期化が高速化され、不必要な統計のロードが回避されるため、TiDBメモリの使用量が削減されます。詳細は[負荷統計](/statistics.md#load-statistics)を参照してください。
 
-### <code>force-init-stats</code> <span class="version-mark">v7.1.0 の新機能</span> {#code-force-init-stats-code-span-class-version-mark-new-in-v7-1-0-span}
+### <code>force-init-stats</code> <span class="version-mark">v6.5.7 および v7.1.0 の新機能</span> {#code-force-init-stats-code-span-class-version-mark-new-in-v6-5-7-and-v7-1-0-span}
 
 -   TiDB の起動時にサービスを提供する前に、統計の初期化が完了するまで待機するかどうかを制御します。
 -   デフォルト値: v7.2.0 より前のバージョンの場合は`false` 、v7.2.0 以降のバージョンの場合は`true` 。
--   `force-init-stats`の値が`true`の場合、TiDB は起動時にサービスを提供する前に、統計の初期化が完了するまで待つ必要があります。テーブルとパーティションの数が多く、 [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)の値が`false`ある場合、 `force-init-stats`から`true`に設定すると、TiDB がサービスの提供を開始するまでにかかる時間が長くなる可能性があることに注意してください。
--   `force-init-stats`の値が`false`の場合、TiDB は統計の初期化が完了する前でもサービスを提供できますが、オプティマイザは擬似統計を使用して決定を行うため、最適とは言えない実行計画が生じる可能性があります。
+-   `force-init-stats`の値が`true`の場合、TiDB は起動時にサービスを提供する前に、統計の初期化が完了するまで待つ必要があります。テーブルとパーティションの数が多く、 [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)の値が`false`である場合、 `force-init-stats`から`true`に設定すると、TiDB がサービスの提供を開始するまでにかかる時間が長くなる可能性があることに注意してください。
+-   `force-init-stats`の値が`false`の場合、TiDB は統計の初期化が完了する前でもサービスを提供できますが、オプティマイザは疑似統計を使用して決定を行うため、最適ではない実行計画が生じる可能性があります。
 
 ## オープントレース {#opentracing}
 
@@ -719,6 +719,16 @@ opentracing.reporterに関するコンフィグレーション項目。
 -   TiKV 負荷のしきい値。 TiKV 負荷がこのしきい値を超えると、TiKV の圧力を軽減するためにさらに`batch`パケットが収集されます。 `tikv-client.max-batch-size`の値が`0`より大きい場合にのみ有効です。この値は変更しないことをお勧めします。
 -   デフォルト値: `200`
 
+### <code>copr-req-timeout</code> <span class="version-mark">v7.5.0 の新機能</span> {#code-copr-req-timeout-code-span-class-version-mark-new-in-v7-5-0-span}
+
+> **警告：**
+>
+> この構成は将来のバージョンでは非推奨になる可能性があります。この設定の値は変更**しないでください**。
+
+-   単一のコプロセッサー要求のタイムアウト。
+-   デフォルト値: `60`
+-   単位：秒
+
 ## tikv-client.copr-cache <span class="version-mark">v4.0.0 の新機能</span> {#tikv-client-copr-cache-span-class-version-mark-new-in-v4-0-0-span}
 
 このセクションでは、コプロセッサーキャッシュ機能に関連する設定項目を紹介します。
@@ -787,6 +797,12 @@ TiDB サービスのステータスに関連するコンフィグレーション
 ### <code>record-db-qps</code> {#code-record-db-qps-code}
 
 -   データベース関連の QPS メトリクスを Prometheus に送信するかどうかを決定します。
+-   デフォルト値: `false`
+
+### <code>record-db-label</code> {#code-record-db-label-code}
+
+-   データベース関連の QPS メトリクスを Prometheus に送信するかどうかを決定します。
+-   期間やステートメントなど、 `record-db-qps`よりも多くのメトリック タイプをサポートします。
 -   デフォルト値: `false`
 
 ## pessimistic-txn {#pessimistic-txn}
@@ -889,6 +905,10 @@ TiDB サービスのステータスに関連するコンフィグレーション
 -   デフォルト値: `NO_PRIORITY`
 -   デフォルト値`NO_PRIORITY`は、ステートメントの優先順位が強制的に変更されないことを意味します。他のオプションは昇順で`LOW_PRIORITY` 、 `DELAYED` 、および`HIGH_PRIORITY`です。
 -   v6.1.0 より前では、この構成は`force-priority`によって設定されます。
+
+> **注記：**
+>
+> v6.6.0 以降、TiDB は[リソース制御](/tidb-resource-control.md)をサポートします。この機能を使用すると、異なるリソース グループで異なる優先順位で SQL ステートメントを実行できます。これらのリソース グループに適切なクォータと優先順位を構成することで、異なる優先順位を持つ SQL ステートメントのスケジュール制御を向上させることができます。リソース制御が有効になっている場合、ステートメントの優先順位は無効になります。さまざまな SQL ステートメントのリソース使用量を管理するには、 [リソース制御](/tidb-resource-control.md)を使用することをお勧めします。
 
 ### <code>max_connections</code> {#code-max-connections-code}
 

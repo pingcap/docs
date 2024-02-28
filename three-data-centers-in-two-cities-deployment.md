@@ -39,7 +39,7 @@ summary: Learn the deployment solution to three availability zones in two region
 
 -   **短所**
 
-    -   データの整合性はRaftアルゴリズムによって実現されるため、同じリージョン内の 2 つの AZ に同時に障害が発生した場合、別のリージョン (サンフランシスコ) のディザスター リカバリー AZ には 1 つのレプリカのみが残ります。これでは、ほとんどのレプリカが存続するというRaftアルゴリズムの要件を満たすことができません。その結果、クラスターが一時的に使用できなくなる可能性があります。メンテナンス スタッフは、残っている 1 つのレプリカからクラスターを回復する必要がありますが、レプリケートされていない少量のホット データが失われます。しかし、このケースはまれな出来事です。
+    -   データの整合性はRaftアルゴリズムによって実現されるため、同じリージョン内の 2 つの AZ に同時に障害が発生した場合、別のリージョン (サンフランシスコ) のディザスター リカバリー AZ には 1 つのレプリカのみが残ります。これでは、ほとんどのレプリカが存続するというRaftアルゴリズムの要件を満たすことができません。その結果、クラスターが一時的に使用できなくなる可能性があります。メンテナンス スタッフは、残っている 1 つのレプリカからクラスターを回復する必要がありますが、複製されていない少量のホット データが失われます。しかし、このケースはまれな出来事です。
     -   このアーキテクチャのネットワーク インフラストラクチャは、ISP の専用ネットワークを使用するため、コストが高くなります。
     -   2 つのリージョンの 3 つの AZ に 5 つのレプリカが構成されているため、データの冗長性が向上し、storageコストが増加します。
 
@@ -51,7 +51,7 @@ summary: Learn the deployment solution to three availability zones in two region
 
 上の図から、シアトルには AZ1 と AZ2 の 2 つの AZ があることがわかります。 AZ1 には、rac1、rac2、rac3 の 3 セットのラックがあります。 AZ2 には rac4 と rac5 の 2 つのラックがあります。サンフランシスコの AZ3 には rac6 ラックが搭載されています。
 
-AZ1 の rac1 では、1 つのサーバーがTiDB および PD サービスを使用してデプロイされ、他の 2 つのサーバーが TiKV サービスを使用してデプロイされます。各 TiKVサーバーは2 つの TiKV インスタンス (tikv-server) でデプロイされます。これは、rac2、rac4、rac5、および rac6 と同様です。
+AZ1 の rac1 では、1 つのサーバーがTiDB および PD サービスを使用してデプロイされ、他の 2 つのサーバーが TiKV サービスを使用してデプロイされます。各 TiKVサーバーは2 つの TiKV インスタンス (tikv-server) でデプロイされます。これは、rac2、rac4、rac5、および rac6 に似ています。
 
 TiDBサーバー、制御マシン、および監視サーバーはrac3 上にあります。 TiDBサーバーは、定期的なメンテナンスとバックアップのために導入されます。 Prometheus、Grafana、および復元ツールは、制御マシンと監視マシンにデプロイされます。
 
@@ -113,8 +113,8 @@ tikv_servers:
   - host: 10.63.10.34
     config:
       server.labels: { az: "3", replication zone: "5", rack: "5", host: "34" }
-      raftstore.raft-min-election-timeout-ticks: 1000
-      raftstore.raft-max-election-timeout-ticks: 1200
+      raftstore.raft-min-election-timeout-ticks: 50
+      raftstore.raft-max-election-timeout-ticks: 60
 
 monitoring_servers:
   - host: 10.63.10.60
@@ -174,11 +174,15 @@ tikv_servers:
 -   別のリージョン (サンフランシスコ) の TiKV ノードのネットワーク構成を最適化します。サンフランシスコの AZ3 の次の TiKV パラメーターを変更し、この TiKV ノードのレプリカがRaft選挙に参加しないようにします。
 
     ```yaml
-    raftstore.raft-min-election-timeout-ticks: 1000
-    raftstore.raft-max-election-timeout-ticks: 1200
+    raftstore.raft-min-election-timeout-ticks: 50
+    raftstore.raft-max-election-timeout-ticks: 60
     ```
 
--   スケジュールを設定します。クラスターが有効になったら、 `tiup ctl:v<CLUSTER_VERSION> pd`ツールを使用してスケジューリング ポリシーを変更します。 TiKV Raftレプリカの数を変更します。この番号を計画どおりに構成します。この例では、レプリカの数は 5 です。
+> **注記：**
+>
+> `raftstore.raft-min-election-timeout-ticks`と`raftstore.raft-max-election-timeout-ticks`を使用して、TiKV ノードの選択タイムアウト ティックをより大きく設定すると、そのノード上のリージョンがリーダーになる可能性が大幅に低下する可能性があります。ただし、一部の TiKV ノードがオフラインで、残りのアクティブな TiKV ノードがRaftログで遅れているような災害シナリオでは、この TiKV ノード上の選出タイムアウト ティックが大きいリージョンのみがリーダーになれます。この TiKV ノード上のリージョンは、選挙を開始する前に少なくとも「raftstore.raft-min-election-timeout-ticks」で設定された期間待機する必要があるため、クラスターへの潜在的な影響を防ぐために、これらの値を過度に大きく設定しないことをお勧めします。このようなシナリオでの可用性。
+
+-   スケジュールを設定します。クラスターが有効になったら、 `tiup ctl:v{CLUSTER_VERSION} pd`ツールを使用してスケジューリング ポリシーを変更します。 TiKV Raftレプリカの数を変更します。この番号を計画どおりに構成します。この例では、レプリカの数は 5 です。
 
     ```bash
     config set max-replicas 5

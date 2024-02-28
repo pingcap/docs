@@ -14,7 +14,7 @@ summary: Learn about the multi-replica disaster recovery solution for a single c
 
 ## 導入 {#introduction}
 
-重要な本番システムには通常、ゼロ RPO と分単位の RTO を備えた地域的な DR が必要です。 Raft ベースの分散データベースである TiDB は複数のレプリカを提供するため、データの一貫性と高可用性が保証された地域 DR をサポートできます。同じリージョン内のアベイラブル ゾーン (AZ) 間のネットワークレイテンシーが小さいことを考慮すると、ビジネス トラフィックを同じリージョン上の 2 つの AZ に同時にディスパッチし、リージョンリーダーと PD リーダーを適切に配置することで、同じリージョン上の AZ 間の負荷分散を実現できます。 。
+重要な本番システムには通常、ゼロ RPO と分単位の RTO を備えた地域的な DR が必要です。 Raft ベースの分散データベースである TiDB は複数のレプリカを提供するため、データの一貫性と高可用性が保証された地域 DR をサポートできます。同じリージョン内のアベイラブル ゾーン (AZ) 間のネットワークレイテンシーが小さいことを考慮すると、ビジネス トラフィックを同じリージョン上の 2 つの AZ に同時にディスパッチし、リージョンリーダーと PD リーダーを適切に配置することで、同じリージョン上の AZ 間のロード バランスを実現できます。 。
 
 > **注記：**
 >
@@ -74,8 +74,8 @@ summary: Learn about the multi-replica disaster recovery solution for a single c
         config:
           server.labels: { Region: "Region3", AZ: "AZ5" }
 
-          raftstore.raft-min-election-timeout-ticks: 1000
-          raftstore.raft-max-election-timeout-ticks: 1200
+          raftstore.raft-min-election-timeout-ticks: 50
+          raftstore.raft-max-election-timeout-ticks: 60
 
     monitoring_servers:
       - host: tidb-dr-test2

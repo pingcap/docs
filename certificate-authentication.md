@@ -3,7 +3,7 @@ title: Certificate-Based Authentication for Login
 summary: Learn the certificate-based authentication used for login.
 ---
 
-# ログイン用の証明書ベースの認証 {#certificate-based-authentication-for-login}
+# 証明書ベースのログイン認証 {#certificate-based-authentication-for-login}
 
 TiDB は、ユーザーが TiDB にログインするための証明書ベースの認証方法をサポートしています。この方法を使用すると、TiDB はさまざまなユーザーに証明書を発行し、暗号化された接続を使用してデータを転送し、ユーザーがログインするときに証明書を検証します。このアプローチは、MySQL ユーザーが一般的に使用する従来のパスワードベースの認証方法よりも安全であるため、MySQL ユーザーによって採用されています。ユーザー数の増加。
 
@@ -38,7 +38,7 @@ TiDB は、ユーザーが TiDB にログインするための証明書ベース
     sudo openssl genrsa 2048 > ca-key.pem
     ```
 
-    上記のコマンドの出力は次のとおりです。
+    上記のコマンドの出力:
 
         Generating RSA private key, 2048 bit long modulus (2 primes)
         ....................+++++
@@ -207,7 +207,7 @@ TiDB 構成ファイルの`[security]`セクションを変更します。この
 
 TiDB を起動してログを確認します。次の情報がログに表示されれば、構成は成功しています。
 
-    [INFO] [server.go:264] ["secure connection is enabled"] ["client verification enabled"=true]
+    [INFO] [server.go:286] ["mysql protocol server secure connection is enabled"] ["client verification enabled"=true]
 
 ### クライアント証明書を使用するようにクライアントを構成する {#configure-the-client-to-use-client-certificate}
 
@@ -229,9 +229,9 @@ mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key 
 
 ### ユーザー証明書情報の取得 {#get-user-certificate-information}
 
-ユーザー証明書情報は`require subject` 、 `require issuer` 、 `require san` 、および`require cipher`で指定でき、X509 証明書の属性を確認するために使用されます。
+ユーザー証明書情報は`REQUIRE SUBJECT` 、 `REQUIRE ISSUER` 、 `REQUIRE SAN` 、および`REQUIRE CIPHER`で指定でき、X.509 証明書の属性を確認するために使用されます。
 
--   `require subject` : ログイン時にクライアント証明書の`subject`情報を指定します。このオプションを指定すると、 `require ssl`またはx509の設定は不要です。指定する情報は、 [クライアントキーと証明書を生成する](#generate-client-key-and-certificate)で入力した`subject`情報と一致します。
+-   `REQUIRE SUBJECT` : ログイン時にクライアント証明書のサブジェクト情報を指定します。このオプションを指定すると、 `require ssl`または x509 の設定は不要です。指定する情報は、 [クライアントキーと証明書を生成する](#generate-client-key-and-certificate)で入力した件名情報と一致します。
 
     このオプションを取得するには、次のコマンドを実行します。
 
@@ -239,7 +239,7 @@ mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key 
     openssl x509 -noout -subject -in client-cert.pem | sed 's/.\{8\}//'  | sed 's/, /\//g' | sed 's/ = /=/g' | sed 's/^/\//'
     ```
 
--   `require issuer` : ユーザー証明書を発行するCA証明書の`subject`情報を指定します。指定する情報は、 [CA キーと証明書を生成する](#generate-ca-key-and-certificate)で入力した`subject`情報と一致します。
+-   `require issuer` : ユーザー証明書を発行するCA証明書の情報`subject`を指定します。指定する情報は、 [CA キーと証明書を生成する](#generate-ca-key-and-certificate)で入力した`subject`情報と一致します。
 
     このオプションを取得するには、次のコマンドを実行します。
 
@@ -249,27 +249,27 @@ mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key 
 
 -   `require san` : ユーザー証明書を発行するCA証明書の情報`Subject Alternative Name`を指定します。指定する情報は、クライアント証明書の生成に使用した[`openssl.cnf`構成ファイルの`alt_names`](https://docs.pingcap.com/tidb/stable/generate-self-signed-certificates)と一致します。
 
-    -   次のコマンドを実行して、生成された証明書の`require san`項目の情報を取得します。
+    -   次のコマンドを実行して、生成された証明書の`REQUIRE SAN`項目の情報を取得します。
 
         ```shell
         openssl x509 -noout -extensions subjectAltName -in client.crt
         ```
 
-    -   `require san`では現在、次の`Subject Alternative Name`チェック項目がサポートされています。
+    -   `REQUIRE SAN`では現在、次の`Subject Alternative Name`チェック項目がサポートされています。
 
         -   URI
         -   IP
         -   DNS
 
-    -   チェック項目はカンマで区切って複数設定できます。たとえば、ユーザー`u1`に対して`require san`次のように設定します。
+    -   チェック項目はカンマで区切って複数設定できます。たとえば、ユーザー`u1`に対して`REQUIRE SAN`次のように設定します。
 
         ```sql
-        create user 'u1'@'%' require san 'DNS:d1,URI:spiffe://example.org/myservice1,URI:spiffe://example.org/myservice2';
+        CREATE USER 'u1'@'%' REQUIRE SAN 'DNS:d1,URI:spiffe://example.org/myservice1,URI:spiffe://example.org/myservice2';
         ```
 
-        上記の構成では、URI 項目`spiffe://example.org/myservice1`または`spiffe://example.org/myservice2`と DNS 項目`d1`の証明書を使用して TiDB にログインできるのは`u1`人のユーザーのみです。
+        上記の構成では、URI 項目`spiffe://example.org/myservice1`または`spiffe://example.org/myservice2`と DNS 項目`d1`の証明書を使用して、 `u1`人のユーザーのみが TiDB にログインできます。
 
--   `require cipher` : クライアントがサポートする暗号方式を確認します。次のステートメントを使用して、サポートされている暗号方式のリストを確認します。
+-   `REQUIRE CIPHER` : クライアントがサポートする暗号方式を確認します。次のステートメントを使用して、サポートされている暗号方式のリストを確認します。
 
     ```sql
     SHOW SESSION STATUS LIKE 'Ssl_cipher_list';
@@ -277,34 +277,28 @@ mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key 
 
 ### ユーザー証明書情報の構成 {#configure-user-certificate-information}
 
-ユーザー証明書情報 ( `require subject` 、 `require issuer` 、 `require san` 、 `require cipher` ) を取得したら、ユーザーの作成、権限の付与、またはユーザーの変更時に検証されるようにこれらの情報を構成します。 `<replaceable>`次のステートメントの対応する情報に置き換えます。
+ユーザー証明書情報 ( `REQUIRE SUBJECT` 、 `REQUIRE ISSUER` 、 `REQUIRE SAN` 、 `REQUIRE CIPHER` ) を取得したら、ユーザーの作成、権限の付与、またはユーザーの変更時に検証されるようにこれらの情報を構成します。 `<replaceable>`次のステートメントの対応する情報に置き換えます。
 
 スペースまたは`and`を区切り文字として使用して、1 つのオプションまたは複数のオプションを設定できます。
 
--   ユーザーの作成時にユーザー証明書を構成します ( `create user` ):
+-   ユーザーの作成時にユーザー証明書を構成します ( `CREATE USER` ):
 
     ```sql
-    create user 'u1'@'%' require issuer '<replaceable>' subject '<replaceable>' san '<replaceable>' cipher '<replaceable>';
-    ```
-
--   権限を付与するときにユーザー証明書を構成します。
-
-    ```sql
-    grant all on *.* to 'u1'@'%' require issuer '<replaceable>' subject '<replaceable>' san '<replaceable>' cipher '<replaceable>';
+    CREATE USER 'u1'@'%' REQUIRE ISSUER '<replaceable>' SUBJECT '<replaceable>' SAN '<replaceable>' CIPHER '<replaceable>';
     ```
 
 -   ユーザーを変更するときにユーザー証明書を構成します。
 
     ```sql
-    alter user 'u1'@'%' require issuer '<replaceable>' subject '<replaceable>' san '<replaceable>' cipher '<replaceable>';
+    ALTER USER 'u1'@'%' REQUIRE ISSUER '<replaceable>' SUBJECT '<replaceable>' SAN '<replaceable>' CIPHER '<replaceable>';
     ```
 
 上記の設定後、ログイン時に次の項目が確認されます。
 
 -   SSL が使用されます。クライアント証明書を発行する CA は、サーバーに構成されている CA と一致します。
--   クライアント証明書の`issuer`情報は、 `require issuer`で指定した情報と一致します。
--   クライアント証明書の`subject`情報は、 `require cipher`で指定した情報と一致します。
--   クライアント証明書の`Subject Alternative Name`情報は、 `require san`で指定した情報と一致します。
+-   クライアント証明書の`issuer`情報は、 `REQUIRE ISSUER`で指定した情報と一致します。
+-   クライアント証明書の`subject`情報は、 `REQUIRE CIPHER`で指定した情報と一致します。
+-   クライアント証明書の`Subject Alternative Name`情報は、 `REQUIRE SAN`で指定した情報と一致します。
 
 上記のすべての項目が確認された場合にのみ、TiDB にログインできます。それ以外の場合は、 `ERROR 1045 (28000): Access denied`エラーが返されます。次のコマンドを使用して、TLS バージョン、暗号アルゴリズム、および現在の接続でログインに証明書が使用されているかどうかを確認できます。
 
@@ -317,17 +311,17 @@ MySQL クライアントに接続し、次のステートメントを実行し�
 出力：
 
     --------------
-    mysql  Ver 15.1 Distrib 10.4.10-MariaDB, for Linux (x86_64) using readline 5.1
+    mysql  Ver 8.3.0 for Linux on x86_64 (MySQL Community Server - GPL)
 
     Connection id:       1
     Current database:    test
     Current user:        root@127.0.0.1
-    SSL:                 Cipher in use is TLS_AES_256_GCM_SHA384
+    SSL:                 Cipher in use is TLS_AES_128_GCM_SHA256
 
 次に、次のステートメントを実行します。
 
 ```sql
-show variables like '%ssl%';
+SHOW VARIABLES LIKE '%ssl%';
 ```
 
 出力：
@@ -335,13 +329,14 @@ show variables like '%ssl%';
     +---------------+----------------------------------+
     | Variable_name | Value                            |
     +---------------+----------------------------------+
-    | ssl_cert      | /path/to/server-cert.pem         |
-    | ssl_ca        | /path/to/ca-cert.pem             |
-    | have_ssl      | YES                              |
     | have_openssl  | YES                              |
+    | have_ssl      | YES                              |
+    | ssl_ca        | /path/to/ca-cert.pem             |
+    | ssl_cert      | /path/to/server-cert.pem         |
+    | ssl_cipher    |                                  |
     | ssl_key       | /path/to/server-key.pem          |
     +---------------+----------------------------------+
-    6 rows in set (0.067 sec)
+    6 rows in set (0.06 sec)
 
 ## 証明書の更新と置き換え {#update-and-replace-certificate}
 

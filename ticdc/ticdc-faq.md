@@ -55,14 +55,14 @@ cdc cli changefeed list --server=http://127.0.0.1:8300
 
 ## TiCDC の<code>gc-ttl</code>は何ですか? {#what-is-code-gc-ttl-code-in-ticdc}
 
-v4.0.0-rc.1 以降、PD はサービス レベルの GC セーフポイントの設定において外部サービスをサポートします。どのサービスでも GC セーフポイントを登録および更新できます。 PD は、この GC セーフポイントより後のキーと値のデータが GC によってクリーンアップされないことを保証します。
+v4.0.0-rc.1 以降、PD はサービス レベルの GC セーフポイントの設定において外部サービスをサポートしています。どのサービスでも GC セーフポイントを登録および更新できます。 PD は、この GC セーフポイントより後のキーと値のデータが GC によってクリーンアップされないことを保証します。
 
 この機能により、レプリケーション タスクが利用できないか中断された場合、TiCDC によって消費されるデータが GC によってクリーンアップされずに TiKV に保持されることが保証されます。
 
 TiCDCサーバーを起動するときに、 `gc-ttl`を構成することで GC セーフポイントの存続時間 (TTL) 期間を指定できます。 [TiUPを使用して変更します](/ticdc/deploy-ticdc.md#modify-ticdc-cluster-configurations-using-tiup) `gc-ttl`もできます。デフォルト値は 24 時間です。 TiCDC では、この値は次のことを意味します。
 
 -   TiCDC サービスが停止した後、GC セーフポイントが PD に保持される最大時間。
--   タスクが中断または手動で停止された後に、レプリケーション タスクを一時停止できる最大時間。一時停止されたレプリケーション タスクの時間が`gc-ttl`で設定された値よりも長い場合、レプリケーション タスクは`failed`ステータスになり、再開できず、GC セーフポイントの進行に影響を与え続けることはできません。
+-   TiKV の GC が TiCDC の GC セーフポイントによってブロックされている場合、 `gc-ttl` TiCDC レプリケーション タスクの最大レプリケ​​ーション遅延を示します。レプリケーション タスクの遅延が`gc-ttl`で設定された値を超えると、レプリケーション タスクは`failed`状態になり、 `ErrGCTTLExceeded`エラーを報告します。これは回復できず、GC セーフポイントの進行を妨げなくなります。
 
 上記の 2 番目の動作は、TiCDC v4.0.13 以降のバージョンで導入されています。目的は、TiCDC のレプリケーション タスクが長時間中断され、上流の TiKV クラスターの GC セーフポイントが長期間継続できなくなり、古いデータ バージョンが多すぎる状態で保持され、上流クラスターのパフォーマンスに影響を与えることを防ぐことです。
 
@@ -74,9 +74,15 @@ TiCDCサーバーを起動するときに、 `gc-ttl`を構成することで GC
 
 TiCDC サービスの開始後にレプリケーション タスクが開始される場合、TiCDC 所有者は、PD サービスの GC セーフポイントをすべてのレプリケーション タスクの中で最も小さい値`checkpoint-ts`で更新します。サービス GC セーフポイントは、TiCDC がその時点およびその後に生成されたデータを削除しないことを保証します。レプリケーション タスクが中断または手動で停止された場合、このタスクの`checkpoint-ts`変わりません。一方、PDの対応サービスGCセーフポイントも更新されない。
 
-レプリケーション タスクが`gc-ttl`で指定された時間より長く一時停止されている場合、レプリケーション タスクは`failed`ステータスになり、再開できません。 PD対応サービスGCセーフポイントは継続します。
+レプリケーション タスクが`gc-ttl`で指定された時間よりも長く一時停止されている場合、レプリケーション タスクは`failed`ステータスになり、再開できません。 PD対応サービスGCセーフポイントは継続します。
 
-TiCDC がサービス GC セーフポイントに設定する存続時間 (TTL) は 24 時間です。これは、TiCDC サービスが中断されてから 24 時間以内に回復できる場合、GC メカニズムはデータを削除しないことを意味します。
+TiCDC がサービス GC セーフポイントに設定するデフォルトの Time-To-Live (TTL) は 24 時間です。つまり、TiCDC サービスが GC セーフポイントから 24 時間以内に回復できる場合、レプリケーションを継続するために TiCDC が必要とするデータは GC メカニズムによって削除されません。中断されます。
+
+## レプリケーション タスクが失敗した後に回復するにはどうすればよいですか? {#how-to-recover-a-replication-task-after-it-fails}
+
+1.  レプリケーション タスクのエラー情報をクエリし、できるだけ早くエラーを修正するには、 `cdc cli changefeed query`を使用します。
+2.  値`gc-ttl`を増やすと、エラーを修正するまでの時間が長くなり、エラーが修正された後にレプリケーション遅延が`gc-ttl`を超えるためにレプリケーション タスクが`failed`ステータスにならないようになります。
+3.  システムへの影響を評価した後、TiDB の値[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)増やして GC をブロックしてデータを保持し、エラー修正後に GC クリーニング データによってレプリケーション タスクが`failed`ステータスにならないようにします。
 
 ## TiCDC タイム ゾーンとアップストリーム/ダウンストリーム データベースのタイム ゾーンの関係を理解するにはどうすればよいですか? {#how-to-understand-the-relationship-between-the-ticdc-time-zone-and-the-time-zones-of-the-upstream-downstream-databases}
 
@@ -177,7 +183,7 @@ TiCDC オープン プロトコルでは、タイプ コード`6`は`null`を表
 
 ## TiCDC はどのくらいの PDstorageを使用しますか? {#how-much-pd-storage-does-ticdc-use}
 
-TiCDC は PD で etcd を使用してメタデータを保存し、定期的に更新します。 etcd の MVCC と PD のデフォルトの圧縮の間の時間間隔は 1 時間であるため、TiCDC が使用する PDstorageの量は、この 1 時間以内に生成されるメタデータ バージョンの量に比例します。ただし、v4.0.5、v4.0.6、および v4.0.7 では、TiCDC に頻繁な書き込みの問題があるため、1 時間に 1000 のテーブルが作成またはスケジュールされている場合、etcdstorageがすべて占有され、 `etcdserver: mvcc: database space exceeded`エラーが返されます。 。このエラーが発生した後は、etcdstorageをクリーンアップする必要があります。詳細は[etcd メンテナンススペースクォータ](https://etcd.io/docs/v3.4.0/op-guide/maintenance/#space-quota)参照してください。クラスターを v4.0.9 以降のバージョンにアップグレードすることをお勧めします。
+TiCDC は PD で etcd を使用してメタデータを保存し、定期的に更新します。 etcd の MVCC と PD のデフォルト圧縮の間の時間間隔は 1 時間であるため、TiCDC が使用する PDstorageの量は、この 1 時間以内に生成されるメタデータ バージョンの量に比例します。ただし、v4.0.5、v4.0.6、および v4.0.7 では、TiCDC には頻繁な書き込みの問題があるため、1 時間に 1000 のテーブルが作成またはスケジュールされている場合、etcdstorageがすべて占有され、 `etcdserver: mvcc: database space exceeded`エラーが返されます。 。このエラーが発生した後は、etcdstorageをクリーンアップする必要があります。詳細は[etcd メンテナンススペースクォータ](https://etcd.io/docs/v3.4.0/op-guide/maintenance/#space-quota)参照してください。クラスターを v4.0.9 以降のバージョンにアップグレードすることをお勧めします。
 
 ## TiCDC は大規模なトランザクションのレプリケーションをサポートしていますか?リスクはありますか? {#does-ticdc-support-replicating-large-transactions-is-there-any-risk}
 
@@ -260,7 +266,19 @@ v6.1.3 より前のバージョンでは、 `safe-mode`デフォルトは`true`�
 
 ## アップストリームからTiDB LightningおよびBRを使用してデータを復元した後、TiCDC を使用したレプリケーションが停止したり停止したりするのはなぜですか? {#why-does-replication-using-ticdc-stall-or-even-stop-after-data-restore-using-tidb-lightning-and-br-from-upstream}
 
-現在、TiCDC はまだTiDB LightningおよびBRと完全な互換性はありません。したがって、TiCDC によってレプリケートされるテーブルではTiDB LightningおよびBRを使用しないでください。
+現在、TiCDC はまだTiDB LightningおよびBRと完全な互換性はありません。したがって、TiCDC によってレプリケートされるテーブルではTiDB LightningおよびBRを使用しないでください。そうしないと、TiCDC レプリケーションの停止、レプリケーションレイテンシーの大幅なスパイク、またはデータ損失などの不明なエラーが発生する可能性があります。
+
+TiDB LightningまたはBRを使用して、TiCDC によってレプリケートされた一部のテーブルのデータを復元する必要がある場合は、次の手順を実行します。
+
+1.  これらのテーブルに関連する TiCDC レプリケーション タスクを削除します。
+
+2.  TiDB LightningまたはBRを使用して、TiCDC の上流クラスターと下流クラスターでデータを個別に復元します。
+
+3.  復元が完了し、上流クラスターと下流クラスター間のデータの整合性が確認されたら、上流バックアップのタイムスタンプ (TSO) をタスクの`start-ts`として、増分レプリケーション用の新しい TiCDC レプリケーション タスクを作成します。たとえば、アップストリーム クラスターのBRバックアップのスナップショット タイムスタンプが`431434047157698561`であると仮定すると、次のコマンドを使用して新しい TiCDC レプリケーション タスクを作成できます。
+
+    ```shell
+    cdc cli changefeed create -c "upstream-to-downstream-some-tables" --start-ts=431434047157698561 --sink-uri="mysql://root@127.0.0.1:4000? time-zone="
+    ```
 
 ## チェンジフィードが一時停止から再開すると、そのレプリケーションのレイテンシーはますます長くなり、数分後にのみ通常の状態に戻ります。なぜ？ {#after-a-changefeed-resumes-from-pause-its-replication-latency-gets-higher-and-higher-and-returns-to-normal-only-after-a-few-minutes-why}
 

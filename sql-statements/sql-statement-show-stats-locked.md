@@ -7,10 +7,6 @@ summary: An overview of the usage of SHOW STATS_LOCKED for the TiDB database.
 
 `SHOW STATS_LOCKED` 、統計がロックされているテーブルを示します。
 
-> **警告：**
->
-> 統計のロックは、現在のバージョンの実験的機能です。本番環境での使用はお勧めできません。
-
 ## あらすじ {#synopsis}
 
 ```ebnf+diagram

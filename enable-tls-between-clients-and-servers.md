@@ -1,15 +1,15 @@
 ---
 title: Enable TLS Between TiDB Clients and Servers
-summary: Use the encrypted connection to ensure data security.
+summary: Use secure connections to ensure data security.
 ---
 
 # TiDB クライアントとサーバーの間で TLS を有効にする {#enable-tls-between-tidb-clients-and-servers}
 
-TiDB のサーバーとクライアント間の非暗号化接続はデフォルトで許可されており、これにより、チャネル トラフィックを監視するサードパーティは、サーバーとクライアントの間で送受信されるデータ (クエリ内容やクエリ結果など) を知ることができます。チャネルが信頼できない場合 (クライアントがパブリック ネットワーク経由で TiDBサーバーに接続している場合など)、暗号化されていない接続では情報漏洩が発生する可能性があります。この場合、セキュリティ上の理由から、暗号化された接続を要求することをお勧めします。
+デフォルトでは、TiDB はサーバーとクライアント間の安全でない接続を許可します。これにより、チャネル トラフィックを監視するサードパーティは、サーバーとクライアントの間で送受信されるデータ (クエリ コンテンツやクエリ結果など) を知り、場合によっては変更することができます。チャネルが信頼できない場合 (クライアントがパブリック ネットワーク経由で TiDBサーバーに接続している場合など)、安全でない接続により情報漏洩が発生する可能性があります。この場合、セキュリティ上の理由から、TLS で保護された接続を要求することをお勧めします。
 
-TiDBサーバーは、 TLS (Transport Layer Security) に基づく暗号化接続をサポートしています。このプロトコルは MySQL 暗号化接続と一致しており、MySQL クライアント、MySQL シェル、MySQL ドライバーなどの既存の MySQL クライアントによって直接サポートされています。 TLS は、SSL (セキュリティ Sockets Layer) と呼ばれることもあります。 SSL プロトコルには[既知のセキュリティ脆弱性](https://en.wikipedia.org/wiki/Transport_Layer_Security)あるため、TiDB は SSL をサポートしません。 TiDB は、TLSv1.0、TLSv1.1、TLSv1.2、および TLSv1.3 のプロトコルをサポートします。
+TiDBサーバーは、 TLS (Transport Layer Security) プロトコルに基づいた安全な接続をサポートしています。このプロトコルは MySQL の安全な接続と一致しており、MySQL クライアント、MySQL シェル、MySQL ドライバーなどの既存の MySQL クライアントによって直接サポートされています。 TLS は、SSL (セキュリティ Sockets Layer) と呼ばれることもあります。 SSL プロトコルには[既知のセキュリティ脆弱性](https://en.wikipedia.org/wiki/Transport_Layer_Security)あるため、TiDB は SSL をサポートしません。 TiDB は、TLSv1.0、TLSv1.1、TLSv1.2、および TLSv1.3 のプロトコルをサポートします。
 
-暗号化された接続が使用される場合、接続には次のセキュリティ特性があります。
+TLS で保護された接続が使用される場合、接続には次のセキュリティ プロパティがあります。
 
 -   機密性: トラフィックの平文は盗聴を避けるために暗号化されます。
 -   整合性: トラフィックの平文は改ざんできません
@@ -19,8 +19,8 @@ TLS で保護された接続を使用するには、まず TLS を有効にす�
 
 MySQL と同様に、TiDB では、同じ TCP ポート上で TLS 接続と非 TLS 接続が可能です。 TLS が有効になっている TiDBサーバーの場合、暗号化された接続を通じて TiDBサーバーに安全に接続するか、暗号化されていない接続を使用するかを選択できます。次の方法を使用して、安全な接続の使用を要求できます。
 
--   すべてのユーザーに対して TiDBサーバーへの安全な接続を要求するようにシステム変数`require_secure_transport`を構成します。
--   ユーザーを作成する場合 ( `create user` )、または既存のユーザーを変更する場合 ( `alter user` ) に`REQUIRE SSL`指定します。これは、指定されたユーザーが TiDB にアクセスするために暗号化された接続を使用する必要があることを指定します。ユーザーを作成する例を次に示します。
+-   すべてのユーザーに対して TiDBサーバーへの安全な接続を要求するようにシステム変数[`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610)を構成します。
+-   ユーザーを作成する場合 ( `create user` )、または既存のユーザーを変更する場合 ( `alter user` ) に`REQUIRE SSL`指定します。これは、指定されたユーザーが TiDB にアクセスするために TLS 接続を使用する必要があることを指定します。ユーザーを作成する例を次に示します。
 
     ```sql
     CREATE USER 'u1'@'%' IDENTIFIED BY 'my_random_password' REQUIRE SSL;
@@ -44,26 +44,26 @@ MySQL と同様に、TiDB では、同じ TCP ポート上で TLS 接続と非 T
 
 TiDBサーバーで独自の証明書を使用した安全な接続を有効にするには、TiDBサーバーの起動時に構成ファイルで`ssl-cert`と`ssl-key`の両方のパラメーターを指定する必要があります。クライアント認証に`ssl-ca`パラメータを指定することもできます ( [認証を有効にする](#enable-authentication)を参照)。
 
-パラメータで指定されたすべてのファイルは PEM (Privacy Enhanced Mail) 形式です。現在、TiDB はパスワードで保護された秘密キーのインポートをサポートしていないため、パスワードなしで秘密キー ファイルを提供する必要があります。証明書または秘密キーが無効な場合、TiDBサーバーは通常どおり起動しますが、クライアントは暗号化された接続を介して TiDBサーバーに接続できません。
+パラメータで指定されたすべてのファイルは PEM (Privacy Enhanced Mail) 形式です。現在、TiDB はパスワードで保護された秘密キーのインポートをサポートしていないため、パスワードなしで秘密キー ファイルを提供する必要があります。証明書または秘密キーが無効な場合、TiDBサーバーは通常どおり起動しますが、クライアントは TLS 接続を通じて TiDBサーバーに接続できません。
 
-証明書パラメータが正しい場合、TiDB は起動時に`secure connection is enabled`を出力します。それ以外の場合は、 `secure connection is NOT ENABLED`を出力します。
+証明書パラメータが正しい場合、TiDB は起動時に`"INFO"`レベルのログに`mysql protocol server secure connection is enabled`を出力します。
 
-TiDB バージョン v5.2.0 より前の場合、 `mysql_ssl_rsa_setup --datadir=./certs`を使用して証明書を生成できます。 `mysql_ssl_rsa_setup`ツールは MySQL Server の一部です。
+## TLS 接続を使用するように MySQL クライアントを構成する {#configure-the-mysql-client-to-use-tls-connections}
 
-## 暗号化された接続を使用するように MySQL クライアントを構成する {#configure-the-mysql-client-to-use-encrypted-connections}
-
-MySQL 5.7以降のバージョンのクライアントは、デフォルトで暗号化された接続を確立しようとします。サーバーが暗号化された接続をサポートしていない場合は、自動的に非暗号化接続に戻ります。バージョン 5.7 より前の MySQL のクライアントは、デフォルトで暗号化されていない接続を使用します。
+MySQL 5.7以降のバージョンのクライアントは、デフォルトで TLS 接続の確立を試みます。サーバーがTLS 接続をサポートしていない場合は、自動的に暗号化されていない接続に戻ります。バージョン 5.7 より前の MySQL のクライアントは、デフォルトで非 TLS 接続を使用します。
 
 次の`--ssl-mode`パラメータを使用して、クライアントの接続動作を変更できます。
 
--   `--ssl-mode=REQUIRED` : クライアントは暗号化された接続を必要とします。サーバー側が暗号化された接続をサポートしていない場合、接続を確立できません。
--   `--ssl-mode`パラメータがない場合: クライアントは暗号化接続を使用しようとしますが、サーバー側が暗号化接続をサポートしていない場合、暗号化接続は確立できません。その後、クライアントは暗号化されていない接続を使用します。
+-   `--ssl-mode=REQUIRED` : クライアントは TLS 接続を必要とします。サーバー側が TLS 接続をサポートしていない場合、接続を確立できません。
+-   `--ssl-mode`パラメータがない場合: クライアントは TLS 接続の使用を試みますが、サーバー側が暗号化接続をサポートしていない場合、暗号化接続を確立できません。その後、クライアントは暗号化されていない接続を使用します。
 -   `--ssl-mode=DISABLED` : クライアントは暗号化されていない接続を使用します。
 
-MySQL 8.0 クライアントには、このパラメータに加えて 2 つの SSL モードがあります。
+MySQL 8.x クライアントには、このパラメータに加えて 2 つの SSL モードがあります。
 
 -   `--ssl-mode=VERIFY_CA` : `--ssl-ca`を必要とする CA に対してサーバーからの証明書を検証します。
 -   `--ssl-mode=VERIFY_IDENTITY` : `VERIFY_CA`と同じですが、接続先のホスト名が証明書と一致するかどうかも検証します。
+
+MySQL 5.7および MariaDB クライアント以前の場合、 `--ssl-verify-server-cert`を使用してサーバー証明書の検証を有効にできます。
 
 詳細については、MySQL の[暗号化された接続のためのクライアント側のコンフィグレーション](https://dev.mysql.com/doc/refman/8.0/en/using-encrypted-connections.html#using-encrypted-connections-client-side-configuration)を参照してください。
 
@@ -86,15 +86,15 @@ TiDBサーバーまたは MySQL クライアントで`ssl-ca`パラメーター�
 
 -   相互認証を行うには、上記の両方の要件を満たす必要があります。
 
-デフォルトでは、サーバーからクライアントへの認証はオプションです。 TLS ハンドシェイク中にクライアントが識別証明書を提示しなくても、TLS 接続は確立できます。ユーザーの作成 ( `create user` )、権限の付与 ( `grant` )、または既存のユーザーの変更 ( `alter user` ) に`require x509`を指定して、クライアントの認証を要求することもできます。ユーザーを作成する例を次に示します。
+デフォルトでは、サーバーからクライアントへの認証はオプションです。 TLS ハンドシェイク中にクライアントが識別証明書を提示しなくても、TLS 接続は確立できます。ユーザーを作成するとき ( `CREATE USER` )、または既存のユーザーを変更するとき ( `ALTER USER` ) に`REQUIRE x509`を指定して、クライアントの認証を要求することもできます。ユーザーを作成する例を次に示します。
 
 ```sql
-create user 'u1'@'%'  require x509;
+CREATE USER 'u1'@'%'  REQUIRE X509;
 ```
 
 > **注記：**
 >
-> ログイン ユーザーが[TiDB 証明書ベースのログイン認証](/certificate-authentication.md#configure-the-user-certificate-information-for-login-verification)使用して設定した場合、ユーザーは TiDB への暗号化された接続を有効にすることが暗黙的に要求されます。
+> ログイン ユーザーが[TiDB 証明書ベースのログイン認証](/certificate-authentication.md#configure-the-user-certificate-information-for-login-verification)使用して設定した場合、ユーザーは TiDB への TLS 接続を有効にすることが暗黙的に要求されます。
 
 ## 現在の接続で暗号化が使用されているかどうかを確認する {#check-whether-the-current-connection-uses-encryption}
 
@@ -102,23 +102,32 @@ create user 'u1'@'%'  require x509;
 
 暗号化された接続での結果の次の例を参照してください。結果は、クライアントがサポートする TLS バージョンまたは暗号化プロトコルによって異なります。
 
-    mysql> SHOW STATUS LIKE "%Ssl%";
-    ......
-    | Ssl_verify_mode | 5                            |
-    | Ssl_version     | TLSv1.2                      |
-    | Ssl_cipher      | ECDHE-RSA-AES128-GCM-SHA256  |
-    ......
+```sql
+SHOW STATUS LIKE "Ssl%";
+```
+
+    +-----------------------+------------------------------------------------------->
+    | Variable_name         | Value                                                 >
+    +-----------------------+------------------------------------------------------->
+    | Ssl_cipher            | TLS_AES_128_GCM_SHA256                                >
+    | Ssl_cipher_list       | RC4-SHA:DES-CBC3-SHA:AES128-SHA:AES256-SHA:AES128-SHA2>
+    | Ssl_server_not_after  | Apr 23 07:59:47 2024 UTC                              >
+    | Ssl_server_not_before | Jan 24 07:59:47 2024 UTC                              >
+    | Ssl_verify_mode       | 5                                                     >
+    | Ssl_version           | TLSv1.3                                               >
+    +-----------------------+------------------------------------------------------->
+    6 rows in set (0.0062 sec)
 
 公式 MySQL クライアントの場合、 `STATUS`または`\s`ステートメントを使用して接続ステータスを表示することもできます。
 
     mysql> \s
     ...
-    SSL: Cipher in use is ECDHE-RSA-AES128-GCM-SHA256
+    SSL: Cipher in use is TLS_AES_128_GCM_SHA256
     ...
 
 ## サポートされている TLS バージョン、キー交換プロトコル、および暗号化アルゴリズム {#supported-tls-versions-key-exchange-protocols-and-encryption-algorithms}
 
-TiDB でサポートされる TLS バージョン、鍵交換プロトコル、および暗号化アルゴリズムは、公式のGolangライブラリによって決定されます。
+TiDB でサポートされる TLS バージョン、鍵交換プロトコル、および暗号化アルゴリズムは、公式 Go ライブラリによって決定されます。
 
 オペレーティング システムの暗号化ポリシーと使用しているクライアント ライブラリも、サポートされるプロトコルと暗号スイートのリストに影響を与える可能性があります。
 
@@ -129,7 +138,7 @@ TiDB でサポートされる TLS バージョン、鍵交換プロトコル、�
 -   TLSv1.2
 -   TLSv1.3
 
-`tls-version`構成オプションを使用すると、使用できる TLS バージョンを制限できます。
+[`tls-version`](/tidb-configuration-file.md#tls-version)構成オプションを使用すると、使用できる TLS バージョンを制限できます。
 
 使用できる実際の TLS バージョンは、OS の暗号化ポリシー、MySQL クライアントのバージョン、およびクライアントで使用される SSL/TLS ライブラリによって異なります。
 
@@ -158,7 +167,7 @@ TiDB でサポートされる TLS バージョン、鍵交換プロトコル、�
 
 ## 証明書、キー、CA をリロードする {#reload-certificate-key-and-ca}
 
-証明書、キー、または CA を置き換えるには、まず対応するファイルを置き換えてから、実行中の TiDB インスタンスで[`ALTER INSTANCE RELOAD TLS`](/sql-statements/sql-statement-alter-instance.md)ステートメントを実行して、証明書 ( [`ssl-cert`](/tidb-configuration-file.md#ssl-cert) )、キー ( [`ssl-key`](/tidb-configuration-file.md#ssl-key) )、および CA ( [`ssl-ca`](/tidb-configuration-file.md#ssl-ca) ) を元の構成からリロードします。パス。この方法では、TiDB インスタンスを再起動する必要はありません。
+証明書、キー、または CA を置き換えるには、まず対応するファイルを置き換えてから、実行中の TiDB インスタンスで[`ALTER INSTANCE RELOAD TLS`](/sql-statements/sql-statement-alter-instance.md)ステートメントを実行して、元の構成から証明書 ( [`ssl-cert`](/tidb-configuration-file.md#ssl-cert) )、キー ( [`ssl-key`](/tidb-configuration-file.md#ssl-key) )、および CA ( [`ssl-ca`](/tidb-configuration-file.md#ssl-ca) ) を再ロードします。パス。この方法では、TiDB インスタンスを再起動する必要はありません。
 
 新しくロードされた証明書、キー、および CA は、ステートメントが正常に実行された後に確立された接続で有効になります。ステートメントの実行前に確立された接続は影響を受けません。
 

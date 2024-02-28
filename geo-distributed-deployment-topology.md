@@ -56,9 +56,13 @@ summary: Learn the geo-distributed deployment topology of TiDB.
 -   リモート TiKV ノードが不必要なRaft選挙を開始しないようにするには、リモート TiKV ノードが選挙を開始するために必要な最小および最大ティック数を増やす必要があります。 2 つのパラメータはデフォルトで`0`に設定されます。
 
     ```yaml
-    raftstore.raft-min-election-timeout-ticks: 1000
-    raftstore.raft-max-election-timeout-ticks: 1020
+    raftstore.raft-min-election-timeout-ticks: 50
+    raftstore.raft-max-election-timeout-ticks: 60
     ```
+
+> **注記：**
+>
+> `raftstore.raft-min-election-timeout-ticks`と`raftstore.raft-max-election-timeout-ticks`を使用して、TiKV ノードの選択タイムアウト ティックをより大きく設定すると、そのノード上のリージョンがリーダーになる可能性が大幅に低下する可能性があります。ただし、一部の TiKV ノードがオフラインで、残りのアクティブな TiKV ノードがRaftログで遅れているような災害シナリオでは、この TiKV ノード上の選出タイムアウト ティックが大きいリージョンのみがリーダーになれます。この TiKV ノード上のリージョンは、選挙を開始する前に少なくとも「raftstore.raft-min-election-timeout-ticks」で設定された期間待機する必要があるため、クラスターへの潜在的な影響を防ぐために、これらの値を過度に大きく設定しないことをお勧めします。このようなシナリオでの可用性。
 
 #### PDパラメータ {#pd-parameters}
 
@@ -91,5 +95,5 @@ summary: Learn the geo-distributed deployment topology of TiDB.
 
 > **注記：**
 >
-> -   構成ファイルに`tidb`ユーザーを手動で作成する必要はありません。 TiUPクラスターコンポーネントは、ターゲット マシン上に`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズしたり、ユーザーと制御マシンの一貫性を保つことができます。
+> -   構成ファイルに`tidb`ユーザーを手動で作成する必要はありません。 TiUPクラスターコンポーネントは、ターゲット マシン上に`tidb`のユーザーを自動的に作成します。ユーザーをカスタマイズしたり、ユーザーと制御マシンの一貫性を保つことができます。
 > -   デプロイメント ディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリにデプロイされます。

@@ -7,10 +7,6 @@ summary: An overview of the usage of UNLOCK STATS for the TiDB database.
 
 `UNLOCK STATS`は、テーブルの統計のロックを解除するために使用されます。
 
-> **警告：**
->
-> 統計のロックは、現在のバージョンの実験的機能です。本番環境での使用はお勧めできません。
-
 ## あらすじ {#synopsis}
 
 ```ebnf+diagram

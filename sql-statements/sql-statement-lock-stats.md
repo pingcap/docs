@@ -7,10 +7,6 @@ summary: An overview of the usage of LOCK STATS for the TiDB database.
 
 `LOCK STATS`は、テーブルまたはパーティションの統計をロックするために使用されます。統計がロックされている場合、TiDB はテーブルまたはパーティションの統計を自動的に更新しません。動作の詳細については、 [ロック統計の動作](/statistics.md#behaviors-of-locking-statistics)を参照してください。
 
-> **警告：**
->
-> 統計のロックは、現在のバージョンの実験的機能です。本番環境での使用はお勧めしません。
-
 ## あらすじ {#synopsis}
 
 ```ebnf+diagram

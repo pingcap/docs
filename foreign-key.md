@@ -311,7 +311,7 @@ Create Table | CREATE TABLE `child` (
 <CustomContent platform="tidb">
 
 -   [TiDBBinlog](/tidb-binlog/tidb-binlog-overview.md)は外部キーをサポートしません。
--   [DM](/dm/dm-overview.md)は外部キーをサポートしません。 DM v6.6.0 では、データを TiDB にレプリケートするときに、ダウンストリーム TiDB の[`foreign_key_checks`](/system-variables.md#foreign_key_checks)が無効になります。したがって、外部キーによって引き起こされるカスケード操作は上流から下流にレプリケートされず、データの不整合が発生する可能性があります。この動作は、以前の DM バージョンと一致しています。
+-   [DM](/dm/dm-overview.md)は外部キーをサポートしません。 DM は、データを TiDB にレプリケートするときに、ダウンストリーム TiDB の[`foreign_key_checks`](/system-variables.md#foreign_key_checks)を無効にします。したがって、外部キーによって引き起こされるカスケード操作は上流から下流にレプリケートされず、データの不整合が発生する可能性があります。
 -   [TiCDC](/ticdc/ticdc-overview.md) v6.6.0 は外部キーと互換性があります。 TiCDC の以前のバージョンでは、外部キーを含むテーブルを複製するときにエラーが報告される場合がありました。 v6.6.0 より前の TiCDC バージョンを使用する場合は、ダウンストリーム TiDB クラスターの`foreign_key_checks`無効にすることをお勧めします。
 -   [BR](/br/backup-and-restore-overview.md) v6.6.0 は外部キーと互換性があります。 BRの以前のバージョンでは、外部キーを含むテーブルを v6.6.0 以降のクラスターに復元するときにエラーが報告される場合があります。 v6.6.0 より前のBRを使用する場合は、クラスターを復元する前にダウンストリーム TiDB クラスターの`foreign_key_checks`無効にすることをお勧めします。
 -   [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用する場合は、データをインポートする前にダウンストリーム TiDB クラスターの`foreign_key_checks`無効にすることをお勧めします。
