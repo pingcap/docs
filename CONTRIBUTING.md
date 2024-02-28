@@ -4,7 +4,7 @@ Welcome to [TiDB](https://github.com/pingcap/tidb) documentation! We are excited
 
 ## What you can contribute
 
-You can start from any one of the following items to help improve [TiDB Docs at the PingCAP website](https://docs.pingcap.com/tidb/stable):
+You can start from any one of the following items to help improve [TiDB documentation at the PingCAP website](https://docs.pingcap.com/tidb/stable):
 
 - Fix typos or format (punctuation, space, indentation, code block, etc.)
 - Fix or update inappropriate or outdated descriptions
@@ -203,7 +203,7 @@ In the example:
 
 ## Guideline for previewing EBNF diagrams
 
-[TiDB Docs at the PingCAP website](https://docs.pingcap.com/tidb/stable) provide a lot of SQL synopsis diagrams to help users understand the SQL syntax. For example, you can find the synopsis diagrams for the `ALTER INDEX` statement [here](https://docs.pingcap.com/tidb/stable/sql-statement-alter-index#synopsis).
+[TiDB documentation](https://docs.pingcap.com/tidb/stable) provides a lot of SQL synopsis diagrams to help users understand the SQL syntax. For example, you can find the synopsis diagrams for the `ALTER INDEX` statement [here](https://docs.pingcap.com/tidb/stable/sql-statement-alter-index#synopsis).
 
 The source of these synopsis diagrams is written using [extended Backus–Naur form (EBNF)](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form). When preparing the EBNF code for a SQL statement, you can easily preview the EBNF diagram by copying the code to <https://kennytm.github.io/website-docs/dist/> and clicking **Render**.
 
