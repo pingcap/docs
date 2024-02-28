@@ -5,6 +5,10 @@ summary: Learn the main features, installation, and usage of TiProxy.
 
 # TiProxy Overview
 
+> **Warning:**
+>
+> TiProxy is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tiproxy/issues) on GitHub.
+
 TiProxy is the official proxy component of PingCAP. It is placed between the client and the TiDB server to provide load balancing, connection persistence, service discovery, and other features for TiDB.
 
 TiProxy is an optional component. You can also use a third-party proxy component or connect directly to the TiDB server without using a proxy.
