@@ -78,10 +78,10 @@ Description of configuration parameters:
 | drop view     | DDL  | |Matches `drop view` event     |
 
 - `ignore-sql`: the DDL statements to be ignored. This parameter accepts an array of strings, in which you can configure multiple regular expressions. This rule only applies to DDL events.
-- `ignore-delete-value-expr`: this parameter accepts a SQL expression. This rule only applies to delete DML events with the specified value.
-- `ignore-insert-value-expr`: this parameter accepts a SQL expression. This rule only applies to insert DML events with the specified value.
-- `ignore-update-old-value-expr`: this parameter accepts a SQL expression. This rule only applies to update DML events whose old value contains the specified value.
-- `ignore-update-new-value-expr`: this parameter accepts a SQL expression. This rule only applies to update DML events whose new value contains the specified value.
+- `ignore-delete-value-expr`: this parameter accepts a SQL expression that follows the default SQL Mode. This rule only applies to delete DML events with the specified value.
+- `ignore-insert-value-expr`: this parameter accepts a SQL expression that follows the default SQL Mode. This rule only applies to insert DML events with the specified value.
+- `ignore-update-old-value-expr`: this parameter accepts a SQL expression that follows the default SQL Mode. This rule only applies to update DML events whose old value contains the specified value.
+- `ignore-update-new-value-expr`: this parameter accepts a SQL expression that follows the default SQL Mode. This rule only applies to update DML events whose new value contains the specified value.
 
 > **Note:**
 >
