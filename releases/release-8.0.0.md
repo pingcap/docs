@@ -45,12 +45,6 @@ Several enhancements were made in this version to mitigate that:
   - Priority queue for auto-analyze, making auto-analyze less rigid and more stable across more tables</td>
   </tr>
   <tr>
-    <td rowspan="1">Reliability and Availability</td>
-    <td>SQL Plan Management</td>
-    <td>TiDB introduces a more scalable way to manage SQL plan bindings.</td>
-  </tr>
-  <tr>
-  <tr>
     <td rowspan="1">DB Operations and Observability</td>
     <td>Index usage view</td>
     <td>TiDB adds a new system table for viewing the usage statistics of indexes, ultimately helping users to evaluate the importance (or lack thereof) of all indexes.</td>
