@@ -75,7 +75,10 @@ When using the smooth upgrade feature, note the following limitations.
 
 ### Limitations on user operations
 
-* Before the upgrade, if there is a canceling DDL job in the cluster, that is, an ongoing DDL job is being canceled by a user, because the job in the canceling state cannot be paused, TiDB will retry canceling the job. If the retry fails, an error is reported and the upgrade is exited.
+* Before the upgrade, consider the following restrictions:
+
+    * If there is a canceling DDL job in the cluster, that is, an ongoing DDL job is being canceled by a user, because the job in the canceling state cannot be paused, TiDB will retry canceling the job. If the retry fails, an error is reported and the upgrade is exited.
+    * If the TiDB Distributed eXecution Framework (DXF) is enabled, disable it by setting [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) to `OFF` (its default value) and ensure that all ongoing distributed `ADD INDEX` and `IMPORT INTO` tasks are completed. Alternatively, you can cancel these tasks and wait until the upgrade is complete to restart them. Otherwise, the `ADD INDEX` operations during the upgrade might cause data index inconsistency.
 
 * In scenarios of using TiUP to upgrade TiDB, because TiUP upgrade has a timeout period, if the cluster has a large number of DDL jobs (more than 300) waiting in queues before the upgrade, the upgrade might fail.
 
@@ -84,10 +87,6 @@ When using the smooth upgrade feature, note the following limitations.
     * Run DDL operations on system tables (`mysql.*`, `information_schema.*`, `performance_schema.*`, and `metrics_schema.*`).
     * Manually cancel DDL jobs: `ADMIN CANCEL DDL JOBS job_id [, job_id] ...;`.
     * Import data.
-    * Run distributed `ADD INDEX` or `IMPORT INTO` tasks. If the TiDB Distributed eXecution Framework (DXF) is enabled before the smooth upgrade, and there are ongoing `ADD INDEX` or `IMPORT INTO` tasks during the upgrade, perform the following steps to mitigate potential issues:
-      1. Disable the DXF by setting [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) to `OFF` (its default value).
-      2. Ensure that all ongoing distributed `ADD INDEX` and `IMPORT INTO` tasks are completed before the upgrade starts. Alternatively, you can cancel these tasks and wait until the upgrade is complete to restart them.
-      3. After completing the preceding two steps, you can proceed with the smooth upgrade.
 
 ### Limitations on tools
 
