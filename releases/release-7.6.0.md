@@ -293,8 +293,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 | TiDB Lightning | [`block-size`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) | Newly added | Controls the I/O block size for sorting local files in Physical Import Mode (`backend='local'`). The default value is `16KiB`. When the disk IOPS is a bottleneck, you can increase this value to improve performance. |
 | BR | [`--granularity`](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-restore) | Newly added | Uses the coarse-grained Region scatter algorithm (experimental) by specifying `--granularity="coarse-grained"`. This accelerates restore speed in large-scale Region scenarios. |
 | TiCDC | [`compression`](/ticdc/ticdc-changefeed-config.md) | Newly added | Controls the behavior to compress redo log files. |
-| TiCDC | [`encoding-worker-num`](/ticdc/ticdc-changefeed-config.md) | Newly added | Controls the number of encoding and decoding workers in the redo module. The default value is `16`. |
-| TiCDC | [`flush-worker-num`](/ticdc/ticdc-changefeed-config.md) | Newly added | Controls the number of flushing workers in the redo module. The default value is `8`. |
 | TiCDC | [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md) | Newly added | Sets the automatic cleanup of historical data when replicating data to object storage. |
 
 ### System tables
