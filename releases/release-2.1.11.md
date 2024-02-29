@@ -1,5 +1,6 @@
 ---
 title: TiDB 2.1.11 Release Notes
+summary: TiDB 2.1.11 was released on June 03, 2019. It includes fixes for various issues in TiDB, PD, TiKV, and Tools. Some highlights are the fix for incorrect schema in delete from join, calculation errors of unix_timestamp(), and the addition of Drainer parameters in TiDB Ansible.
 ---
 
 # TiDB 2.1.11 Release Notes

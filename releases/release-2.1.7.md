@@ -1,5 +1,6 @@
 ---
 title: TiDB 2.1.7 Release Notes
+summary: TiDB 2.1.7 was released on March 28, 2019. It includes various bug fixes, compatibility improvements, and new features such as support for subqueries in the `DO` statement, plugin framework, and checking binlog and Pump/Drainer status using SQL statements. PD also fixed an issue related to transferring leader step in balance-region. Additionally, the default retention time of Prometheus monitoring data in TiDB Ansible has been changed to 30d.
 ---
 
 # TiDB 2.1.7 Release Notes

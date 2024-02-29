@@ -1,6 +1,6 @@
 ---
 title: Snapshot Backup and Restore Guide
-summary: Learn about how to back up and restore TiDB snapshots using the br command-line tool.
+summary: This document describes how to back up and restore TiDB snapshots using the br command-line tool. It includes instructions for snapshot backup, restoring data of a specified time point, and restoring a database or table. The document also covers the performance and impact of snapshot backup and restore.
 ---
 
 # Snapshot Backup and Restore Guide

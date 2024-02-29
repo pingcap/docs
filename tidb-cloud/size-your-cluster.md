@@ -23,17 +23,17 @@ To learn performance test results of different cluster scales, see [TiDB Cloud P
 
 The supported vCPU and RAM sizes include the following:
 
-- 2 vCPU, 8 GiB (Beta)
 - 4 vCPU, 16 GiB
 - 8 vCPU, 16 GiB
 - 16 vCPU, 32 GiB
+- 32 vCPU, 64 GiB
 
 > **Note:**
 >
-> If the vCPU and RAM size of TiDB is set as **2 vCPU, 8 GiB (Beta)** or **4 vCPU, 16 GiB**, note the following restrictions:
+> If the vCPU and RAM size of TiDB is set as **4 vCPU, 16 GiB**, note the following restrictions:
 >
 > - The node number of TiDB can only be set to 1 or 2, and the node number of TiKV is fixed to 3.
-> - 2 vCPU TiDB can only be used with 2 vCPU TiKV. 4 vCPU TiDB can only be used with 4 vCPU TiKV.
+> - 4 vCPU TiDB can only be used with 4 vCPU TiKV.
 > - TiFlash is unavailable.
 
 ### TiDB node number
@@ -85,18 +85,18 @@ To learn performance test results of different cluster scales, see [TiDB Cloud P
 
 The supported vCPU and RAM sizes include the following:
 
-- 2 vCPU, 8 GiB (Beta)
 - 4 vCPU, 16 GiB
 - 8 vCPU, 32 GiB
 - 8 vCPU, 64 GiB
 - 16 vCPU, 64 GiB
+- 32 vCPU, 128 GiB
 
 > **Note:**
 >
-> If the vCPU and RAM size of TiKV is set as **2 vCPU, 8 GiB (Beta)** or **4 vCPU, 16 GiB**, note the following restrictions:
+> If the vCPU and RAM size of TiKV is set as **4 vCPU, 16 GiB**, note the following restrictions:
 >
 > - The node number of TiDB can only be set to 1 or 2, and the node number of TiKV is fixed to 3.
-> - 2 vCPU TiKV can only be used with 2 vCPU TiDB. 4 vCPU TiKV can only be used with 4 vCPU TiDB.
+> - 4 vCPU TiKV can only be used with 4 vCPU TiDB.
 > - TiFlash is unavailable.
 
 ### TiKV node number
@@ -168,10 +168,10 @@ The supported node storage of different TiKV vCPUs is as follows:
 
 | TiKV vCPU | Min node storage | Max node storage | Default node storage |
 |:---------:|:----------------:|:----------------:|:--------------------:|
-| 2 vCPU    | 200 GiB          |     500 GiB      | 200 GiB              |
 | 4 vCPU    | 200 GiB          |     2048 GiB     | 500 GiB              |
 | 8 vCPU    | 200 GiB          |     4096 GiB     | 500 GiB              |
 | 16 vCPU   | 200 GiB          |     6144 GiB     | 500 GiB              |
+| 32 vCPU   | 200 GiB          |     6144 GiB     | 500 GiB              |
 
 > **Note:**
 >
@@ -189,8 +189,9 @@ The supported vCPU and RAM sizes include the following:
 
 - 8 vCPU, 64 GiB
 - 16 vCPU, 128 GiB
+- 32 vCPU, 256 GiB
 
-Note that TiFlash is unavailable when the vCPU and RAM size of TiDB or TiKV is set as **2 vCPU, 8 GiB (Beta)** or **4 vCPU, 16 GiB**.
+Note that TiFlash is unavailable when the vCPU and RAM size of TiDB or TiKV is set as **4 vCPU, 16 GiB**.
 
 ### TiFlash node number
 
@@ -212,6 +213,7 @@ The supported node storage of different TiFlash vCPUs is as follows:
 |:---------:|:----------------:|:----------------:|:--------------------:|
 | 8 vCPU    | 200 GiB          | 2048 GiB         | 500 GiB              |
 | 16 vCPU   | 200 GiB          | 2048 GiB         | 500 GiB              |
+| 32 vCPU   | 200 GiB          | 2048 GiB         | 500 GiB              |
 
 > **Note:**
 >

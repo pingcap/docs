@@ -1,6 +1,6 @@
 ---
 title: SQL Statements Page of TiDB Dashboard
-summary: View the execution status of all SQL statements in the TiDB cluster.
+summary: The SQL statements page in TiDB Dashboard shows the execution status of all SQL statements in the cluster. It allows users to analyze long-running SQL statements and provides options to access, filter, display more columns, sort, and change settings. The page also includes a feature to limit the number of stored SQL statements. For more details, visit the TiDB Dashboard documentation.
 ---
 
 # SQL Statements Page of TiDB Dashboard
@@ -21,7 +21,7 @@ All the data shown on the SQL statement summary page are from the TiDB statement
 
 > **Note:**
 >
-> In the **Mean Latency** column of the SQL statement summary page, the blue bar indicates the average execution time. If there is a yellow line on the blue bar for an SQL statement, the left and right sides of the yellow line respectively represent the minimum and maximum execution time of the SQL statement during the recent data collection cycle. 
+> In the **Mean Latency** column of the SQL statement summary page, the blue bar indicates the average execution time. If there is a yellow line on the blue bar for an SQL statement, the left and right sides of the yellow line respectively represent the minimum and maximum execution time of the SQL statement during the recent data collection cycle.
 
 ### Change Filters
 
