@@ -268,6 +268,7 @@ As an open-source distributed SQL database, TiDB requires the following network 
 TiDB relies on [Grafana](https://grafana.com/) to provide visualization of database metrics. A recent version of Microsoft Edge, Safari, Chrome or Firefox with Javascript enabled is sufficient.
 
 ## Hardware and Software Requirements for TiFlash Disaggregated Storage and Compute Architecture
+
 All the descriptions above are for the coupled TiFlash architecture. Starting from v7.0.0, TiFlash introduces support for the [disaggregated of storage and compute](/tiflash/tiflash-disaggregated-and-s3.md) architecture. In this architecture, TiFlash is divided into storage nodes and compute nodes. The corresponding hardware and software requirements are as follows:
 1. **Software:**
    - The operating system and platform requirements are same with the coupled storage and compute architecture.
@@ -282,12 +283,14 @@ All the descriptions above are for the coupled TiFlash architecture. Starting fr
 4. **CPU and Other Memory Requirements - Refer to the Next Section**
 
 ### Development and Testing Environment
+
 | **Component** | **CPU** | **Memory** | **Local Storage** | **Network** | **Instance Quantity (Minimum Requirement)** |
 | --- | --- | --- | --- | --- | --- |
 | TiFlash Storage Node | 16 cores+ | 32 GB+ | SSD, 200 GB+ | Gigabit Ethernet | 1 |
 | TiFlash Compute Node | 16 cores+ | 32 GB+ | SSD, 100 GB+ | Gigabit Ethernet | 0 |
 
 ### Production Environment
+
 | **Component** | **CPU** | **Memory** | **Disk Type** | **Network** | **Instance Quantity (Minimum Requirement)** |
 | --- | --- | --- | --- | --- | --- |
 | TiFlash Storage Node | 32 cores+ | 64 GB+ | 1 or more SSDs | 10 Gigabit Ethernet (2 recommended) | 1 |
