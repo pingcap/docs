@@ -1987,7 +1987,7 @@ mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 
 
 From example 2, you can see that in `dynamic` mode, the execution plan with IndexJoin is selected when you execute the query.
 
-Currently, `static` pruning mode does not support plan cache, neither for prepared statmements nor non-prepared statements.
+Currently, `static` pruning mode does not support plan cache for both prepared and non-prepared statements.
 
 #### Update statistics of partitioned tables in dynamic pruning mode
 
