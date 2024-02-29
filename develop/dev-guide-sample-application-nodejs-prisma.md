@@ -101,7 +101,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 6. Edit the `.env` file, set up the environment variable `DATABASE_URL` as follows, and replace the corresponding placeholders `{}` with the connection string in the connection dialog:
 
     ```dotenv
-    DATABASE_URL={connection_string}
+    DATABASE_URL='{connection_string}'
     ```
 
     > **Note**
@@ -138,7 +138,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 5. Edit the `.env` file, set up the environment variable `DATABASE_URL` as follows, replace the corresponding placeholders `{}` with connection parameters on the connection dialog:
 
     ```dotenv
-    DATABASE_URL=mysql://{user}:{password}@{host}:4000/test?sslaccept=strict&sslcert={downloaded_ssl_ca_path}
+    DATABASE_URL='mysql://{user}:{password}@{host}:4000/test?sslaccept=strict&sslcert={downloaded_ssl_ca_path}'
     ```
 
     > **Note**
@@ -167,7 +167,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 2. Edit the `.env` file, set up the environment variable `DATABASE_URL` as follows, replace the corresponding placeholders `{}` with connection parameters of your TiDB cluster:
 
     ```dotenv
-    DATABASE_URL=mysql://{user}:{password}@{host}:4000/test
+    DATABASE_URL='mysql://{user}:{password}@{host}:4000/test'
     ```
 
    If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
