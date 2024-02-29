@@ -55,8 +55,8 @@ If you encounter problems when connecting to TiDB using the tools listed in this
          <td>Full</td>
          <td>
             <ul>
-               <li><a href="https://docs.pingcap.com/tidb/v7.1/dev-guide-choose-driver-or-orm#java-drivers" data-href="/tidb/v7.1/dev-guide-choose-driver-or-orm#java-drivers">pingcap/mysql-connector-j</a></li>
-               <li><a href="https://docs.pingcap.com/tidb/v7.1/dev-guide-choose-driver-or-orm#tidb-loadbalance" data-href="/tidb/v7.1/dev-guide-choose-driver-or-orm#tidb-loadbalance">pingcap/tidb-loadbalance</a></li>
+               <li><a href="https://docs.pingcap.com/tidb/v7.1/dev-guide-choose-driver-or-orm#java-drivers" data-href="https://docs.pingcap.com/tidb/v7.1/dev-guide-choose-driver-or-orm#java-drivers">pingcap/mysql-connector-j</a></li>
+               <li><a href="https://docs.pingcap.com/tidb/v7.1/dev-guide-choose-driver-or-orm#tidb-loadbalance" data-href="https://docs.pingcap.com/tidb/v7.1/dev-guide-choose-driver-or-orm#tidb-loadbalance">pingcap/tidb-loadbalance</a></li>
             </ul>
          </td>
          <td><a href="https://docs.pingcap.com/tidb/v7.1/dev-guide-sample-application-java-jdbc">Connect to TiDB with JDBC</a></td>
@@ -95,8 +95,8 @@ If you encounter problems when connecting to TiDB using the tools listed in this
          <td>Full</td>
          <td>
             <ul>
-               <li><a href="/tidbcloud/dev-guide-choose-driver-or-orm#java-drivers" data-href="/tidbcloud/dev-guide-choose-driver-or-orm#java-drivers">pingcap/mysql-connector-j</a></li>
-               <li><a href="/tidbcloud/dev-guide-choose-driver-or-orm#tidb-loadbalance" data-href="/tidbcloud/dev-guide-choose-driver-or-orm#tidb-loadbalance">pingcap/tidb-loadbalance</a></li>
+               <li><a href="/tidbcloud/dev-guide-choose-driver-or-orm#java-drivers" data-href="https://docs.pingcap.com/tidbcloud/dev-guide-choose-driver-or-orm#java-drivers">pingcap/mysql-connector-j</a></li>
+               <li><a href="/tidbcloud/dev-guide-choose-driver-or-orm#tidb-loadbalance" data-href="https://docs.pingcap.com/tidbcloud/dev-guide-choose-driver-or-orm#tidb-loadbalance">pingcap/tidb-loadbalance</a></li>
             </ul>
          </td>
          <td><a href="/tidbcloud/dev-guide-sample-application-java-jdbc">Connect to TiDB with JDBC</a></td>
