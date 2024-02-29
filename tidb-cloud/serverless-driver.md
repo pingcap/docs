@@ -152,16 +152,16 @@ You can configure TiDB Cloud serverless driver at both the connection level and 
 
 At the connection level, you can make the following configurations:
 
-| Name         | Type     | Default value | Description                                                                                                                                                                                                                      |
-|--------------|----------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `username`   | string   | N/A           | Username of TiDB Serverless                                                                                                                                                                                                      |
-| `password`   | string   | N/A           | Password of TiDB Serverless                                                                                                                                                                                                      |
-| `host`       | string   | N/A           | Hostname of TiDB Serverless                                                                                                                                                                                                      |
-| `database`   | string   | `test`        | Database of TiDB Serverless                                                                                                                                                                                                      |
-| `url`        | string   | N/A           | The URL for the database, in the `mysql://[username]:[password]@[host]/[database]` format, where `database` can be skipped if you intend to connect to the default database.                                                     |
-| `fetch`      | function | global fetch  | Custom fetch function. For example, you can use the `undici` fetch in node.js.                                                                                                                                                   |
-| `arrayMode`  | bool     | `false`       | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.                                                                                                                             |
-| `fullResult` | bool     | `false`       | Whether to return full result object instead of just rows. To get more detailed results, set it to `true`.                                                                                                                       |
+| Name         | Type     | Default value | Description                                                                                                                                                                                                                                                                                                                                                  |
+|--------------|----------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `username`   | string   | N/A           | Username of TiDB Serverless                                                                                                                                                                                                                                                                                                                                  |
+| `password`   | string   | N/A           | Password of TiDB Serverless                                                                                                                                                                                                                                                                                                                                  |
+| `host`       | string   | N/A           | Hostname of TiDB Serverless                                                                                                                                                                                                                                                                                                                                  |
+| `database`   | string   | `test`        | Database of TiDB Serverless                                                                                                                                                                                                                                                                                                                                  |
+| `url`        | string   | N/A           | The URL for the database, in the `mysql://[username]:[password]@[host]/[database]` format, where `database` can be skipped if you intend to connect to the default database.                                                                                                                                                                                 |
+| `fetch`      | function | global fetch  | Custom fetch function. For example, you can use the `undici` fetch in node.js.                                                                                                                                                                                                                                                                               |
+| `arrayMode`  | bool     | `false`       | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.                                                                                                                                                                                                                                                         |
+| `fullResult` | bool     | `false`       | Whether to return full result object instead of just rows. To get more detailed results, set it to `true`.                                                                                                                                                                                                                                                   |
 | `decoders`   | object   | `{}`          | A collection of key-value pairs, which enables you to customize the decoding process for different column types. In each pair, you can specify a column type as the key and specify a corresponding function as the value. This function takes the raw string value received from TiDB Cloud serverless driver as an argument and returns the decoded value. |
 
 **Database URL**
@@ -201,33 +201,32 @@ const conn = connect(config)
 
 At the SQL level, you can configure the following options:
 
-| Option       | Type   | Default value | Description                                                                                                        |
-|--------------|--------|---------------|--------------------------------------------------------------------------------------------------------------------|
-| `arrayMode`  | bool   | `false`       | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.               |
-| `fullResult` | bool   | `false`       | Whether to return full result object instead of just rows. To get more detailed results, set it to `true`.         |
-| `decoders`   | object | `{}`          | A collection of key-value pairs, which enables you to customize the decoding process for different column types. In each pair, you can specify a column type as the key and specify a corresponding function as the value. This function takes the raw string value received from TiDB Cloud serverless driver as an argument and returns the decoded value. If you have configured `decoders` at both the connection and SQL levels, the key-value pairs with different keys configured at the connection level will be merged to the SQL level to take effect. If the same key (this is, column type) is specified at both levels, the value at the SQL level takes precedence. |
+| Option       | Type   | Default value     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+|--------------|--------|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `arrayMode`  | bool   | `false`           | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `fullResult` | bool   | `false`           | Whether to return the full result object instead of just rows. To get more detailed results, set it to `true`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `isolation`  | string | `REPEATABLE READ` | The transaction isolation level, which can be set to `READ COMMITTED` or `REPEATABLE READ`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `decoders`   | object | `{}`              | A collection of key-value pairs, which enables you to customize the decoding process for different column types. In each pair, you can specify a column type as the key and specify a corresponding function as the value. This function takes the raw string value received from TiDB Cloud serverless driver as an argument and returns the decoded value. If you have configured `decoders` at both the connection and SQL levels, the key-value pairs with different keys configured at the connection level will be merged to the SQL level to take effect. If the same key (this is, column type) is specified at both levels, the value at the SQL level takes precedence. |
 
-For example:
+**arrayMode and fullResult**
+
+To return the full result object as arrays, you can configure the `arrayMode` and `fullResult` options as follows:
 
 ```ts
 const conn = connect({url: process.env['DATABASE_URL'] || 'mysql://[username]:[password]@[host]/[database]'})
 const results = await conn.execute('select * from test',null,{arrayMode:true,fullResult:true})
 ```
 
-Starting from TiDB Cloud serverless driver v0.0.7, you can also configure the following SQL level option when you use transactions:
+**isolation**
 
-| Option       | Type   | Default value     | Description                                                                        |
-|--------------|--------|-------------------|------------------------------------------------------------------------------------|
-| `isolation`  | string | `REPEATABLE READ` | The transaction isolation level, which can be set to `READ COMMITTED` or `REPEATABLE READ`.    |
-
-The `isolation` option can only be used in the `begin` function. Here is an example:
+The `isolation` option can only be used in the `begin` function.
 
 ```ts
 const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]'})
 const tx = await conn.begin({isolation:"READ COMMITTED"})
 ```
 
-### Customize column type decoders
+**decoders**
 
 To customize the format of returned column values, you can configure the `decoder` option in the `connect()` method as follows:
 
@@ -252,6 +251,13 @@ conn.execute(`select ...`, [], {
   }
 })
 ```
+
+> **Note:**
+>
+> TiDB Cloud serverless driver configuration changes:
+> 
+> - v0.0.7: add the SQL level option `isolation`.
+> - v0.0.10: add the connection level configuration `decoders` and the SQL level option `decoders`.
 
 ## Features
 
@@ -281,26 +287,36 @@ The type mapping between TiDB Serverless and Javascript is as follows:
 | DECIMAL              | string          |
 | CHAR                 | string          |
 | VARCHAR              | string          |
-| BINARY               | string          |
-| VARBINARY            | string          |
+| BINARY               | Uint8Array      |
+| VARBINARY            | Uint8Array      |
 | TINYTEXT             | string          |
 | TEXT                 | string          |
 | MEDIUMTEXT           | string          |
 | LONGTEXT             | string          |
-| TINYBLOB             | string          |
-| BLOB                 | string          |
-| MEDIUMBLOB           | string          |
-| LONGBLOB             | string          |
+| TINYBLOB             | Uint8Array      |
+| BLOB                 | Uint8Array      |
+| MEDIUMBLOB           | Uint8Array      |
+| LONGBLOB             | Uint8Array      |
 | DATE                 | string          |
 | TIME                 | string          |
 | DATETIME             | string          |
 | TIMESTAMP            | string          |
 | ENUM                 | string          |
 | SET                  | string          |
-| BIT                  | string          |
+| BIT                  | Uint8Array      |
 | JSON                 | object          |
 | NULL                 | null            |
 | Others               | string          |
+
+> **Note:**
+>
+> Make sure to use the default `utf8mb4` character set in TiDB Serverless for the type conversion to JavaScript strings, because TiDB Cloud serverless driver uses the UTF-8 encoding to decode them to strings. 
+
+> **Note:**
+>
+> TiDB Cloud serverless driver data type mapping changes:
+> 
+> - v0.1.0: the `BINARY`, `VARBINARY`, `TINYBLOB`, `BLOB`, `MEDIUMBLOB`, `LONGBLOB`, and `BIT` types are now returned as a `Uint8Array` instead of a `string`.
 
 ### ORM integrations
 

@@ -1,15 +1,15 @@
 ---
 title: Enable TLS Between TiDB Clients and Servers
-summary: Use the encrypted connection to ensure data security.
+summary: Use secure connections to ensure data security.
 ---
 
 # Enable TLS between TiDB Clients and Servers
 
-Non-encrypted connection between TiDB's server and clients is allowed by default, which enables third parties that monitor channel traffic to know the data sent and received between the server and the client, including query content and query results. If a channel is untrustworthy (such as if the client is connected to the TiDB server via a public network), then a non-encrypted connection is prone to information leakage. In this case, for security reasons, it is recommended to require an encrypted connection.
+By default, TiDB allows insecure connections between the server and clients. This enables third parties that monitor channel traffic to know and possibly modify the data sent and received between the server and the client, including query content and query results. If a channel is untrustworthy (such as if the client is connected to the TiDB server via a public network), an insecure connection is prone to information leakage. In this case, for security reasons, it is recommended to require a connection that is secured with TLS.
 
-The TiDB server supports the encrypted connection based on the TLS (Transport Layer Security). The protocol is consistent with MySQL encrypted connections and is directly supported by existing MySQL clients such as MySQL Client, MySQL Shell and MySQL drivers. TLS is sometimes referred to as SSL (Secure Sockets Layer). Because the SSL protocol has [known security vulnerabilities](https://en.wikipedia.org/wiki/Transport_Layer_Security), TiDB does not support SSL. TiDB supports the following protocols: TLSv1.0, TLSv1.1, TLSv1.2 and TLSv1.3.
+The TiDB server supports secure connections based on the TLS (Transport Layer Security) protocol. The protocol is consistent with MySQL secure connections and is directly supported by existing MySQL clients such as MySQL Client, MySQL Shell and MySQL drivers. TLS is sometimes referred to as SSL (Secure Sockets Layer). Because the SSL protocol has [known security vulnerabilities](https://en.wikipedia.org/wiki/Transport_Layer_Security), TiDB does not support SSL. TiDB supports the following protocols: TLSv1.0, TLSv1.1, TLSv1.2 and TLSv1.3.
 
-When an encrypted connection is used, the connection has the following security properties:
+When a TLS secured connection is used, the connection has the following security properties:
 
 - Confidentiality: the traffic plaintext is encrypted to avoid eavesdropping
 - Integrity: the traffic plaintext cannot be tampered
@@ -19,8 +19,8 @@ To use connections secured with TLS, you first need to configure the TiDB server
 
 Similar to MySQL, TiDB allows TLS and non-TLS connections on the same TCP port. For a TiDB server with TLS enabled, you can choose to securely connect to the TiDB server through an encrypted connection, or to use an unencrypted connection. You can use the following ways to require the use of secure connections:
 
-+ Configure the system variable `require_secure_transport` to require secure connections to the TiDB server for all users.
-+ Specify `REQUIRE SSL` when you create a user (`create user`), or modify an existing user (`alter user`), which is to specify that specified users must use the encrypted connection to access TiDB. The following is an example of creating a user:
++ Configure the system variable [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610) to require secure connections to the TiDB server for all users.
++ Specify `REQUIRE SSL` when you create a user (`create user`), or modify an existing user (`alter user`), which is to specify that specified users must use TLS connections to access TiDB. The following is an example of creating a user:
 
     {{< copyable "sql" >}}
 
@@ -46,26 +46,26 @@ See the following descriptions about the related parameters to enable secure con
 
 To enable secure connections with your own certificates in the TiDB server, you must specify both of the `ssl-cert` and `ssl-key` parameters in the configuration file when you start the TiDB server. You can also specify the `ssl-ca` parameter for client authentication (see [Enable authentication](#enable-authentication)).
 
-All the files specified by the parameters are in PEM (Privacy Enhanced Mail) format. Currently, TiDB does not support the import of a password-protected private key, so it is required to provide a private key file without a password. If the certificate or private key is invalid, the TiDB server starts as usual, but the client cannot connect to the TiDB server through an encrypted connection.
+All the files specified by the parameters are in PEM (Privacy Enhanced Mail) format. Currently, TiDB does not support the import of a password-protected private key, so it is required to provide a private key file without a password. If the certificate or private key is invalid, the TiDB server starts as usual, but the client cannot connect to the TiDB server through a TLS connection.
 
-If the certificate parameters are correct, TiDB outputs `secure connection is enabled` when started; otherwise, it outputs `secure connection is NOT ENABLED`.
+If the certificate parameters are correct, TiDB outputs `mysql protocol server secure connection is enabled` to the logs on `"INFO"` level when started.
 
-For TiDB versions earlier than v5.2.0, you can use `mysql_ssl_rsa_setup --datadir=./certs` to generate certficates. The `mysql_ssl_rsa_setup` tool is a part of MySQL Server.
+## Configure the MySQL client to use TLS connections
 
-## Configure the MySQL client to use encrypted connections
-
-The client of MySQL 5.7 or later versions attempts to establish an encrypted connection by default. If the server does not support encrypted connections, it automatically returns to unencrypted connections. The client of MySQL earlier than version 5.7 uses the unencrypted connection by default.
+The client of MySQL 5.7 or later versions attempts to establish a TLS connection by default. If the server does not support TLS connections, it automatically returns to unencrypted connections. The client of MySQL earlier than version 5.7 uses the non-TLS connections by default.
 
 You can change the connection behavior of the client using the following `--ssl-mode` parameters:
 
-- `--ssl-mode=REQUIRED`: The client requires an encrypted connection. The connection cannot be established if the server side does not support encrypted connections.
-- In the absence of the `--ssl-mode` parameter: The client attempts to use an encrypted connection, but the encrypted connection cannot be established if the server side does not support encrypted connections. Then the client uses an unencrypted connection.
+- `--ssl-mode=REQUIRED`: The client requires a TLS connection. The connection cannot be established if the server side does not support TLS connections.
+- In the absence of the `--ssl-mode` parameter: The client attempts to use a TLS connection, but the encrypted connection cannot be established if the server side does not support encrypted connections. Then the client uses an unencrypted connection.
 - `--ssl-mode=DISABLED`: The client uses an unencrypted connection.
 
-MySQL 8.0 clients have two SSL modes in addition to this parameter:
+MySQL 8.x clients have two SSL modes in addition to this parameter:
 
 - `--ssl-mode=VERIFY_CA`: Validates the certificate from the server against the CA that requires `--ssl-ca`.
 - `--ssl-mode=VERIFY_IDENTITY`: The same as `VERIFY_CA`, but also validating whether the hostname you are connecting to matches the certificate.
+
+For MySQL 5.7 and MariaDB clients and earlier you can use `--ssl-verify-server-cert` to enable validation of the server certificate.
 
 For more information, see [Client-Side Configuration for Encrypted Connections](https://dev.mysql.com/doc/refman/8.0/en/using-encrypted-connections.html#using-encrypted-connections-client-side-configuration) in MySQL.
 
@@ -86,17 +86,15 @@ If the `ssl-ca` parameter is not specified in the TiDB server or MySQL client, t
 
 - To perform mutual authentication, meet both of the above requirements.
 
-By default, the server-to-client authentication is optional. Even if the client does not present its certificate of identification during the TLS handshake, the TLS connection can be still established. You can also require the client to be authenticated by specifying `require x509` when creating a user (`create user`), granting permissions (`grant`), or modifying an existing user (`alter user`). The following is an example of creating a user:
-
-{{< copyable "sql" >}}
+By default, the server-to-client authentication is optional. Even if the client does not present its certificate of identification during the TLS handshake, the TLS connection can be still established. You can also require the client to be authenticated by specifying `REQUIRE x509` when creating a user (`CREATE USER`), or modifying an existing user (`ALTER USER`). The following is an example of creating a user:
 
 ```sql
-create user 'u1'@'%'  require x509;
+CREATE USER 'u1'@'%'  REQUIRE X509;
 ```
 
 > **Note:**
 >
-> If the login user has configured using the [TiDB Certificate-Based Authentication for Login](/certificate-authentication.md#configure-the-user-certificate-information-for-login-verification), the user is implicitly required to enable the encrypted connection to TiDB.
+> If the login user has configured using the [TiDB Certificate-Based Authentication for Login](/certificate-authentication.md#configure-the-user-certificate-information-for-login-verification), the user is implicitly required to enable the TLS connection to TiDB.
 
 ## Check whether the current connection uses encryption
 
@@ -104,13 +102,22 @@ Use the `SHOW STATUS LIKE "%Ssl%";` statement to get the details of the current 
 
 See the following example of the result in an encrypted connection. The results change according to different TLS versions or encryption protocols supported by the client.
 
+```sql
+SHOW STATUS LIKE "Ssl%";
 ```
-mysql> SHOW STATUS LIKE "%Ssl%";
-......
-| Ssl_verify_mode | 5                            |
-| Ssl_version     | TLSv1.2                      |
-| Ssl_cipher      | ECDHE-RSA-AES128-GCM-SHA256  |
-......
+
+```
++-----------------------+------------------------------------------------------->
+| Variable_name         | Value                                                 >
++-----------------------+------------------------------------------------------->
+| Ssl_cipher            | TLS_AES_128_GCM_SHA256                                >
+| Ssl_cipher_list       | RC4-SHA:DES-CBC3-SHA:AES128-SHA:AES256-SHA:AES128-SHA2>
+| Ssl_server_not_after  | Apr 23 07:59:47 2024 UTC                              >
+| Ssl_server_not_before | Jan 24 07:59:47 2024 UTC                              >
+| Ssl_verify_mode       | 5                                                     >
+| Ssl_version           | TLSv1.3                                               >
++-----------------------+------------------------------------------------------->
+6 rows in set (0.0062 sec)
 ```
 
 For the official MySQL client, you can also use the `STATUS` or `\s` statement to view the connection status:
@@ -118,13 +125,13 @@ For the official MySQL client, you can also use the `STATUS` or `\s` statement t
 ```
 mysql> \s
 ...
-SSL: Cipher in use is ECDHE-RSA-AES128-GCM-SHA256
+SSL: Cipher in use is TLS_AES_128_GCM_SHA256
 ...
 ```
 
 ## Supported TLS versions, key exchange protocols, and encryption algorithms
 
-The TLS versions, key exchange protocols and encryption algorithms supported by TiDB are determined by the official Golang libraries.
+The TLS versions, key exchange protocols and encryption algorithms supported by TiDB are determined by the official Go libraries.
 
 The crypto policy for your operating system and the client library you are using might also impact the list of supported protocols and cipher suites.
 
@@ -135,7 +142,7 @@ The crypto policy for your operating system and the client library you are using
 - TLSv1.2
 - TLSv1.3
 
-The `tls-version` configuration option can be used to limit the TLS versions that can be used.
+You can use the [`tls-version`](/tidb-configuration-file.md#tls-version) configuration option to limit the TLS versions that can be used.
 
 The actual TLS versions that can be used depend on the OS crypto policy, MySQL client version and the SSL/TLS library that is used by the client.
 

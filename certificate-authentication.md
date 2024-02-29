@@ -240,7 +240,7 @@ ssl-ca="path/to/ca-cert.pem"
 Start TiDB and check logs. If the following information is displayed in the log, the configuration is successful:
 
 ```
-[INFO] [server.go:264] ["secure connection is enabled"] ["client verification enabled"=true]
+[INFO] [server.go:286] ["mysql protocol server secure connection is enabled"] ["client verification enabled"=true]
 ```
 
 ### Configure the client to use client certificate
@@ -265,9 +265,9 @@ First, connect TiDB using the client to configure the login verification. Then, 
 
 ### Get user certificate information
 
-The user certificate information can be specified by `require subject`, `require issuer`, `require san`, and `require cipher`, which are used to check the X509 certificate attributes.
+The user certificate information can be specified by `REQUIRE SUBJECT`, `REQUIRE ISSUER`, `REQUIRE SAN`, and `REQUIRE CIPHER`, which are used to check the X.509 certificate attributes.
 
-+ `require subject`: Specifies the `subject` information of the client certificate when you log in. With this option specified, you do not need to configure `require ssl` or x509. The information to be specified is consistent with the entered `subject` information in [Generate client keys and certificates](#generate-client-key-and-certificate).
++ `REQUIRE SUBJECT`: Specifies the subject information of the client certificate when you log in. With this option specified, you do not need to configure `require ssl` or x509. The information to be specified is consistent with the entered subject information in [Generate client keys and certificates](#generate-client-key-and-certificate).
 
     To get this option, execute the following command:
 
@@ -289,7 +289,7 @@ The user certificate information can be specified by `require subject`, `require
 
 + `require san`: Specifies the `Subject Alternative Name` information of the CA certificate that issues the user certificate. The information to be specified is consistent with the [`alt_names` of the `openssl.cnf` configuration file](https://docs.pingcap.com/tidb/stable/generate-self-signed-certificates) used to generate the client certificate.
 
-    + Execute the following command to get the information of the `require san` item in the generated certificate:
+    + Execute the following command to get the information of the `REQUIRE SAN` item in the generated certificate:
 
         {{< copyable "shell-regular" >}}
 
@@ -297,25 +297,23 @@ The user certificate information can be specified by `require subject`, `require
         openssl x509 -noout -extensions subjectAltName -in client.crt
         ```
 
-    + `require san` currently supports the following `Subject Alternative Name` check items:
+    + `REQUIRE SAN` currently supports the following `Subject Alternative Name` check items:
 
         - URI
         - IP
         - DNS
 
-    + Multiple check items can be configured after they are connected by commas. For example, configure `require san` as follows for the `u1` user:
+    + Multiple check items can be configured after they are connected by commas. For example, configure `REQUIRE SAN` as follows for the `u1` user:
 
         {{< copyable "sql" >}}
 
         ```sql
-        create user 'u1'@'%' require san 'DNS:d1,URI:spiffe://example.org/myservice1,URI:spiffe://example.org/myservice2';
+        CREATE USER 'u1'@'%' REQUIRE SAN 'DNS:d1,URI:spiffe://example.org/myservice1,URI:spiffe://example.org/myservice2';
         ```
 
         The above configuration only allows the `u1` user to log in to TiDB using the certificate with the URI item `spiffe://example.org/myservice1` or `spiffe://example.org/myservice2` and the DNS item `d1`.
 
-+ `require cipher`: Checks the cipher method supported by the client. Use the following statement to check the list of supported cipher methods:
-
-    {{< copyable "sql" >}}
++ `REQUIRE CIPHER`: Checks the cipher method supported by the client. Use the following statement to check the list of supported cipher methods:
 
     ```sql
     SHOW SESSION STATUS LIKE 'Ssl_cipher_list';
@@ -323,24 +321,16 @@ The user certificate information can be specified by `require subject`, `require
 
 ### Configure user certificate information
 
-After getting the user certificate information (`require subject`, `require issuer`, `require san`, `require cipher`), configure these information to be verified when creating a user, granting privileges, or altering a user. Replace `<replaceable>` with the corresponding information in the following statements.
+After getting the user certificate information (`REQUIRE SUBJECT`, `REQUIRE ISSUER`, `REQUIRE SAN`, `REQUIRE CIPHER`), configure these information to be verified when creating a user, granting privileges, or altering a user. Replace `<replaceable>` with the corresponding information in the following statements.
 
 You can configure one option or multiple options using the space or `and` as the separator.
 
-+ Configure user certificate when creating a user (`create user`):
++ Configure user certificate when creating a user (`CREATE USER`):
 
     {{< copyable "sql" >}}
 
     ```sql
-    create user 'u1'@'%' require issuer '<replaceable>' subject '<replaceable>' san '<replaceable>' cipher '<replaceable>';
-    ```
-
-+ Configure user certificate when granting privileges:
-
-    {{< copyable "sql" >}}
-
-    ```sql
-    grant all on *.* to 'u1'@'%' require issuer '<replaceable>' subject '<replaceable>' san '<replaceable>' cipher '<replaceable>';
+    CREATE USER 'u1'@'%' REQUIRE ISSUER '<replaceable>' SUBJECT '<replaceable>' SAN '<replaceable>' CIPHER '<replaceable>';
     ```
 
 + Configure user certificate when altering a user:
@@ -348,21 +338,19 @@ You can configure one option or multiple options using the space or `and` as the
     {{< copyable "sql" >}}
 
     ```sql
-    alter user 'u1'@'%' require issuer '<replaceable>' subject '<replaceable>' san '<replaceable>' cipher '<replaceable>';
+    ALTER USER 'u1'@'%' REQUIRE ISSUER '<replaceable>' SUBJECT '<replaceable>' SAN '<replaceable>' CIPHER '<replaceable>';
     ```
 
 After the above configuration, the following items will be verified when you log in:
 
 + SSL is used; the CA that issues the client certificate is consistent with the CA configured in the server.
-+ The `issuer` information of the client certificate matches the information specified in `require issuer`.
-+ The `subject` information of the client certificate matches the information specified in `require cipher`.
-+ The `Subject Alternative Name` information of the client certificate matches the information specified in `require san`.
++ The `issuer` information of the client certificate matches the information specified in `REQUIRE ISSUER`.
++ The `subject` information of the client certificate matches the information specified in `REQUIRE CIPHER`.
++ The `Subject Alternative Name` information of the client certificate matches the information specified in `REQUIRE SAN`.
 
 You can log into TiDB only after all the above items are verified. Otherwise, the `ERROR 1045 (28000): Access denied` error is returned. You can use the following command to check the TLS version, the cipher algorithm and whether the current connection uses the certificate for the login.
 
 Connect the MySQL client and execute the following statement:
-
-{{< copyable "sql" >}}
 
 ```sql
 \s
@@ -372,20 +360,18 @@ The output:
 
 ```
 --------------
-mysql  Ver 15.1 Distrib 10.4.10-MariaDB, for Linux (x86_64) using readline 5.1
+mysql  Ver 8.3.0 for Linux on x86_64 (MySQL Community Server - GPL)
 
 Connection id:       1
 Current database:    test
 Current user:        root@127.0.0.1
-SSL:                 Cipher in use is TLS_AES_256_GCM_SHA384
+SSL:                 Cipher in use is TLS_AES_128_GCM_SHA256
 ```
 
 Then execute the following statement:
 
-{{< copyable "sql" >}}
-
 ```sql
-show variables like '%ssl%';
+SHOW VARIABLES LIKE '%ssl%';
 ```
 
 The output:
@@ -394,13 +380,14 @@ The output:
 +---------------+----------------------------------+
 | Variable_name | Value                            |
 +---------------+----------------------------------+
-| ssl_cert      | /path/to/server-cert.pem         |
-| ssl_ca        | /path/to/ca-cert.pem             |
-| have_ssl      | YES                              |
 | have_openssl  | YES                              |
+| have_ssl      | YES                              |
+| ssl_ca        | /path/to/ca-cert.pem             |
+| ssl_cert      | /path/to/server-cert.pem         |
+| ssl_cipher    |                                  |
 | ssl_key       | /path/to/server-key.pem          |
 +---------------+----------------------------------+
-6 rows in set (0.067 sec)
+6 rows in set (0.06 sec)
 ```
 
 ## Update and replace certificate

@@ -44,8 +44,10 @@ You can set the CIDR when creating the first TiDB Dedicated cluster. If you want
 
     > - For Google Cloud Region, it is recommended to configure an IP range size between `/19` and `/20`. If you want to configure an IP range size between `/16` and `/18`, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). Supported network addresses include:
     >     - 10.250.0.0 - 10.251.255.255
-    >     - 172.16.0.0 - 172.16.255.255
+    >     - 172.16.0.0 - 172.17.255.255
     >     - 172.30.0.0 - 172.31.255.255
+
+    > - TiDB Cloud limits the number of TiDB Cloud nodes in a region of a project based on the CIDR block size of the region.
 
 5. View the CIDR of the cloud provider and the specific region. 
 

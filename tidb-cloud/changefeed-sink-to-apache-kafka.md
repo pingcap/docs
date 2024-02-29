@@ -137,8 +137,8 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
 8. In the **Topic Configuration** area, configure the following numbers. The changefeed will automatically create the Kafka topics according to the numbers.
 
-   - **Replication Factor**: controls how many Kafka servers each Kafka message is replicated to.
-   - **Partition Number**: controls how many partitions exist in a topic.
+    - **Replication Factor**: controls how many Kafka servers each Kafka message is replicated to. The valid value ranges from [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) to the number of Kafka brokers.
+    - **Partition Number**: controls how many partitions exist in a topic. The valid value range is `[1, 10 * the number of Kafka brokers]`.
 
 9. Click **Next**.
 

@@ -128,7 +128,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | Concurrent DDL statements | Y | Y | Y | N | N | N | N | N | N | N |
 | [Acceleration of `ADD INDEX` and `CREATE INDEX`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) | Y | Y | Y | N | N | N | N | N | N | N |
 | [Metadata lock](/metadata-lock.md) | Y | Y | Y | N | N | N | N | N | N | N |
-| [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) | Y | Y | Y | N | N | N | N | N | N | N |
+| [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) | Y | Y | Y | N | N | N | N | N | N | N |
 | [Pause](/sql-statements/sql-statement-admin-pause-ddl.md)/[Resume](/sql-statements/sql-statement-admin-resume-ddl.md) DDL | Y | N | N | N | N | N | N | N | N | N |
 
 ## Transactions
@@ -176,7 +176,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Collect statistics for `PREDICATE COLUMNS`](/statistics.md#collect-statistics-on-some-columns) | E | E | E | E | E | E | N | N | N | N |
 | [Control the memory quota for collecting statistics](/statistics.md#the-memory-quota-for-collecting-statistics) | E | E | E | E | N | N | N | N | N | N |
 | [Randomly sample about 10000 rows of data to quickly build statistics](/system-variables.md#tidb_enable_fast_analyze) | Deprecated | E | E | E | E | E | E | E | E | E |
-| [Lock statistics](/statistics.md#lock-statistics) | E | E | E | N | N | N | N | N | N | N |
+| [Lock statistics](/statistics.md#lock-statistics) | Y | E | E | N | N | N | N | N | N | N |
 | [Lightweight statistics initialization](/statistics.md#load-statistics) | Y | E | N | N | N | N | N | N | N | N |
 | [Show the progress of collecting statistics](/sql-statements/sql-statement-show-analyze-status.md) | Y | N | N | N | N | N | N | N | N | N |
 

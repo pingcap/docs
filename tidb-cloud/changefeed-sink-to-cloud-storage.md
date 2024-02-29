@@ -46,7 +46,7 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
         ![Create a role](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-create-role.png)
 
     3. Enter a name, description, ID, and role launch stage for the role. The role name cannot be changed after the role is created.
-    4. Click **Add permissions**. Add the following read-only permissions to the role, and then click **Add**.
+    4. Click **Add permissions**. Add the following permissions to the role, and then click **Add**.
 
         - storage.buckets.get
         - storage.objects.create
