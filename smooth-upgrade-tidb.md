@@ -84,7 +84,7 @@ When using the smooth upgrade feature, note the following limitations.
     * Run DDL operations on system tables (`mysql.*`, `information_schema.*`, `performance_schema.*`, and `metrics_schema.*`).
     * Manually cancel DDL jobs: `ADMIN CANCEL DDL JOBS job_id [, job_id] ...;`.
     * Import data.
-    * If the TiDB Distributed eXecution Framework (DXF) is enabled before the smooth upgrade, and there are ongoing `ADD INDEX` or `IMPORT INTO` tasks during the upgrade, perform the following steps to mitigate potential issues:
+    * Run distributed `ADD INDEX` or `IMPORT INTO` tasks. If the TiDB Distributed eXecution Framework (DXF) is enabled before the smooth upgrade, and there are ongoing `ADD INDEX` or `IMPORT INTO` tasks during the upgrade, perform the following steps to mitigate potential issues:
       1. Disable the DXF by setting [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) to `OFF` (its default value).
       2. Ensure that all ongoing distributed `ADD INDEX` and `IMPORT INTO` tasks are completed before the upgrade starts. Alternatively, you can cancel these tasks and wait until the upgrade is complete to restart them.
       3. After completing the preceding two steps, you can proceed with the smooth upgrade.
