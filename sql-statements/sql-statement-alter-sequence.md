@@ -90,7 +90,6 @@ CREATE SEQUENCE s1;
 Query OK, 0 rows affected (0.15 sec)
 ```
 
-
 Then we get two values from the sequence
 
 ```sql
