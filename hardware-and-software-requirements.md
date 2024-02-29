@@ -270,17 +270,13 @@ TiDB relies on [Grafana](https://grafana.com/) to provide visualization of datab
 ## Hardware and Software Requirements for TiFlash Disaggregated Storage and Compute Architecture
 
 All the descriptions above are for the coupled TiFlash architecture. Starting from v7.0.0, TiFlash introduces support for the [disaggregated of storage and compute](/tiflash/tiflash-disaggregated-and-s3.md) architecture. In this architecture, TiFlash is divided into storage nodes and compute nodes. The corresponding hardware and software requirements are as follows:
-1. **Software:**
-   - The operating system and platform requirements are same with the coupled storage and compute architecture.
 
-2. **Network Ports:**
-   - Network port requirements are same with the coupled storage and compute mode.
-
-3. **Disk Space Requirements:**
-   - Storage Nodes: Same with the coupled storage and compute mode, but an S3-compatible object storage is required.
-   - Compute Nodes: Recommended 100GB. The storage on compute nodes is mainly used to cache data read from storage nodes to accelerate performance. Therefore, it is normal to see the cache on compute nodes being fully utilized.
-
-4. **CPU and Other Memory Requirements - Refer to the Next Section**
+1. Software: The operating system and platform requirements are same with the coupled storage and compute architecture.
+2. Network Ports: Network port requirements are same with the coupled storage and compute mode.
+3. Disk Space Requirements:
+   1. Storage Nodes: Same with the coupled storage and compute mode, but an S3-compatible object storage is required.
+   2. Compute Nodes: Recommended 100GB. The storage on compute nodes is mainly used to cache data read from storage nodes to accelerate performance. Therefore, it is normal to see the cache on compute nodes being fully utilized.
+4. CPU and Other Memory Requirements - Refer to the Next Section
 
 ### Development and Testing Environment
 
