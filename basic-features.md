@@ -194,7 +194,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Certificate-based authentication](/certificate-authentication.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [`caching_sha2_password` authentication](/system-variables.md#default_authentication_plugin) | Y | Y | Y | Y | Y | Y | Y | Y | N | N | N |
 | [`tidb_sm3_password` authentication](/system-variables.md#default_authentication_plugin) | Y | Y | Y | Y | N | N | N | N | N | N | N |
-| [`tidb_auth_token` authentication](/system-variables.md#default_authentication_plugin) | Y | Y | Y | Y | N | N | N | N | N | N | N |
+| [`tidb_auth_token` authentication](/security-compatibility-with-mysql.md#tidb_auth_token) | Y | Y | Y | Y | N | N | N | N | N | N | N |
 | [`authentication_ldap_sasl` authentication](/system-variables.md#default_authentication_plugin) | Y | Y | N | N | N | N | N | N | N | N |
 | [`authentication_ldap_simple` authentication](/system-variables.md#default_authentication_plugin) | Y | Y | Y | N | N | N | N | N | N | N | N |
 | [Password management](/password-management.md) | Y | Y | Y | Y | N | N | N | N | N | N | N |
