@@ -60,7 +60,10 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `SHOW PLUGINS` | Supported | Not supported [^8] |
 | `SHOW PUMP STATUS` | Not supported [^7] | Not supported [^7] |
 | `SHUTDOWN` | Not supported [^4] | Not supported [^4] |
+<<<<<<< HEAD
 | `CREATE TABLE ... AUTO_ID_CACHE` | Supported | Not supported [^11] |
+=======
+>>>>>>> 312f207a92 (Update limited-sql-features about serverless (#16204))
 
 ## Functions and operators
 
@@ -129,10 +132,17 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `max_allowed_packet` | No limitation | Read-only [^10] |
 | `plugin_dir` | No limitation | Not supported [^8] |
 | `plugin_load` | No limitation | Not supported [^8] |
+<<<<<<< HEAD
 | `require_secure_transport` | Not supported [^12] | Read-only [^10] |
 | `skip_name_resolve` | No limitation | Read-only [^10] |
 | `sql_log_bin` | No limitation | Read-only [^10] |
 | `tidb_cdc_write_source` | No limitation | Read-only [^10] |
+=======
+| `require_secure_transport` | Not supported [^12] | Read-only [^11] |
+| `skip_name_resolve` | No limitation | Read-only [^11] |
+| `sql_log_bin` | No limitation | Read-only [^11] |
+| `tidb_cdc_write_source` | No limitation | Read-only [^11] |
+>>>>>>> 312f207a92 (Update limited-sql-features about serverless (#16204))
 | `tidb_check_mb4_value_in_utf8` | Not supported [^4] | Not supported [^4] |
 | `tidb_config` | Not supported [^4] | Not supported [^4] |
 | `tidb_ddl_disk_quota` | No limitation | Read-only [^10] |
