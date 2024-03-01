@@ -319,6 +319,12 @@ Configuration items related to log.
 - Default value: `10000`
 - When the number of query rows (including the intermediate results based on statistics) is larger than this value, it is an `expensive` operation and outputs log with the `[EXPENSIVE_QUERY]` prefix.
 
+### `general-log-file` <span class="version-mark">New in v8.0.0</span>
+
++ The file name of the [general log](/system-variables.md#tidb_general_log).
++ Default value: ""
++ If you set file name, the general log is output to this file. If the value is empty, the general log is output to the file specified by [`filename`](#filename) on the TiDB server.
+
 ### `timeout` <span class="version-mark">New in v7.1.0</span>
 
 - Sets the timeout for log-writing operations in TiDB. In case of a disk failure that prevents logs from being written, this configuration item can trigger the TiDB process to panic instead of hang.
@@ -354,6 +360,12 @@ Configuration items related to log files.
 - The maximum number of retained logs.
 - Default value: `0`
 - All the log files are retained by default. If you set it to `7`, seven log files are retained at maximum.
+
+#### `compress` <span class="version-mark">New in v8.0.0</span>
+
++ The compression method for the log.
++ Default value: ""
++ By default, compression is not enabled. Currently, the only supported compression format is `"gzip"`. After compression is enabled, all log files are affected, such as `slow-log-file` and `general-log-file`.
 
 ## Security
 
