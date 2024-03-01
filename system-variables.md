@@ -1618,7 +1618,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> Currently, the global sort feature consumes a large amount of computing and memory resources from TiDB nodes. In scenarios where online index addition is performed while your applications are running, it is recommended for users to add new TiDB nodes and set the `tidb_service_scope` of these nodes to `"background"`. This way, the distributed framework schedule tasks to these nodes, reducing the impact of executing backend tasks on user business operations.
+> Currently, the [Global Sort](/tidb-global-sort.md) process consumes a large amount of computing and memory resources of TiDB nodes. In scenarios such as adding indexes online while user business operations are running, it is recommended to add new TiDB nodes to the cluster and set the [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) variable of these nodes to `"background"`. In this way, the distributed framework will schedule tasks to these nodes, reducing the impact of executing backend tasks on user business operations.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
