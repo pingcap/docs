@@ -475,7 +475,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 9001
 
-    The complete error message: `ERROR 9001 (HY000): PD Server Timeout`
+    The complete error message: `ERROR 9001 (HY000): PD server timeout`
 
     The PD request timed out.
 
