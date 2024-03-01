@@ -82,7 +82,7 @@ To complete this tutorial, you need the following:
 2. Set the environment variable `DATABASE_URL` in your local environment. For example, in Linux or macOS, you can run the following command:
 
     ```bash
-    export DATABASE_URL=mysql://[username]:[password]@[host]/[database]
+    export DATABASE_URL='mysql://[username]:[password]@[host]/[database]'
     ```
    
 ### Step 3. Use Kysely to query data
@@ -275,7 +275,7 @@ mysql://[username]:[password]@[host]/[database]
 3. Test your code locally:
 
    ```
-   export DATABASE_URL=mysql://[username]:[password]@[host]/[database]
+   export DATABASE_URL='mysql://[username]:[password]@[host]/[database]'
    next dev
    ```
    
@@ -286,7 +286,7 @@ mysql://[username]:[password]@[host]/[database]
 1. Deploy your code to Vercel with the `DATABASE_URL` environment variable:
 
    ```
-   vercel -e DATABASE_URL=mysql://[username]:[password]@[host]/[database] --prod
+   vercel -e DATABASE_URL='mysql://[username]:[password]@[host]/[database]' --prod
    ```
 
     After the deployment is complete, you will get the URL of your project. 
