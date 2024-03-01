@@ -180,7 +180,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Collect statistics for `PREDICATE COLUMNS`](/statistics.md#collect-statistics-on-some-columns) | E | E | E | E | E | E | E | N | N | N | N |
 | [Control the memory quota for collecting statistics](/statistics.md#the-memory-quota-for-collecting-statistics) | E | E | E | E | E | N | N | N | N | N | N |
 | [Randomly sample about 10000 rows of data to quickly build statistics](/system-variables.md#tidb_enable_fast_analyze) | Deprecated | Deprecated | E | E | E | E | E | E | E | E | E |
-| [Lock statistics](/statistics.md#lock-statistics) | E | E | E | E | N | N | N | N | N | N | N |
+| [Lock statistics](/statistics.md#lock-statistics) | Y | Y | E | E | N | N | N | N | N | N | N |
 | [Lightweight statistics initialization](/statistics.md#load-statistics) | Y | Y | E | N | N | N | N | N | N | N | N |
 | [Show the progress of collecting statistics](/sql-statements/sql-statement-show-analyze-status.md) | Y | Y | N | N | N | N | N | N | N | N | N |
 

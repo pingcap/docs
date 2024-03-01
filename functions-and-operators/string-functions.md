@@ -28,36 +28,20 @@ The `ASCII(str)` function is used to get the ASCII value of the leftmost charact
 >
 > `ASCII(str)` only works for characters represented using 8 bits of binary digits (one byte).
 
-Examples:
+Example:
 
 ```sql
-SELECT ASCII('A');
-
-+------------+
-| ASCII('A') |
-+------------+
-|         65 |
-+------------+
+SELECT ASCII('A'), ASCII('TiDB'), ASCII(23);
 ```
 
-```sql
-SELECT ASCII('TiDB');
-
-+---------------+
-| ASCII('TiDB') |
-+---------------+
-|            84 |
-+---------------+
-```
+Output:
 
 ```sql
-SELECT ASCII(23);
-
-+-----------+
-| ASCII(23) |
-+-----------+
-|        50 |
-+-----------+
++------------+---------------+-----------+
+| ASCII('A') | ASCII('TiDB') | ASCII(23) |
++------------+---------------+-----------+
+|         65 |            84 |        50 |
++------------+---------------+-----------+
 ```
 
 ### [`BIN()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bin)
@@ -68,42 +52,40 @@ The `BIN()` function is used to convert the given argument into a string represe
 - If the argument is a negative number, the function converts the absolute value of the argument to its binary representation, inverts each bit of the binary value (changing `0` to `1` and `1` to `0`), and then adds `1` to the inverted value.
 - If the argument is a string containing only digits, the function returns the result according to those digits. For example, the results for `"123"` and `123` are the same.
 - If the argument is a string and its first character is not a digit (such as `"q123"`), the function returns `0`.
-- If the argument is a string that consists of digits and non-digits, the function returns the result according to the consecutive digits at the beginning of the argument. For example, the results for `"123q123"` and `123` are the same.
+- If the argument is a string that consists of digits and non-digits, the function returns the result according to the consecutive digits at the beginning of the argument. For example, the results for `"123q123"` and `123` are the same, but `BIN('123q123')` generates a warning like `Truncated incorrect INTEGER value: '123q123'`.
 - If the argument is `NULL`, the function returns `NULL`.
 
-Examples:
+Example 1:
 
 ```sql
-SELECT BIN(123);
-
-+----------+
-| BIN(123) |
-+----------+
-| 1111011  |
-+----------+
+SELECT BIN(123), BIN('123q123');
 ```
+
+Output 1:
+
+```sql
++----------+----------------+
+| BIN(123) | BIN('123q123') |
++----------+----------------+
+| 1111011  | 1111011        |
++----------+----------------+
+```
+
+Example 2:
 
 ```sql
 SELECT BIN(-7);
+```
 
+Output 2:
+
+```sql
 +------------------------------------------------------------------+
 | BIN(-7)                                                          |
 +------------------------------------------------------------------+
 | 1111111111111111111111111111111111111111111111111111111111111001 |
 +------------------------------------------------------------------+
 ```
-
-```sql
-SELECT BIN("123q123");
-
-+----------------+
-| BIN("123q123") |
-+----------------+
-| 1111011        |
-+----------------+
-```
-
-Return a string containing binary representation of a number.
 
 ### [`BIT_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bit-length)
 
@@ -1307,7 +1289,7 @@ Example 1:
 SELECT SUBSTRING_INDEX('www.tidbcloud.com', '.', 2);
 ```
 
-Result 1:
+Output 1:
 
 ```sql
 +-----------------------------------------+
@@ -1323,7 +1305,7 @@ Example 2:
 SELECT SUBSTRING_INDEX('www.tidbcloud.com', '.', -1);
 ```
 
-Result 2:
+Output 2:
 
 ```sql
 +------------------------------------------+
@@ -1352,7 +1334,7 @@ Example 1:
 SELECT TO_BASE64('abc');
 ```
 
-Result 1:
+Output 1:
 
 ```sql
 +------------------+
@@ -1368,7 +1350,7 @@ Example 2:
 SELECT TO_BASE64(6);
 ```
 
-Result 2:
+Output 2:
 
 ```sql
 +--------------+
@@ -1388,19 +1370,108 @@ Remove leading and trailing spaces.
 
 ### [`UCASE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ucase)
 
-Synonym for `UPPER()`.
+The `UCASE()` function is used to convert a string to uppercase letters. This function is equivalent to the `UPPER()` function.
+
+> **Note:**
+>
+> When the string is null, the `UCASE()` function returns `NULL`.
+
+Example:
+
+```sql
+SELECT UCASE('bigdata') AS result_upper, UCASE(null) AS result_null;
+```
+
+Output:
+
+```sql
++--------------+-------------+
+| result_upper | result_null |
++--------------+-------------+
+| BIGDATA      | NULL        |
++--------------+-------------+
+```
 
 ### [`UNHEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_unhex)
 
-Return a string containing hex representation of a number.
+The `UNHEX()` function performs the reverse operation of the `HEX()` function. It treats each pair of characters in the argument as a hexadecimal number and converts it to the character represented by that number, returning the result as a binary string.
+
+> **Note:**
+>
+> The argument must be a valid hexadecimal value that contains `0`–`9`, `A`–`F`, or `a`–`f`. If the argument is `NULL` or falls outside this range, the function returns `NULL`.
+
+Example:
+
+```sql
+SELECT UNHEX('54694442');
+```
+
+Output:
+
+```sql
++--------------------------------------+
+| UNHEX('54694442')                    |
++--------------------------------------+
+| 0x54694442                           |
++--------------------------------------+
+```
 
 ### [`UPPER()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_upper)
 
-Convert to uppercase.
+The `UPPER()` function is used to convert a string to uppercase letters. This function is equivalent to the `UCASE()` function.
+
+> **Note:**
+>
+> When the string is null, the `UPPER()` function returns `NULL`.
+
+Example:
+
+```sql
+SELECT UPPER('bigdata') AS result_upper, UPPER(null) AS result_null;
+```
+
+Output:
+
+```sql
++--------------+-------------+
+| result_upper | result_null |
++--------------+-------------+
+| BIGDATA      | NULL        |
++--------------+-------------+
+```
 
 ### [`WEIGHT_STRING()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_weight-string)
 
-Return the weight string for the input string.
+The `WEIGHT_STRING()` function returns the weight string (binary characters) for the input string, primarily used for sorting and comparison operations in multi-character set scenarios. If the argument is `NULL`, it returns `NULL`. The syntax is as follows:
+
+```sql
+WEIGHT_STRING(str [AS {CHAR|BINARY}(N)])
+```
+
+- `str`: the input string expression. If it is a non-binary string, such as a `CHAR`, `VARCHAR`, or `TEXT` value, the return value contains the collation weights for the string. If it is a binary string, such as a `BINARY`, `VARBINARY`, or `BLOB` value, the return value is the same as the input.
+
+- `AS {CHAR|BINARY}(N)`: optional parameters used to specify the type and length of the output. `CHAR` represents the character data type, and `BINARY` represents the binary data type. `N` specifies the output length, which is an integer greater than or equal to 1.
+
+> **Note:**
+>
+> If `N` is less than the string length, the string is truncated. If `N` exceeds the string length, `AS CHAR(N)` pads the string with spaces to the specified length, and `AS BINARY(N)` pads the string with `0x00` to the specified length.
+
+Example:
+
+```sql
+SET NAMES 'utf8mb4';
+SELECT HEX(WEIGHT_STRING('ab' AS CHAR(3))) AS char_result, HEX(WEIGHT_STRING('ab' AS BINARY(3))) AS binary_result;
+```
+
+Output:
+
+```sql
++-------------+---------------+
+| char_result | binary_result |
++-------------+---------------+
+| 6162        | 616200        |
++-------------+---------------+
+```
 
 ## Unsupported functions
 
