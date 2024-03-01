@@ -182,6 +182,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 
 ## Security
 
+<<<<<<< HEAD
 | Security | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [Transparent layer security (TLS)](/enable-tls-between-clients-and-servers.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
@@ -198,6 +199,24 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Dynamic Privileges](/privilege-management.md#dynamic-privileges) | Y | Y | Y | Y | Y | Y | Y | Y | N | N |
 | [Security Enhanced Mode](/system-variables.md#tidb_enable_enhanced_security) | Y | Y | Y | Y | Y | Y | Y | Y | N | N |
 | [Redacted Log Files](/log-redaction.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | N |
+=======
+| Security | 7.6 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| [Transparent layer security (TLS)](/enable-tls-between-clients-and-servers.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Encryption at rest (TDE)](/encryption-at-rest.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Role-based authentication (RBAC)](/role-based-access-control.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Certificate-based authentication](/certificate-authentication.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [`caching_sha2_password` authentication](/system-variables.md#default_authentication_plugin) | Y | Y | Y | Y | Y | Y | Y | Y | N | N | N |
+| [`tidb_sm3_password` authentication](/system-variables.md#default_authentication_plugin) | Y | Y | Y | Y | N | N | N | N | N | N | N |
+| [`tidb_auth_token` authentication](/security-compatibility-with-mysql.md#tidb_auth_token) | Y | Y | Y | Y | N | N | N | N | N | N | N |
+| [`authentication_ldap_sasl` authentication](/system-variables.md#default_authentication_plugin) | Y | Y | N | N | N | N | N | N | N | N |
+| [`authentication_ldap_simple` authentication](/system-variables.md#default_authentication_plugin) | Y | Y | Y | N | N | N | N | N | N | N | N |
+| [Password management](/password-management.md) | Y | Y | Y | Y | N | N | N | N | N | N | N |
+| [MySQL compatible `GRANT` system](/privilege-management.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Dynamic Privileges](/privilege-management.md#dynamic-privileges) | Y | Y | Y | Y | Y | Y | Y | Y | Y | N | N |
+| [Security Enhanced Mode](/system-variables.md#tidb_enable_enhanced_security) | Y | Y | Y | Y | Y | Y | Y | Y | Y | N | N |
+| [Redacted Log Files](/log-redaction.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | N |
+>>>>>>> de815dc10d (Add description for `tidb_auth_token` authentication (#15979))
 
 ## Data import and export
 
