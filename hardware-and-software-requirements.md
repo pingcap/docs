@@ -296,4 +296,3 @@ All the descriptions above are for the coupled TiFlash architecture. Starting fr
 > **Note:**
 >
 > - TiFlash Compute Nodes can be quickly scaled in or out using deployment tools such as TiUP, with a scaling range of [0, inf+].
-
