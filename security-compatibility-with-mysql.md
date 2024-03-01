@@ -107,9 +107,9 @@ The implementation mechanisms are consistent between TiDB and MySQL. Both use th
 
 ## Authentication plugin status
 
-TiDB supports multiple authentication methods. These methods can be specified on a per user basis using [`CREATE USER`](/sql-statements/sql-statement-create-user.md) and [`ALTER USER`](/sql-statements/sql-statement-create-user.md). These methods are compatible with the authentication methods of MySQL with the same names.
+TiDB supports multiple authentication methods. These methods can be specified on a per user basis using [`CREATE USER`](/sql-statements/sql-statement-create-user.md) and [`ALTER USER`](/sql-statements/sql-statement-alter-user.md). These methods are compatible with the authentication methods of MySQL with the same names.
 
-You can use one of the following supported authentication methods in the table. To specify a default method that the server advertises when the client-server connection is being established, set the [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin) variable. `tidb_sm3_password` is the SM3 authentication method only supported in TiDB. Therefore, to authenticate using this method, you must connect to TiDB using [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3). `tidb_auth_token` is a JSON Web Token (JWT) based authentication method used only in TiDB Cloud.
+You can use one of the following supported authentication methods in the table. To specify a default method that the server advertises when the client-server connection is being established, set the [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin) variable. `tidb_sm3_password` is the SM3 authentication method only supported in TiDB. Therefore, to authenticate using this method, you must connect to TiDB using [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3). `tidb_auth_token` is a JSON Web Token (JWT)-based authentication method used in TiDB Cloud, and you can also configure it for use in TiDB Self-Hosted.
 
 <CustomContent platform="tidb">
 
@@ -123,6 +123,7 @@ The support for TLS authentication is configured differently. For detailed infor
 
 </CustomContent>
 
+<<<<<<< HEAD
 | Authentication Method    | Supported        |
 | :------------------------| :--------------- |
 | `mysql_native_password`  | Yes              |
@@ -137,3 +138,140 @@ The support for TLS authentication is configured differently. For detailed infor
 | ed25519 (MariaDB)        | No               |
 | GSSAPI (MariaDB)         | No               |
 | FIDO                     | No               |
+=======
+| Authentication Method        | Supported        |
+| :----------------------------| :--------------- |
+| `mysql_native_password`      | Yes              |
+| `sha256_password`            | No               |
+| `caching_sha2_password`      | Yes, since 5.2.0 |
+| `auth_socket`                | Yes, since 5.3.0 |
+| `tidb_sm3_password`          | Yes, since 6.3.0 |
+| `tidb_auth_token`            | Yes, since 6.4.0 |
+| `authentication_ldap_sasl`   | Yes, since 7.1.0 |
+| `authentication_ldap_simple` | Yes, since 7.1.0 |
+| TLS Certificates             | Yes              |
+| LDAP                         | Yes, since 7.1.0 |
+| PAM                          | No               |
+| ed25519 (MariaDB)            | No               |
+| GSSAPI (MariaDB)             | No               |
+| FIDO                         | No               |
+
+### `tidb_auth_token`
+
+`tidb_auth_token` is a passwordless authentication method based on [JSON Web Token (JWT)](https://datatracker.ietf.org/doc/html/rfc7519). In v6.4.0, `tidb_auth_token` is only used for user authentication in TiDB Cloud. Starting from v6.5.0, you can also configure `tidb_auth_token` as a user authentication method for TiDB Self-Hosted. Different from password-based authentication methods such as `mysql_native_passsword` and `caching_sha2_password`, when you create users using `tidb_auth_token`, there is no need to set or store custom passwords. To log into TiDB, users only need to use a signed token instead of a password, which simplifies the authentication process and improves security.
+
+#### JWT
+
+JWT consists of three parts: Header, Payload, and Signature. After being encoded using base64, they are concatenated into a string separated by dots (`.`) for transmission between the client and server.
+
+The Header describes the metadata of the JWT, including 3 parameters:
+
+* `alg`: the algorithm for signature, which is `RS256` by default.
+* `typ`: the type of token, which is `JWT`.
+* `kid`: the key ID for generating token signature.
+
+Here is an example for Header:
+
+```json
+{
+  "alg": "RS256",
+  "kid": "the-key-id-0",
+  "typ": "JWT"
+}
+```
+
+Payload is the main part of JWT, which stores the user information. Each field in the Payload is called a claim. The claims required for TiDB user authentication are as follows:
+
+* `iss`: if `TOKEN_ISSUER` is not specified or set to empty when [`CREATE USER`](/sql-statements/sql-statement-create-user.md), this claim is not required; otherwise, `iss` should use the same value as `TOKEN_ISSUER`.
+* `sub`: this claim is required to be the same as the username to be authenticated.
+* `iat`: it means `issued at`, the timestamp when the token is issued. In TiDB, this value must not be later than the authentication time or earlier than 15 minutes before authentication.
+* `exp`: the timestamp when the token expires. If it is earlier than the time of authentication, the authentication fails.
+* `email`: the email can be specified when creating a user by `ATTRIBUTE '{"email": "xxxx@pingcap.com"}`. If no email is specified when a user is created, this claim must be set as an empty string; otherwise, this claim must be the same as the specified value when the user is created.
+
+Here is an example for Payload:
+
+```json
+{
+  "email": "user@pingcap.com",
+  "exp": 1703305494,
+  "iat": 1703304594,
+  "iss": "issuer-abc",
+  "sub": "user@pingcap.com"
+}
+```
+
+Signature is used to sign the Header and Payload data.
+
+> **Warning:**
+>
+> - The encoding of the Header and Payload in base64 is reversible. Do **Not** attach any sensitive information to them.
+> - The `tidb_auth_token` authentication method requires clients to support the [`mysql_clear_password`](https://dev.mysql.com/doc/refman/8.0/en/cleartext-pluggable-authentication.html) plugin to send the token to TiDB in plain text. Therefore, you need to [enale TLS between clients and servers](/enable-tls-between-clients-and-servers.md) before using `tidb_auth_token`.
+
+#### Usage
+
+To configure and use `tidb_auth_token` as the authentication method for TiDB Self-Hosted users, take the following steps:
+
+1. Configure [`auth-token-jwks`](/tidb-configuration-file.md#auth-token-jwks-new-in-v640) and [`auth-token-refresh-interval`](/tidb-configuration-file.md#auth-token-refresh-interval-new-in-v640) in the TiDB configuration file.
+
+    For example, you can get an example JWKS using the following command:
+    
+    ```bash
+    wget https://raw.githubusercontent.com/CbcWestwolf/generate_jwt/master/JWKS.json
+    ```
+
+    Then, configure the path of the example JWKS in `config.toml`:
+
+    ```toml
+    [security]
+    auth-token-jwks = "JWKS.json"
+    ```
+
+2. Start `tidb-server` and periodically update and save the JWKS to the path specified by `auth-token-jwks`.
+
+3. Create a user with `tidb_auth_token`, and specify `iss` and `email` as needed using `REQUIRE TOKEN_ISSUER` and `ATTRIBUTE '{"email": "xxxx@pingcap.com"}`.
+
+    For example, create a user `user@pingcap.com` with `tidb_auth_token`:
+
+    ```sql
+    CREATE USER 'user@pingcap.com' IDENTIFIED WITH 'tidb_auth_token' REQUIRE TOKEN_ISSUER 'issuer-abc' ATTRIBUTE '{"email": "user@pingcap.com"}';
+    ```
+
+4. Generate and sign a token for authentication, and authenticate using the `mysql_clear_text` plugin of the MySQL client.
+
+    Install the JWT generation tool via `go install github.com/cbcwestwolf/generate_jwt` (this tool is only used for testing `tidb_auth_token`). For example:
+
+    ```text
+    generate_jwt --kid "the-key-id-0" --sub "user@pingcap.com" --email "user@pingcap.com" --iss "issuer-abc"
+    ```
+
+    It prints the public key and token as follows:
+
+    ```text
+    -----BEGIN PUBLIC KEY-----
+    MIIBCgKCAQEAq8G5n9XBidxmBMVJKLOBsmdOHrCqGf17y9+VUXingwDUZxRp2Xbu
+    LZLbJtLgcln1lC0L9BsogrWf7+pDhAzWovO6Ai4Aybu00tJ2u0g4j1aLiDdsy0gy
+    vSb5FBoL08jFIH7t/JzMt4JpF487AjzvITwZZcnsrB9a9sdn2E5B/aZmpDGi2+Is
+    f5osnlw0zvveTwiMo9ba416VIzjntAVEvqMFHK7vyHqXbfqUPAyhjLO+iee99Tg5
+    AlGfjo1s6FjeML4xX7sAMGEy8FVBWNfpRU7ryTWoSn2adzyA/FVmtBvJNQBCMrrA
+    hXDTMJ5FNi8zHhvzyBKHU0kBTS1UNUbP9wIDAQAB
+    -----END PUBLIC KEY-----
+
+    eyJhbGciOiJSUzI1NiIsImtpZCI6InRoZS1rZXktaWQtMCIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAcGluZ2NhcC5jb20iLCJleHAiOjE3MDMzMDU0OTQsImlhdCI6MTcwMzMwNDU5NCwiaXNzIjoiaXNzdWVyLWFiYyIsInN1YiI6InVzZXJAcGluZ2NhcC5jb20ifQ.T4QPh2hTB5on5xCuvtWiZiDTuuKvckggNHtNaovm1F4RvwUv15GyOqj9yMstE-wSoV5eLEcPC2HgE6eN1C6yH_f4CU-A6n3dm9F1w-oLbjts7aYCl8OHycVYnq609fNnb8JLsQAmd1Zn9C0JW899-WSOQtvjLqVSPe9prH-cWaBVDQXzUJKxwywQzk9v-Z1Njt9H3Rn9vvwwJEEPI16VnaNK38I7YG-1LN4fAG9jZ6Zwvz7vb_s4TW7xccFf3dIhWTEwOQ5jDPCeYkwraRXU8NC6DPF_duSrYJc7d7Nu9Z2cr-E4i1Rt_IiRTuIIzzKlcQGg7jd9AGEfGe_SowsA-w
+    ```
+
+    Copy the preceding token in the last line for login:
+
+    ```Shell
+    mycli -h 127.0.0.1 -P 4000 -u 'user@pingcap.com' -p '<the-token-generated>'
+    ```
+
+    Ensure that the MySQL client here supports the `mysql_clear_password` plugin. [mycli](https://www.mycli.net/) supports and enables this plugin by default. If you are using the [mysql command-line client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html), you need to use the `--enable-cleartext-plugin` option to enable this plugin:
+
+    ```Shell
+    mysql -h 127.0.0.1 -P 4000 -u 'user@pingcap.com' -p'<the-token-generated>' --enable-cleartext-plugin
+    ```
+
+    If an incorrect `--sub` is specified when the token is generated (such as `--sub "wronguser@pingcap.com"`), the authentication using this token would fail.
+
+You can encode and decode a token using the debugger provided by [jwt.io](https://jwt.io/).
+>>>>>>> de815dc10d (Add description for `tidb_auth_token` authentication (#15979))
