@@ -323,7 +323,7 @@ Configuration items related to log.
 
 + The file name of the [general log](/system-variables.md#tidb_general_log).
 + Default value: ""
-+ If you specify a file name, the general log is output to this file. If the value is empty, the general log is output to the file specified by [`filename`](#filename) on the TiDB server.
++ If you specify a file name, the general log is written to this particular file. If the value is blank, the general log is written to the server log of the TiDB instance. The name of server log is specified by [`filename`](#filename). 
 
 ### `timeout` <span class="version-mark">New in v7.1.0</span>
 
