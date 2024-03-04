@@ -12,7 +12,7 @@ The `CREATE SEQUENCE` statement creates sequence objects in TiDB. The sequence i
 
 ```ebnf+diagram
 CreateSequenceStmt ::=
-    'CREATE' 'SEQUENCE' IfNotExists TableName CreateSequenceOptionListOpt CreateTableOptionListOpt
+    'CREATE' 'SEQUENCE' IfNotExists TableName CreateSequenceOptionListOpt
 
 IfNotExists ::=
     ('IF' 'NOT' 'EXISTS')?
@@ -28,6 +28,7 @@ SequenceOptionList ::=
 
 SequenceOption ::=
     ( 'INCREMENT' ( '='? | 'BY' ) | 'START' ( '='? | 'WITH' ) | ( 'MINVALUE' | 'MAXVALUE' | 'CACHE' ) '='? ) SignedNum
+|   'COMMENT' '='? stringLit
 |   'NOMINVALUE'
 |   'NO' ( 'MINVALUE' | 'MAXVALUE' | 'CACHE' | 'CYCLE' )
 |   'NOMAXVALUE'
