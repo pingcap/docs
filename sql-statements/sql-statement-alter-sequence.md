@@ -64,7 +64,7 @@ You can control a sequence through the following expression functions:
 
 + `NEXTVAL` or `NEXT VALUE FOR`
 
-    Essentially, both are the `nextval()` function that gets the next valid value of a sequence object. The parameter of the `nextval()` function is the `identifier` of the sequence.
+    Essentially, both are the `NEXTVAL()` function that gets the next valid value of a sequence object. The parameter of the `NEXTVAL()` function is the `identifier` of the sequence.
 
 + `LASTVAL`
 
@@ -197,7 +197,7 @@ For example:
 
 ```
 1, 3, 5, ...            // The sequence starts from 1 and increments by 2.
-select setval(seq, 6)   // Sets the current value of a sequence to 6.
+SELECT SETVAL(seq, 6)   // Sets the current value of a sequence to 6.
 7, 9, 11, ...           // Subsequent values still follow the progression rule.
 ```
 
