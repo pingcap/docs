@@ -76,12 +76,9 @@ The following sections illustrate the metrics on the Metrics page for TiDB Dedic
 | TiKV Storage Usage | node, limit | The storage usage statistics or upper limit of each TiKV node. |
 | TiFlash Uptime | node | The runtime of each TiFlash node since last restart. |
 | TiFlash CPU Usage | node, limit | The CPU usage statistics or upper limit of each TiFlash node. |
-| TiFlash CPU limit | limit | The maximum limit of CPU for each TiFlash node. |
-| TiFlash Memory Usage | node | The memory usage statistics of each TiFlash node. |
-| TiFlash Memory Limit | limit | The maximum limit of memory for each TiFlash node. |
+| TiFlash Memory Usage | node, limit | The memory usage statistics or upper limit of each TiFlash node. |
 | TiFlash IO MBps | node-write, node-read | The total bytes of read and write in each TiFlash node. |
-| TiFlash Storage Usage | node | The storage usage statistics of each TiFlash node. |
-| TiFlash Storage Limit | limit | The maximum limit of storage for each TiFlash node. |
+| TiFlash Storage Usage | node, limit | The storage usage statistics or upper limit of each TiFlash node. |
 
 ## Metrics for TiDB Serverless clusters
 
