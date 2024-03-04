@@ -35,7 +35,7 @@ Before you deploy HAProxy, make sure that you meet the hardware and software req
 
 ### Hardware requirements
 
-According to the [HAProxy documentation](https://www.haproxy.com/documentation/haproxy-enterprise/getting-started/installation/linux/), the minimum hardware configuration for HAProxy is shown in the following table. Under the sysbench `oltp_read_write` workload, the maximum QPS for this configuration is about 50K. You can also improve server specifications according to the load balancing environment.
+According to the [HAProxy documentation](https://www.haproxy.com/documentation/haproxy-enterprise/getting-started/installation/linux/), the minimum hardware configuration for HAProxy is shown in the following table. Under the Sysbench `oltp_read_write` workload, the maximum QPS for this configuration is about 50K. You can increase the server configuration according to your load balancing environment.
 
 | Hardware resource      | Minimum specification |
 | :--------------------- | :-------------------- |
