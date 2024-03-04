@@ -92,11 +92,11 @@ To analyze and customize your cost reports of your organization, perform the fol
     >
     > If you are in multiple organizations, switch to your target organization by clicking its name.
 
-2. In the left navigation pane, navigate to **Billing > Cost Explorer**.
+2. In the left navigation pane, click the **Billing** tab and then click the **Cost Explorer** tab.
 3. On the **Cost Explorer** page, expand the **Filter** section in the upper-right corner to customize your report. You can set the time range, select a grouping option (such as by service, project, cluster, region, product type, and charge type), and apply filters by selecting specific services, projects, clusters, or regions. The cost explorer will display you with the following information:
 
     - **Cost Graph**: visualizes the cost trends over the selected time range. You can switch between **Monthly**, **Daily**, and **Total** views.
-    - **Cost Breakdown**: displays a detailed breakdown of your costs according to the chosen grouping option. For further analysis, you can download the data in CSV format.
+    - **Cost Breakdown**: displays a detailed breakdown of your costs according to the selected grouping option. For further analysis, you can download the data in CSV format.
 
 ## Billing profile
 
