@@ -16,11 +16,7 @@ For critical alerts, you need to pay close attention to abnormal monitoring metr
 
 - Alert rule:
 
-<<<<<<< HEAD
-    (time() - ticdc_processor_checkpoint_ts / 1000) > 600
-=======
-    `(time() - ticdc_owner_checkpoint_ts / 1000) > 600`
->>>>>>> 5f3a210d15 (ticdc: add ticdc_changefeed_failed alert rule (#16380))
+    `(time() - ticdc_processor_checkpoint_ts / 1000) > 600`
 
 - Description:
 
@@ -34,7 +30,7 @@ For critical alerts, you need to pay close attention to abnormal monitoring metr
 
 - Alert rule:
 
-    `(time() - ticdc_owner_resolved_ts / 1000) > 300`
+    `(time() - ticdc_processor_checkpoint_ts / 1000) > 300`
 
 - Description:
 
