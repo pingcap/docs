@@ -11,7 +11,7 @@ The `ALTER SEQUENCE` statement alters sequence objects in TiDB. The sequence is 
 
 ```ebnf+diagram
 CreateSequenceStmt ::=
-    'ALTER' 'SEQUENCE' TableName CreateSequenceOptionListOpt CreateTableOptionListOpt
+    'ALTER' 'SEQUENCE' TableName CreateSequenceOptionListOpt
 
 TableName ::=
     Identifier ('.' Identifier)?
@@ -24,12 +24,14 @@ SequenceOptionList ::=
 
 SequenceOption ::=
     ( 'INCREMENT' ( '='? | 'BY' ) | 'START' ( '='? | 'WITH' ) | ( 'MINVALUE' | 'MAXVALUE' | 'CACHE' ) '='? ) SignedNum
+|   'COMMENT' '='? stringLit
 |   'NOMINVALUE'
 |   'NO' ( 'MINVALUE' | 'MAXVALUE' | 'CACHE' | 'CYCLE' )
 |   'NOMAXVALUE'
 |   'NOCACHE'
 |   'CYCLE'
 |   'NOCYCLE'
+|   'RESTART' ( ( '='? | 'WITH' ) SignedNum )?
 ```
 
 ## Syntax
@@ -57,6 +59,8 @@ ALTER SEQUENCE sequence_name
 | `START` | `MINVALUE` or `MAXVALUE`| Specifies the initial value of a sequence. When `INCREMENT` > `0`, the default value is `MINVALUE`. When `INCREMENT` < `0`, the default value is `MAXVALUE`. |
 | `CACHE` | `1000` | Specifies the local cache size of a sequence in TiDB. |
 | `CYCLE` | `NO CYCLE` | Specifies whether a sequence restarts from the minimum value (or maximum for the descending sequence). When `INCREMENT` > `0`, the default value is `MINVALUE`. When `INCREMENT` < `0`, the default value is `MAXVALUE`. |
+
+Note that changing the `START` value doesn't affect the generated values until you run `ALTER SEQUENCE ... RESTART`.
 
 ## `SEQUENCE` function
 
