@@ -5,13 +5,12 @@ summary: Learn the `TIDB_INDEX_USAGE` information_schema table.
 
 # TIDB_INDEX_USAGE
 
-`TIDB_INDEX_USAGE` records the access statistics of all indexes on the current node.
-
-{{< copyable "sql" >}}
+TiDB provides `TIDB_INDEX_USAGE` since v8.0.0. You can use `TIDB_INDEX_USAGE` to get
+ the access statistics of all indexes on the current node.
 
 ```sql
-USE information_schema;
-DESC tidb_index_usage;
+USE INFORMATION_SCHEMA;
+DESC TIDB_INDEX_USAGE;
 ```
 
 ```sql
@@ -53,7 +52,41 @@ The columns in the `TIDB_INDEX_USAGE` table are as follows:
 * `PERCENTAGE_ACCESS_100`: The number of times the access ratio of rows to the total number of rows in the table is 100%.
 * `LAST_ACCESS_TIME`: The time when the index was last accessed.
 
-# Limitations
+## CLUSTER_TIDB_INDEX_USAGE
+
+The `TIDB_INDEX_USAGE` table only provides information about the index access statisitcson a single TiDB node. If you want to view the information of the index usages on all TiDB nodes in the entire cluster, you need to query the `CLUSTER_TIDB_INDEX_USAGE` table. Compared with the query result of the `TIDB_INDEX_USAGE` table, the query result of the `CLUSTER_TIDB_INDEX_USAGE` table includes an extra `INSTANCE` field. The `INSTANCE` field displays the IP address and port of each node in the cluster, which is used to distinguish the TiDB nodes.
+
+```sql
+USE INFORMATION_SCHEMA;
+DESC CLUSTER_TIDB_INDEX_USAGE;
+```
+
+The output is as follows:
+
+```sql
++-------------------------+-----------------------------------------------------------------+------+------+---------+-------+
+| Field                   | Type                                                            | Null | Key  | Default | Extra |
++-------------------------+-----------------------------------------------------------------+------+------+---------+-------+
+| INSTANCE                | varchar(64)                                                     | YES  |      | NULL    |       |
+| ID                      | bigint(21) unsigned                                             | NO   | PRI  | NULL    |       |
+| START_TIME              | timestamp(6)                                                    | YES  |      | NULL    |       |
+| CURRENT_SQL_DIGEST      | varchar(64)                                                     | YES  |      | NULL    |       |
+| CURRENT_SQL_DIGEST_TEXT | text                                                            | YES  |      | NULL    |       |
+| STATE                   | enum('Idle','Running','LockWaiting','Committing','RollingBack') | YES  |      | NULL    |       |
+| WAITING_START_TIME      | timestamp(6)                                                    | YES  |      | NULL    |       |
+| MEM_BUFFER_KEYS         | bigint(64)                                                      | YES  |      | NULL    |       |
+| MEM_BUFFER_BYTES        | bigint(64)                                                      | YES  |      | NULL    |       |
+| SESSION_ID              | bigint(21) unsigned                                             | YES  |      | NULL    |       |
+| USER                    | varchar(16)                                                     | YES  |      | NULL    |       |
+| DB                      | varchar(64)                                                     | YES  |      | NULL    |       |
+| ALL_SQL_DIGESTS         | text                                                            | YES  |      | NULL    |       |
+| RELATED_TABLE_IDS       | text                                                            | YES  |      | NULL    |       |
+| WAITING_TIME            | double                                                          | YES  |      | NULL    |       |
++-------------------------+-----------------------------------------------------------------+------+------+---------+-------+
+15 rows in set (0.00 sec)
+```
+
+## Limitations
 
 - The data in the `TIDB_INDEX_USAGE` table may be delayed by up to 5 minutes.
 - After TiDB restarts, the data in the `TIDB_INDEX_USAGE` table is cleared.
