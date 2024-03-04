@@ -50,6 +50,19 @@ Several enhancements were made in this version to mitigate that:
     <td>TiDB adds a new system table for viewing the usage statistics of indexes, ultimately helping users to evaluate the importance (or lack thereof) of all indexes.</td>
     </td>
   </tr>
+  <tr>
+    <td rowspan="3">Data Migration</td>
+    <td>TiCDC supports replicating DDL statements in bi-directional replication (BDR) mode (GA)</td>
+    <td>With this feature, TiCDC allows for a cluster to be assigned the PRIMARY BDR role, and enables the replication of DDL statements from that cluster to the downstream cluster</td>
+    </td>
+  </tr>
+  <tr>
+    <td>TiCDC adds support for Simple Protocol</td>
+    <td>TiCDC introduces support for a new protocol, the Simple Protocol. This new protocol includes support for in-band schema tracking capabilities.</td>
+  </tr>
+  <tr>
+    <td>TiCDC adds support for Debezium format Protocol</td>
+    <td>TiCDC can now publish replication events to a Kafka sink using a protocol that generates Debezium style messages.</td>
   </tr>
 </tbody>
 </table>
@@ -106,11 +119,23 @@ Several enhancements were made in this version to mitigate that:
 
 ### Data migration
 
-* Feature summary [#issue-number](issue-link) @[pr-auorthor-id](author-link)
+* TiCDC supports replicating DDL statements in bi-directional replication (BDR) mode (GA) [#10301](https://github.com/pingcap/tiflow/issues/10301) @[asddongmen](https://github.com/asddongmen)
 
-    Feature descriptions (including what the feature is, why it is valuable for users, and how to use this feature generally)
+    General Availability since v8.0.0, TiCDC supports replication of DDL statements with bi-directional replication configured. Previously, replicating DDL statements was not supported by TiCDC, so users of TiCDC's bi-directional replication had to apply DDL statements to both TiDB clusters separately. With this feature, TiCDC allows for a cluster to be assigned the PRIMARY BDR role, and enables the replication of DDL statements from that cluster to the downstream cluster.
 
-    For more information, see [documentation](doc-link).
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.0/ticdc-bidirectional-replication).
+
+* TiCDC adds support for Simple Protocol [#9898](https://github.com/pingcap/tiflow/issues/9898) @[3AceShowHand](https://github.com/3AceShowHand)
+
+    TiCDC introduces support for a new protocol, the Simple protocol. This new protocol includes support for in-band schema tracking capabilities.
+
+    For more information, see [documentation](/ticdc/ticdc-simple-protocol.md).
+
+* TiCDC adds support for Debezium format Protocol [#1799](https://github.com/pingcap/tiflow/issues/1799) @[breezewish](https://github.com/breezewish)
+
+    TiCDC can now publish replication events to a Kafka sink using a protocol that generates event messages using a Debezium style format. This helps to simplify the migration from MySQL to TiDB for users who are currently using Debezium to pull data from MySQL for downstream processing.
+
+    For more information, see [documentation](/ticdc/ticdc-debezium.md).
 
 ## Compatibility changes
 
