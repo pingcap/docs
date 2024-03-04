@@ -14,11 +14,11 @@ Therefore, TiDB provides the Optimizer Fix Controls feature that allows you to m
 
 ## Introduction to `tidb_opt_fix_control`
 
-Starting from v7.1.0, TiDB provides the [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v710) system variable to control the behavior of the optimizer in a more fine-grained way.
+Starting from v6.5.3 and v7.1.0, TiDB provides the [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710) system variable to control the behavior of the optimizer in a more fine-grained way.
 
 Each fix is a control item used to adjust the behavior in the TiDB optimizer for one particular purpose. It is denoted by a number that corresponds to a GitHub Issue that contains the technical details of the behavior change. For example, for fix `44262`, you can review what it controls in [Issue 44262](https://github.com/pingcap/tidb/issues/44262).
 
-The [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v710) system variable accepts multiple fixes as one value, separated by commas (`,`). The format is `"<#issue1>:<value1>,<#issue2>:<value2>,...,<#issueN>:<valueN>"`, where `<#issueN>` is the fix number. For example:
+The [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710) system variable accepts multiple fixes as one value, separated by commas (`,`). The format is `"<#issue1>:<value1>,<#issue2>:<value2>,...,<#issueN>:<valueN>"`, where `<#issueN>` is the fix number. For example:
 
 ```sql
 SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
@@ -26,13 +26,13 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 ## Optimizer Fix Controls reference
 
-### [`44262`](https://github.com/pingcap/tidb/issues/44262) <span class="version-mark">New in v7.1.1</span>
+### [`44262`](https://github.com/pingcap/tidb/issues/44262) <span class="version-mark">New in v6.5.3 and v7.1.1</span>
 
 - Default value: `OFF`
 - Possible values: `ON`, `OFF`
 - This variable controls whether to allow the use of [Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode) to access the partitioned table when the [GlobalStats](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode) are missing.
 
-### [`44389`](https://github.com/pingcap/tidb/issues/44389) <span class="version-mark">New in v7.1.1</span>
+### [`44389`](https://github.com/pingcap/tidb/issues/44389) <span class="version-mark">New in v6.5.3 and v7.1.1</span>
 
 - Default value: `OFF`
 - Possible values: `ON`, `OFF`
@@ -45,10 +45,16 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 - To conserve memory, Plan Cache does not cache queries that exceed a specified number of parameters.
 - This variable controls the threshold for the maximum number of parameters. `0` means no limit.
 
-### [`44855`](https://github.com/pingcap/tidb/issues/44855) <span class="version-mark">New in v7.1.1</span>
+### [`44830`](https://github.com/pingcap/tidb/issues/44830) <span class="version-mark">New in v6.5.7</span>
 
 - Default value: `OFF`
-- Possible values: `ON`、`OFF`
+- Possible values: `ON`, `OFF`
+- This variable controls whether Plan Cache is allowed to cache execution plans with the `PointGet` operator generated during physical optimization.
+
+### [`44855`](https://github.com/pingcap/tidb/issues/44855) <span class="version-mark">New in v6.5.4 and v7.1.1</span>
+
+- Default value: `OFF`
+- Possible values: `ON`, `OFF`
 - In some scenarios, when the `Probe` side of an `IndexJoin` operator contains a `Selection` operator, TiDB severely overestimates the row count of `IndexScan`. This might cause suboptimal query plans to be selected instead of `IndexJoin`.
 - To mitigate this issue, TiDB has introduced an improvement. However, due to potential query plan fallback risks, this improvement is disabled by default.
 - This variable controls whether to enable the preceding improvement.

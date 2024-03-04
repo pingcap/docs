@@ -401,20 +401,12 @@ Configuration items related to security.
 
 ### `auth-token-jwks` <span class="version-mark">New in v6.4.0</span>
 
-> **Warning:**
->
-> The `tidb_auth_token` authentication method is used only for the internal operation of TiDB Cloud. **DO NOT** change the value of this configuration.
-
-- Set the local file path of the JSON Web Key Sets (JWKS) for the `tidb_auth_token` authentication method.
+- Set the local file path of the JSON Web Key Sets (JWKS) for the [`tidb_auth_token`](/security-compatibility-with-mysql.md#tidb_auth_token) authentication method.
 - Default value: `""`
 
 ### `auth-token-refresh-interval` <span class="version-mark">New in v6.4.0</span>
 
-> **Warning:**
->
-> The `tidb_auth_token` authentication method is used only for the internal operation of TiDB Cloud. **DO NOT** change the value of this configuration.
-
-- Set the JWKS refresh interval for the `tidb_auth_token` authentication method.
+- Set the JWKS refresh interval for the [`tidb_auth_token`](/security-compatibility-with-mysql.md#tidb_auth_token) authentication method.
 - Default value: `1h`
 
 ### `disconnect-on-expired-password` <span class="version-mark">New in v6.5.0</span>
@@ -426,19 +418,15 @@ Configuration items related to security.
 
 ### `session-token-signing-cert` <span class="version-mark">New in v6.4.0</span>
 
-> **Warning:**
->
-> The feature controlled by this parameter is under development. **Do not modify the default value**.
-
++ The certificate file path, which is used by [TiProxy](https://docs.pingcap.com/tidb/v7.6/tiproxy-overview) for session migration.
 + Default value: ""
++ Empty value will cause TiProxy session migration to fail. To enable session migration, all TiDB nodes must set this to the same certificate and key. This means that you should store the same certificate and key on every TiDB node.
 
 ### `session-token-signing-key` <span class="version-mark">New in v6.4.0</span>
 
-> **Warning:**
->
-> The feature controlled by this parameter is under development. **Do not modify the default value**.
-
++ The key file path used by [TiProxy](https://docs.pingcap.com/tidb/v7.6/tiproxy-overview) for session migration.
 + Default value: ""
++ Refer to the descriptions of [`session-token-signing-cert`](#session-token-signing-cert-new-in-v640).
 
 ## Performance
 
@@ -533,6 +521,10 @@ Configuration items related to performance.
 - Value options: The default value `NO_PRIORITY` means that the priority for statements is not forced to change. Other options are `LOW_PRIORITY`, `DELAYED`, and `HIGH_PRIORITY` in ascending order.
 - Since v6.1.0, the priority for all statements is determined by the TiDB configuration item [`instance.tidb_force_priority`](/tidb-configuration-file.md#tidb_force_priority) or the system variable [`tidb_force_priority`](/system-variables.md#tidb_force_priority). `force-priority` still takes effect. But if `force-priority` and `instance.tidb_force_priority` are set at the same time, the latter takes effect.
 
+> **Note:**
+>
+> Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control.md) to manage resource usage for different SQL statements.
+
 ### `distinct-agg-push-down`
 
 - Determines whether the optimizer executes the operation that pushes down the aggregation function with `Distinct` (such as `select count(distinct a) from t`) to Coprocessors.
@@ -585,7 +577,7 @@ Configuration items related to performance.
 + When the value of `lite-init-stats` is `true`, statistics initialization does not load any histogram, TopN, or Count-Min Sketch of indexes or columns into memory. When the value of `lite-init-stats` is `false`, statistics initialization loads histograms, TopN, and Count-Min Sketch of indexes and primary keys into memory but does not load any histogram, TopN, or Count-Min Sketch of non-primary key columns into memory. When the optimizer needs the histogram, TopN, and Count-Min Sketch of a specific index or column, the necessary statistics are loaded into memory synchronously or asynchronously (controlled by [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)).
 + Setting `lite-init-stats` to `true` speeds up statistics initialization and reduces TiDB memory usage by avoiding unnecessary statistics loading. For details, see [Load statistics](/statistics.md#load-statistics).
 
-### `force-init-stats` <span class="version-mark">New in v7.1.0</span>
+### `force-init-stats` <span class="version-mark">New in v6.5.7 and v7.1.0</span>
 
 + Controls whether to wait for statistics initialization to finish before providing services during TiDB startup.
 + Default value: false
@@ -877,6 +869,10 @@ Configuration items related to read isolation.
 - Default value: `NO_PRIORITY`
 - The default value `NO_PRIORITY` means that the priority for statements is not forced to change. Other options are `LOW_PRIORITY`, `DELAYED`, and `HIGH_PRIORITY` in ascending order.
 - Before v6.1.0, this configuration is set by `force-priority`.
+
+> **Note:**
+>
+> Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control.md) to manage resource usage for different SQL statements.
 
 ### `max_connections`
 

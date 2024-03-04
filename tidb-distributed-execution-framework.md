@@ -7,7 +7,7 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 
 > **Warning:**
 >
-> This feature is an experimental feature. It is not recommended to use it in production environments.
+> This feature is an experimental feature. It is not recommended to use it in production environments. When enabling the TiDB backend task distributed execution framework, if you plan to upgrade TiDB from v7.1.x to v7.5.0 or later, ensure that there are no `ADD INDEX` tasks running before the upgrade.
 
 <CustomContent platform="tidb-cloud">
 

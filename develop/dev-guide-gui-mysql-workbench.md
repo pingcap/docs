@@ -68,7 +68,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
 5. Launch MySQL Workbench and click **+** near the **MySQL Connections** title.
 
-    ![MySQL Workbench: add new connection](/media/develop/navicat-add-new-connection.png)
+    ![MySQL Workbench: add new connection](/media/develop/mysql-workbench-add-new-connection.png)
 
 6. In the **Setup New Connection** dialog, configure the following connection parameters:
 
@@ -76,7 +76,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     - **Hostname**: enter the `HOST` parameter from the TiDB Cloud connection dialog.
     - **Port**: enter the `PORT` parameter from the TiDB Cloud connection dialog.
     - **Username**: enter the `USERNAME` parameter from the TiDB Cloud connection dialog.
-    - **Password**: click **Store in Keychain ...**, enter the password of the TiDB Serverless cluster, and then click **OK** to store the password.
+    - **Password**: click **Store in Keychain ...** or **Store in Vault**, enter the password of the TiDB Serverless cluster, and then click **OK** to store the password.
 
         ![MySQL Workbench: store the password of TiDB Serverless in keychain](/media/develop/mysql-workbench-store-password-in-keychain.png)
 
@@ -101,14 +101,14 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
 4. Launch MySQL Workbench and click **+** near the **MySQL Connections** title.
 
-    ![MySQL Workbench: add new connection](/media/develop/navicat-add-new-connection.png)
+    ![MySQL Workbench: add new connection](/media/develop/mysql-workbench-add-new-connection.png)
 
 5. In the **Setup New Connection** dialog, configure the following connection parameters:
 
     - **Connection Name**: give this connection a meaningful name.
-    - **Hostname**: enter the `host` parameter from the TiDB Cloud connection dialog.
-    - **Port**: enter the `port` parameter from the TiDB Cloud connection dialog.
-    - **Username**: enter the `user` parameter from the TiDB Cloud connection dialog.
+    - **Hostname**: enter the `HOST` parameter from the TiDB Cloud connection dialog.
+    - **Port**: enter the `PORT` parameter from the TiDB Cloud connection dialog.
+    - **Username**: enter the `USERNAME` parameter from the TiDB Cloud connection dialog.
     - **Password**: click **Store in Keychain ...**, enter the password of the TiDB Dedicated cluster, and then click **OK** to store the password.
 
         ![MySQL Workbench: store the password of TiDB Dedicated in keychain](/media/develop/mysql-workbench-store-dedicated-password-in-keychain.png)
@@ -126,7 +126,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
 1. Launch MySQL Workbench and click **+** near the **MySQL Connections** title.
 
-    ![MySQL Workbench: add new connection](/media/develop/navicat-add-new-connection.png)
+    ![MySQL Workbench: add new connection](/media/develop/mysql-workbench-add-new-connection.png)
 
 2. In the **Setup New Connection** dialog, configure the following connection parameters:
 

@@ -42,9 +42,9 @@ In upstream clusters where you create log backup tasks, avoid using the TiDB Lig
 
 ### Why is the acceleration of adding indexes feature incompatible with PITR?
 
-Issue: [#38045](https://github.com/pingcap/tidb/issues/38045)
+Issue: [#38045](https://github.com/pingcap/tidb/issues/38045) (fixed in v7.0.0)
 
-Currently, index data created through the [index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) feature cannot be backed up by PITR.
+For TiDB versions earlier than v7.0.0, index data created through the [index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) feature cannot be backed up by PITR.
 
 Therefore, after PITR recovery is complete, BR will delete the index data created by index acceleration, and then recreate it. If many indexes are created by index acceleration or the index data is large during the log backup, it is recommended to perform a full backup after creating the indexes.
 
@@ -58,13 +58,13 @@ To resolve this issue, you need to manually execute the `br log resume` command 
 
 ### What should I do if the error `execute over region id` is returned when I perform PITR?
 
-Issue: [#37207](https://github.com/pingcap/tidb/issues/37207)
+Issue: [#37207](https://github.com/pingcap/tidb/issues/37207) (fixed in v6.6.0)
 
-This issue usually occurs when you enable log backup during a full data import and afterward perform a PITR to restore data at a time point during the data import.
+For TiDB versions earlier than v6.6.0, you might encounter the error of `execute over region id` during PITR recovery. This issue usually occurs when you enable log backup during a full data import and afterward perform a PITR to restore data at a time point during the data import.
 
 Specifically, there is a probability that this issue occurs if there are a large number of hotspot writes for a long time (such as 24 hours) and if the OPS of each TiKV node is larger than 50k/s (you can view the metrics in Grafana: **TiKV-Details** -> **Backup Log** -> **Handle Event Rate**).
 
-It is recommended that you perform a snapshot backup after the data import and perform PITR based on this snapshot backup.
+For TiDB versions earlier than v6.6.0, it is recommended that you perform a snapshot backup after the data import and perform PITR based on this snapshot backup.
 
 ## After restoring a downstream cluster using the `br restore point` command, data cannot be accessed from TiFlash. What should I do?
 
@@ -295,6 +295,10 @@ Note that even if you configures [table filter](/table-filter.md#syntax), **BR d
 - System variable tables (`mysql.tidb`, `mysql.global_variables`)
 - [Other system tables](https://github.com/pingcap/tidb/blob/master/br/pkg/restore/systable_restore.go#L31)
 
+### How to deal with the error of `cannot find rewrite rule` during restoration?
+
+Examine whether there are tables in the restoration cluster sharing the same name as other tables in the backup data but having inconsistent structures. In most cases, this issue is caused by missing indexes in the tables of the restoration cluster. A recommended approach is to delete such tables in the restoration cluster first and then retry restoration.
+
 ## Other things you may want to know about backup and restore
 
 ### What is the size of the backup data? Are there replicas of the backup?
@@ -326,3 +330,11 @@ If you do not execute `ANALYZE` on the table, TiDB will fail to select the optim
 ### Does BR back up the `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` information of a table? Does the restored table have multiple Regions?
 
 Yes. BR backs up the [`SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) information of a table. The data of the restored table is also split into multiple Regions.
+
+## If the recovery process is interrupted, is it necessary to delete the already recovered data and start the recovery again?
+
+No, it is not necessary. Starting from v7.1.0, BR supports resuming data from a breakpoint. If the recovery is interrupted due to unexpected circumstances, simply restart the recovery task, and it will resume from where it left off.
+
+## After the recovery is complete, can I delete a specific table and then recover it again?
+
+Yes, after deleting a specific table, you can recover it again. But note that, you can only recover tables that are deleted using the `DROP TABLE` or `TRUNCATE TABLE` statement, not the `DELETE FROM` statement. This is because `DELETE FROM` only updates the MVCC version to mark the data to be deleted, and the actual data deletion occurs after GC.

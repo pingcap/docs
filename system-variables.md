@@ -227,7 +227,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 65535]`
-- Controls the step size of `AUTO_INCREMENT` values to be allocated to a column. It is often used in combination with `auto_increment_offset`.
+- Controls the step size of `AUTO_INCREMENT` values to be allocated to a column, and allocation rules for `AUTO_RANDOM` IDs. It is often used in combination with [`auto_increment_offset`](#auto_increment_offset).
 
 ### auto_increment_offset
 
@@ -236,7 +236,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 65535]`
-- Controls the initial offset of `AUTO_INCREMENT` values to be allocated to a column. This setting is often used in combination with `auto_increment_increment`. For example:
+- Controls the initial offset of `AUTO_INCREMENT` values to be allocated to a column, and allocation rules for `AUTO_RANDOM` IDs. This setting is often used in combination with [`auto_increment_increment`](#auto_increment_increment). For example:
 
 ```sql
 mysql> CREATE TABLE t1 (a int not null primary key auto_increment);
@@ -397,7 +397,6 @@ mysql> SELECT * FROM t1;
 - Type: Enumeration
 - Default value: `mysql_native_password`
 - Possible values: `mysql_native_password`, `caching_sha2_password`, `tidb_sm3_password`, `tidb_auth_token`, `authentication_ldap_sasl`, and `authentication_ldap_simple`.
-- The `tidb_auth_token` authentication method is used only for the internal operation of TiDB Cloud. **DO NOT** set the variable to this value.
 - This variable sets the authentication method that the server advertises when the server-client connection is being established.
 - To authenticate using the `tidb_sm3_password` method, you can connect to TiDB using [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3).
 
@@ -1338,15 +1337,13 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 <CustomContent platform="tidb">
 
-> **Warning:**
->
-> Currently, PITR recovery handles the indexes created by index acceleration during the log backup with extra processing to achieve compatibility. For details, see [Why is the acceleration of adding indexes feature incompatible with PITR?](/faq/backup-and-restore-faq.md#why-is-the-acceleration-of-adding-indexes-feature-incompatible-with-pitr).
-
 > **Note:**
 >
 > * Index acceleration requires a [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) that is writable and has enough free space. If the `temp-dir` is unusable, TiDB falls back to non-accelerated index building. It is recommended to put the `temp-dir` on a SSD disk.
 >
 > * Before you upgrade TiDB to v6.5.0 or later, it is recommended that you check whether the [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) path of TiDB is correctly mounted to an SSD disk. Make sure that the operating system user that runs TiDB has the read and write permissions for this directory. Otherwise, The DDL operations might experience unpredictable issues. This path is a TiDB configuration item, which takes effect after TiDB is restarted. Therefore, setting this configuration item before upgrading can avoid another restart.
+>
+> * For TiDB versions earlier than v7.0.0, PITR recovery handles the indexes created by index acceleration during the log backup with extra processing to achieve compatibility. For details, see [Why is the acceleration of adding indexes feature incompatible with PITR?](/faq/backup-and-restore-faq.md#why-is-the-acceleration-of-adding-indexes-feature-incompatible-with-pitr).
 
 </CustomContent>
 
@@ -1356,7 +1353,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 >
 > Currently, this feature is not fully compatible with [altering multiple columns or indexes in a single `ALTER TABLE` statement](/sql-statements/sql-statement-alter-table.md). When adding a unique index with the index acceleration, you need to avoid altering other columns or indexes in the same statement.
 >
-> Currently, PITR recovery handles the indexes created by index acceleration during the log backup with extra processing to achieve compatibility. For details, see [Why is the acceleration of adding indexes feature incompatible with PITR?](https://docs.pingcap.com/tidb/v7.0/backup-and-restore-faq#why-is-the-acceleration-of-adding-indexes-feature-incompatible-with-pitr).
+> For TiDB versions earlier than v7.0.0, PITR recovery handles the indexes created by index acceleration during the log backup with extra processing to achieve compatibility. For details, see [Why is the acceleration of adding indexes feature incompatible with PITR?](https://docs.pingcap.com/tidb/v7.0/backup-and-restore-faq#why-is-the-acceleration-of-adding-indexes-feature-incompatible-with-pitr).
 
 </CustomContent>
 
@@ -1364,7 +1361,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Warning:**
 >
-> This feature is still in the experimental stage. It is not recommended to enable this feature in production environments.
+> This feature is still in the experimental stage. It is not recommended to enable this feature in production environments. When enabling the TiDB backend task distributed execution framework, if you plan to upgrade TiDB from v7.1.x to v7.5.0 or later, ensure that there are no `ADD INDEX` tasks running before the upgrade.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -2453,6 +2450,10 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This variable is used to change the default priority for statements executed on a TiDB server. A use case is to ensure that a particular user that is performing OLAP queries receives lower priority than users performing OLTP queries.
 - The default value `NO_PRIORITY` means that the priority for statements is not forced to change.
 
+> **Note:**
+>
+> Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control.md) to manage resource usage for different SQL statements.
+
 ### tidb_gc_concurrency <span class="version-mark">New in v5.0</span>
 
 > **Note:**
@@ -2808,7 +2809,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `32`
 - Range: `[1, 32]`
 - Unit: Rows
-- This variable is used to set the number of rows for the initial chunk during the execution process.
+- This variable is used to set the number of rows for the initial chunk during the execution process. The number of rows for a chunk directly affects the amount of memory required for a single query. You can roughly estimate the memory needed for a single chunk by considering the total width of all columns in the query and the number of rows for the chunk. Combining this with the concurrency of the executor, you can make a rough estimation of the total memory required for a single query. It is recommended that the total memory for a single chunk does not exceed 16 MiB.
 
 ### tidb_isolation_read_engines <span class="version-mark">New in v4.0</span>
 
@@ -3022,7 +3023,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `1024`
 - Range: `[32, 2147483647]`
 - Unit: Rows
-- This variable is used to set the maximum number of rows in a chunk during the execution process. Setting to too large of a value may cause cache locality issues.
+- This variable is used to set the maximum number of rows in a chunk during the execution process. Setting to too large of a value may cause cache locality issues. The recommended value for this variable is no larger than 65536. The number of rows for a chunk directly affects the amount of memory required for a single query. You can roughly estimate the memory needed for a single chunk by considering the total width of all columns in the query and the number of rows for the chunk. Combining this with the concurrency of the executor, you can make a rough estimation of the total memory required for a single query. It is recommended that the total memory for a single chunk does not exceed 16 MiB. When the query involves a large amount of data and a single chunk is insufficient to handle all the data, TiDB processes it multiple times, doubling the chunk size with each processing iteration, starting from [`tidb_init_chunk_size`](#tidb_init_chunk_size) until the chunk size reaches the value of `tidb_max_chunk_size`.
 
 ### tidb_max_delta_schema_count <span class="version-mark">New in v2.1.18 and v3.0.5</span>
 
@@ -3469,7 +3470,7 @@ mysql> desc select count(distinct a) from test.t;
 - This variable is used to control whether to enable the [TiFlash late materialization](/tiflash/tiflash-late-materialization.md) feature. Note that TiFlash late materialization does not take effect in the [fast scan mode](/tiflash/use-fastscan.md).
 - When this variable is set to `OFF` to disable the TiFlash late materialization feature, to process a `SELECT` statement with filter conditions (`WHERE` clause), TiFlash scans all the data of the required columns before filtering. When this variable is set to `ON` to enable the TiFlash late materialization feature, TiFlash can first scan the column data related to the filter conditions that are pushed down to the TableScan operator, filter the rows that meet the conditions, and then scan the data of other columns of these rows for further calculations, thereby reducing IO scans and computations of data processing.
 
-### tidb_opt_fix_control <span class="version-mark">New in v7.1.0</span>
+### tidb_opt_fix_control <span class="version-mark">New in v6.5.3 and v7.1.0</span>
 
 <CustomContent platform="tidb">
 

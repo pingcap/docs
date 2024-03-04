@@ -104,13 +104,6 @@ This document only describes the parameters that are not included in command-lin
     + If the configuration item is set to a value other than `0`, TiKV keeps at most the number of old log files specified by `max-backups`. For example, if the value is set to `7`, TiKV keeps up to 7 old log files.
 + Default value: `0`
 
-### `pd.enable-forwarding` <span class="version-mark">New in v5.0.0</span>
-
-+ Controls whether the PD client in TiKV forwards requests to the leader via the followers in the case of possible network isolation.
-+ Default value: `false`
-+ If the environment might have isolated network, enabling this parameter can reduce the window of service unavailability.
-+ If you cannot accurately determine whether isolation, network interruption, or downtime has occurred, using this mechanism has the risk of misjudgment and causes reduced availability and performance. If network failure has never occurred, it is not recommended to enable this parameter.
-
 ## server
 
 + Configuration items related to the server.
@@ -563,6 +556,13 @@ Configuration items related to the I/O rate limiter.
 + Default value: `"write-only"`
 
 ## pd
+
+### `enable-forwarding` <span class="version-mark">New in v5.0.0</span>
+
++ Controls whether the PD client in TiKV forwards requests to the leader via the followers in the case of possible network isolation.
++ Default value: `false`
++ If the environment might have isolated network, enabling this parameter can reduce the window of service unavailability.
++ If you cannot accurately determine whether isolation, network interruption, or downtime has occurred, using this mechanism has the risk of misjudgment and causes reduced availability and performance. If network failure has never occurred, it is not recommended to enable this parameter.
 
 ### `endpoints`
 
@@ -1148,8 +1148,8 @@ Configuration items related to RocksDB
 
 ### `wal-dir`
 
-+ The directory in which WAL files are stored
-+ Default value: `"/tmp/tikv/store"`
++ The directory in which WAL files are stored. If not specified, the WAL files will be stored in the same directory as the data.
++ Default value: `""`
 
 ### `wal-ttl-seconds`
 
@@ -1976,6 +1976,11 @@ Configuration items related to TiDB Lightning import and BR restore.
 + The garbage ratio threshold to trigger GC.
 + Default value: `1.1`
 
+### `num-threads` <span class="version-mark">New in v6.5.8</span>
+
++ The number of GC threads when `enable-compaction-filter` is `false`.
++ Default value: `1`
+
 ## backup
 
 Configuration items related to BR backup.
@@ -2048,8 +2053,8 @@ Configuration items related to log backup.
 
 ### `initial-scan-rate-limit` <span class="version-mark">New in v6.2.0</span>
 
-+ The rate limit on throughput in an incremental data scan during log backup.
-+ Default value: 60, indicating that the rate limit is 60 MB/s by default.
++ The rate limit on throughput in an incremental data scan during log backup, which means the maximum amount of data that can be read from the disk per second. Note that if you only specify a number (for example, `60`), the unit is Byte instead of KiB.
++ Default value: 60MiB
 
 ### `max-flush-interval` <span class="version-mark">New in v6.2.0</span>
 
