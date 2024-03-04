@@ -67,8 +67,7 @@ The following sections illustrate the metrics on the Metrics page for TiDB Dedic
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
 | TiDB Uptime | node | The runtime of each TiDB node since last restart. |
-| TiDB CPU Usage | node | The CPU usage statistics of each TiDB node. |
-| TiDB CPU Limit | limit | The maximum limit of CPU for each TiDB node. |
+| TiDB CPU Usage | node, limit | The CPU usage statistics or upper limit of each TiDB node. |
 | TiDB Memory Usage | node | The memory usage statistics of each TiDB node. |
 | TiDB Memory Limit | limit | The maximum limit of memory for each TiDB node. |
 | TiKV Uptime | node | The runtime of each TiKV node since last restart. |
