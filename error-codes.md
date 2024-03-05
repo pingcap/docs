@@ -539,7 +539,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 9002
 
-    The complete error message: `ERROR 9002 (HY000): TiKV Server Timeout`
+    The complete error message: `ERROR 9002 (HY000): TiKV server timeout`
 
     The TiKV request timed out.
 
