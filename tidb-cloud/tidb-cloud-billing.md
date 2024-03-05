@@ -86,13 +86,13 @@ If you are in the `Organization Owner` or `Organization Billing Admin` role of y
 
 To analyze and customize your cost reports of your organization, perform the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
+1. In the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com), click <MDSvgIcon name="icon-top-organization" />, and then click **Billing**.
 
     > **Note:**
     >
     > If you are in multiple organizations, switch to your target organization by clicking its name.
 
-2. In the left navigation pane, click the **Billing** tab and then click the **Cost Explorer** tab.
+2. On the **Billing** page, click the **Cost Explorer** tab.
 3. On the **Cost Explorer** page, expand the **Filter** section in the upper-right corner to customize your report. You can set the time range, select a grouping option (such as by service, project, cluster, region, product type, and charge type), and apply filters by selecting specific services, projects, clusters, or regions. The cost explorer will display you with the following information:
 
     - **Cost Graph**: visualizes the cost trends over the selected time range. You can switch between **Monthly**, **Daily**, and **Total** views.
