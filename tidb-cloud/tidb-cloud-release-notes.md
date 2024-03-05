@@ -16,7 +16,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Introduce the **Cost Explorer** tab on the **Billing** page, which provides an intuitive interface for analyzing and customizing cost reports for your organization over time.
+- Introduce the **Cost Explorer** tab on the [**Billing**](https://tidbcloud.com/console/org-settings/billing/payments) page, which provides an intuitive interface for analyzing and customizing cost reports for your organization over time.
 
     To use this feature, navigate to the **Billing** page of your organization and click the **Cost Explorer** tab.
 
@@ -24,7 +24,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) displays a **limit** label for [node-level resource metrics](/tidb-cloud/built-in-monitoring.md#server).
 
-    The **limit** label shows the maximum usage of resources such as CPU, memory, and storage for each component in the cluster. This enhancement simplifies the process of monitoring the resource usage rate of your cluster.
+    The **limit** label shows the maximum usage of resources such as CPU, memory, and storage for each component in a cluster. This enhancement simplifies the process of monitoring the resource usage rate of your cluster.
 
     To access these metric limits, navigate to the **Monitoring** page of your cluster, and then check the **Server** category under the **Metrics** tab.
 
