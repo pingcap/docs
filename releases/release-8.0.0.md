@@ -25,7 +25,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
   <tr>
     <td rowspan="4">Scalability and Performance</td>
     <td>Disaggregation of PD to improve scale (experimental) **tw@qiancai** <!--1553, 1558--></td>
-    <td>PD (Placement Driver) has a lot of critical modules for the running of TiDB. Each module's resource consumption can increase as certain workloads scale, meaning they can each interfere with other functions in PD, ultimatley impacting quality of service of the cluster. 
+    <td>PD (Placement Driver) has a lot of critical modules for the running of TiDB. Each module's resource consumption can increase as certain workloads scale, meaning they can each interfere with other functions in PD, ultimately impacting quality of service of the cluster.
 By separating PD modules into separately-deployable services, their blast radii are massively mitigated as the cluster scales. Much larger clusters with much larger workloads are possible with this architecture.</td>
   </tr>
   <tr>
@@ -38,7 +38,7 @@ By separating PD modules into separately-deployable services, their blast radii 
   </tr>
   <tr>
     <td>Enhanced stability of massive number of tables **tw@hfxsd** <!--16408--></td>
-    <td>SaaS companies using TiDB as the system of record for their multi-tenant applications require storing many tables. Prior to this release, so table counts on the order of a million or more were possible but were likely to degrade experience. 
+    <td>SaaS companies using TiDB as the system of record for their multi-tenant applications require storing many tables. Prior to this release, so table counts on the order of a million or more were possible but were likely to degrade experience.
 Several enhancements were made in this version to mitigate that:
 
   - New information schema caching system that includes a lazy-loading LRU cache for table metadata and more memory-efficient handling of schema version changes.
@@ -95,12 +95,6 @@ Several enhancements were made in this version to mitigate that:
 
 ### SQL
 
-* PITR supports Amazon S3 Object Lock [#51184](https://github.com/pingcap/tidb/issues/51184) @[RidRisR](https://github.com/RidRisR) **tw@lilin90** <!--1604-->
-
-    Amazon S3 Object Lock can help prevent backup data from being accidentally or intentionally deleted during a specified retention period, enhancing the security and integrity of data. Starting from v6.3.0, BR supports Amazon S3 Object Lock in snapshot backups, adding an additional layer of security for full backups. Starting from v8.0.0, PITR also supports Amazon S3 Object Lock. Whether full backups or log data backups, the Object Lock feature ensures a more reliable data protection, further strengthening the security of data backup and recovery and meeting regulatory requirements.
-
-    For more information, see [documentation](/br/backup-and-restore-storages.md#other-features-supported-by-the-storage-service).
-
 * Feature summary [#issue-number](issue-link) @[pr-auorthor-id](author-link)
 
     Feature descriptions (including what the feature is, why it is valuable for users, and how to use this feature generally)
@@ -108,6 +102,12 @@ Several enhancements were made in this version to mitigate that:
     For more information, see [documentation](doc-link).
 
 ### DB operations
+
+* PITR supports Amazon S3 Object Lock [#51184](https://github.com/pingcap/tidb/issues/51184) @[RidRisR](https://github.com/RidRisR) **tw@lilin90** <!--1604-->
+
+    Amazon S3 Object Lock can help prevent backup data from being accidentally or intentionally deleted during a specified retention period, enhancing the security and integrity of data. Starting from v6.3.0, BR supports Amazon S3 Object Lock in snapshot backups, adding an additional layer of security for full backups. Starting from v8.0.0, PITR also supports Amazon S3 Object Lock. Whether full backups or log data backups, the Object Lock feature ensures a more reliable data protection, further strengthening the security of data backup and recovery and meeting regulatory requirements.
+
+    For more information, see [documentation](/br/backup-and-restore-storages.md#other-features-supported-by-the-storage-service).
 
 * Feature summary [#issue-number](issue-link) @[pr-auorthor-id](author-link)
 
