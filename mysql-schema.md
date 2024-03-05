@@ -22,6 +22,15 @@ These system tables contain grant information about user accounts and their priv
 - `global_priv`: the authentication information based on certificates
 - `role_edges`: the relationship between roles
 
+## Cluster status system tables
+
+* The `tidb` table contains some global information about TiDB:
+
+    * `bootstrapped`: whether the TiDB cluster has been initialized. Note that this value is read-only and cannot be modified.
+    * `tidb_server_version`: the version information of TiDB when it is initialized. Note that this value is read-only and cannot be modified.
+    * `system_tz`: the system time zone of TiDB.
+    * `new_collation_enabled`: whether TiDB has enabled the [new framework for collations](/character-set-and-collation.md#new-framework-for-collations). Note that this value is read-only and cannot be modified.
+
 ## Server-side help system tables
 
 Currently, the `help_topic` is NULL.
@@ -76,8 +85,26 @@ Currently, the `help_topic` is NULL.
 
 ## System tables related to metadata locks
 
-* `tidb_mdl_view`：a view of metadata locks. You can use it to view information about the currently blocked DDL statements
-* `tidb_mdl_info`：used internally by TiDB to synchronize metadata locks across nodes
+* `tidb_mdl_view`: a view of metadata locks. You can use it to view information about the currently blocked DDL statements
+* `tidb_mdl_info`: used internally by TiDB to synchronize metadata locks across nodes
+
+## System tables related to DDL statements
+
+* `tidb_ddl_history`: the history records of DDL statements
+* `tidb_ddl_jobs`: the metadata of DDL statements that are currently being executed by TiDB
+* `tidb_ddl_reorg`: the metadata of physical DDL statements (such as adding indexes) that are currently being executed by TiDB
+
+## System tables related to TiDB Distributed eXecution Framework (DXF)
+
+* `dist_framework_meta`: the metadata of the Distributed eXecution Framework (DXF) task scheduler
+* `tidb_global_task`: the metadata of the current DXF task
+* `tidb_global_task_history`: the metadata of the historical DXF tasks, including both succeeded and failed tasks
+* `tidb_background_subtask`: the metadata of the current DXF subtask
+* `tidb_background_subtask_history`: the metadata of the historical DXF subtasks
+
+## System tables related to Resource Control
+
+* `request_unit_by_group`: the history records of consumed resource units (RUs) of all resource groups
 
 ## Miscellaneous system tables
 
@@ -88,10 +115,8 @@ Currently, the `help_topic` is NULL.
 > The `tidb`, `expr_pushdown_blacklist`, `opt_rule_blacklist`, `table_cache_meta`, `tidb_import_jobs`, and `tidb_timers` system tables are only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 - `GLOBAL_VARIABLES`: global system variable table
-- `tidb`: to record the version information when TiDB executes `bootstrap`
 - `expr_pushdown_blacklist`: the blocklist for expression pushdown
 - `opt_rule_blacklist`: the blocklist for logical optimization rules
-- `table_cache_meta`: the metadata of cached tables
 - `tidb_import_jobs`: the job information of [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)
 - `tidb_timers`: the metadata of internal timers
 

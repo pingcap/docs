@@ -1,6 +1,6 @@
 ---
 title: TiDB Log Backup and PITR Guide
-summary: Learns about how to perform log backup and PITR in TiDB.
+summary: TiDB Log Backup and PITR Guide explains how to back up and restore data using the br command-line tool. It includes instructions for starting log backup, running full backup regularly, and cleaning up outdated data. The guide also provides information on running PITR and the performance capabilities of PITR.
 aliases: ['/tidb/dev/pitr-usage']
 ---
 
@@ -23,7 +23,7 @@ To start a log backup, run `br log start`. A cluster can only run one log backup
 
 ```shell
 tiup br log start --task-name=pitr --pd "${PD_IP}:2379" \
---storage 's3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+--storage 's3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
 ```
 
 After the log backup task starts, it runs in the background of the TiDB cluster until you stop it manually. During this process, the TiDB change logs are regularly backed up to the specified storage in small batches. To query the status of the log backup task, run the following command:
@@ -52,7 +52,7 @@ The snapshot backup can be used as a method of full backup. You can run `br back
 
 ```shell
 tiup br backup full --pd "${PD_IP}:2379" \
---storage 's3://backup-101/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+--storage 's3://backup-101/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}'
 ```
 
 ## Run PITR
@@ -61,8 +61,8 @@ To restore the cluster to any point in time within the backup retention period, 
 
 ```shell
 br restore point --pd "${PD_IP}:2379" \
---storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"' \
---full-backup-storage='s3://backup-101/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}"' \
+--storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}' \
+--full-backup-storage='s3://backup-101/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}' \
 --restored-ts '2022-05-15 18:00:00+0800'
 ```
 
@@ -94,7 +94,7 @@ The following steps describe how to clean up backup data that exceeds the backup
 3. Delete log backup data earlier than the snapshot backup `FULL_BACKUP_TS`:
 
     ```shell
-    tiup br log truncate --until=${FULL_BACKUP_TS} --storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+    tiup br log truncate --until=${FULL_BACKUP_TS} --storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
     ```
 
 4. Delete snapshot data earlier than the snapshot backup `FULL_BACKUP_TS`:
@@ -103,9 +103,7 @@ The following steps describe how to clean up backup data that exceeds the backup
     rm -rf s3://backup-101/snapshot-${date}
     ```
 
-## Performance and impact of PITR
-
-### Capabilities
+## Performance capabilities of PITR
 
 - On each TiKV node, PITR can restore snapshot data at a speed of 280 GB/h and log data 30 GB/h.
 - BR deletes outdated log backup data at a speed of 600 GB/h.
@@ -121,7 +119,7 @@ The following steps describe how to clean up backup data that exceeds the backup
 > The default replica number for all clusters in the test is 3.
 > To improve the overall restore performance, you can modify the [`import.num-threads`](/tikv-configuration-file.md#import) item in the TiKV configuration file and the [`concurrency`](/br/use-br-command-line-tool.md#common-options) option in the BR command.
 
-Testing scenario 1 (on [TiDB Cloud](https://tidbcloud.com)):
+Testing scenario 1 (on [TiDB Cloud](https://tidbcloud.com)) is as follows:
 
 - The number of TiKV nodes (8 core, 16 GB memory): 21
 - TiKV configuration item `import.num-threads`: 8
@@ -130,7 +128,7 @@ Testing scenario 1 (on [TiDB Cloud](https://tidbcloud.com)):
 - New log data created in the cluster: 10 GB/h
 - Write (INSERT/UPDATE/DELETE) QPS: 10,000
 
-Testing scenario 2 (on TiDB Self-Hosted):
+Testing scenario 2 (on TiDB Self-Hosted) is as follows:
 
 - The number of TiKV nodes (8 core, 64 GB memory): 6
 - TiKV configuration item `import.num-threads`: 8

@@ -10,7 +10,7 @@ This document lists the frequently asked questions (FAQs) and the solutions of T
 
 ## What should I do to quickly recover data after mistakenly deleting or updating data?
 
-TiDB v6.4.0 introduces the flashback feature. You can use this feature to quickly recover data within the GC time to a specified point in time. Therefore, if misoperations occur, you can use this feature to recover data. For details, see [Flashback Cluster](/sql-statements/sql-statement-flashback-to-timestamp.md) and [Flashback Database](/sql-statements/sql-statement-flashback-database.md).
+TiDB v6.4.0 introduces the flashback feature. You can use this feature to quickly recover data within the GC time to a specified point in time. Therefore, if misoperations occur, you can use this feature to recover data. For details, see [Flashback Cluster](/sql-statements/sql-statement-flashback-cluster.md) and [Flashback Database](/sql-statements/sql-statement-flashback-database.md).
 
 ## In TiDB v5.4.0 and later versions, when backup tasks are performed on the cluster under a heavy workload, why does the speed of backup tasks become slow?
 
@@ -29,7 +29,7 @@ When you perform backup tasks on an offline cluster, to speed up the backup, you
 
 ## PITR issues
 
-### What is the difference between [PITR](/br/br-pitr-guide.md) and [cluster flashback](/sql-statements/sql-statement-flashback-to-timestamp.md)?
+### What is the difference between [PITR](/br/br-pitr-guide.md) and [cluster flashback](/sql-statements/sql-statement-flashback-cluster.md)?
 
 From the perspective of use cases, PITR is usually used to restore the data of a cluster to a specified point in time when the cluster is completely out of service or the data is corrupted and cannot be recovered using other solutions. To use PITR, you need a new cluster for data recovery. The cluster flashback feature is specifically designed for the data error scenarios caused by user mis-operations or other factors, which allows you to restore the data of a cluster in-place to the latest timestamp before the data errors occur.
 
@@ -41,14 +41,6 @@ Currently, the log backup feature is not fully adapted to TiDB Lightning. Theref
 
 In upstream clusters where you create log backup tasks, avoid using the TiDB Lightning physical mode to import data. Instead, you can use TiDB Lightning logical mode. If you do need to use the physical mode, perform a snapshot backup after the import is complete, so that PITR can be restored to the time point after the snapshot backup.
 
-### Why is the acceleration of adding indexes feature incompatible with PITR?
-
-Issue: [#38045](https://github.com/pingcap/tidb/issues/38045)
-
-Currently, index data created through the [index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) feature cannot be backed up by PITR.
-
-Therefore, after PITR recovery is complete, BR will delete the index data created by index acceleration, and then recreate it. If many indexes are created by index acceleration or the index data is large during the log backup, it is recommended to perform a full backup after creating the indexes.
-
 ### The cluster has recovered from the network partition failure, but the checkpoint of the log backup task progress still does not resume. Why?
 
 Issue: [#13126](https://github.com/tikv/tikv/issues/13126)
@@ -56,16 +48,6 @@ Issue: [#13126](https://github.com/tikv/tikv/issues/13126)
 After a network partition failure in the cluster, the backup task cannot continue backing up logs. After a certain retry time, the task will be set to `ERROR` state. At this point, the backup task has stopped.
 
 To resolve this issue, you need to manually execute the `br log resume` command to resume the log backup task.
-
-### What should I do if the error `execute over region id` is returned when I perform PITR?
-
-Issue: [#37207](https://github.com/pingcap/tidb/issues/37207)
-
-This issue usually occurs when you enable log backup during a full data import and afterward perform a PITR to restore data at a time point during the data import.
-
-Specifically, there is a probability that this issue occurs if there are a large number of hotspot writes for a long time (such as 24 hours) and if the OPS of each TiKV node is larger than 50k/s (you can view the metrics in Grafana: **TiKV-Details** -> **Backup Log** -> **Handle Event Rate**).
-
-It is recommended that you perform a snapshot backup after the data import and perform PITR based on this snapshot backup.
 
 ## After restoring a downstream cluster using the `br restore point` command, data cannot be accessed from TiFlash. What should I do?
 
@@ -136,9 +118,9 @@ To address this problem, delete the current task using `br log stop`, and then c
 
 You can use [`filter.rules`](https://github.com/pingcap/tiflow/blob/7c3c2336f98153326912f3cf6ea2fbb7bcc4a20c/cmd/changefeed.toml#L16) to configure the block list for TiCDC and use [`syncer.ignore-table`](/tidb-binlog/tidb-binlog-configuration-file.md#ignore-table) to configure the block list for Drainer.
 
-### Why is `new_collations_enabled_on_first_bootstrap` mismatch reported during restore?
+### Why is `new_collation_enabled` mismatch reported during restore?
 
-Since TiDB v6.0.0, the default value of [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) has changed from `false` to `true`. BR backs up the `new_collations_enabled_on_first_bootstrap` configuration of the upstream cluster and then checks whether the value of this configuration is consistent between the upstream and downstream clusters. If the value is consistent, BR safely restores the data backed up in the upstream cluster to the downstream cluster. If the value is inconsistent, BR does not perform the data restore and reports an error.
+Since TiDB v6.0.0, the default value of [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) has changed from `false` to `true`. BR backs up the `new_collation_enabled` configuration in the `mysql.tidb` table of the upstream cluster and then checks whether the value of this configuration is consistent between the upstream and downstream clusters. If the value is consistent, BR safely restores the data backed up in the upstream cluster to the downstream cluster. If the value is inconsistent, BR does not perform the data restore and reports an error.
 
 Suppose that you have backed up the data in a TiDB cluster of an earlier version of v6.0.0, and you want to restore this data to a TiDB cluster of v6.0.0 or later versions. In this situation, you need to manually check whether the value of `new_collations_enabled_on_first_bootstrap` is consistent between the upstream and downstream clusters:
 
@@ -296,6 +278,10 @@ Note that even if you configures [table filter](/table-filter.md#syntax), **BR d
 - System variable tables (`mysql.tidb`, `mysql.global_variables`)
 - [Other system tables](https://github.com/pingcap/tidb/blob/master/br/pkg/restore/systable_restore.go#L31)
 
+### How to deal with the error of `cannot find rewrite rule` during restoration?
+
+Examine whether there are tables in the restoration cluster sharing the same name as other tables in the backup data but having inconsistent structures. In most cases, this issue is caused by missing indexes in the tables of the restoration cluster. A recommended approach is to delete such tables in the restoration cluster first and then retry restoration.
+
 ## Other things you may want to know about backup and restore
 
 ### What is the size of the backup data? Are there replicas of the backup?
@@ -327,3 +313,11 @@ If you do not execute `ANALYZE` on the table, TiDB will fail to select the optim
 ### Does BR back up the `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` information of a table? Does the restored table have multiple Regions?
 
 Yes. BR backs up the [`SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) information of a table. The data of the restored table is also split into multiple Regions.
+
+## If the recovery process is interrupted, is it necessary to delete the already recovered data and start the recovery again?
+
+No, it is not necessary. Starting from v7.1.0, BR supports resuming data from a breakpoint. If the recovery is interrupted due to unexpected circumstances, simply restart the recovery task, and it will resume from where it left off.
+
+## After the recovery is complete, can I delete a specific table and then recover it again?
+
+Yes, after deleting a specific table, you can recover it again. But note that, you can only recover tables that are deleted using the `DROP TABLE` or `TRUNCATE TABLE` statement, not the `DELETE FROM` statement. This is because `DELETE FROM` only updates the MVCC version to mark the data to be deleted, and the actual data deletion occurs after GC.

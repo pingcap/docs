@@ -25,7 +25,7 @@ TiDB Cloud is a fully managed cloud Database as a Service of TiDB. It has an eas
 
 ### Is TiDB Cloud compatible with MySQL?
 
-Currently, TiDB Cloud supports the majority of MySQL 5.7 syntax with the exception of triggers, stored procedures, user-defined functions, and foreign keys. For more details, see [Compatibility with MySQL](https://docs.pingcap.com/tidb/stable/mysql-compatibility).
+Currently, TiDB Cloud supports the majority of MySQL 5.7 and MySQL 8.0 syntax with the exception of triggers, stored procedures, and user-defined functions. For more details, see [Compatibility with MySQL](/mysql-compatibility.md).
 
 ### What programming languages can I use to work with TiDB Cloud?
 
@@ -41,7 +41,7 @@ No.
 
 ### What versions of TiDB are supported on TiDB Cloud?
 
-- Starting from July 25, 2023, the default TiDB version for new TiDB Dedicated clusters is v7.1.1.
+- Starting from October 31, 2023, the default TiDB version for new TiDB Dedicated clusters is v7.1.2.
 - Starting from March 7, 2023, the default TiDB version for new TiDB Serverless clusters is v6.6.0.
 
 For more information, see [TiDB Cloud Release Notes](/tidb-cloud/tidb-cloud-release-notes.md).
@@ -104,7 +104,7 @@ TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compat
 
 ### Does TiDB Cloud support incremental backups?
 
-No. If you need to restore data to any point in time within the cluster's backup retention, you can use PITR (Point-in-time Recovery). For more information, see [Use PITR in a TiDB Dedicated cluster](/tidb-cloud/backup-and-restore.md#automatic-backup) or [Use PITR in a TiDB Serverless cluster](/tidb-cloud/backup-and-restore-serverless.md#restore).
+No. If you need to restore data to any point in time within the cluster's backup retention, you can use PITR (Point-in-time Recovery). For more information, see [Use PITR in a TiDB Dedicated cluster](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) or [Use PITR in a TiDB Serverless cluster](/tidb-cloud/backup-and-restore-serverless.md#restore).
 
 ## HTAP FAQs
 

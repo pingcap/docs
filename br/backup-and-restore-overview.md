@@ -1,6 +1,6 @@
 ---
 title: TiDB Backup & Restore Overview
-summary: Learn about the definition and features of TiDB Backup & Restore.
+summary: TiDB Backup & Restore (BR) ensures high availability of clusters and data safety. It supports disaster recovery with a short RPO, handles misoperations, and provides history data auditing. It is recommended to perform backup operations during off-peak hours and store backup data to compatible storage systems. BR supports full backup and log backup, as well as restoring data to any point in time. It is important to use BR of the same major version as the TiDB cluster for backup and restoration.
 aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/br/','/docs/dev/how-to/maintain/backup-and-restore/br/','/tidb/dev/backup-and-restore-tool/','/tidb/dev/point-in-time-recovery/']
 ---
 
@@ -94,7 +94,7 @@ Corresponding to the backup features, you can perform two types of restore: full
 #### Restore performance and impact on TiDB clusters
 
 - Data restore is performed at a scalable speed. Generally, the speed is 100 MiB/s per TiKV node. `br` only supports restoring data to a new cluster and uses the resources of the target cluster as much as possible. For more details, see [Restore performance and impact](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-restore).
-- On each TiKV node, PITR can restore log data at 30 GiB/h. For more details, see [PITR performance and impact](/br/br-pitr-guide.md#performance-and-impact-of-pitr).
+- On each TiKV node, PITR can restore log data at 30 GiB/h. For more details, see [PITR performance and impact](/br/br-pitr-guide.md#performance-capabilities-of-pitr).
 
 ## Backup storage
 
@@ -113,7 +113,7 @@ Backup and restore might go wrong when some TiDB features are enabled or disable
 |  ----  | ----  | ----- |
 |GBK charset|| BR of versions earlier than v5.4.0 does not support restoring `charset=GBK` tables. No version of BR supports recovering `charset=GBK` tables to TiDB clusters earlier than v5.4.0. |
 | Clustered index | [#565](https://github.com/pingcap/br/issues/565) | Make sure that the value of the `tidb_enable_clustered_index` global variable during restore is consistent with that during backup. Otherwise, data inconsistency might occur, such as `default not found` error and inconsistent data index. |
-| New collation  | [#352](https://github.com/pingcap/br/issues/352)       | Make sure that the value of the `new_collations_enabled_on_first_bootstrap` variable during restore is consistent with that during backup. Otherwise, inconsistent data index might occur and checksum might fail to pass. For more information, see [FAQ - Why does BR report `new_collations_enabled_on_first_bootstrap` mismatch?](/faq/backup-and-restore-faq.md#why-is-new_collations_enabled_on_first_bootstrap-mismatch-reported-during-restore). |
+| New collation  | [#352](https://github.com/pingcap/br/issues/352)       | Make sure that the value of the `new_collation_enabled` variable in the `mysql.tidb` table during restore is consistent with that during backup. Otherwise, inconsistent data index might occur and checksum might fail to pass. For more information, see [FAQ - Why does BR report `new_collations_enabled_on_first_bootstrap` mismatch?](/faq/backup-and-restore-faq.md#why-is-new_collation_enabled-mismatch-reported-during-restore). |
 | Global temporary tables | | Make sure that you are using v5.3.0 or a later version of BR to back up and restore data. Otherwise, an error occurs in the definition of the backed global temporary tables. |
 | TiDB Lightning Physical Import| | If the upstream database uses the physical import mode of TiDB Lightning, data cannot be backed up in log backup. It is recommended to perform a full backup after the data import. For more information, see [When the upstream database imports data using TiDB Lightning in the physical import mode, the log backup feature becomes unavailable. Why?](/faq/backup-and-restore-faq.md#when-the-upstream-database-imports-data-using-tidb-lightning-in-the-physical-import-mode-the-log-backup-feature-becomes-unavailable-why).|
 
@@ -125,7 +125,7 @@ Backup and restore might go wrong when some TiDB features are enabled or disable
 
 Before performing backup and restore, BR compares the TiDB cluster version with its own and checks their compatibility. If the versions are incompatible, BR reports an error and exits. To forcibly skip the version check, you can set `--check-requirements=false`. Note that skipping the version check might introduce incompatibility in data.
 
-Starting from v7.0.0, TiDB gradually supports performing backup and restore operations through SQL statements. Therefore, it is strongly recommended to use the BR tool of the same major version as the TiDB cluster when backing up and restoring cluster data, and avoid performing data backup and restore operations across major versions. This helps ensure smooth execution of restore operations and data consistency.
+Starting from v7.0.0, TiDB gradually supports performing backup and restore operations through SQL statements. Therefore, it is strongly recommended to use the BR tool of the same major version as the TiDB cluster when backing up and restoring cluster data, and avoid performing data backup and restore operations across major versions. This helps ensure smooth execution of restore operations and data consistency. Starting from v7.6.0, BR restores data in some `mysql` system tables by default, that is, the `--with-sys-table` option is set to `true` by default. When restoring data to a TiDB cluster with a different version, if you encounter an error similar to `[BR:Restore:ErrRestoreIncompatibleSys]incompatible system table` due to different schemas of system tables, you can set `--with-sys-table=false` to skip restoring the system tables and avoid this error.
 
 The compatibility information for BR before TiDB v6.6.0 is as follows:
 

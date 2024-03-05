@@ -161,6 +161,13 @@ TiKV Coprocessor Task fields:
 * `tikvDiskFull`: The backoff caused by that the TiKV disk is full.
 * `txnLockFast`: The backoff caused by that locks are encountered during data reads.
 
+Fields related to Resource Control:
+
+* `Resource_group`: the resource group that the statement is bound to.
+* `Request_unit_read`: the total read RUs consumed by the statement.
+* `Request_unit_write`: the total write RUs consumed by the statement.
+* `Time_queued_by_rc`: the total time that the statement waits for available resources.
+
 ## Related system variables
 
 * [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold): Sets the threshold for the slow log. The SQL statement whose execution time exceeds this threshold is recorded in the slow log. The default value is 300 (ms).
@@ -607,7 +614,7 @@ The following table shows output details:
 | details | The details of the SQL execution |
 | succ | Whether the SQL statement is executed successfully. `1` means success and `0` means failure. |
 | conn_id | The connection ID for the session |
-| transaction_ts | The `commit ts` for a transaction commit |
+| transaction_ts | The `start ts` of the transaction |
 | user | The user name for the execution of the statement |
 | db | The database involved when the statement is executed |
 | table_ids | The ID of the table involved when the SQL statement is executed |

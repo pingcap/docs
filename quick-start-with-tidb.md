@@ -15,7 +15,7 @@ In addition, you can try out TiDB features on [TiDB Playground](https://play.tid
 
 > **Note:**
 >
-> The deployment method provided in this guide is **ONLY FOR** quick start, **NOT FOR** production.
+> The deployment method provided in this guide is **ONLY FOR** quick start, **NOT FOR** production or comprehensive functionality and stability testing.
 >
 > - To deploy a self-hosted production cluster, see the [production installation guide](/production-deployment-using-tiup.md).
 > - To deploy TiDB on Kubernetes, see [Get Started with TiDB on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started).
@@ -81,10 +81,10 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup playground v7.4.0 --db 2 --pd 3 --kv 3
+        tiup playground v7.6.0 --db 2 --pd 3 --kv 3
         ```
 
-        The command downloads a version cluster to the local machine and starts it, such as v7.4.0. To view the latest version, run `tiup list tidb`.
+        The command downloads a version cluster to the local machine and starts it, such as v7.6.0. To view the latest version, run `tiup list tidb`.
 
         This command returns the access methods of the cluster:
 
@@ -202,10 +202,10 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup playground v7.4.0 --db 2 --pd 3 --kv 3
+        tiup playground v7.6.0 --db 2 --pd 3 --kv 3
         ```
 
-        The command downloads a version cluster to the local machine and starts it, such as v7.4.0. To view the latest version, run `tiup list tidb`.
+        The command downloads a version cluster to the local machine and starts it, such as v7.6.0. To view the latest version, run `tiup list tidb`.
 
         This command returns the access methods of the cluster:
 
@@ -437,7 +437,7 @@ Other requirements for the target machine include:
     ```
 
     - `<cluster-name>`: Set the cluster name
-    - `<version>`: Set the TiDB cluster version, such as `v7.4.0`. You can see all the supported TiDB versions by running the `tiup list tidb` command
+    - `<version>`: Set the TiDB cluster version, such as `v7.6.0`. You can see all the supported TiDB versions by running the `tiup list tidb` command
     - `-p`: Specify the password used to connect to the target machine.
 
         > **Note:**

@@ -46,6 +46,10 @@ With this feature, you can:
 
 In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
 
+> **Note:**
+>
+> - To assess the effectiveness of resource management, it is recommended to deploy the cluster on independent computing and storage nodes. Scheduling and other cluster resource-sensitive features are hardly working properly on the deployment created by `tiup playground`, where the resources are shared across instances. 
+
 ## Limitations
 
 Resource control incurs additional scheduling overhead. Therefore, there might be a slight performance degradation (less than 5%) when this feature is enabled.
@@ -74,7 +78,7 @@ Request Unit (RU) is a unified abstraction unit in TiDB for system resources, wh
         </tr>
         <tr>
             <td rowspan="3">Write</td>
-            <td>1 storage write batch consumes 1 RU for each replica</td>
+            <td>1 storage write batch consumes 1 RU</td>
         </tr>
         <tr>
             <td>1 storage write request consumes 1 RU</td>
@@ -89,17 +93,11 @@ Request Unit (RU) is a unified abstraction unit in TiDB for system resources, wh
     </tbody>
 </table>
 
-Currently, TiFlash resource control only considers SQL CPU, which is the CPU time consumed by the execution of pipeline tasks for queries, and read request payload.
-
 > **Note:**
 >
 > - Each write operation is eventually replicated to all replicas (by default, TiKV has 3 replicas). Each replication operation is considered a different write operation.
-> - In addition to queries executed by users, RU can be consumed by background tasks, such as automatic statistics collection.
 > - The preceding table lists only the resources involved in RU calculation for TiDB Self-Hosted clusters, excluding the network and storage consumption. For TiDB Serverless RUs, see [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details/).
-
-## Estimate RU consumption of SQL statements
-
-You can use the [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption) statement to get the amount of RUs consumed during SQL execution. Note that the amount of RUs is affected by the cache (for example, [coprocessor cache](/coprocessor-cache.md)). When the same SQL is executed multiple times, the amount of RUs consumed by each execution might be different. The RU value does not represent the exact value for each execution, but can be used as a reference for estimation.
+> - Currently, TiFlash resource control only considers SQL CPU, which is the CPU time consumed by the execution of pipeline tasks for queries, and read request payload.
 
 ## Parameters for resource control
 
@@ -264,7 +262,7 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 >
 > This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
-A runaway query is a query that consumes more time or resources than expected. The term **runaway queries** is used in the following to describe the feature of managing the runaway query.
+A runaway query is a query (`SELECT` statement only) that consumes more time or resources than expected. The term **runaway queries** is used in the following to describe the feature of managing the runaway query.
 
 - Starting from v7.2.0, the resource control feature introduces the management of runaway queries. You can set criteria for a resource group to identify runaway queries and automatically take actions to prevent them from exhausting resources and affecting other queries. You can manage runaway queries for a resource group by including the `QUERY_LIMIT` field in [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md) or [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md).
 - Starting from v7.3.0, the resource control feature introduces manual management of runaway watches, enabling quick identification of runaway queries for a given SQL statement or Digest. You can execute the statement [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md) to manually manage the runaway queries watch list in the resource group.
@@ -405,6 +403,8 @@ You can get more information about runaway queries from the following system tab
 > **Warning:**
 >
 > This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://docs.pingcap.com/tidb/stable/support) on GitHub.
+> 
+> The background task management in resource control is based on TiKV's dynamic adjustment of resource quotas for CPU/IO utilization. Therefore, it relies on the available resource quota of each instance. If multiple components or instances are deployed on a single server, it is mandatory to set the appropriate resource quota for each instance through `cgroup`. It is difficult to achieve the expected effect in deployment with shared resources like TiUP Playground.
 
 Background tasks, such as data backup and automatic statistics collection, are low-priority but consume many resources. These tasks are usually triggered periodically or irregularly. During execution, they consume a lot of resources, thus affecting the performance of online high-priority tasks.
 
@@ -422,6 +422,7 @@ TiDB supports the following types of background tasks:
 - `br`: perform backup and restore tasks using [BR](/br/backup-and-restore-overview.md). PITR is not supported.
 - `ddl`: control the resource usage during the batch data write back phase of Reorg DDLs.
 - `stats`: the [collect statistics](/statistics.md#collect-statistics) tasks that are manually executed or automatically triggered by TiDB.
+- `background`: a reserved task type. You can use the [`tidb_request_source_type`](/system-variables.md#tidb_request_source_type-new-in-v740) system variable to specify the task type of the current session as `background`.
 
 </CustomContent>
 
@@ -431,35 +432,60 @@ TiDB supports the following types of background tasks:
 - `br`: perform backup and restore tasks using [BR](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview). PITR is not supported.
 - `ddl`: control the resource usage during the batch data write back phase of Reorg DDLs.
 - `stats`: the [collect statistics](/statistics.md#collect-statistics) tasks that are manually executed or automatically triggered by TiDB.
+- `background`: a reserved task type. You can use the [`tidb_request_source_type`](/system-variables.md#tidb_request_source_type-new-in-v740) system variable to specify the task type of the current session as `background`.
 
 </CustomContent>
 
-By default, the task types that are marked as background tasks are empty, and the management of background tasks is disabled. This default behavior is the same as that of versions prior to TiDB v7.4.0. To manage background tasks, you need to manually modify the background task types of the `default` resource group.
+By default, the task types that are marked as background tasks are `""`, and the management of background tasks is disabled. To enable background task management, you need to manually modify the background task type of the `default` resource group. After a background task is identified and matched, Resource Control is automatically performed. This means that when system resources are insufficient, the background tasks are automatically reduced to the lowest priority to ensure the execution of foreground tasks.
+
+> **Note:**
+>
+> Currently, background tasks for all resource groups are bound to the `default` resource group. You can manage background task types globally through `default`. Binding background tasks to other resource groups is currently not supported.
 
 #### Examples
 
-1. Create the `rg1` resource group and set `br` and `stats` as background tasks.
+1. Modify the `default` resource group and mark `br` and `ddl` as background tasks.
 
     ```sql
-    CREATE RESOURCE GROUP IF NOT EXISTS rg1 RU_PER_SEC = 500 BACKGROUND=(TASK_TYPES='br,stats');
+    ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES='br,ddl');
     ```
 
-2. Change the `rg1` resource group to set `br` and `ddl` as background tasks.
+2. Change the `default` resource group to revert the background task type to its default value.
 
     ```sql
-    ALTER RESOURCE GROUP rg1 BACKGROUND=(TASK_TYPES='br,ddl');
+    ALTER RESOURCE GROUP `default` BACKGROUND=NULL;
     ```
 
-3. Restore the background tasks of `rg1` resource group to the default value. In this case, the background task types follow the configuration of the `default` resource group.
+3. Change the `default` resource group to set the background task type to empty. In this case, all tasks of this resource group are not treated as background tasks.
 
     ```sql
-    ALTER RESOURCE GROUP rg1 BACKGROUND=NULL;
+    ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES="");
     ```
 
-4. Change the `rg1` resource group to set the background task types to empty. In this case, all tasks of this resource group are not treated as background tasks.
+4. View the background task type of the `default` resource group.
 
     ```sql
-    ALTER RESOURCE GROUP rg1 BACKGROUND=(TASK_TYPES="");
+    SELECT * FROM information_schema.resource_groups WHERE NAME="default";
+    ```
+
+    The output is as follows:
+
+    ```
+    +---------+------------+----------+-----------+-------------+---------------------+
+    | NAME    | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT | BACKGROUND          |
+    +---------+------------+----------+-----------+-------------+---------------------+
+    | default | UNLIMITED  | MEDIUM   | YES       | NULL        | TASK_TYPES='br,ddl' |
+    +---------+------------+----------+-----------+-------------+---------------------+
+    ```
+
+5. To explicitly mark tasks in the current session as the background type, you can use `tidb_request_source_type` to explicitly specify the task type. The following is an example:
+
+    ``` sql
+    SET @@tidb_request_source_type="background";
+    /* Add background task type */
+    ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES="background");
+    /* Execute LOAD DATA in the current session */
+    LOAD DATA INFILE "s3://resource-control/Lightning/test.customer.aaaa.csv"
     ```
 
 ## Disable resource control
@@ -491,6 +517,102 @@ By default, the task types that are marked as background tasks are empty, and th
 3. For TiDB Self-Hosted, you can use the `enable_resource_control` configuration item to control whether to enable TiFlash resource control. For TiDB Cloud, the value of the `enable_resource_control` parameter is `true` by default and does not support dynamic modification. If you need to disable it for TiDB Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
+
+## View RU consumption
+
+You can view information about RU consumption.
+
+### View the RU consumption by SQL
+
+You can view the RU consumption of SQL statements in the following ways:
+
+- The system variable `tidb_last_query_info`
+- `EXPLAIN ANALYZE`
+- Slow queries and corresponding system table
+- `statements_summary`
+
+#### View the RUs consumed by the last SQL execution by querying the system variable `tidb_last_query_info`
+
+TiDB provides the system variable [`tidb_last_query_info`](/system-variables.md#tidb_last_query_info-new-in-v4014). This system variable records the information of the last DML statement executed, including the RUs consumed by the SQL execution.
+
+Example:
+
+1. Run the `UPDATE` statement:
+
+    ```sql
+    UPDATE sbtest.sbtest1 SET k = k + 1 WHERE id = 1;
+    ```
+
+    ```
+    Query OK, 1 row affected (0.01 sec)
+    Rows matched: 1  Changed: 1  Warnings: 0
+    ```
+
+2. Query the system variable `tidb_last_query_info` to view the information of the last executed statement:
+
+    ```sql
+    SELECT @@tidb_last_query_info;
+    ```
+
+    ```
+    +------------------------------------------------------------------------------------------------------------------------+
+    | @@tidb_last_query_info                                                                                                 |
+    +------------------------------------------------------------------------------------------------------------------------+
+    | {"txn_scope":"global","start_ts":446809472210829315,"for_update_ts":446809472210829315,"ru_consumption":4.34885578125} |
+    +------------------------------------------------------------------------------------------------------------------------+
+    1 row in set (0.01 sec)
+    ```
+
+    In the result, `ru_consumption` is the RUs consumed by the execution of this SQL statement.
+
+#### View RUs consumed during SQL execution by `EXPLAIN ANALYZE`
+
+You can use the [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption) statement to get the amount of RUs consumed during SQL execution. Note that the amount of RUs is affected by the cache (for example, [coprocessor cache](/coprocessor-cache.md)). When the same SQL is executed multiple times, the amount of RUs consumed by each execution might be different. The RU value does not represent the exact value for each execution, but can be used as a reference for estimation.
+
+#### Slow queries and the corresponding system table
+
+<CustomContent platform="tidb">
+
+When you enable resource control, the [slow query log](/identify-slow-queries.md) of TiDB and the corresponding system table [`INFORMATION_SCHEMA.SLOW_QUERY`](/information-schema/information-schema-slow-query.md) contain the resource group, RU consumption of the corresponding SQL, and the time spent waiting for available RUs.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+When you enable resource control, the system table [`INFORMATION_SCHEMA.SLOW_QUERY`](/information-schema/information-schema-slow-query.md) contains the resource group, RU consumption of the corresponding SQL, and the time spent waiting for available RUs.
+
+</CustomContent>
+
+#### View RU statistics by `statements_summary`
+
+The system table [`INFORMATION_SCHEMA.statements_summary`](/statement-summary-tables.md#statements_summary) in TiDB stores the normalized and aggregated statistics of SQL statements. You can use the system table to view and analyze the execution performance of SQL statements. It also contains statistics about resource control, including the resource group name, RU consumption, and the time spent waiting for available RUs. For more details, see [`statements_summary` fields description](/statement-summary-tables.md#statements_summary-fields-description).
+
+### View the RU consumption of resource groups
+
+Starting from v7.6.0, TiDB provides the system table [`mysql.request_unit_by_group`](/mysql-schema.md#system-tables-related-to-resource-control) to store the historical records of the RU consumption of each resource group.
+
+Example:
+
+```sql
+SELECT * FROM request_unit_by_group LIMIT 5;
+```
+
+```
++----------------------------+----------------------------+----------------+----------+
+| start_time                 | end_time                   | resource_group | total_ru |
++----------------------------+----------------------------+----------------+----------+
+| 2024-01-01 00:00:00.000000 | 2024-01-02 00:00:00.000000 | default        |   334147 |
+| 2024-01-01 00:00:00.000000 | 2024-01-02 00:00:00.000000 | rg1            |     4172 |
+| 2024-01-01 00:00:00.000000 | 2024-01-02 00:00:00.000000 | rg2            |    34028 |
+| 2024-01-02 00:00:00.000000 | 2024-01-03 00:00:00.000000 | default        |   334088 |
+| 2024-01-02 00:00:00.000000 | 2024-01-03 00:00:00.000000 | rg1            |     3850 |
++----------------------------+----------------------------+----------------+----------+
+5 rows in set (0.01 sec)
+```
+
+> **Note:**
+>
+> The data of `mysql.request_unit_by_group` is automatically imported by a TiDB scheduled task at the end of each day. If the RU consumption of a resource group is 0 on a certain day, no record is generated. By default, this table stores data for the last three months (up to 92 days). Data that exceeds this period is automatically cleared.
 
 ## Monitoring metrics and charts
 

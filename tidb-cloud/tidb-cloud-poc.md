@@ -52,7 +52,7 @@ TiDB Cloud is suitable for various use cases that require high availability and 
 - Horizontally scaling out or scaling in
 - Financial-grade high availability
 - Real-time HTAP
-- Compatible with the MySQL 5.7 protocol and MySQL ecosystem
+- Compatible with the MySQL protocol and MySQL ecosystem
 
 You might also be interested in using [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview), a columnar storage engine that helps speed up analytical processing. During the PoC, you can use the TiFlash feature at any time.
 
@@ -81,7 +81,7 @@ Once a dedicated PoC cluster is created, you are ready to load data and perform 
 For a newly created cluster, note the following configurations:
 
 - The default time zone (the **Create Time** column on the Dashboard) is UTC. You can change it to your local time zone by following [Set the Local Time Zone](/tidb-cloud/manage-user-access.md#set-the-time-zone-for-your-organization).
-- The default backup setting on a new cluster is full database backup on a daily basis. You can specify a preferred backup time or back up data manually. For the default backup time and more details, see [Back up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md#backup).
+- The default backup setting on a new cluster is full database backup on a daily basis. You can specify a preferred backup time or back up data manually. For the default backup time and more details, see [Back up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup).
 
 ## Step 4. Adapt your schemas and SQL
 
@@ -89,7 +89,7 @@ Next, you can load your database schemas to the TiDB cluster, including tables a
 
 Because the amount of PoC credits is limited, to maximize the value of credits, it is recommended that you create a [TiDB Serverless cluster](/tidb-cloud/select-cluster-tier.md#tidb-serverless) for compatibility tests and preliminary analysis on TiDB Cloud.
 
-TiDB Cloud is highly compatible with MySQL 5.7. You can directly import your data into TiDB if it is MySQL-compatible or can be adapted to be compatible with MySQL.
+TiDB Cloud is highly compatible with MySQL 8.0. You can directly import your data into TiDB if it is MySQL-compatible or can be adapted to be compatible with MySQL.
 
 For more information about compatibilities, see the following documents:
 
@@ -130,7 +130,7 @@ You can import data in various formats to TiDB Cloud:
 
 Now you have created the environment, adapted the schemas, and imported data. It is time to test your workload.
 
-Before testing the workload, consider performing a manual backup, so that you can restore the database to its original state if needed. For more information, see [Back up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md#backup).
+Before testing the workload, consider performing a manual backup, so that you can restore the database to its original state if needed. For more information, see [Back up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup).
 
 After kicking off the workload, you can observe the system using the following methods:
 
@@ -175,7 +175,7 @@ Now the workload testing is finished, you can explore more features, for example
 
 - Backup
 
-    To avoid vendor lock-in, you can use daily full backup to migrate data to a new cluster and use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data. For more information, see [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md#backup) and [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore-serverless.md#backup).
+    To avoid vendor lock-in, you can use daily full backup to migrate data to a new cluster and use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data. For more information, see [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) and [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore-serverless.md#backup).
 
 ## Step 8. Clean up the environment and finish the PoC
 
