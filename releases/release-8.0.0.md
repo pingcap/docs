@@ -125,19 +125,19 @@ Several enhancements were made in this version to mitigate that:
 
 ### Data migration
 
-* TiCDC supports replicating DDL statements in bi-directional replication (BDR) mode (GA) [#10301](https://github.com/pingcap/tiflow/issues/10301) @[asddongmen](https://github.com/asddongmen)
+* TiCDC supports replicating DDL statements in bi-directional replication (BDR) mode (GA) [#10301](https://github.com/pingcap/tiflow/issues/10301) @[asddongmen](https://github.com/asddongmen) **tw@hfxsd** <!--1682-->
 
     General Availability since v8.0.0, TiCDC supports replication of DDL statements with bi-directional replication configured. Previously, replicating DDL statements was not supported by TiCDC, so users of TiCDC's bi-directional replication had to apply DDL statements to both TiDB clusters separately. With this feature, TiCDC allows for a cluster to be assigned the PRIMARY BDR role, and enables the replication of DDL statements from that cluster to the downstream cluster.
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.0/ticdc-bidirectional-replication).
 
-* TiCDC adds support for Simple Protocol [#9898](https://github.com/pingcap/tiflow/issues/9898) @[3AceShowHand](https://github.com/3AceShowHand)
+* TiCDC adds support for Simple Protocol [#9898](https://github.com/pingcap/tiflow/issues/9898) @[3AceShowHand](https://github.com/3AceShowHand) **tw@lilin90** <!--1646-->
 
     TiCDC introduces support for a new protocol, the Simple protocol. This new protocol includes support for in-band schema tracking capabilities.
 
     For more information, see [documentation](/ticdc/ticdc-simple-protocol.md).
 
-* TiCDC adds support for Debezium format Protocol [#1799](https://github.com/pingcap/tiflow/issues/1799) @[breezewish](https://github.com/breezewish)
+* TiCDC adds support for Debezium format Protocol [#1799](https://github.com/pingcap/tiflow/issues/1799) @[breezewish](https://github.com/breezewish) **tw@lilin90** <!--1652-->
 
     TiCDC can now publish replication events to a Kafka sink using a protocol that generates event messages using a Debezium style format. This helps to simplify the migration from MySQL to TiDB for users who are currently using Debezium to pull data from MySQL for downstream processing.
 
