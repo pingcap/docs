@@ -8,6 +8,28 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
+## March 5, 2024
+
+**General changes**
+
+- Upgrade the default TiDB version of new [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters from [v7.5.0](https://docs.pingcap.com/tidb/v7.5/release-7.5.0) to [v7.5.1](https://docs.pingcap.com/tidb/v7.5/release-7.5.1).
+
+**Console changes**
+
+- Introduce the **Cost Explorer** tab on the **Billing** page, which provides an intuitive interface for analyzing and customizing cost reports for your organization over time.
+
+    To use this feature, navigate to the **Billing** page of your organization and click the **Cost Explorer** tab.
+
+    For more information, see [Cost Explorer](/tidb-cloud/tidb-cloud-billing.md#cost-explorer).
+
+- [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) displays a **limit** label for [node-level resource metrics](/tidb-cloud/built-in-monitoring.md#server).
+
+    The **limit** label shows the maximum usage of resources such as CPU, memory, and storage for each component in the cluster. This enhancement simplifies the process of monitoring the resource usage rate of your cluster.
+
+    To access these metric limits, navigate to the **Monitoring** page of your cluster, and then check the **Server** category under the **Metrics** tab.
+
+    For more information, see [Metrics for TiDB Dedicated clusters](/tidb-cloud/built-in-monitoring.md#server).
+
 ## February 20, 2024
 
 **General changes**
