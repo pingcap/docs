@@ -122,13 +122,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
 + PD <!--tw@hfxsd 7 条 -->
 
-    - 修复 Resource Group 客户端中未删除完全的 slot 导致分配 token 低于给定值的问题 [#7346](https://github.com/tikv/pd/issues/7346) @[guo-shaoge](https://github.com/guo-shaoge)
-    - 修复 TSO 部分日志没有打印 error 原因的问题 [#7496](https://github.com/tikv/pd/issues/7496) @[CabinfeverB](https://github.com/CabinfeverB)
-    - 修复 Default Resource Group 在 burstable 时累计不必要 tokens 的问题 [#7206](https://github.com/tikv/pd/issues/7206) @[CabinfeverB](https://github.com/CabinfeverB)
-    - 修复调用 evict-leader 接口时没有输出结果的问题 [#7672](https://github.com/tikv/pd/issues/7672) @[CabinfeverB](https://github.com/CabinfeverB)
-    - 修复 watch etcd 没有正确关闭导致内存泄露的问题 [#7807](https://github.com/tikv/pd/issues/7807) @[rleungx](https://github.com/rleungx)
-    - 修复 MergeLabels 时存在 datarace 的问题 [#7535](https://github.com/tikv/pd/issues/7535) @[lhy1024](https://github.com/lhy1024)
-    - 修复 Dashboard 中在开启 tls 时 tikv profile 获取失败的问题 [#7561](https://github.com/tikv/pd/issues/7561) @[Connor1996](https://github.com/Connor1996)
+    - Fix the issue that a slot that is not fully deleted in a resource group client causes the number of the assigned tokens to be less than the specified value [#7346](https://github.com/tikv/pd/issues/7346) @[guo-shaoge](https://github.com/guo-shaoge)
+    - Fix the issue that some of the TSO logs do not print the cause of an error [#7496](https://github.com/tikv/pd/issues/7496) @[CabinfeverB](https://github.com/CabinfeverB)
+    - Fix the issue that the default resource group accumulates unnecessary tokens when `BURSTABLE` is enabled [#7206](https://github.com/tikv/pd/issues/7206) @[CabinfeverB](https://github.com/CabinfeverB)
+    - Fix the issue that there is no output when the `evict-leader-scheduler` interface is called [#7672](https://github.com/tikv/pd/issues/7672) @[CabinfeverB](https://github.com/CabinfeverB)
+    - Fix the memory leak issue that occurs when `watch etcd` is not turned off correctly [#7807](https://github.com/tikv/pd/issues/7807) @[rleungx](https://github.com/rleungx)
+    - Fix the issue that data race happens when the `MergeLabels` function is called [#7535](https://github.com/tikv/pd/issues/7535) @[lhy1024](https://github.com/lhy1024)
+    - Fix the issue that Dashboard fails to get the TiKV profile when TLS is enabled [#7561](https://github.com/tikv/pd/issues/7561) @[Connor1996](https://github.com/Connor1996)
     - (dup): release-7.5.1.md > Bug fixes> PD - Fix the issue that the orphan peer is deleted when the number of replicas does not meet the requirements [#7584](https://github.com/tikv/pd/issues/7584) @[bufferflies](https://github.com/bufferflies)
     - (dup): release-7.5.0.md > Bug fixes> PD - Fix the issue that `available_stores` is calculated incorrectly for clusters adopting the Data Replication Auto Synchronous (DR Auto-Sync) mode [#7221](https://github.com/tikv/pd/issues/7221) @[disksing](https://github.com/disksing)
     - (dup): release-7.5.0.md > Bug fixes> PD - Fix the issue that `canSync` and `hasMajority` might be calculated incorrectly for clusters adopting the Data Replication Auto Synchronous (DR Auto-Sync) mode when the configuration of Placement Rules is complex [#7201](https://github.com/tikv/pd/issues/7201) @[disksing](https://github.com/disksing)
@@ -148,8 +148,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
     - (dup): release-7.5.1.md > Bug fixes> TiFlash - Fix the issue that the memory usage increases significantly due to slow queries [#8564](https://github.com/pingcap/tiflash/issues/8564) @[JinheLin](https://github.com/JinheLin)
     - (dup): release-7.5.1.md > Bug fixes> TiFlash - Fix the issue that TiFlash panics after executing `ALTER TABLE ... MODIFY COLUMN ... NOT NULL`, which changes nullable columns to non-nullable [#8419](https://github.com/pingcap/tiflash/issues/8419) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - (dup): release-6.5.8.md > Bug fixes> TiFlash - Fix the issue that after terminating a query, TiFlash crashes due to concurrent data conflicts when a large number of tasks on TiFlash are canceled at the same time [#7432](https://github.com/pingcap/tiflash/issues/7432) @[SeaRise](https://github.com/SeaRise)
-    - 修复 TiFlash 在有大量远程读时，由于并发数据冲突导致 TiFlash 崩溃的问题 [#8685](https://github.com/pingcap/tiflash/issues/8685) @[zanmato1984](https://github.com/zanmato1984)
-    - 修复 anti semi join 在有其他不等值连接条件时，结果可能会出错的问题 [#8791](https://github.com/pingcap/tiflash/issues/8791) @[windtalker](https://github.com/windtalker)
+    - Fix the issue that TiFlash crashes due to concurrent data conflict when TiFlash has a large number of remote read operations [#8685](https://github.com/pingcap/tiflash/issues/8685) @[zanmato1984](https://github.com/zanmato1984)
+    - Fix the issue that Anti Semi Join might return incorrect results when there are other unequal join conditions [#8791](https://github.com/pingcap/tiflash/issues/8791) @[windtalker](https://github.com/windtalker)
 
 + Tools
 
@@ -169,13 +169,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
         - (dup): release-7.5.1.md > Bug fixes> Tools> TiCDC - Fix the issue that after filtering out `add table partition` events is configured in `ignore-event`, TiCDC does not replicate other types of DML changes for related partitions to the downstream [#10524](https://github.com/pingcap/tiflow/issues/10524) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - (dup): release-7.5.1.md > Bug fixes> Tools> TiCDC - Fix the issue that the file sequence number generated by the storage service might not increment correctly when using the storage sink [#10352](https://github.com/pingcap/tiflow/issues/10352) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - (dup): release-7.5.1.md > Bug fixes> Tools> TiCDC - Fix the issue that TiCDC returns the `ErrChangeFeedAlreadyExists` error when concurrently creating multiple changefeeds [#10430](https://github.com/pingcap/tiflow/issues/10430) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - 修复在 resume changefeed 的时候由于没有检查 changefeed 的 checkpoint-ts 是否小于 TiDB 的 gc safepoint 从而没有及时把 "snapshot lost cased by GC" 错误提示出来 [#10463](https://github.com/pingcap/tiflow/issues/10463) @[sdojjy](https://github.com/sdojjy)
-        - 修复 TiCDC 在开启单行数据正确性校验 (Data Integrity Validation for Single-Row Data) 后由于没有正确考虑时区的问题导致 timestamp 类型 checksum 验证失败的问题 [#10573](https://github.com/pingcap/tiflow/issues/10573) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix the issue that `snapshot lost cased by GC` is not reported in time when resuming a changefeed and `checkpoint-ts` of the changefeed is smaller than `gc safepoint` of TiDB [#10463](https://github.com/pingcap/tiflow/issues/10463) @[sdojjy](https://github.com/sdojjy)
+        - Fix the issue that TiCDC fails to validate timestamp type checksum due to time zone mismatch after data integrity validation for single-row data is enabled [#10573](https://github.com/pingcap/tiflow/issues/10573) @[3AceShowHand](https://github.com/3AceShowHand)
 
     + TiDB Data Migration (DM) <!--tw@hfxsd 2 条 -->
 
-        - 修复任务配置中错误的 binlog 事件类型导致升级失败的问题 [#10282](https://github.com/pingcap/tiflow/issues/10282) @[GMHDBJD](https://github.com/GMHDBJD)
-        - 修复带有 shard_row_id_bits 的表会导致 schema tracker 无法初始化的问题 [#10308](https://github.com/pingcap/tiflow/issues/10308) @[GMHDBJD](https://github.com/GMHDBJD)
+        - Fix the issue that a wrong binlog event type in the task configuration causes upgrade to fail [#10282](https://github.com/pingcap/tiflow/issues/10282) @[GMHDBJD](https://github.com/GMHDBJD)
+        - Fix the issue that a table with `shard_row_id_bits` causes the schema tracker to fail to initialize [#10308](https://github.com/pingcap/tiflow/issues/10308) @[GMHDBJD](https://github.com/GMHDBJD)
 
     + TiDB Lightning <!--tw@Oreoxmt 2 条 -->
 
