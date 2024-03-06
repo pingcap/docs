@@ -25,3 +25,40 @@ Implicit defaults are defined as follows:
 - For numeric types, the default is 0. If declared with the `AUTO_INCREMENT` attribute, the default is the next value in the sequence.
 - For date and time types other than `TIMESTAMP`, the default is the appropriate "zero" value for the type. For `TIMESTAMP`, the default value is the current date and time.
 - For string types other than `ENUM`, the default value is the empty string. For `ENUM`, the default is the first enumeration value.
+
+## Specifying expressions as default values
+
+> **Warning:**
+>
+> - Currently, this feature is experimental. It is not recommended that you use it in production environments. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+From v8.0.13, MySQL supports specifying expressions as default values in the `DEFAULT` clause. For more information, see [Explicit Default Handling as of MySQL 8.0.13](https://dev.mysql.com/doc/refman/8.0/en/data-type-defaults.html#data-type-defaults-explicit). TiDB has implemented this feature and supports specifying expressions as default values in the `DEFAULT` clause.
+
+From TiDB v8.0.0, the `BLOB`, `TEXT`, and `JSON` data types support default values, but the default values can only be set as expressions.
+
+```sql
+CREATE TABLE t2 (b BLOB DEFAULT (rand()));
+```
+
+TiDB currently supports the following expressions:
+
+* RAND, UUID, UUID_TO_BIN
+
+Starting from TiDB v8.0.0, the `DEFAULT` clause supports using the following expressions to set default values.
+
+* `UPPER(SUBSTRING_INDEX(user(),'@',1))`
+
+* `REPLACE(UPPER(uuid()), '-', '')`
+
+* The `DATE_FORMAT` supports the following formats:
+
+    * `DATE_FORMAT(NOW(),'%Y-%m')`
+    * `DATE_FORMAT(NOW(),'%Y-%m-%d')`
+    * `DATE_FORMAT(NOW(),'%Y-%m-%d %H.%i.%s')`
+    * `DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s')`
+
+* `STR_TO_DATE('1980-01-01','%Y-%m-%d')`
+
+> **Note:**
+>
+> Currently, the `CHANGE COLUMN` and `MODIFY COLUMN` statements are not supported.
