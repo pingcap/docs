@@ -682,7 +682,7 @@ PARTITION BY KEY()
 PARTITIONS 4;
 ```
 
-If there is no primary key but a unique key, the unique key will be used as the partitioning key:
+If the table lacks a primary key but contains a unique key, the unique key is used as the partitioning key:
 
 ```sql
 CREATE TABLE k1 (
