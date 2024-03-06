@@ -47,6 +47,7 @@ TiProxy has four panel groups. The metrics on these panels indicate the current 
 - CPS by Instance: command per second of each TiProxy instance
 - CPS by Backend: command per second of each TiDB instance
 - CPS by CMD: command per second grouped by SQL command type
+- Handshake Duration: average, P95, P99 duration of the handshake phase between the client and TiProxy
 
 ## Balance
 
@@ -59,3 +60,10 @@ TiProxy has four panel groups. The metrics on these panels indicate the current 
 - Get Backend Duration: the average, p95, p99 duration of TiProxy connecting to a TiDB instance
 - Ping Backend Duration: the network latency between each TiProxy instance and each TiProxy instance. For example, `10.24.31.1:6000 | 10.24.31.2:4000` indicates the network latency between TiProxy instance `10.24.31.1:6000` and TiDB instance `10.24.31.2:4000`
 - Health Check Cycle: the duration of a cycle of the health check between a TiProxy instance and all TiDB instances. For example, `10.24.31.1:6000` indicates the duration of the latest health check that TiProxy instance `10.24.31.1:6000` executes on all the TiDB instances. If this duration is higher than 3 seconds, TiProxy may not be timely to refresh the backend TiDB list
+
+## Traffic
+
+- Bytes/Second from Backends: the amount of data, in bytes, sent from each TiDB instance to each TiProxy instance per second.
+- Packets/Second from Backends: the number of MySQL packets sent from each TiDB instance to each TiProxy instance per second.
+- Bytes/Second to Backends: the amount of data, in bytes, sent from each TiProxy instance to each TiDB instance per second.
+- Packets/Second to Backends: the number of MySQL packets sent from each TiProxy instance to each TiDB instance per second.

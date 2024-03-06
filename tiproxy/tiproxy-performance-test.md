@@ -9,33 +9,34 @@ This report tests the performance of TiProxy in the OLTP scenario of Sysbench an
 
 The results are as follows:
 
-- The QPS upper limit of TiProxy is affected by the type of workload. Under the basic workloads of Sysbench and the same CPU usage, the QPS of TiProxy is about 20% to 40% lower than that of HAProxy.
-- The number of TiDB server instances that TiProxy can hold varies according to the type of workload. Under the basic workloads of Sysbench, a TiProxy can hold 4 to 10 TiDB server instances of the same model.
-- The performance of TiProxy is more affected by the number of vCPUs, compared to HAProxy. When the returned data is 10,000 rows and the CPU usage is the same, the QPS of TiProxy is about 30% lower than that of HAProxy.
+- The QPS upper limit of TiProxy is affected by the type of workload. Under the basic workloads of Sysbench and the same CPU usage, the QPS of TiProxy is about 25% lower than that of HAProxy.
+- The number of TiDB server instances that TiProxy can hold varies according to the type of workload. Under the basic workloads of Sysbench, a TiProxy can hold 5 to 12 TiDB server instances of the same model.
+- The row number of the query result set has a significant impact on the QPS of TiProxy, and the impact is the same as that of HAProxy.
 - The performance of TiProxy increases almost linearly with the number of vCPUs. Therefore, increasing the number of vCPUs can effectively improve the QPS upper limit.
+- The number of long connections and the frequency of creating short connections have minimal impact on the QPS of TiProxy.
 
 ## Test environment
 
 ### Hardware configuration
 
-| Service | Machine Type | CPU Architecture | Instance Count |
+| Service | Machine type | CPU model | Instance count |
 | --- | --- | --- | --- |
-| TiProxy | 4C8G | AMD64 | 1 |
-| HAProxy | 4C8G | AMD64 | 1 |
-| PD | 4C8G | AMD64 | 3 |
-| TiDB | 8C16G | AMD64 | 8 |
-| TiKV | 8C16G | AMD64 | 8 |
-| Sysbench | 8C16G | AMD64 | 1 |
+| TiProxy | 4C8G | Intel(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 1 |
+| HAProxy | 4C8G | Intel(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 1 |
+| PD | 4C8G | Intel(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 3 |
+| TiDB | 8C16G | Intel(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 8 |
+| TiKV | 8C16G | Intel(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 8 |
+| Sysbench | 8C16G | Intel(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 1 |
 
 ### Software
 
 | Service | Software version |
 | --- | --- |
-| TiProxy | v0.2.0 |
+| TiProxy | v1.0.0 |
 | HAProxy | 2.9.0 |
-| PD | v7.6.0 |
-| TiDB | v7.6.0 |
-| TiKV | v7.6.0 |
+| PD | v8.0.0 |
+| TiDB | v8.0.0 |
+| TiKV | v8.0.0 |
 | Sysbench | 1.0.17 |
 
 ### Configuration
@@ -102,73 +103,73 @@ sysbench $testname \
 
 TiProxy test results:
 
-| Threads | QPS | Avg latency(ms) | P95 latency (ms) | TiProxy CPU usage | TiDB overall CPU Usage |
-| --- | --- | --- | --- | --- | --- |
-| 20 | 43935 | 0.45 | 0.63 | 210% | 900% |
-| 50 | 87870 | 0.57 | 0.77 | 350% | 1700% |
-| 100 | 91611 | 1.09 | 1.79 | 400% | 1800% |
+| Threads | QPS     | Avg latency (ms) | P95 latency (ms) | TiProxy CPU usage | TiDB overall CPU usage |
+|---------|---------|------------------|------------------|-------------------|------------------------|
+| 20      | 41273   | 0.48             | 0.64             | 190%              | 900%                   |
+| 50      | 100255  | 0.50             | 0.62             | 330%              | 1900%                  |
+| 100     | 137688  | 0.73             | 1.01             | 400%              | 2600%                  |
 
 HAProxy test results:
 
-| Threads | QPS | Avg latency(ms) | P95 latency (ms) | HAProxy CPU usage | TiDB overall CPU Usage |
-| --- | --- | --- | --- | --- | --- |
-| 20 | 43629 | 0.46 | 0.63 | 130% | 900% |
-| 50 | 102934 | 0.49 | 0.61 | 320% | 2000% |
-| 100 | 157880 | 0.63 | 0.81 | 400% | 3000% |
+| Threads | QPS    | Avg latency (ms) | P95 latency (ms) | HAProxy CPU usage | TiDB overall CPU usage |
+|---------|--------|------------------|------------------|-------------------|------------------------|
+| 20      | 44833  | 0.45             | 0.61             | 140%              | 1000%                  |
+| 50      | 103631 | 0.48             | 0.61             | 270%              | 2100%                  |
+| 100     | 163069 | 0.61             | 0.77             | 360%              | 3100%                  |
 
 ### Read Only
 
 TiProxy test results:
 
-| Threads | QPS | Avg latency(ms) | P95 latency (ms) | TiProxy CPU usage | TiDB overall CPU Usage |
-| --- | --- | --- | --- | --- | --- |
-| 50 | 71816 | 11.14 | 12.98 | 340% | 2500% |
-| 100 | 79299 | 20.17 | 23.95 | 400% | 2800% |
-| 200 | 83371 | 38.37 | 46.63 | 400% | 2900% |
+| Threads | QPS    | Avg latency (ms) | P95 latency (ms) | TiProxy CPU usage | TiDB overall CPU usage |
+|---------|--------|------------------|------------------|-------------------|------------------------|
+| 50      | 72076  | 11.09            | 12.75            | 290%              | 2500%                  |
+| 100     | 109704 | 14.58            | 17.63            | 370%              | 3800%                  |
+| 200     | 117519 | 27.21            | 32.53            | 400%              | 4100%                  |
 
 HAProxy test results:
 
-| Threads | QPS | Avg latency(ms) | P95 latency (ms) | HAProxy CPU usage | TiDB overall CPU Usage |
-| --- | --- | --- | --- | --- | --- |
-| 50 | 74945 | 10.67 | 12.08 | 250% | 2500% |
-| 100 | 118526 | 13.49 | 18.28 | 350% | 4000% |
-| 200 | 131102 | 24.39 | 34.33 | 390% | 4300% |
+| Threads | QPS     | Avg latency (ms) | P95 latency (ms) | HAProxy CPU usage | TiDB overall CPU usage |
+|---------|---------|------------------|------------------|-------------------|------------------------|
+| 50      | 75760   | 10.56            | 12.08            | 250%              | 2600%                  |
+| 100     | 121730  | 13.14            | 15.83            | 350%              | 4200%                  |
+| 200     | 131712  | 24.27            | 30.26            | 370%              | 4500%                  |
 
 ### Write Only
 
 TiProxy test results:
 
-| Threads | QPS | Avg latency(ms) | P95 latency (ms) | TiProxy CPU usage | TiDB overall CPU Usage |
-| --- | --- | --- | --- | --- | --- |
-| 100 | 67762 | 8.85 | 15.27 | 310% | 3200% |
-| 300 | 81113 | 22.18 | 38.25 | 390% | 3900% |
-| 500 | 79260 | 37.83 | 56.84 | 400% | 3800% |
+| Threads | QPS     | Avg latency (ms) | P95 latency (ms) | TiProxy CPU usage | TiDB overall CPU usage |
+|---------|---------|------------------|------------------|-------------------|------------------------|
+| 100     | 81957   | 7.32             | 10.27            | 290%              | 3900%                  |
+| 300     | 103040  | 17.45            | 31.37            | 330%              | 4700%                  |
+| 500     | 104869  | 28.59            | 52.89            | 340%              | 4800%                  |
 
 HAProxy test results:
 
-| Threads | QPS | Avg latency(ms) | P95 latency (ms) | HAProxy CPU usage | TiDB overall CPU Usage |
-| --- | --- | --- | --- | --- | --- |
-| 100 | 74501 | 8.05 | 12.30 | 220% | 3500% |
-| 300 | 97942 | 18.36 | 31.94 | 280% | 4300% |
-| 500 | 105352 | 28.44 | 49.21 | 300% | 4500% |
+| Threads | QPS     | Avg latency (ms) | P95 latency (ms) | HAProxy CPU usage | TiDB overall CPU usage |
+|---------|---------|------------------|------------------|-------------------|------------------------|
+| 100     | 81708   | 7.34             | 10.65            | 240%              | 3700%                  |
+| 300     | 106008  | 16.95            | 31.37            | 320%              | 4800%                  |
+| 500     | 122369  | 24.45            | 47.47            | 350%              | 5300%                  |
 
 ### Read Write
 
 TiProxy test results:
 
-| Threads | QPS | Avg latency(ms) | P95 latency (ms) | TiProxy CPU usage | TiDB overall CPU Usage |
-| --- | --- | --- | --- | --- | --- |
-| 50 | 60170 | 16.62 | 18.95 | 280% | 2700% |
-| 100 | 81691 | 24.48 | 31.37 | 340% | 3600% |
-| 200 | 88755 | 45.05 | 54.83 | 400% | 4000% |
+| Threads | QPS    | Avg latency (ms) | P95 latency (ms) | TiProxy CPU usage | TiDB overall CPU usage |
+|---------|--------|------------------|------------------|-------------------|------------------------|
+| 50      | 58571  | 17.07            | 19.65            | 250%              | 2600%                  |
+| 100     | 88432  | 22.60            | 29.19            | 330%              | 3900%                  |
+| 200     | 108758 | 36.73            | 51.94            | 380%              | 4800%                  |
 
 HAProxy test results:
 
-| Threads | QPS | Avg latency(ms) | P95 latency (ms) | HAProxy CPU usage | TiDB overall CPU Usage |
-| --- | --- | --- | --- | --- | --- |
-| 50 | 58151 | 17.19 | 20.37 | 240% | 2600% |
-| 100 | 94123 | 21.24 | 26.68 | 370% | 4100% |
-| 200 | 107423 | 37.21 | 45.79 | 400% | 4700% |
+| Threads | QPS     | Avg latency (ms) | P95 latency (ms) | HAProxy CPU usage | TiDB overall CPU usage |
+|---------|---------|------------------|------------------|-------------------|------------------------|
+| 50      | 61226   | 16.33            | 19.65            | 190%              | 2800%                  |
+| 100     | 96569   | 20.70            | 26.68            | 290%              | 4100%                  |
+| 200     | 120163  | 31.28            | 49.21            | 340%              | 5200%                  |
 
 ## Result set test
 
@@ -202,21 +203,21 @@ sysbench oltp_read_only \
 
 TiProxy test results:
 
-| Range Size | QPS | Avg latency(ms) | P95 latency (ms) | TiProxy CPU usage | TiDB overall CPU Usage | Inbound Network (MiB/s) | Outbound Network (MiB/s) |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| 10 | 92100 | 1.09 | 1.34 | 330% | 3700% | 150 | 150 |
-| 100 | 57931 | 1.73 | 2.30 | 370% | 2800% | 840 | 840 |
-| 1000 | 8249 | 12.12 | 18.95 | 250% | 1300% | 1140 | 1140 |
-| 10000 | 826 | 120.77 | 363.18 | 230% | 600% | 1140 | 1140 |
+| Range size | QPS     | Avg latency (ms) | P95 latency (ms) | TiProxy CPU usage | TiDB overall CPU usage | Inbound network (MiB/s) | Outbound network (MiB/s) |
+|------------|---------|------------------|------------------|-------------------|------------------------|-------------------------|--------------------------|
+| 10         | 80157   | 1.25             | 1.61             | 340%              | 2600%                  | 140                     | 140                      |
+| 100        | 55936   | 1.79             | 2.43             | 370%              | 2800%                  | 820                     | 820                      |
+| 1000       | 10313   | 9.69             | 13.70            | 310%              | 1500%                  | 1370                    | 1370                     |
+| 10000      | 1064    | 93.88            | 142.39           | 250%              | 600%                   | 1430                    | 1430                     |
 
 HAProxy test results:
 
-| Range Size | QPS | Avg latency(ms) | P95 latency (ms) | HAProxy CPU usage | TiDB overall CPU Usage | Inbound Network (MiB/s) | Outbound Network (MiB/s) |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| 10 | 93202 | 1.07 | 1.30 | 330% | 3800% | 145 | 145 |
-| 100 | 64348 | 1.55 | 1.86 | 350% | 3100% | 830 | 830 |
-| 1000 | 8944 | 11.18 | 14.73 | 240% | 1400% | 1100 | 1100 |
-| 10000 | 908 | 109.96 | 139.85 | 180% | 600% | 1130 | 1130 |
+| Range size | QPS    | Avg latency (ms) | P95 latency (ms) | HAProxy CPU usage | TiDB overall CPU usage | Inbound network (MiB/s) | Outbound network (MiB/s) |
+|------------|--------|------------------|------------------|-------------------|------------------------|-------------------------|--------------------------|
+| 10         | 94376  | 1.06             | 1.30             | 250%              | 4000%                  | 150                     | 150                      |
+| 100        | 70129  | 1.42             | 1.76             | 270%              | 3300%                  | 890                     | 890                      |
+| 1000       | 9501   | 11.18            | 14.73            | 240%              | 1500%                  | 1180                    | 1180                     |
+| 10000      | 955    | 104.61           | 320.17           | 180%              | 1200%                  | 1200                    | 1200                     |
 
 ## Scalability test
 
@@ -241,9 +242,73 @@ sysbench oltp_point_select \
 
 ### Test results
 
-| vCPU | Threads | QPS | Avg latency(ms) | P95 latency (ms) | TiProxy CPU usage | TiDB overall CPU Usage |
-| --- | --- | --- | --- | --- | --- | --- |
-| 2 | 40 | 58508 | 0.68 | 0.97 | 190% | 1200% |
-| 4 | 80 | 104890 | 0.76 | 1.16 | 390% | 2000% |
-| 6 | 120 | 155520 | 0.77 | 1.14 | 590% | 2900% |
-| 8 | 160 | 202134 | 0.79 | 1.18 | 800% | 3900% |
+| vCPU | Threads | QPS     | Avg latency (ms) | P95 latency (ms) | TiProxy CPU usage | TiDB overall CPU usage |
+|------|---------|---------|------------------|------------------|-------------------|------------------------|
+| 2    | 40      | 58508   | 0.68             | 0.97             | 190%              | 1200%                  |
+| 4    | 80      | 104890  | 0.76             | 1.16             | 390%              | 2000%                  |
+| 6    | 120     | 155520  | 0.77             | 1.14             | 590%              | 2900%                  |
+| 8    | 160     | 202134  | 0.79             | 1.18             | 800%              | 3900%                  |
+
+## Long connection test
+
+### Test plan
+
+This test aims to verify that a large number of idle connections have minimal impact on the QPS when the client uses long connections. This test creates 5000, 10000, and 15000 idle long connections, and then executes `sysbench`.
+
+In this test, the `conn-buffer-size` configuration is kept at the default value:
+
+```yaml
+proxy.conn-buffer-size: 32768
+```
+
+The following command is used to perform the test:
+
+```bash
+sysbench oltp_point_select \
+    --threads=50 \
+    --time=1200 \
+    --report-interval=10 \
+    --rand-type=uniform \
+    --db-driver=mysql \
+    --mysql-db=sbtest \
+    --mysql-host=$host \
+    --mysql-port=$port \
+    run --tables=32 --table-size=1000000
+```
+
+### Test results
+
+| Connection count | QPS   | Avg latency (ms) | P95 latency (ms) | TiProxy CPU usage | TiProxy memory usage (MB) | TiDB overall CPU usage |
+|------------------|-------|------------------|------------------|-------------------|---------------------------|------------------------|
+| 5000             | 96620 | 0.52             | 0.64             | 330%              | 920                       | 1800%                  |
+| 10000            | 96143 | 0.52             | 0.65             | 330%              | 1710                      | 1800%                  |
+| 15000            | 96048 | 0.52             | 0.65             | 330%              | 2570                      | 1900%                  |
+
+## Short connection test
+
+### Test plan
+
+This test aims to verify that frequent creation and destruction of connections have minimal impact on the QPS when the client uses short connections. This test starts another client program to create and disconnect 100, 200, and 300 short connections per second while executing `sysbench`.
+
+The following command is used to perform the test:
+
+```bash
+sysbench oltp_point_select \
+    --threads=50 \
+    --time=1200 \
+    --report-interval=10 \
+    --rand-type=uniform \
+    --db-driver=mysql \
+    --mysql-db=sbtest \
+    --mysql-host=$host \
+    --mysql-port=$port \
+    run --tables=32 --table-size=1000000
+```
+
+### Test results
+
+| New connections per second | QPS    | Avg latency (ms) | P95 latency (ms) | TiProxy CPU usage | TiDB overall CPU usage |
+|----------------------------|--------|------------------|------------------|-------------------|------------------------|
+| 100                        | 95597  | 0.52             | 0.65             | 330%              | 1800%                  |
+| 200                        | 94692  | 0.53             | 0.67             | 330%              | 1800%                  |
+| 300                        | 94102  | 0.53             | 0.68             | 330%              | 1900%                  |
