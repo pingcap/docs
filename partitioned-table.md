@@ -694,7 +694,7 @@ PARTITION BY KEY()
 PARTITIONS 2;
 ```
 
-However, the previous statements will fail if the unique key column is not defined as `NOT NULL`.
+However, the previous statement will fail if the unique key column is not defined as `NOT NULL`.
 
 #### How TiDB handles Linear Hash partitions
 
