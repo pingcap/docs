@@ -61,4 +61,4 @@ Starting from TiDB v8.0.0, the `DEFAULT` clause supports using the following exp
 
 > **Note:**
 >
-> Currently, the `CHANGE COLUMN` and `MODIFY COLUMN` statements do not support using expressions as default values.
+> Currently, the `ADD COLUMN` statement does not support using expressions as default values.
