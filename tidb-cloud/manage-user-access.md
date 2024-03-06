@@ -78,7 +78,7 @@ At the organization level, TiDB Cloud defines four roles, in which `Organization
 | Invite users to or remove users from an organization, and edit organization roles of users. | ✅ | ❌ | ❌ | ❌ |
 | All the permissions of `Project Owner` for all projects in the organization. | ✅ | ❌ | ❌ | ❌ |
 | Create projects with Customer-Managed Encryption Key (CMEK) enabled | ✅ | ❌ | ❌ | ❌ |
-| View bills and edit payment information for the organization. | ✅ | ✅ | ❌ | ❌ |
+| View bills, use [cost explorer](/tidb-cloud/tidb-cloud-billing.md#cost-explorer), and edit payment information for the organization. | ✅ | ✅ | ❌ | ❌ |
 | Manage TiDB Cloud [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md) for the organization. | ✅ | ❌ | ✅ | ❌ |
 | View users in the organization and projects in which the member belong to. | ✅ | ✅ | ✅ | ✅ |
 
