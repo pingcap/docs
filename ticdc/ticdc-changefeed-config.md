@@ -68,7 +68,7 @@ case-sensitive = false
 # The default value is the same as the default SQL mode of TiDB.
 # sql-mode = "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
 
-# The default value is false, which means that BDR (Bi-Directional Replication) mode is not enabled.
+# The default value is false, which means that Bi-Directional Replication (BDR) mode is disabled.
 # For more information, see https://docs.pingcap.com/tidb/stable/ticdc-bidirectional-replication
 # bdr-mode = false
 
