@@ -764,7 +764,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
         - Fix a bug that a TiCDC node exits abnormally when a PD leader is killed [#4248](https://github.com/pingcap/tiflow/issues/4248)
         - Fix the error `Unknown system variable 'transaction_isolation'` for some MySQL versions [#4504](https://github.com/pingcap/tiflow/issues/4504)
         - Fix the TiCDC panic issue that might occur when `Canal-JSON` incorrectly handles `string` [#4635](https://github.com/pingcap/tiflow/issues/4635)
-        - Fix a bug that sequence is incorrectly replicated in some cases [#4552](https://github.com/pingcap/tiflow/issues/4552)
+        - Fix a bug that sequence is incorrectly replicated in some cases [#4563](https://github.com/pingcap/tiflow/issues/4552)
         - Fix the TiCDC panic issue that might occur because `Canal-JSON` does not support nil [#4736](https://github.com/pingcap/tiflow/issues/4736)
         - Fix the wrong data mapping for avro codec of type `Enum/Set` and `TinyText/MediumText/Text/LongText` [#4454](https://github.com/pingcap/tiflow/issues/4454)
         - Fix a bug that Avro converts a `NOT NULL` column to a nullable field [#4818](https://github.com/pingcap/tiflow/issues/4818)
