@@ -34,21 +34,21 @@ Implicit defaults are defined as follows:
 
 Starting from v8.0.13, MySQL supports specifying expressions as default values in the `DEFAULT` clause. For more information, see [Explicit Default Handling as of MySQL 8.0.13](https://dev.mysql.com/doc/refman/8.0/en/data-type-defaults.html#data-type-defaults-explicit). TiDB has implemented this feature and supports specifying some expressions as default values in the `DEFAULT` clause.
 
-Starting from TiDB v8.0.0, the `BLOB`, `TEXT`, and `JSON` data types support default values, but the default values can only be set as expressions.
+Starting from TiDB v8.0.0, the [`BLOB`, `TEXT`](/data-type-string.md), and [`JSON`](/data-type-json.md) data types support default values, but the default values can only be set as expressions.
 
 ```sql
-CREATE TABLE t2 (b BLOB DEFAULT (rand()));
+CREATE TABLE t2 (b BLOB DEFAULT (RAND()));
 ```
 
 TiDB currently supports the following expressions:
 
-* `RAND`, `UUID`, `UUID_TO_BIN`
+* [`RAND()`](/functions-and-operators/numeric-functions-and-operators.md), [`UUID()`](/functions-and-operators/miscellaneous-functions.md), [`UUID_TO_BIN()`](/functions-and-operators/miscellaneous-functions.md)
 
 Starting from TiDB v8.0.0, the `DEFAULT` clause supports using the following expressions to set default values.
 
-* `UPPER(SUBSTRING_INDEX(user(), '@', 1))`
+* `UPPER(SUBSTRING_INDEX(USER(), '@', 1))`
 
-* `REPLACE(UPPER(uuid()), '-', '')`
+* `REPLACE(UPPER(UUID()), '-', '')`
 
 * The `DATE_FORMAT` supports the following formats:
 
