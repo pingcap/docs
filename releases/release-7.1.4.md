@@ -11,10 +11,10 @@ TiDB version: 7.1.4
 
 Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v7.1/production-deployment-using-tiup) | [Installation packages](https://www.pingcap.com/download/?version=v7.1.4#version-list)
 
-## Compatibility changes <!--tw@qiancai 1 条 -->
+## Compatibility changes
 
-- 为减少日志打印的开销，TiFlash 配置项 `logger.level` 默认值由 `"debug"` 改为 `"info"` [#8641](https://github.com/pingcap/tiflash/issues/8641) @[JaySon-Huang](https://github.com/JaySon-Huang)
-- (dup): release-6.5.8.md > 兼容性变更 - 新增 TiKV 配置项 [`gc.num-threads`](https://docs.pingcap.com/zh/tidb/v6.5/tikv-configuration-file#num-threads-从-v658-版本开始引入)，用于设置当 `enable-compaction-filter` 为 `false` 时 GC 的线程个数 [#16101](https://github.com/tikv/tikv/issues/16101) @[tonyxuqqi](https://github.com/tonyxuqqi)
+- (dup): release-7.5.1.md > Compatibility changes - To reduce the overhead of log printing, TiFlash changes the default value of `logger.level` from `"debug"` to `"info"` [#8641](https://github.com/pingcap/tiflash/issues/8641) @[JaySon-Huang](https://github.com/JaySon-Huang)
+- (dup): release-6.5.8.md > Compatibility changes - Introduce the TiKV configuration item [`gc.num-threads`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#num-threads-new-in-v658) to set the number of GC threads when `enable-compaction-filter` is `false`  [#16101](https://github.com/tikv/tikv/issues/16101) @[tonyxuqqi](https://github.com/tonyxuqqi)
 
 ## Improvements
 
@@ -22,6 +22,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
     - (dup): release-7.5.1.md > Improvements> TiDB - Enhance the ability to convert `OUTER JOIN` to `INNER JOIN` in specific scenarios [#49616](https://github.com/pingcap/tidb/issues/49616) @[qw4990](https://github.com/qw4990)
     - When `force-init-stats` is set to `true`, TiDB waits for statistics initialization to finish before providing services during TiDB startup. During this period, TiDB also blocks the startup of HTTP servers [#50854](https://github.com/pingcap/tidb/issues/50854) @[hawkingrei](https://github.com/hawkingrei)
+
++ TiKV <!--tw@qiancai 1 条 -->
+
+    - 当 TiKV 检测到存在损坏的 SST 文件时，记录损坏的具体原因 [#16308](https://github.com/tikv/tikv/issues/16308) @[overvenus](https://github.com/overvenus)
 
 + PD
 
@@ -99,26 +103,26 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
     - Fix the execution order of DDL jobs to prevent TiCDC from receiving out-of-order DDLs [#49498](https://github.com/pingcap/tidb/issues/49498) @[tangenta](https://github.com/tangenta)
     - Fix the issue encountered when using `REVERSE()` on `BIT` type columns [#50850](https://github.com/pingcap/tidb/issues/50850) @[jiyfhust](https://github.com/jiyfhust)
     - Fix the issue that the `tidb_gogc_tuner_threshold` system variable is not adjusted accordingly after modifying the `tidb_server_memory_limit` variable [#48180](https://github.com/pingcap/tidb/issues/48180) @[hawkingrei](https://github.com/hawkingrei) <!--tw@qiancai 以下 7 条 -->
-    - 修复分区表进行 range 分区裁剪处理 unsigned 类型的列时的一处 bug，该 bug 会生成错误的 TableDual 的查询计划导致查询结果错误 [#50082](https://github.com/pingcap/tidb/issues/50082) @[Defined2014]
-    - 修复部分 partition 或者约束的表达式会导致 DDL 卡住的问题 [#50972](https://github.com/pingcap/tidb/issues/50972) @[lcwangchao](https://github.com/lcwangchao)
-    - 修复默认值被删除的列获取默认值报错的问题 [#51309](https://github.com/pingcap/tidb/issues/51309) @[crazycs520](https://github.com/crazycs520)
-    - 修复 grafana 监控指标 tidb_statistics_auto_analyze_total 不为整数的问题。[#51051](https://github.com/pingcap/tidb/issues/51051) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复 auto analyze 在处理分区表时，并发不可用的问题。[#47594](https://github.com/pingcap/tidb/issues/47594) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复 join 中可能出现的 index out of range 问题。 [#42588](https://github.com/pingcap/tidb/issues/42588) @[AilinKid](https://github.com/AilinKid)
-    - 修复在 TiFlash 延迟物化在处理关联列时结果可能出错的问题 [#49241](https://github.com/pingcap/tidb/issues/49241) [#51204](https://github.com/pingcap/tidb/issues/51204) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    - (dup): release-6.5.8.md > 错误修复> TiDB - 修复某些情况下，由于错误的分区裁剪导致查询 Range Partition 的结果不正确的问题 [#50082](https://github.com/pingcap/tidb/issues/50082) @[Defined2014](https://github.com/Defined2014)
+    - 修复当 `CREATE TABLE` 语句中包含特定分区或约束的表达式时，表名变更等的 DDL 操作会卡住的问题 [#50972](https://github.com/pingcap/tidb/issues/50972) @[lcwangchao](https://github.com/lcwangchao)
+    - 修复当列的默认值被删除时，获取该列的默认值会报错的问题 [#50043](https://github.com/pingcap/tidb/issues/50043) [#51324](https://github.com/pingcap/tidb/issues/51324) @[crazycs520](https://github.com/crazycs520)
+    - 修复 Grafana 监控指标 `tidb_statistics_auto_analyze_total` 没有显示为整数的问题 [#51051](https://github.com/pingcap/tidb/issues/51051) @[hawkingrei](https://github.com/hawkingrei)
+    - 修复 `auto analyze` 在处理分区表时，`tidb_merge_partition_stats_concurrency` 变量未生效的问题 [#47594](https://github.com/pingcap/tidb/issues/47594) @[hawkingrei](https://github.com/hawkingrei)
+    - 修复当查询语句涉及 JOIN 操作时可能出现 `index out of range` 报错的问题 [#42588](https://github.com/pingcap/tidb/issues/42588) @[AilinKid](https://github.com/AilinKid)
+    - (dup): release-7.5.1.md > 错误修复> TiDB - 修复在 TiFlash 延迟物化在处理关联列时结果可能出错的问题 [#49241](https://github.com/pingcap/tidb/issues/49241) [#51204](https://github.com/pingcap/tidb/issues/51204) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
 
-+ TiKV <!--tw@qiancai 6 条 -->
++ TiKV <!--tw@qiancai 5 条 -->
 
-    - raftstore: 修复休眠region在异常情况下不能及时唤醒的缺陷。[#16368](https://github.com/tikv/tikv/issues/16368) @[LykxSassinator](https://github.com/LykxSassinator)
-    - 在执行下线节点操作前，检查该region所有副本的上一次心跳时间，防止下线一个副本后整个region不可用. [#16465](https://github.com/tikv/tikv/issues/16465) @[tonyxuqqi](https://github.com/tonyxuqqi)
-    - 修复Titan打开时RocksDB中Table property相关的缺陷。 [#16319](https://github.com/tikv/tikv/issues/16319) @[hicqu](https://github.com/hicqu)
-    - 修复当TiFlash打开时tikv-ctl compact-cluster无法工作的缺陷。[#16189](https://github.com/tikv/tikv/issues/16189) @[frew](https://github.com/frew)
+    - 修复休眠的 Region 在异常情况下未被及时唤醒的问题 [#16368](https://github.com/tikv/tikv/issues/16368) @[LykxSassinator](https://github.com/LykxSassinator)
+    - 通过在执行下线节点操作前检查该 Region 所有副本的上一次心跳时间，修复下线一个副本导致整个 Region 不可用的问题 [#16465](https://github.com/tikv/tikv/issues/16465) @[tonyxuqqi](https://github.com/tonyxuqqi)
+    - 修复开启 Titan 时 RocksDB 中存储的表属性可能不准确的问题 [#16319](https://github.com/tikv/tikv/issues/16319) @[hicqu](https://github.com/hicqu)
+    - 修复当集群中存在 TiFlash 节点时，执行 `tikv-ctl compact-cluster` 失败的问题 [#16189](https://github.com/tikv/tikv/issues/16189) @[frew](https://github.com/frew)
     - RocksDB: 记录SST损坏的具体原因。[#16308](https://github.com/tikv/tikv/issues/16308) @[overvenus](https://github.com/overvenus)
     - (dup): release-7.5.1.md > Bug fixes> TiKV - Fix the issue that TiKV might panic when gRPC threads are checking `is_shutdown` [#16236](https://github.com/tikv/tikv/issues/16236) @[pingyu](https://github.com/pingyu)
     - (dup): release-7.5.1.md > Bug fixes> TiKV - Fix the issue that TiDB and TiKV might produce inconsistent results when processing `DECIMAL` arithmetic multiplication truncation [#16268](https://github.com/tikv/tikv/issues/16268) @[solotzg](https://github.com/solotzg)
     - (dup): release-7.5.1.md > Bug fixes> TiKV - Fix the issue that `cast_duration_as_time` might return incorrect results [#16211](https://github.com/tikv/tikv/issues/16211) @[gengliqi](https://github.com/gengliqi)
     - (dup): release-7.5.1.md > Bug fixes> TiKV - Fix the issue that TiKV converts the time zone incorrectly for Brazil and Egypt [#16220](https://github.com/tikv/tikv/issues/16220) @[overvenus](https://github.com/overvenus)
-    - 修复 JSON 整形数值在大于 int64 最大值但是小于 uint64 最大值时会被解析成 float64 导致结果和 TiDB 不一致的问题 [#16537](https://github.com/tikv/tikv/pull/16537) @[YangKeao](https://github.com/YangKeao)
+    - 修复 JSON 整型数值在大于 `INT64` 最大值但小于 `UINT64` 最大值时会被 TiKV 解析成 `FLOAT64` 导致结果和 TiDB 不一致的问题 [#16512](https://github.com/tikv/tikv/issues/16512) @[YangKeao](https://github.com/YangKeao)
 
 + PD <!--tw@hfxsd 7 条 -->
 
