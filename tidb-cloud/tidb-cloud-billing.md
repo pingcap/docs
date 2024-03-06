@@ -46,7 +46,7 @@ To view the list of invoices, perform the following steps:
     >
     > If you are in multiple organizations, switch to your target organization by clicking its name.
 
-2. In the left navigation pane, click the **Billing** tab .
+2. In the left navigation pane, click the **Billing** tab.
 
 3. Click the **Invoices** tab. The invoices page is displayed.
 
@@ -79,6 +79,24 @@ The billing details page shows the billing summary by project and by service. Yo
 >
 > - The total amount in the monthly bill is rounded off to the 2nd decimal place.
 > - The total amount in the daily usage details is accurate to the 6th decimal place.
+
+## Cost explorer
+
+If you are in the `Organization Owner` or `Organization Billing Admin` role of your organization, you can view and analyze the usage costs of TiDB Cloud. Otherwise, skip this section.
+
+To analyze and customize your cost reports of your organization, perform the following steps:
+
+1. In the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com), click <MDSvgIcon name="icon-top-organization" />, and then click **Billing**.
+
+    > **Note:**
+    >
+    > If you are in multiple organizations, switch to your target organization by clicking its name.
+
+2. On the **Billing** page, click the **Cost Explorer** tab.
+3. On the **Cost Explorer** page, expand the **Filter** section in the upper-right corner to customize your report. You can set the time range, select a grouping option (such as by service, project, cluster, region, product type, and charge type), and apply filters by selecting specific services, projects, clusters, or regions. The cost explorer will display you with the following information:
+
+    - **Cost Graph**: visualizes the cost trends over the selected time range. You can switch between **Monthly**, **Daily**, and **Total** views.
+    - **Cost Breakdown**: displays a detailed breakdown of your costs according to the selected grouping option. For further analysis, you can download the data in CSV format.
 
 ## Billing profile
 
