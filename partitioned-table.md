@@ -665,7 +665,7 @@ PARTITION BY KEY(fname, store_id)
 PARTITIONS 4;
 ```
 
-TiDB also supports creating Key partitioned tables with an empty partition column list specified in `PARTITION BY KEY`, just like MySQL. For example, the following statement will create a partitioned table with the primary key `id` as the partitioning key:
+Similar to MySQL, TiDB supports creating Key partitioned tables with an empty partition column list specified in `PARTITION BY KEY`. For example, the following statement creates a partitioned table using the primary key `id` as the partitioning key:
 
 ```sql
 CREATE TABLE employees (
