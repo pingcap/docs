@@ -26,7 +26,7 @@ Implicit defaults are defined as follows:
 - For date and time types other than `TIMESTAMP`, the default is the appropriate "zero" value for the type. For `TIMESTAMP`, the default value is the current date and time.
 - For string types other than `ENUM`, the default value is the empty string. For `ENUM`, the default is the first enumeration value.
 
-## Specifying expressions as default values
+## Specify expressions as default values
 
 > **Warning:**
 >
