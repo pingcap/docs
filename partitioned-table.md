@@ -684,7 +684,7 @@ PARTITIONS 4;
 
 If there is no primary key but a unique key, the unique key will be used as the partitioning key:
 
-```
+```sql
 CREATE TABLE k1 (
     id INT NOT NULL,
     name VARCHAR(20),
