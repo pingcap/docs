@@ -7,7 +7,7 @@ summary: Time to live (TTL) is a feature that allows you to manage TiDB data lif
 
 Time to Live (TTL) は、TiDB データの有効期間を行レベルで管理できるようにする機能です。 TTL 属性を持つテーブルの場合、TiDB はデータの有効期間を自動的にチェックし、期限切れのデータを行レベルで削除します。この機能により、storage領域を効果的に節約し、一部のシナリオでパフォーマンスを向上させることができます。
 
-以下に、TTL の一般的なシナリオをいくつか示します。
+TTL の一般的なシナリオをいくつか次に示します。
 
 -   確認コードと短縮 URL は定期的に削除してください。
 -   不要な過去の注文を定期的に削除します。
@@ -136,7 +136,7 @@ ALTER TABLE orders TTL_JOB_INTERVAL = '24h';
 
 デフォルトでは`TTL_JOB_INTERVAL` `1h`に設定されます。
 
-TTL ジョブを実行するとき、TiDB はテーブルを最大 64 のタスクに分割します。リージョンは最小単位です。これらのタスクは分散的に実行されます。システム変数[`tidb_ttl_running_tasks`](/system-variables.md#tidb_ttl_running_tasks-new-in-v700)を設定することで、クラスター全体での同時 TTL タスクの数を制限できます。ただし、すべての種類のテーブルのすべての TTL ジョブをタスクに分割できるわけではありません。どの種類のテーブルの TTL ジョブをタスクに分割できないかについて詳しくは、 [制限事項](#limitations)セクションを参照してください。
+TTL ジョブを実行するとき、TiDB はテーブルを最大 64 のタスクに分割します。リージョンは最小単位です。これらのタスクは分散的に実行されます。システム変数[`tidb_ttl_running_tasks`](/system-variables.md#tidb_ttl_running_tasks-new-in-v700)を設定することで、クラスター全体での同時 TTL タスクの数を制限できます。ただし、あらゆる種類のテーブルのすべての TTL ジョブをタスクに分割できるわけではありません。どの種類のテーブルの TTL ジョブをタスクに分割できないかについて詳しくは、 [制限事項](#limitations)セクションを参照してください。
 
 TTL ジョブの実行を無効にするには、 `TTL_ENABLE='OFF'`テーブル オプションを設定するだけでなく、 [`tidb_ttl_job_enable`](/system-variables.md#tidb_ttl_job_enable-new-in-v650)グローバル変数を設定してクラスター全体で TTL ジョブの実行を無効にすることもできます。
 
@@ -233,17 +233,17 @@ TTL は、他の TiDB 移行、バックアップ、およびリカバリ ツー
 
 | ツール名           | サポートされる最小バージョン | 説明                                                                                                                                                                        |
 | -------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| バックアップと復元 (BR) | v6.6.0         | BRを使用してデータを復元すると、テーブルの`TTL_ENABLE`属性が`OFF`に設定されます。これにより、バックアップと復元後に TiDB が期限切れのデータをすぐに削除することがなくなります。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。                |
+| バックアップと復元 (BR) | v6.6.0         | BRを使用してデータを復元すると、テーブルの`TTL_ENABLE`属性が`OFF`に設定されます。これにより、TiDB がバックアップと復元後に期限切れのデータをすぐに削除するのを防ぎます。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。                    |
 | TiDB Lightning | v6.6.0         | TiDB Lighting を使用してデータをインポートすると、インポートされたテーブルの`TTL_ENABLE`属性が`OFF`に設定されます。これにより、TiDB がインポート後に期限切れのデータをすぐに削除するのを防ぎます。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。 |
 | TiCDC          | v7.0.0         | ダウンストリームの`TTL_ENABLE`属性は自動的に`OFF`に設定されます。アップストリームの TTL 削除はダウンストリームに同期されます。したがって、重複した削除を防ぐために、下流テーブルの`TTL_ENABLE`属性は強制的に`OFF`に設定されます。                                      |
 
 ## SQLとの互換性 {#compatibility-with-sql}
 
-| 機能名                                                                                         | 説明                                                                                                                                                                                   |
-| :------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)                       | `FLASHBACK TABLE`指定すると、テーブルの`TTL_ENABLE`属性が`OFF`に設定されます。これにより、TiDB がフラッシュバック後に期限切れのデータをすぐに削除するのを防ぎます。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。                          |
-| [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)                 | `FLASHBACK DATABASE`指定すると、テーブルの`TTL_ENABLE`属性が`OFF`に設定され、 `TTL_ENABLE`属性は変更されません。これにより、TiDB がフラッシュバック後に期限切れのデータをすぐに削除するのを防ぎます。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。 |
-| [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) | `FLASHBACK CLUSTER TO TIMESTAMP`指定すると、システム変数[`TIDB_TTL_JOB_ENABLE`](/system-variables.md#tidb_ttl_job_enable-new-in-v650) `OFF`に設定され、 `TTL_ENABLE`属性の値は変更されません。                      |
+| 機能名                                                                         | 説明                                                                                                                                                                                   |
+| :-------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)       | `FLASHBACK TABLE`指定すると、テーブルの`TTL_ENABLE`属性が`OFF`に設定されます。これにより、TiDB がフラッシュバック後に期限切れのデータをすぐに削除するのを防ぎます。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。                          |
+| [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) | `FLASHBACK DATABASE`指定すると、テーブルの`TTL_ENABLE`属性が`OFF`に設定され、 `TTL_ENABLE`属性は変更されません。これにより、TiDB がフラッシュバック後に期限切れのデータをすぐに削除するのを防ぎます。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。 |
+| [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)   | `FLASHBACK CLUSTER`指定すると、システム変数[`TIDB_TTL_JOB_ENABLE`](/system-variables.md#tidb_ttl_job_enable-new-in-v650) `OFF`に設定され、 `TTL_ENABLE`属性の値は変更されません。                                   |
 
 ## 制限事項 {#limitations}
 
@@ -277,7 +277,7 @@ TTL は、他の TiDB 移行、バックアップ、およびリカバリ ツー
 
     ![delete fast example](/media/ttl/delete-fast.png)
 
-    TTL ジョブにおけるスキャンと削除の割合はマシンの構成とデータ分散に関連しているため、各瞬間の監視データは実行中の TTL ジョブを表すだけです。テーブル`mysql.tidb_ttl_job_history`を読み取ると、特定の時点で実行されている TTL ジョブと、そのジョブに対応するテーブルを判断できます。
+    TTL ジョブにおけるスキャンと削除の割合はマシンの構成とデータ分散に関連するため、各時点の監視データは実行中の TTL ジョブを表すだけです。テーブル`mysql.tidb_ttl_job_history`を読み取ると、特定の時点でどの TTL ジョブが実行されているか、およびジョブの対応するテーブルを判断できます。
 
 -   `tidb_ttl_scan_worker_count`と`tidb_ttl_delete_worker_count`適切に設定するにはどうすればよいですか?
 

@@ -115,7 +115,7 @@
     -   [ソフトウェアとハ​​ードウェアの要件](/hardware-and-software-requirements.md)
     -   [環境コンフィグレーションチェックリスト](/check-before-deployment.md)
     -   クラスタトポロジの計画
-        -   [最小限のトポロジー](/minimal-deployment-topology.md)
+        -   [最小限のトポロジ](/minimal-deployment-topology.md)
         -   [TiFlashトポロジ](/tiflash-deployment-topology.md)
         -   [TiCDC トポロジー](/ticdc-deployment-topology.md)
         -   [TiDBBinlogトポロジ](/tidb-binlog-deployment-topology.md)
@@ -319,7 +319,7 @@
         -   [高度な同時書き込み](/best-practices/high-concurrency-best-practices.md)
         -   [グラファナの監視](/best-practices/grafana-monitor-best-practices.md)
         -   [PD スケジューリング](/best-practices/pd-scheduling-best-practices.md)
-        -   [大規模領域を使用した TiKV性能チューニング](/best-practices/massive-regions-best-practices.md)
+        -   [大規模な領域を使用した TiKV性能チューニング](/best-practices/massive-regions-best-practices.md)
         -   [3 ノードのハイブリッド展開](/best-practices/three-nodes-hybrid-deployment.md)
         -   [3 つのデータセンター展開におけるローカル読み取り](/best-practices/three-dc-local-read.md)
         -   [UUIDを使用する](/best-practices/uuid.md)
@@ -380,7 +380,7 @@
                 -   [tiup cluster import](/tiup/tiup-component-cluster-import.md)
                 -   [tiup cluster list](/tiup/tiup-component-cluster-list.md)
                 -   [tiup クラスターのメタバックアップ](/tiup/tiup-component-cluster-meta-backup.md)
-                -   [tiup クラスターのメタ復元](/tiup/tiup-component-cluster-meta-restore.md)
+                -   [tiup クラスター メタ リストア](/tiup/tiup-component-cluster-meta-restore.md)
                 -   [tiup cluster patch](/tiup/tiup-component-cluster-patch.md)
                 -   [tiup cluster prune](/tiup/tiup-component-cluster-prune.md)
                 -   [tiup cluster reload](/tiup/tiup-component-cluster-reload.md)
@@ -764,7 +764,7 @@
             -   [`EXECUTE`](/sql-statements/sql-statement-execute.md)
             -   [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)
             -   [`EXPLAIN`](/sql-statements/sql-statement-explain.md)
-            -   [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md)
+            -   [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)
             -   [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)
             -   [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)
             -   [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)
@@ -888,7 +888,7 @@
         -   [生成された列](/generated-columns.md)
         -   [SQLモード](/sql-mode.md)
         -   [テーブルの属性](/table-attributes.md)
-        -   取引
+        -   トランザクション
             -   [概要](/transaction-overview.md)
             -   [分離レベル](/transaction-isolation-levels.md)
             -   [楽観的なトランザクション](/optimistic-transaction.md)
@@ -1003,7 +1003,7 @@
     -   [テレメトリー](/telemetry.md)
     -   [エラーコード](/error-codes.md)
     -   [テーブルフィルター](/table-filter.md)
-    -   [トポロジ ラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)
+    -   [トポロジーラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)
     -   [外部ストレージ サービスの URI 形式](/external-storage-uri.md)
 -   よくある質問
     -   [FAQの概要](/faq/faq-overview.md)
@@ -1023,6 +1023,7 @@
     -   [TiDB のバージョン管理](/releases/versioning.md)
     -   [TiDB インストール パッケージ](/binary-package.md)
     -   v7.5
+        -   [7.5.1](/releases/release-7.5.1.md)
         -   [7.5.0](/releases/release-7.5.0.md)
     -   v7.4
         -   [7.4.0-DMR](/releases/release-7.4.0.md)
@@ -1200,7 +1201,7 @@
         -   [2.0](/releases/release-2.0-ga.md)
         -   [2.0 RC5](/releases/release-2.0-rc.5.md)
         -   [2.0 RC4](/releases/release-2.0-rc.4.md)
-        -   [2.0 RC3](/releases/release-2.0-rc.3.md)
+        -   [2.0RC3](/releases/release-2.0-rc.3.md)
         -   [2.0 RC1](/releases/release-2.0-rc.1.md)
         -   [1.1 ベータ版](/releases/release-1.1-beta.md)
         -   [1.1 アルファ](/releases/release-1.1-alpha.md)

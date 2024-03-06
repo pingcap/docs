@@ -280,6 +280,7 @@
 -   請求する
     -   [請求書](/tidb-cloud/tidb-cloud-billing.md#invoices)
     -   [支払明細](/tidb-cloud/tidb-cloud-billing.md#billing-details)
+    -   [コストエクスプローラー](/tidb-cloud/tidb-cloud-billing.md#cost-explorer)
     -   [請求プロファイル](/tidb-cloud/tidb-cloud-billing.md#billing-profile)
     -   [クレジット](/tidb-cloud/tidb-cloud-billing.md#credits)
     -   [支払い方法の設定](/tidb-cloud/tidb-cloud-billing.md#payment-method)
@@ -411,7 +412,7 @@
             -   [`EXECUTE`](/sql-statements/sql-statement-execute.md)
             -   [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)
             -   [`EXPLAIN`](/sql-statements/sql-statement-explain.md)
-            -   [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md)
+            -   [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)
             -   [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)
             -   [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)
             -   [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)
@@ -530,7 +531,7 @@
         -   [生成された列](/generated-columns.md)
         -   [SQLモード](/sql-mode.md)
         -   [テーブルの属性](/table-attributes.md)
-        -   取引
+        -   トランザクション
             -   [概要](/transaction-overview.md)
             -   [分離レベル](/transaction-isolation-levels.md)
             -   [楽観的なトランザクション](/optimistic-transaction.md)

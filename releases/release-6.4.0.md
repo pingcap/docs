@@ -10,13 +10,13 @@ TiDB バージョン: 6.4.0-DMR
 
 > **注記：**
 >
-> TiDB 6.4.0-DMR のドキュメントは[アーカイブされた](https://docs-archive.pingcap.com/tidb/v6.4/)になりました。 PingCAP では、 [最新のLTSバージョン](https://docs.pingcap.com/tidb/stable)の TiDB データベースを使用することをお勧めします。
+> TiDB 6.4.0-DMR ドキュメントは[アーカイブされた](https://docs-archive.pingcap.com/tidb/v6.4/)になりました。 PingCAP では、 [最新のLTSバージョン](https://docs.pingcap.com/tidb/stable)の TiDB データベースを使用することをお勧めします。
 
 クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v6.4/quick-start-with-tidb) | [インストールパッケージ](https://www.pingcap.com/download/?version=v6.4.0#version-list)
 
 v6.4.0-DMR の主な新機能と改善点は次のとおりです。
 
--   [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) (実験的) を使用して、特定の時点へのクラスターの復元をサポートします。
+-   [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md) (実験的) を使用して、特定の時点へのクラスターの復元をサポートします。
 -   [グローバルメモリ使用量の追跡](/configure-memory-usage.md)の TiDB インスタンスをサポートします (実験的)。
 -   [線形ハッシュ分割構文](/partitioned-table.md#how-tidb-handles-linear-hash-partitions)と互換性があること。
 -   高性能でグローバルに単調な[`AUTO_INCREMENT`](/auto-increment.md#mysql-compatibility-mode) (実験的) をサポートします。
@@ -25,7 +25,7 @@ v6.4.0-DMR の主な新機能と改善点は次のとおりです。
 -   [動的計画アルゴリズム](/join-reorder.md#example-the-dynamic-programming-algorithm-of-join-reorder)を追加してテーブルの結合順序を決定します。
 -   [新しいオプティマイザ ヒント`NO_DECORRELATE`](/optimizer-hints.md#no_decorrelate)を導入して、相関サブクエリの非相関化を実行するかどうかを制御します。
 -   [クラスター診断](/dashboard/dashboard-diagnostics-access.md)機能が GA になります。
--   TiFlash は、 [保存時の暗号化](/encryption-at-rest.md#tiflash)の SM4 アルゴリズムをサポートしています。
+-   TiFlash は、 [保存時の暗号化](/encryption-at-rest.md#tiflash)の SM4 アルゴリズムをサポートします。
 -   [テーブル内の指定されたパーティションのコンパクトなTiFlashレプリカを直ちに作成します](/sql-statements/sql-statement-alter-table-compact.md#compact-tiflash-replicas-of-specified-partitions-in-a-table)への SQL ステートメントの使用をサポートします。
 -   サポート[EBS ボリューム スナップショットを使用した TiDB クラスターのバックアップ](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/backup-to-aws-s3-by-snapshot) ．
 -   DM は[アップストリーム データ ソース情報をダウンストリーム マージ テーブルの拡張列に書き込む](/dm/dm-table-routing.md#extract-table-schema-and-source-information-and-write-into-the-merged-table)をサポートします。
@@ -48,7 +48,7 @@ v6.4.0-DMR の主な新機能と改善点は次のとおりです。
 
     `FLASHBACK CLUSTER TO TIMESTAMP`を実行する前に、TiCDC などのツールで実行されている PITR タスクとレプリケーション タスクを一時停止し、 `FLASHBACK`完了後に再起動する必要があります。そうしないと、レプリケーション タスクが失敗する可能性があります。
 
-    詳細については、 [ユーザードキュメント](/sql-statements/sql-statement-flashback-to-timestamp.md)を参照してください。
+    詳細については、 [ユーザードキュメント](/sql-statements/sql-statement-flashback-cluster.md)を参照してください。
 
 -   `FLASHBACK DATABASE` [#20463](https://github.com/pingcap/tidb/issues/20463) @ [エルワドバ](https://github.com/erwadba)を使用した削除されたデータベースの復元をサポート
 
@@ -58,7 +58,7 @@ v6.4.0-DMR の主な新機能と改善点は次のとおりです。
 
 ### Security {#security}
 
--   TiFlash は、保存時の暗号化のための SM4 アルゴリズムをサポートしています[#5953](https://github.com/pingcap/tiflash/issues/5953) @ [リデジュ](https://github.com/lidezhu)
+-   TiFlash は、保存時の暗号化のための SM4 アルゴリズムをサポートしています[#5953](https://github.com/pingcap/tiflash/issues/5953) @ [リデズ](https://github.com/lidezhu)
 
     保存時のTiFlash暗号化用の SM4 アルゴリズムを追加します。保存時の暗号化を構成する場合、 `tiflash-learner.toml`構成ファイルで`data-encryption-method`構成の値を`sm4-ctr`に設定することで、SM4 暗号化容量を有効にすることができます。
 
@@ -186,7 +186,7 @@ v6.4.0-DMR の主な新機能と改善点は次のとおりです。
 
     詳細については、 [ユーザードキュメント](/auto-increment.md#mysql-compatibility-mode)を参照してください。
 
--   JSON type [#13644](https://github.com/tikv/tikv/issues/13644) @ [ヤンケオ](https://github.com/YangKeao)の配列データの範囲選択をサポート
+-   JSONタイプ[#13644](https://github.com/tikv/tikv/issues/13644) @ [ヤンケオ](https://github.com/YangKeao)の配列データの範囲選択をサポート
 
     v6.4.0 以降、TiDB で MySQL 互換[範囲選択の構文](https://dev.mysql.com/doc/refman/8.0/en/json.html#json-paths)を使用できるようになります。
 
@@ -241,7 +241,7 @@ v6.4.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   DM は、一部の必須チェック項目をオプション項目に変更することで、事前チェック メカニズムを最適化します[#7333](https://github.com/pingcap/tiflow/issues/7333) @ [リチュンジュ](https://github.com/lichunzhu)
 
-    データ移行タスクをスムーズに実行するために、DM はタスクの開始時に自動的に[事前チェック](/dm/dm-precheck.md)トリガーし、チェック結果を返します。 DM は、事前チェックに合格した後にのみ移行を開始します。
+    データ移行タスクをスムーズに実行するために、DM はタスクの開始時に[事前チェック](/dm/dm-precheck.md)自動的にトリガーし、チェック結果を返します。 DM は、事前チェックに合格した後にのみ移行を開始します。
 
     v6.4.0 では、DM は次の 3 つのチェック項目を必須からオプションに変更し、事前チェックの通過率を向上させます。
 
@@ -278,7 +278,7 @@ v6.4.0-DMR の主な新機能と改善点は次のとおりです。
 | 変数名                                                                                                                                 | 種類の変更    | 説明                                                                                                                                                                                                                                  |
 | ----------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)         | 修正済み     | GLOBAL スコープを削除し、 [`pessimistic-txn.constraint-check-in-place-pessimistic`](/tidb-configuration-file.md#constraint-check-in-place-pessimistic-new-in-v640)構成項目を使用してデフォルト値を変更できるようにします。この変数は、TiDB が悲観的トランザクションの一意の制約をいつチェックするかを制御します。 |
-| [`tidb_ddl_flashback_concurrency`](/system-variables.md#tidb_ddl_flashback_concurrency-new-in-v630)                                 | 修正済み     | v6.4.0 から有効になり、 [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md)の同時実行性を制御します。デフォルト値は`64`です。                                                                                              |
+| [`tidb_ddl_flashback_concurrency`](/system-variables.md#tidb_ddl_flashback_concurrency-new-in-v630)                                 | 修正済み     | v6.4.0 から有効になり、 [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)の同時実行性を制御します。デフォルト値は`64`です。                                                                                                   |
 | [`tidb_enable_clustered_index`](/system-variables.md#tidb_enable_clustered_index-new-in-v50)                                        | 修正済み     | デフォルト値を`INT_ONLY`から`ON`に変更します。これは、主キーがデフォルトでクラスター化インデックスとして作成されることを意味します。                                                                                                                                                           |
 | [`tidb_enable_paging`](/system-variables.md#tidb_enable_paging-new-in-v540)                                                         | 修正済み     | デフォルト値を`OFF`から`ON`に変更します。これは、コプロセッサ要求を送信するページング方式がデフォルトで使用されることを意味します。                                                                                                                                                              |
 | [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)                               | 修正済み     | SESSION スコープを追加します。この変数は、 [プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)を有効にするかどうかを制御します。                                                                                                                                             |
@@ -304,27 +304,27 @@ v6.4.0-DMR の主な新機能と改善点は次のとおりです。
 
 ### コンフィグレーションファイルのパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                                                           | 種類の変更    | 説明                                                                                                                                                                |
-| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| TiDB           | `tidb_memory_usage_alarm_ratio`                                                                                                           | 削除されました  | この設定項目は無効になりました。                                                                                                                                                  |
-| TiDB           | `memory-usage-alarm-ratio`                                                                                                                | 削除されました  | システム変数[`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)に置き換えられます。この構成項目が v6.4.0 より前の TiDB バージョンで構成されている場合、アップグレード後は有効になりません。  |
-| TiDB           | [`pessimistic-txn.constraint-check-in-place-pessimistic`](/tidb-configuration-file.md#constraint-check-in-place-pessimistic-new-in-v640)  | 新しく追加された | システム変数[`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)のデフォルト値を制御します。デフォルト値は`true`です。   |
-| TiDB           | [`tidb-max-reuse-chunk`](/tidb-configuration-file.md#tidb-max-reuse-chunk-new-in-v640)                                                    | 新しく追加された | チャンク割り当てのキャッシュされたチャンク オブジェクトの最大数を制御します。デフォルト値は`64`です。                                                                                                             |
-| TiDB           | [`tidb-max-reuse-column`](/tidb-configuration-file.md#tidb-max-reuse-column-new-in-v640)                                                  | 新しく追加された | チャンク割り当てのキャッシュされた列オブジェクトの最大数を制御します。デフォルト値は`256`です。                                                                                                                |
-| TiKV           | [`cdc.raw-min-ts-outlier-threshold`](https://docs.pingcap.com/tidb/v6.2/tikv-configuration-file#raw-min-ts-outlier-threshold-new-in-v620) | 廃止されました  | この設定項目は無効になりました。                                                                                                                                                  |
-| TiKV           | [`causal-ts.alloc-ahead-buffer`](/tikv-configuration-file.md#alloc-ahead-buffer-new-in-v640)                                              | 新しく追加された | 事前に割り当てられた TSO キャッシュ サイズ (期間内)。デフォルト値は`3s`です。                                                                                                                     |
-| TiKV           | [`causal-ts.renew-batch-max-size`](/tikv-configuration-file.md#renew-batch-max-size-new-in-v640)                                          | 新しく追加された | タイムスタンプ要求内の TSO の最大数を制御します。デフォルト値は`8192`です。                                                                                                                       |
-| TiKV           | [`raftstore.apply-yield-write-size`](/tikv-configuration-file.md#apply-yield-write-size-new-in-v640)                                      | 新しく追加された | 適用スレッドがポーリングの 1 ラウンドで 1 つの FSM (有限状態マシン) に対して書き込むことができる最大バイト数を制御します。デフォルト値は`32KiB`です。これはソフトリミットです。                                                                |
-| PD             | [`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)                                                  | 新しく追加された | v6.4.0 から有効になり、PD が TSO の物理時間を更新する間隔を制御します。デフォルト値は`50ms`です。                                                                                                       |
-| TiFlash        | [`data-encryption-method`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)                                      | 修正済み     | 新しい値のオプション`sm4-ctr`を導入します。この設定項目を`sm4-ctr`に設定すると、データは SM4 を使用して暗号化されて保存されます。                                                                                      |
-| DM             | [`routes.route-rule-1.extract-table`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                      | 新しく追加された | オプション。シャーディング テーブルのソース情報を抽出するためのシャーディング シナリオで使用されます。抽出された情報は、データ ソースを識別するためにダウンストリームのマージされたテーブルに書き込まれます。このパラメータが設定されている場合は、事前にダウンストリームにマージされたテーブルを手動で作成する必要があります。 |
-| DM             | [`routes.route-rule-1.extract-schema`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                     | 新しく追加された | オプション。シャーディング スキーマのソース情報を抽出するためにシャーディング シナリオで使用されます。抽出された情報は、データ ソースを識別するためにダウンストリームのマージされたテーブルに書き込まれます。このパラメータが設定されている場合は、事前にダウンストリームにマージされたテーブルを手動で作成する必要があります。 |
-| DM             | [`routes.route-rule-1.extract-source`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                     | 新しく追加された | オプション。シャーディング シナリオでソース インスタンス情報を抽出するために使用されます。抽出された情報は、データ ソースを識別するためにダウンストリームのマージされたテーブルに書き込まれます。このパラメータが設定されている場合は、事前にダウンストリームにマージされたテーブルを手動で作成する必要があります。       |
-| TiCDC          | [`transaction-atomicity`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb)                                             | 修正済み     | デフォルト値を`table`から`none`に変更します。この変更は、レプリケーションのレイテンシーと OOM のリスクを軽減するのに役立ちます。さらに、TiCDC は、すべてのトランザクションではなく、少数のトランザクションのみを分割するようになりました (単一トランザクションのサイズは 1024 行を超えます)。   |
+| コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                                                           | 種類の変更      | 説明                                                                                                                                                                |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| TiDB           | `tidb_memory_usage_alarm_ratio`                                                                                                           | 削除されました    | この設定項目は無効になりました。                                                                                                                                                  |
+| TiDB           | `memory-usage-alarm-ratio`                                                                                                                | 削除されました    | システム変数[`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)に置き換えられます。この構成項目が v6.4.0 より前の TiDB バージョンで構成されている場合、アップグレード後は有効になりません。  |
+| TiDB           | [`pessimistic-txn.constraint-check-in-place-pessimistic`](/tidb-configuration-file.md#constraint-check-in-place-pessimistic-new-in-v640)  | 新しく追加された   | システム変数[`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)のデフォルト値を制御します。デフォルト値は`true`です。   |
+| TiDB           | [`tidb-max-reuse-chunk`](/tidb-configuration-file.md#tidb-max-reuse-chunk-new-in-v640)                                                    | 新しく追加された   | チャンク割り当てのキャッシュされたチャンク オブジェクトの最大数を制御します。デフォルト値は`64`です。                                                                                                             |
+| TiDB           | [`tidb-max-reuse-column`](/tidb-configuration-file.md#tidb-max-reuse-column-new-in-v640)                                                  | 新しく追加された   | チャンク割り当てのキャッシュされた列オブジェクトの最大数を制御します。デフォルト値は`256`です。                                                                                                                |
+| TiKV           | [`cdc.raw-min-ts-outlier-threshold`](https://docs.pingcap.com/tidb/v6.2/tikv-configuration-file#raw-min-ts-outlier-threshold-new-in-v620) | 廃止されました    | この設定項目は無効になりました。                                                                                                                                                  |
+| TiKV           | [`causal-ts.alloc-ahead-buffer`](/tikv-configuration-file.md#alloc-ahead-buffer-new-in-v640)                                              | 新しく追加された   | 事前に割り当てられた TSO キャッシュ サイズ (期間内)。デフォルト値は`3s`です。                                                                                                                     |
+| TiKV           | [`causal-ts.renew-batch-max-size`](/tikv-configuration-file.md#renew-batch-max-size-new-in-v640)                                          | 新しく追加された   | タイムスタンプ要求内の TSO の最大数を制御します。デフォルト値は`8192`です。                                                                                                                       |
+| TiKV           | [`raftstore.apply-yield-write-size`](/tikv-configuration-file.md#apply-yield-write-size-new-in-v640)                                      | 新しく追加された   | 適用スレッドがポーリングの 1 ラウンドで 1 つの FSM (有限状態マシン) に対して書き込むことができる最大バイト数を制御します。デフォルト値は`32KiB`です。これはソフトリミットです。                                                                |
+| PD             | [`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)                                                  | 新たに追加されました | v6.4.0 から有効になり、PD が TSO の物理時間を更新する間隔を制御します。デフォルト値は`50ms`です。                                                                                                       |
+| TiFlash        | [`data-encryption-method`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)                                      | 修正済み       | 新しい値のオプション`sm4-ctr`を導入します。この設定項目を`sm4-ctr`に設定すると、データは SM4 を使用して暗号化されて保存されます。                                                                                      |
+| DM             | [`routes.route-rule-1.extract-table`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                      | 新たに追加されました | オプション。シャーディング テーブルのソース情報を抽出するためのシャーディング シナリオで使用されます。抽出された情報は、データ ソースを識別するためにダウンストリームのマージされたテーブルに書き込まれます。このパラメータが設定されている場合は、事前にダウンストリームにマージされたテーブルを手動で作成する必要があります。 |
+| DM             | [`routes.route-rule-1.extract-schema`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                     | 新たに追加されました | オプション。シャーディング スキーマのソース情報を抽出するためにシャーディング シナリオで使用されます。抽出された情報は、データ ソースを識別するためにダウンストリームのマージされたテーブルに書き込まれます。このパラメータが設定されている場合は、事前にダウンストリームにマージされたテーブルを手動で作成する必要があります。 |
+| DM             | [`routes.route-rule-1.extract-source`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                     | 新たに追加されました | オプション。シャーディング シナリオでソース インスタンス情報を抽出するために使用されます。抽出された情報は、データ ソースを識別するためにダウンストリームのマージされたテーブルに書き込まれます。このパラメータが設定されている場合は、事前にダウンストリームにマージされたテーブルを手動で作成する必要があります。       |
+| TiCDC          | [`transaction-atomicity`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb)                                             | 修正済み       | デフォルト値を`table`から`none`に変更します。この変更は、レプリケーションのレイテンシーと OOM のリスクを軽減するのに役立ちます。さらに、TiCDC は、すべてのトランザクションではなく、少数のトランザクションのみを分割するようになりました (単一トランザクションのサイズは 1024 行を超えます)。   |
 
 ### その他 {#others}
 
--   v6.4.0 以降、 `mysql.user`テーブルには`User_attributes`と`Token_issuer`という 2 つの新しい列が追加されます。以前の TiDB バージョンのバックアップ データから TiDB v6.4.0 にバックアップ[`mysql`スキーマ内のシステム テーブルを復元する](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)と、 BR は`mysql.user`テーブルに対して`column count mismatch`エラーを報告します。 `mysql`スキーマのシステム テーブルを復元しない場合、このエラーは報告されません。
+-   v6.4.0 以降、 `mysql.user`テーブルには`User_attributes`と`Token_issuer`という 2 つの新しい列が追加されます。以前の TiDB バージョンのバックアップ データから TiDB v6.4.0 にバックアップ[`mysql`スキーマ内のシステムテーブルを復元する](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)と、 BR は`mysql.user`テーブルに対して`column count mismatch`エラーを報告します。 `mysql`スキーマのシステム テーブルを復元しない場合、このエラーは報告されません。
 -   名前が[Dumplingエクスポート ファイルの形式](/dumpling-overview.md#format-of-exported-files)に一致するが、非圧縮形式で終わるファイル ( `test-schema-create.sql.origin`や`test.table-schema.sql.origin`など) の場合、 TiDB Lightningファイルの処理方法が変更されます。 v6.4.0 より前では、インポートされるファイルにそのようなファイルが含まれている場合、 TiDB Lightning はそのようなファイルのインポートをスキップします。 v6.4.0 以降、 TiDB Lightning は、そのようなファイルがサポートされていない圧縮形式を使用していると想定するため、インポート タスクは失敗します。
 -   v6.4.0 以降、 `SYSTEM_VARIABLES_ADMIN`または`SUPER`権限を持つ変更フィードのみが TiCDC 同期ポイント機能を使用できます。
 
@@ -447,7 +447,7 @@ v6.4.0-DMR の主な新機能と改善点は次のとおりです。
         -   DM ワーカーが開始時または停止時に一定の確率でデータ競合を引き起こす問題を修正[#6401](https://github.com/pingcap/tiflow/issues/6401) @ [リウメンギャ94](https://github.com/liumengya94)
         -   DM が`UPDATE`または`DELETE`ステートメントをレプリケートするが、対応する行データが存在しない場合、DM はイベント[#6383](https://github.com/pingcap/tiflow/issues/6383) @ [GMHDBJD](https://github.com/GMHDBJD)をサイレントに無視する問題を修正します。
         -   `query-status`コマンド[#7189](https://github.com/pingcap/tiflow/issues/7189) @ [GMHDBJD](https://github.com/GMHDBJD)を実行した後に`secondsBehindMaster`フィールドが表示されない問題を修正します。
-        -   チェックポイントを更新すると大規模なトランザクションがトリガーされる可能性がある問題を修正[#5010](https://github.com/pingcap/tiflow/issues/5010) @ [ランス6716](https://github.com/lance6716)
+        -   チェックポイントの更新により大規模なトランザクションがトリガーされる可能性がある問題を修正[#5010](https://github.com/pingcap/tiflow/issues/5010) @ [ランス6716](https://github.com/lance6716)
         -   フル タスク モードで、タスクが同期ステージに入ってすぐに失敗すると、DM がアップストリーム テーブル スキーマ情報[#7159](https://github.com/pingcap/tiflow/issues/7159) @ [ランス6716](https://github.com/lance6716)を失う可能性がある問題を修正します。
         -   整合性チェックが有効になっている場合にデッドロックが発生する可能性がある問題を修正[#7241](https://github.com/pingcap/tiflow/issues/7241) @ [ブチュイトデゴウ](https://github.com/buchuitoudegou)
         -   タスクの事前チェックに`INFORMATION_SCHEMA`テーブル[#7317](https://github.com/pingcap/tiflow/issues/7317) @ [ランス6716](https://github.com/lance6716)に対する`SELECT`権限が必要である問題を修正

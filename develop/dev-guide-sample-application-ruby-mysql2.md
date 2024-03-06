@@ -188,7 +188,7 @@ ruby app.rb
 
 接続が成功すると、コンソールには次のように TiDB クラスターのバージョンが出力されます。
 
-    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v7.5.0)
+    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v7.5.1)
     ⏳ Loading sample game data...
     ✅ Loaded sample game data.
 
@@ -297,11 +297,11 @@ end
 3.  OpenSUSE の場合は`/etc/ssl/ca-bundle.pem`
 4.  macOS または Alpine (Docker コンテナー) の場合は`/etc/ssl/cert.pem`
 
-CA 証明書のパスを手動で指定することは可能ですが、マシンや環境が異なれば CA 証明書が異なる場所に保存される可能性があるため、複数環境の展開シナリオでは重大な不便が生じる可能性があります。したがって、さまざまな環境間での導入の柔軟性と容易さを考慮して、 `sslca` ～ `nil`を設定することをお勧めします。
+CA 証明書のパスを手動で指定することは可能ですが、マシンや環境が異なれば CA 証明書が異なる場所に保存される可能性があるため、複数環境の展開シナリオでは重大な不便が生じる可能性があります。したがって、さまざまな環境にわたる柔軟性と導入の容易さを考慮して、 `sslca` ～ `nil`を設定することをお勧めします。
 
 ## 次のステップ {#next-steps}
 
--   mysql2 ドライバーの使用法については[mysql2のドキュメント](https://github.com/brianmario/mysql2#readme)からご覧ください。
+-   mysql2 ドライバーの使用法については[mysql2のドキュメント](https://github.com/brianmario/mysql2#readme)から学びましょう。
 -   TiDB アプリケーション開発のベスト プラクティスについては、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データの削除](/develop/dev-guide-delete-data.md) 、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md) 、 [トランザクション](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)など) で学習してください。
 -   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 

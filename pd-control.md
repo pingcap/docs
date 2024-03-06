@@ -28,7 +28,7 @@ PD Controlを使用するには、 `tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd
 
 > **注記：**
 >
-> リンク内の`{version}`は、TiDB のバージョン番号を示します。たとえば、 `amd64`アーキテクチャの`v7.5.0`のダウンロード リンクは`https://download.pingcap.org/tidb-community-server-v7.5.0-linux-amd64.tar.gz`です。
+> リンク内の`{version}`は、TiDB のバージョン番号を示します。たとえば、 `amd64`アーキテクチャの`v7.5.1`のダウンロード リンクは`https://download.pingcap.org/tidb-community-server-v7.5.1-linux-amd64.tar.gz`です。
 
 ### ソースコードからコンパイルする {#compile-from-source-code}
 
@@ -218,7 +218,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 
 -   `key-type`クラスターに使用されるキーのエンコーディング タイプを指定します。サポートされているオプションは [&quot;table&quot;、&quot;raw&quot;、&quot;txn&quot;] で、デフォルト値は &quot;table&quot; です。
 
-    -   クラスター内に TiDB インスタンスが存在しない場合、 `key-type` 「raw」または「txn」となり、PD は`enable-cross-table-merge`設定に関係なくテーブル間でリージョンをマージできます。
+    -   クラスター内に TiDB インスタンスが存在しない場合、 `key-type`は「raw」または「txn」となり、PD は`enable-cross-table-merge`設定に関係なくテーブル間でリージョンをマージできます。
     -   クラスター内に TiDB インスタンスが存在する場合、 `key-type` 「テーブル」である必要があります。 PD がテーブル間でリージョンをマージできるかどうかは、 `enable-cross-table-merge`によって決まります。 `key-type`が「未加工」の場合、配置ルールは機能しません。
 
     ```bash
@@ -263,7 +263,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set region-schedule-limit 2         // 2 tasks of Region scheduling at the same time at most
     ```
 
--   `replica-schedule-limit`レプリカを同時にスケジュールするタスクの数を制御します。この値は、ノードがダウンしているか削除されている場合のスケジューリング速度に影響します。値が大きいほど速度が速くなり、値を 0 に設定するとスケジューリングが終了します。通常、レプリカのスケジューリングは負荷が大きいため、あまり大きな値を設定しないでください。通常、この設定項目はデフォルト値のままであることに注意してください。値を変更する場合は、いくつかの値を試して、実際の状況に応じて最適な値を確認する必要があります。
+-   `replica-schedule-limit`レプリカを同時にスケジュールするタスクの数を制御します。この値は、ノードがダウンしているか削除されている場合のスケジューリング速度に影響します。値が大きいほど速度が速くなり、値を 0 に設定するとスケジューリングが終了します。通常、レプリカのスケジューリングは負荷が大きいため、あまり大きな値を設定しないでください。通常、この設定項目はデフォルト値のままであることに注意してください。値を変更する場合は、いくつかの値を試して、実際の状況に応じてどれが最適であるかを確認する必要があります。
 
     ```bash
     config set replica-schedule-limit 4        // 4 tasks of replica scheduling at the same time at most
@@ -289,13 +289,13 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set tolerant-size-ratio 20        // Set the size of the buffer area to about 20 times of the average Region Size
     ```
 
--   `low-space-ratio`ストアスペースが不十分であるとみなされるしきい値を制御します。ノードが占めるスペースの割合が指定された値を超える場合、PD は該当するノードへのデータの移行を可能な限り回避しようとします。同時に、PD は主に、対応するノードのディスク容量を使い果たさないように、残りの容量をスケジュールします。
+-   `low-space-ratio`ストアスペースが不十分であるとみなされるしきい値を制御します。ノードが占めるスペースの割合が指定された値を超えると、PD は該当するノードへのデータの移行を可能な限り回避しようとします。同時に、PD は主に、対応するノードのディスク容量を使い果たさないように、残りの容量をスケジュールします。
 
     ```bash
     config set low-space-ratio 0.9              // Set the threshold value of insufficient space to 0.9
     ```
 
--   `high-space-ratio`十分なストア スペースとみなされるしきい値を制御します。この設定は、 `region-score-formula-version`が`v1`に設定されている場合にのみ有効になります。ノードが占有する容量の割合が指定値未満の場合、PD は残りの容量を無視し、主に実際のデータ量をスケジュールします。
+-   `high-space-ratio`十分なストア スペースとみなされるしきい値を制御します。この設定は、 `region-score-formula-version`が`v1`に設定されている場合にのみ有効になります。ノードが占有する領域の割合が指定値未満の場合、PD は残りの領域を無視し、主に実際のデータ量をスケジュールします。
 
     ```bash
     config set high-space-ratio 0.5             // Set the threshold value of sufficient space to 0.5
@@ -1110,7 +1110,7 @@ logic:  120102
 > **警告：**
 >
 > -   この機能は損失を伴うリカバリであるため、TiKV はこの機能の使用後のデータの整合性とデータ インデックスの整合性を保証できません。
-> -   TiDB チームのサポートを受けて機能関連の操作を実行することをお勧めします。誤った操作を行った場合、クラスタの復旧が困難になる可能性があります。
+> -   TiDB チームのサポートを受けて機能関連の操作を実行することをお勧めします。誤った操作が行われた場合、クラスタの復旧が困難になる可能性があります。
 
 このコマンドは、レプリカが永続的に損傷し、データが使用できなくなった場合に、損失を伴う回復操作を実行するために使用します。次の例を参照してください。詳細は[オンラインの安全でないリカバリ](/online-unsafe-recovery.md)で説明します
 
@@ -1230,7 +1230,7 @@ store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"en
 ...
 ```
 
-または、[store1、store30、store31] の起動に失敗した場合、store1 でデータを手動で安全に削除できるリージョンを見つけることができます。このようにして、store1 にレプリカがあるが他の DownPeer がないすべてのリージョンをフィルターで除外できます。
+または、[store1、store30、store31] の起動に失敗した場合、store1 でデータを手動で安全に削除できるリージョンを見つけることができます。このようにして、store1 にレプリカがあるが、他の DownPeer がないすべてのリージョンをフィルターで除外できます。
 
 ```bash
 >> region --jq=".regions[] | {id: .id, peer_stores: [.peers[].store_id] | select(length>1 and any(.==1) and all(.!=(30,31)))}"

@@ -39,7 +39,7 @@ summary: Learn about the TiDB system tables.
 -   `stats_buckets` : 統計のバケット
 -   `stats_histograms` : 統計のヒストグラム
 -   `stats_top_n` : 統計のトップN
--   `stats_meta` : 総行数や更新された行などのテーブルのメタ情報
+-   `stats_meta` : テーブルのメタ情報 (総行数や更新された行など)
 -   `stats_extended` : 拡張統計 (列間の順序相関など)
 -   `stats_feedback` : 統計のクエリフィードバック
 -   `stats_fm_sketch` : 統計列のヒストグラムの FMSketch 分布
@@ -100,6 +100,10 @@ summary: Learn about the TiDB system tables.
 -   `tidb_global_task_history` : 成功したタスクと失敗したタスクの両方を含む、履歴 DXF タスクのメタデータ
 -   `tidb_background_subtask` : 現在の DXF サブタスクのメタデータ
 -   `tidb_background_subtask_history` : 過去の DXF サブタスクのメタデータ
+
+## リソース制御に関連するシステムテーブル {#system-tables-related-to-resource-control}
+
+-   `request_unit_by_group` : すべてのリソース グループの消費されたリソース ユニット (RU) の履歴レコード
 
 ## その他のシステムテーブル {#miscellaneous-system-tables}
 

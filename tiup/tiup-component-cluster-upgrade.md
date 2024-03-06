@@ -1,5 +1,6 @@
 ---
 title: tiup cluster upgrade
+summary: The tiup cluster upgrade command is used to upgrade a specified cluster to a specific version. It requires the cluster name and target version as input. Options include --force to ignore errors and start the cluster, --transfer-timeout to set maximum wait time for node migration, --ignore-config-check to skip configuration check, and --offline to replace binary files without restarting the cluster. The output is the log of the upgrading progress.
 ---
 
 # tiup cluster upgrade {#tiup-cluster-upgrade}
@@ -13,7 +14,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 ```
 
 -   `<cluster-name>` : 操作対象のクラスター名。クラスター名を忘れた場合は、 [クラスタリスト](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
--   `<version>` : アップグレード先のターゲット バージョン ( `v7.5.0`など)。現在、現在のクラスターよりも高いバージョンへのアップグレードのみが許可されています。つまり、ダウングレードは許可されていません。また、夜間バージョンにアップグレードすることもできません。
+-   `<version>` : アップグレード先のターゲット バージョン ( `v7.5.1`など)。現在、現在のクラスターよりも高いバージョンへのアップグレードのみが許可されています。つまり、ダウングレードは許可されていません。また、夜間バージョンにアップグレードすることもできません。
 
 ## オプション {#options}
 

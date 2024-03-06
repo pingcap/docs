@@ -104,13 +104,6 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
     -   構成項目が`0`以外の値に設定されている場合、TiKV は最大で`max-backups`で指定された数の古いログ ファイルを保持します。たとえば、値が`7`に設定されている場合、TiKV は最大 7 つの古いログ ファイルを保持します。
 -   デフォルト値: `0`
 
-### <code>pd.enable-forwarding</code> <span class="version-mark">v5.0.0 の新機能</span> {#code-pd-enable-forwarding-code-span-class-version-mark-new-in-v5-0-0-span}
-
--   ネットワーク分離の可能性がある場合に、TiKV の PD クライアントがフォロワー経由でリーダーにリクエストを転送するかどうかを制御します。
--   デフォルト値: `false`
--   環境でネットワークが分離されている可能性がある場合、このパラメータを有効にすると、サービスが利用できなくなる期間を短縮できます。
--   分離、ネットワークの中断、またはダウンタイムが発生したかどうかを正確に判断できない場合、このメカニズムを使用すると判断を誤るリスクがあり、可用性とパフォーマンスの低下が発生します。ネットワーク障害が発生したことがない場合は、このパラメータを有効にすることはお勧めできません。
-
 ## サーバー {#server}
 
 -   サーバーに関連するコンフィグレーション項目。
@@ -438,7 +431,7 @@ storageに関するコンフィグレーション項目。
 
 ### <code>scheduler-concurrency</code> {#code-scheduler-concurrency-code}
 
--   キーの同時操作を防止するメモリロック機構を内蔵しています。各キーは異なるスロットにハッシュを持ちます。
+-   キーの同時操作を防止するメモリロック機構を内蔵しています。各キーは異なるスロットにハッシュを持っています。
 -   デフォルト値: `524288`
 -   最小値: `1`
 
@@ -497,7 +490,7 @@ storageに関するコンフィグレーション項目。
     -   `1` : API V1を使用し、クライアントから渡されたデータをエンコードせず、そのままのデータを保存します。 v6.1.0 より前のバージョンでは、TiKV はデフォルトで API V1 を使用します。
     -   `2` : API V2 を使用します:
         -   データはマルチバージョン同時実行制御 (MVCC) 形式で保存され、タイムスタンプは tikv-server によって PD (TSO) から取得されます。
-        -   データはさまざまな用途に応じてスコープ設定されており、API V2 は、単一クラスター内での TiDB、トランザクション KV、および RawKV アプリケーションの共存をサポートします。
+        -   データはさまざまな用途に応じてスコープ設定され、API V2 は単一クラスター内での TiDB、トランザクション KV、および RawKV アプリケーションの共存をサポートします。
         -   API V2 を使用する場合は、同時に`storage.enable-ttl = true`を設定する必要があります。 API V2 は TTL 機能をサポートしているため、 `enable-ttl`明示的にオンにする必要があります。そうしないと、 `storage.enable-ttl`のデフォルトが`false`になるため、競合します。
         -   API V2 が有効になっている場合、古いデータを再利用するには、少なくとも 1 つの tidb-server インスタンスをデプロイする必要があります。この tidb-server インスタンスは、読み取りサービスと書き込みサービスを同時に提供できます。高可用性を確保するために、複数の tidb-server インスタンスをデプロイできます。
         -   API V2 にはクライアントのサポートが必要です。詳細については、API V2 のクライアントの対応する命令を参照してください。
@@ -569,6 +562,13 @@ I/Oレートリミッタに関するコンフィグレーション項目。
 -   デフォルト値: `"write-only"`
 
 ## PD {#pd}
+
+### <code>enable-forwarding</code> <span class="version-mark">v5.0.0 の新機能</span> {#code-enable-forwarding-code-span-class-version-mark-new-in-v5-0-0-span}
+
+-   ネットワーク分離の可能性がある場合に、TiKV の PD クライアントがフォロワー経由でリーダーにリクエストを転送するかどうかを制御します。
+-   デフォルト値: `false`
+-   環境でネットワークが分離されている可能性がある場合、このパラメータを有効にすると、サービスが利用できなくなる期間を短縮できます。
+-   分離、ネットワークの中断、ダウンタイムが発生したかどうかを正確に判断できない場合、このメカニズムを使用すると判断を誤るリスクがあり、可用性とパフォーマンスの低下を引き起こします。ネットワーク障害が発生したことがない場合は、このパラメータを有効にすることはお勧めできません。
 
 ### <code>endpoints</code> {#code-endpoints-code}
 
@@ -741,7 +741,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>hibernate-regions</code> {#code-hibernate-regions-code}
 
--   Hibernateリージョンを有効または無効にします。このオプションを有効にすると、長時間アイドル状態のリージョンは自動的に休止状態に設定されます。これにより、アイドル状態のリージョンのRaftリーダーとフォロワーの間のハートビートメッセージによって生じる余分なオーバーヘッドが削減されます。 `peer-stale-state-check-interval`を使用すると、休止状態のリージョンのリーダーとフォロワー間のハートビート間隔を変更できます。
+-   Hibernateリージョンを有効または無効にします。このオプションを有効にすると、長時間アイドル状態のリージョンは自動的に休止状態に設定されます。これにより、 Raftリーダーとアイドル リージョンのフォロワー間のハートビートメッセージによって生じる余分なオーバーヘッドが削減されます。 `peer-stale-state-check-interval`を使用すると、休止状態のリージョンのリーダーとフォロワー間のハートビート間隔を変更できます。
 -   デフォルト値: v5.0.2 以降のバージョンでは`true` 。 v5.0.2 より前のバージョンでは`false`
 
 ### <code>split-region-check-tick-interval</code> {#code-split-region-check-tick-interval-code}
@@ -1161,12 +1161,12 @@ RocksDBに関するコンフィグレーション項目
 
 ### <code>wal-dir</code> {#code-wal-dir-code}
 
--   WALファイルが保存されているディレクトリ
--   デフォルト値: `"/tmp/tikv/store"`
+-   WAL ファイルが保存されるディレクトリ。指定しない場合、WAL ファイルはデータと同じディレクトリに保存されます。
+-   デフォルト値: `""`
 
 ### <code>wal-ttl-seconds</code> {#code-wal-ttl-seconds-code}
 
--   アーカイブされた WAL ファイルの存続期間。この値を超えると、システムはこれらのファイルを削除します。
+-   アーカイブされた WAL ファイルの生存時間。この値を超えると、システムはこれらのファイルを削除します。
 -   デフォルト値: `0`
 -   最小値: `0`
 -   単位：秒
@@ -1587,13 +1587,13 @@ RocksDBに関するコンフィグレーション項目
 
 -   TTL より古い更新を含む SST ファイルは、圧縮対象として自動的に選択されます。これらの SST ファイルはカスケード方式で圧縮されるため、最下位のレベルまたはファイルに圧縮されます。
 -   デフォルト値: `"0s"`は、デフォルトでは SST ファイルが選択されていないことを意味します。
--   単位: s(秒)|h(時間)|d(日)
+-   単位: s(秒)|h(時)|d(日)
 
 ### <code>periodic-compaction-seconds</code> <span class="version-mark">v7.2.0 の新機能</span> {#code-periodic-compaction-seconds-code-span-class-version-mark-new-in-v7-2-0-span}
 
 -   定期的な圧縮の時間間隔。この値より古い更新を含む SST ファイルは圧縮対象として選択され、これらの SST ファイルが元々存在していたレベルと同じレベルに再書き込みされます。
 -   デフォルト値: `"0s"`は、定期的な圧縮がデフォルトで無効であることを意味します。
--   単位: s(秒)|h(時間)|d(日)
+-   単位: s(秒)|h(時)|d(日)
 
 ## ロックsdb.defaultcf.titan {#rocksdb-defaultcf-titan}
 
@@ -2021,6 +2021,11 @@ TiDB LightningインポートおよびBRリストアに関連するコンフィ�
 -   GC をトリガーするガベージ率のしきい値。
 -   デフォルト値: `1.1`
 
+### <code>num-threads</code> <span class="version-mark">v6.5.8 および v7.5.1 の新機能</span> {#code-num-threads-code-span-class-version-mark-new-in-v6-5-8-and-v7-5-1-span}
+
+-   `enable-compaction-filter`が`false`の場合の GC スレッドの数。
+-   デフォルト値: `1`
+
 ## バックアップ {#backup}
 
 BRバックアップに関するコンフィグレーション項目。
@@ -2093,8 +2098,8 @@ BRバックアップに関するコンフィグレーション項目。
 
 ### <code>initial-scan-rate-limit</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-initial-scan-rate-limit-code-span-class-version-mark-new-in-v6-2-0-span}
 
--   ログ バックアップ中の増分データ スキャンのスループットのレート制限。
--   デフォルト値: 60。デフォルトのレート制限が 60 MB/秒であることを示します。
+-   ログ バックアップ中の増分データ スキャンのスループットのレート制限。これは、1 秒あたりにディスクから読み取ることができるデータの最大量を意味します。数値のみを指定した場合 (たとえば、 `60` )、単位は KiB ではなくバイトになることに注意してください。
+-   デフォルト値: 60MiB
 
 ### <code>max-flush-interval</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-max-flush-interval-code-span-class-version-mark-new-in-v6-2-0-span}
 
@@ -2194,7 +2199,7 @@ TiCDC に関するコンフィグレーション項目。
 
 ## クォータ {#quota}
 
-クォータリミッターに関するコンフィグレーション項目。
+クォータ リミッターに関するコンフィグレーション項目。
 
 ### <code>max-delay-duration</code> <span class="version-mark">v6.0.0 の新機能</span> {#code-max-delay-duration-code-span-class-version-mark-new-in-v6-0-0-span}
 
@@ -2289,7 +2294,7 @@ TiKV API V2 が有効な場合のタイムスタンプの取得に関連する�
 ### <code>renew-interval</code> {#code-renew-interval-code}
 
 -   ローカルにキャッシュされたタイムスタンプが更新される間隔。
--   TiKV は`renew-interval`の間隔でタイムスタンプのリフレッシュのバッチを開始し、前の期間のタイムスタンプの消費量と[`alloc-ahead-buffer`](#alloc-ahead-buffer-new-in-v640)の設定に従って、キャッシュされたタイムスタンプの数を調整します。このパラメーターの設定値が大きすぎると、最新の TiKV ワークロードの変更が時間内に反映されません。このパラメータを小さい値に設定すると、PD の負荷が増加します。書き込みトラフィックが大きく変動する場合、タイムスタンプが頻繁に使い果たされる場合、および書き込みレイテンシーが増加する場合は、このパラメータをより小さい値に設定できます。同時に PD の負荷も考慮する必要があります。
+-   TiKV は`renew-interval`の間隔でタイムスタンプのリフレッシュのバッチを開始し、前の期間のタイムスタンプの消費量と[`alloc-ahead-buffer`](#alloc-ahead-buffer-new-in-v640)の設定に従って、キャッシュされたタイムスタンプの数を調整します。このパラメーターを大きすぎる値に設定すると、最新の TiKV ワークロードの変更が時間内に反映されません。このパラメータを小さい値に設定すると、PD の負荷が増加します。書き込みトラフィックが大きく変動する場合、タイムスタンプが頻繁に使い果たされる場合、および書き込みレイテンシーが増加する場合は、このパラメータをより小さい値に設定できます。同時に PD の負荷も考慮する必要があります。
 -   デフォルト値: `"100ms"`
 
 ### <code>renew-batch-min-size</code> {#code-renew-batch-min-size-code}
@@ -2302,7 +2307,7 @@ TiKV API V2 が有効な場合のタイムスタンプの取得に関連する�
 ### <code>renew-batch-max-size</code> <span class="version-mark">v6.4.0 の新機能</span> {#code-renew-batch-max-size-code-span-class-version-mark-new-in-v6-4-0-span}
 
 -   タイムスタンプ要求内の TSO の最大数。
--   デフォルトの TSO 物理時間更新間隔 ( `50ms` ) では、PD は最大 262144 個の TSO を提供します。要求された TSO がこの数を超えると、PD はそれ以上 TSO を提供しません。この構成アイテムは、TSO の枯渇と、TSO の枯渇による他のビジネスへの逆影響を回避するために使用されます。高可用性を向上させるためにこの構成項目の値を増やす場合、十分な TSO を取得するには、同時に[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)の値を減らす必要があります。
+-   デフォルトの TSO 物理時間更新間隔 ( `50ms` ) では、PD は最大 262144 個の TSO を提供します。要求された TSO がこの数を超えると、PD はそれ以上 TSO を提供しません。この構成アイテムは、TSO の枯渇と、TSO の枯渇による他のビジネスへの逆影響を回避するために使用されます。高可用性を向上させるためにこの構成項目の値を増やす場合は、十分な TSO を取得するために同時に[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)の値を減らす必要があります。
 -   デフォルト値: `8192`
 
 ## リソース制御 {#resource-control}
@@ -2311,7 +2316,7 @@ TiKVstorageレイヤーのリソース制御に関するコンフィグレーシ
 
 ### <code>enabled</code> <span class="version-mark">v6.6.0 の新機能</span> {#code-enabled-code-span-class-version-mark-new-in-v6-6-0-span}
 
--   対応するリソース グループの[リクエストユニット (RU)](/tidb-resource-control.md#what-is-request-unit-ru)に従って、ユーザーのフォアグラウンド読み取り/書き込み要求のスケジューリングを有効にするかどうかを制御します。 TiDB リソース グループとリソース制御については、 [TiDB リソース制御](/tidb-resource-control.md)を参照してください。
+-   対応するリソース グループの[リクエストユニット(RU)](/tidb-resource-control.md#what-is-request-unit-ru)に従って、ユーザーのフォアグラウンド読み取り/書き込み要求のスケジューリングを有効にするかどうかを制御します。 TiDB リソース グループとリソース制御については、 [TiDB リソース制御](/tidb-resource-control.md)を参照してください。
 -   この設定項目を有効にすると、TiDB で[`tidb_enable_resource_control](/system-variables.md#tidb_enable_resource_control-new-in-v660)が有効になっている場合にのみ機能します。この構成項目が有効になっている場合、TiKV はプライオリティ キューを使用して、フォアグラウンド ユーザーからのキューに入れられた読み取り/書き込み要求をスケジュールします。リクエストのスケジューリング優先度は、このリクエストを受信するリソース グループによってすでに消費されているリソースの量に反比例し、対応するリソース グループのクォータに正の相関関係があります。
 -   デフォルト値: `true` 。これは、リソース グループの RU に基づくスケジューリングが有効であることを意味します。
 

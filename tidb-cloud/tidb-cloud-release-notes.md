@@ -8,6 +8,28 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには 2024 年[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが記載されています。
 
+## 2024 年 3 月 5 日 {#march-5-2024}
+
+**一般的な変更点**
+
+-   新しい[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターのデフォルトの TiDB バージョンを[v7.5.0](https://docs.pingcap.com/tidb/v7.5/release-7.5.0)から[v7.5.1](https://docs.pingcap.com/tidb/v7.5/release-7.5.1)にアップグレードします。
+
+**コンソールの変更**
+
+-   [**請求する**](https://tidbcloud.com/console/org-settings/billing/payments)ページの**[Cost Explorer]**タブを紹介します。このタブは、組織の長期的なコスト レポートを分析およびカスタマイズするための直感的なインターフェイスを提供します。
+
+    この機能を使用するには、組織の**[請求]**ページに移動し、 **[コスト エクスプローラー]**タブをクリックします。
+
+    詳細については、 [コストエクスプローラー](/tidb-cloud/tidb-cloud-billing.md#cost-explorer)を参照してください。
+
+-   [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) [ノードレベルのリソースメトリック](/tidb-cloud/built-in-monitoring.md#server)の**制限**ラベルを表示します。
+
+    **制限**ラベルには、クラスター内の各コンポーネントの CPU、メモリ、storageなどのリソースの最大使用量が表示されます。この機能強化により、クラスターのリソース使用率を監視するプロセスが簡素化されます。
+
+    これらのメトリック制限にアクセスするには、クラスターの**[監視]**ページに移動し、 **[メトリック]**タブの**[サーバー]**カテゴリを確認します。
+
+    詳細については、 [TiDB 専用クラスターのメトリック](/tidb-cloud/built-in-monitoring.md#server)を参照してください。
+
 ## 2024 年 2 月 20 日 {#february-20-2024}
 
 **一般的な変更点**
@@ -15,7 +37,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 -   Google Cloud 上でのさらに多くのTiDB Cloudノードの作成をサポートします。
 
     -   Google Cloud の`/19`の[リージョン CIDR サイズの構成](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)により、プロジェクトの任意のリージョン内に最大 124 のTiDB Cloudノードを作成できるようになりました。
-    -   プロジェクトの任意のリージョンに 124 を超えるノードを作成する場合は、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)に問い合わせて、 `/16`から`/18`の範囲の IP 範囲サイズをカスタマイズするための支援を得ることができます。
+    -   プロジェクトの任意のリージョンに 124 を超えるノードを作成する場合は、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)に連絡して、 `/16`から`/18`の範囲の IP 範囲サイズをカスタマイズするための支援を得ることができます。
 
 ## 2024 年 1 月 23 日 {#january-23-2024}
 

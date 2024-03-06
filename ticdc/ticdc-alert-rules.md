@@ -17,7 +17,7 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   アラート ルール:
 
-    (time() - ticdc_owner_checkpoint_ts / 1000) &gt; 600
+    `(time() - ticdc_owner_checkpoint_ts / 1000) > 600`
 
 -   説明：
 
@@ -25,13 +25,13 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   解決：
 
-    [TiCDC ハンドル レプリケーションの中断](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)を参照してください。
+    [TiCDC によるレプリケーションの中断の処理](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)を参照してください。
 
-## <code>cdc_resolvedts_high_delay</code> {#code-cdc-resolvedts-high-delay-code}
+### <code>cdc_resolvedts_high_delay</code> {#code-cdc-resolvedts-high-delay-code}
 
 -   アラート ルール:
 
-    (time() - ticdc_owner_resolved_ts / 1000) &gt; 300
+    `(time() - ticdc_owner_resolved_ts / 1000) > 300`
 
 -   説明：
 
@@ -39,7 +39,21 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   解決：
 
-    [TiCDC ハンドル レプリケーションの中断](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)を参照してください。
+    [TiCDC によるレプリケーションの中断の処理](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)を参照してください。
+
+### <code>ticdc_changefeed_failed</code> {#code-ticdc-changefeed-failed-code}
+
+-   アラート ルール:
+
+    `(max_over_time(ticdc_owner_status[1m]) == 2) > 0`
+
+-   説明：
+
+    レプリケーション タスクで回復不可能なエラーが発生し、失敗状態になります。
+
+-   解決：
+
+    このアラートはレプリケーションの中断に似ています。 [TiCDC によるレプリケーションの中断の処理](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)を参照してください。
 
 ### <code>ticdc_processor_exit_with_error_count</code> {#code-ticdc-processor-exit-with-error-count-code}
 
@@ -53,7 +67,7 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   解決：
 
-    [TiCDC ハンドル レプリケーションの中断](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)を参照してください。
+    [TiCDC によるレプリケーションの中断の処理](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)を参照してください。
 
 ## 警告アラート {#warning-alerts}
 
@@ -95,11 +109,11 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   説明：
 
-    レプリケーション タスクが 1 分以上進んでいません。
+    レプリケーション タスクが 1 分以上進行していません。
 
 -   解決：
 
-    [TiCDC ハンドル レプリケーションの中断](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)を参照してください。
+    [TiCDC によるレプリケーションの中断の処理](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)を参照してください。
 
 ### <code>ticdc_puller_entry_sorter_sort_bucket</code> {#code-ticdc-puller-entry-sorter-sort-bucket-code}
 
@@ -133,7 +147,7 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   アラート ルール:
 
-    `changes(tikv_cdc_min_resolved_ts[1m]) < 1 and ON (instance) tikv_cdc_region_resolve_status{status="resolved"} > 0`
+    `changes(tikv_cdc_min_resolved_ts[1m]) < 1 and ON (instance) tikv_cdc_region_resolve_status{status="resolved"} > 0 and ON (instance) tikv_cdc_captured_region_total > 0`
 
 -   説明：
 

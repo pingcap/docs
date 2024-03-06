@@ -143,7 +143,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
 1.  ノード情報を`scale-out.yml`ファイルに追加します。
 
-    TiFlashノード情報を追加する`scale-out.yml`ファイルを作成します。
+    TiFlashノード情報を追加するファイル`scale-out.yml`を作成します。
 
     ```ini
     tiflash_servers:
@@ -176,7 +176,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 | :------- | :---------------------- |
 | 10.0.1.3 | TiDB + TiFlash          |
 | 10.0.1.4 | TiDB + PD + **TiFlash** |
-| 10.0.1.5 | TiDB+ TiKV+ モニター        |
+| 10.0.1.5 | TiDB+ TiKV + モニター       |
 | 10.0.1.1 | TiKV                    |
 | 10.0.1.2 | TiKV                    |
 
@@ -244,7 +244,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
         Starting /root/.tiup/components/cluster/v1.12.3/cluster display <cluster-name>
         TiDB Cluster: <cluster-name>
-        TiDB Version: v7.5.0
+        TiDB Version: v7.5.1
         ID              Role         Host        Ports                            Status  Data Dir                Deploy Dir
         --              ----         ----        -----                            ------  --------                ----------
         10.0.1.3:8300   cdc          10.0.1.3    8300                             Up      data/cdc-8300           deploy/cdc-8300
@@ -352,7 +352,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
 2.  pd-ctl でTiFlashノードを削除します。
 
-    -   pd-ctl に`store delete <store_id>`入力します ( `<store_id>`は、前の手順で見つかったTiFlashノードのストア ID です)。
+    -   pd-ctl に`store delete <store_id>`入力します ( `<store_id>`は、前の手順で見つかったTiFlashノードのストア ID です。
 
     -   TiUPデプロイメントを使用する場合は、 `pd-ctl` `tiup ctl:v<CLUSTER_VERSION> pd`に置き換えます。
 

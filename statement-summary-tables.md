@@ -23,7 +23,7 @@ SQL パフォーマンスの問題をより適切に処理するために、MySQ
 
 ## <code>statements_summary</code> {#code-statements-summary-code}
 
-`statements_summary`は`information_schema`のシステムテーブルです。 `statements_summary` SQL ダイジェストとプラン ダイジェストごとに SQL ステートメントをグループ化し、各 SQL カテゴリの統計を提供します。
+`statements_summary`は`information_schema`のシステムテーブルです。 `statements_summary`リソース グループ、SQL ダイジェスト、およびプラン ダイジェストごとに SQL ステートメントをグループ化し、各 SQL カテゴリの統計を提供します。
 
 ここでの「SQL ダイジェスト」は、スロー ログで使用されるものと同じものを意味し、正規化された SQL ステートメントによって計算される一意の識別子です。正規化プロセスでは、定数の空白文字は無視され、大文字と小文字は区別されません。したがって、一貫した構文を持つステートメントは同じダイジェストを持ちます。例えば：
 
@@ -79,7 +79,8 @@ select * from employee where id in (...) and salary between ? and ?;
 
 > **注記：**
 >
-> TiDB では、ステートメント概要テーブルのフィールドの時間単位はナノ秒 (ns) ですが、MySQL では時間単位はピコ秒 (ps) です。
+> -   TiDB では、ステートメント概要テーブルのフィールドの時間単位はナノ秒 (ns) ですが、MySQL では時間単位はピコ秒 (ps) です。
+> -   v7.5.1 以降、 [リソース制御](/tidb-resource-control.md)が有効になっているクラスターの場合、 `statements_summary`リソース グループごとに集計されます。たとえば、異なるリソース グループで実行された同じステートメントは、異なるレコードとして収集されます。
 
 ## <code>statements_summary_history</code> {#code-statements-summary-history-code}
 
@@ -306,7 +307,7 @@ SELECT sum_latency, avg_latency, exec_count, query_sample_text
 -   `DIGEST` : このカテゴリの SQL ステートメントのダイジェスト。
 -   `DIGEST_TEXT` : 正規化された SQL ステートメント。
 -   `QUERY_SAMPLE_TEXT` : SQL カテゴリの元の SQL ステートメント。元のステートメントは 1 つだけ採用されます。
--   `TABLE_NAMES` : SQL ステートメントに関係するすべてのテーブル。複数のテーブルがある場合は、それぞれをカンマで区切ります。
+-   `TABLE_NAMES` : SQL ステートメントに含まれるすべてのテーブル。複数のテーブルがある場合は、それぞれをカンマで区切ります。
 -   `INDEX_NAMES` : SQL ステートメントで使用されるすべての SQL インデックス。複数のインデックスがある場合は、それぞれをカンマで区切ります。
 -   `SAMPLE_USER` : このカテゴリの SQL ステートメントを実行するユーザー。 1 人のユーザーのみが取得されます。
 -   `PLAN_DIGEST` : 実行計画のダイジェスト。
@@ -358,7 +359,7 @@ TiKVコプロセッサータスクに関連するフィールド:
 -   `AVG_PROCESSED_KEYS` :コプロセッサーが処理したキーの平均数。 `avg_total_keys`と比較して、 `avg_processed_keys`は古いバージョンの MVCC が含まれていません。 `avg_total_keys`と`avg_processed_keys`の大きな違いは、古いバージョンが多数存在することを示しています。
 -   `MAX_PROCESSED_KEYS` :コプロセッサーが処理したキーの最大数。
 
-トランザクション関連フィールド:
+トランザクション関連のフィールド:
 
 -   `AVG_PREWRITE_TIME` : プリライトフェーズの平均時間。
 -   `MAX_PREWRITE_TIME` : プリライトフェーズの最長時間。
@@ -378,12 +379,22 @@ TiKVコプロセッサータスクに関連するフィールド:
 -   `MAX_WRITE_SIZE` : 書き込まれるデータの最大量 (バイト単位)。
 -   `AVG_PREWRITE_REGIONS` : 事前書き込みフェーズに含まれるリージョンの平均数。
 -   `MAX_PREWRITE_REGIONS` : 事前書き込みフェーズ中の領域の最大数。
--   `AVG_TXN_RETRY` : トランザクションの平均再試行回数。
+-   `AVG_TXN_RETRY` : トランザクションの平均再試行数。
 -   `MAX_TXN_RETRY` : トランザクションの最大再試行回数。
 -   `SUM_BACKOFF_TIMES` : このカテゴリの SQL ステートメントで再試行が必要なエラーが発生した場合の再試行の合計。
 -   `BACKOFF_TYPES` : 再試行が必要なすべてのタイプのエラーと、タイプごとの再試行回数。フィールドの形式は`type:number`です。複数のエラー タイプがある場合は、 `txnLock:2,pdRPC:1`のように、それぞれをカンマで区切ります。
 -   `AVG_AFFECTED_ROWS` : 影響を受ける行の平均数。
 -   `PREV_SAMPLE_TEXT` : 現在の SQL ステートメントが`COMMIT`の場合、 `PREV_SAMPLE_TEXT`は`COMMIT`の前のステートメントです。この場合、SQL ステートメントはダイジェストと`prev_sample_text`によってグループ化されます。これは、 `prev_sample_text`が異なる`COMMIT`のステートメントが異なる行にグループ化されることを意味します。現在の SQL ステートメントが`COMMIT`はない場合、 `PREV_SAMPLE_TEXT`フィールドは空の文字列になります。
+
+リソース制御に関連するフィールド:
+
+-   `AVG_REQUEST_UNIT_WRITE` : SQL ステートメントによって消費される書き込み RU の平均数。
+-   `MAX_REQUEST_UNIT_WRITE` : SQL ステートメントによって消費される書き込み RU の最大数。
+-   `AVG_REQUEST_UNIT_READ` : SQL ステートメントによって消費される読み取り RU の平均数。
+-   `MAX_REQUEST_UNIT_READ` : SQL ステートメントによって消費される読み取り RU の最大数。
+-   `AVG_QUEUED_RC_TIME` : SQL ステートメントを実行する際の、使用可能な RU の平均待ち時間。
+-   `MAX_QUEUED_RC_TIME` : SQL ステートメントを実行するときに使用可能な RU の最大待機時間。
+-   `RESOURCE_GROUP` : SQL ステートメントにバインドされたリソース グループ。
 
 ### <code>statements_summary_evicted</code>フィールドの説明 {#code-statements-summary-evicted-code-fields-description}
 

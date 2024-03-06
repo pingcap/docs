@@ -100,7 +100,7 @@ npm install prisma typescript ts-node @types/node --save-dev
 6.  `.env`ファイルを編集し、次のように環境変数`DATABASE_URL`を設定し、接続ダイアログ内の対応するプレースホルダー`{}`を接続文字列に置き換えます。
 
     ```dotenv
-    DATABASE_URL={connection_string}
+    DATABASE_URL='{connection_string}'
     ```
 
     > **注記**
@@ -125,7 +125,7 @@ npm install prisma typescript ts-node @types/node --save-dev
 
 2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3.  **「どこからでもアクセスを許可」**をクリックし、 **「TiDB クラスター CA のダウンロード」**をクリックして CA 証明書をダウンロードします。
+3.  **[どこからでもアクセスを許可]**をクリックし、 **[TiDB クラスター CA のダウンロード]**をクリックして CA 証明書をダウンロードします。
 
     接続文字列の取得方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
 
@@ -138,7 +138,7 @@ npm install prisma typescript ts-node @types/node --save-dev
 5.  `.env`ファイルを編集し、次のように環境変数`DATABASE_URL`を設定し、接続ダイアログ上の対応するプレースホルダー`{}`接続パラメーターに置き換えます。
 
     ```dotenv
-    DATABASE_URL=mysql://{user}:{password}@{host}:4000/test?sslaccept=strict&sslcert={downloaded_ssl_ca_path}
+    DATABASE_URL='mysql://{user}:{password}@{host}:4000/test?sslaccept=strict&sslcert={downloaded_ssl_ca_path}'
     ```
 
     > **注記**
@@ -168,7 +168,7 @@ npm install prisma typescript ts-node @types/node --save-dev
 2.  `.env`ファイルを編集し、次のように環境変数`DATABASE_URL`を設定し、対応するプレースホルダー`{}` TiDB クラスターの接続パラメーターに置き換えます。
 
     ```dotenv
-    DATABASE_URL=mysql://{user}:{password}@{host}:4000/test
+    DATABASE_URL='mysql://{user}:{password}@{host}:4000/test'
     ```
 
     TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
@@ -355,14 +355,14 @@ await prisma.player.delete({
 
     > **警告：**
     >
-    > **外部キーは、小規模および中規模のデータ シナリオに適しています。**大量のデータで外部キーを使用すると、パフォーマンスに重大な問題が発生し、システムに予期せぬ影響を与える可能性があります。外部キーを使用する予定がある場合は、最初に徹底的な検証を実行し、慎重に使用してください。
+    > **外部キーは、小規模および中規模のデータ シナリオに適しています。**大量のデータで外部キーを使用すると、重大なパフォーマンスの問題が発生し、システムに予期しない影響を与える可能性があります。外部キーを使用する予定がある場合は、最初に徹底的な検証を実行し、慎重に使用してください。
 
 -   [プリズマ関係モード](https://www.prisma.io/docs/concepts/components/prisma-schema/relations/relation-mode)は、Prisma クライアント側での参照整合性のエミュレーションです。ただし、参照整合性を維持するために追加のデータベース クエリが必要になるため、パフォーマンスに影響があることに注意してください。
 
 ## 次のステップ {#next-steps}
 
 -   ORM フレームワーク Prisma ドライバーの詳しい使用方法を[Prisma のドキュメント](https://www.prisma.io/docs)から学びます。
--   [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) で TiDB [取引](/develop/dev-guide-transaction-overview.md) [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md) [データを更新する](/develop/dev-guide-update-data.md)ベスト プラクティス[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)学習[データの削除](/develop/dev-guide-delete-data.md)ます。
+-   [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) で TiDB [トランザクション](/develop/dev-guide-transaction-overview.md) [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md) [データを更新する](/develop/dev-guide-update-data.md)ベスト プラクティス[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)学習[データの削除](/develop/dev-guide-delete-data.md)ます。
 -   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## 助けが必要？ {#need-help}

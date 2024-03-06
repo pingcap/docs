@@ -13,7 +13,7 @@ summary: Learn to deploy TiDB Binlog with a simple TiDB cluster.
 >
 > このチュートリアルの TiDB をデプロイする手順は、本番または開発設定で TiDB をデプロイするために使用し**ない**でください。
 
-このチュートリアルは、x86-64 上の最新の Linux ディストリビューションを使用していることを前提としています。このチュートリアルでは例として、VMware で実行されている最小限の CentOS 7 インストールを使用します。既存の環境の癖の影響を受けないよう、クリーン インストールから始めることをお勧めします。ローカル仮想化を使用したくない場合は、クラウド サービスを使用して CentOS 7 VM を簡単に起動できます。
+このチュートリアルでは、x86-64 上の最新の Linux ディストリビューションを使用していることを前提としています。このチュートリアルでは、例として、VMware で実行されている最小限の CentOS 7 インストールが使用されています。既存の環境の癖の影響を受けないよう、クリーン インストールから始めることをお勧めします。ローカル仮想化を使用したくない場合は、クラウド サービスを使用して CentOS 7 VM を簡単に起動できます。
 
 ## TiDBBinlogの概要 {#tidb-binlog-overview}
 
@@ -42,7 +42,7 @@ sudo yum install -y mariadb-server
 ```
 
 ```bash
-curl -L https://download.pingcap.org/tidb-community-server-v7.5.0-linux-amd64.tar.gz | tar xzf -
+curl -L https://download.pingcap.org/tidb-community-server-v7.5.1-linux-amd64.tar.gz | tar xzf -
 cd tidb-latest-linux-amd64
 ```
 

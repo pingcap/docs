@@ -1,15 +1,18 @@
 ---
-title: FLASHBACK CLUSTER TO TIMESTAMP
-summary: Learn the usage of FLASHBACK CLUSTER TO TIMESTAMP in TiDB databases.
+title: FLASHBACK CLUSTER
+summary: Learn the usage of FLASHBACK CLUSTER in TiDB databases.
+aliases: ['/tidb/v7.5/sql-statement-flashback-to-timestamp','/tidb/stable/sql-statement-flashback-to-timestamp','/tidbcloud/sql-statement-flashback-to-timestamp']
 ---
 
-# フラッシュバッククラスターからタイムスタンプへ {#flashback-cluster-to-timestamp}
+# フラッシュバッククラスター {#flashback-cluster}
 
-TiDB v6.4.0 では`FLASHBACK CLUSTER TO TIMESTAMP`構文が導入されています。これを使用して、クラスターを特定の時点に復元できます。
+TiDB v6.4.0 では`FLASHBACK CLUSTER TO TIMESTAMP`構文が導入されています。これを使用して、クラスターを特定の時点に復元できます。タイムスタンプを指定する場合、日時値を設定するか、時刻関数を使用できます。 datetime の形式は「2016-10-08 16:45:26.999」のようなもので、最小時間単位はミリ秒です。ただし、ほとんどの場合、時間単位として秒を使用してタイムスタンプを指定するだけで十分です (たとえば、「2016-10-08 16:45:26」)。
+
+v6.5.6、v7.1.3、および v7.5.1 以降、TiDB では`FLASHBACK CLUSTER TO TSO`構文が導入されています。この構文では[TSO](/tso.md)使用してより正確な回復時点を指定できるため、データ回復の柔軟性が向上します。
 
 > **警告：**
 >
-> `FLASHBACK CLUSTER TO TIMESTAMP`構文は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターには適用されません。予期しない結果を避けるため、TiDB サーバーレス クラスターではこのステートメントを実行しないでください。
+> `FLASHBACK CLUSTER TO [TIMESTAMP|TSO]`構文は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターには適用されません。予期しない結果を避けるため、TiDB サーバーレス クラスターではこのステートメントを実行しないでください。
 
 <CustomContent platform="tidb">
 
@@ -23,19 +26,21 @@ TiDB v6.4.0 では`FLASHBACK CLUSTER TO TIMESTAMP`構文が導入されていま
 
 > **注記：**
 >
-> `FLASHBACK CLUSTER TO TIMESTAMP`の動作原理は、特定の時点の古いデータを最新のタイムスタンプで書き込み、現在のデータは削除しません。したがって、この機能を使用する前に、古いデータと現在のデータを保存するのに十分なstorage領域があることを確認する必要があります。
+> `FLASHBACK CLUSTER TO [TIMESTAMP|TSO]`の動作原理は、特定の時点の古いデータを最新のタイムスタンプで書き込み、現在のデータは削除しません。したがって、この機能を使用する前に、古いデータと現在のデータを保存するのに十分なstorage領域があることを確認する必要があります。
 
 ## 構文 {#syntax}
 
 ```sql
 FLASHBACK CLUSTER TO TIMESTAMP '2022-09-21 16:02:50';
+FLASHBACK CLUSTER TO TSO 445494839813079041;
 ```
 
 ### あらすじ {#synopsis}
 
 ```ebnf+diagram
-FlashbackToTimestampStmt ::=
-    "FLASHBACK" "CLUSTER" "TO" "TIMESTAMP" stringLit
+FlashbackToTimestampStmt
+         ::= 'FLASHBACK' 'CLUSTER' 'TO' 'TIMESTAMP' stringLit
+           | 'FLASHBACK' 'CLUSTER' 'TO' 'TSO' LengthNum
 ```
 
 ## ノート {#notes}
@@ -51,8 +56,8 @@ FlashbackToTimestampStmt ::=
 -   `SUPER`権限を持つユーザーのみが`FLASHBACK CLUSTER` SQL ステートメントを実行できます。
 -   `FLASHBACK CLUSTER` `ALTER TABLE ATTRIBUTE` 、 `ALTER TABLE REPLICA` 、 `CREATE PLACEMENT POLICY`などの PD 関連情報を変更する DDL ステートメントのロールバックをサポートしません。
 -   `FLASHBACK`ステートメントで指定された時点で、完全に実行されていない DDL ステートメントがあってはなりません。そのような DDL が存在する場合、TiDB はそれを拒否します。
--   `FLASHBACK CLUSTER TO TIMESTAMP`を実行する前に、TiDB は関連するすべての接続を切断し、ステートメント`FLASHBACK CLUSTER`完了するまでこれらのテーブルに対する読み取りおよび書き込み操作を禁止します。
--   `FLASHBACK CLUSTER TO TIMESTAMP`ステートメントは実行後にキャンセルできません。 TiDB は成功するまで再試行を続けます。
+-   `FLASHBACK CLUSTER`を実行する前に、TiDB は関連するすべての接続を切断し、ステートメント`FLASHBACK CLUSTER`完了するまでこれらのテーブルに対する読み取りおよび書き込み操作を禁止します。
+-   `FLASHBACK CLUSTER`ステートメントは実行後にキャンセルできません。 TiDB は成功するまで再試行を続けます。
 -   `FLASHBACK CLUSTER`の実行中にデータをバックアップする必要がある場合は、 [復元する](/br/br-snapshot-guide.md)のみを使用し、 `FLASHBACK CLUSTER`の開始時刻よりも前の`BackupTS`を指定できます。さらに、 `FLASHBACK CLUSTER`の実行中に[ログのバックアップ](/br/br-pitr-guide.md)を有効にすると失敗します。したがって、 `FLASHBACK CLUSTER`が完了した後でログのバックアップを有効にするようにしてください。
 -   `FLASHBACK CLUSTER`ステートメントによってメタデータ (テーブル構造、データベース構造) のロールバックが発生した場合、関連する変更は TiCDC によってレプリケートされませ**ん**。したがって、タスクを手動で一時停止し、 `FLASHBACK CLUSTER`の完了を待ち、アップストリームとダウンストリームのスキーマ定義を手動でレプリケートして、一貫性があることを確認する必要があります。その後、TiCDC 変更フィードを再作成する必要があります。
 
@@ -63,15 +68,15 @@ FlashbackToTimestampStmt ::=
 -   `SUPER`権限を持つユーザーのみが`FLASHBACK CLUSTER` SQL ステートメントを実行できます。
 -   `FLASHBACK CLUSTER` `ALTER TABLE ATTRIBUTE` 、 `ALTER TABLE REPLICA` 、 `CREATE PLACEMENT POLICY`などの PD 関連情報を変更する DDL ステートメントのロールバックをサポートしません。
 -   `FLASHBACK`ステートメントで指定された時点で、完全に実行されていない DDL ステートメントがあってはなりません。そのような DDL が存在する場合、TiDB はそれを拒否します。
--   `FLASHBACK CLUSTER TO TIMESTAMP`を実行する前に、TiDB は関連するすべての接続を切断し、ステートメント`FLASHBACK CLUSTER`完了するまでこれらのテーブルに対する読み取りおよび書き込み操作を禁止します。
--   `FLASHBACK CLUSTER TO TIMESTAMP`ステートメントは実行後にキャンセルできません。 TiDB は成功するまで再試行を続けます。
+-   `FLASHBACK CLUSTER`を実行する前に、TiDB は関連するすべての接続を切断し、ステートメント`FLASHBACK CLUSTER`完了するまでこれらのテーブルに対する読み取りおよび書き込み操作を禁止します。
+-   `FLASHBACK CLUSTER`ステートメントは実行後にキャンセルできません。 TiDB は成功するまで再試行を続けます。
 -   `FLASHBACK CLUSTER`ステートメントによってメタデータ (テーブル構造、データベース構造) のロールバックが発生した場合、関連する変更は TiCDC によってレプリケートされませ**ん**。したがって、タスクを手動で一時停止し、 `FLASHBACK CLUSTER`の完了を待ち、アップストリームとダウンストリームのスキーマ定義を手動でレプリケートして、一貫性があることを確認する必要があります。その後、TiCDC 変更フィードを再作成する必要があります。
 
 </CustomContent>
 
 ## 例 {#example}
 
-次の例は、新しく挿入されたデータを復元する方法を示しています。
+次の例は、クラスターを特定のタイムスタンプにフラッシュバックして、新しく挿入されたデータを復元する方法を示しています。
 
 ```sql
 mysql> CREATE TABLE t(a INT);
@@ -104,6 +109,52 @@ Query OK, 0 rows affected (0.20 sec)
 
 mysql> SELECT * FROM t;
 Empty set (0.00 sec)
+```
+
+次の例は、クラスターを特定の TSO にフラッシュバックして、誤って削除されたデータを正確に復元する方法を示しています。
+
+```sql
+mysql> INSERT INTO t VALUES (1);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> SELECT * FROM t;
++------+
+| a    |
++------+
+|    1 |
++------+
+1 row in set (0.01 sec)
+
+
+mysql> BEGIN;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT @@tidb_current_ts;  -- Get the current TSO
++--------------------+
+| @@tidb_current_ts  |
++--------------------+
+| 446113975683252225 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.00 sec)
+
+
+mysql> DELETE FROM t;
+Query OK, 1 rows affected (0.00 sec)
+
+
+mysql> FLASHBACK CLUSTER TO TSO 446113975683252225;
+Query OK, 0 rows affected (0.20 sec)
+
+mysql> SELECT * FROM t;
++------+
+| a    |
++------+
+|    1 |
++------+
+1 row in set (0.01 sec)
 ```
 
 `FLASHBACK`ステートメントで指定された時間に完全に実行されていない DDL ステートメントがある場合、 `FLASHBACK`ステートメントは失敗します。

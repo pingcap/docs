@@ -9,7 +9,7 @@ summary: Learn about Frequently Asked Questions (FAQs) and the solutions of back
 
 ## 誤ってデータを削除または更新した後、すぐにデータを復元するにはどうすればよいですか? {#what-should-i-do-to-quickly-recover-data-after-mistakenly-deleting-or-updating-data}
 
-TiDB v6.4.0 にはフラッシュバック機能が導入されています。この機能を使用すると、GC 時間内で指定した時点までデータを迅速にリカバリできます。したがって、誤操作が発生した場合、この機能を使用してデータを回復できます。詳細は[フラッシュバッククラスタ](/sql-statements/sql-statement-flashback-to-timestamp.md)および[フラッシュバックデータベース](/sql-statements/sql-statement-flashback-database.md)を参照してください。
+TiDB v6.4.0 にはフラッシュバック機能が導入されています。この機能を使用すると、GC 時間内で指定した時点までデータを迅速にリカバリできます。したがって、誤操作が発生した場合、この機能を使用してデータを回復できます。詳細は[フラッシュバッククラスタ](/sql-statements/sql-statement-flashback-cluster.md)および[フラッシュバックデータベース](/sql-statements/sql-statement-flashback-database.md)を参照してください。
 
 ## TiDB v5.4.0 以降のバージョンでは、負荷の高いクラスターでバックアップ タスクが実行されると、バックアップ タスクの速度が遅くなるのはなぜですか? {#in-tidb-v5-4-0-and-later-versions-when-backup-tasks-are-performed-on-the-cluster-under-a-heavy-workload-why-does-the-speed-of-backup-tasks-become-slow}
 
@@ -28,7 +28,7 @@ TiKV は自動調整[動的構成](/tikv-control.md#modify-the-tikv-configuratio
 
 ## PITRの問題 {#pitr-issues}
 
-### <a href="/br/br-pitr-guide.md">PITR</a>と<a href="/sql-statements/sql-statement-flashback-to-timestamp.md">クラスターフラッシュバック</a>の違いは何ですか? {#what-is-the-difference-between-a-href-br-br-pitr-guide-md-pitr-a-and-a-href-sql-statements-sql-statement-flashback-to-timestamp-md-cluster-flashback-a}
+### <a href="/br/br-pitr-guide.md">PITR</a>と<a href="/sql-statements/sql-statement-flashback-cluster.md">クラスターフラッシュバック</a>の違いは何ですか? {#what-is-the-difference-between-a-href-br-br-pitr-guide-md-pitr-a-and-a-href-sql-statements-sql-statement-flashback-cluster-md-cluster-flashback-a}
 
 ユースケースの観点から見ると、PITR は通常、クラスターが完全にサービス停止になった場合、またはデータが破損して他のソリューションを使用して回復できない場合に、クラスターのデータを指定された時点に復元するために使用されます。 PITR を使用するには、データ回復用の新しいクラスターが必要です。クラスターのフラッシュバック機能は、ユーザーの誤操作やその他の要因によって引き起こされるデータ エラーのシナリオ向けに特別に設計されており、データ エラーが発生する前の最新のタイムスタンプにクラスターのデータをインプレースで復元できます。
 
@@ -241,7 +241,7 @@ TiKV がバックアップ ディレクトリにアクセスできるかどう�
 
 BR v5.1.0 以降、完全バックアップを実行すると、 BR は**`mysql`スキーマ内のテーブル**をバックアップします。 BR v6.2.0 より前のデフォルト設定では、 BR はユーザー データのみを復元し、 **`mysql`スキーマ**内のテーブルは復元しません。
 
-ユーザーが`mysql`スキーマに作成したテーブル (システム テーブルではない) を復元するには、 [テーブルフィルター](/table-filter.md#syntax)を使用してテーブルを明示的に含めます。次の例は、 BR が通常の復元を実行するときに`mysql.usertable`テーブルを復元する方法を示しています。
+ユーザーが`mysql`スキーマ (システム テーブルではない) で作成したテーブルを復元するには、 [テーブルフィルター](/table-filter.md#syntax)使用してテーブルを明示的に含めます。次の例は、 BR が通常の復元を実行するときに`mysql.usertable`テーブルを復元する方法を示しています。
 
 ```shell
 br restore full -f '*.*' -f '!mysql.*' -f 'mysql.usertable' -s $external_storage_url --with-sys-table
@@ -271,7 +271,7 @@ br restore full -f 'mysql.usertable' -s $external_storage_url --with-sys-table
 
 ## バックアップと復元についてその他知っておきたいこと {#other-things-you-may-want-to-know-about-backup-and-restore}
 
-### バックアップデータのサイズはどれくらいですか?バックアップのレプリカはありますか? {#what-is-the-size-of-the-backup-data-are-there-replicas-of-the-backup}
+### バックアップデータのサイズはどのくらいですか?バックアップのレプリカはありますか? {#what-is-the-size-of-the-backup-data-are-there-replicas-of-the-backup}
 
 データのバックアップ中に、各リージョンのLeaderノード上にバックアップ ファイルが生成されます。バックアップのサイズはデータ サイズと等しく、冗長レプリカはありません。したがって、合計データ サイズは、TiKV データの合計数をレプリカの数で割ったものとほぼなります。
 
@@ -294,7 +294,7 @@ v4.0.9 では、 BR はデフォルトで統計をバックアップするため
 以下の理由により、単一クラスターのデータを復元するために複数の復元タスクを同時に開始すること**は強く推奨されません**。
 
 -   BR がデータを復元すると、PD の一部のグローバル構成が変更されます。したがって、データの復元のために複数の復元タスクを同時に開始すると、これらの構成が誤って上書きされ、クラスターの状態が異常になる可能性があります。
--   BR はデータを復元するために大量のクラスター リソースを消費するため、実際には、復元タスクを並行して実行しても復元速度は限られた範囲でしか向上しません。
+-   BR はデータの復元に大量のクラスター リソースを消費するため、実際には、復元タスクを並行して実行しても、復元速度は限られた範囲でしか向上しません。
 -   データの復元のために複数の復元タスクを並行して実行するテストは行われていないため、成功するかどうかは保証されません。
 
 ### BR はテーブルの<code>SHARD_ROW_ID_BITS</code>および<code>PRE_SPLIT_REGIONS</code>情報をバックアップしますか?復元されたテーブルには複数のリージョンがありますか? {#does-br-back-up-the-code-shard-row-id-bits-code-and-code-pre-split-regions-code-information-of-a-table-does-the-restored-table-have-multiple-regions}

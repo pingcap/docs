@@ -5,7 +5,7 @@ summary: Learn how to create TiFlash replicas.
 
 # TiFlashレプリカの作成 {#create-tiflash-replicas}
 
-このドキュメントでは、テーブルとデータベースのTiFlashレプリカを作成し、レプリカのスケジュール設定に使用可能なゾーンを設定する方法を紹介します。
+このドキュメントでは、テーブルとデータベースのTiFlashレプリカを作成し、レプリカのスケジュールに使用可能なゾーンを設定する方法を紹介します。
 
 ## テーブルのTiFlashレプリカを作成する {#create-tiflash-replicas-for-tables}
 
@@ -51,7 +51,7 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 
 ### レプリケーションの進行状況を確認する {#check-replication-progress}
 
-次のステートメントを使用して、特定のテーブルのTiFlashレプリカのステータスを確認できます。テーブルは`WHERE`句を使用して指定されます。 `WHERE`句を削除すると、すべてのテーブルのレプリカのステータスがチェックされます。
+次のステートメントを使用して、特定のテーブルのTiFlashレプリカのステータスを確認できます。テーブルは`WHERE`句を使用して指定されます。 `WHERE`句を削除すると、すべてのテーブルのレプリカ ステータスがチェックされます。
 
 ```sql
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>' and TABLE_NAME = '<table_name>';
@@ -143,10 +143,10 @@ TiFlashレプリカが追加される前に、各 TiKV インスタンスはフ�
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 add-peer
     ```
 
-    > 前述のコマンドでは、 `v<CLUSTER_VERSION>`実際のクラスターのバージョンに置き換える必要があります。たとえば、 `v7.5.0`と`<PD_ADDRESS>:2379`任意の PD ノードのアドレスに置き換えます。例えば：
+    > 前述のコマンドでは、 `v<CLUSTER_VERSION>`実際のクラスターのバージョンに置き換える必要があります。たとえば、 `v7.5.1`と`<PD_ADDRESS>:2379`任意の PD ノードのアドレスに置き換えます。例えば：
     >
     > ```shell
-    > tiup ctl:v7.5.0 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
+    > tiup ctl:v7.5.1 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
     > ```
 
     数分以内に、 TiFlashノードの CPU およびディスク IO リソースの使用量が大幅に増加することがわかり、 TiFlash はレプリカをより速く作成するはずです。同時に、TiKV ノードの CPU およびディスク IO リソースの使用量も増加します。

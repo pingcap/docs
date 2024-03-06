@@ -23,7 +23,7 @@ cdc cli changefeed create \
 
 Create changefeed successfully!
 ID: simple-replication-task
-Info: {"upstream_id":7277814241002263370,"namespace":"default","id":"simple-replication-task","sink_uri":"pulsar://127.0.0.1:6650/consumer-test?protocol=canal-json","create_time":"2023-11-28T14:42:32.000904+08:00","start_ts":444203257406423044,"config":{"memory_quota":1073741824,"case_sensitive":false,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":false,"bdr_mode":false,"sync_point_interval":600000000000,"sync_point_retention":86400000000000,"filter":{"rules":["pulsar_test.*"]},"mounter":{"worker_num":16},"sink":{"protocol":"canal-json","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false,"binary_encoding_method":"base64"},"dispatchers":[{"matcher":["pulsar_test.*"],"partition":"","topic":"test_{schema}_{table}"}],"encoder_concurrency":16,"terminator":"\r\n","date_separator":"day","enable_partition_separator":true,"enable_kafka_sink_v2":false,"only_output_updated_columns":false,"delete_only_output_handle_key_columns":false,"pulsar_config":{"connection-timeout":30,"operation-timeout":30,"batching-max-messages":1000,"batching-max-publish-delay":10,"send-timeout":30},"advance_timeout":150},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"use_file_backend":false},"scheduler":{"enable_table_across_nodes":false,"region_threshold":100000,"write_key_threshold":0},"integrity":{"integrity_check_level":"none","corruption_handle_level":"warn"}},"state":"normal","creator_version":"v7.5.0","resolved_ts":444203257406423044,"checkpoint_ts":444203257406423044,"checkpoint_time":"2023-09-12 14:42:31.410"}
+Info: {"upstream_id":7277814241002263370,"namespace":"default","id":"simple-replication-task","sink_uri":"pulsar://127.0.0.1:6650/consumer-test?protocol=canal-json","create_time":"2024-02-29T14:42:32.000904+08:00","start_ts":444203257406423044,"config":{"memory_quota":1073741824,"case_sensitive":false,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":false,"bdr_mode":false,"sync_point_interval":600000000000,"sync_point_retention":86400000000000,"filter":{"rules":["pulsar_test.*"]},"mounter":{"worker_num":16},"sink":{"protocol":"canal-json","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false,"binary_encoding_method":"base64"},"dispatchers":[{"matcher":["pulsar_test.*"],"partition":"","topic":"test_{schema}_{table}"}],"encoder_concurrency":16,"terminator":"\r\n","date_separator":"day","enable_partition_separator":true,"enable_kafka_sink_v2":false,"only_output_updated_columns":false,"delete_only_output_handle_key_columns":false,"pulsar_config":{"connection-timeout":30,"operation-timeout":30,"batching-max-messages":1000,"batching-max-publish-delay":10,"send-timeout":30},"advance_timeout":150},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"use_file_backend":false},"scheduler":{"enable_table_across_nodes":false,"region_threshold":100000,"write_key_threshold":0},"integrity":{"integrity_check_level":"none","corruption_handle_level":"warn"}},"state":"normal","creator_version":"v7.5.1","resolved_ts":444203257406423044,"checkpoint_ts":444203257406423044,"checkpoint_time":"2024-02-29 14:42:31.410"}
 ```
 
 各パラメータの意味は次のとおりです。
@@ -99,12 +99,16 @@ token-from-file="/data/pulsar/token-file.txt"
 basic-user-name="root"
 # Pulsar uses the basic account and password to authenticate the identity. Specify the password.
 basic-password="password"
-# The certificate path for Pulsar TLS encrypted authentication.
+# The certificate path on the client, which is required when Pulsar enables the mTLS authentication.
 auth-tls-certificate-path="/data/pulsar/certificate"
-# The private key path for Pulsar TLS encrypted authentication.
+# The private key path on the client, which is required when Pulsar enables the mTLS authentication.
 auth-tls-private-key-path="/data/pulsar/certificate.key"
-# Path to trusted certificate file of the Pulsar TLS encrypted authentication.
+# The path to the trusted certificate file of the Pulsar TLS authentication, which is required when Pulsar enables the mTLS authentication or TLS encrypted transmission.
 tls-trust-certs-file-path="/data/pulsar/tls-trust-certs-file"
+# The path to the encrypted private key on the client, which is required when Pulsar enables TLS encrypted transmission.
+tls-key-file-path="/data/pulsar/tls-key-file"
+# The path to the encrypted certificate file on the client, which is required when Pulsar enables TLS encrypted transmission.
+tls-certificate-file="/data/pulsar/tls-certificate-file"
 # Pulsar oauth2 issuer-url. For more information, see the Pulsar website: https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication
 oauth2.oauth2-issuer-url="https://xxxx.auth0.com"
 # Pulsar oauth2 audience
@@ -135,6 +139,32 @@ send-timeout=30
 
 -   変更フィードを作成するときは、 `protocol`パラメーターを指定する必要があります。現在、Pulsar へのデータの複製では`canal-json`プロトコルのみがサポートされています。
 -   `pulsar-producer-cache-size`パラメータは、Pulsar クライアントにキャッシュされたプロデューサーの数を示します。 Pulsar の各プロデューサーは 1 つのトピックにのみ対応できるため、TiCDC は LRU 方式を採用してプロデューサーをキャッシュし、デフォルトの制限は 10240 です。複製する必要があるトピックの数がデフォルト値より大きい場合は、その数を増やす必要があります。 。
+
+### TLS暗号化通信 {#tls-encrypted-transmission}
+
+v7.5.1 以降の v7.5 パッチ バージョンでは、TiCDC は Pulsar の TLS 暗号化送信をサポートします。構成例は以下のとおりです。
+
+シンク URI:
+
+```shell
+--sink-uri="pulsar+ssl://127.0.0.1:6651/persistent://public/default/yktest?protocol=canal-json"
+```
+
+コンフィグレーション：
+
+```toml
+[sink.pulsar-config]
+tls-trust-certs-file-path="/data/pulsar/tls-trust-certs-file"
+```
+
+Pulsarサーバーに対して`tlsRequireTrustedClientCertOnConnect=true`パラメータが設定されている場合は、changefeed 設定ファイルで`tls-key-file-path`および`tls-certificate-file`パラメータも設定する必要があります。例えば：
+
+```toml
+[sink.pulsar-config]
+tls-trust-certs-file-path="/data/pulsar/tls-trust-certs-file"
+tls-certificate-file="/data/pulsar/tls-certificate-file"
+tls-key-file-path="/data/pulsar/tls-key-file"
+```
 
 ### Pulsar の TiCDC 認証と認可 {#ticdc-authentication-and-authorization-for-pulsar}
 
@@ -171,32 +201,34 @@ send-timeout=30
     token-from-file="/data/pulsar/token-file.txt"
     ```
 
--   TLS暗号化認証
+-   mTLS認証
 
     シンク URI:
 
     ```shell
-    --sink-uri="pulsar+ssl://127.0.0.1:6650/persistent://public/default/yktest?protocol=canal-json"
+    --sink-uri="pulsar+ssl://127.0.0.1:6651/persistent://public/default/yktest?protocol=canal-json"
     ```
 
     構成パラメータ:
 
     ```toml
     [sink.pulsar-config]
-    # Certificate path of the Pulsar TLS encrypted authentication
+    # Certificate path of the Pulsar mTLS authentication
     auth-tls-certificate-path="/data/pulsar/certificate"
-    # Private key path of the Pulsar TLS encrypted authentication
+    # Private key path of the Pulsar mTLS authentication
     auth-tls-private-key-path="/data/pulsar/certificate.key"
-    # Path to trusted certificate file of the Pulsar TLS encrypted authentication
+    # Path to the trusted certificate file of the Pulsar mTLS authentication
     tls-trust-certs-file-path="/data/pulsar/tls-trust-certs-file"
     ```
 
 -   OAuth2認証
 
+    v7.5.1 以降の v7.5 パッチ バージョンの場合、TiCDC は Pulsar の OAuth2 認証をサポートします。
+
     シンク URI:
 
     ```shell
-    --sink-uri="pulsar+ssl://127.0.0.1:6650/persistent://public/default/yktest?protocol=canal-json"
+    --sink-uri="pulsar://127.0.0.1:6650/persistent://public/default/yktest?protocol=canal-json"
     ```
 
     構成パラメータ:
@@ -291,7 +323,7 @@ dispatchers = [
 
 派遣ルールは以下の通りです。
 
--   `default` : デフォルトでは、 `table`を指定した場合と同じスキーマ名とテーブル名によってイベントが送出されます。
+-   `default` : デフォルトでは、 `table`を指定した場合と同様に、スキーマ名とテーブル名によってイベントが送出されます。
 -   `ts` : 行変更の commitT を使用してハッシュ計算を実行し、イベントをディスパッチします。
 -   `index-value` : テーブルの主キーまたは一意のインデックスの値を使用して、ハッシュ計算を実行し、イベントをディスパッチします。
 -   `table` : スキーマ名とテーブル名を使用してハッシュ計算を実行し、イベントをディスパッチします。

@@ -128,12 +128,12 @@ summary: Learn about the feature overview of TiDB.
 | 同時実行の DDL ステートメント                                                                                                    |  Y  |  Y  |   Y   |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [`ADD INDEX`と`CREATE INDEX`の高速化](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)                        |  Y  |  Y  |   Y   |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [メタデータロック](/metadata-lock.md)                                                                                        |  Y  |  Y  |   Y   |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
-| [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md)                          |  Y  |  Y  |   Y   |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
+| [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)                                            |  Y  |  Y  |   Y   |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [一時停止](/sql-statements/sql-statement-admin-pause-ddl.md) / [再開する](/sql-statements/sql-statement-admin-resume-ddl.md) |  Y  |  N  |   N   |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 
-## 取引 {#transactions}
+## トランザクション {#transactions}
 
-| 取引                                                                    | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+| トランザクション                                                              | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 | --------------------------------------------------------------------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | [非同期コミット](/system-variables.md#tidb_enable_async_commit-new-in-v50)   |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  N  |
 | [1個](/system-variables.md#tidb_enable_1pc-new-in-v50)                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  N  |
@@ -190,7 +190,7 @@ summary: Learn about the feature overview of TiDB.
 | [証明書ベースの認証](/certificate-authentication.md)                                          |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [`caching_sha2_password`認証](/system-variables.md#default_authentication_plugin)      |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  N  |  N  |  N  |
 | [`tidb_sm3_password`認証](/system-variables.md#default_authentication_plugin)          |  Y  |  Y  |  Y  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
-| [`tidb_auth_token`認証](/system-variables.md#default_authentication_plugin)            |  Y  |  Y  |  Y  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
+| [`tidb_auth_token`認証](/security-compatibility-with-mysql.md#tidb_auth_token)         |  Y  |  Y  |  Y  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [`authentication_ldap_sasl`認証](/system-variables.md#default_authentication_plugin)   |  Y  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |     |
 | [`authentication_ldap_simple`認証](/system-variables.md#default_authentication_plugin) |  Y  |  Y  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [パスワード管理](/password-management.md)                                                   |  Y  |  Y  |  Y  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
@@ -217,7 +217,7 @@ summary: Learn about the feature overview of TiDB.
 
 ## 管理、可観測性、およびツール {#management-observability-and-tools}
 
-| 管理、可観測性、ツール                                                                                                    | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+| 管理、可観測性、およびツール                                                                                                 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 | -------------------------------------------------------------------------------------------------------------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | [TiDB ダッシュボード UI](/dashboard/dashboard-intro.md)                                                               |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [TiDB ダッシュボードの継続的プロファイリング](/dashboard/continuous-profiling.md)                                                 |  Y  |  Y  |  Y  |  Y  |  E  |  E  |  N  |  N  |  N  |  N  |
@@ -246,7 +246,7 @@ summary: Learn about the feature overview of TiDB.
 | [クラスター間の RawKV レプリケーション](/tikv-configuration-file.md#api-version-new-in-v610)                                  |  E  |  E  |  E  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [グリーンGC](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50)                                               |  E  |  E  |  E  |  E  |  E  |  E  |  E  |  E  |  E  |  N  |
 | [リソース制御](/tidb-resource-control.md)                                                                            |  Y  |  Y  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
-| [暴走クエリの管理](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries) |  E  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
+| [暴走クエリ管理](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries)  |  E  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [バックグラウンドタスク管理](/tidb-resource-control.md#manage-background-tasks)                                             |  E  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [TiFlash の分散型ストレージとコンピューティングアーキテクチャおよび S3 サポート](/tiflash/tiflash-disaggregated-and-s3.md)                      |  Y  |  E  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [Distributed eXecution Framework (DXF) タスク用の TiDB ノードの選択](/system-variables.md#tidb_service_scope-new-in-v740) |  Y  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |

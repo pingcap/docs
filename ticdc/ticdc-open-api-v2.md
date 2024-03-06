@@ -92,7 +92,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/status
 
 ```json
 {
-  "version": "v7.5.0",
+  "version": "v7.5.1",
   "git_hash": "10413bded1bdb2850aa6d7b94eb375102e9c44dc",
   "id": "d2912e63-3349-447c-90ba-72a4e04b5e9e",
   "pid": 1447,
@@ -259,34 +259,39 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `start_ts`       | `UINT64`タイプ。変更フィードの開始 TSO を指定します。 TiCDC クラスターは、この TSO からのデータのプルを開始します。デフォルト値は現在時刻です。 (オプション)                                 |
 | `target_ts`      | `UINT64`タイプ。変更フィードのターゲット TSO を指定します。 TiCDC クラスターは、この TSO に到達するとデータのプルを停止します。デフォルト値は空です。これは、TiCDC が自動的に停止しないことを意味します。 (オプション) |
 
-`changefeed_id` 、 `start_ts` 、 `target_ts` 、 `sink_uri`の意味と形式は、ドキュメント[`cdc cli`を使用してレプリケーション タスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)に記載されているものと同じです。これらのパラメータの詳細については、そのドキュメントを参照してください。 `sink_uri`で証明書のパスを指定する場合は、対応する証明書が対応する TiCDCサーバーにアップロードされていることを確認してください。
+`changefeed_id` 、 `start_ts` 、 `target_ts` 、 `sink_uri`の意味と形式は、ドキュメント[`cdc cli`を使用してレプリケーション タスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)に記載されているものと同じです。これらのパラメータの詳細については、そのドキュメントを参照してください。 `sink_uri`で証明書のパスを指定する場合は、対応する証明書を対応する TiCDCサーバーにアップロードしていることを確認してください。
 
 `replica_config`パラメータの説明は次のとおりです。
 
-| パラメータ名                    | 説明                                                                                                                                                                           |
-| :------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `bdr_mode`                | `BOOLEAN`タイプ。 [双方向レプリケーション](/ticdc/ticdc-bidirectional-replication.md)を有効にするかどうかを決定します。デフォルト値は`false`です。 (オプション)                                                             |
-| `case_sensitive`          | `BOOLEAN`タイプ。テーブル名をフィルタリングするときに大文字と小文字を区別するかどうかを決定します。 v7.5.0 以降、デフォルト値は`true`から`false`に変更されます。 (オプション)                                                                      |
-| `check_gc_safe_point`     | `BOOLEAN`タイプ。レプリケーション タスクの開始時刻が GC 時刻よりも前であることを確認するかどうかを決定します。デフォルト値は`true`です。 (オプション)                                                                                       |
-| `consistent`              | REDO ログの構成パラメータ。 (オプション)                                                                                                                                                     |
-| `enable_sync_point`       | `BOOLEAN`タイプ。 `sync point`を有効にするかどうかを決定します。 (オプション)                                                                                                                          |
-| `filter`                  | `filter`の構成パラメータ。 (オプション)                                                                                                                                                    |
-| `force_replicate`         | `BOOLEAN`タイプ。デフォルト値は`false`です。これを`true`に設定すると、レプリケーション タスクは一意のインデックスのないテーブルを強制的にレプリケートします。 (オプション)                                                                           |
-| `ignore_ineligible_table` | `BOOLEAN`タイプ。デフォルト値は`false`です。これを`true`に設定すると、レプリケーション タスクはレプリケートできないテーブルを無視します。 (オプション)                                                                                     |
-| `memory_quota`            | `UINT64`タイプ。レプリケーション タスクのメモリクォータ。 (オプション)                                                                                                                                    |
-| `mounter`                 | `mounter`の構成パラメータ。 (オプション)                                                                                                                                                   |
-| `sink`                    | `sink`の構成パラメータ。 (オプション)                                                                                                                                                      |
-| `sync_point_interval`     | `STRING`タイプ。戻り値は`UINT64`種類のナノ秒単位の時間であることに注意してください。 `sync point`機能が有効な場合、このパラメータは、Syncpoint がアップストリームとダウンストリームのスナップショットを調整する間隔を指定します。デフォルト値は`10m`で、最小値は`30s`です。 (オプション)       |
-| `sync_point_retention`    | `STRING`タイプ。戻り値は`UINT64`種類のナノ秒単位の時間であることに注意してください。 `sync point`機能が有効な場合、このパラメータは、同期ポイントによってダウンストリーム テーブルにデータが保持される期間を指定します。この期間を超えると、データはクリーンアップされます。デフォルト値は`24h`です。 (オプション) |
+| パラメータ名                    | 説明                                                                                                                                                                              |
+| :------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `bdr_mode`                | `BOOLEAN`タイプ。 [双方向レプリケーション](/ticdc/ticdc-bidirectional-replication.md)を有効にするかどうかを決定します。デフォルト値は`false`です。 (オプション)                                                                |
+| `case_sensitive`          | `BOOLEAN`タイプ。テーブル名をフィルタリングするときに大文字と小文字を区別するかどうかを決定します。 v7.5.0 以降、デフォルト値は`true`から`false`に変更されます。 (オプション)                                                                         |
+| `check_gc_safe_point`     | `BOOLEAN`タイプ。レプリケーション タスクの開始時刻が GC 時刻よりも前であることを確認するかどうかを決定します。デフォルト値は`true`です。 (オプション)                                                                                          |
+| `consistent`              | REDO ログの構成パラメータ。 (オプション)                                                                                                                                                        |
+| `enable_sync_point`       | `BOOLEAN`タイプ。 `sync point`を有効にするかどうかを決定します。 (オプション)                                                                                                                             |
+| `filter`                  | `filter`の構成パラメータ。 (オプション)                                                                                                                                                       |
+| `force_replicate`         | `BOOLEAN`タイプ。デフォルト値は`false`です。これを`true`に設定すると、レプリケーション タスクは一意のインデックスのないテーブルを強制的にレプリケートします。 (オプション)                                                                              |
+| `ignore_ineligible_table` | `BOOLEAN`タイプ。デフォルト値は`false`です。これを`true`に設定すると、レプリケーション タスクはレプリケートできないテーブルを無視します。 (オプション)                                                                                        |
+| `memory_quota`            | `UINT64`タイプ。レプリケーション タスクのメモリクォータ。 (オプション)                                                                                                                                       |
+| `mounter`                 | `mounter`の構成パラメータ。 (オプション)                                                                                                                                                      |
+| `sink`                    | `sink`の構成パラメータ。 (オプション)                                                                                                                                                         |
+| `sync_point_interval`     | `STRING`タイプ。戻り値は`UINT64`種類のナノ秒単位の時間であることに注意してください。 `sync point`機能が有効な場合、このパラメータは、Syncpoint がアップストリーム スナップショットとダウンストリーム スナップショットを調整する間隔を指定します。デフォルト値は`10m`で、最小値は`30s`です。 (オプション) |
+| `sync_point_retention`    | `STRING`タイプ。戻り値は`UINT64`種類のナノ秒単位の時間であることに注意してください。 `sync point`機能が有効な場合、このパラメータは、同期ポイントによってダウンストリーム テーブルにデータが保持される期間を指定します。この期間を超えると、データはクリーンアップされます。デフォルト値は`24h`です。 (オプション)    |
 
 `consistent`パラメータは次のように説明されます。
 
-| パラメータ名           | 説明                                           |
-| :--------------- | :------------------------------------------- |
-| `flush_interval` | `UINT64`タイプ。 REDO ログ ファイルをフラッシュする間隔。 (オプション) |
-| `level`          | `STRING`タイプ。レプリケートされたデータの整合性レベル。 (オプション)     |
-| `max_log_size`   | `UINT64`タイプ。 REDOログの最大値。 (オプション)             |
-| `storage`        | `STRING`タイプ。storageの宛先アドレス。 (オプション)          |
+| パラメータ名                | 説明                                                                                             |
+| :-------------------- | :--------------------------------------------------------------------------------------------- |
+| `flush_interval`      | `UINT64`タイプ。 REDO ログ ファイルをフラッシュする間隔。 (オプション)                                                   |
+| `level`               | `STRING`タイプ。レプリケートされたデータの整合性レベル。 (オプション)                                                       |
+| `max_log_size`        | `UINT64`タイプ。 REDOログの最大値。 (オプション)                                                               |
+| `storage`             | `STRING`タイプ。storageの宛先アドレス。 (オプション)                                                            |
+| `use_file_backend`    | `BOOL`タイプ。 REDO ログをローカル ファイルに保存するかどうかを指定します。 (オプション)                                           |
+| `encoding_worker_num` | `INT`タイプ。 REDO モジュール内のエンコードおよびデコード ワーカーの数。 (オプション)                                             |
+| `flush_worker_num`    | `INT`タイプ。 REDO モジュール内のフラッシュ ワーカーの数。 (オプション)                                                    |
+| `compression`         | `STRING`タイプ。 REDO ログ ファイルを圧縮する動作。利用可能なオプションは`""`と`"lz4"`です。デフォルト値は`""`で、圧縮しないことを意味します。 (オプション) |
+| `flush_concurrency`   | `INT`タイプ。単一ファイルをアップロードする際の同時実行数。デフォルト値は`1`で、同時実行が無効であることを意味します。 (オプション)                        |
 
 `filter`パラメータは次のように説明されます。
 
@@ -304,7 +309,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 
 | パラメータ名                         | 説明                                                                                                                          |
 | :----------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
-| `ignore_delete_value_expr`     | `STRING ARRAY`タイプ。たとえば、 `"name = 'john'"` 、 `name = 'john'`条件を含む DELETE DML ステートメントをフィルターで除外することを意味します。 (オプション)             |
+| `ignore_delete_value_expr`     | `STRING ARRAY`タイプ。たとえば、 `"name = 'john'"` 、 `name = 'john'`条件を含む DELETE DML ステートメントをフィルタリングして除外することを意味します。 (オプション)          |
 | `ignore_event`                 | `STRING ARRAY`タイプ。たとえば、 `["insert"]` INSERT イベントがフィルターで除外されることを示します。 (オプション)                                                |
 | `ignore_insert_value_expr`     | `STRING ARRAY`タイプ。たとえば、 `"id >= 100"` 、条件`id >= 100`に一致する INSERT DML ステートメントを除外することを意味します。 (オプション)                          |
 | `ignore_sql`                   | `STRING ARRAY`タイプ。たとえば、 `["^drop", "add column"]` 、 `DROP`で始まるか、 `ADD COLUMN`を含む DDL ステートメントをフィルタリングして除外することを意味します。 (オプション) |
@@ -332,6 +337,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `terminator`                  | `STRING`タイプ。ターミネータは、2 つのデータ変更イベントを区切るために使用されます。デフォルト値は null です。これは、 `"\r\n"`がターミネータとして使用されることを意味します。 (オプション)                       |
 | `transaction_atomicity`       | `STRING`タイプ。トランザクションのアトミックレベル。 (オプション)                                                                                             |
 | `only_output_updated_columns` | `BOOLEAN`タイプ。 `canal-json`または`open-protocol`プロトコルを使用する MQ シンクの場合、変更された列のみを出力するかどうかを指定できます。デフォルト値は`false`です。 (オプション)                |
+| `cloud_storage_config`        | storageシンクの構成。 (オプション)                                                                                                             |
 
 `sink.column_selectors`は配列です。パラメータは次のように説明されます。
 
@@ -342,12 +348,13 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 
 `sink.csv`パラメータは次のように説明されます。
 
-| パラメータ名              | 説明                                                                          |
-| :------------------ | :-------------------------------------------------------------------------- |
-| `delimiter`         | `STRING`タイプ。 CSV ファイル内のフィールドを区切るために使用される文字。値は ASCII 文字である必要があり、デフォルトは`,`です。 |
-| `include_commit_ts` | `BOOLEAN`タイプ。 CSV 行に commit-t を含めるかどうか。デフォルト値は`false`です。                    |
-| `null`              | `STRING`タイプ。 CSV 列が null の場合に表示される文字。デフォルト値は`\N`です。                         |
-| `quote`             | `STRING`タイプ。 CSV ファイル内のフィールドを囲むために使用される引用符。値が空の場合、引用符は使用されません。デフォルト値は`"`です。 |
+| パラメータ名                   | 説明                                                                          |
+| :----------------------- | :-------------------------------------------------------------------------- |
+| `delimiter`              | `STRING`タイプ。 CSV ファイル内のフィールドを区切るために使用される文字。値は ASCII 文字である必要があり、デフォルトは`,`です。 |
+| `include_commit_ts`      | `BOOLEAN`タイプ。 CSV 行に commit-t を含めるかどうか。デフォルト値は`false`です。                    |
+| `null`                   | `STRING`タイプ。 CSV 列が null の場合に表示される文字。デフォルト値は`\N`です。                         |
+| `quote`                  | `STRING`タイプ。 CSV ファイル内のフィールドを囲むために使用される引用符。値が空の場合、引用符は使用されません。デフォルト値は`"`です。 |
+| `binary_encoding_method` | `STRING`タイプ。バイナリ データのエンコード方式。 `"base64"`または`"hex"`です。デフォルト値は`"base64"`です。   |
 
 `sink.dispatchers` : MQ タイプのシンクの場合、このパラメーターを使用してイベント ディスパッチャーを構成できます。次のディスパッチャーがサポートされています: `default` 、 `ts` 、 `rowid` 、および`table` 。ディスパッチャのルールは次のとおりです。
 
@@ -363,6 +370,17 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `matcher`   | `STRING ARRAY`タイプ。フィルター ルールと同じ一致構文を持ちます。   |
 | `partition` | `STRING`タイプ。イベントをディスパッチするためのターゲット パーティション。 |
 | `topic`     | `STRING`タイプ。イベントをディスパッチする対象のトピック。          |
+
+`sink.cloud_storage_config`パラメータは次のように説明されます。
+
+| パラメータ名                   | 説明                                                                                                                                                 |
+| :----------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `worker_count`           | `INT`タイプ。データをダウンストリームのクラウドstorageに保存するための同時実行性が変わります。                                                                                              |
+| `flush_interval`         | `STRING`タイプ。ダウンストリームのクラウドstorageにデータを保存する間隔が変わります。                                                                                                 |
+| `file_size`              | `INT`タイプ。データ変更ファイルのバイト数がこのパラメータの値を超えると、データ変更ファイルがクラウドstorageに保存されます。                                                                               |
+| `file_expiration_days`   | `INT`タイプ。ファイルを保持する期間。 `date-separator`が`day`として構成されている場合にのみ有効になります。                                                                                |
+| `file_cleanup_cron_spec` | `STRING`タイプ。スケジュールされたクリーンアップ タスクの実行サイクル。crontab 構成と互換性があり、形式は`<Second> <Minute> <Hour> <Day of the month> <Month> <Day of the week (Optional)>`です。 |
+| `flush_concurrency`      | `INT`タイプ。単一ファイルをアップロードする際の同時実行数。                                                                                                                   |
 
 ### 例 {#example}
 
@@ -791,6 +809,95 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds/test1
 ```
 
 JSON レスポンスボディの意味は[レプリケーションタスクを作成する](#create-a-replication-task)セクションと同じです。詳細については、そのセクションを参照してください。
+
+## 特定のレプリケーションタスクが完了したかどうかをクエリします {#query-whether-a-specific-replication-task-is-completed}
+
+この API は同期インターフェイスです。リクエストが成功すると、タスクが完了したかどうかや追加の詳細を含む、指定されたレプリケーション タスク (変更フィード) の同期ステータスが返されます。
+
+### リクエストURI {#request-uri}
+
+`GET /api/v2/changefeed/{changefeed_id}/synced`
+
+### パラメータの説明 {#parameter-description}
+
+#### パスパラメータ {#path-parameter}
+
+| パラメータ名          | 説明                                |
+| :-------------- | :-------------------------------- |
+| `changefeed_id` | クエリ対象のレプリケーション タスク (変更フィード) の ID。 |
+
+### 例 {#examples}
+
+次のリクエストは、ID `test1`のレプリケーション タスクの同期ステータスをクエリします。
+
+```shell
+curl -X GET http://127.0.0.1:8300/api/v2/changefeed/test1/synced
+```
+
+**例1: 同期が完了しました**
+
+```json
+{
+  "synced": true,
+  "sink_checkpoint_ts": "2023-11-30 15:14:11.015",
+  "puller_resolved_ts": "2023-11-30 15:14:12.215",
+  "last_synced_ts": "2023-11-30 15:08:35.510",
+  "now_ts": "2023-11-30 15:14:11.511",
+  "info": "Data syncing is finished"
+}
+```
+
+応答には次のフィールドが含まれます。
+
+-   `synced` : このレプリケーションタスクが完了したかどうか。 `true`タスクが完了したことを意味し、 `false`不完全な可能性があることを意味します。 `false`の場合は、 `info`フィールドと他のフィールドの両方で特定のステータスを確認する必要があります。
+-   `sink_checkpoint_ts` : PD 時間におけるシンク モジュールのチェックポイント TS 値。
+-   `puller_resolved_ts` : PD 時間での、プラー モジュールのresolved-ts値。
+-   `last_synced_ts` : PD 時間における、TiCDC によって処理された最新データの commit-ts 値。
+-   `now_ts` : 現在の PD 時間。
+-   `info` : 特に`synced`が`false`の場合、同期ステータスの決定を支援する補足情報。
+
+**例 2: 同期が完了していない**
+
+```json
+{
+  "synced": false,
+  "sink_checkpoint_ts": "2023-11-30 15:26:31.519",
+  "puller_resolved_ts": "2023-11-30 15:26:23.525",
+  "last_synced_ts": "2023-11-30 15:24:30.115",
+  "now_ts": "2023-11-30 15:26:31.511",
+  "info": "The data syncing is not finished, please wait"
+}
+```
+
+この例は、進行中のレプリケーション タスクの応答を示しています。 `synced`と`info`フィールドの両方をチェックすると、レプリケーション タスクがまだ完了しておらず、さらに待機することが予想されることがわかります。
+
+**例 3: 同期ステータスをさらに確認する必要がある**
+
+```json
+{
+  "synced":false,
+  "sink_checkpoint_ts":"2023-12-13 11:45:13.515",
+  "puller_resolved_ts":"2023-12-13 11:45:13.525",
+  "last_synced_ts":"2023-12-13 11:45:07.575",
+  "now_ts":"2023-12-13 11:50:24.875",
+  "info":"Please check whether PD is online and TiKV Regions are all available. If PD is offline or some TiKV regions are not available, it means that the data syncing process is complete. To check whether TiKV regions are all available, you can view 'TiKV-Details' > 'Resolved-Ts' > 'Max Leader Resolved TS gap' on Grafana. If the gap is large, such as a few minutes, it means that some regions in TiKV are unavailable. Otherwise, if the gap is small and PD is online, it means the data syncing is incomplete, so please wait"
+}
+```
+
+この API を使用すると、アップストリーム クラスターで障害が発生した場合でも、同期ステータスをクエリできます。状況によっては、TiCDC の現在のデータ複製タスクが完了したかどうかを直接判断できない場合があります。このような場合は、この API をリクエストし、応答の`info`フィールドと上流クラスターの現在のステータスの両方をチェックして、特定のステータスを判断できます。
+
+この例では、TiCDC がまだデータ レプリケーションに追いついているか、PD または TiKV に障害が発生しているため、時間的に`sink_checkpoint_ts`が`now_ts`より遅れています。これが TiCDC がまだデータ レプリケーションに追いついていないことが原因である場合は、レプリケーション タスクがまだ完了していないことを意味します。これが PD または TiKV の障害によるものである場合は、レプリケーション タスクが完了したことを意味します。したがって、クラスターのステータスを判断するには、 `info`フィールドを確認する必要があります。
+
+**例 4: クエリエラー**
+
+```json
+{
+  "error_msg": "[CDC:ErrPDEtcdAPIError]etcd api call error: context deadline exceeded",
+  "error_code": "CDC:ErrPDEtcdAPIError"
+}
+```
+
+アップストリーム クラスターの PD が長期間にわたって失敗する場合、この API をクエリすると、前述のエラーと同様のエラーが返される可能性があります。このエラーでは、さらに確認するための情報が提供されません。 PD 障害は TiCDC データ レプリケーションに直接影響するため、このようなエラーが発生した場合は、TiCDC がデータ レプリケーションを可能な限り完了していると想定できますが、PD 障害によりダウンストリーム クラスターでデータ損失が依然として発生する可能性があります。
 
 ## レプリケーションタスクを一時停止する {#pause-a-replication-task}
 

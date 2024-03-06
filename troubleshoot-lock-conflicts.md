@@ -9,7 +9,7 @@ TiDB は完全な分散トランザクションをサポートします。 v3.0 
 
 ## ロックビューを使用してロックの問題をトラブルシューティングする {#use-lock-view-to-troubleshoot-lock-issues}
 
-v5.1 以降、TiDB はロックビュー機能をサポートしています。この機能には、ロックの競合とロックの待機に関する詳細情報を提供する`information_schema`のシステム テーブルが組み込まれています。
+v5.1 以降、TiDB はロックビュー機能をサポートしています。この機能には、ロックの競合とロックの待機に関する詳細情報を提供するいくつかのシステム テーブルが`information_schema`れています。
 
 > **注記：**
 >
@@ -75,18 +75,19 @@ select `key`, count(*) as `count` from information_schema.data_lock_waits group 
 
 頻繁に問題が発生するキーがわかっている場合は、そのキーをロックしようとしているトランザクションの情報を`TIDB_TRX`または`CLUSTER_TIDB_TRX`テーブルから取得してみることができます。
 
-表`TIDB_TRX`と`CLUSTER_TIDB_TRX`に表示される情報は、クエリの実行時に実行されているトランザクションの情報でもあることに注意してください。これらのテーブルには、完了したトランザクションの情報は表示されません。同時トランザクションが多数ある場合、クエリの結果セットも大きくなる可能性があります。 `limit`句または`where`句を使用して、ロック待機時間が長いトランザクションをフィルタリングできます。 Lock ビューで複数のテーブルを結合すると、異なるテーブルのデータが同時に取得されないため、異なるテーブルの情報に一貫性がなくなる可能性があることに注意してください。
+表`TIDB_TRX`と`CLUSTER_TIDB_TRX`に表示される情報は、クエリの実行時に実行中のトランザクションの情報でもあることに注意してください。これらのテーブルには、完了したトランザクションの情報は表示されません。同時トランザクションが多数ある場合、クエリの結果セットも大きくなる可能性があります。 `limit`句または`where`句を使用して、ロック待機時間が長いトランザクションをフィルタリングできます。 Lock ビューで複数のテーブルを結合すると、異なるテーブルのデータが同時に取得されないため、異なるテーブルの情報に一貫性がなくなる可能性があることに注意してください。
 
 たとえば、 `where`句を使用してロック待機時間が長いトランザクションをフィルタリングするには、次の SQL ステートメントを実行できます。
 
 ```sql
-select trx.* from information_schema.data_lock_waits as l left join information_schema.tidb_trx as trx on l.trx_id = trx.id where l.key = "7480000000000000415F728000000000000001"\G
+select trx.* from information_schema.data_lock_waits as l left join information_schema.cluster_tidb_trx as trx on l.trx_id = trx.id where l.key = "7480000000000000415F728000000000000001"\G
 ```
 
 以下は出力例です。
 
 ```sql
 *************************** 1. row ***************************
+               INSTANCE: 127.0.0.1:10080
                      ID: 426831815660273668
              START_TIME: 2021-08-06 07:16:00.081000
      CURRENT_SQL_DIGEST: 06da614b93e62713bd282d4685fc5b88d688337f36e88fe55871726ce0eb80d7
@@ -100,6 +101,7 @@ CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ? ;
                      DB: test
         ALL_SQL_DIGESTS: ["0fdc781f19da1c6078c9de7eadef8a307889c001e05f107847bee4cfc8f3cdf3","06da614b93e62713bd282d4685fc5b88d688337f36e88fe55871726ce0eb80d7"]
 *************************** 2. row ***************************
+               INSTANCE: 127.0.0.1:10080
                      ID: 426831818019569665
              START_TIME: 2021-08-06 07:16:09.081000
      CURRENT_SQL_DIGEST: 06da614b93e62713bd282d4685fc5b88d688337f36e88fe55871726ce0eb80d7
@@ -147,7 +149,7 @@ CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ? ;
 
 上記のクエリでは、 [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)関数が`CLUSTER_TIDB_TRX`テーブルの`ALL_SQL_DIGESTS`列で使用されています。この関数は、この列 (値は SQL ダイジェストのセット) を正規化された SQL ステートメントに変換しようとします。これにより、可読性が向上します。
 
-現在のトランザクションの`start_ts`不明な場合は、 `TIDB_TRX` / `CLUSTER_TIDB_TRX`テーブルまたは[`PROCESSLIST` / `CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md)テーブルの情報からそれを見つけ出すことができます。
+現在のトランザクションの`start_ts`不明な場合は、 `TIDB_TRX` / `CLUSTER_TIDB_TRX`テーブルまたは[`PROCESSLIST` / `CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md)テーブルの情報から調べてみることができます。
 
 ## 楽観的ロックの競合のトラブルシューティング {#troubleshoot-optimistic-lock-conflicts}
 
@@ -165,7 +167,7 @@ TiDB クラスター内の読み取り/書き込み競合は、次の方法で�
 
 1.  TiDBサーバーのメトリクスとログのモニタリング
 
-    -   Grafana を介したデータの監視
+    -   Grafana を介したデータのモニタリング
 
         TiDB ダッシュボードの`KV Errors`パネルでは、 `Lock Resolve OPS`の`not_expired` / `resolve`と`KV Backoff OPS`の`tikvLockFast`が、トランザクション内の読み取り/書き込み競合をチェックするために使用できるモニタリング メトリックです。すべてのメトリックの値が増加すると、読み取り/書き込みの競合が多数発生する可能性があります。 `not_expired`項目は、トランザクションのロックがタイムアウトしていないことを意味します。 `resolve`項目は、他のトランザクションがロックをクリーンアップしようとしていることを意味します。 `tikvLockFast`項目は、読み取り/書き込みの競合が発生することを意味します。
 
@@ -192,7 +194,7 @@ TiDB クラスター内の読み取り/書き込み競合は、次の方法で�
     [ERROR] [endpoint.rs:454] [error-response] [err=""locked primary_lock:7480000000000004D35F6980000000000000010380000000004C788E0380000000004C0748 lock_version: 411402933858205712 key: 7480000000000004D35F7280000000004C0748 lock_ttl: 3008 txn_size: 1""]
     ```
 
-    このメッセージは、TiDB で読み取り/書き込み競合が発生したことを示します。読み取りリクエストのターゲットキーは別のトランザクションによってロックされています。ロックは、コミットされていない楽観的トランザクションと、事前書き込みフェーズ後のコミットされていない悲観的トランザクションからのものです。
+    このメッセージは、TiDB で読み取り/書き込み競合が発生したことを示します。読み取りリクエストの対象キーが別のトランザクションによってロックされています。ロックは、コミットされていない楽観的トランザクションと、事前書き込みフェーズ後のコミットされていない悲観的トランザクションからのものです。
 
     -   Primary_lock: 対象キーがプライマリロックでロックされていることを示します。
     -   lock_version: ロックを所有するトランザクションの start_ts。

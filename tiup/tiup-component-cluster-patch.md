@@ -1,10 +1,11 @@
 ---
 title: tiup cluster patch
+summary: The `tiup cluster patch` command allows for dynamic replacement of binaries in a running cluster. It uploads the binary package, stops the target service, replaces the binary, and starts the service. Preparation involves packing the binary package and using options like `--overwrite`, `--transfer-timeout`, `-N, --node`, `-R, --role`, and `--offline`. The output is the execution log of the tiup-cluster.
 ---
 
 # tiup cluster patch {#tiup-cluster-patch}
 
-クラスターの実行中にサービスのバイナリを動的に置換する必要がある場合 (つまり、置換プロセス中にクラスターを使用可能な状態に維持する場合)、 `tiup cluster patch`コマンドを使用できます。コマンドが実行されると、 TiUP は次のことを実行します。
+クラスターの実行中にサービスのバイナリを動的に置換する必要がある場合 (つまり、置換プロセス中にクラスターを使用可能な状態に維持する場合)、 `tiup cluster patch`コマンドを使用できます。コマンドの実行後、 TiUP は次のことを行います。
 
 -   置換用のバイナリ パッケージをターゲット マシンにアップロードします。
 -   ターゲット サービスが TiKV、 TiFlash、TiDB Binlogなどのstorageサービスである場合、 TiUP はまず API を介して関連ノードをオフラインにします。
@@ -28,7 +29,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 1.  次の変数を決定します。
 
     -   `${component}` : 置換されるコンポーネントの名前 ( `tidb` 、 `tikv` 、または`pd`など)。
-    -   `${version}` :コンポーネントのバージョン ( `v7.5.0`や`v6.5.3`など)。
+    -   `${version}` :コンポーネントのバージョン ( `v7.5.1`や`v6.5.3`など)。
     -   `${os}` : オペレーティング システム ( `linux` )。
     -   `${arch}` :コンポーネントが実行されるプラットフォーム ( `amd64` 、 `arm64` )。
 

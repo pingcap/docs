@@ -1,5 +1,6 @@
 ---
 title: tiup cluster deploy
+summary: The tiup cluster deploy command is used to deploy a new cluster with specified options such as cluster name, version, and topology file. Additional options include user, identity file, password, ignore config check, skip labels, skip create user, and help. The output is the deployment log.
 ---
 
 # tiup cluster deploy {#tiup-cluster-deploy}
@@ -13,8 +14,8 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 ```
 
 -   `<cluster-name>` : 新しいクラスターの名前。既存のクラスター名と同じにすることはできません。
--   `<version>` : デプロイする TiDB クラスターのバージョン番号`v7.5.0`など)。
--   `<topology.yaml>` : 準備された[トポロジファイル](/tiup/tiup-cluster-topology-reference.md) 。
+-   `<version>` : デプロイする TiDB クラスターのバージョン番号`v7.5.1`など)。
+-   `<topology.yaml>` : 準備された[トポロジーファイル](/tiup/tiup-cluster-topology-reference.md) 。
 
 ## オプション {#options}
 
@@ -28,7 +29,7 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 
 -   ターゲット マシンへの接続に使用するキー ファイルを指定します。
 -   データ型: `STRING`
--   このオプションがコマンドで指定されていない場合、デフォルトで`~/.ssh/id_rsa`ファイルがターゲット マシンへの接続に使用されます。
+-   このオプションがコマンドで指定されていない場合、デフォルトでは`~/.ssh/id_rsa`ファイルがターゲット マシンへの接続に使用されます。
 
 ### -p、--パスワード {#p-password}
 

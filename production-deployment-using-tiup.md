@@ -287,13 +287,13 @@ alertmanager_servers:
 3.  TiDB クラスターをデプロイ。
 
     ```shell
-    tiup cluster deploy tidb-test v7.5.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
+    tiup cluster deploy tidb-test v7.5.1 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
     ```
 
 上記の`tiup cluster deploy`コマンドでは次のようになります。
 
 -   `tidb-test`は、デプロイされる TiDB クラスターの名前です。
--   `v7.5.0`は、デプロイされる TiDB クラスターのバージョンです。 `tiup list tidb`を実行すると、サポートされている最新のバージョンを確認できます。
+-   `v7.5.1`は、デプロイされる TiDB クラスターのバージョンです。 `tiup list tidb`を実行すると、サポートされている最新のバージョンを確認できます。
 -   `topology.yaml`は初期化設定ファイルです。
 -   `--user root` 、ターゲット マシンに`root`ユーザーとしてログインしてクラスターの展開を完了することを示します。 `root`ユーザーは、ターゲット マシンに対する`ssh`および`sudo`権限を持つことが期待されます。あるいは、 `ssh`および`sudo`権限を持つ他のユーザーを使用して展開を完了することもできます。
 -   `[-i]`と`[-p]`はオプションです。パスワードなしでターゲット マシンへのログインを設定した場合、これらのパラメータは必要ありません。そうでない場合は、2 つのパラメータのいずれかを選択します。 `[-i]`は、ターゲット マシンにアクセスできる root ユーザー (または`--user`で指定された他のユーザー) の秘密キーです。 `[-p]`は、ユーザーのパスワードを対話的に入力するために使用されます。

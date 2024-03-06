@@ -96,7 +96,7 @@ bundle add mysql2 dotenv
 6.  `.env`ファイルを編集し、 `DATABASE_URL`環境変数を次のように設定し、接続ダイアログから接続文字列を変数値としてコピーします。
 
     ```dotenv
-    DATABASE_URL=mysql2://{user}:{password}@{host}:{port}/{database_name}?ssl_mode=verify_identity
+    DATABASE_URL='mysql2://{user}:{password}@{host}:{port}/{database_name}?ssl_mode=verify_identity'
     ```
 
     > **注記**
@@ -112,7 +112,7 @@ bundle add mysql2 dotenv
 
 2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3.  **[どこからでもアクセスを許可]**をクリックし、 **[TiDB クラスター CA のダウンロード]**をクリックして CA 証明書をダウンロードします。
+3.  **「どこからでもアクセスを許可」**をクリックし、 **「TiDB クラスター CA のダウンロード」**をクリックして CA 証明書をダウンロードします。
 
     接続文字列の取得方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
 
@@ -125,7 +125,7 @@ bundle add mysql2 dotenv
 5.  `.env`ファイルを編集し、次のように`DATABASE_URL`環境変数を設定し、接続ダイアログから接続文字列を変数値としてコピーし、 `sslca`クエリ パラメータを接続ダイアログからダウンロードした CA 証明書のファイル パスに設定します。
 
     ```dotenv
-    DATABASE_URL=mysql2://{user}:{password}@{host}:{port}/{database}?ssl_mode=verify_identity&sslca=/path/to/ca.pem
+    DATABASE_URL='mysql2://{user}:{password}@{host}:{port}/{database}?ssl_mode=verify_identity&sslca=/path/to/ca.pem'
     ```
 
     > **注記**
@@ -148,7 +148,7 @@ bundle add mysql2 dotenv
 2.  `.env`ファイルを編集し、次のように`DATABASE_URL`環境変数を設定し、 `{user}` 、 `{password}` 、 `{host}` 、 `{port}` 、および`{database}`独自の TiDB 接続情報に置き換えます。
 
     ```dotenv
-    DATABASE_URL=mysql2://{user}:{password}@{host}:{port}/{database}
+    DATABASE_URL='mysql2://{user}:{password}@{host}:{port}/{database}'
     ```
 
     TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
@@ -181,7 +181,7 @@ bundle add mysql2 dotenv
 
 接続が成功すると、コンソールには次のように TiDB クラスターのバージョンが出力されます。
 
-    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v7.5.0)
+    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v7.5.1)
     ⏳ Loading sample game data...
     ✅ Loaded sample game data.
 
