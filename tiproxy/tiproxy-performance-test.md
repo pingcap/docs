@@ -255,13 +255,13 @@ sysbench oltp_point_select \
 
 This test aims to verify that a large number of idle connections have minimal impact on the QPS when the client uses long connections. This test creates 5000, 10000, and 15000 idle long connections, and then executes `sysbench`.
 
-In this test, the `conn-buffer-size` configuration is kept at the default value:
+This test uses the default value for the `conn-buffer-size` configuration:
 
 ```yaml
 proxy.conn-buffer-size: 32768
 ```
 
-The following command is used to perform the test:
+Use the following command to perform the test:
 
 ```bash
 sysbench oltp_point_select \
@@ -290,7 +290,7 @@ sysbench oltp_point_select \
 
 This test aims to verify that frequent creation and destruction of connections have minimal impact on the QPS when the client uses short connections. This test starts another client program to create and disconnect 100, 200, and 300 short connections per second while executing `sysbench`.
 
-The following command is used to perform the test:
+Use the following command to perform the test:
 
 ```bash
 sysbench oltp_point_select \

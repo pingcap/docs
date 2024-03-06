@@ -47,7 +47,7 @@ TiProxy has four panel groups. The metrics on these panels indicate the current 
 - CPS by Instance: command per second of each TiProxy instance
 - CPS by Backend: command per second of each TiDB instance
 - CPS by CMD: command per second grouped by SQL command type
-- Handshake Duration: average, P95, P99 duration of the handshake phase between the client and TiProxy
+- Handshake Duration: average, P95, and P99 duration of the handshake phase between the client and TiProxy
 
 ## Balance
 
