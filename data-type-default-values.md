@@ -8,7 +8,7 @@ aliases: ['/docs/dev/data-type-default-values/','/docs/dev/reference/sql/data-ty
 
 The `DEFAULT` value clause in a data type specification indicates a default value for a column. The default value must be a constant and cannot be a function or an expression. But for the time type, you can specify the `NOW`, `CURRENT_TIMESTAMP`, `LOCALTIME`, and `LOCALTIMESTAMP` functions as the default for `TIMESTAMP` and `DATETIME` columns.
 
-The `BLOB`, `TEXT`, and `JSON` columns __cannot__ be assigned a default value.
+The `BLOB`, `TEXT`, and `JSON` columns can be assigned a default value.
 
 If a column definition includes no explicit `DEFAULT` value, TiDB determines the default value as follows:
 
