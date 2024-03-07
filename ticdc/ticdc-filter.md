@@ -99,7 +99,7 @@ Description of configuration parameters:
 
 > **Note:**
 >
-> TiDB's DDL statements support changing multiple attributes of a single table at the same time, such as `ALTER TABLE t MODIFY COLUMN a INT, ADD COLUMN b INT, DROP COLUMN c;` This operation will be defined as MultiSchemaChange. If you want to filter out this type of DDL, you need to configure "multi schema change".
+> TiDB's DDL statements support changing multiple properties of a single table at the same time, such as `ALTER TABLE t MODIFY COLUMN a INT, ADD COLUMN b INT, DROP COLUMN c;`. This operation is defined as MultiSchemaChange. If you want to filter out this type of DDL, you need to configure "multi schema change".
 
 - `ignore-sql`: the DDL statements to be ignored. This parameter accepts an array of strings, in which you can configure multiple regular expressions. This rule only applies to DDL events.
 - `ignore-delete-value-expr`: this parameter accepts a SQL expression that follows the default SQL Mode. This rule only applies to delete DML events with the specified value.
