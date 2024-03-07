@@ -132,7 +132,7 @@ The following example constructs a memory-intensive SQL statement that triggers 
 
 ## Reduce the memory usage for write transactions in tidb-server
 
-The transaction model used by TiDB requires that all write operations of transactions are first cached in memory before being committed. When writing large transactions, memory usage might increase and become a bottleneck. To reduce or avoid high memory usage by large transactions under various constraints, you can adjust the [`tidb_dml_type`](/system-variables.md#tidb_dml_type-Introduced-in-v800) system variable to `"bulk"` or use [Non-transactional DML statements](/non-transactional-dml.md).
+The transaction model used by TiDB requires that all write operations of transactions are first cached in memory before being committed. When TiDB writes large transactions, memory usage might increase and become a bottleneck. To reduce or avoid high memory usage by large transactions under various constraints, you can adjust the [`tidb_dml_type`](/system-variables.md#tidb_dml_type-Introduced-in-v800) system variable to `"bulk"` or use [Non-transactional DML statements](/non-transactional-dml.md).
 
 ## Other memory control behaviors of tidb-server
 
