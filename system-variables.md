@@ -1797,6 +1797,27 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 >
 > Starting from v7.0.0, `tidb_dml_batch_size` no longer takes effect on the [`LOAD DATA` statement](/sql-statements/sql-statement-load-data.md).
 
+### tidb_dml_type <span class="version-mark">New in v8.0.0</span>
+
+> **Warning:**
+>
+> The batch DML execution mode (`tidb_dml_type = "bulk"`) is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues). When performing large transactions using the batch DML mode, it might affect the memory usage and execution efficiency of TiCDC, TiFlash, and the resolved-ts module of TiKV, and might cause OOM issues. Therefore, it is not recommended to use this mode when these components or features are enabled.
+
+- Scope: SESSION
+- Persists to cluster: No
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: String
+- Default value: `"standard"`
+- Value options: `"standard"`, `"bulk"`
+- This variable sets the execution mode of DML statements.
+    - `"standard"` indicates the standard DML execution mode, where TiDB transactions are cached in memory before being committed. This mode is suitable for high-concurrency transaction scenarios with potential conflicts and is the default recommended execution mode.
+    - (experimental) `"bulk"` indicates the batch DML execution mode, which is suitable for scenarios where a large amount of data is written, causing excessive memory usage in TiDB.
+        - During the execution of TiDB transactions, the data is not fully cached in the TiDB memory, but is continuously written to TiKV to reduce memory usage.
+        - Only `INSERT`, `UPDATE`, `REPLACE`, and `DELETE` statements are affected by the `bulk` mode.
+        - This mode is not efficient for handling write conflicts and is only suitable for scenarios where a large amount of data is written without conflicts.
+        - `bulk` mode only takes effect on statements with auto-commit enabled and requires the [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-span-classversion-marknew-in-v600span) configuration item to be set to `false`.
+        - This mode is implemented by the Pipelined DML feature. For detailed design and GitHub issues, see [Pipelined DML](https://github.com/pingcap/tidb/blob/master/docs/design/2024-01-09-pipelined-DML.md) and [#50215](https://github.com/pingcap/tidb/issues/50215).
+
 ### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
 
 > **Note:**
