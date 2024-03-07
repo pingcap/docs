@@ -131,15 +131,15 @@ Several enhancements were made in this version to mitigate that:
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.0/ticdc-bidirectional-replication).
 
-* TiCDC adds support for Simple Protocol [#9898](https://github.com/pingcap/tiflow/issues/9898) @[3AceShowHand](https://github.com/3AceShowHand) **tw@lilin90** <!--1646-->
+* TiCDC adds support for the Simple protocol [#9898](https://github.com/pingcap/tiflow/issues/9898) @[3AceShowHand](https://github.com/3AceShowHand) **tw@lilin90** <!--1646-->
 
-    TiCDC introduces support for a new protocol, the Simple protocol. This new protocol includes support for in-band schema tracking capabilities.
+    TiCDC introduces support for a new protocol, the Simple protocol. This protocol includes support for in-band schema tracking capabilities.
 
     For more information, see [documentation](/ticdc/ticdc-simple-protocol.md).
 
-* TiCDC adds support for Debezium format Protocol [#1799](https://github.com/pingcap/tiflow/issues/1799) @[breezewish](https://github.com/breezewish) **tw@lilin90** <!--1652-->
+* TiCDC adds support for the Debezium format protocol [#1799](https://github.com/pingcap/tiflow/issues/1799) @[breezewish](https://github.com/breezewish) **tw@lilin90** <!--1652-->
 
-    TiCDC can now publish replication events to a Kafka sink using a protocol that generates event messages using a Debezium style format. This helps to simplify the migration from MySQL to TiDB for users who are currently using Debezium to pull data from MySQL for downstream processing.
+    TiCDC can now publish replication events to a Kafka sink using a protocol that generates event messages in a Debezium style format. This helps to simplify the migration from MySQL to TiDB for users who are currently using Debezium to pull data from MySQL for downstream processing.
 
     For more information, see [documentation](/ticdc/ticdc-debezium.md).
 
