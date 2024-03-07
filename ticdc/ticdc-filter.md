@@ -76,6 +76,30 @@ Description of configuration parameters:
 | truncate table partition    | DDL  | |Matches `truncate table partition` event     |
 | create view     | DDL  | |Matches `create view`event     |
 | drop view     | DDL  | |Matches `drop view` event     |
+| modify schema charset and collate | DDL  | |Matches `modify schema charset and collate` event     |
+| recover table   | DDL  | |Matches `recover table` event    |
+| rebase auto id    | DDL  | |Matches `rebase auto id` event    |
+| modify table comment | DDL  | |Matches `modify table comment` event    |
+| modify table charset and collate | DDL  | |Matches `modify table charset and collate` event    |
+| exchange table partition | DDL  | |Matches `exchange table partition` event    |
+| reorganize table partition | DDL  | |Matches `reorganize table partition` event    |
+| alter table partitioning | DDL  | |Matches `alter table partitioning` event    |
+| remove table partitioning | DDL  | |Matches `remove table partitioning` event    |
+| add column | DDL  | |Matches `add column` event    |
+| drop column | DDL  | |Matches `drop column` event    |
+| modify column | DDL  | |Matches `modify column` event    |
+| set default value | DDL  | |Matches `set default value` event    |
+| add primary key | DDL  | |Matches `add primary key` event    |
+| drop primary key | DDL  | |Matches `drop primary key` event    |
+| rename index | DDL  | |Matches `rename index` event    |
+| alter index visibility | DDL  | |Matches `alter index visibility` event    |
+| alter ttl info | DDL  | |Matches `alter ttl info` event    |
+| alter ttl remove| DDL  | |Matches `alter table remove ttl info` event    |
+| multi schema change | DDL  | |Matches DDL events that change multiple properties of a table within the same DDL statement |
+
+> **Note:**
+>
+> TiDB's DDL statements support changing multiple attributes of a single table at the same time, such as `ALTER TABLE t MODIFY COLUMN a INT, ADD COLUMN b INT, DROP COLUMN c;` This operation will be defined as MultiSchemaChange. If you want to filter out this type of DDL, you need to configure "multi schema change".
 
 - `ignore-sql`: the DDL statements to be ignored. This parameter accepts an array of strings, in which you can configure multiple regular expressions. This rule only applies to DDL events.
 - `ignore-delete-value-expr`: this parameter accepts a SQL expression that follows the default SQL Mode. This rule only applies to delete DML events with the specified value.
