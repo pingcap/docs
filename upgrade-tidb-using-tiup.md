@@ -54,6 +54,7 @@ The following provides compatibility changes you need to know when you upgrade f
 - TiDB v7.1.1 [compatibility changes](/releases/release-7.1.1.md#compatibility-changes)
 - TiDB v7.1.2 [compatibility changes](/releases/release-7.1.2.md#compatibility-changes)
 - TiDB v7.1.3 [compatibility changes](/releases/release-7.1.3.md#compatibility-changes)
+- TiDB v7.1.4 [compatibility changes](/releases/release-7.1.4.md#compatibility-changes)
 
 ### Step 2: Upgrade TiUP or TiUP offline mirror
 
