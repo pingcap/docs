@@ -5,9 +5,11 @@ summary: Learn about the system tables in the `sys` schema.
 
 # `sys` Schema
 
-TiDB provides `sys` Schema since v8.0.0. You can use the views in `sys` schema to understand the data in TiDB's system tables, `INFORMATION_SCHEMA` database, and `PERFORMANCE_SCHEMA` database.
+Starting from v8.0.0, TiDB provides the `sys` Schema. You can use the views in `sys` schema to understand the data in the system tables, [`INFORMATION_SCHEMA`](/information-schema/information-schema.md), and [`PERFORMANCE SCHEMA`](/performance-schema/performance-schema.md) of TiDB.
 
-The cluster upgrades from version prior than v8.0.0 will not have `sys` Schema and the views in it. `sys` and the view inside can be created by the following SQLs:
+## Manually create the `sys` schema and views
+
+For clusters upgraded from versions earlier than v8.0.0, the `sys` schema and the views in it are not created automatically. You can manually create them using the following SQL statements:
 
 ```sql
 CREATE DATABASE IF NOT EXISTS sys;
@@ -27,7 +29,7 @@ CREATE OR REPLACE VIEW sys.schema_unused_indexes AS
 
 ## `schema_unused_index`
 
-`schema_unused_index` is used to record indexes that have not been used since the last restart of TiDB. It includes the following columns:
+`schema_unused_index` records indexes that have not been used since the last start of TiDB. It includes the following columns:
 
 - `OBJECT_SCHEMA`: The name of the database to which the table containing the index belongs.
 - `OBJECT_NAME`: The name of the table containing the index.

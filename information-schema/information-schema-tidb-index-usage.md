@@ -5,7 +5,7 @@ summary: Learn the `TIDB_INDEX_USAGE` information_schema table.
 
 # TIDB_INDEX_USAGE
 
-TiDB provides `TIDB_INDEX_USAGE` since v8.0.0. You can use `TIDB_INDEX_USAGE` to get the access statistics of all indexes on the current node. These index usage statistics are maintained by default. Turning off the config [`instance.tidb_enable_collect_execution_info`](/tidb-configuration-file.md#tidb_enable_collect_execution_info) or the system variable [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info) will stop collecting these data.
+Starting from v8.0.0, TiDB provides the `TIDB_INDEX_USAGE` table. You can use `TIDB_INDEX_USAGE` to get the usage statistics of all indexes on the current TiDB node. By default, TiDB collects these index usage statistics during SQL statement execution. You can disable this feature by turning off the [`instance.tidb_enable_collect_execution_info`](/tidb-configuration-file.md#tidb_enable_collect_execution_info) configuration item or the [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info) system variable.
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -42,18 +42,20 @@ The columns in the `TIDB_INDEX_USAGE` table are as follows:
 * `QUERY_TOTAL`: The total number of statements accessing the index.
 * `KV_REQ_TOTAL`: The total number of KV requests generated when accessing the index.
 * `ROWS_ACCESS_TOTAL`: The total number of rows scanned when accessing the index.
-* `PERCENTAGE_ACCESS_0`: The number of times the access ratio of rows to the total number of rows in the table is 0.
-* `PERCENTAGE_ACCESS_0_1`: The number of times the access ratio of rows to the total number of rows in the table is between 0% and 1%.
-* `PERCENTAGE_ACCESS_1_10`: The number of times the access ratio of rows to the total number of rows in the table is between 1% and 10%.
-* `PERCENTAGE_ACCESS_10_20`: The number of times the access ratio of rows to the total number of rows in the table is between 10% and 20%.
-* `PERCENTAGE_ACCESS_20_50`: The number of times the access ratio of rows to the total number of rows in the table is between 20% and 50%.
-* `PERCENTAGE_ACCESS_50_100`: The number of times the access ratio of rows to the total number of rows in the table is between 50% and 100%.
-* `PERCENTAGE_ACCESS_100`: The number of times the access ratio of rows to the total number of rows in the table is 100%.
-* `LAST_ACCESS_TIME`: The time when the index was last accessed.
+* `PERCENTAGE_ACCESS_0`: The number of times the row access ratio (the percentage of accessed rows out of the total number of rows in the table) is 0.
+* `PERCENTAGE_ACCESS_0_1`: The number of times the row access ratio is between 0% and 1%.
+* `PERCENTAGE_ACCESS_1_10`: The number of times the row access ratio is between 1% and 10%.
+* `PERCENTAGE_ACCESS_10_20`: The number of times the row access ratio is between 10% and 20%.
+* `PERCENTAGE_ACCESS_20_50`: The number of times the row access ratio is between 20% and 50%.
+* `PERCENTAGE_ACCESS_50_100`: The number of times the row access ratio is between 50% and 100%.
+* `PERCENTAGE_ACCESS_100`: The number of times the row access ratio is 100%.
+* `LAST_ACCESS_TIME`: The time of the most recent access to the index.
 
 ## CLUSTER_TIDB_INDEX_USAGE
 
-The `TIDB_INDEX_USAGE` table only provides information about the index access statisitcson a single TiDB node. If you want to view the information of the index usages on all TiDB nodes in the entire cluster, you need to query the `CLUSTER_TIDB_INDEX_USAGE` table. Compared with the query result of the `TIDB_INDEX_USAGE` table, the query result of the `CLUSTER_TIDB_INDEX_USAGE` table includes an extra `INSTANCE` field. The `INSTANCE` field displays the IP address and port of each node in the cluster, which is used to distinguish the TiDB nodes.
+The `TIDB_INDEX_USAGE` table only provides usage statistics of all indexes on a single TiDB node. To obtain the index usage statistics on all TiDB nodes in the cluster, you need to query the `CLUSTER_TIDB_INDEX_USAGE` table.
+
+Compared with the `TIDB_INDEX_USAGE` table, the query result of the `CLUSTER_TIDB_INDEX_USAGE` table includes an additional `INSTANCE` field. This field displays the IP address and port of each node in the cluster, which helps you distinguish the statistics across different nodes.
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -87,5 +89,5 @@ The output is as follows:
 
 ## Limitations
 
-- The data in the `TIDB_INDEX_USAGE` table may be delayed by up to 5 minutes.
+- The data in the `TIDB_INDEX_USAGE` table might be delayed by up to 5 minutes.
 - After TiDB restarts, the data in the `TIDB_INDEX_USAGE` table is cleared.
