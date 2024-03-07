@@ -4734,10 +4734,12 @@ SHOW WARNINGS;
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
+- Type: Enumeration
 - Default value: `OFF`
+- Possible values: `OFF`, `ON`, `MARKER`
 - This variable controls whether to hide user information in the SQL statement being recorded into the TiDB log and slow log.
-- When you set the variable to `1`, user information is hidden. For example, if the executed SQL statement is `insert into t values (1,2)`, the statement is recorded as `insert into t values (?,?)` in the log.
+- When you set the variable to `on`, user information is hidden. For example, if the executed SQL statement is `INSERT INTO t VALUES (1,2)`, the statement is recorded as `INSERT INTO t VALUES (?,?)` in the log.
+- When you set the variable to `marker`, user information is replaced with a marker. For example, if the executed SQL statement is `INSERT INTO t VALUES (1,2)`, the statement is recorded as `INSERT INTO t VALUES (‹1›,‹2›)` in the log.
 
 ### tidb_regard_null_as_point <span class="version-mark">New in v5.4.0</span>
 
