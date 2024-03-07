@@ -57,11 +57,11 @@ Several enhancements were made in this version to mitigate that:
     </td>
   </tr>
   <tr>
-    <td>TiCDC adds support for Simple Protocol</td>
-    <td>TiCDC introduces support for a new protocol, the Simple Protocol. This new protocol includes support for in-band schema tracking capabilities.</td>
+    <td>TiCDC adds support for the Simple protocol</td>
+    <td>TiCDC introduces support for a new protocol, the Simple protocol. This protocol includes support for in-band schema tracking capabilities.</td>
   </tr>
   <tr>
-    <td>TiCDC adds support for Debezium format Protocol</td>
+    <td>TiCDC adds support for the Debezium format protocol</td>
     <td>TiCDC can now publish replication events to a Kafka sink using a protocol that generates Debezium style messages.</td>
   </tr>
 </tbody>
