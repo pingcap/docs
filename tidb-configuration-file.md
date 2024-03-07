@@ -843,7 +843,7 @@ Configuration items related to read isolation.
 
 ### `tidb_enable_collect_execution_info`
 
-- This configuration controls whether to record the execution information of each operator in the slow query log.
+- This configuration controls whether to record the execution information of each operator in the slow query log and whether to record the [usage statistics of indexes](/information-schema/information-schema-tidb-index-usage.md).
 - Default value: `true`
 - Before v6.1.0, this configuration is set by `enable-collect-execution-info`.
 
