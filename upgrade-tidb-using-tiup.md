@@ -25,6 +25,31 @@ This document is targeted for the following upgrade paths:
 > - If your cluster to be upgraded is v3.1 or an earlier version (v3.0 or v2.1), the direct upgrade to v7.1.0 or a later v7.1.x version is not supported. You need to upgrade your cluster first to v4.0 and then to the target TiDB version.
 > - If your cluster to be upgraded is earlier than v6.2, the upgrade might get stuck when you upgrade the cluster to v6.2 or later versions in some scenarios. You can refer to [How to fix the issue](#how-to-fix-the-issue-that-the-upgrade-gets-stuck-when-upgrading-to-v620-or-later-versions).
 > - TiDB nodes use the value of the [`server-version`](/tidb-configuration-file.md#server-version) configuration item to verify the current TiDB version. Therefore, to avoid unexpected behaviors, before upgrading the TiDB cluster, you need to set the value of `server-version` to empty or the real version of the current TiDB cluster.
+> - Setting the [`performance.force-init-stats`](/tidb-configuration-file.md#force-init-stats-introduced-in-v657-and-v710) configuration item to `ON` prolongs the TiDB startup time, which might cause startup timeouts and upgrade failures. To avoid this issue, it is recommended to set a longer waiting timeout for TiUP.
+>     - Scenarios that might be affected:
+>         - The original cluster version is earlier than v6.5.7 and v7.1.0 (which does not support `performance.force-init-stats` yet), and the target version is v7.2.0 or later.
+>         - The original cluster version is equal to or later than v6.5.7 and v7.1.0, and the `performance.force-init-stats` configuration item is set to `ON`.
+>
+>     - Check the value of the `performance.force-init-stats` configuration item:
+>
+>         ```
+>         SHOW CONFIG WHERE type = 'tidb' AND name = 'performance.force-init-stats';
+>         ```
+>
+>     - You can increase the TiUP waiting timeout by adding the command-line option [`--wait-timeout`](/tiup/tiup-component-cluster.md##--wait-timeout). For example, executing the following command sets the waiting timeout to 1200 seconds (20 minutes).
+>
+>         ```shell
+>         tiup update cluster --wait-timeout 1200 [other options]
+>         ```
+>
+>         Generally, a 20-minute waiting timeout is sufficient for most scenarios. For a more precise estimate, search for `init stats info time` in the TiDB log to get the statistics loading time during the previous startup as a reference. For example:
+>
+>         ```
+>         [domain.go:2271] ["init stats info time"] [lite=true] ["take time"=2.151333ms]
+>         ```
+>
+>          If the original cluster is v7.1.0 or earlier, when upgrading to v7.2.0 or later, because of the introduction of [`performance.lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-introduced-in-v710), the statistics loading time is greatly reduced. In this case, the `init stats info time` before the upgrade is longer than the loading time after the upgrade.
+>     - If you want to shorten the rolling upgrade duration of TiDB and the potential performance impact of missing initial statistical information during the upgrade is acceptable for your cluster, you can set `performance.force-init-stats` to `OFF` before the upgrade by [modifying the configuration of the target instance with TiUP](/maintain-tidb-using-tiup.md#modify-the-configuration). After the upgrade is completed, you can reassess and revert this setting if necessary.
 
 ## Upgrade caveat
 
