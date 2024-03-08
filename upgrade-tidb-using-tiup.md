@@ -37,7 +37,7 @@ This document is targeted for the following upgrade paths:
 >         SHOW CONFIG WHERE type = 'tidb' AND name = 'performance.force-init-stats';
 >         ```
 >
->     - You can increase the TiUP waiting timeout by adding the command-line option [`--wait-timeout`](/tiup/tiup-component-cluster.md##--wait-timeout). For example, executing the following command sets the waiting timeout to 1200 seconds (20 minutes).
+>     - You can increase the TiUP waiting timeout by adding the command-line option [`--wait-timeout`](/tiup/tiup-component-cluster.md#--wait-timeout). For example, executing the following command sets the waiting timeout to 1200 seconds (20 minutes).
 >
 >         ```shell
 >         tiup update cluster --wait-timeout 1200 [other options]
@@ -49,7 +49,7 @@ This document is targeted for the following upgrade paths:
 >         [domain.go:2271] ["init stats info time"] [lite=true] ["take time"=2.151333ms]
 >         ```
 >
->          If the original cluster is v7.1.0 or earlier, when upgrading to v7.2.0 or later, because of the introduction of [`performance.lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-introduced-in-v710), the statistics loading time is greatly reduced. In this case, the `init stats info time` before the upgrade is longer than the loading time after the upgrade.
+>          If the original cluster is v7.1.0 or earlier, when upgrading to v7.2.0 or later, because of the introduction of [`performance.lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710), the statistics loading time is greatly reduced. In this case, the `init stats info time` before the upgrade is longer than the loading time after the upgrade.
 >     - If you want to shorten the rolling upgrade duration of TiDB and the potential performance impact of missing initial statistical information during the upgrade is acceptable for your cluster, you can set `performance.force-init-stats` to `OFF` before the upgrade by [modifying the configuration of the target instance with TiUP](/maintain-tidb-using-tiup.md#modify-the-configuration). After the upgrade is completed, you can reassess and revert this setting if necessary.
 
 ## Upgrade caveat
