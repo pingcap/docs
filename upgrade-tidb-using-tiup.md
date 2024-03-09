@@ -36,7 +36,7 @@ This document is targeted for the following upgrade paths:
 >         SHOW CONFIG WHERE type = 'tidb' AND name = 'performance.force-init-stats';
 >         ```
 >
->     - You can increase the TiUP waiting timeout by adding the command-line option [`--wait-timeout`](/tiup/tiup-component-cluster.md#--wait-timeout). For example, executing the following command sets the waiting timeout to 1200 seconds (20 minutes).
+>     - You can increase the TiUP waiting timeout by adding the command-line option [`--wait-timeout`](/tiup/tiup-component-cluster.md#--wait-timeout). For example, execute the following command to set the waiting timeout to 1200 seconds (20 minutes).
 >
 >         ```shell
 >         tiup update cluster --wait-timeout 1200 [other options]
