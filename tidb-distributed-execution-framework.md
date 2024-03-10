@@ -40,7 +40,11 @@ Currently, the DXF supports the distributed execution of the `ADD INDEX` and `IM
 
 ## Limitation
 
-- The DXF can only schedule the distributed execution of one `ADD INDEX` task at a time. If a new `ADD INDEX` task is submitted before the current `ADD INDEX` distributed task has finished, the new task is executed through a transaction.
+The DXF can only schedule up to 16 tasks (including `ADD INDEX` tasks and `IMPORT INTO` tasks) simultaneously. 
+
+## `ADD INDEX` Limitation
+
+- For each cluster, only one `ADD INDEX` task is allowed for distributed execution at a time. If a new `ADD INDEX` task is submitted before the current `ADD INDEX` distributed task has finished, the new `ADD INDEX` task is executed through a transaction instead of being scheduled by DXF.
 - Adding indexes on columns with the `TIMESTAMP` data type through the DXF is not supported, because it might lead to inconsistency between the index and the data.
 
 ## Prerequisites
