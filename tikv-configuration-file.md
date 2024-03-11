@@ -1976,7 +1976,7 @@ Configuration items related to TiDB Lightning import and BR restore.
 + The garbage ratio threshold to trigger GC.
 + Default value: `1.1`
 
-### `num-threads` <span class="version-mark">New in v6.5.8</span>
+### `num-threads` <span class="version-mark">New in v6.5.8 and v7.1.4</span>
 
 + The number of GC threads when `enable-compaction-filter` is `false`.
 + Default value: `1`
