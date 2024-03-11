@@ -37,12 +37,13 @@ By separating PD modules into separately-deployable services, their blast radii 
     <td>An optimization to involve all TiKV nodes in the preparation step for cluster restores was introduced to leverage scale such that restore speeds for a cluster are much faster for larger sets of data on larger clusters. Real world tests exhibit restore acceleration of ~300% in slower cases.</td>
   </tr>
   <tr>
-    <td>Enhanced stability of massive number of tables **tw@hfxsd** <!--16408--></td>
-    <td>SaaS companies using TiDB as the system of record for their multi-tenant applications require storing many tables. Prior to this release, so table counts on the order of a million or more were possible but were likely to degrade experience.
-Several enhancements were made in this version to mitigate that:
-
-  - New information schema caching system that includes a lazy-loading LRU cache for table metadata and more memory-efficient handling of schema version changes.
-  - Priority queue for auto-analyze, making auto-analyze less rigid and more stable across more tables</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.0/system-variables#tidb_schema_cache_size-new-in-v800">Enhanced stability of a massive number of tables </a>**tw@hfxsd** <!--16408--></td>
+    <td>SaaS companies using TiDB as the system of record for their multi-tenant applications often need to store a substantial number of tables. In previous versions, handling table counts in the order of a million or more was feasible, but it had the potential to degrade the overall user experience. TiDB v8.0.0 improves the situation with the following enhancements:
+  <ul>
+    <li>- Introduce a new information schema caching system, incorporating a lazy-loading Least Recently Used (LRU) cache for table metadata and more efficiently managing schema version changes.</li>
+    <li>- Implement a priority queue for `auto analyze`, making the process less rigid and enhancing stability across a wider array of tables.</li>
+  </ul>
+    </td>
   </tr>
   <tr>
     <td rowspan="1">DB Operations and Observability</td>
