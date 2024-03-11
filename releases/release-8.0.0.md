@@ -162,7 +162,7 @@ By separating PD modules into separately-deployable services, their blast radii 
 
     For more information, see [documentation](/system-variables.md#tidb_dml_type-new-in-v800).
 
-* Support using more expressions to set the default values for columns when creating a table (experimental) [#50936](https://github.com/pingcap/tidb/issues/50936) @[zimulala](https://github.com/zimulala) **tw@hfxsd** <!--1690-->
+* Support using some expressions to set the default values for columns when a table is created (experimental) [#50936](https://github.com/pingcap/tidb/issues/50936) @[zimulala](https://github.com/zimulala) **tw@hfxsd** <!--1690-->
 
     Before v8.0.0, when you create a table, the default values of columns can only be fixed strings, numbers, and dates. Starting from v8.0.0, you can use some expressions as the default values of columns, such as setting the default value of columns to `UUID()`. This feature helps you meet your diverse requirements.
     
@@ -215,7 +215,7 @@ By separating PD modules into separately-deployable services, their blast radii 
 
 * TiCDC supports replicating DDL statements in bi-directional replication (BDR) mode (GA) [#10301](https://github.com/pingcap/tiflow/issues/10301) @[asddongmen](https://github.com/asddongmen) **tw@hfxsd** <!--1689/1682-->
 
-    TiDB v7.6.0 introduces replicating DDL statements in BDR mode. Previously, replicating DDL statements was not supported by TiCDC, so users of TiCDC bi-directional replication had to apply DDL statements to both TiDB clusters separately. With this feature, TiCDC allows for a cluster to be assigned the `PRIMARY` BDR role, and enables the replication of DDL statements from that cluster to the downstream cluster. In v8.0.0, this feature becomes GA.
+    TiDB v7.6.0 introduces replicating DDL statements in BDR mode as an experimental feature. Previously, replicating DDL statements was not supported by TiCDC, so users of TiCDC bi-directional replication had to apply DDL statements to both TiDB clusters separately. With this feature, TiCDC allows for a cluster to be assigned the `PRIMARY` BDR role, and enables the replication of DDL statements from that cluster to the downstream cluster. In v8.0.0, this feature becomes GA.
 
     For more information, see [documentation](/ticdc/ticdc-bidirectional-replication.md).
 
@@ -264,6 +264,12 @@ By separating PD modules into separately-deployable services, their blast radii 
 
 ## Improvements
 
++ Tools
+
+    + TiDB Data Migration (DM)
+    
+        - In a MariaDB primary and secondary replication scenario, that is, a `MariaDB_primary_instance` -> `MariaDB_secondary_instance` -> `DM` -> `TiDB` migration scenario, when `gtid_strict_mode = off` and the GTID of the `MariaDB_secondary_instance` is not strictly incrementing (for example, there is data writing to the `MariaDB_secondary_instance`), then the DM task will report an error `less than global checkpoint position`, the DM task will report an error `less than global checkpoint position`. Starting from v8.0.0, TiDB is compatible with this scenario and data can be migrated downstream. [#10741](https://github.com/pingcap/tiflow/issues/10741) @[okJiang](https://github.com/okJiang) **tw@hfxsd** <!--1683-->
+        
 ## Bug fixes
 
 ## Contributors
