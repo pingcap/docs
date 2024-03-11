@@ -80,6 +80,13 @@ By separating PD modules into separately-deployable services, their blast radii 
 
 ### Performance
 
+* Support pushing down the following functions to TiFlash [#50975](https://github.com/pingcap/tidb/issues/50975) [#50485](https://github.com/pingcap/tidb/issues/50485) @[yibin87](https://github.com/yibin87) @[windtalker](https://github.com/windtalker) **tw@Oreoxmt** <!--1662--><!--1664-->
+
+    * `CAST(DECIMAL AS DOUBLE)`
+    * `POWER()`
+
+  For more information, see [documentation](/tiflash/tiflash-supported-pushdown-calculations.md).
+
 * Introduce priority queues for automatic statistics update [#50132](https://github.com/pingcap/tidb/issues/50132) @[hi-rustin](https://github.com/hi-rustin) **tw@hfxsd** <!--1640-->
 
     Maintaining the up-to-date nature of optimizer statistics is critical to stabilizing database performance. Most users rely on the [automatic statistics update](/statistics.md#automatic-update) provided by TiDB to keep statistics up-to-date. Automatic statistics update polls the status of statistics for all objects, and adds objects with insufficient health to a queue that is collected and updated one by one. In previous versions, the collection order is set randomly, which can result in longer waits for more worthy objects to be updated, causing potential database performance rollbacks.
@@ -115,6 +122,7 @@ By separating PD modules into separately-deployable services, their blast radii 
     Before v8.0.0, the TSO update interval of low-precision TSO feature is fixed and cannot be adjusted according to actual business needs. In v8.0.0, TiDB introduces the system variable `tidb_low_resolution_tso_update_interval` to control the TSO update interval. This feature is valid only when the low-precision TSO feature is enabled.
 
     For more information, see [documentation](/system-variables.md#tidb_low_resolution_tso_update_interval-new-in-v800).
+
 ### Reliability
 
 * Support caching required schema information according to the Least Recently Used (LRU) algorithm to reduce memory consumption on the TiDB server (experimental) [#50959](https://github.com/pingcap/tidb/issues/50959) @[gmhdbjd](https://github.com/gmhdbjd) **tw@hfxsd** <!--1691-->
@@ -125,7 +133,34 @@ By separating PD modules into separately-deployable services, their blast radii 
 
     For more information, see [documentation](/system-variables.md#tidb_schema_cache_size-new-in-v800).
 
+### Availability
+
+* The proxy component TiProxy becomes generally available (GA) [#413](https://github.com/pingcap/tiproxy/issues/413) @[djshow832](https://github.com/djshow832) @[xhebox](https://github.com/xhebox) **tw@Oreoxmt** <!--1698-->
+
+    TiDB v7.6.0 introduces the proxy component TiProxy as an experimental feature. TiProxy is the official proxy component of TiDB, located between the client and TiDB server. It provides load balancing and connection persistence functions for TiDB, making the workload of the TiDB cluster more balanced and not affecting user access to the database during maintenance operations.
+    
+    In v8.0.0, TiProxy becomes generally available and enhances the automatic generation of signature certificates and monitoring functions.
+
+    The usage scenarios of TiProxy are as follows:
+
+    - During maintenance operations such as rolling restarts, rolling upgrades, and scaling-in in a TiDB cluster, changes occur in the TiDB servers which result in interruptions in connections between clients and the TiDB servers. By using TiProxy, connections can be smoothly migrated to other TiDB servers during these maintenance operations so that clients are not affected.
+    - Client connections to a TiDB server cannot be dynamically migrated to other TiDB servers. When the workload of multiple TiDB servers is unbalanced, it might result in a situation where the overall cluster resources are sufficient, but certain TiDB servers experience resource exhaustion leading to a significant increase in latency. To address this issue, TiProxy provides dynamic migration for connection, which allows connections to be migrated from one TiDB server to another without any impact on the clients, thereby achieving load balancing for the TiDB cluster.
+
+  TiProxy has been integrated into TiUP, TiDB Operator, and TiDB Dashboard, making it easy to configure, deploy and maintain.
+
+    For more information, see [documentation](/tiproxy/tiproxy-overview.md).
+
 ### SQL
+
+* Support a new DML type for handling a large amount of data (experimental) [#50215](https://github.com/pingcap/tidb/issues/50215) @[ekexium](https://github.com/ekexium) **tw@Oreoxmt** <!--1694-->
+
+    Before v8.0.0, TiDB stores all transaction data in memory before committing. When processing a large amount of data, the memory required for transactions becomes a bottleneck that limits the transaction size that TiDB can handle. Although TiDB introduces non-transactional DML to attempt to solve the transaction size limitation by splitting SQL statements, this feature has various limitations and does not provide an ideal experience in actual scenarios.
+
+    Starting from v8.0.0, TiDB supports a DML type for handling a large amount of data. This DML type writes data to TiKV in a timely manner during execution, avoiding the continuous storage of all transaction data in memory, and thus supports handling a large amount of data that exceeds the memory limit. This DML type ensures transaction integrity and uses the same syntax as standard DML. `INSERT`, `UPDATE`, `REPLACE`, and `DELETE` statements can use this new DML type to execute large-scale DML operations.
+
+    This DML type is implemented by the [Pipelined DML](https://github.com/pingcap/tidb/blob/master/docs/design/2024-01-09-pipelined-DML.md) feature and only takes effect on statements with auto-commit enabled. You can control whether to enable this DML type by setting the system variable [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800).
+
+    For more information, see [documentation](/system-variables.md#tidb_dml_type-new-in-v800).
 
 * Support using more expressions to set the default values for columns when creating a table (experimental) [#50936](https://github.com/pingcap/tidb/issues/50936) @[zimulala](https://github.com/zimulala) **tw@hfxsd** <!--1690-->
 
@@ -141,6 +176,14 @@ By separating PD modules into separately-deployable services, their blast radii 
 
     For more information, see [documentation](/br/backup-and-restore-storages.md#other-features-supported-by-the-storage-service).
 
+* Support making invisible indexes visible at the session level [#issue号](链接) @[hawkingrei](https://github.com/hawkingrei) **tw@Oreoxmt** <!--1401-->
+
+    By default, the optimizer does not select [invisible indexes](/sql-statements/sql-statement-create-index.md#invisible-index) to optimize query execution. This mechanism is usually used to evaluate whether to delete an index. If there is uncertainty about whether deleting an index could degrade performance, you can set the index to invisible first and then quickly restore it to visible when necessary.
+
+    Starting from v8.0.0, you can set the session-level system variable [`tidb_opt_use_invisible_indexes`](/system-variables.md#) to `ON` to make the current session recognize and use invisible indexes. With this feature, you can create a new index and test its performance by setting the index to invisible first, and then modifying the system variable in the current session for testing without affecting other sessions. This improvement enhances the safety of performance tuning and helps to improve the stability of production databases.
+
+    For more information, see [documentation](/sql-statements/sql-statement-create-index.md#invisible-index).
+
 * Support writing general logs to a separate file [#51248](https://github.com/pingcap/tidb/issues/51248) @[Defined2014](https://github.com/Defined2014) **tw@hfxsd** <!--1632-->
 
     The general log is a MySQL-compatible feature. When you enable it, it logs all SQL statements executed by the database to help you diagnose problems. TiDB also supports this feature. You can enable it by setting the variable [`tidb_general_log`](/system-variables.md#tidb_general_log). However, in previous versions, the content of general logs can only be written to the TiDB instance log together with other information, which is not friendly to keep it for a long time.
@@ -153,11 +196,20 @@ By separating PD modules into separately-deployable services, their blast radii 
 
 ### Observability
 
-* Feature summary [#issue-number](issue-link) @[pr-auorthor-id](author-link)
+* Support monitoring index usage statistics [#49830](https://github.com/pingcap/tidb/issues/49830) @[YangKeao](https://github.com/YangKeao) **tw@Oreoxmt** <!--1400-->
 
-    Feature descriptions (including what the feature is, why it is valuable for users, and how to use this feature generally)
+    Proper index design is a crucial prerequisite for improving database performance. TiDB v8.0.0 introduces the memory table [`INFORMATION_SCHEMA.TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md), which records usage statistics of all indexes on the current TiDB node, including the following information:
 
-    For more information, see [documentation](doc-link).
+    * The cumulative execution count of statements that scan the index
+    * The total number of rows scanned when accessing the index
+    * The selectivity distribution when scanning the index
+    * The time of the most recent access to the index
+
+  With this information, you can identify indexes that are not used by the optimizer and indexes with poor filtering effects, thereby optimizing index design to improve database performance.
+  
+    Additionally, TiDB v8.0.0 introduces a view [`sys.schema_unused_index`](/sys-schema.md), which is compatible with MySQL. This view records indexes that have not been used since the last start of TiDB. For clusters upgraded from versions earlier than v8.0.0, the `sys` schema and the views in it are not created automatically. You can manually create them by referring to [`sys`](/sys-schema.md).
+
+    For more information, see [documentation](/information-schema/information-schema-tidb-index-usage.md).
 
 ### Data migration
 
