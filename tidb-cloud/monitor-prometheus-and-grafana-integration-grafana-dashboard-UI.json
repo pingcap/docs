@@ -15,7 +15,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "9.3.2"
+      "version": "9.4.3"
     },
     {
       "type": "datasource",
@@ -56,7 +56,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
+  "id": null,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -76,7 +76,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "8QaRpvBVk"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "database time consumed by SQL statements per second, which is collected by SQL types, such as SELECT, INSERT, and UPDATE.",
       "fieldConfig": {
@@ -171,7 +171,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "expr": "sum by(cluster_name) (rate(tidbcloud_db_query_duration_seconds_sum{cluster_name=\"$Cluster_name\"}[2m]))",
@@ -182,7 +182,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "expr": "sum by(sql_type) (rate(tidbcloud_db_query_duration_seconds_sum{cluster_name=\"$Cluster_name\"}[2m]))",
@@ -198,7 +198,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "8QaRpvBVk"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The number of SQL statements executed per second in all TiDB instances, which is collected by SQL types, such as SELECT, INSERT, and UPDATE.",
       "fieldConfig": {
@@ -279,7 +279,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "exemplar": false,
@@ -293,7 +293,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "exemplar": false,
@@ -312,7 +312,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "8QaRpvBVk"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The duration from receiving a request from the client to TiDB till TiDB executing the request and returning the result to the client.",
       "fieldConfig": {
@@ -391,7 +391,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "expr": "sum by(cluster_name) (rate(tidbcloud_db_query_duration_seconds_sum{cluster_name=\"$Cluster_name\"}[2m])) / sum by(cluster_name) (rate(tidbcloud_db_query_duration_seconds_count{cluster_name=\"$Cluster_name\"}[2m]))",
@@ -402,7 +402,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "expr": "sum by(sql_type) (rate(tidbcloud_db_query_duration_seconds_sum{cluster_name=\"$Cluster_name\"}[2m])) / sum by(sql_type) (rate(tidbcloud_db_query_duration_seconds_count{cluster_name=\"$Cluster_name\"}[2m]))",
@@ -418,7 +418,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "8QaRpvBVk"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The duration from receiving a request from the client to TiDB till TiDB executing the request and returning the result to the client.",
       "fieldConfig": {
@@ -497,7 +497,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "expr": "histogram_quantile(0.99, sum by(le, cluster_name) (rate(tidbcloud_db_query_duration_seconds_bucket{cluster_name=\"$Cluster_name\"}[2m])))",
@@ -509,7 +509,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "expr": "histogram_quantile(0.99, sum by(le, sql_type) (rate(tidbcloud_db_query_duration_seconds_bucket{cluster_name=\"$Cluster_name\"}[2m])))",
@@ -526,7 +526,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "8QaRpvBVk"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The statistics of error types (such as syntax errors and primary key conflicts) according to the SQL statement execution errors per minute on each TiDB instance. It contains the module in which an error occurs and the error code.",
       "fieldConfig": {
@@ -604,7 +604,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "expr": "sum by(type) (rate(tidbcloud_db_failed_queries_total{cluster_name=\"$Cluster_name\"}[2m]))",
@@ -620,7 +620,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "8QaRpvBVk"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Current number of connections in your TiDB server\n",
       "fieldConfig": {
@@ -698,7 +698,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "expr": "tidbcloud_db_connections{cluster_name=\"$Cluster_name\"}",
@@ -726,7 +726,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "8QaRpvBVk"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -768,8 +768,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -804,7 +803,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "tidbcloud_changefeed_latency",
@@ -821,7 +820,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "8QaRpvBVk"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -863,8 +862,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -899,7 +897,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "tidbcloud_changefeed_Replica_rows",
@@ -928,7 +926,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "8QaRpvBVk"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The statistics of CPU usage of each TiDB instance.\n",
       "fieldConfig": {
@@ -971,8 +969,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1007,7 +1004,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "expr": "sum by(exported_instance) (rate(tidbcloud_node_cpu_seconds_total{cluster_name=\"$Cluster_name\", component=\"tidb\"}[2m]))",
@@ -1019,7 +1016,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "expr": "tidbcloud_node_cpu_capacity_cores{cluster_name=\"$Cluster_name\", component=\"tidb\"}",
@@ -1036,7 +1033,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "8QaRpvBVk"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The memory usage statistics of each TiDB instance.\n",
       "fieldConfig": {
@@ -1079,8 +1076,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1115,7 +1111,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "expr": "tidbcloud_node_memory_used_bytes{cluster_name=\"$Cluster_name\", component=\"tidb\"}",
@@ -1127,7 +1123,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "expr": "tidbcloud_node_memory_capacity_bytes{cluster_name=\"$Cluster_name\", component=\"tidb\"}",
@@ -1157,7 +1153,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "8QaRpvBVk"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The statistics of CPU usage of each TiKV instance.\n",
       "fieldConfig": {
@@ -1200,8 +1196,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1236,7 +1231,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "expr": "sum by(exported_instance) (rate(tidbcloud_node_cpu_seconds_total{cluster_name=\"$Cluster_name\", component=\"tikv\"}[2m]))",
@@ -1248,7 +1243,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "expr": "tidbcloud_node_cpu_capacity_cores{cluster_name=\"$Cluster_name\", component=\"tikv\"}",
@@ -1265,7 +1260,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "8QaRpvBVk"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The memory usage statistics of each TiKV instance.\n",
       "fieldConfig": {
@@ -1308,8 +1303,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1344,7 +1338,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "expr": "tidbcloud_node_memory_used_bytes{cluster_name=\"$Cluster_name\", component=\"tikv\"}",
@@ -1356,7 +1350,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "expr": "tidbcloud_node_memory_capacity_bytes{cluster_name=\"$Cluster_name\", component=\"tikv\"}",
@@ -1373,7 +1367,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "8QaRpvBVk"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The storage size per TiKV instance.\n",
       "fieldConfig": {
@@ -1416,8 +1410,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1452,7 +1445,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "expr": "tidbcloud_node_storage_used_bytes{cluster_name=\"$Cluster_name\", component=\"tikv\"}",
@@ -1464,7 +1457,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "expr": "tidbcloud_node_storage_capacity_bytes{cluster_name=\"$Cluster_name\", component=\"tikv\"}",
@@ -1494,7 +1487,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "8QaRpvBVk"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The statistics of CPU usage of each TiFlash instance.\n",
       "fieldConfig": {
@@ -1537,8 +1530,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1573,7 +1565,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "expr": "sum by(exported_instance) (rate(tidbcloud_node_cpu_seconds_total{cluster_name=\"$Cluster_name\", component=\"tiflash\"}[2m]))",
@@ -1585,7 +1577,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "expr": "tidbcloud_node_cpu_capacity_cores{cluster_name=\"$Cluster_name\", component=\"tiflash\"}",
@@ -1602,7 +1594,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "8QaRpvBVk"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The memory usage statistics of each TiKV instance.\n",
       "fieldConfig": {
@@ -1645,8 +1637,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1681,7 +1672,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "expr": "tidbcloud_node_memory_used_bytes{cluster_name=\"$Cluster_name\", component=\"tiflash\"}",
@@ -1693,7 +1684,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "expr": "tidbcloud_node_memory_capacity_bytes{cluster_name=\"$Cluster_name\", component=\"tiflash\"}",
@@ -1710,7 +1701,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "8QaRpvBVk"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The storage size per TiFlash instance.\n",
       "fieldConfig": {
@@ -1753,8 +1744,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1789,7 +1779,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "expr": "tidbcloud_node_storage_used_bytes{cluster_name=\"$Cluster_name\", component=\"tiflash\"}",
@@ -1801,7 +1791,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "8QaRpvBVk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "builder",
           "expr": "tidbcloud_node_storage_capacity_bytes{cluster_name=\"$Cluster_name\", component=\"tiflash\"}",
@@ -1824,14 +1814,10 @@
   "templating": {
     "list": [
       {
-        "current": {
-          "selected": false,
-          "text": "Cluster0",
-          "value": "Cluster0"
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
-          "uid": "8QaRpvBVk"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "tidbcloud_db_connections",
         "hide": 0,
