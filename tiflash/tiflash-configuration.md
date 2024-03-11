@@ -166,7 +166,7 @@ delta_index_cache_size = 0
     # log-level = "info" 
 
 [logger]
-    ## log level (available options: "trace", "debug", "info", "warn", "error"). The default value is "info".
+    ## log level (available options: "trace", "debug", "info", "warn", "error"). Starting from v7.1.4, the default value changes from "debug" to "info".
     level = "info"
     log = "/tidb-deploy/tiflash-9000/log/tiflash.log"
     errorlog = "/tidb-deploy/tiflash-9000/log/tiflash_error.log"
