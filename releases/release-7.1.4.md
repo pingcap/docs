@@ -56,7 +56,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
     + TiDB Lightning
 
-        - Improve the performance in scenarios where multiple tables are imported by canceling the lock operation when executing `ALTER TABLE` [#50105](https://github.com/pingcap/tidb/issues/50105) @[D3Hunter](https://github.com/D3Hunter)
+        - Improve the performance in scenarios where multiple tables are imported by removing the lock operation when executing `ALTER TABLE` [#50105](https://github.com/pingcap/tidb/issues/50105) @[D3Hunter](https://github.com/D3Hunter)
 
 ## Bug fixes
 
