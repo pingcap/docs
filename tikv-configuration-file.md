@@ -1176,8 +1176,8 @@ Configuration items related to RocksDB
 
 ### `wal-dir`
 
-+ The directory in which WAL files are stored
-+ Default value: `"/tmp/tikv/store"`
++ The directory in which WAL files are stored. If not specified, the WAL files will be stored in the same directory as the data.
++ Default value: `""`
 
 ### `wal-ttl-seconds`
 
@@ -2066,7 +2066,7 @@ Configuration items related to TiDB Lightning import and BR restore.
 + The garbage ratio threshold to trigger GC.
 + Default value: `1.1`
 
-### `num-threads` <span class="version-mark">New in v7.6.0</span>
+### `num-threads` <span class="version-mark">New in v6.5.8, v7.1.4, v7.5.1, and v7.6.0</span>
 
 + The number of GC threads when `enable-compaction-filter` is `false`.
 + Default value: `1`

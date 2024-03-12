@@ -4,14 +4,7 @@ Welcome to [TiDB](https://github.com/pingcap/tidb) documentation! We are excited
 
 ## What you can contribute
 
-🚀 To provide you with better TiDB documentation, we sincerely invite you to participate in the [2024 TiDB Docs Dash](https://www.pingcap.com/event/tidb-docs-dash/). In this event, you'll have a chance to work with other members of the community while making a meaningful impact on [TiDB documentation](https://docs.pingcap.com/tidb/stable/) and [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud/).
-
-- **Dates/Time:** January 9 at 08:00 UTC ([your local time](https://www.timeanddate.com/worldclock/fixedtime.html?msg=TiDB+Docs+Dash+2024%3A+Start&iso=20240109T08&p1=1440))  – January 12 at 07:59 UTC ([your local time](https://www.timeanddate.com/worldclock/fixedtime.html?msg=TiDB+Docs+Dash+2024%3A+End&iso=20240112T0759&p1=1440))
-- **Event details**: <https://www.pingcap.com/event/tidb-docs-dash/>
-- **Issue list**: <https://github.com/orgs/pingcap/projects/51/views/3>
-- **Participation introduction**: <https://github.com/pingcap/docs/issues/15479>
-
-In addition to the issues and tasks in the event, you can also start from any one of the following items to help improve [TiDB Docs at the PingCAP website](https://docs.pingcap.com/tidb/stable):
+You can start from any one of the following items to help improve [TiDB documentation at the PingCAP website](https://docs.pingcap.com/tidb/stable):
 
 - Fix typos or format (punctuation, space, indentation, code block, etc.)
 - Fix or update inappropriate or outdated descriptions
@@ -160,6 +153,59 @@ If your change fits one of the following situations, **CHOOSE THE AFFECTED RELEA
 - Involves a compatibility change, including changing the default value of a configuration item or a system variable.
 - Fixes format to resolve a display error
 - Fixes broken links
+
+## Guideline for contributing to TiDB Cloud documentation
+
+Currently, the [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud/) is available only in English, and it is stored in the [release-7.5](https://github.com/pingcap/docs/tree/release-7.5/tidb-cloud) branch of this repository for reusing SQL documents and development documents of TiDB v7.5. Hence, to create a pull request for TiDB Cloud documentation, make sure that your PR is based on the [release-7.5](https://github.com/pingcap/docs/tree/release-7.5) branch.
+
+> **Tip:**
+>
+> To learn which TiDB document is reused by TiDB Cloud, check the [TOC file of TiDB Cloud documentation](https://github.com/pingcap/docs/blob/release-7.5/TOC-tidb-cloud.md?plain=1).
+>
+> - If the path of a document in this file starts with `/tidb-cloud/`, it means that this document is only for TiDB Cloud.
+> - If the path of a document in this file does not start with `/tidb-cloud/`, it means that this TiDB document is reused by TiDB Cloud.
+
+In some TiDB documents that are reused by TiDB Cloud, you might notice `CustomContent` tags. These `CustomContent` tags are used to show the dedicated content of TiDB or TiDB Cloud.
+
+For example:
+
+```Markdown
+## Restrictions
+
+<CustomContent platform="tidb">
+
+* The TiDB memory limit on the `INSERT INTO SELECT` statement can be adjusted using the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query). Starting from v6.5.0, it is not recommended to use [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) to control transaction memory size.
+
+    For more information, see [TiDB memory control](/configure-memory-usage.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+* The TiDB memory limit on the `INSERT INTO SELECT` statement can be adjusted using the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query). Starting from v6.5.0, it is not recommended to use [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) to control transaction memory size.
+
+    For more information, see [TiDB memory control](https://docs.pingcap.com/tidb/stable/configure-memory-usage).
+
+</CustomContent>
+
+* TiDB has no hard limit on the concurrency of the `INSERT INTO SELECT` statement, but it is recommended to consider the following practices:
+
+    * When a "write transaction" is large, such as close to 1 GiB, it is recommended to control concurrency to no more than 10.
+    * When a "write transaction" is small, such as less than 100 MiB, it is recommended to control concurrency to no more than 30.
+    * Determine the concurrency based on testing results and specific circumstances.
+```
+
+In the example:
+
+- The content within the `<CustomContent platform="tidb">` tag is only applicable to TiDB and will not be displayed on the [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud/) website.
+- The content within the `<CustomContent platform="tidb-cloud">`tag is only applicable to TiDB Cloud and will not be displayed on the [TiDB documentation](https://docs.pingcap.com/tidb/stable) website.
+- The content that are not wrapped by `<CustomContent>` tag are applicable to both TiDB and TiDB Cloud and will be displayed on both documentation websites.
+
+## Guideline for previewing EBNF diagrams
+
+[TiDB documentation](https://docs.pingcap.com/tidb/stable) provides a lot of SQL synopsis diagrams to help users understand the SQL syntax. For example, you can find the synopsis diagrams for the `ALTER INDEX` statement [here](https://docs.pingcap.com/tidb/stable/sql-statement-alter-index#synopsis).
+
+The source of these synopsis diagrams is written using [extended Backus–Naur form (EBNF)](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form). When preparing the EBNF code for a SQL statement, you can easily preview the EBNF diagram by copying the code to <https://kennytm.github.io/website-docs/dist/> and clicking **Render**.
 
 ## Contact
 

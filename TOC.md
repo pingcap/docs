@@ -140,6 +140,7 @@
     - [Migrate Large Datasets from MySQL](/migrate-large-mysql-to-tidb.md)
     - [Migrate and Merge MySQL Shards of Small Datasets](/migrate-small-mysql-shards-to-tidb.md)
     - [Migrate and Merge MySQL Shards of Large Datasets](/migrate-large-mysql-shards-to-tidb.md)
+    - [Migrate from MariaDB](/migrate-from-mariadb.md)
     - [Migrate from CSV Files](/migrate-from-csv-files-to-tidb.md)
     - [Migrate from SQL Files](/migrate-from-sql-files-to-tidb.md)
     - [Migrate from Parquet Files](/migrate-from-parquet-files-to-tidb.md)
@@ -1034,6 +1035,7 @@
   - v7.6
     - [7.6.0](/releases/release-7.6.0.md)
   - v7.5
+    - [7.5.1](/releases/release-7.5.1.md)
     - [7.5.0](/releases/release-7.5.0.md)
   - v7.4
     - [7.4.0-DMR](/releases/release-7.4.0.md)
@@ -1042,6 +1044,7 @@
   - v7.2
     - [7.2.0-DMR](/releases/release-7.2.0.md)
   - v7.1
+    - [7.1.4](/releases/release-7.1.4.md)
     - [7.1.3](/releases/release-7.1.3.md)
     - [7.1.2](/releases/release-7.1.2.md)
     - [7.1.1](/releases/release-7.1.1.md)
@@ -1051,6 +1054,7 @@
   - v6.6
     - [6.6.0-DMR](/releases/release-6.6.0.md)
   - v6.5
+    - [6.5.8](/releases/release-6.5.8.md)
     - [6.5.7](/releases/release-6.5.7.md)
     - [6.5.6](/releases/release-6.5.6.md)
     - [6.5.5](/releases/release-6.5.5.md)

@@ -413,26 +413,22 @@ Configuration items related to security.
 
 ### `tls-version`
 
+> **Warning:**
+>
+> `"TLSv1.0"` and `"TLSv1.1"` protocols are deprecated in TiDB v7.6.0, and will be removed in v8.0.0.
+
 - Set the minimum TLS version for MySQL Protocol connections.
-- Default value: "", which allows TLSv1.2 or higher. Before TiDB v7.6.0, the default value allows TLSv1.1 or higher.
-- Optional values: `"TLSv1.0"`, `"TLSv1.1"`, `"TLSv1.2"` and `"TLSv1.3"`
+- Default value: "", which allows TLSv1.2 or later versions. Before TiDB v7.6.0, the default value allows TLSv1.1 or later versions.
+- Optional values: `"TLSv1.2"` and `"TLSv1.3"`. Before TiDB v8.0.0, `"TLSv1.0"` and `"TLSv1.1"` are also allowed.
 
 ### `auth-token-jwks` <span class="version-mark">New in v6.4.0</span>
 
-> **Warning:**
->
-> The `tidb_auth_token` authentication method is used only for the internal operation of TiDB Cloud. **DO NOT** change the value of this configuration.
-
-- Set the local file path of the JSON Web Key Sets (JWKS) for the `tidb_auth_token` authentication method.
+- Set the local file path of the JSON Web Key Sets (JWKS) for the [`tidb_auth_token`](/security-compatibility-with-mysql.md#tidb_auth_token) authentication method.
 - Default value: `""`
 
 ### `auth-token-refresh-interval` <span class="version-mark">New in v6.4.0</span>
 
-> **Warning:**
->
-> The `tidb_auth_token` authentication method is used only for the internal operation of TiDB Cloud. **DO NOT** change the value of this configuration.
-
-- Set the JWKS refresh interval for the `tidb_auth_token` authentication method.
+- Set the JWKS refresh interval for the [`tidb_auth_token`](/security-compatibility-with-mysql.md#tidb_auth_token) authentication method.
 - Default value: `1h`
 
 ### `disconnect-on-expired-password` <span class="version-mark">New in v6.5.0</span>
@@ -547,6 +543,10 @@ Configuration items related to performance.
 - Default value: `NO_PRIORITY`
 - Value options: The default value `NO_PRIORITY` means that the priority for statements is not forced to change. Other options are `LOW_PRIORITY`, `DELAYED`, and `HIGH_PRIORITY` in ascending order.
 - Since v6.1.0, the priority for all statements is determined by the TiDB configuration item [`instance.tidb_force_priority`](/tidb-configuration-file.md#tidb_force_priority) or the system variable [`tidb_force_priority`](/system-variables.md#tidb_force_priority). `force-priority` still takes effect. But if `force-priority` and `instance.tidb_force_priority` are set at the same time, the latter takes effect.
+
+> **Note:**
+>
+> Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control.md) to manage resource usage for different SQL statements.
 
 ### `distinct-agg-push-down`
 
@@ -796,6 +796,12 @@ Configuration related to the status of TiDB service.
 - Determines whether to transmit the database-related QPS metrics to Prometheus.
 - Default value: `false`
 
+### `record-db-label`
+
+- Determines whether to transmit the database-related QPS metrics to Prometheus.
+- Supports more metircs types than `record-db-qps`, for example, duration and statements.
+- Default value: `false`
+
 ## pessimistic-txn
 
 For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md).
@@ -896,6 +902,10 @@ Configuration items related to read isolation.
 - Default value: `NO_PRIORITY`
 - The default value `NO_PRIORITY` means that the priority for statements is not forced to change. Other options are `LOW_PRIORITY`, `DELAYED`, and `HIGH_PRIORITY` in ascending order.
 - Before v6.1.0, this configuration is set by `force-priority`.
+
+> **Note:**
+>
+> Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control.md) to manage resource usage for different SQL statements.
 
 ### `max_connections`
 

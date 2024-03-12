@@ -8,7 +8,7 @@ aliases: ['/tidb/dev/sql-statement-flashback-to-timestamp']
 
 TiDB v6.4.0 introduces the `FLASHBACK CLUSTER TO TIMESTAMP` syntax. You can use it to restore a cluster to a specific point in time. When specifying the timestamp, you can either set a datetime value or use a time function. The format of datetime is like '2016-10-08 16:45:26.999', with millisecond as the minimum time unit. But in most cases, specifying the timestamp with second as the time unit is sufficient, for example, '2016-10-08 16:45:26'.
 
-Starting from v6.5.6, v7.1.3, and v7.6.0, TiDB introduces the `FLASHBACK CLUSTER TO TSO` syntax. This syntax enables you to use [TSO](/tso.md) to specify a more precise recovery point in time, thereby enhancing flexibility in data recovery.
+Starting from v6.5.6, v7.1.3, v7.5.1, and v7.6.0, TiDB introduces the `FLASHBACK CLUSTER TO TSO` syntax. This syntax enables you to use [TSO](/tso.md) to specify a more precise recovery point in time, thereby enhancing flexibility in data recovery.
 
 > **Warning:**
 >
