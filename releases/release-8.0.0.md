@@ -249,11 +249,11 @@ By separating PD modules into separately-deployable services, their blast radii 
 
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
-| [`initial-scan-rate-limit``](/system-variables.md#initial-scan-rate-limit-new-in-v620) | Modified | Add a limit of `1MiB` as the minimum value. |
-| [`tidb_redact_log`](/system-variables.md#tidb_redact_log) | Modified | 控制在记录 TiDB 日志和慢日志时如何处理 SAL 文本中的用户信息，可选值为 `OFF`、`ON`、`MARKER`，以分别支持记录信息明文、信息屏蔽、信息标记。当变量值为 `MARKER` 时，日志中的用户信息将被标记处理，可以在之后决定是否对日志信息进行脱敏。 |
-| [`tidb_low_resolution_tso_update_interval`](/system-variables.md#tidb_low_resolution_tso_update_interval-从-v800-版本开始引入) | Newly added | 设置更新 TiDB [缓存 timestamp](system-variables#tidb_low_resolution_tso) 的间隔。 |
+| [`initial-scan-rate-limit`](/system-variables.md#initial-scan-rate-limit-new-in-v620) | Modified | Add a limit of `1MiB` as the minimum value. |
+| [`tidb_redact_log`](/system-variables.md#tidb_redact_log) | Modified | Controls how to handle user information in SAL text when logging TiDB logs and slow logs. Values can be `OFF`, `ON`, and `MARKER` to support logging of information in plain text, information masking, and information marking, respectively. When the value of the variable is `MARKER`, the user information in the log will be marked for processing, and you can decide later whether to desensitize the log information. |
+| [`tidb_low_resolution_tso_update_interval`](/system-variables.md#tidb_low_resolution_tso_update_interval-new-in-v800) | Newly added | Controls the interval for updating TiDB [cache timestamp](/system-variables.md#tidb_low_resolution_tso). |
 | [`tidb_opt_use_invisible_indexes`](/system-variables.md#) | Newly added | 控制会话中是否能够选择[不可见索引](/sql-statements/sql-statement-create-index.md#不可见索引)。当修改变量为`ON`时，针对该会话执行的查询，优化能够使用[不可见索引](/sql-statements/sql-statement-create-index.md#不可见索引)进行优化。|
-|  [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-从-v800-版本开始引入)      |   Newly added                           |  设置缓存 schema 信息可以使用的内存上限，避免占用过多的内存。开启该功能后，将使用 LRU 算法来缓存所需的表，有效减小 schema 信息占用的内存。    |
+|  [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)      |   Newly added                           |  Controls the upper limit of memory that can be used for caching the schema information to avoid occupying too much memory. When this feature is enabled, the LRU algorithm is used to cache the required tables, effectively reducing the memory occupied by schema information.    |
 
 ### Configuration file parameters
 
