@@ -4737,10 +4737,10 @@ SHOW WARNINGS;
 - Type: Enumeration
 - Default value: `OFF`
 - Possible values: `OFF`, `ON`, `MARKER`
-- This variable controls whether to hide user information in the SQL statement being recorded into the TiDB log and slow log.
+- This variable controls whether to hide the user information in the SQL statement being recorded into the TiDB log and slow log.
 - The default value is `OFF`, which means that the user information is not processed in any way.
-- When you set the variable to `ON`, user information is hidden. For example, if the executed SQL statement is `INSERT INTO t VALUES (1,2)`, the statement is recorded as `INSERT INTO t VALUES (?,?)` in the log.
-- When you set the variable to `MARKER`, user information is wrapped in `‹ ›`. For example, if the executed SQL statement is `INSERT INTO t VALUES (1,2)`, the statement is recorded as `INSERT INTO t VALUES (‹1›,‹2›)` in the log. If the input has `‹`, it is escaped as `‹‹`, and `›` is escaped as `››`. Based on the marked logs, you can decide whether to desensitize the marked information when the logs are displayed.
+- When you set the variable to `ON`, the user information is hidden. For example, if the executed SQL statement is `INSERT INTO t VALUES (1,2)`, the statement is recorded as `INSERT INTO t VALUES (?,?)` in the log.
+- When you set the variable to `MARKER`, the user information is wrapped in `‹ ›`. For example, if the executed SQL statement is `INSERT INTO t VALUES (1,2)`, the statement is recorded as `INSERT INTO t VALUES (‹1›,‹2›)` in the log. If the input has `‹`, it is escaped as `‹‹`, and `›` is escaped as `››`. Based on the marked logs, you can decide whether to desensitize the marked information when the logs are displayed.
 
 ### tidb_regard_null_as_point <span class="version-mark">New in v5.4.0</span>
 
