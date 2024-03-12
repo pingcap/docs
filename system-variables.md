@@ -1817,6 +1817,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
         - `"bulk"` mode is only suitable for scenarios where a large amount of data is written without conflicts. This mode is not efficient for handling write conflicts.
         - `"bulk"` mode only takes effect on statements with auto-commit enabled, and requires the [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-span-classversion-marknew-in-v600span) configuration item to be set to `false`.
         - `"bulk"` mode cannot be used on [temporary tables](/temporary-tables.md).
+        - `"bulk"` mode cannot be used on tables containing foreign keys when the foreign key constraint check is enabled (`foreign_key_checks = ON`).
         - This mode is implemented by the Pipelined DML feature. For detailed design and GitHub issues, see [Pipelined DML](https://github.com/pingcap/tidb/blob/master/docs/design/2024-01-09-pipelined-DML.md) and [#50215](https://github.com/pingcap/tidb/issues/50215).
 
 ### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
