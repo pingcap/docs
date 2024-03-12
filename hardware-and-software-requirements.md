@@ -275,9 +275,9 @@ The preceding TiFlash software and hardware requirements are for the coupled sto
 - Software: remain the same as the coupled storage and compute architecture, see [OS and platform requirements](#os-and-platform-requirements).
 - Network port: remain the same as the coupled storage and compute architecture, see [Network](#network-requirements).
 - Disk space:
-    - TiFlash Write Node: it is recommended to configure 200 GB+ of disk space, which is used as a local buffer when adding TiFlash replicas and migrating Region replicas before uploading data to Amazon S3. In addition, an object storage compatible with Amazon S3 is required.
-    - TiFlash Compute Node: it is recommended to configure 100 GB+ of disk space, which is mainly used to cache the data read from the Write Node to improve performance. The cache of the compute node may be fully used, which is normal.
-- CPU and memory requirements are as follows.
+    - TiFlash Write Node: it is recommended to configure at least 200 GB of disk space, which is used as a local buffer when adding TiFlash replicas and migrating Region replicas before uploading data to Amazon S3. In addition, an object storage compatible with Amazon S3 is required.
+    - TiFlash Compute Node: it is recommended to configure at least 100 GB of disk space, which is mainly used to cache the data read from the Write Node to improve performance. The cache of the Compute Node might be fully used, which is normal.
+- CPU and memory requirements are described in the following sections.
 
 ### Development and test environments
 
