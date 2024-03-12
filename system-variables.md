@@ -509,6 +509,7 @@ For more possible values of this variable, see [Authentication plugin status](/s
 ### div_precision_increment <span class="version-mark">New in v8.0.0</span>
 
 - Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `4`
