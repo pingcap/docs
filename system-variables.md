@@ -510,9 +510,10 @@ For more possible values of this variable, see [Authentication plugin status](/s
 
 - Scope: SESSION | GLOBAL
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Integer
 - Default value: `4`
 - Range: `[0, 30]`
-- This variable indicates the number of digits by which to increase the scale of the result of division operations. 
+- This variable is used to control the number of decimal places in the result of a division operation performed using the operator.
 
 ### error_count
 
