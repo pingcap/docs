@@ -10,19 +10,6 @@ The `IMPORT INTO` statement lets you import data to TiDB via the [Physical Impor
 - `IMPORT INTO ... FROM FILE`: import data files in formats such as `CSV`, `SQL`, and `PARQUET` into an empty table in TiDB.
 - `IMPORT INTO ... FROM SELECT`: import the query result of a `SELECT` statement to an empty table in TiDB. You can also use it to import historical data queried with [`AS OF TIMESTAMP`](/as-of-timestamp.md).
 
-> **Note:**
->
-> `IMPORT INTO ... FROM FILE` is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
-
-For TiDB Self-Hosted, `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3, GCS, and the TiDB local storage. For [TiDB Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-dedicated), `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3 and GCS.
-
-- For data files stored in Amazon S3 or GCS, `IMPORT INTO` supports running in the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md).
-
-    - When this DXF is enabled ([tidb_enable_dist_task](/system-variables.md#tidb_enable_dist_task-new-in-v710) is `ON`), `IMPORT INTO` splits a data import job into multiple sub-jobs and distributes these sub-jobs to different TiDB nodes for execution to improve the import efficiency.
-    - When this DXF is disabled, `IMPORT INTO` only supports running on the TiDB node where the current user is connected.
-
-- For data files stored locally in TiDB, `IMPORT INTO` only supports running on the TiDB node where the current user is connected. Therefore, the data files need to be placed on the TiDB node where the current user is connected. If you access TiDB through a proxy or load balancer, you cannot import data files stored locally in TiDB.
-
 ## Restrictions
 
 - `IMPORT INTO` only supports importing data into existing empty tables in the database.
@@ -137,7 +124,7 @@ The `IMPORT INTO` statement supports three data file formats: `CSV`, `SQL`, and 
 
 ### WithOptions
 
-You can use `WithOptions` to specify import options and control the data import process. For example, to execute the import asynchronously in the backend, you can enable the `DETACHED` mode for the import by adding the `WITH DETACHED` option to the `IMPORT INTO` statement.
+You can use `WithOptions` to specify import options and control the data import process. For example, to execute the import of data files asynchronously in the backend, you can enable the `DETACHED` mode for the import by adding the `WITH DETACHED` option to the `IMPORT INTO` statement.
 
 The supported options are described as follows:
 
@@ -160,9 +147,24 @@ The supported options are described as follows:
 | `CLOUD_STORAGE_URI` | All file formats | Specifies the target address where encoded KV data for [Global Sort](/tidb-global-sort.md) is stored. When `CLOUD_STORAGE_URI` is not specified, `IMPORT INTO` determines whether to use Global Sort based on the value of the system variable [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740). If this system variable specifies a target storage address, `IMPORT INTO` uses this address for Global Sort. When `CLOUD_STORAGE_URI` is specified with a non-empty value, `IMPORT INTO` uses that value as the target storage address. When `CLOUD_STORAGE_URI` is specified with an empty value, local sorting is enforced. Currently, the target storage address only supports S3. For details about the URI configuration, see [Amazon S3 URI format](/external-storage-uri.md#amazon-s3-uri-format). When this feature is used, all TiDB nodes must have read and write access for the target S3 bucket. |
 | `DISABLE_PRECHECK` | All file formats and query results of `SELECT` | Setting this option disables pre-checks of non-critical itemes, such as checking whether there are CDC or PITR tasks.  |
 
-## Compressed files
+## `IMPORT INTO ... FROM FILE` usage
 
-`IMPORT INTO` supports importing compressed `CSV` and `SQL` files. It can automatically determine whether a file is compressed and the compression format based on the file extension:
+> **Note:**
+>
+> `IMPORT INTO ... FROM FILE` is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+
+For TiDB Self-Hosted, `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3, GCS, and the TiDB local storage. For [TiDB Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-dedicated), `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3 and GCS.
+
+- For data files stored in Amazon S3 or GCS, `IMPORT INTO ... FROM FILE` supports running in the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md).
+
+    - When the DXF is enabled ([tidb_enable_dist_task](/system-variables.md#tidb_enable_dist_task-new-in-v710) is `ON`), `IMPORT INTO` splits a data import job into multiple sub-jobs and distributes these sub-jobs to different TiDB nodes for execution to improve the import efficiency.
+    - When the DXF is disabled, `IMPORT INTO ... FROM FILE` only supports running on the TiDB node where the current user is connected.
+
+- For data files stored locally in TiDB, `IMPORT INTO ... FROM FILE` only supports running on the TiDB node where the current user is connected. Therefore, the data files need to be placed on the TiDB node where the current user is connected. If you access TiDB through a proxy or load balancer, you cannot import data files stored locally in TiDB.
+
+### Compressed files
+
+`IMPORT INTO ... FROM FILE` supports importing compressed `CSV` and `SQL` files. It can automatically determine whether a file is compressed and the compression format based on the file extension:
 
 | Extension | Compression format |
 |:---|:---|
@@ -175,13 +177,13 @@ The supported options are described as follows:
 > - The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
 > - Because TiDB Lightning cannot concurrently decompress a single large compressed file, the size of the compressed file affects the import speed. It is recommended that a source file is no greater than 256 MiB after decompression.
 
-## Global Sort
+### Global Sort
 
 > **Warning:**
 >
 > The Global Sort feature is experimental. It is not recommended to use it in production environments.
 
-`IMPORT INTO` splits the data import job of a source data file into multiple sub-jobs, each sub-job independently encoding and sorting data before importing. If the encoded KV ranges of these sub-jobs have significant overlap (to learn how TiDB encodes data to KV, see [TiDB computing](/tidb-computing.md)), TiKV needs to keep compaction during import, leading to a decrease in import performance and stability.
+`IMPORT INTO ... FROM FILE` splits the data import job of a source data file into multiple sub-jobs, each sub-job independently encoding and sorting data before importing. If the encoded KV ranges of these sub-jobs have significant overlap (to learn how TiDB encodes data to KV, see [TiDB computing](/tidb-computing.md)), TiKV needs to keep compaction during import, leading to a decrease in import performance and stability.
 
 In the following scenarios, there can be significant overlap in KV ranges:
 
@@ -203,11 +205,11 @@ SET GLOBAL tidb_server_memory_limit='88%';
 > - If the KV range overlap in a source data file is low, enabling Global Sort might decrease import performance. This is because when Global Sort is enabled, TiDB needs to wait for the completion of local sorting in all sub-jobs before proceeding with the Global Sort operations and subsequent import.
 > - After an import job using Global Sort completes, the files stored in the cloud storage for Global Sort are cleaned up asynchronously in a background thread.
 
-## `IMPORT INTO ... FROM FILE` output
+### Output
 
-When `IMPORT INTO ... FROM FILE` completes the import or when the `DETACHED` mode is enabled, `IMPORT INTO` will return the current job information in the output, as shown in the following examples. For the description of each field, see [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md).
+When `IMPORT INTO ... FROM FILE` completes the import or when the `DETACHED` mode is enabled, TiDB returns the current job information in the output, as shown in the following examples. For the description of each field, see [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md).
 
-When `IMPORT INTO` completes the import, the example output is as follows:
+When `IMPORT INTO ... FROM FILE` completes the import, the example output is as follows:
 
 ```sql
 IMPORT INTO t FROM '/path/to/small.csv';
@@ -218,7 +220,7 @@ IMPORT INTO t FROM '/path/to/small.csv';
 +--------+--------------------+--------------+----------+-------+----------+------------------+---------------+----------------+----------------------------+----------------------------+----------------------------+------------+
 ```
 
-When the `DETACHED` mode is enabled, executing the `IMPORT INTO` statement will immediately return the job information in the output. From the output, you can see that the status of the job is `pending`, which means waiting for execution.
+When the `DETACHED` mode is enabled, executing the `IMPORT INTO ... FROM FILE` statement will immediately return the job information in the output. From the output, you can see that the status of the job is `pending`, which means waiting for execution.
 
 ```sql
 IMPORT INTO t FROM '/path/to/small.csv' WITH DETACHED;
@@ -229,27 +231,27 @@ IMPORT INTO t FROM '/path/to/small.csv' WITH DETACHED;
 +--------+--------------------+--------------+----------+-------+---------+------------------+---------------+----------------+----------------------------+------------+----------+------------+
 ```
 
-## View and manage import jobs
+### View and manage import jobs
 
 For an import job with the `DETACHED` mode enabled, you can use [`SHOW IMPORT`](/sql-statements/sql-statement-show-import-job.md) to view its current job progress.
 
 After an import job is started, you can cancel it using [`CANCEL IMPORT JOB <job-id>`](/sql-statements/sql-statement-cancel-import-job.md).
 
-## Examples
+### Examples
 
-### Import a CSV file with headers
+#### Import a CSV file with headers
 
 ```sql
 IMPORT INTO t FROM '/path/to/file.csv' WITH skip_rows=1;
 ```
 
-### Import a file asynchronously in the `DETACHED` mode
+#### Import a file asynchronously in the `DETACHED` mode
 
 ```sql
 IMPORT INTO t FROM '/path/to/file.csv' WITH DETACHED;
 ```
 
-### Skip importing a specific field in your data file
+#### Skip importing a specific field in your data file
 
 Assume that your data file is in the CSV format and its content is as follows:
 
@@ -265,7 +267,7 @@ And assume that the target table schema for the import is `CREATE TABLE t(id int
 IMPORT INTO t(id, name, @1) FROM '/path/to/file.csv' WITH skip_rows=1;
 ```
 
-### Import multiple data files using the wildcard `*`
+#### Import multiple data files using the wildcard `*`
 
 Assume that there are three files named `file-01.csv`, `file-02.csv`, and `file-03.csv` in the `/path/to/` directory. To import these three files into a target table `t` using `IMPORT INTO`, you can execute the following SQL statement:
 
@@ -273,7 +275,7 @@ Assume that there are three files named `file-01.csv`, `file-02.csv`, and `file-
 IMPORT INTO t FROM '/path/to/file-*.csv'
 ```
 
-### Import data files from Amazon S3 or GCS
+#### Import data files from Amazon S3 or GCS
 
 - Import data files from Amazon S3:
 
@@ -289,7 +291,7 @@ IMPORT INTO t FROM '/path/to/file-*.csv'
 
 For details about the URI path configuration for Amazon S3 or GCS, see [URI Formats of External Storage Services](/external-storage-uri.md).
 
-### Calculate column values using SetClause
+#### Calculate column values using SetClause
 
 Assume that your data file is in the CSV format and its content is as follows:
 
@@ -305,13 +307,13 @@ And assume that the target table schema for the import is `CREATE TABLE t(id int
 IMPORT INTO t(id, name, @1) SET val=@1*100 FROM '/path/to/file.csv' WITH skip_rows=1;
 ```
 
-### Import a data file in the SQL format
+#### Import a data file in the SQL format
 
 ```sql
 IMPORT INTO t FROM '/path/to/file.sql' FORMAT 'sql';
 ```
 
-### Limit the write speed to TiKV
+#### Limit the write speed to TiKV
 
 To limit the write speed to a TiKV node to 10 MiB/s, execute the following SQL statement:
 
@@ -319,15 +321,21 @@ To limit the write speed to a TiKV node to 10 MiB/s, execute the following SQL s
 IMPORT INTO t FROM 's3://bucket/path/to/file.parquet?access-key=XXX&secret-access-key=XXX' FORMAT 'parquet' WITH MAX_WRITE_SPEED='10MiB';
 ```
 
-### `IMPORT INTO ... FROM SELECT`
+## `IMPORT INTO ... FROM SELECT` usage
 
-To import the `UNION ` result to the target table `t`, with import concurrency specified as `8` and precheck of non-critical items configured as disabled, execute the following SQL statement:
+`IMPORT INTO ... FROM SELECT` lets you import the query result of a `SELECT` statement to an empty table in TiDB. You can also use it to import historical data queried with [`AS OF TIMESTAMP`](/as-of-timestamp.md).
+
+### Import the query result of `SELECT`
+
+To import the `UNION` result to the target table `t`, with import concurrency specified as `8` and precheck of non-critical items configured as disabled, execute the following SQL statement:
 
 ```sql
 IMPORT INTO t FROM SELECT * FROM src UNION SELECT * FROM src2 WITH THREAD = 8, DISABLE_PRECHECK;
 ```
 
-To import historical data at the specified time point to the target table `t`, execute the following SQL statement:
+### Import historical data at a specified time point
+
+To import historical data at a specified time point to the target table `t`, execute the following SQL statement:
 
 ```sql
 IMPORT INTO t FROM SELECT * FROM src AS OF TIMESTAMP '2024-02-27 11:38:00';
