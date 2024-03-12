@@ -268,31 +268,31 @@ As an open-source distributed SQL database, TiDB requires the following network 
 
 TiDB relies on [Grafana](https://grafana.com/) to provide visualization of database metrics. A recent version of Microsoft Edge, Safari, Chrome or Firefox with Javascript enabled is sufficient.
 
-## Hardware and Software Requirements for TiFlash Disaggregated Storage and Compute Architecture
+## Hardware and software requirements for TiFlash disaggregated storage and compute architecture
 
-All the descriptions above are for the coupled TiFlash architecture. Starting from v7.0.0, TiFlash introduces support for the [disaggregated of storage and compute](/tiflash/tiflash-disaggregated-and-s3.md) architecture. In this architecture, TiFlash is divided into storage nodes and compute nodes. The corresponding hardware and software requirements are as follows:
+The preceding TiFlash software and hardware requirements are for the coupled storage and compute architecture. Starting from v7.0.0, TiFlash supports the [disaggregated storage and compute architecture](/tiflash/tiflash-disaggregated-and-s3.md). In this architecture, TiFlash is divided into two types of nodes: the Write Node and the Compute Node. The requirements for these nodes are as follows:
 
-1. Software: The operating system and platform requirements are same with the coupled storage and compute architecture.
-2. Network Ports: Network port requirements are same with the coupled storage and compute mode.
-3. Disk Space Requirements:
-   1. Storage Nodes: Same with the coupled storage and compute mode, but an S3-compatible object storage is required.
-   2. Compute Nodes: Recommended 100GB. The storage on compute nodes is mainly used to cache data read from storage nodes to accelerate performance. Therefore, it is normal to see the cache on compute nodes being fully utilized.
-4. CPU and Other Memory Requirements - Refer to the Next Section
+- Software: remain the same as the coupled storage and compute architecture, see [OS and platform requirements](#os-and-platform-requirements).
+- Network port: remain the same as the coupled storage and compute architecture, see [Network](#network-requirements).
+- Disk space:
+    - TiFlash Write Node: it is recommended to configure 200 GB+ of disk space, which is used as a local buffer when adding TiFlash replicas and migrating Region replicas before uploading data to Amazon S3. In addition, an object storage compatible with Amazon S3 is required.
+    - TiFlash Compute Node: it is recommended to configure 100 GB+ of disk space, which is mainly used to cache the data read from the Write Node to improve performance. The cache of the compute node may be fully used, which is normal.
+- CPU and memory requirements are as follows.
 
-### Development and Testing Environment
+### Development and test environments
 
-| **Component** | **CPU** | **Memory** | **Local Storage** | **Network** | **Instance Quantity (Minimum Requirement)** |
+| Component | CPU | Memory | Local Storage | Network | Number of Instances (Minimum Requirement) |
 | --- | --- | --- | --- | --- | --- |
-| TiFlash Storage Node | 16 cores+ | 32 GB+ | SSD, 200 GB+ | Gigabit Ethernet | 1 |
-| TiFlash Compute Node | 16 cores+ | 32 GB+ | SSD, 100 GB+ | Gigabit Ethernet | 0 |
+| TiFlash Write Node | 16 cores+ | 32 GB+ | SSD, 200 GB+ | Gigabit Ethernet | 1 |
+| TiFlash Compute Node | 16 cores+ | 32 GB+ | SSD, 100 GB+ | Gigabit Ethernet | 0 (see the following note) |
 
-### Production Environment
+### Production environment
 
-| **Component** | **CPU** | **Memory** | **Disk Type** | **Network** | **Instance Quantity (Minimum Requirement)** |
+| Component | CPU | Memory | Disk Type | Network | Number of Instances (Minimum Requirement) |
 | --- | --- | --- | --- | --- | --- |
-| TiFlash Storage Node | 32 cores+ | 64 GB+ | 1 or more SSDs | 10 Gigabit Ethernet (2 recommended) | 1 |
-| TiFlash Compute Node | 32 cores+ | 64 GB+ | 1 or more SSDs | 10 Gigabit Ethernet (2 recommended) | 0 |
+| TiFlash Write Node | 32 cores+ | 64 GB+ | 1 or more SSDs | 10 Gigabit Ethernet (2 recommended) | 1 |
+| TiFlash Compute Node | 32 cores+ | 64 GB+ | 1 or more SSDs | 10 Gigabit Ethernet (2 recommended) | 0 (see the following note) |
 
 > **Note:**
 >
-> - TiFlash Compute Nodes can be quickly scaled in or out using deployment tools such as TiUP, with a scaling range of [0, inf+].
+> You can use deployment tools such as TiUP to quickly scale in or out the TiFlash Compute Node, within the range of `[0, +inf]`.
