@@ -136,3 +136,11 @@ If you want to skip this DDL statement that goes wrong, set the start-ts of the 
 cdc cli changefeed remove --server=http://127.0.0.1:8300 --changefeed-id simple-replication-task
 cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task" --sort-engine="unified" --start-ts 415241823337054210
 ```
+
+## How do I handle the `Kafka: client has run out of available brokers to talk to: EOF` error when using TiCDC to replicate messages to Kafka?
+
+This error is generally caused by the connection failure between TiCDC and the Kafka cluster. You can troubleshoot the issue by checking the Kafka logs and network status. One possible reason is that you did not specify the correct `kafka-version` parameter when creating the replication task, causing the Kafka client inside TiCDC to use the wrong Kafka API version when accessing the Kafka server. You can fix this issue by specifying the correct `kafka-version` parameter in the [`--sink-uri`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka) configuration. For example:
+
+```shell
+cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri "kafka://127.0.0.1:9092/test?topic=test&protocol=open-protocol&kafka-version=2.4.0" 
+```
