@@ -126,15 +126,19 @@ driver = "file"
 
 [conflict]
 # Starting from v7.3.0, a new version of strategy is introduced to handle conflicting data. The default value is "".
-# - "": TiDB Lightning does not detect or handle conflicting data. If the source file contains conflicting primary or unique key records, the subsequent step reports an error.
+# - "": TiDB Lightning does not detect or handle conflicting data. If the source file contains conflicting primary or unique key records, the subsequent step reports an error. In the logical import mode, the strategy is converted to "error" directly.
 # - "error": when detecting conflicting primary or unique key records in the imported data, TiDB Lightning terminates the import and reports an error.
-# - "replace": when encountering conflicting primary or unique key records, TiDB Lightning retains the new data and overwrites the old data.
-# - "ignore": when encountering conflicting primary or unique key records, TiDB Lightning retains the old data and ignores the new data.
-# The new version strategy cannot be used together with tikv-importer.duplicate-resolution (the old version of conflict detection).
+# - "replace": when encountering conflicting primary or unique key records, TiDB Lightning retains the latest data and overwrites the old data.
+#              The conflict data are recorded in the `lightning_task_info.conflict_error_v2` table and the `conflict_records` table of the target TiDB cluster.
+#              You can manually insert the correct records into the target table based on your business requirements.
+#              Note that the target TiKV must be v5.2.0 or later versions.
+# - "ignore": when encountering conflicting primary or unique key records, TiDB Lightning retains the old data and ignores the new data. This option can only be used in the logical import mode (`tikv-importer.backend = "tidb"`).
 strategy = ""
-# Controls the upper limit of the conflicting data that can be handled when strategy is "replace" or "ignore". You can set it only when strategy is "replace" or "ignore". The default value is 9223372036854775807, which means that almost all errors are tolerant.
+# Controls whether TiDB Lightning checks conflicts before the import. The default value is false, which means that TiDB Lightning only checks conflicts after the import. If you set it to true, TiDB Lightning checks conflicts both before and after the import. This parameter can be used only in the physical import mode (`tikv-importer.backend = "local"`).
+# precheck-conflict-before-import = false
+# Controls the maximum number of conflict errors that can be handled when strategy is "replace" or "ignore". You can set it only when strategy is "replace" or "ignore". The default value is 9223372036854775807, which means that almost all errors are tolerant. This parameter takes effect only when `precheck-conflict-before-import` is enabled in physical import mode.
 # threshold = 9223372036854775807
-# Controls the maximum number of records in the conflict_records table. The default value is 100. If the strategy is "ignore", the conflict records that are ignored are recorded; if the strategy is "replace", the conflict records that are overwritten are recorded. However, the "replace" strategy cannot record the conflict records in the logical import mode.
+# Controls the maximum number of records in the conflict_records table. The default value is 100. If the strategy is "ignore", the conflict records that are ignored are recorded; if the strategy is "replace", the conflict records that are overwritten are recorded. However, the "replace" strategy cannot record the conflict records in the logical import mode. This parameter takes effect only when `precheck-conflict-before-import` is enabled in physical import mode.
 # max-record-rows = 100
 
 [tikv-importer]
@@ -150,17 +154,6 @@ strategy = ""
 # Note that this parameter is only used in scenarios where the target table is empty.
 # parallel-import = false
 
-# Whether to detect and resolve duplicate records (unique key conflict) in the physical import mode.
-# The following resolution algorithms are supported:
-#  - none: does not detect duplicate records, which has the best performance of the two algorithms.
-#          But if there are duplicate records in the data source, it might lead to inconsistent data in the target TiDB.
-#  - remove: if there are primary key or unique key conflicts between the inserting data A and B,
-#            A and B will be removed from the target table and recorded
-#            in the `lightning_task_info.conflict_error_v1` table in the target TiDB.
-#            You can manually insert the correct records into the target table based on your business requirements.
-#            Note that the target TiKV must be v5.2.0 or later versions; otherwise it falls back to 'none'.
-# The default value is 'none'.
-# duplicate-resolution = 'none'
 # The maximum number of KV pairs in one request when sending data to TiKV in physical import mode.
 # Starting from v7.2.0, this parameter is deprecated and no longer takes effect after it is set.
 # If you want to adjust the amount of data sent to TiKV in one request, use the `send-kv-size` parameter instead.
