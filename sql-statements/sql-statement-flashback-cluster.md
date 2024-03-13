@@ -15,7 +15,7 @@ Starting from v6.5.6, v7.1.3, v7.5.1, and v7.6.0, TiDB introduces the `FLASHBACK
 
 > **Warning:**
 >
-> When specifying a recovery point in time, make sure to check the validity of your specified timestamp or TSO and avoid specifying a future time that exceeds the maximum TSO currently allocated by the PD (see `Current TSO` on the Grafana PD panel). Otherwise, concurrent processing linear consistency and transaction isolation levels might be violated, leading to serious data correctness issues.
+> When specifying a recovery point in time, make sure to check the validity of your target timestamp or TSO and avoid specifying a future time that exceeds the maximum TSO currently allocated by the PD (see `Current TSO` on the Grafana PD panel). Otherwise, concurrent processing linear consistency and transaction isolation levels might be violated, leading to serious data correctness issues.
 
 <CustomContent platform="tidb">
 
