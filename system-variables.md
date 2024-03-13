@@ -4493,6 +4493,13 @@ SHOW WARNINGS;
 - Default value: `24.0`
 - Indicates the concurrency number of TiFlash computation. This variable is internally used in the Cost Model, and it is NOT recommended to modify its value.
 
+### tidb_opt_use_invisible_indexes
+
+- Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Default Value: OFF
+- This variable is used to set whether the optimizer is allowed to use invisible indexes. Invisible indexes refer to indexes created by the user, but such indexes are not used by the optimizer. After enabling this option, the optimizer will attempt to use invisible indexes.
+
 ### tidb_opt_write_row_id
 
 > **Note:**
