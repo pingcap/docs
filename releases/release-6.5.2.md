@@ -39,7 +39,7 @@ TiDB バージョン: 6.5.2
 
         -   TiCDC オープン API v2.0 [#8743](https://github.com/pingcap/tiflow/issues/8743) @ [スドジ](https://github.com/sdojjy)をリリース
         -   TiCDC による OOM 問題を防ぐために`gomemlimit`を導入します[#8675](https://github.com/pingcap/tiflow/issues/8675) @ [咸陽飛](https://github.com/amyangfei)
-        -   複数ステートメントのアプローチを使用して、 `UPDATE`ステートメント[#8057](https://github.com/pingcap/tiflow/issues/8057) @ [咸陽飛](https://github.com/amyangfei)のバッチ実行を含むシナリオでレプリケーションのパフォーマンスを最適化します。
+        -   複数ステートメントのアプローチを使用して、 `UPDATE`ステートメント[#8057](https://github.com/pingcap/tiflow/issues/8057) @ [アミャンフェイ](https://github.com/amyangfei)のバッチ実行を含むシナリオでレプリケーションのパフォーマンスを最適化します。
         -   REDO アプライアでのトランザクションの分割をサポートして、スループットを向上させ、災害復旧シナリオでの RTO を削減します[#8318](https://github.com/pingcap/tiflow/issues/8318) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   REDO ログ[#8361](https://github.com/pingcap/tiflow/issues/8361) @ [CharlesCheung96](https://github.com/CharlesCheung96)での DDL イベントの適用のサポート
 
@@ -65,7 +65,7 @@ TiDB バージョン: 6.5.2
     -   準備されたプラン キャッシュが有効になっている場合にフル インデックス スキャンでエラーが発生する可能性がある問題を修正します[#42150](https://github.com/pingcap/tidb/issues/42150) @ [fzzf678](https://github.com/fzzf678)
     -   プラン キャッシュの準備が有効になっている場合に IndexMerge が誤った結果を生成する可能性がある問題を修正します[#41828](https://github.com/pingcap/tidb/issues/41828) @ [qw4990](https://github.com/qw4990)
     -   `max_prepared_stmt_count`の設定が反映されない問題を修正[#39735](https://github.com/pingcap/tidb/issues/39735) @ [シュイファングリーンアイズ](https://github.com/xuyifangreeneyes)
-    -   プラン キャッシュの準備が有効になっている場合に IndexMerge が誤った結果を生成する可能性がある問題を修正します[#41828](https://github.com/pingcap/tidb/issues/41828) @ [qw4990](https://github.com/qw4990) @ [徐淮嶼](https://github.com/XuHuaiyu)
+    -   グローバルメモリ制御により、メモリ使用量が`tidb_server_memory_limit_sess_min_size` [#42662](https://github.com/pingcap/tidb/issues/42662) @ [徐淮嶼](https://github.com/XuHuaiyu)未満の SQL ステートメントが誤って強制終了される可能性がある問題を修正
     -   パーティションテーブル[#40596](https://github.com/pingcap/tidb/issues/40596) @ [ティエンチャイアマオ](https://github.com/tiancaiamao)の動的トリミングモードでインデックス結合によりpanicが発生する可能性がある問題を修正
 
 -   TiKV
@@ -102,7 +102,7 @@ TiDB バージョン: 6.5.2
         -   REDO ログ[#8591](https://github.com/pingcap/tiflow/issues/8591) @ [CharlesCheung96](https://github.com/CharlesCheung96)の適用中に特殊なケースでデータ損失が発生する可能性がある問題を修正
         -   `db sorter`のメモリ使用量が`cgroup memory limit` [#8588](https://github.com/pingcap/tiflow/issues/8588) @ [咸陽飛](https://github.com/amyangfei)によって制御されない問題を修正
         -   データ レプリケーション中の`UPDATE`と`INSERT`ステートメントの不規則性により、 `Duplicate entry`エラー[#8597](https://github.com/pingcap/tiflow/issues/8597) @ [スドジ](https://github.com/sdojjy)が発生する可能性がある問題を修正します。
-        -   PD と TiCDC [#8562](https://github.com/pingcap/tiflow/issues/8562) @ [オーバーヴィーナス](https://github.com/overvenus)の間のネットワーク分離によって引き起こされる TiCDC サービスの異常終了の問題を修正します。
+        -   PD と TiCDC [#8562](https://github.com/pingcap/tiflow/issues/8562) @ [オーバーヴィーナス](https://github.com/overvenus)の間のネットワーク分離が原因で発生する TiCDC サービスの異常終了の問題を修正します。
         -   Kubernetes [#8484](https://github.com/pingcap/tiflow/issues/8484) @ [オーバーヴィーナス](https://github.com/overvenus)で TiCDC クラスターの正常なアップグレードが失敗する問題を修正
         -   すべてのダウンストリーム Kafka サーバーが利用できない場合に TiCDCサーバーがパニックになる問題を修正[#8523](https://github.com/pingcap/tiflow/issues/8523) @ [3エースショーハンド](https://github.com/3AceShowHand)
         -   変更フィードを再開するとデータが失われる可能性がある、またはチェックポイントが[#8242](https://github.com/pingcap/tiflow/issues/8242) @ [オーバーヴィーナス](https://github.com/overvenus)進むことができないという問題を修正します。

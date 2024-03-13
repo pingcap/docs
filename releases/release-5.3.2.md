@@ -86,7 +86,7 @@ TiDB バージョン: 5.3.2
     -   PDリーダー転送[#4769](https://github.com/tikv/pd/issues/4769)直後にスケジューリングが開始できない問題を修正
     -   PDリーダー移転後、削除された墓石ストアが再び表示される問題を修正[#4941](https://github.com/tikv/pd/issues/4941)
     -   いくつかの特殊なケースにおける TSO フォールバックのバグを修正[#4884](https://github.com/tikv/pd/issues/4884)
-    -   大容量のストア（たとえば 2T）が存在する場合、完全に割り当てられた小さなストアが検出できず、バランス演算子が生成されない問題を修正します[#4805](https://github.com/tikv/pd/issues/4805)
+    -   大容量のストア（たとえば 2T）が存在する場合、完全に割り当てられた小さなストアを検出できず、バランス演算子が生成されない問題を修正します[#4805](https://github.com/tikv/pd/issues/4805)
     -   `SchedulerMaxWaitingOperator`を`1` [#4946](https://github.com/tikv/pd/issues/4946)に設定するとスケジューラが動作しない問題を修正
     -   ラベル分布のメトリクスに残留ラベルがある問題を修正します[#4825](https://github.com/tikv/pd/issues/4825)
 
@@ -129,7 +129,7 @@ TiDB バージョン: 5.3.2
         -   BRまたはTiDB Lightningが異常終了した後にスケジューラが再開しない問題を修正[#33546](https://github.com/pingcap/tidb/issues/33546)
         -   空のクエリ[#33322](https://github.com/pingcap/tidb/issues/33322)を含む DDL ジョブによりBR増分リストアが誤ってエラーを返すバグを修正
         -   復元中にリージョンに一貫性がない場合、 BR が十分な回数再試行しない問題を修正[#33419](https://github.com/pingcap/tidb/issues/33419)
-        -   復元操作で回復不可能なエラーが発生した場合にBR がスタックするバグを修正[#33200](https://github.com/pingcap/tidb/issues/33200)
+        -   復元操作で回復不能なエラーが発生した場合にBR がスタックするバグを修正[#33200](https://github.com/pingcap/tidb/issues/33200)
         -   BR がRawKV [#32607](https://github.com/pingcap/tidb/issues/32607)のバックアップに失敗する問題を修正
         -   BR がS3 内部エラーを処理できない問題を修正[#34350](https://github.com/pingcap/tidb/issues/34350)
 
@@ -138,14 +138,14 @@ TiDB バージョン: 5.3.2
         -   所有者の変更によって引き起こされた誤ったメトリクスを修正する[#4774](https://github.com/pingcap/tiflow/issues/4774)
         -   REDO ログ マネージャーがログを書き込む前にログをフラッシュするバグを修正[#5486](https://github.com/pingcap/tiflow/issues/5486)
         -   一部のテーブルが REDO ライターによって維持されていない場合、解決された ts の移動が速すぎるバグを修正[#5486](https://github.com/pingcap/tiflow/issues/5486)
-        -   UUID サフィックスを REDO ログ ファイル名に追加して、ファイル名の競合によってデータ損失が発生する可能性がある問題を修正します[#5486](https://github.com/pingcap/tiflow/issues/5486)
+        -   ファイル名の競合によってデータ損失が発生する可能性がある問題を修正するには、REDO ログ ファイル名に UUID サフィックスを追加します[#5486](https://github.com/pingcap/tiflow/issues/5486)
         -   MySQL シンクが間違ったチェックポイント Ts [#5107](https://github.com/pingcap/tiflow/issues/5107)を保存する可能性があるバグを修正
         -   アップグレード[#5266](https://github.com/pingcap/tiflow/issues/5266)後に TiCDC クラスターがpanicになる可能性がある問題を修正
         -   同じノード[#4464](https://github.com/pingcap/tiflow/issues/4464)でテーブルが繰り返しスケジュールされると、変更フィードがスタックする問題を修正します。
         -   TLS を有効にした後、 `--pd`で設定した最初の PD が利用できない場合に TiCDC の起動に失敗する問題を修正[#4777](https://github.com/pingcap/tiflow/issues/4777)
         -   PDノードが異常[#4778](https://github.com/pingcap/tiflow/issues/4778)の場合、オープンAPIによるステータス問い合わせがブロックされる場合があるバグを修正
         -   Unified Sorter [#4447](https://github.com/pingcap/tiflow/issues/4447)によって使用されるワーカープールの安定性の問題を修正しました。
-        -   場合によってはシーケンスが不正に複製されるバグを修正[#4563](https://github.com/pingcap/tiflow/issues/4552)
+        -   場合によってはシーケンスが不正に複製されるバグを修正[#4552](https://github.com/pingcap/tiflow/issues/4552)
 
     -   TiDB データ移行 (DM)
 

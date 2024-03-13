@@ -189,7 +189,7 @@ TiDB バージョン: 6.1.0
 
 -   MySQL によるユーザーレベルのロック管理との互換性をサポート
 
-    ユーザーレベルのロックは、MySQL が組み込み関数を通じて提供するユーザー名付きのロック管理システムです。ロック関数は、ロックのブロック、待機、その他のロック管理機能を提供します。ユーザーレベルのロックは、Rails、Elixir、Ecto などの ORM フレームワークでも広く使用されています。 v6.1.0 以降、TiDB は MySQL と互換性のあるユーザーレベル`RELEASE_LOCK` `GET_LOCK`および`RELEASE_ALL_LOCKS`関数をサポートしています。
+    ユーザーレベルのロックは、MySQL が組み込み関数を通じて提供するユーザー名付きのロック管理システムです。ロック関数は、ロックのブロック、待機、およびその他のロック管理機能を提供できます。ユーザーレベルのロックは、Rails、Elixir、Ecto などの ORM フレームワークでも広く使用されています。 v6.1.0 以降、TiDB は MySQL と互換性のあるユーザーレベル`RELEASE_LOCK` `GET_LOCK`および`RELEASE_ALL_LOCKS`関数をサポートしています。
 
     [ユーザードキュメント](/functions-and-operators/locking-functions.md) [#14994](https://github.com/pingcap/tidb/issues/14994)
 
@@ -257,14 +257,14 @@ TiDB バージョン: 6.1.0
 | コンフィグレーションファイル | コンフィグレーション                                                                                                                                                                                             | 種類の変更    | 説明                                                                                                                                                        |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | `committer-concurrency`                                                                                                                                                                                | 削除されました  | システム変数`tidb_committer_concurrency`に置き換えられます。この設定項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                         |
-| TiDB           | `lower-case-table-names`                                                                                                                                                                               | 削除されました  | 現在、TiDB は`lower_case_table_name=2`のみをサポートしています。別の値が設定されている場合、クラスターを v6.1.0 にアップグレードすると、その値は失われます。                                                         |
+| TiDB           | `lower-case-table-names`                                                                                                                                                                               | 削除されました  | 現在、TiDB は`lower_case_table_name=2`のみをサポートします。別の値が設定されている場合、クラスターを v6.1.0 にアップグレードすると、その値は失われます。                                                           |
 | TiDB           | `mem-quota-query`                                                                                                                                                                                      | 削除されました  | システム変数`tidb_mem_quota_query`に置き換えられます。この設定項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                               |
 | TiDB           | `oom-action`                                                                                                                                                                                           | 削除されました  | システム変数`tidb_mem_oom_action`に置き換えられます。この設定項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                                |
-| TiDB           | `prepared-plan-cache.capacity`                                                                                                                                                                         | 削除されました  | システム変数`tidb_prepared_plan_cache_size`に置き換えられます。この構成項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                      |
-| TiDB           | `prepared-plan-cache.enabled`                                                                                                                                                                          | 削除されました  | システム変数`tidb_enable_prepared_plan_cache`に置き換えられます。この構成項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                    |
-| TiDB           | `query-log-max-len`                                                                                                                                                                                    | 削除されました  | システム変数`tidb_query_log_max_len`に置き換えられます。この構成項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                             |
-| TiDB           | `require-secure-transport`                                                                                                                                                                             | 削除されました  | システム変数`require_secure_transport`に置き換えられます。この構成項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                           |
-| TiDB           | `run-auto-analyze`                                                                                                                                                                                     | 削除されました  | システム変数`tidb_enable_auto_analyze`に置き換えられます。この構成項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                           |
+| TiDB           | `prepared-plan-cache.capacity`                                                                                                                                                                         | 削除されました  | システム変数`tidb_prepared_plan_cache_size`に置き換えられます。この設定項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                      |
+| TiDB           | `prepared-plan-cache.enabled`                                                                                                                                                                          | 削除されました  | システム変数`tidb_enable_prepared_plan_cache`に置き換えられます。この設定項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                    |
+| TiDB           | `query-log-max-len`                                                                                                                                                                                    | 削除されました  | システム変数`tidb_query_log_max_len`に置き換えられます。この設定項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                             |
+| TiDB           | `require-secure-transport`                                                                                                                                                                             | 削除されました  | システム変数`require_secure_transport`に置き換えられます。この設定項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                           |
+| TiDB           | `run-auto-analyze`                                                                                                                                                                                     | 削除されました  | システム変数`tidb_enable_auto_analyze`に置き換えられます。この設定項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                           |
 | TiDB           | [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610)                                                                                                                     | 新しく追加された | Global Kill (インスタンス間でのクエリまたは接続の終了) 機能を有効にするかどうかを制御します。値が`true`の場合、 `KILL`と`KILL TIDB`ステートメントの両方でインスタンス間のクエリまたは接続を終了できるため、クエリまたは接続が誤って終了することを心配する必要はありません。 |
 | TiDB           | [`enable-stats-cache-mem-quota`](/tidb-configuration-file.md#enable-stats-cache-mem-quota-new-in-v610)                                                                                                 | 新しく追加された | 統計キャッシュのメモリ割り当てを有効にするかどうかを制御します。                                                                                                                          |
 | TiKV           | [`raft-engine.enable`](/tikv-configuration-file.md#enable-1)                                                                                                                                           | 修正済み     | デフォルト値が`FALSE`から`TRUE`に変更されました。                                                                                                                           |
@@ -376,7 +376,7 @@ TiDB バージョン: 6.1.0
     -   `UnionScan`演算子が順序[#33175](https://github.com/pingcap/tidb/issues/33175)を維持できないため、間違ったクエリ結果が表示される問題を修正
     -   特定の場合に Merge Join 演算子が間違った結果を取得する問題を修正します[#33042](https://github.com/pingcap/tidb/issues/33042)
     -   動的枝刈りモード[#33231](https://github.com/pingcap/tidb/issues/33231)において`index join`の結果が間違っている場合がある問題を修正
-    -   パーティションテーブルの一部のパーティションが削除されると、データがガベージコレクションされない場合がある問題を修正します[#33620](https://github.com/pingcap/tidb/issues/33620)
+    -   パーティションテーブルの一部のパーティションが削除されると、データがガベージコレクションされないことがある問題を修正します[#33620](https://github.com/pingcap/tidb/issues/33620)
     -   クラスターの PD ノードが交換された後、一部の DDL ステートメントが一定期間スタックすることがある問題を修正します[#33908](https://github.com/pingcap/tidb/issues/33908)
     -   `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`テーブルがクエリされるときに TiDBサーバーがメモリ不足になる可能性がある問題を修正します。この問題は、Grafana ダッシュボード[#33893](https://github.com/pingcap/tidb/issues/33893)で遅いクエリをチェックすると発生する可能性があります。
     -   システム変数`max_allowed_packet`が有効にならない問題を修正[#31422](https://github.com/pingcap/tidb/issues/31422)
@@ -418,11 +418,11 @@ TiDB バージョン: 6.1.0
 
     -   TiDB データ移行 (DM)
 
-        -   `start-time`タイム ゾーンの問題を修正し、DM の動作をダウンストリーム タイム ゾーンの使用からアップストリーム タイム ゾーン[#5271](https://github.com/pingcap/tiflow/issues/5471)の使用に変更します。
+        -   `start-time`タイム ゾーンの問題を修正し、DM の動作をダウンストリーム タイム ゾーンの使用からアップストリーム タイム ゾーン[#5471](https://github.com/pingcap/tiflow/issues/5471)の使用に変更します。
         -   タスクが自動的に再開された後、DM がより多くのディスク領域を占有する問題を修正[#3734](https://github.com/pingcap/tiflow/issues/3734) [#5344](https://github.com/pingcap/tiflow/issues/5344)
         -   チェックポイントフラッシュにより失敗した行のデータがスキップされる場合がある問題を修正[#5279](https://github.com/pingcap/tiflow/issues/5279)
-        -   場合によっては、フィルタリングされた DDL をダウンストリームで手動で実行すると、タスクの再開が失敗する可能性がある問題を修正します[#5272](https://github.com/pingcap/tiflow/issues/5272)
-        -   `case-sensitive: true`が設定されていない場合、大文字のテーブルが複製できない問題を修正します[#5255](https://github.com/pingcap/tiflow/issues/5255)
+        -   場合によっては、ダウンストリームでフィルタリングされた DDL を手動で実行すると、タスクの再開が失敗する可能性がある問題を修正します[#5272](https://github.com/pingcap/tiflow/issues/5272)
+        -   `case-sensitive: true`が設定されていない場合、大文字のテーブルを複製できない問題を修正します[#5255](https://github.com/pingcap/tiflow/issues/5255)
         -   `SHOW CREATE TABLE`ステートメント[#5159](https://github.com/pingcap/tiflow/issues/5159)によって返されるインデックスの先頭に主キーがない場合に発生する DM ワーカーのpanic問題を修正します。
         -   GTID が有効になっている場合、またはタスクが自動的に再開された場合に、CPU 使用率が増加し、大量のログが出力される場合がある問題を修正します[#5063](https://github.com/pingcap/tiflow/issues/5063)
         -   DM WebUI [#4993](https://github.com/pingcap/tiflow/issues/4993)のオフライン オプションとその他の使用上の問題を修正
@@ -434,5 +434,5 @@ TiDB バージョン: 6.1.0
         -   事前チェックでローカル ディスク リソースとクラスターの可用性がチェックされない問題を修正します[#34213](https://github.com/pingcap/tidb/issues/34213)
         -   スキーマ[#33381](https://github.com/pingcap/tidb/issues/33381)の誤ったルーティングの問題を修正
         -   TiDB Lightningパニック時に PD 設定が正しく復元されない問題を修正[#31733](https://github.com/pingcap/tidb/issues/31733)
-        -   `auto_increment`列[#29737](https://github.com/pingcap/tidb/issues/27937)の範囲外データが原因でローカル バックエンドのインポートが失敗する問題を修正
+        -   `auto_increment`列[#27937](https://github.com/pingcap/tidb/issues/27937)の範囲外データが原因でローカル バックエンドのインポートが失敗する問題を修正
         -   `auto_random`列または`auto_increment`列が null の場合にローカル バックエンドのインポートが失敗する問題を修正[#34208](https://github.com/pingcap/tidb/issues/34208)

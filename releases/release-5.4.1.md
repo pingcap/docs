@@ -99,7 +99,7 @@ TiDB v5.4.1 では、製品設計に互換性の変更は導入されていま�
 -   PD
 
     -   `dr-autosync`の`Duration`フィールドを動的に設定できない問題を修正[#4651](https://github.com/tikv/pd/issues/4651)
-    -   大容量のストア（たとえば 2T）が存在する場合、完全に割り当てられた小さなストアが検出できず、バランス演算子が生成されない問題を修正します[#4805](https://github.com/tikv/pd/issues/4805)
+    -   大容量のストア（たとえば 2T）が存在する場合、完全に割り当てられた小さなストアを検出できず、バランス演算子が生成されない問題を修正します[#4805](https://github.com/tikv/pd/issues/4805)
     -   ラベル分布のメトリクスに残留ラベルがある問題を修正します[#4825](https://github.com/tikv/pd/issues/4825)
 
 -   TiFlash
@@ -145,7 +145,7 @@ TiDB v5.4.1 では、製品設計に互換性の変更は導入されていま�
         -   所有者の変更によって引き起こされた誤ったメトリクスを修正する[#4774](https://github.com/pingcap/tiflow/issues/4774)
         -   `Canal-JSON`が nil [#4736](https://github.com/pingcap/tiflow/issues/4736)をサポートしていないために発生する可能性がある TiCDCpanic問題を修正
         -   Unified Sorter [#4447](https://github.com/pingcap/tiflow/issues/4447)によって使用されるワーカープールの安定性の問題を修正しました。
-        -   場合によってはシーケンスが不正に複製されるバグを修正[#4563](https://github.com/pingcap/tiflow/issues/4552)
+        -   場合によってはシーケンスが不正に複製されるバグを修正[#4552](https://github.com/pingcap/tiflow/issues/4552)
         -   `Canal-JSON` `string` [#4635](https://github.com/pingcap/tiflow/issues/4635)を誤って処理した場合に発生する可能性がある TiCDCpanicの問題を修正
         -   PDリーダーがキルされた場合にTiCDCノードが異常終了するバグを修正[#4248](https://github.com/pingcap/tiflow/issues/4248)
         -   `batch-replace-enable`が無効になっている場合、MySQL シンクが重複した`replace` SQL ステートメントを生成するバグを修正[#4501](https://github.com/pingcap/tiflow/issues/4501)
@@ -157,7 +157,7 @@ TiDB v5.4.1 では、製品設計に互換性の変更は導入されていま�
 
     -   TiDB Lightning
 
-        -   チェックサム エラー「GC ライフタイムがトランザクション期間よりも短い」 [#32733](https://github.com/pingcap/tidb/issues/32733)を修正
+        -   チェックサム エラー「GC ライフタイムがトランザクション期間よりも短い」を修正します[#32733](https://github.com/pingcap/tidb/issues/32733)
         -   TiDB Lightning が空のテーブルのチェックに失敗するとスタックする問題を修正[#31797](https://github.com/pingcap/tidb/issues/31797)
         -   一部のインポートタスクにソースファイルが含まれていない場合、 TiDB Lightning がメタデータスキーマを削除できないことがあるバグを修正[#28144](https://github.com/pingcap/tidb/issues/28144)
         -   事前チェックでローカル ディスク リソースとクラスターの可用性がチェックされない問題を修正します[#34213](https://github.com/pingcap/tidb/issues/34213)

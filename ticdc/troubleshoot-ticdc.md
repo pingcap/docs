@@ -124,3 +124,11 @@ cdc cli changefeed resume -c test-cf --server=http://127.0.0.1:8300
 cdc cli changefeed remove --server=http://127.0.0.1:8300 --changefeed-id simple-replication-task
 cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task" --sort-engine="unified" --start-ts 415241823337054210
 ```
+
+## <code>Kafka: client has run out of available brokers to talk to: EOF</code>エラーが報告されます。どうすればいいですか？ {#the-code-kafka-client-has-run-out-of-available-brokers-to-talk-to-eof-code-error-is-reported-when-i-use-ticdc-to-replicate-messages-to-kafka-what-should-i-do}
+
+このエラーは通常、TiCDC と Kafka クラスター間の接続障害によって発生します。トラブルシューティングを行うには、Kafka ログとネットワーク ステータスを確認します。考えられる理由の 1 つは、レプリケーション タスクの作成時に正しい`kafka-version`パラメーターを指定しなかったため、TiCDC 内の Kafka クライアントが Kafkaサーバーにアクセスするときに間違った Kafka API バージョンを使用したことです。この問題は、 [`--sink-uri`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)構成で正しい`kafka-version`パラメータを指定することで解決できます。例えば：
+
+```shell
+cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri "kafka://127.0.0.1:9092/test?topic=test&protocol=open-protocol&kafka-version=2.4.0" 
+```

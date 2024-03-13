@@ -115,11 +115,11 @@
     -   [ソフトウェアとハ​​ードウェアの要件](/hardware-and-software-requirements.md)
     -   [環境コンフィグレーションチェックリスト](/check-before-deployment.md)
     -   クラスタトポロジの計画
-        -   [最小限のトポロジ](/minimal-deployment-topology.md)
-        -   [TiFlashトポロジ](/tiflash-deployment-topology.md)
+        -   [最小限のトポロジー](/minimal-deployment-topology.md)
+        -   [TiFlashトポロジー](/tiflash-deployment-topology.md)
         -   [TiCDC トポロジー](/ticdc-deployment-topology.md)
         -   [TiDBBinlogトポロジ](/tidb-binlog-deployment-topology.md)
-        -   [TiSpark トポロジ](/tispark-deployment-topology.md)
+        -   [TiSpark トポロジー](/tispark-deployment-topology.md)
         -   [クロス DC トポロジ](/geo-distributed-deployment-topology.md)
         -   [ハイブリッド トポロジ](/hybrid-deployment-topology.md)
     -   インストールして開始する
@@ -888,7 +888,7 @@
         -   [生成された列](/generated-columns.md)
         -   [SQLモード](/sql-mode.md)
         -   [テーブルの属性](/table-attributes.md)
-        -   トランザクション
+        -   取引
             -   [概要](/transaction-overview.md)
             -   [分離レベル](/transaction-isolation-levels.md)
             -   [楽観的なトランザクション](/optimistic-transaction.md)
@@ -1032,6 +1032,7 @@
     -   v7.2
         -   [7.2.0-DMR](/releases/release-7.2.0.md)
     -   v7.1
+        -   [7.1.4](/releases/release-7.1.4.md)
         -   [7.1.3](/releases/release-7.1.3.md)
         -   [7.1.2](/releases/release-7.1.2.md)
         -   [7.1.1](/releases/release-7.1.1.md)

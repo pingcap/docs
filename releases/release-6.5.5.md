@@ -25,7 +25,6 @@ TiDB バージョン: 6.5.5
     -   リーダー転送中の PITR チェックポイント ラグの安定性を向上[#13638](https://github.com/tikv/tikv/issues/13638) @ [ユジュンセン](https://github.com/YuJuncen)
     -   `safe-ts` [#15082](https://github.com/tikv/tikv/issues/15082) @ [エキシウム](https://github.com/ekexium)に関連するログと監視メトリクスを追加します
     -   `resolved-ts` [#15082](https://github.com/tikv/tikv/issues/15082) @ [エキシウム](https://github.com/ekexium)のログと監視メトリクスをさらに提供します
-    -   圧縮メカニズムを最適化します。リージョンが分割されるときに、分割するキーがない場合、過剰な MVCC バージョン[#15282](https://github.com/tikv/tikv/issues/15282) @ [SpadeA-Tang](https://github.com/SpadeA-Tang)を排除するために圧縮がトリガーされます。
 
 -   ツール
 
@@ -57,7 +56,7 @@ TiDB バージョン: 6.5.5
 
         -   PITR によって暗黙的な主キーを復元すると競合が発生する可能性がある問題を修正[#46520](https://github.com/pingcap/tidb/issues/46520) @ [3ポインター](https://github.com/3pointer)
         -   PITRがmeta-kv [#46578](https://github.com/pingcap/tidb/issues/46578) @ [レヴルス](https://github.com/Leavrth)を回復するときにエラーが発生する問題を修正
-        -   BR統合テスト ケース[#45561](https://github.com/pingcap/tidb/issues/46561) @ [ピュアリンド](https://github.com/purelind)のエラーを修正
+        -   BR統合テスト ケース[#46561](https://github.com/pingcap/tidb/issues/46561) @ [ピュアリンド](https://github.com/purelind)のエラーを修正
         -   PITR が GCS [#47022](https://github.com/pingcap/tidb/issues/47022) @ [レヴルス](https://github.com/Leavrth)からのデータの復元に失敗する問題を修正
 
     -   TiCDC

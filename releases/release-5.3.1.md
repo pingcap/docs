@@ -20,7 +20,7 @@ TiDB バージョン: 5.3.1
 
 -   TiDB
 
-    -   ユーザー ログイン モードのマッピング ロジックを最適化して、ログの MySQL 互換性を高めます[#30450](https://github.com/pingcap/tidb/issues/32648)
+    -   ユーザー ログイン モードのマッピング ロジックを最適化して、ログの MySQL 互換性を高めます[#32648](https://github.com/pingcap/tidb/issues/32648)
 
 -   TiKV
 
@@ -135,7 +135,7 @@ TiDB バージョン: 5.3.1
         -   `mq sink write row`監視データがない問題を修正[#3431](https://github.com/pingcap/tiflow/issues/3431)
         -   レプリケーション タスクが削除されたときに発生する潜在的なpanicの問題を修正します[#3128](https://github.com/pingcap/tiflow/issues/3128)
         -   デッドロックによりレプリケーション タスクが停止するという潜在的な問題を修正します[#4055](https://github.com/pingcap/tiflow/issues/4055)
-        -   etcd [#2980](https://github.com/pingcap/tiflow/issues/2980)でタスクステータスを手動でクリーンアップするときに発生する TiCDCpanicの問題を修正します。
+        -   etcd [#2980](https://github.com/pingcap/tiflow/issues/2980)でタスク ステータスを手動でクリーンアップするときに発生する TiCDCpanicの問題を修正します。
         -   DDL ステートメント内の特別なコメントによりレプリケーション タスクが停止する問題を修正します[#3755](https://github.com/pingcap/tiflow/issues/3755)
         -   `config.Metadata.Timeout` [#3352](https://github.com/pingcap/tiflow/issues/3352)の誤った構成によって引き起こされるレプリケーション停止の問題を修正します。
         -   一部の RHEL リリースでタイムゾーンの問題が原因でサービスを開始できない問題を修正します[#3584](https://github.com/pingcap/tiflow/issues/3584)

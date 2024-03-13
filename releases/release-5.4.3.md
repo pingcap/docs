@@ -12,7 +12,7 @@ TiDB バージョン: 5.4.3
 
 -   TiKV
 
-    -   RocksDB 書き込み停止設定をフロー制御しきい値[#13467](https://github.com/tikv/tikv/issues/13467)よりも小さい値に構成することをサポート
+    -   RocksDB の書き込み停止設定をフロー制御しきい値[#13467](https://github.com/tikv/tikv/issues/13467)よりも小さい値に構成することをサポートします。
     -   1 つのピアが到達不能になった後にRaftstore が大量のメッセージをブロードキャストすることを避けるための`unreachable_backoff`項目の設定をサポートします[#13054](https://github.com/tikv/tikv/issues/13054)
 
 -   ツール
@@ -75,7 +75,7 @@ TiDB バージョン: 5.4.3
 
     -   TiDB Lightning
 
-        -   タイプ`BIGINT`の自動インクリメント列が範囲[#27397](https://github.com/pingcap/tidb/issues/27937)から外れることがある問題を修正
+        -   タイプ`BIGINT`の自動インクリメント列が範囲[#27937](https://github.com/pingcap/tidb/issues/27937)から外れることがある問題を修正
         -   重複排除により、極端な場合にTiDB Lightning がpanicを引き起こす可能性がある問題を修正します[#34163](https://github.com/pingcap/tidb/issues/34163)
         -   TiDB Lightning がParquet ファイルのスラッシュ、数字、または非 ASCII 文字で始まる列をサポートしない問題を修正します[#36980](https://github.com/pingcap/tidb/issues/36980)
         -   TiDB が IPv6 ホスト[#35880](https://github.com/pingcap/tidb/issues/35880)を使用している場合、 TiDB Lightning がTiDB に接続できない問題を修正します。

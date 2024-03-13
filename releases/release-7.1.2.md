@@ -13,6 +13,8 @@ TiDB バージョン: 7.1.2
 
 ## 互換性の変更 {#compatibility-changes}
 
+-   ユーザー[#47665](https://github.com/pingcap/tidb/issues/47665) @ [ティエンチャイアマオ](https://github.com/tiancaiamao)の潜在的な接続問題を防ぐために、Security強化モード (SEM) で[`require_secure_transport`](https://docs.pingcap.com/tidb/v7.1/system-variables#require_secure_transport-new-in-v610) ～ `ON`の設定を禁止します。
+-   デフォルトでは[スムーズなアップグレード](/smooth-upgrade-tidb.md)機能を無効にします。 `/upgrade/start`と`upgrade/finish` HTTP リクエスト[#47172](https://github.com/pingcap/tidb/issues/47172) @ [ジムララ](https://github.com/zimulala)を送信することで有効にできます。
 -   [`tidb_opt_enable_hash_join`](https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_opt_enable_hash_join-new-in-v712)システム変数を導入して、オプティマイザがテーブル[#46695](https://github.com/pingcap/tidb/issues/46695) @ [コードプレイ](https://github.com/coderplay)のハッシュ結合を選択するかどうかを制御します。
 -   RocksDB の定期的な圧縮をデフォルトで無効にすることで、TiKV RocksDB のデフォルトの動作が v6.5.0 より前のバージョンの動作と一致するようになりました。この変更により、アップグレード後の大量の圧縮によって引き起こされる潜在的なパフォーマンスへの影響が防止されます。さらに、TiKV では 2 つの新しい構成項目[`rocksdb.[defaultcf|writecf|lockcf].periodic-compaction-seconds`](https://docs.pingcap.com/tidb/v7.1/tikv-configuration-file#periodic-compaction-seconds-new-in-v712)および[`rocksdb.[defaultcf|writecf|lockcf].ttl`](https://docs.pingcap.com/tidb/v7.1/tikv-configuration-file#ttl-new-in-v712)が導入され、RocksDB [#15355](https://github.com/tikv/tikv/issues/15355) @ [リククスサシネーター](https://github.com/LykxSassinator)の定期的な圧縮を手動で構成できるようになります。
 -   TiCDC では、CSV プロトコルにおけるバイナリ データのエンコード方法を制御する[`sink.csv.binary-encoding-method`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)設定項目を導入しています。デフォルト値は`'base64'` [#9373](https://github.com/pingcap/tiflow/issues/9373) @ [CharlesCheung96](https://github.com/CharlesCheung96)です。
@@ -102,12 +104,12 @@ TiDB バージョン: 7.1.2
     -   パーティションテーブルテーブルと配置ポリシー[#45791](https://github.com/pingcap/tidb/issues/45791) @ [むじょん](https://github.com/mjonss)を持つテーブルの間でパーティションを交換した後、パーティション テーブルへのデータの挿入が失敗することがある問題を修正します。
     -   間違ったタイムゾーン情報[#46033](https://github.com/pingcap/tidb/issues/46033) @ [タンジェンタ](https://github.com/tangenta)を使用して時間フィールドをエンコードする問題を修正
     -   `tmp`ディレクトリが存在しない場合、インデックスを高速追加する DDL ステートメントがスタックする問題を修正[#45456](https://github.com/pingcap/tidb/issues/45456) @ [タンジェンタ](https://github.com/tangenta)
-    -   複数の TiDB インスタンスを同時にアップグレードすると、アップグレード プロセス[#46288](https://github.com/pingcap/tidb/issues/46228) @ [ジムララ](https://github.com/zimulala)がブロックされる可能性がある問題を修正します。
+    -   複数の TiDB インスタンスを同時にアップグレードすると、アップグレード プロセス[#46228](https://github.com/pingcap/tidb/issues/46228) @ [ジムララ](https://github.com/zimulala)がブロックされる可能性がある問題を修正します。
     -   領域[#46135](https://github.com/pingcap/tidb/issues/46135) @ [ジムララ](https://github.com/zimulala)の分割に使用される不正なパラメータによって引き起こされる不均一なリージョン散乱の問題を修正します。
     -   TiDB の再起動後に DDL 操作が停止する可能性がある問題を修正[#46751](https://github.com/pingcap/tidb/issues/46751) @ [wjhuang2016](https://github.com/wjhuang2016)
     -   非整数クラスター化インデックス[#47350](https://github.com/pingcap/tidb/issues/47350) @ [タンジェンタ](https://github.com/tangenta)での分割テーブル操作の禁止
     -   不適切な MDL 処理[#46920](https://github.com/pingcap/tidb/issues/46920) @ [wjhuang2016](https://github.com/wjhuang2016)が原因で DDL 操作が永続的にブロックされる可能性がある問題を修正します。
-    -   `RENAME TABLE`操作[#47064](https://github.com/pingcap/tidb/issues/47064) @ [ジフフスト](https://github.com/jiyfhust)によって引き起こされるテーブル内の重複列の問題を修正
+    -   テーブル[#47064](https://github.com/pingcap/tidb/issues/47064) @ [ジフフスト](https://github.com/jiyfhust)の名前変更によって発生する`information_schema.columns`の重複行の問題を修正します。
     -   `batch-client` `client-go` @ [クレイジークス520](https://github.com/crazycs520) [#47691](https://github.com/pingcap/tidb/issues/47691)panicの問題を修正
     -   メモリ使用量がメモリ制限[#45706](https://github.com/pingcap/tidb/issues/45706) @ [ホーキングレイ](https://github.com/hawkingrei)を超えた場合、パーティション テーブルの統計収集が時間内に強制終了されない問題を修正します。
     -   クエリに`UNHEX`条件[#45378](https://github.com/pingcap/tidb/issues/45378) @ [qw4990](https://github.com/qw4990)が含まれる場合、クエリ結果が不正確になる問題を修正します。
@@ -163,11 +165,11 @@ TiDB バージョン: 7.1.2
         -   PITR が GCS [#47022](https://github.com/pingcap/tidb/issues/47022) @ [レヴルス](https://github.com/Leavrth)からのデータの回復に失敗する問題を修正
         -   RawKV モード[#37085](https://github.com/pingcap/tidb/issues/37085) @ [ピンギュ](https://github.com/pingyu)の詳細なバックアップ フェーズで発生する可能性のあるエラーを修正しました。
         -   PITR を使用してメタ KV を回復するとエラー[#46578](https://github.com/pingcap/tidb/issues/46578) @ [レヴルス](https://github.com/Leavrth)が発生する可能性がある問題を修正
-        -   BR統合テスト ケース[#45561](https://github.com/pingcap/tidb/issues/46561) @ [ピュアリンド](https://github.com/purelind)のエラーを修正
+        -   BR統合テスト ケース[#46561](https://github.com/pingcap/tidb/issues/46561) @ [ピュアリンド](https://github.com/purelind)のエラーを修正
         -   BRで使用されるグローバル パラメータ`TableColumnCountLimit`および`IndexLimit`のデフォルト値を最大値[#45793](https://github.com/pingcap/tidb/issues/45793) @ [レヴルス](https://github.com/Leavrth)に増やすことで、復元の失敗の問題を修正します。
         -   復元されたデータ[#45476](https://github.com/pingcap/tidb/issues/45476) @ [3ポインター](https://github.com/3pointer)をスキャンするときに br CLI クライアントがスタックする問題を修正
         -   PITR が`CREATE INDEX` DDL ステートメント[#47482](https://github.com/pingcap/tidb/issues/47482) @ [レヴルス](https://github.com/Leavrth)の復元をスキップする可能性がある問題を修正します。
-        -   1 分以内に PITR を複数回実行するとデータ損失[#15483](https://github.com/tikv/tikv/issues/15483) @ [ユジュンセン](https://github.com/YuJuncen)が発生する可能性がある問題を修正
+        -   1 分以内に PITR を複数回実行するとデータ損失が発生する可能性がある問題を修正[#15483](https://github.com/tikv/tikv/issues/15483) @ [ユジュンセン](https://github.com/YuJuncen)
 
     -   TiCDC
 
@@ -192,7 +194,7 @@ TiDB バージョン: 7.1.2
 
     -   TiDB データ移行 (DM)
 
-        -   失敗した DDL がスキップされ、後続の DDL が実行されない場合、DM から返されるレプリケーション ラグが増大し続ける問題を修正します[#9605](https://github.com/pingcap/tiflow/issues/9605) @ [D3ハンター](https://github.com/D3Hunter)
+        -   失敗した DDL がスキップされ、後続の DDL が実行されない場合、DM によって返されるレプリケーション ラグが増大し続ける問題を修正します[#9605](https://github.com/pingcap/tiflow/issues/9605) @ [D3ハンター](https://github.com/D3Hunter)
         -   DM が大文字と小文字を区別しない照合順序[#9489](https://github.com/pingcap/tiflow/issues/9489) @ [ヒヒヒヒヒ](https://github.com/hihihuhu)との競合を正しく処理できない問題を修正します。
         -   DM バリデーターのデッドロック問題を修正し、再試行[#9257](https://github.com/pingcap/tiflow/issues/9257) @ [D3ハンター](https://github.com/D3Hunter)を強化しました。
         -   楽観的モード[#9588](https://github.com/pingcap/tiflow/issues/9588) @ [GMHDBJD](https://github.com/GMHDBJD)でタスクを再開すると、DM がすべての DML をスキップする問題を修正します。

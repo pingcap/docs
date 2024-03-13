@@ -88,11 +88,11 @@ TiDB バージョン: 5.2.4
     -   システム変数`max_allowed_packet`が有効にならない問題を修正[#31422](https://github.com/pingcap/tidb/issues/31422)
     -   自動 ID が範囲[#29483](https://github.com/pingcap/tidb/issues/29483)の外にある場合、 `REPLACE`ステートメントが他の行を誤って変更する問題を修正します。
     -   スロークエリログが正常にログ出力できず、メモリを過剰に消費する可能性がある問題を修正[#32656](https://github.com/pingcap/tidb/issues/32656)
-    -   NATURAL JOIN の結果に予期しない列が含まれる場合がある問題を修正[#24981](https://github.com/pingcap/tidb/issues/29481)
+    -   NATURAL JOIN の結果に予期しない列が含まれる場合がある問題を修正[#29481](https://github.com/pingcap/tidb/issues/29481)
     -   データ[#29711](https://github.com/pingcap/tidb/issues/29711)のクエリにプレフィックス列インデックスが使用されている場合、1 つのステートメントで`ORDER BY`と`LIMIT`を一緒に使用すると間違った結果が出力される可能性がある問題を修正します。
     -   楽観的トランザクションのリトライ時にDOUBLE型の自動インクリメント列が変更される場合がある問題を修正[#29892](https://github.com/pingcap/tidb/issues/29892)
     -   STR_TO_DATE 関数がマイクロ秒部分の前のゼロを正しく処理できない問題を修正します[#30078](https://github.com/pingcap/tidb/issues/30078)
-    -   TiFlash は空の範囲を持つテーブルの読み取りをサポートしていませんが、 TiFlashを使用して空の範囲を持つテーブルをスキャンすると、 TiFlashが間違った結果を取得する問題を修正します[#33083](https://github.com/pingcap/tidb/issues/33083)
+    -   TiFlash は空の範囲を持つテーブルの読み取りをまだサポートしていませんが、 TiFlashを使用して空の範囲を持つテーブルをスキャンすると、 TiFlashが間違った結果を取得する問題を修正します[#33083](https://github.com/pingcap/tidb/issues/33083)
 
 -   TiKV
 
@@ -136,7 +136,7 @@ TiDB バージョン: 5.2.4
     -   重い読み取りワークロードで列を追加した後の潜在的なクエリ エラーを修正[#3967](https://github.com/pingcap/tiflash/issues/3967)
     -   無効なstorageディレクトリ構成が予期せぬ動作を引き起こすバグを修正[#4093](https://github.com/pingcap/tiflash/issues/4093)
     -   一部の例外が正しく処理されないバグを修正[#4101](https://github.com/pingcap/tiflash/issues/4101)
-    -   `STR_TO_DATE()`関数がマイクロ秒[#3557](https://github.com/pingcap/tiflash/issues/3557)を解析する際に先頭のゼロを誤って処理するバグを修正
+    -   `STR_TO_DATE()`関数がマイクロ秒[#3557](https://github.com/pingcap/tiflash/issues/3557)の解析時に先頭のゼロを誤って処理するバグを修正
     -   `INT`から`DECIMAL`にキャストするとオーバーフローが発生する可能性がある問題を修正[#3920](https://github.com/pingcap/tiflash/issues/3920)
     -   `DATETIME`から`DECIMAL` [#4151](https://github.com/pingcap/tiflash/issues/4151)をキャストするときに発生する間違った結果を修正
     -   `FLOAT` ～ `DECIMAL` [#3998](https://github.com/pingcap/tiflash/issues/3998)キャスト時に発生するオーバーフローを修正
@@ -165,7 +165,7 @@ TiDB バージョン: 5.2.4
     -   TiCDC
 
         -   デフォルト値を複製できない問題を修正[#3793](https://github.com/pingcap/tiflow/issues/3793)
-        -   場合によってはシーケンスが不正に複製されるバグを修正[#4563](https://github.com/pingcap/tiflow/issues/4552)
+        -   場合によってはシーケンスが不正に複製されるバグを修正[#4552](https://github.com/pingcap/tiflow/issues/4552)
         -   PDリーダーがキルされた場合にTiCDCノードが異常終了するバグを修正[#4248](https://github.com/pingcap/tiflow/issues/4248)
         -   `batch-replace-enable`が無効になっている場合、MySQL シンクが重複した`replace` SQL ステートメントを生成するバグを修正[#4501](https://github.com/pingcap/tiflow/issues/4501)
         -   デフォルトの列値[#3929](https://github.com/pingcap/tiflow/issues/3929)を出力するときに発生するpanicとデータの不整合の問題を修正します。
@@ -177,11 +177,11 @@ TiDB バージョン: 5.2.4
         -   デッドロックによりレプリケーション タスクが停止するという潜在的な問題を修正します[#4055](https://github.com/pingcap/tiflow/issues/4055)
         -   etcd [#2980](https://github.com/pingcap/tiflow/issues/2980)でタスクステータスを手動でクリーンアップするときに発生する TiCDCpanicの問題を修正します。
         -   DDL ステートメント内の特別なコメントによりレプリケーション タスクが停止する問題を修正します[#3755](https://github.com/pingcap/tiflow/issues/3755)
-        -   `config.Metadata.Timeout` [#3352](https://github.com/pingcap/tiflow/issues/3352)の誤った構成によって引き起こされるレプリケーション停止の問題を修正します。
+        -   `config.Metadata.Timeout` [#3352](https://github.com/pingcap/tiflow/issues/3352)の誤った構成が原因でレプリケーションが停止する問題を修正
         -   RHEL リリース[#3584](https://github.com/pingcap/tiflow/issues/3584)のタイムゾーンの問題によりサービスを開始できない問題を修正
         -   `stopped`クラスターのアップグレード後に変更フィードが自動的に再開される問題を修正[#3473](https://github.com/pingcap/tiflow/issues/3473)
         -   MySQL シンクのデッドロックによって引き起こされる過度に頻繁な警告の問題を修正します[#2706](https://github.com/pingcap/tiflow/issues/2706)
-        -   CanalおよびMaxwellプロトコル[#3676](https://github.com/pingcap/tiflow/issues/3676)において、 `enable-old-value`設定項目が自動的に`true`に設定されないバグを修正
+        -   Canal および Maxwell プロトコル[#3676](https://github.com/pingcap/tiflow/issues/3676)で`enable-old-value`設定項目が自動的に`true`に設定されないバグを修正
         -   Avro シンクが JSON 型列の解析をサポートしていない問題を修正します[#3624](https://github.com/pingcap/tiflow/issues/3624)
         -   チェンジフィードチェックポイントラグ[#3010](https://github.com/pingcap/tiflow/issues/3010)の負の値エラーを修正
         -   コンテナ環境の OOM 問題を修正する[#1798](https://github.com/pingcap/tiflow/issues/1798)
@@ -195,7 +195,7 @@ TiDB バージョン: 5.2.4
     -   TiDB Lightning
 
         -   TiDB Lightning にテーブル`mysql.tidb`へのアクセス権限がない場合にインポート結果が正しくない問題を[#31088](https://github.com/pingcap/tidb/issues/31088)
-        -   チェックサム エラー「GC ライフタイムがトランザクション期間よりも短い」 [#32733](https://github.com/pingcap/tidb/issues/32733)を修正
+        -   チェックサム エラー「GC ライフタイムがトランザクション期間よりも短い」を修正します[#32733](https://github.com/pingcap/tidb/issues/32733)
         -   一部のインポートタスクにソースファイルが含まれていない場合、 TiDB Lightning がメタデータスキーマを削除できないことがあるバグを修正[#28144](https://github.com/pingcap/tidb/issues/28144)
         -   S3storageパスが存在しない場合にTiDB Lightning がエラーを報告しない問題を修正[#28031](https://github.com/pingcap/tidb/issues/28031) [#30709](https://github.com/pingcap/tidb/issues/30709)
         -   GCS [#30377](https://github.com/pingcap/tidb/issues/30377)で 1000 を超えるキーを反復するときに発生するエラーを修正

@@ -157,7 +157,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>grpc-memory-pool-quota</code> {#code-grpc-memory-pool-quota-code}
 
--   gRPC が使用できるメモリサイズを制限します。
+-   gRPC で使用できるメモリサイズを制限します
 -   デフォルト値: 制限なし
 -   OOM が発生した場合に備えてメモリを制限します。使用量を制限すると、ストールが発生する可能性があることに注意してください
 
@@ -431,7 +431,7 @@ storageに関するコンフィグレーション項目。
 
 ### <code>scheduler-concurrency</code> {#code-scheduler-concurrency-code}
 
--   キーの同時操作を防止するメモリロック機構を内蔵しています。各キーは異なるスロットにハッシュを持っています。
+-   キーの同時操作を防止するメモリロック機構を内蔵しています。各キーは異なるスロットにハッシュを持ちます。
 -   デフォルト値: `524288`
 -   最小値: `1`
 
@@ -568,7 +568,7 @@ I/Oレートリミッタに関するコンフィグレーション項目。
 -   ネットワーク分離の可能性がある場合に、TiKV の PD クライアントがフォロワー経由でリーダーにリクエストを転送するかどうかを制御します。
 -   デフォルト値: `false`
 -   環境でネットワークが分離されている可能性がある場合、このパラメータを有効にすると、サービスが利用できなくなる期間を短縮できます。
--   分離、ネットワークの中断、ダウンタイムが発生したかどうかを正確に判断できない場合、このメカニズムを使用すると判断を誤るリスクがあり、可用性とパフォーマンスの低下を引き起こします。ネットワーク障害が発生したことがない場合は、このパラメータを有効にすることはお勧めできません。
+-   分離、ネットワークの中断、またはダウンタイムが発生したかどうかを正確に判断できない場合、このメカニズムを使用すると判断を誤るリスクがあり、可用性とパフォーマンスの低下が発生します。ネットワーク障害が発生したことがない場合は、このパラメータを有効にすることはお勧めできません。
 
 ### <code>endpoints</code> {#code-endpoints-code}
 
@@ -582,7 +582,7 @@ I/Oレートリミッタに関するコンフィグレーション項目。
 
 ### <code>retry-log-every</code> {#code-retry-log-every-code}
 
--   PD クライアントがエラーを観察したときに、エラーの報告をスキップする頻度を指定します。たとえば、値が`5`の場合、PD クライアントはエラーを観察した後、4 回ごとにエラーの報告をスキップし、5 回ごとにエラーを報告します。
+-   クライアントがエラーを観察したときに、PD クライアントがエラーの報告をスキップする頻度を指定します。たとえば、値が`5`の場合、PD クライアントはエラーを観察した後、4 回ごとにエラーの報告をスキップし、5 回ごとにエラーを報告します。
 -   この機能を無効にするには、値を`1`に設定します。
 -   デフォルト値: `10`
 
@@ -741,7 +741,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>hibernate-regions</code> {#code-hibernate-regions-code}
 
--   Hibernateリージョンを有効または無効にします。このオプションを有効にすると、長時間アイドル状態のリージョンは自動的に休止状態に設定されます。これにより、 Raftリーダーとアイドル リージョンのフォロワー間のハートビートメッセージによって生じる余分なオーバーヘッドが削減されます。 `peer-stale-state-check-interval`を使用すると、休止状態のリージョンのリーダーとフォロワー間のハートビート間隔を変更できます。
+-   Hibernateリージョンを有効または無効にします。このオプションを有効にすると、長時間アイドル状態のリージョンは自動的に休止状態に設定されます。これにより、アイドル状態のリージョンのRaftリーダーとフォロワーの間のハートビートメッセージによって生じる余分なオーバーヘッドが削減されます。 `peer-stale-state-check-interval`を使用すると、休止状態のリージョンのリーダーとフォロワー間のハートビート間隔を変更できます。
 -   デフォルト値: v5.0.2 以降のバージョンでは`true` 。 v5.0.2 より前のバージョンでは`false`
 
 ### <code>split-region-check-tick-interval</code> {#code-split-region-check-tick-interval-code}
@@ -909,7 +909,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 > **警告：**
 >
-> 本番環境で一貫性チェックを有効にすることはお勧め**できません**。これは、クラスタのパフォーマンスに影響を与え、TiDB のガベージコレクションと互換性がないからです。
+> 本番環境で一貫性チェックを有効にすることはお勧め**できません**。これは、クラスタのパフォーマンスに影響を与え、TiDB のガベージコレクションと互換性がないためです。
 
 -   整合性チェックがトリガーされる時間間隔。 `0` 、この機能が無効であることを意味します。
 -   デフォルト値: `"0s"`
@@ -1072,7 +1072,7 @@ Raftstoreに関連するコンフィグレーション項目。
 ### <code>consistency-check-method</code> {#code-consistency-check-method-code}
 
 -   データの整合性チェックの方法を指定します
--   MVCC データの整合性チェックの場合、値を`"mvcc"`に設定します。生データの整合性チェックの場合は、値を`"raw"`に設定します。
+-   MVCC データの整合性チェックの場合は、値を`"mvcc"`に設定します。生データの整合性チェックの場合は、値を`"raw"`に設定します。
 -   デフォルト値: `"mvcc"`
 
 ## コプロセッサーv2 {#coprocessor-v2}
@@ -1156,7 +1156,7 @@ RocksDBに関するコンフィグレーション項目
     -   `"tolerate-corrupted-tail-records"` : すべてのログ上で不完全な末尾データを持つレコードを許容し、破棄します。
     -   `"absolute-consistency"` : 破損したログが見つかった場合、回復を中止します。
     -   `"point-in-time"` : 最初の破損したログが見つかるまで、ログを順番に回復します。
-    -   `"skip-any-corrupted-records"` : 災害後の復旧。データは可能な限り復元され、破損したレコードはスキップされます。
+    -   `"skip-any-corrupted-records"` : 災害後の回復。データは可能な限り復元され、破損したレコードはスキップされます。
 -   デフォルト値: `"point-in-time"`
 
 ### <code>wal-dir</code> {#code-wal-dir-code}
@@ -1233,7 +1233,7 @@ RocksDBに関するコンフィグレーション項目
 
 ### <code>rate-limiter-auto-tuned</code> <span class="version-mark">v5.0 の新機能</span> {#code-rate-limiter-auto-tuned-code-span-class-version-mark-new-in-v5-0-span}
 
--   最近のワークロードに基づいて、RocksDB の圧縮レート リミッターの構成を自動的に最適化するかどうかを決定します。この構成を有効にすると、圧縮保留中のバイト数が通常よりわずかに増加します。
+-   最近のワークロードに基づいて、RocksDB の圧縮レート リミッターの構成を自動的に最適化するかどうかを決定します。この構成を有効にすると、圧縮保留中のバイト数が通常よりわずかに多くなります。
 -   デフォルト値: `true`
 
 ### <code>enable-pipelined-write</code> {#code-enable-pipelined-write-code}
@@ -1601,14 +1601,14 @@ RocksDBに関するコンフィグレーション項目
 
 ### <code>min-blob-size</code> {#code-min-blob-size-code}
 
--   Blob ファイルに保存される最小値。指定されたサイズより小さい値は LSM ツリーに格納されます。
+-   Blob ファイルに格納されている最小値。指定されたサイズより小さい値は LSM ツリーに格納されます。
 -   デフォルト値: `"1KB"`
 -   最小値: `0`
 -   単位: KB|MB|GB
 
 ### <code>blob-file-compression</code> {#code-blob-file-compression-code}
 
--   Blob ファイルで使用される圧縮アルゴリズム
+-   BLOB ファイルで使用される圧縮アルゴリズム
 -   オプションの値: `"no"` 、 `"snappy"` 、 `"zlib"` 、 `"bzip2"` 、 `"lz4"` 、 `"lz4hc"` 、 `"zstd"`
 -   デフォルト値: `"lz4"`
 
@@ -1715,7 +1715,7 @@ RocksDBに関するコンフィグレーション項目
 
 -   Raft RocksDB WAL ファイルが保存されているディレクトリ。これは、WAL の絶対ディレクトリ パスです。この構成項目を[`rocksdb.wal-dir`](#wal-dir)と同じ値に設定し**ないでください**。
 -   この設定項目が設定されていない場合、ログファイルはデータと同じディレクトリに保存されます。
--   マシン上に 2 つのディスクがある場合、RocksDB データと WAL ログを別のディスクに保存すると、パフォーマンスが向上する可能性があります。
+-   マシン上に 2 つのディスクがある場合、RocksDB データと WAL ログを別のディスクに保存するとパフォーマンスが向上する可能性があります。
 -   デフォルト値: `""`
 
 ### <code>wal-ttl-seconds</code> {#code-wal-ttl-seconds-code}
@@ -1857,7 +1857,7 @@ Raft Engineに関連するコンフィグレーション項目。
 ### <code>recovery-mode</code> {#code-recovery-mode-code}
 
 -   リカバリ中のファイル破損に対処する方法を決定します。
--   値のオプション: `"absolute-consistency"` 、 `"tolerate-tail-corruption"` 、 `"tolerate-any-corruption"`
+-   値`"tolerate-tail-corruption"` `"tolerate-any-corruption"` : `"absolute-consistency"`
 -   デフォルト値: `"tolerate-tail-corruption"`
 
 ### <code>recovery-read-block-size</code> {#code-recovery-read-block-size-code}
@@ -2021,7 +2021,7 @@ TiDB LightningインポートおよびBRリストアに関連するコンフィ�
 -   GC をトリガーするガベージ率のしきい値。
 -   デフォルト値: `1.1`
 
-### <code>num-threads</code> <span class="version-mark">v6.5.8 および v7.5.1 の新機能</span> {#code-num-threads-code-span-class-version-mark-new-in-v6-5-8-and-v7-5-1-span}
+### <code>num-threads</code> <span class="version-mark">v6.5.8、v7.1.4、および v7.5.1 の新機能</span> {#code-num-threads-code-span-class-version-mark-new-in-v6-5-8-v7-1-4-and-v7-5-1-span}
 
 -   `enable-compaction-filter`が`false`の場合の GC スレッドの数。
 -   デフォルト値: `1`
@@ -2188,7 +2188,7 @@ TiCDC に関するコンフィグレーション項目。
 
 ### <code>pipelined</code> {#code-pipelined-code}
 
--   この構成項目により、悲観的ロックを追加するパイプライン処理が可能になります。この機能を有効にすると、データがロックできることを検出した後、TiKV はただちに TiDB に後続のリクエストを実行し、悲観的ロックを非同期で書き込むように通知します。これにより、レイテンシーされ、悲観的トランザクションのパフォーマンスが大幅に向上します。ただし、悲観的ロックの非同期書き込みが失敗する可能性は依然として低いため、悲観的トランザクションのコミットが失敗する可能性があります。
+-   この構成項目により、悲観的ロックを追加するパイプライン処理が可能になります。この機能を有効にすると、データがロックできることを検出した後、TiKV はただちに TiDB に後続のリクエストを実行し、悲観的ロックを非同期で書き込むように通知します。これにより、レイテンシーされ、悲観的トランザクションのパフォーマンスが大幅に向上します。ただし、悲観的ロックの非同期書き込みが失敗する可能性は依然として低いため、悲観的トランザクション コミットの失敗が発生する可能性があります。
 -   デフォルト値: `true`
 
 ### <code>in-memory</code> <span class="version-mark">v6.0.0 の新機能</span> {#code-in-memory-code-span-class-version-mark-new-in-v6-0-0-span}
@@ -2294,7 +2294,7 @@ TiKV API V2 が有効な場合のタイムスタンプの取得に関連する�
 ### <code>renew-interval</code> {#code-renew-interval-code}
 
 -   ローカルにキャッシュされたタイムスタンプが更新される間隔。
--   TiKV は`renew-interval`の間隔でタイムスタンプのリフレッシュのバッチを開始し、前の期間のタイムスタンプの消費量と[`alloc-ahead-buffer`](#alloc-ahead-buffer-new-in-v640)の設定に従って、キャッシュされたタイムスタンプの数を調整します。このパラメーターを大きすぎる値に設定すると、最新の TiKV ワークロードの変更が時間内に反映されません。このパラメータを小さい値に設定すると、PD の負荷が増加します。書き込みトラフィックが大きく変動する場合、タイムスタンプが頻繁に使い果たされる場合、および書き込みレイテンシーが増加する場合は、このパラメータをより小さい値に設定できます。同時に PD の負荷も考慮する必要があります。
+-   TiKV は`renew-interval`の間隔でタイムスタンプのリフレッシュのバッチを開始し、前の期間のタイムスタンプの消費量と[`alloc-ahead-buffer`](#alloc-ahead-buffer-new-in-v640)の設定に従って、キャッシュされたタイムスタンプの数を調整します。このパラメーターの設定値が大きすぎると、最新の TiKV ワークロードの変更が時間内に反映されません。このパラメータを小さい値に設定すると、PD の負荷が増加します。書き込みトラフィックが大きく変動する場合、タイムスタンプが頻繁に使い果たされる場合、および書き込みレイテンシーが増加する場合は、このパラメータをより小さい値に設定できます。同時に PD の負荷も考慮する必要があります。
 -   デフォルト値: `"100ms"`
 
 ### <code>renew-batch-min-size</code> {#code-renew-batch-min-size-code}
@@ -2307,7 +2307,7 @@ TiKV API V2 が有効な場合のタイムスタンプの取得に関連する�
 ### <code>renew-batch-max-size</code> <span class="version-mark">v6.4.0 の新機能</span> {#code-renew-batch-max-size-code-span-class-version-mark-new-in-v6-4-0-span}
 
 -   タイムスタンプ要求内の TSO の最大数。
--   デフォルトの TSO 物理時間更新間隔 ( `50ms` ) では、PD は最大 262144 個の TSO を提供します。要求された TSO がこの数を超えると、PD はそれ以上 TSO を提供しません。この構成アイテムは、TSO の枯渇と、TSO の枯渇による他のビジネスへの逆影響を回避するために使用されます。高可用性を向上させるためにこの構成項目の値を増やす場合は、十分な TSO を取得するために同時に[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)の値を減らす必要があります。
+-   デフォルトの TSO 物理時間更新間隔 ( `50ms` ) では、PD は最大 262144 個の TSO を提供します。要求された TSO がこの数を超えると、PD はそれ以上 TSO を提供しません。この構成アイテムは、TSO の枯渇と、TSO の枯渇による他のビジネスへの逆影響を回避するために使用されます。高可用性を向上させるためにこの構成項目の値を増やす場合、十分な TSO を取得するには、同時に[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)の値を減らす必要があります。
 -   デフォルト値: `8192`
 
 ## リソース制御 {#resource-control}
@@ -2350,7 +2350,7 @@ TiKVstorageレイヤーのリソース制御に関するコンフィグレーシ
 
 ## メモリ<span class="version-mark">v7.5.0 の新機能</span> {#memory-span-class-version-mark-new-in-v7-5-0-span}
 
-### <code>enable-heap-profiling</code> <span class="version-mark">v7.5.0 の新機能</span> {#code-enable-heap-profiling-code-span-class-version-mark-new-in-v7-5-0-span}
+### イネーブルヒーププロファイリング<span class="version-mark">v7.5.0 の新</span><code>enable-heap-profiling</code> {#code-enable-heap-profiling-code-span-class-version-mark-new-in-v7-5-0-span}
 
 -   TiKV のメモリ使用量を追跡するためにヒープ プロファイリングを有効にするかどうかを制御します。
 -   デフォルト値: `true`

@@ -173,8 +173,37 @@ TiCDC を展開する前に、500 GB を超える PCIe SSD ディスクに TiCDC
 
 ## ディスク容量の要件 {#disk-space-requirements}
 
-<table><thead><tr><th>成分</th><th>ディスク容量の要件</th><th>健全なディスク使用量</th></tr></thead><tbody><tr><td>TiDB</td><td><ul><li>ログディスク用に少なくとも 30 GB</li><li> v6.5.0 以降、Fast Online DDL ( <a href="https://docs.pingcap.com/tidb/v7.5/system-variables#tidb_ddl_enable_fast_reorg-new-in-v630">tidb_ddl_enable_fast_reorg</a>変数によって制御される) がデフォルトで有効になり、インデックスの追加などの DDL 操作が高速化されます。大きなオブジェクトを含む DDL 操作がアプリケーションに存在する場合、または<a href="https://docs.pingcap.com/tidb/v7.5/sql-statement-import-into">IMPORT INTO</a>を使用してデータをインポートする場合は、TiDB 用に追加の SSD ディスク領域 (100 GB 以上) を準備することを強くお勧めします。詳細な構成手順については、 <a href="https://docs.pingcap.com/tidb/v7.5/check-before-deployment#set-temporary-spaces-for-tidb-instances-recommended">「TiDB インスタンスの一時スペースを設定する」</a>を参照してください。</li></ul></td><td> 90%未満</td></tr><tr><td>PD</td><td>データ ディスクとログ ディスクにそれぞれ少なくとも 20 GB</td><td> 90%未満</td></tr><tr><td>TiKV</td><td>データ ディスクとログ ディスクにそれぞれ少なくとも 100 GB</td><td> 80%未満</td></tr><tr><td>TiFlash</td><td>データ ディスクには少なくとも 100 GB、ログ ディスクには少なくとも 30 GB それぞれ</td><td>80%未満</td></tr><tr><td>TiUP</td><td><ul><li>コントロール マシン: 単一バージョンの TiDB クラスターをデプロイするのに必要なスペースは 1 GB 以内です。複数のバージョンの TiDB クラスターをデプロイすると、必要なスペースが増加します。</li><li>デプロイメントサーバー (TiDB コンポーネントが実行されるマシン): TiFlash は約 700 MB のスペースを占有し、他のコンポーネント (PD、TiDB、TiKV など) は約 200 MB のスペースをそれぞれ占有します。クラスター展開プロセス中、 TiUPクラスターは一時ファイルを保存するために 1 MB 未満の一時スペース ( <code>/tmp</code>ディレクトリ) を必要とします。</li></ul></td><td>該当なし</td></tr><tr><td>NGモニタリング</td><td><ul><li>Conprof: 3 x 1 GB x コンポーネントの数 (各コンポーネントは1 日あたり約 1 GB、合計 3 日を占有) + 20 GB の予約スペース</li><li>Top SQL: 30 x 50 MB x コンポーネントの数 (各コンポーネントは1 日あたり約 50 MB、合計 30 日を占有します)</li><li> Conprof とTop SQL は予約スペースを共有します</li></ul></td><td>該当なし</td></tr></tbody></table>
+<table><thead><tr><th>成分</th><th>ディスク容量の要件</th><th>健全なディスク使用量</th></tr></thead><tbody><tr><td>TiDB</td><td><ul><li>ログディスク用に少なくとも 30 GB</li><li> v6.5.0 以降、Fast Online DDL ( <a href="https://docs.pingcap.com/tidb/v7.5/system-variables#tidb_ddl_enable_fast_reorg-new-in-v630">tidb_ddl_enable_fast_reorg</a>変数によって制御される) がデフォルトで有効になり、インデックスの追加などの DDL 操作が高速化されます。大きなオブジェクトを含む DDL 操作がアプリケーションに存在する場合、または<a href="https://docs.pingcap.com/tidb/v7.5/sql-statement-import-into">IMPORT INTO</a>を使用してデータをインポートする場合は、TiDB 用に追加の SSD ディスク領域 (100 GB 以上) を準備することを強くお勧めします。詳細な構成手順については、 <a href="https://docs.pingcap.com/tidb/v7.5/check-before-deployment#set-temporary-spaces-for-tidb-instances-recommended">「TiDB インスタンスの一時スペースを設定する」</a>を参照してください。</li></ul></td><td> 90%未満</td></tr><tr><td>PD</td><td>データ ディスクとログ ディスクにそれぞれ少なくとも 20 GB</td><td> 90%未満</td></tr><tr><td>TiKV</td><td>データ ディスクとログ ディスクにそれぞれ少なくとも 100 GB</td><td> 80%未満</td></tr><tr><td>TiFlash</td><td>データ ディスクには少なくとも 100 GB、ログ ディスクには少なくとも 30 GB それぞれ</td><td>80%未満</td></tr><tr><td>TiUP</td><td><ul><li>コントロール マシン: 単一バージョンの TiDB クラスターをデプロイするのに必要なスペースは 1 GB 以内です。複数のバージョンの TiDB クラスターをデプロイする場合、必要なスペースが増加します。</li><li>デプロイメントサーバー (TiDB コンポーネントが実行されるマシン): TiFlash は約 700 MB のスペースを占有し、他のコンポーネント (PD、TiDB、TiKV など) は約 200 MB のスペースをそれぞれ占有します。クラスター展開プロセス中、 TiUPクラスターは一時ファイルを保存するために 1 MB 未満の一時領域 ( <code>/tmp</code>ディレクトリ) を必要とします。</li></ul></td><td>該当なし</td></tr><tr><td>NGモニタリング</td><td><ul><li>Conprof: 3 x 1 GB x コンポーネントの数 (各コンポーネントは1 日あたり約 1 GB、合計 3 日を占有します) + 20 GB の予約スペース</li><li>Top SQL: 30 x 50 MB x コンポーネントの数 (各コンポーネントは1 日あたり約 50 MB、合計 30 日を占有します)</li><li> Conprof とTop SQL は予約スペースを共有します</li></ul></td><td>該当なし</td></tr></tbody></table>
 
 ## Web ブラウザの要件 {#web-browser-requirements}
 
 TiDB は[グラファナ](https://grafana.com/)に依存してデータベース メトリックの視覚化を提供します。 Javascript が有効になっている最新バージョンの Internet Explorer、Chrome、または Firefox で十分です。
+
+## TiFlashの分散storageおよびコンピューティングアーキテクチャのハードウェアおよびソフトウェア要件 {#hardware-and-software-requirements-for-tiflash-disaggregated-storage-and-compute-architecture}
+
+前述のTiFlashソフトウェアおよびハードウェア要件は、結合されたstorageとコンピューティングアーキテクチャに関するものです。 v7.0.0 以降、 TiFlash は[細分化されたstorageとコンピューティングアーキテクチャ](/tiflash/tiflash-disaggregated-and-s3.md)をサポートします。このアーキテクチャでは、 TiFlash は書き込みノードと計算ノードの 2 種類のノードに分割されます。これらのノードの要件は次のとおりです。
+
+-   ソフトウェア: 結合されたstorageとコンピューティングアーキテクチャと同じままです[OS とプラットフォームの要件](#os-and-platform-requirements)を参照してください。
+-   ネットワーク ポート: 結合されたstorageとコンピューティングアーキテクチャと同じままです。1 [通信網](#network-requirements)参照してください。
+-   ディスクスペース：
+    -   TiFlash書き込みノード: データを Amazon S3 にアップロードする前に、 TiFlashレプリカを追加したりリージョンレプリカを移行したりするときにローカル バッファとして使用される、少なくとも 200 GB のディスク領域を設定することをお勧めします。また、Amazon S3 と互換性のあるオブジェクトstorageが必要です。
+    -   TiFlashコンピューティング ノード: 少なくとも 100 GB のディスク領域を構成することをお勧めします。これは主に、パフォーマンスを向上させるために書き込みノードから読み取ったデータをキャッシュするために使用されます。計算ノードのキャッシュが完全に使用される場合がありますが、これは正常です。
+-   CPU とメモリの要件については、次のセクションで説明します。
+
+### 開発およびテスト環境 {#development-and-test-environments}
+
+| 成分                   | CPU    | メモリ    | ローカルストレージ   | 通信網         | インスタンスの数 (最小要件) |
+| -------------------- | ------ | ------ | ----------- | ----------- | --------------- |
+| TiFlash書き込みノード       | 16コア以上 | 32GB以上 | SSD、200GB以上 | ギガビットイーサネット | 1               |
+| TiFlashコンピューティング ノード | 16コア以上 | 32GB以上 | SSD、100GB以上 | ギガビットイーサネット | 0 (次の注を参照)      |
+
+### 本番環境 {#production-environment}
+
+| 成分                   | CPU    | メモリ    | ディスクの種類    | 通信網                      | インスタンスの数 (最小要件) |
+| -------------------- | ------ | ------ | ---------- | ------------------------ | --------------- |
+| TiFlash書き込みノード       | 32コア以上 | 64GB以上 | 1 つ以上の SSD | 10 ギガビット イーサネット (2 つを推奨) | 1               |
+| TiFlashコンピューティング ノード | 32コア以上 | 64GB以上 | 1 つ以上の SSD | 10 ギガビット イーサネット (2 つを推奨) | 0 (次の注を参照)      |
+
+> **注記：**
+>
+> TiUPなどのデプロイメント ツールを使用すると、 TiFlashコンピューティング ノードを`[0, +inf]`の範囲内で迅速にスケールインまたはスケールアウトできます。
