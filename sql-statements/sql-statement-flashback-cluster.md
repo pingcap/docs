@@ -13,6 +13,10 @@ Starting from v6.5.6, v7.1.3, v7.5.1, and v7.6.0, TiDB introduces the `FLASHBACK
 >
 > The `FLASHBACK CLUSTER TO [TIMESTAMP|TSO]` syntax is not applicable to [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters. To avoid unexpected results, do not execute this statement on TiDB Serverless clusters.
 
+> **Warning:**
+>
+> When using TSO to specify a recovery point in time, make sure to check the validity of the TSO and avoid specifying a time in the future that exceeds the [current TSO of TiDB](/tso.md). Otherwise, concurrent processing linear consistency and transaction isolation levels might be violated, leading to serious data correctness issues.
+
 <CustomContent platform="tidb">
 
 > **Warning:**
