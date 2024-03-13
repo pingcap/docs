@@ -213,7 +213,7 @@ Except `vendor`, you need to modify the values of other fields in the preceding 
 
 </SimpleTab>
 
-#### Specify the master key via a file
+#### Specify a master key via a file
 
 To specify a master key that's stored in a file, the master key configuration would look like the following:
 
