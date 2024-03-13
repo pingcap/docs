@@ -175,9 +175,17 @@ You can combine the above two parameters with the DML of TiDB to use them. For e
 
 ## What's the trigger strategy for `auto analyze` in TiDB?
 
+<<<<<<< HEAD
 Trigger strategy: `auto analyze` is automatically triggered when the number of pieces of data in a new table reaches 1000 and this table has no write operation within one minute.
 
 When the modified number or the current total row number is larger than `tidb_auto_analyze_ratio`, the `analyze` statement is automatically triggered. The default value of `tidb_auto_analyze_ratio` is 0.5, indicating that this feature is enabled by default. To ensure safety, its minimum value is 0.3 when the feature is enabled, and it must be smaller than `pseudo-estimate-ratio` whose default value is 0.8, otherwise pseudo statistics will be used for a period of time. It is recommended to set `tidb_auto_analyze_ratio` to 0.5.
+=======
+When the number of rows in a table or a single partition of a partitioned table reaches 1000, and the ratio (the number of modified rows / the current total number of rows) of the table or partition is larger than [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio), the [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) statement is automatically triggered.
+
+The default value of the `tidb_auto_analyze_ratio` system variable is `0.5`, indicating that this feature is enabled by default. It is not recommended to set the value of `tidb_auto_analyze_ratio` to be larger than or equal to [`pseudo-estimate-ratio`](/tidb-configuration-file.md#pseudo-estimate-ratio) (the default value is `0.8`), otherwise the optimizer might use pseudo statistics. TiDB v5.3.0 introduces the [`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530) variable, and when you set it to `OFF`, pseudo statistics are not used even if the statistics are outdated.
+
+To disable `auto analyze`, use the system variable [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610).
+>>>>>>> a5d8638865 (faq: update an outdated sentence (#16739))
 
 ## Can I use hints to override the optimizer behavior?
 
