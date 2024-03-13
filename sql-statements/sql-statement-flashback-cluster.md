@@ -16,7 +16,7 @@ Starting from v6.5.6 and v7.1.3, TiDB introduces the `FLASHBACK CLUSTER TO TSO` 
 
 > **Warning:**
 >
-> When specifying a recovery point in time, make sure to check the validity of your target timestamp or TSO and avoid specifying a future time that exceeds the maximum TSO currently allocated by the PD (see `Current TSO` on the Grafana PD panel). Otherwise, concurrent processing linear consistency and transaction isolation levels might be violated, leading to serious data correctness issues.
+> When specifying a recovery point in time, make sure to check the validity of your target timestamp or TSO and avoid specifying a future time that exceeds the maximum TSO currently allocated by PD (see `Current TSO` on the Grafana PD panel). Otherwise, concurrent processing linear consistency and transaction isolation levels might be violated, leading to serious data correctness issues.
 
 <CustomContent platform="tidb">
 
