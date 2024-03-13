@@ -183,7 +183,7 @@ For example, to scale out a DM-worker node in the `prod-cluster` cluster, take t
 >
 > Before upgrading, you can use `config export` to export the configuration files of clusters. After upgrading, if you need to downgrade to an earlier version, you can first redeploy the earlier cluster and then use `config import` to import the previous configuration files.
 >
-> For clusters earlier than v2.0.5, you can use dmctl v2.0.5 or later to export and import the data source and task configuration files.
+> For clusters earlier than v2.0.5, you can use dmctl (>= v2.0.5 and < v8.0.0) to export and import the data source and task configuration files.
 >
 > For clusters later than v2.0.2, currently, it is not supported to automatically import the configuration related to relay worker. You can use `start-relay` command to manually [start relay log](/dm/relay-log.md#enable-and-disable-relay-log).
 
@@ -192,6 +192,10 @@ The rolling upgrade process is made as transparent as possible to the applicatio
 ### Upgrade command
 
 You can run the `tiup dm upgrade` command to upgrade a DM cluster. For example, the following command upgrades the cluster to `${version}`. Modify `${version}` to your needed version before running this command:
+
+> **Note:**
+>
+> Starting from v8.0.0, DM removes the fixed key for encryption and decryption and enables you to specify a custom key for encryption and decryption. If encrypted passwords are used in [data source configurations](/dm/dm-source-configuration-file.md) and [migration task configurations](/dm/task-configuration-file-full.md) before the upgrade, you need to refer to the upgrade steps in [DM custom key for encryption and decryption](/dm/dm-customized-secret-key.md) for additional operations.
 
 {{< copyable "shell-regular" >}}
 

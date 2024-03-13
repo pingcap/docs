@@ -75,6 +75,12 @@ This document introduces DM's command-line flags.
 - The default value is `"http://127.0.0.1:8291"`
 - Required flag
 
+### `--secret-key-path`
+
+- The path of the custom key for encryption and decryption
+- The default value is `""`
+- Optional flag
+
 ## DM-worker
 
 ### `--advertise-addr`
@@ -132,15 +138,3 @@ This document introduces DM's command-line flags.
 - The `{advertise-addr}` of any DM-master node in the cluster to be connected by dmctl
 - The default value is `""`
 - It is a required flag when dmctl interacts with DM-master
-
-### `--encrypt`
-
-- Encrypts the plaintext database password into ciphertext
-- The default value is `""`
-- When this flag is specified, it is only used to encrypt the plaintext without interacting with the DM-master
-
-### `--decrypt`
-
-- Decrypts ciphertext encrypted with dmctl into plaintext
-- The default value is `""`
-- When this flag is specified, it is only used to decrypt the ciphertext without interacting with the DM-master

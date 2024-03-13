@@ -97,6 +97,10 @@ Before starting a data migration task, you need to configure the MySQL data sour
 
 For safety reasons, it is recommended to configure and use encrypted passwords. You can use dmctl to encrypt the MySQL/TiDB password. Suppose the password is "123456":
 
+> **Note:**
+>
+> Starting from v8.0.0, you must configure [`secret-key-path`](/dm/dm-master-configuration-file.md) for DM-master before using the `dmctl encrypt` command.
+
 {{< copyable "shell-regular" >}}
 
 ```bash

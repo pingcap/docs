@@ -446,6 +446,7 @@
       - [Binlog Event Filter](/dm/dm-binlog-event-filter.md)
       - [Filter DMLs Using SQL Expressions](/dm/feature-expression-filter.md)
       - [Online DDL Tool Support](/dm/dm-online-ddl-tool-support.md)
+      - [Custom key for encryption and decryption](/dm/dm-customized-secret-key.md)
       - Manage a Data Migration Task
         - [Precheck a Task](/dm/dm-precheck.md)
         - [Create a Task](/dm/dm-create-task.md)
