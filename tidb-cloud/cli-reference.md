@@ -17,17 +17,20 @@ The following table lists the commands available for the TiDB Cloud CLI.
 
 To use the `ticloud` CLI in your terminal, run `ticloud [command] [subcommand]`. If you are using [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview), use `tiup cloud [command] [subcommand]` instead.
 
-| Command    | Subcommand                                                 | Description                                                                                              |
-|------------|------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| cluster    | create, delete, describe, list, connect-info               | Manage clusters                                                                                          |
-| branch     | create, delete, describe, list, connect-info               | Manage branches                                                                                          |
-| completion | bash, fish, powershell, zsh                                | Generate completion script for specified shell                                                           |
-| config     | create, delete, describe, edit, list, set, use             | Configure user profiles                                                                                  |
-| connect    | -                                                          | Connect to a TiDB cluster                                                                                |
-| help       | cluster, completion, config, help, import, project, update | View help for any command                                                                                |
-| import     | cancel, describe, list, start                              | Manage [import](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud) tasks |
-| project    | list                                                       | Manage projects                                                                                          |
-| update     | -                                                          | Update the CLI to the latest version                                                                     |
+| Command            | Subcommand                                                                           | Description                                                                                              |
+|--------------------|--------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| serverless         | create, delete, describe, list, update, connect-info, spending-limit, regions, shell | Manage TiDB Serverless clusters                                                                          |
+| serverless branch  | create, delete, describe, list, connect-info, shell                                  | Manage TiDB Serverless branches                                                                          |
+| serverless backup  | list, describe                                                                       | Manage TiDB Serverless backups                                                                           |
+| serverless restore | -                                                                                    | Restore TiDB Serverless                                                                                  |
+| serverless export  | create, describe, list, cancel, download                                             | Manage TiDB Serverless export jobs                                                                       |
+| serverless import  | cancel, describe, list, start                                                        | Manage [import](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud) tasks |
+| completion         | bash, fish, powershell, zsh                                                          | Generate completion script for specified shell                                                           |
+| config             | create, delete, describe, edit, list, set, use                                       | Configure user profiles                                                                                  |
+| connect            | -                                                                                    | Connect to a TiDB cluster                                                                                |
+| help               | cluster, completion, config, help, import, project, update                           | View help for any command                                                                                |
+| project            | list                                                                                 | Manage projects                                                                                          |
+| update             | -                                                                                    | Update the CLI to the latest version                                                                     |
 
 ## Command modes
 
