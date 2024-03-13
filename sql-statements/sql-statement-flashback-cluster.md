@@ -18,6 +18,10 @@ Starting from v6.5.6, TiDB introduces the `FLASHBACK CLUSTER TO TSO` syntax. Thi
 
 </CustomContent>
 
+> **Warning:**
+>
+> When specifying a recovery point in time, make sure to check the validity of your target timestamp or TSO and avoid specifying a future time that exceeds the maximum TSO currently allocated by PD (see `Current TSO` on the Grafana PD panel). Otherwise, concurrent processing linear consistency and transaction isolation levels might be violated, leading to serious data correctness issues.
+
 > **Note:**
 >
 > The working principle of `FLASHBACK CLUSTER TO [TIMESTAMP|TSO]` is to write the old data of a specific point in time with the latest timestamp, and will not delete the current data. So before using this feature, you need to ensure that there is enough storage space for the old data and the current data.
