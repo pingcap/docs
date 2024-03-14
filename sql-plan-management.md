@@ -484,7 +484,7 @@ SHOW binding_cache status;
 1 row in set (0.00 sec)
 ```
 
-## Utilize Statement Summary table to obtain queries that need to be bound
+## Utilize the Statement Summary table to obtain queries that need to be bound
 
 [Statement Summary](/statement-summary-tables.md) stores recent SQL execution information, such as latency, execution times, corresponding query plans, etc. You can query Statement Summary to get qualified `plan_digest`, and [create bindings according to these historical execution plans](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan).
 
