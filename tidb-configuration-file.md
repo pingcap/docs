@@ -361,7 +361,7 @@ Configuration items related to log files.
 - Default value: `0`
 - All the log files are retained by default. If you set it to `7`, seven log files are retained at maximum.
 
-#### `compress` <span class="version-mark">New in v8.0.0</span>
+#### `compression` <span class="version-mark">New in v8.0.0</span>
 
 + The compression method for the log.
 + Default value: ""
