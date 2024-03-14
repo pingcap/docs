@@ -236,7 +236,7 @@ To make the execution plan of a SQL statement fixed to a historical execution pl
 When using this feature, note the following:
 
 - The feature generates hints according to historical execution plans and uses the generated hints for binding. Because historical execution plans are stored in [Statement Summary Tables](/statement-summary-tables.md), before using this feature, you need to enable the [`tidb_enable_stmt_summary`](/system-variables.md#tidb_enable_stmt_summary-new-in-v304) system variable first.
-- For TiFlash queries, Join queries with three or more tables, and queries that contain subqueries, auto-generated hints might not be complete and able to fix the plan completely, for such cases a warning will be outputted.
+- For TiFlash queries, Join queries with three or more tables, and queries that contain subqueries, the auto-generated hints are not complete enough, which might result in the plan not being fully bound. In such cases, a warning will occur when creating a binding.
 - If a historical execution plan is for a SQL statement with hints, the hints will be added to the binding. For example, after executing `SELECT /*+ max_execution_time(1000) */ * FROM t`, the binding created with its `plan_digest` will include `max_execution_time(1000)`.
 
 The SQL statement of this binding method is as follows:
