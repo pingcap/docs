@@ -161,7 +161,7 @@ delete-only-output-handle-key-columns = false
 # encoder-concurrency = 32
 
 # Specifies whether to enable kafka-sink-v2 that uses the kafka-go sink library.
-# Note: This configuration item only takes effect if the downstream is MQ.
+# Note: This configuration item is experimental, and only takes effect if the downstream is MQ.
 # The default value is false.
 # enable-kafka-sink-v2 = false
 
