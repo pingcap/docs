@@ -6,7 +6,7 @@ aliases: ['/docs/dev/sql-statements/sql-statement-alter-index/']
 
 # ALTER INDEX
 
-The `ALTER INDEX` statement is used to modify the visibility of the index to `Visible` or `Invisible`. Invisible indexes are maintained by DML statements, but will not be used by the query optimizer. This is useful in scenarios where you want to double-check before removing an index permanently.
+The `ALTER INDEX` statement is used to modify the visibility of the index to `Visible` or `Invisible`. Invisible indexes are maintained by DML statements, but will not be used by the query optimizer. This is useful in scenarios where you want to double-check before removing an index permanently. Starting from TiDB v8.0.0, you can allow the optimizer to select invisible indexes by modifying the system variable [`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800).
 
 ## Synopsis
 
@@ -119,7 +119,6 @@ Query OK, 0 rows affected (0.02 sec)
 
 * Invisible indexes in TiDB are modeled on the equivalent feature from MySQL 8.0.
 * Similiar to MySQL, TiDB does not permit `PRIMARY KEY` indexes to be made invisible.
-* MySQL provides an optimizer switch `use_invisible_indexes=on` to make all invisible indexes _visible_ again. This functionality is not available in TiDB.
 
 ## See also
 
