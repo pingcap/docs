@@ -519,7 +519,7 @@ GROUP BY stmts.`digest`
 ORDER BY SUM(exec_count) DESC LIMIT 100;                       -- Top 100 high-frequency queries.
 ```
 
-By applying certain filtering conditions to obtain queries that meet the criteria, you can then directly execute the statements corresponding to the `binding_stmt` column to create bindings.
+By applying certain filtering conditions to obtain queries that meet the criteria, you can then directly execute the statements in the corresponding `binding_stmt` column to create bindings.
 
 ```
 +---------------------------------------------+------------+-----------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
