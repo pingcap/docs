@@ -347,7 +347,7 @@ See [Index Selection - Use multi-valued indexes](/choose-index.md#use-multi-valu
 
 ## Invisible index
 
-Invisible indexes are indexes that are ignored by the query optimizer:
+Invisible indexes are indexes that are ignored by the query optimizer under default circumstances:
 
 ```sql
 CREATE TABLE t1 (c1 INT, c2 INT, UNIQUE(c2));
