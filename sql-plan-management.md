@@ -484,6 +484,52 @@ SHOW binding_cache status;
 1 row in set (0.00 sec)
 ```
 
+## Utilize Statement Summary table to obtain queries that need to be bound
+
+[Statement Summary](/statement-summary-tables.md) stores recent SQL execution information, such as latency, execution times, corresponding query plans, etc. You can query Statement Summary to get qualified `plan_digest`, and [create bindings according to these historical execution plans](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan).
+
+The following example searches for SELECT statements that have been executed more than 10 times in the past 2 weeks, have unstable execution plans, and have not been bound. It sorts the queries by the execution times, and binds the top 100 queries to their fastest plans.
+
+```sql
+WITH stmts AS (                                                -- Gets all information
+  SELECT * FROM INFORMATION_SCHEMA.CLUSTER_STATEMENTS_SUMMARY
+  UNION ALL
+  SELECT * FROM INFORMATION_SCHEMA.CLUSTER_STATEMENTS_SUMMARY_HISTORY 
+),
+best_plans AS (
+  SELECT plan_digest, `digest`, avg_latency, 
+  CONCAT('create global binding from history using plan digest "', plan_digest, '"') as binding_stmt 
+  FROM stmts t1
+  WHERE avg_latency = (SELECT min(avg_latency) FROM stmts t2   -- The plan with the lowest query latency
+                       WHERE t2.`digest` = t1.`digest`)
+)
+
+SELECT any_value(digest_text) as query, 
+       SUM(exec_count) as exec_count, 
+       plan_hint, binding_stmt
+FROM stmts, best_plans
+WHERE stmts.`digest` = best_plans.`digest`
+  AND summary_begin_time > DATE_SUB(NOW(), interval 14 day)    -- Executed in the past 2 weeks
+  AND stmt_type = 'Select'                                     -- Only consider select statements
+  AND schema_name NOT IN ('INFORMATION_SCHEMA', 'mysql')       -- Not an internal query
+  AND plan_in_binding = 0                                      -- No binding yet
+GROUP BY stmts.`digest`
+  HAVING COUNT(DISTINCT(stmts.plan_digest)) > 1                -- This query is unstable. It has more than 1 plan.
+         AND SUM(exec_count) > 10                              -- High-frequency, and has been executed more than 10 times.
+ORDER BY SUM(exec_count) DESC LIMIT 100;                       -- Top 100 high-frequency queries.
+```
+
+By applying certain filtering conditions to obtain queries that meet the criteria, you can then directly execute the statements corresponding to the `binding_stmt` column to create bindings.
+
+```
++---------------------------------------------+------------+-----------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
+| query                                       | exec_count | plan_hint                                                                   | binding_stmt                                                                                                            |
++---------------------------------------------+------------+-----------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
+| select * from `t` where `a` = ? and `b` = ? |        401 | use_index(@`sel_1` `test`.`t` `a`), no_order_index(@`sel_1` `test`.`t` `a`) | create global binding from history using plan digest "0d6e97fb1191bbd08dddefa7bd007ec0c422b1416b152662768f43e64a9958a6" |
+| select * from `t` where `b` = ? and `c` = ? |        104 | use_index(@`sel_1` `test`.`t` `b`), no_order_index(@`sel_1` `test`.`t` `b`) | create global binding from history using plan digest "80c2aa0aa7e6d3205755823aa8c6165092c8521fb74c06a9204b8d35fc037dd9" |
++---------------------------------------------+------------+-----------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
+```
+
 ## Cross-database binding
 
 Starting from v7.6.0, you can create cross-database bindings in TiDB by using the wildcard `*` to represent a database name in the binding creation syntax. Before creating cross-database bindings, you need to first enable the [`tidb_opt_enable_fuzzy_binding`](/system-variables.md#tidb_opt_enable_fuzzy_binding-new-in-v760) system variable.

@@ -3356,6 +3356,16 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 </CustomContent>
 
+### `tidb_load_binding_timeout` <span class="version-mark">从 v8.0.0 版本开始引入</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Default value: `200`
+- Range: `(0, 2147483647]`
+- Unit: Milliseconds
+- This variable is used to control the timeout of binding loading. If the time of binding loading exceeds this variable, it will stop.
+
 ### `tidb_lock_unchanged_keys` <span class="version-mark">New in v7.1.1 and v7.3.0</span>
 
 - Scope: SESSION | GLOBAL
