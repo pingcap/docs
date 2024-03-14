@@ -1934,7 +1934,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `OFF`
 - This variable controls whether to enable TiDB to collect `PREDICATE COLUMNS`. After enabling the collection, if you disable it, the information of previously collected `PREDICATE COLUMNS` is cleared. For details, see [Collect statistics on some columns](/statistics.md#collect-statistics-on-some-columns).
 
-### tidb_enable_concurrent_hashagg_spill <span class="version-mark">New in v7.6.0</span>
+### tidb_enable_concurrent_hashagg_spill <span class="version-mark">New in v8.0.0</span>
 
 > **Warning:**
 >
