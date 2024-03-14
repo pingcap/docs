@@ -990,7 +990,7 @@ Configuration items related to Raftstore.
 ### `store-io-pool-size` <span class="version-mark">New in v5.3.0</span>
 
 + The allowable number of threads that process Raft I/O tasks, which is the size of the StoreWriter thread pool. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
-+ Default value: `1`
++ Default value: `1` (Before v8.0.0, the default value is `0`.)
 + Minimum value: `0`
 
 ### `future-poll-size`
