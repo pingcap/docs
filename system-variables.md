@@ -4497,8 +4497,9 @@ SHOW WARNINGS;
 
 - Scope: SESSION
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
-- Default Value: OFF
-- This variable is used to set whether the optimizer is allowed to use [ invisible indexes ](/sql-statements/sql-statement-create-index.md#invisible-index). Invisible indexes refer to indexes created by the user, but such indexes are ignored by the optimizer when accessing the base table. After enabling this option, the optimizer will attempt to use invisible indexes.
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether whether the optimizer can select [invisible indexes](/sql-statements/sql-statement-create-index.md#invisible-index) for query optimization in the current session. Invisible indexes are maintained by DML statements, but will not be used by the query optimizer. This is useful in scenarios where you want to double-check before removing an index permanently. When the variable is set to `ON`, the optimizer can select invisible indexes for query optimization in the session.
 
 ### tidb_opt_write_row_id
 
