@@ -3396,6 +3396,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_low_resolution_tso
 
 - Scope: SESSION
+- Persists to cluster: No
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
