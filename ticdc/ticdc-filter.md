@@ -94,18 +94,18 @@ Description of configuration parameters:
     | rename index | DDL  | |Matches `rename index` event    |
     | alter index visibility | DDL  | |Matches `alter index visibility` event    |
     | alter ttl info | DDL  | |Matches `alter ttl info` event    |
-    | alter ttl remove| DDL  | |Matches DDL events that remove all the TTL properties of a table |
-    | multi schema change | DDL  | |Matches DDL events that change multiple properties of a table within the same DDL statement |
+    | alter ttl remove| DDL  | |Matches DDL events that remove all TTL attributes of a table |
+    | multi schema change | DDL  | |Matches DDL events that change multiple attributes of a table within the same DDL statement |
 
-> **Note:**
->
-> TiDB's DDL statements support changing multiple properties of a single table at the same time, such as `ALTER TABLE t MODIFY COLUMN a INT, ADD COLUMN b INT, DROP COLUMN c;`. This operation is defined as MultiSchemaChange. If you want to filter out this type of DDL, you need to configure `"multi schema change"` in `ignore-event`.
+    > **Note:**
+    >
+    > TiDB's DDL statements support changing multiple attributes of a single table at the same time, such as `ALTER TABLE t MODIFY COLUMN a INT, ADD COLUMN b INT, DROP COLUMN c;`. This operation is defined as MultiSchemaChange. If you want to filter out this type of DDL, you need to configure `"multi schema change"` in `ignore-event`.
 
 - `ignore-sql`: the regular expressions of the DDL statements to be filtered out. This parameter accepts an array of strings, in which you can configure multiple regular expressions. This configuration only applies to DDL events.
-- `ignore-delete-value-expr`: this parameter accepts a SQL expression that follows the default SQL Mode, used to filter out the `DELETE` type of DML events with a specified value.
-- `ignore-insert-value-expr`: this parameter accepts a SQL expression that follows the default SQL Mode, used to filter out the `INSERT` type of DML events with a specified value.
-- `ignore-update-old-value-expr`: this parameter accepts a SQL expression that follows the default SQL Mode, used to filter out the `UPDATE` type of DML events with an old specified value.
-- `ignore-update-new-value-expr`: this parameter accepts a SQL expression that follows the default SQL Mode, used to filter out the `UPDATE` DML events with a new specified value.
+- `ignore-delete-value-expr`: this parameter accepts a SQL expression that follows the default SQL mode, used to filter out the `DELETE` type of DML events with a specified value.
+- `ignore-insert-value-expr`: this parameter accepts a SQL expression that follows the default SQL mode, used to filter out the `INSERT` type of DML events with a specified value.
+- `ignore-update-old-value-expr`: this parameter accepts a SQL expression that follows the default SQL mode, used to filter out the `UPDATE` type of DML events with a specified old value.
+- `ignore-update-new-value-expr`: this parameter accepts a SQL expression that follows the default SQL mode, used to filter out the `UPDATE` DML events with a specified new value.
 
 > **Note:**
 >
