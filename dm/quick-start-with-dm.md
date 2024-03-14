@@ -6,7 +6,7 @@ aliases: ['/docs/tidb-data-migration/dev/get-started/']
 
 # Quick Start Guide for TiDB Data Migration
 
-This document describes how to migrate data from MySQL to TiDB using [TiDB Data Migration](/dm/dm-overview.md) (DM). This guide is a quick demo of DM features and is not recommended for any production environment.
+This document describes how to migrate data from MySQL to TiDB using [TiDB Data Migration (DM)](/dm/dm-overview.md). This guide is a quick demo of DM features and is not recommended for any production environment.
 
 ## Step 1: Deploy a DM cluster
 
