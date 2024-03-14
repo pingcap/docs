@@ -5,7 +5,7 @@ summary: An overview of the usage of ALTER SEQUENCE for the TiDB database.
 
 # ALTER SEQUENCE
 
-The `ALTER SEQUENCE` statement alters sequence objects in TiDB. The sequence is a database object that is on a par with the table and the `View` object. The sequence is used to generate serialized IDs in a customized way.
+The `ALTER SEQUENCE` statement alters sequence objects in TiDB. The sequence is a database object that is on a par with the `Table` and the `View` object. The sequence is used to generate serialized IDs in a customized way.
 
 ## Synopsis
 
