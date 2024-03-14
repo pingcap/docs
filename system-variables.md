@@ -3361,6 +3361,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
 - Default value: `200`
 - Range: `(0, 2147483647]`
 - Unit: Milliseconds
