@@ -160,7 +160,7 @@ To fix the error, take the following steps:
     {{< copyable "shell-regular" >}}
 
     ```shell
-    cdc cli changefeed update -c test-cf --pd=http://10.0.10.25:2379 --sink-uri="mysql://127.0.0.1:3306/?max-txn-row=20&worker-number=8" --config=changefeed.toml
+    cdc cli changefeed update -c test-cf --pd=http://10.0.10.25:2379 --sink-uri="mysql://127.0.0.1:3306/?max-txn-row=20&worker-count=8" --config=changefeed.toml
     ```
 
 4. Execute `cdc cli changfeed resume` to resume the replication task.
