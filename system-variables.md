@@ -3356,7 +3356,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 </CustomContent>
 
-### `tidb_load_binding_timeout` <span class="version-mark">从 v8.0.0 版本开始引入</span>
+### `tidb_load_binding_timeout` <span class="version-mark">New in v8.0.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
