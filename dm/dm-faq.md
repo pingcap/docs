@@ -25,7 +25,7 @@ Currently, DM does not support it and only supports the regular expressions of t
 
 ## If a statement executed upstream contains multiple DDL operations, does DM support such migration?
 
-DM will attempt to split a single statement containing multiple DDL change operations into multiple statements containing only one DDL operation, but might not cover all cases. It is recommended to include only one DDL operation in a statement executed upstream, or verify it in the test environment. If it is not supported, you can file an [issue](https://github.com/pingcap/tiflow/issues) to the tiflow repository.
+DM will attempt to split a single statement containing multiple DDL change operations into multiple statements containing only one DDL operation, but might not cover all cases. It is recommended to include only one DDL operation in a statement executed upstream, or verify it in the test environment. If it is not supported, you can file an [issue](https://github.com/pingcap/tiflow/issues) to the `pingcap/tiflow` repository.
 
 ## How to handle incompatible DDL statements?
 
