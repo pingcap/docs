@@ -9,7 +9,7 @@ summary: Learn the concept of the TiCDC Debezium Protocol and how to use it.
 
 ## Use the Debezium message format
 
-When you use Kafka as the downstream sink, specify the `protocol` field of `sink-uri` as `debezium`. Then TiCDC encapsulates the Debezium message based on the event and send TiDB data change events to the downstream.
+When you use Kafka as the downstream sink, specify the `protocol` field as `debezium` in `sink-uri` configuration. Then TiCDC encapsulates the Debezium message based on the event and send TiDB data change events to the downstream.
 
 Currently, the Debezium protocol only supports Row changed events and directly ignores DDL events and WATERMARK events. A Row changed event represents a change in a row of data. When a row changes, the Row changed event is sent, including relevant information about the row both before and after the change.
 
