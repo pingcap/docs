@@ -405,11 +405,11 @@ mysql> EXPLAIN SELECT /*+ use_index_merge(t3, idx) */ * FROM t3 WHERE ((1 member
 3 rows in set, 2 warnings (0.00 sec)
 ```
 
-### Multi-valued indexes and Plan Cache
+### Multi-valued indexes and plan cache
 
-Queries using `member of` to choose multi-valued indexes can be cached. If the query plan uses `json_contains` or `json_overlaps` to choose multi-valued indexes, it can't be cached.
+A query plan that uses `member of` to choose multi-valued indexes can be cached. A query plan that uses the `JSON_CONTAINS()` or `JSON_OVERLAPS()` function to choose multi-valued indexes cannot be cached.
 
-Below are some cases that queries can be cached:
+The following are some examples that query plans can be cached:
 
 ```sql
 mysql> CREATE TABLE t5 (j1 JSON, j2 JSON, INDEX idx1((CAST(j1 AS SIGNED ARRAY))));
@@ -456,7 +456,7 @@ mysql> SELECT @@LAST_PLAN_FROM_CACHE; -- can hit plan cache if the JSON_CONTAINS
 1 row in set (0.00 sec)
 ```
 
-Below are some cases that queries can't be cached:
+The following are some examples that query plans cannot be cached:
 
 ```sql
 mysql> PREPARE st2 FROM 'SELECT /*+ use_index(t5, idx1) */ * FROM t5 WHERE JSON_CONTAINS(j1, ?)';
