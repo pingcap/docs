@@ -321,9 +321,9 @@ Configuration items related to log.
 
 ### `general-log-file` <span class="version-mark">New in v8.0.0</span>
 
-+ The file name of the [general log](/system-variables.md#tidb_general_log).
-+ Default value: ""
-+ If you specify a file name, the general log is written to this particular file. If the value is blank, the general log is written to the server log of the TiDB instance. The name of server log is specified by [`filename`](#filename). 
++ The filename of the [general log](/system-variables.md#tidb_general_log).
++ Default value: `""`
++ If you specify a filename, the general log is written to this specified file. If the value is blank, the general log is written to the server log of the TiDB instance. You can specify the name of the server log using [`filename`](#filename).
 
 ### `timeout` <span class="version-mark">New in v7.1.0</span>
 
@@ -364,8 +364,9 @@ Configuration items related to log files.
 #### `compression` <span class="version-mark">New in v8.0.0</span>
 
 + The compression method for the log.
-+ Default value: ""
-+ By default, compression is not enabled. Currently, the only supported compression format is `"gzip"`. After compression is enabled, all log files are affected, such as `slow-log-file` and `general-log-file`.
++ Default value: `""`
++ Value options: `""`, `"gzip"`
++ The default value is `""`, which means no compression. To enable the gzip compression, set this value to `"gzip"`. After compression is enabled, all log files are affected, such as [`slow-query-file`](#slow-query-file) and [`general-log-file`](#general-log-file).
 
 ## Security
 
