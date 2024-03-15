@@ -514,7 +514,7 @@ For more possible values of this variable, see [Authentication plugin status](/s
 - Type: Integer
 - Default value: `4`
 - Range: `[0, 30]`
-- This variable indicates the number of digits by which to increase the scale of the result of a division operation performed using the `/` operator. This variable is the same as MySQL.
+- This variable specifies the number of digits by which to increase the scale of the result of a division operation performed using the `/` operator. This variable is the same as MySQL.
 
 ### error_count
 
