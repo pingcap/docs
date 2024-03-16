@@ -105,6 +105,10 @@ If you observe that the Titan GC thread is in full load for a long time from **T
 
 You can adjust [`rate-bytes-per-sec`](/tikv-configuration-file.md#rate-bytes-per-sec) to limit the I/O rate of RocksDB compaction, reducing its impact on foreground read and write performance during high traffic.
 
+### `shared-blob-cache` (New in v8.0.0)
+
+You can control whether to enable the shared cache for Titan blob files and RocksDB block files through [`shared-blob-cache`](/tikv-configuration-file.md#shared-blob-cache-tidb-new-in-v800). The default value is `true`. When the shared cache is enabled, block files have higher priority. This means that TiKV prioritizes meeting the cache needs of block files and then uses the remaining cache for blob files.
+
 ### Titan configuration example
 
 The following is an example of the Titan configuration file. You can either [use TiUP to modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration) or [configure a TiDB cluster on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster).
@@ -150,7 +154,7 @@ To fully disable Titan for all existing and future data, you can follow these st
 
     > **Note:**
     >
-    > When there is insufficient disk space to accommodate both Titan and RocksDB data, it is recommended to use the default value of `0.5` for [`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio). In general, the default value is recommended when available disk space is less than 50%. This is because when `discardable-ratio = 1.0`, the RocksDB data continues to increase. At the same time, the recycling of existing blob files in Titan requires all the data in that file to be converted to RocksDB, which is a slow process. However, if the disk size is large enough, setting `discardable-ratio = 1.0` can reduce the GC of the blob file itself during compaction, which saves bandwidth.
+    > When there is insufficient disk space to accommodate both Titan and RocksDB data, it is recommended to use the default value of `0.5` for [`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio). In general, the default value is recommended when available disk space is less than 50%. This is because when `discardable-ratio = 1.0`, the RocksDB data continues to increase. At the same time, the recycling of existing blob files in Titan requires all the data in that file to be converted to RocksDB, which is a slow process. However, if the disk size is large enough, setting `discardable-ratio = 1.0` can reduce the GC of the blob file itself during compaction, which saves bandwidth. When disk space is insufficient, executing `tikv-ctl compact cluster` might result in the entire cluster running out of available space and thus unable to write data.
 
 2. (Optional) Perform a full compaction using tikv-ctl. This process will consume a large amount of I/O and CPU resources.
 

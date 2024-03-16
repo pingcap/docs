@@ -1661,6 +1661,11 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 + Recommended value: After database stabilization, it is recommended to set the RocksDB block cache (`storage.block-cache.capacity`) based on monitoring to maintain a block cache hit rate of at least 95%, and set `blob-cache-size` to `(total memory size) * 50% - (size of block cache)`. This is to ensure that the block cache is sufficiently large to cache the entire RocksDB, while maximizing the blob cache size. However, to prevent a significant drop in the block cache hit rate, do not set the blob cache size too large.
 + Unit: KB|MB|GB
 
+### `shared-blob-cache` (New in v8.0.0)
+
++ Controls whether to enable the shared cache for Titan blob files and RocksDB block files.
++ Default value: `true`. When the shared cache is enabled, block files have higher priority. This means that TiKV prioritizes meeting the cache needs of block files and then uses the remaining cache for blob files.
+
 ### `min-gc-batch-size`
 
 + The minimum total size of Blob files required to perform GC for one time
