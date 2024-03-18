@@ -1210,7 +1210,7 @@ Configuration items related to RocksDB
 
 ### `compaction-readahead-size`
 
-+ Enables the readahead feature during RocksDB compaction and specifies the size of readahead data. If you are using mechanical disks, it is recommended to set the value to 2MB at least.
++ Enables the readahead feature during RocksDB compaction and specifies the size of readahead data. If you are using mechanical disks, it is recommended to set the value to 2MiB at least.
 + Default value: `0`
 + Minimum value: `0`
 + Unit: B|KiB|MiB|GiB
@@ -1779,7 +1779,7 @@ Configuration items related to `raftdb`
 ### `max-total-wal-size`
 
 + The maximum RocksDB WAL size in total
-+ Default value: `"4GiB"`
++ Default value:
     + When `storage.engine="raft-kv"`, the default value is `"4GiB"`.
     + When `storage.engine="partitioned-raft-kv"`, the default value is `1`.
 
