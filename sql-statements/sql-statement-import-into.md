@@ -7,8 +7,8 @@ summary: An overview of the usage of IMPORT INTO in TiDB.
 
 The `IMPORT INTO` statement lets you import data to TiDB via the [Physical Import Mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode) of TiDB Lightning. You can use `IMPORT INTO` in the following two ways:
 
-- `IMPORT INTO ... FROM FILE`: import data files in formats such as `CSV`, `SQL`, and `PARQUET` into an empty table in TiDB.
-- `IMPORT INTO ... FROM SELECT`: import the query result of a `SELECT` statement to an empty table in TiDB. You can also use it to import historical data queried with [`AS OF TIMESTAMP`](/as-of-timestamp.md).
+- `IMPORT INTO ... FROM FILE`: imports data files in formats such as `CSV`, `SQL`, and `PARQUET` into an empty table in TiDB.
+- `IMPORT INTO ... FROM SELECT`: imports the query result of a `SELECT` statement into an empty table in TiDB. You can also use it to import historical data queried with [`AS OF TIMESTAMP`](/as-of-timestamp.md).
 
 ## Restrictions
 
@@ -27,12 +27,11 @@ The `IMPORT INTO` statement lets you import data to TiDB via the [Physical Impor
 
 - For TiDB Self-Hosted, `IMPORT INTO` supports importing data within 10 TiB. For [TiDB Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-dedicated), `IMPORT INTO` supports importing data within 50 GiB.
 - The execution of `IMPORT INTO ... FROM FILE` blocks the current connection until the import is completed. To execute the statement asynchronously, you can add the `DETACHED` option.
-- Up to 16 `IMPORT INTO` tasks can run simultaneously on each cluster (see [TiDB Distributed eXecution Framework (DXF) usage limitations](/tidb-distributed-execution-framework.md#usage-limitations). When a cluster does not have enough resources or reaches the upper limit number of tasks, the newly submitted import tasks are queued for execution.
+- Up to 16 `IMPORT INTO` tasks can run simultaneously on each cluster (see [TiDB Distributed eXecution Framework (DXF) usage limitations](/tidb-distributed-execution-framework.md#usage-limitations)). When a cluster lacks sufficient resources or reaches the maximum number of tasks, newly submitted import tasks are queued for execution.
 - When the [Global Sort](/tidb-global-sort.md) feature is used for data import, the value of the `THREAD` option must be at least `16`.
 - When the [Global Sort](/tidb-global-sort.md) feature is used for data import, the data size of a single row after encoding must not exceed 32 MiB.
 - When the Global Sort feature is used for data import, if the target TiDB cluster is deleted before the import task is completed, temporary data used for global sorting might remain on Amazon S3. In this case, you need to delete the residual data manually to avoid increasing S3 storage costs.
-- If an `IMPORT INTO` task scheduled by the Distributed eXecution Framework (DXF) is already running, it cannot be scheduled to a new TiDB node. If the TiDB node that executes the data import task is restarted, it will no longer execute the data import task, but transfers the task to another TiDB node to continue executing. However, if the imported data is from a local file, the task will not be transferred to another TiDB node to continue executing.
-- All `IMPORT INTO` tasks that are created when [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md) is not enabled run directly on the nodes where the tasks are submitted, and these tasks will not be scheduled for execution on other TiDB nodes even after DXF is enabled later. After DXF is enabled, only newly created `IMPORT INTO` tasks that import data from S3 or GCS are automatically scheduled or failover to other TiDB nodes for execution.
+- All `IMPORT INTO` tasks that are created when [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md) is not enabled run directly on the nodes where the tasks are submitted, and these tasks will not be scheduled for execution on other TiDB nodes even after DXF is enabled later. After DXF is enabled, only newly created `IMPORT INTO` tasks that import data from S3 or GCS are automatically scheduled or failed over to other TiDB nodes for execution.
 
 ### `IMPORT INTO ... FROM SELECT` restrictions
 
@@ -48,7 +47,7 @@ Before using `IMPORT INTO` to import data, make sure the following requirements 
 
 - The target table to be imported is already created in TiDB and it is empty.
 - The target cluster has sufficient space to store the data to be imported.
-- For TiDB Self-Hosted, the [temporary directory](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) of the TiDB node connected to the current session has at least 90 GiB of available space. If [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) is enabled, also make sure that the temporary directory of each TiDB node in the cluster has sufficient disk space.
+- For TiDB Self-Hosted, the [temporary directory](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) of the TiDB node connected to the current session has at least 90 GiB of available space. If [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) is enabled and the data for import is from S3 or GCS, also make sure that the temporary directory of each TiDB node in the cluster has sufficient disk space.
 
 ## Required privileges
 
@@ -142,7 +141,7 @@ The supported options are described as follows:
 | `SPLIT_FILE` | CSV | Splits a single CSV file into multiple smaller chunks of around 256 MiB for parallel processing to improve import efficiency. This parameter only works for **non-compressed** CSV files and has the same usage restrictions as that of TiDB Lightning [`strict-format`](https://docs.pingcap.com/tidb/stable/tidb-lightning-data-source#strict-format). |
 | `DISK_QUOTA='<string>'` | All file formats | Specifies the disk space threshold that can be used during data sorting. The default value is 80% of the disk space in the TiDB [temporary directory](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630). If the total disk size cannot be obtained, the default value is 50 GiB. When specifying `DISK_QUOTA` explicitly, make sure that the value does not exceed 80% of the disk space in the TiDB temporary directory. |
 | `DISABLE_TIKV_IMPORT_MODE` | All file formats | Specifies whether to disable switching TiKV to import mode during the import process. By default, switching TiKV to import mode is not disabled. If there are ongoing read-write operations in the cluster, you can enable this option to avoid impact from the import process. |
-| `THREAD=<number>` | All file formats and query results of `SELECT` | Specifies the concurrency for import. For `IMPORT INTO ... FROM FILE`, the default value of `THREAD` is 50% of the number of CPU cores on the TiDB node, the minimum value is `1`, and the maximum value CPU cores. For `IMPORT INTO ... FROM SELECT`, the default value of `THREAD` is `2`, the minimum value is `1`, and the maximum value is two times the number of CPU cores on the TiDB node. You can explicitly specify this option to control the resource usage, but make sure that the value does not exceed the number of CPU cores. To import data into a new cluster without any data, it is recommended to increase this concurrency appropriately to improve import performance. If the target cluster is already used in a production environment, it is recommended to adjust this concurrency according to your application requirements. |
+| `THREAD=<number>` | All file formats and query results of `SELECT` | Specifies the concurrency for import. For `IMPORT INTO ... FROM FILE`, the default value of `THREAD` is 50% of the number of CPU cores on the TiDB node, the minimum value is `1`, and the maximum value is the number of CPU cores. For `IMPORT INTO ... FROM SELECT`, the default value of `THREAD` is `2`, the minimum value is `1`, and the maximum value is two times the number of CPU cores on the TiDB node. To import data into a new cluster without any data, it is recommended to increase this concurrency appropriately to improve import performance. If the target cluster is already used in a production environment, it is recommended to adjust this concurrency according to your application requirements. |
 | `MAX_WRITE_SPEED='<string>'` | All file formats | Controls the write speed to a TiKV node. By default, there is no speed limit. For example, you can specify this option as `1MiB` to limit the write speed to 1 MiB/s. |
 | `CHECKSUM_TABLE='<string>'` | All file formats | Configures whether to perform a checksum check on the target table after the import to validate the import integrity. The supported values include `"required"` (default), `"optional"`, and `"off"`. `"required"` means performing a checksum check after the import. If the checksum check fails, TiDB will return an error and the import will exit. `"optional"` means performing a checksum check after the import. If an error occurs, TiDB will return a warning and ignore the error. `"off"` means not performing a checksum check after the import. |
 | `DETACHED` | All file formats | Controls whether to execute `IMPORT INTO` asynchronously. When this option is enabled, executing `IMPORT INTO` immediately returns the information of the import job (such as the `Job_ID`), and the job is executed asynchronously in the backend. |
@@ -335,7 +334,7 @@ IMPORT INTO t FROM 's3://bucket/path/to/file.parquet?access-key=XXX&secret-acces
 
 ### Import the query result of `SELECT`
 
-To import the `UNION` result to the target table `t`, with import concurrency specified as `8` and precheck of non-critical items configured as disabled, execute the following SQL statement:
+To import the `UNION` result to the target table `t`, with the import concurrency specified as `8` and precheck of non-critical items configured as disabled, execute the following SQL statement:
 
 ```sql
 IMPORT INTO t FROM SELECT * FROM src UNION SELECT * FROM src2 WITH THREAD = 8, DISABLE_PRECHECK;
