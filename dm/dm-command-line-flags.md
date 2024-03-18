@@ -77,7 +77,7 @@ This document introduces DM's command-line flags.
 
 ### `--secret-key-path`
 
-- The path of the custom key for encryption and decryption
+- The path of the customized secret key for encryption and decryption
 - The default value is `""`
 - Optional flag
 
