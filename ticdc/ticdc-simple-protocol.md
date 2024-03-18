@@ -479,49 +479,48 @@ The fields in the preceding JSON data are explained as follows:
 
 ### DDL
 
-- 生成时机：DDL 事件将会在该 DDL 发生之前的所有事务都被发送完毕后发送。
-- 发送目的地：DDL 事件将会被发送到对应 Topic 的所有的 Partition。
+- Generation time: The DDL event is sent after all transactions before this DDL event have been sent.
+- Destination: The DDL event is sent to all partitions of the corresponding topic.
 
 ### DML
 
-- 生成时机：DML 事件会按照事务的 commitTs 顺序被发送。
-- 发送目的地：DML 事件将会按照用户配置的 Dispatch 规则发送到对应 Topic 对应 Partition。
+- Generation time: The DML event is sent in the order of the `commitTs` of the transaction.
+- Destination: The DML event is sent to the corresponding partition of the corresponding topic according to the user-configured dispatch rules.
 
 ### WATERMARK
 
-- 生成时机：WATERMARK 事件会周期性地被发送，用于标记一个 changefeed 的同步进度，目前的周期为 1 秒钟。
-- 发送目的地：WATERMARK 事件将会被发送到对应 Topic 的所有的 Partition。
+- Generation time: The `WATERMARK` event is sent periodically to mark the replication progress of a changefeed. The current interval is 1 second.
+- Destination: The `WATERMARK` event is sent to all partitions of the corresponding topic.
 
 ### BOOTSTRAP
 
-- 生成时机：
-    - 创建一个新的 changefeed 后，在一张表的第一条 DML 事件发送之前，TiCDC 会发送 BOOTSTRAP 事件给下游，用于给下游构建表的结构。
-    - 此外，BOOTSTRAP 事件会周期性地被发送，以供下游新加入的 consumer 构建表的结构。目前默认每 120 秒或者每间隔 10000 个消息发送一次，可以通过 sink 配置项 `send-bootstrap-interval-in-sec` 和 `send-bootstrap-in-msg-count` 来调整发送周期。
-    - 如果一张表在 30 分钟内没有收到任何新的 DML 消息，那么该表将被认为是不活跃的。我们将停止为该表发送 BOOTSTRAP 事件，直到该表收到新的 DML 事件。
-- 发送目的地：BOOTSTRAP 事件默认发送到对应 Topic 的所有的 Partition，可以通过 sink 配置项 `send-bootstrap-to-all-partition` 来调整发送策略。
+- Generation time:
+    - After creating a new changefeed, before the first DML event of a table is sent, TiCDC sends a `BOOTSTRAP` event to the downstream to build the table schema.
+    - Additionally, the `BOOTSTRAP` event is sent periodically to allow newly joined consumers to build the table schema. The default interval is 120 seconds or every 10000 messages. You can adjust the sending interval by configuring the `send-bootstrap-interval-in-sec` and `send-bootstrap-in-msg-count` parameters in the sink configuration.
+    - If a table does not receive any new DML messages within 30 minutes, the table is considered inactive. TiCDC stops sending `BOOTSTRAP` events for the table until new DML events are received.
+- Destination: By default, the `BOOTSTRAP` event is sent to all partitions of the corresponding topic. You can adjust the sending strategy by configuring the `send-bootstrap-to-all-partition` parameter in the sink configuration.
 
-## Message consumption scenarios
+## Message consumption methods
 
-由于 Simple Protocol 在发送 DML 消息时没有包含表的 schema 信息，因此在消费 DML 消息时，下游需要先接收到 DDL 或者 BOOTSTRAP 消息，并且把表的 schema 信息缓存起来。在接收到 DML 消息时，通过 DML 消息中的 table 名和 schemaVersion 字段来获取对应的 tableSchema 信息，从而正确地消费 DML 消息。
+Because the TiCDC Simple protocol does not include the schema information of the table when sending DML messages, the downstream needs to receive DDL or BOOTSTRAP messages and cache the schema information of the table when consuming DML messages. When receiving a DML message, the downstream can obtain the corresponding table schema information through the table name and `schemaVersion` field in the DML message, and then correctly consume the DML message.
 
-下面将会介绍如何正确地根据 DDL 或者 BOOTSTRAP 消息来消费 DML 消息。
-根据上述文档的描述，我们已知如下信息
+The following describes how to correctly consume DML messages based on DDL or BOOTSTRAP messages. According to preceding descriptions, the following information is known:
 
-- 每个 DML 消息都会包含一个 schemaVersion 字段，用于标记该 DML 消息对应的表的 schema 版本号。
-- 每个 DDL 消息都会包含一个 tableSchema 和 preTableSchema 字段，用于标记该 DDL 发生前后的表的 schema 信息。
-- 每个 BOOTSTRAP 消息都会包含一个 tableSchema 字段，用于标记该 BOOTSTRAP 对应的表的 schema 信息。
+- Each DML message contains a `schemaVersion` field to mark the schema version number of the table corresponding to the DML message.
+- Each DDL message contains a `tableSchema` and `preTableSchema` field to mark the schema information of the table before and after the DDL event.
+- Each BOOTSTRAP message contains a `tableSchema` field to mark the schema information of the table corresponding to the BOOTSTRAP message.
 
-接下来，我们将介绍两种场景下的消费方法。
+The consumption methods are introduced in the following two scenarios.
 
-### 场景一：消费者从头开始消费
+### Scenario 1: The consumer starts consuming from the beginning
 
-在此场景下，消费者从头开始消费，因此消费者能够接收到该表的所有 DDL 和 BOOTSTRAP 消息。此时，消费者可以通过一个 DML 消息中的 table 名和 schemaVersion 字段来获取对应的 tableSchema 信息。具体步骤如下图所示：
+In this scenario, the consumer starts consuming from the beginning, so the consumer can receive all DDL and BOOTSTRAP messages of the table. In this case, the consumer can obtain the schema information of the table through the `table` name and `schemaVersion` field in the DML message. The specific steps are as follows:
 
 ![TiCDC Simple Protocol consumer scene 1](/media/ticdc/ticdc-simple-consumer-1.png)
 
-### 场景二：消费者从中间开始消费
+### Scenario 2: The consumer starts consuming from the middle
 
-在一个新的消费者加入到消费者组时，它可能会从中间开始消费，因此它可能会错过之前的 DDL 和 BOOTSTRAP 消息。在这种情况下，消费者可能会先接收到一些 DML 消息，但是此时它还没有该表的 schema 信息。因此，它需要先等待一段时间，直到它接收到该表 DDL 或 BOOTSTRAP 消息，从而获取到该表的 schema 信息。由于 BOOTSTRAP 消息会周期性地被发送，消费者总是能够在一段时间内获取到该表的 schema 信息。具体步骤如下图所示：
+When a new consumer joins the consumer group, it might start consuming from the middle, so it might miss the previous DDL and BOOTSTRAP messages. In this case, the consumer might receive some DML messages before obtaining the schema information of the table. Therefore, the consumer needs to wait for a period of time until it receives the DDL or BOOTSTRAP message to obtain the schema information of the table. Because BOOTSTRAP messages are sent periodically, the consumer can always obtain the schema information of the table within a period of time. The specific steps are as follows:
 
 ![TiCDC Simple Protocol consumer scene 2](/media/ticdc/ticdc-simple-consumer-2.png)
 
@@ -529,8 +528,7 @@ The fields in the preceding JSON data are explained as follows:
 
 ### TableSchema definition
 
-TableSchema 是一个 JSON 对象，包含了表的 schema 信息，包括表名、表 ID、表的版本号、列信息和索引信息。
-其 JSON 消息格式如下：
+TableSchema is a JSON object that contains the schema information of the table, including the table name, table ID, table version number, column information, and index information. The JSON message format is as follows:
 
 ``` json
 {
@@ -598,24 +596,26 @@ TableSchema 是一个 JSON 对象，包含了表的 schema 信息，包括表名
 }
 ```
 
-以上 JSON 数据的字段解释如下：
+The preceding JSON data is explained as follows:
 
-| 字段      | 类型   | 说明                                                                      |
-| --------- | ------ | ------------------------------------------------------------------------- |
-| schema    | string | 数据库名。                                                         |
-| table     | string | 表名。                                                                     |
-| tableID   | number    | 表的 ID。                                                              |
-| version   | number    | 表的 schema 版本号。                                                       |
-| columns   | array  | 列信息，包括列名、数据类型、是否可为空、默认值等。                         |
-| indexes   | array  | 索引信息，包括索引名、是否唯一、是否主键、索引列等。                       |
+| Field      | Type   | Description                                                         |
+| ---------- | ------ | ------------------------------------------------------------------- |
+| `schema`   | String | The name of the database.                                           |
+| `table`    | String | The name of the table.                                              |
+| `tableID`  | Number | The ID of the table.                                                |
+| `version`  | Number | The schema version number of the table.                             |
+| `columns`  | Array  | The column information, including the column name, data type, whether it can be null, and the default value. |
+| `indexes`  | Array  | The index information, including the index name, whether it is unique, whether it is a primary key, and the index column. |
 
-你可以通过表名和表的 schema 版本号 来唯一标识一张表的 schema 信息。
+You can uniquely identify the schema information of a table by the table name and the schema version number.
 
-注意：由于 TiDB 的实现限制，在执行 RENAME TABLE 的 DDL 操作时，表的 schema 版本号不会发生变化。
+> **Note:**
+>
+> Due to the implementation limitations of TiDB, the schema version number of a table does not change when the `RENAME TABLE` DDL operation is executed.
 
-#### Column 定义 
+#### Column definition
 
-Column 是一个 JSON 对象，包含了列的 schema 信息，包括列名、数据类型、是否可为空、默认值等。
+Column is a JSON object that contains the schema information of the column, including the column name, data type, whether it can be null, and the default value.
 
 ```json
 {
@@ -631,18 +631,18 @@ Column 是一个 JSON 对象，包含了列的 schema 信息，包括列名、�
 }
 ```
 
-以上 JSON 数据的字段解释如下：
+The preceding JSON data is explained as follows:
 
-| 字段      | 类型   | 说明                                                                      |
-| --------- | ------ | ------------------------------------------------------------------------- |
-| name      | string | 列名。                                                                     |
-| dataType  | object | 数据类型信息，包括 MySQL 数据类型、字符集、字符序、字段长度。                   |
-| nullable  | boolean | 是否可为空。                                                              |
-| default   | string | 默认值。                                                                   |
+| Field      | Type   | Description                                                         |
+| ---------- | ------ | ------------------------------------------------------------------- |
+| `name`     | String | The name of the column.                                             |
+| `dataType` | Object | The data type information, including the MySQL data type, character set, collation, and field length. |
+| `nullable` | Boolean | Whether the column can be null.                                    |
+| `default`  | String | The default value of the column.                                    |
 
-#### Index 定义
+#### Index definition
 
-Index 是一个 JSON 对象，包含了索引的 schema 信息，包括索引名、是否唯一、是否主键、索引列等。
+Index is a JSON object that contains the schema information of the index, including the index name, whether it is unique, whether it is a primary key, and the index column.
 
 ```json
 {
@@ -656,21 +656,21 @@ Index 是一个 JSON 对象，包含了索引的 schema 信息，包括索引名
 }
 ```
 
-以上 JSON 数据的字段解释如下：
+The preceding JSON data is explained as follows:
 
-| 字段      | 类型   | 说明                                                                      |
-| --------- | ------ | ------------------------------------------------------------------------- |
-| name      | string | 索引名。                                                                   |
-| unique    | boolean | 是否唯一。                                                                |
-| primary   | boolean | 是否主键。                                                                |
-| nullable  | boolean | 是否可为空。                                                              |
-| columns   | array  | 索引包含的列名。                                                            |
+| Field      | Type   | Description                                                         |
+| ---------- | ------ | ------------------------------------------------------------------- |
+| `name`     | String | The name of the index.                                              |
+| `unique`   | Boolean | Whether the index is unique.                                       |
+| `primary`  | Boolean | Whether the index is a primary key.                                |
+| `nullable` | Boolean | Whether the index can be null.                                     |
+| `columns`  | Array  | The column names included in the index.                             |
 
-### mysqlType 参考表格
+### mysqlType reference table
 
-以下表格描述了 TiCDC Simple Protocol 中所有的 mysqlType 字段的取值范围及其在 TiDB(Golang) 和 Avro(JAVA) 中的类型。
-当你需要对 DML 消息进行解析时，取决于你所使用的协议和语言，可以根据该表格和 DML 消息中的 mysqlType 字段来正确地解析数据。
-其中 TiDB Type (Golang) 代表了对应 mysqlType 在 TiDB 和 TiCDC (Golang) 中处理时的类型，Avro Type (Java) 代表了对应 mysqlType 在编码为 Avro 格式消息时的类型。
+The following table describes the value range of the `mysqlType` field in the TiCDC Simple protocol and its type in TiDB (Golang) and Avro (Java). When you need to parse DML messages, you can correctly parse the data according to this table and the `mysqlType` field in the DML message, depending on the protocol and language you use.
+
+**TiDB Type (Golang)** represents the type of the corresponding `mysqlType` when it is processed in TiDB and TiCDC (Golang). **Avro Type (Java)** represents the type of the corresponding `mysqlType` when it is encoded into Avro format messages.
 
 | MySQL Type | Value Range | TiDB Type (Golang) | Avro Type (Java) |
 | --- | --- | --- | --- |
