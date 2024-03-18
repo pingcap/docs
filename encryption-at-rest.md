@@ -87,8 +87,8 @@ data-key-rotation-period = "168h" # 7 days
 
 If encryption is enabled (that is, the value of `data-encryption-method` is not `"plaintext"`), you must specify a master key in either of the following ways:
 
-- [Specify a master key via KMS](#specify-the-master-key-via-kms)
-- [Specify a master key via a file](#specify-the-master-key-via-file)
+- [Specify a master key via KMS](#specify-a-master-key-via-kms)
+- [Specify a master key via a file](#specify-a-master-key-via-file)
 
 #### Specify a master key via KMS
 
@@ -185,7 +185,6 @@ To create a key on Azure, refer to the instructions in [Set and retrieve a key f
 **Step 2: Configure the master key**
 
 To specify the master key using Azure KMS, add the `[security.encryption.master-key]` configuration after the `[security.encryption]` section in the TiKV configuration file:
-
 
 ```
 [security.encryption.master-key]
