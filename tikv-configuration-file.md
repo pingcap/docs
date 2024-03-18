@@ -1213,13 +1213,8 @@ Configuration items related to RocksDB
 
 ### `rate-bytes-per-sec`
 
-<<<<<<< HEAD
 + The maximum rate permitted by RocksDB's compaction rate limiter
-+ Default value: `10GB`
-=======
-+ When Titan is disabled, this configuration item limits the I/O rate of RocksDB compaction to reduce the impact of RocksDB compaction on the foreground read and write performance during traffic peaks. When Titan is enabled, this configuration item limits the summed I/O rates of RocksDB compaction and Titan GC. If you find that the I/O or CPU consumption of RocksDB compaction and Titan GC is too large, set this configuration item to an appropriate value according the disk I/O bandwidth and the actual write traffic.
 + Default value: `10GiB`
->>>>>>> af411df184 (*: update storage unit in system variables and config file (#16775))
 + Minimum value: `0`
 + Unit: B|KiB|MiB|GiB
 
@@ -1319,19 +1314,8 @@ Configuration items related to Titan.
 
 ### `enabled`
 
-<<<<<<< HEAD
 + Enables or disables Titan
 + Default value: `false`
-=======
-> **Note:**
->
-> - To enhance the performance of wide table and JSON data writing and point query, starting from TiDB v7.6.0, the default value changes from `false` to `true`, which means that Titan is enabled by default.
-> - Existing clusters upgraded to v7.6.0 or later versions retain the original configuration, which means that if Titan is not explicitly enabled, it still uses RocksDB.
-> - If the cluster has enabled Titan before upgrading to TiDB v7.6.0 or later versions, Titan will be retained after the upgrade, and the [`min-blob-size`](/tikv-configuration-file.md#min-blob-size) configuration before the upgrade will be retained. If you do not explicitly configure the value before the upgrade, the default value of the previous version `1KiB` will be retained to ensure the stability of the cluster configuration after the upgrade.
-
-+ Enables or disables Titan.
-+ Default value: `true`
->>>>>>> af411df184 (*: update storage unit in system variables and config file (#16775))
 
 ### `dirname`
 
@@ -1614,19 +1598,8 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 
 ### `min-blob-size`
 
-<<<<<<< HEAD
 + The smallest value stored in a Blob file. Values smaller than the specified size are stored in the LSM-Tree.
-+ Default value: `"1KB"`
-=======
-> **Note:**
->
-> - Starting from TiDB v7.6.0, Titan is enabled by default to enhance the performance of wide table and JSON data writing and point query. The default value of `min-blob-size` changes from `1KiB` to `32KiB`. This means that values exceeding `32KiB` is stored in Titan, while other data continues to be stored in RocksDB.
-> - To ensure configuration consistency, for existing clusters upgrading to TiDB v7.6.0 or later versions, if you do not explicitly set `min-blob-size` before the upgrade, TiDB retains the previous default value of `1KiB`.
-> - A value smaller than `32KiB` might affect the performance of range scans. However, if the workload primarily involves heavy writes and point queries, you can consider decreasing the value of `min-blob-size` for better performance.
-
-+ The smallest value stored in a Blob file. Values smaller than the specified size are stored in the LSM-Tree.
-+ Default value: `"32KiB"`
->>>>>>> af411df184 (*: update storage unit in system variables and config file (#16775))
++ Default value: `"1KiB"`
 + Minimum value: `0`
 + Unit: KiB|MiB|GiB
 
@@ -1636,29 +1609,16 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 + Optional values: `"no"`, `"snappy"`, `"zlib"`, `"bzip2"`, `"lz4"`, `"lz4hc"`, `"zstd"`
 + Default value: `"lz4"`
 
-<<<<<<< HEAD
 > **Note:**
 >
 > The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
-=======
-### `zstd-dict-size`
-
-+ The zstd dictionary compression size. The default value is `"0KiB"`, which means to disable the zstd dictionary compression. In this case, Titan compresses data based on single values, whereas RocksDB compresses data based on blocks (`32KiB` by default). When the average size of Titan values is less than `32KiB`, Titan's compression ratio is lower than that of RocksDB. Taking JSON as an example, the store size in Titan can be 30% to 50% larger than that of RocksDB. The actual compression ratio depends on whether the value content is suitable for compression and the similarity among different values. You can enable the zstd dictionary compression to increase the compression ratio by configuring `zstd-dict-size` (for example, set it to `16KiB`). The actual store size can be lower than that of RocksDB. But the zstd dictionary compression might lead to about 10% performance regression in specific workloads.
-+ Default value: `"0KiB"`
-+ Unit: KiB|MiB|GiB 
->>>>>>> af411df184 (*: update storage unit in system variables and config file (#16775))
 
 ### `blob-cache-size`
 
 + The cache size of a Blob file
 + Default value: `"0GiB"`
 + Minimum value: `0`
-<<<<<<< HEAD
-+ Unit: KB|MB|GB
-=======
-+ Recommended value: After database stabilization, it is recommended to set the RocksDB block cache (`storage.block-cache.capacity`) based on monitoring to maintain a block cache hit rate of at least 95%, and set `blob-cache-size` to `(total memory size) * 50% - (size of block cache)`. This is to ensure that the block cache is sufficiently large to cache the entire RocksDB, while maximizing the blob cache size. However, to prevent a significant drop in the block cache hit rate, do not set the blob cache size too large.
 + Unit: KiB|MiB|GiB
->>>>>>> af411df184 (*: update storage unit in system variables and config file (#16775))
 
 ### `min-gc-batch-size`
 
