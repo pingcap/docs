@@ -484,11 +484,11 @@ SHOW binding_cache status;
 1 row in set (0.00 sec)
 ```
 
-## Utilize the Statement Summary table to obtain queries that need to be bound
+## Utilize the statement summary table to obtain queries that need to be bound
 
-[Statement Summary](/statement-summary-tables.md) stores recent SQL execution information, such as latency, execution times, and corresponding query plans. You can query Statement Summary to get qualified `plan_digest`, and then [create bindings according to these historical execution plans](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan).
+[Statement summary](/statement-summary-tables.md) records recent SQL execution information, such as latency, execution times, and corresponding query plans. You can query statement summary tables to get qualified `plan_digest`, and then [create bindings according to these historical execution plans](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan).
 
-The following example searches for SELECT statements that have been executed more than 10 times in the past two weeks, and have multiple execution plans without SQL binding. It sorts the queries by the execution times, and binds the top 100 queries to their fastest plans.
+The following example queries `SELECT` statements that have been executed more than 10 times in the past two weeks, and have multiple execution plans without SQL binding. It sorts the queries by the execution times, and binds the top 100 queries to their fastest plans.
 
 ```sql
 WITH stmts AS (                                                -- Gets all information
