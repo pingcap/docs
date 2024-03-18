@@ -4582,8 +4582,8 @@ SHOW WARNINGS;
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
-- Default value: `2097152` (which is 2 MB)
-- Range: `[0, 9223372036854775807]`, in bytes. The memory format with the units "KB|MB|GB|TB" is also supported. `0` means no limit.
+- Default value: `2097152` (which is 2 MiB)
+- Range: `[0, 9223372036854775807]`, in bytes. The memory format with the units "KiB|MiB|GiB|TiB" is also supported. `0` means no limit.
 - This variable controls the maximum size of a plan that can be cached in prepared or non-prepared plan cache. If the size of a plan exceeds this value, the plan will not be cached. For more details, see [Memory management of prepared plan cache](/sql-prepared-plan-cache.md#memory-management-of-prepared-plan-cache) and [Non-prepared plan cache](/sql-plan-management.md#usage).
 
 ### tidb_pprof_sql_cpu <span class="version-mark">New in v4.0</span>
@@ -4888,8 +4888,8 @@ SHOW WARNINGS;
 - Default value: `80%`
 - Range:
     - You can set the value in the percentage format, which means the percentage of the memory usage relative to the total memory. The value range is `[1%, 99%]`.
-    - You can also set the value in memory size. The value range is `0` and `[536870912, 9223372036854775807]` in bytes. The memory format with the units "KB|MB|GB|TB" is supported. `0` means no memory limit.
-    - If this variable is set to a memory size that is less than 512 MB but not `0`, TiDB uses 512 MB as the actual size.
+    - You can also set the value in memory size. The value range is `0` and `[536870912, 9223372036854775807]` in bytes. The memory format with the units "KiB|MiB|GiB|TiB" is supported. `0` means no memory limit.
+    - If this variable is set to a memory size that is less than 512 MiB but not `0`, TiDB uses 512 MiB as the actual size.
 - This variable specifies the memory limit for a TiDB instance. When the memory usage of TiDB reaches the limit, TiDB cancels the currently running SQL statement with the highest memory usage. After the SQL statement is successfully canceled, TiDB tries to call Golang GC to immediately reclaim memory to relieve memory stress as soon as possible.
 - Only the SQL statements with more memory usage than the [`tidb_server_memory_limit_sess_min_size`](/system-variables.md#tidb_server_memory_limit_sess_min_size-new-in-v640) limit are selected as the SQL statements to be canceled first.
 - Currently, TiDB cancels only one SQL statement at a time. After TiDB completely cancels a SQL statement and recovers resources, if the memory usage is still greater than the limit set by this variable, TiDB starts the next cancel operation.
@@ -4916,8 +4916,8 @@ SHOW WARNINGS;
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `134217728` (which is 128 MB)
-- Range: `[128, 9223372036854775807]`, in bytes. The memory format with the units "KB|MB|GB|TB" is also supported.
+- Default value: `134217728` (which is 128 MiB)
+- Range: `[128, 9223372036854775807]`, in bytes. The memory format with the units "KiB|MiB|GiB|TiB" is also supported.
 - After you enable the memory limit, TiDB will terminate the SQL statement with the highest memory usage on the current instance. This variable specifies the minimum memory usage of the SQL statement to be terminated. If the memory usage of a TiDB instance that exceeds the limit is caused by too many sessions with low memory usage, you can properly lower the value of this variable to allow more sessions to be canceled.
 
 ### tidb_service_scope <span class="version-mark">New in v7.4.0</span>
@@ -5682,7 +5682,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 <CustomContent platform="tidb-cloud">
 
-- This variable is used to control the batch size of transaction commit requests that TiDB sends to TiKV. If most of the transactions in the application workload have a large number of write operations, adjusting this variable to a larger value can improve the performance of batch processing. However, if this variable is set to too large a value and exceeds the limit of TiKV's maximum size of a single log (which is 8 MB by default), the commits might fail.
+- This variable is used to control the batch size of transaction commit requests that TiDB sends to TiKV. If most of the transactions in the application workload have a large number of write operations, adjusting this variable to a larger value can improve the performance of batch processing. However, if this variable is set to too large a value and exceeds the limit of TiKV's maximum size of a single log (which is 8 MiB by default), the commits might fail.
 
 </CustomContent>
 
