@@ -98,7 +98,7 @@ TiKV supports KMS encryption for three platforms: AWS, Google Cloud, and Azure. 
 
 <div label="AWS KMS">
 
-**Step 1: Create a master key**
+**Step 1. Create a master key**
 
 To create a key on AWS, take the following steps:
 
@@ -116,7 +116,7 @@ aws --region us-west-2 kms create-alias --alias-name "alias/tidb-tde" --target-k
 
 The `--target-key-id` to enter in the second command is in the output of the first command.
 
-**Step 2: Configure the master key**
+**Step 2. Configure the master key**
 
 To specify the master key using AWS KMS, add the `[security.encryption.master-key]` configuration after the `[security.encryption]` section in the TiKV configuration file:
 
@@ -135,7 +135,7 @@ You can also use [multi-Region keys](https://docs.aws.amazon.com/kms/latest/deve
 </div>
 <div label="Google Cloud KMS">
 
-**Step 1: Create a master key**
+**Step 1. Create a master key**
 
 To create a key on Google Cloud, take the following steps:
 
@@ -157,7 +157,7 @@ gcloud kms keys create "key-name" --keyring "key-ring-name" --location "global" 
 
 Make sure to replace the values of `"key-ring-name"`, `"key-name"`, `"global"`, and `"30d"` in the preceding command with the names and configurations corresponding to your actual key.
 
-**Step 2: Configure the master key**
+**Step 2. Configure the master key**
 
 To specify the master key using Google Cloud KMS, add the `[security.encryption.master-key]` configuration after the `[security.encryption]` section:
 
@@ -177,11 +177,11 @@ credential-file-path = "/path/to/credential.json"
 </div>
 <div label="Azure KMS">
 
-**Step 1: Create a master key**
+**Step 1. Create a master key**
 
 To create a key on Azure, refer to the instructions in [Set and retrieve a key from Azure Key Vault using the Azure portal](https://learn.microsoft.com/en-us/azure/key-vault/keys/quick-create-portal).
 
-**Step 2: Configure the master key**
+**Step 2. Configure the master key**
 
 To specify the master key using Azure KMS, add the `[security.encryption.master-key]` configuration after the `[security.encryption]` section in the TiKV configuration file:
 
