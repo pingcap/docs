@@ -27,7 +27,7 @@ The `IMPORT INTO` statement lets you import data to TiDB via the [Physical Impor
 
 - For TiDB Self-Hosted, `IMPORT INTO` supports importing data within 10 TiB. For [TiDB Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-dedicated), `IMPORT INTO` supports importing data within 50 GiB.
 - The execution of `IMPORT INTO ... FROM FILE` blocks the current connection until the import is completed. To execute the statement asynchronously, you can add the `DETACHED` option.
-- Up to 16 `IMPORT INTO` tasks can run simultaneously on each cluster (see [TiDB Distributed eXecution Framework (DXF) usage limitations](/tidb-distributed-execution-framework.md#usage-limitations)). When a cluster lacks sufficient resources or reaches the maximum number of tasks, newly submitted import tasks are queued for execution.
+- Up to 16 `IMPORT INTO` tasks can run simultaneously on each cluster (see [TiDB Distributed eXecution Framework (DXF) usage limitations](/tidb-distributed-execution-framework.md#limitation)). When a cluster lacks sufficient resources or reaches the maximum number of tasks, newly submitted import tasks are queued for execution.
 - When the [Global Sort](/tidb-global-sort.md) feature is used for data import, the value of the `THREAD` option must be at least `16`.
 - When the [Global Sort](/tidb-global-sort.md) feature is used for data import, the data size of a single row after encoding must not exceed 32 MiB.
 - When the Global Sort feature is used for data import, if the target TiDB cluster is deleted before the import task is completed, temporary data used for global sorting might remain on Amazon S3. In this case, you need to delete the residual data manually to avoid increasing S3 storage costs.
@@ -38,7 +38,7 @@ The `IMPORT INTO` statement lets you import data to TiDB via the [Physical Impor
 - `IMPORT INTO ... FROM SELECT` can only be executed on the TiDB node that the current user is connected to, and it blocks the current connection until the import is complete.
 - `IMPORT INTO ... FROM SELECT` only supports two [import options](#withoptions): `THREAD` and `DISABLE_PRECHECK`.
 - `IMPORT INTO ... FROM SELECT` does not support the task management statements such as `SHOW IMPORT JOB(s)` and `CANCEL IMPORT JOB <job-id>`.
-- The [temp directory](/tidb-configuration-file.md#temp-dir-introduced-from-v630-version) of TiDB requires sufficient space to store the entire query result of the `SELECT` statement (configuring the `DISK_QUOTA` option is not supported currently).
+- The [temporary directory](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) of TiDB requires sufficient space to store the entire query result of the `SELECT` statement (configuring the `DISK_QUOTA` option is not supported currently).
 - Importing historical data using [`tidb_snapshot`](/read-historical-data.md) is not supported.
 
 ## Prerequisites for import
