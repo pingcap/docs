@@ -100,7 +100,7 @@ TiKV supports KMS encryption for three platforms: AWS, Google Cloud, and Azure. 
 
 **Step 1: Create a master key**
 
-To create a key on AWS, follow these steps:
+To create a key on AWS, take the following steps:
 
 1. Go to the [AWS KMS](https://console.aws.amazon.com/kms) on the AWS console.
 2. Make sure that you have selected the correct region on the top right corner of your console.
