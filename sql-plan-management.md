@@ -236,7 +236,7 @@ To make the execution plan of a SQL statement fixed to a historical execution pl
 When using this feature, note the following:
 
 - The feature generates hints according to historical execution plans and uses the generated hints for binding. Because historical execution plans are stored in [Statement Summary Tables](/statement-summary-tables.md), before using this feature, you need to enable the [`tidb_enable_stmt_summary`](/system-variables.md#tidb_enable_stmt_summary-new-in-v304) system variable first.
-- For TiFlash queries, Join queries with three or more tables, and queries that contain subqueries, the auto-generated hints are not complete enough, which might result in the plan not being fully bound. In such cases, a warning will occur when creating a binding.
+- For TiFlash queries, Join queries with three or more tables, and queries that contain subqueries, the auto-generated hints are not adequate, which might result in the plan not being fully bound. In such cases, a warning will occur when creating a binding.
 - If a historical execution plan is for a SQL statement with hints, the hints will be added to the binding. For example, after executing `SELECT /*+ max_execution_time(1000) */ * FROM t`, the binding created with its `plan_digest` will include `max_execution_time(1000)`.
 
 The SQL statement of this binding method is as follows:
@@ -488,7 +488,7 @@ SHOW binding_cache status;
 
 [Statement Summary](/statement-summary-tables.md) stores recent SQL execution information, such as latency, execution times, and corresponding query plans. You can query Statement Summary to get qualified `plan_digest`, and then [create bindings according to these historical execution plans](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan).
 
-The following example searches for SELECT statements that have been executed more than 10 times in the past two weeks, have unstable execution plans, and have not been bound. It sorts the queries by the execution times, and binds the top 100 queries to their fastest plans.
+The following example searches for SELECT statements that have been executed more than 10 times in the past two weeks, and have multiple execution plans without SQL binding. It sorts the queries by the execution times, and binds the top 100 queries to their fastest plans.
 
 ```sql
 WITH stmts AS (                                                -- Gets all information
