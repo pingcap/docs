@@ -87,7 +87,7 @@ Request Unit (RU) is a unified abstraction unit in TiDB for system resources, wh
             <td>1 KiB write request payload consumes 1 RU</td>
         </tr>
         <tr>
-            <td>SQL CPU</td>
+            <td>CPU</td>
             <td> 3 ms consumes 1 RU</td>
         </tr>
     </tbody>
