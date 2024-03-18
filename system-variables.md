@@ -1818,7 +1818,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
         - `"bulk"` mode only takes effect on statements with auto-commit enabled, and requires the [`pessimistic-auto-commit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#pessimistic-auto-commit-new-in-v600) configuration item to be set to `false`.
         - When using the `"bulk"` mode to execute statements, ensure that the [metadata lock](/metadata-lock.md) remains enabled during the execution process.
         - `"bulk"` mode cannot be used on [temporary tables](/temporary-tables.md) and [cached tables](/cached-tables.md).
-        - `"bulk"` mode cannot be used on tables containing foreign keys when the foreign key constraint check is enabled (`foreign_key_checks = ON`).
+        - `"bulk"` mode cannot be used on tables containing foreign keys and tables referenced by foreign keys when the foreign key constraint check is enabled (`foreign_key_checks = ON`).
         - When executing large transactions in the `"bulk"` mode, the transaction duration might be long. For transactions in this mode, the maximum TTL of the transaction lock is the greater value between [`max-txn-ttl`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#max-txn-ttl) and 24 hours. Additionally, if the transaction execution time exceeds the value set by [`tidb_gc_max_wait_time`](#tidb_gc_max_wait_time-new-in-v610), the GC might force a rollback of the transaction, leading to its failure.
         - This mode is implemented by the Pipelined DML feature. For detailed design and GitHub issues, see [Pipelined DML](https://github.com/pingcap/tidb/blob/master/docs/design/2024-01-09-pipelined-DML.md) and [#50215](https://github.com/pingcap/tidb/issues/50215).
 
