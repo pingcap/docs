@@ -30,7 +30,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 - Default value: `OFF`
 - Possible values: `ON`, `OFF`
-- This variable controls whether to allow plan cache for partitioned tables. If it is set to `ON`, neither [Prepared statement cache](/sql-prepared-plan-cache.md) nor [Non-prepared statement cache](/sql-non-prepared-plan-cache.md) will be enabled for [partitioned tables](/partitioned-table.md).
+- This variable controls whether to allow plan cache for partitioned tables. If it is set to `ON`, neither [Prepared statement plan cache](/sql-prepared-plan-cache.md) nor [Non-prepared statement plan cache](/sql-non-prepared-plan-cache.md) will be enabled for [partitioned tables](/partitioned-table.md).
 
 ### [`44262`](https://github.com/pingcap/tidb/issues/44262) <span class="version-mark">New in v6.5.3 and v7.2.0</span>
 
