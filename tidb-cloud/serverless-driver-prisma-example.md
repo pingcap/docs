@@ -10,9 +10,51 @@ summary: Learn how to use TiDB Cloud serverless driver with Prisma ORM.
 - Better performance in the serverless environments
 - Ability to use in the edge environments
 
-This tutorial describes how to use TiDB Cloud serverless driver with the Prisma adapter.
+This tutorial describes how to use the Prisma adapter.
+
+## Install
+
+You need to install both the `prisma-adapter` and `serverless driver`. You can install them using npm or your preferred package manager.
+
+```
+npm install @tidbcloud/prisma-adapter
+npm install @tidbcloud/serverless
+```
+
+## Use driverAdapters in prisma schema
+
+To use the Prisma adapter, we need to enable the `driverAdapters` feature in the `schema.prisma` file. Here is an example:
+
+```
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+}
+```
+
+## Initialize Prisma Client using the Prisma adapter
+
+After initialize the Prisma Client with the Prisma adapter, you can use the Prisma Client as usual. Then, the query will go through the TiDB Cloud serverless driver. Here is an example:
+
+```
+import { connect } from '@tidbcloud/serverless';
+import { PrismaTiDBCloud } from '@tidbcloud/prisma-adapter';
+import { PrismaClient } from '@prisma/client';
+
+// Initialize Prisma Client
+const connection = connect({ url: ${DATABASE_URL} });
+const adapter = new PrismaTiDBCloud(connection);
+const prisma = new PrismaClient({ adapter });
+```
 
 ## Use the Prisma adapter in Node.js environments
+
+This is an example of how to use the Prisma adapter in Node.js environments.
 
 ### Before you begin
 
@@ -216,7 +258,7 @@ To complete this tutorial, you need the following:
    
 ## Use the Prisma adapter in edge environments
 
-Now, you can use `@tidbcloud/prisma-adapter` >= v5.11.0 in the edge environments such as Vercel Edge Function and Cloudflare Workers.
+You can use `@tidbcloud/prisma-adapter` >= v5.11.0 in the edge environments such as Vercel Edge Function and Cloudflare Workers.
 
-- [Vercel Edge Function Example]()
-- [Cloudflare Worker Example]()
+- [Vercel Edge Function Example](https://github.com/tidbcloud/serverless-driver-example/tree/main/prisma/prisma-vercel-example)
+- [Cloudflare Worker Example](https://github.com/shiyuhang0/serverless-driver-example/tree/main/prisma/prisma-cloudflare-worker-example)
