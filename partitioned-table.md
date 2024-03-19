@@ -665,11 +665,11 @@ PARTITION BY KEY(fname, store_id)
 PARTITIONS 4;
 ```
 
-Currently, TiDB does not support creating Key partitioned tables if the partition column list specified in `PARTITION BY KEY` is empty. For example, after you execute the following statement, TiDB will create a non-partitioned table and return an `Unsupported partition type KEY, treat as normal table` warning.
+Similar to MySQL, TiDB supports creating Key partitioned tables with an empty partition column list specified in `PARTITION BY KEY`. For example, the following statement creates a partitioned table using the primary key `id` as the partitioning key:
 
 ```sql
 CREATE TABLE employees (
-    id INT NOT NULL,
+    id INT NOT NULL PRIMARY KEY,
     fname VARCHAR(30),
     lname VARCHAR(30),
     hired DATE NOT NULL DEFAULT '1970-01-01',
@@ -681,6 +681,20 @@ CREATE TABLE employees (
 PARTITION BY KEY()
 PARTITIONS 4;
 ```
+
+If the table lacks a primary key but contains a unique key, the unique key is used as the partitioning key:
+
+```sql
+CREATE TABLE k1 (
+    id INT NOT NULL,
+    name VARCHAR(20),
+    UNIQUE KEY (id)
+)
+PARTITION BY KEY()
+PARTITIONS 2;
+```
+
+However, the previous statement will fail if the unique key column is not defined as `NOT NULL`.
 
 #### How TiDB handles Linear Hash partitions
 
@@ -1681,8 +1695,6 @@ YEARWEEK()
 ### Compatibility with MySQL
 
 Currently, TiDB supports Range partitioning, Range COLUMNS partitioning, List partitioning, List COLUMNS partitioning, Hash partitioning, and Key partitioning. Other partitioning types that are available in MySQL are not supported yet in TiDB.
-
-Currently, TiDB does not support using an empty partition column list for Key partitioning.
 
 With regard to partition management, any operation that requires moving data in the bottom implementation is not supported currently, including but not limited to: adjust the number of partitions in a Hash partitioned table, modify the Range of a Range partitioned table, and merge partitions.
 
