@@ -21,7 +21,7 @@ npm install @tidbcloud/prisma-adapter
 npm install @tidbcloud/serverless
 ```
 
-## Use driverAdapters in prisma schema
+## Enable the driverAdapters
 
 To use the Prisma adapter, we need to enable the `driverAdapters` feature in the `schema.prisma` file. Here is an example:
 
@@ -37,7 +37,7 @@ datasource db {
 }
 ```
 
-## Initialize Prisma Client using the Prisma adapter
+## Initialize the Prisma Client
 
 After initialize the Prisma Client with the Prisma adapter, you can use the Prisma Client as usual. Then, the query will go through the TiDB Cloud serverless driver. Here is an example:
 
