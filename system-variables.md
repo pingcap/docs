@@ -3409,8 +3409,20 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
-- This variable is used to set whether to enable the low precision TSO feature. After this feature is enabled, new transactions use a timestamp updated every 2 seconds to read data.
+- This variable is used to set whether to enable the low-precision TSO feature. After this feature is enabled, TiDB uses the cached timestamp to read data. The cached timestamp is updated every 2 seconds by default. Starting from v8.0.0, you can configure the update interval by [`tidb_low_resolution_tso_update_interval`](#tidb_low_resolution_tso_update_interval-new-in-v800).
 - The main applicable scenario is to reduce the overhead of acquiring TSO for small read-only transactions when reading old data is acceptable.
+
+### `tidb_low_resolution_tso_update_interval` <span class="version-mark">New in v8.0.0</span>
+
+- Scope：GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type：Integer
+- Default value：`2000`
+- Range：`[10, 60000]`
+- Unit: Milliseconds
+- This variable is used to set the update interval of the cached timestamp used in the low-precision TSO feature, in milliseconds.
+- This variable is only available when [`tidb_low_resolution_tso`](#tidb_low_resolution_tso) is enabled.
 
 ### tidb_max_auto_analyze_time <span class="version-mark">New in v6.1.0</span>
 
