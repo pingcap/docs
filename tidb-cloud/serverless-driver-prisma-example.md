@@ -261,4 +261,4 @@ To complete this tutorial, you need the following:
 You can use `@tidbcloud/prisma-adapter` >= v5.11.0 in the edge environments such as Vercel Edge Function and Cloudflare Workers.
 
 - [Vercel Edge Function Example](https://github.com/tidbcloud/serverless-driver-example/tree/main/prisma/prisma-vercel-example)
-- [Cloudflare Worker Example](https://github.com/shiyuhang0/serverless-driver-example/tree/main/prisma/prisma-cloudflare-worker-example)
+- [Cloudflare Worker Example](https://github.com/tidbcloud/serverless-driver-example/tree/main/prisma/prisma-cloudflare-worker-example)
