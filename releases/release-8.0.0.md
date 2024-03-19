@@ -256,11 +256,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 
     For more information, see [documentation](/encryption-at-rest.md##tikv-encryption-at-rest).
 
-* TiDB 日志脱敏增强 [#51306](https://github.com/pingcap/tidb/issues/51306) @[xhebox](https://github.com/xhebox) **tw@hfxsd** <!--1229-->
+* Enhance TiDB log desensitization [#51306](https://github.com/pingcap/tidb/issues/51306) @[xhebox](https://github.com/xhebox) **tw@hfxsd** <!--1229-->
 
-    TiDB 日志脱敏增强是基于对日志文件中 SQL 文本信息的数据进行标记，以便支持用户在查看时进行敏感数据的安全展示。用户可以更灵活自主地在展示环节控制是否对日志信息进行脱敏，以支持 TiDB 日志在不同场景下的安全使用，提升了客户使用日志脱敏能力的安全性和灵活性。要使用此功能请通过修改系统变量 `tidb_redact_log` 的值设置为 `marker`，此时 TiDB 的运行日志将对 SQL 文本进行标记，查看时将基于标记进行数据的安全展示，从而实现日志信息的保护。
+    The TiDB log desensitization enhancement is based on marking data with SQL text information in log files to support secure presentation of sensitive data when viewed by users. You can control whether or not to desensitize log information to enable secure use of TiDB logs in different scenarios, enhancing the security and flexibility of using the log desensitization capability. To use this feature, you set the system variable `tidb_redact_log` to `MARKER`. The SQL text in TiDB logs will be marked, and the data will be securely displayed based on the markers when viewed.
 
-    更多信息，请参考[用户文档](链接)。
+    For more information, see [documentation](/system-variables.md#tidb_redact_log).
 
 ### Data migration
 
@@ -382,3 +382,21 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 ## Bug fixes
 
 ## Contributors
+
+We would like to thank the following contributors from the TiDB community:
+
+- [Aoang](https://github.com/Aoang)
+- [bufferflies](https://github.com/bufferflies)
+- [daemon365](https://github.com/daemon365)
+- [eltociear](https://github.com/eltociear)
+- [lichunzhu](https://github.com/lichunzhu)
+- [jiyfhust](https://github.com/jiyfhust)
+- [pingandb](https://github.com/pingandb)
+- [renovate](https://github.com/renovate)
+- [shenqidebaozi](https://github.com/shenqidebaozi)
+- [Smityz ](https://github.com/Smityz)
+- [songzhibin97](https://github.com/songzhibin97)
+- [tangjingyu97](https://github.com/tangjingyu97)
+- [Tema](https://github.com/Tema)
+- [ub-3](https://github.com/ub-3)
+- [yoshikipom](https://github.com/yoshikipom)
