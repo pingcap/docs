@@ -506,6 +506,16 @@ For more possible values of this variable, see [Authentication plugin status](/s
 
 </CustomContent>
 
+### div_precision_increment <span class="version-mark">New in v8.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Integer
+- Default value: `4`
+- Range: `[0, 30]`
+- This variable specifies the number of digits by which to increase the scale of the result of a division operation performed using the `/` operator. This variable is the same as MySQL.
+
 ### error_count
 
 - Scope: SESSION
