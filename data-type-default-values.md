@@ -42,7 +42,9 @@ CREATE TABLE t2 (b BLOB DEFAULT (RAND()));
 
 TiDB currently supports the following expressions:
 
-* [`RAND()`](/functions-and-operators/numeric-functions-and-operators.md), [`UUID()`](/functions-and-operators/miscellaneous-functions.md), [`UUID_TO_BIN()`](/functions-and-operators/miscellaneous-functions.md)
+* [`RAND()`](/functions-and-operators/numeric-functions-and-operators.md)
+* [`UUID()`](/functions-and-operators/miscellaneous-functions.md)
+* [`UUID_TO_BIN()`](/functions-and-operators/miscellaneous-functions.md)
 
 Starting from TiDB v8.0.0, the `DEFAULT` clause supports using the following expressions to set default values.
 
