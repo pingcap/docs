@@ -79,6 +79,12 @@ When you start the TiDB cluster, you can use command-line options or environment
 - Default: `""`
 - If this option is not set, logs are output to "stderr". If this option is set, logs are output to the corresponding file.
 
+## `--log-general`
+
++ The filename of the [General Log](/system-variables.md#tidb_general_log)
++ Default: `""`
++ If this option is not set, the general log is written to the file specified by [`--log-file`](#--log-file) by default.
+
 ## `--log-slow-query`
 
 - The directory for the slow query log

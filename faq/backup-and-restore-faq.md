@@ -321,3 +321,9 @@ No, it is not necessary. Starting from v7.1.0, BR supports resuming data from a 
 ## After the recovery is complete, can I delete a specific table and then recover it again?
 
 Yes, after deleting a specific table, you can recover it again. But note that, you can only recover tables that are deleted using the `DROP TABLE` or `TRUNCATE TABLE` statement, not the `DELETE FROM` statement. This is because `DELETE FROM` only updates the MVCC version to mark the data to be deleted, and the actual data deletion occurs after GC.
+
+### Why does BR take a lot of memory when restoring statistics information?
+
+Before v7.6.0, the statistics data backed up by BR is stored together with the table information and loaded into memory during recovery. Therefore, when the backup statistics data is very large, BR needs to occupy a large amount of memory.
+
+Starting from v7.6.0, the backup statistics is stored in a specific file separately. BR does not load statistic data of any table until BR starts to restore the table, which saves memory.
