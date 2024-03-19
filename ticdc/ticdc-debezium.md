@@ -124,7 +124,7 @@ The key fields of the preceding JSON data are explained as follows:
 | payload.after     | JSON   | The data value after the change event of a statement. For `"d"` events, the value of the `after` field is `null`.     |
 | payload.source.commit_ts     | Number  | The `CommitTs` identifier when TiCDC generates this message.       |
 | payload.source.db     | String   | The name of the database where the event occurs.    |
-| payload.source.table     | String  |  The name of the data table where the event occurs.   |
+| payload.source.table     | String  |  The name of the table where the event occurs.   |
 | schema.fields     | JSON   |  The type information of each field in the payload, including the schema information of the row data before and after the change.   |
 
 ### Data type mapping
