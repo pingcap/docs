@@ -31,7 +31,6 @@ You can only export one table at a time when you export data to local. The expor
 
 <div label="Export With CLI">
 
-
 1. Export a specific table from a TiDB Serverless cluster to local.
 
    ```sh
