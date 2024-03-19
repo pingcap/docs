@@ -12,7 +12,7 @@ If you encounter a situation where hints do not take effect, see [Troubleshoot c
 
 ## Syntax
 
-Optimizer hints are case insensitive and specified within `/*+ ... */` comments following the `SELECT`, `UPDATE` or `DELETE` keyword in a SQL statement. Optimizer hints are not currently supported for `INSERT` statements.
+Optimizer hints are case insensitive and specified within `/*+ ... */` comments following the `SELECT`, `INSERT`, `UPDATE` or `DELETE` keyword in a SQL statement.
 
 Multiple hints can be specified by separating with commas. For example, the following query uses three different hints:
 
