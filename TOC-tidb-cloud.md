@@ -603,7 +603,7 @@
         - [`SESSION_CONNECT_ATTRS`](/performance-schema/performance-schema-session-connect-attrs.md)
     - [Metadata Lock](/metadata-lock.md)
     - [Use UUIDs](/best-practices/uuid.md)
-    - [TiDB DDL V2](/ddl-v2.md)
+    - [TiDB Create Table Acceration](/fast-create-table.md)
   - [System Variables](/system-variables.md)
   - [Server Status Variables](/status-variables.md)
   - Storage Engines
