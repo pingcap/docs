@@ -8,11 +8,15 @@ aliases: ['/tidb/v7.5/sql-statement-flashback-to-timestamp','/tidb/stable/sql-st
 
 TiDB v6.4.0 では`FLASHBACK CLUSTER TO TIMESTAMP`構文が導入されています。これを使用して、クラスターを特定の時点に復元できます。タイムスタンプを指定する場合、日時値を設定するか、時刻関数を使用できます。 datetime の形式は「2016-10-08 16:45:26.999」のようなもので、最小時間単位はミリ秒です。ただし、ほとんどの場合、時間単位として秒を使用してタイムスタンプを指定するだけで十分です (たとえば、「2016-10-08 16:45:26」)。
 
-v6.5.6、v7.1.3、および v7.5.1 以降、TiDB では`FLASHBACK CLUSTER TO TSO`構文が導入されています。この構文では[TSO](/tso.md)使用してより正確な回復時点を指定できるため、データ回復の柔軟性が向上します。
+v6.5.6、v7.1.3、および v7.5.1 以降、TiDB では`FLASHBACK CLUSTER TO TSO`構文が導入されています。この構文では、 [TSO](/tso.md)使用してより正確な回復時点を指定できるため、データ回復の柔軟性が向上します。
 
 > **警告：**
 >
 > `FLASHBACK CLUSTER TO [TIMESTAMP|TSO]`構文は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターには適用されません。予期しない結果を避けるため、TiDB サーバーレス クラスターではこのステートメントを実行しないでください。
+
+> **警告：**
+>
+> リカバリ時点を指定する場合は、ターゲットのタイムスタンプまたは TSO の有効性を必ず確認し、PD によって現在割り当てられている最大 TSO を超える将来の時刻を指定しないようにしてください (Grafana PD パネルの`Current TSO`を参照)。そうしないと、同時処理の線形一貫性とトランザクション分離レベルに違反し、データの正確性に関する重大な問題が発生する可能性があります。
 
 <CustomContent platform="tidb">
 

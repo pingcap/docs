@@ -46,7 +46,7 @@ cdc cli changefeed list --server=http://10.0.10.25:8300
     -   `normal` : レプリケーションタスクは正常に実行されます。
     -   `stopped` : レプリケーション タスクは停止されています (手動で一時停止されています)。
     -   `error` : レプリケーションタスクは（エラーにより）停止されています。
-    -   `removed` : レプリケーションタスクは削除されます。この状態のタスクは、 `--all`オプションを指定した場合にのみ表示されます。このオプションが指定されていない場合にこれらのタスクを表示するには、 `changefeed query`コマンドを実行します。
+    -   `removed` : レプリケーション タスクは削除されます。この状態のタスクは、 `--all`オプションを指定した場合にのみ表示されます。このオプションが指定されていない場合にこれらのタスクを表示するには、 `changefeed query`コマンドを実行します。
     -   `finished` : レプリケーション タスクが終了しました (データは`target-ts`にレプリケートされます)。この状態のタスクは、オプション`--all`を指定した場合にのみ表示されます。このオプションが指定されていない場合にこれらのタスクを表示するには、 `changefeed query`コマンドを実行します。
 
 ## 特定のレプリケーションタスクをクエリする {#query-a-specific-replication-task}
@@ -80,7 +80,7 @@ cdc cli changefeed query --server=http://10.0.10.25:8300 --changefeed-id=simple-
 ```shell
 {
   "info": {
-    "sink-uri": "mysql://127.0.0.1:3306/?max-txn-row=20\u0026worker-number=4",
+    "sink-uri": "mysql://127.0.0.1:3306/?max-txn-row=20\u0026worker-count=4",
     "opts": {},
     "create-time": "2020-08-27T10:33:41.687983832+08:00",
     "start-ts": 419036036249681921,
@@ -195,7 +195,7 @@ TiCDC は、レプリケーション タスクの構成の変更をサポート�
 
 ```shell
 cdc cli changefeed pause -c test-cf --server=http://10.0.10.25:8300
-cdc cli changefeed update -c test-cf --server=http://10.0.10.25:8300 --sink-uri="mysql://127.0.0.1:3306/?max-txn-row=20&worker-number=8" --config=changefeed.toml
+cdc cli changefeed update -c test-cf --server=http://10.0.10.25:8300 --sink-uri="mysql://127.0.0.1:3306/?max-txn-row=20&worker-count=8" --config=changefeed.toml
 cdc cli changefeed resume -c test-cf --server=http://10.0.10.25:8300
 ```
 

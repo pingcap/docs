@@ -13,7 +13,7 @@ summary: Learn how to use the resource control feature to control and schedule a
 
 TiDB リソース制御機能は、TiDBレイヤーのフロー制御機能と TiKVレイヤーの優先スケジューリング機能の 2 層のリソース管理機能を提供します。 2 つの機能は個別に有効にすることも、同時に有効にすることもできます。詳細は[リソース制御用パラメータ](#parameters-for-resource-control)を参照してください。これにより、TiDBレイヤーがリソース グループに設定されたクォータに基づいてユーザーの読み取りおよび書き込みリクエストのフローを制御できるようになり、TiKVレイヤーが読み取りおよび書き込みクォータにマップされた優先順位に基づいてリクエストをスケジュールできるようになります。これにより、アプリケーションのリソース分離を確保し、サービス品質 (QoS) 要件を満たすことができます。
 
--   TiDB フロー制御: TiDB フロー制御は[トークンバケットアルゴリズム](https://en.wikipedia.org/wiki/Token_bucket)を使用します。バケット内に十分なトークンがなく、リソース グループが`BURSTABLE`オプションを指定していない場合、リソース グループへのリクエストは、トークン バケットにトークンがバックフィルされるまで待機して、再試行します。タイムアウトにより再試行が失敗する場合があります。
+-   TiDB フロー制御: TiDB フロー制御は[トークンバケットアルゴリズム](https://en.wikipedia.org/wiki/Token_bucket)を使用します。バケット内に十分なトークンがなく、リソース グループが`BURSTABLE`オプションを指定していない場合、リソース グループへのリクエストは、トークン バケットにトークンがバックフィルされるのを待って再試行します。タイムアウトにより再試行が失敗する場合があります。
 
 -   TiKV スケジューリング: 必要に応じて絶対優先度[（ `PRIORITY` ）](/information-schema/information-schema-resource-groups.md#examples)を設定できます。 `PRIORITY`の設定に従って、さまざまなリソースがスケジュールされます。高`PRIORITY`のタスクが最初にスケジュールされます。絶対優先度を設定しない場合、TiKV は各リソース グループの値`RU_PER_SEC`を使用して、各リソース グループの読み取りおよび書き込みリクエストの優先度を決定します。優先順位に基づいて、storageレイヤーは優先キューを使用してリクエストをスケジュールし、処理します。
 
@@ -58,7 +58,7 @@ v7.4.0 以降、リソース制御機能はTiFlashリソースの制御をサポ
 
 リクエスト ユニット (RU) は、システム リソースに対する TiDB の統合抽象化ユニットであり、現在、CPU、IOPS、および IO 帯域幅のメトリクスが含まれています。これは、データベースへの 1 回のリクエストによって消費されるリソースの量を示すために使用されます。要求によって消費される RU の数は、操作の種類、クエリまたは変更されるデータの量などのさまざまな要因によって異なります。現在、RU には次の表のリソースの消費統計が含まれています。
 
-<table><thead><tr><th>リソースの種類</th><th>RUの消費量</th></tr></thead><tbody><tr><td rowspan="3">読む</td><td>2 つのstorage読み取りバッチは 1 RU を消費します</td></tr><tr><td>8 つのstorage読み取りリクエストは 1 RU を消費します</td></tr><tr><td>64 KiB の読み取り要求ペイロードは 1 RU を消費します</td></tr><tr><td rowspan="3">書く</td><td>1 つのstorage書き込みバッチは 1 RU を消費します</td></tr><tr><td>1 つのstorage書き込みリクエストは 1 RU を消費します</td></tr><tr><td>1 KiB の書き込み要求ペイロードは 1 RU を消費します</td></tr><tr><td>SQL CPU</td><td> 3 ミリ秒で 1 RU を消費</td></tr></tbody></table>
+<table><thead><tr><th>リソースの種類</th><th>RUの消費量</th></tr></thead><tbody><tr><td rowspan="3">読む</td><td>2 つのstorage読み取りバッチは 1 RU を消費します</td></tr><tr><td>8 つのstorage読み取りリクエストは 1 RU を消費します</td></tr><tr><td>64 KiB の読み取り要求ペイロードは 1 RU を消費します</td></tr><tr><td rowspan="3">書く</td><td>1 つのstorage書き込みバッチは 1 RU を消費します</td></tr><tr><td>1 つのstorage書き込みリクエストは 1 RU を消費します</td></tr><tr><td>1 KiB の書き込み要求ペイロードは 1 RU を消費します</td></tr><tr><td>CPU</td><td> 3 ミリ秒で 1 RU を消費</td></tr></tbody></table>
 
 > **注記：**
 >
@@ -213,7 +213,7 @@ ALTER USER 'usr3'@'%' RESOURCE GROUP `default`;
 SET RESOURCE GROUP rg1;
 ```
 
-#### 現在のステートメントをリソース グループにバインドします。 {#bind-the-current-statement-to-a-resource-group}
+#### 現在のステートメントをリソース グループにバインドします {#bind-the-current-statement-to-a-resource-group}
 
 SQL ステートメントに[`RESOURCE_GROUP(resource_group_name)`](/optimizer-hints.md#resource_groupresource_group_name)ヒントを追加すると、ステートメントがバインドされるリソース グループを指定できます。このヒントは、 `SELECT` 、 `INSERT` 、 `UPDATE` 、および`DELETE`ステートメントをサポートします。
 
@@ -296,7 +296,7 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 
 -   `ACTION`の意味は`QUERY LIMIT`と同じです。このパラメータは省略可能です。省略した場合、識別後の対応するアクションはリソースグループの`QUERY LIMIT`で設定された`ACTION`を採用し、 `QUERY LIMIT`の設定とアクションは変わりません。リソース グループに`ACTION`構成されていない場合、エラーが報告されます。
 
--   `QueryWatchTextOption`パラメーターには、 `SQL DIGEST` 、 `PLAN DIGEST` 、および`SQL TEXT`の 3 つのオプションがあります。
+-   `QueryWatchTextOption`パラメーターには`SQL DIGEST` 、 `PLAN DIGEST` 、および`SQL TEXT`の 3 つのオプションがあります。
     -   `SQL DIGEST`は`SIMILAR`と同じです。次のパラメータは、文字列、ユーザー定義変数、または文字列の結果を生成するその他の式を受け入れます。文字列の長さは 64 である必要があり、これは TiDB のダイジェスト定義と同じです。
     -   `PLAN DIGEST`は`PLAN`と同じです。次のパラメータはダイジェスト文字列です。
     -   `SQL TEXT`入力 SQL を生の文字列 ( `EXACT` ) として照合するか、次のパラメータに応じて解析して`SQL DIGEST` ( `SIMILAR` ) または`PLAN DIGEST` ( `PLAN` ) にコンパイルします。
@@ -530,7 +530,7 @@ TiDB はシステム変数[`tidb_last_query_info`](/system-variables.md#tidb_las
 
 #### <code>EXPLAIN ANALYZE</code>による SQL 実行中に消費された RU をビュー {#view-rus-consumed-during-sql-execution-by-code-explain-analyze-code}
 
-[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption)ステートメントを使用すると、SQL の実行中に消費された RU の量を取得できます。 RU の量はキャッシュの影響を受けることに注意してください (たとえば、 [コプロセッサキャッシュ](/coprocessor-cache.md) )。同じ SQL が複数回実行されると、各実行で消費される RU の量が異なる場合があります。 RU 値は各実行の正確な値を表すものではありませんが、推定の参考として使用できます。
+[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption)ステートメントを使用すると、SQL 実行中に消費された RU の量を取得できます。 RU の量はキャッシュの影響を受けることに注意してください (たとえば、 [コプロセッサキャッシュ](/coprocessor-cache.md) )。同じ SQL が複数回実行されると、各実行で消費される RU の量が異なる場合があります。 RU 値は各実行の正確な値を表すものではありませんが、推定の参考として使用できます。
 
 #### 遅いクエリと対応するシステム テーブル {#slow-queries-and-the-corresponding-system-table}
 

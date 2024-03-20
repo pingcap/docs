@@ -157,7 +157,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>grpc-memory-pool-quota</code> {#code-grpc-memory-pool-quota-code}
 
--   gRPC で使用できるメモリサイズを制限します
+-   gRPC が使用できるメモリサイズを制限します。
 -   デフォルト値: 制限なし
 -   OOM が発生した場合に備えてメモリを制限します。使用量を制限すると、ストールが発生する可能性があることに注意してください
 
@@ -177,9 +177,9 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 ### <code>grpc-stream-initial-window-size</code> {#code-grpc-stream-initial-window-size-code}
 
 -   gRPC ストリームのウィンドウ サイズ
--   デフォルト値: `2MB`
--   単位: KB|MB|GB
--   最小値: `"1KB"`
+-   デフォルト値: `2MiB`
+-   単位: KiB|MiB|GiB
+-   最小値: `"1KiB"`
 
 ### <code>grpc-keepalive-time</code> {#code-grpc-keepalive-time-code}
 
@@ -220,9 +220,9 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 ### <code>snap-io-max-bytes-per-sec</code> {#code-snap-io-max-bytes-per-sec-code}
 
 -   スナップショット処理時の最大許容ディスク帯域幅
--   デフォルト値: `"100MB"`
--   単位: KB|MB|GB
--   最小値: `"1KB"`
+-   デフォルト値: `"100MiB"`
+-   単位: KiB|MiB|GiB
+-   最小値: `"1KiB"`
 
 ### <code>enable-request-batch</code> {#code-enable-request-batch-code}
 
@@ -247,7 +247,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>raft-client-queue-size</code> {#code-raft-client-queue-size-code}
 
--   TiKV のRaftメッセージのキュー サイズを指定します。時間内に送信されなかったメッセージが多すぎてバッファがいっぱいになったり、メッセージが破棄されたりする場合は、より大きな値を指定してシステムの安定性を向上させることができます。
+-   TiKV のRaftメッセージのキュー サイズを指定します。期限内に送信されなかったメッセージが多すぎてバッファがいっぱいになったり、メッセージが破棄されたりする場合は、より大きな値を指定してシステムの安定性を向上させることができます。
 -   デフォルト値: `8192`
 
 ### <code>simplify-metrics</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-simplify-metrics-code-span-class-version-mark-new-in-v6-2-0-span}
@@ -283,9 +283,9 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   統合スレッド プール内のスレッドのスタック サイズ
 -   タイプ: 整数 + 単位
--   デフォルト値: `"10MB"`
--   単位: KB|MB|GB
--   最小値: `"2MB"`
+-   デフォルト値: `"10MiB"`
+-   単位: KiB|MiB|GiB
+-   最小値: `"2MiB"`
 -   最大値：システム内で`ulimit -sH`コマンドを実行した結果出力されるKバイト数。
 
 ### <code>max-tasks-per-worker</code> {#code-max-tasks-per-worker-code}
@@ -348,9 +348,9 @@ storageスレッドプールに関連するコンフィグレーション項目�
 
 -   ストレージ読み取りスレッド プール内のスレッドのスタック サイズ
 -   タイプ: 整数 + 単位
--   デフォルト値: `"10MB"`
--   単位: KB|MB|GB
--   最小値: `"2MB"`
+-   デフォルト値: `"10MiB"`
+-   単位: KiB|MiB|GiB
+-   最小値: `"2MiB"`
 -   最大値：システム内で`ulimit -sH`コマンドを実行した結果出力されるKバイト数。
 
 ## <code>readpool.coprocessor</code> {#code-readpool-coprocessor-code}
@@ -402,9 +402,9 @@ storageスレッドプールに関連するコンフィグレーション項目�
 
 -   コプロセッサースレッドプール内のスレッドのスタックサイズ
 -   タイプ: 整数 + 単位
--   デフォルト値: `"10MB"`
--   単位: KB|MB|GB
--   最小値: `"2MB"`
+-   デフォルト値: `"10MiB"`
+-   単位: KiB|MiB|GiB
+-   最小値: `"2MiB"`
 -   最大値：システム内で`ulimit -sH`コマンドを実行した結果出力されるKバイト数。
 
 ## storage {#storage}
@@ -444,8 +444,8 @@ storageに関するコンフィグレーション項目。
 ### <code>scheduler-pending-write-threshold</code> {#code-scheduler-pending-write-threshold-code}
 
 -   書き込みキューの最大サイズ。この値を超えると、TiKV への新規書き込みに対して`Server Is Busy`エラーが返されます。
--   デフォルト値: `"100MB"`
--   単位: MB|GB
+-   デフォルト値: `"100MiB"`
+-   単位: MiB|GiB
 
 ### <code>enable-async-apply-prewrite</code> {#code-enable-async-apply-prewrite-code}
 
@@ -456,9 +456,9 @@ storageに関するコンフィグレーション項目。
 
 -   TiKV が開始されると、ディスク保護としてディスク上に一部のスペースが予約されます。残りのディスク容量が予約容量より少ない場合、TiKV は一部の書き込み操作を制限します。予約領域は 2 つの部分に分かれており、予約領域の 80% はディスク領域が不足した場合の運用に必要な追加ディスク領域として使用され、残りの 20% は一時ファイルの保存に使用されます。スペースを再利用するプロセスで、余分なディスクスペースを使用しすぎてstorageが使い果たされた場合、この一時ファイルはサービスを復元するための最後の保護として機能します。
 -   一時ファイルの名前は`space_placeholder_file`で、 `storage.data-dir`ディレクトリにあります。ディスク領域が不足して TiKV がオフラインになった場合、TiKV を再起動すると、一時ファイルは自動的に削除され、TiKV は領域を再利用しようとします。
--   残りの容量が不足している場合、TiKV は一時ファイルを作成しません。保護の有効性は、予約されたスペースのサイズに関係します。予約領域のサイズは、ディスク容量の 5% とこの設定値の間の大きい方の値になります。この構成項目の値が`"0MB"`の場合、TiKV はこのディスク保護機能を無効にします。
--   デフォルト値: `"5GB"`
--   単位: MB|GB
+-   残りの容量が不足している場合、TiKV は一時ファイルを作成しません。保護の有効性は、予約されたスペースのサイズに関係します。予約領域のサイズは、ディスク容量の 5% とこの設定値の間の大きい方の値になります。この構成項目の値が`"0MiB"`の場合、TiKV はこのディスク保護機能を無効にします。
+-   デフォルト値: `"5GiB"`
+-   単位: MiB|GiB
 
 ### <code>enable-ttl</code> {#code-enable-ttl-code}
 
@@ -487,7 +487,7 @@ storageに関するコンフィグレーション項目。
 
 -   TiKV が RawKV ストアとして機能するときに TiKV によって使用されるstorage形式とインターフェイスのバージョン。
 -   値のオプション:
-    -   `1` : API V1を使用し、クライアントから渡されたデータをエンコードせず、そのままのデータを保存します。 v6.1.0 より前のバージョンでは、TiKV はデフォルトで API V1 を使用します。
+    -   `1` : API V1を使用し、クライアントから渡されたデータをエンコードせず、そのままのデータを格納します。 v6.1.0 より前のバージョンでは、TiKV はデフォルトで API V1 を使用します。
     -   `2` : API V2 を使用します:
         -   データはマルチバージョン同時実行制御 (MVCC) 形式で保存され、タイムスタンプは tikv-server によって PD (TSO) から取得されます。
         -   データはさまざまな用途に応じてスコープ設定され、API V2 は単一クラスター内での TiDB、トランザクション KV、および RawKV アプリケーションの共存をサポートします。
@@ -515,7 +515,7 @@ storageに関するコンフィグレーション項目。
     -   `storage.engine="raft-kv"`の場合、デフォルト値はシステムメモリ全体のサイズの 45% です。
     -   `storage.engine="partitioned-raft-kv"`の場合、デフォルト値はシステムメモリの合計サイズの 30% です。
 
--   単位: KB|MB|GB
+-   単位: KiB|MiB|GiB
 
 ## storageとフロー制御 {#storage-flow-control}
 
@@ -539,12 +539,12 @@ TiKVのフロー制御機構に関するコンフィグレーション項目。�
 ### <code>soft-pending-compaction-bytes-limit</code> {#code-soft-pending-compaction-bytes-limit-code}
 
 -   KvDB 内の保留中の圧縮バイトがこのしきい値に達すると、フロー制御メカニズムが一部の書き込みリクエストの拒否を開始し、 `ServerIsBusy`エラーを報告します。 `enable`が`true`に設定されている場合、この構成項目は`rocksdb.(defaultcf|writecf|lockcf).soft-pending-compaction-bytes-limit`をオーバーライドします。
--   デフォルト値: `"192GB"`
+-   デフォルト値: `"192GiB"`
 
 ### <code>hard-pending-compaction-bytes-limit</code> {#code-hard-pending-compaction-bytes-limit-code}
 
 -   KvDB 内の保留中の圧縮バイトがこのしきい値に達すると、フロー制御メカニズムはすべての書き込みリクエストを拒否し、 `ServerIsBusy`エラーを報告します。 `enable`が`true`に設定されている場合、この構成項目は`rocksdb.(defaultcf|writecf|lockcf).hard-pending-compaction-bytes-limit`をオーバーライドします。
--   デフォルト値: `"1024GB"`
+-   デフォルト値: `"1024GiB"`
 
 ## storageの.io-rate-limit {#storage-io-rate-limit}
 
@@ -553,7 +553,7 @@ I/Oレートリミッタに関するコンフィグレーション項目。
 ### <code>max-bytes-per-sec</code> {#code-max-bytes-per-sec-code}
 
 -   サーバーが1 秒間にディスクに書き込みまたはディスクから読み取ることができる最大 I/O バイト (以下の`mode`の構成項目によって決定) を制限します。この制限に達すると、TiKV はフォアグラウンド操作よりもバックグラウンド操作のスロットリングを優先します。この構成項目の値は、ディスクの最適な I/O 帯域幅 (たとえば、クラウド ディスク ベンダーによって指定された最大 I/O 帯域幅) に設定する必要があります。この構成値をゼロに設定すると、ディスク I/O 操作は制限されません。
--   デフォルト値: `"0MB"`
+-   デフォルト値: `"0MiB"`
 
 ### <code>mode</code> {#code-mode-code}
 
@@ -582,7 +582,7 @@ I/Oレートリミッタに関するコンフィグレーション項目。
 
 ### <code>retry-log-every</code> {#code-retry-log-every-code}
 
--   クライアントがエラーを観察したときに、PD クライアントがエラーの報告をスキップする頻度を指定します。たとえば、値が`5`の場合、PD クライアントはエラーを観察した後、4 回ごとにエラーの報告をスキップし、5 回ごとにエラーを報告します。
+-   PD クライアントがエラーを観察したときに、エラーの報告をスキップする頻度を指定します。たとえば、値が`5`の場合、PD クライアントはエラーを観察した後、4 回ごとにエラーの報告をスキップし、5 回ごとにエラーを報告します。
 -   この機能を無効にするには、値を`1`に設定します。
 -   デフォルト値: `10`
 
@@ -605,7 +605,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 -   storage容量。データを保存できる最大サイズです。 `capacity`を指定しない場合は、現在のディスクの容量が優先されます。複数の TiKV インスタンスを同じ物理ディスクにデプロイするには、このパラメータを TiKV 構成に追加します。詳細は[ハイブリッド展開の主要なパラメータ](/hybrid-deployment-topology.md#key-parameters)を参照してください。
 -   デフォルト値: `0`
--   単位: KB|MB|GB
+-   単位: KiB|MiB|GiB
 
 ### <code>raftdb-path</code> {#code-raftdb-path-code}
 
@@ -669,10 +669,10 @@ Raftstoreに関連するコンフィグレーション項目。
 > この構成項目は SQL ステートメントを介してクエリすることはできませんが、構成ファイルで構成することができます。
 
 -   単一メッセージ パケットのサイズに対するソフト制限
--   デフォルト値: `"1MB"`
+-   デフォルト値: `"1MiB"`
 -   最小値: `0`より大きい
--   最大値： `3GB`
--   単位: KB|MB|GB
+-   最大値： `3GiB`
+-   単位: KiB|MiB|GiB
 
 ### <code>raft-max-inflight-msgs</code> {#code-raft-max-inflight-msgs-code}
 
@@ -687,10 +687,10 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>raft-entry-max-size</code> {#code-raft-entry-max-size-code}
 
--   単一ログの最大サイズのハード制限
--   デフォルト値: `"8MB"`
+-   単一ログの最大サイズのハードリミット
+-   デフォルト値: `"8MiB"`
 -   最小値: `0`
--   単位: MB|GB
+-   単位: MiB|GiB
 
 ### <code>raft-log-compact-sync-interval</code> <span class="version-mark">v5.3 の新機能</span> {#code-raft-log-compact-sync-interval-code-span-class-version-mark-new-in-v5-3-span}
 
@@ -713,7 +713,7 @@ Raftstoreに関連するコンフィグレーション項目。
 ### <code>raft-log-gc-count-limit</code> {#code-raft-log-gc-count-limit-code}
 
 -   Raftの残存丸太の許容数のハードリミット
--   デフォルト値: 3/4リージョンサイズに収容できるログ数 (各ログあたり 1MB として計算)
+-   デフォルト値: 3/4リージョンサイズに収容できるログ数 (ログあたり 1MiB として計算)
 -   最小値: `0`
 
 ### <code>raft-log-gc-size-limit</code> {#code-raft-log-gc-size-limit-code}
@@ -846,9 +846,9 @@ Raftstoreに関連するコンフィグレーション項目。
 ### <code>lock-cf-compact-bytes-threshold</code> {#code-lock-cf-compact-bytes-threshold-code}
 
 -   TiKV がロックカラムファミリーの手動圧縮をトリガーするサイズ
--   デフォルト値: `"256MB"`
+-   デフォルト値: `"256MiB"`
 -   最小値: `0`
--   単位：MB
+-   単位: MiB
 
 ### <code>notify-capacity</code> {#code-notify-capacity-code}
 
@@ -901,15 +901,15 @@ Raftstoreに関連するコンフィグレーション項目。
 ### <code>snap-apply-batch-size</code> {#code-snap-apply-batch-size-code}
 
 -   インポートされたスナップショット ファイルをディスクに書き込むときに必要なメモリキャッシュ サイズ
--   デフォルト値: `"10MB"`
+-   デフォルト値: `"10MiB"`
 -   最小値: `0`
--   単位：MB
+-   単位: MiB
 
 ### <code>consistency-check-interval</code> {#code-consistency-check-interval-code}
 
 > **警告：**
 >
-> 本番環境で一貫性チェックを有効にすることはお勧め**できません**。これは、クラスタのパフォーマンスに影響を与え、TiDB のガベージコレクションと互換性がないためです。
+> 本番環境で一貫性チェックを有効にすることはお勧め**できません**。これは、クラスタのパフォーマンスに影響を与え、TiDB のガベージコレクションと互換性がないからです。
 
 -   整合性チェックがトリガーされる時間間隔。 `0` 、この機能が無効であることを意味します。
 -   デフォルト値: `"0s"`
@@ -1015,7 +1015,7 @@ Raftstoreに関連するコンフィグレーション項目。
 ### <code>raft-write-size-limit</code> <span class="version-mark">v5.3.0 の新機能</span> {#code-raft-write-size-limit-code-span-class-version-mark-new-in-v5-3-0-span}
 
 -   Raftデータがディスクに書き込まれるしきい値を決定します。データサイズがこの設定項目の値より大きい場合、データはディスクに書き込まれます。 `store-io-pool-size`の値が`0`の場合、この構成項目は有効になりません。
--   デフォルト値: `1MB`
+-   デフォルト値: `1MiB`
 -   最小値: `0`
 
 ### <code>report-min-resolved-ts-interval</code> <span class="version-mark">v6.0.0 の新機能</span> {#code-report-min-resolved-ts-interval-code-span-class-version-mark-new-in-v6-0-0-span}
@@ -1072,7 +1072,7 @@ Raftstoreに関連するコンフィグレーション項目。
 ### <code>consistency-check-method</code> {#code-consistency-check-method-code}
 
 -   データの整合性チェックの方法を指定します
--   MVCC データの整合性チェックの場合は、値を`"mvcc"`に設定します。生データの整合性チェックの場合は、値を`"raw"`に設定します。
+-   MVCC データの整合性チェックの場合、値を`"mvcc"`に設定します。生データの整合性チェックの場合は、値を`"raw"`に設定します。
 -   デフォルト値: `"mvcc"`
 
 ## コプロセッサーv2 {#coprocessor-v2}
@@ -1140,9 +1140,9 @@ RocksDBに関するコンフィグレーション項目
 ### <code>max-manifest-file-size</code> {#code-max-manifest-file-size-code}
 
 -   RocksDB マニフェスト ファイルの最大サイズ
--   デフォルト値: `"128MB"`
+-   デフォルト値: `"128MiB"`
 -   最小値: `0`
--   単位: B|KB|MB|GB
+-   単位: B|KiB|MiB|GiB
 
 ### <code>create-if-missing</code> {#code-create-if-missing-code}
 
@@ -1156,7 +1156,7 @@ RocksDBに関するコンフィグレーション項目
     -   `"tolerate-corrupted-tail-records"` : すべてのログ上で不完全な末尾データを持つレコードを許容し、破棄します。
     -   `"absolute-consistency"` : 破損したログが見つかった場合、回復を中止します。
     -   `"point-in-time"` : 最初の破損したログが見つかるまで、ログを順番に回復します。
-    -   `"skip-any-corrupted-records"` : 災害後の回復。データは可能な限り復元され、破損したレコードはスキップされます。
+    -   `"skip-any-corrupted-records"` : 災害後の復旧。データは可能な限り復元され、破損したレコードはスキップされます。
 -   デフォルト値: `"point-in-time"`
 
 ### <code>wal-dir</code> {#code-wal-dir-code}
@@ -1166,7 +1166,7 @@ RocksDBに関するコンフィグレーション項目
 
 ### <code>wal-ttl-seconds</code> {#code-wal-ttl-seconds-code}
 
--   アーカイブされた WAL ファイルの生存時間。この値を超えると、システムはこれらのファイルを削除します。
+-   アーカイブされた WAL ファイルの存続期間。この値を超えると、システムはこれらのファイルを削除します。
 -   デフォルト値: `0`
 -   最小値: `0`
 -   単位：秒
@@ -1176,14 +1176,14 @@ RocksDBに関するコンフィグレーション項目
 -   アーカイブされた WAL ファイルのサイズ制限。この値を超えると、システムはこれらのファイルを削除します。
 -   デフォルト値: `0`
 -   最小値: `0`
--   単位: B|KB|MB|GB
+-   単位: B|KiB|MiB|GiB
 
 ### <code>max-total-wal-size</code> {#code-max-total-wal-size-code}
 
 -   RocksDB WAL の合計最大サイズ。これは、 `data-dir`のファイル内の`*.log`のファイルのサイズです。
 -   デフォルト値:
 
-    -   `storage.engine="raft-kv"`の場合、デフォルト値は`"4GB"`です。
+    -   `storage.engine="raft-kv"`の場合、デフォルト値は`"4GiB"`です。
     -   `storage.engine="partitioned-raft-kv"`の場合、デフォルト値は`1`です。
 
 ### <code>stats-dump-period</code> {#code-stats-dump-period-code}
@@ -1196,17 +1196,17 @@ RocksDBに関するコンフィグレーション項目
 
 ### <code>compaction-readahead-size</code> {#code-compaction-readahead-size-code}
 
--   RocksDB の圧縮中に先読み機能を有効にし、先読みデータのサイズを指定します。メカニカル ディスクを使用している場合は、値を少なくとも 2MB に設定することをお勧めします。
+-   RocksDB の圧縮中に先読み機能を有効にし、先読みデータのサイズを指定します。メカニカル ディスクを使用している場合は、値を少なくとも 2MiB に設定することをお勧めします。
 -   デフォルト値: `0`
 -   最小値: `0`
--   単位: B|KB|MB|GB
+-   単位: B|KiB|MiB|GiB
 
 ### <code>writable-file-max-buffer-size</code> {#code-writable-file-max-buffer-size-code}
 
 -   WritableFileWrite で使用される最大バッファ サイズ
--   デフォルト値: `"1MB"`
+-   デフォルト値: `"1MiB"`
 -   最小値: `0`
--   単位: B|KB|MB|GB
+-   単位: B|KiB|MiB|GiB
 
 ### <code>use-direct-io-for-flush-and-compaction</code> {#code-use-direct-io-for-flush-and-compaction-code}
 
@@ -1216,9 +1216,9 @@ RocksDBに関するコンフィグレーション項目
 ### <code>rate-bytes-per-sec</code> {#code-rate-bytes-per-sec-code}
 
 -   RocksDB の圧縮レート リミッターによって許可される最大レート
--   デフォルト値: `10GB`
+-   デフォルト値: `10GiB`
 -   最小値: `0`
--   単位: B|KB|MB|GB
+-   単位: B|KiB|MiB|GiB
 
 ### <code>rate-limiter-refill-period</code> {#code-rate-limiter-refill-period-code}
 
@@ -1233,7 +1233,7 @@ RocksDBに関するコンフィグレーション項目
 
 ### <code>rate-limiter-auto-tuned</code> <span class="version-mark">v5.0 の新機能</span> {#code-rate-limiter-auto-tuned-code-span-class-version-mark-new-in-v5-0-span}
 
--   最近のワークロードに基づいて、RocksDB の圧縮レート リミッターの構成を自動的に最適化するかどうかを決定します。この構成を有効にすると、圧縮保留中のバイト数が通常よりわずかに多くなります。
+-   最近のワークロードに基づいて、RocksDB の圧縮レート リミッターの構成を自動的に最適化するかどうかを決定します。この構成を有効にすると、圧縮保留中のバイト数が通常よりわずかに増加します。
 -   デフォルト値: `true`
 
 ### <code>enable-pipelined-write</code> {#code-enable-pipelined-write-code}
@@ -1244,23 +1244,23 @@ RocksDBに関するコンフィグレーション項目
 ### <code>bytes-per-sync</code> {#code-bytes-per-sync-code}
 
 -   ファイルが非同期で書き込まれている間に、OS がファイルをディスクに増分同期する速度。
--   デフォルト値: `"1MB"`
+-   デフォルト値: `"1MiB"`
 -   最小値: `0`
--   単位: B|KB|MB|GB
+-   単位: B|KiB|MiB|GiB
 
 ### <code>wal-bytes-per-sync</code> {#code-wal-bytes-per-sync-code}
 
 -   WAL ファイルの書き込み中に OS が WAL ファイルをディスクに増分同期する速度
--   デフォルト値: `"512KB"`
+-   デフォルト値: `"512KiB"`
 -   最小値: `0`
--   単位: B|KB|MB|GB
+-   単位: B|KiB|MiB|GiB
 
 ### <code>info-log-max-size</code> {#code-info-log-max-size-code}
 
 -   情報ログの最大サイズ
--   デフォルト値: `"1GB"`
+-   デフォルト値: `"1GiB"`
 -   最小値: `0`
--   単位: B|KB|MB|GB
+-   単位: B|KiB|MiB|GiB
 
 ### <code>info-log-roll-time</code> {#code-info-log-roll-time-code}
 
@@ -1343,10 +1343,10 @@ RocksDBに関するコンフィグレーション項目
 ### <code>block-size</code> {#code-block-size-code}
 
 -   RocksDB ブロックのデフォルトのサイズ
--   `defaultcf`と`writecf`のデフォルト値: `"32KB"`
--   `lockcf`のデフォルト値: `"16KB"`
--   最小値: `"1KB"`
--   単位: KB|MB|GB
+-   `defaultcf`と`writecf`のデフォルト値: `"32KiB"`
+-   `lockcf`のデフォルト値: `"16KiB"`
+-   最小値: `"1KiB"`
+-   単位: KiB|MiB|GiB
 
 ### <code>block-cache-size</code> {#code-block-cache-size-code}
 
@@ -1359,7 +1359,7 @@ RocksDBに関するコンフィグレーション項目
 -   `writecf`のデフォルト値: `Total machine memory * 15%`
 -   `lockcf`のデフォルト値: `Total machine memory * 2%`
 -   最小値: `0`
--   単位: KB|MB|GB
+-   単位: KiB|MiB|GiB
 
 ### <code>disable-block-cache</code> {#code-disable-block-cache-code}
 
@@ -1440,12 +1440,12 @@ RocksDBに関するコンフィグレーション項目
 ### <code>write-buffer-size</code> {#code-write-buffer-size-code}
 
 -   メムテーブルのサイズ
--   `defaultcf`と`writecf`のデフォルト値: `"128MB"`
+-   `defaultcf`と`writecf`のデフォルト値: `"128MiB"`
 -   `lockcf`のデフォルト値:
-    -   `storage.engine="raft-kv"`の場合、デフォルト値は`"32MB"`です。
-    -   `storage.engine="partitioned-raft-kv"`の場合、デフォルト値は`"4MB"`です。
+    -   `storage.engine="raft-kv"`の場合、デフォルト値は`"32MiB"`です。
+    -   `storage.engine="partitioned-raft-kv"`の場合、デフォルト値は`"4MiB"`です。
 -   最小値: `0`
--   単位: KB|MB|GB
+-   単位: KiB|MiB|GiB
 
 ### <code>max-write-buffer-number</code> {#code-max-write-buffer-number-code}
 
@@ -1462,18 +1462,18 @@ RocksDBに関するコンフィグレーション項目
 ### <code>max-bytes-for-level-base</code> {#code-max-bytes-for-level-base-code}
 
 -   基本レベル (レベル 1) の最大バイト数。通常、memtable の 4 倍のサイズに設定されます。レベル 1 のデータ サイズが制限値`max-bytes-for-level-base`に達すると、レベル 1 の SST ファイルと、それらに重複するレベル 2 の SST ファイルが圧縮されます。
--   `defaultcf`と`writecf`のデフォルト値: `"512MB"`
--   `lockcf`のデフォルト値: `"128MB"`
+-   `defaultcf`と`writecf`のデフォルト値: `"512MiB"`
+-   `lockcf`のデフォルト値: `"128MiB"`
 -   最小値: `0`
--   単位: KB|MB|GB
--   不必要な圧縮を減らすために、値`max-bytes-for-level-base`を L0 のデータ量とほぼ同じに設定することをお勧めします。たとえば、圧縮方法が「no:no:lz4:lz4:lz4:lz4:lz4」の場合、L0 と L1 には圧縮がなく、L0 の圧縮のトリガー条件は次のとおりであるため、 `max-bytes-for-level-base`の値は`write-buffer-size * 4`になります。 SST ファイルの数が 4 (デフォルト値) に達していることを確認します。 L0 と L1 の両方で圧縮を採用する場合、memtable から圧縮された SST ファイルのサイズを理解するには、RocksDB ログを分析する必要があります。たとえば、ファイル サイズが 32 MB の場合、 `max-bytes-for-level-base` ～ 128 MB の値を設定することをお勧めします ( `32 MB * 4` )。
+-   単位: KiB|MiB|GiB
+-   不必要な圧縮を減らすために、値`max-bytes-for-level-base`を L0 のデータ量とほぼ同じに設定することをお勧めします。たとえば、圧縮方法が「no:no:lz4:lz4:lz4:lz4:lz4」の場合、L0 と L1 には圧縮がなく、L0 の圧縮のトリガー条件は次のとおりであるため、 `max-bytes-for-level-base`の値は`write-buffer-size * 4`になります。 SST ファイルの数が 4 (デフォルト値) に達していることを確認します。 L0 と L1 の両方で圧縮を採用する場合、memtable から圧縮された SST ファイルのサイズを理解するには、RocksDB ログを分析する必要があります。たとえば、ファイル サイズが 32 MiB の場合、 `max-bytes-for-level-base` ～ 128 MiB の値を設定することをお勧めします ( `32 MiB * 4` )。
 
 ### <code>target-file-size-base</code> {#code-target-file-size-base-code}
 
 -   基本レベルでのターゲット ファイルのサイズ。 `enable-compaction-guard`値が`true`の場合、この値は`compaction-guard-max-output-file-size`で上書きされます。
--   デフォルト値: `"8MB"`
+-   デフォルト値: `"8MiB"`
 -   最小値: `0`
--   単位: KB|MB|GB
+-   単位: KiB|MiB|GiB
 
 ### <code>level0-file-num-compaction-trigger</code> {#code-level0-file-num-compaction-trigger-code}
 
@@ -1497,9 +1497,9 @@ RocksDBに関するコンフィグレーション項目
 ### <code>max-compaction-bytes</code> {#code-max-compaction-bytes-code}
 
 -   圧縮ごとにディスクに書き込まれる最大バイト数
--   デフォルト値: `"2GB"`
+-   デフォルト値: `"2GiB"`
 -   最小値: `0`
--   単位: KB|MB|GB
+-   単位: KiB|MiB|GiB
 
 ### <code>compaction-pri</code> {#code-compaction-pri-code}
 
@@ -1541,14 +1541,14 @@ RocksDBに関するコンフィグレーション項目
 ### <code>soft-pending-compaction-bytes-limit</code> {#code-soft-pending-compaction-bytes-limit-code}
 
 -   保留中の圧縮バイトのソフト制限。 `storage.flow-control.enable`が`true`に設定されている場合、 `storage.flow-control.soft-pending-compaction-bytes-limit`この構成項目をオーバーライドします。
--   デフォルト値: `"192GB"`
--   単位: KB|MB|GB
+-   デフォルト値: `"192GiB"`
+-   単位: KiB|MiB|GiB
 
 ### <code>hard-pending-compaction-bytes-limit</code> {#code-hard-pending-compaction-bytes-limit-code}
 
 -   保留中の圧縮バイトのハード制限。 `storage.flow-control.enable`が`true`に設定されている場合、 `storage.flow-control.hard-pending-compaction-bytes-limit`この構成項目をオーバーライドします。
--   デフォルト値: `"256GB"`
--   単位: KB|MB|GB
+-   デフォルト値: `"256GiB"`
+-   単位: KiB|MiB|GiB
 
 ### <code>enable-compaction-guard</code> {#code-enable-compaction-guard-code}
 
@@ -1559,14 +1559,14 @@ RocksDBに関するコンフィグレーション項目
 ### <code>compaction-guard-min-output-file-size</code> {#code-compaction-guard-min-output-file-size-code}
 
 -   コンパクション ガードが有効な場合の SST ファイルの最小サイズ。この構成により、コンパクション ガードが有効になっているときに SST ファイルが小さすぎることが防止されます。
--   デフォルト値: `"8MB"`
--   単位: KB|MB|GB
+-   デフォルト値: `"8MiB"`
+-   単位: KiB|MiB|GiB
 
 ### <code>compaction-guard-max-output-file-size</code> {#code-compaction-guard-max-output-file-size-code}
 
 -   コンパクション ガードが有効な場合の SST ファイルの最大サイズ。この構成により、コンパクション ガードが有効になっているときに SST ファイルが大きくなりすぎることがなくなります。この構成は、同じカラムファミリーの`target-file-size-base`をオーバーライドします。
--   デフォルト値: `"128MB"`
--   単位: KB|MB|GB
+-   デフォルト値: `"128MiB"`
+-   単位: KiB|MiB|GiB
 
 ### <code>format-version</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-format-version-code-span-class-version-mark-new-in-v6-2-0-span}
 
@@ -1601,14 +1601,14 @@ RocksDBに関するコンフィグレーション項目
 
 ### <code>min-blob-size</code> {#code-min-blob-size-code}
 
--   Blob ファイルに格納されている最小値。指定されたサイズより小さい値は LSM ツリーに格納されます。
--   デフォルト値: `"1KB"`
+-   Blob ファイルに保存される最小値。指定されたサイズより小さい値は LSM ツリーに格納されます。
+-   デフォルト値: `"1KiB"`
 -   最小値: `0`
--   単位: KB|MB|GB
+-   単位: KiB|MiB|GiB
 
 ### <code>blob-file-compression</code> {#code-blob-file-compression-code}
 
--   BLOB ファイルで使用される圧縮アルゴリズム
+-   Blob ファイルで使用される圧縮アルゴリズム
 -   オプションの値: `"no"` 、 `"snappy"` 、 `"zlib"` 、 `"bzip2"` 、 `"lz4"` 、 `"lz4hc"` 、 `"zstd"`
 -   デフォルト値: `"lz4"`
 
@@ -1619,23 +1619,23 @@ RocksDBに関するコンフィグレーション項目
 ### <code>blob-cache-size</code> {#code-blob-cache-size-code}
 
 -   BLOB ファイルのキャッシュ サイズ
--   デフォルト値: `"0GB"`
+-   デフォルト値: `"0GiB"`
 -   最小値: `0`
--   単位: KB|MB|GB
+-   単位: KiB|MiB|GiB
 
 ### <code>min-gc-batch-size</code> {#code-min-gc-batch-size-code}
 
 -   GC を 1 回実行するために必要な BLOB ファイルの最小合計サイズ
--   デフォルト値: `"16MB"`
+-   デフォルト値: `"16MiB"`
 -   最小値: `0`
--   単位: KB|MB|GB
+-   単位: KiB|MiB|GiB
 
 ### <code>max-gc-batch-size</code> {#code-max-gc-batch-size-code}
 
 -   1 回の GC 実行に許可される BLOB ファイルの最大合計サイズ
--   デフォルト値: `"64MB"`
+-   デフォルト値: `"64MiB"`
 -   最小値: `0`
--   単位: KB|MB|GB
+-   単位: KiB|MiB|GiB
 
 ### <code>discardable-ratio</code> {#code-discardable-ratio-code}
 
@@ -1654,9 +1654,9 @@ RocksDBに関するコンフィグレーション項目
 ### <code>merge-small-file-threshold</code> {#code-merge-small-file-threshold-code}
 
 -   Blob ファイルのサイズがこの値より小さい場合でも、Blob ファイルが GC に選択される可能性があります。この場合、 `discardable-ratio`は無視されます。
--   デフォルト値: `"8MB"`
+-   デフォルト値: `"8MiB"`
 -   最小値: `0`
--   単位: KB|MB|GB
+-   単位: KiB|MiB|GiB
 
 ### <code>blob-run-mode</code> {#code-blob-run-mode-code}
 
@@ -1697,9 +1697,9 @@ RocksDBに関するコンフィグレーション項目
 ### <code>max-manifest-file-size</code> {#code-max-manifest-file-size-code}
 
 -   RocksDB マニフェスト ファイルの最大サイズ
--   デフォルト値: `"20MB"`
+-   デフォルト値: `"20MiB"`
 -   最小値: `0`
--   単位: B|KB|MB|GB
+-   単位: B|KiB|MiB|GiB
 
 ### <code>create-if-missing</code> {#code-create-if-missing-code}
 
@@ -1715,7 +1715,7 @@ RocksDBに関するコンフィグレーション項目
 
 -   Raft RocksDB WAL ファイルが保存されているディレクトリ。これは、WAL の絶対ディレクトリ パスです。この構成項目を[`rocksdb.wal-dir`](#wal-dir)と同じ値に設定し**ないでください**。
 -   この設定項目が設定されていない場合、ログファイルはデータと同じディレクトリに保存されます。
--   マシン上に 2 つのディスクがある場合、RocksDB データと WAL ログを別のディスクに保存するとパフォーマンスが向上する可能性があります。
+-   マシン上に 2 つのディスクがある場合、RocksDB データと WAL ログを別のディスクに保存すると、パフォーマンスが向上する可能性があります。
 -   デフォルト値: `""`
 
 ### <code>wal-ttl-seconds</code> {#code-wal-ttl-seconds-code}
@@ -1730,29 +1730,29 @@ RocksDBに関するコンフィグレーション項目
 -   アーカイブされた WAL ファイルのサイズ制限。この値を超えると、システムはこれらのファイルを削除します。
 -   デフォルト値: `0`
 -   最小値: `0`
--   単位: B|KB|MB|GB
+-   単位: B|KiB|MiB|GiB
 
 ### <code>max-total-wal-size</code> {#code-max-total-wal-size-code}
 
 -   RocksDB WAL の合計最大サイズ
--   デフォルト値: `"4GB"`
-    -   `storage.engine="raft-kv"`の場合、デフォルト値は`"4GB"`です。
+-   デフォルト値:
+    -   `storage.engine="raft-kv"`の場合、デフォルト値は`"4GiB"`です。
     -   `storage.engine="partitioned-raft-kv"`の場合、デフォルト値は`1`です。
 
 ### <code>compaction-readahead-size</code> {#code-compaction-readahead-size-code}
 
 -   RocksDB の圧縮中に先読み機能を有効にするかどうかを制御し、先読みデータのサイズを指定します。
--   メカニカル ディスクを使用する場合は、値を少なくとも`2MB`に設定することをお勧めします。
+-   メカニカル ディスクを使用する場合は、値を少なくとも`2MiB`に設定することをお勧めします。
 -   デフォルト値: `0`
 -   最小値: `0`
--   単位: B|KB|MB|GB
+-   単位: B|KiB|MiB|GiB
 
 ### <code>writable-file-max-buffer-size</code> {#code-writable-file-max-buffer-size-code}
 
 -   WritableFileWrite で使用される最大バッファ サイズ
--   デフォルト値: `"1MB"`
+-   デフォルト値: `"1MiB"`
 -   最小値: `0`
--   単位: B|KB|MB|GB
+-   単位: B|KiB|MiB|GiB
 
 ### <code>use-direct-io-for-flush-and-compaction</code> {#code-use-direct-io-for-flush-and-compaction-code}
 
@@ -1772,23 +1772,23 @@ RocksDBに関するコンフィグレーション項目
 ### <code>bytes-per-sync</code> {#code-bytes-per-sync-code}
 
 -   ファイルが非同期で書き込まれている間に、OS がファイルをディスクに増分同期する速度。
--   デフォルト値: `"1MB"`
+-   デフォルト値: `"1MiB"`
 -   最小値: `0`
--   単位: B|KB|MB|GB
+-   単位: B|KiB|MiB|GiB
 
 ### <code>wal-bytes-per-sync</code> {#code-wal-bytes-per-sync-code}
 
 -   WAL ファイルの書き込み時に OS が WAL ファイルをディスクに増分同期する速度
--   デフォルト値: `"512KB"`
+-   デフォルト値: `"512KiB"`
 -   最小値: `0`
--   単位: B|KB|MB|GB
+-   単位: B|KiB|MiB|GiB
 
 ### <code>info-log-max-size</code> {#code-info-log-max-size-code}
 
 -   情報ログの最大サイズ
--   デフォルト値: `"1GB"`
+-   デフォルト値: `"1GiB"`
 -   最小値: `0`
--   単位: B|KB|MB|GB
+-   単位: B|KiB|MiB|GiB
 
 ### <code>info-log-roll-time</code> {#code-info-log-roll-time-code}
 
@@ -1797,7 +1797,7 @@ RocksDBに関するコンフィグレーション項目
 
 ### <code>info-log-keep-log-file-num</code> {#code-info-log-keep-log-file-num-code}
 
--   RaftDB に保存される情報ログ ファイルの最大数
+-   RaftDB に保持される情報ログ ファイルの最大数
 -   デフォルト値: `10`
 -   最小値: `0`
 
@@ -1835,35 +1835,35 @@ Raft Engineに関連するコンフィグレーション項目。
 ### <code>batch-compression-threshold</code> {#code-batch-compression-threshold-code}
 
 -   ログバッチのしきい値サイズを指定します。この構成より大きいログ バッチは圧縮されます。この構成項目を`0`に設定すると、圧縮は無効になります。
--   デフォルト値: `"8KB"`
+-   デフォルト値: `"8KiB"`
 
 ### <code>bytes-per-sync</code> {#code-bytes-per-sync-code}
 
 -   バッファリングされた書き込みの最大累積サイズを指定します。この設定値を超えると、バッファされた書き込みがディスクにフラッシュされます。
 -   この構成項目を`0`に設定すると、増分同期は無効になります。
--   デフォルト値: `"4MB"`
+-   デフォルト値: `"4MiB"`
 
 ### <code>target-file-size</code> {#code-target-file-size-code}
 
 -   ログファイルの最大サイズを指定します。ログ ファイルがこの値より大きい場合、ログ ファイルはローテーションされます。
--   デフォルト値: `"128MB"`
+-   デフォルト値: `"128MiB"`
 
 ### <code>purge-threshold</code> {#code-purge-threshold-code}
 
 -   メインログキューのしきい値サイズを指定します。この設定値を超えると、メイン ログ キューがパージされます。
 -   この設定を使用して、 Raft Engineのディスク領域使用量を調整できます。
--   デフォルト値: `"10GB"`
+-   デフォルト値: `"10GiB"`
 
 ### <code>recovery-mode</code> {#code-recovery-mode-code}
 
 -   リカバリ中のファイル破損に対処する方法を決定します。
--   値`"tolerate-tail-corruption"` `"tolerate-any-corruption"` : `"absolute-consistency"`
+-   値のオプション: `"absolute-consistency"` 、 `"tolerate-tail-corruption"` 、 `"tolerate-any-corruption"`
 -   デフォルト値: `"tolerate-tail-corruption"`
 
 ### <code>recovery-read-block-size</code> {#code-recovery-read-block-size-code}
 
 -   リカバリ中にログ ファイルを読み取るための最小 I/O サイズ。
--   デフォルト値: `"16KB"`
+-   デフォルト値: `"16KiB"`
 -   最小値: `"512B"`
 
 ### <code>recovery-threads</code> {#code-recovery-threads-code}
@@ -1985,7 +1985,7 @@ TiDB LightningインポートおよびBRリストアに関連するコンフィ�
 
 ### <code>stream-channel-window</code> {#code-stream-channel-window-code}
 
--   ストリーム チャネルのウィンドウ サイズ。チャンネルがいっぱいになると、ストリームはブロックされます。
+-   ストリームチャネルのウィンドウサイズ。チャネルがいっぱいになると、ストリームはブロックされます。
 -   デフォルト値: `128`
 
 ### <code>memory-use-ratio</code> <span class="version-mark">v6.5.0 の新機能</span> {#code-memory-use-ratio-code-span-class-version-mark-new-in-v6-5-0-span}
@@ -2046,7 +2046,7 @@ BRバックアップに関するコンフィグレーション項目。
 
 -   バックアップ SST ファイル サイズのしきい値。 TiKVリージョン内のバックアップ ファイルのサイズがこのしきい値を超える場合、ファイルは TiKVリージョンを複数のリージョン範囲に分割して複数のファイルにバックアップされます。分割されたリージョン内の各ファイルのサイズは`sst-max-size`と同じ (またはわずかに大きい) です。
 -   たとえば、リージョン`[a,e)`のバックアップ ファイルのサイズが`sst-max-size`より大きい場合、ファイルはリージョン`[a,b)` 、 `[b,c)` 、 `[c,d)`および`[d,e)`の複数のファイルにバックアップされますが、 `[a,b)` 、 `[b,c)` 、 `[c,d)`のサイズは同じです。 `sst-max-size`のものと同じ (またはわずかに大きい)。
--   デフォルト値: `"144MB"`
+-   デフォルト値: `"144MiB"`
 
 ### <code>enable-auto-tune</code> <span class="version-mark">v5.4.0 の新機能</span> {#code-enable-auto-tune-code-span-class-version-mark-new-in-v5-4-0-span}
 
@@ -2094,7 +2094,7 @@ BRバックアップに関するコンフィグレーション項目。
 ### <code>initial-scan-pending-memory-quota</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-initial-scan-pending-memory-quota-code-span-class-version-mark-new-in-v6-2-0-span}
 
 -   ログ バックアップ中に増分スキャン データを保存するために使用されるキャッシュのクォータ。
--   デフォルト値: `min(Total machine memory * 10%, 512 MB)`
+-   デフォルト値: `min(Total machine memory * 10%, 512 MiB)`
 
 ### <code>initial-scan-rate-limit</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-initial-scan-rate-limit-code-span-class-version-mark-new-in-v6-2-0-span}
 
@@ -2129,17 +2129,17 @@ TiCDC に関するコンフィグレーション項目。
 ### <code>old-value-cache-memory-quota</code> {#code-old-value-cache-memory-quota-code}
 
 -   TiCDC の古い値によるメモリ使用量の上限。
--   デフォルト値: `512MB`
+-   デフォルト値: `512MiB`
 
 ### <code>sink-memory-quota</code> {#code-sink-memory-quota-code}
 
 -   TiCDC データ変更イベントによるメモリ使用量の上限。
--   デフォルト値: `512MB`
+-   デフォルト値: `512MiB`
 
 ### <code>incremental-scan-speed-limit</code> {#code-incremental-scan-speed-limit-code}
 
 -   履歴データが段階的にスキャンされる最大速度。
--   デフォルト値: `"128MB"` 、1 秒あたり 128 MB を意味します。
+-   デフォルト値: `"128MiB"` 、1 秒あたり 128 MiB を意味します。
 
 ### <code>incremental-scan-threads</code> {#code-incremental-scan-threads-code}
 
@@ -2188,7 +2188,7 @@ TiCDC に関するコンフィグレーション項目。
 
 ### <code>pipelined</code> {#code-pipelined-code}
 
--   この構成項目により、悲観的ロックを追加するパイプライン処理が可能になります。この機能を有効にすると、データがロックできることを検出した後、TiKV はただちに TiDB に後続のリクエストを実行し、悲観的ロックを非同期で書き込むように通知します。これにより、レイテンシーされ、悲観的トランザクションのパフォーマンスが大幅に向上します。ただし、悲観的ロックの非同期書き込みが失敗する可能性は依然として低いため、悲観的トランザクション コミットの失敗が発生する可能性があります。
+-   この構成項目により、悲観的ロックを追加するパイプライン処理が可能になります。この機能を有効にすると、データがロックできることを検出した後、TiKV はただちに TiDB に後続のリクエストを実行し、悲観的ロックを非同期で書き込むように通知します。これにより、レイテンシーされ、悲観的トランザクションのパフォーマンスが大幅に向上します。ただし、悲観的ロックの非同期書き込みが失敗する可能性は依然として低いため、悲観的トランザクションのコミットが失敗する可能性があります。
 -   デフォルト値: `true`
 
 ### <code>in-memory</code> <span class="version-mark">v6.0.0 の新機能</span> {#code-in-memory-code-span-class-version-mark-new-in-v6-0-0-span}
@@ -2199,7 +2199,7 @@ TiCDC に関するコンフィグレーション項目。
 
 ## クォータ {#quota}
 
-クォータ リミッターに関するコンフィグレーション項目。
+クォータリミッターに関するコンフィグレーション項目。
 
 ### <code>max-delay-duration</code> <span class="version-mark">v6.0.0 の新機能</span> {#code-max-delay-duration-code-span-class-version-mark-new-in-v6-0-0-span}
 
@@ -2223,14 +2223,14 @@ TiKV がデプロイされているマシンのリソースが限られている
 #### <code>foreground-write-bandwidth</code> <span class="version-mark">v6.0.0 の新機能</span> {#code-foreground-write-bandwidth-code-span-class-version-mark-new-in-v6-0-0-span}
 
 -   トランザクションがデータを書き込む帯域幅のソフト制限。
--   デフォルト値: `0KB` (制限なしを意味します)
--   推奨設定: `foreground-cpu-time`設定では書き込み帯域幅を制限するのに十分でない場合を除き、ほとんどの場合はデフォルト値`0`を使用します。このような例外を考慮して、4 コア以下のインスタンスでは`50MB`より小さい値を設定することをお勧めします。
+-   デフォルト値: `0KiB` (制限なしを意味します)
+-   推奨設定: `foreground-cpu-time`設定では書き込み帯域幅を制限するのに十分でない場合を除き、ほとんどの場合はデフォルト値`0`を使用します。このような例外を考慮して、4 コア以下のインスタンスでは`50MiB`より小さい値を設定することをお勧めします。
 
 #### <code>foreground-read-bandwidth</code> <span class="version-mark">v6.0.0 の新機能</span> {#code-foreground-read-bandwidth-code-span-class-version-mark-new-in-v6-0-0-span}
 
 -   トランザクションとコプロセッサーがデータを読み取る帯域幅のソフト制限。
--   デフォルト値: `0KB` (制限なしを意味します)
--   推奨設定: `foreground-cpu-time`設定では読み取り帯域幅を制限するのに十分でない場合を除き、ほとんどの場合はデフォルト値`0`を使用します。このような例外を考慮して、4 コア以下のインスタンスでは`20MB`より小さい値を設定することをお勧めします。
+-   デフォルト値: `0KiB` (制限なしを意味します)
+-   推奨設定: `foreground-cpu-time`設定では読み取り帯域幅を制限するのに十分でない場合を除き、ほとんどの場合はデフォルト値`0`を使用します。このような例外を考慮して、4 コア以下のインスタンスでは`20MiB`より小さい値を設定することをお勧めします。
 
 ### バックグラウンド クォータ リミッター {#background-quota-limiter}
 
@@ -2256,7 +2256,7 @@ TiKV がデプロイされているマシンのリソースが限られている
 > この構成項目は`SHOW CONFIG`の結果として返されますが、現在設定しても効果はありません。
 
 -   バックグラウンド トランザクションがデータを書き込む帯域幅のソフト制限。
--   デフォルト値: `0KB` (制限なしを意味します)
+-   デフォルト値: `0KiB` (制限なしを意味します)
 
 #### <code>background-read-bandwidth</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-background-read-bandwidth-code-span-class-version-mark-new-in-v6-2-0-span}
 
@@ -2265,7 +2265,7 @@ TiKV がデプロイされているマシンのリソースが限られている
 > この構成項目は`SHOW CONFIG`の結果として返されますが、現在設定しても効果はありません。
 
 -   バックグラウンド トランザクションとコプロセッサーがデータを読み取る帯域幅のソフト制限。
--   デフォルト値: `0KB` (制限なしを意味します)
+-   デフォルト値: `0KiB` (制限なしを意味します)
 
 #### <code>enable-auto-tune</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-enable-auto-tune-code-span-class-version-mark-new-in-v6-2-0-span}
 
@@ -2307,7 +2307,7 @@ TiKV API V2 が有効な場合のタイムスタンプの取得に関連する�
 ### <code>renew-batch-max-size</code> <span class="version-mark">v6.4.0 の新機能</span> {#code-renew-batch-max-size-code-span-class-version-mark-new-in-v6-4-0-span}
 
 -   タイムスタンプ要求内の TSO の最大数。
--   デフォルトの TSO 物理時間更新間隔 ( `50ms` ) では、PD は最大 262144 個の TSO を提供します。要求された TSO がこの数を超えると、PD はそれ以上 TSO を提供しません。この構成アイテムは、TSO の枯渇と、TSO の枯渇による他のビジネスへの逆影響を回避するために使用されます。高可用性を向上させるためにこの構成項目の値を増やす場合、十分な TSO を取得するには、同時に[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)の値を減らす必要があります。
+-   デフォルトの TSO 物理時間更新間隔 ( `50ms` ) では、PD は最大 262144 個の TSO を提供します。要求された TSO がこの数を超えると、PD はそれ以上 TSO を提供しません。この構成項目は、TSO の枯渇と、TSO の枯渇による他のビジネスへの逆影響を回避するために使用されます。高可用性を向上させるためにこの構成項目の値を増やす場合は、十分な TSO を取得するために同時に[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)の値を減らす必要があります。
 -   デフォルト値: `8192`
 
 ## リソース制御 {#resource-control}
@@ -2329,24 +2329,24 @@ TiKVstorageレイヤーのリソース制御に関するコンフィグレーシ
 -   リージョンがホットスポットとして識別されるトラフィックのしきい値を制御します。
 -   デフォルト値:
 
-    -   [`region-split-size`](#region-split-size) 4 GB 未満の場合、1 秒あたり`30MiB` 。
-    -   [`region-split-size`](#region-split-size)が 4 GB 以上の場合、1 秒あたり`100MiB` 。
+    -   [`region-split-size`](#region-split-size) 4 GiB 未満の場合、1 秒あたり`30MiB` 。
+    -   [`region-split-size`](#region-split-size)が 4 GiB 以上の場合、1 秒あたり`100MiB` 。
 
 ### <code>qps-threshold</code> {#code-qps-threshold-code}
 
 -   リージョンがホットスポットとして識別される QPS しきい値を制御します。
 -   デフォルト値:
 
-    -   [`region-split-size`](#region-split-size) 4GB未満の場合は`3000` 。
-    -   [`region-split-size`](#region-split-size)が 4 GB 以上の場合は`7000` 。
+    -   [`region-split-size`](#region-split-size)が 4 GiB 未満の場合は`3000` 。
+    -   [`region-split-size`](#region-split-size)が 4 GiB 以上の場合は`7000` 。
 
 ### <code>region-cpu-overload-threshold-ratio</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-region-cpu-overload-threshold-ratio-code-span-class-version-mark-new-in-v6-2-0-span}
 
 -   リージョンがホットスポットとして識別される CPU 使用率のしきい値を制御します。
 -   デフォルト値:
 
-    -   [`region-split-size`](#region-split-size) 4GB未満の場合は`0.25` 。
-    -   [`region-split-size`](#region-split-size)が 4 GB 以上の場合は`0.75` 。
+    -   [`region-split-size`](#region-split-size)が 4 GiB 未満の場合は`0.25` 。
+    -   [`region-split-size`](#region-split-size)が 4 GiB 以上の場合は`0.75` 。
 
 ## メモリ<span class="version-mark">v7.5.0 の新機能</span> {#memory-span-class-version-mark-new-in-v7-5-0-span}
 
@@ -2358,4 +2358,4 @@ TiKVstorageレイヤーのリソース制御に関するコンフィグレーシ
 ### <code>profiling-sample-per-bytes</code> <span class="version-mark">v7.5.0 の新機能</span> {#code-profiling-sample-per-bytes-code-span-class-version-mark-new-in-v7-5-0-span}
 
 -   ヒープ プロファイリングによって毎回サンプリングされるデータの量を、最も近い 2 の累乗に切り上げて指定します。
--   デフォルト値: `512KB`
+-   デフォルト値: `512KiB`

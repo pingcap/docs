@@ -32,7 +32,7 @@ TiDB にはコストベースのオプティマイザーが含まれています
 
 ## 特定の SQL ステートメントの実行を防ぐにはどうすればよいですか? {#how-to-prevent-the-execution-of-a-particular-sql-statement}
 
-[SQLバインディング](/sql-plan-management.md#sql-binding)と[`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen)ヒントを作成すると、特定のステートメントの実行時間を小さい値 (1ms など) に制限できます。このようにして、ステートメントはしきい値によって自動的に終了します。
+[`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen)ヒントを使用して[SQLバインディング](/sql-plan-management.md#sql-binding)を作成すると、特定のステートメントの実行時間を小さい値 (1ms など) に制限できます。このようにして、ステートメントはしきい値によって自動的に終了します。
 
 たとえば、 `SELECT * FROM t1, t2 WHERE t1.id = t2.id`の実行を防ぐには、次の SQL バインディングを使用してステートメントの実行時間を 1 ミリ秒に制限します。
 
@@ -182,7 +182,7 @@ Sqoop では、 `--batch`各バッチで 100 個のステートメントをコ�
 
 ## データを削除するとクエリ速度が遅くなるのはなぜですか? {#why-does-the-query-speed-get-slow-after-data-is-deleted}
 
-大量のデータを削除すると、無駄なキーが大量に残り、クエリの効率に影響します。この問題を解決するには、 [リージョンのマージ](/best-practices/massive-regions-best-practices.md#method-3-enable-region-merge)機能を使用できます。詳細は[TiDB ベスト プラクティスのデータの削除セクション](https://en.pingcap.com/blog/tidb-best-practice/#write)を参照してください。
+大量のデータを削除すると、不要なキーが大量に残り、クエリの効率に影響します。この問題を解決するには、 [リージョンのマージ](/best-practices/massive-regions-best-practices.md#method-3-enable-region-merge)機能を使用できます。詳細は[TiDB ベスト プラクティスのデータの削除セクション](https://en.pingcap.com/blog/tidb-best-practice/#write)を参照してください。
 
 ## データを削除した後にstorage領域を再利用するのが遅い場合はどうすればよいですか? {#what-should-i-do-if-it-is-slow-to-reclaim-storage-space-after-deleting-data}
 
@@ -225,9 +225,11 @@ TiDB は、 [グローバル](/system-variables.md#tidb_force_priority)または
 
 ## TiDB での<code>auto analyze</code>のトリガー戦略は何ですか? {#what-s-the-trigger-strategy-for-code-auto-analyze-code-in-tidb}
 
-新しいテーブルの行数が 1000 に達し、比率 (変更された行数 / 現在の総行数) が`tidb_auto_analyze_ratio`より大きい場合、 [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)ステートメントが自動的にトリガーされます。デフォルト値`tidb_auto_analyze_ratio`は`0.5`で、この機能がデフォルトで有効であることを示します。安全性を確保するため、この機能が有効な場合の最小値は`0.3`であり、デフォルト値が`0.8`である`pseudo-estimate-ratio`より小さい必要があります。それ以外の場合は、一定期間疑似統計が使用されます。 `tidb_auto_analyze_ratio` ～ `0.5`に設定することをお勧めします。
+テーブルまたはパーティションテーブルテーブルの単一パーティション内の行数が 1000 に達し、テーブルまたはパーティションの比率 (変更された行数 / 現在の総行数) が[`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio)より大きい場合、 [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)ステートメントは次のようになります。自動的にトリガーされます。
 
-`auto analyze`無効にするには、システム変数`tidb_enable_auto_analyze`を使用します。
+`tidb_auto_analyze_ratio`システム変数のデフォルト値は`0.5`で、この機能がデフォルトで有効であることを示します。 `tidb_auto_analyze_ratio`の値を[`pseudo-estimate-ratio`](/tidb-configuration-file.md#pseudo-estimate-ratio) (デフォルト値は`0.8` ) 以上に設定することはお勧めできません。そうしないと、オプティマイザが疑似統計を使用する可能性があります。 TiDB v5.3.0 では[`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530)変数が導入されており、これを`OFF`に設定すると、統計が古くても擬似統計は使用されません。
+
+`auto analyze`無効にするには、システム変数[`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610)を使用します。
 
 ## オプティマイザーのヒントを使用してオプティマイザーの動作をオーバーライドできますか? {#can-i-use-optimizer-hints-to-override-the-optimizer-behavior}
 
@@ -315,11 +317,11 @@ TiDB v6.2.0 より前では、TiDB は、DDL ステートメントのタイプ�
 
 先入れ先出しキューの制限により、DDL 3 は DDL 2 が実行されるまで待機する必要があります。また、同じテーブル上の DDL ステートメントはシリアルに実行する必要があるため、DDL 2 は DDL 1 が実行されるまで待機する必要があります。したがって、DDL 3 は、異なるテーブルで動作する場合でも、DDL 1 が最初に実行されるまで待機する必要があります。
 
-TiDB v6.2.0 以降、TiDB DDL モジュールは同時フレームワークを使用します。同時フレームワークでは、先入れ先出しキューの制限はなくなりました。代わりに、TiDB はすべての DDL タスクから実行できる DDL タスクを選択します。さらに、Reorg ワーカーの数が拡張され、ノードあたり約`CPU/4`になりました。これにより、TiDB は並行フレームワークで複数のテーブルのインデックスを同時に構築できます。
+TiDB v6.2.0 以降、TiDB DDL モジュールは同時フレームワークを使用します。同時フレームワークでは、先入れ先出しキューの制限がなくなりました。代わりに、TiDB はすべての DDL タスクから実行できる DDL タスクを選択します。さらに、Reorg ワーカーの数が拡張され、ノードあたり約`CPU/4`になりました。これにより、TiDB は並行フレームワークで複数のテーブルのインデックスを同時に構築できます。
 
 クラスターが新しいクラスターであっても、以前のバージョンからアップグレードされたクラスターであっても、TiDB は TiDB v6.2 以降のバージョンの同時フレームワークを自動的に使用します。手動で調整する必要はありません。
 
-### DDL 実行のスタックの原因を特定する {#identify-the-cause-of-stuck-ddl-execution}
+### DDL 実行スタックの原因を特定する {#identify-the-cause-of-stuck-ddl-execution}
 
 1.  DDL ステートメントの実行を遅くする他の理由を取り除きます。
 2.  次のいずれかの方法を使用して、DDL 所有者ノードを識別します。
@@ -370,7 +372,7 @@ ADMIN SHOW DDL;
 ### DDL ジョブを表示するにはどうすればよいですか? {#how-to-view-the-ddl-job}
 
 -   `ADMIN SHOW DDL` : 実行中の DDL ジョブを表示します。
--   `ADMIN SHOW DDL JOBS` : 現在の DDL ジョブ キュー内のすべての結果 (実行中および実行を待機しているタスクを含む) と、完了した DDL ジョブ キュー内の最後の 10 件の結果を表示します。
+-   `ADMIN SHOW DDL JOBS` : 現在の DDL ジョブ キュー内のすべての結果 (実行中および実行待ちのタスクを含む) と、完了した DDL ジョブ キュー内の最後の 10 件の結果を表示します。
 -   `ADMIN SHOW DDL JOBS QUERIES 'job_id' [, 'job_id'] ...` : `job_id`に対応する DDL タスクの元の SQL ステートメントを表示します。 `job_id`実行中の DDL ジョブのみを検索し、DDL 履歴ジョブ キュー内の最後の 10 件の結果を検索します。
 
 ### TiDB は CBO (コストベースの最適化) をサポートしていますか? 「はい」の場合、どの程度ですか? {#does-tidb-support-cbo-cost-based-optimization-if-yes-to-what-extent}
