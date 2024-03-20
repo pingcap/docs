@@ -4960,6 +4960,20 @@ SHOW WARNINGS;
 - By default, Regions are split for a new table when it is being created in TiDB. After this variable is enabled, the newly split Regions are scattered immediately during the execution of the `CREATE TABLE` statement. This applies to the scenario where data need to be written in batches right after the tables are created in batches, because the newly split Regions can be scattered in TiKV beforehand and do not have to wait to be scheduled by PD. To ensure the continuous stability of writing data in batches, the `CREATE TABLE` statement returns success only after the Regions are successfully scattered. This makes the statement's execution time multiple times longer than that when you disable this variable.
 - Note that if `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` have been set when a table is created, the specified number of Regions are evenly split after the table creation.
 
+### tidb_schema_cache_size <span class="version-mark">New in v8.0.0</span>
+
+> **Warning:**
+>
+> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 9223372036854775807]`
+- This variable controls the size of the schema cache in TiDB. The unit is byte. The default value is `0`, which means that the cache limit feature is not enabled. When this feature is enabled, TiDB uses the value you set as the maximum available memory limit, and uses the Least Recently Used (LRU) algorithm to cache the required tables, effectively reducing the memory occupied by the schema information.
+
 ### tidb_schema_version_cache_limit <span class="version-mark">New in v7.4.0</span>
 
 - Scope: GLOBAL
