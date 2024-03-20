@@ -105,9 +105,9 @@ If you use the `cdc cli changefeed create` command without specifying the `-conf
 - Replicates all tables except system tables
 - Only replicates tables that contain [valid indexes](/ticdc/ticdc-overview.md#best-practices)
 
-## Does TiCDC support outputting data changes in the Canal format?
+## Does TiCDC support outputting data changes in the Canal protocol?
 
-Yes. To enable Canal output, specify the protocol as `canal-json` in the `--sink-uri` parameter. For example:
+Yes. Note that for Canal protocol, TiCDC only support the JSON output format, while the protobuf format is not officially supported yet. To enable Canal output, specify the protocol as `canal-json` in the `--sink-uri` parameter. For example:
 
 {{< copyable "shell-regular" >}}
 
