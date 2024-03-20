@@ -242,7 +242,7 @@ If several `json_member_of`, `json_contains` or `json_overlaps` are connected wi
 - All the conditions that are used for the IndexMerge must match the semantic of `OR` or `AND` that connects them.
     - If `json_contains` is connected with `AND`, it matches the semantic.
     - If `json_overlaps` is connected with `OR`, it matches the semantic.
-    - If `json_member_of` is connected with `OR`/`AND`, it matches the semantic.
+    - If `json_member_of` is connected with `OR` or `AND`, it matches the semantic.
     - If `json_contains` that contains multiple values is connected with `OR`, or `json_overlaps` that contains multiple values is connected with `AND`, they don't match the semantic, but they match the semantic if they only contain one value.
 
 For example:
