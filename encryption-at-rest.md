@@ -88,7 +88,7 @@ data-key-rotation-period = "168h" # 7 days
 If encryption is enabled (that is, the value of `data-encryption-method` is not `"plaintext"`), you must specify a master key in either of the following ways:
 
 - [Specify a master key via KMS](#specify-a-master-key-via-kms)
-- [Specify a master key via a file](#specify-a-master-key-via-file)
+- [Specify a master key via a file](#specify-a-master-key-via-a-file)
 
 #### Specify a master key via KMS
 
