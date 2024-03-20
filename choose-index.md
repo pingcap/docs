@@ -235,10 +235,16 @@ mysql> EXPLAIN SELECT /*+ use_index_merge(t2, idx) */ * FROM t2 WHERE a=1 AND JS
 6 rows in set, 1 warning (0.00 sec)
 ```
 
-If several `json_member_of`, `json_contains` or `json_overlaps` are connected with `OR`/`AND`, they need to meet some requirements for TiDB to use them to access multi-valued indexes with IndexMerge:
-1. If several conditions are connected with `OR`, each of them needs to be able to be accessed with IndexMerge respectively.
-2. If several conditions are connected with `AND`, some of them need to be able to be accessed with IndexMerge respectively. TiDB can only use IndexMerge to access multi-valued indexes with these conditions.
-3. All the conditions that are used for the IndexMerge must match the semantic of `OR`/`AND` that connects them. Specifically, if `json_contains` is connected with `AND`, or `json_overlaps` is connected with `OR`, or `json_member_of` is connected with `OR`/`AND`, they match the semantic; if `json_contains` that contains multiple values is connected with `OR`, or `json_overlaps` that contains multiple values is connected with `AND`, they don't match the semantic, but they match the semantic if they only contain one value.
+If several `json_member_of`, `json_contains` or `json_overlaps` are connected with `OR`/`AND`, they need to meet the following requirements for TiDB to use them to access multi-valued indexes with IndexMerge:
+
+- If several conditions are connected with `OR`, each of them needs to be able to be accessed with IndexMerge respectively.
+- If several conditions are connected with `AND`, some of them need to be able to be accessed with IndexMerge respectively. TiDB can only use IndexMerge to access multi-valued indexes with these conditions.
+- All the conditions that are used for the IndexMerge must match the semantic of `OR`/`AND` that connects them.
+    - If `json_contains` is connected with `AND`, it matches the semantic.
+    - If `json_overlaps` is connected with `OR`, it matches the semantic.
+    - If `json_member_of` is connected with `OR`/`AND`, it matches the semantic.
+    - If `json_contains` that contains multiple values is connected with `OR`, or `json_overlaps` that contains multiple values is connected with `AND`, they don't match the semantic, but they match the semantic if they only contain one value.
+
 For example:
 
 ```sql
@@ -416,13 +422,16 @@ EXPLAIN SELECT /*+ use_index_merge(t5, k1, k2, ka) */ * FROM t5 WHERE 1 member o
 +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+---------------------------------------------+
 ```
 
-If the conditions contain multi-layer nested `OR`/`AND`, or if the conditions correspond to the index columns only after transformations like expansion, TiDB may not be able to use IndexMerge or not be able to make full use of all conditions. We suggest users perform prior testing and verification for specific scenarios.
-Here are examples for some scenarios:
+If the conditions contain multi-layer nested `OR`/`AND`, or if the conditions correspond to the index columns only after transformations such as expansion, TiDB might not be able to use IndexMerge or not be able to make full use of all conditions. It is recommended that you perform prior testing and verification for specific scenarios.
+
+The following are some examples:
 
 ```sql
 CREATE TABLE t6 (a INT, j JSON, b INT, k JSON, INDEX idx(a, (CAST(j AS SIGNED ARRAY)), b), INDEX idx2(a, (CAST(k as SIGNED ARRAY)), b));
 ```
-If single `OR` is nested in `AND`, and they need expansion to correspond to the index columns, TiDB can usually make full use of the conditions.
+
+If a single `OR` is nested in `AND`, and it needs expansion to correspond to the index columns, TiDB can usually make full use of the conditions.
+
 ```sql
 EXPLAIN SELECT /*+ use_index_merge(t6, idx, idx2) */ * FROM t6 WHERE a=1 AND (1 member of (j) OR 2 member of (k));
 ```
@@ -438,7 +447,8 @@ EXPLAIN SELECT /*+ use_index_merge(t6, idx, idx2) */ * FROM t6 WHERE a=1 AND (1 
 +-------------------------------+---------+-----------+-------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
 ```
 
-If several `OR`s are nested in different places in `AND`, and they need expansion to correspond to the index columns, TiDB may not be able to make full use of all conditions.
+If several `OR`s are nested in different places in `AND`, and they need expansion to correspond to the index columns, TiDB might not be able to make full use of all conditions.
+
 ```sql
 EXPLAIN SELECT /*+ use_index_merge(t6, idx, idx2) */ * FROM t6 WHERE a=1 AND (1 member of (j) OR 2 member of (k)) and (b = 1 or b = 2);
 ```
