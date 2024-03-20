@@ -116,9 +116,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 
     For more information, see [documentation](/system-variables.md#tidb_enable_concurrent_hashagg_spill-new-in-v760).
 
-* Introduce priority queues for automatic statistics update [#50132](https://github.com/pingcap/tidb/issues/50132) @[hi-rustin](https://github.com/hi-rustin) **tw@hfxsd** <!--1640-->
+* Introduce the priority queue for automatic statistics update [#50132](https://github.com/pingcap/tidb/issues/50132) @[hi-rustin](https://github.com/hi-rustin) **tw@hfxsd** <!--1640-->
 
-    Maintaining the up-to-date nature of optimizer statistics is critical to stabilizing database performance. Most users rely on the [automatic statistics update](/statistics.md#automatic-update) provided by TiDB to keep statistics up-to-date. Automatic statistics update polls the status of statistics for all objects, and adds objects with insufficient health to a queue that is collected and updated one by one. In previous versions, the collection order is set randomly, which can result in longer waits for more worthy objects to be updated, causing potential database performance rollbacks.
+    Maintaining optimizer statistics up-to-date is the key to stabilizing database performance. Most users rely on the [automatic statistics update](/statistics.md#automatic-update) provided by TiDB to keep statistics up-to-date. Automatic statistics update polls the status of statistics for all objects, and adds objects with insufficient health to a queue for individual collection and update. In previous versions, the collection order is random, which could result in longer waits for more worthy objects to be updated, causing potential database performance regressions.
 
     Starting from v8.0.0, automatic statistics update dynamically sets priorities for objects in combination with a variety of conditions to ensure that more valuable objects for collection are processed first, such as newly created indexes and partitioned tables with partition changes. Additionally, TiDB prioritizes tables with lower health scores, placing them at the front of the queue. This enhancement improves the reasonableness of the collection order, and reduces performance problems caused by outdated statistics, therefore improving database stability.
     
@@ -126,39 +126,39 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 
 * Remove some limitations on execution plan cache [#49161](https://github.com/pingcap/tidb/pull/49161) @[mjonss](https://github.com/mjonss) @[qw4990](https://github.com/qw4990) **tw@hfxsd** <!--1622/1585-->
 
-    TiDB supports [execution plan cache](/sql-prepared-plan-cache.md), which can effectively reduce the processing latency of the transaction-intensive system and provides an important means to improve performance. In v8.0.0, TiDB removes several restrictions on execution plan cache. Execution plans with the following contents can be cached:
+    TiDB supports [execution plan caching](/sql-prepared-plan-cache.md), which can effectively reduce the processing latency of transaction-intensive systems and is important for improving performance. In v8.0.0, TiDB removes several limitations on execution plan cache. Execution plans with the following contents can be cached:
 
     - [Partitioned tables](/partitioned-table.md)
-    - [Generated columns](/generated-columns.md), including objects that depend on the generated columns (such as [multi-valued indexes](/choose-index.md#multi-valued-indexes-and-plan-cache))
+    - [Generated columns](/generated-columns.md), including objects that depend on generated columns (such as [multi-valued indexes](/choose-index.md#multi-valued-indexes-and-plan-cache))
 
-  This enhancement extends the usage scenarios of execution plan cache and improves the overall performance of the database in complex scenarios.
+  This enhancement extends the usage scenarios of execution plan cache and improves the overall database performance in complex scenarios.
 
     For more information, see [documentation](/sql-prepared-plan-cache.md).
 
-* The optimizer enhances support for multi-valued indexes [#47759](https://github.com/pingcap/tidb/issues/47759) [#46539](https://github.com/pingcap/tidb/issues/46539) @[Arenatlx](https://github.com/Arenatlx) @[time-and-fate](https://github.com/time-and-fate) **tw@hfxsd** <!--1405/1584-->
+* Optimizer enhances support for multi-valued indexes [#47759](https://github.com/pingcap/tidb/issues/47759) [#46539](https://github.com/pingcap/tidb/issues/46539) @[Arenatlx](https://github.com/Arenatlx) @[time-and-fate](https://github.com/time-and-fate) **tw@hfxsd** <!--1405/1584-->
 
-    TiDB introduced [multi-value indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes) in in v6.6.0 to improve query performance for JSON data types. In v8.0.0, the optimizer enhances its support for multi-valued indexes and can correctly identify and utilize them to optimize queries in complex scenarios.
+    TiDB v6.6.0 introduces [multi-value indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes) to improve query performance for JSON data types. In v8.0.0, the optimizer enhances its support for multi-valued indexes and can correctly identify and utilize them to optimize queries in complex scenarios.
 
-    * Statistics on multi-valued indexes are collected and applied by the optimizer for estimation. When a SQL statement might select multiple multi-valued indexes, the optimizer can identify the index with lower cost.
-    * When there are multiple `member of` conditions connected by `OR`, the optimizer is able to match an effective index partial path for each DNF item (a `member of` condition) and combine multiple paths using Union to form an `Index Merge`. This allows more efficient condition filtering and data querying.
+    * The optimizer can collect statistics on multi-valued indexes and use this information for estimation. When a SQL statement might select from several multi-value indexes, the optimizer can identify the index with lower cost.
+    * When using `OR` to connect multiple `member of` conditions, the optimizer can match an effective index partial path for each DNF item (a `member of` condition) and combine these paths using Union to form an `Index Merge`. This achieves more efficient condition filtering and data querying.
 
   For more information, see [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-indexes).
   
-  * Supports configuring the update interval for low-precision TSO [#51081](https://github.com/pingcap/tidb/issues/51081) @[Tema](https://github.com/Tema) **tw@hfxsd** <!--1725-->
+* Supports configuring the update interval for low-precision TSO [#51081](https://github.com/pingcap/tidb/issues/51081) @[Tema](https://github.com/Tema) **tw@hfxsd** <!--1725-->
 
-    The TiDB [low-precision TSO feature](/system-variables.md#tidb_low_resolution_tso) uses regularly updated TSO as transaction timestamps. Although this feature sacrifices real-time performance while tolerating reading old data, it reduces the overhead of obtaining TSO for small read-only transactions and improves the ability of high-concurrency reads.
+    The [low-precision TSO feature](/system-variables.md#tidb_low_resolution_tso) in TiDB uses regularly updated TSO as the transaction timestamp. In scenarios where reading outdated data is acceptable, this feature reduces the overhead of obtaining TSO for small read-only transactions by sacrificing real-time performance and improves the ability of high-concurrency reads.
 
-    Before v8.0.0, the TSO update interval of low-precision TSO feature is fixed and cannot be adjusted according to actual business needs. In v8.0.0, TiDB introduces the system variable `tidb_low_resolution_tso_update_interval` to control the TSO update interval. This feature is valid only when the low-precision TSO feature is enabled.
+    Before v8.0.0, the TSO update interval of low-precision TSO feature is fixed and cannot be adjusted according to actual application requirements. In v8.0.0, TiDB introduces the system variable `tidb_low_resolution_tso_update_interval` to control the TSO update interval. This feature takes effect only when the low-precision TSO feature is enabled.
 
     For more information, see [documentation](/system-variables.md#tidb_low_resolution_tso_update_interval-new-in-v800).
 
 ### Reliability
 
-* Support caching required schema information according to the Least Recently Used (LRU) algorithm to reduce memory consumption on the TiDB server (experimental) [#50959](https://github.com/pingcap/tidb/issues/50959) @[gmhdbjd](https://github.com/gmhdbjd) **tw@hfxsd** <!--1691-->
+* Support caching required schema information according to the LRU algorithm to reduce memory consumption on the TiDB server (experimental) [#50959](https://github.com/pingcap/tidb/issues/50959) @[gmhdbjd](https://github.com/gmhdbjd) **tw@hfxsd** <!--1691-->
 
-    Before v8.0.0, each TiDB node caches the schema information of all tables. Once the number of tables is large, for example, in a scenario that involves hundreds of thousands of tables, caching the schema information of these tables alone will take up a lot of memory. 
-    
-    Starting from v8.0.0, the system variable [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800) is introduced, which allows you to set an upper limit on the amount of memory that can be used for caching the schema information, so that it does not take up too much memory. When you enable this feature, TiDB uses the LRU algorithm to cache the required tables, effectively reducing the memory consumed by the schema information.
+    Before v8.0.0, each TiDB node caches the schema information of all tables. In scenarios with hundreds of thousands of tables, just caching these table schemas could consume a significant amount of memory. 
+ 
+    Starting from v8.0.0, TiDB introduces the system variable [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800), which enables you to set an upper limit for caching schema information, thereby preventing excessive memory usage. When you enable this feature, TiDB uses the Least Recently Used (LRU) algorithm to cache the required tables, effectively reducing the memory consumed by the schema information.
 
     For more information, see [documentation](/system-variables.md#tidb_schema_cache_size-new-in-v800).
 
@@ -191,15 +191,15 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 
     For more information, see [documentation](/system-variables.md#tidb_dml_type-new-in-v800).
 
-* Support using some expressions to set the default values for columns when a table is created (experimental) [#50936](https://github.com/pingcap/tidb/issues/50936) @[zimulala](https://github.com/zimulala) **tw@hfxsd** <!--1690-->
+* Support using some expressions to set default column values when creating a table (experimental) [#50936](https://github.com/pingcap/tidb/issues/50936) @[zimulala](https://github.com/zimulala) **tw@hfxsd** <!--1690-->
 
-    Before v8.0.0, when you create a table, the default values of columns can only be fixed strings, numbers, and dates. Starting from v8.0.0, you can use some expressions as the default values of columns, such as setting the default value of columns to `UUID()`. This feature helps you meet your diverse requirements.
+    Before v8.0.0, when you create a table, the default value of a column is limited to strings, numbers, and dates. Starting from v8.0.0, you can use some expressions as the default column values. For example, you can set the default value of a column to `UUID()`. This feature helps you meet more diverse requirements.
     
     For more information, see [documentation](/data-type-default-values.md#specify-expressions-as-default-values).
 
 * Support the `div_precision_increment` system variable [#51501](https://github.com/pingcap/tidb/issues/51501) @[yibin87](https://github.com/yibin87) **tw@hfxsd** <!--1566-->
 
-    MySQL 8.0 supports the variable `div_precision_increment`, which specifies the number of digits by which to increase the scale of the result of a division operation performed using the `/` operator. Before v8.0.0, TiDB does not support this variable, and division is performed to 4 decimal places. Starting with v8.0.0, TiDB supports this variable. You can specify the number of digits by which to increase the scale of the result of a division operation as desired.
+    MySQL 8.0 supports the variable `div_precision_increment`, which specifies the number of digits by which to increase the scale of the result of a division operation performed using the `/` operator. Before v8.0.0, TiDB does not support this variable, and division is performed to 4 decimal places. Starting from v8.0.0, TiDB supports this variable. You can specify the number of digits by which to increase the scale of the result of a division operation as desired.
     
     For more information, see [documentation](/system-variables.md#div_precision_increment-new-in-v800).
    
@@ -221,11 +221,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 
 * Support writing general logs to a separate file [#51248](https://github.com/pingcap/tidb/issues/51248) @[Defined2014](https://github.com/Defined2014) **tw@hfxsd** <!--1632-->
 
-    The general log is a MySQL-compatible feature. When you enable it, it logs all SQL statements executed by the database to help you diagnose problems. TiDB also supports this feature. You can enable it by setting the variable [`tidb_general_log`](/system-variables.md#tidb_general_log). However, in previous versions, the content of general logs can only be written to the TiDB instance log together with other information, which is not friendly to keep it for a long time.
+    The general log is a MySQL-compatible feature that logs all executed SQL statements to help diagnose issues. TiDB also supports this feature. You can enable it by setting the variable [`tidb_general_log`](/system-variables.md#tidb_general_log). However, in previous versions, the content of general logs can only be written to the TiDB instance log along with other information, which is inconvenient for users who need to keep logs for a long time.
 
-    Starting from v8.0.0, you can enable TiDB to write the general log to a specified file by setting the configuration item [`log.general-log-file`](/tidb-configuration-file.md#general-log-file-new-in-v800) to a valid filename. The general log also conforms to the same polling and saving policies for instance logs.
+    Starting from v8.0.0, you can enable writing the general log to a specified file by setting the configuration item [`log.general-log-file`](/tidb-configuration-file.md#general-log-file-new-in-v800) to a valid filename. The general log follows the same rotation and retention policies as the instance log.
 
-    In addition, to reduce the amount of disk space taken up by history log files, TiDB supports a native log compression option in v8.0.0. You can set the configuration item [`log.file.compression`](/tidb-configuration-file.md#compression-new-in-v800) to `gzip`, and the polled history logs will be automatically compressed in [`gzip`](https://www.gzip.org/) format.
+    In addition, to reduce the disk space occupied by historical log files, TiDB v8.0.0 introduces a native log compression option. You can set the configuration item [`log.file.compression`](/tidb-configuration-file.md#compression-new-in-v800) to `gzip` to automatically compress rotated logs using the [`gzip`](https://www.gzip.org/) format.
 
     For more information, see [documentation](/tidb-configuration-file.md#general-log-file-new-in-v800).
 
@@ -258,17 +258,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 
 * Enhance TiDB log desensitization [#51306](https://github.com/pingcap/tidb/issues/51306) @[xhebox](https://github.com/xhebox) **tw@hfxsd** <!--1229-->
 
-    The TiDB log desensitization enhancement is based on marking data with SQL text information in log files to support secure presentation of sensitive data when viewed by users. You can control whether or not to desensitize log information to enable secure use of TiDB logs in different scenarios, enhancing the security and flexibility of using the log desensitization capability. To use this feature, you set the system variable `tidb_redact_log` to `MARKER`. The SQL text in TiDB logs will be marked, and the data will be securely displayed based on the markers when viewed.
+    The enhancement of TiDB log desensitization is based on marking SQL text information in log files, facilitating the safe display of sensitive data when users view the logs. You can control whether to desensitize log information to enable secure use of TiDB logs in different scenarios, enhancing the security and flexibility of using log desensitization. To use this feature, set the system variable `tidb_redact_log` to `MARKER`. This marks the SQL text in TiDB logs. When you view the logs, sensitive data is securely displayed based on the markers, thus protecting the log information.
 
     For more information, see [documentation](/system-variables.md#tidb_redact_log).
 
 ### Data migration
-
-* TiCDC supports replicating DDL statements in bi-directional replication (BDR) mode (GA) [#10301](https://github.com/pingcap/tiflow/issues/10301) @[asddongmen](https://github.com/asddongmen) **tw@hfxsd** <!--1689/1682-->
-
-    TiDB v7.6.0 introduces replicating DDL statements in BDR mode as an experimental feature. Previously, replicating DDL statements was not supported by TiCDC, so users of TiCDC bi-directional replication had to apply DDL statements to both TiDB clusters separately. With this feature, TiCDC allows for a cluster to be assigned the `PRIMARY` BDR role, and enables the replication of DDL statements from that cluster to the downstream cluster. In v8.0.0, this feature becomes GA.
-
-    For more information, see [documentation](/ticdc/ticdc-bidirectional-replication.md).
 
 * TiCDC adds support for the Simple protocol [#9898](https://github.com/pingcap/tiflow/issues/9898) @[3AceShowHand](https://github.com/3AceShowHand) **tw@lilin90** <!--1646-->
 
@@ -281,6 +275,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
     TiCDC can now publish replication events to a Kafka sink using a protocol that generates event messages in a Debezium style format. This helps to simplify the migration from MySQL to TiDB for users who are currently using Debezium to pull data from MySQL for downstream processing.
 
     For more information, see [documentation](/ticdc/ticdc-debezium.md).
+
+* TiCDC supports replicating DDL statements in bi-directional replication (BDR) mode (GA) [#10301](https://github.com/pingcap/tiflow/issues/10301) [#48519](https://github.com/pingcap/tidb/issues/48519) @[okJiang](https://github.com/okJiang) @[asddongmen](https://github.com/asddongmen) **tw@hfxsd** <!--1689/1682-->
+
+    TiDB v7.6.0 introduces replicating DDL statements in BDR mode as an experimental feature. Previously, replicating DDL statements was not supported by TiCDC, so users of TiCDC bi-directional replication had to apply DDL statements to both TiDB clusters separately. With this feature, TiCDC allows for a cluster to be assigned the `PRIMARY` BDR role, and enables the replication of DDL statements from that cluster to the downstream cluster. In v8.0.0, this feature becomes generally available (GA).
+
+    For more information, see [documentation](/ticdc/ticdc-bidirectional-replication.md).
 
 * DM supports specifying a secret key for encrypting and decrypting passwords of source and target databases [#9492](https://github.com/pingcap/tiflow/issues/9492) @[D3Hunter](https://github.com/D3Hunter) **tw@qiancai** <!--1497-->
 
@@ -322,11 +322,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 
 ### Behavior changes
 
-* When you enable `tidb_ddl_enable_fast_reorg` for index acceleration, the encoded index key ingests data to TiKV with fixed concurrency (`16`), which cannot be dynamically adjusted according to the downstream TiKV capacity. Starting from v8.0.0, you can adjust concurrency using the [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt-new-in-v800) system variable. The default value is `4`. Compared with the previous default value of `16`, the new default value reduces performance when ingesting indexed key-value pairs. You can adjust this system variable based on the workload of the cluster. **tw@hfxsd** <!--no FD-->
+* Before v8.0.0, after enabling the acceleration of `ADD INDEX` and `CREATE INDEX` (`tidb_ddl_enable_fast_reorg = ON`), the encoded index key ingests data to TiKV with a fixed concurrency of `16`, which cannot be dynamically adjusted according to the downstream TiKV capacity. Starting from v8.0.0, you can adjust the concurrency using the [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt-new-in-v800) system variable. The default value is `4`. Compared with the previous default value of `16`, the new default value reduces performance when ingesting indexed key-value pairs. You can adjust this system variable based on the workload of your cluster. **tw@hfxsd** <!--no FD-->
 
 ### MySQL compatibility 
 
-* The `KEY` partition type supports statements with empty list of partition fields, which is consistent with the behavior of MySQL. **tw@hfxsd** <!--No FD-->
+* The `KEY` partition type supports statements with an empty list of partition fields, which is consistent with the behavior of MySQL. **tw@hfxsd** <!--No FD-->
 
 ### System variables
 
@@ -382,7 +382,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 
     + TiDB Data Migration (DM)
     
-        - In a MariaDB primary and secondary replication scenario, that is, a `MariaDB_primary_instance` -> `MariaDB_secondary_instance` -> `DM` -> `TiDB` migration scenario, when `gtid_strict_mode = off` and the GTID of the `MariaDB_secondary_instance` is not strictly incrementing (for example, there is data writing to the `MariaDB_secondary_instance`), then the DM task will report an error `less than global checkpoint position`, the DM task will report an error `less than global checkpoint position`. Starting from v8.0.0, TiDB is compatible with this scenario and data can be migrated downstream. [#10741](https://github.com/pingcap/tiflow/issues/10741) @[okJiang](https://github.com/okJiang) **tw@hfxsd** <!--1683-->
+        - In a MariaDB primary-secondary replication scenario, where the migration path is: MariaDB primary instance -> MariaDB secondary instance -> DM -> TiDB, when `gtid_strict_mode = off` and the GTID of the MariaDB secondary instance is not strictly incrementing (for example, there is data writing to the MariaDB secondary instance), the DM task will report an error `less than global checkpoint position`. Starting from v8.0.0, TiDB is compatible with this scenario and data can be migrated downstream normally. [#10741](https://github.com/pingcap/tiflow/issues/10741) @[okJiang](https://github.com/okJiang) **tw@hfxsd** <!--1683-->
         
 ## Bug fixes
 
