@@ -488,6 +488,7 @@ Configuration items related to performance.
 - Default value: `3600000`
 - Unit: Millisecond
 - The transaction that holds locks longer than this time can only be committed or rolled back. The commit might not be successful.
+- For transactions executed using the [`"bulk"` DML mode](/system-variables.md#tidb_dml_type-new-in-v800), the maximum TTL can exceed the limit of this configuration item. The maximum value is the greater value between this configuration item and 24 hours.
 
 ### `stmt-count-limit`
 
@@ -841,6 +842,7 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 + Determines the transaction mode that the auto-commit transaction uses when the pessimistic transaction mode is globally enabled (`tidb_txn_mode='pessimistic'`). By default, even if the pessimistic transaction mode is globally enabled, the auto-commit transaction still uses the optimistic transaction mode. After enabling `pessimistic-auto-commit` (set to `true`), the auto-commit transaction also uses pessimistic mode, which is consistent with the other explicitly committed pessimistic transactions.
 + For scenarios with conflicts, after enabling this configuration, TiDB includes auto-commit transactions into the global lock-waiting management, which avoids deadlocks and mitigates the latency spike brought by deadlock-causing conflicts.
 + For scenarios with no conflicts, if there are many auto-commit transactions (the specific number is determined by the real scenarios. For example, the number of auto-commit transactions accounts for more than half of the total number of applications), and a single transaction operates a large data volume, enabling this configuration causes performance regression. For example, the auto-commit `INSERT INTO SELECT` statement.
++ When the session-level system variable [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) is set to `"bulk"`, the effect of this configuration in the session is equivalent to setting it to `false`.
 + Default value: `false`
 
 ### constraint-check-in-place-pessimistic <span class="version-mark">New in v6.4.0</span>
