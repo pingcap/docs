@@ -235,11 +235,11 @@ mysql> EXPLAIN SELECT /*+ use_index_merge(t2, idx) */ * FROM t2 WHERE a=1 AND JS
 6 rows in set, 1 warning (0.00 sec)
 ```
 
-If several `json_member_of`, `json_contains` or `json_overlaps` are connected with `OR`/`AND`, they need to meet the following requirements for TiDB to use them to access multi-valued indexes with IndexMerge:
+If several `json_member_of`, `json_contains` or `json_overlaps` are connected with `OR` or `AND`, they need to meet the following requirements for TiDB to use them to access multi-valued indexes with IndexMerge:
 
 - If several conditions are connected with `OR`, each of them needs to be able to be accessed with IndexMerge respectively.
 - If several conditions are connected with `AND`, some of them need to be able to be accessed with IndexMerge respectively. TiDB can only use IndexMerge to access multi-valued indexes with these conditions.
-- All the conditions that are used for the IndexMerge must match the semantic of `OR`/`AND` that connects them.
+- All the conditions that are used for the IndexMerge must match the semantic of `OR` or `AND` that connects them.
     - If `json_contains` is connected with `AND`, it matches the semantic.
     - If `json_overlaps` is connected with `OR`, it matches the semantic.
     - If `json_member_of` is connected with `OR`/`AND`, it matches the semantic.
