@@ -195,7 +195,7 @@ You can run the `tiup dm upgrade` command to upgrade a DM cluster. For example, 
 
 > **Note:**
 >
-> Starting from v8.0.0, DM removes the fixed secret key for encryption and decryption and enables you customize a secret key for encryption and decryption. If encrypted passwords are used in [data source configurations](/dm/dm-source-configuration-file.md) and [migration task configurations](/dm/task-configuration-file-full.md) before the upgrade, you need to refer to the upgrade steps in [Customize a Secret Key for DM Encryption and Decryption](/dm/dm-customized-secret-key.md) for additional operations.
+> Starting from v8.0.0, DM removes the fixed secret key for encryption and decryption and enables you to customize a secret key for encryption and decryption. If encrypted passwords are used in [data source configurations](/dm/dm-source-configuration-file.md) and [migration task configurations](/dm/task-configuration-file-full.md) before the upgrade, you need to refer to the upgrade steps in [Customize a Secret Key for DM Encryption and Decryption](/dm/dm-customized-secret-key.md) for additional operations.
 
 {{< copyable "shell-regular" >}}
 
