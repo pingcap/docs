@@ -435,6 +435,7 @@ If a single `OR` is nested in `AND`, and it needs expansion to correspond to the
 ```sql
 EXPLAIN SELECT /*+ use_index_merge(t6, idx, idx2) */ * FROM t6 WHERE a=1 AND (1 member of (j) OR 2 member of (k));
 ```
+
 ```sql
 +-------------------------------+---------+-----------+-------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
 | id                            | estRows | task      | access object                                         | operator info                                                                                                           |
@@ -452,6 +453,7 @@ If several `OR`s are nested in different places in `AND`, and they need expansio
 ```sql
 EXPLAIN SELECT /*+ use_index_merge(t6, idx, idx2) */ * FROM t6 WHERE a=1 AND (1 member of (j) OR 2 member of (k)) and (b = 1 or b = 2);
 ```
+
 ```sql
 +-------------------------------+---------+-----------+-------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | id                            | estRows | task      | access object                                         | operator info                                                                                                                                                     |
