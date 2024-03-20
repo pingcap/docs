@@ -25,7 +25,7 @@ Because DM no longer uses the fixed secret key starting from v8.0.0, pay attenti
 
 To update the secret key used for encryption and decryption, take the following steps:
 
-1. Update `secret-key-path` in [DM-master configuration file](/dm/dm-master-configuration-file.md).
+1. Update `secret-key-path` in the [DM-master configuration file](/dm/dm-master-configuration-file.md).
 
     > **Note:**
     >
