@@ -126,7 +126,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 
 * Remove some limitations on execution plan cache [#49161](https://github.com/pingcap/tidb/pull/49161) @[mjonss](https://github.com/mjonss) @[qw4990](https://github.com/qw4990) **tw@hfxsd** <!--1622/1585-->
 
-    TiDB supports [execution plan caching](/sql-prepared-plan-cache.md), which can effectively reduce the processing latency of transaction-intensive systems and is important for improving performance. In v8.0.0, TiDB removes several limitations on execution plan cache. Execution plans with the following contents can be cached:
+    TiDB supports [execution plan cache](/sql-prepared-plan-cache.md), which can effectively reduce the processing latency of transaction-intensive systems and is important for improving performance. In v8.0.0, TiDB removes several limitations on execution plan cache. Execution plans with the following contents can be cached:
 
     - [Partitioned tables](/partitioned-table.md)
     - [Generated columns](/generated-columns.md), including objects that depend on generated columns (such as [multi-valued indexes](/choose-index.md#multi-valued-indexes-and-plan-cache))
