@@ -739,6 +739,15 @@ Configuration items related to opentracing.reporter.
 + Default value: `60`
 + Unit: second
 
+### `enable-replica-selector-v2` <span class="version-mark">New in v8.0.0</span>
+
+> **Warning:**
+>
+> This configuration might be deprecated in future versions. **DO NOT** change the value of this configuration.
+
++ Whether to use the replica selector v2 version.
++ Default value: `true`
+
 ## tikv-client.copr-cache <span class="version-mark">New in v4.0.0</span>
 
 This section introduces configuration items related to the Coprocessor Cache feature.
