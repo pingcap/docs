@@ -238,6 +238,21 @@ strategy = ""
 # This parameter is introduced in v7.6.0. The default value is "16KiB". The value must be greater than or equal to `1B`. Note that if you only specify a number (for example, `16`), the unit is Byte instead of KiB.
 # block-size = "16KiB"
 
+# Limit the size of each SQL query executed on downstream TiDB server in Logical Import Mode.
+# This parameter is introduced in v8.0.0.
+# This is the desired length of the VALUES part of each INSERT/REPLACE statement executed in a single transaction.
+# This is not a hard limit; the actual SQL executed may be longer or shorter depending on the actual content imported.
+# The default value is "96KiB", which is optimized for import speed when Lightning is the only client of the cluster.
+# Because of implementation details of Lightning, the value is capped at 96 KiB and larger values are ignored.
+# This value may be decreased to reduce the stress on the cluster due to large transaction.
+# logical-import-batch-size = '96KiB'
+
+# Limit the maximum number of rows inserted per transaction in Logical Import Mode.
+# This parameter is introduced in v8.0.0. The default value is 65,536 rows.
+# When both `logical-import-batch-size` and `logical-import-batch-rows` are defined, the rows will be split in a way to respect both settings.
+# This value may be decreased to reduce the stress on the cluster due to large transaction.
+# logical-import-batch-rows = 65536
+
 [mydumper]
 # Block size for file reading. Keep it longer than the longest string of the data source.
 read-block-size = "64KiB" # default value
