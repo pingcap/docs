@@ -333,7 +333,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 | [`tidb_disable_txn_auto_retry`](/system-variables.md#tidb_disable_txn_auto_retry) | Deprecated | Starting from v8.0.0, this system variable is deprecated, and TiDB no longer supports automatic retries of optimistic transactions. It is recommended to use the [Pessimistic transaction mode](/pessimistic-transaction.md). If you encounter optimistic transaction conflicts, you can capture the error and retry transactions in your application. |
 | `tidb_ddl_version` | Renamed | Controls whether to enable TiDB DDL V2. Starting from v8.0.0, this variable is renamed to [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800). |
 | [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info) | Modified | Adds a control to whether to record the [usage statistics of indexes](/information-schema/information-schema-tidb-index-usage.md). The default value is `ON`. |
-| [`tidb_redact_log`](/system-variables.md#tidb_redact_log) | Modified | Controls how to handle user information in SAL text when logging TiDB logs and slow logs. Values can be `OFF` and `ON`, to support log information in plain text, and masking log information, respectively. To provide a richer way of processing user information in the log, the `MARKER` option is added in v8.0.0 to support marking log information. When you set the variable to `MARKER`, the user information in the log will be marked for processing, and you can decide later whether to desensitize the log information. |
+| [`tidb_redact_log`](/system-variables.md#tidb_redact_log) | Modified | Controls how to handle user information in SAL text when logging TiDB logs and slow logs. Values can be `OFF` and `ON`, to support log information in plain text, and masking log information, respectively. To provide a richer way of processing user information in the log, the `MARKER` option is added in v8.0.0 to support marking log information. |
 | [`div_precision_increment`](/system-variables.md#div_precision_increment-new-in-v800) | Newly added | Controls the number of digits by which to increase the scale of the result of a division operation performed using the `/` operator. This variable is the same as MySQL. |
 | [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) | Newly added | Controls the execution mode of DML statements. The value options are `"standard"` and `"bulk"`. |
 | [`tidb_enable_auto_analyze_priority_queue`](/system-variables.md#tidb_enable_auto_analyze_priority_queue-new-in-v800) | Newly added | Control whether to enable the priority queue to schedule the tasks of automatically collecting statistics. When this variable is enabled, TiDB prioritizes collecting statistics for the tables that most need statistics. |
@@ -397,7 +397,7 @@ We would like to thank the following contributors from the TiDB community:
 - [pingandb](https://github.com/pingandb)
 - [renovate](https://github.com/renovate)
 - [shenqidebaozi](https://github.com/shenqidebaozi)
-- [Smityz ](https://github.com/Smityz)
+- [Smityz](https://github.com/Smityz)
 - [songzhibin97](https://github.com/songzhibin97)
 - [tangjingyu97](https://github.com/tangjingyu97)
 - [Tema](https://github.com/Tema)
