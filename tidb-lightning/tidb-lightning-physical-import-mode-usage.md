@@ -34,13 +34,13 @@ data-source-dir = "/data/my_database"
 # - "": TiDB Lightning does not detect or handle conflicting data. If the source file contains conflicting primary or unique key records, the subsequent step reports an error.
 # - "error": when detecting conflicting primary or unique key records in the imported data, TiDB Lightning terminates the import and reports an error.
 # - "replace": when encountering conflicting primary or unique key records, TiDB Lightning retains the latest data and overwrites the old data.
-#              The conflict data are recorded in the `lightning_task_info.conflict_error_v2` table and the `conflict_records` table of the target TiDB cluster.
+#              The conflict data are recorded in the `lightning_task_info.conflict_error_v2` table (recording conflict data detected by conflict post checks) and the `conflict_records` table (recording conflict data detected by conflict prechecks) of the target TiDB cluster.
 #              You can manually insert the correct records into the target table based on your business requirements.
 #              Note that the target TiKV must be v5.2.0 or later versions.
 # - "ignore": when encountering conflicting primary or unique key records, TiDB Lightning retains the old data and ignores the new data.
 # The new version strategy cannot be used together with tikv-importer.duplicate-resolution (the old version of conflict detection).
 strategy = ""
-# Controls whether TiDB Lightning checks conflicts before the import. The default value is false, which means that TiDB Lightning only checks conflicts after the import. If you set it to true, TiDB Lightning checks conflicts both before and after the import.
+# Controls whether to enable conflict prechecks, which check conflicts in the data before importing it to TiDB. In scenarios where the ratio of conflict records is greater than or equal to 1%, it is recommended to enable conflict prechecks for better performance in conflict detection. In other scenarios, it is recommended to disable it. The default value is false, indicating that TiDB Lightning only checks conflicts after the import. If you set it to true, TiDB Lightning checks conflicts both before and after the import. This parameter is experimental.
 # precheck-conflict-before-import = false
 # threshold = 9223372036854775807
 # max-record-rows = 100
@@ -113,7 +113,7 @@ The meanings of configuration values are as follows:
 | :-- | :-- | :-- |
 | `"replace"` | Retaining the latest data and overwrites the old data | `REPLACE INTO ...` |
 | `"error"` | Terminating the import and reporting an error. | `INSERT INTO ...` |
-| `""` | TiDB Lightning does not detect or handle conflicting data. If data with primary and unique key conflicts exists, the subsequent step reports an error. |  None   |
+| `""` | TiDB Lightning does not detect or handle conflicting data. If data with primary and unique key conflicts exists, the subsequent checksum step reports an error. |  None   |
 
 > **Note:**
 >
@@ -126,7 +126,7 @@ The new version of conflict detection has the following limitations:
 - Before importing, TiDB Lightning prechecks potential conflicting data by reading all data and encoding it. During the detection process, TiDB Lightning uses `tikv-importer.sorted-kv-dir` to store temporary files. After the detection is complete, TiDB Lightning retains the results for import phase. This introduces additional overhead for time consumption, disk space usage, and API requests to read the data.
 - The new version of conflict detection only works in a single node, and does not apply to parallel imports and scenarios where the `disk-quota` parameter is enabled.
 
-The new version of conflict detection controls whether to enable prechecks via the `precheck-conflict-before-import` parameter. In cases where the original data has a lot of conflicting data, the total time consumed by conflict detection before and after the import is less compared to the old version. Therefore, it is recommended to enable prechecks in non-parallel import tasks where the data contains conflicting data and there is sufficient local disk space.
+The new version of conflict detection controls whether to enable prechecks via the `precheck-conflict-before-import` parameter. In cases where the original data has a lot of conflicting data, the total time consumed by conflict detection before and after the import is less compared to the old version. Therefore, it is recommended to enable prechecks in scenarios where the ratio of conflict records is greater than or equal to 1% and there is sufficient local disk space.
 
 ### The old version of conflict detection (deprecated in v8.0.0)
 
