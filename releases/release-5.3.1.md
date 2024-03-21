@@ -20,7 +20,7 @@ TiDB version: 5.3.1
 
 - TiDB
 
-    - Optimize the mapping logic of user login mode to make the logging more MySQL-compatible [#30450](https://github.com/pingcap/tidb/issues/32648)
+    - Optimize the mapping logic of user login mode to make the logging more MySQL-compatible [#32648](https://github.com/pingcap/tidb/issues/32648)
 
 - TiKV
 

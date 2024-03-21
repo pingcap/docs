@@ -138,7 +138,7 @@ enable-table-across-nodes = false
 # ]
 
 # The protocol configuration item specifies the protocol format used for encoding messages.
-# When the downstream is Kafka, the protocol can only be canal-json, avro, or open-protocol.
+# When the downstream is Kafka, the protocol can only be canal-json, avro, debezium, or open-protocol.
 # When the downstream is Pulsar, the protocol can only be canal-json.
 # When the downstream is a storage service, the protocol can only be canal-json or csv.
 # Note: This configuration item only takes effect if the downstream is Kafka, Pulsar, or a storage service.
@@ -161,7 +161,7 @@ delete-only-output-handle-key-columns = false
 # encoder-concurrency = 32
 
 # Specifies whether to enable kafka-sink-v2 that uses the kafka-go sink library.
-# Note: This configuration item only takes effect if the downstream is MQ.
+# Note: This configuration item is experimental, and only takes effect if the downstream is MQ.
 # The default value is false.
 # enable-kafka-sink-v2 = false
 
