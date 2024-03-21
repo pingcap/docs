@@ -1658,7 +1658,7 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 + The cache size of a Blob file
 + Default value: `"0GB"`
 + Minimum value: `0`
-+ Recommended value: `0`. Starting from v8.0.0, TiKV introduces the `shared-blob-cache` configuration item and enables it by default, so there is no need to set `blob-cache-size` separately. The `blob-cache-size` configuration only takes effect when `shared-blob-cache` is set to `false`.
++ Recommended value: `0`. Starting from v8.0.0, TiKV introduces the `shared-blob-cache` configuration item and enables it by default, so there is no need to set `blob-cache-size` separately. The configuration of `blob-cache-size` only takes effect when `shared-blob-cache` is set to `false`.
 + Unit: KB|MB|GB
 
 ### `shared-blob-cache` (New in v8.0.0)
