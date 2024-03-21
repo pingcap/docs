@@ -243,7 +243,7 @@ If several `json_member_of`, `json_contains` or `json_overlaps` are connected wi
     - If `json_contains` is connected with `AND`, it matches the semantic.
     - If `json_overlaps` is connected with `OR`, it matches the semantic.
     - If `json_member_of` is connected with `OR` or `AND`, it matches the semantic.
-    - If `json_contains` that contains multiple values is connected with `OR`, or `json_overlaps` that contains multiple values is connected with `AND`, they don't match the semantic, but they match the semantic if they only contain one value.
+    - If `json_contains` that contains multiple values is connected with `OR`, or `json_overlaps` that contains multiple values is connected with `AND`, they do not match the semantic, but they match the semantic if they only contain one value.
 
 For example:
 
