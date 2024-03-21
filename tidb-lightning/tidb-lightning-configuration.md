@@ -135,7 +135,7 @@ driver = "file"
 strategy = ""
 # Controls whether to enable conflict prechecks, which check conflicts in the data before importing it to TiDB. In scenarios where the ratio of conflict records is greater than or equal to 1%, it is recommended to enable conflict prechecks for better performance in conflict detection. In other scenarios, it is recommended to disable it. The default value is false, indicating that TiDB Lightning only checks conflicts after the import. If you set it to true, TiDB Lightning checks conflicts both before and after the import. This parameter is experimental, and it can be used only in the physical import mode.
 # precheck-conflict-before-import = false
-# Controls the maximum number of conflict errors that can be handled when strategy is "replace" or "ignore". You can set it only when strategy is "replace" or "ignore". The default value is 9223372036854775807, which means that almost all errors are tolerant. 
+# Controls the maximum number of conflict errors that can be handled when the strategy is "replace" or "ignore". You can set it only when the strategy is "replace" or "ignore". The default value is 9223372036854775807, which means that almost all errors are tolerant. 
 # threshold = 9223372036854775807
 # Controls the maximum number of records in the `conflict_records` table. The default value is 100. In the physical import mode, if the strategy is "replace", the conflict records that are overwritten are recorded. In the logical import mode, if the strategy is "ignore", the conflict records that are ignored are recorded; if the strategy is "replace", the conflict records are recorded, but the conflict records that are overwritten are not recorded.
 # max-record-rows = 100

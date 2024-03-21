@@ -108,7 +108,7 @@ The meanings of configuration values are as follows:
 
 | Strategy | Default behavior of conflicting data | The corresponding SQL statement |
 | :-- | :-- | :-- |
-| `"replace"` | Retaining the latest data and overwrites the old data | `REPLACE INTO ...` |
+| `"replace"` | Retaining the latest data and overwriting the old data | `REPLACE INTO ...` |
 | `"error"` | Terminating the import and reporting an error. | `INSERT INTO ...` |
 | `""` | TiDB Lightning does not detect or handle conflicting data. If data with primary and unique key conflicts exists, the subsequent checksum step reports an error. |  None   |
 
