@@ -154,9 +154,13 @@ To fully disable Titan for all existing and future data, you can follow these st
 
     > **Note:**
     >
-    > When there is insufficient disk space to accommodate both Titan and RocksDB data, it is recommended to use the default value of `0.5` for [`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio). In general, the default value is recommended when available disk space is less than 50%. This is because when `discardable-ratio = 1.0`, the RocksDB data continues to increase. At the same time, the recycling of existing blob files in Titan requires all the data in that file to be converted to RocksDB, which is a slow process. However, if the disk size is large enough, setting `discardable-ratio = 1.0` can reduce the GC of the blob file itself during compaction, which saves bandwidth. When disk space is insufficient, executing `tikv-ctl compact cluster` might result in the entire cluster running out of available space and thus unable to write data.
+    > When there is insufficient disk space to accommodate both Titan and RocksDB data, it is recommended to use the default value of `0.5` for [`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio). In general, the default value is recommended when available disk space is less than 50%. This is because when `discardable-ratio = 1.0`, the RocksDB data continues to increase. At the same time, the recycling of existing blob files in Titan requires all the data in that file to be converted to RocksDB, which is a slow process. However, if the disk size is large enough, setting `discardable-ratio = 1.0` can reduce the GC of the blob file itself during compaction, which saves bandwidth.
 
 2. (Optional) Perform a full compaction using tikv-ctl. This process will consume a large amount of I/O and CPU resources.
+
+    > **Warning:**
+    >
+    > When disk space is insufficient, executing the following command might result in the entire cluster running out of available space and thus unable to write data.
 
     ```bash
     tikv-ctl --pd <PD_ADDR> compact-cluster --bottommost force
