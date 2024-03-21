@@ -248,7 +248,7 @@ strategy = ""
 # logical-import-batch-size = '96KiB'
 
 # Limit the maximum number of rows inserted per transaction in Logical Import Mode.
-# This parameter is introduced in v8.0.0. The default value is 65,536 rows.
+# This parameter is introduced in v8.0.0. The default value is `65536` rows.
 # When both `logical-import-batch-size` and `logical-import-batch-rows` are defined, the parameter whose value reaches the threshold first will take effect.
 # You can decrease this value to reduce the stress on the cluster due to large transactions.
 # logical-import-batch-rows = 65536
