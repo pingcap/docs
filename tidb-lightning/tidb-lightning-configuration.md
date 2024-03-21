@@ -238,7 +238,7 @@ strategy = ""
 # This parameter is introduced in v7.6.0. The default value is "16KiB". The value must be greater than or equal to `1B`. Note that if you only specify a number (for example, `16`), the unit is Byte instead of KiB.
 # block-size = "16KiB"
 
-# Limit the size of each SQL query executed on the downstream TiDB server in Logical Import Mode.
+# In Logical Import Mode, this parameter controls the size of each SQL query executed on the downstream TiDB server.
 # This parameter is introduced in v8.0.0.
 # This is the desired size of the VALUES part of each INSERT or REPLACE statement executed in a single transaction.
 # This is not a hard limit. The actual SQL executed might be longer or shorter, depending on the actual content imported.
@@ -247,7 +247,7 @@ strategy = ""
 # You can decrease this value to reduce the stress on the cluster due to large transactions.
 # logical-import-batch-size = '96KiB'
 
-# Limit the maximum number of rows inserted per transaction in Logical Import Mode.
+# In Logical Import Mode, this parameter controls the maximum number of rows inserted per transaction.
 # This parameter is introduced in v8.0.0. The default value is `65536` rows.
 # When both `logical-import-batch-size` and `logical-import-batch-rows` are defined, the parameter whose value reaches the threshold first will take effect.
 # You can decrease this value to reduce the stress on the cluster due to large transactions.
