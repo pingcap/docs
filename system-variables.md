@@ -1712,7 +1712,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Unit: Threads
 - This variable is used to set the concurrency of the DDL operation in the `re-organize` phase.
 
-### `tidb_fast_create_table` <span class="version-mark">New in v8.0.0</span>
+### `table_enable_fast_create_table` <span class="version-mark">New in v8.0.0</span>
 
 > **Warning:**
 >

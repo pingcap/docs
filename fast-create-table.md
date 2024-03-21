@@ -25,18 +25,18 @@ You can now use TiDB accelerates table creation only in the [`CREATE TABLE`](/sq
 
 ## Use TiDB Accelerates Table Creation
 
-You can enable or disable TiDB accelerates table creation by specifying the value of the system variable [`tidb_fast_create_table`](/system-variables.md#tidb_fast_create_table-new-in-v800) .
+You can enable or disable TiDB accelerates table creation by specifying the value of the system variable [`table_enable_fast_create_table`](/system-variables.md#table_enable_fast_create_table-new-in-v800) .
 
 To enable TiDB accelerates table creation, set the value of this variable to `ON`:
 
 ```sql
-SET GLOBAL tidb_fast_create_table = ON;
+SET GLOBAL table_enable_fast_create_table = ON;
 ```
 
 To disable TiDB accelerates table creation, set the value of this variable to `OFF`:
 
 ```sql
-SET GLOBAL tidb_fast_create_table = OFF;
+SET GLOBAL table_enable_fast_create_table = OFF;
 ```
 
 ## Implementation principle
