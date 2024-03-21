@@ -110,7 +110,7 @@ If you use the `cdc cli changefeed create` command without specifying the `-conf
 
 ## Does TiCDC support outputting data changes in the Canal protocol?
 
-Yes. Note that for Canal protocol, TiCDC only support the JSON output format, while the protobuf format is not officially supported yet. To enable Canal output, specify the protocol as `canal-json` in the `--sink-uri` parameter. For example:
+Yes. Note that for the Canal protocol, TiCDC only supports the JSON output format, while the protobuf format is not officially supported yet. To enable Canal output, specify `protocol` as `canal-json` in the `--sink-uri` configuration. For example:
 
 {{< copyable "shell-regular" >}}
 
