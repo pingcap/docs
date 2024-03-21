@@ -152,7 +152,18 @@ strategy = ""
 # but the premise is that no data exists in the target table, that is, all data can only be imported by TiDB Lightning.
 # Note that this parameter is only used in scenarios where the target table is empty.
 # parallel-import = false
-
+# Starting from v8.0.0, the `duplicate-resolution` parameter is deprecated. For more information, see <https://docs.pingcap.com/tidb/dev/tidb-lightning-physical-import-mode-usage##the-old-version-of-conflict-detection-deprecated-in-v800>.
+# Whether to detect and resolve duplicate records (unique key conflict) in the physical import mode.
+# The following resolution algorithms are supported:
+#  - none: does not detect duplicate records, which has the best performance of the two algorithms.
+#          But if there are duplicate records in the data source, it might lead to inconsistent data in the target TiDB.
+#  - remove: if there are primary key or unique key conflicts between the inserting data A and B,
+#            A and B will be removed from the target table and recorded
+#            in the `lightning_task_info.conflict_error_v1` table in the target TiDB.
+#            You can manually insert the correct records into the target table based on your business requirements.
+#            Note that the target TiKV must be v5.2.0 or later versions; otherwise it falls back to 'none'.
+# The default value is 'none'.
+# duplicate-resolution = 'none'
 # The maximum number of KV pairs in one request when sending data to TiKV in physical import mode.
 # Starting from v7.2.0, this parameter is deprecated and no longer takes effect after it is set.
 # If you want to adjust the amount of data sent to TiKV in one request, use the `send-kv-size` parameter instead.
