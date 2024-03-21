@@ -129,7 +129,7 @@ driver = "file"
 # - "": in the physical import mode, TiDB Lightning does not detect or handle conflicting data. If the source file contains conflicting primary or unique key records, the subsequent step reports an error. In the logical import mode, TiDB Lightning converts the "" strategy to the "error" strategy for processing.
 # - "error": when detecting conflicting primary or unique key records in the imported data, TiDB Lightning terminates the import and reports an error.
 # - "replace": when encountering conflicting primary or unique key records, TiDB Lightning retains the latest data and overwrites the old data.
-#              The conflict data are recorded in the `lightning_task_info.conflict_error_v2` table (recording conflict data detected by conflict post checks in the physical import mode) and the `conflict_records` table (recording conflict data detected by conflict prechecks in both logical and physical import modes) of the target TiDB cluster.
+#              The conflicting data are recorded in the `lightning_task_info.conflict_error_v2` table (recording conflicting data detected by conflict post checks in the physical import mode) and the `conflict_records` table (recording conflicting data detected by conflict prechecks in both logical and physical import modes) of the target TiDB cluster.
 #              You can manually insert the correct records into the target table based on your application requirements. Note that the target TiKV must be v5.2.0 or later versions.
 # - "ignore": when encountering conflicting primary or unique key records, TiDB Lightning retains the old data and ignores the new data. This option can only be used in the logical import mode.
 strategy = ""
