@@ -248,7 +248,7 @@ Refer to [Notes for compatibility](/ticdc/manage-ticdc.md#notes-for-compatibilit
 
 ## Does TiCDC support outputting data changes in the Canal format?
 
-Yes. Note that for the Canal protocol, TiCDC only supports the JSON output format, while the protobuf format is not officially supported yet. To enable Canal output, specify `protocol` as `canal-json` in the `--sink-uri` configuration. For example:
+Yes. Note that for the Canal protocol, TiCDC only supports the JSON output format (experimental), while the protobuf format is not officially supported yet. To enable Canal output, specify `protocol` as `canal-json` in the `--sink-uri` configuration. For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -358,7 +358,7 @@ If you encounter an error above, it is recommended to use BR to restore the incr
 
 ## After I upgrade the TiCDC cluster to v4.0.8, the `[CDC:ErrKafkaInvalidConfig]Canal requires old value to be enabled` error is reported when I execute a changefeed
 
-Since v4.0.8, if the `canal-json` or `maxwell` protocol is used for output in a changefeed, TiCDC enables the old value feature automatically. However, if you have upgraded TiCDC from an earlier version to v4.0.8 or later, when the changefeed uses the `canal-json` or `maxwell` protocol and the old value feature is disabled, this error is reported.
+Since v4.0.8, if the `canal-json` or `maxwell` protocol is used for output in a changefeed, TiCDC enables the old value feature automatically. However, if you have upgraded TiCDC from an earlier version to v4.0.8 or later, when the changefeed uses the `canal-json` (experimental) or `maxwell` protocol and the old value feature is disabled, this error is reported.
 
 To fix the error, take the following steps:
 
