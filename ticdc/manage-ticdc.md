@@ -214,7 +214,7 @@ The following are descriptions of parameters and parameter values that can be co
 | `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `64MB` by default) |
 | `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default)                       |
 | `compression` | The compression algorithm used when sending messages (value options are `none`, `lz4`, `gzip`, `snappy`, and `zstd`; `none` by default). |
-| `protocol` | The protocol with which messages are output to Kafka. The value options are `default`, `avro`, and `maxwell` (`default` by default)    |
+| `protocol` | The protocol with which messages are output to Kafka. The value options are `default`, `canal-json`, `avro`, and `maxwell` (`default` by default)    |
 | `auto-create-topic` | Determines whether TiCDC creates the topic automatically when the `topic-name` passed in does not exist in the Kafka cluster (optional, `true` by default) |
 | `max-batch-size` | New in v4.0.9. If the message protocol supports outputting multiple data changes to one Kafka message, this parameter specifies the maximum number of data changes in one Kafka message. It currently takes effect only when Kafka's `protocol` is `default`. (optional, `16` by default) |
 | `ca` | The path of the CA certificate file needed to connect to the downstream Kafka instance (optional)  |
@@ -581,7 +581,7 @@ dispatchers = [
     {matcher = ['test3.*', 'test4.*'], dispatcher = "rowid"},
 ]
 # For the sink of MQ type, you can specify the protocol format of the message.
-# Currently the following protocols are supported: default, avro, and maxwell. The default protocol is TiCDC Open Protocol.
+# Currently the following protocols are supported: default, canal-json, avro, and maxwell. The default protocol is TiCDC Open Protocol.
 protocol = "default"
 
 ```
