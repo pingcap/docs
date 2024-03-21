@@ -113,21 +113,13 @@ Yes. Note that for the Canal protocol, TiCDC only supports the JSON output forma
 {{< copyable "shell-regular" >}}
 
 ```shell
-<<<<<<< HEAD
-cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&protocol=canal" --config changefeed.toml
-=======
-cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&protocol=canal-json" --config changefeed.toml
->>>>>>> 27c62b50da (ticdc: remove canal protocol document (#16773))
+cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&protocol=canal-json" --config changefeed.toml
 ```
 
 > **Note:**
 >
 > * This feature is introduced in TiCDC 4.0.2.
-<<<<<<< HEAD
-> * TiCDC currently supports outputting data changes in the Canal format only to MQ sinks such as Kafka and Pulsar.
-=======
-> * TiCDC currently supports outputting data changes in the Canal-JSON format only to MQ sinks such as Kafka.
->>>>>>> 27c62b50da (ticdc: remove canal protocol document (#16773))
+> * TiCDC currently supports outputting data changes in the Canal-JSON format only to MQ sinks such as Kafka and Pulsar.
 
 For more information, refer to [Create a replication task](/ticdc/manage-ticdc.md#create-a-replication-task).
 
