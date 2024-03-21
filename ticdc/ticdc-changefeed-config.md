@@ -138,7 +138,7 @@ enable-table-across-nodes = false
 # ]
 
 # The protocol configuration item specifies the protocol format used for encoding messages.
-# When the downstream is Kafka, protocol can be canal-json, avro, debezium, open-protocol, or simple.
+# When the downstream is Kafka, the protocol can be canal-json, avro, debezium, open-protocol, or simple.
 # When the downstream is Pulsar, the protocol can only be canal-json.
 # When the downstream is a storage service, the protocol can only be canal-json or csv.
 # Note: This configuration item only takes effect if the downstream is Kafka, Pulsar, or a storage service.
