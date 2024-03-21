@@ -328,6 +328,7 @@
   - [Use Load Base Split](/configure-load-base-split.md)
   - [Use Store Limit](/configure-store-limit.md)
   - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
+  - [Use PD Microservices](/pd-microservices.md)
 - TiDB Tools
   - [Overview](/ecosystem-tool-user-guide.md)
   - [Use Cases](/ecosystem-tool-user-case.md)
