@@ -105,20 +105,20 @@ If you use the `cdc cli changefeed create` command without specifying the `-conf
 - Replicates all tables except system tables
 - Only replicates tables that contain [valid indexes](/ticdc/ticdc-overview.md#best-practices)
 
-## Does TiCDC support outputting data changes in the Canal format?
+## Does TiCDC support outputting data changes in the Canal protocol?
 
-Yes. To enable Canal output, specify the protocol as `canal` in the `--sink-uri` parameter. For example:
+Yes. Note that for the Canal protocol, TiCDC only supports the JSON output format, while the protobuf format is not officially supported yet. To enable Canal output, specify `protocol` as `canal-json` in the `--sink-uri` configuration. For example:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&protocol=canal" --config changefeed.toml
+cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&protocol=canal-json" --config changefeed.toml
 ```
 
 > **Note:**
 >
 > * This feature is introduced in TiCDC 4.0.2.
-> * TiCDC currently supports outputting data changes in the Canal format only to MQ sinks such as Kafka.
+> * TiCDC currently supports outputting data changes in the Canal-JSON format only to MQ sinks such as Kafka.
 
 For more information, refer to [TiCDC changefeed configurations](/ticdc/ticdc-changefeed-config.md).
 
