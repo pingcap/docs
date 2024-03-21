@@ -734,11 +734,20 @@ Configuration items related to opentracing.reporter.
 
 > **Warning:**
 >
-> This configuration might be deprecated in future versions. **DO NOT** change the value of this configuration.
+> This configuration parameter might be deprecated in future versions. **DO NOT** change the value of it.
 
 + The timeout of a single Coprocessor request.
 + Default value: `60`
 + Unit: second
+
+### `enable-replica-selector-v2` <span class="version-mark">New in v8.0.0</span>
+
+> **Warning:**
+>
+> This configuration parameter might be deprecated in future versions. **DO NOT** change the value of it.
+
++ Whether to use the new version of the Region replica selector when sending RPC requests to TiKV.
++ Default value: `true`
 
 ## tikv-client.copr-cache <span class="version-mark">New in v4.0.0</span>
 
