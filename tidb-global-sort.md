@@ -11,7 +11,7 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 > **Note:**
 >
 > - Currently, the Global Sort process consumes a large amount of computing and memory resources of TiDB nodes. In scenarios such as adding indexes online while user business applications are running, it is recommended to add new TiDB nodes to the cluster and set the [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) variable of these nodes to `"background"`. In this way, the distributed framework schedules tasks to these nodes, isolating the workload from other TiDB nodes to reduce the impact of executing backend tasks such as `ADD INDEX` and `IMPORT INTO` on user business applications.
-> - When the Global Sort feature is used, it is recommended that each TiDB node is equipped with at least 16 cores of CPU and 32 GB of memory to avoid OOM.
+> - When the Global Sort feature is used, it is recommended to use TiDB nodes with at least 16 cores of CPU and 32 GiB of memory to avoid OOM.
 
 > **Note:**
 >
@@ -21,7 +21,7 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 
 The TiDB Global Sort feature enhances the stability and efficiency of data import and DDL (Data Definition Language) operations. It serves as a general operator in the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md), providing a global sort service on cloud.
 
-Currently, the Global Sort feature supports using Amazon S3 as cloud storage. In future releases, it will be extended to support multiple shared storage interfaces, such as POSIX, enabling seamless integration with different storage systems. This flexibility enables efficient and adaptable data sorting for various use cases.
+Currently, the Global Sort feature supports using Amazon S3 as cloud storage.
 
 ## Use cases
 
