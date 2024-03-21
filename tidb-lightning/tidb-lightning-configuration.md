@@ -240,7 +240,7 @@ strategy = ""
 
 # Limit the size of each SQL query executed on the downstream TiDB server in Logical Import Mode.
 # This parameter is introduced in v8.0.0.
-# This is the desired length of the VALUES part of each INSERT or REPLACE statement executed in a single transaction.
+# This is the desired size of the VALUES part of each INSERT or REPLACE statement executed in a single transaction.
 # This is not a hard limit. The actual SQL executed might be longer or shorter, depending on the actual content imported.
 # The default value is "96KiB", which is optimized for import speed when TiDB Lightning is the only client of the cluster.
 # Because of implementation details of TiDB Lightning, the value is capped at 96 KiB. Larger values are ignored.
