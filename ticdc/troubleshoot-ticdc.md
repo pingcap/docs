@@ -248,7 +248,7 @@ Refer to [Notes for compatibility](/ticdc/manage-ticdc.md#notes-for-compatibilit
 
 ## Does TiCDC support outputting data changes in the Canal protocol?
 
-Yes. Note that for the Canal protocol, TiCDC only supports the JSON output format (experimental), while the protobuf format is not officially supported yet. To enable Canal output, specify `protocol` as `canal-json` in the `--sink-uri` configuration. For example:
+Yes. Note that it is experimental. For the Canal protocol, TiCDC only supports the JSON output format, while the protobuf format is not officially supported yet. To enable Canal output, specify `protocol` as `canal-json` in the `--sink-uri` configuration. For example:
 
 {{< copyable "shell-regular" >}}
 
