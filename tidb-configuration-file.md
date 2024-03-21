@@ -733,7 +733,7 @@ Configuration items related to opentracing.reporter.
 
 > **Warning:**
 >
-> This configuration might be deprecated in future versions. **DO NOT** change the value of this configuration.
+> This configuration parameter might be deprecated in future versions. **DO NOT** change the value of it.
 
 + The timeout of a single Coprocessor request.
 + Default value: `60`
