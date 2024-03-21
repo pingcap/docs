@@ -1725,7 +1725,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `OFF`
 - This variable is used to control whether to enable [TiDB Accerates Table Creation](/fast-create-table.md).
 - Starting from v8.0.0, TiDB supports accelerating table creation by the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) statement.
-- This feature is controlled in v7.6.0 by [`tidb_ddl_version`](https://docs.pingcap.com/tidb/v7.6/system-variables#tidb_ddl_version-new-in-v760).
+- In v7.6.0, this feature is controlled by [`tidb_ddl_version`](https://docs.pingcap.com/tidb/v7.6/system-variables#tidb_ddl_version-new-in-v760).
 
 ### tidb_default_string_match_selectivity <span class="version-mark">New in v6.2.0</span>
 
