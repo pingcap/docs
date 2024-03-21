@@ -138,7 +138,7 @@ enable-table-across-nodes = false
 # ]
 
 # The protocol configuration item specifies the protocol format used for encoding messages.
-# When the downstream is Kafka, the protocol can only be canal-json, avro, debezium, or open-protocol.
+# When the downstream is Kafka, the protocol can be the canal-json, avro, debezium, open, or simple protocol.
 # When the downstream is Pulsar, the protocol can only be canal-json.
 # When the downstream is a storage service, the protocol can only be canal-json or csv.
 # Note: This configuration item only takes effect if the downstream is Kafka, Pulsar, or a storage service.
@@ -202,7 +202,7 @@ enable-partition-separator = true
 # send-bootstrap-interval-in-sec = 120
 
 # send-bootstrap-in-msg-count controls the message interval for sending bootstrap, in message count.
-# The default value is 10000, which means that a bootstrap message is sent every 10000 row changes for each table.
+# The default value is 10000, which means that a bootstrap message is sent every 10000 row changed messages for each table.
 # send-bootstrap-in-msg-count = 10000
 # Note: If you want to disable the sending of bootstrap messages, set both send-bootstrap-interval-in-sec and send-bootstrap-in-msg-count to 0.
 

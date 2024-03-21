@@ -31,7 +31,7 @@ protocol = "simple"
 send-bootstrap-interval-in-sec = 120
 
 # send-bootstrap-in-msg-count controls the message interval for sending bootstrap, in message count.
-# The default value is 10000, which means that a bootstrap message is sent every 10000 row changes for each table.
+# The default value is 10000, which means that a bootstrap message is sent every 10000 row changed messages for each table.
 send-bootstrap-in-msg-count = 10000
 # Note: If you want to disable the sending of bootstrap messages, set both send-bootstrap-interval-in-sec and send-bootstrap-in-msg-count to 0.
 
@@ -50,12 +50,6 @@ encoding-format = "json"
 
 The TiCDC Simple protocol has the following message types.
 
-DML:
-
-- `INSERT`: the inserting event.
-- `UPDATE`: the updating event.
-- `DELETE`: the deleting event.
-
 DDL:
 
 - `CREATE`: the creating table event.
@@ -67,6 +61,12 @@ DDL:
 - `ALTER`: the altering table event, including adding columns, deleting columns, modifying column types, and other `ALTER TABLE` statements supported by TiCDC.
 - `QUERY`: other DDL events.
 
+DML:
+
+- `INSERT`: the inserting event.
+- `UPDATE`: the updating event.
+- `DELETE`: the deleting event.
+
 Other:
 
 - `WATERMARK`: equal to the TSO in the upstream TiDB cluster. Containing a 64-bit timestamp, the `WATERMARK` event is used to mark the table replication progress. All events earlier than the watermark have been sent to the downstream.
@@ -74,7 +74,7 @@ Other:
 
 ## Message format
 
-In the Simple protocol, each message contains only one event. The Simple protocol supports encoding messages in JSON and Avro formats. This document uses JSON format as an example. For Avro format messages, their fields and meanings are the same as those in JSON format messages, but the encoding format is different. For more information, see the [Avro schema definition](#avro-schema-definition).
+In the Simple protocol, each message contains only one event. The Simple protocol supports encoding messages in JSON and Avro formats. This document uses JSON format as an example. For Avro format messages, their fields and meanings are the same as those in JSON format messages, but the encoding format is different. For details about the Avro schema format, see [Simple Protocol Avro Schema](https://github.com/pingcap/tiflow/blob/master/pkg/sink/codec/simple/message.json).
 
 ### DDL
 
@@ -479,30 +479,30 @@ The fields in the preceding JSON data are explained as follows:
 
 ### DDL
 
-- Generation time: The DDL event is sent after all transactions before this DDL event have been sent.
-- Destination: The DDL event is sent to all partitions of the corresponding topic.
+- Generation time: TiCDC sends DDL events after all transactions before this DDL event have been sent.
+- Destination: TiCDC sends DDL events to all partitions of the corresponding topic.
 
 ### DML
 
-- Generation time: The DML event is sent in the order of the `commitTs` of the transaction.
-- Destination: The DML event is sent to the corresponding partition of the corresponding topic according to the user-configured dispatch rules.
+- Generation time: TiCDC sends DML events in the order of the `commitTs` of the transaction.
+- Destination: TiCDC sends DDL events to the corresponding partition of the corresponding topic according to the user-configured dispatch rules.
 
 ### WATERMARK
 
-- Generation time: The `WATERMARK` event is sent periodically to mark the replication progress of a changefeed. The current interval is 1 second.
-- Destination: The `WATERMARK` event is sent to all partitions of the corresponding topic.
+- Generation time: TiCDC sends `WATERMARK` events periodically to mark the replication progress of a changefeed. The current interval is 1 second.
+- Destination: TiCDC sends `WATERMARK` events to all partitions of the corresponding topic.
 
 ### BOOTSTRAP
 
 - Generation time:
     - After creating a new changefeed, before the first DML event of a table is sent, TiCDC sends a `BOOTSTRAP` event to the downstream to build the table schema.
-    - Additionally, the `BOOTSTRAP` event is sent periodically to allow newly joined consumers to build the table schema. The default interval is 120 seconds or every 10000 messages. You can adjust the sending interval by configuring the `send-bootstrap-interval-in-sec` and `send-bootstrap-in-msg-count` parameters in the sink configuration.
+    - Additionally, TiCDC sends `BOOTSTRAP` events periodically to allow newly joined consumers to build the table schema. The default interval is 120 seconds or every 10000 messages. You can adjust the sending interval by configuring the `send-bootstrap-interval-in-sec` and `send-bootstrap-in-msg-count` parameters in the sink configuration.
     - If a table does not receive any new DML messages within 30 minutes, the table is considered inactive. TiCDC stops sending `BOOTSTRAP` events for the table until new DML events are received.
-- Destination: By default, the `BOOTSTRAP` event is sent to all partitions of the corresponding topic. You can adjust the sending strategy by configuring the `send-bootstrap-to-all-partition` parameter in the sink configuration.
+- Destination: By default, TiCDC sends `BOOTSTRAP` events to all partitions of the corresponding topic. You can adjust the sending strategy by configuring the `send-bootstrap-to-all-partition` parameter in the sink configuration.
 
 ## Message consumption methods
 
-Because the TiCDC Simple protocol does not include the schema information of the table when sending DML messages, the downstream needs to receive DDL or BOOTSTRAP messages and cache the schema information of the table when consuming DML messages. When receiving a DML message, the downstream can obtain the corresponding table schema information through the table name and `schemaVersion` field in the DML message, and then correctly consume the DML message.
+Because the TiCDC Simple protocol does not include the schema information of the table when sending DML messages, the downstream needs to receive DDL or BOOTSTRAP messages and cache the schema information of the table when consuming DML messages. When receiving a DML message, the downstream can obtain the corresponding table schema information through the `table` name and `schemaVersion` field in the DML message, and then correctly consume the DML message.
 
 The following describes how to correctly consume DML messages based on DDL or BOOTSTRAP messages. According to preceding descriptions, the following information is known:
 
@@ -514,13 +514,13 @@ The consumption methods are introduced in the following two scenarios.
 
 ### Scenario 1: The consumer starts consuming from the beginning
 
-In this scenario, the consumer starts consuming from the beginning, so the consumer can receive all DDL and BOOTSTRAP messages of the table. In this case, the consumer can obtain the schema information of the table through the `table` name and `schemaVersion` field in the DML message. The specific steps are as follows:
+In this scenario, the consumer starts consuming from the beginning, so the consumer can receive all DDL and BOOTSTRAP messages of the table. In this case, the consumer can obtain the schema information of the table through the `table` name and `schemaVersion` field in the DML message. The detailed process is as follows:
 
 ![TiCDC Simple Protocol consumer scene 1](/media/ticdc/ticdc-simple-consumer-1.png)
 
 ### Scenario 2: The consumer starts consuming from the middle
 
-When a new consumer joins the consumer group, it might start consuming from the middle, so it might miss the previous DDL and BOOTSTRAP messages. In this case, the consumer might receive some DML messages before obtaining the schema information of the table. Therefore, the consumer needs to wait for a period of time until it receives the DDL or BOOTSTRAP message to obtain the schema information of the table. Because BOOTSTRAP messages are sent periodically, the consumer can always obtain the schema information of the table within a period of time. The specific steps are as follows:
+When a new consumer joins the consumer group, it might start consuming from the middle, so it might miss the previous DDL and BOOTSTRAP messages. In this case, the consumer might receive some DML messages before obtaining the schema information of the table. Therefore, the consumer needs to wait for a period of time until it receives the DDL or BOOTSTRAP message to obtain the schema information of the table. Because TiCDC sends BOOTSTRAP messages periodically, the consumer can always obtain the schema information of the table within a period of time. The detailed process is as follows:
 
 ![TiCDC Simple Protocol consumer scene 2](/media/ticdc/ticdc-simple-consumer-2.png)
 
