@@ -22,7 +22,8 @@ For TiDB Self-Hosted, `IMPORT INTO` supports importing data from files stored in
 
 ## Restrictions
 
-- For TiDB Self-Hosted, `IMPORT INTO` supports importing data within 10 TiB. If you enable the [Global Sort](/tidb-global-sort.md) feature, `IMPORT INTO` supports importing data within 100 TiB. For [TiDB Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-dedicated), `IMPORT INTO` supports importing data within 50 GiB.
+- For TiDB Self-Hosted, each `IMPORT INTO` task supports importing data within 10 TiB. If you enable the [Global Sort](/tidb-global-sort.md) feature, each `IMPORT INTO` task supports importing data within 40 TiB. 
+- For [TiDB Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-dedicated), if your data to be imported exceeds 500 GiB, it is recommended to use TiDB nodes with at least 16 cores and enable the [Global Sort](/tidb-global-sort.md) feature, then each `IMPORT INTO` task supports importing data within 40 TiB. If your data to be imported is within 500 GiB or if the cores of your TiDB nodes are less than 16, it is not recommended to enable the [Global Sort](/tidb-global-sort.md) feature.
 - `IMPORT INTO` only supports importing data into existing empty tables in the database.
 - `IMPORT INTO` does not support transactions or rollback. Executing `IMPORT INTO` within an explicit transaction (`BEGIN`/`END`) will return an error.
 - The execution of `IMPORT INTO` blocks the current connection until the import is completed. To execute the statement asynchronously, you can add the `DETACHED` option.
