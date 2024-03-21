@@ -10,7 +10,7 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 
 > **Note:**
 >
-> - Currently, the Global Sort process consumes a large amount of computing and memory resources of TiDB nodes. In scenarios such as adding indexes online while user business applications are running, it is recommended to add new TiDB nodes to the cluster and set the [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) variable of these nodes to `"background"`. In this way, the distributed framework schedules tasks to these nodes, reducing the impact of executing backend tasks on user business applications.
+> - Currently, the Global Sort process consumes a large amount of computing and memory resources of TiDB nodes. In scenarios such as adding indexes online while user business applications are running, it is recommended to add new TiDB nodes to the cluster and set the [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) variable of these nodes to `"background"`. In this way, the distributed framework schedules tasks to these nodes, isolating the workload from other TiDB nodes to reduce the impact of executing backend tasks such as 'ADD INDEX' and 'IMPORT INTO' on user business applications.
 > - When the Global Sort feature is used, it is recommended that each TiDB node is equipped with at least 16 cores of CPU and 32 GB of memory to avoid OOM.
 
 > **Note:**
