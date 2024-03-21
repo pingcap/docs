@@ -273,13 +273,13 @@ IMPORT INTO t(id, name, @1) FROM '/path/to/file.csv' WITH skip_rows=1;
 Assume that there are three files named `file-01.csv`, `file-02.csv`, and `file-03.csv` in the `/path/to/` directory. To import these three files into a target table `t` using `IMPORT INTO`, you can execute the following SQL statement:
 
 ```sql
-IMPORT INTO t FROM '/path/to/file-*.csv'
+IMPORT INTO t FROM '/path/to/file-*.csv';
 ```
 
 If you only need to import `file-01.csv` and `file-03.csv` into the target table, execute the following SQL statement:
 
 ```sql
-IMPORT INTO t FROM '/path/to/file-0[13].csv'
+IMPORT INTO t FROM '/path/to/file-0[13].csv';
 ```
 
 #### Import data files from Amazon S3 or GCS
