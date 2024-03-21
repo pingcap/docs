@@ -246,20 +246,20 @@ If you use the `cdc cli changefeed create` command without specifying the `-conf
 
 Refer to [Notes for compatibility](/ticdc/manage-ticdc.md#notes-for-compatibility).
 
-## Does TiCDC support outputting data changes in the Canal format?
+## Does TiCDC support outputting data changes in the Canal protocol?
 
-Yes. To enable Canal output, specify the protocol as `canal` in the `--sink-uri` parameter. For example:
+Yes. Note that it is experimental. For the Canal protocol, TiCDC only supports the JSON output format, while the protobuf format is not officially supported yet. To enable Canal output, specify `protocol` as `canal-json` in the `--sink-uri` configuration. For example:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&protocol=canal" --config changefeed.toml
+cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&protocol=canal-json" --config changefeed.toml
 ```
 
 > **Note:**
 >
 > * This feature is introduced in TiCDC 4.0.2.
-> * TiCDC currently supports outputting data changes in the Canal format only to MQ sinks such as Kafka and Pulsar.
+> * TiCDC currently supports outputting data changes in the Canal-JSON format only to MQ sinks such as Kafka and Pulsar.
 
 For more information, refer to [Create a replication task](/ticdc/manage-ticdc.md#create-a-replication-task).
 
@@ -358,7 +358,7 @@ If you encounter an error above, it is recommended to use BR to restore the incr
 
 ## After I upgrade the TiCDC cluster to v4.0.8, the `[CDC:ErrKafkaInvalidConfig]Canal requires old value to be enabled` error is reported when I execute a changefeed
 
-Since v4.0.8, if the `canal` or `maxwell` protocol is used for output in a changefeed, TiCDC enables the old value feature automatically. However, if you have upgraded TiCDC from an earlier version to v4.0.8 or later, when the changefeed uses the `canal` or `maxwell` protocol and the old value feature is disabled, this error is reported.
+Since v4.0.8, if the `canal-json` or `maxwell` protocol is used for output in a changefeed, TiCDC enables the old value feature automatically. However, if you have upgraded TiCDC from an earlier version to v4.0.8 or later, when the changefeed uses the `canal-json` (experimental) or `maxwell` protocol and the old value feature is disabled, this error is reported.
 
 To fix the error, take the following steps:
 
