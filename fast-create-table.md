@@ -25,18 +25,18 @@ You can now use performance optimization for table creation only in the [`CREATE
 
 ## Use `tidb_enable_fast_create_table` to accelerate table creation
 
-You can enable or disable performance optimization for creating tables by specifying the value of the system variable [`table_enable_fast_create_table`](/system-variables.md#table_enable_fast_create_table-new-in-v800).
+You can enable or disable performance optimization for creating tables by specifying the value of the system variable [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800).
 
 To enable performance optimization for creating tables, set the value of this variable to `ON`:
 
 ```sql
-SET GLOBAL table_enable_fast_create_table = ON;
+SET GLOBAL tidb_enable_fast_create_table = ON;
 ```
 
 To disable performance optimization for creating tables, set the value of this variable to `OFF`:
 
 ```sql
-SET GLOBAL table_enable_fast_create_table = OFF;
+SET GLOBAL tidb_enable_fast_create_table = OFF;
 ```
 
 ## Implementation principle
