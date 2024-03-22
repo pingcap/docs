@@ -107,7 +107,7 @@ You can adjust [`rate-bytes-per-sec`](/tikv-configuration-file.md#rate-bytes-per
 
 ### `shared-blob-cache` (New in v8.0.0)
 
-You can control whether to enable the shared cache for Titan blob files and RocksDB block files through [`shared-blob-cache`](/tikv-configuration-file.md#shared-blob-cache-tidb-new-in-v800). The default value is `true`. When the shared cache is enabled, block files have higher priority. This means that TiKV prioritizes meeting the cache needs of block files and then uses the remaining cache for blob files.
+You can control whether to enable the shared cache for Titan blob files and RocksDB block files through [`shared-blob-cache`](/tikv-configuration-file.md#shared-blob-cache-new-in-v800). The default value is `true`. When the shared cache is enabled, block files have higher priority. This means that TiKV prioritizes meeting the cache needs of block files and then uses the remaining cache for blob files.
 
 ### Titan configuration example
 
