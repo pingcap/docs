@@ -23,7 +23,7 @@ However, for some DDL statements, it is not necessary to strictly follow the onl
 
 You can now use performance optimization for table creation only in the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) statement, and this statement must not include any foreign key constraints.
 
-## Use `table_enable_fast_create_table` to accelerate table creation
+## Use `tidb_enable_fast_create_table` to accelerate table creation
 
 You can enable or disable performance optimization for creating tables by specifying the value of the system variable [`table_enable_fast_create_table`](/system-variables.md#table_enable_fast_create_table-new-in-v800).
 
