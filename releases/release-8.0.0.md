@@ -73,14 +73,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 
 - PD supports the microservice mode [#5766](https://github.com/tikv/pd/issues/5766) @[binshi-bing](https://github.com/binshi-bing) **tw@qiancai** <!--1553/1558-->
 
-    Starting from v8.0.0, PD supports the microservice mode. This mode disaggregates the timestamp allocation and cluster scheduling functions of PD into separate microservices that can be deployed independently, thereby achieving performance scalability for PD and addressing performance bottlenecks of PD in large-scale clusters.
+    Starting from v8.0.0, PD supports the microservice mode. This mode disaggregates the timestamp allocation and cluster scheduling functions of PD into separate microservices that can be deployed independently, thereby enhancing performance scalability for PD and addressing performance bottlenecks of PD in large-scale clusters.
 
-    - TSO microservice: provides monotonically increasing timestamp allocation for the entire cluster.
-    - Scheduling microservice: provides scheduling functions for the entire cluster, including but not limited to load balancing, hot spot handling, replica repair, and replica placement.
+    - `tso` microservice: provides monotonically increasing timestamp allocation for the entire cluster.
+    - `scheduling` microservice: provides scheduling functions for the entire cluster, including but not limited to load balancing, hot spot handling, replica repair, and replica placement.
 
     Each microservice is deployed as an independent process. If you configure more than one replica for a microservice, the microservice automatically implements a primary-secondary fault-tolerant mode to ensure high availability and reliability of the service.
 
-    Currently, PD microservices can only be deployed by TiDB Operator. It is recommended to consider using this mode when PD encounters significant performance bottlenecks that cannot be resolved by scaling up.
+    Currently, PD microservices can only be deployed using TiDB Operator and TiUP playground. It is recommended to consider this mode when PD becomes a significant performance bottleneck that cannot be resolved by scaling up.
 
     For more information, see [documentation](https://docs.pingcap.com/tidb-in-kubernetes/dev/pd-microservices).
 
@@ -95,9 +95,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 
 * BR improves snapshot restore speed by up to 10 times (GA) [#50701](https://github.com/pingcap/tidb/issues/50701) @[3pointer](https://github.com/3pointer) @[Leavrth](https://github.com/Leavrth) **tw@qiancai** <!--1681-->
 
-  Starting from TiDB v8.0.0, the improvement in snapshot restore speed has been generally available (GA) and enabled by default. By implementing various optimizations such as adopting the coarse-grained region scattering algorithm, creating databases and tables in batches, reducing the mutual impact between SST file downloads and ingest operations, and accelerating the restore of table statistics, BR improves snapshot restore speed by up to approximately 10 times while ensuring that the data is sufficiently distributed. This feature fully utilizes all resources of each TiKV node, achieving parallel and rapid restore. According to test results from real-world cases, the data restore speed of a single TiKV node remains stable at 1.2 GB/s, enabling the restore of 100 TB of data within 1 hour.
+  Starting from TiDB v8.0.0, the acceleration of snapshot restore speed has been generally available (GA) and enabled by default. BR improves snapshot restore speed by up to approximately 10 times while ensuring that data is sufficiently distributed, by implementing various optimizations such as adopting the coarse-grained region scattering algorithm, creating databases and tables in batches, reducing the mutual impact between SST file downloads and ingest operations, and accelerating the restore of table statistics. This feature fully utilizes all resources of each TiKV node, achieving parallel and rapid restore. According to test results from real-world cases, the data restore speed of a single TiKV node remains stable at 1.2 GB/s, enabling the restore of 100 TB of data within 1 hour.
 
-  This means that even in high-load environments, BR can fully utilize the resources of each TiKV node, significantly reducing database restore time, enhancing the availability and reliability of the database, and reducing downtime and business losses caused by data loss or system failures.
+  This means that even in high-load environments, BR can fully utilize the resources of each TiKV node, significantly reducing database restore time, enhancing the availability and reliability of databases, and reducing downtime and business losses caused by data loss or system failures.
 
   For more information, see [documentation](/br/br-snapshot-guide.md#restore-cluster-snapshots).
 
@@ -250,7 +250,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 
 * TiKV encryption at rest supports Google [Key Management Service (Cloud KMS)](https://cloud.google.com/docs/security/key-management-deep-dive?hl) [#8906](https://github.com/tikv/tikv/issues/8906) @[glorv](https://github.com/glorv) **tw@qiancai** <!--1612-->
 
-    TiKV ensures data security through encryption at rest mechanisms. The core of encryption at rest for security lies in key management. Starting from v8.0.0, you can manage the master key of TiKV using Google Cloud KMS to establish encryption-at-rest capabilities based on Cloud KMS, thereby enhancing the security of user data.
+    TiKV ensures data security by encrypting stored data using the encryption at rest technique. The core of encryption at rest for security is key management. Starting from v8.0.0, you can manage the master key of TiKV using Google Cloud KMS to establish encryption-at-rest capabilities based on Cloud KMS, thereby enhancing the security of user data.
 
     To enable encryption at rest based on Google Cloud KMS, you need to create a key on Google Cloud and then configure the `[security.encryption.master-key]` section in the TiKV configuration file.
 
@@ -282,7 +282,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 
     For more information, see [documentation](/ticdc/ticdc-bidirectional-replication.md).
 
-* DM supports specifying a secret key for encrypting and decrypting passwords of source and target databases [#9492](https://github.com/pingcap/tiflow/issues/9492) @[D3Hunter](https://github.com/D3Hunter) **tw@qiancai** <!--1497-->
+* DM supports using a user-provided secret key to encrypt and decrypt passwords of source and target databases [#9492](https://github.com/pingcap/tiflow/issues/9492) @[D3Hunter](https://github.com/D3Hunter) **tw@qiancai** <!--1497-->
 
     In earlier versions, DM uses a built-in fixed secret key with relatively low security. Starting from v8.0.0, you can upload and specify a secret key file for encrypting and decrypting passwords of upstream and downstream databases. In addition, you can replace the secret key file as needed to enhance data security.
 
@@ -296,19 +296,19 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 
    For more information, see [documentation](sql-statements/sql-statement-import-into.md).
 
-* TiDB Lightning simplifies conflict resolution strategies and supports handling conflicting data using the "replace" method (experimental) [#51036](https://github.com/pingcap/tidb/issues/51036) @[lyzx2001](https://github.com/lyzx2001) **tw@qiancai** <!--1684-->
+* TiDB Lightning simplifies conflict resolution strategies and supports handling conflicting data using the `replace` strategy (experimental) [#51036](https://github.com/pingcap/tidb/issues/51036) @[lyzx2001](https://github.com/lyzx2001) **tw@qiancai** <!--1684-->
 
     In earlier versions, TiDB Lightning has [one data conflict resolution strategy](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md#conflict-detection) for the logical import mode and [two data conflict resolution strategies](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-data-detection) for the physical import mode, which are not easy to understand and configure.
 
-    Starting from v8.0.0, TiDB Lightning has deprecated the [old version of conflict detection](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#the-old-version-of-conflict-detection-deprecated-in-v800) strategy for the physical import mode, enables you to control the conflict detection strategy for both logical and physical import modes via the [`conflict.strategy`](tidb-lightning/tidb-lightning-configuration.md) parameter, and simplified the configuration of this parameter. In addition, in the physical import mode, the `replace` strategy now supports retaining the latest data and overwriting the old data when the import detects data with primary key or unique key conflicts.
+    Starting from v8.0.0, TiDB Lightning deprecates the [old version of conflict detection](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#the-old-version-of-conflict-detection-deprecated-in-v800) strategy for the physical import mode, enables you to control the conflict detection strategy for both logical and physical import modes via the [`conflict.strategy`](tidb-lightning/tidb-lightning-configuration.md) parameter, and simplifies the configuration of this parameter. In addition, in the physical import mode, the `replace` strategy now supports retaining the latest data and overwriting the old data when the import detects data with primary key or unique key conflicts.
 
     For more information, see [documentation](tidb-lightning/tidb-lightning-configuration.md).
 
-* Global Sort becomes generally available (GA), improving the performance and stability of  `IMPORT INTO` significantly (importing data within 40 TiBs is now supported) [#45719](https://github.com/pingcap/tidb/issues/45719) @[lance6716](https://github.com/lance6716) **tw@qiancai** <!--1580-->
+* Global Sort becomes generally available (GA), improving the performance and stability of  `IMPORT INTO` significantly [#45719](https://github.com/pingcap/tidb/issues/45719) @[lance6716](https://github.com/lance6716) **tw@qiancai** <!--1580-->
 
-    Before v7.4.0, when executing `IMPORT INTO` tasks using the [Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md), TiDB only locally sorts part of the data before importing it into TiKV due to limited local storage space. This results in a significant overlap of the imported data in TiKV, requiring TiKV to perform additional compaction operations during import and affecting the TiKV performance and stability.
+    Before v7.4.0, when executing `IMPORT INTO` tasks using the [Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md), TiDB only locally sorts part of the data before importing it into TiKV due to limited local storage space. This results in significant overlap of the imported data in TiKV, requiring TiKV to perform additional compaction operations during import and affecting the TiKV performance and stability.
 
-    With the Global Sort experimental feature introduced in v7.4.0, TiDB can temporarily store the data to be imported in an external storage (such as Amazon S3) for global sorting before importing it into TiKV, which eliminates the need for TiKV compaction operations during import. In v8.0.0, Global sorting becomes GA. This feature reduces the resource consumption of TiKV and significantly improves the performance and stability of `IMPORT INTO`.
+    With the Global Sort experimental feature introduced in v7.4.0, TiDB can temporarily store the data to be imported in an external storage (such as Amazon S3) for global sorting before importing it into TiKV, which eliminates the need for TiKV compaction operations during import. In v8.0.0, Global sorting becomes GA. This feature reduces the resource consumption of TiKV and significantly improves the performance and stability of `IMPORT INTO`. If you enable the Global Sort, each `IMPORT INTO` task supports importing data within 40 TiB.
 
    For more information, see [documentation](/tidb-global-sort.md).
 
