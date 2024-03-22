@@ -46,7 +46,7 @@ strategy = ""
 # Import mode. "local" means using the physical import mode.
 backend = "local"
 
-# Starting from v8.0.0, the `duplicate-resolution` parameter is deprecated. For more information, see <https://docs.pingcap.com/tidb/dev/tidb-lightning-physical-import-mode-usage##the-old-version-of-conflict-detection-deprecated-in-v800>.
+# Starting from v8.0.0, the `duplicate-resolution` parameter is deprecated. For more information, see <https://docs.pingcap.com/tidb/dev/tidb-lightning-physical-import-mode-usage#the-old-version-of-conflict-detection-deprecated-in-v800>.
 # The method to resolve the conflicting data.
 duplicate-resolution = 'remove'
 
