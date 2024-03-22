@@ -137,7 +137,7 @@ strategy = ""
 # precheck-conflict-before-import = false
 # Controls the maximum number of conflict errors that can be handled when the strategy is "replace" or "ignore". You can set it only when the strategy is "replace" or "ignore". The default value is 9223372036854775807, which means that almost all errors are tolerant. 
 # threshold = 9223372036854775807
-# Controls the maximum number of records in the `conflict_records` table. The default value is 100. In the physical import mode, if the strategy is "replace", the conflict records that are overwritten are recorded. In the logical import mode, if the strategy is "ignore", the conflict records that are ignored are recorded; if the strategy is "replace", the conflict records are recorded, but the conflict records that are overwritten are not recorded.
+# Controls the maximum number of records in the `conflict_records` table. The default value is 100. In the physical import mode, if the strategy is "replace", the conflict records that are overwritten are recorded. In the logical import mode, if the strategy is "ignore", the conflict records that are ignored are recorded; if the strategy is "replace", the conflict records are not recorded.
 # max-record-rows = 100
 
 [tikv-importer]
