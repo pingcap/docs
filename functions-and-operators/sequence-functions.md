@@ -5,7 +5,7 @@ summary: This document introduces sequence functions supported in TiDB.
 
 # Sequence Functions
 
-The usage of sequence functions in TiDB are used with sequence objects that are created with the [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md) statement.
+Sequence functions in TiDB are used to return or set values of sequence objects created using the [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md) statement.
 
 | Function name | Feature description |
 | :-------------- | :------------------------------------- |
@@ -15,4 +15,4 @@ The usage of sequence functions in TiDB are used with sequence objects that are 
 
 ## MySQL compatibility
 
-MySQL doesn't support the functions and statements for creating and manipulating sequences as defined in [ISO/IEC 9075-2](https://www.iso.org/standard/76584.html).
+MySQL does not support the functions and statements for creating and manipulating sequences as defined in [ISO/IEC 9075-2](https://www.iso.org/standard/76584.html).
