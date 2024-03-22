@@ -17,7 +17,7 @@ However, for some DDL statements, it is not necessary to strictly follow the onl
 
 ## Compatibility with TiDB tools
 
-- [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) does not support replicating the tables that are created by `table_enable_fast_create_table`.
+- [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) does not support replicating the tables that are created by `tidb_enable_fast_create_table`.
 
 ## Limitation
 
