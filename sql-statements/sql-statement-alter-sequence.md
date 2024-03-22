@@ -36,8 +36,6 @@ SequenceOption ::=
 
 ## Syntax
 
-{{< copyable "sql" >}}
-
 ```sql
 ALTER SEQUENCE sequence_name
     [ INCREMENT [ BY | = ] increment ]
@@ -60,7 +58,9 @@ ALTER SEQUENCE sequence_name
 | `CACHE` | `1000` | Specifies the local cache size of a sequence in TiDB. |
 | `CYCLE` | `NO CYCLE` | Specifies whether a sequence restarts from the minimum value (or maximum for the descending sequence). When `INCREMENT` > `0`, the default value is `MINVALUE`. When `INCREMENT` < `0`, the default value is `MAXVALUE`. |
 
-Note that changing the `START` value doesn't affect the generated values until you run `ALTER SEQUENCE ... RESTART`.
+> **Note:**
+>
+> Changing the `START` value does not affect the generated values until you execute `ALTER SEQUENCE ... RESTART`.
 
 ## `SEQUENCE` function
 
@@ -84,7 +84,7 @@ You can control a sequence through the following expression functions:
 
 ## Examples
 
-We create a sequence with a name of `s1`.
+Create a sequence named `s1`:
 
 ```sql
 CREATE SEQUENCE s1;
@@ -94,7 +94,7 @@ CREATE SEQUENCE s1;
 Query OK, 0 rows affected (0.15 sec)
 ```
 
-Then we get two values from the sequence
+Get the next two values from the sequence by executing the following SQL statement twice:
 
 ```sql
 SELECT NEXTVAL(s1);
@@ -122,7 +122,7 @@ SELECT NEXTVAL(s1);
 1 row in set (0.00 sec)
 ```
 
-Now we change the sequence to increment by two.
+Change the increment of the sequence to `2`:
 
 ```sql
 ALTER SEQUENCE s1 INCREMENT=2;
@@ -132,7 +132,7 @@ ALTER SEQUENCE s1 INCREMENT=2;
 Query OK, 0 rows affected (0.18 sec)
 ```
 
-Now we get two new values.
+Now, get the next two values from the sequence again.
 
 ```sql
 SELECT NEXTVAL(s1);
@@ -160,9 +160,9 @@ SELECT NEXTVAL(s1);
 1 row in set (0.00 sec)
 ```
 
-As you can see in the output the values now increate by two, following the `ALTER SEQUENCE` statement.
+As you can see from the output, the values now increase by two, following the `ALTER SEQUENCE` statement.
 
-It is also possible to change other properties, for example `MAXVALUE`.
+You can also change other parameters of the sequence. For example, you can change the `MAXVALUE` of the sequence as follows:
 
 ```sql
 CREATE SEQUENCE s2 MAXVALUE=10;
