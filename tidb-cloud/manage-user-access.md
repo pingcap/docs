@@ -5,7 +5,7 @@ summary: Learn how to manage identity access in TiDB Cloud.
 
 # Identity Access Management
 
-This document describes how to manage access to organizations, projects, roles, and user profiles in TiDB Cloud.
+This document describes how to manage access to organizations, projects, roles, user profiles, and notifications in TiDB Cloud.
 
 Before accessing TiDB Cloud, [create a TiDB Cloud account](https://tidbcloud.com/free-trial). You can either sign up with email and password so that you can [manage your password using TiDB Cloud](/tidb-cloud/tidb-cloud-password-authentication.md), or choose your Google, GitHub, or Microsoft account for single sign-on (SSO) to TiDB Cloud.
 
@@ -331,3 +331,13 @@ In TiDB Cloud, you can easily manage your profile, including your first name, la
 2. Click **Account Settings**. The **Profile** tab is displayed by default.
 
 3. Update the profile information, and then click **Save**.
+
+## Manage notifications
+
+TiDB Cloud sends notifications to you through the TiDB Cloud console and email. To view or manage these notifications in the TiDB Cloud console, take the following steps:
+
+1. Click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner of the TiDB Cloud console.
+
+2. Click **Notifications**. You can view your notifications and mark them as read on the page that is displayed.
+
+Alternatively, you can click <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="-1 -1 24 24" stroke-width="2"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M9.354 21c.705.622 1.632 1 2.646 1s1.94-.378 2.646-1M18 8A6 6 0 1 0 6 8c0 3.09-.78 5.206-1.65 6.605-.735 1.18-1.102 1.771-1.089 1.936.015.182.054.252.2.36.133.099.732.099 1.928.099H18.61c1.196 0 1.795 0 1.927-.098.147-.11.186-.179.2-.361.014-.165-.353-.755-1.088-1.936C18.78 13.206 18 11.09 18 8Z" stroke-width="inherit"></path></svg> in the lower-right corner of the TiDB Cloud console to view your notifications.
