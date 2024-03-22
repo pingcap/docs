@@ -48,7 +48,7 @@ You can use one or multiple MySQL instances as an upstream data source.
     from:
       host: "127.0.0.1"
       user: "root"
-      password: "fCxfQ9XKCezSzuCD0Wf5dUD+LsKegSg="  # encrypt with `tiup dmctl --encrypt "123456"`
+      password: "fCxfQ9XKCezSzuCD0Wf5dUD+LsKegSg="
       port: 3306
     ```
 
