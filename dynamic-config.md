@@ -213,6 +213,9 @@ The following TiKV configuration items can be modified dynamically:
 | `{db-name}.{cf-name}.soft-pending-compaction-bytes-limit` | The soft limit on the pending compaction bytes |
 | `{db-name}.{cf-name}.hard-pending-compaction-bytes-limit` | The hard limit on the pending compaction bytes |
 | `{db-name}.{cf-name}.titan.blob-run-mode` | The mode of processing blob files |
+| `{db-name}.{cf-name}.titan.min-blob-size` | The threshold at which data is stored in Titan. Data is stored in a Titan blob file when its value reaches this threshold. |
+| `{db-name}.{cf-name}.titan.blob-file-compression` | The compression algorithm used by Titan blob files |
+| `{db-name}.{cf-name}.titan.discardable-ratio` | The threshold of garbage data ratio in Titan data files for GC. When the ratio of useless data in a blob file exceeds the threshold, Titan GC is triggered. |
 | `server.grpc-memory-pool-quota` | Limits the memory size that can be used by gRPC |
 | `server.max-grpc-send-msg-len` | Sets the maximum length of a gRPC message that can be sent |
 | `server.snap-io-max-bytes-per-sec` | Sets the maximum allowable disk bandwidth when processing snapshots |
