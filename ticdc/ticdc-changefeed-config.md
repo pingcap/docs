@@ -208,7 +208,7 @@ enable-partition-separator = true
 
 # send-bootstrap-to-all-partition controls whether to send bootstrap messages to all partitions.
 # The default value is true, which means that bootstrap messages are sent to all partitions of the corresponding table topic.
-# Setting it to false means the bootstrap message is sent to only the first partition of the corresponding table topic.
+# Setting it to false means bootstrap messages are sent to only the first partition of the corresponding table topic.
 # send-bootstrap-to-all-partition = true
 
 [sink.kafka-config.codec-config]
