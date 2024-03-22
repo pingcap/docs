@@ -1,11 +1,11 @@
 ---
 title: TiDB Accelerates Table Creation
-summary: Learn the concept, principles, and implementation details of TiDB accelerates table creation.
+summary: Learn the concept, principles, and implementation details of performance optimization for creating tables.
 ---
 
 # TiDB Accelerates Table Creation
 
-Starting from v8.0.0, TiDB supports creating tables quickly, which improves the efficiency of bulk table creation.
+TiDB v7.6.0 introduces the system variable [`tidb_ddl_version`](https://docs.pingcap.com/tidb/v7.6/system-variables#tidb_enable_fast_create_table-new-in-v800) to support accelerating table creation, which improves the efficiency of bulk table creation. Starting from v8.0.0, this system variable is renamed to [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800).
 
 TiDB uses the online asynchronous schema change algorithm to change the metadata. All DDL jobs are submitted to the `mysql.tidb_ddl_job` table, and the owner node pulls the DDL job to execute. After executing each phase of the online DDL algorithm, the DDL job is marked as completed and moved to the `mysql.tidb_ddl_history` table. Therefore, DDL statements can only be executed on the owner node and cannot be linearly extended.
 
@@ -17,23 +17,23 @@ However, for some DDL statements, it is not necessary to strictly follow the onl
 
 ## Compatibility with TiDB tools
 
-- [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) does not support replicating the tables that are created by TiDB accelerates table creation.
+- [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) does not support replicating the tables that are created by `table_enable_fast_create_table`.
 
 ## Limitation
 
-You can now use TiDB accelerates table creation only in the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) statement, and this statement must not include any foreign key constraints.
+You can now use performance optimization for table creation only in the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) statement, and this statement must not include any foreign key constraints.
 
-## Use TiDB Accelerates Table Creation
+## Use `table_enable_fast_create_table` to accelerate table creation
 
-You can enable or disable TiDB accelerates table creation by specifying the value of the system variable [`table_enable_fast_create_table`](/system-variables.md#table_enable_fast_create_table-new-in-v800) .
+You can enable or disable performance optimization for creating tables by specifying the value of the system variable [`table_enable_fast_create_table`](/system-variables.md#table_enable_fast_create_table-new-in-v800).
 
-To enable TiDB accelerates table creation, set the value of this variable to `ON`:
+To enable performance optimization for creating tables, set the value of this variable to `ON`:
 
 ```sql
 SET GLOBAL table_enable_fast_create_table = ON;
 ```
 
-To disable TiDB accelerates table creation, set the value of this variable to `OFF`:
+To disable performance optimization for creating tables, set the value of this variable to `OFF`:
 
 ```sql
 SET GLOBAL table_enable_fast_create_table = OFF;
@@ -41,7 +41,7 @@ SET GLOBAL table_enable_fast_create_table = OFF;
 
 ## Implementation principle
 
-The detailed implementation principle of TiDB accelerates table creation is as follows:
+The detailed implementation principle of performance optimization for table creation is as follows:
 
 1. Create a `CREATE TABLE` Job.
 
