@@ -175,7 +175,7 @@ tiup playground scale-in --pid 86526
 
 ## Deploy PD microservices
 
-Starting from v8.0.0, PD supports the [microservice mode](/pd-microservices.md). You can deploy the `tso` microservice and `scheduling` microservice for your cluster using TiUP playground as follows:
+Starting from v8.0.0, PD supports the [microservice mode](/pd-microservices.md) (experimental). You can deploy the `tso` microservice and `scheduling` microservice for your cluster using TiUP playground as follows:
 
 ```shell
 ./tiup-playground v8.0.0 --pd.mode ms --pd.api 3  --pd.tso 2 --pd.scheduling 3
