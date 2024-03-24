@@ -149,6 +149,17 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 </div>
 </SimpleTab>
 
+## FAQs
+
+### My connection is timing out with an error like "Error Code: 2013. Lost connection to MySQL server during query".
+
+The query exceeds the timeout settings. Adjust the **DBMS connection read timeout interval** option in **SQL Editor** settings. This sets the maximum amount of time (in seconds) that a query can take before MySQL Workbench disconnects from the server.
+
+![MySQL Workbench: adjust timeout option in SQL Editor settings](/media/develop/mysql-workbench-adjust-sqleditor-read-timeout.jpg)
+
+
+You can also refer to [MySQL Workbench Frequently Asked Questions](https://dev.mysql.com/doc/workbench/en/workbench-faq.html) for more information.
+
 ## Next steps
 
 - Learn more usage of MySQL Workbench from [the documentation of MySQL Workbench](https://dev.mysql.com/doc/workbench/en/).
