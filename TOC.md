@@ -980,7 +980,7 @@
         - [`SESSION_CONNECT_ATTRS`](/performance-schema/performance-schema-session-connect-attrs.md)
       - [`SYS`](/sys-schema.md)
     - [Metadata Lock](/metadata-lock.md)
-    - [TiDB Accelerated Table Creation](/fast-create-table.md)
+    - [TiDB Accelerated Table Creation](/accelerated-table-creation.md)
   - UI
     - TiDB Dashboard
       - [Overview](/dashboard/dashboard-intro.md)

@@ -132,7 +132,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Metadata lock](/metadata-lock.md) | Y | Y | Y | Y | N | N | N | N | N | N | N |
 | [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) | Y | Y | Y | Y | N | N | N | N | N | N | N |
 | [Pause](/sql-statements/sql-statement-admin-pause-ddl.md)/[Resume](/sql-statements/sql-statement-admin-resume-ddl.md) DDL | Y | Y | N | N | N | N | N | N | N | N | N |
-| [TiDB Accelerated Table Creation](/fast-create-table.md) | N | N | N | N | N | N | N | N | N | N | N |
+| [TiDB Accelerated Table Creation](/accelerated-table-creation.md) | N | N | N | N | N | N | N | N | N | N | N |
 
 ## Transactions
 
