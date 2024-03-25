@@ -55,7 +55,7 @@ For details information on using TiDB Operator, see the following documents:
 </div>
 <div label="TiUP Playground">
 
-For details information on using TiUP Playground, see the following documents:
+For details information on using TiUP Playground, see the following document:
 
 - [Deploy PD microservices](/tiup/tiup-playground.md#deploy-pd-microservices)
 
