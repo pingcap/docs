@@ -160,7 +160,7 @@ PLAN REPLAYER LOAD 'plan_replayer.zip';
 You can disable auto analyze by setting the [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) system variable to `OFF`:
 
 ```sql
-MySQL [test]> set @@global.tidb_enable_auto_analyze = OFF;
+set @@global.tidb_enable_auto_analyze = OFF;
 ```
 
 After the cluster information is imported, the TiDB cluster is loaded with the required table schema, statistics and other information that affects the construction of the execution plan. You can view the execution plan and verify statistics in the following way:
