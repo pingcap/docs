@@ -143,7 +143,7 @@ With an existing `ZIP` file exported using `PLAN REPLAYER`, you can use the `PLA
 PLAN REPLAYER LOAD 'file_name';
 ```
 
-In the statement above, `file_name` is the name of the `ZIP` file to be exported.
+In the statement above, `file_name` is the name of the `ZIP` file to be imported.
 
 For example:
 
@@ -151,6 +151,16 @@ For example:
 
 ```sql
 PLAN REPLAYER LOAD 'plan_replayer.zip';
+```
+
+> **Note:**
+>
+> You need to disable auto analyze. Otherwise the imported statistics will be overwritten by analyze.
+
+You can disable auto analyze by setting the [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) system variable to `OFF`:
+
+```sql
+set @@global.tidb_enable_auto_analyze = OFF;
 ```
 
 After the cluster information is imported, the TiDB cluster is loaded with the required table schema, statistics and other information that affects the construction of the execution plan. You can view the execution plan and verify statistics in the following way:
