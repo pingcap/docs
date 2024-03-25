@@ -1712,7 +1712,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Unit: Threads
 - This variable is used to set the concurrency of the DDL operation in the `re-organize` phase.
 
-### `tidb_ddl_version` <span class="version-mark">New in v7.6.0</span>
+### `tidb_enable_fast_create_table` <span class="version-mark">New in v8.0.0</span>
 
 > **Warning:**
 >
@@ -1721,10 +1721,11 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `1`
-- Value range: `1` or `2`
-- This variable is used to control whether to enable [TiDB DDL V2](/ddl-v2.md). Setting it to `2` enables this feature, and setting it to `1` disables it. The default value is `1`. After you enable it, TiDB uses TiDB DDL V2 to execute DDL statements.
-- Starting from v7.6.0, TiDB only supports accelerating table creation by the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) statement.
+- Type: Boolean
+- Default value: `OFF`
+- This variable is used to control whether to enable [TiDB Accelerated Table Creation](/accelerated-table-creation.md).
+- Starting from v8.0.0, TiDB supports accelerating table creation by the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) statement using `tidb_enable_fast_create_table`.
+- This variable is renamed from the variable [`tidb_ddl_version`](https://docs.pingcap.com/tidb/v7.6/system-variables#tidb_ddl_version-new-in-v760) that is introduced in v7.6.0. Starting from v8.0.0, `tidb_ddl_version` no longer takes effect.
 
 ### tidb_default_string_match_selectivity <span class="version-mark">New in v6.2.0</span>
 
