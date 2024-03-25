@@ -185,4 +185,3 @@ Starting from v8.0.0, PD supports the [microservice mode](/pd-microservices.md) 
 - `--pd.api num`: specifies the number of APIs for PD microservices. It must be at least `1`.
 - `--pd.tso num`: specifies the number of instances to be deployed for the `tso` microservice.
 - `--pd.scheduling num`: specifies the number of instances to be deployed for the `scheduling` microservice.
-```
