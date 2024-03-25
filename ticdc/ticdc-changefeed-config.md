@@ -196,7 +196,7 @@ enable-partition-separator = true
 
 # Starting from v8.0.0, TiCDC supports the Simple message encoding protocol. The following are the configuration parameters for the Simple protocol.
 # For more information about the protocol, see <https://docs.pingcap.com/tidb/stable/ticdc-simple-protocol>.
-# The following configuration parameters controls the sending behavior of bootstrap messages.
+# The following configuration parameters control the sending behavior of bootstrap messages.
 # send-bootstrap-interval-in-sec controls the time interval for sending bootstrap messages, in seconds.
 # The default value is 120 seconds, which means that a bootstrap message is sent every 120 seconds for each table.
 # send-bootstrap-interval-in-sec = 120
