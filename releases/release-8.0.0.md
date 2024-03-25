@@ -58,7 +58,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
   </tr>
   <tr>
     <td>TiCDC adds support for the Simple protocol **tw@lilin90** <!--1646--></td>
-    <td>TiCDC introduces support for a new protocol, the Simple protocol. This protocol includes support for in-band schema tracking capabilities.</td>
+    <td>TiCDC introduces support for a new protocol, the Simple protocol. This protocol includes support for in-band schema tracking capabilities by embedding schema information in DDL and BOOTSTRAP events.</td>
   </tr>
   <tr>
     <td>TiCDC adds support for the Debezium format protocol **tw@lilin90** <!--1652--></td>
@@ -266,7 +266,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 
 * TiCDC adds support for the Simple protocol [#9898](https://github.com/pingcap/tiflow/issues/9898) @[3AceShowHand](https://github.com/3AceShowHand) **tw@lilin90** <!--1646-->
 
-    TiCDC introduces support for a new protocol, the Simple protocol. This protocol includes support for in-band schema tracking capabilities.
+    TiCDC introduces support for a new protocol, the Simple protocol. This protocol includes support for in-band schema tracking capabilities by embedding schema information in DDL and BOOTSTRAP events.
 
     For more information, see [documentation](/ticdc/ticdc-simple-protocol.md).
 
