@@ -7,10 +7,10 @@ summary: Learn about SQL Prepared Execution Plan Cache in TiDB.
 
 > **Warning:**
 >
-> If a cached `Update` or `Delete` statement encounters a DDL operation that modifies the relevant schema during execution, it may cause data inconsistency between tables and indexes, leading to incorrect results ([#51407](https://github.com/pingcap/tidb/issues/51407)). Please pay attention to the progress of the fix and upgrade to the latest LTS version to resolve this issue. Possible workarounds before upgrading:
+> If a cached `UPDATE` or `DELETE` statement encounters a DDL operation that modifies the relevant schema during execution, it might cause data inconsistency between tables and indexes, leading to incorrect results. For more information, see [Issue #51407](https://github.com/pingcap/tidb/issues/51407). Keep updated to the progress of the latest LTS version to resolve this issue. The following are possible workarounds before upgrading:
 > 
-> - Temporarily [disable the execution plan cache for Prepare statements](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610) before submitting DDL, and restore the setting of plan cache after DDL execution.
-> - Avoid executing DDL during business hours. Immediately after executing DDL, run [`admin check table`](/sql-statements/sql-statement-admin-check-table-index.md) to verify the consistency between tables and indexes. If errors are found, rebuild the relevant indexes.
+> - Before submitting DDL, temporarily [disable the execution plan cache for Prepare statements](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610) , and restore the setting of plan cache after the DDL execution.
+> - Avoid executing DDL during business peak hours. After executing DDL, immediately run [`ADMIN CHECK TABLE`](/sql-statements/sql-statement-admin-check-table-index.md) to verify the consistency between tables and indexes. If errors are found, rebuild the relevant indexes.
 
 TiDB supports execution plan caching for `Prepare` and `Execute` queries. This includes both forms of prepared statements:
 
