@@ -212,3 +212,4 @@ In the `CYCLE` mode, the initial value of a sequence in the first round is the v
 * [CREATE SEQUENCE](/sql-statements/sql-statement-create-sequence.md)
 * [DROP SEQUENCE](/sql-statements/sql-statement-drop-sequence.md)
 * [SHOW CREATE SEQUENCE](/sql-statements/sql-statement-show-create-sequence.md)
+* [Sequence Functions](/functions-and-operators/sequence-functions.md)
