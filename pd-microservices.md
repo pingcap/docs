@@ -34,9 +34,9 @@ In addition, when the scheduling module is changed, you can update the `scheduli
 
 - Currently, the `tso` microservice does not support dynamic start and stop. After enabling or disabling the `tso` microservice, you need to restart the PD cluster for the changes to take effect.
 - Only the TiDB component supports a direct connection to the `tso` microservice through service discovery, while other components need to forward requests to the `tso` microservice through PD to obtain timestamps.
-- Microservices are not compatible with the [Data Replication Auto Synchronous (DR Auto-Sync)](https://docs.pingcap.com/tidb/stable/two-data-centers-in-one-city-deployment) feature.
+- Microservices are not compatible with the [Data Replication Auto Synchronous (DR Auto-Sync)](/two-data-centers-in-one-city-deployment.md) feature.
 - Microservices are not compatible with the TiDB system variable [`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530).
-- Because hibernate Regions might exist in a cluster, during a primary and secondary switchover of the `scheduling` microservice, the scheduling function of the cluster might be unavailable for up to five minutes to avoid redundant scheduling.
+- Because [hibernate Regions](/tikv-configuration-file.md#hibernate-regions) might exist in a cluster, during a primary and secondary switchover of the `scheduling` microservice, the scheduling function of the cluster might be unavailable for a certain duration (not exceeding [`peer-stale-state-check-interval`](/tikv-configuration-file.md#peer-stale-state-check-interval), which is five minutes by default) to avoid redundant scheduling.
 
 ## Usage
 
