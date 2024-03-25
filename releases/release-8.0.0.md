@@ -378,6 +378,23 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 
 ## Improvements
 
++ TiDB <!--tw@qiancai, 18 条-->
+
+    - 提升 Sort 算子的数据落盘性能 [#47733](https://github.com/pingcap/tidb/issues/47733) @[xzhangxian1008](https://github.com/xzhangxian1008) **tw@Oreoxmt** <!--1609-->
+    - 优化数据落盘功能的退出机制，支持在数据落盘过程中取消查询 [#50511](https://github.com/pingcap/tidb/issues/50511) @[wshwsh12](https://github.com/wshwsh12) **tw@qiancai** <!--1635-->
+    - 在处理包含多个等值条件的表连接查询时，支持使用匹配部分条件的索引构造 Index Join [#47233](https://github.com/pingcap/tidb/issues/47233) @[winoros](https://github.com/winoros) **tw@Oreoxmt** <!--1601-->
+    - 增强 Index Merge 能力，使其能识别查询中的排序需求，并能选中满足排序要求的索引 [#48359](https://github.com/pingcap/tidb/issues/48359) @[AilinKid](https://github.com/AilinKid
+    - 当 `Apply` 算子没有并发执行时，支持通过执行 `SHOW WARNINGS` 查看阻碍并发的算子名 [#50256](https://github.com/pingcap/tidb/issues/50256) @[hawkingrei](https://github.com/hawkingrei)
+    - 优化点查的索引选择，在所有的索引都支持点查时，支持选择其中性能最优的一个用于查询 [#50184](https://github.com/pingcap/tidb/issues/50184) @[elsa0520](https://github.com/elsa0520)
+    - 将统计信息同步加载任务的优先级暂时调整为 high，避免在 TiKV 高负载时同步加载任务大面积超时，从而导致统计信息无法加载 [#50332](https://github.com/pingcap/tidb/issues/50332) @[winoros](https://github.com/winoros)
+	- 在执行 `PREPARE` 语句时无法命中执行计划缓存时，支持通过执行 `SHOW WARNINGS` 查看原因 [#50407](https://github.com/pingcap/tidb/issues/50407) @[hawkingrei](https://github.com/hawkingrei)
+	- 改进当多次更新同一行的数据时查询估算信息不准确的问题 [#47523](https://github.com/pingcap/tidb/issues/47523) @[terry1purcell](https://github.com/terry1purcell)
+	- Index Merge 支持在 `AND` 谓词中内嵌多值索引和 `OR` 操作符 [#51778](https://github.com/pingcap/tidb/issues/51778) @[time-and-fate](https://github.com/time-and-fate)
+	- 支持同时提交 16 个 `IMPORT INTO ... FROM FILE` 任务，方便批量导入数据到目标表，极大地提升了数据文件导入的效率和性能 [#49008](https://github.com/pingcap/tidb/issues/49008) @[D3Hunter](https://github.com/D3Hunter) **tw@qiancai** <!--1680-->
+    - (dup): release-7.1.4.md > 改进提升> TiDB - 当设置 `force-init-stats` 为 `true` 时，即 TiDB 启动时等待统计信息初始化完成后再对外提供服务，这一设置不再影响 HTTP server 提供服务，用户仍可查看监控 [#50854](https://github.com/pingcap/tidb/issues/50854) @[hawkingrei](https://github.com/hawkingrei)
+    - MDL View 中不显示 blocked DDL，当 DDL 任务中包含多张表 [#47743](https://github.com/pingcap/tidb/issues/47743) @[wjhuang2016](https://github.com/wjhuang2016)
+    - DDL 创建表语句 `CREATE TABLE` 执行性能加速 10 倍，并且可线性扩展 [#50052](https://github.com/pingcap/tidb/issues/50052) @[GMHDBJD](https://github.com/GMHDBJD)
+
 + TiKV <!--tw@Oreoxmt, 13 条-->
 
     - Enhance TSO verification and detection to improve the robustness of the cluster TSO when the configuration or operation is improper [#16545](https://github.com/tikv/tikv/issues/16545) @[cfzjywxk](https://github.com/cfzjywxk) **tw@qiancai** <!--1624-->
@@ -406,6 +423,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
     - Adjust GRPC configurations to improve availability [#7821](https://github.com/tikv/pd/issues/7821) @[rleungx](https://github.com/rleungx)
 
 + Tools
+
+    + Backup & Restore (BR) <!--tw@qiancai, 5 条-->
+
+        - 支持通过新增的恢复参数 `--load-stats` 控制是否恢复统计信息  [#50568](https://github.com/pingcap/tidb/issues/50568) @[Leavrth](https://github.com/Leavrth)
+        - 粗粒度打散 Region 算法支持自适应获取并发参数，提升恢复性能 [#50701](https://github.com/pingcap/tidb/issues/50701) @[3pointer](https://github.com/3pointer)
+        - 在 `br` 的命令行帮助信息中显示 `log` 命令 [#50927](https://github.com/pingcap/tidb/issues/50927) @[RidRisR](https://github.com/RidRisR)
+        - 支持在恢复过程中提前分配好 TableID，从而最大限度复用 Table ID，提升恢复性能 [#51736](https://github.com/pingcap/tidb/issues/51736) @[Leavrth](https://github.com/Leavrth)
+        - 使用 BR 时，禁用 TiDB 内部的 gc memory limit tuner 功能，避免 OOM 问题 [#51078](https://github.com/pingcap/tidb/issues/51078) @[Leavrth](https://github.com/Leavrth)
 
     + TiDB Data Migration (DM)
     
