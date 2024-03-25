@@ -305,7 +305,7 @@ CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), I
     |   └─TableRowIDScan_10(Probe)     | 39.94   | cop[tikv] | table:t4                                                                    | keep order:false, stats:pseudo                                                                                                                             |
     +----------------------------------+---------+-----------+-----------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
     
-    -- json_length(j->'$.a') = 3 can't be accessed with IndexMerge directly, so TiDB can't use IndexMerge for this SQL
+    -- json_length(j->'$.a') = 3 cannot be accessed with IndexMerge directly, so TiDB cannot use IndexMerge for this SQL.
     > EXPLAIN SELECT /*+ use_index_merge(t4, mvi1) */ * FROM t4 WHERE json_overlaps(j->'$.a', '[1, 2]') OR json_length(j->'$.a') = 3;
     +-------------------------+----------+-----------+---------------+------------------------------------------------------------------------------------------------------------------------------------+
     | id                      | estRows  | task      | access object | operator info                                                                                                                      |
@@ -343,7 +343,7 @@ CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), I
     | └─TableRowIDScan_9(Probe)     | 0.00    | cop[tikv] | table:t4                                                                    | keep order:false, stats:pseudo              |
     +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+---------------------------------------------+
     
-    -- json_length(j->'$.a') = 3 can't be accessed with IndexMerge directly, so TiDB use IndexMerge to access the other two json_contains conditions, and json_length(j->'$.a') = 3 becomes a Selection operator
+    -- json_length(j->'$.a') = 3 cannot be accessed with IndexMerge directly, so TiDB uses IndexMerge to access the other two json_contains conditions, and json_length(j->'$.a') = 3 becomes a Selection operator.
     > EXPLAIN SELECT /*+ use_index_merge(t4, mvi1) */ * FROM t4 WHERE json_contains(j->'$.a', '[1, 2]') AND json_contains(j->'$.a', '[3, 4]') AND json_length(j->'$.a') = 2;
     +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+----------------------------------------------------+
     | id                            | estRows | task      | access object                                                               | operator info                                      |
@@ -359,6 +359,7 @@ CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), I
     ```
 
 - All the conditions that are used for the IndexMerge must match the semantic of `OR` or `AND` that connects them.
+
     - If `json_contains` is connected with `AND`, it matches the semantic. For example:
 
         ```sql
@@ -378,7 +379,7 @@ CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), I
         | └─TableRowIDScan_8(Probe)     | 0.00    | cop[tikv] | table:t4                                                                    | keep order:false, stats:pseudo              |
         +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+---------------------------------------------+
 
-        -- The conditions don't match the semantic, so TiDB can't use IndexMerge for this SQL as explained above.
+        -- The conditions do not match the semantic, so TiDB cannot use IndexMerge for this SQL as explained above.
         > EXPLAIN SELECT /*+ use_index_merge(t4, mvi1, mvi2) */ * FROM t4 WHERE json_contains(j->'$.a', '[1]') OR json_contains(j->'$.b', '[2, 3]');
         +-------------------------+----------+-----------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
         | id                      | estRows  | task      | access object | operator info                                                                                                                                           |
@@ -409,7 +410,7 @@ CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), I
         |   └─TableRowIDScan_9(Probe)     | 29.97   | cop[tikv] | table:t4                                                                    | keep order:false, stats:pseudo                                                                                                                          |
         +---------------------------------+---------+-----------+-----------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
         
-        -- The conditions don't match the semantic, so TiDB can only use IndexMerge for part of the conditions of this SQL as explained above.
+        -- The conditions do not match the semantic, so TiDB can only use IndexMerge for part of the conditions of this SQL as explained above.
         > EXPLAIN SELECT /*+ use_index_merge(t4, mvi1, mvi2) */ * FROM t4 WHERE json_overlaps(j->'$.a', '[1]') AND json_overlaps(j->'$.b', '[2, 3]');
         +---------------------------------+---------+-----------+-----------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
         | id                              | estRows | task      | access object                                                               | operator info                                                                                                                                       |
@@ -455,7 +456,7 @@ CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), I
     - If `json_contains` that contains multiple values is connected with `OR`, or `json_overlaps` that contains multiple values is connected with `AND`, they do not match the semantic, but they match the semantic if they only contain one value. For example:
         
         ```sql
-        -- Please refer to the above for examples of conditions that don't match the semantic. Only examples of conditions that match the semantic are provided here.
+        -- Refer to the preceding examples of conditions that do not match the semantic. Only examples of conditions that match the semantic are provided here.
         EXPLAIN SELECT /*+ use_index_merge(t4, mvi1, mvi2) */ * FROM t4 WHERE json_overlaps(j->'$.a', '[1]') AND json_overlaps(j->'$.b', '[2]');
         EXPLAIN SELECT /*+ use_index_merge(t4, mvi1, mvi2) */ * FROM t4 WHERE json_contains(j->'$.a', '[1]') OR json_contains(j->'$.b', '[2]');
         ```
@@ -483,7 +484,7 @@ CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), I
         +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+---------------------------------------------+
         ```
 
-    - If both `OR` and `AND` appear in the conditions (essentially it's nested `OR` and `AND`), the conditions that constitute the IndexMerge must all match the semantic of `OR` or the semantic of `AND`, and they can't have part of them match the semantic of `OR` while the others match the semantic of `AND`. For example:
+    - If both `OR` and `AND` appear in the conditions (nested `OR` and `AND`), the conditions that constitute the IndexMerge must all match the semantic of `OR` or the semantic of `AND`, and they cannot make part of them match the semantic of `OR` while the others match the semantic of `AND`. For example:
         
         ```sql
         EXPLAIN SELECT /*+ use_index_merge(t4, mvi1, mvi2) */ * FROM t4 WHERE 1 member of (j->'$.a') AND (2 member of (j->'$.b') OR 3 member of (j->'$.a'));
@@ -491,7 +492,7 @@ CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), I
         ```
 
         ```sql
-        -- Only 2 member of (j->'$.b') and 3 member of (j->'$.a') that match the semantic of OR constitute the IndexMerge. 1 member of (j->'$.a') that matches the semantic of AND is not included.
+        -- Only two members of (j->'$.b') and three members of (j->'$.a') that match the semantic of OR constitute the IndexMerge. One member of (j->'$.a') that matches the semantic of AND is not included.
         > EXPLAIN SELECT /*+ use_index_merge(t4, mvi1, mvi2) */ * FROM t4 WHERE 1 member of (j->'$.a') AND (2 member of (j->'$.b') OR 3 member of (j->'$.a'));
         +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | id                            | estRows | task      | access object                                                               | operator info                                                                                                                                                                                                     |
@@ -503,7 +504,7 @@ CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), I
         |   └─TableRowIDScan_7          | 19.99   | cop[tikv] | table:t4                                                                    | keep order:false, stats:pseudo                                                                                                                                                                                    |
         +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-        -- Only 1 member of (j->'$.a') and 3 member of (j->'$.a') that match the semantic of OR constitute the IndexMerge. 2 member of (j->'$.b') that matches the semantic of AND is not included.
+        -- Only one member of (j->'$.a') and three member of (j->'$.a') that match the semantic of OR constitute the IndexMerge. Two member of (j->'$.b') that matches the semantic of AND is not included.
         > EXPLAIN SELECT /*+ use_index_merge(t4, mvi1, mvi2) */ * FROM t4 WHERE 1 member of (j->'$.a') OR (2 member of (j->'$.b') AND 3 member of (j->'$.a'));
         +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | id                            | estRows | task      | access object                                                               | operator info                                                                                                                                                                                                          |
@@ -516,7 +517,7 @@ CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), I
         +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         ```
 
-If the conditions contain nested `OR`/`AND`, or if the conditions correspond to the index columns only after transformations such as expansion, TiDB might not be able to use IndexMerge or not be able to make full use of all conditions. It is recommended that you perform prior testing and verification for specific scenarios.
+If the conditions contain nested `OR`/`AND`, or if the conditions correspond to the index columns only after transformations such as expansion, TiDB might not be able to use IndexMerge or make full use of all conditions. It is recommended that you perform prior testing and verification for specific scenarios.
 
 The following are some examples:
 
@@ -569,7 +570,7 @@ EXPLAIN SELECT /*+ use_index_merge(t6, idx, idx2) */ * FROM t6 WHERE a=1 AND ((1
 ```
 
 ```sql
--- Due to current implementation limitations, (b = 1 or b = 2) doesn't constitute the IndexMerge, but become a Selection operator
+-- Due to current implementation limitations, (b = 1 or b = 2) does not constitute the IndexMerge, but becomes a Selection operator
 > EXPLAIN SELECT /*+ use_index_merge(t6, idx, idx2) */ * FROM t6 WHERE a=1 AND (1 member of (j) OR 2 member of (k)) AND (b = 1 OR b = 2);
 +-------------------------------+---------+-----------+-------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | id                            | estRows | task      | access object                                         | operator info                                                                                                                                                |
@@ -581,7 +582,7 @@ EXPLAIN SELECT /*+ use_index_merge(t6, idx, idx2) */ * FROM t6 WHERE a=1 AND ((1
 |   └─TableRowIDScan_7          | 0.20    | cop[tikv] | table:t6                                              | keep order:false, stats:pseudo                                                                                                                               |
 +-------------------------------+---------+-----------+-------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
--- If we manually expand the two OR conditions connected with AND, TiDB can make full use of these conditions
+-- If you manually expand the two OR conditions connected with AND, TiDB can make full use of these conditions
 > EXPLAIN SELECT /*+ use_index_merge(t6, idx, idx2) */ * FROM t6 WHERE a=1 AND ((1 member of (j) AND b = 1) OR (1 member of (j) AND b = 2) OR (2 member of (k) AND b = 1) OR (2 member of (k) AND b = 2));
 +-------------------------------+---------+-----------+-------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | id                            | estRows | task      | access object                                         | operator info                                                                                                                                                                                                                                                                                                            |
