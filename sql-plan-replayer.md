@@ -155,9 +155,9 @@ PLAN REPLAYER LOAD 'plan_replayer.zip';
 
 > **Note:**
 >
-> You will need to disable auto analyze otherwise the imported statistics will be overwritten by analyze.
+> You need to disable auto analyze. Otherwise the imported statistics will be overwritten by analyze.
 
-Disable auto analyze by setting the tidb_enable_auto_analyze to OFF:
+You can disable auto analyze by setting the [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) system variable to `OFF`:
 
 ```sql
 MySQL [test]> set @@global.tidb_enable_auto_analyze = OFF;
