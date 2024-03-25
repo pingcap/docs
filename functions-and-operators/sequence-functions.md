@@ -9,9 +9,9 @@ Sequence functions in TiDB are used to return or set values of sequence objects 
 
 | Function name | Feature description |
 | :-------------- | :------------------------------------- |
-| `NEXTVAL` or `NEXT VALUE FOR` | Returns the next value of the sequence |
-| `SETVAL` | Sets value of the sequence |
-| `LASTVAL` | Returns the last used value of the sequence |
+| `NEXTVAL()` or `NEXT VALUE FOR` | Returns the next value of a sequence |
+| `SETVAL()` | Sets the current value of a sequence |
+| `LASTVAL()` | Returns the last used value of a sequence |
 
 ## MySQL compatibility
 
