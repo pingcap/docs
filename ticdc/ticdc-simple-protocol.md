@@ -500,7 +500,7 @@ The fields in the preceding JSON data are explained as follows:
 
 ## Message consumption methods
 
-Because the TiCDC Simple protocol does not include the schema information of the table when sending DML messages, the downstream needs to receive DDL or BOOTSTRAP messages and cache the schema information of the table when consuming DML messages. When receiving a DML message, the downstream can obtain the corresponding table schema information from the cache through the `table` name and `schemaVersion` field in the DML message, and then correctly consume the DML message.
+Because the TiCDC Simple protocol does not include the schema information of the table when sending a DML message, the downstream needs to receive the DDL or BOOTSTRAP message and cache the schema information of the table before consuming a DML message. When receiving a DML message, the downstream obtains the corresponding table schema information from the cache by searching the `table` name and `schemaVersion` fields of the DML message, and then correctly consumes the DML message.
 
 The following describes how the downstream consumes DML messages based on DDL or BOOTSTRAP messages. According to preceding descriptions, the following information is known:
 
