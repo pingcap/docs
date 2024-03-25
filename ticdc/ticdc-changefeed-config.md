@@ -193,6 +193,12 @@ enable-partition-separator = true
 # include-commit-ts = false
 # The encoding method of binary data, which can be 'base64' or 'hex'. The default value is 'base64'.
 # binary-encoding-method = 'base64'
+# Whether to output handle key information. The default value is false. 
+# This variable is for internal implementation only and setting this variable is not recommended.
+# output-handle-key = false
+# Whether to output the value before the row data changes. The default value is false. 
+# After being turned on, the Update event will output two lines of data. The first line is a Delete event, which outputs the data before the change, and the second line is a Insert event, which outputs the changed data.
+# output-old-value = false
 
 # Specifies the replication consistency configurations for a changefeed when using the redo log. For more information, see https://docs.pingcap.com/tidb/stable/ticdc-sink-to-mysql#eventually-consistent-replication-in-disaster-scenarios.
 # Note: The consistency-related configuration items only take effect when the downstream is a database and the redo log feature is enabled.
