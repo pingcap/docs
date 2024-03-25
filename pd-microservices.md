@@ -5,7 +5,7 @@ summary: Learn how to enable the microservice mode of PD to improve service qual
 
 # PD Microservices
 
-Starting from v8.0.0, PD supports the microservice mode, which disaggregates the timestamp allocation and cluster scheduling functions of PD into the following two independently deployed microservices. In this way, these two functions are decoupled from the routing function of PD, which allows PD to focus on the routing service for metadata.
+Starting from v8.0.0, PD supports the microservice mode, which splits the timestamp allocation and cluster scheduling functions of PD into the following two independently deployed microservices. In this way, these two functions are decoupled from the routing function of PD, which allows PD to focus on the routing service for metadata.
 
 - `tso` microservice: provides monotonically increasing timestamp allocation for the entire cluster.
 - `scheduling` microservice: provides scheduling functions for the entire cluster, including but not limited to load balancing, hot spot handling, replica repair, and replica placement.
@@ -36,11 +36,11 @@ In addition, when the scheduling module is changed, you can update the `scheduli
 - Only the TiDB component supports a direct connection to the `tso` microservice through service discovery, while other components need to forward requests to the `tso` microservice through PD to obtain timestamps.
 - Microservices are not compatible with the [Data Replication Auto Synchronous (DR Auto-Sync)](https://docs.pingcap.com/tidb/stable/two-data-centers-in-one-city-deployment) feature.
 - Microservices are not compatible with the TiDB system variable [`tidb_enable_tso_follower_proxy`](https://docs.pingcap.com/tidb/stable/system-variables#tidb_enable_tso_follower_proxy-new-in-v530).
-- Due to the potential presence of hibernate Regions in a cluster, during a primary and secondary switchover of the `scheduling` microservice, the scheduling function of the cluster might be unavailable for up to five minutes to avoid redundant scheduling.
+- Because hibernate Regions might exist in a cluster, during a primary and secondary switchover of the `scheduling` microservice, the scheduling function of the cluster might be unavailable for up to five minutes to avoid redundant scheduling.
 
 ## Usage
 
-Currently, PD microservices can be deployed using TiDB Operator and TiUP Playground.
+Currently, PD microservices can be deployed using TiDB Operator or TiUP Playground.
 
 <SimpleTab>
 <div label="TiDB Operator">
