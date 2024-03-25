@@ -62,7 +62,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
   </tr>
   <tr>
     <td>TiCDC adds support for the Debezium format protocol **tw@lilin90** <!--1652--></td>
-    <td>TiCDC can now publish replication events to a Kafka sink using a protocol that generates Debezium style messages.</td>
+    <td>TiCDC introduces support for a new protocol, the Debezium protocol. TiCDC can now publish replication events to a Kafka sink using a protocol that generates Debezium style messages.</td>
   </tr>
 </tbody>
 </table>
