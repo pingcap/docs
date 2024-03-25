@@ -4968,7 +4968,7 @@ SHOW WARNINGS;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 9223372036854775807]`
