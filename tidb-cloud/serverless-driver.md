@@ -53,7 +53,7 @@ try {
   await tx.execute('insert into test values (1)')
   await tx.execute('select * from test')
   await tx.commit()
-} catch (err) {
+}catch (err) {
   await tx.rollback()
   throw err
 }
