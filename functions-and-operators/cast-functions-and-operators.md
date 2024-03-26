@@ -44,7 +44,6 @@ SELECT CAST(0x54694442 AS CHAR);
 1 row in set (0.0002 sec)
 ```
 
-
 ### CONVERT
 
 The `CONVERT()` function is used to convert between [character sets](/character-set-and-collation.md).
