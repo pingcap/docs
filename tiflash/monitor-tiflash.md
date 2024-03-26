@@ -1,7 +1,6 @@
 ---
 title: Monitor the TiFlash Cluster
 summary: Learn the monitoring items of TiFlash.
-aliases: ['/docs/dev/tiflash/monitor-tiflash/','/docs/dev/reference/tiflash/monitor/']
 ---
 
 # Monitor the TiFlash Cluster

@@ -1,7 +1,6 @@
 ---
 title: Placement Rules
 summary: Learn how to configure Placement Rules.
-aliases: ['/docs/dev/configure-placement-rules/','/docs/dev/how-to/configure/placement-rules/']
 ---
 
 # Placement Rules

@@ -1,6 +1,5 @@
 ---
 title: Quick Start for TiDB Lightning
-aliases: ['/docs/dev/get-started-with-tidb-lightning/','/docs/dev/how-to/get-started/tidb-lightning/']
 ---
 
 # Quick Start for TiDB Lightning

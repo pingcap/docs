@@ -1,7 +1,6 @@
 ---
 title: Back Up and Restore TiDB Dedicated Data
 summary: Learn how to back up and restore your TiDB Dedicated cluster.
-aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
 # Back Up and Restore TiDB Dedicated Data
