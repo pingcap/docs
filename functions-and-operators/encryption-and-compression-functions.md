@@ -24,7 +24,6 @@ TiDB supports most of the [encryption and compression functions](https://dev.mys
 | [`UNCOMPRESSED_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_uncompressed-length)                             | Return the length of a string before compression  |
 | [`VALIDATE_PASSWORD_STRENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_validate-password-strength) | Validate the password strength |
 
-
 ## Related system variables
 
 The [`block_encryption_mode`](/system-variables.md#block_encryption_mode) variable sets the encryption mode that is used for `AES_ENCRYPT()` and `AES_DECRYPT()`.
