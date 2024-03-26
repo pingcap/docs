@@ -11,7 +11,7 @@ Cast functions and operators enable conversion of values from one data type to a
 
 | Name                                     | Description                      |
 | ---------------------------------------- | -------------------------------- |
-| [`BINARY`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#operator_binary) | Cast a string to a binary string. |
+| [`BINARY`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#operator_binary) | Cast a string to a binary string |
 | [`CAST()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast) | Cast a value as a certain type   |
 | [`CONVERT()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_convert) | Cast a value as a certain type   |
 
