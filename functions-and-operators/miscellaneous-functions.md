@@ -283,6 +283,7 @@ SELECT IS_IPV6('::1');
 +----------------+
 1 row in set (0.00 sec)
 ```
+
 ### IS_UUID()
 
 Tests if the argument is a UUID.
