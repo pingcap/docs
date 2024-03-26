@@ -1,34 +1,40 @@
 ---
-title: ticloud serverless import describe
-summary: The reference of `ticloud serverless import describe`.
+title: ticloud serverless cluster shell
+summary: The reference of `ticloud serverless shell`.
 ---
 
-# ticloud serverless import describe
+# ticloud serverless shell
 
-Get the import details of a data import task:
-
-```shell
-ticloud serverless import describe [flags]
-```
-
-Or use the following alias command:
+Connect to a serverless cluster
 
 ```shell
-ticloud serverless import get [flags]
+ticloud serverless shell [flags]
 ```
 
 ## Examples
 
-Describe an import task in interactive mode:
+Connect to a serverless cluster in interactive mode:
 
 ```shell
-ticloud serverless import describe
+ticloud serverless shell
 ```
 
-Describe an import task in non-interactive mode:
+Connect to a serverless cluster with default user in non-interactive mode:
 
 ```shell
-ticloud serverless import describe --project-id <project-id> --cluster-id <cluster-id> --import-id <import-id>
+ticloud serverless shell -c <cluster-id>
+```
+
+Connect to a serverless cluster with default user and password in non-interactive mode:
+
+```shell
+ticloud serverless shell -c <cluster-id> --password <password>
+```
+
+Connect to a serverless cluster with specific user and password in non-interactive mode:
+
+```shell
+ticloud connect -c <cluster-id> -u <user-name> --password <password>
 ```
 
 ## Flags
@@ -39,8 +45,8 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 |-------------------------|-----------------------------------|----------|------------------------------------------------------|
 | -c, --cluster-id string | Cluster ID                        | Yes      | Only works in non-interactive mode.                  |
 | -h, --help              | Help information for this command | No       | Works in both non-interactive and interactive modes. |
-| --import-id string      | The ID of the import task         | Yes      | Only works in non-interactive mode.                  |
-| -p, --project-id string | Project ID                        | Yes      | Only works in non-interactive mode.                  |
+| --password              | The password of the user          | No       | Only works in non-interactive mode.                  |
+| -u, --user string       | A specific user for login         | No       | Only works in non-interactive mode.                  |
 
 ## Inherited flags
 

@@ -1,34 +1,34 @@
 ---
-title: ticloud serverless import describe
-summary: The reference of `ticloud serverless import describe`.
+title: ticloud serverless backup describe
+summary: The reference of `ticloud serverless backup describe`.
 ---
 
-# ticloud serverless import describe
+# ticloud serverless backup describe
 
-Get the import details of a data import task:
+Describe a serverless cluster backup
 
 ```shell
-ticloud serverless import describe [flags]
+ticloud serverless backup describe [flags]
 ```
 
 Or use the following alias command:
 
 ```shell
-ticloud serverless import get [flags]
+ticloud serverless backup get [flags]
 ```
 
 ## Examples
 
-Describe an import task in interactive mode:
+Get the backup in interactive mode:
 
 ```shell
-ticloud serverless import describe
+ticloud serverless backup describe
 ```
 
-Describe an import task in non-interactive mode:
+Get the backup in non-interactive mode:
 
 ```shell
-ticloud serverless import describe --project-id <project-id> --cluster-id <cluster-id> --import-id <import-id>
+ticloud serverless backup describe --backup-id <backup-id>
 ```
 
 ## Flags
@@ -37,10 +37,8 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 
 | Flag                    | Description                       | Required | Note                                                 |
 |-------------------------|-----------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | Cluster ID                        | Yes      | Only works in non-interactive mode.                  |
+| --backup-id string      | The ID of the backup              | Yes      | Only works in non-interactive mode.                  |
 | -h, --help              | Help information for this command | No       | Works in both non-interactive and interactive modes. |
-| --import-id string      | The ID of the import task         | Yes      | Only works in non-interactive mode.                  |
-| -p, --project-id string | Project ID                        | Yes      | Only works in non-interactive mode.                  |
 
 ## Inherited flags
 

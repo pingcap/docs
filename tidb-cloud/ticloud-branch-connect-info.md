@@ -1,28 +1,28 @@
 ---
-title: ticloud branch connect-info
-summary: The reference of `ticloud branch connect-info`.
+title: ticloud serverless branch connect-info
+summary: The reference of `ticloud serverless branch connect-info`.
 ---
 
-# ticloud branch connect-info
+# ticloud serverless branch connect-info
 
-Get the connection string of a branch:
+Get the connection string of a serverless branch:
 
 ```shell
-ticloud branch connect-info [flags]
+ticloud serverless branch connect-info [flags]
 ```
 
 ## Examples
 
-Get the connection string of a branch in interactive mode:
+Get the connection string of a serverless branch in interactive mode:
 
 ```shell
-ticloud branch connect-info
+ticloud serverless branch connect-info
 ```
 
-Get the connection string of a branch in non-interactive mode:
+Get the connection string of a serverless branch in non-interactive mode:
 
 ```shell
-ticloud branch connect-info --branch-id <branch-id> --cluster-id <cluster-id> --client <client-name> --operating-system <operating-system>
+ticloud serverless branch connect-info --branch-id <branch-id> --cluster-id <cluster-id> --client <client-name> --operating-system <operating-system>
 ```
 
 ## Flags
@@ -39,10 +39,11 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 
 ## Inherited flags
 
-| Flag                 | Description                                                                                           | Required | Note                                                                                                              |
-|----------------------|-------------------------------------------------------------------------------------------------------|----------|-------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                                                                             | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components.  |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command.  | No       | Works in both non-interactive and interactive modes.                                                              |
+| Flag                 | Description                                                                                          | Required | Note                                                                                                             |
+|----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
+| --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
+| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
+| -D, --debug          | Enable debug mode                                                                                    | No       | Works in both non-interactive and interactive modes.                                                             |
 
 ## Feedback
 

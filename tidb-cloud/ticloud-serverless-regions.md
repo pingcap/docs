@@ -1,46 +1,38 @@
 ---
-title: ticloud serverless branch delete
-summary: The reference of `ticloud serverless branch delete`.
+title: ticloud serverless cluster regions
+summary: The reference of `ticloud serverless regions`.
 ---
 
-# ticloud serverless branch delete
+# ticloud serverless regions
 
-Delete a branch from your serverless cluster:
-
-```shell
-ticloud serverless branch delete [flags]
-```
-
-Or use the following alias command:
+List all available regions for serverless clusters
 
 ```shell
-ticloud serverless branch rm [flags]
+ticloud serverless regions [flags]
 ```
 
 ## Examples
 
-Delete a serverless branch in interactive mode:
+List all available regions for serverless clusters:
 
 ```shell
-ticloud serverless branch delete
+ticloud serverless regions
 ```
 
-Delete a serverless branch in non-interactive mode:
+List all available regions for serverless clusters in the JSON format:
 
 ```shell
-ticloud branch delete --branch-id <branch-id> --cluster-id <cluster-id>
+ticloud serverless regions -o json
 ```
 
 ## Flags
 
 In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
-| Flag                    | Description                                | Required | Note                                                 |
-|-------------------------|--------------------------------------------|----------|------------------------------------------------------|
-| -b, --branch-id string  | The ID of the branch to be deleted         | Yes      | Only works in non-interactive mode.                  |
-| --force                 | Deletes a branch without confirmation      | No       | Works in both non-interactive and interactive modes. |
-| -h, --help              | Help information for this command          | No       | Works in both non-interactive and interactive modes. |
-| -c, --cluster-id string | The cluster ID of the branch to be deleted | Yes      | Only works in non-interactive mode.                  |
+| Flag                | Description                                                                                                              | Required | Note                                                 |
+|---------------------|--------------------------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------|
+| -o, --output string | Output format (`human` by default). Valid values are `human` or `json`. To get a complete result, use the `json` format. | No       | Works in both non-interactive and interactive modes. |
+| -h, --help          | Help information for this command                                                                                        | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
 

@@ -1,46 +1,47 @@
 ---
-title: ticloud serverless import describe
-summary: The reference of `ticloud serverless import describe`.
+title: ticloud serverless cluster update
+summary: The reference of `ticloud serverless update`.
 ---
 
-# ticloud serverless import describe
+# ticloud serverless update
 
-Get the import details of a data import task:
-
-```shell
-ticloud serverless import describe [flags]
-```
-
-Or use the following alias command:
+Update a serverless cluster:
 
 ```shell
-ticloud serverless import get [flags]
+ticloud serverless update [flags]
 ```
 
 ## Examples
 
-Describe an import task in interactive mode:
+Update a serverless cluster in interactive mode:
 
 ```shell
-ticloud serverless import describe
+ticloud serverless update
 ```
 
-Describe an import task in non-interactive mode:
+Update displayName of a serverless cluster in non-interactive mode:
 
 ```shell
-ticloud serverless import describe --project-id <project-id> --cluster-id <cluster-id> --import-id <import-id>
+ticloud serverless update -c <cluster-id> --display-name <new-display-mame>
+```
+
+Update labels of a serverless cluster in non-interactive mode
+
+```shell
+ticloud serverless update -c <cluster-id> --labels "{\"label1\":\"value1\"}"
 ```
 
 ## Flags
 
 In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
-| Flag                    | Description                       | Required | Note                                                 |
-|-------------------------|-----------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | Cluster ID                        | Yes      | Only works in non-interactive mode.                  |
-| -h, --help              | Help information for this command | No       | Works in both non-interactive and interactive modes. |
-| --import-id string      | The ID of the import task         | Yes      | Only works in non-interactive mode.                  |
-| -p, --project-id string | Project ID                        | Yes      | Only works in non-interactive mode.                  |
+| Flag                     | Description                                           | Required | Note                                                 |
+|--------------------------|-------------------------------------------------------|----------|------------------------------------------------------|
+| -c, --cluster-id string  | The ID of the cluster to be updated                   | Yes      | Only works in non-interactive mode.                  |
+| -n --display-name string | The new displayName of the cluster to be updated      | No       | Only works in non-interactive mode.                  |
+| --annotations string     | The annotations of the cluster to be added or updated | No       | Only works in non-interactive mode.                  |
+| --labels string          | The labels of the cluster to be added or updated      | No       | Only works in non-interactive mode.                  |
+| -h, --help               | Help information for this command                     | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
 

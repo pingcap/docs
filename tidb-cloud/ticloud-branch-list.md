@@ -1,65 +1,59 @@
 ---
-title: ticloud branch list
-summary: The reference of `ticloud branch list`.
+title: ticloud serverless branch list
+summary: The reference of `ticloud serverless branch list`.
 ---
 
-# ticloud branch list
+# ticloud serverless branch list
 
-List all branches for a cluster:
+List all branches for a serverless cluster:
 
 ```shell
-ticloud branch list <cluster-id> [flags]
+ticloud serverless branch list <cluster-id> [flags]
 ```
 
 Or use the following alias command:
 
 ```shell
-ticloud branch ls <cluster-id> [flags]
+ticloud serverless branch ls <cluster-id> [flags]
 ```
 
 ## Examples
 
-List all branches for a cluster (interactive mode):
+List all branches for a serverless cluster in interactive mode:
 
 ```shell
-ticloud branch list
+ticloud serverless branch list
 ```
 
-List all branches for a specified cluster (non-interactive mode):
+List all branches for a specified serverless cluster in non-interactive mode:
 
 ```shell
-ticloud branch list <cluster-id>
+ticloud serverless branch list -c <cluster-id>
 ```
 
-List all branches for a specified cluster in the JSON format:
+List all branches for a specified serverless cluster in the JSON format:
 
 ```shell
-ticloud branch list <cluster-id> -o json
+ticloud serverless branch list <cluster-id> -o json
 ```
-
-## Arguments
-
-The `branch list` command has the following arguments:
-
-| Argument Index | Description                                         | Required | Note                                  |
-|----------------|-----------------------------------------------------|----------|---------------------------------------|
-| `<cluster-id>` | The cluster ID of the branches which will be listed | Yes      | Only works in non-interactive mode.   |
 
 ## Flags
 
 In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
-| Flag                | Description                                                                                                              | Required | Note                                                 |
-|---------------------|--------------------------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------|
-| -h, --help          | Help information for this command                                                                                        | No       | Works in both non-interactive and interactive modes. |
-| -o, --output string | Output format (`human` by default). Valid values are `human` or `json`. To get a complete result, use the `json` format. | No       | Works in both non-interactive and interactive modes. |
+| Flag                    | Description                                                                                                              | Required | Note                                                 |
+|-------------------------|--------------------------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------|
+| -c, --cluster-id string | The ID of the cluster                                                                                                    | Yes      | Only works in non-interactive mode.                  |
+| -h, --help              | Help information for this command                                                                                        | No       | Works in both non-interactive and interactive modes. |
+| -o, --output string     | Output format (`human` by default). Valid values are `human` or `json`. To get a complete result, use the `json` format. | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
 
-| Flag                 | Description                                                                                          | Required | Note                                                                                                                     |
-|----------------------|------------------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components.         |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                                     |
+| Flag                 | Description                                                                                          | Required | Note                                                                                                             |
+|----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
+| --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
+| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
+| -D, --debug          | Enable debug mode                                                                                    | No       | Works in both non-interactive and interactive modes.                                                             |
 
 ## Feedback
 
