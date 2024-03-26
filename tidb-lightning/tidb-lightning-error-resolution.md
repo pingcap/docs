@@ -11,7 +11,7 @@ This document introduces TiDB Lightning error types, how to query the errors, an
 
 - `lightning.max-error`: the tolerance threshold of type error
 - `conflict.strategy`, `conflict.threshold`, and `conflict.max-record-rows`: configurations related to conflicting data
-- `tikv-importer.duplicate-resolution`: the conflict handling configuration that can only be used in the physical import mode
+- `tikv-importer.duplicate-resolution` (deprecated in v8.0.0): the conflict handling configuration that can only be used in the physical import mode
 - `lightning.task-info-schema-name`: the database where conflicting data is stored when TiDB Lightning detects conflicts
 
 For more information, see [TiDB Lightning (Task)](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task).
@@ -119,9 +119,9 @@ CREATE TABLE conflict_records (
 
 `type_error_v1` records all [type errors](#type-error) managed by `lightning.max-error`. Each error corresponds to one row.
 
-`conflict_error_v1` records all unique and primary key conflicts managed by `tikv-importer.duplicate-resolution` in the physical import mode. Each pair of conflicts corresponds to two rows.
+`conflict_error_v2` records conflicts managed by the `conflict` configuration group in the physical import mode. Each pair of conflicts corresponds to two rows.
 
-`conflict_records` records all unique and primary key conflicts managed by the `conflict` configuration group in logical import mode and physical import mode. Each error corresponds to one row.
+`conflict_records` records conflicts managed by the `conflict` configuration group in both the logical import mode and physical import mode. Each error corresponds to one row.
 
 | Column       | Syntax | Type | Conflict | Description                                                                                                                         |
 | ------------ | ------ | ---- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
