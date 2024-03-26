@@ -35,9 +35,7 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 | --------------------------------- | ----------- |
 | [JSON_APPEND(json_doc, path, value)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-append) | An alias to `JSON_ARRAY_APPEND` |
 | [JSON_ARRAY_APPEND(json_doc, path, val[, path, val] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-append) | Appends values to the end of the indicated arrays within a JSON document and returns the result |
-| [JSON_ARRAY_APPEND(json_doc, path, value)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-append) | Appends a value to the end of a JSON array at a specified path |
 | [JSON_ARRAY_INSERT(json_doc, path, val[, path, val] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-insert) | Insert values into the specified location of a JSON document and returns the result |
-| [JSON_ARRAY_INSERT(json_doc, path, val[, path, val] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-insert) | Inserts an array into the json document and returns the modified document |
 | [JSON_INSERT(json_doc, path, val[, path, val] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-insert) | Inserts data into a JSON document and returns the result |
 | [JSON_MERGE_PATCH(json_doc, json_doc[, json_doc] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge-patch)  | Merge JSON documents |
 | [JSON_MERGE_PRESERVE(json_doc, json_doc[, json_doc] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge-preserve)  | Merges two or more JSON documents and returns the merged result |
