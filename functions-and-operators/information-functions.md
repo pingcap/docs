@@ -214,7 +214,7 @@ SELECT USER(), CURRENT_USER();
 
 ### VERSION()
 
-This function returns the function of TiDB in a way that is compatible with MySQL. The [`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version) function can be used to get more details.
+This function returns the version of TiDB in a way that is compatible with MySQL. The [`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version) function can be used to get more details.
 
 ```
 mysql> SELECT VERSION();
