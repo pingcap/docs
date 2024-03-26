@@ -6,7 +6,7 @@ aliases: ['/docs/dev/sql-statements/sql-statement-explain/','/docs/dev/reference
 
 # `EXPLAIN`
 
-The `EXPLAIN` statement shows the execution plan for a query without executing it. It is complimented by `EXPLAIN ANALYZE` which will execute the query. If the output of `EXPLAIN` does not match the expected result, consider executing `ANALYZE TABLE` on each table in the query.
+The `EXPLAIN` statement shows the execution plan for a query without executing it. It complements the `EXPLAIN ANALYZE` statement, which executes the query. If the output of `EXPLAIN` does not match the expected result, consider executing `ANALYZE TABLE` on each table in the query to make sure the table statistics are up to date.
 
 The statements `DESC` and `DESCRIBE` are aliases of this statement. The alternative usage of `EXPLAIN <tableName>` is documented under [`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md).
 
