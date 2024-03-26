@@ -21,7 +21,7 @@ TiDB supports all of the [bit functions and operators](https://dev.mysql.com/doc
 
 # MySQL Compatibility
 
-There are some differences in how MySQL 8.0 and earlier versions of MySQL handle bit operations. TiDB aims to follow the MySQL 8.0 behaviour.
+There are some differences between MySQL 8.0 and earlier versions of MySQL handle bit operations. TiDB aims to follow the MySQL 8.0 behaviour.
 
 ## Known issues
 
