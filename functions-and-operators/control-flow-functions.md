@@ -14,7 +14,6 @@ TiDB supports all of the [control flow functions](https://dev.mysql.com/doc/refm
 | [`IFNULL()`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_ifnull) | Null if/else construct            |
 | [`NULLIF()`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_nullif) | Return NULL if expr1 = expr2      |
 
-
 ## CASE
 
 The `CASE` operator allows you to respond on multiple values and conditions.
