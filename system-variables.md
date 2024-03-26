@@ -1625,9 +1625,9 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_cloud_storage_uri <span class="version-mark">New in v7.4.0</span>
 
-> **Warning:**
+> **Note:**
 >
-> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> Currently, the [Global Sort](/tidb-global-sort.md) process consumes a large amount of computing and memory resources of TiDB nodes. In scenarios such as adding indexes online while user business applications are running, it is recommended to add new TiDB nodes to the cluster and set the [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) variable of these nodes to `"background"`. In this way, the distributed framework schedules tasks to these nodes, isolating the workload from other TiDB nodes to reduce the impact of executing backend tasks such as `ADD INDEX` and `IMPORT INTO` on user business applications.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
