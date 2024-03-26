@@ -277,7 +277,7 @@ EXPLAIN SELECT /*+ use_index_merge(t3, k1, k2, ka) */ * FROM t3 WHERE 1 member o
 +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+---------------------------------------------+
 ```
 
-If several `json_member_of`, `json_contains` or `json_overlaps` are connected with `OR` or `AND`, they need to meet the following requirements to use them to access multi-valued indexes with IndexMerge:
+If several `json_member_of`, `json_contains` or `json_overlaps` are connected with `OR` or `AND`, they need to meet the following requirements to access multi-valued indexes with IndexMerge:
 
 ```sql
 CREATE TABLE t4(a INT, j JSON, INDEX mvi1((CAST(j->'$.a' AS UNSIGNED ARRAY))), INDEX mvi2((CAST(j->'$.b' AS UNSIGNED ARRAY))));
@@ -562,7 +562,7 @@ EXPLAIN SELECT /*+ use_index_merge(t6, idx, idx2) */ * FROM t6 WHERE a=1 AND (1 
 +-------------------------------+---------+-----------+-------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
 ```
 
-If several `OR`s are nested in different places in `AND`, and they need expansion to correspond to the index columns, TiDB might not be able to make full use of all conditions. For example:
+If several `OR` conditions are nested in different places in `AND`, and they need expansion to correspond to the index columns, TiDB might not be able to make full use of all conditions. For example:
 
 ```sql
 EXPLAIN SELECT /*+ use_index_merge(t6, idx, idx2) */ * FROM t6 WHERE a=1 AND (1 member of (j) OR 2 member of (k)) and (b = 1 OR b = 2);
