@@ -70,8 +70,7 @@ SELECT n, IF(n MOD 2, "odd", "even") FROM d;
 
 ## IFNULL()
 
-The `IFNULL()` functions returns the data of the expression if it is not NULL and if it is NULL it returns the data
-of the second argument of the function.
+The `IFNULL()` functions returns the data of the expression if it is not NULL and if it is NULL it returns the data of the second argument of the function.
 
 ```sql
 WITH data AS (SELECT NULL AS x UNION ALL SELECT 1 )
