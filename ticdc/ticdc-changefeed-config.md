@@ -194,10 +194,10 @@ enable-partition-separator = true
 # The encoding method of binary data, which can be 'base64' or 'hex'. The default value is 'base64'.
 # binary-encoding-method = 'base64'
 # Whether to output handle key information. The default value is false. 
-# This variable is for internal implementation only and setting this variable is not recommended.
+# This configuration parameter is for internal implementation only, so it is not recommended to set it.
 # output-handle-key = false
 # Whether to output the value before the row data changes. The default value is false. 
-# After being turned on, the Update event will output two lines of data. The first line is a Delete event, which outputs the data before the change, and the second line is a Insert event, which outputs the changed data.
+# When it is enabled, the UPDATE event will output two rows of data: the first row is a DELETE event that outputs the data before the change; the second row is an INSERT event that outputs the changed data.
 # output-old-value = false
 
 # Starting from v8.0.0, TiCDC supports the Simple message encoding protocol. The following are the configuration parameters for the Simple protocol.
