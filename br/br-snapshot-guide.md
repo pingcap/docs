@@ -232,7 +232,6 @@ The impact of backup on cluster performance can be reduced by limiting the backu
     - Set the `--ratelimit` parameter to limit the download speed, ensuring sufficient resources for ingesting file tasks. For example, if the disk throughput of any TiKV node is `x MiB/s` and the network bandwidth for downloading backup files exceeds `x/2 MiB/s`, you can set the parameter as `--ratelimit x/2`. If the disk throughput of any TiKV node is `x MiB/s` and the network bandwidth for downloading backup files is less than or equal to `x/2 MiB/s`, you can leave the parameter `--ratelimit` unset.
     - Increase the `--tikv-max-restore-concurrency` to increase the maximum length of the job queue.
 
-
 ## See also
 
 * [TiDB Backup and Restore Use Cases](/br/backup-and-restore-use-cases.md)
