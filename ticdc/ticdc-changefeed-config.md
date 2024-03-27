@@ -193,9 +193,6 @@ enable-partition-separator = true
 # include-commit-ts = false
 # The encoding method of binary data, which can be 'base64' or 'hex'. The default value is 'base64'.
 # binary-encoding-method = 'base64'
-# Whether to output handle key information. The default value is false. 
-# This configuration parameter is for internal implementation only, so it is not recommended to set it.
-# output-handle-key = false
 # Whether to output the value before the row data changes. The default value is false. 
 # When it is enabled, the UPDATE event will output two rows of data: the first row is a DELETE event that outputs the data before the change; the second row is an INSERT event that outputs the changed data.
 # output-old-value = false
