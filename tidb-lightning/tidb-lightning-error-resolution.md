@@ -207,6 +207,7 @@ In this example, a data source is prepared with some known errors.
         [tikv-importer]
         backend = 'local'
         sorted-kv-dir = '/tmp/lightning-tmp/'
+
         [conflict]
         strategy = 'replace'
         [mydumper]
