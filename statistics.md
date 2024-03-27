@@ -8,9 +8,9 @@ aliases: ['/docs/dev/statistics/','/docs/dev/reference/performance/statistics/']
 
 Tidb uses statistics as input to the optimizer to estimate the number of rows processed in each plan step for a SQL statement. The optimizer estimates the cost of each available plan choice - including [index accesses](/choose-index.md), the sequence of table joins, and produces a cost for each available plan. The optimizer then picks the execution plan with the lowest overall cost.
 
-## Collection of Statistics
+## Collect Statistics
 
-### Automated update
+### Automatic update
 
 <CustomContent platform="tidb">
 
@@ -65,7 +65,7 @@ You can perform full collection using the following syntax.
 
 `WITH NUM SAMPLES` and `WITH FLOAT_NUM SAMPLERATE` correspond to two different algorithms of collecting samples.
 
-[Histograms](#histogram), [Top-N](#top-n-values) and [CMSketch](#count-min-sketch) (count-min sketch) are explained in their respective sections below, and `SAMPLES`/`SAMPLERATE` explained in the section on [Improving ANALYZE performance](#improving-analyze-performance)
+[Histograms](#histogram), [Top-N](#top-n-values) and [CMSketch](#count-min-sketch) (count-min sketch) are explained in their respective sections below, and `SAMPLES`/`SAMPLERATE` explained in the section on [Improving collection performance](#improving-collection-performance)
 For information on persisting the options used to allow for easier reuse, refer to [Persist ANALYZE configurations](#persist-analyze-configurations).
 
 ## Types of Statistics
@@ -118,11 +118,11 @@ When `IndexNameList` is empty, this syntax collects statistics on all indexes in
 >
 > To ensure that the statistical information before and after the collection is consistent, when `tidb_analyze_version` is `2`, this syntax collects statistics on the entire table (including all columns and indexes), instead of only on indexes.
 
-### Collect statistics on selected columns
+### Collect statistics on some columns
 
 In most cases, the optimizer only uses statistics on columns in the `WHERE`, `JOIN`, `ORDER BY`, and `GROUP BY` statements. These columns can be referred to as `PREDICATE COLUMNS`.
 
-If a table has many columns, collecting statistics on all the columns can cause a large overhead. To reduce the overhead, you can collect statistics on only specific columns (that you choose) or `PREDICATE COLUMNS` to be used by the optimizer. To persist the column list of any subset of columns for reuse in future, refer to the section [Persist Column Configurations](#persist-column-configurations).
+If a table has many columns, collecting statistics on all the columns can cause a large overhead. To reduce the overhead, you can collect statistics on only specific columns (that you choose) or `PREDICATE COLUMNS` to be used by the optimizer. To persist the column list of any subset of columns for reuse in future, refer to the section [Persisting Column Configurations](#persisting-column-configurations).
 
 > **Note:**
 >
@@ -237,7 +237,7 @@ If partitions are empty, or columns for some partitions are missing, then the co
 > -  Starting from v7.5.0, the [Fast Analyze feature (`tidb_enable_fast_analyze`)](/system-variables.md#tidb_enable_fast_analyze) and the [incremental collection feature](https://docs.pingcap.com/tidb/v7.4/statistics#incremental-collection) for statistics are deprecated.
 
 TiDB provides two options to improve the performance of statistics collection:
-1. Collecting statistics on a subset of the columns - refer to the prior section [Collecting Statistics on Selected Columns](#collect-statistics-on-selected-columns)
+1. Collecting statistics on a subset of the columns - refer to the prior section [Collecting Statistics on Some Columns](#collect-statistics-on-some-columns)
 2. Sampling
 
 ### Statistics Sampling
@@ -335,7 +335,7 @@ After disabling the `ANALYZE` configuration persistence feature, TiDB does not c
 >
 > When you enable the `ANALYZE` configuration persistence feature again, if the previously recorded persistence configurations are no longer applicable to the latest data, you need to execute the `ANALYZE` statement manually and specify the new persistence configurations.
 
-### Persisting Column Configuration
+### Persisting Column Configurations
 
 If you want to persist the column configuration in the `ANALYZE` statement (including `COLUMNS ColumnNameList`, `PREDICATE COLUMNS`, and `ALL COLUMNS`), set the value of the `tidb_persist_analyze_options` system variable to `ON` to enable the [ANALYZE configuration persistence](#persist-analyze-configurations) feature. After enabling the ANALYZE configuration persistence feature:
 
@@ -409,7 +409,7 @@ The `tidb_analyze_version` variable controls the statistics collected by TiDB. C
 - For TiDB Cloud, the default value of this variable changes from `1` to `2` starting from v6.5.0.
 - If your cluster is upgraded from an earlier version, the default value of `tidb_analyze_version` does not change after the upgrade.
 
-Version 2 is preferred, and will continue to be enhanced to ultimately replace Version 1 completely. Compared to Version 1, Version 2 improves the accuracy of many of the statistics collected for larger data volumes. Version 2 also improves collection performance by removing the need to collect Count-Min sketch statistics for predicate selectivity estimation, and also supporting automated collection only on selected columns (see section on [Collecting Statistics on Selected Columns](#collect-statistics-on-selected-columns)).
+Version 2 is preferred, and will continue to be enhanced to ultimately replace Version 1 completely. Compared to Version 1, Version 2 improves the accuracy of many of the statistics collected for larger data volumes. Version 2 also improves collection performance by removing the need to collect Count-Min sketch statistics for predicate selectivity estimation, and also supporting automated collection only on selected columns (see section on [Collecting Statistics on Some Columns](#collect-statistics-on-some-columns)).
 
 The following table lists the information collected by each version for usage in the optimizer estimates:
 
