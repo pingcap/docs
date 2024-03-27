@@ -133,7 +133,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) | Y | Y | Y | Y | Y | N | N | N | N | N | N | N |
 | [Pause](/sql-statements/sql-statement-admin-pause-ddl.md)/[Resume](/sql-statements/sql-statement-admin-resume-ddl.md) DDL | Y | Y | Y | N | N | N | N | N | N | N | N | N |
 | [TiDB Accelerated Table Creation](/accelerated-table-creation.md) | E | N | N | N | N | N | N | N | N | N | N | N |
-| [Configure BDR role to replicate DDL statements in BDR mode](/sql-statement-admin-bdr-role.md#admin-setshowunset-bdr-role) | E | E | N | N | N | N | N | N | N | N | N | N |
+| [Configure BDR role to replicate DDL statements in BDR mode](/sql-statements/sql-statement-admin-bdr-role.md#admin-setshowunset-bdr-role) | E | E | N | N | N | N | N | N | N | N | N | N |
 
 ## Transactions
 
@@ -261,6 +261,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [PD microservices](/pd-microservices.md) | Y | N | N | N | N | N | N | N | N | N | N | N |
 | [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md) | Y | Y | Y | E | N | N | N | N | N | N | N | N |
 | [Global Sort](/tidb-global-sort.md) | Y | E | E | N | N | N | N | N | N | N | N | N |
+
 [^1]: TiDB incorrectly treats latin1 as a subset of utf8. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
 
 [^2]: Starting from v6.5.0, the expression indexes created on the functions listed by the [`tidb_allow_function_for_expression_index`](/system-variables.md#tidb_allow_function_for_expression_index-new-in-v520) system variable have been tested and can be used in production environments, and more functions will be supported in the future releases. For functions not listed by this variable, the corresponding expression indexes are not recommended for use in production environments. See [expression indexes](/sql-statements/sql-statement-create-index.md#expression-index) for details.
