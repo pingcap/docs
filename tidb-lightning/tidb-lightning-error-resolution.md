@@ -194,7 +194,7 @@ In this example, a data source is prepared with some known errors.
     EOF
     ```
 
-3. Configure TiDB Lightning to enable strict SQL mode, use the Local-backend to import data, delete duplicates, and skip up to 10 errors.
+3. Configure TiDB Lightning to enable strict SQL mode, use the Local-backend to import data, replace duplicates, and skip up to 10 errors.
 
     {{< copyable "shell-regular" >}}
 
@@ -207,8 +207,8 @@ In this example, a data source is prepared with some known errors.
         [tikv-importer]
         backend = 'local'
         sorted-kv-dir = '/tmp/lightning-tmp/'
-        duplicate-resolution = 'remove'
-
+        [conflict]
+        strategy = 'replace'
         [mydumper]
         data-source-dir = '.'
         [tidb]
