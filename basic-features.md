@@ -132,7 +132,8 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Metadata lock](/metadata-lock.md) | Y | Y | Y | Y | Y | N | N | N | N | N | N | N |
 | [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) | Y | Y | Y | Y | Y | N | N | N | N | N | N | N |
 | [Pause](/sql-statements/sql-statement-admin-pause-ddl.md)/[Resume](/sql-statements/sql-statement-admin-resume-ddl.md) DDL | Y | Y | Y | N | N | N | N | N | N | N | N | N |
-| [TiDB DDL V2](/ddl-v2.md) | E | E | N | N | N | N | N | N | N | N | N | N |
+| [TiDB Accelerated Table Creation](/accelerated-table-creation.md) | E | N | N | N | N | N | N | N | N | N | N | N |
+| [Configure BDR role to replicate DDL statements in BDR mode](/sql-statement-admin-bdr-role#admin-setshowunset-bdr-role) | E | E | N | N | N | N | N | N | N | N | N | N |
 
 ## Transactions
 
@@ -257,7 +258,9 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Selecting TiDB nodes for the Distributed eXecution Framework (DXF) tasks](/system-variables.md#tidb_service_scope-new-in-v740) | Y | Y | Y | N | N | N | N | N | N | N | N | N |
 | PD Follower Proxy (controlled by [`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530)) | Y | Y | Y | Y | Y | Y | Y | Y | N | N | N | N |
 | [Active PD Follower](/tune-region-performance.md#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service) (controlled by [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)) | E | E | N | N | N | N | N | N | N | N | N | N |
-
+| [PD microservices](/pd-microservices.md) | Y | N | N | N | N | N | N | N | N | N | N | N |
+| [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md) | Y | Y | Y | E | N | N | N | N | N | N | N | N |
+| [Global Sort](/tidb-global-sort.md) | Y | E | E | N | N | N | N | N | N | N | N | N |
 [^1]: TiDB incorrectly treats latin1 as a subset of utf8. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
 
 [^2]: Starting from v6.5.0, the expression indexes created on the functions listed by the [`tidb_allow_function_for_expression_index`](/system-variables.md#tidb_allow_function_for_expression_index-new-in-v520) system variable have been tested and can be used in production environments, and more functions will be supported in the future releases. For functions not listed by this variable, the corresponding expression indexes are not recommended for use in production environments. See [expression indexes](/sql-statements/sql-statement-create-index.md#expression-index) for details.
