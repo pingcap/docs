@@ -113,9 +113,9 @@ alertmanager_servers:
 >
 > -   特定のノードで有効にするパラメータについては、このノードの`config`でこれらのパラメータを設定します。
 >
-> -   構成のサブカテゴリを示すには`.`を使用します ( `log.slow-threshold`など)。その他の形式については、 [TiUP設定テンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。
+> -   構成のサブカテゴリを示すには`.`を使用します ( `log.slow-threshold`など)。その他の形式については、 [TiUP構成テンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。
 >
-> -   パラメーターの詳細については、 [マスター`config.toml.example`](https://github.com/pingcap/dm/blob/master/dm/master/dm-master.toml)および[ワーカーの`config.toml.example`](https://github.com/pingcap/dm/blob/master/dm/worker/dm-worker.toml)を参照してください。
+> -   パラメーターの詳細については、 [マスター`config.toml.example`](https://github.com/pingcap/tiflow/blob/master/dm/master/dm-master.toml)および[ワーカーの`config.toml.example`](https://github.com/pingcap/tiflow/blob/master/dm/worker/dm-worker.toml)を参照してください。
 >
 > -   次のコンポーネント間のポートが相互接続されていることを確認してください。
 >     -   DM マスター ノードのうちの`peer_port` (デフォルトでは`8291` ) は相互接続されています。

@@ -139,7 +139,7 @@ alertmanager_servers:
 >     -   TiUPノードは、すべての DM マスター ノードのうちの`port`に接続できます (デフォルトでは`8261` )。
 >     -   TiUPノードは、すべての DM ワーカー ノードのうちの`port`に接続できます (デフォルトでは`8262` )。
 
-`master_servers.host.config`パラメータの詳細については、 [マスターパラメータ](https://github.com/pingcap/dm/blob/master/dm/master/dm-master.toml)を参照してください。 `worker_servers.host.config`パラメータの詳細については、 [ワーカーパラメータ](https://github.com/pingcap/dm/blob/master/dm/worker/dm-worker.toml)を参照してください。
+`master_servers.host.config`パラメータの詳細については、 [マスターパラメータ](https://github.com/pingcap/tiflow/blob/master/dm/master/dm-master.toml)を参照してください。 `worker_servers.host.config`パラメータの詳細については、 [ワーカーパラメータ](https://github.com/pingcap/tiflow/blob/master/dm/worker/dm-worker.toml)を参照してください。
 
 ## ステップ 3: デプロイメント コマンドを実行する {#step-3-execute-the-deployment-command}
 
@@ -168,7 +168,7 @@ tiup dm deploy ${name} ${version} ./topology.yaml -u ${ssh_user} [-p] [-i /home/
 
 出力ログの最後には``Deployed cluster `dm-test` successfully``が表示されます。これは、展開が成功したことを示します。
 
-## ステップ 4: TiUPによって管理されているクラスターを確認する {#step-4-check-the-clusters-managed-by-tiup}
+## ステップ4: TiUPによって管理されているクラスターを確認する {#step-4-check-the-clusters-managed-by-tiup}
 
 ```shell
 tiup dm list

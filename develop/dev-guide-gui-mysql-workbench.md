@@ -149,10 +149,23 @@ TiDB は MySQL と互換性のあるデータベースであり、 [MySQL ワー
 </div>
 </SimpleTab>
 
+## よくある質問 {#faqs}
+
+### 接続タイムアウト エラー「エラー コード: 2013。クエリ中に MySQLサーバーへの接続が失われました」を処理する方法は? {#how-to-handle-the-connection-timeout-error-error-code-2013-lost-connection-to-mysql-server-during-query}
+
+このエラーは、クエリの実行時間がタイムアウト制限を超えたことを示します。この問題を解決するには、次の手順でタイムアウト設定を調整します。
+
+1.  MySQL Workbench を起動し、 **Workbench の設定**ページに移動します。
+2.  **[SQL エディター]** &gt; **[MySQL セッション]**セクションで、 **DBMS 接続読み取りタイムアウト間隔 (秒単位)**オプションを構成します。これは、MySQL Workbench がサーバーから切断されるまでのクエリにかかる最大時間 (秒単位) を設定します。
+
+    ![MySQL Workbench: adjust timeout option in SQL Editor settings](/media/develop/mysql-workbench-adjust-sqleditor-read-timeout.jpg)
+
+詳細については、 [MySQL Workbench に関するよくある質問](https://dev.mysql.com/doc/workbench/en/workbench-faq.html)を参照してください。
+
 ## 次のステップ {#next-steps}
 
 -   MySQL Workbench の詳しい使い方を[MySQL Workbench のドキュメント](https://dev.mysql.com/doc/workbench/en/)から学びましょう。
--   TiDB アプリケーション開発の[SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)プラクティスについて[取引](/develop/dev-guide-transaction-overview.md) 、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[データの削除](/develop/dev-guide-delete-data.md) [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ください。
+-   TiDB アプリケーション開発の[SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)プラクティスについて[トランザクション](/develop/dev-guide-transaction-overview.md) 、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[データの削除](/develop/dev-guide-delete-data.md) [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ください。
 -   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## 助けが必要？ {#need-help}

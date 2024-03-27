@@ -9,7 +9,7 @@ summary: Learn how to use the OpenAPI interface to manage the cluster status and
 
 > **注記**
 >
-> TiCDC OpenAPI v1 は非推奨となり、将来削除される予定です。 [TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md)を使用することをお勧めします。
+> TiCDC OpenAPI v1 は非推奨となっており、将来削除される予定です。 [TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md)を使用することをお勧めします。
 
 TiCDC は、TiCDC クラスターのクエリと操作のための OpenAPI 機能を提供します。これは、 [`cdc cli`ツール](/ticdc/ticdc-manage-changefeed.md)の機能に似ています。
 
@@ -148,7 +148,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/health
 
 `matcher` : matcher のマッチング構文はフィルター ルールの構文と同じです。
 
-`protocol` : MQ タイプのシンクの場合、メッセージのプロトコル形式を指定できます。現在、次のプロトコルがサポートされています: `canal-json` 、 `open-protocol` 、 `canal` 、 `avro` 、および`maxwell` 。
+`protocol` : MQ タイプのシンクの場合、メッセージのプロトコル形式を指定できます。現在、次のプロトコルがサポートされています: `canal-json` 、 `open-protocol` 、 `avro` 、および`maxwell` 。
 
 ### 例 {#example}
 
@@ -222,7 +222,7 @@ curl -X DELETE http://127.0.0.1:8300/api/v1/changefeeds/test1
 
 リクエストが成功すると`202 Accepted`が返されます。リクエストが失敗した場合は、エラー メッセージとエラー コードが返されます。
 
-## レプリケーションタスクリストのクエリ {#query-the-replication-task-list}
+## レプリケーションタスクリストをクエリする {#query-the-replication-task-list}
 
 この API は同期インターフェイスです。リクエストが成功すると、TiCDC クラスター内のすべてのノードの基本情報が返されます。
 
@@ -376,7 +376,7 @@ curl -X POST http://127.0.0.1:8300/api/v1/changefeeds/test1/pause
 curl -X POST http://127.0.0.1:8300/api/v1/changefeeds/test1/resume
 ```
 
-リクエストが成功すると`202 Accepted`が返されます。リクエストが失敗した場合は、エラー メッセージとエラー コードが返されます。
+要求が成功した場合は`202 Accepted`が返されます。要求が失敗した場合は、エラー メッセージとエラー コードが返されます。
 
 ## レプリケーションサブタスクリストのクエリ {#query-the-replication-subtask-list}
 

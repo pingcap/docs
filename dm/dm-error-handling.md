@@ -69,7 +69,7 @@ summary: Learn about the error system and how to handle common errors when you u
 
     DM がエラースタック情報を出力するかどうかは、エラーの重大度と必要性に応じて異なります。エラー スタックには、エラーが発生したときの完全なスタック呼び出し情報が記録されます。基本情報やエラーメッセージからはエラーの原因が特定できない場合は、エラースタックを使用してエラー発生時のコードの実行パスを追跡できます。
 
-エラー コードの完全なリストについては、 [エラーコードリスト](https://github.com/pingcap/dm/blob/master/_utils/terror_gen/errors_release.txt)を参照してください。
+エラー コードの完全なリストについては、 [エラーコードリスト](https://github.com/pingcap/tiflow/blob/master/dm/_utils/terror_gen/errors_release.txt)を参照してください。
 
 ## トラブルシューティング {#troubleshooting}
 

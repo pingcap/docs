@@ -9,12 +9,11 @@ TiDB CloudはAI を活用しています。 [TiDB Cloudコンソール](https://
 
 Chat2Query では、 `--`入力してから AI に SQL クエリを自動的に生成させる指示を入力するか、SQL クエリを手動で作成して、ターミナルを使用せずにデータベースに対して SQL クエリを実行することができます。クエリ結果をテーブルで直感的に見つけたり、クエリログを簡単に確認したりできます。
 
-> **注記：**
->
-> Chat2Query は、AWS でホストされている v6.5.0 以降の TiDB クラスターでサポートされています。
->
-> -   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターの場合、Chat2Query はデフォルトで使用可能です。
-> -   [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの場合、Chat2Query はリクエストに応じてのみ利用可能です。 TiDB 専用クラスターで Chat2Query を使用するには、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+## 制限事項 {#limitations}
+
+-   AI によって生成された SQL クエリは 100% 正確ではない可能性があり、調整が必要になる場合があります。
+-   Chat2Query は、v6.5.0 以降で AWS でホストされている TiDB クラスターでのみサポートされます。
+-   Chat2Query と[Chat2Query API](https://docs.pingcap.com/tidbcloud/use-chat2query-api)デフォルトで[TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)のクラスターで使用できます。 [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターで Chat2Query または Chat2Query API を使用するには、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 ## ユースケース {#use-cases}
 
@@ -23,11 +22,6 @@ Chat2Query の推奨される使用例は次のとおりです。
 -   Chat2Query の AI 機能を使用すると、複雑な SQL クエリを即座に生成できます。
 -   TiDB の MySQL 互換性をすぐにテストします。
 -   TiDB SQL の機能を簡単に探索できます。
-
-## 制限 {#limitation}
-
--   AI によって生成された SQL クエリは 100% 正確ではないため、さらに調整が必要な場合があります。
--   [Chat2Query API](/tidb-cloud/use-chat2query-api.md) [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターで使用できます。 [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターで Chat2Query API を使用するには、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 ## Chat2Query にアクセスする {#access-chat2query}
 
@@ -111,6 +105,20 @@ Chat2Query では、SQL クエリをさまざまな SQL ファイルに保存し
 -   SQL ファイルの名前を変更するには、ファイル名の上にカーソルを移動し、ファイル名の横にある**[...]**をクリックして、 **[名前の変更]**を選択します。
 -   SQL ファイルを削除するには、ファイル名の上にカーソルを移動し、ファイル名の横にある**[...]**をクリックして、 **[削除]**を選択します。 **[SQL ファイル]**タブに SQL ファイルが 1 つしかない場合は、削除できないことに注意してください。
 
+## API経由でChat2Queryにアクセス {#access-chat2query-via-api}
+
+Chat2Query には UI 経由でアクセスするだけでなく、API 経由でアクセスすることもできます。これを行うには、まず Chat2Query データ アプリを作成する必要があります。
+
+Chat2Query では、次のように Chat2Query データ アプリにアクセスしたり、Chat2Query データ アプリを作成したりできます。
+
+1.  右上隅の**[...]**をクリックし、 **[API 経由で Chat2Query にアクセス] を**クリックします。
+2.  表示されたダイアログで、次のいずれかを実行します。
+
+    -   新しい Chat2Query データ アプリを作成するには、 **[新しい Chat2Query データ アプリ]**をクリックします。
+    -   既存の Chat2Query データ アプリにアクセスするには、ターゲット データ アプリの名前をクリックします。
+
+詳細については、 [Chat2Query API を使ってみる](/tidb-cloud/use-chat2query-api.md)を参照してください。
+
 ## SQL ファイルからエンドポイントを生成する {#generate-an-endpoint-from-a-sql-file}
 
 TiDB クラスターの場合、 TiDB Cloud は、カスタム API エンドポイントを使用して HTTPS リクエスト経由でTiDB Cloudデータにアクセスできるようにする[データサービス（ベータ版）](/tidb-cloud/data-service-overview.md)機能を提供します。 Chat2Query では、次の手順を実行して SQL ファイルから Data Service (ベータ版) のエンドポイントを生成できます。
@@ -127,7 +135,6 @@ Chat2Query では、次の設定を変更できます。
 
 -   クエリ結果の最大行数
 -   **[スキーマ]**タブにシステム データベース スキーマを表示するかどうか
--   有効にするかどうか[Chat2Query API](/tidb-cloud/use-chat2query-api.md)
 
 設定を変更するには、次の手順を実行します。
 

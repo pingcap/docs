@@ -5,7 +5,7 @@ summary: Learn how to quickly deploy a DM cluster using binary packages.
 
 # TiDB データ移行のクイック スタート ガイド {#quick-start-guide-for-tidb-data-migration}
 
-このドキュメントでは、 [TiDB データ移行](https://github.com/pingcap/dm) (DM) を使用して MySQL から TiDB にデータを移行する方法について説明します。このガイドは DM 機能の簡単なデモであり、本番環境には推奨されません。
+このドキュメントでは、 [TiDB データ移行 (DM)](/dm/dm-overview.md)を使用して MySQL から TiDB にデータを移行する方法について説明します。このガイドは DM 機能の簡単なデモであり、本番環境には推奨されません。
 
 ## ステップ 1: DM クラスターをデプロイ {#step-1-deploy-a-dm-cluster}
 

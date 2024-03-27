@@ -31,7 +31,7 @@ TiDB は`sql-statement`に基づいて、次のオンサイト情報を整理し
 -   `EXPLAIN [ANALYZE] sql-statement`の結果
 -   クエリ最適化のいくつかの内部手順
 
-履歴統計が[有効化](/system-variables.md#tidb_enable_historical_stats)の場合、 `PLAN REPLAYER`ステートメントで時間を指定して、対応する時間の履歴統計を取得できます。日時を直接指定することも、タイムスタンプを指定することもできます。 TiDB は、指定された時刻より前の履歴統計を検索し、その中の最新の統計をエクスポートします。
+履歴統計が[有効](/system-variables.md#tidb_enable_historical_stats)の場合、 `PLAN REPLAYER`ステートメントで時間を指定すると、対応する時間の履歴統計を取得できます。日時を直接指定することも、タイムスタンプを指定することもできます。 TiDB は、指定された時刻より前の履歴統計を検索し、その中の最新の統計をエクスポートします。
 
 指定された時刻より前の履歴統計がない場合、TiDB は最新の統計をエクスポートします。これは、時刻が指定されていない場合の動作と一致します。さらに、TiDB は、エクスポートされた`ZIP`ファイル内の`errors.txt`ファイルにエラー メッセージを出力。
 
@@ -133,12 +133,22 @@ curl http://127.0.0.1:10080/plan_replayer/dump/replayer_JOGvpu4t7dssySqJfTtS4A==
 PLAN REPLAYER LOAD 'file_name';
 ```
 
-上記のステートメントでは、 `file_name`はエクスポートされる`ZIP`ファイルの名前です。
+上記のステートメントの`file_name` 、インポートされる`ZIP`ファイルの名前です。
 
 例えば：
 
 ```sql
 PLAN REPLAYER LOAD 'plan_replayer.zip';
+```
+
+> **注記：**
+>
+> auto analyzeを無効にする必要があります。そうしないと、インポートされた統計が分析によって上書きされます。
+
+auto analyzeを無効にするには、システム変数[`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610)を`OFF`に設定します。
+
+```sql
+set @@global.tidb_enable_auto_analyze = OFF;
 ```
 
 クラスター情報がインポートされると、必要なテーブル スキーマ、統計、および実行計画の構築に影響を与えるその他の情報が TiDB クラスターにロードされます。次の方法で実行計画を表示し、統計を確認できます。

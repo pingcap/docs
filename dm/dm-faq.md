@@ -15,16 +15,16 @@ Alibaba Cloud RDS の主キーのない上流テーブルの場合、そのbinlo
 
 互換性のない既知の問題をいくつか次に示します。
 
--   **Alibaba Cloud RDS**では、主キーのない上流テーブルの場合、そのbinlogには依然として非表示の主キー列が含まれており、元のテーブル構造と矛盾しています。
+-   **Alibaba Cloud RDS**では、主キーのない上流テーブルの場合、そのbinlogには依然として非表示の主キー列が含まれており、元のテーブル構造と矛盾します。
 -   **HUAWEI Cloud RDS**では、 binlogファイルの直接読み取りはサポートされていません。詳細については、 [HUAWEI Cloud RDS はBinlogバックアップ ファイルを直接読み取ることができますか?](https://support.huaweicloud.com/en-us/rds_faq/rds_faq_0210.html)参照してください。
 
 ## タスク設定のブロックと許可リストの正規表現は<code>non-capturing (?!)</code>をサポートしていますか? {#does-the-regular-expression-of-the-block-and-allow-list-in-the-task-configuration-support-code-non-capturing-code}
 
 現在、DM はこれをサポートしておらず、 Golang標準ライブラリの正規表現のみをサポートしています。 Golangでサポートされている正規表現については、 [re2 構文](https://github.com/google/re2/wiki/Syntax)参照してください。
 
-## 上流で実行されるステートメントに複数の DDL 操作が含まれている場合、DM はそのような移行をサポートしますか? {#if-a-statement-executed-upstream-contains-multiple-ddl-operations-does-dm-support-such-migration}
+## アップストリームで実行されるステートメントに複数の DDL 操作が含まれている場合、DM はそのような移行をサポートしますか? {#if-a-statement-executed-upstream-contains-multiple-ddl-operations-does-dm-support-such-migration}
 
-DM は、複数の DDL 変更操作を含む 1 つのステートメントを、1 つの DDL 操作のみを含む複数のステートメントに分割しようとしますが、すべてのケースをカバーできるわけではありません。上流で実行されるステートメントには DDL 操作を 1 つだけ含めるか、テスト環境で検証することをお勧めします。サポートされていない場合は、DM リポジトリに[問題](https://github.com/pingcap/dm/issues)を提出できます。
+DM は、複数の DDL 変更操作を含む 1 つのステートメントを、1 つの DDL 操作のみを含む複数のステートメントに分割しようとしますが、すべてのケースをカバーできるわけではありません。上流で実行されるステートメントには DDL 操作を 1 つだけ含めるか、テスト環境で検証することをお勧めします。サポートされていない場合は、 [問題](https://github.com/pingcap/tiflow/issues) ～ `pingcap/tiflow`リポジトリをファイルできます。
 
 ## 互換性のない DDL ステートメントを処理するにはどうすればよいですか? {#how-to-handle-incompatible-ddl-statements}
 
@@ -53,7 +53,7 @@ TiDB でサポートされていない DDL ステートメントが発生した�
 
 ## <code>online-ddl: true</code>が設定された後、gh-ost テーブルに関連する DDL 操作によって返されたエラーを処理する方法は? {#how-to-handle-the-error-returned-by-the-ddl-operation-related-to-the-gh-ost-table-after-code-online-ddl-true-code-is-set}
 
-    [unit=Sync] ["error information"="{\"msg\":\"[code=36046:class=sync-unit:scope=internal:level=high] online ddls on ghost table `xxx`.`_xxxx_gho`\\ngithub.com/pingcap/dm/pkg/terror.(*Error).Generate ......
+    [unit=Sync] ["error information"="{\"msg\":\"[code=36046:class=sync-unit:scope=internal:level=high] online ddls on ghost table `xxx`.`_xxxx_gho`\\ngithub.com/pingcap/tiflow/pkg/terror.(*Error).Generate ......
 
 上記のエラーは、次の理由によって発生する可能性があります。
 
@@ -96,7 +96,7 @@ MySQL はエクスポート用のスナップショットを指定できない�
 
 ### <code>Sync</code>ステージでは {#in-the-code-sync-code-stage}
 
-データ移行タスクが`Sync`段階にある場合、構成ファイルにテーブルを追加してタスクを再開すると、DM は新しく追加されたテーブルに対して完全なエクスポートとインポートを再実行しません。代わりに、DM は前のチェックポイントから増分レプリケーションを続行します。
+データ移行タスクが`Sync`段階にあるときに、構成ファイルにテーブルを追加してタスクを再開しても、DM は新しく追加されたテーブルに対して完全なエクスポートとインポートを再実行しません。代わりに、DM は前のチェックポイントから増分レプリケーションを続行します。
 
 したがって、新しく追加されたテーブルの完全なデータがダウンストリームにインポートされていない場合は、別のデータ移行タスクを使用して、完全なデータをダウンストリームにエクスポートおよびインポートする必要があります。
 
@@ -162,7 +162,7 @@ DM 1.0 では、モニター データを生成するには`enable-heartbeat`を
 -   データは手動または他のレプリケーション プログラムによって挿入されません。
 -   このテーブルに関連付けられた DML フィルターは構成されていません。
 
-トラブルシューティングを容易にするために、まずダウンストリーム TiDB インスタンスの一般的なログ ファイルを収集し、次に[TiDB コミュニティのスラック チャンネル](https://tidbcommunity.slack.com/archives/CH7TTLL7P)でテクニカル サポートを依頼できます。次の例は、一般的なログ ファイルを収集する方法を示しています。
+トラブルシューティングを容易にするために、まずダウンストリーム TiDB インスタンスの一般的なログ ファイルを収集し、次に[TiDB コミュニティのスラック チャンネル](https://tidbcommunity.slack.com/archives/CH7TTLL7P)でテクニカル サポートに問い合わせることができます。次の例は、一般的なログ ファイルを収集する方法を示しています。
 
 ```bash
 # Enable general log collection
@@ -185,7 +185,7 @@ curl -X POST -d "tidb_general_log=0" http://{TiDBIP}:10080/settings
 
     if the DDL is not needed, you can use a filter rule with \"*\" schema-pattern to ignore it.\n\t : parse statement: line 1 column 11 near \"EVENT `event_del_big_table` \r\nDISABLE\" %!!(MISSING)(EXTRA string=ALTER EVENT `event_del_big_table` \r\nDISABLE
 
-このタイプのエラーの理由は、TiDB パーサーがアップストリームによって送信された DDL ステートメント ( `ALTER EVENT`など) を解析できないため、 `sql-skip`期待どおりに機能しないことです。構成ファイルに[binlogイベントフィルター](/dm/dm-binlog-event-filter.md)追加してこれらのステートメントをフィルターし、 `schema-pattern: "*"`を設定できます。 DM v2.0.1 以降、DM は`EVENT`に関連するステートメントを事前にフィルターします。
+このタイプのエラーの理由は、TiDB パーサーがアップストリームによって送信された DDL ステートメント ( `ALTER EVENT`など) を解析できないため、 `sql-skip`期待どおりに機能しないことです。構成ファイルに[binlogイベント フィルター](/dm/dm-binlog-event-filter.md)追加してこれらのステートメントをフィルターし、 `schema-pattern: "*"`を設定できます。 DM v2.0.1 以降、DM は`EVENT`に関連するステートメントを事前にフィルターします。
 
 DM v6.0 以降、 `sql-skip`と`handle-error`は`binlog`に置き換えられます。この問題を回避するには、代わりに`binlog`コマンドを使用します。
 
@@ -354,7 +354,7 @@ DM v2.0.1 以前のバージョンでは、完全なインポートが完了す�
 
 DM マスターが起動すると、DM は現在のディレクトリに etcd 情報を記録します。 DM マスターの再起動後にディレクトリが変更されると、DM は etcd 情報にアクセスできないため、再起動は失敗します。
 
-この問題を解決するには、 TiUP を使用して DM クラスターを保守することをお勧めします。バイナリ ファイルを使用してデプロイする必要がある場合は、DM マスターの設定ファイルで絶対パスを使用して`data-dir`を設定するか、コマンドを実行する現在のディレクトリに注意する必要があります。
+この問題を解決するには、 TiUPを使用して DM クラスターを保守することをお勧めします。バイナリ ファイルを使用してデプロイする必要がある場合は、DM マスターの設定ファイルで絶対パスを使用して`data-dir`を設定するか、コマンドを実行する現在のディレクトリに注意する必要があります。
 
 ## dmctl を使用してコマンドを実行すると DM-master に接続できないのはなぜですか? {#why-dm-master-cannot-be-connected-when-i-use-dmctl-to-execute-commands}
 

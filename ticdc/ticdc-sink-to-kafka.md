@@ -59,7 +59,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-v
 | `replication-factor`                 | 保存できる Kafka メッセージ レプリカの数 (オプション、デフォルトでは`1` )。この値は、Kafka の値[`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas)以上である必要があります。                                                                                                                                                                                                                             |
 | `required-acks`                      | `Produce`リクエストで使用されるパラメータ。応答する前に受信する必要があるレプリカ確認応答の数をブローカーに通知します。値のオプションは`0` ( `NoResponse` : 応答なし、 `TCP ACK`のみが提供される)、 `1` ( `WaitForLocal` : ローカル コミットが正常に送信された後にのみ応答する)、および`-1` ( `WaitForAll` : すべての複製されたレプリカが正常にコミットされた後に応答する) です。最小数は構成できます。ブローカーの[`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas)構成項目を使用して複製されたレプリカの数）。 (オプション、デフォルト値は`-1` )。 |
 | `compression`                        | メッセージの送信時に使用される圧縮アルゴリズム (値のオプションは`none` 、 `lz4` 、 `gzip` 、 `snappy` 、および`zstd`です。デフォルトでは`none`です)。 Snappy 圧縮ファイルは[公式の Snappy フォーマット](https://github.com/google/snappy)にある必要があることに注意してください。 Snappy 圧縮の他のバリアントはサポートされていません。                                                                                                                                                                                    |
-| `protocol`                           | Kafka へのメッセージの出力に使用されるプロトコル。値のオプションは`canal-json` 、 `open-protocol` 、 `canal` 、 `avro`および`maxwell`です。                                                                                                                                                                                                                                                                                                         |
+| `protocol`                           | Kafka へのメッセージの出力に使用されるプロトコル。値のオプションは`canal-json` 、 `open-protocol` 、 `avro`および`maxwell`です。                                                                                                                                                                                                                                                                                                                   |
 | `auto-create-topic`                  | 渡された`topic-name` Kafka クラスターに存在しない場合に、TiCDC がトピックを自動的に作成するかどうかを決定します (オプション、デフォルトでは`true` )。                                                                                                                                                                                                                                                                                                                 |
 | `enable-tidb-extension`              | オプション。デフォルトでは`false` 。出力プロトコルが`canal-json`の場合、値が`true`の場合、TiCDC は[ウォーターマークイベント](/ticdc/ticdc-canal-json.md#watermark-event)送信し、 [TiDB 拡張フィールド](/ticdc/ticdc-canal-json.md#tidb-extension-field)を Kafka メッセージに追加します。 v6.1.0 以降、このパラメータは`avro`プロトコルにも適用されます。値が`true`の場合、TiCDC は Kafka メッセージに[3 つの TiDB 拡張フィールド](/ticdc/ticdc-avro-protocol.md#tidb-extension-fields)を追加します。                                    |
 | `max-batch-size`                     | v4.0.9 の新機能。メッセージ プロトコルが 1 つの Kafka メッセージへの複数のデータ変更の出力をサポートしている場合、このパラメーターは 1 つの Kafka メッセージ内のデータ変更の最大数を指定します。現在、Kafka の`protocol`が`open-protocol` (オプション、デフォルトでは`16` ) の場合にのみ有効になります。                                                                                                                                                                                                                       |
@@ -157,6 +157,28 @@ dispatchers = [
 
 詳細な統合ガイドについては、 [TiDB と Confluent プラットフォームの統合に関するクイック スタート ガイド](/ticdc/integrate-confluent-using-ticdc.md)を参照してください。
 
+### TiCDC を AWS Glue スキーマ レジストリと統合する {#integrate-ticdc-with-aws-glue-schema-registry}
+
+v7.4.0 以降、TiCDC は、ユーザーがデータ レプリケーションに Avro プロトコルを選択した場合に、スキーマ レジストリとして[AWS Glue スキーマレジストリ](https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html)の使用をサポートします。構成例は以下のとおりです。
+
+```shell
+./cdc cli changefeed create --server=127.0.0.1:8300 --changefeed-id="kafka-glue-test" --sink-uri="kafka://127.0.0.1:9092/topic-name?&protocol=avro&replication-factor=3" --config changefeed_glue.toml
+```
+
+```toml
+[sink]
+[sink.kafka-config.glue-schema-registry-config]
+region="us-west-1"  
+registry-name="ticdc-test"
+access-key="xxxx"
+secret-access-key="xxxx"
+token="xxxx"
+```
+
+上記の設定では、 `region`と`registry-name`は必須フィールドですが、 `access-key` 、 `secret-access-key` 、および`token`はオプションのフィールドです。ベストプラクティスは、AWS 認証情報を環境変数として設定するか、変更フィード構成ファイルに設定する代わりに`~/.aws/credentials`ファイルに保存することです。
+
+詳細については、 [公式 AWS SDK for Go V2 ドキュメント](https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/#specifying-credentials)を参照してください。
+
 ## Kafka シンクのトピックおよびパーティション ディスパッチャーのルールをカスタマイズする {#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink}
 
 ### マッチャーのルール {#matcher-rules}
@@ -220,13 +242,13 @@ Topic 式の形式は`[prefix][{schema}][middle][{table}][suffix]`です。
 -   DDL イベントに単一のテーブルが関与している場合、DDL イベントは対応するトピックにそのまま送信されます。たとえば、DDL イベント`drop table test.table1`の場合、イベントは`test_table1`という名前のトピックに送信されます。
 -   DDL イベントに複数のテーブルが関与する場合 ( `rename table` `drop table`は複数のテーブルが関与する場合があります)、DDL イベントは複数のイベントに分割され、対応するトピックに送信さ`drop view`ます。たとえば、DDL イベント`rename table test.table1 to test.table10, test.table2 to test.table20`の場合、イベント`rename table test.table1 to test.table10` `test_table1`という名前のトピックに送信され、イベント`rename table test.table2 to test.table20` `test.table2`という名前のトピックに送信されます。
 
-### パーティションディスパッチャー {#partition-dispatchers}
+### パーティションディスパッチャ {#partition-dispatchers}
 
 `partition = "xxx"`を使用してパーティション ディスパッチャを指定できます。 5 つのディスパッチャー ( `default` 、 `index-value` 、 `columns` 、 `table` 、および`ts`をサポートします。ディスパッチャのルールは次のとおりです。
 
 -   `default` : デフォルトで`table`ディスパッチャー ルールを使用します。スキーマ名とテーブル名を使用してパーティション番号を計算し、テーブルのデータが同じパーティションに送信されるようにします。その結果、単一テーブルのデータは 1 つのパーティションにのみ存在し、順序付けされることが保証されます。ただし、このディスパッチャ ルールは送信スループットを制限し、コンシューマを追加しても消費速度を向上させることはできません。
 -   `index-value` : 主キー、一意のインデックス、または明示的に指定されたインデックスのいずれかを使用してパーティション番号を計算し、テーブル データを複数のパーティションに分散します。単一テーブルのデータは複数のパーティションに送信され、各パーティション内のデータは順序付けされます。コンシューマーを追加すると、消費速度を向上させることができます。
--   `columns` : 明示的に指定された列の値を使用してパーティション番号を計算し、テーブル データを複数のパーティションに分散します。単一テーブルのデータは複数のパーティションに送信され、各パーティション内のデータは順序付けされます。コンシューマーを追加すると、消費速度を向上させることができます。
+-   `columns` : 明示的に指定された列の値を使用してパーティション番号を計算し、テーブル データを複数のパーティションに分散します。単一のテーブルのデータは複数のパーティションに送信され、各パーティションのデータは順序付けされます。コンシューマーを追加することで、消費速度を向上させることができます。
 -   `table` : スキーマ名とテーブル名を使用してパーティション番号を計算します。
 -   `ts` : 行変更の commitT を使用してパーティション番号を計算し、テーブル データを複数のパーティションに分散します。単一テーブルのデータは複数のパーティションに送信され、各パーティション内のデータは順序付けされます。コンシューマーを追加すると、消費速度を向上させることができます。ただし、データ項目の複数の変更が異なるパーティションに送信される可能性があり、異なるコンシューマのコンシューマの進行状況が異なる場合があり、これによりデータの不整合が発生する可能性があります。したがって、コンシューマーは、使用する前に commitT によって複数のパーティションからデータを並べ替える必要があります。
 
@@ -242,7 +264,7 @@ dispatchers = [
 ]
 ```
 
--   `test`データベース内のテーブルは、主キーまたは一意のインデックスの値を使用してパーティション番号を計算する`index-value`ディスパッチャーを使用します。主キーが存在する場合は、主キーが使用されます。それ以外の場合は、最も短い一意のインデックスが使用されます。
+-   `test`データベース内のテーブルは、主キーまたは一意のインデックスの値を使用してパーティション番号を計算する`index-value`ディスパッチャを使用します。主キーが存在する場合は、主キーが使用されます。それ以外の場合は、最も短い一意のインデックスが使用されます。
 -   `test1`テーブル内のテーブルは`index-value`ディスパッチャーを使用し、 `index1`という名前のインデックス内のすべての列の値を使用してパーティション番号を計算します。指定されたインデックスが存在しない場合は、エラーが報告されます。 `index-name`で指定するインデックスは一意のインデックスである必要があることに注意してください。
 -   `test2`データベース内のテーブルは`columns`ディスパッチャーを使用し、列`id`と列`a`の値を使用してパーティション番号を計算します。いずれかの列が存在しない場合は、エラーが報告されます。
 -   `test3`データベース内のテーブルは`table`ディスパッチャを使用します。
@@ -329,7 +351,7 @@ SELECT COUNT(*) FROM INFORMATION_SCHEMA.TIKV_REGION_STATUS WHERE DB_NAME="databa
 
 Kafka トピックは、受信できるメッセージのサイズに制限を設定します。この制限は[`max.message.bytes`](https://kafka.apache.org/documentation/#topicconfigs_max.message.bytes)パラメータによって制御されます。 TiCDC Kafka シンクがこの制限を超えるデータを送信すると、変更フィードはエラーを報告し、データの複製を続行できません。この問題を解決するために、TiCDC は新しい構成`large-message-handle-option`を追加し、次の解決策を提供します。
 
-現在、この機能は、Canal-JSON と Open Protocol の 2 つのエンコード プロトコルをサポートしています。 Canal-JSON プロトコルを使用する場合は、 `enable-tidb-extension=true` in `sink-uri`を指定する必要があります。
+現在、この機能は Canal-JSON と Open Protocol の 2 つのエンコード プロトコルをサポートしています。Canal-JSON プロトコルを使用する場合は、 `sink-uri`のうち`enable-tidb-extension=true`を指定する必要があります。
 
 ### TiCDC データ圧縮 {#ticdc-data-compression}
 
@@ -405,7 +427,7 @@ large-message-handle-option = "claim-check"
 }
 ```
 
-Kafka コンシューマはメッセージを受信すると、まず`onlyHandleKey`フィールドをチェックします。このフィールドが存在し、 `true`である場合、メッセージには完全なデータのハンドル キーのみが含まれていることを意味します。この場合、完全なデータを取得するには、上流の TiDB にクエリを実行し、 [`tidb_snapshot`履歴データを読み取る](/read-historical-data.md)を使用する必要があります。
+Kafka コンシューマーはメッセージを受信すると、まず`onlyHandleKey`フィールドをチェックします。このフィールドが存在し、 `true`である場合、メッセージには完全なデータのハンドル キーのみが含まれていることを意味します。この場合、完全なデータを取得するには、上流の TiDB にクエリを実行し、 [`tidb_snapshot`履歴データを読み取る](/read-historical-data.md)を使用する必要があります。
 
 > **警告：**
 >

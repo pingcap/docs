@@ -40,7 +40,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
     -   TiKV インスタンス内のリージョンが多すぎると、単一の gRPC スレッドがボトルネックになります ( **Grafana** -&gt; **TiKV の詳細**-&gt;**スレッド CPU/スレッドあたりの gRPC CPU**メトリックを確認してください)。 v3.x 以降のバージョンでは、 `Hibernate Region`有効にすることで問題を解決できます。中国語の[ケース-612](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case612.md)を参照してください。
 
-    -   v3.0 より前のバージョンでは、raftstore スレッドまたは適用スレッドがボトルネックになる場合 ( **Grafana** -&gt; **TiKV-details** -&gt;**スレッド CPU/raft ストア CPU**および**非同期適用 CPU**メトリクスが`80%`を超える)、TiKV (v2) をスケールアウトできます。 .x) インスタンスを使用するか、マルチスレッドを使用して v3.x にアップグレードします。 <!-- See [case-517](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case517.md) in Chinese. -->
+    -   v3.0 より前のバージョンでは、raftstore スレッドまたは適用スレッドがボトルネックになる場合 ( **Grafana** -&gt; **TiKV-details** -&gt;**スレッド CPU/raft ストア CPU**および**非同期適用 CPU**メトリックが`80%`を超える)、TiKV (v2) をスケールアウトできます。 .x) インスタンスを使用するか、マルチスレッドを使用して v3.x にアップグレードします。 <!-- See [case-517](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case517.md) in Chinese. -->
 
 -   2.2.2 CPU負荷が増加します。
 
@@ -58,11 +58,13 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   3.1.2 TiDB DDL ジョブがハングする、または実行が遅い (DDL の進行状況を確認するには`admin show ddl jobs`を使用します)
 
-    -   原因 1: 他のコンポーネント (PD/TiKV) でのネットワークの問題。
+    -   原因 1: TiDB は v6.3.0 で[メタデータロック](/metadata-lock.md)を導入し、v6.5.0 以降のバージョンではデフォルトで有効にします。 DDL 操作に関係するテーブルに、コミットされていないトランザクションに関係するテーブルとの交差がある場合、トランザクションがコミットまたはロールバックされるまで、DDL 操作はブロックされます。
 
-    -   原因 2: TiDB の初期バージョン (v3.0.8 より前) では、高い同時実行性で多数の goroutine が使用されるため、内部負荷が高くなります。
+    -   原因 2: 他のコンポーネント (PD/TiKV) でのネットワークの問題。
 
-    -   原因 3: 初期のバージョン (v2.1.15 およびバージョン &lt; v3.0.0-rc1) では、PD インスタンスが TiDB キーの削除に失敗するため、すべての DDL 変更が 2 つのリースを待機することになります。
+    -   原因 3: TiDB の初期バージョン (v3.0.8 より前) では、高い同時実行性で多数の goroutine が使用されるため、内部負荷が高くなります。
+
+    -   原因 4: 初期のバージョン (v2.1.15 およびバージョン &lt; v3.0.0-rc1) では、PD インスタンスが TiDB キーの削除に失敗するため、すべての DDL 変更が 2 つのリースを待機することになります。
 
     -   その他の不明な原因については、 [バグを報告](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&#x26;template=bug-report.md) 。
 
@@ -159,7 +161,7 @@ OOM のトラブルシューティングの詳細については、 [TiDB OOM �
 
     -   v3.0 以降のバージョンの場合は、 `SQL Bind`機能を使用して実行プランをバインドします。
 
-    -   統計を更新します。問題の原因が統計にあることが大まかに確信できる場合は、 [統計をダンプする](/statistics.md#export-statistics) 。原因が古い統計 ( `show stats_meta`の`modify count/row count`特定の値 (0.3 など) より大きい場合、またはテーブルに時刻列のインデックスがある場合) である場合は、 `analyze table`使用して回復を試みることができます。 `auto analyze`が設定されている場合は、システム変数`tidb_auto_analyze_ratio`が大きすぎるかどうか (たとえば、0.3 より大きいかどうか)、および現在時刻が`tidb_auto_analyze_start_time`から`tidb_auto_analyze_end_time`の間にあるかどうかを確認してください。
+    -   統計を更新します。問題の原因が統計にあることが大まかに確信できる場合は、 [統計をダンプする](/statistics.md#export-statistics) 。原因が古い統計 ( `show stats_meta`の`modify count/row count`特定の値 (0.3 など) より大きい場合、またはテーブルに時間のインデックス列がある場合) である場合は、 `analyze table`使用して回復を試みることができます。 `auto analyze`が設定されている場合は、システム変数`tidb_auto_analyze_ratio`が大きすぎるかどうか (たとえば、0.3 より大きいかどうか)、および現在時刻が`tidb_auto_analyze_start_time`から`tidb_auto_analyze_end_time`の間にあるかどうかを確認してください。
 
     -   その他の状況の場合は、 [バグを報告](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&#x26;template=bug-report.md) 。
 
@@ -175,7 +177,7 @@ OOM のトラブルシューティングの詳細については、 [TiDB OOM �
 
         `(0.1^30) / 10`例に挙げます。 TiDB と MySQL の結果は両方とも`0`です。これは、精度が最大`30`であるためです。ただし、TiDB では、10 進精度のフィールドは`31`のままです。
 
-        複数の`Decimal`除算の後、結果が正しい場合でも、この精度フィールドはますます大きくなり、最終的には TiDB ( `72` ) のしきい値を超え、 `Data Truncated`エラーが報告されます。
+        複数の`Decimal`除算の後、結果が正しい場合でも、この精度フィールドはますます大きくなり、最終的に TiDB ( `72` ) のしきい値を超える可能性があり、 `Data Truncated`エラーが報告されます。
 
         `Decimal`の乗算では、範囲外がバイパスされ、精度が最大精度制限に設定されるため、この問題は発生しません。
 
@@ -243,7 +245,7 @@ TiDB は、トランザクション[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements
 
     TiKV インスタンスには 2 つの RocksDB インスタンスがあり、 `data/raft`つはRaftログを保存するため、もう 1 つは`data/db`で実際のデータを保存します。ログで`grep "Stalling" RocksDB`を実行すると、ストールの具体的な原因を確認できます。 RocksDB ログは`LOG`で始まるファイルで、 `LOG`が現在のログです。
 
-    -   `level0 sst`が多すぎるとストールの原因になります。 `[rocksdb] max-sub-compactions = 2` (または 3) パラメータを追加すると、 `level0 sst`圧縮を高速化できます。 level0 から level1 までの圧縮タスクは、複数のサブタスク (サブタスクの最大数は`max-sub-compactions` ) に分割され、同時に実行されます。中国語の[ケース-815](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case815.md)を参照してください。
+    -   `level0 sst`が多すぎるとストールの原因になります。 `[rocksdb] max-sub-compactions = 2` (または 3) パラメータを追加すると、 `level0 sst`圧縮を高速化できます。 level0 から level1 までの圧縮タスクは、同時に実行されるいくつかのサブタスク (サブタスクの最大数は`max-sub-compactions` ) に分割されます。中国語の[ケース-815](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case815.md)を参照してください。
 
     -   `pending compaction bytes`が多すぎるとストールの原因になります。ビジネスのピーク時には、ディスク I/O が書き込み操作に追いつけなくなります。対応する CF の`soft-pending-compaction-bytes-limit`と`hard-pending-compaction-bytes-limit`を増やすことで、この問題を軽減できます。
 
@@ -320,7 +322,7 @@ TiDB は、トランザクション[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements
 
     -   マシンの CPU リソースが不足しています。
 
-    -   リージョン書き込みホットスポット。単一の適用スレッドでは CPU 使用率が高くなります。現在、単一のリージョンでのホット スポットの問題に適切に対処できませんが、現在改善中です。各スレッドの CPU 使用率を表示するには、Grafana 式を変更して`by (instance, name)`を追加します。
+    -   リージョン書き込みホットスポット。単一の適用スレッドでは CPU 使用率が高くなります。現在、単一のリージョンでのホット スポットの問題に適切に対処できませんが、この問題は改善されています。各スレッドの CPU 使用率を表示するには、Grafana 式を変更して`by (instance, name)`を追加します。
 
     -   RocksDB の書き込みが遅い。 **RocksDB kv** / `max write duration`は高いです。単一のRaftログには複数の KV が含まれる場合があります。 RocksDB に書き込む場合、書き込みバッチで 128 KV が RocksDB に書き込まれます。したがって、適用ログは RocksDB の複数の書き込みに関連付けられている可能性があります。
 
@@ -350,7 +352,7 @@ TiDB は、トランザクション[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements
 
 -   5.1.3 バランス
 
-    -   Leader/リージョンの数は均等に分散されていません。中国語の[ケース-394](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case394.md)と[ケース-759](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case759.md)を参照してください。主な原因は、天びんがリージョン/Leaderのサイズに基づいてスケジューリングを実行するため、カウントが不均一に分散される可能性があることです。 TiDB 4.0 では、 `[leader-schedule-policy]`パラメータが導入され、Leaderのスケジューリング ポリシーを`count`ベースまたは`size`ベースに設定できるようになります。
+    -   Leader/リージョンの数は均等に分散されていません。中国語の[ケース-394](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case394.md)と[ケース-759](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case759.md)を参照してください。主な原因は、天びんがリージョン/Leaderのサイズに基づいてスケジューリングを実行するため、カウントが不均一に分散される可能性があることです。 TiDB 4.0 では、 `[leader-schedule-policy]`パラメーターが導入され、Leaderのスケジューリング ポリシーを`count`ベースまたは`size`ベースに設定できるようになります。
 
 ### 5.2 PDの選出 {#5-2-pd-election}
 
@@ -470,7 +472,7 @@ TiDB は、トランザクション[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements
 
 ### 6.2 データの移行 {#6-2-data-migration}
 
--   6.2.1 TiDB Data Migration (DM) は、MySQL/MariaDB から TiDB へのデータ移行をサポートする移行ツールです。詳細は[GitHub の DM](https://github.com/pingcap/dm/)を参照してください。
+-   6.2.1 TiDB Data Migration (DM) は、MySQL/MariaDB から TiDB へのデータ移行をサポートする移行ツールです。詳細は[DM概要](/dm/dm-overview.md)を参照してください。
 
 -   6.2.2 `Access denied for user 'root'@'172.31.43.27' (using password: YES)` `query status`実行するか、ログを確認すると表示されます。
 
@@ -505,7 +507,7 @@ TiDB は、トランザクション[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements
 
 -   6.2.6 DM レプリケーションが中断され、ログが`ERROR 1236 (HY000) The slave is connecting using CHANGE MASTER TO MASTER_AUTO_POSITION = 1, but the master has purged binary logs containing GTIDs that the slave requires.`を返す
 
-    -   マスターbinlogがパージされているかどうかを確認します。
+    -   マスターbinlog がパージされているかどうかを確認します。
     -   `relay.meta`で記録した位置情報を確認します。
 
         -   `relay.meta`には空の GTID 情報が記録されています。 DM-worker は、終了時または 30 秒ごとに、メモリ内の GTID 情報を`relay.meta`に保存します。 DM-worker は上流の GTID 情報を取得できなかった場合、空の GTID 情報を`relay.meta`に保存します。中国語の[ケース-772](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case772.md)を参照してください。
@@ -620,7 +622,7 @@ TiDB は、トランザクション[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements
 
 -   7.2.3 `TxnLockNotFound` .
 
-    このトランザクションのコミットが遅すぎるため、Time To Live (TTL) 後に他のトランザクションによってロールバックされます。このトランザクションは自動的に再試行されるため、通常はビジネスに影響はありません。サイズが 0.25 MB 以下のトランザクションの場合、デフォルトの TTL は 3 秒です。詳細については、 [`LockNotFound`ファウンドエラー](/troubleshoot-lock-conflicts.md#locknotfound-error)参照してください。
+    このトランザクションのコミットが遅すぎるため、Time To Live (TTL) 後に他のトランザクションによってロールバックされます。このトランザクションは自動的に再試行されるため、通常はビジネスに影響はありません。サイズが 0.25 MB 以下のトランザクションの場合、デフォルトの TTL は 3 秒です。詳細については、 [`LockNotFound`ファウンドエラー](/troubleshoot-lock-conflicts.md#locknotfound-error)を参照してください。
 
 -   7.2.4 `PessimisticLockNotFound` .
 
