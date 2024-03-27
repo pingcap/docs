@@ -1,0 +1,40 @@
+---
+title: 2024-04-18 TiDB Cloud Dedicated Data Migration (DM) Feature Maintenance Notification
+summary: Learn about the details of TiDB Cloud Dedicated Data Migration (DM) feature maintenance on April 18, 2024, such as the maintenance window and impact.
+---
+
+# [2024-04-18] TiDB Cloud Dedicated Data Migration (DM) Feature Maintenance Notification
+
+This notification describes the details that you need to know about the maintenance for [Data Migration (DM) feature](/tidb-cloud/migrate-from-mysql-using-data-migration.md) of TiDB Cloud Dedicated on April 18, 2024.
+
+## Maintenance window
+
+- Start time: 2024-04-18 08:00 (UTC+0)
+- End time: 2024-04-18 09:00 (UTC+0)
+- Duration: 1 hour
+
+## Impact
+
+During the maintenance window, the DM feature for TiDB Dedicated clusters in the following regions will be affected:
+
+- Cloud provider: AWS, region: Tokyo (ap-northeast-1)
+
+Apart from the DM feature in the TiDB cluster, all other functionalities remain unaffected. You can continue to manage the TiDB cluster and perform read/write operations or other operations as usual.
+
+For clusters deployed on AWS:
+
+- During the upgrade, the DM tasks can keep running without disruption. The DM console can be used normally.
+
+For clusters deployed on Google Cloud:
+
+- The DM console will be unavailable for up to 30 minutes. During this period, you cannot create or manage DM tasks.
+- If a DM task is in the incremental migration stage, it will be interrupted for up to 30 minutes. During this period, do not purge the binary log of the MySQL database. The DM task will automatically resume after the upgrade is completed.
+- If a DM task is in the stage of exporting and importing full data, it will fail during the upgrade, and cannot be resumed after the upgrade. It is recommended not to create any DM task on the day when the upgrade is performed, to ensure that no DM tasks are in the stage of exporting and importing full data when the upgrade starts.
+
+## Completion and resumption
+
+Once the maintenance is successfully completed, the affected functionalities will be reinstated, offering you a better experience.
+
+## Get support
+
+If you have any questions or need assistance, contact our [support team](/tidb-cloud/tidb-cloud-support.md). We are here to address your concerns and provide any necessary guidance.
