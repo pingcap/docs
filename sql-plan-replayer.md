@@ -196,6 +196,11 @@ mysql> show stats_meta;
 
 After the scene is loaded and restored, you can diagnose and improve the execution plan for the cluster.
 
+> **Note:**
+>
+> If you use `mysql` and encounter `ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.`, you can add `--local-infile=true` in the connection string.
+
+
 ## Use `PLAN REPLAYER CAPTURE` to capture target plans
 
 When you locate the execution plan of TiDB in some scenarios, the target SQL statement and the target execution plan might only appear occasionally in the query, so you cannot directly capture the statement and the plan using `PLAN REPLAYER`. In such cases, you can use `PLAN REPLAYER CAPTURE` to help you capture the optimizer information of the target SQL statement and the target plan.
