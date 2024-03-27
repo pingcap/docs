@@ -153,7 +153,7 @@ strategy = ""
 # Note that this parameter is only used in scenarios where the target table is empty.
 # parallel-import = false
 
-# Starting from v8.0.0, the `duplicate-resolution` parameter is deprecated. For more information, see <https://docs.pingcap.com/tidb/dev/tidb-lightning-physical-import-mode-usage#the-old-version-of-conflict-detection-deprecated-in-v800>.
+# Starting from v8.0.0, the `duplicate-resolution` parameter is deprecated. This parameter will be removed in v8.5. For more information, see <https://docs.pingcap.com/tidb/dev/tidb-lightning-physical-import-mode-usage#the-old-version-of-conflict-detection-deprecated-in-v800>.
 # Whether to detect and resolve duplicate records (unique key conflict) in the physical import mode.
 # The following resolution algorithms are supported:
 #  - none: does not detect duplicate records, which has the best performance of the two algorithms.
