@@ -11,10 +11,14 @@ This document introduces how to manage data source configurations, including enc
 
 In DM configuration files, it is recommended to use the password encrypted with dmctl. For one original password, the encrypted password is different after each encryption.
 
+> **Note:**
+>
+> Starting from v8.0.0, you must configure [`secret-key-path`](/dm/dm-master-configuration-file.md) for DM-master before using the `dmctl encrypt` command.
+
 {{< copyable "shell-regular" >}}
 
 ```bash
-./dmctl -encrypt 'abc!@#123'
+./dmctl encrypt 'abc!@#123'
 ```
 
 ```
