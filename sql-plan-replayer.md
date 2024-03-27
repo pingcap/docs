@@ -198,7 +198,7 @@ After the scene is loaded and restored, you can diagnose and improve the executi
 
 > **Note:**
 >
-> If you use `mysql` and encounter `ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.`, you can add `--local-infile=true` in the connection string.
+> If you use `mysql` command line utility and encounter `ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.`, you can add `--local-infile=true` in the connection string.
 
 
 ## Use `PLAN REPLAYER CAPTURE` to capture target plans
