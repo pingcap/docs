@@ -138,7 +138,7 @@ enable-table-across-nodes = false
 # ]
 
 # The protocol configuration item specifies the protocol format used for encoding messages.
-# When the downstream is Kafka, the protocol can only be canal-json, avro, or open-protocol.
+# When the downstream is Kafka, the protocol can be canal-json, avro, debezium, open-protocol, or simple.
 # When the downstream is Pulsar, the protocol can only be canal-json.
 # When the downstream is a storage service, the protocol can only be canal-json or csv.
 # Note: This configuration item only takes effect if the downstream is Kafka, Pulsar, or a storage service.
@@ -161,7 +161,7 @@ delete-only-output-handle-key-columns = false
 # encoder-concurrency = 32
 
 # Specifies whether to enable kafka-sink-v2 that uses the kafka-go sink library.
-# Note: This configuration item only takes effect if the downstream is MQ.
+# Note: This configuration item is experimental, and only takes effect if the downstream is MQ.
 # The default value is false.
 # enable-kafka-sink-v2 = false
 
@@ -193,6 +193,28 @@ enable-partition-separator = true
 # include-commit-ts = false
 # The encoding method of binary data, which can be 'base64' or 'hex'. The default value is 'base64'.
 # binary-encoding-method = 'base64'
+
+# Starting from v8.0.0, TiCDC supports the Simple message encoding protocol. The following are the configuration parameters for the Simple protocol.
+# For more information about the protocol, see <https://docs.pingcap.com/tidb/stable/ticdc-simple-protocol>.
+# The following configuration parameters control the sending behavior of bootstrap messages.
+# send-bootstrap-interval-in-sec controls the time interval for sending bootstrap messages, in seconds.
+# The default value is 120 seconds, which means that a bootstrap message is sent every 120 seconds for each table.
+# send-bootstrap-interval-in-sec = 120
+
+# send-bootstrap-in-msg-count controls the message interval for sending bootstrap, in message count.
+# The default value is 10000, which means that a bootstrap message is sent every 10000 row changed messages for each table.
+# send-bootstrap-in-msg-count = 10000
+# Note: If you want to disable the sending of bootstrap messages, set both send-bootstrap-interval-in-sec and send-bootstrap-in-msg-count to 0.
+
+# send-bootstrap-to-all-partition controls whether to send bootstrap messages to all partitions.
+# The default value is true, which means that bootstrap messages are sent to all partitions of the corresponding table topic.
+# Setting it to false means bootstrap messages are sent to only the first partition of the corresponding table topic.
+# send-bootstrap-to-all-partition = true
+
+[sink.kafka-config.codec-config]
+# encoding-format controls the encoding format of the Simple protocol messages. Currently, the Simple protocol message supports "json" and "avro" encoding formats.
+# The default value is "json".
+# encoding-format = "json"
 
 # Specifies the replication consistency configurations for a changefeed when using the redo log. For more information, see https://docs.pingcap.com/tidb/stable/ticdc-sink-to-mysql#eventually-consistent-replication-in-disaster-scenarios.
 # Note: The consistency-related configuration items only take effect when the downstream is a database and the redo log feature is enabled.
