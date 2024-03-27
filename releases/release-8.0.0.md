@@ -47,7 +47,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
   <tr>
     <td rowspan="1">DB Operations and Observability</td>
     <td>Support monitoring index usage statistics </td>
-    <td>TiDB v8.0.0 introduces the <a href="https://docs.pingcap.com/tidb/v8.0/information-schema-tidb-index-usage"><code>INFORMATION_SCHEMA.TIDB_INDEX_USAGE</code></a> table and the <a href="https://docs.pingcap.com/tidb/v8.0/sys-schema"><code>sys.schema_unused_index</code></a> view to provide usage statistics of indexes. This feature helps you assess the importance of all indexes and optimize the index design.</td>
+    <td>Proper index design is a crucial prerequisite for improving database performance. TiDB v8.0.0 introduces the <a href="https://docs.pingcap.com/tidb/v8.0/information-schema-tidb-index-usage"><code>INFORMATION_SCHEMA.TIDB_INDEX_USAGE</code></a> table and the <a href="https://docs.pingcap.com/tidb/v8.0/sys-schema"><code>sys.schema_unused_index</code></a> view to provide usage statistics of indexes. This feature helps you assess the efficiency of indexes in the database and optimize the index design.</td>
   </tr>
   <tr>
     <td rowspan="2">Data Migration</td>
@@ -207,7 +207,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 
 * Support making invisible indexes visible at the session level [#50653](https://github.com/pingcap/tidb/issues/50653) @[hawkingrei](https://github.com/hawkingrei)
 
-    By default, the optimizer does not select [invisible indexes](/sql-statements/sql-statement-create-index.md#invisible-index) to optimize query execution. This mechanism is usually used to evaluate whether to delete an index. If there is uncertainty about the potential performance impact of deleting an index, you have the option to set the index to invisible temporarily and promptly restore it to visible when needed.
+    By default, the optimizer does not select [invisible indexes](/sql-statements/sql-statement-create-index.md#invisible-index). This mechanism is usually used to evaluate whether to delete an index. If there is uncertainty about the potential performance impact of deleting an index, you have the option to set the index to invisible temporarily and promptly restore it to visible when needed.
 
     Starting from v8.0.0, you can set the session-level system variable [`tidb_opt_use_invisible_indexes`](/system-variables.md#) to `ON` to make the current session recognize and use invisible indexes. With this feature, you can create a new index and test its performance by setting the index to invisible first, and then modifying the system variable in the current session for testing without affecting other sessions. This improvement enhances the safety of performance tuning and helps to improve the stability of production databases.
 
