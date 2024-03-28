@@ -122,7 +122,7 @@ The TiDB configuration file supports more options than command-line parameters. 
     - When the built-in `VERSION()` function is used.
     - When TiDB establishes the initial connection to the client and returns the initial handshake packet with version string of the server. For details, see [MySQL Initial Handshake Packet](https://dev.mysql.com/doc/dev/mysql-server/latest/page_protocol_connection_phase.html#sect_protocol_connection_phase_initial_handshake).
 + Default value: ""
-+ By default, the format of the TiDB version string is `5.7.${mysql_latest_minor_version}-TiDB-${tidb_version}`.
++ By default, the format of the TiDB version string is `8.0.${mysql_latest_minor_version}-TiDB-${tidb_version}`.
 
 > **Note:**
 >
