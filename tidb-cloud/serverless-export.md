@@ -70,6 +70,7 @@ You can export data directly to your own S3 bucket with the credentials.
    ```sh
    ticloud serverless export create -c <cluster-id> --bucket-uri <bucket-uri> --access-key-id <access-key-id> --secret-access-key <secret-access-key>
    ```
+
 2. Export from a TiDB Serverless cluster to S3 with SQL file.
 
    ```sh
