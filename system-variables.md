@@ -5411,16 +5411,17 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Integer
 - Default value: `4096`
 - Range: `[0, 2147483647]`
+- Unit: Bytes
 
 <CustomContent platform="tidb">
 
-- This variable is used to control the length of the SQL string in [statement summary tables](/statement-summary-tables.md), the [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md) table, and the [TiDB Dashboard](/dashboard/dashboard-intro.md).
+- This variable is used to control the length of the SQL string in [statement summary tables](/statement-summary-tables.md) and the [TiDB Dashboard](/dashboard/dashboard-intro.md).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- This variable is used to control the length of the SQL string in [statement summary tables](/statement-summary-tables.md) and the [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md) table.
+- This variable is used to control the length of the SQL string in [statement summary tables](/statement-summary-tables.md).
 
 </CustomContent>
 
