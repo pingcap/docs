@@ -45,7 +45,9 @@ SELECT BENCHMARK(5, SLEEP(2));
 
 ### CONNECTION_ID()
 
-This returns the connection id of the session.
+This returns the connection id of the session. Based on the [`enable-32bits-connection-id`](/tidb-configuration-file.md#enable-32bits-connection-id-new-in-v730) configuration option for TiDB this function might return 32-bit or 64-bit ID's.
+
+If [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610) is enabled the connection ID can be used to kill queries across multiple TiDB instances of the same cluster.
 
 ```sql
 SELECT CONNECTION_ID();
@@ -149,30 +151,31 @@ SELECT FOUND_ROWS();
 This returns the ID of the last row that was inserted. This works with [`AUTO_INCREMENT`](/auto-increment.md) and [`AUTO_RANDOM`](/auto-random.md) columns.
 
 ```
-mysql> CREATE TABLE t1(id BIGINT UNSIGNED PRIMARY KEY AUTO_RANDOM);
-Query OK, 0 rows affected, 1 warning (0.18 sec)
+mysql> CREATE TABLE t1(id SERIAL);
+Query OK, 0 rows affected (0.17 sec)
 
-mysql> INSERT INTO t1() VALUES (),(),();
-Query OK, 3 rows affected (0.02 sec)
-Records: 3  Duplicates: 0  Warnings: 0
+mysql> INSERT INTO t1() VALUES();
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO t1() VALUES();
+Query OK, 1 row affected (0.00 sec)
 
 mysql> SELECT LAST_INSERT_ID();
-+----------------------+
-| LAST_INSERT_ID()     |
-+----------------------+
-| 10952754293765046273 |
-+----------------------+
++------------------+
+| LAST_INSERT_ID() |
++------------------+
+|                3 |
++------------------+
 1 row in set (0.00 sec)
 
 mysql> TABLE t1;
-+----------------------+
-| id                   |
-+----------------------+
-| 10952754293765046273 |
-| 10952754293765046274 |
-| 10952754293765046275 |
-+----------------------+
-3 rows in set (0.00 sec)
++----+
+| id |
++----+
+|  1 |
+|  3 |
++----+
+2 rows in set (0.00 sec)
 ```
 
 ### ROW_COUNT()
