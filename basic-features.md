@@ -179,7 +179,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Fast Analyze](/system-variables.md#tidb_enable_fast_analyze) | Deprecated | Deprecated | Deprecated | E | E | E | E | E | E | E | E | E | E |
 | [Dynamic pruning](/partitioned-table.md#dynamic-pruning-mode) | Y | Y | Y | Y | Y | Y | E | E | E | E | E | N | N |
 | [Collect statistics for `PREDICATE COLUMNS`](/statistics.md#collect-statistics-on-some-columns) | E | E | E | E | E | E | E | E | N | N | N | N | N |
-| [Control the memory quota for collecting statistics](/statistics.md#the-memory-quota-for-collecting-statistics) | E | E | E | E | E | N | N | N | N | N | N | N |
+| [Control the memory quota for collecting statistics](/statistics.md#the-memory-quota-for-collecting-statistics) | E | E | E | E | E | N | N | N | N | N | N | N | N |
 | [Randomly sample about 10000 rows of data to quickly build statistics](/system-variables.md#tidb_enable_fast_analyze) | Deprecated | Deprecated | Deprecated | E | E | E | E | E | E | E | E | E | E |
 | [Lock statistics](/statistics.md#lock-statistics) | Y | Y | Y | E | E | N | N | N | N | N | N | N | N |
 | [Lightweight statistics initialization](/statistics.md#load-statistics) | Y | Y | Y | E | N | N | N | N | N | N | N | N | N |
