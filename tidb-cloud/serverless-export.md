@@ -16,6 +16,7 @@ You can also export data with `mysqldump`, `TiDB Dumpling`, or other tools. Howe
 ## Export to local
 
 When you export to local, there are some limitations:
+
 1. You can only export one table at a time.
 2. The exported data will be expired after two days, please download the data in time.
 3. The exported data will be saved in the stashing area, which offers 250 GB storage space for each organization per region. If the storage space is full, you will not be able to export data to local.
@@ -66,14 +67,14 @@ You can export data directly to your own S3 bucket with the credentials.
 
 1. Export all data from a TiDB Serverless cluster to S3.
 
-```sh
-ticloud serverless export create -c <cluster-id> --bucket-uri <bucket-uri> --access-key-id <access-key-id> --secret-access-key <secret-access-key>
-```
+   ```sh
+   ticloud serverless export create -c <cluster-id> --bucket-uri <bucket-uri> --access-key-id <access-key-id> --secret-access-key <secret-access-key>
+   ```
 2. Export from a TiDB Serverless cluster to S3 with SQL file.
 
-```sh
-ticloud serverless export create -c <cluster-id> --bucket-uri <bucket-uri> --access-key-id <access-key-id> --secret-access-key <secret-access-key> --file-type SQL
-```
+   ```sh
+   ticloud serverless export create -c <cluster-id> --bucket-uri <bucket-uri> --access-key-id <access-key-id> --secret-access-key <secret-access-key> --file-type SQL
+   ```
 
 You can also use the cli with interactive mode.
 
