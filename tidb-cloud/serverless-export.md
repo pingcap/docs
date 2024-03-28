@@ -7,7 +7,7 @@ summary: Learn how to export from TiDB Serverless.
 
 TiDB Serverless Export (Beta) is a service that allows you to export data from a TiDB Serverless cluster to local or an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
 
-You can also export data with `MySQL shell`, `TiDB Dumpling`, or other tools. However, TiDB Serverless Export provides a more convenient and efficient way to export data from a TiDB Serverless cluster. It brings the following benefits:
+You can also export data with `mysqldump`, `TiDB Dumpling`, or other tools. However, TiDB Serverless Export provides a more convenient and efficient way to export data from a TiDB Serverless cluster. It brings the following benefits:
 
 - Convenience: Export service provides a simple and easy-to-use way to export data from a TiDB Serverless cluster. You don't need additional tools or resources.
 - Isolation: Export service uses separate computing resources, which is isolated from the computing resources used by your online services
