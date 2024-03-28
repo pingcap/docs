@@ -104,4 +104,4 @@ The output is as follows:
 
 ## Read more
 
-- [`sys.schema_unused_indexes`](/sys-schema/schema_unused_indexes.md)
+- [`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
