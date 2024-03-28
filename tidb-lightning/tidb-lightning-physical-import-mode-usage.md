@@ -46,7 +46,7 @@ strategy = ""
 # Import mode. "local" means using the physical import mode.
 backend = "local"
 
-# The `duplicate-resolution` parameter is deprecated starting from v8.0.0 and will be removed in v8.5.0. For more information, see <https://docs.pingcap.com/tidb/dev/tidb-lightning-physical-import-mode-usage#the-old-version-of-conflict-detection-deprecated-in-v800>.
+# The `duplicate-resolution` parameter is deprecated starting from v8.0.0 and will be removed in a future release. For more information, see <https://docs.pingcap.com/tidb/dev/tidb-lightning-physical-import-mode-usage#the-old-version-of-conflict-detection-deprecated-in-v800>.
 # The method to resolve the conflicting data.
 duplicate-resolution = 'remove'
 
@@ -104,7 +104,7 @@ Conflicting data refers to two or more records with the same primary key or uniq
 There are two versions for conflict detection:
 
 - The new version of conflict detection, controlled by the `conflict` configuration item.
-- The old version of conflict detection (deprecated in v8.0.0 and will be removed in v8.5.0), controlled by the `tikv-importer.duplicate-resolution` configuration item.
+- The old version of conflict detection (deprecated in v8.0.0 and will be removed in a future release), controlled by the `tikv-importer.duplicate-resolution` configuration item.
 
 ### The new version of conflict detection
 
@@ -131,7 +131,7 @@ The new version of conflict detection controls whether to enable preprocess conf
 
 ### The old version of conflict detection (deprecated in v8.0.0)
 
-Starting from v8.0.0, the old version of conflict detection (`tikv-importer.duplicate-resolution`) is deprecated. The `tikv-importer.duplicate-resolution` parameter will be removed in v8.5.0. If `tikv-importer.duplicate-resolution` is `remove` and `conflict.strategy` is not configured, TiDB Lightning automatically enables the new version of conflict detection by assigning the value of `conflict.strategy` to `"replace"`. Note that `tikv-importer.duplicate-resolution` and `conflict.strategy` cannot be configured at the same time, as it will result in an error.
+Starting from v8.0.0, the old version of conflict detection (`tikv-importer.duplicate-resolution`) is deprecated. The `tikv-importer.duplicate-resolution` parameter will be removed in a future release. If `tikv-importer.duplicate-resolution` is `remove` and `conflict.strategy` is not configured, TiDB Lightning automatically enables the new version of conflict detection by assigning the value of `conflict.strategy` to `"replace"`. Note that `tikv-importer.duplicate-resolution` and `conflict.strategy` cannot be configured at the same time, as it will result in an error.
 
 - For versions between v7.3.0 and v7.6.0, TiDB Lightning enables the old version of conflict detection when `tikv-importer.duplicate-resolution` is not an empty string.
 - For v7.2.0 and earlier versions, TiDB Lightning only supports the old version of conflict detection.
