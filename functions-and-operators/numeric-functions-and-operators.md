@@ -53,3 +53,7 @@ TiDB supports all of the [numeric functions and operators](https://dev.mysql.com
 | [`SQRT()`](https://dev.mysql.com/doc/refman/8.0/en/mathematical-functions.html#function_sqrt)             | Return the square root of the argument                            |
 | [`TAN()`](https://dev.mysql.com/doc/refman/8.0/en/mathematical-functions.html#function_tan)               | Return the tangent of the argument                                |
 | [`TRUNCATE()`](https://dev.mysql.com/doc/refman/8.0/en/mathematical-functions.html#function_truncate)     | Truncate to specified number of decimal places                    |
+
+## Related system variables
+
+[`div_precision_increment`](/system-variables.md#div_precision_increment-new-in-v800) is used to set the precision for the `/` operator.
