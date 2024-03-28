@@ -111,7 +111,7 @@ Library required for running TiDB: glibc (2.28-151.el8 version)
 
 The following CPU architectures are supported:
 
-- x86_64. Starting from TiDB v6.6.0, the [x84-64-v2 instruction set](https://developers.redhat.com/blog/2021/01/05/building-red-hat-enterprise-linux-9-for-the-x86-64-v2-microarchitecture-level) is required.
+- x86_64. Starting from TiDB v6.6.0, the [x86-64-v2 instruction set](https://developers.redhat.com/blog/2021/01/05/building-red-hat-enterprise-linux-9-for-the-x86-64-v2-microarchitecture-level) is required.
 - ARM 64
 
 ## Software recommendations
