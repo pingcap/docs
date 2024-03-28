@@ -603,7 +603,6 @@ We would like to thank the following contributors from the TiDB community:
 - [lichunzhu](https://github.com/lichunzhu)
 - [jiyfhust](https://github.com/jiyfhust)
 - [pingandb](https://github.com/pingandb)
-- [renovate](https://github.com/renovate)
 - [shenqidebaozi](https://github.com/shenqidebaozi)
 - [Smityz](https://github.com/Smityz)
 - [songzhibin97](https://github.com/songzhibin97)
