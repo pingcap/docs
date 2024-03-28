@@ -89,7 +89,7 @@ SELECT x, IFNULL(x,'x has no value') FROM data;
 
 ## NULLIF()
 
-The `NULLIF()` function returns null if both arguments are the same. Otherwise it returns the first argument.
+The `NULLIF()` function returns NULL if both arguments are the same or if the first argument is NULL. Otherwise it returns the first argument.
 
 ```sql
 WITH RECURSIVE d AS (SELECT 1 AS n UNION ALL SELECT n+1 FROM d WHERE n<10)
