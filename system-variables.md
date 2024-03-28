@@ -5412,6 +5412,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Integer
 - Default value: `4096`
 - Range: `[0, 2147483647]`
+- Unit: Bytes
 
 <CustomContent platform="tidb">
 
