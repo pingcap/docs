@@ -301,7 +301,6 @@ SELECT IS_UUID('eb48c08c-eb71-11ee-bacf-5405db7aad56');
 |                                               1 |
 +-------------------------------------------------+
 1 row in set (0.00 sec)
-
 ```
 
 ### NAME_CONST()
