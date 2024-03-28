@@ -7,7 +7,7 @@ summary: Learn about the new features, compatibility changes, improvements, and 
 
 > **Note:**
 >
->  Currently, TiDB v8.0.0 is still in development. The following content is subject to change before the official release.
+> Currently, TiDB v8.0.0 is still in development. The following content is subject to change before the official release.
 
 TiDB version: 8.0.0
 
