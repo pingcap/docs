@@ -54,6 +54,10 @@ The following is an example of an Amazon S3 URI for [`IMPORT INTO`](/sql-stateme
 s3://external/test.csv?access-key=${access-key}&secret-access-key=${secret-access-key}
 ```
 
+> **Note:**
+>
+> Please note that the XML API of GCS is not fully compatible with the s3:// protocol. If you are using GCS, please use the gs:// protocol instead.
+
 ## GCS URI format
 
 - `scheme`: `gcs` or `gs`
