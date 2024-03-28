@@ -1,5 +1,5 @@
 ---
-title: sys Schema
+title: schema_unused_indexes
 summary: Learn about the `schema_unused_indexes` table in the `sys` schema.
 ---
 
