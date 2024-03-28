@@ -25,7 +25,6 @@ For clusters deployed on AWS:
 
 - During the upgrade, the DM tasks can keep running without disruption. The DM console can be used normally.
 
-
 ## Completion and resumption
 
 Once the maintenance is successfully completed, the affected functionalities will be reinstated, offering you a better experience.
