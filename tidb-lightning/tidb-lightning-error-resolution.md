@@ -11,7 +11,7 @@ This document introduces TiDB Lightning error types, how to query the errors, an
 
 - `lightning.max-error`: the tolerance threshold of type error
 - `conflict.strategy`, `conflict.threshold`, and `conflict.max-record-rows`: configurations related to conflicting data
-- `tikv-importer.duplicate-resolution` (deprecated in v8.0.0 and will be removed in v8.5.0): the conflict handling configuration that can only be used in the physical import mode
+- `tikv-importer.duplicate-resolution` (deprecated in v8.0.0 and will be removed in a future release): the conflict handling configuration that can only be used in the physical import mode
 - `lightning.task-info-schema-name`: the database where conflicting data is stored when TiDB Lightning detects conflicts
 
 For more information, see [TiDB Lightning (Task)](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task).
