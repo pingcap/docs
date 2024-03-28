@@ -105,6 +105,8 @@ mysql> SELECT BIN_TO_UUID(0x11EEEB6D9A17B457BACF5405DB7AAD56, 1);
 1 row in set (0.00 sec)
 ```
 
+See also [UUID()](#uuid) and the [best practices for UUID](/best-practices/uuid.md)
+
 ### DEFAULT()
 
 The `DEFAULT()` function is used to get the default value for a column.
@@ -382,24 +384,27 @@ This function is used to specify values in the `ON DUPLICATE KEY UPDATE` part of
 
 ```
 mysql> CREATE TABLE t1 (id INT PRIMARY KEY, c1 INT);
-Query OK, 0 rows affected (0.16 sec)
+Query OK, 0 rows affected (0.17 sec)
 
-mysql> INSERT INTO t1 VALUES (1,1),(2,2),(3,3);
-Query OK, 3 rows affected (0.01 sec)
-Records: 3  Duplicates: 0  Warnings: 0
+mysql> INSERT INTO t1 VALUES (1,51),(2,52),(3,53),(4,54),(5,55);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
 
-mysql> INSERT INTO t1 VALUES(2,2) ON DUPLICATE KEY UPDATE c1=VALUES(id)+100;
-Query OK, 2 rows affected (0.00 sec)
+mysql> INSERT INTO t1 VALUES(2,22),(4,44) ON DUPLICATE KEY UPDATE c1=VALUES(id)+100;
+Query OK, 4 rows affected (0.01 sec)
+Records: 2  Duplicates: 2  Warnings: 0
 
 mysql> TABLE t1;
 +----+------+
 | id | c1   |
 +----+------+
-|  1 |    1 |
+|  1 |   51 |
 |  2 |  102 |
-|  3 |    3 |
+|  3 |   53 |
+|  4 |  104 |
+|  5 |   55 |
 +----+------+
-3 rows in set (0.00 sec)
+5 rows in set (0.00 sec)
 ```
 
 ## Unsupported functions
