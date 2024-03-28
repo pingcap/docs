@@ -9,6 +9,6 @@ Starting from v8.0.0, TiDB provides the `sys` schema. You can use the views in `
 
 ## Tables for MySQL compatibility
 
-| Table Name                                                                                       | Description                                               |
+| Table name                                                                                       | Description                                               |
 |--------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
 | [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)                                  | Records indexes that have not been used since the last start of TiDB. |
