@@ -25,5 +25,5 @@ There are some differences between MySQL 8.0 and earlier versions of MySQL handl
 
 ## Known issues
 
-- [bitwise operations with binary args behavior changes by mysql 5.7 and 8.0 both](https://github.com/pingcap/tidb/issues/30637)
+- [bitwise operations with binary args behavior changes between MySQL 5.7 and 8.0](https://github.com/pingcap/tidb/issues/30637)
 - [function bit\_count result is Inconsistent with MySQL](https://github.com/pingcap/tidb/issues/44621)
