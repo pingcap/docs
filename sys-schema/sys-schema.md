@@ -11,4 +11,4 @@ Starting from v8.0.0, TiDB provides the `sys` schema. You can use the views in `
 
 | Table Name                                                                                       | Description                                               |
 |--------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
-| [`schema_unused_indexes`](/sys-schema/schema_unused_indexes.md)                                  | Unused indexes                                            |
+| [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)                                  | Records indexes that have not been used since the last start of TiDB. |

@@ -49,6 +49,6 @@ CREATE OR REPLACE VIEW sys.schema_unused_indexes AS
     sum(last_access_time) is null;
 ```
 
-## Related information
+## Read more
 
 - [`INFORMATION_SCHEMA.TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)
