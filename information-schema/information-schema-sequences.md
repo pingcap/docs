@@ -37,7 +37,7 @@ Create a sequence `test.seq` and query the next value of the sequence:
 
 ```sql
 CREATE SEQUENCE test.seq;
-SELECT nextval(test.seq);
+SELECT NEXTVAL(test.seq);
 SELECT * FROM sequences\G
 ```
 
@@ -45,7 +45,7 @@ The output is as follows:
 
 ```sql
 +-------------------+
-| nextval(test.seq) |
+| NEXTVAL(test.seq) |
 +-------------------+
 |                 1 |
 +-------------------+
