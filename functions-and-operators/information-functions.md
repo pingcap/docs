@@ -144,7 +144,7 @@ SELECT FOUND_ROWS();
 
 > **Note**
 >
-> `SQL_CALC_FOUND_ROWS` is only accepted if [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40) is set. This query modifier has been deprecated in MySQL 8.0.17.
+> `SQL_CALC_FOUND_ROWS` is only accepted if [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40) is set. This query modifier is used in MySQL to calculate the total number of rows even if a `LIMIT` clause is causing the resultset to be shorter. This query modifier has been deprecated in MySQL 8.0.17. It is recommended to use `COUNT(*)` instead.
 
 ### LAST_INSERT_ID()
 
