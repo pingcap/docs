@@ -56,7 +56,7 @@ s3://external/test.csv?access-key=${access-key}&secret-access-key=${secret-acces
 
 > **Note:**
 >
-> Please note that the XML API of GCS is not fully compatible with the s3:// protocol. If you are using GCS, please use the gs:// protocol instead.
+> Please note that the XML API of GCS is not fully compatible with the `s3://` protocol. If you are using GCS, please use the `gcs://` protocol instead.
 
 ## GCS URI format
 
