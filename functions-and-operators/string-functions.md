@@ -1162,6 +1162,51 @@ SELECT LOWER(-012);
 
 Return the string argument, left-padded with the specified string.
 
+```sql
+SELECT LPAD('TiDB',8,'>');
+```
+
+```
++--------------------+
+| LPAD('TiDB',8,'>') |
++--------------------+
+| >>>>TiDB           |
++--------------------+
+1 row in set (0.00 sec)
+```
+
+In the example above the string "TiDB" is left padded until 8 characters with 4 `>` characters.
+
+```sql
+SELECT LPAD('TiDB',2,'>');
+```
+
+```
++--------------------+
+| LPAD('TiDB',2,'>') |
++--------------------+
+| Ti                 |
++--------------------+
+1 row in set (0.00 sec)
+```
+
+In the example above the string "TiDB" is left padded until 2 characters with `>` characters. The result is "Ti". This shows that the string in the first argument will be truncated if it is longer than the second argument.
+
+```sql
+SELECT LPAD('TiDB',-2,'>');
+```
+
+```
++---------------------+
+| LPAD('TiDB',-2,'>') |
++---------------------+
+| NULL                |
++---------------------+
+1 row in set (0.00 sec)
+```
+
+In the example above the string "TiDB" is left padded until -2 characters with `>` characters. The result is NULL as the second argument is negative.
+
 ### [`LTRIM()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ltrim)
 
 Remove leading spaces.
