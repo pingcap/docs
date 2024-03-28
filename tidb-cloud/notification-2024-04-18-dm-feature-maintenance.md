@@ -25,11 +25,6 @@ For clusters deployed on AWS:
 
 - During the upgrade, the DM tasks can keep running without disruption. The DM console can be used normally.
 
-For clusters deployed on Google Cloud:
-
-- The DM console will be unavailable for up to 30 minutes. During this period, you cannot create or manage DM tasks.
-- If a DM task is in the incremental migration stage, it will be interrupted for up to 30 minutes. During this period, do not purge the binary log of the MySQL database. The DM task will automatically resume after the upgrade is completed.
-- If a DM task is in the stage of exporting and importing full data, it will fail during the upgrade, and cannot be resumed after the upgrade. It is recommended not to create any DM task on the day when the upgrade is performed, to ensure that no DM tasks are in the stage of exporting and importing full data when the upgrade starts.
 
 ## Completion and resumption
 
