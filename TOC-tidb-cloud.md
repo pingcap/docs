@@ -603,7 +603,7 @@
         - [`SESSION_CONNECT_ATTRS`](/performance-schema/performance-schema-session-connect-attrs.md)
       - SYS
         - [Overview](/sys-schema/sys-schema.md)
-        - [`schema_unused_indexes`](/sys-schema/sys_schema_unused_indexes.md)
+        - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
     - [Metadata Lock](/metadata-lock.md)
     - [Use UUIDs](/best-practices/uuid.md)
     - [TiDB Accelerated Table Creation](/accelerated-table-creation.md)
