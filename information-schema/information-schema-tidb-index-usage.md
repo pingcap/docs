@@ -102,6 +102,6 @@ The output is as follows:
 - The data in the `TIDB_INDEX_USAGE` table might be delayed by up to 5 minutes.
 - After TiDB restarts, the data in the `TIDB_INDEX_USAGE` table is cleared.
 
-## Related information
+## Read more
 
 - [`sys.schema_unused_indexes`](/sys-schema/schema_unused_indexes.md)
