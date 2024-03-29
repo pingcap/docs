@@ -18,11 +18,31 @@ TiDB Cloud provides the following two options of cluster tiers. Before creating 
 <!--To be confirmed-->
 TiDB Serverless is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free tier and consumption based billing once free limits are exceeded.
 
+### Cluster Plan
+
+At TiDB Serverless, we offer two distinct service plans designed to cater to the diverse needs of our users. Whether you're just getting started or scaling to meet the demands of growing applications, our service plans provide the flexibility and power you need.
+
+#### Free Cluster
+The Free Cluster Plan is ideal for those who are getting started with TiDB Serverless. It's designed to provide developers and small teams with the essential features as following:
+
+- **No Cost**: Absolutely free with no credit card required to start.
+- **Storage**: Comes with 5GiB of initial storage capacity.
+- **Request Units**: Includes 50 million request units for your database operations.
+- **Easy Upgrade**: Seamlessly transition to the Scalable Cluster Plan as your needs grow.
+
+#### Scalable Cluster
+
+For applications with increasing workloads that require on-the-fly scalability, the Scalable Cluster Plan offers the agility and performance to keep pace with your business growth with the following features:
+
+- **Enhanced Capabilities**: Includes all the capabilities of the Free Cluster Plan, plus the ability to handle larger, more demanding workloads, with more advanced security features.
+- **Automatic Scaling**: Automatically adjusts storage and compute resources to efficiently handle varying workload demands.
+- **Predictable Pricing**: While this plan requires a credit card, you pay only for the resources you consume, ensuring cost efficiency as you scale.
+
 ### Usage quota
 
-For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless clusters by default. To create more TiDB Serverless clusters, you need to add a credit card and set a [spending limit](/tidb-cloud/tidb-cloud-glossary.md#spending-limit) for the usage.
+For each organization in TiDB Cloud, you can create a maximum of five Free Clusters by default. To create more TiDB Serverless clusters, you need to add a credit card and create Scalable Clusters for the usage.
 
-For the first five TiDB Serverless clusters in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
+For the first five TiDB Serverless clusters in your organization, no matter Free Cluster or Scalable Cluster, TiDB Cloud provides a free usage quota for each of them as follows:
 
 - Row-based storage: 5 GiB
 - [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit): 50 million RUs per month
