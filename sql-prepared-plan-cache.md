@@ -8,10 +8,10 @@ aliases: ['/tidb/dev/sql-prepare-plan-cache']
 
 > **Warning:**
 >
-> If a cached `UPDATE` or `DELETE` statement encounters a DDL operation that modifies the relevant schema during execution, it might cause data inconsistency between tables and indexes. For more information, see [Issue #51407](https://github.com/pingcap/tidb/issues/51407). Keep updated to the progress of [the latest LTS version](https://docs.pingcap.com/tidb/stable) to resolve this issue. The following are possible workarounds before upgrading:
+> If a cached `UPDATE` or `DELETE` statement encounters a DDL operation that modifies the relevant schema during execution, it might cause data inconsistency between tables and indexes. For more information, see [Issue #51407](https://github.com/pingcap/tidb/issues/51407). It is recommended to monitor the status of this issue and upgrade to [the latest LTS version](https://docs.pingcap.com/tidb/stable) to resolve this issue. Before upgrading, you can try the following workarounds:
 > 
-> - Before submitting DDL, temporarily [disable the execution plan cache for Prepare statements](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610), and restore the setting of plan cache after the DDL execution.
-> - Avoid executing DDL during business peak hours. After executing DDL, immediately run [`ADMIN CHECK TABLE`](/sql-statements/sql-statement-admin-check-table-index.md) to verify the consistency between tables and indexes. If errors are found, rebuild the relevant indexes.
+> - Before executing DDL, temporarily [disable the prepared plan cache](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610), and re-enable it after the DDL is complete.
+> - Avoid executing DDL during business peak hours. After executing DDL, immediately run [`ADMIN CHECK TABLE`](/sql-statements/sql-statement-admin-check-table-index.md) to check the consistency between tables and indexes. If errors are found, rebuild the relevant indexes.
 
 TiDB supports execution plan caching for `Prepare` and `Execute` queries. This includes both forms of prepared statements:
 
