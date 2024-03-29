@@ -5,7 +5,7 @@ summary: Learn about the storage URI formats of external storage services, inclu
 
 ## URI Formats of External Storage Services
 
-This document describes the URI formats of external storage services, including Amazon S3, GCS, and Azure Blob Storage.
+This document describes the URI formats of external storage services, including Amazon S3, Google Cloud Storage (GCS), and Azure Blob Storage.
 
 The basic format of the URI is as follows:
 
@@ -56,7 +56,7 @@ s3://external/test.csv?access-key=${access-key}&secret-access-key=${secret-acces
 
 > **Note:**
 >
-> Please note that the XML API of GCS is not fully compatible with the `s3://` protocol. If you are using GCS, please use the `gcs://` protocol instead.
+> Please note that the XML API of Google Cloud Storage (GCS) is not fully compatible with the s3:// protocol. If you are using GCS, please use the gcs:// protocol instead.
 
 ## GCS URI format
 

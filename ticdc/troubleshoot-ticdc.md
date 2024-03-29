@@ -148,4 +148,4 @@ cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri "kafka://127
 
 ## The `[CDC:ErrS3StorageAPI]external storage api: NotImplemented` error is reported when I use TiCDC and enable Redo. What should I do?
 
-This error might be caused by the external storage not fully supporting the `s3://` protocol. You can replace it with another protocol, such as `gs://`, if you are using GCS.
+This error might be caused by the external storage not fully supporting the `s3://` protocol. You can replace it with another protocol, such as `gs://`, if you are using Google Cloud Storage (GCS).
