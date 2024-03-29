@@ -7,23 +7,26 @@ summary: Learn how to use TiDB Cloud serverless driver with Prisma ORM.
 
 [Prisma](https://www.prisma.io/docs) is an open source next-generation ORM (Object-Relational Mapping) that helps developers interact with their database in an intuitive, efficient, and safe way. TiDB Cloud offers [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter), enabling you to use [Prisma Client](https://www.prisma.io/docs/concepts/components/prisma-client) over HTTPS with [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md). Compared with the traditional TCP way, [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter) brings the following benefits:
 
-- Better performance in the serverless environments
-- Ability to use in the edge environments
+- Better performance of Prisma Client in serverless environments
+- Ability to use Prisma Client in edge environments
 
-This tutorial describes how to use the Prisma adapter.
+This tutorial describes how to use [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter) in serverless environments and edge environments.
 
 ## Install
 
-You need to install both the `prisma-adapter` and `serverless driver`. You can install them using npm or your preferred package manager.
+You need to install both [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter) and [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md). You can install them using [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
+
+Taking npm as an example, you can run the following commands for installation: 
+
 
 ```
 npm install @tidbcloud/prisma-adapter
 npm install @tidbcloud/serverless
 ```
 
-## Enable the driverAdapters
+## Enable `driverAdapters`
 
-To use the Prisma adapter, we need to enable the `driverAdapters` feature in the `schema.prisma` file. Here is an example:
+To use the Prisma adapter, you need to enable the `driverAdapters` feature in the `schema.prisma` file. For example:
 
 ```
 generator client {
@@ -37,9 +40,9 @@ datasource db {
 }
 ```
 
-## Initialize the Prisma Client
+## Initialize Prisma Client
 
-After initialize the Prisma Client with the Prisma adapter, you can use the Prisma Client as usual. Then, the query will go through the TiDB Cloud serverless driver. Here is an example:
+Before using Prisma Client, you need to initialize it with `@tidbcloud/prisma-adapter`. For example:
 
 ```
 import { connect } from '@tidbcloud/serverless';
@@ -54,7 +57,7 @@ const prisma = new PrismaClient({ adapter });
 
 ## Use the Prisma adapter in Node.js environments
 
-This is an example of how to use the Prisma adapter in Node.js environments.
+This section provides an example of how to use `@tidbcloud/prisma-adapter` in Node.js environments.
 
 ### Before you begin
 
@@ -258,7 +261,7 @@ To complete this tutorial, you need the following:
    
 ## Use the Prisma adapter in edge environments
 
-You can use `@tidbcloud/prisma-adapter` >= v5.11.0 in the edge environments such as Vercel Edge Function and Cloudflare Workers.
+You can use `@tidbcloud/prisma-adapter` v5.11.0 or a later version in edge environments such as Vercel Edge Function and Cloudflare Workers.
 
-- [Vercel Edge Function Example](https://github.com/tidbcloud/serverless-driver-example/tree/main/prisma/prisma-vercel-example)
-- [Cloudflare Worker Example](https://github.com/tidbcloud/serverless-driver-example/tree/main/prisma/prisma-cloudflare-worker-example)
+- [Vercel Edge Function example](https://github.com/tidbcloud/serverless-driver-example/tree/main/prisma/prisma-vercel-example)
+- [Cloudflare Worker example](https://github.com/tidbcloud/serverless-driver-example/tree/main/prisma/prisma-cloudflare-worker-example)
