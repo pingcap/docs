@@ -19,7 +19,7 @@ During the maintenance window, the DM feature for TiDB Dedicated clusters in the
 
 - Cloud provider: AWS, region: Tokyo (ap-northeast-1)
 
-During the upgrade, you can use the functionalities of TiDB clusters normally. The DM tasks can keep running without disruption. The DM console can be used normally.
+During the upgrade, you can use the functionalities of TiDB clusters and the DM console normally. The DM tasks can keep running without disruption.
 
 ## Completion and resumption
 
