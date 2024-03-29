@@ -179,7 +179,9 @@ mysql> TABLE t1;
 
 > **Note**
 >
-> The [`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache) might lead to results that differ from what MySQL would give. If this is a concern for you then you can enable [MySQL Compatible mode](/auto-increment.md#mysql-compatibility-mode).
+> The [`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache) might lead to results that differ from what MySQL would give. As ID's are cached on each TiDB node the ID's can be out of order an have gaps. If this is a concern for you then you can enable [MySQL Compatible mode](/auto-increment.md#mysql-compatibility-mode).
+>
+> In this example the ID's increase by 2 while MySQL would have ID's that increase by one in the same situation. See [Auto-Increment ID](/mysql-compatibility.md#auto-increment-id) in our MySQL Compatibility documentation for more details on this.
 
 ### ROW_COUNT()
 
