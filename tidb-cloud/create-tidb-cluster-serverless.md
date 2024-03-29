@@ -31,7 +31,7 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
 4. The cloud provider of TiDB Serverless is AWS. You can select an AWS region where you want to host your cluster.
 
-5. Select **Cluster Plan**. TiDB Serverless has two [Cluster Plans](/tidb-cloud/select-cluster-tier.md#cluster-plans). You can start with Free Cluster and later update to Scalable Cluster as your needs grow. If you want to create a scalable cluster, you need to set a spending limit and add a credit card.
+5. Select **Cluster Plan**. TiDB Serverless has two [Cluster Plans](/tidb-cloud/select-cluster-tier.md#cluster-plan). You can start with Free Cluster and later update to Scalable Cluster as your needs grow. If you want to create a scalable cluster, you need to set a spending limit and add a credit card.
 
     > **Note:**
     >
