@@ -15,15 +15,11 @@ This notification describes the details that you need to know about the maintena
 
 ## Impact
 
-During the maintenance window, the DM feature for TiDB Dedicated clusters in the following regions will be affected:
+During the maintenance window, the DM feature for TiDB Dedicated clusters in the following region will be upgraded:
 
 - Cloud provider: AWS, region: Tokyo (ap-northeast-1)
 
-The maintenance only affects the DM feature in the TiDB cluster. All the other functionalities remain unaffected. You can continue to manage the TiDB cluster and perform read/write operations or other operations as usual.
-
-For clusters deployed on AWS:
-
-- During the upgrade, the DM tasks can keep running without disruption. The DM console can be used normally.
+During the upgrade, you can use the functionalities of TiDB clusters normally. The DM tasks can keep running without disruption. The DM console can be used normally.
 
 ## Completion and resumption
 
