@@ -148,17 +148,17 @@ The configuration parameters of sink are as follows:
 {
   "dispatchers":[
     {"matcher":["test1.*", "test2.*"], "dispatcher":"ts"},
-    {"matcher":["test3.*", "test4.*"], "dispatcher":"rowid"}
+    {"matcher":["test3.*", "test4.*"], "dispatcher":"index-value"}
   ],
   "protocal":"canal-json"
 }
 ```
 
-`dispatchers`: For the sink of MQ type, you can use dispatchers to configure the event dispatcher. Four dispatchers are supported: `default`, `ts`, `rowid`, and `table`. The dispatcher rules are as follows:
+`dispatchers`: For the sink of MQ type, you can use dispatchers to configure the event dispatcher. Four dispatchers are supported: `default`, `ts`, `index-value`, and `table`. The dispatcher rules are as follows:
 
 - `default`: dispatches events in the `table` mode.
 - `ts`: uses the commitTs of the row change to create the hash value and dispatch events.
-- `rowid`: uses the name and value of the selected HandleKey column to create the hash value and dispatch events.
+- `index-value`: uses the name and value of the selected HandleKey column to create the hash value and dispatch events.
 - `table`: uses the schema name of the table and the table name to create the hash value and dispatch events.
 
 `matcher`: The matching syntax of matcher is the same as the filter rule syntax.
