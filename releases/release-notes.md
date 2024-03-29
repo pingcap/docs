@@ -6,7 +6,7 @@ title: Release Notes
 
 ## 8.0
 
-- [8.0.0-DMR](/releases/release-8.0.0.md): 2024-03-28
+- [8.0.0-DMR](/releases/release-8.0.0.md): 2024-03-29
 
 ## 7.6
 
