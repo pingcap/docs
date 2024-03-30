@@ -4295,14 +4295,15 @@ mysql> desc select count(distinct a) from test.t;
 - This variable is used to influence the estimated number of rows for an index that matches a SQL statements `ORDER BY` when there are `ORDER BY` and `LIMIT` clauses with filter conditions that aren't covered by the index.
 - This addresses the same query patterns as variable [tidb_opt_ordering_index_selectivity_threshold](#tidb_opt_ordering_index_selectivity_threshold-new-in-v700).
 - It differs in implementation by applying a ratio or percentage of the possible range that the qualified rows will be found.
-- Value -1 (default) disables this ratio. Any value between 0 and 1 applies a ratio of 0% to 100% (meaning 0.5 = 50%).
+- Value -1 (default) and any other value below zero disables this ratio, that enables optimizer to estimate target rows. Any value between 0 and 1 applies a ratio of 0% to 100% (meaning 0.5 = 50%).
 - In the following examples, table `t` has a total of 1,000,000 rows. The same query is used, but different values for `tidb_opt_ordering_index_selectivity_ratio` are used. The query in the example has a WHERE clause predicate that qualifies a small percentage of the rows (9000 out of 1,000,000). There is an index that supports the `ORDER BY a` (index ia), but the filtering on b does not appear in this index. Based upon the data distribution, the row matching the WHERE clause and LIMIT 1 could be found as the 1st row accessed when scanning the non-filtering index, or at worst, after nearly all of the rows have been processed.
+- An index hint is used in each example to demonstrate the impact to estRows. The impact to the final plan choice is dependent on the availability and cost of other plans.
 - The first example uses the default -1, which uses the existing estimation formula. The default behavior is that a small percentage of the rows are estimated to be scanned before a row is found that qualifies from filtering outside of that index.
 
 ```sql
 > SET SESSION tidb_opt_ordering_index_selectivity_ratio = -1;
 
->EXPLAIN SELECT * FROM t USE INDEX (ia) WHERE b <= 9000 ORDER BY a 1;
+>EXPLAIN SELECT * FROM t USE INDEX (ia) WHERE b <= 9000 ORDER BY a LIMIT 1;
 +-----------------------------------+---------+-----------+-----------------------+---------------------------------+
 | id                                | estRows | task      | access object         | operator info                   |
 +-----------------------------------+---------+-----------+-----------------------+---------------------------------+
@@ -4320,7 +4321,7 @@ mysql> desc select count(distinct a) from test.t;
 ```sql
 >SET SESSION tidb_opt_ordering_index_selectivity_ratio = 0;
 
->EXPLAIN SELECT * FROM t USE INDEX (ia) WHERE b <= 9000 ORDER BY a 1;
+>EXPLAIN SELECT * FROM t USE INDEX (ia) WHERE b <= 9000 ORDER BY a LIMIT 1;
 +-----------------------------------+---------+-----------+-----------------------+---------------------------------+
 | id                                | estRows | task      | access object         | operator info                   |
 +-----------------------------------+---------+-----------+-----------------------+---------------------------------+
@@ -4338,7 +4339,7 @@ mysql> desc select count(distinct a) from test.t;
 ```sql
 >SET SESSION tidb_opt_ordering_index_selectivity_ratio = 0.1;
 
->EXPLAIN SELECT * FROM t USE INDEX (ia) WHERE b <= 9000 ORDER BY a 1;
+>EXPLAIN SELECT * FROM t USE INDEX (ia) WHERE b <= 9000 ORDER BY a LIMIT 1;
 +-----------------------------------+----------+-----------+-----------------------+---------------------------------+
 | id                                | estRows  | task      | access object         | operator info                   |
 +-----------------------------------+----------+-----------+-----------------------+---------------------------------+
@@ -4356,7 +4357,7 @@ mysql> desc select count(distinct a) from test.t;
 ```sql
 >SET SESSION tidb_opt_ordering_index_selectivity_ratio = 1;
 
->EXPLAIN SELECT * FROM t USE INDEX (ia) WHERE b <= 9000 ORDER BY a 1;
+>EXPLAIN SELECT * FROM t USE INDEX (ia) WHERE b <= 9000 ORDER BY a LIMIT 1;
 +-----------------------------------+-----------+-----------+-----------------------+---------------------------------+
 | id                                | estRows   | task      | access object         | operator info                   |
 +-----------------------------------+-----------+-----------+-----------------------+---------------------------------+
@@ -4372,7 +4373,7 @@ mysql> desc select count(distinct a) from test.t;
 - The 5th example also uses 1.0, but adds a predicate on a that limits the worst case scan range since `WHERE a <= 9000` is matching on the index such that approximately 9000 rows would qualify in total. Given that there is a filtering predicate on b that is not in the index, all of the approximately 9000 rows are considered to be scanned before a qualified row for `b <= 9000` is found.
 
 ```sql
->EXPLAIN SELECT * FROM t USE INDEX (ia) WHERE a <= 9000 AND b <= 9000 ORDER BY a 1;
+>EXPLAIN SELECT * FROM t USE INDEX (ia) WHERE a <= 9000 AND b <= 9000 ORDER BY a LIMIT 1;
 +------------------------------------+---------+-----------+-----------------------+------------------------------------+
 | id                                 | estRows | task      | access object         | operator info                      |
 +------------------------------------+---------+-----------+-----------------------+------------------------------------+
