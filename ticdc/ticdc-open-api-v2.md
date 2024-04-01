@@ -356,11 +356,11 @@ The `sink.csv` parameters are described as follows:
 | `quote`                  | `STRING` type. The quotation character used to surround fields in the CSV file. If the value is empty, no quotation is used. The default value is `"`. |
 | `binary_encoding_method` | `STRING` type. The encoding method of binary data, which can be `"base64"` or `"hex"`. The default value is `"base64"`. |
 
-`sink.dispatchers`: for the sink of MQ type, you can use this parameter to configure the event dispatcher. The following dispatchers are supported: `default`, `ts`, `rowid`, and `table`. The dispatcher rules are as follows:
+`sink.dispatchers`: for the sink of MQ type, you can use this parameter to configure the event dispatcher. The following dispatchers are supported: `default`, `ts`, `index-value`, and `table`. The dispatcher rules are as follows:
 
 - `default`: dispatches events in the `table` mode.
 - `ts`: uses the commitTs of the row change to create the hash value and dispatch events.
-- `rowid`: uses the name and value of the selected HandleKey column to create the hash value and dispatch events.
+- `index-value`: uses the name and value of the selected HandleKey column to create the hash value and dispatch events.
 - `table`: uses the schema name of the table and the table name to create the hash value and dispatch events.
 
 `sink.dispatchers` is an array. The parameters are described as follows:
