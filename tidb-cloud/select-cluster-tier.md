@@ -18,7 +18,7 @@ TiDB Cloud provides the following two options of cluster tiers. Before creating 
 <!--To be confirmed-->
 TiDB Serverless is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free tier and consumption based billing once free limits are exceeded.
 
-### Cluster plan
+### Cluster plans
 
 TiDB Serverless offers two service plans to meet different user requirements. Whether you are just getting started or scaling to meet the increasing application demands, these service plans provide the flexibility and capability you need.
 

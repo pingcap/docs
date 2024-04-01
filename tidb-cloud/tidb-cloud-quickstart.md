@@ -30,7 +30,7 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
     - To create a new TiDB Serverless cluster on your own, follow these steps:
 
         1. Click **Create Cluster**.
-        2. On the **Create Cluster** page, **Serverless** is selected by default. Select the target region for your cluster, update the default cluster name if necessary, select your [cluster plan](/tidb-cloud/select-cluster-tier.md#cluster-plan), and then click **Create**. Your TiDB Serverless cluster will be created in approximately 30 seconds.
+        2. On the **Create Cluster** page, **Serverless** is selected by default. Select the target region for your cluster, update the default cluster name if necessary, select your [cluster plan](/tidb-cloud/select-cluster-tier.md#cluster-plans), and then click **Create**. Your TiDB Serverless cluster will be created in approximately 30 seconds.
 
 ## Step 2: Try AI-powered Chat2Query (beta)
 

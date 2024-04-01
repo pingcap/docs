@@ -49,7 +49,7 @@ For the first five TiDB Serverless clusters in your organization, TiDB Cloud pro
 - Row-based storage: 5 GiB
 - [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit): 50 million RUs per month
 
-If you are using a Scalable cluster, usage beyond the free quota will be charged. For Free clusters, once the free quota is reached, the read and write operations on this cluster will be throttled until you upgrade to Scalable clusters or the usage is reset upon the start of a new month.
+If you are using a scalable cluster, usage beyond the free quota will be charged. For a free cluster, once the free quota is reached, the read and write operations on this cluster will be throttled until you upgrade to a scalable cluster or the usage is reset upon the start of a new month.
 
 For more information, see [TiDB Serverless usage quota](/tidb-cloud/select-cluster-tier.md#usage-quota).
 

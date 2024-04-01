@@ -16,7 +16,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     To meet different user requirements, TiDB Serverless offers the free and scalable service plans. Whether you are just getting started or scaling to meet the increasing application demands, these plans provide the flexibility and capability you need.
 
-    For more information, see [Cluster plan](/tidb-cloud/select-cluster-tier.md#cluster-plan).
+    For more information, see [Cluster plans](/tidb-cloud/select-cluster-tier.md#cluster-plans).
 
 ## March 5, 2024
 

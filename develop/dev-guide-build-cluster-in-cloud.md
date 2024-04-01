@@ -29,7 +29,7 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 3. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click **Create Cluster**.
 
-4. On the **Create Cluster** page, **Serverless** is selected by default. Update the default cluster name if necessary, and then select the [cluster plan](/tidb-cloud/select-cluster-tier.md#cluster-plan).
+4. On the **Create Cluster** page, **Serverless** is selected by default. Update the default cluster name if necessary, and then select the [cluster plan](/tidb-cloud/select-cluster-tier.md#cluster-plans).
 
 5. Click **Create** to create a TiDB Serverless cluster.
 
