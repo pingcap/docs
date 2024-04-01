@@ -8,6 +8,16 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
+## April 2, 2024
+
+**General changes**
+
+- Introduce two service plans for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters: **Free** and **Scalable**.
+
+    To meet different user requirements, TiDB Serverless offers the free and scalable service plans. Whether you are just getting started or scaling to meet the increasing application demands, these plans provide the flexibility and capability you need.
+
+    For more information, see [Cluster plan](/tidb-cloud/select-cluster-tier.md#cluster-plan).
+
 ## March 5, 2024
 
 **General changes**
