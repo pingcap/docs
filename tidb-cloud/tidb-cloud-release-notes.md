@@ -14,13 +14,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Introduce two service plans for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters: **Free** and **Scalable**.
 
-    To meet different user requirements, TiDB Serverless offers the free and scalable service plans. Whether you are just getting started or scaling to meet the increasing application demands, these plans provide the flexibility and capabilities you need. 
+    To meet different user requirements, TiDB Serverless offers the free and scalable service plans. Whether you are just getting started or scaling to meet the increasing application demands, these plans provide the flexibility and capabilities you need.
 
     For more information, see [Cluster plans](/tidb-cloud/select-cluster-tier.md#cluster-plans).
 
-- We've updated the throttling behavior for TiDB Serverless clusters reaching their quota limits. New connections to throttled clusters will be denied, ensuring uninterrupted service for existing operations.
+- Modify the throttling behavior for TiDB Serverless clusters upon reaching their usage quota. Now, once a cluster reaches its usage quota, it immediately denies any new connection attempts, thereby ensuring uninterrupted service for existing operations.
 
-    For more infomation, see [tidb-cloud/serverless-limitations.md#usage-quota]
+    For more information, see [Usage quota](/tidb-cloud/serverless-limitations.md#usage-quota).
 
 ## March 5, 2024
 
