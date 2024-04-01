@@ -49,7 +49,7 @@ For the first five TiDB Serverless clusters in your organization, no matter Free
 
 A Request Unit (RU) is a unit of measure used to represent the amount of resources consumed by a single request to the database. The amount of RUs consumed by a request depends on various factors, such as the operation type or the amount of data being retrieved or modified.
 
-Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) or the usage is reset upon the start of a new month. For example, when the storage of a cluster exceeds 5 GiB, the maximum size limit of a single transaction is reduced from 10 MiB to 1 MiB.
+Once the usage quota of a cluster is reached, new connection attempts will be immediately denied until you [increase the quota](#update-spending-limit) or the usage is reset upon the start of a new month. For connections that were established prior to the throttling, there will be no change in behavior. For example, when the storage of a cluster exceeds 5 GiB for a free cluster, new connection attempts to the cluster will be directly restricted.
 
 To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
 
