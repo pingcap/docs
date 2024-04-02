@@ -547,7 +547,7 @@ INSERT INTO t VALUES ('a');
 ```
 
 ```sql
-ERROR 1062 (23000): Duplicate entry 'a' for key 't.PRIMARY' # TiDB is compatible with the case-insensitive collation of MySQL.
+ERROR 1062 (23000): Duplicate entry 'a' for key 't.PRIMARY' -- TiDB is compatible with the case-insensitive collation of MySQL.
 ```
 
 ```sql
@@ -555,7 +555,7 @@ INSERT INTO t VALUES ('a ');
 ```
 
 ```sql
-ERROR 1062 (23000): Duplicate entry 'a ' for key 't.PRIMARY' # TiDB modifies the `PADDING` behavior to be compatible with MySQL.
+ERROR 1062 (23000): Duplicate entry 'a ' for key 't.PRIMARY' -- TiDB modifies the `PADDING` behavior to be compatible with MySQL.
 ```
 
 > **Note:**
