@@ -12,7 +12,19 @@ TiDB uses statistics as input to the optimizer to estimate the number of rows pr
 
 ### Automatic update
 
-For the `INSERT`, `DELETE`, or `UPDATE` statements, TiDB automatically updates the number of rows and modified rows. TiDB persists this information regularly and the update cycle is 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease). The default value of `stats-lease` is `3s`.
+For the `INSERT`, `DELETE`, or `UPDATE` statements, TiDB automatically updates the number of rows and modified rows. 
+
+<CustomContent platform="tidb">
+
+TiDB persists the update information regularly and the update cycle is 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease). The default value of `stats-lease` is `3s`. If you specify the value as `0`, TiDB stops updating statistics automatically.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+TiDB persists the update information every 60 seconds.
+
+</CustomContent>
 
 Based upon the number of changes to a table, TiDB will automatically schedule `ANALYZE` to collect statistics on those tables. This is controlled by the [`tidb_enable_auto_anlyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) system variable and `tidb_auto_analyze%` variables. 
 
