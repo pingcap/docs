@@ -434,11 +434,12 @@ Here the first argument of `FIELD()` is `needle` and this matches the second one
 
 Return the index position of the first argument within the second argument.
 
+This function is often used with the [`SET`](/data-type-string.md#set-type) data type.
+
+In the following example, `Go` is the fourth element in the set `COBOL,BASIC,Rust,Go,Java,Fortran`, so the function returns `4`.
+
 ```sql
 SELECT FIND_IN_SET('Go', 'COBOL,BASIC,Rust,Go,Java,Fortran');
-```
-
-```
 +-------------------------------------------------------+
 | FIND_IN_SET('Go', 'COBOL,BASIC,Rust,Go,Java,Fortran') |
 +-------------------------------------------------------+
@@ -446,10 +447,6 @@ SELECT FIND_IN_SET('Go', 'COBOL,BASIC,Rust,Go,Java,Fortran');
 +-------------------------------------------------------+
 1 row in set (0.00 sec)
 ```
-
-In the example above, `Go` is the 4th element of the set, so the function returns 4.
-
-This function is often used with the [`SET`](/data-type-string.md#set-type) data type.
 
 ### [`FORMAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_format)
 
