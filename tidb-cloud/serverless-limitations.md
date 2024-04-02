@@ -71,4 +71,4 @@ To learn more about the RU consumption of different resources (including read, w
 
 If you want to create a TiDB Serverless cluster with an additional quota, you can edit the spending limit on the cluster creation page. For more information, see [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
 
-After creating a TiDB Serverless, you can still check and edit the spending limit on your cluster overview page. For more information, see [Manage Spending Limit for TiDB Serverless Clusters](/tidb-cloud/manage-serverless-spend-limit.md).
+After creating a TiDB Serverless cluster, you can still check and edit the spending limit on your cluster overview page. For more information, see [Manage Spending Limit for TiDB Serverless Clusters](/tidb-cloud/manage-serverless-spend-limit.md).
