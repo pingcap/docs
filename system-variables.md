@@ -4243,47 +4243,6 @@ mysql> desc select count(distinct a) from test.t;
 - The real-time statistics are the total number of rows and the number of modified rows that are automatically updated based on DML statements. When this variable is set to `moderate` (default), TiDB generates the execution plan based on real-time statistics. When this variable is set to `determinate`, TiDB does not use real-time statistics for generating the execution plan, which will make execution plans more stable.
 - For long-term stable OLTP workload, or if the user is affirmative on the existing execution plans, it is recommended to use the `determinate` mode to reduce the possibility of unexpected execution plan changes. Additionally, you can use the [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md) to prevent the statistics from being modified and further stabilize the execution plan.
 
-### tidb_opt_ordering_index_selectivity_threshold <span class="version-mark">New in v7.0.0</span>
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
-- Type: Float
-- Default value: `0`
-- Range: `[0, 1]`
-- This variable is used to control how the optimizer selects an index when there are `ORDER BY` and `LIMIT` clauses with filter conditions in a SQL statement.
-- For such queries, the optimizer considers selecting the corresponding index to satisfy the `ORDER BY` and `LIMIT` clauses (even if this index does not satisfy any filter conditions). However, due to the complexity of data distribution, the optimizer might select a suboptimal index in this scenario.
-- This variable represents a threshold. When an index exists that can satisfy filtering conditions and its selectivity estimate is lower than this threshold, the optimizer will avoid selecting an index used to satisfy `ORDER BY` and `LIMIT`. Instead, it prioritizes an index that satisfies the filtering conditions.
-- For example, when the variable is set to `0`, the optimizer maintains its default behavior; when it is set to `1`, the optimizer always prioritizes selecting indexes that satisfy the filter conditions and avoids selecting indexes that satisfy both `ORDER BY` and `LIMIT` clauses.
-- In the following example, table `t` has a total of 1,000,000 rows. When using an index on column `b`, its estimated row count is approximately 8,748, so its selectivity estimate value is about 0.0087. By default, the optimizer selects an index on column `a`. However, after setting this variable to 0.01, since the selectivity of an index on column `b` (0.0087) is less than 0.01, the optimizer selects an index on column `b`.
-
-```sql
-> EXPLAIN SELECT * FROM t WHERE b <= 9000 ORDER BY a LIMIT 1;
-+-----------------------------------+---------+-----------+----------------------+--------------------+
-| id                                | estRows | task      | access object        | operator info      |
-+-----------------------------------+---------+-----------+----------------------+--------------------+
-| Limit_12                          | 1.00    | root      |                      | offset:0, count:1  |
-| └─Projection_25                   | 1.00    | root      |                      | test.t.a, test.t.b |
-|   └─IndexLookUp_24                | 1.00    | root      |                      |                    |
-|     ├─IndexFullScan_21(Build)     | 114.30  | cop[tikv] | table:t, index:ia(a) | keep order:true    |
-|     └─Selection_23(Probe)         | 1.00    | cop[tikv] |                      | le(test.t.b, 9000) |
-|       └─TableRowIDScan_22         | 114.30  | cop[tikv] | table:t              | keep order:false   |
-+-----------------------------------+---------+-----------+----------------------+--------------------+
-
-> SET SESSION tidb_opt_ordering_index_selectivity_threshold = 0.01;
-
-> EXPLAIN SELECT * FROM t WHERE b <= 9000 ORDER BY a LIMIT 1;
-+----------------------------------+---------+-----------+----------------------+-------------------------------------+
-| id                               | estRows | task      | access object        | operator info                       |
-+----------------------------------+---------+-----------+----------------------+-------------------------------------+
-| TopN_9                           | 1.00    | root      |                      | test.t.a, offset:0, count:1         |
-| └─IndexLookUp_20                 | 1.00    | root      |                      |                                     |
-|   ├─IndexRangeScan_17(Build)     | 8748.62 | cop[tikv] | table:t, index:ib(b) | range:[-inf,9000], keep order:false |
-|   └─TopN_19(Probe)               | 1.00    | cop[tikv] |                      | test.t.a, offset:0, count:1         |
-|     └─TableRowIDScan_18          | 8748.62 | cop[tikv] | table:t              | keep order:false                    |
-+----------------------------------+---------+-----------+----------------------+-------------------------------------+
-```
-
 ### tidb_opt_ordering_index_selectivity_ratio <span class="version-mark">New in v8.0.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -4370,7 +4329,7 @@ mysql> desc select count(distinct a) from test.t;
 +-----------------------------------+-----------+-----------+-----------------------+---------------------------------+
 ```
 
-- The fifth example also uses `1.0`, but adds a predicate on a that limits the worst case scan range since `WHERE a <= 9000` is matching on the index such that approximately 9000 rows would qualify in total. Given that there is a filtering predicate on b that is not in the index, all of the approximately 9000 rows are considered to be scanned before a qualified row for `b <= 9000` is found.
+- The fifth example also uses `1.0`, but adds a predicate on a that limits the worst case scan range since `WHERE a <= 9000` is matching on the index such that approximately 9000 rows would qualify in total. Given that there is a filtering predicate on `b` that is not in the index, all of the approximately 9000 rows are considered to be scanned before a qualified row for `b <= 9000` is found.
 
 ```sql
 >EXPLAIN SELECT * FROM t USE INDEX (ia) WHERE a <= 9000 AND b <= 9000 ORDER BY a LIMIT 1;
@@ -4384,6 +4343,47 @@ mysql> desc select count(distinct a) from test.t;
 |     └─Selection_20(Probe)          | 1.00    | cop[tikv] |                       | le(test.t.b, 9000)                 |
 |       └─TableRowIDScan_19          | 9074.99 | cop[tikv] | table:t               | keep order:false                   |
 +------------------------------------+---------+-----------+-----------------------+------------------------------------+
+```
+
+### tidb_opt_ordering_index_selectivity_threshold <span class="version-mark">New in v7.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Float
+- Default value: `0`
+- Range: `[0, 1]`
+- This variable is used to control how the optimizer selects an index when there are `ORDER BY` and `LIMIT` clauses with filter conditions in a SQL statement.
+- For such queries, the optimizer considers selecting the corresponding index to satisfy the `ORDER BY` and `LIMIT` clauses (even if this index does not satisfy any filter conditions). However, due to the complexity of data distribution, the optimizer might select a suboptimal index in this scenario.
+- This variable represents a threshold. When an index exists that can satisfy filtering conditions and its selectivity estimate is lower than this threshold, the optimizer will avoid selecting an index used to satisfy `ORDER BY` and `LIMIT`. Instead, it prioritizes an index that satisfies the filtering conditions.
+- For example, when the variable is set to `0`, the optimizer maintains its default behavior; when it is set to `1`, the optimizer always prioritizes selecting indexes that satisfy the filter conditions and avoids selecting indexes that satisfy both `ORDER BY` and `LIMIT` clauses.
+- In the following example, table `t` has a total of 1,000,000 rows. When using an index on column `b`, its estimated row count is approximately 8,748, so its selectivity estimate value is about 0.0087. By default, the optimizer selects an index on column `a`. However, after setting this variable to 0.01, since the selectivity of an index on column `b` (0.0087) is less than 0.01, the optimizer selects an index on column `b`.
+
+```sql
+> EXPLAIN SELECT * FROM t WHERE b <= 9000 ORDER BY a LIMIT 1;
++-----------------------------------+---------+-----------+----------------------+--------------------+
+| id                                | estRows | task      | access object        | operator info      |
++-----------------------------------+---------+-----------+----------------------+--------------------+
+| Limit_12                          | 1.00    | root      |                      | offset:0, count:1  |
+| └─Projection_25                   | 1.00    | root      |                      | test.t.a, test.t.b |
+|   └─IndexLookUp_24                | 1.00    | root      |                      |                    |
+|     ├─IndexFullScan_21(Build)     | 114.30  | cop[tikv] | table:t, index:ia(a) | keep order:true    |
+|     └─Selection_23(Probe)         | 1.00    | cop[tikv] |                      | le(test.t.b, 9000) |
+|       └─TableRowIDScan_22         | 114.30  | cop[tikv] | table:t              | keep order:false   |
++-----------------------------------+---------+-----------+----------------------+--------------------+
+
+> SET SESSION tidb_opt_ordering_index_selectivity_threshold = 0.01;
+
+> EXPLAIN SELECT * FROM t WHERE b <= 9000 ORDER BY a LIMIT 1;
++----------------------------------+---------+-----------+----------------------+-------------------------------------+
+| id                               | estRows | task      | access object        | operator info                       |
++----------------------------------+---------+-----------+----------------------+-------------------------------------+
+| TopN_9                           | 1.00    | root      |                      | test.t.a, offset:0, count:1         |
+| └─IndexLookUp_20                 | 1.00    | root      |                      |                                     |
+|   ├─IndexRangeScan_17(Build)     | 8748.62 | cop[tikv] | table:t, index:ib(b) | range:[-inf,9000], keep order:false |
+|   └─TopN_19(Probe)               | 1.00    | cop[tikv] |                      | test.t.a, offset:0, count:1         |
+|     └─TableRowIDScan_18          | 8748.62 | cop[tikv] | table:t              | keep order:false                    |
++----------------------------------+---------+-----------+----------------------+-------------------------------------+
 ```
 
 ### tidb_opt_prefer_range_scan <span class="version-mark">New in v5.0</span>
