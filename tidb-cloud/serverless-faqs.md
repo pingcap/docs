@@ -55,7 +55,7 @@ For more information, see [TiDB Serverless usage quota](/tidb-cloud/select-clust
 
 ### What are the limitations of the free plan?
 
-Under the free plan, cluster performance is capped at a maximum of 10,000 RUs per second based on actual workload. Additionally, memory allocation per query is limited to 256 MiB. To maximize cluster performance, you can choose to enable the commercial offering by [upgrading to Scalable Cluster](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan).
+Under the free plan, cluster performance is capped at a maximum of 10,000 RUs per second based on actual workload. Additionally, memory allocation per query is limited to 256 MiB. To maximize cluster performance, you can choose to enable the commercial offering by upgrading to a [scalable cluster](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan).
 
 ### How can I estimate the number of RUs required by my workloads and plan my monthly budget?
 
