@@ -22,7 +22,7 @@ Get started with the 5-minute [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-qu
 
 ### How many TiDB Serverless clusters can I create in TiDB Cloud?
 
-For each organization in TiDB Cloud, you can create a maximum of five [Free clusters](/tidb-cloud/select-cluster-tier.md#free-cluster-plan) by default. To create more TiDB Serverless clusters, you need to add a credit card and create [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan) for the usage.
+For each organization in TiDB Cloud, you can create a maximum of five [free clusters](/tidb-cloud/select-cluster-tier.md#free-cluster-plan) by default. To create more TiDB Serverless clusters, you need to add a credit card and create [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan) for the usage.
 
 ### Are all TiDB Cloud features fully supported on TiDB Serverless?
 
@@ -61,7 +61,7 @@ Under the free plan, cluster performance is capped at a maximum of 10,000 RUs pe
 
 To get the RU consumption of individual SQL statements, you can use the [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption) SQL statement. However, it is important to note that the RUs usage returned in `EXPLAIN ANALYZE` does not incorporate egress RUs, as egress usage is measured separately in the gateway, which is unknown to the TiDB server.
 
-To get the RUs and storage used by your cluster, view the **Usage this month** pane on your cluster overview page. With your past resource usage data and real-time resource usage in this pane, you can track your cluster's resource consumption and estimate a reasonable spending limit. If the free quota cannot meet your requirement, you can [upgrade to Scalable Cluster](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan) and edit the spending limit. For more information, For more information, see [TiDB Serverless usage quota](/tidb-cloud/select-cluster-tier.md#usage-quota).
+To get the RUs and storage used by your cluster, view the **Usage this month** pane on your cluster overview page. With your past resource usage data and real-time resource usage in this pane, you can track your cluster's resource consumption and estimate a reasonable spending limit. If the free quota cannot meet your requirement, you can upgrade to a [scalable cluster](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan) and edit the spending limit. For more information, For more information, see [TiDB Serverless usage quota](/tidb-cloud/select-cluster-tier.md#usage-quota).
 
 ### How can I optimize my workload to minimize the number of RUs consumed?
 
