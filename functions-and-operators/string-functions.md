@@ -406,11 +406,62 @@ Output:
 
 ### [`ELT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_elt)
 
-Return string at index number.
+Returns the element at the index number.
+
+```sql
+SELECT ELT(3, 'This', 'is', 'TiDB');
+```
+
+```
++------------------------------+
+| ELT(3, 'This', 'is', 'TiDB') |
++------------------------------+
+| TiDB                         |
++------------------------------+
+1 row in set (0.00 sec)
+```
+
+This example returns the third element, which is "TiDB".
 
 ### [`EXPORT_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_export-set)
 
 Return a string such that for every bit set in the value bits, you get an on string and for every unset bit, you get an off string.
+
+The full signature of this function is:
+
+```
+EXPORT_SET(bits, on, off, [separator, number_of_bits])
+```
+
+```sql
+SELECT EXPORT_SET(b'00001111', 'x', '_', '', 8);
+```
+
+```
++------------------------------------------+
+| EXPORT_SET(b'00001111', 'x', '_', '', 8) |
++------------------------------------------+
+| xxxx____                                 |
++------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the example above `bits` is set to `00001111` and this causes the function to return `____` for the bits that are set to 0 and `xxxx` for the bits that are set to 1. Here `x` means "on" and "_" means "off". 
+
+```sql
+SELECT EXPORT_SET(b'01010101', 'x', '_', '', 8);
+```
+
+```
++------------------------------------------+
+| EXPORT_SET(b'01010101', 'x', '_', '', 8) |
++------------------------------------------+
+| x_x_x_x_                                 |
++------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the example above you can see the off (`_`) / on (`x`) pattern from right to left as set by the `bits.
 
 ### [`FIELD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_field)
 
