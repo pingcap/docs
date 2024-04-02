@@ -416,9 +416,41 @@ Return a string such that for every bit set in the value bits, you get an on str
 
 Return the index (position)of the first argument in the subsequent arguments.
 
+```sql
+SELECT FIELD('needle', 'A', 'needle', 'in', 'a', 'haystack');
+```
+
+```
++-------------------------------------------------------+
+| FIELD('needle', 'A', 'needle', 'in', 'a', 'haystack') |
++-------------------------------------------------------+
+|                                                     2 |
++-------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+Here the first argument of `FIELD()` is `needle` and this matches the second one of the following arguments, so the function returns 2.
+
 ### [`FIND_IN_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_find-in-set)
 
 Return the index position of the first argument within the second argument.
+
+```sql
+SELECT FIND_IN_SET('Go', 'COBOL,BASIC,Rust,Go,Java,Fortran');
+```
+
+```
++-------------------------------------------------------+
+| FIND_IN_SET('Go', 'COBOL,BASIC,Rust,Go,Java,Fortran') |
++-------------------------------------------------------+
+|                                                     4 |
++-------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the example above, `Go` is the 4th element of the set, so the function returns 4.
+
+This function is often used with the [`SET`](/data-type-string.md#set-type) data type.
 
 ### [`FORMAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_format)
 
