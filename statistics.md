@@ -12,7 +12,9 @@ TiDB uses statistics as input to the optimizer to estimate the number of rows pr
 
 ### Automatic update
 
-For the `INSERT`, `DELETE`, or `UPDATE` statements, TiDB automatically updates the number of rows and modified rows. Based upon the number of changes to a table, TiDB will automatically schedule `ANALYZE` to collect statistics on those tables. This is controlled by the [`tidb_enable_auto_anlyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) system variable and `tidb_auto_analyze%` variables. 
+For the `INSERT`, `DELETE`, or `UPDATE` statements, TiDB automatically updates the number of rows and modified rows. TiDB persists this information regularly and the update cycle is 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease). The default value of `stats-lease` is `3s`.
+
+Based upon the number of changes to a table, TiDB will automatically schedule `ANALYZE` to collect statistics on those tables. This is controlled by the [`tidb_enable_auto_anlyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) system variable and `tidb_auto_analyze%` variables. 
 
 The following system variables related to automatic update of statistics are as follows:
 
@@ -77,7 +79,7 @@ For details about the parameter that determines the upper limit to the number of
 > **Note:**
 > Count-Min Sketch is used in statistics Version 1 only for equal/IN predicate selectivity estimation. In Version 2, other available statistics are used due to challenges in management of count-min sketch to avoid collisions as discussed below.
 
-Count-Min Sketch is a hash structure. When an equivalence query contains `a = 1` or `IN` query (for example, `a in (1, 2, 3)`), TiDB uses this data structure for estimation.
+Count-Min Sketch is a hash structure. When an equivalence query contains `a = 1` or `IN` query (for example, `a IN (1, 2, 3)`), TiDB uses this data structure for estimation.
 
 A hash collision might occur since Count-Min Sketch is a hash structure. In the `EXPLAIN` statement, if the estimate of the equivalent query deviates greatly from the actual value, it can be considered that a larger value and a smaller value have been hashed together. In this case, you can take one of the following ways to avoid the hash collision:
 
