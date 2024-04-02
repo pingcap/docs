@@ -4254,62 +4254,62 @@ mysql> desc select count(distinct a) from test.t;
 - This variable is used to influence the estimated number of rows for an index that matches the SQL statement `ORDER BY` when there are `ORDER BY` and `LIMIT` clauses with filter conditions that are not covered by the index.
 - This addresses the same query patterns as the system variable [tidb_opt_ordering_index_selectivity_threshold](#tidb_opt_ordering_index_selectivity_threshold-new-in-v700).
 - It differs in implementation by applying a ratio or percentage of the possible range that the qualified rows will be found.
-- Value `-1` (default) and any other value below zero disables this ratio, which enables optimizer to estimate target rows. Any value between `0` and `1` applies a ratio of 0% to 100% (for example, `0.5` = `50%`).
+- Value `-1` (default) and any other value below zero disables this ratio. Any value between `0` and `1` applies a ratio of 0% to 100% (for example, `0.5` = `50%`).
 - In the following examples, the table `t` has a total of 1,000,000 rows. The same query is used, but different values for `tidb_opt_ordering_index_selectivity_ratio` are used. The query in the example has a `WHERE` clause predicate that qualifies a small percentage of the rows (9000 out of 1,000,000). There is an index that supports the `ORDER BY a` (index `ia`), but the filtering on `b` does not appear in this index. Based upon the data distribution, the row matching the `WHERE` clause and `LIMIT 1` can be found as the 1st row accessed when scanning the non-filtering index, or at worst, after nearly all of the rows have been processed.
 - An index hint is used in each example to demonstrate the impact on estRows. The impact on the final plan choice is dependent on the availability and cost of other plans.
 - The first example uses the default value `-1`, which uses the existing estimation formula. The default behavior is that a small percentage of the rows are estimated to be scanned before a row is found that qualifies from filtering outside of that index.
 
-```sql
-> SET SESSION tidb_opt_ordering_index_selectivity_ratio = -1;
+    ```sql
+    > SET SESSION tidb_opt_ordering_index_selectivity_ratio = -1;
 
->EXPLAIN SELECT * FROM t USE INDEX (ia) WHERE b <= 9000 ORDER BY a LIMIT 1;
-+-----------------------------------+---------+-----------+-----------------------+---------------------------------+
-| id                                | estRows | task      | access object         | operator info                   |
-+-----------------------------------+---------+-----------+-----------------------+---------------------------------+
-| Limit_12                          | 1.00    | root      |                       | offset:0, count:1               |
-| └─Projection_22                   | 1.00    | root      |                       | test.t.a, test.t.b, test.t.c    |
-|   └─IndexLookUp_21                | 1.00    | root      |                       |                                 |
-|     ├─IndexFullScan_18(Build)     | 109.20  | cop[tikv] | table:t, index:ia(a)  | keep order:true                 |
-|     └─Selection_20(Probe)         | 1.00    | cop[tikv] |                       | le(test.t.b, 9000)              |
-|       └─TableRowIDScan_19         | 109.20  | cop[tikv] | table:t               | keep order:false                |
-+-----------------------------------+---------+-----------+-----------------------+---------------------------------+
-```
+    > EXPLAIN SELECT * FROM t USE INDEX (ia) WHERE b <= 9000 ORDER BY a LIMIT 1;
+    +-----------------------------------+---------+-----------+-----------------------+---------------------------------+
+    | id                                | estRows | task      | access object         | operator info                   |
+    +-----------------------------------+---------+-----------+-----------------------+---------------------------------+
+    | Limit_12                          | 1.00    | root      |                       | offset:0, count:1               |
+    | └─Projection_22                   | 1.00    | root      |                       | test.t.a, test.t.b, test.t.c    |
+    |   └─IndexLookUp_21                | 1.00    | root      |                       |                                 |
+    |     ├─IndexFullScan_18(Build)     | 109.20  | cop[tikv] | table:t, index:ia(a)  | keep order:true                 |
+    |     └─Selection_20(Probe)         | 1.00    | cop[tikv] |                       | le(test.t.b, 9000)              |
+    |       └─TableRowIDScan_19         | 109.20  | cop[tikv] | table:t               | keep order:false                |
+    +-----------------------------------+---------+-----------+-----------------------+---------------------------------+
+    ```
 
 - The second example uses `0`, which assumes that 0% of the rows will be scanned before the qualified rows are found. 
 
-```sql
->SET SESSION tidb_opt_ordering_index_selectivity_ratio = 0;
+    ```sql
+    > SET SESSION tidb_opt_ordering_index_selectivity_ratio = 0;
 
->EXPLAIN SELECT * FROM t USE INDEX (ia) WHERE b <= 9000 ORDER BY a LIMIT 1;
-+-----------------------------------+---------+-----------+-----------------------+---------------------------------+
-| id                                | estRows | task      | access object         | operator info                   |
-+-----------------------------------+---------+-----------+-----------------------+---------------------------------+
-| Limit_12                          | 1.00    | root      |                       | offset:0, count:1               |
-| └─Projection_22                   | 1.00    | root      |                       | test.t.a, test.t.b, test.t.c    |
-|   └─IndexLookUp_21                | 1.00    | root      |                       |                                 |
-|     ├─IndexFullScan_18(Build)     | 1.00    | cop[tikv] | table:t, index:ia(a)  | keep order:true                 |
-|     └─Selection_20(Probe)         | 1.00    | cop[tikv] |                       | le(test.t.b, 9000)              |
-|       └─TableRowIDScan_19         | 1.00    | cop[tikv] | table:t               | keep order:false                |
-+-----------------------------------+---------+-----------+-----------------------+---------------------------------+
-```
+    > EXPLAIN SELECT * FROM t USE INDEX (ia) WHERE b <= 9000 ORDER BY a LIMIT 1;
+    +-----------------------------------+---------+-----------+-----------------------+---------------------------------+
+    | id                                | estRows | task      | access object         | operator info                   |
+    +-----------------------------------+---------+-----------+-----------------------+---------------------------------+
+    | Limit_12                          | 1.00    | root      |                       | offset:0, count:1               |
+    | └─Projection_22                   | 1.00    | root      |                       | test.t.a, test.t.b, test.t.c    |
+    |   └─IndexLookUp_21                | 1.00    | root      |                       |                                 |
+    |     ├─IndexFullScan_18(Build)     | 1.00    | cop[tikv] | table:t, index:ia(a)  | keep order:true                 |
+    |     └─Selection_20(Probe)         | 1.00    | cop[tikv] |                       | le(test.t.b, 9000)              |
+    |       └─TableRowIDScan_19         | 1.00    | cop[tikv] | table:t               | keep order:false                |
+    +-----------------------------------+---------+-----------+-----------------------+---------------------------------+
+    ```
 
 - The third example uses `0.1`, meaning that 10% of the possible range is estimated to be scanned. Given the strong filtering of less than 1% of the rows qualified, the worst case is that 99% of the rows need to be scanned before that 1% of the rows are found. 10% of that 99% is approximately 9.9%, which is reflected in the estRows.
 
-```sql
->SET SESSION tidb_opt_ordering_index_selectivity_ratio = 0.1;
+    ```sql
+    > SET SESSION tidb_opt_ordering_index_selectivity_ratio = 0.1;
 
->EXPLAIN SELECT * FROM t USE INDEX (ia) WHERE b <= 9000 ORDER BY a LIMIT 1;
-+-----------------------------------+----------+-----------+-----------------------+---------------------------------+
-| id                                | estRows  | task      | access object         | operator info                   |
-+-----------------------------------+----------+-----------+-----------------------+---------------------------------+
-| Limit_12                          | 1.00     | root      |                       | offset:0, count:1               |
-| └─Projection_22                   | 1.00     | root      |                       | test.t.a, test.t.b, test.t.c    |
-|   └─IndexLookUp_21                | 1.00     | root      |                       |                                 |
-|     ├─IndexFullScan_18(Build)     | 99085.21 | cop[tikv] | table:t, index:ia(a)  | keep order:true                 |
-|     └─Selection_20(Probe)         | 1.00     | cop[tikv] |                       | le(test.t.b, 9000)              |
-|       └─TableRowIDScan_19         | 99085.21 | cop[tikv] | table:t               | keep order:false                |
-+-----------------------------------+----------+-----------+-----------------------+---------------------------------+
-```
+    > EXPLAIN SELECT * FROM t USE INDEX (ia) WHERE b <= 9000 ORDER BY a LIMIT 1;
+    +-----------------------------------+----------+-----------+-----------------------+---------------------------------+
+    | id                                | estRows  | task      | access object         | operator info                   |
+    +-----------------------------------+----------+-----------+-----------------------+---------------------------------+
+    | Limit_12                          | 1.00     | root      |                       | offset:0, count:1               |
+    | └─Projection_22                   | 1.00     | root      |                       | test.t.a, test.t.b, test.t.c    |
+    |   └─IndexLookUp_21                | 1.00     | root      |                       |                                 |
+    |     ├─IndexFullScan_18(Build)     | 99085.21 | cop[tikv] | table:t, index:ia(a)  | keep order:true                 |
+    |     └─Selection_20(Probe)         | 1.00     | cop[tikv] |                       | le(test.t.b, 9000)              |
+    |       └─TableRowIDScan_19         | 99085.21 | cop[tikv] | table:t               | keep order:false                |
+    +-----------------------------------+----------+-----------+-----------------------+---------------------------------+
+    ```
 
 - The fourth example uses `1.0`, which means 100% of the possible range is estimated to be scanned.
 
