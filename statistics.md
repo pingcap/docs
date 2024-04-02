@@ -6,7 +6,7 @@ aliases: ['/docs/dev/statistics/','/docs/dev/reference/performance/statistics/']
 
 # Introduction to Statistics
 
-Tidb uses statistics as input to the optimizer to estimate the number of rows processed in each plan step for a SQL statement. The optimizer estimates the cost of each available plan choice - including [index accesses](/choose-index.md), the sequence of table joins, and produces a cost for each available plan. The optimizer then picks the execution plan with the lowest overall cost.
+TiDB uses statistics as input to the optimizer to estimate the number of rows processed in each plan step for a SQL statement. The optimizer estimates the cost of each available plan choice - including [index accesses](/choose-index.md), the sequence of table joins, and produces a cost for each available plan. The optimizer then picks the execution plan with the lowest overall cost.
 
 ## Collect Statistics
 
@@ -14,13 +14,13 @@ Tidb uses statistics as input to the optimizer to estimate the number of rows pr
 
 <CustomContent platform="tidb">
 
-For the `INSERT`, `DELETE`, or `UPDATE` statements, TiDB automatically updates the number of rows and modified rows. Based upon the number of changes to a table, TiDB will automatically schedule `ANALYZE` to collect statistics on those tables. This is controlled by the [`tidb_enable_auto_anlyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) system variable. 
+For the `INSERT`, `DELETE`, or `UPDATE` statements, TiDB automatically updates the number of rows and modified rows. Based upon the number of changes to a table, TiDB will automatically schedule `ANALYZE` to collect statistics on those tables. This is controlled by the [`tidb_enable_auto_anlyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) system variable and `tidb_auto_analyze%` variables. 
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-For the `INSERT`, `DELETE`, or `UPDATE` statements, TiDB automatically updates the number of rows and modified rows. TiDB persists this information regularly and the update cycle is 20 * `stats-lease`. The default value of `stats-lease` is `3s`.
+For the `INSERT`, `DELETE`, or `UPDATE` statements, TiDB automatically updates the number of rows and modified rows. TiDB persists this information regularly and the update cycle is 20 * `stats-lease`. The default value of [`stats-lease`](/tidb-configuration-file.md#stats-lease) is `3s`.
 
 </CustomContent>
 
@@ -105,8 +105,6 @@ TiDB records the values and occurrences of Top-N values. The default value is 20
 ### Collect statistics on indexes
 
 To collect statistics on all indexes in `IndexNameList` in `TableName`, use the following syntax:
-
-{{< copyable "sql" >}}
 
 ```sql
 ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
@@ -344,8 +342,6 @@ If you want to persist the column configuration in the `ANALYZE` statement (incl
 
 To locate `PREDICATE COLUMNS` and columns on which statistics have been collected, use the following syntax:
 
-{{< copyable "sql" >}}
-
 ```sql
 SHOW COLUMN_STATS_USAGE [ShowLikeOrWhere];
 ```
@@ -363,8 +359,6 @@ The `SHOW COLUMN_STATS_USAGE` statement returns the following 6 columns:
 
 In the following example, after executing `ANALYZE TABLE t PREDICATE COLUMNS;`, TiDB collects statistics on columns `b`, `c`, and `d`, where column `b` is a `PREDICATE COLUMN` and columns `c` and `d` are index columns.
 
-{{< copyable "sql" >}}
-
 ```sql
 SET GLOBAL tidb_enable_column_tracking = ON;
 Query OK, 0 rows affected (0.00 sec)
@@ -378,7 +372,8 @@ Empty set (0.00 sec)
 
 -- After waiting for a period of time (100 * stats-lease), TiDB writes the collected `PREDICATE COLUMNS` to mysql.column_stats_usage.
 -- Specify `last_used_at IS NOT NULL` to show the `PREDICATE COLUMNS` collected by TiDB.
-SHOW COLUMN_STATS_USAGE WHERE db_name = 'test' AND table_name = 't' AND last_used_at IS NOT NULL;
+SHOW COLUMN_STATS_USAGE 
+WHERE db_name = 'test' AND table_name = 't' AND last_used_at IS NOT NULL;
 +---------+------------+----------------+-------------+---------------------+------------------+
 | Db_name | Table_name | Partition_name | Column_name | Last_used_at        | Last_analyzed_at |
 +---------+------------+----------------+-------------+---------------------+------------------+
@@ -390,7 +385,8 @@ ANALYZE TABLE t PREDICATE COLUMNS;
 Query OK, 0 rows affected, 1 warning (0.03 sec)
 
 -- Specify `last_analyzed_at IS NOT NULL` to show the columns for which statistics have been collected.
-SHOW COLUMN_STATS_USAGE WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
+SHOW COLUMN_STATS_USAGE 
+WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
 +---------+------------+----------------+-------------+---------------------+---------------------+
 | Db_name | Table_name | Partition_name | Column_name | Last_used_at        | Last_analyzed_at    |
 +---------+------------+----------------+-------------+---------------------+---------------------+
@@ -433,13 +429,19 @@ To prepare `ANALYZE` for switching between versions:
 - If the `ANALYZE` statement is executed manually, manually analyze every table to be analyzed.
 
     ```sql
-    SELECT DISTINCT(CONCAT('ANALYZE TABLE ', table_schema, '.', table_name, ';')) FROM information_schema.tables, mysql.stats_histograms WHERE stats_ver = 2 AND table_id = tidb_table_id;
+    SELECT DISTINCT(CONCAT('ANALYZE TABLE ', table_schema, '.', table_name, ';')) 
+    FROM information_schema.tables JOIN mysql.stats_histograms
+    ON table_id = tidb_table_id
+    WHERE stats_ver = 2;
     ```
 
-- If TiDB automatically executes the `ANALYZE` statement because the auto-analysis has been enabled, execute the following statement that generates the `DROP STATS` statement:
+- If TiDB automatically executes the `ANALYZE` statement because the auto-analysis has been enabled, execute the following statement that generates the [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md) statement:
 
     ```sql
-    SELECT DISTINCT(CONCAT('DROP STATS ', table_schema, '.', table_name, ';')) FROM information_schema.tables, mysql.stats_histograms WHERE stats_ver = 2 AND table_id = tidb_table_id;
+    SELECT DISTINCT(CONCAT('DROP STATS ', table_schema, '.', table_name, ';')) 
+    FROM information_schema.tables ON mysql.stats_histograms 
+    ON table_id = tidb_table_id
+    WHERE stats_ver = 2;
     ```
 
 - If the result of the preceding statement is too long to copy and paste, you can export the result to a temporary text file and then perform execution from the file like this:
