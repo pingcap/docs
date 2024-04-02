@@ -74,7 +74,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 
   Each microservice is deployed as an independent process. If you configure more than one replica for a microservice, the microservice automatically implements a primary-secondary fault-tolerant mode to ensure high availability and reliability of the service.
 
-    Currently, PD microservices can only be deployed using TiDB Operator and TiUP playground. It is recommended to consider this mode when PD becomes a significant performance bottleneck that cannot be resolved by scaling up.
+    Currently, PD microservices can only be deployed using TiDB Operator. It is recommended to consider this mode when PD becomes a significant performance bottleneck that cannot be resolved by scaling up.
 
     For more information, see [documentation](/pd-microservices.md).
 
