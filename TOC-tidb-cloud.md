@@ -334,14 +334,14 @@
     - [TiDB Global Sort](/tidb-global-sort.md)
   - Benchmarks
     - TiDB v7.5
-      - [TPC-C Performance Test Report](/tidb-cloud/v7.5-performance-benchmarking-with-tpcc)
-      - [Sysbench Performance Test Report](/tidb-cloud/v7.5-performance-benchmarking-with-sysbench)
+      - [TPC-C Performance Test Report](/tidb-cloud/v7.5-performance-benchmarking-with-tpcc.md)
+      - [Sysbench Performance Test Report](/tidb-cloud/v7.5-performance-benchmarking-with-sysbench.md)
     - TiDB v7.1
-      - [TPC-C Performance Test Report](/tidb-cloud/v7.1-performance-benchmarking-with-tpcc)
-      - [Sysbench Performance Test Report](/tidb-cloud/v7.1-performance-benchmarking-with-sysbench)
+      - [TPC-C Performance Test Report](/tidb-cloud/v7.1-performance-benchmarking-with-tpcc.md)
+      - [Sysbench Performance Test Report](/tidb-cloud/v7.1-performance-benchmarking-with-sysbench.md)
     - TiDB v6.5
-      - [TPC-C Performance Test Report](/tidb-cloud/v6.5-performance-benchmarking-with-tpcc)
-      - [Sysbench Performance Test Report](/tidb-cloud/v6.5-performance-benchmarking-with-sysbench)
+      - [TPC-C Performance Test Report](/tidb-cloud/v6.5-performance-benchmarking-with-tpcc.md)
+      - [Sysbench Performance Test Report](/tidb-cloud/v6.5-performance-benchmarking-with-sysbench.md)
   - SQL
     - [Explore SQL with TiDB](/basic-sql-operations.md)
     - SQL Language Structure and Syntax
