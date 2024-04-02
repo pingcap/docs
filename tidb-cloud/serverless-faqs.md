@@ -22,7 +22,7 @@ Get started with the 5-minute [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-qu
 
 ### How many TiDB Serverless clusters can I create in TiDB Cloud?
 
-For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless clusters by default. To create more TiDB Serverless clusters, you need to add a credit card and set a [spending limit](/tidb-cloud/tidb-cloud-glossary.md#spending-limit) for usage.
+For each organization in TiDB Cloud, you can create a maximum of five [free clusters](/tidb-cloud/select-cluster-tier.md#free-cluster-plan) by default. To create more TiDB Serverless clusters, you need to add a credit card and create [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan) for the usage.
 
 ### Are all TiDB Cloud features fully supported on TiDB Serverless?
 
@@ -55,13 +55,13 @@ For more information, see [TiDB Serverless usage quota](/tidb-cloud/select-clust
 
 ### What are the limitations of the free plan?
 
-Under the free plan, cluster performance is capped at a maximum of 10,000 RUs per second based on actual workload. Additionally, memory allocation per query is limited to 256 MiB. To maximize cluster performance, you can choose to enable the commercial offering by [increasing your spending limit](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit).
+Under the free plan, cluster performance is capped at a maximum of 10,000 RUs per second based on actual workload. Additionally, memory allocation per query is limited to 256 MiB. To maximize cluster performance, you can choose to enable the commercial offering by upgrading to a [scalable cluster](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan).
 
 ### How can I estimate the number of RUs required by my workloads and plan my monthly budget?
 
 To get the RU consumption of individual SQL statements, you can use the [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption) SQL statement. However, it is important to note that the RUs usage returned in `EXPLAIN ANALYZE` does not incorporate egress RUs, as egress usage is measured separately in the gateway, which is unknown to the TiDB server.
 
-To get the RUs and storage used by your cluster, view the **Usage this month** pane on your cluster overview page. With your past resource usage data and real-time resource usage in this pane, you can track your cluster's resource consumption and estimate a reasonable spending limit. If the free quota cannot meet your requirement, you can edit the spending limit easily. For more information, see [Manage Spending Limit for TiDB Serverless clusters](/tidb-cloud/manage-serverless-spend-limit.md).
+To get the RUs and storage used by your cluster, view the **Usage this month** pane on your cluster overview page. With your past resource usage data and real-time resource usage in this pane, you can track your cluster's resource consumption and estimate a reasonable spending limit. If the free quota cannot meet your requirement, you can upgrade to a [scalable cluster](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan) and edit the spending limit. For more information, see [TiDB Serverless usage quota](/tidb-cloud/select-cluster-tier.md#usage-quota).
 
 ### How can I optimize my workload to minimize the number of RUs consumed?
 
@@ -85,7 +85,7 @@ A spike in RU usage can occur due to necessary background jobs in TiDB. These jo
 
 ### What happens when my cluster exhausts its free quota or exceeds its spending limit?
 
-Once a cluster reaches its free quota or spending limit, the cluster will enforce throttling measures on its read and write operations. These operations will be limited until the quota is increased or the usage is reset at the start of a new month. For more information, see [TiDB Serverless Limitations and Quotas](/tidb-cloud/serverless-limitations.md#usage-quota).
+Once a cluster reaches its free quota or spending limit, the cluster immediately denies any new connection attempts until the quota is increased or the usage is reset at the start of a new month. Existing connections established before reaching the quota will not be affected. For more information, see [TiDB Serverless Limitations and Quotas](/tidb-cloud/serverless-limitations.md#usage-quota).
 
 ### Why do I observe spikes in RU usage while importing data?
 
