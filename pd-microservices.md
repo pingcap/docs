@@ -42,18 +42,12 @@ In addition, when the scheduling module is changed, you can update the `scheduli
 
 Currently, PD microservices can be deployed using TiDB Operator.
 
-<SimpleTab>
-<div label="TiDB Operator">
-
 For detailed information on using TiDB Operator, see the following documents:
 
 - [Deploy PD microservices](https://docs.pingcap.com/tidb-in-kubernetes/dev/configure-a-tidb-cluster#enable-pd-microservices)
 - [Configure PD microservices](https://docs.pingcap.com/tidb-in-kubernetes/dev/configure-a-tidb-cluster#configure-pd-microservices)
 - [Modify PD microservices](https://docs.pingcap.com/tidb-in-kubernetes/dev/modify-tidb-configuration#modify-pd-microservice-configuration)
 - [Scale PD microservice components](https://docs.pingcap.com/tidb-in-kubernetes/dev/scale-a-tidb-cluster#scale-pd-microservice-components)
-
-</div>
-</SimpleTab>
 
 When deploying and using PD microservices, pay attention to the following:
 
