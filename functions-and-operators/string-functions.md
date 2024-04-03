@@ -1302,6 +1302,14 @@ SELECT n, OCT(n) FROM nr;
 20 rows in set (0.00 sec)
 ```
 
+### [`OCTET_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_octet-length)
+
+Synonym for [`LENGTH()`](#length).
+
+### [`ORD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ord)
+
+Return character code for leftmost character of the argument.
+
 This function is similar to [`CHAR()`](#char), but works the other way around.
 
 Examples:
@@ -1350,14 +1358,6 @@ SELECT ORD('e'), ORD('ë'), HEX('e'), HEX('ë');
 +----------+-----------+----------+-----------+
 1 row in set (0.00 sec)
 ```
-
-### [`OCTET_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_octet-length)
-
-Synonym for [`LENGTH()`](#length).
-
-### [`ORD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ord)
-
-Return character code for leftmost character of the argument.
 
 ### [`POSITION()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_position)
 
