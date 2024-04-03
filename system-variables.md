@@ -4251,13 +4251,13 @@ mysql> desc select count(distinct a) from test.t;
 - Type: Float
 - Default value: `-1`
 - Range: `[-1, 1]`
-- This variable is used to influence the estimated number of rows for an index that matches the SQL statement `ORDER BY` when there are `ORDER BY` and `LIMIT` clauses with filter conditions that are not covered by the index.
+- This variable controls the estimated number of rows for an index that matches the SQL statement `ORDER BY` when there are `ORDER BY` and `LIMIT` clauses in a SQL statement, but does not cover some filter conditions.
 - This addresses the same query patterns as the system variable [tidb_opt_ordering_index_selectivity_threshold](#tidb_opt_ordering_index_selectivity_threshold-new-in-v700).
 - It differs in implementation by applying a ratio or percentage of the possible range that the qualified rows will be found.
-- Value `-1` (default) and any other value below zero disables this ratio. Any value between `0` and `1` applies a ratio of 0% to 100% (for example, `0.5` = `50%`).
-- In the following examples, the table `t` has a total of 1,000,000 rows. The same query is used, but different values for `tidb_opt_ordering_index_selectivity_ratio` are used. The query in the example has a `WHERE` clause predicate that qualifies a small percentage of the rows (9000 out of 1,000,000). There is an index that supports the `ORDER BY a` (index `ia`), but the filtering on `b` does not appear in this index. Based upon the data distribution, the row matching the `WHERE` clause and `LIMIT 1` can be found as the 1st row accessed when scanning the non-filtering index, or at worst, after nearly all of the rows have been processed.
-- An index hint is used in each example to demonstrate the impact on estRows. The impact on the final plan choice is dependent on the availability and cost of other plans.
-- The first example uses the default value `-1`, which uses the existing estimation formula. The default behavior is that a small percentage of the rows are estimated to be scanned before a row is found that qualifies from filtering outside of that index.
+- A value of `-1` (default) or less thabn `0` disables this ratio. Any value between `0` and `1` applies a ratio of 0% to 100% (for example, `0.5` corresponds to `50%`).
+- In the following examples, the table `t` has a total of 1,000,000 rows. The same query is used, but different values for `tidb_opt_ordering_index_selectivity_ratio` are used. The query in the example contains a `WHERE` clause predicate that qualifies a small percentage of the rows (9,000 out of 1,000,000). There is an index that supports the `ORDER BY a` (index `ia`), but the filter on `b` is not included in this index. Depending on the actual data distribution, the rows matching the `WHERE` clause and `LIMIT 1` might be found as the first row accessed when scanning the non-filtering index, or at worst, after nearly all of the rows have been processed.
+- Each example uses an index hint to demonstrate the impact on estRows. The final plan selection depends on the availability and cost of other plans.
+- The first example uses the default value `-1`, which uses the existing estimation formula. By default, a small percentage of rows are scanned for estimation before the qualified rows are found.
 
     ```sql
     > SET SESSION tidb_opt_ordering_index_selectivity_ratio = -1;
@@ -4275,7 +4275,7 @@ mysql> desc select count(distinct a) from test.t;
     +-----------------------------------+---------+-----------+-----------------------+---------------------------------+
     ```
 
-- The second example uses `0`, which assumes that 0% of the rows will be scanned before the qualified rows are found. 
+- The second example uses `0`, which assumes that 0% of rows will be scanned before the qualified rows are found. 
 
     ```sql
     > SET SESSION tidb_opt_ordering_index_selectivity_ratio = 0;
@@ -4293,7 +4293,7 @@ mysql> desc select count(distinct a) from test.t;
     +-----------------------------------+---------+-----------+-----------------------+---------------------------------+
     ```
 
-- The third example uses `0.1`, meaning that 10% of the possible range is estimated to be scanned. Given the strong filtering of less than 1% of the rows qualified, the worst case is that 99% of the rows need to be scanned before that 1% of the rows are found. 10% of that 99% is approximately 9.9%, which is reflected in the estRows.
+- The third example uses `0.1`, which assumes that 10% of rows will be scanned before the qualified rows are found. This condition is highly selective, with only 1% of rows meeting the condition. Therefore, in the worst-case scenario, it might be necessary to scan 99% of rows before finding the 1% that qualify. 10% of that 99% is approximately 9.9%, which is reflected in the estRows.
 
     ```sql
     > SET SESSION tidb_opt_ordering_index_selectivity_ratio = 0.1;
@@ -4311,7 +4311,7 @@ mysql> desc select count(distinct a) from test.t;
     +-----------------------------------+----------+-----------+-----------------------+---------------------------------+
     ```
 
-- The fourth example uses `1.0`, which means 100% of the possible range is estimated to be scanned.
+- The fourth example uses `1.0`, which assumes that 100% of rows will be scanned before the qualified rows are found.
 
     ```sql
     > SET SESSION tidb_opt_ordering_index_selectivity_ratio = 1;
@@ -4329,7 +4329,7 @@ mysql> desc select count(distinct a) from test.t;
     +-----------------------------------+-----------+-----------+-----------------------+---------------------------------+
     ```
 
-- The fifth example also uses `1.0`, but adds a predicate on a that limits the worst case scan range since `WHERE a <= 9000` is matching on the index such that approximately 9000 rows would qualify in total. Given that there is a filtering predicate on `b` that is not in the index, all of the approximately 9000 rows are considered to be scanned before a qualified row for `b <= 9000` is found.
+- The fifth example also uses `1.0`, but adds a predicate on `a`, limiting the scan range in the worst-case scenario. This is because `WHERE a <= 9000` matches the index, with approximately 9,000 rows would qualify. Given that the filter predicate on `b` is not in the index, all the approximately 9,000 rows are considered to be scanned before finding a row that matches `b <= 9000`.
 
     ```sql
     > SET SESSION tidb_opt_ordering_index_selectivity_ratio = 1;
