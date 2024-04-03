@@ -223,7 +223,7 @@ SELECT CustomerName, CHAR_LENGTH(CustomerName) AS LenghtOfName FROM Customers;
 
 The `CHARACTER_LENGTH()` function is the same as the `CHAR_LENGTH()` function. Both functions can be used synonymously because they generate the same output.
 
-## [`CONCAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat)
+### [`CONCAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat)
 
 The `CONCAT()` function concatenates one or more arguments into a single string.
 
@@ -1186,9 +1186,58 @@ Negation of `REGEXP`.
 
 Return a string containing octal representation of a number.
 
+This function is similar to [`CHAR()`](#char), but works the other way around.
+
+Examples:
+
+Here we take "a" and "A" and use `ORD()` to get "97" and "65".
+
+```sql
+SELECT ORD('a'), ORD('A');
+```
+
+```
++----------+----------+
+| ORD('a') | ORD('A') |
++----------+----------+
+|       97 |       65 |
++----------+----------+
+1 row in set (0.00 sec)
+```
+
+If we take the octal numbers we got from `ORD()` then we can get back to the orignal characters by using the `CHAR()` function. Note that the display of the output might be different if your MySQL client has the `binary-as-hex` option enabled.
+
+```sql
+SELECT CHAR(97), CHAR(65);
+```
+
+```
++----------+----------+
+| CHAR(97) | CHAR(65) |
++----------+----------+
+| a        | A        |
++----------+----------+
+1 row in set (0.01 sec)
+```
+
+In the example below you can see how `ORD()` handles multibyte characters. Here 101 and 0x65 are both the value for the "e" character, but in different formats. And 50091 and 0xC3AB are the same, but for the "ë" character. 
+
+```sql
+SELECT ORD('e'), ORD('ë'), HEX('e'), HEX('ë');
+```
+
+```
++----------+-----------+----------+-----------+
+| ORD('e') | ORD('ë')  | HEX('e') | HEX('ë')  |
++----------+-----------+----------+-----------+
+|      101 |     50091 | 65       | C3AB      |
++----------+-----------+----------+-----------+
+1 row in set (0.00 sec)
+```
+
 ### [`OCTET_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_octet-length)
 
-Synonym for `LENGTH()`.
+Synonym for [`LENGTH()`](#length).
 
 ### [`ORD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ord)
 
