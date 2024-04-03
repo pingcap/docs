@@ -1185,7 +1185,43 @@ SELECT LOWER(-012);
 
 ### [`LPAD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lpad)
 
-Return the string argument, left-padded with the specified string.
+The `LPAD(str, len, padstr)` function returns the string argument, left-padded with the specified string `padstr` to a length of `len` characters.
+
+- If `len` is less than the length of the string `str`, the function truncates the string `str` to the length of `len`.
+- If `len` is a negative number, the function returns `NULL`.
+- If any argument is `NULL`, the function returns `NULL`.
+
+Examples:
+
+```sql
+SELECT LPAD('TiDB',8,'>');
++--------------------+
+| LPAD('TiDB',8,'>') |
++--------------------+
+| >>>>TiDB           |
++--------------------+
+1 row in set (0.00 sec)
+```
+
+```sql
+SELECT LPAD('TiDB',2,'>');
++--------------------+
+| LPAD('TiDB',2,'>') |
++--------------------+
+| Ti                 |
++--------------------+
+1 row in set (0.00 sec)
+```
+
+```sql
+SELECT LPAD('TiDB',-2,'>');
++---------------------+
+| LPAD('TiDB',-2,'>') |
++---------------------+
+| NULL                |
++---------------------+
+1 row in set (0.00 sec)
+```
 
 ### [`LTRIM()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ltrim)
 
