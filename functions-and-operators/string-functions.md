@@ -1291,7 +1291,7 @@ SELECT n, OCT(n) FROM nr;
 
 ### [`OCTET_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_octet-length)
 
-Synonym for `LENGTH()`.
+Synonym for [`LENGTH()`](#length).
 
 ### [`ORD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ord)
 
@@ -1299,11 +1299,30 @@ Return character code for leftmost character of the argument.
 
 ### [`POSITION()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_position)
 
-Synonym for `LOCATE()`.
+Synonym for [`LOCATE()`](#locate).
 
 ### [`QUOTE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_quote)
 
 Escape the argument for use in an SQL statement.
+
+If the argument is NULL then the function returns NULL.
+
+Examples:
+
+In this example you can see that ASCII NUL gets escaped as `\0` and `'` gets escaped as `\'`.
+
+```sql
+SELECT QUOTE(0x002774657374);
+```
+
+```
++-----------------------+
+| QUOTE(0x002774657374) |
++-----------------------+
+| '\0\'test'            |
++-----------------------+
+1 row in set (0.00 sec)
+```
 
 ### [`REGEXP`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp)
 
@@ -1399,7 +1418,7 @@ Return the specified rightmost number of characters.
 
 ### [`RLIKE`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp)
 
-Synonym for `REGEXP`.
+Synonym for [`REGEXP`](#regexp).
 
 ### [`RPAD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_rpad)
 
