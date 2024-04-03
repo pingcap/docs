@@ -1172,11 +1172,79 @@ Return a set of comma-separated strings that have the corresponding bit in bits 
 
 ### [`MID()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_mid)
 
-Return a substring starting from the specified position.
+The `MID(str, start, [end])` function returns a substring starting from the specified `start` position and ends at the optinal `end` position.
+
+If any of the arguments are NULL the function returns NULL.
+
+Examples:
+
+In the example below `MID()` returns the input string from the 4th until the last character.
+
+```sql
+SELECT MID('abcdef',4);
+```
+
+```
++-----------------+
+| MID('abcdef',4) |
++-----------------+
+| def             |
++-----------------+
+1 row in set (0.00 sec)
+```
+
+In the example below `MID()` returns the input string from the second until (including) the third character.
+
+```sql
+SELECT MID('abcdef',2,3);
+```
+
+```
++-------------------+
+| MID('abcdef',2,3) |
++-------------------+
+| bcd               |
++-------------------+
+1 row in set (0.00 sec)
+```
 
 ### [`NOT LIKE`](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_not-like)
 
 Negation of simple pattern matching.
+
+This function does the opposite of [`LIKE`](#like).
+
+Examples:
+
+In the example below `NOT LIKE` returns 0 (False) as "aaa" is matching the `a%` pattern.
+
+```sql
+SELECT 'aaa' LIKE 'a%', 'aaa' NOT LIKE 'a%';
+```
+
+```
++-----------------+---------------------+
+| 'aaa' LIKE 'a%' | 'aaa' NOT LIKE 'a%' |
++-----------------+---------------------+
+|               1 |                   0 |
++-----------------+---------------------+
+1 row in set (0.00 sec)
+```
+
+In the example below `NOT LIKE` returns 1 (True) as "aaa" is not matching the `b%` pattern.
+
+```sql
+SELECT 'aaa' LIKE 'b%', 'aaa' NOT LIKE 'b%';
+```
+
+```
++-----------------+---------------------+
+| 'aaa' LIKE 'b%' | 'aaa' NOT LIKE 'b%' |
++-----------------+---------------------+
+|               0 |                   1 |
++-----------------+---------------------+
+1 row in set (0.00 sec)
+```
 
 ### [`NOT REGEXP`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_not-regexp)
 
