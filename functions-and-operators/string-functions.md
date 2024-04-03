@@ -1240,9 +1240,122 @@ SELECT LPAD('TiDB',-2,'>');
 
 Remove leading spaces.
 
+If the first argument is NULL then the function returns NULL.
+
+This function only strips the space character (U+0020) and not any other space like characters like tab (U+0009) or NBSP (U+00A0).
+
+In the example below the `LTRIM()` function removes the leading spaces of ""    hello", which gives "hello" as result.
+
+```sql
+SELECT LTRIM('    hello');
+```
+
+```
++--------------------+
+| LTRIM('    hello') |
++--------------------+
+| hello              |
++--------------------+
+1 row in set (0.00 sec)
+```
+
+In the example below the `LTRIM()` function removes the leading spaces of ""    hello", which gives "hello" as result. We then use [`CONCAT()`](#concat) to add `«` before it and `»` after it. This makes it a bit easier to see that all spaces are removed.
+
+```sql
+SELECT CONCAT('«',LTRIM('    hello'),'»');
+```
+
+```
++------------------------------------+
+| CONCAT('«',LTRIM('    hello'),'»') |
++------------------------------------+
+| «hello»                            |
++------------------------------------+
+1 row in set (0.00 sec)
+```
+
 ### [`MAKE_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_make-set)
 
 Return a set of comma-separated strings that have the corresponding bit in bits set.
+
+If the first argument is set to NULL then the function returns NULL.
+
+In the example below you can see that the bits in the first argument control which of the other arguments are part of the comma separated resultset.
+
+```sql
+SELECT MAKE_SET(b'000','foo','bar','baz');
+```
+
+```
++------------------------------------+
+| MAKE_SET(b'000','foo','bar','baz') |
++------------------------------------+
+|                                    |
++------------------------------------+
+1 row in set (0.00 sec)
+```
+
+Here the result is "" (empty string) as all bits are set to 0.
+
+```sql
+SELECT MAKE_SET(b'001','foo','bar','baz');
+```
+
+```
++------------------------------------+
+| MAKE_SET(b'001','foo','bar','baz') |
++------------------------------------+
+| foo                                |
++------------------------------------+
+1 row in set (0.00 sec)
+```
+
+Here the result is "foo" as only the first bit from the right is set to 1.
+
+```sql
+SELECT MAKE_SET(b'010','foo','bar','baz');
+```
+
+```
++------------------------------------+
+| MAKE_SET(b'010','foo','bar','baz') |
++------------------------------------+
+| bar                                |
++------------------------------------+
+1 row in set (0.00 sec)
+```
+
+Here the result is "bar" as only the second bit from the right is set to 1.
+
+```sql
+SELECT MAKE_SET(b'100','foo','bar','baz');
+```
+
+```
++------------------------------------+
+| MAKE_SET(b'100','foo','bar','baz') |
++------------------------------------+
+| baz                                |
++------------------------------------+
+1 row in set (0.00 sec)
+```
+
+Here the result is "baz" as only the third bit from the right is set to 1.
+
+```sql
+SELECT MAKE_SET(b'111','foo','bar','baz');
+```
+
+```
++------------------------------------+
+| MAKE_SET(b'111','foo','bar','baz') |
++------------------------------------+
+| foo,bar,baz                        |
++------------------------------------+
+1 row in set (0.0002 sec)
+```
+
+Here the result is "foo,bar,baz" as all three bits are set to 1.
 
 ### [`MID()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_mid)
 
