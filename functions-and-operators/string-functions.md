@@ -413,11 +413,37 @@ Return a string such that for every bit set in the value bits, you get an on str
 
 ### [`FIELD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_field)
 
-Return the index (position)of the first argument in the subsequent arguments.
+Return the index (position) of the first argument in the subsequent arguments.
+
+In the following example, the first argument of `FIELD()` is `needle`, and it matches the second argument in the following list, so the function returns `2`.
+
+```sql
+SELECT FIELD('needle', 'A', 'needle', 'in', 'a', 'haystack');
++-------------------------------------------------------+
+| FIELD('needle', 'A', 'needle', 'in', 'a', 'haystack') |
++-------------------------------------------------------+
+|                                                     2 |
++-------------------------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ### [`FIND_IN_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_find-in-set)
 
 Return the index position of the first argument within the second argument.
+
+This function is often used with the [`SET`](/data-type-string.md#set-type) data type.
+
+In the following example, `Go` is the fourth element in the set `COBOL,BASIC,Rust,Go,Java,Fortran`, so the function returns `4`.
+
+```sql
+SELECT FIND_IN_SET('Go', 'COBOL,BASIC,Rust,Go,Java,Fortran');
++-------------------------------------------------------+
+| FIND_IN_SET('Go', 'COBOL,BASIC,Rust,Go,Java,Fortran') |
++-------------------------------------------------------+
+|                                                     4 |
++-------------------------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ### [`FORMAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_format)
 
