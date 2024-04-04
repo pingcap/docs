@@ -1268,9 +1268,172 @@ Escape the argument for use in an SQL statement.
 
 Pattern matching using regular expressions.
 
+Examples:
+
+In this example a number of strings are matched against two regular expressions.
+
+```sql
+WITH vals AS (
+    SELECT 'TiDB' AS v 
+    UNION ALL
+    SELECT 'Titanium'
+    UNION ALL
+    SELECT 'Tungsten'
+    UNION ALL
+    SELECT 'Rust'
+)
+SELECT 
+    v,
+    v REGEXP '^Ti' AS 'starts with "Ti"',
+    v REGEXP '^.{4}$' AS 'Length is 4 characters'
+FROM
+    vals;
+```
+
+```
++----------+------------------+------------------------+
+| v        | starts with "Ti" | Length is 4 characters |
++----------+------------------+------------------------+
+| TiDB     |                1 |                      1 |
+| Titanium |                1 |                      0 |
+| Tungsten |                0 |                      0 |
+| Rust     |                0 |                      1 |
++----------+------------------+------------------------+
+4 rows in set (0.00 sec)
+```
+
+The following example demonstrates that `REGEXP` isn't limited to the `SELECT` clause and for example can also be used in the `WHERE` clause of the query.
+
+```sql
+SELECT
+    v
+FROM (
+        SELECT 'TiDB' AS v
+    ) AS vals
+WHERE
+    v REGEXP 'DB$';
+```
+
+```
++------+
+| v    |
++------+
+| TiDB |
++------+
+1 row in set (0.01 sec)
+```
+
 ### [`REGEXP_INSTR()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-instr)
 
 Return the starting index of the substring that matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
+
+The `REGEXP_INSTR(str, regexp, [start, [match, [ret]]])` function returns the position of the match if the regular expression (`regexp`) matches the string (`str`).
+
+If either the `str` or `regexp` is NULL then the function returns NULL. If both arguments are NULL then the functions returns NULL.
+
+
+Examples:
+
+In the example below you can see that the `^.b.$` matches `abc`.
+
+```sql
+SELECT REGEXP_INSTR('abc','^.b.$');
+```
+
+```
++-----------------------------+
+| REGEXP_INSTR('abc','^.b.$') |
++-----------------------------+
+|                           1 |
++-----------------------------+
+1 row in set (0.00 sec)
+```
+
+In the example below you can see that the third argument can be used to start looking for a match with a different start position in the string.
+
+```sql
+SELECT REGEXP_INSTR('abcabc','a');
+```
+
+```
++----------------------------+
+| REGEXP_INSTR('abcabc','a') |
++----------------------------+
+|                          1 |
++----------------------------+
+1 row in set (0.00 sec)
+```
+
+```sql
+SELECT REGEXP_INSTR('abcabc','a',2);
+```
+
+```
++------------------------------+
+| REGEXP_INSTR('abcabc','a',2) |
++------------------------------+
+|                            4 |
++------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the example below we use the 4th argument to look for the second match.
+
+```sql
+SELECT REGEXP_INSTR('abcabc','a',1,2);
+```
+
+```
++--------------------------------+
+| REGEXP_INSTR('abcabc','a',1,2) |
++--------------------------------+
+|                              4 |
++--------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the example below we use the 5th argument to return the value _after_ the mach instead of the value of the match.
+
+```sql
+SELECT REGEXP_INSTR('abcabc','a',1,1,1);
+```
+
+```
++----------------------------------+
+| REGEXP_INSTR('abcabc','a',1,1,1) |
++----------------------------------+
+|                                2 |
++----------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the example below the 6th argument is used to add the `i` flag to get a case insensitive match.
+
+```sql
+SELECT REGEXP_INSTR('abcabc','A',1,1,0,'');
+```
+
+```
++-------------------------------------+
+| REGEXP_INSTR('abcabc','A',1,1,0,'') |
++-------------------------------------+
+|                                   0 |
++-------------------------------------+
+1 row in set (0.00 sec)
+```
+
+```sql
+SELECT REGEXP_INSTR('abcabc','A',1,1,0,'i');
+```
+
+```
++--------------------------------------+
+| REGEXP_INSTR('abcabc','A',1,1,0,'i') |
++--------------------------------------+
+|                                    1 |
++--------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ### [`REGEXP_LIKE()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-like)
 
@@ -1581,3 +1744,7 @@ The difference between TiDB and MySQL support for the binary string type:
     ```sql
     SELECT REGEXP_REPLACE('abcd','(.*)(.{2})$','\\1') AS s;
     ```
+
+### Known issues
+
+- https://github.com/pingcap/tidb/issues/37981
