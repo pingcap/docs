@@ -1589,7 +1589,7 @@ The `REGEXP_SUBSTR(str, regexp, [start, [match, [flags]]])` function is used to 
 
 Examples
 
-In this example we use the `Ti.{2}` regular exmpression to get the `TiDB` substring of the `This is TiDB` string.
+In this example we use the `Ti.{2}` regular expression to get the `TiDB` substring of the `This is TiDB` string.
 
 ```sql
 SELECT REGEXP_SUBSTR('This is TiDB','Ti.{2}');
