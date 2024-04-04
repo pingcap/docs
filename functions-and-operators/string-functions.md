@@ -1511,10 +1511,6 @@ The difference between TiDB and MySQL support for the binary string type:
     - MySQL does not replace the empty string and returns `""` as the result.
     - TiDB replaces the empty string and returns `"123"` as the result.
 
-<<<<<<< HEAD
-- MySQL does not replace the empty string and returns `""` as the result.
-- TiDB replaces the empty string and returns `"123"` as the result.
-=======
 - The keyword used for capturing groups in TiDB is different from MySQL. MySQL uses `$` as the keyword, while TiDB uses `\\` as the keyword. In addition, TiDB only supports capturing groups numbered from `0` to `9`.
 
     For example, the following SQL statement returns `ab` in TiDB:
@@ -1522,4 +1518,3 @@ The difference between TiDB and MySQL support for the binary string type:
     ```sql
     SELECT REGEXP_REPLACE('abcd','(.*)(.{2})$','\\1') AS s;
     ```
->>>>>>> e00a62026b (Add the introduction of capture group for regexp function (#16800))
