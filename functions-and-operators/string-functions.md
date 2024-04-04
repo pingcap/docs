@@ -1492,9 +1492,118 @@ SELECT REGEXP_LIKE('abc','^A','i');
 
 Replace substrings that match the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
 
+The `REGEXP_REPLACE(str, regexp, replace, [start, [match, [flags]]])` function can be used to replace strings based on regular expressions.
+
+Examples:
+
+In this example two o's are replaced by "i".
+
+```sql
+SELECT REGEXP_REPLACE('TooDB', 'o{2}', 'i');
+```
+
+```
++--------------------------------------+
+| REGEXP_REPLACE('TooDB', 'o{2}', 'i') |
++--------------------------------------+
+| TiDB                                 |
++--------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the example below we start the match at the third character, causing the regular expression to not match and not do any replacement.
+
+```sql
+SELECT REGEXP_REPLACE('TooDB', 'o{2}', 'i',3);
+```
+
+```
++----------------------------------------+
+| REGEXP_REPLACE('TooDB', 'o{2}', 'i',3) |
++----------------------------------------+
+| TooDB                                  |
++----------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the example below the 5th argument is used to set if the first or the second match is used for the replacement.
+
+```sql
+SELECT REGEXP_REPLACE('TooDB', 'o', 'i',1,1);
+```
+
+```
++---------------------------------------+
+| REGEXP_REPLACE('TooDB', 'o', 'i',1,1) |
++---------------------------------------+
+| TioDB                                 |
++---------------------------------------+
+1 row in set (0.00 sec)
+```
+
+```sql
+SELECT REGEXP_REPLACE('TooDB', 'o', 'i',1,2);
+```
+
+```
++---------------------------------------+
+| REGEXP_REPLACE('TooDB', 'o', 'i',1,2) |
++---------------------------------------+
+| ToiDB                                 |
++---------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the example below we use the 6th argument to set the flags for case insensitive matching.
+
+```sql
+SELECT REGEXP_REPLACE('TooDB', 'O{2}','i',1,1);
+```
+
+```
++-----------------------------------------+
+| REGEXP_REPLACE('TooDB', 'O{2}','i',1,1) |
++-----------------------------------------+
+| TooDB                                   |
++-----------------------------------------+
+1 row in set (0.00 sec)
+```
+
+```sql
+SELECT REGEXP_REPLACE('TooDB', 'O{2}','i',1,1,'i');
+```
+
+```
++---------------------------------------------+
+| REGEXP_REPLACE('TooDB', 'O{2}','i',1,1,'i') |
++---------------------------------------------+
+| TiDB                                        |
++---------------------------------------------+
+1 row in set (0.00 sec)
+```
+
 ### [`REGEXP_SUBSTR()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-substr)
 
 Return the substring that matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
+
+The `REGEXP_SUBSTR(str, regexp, [start, [match, [flags]]])` function is used to get a substring based on a regular expression.
+
+Examples
+
+In this example we use the `Ti.{2}` regular exmpression to get the `TiDB` substring of the `This is TiDB` string.
+
+```sql
+SELECT REGEXP_SUBSTR('This is TiDB','Ti.{2}');
+```
+
+```
++----------------------------------------+
+| REGEXP_SUBSTR('This is TiDB','Ti.{2}') |
++----------------------------------------+
+| TiDB                                   |
++----------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ### [`REPEAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_repeat)
 
