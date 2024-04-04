@@ -1389,7 +1389,7 @@ WHERE
 
 Return the starting index of the substring that matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
 
-The `REGEXP_INSTR(str, regexp, [start, [match, [ret]]])` function returns the position of the match if the regular expression (`regexp`) matches the string (`str`).
+The `REGEXP_INSTR(str, regexp, [start, [match, [ret, [flags]]]])` function returns the position of the match if the regular expression (`regexp`) matches the string (`str`).
 
 If either the `str` or `regexp` is NULL then the function returns NULL. If both arguments are NULL then the functions returns NULL.
 
