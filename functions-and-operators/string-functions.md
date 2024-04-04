@@ -1331,7 +1331,6 @@ The `REGEXP_INSTR(str, regexp, [start, [match, [ret, [flags]]]])` function retur
 
 If either the `str` or `regexp` is NULL then the function returns NULL. If both arguments are NULL then the functions returns NULL.
 
-
 Examples:
 
 In the example below you can see that the `^.b.$` matches `abc`.
