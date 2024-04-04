@@ -1501,6 +1501,55 @@ SELECT REGEXP_INSTR('abcabc','A',1,1,0,'i');
 
 Whether the string matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
 
+The `REGEXP_LIKE(str, regex, [flags])` function is used to test if a regular expression matches a string. Optionally the `flags` can be used to change the matching behavior.
+
+Examples:
+
+This example matches `^a` against `abc`, which matches.
+
+```sql
+SELECT REGEXP_LIKE('abc','^a');
+```
+
+```
++-------------------------+
+| REGEXP_LIKE('abc','^a') |
++-------------------------+
+|                       1 |
++-------------------------+
+1 row in set (0.00 sec)
+```
+
+This example matches `^A` against `abc`, which doesn't match.
+
+```sql
+SELECT REGEXP_LIKE('abc','^A');
+```
+
+```
++-------------------------+
+| REGEXP_LIKE('abc','^A') |
++-------------------------+
+|                       0 |
++-------------------------+
+1 row in set (0.00 sec)
+```
+
+This example matches `^A` against `abc`, which now matches because of the `i` flag which enabled case insensitive matching.
+
+```sql
+SELECT REGEXP_LIKE('abc','^A','i');
+```
+
+```
++-----------------------------+
+| REGEXP_LIKE('abc','^A','i') |
++-----------------------------+
+|                           1 |
++-----------------------------+
+1 row in set (0.00 sec)
+```
+
 ### [`REGEXP_REPLACE()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-replace)
 
 Replace substrings that match the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
