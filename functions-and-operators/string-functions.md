@@ -1406,7 +1406,7 @@ SELECT REGEXP_INSTR('abcabc','a',1,1,1);
 1 row in set (0.00 sec)
 ```
 
-In the example below the 6th argument is used to add the `i` flag to get a case insensitive match.
+In the example below the 6th argument is used to add the `i` flag to get a case insensitive match. More details about regular expression flags can be found in [`match_type` compatibility](#match_type-compatibility) section.
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','A',1,1,0,'');
@@ -1472,7 +1472,7 @@ SELECT REGEXP_LIKE('abc','^A');
 1 row in set (0.00 sec)
 ```
 
-This example matches `^A` against `abc`, which now matches because of the `i` flag which enabled case insensitive matching.
+This example matches `^A` against `abc`, which now matches because of the `i` flag which enabled case insensitive matching. More details about regular expression flags can be found in [`match_type` compatibility](#match_type-compatibility) section.
 
 ```sql
 SELECT REGEXP_LIKE('abc','^A','i');
@@ -1553,7 +1553,7 @@ SELECT REGEXP_REPLACE('TooDB', 'o', 'i',1,2);
 1 row in set (0.00 sec)
 ```
 
-In the example below we use the 6th argument to set the flags for case insensitive matching.
+In the example below we use the 6th argument to set the flags for case insensitive matching. More details about regular expression flags can be found in [`match_type` compatibility](#match_type-compatibility) section.
 
 ```sql
 SELECT REGEXP_REPLACE('TooDB', 'O{2}','i',1,1);
