@@ -1389,7 +1389,7 @@ WHERE
 
 Return the starting index of the substring that matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
 
-The `REGEXP_INSTR(str, regexp, [start, [match, [ret, [flags]]]])` function returns the position of the match if the regular expression (`regexp`) matches the string (`str`).
+The `REGEXP_INSTR(str, regexp, [start, [match, [ret, [match_type]]]])` function returns the position of the match if the regular expression (`regexp`) matches the string (`str`).
 
 If either the `str` or `regexp` is NULL then the function returns NULL.
 
@@ -1468,7 +1468,7 @@ SELECT REGEXP_INSTR('abcabc','a',1,1,1);
 1 row in set (0.00 sec)
 ```
 
-In the example below the 6th argument is used to add the `i` flag to get a case insensitive match. More details about regular expression flags can be found in [`match_type` compatibility](#match_type-compatibility) section.
+In the example below the 6th argument is used to add the `i` flag to get a case insensitive match. More details about regular expression `match_type` can be found in [`match_type` compatibility](#match_type-compatibility) section.
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','A',1,1,0,'');
@@ -1500,7 +1500,7 @@ SELECT REGEXP_INSTR('abcabc','A',1,1,0,'i');
 
 Whether the string matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
 
-The `REGEXP_LIKE(str, regex, [flags])` function is used to test if a regular expression matches a string. Optionally the `flags` can be used to change the matching behavior.
+The `REGEXP_LIKE(str, regex, [match_type])` function is used to test if a regular expression matches a string. Optionally the `match_type` can be used to change the matching behavior.
 
 Examples:
 
@@ -1534,7 +1534,7 @@ SELECT REGEXP_LIKE('abc','^A');
 1 row in set (0.00 sec)
 ```
 
-This example matches `^A` against `abc`, which now matches because of the `i` flag which enabled case insensitive matching. More details about regular expression flags can be found in [`match_type` compatibility](#match_type-compatibility) section.
+This example matches `^A` against `abc`, which now matches because of the `i` flag which enabled case insensitive matching. More details about regular expression `match_type`` can be found in [`match_type` compatibility](#match_type-compatibility) section.
 
 ```sql
 SELECT REGEXP_LIKE('abc','^A','i');
@@ -1553,7 +1553,7 @@ SELECT REGEXP_LIKE('abc','^A','i');
 
 Replace substrings that match the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
 
-The `REGEXP_REPLACE(str, regexp, replace, [start, [match, [flags]]])` function can be used to replace strings based on regular expressions.
+The `REGEXP_REPLACE(str, regexp, replace, [start, [match, [match_type]]])` function can be used to replace strings based on regular expressions.
 
 Examples:
 
@@ -1615,7 +1615,7 @@ SELECT REGEXP_REPLACE('TooDB', 'o', 'i',1,2);
 1 row in set (0.00 sec)
 ```
 
-In the example below we use the 6th argument to set the flags for case insensitive matching. More details about regular expression flags can be found in [`match_type` compatibility](#match_type-compatibility) section.
+In the example below we use the 6th argument to set the `match_type` for case insensitive matching. More details about regular expression `match_type` can be found in [`match_type` compatibility](#match_type-compatibility) section.
 
 ```sql
 SELECT REGEXP_REPLACE('TooDB', 'O{2}','i',1,1);
@@ -1647,7 +1647,7 @@ SELECT REGEXP_REPLACE('TooDB', 'O{2}','i',1,1,'i');
 
 Return the substring that matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
 
-The `REGEXP_SUBSTR(str, regexp, [start, [match, [flags]]])` function is used to get a substring based on a regular expression.
+The `REGEXP_SUBSTR(str, regexp, [start, [match, [match_type]]])` function is used to get a substring based on a regular expression.
 
 Examples
 
