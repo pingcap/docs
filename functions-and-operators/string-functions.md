@@ -1391,7 +1391,7 @@ Return the starting index of the substring that matches the regular expression (
 
 The `REGEXP_INSTR(str, regexp, [start, [match, [ret, [flags]]]])` function returns the position of the match if the regular expression (`regexp`) matches the string (`str`).
 
-If either the `str` or `regexp` is NULL then the function returns NULL. If both arguments are NULL then the functions returns NULL.
+If either the `str` or `regexp` is NULL then the function returns NULL.
 
 Examples:
 
