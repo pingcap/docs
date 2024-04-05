@@ -1880,6 +1880,15 @@ The value options of `match_type` between TiDB and MySQL are:
 
 - TiDB does not support `"u"`, which means Unix-only line endings in MySQL.
 
+| `match_type` | MySQL | TiDB | Description                            |
+|:------------:|-------|------|----------------------------------------|
+| c            | Yes   | Yes  | Case-sensitive matching                |
+| i            | Yes   | Yes  | Case-insensitive matching              |
+| m            | Yes   | Yes  | Multi-line mode                        |
+| s            | No    | Yes  | Matches newlines, same as `n` in MySQL |
+| n            | Yes   | No   | Matches newlines, same as `s` in TiDB  |
+| u            | Yes   | No   | UNIX&trade; line endings               |
+
 ### Data type compatibility
 
 The difference between TiDB and MySQL support for the binary string type:
@@ -1904,4 +1913,4 @@ The difference between TiDB and MySQL support for the binary string type:
 
 ### Known issues
 
-- https://github.com/pingcap/tidb/issues/37981
+- [GitHub Issue #37981](https://github.com/pingcap/tidb/issues/37981)
