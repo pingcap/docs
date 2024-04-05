@@ -1496,6 +1496,34 @@ SELECT REGEXP_INSTR('abcabc','A',1,1,0,'i');
 1 row in set (0.00 sec)
 ```
 
+Besides `match_type` the [collation](/character-set-and-collation.md) also influences the matching. In the example below a case-sensitive and a case-insensitive collation is used to demonstrate this.
+
+```sql
+SELECT REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_general_ci);
+```
+
+```
++-------------------------------------------------------+
+| REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_general_ci) |
++-------------------------------------------------------+
+|                                                     1 |
++-------------------------------------------------------+
+1 row in set (0.01 sec)
+```
+
+```sql
+SELECT REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_bin);
+```
+
+```
++------------------------------------------------+
+| REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_bin) |
++------------------------------------------------+
+|                                              0 |
++------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
 ### [`REGEXP_LIKE()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-like)
 
 Whether the string matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
