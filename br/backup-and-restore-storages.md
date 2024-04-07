@@ -31,12 +31,13 @@ BACKUP DATABASE * TO 's3://bucket-name/prefix' SEND_CREDENTIALS_TO_TIKV = FALSE;
 
 ### URI format description
 
-This section describes the URI format of the storage services:
+The URI format of the external storage service is as follows:
 
 ```shell
 [scheme]://[host]/[path]?[parameters]
 ```
 
+<<<<<<< HEAD
 <SimpleTab groupId="storage">
 <div label="Amazon S3" value="amazon">
 
@@ -81,6 +82,9 @@ This section describes the URI format of the storage services:
 
 </div>
 </SimpleTab>
+=======
+For more information about the URI format, see [URI Formats of External Storage Services](/external-storage-uri.md).
+>>>>>>> a2edc5e976 (dumpling: add URI formats (#16965))
 
 ### URI examples
 
