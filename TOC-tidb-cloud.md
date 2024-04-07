@@ -124,7 +124,7 @@
       - [GitHub Integration](/tidb-cloud/branch-github-integration.md)
     - [Manage Spending Limit](/tidb-cloud/manage-serverless-spend-limit.md)
     - [Back Up and Restore TiDB Serverless Data](/tidb-cloud/backup-and-restore-serverless.md)
-    - [Export from TiDB Serverless](/tidb-cloud/serverless-export.md)
+    - [Export Data from TiDB Serverless](/tidb-cloud/serverless-export.md)
   - Manage TiDB Dedicated Clusters
     - [Create a TiDB Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)
     - Connect to Your TiDB Dedicated Cluster

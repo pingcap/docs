@@ -1,17 +1,17 @@
 ---
 title: TiDB Serverless Export (Beta)
-summary: Learn how to export from TiDB Serverless.
+summary: Learn how to export data from TiDB Serverless clusters.
 ---
 
 # TiDB Serverless Export (Beta)
 
-TiDB Serverless Export (Beta) is a service that allows you to export data from a TiDB Serverless cluster to local or an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
+TiDB Serverless Export (Beta) is a service that enables you to export data from a TiDB Serverless cluster to local storage or an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
 
-You can also export data with `mysqldump`, `TiDB Dumpling`, or other tools. However, TiDB Serverless Export provides a more convenient and efficient way to export data from a TiDB Serverless cluster. It brings the following benefits:
+While you can also export data using `mysqldump`, TiDB Dumpling, or other tools, TiDB Serverless Export offers a more convenient and efficient way to export data from a TiDB Serverless cluster. It brings the following benefits:
 
-- Convenience: Export service provides a simple and easy-to-use way to export data from a TiDB Serverless cluster. You don't need additional tools or resources.
-- Isolation: Export service uses separate computing resources, which is isolated from the computing resources used by your online services
-- Consistency: Export service ensures the consistency of the exported data without locking, which will not affect your online services.
+- Convenience: the export service provides a simple and easy-to-use way to export data from a TiDB Serverless cluster, eliminating the need for additional tools or resources.
+- Isolation: the export service uses separate computing resources, ensuring isolation from the resources used by your online services.
+- Consistency: the export service ensures the consistency of the exported data without causing locks, which does not affect your online services.
 
 ## Export to local
 
@@ -32,7 +32,7 @@ When you export to local, there are some limitations:
 1. Export a specific table from a TiDB Serverless cluster to local.
 
    ```sh
-   ticloud serverless export create -c <cluster-id> --databsae <database> --table <table>
+   ticloud serverless export create -c <cluster-id> --database <database> --table <table>
    ```
 
 2. Download the exported data after the export is succeeded.
