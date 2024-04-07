@@ -26,6 +26,7 @@ mysql> SHOW PROCESSLIST;
 |    2 | root | 127.0.0.1 |      | Sleep   |    4 | 2     |                  |
 +------+------+-----------+------+---------+------+-------+------------------+
 2 rows in set (0.00 sec)
+```
 
 You can get the TiDB Server details of a session to be killed by querying the `INSTANCE` column of `INFORMATION_SCHEMA.CLUSTER_PROCESSLIST`:
 
