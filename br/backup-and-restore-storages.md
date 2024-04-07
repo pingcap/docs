@@ -31,7 +31,7 @@ BACKUP DATABASE * TO 's3://bucket-name/prefix' SEND_CREDENTIALS_TO_TIKV = FALSE;
 
 ### URI format description
 
-The URI format of the storage service is as follows:
+The URI format of the external storage service is as follows:
 
 ```shell
 [scheme]://[host]/[path]?[parameters]
