@@ -1410,7 +1410,7 @@ SELECT REGEXP_INSTR('abc','^.b.$');
 1 row in set (0.00 sec)
 ```
 
-In the example below you can see that the third argument can be used to start looking for a match with a different start position in the string.
+The following example uses the third argument to look for a match with a different start position in the string.
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','a');
