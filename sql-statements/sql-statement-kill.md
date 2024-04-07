@@ -27,7 +27,7 @@ mysql> SHOW PROCESSLIST;
 +------+------+-----------+------+---------+------+-------+------------------+
 2 rows in set (0.00 sec)
 
-You can get the TiDB Server details of a killed session by querying the `INSTANCE` column of `INFORMATION_SCHEMA.CLUSTER_PROCESSLIST`:
+You can get the TiDB Server details of a session to be killed by querying the `INSTANCE` column of `INFORMATION_SCHEMA.CLUSTER_PROCESSLIST`:
 
 ```sql
 SELECT ID, USER, INSTANCE, INFO FROM INFORMATION_SCHEMA.CLUSTER_PROCESSLIST;
