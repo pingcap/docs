@@ -1188,7 +1188,7 @@ Return a string containing octal (base 7) representation of a number.
 
 Examples:
 
-In the example below you can see that the decimal values 1 to 7 are identical to the octal numbers. The numbers 8 until 15 in decimal match with 10 to 17 octal.
+The following example generates a sequence of numbers from 1 to 20 using a [recursive common table expression (CTE)](/develop/dev-guide-use-common-table-expression.md#recursive-cte) and then uses the `OCT()` function to convert each number to its octal representation. Decimal values from 1 to 7 have identical representations in octal. Decimal numbers from 8 to 15 correspond to octal numbers from 10 to 17.
 
 ```sql
 WITH RECURSIVE nr(n) AS (
