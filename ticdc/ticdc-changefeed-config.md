@@ -68,8 +68,8 @@ case-sensitive = false
 # The default value is the same as the default SQL mode of TiDB.
 # sql-mode = "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
 
-# The duration the changefeed is allowed to automatically retry when internal errors and exceptions occur. The default value is 30 minutes.
-# The changefeed enters the failed state if internal errors and exceptions occur in the changefeed and last longer than the time set for this parameter.
+# The duration the changefeed is allowed to automatically retry when internal errors or exceptions occur. The default value is 30 minutes.
+# The changefeed enters the failed state if internal errors or exceptions occur in the changefeed and last longer than the time set for this parameter.
 # When the changefeed is in the failed state, you need to restart the changefeed manually for recovery.
 # The format of this parameter is "h m s", for example, "1h30m30s".
 changefeed-error-stuck-duration = "30m"
