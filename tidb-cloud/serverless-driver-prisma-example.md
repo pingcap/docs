@@ -18,7 +18,7 @@ You need to install both [@tidbcloud/prisma-adapter](https://github.com/tidbclou
 
 Taking npm as an example, you can run the following commands for installation: 
 
-```
+```shell
 npm install @tidbcloud/prisma-adapter
 npm install @tidbcloud/serverless
 ```
