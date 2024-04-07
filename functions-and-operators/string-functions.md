@@ -1364,7 +1364,7 @@ FROM
 4 rows in set (0.00 sec)
 ```
 
-The following example demonstrates that `REGEXP` isn't limited to the `SELECT` clause and for example can also be used in the `WHERE` clause of the query.
+The following example demonstrates that `REGEXP` is not limited to the `SELECT` clause. For example, you can also use it in the `WHERE` clause of the query.
 
 ```sql
 SELECT
