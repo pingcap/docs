@@ -1438,7 +1438,7 @@ SELECT REGEXP_INSTR('abcabc','a',2);
 1 row in set (0.00 sec)
 ```
 
-In the example below we use the 4th argument to look for the second match.
+The following example uses the 4th argument to look for the second match.
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','a',1,2);
