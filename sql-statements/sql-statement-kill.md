@@ -43,7 +43,7 @@ SELECT ID, USER, INSTANCE, INFO FROM INFORMATION_SCHEMA.CLUSTER_PROCESSLIST;
 2 rows in set (0.00 sec)
 ```
 
-To execute the `KILL TIDB` statement, connect to the same TiDB node as the killed session:
+To execute the `KILL TIDB` statement, connect to the TiDB node where the session needs to be killed:
 
 ```shell
 mysql -h 127.0.0.1 -P 10080 -u root -p
