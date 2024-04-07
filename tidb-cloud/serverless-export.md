@@ -13,91 +13,105 @@ While you can also export data using `mysqldump`, TiDB Dumpling, or other tools,
 - Isolation: the export service uses separate computing resources, ensuring isolation from the resources used by your online services.
 - Consistency: the export service ensures the consistency of the exported data without causing locks, which does not affect your online services.
 
-## Export to local
+## Features
 
-When you export to local, there are some limitations:
+### Location of files
 
-1. You can only export one table at a time.
+You can export data to the local storage or an external storage service.
+
+**Local storage**
+
+There are some limitations when you export data to local storage:
+
+1. You are not allowed to export multiple databases at the same time.
 2. The exported data will be expired after two days, please download the data in time.
 3. The exported data will be saved in the stashing area, which offers 250 GB storage space for each organization per region. If the storage space is full, you will not be able to export data to local.
 
+**[Amazon S3](https://aws.amazon.com/s3/)**
+
+You need to provide the credentials of the S3 bucket. Supported credentials include:
+
+- [Access Key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): The long-term credentials for an IAM user or the AWS account root user. Please make sure the access key has the necessary permissions to your S3 bucket, we recommend you create a new bucket with full s3 access.
+  
 > **Note:**
 >
-> We recommend you export to S3 or other supported storage services if you want to export a large amount of data.
+> We recommend you export to the external storage service such as S3 when you want to export a large amount of data.
 
-<SimpleTab>
+### Data Filtering
 
-<div label="Export With CLI">
+You can filter data by specifying the database and table you want to export. If you do not specify the table, we will export all tables in the specified database. If you do not specify the database, we will export all databases in the cluster.
 
-1. Export a specific table from a TiDB Serverless cluster to local.
+> **Note:**
+>
+> You must specify the database when you export data to local storage.
+
+### Data Formats
+
+You can export data in the following formats:
+
+- SQL(default): export data in SQL format.
+- CSV: export data in CSV format.
+
+### Data Compression
+
+You can compress the exported data in the following algorithms:
+
+- gzip(default): compress the exported data with gzip 
+- snappy: compress the exported data with snappy.
+- zstd: compress the exported data with zstd.
+- none: do not compress the exported data.
+
+### Cancel Export
+
+You can cancel an export job that is in running state.
+
+## Examples
+
+Now, you can manage exports with [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
+
+### Export to local
+
+First, create an export job which specifies the database and table you want to export. It will output the export ID.
 
    ```sh
    ticloud serverless export create -c <cluster-id> --database <database> --table <table>
    ```
 
-2. Download the exported data after the export is succeeded.
+Then, download the exported data after the export is succeeded.
 
    ```sh
    ticloud serverless export download -c <cluster-id> -e <export-id>
    ```
-   
-You can also use the cli with interactive mode.
 
-   ```sh
-   ticloud serverless export create
-   ```
-
-</div>
-
-<div label="Export On Console">
-
-Not supported yet.
-
-</div>
-
-</SimpleTab>
-
-## Export to S3
-
-You can export data directly to your own S3 bucket with the credentials.
-
-<SimpleTab>
-
-<div label="Export With CLI">
-
-1. Export all data from a TiDB Serverless cluster to S3.
+### Export to S3
 
    ```sh
    ticloud serverless export create -c <cluster-id> --bucket-uri <bucket-uri> --access-key-id <access-key-id> --secret-access-key <secret-access-key>
    ```
 
-2. Export from a TiDB Serverless cluster to S3 with SQL file.
+### Export with CSV format
 
    ```sh
-   ticloud serverless export create -c <cluster-id> --bucket-uri <bucket-uri> --access-key-id <access-key-id> --secret-access-key <secret-access-key> --file-type SQL
+   ticloud serverless export create -c <cluster-id> --file-type CSV
    ```
 
-You can also use the cli with interactive mode.
+### Export the whole database
 
    ```sh
-   ticloud serverless export create
+   ticloud serverless export create -c <cluster-id> --database <database>
    ```
 
-</div>
+### Export with snappy compression.
 
-<div label="Export On Console">
+   ```sh
+   ticloud serverless export create -c <cluster-id> --compress snappy
+   ```
 
-Not supported yet.
+### Cancel an export job
 
-</div>
-
-</SimpleTab>
-
-## Features
-
-- Support exporting data to local and [Amazon S3](https://aws.amazon.com/s3/). Please Contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) if your want to export to other storage services.
-- Support exporting a specific database or table.
-- Support exporting as CSV or SQL format.
+   ```sh
+   ticloud serverless export cancel -c <cluster-id> -e <export-id>
+   ```
 
 ## Pricing
 
