@@ -1289,6 +1289,8 @@ Repeat a string the specified number of times.
 
 Examples:
 
+The following example generates a sequence of numbers from 1 to 20 using a [recursive common table expression (CTE)](/develop/dev-guide-use-common-table-expression.md#recursive-cte). For each number in the sequence, the character `x` is repeated the number of times equal to the number itself.
+
 ```sql
 WITH RECURSIVE nr(n) AS (
     SELECT 1 AS n 
