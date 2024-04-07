@@ -1391,7 +1391,7 @@ SELECT REGEXP_INSTR('abcabc','a',1,2);
 1 row in set (0.00 sec)
 ```
 
-In the example below we use the 5th argument to return the value _after_ the mach instead of the value of the match.
+The following example uses the 5th argument to return the value _after_ the mach, instead of the value of the match.
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','a',1,1,1);
