@@ -1305,11 +1305,11 @@ Synonym for [`LOCATE()`](#locate).
 
 Escape the argument for use in an SQL statement.
 
-If the argument is NULL then the function returns NULL.
+If the argument is `NULL`, the function returns `NULL`.
 
 Examples:
 
-In this example you can see that ASCII NUL gets escaped as `\0` and `'` gets escaped as `\'`.
+The following example shows that the ASCII NULL character is escaped as `\0` and the single quote character `'` is escaped as `\'`:
 
 ```sql
 SELECT QUOTE(0x002774657374);
