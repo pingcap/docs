@@ -10,14 +10,18 @@ This statement shows a list of assignable privileges in TiDB. It is a static lis
 
 ## Synopsis
 
-**ShowStmt:**
-
-![ShowStmt](/media/sqlgram/ShowStmt.png)
+```ebnf+diagram
+ShowPrivilegesStmt ::=
+    "SHOW" "PRIVILEGES"
+```
 
 ## Examples
 
 ```sql
-mysql> show privileges;
+SHOW PRIVILEGES;
+```
+
+```
 +---------------------------------+---------------------------------------+-------------------------------------------------------+
 | Privilege                       | Context                               | Comment                                               |
 +---------------------------------+---------------------------------------+-------------------------------------------------------+
