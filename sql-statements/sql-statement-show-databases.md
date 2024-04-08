@@ -11,13 +11,14 @@ This statement shows a list of databases that the current user has privileges to
 
 ## Synopsis
 
-**ShowDatabasesStmt:**
+```
+ShowDatabasesStmt ::=
+    "SHOW" "DATABASES" ShowLikeOrWhere?
 
-![ShowDatabasesStmt](/media/sqlgram/ShowDatabasesStmt.png)
-
-**ShowLikeOrWhereOpt:**
-
-![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
+ShowLikeOrWhere ::=
+    "LIKE" SimpleExpr
+|   "WHERE" Expression
+```
 
 ## Examples
 
@@ -58,3 +59,4 @@ The `SHOW DATABASES` statement in TiDB is fully compatible with MySQL. If you fi
 * [SHOW SCHEMAS](/sql-statements/sql-statement-show-schemas.md)
 * [DROP DATABASE](/sql-statements/sql-statement-drop-database.md)
 * [CREATE DATABASE](/sql-statements/sql-statement-create-database.md)
+* [`information_schema.schemata`](/information-schema/information-schema-schemata.md)
