@@ -49,7 +49,7 @@ When new collation framework is enabled, `utf8_general_ci` and `utf8mb4_general_
 SHOW COLLATION;
 ```
 
-``
+```
 +--------------------+---------+------+---------+----------+---------+
 | Collation          | Charset | Id   | Default | Compiled | Sortlen |
 +--------------------+---------+------+---------+----------+---------+
