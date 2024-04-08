@@ -9,13 +9,10 @@ This statement lists the current sessions connected to the same TiDB server. The
 
 ## Synopsis
 
-**ShowProcesslistStmt:**
-
-![ShowProcesslistStmt](/media/sqlgram/ShowProcesslistStmt.png)
-
-**OptFull:**
-
-![OptFull](/media/sqlgram/OptFull.png)
+```ebnf+diagram
+ShowProcesslistStmt ::=
+    "SHOW" "FULL"? "PROCESSLIST"
+```
 
 ## Examples
 
@@ -36,3 +33,4 @@ mysql> SHOW PROCESSLIST;
 ## See also
 
 * [KILL \[TIDB\]](/sql-statements/sql-statement-kill.md)
+* [`information_schema.processlist`](/information-schema/information-schema-processlist.md)
