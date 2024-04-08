@@ -86,6 +86,21 @@ mysql> SHOW SESSION VARIABLES LIKE 'sql_mode';
 1 row in set (0.00 sec)
 ```
 
+User variables start with a `@`.
+
+```sql
+mysql> SET @myvar := 5;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT @myvar, @myvar + 1;
++--------+------------+
+| @myvar | @myvar + 1 |
++--------+------------+
+|      5 |          6 |
++--------+------------+
+1 row in set (0.00 sec)
+```
+
 ## MySQL compatibility
 
 The following behavior differences apply:
