@@ -1170,7 +1170,7 @@ If the first argument is NULL then the function returns NULL.
 
 This function only strips the space character (U+0020) and not any other space like characters like tab (U+0009) or NBSP (U+00A0).
 
-In the example below the `LTRIM()` function removes the leading spaces of ""    hello", which gives "hello" as result.
+In the example below the `LTRIM()` function removes the leading spaces of "    hello", which gives "hello" as result.
 
 ```sql
 SELECT LTRIM('    hello');
@@ -1185,7 +1185,7 @@ SELECT LTRIM('    hello');
 1 row in set (0.00 sec)
 ```
 
-In the example below the `LTRIM()` function removes the leading spaces of ""    hello", which gives "hello" as result. We then use [`CONCAT()`](#concat) to add `«` before it and `»` after it. This makes it a bit easier to see that all spaces are removed.
+In the example below the `LTRIM()` function removes the leading spaces of "    hello", which gives "hello" as result. We then use [`CONCAT()`](#concat) to add `«` before it and `»` after it. This makes it a bit easier to see that all spaces are removed.
 
 ```sql
 SELECT CONCAT('«',LTRIM('    hello'),'»');
