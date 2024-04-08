@@ -20,7 +20,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 + TiDB <!--tw@hfxsd 1 条-->
 
     - (dup): release-8.0.0.md > Improvements> TiDB - When `force-init-stats` is set to `true`, TiDB waits for statistics initialization to finish before providing services during TiDB startup. This setting no longer blocks the startup of HTTP servers, which enables users to continue monitoring [#50854](https://github.com/pingcap/tidb/issues/50854) @[hawkingrei](https://github.com/hawkingrei)
-    - 优化了 Analyze 语句卡住 Metadata Lock 的问题 [#47475](https://github.com/pingcap/tidb/issues/47475) @[wjhuang2016](https://github.com/wjhuang2016)
+    - Optimize the issue that the `ANALYZE` statement blocks the metadata lock [#47475](https://github.com/pingcap/tidb/issues/47475) @[wjhuang2016](https://github.com/wjhuang2016)
 
 + TiKV <!--tw@qiancai TBD 条-->
 
@@ -77,14 +77,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     - (dup): release-8.0.0.md > Bug fixes> TiDB - Fix the issue that `ALTER TABLE ... COMPACT TIFLASH REPLICA` might incorrectly end when the primary key type is `VARCHAR` [#51810](https://github.com/pingcap/tidb/issues/51810) @[breezewish](https://github.com/breezewish)
     - (dup): release-8.0.0.md > Bug fixes> TiDB - Fix the issue that the `tidb_gogc_tuner_threshold` system variable is not adjusted accordingly after the `tidb_server_memory_limit` variable is modified [#48180](https://github.com/pingcap/tidb/issues/48180) @[hawkingrei](https://github.com/hawkingrei)
     - (dup): release-7.5.1.md > Bug fixes> TiDB - Fix the `Can't find column ...` error that might occur when aggregate functions are used for group calculations [#50926](https://github.com/pingcap/tidb/issues/50926) @[qw4990](https://github.com/qw4990) <!--tw@hfxsd 以下 8 条-->
-    - 修复 `reverse` 函数在处理 `bit` 类型列时报错的问题 [#50850](https://github.com/pingcap/tidb/issues/50850), [#50855](https://github.com/pingcap/tidb/issues/50855) @[jiyfhust](https://github.com/jiyfhust)
-    - 修复 `insert ignore` 向正在执行 ddl 的表中批量插入时报错的问题 [#50993](https://github.com/pingcap/tidb/issues/50993) @[YangKeao](https://github.com/YangKeao)
-    - 修复 TiDB Server 通过 HTTP 接口添加 label 返回成功但不生效的问题 [#51427](https://github.com/pingcap/tidb/issues/51427) @[you06](https://github.com/you06)
-    - 修复 `ifnull` 函数返回的类型和 MySQL 不一致的问题 [#51765](https://github.com/pingcap/tidb/issues/51765) @[YangKeao](https://github.com/YangKeao)
-    - 修复 TiDB Server 在初始化完成之前就标记为 Health 的问题 [#51596](https://github.com/pingcap/tidb/issues/51596) @[shenqidebaozi](https://github.com/shenqidebaozi)
-    - 修复查询 `TIDB_HOT_REGIONS` 表结果会返回内存表的问题 [#50810](https://github.com/pingcap/tidb/issues/50810) @[Defined2014](https://github.com/Defined2014)
-    - 修复 `exchange partition` 在处理外键时判断错误的问题 [#51807](https://github.com/pingcap/tidb/issues/51807) @[YangKeao](https://github.com/YangKeao)
-    - 修复执行 CTE 函数会 panic 的问题 [#41688](https://github.com/pingcap/tidb/issues/41688) @[srstack](https://github.com/srstack)
+    - Fix the issue that the `REVERSE` function reports an error when processing columns of the `BIT` type [#50850](https://github.com/pingcap/tidb/issues/50850) [#50855](https://github.com/pingcap/tidb/issues/50855) @[jiyfhust](https://github.com/jiyfhust)
+    - Fix the issue that `INSERT IGNORE` reports an error when inserting data in bulk into a table that has a DDL being executed [#50993](https://github.com/pingcap/tidb/issues/50993) @[YangKeao](https://github.com/YangKeao)
+    - Fix the issue that the TiDB server adds a label via the HTTP interface and returns success, but does not take effect [#51427](https://github.com/pingcap/tidb/issues/51427) @[you06](https://github.com/you06)
+    - Fix the issue that the type returned by the `IFNULL` function is inconsistent with MySQL [#51765](https://github.com/pingcap/tidb/issues/51765) @[YangKeao](https://github.com/YangKeao)
+    - Fix the issue that the TiDB server is marked as health before the initialization is complete [#51596](https://github.com/pingcap/tidb/issues/51596) @[shenqidebaozi](https://github.com/shenqidebaozi)
+    - Fix the issue that when querying the `TIDB_HOT_REGIONS` table, it returns an in-memory table [#50810](https://github.com/pingcap/tidb/issues/50810) @[Defined2014](https://github.com/Defined2014)
+    - Fix an issue that `exchange partition` incorrectly processes foreign keys [#51807](https://github.com/pingcap/tidb/issues/51807) @[YangKeao](https://github.com/YangKeao)
+    - Fix the issue that executing CTE functions causes TiDB to panic [#41688](https://github.com/pingcap/tidb/issues/41688) @[srstack](https://github.com/srstack)
 
 + TiKV <!--tw@qiancai 1 + TBD 条-->
 
@@ -128,9 +128,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
         - (dup): release-8.0.0.md > Bug fixes> Tools> TiCDC - Fix the issue TiCDC panics when scheduling table replication tasks [#10613](https://github.com/pingcap/tiflow/issues/10613) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - (dup): release-8.0.0.md > Bug fixes> Tools> TiCDC - Fix the issue that data race in the KV client causes TiCDC to panic [#10718](https://github.com/pingcap/tiflow/issues/10718) @[asddongmen](https://github.com/asddongmen)
         - (dup): release-7.5.1.md > Bug fixes> Tools> TiCDC - Fix the issue that the file sequence number generated by the storage service might not increment correctly when using the storage sink [#10352](https://github.com/pingcap/tiflow/issues/10352) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - 修复 storage sink 场景下无法正常访问 azure 和 gcs 对象存储的问题 [#10592](https://github.com/pingcap/tiflow/issues/10592) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - 修复 open-protocol 的 old value 部分错误的按照 string 类型而非真正类型输出默认值的问题 [#10803](https://github.com/pingcap/tiflow/issues/10803)，@[3AceShowHand](https://github.com/3AceShowHand)
-        - 修复了当对象存储遇到暂时故障时，启用了最终一致性功能的 changefeed 可能直接失败的问题，[#10710](https://github.com/pingcap/tiflow/issues/10710) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue that TiCDC cannot access Azure and GCS properly in storage sink scenarios [#10592](https://github.com/pingcap/tiflow/issues/10592) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue that the old value part of `open-protocol` incorrectly outputs the default value according to the `STRING` type instead of the true type [#10803](https://github.com/pingcap/tiflow/issues/10803) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix the issue that a changefeed with eventual consistency enabled might fail when the object store encounters a temporary failure [#10710](https://github.com/pingcap/tiflow/issues/10710) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
     + TiDB Data Migration (DM)
 
