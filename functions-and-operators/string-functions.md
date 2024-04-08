@@ -430,7 +430,7 @@ Return a string such that for every bit set in the value bits, you get an on str
 The full signature of this function is:
 
 ```
-EXPORT_SET(bits, on, off, [separator, number_of_bits])
+EXPORT_SET(bits, on, off, [separator[, number_of_bits]])
 ```
 
 ```sql
