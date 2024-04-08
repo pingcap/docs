@@ -20,8 +20,6 @@ ShutdownStmt ::=
 
 ## Examples
 
-{{< copyable "sql" >}}
-
 ```sql
 SHUTDOWN;
 ```
