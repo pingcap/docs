@@ -1246,26 +1246,11 @@ Return a set of comma-separated strings that have the corresponding bit in bits 
 
 ### [`MID()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_mid)
 
-The `MID(str, start, [end])` function returns a substring starting from the specified `start` position and ends at the optinal `end` position.
+The `MID(str, start, end)` function returns a substring starting from the specified `start` position and ends at the optinal `end` position.
 
 If any of the arguments are NULL the function returns NULL.
 
 Examples:
-
-In the example below `MID()` returns the input string from the 4th until the last character.
-
-```sql
-SELECT MID('abcdef',4);
-```
-
-```
-+-----------------+
-| MID('abcdef',4) |
-+-----------------+
-| def             |
-+-----------------+
-1 row in set (0.00 sec)
-```
 
 In the example below `MID()` returns the input string from the second until (including) the third character.
 
