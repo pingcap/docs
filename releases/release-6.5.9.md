@@ -5,7 +5,7 @@ summary: Learn about the compatibility changes, improvements, and bug fixes in T
 
 # TiDB 6.5.9 Release Notes
 
-Release date: February 2, 2024
+Release date: April xx, 2024
 
 TiDB version: 6.5.9
 
