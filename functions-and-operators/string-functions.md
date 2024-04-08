@@ -1184,7 +1184,7 @@ Negation of [`REGEXP`](#regexp).
 
 ### [`OCT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_oct)
 
-Return a string containing octal (base 7) representation of a number.
+Return a string containing octal (base 8) representation of a number.
 
 Examples:
 
