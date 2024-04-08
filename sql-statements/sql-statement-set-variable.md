@@ -6,7 +6,11 @@ aliases: ['/docs/dev/sql-statements/sql-statement-set-variable/','/docs/dev/refe
 
 # `SET [GLOBAL|SESSION] <variable>`
 
-The statement `SET [GLOBAL|SESSION]` modifies one of TiDB's built in variables, of either `SESSION` or `GLOBAL` scope.
+The statement `SET [GLOBAL|SESSION]` modifies one of TiDB's built in variables. These variables can be [system variables](/system-variables.md) of either `SESSION` or `GLOBAL` scope or [user variables](/user-defined-variables.md).
+
+> **Warning:**
+>
+> User-defined variables are still an experimental feature. It is **NOT** recommended that you use them in the production environment.
 
 > **Note:**
 >
@@ -14,13 +18,14 @@ The statement `SET [GLOBAL|SESSION]` modifies one of TiDB's built in variables, 
 
 ## Synopsis
 
-**SetStmt:**
+```ebnf+diagram
+SetVariableStmt ::=
+    "SET" Variable "=" Expression ("," Variable "=" Expression )*
 
-![SetStmt](/media/sqlgram/SetStmt.png)
-
-**VariableAssignment:**
-
-![VariableAssignment](/media/sqlgram/VariableAssignment.png)
+Variable ::=
+    ("GLOBAL" | "SESSION") SystemVariable
+|   UserVariable 
+```
 
 ## Examples
 
