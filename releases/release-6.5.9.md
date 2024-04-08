@@ -138,4 +138,4 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
     + TiDB Lightning
 
-        - (dup): release-8.0.0.md > 错误修复> Tools> TiDB Lightning - 修复在扫描数据文件时，遇到不合法符号链接文件而报错的问题 [#49423](https://github.com/pingcap/tidb/issues/49423) @[lance6716](https://github.com/lance6716)
+        - (dup): release-8.0.0.md > Bug fixes> Tools> TiDB Lightning - Fix the issue that TiDB Lightning reports an error when encountering invalid symbolic link files during file scanning [#49423](https://github.com/pingcap/tidb/issues/49423) @[lance6716](https://github.com/lance6716)
