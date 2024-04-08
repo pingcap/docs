@@ -1176,6 +1176,8 @@ The `MID(str, start, end)` function returns a substring starting from the specif
 
 If any of the arguments are NULL the function returns NULL.
 
+TiDB doesn't support the two arguments variant of this function. See also [Github Issue #52420](https://github.com/pingcap/tidb/issues/52420).
+
 Examples:
 
 In the example below `MID()` returns the input string from the second until (including) the third character.
