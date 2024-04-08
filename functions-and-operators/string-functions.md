@@ -461,7 +461,7 @@ SELECT EXPORT_SET(b'01010101', 'x', '_', '', 8);
 1 row in set (0.00 sec)
 ```
 
-In the example above you can see the off (`_`) / on (`x`) pattern from right to left as set by the `bits.
+In the example above you can see the off (`_`) / on (`x`) pattern from right to left as set by the `bits`.
 
 ### [`FIELD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_field)
 
