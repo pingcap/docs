@@ -69,7 +69,7 @@ SHOW COLLATION;
 11 rows in set (0.001 sec)
 ```
 
-To filter on character set you can add a `WHERE` clause.
+To filter on the character set, you can add a `WHERE` clause.
 
 ```sql
 SHOW COLLATION WHERE Charset="utf8mb4";
