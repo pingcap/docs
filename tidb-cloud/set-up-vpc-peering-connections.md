@@ -175,7 +175,7 @@ You can also use the AWS dashboard to configure the VPC peering connection.
 
     2. From the left navigation bar, open the **Peering Connections** page. On the **Create Peering Connection** tab, a peering connection is in the **Pending Acceptance** status.
 
-    3. Confirm the requester owner is TiDB Cloud (`380838443567` or `143458967504`). Right-click the peering connection and select **Accept Request** to accept the request in the **Accept VPC peering connection request** dialog.
+    3. Confirm the requester owner is TiDB Cloud (`380838443567` or `143458967504` or `730335266318`). Right-click the peering connection and select **Accept Request** to accept the request in the **Accept VPC peering connection request** dialog.
 
         ![AWS VPC peering requests](/media/tidb-cloud/vpc-peering/aws-vpc-guide-3.png)
 
