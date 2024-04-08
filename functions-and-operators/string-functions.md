@@ -1245,7 +1245,7 @@ Negation of [`REGEXP`](#regexp).
 
 ### [`OCT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_oct)
 
-Return a string containing octal (base 8) representation of a number.
+Return a string containing [octal](https://en.wikipedia.org/wiki/Octal) (base 8) representation of a number.
 
 Examples:
 
@@ -1253,7 +1253,7 @@ The following example generates a sequence of numbers from 1 to 20 using a [recu
 
 ```sql
 WITH RECURSIVE nr(n) AS (
-    SELECT 1 AS n
+    SELECT 0 AS n
     UNION ALL
     SELECT n+1 FROM nr WHERE n<20
 )
@@ -1264,6 +1264,7 @@ SELECT n, OCT(n) FROM nr;
 +------+--------+
 | n    | OCT(n) |
 +------+--------+
+|    0 | 0      |
 |    1 | 1      |
 |    2 | 2      |
 |    3 | 3      |
