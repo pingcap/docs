@@ -74,7 +74,7 @@ To filter on the character set, you can add a `WHERE` clause.
 SHOW COLLATION WHERE Charset="utf8mb4";
 ```
 
-```
+```sql
 +--------------------+---------+-----+---------+----------+---------+
 | Collation          | Charset | Id  | Default | Compiled | Sortlen |
 +--------------------+---------+-----+---------+----------+---------+
