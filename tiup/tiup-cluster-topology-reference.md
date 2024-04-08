@@ -667,6 +667,8 @@ tispark_workers:
 
 - `resource_control`: Resource control for the service. If this field is configured, the field content is merged with the `resource_control` content in `global` (if the two fields overlap, the content of this field takes effect). Then, a systemd configuration file is generated and sent to the machine specified in `host`. The configuration rules of `resource_control` are the same as the `resource_control` content in `global`.
 
+- `additional_args`: Introduced in TiUP v1.15.0, this field configures additional parameters for running Prometheus. This field is an array, and each element of the array is a Prometheus running parameter. For example, to enable the Prometheus hot reload feature, you can set this field to `--web.enable-lifecycle`.
+
 For the above fields, you cannot modify these configured fields after the deployment:
 
 - `host`
@@ -683,6 +685,8 @@ A `monitoring_servers` configuration example is as follows:
 monitoring_servers:
   - host: 10.0.1.11
     rule_dir: /local/rule/dir
+    additional_args:
+    - --web.enable-lifecycle
     remote_config:
       remote_write:
       - queue_config:
