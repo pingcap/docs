@@ -44,7 +44,7 @@ IdentListWithParenOpt ::=
 Non-recursive CTE:
 
 ```sql
-WITH CTE AS (SELECT 1, 2) SELECT * FROM cte t1, cte t2;
+WITH cte AS (SELECT 1, 2) SELECT * FROM cte t1, cte t2;
 ```
 
 ```
