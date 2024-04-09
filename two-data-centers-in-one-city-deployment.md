@@ -212,7 +212,8 @@ The replication mode is controlled by PD. You can configure the replication mode
     primary-replicas = 2
     dr-replicas = 1
     wait-store-timeout = "1m"
-    wait-sync-timeout = "1m"
+    wait-recover-timeout = "0s"
+    pause-region-split = false  
     ```
 
 - Method 2: If you have deployed a cluster, use pd-ctl commands to modify the configurations of PD.
@@ -235,6 +236,9 @@ Descriptions of configuration items:
 + `primary-replicas` is the number of Voter replicas in the primary data center.
 + `dr-replicas` is the number of Voter replicas in the DR data center.
 + `wait-store-timeout` is the waiting time for switching to asynchronous replication mode when network isolation or failure occurs. If the time of network failure exceeds the waiting time, asynchronous replication mode is enabled. The default waiting time is 60 seconds.
++ `wait-recover-timeout` is the waiting time for switching back to `sync_recover` mode after the network recovers. The default waiting time is 0 seconds.
++ `pause-region-split` is used to control whether to pause the split operation of Regions in the `async_wait` and `async` statuses. Pausing the Region split can prevent temporary partial data loss in the subordinate Regions when synchronizing data in the `sync_recover` status. The default value is false.
+
 
 To check the current replication status of the cluster, use the following API:
 
