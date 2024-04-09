@@ -1,35 +1,28 @@
 ---
 title: 2024-04-09 TiDB Cloud Monitoring Features Maintenance Notification
-summary: Learn about the details of the TiDB Cloud Monitoring features maintenance on April 9, 2024, such as the maintenance window, reason, and impact.
+summary: Learn about the details of the TiDB Cloud Monitoring features maintenance on April 16, 2024, such as the maintenance window, reason, and impact.
 ---
 
 # [2023-08-31] TiDB Cloud Console Maintenance Notification
 
-This notification describes the details that you need to know about the [TiDB Cloud console](https://tidbcloud.com/) maintenance on April 9, 2024.
+This notification describes the details that you need to know about the [TiDB Cloud console](https://tidbcloud.com/) maintenance on April 16, 2024.
 
 ## Maintenance window
 
-- Start time: 2024-04-09 08:00 (UTC+0)
-- End time: 2024-04-09 12:00 (UTC+0)
+- Start time: 2024-04-16 08:00 (UTC+0)
+- End time: 2024-04-16 12:00 (UTC+0)
 - Duration: 4 hours
 
 ## Impact
 
 ### Impacted region scope:  
 - Monitoring features for TiDB Dedicated clusters in the following regions：
-    - Cloud Provider: AWS, Region: Oregon (us-west-2)
-    - Cloud Provider: AWS, Region: Seoul (ap-northeast-2)
-    - Cloud Provider: AWS, Region: Frankfurt (eu-central-1)
-    - Cloud Provider: AWS, Region: Oregon (us-west-2)
-    - Cloud Provider: Google Cloud, Region: Oregon (us-west1)
-    - Cloud Provider: Google Cloud, Region: Tokyo (asia-northeast1)
-    - Cloud Provider: Google Cloud, Region: Singapore (asia-southeast1)
-    - Cloud Provider: Google Cloud, Region: Iowa (us-central1)
-    - Cloud Provider: Google Cloud, Region: Taiwan (asia-east1)
-
+    - Cloud Provider: AWS, Region: Tokyo (ap-northeast-1)
+    - Cloud Provider: AWS, Region: N. Virginia (us-east-1)
+    
 - Monitoring features for Serverless clusters in the following regions：
-    - Cloud Provider: AWS, Region: Frankfurt (eu-central-1)
-    - Cloud Provider: AWS, Region: Oregon (us-west-2)
+    - Cloud Provider: AWS, Region: Tokyo (ap-northeast-1)
+    - Cloud Provider: AWS, Region: N. Virginia (us-east-1)
 
 ### Affected Monitoring features ：
 
