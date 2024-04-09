@@ -1,5 +1,5 @@
 ---
-title: 2024-04-09 TiDB Cloud Monitoring Features Maintenance Notification
+title: 2024-04-16 TiDB Cloud Monitoring Features Maintenance Notification
 summary: Learn about the details of the TiDB Cloud Monitoring features maintenance on April 16, 2024, such as the maintenance window, reason, and impact.
 ---
 
@@ -19,7 +19,7 @@ This notification describes the details that you need to know about the [TiDB Cl
 - Monitoring features for TiDB Dedicated clusters in the following regions：
     - Cloud Provider: AWS, Region: Tokyo (ap-northeast-1)
     - Cloud Provider: AWS, Region: N. Virginia (us-east-1)
-    
+
 - Monitoring features for Serverless clusters in the following regions：
     - Cloud Provider: AWS, Region: Tokyo (ap-northeast-1)
     - Cloud Provider: AWS, Region: N. Virginia (us-east-1)
