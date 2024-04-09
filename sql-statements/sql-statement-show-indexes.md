@@ -14,7 +14,7 @@ The statement `SHOW INDEXES [FROM|IN]` lists the indexes on a specified table. T
 ShowIndexStmt ::=
     "SHOW" ( "INDEX" | "INDEXES" | "KEYS" ) ("FROM" | "IN" ) TableName (("FROM" | "IN") SchemaName )? ShowLikeOrWhereOpt?
 
-ShowLikeOrWhereOpt ::=
+ShowLikeOrWhere ::=
     "LIKE" SimpleExpr
 |   "WHERE" Expression
 ```
