@@ -1267,7 +1267,7 @@ SELECT n, REPEAT('x',n) FROM nr;
 20 rows in set (0.01 sec)
 ```
 
-The following example demonstrates that `REPEAT()` can operate on operate on strings consisting of multiple characters.
+The following example demonstrates that `REPEAT()` can operate on strings consisting of multiple characters.
 
 ```sql
 SELECT REPEAT('ha',3);
