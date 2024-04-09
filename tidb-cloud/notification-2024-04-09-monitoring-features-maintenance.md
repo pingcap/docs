@@ -1,6 +1,6 @@
 ---
 title: 2024-04-09 TiDB Cloud Monitoring Features Maintenance Notification
-summary: Learn about the details of TiDB Cloud monitoring features maintenance on April 9, 2024, such as the maintenance window, reason, and impact.
+summary: Learn about the details of the TiDB Cloud monitoring features maintenance on April 9, 2024, such as the maintenance window, reason, and impact.
 ---
 
 # [2024-04-09] TiDB Cloud Monitoring Features Maintenance Notification
@@ -40,8 +40,8 @@ During the maintenance window, the monitoring features in the following regions 
 >
 > The maintenance only affects monitoring features in the TiDB cluster. All the other functionalities remain unaffected. You can continue to manage the TiDB cluster and perform read/write operations or other operations as usual.
 
-- The **Metrics** page will be temporarily unavailable for several short periods (each less than 20 mins).
-- The **Slow Query** page will be temporarily unavailable for several short periods (each less than 5 mins).
+- The **Metrics** page will be temporarily unavailable for several short periods (each less than 20 minutes).
+- The **Slow Query** page will be temporarily unavailable for several short periods (each less than 5 minutes).
 - The metrics integration with Prometheus, DataDog, and NewRelic might have breakpoints.
 
 ## Completion and resumption

@@ -33,8 +33,8 @@ During the maintenance window, the monitoring features in the following regions 
 >
 > The maintenance only affects monitoring features in the TiDB cluster. All the other functionalities remain unaffected. You can continue to manage the TiDB cluster and perform read/write operations or other operations as usual.
 
-- The **Metrics** page will be temporarily unavailable for several short periods (each less than 20 mins).
-- The **Slow Query** page will be temporarily unavailable for several short periods (each less than 5 mins).
+- The **Metrics** page will be temporarily unavailable for several short periods (each less than 20 minutes).
+- The **Slow Query** page will be temporarily unavailable for several short periods (each less than 5 minutes).
 - The metrics integration with Prometheus, DataDog, and NewRelic might have breakpoints.
 
 ## Completion and resumption
