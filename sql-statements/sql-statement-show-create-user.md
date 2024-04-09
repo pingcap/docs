@@ -12,7 +12,7 @@ This statement shows how to re-create a user using the `CREATE USER` syntax.
 
 ```ebnf+diagram
 ShowCreateUserStmt ::=
-    "SHOW" "CREATE" "USER" (Username ("@" Hostname)? | CURRENT_USER "()"? )
+    "SHOW" "CREATE" "USER" (Username ("@" Hostname)? | "CURRENT_USER" ( "(" ")" )? )
 ```
 
 ## Examples
