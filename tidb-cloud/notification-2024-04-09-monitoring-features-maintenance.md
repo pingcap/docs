@@ -15,7 +15,7 @@ This notification describes the details that you need to know about TiDB Cloud [
 
 ## Impact
 
-### Affected regions:
+### Affected regions
 
 During the maintenance window, the monitoring features in the following regions will be affected:
 
