@@ -21,7 +21,7 @@ The statement returns a result set in which the `Scheduling_State` field indicat
 
 ```ebnf+diagram
 ShowStmt ::=
-    "SHOW" "PLACEMENT"
+    "SHOW" "PLACEMENT" ShowLikeOrWhere?
 ```
 
 ## Examples
