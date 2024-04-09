@@ -7,27 +7,22 @@ summary: An overview of the usage of SHOW STATS_HEALTHY for TiDB database.
 
 The `SHOW STATS_HEALTHY` statement shows an estimation of how accurate statistics are believed to be. Tables with a low percentage health may generate sub-optimal query execution plans.
 
-The health of a table can be improved by running the `ANALYZE` table command. `ANALYZE` runs automatically when the health drops below the [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio) threshold.
+The health of a table can be improved by running the [`ANALYZE TABLE` statement](/sql-statements/sql-statement-analyze-table.md). `ANALYZE` runs automatically when the health drops below the [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio) threshold.
 
 ## Synopsis
 
-**ShowStmt**
+```ebnf+diagram
+ShowStatsHealthyStmt ::=
+    "SHOW" "STATS_HEALTHY" ShowLikeOrWhere?
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
-
-**ShowTargetFiltertable**
-
-![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
-
-**ShowLikeOrWhereOpt**
-
-![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
+ShowLikeOrWhere ::=
+    "LIKE" SimpleExpr
+|   "WHERE" Expression
+```
 
 ## Examples
 
 Load example data and run `ANALYZE`:
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE t1 (
@@ -61,8 +56,6 @@ mysql> SHOW STATS_HEALTHY;
 ```
 
 Perform a bulk update deleting approximately 30% of the records. Check the health of the statistics:
-
-{{< copyable "sql" >}}
 
 ```sql
 DELETE FROM t1 WHERE id BETWEEN 101010 AND 201010; # delete about 30% of records
