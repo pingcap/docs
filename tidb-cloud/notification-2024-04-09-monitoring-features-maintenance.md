@@ -5,7 +5,7 @@ summary: Learn about the details of TiDB Cloud monitoring features maintenance o
 
 # [2024-04-09] TiDB Cloud Monitoring Features Maintenance Notification
 
-This notification describes the details that you need to know about TiDB Cloud [monitoring features](/tidb-cloud/monitor-tidb-cluster.md) maintenance on April 9, 2024.
+This notification describes the details that you need to know about the TiDB Cloud [monitoring features](/tidb-cloud/monitor-tidb-cluster.md) maintenance on April 9, 2024.
 
 ## Maintenance window
 
@@ -38,7 +38,7 @@ During the maintenance window, the monitoring features in the following regions 
 
 > **Note:**
 >
-> The maintenance only affects the monitoring features in the TiDB cluster. All the other functionalities remain unaffected. You can continue to manage the TiDB cluster and perform read/write operations or other operations as usual.
+> The maintenance only affects monitoring features in the TiDB cluster. All the other functionalities remain unaffected. You can continue to manage the TiDB cluster and perform read/write operations or other operations as usual.
 
 - The **Metrics** page will be temporarily unavailable for several short periods (each less than 20 mins).
 - The **Slow Query** page will be temporarily unavailable for several short periods (each less than 5 mins).
