@@ -36,6 +36,19 @@ RELEASE SAVEPOINT identifier
 
     After the transaction is committed or rolled back, all savepoints in the transaction will be deleted.
 
+## Synopsis
+
+```ebnf+diagram
+SavepointStmt ::=
+    "SAVEPOINT" Identifier
+
+RollbackToStmt ::=
+    "ROLLBACK" "TO" "SAVEPOINT"? Identifier
+
+ReleaseSavepointStmt ::=
+    "RELEASE" "SAVEPOINT" Identifier
+```
+
 ## Examples
 
 Create a table `t1`:
