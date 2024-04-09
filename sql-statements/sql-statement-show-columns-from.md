@@ -17,7 +17,7 @@ The statements `SHOW [FULL] FIELDS FROM <table_name>`, `DESC <table_name>`, `DES
 
 ```ebnf+diagram
 ShowColumnsFromStmt ::=
-    "SHOW" "FULL"? ("COLUMNS" | "FIELDS") ("FROM" | "IN") TableName ("FROM" | "IN" SchemaName)? ShowLikeOrWhereOpt?
+    "SHOW" "FULL"? ("COLUMNS" | "FIELDS") ("FROM" | "IN") TableName ( ("FROM" | "IN") SchemaName)? ShowLikeOrWhere?
 
 TableName ::=
     (Identifier ".")? Identifier
