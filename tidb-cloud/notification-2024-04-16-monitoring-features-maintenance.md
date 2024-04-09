@@ -17,7 +17,7 @@ This notification describes the details that you need to know TiDB Cloud [monito
 
 ### Affected regions
 	
-	During the maintenance window, the monitoring features in the following regions will be affected:
+During the maintenance window, the monitoring features in the following regions will be affected:
 
 - TiDB Dedicated clusters：
     - Cloud Provider: AWS, Region: Tokyo (ap-northeast-1)
