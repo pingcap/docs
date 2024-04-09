@@ -22,7 +22,7 @@ ShowColumnsFromStmt ::=
 TableName ::=
     (Identifier ".")? Identifier
 
-ShowLikeOrWhereOpt ::=
+ShowLikeOrWhere ::=
     "LIKE" SimpleExpr
 |   "WHERE" Expression
 ```
