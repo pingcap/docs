@@ -5,7 +5,7 @@ summary: Learn about the details of TiDB Cloud monitoring features maintenance o
 
 # [2024-04-09] TiDB Cloud Monitoring Features Notification
 
-This notification describes the details that you need to know about TiDB Cloud monitoring features maintenance on April 9, 2024.
+This notification describes the details that you need to know about TiDB Cloud [monitoring features](/tidb-cloud/monitor-tidb-cluster.md) maintenance on April 9, 2024.
 
 ## Maintenance window
 
