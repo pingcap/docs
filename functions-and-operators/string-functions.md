@@ -1309,7 +1309,7 @@ If the argument is `NULL`, the function returns `NULL`.
 
 Examples:
 
-For this example you need to use the `--skip-binary-as-hex` option as otherwise it would display the result as hex-encoded instead of directly displaying it.
+To display the result as a hexadecimal-encoded value instead of showing it directly, you need to start the MySQL client with the [`--skip-binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex) option.
 
 The following example shows that the ASCII NULL character is escaped as `\0` and the single quote character `'` is escaped as `\'`:
 
