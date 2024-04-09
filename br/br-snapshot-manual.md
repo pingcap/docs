@@ -118,7 +118,7 @@ If you do not set this parameter to `false`, the `br` command-line tool uses the
 
 > **Warning:**
 >
-> In TiDB v7.5.o, when you use the `br` command-line tool to restore statistics, it requires a large amount of memory, especially when the task involves a large number of tables. Therefore, it is recommended to increase the memory on the node where `br` is running to ensure correct operation.
+> In TiDB v7.5.0, when you use the `br` command-line tool to restore statistics, it requires a large amount of memory, especially when the task involves a large number of tables. Therefore, it is recommended to increase the memory on the node where `br` is running to ensure correct operation.
 
 The following is an example of backing up cluster snapshot data and backing up table statistics with `--ignore-stats=false`:
 
