@@ -1343,7 +1343,6 @@ SELECT REPEAT('ha',3);
 1 row in set (0.00 sec)
 ```
 
-
 ### [`REPLACE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_replace)
 
 Replace occurrences of a specified string.
