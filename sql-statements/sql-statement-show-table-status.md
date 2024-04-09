@@ -9,17 +9,14 @@ This statement shows various statistics about tables in TiDB. If the statistics 
 
 ## Synopsis
 
-**ShowTableStatusStmt:**
+```ebnf+diagram
+ShowTableStatusStmt ::=
+    "SHOW" "TABLE" "STATUS" ("FROM" Identifier | "IN" Identifier )? ShowLikeOrWhere?
 
-![ShowTableStatusStmt](/media/sqlgram/ShowTableStatusStmt.png)
-
-**FromOrIn:**
-
-![FromOrIn](/media/sqlgram/FromOrIn.png)
-
-**StatusTableName:**
-
-![StatusTableName](/media/sqlgram/StatusTableName.png)
+ShowLikeOrWhere ::=
+    "LIKE" SimpleExpr
+|   "WHERE" Expression
+```
 
 ## Examples
 
@@ -53,7 +50,7 @@ Max_data_length: 0
         Comment:
 1 row in set (0.00 sec)
 
-mysql> analyze table t1;
+mysql> ANALYZE TABLE t1;
 Query OK, 0 rows affected (0.12 sec)
 
 mysql> SHOW TABLE STATUS LIKE 't1'\G
