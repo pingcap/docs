@@ -248,7 +248,6 @@ Descriptions of configuration items:
 + `wait-recover-timeout` is the waiting time for switching back to the `sync-recover` status after the network recovers. The default value is 0 seconds.
 + `pause-region-split` controls whether to pause Region split operations in the `async_wait` and `async` statuses. Pausing Region split can prevent temporary partial data loss in the disaster recovery (DR) AZ when synchronizing data in the `sync-recover` status. The default value is `false`.
 
-
 To check the current replication status of the cluster, use the following API:
 
 {{< copyable "shell-regular" >}}
