@@ -1,5 +1,6 @@
 ---
 title: TiDB 5.1.4 Release Notes
+summary: "TiDB 5.1.4 Release Notes: Compatibility changes include default value changes for system variables. Improvements in partition pruning, memory usage tracking, and speed of inserting SST files. Bug fixes address memory leaks, configuration issues, and incorrect query results. Tools like TiCDC and TiFlash also receive various fixes and improvements."
 ---
 
 # TiDB 5.1.4 Release Notes
@@ -79,6 +80,7 @@ TiDB version: 5.1.4
     - Fix the `INDEX OUT OF RANGE` error for a MPP query after deleting an empty `dual table` [#28250](https://github.com/pingcap/tidb/issues/28250)
     - Fix the issue of false positive error log `invalid cop task execution summaries length` for MPP queries [#1791](https://github.com/pingcap/tics/issues/1791)
     - Fix the issue that SET GLOBAL tidb_skip_isolation_level_check=1 doesn't affect new session settings [#27897](https://github.com/pingcap/tidb/issues/27897)
+    - Fix the `index out of range` issue that occurs when `tiup bench` runs for a long time [#26832](https://github.com/pingcap/tidb/issues/26832)
 
 + TiKV
 

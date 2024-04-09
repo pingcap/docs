@@ -144,7 +144,7 @@ alertmanager_servers:
 >     - The TiUP nodes can connect to the `port` of all DM-master nodes (`8261` by default).
 >     - The TiUP nodes can connect to the `port` of all DM-worker nodes (`8262` by default).
 
-For more `master_servers.host.config` parameter description, refer to [master parameter](https://github.com/pingcap/dm/blob/master/dm/master/dm-master.toml). For more `worker_servers.host.config` parameter description, refer to [worker parameter](https://github.com/pingcap/dm/blob/master/dm/worker/dm-worker.toml).
+For more `master_servers.host.config` parameter description, refer to [master parameter](https://github.com/pingcap/tiflow/blob/master/dm/master/dm-master.toml). For more `worker_servers.host.config` parameter description, refer to [worker parameter](https://github.com/pingcap/tiflow/blob/master/dm/worker/dm-worker.toml).
 
 ## Step 3: Execute the deployment command
 
@@ -203,7 +203,7 @@ tiup dm display dm-test
 
 Expected output includes the instance ID, role, host, listening port, and status (because the cluster is not started yet, so the status is `Down`/`inactive`), and directory information.
 
-## Step 6: Start the TiDB cluster
+## Step 6: Start the DM cluster
 
 {{< copyable "shell-regular" >}}
 
@@ -213,7 +213,7 @@ tiup dm start dm-test
 
 If the output log includes ```Started cluster `dm-test` successfully```, the start is successful.
 
-## Step 7: Verify the running status of the TiDB cluster
+## Step 7: Verify the running status of the DM cluster
 
 Check the DM cluster status using TiUP:
 

@@ -1,5 +1,6 @@
 ---
 title: tiup cluster check
+summary: TiUP Cluster provides a `check` command to ensure hardware and software environments meet production requirements. It checks OS version, CPU support, time synchronization, system limits, and more. Options include automatic repair and enabling checks for CPU core number, memory size, and disk performance. Use `tiup cluster check <topology.yml | cluster-name> [flags]` command to perform checks. Use `--apply` to attempt automatic repair. Use `-N, --node` and `-R, --role` to specify nodes and roles to check. Use `--enable-cpu`, `--enable-disk`, and `--enable-mem` to enable specific checks.
 ---
 
 # tiup cluster check
@@ -123,6 +124,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 - If a cluster is not deployed yet, you need to pass the [topology.yml](/tiup/tiup-cluster-topology-reference.md) file that is used to deploy the cluster. According to the content in this file, tiup-cluster connects to the corresponding machine to perform the check.
 - If a cluster is already deployed, you can use the `<cluster-name>` as the check object.
+- If you want to check the scale-out YAML file for an existing cluster, you can use both `<scale-out.yml>` and `<cluster-name>` as the check objects.
 
 > **Note:**
 >
@@ -142,21 +144,33 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 - Data type: `BOOLEAN`
 - This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
+> **Note:**
+>
+> `tiup cluster check` also supports repairing the `scale-out.yml` file for an existing cluster with the following command format:
+>
+>```shell
+> tiup cluster check <cluster-name> scale-out.yml --cluster --apply --user root [-p] [-i /home/root/.ssh/gcp_rsa]
+>```
+
 ### --cluster
 
-- Indicates that the check is for the deployed clusters.
+- Indicates that the check is for a cluster that has been deployed.
 - Data type: `BOOLEAN`
 - This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+- Command format:
+
+    ```shell
+    tiup cluster check <topology.yml | cluster-name> --cluster [flags]
+    ```
 
 > **Note:**
 >
-> tiup-cluster supports checking both un-deployed clusters and deployed clusters with the following command format:
-> 
-> ```shell
-> tiup cluster check <topology.yml | cluster-name> [flags]
-> ```
-> 
-> If the `tiup cluster check <cluster-name>` command is used, you must add the `--cluster` option: `tiup cluster check <cluster-name> --cluster`.
+> - If the `tiup cluster check <cluster-name>` command is used, you must add the `--cluster` option: `tiup cluster check <cluster-name> --cluster`.
+> - `tiup cluster check` also supports checking the `scale-out.yml` file for an existing cluster with the following command format:
+>
+>   ```shell
+>   tiup cluster check <cluster-name> scale-out.yml --cluster --user root [-p] [-i /home/root/.ssh/gcp_rsa]
+>   ```
 
 ### -N, --node
 

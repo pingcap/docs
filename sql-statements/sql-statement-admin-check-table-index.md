@@ -8,6 +8,23 @@ category: reference
 
 The `ADMIN CHECK [TABLE|INDEX]` statement checks for data consistency of tables and indexes.
 
+It does not support the following:
+
+- Checking [FOREIGN KEY constraints](/foreign-key.md).
+- Checking the PRIMARY KEY index if a [clustered primary key](/clustered-indexes.md) is used.
+
+If `ADMIN CHECK [TABLE|INDEX]` finds any issues, you can resolve them by dropping and recreating the index. If the issue is not resolved, you can [report a bug](https://docs.pingcap.com/tidb/stable/support).
+
+## Principles
+
+The `ADMIN CHECK TABLE` statement takes the following steps to check the table:
+
+1. For each index, it checks if the number of records in the index is the same as that in the table.
+
+2. For each index, it loops over the values in each row and compares the values with that in the table.
+
+If you use the `ADMIN CHECK INDEX` statement, it only checks the specified index.
+
 ## Synopsis
 
 ```ebnf+diagram

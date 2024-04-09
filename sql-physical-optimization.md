@@ -1,5 +1,6 @@
 ---
 title: SQL Physical Optimization
+summary: Physical optimization is a cost-based process that creates a physical execution plan for the logical execution plan. The optimizer selects the best physical implementation for each operator based on data statistics, time complexity, and resource consumption. This includes index selection, statistics collection, using the right index, distinct keyword optimization, and cost model for optimal execution plan selection.
 ---
 
 # SQL Physical Optimization
@@ -12,3 +13,4 @@ Physical optimization is cost-based optimization, which makes a physical executi
 - In [Introduction to Statistics](/statistics.md), you will learn what statistics TiDB collects to obtain the data distribution of a table.
 - [Wrong Index Solution](/wrong-index-solution.md) introduces how to use the right index when you find the index is selected wrongly.
 - [Distinct Optimization](/agg-distinct-optimization.md) introduces an optimization related to the `DISTINCT` keyword during physical optimization. In this section, you will learn its advantages and disadvantages and how to use it.
+- [Cost Model](/cost-model.md) introduces how to choose a optimal execution plan based on the cost model during physical optimization.

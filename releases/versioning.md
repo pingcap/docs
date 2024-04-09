@@ -6,13 +6,17 @@ summary: Learn the version numbering system of TiDB.
 # TiDB Versioning
 
 <Important>
+
 It is recommended to always upgrade to the latest patch release of your release series.
+
 </Important>
 
 TiDB offers two release series:
 
 * Long-Term Support Releases
 * Development Milestone Releases (introduced in TiDB v6.0.0)
+
+To learn about the support policy for major releases of TiDB, see [TiDB Release Support Policy](https://en.pingcap.com/tidb-release-support-policy/).
 
 ## Release versioning
 
@@ -44,7 +48,9 @@ Example version:
 - 6.1.1
 
 <Note>
+
 v5.1.0, v5.2.0, v5.3.0, v5.4.0 were released only two months after their preceding releases, but all four releases are LTS and provide patch releases.
+
 </Note>
 
 ## Development Milestone Releases

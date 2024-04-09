@@ -7,7 +7,7 @@ summary: Understand the storage layer of a TiDB database.
 
 This document introduces some design ideas and key concepts of [TiKV](https://github.com/tikv/tikv).
 
-![storage-architecture](/media/tidb-storage-architecture.png)
+![storage-architecture](/media/tidb-storage-architecture-1.png)
 
 ## Key-Value pairs
 
@@ -33,7 +33,7 @@ A simple way is to replicate data to multiple machines, so that even if one mach
 Raft is a consensus algorithm. This document only briefly introduces Raft. For more details, you can see [In Search of an Understandable Consensus Algorithm](https://raft.github.io/raft.pdf). The Raft has several important features:
 
 - Leader election
-- Membership changes (such as adding replicas, deleting replicas, transferring leaders, and so on)
+- Membership changes (such as adding replicas, deleting replicas, and transferring leaders)
 - Log replication
 
 TiKV use Raft to perform data replication. Each data change will be recorded as a Raft log. Through Raft log replication, data is safely and reliably replicated to multiple nodes of the Raft group. However, according to Raft protocol, successful writes only need that data is replicated to the majority of nodes.
@@ -49,7 +49,7 @@ To make it easy to understand, let's assume that all data only has one replica. 
 * Hash: Create Hash by Key and select the corresponding storage node according to the Hash value.
 * Range: Divide ranges by Key, where a segment of serial Key is stored on a node.
 
-TiKV chooses the second solution that divides the whole Key-Value space into a series of consecutive Key segments. Each segment is called a Region. There is a size limit for each Region to store data (the default value is 96 MB and the size can be configured). Each Region can be described by `[StartKey, EndKey)`, a left-closed and right-open interval.
+TiKV chooses the second solution that divides the whole Key-Value space into a series of consecutive Key segments. Each segment is called a Region. Each Region can be described by `[StartKey, EndKey)`, a left-closed and right-open interval. The default size limit for each Region is 96 MiB and the size can be configured.
 
 ![Region in TiDB](/media/tidb-storage-2.png)
 
@@ -74,7 +74,9 @@ As we distribute and replicate data in Regions, we have a distributed Key-Value 
 
 ## MVCC
 
-Many databases implement multi-version concurrency control (MVCC), and TiKV is no exception. Imagine the situation where two clients modify the value of a Key at the same time. Without MVCC, the data needs to be locked. In a distributed scenario, it might cause performance and deadlock problems. TiKV's MVCC implementation is achieved by appending a version number to Key. In short, without MVCC, TiKV's data layout can be seen as:
+TiKV supports multi-version concurrency control (MVCC). Consider a scenario where Client A is writing to a key simultaneously as Client B is reading the same key. Without the MVCC mechanism, these read and write operations would be mutually exclusive, posing performance issues and deadlocks in a distributed scenario. However, With MVCC, as long as Client B performs a read operation at a logical time earlier than the Client A write operation, then Client B can correctly read the original value at the same time Client A performs the write operation. Even if the key is modified multiple times by multiple write operations, Client B can still read the old value according to its logical time.
+
+TiKV MVCC is implemented by appending a version number to the key. Without MVCC, the Key-Value pairs of TiKV are as follows:
 
 ```
 Key1 -> Value
@@ -83,7 +85,7 @@ Key2 -> Value
 KeyN -> Value
 ```
 
-With MVCC, the key array of TiKV is like this:
+With MVCC, the Key-Value pairs of TiKV are as follows:
 
 ```
 Key1_Version3 -> Value

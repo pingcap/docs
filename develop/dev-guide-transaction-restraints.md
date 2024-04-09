@@ -33,7 +33,9 @@ For example, suppose you are writing a doctor shift management program for a hos
 
 Now there is a situation where doctors `Alice` and `Bob` are on call. Both are feeling sick, so they decide to take sick leave. They happen to click the button at the same time. Let's simulate this process with the following program:
 
-{{< copyable "" >}}
+<SimpleTab groupId="language">
+
+<div label="Java" value="java">
 
 ```java
 package com.pingcap.txn.write.skew;
@@ -154,9 +156,179 @@ public class EffectWriteSkew {
 }
 ```
 
-SQL log:
+</div>
 
-{{< copyable "sql" >}}
+<div label="Golang" value="golang">
+
+To adapt TiDB transactions, write a [util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util) according to the following code:
+
+```go
+package main
+
+import (
+    "database/sql"
+    "fmt"
+    "sync"
+
+    "github.com/pingcap-inc/tidb-example-golang/util"
+
+    _ "github.com/go-sql-driver/mysql"
+)
+
+func main() {
+    openDB("mysql", "root:@tcp(127.0.0.1:4000)/test", func(db *sql.DB) {
+        writeSkew(db)
+    })
+}
+
+func openDB(driverName, dataSourceName string, runnable func(db *sql.DB)) {
+    db, err := sql.Open(driverName, dataSourceName)
+    if err != nil {
+        panic(err)
+    }
+    defer db.Close()
+
+    runnable(db)
+}
+
+func writeSkew(db *sql.DB) {
+    err := prepareData(db)
+    if err != nil {
+        panic(err)
+    }
+
+    waitingChan, waitGroup := make(chan bool), sync.WaitGroup{}
+
+    waitGroup.Add(1)
+    go func() {
+        defer waitGroup.Done()
+        err = askForLeave(db, waitingChan, 1, 1)
+        if err != nil {
+            panic(err)
+        }
+    }()
+
+    waitGroup.Add(1)
+    go func() {
+        defer waitGroup.Done()
+        err = askForLeave(db, waitingChan, 2, 2)
+        if err != nil {
+            panic(err)
+        }
+    }()
+
+    waitGroup.Wait()
+}
+
+func askForLeave(db *sql.DB, waitingChan chan bool, goroutineID, doctorID int) error {
+    txnComment := fmt.Sprintf("/* txn %d */ ", goroutineID)
+    if goroutineID != 1 {
+        txnComment = "\t" + txnComment
+    }
+
+    txn, err := util.TiDBSqlBegin(db, true)
+    if err != nil {
+        return err
+    }
+    fmt.Println(txnComment + "start txn")
+
+    // Txn 1 should be waiting until txn 2 is done.
+    if goroutineID == 1 {
+        <-waitingChan
+    }
+
+    txnFunc := func() error {
+        queryCurrentOnCall := "SELECT COUNT(*) AS `count` FROM `doctors` WHERE `on_call` = ? AND `shift_id` = ?"
+        rows, err := txn.Query(queryCurrentOnCall, true, 123)
+        if err != nil {
+            return err
+        }
+        defer rows.Close()
+        fmt.Println(txnComment + queryCurrentOnCall + " successful")
+
+        count := 0
+        if rows.Next() {
+            err = rows.Scan(&count)
+            if err != nil {
+                return err
+            }
+        }
+        rows.Close()
+
+        if count < 2 {
+            return fmt.Errorf("at least one doctor is on call")
+        }
+
+        shift := "UPDATE `doctors` SET `on_call` = ? WHERE `id` = ? AND `shift_id` = ?"
+        _, err = txn.Exec(shift, false, doctorID, 123)
+        if err == nil {
+            fmt.Println(txnComment + shift + " successful")
+        }
+        return err
+    }
+
+    err = txnFunc()
+    if err == nil {
+        txn.Commit()
+        fmt.Println("[runTxn] commit success")
+    } else {
+        txn.Rollback()
+        fmt.Printf("[runTxn] got an error, rollback: %+v\n", err)
+    }
+
+    // Txn 2 is done. Let txn 1 run again.
+    if goroutineID == 2 {
+        waitingChan <- true
+    }
+
+    return nil
+}
+
+func prepareData(db *sql.DB) error {
+    err := createDoctorTable(db)
+    if err != nil {
+        return err
+    }
+
+    err = createDoctor(db, 1, "Alice", true, 123)
+    if err != nil {
+        return err
+    }
+    err = createDoctor(db, 2, "Bob", true, 123)
+    if err != nil {
+        return err
+    }
+    err = createDoctor(db, 3, "Carol", false, 123)
+    if err != nil {
+        return err
+    }
+    return nil
+}
+
+func createDoctorTable(db *sql.DB) error {
+    _, err := db.Exec("CREATE TABLE IF NOT EXISTS `doctors` (" +
+        "    `id` int(11) NOT NULL," +
+        "    `name` varchar(255) DEFAULT NULL," +
+        "    `on_call` tinyint(1) DEFAULT NULL," +
+        "    `shift_id` int(11) DEFAULT NULL," +
+        "    PRIMARY KEY (`id`)," +
+        "    KEY `idx_shift_id` (`shift_id`)" +
+        "  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin")
+    return err
+}
+
+func createDoctor(db *sql.DB, id int, name string, onCall bool, shiftID int) error {
+    _, err := db.Exec("INSERT INTO `doctors` (`id`, `name`, `on_call`, `shift_id`) VALUES (?, ?, ?, ?)",
+        id, name, onCall, shiftID)
+    return err
+}
+```
+
+</div>
+
+</SimpleTab>
+
+SQL log:
 
 ```sql
 /* txn 1 */ BEGIN
@@ -170,8 +342,6 @@ SQL log:
 ```
 
 Running result:
-
-{{< copyable "sql" >}}
 
 ```sql
 mysql> SELECT * FROM doctors;
@@ -190,7 +360,9 @@ In both transactions, the application first checks if two or more doctors are on
 
 Now let's change the sample program to use `SELECT FOR UPDATE` to avoid the write skew problem:
 
-{{< copyable "" >}}
+<SimpleTab groupId="language">
+
+<div label="Java" value="java">
 
 ```java
 package com.pingcap.txn.write.skew;
@@ -311,9 +483,177 @@ public class EffectWriteSkew {
 }
 ```
 
-SQL log:
+</div>
 
-{{< copyable "sql" >}}
+<div label="Golang" value="golang">
+
+```go
+package main
+
+import (
+    "database/sql"
+    "fmt"
+    "sync"
+
+    "github.com/pingcap-inc/tidb-example-golang/util"
+
+    _ "github.com/go-sql-driver/mysql"
+)
+
+func main() {
+    openDB("mysql", "root:@tcp(127.0.0.1:4000)/test", func(db *sql.DB) {
+        writeSkew(db)
+    })
+}
+
+func openDB(driverName, dataSourceName string, runnable func(db *sql.DB)) {
+    db, err := sql.Open(driverName, dataSourceName)
+    if err != nil {
+        panic(err)
+    }
+    defer db.Close()
+
+    runnable(db)
+}
+
+func writeSkew(db *sql.DB) {
+    err := prepareData(db)
+    if err != nil {
+        panic(err)
+    }
+
+    waitingChan, waitGroup := make(chan bool), sync.WaitGroup{}
+
+    waitGroup.Add(1)
+    go func() {
+        defer waitGroup.Done()
+        err = askForLeave(db, waitingChan, 1, 1)
+        if err != nil {
+            panic(err)
+        }
+    }()
+
+    waitGroup.Add(1)
+    go func() {
+        defer waitGroup.Done()
+        err = askForLeave(db, waitingChan, 2, 2)
+        if err != nil {
+            panic(err)
+        }
+    }()
+
+    waitGroup.Wait()
+}
+
+func askForLeave(db *sql.DB, waitingChan chan bool, goroutineID, doctorID int) error {
+    txnComment := fmt.Sprintf("/* txn %d */ ", goroutineID)
+    if goroutineID != 1 {
+        txnComment = "\t" + txnComment
+    }
+
+    txn, err := util.TiDBSqlBegin(db, true)
+    if err != nil {
+        return err
+    }
+    fmt.Println(txnComment + "start txn")
+
+    // Txn 1 should be waiting until txn 2 is done.
+    if goroutineID == 1 {
+        <-waitingChan
+    }
+
+    txnFunc := func() error {
+        queryCurrentOnCall := "SELECT COUNT(*) AS `count` FROM `doctors` WHERE `on_call` = ? AND `shift_id` = ?"
+        rows, err := txn.Query(queryCurrentOnCall, true, 123)
+        if err != nil {
+            return err
+        }
+        defer rows.Close()
+        fmt.Println(txnComment + queryCurrentOnCall + " successful")
+
+        count := 0
+        if rows.Next() {
+            err = rows.Scan(&count)
+            if err != nil {
+                return err
+            }
+        }
+        rows.Close()
+
+        if count < 2 {
+            return fmt.Errorf("at least one doctor is on call")
+        }
+
+        shift := "UPDATE `doctors` SET `on_call` = ? WHERE `id` = ? AND `shift_id` = ?"
+        _, err = txn.Exec(shift, false, doctorID, 123)
+        if err == nil {
+            fmt.Println(txnComment + shift + " successful")
+        }
+        return err
+    }
+
+    err = txnFunc()
+    if err == nil {
+        txn.Commit()
+        fmt.Println("[runTxn] commit success")
+    } else {
+        txn.Rollback()
+        fmt.Printf("[runTxn] got an error, rollback: %+v\n", err)
+    }
+
+    // Txn 2 is done. Let txn 1 run again.
+    if goroutineID == 2 {
+        waitingChan <- true
+    }
+
+    return nil
+}
+
+func prepareData(db *sql.DB) error {
+    err := createDoctorTable(db)
+    if err != nil {
+        return err
+    }
+
+    err = createDoctor(db, 1, "Alice", true, 123)
+    if err != nil {
+        return err
+    }
+    err = createDoctor(db, 2, "Bob", true, 123)
+    if err != nil {
+        return err
+    }
+    err = createDoctor(db, 3, "Carol", false, 123)
+    if err != nil {
+        return err
+    }
+    return nil
+}
+
+func createDoctorTable(db *sql.DB) error {
+    _, err := db.Exec("CREATE TABLE IF NOT EXISTS `doctors` (" +
+        "    `id` int(11) NOT NULL," +
+        "    `name` varchar(255) DEFAULT NULL," +
+        "    `on_call` tinyint(1) DEFAULT NULL," +
+        "    `shift_id` int(11) DEFAULT NULL," +
+        "    PRIMARY KEY (`id`)," +
+        "    KEY `idx_shift_id` (`shift_id`)" +
+        "  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin")
+    return err
+}
+
+func createDoctor(db *sql.DB, id int, name string, onCall bool, shiftID int) error {
+    _, err := db.Exec("INSERT INTO `doctors` (`id`, `name`, `on_call`, `shift_id`) VALUES (?, ?, ?, ?)",
+        id, name, onCall, shiftID)
+    return err
+}
+```
+
+</div>
+
+</SimpleTab>
+
+SQL log:
 
 ```sql
 /* txn 1 */ BEGIN
@@ -328,8 +668,6 @@ At least one doctor is on call
 
 Running result:
 
-{{< copyable "sql" >}}
-
 ```sql
 mysql> SELECT * FROM doctors;
 +----+-------+---------+----------+
@@ -341,15 +679,11 @@ mysql> SELECT * FROM doctors;
 +----+-------+---------+----------+
 ```
 
-## `savepoint` and nested transactions are not supported
-
-TiDB does **_NOT_** support the `savepoint` mechanism and therefore does not support the `PROPAGATION_NESTED` propagation behavior. If your applications are based on the **Java Spring** framework that use the `PROPAGATION_NESTED` propagation behavior, you need to adapt it on the application side to remove the logic for nested transactions.
+## Support for `savepoint` and nested transactions
 
 The `PROPAGATION_NESTED` propagation behavior supported by **Spring** triggers a nested transaction, which is a child transaction that is started independently of the current transaction. A `savepoint` is recorded when the nested transaction starts. If the nested transaction fails, the transaction will roll back to the `savepoint` state. The nested transaction is part of the outer transaction and will be committed together with the outer transaction.
 
 The following example demonstrates the `savepoint` mechanism:
-
-{{< copyable "sql" >}}
 
 ```sql
 mysql> BEGIN;
@@ -366,6 +700,10 @@ mysql> SELECT * FROM T2;
 |  100 |
 +------+
 ```
+
+> **Note:**
+>
+> Since v6.2.0, TiDB supports the `savepoint` feature. If your TiDB cluster is earlier than v6.2.0, your TiDB cluster does not support the `PROPAGATION_NESTED` behavior. If your applications are based on the **Java Spring** framework that use the `PROPAGATION_NESTED` propagation behavior, you need to adapt it on the application side to remove the logic for nested transactions.
 
 ## Large transaction restrictions
 

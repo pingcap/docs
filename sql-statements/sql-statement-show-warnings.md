@@ -10,9 +10,10 @@ This statement shows a list of warnings that occurred for previously executed st
 
 ## Synopsis
 
-**ShowWarningsStmt:**
-
-![ShowWarningsStmt](/media/sqlgram/ShowWarningsStmt.png)
+```ebnf+trace
+ShowWarningsStmt ::=
+    "SHOW" "WARNINGS"
+```
 
 ## Examples
 
@@ -76,7 +77,7 @@ mysql> SELECT * FROM t1;
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+The `SHOW WARNINGS` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
 ## See also
 

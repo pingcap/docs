@@ -1,5 +1,6 @@
 ---
 title: tiup cluster deploy
+summary: The tiup cluster deploy command is used to deploy a new cluster with specified options such as cluster name, version, and topology file. Additional options include user, identity file, password, ignore config check, skip labels, skip create user, and help. The output is the deployment log.
 ---
 
 # tiup cluster deploy
@@ -13,7 +14,7 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 ```
 
 - `<cluster-name>`: the name of the new cluster, which cannot be the same as the existing cluster names.
-- `<version>`: the version number of the TiDB cluster to deploy, such as `v6.1.0`.
+- `<version>`: the version number of the TiDB cluster to deploy, such as `v8.0.0`.
 - `<topology.yaml>`: the prepared [topology file](/tiup/tiup-cluster-topology-reference.md).
 
 ## Options

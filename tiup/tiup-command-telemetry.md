@@ -1,10 +1,11 @@
 ---
 title: tiup telemetry
+summary: TiUP telemetry is now disabled by default in v1.11.3. Usage information is not collected or shared with PingCAP. When enabled, it shares telemetry identifiers and command execution status. It does not share cluster details. Use 'tiup telemetry' command to control telemetry with sub-commands like status, reset, enable, and disable.
 ---
 
 # tiup telemetry
 
-TiDB, TiUP, and TiDB Dashboard collect usage information by default and share the information with PingCAP to improve the product. For example, through this usage information, PingCAP learns about common TiDB cluster operations and thereby determines the priority of new features.
+Starting from v1.11.3, the telemetry is disabled by default in newly deployed TiUP, and usage information is not collected and shared with PingCAP. In versions earlier than v1.11.3, the telemetry is enabled by default in TiUP, and usage information is collected and shared with PingCAP to improve the product.
 
 When TiUP telemetry is enabled, usage information is shared with PingCAP when TiUP commands are executed, including (but not limited to):
 
@@ -19,10 +20,6 @@ The information below is not shared:
 - The cluster configuration file
 
 TiUP uses the `tiup telemetry` command to control telemetry.
-
-> **Note:**
->
-> This feature is enabled by default.
 
 ## Syntax
 

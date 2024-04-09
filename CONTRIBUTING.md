@@ -4,7 +4,7 @@ Welcome to [TiDB](https://github.com/pingcap/tidb) documentation! We are excited
 
 ## What you can contribute
 
-You can start from any one of the following items to help improve [TiDB Docs at the PingCAP website](https://docs.pingcap.com/tidb/stable):
+You can start from any one of the following items to help improve [TiDB documentation at the PingCAP website](https://docs.pingcap.com/tidb/stable):
 
 - Fix typos or format (punctuation, space, indentation, code block, etc.)
 - Fix or update inappropriate or outdated descriptions
@@ -27,52 +27,35 @@ Before you contribute, please take a quick look at some general information abou
 
     To keep a consistent style for diagrams, we recommend using [Figma](https://www.figma.com/) to draw or design diagrams. If you need to draw a diagram, refer to the guide and use shapes or colors provided in the template.
 
+### Pick a doc template
+
+If you are going to create a new document for TiDB, we provide [several doc templates](/resources/doc-templates) for you to use to align with our style.
+
+Please check out these templates before you submit a pull request:
+
+- [Concept](/resources/doc-templates/template-concept.md)
+- [Task](/resources/doc-templates/template-task.md)
+- [Reference](/resources/doc-templates/template-reference.md)
+- [New Feature](/resources/doc-templates/template-new-feature.md)
+- [Troubleshooting](/resources/doc-templates/template-troubleshooting.md)
+
 ### Learn about docs versions
 
-Currently, we maintain the following versions of TiDB documentation, each with a separate branch:
+We use separate branches to maintain different versions of TiDB documentation.
 
-| Docs branch name | Version description |
-| :--- | :--- |
-| `master` branch | the latest development version |
-| `release 6.1` branch | the 6.1 LTS (Long-Term Support) version |
-| `release 6.0` branch | the 6.0 Development Milestone Release |
-| `release-5.4` branch | the 5.4 stable version |
-| `release-5.3` branch | the 5.3 stable version |
-| `release-5.2` branch | the 5.2 stable version |
-| `release-5.1` branch | the 5.1 stable version |
-| `release-5.0` branch | the 5.0 stable version |
-| `release-4.0` branch | the 4.0 stable version |
-| `release-3.1` branch | the 3.1 stable version |
-| `release-3.0` branch | the 3.0 stable version |
-| `release-2.1` branch | the 2.1 stable version |
-
-> **Note:**
->
-> Previously, we maintain all versions in the `master` branch, with directories like `dev` (the latest development version), `v3.0` and so on. Each docs version is updated very frequently and changes to one version often apply to another version or other versions as well.
->
-> Since February 21, 2020, to reduce manual editing and updating work among versions, we have started to maintain each version in a separate branch and introduced sre-bot (now ti-chi-bot) to automatically file PRs to other versions as long as you add corresponding cherry-pick labels to your PR.
+- The [documentation under development](https://docs.pingcap.com/tidb/dev) is maintained in the `master` branch.
+- The [published documentation](https://docs.pingcap.com/tidb/stable/) is maintained in the corresponding `release-<verion>` branch. For example, TiDB v7.5 documentation is maintained in the `release-7.5` branch.
+- The [archived documentation](https://docs-archive.pingcap.com/) is no longer maintained and does not receive any further updates.
 
 ### Use cherry-pick labels
 
-- If your changes apply to only one docs version, just submit a PR to the corresponding version branch.
+As changes to one documentation version often apply to other documentation versions as well, we introduce [ti-chi-bot](https://github.com/ti-chi-bot) to automate the PR cherry-pick process based on cherry-pick labels.
 
-- If your changes apply to multiple docs versions, you don't have to submit a PR to each branch. Instead, after you submit your PR, trigger the ti-chi-bot to submit a PR to other version branches by adding one or several of the following labels as needed. Once the current PR is merged, ti-chi-bot will start to work.
-    - `needs-cherry-pick-6.1` label: ti-chi-bot will submit a PR to the `release-6.1` branch.
-    - `needs-cherry-pick-6.0` label: ti-chi-bot will submit a PR to the `release-6.0` branch.
-    - `needs-cherry-pick-5.4` label: ti-chi-bot will submit a PR to the `release-5.4` branch.
-    - `needs-cherry-pick-5.3` label: ti-chi-bot will submit a PR to the `release-5.3` branch.
-    - `needs-cherry-pick-5.2` label: ti-chi-bot will submit a PR to the `release-5.2` branch.
-    - `needs-cherry-pick-5.1` label: ti-chi-bot will submit a PR to the `release-5.1` branch.
-    - `needs-cherry-pick-5.0` label: ti-chi-bot will submit a PR to the `release-5.0` branch.
-    - `needs-cherry-pick-4.0` label: ti-chi-bot will submit a PR to the `release-4.0` branch.
-    - `needs-cherry-pick-3.1` label: ti-chi-bot will submit a PR to the `release-3.1` branch.
-    - `needs-cherry-pick-3.0` label: ti-chi-bot will submit a PR to the `release-3.0` branch.
-    - `needs-cherry-pick-2.1` label: ti-chi-bot will submit a PR to the `release-2.1` branch.
-    - `needs-cherry-pick-master` label: ti-chi-bot will submit a PR to the `master` branch.
+- If your changes only apply to a specific documentation version, just create a PR based on the branch of that documentation version. There is no need to add any cherry-pick labels.
 
-    For how to choose the docs versions, refer to [Guideline for choosing the affected version(s)](#guideline-for-choosing-the-affected-versions).
+- If your changes apply to multiple documentation versions, instead of creating multiple PRs, you can just create one PR based on the latest applicable branch (such as `master`), and then add one or several `needs-cherry-pick-release-<version>` labels to the PR according to the applicable documentation versions. Then, after the PR is merged, ti-chi-bot will automatically create the corresponding cherry-pick PRs based on the branches of the specified versions.
 
-- If most of your changes apply to multiple docs versions but some differences exist among versions, you still can use cherry-pick labels to let ti-chi-bot create PRs to other versions. After the PR to another version is successfully submitted by ti-chi-bot, you can make changes to that PR.
+- If most of your changes apply to multiple documentation versions but some differences exist among versions, in addition to the cherry-pick labels for all the target versions, you also need to add the `requires-version-specific-change` label as a reminder to the PR reviewer. After your PR is merged and ti-chi-bot creates the corresponding cherry-pick PRs, you can still make changes to these cherry-pick PRs.
 
 ## How to contribute
 
@@ -171,6 +154,59 @@ If your change fits one of the following situations, **CHOOSE THE AFFECTED RELEA
 - Fixes format to resolve a display error
 - Fixes broken links
 
+## Guideline for contributing to TiDB Cloud documentation
+
+Currently, the [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud/) is available only in English, and it is stored in the [release-7.5](https://github.com/pingcap/docs/tree/release-7.5/tidb-cloud) branch of this repository for reusing SQL documents and development documents of TiDB v7.5. Hence, to create a pull request for TiDB Cloud documentation, make sure that your PR is based on the [release-7.5](https://github.com/pingcap/docs/tree/release-7.5) branch.
+
+> **Tip:**
+>
+> To learn which TiDB document is reused by TiDB Cloud, check the [TOC file of TiDB Cloud documentation](https://github.com/pingcap/docs/blob/release-7.5/TOC-tidb-cloud.md?plain=1).
+>
+> - If the path of a document in this file starts with `/tidb-cloud/`, it means that this document is only for TiDB Cloud.
+> - If the path of a document in this file does not start with `/tidb-cloud/`, it means that this TiDB document is reused by TiDB Cloud.
+
+In some TiDB documents that are reused by TiDB Cloud, you might notice `CustomContent` tags. These `CustomContent` tags are used to show the dedicated content of TiDB or TiDB Cloud.
+
+For example:
+
+```Markdown
+## Restrictions
+
+<CustomContent platform="tidb">
+
+* The TiDB memory limit on the `INSERT INTO SELECT` statement can be adjusted using the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query). Starting from v6.5.0, it is not recommended to use [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) to control transaction memory size.
+
+    For more information, see [TiDB memory control](/configure-memory-usage.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+* The TiDB memory limit on the `INSERT INTO SELECT` statement can be adjusted using the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query). Starting from v6.5.0, it is not recommended to use [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) to control transaction memory size.
+
+    For more information, see [TiDB memory control](https://docs.pingcap.com/tidb/stable/configure-memory-usage).
+
+</CustomContent>
+
+* TiDB has no hard limit on the concurrency of the `INSERT INTO SELECT` statement, but it is recommended to consider the following practices:
+
+    * When a "write transaction" is large, such as close to 1 GiB, it is recommended to control concurrency to no more than 10.
+    * When a "write transaction" is small, such as less than 100 MiB, it is recommended to control concurrency to no more than 30.
+    * Determine the concurrency based on testing results and specific circumstances.
+```
+
+In the example:
+
+- The content within the `<CustomContent platform="tidb">` tag is only applicable to TiDB and will not be displayed on the [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud/) website.
+- The content within the `<CustomContent platform="tidb-cloud">`tag is only applicable to TiDB Cloud and will not be displayed on the [TiDB documentation](https://docs.pingcap.com/tidb/stable) website.
+- The content that are not wrapped by `<CustomContent>` tag are applicable to both TiDB and TiDB Cloud and will be displayed on both documentation websites.
+
+## Guideline for previewing EBNF diagrams
+
+[TiDB documentation](https://docs.pingcap.com/tidb/stable) provides a lot of SQL synopsis diagrams to help users understand the SQL syntax. For example, you can find the synopsis diagrams for the `ALTER INDEX` statement [here](https://docs.pingcap.com/tidb/stable/sql-statement-alter-index#synopsis).
+
+The source of these synopsis diagrams is written using [extended Backus–Naur form (EBNF)](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form). When preparing the EBNF code for a SQL statement, you can easily preview the EBNF diagram by copying the code to <https://kennytm.github.io/website-docs/dist/> and clicking **Render**.
+
 ## Contact
 
-Join the [TiDB Internals forum](https://internals.tidb.io/) for discussion.
+Join [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) for discussion.

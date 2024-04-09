@@ -1,5 +1,6 @@
 ---
 title: tiup cluster start
+summary: The tiup cluster start command is used to start all or some services of a specified cluster. It has options like --init for safe start, -N for specifying nodes, -R for specifying roles, and -h for help. The output is the log of starting the service.
 ---
 
 # tiup cluster start
@@ -15,6 +16,15 @@ tiup cluster start <cluster-name> [flags]
 `<cluster-name>` is the name of the cluster to operate on. If you forget the cluster name, you can check it using the [`tiup cluster list`](/tiup/tiup-component-cluster-list.md) command.
 
 ## Options
+
+### --init
+
+Starts the cluster in a safe way. It is recommended to use this option when the cluster is started for the first time. This method generates the password of the TiDB root user at startup and returns the password in the command line interface.
+
+> **Note:**
+>
+> - After safe start of a TiDB cluster, you cannot log in to the database using the root user without a password. Therefore, you need to record the password returned by the command line for future logins.
+> - The password is generated only once. If you do not record or forget the password, refer to [Forget the `root` password](/user-account-management.md#forget-the-root-password) to change the password.
 
 ### -N, --node
 

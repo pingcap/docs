@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Top SQL page
-summary: Learn how to use Top SQL to find SQL statements with high CPU overhead.
+summary: TiDB Dashboard Top SQL allows real-time monitoring and visualization of CPU overhead for SQL statements in your database. It helps optimize performance by identifying high CPU load statements and provides detailed execution information. It's suitable for analyzing performance issues and can be accessed through TiDB Dashboard or a browser. The feature has a slight impact on cluster performance and is now generally available for production use.
 ---
 
 # TiDB Dashboard Top SQL Page
@@ -35,11 +35,11 @@ The Top SQL feature is still in an early stage and is being continuously enhance
 
 You can access the Top SQL page using either of the following methods:
 
-- After logging into TiDB Dashboard, click **Top SQL** on the left navigation bar.
+* After logging in to TiDB Dashboard, click **Top SQL** in the left navigation menu.
 
   ![Top SQL](/media/dashboard/top-sql-access.png)
 
-- Visit <http://127.0.0.1:2379/dashboard/#/topsql> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
+* Visit <http://127.0.0.1:2379/dashboard/#/topsql> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
 
 ## Enable Top SQL
 

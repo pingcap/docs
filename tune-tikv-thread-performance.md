@@ -61,7 +61,7 @@ Starting from TiKV v5.0, all read requests use the unified thread pool for queri
 
 * The Raftstore thread pool.
 
-    The Raftstore thread pool is the most complex thread pool in TiKV. The default size (configured by `raftstore.store-pool-size`) of this thread pool is `2`. For the StoreWriter thread pool, the default size (configured by `raftstore.store-io-pool-size`) is `0`.
+    The Raftstore thread pool is the most complex thread pool in TiKV. The default size (configured by `raftstore.store-pool-size`) of this thread pool is `2`. For the StoreWriter thread pool, the default size (configured by `raftstore.store-io-pool-size`) is `1`.
 
     - When the size of the StoreWriter thread pool is 0, all write requests are written into RocksDB in the way of `fsync` by the Raftstore thread. In this case, it is recommended to tune the performance as follows:
 
@@ -83,6 +83,8 @@ Starting from TiKV v5.0, all read requests use the unified thread pool for queri
     The UnifyReadPool is responsible for handling all read requests. The default size (configured by `readpool.unified.max-thread-count`) is 80% of the number of the machine's CPU cores. For example, if the machine CPU has 16 cores, the default thread pool size is 12. It is recommended to adjust the CPU usage rate according to the application workloads and keep it between 60% and 90% of the thread pool size.
 
     If the peak value of the `TiKV-Details.Thread CPU.Unified read pool CPU` on Grafana does not exceed 800%, then it is recommended to set `readpool.unified.max-thread-count` to `10`. Too many threads can cause more frequent thread switching, and take up resources of other thread pools.
+
+    Since v6.3.0, TiKV supports automatically adjusting the UnifyReadPool thread pool size based on the current CPU usage. To enable this feature, you can set the [`readpool.unified.auto-adjust-pool-size = true`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630). It is recommended to automatically adjust the thread pool size for clusters that are reread and whose maximum CPU usage exceeds 80%.
 
 * The RocksDB thread pool.
 

@@ -19,7 +19,7 @@ DM supports migrating data from different sources to TiDB clusters. Based on the
 |MySQL ≤ 5.5|Not tested||
 |MySQL 5.6|GA||
 |MySQL 5.7|GA||
-|MySQL 8.0|Experimental||
+|MySQL 8.0|GA|Does not support binlog transaction compression [Transaction_payload_event](https://dev.mysql.com/doc/refman/8.0/en/binary-log-transaction-compression.html)|
 |MariaDB < 10.1.2|Incompatible|Incompatible with binlog of the time type|
 |MariaDB 10.1.2 ~ 10.5.10|Experimental||
 |MariaDB > 10.5.10|Incompatible|Permission errors reported in the check procedure|
@@ -30,7 +30,7 @@ DM supports migrating data from different sources to TiDB clusters. Based on the
 >
 > DM v5.3.0 is not recommended. If you have enabled GTID replication but do not enable relay log in DM v5.3.0, data replication fails with low probability.
 
-|Data source|Compatibility level|DM version|
+|Target database|Compatibility level|DM version|
 |-|-|-|
 |TiDB 6.0|GA|≥ 5.3.1|
 |TiDB 5.4|GA|≥ 5.3.1|

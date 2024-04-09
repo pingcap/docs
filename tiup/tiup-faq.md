@@ -1,10 +1,12 @@
 ---
-title: TiUP FAQ
+title: TiUP FAQs
 summary: Provide answers to common questions asked by TiUP users.
 aliases: ['/docs/dev/tiup/tiup-faq/']
 ---
 
-# TiUP FAQ
+# TiUP FAQs
+
+This document collects the frequently asked questions (FAQs) about TiUP.
 
 ## Can TiUP not use the official mirror source?
 
@@ -21,11 +23,11 @@ TiUP does not support third-party components for the time being, but the TiUP Te
 
 ## What is the difference between the TiUP playground and TiUP cluster components?
 
-The TiUP playground component is mainly used to build a stand-alone development environment on Linux or macOS operating systems. It helps you get started quickly and run a specified version of the TiUP cluster easily. The TiUP cluster component is mainly used to deploy and maintain a production environment cluster, which is usually a large-scale cluster.
+The TiUP playground component is mainly used to build a stand-alone development environment on Linux or macOS operating systems. It helps you get started quickly and run a specified version of the TiUP cluster easily. The TiUP cluster component is mainly used to deploy and maintain a production environment cluster, which is usually a large-scale cluster. TiDB clusters deployed by TiUP Playground might lack some features and operational capabilities, and it is not recommended for complete functional and stability testing.
 
 ## How do I write the topology file for the TiUP cluster component?
 
-Refer to [these templates](https://github.com/pingcap/tiup/tree/master/examples) to write the topology file. The templates include:
+Refer to [these templates](https://github.com/pingcap/tiup/tree/master/embed/examples/cluster) to write the topology file. The templates include:
 
 - Multi-DC deployment topology
 - Minimal deployment topology

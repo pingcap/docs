@@ -1,6 +1,6 @@
 ---
 title: Secure TiDB Dashboard
-summary: Learn how to improve the security of TiDB Dashboard.
+summary: TiDB Dashboard requires enhanced security measures, including setting a strong password for the root user, creating a least-privileged user, and using a firewall to block untrusted access. It is also recommended to use a reverse proxy and enable TLS for further security.
 aliases: ['/docs/dev/dashboard/dashboard-ops-security/']
 ---
 
@@ -23,6 +23,10 @@ The account system of TiDB Dashboard is consistent with that of TiDB SQL. Users 
 It is recommended that you create a least-privileged SQL user to access and sign in to TiDB Dashboard. This avoids access of high-privileged users and improves security. See [TiDB Dashboard User Management](/dashboard/dashboard-user.md) for details.
 
 ## Use a firewall to block untrusted access
+
+> **Note:**
+>
+> TiDB v6.5.0 (and later) and TiDB Operator v1.4.0 (and later) support deploying TiDB Dashboard as an independent Pod on Kubernetes. Using TiDB Operator, you can access the IP address of this Pod to start TiDB Dashboard. This port does not communicate with other privileged interfaces of PD and no extra firewall is required if provided externally. For details, see [Deploy TiDB Dashboard independently in TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently).
 
 TiDB Dashboard provides services through the PD client port, which defaults to <http://IP:2379/dashboard/>. Although TiDB Dashboard requires identity authentication, other privileged interfaces (such as <http://IP:2379/pd/api/v1/members>) in PD carried on the PD client port do not require identity authentication and can perform privileged operations. Therefore, exposing the PD client port directly to the external network is extremely risky.
 
@@ -62,8 +66,6 @@ The output is the actual TiDB Dashboard address.
 >
 > <details>
 > <summary>Upgrade TiUP Cluster</summary>
->
-> {{< copyable "shell-regular" >}}
 >
 > ```bash
 > tiup update --self

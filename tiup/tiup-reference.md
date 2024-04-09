@@ -1,5 +1,6 @@
 ---
 title: TiUP Reference
+summary: TiUP is the package manager for the TiDB ecosystem, managing components like TiDB, PD, and TiKV. It supports commands like install, list, uninstall, update, status, clean, mirror, telemetry, completion, env, and help. It also manages the cluster and TiDB Data Migration (DM) cluster.
 ---
 
 # TiUP Reference
@@ -20,12 +21,12 @@ You can use the `--help` command to get the information of a specific command. T
 
 ## Options
 
-### -B, --binary
+### --binary
 
 - If you enable this option, the specified binary file path is printed.
 
-    - Executing `tiup -B/--binary <component>` will have the path of the latest stable installed `<component>` component printed. If `<component>` is not installed, an error is returned.
-    - Executing `tiup -B/--binary <component>:<version>` will have the path of the installed `<component>` component's `<version>` printed. If this `<version>` is not printed, an error is returned.
+    - Executing `tiup --binary <component>` will have the path of the latest stable installed `<component>` component printed. If `<component>` is not installed, an error is returned.
+    - Executing `tiup --binary <component>:<version>` will have the path of the installed `<component>` component's `<version>` printed. If this `<version>` is not printed, an error is returned.
 
 - Data type: `BOOLEAN`
 - This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
@@ -42,16 +43,6 @@ You can use the `--help` command to get the information of a specific command. T
 
 - Specifies the path of the component to be executed. When a component is executed, if you do not want to use the binary file in the TiUP mirror, you can add this option to specify using the binary file in a custom path.
 - Data type: `STRING`
-
-### --skip-version-check
-
-> **Note:**
->
-> This option is deprecated since v1.3.0.
-
-- Skips the validity check for version numbers. By default, the specified version number can only be the semantic version.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
 
 ### -T, --tag
 

@@ -8,16 +8,18 @@ aliases: ['/docs/dev/sql-mode/','/docs/dev/reference/sql/sql-mode/']
 
 TiDB servers operate in different SQL modes and apply these modes differently for different clients. SQL mode defines the SQL syntaxes that TiDB supports and the type of data validation check to perform, as described below:
 
-After TiDB is started, modify `SET [ SESSION | GLOBAL ] sql_mode='modes'` to set SQL mode.
+After TiDB is started, you can use the `SET [ SESSION | GLOBAL ] sql_mode='modes'` statement to set SQL mode.
 
-Ensure that you have `SUPER` privilege when setting SQL mode at `GLOBAL` level, and your setting at this level only affects the connections established afterwards. Changes to SQL mode at `SESSION` level only affect the current client.
+- Ensure that you have `SUPER` privilege when setting SQL mode at `GLOBAL` level, and your setting at this level only affects the connections established afterwards. 
 
-`Modes` are a series of different modes separated by commas (','). You can use the `SELECT @@sql_mode` statement to check the current SQL mode. The default value of SQL mode: `ONLY_FULL_GROUP_BY, STRICT_TRANS_TABLES, NO_ZERO_IN_DATE, NO_ZERO_DATE, ERROR_FOR_DIVISION_BY_ZERO, NO_AUTO_CREATE_USER, NO_ENGINE_SUBSTITUTION`.
+- Changes to SQL mode at `SESSION` level only affect the current client.
+
+In this statement, `modes` is a set of modes separated by commas (','). You can use the `SELECT @@sql_mode` statement to check the current SQL mode. The default value of SQL mode: `ONLY_FULL_GROUP_BY, STRICT_TRANS_TABLES, NO_ZERO_IN_DATE, NO_ZERO_DATE, ERROR_FOR_DIVISION_BY_ZERO, NO_AUTO_CREATE_USER, NO_ENGINE_SUBSTITUTION`.
 
 ## Important `sql_mode` values
 
 * `ANSI`: This mode complies with standard SQL. In this mode, data is checked. If data does not comply with the defined type or length, the data type is adjusted or trimmed and a `warning` is returned.
-* `STRICT_TRANS_TABLES`: Strict mode, where data is strictly checked. When any incorrect data is inserted into a table, an error is returned.
+* `STRICT_TRANS_TABLES`: Strict mode, where data is strictly checked. If any data is incorrect, it cannot be inserted into a table and an error is returned.
 * `TRADITIONAL`: In this mode, TiDB behaves like a "traditional" SQL database system. An error instead of a warning is returned when any incorrect value is inserted into a column. Then, the `INSERT` or `UPDATE` statement is immediately stopped.
 
 ## SQL mode table
@@ -27,7 +29,7 @@ Ensure that you have `SUPER` privilege when setting SQL mode at `GLOBAL` level, 
 | `PIPES_AS_CONCAT` | Treats "\|\|" as a string concatenation operator (`+`) (the same as `CONCAT()`), not as an `OR` (full support) |
 | `ANSI_QUOTES` | Treats `"` as an identifier. If `ANSI_QUOTES` is enabled, only single quotes are treated as string literals, and double quotes are treated as identifiers. Therefore, double quotes cannot be used to quote strings. (full support)|
 | `IGNORE_SPACE` | If this mode is enabled, the system ignores space. For example: "user" and "user " are the same. (full support)|
-| `ONLY_FULL_GROUP_BY` | If a non-aggregated column that is referred to in `SELECT`, `HAVING`, or `ORDER BY` is absent in `GROUP BY`, this SQL statement is invalid, because it is abnormal for a column to be absent in `GROUP BY` but displayed by query. (full support) |
+| `ONLY_FULL_GROUP_BY` | A SQL statement is invalid if it refers to a column in `SELECT`, `HAVING`, or `ORDER BY` that is neither aggregated nor included in the `GROUP BY` clause. This is because displaying such a column in query result is abnormal. (full support)|
 | `NO_UNSIGNED_SUBTRACTION` | Does not mark the result as `UNSIGNED` if an operand has no symbol in subtraction. (full support)|
 | `NO_DIR_IN_CREATE` | Ignores all `INDEX DIRECTORY` and `DATA DIRECTORY` directives when a table is created. This option is only useful for secondary replication servers (syntax support only) |
 | `NO_KEY_OPTIONS` | When you use the `SHOW CREATE TABLE` statement, MySQL-specific syntaxes such as `ENGINE` are not exported. Consider this option when migrating across DB types using mysqldump. (syntax support only)|

@@ -74,7 +74,7 @@ To run a TiDB server, use the following command:
 {{< copyable "shell-regular" >}}
 
 ```bash
-wget https://download.pingcap.org/tidb-community-server-v6.1.0-linux-amd64.tar.gz
+wget https://download.pingcap.org/tidb-community-server-v8.0.0-linux-amd64.tar.gz
 tar -xzvf tidb-latest-linux-amd64.tar.gz
 mv tidb-latest-linux-amd64/bin/tidb-server ./
 ./tidb-server
@@ -96,6 +96,10 @@ Before starting a data migration task, you need to configure the MySQL data sour
 > + You can use the plaintext password to configure the source information in DM v1.0.6 and later versions.
 
 For safety reasons, it is recommended to configure and use encrypted passwords. You can use dmctl to encrypt the MySQL/TiDB password. Suppose the password is "123456":
+
+> **Note:**
+>
+> Starting from v8.0.0, you must configure [`secret-key-path`](/dm/dm-master-configuration-file.md) for DM-master before using the `dmctl encrypt` command.
 
 {{< copyable "shell-regular" >}}
 

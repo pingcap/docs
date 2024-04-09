@@ -11,7 +11,7 @@ This document introduces how to create tables using the SQL statement and the re
 
 Before reading this document, make sure that the following tasks are completed:
 
-- [Build a TiDB Cluster in TiDB Cloud (DevTier)](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Build a TiDB Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md).
 - [Create a Database](/develop/dev-guide-create-database.md).
 
@@ -25,8 +25,6 @@ The first step for creating a table is to give your table a name. Do not use mea
 
 The `CREATE TABLE` statement usually takes the following form:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE TABLE {table_name} ( {elements} );
 ```
@@ -39,8 +37,6 @@ CREATE TABLE {table_name} ( {elements} );
 Suppose you need to create a table to store the user information in the `bookshop` database.
 
 Note that you cannot execute the following SQL statement yet because not a single column has been added.
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE `bookshop`.`users` (
@@ -60,12 +56,10 @@ Column definitions typically take the following form.
 **Parameter description**
 
 - `{column_name}`: The column name.
-- `{data_type}`: The column [data type](/basic-features.md#data-types-functions-and-operators).
-- `{column_qualification}`: Column qualifications, such as **column-level constraints** or [generated column (experimental feature)](/generated-columns.md) clauses.
+- `{data_type}`: The column [data type](/data-type-overview.md).
+- `{column_qualification}`: Column qualifications, such as **column-level constraints** or [generated column](/generated-columns.md) clauses.
 
 You can add some columns to the `users` table, such as the unique identifier `id`, `balance` and `nickname`.
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE `bookshop`.`users` (
@@ -81,11 +75,9 @@ Then, a field named `nickname` is defined, which is the [varchar](/data-type-str
 
 Finally, a field named `balance` is added, which is the [decimal](/data-type-numeric.md#decimal-type) type, with a **precision** of `15` and a **scale** of `2`. **Precision** represents the total number of digits in the field, and **scale** represents the number of decimal places. For example, `decimal(5,2)` means a precision of `5` and a scale of `2`, with the range from `-999.99` to `999.99`. `decimal(6,1)` means a precision of `6` and a scale of `1`, with the range from `-99999.9` to `99999.9`. **decimal** is a [fixed-point types](/data-type-numeric.md#fixed-point-types), which can be used to store numbers accurately. In scenarios where accurate numbers are needed (for example, user property-related), make sure that you use the **decimal** type.
 
-TiDB supports many other column data types, including the [integer types](/data-type-numeric.md#integer-types), [floating-point types](/data-type-numeric.md#floating-point-types), [fixed-point types](/data-type-numeric.md#fixed-point-types), [date and time types](/data-type-date-and-time.md), and the [enum type](/data-type-string.md#enum-type). You can refer to the supported column [data types](/basic-features.md#data-types-functions-and-operators) and use the **data types** that match the data you want to save in the database.
+TiDB supports many other column data types, including the [integer types](/data-type-numeric.md#integer-types), [floating-point types](/data-type-numeric.md#floating-point-types), [fixed-point types](/data-type-numeric.md#fixed-point-types), [date and time types](/data-type-date-and-time.md), and the [enum type](/data-type-string.md#enum-type). You can refer to the supported column [data types](/data-type-overview.md) and use the **data types** that match the data you want to save in the database.
 
 To make it a bit more complex, you can define a `books` table which will be the core of the `bookshop` data. The `books` table contains fields for the book's ids, titles, types (for example, magazine, novel, life, arts), stock, prices, and publication dates.
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE `bookshop`.`books` (
@@ -110,7 +102,7 @@ A [primary key](/constraints.md#primary-key) is a column or a set of columns in 
 
 > **Note:**
 >
-> The default definition of **primary key** in TiDB is different from that in [InnoDB](https://mariadb.com/kb/en/innodb/)(the common storage engine of MySQL). 
+> The default definition of **primary key** in TiDB is different from that in [InnoDB](https://dev.mysql.com/doc/refman/8.0/en/innodb-storage-engine.html)(the common storage engine of MySQL).
 >
 > - In **InnoDB**: A **primary key** is unique, not null, and **index clustered**.
 >
@@ -122,11 +114,13 @@ A table can be created without a **primary key** or with a non-integer **primary
 
 When the **primary key** of a table is an [integer type](/data-type-numeric.md#integer-types) and `AUTO_INCREMENT` is used, hotspots cannot be avoided by using `SHARD_ROW_ID_BITS`. If you need to avoid hotspots and do not need a continuous and incremental primary key, you can use [`AUTO_RANDOM`](/auto-random.md) instead of `AUTO_INCREMENT` to eliminate row ID continuity.
 
+<CustomContent platform="tidb">
+
 For more information on how to handle hotspot issues, refer to [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
 
-Following the [guidelines for selecting primary key](#guidelines-to-follow-when-selecting-primary-key), the following example shows how an `AUTO_RANDOM` primary key is defined in the `users` table.
+</CustomContent>
 
-{{< copyable "sql" >}}
+Following the [guidelines for selecting primary key](#guidelines-to-follow-when-selecting-primary-key), the following example shows how an `AUTO_RANDOM` primary key is defined in the `users` table.
 
 ```sql
 CREATE TABLE `bookshop`.`users` (
@@ -159,8 +153,6 @@ As described in [select primary key](#select-primary-key), **clustered indexes**
 
 Following the [guidelines for selecting clustered index](#guidelines-to-follow-when-selecting-clustered-index), the following example creates a table with an association between `books` and `users`, which represents the `ratings` of a `book` by `users`. The example creates the table and constructs a composite primary key using `book_id` and `user_id`, and creates a **clustered index** on that **primary key**.
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE TABLE `bookshop`.`ratings` (
   `book_id` bigint,
@@ -179,9 +171,7 @@ In addition to [primary key constraints](#select-primary-key), TiDB also support
 
 To set a default value on a column, use the `DEFAULT` constraint. The default value allows you to insert data without specifying a value for each column.
 
-You can use `DEFAULT` together with [supported SQL functions](/basic-features.md#data-types-functions-and-operators) to move the calculation of defaults out of the application layer, thus saving resources of the application layer. The resources consumed by the calculation do not disappear and are moved to the TiDB cluster. Commonly, you can insert data with the default time. The following exemplifies setting the default value in the `ratings` table:
-
-{{< copyable "sql" >}}
+You can use `DEFAULT` together with [supported SQL functions](/functions-and-operators/functions-and-operators-overview.md) to move the calculation of defaults out of the application layer, thus saving resources of the application layer. The resources consumed by the calculation do not disappear and are moved to the TiDB cluster. Commonly, you can insert data with the default time. The following exemplifies setting the default value in the `ratings` table:
 
 ```sql
 CREATE TABLE `bookshop`.`ratings` (
@@ -194,8 +184,6 @@ CREATE TABLE `bookshop`.`ratings` (
 ```
 
 In addition, if the current time is also filled in by default when the data is being updated, the following statements can be used (but only the [current time related statements](https://pingcap.github.io/sqlgram/#NowSymOptionFraction) can be filled in after `ON UPDATE`, and [more options](https://pingcap.github.io/sqlgram/#DefaultValueExpr) are supported after `DEFAULT`):
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE `bookshop`.`ratings` (
@@ -211,9 +199,7 @@ CREATE TABLE `bookshop`.`ratings` (
 
 If you need to prevent duplicate values in a column, you can use the `UNIQUE` constraint.
 
-For example, to make sure that users' nicknames are unique, you can rewrite the table creation  SQL statement for the `users` table like this:
-
-{{< copyable "sql" >}}
+For example, to make sure that users' nicknames are unique, you can rewrite the table creation SQL statement for the `users` table like this:
 
 ```sql
 CREATE TABLE `bookshop`.`users` (
@@ -232,8 +218,6 @@ If you need to prevent null values in a column, you can use the `NOT NULL` const
 
 Take user nicknames as an example. To ensure that a nickname is not only unique but is also not null, you can rewrite the SQL statement for creating the `users` table as follows:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE TABLE `bookshop`.`users` (
   `id` bigint AUTO_RANDOM,
@@ -245,9 +229,21 @@ CREATE TABLE `bookshop`.`users` (
 
 ## Use HTAP capabilities
 
+<CustomContent platform="tidb">
+
 > **Note:**
 >
 > The steps provided in this guide is **_ONLY_** for quick start in the test environment. For production environments, refer to [explore HTAP](/explore-htap.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The steps provided in this guide is **_ONLY_** for quick start. For more instructions, refer to [Use an HTAP Cluster with TiFlash](/tiflash/tiflash-overview.md).
+
+</CustomContent>
 
 Suppose that you want to perform OLAP analysis on the `ratings` table using the `bookshop` application, for example, to query **whether the rating of a book has a significant correlation with the time of the rating**, which is to analyze whether the user's rating of the book is objective or not. Then you need to query the `score` and `rated_at` fields of the entire `ratings` table. This operation is resource-intensive for an OLTP-only database. Or you can use some ETL or other data synchronization tools to export the data from the OLTP database to a dedicated OLAP database for analysis.
 
@@ -255,13 +251,23 @@ In this scenario, TiDB, an **HTAP (Hybrid Transactional and Analytical Processin
 
 ### Replicate column-based data
 
-Currently, TiDB supports two data analysis engines, **TiFlash** and **TiSpark**. For the large data scenarios (100 T), **TiFlash MPP** is recommended as the primary solution for HTAP, and **TiSpark** as a complementary solution. To learn more about TiDB HTAP capabilities, refer to the following documents: [Quick Start Guide for TiDB HTAP](/quick-start-with-htap.md) and [Explore HTAP](/explore-htap.md).
+<CustomContent platform="tidb">
+
+Currently, TiDB supports two data analysis engines, **TiFlash** and **TiSpark**. For the large data scenarios (100 T), **TiFlash MPP** is recommended as the primary solution for HTAP, and **TiSpark** as a complementary solution.
+
+To learn more about TiDB HTAP capabilities, refer to the following documents: [Quick Start Guide for TiDB HTAP](/quick-start-with-htap.md) and [Explore HTAP](/explore-htap.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+To learn more about TiDB HTAP capabilities, see [TiDB Cloud HTAP Quick Start](/tidb-cloud/tidb-cloud-htap-quickstart.md) and [Use an HTAP Cluster with TiFlash](/tiflash/tiflash-overview.md).
+
+</CustomContent>
 
 In this example, [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview) has been chosen as the data analysis engine for the `bookshop` database.
 
 TiFlash does not automatically replicate data after deployment. Therefore, you need to manually specify the tables to be replicated:
-
-{{< copyable "sql" >}}
 
 ```sql
 ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
@@ -272,13 +278,11 @@ ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
 - `{table_name}`: The table name.
 - `{count}`: The number of replicated replicas. If it is 0, replicated replicas are deleted.
 
-**TiFlash** will then replicate the table. When a query is performed, TiDB automatically selects TiKV (row-based) or TiFlash (column-based) for the query based on cost optimization. Alternatively, you can manually specify whether the query uses a **TiFlash** replica. To learn how to specify it, refer to [Use TiDB to read TiFlash replicas](/tiflash/use-tiflash.md#use-tidb-to-read-tiflash-replicas).
+**TiFlash** will then replicate the table. When a query is performed, TiDB automatically selects TiKV (row-based) or TiFlash (column-based) for the query based on cost optimization. Alternatively, you can manually specify whether the query uses a **TiFlash** replica. To learn how to specify it, refer to [Use TiDB to read TiFlash replicas](/tiflash/use-tidb-to-read-tiflash.md).
 
 ### An example of using HTAP capabilities
 
 The `ratings` table opens `1` replica of TiFlash:
-
-{{< copyable "sql" >}}
 
 ```sql
 ALTER TABLE `bookshop`.`ratings` SET TIFLASH REPLICA 1;
@@ -286,19 +290,15 @@ ALTER TABLE `bookshop`.`ratings` SET TIFLASH REPLICA 1;
 
 > **Note:**
 >
-> If your cluster does not contain **TiFlash** nodes, this SQL statement will report an error: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0`. You can use [Build a TiDB Cluster in TiDB Cloud (DevTier)](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster) to create a free cluster that includes **TiFlash**.
+> If your cluster does not contain **TiFlash** nodes, this SQL statement will report an error: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0`. You can use [Build a TiDB Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster) to create a TiDB Serverless cluster that includes **TiFlash**.
 
 Then you can go on to perform the following query:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT HOUR(`rated_at`), AVG(`score`) FROM `bookshop`.`ratings` GROUP BY HOUR(`rated_at`);
 ```
 
 You can also execute the [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) statement to see whether this statement is using the **TiFlash**:
-
-{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN ANALYZE SELECT HOUR(`rated_at`), AVG(`score`) FROM `bookshop`.`ratings` GROUP BY HOUR(`rated_at`);
@@ -314,7 +314,7 @@ Running results:
 | └─HashAgg_5                 | 299821.99 | 24      | root         |               | time:60.7ms, loops:6, partial_worker:{wall_time:60.660079ms, concurrency:5, task_num:293, tot_wait:262.536669ms, tot_exec:40.171833ms, tot_time:302.827753ms, max:60.636886ms, p95:60.636886ms}, final_worker:{wall_time:60.701437ms, concurrency:5, task_num:25, tot_wait:303.114278ms, tot_exec:176.564µs, tot_time:303.297475ms, max:60.69326ms, p95:60.69326ms}  | group by:Column#10, funcs:avg(Column#8)->Column#5, funcs:firstrow(Column#9)->bookshop.ratings.rated_at                                         | 714.0 KB | N/A  |
 |   └─Projection_15           | 300000.00 | 300000  | root         |               | time:58.5ms, loops:294, Concurrency:5                                                                                                                                                                                                                                                                                                                                | cast(bookshop.ratings.score, decimal(8,4) BINARY)->Column#8, bookshop.ratings.rated_at, hour(cast(bookshop.ratings.rated_at, time))->Column#10 | 366.2 KB | N/A  |
 |     └─TableReader_10        | 300000.00 | 300000  | root         |               | time:43.5ms, loops:294, cop_task: {num: 1, max: 43.1ms, proc_keys: 0, rpc_num: 1, rpc_time: 43ms, copr_cache_hit_ratio: 0.00}                                                                                                                                                                                                                                        | data:TableFullScan_9                                                                                                                           | 4.58 MB  | N/A  |
-|       └─TableFullScan_9     | 300000.00 | 300000  | cop[tiflash] | table:ratings | tiflash_task:{time:5.98ms, loops:8, threads:1}                                                                                                                                                                                                                                                                                                                       | keep order:false                                                                                                                               | N/A      | N/A  |
+|       └─TableFullScan_9     | 300000.00 | 300000  | cop[tiflash] | table:ratings | tiflash_task:{time:5.98ms, loops:8, threads:1}, tiflash_scan:{dtfile:{total_scanned_packs:45, total_skipped_packs:1, total_scanned_rows:368640, total_skipped_rows:8192, total_rs_index_load_time: 1ms, total_read_time: 1ms},total_create_snapshot_time:1ms}                                                                                                        | keep order:false                                                                                                                               | N/A      | N/A  |
 +-----------------------------+-----------+---------+--------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+----------+------+
 ```
 
@@ -326,8 +326,6 @@ After creating all the tables as above rules, our [database initialization](/dev
 
 To name the database initialization script `init.sql` and save it, you can execute the following statement to initialize the database.
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 mysql
     -u root \
@@ -338,8 +336,6 @@ mysql
 ```
 
 To view all tables under the `bookshop` database, use the [`SHOW TABLES`](/sql-statements/sql-statement-show-tables.md#show-full-tables) statement.
-
-{{< copyable "sql" >}}
 
 ```sql
 SHOW TABLES IN `bookshop`;
@@ -373,7 +369,7 @@ This section provides guidelines you need to follow when creating a table.
 
 ### Guidelines to follow when defining columns
 
-- Check the [data types](/basic-features.md#data-types-functions-and-operators) supported by columns and organize your data according to the data type restrictions. Select the appropriate type for the data you plan to store in the column.
+- Check the [data types](/data-type-overview.md) supported by columns and organize your data according to the data type restrictions. Select the appropriate type for the data you plan to store in the column.
 - Check the [guidelines to follow](#guidelines-to-follow-when-selecting-primary-key) for selecting primary keys and decide whether to use primary key columns.
 - Check the [guidelines to follow](#guidelines-to-follow-when-selecting-clustered-index) for selecting clustered indexes and decide whether to specify **clustered indexes**.
 - Check [adding column constraints](#add-column-constraints) and decide whether to add constraints to the columns.

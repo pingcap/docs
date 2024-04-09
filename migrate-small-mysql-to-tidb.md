@@ -1,12 +1,12 @@
 ---
-title: Migrate MySQL of Small Datasets to TiDB
-summary: Learn how to migrate MySQL of small datasets to TiDB.
+title: Migrate Small Datasets from MySQL to TiDB
+summary: Learn how to migrate small datasets from MySQL to TiDB.
 aliases: ['/tidb/dev/usage-scenario-incremental-migration/']
 ---
 
-# Migrate MySQL of Small Datasets to TiDB
+# Migrate Small Datasets from MySQL to TiDB
 
-This document describes how to use TiDB Data Migration (DM) to migrate MySQL of small datasets to TiDB in the full migration mode and incremental replication mode. "Small datasets" in this document mean data size less than 1 TiB.
+This document describes how to use TiDB Data Migration (DM) to migrate small datasets from MySQL to TiDB in the full migration mode and incremental replication mode. "Small datasets" in this document mean data size less than 1 TiB.
 
 The migration speed varies from 30 GB/h to 50 GB/h, depending on multiple factors such as the number of indexes in the table schema, hardware, and network environment. <!--The migration process using DM is shown in the figure below.-->
 
@@ -49,7 +49,7 @@ The parameters used in the command above are described as follows:
 
 |Parameter      |Description|
 |  :-        |    :-           |
-|`--master-addr`  |The {advertise-addr} of any DM-master node in the cluster where `dmctl` is to connect. For example, 172.16.10.71:8261.
+|`--master-addr`  |`{advertise-addr}` of any DM-master node in the cluster where `dmctl` is to connect. For example, 172.16.10.71:8261.
 |`operate-source create`|Load the data source to the DM cluster.|
 
 ## Step 2. Create the migration task
@@ -114,7 +114,7 @@ The parameters used in the command above are described as follows:
 
 |Parameter|Description|
 |     -    |     -     |
-|`--master-addr`| The {advertise-addr} of any DM-master node in the cluster where `dmctl` is to connect. For example: 172.16.10.71:8261. |
+|`--master-addr`| `{advertise-addr}` of any DM-master node in the cluster where `dmctl` is to connect. For example: 172.16.10.71:8261. |
 |`start-task`| Start the migration task |
 
 If the task fails to start, after changing the configuration according to the returned result, you can run the `start-task task.yaml` command to restart the task. If you encounter problems, refer to [Handle Errors](/dm/dm-error-handling.md) and [FAQ](/dm/dm-faq.md).

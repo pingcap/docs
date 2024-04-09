@@ -1,5 +1,6 @@
 ---
 title: tiup cluster reload
+summary: The `tiup cluster reload` command is used to apply modified cluster configurations and restart services. It can be forced with `--force`, set a transfer timeout with `--transfer-timeout`, ignore config checks with `--ignore-config-check`, specify nodes with `-N, --node`, roles with `-R, --role`, and skip restart with `--skip-restart`. The output is the execution log of the tiup-cluster.
 ---
 
 # tiup cluster reload
@@ -26,7 +27,7 @@ tiup cluster reload <cluster-name> [flags]
 
 - When restarting PD or TiKV, the leader of the restarted node is migrated to other nodes first, and the migration process takes some time. You can set the maximum wait time (in seconds) by setting `-transfer-timeout`. After the timeout, the service can be restarted directly without waiting.
 - Data type: `UINT`
-- Default: 300
+- Default: 600
 
 > **Note:**
 >

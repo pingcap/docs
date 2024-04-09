@@ -22,13 +22,6 @@ pprof-port = 8289
 ...
 ```
 
-and in `tikv-importer.toml`:
-
-```toml
-# Listening address of the status server.
-status-server-address = '0.0.0.0:8286'
-```
-
 You need to configure Prometheus to make it discover the servers. For instance, you can directly add the server address to the `scrape_configs` section:
 
 ```yaml
@@ -37,16 +30,11 @@ scrape_configs:
   - job_name: 'tidb-lightning'
     static_configs:
       - targets: ['192.168.20.10:8289']
-  - job_name: 'tikv-importer'
-    static_configs:
-      - targets: ['192.168.20.9:8286']
 ```
 
 ## Grafana dashboard
 
 [Grafana](https://grafana.com/) is a web interface to visualize Prometheus metrics as dashboards.
-
-When you [deploy a TiDB cluster using TiUP](/production-deployment-using-tiup.md) and have added Grafana and Prometheus in the topology configuration, a set of [Grafana + Prometheus monitoring platform](/tidb-monitoring-framework.md) is deployed simultaneously. In this situation, you must first import [the JSON file of the dashboard](https://raw.githubusercontent.com/pingcap/tidb-ansible/master/scripts/lightning.json).
 
 ### Row 1: Speed
 
@@ -136,88 +124,7 @@ If any of the duration is too high, it indicates that the disk used by TiDB Ligh
 
 ## Monitoring metrics
 
-This section explains the monitoring metrics of `tikv-importer` and `tidb-lightning`, if you need to monitor other metrics not covered by the default Grafana dashboard.
-
-### `tikv-importer`
-
-Metrics provided by `tikv-importer` are listed under the namespace `tikv_import_*`.
-
-- **`tikv_import_rpc_duration`** (Histogram)
-
-    Bucketed histogram for the duration of an RPC action. Labels:
-
-    - **request**: what kind of RPC is executed
-        * `switch_mode` — switched a TiKV node to import/normal mode
-        * `open_engine` — opened an engine file
-        * `write_engine` — received data and written into an engine
-        * `close_engine` — closed an engine file
-        * `import_engine` — imported an engine file into the TiKV cluster
-        * `cleanup_engine` — deleted an engine file
-        * `compact_cluster` — explicitly compacted the TiKV cluster
-        * `upload` — uploaded an SST file
-        * `ingest` — ingested an SST file
-        * `compact` — explicitly compacted a TiKV node
-    - **result**: the execution result of the RPC
-        * `ok`
-        * `error`
-
-- **`tikv_import_write_chunk_bytes`** (Histogram)
-
-    Bucketed histogram for the uncompressed size of a block of KV pairs received from TiDB Lightning.
-
-- **`tikv_import_write_chunk_duration`** (Histogram)
-
-    Bucketed histogram for the time needed to receive a block of KV pairs from TiDB Lightning.
-
-- **`tikv_import_upload_chunk_bytes`** (Histogram)
-
-    Bucketed histogram for the compressed size of a chunk of SST file uploaded to TiKV.
-
-- **`tikv_import_upload_chunk_duration`** (Histogram)
-
-    Bucketed histogram for the time needed to upload a chunk of SST file to TiKV.
-
-- **`tikv_import_range_delivery_duration`** (Histogram)
-
-    Bucketed histogram for the time needed to deliver a range of KV pairs into a `dispatch-job`.
-
-- **`tikv_import_split_sst_duration`** (Histogram)
-
-    Bucketed histogram for the time needed to split off a range from the engine file into a single SST file.
-
-- **`tikv_import_sst_delivery_duration`** (Histogram)
-
-    Bucketed histogram for the time needed to deliver an SST file from a `dispatch-job` to an `ImportSSTJob`.
-
-- **`tikv_import_sst_recv_duration`** (Histogram)
-
-    Bucketed histogram for the time needed to receive an SST file from a `dispatch-job` in an `ImportSSTJob`.
-
-- **`tikv_import_sst_upload_duration`** (Histogram)
-
-    Bucketed histogram for the time needed to upload an SST file from an `ImportSSTJob` to a TiKV node.
-
-- **`tikv_import_sst_chunk_bytes`** (Histogram)
-
-    Bucketed histogram for the compressed size of the SST file uploaded to a TiKV node.
-
-- **`tikv_import_sst_ingest_duration`** (Histogram)
-
-    Bucketed histogram for the time needed to ingest an SST file into TiKV.
-
-- **`tikv_import_each_phase`** (Gauge)
-
-    Indicates the running phase. Possible values are 1, meaning running inside the phase, and 0, meaning outside the phase. Labels:
-
-    - **phase**: `prepare`/`import`
-
-- **`tikv_import_wait_store_available_count`** (Counter)
-
-    Counts the number of times a TiKV node is found to have insufficient space when uploading SST files. Labels:
-
-    - **store_id**: The TiKV store ID.
-
-### `tidb-lightning`
+This section explains the monitoring metrics of `tidb-lightning`.
 
 Metrics provided by `tidb-lightning` are listed under the namespace `lightning_*`.
 
@@ -234,11 +141,11 @@ Metrics provided by `tidb-lightning` are listed under the namespace `lightning_*
     Counts idle workers. Labels:
 
     - **name**:
-        * `table` — the remainder of `table-concurrency`, normally 0 until the end of the process
-        * `index` — the remainder of `index-concurrency`, normally 0 until the end of the process
-        * `region` — the remainder of `region-concurrency`, normally 0 until the end of the process
-        * `io` — the remainder of `io-concurrency`, normally close to configured value (default 5), and close to 0 means the disk is too slow
-        * `closed-engine` — number of engines which have been closed but not yet cleaned up, normally close to index + table-concurrency (default 8).  A value close to 0 means TiDB Lightning is faster than TiKV Importer, which might cause TiDB Lightning to stall
+        * `table`: the remainder of `table-concurrency`, normally 0 until the end of the process
+        * `index`: the remainder of `index-concurrency`, normally 0 until the end of the process
+        * `region`: the remainder of `region-concurrency`, normally 0 until the end of the process
+        * `io`: the remainder of `io-concurrency`, normally close to configured value (default 5), and close to 0 means the disk is too slow
+        * `closed-engine`: number of engines which have been closed but not yet cleaned up, normally close to index + table-concurrency (default 8). A value close to 0 means TiDB Lightning is faster than TiKV Importer, which might cause TiDB Lightning to stall
 
 - **`lightning_kv_encoder`** (Counter)
 
@@ -253,42 +160,42 @@ Metrics provided by `tidb-lightning` are listed under the namespace `lightning_*
     Counts processed tables and their statuses. Labels:
 
     - **state**: the status of the table, indicating which phase should be completed
-        * `pending` — not yet processed
-        * `written` — all data encoded and sent
-        * `closed` — all corresponding engine files closed
-        * `imported` — all engine files have been imported into the target cluster
-        * `altered_auto_inc` — AUTO_INCREMENT ID altered
-        * `checksum` — checksum performed
-        * `analyzed` — statistics analysis performed
-        * `completed` — the table has been fully imported and verified
+        * `pending`: not yet processed
+        * `written`: all data encoded and sent
+        * `closed`: all corresponding engine files closed
+        * `imported`: all engine files have been imported into the target cluster
+        * `altered_auto_inc`: AUTO_INCREMENT ID altered
+        * `checksum`: checksum performed
+        * `analyzed`: statistics analysis performed
+        * `completed`: the table has been fully imported and verified
     - **result**: the result of the current phase
-        * `success` — the phase completed successfully
-        * `failure` — the phase failed (did not complete)
+        * `success`: the phase completed successfully
+        * `failure`: the phase failed (did not complete)
 
 * **`lightning_engines`** (Counter)
 
     Counts number of engine files processed and their status. Labels:
 
     - **state**: the status of the engine, indicating which phase should be completed
-        * `pending` — not yet processed
-        * `written` — all data encoded and sent
-        * `closed` — engine file closed
-        * `imported` — the engine file has been imported into the target cluster
-        * `completed` — the engine has been fully imported
+        * `pending`: not yet processed
+        * `written`: all data encoded and sent
+        * `closed`: engine file closed
+        * `imported`: the engine file has been imported into the target cluster
+        * `completed`: the engine has been fully imported
     - **result**: the result of the current phase
-        * `success` — the phase completed successfully
-        * `failure` — the phase failed (did not complete)
+        * `success`: the phase completed successfully
+        * `failure`: the phase failed (did not complete)
 
 - **`lightning_chunks`** (Counter)
 
     Counts number of chunks processed and their status. Labels:
 
     - **state**: a chunk's status, indicating which phase the chunk is in
-        * `estimated` — (not a state) this value gives total number of chunks in current task
-        * `pending` — loaded but not yet processed
-        * `running` — data are being encoded and sent
-        * `finished` — the entire chunk has been processed
-        * `failed` — errors happened during processing
+        * `estimated`: (not a state) this value gives total number of chunks in current task
+        * `pending`: loaded but not yet processed
+        * `running`: data are being encoded and sent
+        * `finished`: the entire chunk has been processed
+        * `failed`: errors happened during processing
 
 - **`lightning_import_seconds`** (Histogram)
 

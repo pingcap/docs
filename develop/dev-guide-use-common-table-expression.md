@@ -23,8 +23,6 @@ Common Table Expressions can be classified into two types: non-recursive CTE and
 
 Non-recursive CTE can be defined using the following syntax:
 
-{{< copyable "sql" >}}
-
 ```sql
 WITH <query_name> AS (
     <query_definition>
@@ -34,12 +32,10 @@ SELECT ... FROM <query_name>;
 
 For example, if you want to know how many books each of the 50 oldest authors have written, take the following steps:
 
-<SimpleTab>
-<div label="SQL">
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
 
 Change the statement in [temporary tables](/develop/dev-guide-use-temporary-tables.md) to the following:
-
-{{< copyable "sql" >}}
 
 ```sql
 WITH top_50_eldest_authors_cte AS (
@@ -74,9 +70,7 @@ The result is as follows:
 ```
 
 </div>
-<div label="Java">
-
-{{< copyable "java" >}}
+<div label="Java" value = "java">
 
 ```java
 public List<Author> getTop50EldestAuthorInfoByCTE() throws SQLException {
@@ -116,8 +110,6 @@ public List<Author> getTop50EldestAuthorInfoByCTE() throws SQLException {
 </SimpleTab>
 
 It can be found that the author "Ray Macejkovic" wrote 4 books. With the CTE query, you can further get the order and rating information of these 4 books as follows:
-
-{{< copyable "sql" >}}
 
 ```sql
 WITH books_authored_by_rm AS (
@@ -172,6 +164,10 @@ First, check out the books written by the author (ID is `2299112019`) in the CTE
 
 Note that the query in `books_authored_by_rm` executes only once, and then TiDB creates a temporary space to cache its result. When the queries in `books_with_average_ratings` and `books_with_orders` refer to `books_authored_by_rm`, TiDB gets its result directly from this temporary space.
 
+> **Tip:**
+>
+> If the efficiency of the default CTE queries is not good, you can use the [`MERGE()`](/optimizer-hints.md#merge) hint to expand the CTE subquery to the outer query to improve the efficiency.
+
 ### Recursive CTE
 
 Recursive CTE can be defined using the following syntax:
@@ -184,8 +180,6 @@ SELECT ... FROM <query_name>;
 ```
 
 A classic example is to generate a set of [Fibonacci numbers](https://en.wikipedia.org/wiki/Fibonacci_number) with recursive CTE:
-
-{{< copyable "sql" >}}
 
 ```sql
 WITH RECURSIVE fibonacci (n, fib_n, next_fib_n) AS

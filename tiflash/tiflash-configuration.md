@@ -10,11 +10,11 @@ This document introduces the configuration parameters related to the deployment 
 
 ## PD scheduling parameters
 
-You can adjust the PD scheduling parameters using [pd-ctl](/pd-control.md). Note that you can use `tiup ctl pd` to replace `pd-ctl -u <pd_ip:pd_port>` when using tiup to deploy and manage your cluster.
+You can adjust the PD scheduling parameters using [pd-ctl](/pd-control.md). Note that you can use `tiup ctl:v<CLUSTER_VERSION> pd` to replace `pd-ctl -u <pd_ip:pd_port>` when using tiup to deploy and manage your cluster.
 
 - [`replica-schedule-limit`](/pd-configuration-file.md#replica-schedule-limit): determines the rate at which the replica-related operator is generated. The parameter affects operations such as making nodes offline and add replicas.
 
-  > **Notes:**
+  > **Note:**
   >
   > The value of this parameter should be less than that of `region-schedule-limit`. Otherwise, the normal Region scheduling among TiKV nodes is affected.
 
@@ -34,19 +34,22 @@ You can adjust the PD scheduling parameters using [pd-ctl](/pd-control.md). Note
 
 This section introduces the configuration parameters of TiFlash.
 
+> **Tip:**
+>
+> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration).
+
 ### Configure the `tiflash.toml` file
 
 ```toml
 ## The listening host for supporting services such as TPC/HTTP. It is recommended to configure it as "0.0.0.0", which means to listen on all IP addresses of this machine.
 listen_host = "0.0.0.0"
-## The TiFlash TCP service port.
-tcp_port = 9000
-## The TiFlash HTTP service port.
-http_port = 8123
+## The TiFlash TCP service port. This port is used for internal testing and is set to 9000 by default. Before TiFlash v7.1.0, this port is enabled by default with a security risk. To enhance security, it is recommended to apply access control on this port to only allow access from whitelisted IP addresses. Starting from TiFlash v7.1.0, you can avoid the security risk by commenting out the configuration of this port. When the TiFlash configuration file does not specify this port, it will be disabled. 
+## It is **NOT** recommended to configure this port in any TiFlash deployment. (Note: Starting from TiFlash v7.1.0, TiFlash deployed by TiUP >= v1.12.5 or TiDB Operator >= v1.5.0 disables the port by default and is more secure.)
+# tcp_port = 9000
 ## The cache size limit of the metadata of a data block. Generally, you do not need to change this value.
-mark_cache_size = 5368709120
+mark_cache_size = 1073741824
 ## The cache size limit of the min-max index of a data block. Generally, you do not need to change this value.
-minmax_index_cache_size = 5368709120
+minmax_index_cache_size = 1073741824
 ## The cache size limit of the DeltaIndex. The default value is 0, which means no limit.
 delta_index_cache_size = 0
 
@@ -69,15 +72,13 @@ delta_index_cache_size = 0
 
 ## Storage paths settings take effect starting from v4.0.9
 [storage]
-    ## This configuration item is deprecated since v5.2.0. You can use the [storage.io_rate_limit] settings below instead.
-
-    # bg_task_io_rate_limit = 0
 
     ## DTFile format
-    ## * format_version = 1, the old format, deprecated.
     ## * format_version = 2, the default format for versions < v6.0.0.
-    ## * format_version = 3, the default format for versions >= v6.0.0, which provides more data validation features.
-    # format_version = 3
+    ## * format_version = 3, the default format for v6.0.0 and v6.1.x, which provides more data validation features.
+    ## * format_version = 4, the default format for versions from v6.2.0 to v7.3.0, which reduces write amplification and background task resource consumption
+    ## * format_version = 5, the default format for v7.4.0 and later versions (introduced in v7.3.0), which reduces the number of physical files by merging smaller files. 
+    # format_version = 5
 
     [storage.main]
     ## The list of directories to store the main data. More than 90% of the total data is stored in
@@ -110,7 +111,7 @@ delta_index_cache_size = 0
     ## The total I/O bandwidth for disk reads and writes. The unit is bytes and the default value is 0, which means the I/O traffic is not limited by default.
     # max_bytes_per_sec = 0
     ## max_read_bytes_per_sec and max_write_bytes_per_sec have similar meanings to max_bytes_per_sec. max_read_bytes_per_sec means the total I/O bandwidth for disk reads, and max_write_bytes_per_sec means the total I/O bandwidth for disk writes.
-    ## These configuration items limit I/O bandwidth for disk reads and writes separately. You can use them for cloud storage that calculates the limit of I/O bandwidth for disk reads and writes separately, such as the Persistent Disk provided by Google Cloud Platform.
+    ## These configuration items limit I/O bandwidth for disk reads and writes separately. You can use them for cloud storage that calculates the limit of I/O bandwidth for disk reads and writes separately, such as the Persistent Disk provided by Google Cloud.
     ## When the value of max_bytes_per_sec is not 0, max_bytes_per_sec is prioritized.
     # max_read_bytes_per_sec = 0
     # max_write_bytes_per_sec = 0
@@ -128,34 +129,57 @@ delta_index_cache_size = 0
     ## auto_tune_sec indicates the interval of automatic tuning. The unit is seconds. If the value of auto_tune_sec is 0, the automatic tuning is disabled.
     # auto_tune_sec = 5
 
-[flash]
-    tidb_status_addr = TiDB status port and address. # Multiple addresses are separated with commas.
-    service_addr = The listening address of TiFlash Raft services and coprocessor services.
+    ## The following configuration items only take effect for the TiFlash disaggregated storage and compute architecture mode. For details, see documentation at https://docs.pingcap.com/tidb/dev/tiflash-disaggregated-and-s3.
+    # [storage.s3]
+    # endpoint: http://s3.{region}.amazonaws.com # S3 endpoint address
+    # bucket: mybucket                           # TiFlash stores all data in this bucket
+    # root: /cluster1_data                       # Root directory where data is stored in the S3 bucket
+    # access_key_id: {ACCESS_KEY_ID}             # Access S3 with ACCESS_KEY_ID
+    # secret_access_key: {SECRET_ACCESS_KEY}     # Access S3 with SECRET_ACCESS_KEY
+    # [storage.remote.cache]
+    # dir: /data1/tiflash/cache        # Local data cache directory of the Compute Node
+    # capacity: 858993459200           # 800 GiB
 
-## Multiple TiFlash nodes elect a master to add or delete placement rules to PD,
-## and the configurations in flash.flash_cluster control this process.
-[flash.flash_cluster]
-    refresh_interval = Master regularly refreshes the valid period.
-    update_rule_interval = Master regularly gets the status of TiFlash replicas and interacts with PD.
-    master_ttl = The valid period of the elected master.
-    cluster_manager_path = The absolute path of the pd buddy directory.
-    log = The pd buddy log path.
+[flash]
+    ## The listening address of TiFlash coprocessor services.
+    service_addr = "0.0.0.0:3930"
+
+    ## Introduced in v7.4.0. When the gap between the `applied_index` advanced by the current Raft state machine and the `applied_index` at the last disk spilling exceeds `compact_log_min_gap`, TiFlash executes the `CompactLog` command from TiKV and spills data to disk. Increasing this gap might reduce the disk spilling frequency of TiFlash, thus reducing read latency in random write scenarios, but it might also increase memory overhead. Decreasing this gap might increase the disk spilling frequency of TiFlash, thus alleviating memory pressure in TiFlash. However, at this stage, the disk spilling frequency of TiFlash will not be higher than that of TiKV, even if this gap is set to 0.
+    ## It is recommended to keep the default value.
+    # compact_log_min_gap = 200
+    ## Introduced in v5.0. When the number or the size of rows in the Regions cached by TiFlash exceeds either of the following thresholds, TiFlash executes the `CompactLog` command from TiKV and spills data to disk.
+    ## It is recommended to keep the default value.
+    # compact_log_min_rows = 40960 # 40k
+    # compact_log_min_bytes = 33554432 # 32MB
+
+    ## The following configuration item only takes effect for the TiFlash disaggregated storage and compute architecture mode. For details, see documentation at https://docs.pingcap.com/tidb/dev/tiflash-disaggregated-and-s3.
+    # disaggregated_mode = tiflash_write # The supported mode is `tiflash_write` or `tiflash_compute.
 
 [flash.proxy]
-    addr = The listening address of proxy. If it is left empty, 127.0.0.1:20170 is used by default.
-    advertise-addr = The external access address of addr. If it is left empty, "addr" is used by default.
-    data-dir = The data storage path of proxy.
-    config = The configuration file path of proxy.
-    log-file = The log path of proxy.
-    log-level = The log level of proxy. "info" is used by default.
-    status-addr = The listening address from which the proxy pulls metrics | status information. If it is left empty, 127.0.0.1:20292 is used by default.
-    advertise-status-addr = The external access address of status-addr. If it is left empty, "status-addr" is used by default.
+    ## The listening address of proxy. If it is left empty, 127.0.0.1:20170 is used by default.
+    addr = "127.0.0.1:20170"
+    ## The external access address of addr. If it is left empty, "addr" is used by default.
+    ## Should guarantee that other nodes can access through `advertise-addr` when you deploy the cluster on multiple nodes.
+    advertise-addr = ""
+    ## The listening address from which the proxy pulls metrics or status information. If it is left empty, 127.0.0.1:20292 is used by default.
+    status-addr = "127.0.0.1:20292"
+    ## The external access address of status-addr. If it is left empty, the value of "status-addr" is used by default.
+    ## Should guarantee that other nodes can access through `advertise-status-addr` when you deploy the cluster on multiple nodes.
+    advertise-status-addr = ""
+    ## The data storage path of proxy.
+    data-dir = "/tidb-data/tiflash-9000/flash"
+    ## The configuration file path of proxy.
+    config = "/tidb-deploy/tiflash-9000/conf/tiflash-learner.toml"
+    ## The log path of proxy.
+    log-file = "/tidb-deploy/tiflash-9000/log/tiflash_tikv.log"
+    ## The log level of proxy (available options: "trace", "debug", "info", "warn", "error"). The default value is "info"
+    # log-level = "info" 
 
 [logger]
-    ## log level (available options: trace, debug, information, warning, error). The default value is `debug`.
-    level = debug
-    log = TiFlash log path
-    errorlog = TiFlash error log path
+    ## log level (available options: "trace", "debug", "info", "warn", "error"). The default value is "info".
+    level = "info"
+    log = "/tidb-deploy/tiflash-9000/log/tiflash.log"
+    errorlog = "/tidb-deploy/tiflash-9000/log/tiflash_error.log"
     ## Size of a single log file. The default value is "100M".
     size = "100M"
     ## Maximum number of log files to save. The default value is 10.
@@ -176,16 +200,24 @@ delta_index_cache_size = 0
     ## of DeltaTree Storage Engine uses logical split.
     ## Using the logical split can reduce the write amplification.
     ## However, these are at the cost of disk space waste.
-    ## Modifying the default value is not recommended.
+    ## It is strongly recommended to keep the default value `false` and
+    ## not to change it to `true` in v6.2.0 and later versions. For details,
+    ## see known issue [#5576](https://github.com/pingcap/tiflash/issues/5576).
     # dt_enable_logical_split = false
 
-    ## The memory usage limit for the generated intermediate data when a single
-    ## coprocessor query is executed. The default value is 0, which means no limit.
+    ## The memory usage limit for the generated intermediate data in a single query.
+    ## When the value is an integer, the unit is byte. For example, 34359738368 means 32 GiB of memory limit, and 0 means no limit.
+    ## When the value is a floating-point number in the range of [0.0, 1.0), it means the ratio of the allowed memory usage to the total memory of the node. For example, 0.8 means 80% of the total memory, and 0.0 means no limit.
+    ## The default value is 0, which means no limit.
+    ## When a query attempts to consume memory that exceeds this limit, the query is terminated and an error is reported.
     max_memory_usage = 0
 
-    ## The memory usage limit for the generated intermediate data when all queries
-    ## are executed. The default value is 0 (in bytes), which means no limit.
-    max_memory_usage_for_all_queries = 0
+    ## The memory usage limit for the generated intermediate data in all queries.
+    ## When the value is an integer, the unit is byte. For example, 34359738368 means 32 GiB of memory limit, and 0 means no limit.
+    ## When the value is a floating-point number in the range of [0.0, 1.0), it means the ratio of the allowed memory usage to the total memory of the node. For example, 0.8 means 80% of the total memory, and 0.0 means no limit.
+    ## The default value is 0.8, which means 80% of the total memory.
+    ## When the queries attempt to consume memory that exceeds this limit, the queries are terminated and an error is reported.
+    max_memory_usage_for_all_queries = 0.8
 
     ## New in v5.0. This item specifies the maximum number of cop requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to 0 or not set, the default value is used, which is twice the number of physical cores.
     cop_pool_size = 0
@@ -196,10 +228,28 @@ delta_index_cache_size = 0
     manual_compact_pool_size = 1
     ## New in v5.4.0. This item enables or disables the elastic thread pool feature, which significantly improves CPU utilization in high concurrency scenarios of TiFlash. The default value is true.
     enable_elastic_threadpool = true
-    # Compression algorithm of the TiFlash storage engine. The value can be LZ4, zstd, or LZ4HC, and is case-insensitive. By default, LZ4 is used.
+    ## Compression algorithm of the TiFlash storage engine. The value can be LZ4, zstd, or LZ4HC, and is case-insensitive. By default, LZ4 is used.
     dt_compression_method = "LZ4"
-    # Compression level of the TiFlash storage engine. The default value is 1. It is recommended that you set this value to 1 if dt_compression_method is LZ4, -1 (smaller compression rate, but better read performance) or 1 if dt_compression_method is zstd, and 9 if dt_compression_method is LZ4HC.
+    ## Compression level of the TiFlash storage engine. The default value is 1.
+    ## It is recommended that you set this value to 1 if dt_compression_method is LZ4.
+    ## It is recommended that you set this value to -1 (smaller compression rate, but better read performance) or 1 if dt_compression_method is zstd.
+    ## It is recommended that you set this value to 9 if dt_compression_method is LZ4HC.
     dt_compression_level = 1
+
+    ## New in v6.2.0. This item specifies the minimum ratio of valid data in a PageStorage data file. When the ratio of valid data in a PageStorage data file is less than the value of this configuration, GC is triggered to compact data in the file. The default value is 0.5.
+    dt_page_gc_threshold = 0.5
+
+    ## New in v7.0.0. This item specifies the maximum memory available for the HashAggregation operator with group by key before a disk spill is triggered. When the memory usage exceeds the threshold, HashAggregation reduces memory usage by spilling to disk. This item defaults to 0, which means that the memory usage is unlimited and spill to disk is never used for HashAggregation.
+    max_bytes_before_external_group_by = 0
+
+    ## New in v7.0.0. This item specifies the maximum memory available for the sort or topN operator before a disk spill is triggered. When the memory usage exceeds the threshold, the sort or topN operator reduces memory usage by spilling to disk. This item defaults to 0, which means that the memory usage is unlimited and spill to disk is never used for sort or topN.
+    max_bytes_before_external_sort = 0
+
+    ## New in v7.0.0. This item specifies the maximum memory available for the HashJoin operator with EquiJoin before a disk spill is triggered. When the memory usage exceeds the threshold, HashJoin reduces memory usage by spilling to disk. This item defaults to 0, which means that the memory usage is unlimited and spill to disk is never used for HashJoin with EquiJoin.
+    max_bytes_before_external_join = 0
+
+    ## New in v7.4.0. This item controls whether to enable the TiFlash resource control feature. When it is set to true, TiFlash uses the pipeline execution model.
+    enable_resource_control = true
 
 ## Security settings take effect starting from v4.0.5.
 [security]
@@ -244,9 +294,27 @@ delta_index_cache_size = 0
     ## If the configuration value is set to true,
     ## all user data in the log will be replaced by ?. The default value is false.
     redact-info-log = false
+
+[security.encryption]
+    ## The encryption method for data files.
+    ## Value options: "aes128-ctr", "aes192-ctr", "aes256-ctr", "sm4-ctr" (supported since v6.4.0), and "plaintext".
+    ## Default value: `"plaintext"`, which means encryption is disabled by default. A value other than "plaintext" means that encryption is enabled, in which case the master key must be specified.
+    data-encryption-method = "aes128-ctr"
+    ## Specifies how often the data encryption key is rotated. Default value: `7d`.
+    data-key-rotation-period = "168h" # 7 days
+
+[security.encryption.master-key]
+    ## Specifies the master key if encryption is enabled. To learn how to configure a master key, see Configure encryption: https://docs.pingcap.com/tidb/dev/encryption-at-rest#configure-encryption .
+
+[security.encryption.previous-master-key]
+    ## Specifies the old master key when rotating the new master key. The configuration format is the same as that of `master-key`. To learn how to configure a master key, see  Configure encryption: https://docs.pingcap.com/tidb/dev/encryption-at-rest#configure-encryption .
 ```
 
 In addition to the items above, other parameters are the same as those of TiKV. Note that the `label` whose key is `engine` is reserved and cannot be configured manually.
+
+### Schedule replicas by topology labels
+
+See [Set available zones](/tiflash/create-tiflash-replicas.md#set-available-zones).
 
 ### Multi-disk deployment
 
@@ -272,5 +340,4 @@ If there are multiple disks with different I/O metrics on your TiFlash node, it 
 
 > **Warning:**
 >
-> - The `[storage]` configuration is supported in TiUP since v1.2.5. If your TiDB cluster version is v4.0.9 or later, make sure that your TiUP version is v1.2.5 or later. Otherwise, the data directories defined in `[storage]` will not be managed by TiUP.
-> - After using the [storage] configurations, downgrading your cluster to a version earlier than v4.0.9 might cause **data loss** on TiFlash..
+> The `[storage]` configuration is supported in TiUP since v1.2.5. If your TiDB cluster version is v4.0.9 or later, make sure that your TiUP version is v1.2.5 or later. Otherwise, the data directories defined in `[storage]` will not be managed by TiUP.

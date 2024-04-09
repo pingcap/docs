@@ -1,6 +1,7 @@
 ---
 title: TiDB 3.0.4 Release Notes
 aliases: ['/docs/dev/releases/release-3.0.4/','/docs/dev/releases/3.0.4/']
+summary: TiDB 3.0.4 was released on October 8, 2019, with new features including system table for troubleshooting SQL performance issues, improvements in split performance and reverse scan, and fixed issues related to slow query logs and data replication. The release also includes contributions from the community and updates to TiDB, TiKV, PD, and TiDB Ansible.
 ---
 
 # TiDB 3.0.4 Release Notes
@@ -75,7 +76,7 @@ TiDB Ansible version: 3.0.4
     - Add the `Backoff` field in the slow query logs to record the Backoff information in the commit phase of 2PC [#12335](https://github.com/pingcap/tidb/pull/12335)
     - Fix the issue that the slow query logs are incorrect when getting the result of `PREPARE` + `EXECUTE` by using the cursor (for example, `PREPARE stmt1FROM SELECT * FROM t WHERE a > ?; EXECUTE stmt1 USING @variable`) [#12392](https://github.com/pingcap/tidb/pull/12392)
     - Support `tidb_enable_stmt_summary`. When this feature is enabled, TiDB counts the SQL statements and the result can be queried by using the system table `performance_schema.events_statements_summary_by_digest` [#12308](https://github.com/pingcap/tidb/pull/12308)
-    - Adjust the level of some logs in tikv-client (for example, change the  log level of `batchRecvLoop fails` from `ERROR` to `INFO`) [#12383](https://github.com/pingcap/tidb/pull/12383)
+    - Adjust the level of some logs in tikv-client (for example, change the log level of `batchRecvLoop fails` from `ERROR` to `INFO`) [#12383](https://github.com/pingcap/tidb/pull/12383)
 - DDL
     - Add the `tidb_allow_remove_auto_inc` variable. Dropping the `AUTO INCREMENT` attribute of the column is disabled by default [#12145](https://github.com/pingcap/tidb/pull/12145)
     - Fix the issue that the uncommented TiDB-specific syntax `PRE_SPLIT_REGIONS` might cause errors in the downstream database during data replication [#12120](https://github.com/pingcap/tidb/pull/12120)

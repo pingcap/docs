@@ -16,7 +16,7 @@ For critical alerts, you need to pay close attention to abnormal monitoring metr
 
 - Alert rule:
 
-    (time() - ticdc_processor_checkpoint_ts / 1000) > 600
+    `(time() - ticdc_owner_checkpoint_ts / 1000) > 600`
 
 - Description:
 
@@ -24,21 +24,35 @@ For critical alerts, you need to pay close attention to abnormal monitoring metr
 
 - Solution:
 
-    See [TiCDC Handle Replication Interruption](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions).
+    See [TiCDC Handles Replication Interruption](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions).
 
-## `cdc_resolvedts_high_delay`
+### `cdc_resolvedts_high_delay`
 
 - Alert rule:
 
-    (time() - ticdc_processor_resolved_ts / 1000) > 300
+    `(time() - ticdc_owner_resolved_ts / 1000) > 300`
 
 - Description:
 
-     The Resolved TS of a replication task is delayed more than 10 minutes.
+     The Resolved TS of a replication task is delayed more than 5 minutes.
 
 - Solution:
 
-    See [TiCDC Handle Replication Interruption](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions).
+    See [TiCDC Handles Replication Interruption](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions).
+
+### `ticdc_changefeed_failed`
+
+- Alert rule:
+
+    `(max_over_time(ticdc_owner_status[1m]) == 2) > 0`
+
+- Description:
+
+    A replication task encounters an unrecoverable error and enters the failed state.
+
+- Solution:
+
+    This alert is similar to replication interruption. See [TiCDC Handles Replication Interruption](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions).
 
 ### `ticdc_processor_exit_with_error_count`
 
@@ -52,7 +66,7 @@ For critical alerts, you need to pay close attention to abnormal monitoring metr
 
 - Solution:
 
-    See [TiCDC Handle Replication Interruption](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions).
+    See [TiCDC Handles Replication Interruption](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions).
 
 ## Warning alerts
 
@@ -72,25 +86,11 @@ Warning alerts are a reminder for an issue or error.
 
     Collect TiCDC logs to locate the root cause.
 
-### `ticdc_mounter_unmarshal_and_mount_time_more_than_1s`
+### `cdc_sink_flush_duration_time_more_than_10s`
 
 - Alert rule:
 
-`histogram_quantile(0.9, rate(ticdc_mounter_unmarshal_and_mount_bucket[1m])) * 1000 > 1000`
-
-- Description:
-
-    It takes a replication task more than 1 second to unmarshal the data changes.
-
-- Solution:
-
-    Collect TiCDC logs to locate the root cause.
-
-### `cdc_sink_execute_duration_time_more_than_10s`
-
-- Alert rule:
-
-    `histogram_quantile(0.9, rate(ticdc_sink_txn_exec_duration_bucket[1m])) > 10`
+    `histogram_quantile(0.9, rate(ticdc_sink_txn_worker_flush_duration[1m])) > 10`
 
 - Description:
 
@@ -112,7 +112,7 @@ Warning alerts are a reminder for an issue or error.
 
 - Solution:
 
-    See [TiCDC Handle Replication Interruption](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions).
+    See [TiCDC Handles Replication Interruption](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions).
 
 ### `ticdc_puller_entry_sorter_sort_bucket`
 
@@ -146,7 +146,7 @@ Warning alerts are a reminder for an issue or error.
 
 - Alert rule:
 
-    `changes(tikv_cdc_min_resolved_ts[1m]) < 1 and ON (instance) tikv_cdc_region_resolve_status{status="resolved"} > 0`
+    `changes(tikv_cdc_min_resolved_ts[1m]) < 1 and ON (instance) tikv_cdc_region_resolve_status{status="resolved"} > 0 and ON (instance) tikv_cdc_captured_region_total > 0`
 
 - Description:
 

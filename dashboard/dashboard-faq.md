@@ -1,12 +1,12 @@
 ---
-title: TiDB Dashboard FAQ
-summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Dashboard.
+title: TiDB Dashboard FAQs
+summary: This document summarizes FAQs about TiDB Dashboard. It covers access-related, UI-related, and deployment issues, providing solutions for each problem. If further assistance is needed, support can be obtained from PingCAP or the community.
 aliases: ['/docs/dev/dashboard/dashboard-faq/']
 ---
 
-# TiDB Dashboard FAQ
+# TiDB Dashboard FAQs
 
-This document summarizes the frequently asked questions (FAQs) and answers about TiDB Dashboard. If a problem cannot be located or persists after you perform as instructed, contact PingCAP technical support for help.
+This document summarizes the frequently asked questions (FAQs) and answers about TiDB Dashboard. If a problem cannot be located or persists after you perform as instructed, [get support](/support.md) from PingCAP or the community.
 
 ## Access-related FAQ
 
@@ -120,7 +120,7 @@ Step 2. Add the ng_port configuration item on the control machine by using TiUP.
     tiup cluster reload ${cluster-name} --role prometheus
     ```
 
-Please Contact PingCAP Technical Support for help if the error message is still prompted after performing steps above.
+If the error message is still prompted after performing steps above, [get support](/support.md) from PingCAP or the community.
 
 </details>
 

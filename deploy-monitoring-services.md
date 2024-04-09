@@ -17,7 +17,7 @@ Assume that the TiDB cluster topology is as follows:
 | Name  | Host IP | Services |
 | :-- | :-- | :-------------- |
 | Node1 | 192.168.199.113| PD1, TiDB, node_export, Prometheus, Grafana |
-| Node2 | 192.168.199.114| PD2, node_export |
+| Node2 | 192.168.199.114| PD2, node_export  |
 | Node3 | 192.168.199.115| PD3, node_export |
 | Node4 | 192.168.199.116| TiKV1, node_export |
 | Node5 | 192.168.199.117| TiKV2, node_export |
@@ -30,8 +30,8 @@ Assume that the TiDB cluster topology is as follows:
 ```bash
 # Downloads the package.
 wget https://download.pingcap.org/prometheus-2.27.1.linux-amd64.tar.gz
-wget https://download.pingcap.org/node_exporter-0.17.0.linux-amd64.tar.gz
-wget https://download.pingcap.org/grafana-6.1.6.linux-amd64.tar.gz
+wget https://download.pingcap.org/node_exporter-v1.3.1-linux-amd64.tar.gz
+wget https://download.pingcap.org/grafana-7.5.11.linux-amd64.tar.gz
 ```
 
 {{< copyable "shell-regular" >}}
@@ -39,8 +39,8 @@ wget https://download.pingcap.org/grafana-6.1.6.linux-amd64.tar.gz
 ```bash
 # Extracts the package.
 tar -xzf prometheus-2.27.1.linux-amd64.tar.gz
-tar -xzf node_exporter-0.17.0.linux-amd64.tar.gz
-tar -xzf grafana-6.1.6.linux-amd64.tar.gz
+tar -xzf node_exporter-v1.3.1-linux-amd64.tar.gz
+tar -xzf grafana-7.5.11.linux-amd64.tar.gz
 ```
 
 ### Step 2: Start `node_exporter` on Node1, Node2, Node3, and Node4
@@ -48,7 +48,7 @@ tar -xzf grafana-6.1.6.linux-amd64.tar.gz
 {{< copyable "shell-regular" >}}
 
 ```bash
-cd node_exporter-0.17.0.linux-amd64
+cd node_exporter-v1.3.1-linux-amd64
 
 # Starts the node_exporter service.
 $ ./node_exporter --web.listen-address=":9100" \
@@ -135,7 +135,7 @@ Edit the Grafana configuration file:
 {{< copyable "shell-regular" >}}
 
 ```ini
-cd grafana-6.1.6 &&
+cd grafana-7.5.11 &&
 vi conf/grafana.ini
 
 ...
@@ -226,7 +226,7 @@ To import a Grafana dashboard for the PD server, the TiKV server, and the TiDB s
 
 2. In the sidebar menu, click **Dashboards** -> **Import** to open the **Import Dashboard** window.
 
-3. Click **Upload .json File** to upload a JSON file (Download TiDB Grafana configuration files from [pingcap/tidb](https://github.com/pingcap/tidb/tree/master/metrics/grafana), [tikv/tikv](https://github.com/tikv/tikv/tree/master/metrics/grafana), and [tikv/pd](https://github.com/tikv/pd/tree/master/metrics/grafana)).
+3. Click **Upload .json File** to upload a JSON file (Download TiDB Grafana configuration files from [pingcap/tidb](https://github.com/pingcap/tidb/tree/master/pkg/metrics/grafana), [tikv/tikv](https://github.com/tikv/tikv/tree/master/metrics/grafana), and [tikv/pd](https://github.com/tikv/pd/tree/master/metrics/grafana)).
 
     > **Note:**
     >

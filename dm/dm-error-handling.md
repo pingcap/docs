@@ -1,10 +1,10 @@
 ---
-title: Handle Errors
+title: Handle Errors in TiDB Data Migration
 summary: Learn about the error system and how to handle common errors when you use DM.
 aliases: ['/docs/tidb-data-migration/dev/error-handling/','/docs/tidb-data-migration/dev/troubleshoot-dm/','/docs/tidb-data-migration/dev/error-system/']
 ---
 
-# Handle Errors
+# Handle Errors in TiDB Data Migration
 
 This document introduces the error system and how to handle common errors when you use DM.
 
@@ -70,7 +70,7 @@ In the error system, usually, the information of a specific error is as follows:
 
     Whether DM outputs the error stack information depends on the error severity and the necessity. The error stack records the complete stack call information when the error occurs. If you cannot figure out the error cause based on the basic information and the error message, you can trace the execution path of the code when the error occurs using the error stack.
 
-For the complete list of error codes, refer to the [error code lists](https://github.com/pingcap/dm/blob/master/_utils/terror_gen/errors_release.txt).
+For the complete list of error codes, refer to the [error code lists](https://github.com/pingcap/tiflow/blob/master/dm/_utils/terror_gen/errors_release.txt).
 
 ## Troubleshooting
 
@@ -80,7 +80,7 @@ If you encounter an error while running DM, take the following steps to troubles
 
 2. Check the log files related to the error. The log files are on the DM-master and DM-worker nodes. To get key information about the error, refer to the [error system](#error-system). Then check the [Handle Common Errors](#handle-common-errors) section to find the solution.
 
-3. If the error is not covered in this document, and you cannot solve the problem by checking the log or monitoring metrics, you can contact the R&D.
+3. If the error is not covered in this document, and you cannot solve the problem by checking the log or monitoring metrics, [get support](/support.md) from PingCAP or the community.
 
 4. After the error is resolved, restart the task using dmctl.
 
@@ -97,8 +97,8 @@ However, you need to reset the data migration task in some cases. For details, r
 | <div style="width: 100px;">Error Code</div>       | Error Description                                                     |  How to Handle                                                    |
 | :----------- | :------------------------------------------------------------ | :----------------------------------------------------------- |
 | `code=10001` |  Abnormal database operation.                                              |  Further analyze the error message and error stack.                                |
-| `code=10002` | The `bad connection` error from the underlying database. It usually indicates that the connection between DM and the downstream TiDB instance is abnormal (possibly caused by network failure, TiDB restart and so on) and the currently requested data is not sent to TiDB. |  DM provides automatic recovery for such error. If the recovery is not successful for a long time, check the network or TiDB status. |
-| `code=10003` | The `invalid connection` error from the underlying database. It usually indicates that the connection between DM and the downstream TiDB instance is abnormal (possibly caused by network failure, TiDB restart and so on) and the currently requested data is partly sent to TiDB.  | DM provides automatic recovery for such error. If the recovery is not successful for a long time, further check the error message and analyze the information based on the actual situation. |
+| `code=10002` | The `bad connection` error from the underlying database. It usually indicates that the connection between DM and the downstream TiDB instance is abnormal (possibly caused by network failure or TiDB restart) and the currently requested data is not sent to TiDB. |  DM provides automatic recovery for such error. If the recovery is not successful for a long time, check the network or TiDB status. |
+| `code=10003` | The `invalid connection` error from the underlying database. It usually indicates that the connection between DM and the downstream TiDB instance is abnormal (possibly caused by network failure or TiDB restart) and the currently requested data is partly sent to TiDB.  | DM provides automatic recovery for such error. If the recovery is not successful for a long time, further check the error message and analyze the information based on the actual situation. |
 | `code=10005` |  Occurs when performing the `QUERY` type SQL statements.                                         |                                                              |
 | `code=10006` |  Occurs when performing the `EXECUTE` type SQL statements, including DDL statements and DML statements of the `INSERT`, `UPDATE`or `DELETE` type. For more detailed error information, check the error message which usually includes the error code and error information returned for database operations.
 |                                                              |
@@ -112,7 +112,7 @@ However, you need to reset the data migration task in some cases. For details, r
 
 #### Reason
 
-The `invalid connection` error indicates that anomalies have occurred in the connection between DM and the downstream TiDB database (such as network failure, TiDB restart, TiKV busy and so on) and that a part of the data for the current request has been sent to TiDB.
+The `invalid connection` error indicates that anomalies have occurred in the connection between DM and the downstream TiDB database (such as network failure, TiDB restart, and TiKV busy) and that a part of the data for the current request has been sent to TiDB.
 
 #### Solutions
 
@@ -125,7 +125,7 @@ Because DM has the feature of concurrently migrating data to the downstream in m
 
 #### Reason
 
-The `driver: bad connection` error indicates that anomalies have occurred in the connection between DM and the upstream TiDB database (such as network failure, TiDB restart and so on) and that the data of the current request has not yet been sent to TiDB at that moment.
+The `driver: bad connection` error indicates that anomalies have occurred in the connection between DM and the upstream TiDB database (such as network failure and TiDB restart) and that the data of the current request has not yet been sent to TiDB at that moment.
 
 #### Solution
 

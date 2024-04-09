@@ -1,9 +1,9 @@
 ---
-title: Manage Data Source Configurations
+title: Manage Data Source Configurations in TiDB Data Migration
 summary: Learn how to manage upstream MySQL instances in TiDB Data Migration.
 ---
 
-# Manage Data Source Configurations
+# Manage Data Source Configurations in TiDB Data Migration
 
 This document introduces how to manage data source configurations, including encrypting the MySQL password, operating the data source, and changing the bindings between upstream MySQL instances and DM-workers using [dmctl](/dm/dmctl-introduction.md).
 
@@ -11,10 +11,14 @@ This document introduces how to manage data source configurations, including enc
 
 In DM configuration files, it is recommended to use the password encrypted with dmctl. For one original password, the encrypted password is different after each encryption.
 
+> **Note:**
+>
+> Starting from v8.0.0, you must configure [`secret-key-path`](/dm/dm-master-configuration-file.md) for DM-master before using the `dmctl encrypt` command.
+
 {{< copyable "shell-regular" >}}
 
 ```bash
-./dmctl -encrypt 'abc!@#123'
+./dmctl encrypt 'abc!@#123'
 ```
 
 ```
@@ -32,7 +36,7 @@ help operate-source
 ```
 
 ```
-`create`/`update`/`stop`/`show` upstream MySQL/MariaDB source.
+`create`/`stop`/`show` upstream MySQL/MariaDB source.
 
 Usage:
   dmctl operate-source <operate-type> [config-file ...] [--print-sample-config] [flags]
@@ -47,11 +51,9 @@ Global Flags:
 
 ### Flags description
 
-+ `create`: Creates one or more upstream database source(s). When creating multiple data sources fails, DM rolls back to the state where the command was not executed.
++ `create`: Creates one or more upstream database sources. When creating multiple data sources fails, DM rolls back to the state where the command was not executed.
 
-+ `update`: Updates an upstream database source.
-
-+ `stop`: Stops one or more upstream database source(s). When stopping multiple data sources fails, some data sources might be stopped.
++ `stop`: Stops one or more upstream database sources. When stopping multiple data sources fails, some data sources might be stopped.
 
 + `show`: Shows the added data source and the corresponding DM-worker.
 

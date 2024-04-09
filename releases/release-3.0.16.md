@@ -1,6 +1,7 @@
 ---
 title: TiDB 3.0.16 Release Notes
 aliases: ['/docs/dev/releases/release-3.0.16/']
+summary: TiDB 3.0.16 was released on July 03, 2020. The release includes improvements such as support for 'is null' filter condition, handling of SQL timeout issues, and removal of sensitive information in slow query logs. Bug fixes include resolving data inconsistency issues, fixing panic issues, and addressing errors in JSON comparison and query results. TiKV and PD also received bug fixes for issues related to store heartbeats, peer removal, and error handling.
 ---
 
 # TiDB 3.0.16 Release Notes
@@ -32,7 +33,7 @@ TiDB version: 3.0.16
 + TiDB
 
     - Fix the data inconsistency issue occurred because the lock of a written and deleted primary key in one transaction is resolved by another transaction [#18248](https://github.com/pingcap/tidb/pull/18248)
-    - Fix the `Got too many pings` gRPC error log in the PD server-side followers [17944](https://github.com/pingcap/tidb/pull/17944)
+    - Fix the `Got too many pings` gRPC error log in the PD server-side followers [#17944](https://github.com/pingcap/tidb/pull/17944)
     - Fix the panic issue that might occur when the child of HashJoin returns the `TypeNull` column [#17935](https://github.com/pingcap/tidb/pull/17935)
     - Fix the error message when access is denied [#17722](https://github.com/pingcap/tidb/pull/17722)
     - Fix JSON comparison issue for the `int` and `float` types [#17715](https://github.com/pingcap/tidb/pull/17715)
@@ -48,7 +49,7 @@ TiDB version: 3.0.16
 + TiKV
 
     - Fix the potential wrong result read from ingested files [#8039](https://github.com/tikv/tikv/pull/8039)
-    - Fix the issue that a peer can not be removed when its store is isolated during multiple merge processes [#8005](https://github.com/tikv/tikv/pull/8005)
+    - Fix the issue that a peer cannot be removed when its store is isolated during multiple merge processes [#8005](https://github.com/tikv/tikv/pull/8005)
 
 + PD
 

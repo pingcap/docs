@@ -6,15 +6,20 @@ aliases: ['/docs/dev/sql-statements/sql-statement-show-errors/','/docs/dev/refer
 
 # SHOW ERRORS
 
-This statement shows error(s) from previously executed statements. The error buffer is cleared as soon as a statement executes successfully.  In which case, `SHOW ERRORS` will return an empty set.
+This statement shows errors from previously executed statements. The error buffer is cleared as soon as a statement executes successfully. In which case, `SHOW ERRORS` will return an empty set.
 
 The behavior of which statements generate errors vs. warnings is highly influenced by the current `sql_mode`.
 
 ## Synopsis
 
-**ShowErrorsStmt:**
+```ebnf+diagram
+ShowErrorsStmt ::=
+    "SHOW" "ERRORS" ShowLikeOrWhere?
 
-![ShowErrorsStmt](/media/sqlgram/ShowErrorsStmt.png)
+ShowLikeOrWhere ::=
+    "LIKE" SimpleExpr
+|   "WHERE" Expression
+```
 
 ## Examples
 
@@ -48,7 +53,7 @@ Empty set (0.00 sec)
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+The `SHOW ERRORS` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
 ## See also
 

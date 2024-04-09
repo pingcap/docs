@@ -1,6 +1,6 @@
 ---
 title: Highly Concurrent Write Best Practices
-summary: Learn best practices for highly-concurrent write-intensive workloads in TiDB.
+summary: This document provides best practices for handling highly-concurrent write-heavy workloads in TiDB. It addresses challenges and solutions for data distribution, hotspot cases, and complex hotspot problems. The article also discusses parameter configuration for optimizing performance.
 aliases: ['/docs/dev/best-practices/high-concurrency-best-practices/','/docs/dev/reference/best-practices/high-concurrency/']
 ---
 
@@ -18,7 +18,7 @@ This document assumes that you have a basic understanding of TiDB. It is recomme
 
 ## Highly-concurrent write-intensive scenario
 
-The highly concurrent write scenario often occurs when you perform batch tasks in applications, such as clearing, settlement and so on. This scenario has the following features:
+The highly concurrent write scenario often occurs when you perform batch tasks in applications, such as clearing and settlement. This scenario has the following features:
 
 + A huge volume of data
 + The need to import historical data into database in a short time
