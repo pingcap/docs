@@ -11,7 +11,11 @@ This statement shows a list of variables for the scope of either `GLOBAL` or `SE
 
 ```ebnf+diagram
 ShowVariablesStmt ::=
-    "SHOW" ("GLOBAL" | "SESSION")? VARIABLES ( "LIKE" stringLit | "WHERE" ("Variable_name" | "Value") "=" stringLit)?
+    "SHOW" ("GLOBAL" | "SESSION")? VARIABLES ShowLikeOrWhere?
+    
+ShowLikeOrWhere ::=
+    "LIKE" SimpleExpr
+|   "WHERE" Expression
 ```
 
 ## Examples
