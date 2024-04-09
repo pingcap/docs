@@ -15,7 +15,7 @@ summary: An overview of the usage of SHOW PLUGINS for the TiDB database.
 
 ```ebnf+diagram
 ShowPluginsStmt ::=
-    "SHOW" "PLUGINS" ("LIKE" stringLit | "WHERE" column "=" stringLit)?
+    "SHOW" "PLUGINS" ShowLikeOrWhere?
 ```
 
 ## Examples
