@@ -1309,6 +1309,8 @@ If the argument is `NULL`, the function returns `NULL`.
 
 Examples:
 
+For this example you need to use the `--skip-binary-as-hex` option as otherwise it would display the result as hex-encoded instead of directly displaying it.
+
 The following example shows that the ASCII NULL character is escaped as `\0` and the single quote character `'` is escaped as `\'`:
 
 ```sql
