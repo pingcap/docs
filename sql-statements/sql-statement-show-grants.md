@@ -14,7 +14,7 @@ ShowGrantsStmt ::=
     "SHOW" "GRANTS" ("FOR" Username ("USING" RolenameList)?)?
 
 Username ::=
-    "CURRENT_USER" "()"?
+    "CURRENT_USER" ( "(" ")" )?
 | Username ("@" Hostname)?
 
 RolenameList ::=
