@@ -16,7 +16,7 @@ aliases: ['/docs/dev/sql-statements/sql-statement-show-plugins/']
 
 ```ebnf+diagram
 ShowPluginsStmt ::=
-    "SHOW" "PLUGINS" ("LIKE" stringLit | "WHERE" column "=" stringLit)?
+    "SHOW" "PLUGINS" ShowLikeOrWhere?
 ```
 
 ## Examples
