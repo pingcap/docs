@@ -1406,7 +1406,7 @@ SELECT REGEXP_INSTR('abcabc','a',1,1,1);
 1 row in set (0.00 sec)
 ```
 
-In the example below the 6th argument is used to add the `i` flag to get a case insensitive match. More details about regular expression `match_type` can be found in [`match_type` compatibility](#match_type-compatibility) section.
+The following example uses the 6th argument to add the `i` flag to get a case insensitive match. For more details about regular expression `match_type`, see [`match_type` compatibility](#match_type-compatibility).
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','A',1,1,0,'');
@@ -1434,7 +1434,7 @@ SELECT REGEXP_INSTR('abcabc','A',1,1,0,'i');
 1 row in set (0.00 sec)
 ```
 
-Besides `match_type` the [collation](/character-set-and-collation.md) also influences the matching. In the example below a case-sensitive and a case-insensitive collation is used to demonstrate this.
+Besides `match_type`, the [collation](/character-set-and-collation.md) also influences the matching. The following example uses a case-sensitive and a case-insensitive collation to demonstrate this.
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_general_ci);
@@ -1470,7 +1470,7 @@ The `REGEXP_LIKE(str, regex, [match_type])` function is used to test if a regula
 
 Examples:
 
-This example matches `^a` against `abc`, which matches.
+The following example shows that `^a` matches `abc`.
 
 ```sql
 SELECT REGEXP_LIKE('abc','^a');
@@ -1485,7 +1485,7 @@ SELECT REGEXP_LIKE('abc','^a');
 1 row in set (0.00 sec)
 ```
 
-This example matches `^A` against `abc`, which doesn't match.
+This following example shows that `^A` does not match `abc`.
 
 ```sql
 SELECT REGEXP_LIKE('abc','^A');
@@ -1500,7 +1500,7 @@ SELECT REGEXP_LIKE('abc','^A');
 1 row in set (0.00 sec)
 ```
 
-This example matches `^A` against `abc`, which now matches because of the `i` flag which enabled case insensitive matching. More details about regular expression `match_type`` can be found in [`match_type` compatibility](#match_type-compatibility) section.
+This example matches `^A` against `abc`, which now matches because of the `i` flag which enabled case insensitive matching. For more details about the regular expression `match_type`, see [`match_type` compatibility](#match_type-compatibility).
 
 ```sql
 SELECT REGEXP_LIKE('abc','^A','i');
@@ -1523,7 +1523,7 @@ The `REGEXP_REPLACE(str, regexp, replace, [start, [match, [match_type]]])` funct
 
 Examples:
 
-In this example two o's are replaced by "i".
+In the following example, two o's are replaced by `i`.
 
 ```sql
 SELECT REGEXP_REPLACE('TooDB', 'o{2}', 'i');
@@ -1538,7 +1538,7 @@ SELECT REGEXP_REPLACE('TooDB', 'o{2}', 'i');
 1 row in set (0.00 sec)
 ```
 
-In the example below we start the match at the third character, causing the regular expression to not match and not do any replacement.
+The following example starts the match at the third character, causing the regular expression not to match and not do any replacement.
 
 ```sql
 SELECT REGEXP_REPLACE('TooDB', 'o{2}', 'i',3);
@@ -1553,7 +1553,7 @@ SELECT REGEXP_REPLACE('TooDB', 'o{2}', 'i',3);
 1 row in set (0.00 sec)
 ```
 
-In the example below the 5th argument is used to set if the first or the second match is used for the replacement.
+In the following example, the 5th argument is used to set if the first or the second match is used for the replacement.
 
 ```sql
 SELECT REGEXP_REPLACE('TooDB', 'o', 'i',1,1);
@@ -1581,7 +1581,7 @@ SELECT REGEXP_REPLACE('TooDB', 'o', 'i',1,2);
 1 row in set (0.00 sec)
 ```
 
-In the example below we use the 6th argument to set the `match_type` for case insensitive matching. More details about regular expression `match_type` can be found in [`match_type` compatibility](#match_type-compatibility) section.
+The following example uses the 6th argument to set the `match_type` for case insensitive matching. For more details about the regular expression `match_type`, see [`match_type` compatibility](#match_type-compatibility).
 
 ```sql
 SELECT REGEXP_REPLACE('TooDB', 'O{2}','i',1,1);
@@ -1615,9 +1615,7 @@ Return the substring that matches the regular expression (Partly compatible with
 
 The `REGEXP_SUBSTR(str, regexp, [start, [match, [match_type]]])` function is used to get a substring based on a regular expression.
 
-Examples
-
-In this example we use the `Ti.{2}` regular expression to get the `TiDB` substring of the `This is TiDB` string.
+The following example uses the `Ti.{2}` regular expression to get the `TiDB` substring of the `This is TiDB` string.
 
 ```sql
 SELECT REGEXP_SUBSTR('This is TiDB','Ti.{2}');
