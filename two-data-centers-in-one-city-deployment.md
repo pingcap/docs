@@ -242,9 +242,9 @@ Descriptions of configuration items:
 + `replication-mode` is the replication mode to be enabled. In the preceding example, it is set to `dr-auto-sync`. By default, the majority protocol is used.
 + `label-key` is used to distinguish different AZs and needs to match Placement Rules. In this example, the primary AZ is "east" and the disaster recovery AZ is "west".
 + `primary-replicas` is the number of Voter replicas in the primary AZ.
-+ `dr-replicas` is the number of Voter replicas in the disaster recovery AZ.
++ `dr-replicas` is the number of Voter replicas in the disaster recovery (DR) AZ.
 + `wait-store-timeout` is the waiting time for switching to asynchronous replication mode when network isolation or failure occurs. If the time of network failure exceeds the waiting time, asynchronous replication mode is enabled. The default waiting time is 60 seconds.
-+ `pause-region-split` controls whether to pause Region split operations in the `async_wait` and `async` statuses. Pausing Region split can prevent temporary partial data loss in the disaster recovery (DR) AZ when synchronizing data in the `sync-recover` status. The default value is `false`.
++ `pause-region-split` controls whether to pause Region split operations in the `async_wait` and `async` statuses. Pausing Region split can prevent temporary partial data loss in the DR AZ when synchronizing data in the `sync-recover` status. The default value is `false`.
 
 To check the current replication status of the cluster, use the following API:
 
