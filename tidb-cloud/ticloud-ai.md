@@ -1,46 +1,38 @@
 ---
-title: ticloud serverless branch delete
-summary: The reference of `ticloud serverless branch delete`.
+title: ticloud ai
+summary: The reference of `ticloud ai`.
 ---
 
-# ticloud serverless branch delete
+# ticloud ai
 
-Delete a branch from your serverless cluster:
-
-```shell
-ticloud serverless branch delete [flags]
-```
-
-Or use the following alias command:
+Chat with TiDB Bot
 
 ```shell
-ticloud serverless branch rm [flags]
+ticloud ai [flags]
 ```
 
 ## Examples
 
-Delete a serverless branch in interactive mode:
+Chat with TiDB Bot in interactive mode:
 
 ```shell
-ticloud serverless branch delete
+ticloud serverless delete
 ```
 
-Delete a serverless branch in non-interactive mode:
+Chat with TiDB Bot in non-interactive mode:
 
 ```shell
-ticloud branch delete --branch-id <branch-id> --cluster-id <cluster-id>
+ticloud ai -q "How to create a cluster?"
 ```
 
 ## Flags
 
 In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
-| Flag                    | Description                                | Required | Note                                                 |
-|-------------------------|--------------------------------------------|----------|------------------------------------------------------|
-| -b, --branch-id string  | The ID of the branch to be deleted         | Yes      | Only works in non-interactive mode.                  |
-| --force                 | Deletes a branch without confirmation      | No       | Works in both non-interactive and interactive modes. |
-| -h, --help              | Help information for this command          | No       | Works in both non-interactive and interactive modes. |
-| -c, --cluster-id string | The cluster ID of the branch to be deleted | Yes      | Only works in non-interactive mode.                  |
+| Flag               | Description                       | Required | Note                                                 |
+|--------------------|-----------------------------------|----------|------------------------------------------------------|
+| -q, --query string | The query to chat with TiDB Bot   | Yes      | Only works in non-interactive mode.                  |
+| -h, --help         | Help information for this command | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
 

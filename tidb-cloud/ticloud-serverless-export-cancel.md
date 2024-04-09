@@ -1,46 +1,40 @@
 ---
-title: ticloud serverless import describe
-summary: The reference of `ticloud serverless import describe`.
+title: ticloud serverless export cancel
+summary: The reference of `ticloud serverless export cancel`.
 ---
 
-# ticloud serverless import describe
+# ticloud serverless export describe
 
-Get the import details of a data import task:
-
-```shell
-ticloud serverless import describe [flags]
-```
-
-Or use the following alias command:
+Cancel a serverless cluster export
 
 ```shell
-ticloud serverless import get [flags]
+ticloud serverless export cancel [flags]
 ```
 
 ## Examples
 
-Describe an import task in interactive mode:
+Cancel an export in interactive mode:
 
 ```shell
-ticloud serverless import describe
+ticloud serverless export cancel
 ```
 
-Describe an import task in non-interactive mode:
+Cancel an export in non-interactive mode:
 
 ```shell
-ticloud serverless import describe --project-id <project-id> --cluster-id <cluster-id> --import-id <import-id>
+ticloud serverless export cancel -c <cluster-id> -e <export-id>
 ```
 
 ## Flags
 
 In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
-| Flag                    | Description                       | Required | Note                                                 |
-|-------------------------|-----------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | Cluster ID                        | Yes      | Only works in non-interactive mode.                  |
-| -h, --help              | Help information for this command | No       | Works in both non-interactive and interactive modes. |
-| --import-id string      | The ID of the import task         | Yes      | Only works in non-interactive mode.                  |
-| -p, --project-id string | Project ID                        | Yes      | Only works in non-interactive mode.                  |
+| Flag                    | Description                                  | Required | Note                                                 |
+|-------------------------|----------------------------------------------|----------|------------------------------------------------------|
+| -c, --cluster-id string | The cluster ID of the export to be described | Yes      | Only works in non-interactive mode.                  |
+| -e, --export-id string  | The ID of the export to be described         | Yes      | Only works in non-interactive mode.                  |
+| --force                 | Cancel an export without confirmation        | No       | Works in both non-interactive and interactive modes. |
+| -h, --help              | Help information for this command            | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
 

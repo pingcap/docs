@@ -620,18 +620,43 @@
       - [Spill to Disk](/tiflash/tiflash-spill-disk.md)
   - CLI
     - [Overview](/tidb-cloud/cli-reference.md)
-    - cluster
+    - auth
+      - [login](/tidb-cloud/ticloud-auth-login.md)
+      - [logout](/tidb-cloud/ticloud-auth-logout.md)
+    - serverless
       - [create](/tidb-cloud/ticloud-cluster-create.md)
       - [delete](/tidb-cloud/ticloud-cluster-delete.md)
       - [describe](/tidb-cloud/ticloud-cluster-describe.md)
       - [list](/tidb-cloud/ticloud-cluster-list.md)
-      - [connect-info](/tidb-cloud/ticloud-cluster-connect-info.md)
-    - branch
-      - [create](/tidb-cloud/ticloud-branch-create.md)
-      - [delete](/tidb-cloud/ticloud-branch-delete.md)
-      - [describe](/tidb-cloud/ticloud-branch-describe.md)
-      - [list](/tidb-cloud/ticloud-branch-list.md)
-      - [connect-info](/tidb-cloud/ticloud-branch-connect-info.md)
+      - [update](/tidb-cloud/ticloud-serverless-update.md)
+      - [spending-limit](/tidb-cloud/ticloud-serverless-spending-limit.md)
+      - [regions](/tidb-cloud/ticloud-serverless-regions.md)
+      - [shell](/tidb-cloud/ticloud-serverless-shell.md)
+      - branch
+        - [create](/tidb-cloud/ticloud-branch-create.md)
+        - [delete](/tidb-cloud/ticloud-branch-delete.md)
+        - [describe](/tidb-cloud/ticloud-branch-describe.md)
+        - [list](/tidb-cloud/ticloud-branch-list.md)
+        - [shell](/tidb-cloud/ticloud-branch-shell.md)
+      - import
+        - [cancel](/tidb-cloud/ticloud-import-cancel.md)
+        - [describe](/tidb-cloud/ticloud-import-describe.md)
+        - [list](/tidb-cloud/ticloud-import-list.md)
+        - start
+          - [local](/tidb-cloud/ticloud-import-start-local.md)
+          - [s3](/tidb-cloud/ticloud-import-start-s3.md)
+          - [mysql](/tidb-cloud/ticloud-import-start-mysql.md)
+      - backup
+        - [describe](/tidb-cloud/ticloud-serverless-backup-describe.md)
+        - [list](/tidb-cloud/ticloud-serverless-backup-list.md)
+      - [restore](/tidb-cloud/ticloud-serverless-restore.md)
+      - export
+        - [create](/tidb-cloud/ticloud-serverless-export-create.md)
+        - [describe](/tidb-cloud/ticloud-serverless-export-describe.md)
+        - [list](/tidb-cloud/ticloud-serverless-export-list.md)
+        - [cancel](/tidb-cloud/ticloud-serverless-export-cancel.md)
+        - [download](/tidb-cloud/ticloud-serverless-export-download.md)
+    - [ai](/tidb-cloud/ticloud-ai.md)
     - config
       - [create](/tidb-cloud/ticloud-config-create.md)
       - [delete](/tidb-cloud/ticloud-config-delete.md)
@@ -640,15 +665,6 @@
       - [list](/tidb-cloud/ticloud-config-list.md)
       - [set](/tidb-cloud/ticloud-config-set.md)
       - [use](/tidb-cloud/ticloud-config-use.md)
-    - [connect](/tidb-cloud/ticloud-connect.md)
-    - import
-      - [cancel](/tidb-cloud/ticloud-import-cancel.md)
-      - [describe](/tidb-cloud/ticloud-import-describe.md)
-      - [list](/tidb-cloud/ticloud-import-list.md)
-      - start
-        - [local](/tidb-cloud/ticloud-import-start-local.md)
-        - [s3](/tidb-cloud/ticloud-import-start-s3.md)
-        - [mysql](/tidb-cloud/ticloud-import-start-mysql.md)
     - project
       - [list](/tidb-cloud/ticloud-project-list.md)
     - [update](/tidb-cloud/ticloud-update.md)
