@@ -1,46 +1,45 @@
 ---
-title: ticloud serverless import describe
-summary: The reference of `ticloud serverless import describe`.
+title: ticloud serverless export describe
+summary: The reference of `ticloud serverless export describe`.
 ---
 
-# ticloud serverless import describe
+# ticloud serverless export describe
 
-Get the import details of a data import task:
+Describe a serverless cluster export
 
 ```shell
-ticloud serverless import describe [flags]
+ticloud serverless export describe [flags]
 ```
 
 Or use the following alias command:
 
 ```shell
-ticloud serverless import get [flags]
+ticloud serverless export get [flags]
 ```
 
 ## Examples
 
-Describe an import task in interactive mode:
+Get an export in interactive mode:
 
 ```shell
-ticloud serverless import describe
+ticloud serverless export describe
 ```
 
-Describe an import task in non-interactive mode:
+Get an export in non-interactive mode:
 
 ```shell
-ticloud serverless import describe --project-id <project-id> --cluster-id <cluster-id> --import-id <import-id>
+ticloud serverless export describe -c <cluster-id> -e <export-id>
 ```
 
 ## Flags
 
 In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
-| Flag                    | Description                       | Required | Note                                                 |
-|-------------------------|-----------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | Cluster ID                        | Yes      | Only works in non-interactive mode.                  |
-| -h, --help              | Help information for this command | No       | Works in both non-interactive and interactive modes. |
-| --import-id string      | The ID of the import task         | Yes      | Only works in non-interactive mode.                  |
-| -p, --project-id string | Project ID                        | Yes      | Only works in non-interactive mode.                  |
+| Flag                    | Description                                  | Required | Note                                                 |
+|-------------------------|----------------------------------------------|----------|------------------------------------------------------|
+| -c, --cluster-id string | The cluster ID of the export to be described | Yes      | Only works in non-interactive mode.                  |
+| -e, --export-id string  | The ID of the export to be described         | Yes      | Only works in non-interactive mode.                  |
+| -h, --help              | Help information for this command            | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
 

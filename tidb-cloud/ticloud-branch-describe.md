@@ -1,34 +1,34 @@
 ---
-title: ticloud branch describe
-summary: The reference of `ticloud branch describe`.
+title: ticloud serverless branch describe
+summary: The reference of `ticloud serverless branch describe`.
 ---
 
-# ticloud branch describe
+# ticloud serverless branch describe
 
 Get information about a branch (such as the endpoints, [user name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix), and usages):
 
 ```shell
-ticloud branch describe [flags]
+ticloud serverless branch describe [flags]
 ```
 
 Or use the following alias command:
 
 ```shell
-ticloud branch get [flags]
+ticloud serverless branch get [flags]
 ```
 
 ## Examples
 
-Get the branch information in interactive mode:
+Get the serverless branch information in interactive mode:
 
 ```shell
-ticloud branch describe
+ticloud serverless branch describe
 ```
 
-Get the branch information in non-interactive mode:
+Get the serverless branch information in non-interactive mode:
 
 ```shell
-ticloud branch describe --branch-id <branch-id> --cluster-id <cluster-id>
+ticloud serverless branch describe --branch-id <branch-id> --cluster-id <cluster-id>
 ```
 
 ## Flags
@@ -43,10 +43,11 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 
 ## Inherited flags
 
-| Flag                 | Description                                                                                          | Required | Note                                                                                                               |
-|----------------------|------------------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components.   |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                               |
+| Flag                 | Description                                                                                          | Required | Note                                                                                                             |
+|----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
+| --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
+| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
+| -D, --debug          | Enable debug mode                                                                                    | No       | Works in both non-interactive and interactive modes.                                                             |
 
 ## Feedback
 
