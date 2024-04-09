@@ -21,25 +21,17 @@ SHOW TABLE [table_name] INDEX [index_name] REGIONS [WhereClauseOptional];
 
 ## Synopsis
 
-**ShowTableRegionStmt:**
+```ebnf+diagram
+ShowTableRegionStmt ::=
+    "SHOW" "TABLE" TableName PartitionNameList? ("INDEX" IndexName)? "REGIONS" ShowLikeOrWhere?
 
-![ShowTableRegionStmt](/media/sqlgram/ShowTableRegionStmt.png)
+TableName ::=
+    (SchemaName ".")? Identifier
 
-**TableName:**
-
-![TableName](/media/sqlgram/TableName.png)
-
-**PartitionNameListOpt:**
-
-![PartitionNameListOpt](/media/sqlgram/PartitionNameListOpt.png)
-
-**WhereClauseOptional:**
-
-![WhereClauseOptional](/media/sqlgram/WhereClauseOptional.png)
-
-**WhereClause:**
-
-![WhereClause](/media/sqlgram/WhereClause.png)
+ShowLikeOrWhere ::=
+    "LIKE" SimpleExpr
+|   "WHERE" Expression
+```
 
 Executing `SHOW TABLE REGIONS` returns the following columns:
 
@@ -151,7 +143,7 @@ The above output shows that Region 96 was split, with a new Region 98 being crea
 For a more detailed example:
 
 ```sql
-mysql> show table t regions;
+mysql> SHOW TABLE t REGIONS;
 +-----------+--------------+--------------+-----------+-----------------+---------------+------------+---------------+------------+----------------------+------------------+------------------------+------------------+
 | REGION_ID | START_KEY    | END_KEY      | LEADER_ID | LEADER_STORE_ID | PEERS         | SCATTERING | WRITTEN_BYTES | READ_BYTES | APPROXIMATE_SIZE(MB) | APPROXIMATE_KEYS | SCHEDULING_CONSTRAINTS | SCHEDULING_STATE |
 +-----------+--------------+--------------+-----------+-----------------+---------------+------------+---------------+------------+----------------------+------------------+------------------------+------------------+
@@ -175,7 +167,7 @@ In the above example:
 To check the Region that corresponds to table t in store 1, use the `WHERE` clause:
 
 ```sql
-test> show table t regions where leader_store_id =1;
+test> SHOW TABLE t REGIONS WHERE leader_store_id =1;
 +-----------+-----------+---------+-----------+-----------------+--------------+------------+---------------+------------+----------------------+------------------+------------------------+------------------+
 | REGION_ID | START_KEY | END_KEY | LEADER_ID | LEADER_STORE_ID | PEERS        | SCATTERING | WRITTEN_BYTES | READ_BYTES | APPROXIMATE_SIZE(MB) | APPROXIMATE_KEYS | SCHEDULING_CONSTRAINTS | SCHEDULING_STATE |
 +-----------+-----------+---------+-----------+-----------------+--------------+------------+---------------+------------+----------------------+------------------+------------------------+------------------+
@@ -186,7 +178,7 @@ test> show table t regions where leader_store_id =1;
 Use `SPLIT TABLE REGION` to split the index data into Regions. In the following example, the index data `name` of table t is split into two Regions in the range of `[a,z]`.
 
 ```sql
-test> split table t index name between ("a") and ("z") regions 2;
+test> SPLIT TABLE t INDEX name BETWEEN ("a") AND ("z") REGIONS 2;
 +--------------------+----------------------+
 | TOTAL_SPLIT_REGION | SCATTER_FINISH_RATIO |
 +--------------------+----------------------+
@@ -198,7 +190,7 @@ test> split table t index name between ("a") and ("z") regions 2;
 Now table t corresponds to seven Regions. Five of them (`102`, `106`, `110`, `114`, `3`) store the record data of table t and another two (`135`, `98`) store the index data `name`.
 
 ```sql
-test> show table t regions;
+test> SHOW TABLE t REGIONS;
 +-----------+-----------------------------+-----------------------------+-----------+-----------------+---------------+------------+---------------+------------+----------------------+------------------+------------------------+------------------+
 | REGION_ID | START_KEY                   | END_KEY                     | LEADER_ID | LEADER_STORE_ID | PEERS         | SCATTERING | WRITTEN_BYTES | READ_BYTES | APPROXIMATE_SIZE(MB) | APPROXIMATE_KEYS | SCHEDULING_CONSTRAINTS | SCHEDULING_STATE |
 +-----------+-----------------------------+-----------------------------+-----------+-----------------+---------------+------------+---------------+------------+----------------------+------------------+------------------------+------------------+
