@@ -34,7 +34,7 @@ You can view some key information in **SQL Statement**.
     ![Details0](/media/dashboard/dashboard-statement-detail0.png)
 
 - Execution plan list: if a SQL statement has more than one execution plan, the list is displayed. You can select different execution plans and the details of the selected execution plan are displayed at the bottom of the list. If there is only one execution plan, the list will not be displayed.
-- Execution plan details: shows the details of the selected execution plan. It collects the execution plans of each SQL type and the corresponding execution time from several perspectives to help you get more information. See [Execution plan in details](https://docs.pingcap.com/tidb/stable/dashboard-statement-details#statement-execution-details-of-tidb-dashboard).
+- Execution plan details: shows the details of the selected execution plan. It collects the execution plans of each SQL type and the corresponding execution time from several perspectives to help you get more information. See [Execution plans](https://docs.pingcap.com/tidb/stable/dashboard-statement-details#execution-plans).
 
     ![Details1](/media/dashboard/dashboard-statement-detail1.png)
     ![Details2](/media/dashboard/dashboard-statement-detail2.png)
