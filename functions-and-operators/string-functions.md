@@ -437,12 +437,31 @@ This example returns the third element, which is "TiDB".
 
 ### [`EXPORT_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_export-set)
 
-Return a string such that for every bit set in the value bits, you get an on string and for every unset bit, you get an off string.
+`EXPORT_SET()` will a string that consists of `number_of_bits` `on`/`off` values optionally separated by `separator`, starting with the right most (lowest) bit as the first (right most) value.
+
+If `number_of_bits` is not set, it will use 64 as default (the max size of bits, which is treated as an unsigned 64 bit integer).
 
 The full signature of this function is:
 
 ```
 EXPORT_SET(bits, on, off, [separator[, number_of_bits]])
+```
+
+Examples:
+
+In the example below `number_of_bits` is set to 5, resulting in 5 values, separated by `|`. As only 3 bits are given the other bits are considered to be unset; in this example setting `number_of_bits` to either `101` or `00101` results in the same output.
+
+```sql
+SELECT EXPORT_SET(b'101',"ON",'off','|',5);
+```
+
+```
++-------------------------------------+
+| EXPORT_SET(b'101',"ON",'off','|',5) |
++-------------------------------------+
+| ON|off|ON|off|off                   |
++-------------------------------------+
+1 row in set (0.00 sec)
 ```
 
 ```sql
