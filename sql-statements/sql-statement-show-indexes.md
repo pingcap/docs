@@ -64,5 +64,5 @@ The `SHOW INDEXES [FROM|IN]` statement in TiDB is fully compatible with MySQL. I
 * [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
 * [`information_schema.TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md)
 * [`information_schema.TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)
-* [`information_schema.KEY_COLUMN_USAGE](/information-schema/information-schema-key-column-usage.md)
+* [`information_schema.KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md)
 * [`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
