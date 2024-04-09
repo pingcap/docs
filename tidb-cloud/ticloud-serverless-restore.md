@@ -1,46 +1,46 @@
 ---
-title: ticloud serverless import describe
-summary: The reference of `ticloud serverless import describe`.
+title: ticloud serverless restore
+summary: The reference of `ticloud serverless restore`.
 ---
 
-# ticloud serverless import describe
+# ticloud serverless restore
 
-Get the import details of a data import task:
-
-```shell
-ticloud serverless import describe [flags]
-```
-
-Or use the following alias command:
+Restore a serverless cluster
 
 ```shell
-ticloud serverless import get [flags]
+ticloud serverless restore [flags]
 ```
 
 ## Examples
 
-Describe an import task in interactive mode:
+Restore a serverless cluster in interactive mode:
 
 ```shell
-ticloud serverless import describe
+ticloud serverless restore
 ```
 
-Describe an import task in non-interactive mode:
+Restore a serverless cluster with snapshot mode in non-interactive mode:
 
-```shell
-ticloud serverless import describe --project-id <project-id> --cluster-id <cluster-id> --import-id <import-id>
+```
+ticloud serverless restore --backup-id <backup-id>
+```
+
+Restore a serverless cluster with pointInTime mode in non-interactive mode:
+
+```
+ticloud serverless restore -c <cluster-id> --backup-time <backup-time>
 ```
 
 ## Flags
 
 In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
-| Flag                    | Description                       | Required | Note                                                 |
-|-------------------------|-----------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | Cluster ID                        | Yes      | Only works in non-interactive mode.                  |
-| -h, --help              | Help information for this command | No       | Works in both non-interactive and interactive modes. |
-| --import-id string      | The ID of the import task         | Yes      | Only works in non-interactive mode.                  |
-| -p, --project-id string | Project ID                        | Yes      | Only works in non-interactive mode.                  |
+| Flag                    | Description                                                                              | Required | Note                                                 |
+|-------------------------|------------------------------------------------------------------------------------------|----------|------------------------------------------------------|
+| --backup-id string      | The ID of the backup, used in snapshot restore mode                                      | NO       | Only works in non-interactive mode.                  |
+| --backup-time   string  | The time to restore to (e.g. 2023-12-13T07:00:00Z), used with point-in-time restore mode | NO       | Only works in non-interactive mode.                  |
+| -c, --cluster-id string | The ID of cluster, used in point-in-time restore mode.                                   | NO       | Only works in non-interactive mode.                  |
+| -h, --help              | Help information for this command                                                        | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
 
