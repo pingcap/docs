@@ -1,11 +1,11 @@
 ---
 title: 2024-04-09 TiDB Cloud Monitoring Features Maintenance Notification
-summary: Learn about the details of the TiDB Cloud Monitoring features maintenance on April 9, 2024, such as the maintenance window, reason, and impact.
+summary: Learn about the details of TiDB Cloud monitoring features maintenance on April 9, 2024, such as the maintenance window, reason, and impact.
 ---
 
-# [2023-08-31] TiDB Cloud Console Maintenance Notification
+# [2024-04-09] TiDB Cloud Monitoring Features Notification
 
-This notification describes the details that you need to know about the [TiDB Cloud console](https://tidbcloud.com/) maintenance on April 9, 2024.
+This notification describes the details that you need to know about TiDB Cloud monitoring features maintenance on April 9, 2024.
 
 ## Maintenance window
 
@@ -15,8 +15,11 @@ This notification describes the details that you need to know about the [TiDB Cl
 
 ## Impact
 
-### Impacted region scope:  
-- Monitoring features for TiDB Dedicated clusters in the following regions：
+### Affected regions:
+
+During the maintenance window, the monitoring features in the following regions will be affected:
+
+- TiDB Dedicated clusters：
     - Cloud Provider: AWS, Region: Oregon (us-west-2)
     - Cloud Provider: AWS, Region: Seoul (ap-northeast-2)
     - Cloud Provider: AWS, Region: Frankfurt (eu-central-1)
@@ -27,19 +30,19 @@ This notification describes the details that you need to know about the [TiDB Cl
     - Cloud Provider: Google Cloud, Region: Iowa (us-central1)
     - Cloud Provider: Google Cloud, Region: Taiwan (asia-east1)
 
-- Monitoring features for Serverless clusters in the following regions：
+- TiDB Serverless clusters：
     - Cloud Provider: AWS, Region: Frankfurt (eu-central-1)
     - Cloud Provider: AWS, Region: Oregon (us-west-2)
 
-### Affected Monitoring features ：
+### Affected monitoring features
 
 > **Note:**
 >
-> The maintenance only affects the Monitoring features in the TiDB cluster. All the other functionalities remain unaffected. You can continue to manage the TiDB cluster and perform read/write operations or other operations as usual.
+> The maintenance only affects the monitoring features in the TiDB cluster. All the other functionalities remain unaffected. You can continue to manage the TiDB cluster and perform read/write operations or other operations as usual.
 
-- Metrics page will be temporarily unavailable for several short periods（less than 20 mins）.
-- Slow Query page will be temporarily unavailable for several short periods （less than 5 mins）.
-- Metrics Integration with Prometheus, DataDog and NewRelic may have breakpoints
+- The **Metrics** page will be temporarily unavailable for several short periods (less than 20 mins).
+- The **Slow Query** page will be temporarily unavailable for several short periods (less than 5 mins).
+- The metrics integration with Prometheus, DataDog, and NewRelic might have breakpoints.
 
 ## Completion and resumption
 
