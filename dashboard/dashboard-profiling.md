@@ -25,6 +25,8 @@ The following performance data are currently supported:
 
 - Heap: The memory consumption of each internal function on TiDB, TiKV, and PD instances
 
+  > Starting from v7.5, TiDB supports the TiKV Heap Profile. The Perl dependency is required in the running environment of TiDB Dashboard. Otherwise an error will occur.
+
 - Mutex: The mutex contention states on TiDB and PD instances
 
 - Goroutine: The running state and call stack of all goroutines on TiDB and PD instances
