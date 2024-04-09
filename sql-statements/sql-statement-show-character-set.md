@@ -11,7 +11,7 @@ This statement provides a static list of available character sets in TiDB. The o
 
 ```ebnf+diagram
 ShowCharsetStmt ::=
-    "SHOW" ( ("CHARACTER" | "CHAR") | "CHARSET" ) ShowLikeOrWhere?
+    "SHOW" ( ("CHARACTER" | "CHAR") "SET" | "CHARSET" ) ShowLikeOrWhere?
 
 ShowLikeOrWhere ::=
     "LIKE" SimpleExpr
