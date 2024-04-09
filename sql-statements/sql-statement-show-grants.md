@@ -10,25 +10,17 @@ This statement shows a list of privileges associated with a user. As in MySQL, t
 
 ## Synopsis
 
-**ShowGrantsStmt:**
+```ebnf+diagram
+ShowGrantsStmt ::=
+    "SHOW" "GRANTS" ("FOR" Username ("USING" RolenameList)?)?
 
-![ShowGrantsStmt](/media/sqlgram/ShowGrantsStmt.png)
+Username ::=
+    "CURRENT_USER" "()"?
+| Username ("@" Hostname)?
 
-**Username:**
-
-![Username](/media/sqlgram/Username.png)
-
-**UsingRoles:**
-
-![UsingRoles](/media/sqlgram/UsingRoles.png)
-
-**RolenameList:**
-
-![RolenameList](/media/sqlgram/RolenameList.png)
-
-**Rolename:**
-
-![Rolename](/media/sqlgram/Rolename.png)
+RolenameList ::=
+    Rolename ("@" Hostname)? ("," Rolename ("@" Hostname)? )*
+```
 
 ## Examples
 
