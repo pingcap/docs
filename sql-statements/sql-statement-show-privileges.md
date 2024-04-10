@@ -84,6 +84,18 @@ The `SHOW PRIVILEGES` statement in TiDB is fully compatible with MySQL. If you f
 
 ## See also
 
+<CustomContent platform="tidb">
+
 * [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
 * [Privilege Management](/privilege-management.md)
 * [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+* [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
+* [Privilege Management](https://docs.pingcap.com/tidb/stable/privilege-management)
+* [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
+
+</CustomContent>
