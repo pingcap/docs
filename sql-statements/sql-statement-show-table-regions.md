@@ -27,9 +27,6 @@ ShowTableRegionStmt ::=
 TableName ::=
     (SchemaName ".")? Identifier
 
-ShowLikeOrWhere ::=
-    "LIKE" SimpleExpr
-|   "WHERE" Expression
 ```
 
 Executing `SHOW TABLE REGIONS` returns the following columns:
