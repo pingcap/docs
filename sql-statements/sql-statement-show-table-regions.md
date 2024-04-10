@@ -23,7 +23,7 @@ SHOW TABLE [table_name] INDEX [index_name] REGIONS [WhereClauseOptional];
 
 ```ebnf+diagram
 ShowTableRegionStmt ::=
-    "SHOW" "TABLE" TableName PartitionNameList? ("INDEX" IndexName)? "REGIONS" ShowLikeOrWhere?
+    "SHOW" "TABLE" TableName PartitionNameList? ("INDEX" IndexName)? "REGIONS" ("WHERE" Expression)?
 
 TableName ::=
     (SchemaName ".")? Identifier
