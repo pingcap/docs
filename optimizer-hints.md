@@ -955,7 +955,7 @@ The execution plan is as follows:
 5 rows in set, 1 warning (0.00 sec)
 ```
 
-In the preceding statements, the collations of `t1.k` and `t2.k` are incompatible (`utf8mb4_general_ci` and `utf8mb4_bin` respectively), which prevents the `INL_JOIN`, `TIDB_INLJ` hint from taking effect.
+In the preceding statements, the collations of `t1.k` and `t2.k` are incompatible (`utf8mb4_general_ci` and `utf8mb4_bin` respectively), which prevents the `INL_JOIN` or `TIDB_INLJ` hint from taking effect.
 
 ```sql
 SHOW WARNINGS;
