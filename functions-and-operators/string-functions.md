@@ -1288,6 +1288,62 @@ Return the substring that matches the regular expression (Partly compatible with
 
 Repeat a string the specified number of times.
 
+Examples:
+
+The following example generates a sequence of numbers from 1 to 20 using a [recursive common table expression (CTE)](/develop/dev-guide-use-common-table-expression.md#recursive-cte). For each number in the sequence, the character `x` is repeated the number of times equal to the number itself.
+
+```sql
+WITH RECURSIVE nr(n) AS (
+    SELECT 1 AS n 
+    UNION ALL 
+    SELECT n+1 FROM nr WHERE n<20
+)
+SELECT n, REPEAT('x',n) FROM nr;
+```
+
+```
++------+----------------------+
+| n    | REPEAT('x',n)        |
++------+----------------------+
+|    1 | x                    |
+|    2 | xx                   |
+|    3 | xxx                  |
+|    4 | xxxx                 |
+|    5 | xxxxx                |
+|    6 | xxxxxx               |
+|    7 | xxxxxxx              |
+|    8 | xxxxxxxx             |
+|    9 | xxxxxxxxx            |
+|   10 | xxxxxxxxxx           |
+|   11 | xxxxxxxxxxx          |
+|   12 | xxxxxxxxxxxx         |
+|   13 | xxxxxxxxxxxxx        |
+|   14 | xxxxxxxxxxxxxx       |
+|   15 | xxxxxxxxxxxxxxx      |
+|   16 | xxxxxxxxxxxxxxxx     |
+|   17 | xxxxxxxxxxxxxxxxx    |
+|   18 | xxxxxxxxxxxxxxxxxx   |
+|   19 | xxxxxxxxxxxxxxxxxxx  |
+|   20 | xxxxxxxxxxxxxxxxxxxx |
++------+----------------------+
+20 rows in set (0.01 sec)
+```
+
+The following example demonstrates that `REPEAT()` can operate on strings consisting of multiple characters.
+
+```sql
+SELECT REPEAT('ha',3);
+```
+
+```
++----------------+
+| REPEAT('ha',3) |
++----------------+
+| hahaha         |
++----------------+
+1 row in set (0.00 sec)
+```
+
 ### [`REPLACE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_replace)
 
 Replace occurrences of a specified string.
