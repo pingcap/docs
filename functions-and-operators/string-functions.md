@@ -1242,11 +1242,53 @@ Negation of simple pattern matching.
 
 ### [`NOT REGEXP`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_not-regexp)
 
-Negation of `REGEXP`.
+Negation of [`REGEXP`](#regexp).
 
 ### [`OCT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_oct)
 
-Return a string containing octal representation of a number.
+Return a string containing [octal](https://en.wikipedia.org/wiki/Octal) (base 8) representation of a number.
+
+Examples:
+
+The following example generates a sequence of numbers from 0 to 20 using a [recursive common table expression (CTE)](/develop/dev-guide-use-common-table-expression.md#recursive-cte) and then uses the `OCT()` function to convert each number to its octal representation. Decimal values from 0 to 7 have identical representations in octal. Decimal numbers from 8 to 15 correspond to octal numbers from 10 to 17.
+
+```sql
+WITH RECURSIVE nr(n) AS (
+    SELECT 0 AS n
+    UNION ALL
+    SELECT n+1 FROM nr WHERE n<20
+)
+SELECT n, OCT(n) FROM nr;
+```
+
+```
++------+--------+
+| n    | OCT(n) |
++------+--------+
+|    0 | 0      |
+|    1 | 1      |
+|    2 | 2      |
+|    3 | 3      |
+|    4 | 4      |
+|    5 | 5      |
+|    6 | 6      |
+|    7 | 7      |
+|    8 | 10     |
+|    9 | 11     |
+|   10 | 12     |
+|   11 | 13     |
+|   12 | 14     |
+|   13 | 15     |
+|   14 | 16     |
+|   15 | 17     |
+|   16 | 20     |
+|   17 | 21     |
+|   18 | 22     |
+|   19 | 23     |
+|   20 | 24     |
++------+--------+
+20 rows in set (0.00 sec)
+```
 
 ### [`OCTET_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_octet-length)
 
@@ -1287,6 +1329,62 @@ Return the substring that matches the regular expression (Partly compatible with
 ### [`REPEAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_repeat)
 
 Repeat a string the specified number of times.
+
+Examples:
+
+The following example generates a sequence of numbers from 1 to 20 using a [recursive common table expression (CTE)](/develop/dev-guide-use-common-table-expression.md#recursive-cte). For each number in the sequence, the character `x` is repeated the number of times equal to the number itself.
+
+```sql
+WITH RECURSIVE nr(n) AS (
+    SELECT 1 AS n 
+    UNION ALL 
+    SELECT n+1 FROM nr WHERE n<20
+)
+SELECT n, REPEAT('x',n) FROM nr;
+```
+
+```
++------+----------------------+
+| n    | REPEAT('x',n)        |
++------+----------------------+
+|    1 | x                    |
+|    2 | xx                   |
+|    3 | xxx                  |
+|    4 | xxxx                 |
+|    5 | xxxxx                |
+|    6 | xxxxxx               |
+|    7 | xxxxxxx              |
+|    8 | xxxxxxxx             |
+|    9 | xxxxxxxxx            |
+|   10 | xxxxxxxxxx           |
+|   11 | xxxxxxxxxxx          |
+|   12 | xxxxxxxxxxxx         |
+|   13 | xxxxxxxxxxxxx        |
+|   14 | xxxxxxxxxxxxxx       |
+|   15 | xxxxxxxxxxxxxxx      |
+|   16 | xxxxxxxxxxxxxxxx     |
+|   17 | xxxxxxxxxxxxxxxxx    |
+|   18 | xxxxxxxxxxxxxxxxxx   |
+|   19 | xxxxxxxxxxxxxxxxxxx  |
+|   20 | xxxxxxxxxxxxxxxxxxxx |
++------+----------------------+
+20 rows in set (0.01 sec)
+```
+
+The following example demonstrates that `REPEAT()` can operate on strings consisting of multiple characters.
+
+```sql
+SELECT REPEAT('ha',3);
+```
+
+```
++----------------+
+| REPEAT('ha',3) |
++----------------+
+| hahaha         |
++----------------+
+1 row in set (0.00 sec)
+```
 
 ### [`REPLACE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_replace)
 
