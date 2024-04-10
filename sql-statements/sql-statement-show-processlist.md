@@ -34,4 +34,4 @@ mysql> SHOW PROCESSLIST;
 ## See also
 
 * [KILL \[TIDB\]](/sql-statements/sql-statement-kill.md)
-* [`information_schema.processlist`](/information-schema/information-schema-processlist.md)
+* [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)
