@@ -25,10 +25,14 @@ The supported vCPU and RAM sizes include the following:
 
 - 4 vCPU, 16 GiB
 - 8 vCPU, 16 GiB
+- 8 vCPU, 32 GiB
 - 16 vCPU, 32 GiB
 - 32 vCPU, 64 GiB
+- 32 vCPU, 128 GiB
 
 > **Note:**
+>
+> To use the **32 vCPU, 128 GiB** size of TiDB, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 >
 > If the vCPU and RAM size of TiDB is set as **4 vCPU, 16 GiB**, note the following restrictions:
 >
