@@ -20,8 +20,8 @@ TracableStmt ::=
 | Format | Description                        |
 |--------|------------------------------------|
 | row    | Output in a tree format            |
-| log    | Log based output                   |
 | json   | Structured output in JSON format   |
+| log    | Log based output                   |
 
 ## Examples
 
