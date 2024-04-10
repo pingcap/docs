@@ -31,7 +31,7 @@ PartitionNameList ::=
     "PARTITION" "(" PartitionName ("," PartitionName)* ")"
 
 SplitOption ::=
-    ("BETWEEN" RowValue "AND" RowValue REGIONS NUM
+    ("BETWEEN" RowValue "AND" RowValue "REGIONS" NUM
 |   "BY" RowValue ("," RowValue)* )
 
 RowValue ::=
