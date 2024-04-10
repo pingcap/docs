@@ -9,9 +9,10 @@ This statement shows a list of warnings that occurred for previously executed st
 
 ## Synopsis
 
-**ShowWarningsStmt:**
-
-![ShowWarningsStmt](/media/sqlgram/ShowWarningsStmt.png)
+```ebnf+trace
+ShowWarningsStmt ::=
+    "SHOW" "WARNINGS"
+```
 
 ## Examples
 
