@@ -1307,7 +1307,7 @@ Escape the argument for use in an SQL statement.
 
 If the argument is `NULL`, the function returns `NULL`.
 
-Examples:
+Example:
 
 To display the result directly instead of showing a hexadecimal-encoded value, you need to start the MySQL client with the [`--skip-binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex) option.
 
