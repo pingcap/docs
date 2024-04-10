@@ -14,7 +14,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 ## Compatibility changes <!--tw@qiancai 2 条-->
 
 - Add a TiKV configuration item [`track-and-verify-wals-in-manifest`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#track-and-verify-wals-in-manifest-new-in-v659) for RocksDB, which helps you investigate possible corruption of Write Ahead Log (WAL) [#16549](https://github.com/tikv/tikv/issues/16549) @[v01dstar](https://github.com/v01dstar)
-- DR Auto-Sync support configuring [`wait-recover-timeout`](https://docs.pingcap.com/tidb/v6.5/two-data-centers-in-one-city-deployment#enable-the-dr-auto-sync-mode), which enables you to control the waiting time for switching back to the `sync-recover` status after the network recovers [#6295](https://github.com/tikv/pd/issues/6295) @[disksing](https://github.com/disksing)
+- DR Auto-Sync supports configuring [`wait-recover-timeout`](https://docs.pingcap.com/tidb/v6.5/two-data-centers-in-one-city-deployment#enable-the-dr-auto-sync-mode), which enables you to control the waiting time for switching back to the `sync-recover` status after the network recovers [#6295](https://github.com/tikv/pd/issues/6295) @[disksing](https://github.com/disksing)
 
 ## Improvements
 
@@ -47,7 +47,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
 + TiDB <!--tw@qiancai 以下 6 条-->
 
-    - Fix the issue that after a large number of tables are created, the newly created tables might lack the `stats_meta` information, causing subsequent query estimation to fail to get accurate row count information  [#36004](https://github.com/pingcap/tidb/issues/36004) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
+    - Fix the issue that after a large number of tables are created, the newly created tables might lack the `stats_meta` information, causing subsequent query estimation to fail to get accurate row count information [#36004](https://github.com/pingcap/tidb/issues/36004) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - Fix the issue that dropped tables are still counted by the Grafana `Stats Healthy Distribution` panel [#39349](https://github.com/pingcap/tidb/issues/39349) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - Fix the issue that TiDB does not handle the `WHERE <column_name>` filtering condition in a SQL statement when the query of that statement involves the `MemTableScan` operator [#40937](https://github.com/pingcap/tidb/issues/40937) @[zhongzc](https://github.com/zhongzc)
     - Fix the issue that query results might be incorrect when the `HAVING` clause in a subquery contains correlated columns [#51107](https://github.com/pingcap/tidb/issues/51107) @[hawkingrei](https://github.com/hawkingrei)
