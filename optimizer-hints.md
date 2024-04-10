@@ -930,9 +930,9 @@ The warning is as follows:
 
 In this case, you need to place the hint directly after the `SELECT` keyword. For more details, see the [Syntax](#syntax) section.
 
-### INL_JOIN, INL_HASH_JOIN hint does not take effect due to collation incompatibility
+### INL_JOIN, INL_HASH_JOIN, INL_MERGE_JOIN hint does not take effect due to collation incompatibility
 
-When the collation of the join key is incompatible between two tables, the `IndexJoin` operator cannot be utilized to execute the query. In this case, the [`INL_JOIN` hint](#inl_joint1_name--tl_name-) or  [`INL_HASH_JOIN` hint](#inl_hash_join) does not take effect. For example:
+When the collation of the join key is incompatible between two tables, the `IndexJoin` operator cannot be utilized to execute the query. In this case, the [`INL_JOIN` hint](#inl_joint1_name--tl_name-), [`INL_HASH_JOIN` hint](#inl_hash_join) or [`INL_MERGE_JOIN`](#inl_merge_join) does not take effect. For example:
 
 ```sql
 CREATE TABLE t1 (k varchar(8), key(k)) COLLATE=utf8mb4_general_ci;
@@ -955,7 +955,7 @@ The execution plan is as follows:
 5 rows in set, 1 warning (0.00 sec)
 ```
 
-In the preceding statements, the collations of `t1.k` and `t2.k` are incompatible (`utf8mb4_general_ci` and `utf8mb4_bin` respectively), which prevents the `INL_JOIN`, `TIDB_INLJ` or `INL_HASH_JOIN` hint from taking effect.
+In the preceding statements, the collations of `t1.k` and `t2.k` are incompatible (`utf8mb4_general_ci` and `utf8mb4_bin` respectively), which prevents the `INL_JOIN`, `TIDB_INLJ` hint from taking effect.
 
 ```sql
 SHOW WARNINGS;
