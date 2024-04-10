@@ -13,7 +13,7 @@ ticloud auth logout [flags]
 
 ## Examples
 
-To log out of the CLI:
+To log out of the TiDB Cloud:
 
 ```shell
 ticloud auht logout
