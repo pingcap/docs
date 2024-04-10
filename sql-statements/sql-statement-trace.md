@@ -9,20 +9,26 @@ The `TRACE` statement provides detailed information about query execution. It is
 
 ## Synopsis
 
-**TraceStmt:**
+```ebnf+diagram
+TraceStmt ::=
+    "TRACE" ( "FORMAT" "=" stringLit )? TracableStmt
 
-![TraceStmt](/media/sqlgram/TraceStmt.png)
+TracableStmt ::=
+    ( SelectStmt | DeleteFromStmt | UpdateStmt | InsertIntoStmt | ReplaceIntoStmt | UnionStmt | LoadDataStmt | BeginTransactionStmt | CommitStmt | RollbackStmt | SetStmt )
+```
 
-**TraceableStmt:**
-
-![TraceableStmt](/media/sqlgram/TraceableStmt.png)
+| Format | Description                        |
+|--------|------------------------------------|
+| row    | Output in a tree format            |
+| json   | Structured output in JSON format   |
+| log    | Log based output                   |
 
 ## Examples
 
-{{< copyable "sql" >}}
+### Row
 
 ```sql
-trace format='row' select * from mysql.user;
+TRACE FORMAT='row' SELECT * FROM mysql.user;
 ```
 
 ```
@@ -46,10 +52,10 @@ trace format='row' select * from mysql.user;
 13 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+### JSON
 
 ```sql
-trace format='json' select * from mysql.user;
+TRACE FORMAT='json' SELECT * FROM mysql.user;
 ```
 
 The JSON formatted trace can be pasted into the trace viewer, which is accessed via the TiDB status port:
@@ -57,6 +63,34 @@ The JSON formatted trace can be pasted into the trace viewer, which is accessed 
 ![TiDB Trace Viewer-1](/media/trace-paste.png)
 
 ![TiDB Trace Viewer-2](/media/trace-view.png)
+
+### Log
+
+```sql
+TRACE FORMAT='log' SELECT * FROM mysql.user;
+```
+
+```
++----------------------------+--------------------------------------------------------+------+------------------------------------+
+| time                       | event                                                  | tags | spanName                           |
++----------------------------+--------------------------------------------------------+------+------------------------------------+
+| 2024-04-08 08:41:47.358734 | --- start span trace ----                              |      | trace                              |
+| 2024-04-08 08:41:47.358737 | --- start span session.ExecuteStmt ----                |      | session.ExecuteStmt                |
+| 2024-04-08 08:41:47.358746 | --- start span executor.Compile ----                   |      | executor.Compile                   |
+| 2024-04-08 08:41:47.358984 | --- start span session.runStmt ----                    |      | session.runStmt                    |
+| 2024-04-08 08:41:47.359035 | --- start span TableReaderExecutor.Open ----           |      | TableReaderExecutor.Open           |
+| 2024-04-08 08:41:47.359047 | --- start span distsql.Select ----                     |      | distsql.Select                     |
+| 2024-04-08 08:41:47.359073 | --- start span *executor.TableReaderExecutor.Next ---- |      | *executor.TableReaderExecutor.Next |
+| 2024-04-08 08:41:47.359077 | table scan table: user, range: [[-inf,+inf]]           |      | *executor.TableReaderExecutor.Next |
+| 2024-04-08 08:41:47.359094 | --- start span regionRequest.SendReqCtx ----           |      | regionRequest.SendReqCtx           |
+| 2024-04-08 08:41:47.359098 | send Cop request to region 16 at store1                |      | regionRequest.SendReqCtx           |
+| 2024-04-08 08:41:47.359237 | --- start span *executor.TableReaderExecutor.Next ---- |      | *executor.TableReaderExecutor.Next |
+| 2024-04-08 08:41:47.359240 | table scan table: user, range: [[-inf,+inf]]           |      | *executor.TableReaderExecutor.Next |
+| 2024-04-08 08:41:47.359242 | execute done, ReturnRow: 1, ModifyRow: 0               |      | trace                              |
+| 2024-04-08 08:41:47.359252 | execute done, modify row: 0                            |      | trace                              |
++----------------------------+--------------------------------------------------------+------+------------------------------------+
+14 rows in set (0.0008 sec)
+```
 
 ## MySQL compatibility
 
