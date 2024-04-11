@@ -9,7 +9,7 @@ This statement shows a list of warnings that occurred for previously executed st
 
 ## Synopsis
 
-```ebnf+trace
+```ebnf+diagram
 ShowWarningsStmt ::=
     "SHOW" "WARNINGS"
 ```
