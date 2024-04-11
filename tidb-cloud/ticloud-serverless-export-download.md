@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless export download`.
 
 # ticloud serverless export describe
 
-Download the local type export
+Download the exported data from a TiDB Serverless cluster to your local storage:
 
 ```shell
 ticloud serverless export download [flags]
@@ -13,13 +13,13 @@ ticloud serverless export download [flags]
 
 ## Examples
 
-Download the local type export in interactive mode:
+Download the exported data in interactive mode:
 
 ```shell
 ticloud serverless export download
 ```
 
-Download the local type export in non-interactive mode:
+Download the exported data in non-interactive mode:
 
 ```shell
 ticloud serverless export download -c <cluster-id> -e <export-id>
@@ -31,11 +31,11 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 
 | Flag                    | Description                                                                        | Required | Note                                                 |
 |-------------------------|------------------------------------------------------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | The cluster ID of the export                                                       | Yes      | Only works in non-interactive mode.                  |
-| -e, --export-id string  | The ID of the export                                                               | Yes      | Only works in non-interactive mode.                  |
-| --output-path string    | Where you want to download to. If not specified, download to the current directory | No       | Only works in non-interactive mode.                  |
-| --auto-approve          | Download without confirmation                                                      | No       | Works in both non-interactive and interactive modes. |
-| -h, --help              | Help information for this command                                                  | No       | Works in both non-interactive and interactive modes. |
+| -c, --cluster-id string | Specifies the ID of the cluster.                                                       | Yes      | Only works in non-interactive mode.                  |
+| -e, --export-id string  | Specifies the ID of the export task.                                                               | Yes      | Only works in non-interactive mode.                  |
+| --output-path string    | Specifies the destination path for saving the downloaded data. If not specified, the data is downloaded to the the current directory. | No       | Only works in non-interactive mode.                  |
+| --auto-approve          | Downloads the exported data without confirmation.                                                      | No       | Works in both non-interactive and interactive modes. |
+| -h, --help              | Shows help information for this command.                                                  | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
 
@@ -43,7 +43,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 |----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
 | --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
 | -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
-| -D, --debug          | Enable debug mode                                                                                    | No       | Works in both non-interactive and interactive modes.                                                             |
+| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both non-interactive and interactive modes.                                                             |
 
 ## Feedback
 

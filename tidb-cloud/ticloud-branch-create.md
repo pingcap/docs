@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless branch create`.
 
 # ticloud serverless branch create
 
-Create a branch for a serverless cluster:
+Create a [branch](/tidb-cloud/branch-overview.md) for a TiDB Serverless cluster:
 
 ```shell
 ticloud serverless branch create [flags]
@@ -13,13 +13,13 @@ ticloud serverless branch create [flags]
 
 ## Examples
 
-Create a serverless branch in interactive mode:
+Create a branch for a TiDB Serverless cluster in interactive mode:
 
 ```shell
 ticloud serverless branch create
 ```
 
-Create a serverless branch in non-interactive mode:
+Create a branch for a TiDB Serverless cluster in non-interactive mode:
 
 ```shell
 ticloud serverless branch create --cluster-id <cluster-id> --display-name <branch-name>
@@ -31,9 +31,9 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 
 | Flag                      | Description                                                | Required | Note                                                |
 |---------------------------|------------------------------------------------------------|----------|-----------------------------------------------------|
-| -c, --cluster-id string   | The ID of the cluster, in which the branch will be created | Yes      | Only works in non-interactive mode.                 |
-| -n, --display-name string | The display name of the branch to be created               | Yes      | Only works in non-interactive mode.                 |
-| -h, --help                | Get help information for this command                      | No       | Works in both non-interactive and interactive modes |
+| -c, --cluster-id string   | Specifies the ID of the cluster, in which the branch will be created. | Yes      | Only works in non-interactive mode.                 |
+| -n, --display-name string | Specifies the name of the branch to be created.               | Yes      | Only works in non-interactive mode.                 |
+| -h, --help                | Shows help information for this command.                     | No       | Works in both non-interactive and interactive modes |
 
 ## Inherited flags
 
@@ -41,7 +41,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 |----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
 | --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
 | -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
-| -D, --debug          | Enable debug mode                                                                                    | No       | Works in both non-interactive and interactive modes.                                                             |
+| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both non-interactive and interactive modes.                                                             |
 
 ## Feedback
 

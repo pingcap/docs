@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless export describe`.
 
 # ticloud serverless export describe
 
-Describe a serverless cluster export
+Get the export information of a TiDB Serverless cluster:
 
 ```shell
 ticloud serverless export describe [flags]
@@ -19,13 +19,13 @@ ticloud serverless export get [flags]
 
 ## Examples
 
-Get an export in interactive mode:
+Get the export information in interactive mode:
 
 ```shell
 ticloud serverless export describe
 ```
 
-Get an export in non-interactive mode:
+Get the export information in non-interactive mode:
 
 ```shell
 ticloud serverless export describe -c <cluster-id> -e <export-id>
@@ -37,9 +37,9 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 
 | Flag                    | Description                                  | Required | Note                                                 |
 |-------------------------|----------------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | The cluster ID of the export to be described | Yes      | Only works in non-interactive mode.                  |
-| -e, --export-id string  | The ID of the export to be described         | Yes      | Only works in non-interactive mode.                  |
-| -h, --help              | Help information for this command            | No       | Works in both non-interactive and interactive modes. |
+| -c, --cluster-id string | Specifies the ID of the cluster. | Yes      | Only works in non-interactive mode.                  |
+| -e, --export-id string  | Specifies the ID of the export task.         | Yes      | Only works in non-interactive mode.                  |
+| -h, --help              | Shows help information for this command.           | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
 
@@ -47,7 +47,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 |----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
 | --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
 | -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
-| -D, --debug          | Enable debug mode                                                                                    | No       | Works in both non-interactive and interactive modes.                                                             |
+| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both non-interactive and interactive modes.                                                             |
 
 ## Feedback
 

@@ -15,9 +15,9 @@ The properties that can be configured include `public-key`, `private-key`, and `
 
 | Properties  | Description                                                        | Required |
 |-------------|--------------------------------------------------------------------|----------|
-| public-key  | The public key of the TiDB Cloud API                               | Yes      |
-| private-key | The private key of the TiDB Cloud API                              | Yes      |
-| api-url     | The base API URL of TiDB Cloud (`https://api.tidbcloud.com` by default) | No       |
+| public-key  | Specifies the public key of the TiDB Cloud API.                               | Yes      |
+| private-key | Specifies the private key of the TiDB Cloud API.                              | Yes      |
+| api-url     | Specifies the base API URL of TiDB Cloud (`https://api.tidbcloud.com` by default). | No       |
 
 > **Notes:**
 >
@@ -51,7 +51,7 @@ ticloud config set api-url https://api.tidbcloud.com
 
 | Flag       | Description              |
 |------------|--------------------------|
-| -h, --help | Help information for this command |
+| -h, --help | Shows help information for this command.|
 
 ## Inherited flags
 
@@ -59,7 +59,7 @@ ticloud config set api-url https://api.tidbcloud.com
 |----------------------|-----------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
 | --no-color           | Disables color in output.                      | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
 | -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                                      |
-| -D, --debug          | Enable debug mode                                                                                    | No       | Works in both non-interactive and interactive modes.                                                             |
+| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both non-interactive and interactive modes.                                                             |
 
 ## Feedback
 

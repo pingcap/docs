@@ -54,18 +54,18 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | Flag                     | Description                                                                  | Required | Note                                                 |
 |--------------------------|------------------------------------------------------------------------------|----------|------------------------------------------------------|
 | -c, --cluster-id string  | Specifies the cluster ID.                                                    | Yes      | Only works in non-interactive mode.                  |
-| -h, --help               | Displays help information for this command.                                  | No       | Works in both non-interactive and interactive modes. |
+| -h, --help               | Shows help information for this command.                                  | No       | Works in both non-interactive and interactive modes. |
 | -p, --project-id string  | Specifies the project ID.                                                    | Yes      | Only works in non-interactive mode.                  |
 | --skip-create-table      | Skips creating the target table if it already exists in the target database. | No       | Only works in non-interactive mode.                  |
-| --source-database string | The name of the source MySQL database.                                       | Yes      | Only works in non-interactive mode.                  |
-| --source-host string     | The host of the source MySQL instance.                                       | Yes      | Only works in non-interactive mode.                  |
-| --source-password string | The password for the source MySQL instance.                                  | Yes      | Only works in non-interactive mode.                  |
-| --source-port int        | The port of the source MySQL instance.                                       | Yes      | Only works in non-interactive mode.                  |
-| --source-table string    | The source table name in the source MySQL database.                          | Yes      | Only works in non-interactive mode.                  |
-| --source-user string     | The user to log in to the source MySQL instance.                             | Yes      | Only works in non-interactive mode.                  |
-| --target-database string | The target database name in the TiDB Serverless cluster.                     | Yes      | Only works in non-interactive mode.                  |
-| --target-password string | The password for the target TiDB Serverless cluster.                         | Yes      | Only works in non-interactive mode.                  |
-| --target-user string     | The user to log in to the target TiDB Serverless cluster.                    | No       | Only works in non-interactive mode.                  |
+| --source-database string | Specifies the name of the source MySQL database.                                       | Yes      | Only works in non-interactive mode.                  |
+| --source-host string     | Specifies the host of the source MySQL instance.                                       | Yes      | Only works in non-interactive mode.                  |
+| --source-password string | Specifies the password for the source MySQL instance.                                  | Yes      | Only works in non-interactive mode.                  |
+| --source-port int        | Specifies the port of the source MySQL instance.                                       | Yes      | Only works in non-interactive mode.                  |
+| --source-table string    | Specifies the source table name in the source MySQL database.                          | Yes      | Only works in non-interactive mode.                  |
+| --source-user string     | Specifies the user to log in to the source MySQL instance.                             | Yes      | Only works in non-interactive mode.                  |
+| --target-database string | Specifies the target database name in the TiDB Serverless cluster.                     | Yes      | Only works in non-interactive mode.                  |
+| --target-password string | Specifies the password for the target TiDB Serverless cluster.                         | Yes      | Only works in non-interactive mode.                  |
+| --target-user string     | Specifies the user to log in to the target TiDB Serverless cluster.                    | No       | Only works in non-interactive mode.                  |
 
 ## Inherited flags
 
@@ -73,7 +73,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 |----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
 | --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
 | -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
-| -D, --debug          | Enable debug mode                                                                                    | No       | Works in both non-interactive and interactive modes.                                                             |
+| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both non-interactive and interactive modes.                                                             |
 
 ## Feedback
 

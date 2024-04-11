@@ -5,7 +5,7 @@ summary: The reference of `ticloud ai`.
 
 # ticloud ai
 
-Chat with TiDB Bot
+Chat with TiDB Bot:
 
 ```shell
 ticloud ai [flags]
@@ -31,16 +31,16 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 
 | Flag               | Description                       | Required | Note                                                 |
 |--------------------|-----------------------------------|----------|------------------------------------------------------|
-| -q, --query string | The query to chat with TiDB Bot   | Yes      | Only works in non-interactive mode.                  |
-| -h, --help         | Help information for this command | No       | Works in both non-interactive and interactive modes. |
+| -q, --query string | Specifies your query to TiDB Bot.   | Yes      | Only works in non-interactive mode.                  |
+| -h, --help         | Shows help information for this command. | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
 
 | Flag                 | Description                                                                                | Required | Note                                                                                                             |
 |----------------------|--------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
 | --no-color           | Disables color in output.                                                                  | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | The active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
-| -D, --debug          | Enable debug mode                                                                          | No       | Works in both non-interactive and interactive modes.                                                             |
+| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
+| -D, --debug          | Enables debug mode.                                                                         | No       | Works in both non-interactive and interactive modes.                                                             |
 
 ## Feedback
 

@@ -43,10 +43,10 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 
 | Flag                    | Description                                                                                                              | Required | Note                                                 |
 |-------------------------|--------------------------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | Cluster ID                                                                                                               | Yes      | Only works in non-interactive mode.                  |
-| -h, --help              | Help information for this command                                                                                        | No       | Works in both non-interactive and interactive modes. |
-| -o, --output string     | Output format (`human` by default). Valid values are `human` or `json`. To get a complete result, use the `json` format. | No       | Works in both non-interactive and interactive modes. |
-| -p, --project-id string | Project ID                                                                                                               | Yes      | Only works in non-interactive mode.                  |
+| -c, --cluster-id string | Specifies the ID of the cluster.                                                                                                               | Yes      | Only works in non-interactive mode.                  |
+| -h, --help              | Shows help information for this command.                                                                                       | No       | Works in both non-interactive and interactive modes. |
+| -o, --output string     | Specifies the output format (`human` by default). Valid values are `human` or `json`. To get a complete result, use the `json` format. | No       | Works in both non-interactive and interactive modes. |
+| -p, --project-id string | Specifies the ID of the project.                                                                                                               | Yes      | Only works in non-interactive mode.                  |
 
 ## Inherited flags
 
@@ -54,7 +54,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 |----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
 | --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
 | -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
-| -D, --debug          | Enable debug mode                                                                                    | No       | Works in both non-interactive and interactive modes.                                                             |
+| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both non-interactive and interactive modes.                                                             |
 
 ## Feedback
 

@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless create`.
 
 # ticloud serverless create
 
-Create a serverless cluster:
+Create a TiDB Serverless cluster:
 
 ```shell
 ticloud serverless create [flags]
@@ -13,13 +13,13 @@ ticloud serverless create [flags]
 
 ## Examples
 
-Create a serverless cluster in interactive mode:
+Create a TiDB Serverless cluster in interactive mode:
 
 ```shell
 ticloud serverless create
 ```
 
-Create a serverless cluster in non-interactive mode:
+Create a TiDB Serverless cluster in non-interactive mode:
 
 ```shell
 ticloud serverless create --project-id <project-id> --display-name <display-name> --region <region>
@@ -31,11 +31,11 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 
 | Flag                         | Description                                                                                | Required  | Note                                                |
 |------------------------------|--------------------------------------------------------------------------------------------|-----------|-----------------------------------------------------|
-| -n --display-name string     | DisplayName of the cluster to be created                                                   | Yes       | Only works in non-interactive mode.                 |
-| --spending-limit-monthly int | Maximum monthly spending limit in USD cents                                                | No        | Only works in non-interactive mode.                 |
-| -p, --project-id string      | The ID of the project, in which the cluster will be created (default is "default project") | No        | Only works in non-interactive mode.                 |
-| -r, --region string          | Cloud region                                                                               | Yes       | Only works in non-interactive mode.                 |
-| -h, --help                   | Get help information for this command                                                      | No        | Works in both non-interactive and interactive modes |
+| -n --display-name string     | Specifies the name of the cluster to be created.                                                   | Yes       | Only works in non-interactive mode.                 |
+| --spending-limit-monthly int | Specifies the maximum monthly spending limit in USD cents.                                                | No        | Only works in non-interactive mode.                 |
+| -p, --project-id string      | Specifies the ID of the project, in which the cluster will be created. The default value is `default project`. | No        | Only works in non-interactive mode.                 |
+| -r, --region string          | Specifies the Cloud region.                                                                               | Yes       | Only works in non-interactive mode.                 |
+| -h, --help                   | Shows help information for this command.                                                     | No        | Works in both non-interactive and interactive modes |
 
 ## Inherited flags
 
@@ -43,7 +43,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 |----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
 | --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
 | -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
-| -D, --debug          | Enable debug mode                                                                                    | No       | Works in both non-interactive and interactive modes.                                                             |
+| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both non-interactive and interactive modes.                                                             |
 
 ## Feedback
 

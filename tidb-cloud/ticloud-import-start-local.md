@@ -45,7 +45,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | -c, --cluster-id string  | Specifies the cluster ID.                                                                                                     | Yes      | Only works in non-interactive mode.                                       |
 | --data-format string     | Specifies the data format. Currently, only `CSV` is supported.                                                                | Yes      | Only works in non-interactive mode.                                       |
 | --delimiter string       | Specifies the delimiter used for quoting for CSV files. The default value is `"`.                                             | No       | Only works in non-interactive mode when `--data-format CSV` is specified. |
-| -h, --help               | Displays help information for this command.                                                                                   | No       | Works in both non-interactive and interactive modes.                      |
+| -h, --help               | Shows help information for this command.                                                                                   | No       | Works in both non-interactive and interactive modes.                      |
 | -p, --project-id string  | Specifies the project ID.                                                                                                     | Yes      | Only works in non-interactive mode.                                       |
 | --separator string       | Specifies the field separator for CSV files. The default value is `,`.                                                        | No       | Only works in non-interactive mode when `--data-format CSV` is specified. |
 | --target-database string | Specifies the target database to import data to.                                                                              | Yes      | Only works in non-interactive mode.                                       |
@@ -58,7 +58,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 |----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
 | --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
 | -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
-| -D, --debug          | Enable debug mode                                                                                    | No       | Works in both non-interactive and interactive modes.                                                             |
+| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both non-interactive and interactive modes.                                                             |
 
 ## Feedback
 

@@ -35,10 +35,10 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 
 | Flag                  | Description                                   | Required | Note                             |
 |-----------------------|-----------------------------------------------|----------|-----------------------------------|
-| -h, --help            | Help information for this command                     | No       | Works in both non-interactive and interactive modes. |
-| --private-key string  | The private key of the TiDB Cloud API         | Yes      | Only works in non-interactive mode. |
-| --profile-name string | The name of the profile, which must not contain `.` | Yes      | Only works in non-interactive mode. |
-| --public-key string   | The public key of the TiDB Cloud API          | Yes      | Only works in non-interactive mode. |
+| -h, --help            | Shows help information for this command.                    | No       | Works in both non-interactive and interactive modes. |
+| --private-key string  | Specifies the private key of the TiDB Cloud API.         | Yes      | Only works in non-interactive mode. |
+| --profile-name string | Specifies the name of the profile (which must not contain `.`). | Yes      | Only works in non-interactive mode. |
+| --public-key string   | Specifies the public key of the TiDB Cloud API.          | Yes      | Only works in non-interactive mode. |
 
 ## Inherited flags
 
@@ -46,7 +46,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 |----------------------|----------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
 | --no-color           | Disables color in output.                     | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
 | -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                                      |
-| -D, --debug          | Enable debug mode                                                                                    | No       | Works in both non-interactive and interactive modes.                                                             |
+| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both non-interactive and interactive modes.                                                             |
 
 ## Feedback
 
