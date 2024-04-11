@@ -68,7 +68,7 @@ You can perform full collection using the following syntax.
 
 `WITH NUM SAMPLES` and `WITH FLOAT_NUM SAMPLERATE` correspond to two different algorithms of collecting samples.
 
-[Histograms](#histogram), [Top-N](#top-n-values) and [CMSketch](#count-min-sketch) (count-min sketch) are explained in their respective sections below, and `SAMPLES`/`SAMPLERATE` is explained in the section on [Improving collection performance](#improving-collection-performance).
+See [Histograms](#histogram), [Top-N](#top-n-values) and [CMSketch](#count-min-sketch) (Count-Min Sketch) for detailed explanations. For `SAMPLES`/`SAMPLERATE`, see [Improving collection performance](#improving-collection-performance).
 
 For information on persisting the options used to allow for easier reuse, refer to [Persist ANALYZE configurations](#persist-analyze-configurations).
 
@@ -124,7 +124,7 @@ When `IndexNameList` is empty, this syntax collects statistics on all indexes in
 
 In most cases, the optimizer only uses statistics on columns in the `WHERE`, `JOIN`, `ORDER BY`, and `GROUP BY` statements. These columns can be referred to as `PREDICATE COLUMNS`.
 
-If a table has many columns, collecting statistics on all the columns can cause a large overhead. To reduce the overhead, you can collect statistics on only specific columns (that you choose) or `PREDICATE COLUMNS` to be used by the optimizer. To persist the column list of any subset of columns for reuse in future, refer to the section [Persisting Column Configurations](#persisting-column-configurations).
+If a table has many columns, collecting statistics on all the columns can cause a large overhead. To reduce the overhead, you can collect statistics on only specific columns (that you choose) or `PREDICATE COLUMNS` to be used by the optimizer. To persist the column list of any subset of columns for reuse in future, refer to [Persisting column configurations](#persisting-column-configurations).
 
 > **Note:**
 >
@@ -230,7 +230,7 @@ If partitions are empty, or columns for some partitions are missing, then the co
 
     - In dynamic pruning mode, the Analyze configurations of partitions and tables should be the same. Therefore, if you specify the `COLUMNS` configuration following the `ANALYZE TABLE TableName PARTITION PartitionNameList` statement or the `OPTIONS` configuration following `WITH`, TiDB will ignore them and return a warning.
 
-## Improving Collection Performance
+## Improving collection performance
 
 > **Note:**
 >
@@ -242,7 +242,7 @@ TiDB provides two options to improve the performance of statistics collection:
 1. Collecting statistics on a subset of the columns. See [Collecting Statistics on Some Columns](#collect-statistics-on-some-columns).
 2. Sampling.
 
-### Statistics Sampling
+### Statistics sampling
 
 Sampling is available via two separate options of the ANALYZE statement - with each corresponding to a different collection algorithm:
 
@@ -334,7 +334,7 @@ After disabling the `ANALYZE` configuration persistence feature, TiDB does not c
 >
 > When you enable the `ANALYZE` configuration persistence feature again, if the previously recorded persistence configurations are no longer applicable to the latest data, you need to execute the `ANALYZE` statement manually and specify the new persistence configurations.
 
-### Persisting Column Configurations
+### Persisting column configurations
 
 If you want to persist the column configuration in the `ANALYZE` statement (including `COLUMNS ColumnNameList`, `PREDICATE COLUMNS`, and `ALL COLUMNS`), set the value of the `tidb_persist_analyze_options` system variable to `ON` to enable the [ANALYZE configuration persistence](#persist-analyze-configurations) feature. After enabling the ANALYZE configuration persistence feature:
 
