@@ -6,13 +6,13 @@ aliases: ['/docs/dev/statistics/','/docs/dev/reference/performance/statistics/']
 
 # Introduction to Statistics
 
-TiDB uses statistics as input to the optimizer to estimate the number of rows processed in each plan step for a SQL statement. The optimizer estimates the cost of each available plan choice - including [index accesses](/choose-index.md), the sequence of table joins, and produces a cost for each available plan. The optimizer then picks the execution plan with the lowest overall cost.
+TiDB uses statistics as input to the optimizer to estimate the number of rows processed in each plan step for a SQL statement. The optimizer estimates the cost of each available plan choice, including [index accesses](/choose-index.md) and the sequence of table joins, and produces a cost for each available plan. The optimizer then picks the execution plan with the lowest overall cost.
 
-## Collect Statistics
+## Collect statistics
 
 ### Automatic update
 
-For the `INSERT`, `DELETE`, or `UPDATE` statements, TiDB automatically updates the number of rows and modified rows. 
+For the `INSERT`, `DELETE`, or `UPDATE` statements, TiDB automatically updates the number of rows and modified rows.
 
 <CustomContent platform="tidb">
 
@@ -26,7 +26,7 @@ TiDB persists the update information every 60 seconds.
 
 </CustomContent>
 
-Based upon the number of changes to a table, TiDB will automatically schedule `ANALYZE` to collect statistics on those tables. This is controlled by the [`tidb_enable_auto_anlyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) system variable and `tidb_auto_analyze%` variables. 
+Based upon the number of changes to a table, TiDB will automatically schedule `ANALYZE` to collect statistics on those tables. This is controlled by the [`tidb_enable_auto_anlyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) system variable and `tidb_auto_analyze%` variables.
 
 The following system variables related to automatic update of statistics are as follows:
 
@@ -41,7 +41,7 @@ The following system variables related to automatic update of statistics are as 
 
 When the ratio of the number of modified rows to the total number of rows of `tbl` in a table is greater than `tidb_auto_analyze_ratio`, and the current time is between `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time`, TiDB executes the `ANALYZE TABLE tbl` statement in the background to automatically update the statistics on this table.
 
-To avoid the situation that modifying data on a small table frequently triggers the automatic update, when a table has less than 1000 rows, modfications do not trigger the automatic update in TiDB. You can use the `SHOW STATS_META` statement to view the number of rows in a table.
+To avoid the situation that modifying data on a small table frequently triggers the automatic update, when a table has less than 1000 rows, modifications do not trigger the automatic update in TiDB. You can use the `SHOW STATS_META` statement to view the number of rows in a table.
 
 > **Note:**
 >
@@ -55,7 +55,6 @@ You can perform full collection using the following syntax.
 
 + To collect statistics of all the tables in `TableNameList`:
 
-    {{< copyable "sql" >}}
     ```sql
     ANALYZE TABLE TableNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
@@ -69,10 +68,11 @@ You can perform full collection using the following syntax.
 
 `WITH NUM SAMPLES` and `WITH FLOAT_NUM SAMPLERATE` correspond to two different algorithms of collecting samples.
 
-[Histograms](#histogram), [Top-N](#top-n-values) and [CMSketch](#count-min-sketch) (count-min sketch) are explained in their respective sections below, and `SAMPLES`/`SAMPLERATE` explained in the section on [Improving collection performance](#improving-collection-performance)
+[Histograms](#histogram), [Top-N](#top-n-values) and [CMSketch](#count-min-sketch) (count-min sketch) are explained in their respective sections below, and `SAMPLES`/`SAMPLERATE` is explained in the section on [Improving collection performance](#improving-collection-performance).
+
 For information on persisting the options used to allow for easier reuse, refer to [Persist ANALYZE configurations](#persist-analyze-configurations).
 
-## Types of Statistics
+## Types of statistics
 
 ### Histogram
 
@@ -102,9 +102,9 @@ A hash collision might occur since Count-Min Sketch is a hash structure. In the 
 
 Top-N values are values with the top N occurrences in a column or index. Top-N statistics are often referred to as frequency statistics or data skew.
 
-TiDB records the values and occurrences of Top-N values. The default value is 20, meaning the top 20 most frequent values are collected. The maximum value is 1024. For details about the parameter that determines the number of values collected, refer to [Manual collection](#manual-collection). 
+TiDB records the values and occurrences of Top-N values. The default value is 20, meaning the top 20 most frequent values are collected. The maximum value is 1024. For details about the parameter that determines the number of values collected, refer to [Manual collection](#manual-collection).
 
-## Selective Statistics Collection
+## Selective statistics collection
 
 ### Collect statistics on indexes
 
@@ -130,7 +130,6 @@ If a table has many columns, collecting statistics on all the columns can cause 
 >
 > - Collecting statistics on predicate columns is only applicable for [`tidb_analyze_version = 2`](/system-variables.md#tidb_analyze_version-new-in-v510).
 > - Starting from TiDB v7.2.0, TiDB also introduces the [`tidb_analyze_skip_column_types`](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720) system variable, indicating which types of columns are skipped for statistics collection when executing the `ANALYZE` command to collect statistics. The system variable is only applicable for `tidb_analyze_version = 2`.
-
 
 - To collect statistics on specific columns, use the following syntax:
 
@@ -239,12 +238,14 @@ If partitions are empty, or columns for some partitions are missing, then the co
 > -  Starting from v7.5.0, the [Fast Analyze feature (`tidb_enable_fast_analyze`)](/system-variables.md#tidb_enable_fast_analyze) and the [incremental collection feature](https://docs.pingcap.com/tidb/v7.4/statistics#incremental-collection) for statistics are deprecated.
 
 TiDB provides two options to improve the performance of statistics collection:
-1. Collecting statistics on a subset of the columns - refer to the prior section [Collecting Statistics on Some Columns](#collect-statistics-on-some-columns)
-2. Sampling
+
+1. Collecting statistics on a subset of the columns. See [Collecting Statistics on Some Columns](#collect-statistics-on-some-columns).
+2. Sampling.
 
 ### Statistics Sampling
 
 Sampling is available via two separate options of the ANALYZE statement - with each corresponding to a different collection algorithm:
+
 - `WITH NUM SAMPLES` specifies the size of the sampling set, which is implemented in the reservoir sampling method in TiDB. When a table is large, it is not recommended to use this method to collect statistics. Because the intermediate result set of the reservoir sampling contains redundant results, it causes additional pressure on resources such as memory.
 - `WITH FLOAT_NUM SAMPLERATE` is a sampling method introduced in v5.3.0. With the value range `(0, 1]`, this parameter specifies the sampling rate. It is implemented in the way of Bernoulli sampling in TiDB, which is more suitable for sampling larger tables and performs better in collection efficiency and resource usage.
 
@@ -281,12 +282,8 @@ To set a proper value of `tidb_mem_quota_analyze`, consider the data size of the
 > **Note:**
 >
 > The following suggestions are for reference only. You need to configure the values based on the real scenario.
->- Minimum value: should be greater than the maximum memory usage when TiDB collects statistics from the 
-table with the most columns. An approximate reference: when TiDB collects statistics from a table with 20
- columns using the default configuration, the maximum memory usage is about 800 MiB; when TiDB collects s
-tatistics from a table with 160 columns using the default configuration, the maximum memory usage is abou
-t 5 GiB.
->- Maximum value: should be less than the available memory when TiDB is not collecting statistics.
+> - Minimum value: should be greater than the maximum memory usage when TiDB collects statistics from the table with the most columns. An approximate reference: when TiDB collects statistics from a table with 20 columns using the default configuration, the maximum memory usage is about 800 MiB; when TiDB collects statistics from a table with 160 columns using the default configuration, the maximum memory usage is about 5 GiB.
+> - Maximum value: should be less than the available memory when TiDB is not collecting statistics.
 
 ## Persist ANALYZE configurations
 
@@ -376,7 +373,7 @@ Empty set (0.00 sec)
 
 -- After waiting for a period of time (100 * stats-lease), TiDB writes the collected `PREDICATE COLUMNS` to mysql.column_stats_usage.
 -- Specify `last_used_at IS NOT NULL` to show the `PREDICATE COLUMNS` collected by TiDB.
-SHOW COLUMN_STATS_USAGE 
+SHOW COLUMN_STATS_USAGE
 WHERE db_name = 'test' AND table_name = 't' AND last_used_at IS NOT NULL;
 +---------+------------+----------------+-------------+---------------------+------------------+
 | Db_name | Table_name | Partition_name | Column_name | Last_used_at        | Last_analyzed_at |
@@ -389,7 +386,7 @@ ANALYZE TABLE t PREDICATE COLUMNS;
 Query OK, 0 rows affected, 1 warning (0.03 sec)
 
 -- Specify `last_analyzed_at IS NOT NULL` to show the columns for which statistics have been collected.
-SHOW COLUMN_STATS_USAGE 
+SHOW COLUMN_STATS_USAGE
 WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
 +---------+------------+----------------+-------------+---------------------+---------------------+
 | Db_name | Table_name | Partition_name | Column_name | Last_used_at        | Last_analyzed_at    |
@@ -426,14 +423,14 @@ The following table lists the information collected by each version for usage in
 
 It is recommended to ensure that all tables/indexes (and partitions) utilize statistics collection from the same version. Version 2 is recommended, however it is not recommended to switch from one version to another without a justifiable reason such as an issue experienced with the version in use. A switch between versions may involve a period of time when no statistics are available until all tables have been analyzed with the new version, which may negatively impact the optimizer plan choices if statistics aren't available.
 
-Examples of justifications to switch may include - with Version 1, there could be inaccuracies in equal/IN predicate estimation due to hash collisions when collecting count-min sketch statistics. Solutions are listed in the section on [Count-Min Sketch](#count-min-sketch). Alternatively, setting `tidb_analyze_version = 2` and rerrunning `ANALYZE` on all objects is also a solution. Early release of Version 2, there was a risk of memory overflow after `ANALYZE`. This issue is resolved, but initially, one solution was to `set tidb_analyze_version = 1` and rerunning `ANALYZE` on all objects.
+Examples of justifications to switch may include - with Version 1, there could be inaccuracies in equal/IN predicate estimation due to hash collisions when collecting count-min sketch statistics. Solutions are listed in the section on [Count-Min Sketch](#count-min-sketch). Alternatively, setting `tidb_analyze_version = 2` and rerunning `ANALYZE` on all objects is also a solution. Early release of Version 2, there was a risk of memory overflow after `ANALYZE`. This issue is resolved, but initially, one solution was to `set tidb_analyze_version = 1` and rerunning `ANALYZE` on all objects.
 
 To prepare `ANALYZE` for switching between versions:
 
 - If the `ANALYZE` statement is executed manually, manually analyze every table to be analyzed.
 
     ```sql
-    SELECT DISTINCT(CONCAT('ANALYZE TABLE ', table_schema, '.', table_name, ';')) 
+    SELECT DISTINCT(CONCAT('ANALYZE TABLE ', table_schema, '.', table_name, ';'))
     FROM information_schema.tables JOIN mysql.stats_histograms
     ON table_id = tidb_table_id
     WHERE stats_ver = 2;
@@ -442,8 +439,8 @@ To prepare `ANALYZE` for switching between versions:
 - If TiDB automatically executes the `ANALYZE` statement because the auto-analysis has been enabled, execute the following statement that generates the [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md) statement:
 
     ```sql
-    SELECT DISTINCT(CONCAT('DROP STATS ', table_schema, '.', table_name, ';')) 
-    FROM information_schema.tables ON mysql.stats_histograms 
+    SELECT DISTINCT(CONCAT('DROP STATS ', table_schema, '.', table_name, ';'))
+    FROM information_schema.tables ON mysql.stats_histograms
     ON table_id = tidb_table_id
     WHERE stats_ver = 2;
     ```
@@ -708,7 +705,7 @@ The default value of `lite-init-stats` is `true`, which means to enable lightwei
 
 <CustomContent platform="tidb-cloud">
 
-After enabling the synchronously loading statistics feature, you can control how TiDB behaves when the waiting time of SQL optimization reaches the timeout by modifing the value of the [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) system variable. The default value of this variable is `ON`, indicating that after the timeout, the SQL optimization process does not use any histogram, TopN, or CMSketch statistics on any columns. If this variable is set to `OFF`, after the timeout, SQL execution fails.
+After enabling the synchronously loading statistics feature, you can control how TiDB behaves when the waiting time of SQL optimization reaches the timeout by modifying the value of the [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) system variable. The default value of this variable is `ON`, indicating that after the timeout, the SQL optimization process does not use any histogram, TopN, or CMSketch statistics on any columns. If this variable is set to `OFF`, after the timeout, SQL execution fails.
 
 </CustomContent>
 
