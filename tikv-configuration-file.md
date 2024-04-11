@@ -1245,36 +1245,7 @@ Configuration items related to RocksDB
 + Log levels of RocksDB
 + Default value: `"info"`
 
-<<<<<<< HEAD
-=======
-### `write-buffer-flush-oldest-first` <span class="version-mark">New in v6.6.0</span>
-
-> **Warning:**
->
-> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-+ Specifies the flush strategy used when the memory usage of `memtable` of the current RocksDB reaches the threshold.
-+ Default value: `false`
-+ Value options:
-
-    + `false`: `memtable` with the largest data volume is flushed to SST files.
-    + `true`: The earliest `memtable` is flushed to SST files. This strategy can clear the `memtable` of cold data, which is suitable for scenarios with obvious cold and hot data.
-
-### `write-buffer-limit` <span class="version-mark">New in v6.6.0</span>
-
-> **Warning:**
->
-> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-+ Specifies the total memory limit of `memtable` for all RocksDB instances in a single TiKV. `0` means no limit.
-+ Default value:
-
-    + When `storage.engine="raft-kv"`, the default value is `0`, which means no limit.
-    + When `storage.engine="partitioned-raft-kv"`, the default value is 20% of the size of total system memory.
-
-+ Unit: KiB|MiB|GiB
-
-### `track-and-verify-wals-in-manifest` <span class="version-mark">New in v6.5.9 and v8.0.0</span>
+### `track-and-verify-wals-in-manifest` <span class="version-mark">New in v6.5.9</span>
 
 + Controls whether to record information about Write Ahead Log (WAL) files in the RocksDB MANIFEST file and whether to verify the integrity of WAL files during startup. For more information, see RocksDB [Track WAL in MANIFEST](https://github.com/facebook/rocksdb/wiki/Track-WAL-in-MANIFEST).
 + Default value: `true`
@@ -1282,7 +1253,6 @@ Configuration items related to RocksDB
     + `true`: records information about WAL files in the MANIFEST file and verifies the integrity of WAL files during startup.
     + `false`: does not record information about WAL files in the MANIFEST file and does not verify the integrity of WAL files during startup.
 
->>>>>>> ba4eacb05e (RocksDB: Add track-and-verify-wals-in-manifest desc (#17109))
 ## rocksdb.titan
 
 Configuration items related to Titan.
