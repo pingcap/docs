@@ -13,13 +13,12 @@ The `SHUTDOWN` statement is used to perform a shutdown operation in TiDB. Execut
 
 ## Synopsis
 
-**Statement:**
-
-![Statement](/media/sqlgram/ShutdownStmt.png)
+```ebnf+diagram
+ShutdownStmt ::=
+    "SHUTDOWN"
+```
 
 ## Examples
-
-{{< copyable "sql" >}}
 
 ```sql
 SHUTDOWN;
