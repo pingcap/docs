@@ -38,7 +38,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | Flag                    | Description                       | Required | Note                                                 |
 |-------------------------|-----------------------------------|----------|------------------------------------------------------|
 | -c, --cluster-id string | Specifies the ID of the cluster.                        | Yes      | Only works in non-interactive mode.                  |
-| -h, --help              | Shows help information for this command.| No       | Works in both non-interactive and interactive modes. |
+| -h, --help              | Shows help information for this command. | No       | Works in both non-interactive and interactive modes. |
 | --import-id string      | Specifies the ID of the import task.         | Yes      | Only works in non-interactive mode.                  |
 | -p, --project-id string | Specifies the ID of the project.                        | Yes      | Only works in non-interactive mode.                  |
 

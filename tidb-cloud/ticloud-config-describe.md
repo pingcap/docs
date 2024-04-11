@@ -29,7 +29,7 @@ ticloud config describe <profile-name>
 
 | Flag       | Description              |
 |------------|--------------------------|
-| -h, --help | Shows help information for this command.|
+| -h, --help | Shows help information for this command. |
 
 ## Inherited flags
 

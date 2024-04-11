@@ -23,7 +23,7 @@ ticloud config use test
 
 | Flag       | Description              |
 |------------|--------------------------|
-| -h, --help | Shows help information for this command.|
+| -h, --help | Shows help information for this command. |
 
 ## Inherited flags
 

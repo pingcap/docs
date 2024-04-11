@@ -46,7 +46,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 |-------------------------|-----------------------------------|----------|------------------------------------------------------|
 | -b, --branch-id string  | Specifies the ID of the branch.                         | Yes      | Only works in non-interactive mode.                  |
 | -c, --cluster-id string | Specifies the ID of the cluster.                        | Yes      | Only works in non-interactive mode.                  |
-| -h, --help              | Shows help information for this command.| No       | Works in both non-interactive and interactive modes. |
+| -h, --help              | Shows help information for this command. | No       | Works in both non-interactive and interactive modes. |
 | --password              | Specifies the password of the user.          | No       | Only works in non-interactive mode.                  |
 | -u, --user string       | Specifies the user for login.         | No       | Only works in non-interactive mode.                  |
 
