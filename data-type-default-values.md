@@ -34,7 +34,7 @@ Implicit defaults are defined as follows:
 
 Starting from 8.0.13, MySQL supports specifying expressions as default values in the `DEFAULT` clause. For more information, see [Explicit default handling as of MySQL 8.0.13](https://dev.mysql.com/doc/refman/8.0/en/data-type-defaults.html#data-type-defaults-explicit). 
 
-TiDB has implemented this feature and supports specifying some expressions as default values in the `DEFAULT` clause. Starting from v8.0.0, TiDB additionally supports assigning default values to `BLOB`, `TEXT`, and `JSON` data types. However, these default values can only be set as expressions. The following is an example of `BLOB`:
+TiDB has implemented this feature and supports specifying some expressions as default values in the `DEFAULT` clause. Starting from v8.0.0, TiDB additionally supports assigning default values to `BLOB`, `TEXT`, and `JSON` data types. However, you can only use expressions to set the default values for these data types. The following is an example of `BLOB`:
 
 ```sql
 CREATE TABLE t2 (b BLOB DEFAULT (RAND()));
