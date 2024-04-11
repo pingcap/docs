@@ -70,9 +70,14 @@ The detailed steps are as follows:
 
 2. Configure permissions for BR and TiKV to access the S3 directory. It is recommended to grant permissions using the IAM method, which is the most secure way to access the S3 bucket. For detailed steps, refer to [AWS documentation: Controlling access to a bucket with user policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html). The required permissions are as follows:
 
+<<<<<<< HEAD
     - TiKV and BR in the backup cluster need `s3:ListBucket`, `s3:GetObject`, `s3:PutObject`, and `s3:AbortMultipartUpload` permissions of the `s3://tidb-pitr-bucket/backup-data` directory.
     - Snapshot restore: TiKV and BR in the restore cluster need `s3:ListBucket` and `s3:GetObject` permissions of the `s3://tidb-pitr-bucket/backup-data` directory.
     - Log restore: TiKV and BR in the restore cluster need `s3:ListBucket`, `s3:GetObject`, and `s3:PutObject` permissions of the `s3://tidb-pitr-bucket/backup-data` directory.
+=======
+    - TiKV and BR in the backup cluster need `s3:ListBucket`, `s3:GetObject`, `s3:DeleteObject`, `s3:PutObject`, and `s3:AbortMultipartUpload` permissions of the `s3://tidb-pitr-bucket/backup-data` directory.
+    - TiKV and BR in the restore cluster need `s3:ListBucket`, `s3:GetObject`, `s3:DeleteObject`, and `s3:PutObject` permissions of the `s3://tidb-pitr-bucket/backup-data` directory.
+>>>>>>> 5ca91297a9 (TiDB 7.1+ checkpoint restore requires `s3:DeleteObject` permission (#17111) (#17159))
 
 3. Plan the directory structure that stores the backup data, including the snapshot (full) backup and the log backup.
 
