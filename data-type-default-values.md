@@ -8,7 +8,7 @@ aliases: ['/docs/dev/data-type-default-values/','/docs/dev/reference/sql/data-ty
 
 The `DEFAULT` value clause in a data type specification indicates a default value for a column. The default value must be a constant and cannot be a function or an expression. But for the time type, you can specify the `NOW`, `CURRENT_TIMESTAMP`, `LOCALTIME`, and `LOCALTIMESTAMP` functions as the default for `TIMESTAMP` and `DATETIME` columns.
 
-Starting from v8.0.0, TiDB supports [specifying expressions as default values](#specify-expressions-as-default-values) for [`BLOB`](/data-type-string.md#blob-type), [`TEXT`](/data-type-string.md#text-type), and [`JSON`](/data-type-json.md#json-type) data types.
+Starting from v8.0.0, TiDB supports [specifying expressions as default values](#specify-expressions-as-default-values) for [`BLOB`](/data-type-string.md#blob-type), [`TEXT`](/data-type-string.md#text-type), and [`JSON`](/data-type-json.md#json-type) data types. You can set default values for all data types, but you can only use expressions to set the [default values](#default-values) for `BLOB`, `TEXT`, and `JSON` data types.
 
 If a column definition includes no explicit `DEFAULT` value, TiDB determines the default value as follows:
 
@@ -34,7 +34,7 @@ Implicit defaults are defined as follows:
 
 Starting from 8.0.13, MySQL supports specifying expressions as default values in the `DEFAULT` clause. For more information, see [Explicit default handling as of MySQL 8.0.13](https://dev.mysql.com/doc/refman/8.0/en/data-type-defaults.html#data-type-defaults-explicit). 
 
-TiDB has implemented this feature and supports specifying some expressions as default values in the `DEFAULT` clause. Starting from v8.0.0, TiDB supports assigning default values to `BLOB`, `TEXT`, and `JSON` data types. However, these default values can only be set as expressions. The following is an example of `BLOB`:
+TiDB has implemented this feature and supports specifying some expressions as default values in the `DEFAULT` clause. Starting from v8.0.0, TiDB additionally supports assigning default values to `BLOB`, `TEXT`, and `JSON` data types. However, these default values can only be set as expressions. The following is an example of `BLOB`:
 
 ```sql
 CREATE TABLE t2 (b BLOB DEFAULT (RAND()));
