@@ -63,15 +63,15 @@ You can compress the exported data using the following algorithms:
 
 ### Cancel export
 
-You can cancel an export job that is in the running state.
+You can cancel an export task that is in the running state.
 
 ## Examples
 
-Currently, you can manage export jobs using [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
+Currently, you can manage export tasks using [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
 
 ### Export data to local storage
 
-1. Create an export job that specifies the database and table you want to export:
+1. Create an export task that specifies the database and table you want to export:
 
    ```shell
    ticloud serverless export create -c <cluster-id> --database <database> --table <table>
@@ -109,7 +109,7 @@ Currently, you can manage export jobs using [TiDB Cloud CLI](/tidb-cloud/cli-ref
    ticloud serverless export create -c <cluster-id> --compress snappy
    ```
 
-### Cancel an export job
+### Cancel an export task
 
    ```shell
    ticloud serverless export cancel -c <cluster-id> -e <export-id>
@@ -117,4 +117,4 @@ Currently, you can manage export jobs using [TiDB Cloud CLI](/tidb-cloud/cli-ref
 
 ## Pricing
 
-The export service is free during the beta period. You only need to pay for the [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) generated during the export process of successful or canceled jobs. For failed export jobs, you will not be charged.
+The export service is free during the beta period. You only need to pay for the [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) generated during the export process of successful or canceled tasks. For failed export tasks, you will not be charged.
