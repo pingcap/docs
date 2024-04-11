@@ -5,7 +5,7 @@ summary: The reference of `ticloud auth login`.
 
 # ticloud auth login
 
-Authenticate with the TiDB Cloud:
+Authenticate with TiDB Cloud CLI:
 
 ```shell
 ticloud auth login [flags]
@@ -13,16 +13,16 @@ ticloud auth login [flags]
 
 ## Examples
 
-To start the login for your account:
+To log into TiDB Cloud CLI:
 
 ```shell
-ticloud auht login
+ticloud auth login
 ```
 
-Login with insecure storage:
+To log into TiDB Cloud CLI with insecure storage:
 
 ```shell
-ticloud auht login --insecure-storage
+ticloud auth login --insecure-storage
 ```
 
 ## Flags
@@ -40,7 +40,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 |----------------------|--------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
 | --no-color           | Disables color in output.                                                                  | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
 | -P, --profile string | The active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
-| -D, --debug          | Enable debug mode                                                                          | No       | Works in both non-interactive and interactive modes.                                                             |
+| -D, --debug          | Enable debug mode.                                                                          | No       | Works in both non-interactive and interactive modes.                                                             |
 
 ## Feedback
 

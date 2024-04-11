@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless update`.
 
 # ticloud serverless update
 
-Update a serverless cluster:
+Update a TiDB Serverless cluster:
 
 ```shell
 ticloud serverless update [flags]
@@ -13,19 +13,19 @@ ticloud serverless update [flags]
 
 ## Examples
 
-Update a serverless cluster in interactive mode:
+Update a TiDB Serverless cluster in interactive mode:
 
 ```shell
 ticloud serverless update
 ```
 
-Update displayName of a serverless cluster in non-interactive mode:
+Update `displayName` of a TiDB Serverless cluster in non-interactive mode:
 
 ```shell
 ticloud serverless update -c <cluster-id> --display-name <new-display-mame>
 ```
 
-Update labels of a serverless cluster in non-interactive mode
+Update labels of a TiDB Serverless cluster in non-interactive mode
 
 ```shell
 ticloud serverless update -c <cluster-id> --labels "{\"label1\":\"value1\"}"
@@ -37,10 +37,10 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 
 | Flag                     | Description                                           | Required | Note                                                 |
 |--------------------------|-------------------------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string  | The ID of the cluster to be updated                   | Yes      | Only works in non-interactive mode.                  |
-| -n --display-name string | The new displayName of the cluster to be updated      | No       | Only works in non-interactive mode.                  |
-| --annotations string     | The annotations of the cluster to be added or updated | No       | Only works in non-interactive mode.                  |
-| --labels string          | The labels of the cluster to be added or updated      | No       | Only works in non-interactive mode.                  |
+| -c, --cluster-id string  | The new ID of the cluster                   | Yes      | Only works in non-interactive mode.                  |
+| -n --display-name string | The new `displayName` of the cluster      | No       | Only works in non-interactive mode.                  |
+| --annotations string     | The new annotations of the cluster | No       | Only works in non-interactive mode.                  |
+| --labels string          | The new labels of the cluster      | No       | Only works in non-interactive mode.                  |
 | -h, --help               | Help information for this command                     | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
@@ -49,7 +49,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 |----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
 | --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
 | -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
-| -D, --debug          | Enable debug mode                                                                                    | No       | Works in both non-interactive and interactive modes.                                                             |
+| -D, --debug          | Enable debug mode.                                                                                    | No       | Works in both non-interactive and interactive modes.                                                             |
 
 ## Feedback
 

@@ -19,11 +19,11 @@ To use the `ticloud` CLI in your terminal, run `ticloud [command] [subcommand]`.
 
 | Command            | Subcommand                                                               | Description                                                                                              |
 |--------------------|--------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| auth               | login, logout                                                            | Login and logout                                                                                         |
 | serverless         | create, delete, describe, list, update, spending-limit, regions, shell   | Manage TiDB Serverless clusters                                                                          |
 | serverless branch  | create, delete, describe, list, shell                                    | Manage TiDB Serverless branches                                                                          |
-| serverless export  | create, describe, list, cancel, download                                 | Manage TiDB Serverless export jobs                                                                       |
 | serverless import  | cancel, describe, list, start                                            | Manage [import](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud) tasks |
-| auth               | login, logout                                                            | Login and logout                                                                                         |
+| serverless export  | create, describe, list, cancel, download                                 | Manage TiDB Serverless export jobs                                                                       |
 | ai                 | -                                                                        | Chat with TiDB Bot                                                                                       |
 | completion         | bash, fish, powershell, zsh                                              | Generate completion script for specified shell                                                           |
 | config             | create, delete, describe, edit, list, set, use                           | Configure user profiles                                                                                  |
