@@ -88,33 +88,33 @@ Currently, you can manage export jobs using [TiDB Cloud CLI](/tidb-cloud/cli-ref
 
 ### Export data to Amazon S3
 
-   ```shell
-   ticloud serverless export create -c <cluster-id> --bucket-uri <bucket-uri> --access-key-id <access-key-id> --secret-access-key <secret-access-key>
-   ```
+```shell
+ticloud serverless export create -c <cluster-id> --bucket-uri <bucket-uri> --access-key-id <access-key-id> --secret-access-key <secret-access-key>
+```
 
 ### Export with the CSV format
 
-   ```shell
-   ticloud serverless export create -c <cluster-id> --file-type CSV
-   ```
+```shell
+ticloud serverless export create -c <cluster-id> --file-type CSV
+```
 
 ### Export the whole database
 
-   ```shell
-   ticloud serverless export create -c <cluster-id> --database <database>
-   ```
+```shell
+ticloud serverless export create -c <cluster-id> --database <database>
+```
 
 ### Export with snappy compression
 
-   ```shell
-   ticloud serverless export create -c <cluster-id> --compress snappy
-   ```
+```shell
+ticloud serverless export create -c <cluster-id> --compress snappy
+```
 
 ### Cancel an export job
 
-   ```shell
-   ticloud serverless export cancel -c <cluster-id> -e <export-id>
-   ```
+```shell
+ticloud serverless export cancel -c <cluster-id> -e <export-id>
+```
 
 ## Pricing
 
