@@ -66,7 +66,7 @@ You can perform full collection using the following syntax.
 
 `WITH NUM SAMPLES` and `WITH FLOAT_NUM SAMPLERATE` correspond to two different algorithms of collecting samples.
 
-See [Histograms](#histogram), [Top-N](#top-n-values) and [CMSketch](#count-min-sketch) (Count-Min Sketch) for detailed explanations. For `SAMPLES`/`SAMPLERATE`, see [Improving collection performance](#improving-collection-performance).
+See [Histograms](#histogram), [Top-N](#top-n-values) and [CMSketch](#count-min-sketch) (Count-Min Sketch) for detailed explanations. For `SAMPLES`/`SAMPLERATE`, see [Improve collection performance](#improve-collection-performance).
 
 For information on persisting the options for easier reuse, see [Persist ANALYZE configurations](#persist-analyze-configurations).
 
@@ -123,7 +123,7 @@ When `IndexNameList` is empty, this syntax collects statistics on all indexes in
 
 In most cases, the optimizer only uses statistics on columns in the `WHERE`, `JOIN`, `ORDER BY`, and `GROUP BY` statements. These columns can be referred to as `PREDICATE COLUMNS`.
 
-If a table has many columns, collecting statistics on all the columns can cause a large overhead. To reduce the overhead, you can collect statistics on only specific columns (that you choose) or `PREDICATE COLUMNS` to be used by the optimizer. To persist the column list of any subset of columns for reuse in future, see [Persisting column configurations](#persisting-column-configurations).
+If a table has many columns, collecting statistics on all the columns can cause a large overhead. To reduce the overhead, you can collect statistics on only specific columns (that you choose) or `PREDICATE COLUMNS` to be used by the optimizer. To persist the column list of any subset of columns for reuse in future, see [Persist column configurations](#persist-column-configurations).
 
 > **Note:**
 >
