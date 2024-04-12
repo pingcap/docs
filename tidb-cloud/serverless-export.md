@@ -23,7 +23,7 @@ You can export data to local storage or [Amazon S3](https://aws.amazon.com/s3/).
 
 > **Note:**
 >
-> If the size of the data to be exported is large(more than 100 GiB), it is recommended that you export it to Amazon S3.
+> If the size of the data to be exported is large (more than 100 GiB), it is recommended that you export it to Amazon S3.
 
 **Local storage**
 
@@ -35,7 +35,7 @@ Exporting data to local storage has the following limitations:
 
 **Amazon S3**
 
-To export data to Amazon S3, you need to provide an [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for your S3 bucket. Please make sure the access key has the read and write access for your S3 bucket, including at least these permissions: `s3:PutObject`, and `s3:ListBucket`.
+To export data to Amazon S3, you need to provide an [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for your S3 bucket. Make sure the access key has the read and write access to your S3 bucket, including at least these permissions: `s3:PutObject`, and `s3:ListBucket`.
 
 ### Data filtering
 
@@ -73,17 +73,17 @@ Currently, you can manage export tasks using [TiDB Cloud CLI](/tidb-cloud/cli-re
 
 1. Create an export task that specifies the database and table you want to export:
 
-   ```shell
-   ticloud serverless export create -c <cluster-id> --database <database> --table <table>
-   ```
+    ```shell
+    ticloud serverless export create -c <cluster-id> --database <database> --table <table>
+    ```
 
     You will get an export ID from the output.
 
 2. After the export is successful, download the exported data to your local storage:
 
-   ```shell
-   ticloud serverless export download -c <cluster-id> -e <export-id>
-   ```
+    ```shell
+    ticloud serverless export download -c <cluster-id> -e <export-id>
+    ```
 
 ### Export data to Amazon S3
 
