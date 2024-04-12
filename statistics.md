@@ -87,7 +87,8 @@ For details about the parameter that determines the upper limit to the number of
 ### Count-Min Sketch
 
 > **Note:**
-> Count-Min Sketch is used in statistics Version 1 only for equal/IN predicate selectivity estimation. In Version 2, other available statistics are used due to challenges in management of count-min sketch to avoid collisions as discussed below.
+>
+> Count-Min Sketch is used in statistics Version 1 only for equal/IN predicate selectivity estimation. In Version 2, other statistics are used due to challenges in managing Count-Min sketch to avoid collisions as discussed below.
 
 Count-Min Sketch is a hash structure. When an equivalence query contains `a = 1` or `IN` query (for example, `a IN (1, 2, 3)`), TiDB uses this data structure for estimation.
 
@@ -100,7 +101,7 @@ A hash collision might occur since Count-Min Sketch is a hash structure. In the 
 
 Top-N values are values with the top N occurrences in a column or index. Top-N statistics are often referred to as frequency statistics or data skew.
 
-TiDB records the values and occurrences of Top-N values. The default value is 20, meaning the top 20 most frequent values are collected. The maximum value is 1024. For details about the parameter that determines the number of values collected, refer to [Manual collection](#manual-collection).
+TiDB records the values and occurrences of Top-N values. The default value is 20, meaning the top 20 most frequent values are collected. The maximum value is 1024. For details about the parameter that determines the number of values collected, see [Manual collection](#manual-collection).
 
 ## Selective statistics collection
 
@@ -122,7 +123,7 @@ When `IndexNameList` is empty, this syntax collects statistics on all indexes in
 
 In most cases, the optimizer only uses statistics on columns in the `WHERE`, `JOIN`, `ORDER BY`, and `GROUP BY` statements. These columns can be referred to as `PREDICATE COLUMNS`.
 
-If a table has many columns, collecting statistics on all the columns can cause a large overhead. To reduce the overhead, you can collect statistics on only specific columns (that you choose) or `PREDICATE COLUMNS` to be used by the optimizer. To persist the column list of any subset of columns for reuse in future, refer to [Persisting column configurations](#persisting-column-configurations).
+If a table has many columns, collecting statistics on all the columns can cause a large overhead. To reduce the overhead, you can collect statistics on only specific columns (that you choose) or `PREDICATE COLUMNS` to be used by the optimizer. To persist the column list of any subset of columns for reuse in future, see [Persisting column configurations](#persisting-column-configurations).
 
 > **Note:**
 >
@@ -216,8 +217,7 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
 When accessing partitioned tables in [dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode) (which is the default since v6.3.0), TiDB collects table-level statistics, which is called GlobalStats. Currently, GlobalStats is aggregated from statistics of all partitions. In dynamic pruning mode, a statistics update of any partitioned table can trigger the GlobalStats to be updated.
 
-If partitions are empty, or columns for some partitions are missing, then the collection behavior is controlled by variable [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730):
-- When GlobalStats update is triggered and [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730) is `OFF`:
+If partitions are empty, or columns for some partitions are missing, then the collection behavior is controlled by the [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730) variable:
 
     - If some partitions have no statistics (such as a new partition that has never been analyzed), GlobalStats generation is interrupted and a warning message is displayed saying that no statistics are available on partitions.
     - If statistics of some columns are absent in specific partitions (different columns are specified for analyzing in these partitions), GlobalStats generation is interrupted when statistics of these columns are aggregated, and a warning message is displayed saying that statistics of some columns are absent in specific partitions.
@@ -228,21 +228,20 @@ If partitions are empty, or columns for some partitions are missing, then the co
 
     - In dynamic pruning mode, the Analyze configurations of partitions and tables should be the same. Therefore, if you specify the `COLUMNS` configuration following the `ANALYZE TABLE TableName PARTITION PartitionNameList` statement or the `OPTIONS` configuration following `WITH`, TiDB will ignore them and return a warning.
 
-## Improving collection performance
+## Improve collection performance
 
 > **Note:**
 >
-> - The execution time of `ANALYZE TABLE` in TiDB may be longer than in MySQL or InnoDB. In InnoDB, only a small number of pages are sampled, while by default in TiDB a comprehensive set of statistics are completely rebuilt.
-> -  Starting from v7.5.0, the [Fast Analyze feature (`tidb_enable_fast_analyze`)](/system-variables.md#tidb_enable_fast_analyze) and the [incremental collection feature](https://docs.pingcap.com/tidb/v7.4/statistics#incremental-collection) for statistics are deprecated.
+> - The execution time of `ANALYZE TABLE` in TiDB might be longer than that in MySQL or InnoDB. In InnoDB, only a small number of pages are sampled, while by default in TiDB a comprehensive set of statistics are completely rebuilt.
 
 TiDB provides two options to improve the performance of statistics collection:
 
-1. Collecting statistics on a subset of the columns. See [Collecting Statistics on Some Columns](#collect-statistics-on-some-columns).
-2. Sampling.
+- Collecting statistics on a subset of the columns. See [Collecting statistics on some columns](#collect-statistics-on-some-columns).
+- Sampling.
 
 ### Statistics sampling
 
-Sampling is available via two separate options of the ANALYZE statement - with each corresponding to a different collection algorithm:
+Sampling is available via two separate options of the `ANALYZE` statement - with each corresponding to a different collection algorithm:
 
 - `WITH NUM SAMPLES` specifies the size of the sampling set, which is implemented in the reservoir sampling method in TiDB. When a table is large, it is not recommended to use this method to collect statistics. Because the intermediate result set of the reservoir sampling contains redundant results, it causes additional pressure on resources such as memory.
 - `WITH FLOAT_NUM SAMPLERATE` is a sampling method introduced in v5.3.0. With the value range `(0, 1]`, this parameter specifies the sampling rate. It is implemented in the way of Bernoulli sampling in TiDB, which is more suitable for sampling larger tables and performs better in collection efficiency and resource usage.
@@ -332,7 +331,7 @@ After disabling the `ANALYZE` configuration persistence feature, TiDB does not c
 >
 > When you enable the `ANALYZE` configuration persistence feature again, if the previously recorded persistence configurations are no longer applicable to the latest data, you need to execute the `ANALYZE` statement manually and specify the new persistence configurations.
 
-### Persisting column configurations
+### Persist column configurations
 
 If you want to persist the column configuration in the `ANALYZE` statement (including `COLUMNS ColumnNameList`, `PREDICATE COLUMNS`, and `ALL COLUMNS`), set the value of the `tidb_persist_analyze_options` system variable to `ON` to enable the [ANALYZE configuration persistence](#persist-analyze-configurations) feature. After enabling the ANALYZE configuration persistence feature:
 
@@ -404,7 +403,7 @@ The `tidb_analyze_version` variable controls the statistics collected by TiDB. C
 - For TiDB Cloud, the default value of this variable changes from `1` to `2` starting from v6.5.0.
 - If your cluster is upgraded from an earlier version, the default value of `tidb_analyze_version` does not change after the upgrade.
 
-Version 2 is preferred, and will continue to be enhanced to ultimately replace Version 1 completely. Compared to Version 1, Version 2 improves the accuracy of many of the statistics collected for larger data volumes. Version 2 also improves collection performance by removing the need to collect Count-Min sketch statistics for predicate selectivity estimation, and also supporting automated collection only on selected columns (see section on [Collecting Statistics on Some Columns](#collect-statistics-on-some-columns)).
+Version 2 is preferred, and will continue to be enhanced to ultimately replace Version 1 completely. Compared to Version 1, Version 2 improves the accuracy of many of the statistics collected for larger data volumes. Version 2 also improves collection performance by removing the need to collect Count-Min sketch statistics for predicate selectivity estimation, and also supporting automated collection only on selected columns (see [Collecting statistics on some columns](#collect-statistics-on-some-columns)).
 
 The following table lists the information collected by each version for usage in the optimizer estimates:
 
@@ -417,7 +416,7 @@ The following table lists the information collected by each version for usage in
 | The average length of columns | √ | √ |
 | The average length of indexes | √ | √ |
 
-### Switching between statistics versions
+### Switch between statistics versions
 
 It is recommended to ensure that all tables/indexes (and partitions) utilize statistics collection from the same version. Version 2 is recommended, however, it is not recommended to switch from one version to another without a justifiable reason such as an issue experienced with the version in use. A switch between versions might take a period of time when no statistics are available until all tables have been analyzed with the new version, which might negatively affect the optimizer plan choices if statistics are not available.
 
