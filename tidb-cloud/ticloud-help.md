@@ -1,28 +1,28 @@
 ---
-title: ticloud serverless import cancel
-summary: The reference of `ticloud serverless import cancel`.
+title: ticloud help
+summary: The reference of `ticloud help`.
 ---
 
-# ticloud serverless import cancel
+# ticloud help
 
-Cancel a data import task:
+Help provides help for any command in the application.
 
 ```shell
-ticloud serverless import cancel [flags]
+ticloud help [command] [flags]
 ```
 
 ## Examples
 
-Cancel an import task in interactive mode:
+To get help for the `auth` command:
 
 ```shell
-ticloud serverless import cancel
+ticloud help auth
 ```
 
-Cancel an import task in non-interactive mode:
+To get help for the `serveless create` command:
 
 ```shell
-ticloud serverless import cancel --project-id <project-id> --cluster-id <cluster-id> --import-id <import-id>
+ticloud help serveless create
 ```
 
 ## Flags
@@ -31,11 +31,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 
 | Flag                    | Description                                                   | Required | Note                                                 |
 |-------------------------|---------------------------------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | Specifies the ID of the cluster.                              | Yes      | Only works in non-interactive mode.                  |
-| --force                 | Cancel the import task without confirmation. | No       | Works in both non-interactive and interactive modes. |
 | -h, --help              | Shows help information for this command.                      | No       | Works in both non-interactive and interactive modes. |
-| --import-id string      | Specifies the ID of the import task.                          | Yes      | Only works in non-interactive mode.                  |
-| -p, --project-id string | Specifies the ID of the project.                              | Yes      | Only works in non-interactive mode.                  |
 
 ## Inherited flags
 

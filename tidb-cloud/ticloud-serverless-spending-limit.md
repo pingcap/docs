@@ -33,7 +33,6 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 |-------------------------|---------------------------------------------|----------|------------------------------------------------------|
 | -c, --cluster-id string | Specifies the ID of the cluster.                       | Yes      | Only works in non-interactive mode.                  |
 | --monthly int32         | Specifies the maximum monthly spending limit in USD cents. | Yes      | Only works in non-interactive mode.                  |
-| --force                 | Deletes a cluster without confirmation.      | No       | Works in both non-interactive and interactive modes. |
 | -h, --help              | Shows help information for this command.          | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags

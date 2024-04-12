@@ -1,28 +1,28 @@
 ---
-title: ticloud serverless import cancel
-summary: The reference of `ticloud serverless import cancel`.
+title: ticloud completion
+summary: The reference of `ticloud completion`.
 ---
 
-# ticloud serverless import cancel
+# ticloud completion
 
-Cancel a data import task:
+Generate the autocompletion script for ticloud for the specified shell.
 
 ```shell
-ticloud serverless import cancel [flags]
+ticloud completion [command]
 ```
 
 ## Examples
 
-Cancel an import task in interactive mode:
+Generate the autocompletion script for bash:
 
 ```shell
-ticloud serverless import cancel
+ticloud completion bash
 ```
 
-Cancel an import task in non-interactive mode:
+Generate the autocompletion script for zsh:
 
 ```shell
-ticloud serverless import cancel --project-id <project-id> --cluster-id <cluster-id> --import-id <import-id>
+ticloud completion zsh
 ```
 
 ## Flags
@@ -31,11 +31,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 
 | Flag                    | Description                                                   | Required | Note                                                 |
 |-------------------------|---------------------------------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | Specifies the ID of the cluster.                              | Yes      | Only works in non-interactive mode.                  |
-| --force                 | Cancel the import task without confirmation. | No       | Works in both non-interactive and interactive modes. |
 | -h, --help              | Shows help information for this command.                      | No       | Works in both non-interactive and interactive modes. |
-| --import-id string      | Specifies the ID of the import task.                          | Yes      | Only works in non-interactive mode.                  |
-| -p, --project-id string | Specifies the ID of the project.                              | Yes      | Only works in non-interactive mode.                  |
 
 ## Inherited flags
 

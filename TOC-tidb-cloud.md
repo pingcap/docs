@@ -663,6 +663,8 @@
       - [use](/tidb-cloud/ticloud-config-use.md)
     - project
       - [list](/tidb-cloud/ticloud-project-list.md)
+    - [completion](/tidb-cloud/ticloud-completion.md)
+    - [help](/tidb-cloud/ticloud-help.md)
     - [update](/tidb-cloud/ticloud-update.md)
   - [Table Filter](/table-filter.md)
   - [Resource Control](/tidb-resource-control.md)
