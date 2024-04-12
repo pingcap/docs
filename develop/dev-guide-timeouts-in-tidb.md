@@ -7,6 +7,22 @@ summary: Learn about timeouts in TiDB, and solutions for troubleshooting errors.
 
 This document describes various timeouts in TiDB to help you troubleshoot errors.
 
+## GC timeout
+
+TiDB's transaction implementation uses the MVCC (Multiple Version Concurrency Control) mechanism. When the newly written data overwrites the old data, the old data will not be replaced, but kept together with the newly written data. The versions are distinguished by the timestamp. TiDB uses the mechanism of periodic Garbage Collection (GC) to clean up the old data that is no longer needed.
+
+- For versions of TiDB prior to `4.0`:
+
+    By default, each MVCC version (consistency snapshots) is kept for 10 minutes. Transactions that take longer than 10 minutes to read will receive an error `GC life time is shorter than transaction duration`.
+
+- For TiDB version 4.0 and later:
+
+    For transactions that are active and do not exceed a duration of 24 hours, garbage collection (GC) will be blocked during the transaction period, preventing the occurrence of the error `GC life time is shorter than transaction duration`.
+
+If you need longer read time, for example, when you are using **Dumpling** for full backups (**Dumpling** backs up consistent snapshots), you can adjust the value of `tikv_gc_life_time` in the `mysql.tidb` table in TiDB to increase the MVCC version retention time. Note that `tikv_gc_life_time` takes effect globally and immediately. Increasing the value will increase the life time of all existing snapshots, and decreasing it will immediately shorten the life time of all snapshots. Too many MVCC versions will impact TiKV's processing efficiency. So you need to change `tikv_gc_life_time` back to the previous setting in time after doing a full backup with **Dumpling**.
+
+For more information about GC, see [GC Overview](/garbage-collection-overview.md).
+
 ## Transaction timeout
 
 GC does not affect ongoing transactions. However, there is still an upper limit to the number of pessimistic transactions that can run, with a limit on the transaction timeout and a limit on the memory used by the transaction. You can modify the transaction timeout by `max-txn-ttl` under the `[performance]` category of the TiDB profile, `60` minutes by default.
