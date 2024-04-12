@@ -35,7 +35,7 @@ Exporting data to local storage has the following limitations:
 
 **Amazon S3**
 
-To export data to Amazon S3, you need to provide an [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for your S3 bucket. Make sure the access key has the read and write access to your S3 bucket, including at least these permissions: `s3:PutObject`, and `s3:ListBucket`.
+To export data to Amazon S3, you need to provide an [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for your S3 bucket. Make sure the access key has read and write access to your S3 bucket, including at least these permissions: `s3:PutObject` and `s3:ListBucket`.
 
 ### Data filtering
 
