@@ -37,7 +37,6 @@ Exporting data to local storage has the following limitations:
 
 To export data to Amazon S3, you need to provide an [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for your S3 bucket. Make sure the access key has read and write access for your S3 bucket, including at least these permissions: `s3:PutObject` and `s3:ListBucket`.
 
-
 ### Data filtering
 
 You can filter data by specifying the database and table you want to export. If you specify a database without specifying a table, all tables in that specified database will be exported. If you do not specify a database when you export data to Amazon S3, all databases in the cluster will be exported.
