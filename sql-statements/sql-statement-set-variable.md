@@ -109,7 +109,7 @@ The following behavior differences apply:
 * Changes made with `SET GLOBAL` will be propagated to all TiDB instances in the cluster. This differs from MySQL, where changes do not propagate to replicas.
 * TiDB presents several variables as both readable and settable. This is required for MySQL compatibility, because it is common for both applications and connectors to read MySQL variables. For example: JDBC connectors both read and set query cache settings, despite not relying on the behavior.
 * Changes made with `SET GLOBAL` will persist through TiDB server restarts. This means that `SET GLOBAL` in TiDB behaves more similar to `SET PERSIST` as available in MySQL 8.0 and above.
-* TiDB doesn't support `SET PERSIST` and `SET PERSIST_ONLY` as TiDB persists global variables.
+* TiDB does not support `SET PERSIST` and `SET PERSIST_ONLY`, because TiDB persists global variables.
 
 ## See also
 
