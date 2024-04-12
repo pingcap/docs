@@ -1,9 +1,9 @@
 ---
-title: TiDB Serverless Export (Beta)
+title: Export Data from TiDB Serverless
 summary: Learn how to export data from TiDB Serverless clusters.
 ---
 
-# TiDB Serverless Export (Beta)
+# Export Data from TiDB Serverless
 
 TiDB Serverless Export (Beta) is a service that enables you to export data from a TiDB Serverless cluster to local storage or an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
 
