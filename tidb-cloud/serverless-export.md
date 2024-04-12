@@ -23,7 +23,7 @@ You can export data to local storage or [Amazon S3](https://aws.amazon.com/s3/).
 
 > **Note:**
 >
-> If the size of the data to be exported is large(more than 100 GiB), it is recommended that you export it to Amazon S3.
+> If the size of the data to be exported is large (more than 100 GiB), it is recommended that you export it to Amazon S3.
 
 **Local storage**
 
