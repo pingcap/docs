@@ -20,6 +20,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 - TiCDC introduces the [`sink.csv.binary-encoding-method`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) configuration item to control the encoding method of binary data in the CSV protocol. The default value is `'base64'` [#9373](https://github.com/pingcap/tiflow/issues/9373) @[CharlesCheung96](https://github.com/CharlesCheung96)
 - TiCDC introduces the [`large-message-handle-option`](/ticdc/ticdc-sink-to-kafka.md#handle-messages-that-exceed-the-kafka-topic-limit) configuration item. It is empty by default, which means that the changefeed fails when the message size exceeds the limit of the Kafka topic. When this configuration is set to `"handle-key-only"`, if the message exceeds the size limit, only the handle key will be sent to reduce the message size; if the reduced message still exceeds the limit, then the changefeed fails [#9680](https://github.com/pingcap/tiflow/issues/9680) @[3AceShowHand](https://github.com/3AceShowHand)
 
+### Behavior changes
+
+- For transactions containing multiple changes, if the primary key or non-null unique index value is modified in the update event, TiCDC splits an event into delete and insert events and ensures that all events follow the sequence of delete events preceding insert events. For more information, see [documentation](/ticdc/ticdc-behavior-change.md#transactions-containing-multiple-update-changes).
+
 ## Improvements
 
 + TiDB
@@ -104,7 +108,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
     - Fix the issue that inserting data into a partitioned table might fail after exchanging partitions between the partition table and a table with placement policies  [#45791](https://github.com/pingcap/tidb/issues/45791) @[mjonss](https://github.com/mjonss)
     - Fix the issue of encoding time fields with incorrect timezone information [#46033](https://github.com/pingcap/tidb/issues/46033) @[tangenta](https://github.com/tangenta)
     - Fix the issue that DDL statements that fast add indexes would get stuck when the `tmp` directory does not exist [#45456](https://github.com/pingcap/tidb/issues/45456) @[tangenta](https://github.com/tangenta)
-    - Fix the issue that upgrading multiple TiDB instances simultaneously might block the upgrade process [#46288](https://github.com/pingcap/tidb/issues/46228) @[zimulala](https://github.com/zimulala)
+    - Fix the issue that upgrading multiple TiDB instances simultaneously might block the upgrade process [#46228](https://github.com/pingcap/tidb/issues/46228) @[zimulala](https://github.com/zimulala)
     - Fix the issue of uneven Region scattering caused by incorrect parameters used in splitting Regions [#46135](https://github.com/pingcap/tidb/issues/46135) @[zimulala](https://github.com/zimulala)
     - Fix the issue that DDL operations might get stuck after TiDB is restarted [#46751](https://github.com/pingcap/tidb/issues/46751) @[wjhuang2016](https://github.com/wjhuang2016)
     - Prohibit split table operations on non-integer clustered indexes [#47350](https://github.com/pingcap/tidb/issues/47350) @[tangenta](https://github.com/tangenta)
@@ -165,7 +169,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
         - Fix the issue that PITR fails to recover data from GCS [#47022](https://github.com/pingcap/tidb/issues/47022) @[Leavrth](https://github.com/Leavrth)
         - Fix the potential error in fine-grained backup phase in RawKV mode [#37085](https://github.com/pingcap/tidb/issues/37085) @[pingyu](https://github.com/pingyu)
         - Fix the issue that recovering meta-kv using PITR might cause errors [#46578](https://github.com/pingcap/tidb/issues/46578) @[Leavrth](https://github.com/Leavrth)
-        - Fix the errors in BR integration test cases [#45561](https://github.com/pingcap/tidb/issues/46561) @[purelind](https://github.com/purelind)
+        - Fix the errors in BR integration test cases [#46561](https://github.com/pingcap/tidb/issues/46561) @[purelind](https://github.com/purelind)
         - Fix the issue of restore failures by increasing the default values of the global parameters `TableColumnCountLimit` and `IndexLimit` used by BR to their maximum values [#45793](https://github.com/pingcap/tidb/issues/45793) @[Leavrth](https://github.com/Leavrth)
         - Fix the issue that the br CLI client gets stuck when scanning restored data [#45476](https://github.com/pingcap/tidb/issues/45476) @[3pointer](https://github.com/3pointer)
         - Fix the issue that PITR might skip restoring the `CREATE INDEX` DDL statement [#47482](https://github.com/pingcap/tidb/issues/47482) @[Leavrth](https://github.com/Leavrth)

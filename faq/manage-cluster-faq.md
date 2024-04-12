@@ -55,7 +55,7 @@ By default, TiDB/PD/TiKV outputs standard error in the logs. If a log file is sp
 
 ### Does TiDB support session timeout?
 
-TiDB currently supports two timeouts, [`wait_timeout`](/system-variables.md#wait_timeout) and [`interactive_timeout`](/system-variables.md#interactive_timeout).
+TiDB currently supports the following timeouts: [`wait_timeout`](/system-variables.md#wait_timeout), [`interactive_timeout`](/system-variables.md#interactive_timeout), and [`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760).
 
 ### What is the TiDB version management strategy?
 
@@ -144,6 +144,10 @@ Most of the APIs of PD are available only when the TiKV cluster is initialized. 
 ### The `etcd cluster ID mismatch` message is displayed when starting PD
 
 This is because the `--initial-cluster` in the PD startup parameter contains a member that doesn't belong to this cluster. To solve this problem, check the corresponding cluster of each member, remove the wrong member, and then restart PD.
+
+### The `[PD:encryption:ErrEncryptionNewMasterKey]fail to get encryption key from file /root/path/file%!(EXTRA string=open /root/path/file: permission denied)` message is displayed when enabling encryption at rest for PD
+ 
+Encryption at rest does not support storing the key file in the `root` directory or its subdirectories. Even if you grant read permissions, the same error occurs. To resolve this issue, store the key file in a location outside the `root` directory.
 
 ### What's the maximum tolerance for time synchronization error of PD?
 

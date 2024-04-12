@@ -16,7 +16,7 @@ aliases: ['/docs/tidb-data-migration/dev/overview/','/docs/tidb-data-migration/d
 
 ## Basic features
 
-- **Compatibility with MySQL.** DM is compatible with MySQL 5.7 protocols and most of the features and syntax of MySQL 5.7.
+- **Compatibility with MySQL.** DM is compatible with the MySQL protocol and most of the features and syntax of MySQL 5.7 and MySQL 8.0.
 - **Replicating DML and DDL events.** It supports parsing and replicating DML and DDL events in MySQL binlog.
 - **Migrating and merging MySQL shards.** DM supports migrating and merging multiple MySQL database instances upstream to one TiDB database downstream. It supports customizing replication rules for different migration scenarios. It can automatically detect and handle DDL changes of upstream MySQL shards, which greatly reduces the operational cost.
 - **Various types of filters.** You can predefine event types, regular expressions, and SQL expressions to filter out MySQL binlog events during the data migration process.
@@ -40,9 +40,7 @@ tiup install dm dmctl
 Before using the DM tool, note the following restrictions:
 
 + Database version requirements
-
-    - MySQL version 5.6,5.7
-    - MySQL version 8.0 (experimental features)
+    - MySQL version 5.6 ~ 8.0
     - MariaDB version >= 10.1.2 (experimental features)
 
     > **Note:**
@@ -63,6 +61,10 @@ Before using the DM tool, note the following restrictions:
 + GBK character set compatibility
 
     - DM does not support migrating `charset=GBK` tables to TiDB clusters earlier than v5.4.0.
+
++ Binlog compatibility
+
+    - DM does not support the MySQL 8.0 new feature binlog [Transaction_payload_event](https://dev.mysql.com/doc/refman/8.0/en/binary-log-transaction-compression.html). Using binlog Transaction_payload_event might result in data inconsistency between upstream and downstream.
 
 ## Contributing
 

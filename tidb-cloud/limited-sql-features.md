@@ -51,7 +51,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `LOAD DATA INFILE` | Only supports `LOAD DATA LOCAL INFILE` | Only supports `LOAD DATA LOCAL INFILE` |
 | `CHANGE DRAINER` | Not supported [^7] | Not supported [^7] |
 | `CHANGE PUMP` | Not supported [^7] | Not supported [^7] |
-| `FLASHBACK CLUSTER TO TIMESTAMP` | Supported | Not supported [^3] |
+| `FLASHBACK CLUSTER` | Supported | Not supported [^3] |
 | `LOAD STATS` | Supported | Not supported |
 | `SELECT ... INTO OUTFILE` | Not supported [^4] | Not supported [^4] |
 | `SET CONFIG` | Not supported [^4] | Not supported [^4] |
@@ -60,7 +60,6 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `SHOW PLUGINS` | Supported | Not supported [^8] |
 | `SHOW PUMP STATUS` | Not supported [^7] | Not supported [^7] |
 | `SHUTDOWN` | Not supported [^4] | Not supported [^4] |
-| `CREATE TABLE ... AUTO_ID_CACHE` | Supported | Not supported [^12] |
 
 ## Functions and operators
 
@@ -134,7 +133,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `max_allowed_packet` | No limitation | Read-only [^11] |
 | `plugin_dir` | No limitation | Not supported [^8] |
 | `plugin_load` | No limitation | Not supported [^8] |
-| `require_secure_transport` | Not supported [^13] | Read-only [^11] |
+| `require_secure_transport` | Not supported [^12] | Read-only [^11] |
 | `skip_name_resolve` | No limitation | Read-only [^11] |
 | `sql_log_bin` | No limitation | Read-only [^11] |
 | `tidb_cdc_write_source` | No limitation | Read-only [^11] |
@@ -246,6 +245,4 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 [^11]: The variable is read-only on TiDB Serverless.
 
-[^12]: Customizing cache size using [`AUTO_ID_CACHE`](/auto-increment.md#cache-size-control) is temporarily unavailable on TiDB Serverless.
-
-[^13]: Not supported. Enabling `require_secure_transport` for TiDB Dedicated clusters will result in SQL client connection failures.
+[^12]: Not supported. Enabling `require_secure_transport` for TiDB Dedicated clusters will result in SQL client connection failures.

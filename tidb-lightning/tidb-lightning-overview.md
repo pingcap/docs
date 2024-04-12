@@ -6,7 +6,7 @@ aliases: ['/docs/dev/tidb-lightning/tidb-lightning-overview/','/docs/dev/referen
 
 # TiDB Lightning Overview
 
-[TiDB Lightning](https://github.com/pingcap/tidb/tree/master/br/pkg/lightning) is a tool used for importing data at TB scale to TiDB clusters. It is often used for initial data import to TiDB clusters.
+[TiDB Lightning](https://github.com/pingcap/tidb/tree/master/lightning) is a tool used for importing data at TB scale to TiDB clusters. It is often used for initial data import to TiDB clusters.
 
 TiDB Lightning supports the following file formats:
 
@@ -19,7 +19,6 @@ TiDB Lightning can read data from the following sources:
 - Local
 - [Amazon S3](/external-storage-uri.md#amazon-s3-uri-format)
 - [Google Cloud Storage](/external-storage-uri.md#gcs-uri-format)
-- [Azure Blob Storage](/external-storage-uri.md#azure-blob-storage-uri-format)
 
 ## TiDB Lightning architecture
 

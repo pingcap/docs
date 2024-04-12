@@ -56,6 +56,8 @@ CREATE TABLE test.select (BEGIN int, END int);
 Query OK, 0 rows affected (0.08 sec)
 ```
 
+Starting from v7.6.0, TiDB provides a full list of keywords in the [`INFORMATION_SCHEMA.KEYWORDS`](/information-schema/information-schema-keywords.md) table.
+
 ## Keyword list
 
 The following list shows the keywords in TiDB. Reserved keywords are marked with `(R)`. Reserved keywords for [Window Functions](/functions-and-operators/window-functions.md) are marked with `(R-Window)`. Special non-reserved keywords that need to be escaped with backticks `` ` `` are marked with `(S)`.
@@ -393,7 +395,6 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - LIST
 - LOAD (R)
 - LOCAL
-- LOCAL_ONLY
 - LOCALTIME (R)
 - LOCALTIMESTAMP (R)
 - LOCATION
@@ -732,6 +733,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - UNIQUE (R)
 - UNKNOWN
 - UNLOCK (R)
+- UNSET
 - UNSIGNED (R)
 - UNTIL (R)
 - UPDATE (R)

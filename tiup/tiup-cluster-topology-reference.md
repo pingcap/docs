@@ -1,5 +1,6 @@
 ---
 title: Topology Configuration File for TiDB Deployment Using TiUP
+summary: TiUP uses a topology file to deploy or modify the cluster topology for TiDB. It also deploys monitoring servers like Prometheus, Grafana, and Alertmanager. The topology file contains sections for global configuration, monitoring services, component versions, and more. Each section specifies the machines to which the corresponding services are deployed and their configurations.
 ---
 
 # Topology Configuration File for TiDB Deployment Using TiUP
@@ -7,6 +8,8 @@ title: Topology Configuration File for TiDB Deployment Using TiUP
 To deploy or scale TiDB using TiUP, you need to provide a topology file ([sample](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)) to describe the cluster topology.
 
 Similarly, to modify the cluster topology, you need to modify the topology file. The difference is that, after the cluster is deployed, you can only modify a part of the fields in the topology file. This document introduces each section of the topology file and each field in each section.
+
+When you deploy a TiDB cluster using TiUP, TiUP also deploys monitoring servers, such as Prometheus, Grafana, and Alertmanager. In the meantime, if you scale out this cluster, TiUP also adds the new nodes into monitoring scope. To customize the configurations of the preceding monitoring servers, you can follow the instructions in [Customize Configurations of Monitoring Servers](/tiup/customized-montior-in-tiup-environment.md).
 
 ## File structure
 
@@ -20,6 +23,7 @@ A topology configuration file for TiDB deployment using TiUP might contain the f
 - [tidb_servers](#tidb_servers): The configuration of the TiDB instance. This configuration specifies the machines to which the TiDB component is deployed.
 - [tikv_servers](#tikv_servers): The configuration of the TiKV instance. This configuration specifies the machines to which the TiKV component is deployed.
 - [tiflash_servers](#tiflash_servers): The configuration of the TiFlash instance. This configuration specifies the machines to which the TiFlash component is deployed.
+- [tiproxy_servers](#tiproxy_servers): The configuration of the TiProxy instance. This configuration specifies the machines to which the TiProxy component is deployed.
 - [pump_servers](#pump_servers): The configuration of the Pump instance. This configuration specifies the machines to which the Pump component is deployed.
 - [drainer_servers](#drainer_servers): The configuration of the Drainer instance. This configuration specifies the machines to which the Drainer component is deployed.
 - [cdc_servers](#cdc_servers): The configuration of the TiCDC instance. This configuration specifies the machines to which the TiCDC component is deployed.
@@ -133,6 +137,8 @@ The above configuration specifies that `node_exporter` uses the `9100` port and 
 - `tiflash`: TiFlash service-related configuration. For the complete configuration, see [TiFlash configuration file](/tiflash/tiflash-configuration.md).
 
 - `tiflash_learner`: Each TiFlash node has a special built-in TiKV. This configuration item is used to configure this special TiKV. It is generally not recommended to modify the content under this configuration item.
+
+- `tiproxy`: TiProxy service-related configuration. For the complete configuration, see [TiProxy configuration file](/tiproxy/tiproxy-configuration.md).
 
 - `pump`: Pump service-related configuration. For the complete configuration, see [TiDB Binlog configuration file](/tidb-binlog/tidb-binlog-configuration-file.md#pump).
 
@@ -412,6 +418,45 @@ A `tiflash_servers` configuration example is as follows:
 
 ```yaml
 tiflash_servers:
+  - host: 10.0.1.21
+  - host: 10.0.1.22
+```
+
+### `tiproxy_servers`
+
+`tiproxy_servers` specifies the machines to which the TiProxy services are deployed and the service configuration on each machine. `tiproxy_servers` is an array, and each element of the array contains the following fields:
+
+- `host`: Specifies the IP address of the machine to which the TiProxy services are deployed. This field is mandatory.
+
+- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+
+- `port`: The listening port of the TiProxy SQL services. The default value is `6000`.
+
+- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated based on the `deploy_dir` directory configured in `global`.
+
+- `data_dir`: Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated based on the `data_dir` directory configured in `global`.
+
+- `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is of string type. The value is the ID of the NUMA node, such as `"0,1"`.
+
+- `config`: The configuration rule of this field is the same as the `tiproxy` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `tiproxy` content in `server_configs`. If these two fields overlap, the content of this field takes effect. Subsequently, a configuration file is generated and sent to the machine specified in `host`.
+
+- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
+
+- `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
+
+Among the above fields, you cannot modify the following configured fields after the deployment:
+
+- `host`
+- `port`
+- `deploy_dir`
+- `data_dir`
+- `arch`
+- `os`
+
+A `tiproxy_servers` configuration example is as follows:
+
+```yaml
+tiproxy_servers:
   - host: 10.0.1.21
   - host: 10.0.1.22
 ```
@@ -707,6 +752,10 @@ tispark_workers:
 
 - `resource_control`: Resource control for the service. If this field is configured, the field content is merged with the `resource_control` content in `global` (if the two fields overlap, the content of this field takes effect). Then, a systemd configuration file is generated and sent to the machine specified in `host`. The configuration rules of `resource_control` are the same as the `resource_control` content in `global`.
 
+- `additional_args`: Introduced in TiUP v1.15.0, this field configures additional parameters for running Prometheus. This field is an array, and each element of the array is a Prometheus running parameter. For example, to enable the Prometheus hot reload feature, you can set this field to `--web.enable-lifecycle`.
+
+- `additional_scrape_conf`: Customized Prometheus scrape configuration. When you deploy, scale out, scale in, or reload a TiDB cluster, TiUP adds the content of the `additional_scrape_conf` field to the corresponding parameters of the Prometheus configuration file. For more information, see [Customize Prometheus scrape configuration](/tiup/customized-montior-in-tiup-environment.md#customize-prometheus-scrape-configuration).
+
 For the above fields, you cannot modify these configured fields after the deployment:
 
 - `host`
@@ -723,6 +772,8 @@ A `monitoring_servers` configuration example is as follows:
 monitoring_servers:
   - host: 10.0.1.11
     rule_dir: /local/rule/dir
+    additional_args:
+    - --web.enable-lifecycle
     remote_config:
       remote_write:
       - queue_config:
@@ -763,6 +814,8 @@ monitoring_servers:
 - `dashboard_dir`: Specifies a local directory that should contain complete `dashboard(*.json)` files. These files are transferred to the target machine during the initialization phase of the cluster configuration as the dashboards for Grafana.
 
 - `resource_control`: Resource control for the service. If this field is configured, the field content is merged with the `resource_control` content in `global` (if the two fields overlap, the content of this field takes effect). Then, a systemd configuration file is generated and sent to the machine specified in `host`. The configuration rules of `resource_control` are the same as the `resource_control` content in `global`.
+
+- `config`: This field is used to add custom configurations to Grafana. When you deploy, scale out, scale in, or reload a TiDB cluster, TiUP adds the content of the `config` field to the Grafana configuration file `grafana.ini`. For more information, see [Customize other Grafana configurations](/tiup/customized-montior-in-tiup-environment.md#customize-other-grafana-configurations).
 
 > **Note:**
 >
@@ -814,6 +867,8 @@ grafana_servers:
 - `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
 
 - `resource_control`: Resource control for the service. If this field is configured, the field content is merged with the `resource_control` content in `global` (if the two fields overlap, the content of this field takes effect). Then, a systemd configuration file is generated and sent to the machine specified in `host`. The configuration rules of `resource_control` are the same as the `resource_control` content in `global`.
+
+- `listen_host`: Specifies the listening address so that Alertmanager can be accessed through a proxy. It is recommended to configure it as `0.0.0.0`. For more information, see [Customize Alertmanager configurations](/tiup/customized-montior-in-tiup-environment.md#customize-alertmanager-configurations).
 
 For the above fields, you cannot modify these configured fields after the deployment:
 

@@ -24,10 +24,11 @@ By default, **CHOOSE MASTER ONLY** so your changes will be applied to the next T
 For details, see [tips for choosing the affected versions](https://github.com/pingcap/docs/blob/master/CONTRIBUTING.md#guideline-for-choosing-the-affected-versions).
 
 - [ ] master (the latest development version)
+- [ ] v8.1 (TiDB 8.1 versions)
+- [ ] v8.0 (TiDB 8.0 versions)
 - [ ] v7.6 (TiDB 7.6 versions)
 - [ ] v7.5 (TiDB 7.5 versions)
 - [ ] v7.4 (TiDB 7.4 versions)
-- [ ] v7.3 (TiDB 7.3 versions)
 - [ ] v7.1 (TiDB 7.1 versions)
 - [ ] v6.5 (TiDB 6.5 versions)
 - [ ] v6.1 (TiDB 6.1 versions)
@@ -35,7 +36,6 @@ For details, see [tips for choosing the affected versions](https://github.com/pi
 - [ ] v5.3 (TiDB 5.3 versions)
 - [ ] v5.2 (TiDB 5.2 versions)
 - [ ] v5.1 (TiDB 5.1 versions)
-- [ ] v5.0 (TiDB 5.0 versions)
 
 ### What is the related PR or file link(s)?
 

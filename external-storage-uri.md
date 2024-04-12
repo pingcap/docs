@@ -38,6 +38,16 @@ The following is an example of an Amazon S3 URI for TiDB Lightning and BR. In th
 s3://external/testfolder?access-key=${access-key}&secret-access-key=${secret-access-key}
 ```
 
+The following is an example of an Amazon S3 URI for TiCDC `sink-uri`.
+
+```shell
+tiup cdc:v7.5.0 cli changefeed create \
+    --server=http://172.16.201.18:8300 \
+    --sink-uri="s3://cdc?endpoint=http://10.240.0.38:9000&access-key=${access-key}&secret-access-key=${secret-access-key}" \
+    --changefeed-id="cdcTest" \
+    --config=cdc_csv.toml
+```
+
 The following is an example of an Amazon S3 URI for [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md). In this example, you need to specify a specific filename `test.csv`.
 
 ```shell
@@ -79,14 +89,8 @@ gcs://external/test.csv?credentials-file=${credentials-file-path}
     - `encryption-scope`: Specifies the [encryption scope](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-scope-manage?tabs=powershell#upload-a-blob-with-an-encryption-scope) for server-side encryption.
     - `encryption-key`: Specifies the [encryption key](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-customer-provided-keys) for server-side encryption, which uses the AES256 encryption algorithm.
 
-The following is an example of an Azure Blob Storage URI for TiDB Lightning and BR. In this example, you need to specify a specific file path `testfolder`.
+The following is an example of an Azure Blob Storage URI for BR. In this example, you need to specify a specific file path `testfolder`.
 
 ```shell
 azure://external/testfolder?account-name=${account-name}&account-key=${account-key}
-```
-
-The following is an example of an Azure Blob Storage URI for [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md). In this example, you need to specify a specific filename `test.csv`.
-
-```shell
-azure://external/test.csv?account-name=${account-name}&account-key=${account-key}
 ```

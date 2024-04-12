@@ -92,7 +92,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/status
 
 ```json
 {
-  "version": "v7.5.0",
+  "version": "v8.0.0",
   "git_hash": "10413bded1bdb2850aa6d7b94eb375102e9c44dc",
   "id": "d2912e63-3349-447c-90ba-72a4e04b5e9e",
   "pid": 1447,
@@ -158,15 +158,6 @@ This interface is used to submit a replication task to TiCDC. If the request is 
     "enable_old_value": true,
     "enable_sync_point": true,
     "filter": {
-      "do_dbs": [
-        "string"
-      ],
-      "do_tables": [
-        {
-          "database_name": "string",
-          "table_name": "string"
-        }
-      ],
       "event_filters": [
         {
           "ignore_delete_value_expr": "string",
@@ -182,15 +173,6 @@ This interface is used to submit a replication task to TiCDC. If the request is 
           "matcher": [
             "string"
           ]
-        }
-      ],
-      "ignore_dbs": [
-        "string"
-      ],
-      "ignore_tables": [
-        {
-          "database_name": "string",
-          "table_name": "string"
         }
       ],
       "ignore_txn_start_ts": [
@@ -297,10 +279,6 @@ The `filter` parameters are described as follows:
 
 | Parameter name | Description |
 |:-----------------|:---------------------------------------|
-| `do_dbs`              | `STRING ARRAY` type. The databases to be replicated. (Optional)                                       |
-| `do_tables`           | The tables to be replicated. (Optional)                                                     |
-| `ignore_dbs`          | `STRING ARRAY` type. The databases to be ignored. (Optional)            |
-| `ignore_tables`       | The tables to be ignored. (Optional)        |
 | `event_filters`       | The configuration to filter events. (Optional)  |
 | `ignore_txn_start_ts` | `UINT64 ARRAY` type. Specifying this will ignore transactions that specify `start_ts`, such as `[1, 2]`. (Optional)   |
 | `rules`               | `STRING ARRAY` type. The rules for table schema filtering, such as `['foo*.*', 'bar*.*']`. For more information, see [Table Filter](/table-filter.md). (Optional)  |
@@ -332,7 +310,7 @@ The `sink` parameters are described as follows:
 | `date_separator`        | `STRING` type. Indicates the date separator type of the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. (Optional) |
 | `dispatchers`           | An configuration array for event dispatching. (Optional)                                                                                                                                                       |
 | `encoder_concurrency`   | `INT` type. The number of encoder threads in the MQ sink. The default value is `16`. (Optional)                                                                                                                |
-| `protocol`              | `STRING` type. For MQ sinks, you can specify the protocol format of the message. The following protocols are currently supported: `canal-json`, `open-protocol`, `canal`, `avro`, and `maxwell`.               |
+| `protocol`              | `STRING` type. For MQ sinks, you can specify the protocol format of the message. The following protocols are currently supported: `canal-json`, `open-protocol`, `avro`, and `maxwell`.               |
 | `schema_registry`       | `STRING` type. The schema registry address. (Optional)                                                                                                                                                         |
 | `terminator`            | `STRING` type. The terminator is used to separate two data change events. The default value is null, which means `"\r\n"` is used as the terminator. (Optional)                                                |
 | `transaction_atomicity` | `STRING` type. The atomicity level of the transaction. (Optional)                                                                                                                                              |
@@ -356,11 +334,11 @@ The `sink.csv` parameters are described as follows:
 | `quote`                  | `STRING` type. The quotation character used to surround fields in the CSV file. If the value is empty, no quotation is used. The default value is `"`. |
 | `binary_encoding_method` | `STRING` type. The encoding method of binary data, which can be `"base64"` or `"hex"`. The default value is `"base64"`. |
 
-`sink.dispatchers`: for the sink of MQ type, you can use this parameter to configure the event dispatcher. The following dispatchers are supported: `default`, `ts`, `rowid`, and `table`. The dispatcher rules are as follows:
+`sink.dispatchers`: for the sink of MQ type, you can use this parameter to configure the event dispatcher. The following dispatchers are supported: `default`, `ts`, `index-value`, and `table`. The dispatcher rules are as follows:
 
 - `default`: dispatches events in the `table` mode.
 - `ts`: uses the commitTs of the row change to create the hash value and dispatch events.
-- `rowid`: uses the name and value of the selected HandleKey column to create the hash value and dispatch events.
+- `index-value`: uses the name and value of the selected HandleKey column to create the hash value and dispatch events.
 - `table`: uses the schema name of the table and the table name to create the hash value and dispatch events.
 
 `sink.dispatchers` is an array. The parameters are described as follows:
@@ -412,15 +390,6 @@ If the request is successful, `200 OK` is returned. If the request fails, an err
     "enable_old_value": true,
     "enable_sync_point": true,
     "filter": {
-      "do_dbs": [
-        "string"
-      ],
-      "do_tables": [
-        {
-          "database_name": "string",
-          "table_name": "string"
-        }
-      ],
       "event_filters": [
         {
           "ignore_delete_value_expr": "string",
@@ -436,15 +405,6 @@ If the request is successful, `200 OK` is returned. If the request fails, an err
           "matcher": [
             "string"
           ]
-        }
-      ],
-      "ignore_dbs": [
-        "string"
-      ],
-      "ignore_tables": [
-        {
-          "database_name": "string",
-          "table_name": "string"
         }
       ],
       "ignore_txn_start_ts": [
@@ -616,15 +576,6 @@ To modify the changefeed configuration, follow the steps of `pause the replicati
     "enable_old_value": true,
     "enable_sync_point": true,
     "filter": {
-      "do_dbs": [
-        "string"
-      ],
-      "do_tables": [
-        {
-          "database_name": "string",
-          "table_name": "string"
-        }
-      ],
       "event_filters": [
         {
           "ignore_delete_value_expr": "string",
@@ -640,15 +591,6 @@ To modify the changefeed configuration, follow the steps of `pause the replicati
           "matcher": [
             "string"
           ]
-        }
-      ],
-      "ignore_dbs": [
-        "string"
-      ],
-      "ignore_tables": [
-        {
-          "database_name": "string",
-          "table_name": "string"
         }
       ],
       "ignore_txn_start_ts": [
@@ -809,6 +751,95 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds/test1
 ```
 
 The meanings of the JSON response body are the same as those in the [Create a replication task](#create-a-replication-task) section. See that section for details.
+
+## Query whether a specific replication task is completed
+
+This API is a synchronous interface. If the request is successful, it returns the synchronization status of the specified replication task (changefeed), including whether the task is completed and additional details.
+
+### Request URI
+
+`GET /api/v2/changefeed/{changefeed_id}/synced`
+
+### Parameter description
+
+#### Path parameter
+
+| Parameter name  | Description                 |
+|:----------------|:----------------------------|
+| `changefeed_id` | The ID of the replication task (changefeed) to be queried. |
+
+### Examples
+
+The following request queries the synchronization status of the replication task with the ID `test1`.
+
+```shell
+curl -X GET http://127.0.0.1:8300/api/v2/changefeed/test1/synced
+```
+
+**Example 1: The synchronization is completed**
+
+```json
+{
+  "synced": true,
+  "sink_checkpoint_ts": "2023-11-30 15:14:11.015",
+  "puller_resolved_ts": "2023-11-30 15:14:12.215",
+  "last_synced_ts": "2023-11-30 15:08:35.510",
+  "now_ts": "2023-11-30 15:14:11.511",
+  "info": "Data syncing is finished"
+}
+```
+
+The response includes the following fields:
+
+- `synced`: whether this replication task is completed. `true` means the task is completed, and `false` means potential incompleteness. If it is `false`, you need to check both the `info` field and other fields for the specific status.
+- `sink_checkpoint_ts`: the checkpoint-ts value of the sink module, in PD time.
+- `puller_resolved_ts`: the resolved-ts value of the puller module, in PD time.
+- `last_synced_ts`: the commit-ts value of the latest data processed by TiCDC, in PD time.
+- `now_ts`: current PD time.
+- `info`: supplementary information to assist in determining the synchronization status, especially when `synced` is `false`.
+
+**Example 2: The synchronization is not completed**
+
+```json
+{
+  "synced": false,
+  "sink_checkpoint_ts": "2023-11-30 15:26:31.519",
+  "puller_resolved_ts": "2023-11-30 15:26:23.525",
+  "last_synced_ts": "2023-11-30 15:24:30.115",
+  "now_ts": "2023-11-30 15:26:31.511",
+  "info": "The data syncing is not finished, please wait"
+}
+```
+
+This example shows the response of an ongoing replication task. By checking both `synced` and `info` fields, you can learn that the replication task is not completed yet and further waiting is expected.
+
+**Example 3: The synchronization status needs further check**
+
+```json
+{
+  "synced":false,
+  "sink_checkpoint_ts":"2023-12-13 11:45:13.515",
+  "puller_resolved_ts":"2023-12-13 11:45:13.525",
+  "last_synced_ts":"2023-12-13 11:45:07.575",
+  "now_ts":"2023-12-13 11:50:24.875",
+  "info":"Please check whether PD is online and TiKV Regions are all available. If PD is offline or some TiKV regions are not available, it means that the data syncing process is complete. To check whether TiKV regions are all available, you can view 'TiKV-Details' > 'Resolved-Ts' > 'Max Leader Resolved TS gap' on Grafana. If the gap is large, such as a few minutes, it means that some regions in TiKV are unavailable. Otherwise, if the gap is small and PD is online, it means the data syncing is incomplete, so please wait"
+}
+```
+
+This API enables you to query the synchronization status even when the upstream cluster encounters disasters. In certain situations, you might not be able to directly determine whether the current data replication task of TiCDC is completed or not. In such cases, you can request this API, and then check both the `info` field in the response and the current status of the upstream cluster to determine the specific status.
+
+In this example, `sink_checkpoint_ts` is behind `now_ts` in time, either because TiCDC is still catching up with data replication, or because the PD or TiKV has failed. If this is due to TiCDC still catching up with data replication, it means that the replication task is not completed yet. If this is due to a PD or TiKV failure, it means that the replication task is completed. Therefore, you need to check the `info` field to assist in determining the cluster status.
+
+**Example 4: Query error**
+
+```json
+{
+  "error_msg": "[CDC:ErrPDEtcdAPIError]etcd api call error: context deadline exceeded",
+  "error_code": "CDC:ErrPDEtcdAPIError"
+}
+```
+
+In cases where PD in the upstream cluster fails for a long period of time, querying this API might return an error similar to the preceding one, which provides no information for further check. Because PD failures directly affect TiCDC data replication, when getting such errors, you can assume that TiCDC has completed the data replication as much as possible, but data loss might still occur in the downstream cluster due to PD failures.
 
 ## Pause a replication task
 

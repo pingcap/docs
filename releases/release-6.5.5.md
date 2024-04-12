@@ -25,7 +25,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     - Improve stability of PITR checkpoint lag during leader transfers [#13638](https://github.com/tikv/tikv/issues/13638) @[YuJuncen](https://github.com/YuJuncen)
     - Add logs and monitoring metrics related to `safe-ts` [#15082](https://github.com/tikv/tikv/issues/15082) @[ekexium](https://github.com/ekexium)
     - Provide more logs and monitoring metrics for `resolved-ts` [#15082](https://github.com/tikv/tikv/issues/15082) @[ekexium](https://github.com/ekexium)
-    - Optimize the compaction mechanism: when a Region is split, if there is no key to split, a compaction is triggered to eliminate excessive MVCC versions [#15282](https://github.com/tikv/tikv/issues/15282) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
 
 + Tools
 
@@ -57,7 +56,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
         - Fix the issue that restoring implicit primary keys by PITR might lead to conflicts [#46520](https://github.com/pingcap/tidb/issues/46520) @[3pointer](https://github.com/3pointer)
         - Fix the issue that an error occurs when PITR recovers the meta-kv [#46578](https://github.com/pingcap/tidb/issues/46578) @[Leavrth](https://github.com/Leavrth)
-        - Fix an error in BR integration test cases [#45561](https://github.com/pingcap/tidb/issues/46561) @[purelind](https://github.com/purelind)
+        - Fix an error in BR integration test cases [#46561](https://github.com/pingcap/tidb/issues/46561) @[purelind](https://github.com/purelind)
         - Fix the issue that PITR fails to restore data from GCS [#47022](https://github.com/pingcap/tidb/issues/47022) @[Leavrth](https://github.com/Leavrth)
 
     + TiCDC

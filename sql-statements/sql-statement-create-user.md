@@ -20,6 +20,12 @@ IfNotExists ::=
 UserSpecList ::=
     UserSpec ( ',' UserSpec )*
 
+RequireClauseOpt ::=
+    ( 'REQUIRE' 'NONE' | 'REQUIRE' 'SSL' | 'REQUIRE' 'X509' | 'REQUIRE' RequireList )?  
+    
+RequireList ::=
+    ( "ISSUER" stringLit | "SUBJECT" stringLit | "CIPHER" stringLit | "SAN" stringLit | "TOKEN_ISSUER" stringLit )*
+
 UserSpec ::=
     Username AuthOption
 
@@ -37,6 +43,10 @@ LockOption ::= ( 'ACCOUNT' 'LOCK' | 'ACCOUNT' 'UNLOCK' )?
 AttributeOption ::= ( 'COMMENT' CommentString | 'ATTRIBUTE' AttributeString )?
 
 ResourceGroupNameOption::= ( 'RESOURCE' 'GROUP' Identifier)?
+
+RequireClauseOpt ::= ('REQUIRE' ('NONE' | 'SSL' | 'X509' | RequireListElement ('AND'? RequireListElement)*))?
+
+RequireListElement ::= 'ISSUER' Issuer | 'SUBJECT' Subject | 'CIPHER' Cipher | 'SAN' SAN | 'TOKEN_ISSUER' TokenIssuer
 ```
 
 ## Examples

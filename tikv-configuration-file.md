@@ -105,13 +105,6 @@ This document only describes the parameters that are not included in command-lin
     + If the configuration item is set to a value other than `0`, TiKV keeps at most the number of old log files specified by `max-backups`. For example, if the value is set to `7`, TiKV keeps up to 7 old log files.
 + Default value: `0`
 
-### `pd.enable-forwarding` <span class="version-mark">New in v5.0.0</span>
-
-+ Controls whether the PD client in TiKV forwards requests to the leader via the followers in the case of possible network isolation.
-+ Default value: `false`
-+ If the environment might have isolated network, enabling this parameter can reduce the window of service unavailability.
-+ If you cannot accurately determine whether isolation, network interruption, or downtime has occurred, using this mechanism has the risk of misjudgment and causes reduced availability and performance. If network failure has never occurred, it is not recommended to enable this parameter.
-
 ## server
 
 + Configuration items related to the server.
@@ -184,9 +177,9 @@ This document only describes the parameters that are not included in command-lin
 ### `grpc-stream-initial-window-size`
 
 + The window size of the gRPC stream
-+ Default value: `2MB`
-+ Unit: KB|MB|GB
-+ Minimum value: `"1KB"`
++ Default value: `2MiB`
++ Unit: KiB|MiB|GiB
++ Minimum value: `"1KiB"`
 
 ### `grpc-keepalive-time`
 
@@ -227,9 +220,9 @@ This document only describes the parameters that are not included in command-lin
 ### `snap-io-max-bytes-per-sec`
 
 + The maximum allowable disk bandwidth when processing snapshots
-+ Default value: `"100MB"`
-+ Unit: KB|MB|GB
-+ Minimum value: `"1KB"`
++ Default value: `"100MiB"`
++ Unit: KiB|MiB|GiB
++ Minimum value: `"1KiB"`
 
 ### `enable-request-batch`
 
@@ -290,9 +283,9 @@ Configuration items related to the single thread pool serving read requests. Thi
 
 + The stack size of the threads in the unified thread pool
 + Type: Integer + Unit
-+ Default value: `"10MB"`
-+ Unit: KB|MB|GB
-+ Minimum value: `"2MB"`
++ Default value: `"10MiB"`
++ Unit: KiB|MiB|GiB
++ Minimum value: `"2MiB"`
 + Maximum value: The number of Kbytes output in the result of the `ulimit -sH` command executed in the system.
 
 ### `max-tasks-per-worker`
@@ -355,9 +348,9 @@ Configuration items related to storage thread pool.
 
 + The stack size of threads in the Storage read thread pool
 + Type: Integer + Unit
-+ Default value: `"10MB"`
-+ Unit: KB|MB|GB
-+ Minimum value: `"2MB"`
++ Default value: `"10MiB"`
++ Unit: KiB|MiB|GiB
++ Minimum value: `"2MiB"`
 + Maximum value: The number of Kbytes output in the result of the `ulimit -sH` command executed in the system.
 
 ## `readpool.coprocessor`
@@ -409,9 +402,9 @@ Configuration items related to the Coprocessor thread pool.
 
 + The stack size of the thread in the Coprocessor thread pool
 + Type: Integer + Unit
-+ Default value: `"10MB"`
-+ Unit: KB|MB|GB
-+ Minimum value: `"2MB"`
++ Default value: `"10MiB"`
++ Unit: KiB|MiB|GiB
++ Minimum value: `"2MiB"`
 + Maximum value: The number of Kbytes output in the result of the `ulimit -sH` command executed in the system.
 
 ## storage
@@ -451,8 +444,8 @@ Configuration items related to storage.
 ### `scheduler-pending-write-threshold`
 
 + The maximum size of the write queue. A `Server Is Busy` error is returned for a new write to TiKV when this value is exceeded.
-+ Default value: `"100MB"`
-+ Unit: MB|GB
++ Default value: `"100MiB"`
++ Unit: MiB|GiB
 
 ### `enable-async-apply-prewrite`
 
@@ -463,9 +456,9 @@ Configuration items related to storage.
 
 + When TiKV is started, some space is reserved on the disk as disk protection. When the remaining disk space is less than the reserved space, TiKV restricts some write operations. The reserved space is divided into two parts: 80% of the reserved space is used as the extra disk space required for operations when the disk space is insufficient, and the other 20% is used to store the temporary file. In the process of reclaiming space, if the storage is exhausted by using too much extra disk space, this temporary file serves as the last protection for restoring services.
 + The name of the temporary file is `space_placeholder_file`, located in the `storage.data-dir` directory. When TiKV goes offline because its disk space ran out, if you restart TiKV, the temporary file is automatically deleted and TiKV tries to reclaim the space.
-+ When the remaining space is insufficient, TiKV does not create the temporary file. The effectiveness of the protection is related to the size of the reserved space. The size of the reserved space is the larger value between 5% of the disk capacity and this configuration value. When the value of this configuration item is `"0MB"`, TiKV disables this disk protection feature.
-+ Default value: `"5GB"`
-+ Unit: MB|GB
++ When the remaining space is insufficient, TiKV does not create the temporary file. The effectiveness of the protection is related to the size of the reserved space. The size of the reserved space is the larger value between 5% of the disk capacity and this configuration value. When the value of this configuration item is `"0MiB"`, TiKV disables this disk protection feature.
++ Default value: `"5GiB"`
++ Unit: MiB|GiB
 
 ### `enable-ttl`
 
@@ -521,7 +514,7 @@ Configuration items related to the sharing of block cache among multiple RocksDB
     + When `storage.engine="raft-kv"`, the default value is 45% of the size of total system memory.
     + When `storage.engine="partitioned-raft-kv"`, the default value is 30% of the size of total system memory.
 
-+ Unit: KB|MB|GB
++ Unit: KiB|MiB|GiB
 
 ## storage.flow-control
 
@@ -545,12 +538,12 @@ Configuration items related to the flow control mechanism in TiKV. This mechanis
 ### `soft-pending-compaction-bytes-limit`
 
 + When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism starts to reject some write requests and reports the `ServerIsBusy` error. When `enable` is set to `true`, this configuration item overrides `rocksdb.(defaultcf|writecf|lockcf).soft-pending-compaction-bytes-limit`.
-+ Default value: `"192GB"`
++ Default value: `"192GiB"`
 
 ### `hard-pending-compaction-bytes-limit`
 
 + When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism rejects all write requests and reports the `ServerIsBusy` error. When `enable` is set to `true`, this configuration item overrides `rocksdb.(defaultcf|writecf|lockcf).hard-pending-compaction-bytes-limit`.
-+ Default value: `"1024GB"`
++ Default value: `"1024GiB"`
 
 ## storage.io-rate-limit
 
@@ -559,7 +552,7 @@ Configuration items related to the I/O rate limiter.
 ### `max-bytes-per-sec`
 
 + Limits the maximum I/O bytes that a server can write to or read from the disk (determined by the `mode` configuration item below) in one second. When this limit is reached, TiKV prefers throttling background operations over foreground ones. The value of this configuration item should be set to the disk's optimal I/O bandwidth, for example, the maximum I/O bandwidth specified by your cloud disk vendor. When this configuration value is set to zero, disk I/O operations are not limited.
-+ Default value: `"0MB"`
++ Default value: `"0MiB"`
 
 ### `mode`
 
@@ -568,6 +561,13 @@ Configuration items related to the I/O rate limiter.
 + Default value: `"write-only"`
 
 ## pd
+
+### `enable-forwarding` <span class="version-mark">New in v5.0.0</span>
+
++ Controls whether the PD client in TiKV forwards requests to the leader via the followers in the case of possible network isolation.
++ Default value: `false`
++ If the environment might have isolated network, enabling this parameter can reduce the window of service unavailability.
++ If you cannot accurately determine whether isolation, network interruption, or downtime has occurred, using this mechanism has the risk of misjudgment and causes reduced availability and performance. If network failure has never occurred, it is not recommended to enable this parameter.
 
 ### `endpoints`
 
@@ -604,7 +604,7 @@ Configuration items related to Raftstore.
 
 + The storage capacity, which is the maximum size allowed to store data. If `capacity` is left unspecified, the capacity of the current disk prevails. To deploy multiple TiKV instances on the same physical disk, add this parameter to the TiKV configuration. For details, see [Key parameters of the hybrid deployment](/hybrid-deployment-topology.md#key-parameters).
 + Default value: `0`
-+ Unit: KB|MB|GB
++ Unit: KiB|MiB|GiB
 
 ### `raftdb-path`
 
@@ -668,10 +668,10 @@ Configuration items related to Raftstore.
 > This configuration item cannot be queried via SQL statements but can be configured in the configuration file.
 
 + The soft limit on the size of a single message packet
-+ Default value: `"1MB"`
++ Default value: `"1MiB"`
 + Minimum value: greater than `0`
-+ Maximum value: `3GB`
-+ Unit: KB|MB|GB
++ Maximum value: `3GiB`
++ Unit: KiB|MiB|GiB
 
 ### `raft-max-inflight-msgs`
 
@@ -687,9 +687,9 @@ Configuration items related to Raftstore.
 ### `raft-entry-max-size`
 
 + The hard limit on the maximum size of a single log
-+ Default value: `"8MB"`
++ Default value: `"8MiB"`
 + Minimum value: `0`
-+ Unit: MB|GB
++ Unit: MiB|GiB
 
 ### `raft-log-compact-sync-interval` <span class="version-mark">New in v5.3</span>
 
@@ -712,7 +712,7 @@ Configuration items related to Raftstore.
 ### `raft-log-gc-count-limit`
 
 + The hard limit on the allowable number of residual Raft logs
-+ Default value: the log number that can be accommodated in the 3/4 Region size (calculated as 1MB for each log)
++ Default value: the log number that can be accommodated in the 3/4 Region size (calculated as 1MiB for each log)
 + Minimum value: `0`
 
 ### `raft-log-gc-size-limit`
@@ -845,9 +845,9 @@ Configuration items related to Raftstore.
 ### `lock-cf-compact-bytes-threshold`
 
 + The size out of which TiKV triggers a manual compaction for the Lock Column Family
-+ Default value: `"256MB"`
++ Default value: `"256MiB"`
 + Minimum value: `0`
-+ Unit: MB
++ Unit: MiB
 
 ### `notify-capacity`
 
@@ -900,9 +900,9 @@ Configuration items related to Raftstore.
 ### `snap-apply-batch-size`
 
 + The memory cache size required when the imported snapshot file is written into the disk
-+ Default value: `"10MB"`
++ Default value: `"10MiB"`
 + Minimum value: `0`
-+ Unit: MB
++ Unit: MiB
 
 ### `consistency-check-interval`
 
@@ -990,7 +990,7 @@ Configuration items related to Raftstore.
 ### `store-io-pool-size` <span class="version-mark">New in v5.3.0</span>
 
 + The allowable number of threads that process Raft I/O tasks, which is the size of the StoreWriter thread pool. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
-+ Default value: `0`
++ Default value: `1` (Before v8.0.0, the default value is `0`)
 + Minimum value: `0`
 
 ### `future-poll-size`
@@ -1014,7 +1014,7 @@ Configuration items related to Raftstore.
 ### `raft-write-size-limit` <span class="version-mark">New in v5.3.0</span>
 
 + Determines the threshold at which Raft data is written into the disk. If the data size is larger than the value of this configuration item, the data is written to the disk. When the value of `store-io-pool-size` is `0`, this configuration item does not take effect.
-+ Default value: `1MB`
++ Default value: `1MiB`
 + Minimum value: `0`
 
 ### `report-min-resolved-ts-interval` <span class="version-mark">New in v6.0.0</span>
@@ -1030,6 +1030,22 @@ Configuration items related to Raftstore.
 + If this value is set to `0`, it means that this feature is disabled.
 + Default value: `0.1`
 + Minimum value: `0`
+
+### `periodic-full-compact-start-times` <span class="version-mark">New in v7.6.0</span>
+
+> **Warning:**
+>
+> Periodic full compaction is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ Set the specific times that TiKV initiates periodic full compaction. You can specify multiple time schedules in an array. For example:
+    + `periodic-full-compact-start-times = ["03:00", "23:00"]` indicates that TiKV performs full compaction daily at 03:00 AM and 11:00 PM, based on the local time zone of the TiKV node.
+    + `periodic-full-compact-start-times = ["03:00 +0000", "23:00 +0000"]` indicates that TiKV performs full compaction daily at 03:00 AM and 11:00 PM in UTC time.
++ Default value: `[]`, which means periodic full compaction is disabled by default.
+
+### `periodic-full-compact-start-max-cpu` <span class="version-mark">New in v7.6.0</span>
+
++ Limits the maximum CPU usage rate for TiKV periodic full compaction.
++ Default value: `0.1`, which means that the maximum CPU usage for periodic compaction processes is 10%.
 
 ## coprocessor
 
@@ -1139,9 +1155,9 @@ Configuration items related to RocksDB
 ### `max-manifest-file-size`
 
 + The maximum size of a RocksDB Manifest file
-+ Default value: `"128MB"`
++ Default value: `"128MiB"`
 + Minimum value: `0`
-+ Unit: B|KB|MB|GB
++ Unit: B|KiB|MiB|GiB
 
 ### `create-if-missing`
 
@@ -1160,8 +1176,8 @@ Configuration items related to RocksDB
 
 ### `wal-dir`
 
-+ The directory in which WAL files are stored
-+ Default value: `"/tmp/tikv/store"`
++ The directory in which WAL files are stored. If not specified, the WAL files will be stored in the same directory as the data.
++ Default value: `""`
 
 ### `wal-ttl-seconds`
 
@@ -1175,14 +1191,14 @@ Configuration items related to RocksDB
 + The size limit of the archived WAL files. When the value is exceeded, the system deletes these files.
 + Default value: `0`
 + Minimum value: `0`
-+ Unit: B|KB|MB|GB
++ Unit: B|KiB|MiB|GiB
 
 ### `max-total-wal-size`
 
 + The maximum RocksDB WAL size in total, which is the size of `*.log` files in the `data-dir`.
 + Default value:
 
-    + When `storage.engine="raft-kv"`, the default value is `"4GB"`.
+    + When `storage.engine="raft-kv"`, the default value is `"4GiB"`.
     + When `storage.engine="partitioned-raft-kv"`, the default value is `1`.
 
 ### `stats-dump-period`
@@ -1195,17 +1211,17 @@ Configuration items related to RocksDB
 
 ### `compaction-readahead-size`
 
-+ Enables the readahead feature during RocksDB compaction and specifies the size of readahead data. If you are using mechanical disks, it is recommended to set the value to 2MB at least.
++ Enables the readahead feature during RocksDB compaction and specifies the size of readahead data. If you are using mechanical disks, it is recommended to set the value to 2MiB at least.
 + Default value: `0`
 + Minimum value: `0`
-+ Unit: B|KB|MB|GB
++ Unit: B|KiB|MiB|GiB
 
 ### `writable-file-max-buffer-size`
 
 + The maximum buffer size used in WritableFileWrite
-+ Default value: `"1MB"`
++ Default value: `"1MiB"`
 + Minimum value: `0`
-+ Unit: B|KB|MB|GB
++ Unit: B|KiB|MiB|GiB
 
 ### `use-direct-io-for-flush-and-compaction`
 
@@ -1214,10 +1230,10 @@ Configuration items related to RocksDB
 
 ### `rate-bytes-per-sec`
 
-+ The maximum rate permitted by RocksDB's compaction rate limiter
-+ Default value: `10GB`
++ When Titan is disabled, this configuration item limits the I/O rate of RocksDB compaction to reduce the impact of RocksDB compaction on the foreground read and write performance during traffic peaks. When Titan is enabled, this configuration item limits the summed I/O rates of RocksDB compaction and Titan GC. If you find that the I/O or CPU consumption of RocksDB compaction and Titan GC is too large, set this configuration item to an appropriate value according the disk I/O bandwidth and the actual write traffic.
++ Default value: `10GiB`
 + Minimum value: `0`
-+ Unit: B|KB|MB|GB
++ Unit: B|KiB|MiB|GiB
 
 ### `rate-limiter-refill-period`
 
@@ -1243,23 +1259,23 @@ Configuration items related to RocksDB
 ### `bytes-per-sync`
 
 + The rate at which OS incrementally synchronizes files to disk while these files are being written asynchronously
-+ Default value: `"1MB"`
++ Default value: `"1MiB"`
 + Minimum value: `0`
-+ Unit: B|KB|MB|GB
++ Unit: B|KiB|MiB|GiB
 
 ### `wal-bytes-per-sync`
 
 + The rate at which OS incrementally synchronizes WAL files to disk while the WAL files are being written
-+ Default value: `"512KB"`
++ Default value: `"512KiB"`
 + Minimum value: `0`
-+ Unit: B|KB|MB|GB
++ Unit: B|KiB|MiB|GiB
 
 ### `info-log-max-size`
 
 + The maximum size of Info log
-+ Default value: `"1GB"`
++ Default value: `"1GiB"`
 + Minimum value: `0`
-+ Unit: B|KB|MB|GB
++ Unit: B|KiB|MiB|GiB
 
 ### `info-log-roll-time`
 
@@ -1309,14 +1325,28 @@ Configuration items related to RocksDB
 
 + Unit: KiB|MiB|GiB
 
+### `track-and-verify-wals-in-manifest` <span class="version-mark">New in v6.5.9 and v8.0.0</span>
+
++ Controls whether to record information about Write Ahead Log (WAL) files in the RocksDB MANIFEST file and whether to verify the integrity of WAL files during startup. For more information, see RocksDB [Track WAL in MANIFEST](https://github.com/facebook/rocksdb/wiki/Track-WAL-in-MANIFEST).
++ Default value: `true`
++ Value options:
+    + `true`: records information about WAL files in the MANIFEST file and verifies the integrity of WAL files during startup.
+    + `false`: does not record information about WAL files in the MANIFEST file and does not verify the integrity of WAL files during startup.
+
 ## rocksdb.titan
 
 Configuration items related to Titan.
 
 ### `enabled`
 
-+ Enables or disables Titan
-+ Default value: `false`
+> **Note:**
+>
+> - To enhance the performance of wide table and JSON data writing and point query, starting from TiDB v7.6.0, the default value changes from `false` to `true`, which means that Titan is enabled by default.
+> - Existing clusters upgraded to v7.6.0 or later versions retain the original configuration, which means that if Titan is not explicitly enabled, it still uses RocksDB.
+> - If the cluster has enabled Titan before upgrading to TiDB v7.6.0 or later versions, Titan will be retained after the upgrade, and the [`min-blob-size`](/tikv-configuration-file.md#min-blob-size) configuration before the upgrade will be retained. If you do not explicitly configure the value before the upgrade, the default value of the previous version `1KiB` will be retained to ensure the stability of the cluster configuration after the upgrade.
+
++ Enables or disables Titan.
++ Default value: `true`
 
 ### `dirname`
 
@@ -1330,7 +1360,7 @@ Configuration items related to Titan.
 
 ### `max-background-gc`
 
-+ The maximum number of GC threads in Titan
++ The maximum number of GC threads in Titan. From the **TiKV Details** > **Thread CPU** > **RocksDB CPU** panel, if you observe that the Titan GC threads are at full capacity for a long time, consider increasing the size of the Titan GC thread pool.
 + Default value: `4`
 + Minimum value: `1`
 
@@ -1341,10 +1371,10 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `block-size`
 
 + The default size of a RocksDB block
-+ Default value for `defaultcf` and `writecf`: `"32KB"`
-+ Default value for `lockcf`: `"16KB"`
-+ Minimum value: `"1KB"`
-+ Unit: KB|MB|GB
++ Default value for `defaultcf` and `writecf`: `"32KiB"`
++ Default value for `lockcf`: `"16KiB"`
++ Minimum value: `"1KiB"`
++ Unit: KiB|MiB|GiB
 
 ### `block-cache-size`
 
@@ -1357,7 +1387,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 + Default value for `writecf`: `Total machine memory * 15%`
 + Default value for `lockcf`: `Total machine memory * 2%`
 + Minimum value: `0`
-+ Unit: KB|MB|GB
++ Unit: KiB|MiB|GiB
 
 ### `disable-block-cache`
 
@@ -1438,12 +1468,12 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `write-buffer-size`
 
 + Memtable size
-+ Default value for `defaultcf` and `writecf`: `"128MB"`
++ Default value for `defaultcf` and `writecf`: `"128MiB"`
 + Default value for `lockcf`:
-    + When `storage.engine="raft-kv"`, the default value is `"32MB"`.
-    + When `storage.engine="partitioned-raft-kv"`, the default value is `"4MB"`.
+    + When `storage.engine="raft-kv"`, the default value is `"32MiB"`.
+    + When `storage.engine="partitioned-raft-kv"`, the default value is `"4MiB"`.
 + Minimum value: `0`
-+ Unit: KB|MB|GB
++ Unit: KiB|MiB|GiB
 
 ### `max-write-buffer-number`
 
@@ -1460,18 +1490,18 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `max-bytes-for-level-base`
 
 + The maximum number of bytes at base level (level-1). Generally, it is set to 4 times the size of a memtable. When the level-1 data size reaches the limit value of `max-bytes-for-level-base`, the SST files of level-1 and their overlapping SST files of level-2 will be compacted.
-+ Default value for `defaultcf` and `writecf`: `"512MB"`
-+ Default value for `lockcf`: `"128MB"`
++ Default value for `defaultcf` and `writecf`: `"512MiB"`
++ Default value for `lockcf`: `"128MiB"`
 + Minimum value: `0`
-+ Unit: KB|MB|GB
-+ It is recommended that the value of `max-bytes-for-level-base` is set approximately equal to the data volume in L0 to reduce unnecessary compaction. For example, if the compression method is "no:no:lz4:lz4:lz4:lz4:lz4", the value of `max-bytes-for-level-base` should be `write-buffer-size * 4`, because there is no compression of L0 and L1 and the trigger condition of compaction for L0 is that the number of the SST files reaches 4 (the default value). When L0 and L1 both adopt compaction, you need to analyze RocksDB logs to understand the size of an SST file compressed from a memtable. For example, if the file size is 32 MB, it is recommended to set the value of `max-bytes-for-level-base` to 128 MB (`32 MB * 4`).
++ Unit: KiB|MiB|GiB
++ It is recommended that the value of `max-bytes-for-level-base` is set approximately equal to the data volume in L0 to reduce unnecessary compaction. For example, if the compression method is "no:no:lz4:lz4:lz4:lz4:lz4", the value of `max-bytes-for-level-base` should be `write-buffer-size * 4`, because there is no compression of L0 and L1 and the trigger condition of compaction for L0 is that the number of the SST files reaches 4 (the default value). When L0 and L1 both adopt compaction, you need to analyze RocksDB logs to understand the size of an SST file compressed from a memtable. For example, if the file size is 32 MiB, it is recommended to set the value of `max-bytes-for-level-base` to 128 MiB (`32 MiB * 4`).
 
 ### `target-file-size-base`
 
 + The size of the target file at base level. This value is overridden by `compaction-guard-max-output-file-size` when the `enable-compaction-guard` value is `true`.
-+ Default value: `"8MB"`
++ Default value: `"8MiB"`
 + Minimum value: `0`
-+ Unit: KB|MB|GB
++ Unit: KiB|MiB|GiB
 
 ### `level0-file-num-compaction-trigger`
 
@@ -1495,9 +1525,9 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `max-compaction-bytes`
 
 + The maximum number of bytes written into disk per compaction
-+ Default value: `"2GB"`
++ Default value: `"2GiB"`
 + Minimum value: `0`
-+ Unit: KB|MB|GB
++ Unit: KiB|MiB|GiB
 
 ### `compaction-pri`
 
@@ -1539,14 +1569,14 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `soft-pending-compaction-bytes-limit`
 
 + The soft limit on the pending compaction bytes. When `storage.flow-control.enable` is set to `true`, `storage.flow-control.soft-pending-compaction-bytes-limit` overrides this configuration item.
-+ Default value: `"192GB"`
-+ Unit: KB|MB|GB
++ Default value: `"192GiB"`
++ Unit: KiB|MiB|GiB
 
 ### `hard-pending-compaction-bytes-limit`
 
 + The hard limit on the pending compaction bytes. When `storage.flow-control.enable` is set to `true`, `storage.flow-control.hard-pending-compaction-bytes-limit` overrides this configuration item.
-+ Default value: `"256GB"`
-+ Unit: KB|MB|GB
++ Default value: `"256GiB"`
++ Unit: KiB|MiB|GiB
 
 ### `enable-compaction-guard`
 
@@ -1557,14 +1587,14 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `compaction-guard-min-output-file-size`
 
 + The minimum SST file size when the compaction guard is enabled. This configuration prevents SST files from being too small when the compaction guard is enabled.
-+ Default value: `"8MB"`
-+ Unit: KB|MB|GB
++ Default value: `"8MiB"`
++ Unit: KiB|MiB|GiB
 
 ### `compaction-guard-max-output-file-size`
 
 + The maximum SST file size when the compaction guard is enabled. The configuration prevents SST files from being too large when the compaction guard is enabled. This configuration overrides `target-file-size-base` for the same column family.
-+ Default value: `"128MB"`
-+ Unit: KB|MB|GB
++ Default value: `"128MiB"`
++ Unit: KiB|MiB|GiB
 
 ### `format-version` <span class="version-mark">New in v6.2.0</span>
 
@@ -1595,49 +1625,79 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 ## rocksdb.defaultcf.titan
 
+> **Note:**
+>
+> Titan can only be enabled in `rocksdb.defaultcf`. It is not supported to enable Titan in `rocksdb.writecf`.
+
 Configuration items related to `rocksdb.defaultcf.titan`.
 
 ### `min-blob-size`
 
+> **Note:**
+>
+> - Starting from TiDB v7.6.0, Titan is enabled by default to enhance the performance of wide table and JSON data writing and point query. The default value of `min-blob-size` changes from `1KiB` to `32KiB`. This means that values exceeding `32KiB` is stored in Titan, while other data continues to be stored in RocksDB.
+> - To ensure configuration consistency, for existing clusters upgrading to TiDB v7.6.0 or later versions, if you do not explicitly set `min-blob-size` before the upgrade, TiDB retains the previous default value of `1KiB`.
+> - A value smaller than `32KiB` might affect the performance of range scans. However, if the workload primarily involves heavy writes and point queries, you can consider decreasing the value of `min-blob-size` for better performance.
+
 + The smallest value stored in a Blob file. Values smaller than the specified size are stored in the LSM-Tree.
-+ Default value: `"1KB"`
++ Default value: `"32KiB"`
 + Minimum value: `0`
-+ Unit: KB|MB|GB
++ Unit: KiB|MiB|GiB
 
 ### `blob-file-compression`
 
-+ The compression algorithm used in a Blob file
-+ Optional values: `"no"`, `"snappy"`, `"zlib"`, `"bzip2"`, `"lz4"`, `"lz4hc"`, `"zstd"`
-+ Default value: `"lz4"`
-
 > **Note:**
 >
-> The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
+> - Snappy compressed files must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
+> - Starting from TiDB v7.6.0, the default value of `blob-file-compression` changes from `"lz4"` to `"zstd"`.
+
++ The compression algorithm used in a Blob file
++ Optional values: `"no"`, `"snappy"`, `"zlib"`, `"bzip2"`, `"lz4"`, `"lz4hc"`, `"zstd"`
++ Default value: `"zstd"`
+
+### `zstd-dict-size`
+
++ The zstd dictionary compression size. The default value is `"0KiB"`, which means to disable the zstd dictionary compression. In this case, Titan compresses data based on single values, whereas RocksDB compresses data based on blocks (`32KiB` by default). When the average size of Titan values is less than `32KiB`, Titan's compression ratio is lower than that of RocksDB. Taking JSON as an example, the store size in Titan can be 30% to 50% larger than that of RocksDB. The actual compression ratio depends on whether the value content is suitable for compression and the similarity among different values. You can enable the zstd dictionary compression to increase the compression ratio by configuring `zstd-dict-size` (for example, set it to `16KiB`). The actual store size can be lower than that of RocksDB. But the zstd dictionary compression might lead to about 10% performance regression in specific workloads.
++ Default value: `"0KiB"`
++ Unit: KiB|MiB|GiB 
 
 ### `blob-cache-size`
 
 + The cache size of a Blob file
-+ Default value: `"0GB"`
++ Default value: `"0GiB"`
 + Minimum value: `0`
-+ Unit: KB|MB|GB
++ Recommended value: `0`. Starting from v8.0.0, TiKV introduces the `shared-blob-cache` configuration item and enables it by default, so there is no need to set `blob-cache-size` separately. The configuration of `blob-cache-size` only takes effect when `shared-blob-cache` is set to `false`.
++ Unit: KiB|MiB|GiB
+
+### `shared-blob-cache` (New in v8.0.0)
+
++ Controls whether to enable the shared cache for Titan blob files and RocksDB block files.
++ Default value: `true`. When the shared cache is enabled, block files have higher priority. This means that TiKV prioritizes meeting the cache needs of block files and then uses the remaining cache for blob files.
 
 ### `min-gc-batch-size`
 
 + The minimum total size of Blob files required to perform GC for one time
-+ Default value: `"16MB"`
++ Default value: `"16MiB"`
 + Minimum value: `0`
-+ Unit: KB|MB|GB
++ Unit: KiB|MiB|GiB
 
 ### `max-gc-batch-size`
 
 + The maximum total size of Blob files allowed to perform GC for one time
-+ Default value: `"64MB"`
++ Default value: `"64MiB"`
 + Minimum value: `0`
-+ Unit: KB|MB|GB
++ Unit: KiB|MiB|GiB
 
 ### `discardable-ratio`
 
-+ The ratio at which GC is triggered for Blob files. The Blob file can be selected for GC only if the proportion of the invalid values in a Blob file exceeds this ratio.
++ When the ratio of obsolete data (the corresponding key has been updated or deleted) in a Blob file exceeds the following threshold, Titan GC is triggered. When Titan writes the valid data of this Blob file to another file, you can use the `discardable-ratio` value to estimate the upper limits of write amplification and space amplification (assuming the compression is disabled).
+
+    Upper limit of write amplification = 1 / `discardable-ratio`
+
+    Upper limit of space amplification = 1 / (1 - `discardable-ratio`)
+
+    From these two equations, you can see that decreasing the value of `discardable_ratio` can reduce space amplification but results in more frequent GC in Titan. Increasing the value reduces the frequency of Titan GC, thereby lowering the corresponding I/O bandwidth and CPU usage, but increases disk usage.
+
 + Default value: `0.5`
 + Minimum value: `0`
 + Maximum value: `1`
@@ -1652,16 +1712,16 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 ### `merge-small-file-threshold`
 
 + When the size of a Blob file is smaller than this value, the Blob file might still be selected for GC. In this situation, `discardable-ratio` is ignored.
-+ Default value: `"8MB"`
++ Default value: `"8MiB"`
 + Minimum value: `0`
-+ Unit: KB|MB|GB
++ Unit: KiB|MiB|GiB
 
 ### `blob-run-mode`
 
 + Specifies the running mode of Titan.
 + Optional values:
-    + `normal`: Writes data to the blob file when the value size exceeds `min-blob-size`.
-    + `read_only`: Refuses to write new data to the blob file, but still reads the original data from the blob file.
+    + `normal`: Writes data to the blob file when the value size exceeds [`min-blob-size`](#min-blob-size).
+    + `read-only`: Refuses to write new data to the blob file, but still reads the original data from the blob file.
     + `fallback`: Writes data in the blob file back to LSM.
 + Default value: `normal`
 
@@ -1695,9 +1755,9 @@ Configuration items related to `raftdb`
 ### `max-manifest-file-size`
 
 + The maximum size of a RocksDB Manifest file
-+ Default value: `"20MB"`
++ Default value: `"20MiB"`
 + Minimum value: `0`
-+ Unit: B|KB|MB|GB
++ Unit: B|KiB|MiB|GiB
 
 ### `create-if-missing`
 
@@ -1728,29 +1788,29 @@ Configuration items related to `raftdb`
 + The size limit of the archived WAL files. When the value is exceeded, the system deletes these files.
 + Default value: `0`
 + Minimum value: `0`
-+ Unit: B|KB|MB|GB
++ Unit: B|KiB|MiB|GiB
 
 ### `max-total-wal-size`
 
 + The maximum RocksDB WAL size in total
-+ Default value: `"4GB"`
-    + When `storage.engine="raft-kv"`, the default value is `"4GB"`.
++ Default value:
+    + When `storage.engine="raft-kv"`, the default value is `"4GiB"`.
     + When `storage.engine="partitioned-raft-kv"`, the default value is `1`.
 
 ### `compaction-readahead-size`
 
 + Controls whether to enable the readahead feature during RocksDB compaction and specify the size of readahead data.
-+ If you use mechanical disks, it is recommended to set the value to `2MB` at least.
++ If you use mechanical disks, it is recommended to set the value to `2MiB` at least.
 + Default value: `0`
 + Minimum value: `0`
-+ Unit: B|KB|MB|GB
++ Unit: B|KiB|MiB|GiB
 
 ### `writable-file-max-buffer-size`
 
 + The maximum buffer size used in WritableFileWrite
-+ Default value: `"1MB"`
++ Default value: `"1MiB"`
 + Minimum value: `0`
-+ Unit: B|KB|MB|GB
++ Unit: B|KiB|MiB|GiB
 
 ### `use-direct-io-for-flush-and-compaction`
 
@@ -1770,23 +1830,23 @@ Configuration items related to `raftdb`
 ### `bytes-per-sync`
 
 + The rate at which OS incrementally synchronizes files to disk while these files are being written asynchronously
-+ Default value: `"1MB"`
++ Default value: `"1MiB"`
 + Minimum value: `0`
-+ Unit: B|KB|MB|GB
++ Unit: B|KiB|MiB|GiB
 
 ### `wal-bytes-per-sync`
 
 + The rate at which OS incrementally synchronizes WAL files to disk when the WAL files are being written
-+ Default value: `"512KB"`
++ Default value: `"512KiB"`
 + Minimum value: `0`
-+ Unit: B|KB|MB|GB
++ Unit: B|KiB|MiB|GiB
 
 ### `info-log-max-size`
 
 + The maximum size of Info logs
-+ Default value: `"1GB"`
++ Default value: `"1GiB"`
 + Minimum value: `0`
-+ Unit: B|KB|MB|GB
++ Unit: B|KiB|MiB|GiB
 
 ### `info-log-roll-time`
 
@@ -1833,24 +1893,24 @@ Configuration items related to Raft Engine.
 ### `batch-compression-threshold`
 
 + Specifies the threshold size of a log batch. A log batch larger than this configuration is compressed. If you set this configuration item to `0`, compression is disabled.
-+ Default value: `"8KB"`
++ Default value: `"8KiB"`
 
 ### `bytes-per-sync`
 
 + Specifies the maximum accumulative size of buffered writes. When this configuration value is exceeded, buffered writes are flushed to the disk.
 + If you set this configuration item to `0`, incremental sync is disabled.
-+ Default value: `"4MB"`
++ Default value: `"4MiB"`
 
 ### `target-file-size`
 
 + Specifies the maximum size of log files. When a log file is larger than this value, it is rotated.
-+ Default value: `"128MB"`
++ Default value: `"128MiB"`
 
 ### `purge-threshold`
 
 + Specifies the threshold size of the main log queue. When this configuration value is exceeded, the main log queue is purged.
 + This configuration can be used to adjust the disk space usage of Raft Engine.
-+ Default value: `"10GB"`
++ Default value: `"10GiB"`
 
 ### `recovery-mode`
 
@@ -1861,7 +1921,7 @@ Configuration items related to Raft Engine.
 ### `recovery-read-block-size`
 
 + The minimum I/O size for reading log files during recovery.
-+ Default value: `"16KB"`
++ Default value: `"16KiB"`
 + Minimum value: `"512B"`
 
 ### `recovery-threads`
@@ -2019,6 +2079,11 @@ Configuration items related to TiDB Lightning import and BR restore.
 + The garbage ratio threshold to trigger GC.
 + Default value: `1.1`
 
+### `num-threads` <span class="version-mark">New in v6.5.8, v7.1.4, v7.5.1, and v7.6.0</span>
+
++ The number of GC threads when `enable-compaction-filter` is `false`.
++ Default value: `1`
+
 ## backup
 
 Configuration items related to BR backup.
@@ -2039,7 +2104,7 @@ Configuration items related to BR backup.
 
 + The threshold of the backup SST file size. If the size of a backup file in a TiKV Region exceeds this threshold, the file is backed up to several files with the TiKV Region split into multiple Region ranges. Each of the files in the split Regions is the same size as `sst-max-size` (or slightly larger).
 + For example, when the size of a backup file in the Region of `[a,e)` is larger than `sst-max-size`, the file is backed up to several files with regions `[a,b)`, `[b,c)`, `[c,d)` and `[d,e)`, and the size of `[a,b)`, `[b,c)`, `[c,d)` is the same as that of `sst-max-size` (or slightly larger).
-+ Default value: `"144MB"`
++ Default value: `"144MiB"`
 
 ### `enable-auto-tune` <span class="version-mark">New in v5.4.0</span>
 
@@ -2087,12 +2152,13 @@ Configuration items related to log backup.
 ### `initial-scan-pending-memory-quota` <span class="version-mark">New in v6.2.0</span>
 
 + The quota of cache used for storing incremental scan data during log backup.
-+ Default value: `min(Total machine memory * 10%, 512 MB)`
++ Default value: `min(Total machine memory * 10%, 512 MiB)`
 
 ### `initial-scan-rate-limit` <span class="version-mark">New in v6.2.0</span>
 
-+ The rate limit on throughput in an incremental data scan during log backup.
-+ Default value: 60, indicating that the rate limit is 60 MB/s by default.
++ The rate limit on throughput in an incremental data scan during log backup, which means the maximum amount of data that can be read from the disk per second. Note that if you only specify a number (for example, `60`), the unit is Byte instead of KiB.
++ Default value: 60MiB
++ Minimum value: 1MiB
 
 ### `max-flush-interval` <span class="version-mark">New in v6.2.0</span>
 
@@ -2122,17 +2188,17 @@ Configuration items related to TiCDC.
 ### `old-value-cache-memory-quota`
 
 + The upper limit of memory usage by TiCDC old values.
-+ Default value: `512MB`
++ Default value: `512MiB`
 
 ### `sink-memory-quota`
 
 + The upper limit of memory usage by TiCDC data change events.
-+ Default value: `512MB`
++ Default value: `512MiB`
 
 ### `incremental-scan-speed-limit`
 
 + The maximum speed at which historical data is incrementally scanned.
-+ Default value: `"128MB"`, which means 128 MB per second.
++ Default value: `"128MiB"`, which means 128 MiB per second.
 
 ### `incremental-scan-threads`
 
@@ -2216,14 +2282,14 @@ Suppose that your machine on which TiKV is deployed has limited resources, for e
 #### `foreground-write-bandwidth` <span class="version-mark">New in v6.0.0</span>
 
 + The soft limit on the bandwidth with which transactions write data.
-+ Default value: `0KB` (which means no limit)
-+ Recommended setting: Use the default value `0` in most cases unless the `foreground-cpu-time` setting is not enough to limit the write bandwidth. For such an exception, it is recommended to set the value smaller than `50MB` in the instance with 4 or less cores.
++ Default value: `0KiB` (which means no limit)
++ Recommended setting: Use the default value `0` in most cases unless the `foreground-cpu-time` setting is not enough to limit the write bandwidth. For such an exception, it is recommended to set the value smaller than `50MiB` in the instance with 4 or less cores.
 
 #### `foreground-read-bandwidth` <span class="version-mark">New in v6.0.0</span>
 
 + The soft limit on the bandwidth with which transactions and the Coprocessor read data.
-+ Default value: `0KB` (which means no limit)
-+ Recommended setting: Use the default value `0` in most cases unless the `foreground-cpu-time` setting is not enough to limit the read bandwidth. For such an exception, it is recommended to set the value smaller than `20MB` in the instance with 4 or less cores.
++ Default value: `0KiB` (which means no limit)
++ Recommended setting: Use the default value `0` in most cases unless the `foreground-cpu-time` setting is not enough to limit the read bandwidth. For such an exception, it is recommended to set the value smaller than `20MiB` in the instance with 4 or less cores.
 
 ### Background Quota Limiter
 
@@ -2249,7 +2315,7 @@ Suppose that your machine on which TiKV is deployed has limited resources, for e
 > This configuration item is returned in the result of `SHOW CONFIG`, but currently setting it does not take any effect.
 
 + The soft limit on the bandwidth with which background transactions write data.
-+ Default value: `0KB` (which means no limit)
++ Default value: `0KiB` (which means no limit)
 
 #### `background-read-bandwidth` <span class="version-mark">New in v6.2.0</span>
 
@@ -2258,7 +2324,7 @@ Suppose that your machine on which TiKV is deployed has limited resources, for e
 > This configuration item is returned in the result of `SHOW CONFIG`, but currently setting it does not take any effect.
 
 + The soft limit on the bandwidth with which background transactions and the Coprocessor read data.
-+ Default value: `0KB` (which means no limit)
++ Default value: `0KiB` (which means no limit)
 
 #### `enable-auto-tune` <span class="version-mark">New in v6.2.0</span>
 
@@ -2322,24 +2388,24 @@ Configuration items related to [Load Base Split](/configure-load-base-split.md).
 + Controls the traffic threshold at which a Region is identified as a hotspot.
 + Default value:
 
-    + `30MiB` per second when [`region-split-size`](#region-split-size) is less than 4 GB.
-    + `100MiB` per second when [`region-split-size`](#region-split-size) is greater than or equal to 4 GB.
+    + `30MiB` per second when [`region-split-size`](#region-split-size) is less than 4 GiB.
+    + `100MiB` per second when [`region-split-size`](#region-split-size) is greater than or equal to 4 GiB.
 
 ### `qps-threshold`
 
 + Controls the QPS threshold at which a Region is identified as a hotspot.
 + Default value:
 
-    + `3000` when [`region-split-size`](#region-split-size) is less than 4 GB.
-    + `7000` when  [`region-split-size`](#region-split-size) is greater than or equal to 4 GB.
+    + `3000` when [`region-split-size`](#region-split-size) is less than 4 GiB.
+    + `7000` when  [`region-split-size`](#region-split-size) is greater than or equal to 4 GiB.
 
 ### `region-cpu-overload-threshold-ratio` <span class="version-mark">New in v6.2.0</span>
 
 + Controls the CPU usage threshold at which a Region is identified as a hotspot.
 + Default value:
 
-    + `0.25` when [`region-split-size`](#region-split-size) is less than 4 GB.
-    + `0.75` when  [`region-split-size`](#region-split-size) is greater than or equal to 4 GB.
+    + `0.25` when [`region-split-size`](#region-split-size) is less than 4 GiB.
+    + `0.75` when  [`region-split-size`](#region-split-size) is greater than or equal to 4 GiB.
 
 ## memory <span class="version-mark">New in v7.5.0</span>
 
@@ -2351,4 +2417,4 @@ Configuration items related to [Load Base Split](/configure-load-base-split.md).
 ### `profiling-sample-per-bytes` <span class="version-mark">New in v7.5.0</span>
 
 + Specifies the amount of data sampled by Heap Profiling each time, rounding up to the nearest power of 2.
-+ Default value: `512KB`
++ Default value: `512KiB`

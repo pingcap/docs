@@ -6,6 +6,13 @@ aliases: ['/tidb/dev/sql-prepare-plan-cache']
 
 # SQL Prepared Execution Plan Cache
 
+> **Warning:**
+>
+> If a cached `UPDATE` or `DELETE` statement encounters a DDL operation that modifies the relevant schema during execution, it might cause data inconsistency between tables and indexes. For more information, see [Issue #51407](https://github.com/pingcap/tidb/issues/51407). It is recommended to monitor the status of this issue and upgrade to [the latest LTS version](https://docs.pingcap.com/tidb/stable) to resolve this issue. Before upgrading, you can try the following workarounds:
+> 
+> - Before executing DDL, temporarily [disable the prepared plan cache](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610), and re-enable it after the DDL is complete.
+> - Avoid executing DDL during business peak hours. After executing DDL, immediately run [`ADMIN CHECK TABLE`](/sql-statements/sql-statement-admin-check-table-index.md) to check the consistency between tables and indexes. If errors are found, rebuild the relevant indexes.
+
 TiDB supports execution plan caching for `Prepare` and `Execute` queries. This includes both forms of prepared statements:
 
 - Using the `COM_STMT_PREPARE` and `COM_STMT_EXECUTE` protocol features.
@@ -20,7 +27,7 @@ TiDB also supports execution plan caching for some non-`PREPARE` statements, sim
 In the current version of TiDB, if a `Prepare` statement meets any of the following conditions, the query or the plan is not cached:
 
 - The query contains SQL statements other than `SELECT`, `UPDATE`, `INSERT`, `DELETE`, `Union`, `Intersect`, and `Except`.
-- The query accesses partitioned tables or temporary tables, or a table that contains generated columns.
+- The query accesses temporary tables, or a table that contains generated columns.
 - The query contains non-correlated sub-queries, such as `SELECT * FROM t1 WHERE t1.a > (SELECT 1 FROM t2 WHERE t2.b < 1)`.
 - The query contains correlated sub-queries with `PhysicalApply` operators in the execution plan, such as `SELECT * FROM t1 WHERE t1.a > (SELECT a FROM t2 WHERE t1.b > t2.b)`.
 - The query contains the `ignore_plan_cache` or `set_var` hint, such as `SELECT /*+ ignore_plan_cache() */ * FROM t` or `SELECT /*+ set_var(max_execution_time=1) */ * FROM t`.

@@ -4,7 +4,7 @@
 - [Docs Home](https://docs.pingcap.com/)
 - About TiDB
   - [TiDB Introduction](/overview.md)
-  - [TiDB 7.5 Release Notes](/releases/release-7.5.0.md)
+  - [TiDB 8.0 Release Notes](/releases/release-8.0.0.md)
   - [Features](/basic-features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
@@ -116,6 +116,7 @@
   - Plan Cluster Topology
     - [Minimal Topology](/minimal-deployment-topology.md)
     - [TiFlash Topology](/tiflash-deployment-topology.md)
+    - [TiProxy Topology](/tiproxy/tiproxy-deployment-topology.md)
     - [TiCDC Topology](/ticdc-deployment-topology.md)
     - [TiDB Binlog Topology](/tidb-binlog-deployment-topology.md)
     - [TiSpark Topology](/tispark-deployment-topology.md)
@@ -139,6 +140,7 @@
     - [Migrate Large Datasets from MySQL](/migrate-large-mysql-to-tidb.md)
     - [Migrate and Merge MySQL Shards of Small Datasets](/migrate-small-mysql-shards-to-tidb.md)
     - [Migrate and Merge MySQL Shards of Large Datasets](/migrate-large-mysql-shards-to-tidb.md)
+    - [Migrate from MariaDB](/migrate-from-mariadb.md)
     - [Migrate from CSV Files](/migrate-from-csv-files-to-tidb.md)
     - [Migrate from SQL Files](/migrate-from-sql-files-to-tidb.md)
     - [Migrate from Parquet Files](/migrate-from-parquet-files-to-tidb.md)
@@ -326,6 +328,7 @@
   - [Use Load Base Split](/configure-load-base-split.md)
   - [Use Store Limit](/configure-store-limit.md)
   - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
+  - [Use PD Microservices](/pd-microservices.md)
 - TiDB Tools
   - [Overview](/ecosystem-tool-user-guide.md)
   - [Use Cases](/ecosystem-tool-user-case.md)
@@ -444,6 +447,7 @@
       - [Binlog Event Filter](/dm/dm-binlog-event-filter.md)
       - [Filter DMLs Using SQL Expressions](/dm/feature-expression-filter.md)
       - [Online DDL Tool Support](/dm/dm-online-ddl-tool-support.md)
+      - [Customize a Secret Key for Encryption and Decryption](/dm/dm-customized-secret-key.md)
       - Manage a Data Migration Task
         - [Precheck a Task](/dm/dm-precheck.md)
         - [Create a Task](/dm/dm-create-task.md)
@@ -562,6 +566,7 @@
       - [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
       - [Data Integrity Validation for Single-Row Data](/ticdc/ticdc-integrity-check.md)
       - [Data Consistency Validation for TiDB Upstream/Downstream Clusters](/ticdc/ticdc-upstream-downstream-check.md)
+      - [TiCDC Behavior Changes](/ticdc/ticdc-behavior-change.md)
     - Monitor and Alert
       - [Monitoring Metrics Summary](/ticdc/ticdc-summary-monitor.md)
       - [Monitoring Metrics Details](/ticdc/monitor-ticdc.md)
@@ -573,8 +578,10 @@
       - Output Protocols
         - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
         - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
-        - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
         - [TiCDC CSV Protocol](/ticdc/ticdc-csv.md)
+        - [TiCDC Debezium Protocol](/ticdc/ticdc-debezium.md)
+        - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
+        - [TiCDC Simple Protocol](/ticdc/ticdc-simple-protocol.md)
       - [TiCDC Open API v2](/ticdc/ticdc-open-api-v2.md)
       - [TiCDC Open API v1](/ticdc/ticdc-open-api.md)
       - TiCDC Data Consumption
@@ -616,6 +623,13 @@
     - [Data Check for Tables with Different Schema/Table Names](/sync-diff-inspector/route-diff.md)
     - [Data Check in the Sharding Scenario](/sync-diff-inspector/shard-diff.md)
     - [Data Check in the DM Replication Scenario](/sync-diff-inspector/dm-diff.md)
+  - TiProxy
+    - [Overview](/tiproxy/tiproxy-overview.md)
+    - [Configuration](/tiproxy/tiproxy-configuration.md)
+    - [Command Line Parameters](/tiproxy/tiproxy-command-line-flags.md)
+    - [Monitoring Metrics](/tiproxy/tiproxy-grafana.md)
+    - [Troubleshooting](/tiproxy/troubleshoot-tiproxy.md)
+    - [Performance Test](/tiproxy/tiproxy-performance-test.md)
 - Reference
   - Cluster Architecture
     - [Overview](/tidb-architecture.md)
@@ -710,6 +724,7 @@
       - [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md)
       - [`ADMIN RECOVER INDEX`](/sql-statements/sql-statement-admin-recover.md)
       - [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)
+      - [`ADMIN [SET|SHOW|UNSET] BDR ROLE`](/sql-statements/sql-statement-admin-bdr-role.md)
       - [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
       - [`ADMIN SHOW TELEMETRY`](/sql-statements/sql-statement-admin-show-telemetry.md)
       - [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
@@ -762,7 +777,7 @@
       - [`EXECUTE`](/sql-statements/sql-statement-execute.md)
       - [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)
       - [`EXPLAIN`](/sql-statements/sql-statement-explain.md)
-      - [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md)
+      - [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)
       - [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)
       - [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)
       - [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)
@@ -927,6 +942,7 @@
         - [`INSPECTION_RESULT`](/information-schema/information-schema-inspection-result.md)
         - [`INSPECTION_RULES`](/information-schema/information-schema-inspection-rules.md)
         - [`INSPECTION_SUMMARY`](/information-schema/information-schema-inspection-summary.md)
+        - [`KEYWORDS`](/information-schema/information-schema-keywords.md)
         - [`KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md)
         - [`MEMORY_USAGE`](/information-schema/information-schema-memory-usage.md)
         - [`MEMORY_USAGE_OPS_HISTORY`](/information-schema/information-schema-memory-usage-ops-history.md)
@@ -949,6 +965,7 @@
         - [`TIDB_HOT_REGIONS`](/information-schema/information-schema-tidb-hot-regions.md)
         - [`TIDB_HOT_REGIONS_HISTORY`](/information-schema/information-schema-tidb-hot-regions-history.md)
         - [`TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md)
+        - [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)
         - [`TIDB_SERVERS_INFO`](/information-schema/information-schema-tidb-servers-info.md)
         - [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
         - [`TIFLASH_REPLICA`](/information-schema/information-schema-tiflash-replica.md)
@@ -965,7 +982,11 @@
       - PERFORMANCE_SCHEMA
         - [Overview](/performance-schema/performance-schema.md)
         - [`SESSION_CONNECT_ATTRS`](/performance-schema/performance-schema-session-connect-attrs.md)
+      - SYS
+        - [Overview](/sys-schema/sys-schema.md)
+        - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
     - [Metadata Lock](/metadata-lock.md)
+    - [TiDB Accelerated Table Creation](/accelerated-table-creation.md)
   - UI
     - TiDB Dashboard
       - [Overview](/dashboard/dashboard-intro.md)
@@ -1020,7 +1041,12 @@
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
+  - v8.0
+    - [8.0.0-DMR](/releases/release-8.0.0.md)
+  - v7.6
+    - [7.6.0-DMR](/releases/release-7.6.0.md)
   - v7.5
+    - [7.5.1](/releases/release-7.5.1.md)
     - [7.5.0](/releases/release-7.5.0.md)
   - v7.4
     - [7.4.0-DMR](/releases/release-7.4.0.md)
@@ -1029,6 +1055,7 @@
   - v7.2
     - [7.2.0-DMR](/releases/release-7.2.0.md)
   - v7.1
+    - [7.1.4](/releases/release-7.1.4.md)
     - [7.1.3](/releases/release-7.1.3.md)
     - [7.1.2](/releases/release-7.1.2.md)
     - [7.1.1](/releases/release-7.1.1.md)
@@ -1038,6 +1065,9 @@
   - v6.6
     - [6.6.0-DMR](/releases/release-6.6.0.md)
   - v6.5
+    - [6.5.9](/releases/release-6.5.9.md)
+    - [6.5.8](/releases/release-6.5.8.md)
+    - [6.5.7](/releases/release-6.5.7.md)
     - [6.5.6](/releases/release-6.5.6.md)
     - [6.5.5](/releases/release-6.5.5.md)
     - [6.5.4](/releases/release-6.5.4.md)

@@ -1,6 +1,6 @@
 ---
 title: Quick Start Guide for PingCAP Clinic
-summary: Learn how to use PingCAP Clinic to collect, upload, and view cluster diagnosis data quickly.
+summary: PingCAP Clinic is a service for collecting and viewing cluster diagnosis data quickly. It consists of Diag client and Clinic Server. Users can collect diagnostic data with Diag, upload it to Clinic Server, and view the results of Health Report. Before using it, users need to install Diag, log in to Clinic Server, create an organization, get an access token, and set the token and region in Diag. After collecting and uploading data, users can get the data access link and view the Health Report.
 ---
 
 # Quick Start Guide for PingCAP Clinic
@@ -34,7 +34,7 @@ Before using PingCAP Clinic, you need to install Diag and prepare an environment
     <SimpleTab groupId="clinicServer">
     <div label="Clinic Server for international users" value="clinic-us">
 
-    Go to the [Clinic Server for international users](https://clinic.pingcap.com) and select **Sign in with TiDB Account** to enter the TiDB Cloud login page. If you do not have a TiDB Cloud account, create one on that page.
+    Go to the [Clinic Server for international users](https://clinic.pingcap.com) and select **Continue with TiDB Account** to enter the TiDB Cloud login page. If you do not have a TiDB Cloud account, create one on that page.
 
     > **Note:**
     >
@@ -44,7 +44,7 @@ Before using PingCAP Clinic, you need to install Diag and prepare an environment
 
     <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
 
-    Go to the [Clinic Server for users in the Chinese mainland](https://clinic.pingcap.com.cn) and select **Sign in with AskTUG** to enter the AskTUG community login page. If you do not have an AskTUG account, create one on that page
+    Go to the [Clinic Server for users in the Chinese mainland](https://clinic.pingcap.com.cn) and select **Continue with AskTUG** to enter the AskTUG community login page. If you do not have an AskTUG account, create one on that page
 
     </div>
     </SimpleTab>
