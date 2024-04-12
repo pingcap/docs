@@ -5,7 +5,7 @@ summary: The reference of `ticloud help`.
 
 # ticloud help
 
-Help provides help for any command in the application.
+Get help information for any command in TiDB Cloud CLI:
 
 ```shell
 ticloud help [command] [flags]

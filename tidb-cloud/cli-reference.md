@@ -27,9 +27,9 @@ To use the `ticloud` CLI in your terminal, run `ticloud [command] [subcommand]`.
 | ai                 | -                                                                        | Chat with TiDB Bot                                                                                       |
 | completion         | bash, fish, powershell, zsh                                              | Generate completion script for specified shell                                                           |
 | config             | create, delete, describe, edit, list, set, use                           | Configure user profiles                                                                                  |
-| help               | cluster, completion, config, help, import, project, update               | View help for any command                                                                                |
 | project            | list                                                                     | Manage projects                                                                                          |
 | update             | -                                                                        | Update the CLI to the latest version                                                                     |
+| help               | cluster, completion, config, help, import, project, update               | View help for any command                                                                                |
 
 ## Command modes
 

@@ -5,7 +5,7 @@ summary: The reference of `ticloud completion`.
 
 # ticloud completion
 
-Generate the autocompletion script for ticloud for the specified shell.
+Generate the autocompletion script for the specified shell of TiDB Cloud CLI:
 
 ```shell
 ticloud completion [command]

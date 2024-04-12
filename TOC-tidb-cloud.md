@@ -653,6 +653,7 @@
         - [cancel](/tidb-cloud/ticloud-serverless-export-cancel.md)
         - [download](/tidb-cloud/ticloud-serverless-export-download.md)
     - [ai](/tidb-cloud/ticloud-ai.md)
+    - [completion](/tidb-cloud/ticloud-completion.md)
     - config
       - [create](/tidb-cloud/ticloud-config-create.md)
       - [delete](/tidb-cloud/ticloud-config-delete.md)
@@ -663,9 +664,8 @@
       - [use](/tidb-cloud/ticloud-config-use.md)
     - project
       - [list](/tidb-cloud/ticloud-project-list.md)
-    - [completion](/tidb-cloud/ticloud-completion.md)
-    - [help](/tidb-cloud/ticloud-help.md)
     - [update](/tidb-cloud/ticloud-update.md)
+    - [help](/tidb-cloud/ticloud-help.md)
   - [Table Filter](/table-filter.md)
   - [Resource Control](/tidb-resource-control.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
