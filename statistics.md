@@ -12,7 +12,7 @@ TiDB uses statistics as input to the optimizer to estimate the number of rows pr
 
 ### Automatic update
 
-For the `INSERT`, `DELETE`, or `UPDATE` statements, TiDB automatically updates the number of rows and modified rows.
+For the `INSERT`, `DELETE`, or `UPDATE` statements, TiDB automatically updates the number of rows and modified rows in statistics.
 
 <CustomContent platform="tidb">
 
@@ -26,9 +26,7 @@ TiDB persists the update information every 60 seconds.
 
 </CustomContent>
 
-Based upon the number of changes to a table, TiDB will automatically schedule `ANALYZE` to collect statistics on those tables. This is controlled by the [`tidb_enable_auto_anlyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) system variable and `tidb_auto_analyze%` variables.
-
-The following system variables related to automatic update of statistics are as follows:
+Based upon the number of changes to a table, TiDB will automatically schedule [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) to collect statistics on those tables. This is controlled by the [`tidb_enable_auto_anlyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) system variable and the following `tidb_auto_analyze%` variables.
 
 |  System Variable | Default Value | Description |
 |---|---|---|
@@ -70,13 +68,13 @@ You can perform full collection using the following syntax.
 
 See [Histograms](#histogram), [Top-N](#top-n-values) and [CMSketch](#count-min-sketch) (Count-Min Sketch) for detailed explanations. For `SAMPLES`/`SAMPLERATE`, see [Improving collection performance](#improving-collection-performance).
 
-For information on persisting the options used to allow for easier reuse, refer to [Persist ANALYZE configurations](#persist-analyze-configurations).
+For information on persisting the options for easier reuse, see [Persist ANALYZE configurations](#persist-analyze-configurations).
 
 ## Types of statistics
 
 ### Histogram
 
-Histogram statistics are used by the optimizer to estimate selectivity of an interval or range predicate, and may be used to determine the number of distinct values for a column for estimation of equal/IN predicates in Version 2 of statistics (refer to [Versions of Statistics](#versions-of-statistics)).
+Histogram statistics are used by the optimizer to estimate selectivity of an interval or range predicate, and might also be used to determine the number of distinct values within a column for estimation of equal/IN predicates in Version 2 of statistics (refer to [Versions of Statistics](#versions-of-statistics)).
 
 A histogram is an approximate representation of the distribution of data. It divides the entire range of values into a series of buckets, and uses simple data to describe each bucket, such as the number of values ​​falling in the bucket. In TiDB, an equal-depth histogram is created for the specific columns of each table. The equal-depth histogram can be used to estimate the interval query.
 
@@ -324,7 +322,7 @@ SELECT sample_num, sample_rate, buckets, topn, column_choice, column_ids FROM my
 
 TiDB will overwrite the previously recorded persistent configuration using the new configurations specified by the latest `ANALYZE` statement. For example, if you run `ANALYZE TABLE t WITH 200 TOPN;`, it will set the top 200 values in the `ANALYZE` statement. Subsequently, executing `ANALYZE TABLE t WITH 0.1 SAMPLERATE;` will set both the top 200 values and a sampling rate of 0.1 for auto `ANALYZE` statements, similar to `ANALYZE TABLE t WITH 200 TOPN, 0.1 SAMPLERATE;`.
 
-#### Disable ANALYZE configuration persistence
+### Disable ANALYZE configuration persistence
 
 To disable the `ANALYZE` configuration persistence feature, set the `tidb_persist_analyze_options` system variable to `OFF`. Because the `ANALYZE` configuration persistence feature is not applicable to `tidb_analyze_version = 1`, setting `tidb_analyze_version = 1` can also disable the feature.
 
@@ -421,9 +419,9 @@ The following table lists the information collected by each version for usage in
 
 ### Switching between statistics versions
 
-It is recommended to ensure that all tables/indexes (and partitions) utilize statistics collection from the same version. Version 2 is recommended, however it is not recommended to switch from one version to another without a justifiable reason such as an issue experienced with the version in use. A switch between versions may involve a period of time when no statistics are available until all tables have been analyzed with the new version, which may negatively impact the optimizer plan choices if statistics aren't available.
+It is recommended to ensure that all tables/indexes (and partitions) utilize statistics collection from the same version. Version 2 is recommended, however, it is not recommended to switch from one version to another without a justifiable reason such as an issue experienced with the version in use. A switch between versions might take a period of time when no statistics are available until all tables have been analyzed with the new version, which might negatively affect the optimizer plan choices if statistics are not available.
 
-Examples of justifications to switch may include - with Version 1, there could be inaccuracies in equal/IN predicate estimation due to hash collisions when collecting count-min sketch statistics. Solutions are listed in the section on [Count-Min Sketch](#count-min-sketch). Alternatively, setting `tidb_analyze_version = 2` and rerunning `ANALYZE` on all objects is also a solution. Early release of Version 2, there was a risk of memory overflow after `ANALYZE`. This issue is resolved, but initially, one solution was to `set tidb_analyze_version = 1` and rerunning `ANALYZE` on all objects.
+Examples of justifications to switch might include - with Version 1, there could be inaccuracies in equal/IN predicate estimation due to hash collisions when collecting Count-Min sketch statistics. Solutions are listed in the [Count-Min Sketch](#count-min-sketch) section. Alternatively, setting `tidb_analyze_version = 2` and rerunning `ANALYZE` on all objects is also a solution. In the early release of Version 2, there was a risk of memory overflow after `ANALYZE`. This issue is resolved, but initially, one solution was to `set tidb_analyze_version = 1` and rerun `ANALYZE` on all objects.
 
 To prepare `ANALYZE` for switching between versions:
 
@@ -923,15 +921,13 @@ The following table describes the behaviors of locking statistics:
 | A partitioned table and the whole table is locked | The lock is invalid | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | The old partition lock information is invalid, and the new partition is automatically locked | The new partition is automatically locked | The lock information of the deleted partition is cleared, and the lock of the whole table continues to take effect | The lock information of the deleted partition is cleared, and the new partition is automatically locked | The lock information is transferred to the exchanged table, and the new partition is automatically locked |
 | A partitioned table and only some partitions are locked | The lock is invalid | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | / | The deleted partition lock information is cleared | The deleted partition lock information is cleared | The lock information is transferred to the exchanged table |
 
-## Managing ANALYZE tasks and concurrency
+## Manage ANALYZE tasks and concurrency
 
 ### Terminate background `ANALYZE` tasks
 
 Since TiDB v6.0, TiDB supports using the `KILL` statement to terminate an `ANALYZE` task running in the background. If you find that an `ANALYZE` task running in the background consumes a lot of resources and affects your application, you can terminate the `ANALYZE` task by taking the following steps:
 
 1. Execute the following SQL statement:
-
-    {{< copyable "sql" >}}
 
     ```sql
     SHOW ANALYZE STATUS
