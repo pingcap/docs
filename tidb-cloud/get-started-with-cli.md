@@ -14,7 +14,7 @@ TiDB Cloud provides a command-line interface (CLI) [`ticloud`](https://github.co
 ## Before you begin
 
 - Have a TiDB Cloud account. If you do not have one, [sign up for a free trial](https://tidbcloud.com/free-trial).
-- [Create a TiDB Cloud API Key](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
+- [Create a TiDB Cloud API key](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
 
 ## Installation
 
@@ -82,6 +82,44 @@ Install the MySQL command-line client if you do not have it. You can refer to th
 </div>
 </SimpleTab>
 
+## Quick start
+
+[TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) is the best way to get started with TiDB Cloud. In this section, you will learn how to create a TiDB Serverless cluster with TiDB Cloud CLI.
+
+### Create a user profile or log into TiDB Cloud
+
+Before creating a cluster with TiDB Cloud CLI, you need to either create a user profile or log into TiDB Cloud.
+
+- Create a user profile with your TiDB Cloud API key:
+
+    ```shell
+    ticloud config create
+    ```
+
+    > **Warning:**
+    >
+    > The profile name **MUST NOT** contain `.`.
+
+- Log into TiDB Cloud with authentication:
+
+    ```shell
+    ticloud auth login
+    ```
+
+    After successful login, an OAuth token will be assigned to the current profile. If no profiles exist, the token will be assigned to a profile named `default`.
+
+> **Note:**
+>
+> In the preceding two methods, the TiDB Cloud API key takes precedence over the OAuth token. If both are available, the API key will be used.
+
+### Create a TiDB Serverless cluster
+
+To create a TiDB Serverless cluster, enter the following command, and then follow the CLI prompts to provide the required information:
+
+```shell
+ticloud serverless create
+```
+
 ## Use the TiDB Cloud CLI
 
 View all commands available:
@@ -122,40 +160,6 @@ Update to the latest version by TiUP:
 
 ```shell
 tiup update cloud
-```
-
-## Quick start
-
-[TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) is the best way to get started with TiDB Cloud. In this section, you will learn how to create a TiDB Serverless cluster with TiDB Cloud CLI.
-
-### Create a user profile or log into TiDB Cloud
-
-Before creating a cluster, you need to create a user profile with your TiDB Cloud API Key:
-
-```shell
-ticloud config create
-```
-
-> **Warning:**
->
-> The profile name **MUST NOT** contain `.`.
-
-You can also log into TiDB Cloud directly. This will add OAuth token to the current profile, or to a new created profile called `default` if you do not have any profiles yet.
-
-```
-ticloud auth login
-```
-
-> **Note:**
->
-> TiDB Cloud API Key has higher priority than oauth token. If you have both, the API Key will be used.
-
-### Create a TiDB Serverless cluster
-
-To create a TiDB Serverless cluster, enter the following command, and then follow the CLI prompts to provide the required information:
-
-```shell
-ticloud serverless create
 ```
 
 ## What's next
