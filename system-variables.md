@@ -4401,7 +4401,12 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Integer
+<<<<<<< HEAD
 - Default value: `0`
+=======
+- Unit: Byte
+- Default value: `0`, which means that the memory quota is automatically set to half of the total memory size of the TiDB instance.
+>>>>>>> 554dc17e84 (Address a few minor changes in user docs as of 7.1 (#17199))
 - Range: `[0, 1099511627776]`
 - This variable sets the memory quota for the TiDB statistics cache.
 
