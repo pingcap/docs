@@ -1344,21 +1344,367 @@ SELECT QUOTE(0x002774657374);
 
 Pattern matching using regular expressions.
 
+Examples:
+
+In this example a number of strings are matched against two regular expressions.
+
+```sql
+WITH vals AS (
+    SELECT 'TiDB' AS v 
+    UNION ALL
+    SELECT 'Titanium'
+    UNION ALL
+    SELECT 'Tungsten'
+    UNION ALL
+    SELECT 'Rust'
+)
+SELECT 
+    v,
+    v REGEXP '^Ti' AS 'starts with "Ti"',
+    v REGEXP '^.{4}$' AS 'Length is 4 characters'
+FROM
+    vals;
+```
+
+```
++----------+------------------+------------------------+
+| v        | starts with "Ti" | Length is 4 characters |
++----------+------------------+------------------------+
+| TiDB     |                1 |                      1 |
+| Titanium |                1 |                      0 |
+| Tungsten |                0 |                      0 |
+| Rust     |                0 |                      1 |
++----------+------------------+------------------------+
+4 rows in set (0.00 sec)
+```
+
+The following example demonstrates that `REGEXP` is not limited to the `SELECT` clause. For example, you can also use it in the `WHERE` clause of the query.
+
+```sql
+SELECT
+    v
+FROM (
+        SELECT 'TiDB' AS v
+    ) AS vals
+WHERE
+    v REGEXP 'DB$';
+```
+
+```
++------+
+| v    |
++------+
+| TiDB |
++------+
+1 row in set (0.01 sec)
+```
+
 ### [`REGEXP_INSTR()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-instr)
 
 Return the starting index of the substring that matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
+
+The `REGEXP_INSTR(str, regexp, [start, [match, [ret, [match_type]]]])` function returns the position of the match if the regular expression (`regexp`) matches the string (`str`).
+
+If either the `str` or `regexp` is `NULL`, then the function returns `NULL`.
+
+Examples:
+
+In the example below you can see that the `^.b.$` matches `abc`.
+
+```sql
+SELECT REGEXP_INSTR('abc','^.b.$');
+```
+
+```
++-----------------------------+
+| REGEXP_INSTR('abc','^.b.$') |
++-----------------------------+
+|                           1 |
++-----------------------------+
+1 row in set (0.00 sec)
+```
+
+The following example uses the third argument to look for a match with a different start position in the string.
+
+```sql
+SELECT REGEXP_INSTR('abcabc','a');
+```
+
+```
++----------------------------+
+| REGEXP_INSTR('abcabc','a') |
++----------------------------+
+|                          1 |
++----------------------------+
+1 row in set (0.00 sec)
+```
+
+```sql
+SELECT REGEXP_INSTR('abcabc','a',2);
+```
+
+```
++------------------------------+
+| REGEXP_INSTR('abcabc','a',2) |
++------------------------------+
+|                            4 |
++------------------------------+
+1 row in set (0.00 sec)
+```
+
+The following example uses the 4th argument to look for the second match.
+
+```sql
+SELECT REGEXP_INSTR('abcabc','a',1,2);
+```
+
+```
++--------------------------------+
+| REGEXP_INSTR('abcabc','a',1,2) |
++--------------------------------+
+|                              4 |
++--------------------------------+
+1 row in set (0.00 sec)
+```
+
+The following example uses the 5th argument to return the value _after_ the mach, instead of the value of the match.
+
+```sql
+SELECT REGEXP_INSTR('abcabc','a',1,1,1);
+```
+
+```
++----------------------------------+
+| REGEXP_INSTR('abcabc','a',1,1,1) |
++----------------------------------+
+|                                2 |
++----------------------------------+
+1 row in set (0.00 sec)
+```
+
+The following example uses the 6th argument to add the `i` flag to get a case insensitive match. For more details about regular expression `match_type`, see [`match_type` compatibility](#match_type-compatibility).
+
+```sql
+SELECT REGEXP_INSTR('abcabc','A',1,1,0,'');
+```
+
+```
++-------------------------------------+
+| REGEXP_INSTR('abcabc','A',1,1,0,'') |
++-------------------------------------+
+|                                   0 |
++-------------------------------------+
+1 row in set (0.00 sec)
+```
+
+```sql
+SELECT REGEXP_INSTR('abcabc','A',1,1,0,'i');
+```
+
+```
++--------------------------------------+
+| REGEXP_INSTR('abcabc','A',1,1,0,'i') |
++--------------------------------------+
+|                                    1 |
++--------------------------------------+
+1 row in set (0.00 sec)
+```
+
+Besides `match_type`, the [collation](/character-set-and-collation.md) also influences the matching. The following example uses a case-sensitive and a case-insensitive collation to demonstrate this.
+
+```sql
+SELECT REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_general_ci);
+```
+
+```
++-------------------------------------------------------+
+| REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_general_ci) |
++-------------------------------------------------------+
+|                                                     1 |
++-------------------------------------------------------+
+1 row in set (0.01 sec)
+```
+
+```sql
+SELECT REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_bin);
+```
+
+```
++------------------------------------------------+
+| REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_bin) |
++------------------------------------------------+
+|                                              0 |
++------------------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ### [`REGEXP_LIKE()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-like)
 
 Whether the string matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
 
+The `REGEXP_LIKE(str, regex, [match_type])` function is used to test if a regular expression matches a string. Optionally the `match_type` can be used to change the matching behavior.
+
+Examples:
+
+The following example shows that `^a` matches `abc`.
+
+```sql
+SELECT REGEXP_LIKE('abc','^a');
+```
+
+```
++-------------------------+
+| REGEXP_LIKE('abc','^a') |
++-------------------------+
+|                       1 |
++-------------------------+
+1 row in set (0.00 sec)
+```
+
+This following example shows that `^A` does not match `abc`.
+
+```sql
+SELECT REGEXP_LIKE('abc','^A');
+```
+
+```
++-------------------------+
+| REGEXP_LIKE('abc','^A') |
++-------------------------+
+|                       0 |
++-------------------------+
+1 row in set (0.00 sec)
+```
+
+This example matches `^A` against `abc`, which now matches because of the `i` flag which enabled case insensitive matching. For more details about the regular expression `match_type`, see [`match_type` compatibility](#match_type-compatibility).
+
+```sql
+SELECT REGEXP_LIKE('abc','^A','i');
+```
+
+```
++-----------------------------+
+| REGEXP_LIKE('abc','^A','i') |
++-----------------------------+
+|                           1 |
++-----------------------------+
+1 row in set (0.00 sec)
+```
+
 ### [`REGEXP_REPLACE()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-replace)
 
 Replace substrings that match the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
 
+The `REGEXP_REPLACE(str, regexp, replace, [start, [match, [match_type]]])` function can be used to replace strings based on regular expressions.
+
+Examples:
+
+In the following example, two o's are replaced by `i`.
+
+```sql
+SELECT REGEXP_REPLACE('TooDB', 'o{2}', 'i');
+```
+
+```
++--------------------------------------+
+| REGEXP_REPLACE('TooDB', 'o{2}', 'i') |
++--------------------------------------+
+| TiDB                                 |
++--------------------------------------+
+1 row in set (0.00 sec)
+```
+
+The following example starts the match at the third character, causing the regular expression not to match and not do any replacement.
+
+```sql
+SELECT REGEXP_REPLACE('TooDB', 'o{2}', 'i',3);
+```
+
+```
++----------------------------------------+
+| REGEXP_REPLACE('TooDB', 'o{2}', 'i',3) |
++----------------------------------------+
+| TooDB                                  |
++----------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the following example, the 5th argument is used to set if the first or the second match is used for the replacement.
+
+```sql
+SELECT REGEXP_REPLACE('TooDB', 'o', 'i',1,1);
+```
+
+```
++---------------------------------------+
+| REGEXP_REPLACE('TooDB', 'o', 'i',1,1) |
++---------------------------------------+
+| TioDB                                 |
++---------------------------------------+
+1 row in set (0.00 sec)
+```
+
+```sql
+SELECT REGEXP_REPLACE('TooDB', 'o', 'i',1,2);
+```
+
+```
++---------------------------------------+
+| REGEXP_REPLACE('TooDB', 'o', 'i',1,2) |
++---------------------------------------+
+| ToiDB                                 |
++---------------------------------------+
+1 row in set (0.00 sec)
+```
+
+The following example uses the 6th argument to set the `match_type` for case insensitive matching. For more details about the regular expression `match_type`, see [`match_type` compatibility](#match_type-compatibility).
+
+```sql
+SELECT REGEXP_REPLACE('TooDB', 'O{2}','i',1,1);
+```
+
+```
++-----------------------------------------+
+| REGEXP_REPLACE('TooDB', 'O{2}','i',1,1) |
++-----------------------------------------+
+| TooDB                                   |
++-----------------------------------------+
+1 row in set (0.00 sec)
+```
+
+```sql
+SELECT REGEXP_REPLACE('TooDB', 'O{2}','i',1,1,'i');
+```
+
+```
++---------------------------------------------+
+| REGEXP_REPLACE('TooDB', 'O{2}','i',1,1,'i') |
++---------------------------------------------+
+| TiDB                                        |
++---------------------------------------------+
+1 row in set (0.00 sec)
+```
+
 ### [`REGEXP_SUBSTR()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-substr)
 
 Return the substring that matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
+
+The `REGEXP_SUBSTR(str, regexp, [start, [match, [match_type]]])` function is used to get a substring based on a regular expression.
+
+The following example uses the `Ti.{2}` regular expression to get the `TiDB` substring of the `This is TiDB` string.
+
+```sql
+SELECT REGEXP_SUBSTR('This is TiDB','Ti.{2}');
+```
+
+```
++----------------------------------------+
+| REGEXP_SUBSTR('This is TiDB','Ti.{2}') |
++----------------------------------------+
+| TiDB                                   |
++----------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ### [`REPEAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_repeat)
 
@@ -1692,6 +2038,15 @@ The value options of `match_type` between TiDB and MySQL are:
 
 - TiDB does not support `"u"`, which means Unix-only line endings in MySQL.
 
+| `match_type` | MySQL | TiDB | Description                            |
+|:------------:|-------|------|----------------------------------------|
+| c            | Yes   | Yes  | Case-sensitive matching                |
+| i            | Yes   | Yes  | Case-insensitive matching              |
+| m            | Yes   | Yes  | Multi-line mode                        |
+| s            | No    | Yes  | Matches newlines, same as `n` in MySQL |
+| n            | Yes   | No   | Matches newlines, same as `s` in TiDB  |
+| u            | Yes   | No   | UNIX&trade; line endings               |
+
 ### Data type compatibility
 
 The difference between TiDB and MySQL support for the binary string type:
@@ -1713,3 +2068,7 @@ The difference between TiDB and MySQL support for the binary string type:
     ```sql
     SELECT REGEXP_REPLACE('abcd','(.*)(.{2})$','\\1') AS s;
     ```
+
+### Known issues
+
+- [GitHub Issue #37981](https://github.com/pingcap/tidb/issues/37981)
