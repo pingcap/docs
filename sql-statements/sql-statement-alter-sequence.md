@@ -132,7 +132,7 @@ ALTER SEQUENCE s1 INCREMENT=2;
 Query OK, 0 rows affected (0.18 sec)
 ```
 
-Now, get the next two values from the sequence again.
+Now, get the next two values from the sequence again:
 
 ```sql
 SELECT NEXTVAL(s1);
@@ -180,7 +180,7 @@ ALTER SEQUENCE s2 MAXVALUE=100;
 Query OK, 0 rows affected (0.15 sec)
 ```
 
-```
+```sql
 SHOW CREATE SEQUENCE s2\G
 ```
 
