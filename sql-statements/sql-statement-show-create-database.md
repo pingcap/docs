@@ -13,7 +13,7 @@ summary: An overview of the use of SHOW CREATE DATABASE in the TiDB database.
 
 ```ebnf+diagram
 ShowCreateDatabaseStmt ::=
-    "SHOW" "CREATE" "DATABASE" | "SCHEMA" ("IF" "NOT" "EXISTS")? DBName
+    "SHOW" "CREATE" ("DATABASE" | "SCHEMA") ("IF" "NOT" "EXISTS")? DBName
 ```
 
 ## Examples
