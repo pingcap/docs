@@ -4401,6 +4401,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Integer
+- Unit: Byte
 - Default value: `0`
 - Range: `[0, 1099511627776]`
 - This variable sets the memory quota for the TiDB statistics cache.
