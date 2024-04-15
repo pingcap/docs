@@ -140,11 +140,15 @@ ticloud config create
 >
 > The profile name **MUST NOT** contain `.`.
 
-You can also log into TiDB Cloud with OAuth:
+You can also log into TiDB Cloud directly. This will add OAuth token to the current profile, or to a new created profile called `default` if you do not have any profiles yet.
 
 ```
 ticloud auth login
 ```
+
+> **Note:**
+>
+> TiDB Cloud API Key has higher priority than oauth token. If you have both, the API Key will be used.
 
 ### Create a TiDB Serverless cluster
 
