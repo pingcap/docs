@@ -34,7 +34,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | -c, --cluster-id string | Specifies the ID of the cluster.                                                       | Yes      | Only works in non-interactive mode.                  |
 | -e, --export-id string  | Specifies the ID of the export task.                                                               | Yes      | Only works in non-interactive mode.                  |
 | --output-path string    | Specifies the destination path for saving the downloaded data. If not specified, the data is downloaded to the current directory. | No       | Only works in non-interactive mode.                  |
-| --auto-approve          | Downloads the exported data without confirmation.                                                      | No       | Works in both non-interactive and interactive modes. |
+| --force                 | Downloads the exported data without confirmation.                                                      | No       | Works in both non-interactive and interactive modes. |
 | -h, --help              | Shows help information for this command.                                                  | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
