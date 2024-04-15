@@ -1,9 +1,10 @@
 ---
 title: ticloud serverless import start
 summary: The reference of `ticloud serverless import start`.
+aliases: ['/tidbcloud/ticloud-import-start-local', '/tidbcloud/ticloud-import-start-mysql, '/tidbcloud/ticloud-import-start-s3']
 ---
 
-# ticloud serverless import start local
+# ticloud serverless import start
 
 Start a data import task:
 
@@ -51,21 +52,20 @@ ticloud serverless import start --local.file-path <file-path> --cluster-id <clus
 
 In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
-| Flag                           | Description                                                                                                                   | Required | Note                                                                      |
-|--------------------------------|-------------------------------------------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------|
-| -c, --cluster-id string        | Specifies the cluster ID.                                                                                                     | Yes      | Only works in non-interactive mode.                                       |
-| --source-type string           | Specifies the import source type. The default value is `LOCAL`.                                                                   | No       | Only works in non-interactive mode.                                       |
-| --local.concurrency int        | Specifies the concurrency for uploading files. The default value is `5`.                                                                               | No       | Only works in non-interactive mode.                                       |
-| --local.file-path string       | Specifies the path of the local file to be imported.                                                                                                | No       | Only works in non-interactive mode.                                       |
-| --local.target-database string | Specifies the target database to which the data is imported.                                                                                         | No       | Only works in non-interactive mode.                                       |
-| --local.target-table string    | Specifies the target table to which the data is imported.                                                                                            | No       | Only works in non-interactive mode.                                       |
-| --local.file-path string       | Specifies the local file path to import the data.                                                                                                | No       | Only works in non-interactive mode.                                       |
-| --file-type string             | Specifies the import file type, one of ["CSV"].                                                                                         | Yes      | Only works in non-interactive mode.                                       |
-| --csv.backslash-escape         | Specifies whether to parse backslash inside fields as escape characters in a CSV file. The default value is `true`.                                     | No       | Only works in non-interactive mode.                                       |
-| --csv.delimiter string         | Specifies the delimiter used for quoting a CSV file. The default value is `\`.                                                                    | No       | Only works in non-interactive mode.                                       |
-| --csv.separator string         | Specifies the field separator in a CSV file. The default value is `,`.                                                                                | No       | Only works in non-interactive mode.                                       |
-| --csv.trim-last-separator      | Specifies whether to treat the separator as the line terminator and trim all trailing separators in a CSV file.                               | No       | Only works in non-interactive mode.                                       |
-| -h, --help                     | Shows help information for this command.                                                                                      | No       | Works in both non-interactive and interactive modes.                      |
+| Flag                           | Description                                                                                                         | Required | Note                                                                      |
+|--------------------------------|---------------------------------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------|
+| -c, --cluster-id string        | Specifies the cluster ID.                                                                                           | Yes      | Only works in non-interactive mode.                                       |
+| --source-type string           | Specifies the import source type. The default value is `LOCAL`.                                                     | No       | Only works in non-interactive mode.                                       |
+| --local.concurrency int        | Specifies the concurrency for uploading files. The default value is `5`.                                            | No       | Only works in non-interactive mode.                                       |
+| --local.file-path string       | Specifies the path of the local file to be imported.                                                                | No       | Only works in non-interactive mode.                                       |
+| --local.target-database string | Specifies the target database to which the data is imported.                                                        | No       | Only works in non-interactive mode.                                       |
+| --local.target-table string    | Specifies the target table to which the data is imported.                                                           | No       | Only works in non-interactive mode.                                       |
+| --file-type string             | Specifies the import file type. Currently, only `CSV` is supported.                                                 | Yes      | Only works in non-interactive mode.                                       |
+| --csv.backslash-escape         | Specifies whether to parse backslash inside fields as escape characters in a CSV file. The default value is `true`. | No       | Only works in non-interactive mode.                                       |
+| --csv.delimiter string         | Specifies the delimiter used for quoting a CSV file. The default value is `\`.                                      | No       | Only works in non-interactive mode.                                       |
+| --csv.separator string         | Specifies the field separator in a CSV file. The default value is `,`.                                              | No       | Only works in non-interactive mode.                                       |
+| --csv.trim-last-separator      | Specifies whether to treat the separator as the line terminator and trim all trailing separators in a CSV file.     | No       | Only works in non-interactive mode.                                       |
+| -h, --help                     | Shows help information for this command.                                                                            | No       | Works in both non-interactive and interactive modes.                      |
 
 ## Inherited flags
 

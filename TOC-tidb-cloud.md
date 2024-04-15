@@ -630,7 +630,7 @@
       - [list](/tidb-cloud/ticloud-cluster-list.md)
       - [update](/tidb-cloud/ticloud-serverless-update.md)
       - [spending-limit](/tidb-cloud/ticloud-serverless-spending-limit.md)
-      - [regions](/tidb-cloud/ticloud-serverless-regions.md)
+      - [region](/tidb-cloud/ticloud-serverless-region.md)
       - [shell](/tidb-cloud/ticloud-serverless-shell.md)
       - branch
         - [create](/tidb-cloud/ticloud-branch-create.md)

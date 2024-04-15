@@ -1,28 +1,28 @@
 ---
-title: ticloud serverless regions
-summary: The reference of `ticloud serverless regions`.
+title: ticloud serverless region
+summary: The reference of `ticloud serverless region`.
 ---
 
-# ticloud serverless regions
+# ticloud serverless region
 
-List all available regions for TiDB Serverless clusters:
+List all available regions for TiDB Serverless:
 
 ```shell
-ticloud serverless regions [flags]
+ticloud serverless region [flags]
 ```
 
 ## Examples
 
-List all available regions for TiDB Serverless clusters:
+List all available regions for TiDB Serverless:
 
 ```shell
-ticloud serverless regions
+ticloud serverless region
 ```
 
 List all available regions for TiDB Serverless clusters in the JSON format:
 
 ```shell
-ticloud serverless regions -o json
+ticloud serverless region -o json
 ```
 
 ## Flags

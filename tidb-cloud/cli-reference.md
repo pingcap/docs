@@ -17,19 +17,19 @@ The following table lists the commands available for the TiDB Cloud CLI.
 
 To use the `ticloud` CLI in your terminal, run `ticloud [command] [subcommand]`. If you are using [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview), use `tiup cloud [command] [subcommand]` instead.
 
-| Command            | Subcommand                                                               | Description                                                                                              |
-|--------------------|--------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| auth               | login, logout                                                            | Login and logout                                                                                         |
-| serverless         | create, delete, describe, list, update, spending-limit, regions, shell   | Manage TiDB Serverless clusters                                                                          |
-| serverless branch  | create, delete, describe, list, shell                                    | Manage TiDB Serverless branches                                                                          |
-| serverless import  | cancel, describe, list, start                                            | Manage TiDB Serverless [import](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud) tasks |
-| serverless export  | create, describe, list, cancel, download                                 | Manage TiDB Serverless export tasks                                                                       |
-| ai                 | -                                                                        | Chat with TiDB Bot                                                                                       |
-| completion         | bash, fish, powershell, zsh                                              | Generate completion script for specified shell                                                           |
-| config             | create, delete, describe, edit, list, set, use                           | Configure user profiles                                                                                  |
-| project            | list                                                                     | Manage projects                                                                                          |
-| update             | -                                                                        | Update the CLI to the latest version                                                                     |
-| help               | cluster, completion, config, help, import, project, update               | View help for any command                                                                                |
+| Command            | Subcommand                                                               | Description                                                                                             |
+|--------------------|--------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| auth               | login, logout                                                            | Login and logout                                                                                        |
+| serverless         | create, delete, describe, list, update, spending-limit, regions, shell   | Manage TiDB Serverless clusters                                                                         |
+| serverless branch  | create, delete, describe, list, shell                                    | Manage TiDB Serverless branches                                                                         |
+| serverless import  | cancel, describe, list, start                                            | Manage TiDB Serverless import tasks |
+| serverless export  | create, describe, list, cancel, download                                 | Manage TiDB Serverless export tasks                                                                      |
+| ai                 | -                                                                        | Chat with TiDB Bot                                                                                      |
+| completion         | bash, fish, powershell, zsh                                              | Generate completion script for specified shell                                                          |
+| config             | create, delete, describe, edit, list, set, use                           | Configure user profiles                                                                                 |
+| project            | list                                                                     | Manage projects                                                                                         |
+| update             | -                                                                        | Update the CLI to the latest version                                                                    |
+| help               | cluster, completion, config, help, import, project, update               | View help for any command                                                                               |
 
 ## Command modes
 
@@ -45,11 +45,15 @@ The TiDB Cloud CLI provides two modes for some commands for easy use:
 
 ## User profile
 
-For the TiDB Cloud CLI, a user profile is a collection of properties associated with a user, including the profile name, public key, and private key. To use TiDB Cloud CLI, you must create a user profile first.
+For the TiDB Cloud CLI, a user profile is a collection of properties associated with a user, including the profile name, public key, private key and OAuth token. To use TiDB Cloud CLI, you must have a user profile.
 
-### Create a user profile
+### Create a user profile with Open API key
 
 Use [`ticloud config create`](/tidb-cloud/ticloud-config-create.md) to create a user profile.
+
+### Create a user profile with OAuth token
+
+Use [`ticloud auth login`](/tidb-cloud/ticloud-auth-login.md) to assign OAuth token to the current profile. If no profiles exist, a profile named `default` will be created automatically.
 
 ### List all user profiles
 
@@ -109,6 +113,7 @@ The following table lists the global flags for the TiDB Cloud CLI.
 |----------------------|---------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
 | --no-color           | Disables color in output.                               | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
 | -P, --profile string | Specifies the active user profile used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
+| -D, --debug          | Enable debug mode                                       | No       | Works in both non-interactive and interactive modes.:wq                                                          |
 
 ## Feedback
 

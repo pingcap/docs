@@ -14,7 +14,6 @@ TiDB Cloud provides a command-line interface (CLI) [`ticloud`](https://github.co
 ## Before you begin
 
 - Have a TiDB Cloud account. If you do not have one, [sign up for a free trial](https://tidbcloud.com/free-trial).
-- [Create a TiDB Cloud API key](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
 
 ## Installation
 
@@ -90,7 +89,7 @@ Install the MySQL command-line client if you do not have it. You can refer to th
 
 Before creating a cluster with TiDB Cloud CLI, you need to either create a user profile or log into TiDB Cloud.
 
-- Create a user profile with your TiDB Cloud API key:
+- Create a user profile with your [TiDB Cloud API key](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management):
 
     ```shell
     ticloud config create
