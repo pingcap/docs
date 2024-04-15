@@ -1291,7 +1291,7 @@ SELECT n, OCT(n) FROM nr;
 
 ### [`OCTET_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_octet-length)
 
-Synonym for `LENGTH()`.
+Synonym for [`LENGTH()`](#length).
 
 ### [`ORD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ord)
 
@@ -1299,11 +1299,32 @@ Return character code for leftmost character of the argument.
 
 ### [`POSITION()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_position)
 
-Synonym for `LOCATE()`.
+Synonym for [`LOCATE()`](#locate).
 
 ### [`QUOTE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_quote)
 
 Escape the argument for use in an SQL statement.
+
+If the argument is `NULL`, the function returns `NULL`.
+
+Example:
+
+To display the result directly instead of showing a hexadecimal-encoded value, you need to start the MySQL client with the [`--skip-binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex) option.
+
+The following example shows that the ASCII NULL character is escaped as `\0` and the single quote character `'` is escaped as `\'`:
+
+```sql
+SELECT QUOTE(0x002774657374);
+```
+
+```
++-----------------------+
+| QUOTE(0x002774657374) |
++-----------------------+
+| '\0\'test'            |
++-----------------------+
+1 row in set (0.00 sec)
+```
 
 ### [`REGEXP`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp)
 
@@ -1399,7 +1420,7 @@ Return the specified rightmost number of characters.
 
 ### [`RLIKE`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp)
 
-Synonym for `REGEXP`.
+Synonym for [`REGEXP`](#regexp).
 
 ### [`RPAD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_rpad)
 
