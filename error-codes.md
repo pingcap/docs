@@ -464,7 +464,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8228
 
-    Unsupported types are specified when using `setval` on Sequence.
+    Unsupported types are specified when using `SETVAL` on Sequence.
 
     See [Sequence documentation](/sql-statements/sql-statement-create-sequence.md#examples) to find the example of the function.
 
