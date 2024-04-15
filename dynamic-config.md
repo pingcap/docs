@@ -339,10 +339,16 @@ select @@tidb_slow_log_threshold;
 The following TiDB configuration items can be modified dynamically:
 
 | Configuration item | SQL variable | Description |
-| :--- | :--- |
-| `instance.tidb_enable_slow_log` | `tidb_enable_slow_log` | Whether to enable slow log |
-| `instance.tidb_slow_log_threshold` | `tidb_slow_log_threshold` | The threshold of slow log |
-| `instance.tidb_expensive_query_time_threshold` | `tidb_expensive_query_time_threshold` | The threshold of a expensive query |
+| --- | --- | --- |
+| `instance.tidb_enable_slow_log` | `tidb_enable_slow_log` | Controls whether to enable slow log |
+| `instance.tidb_slow_log_threshold` | `tidb_slow_log_threshold` | Specifies the threshold of slow log |
+| `instance.tidb_expensive_query_time_threshold` | `tidb_expensive_query_time_threshold` | Specifies the threshold of an expensive query |
+| `instance.tidb_enable_collect_execution_info` | `tidb_enable_collect_execution_info` | Controls whether to record the execution information of operators |
+| `instance.tidb_record_plan_in_slow_log` | `tidb_record_plan_in_slow_log` | Controls whether to record execution plans in the slow log |
+| `instance.tidb_force_priority` | `tidb_force_priority` | Specifies the priority of statements that are submitted from this TiDB instance |
+| `instance.max_connections` | `max_connections` | Specifies the maximum number of concurrent connections permitted for this TiDB instance |
+| `instance.tidb_enable_ddl` | `tidb_enable_ddl` | Controls whether this TiDB instance can become a DDL owner |
+| `pessimistic-txn.constraint-check-in-place-pessimistic` | `tidb_constraint_check_in_place_pessimistic` | Controls whether to defer the unique constraint check of a unique index to the next time when this index requires a lock or to the time when the transaction is committed |
 
 ### Modify TiFlash configuration dynamically
 
