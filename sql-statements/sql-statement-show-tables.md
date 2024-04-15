@@ -5,27 +5,20 @@ summary: An overview of the usage of SHOW [FULL] TABLES for the TiDB database.
 
 # SHOW [FULL] TABLES
 
-This statement shows a list of tables and views in the currently selected database. The optional keyword `FULL` indicates if a table is of type `BASE TABLE` or `VIEW`.
+This statement shows a list of tables and views in the currently selected database. The optional keyword `FULL` indicates if a table is of type `BASE TABLE`, `SEQUENCE`, or `VIEW`.
 
 To show tables in a different database, use `SHOW TABLES IN DatabaseName`.
 
 ## Synopsis
 
-**ShowTablesStmt:**
+```ebnf+diagram
+ShowTableStmt ::=
+    "SHOW" "FULL"? "TABLES" ("FROM" Identifier | "IN" Identifier )? ShowLikeOrWhere?
 
-![ShowTablesStmt](/media/sqlgram/ShowTablesStmt.png)
-
-**OptFull:**
-
-![OptFull](/media/sqlgram/OptFull.png)
-
-**ShowDatabaseNameOpt:**
-
-![ShowDatabaseNameOpt](/media/sqlgram/ShowDatabaseNameOpt.png)
-
-**ShowLikeOrWhereOpt:**
-
-![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
+ShowLikeOrWhere ::=
+    "LIKE" SimpleExpr
+|   "WHERE" Expression
+```
 
 ## Examples
 
@@ -91,3 +84,4 @@ The `SHOW [FULL] TABLES` statement in TiDB is fully compatible with MySQL. If yo
 * [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 * [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
 * [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+* [`INFORMATION_SCHEMA.TABLES`](/information-schema/information-schema-tables.md)
