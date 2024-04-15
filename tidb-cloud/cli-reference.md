@@ -20,7 +20,7 @@ To use the `ticloud` CLI in your terminal, run `ticloud [command] [subcommand]`.
 | Command           | Subcommand                                                               | Description                                                                                             |
 |-------------------|--------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
 | auth              | login, logout                                                            | Login and logout                                                                                        |
-| serverless (alias s)     | create, delete, describe, list, update, spending-limit, regions, shell   | Manage TiDB Serverless clusters                                                                         |
+| serverless (alias: s)     | create, delete, describe, list, update, spending-limit, regions, shell   | Manage TiDB Serverless clusters                                                                         |
 | serverless branch | create, delete, describe, list, shell                                    | Manage TiDB Serverless branches                                                                         |
 | serverless import | cancel, describe, list, start                                            | Manage TiDB Serverless import tasks |
 | serverless export | create, describe, list, cancel, download                                 | Manage TiDB Serverless export tasks                                                                      |
@@ -45,9 +45,9 @@ The TiDB Cloud CLI provides two modes for some commands for easy use:
 
 ## User profile
 
-For the TiDB Cloud CLI, a user profile is a collection of properties associated with a user, including the profile name, public key, private key and OAuth token. To use TiDB Cloud CLI, you must have a user profile.
+For the TiDB Cloud CLI, a user profile is a collection of properties associated with a user, including the profile name, public key, private key, and OAuth token. To use TiDB Cloud CLI, you must have a user profile.
 
-### Create a user profile with Open API key
+### Create a user profile with TiDB Cloud API key
 
 Use [`ticloud config create`](/tidb-cloud/ticloud-config-create.md) to create a user profile.
 
@@ -113,7 +113,7 @@ The following table lists the global flags for the TiDB Cloud CLI.
 |----------------------|---------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
 | --no-color           | Disables color in output.                               | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
 | -P, --profile string | Specifies the active user profile used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
-| -D, --debug          | Enable debug mode                                       | No       | Works in both non-interactive and interactive modes.:wq                                                          |
+| -D, --debug          | Enable debug mode                                       | No       | Works in both non-interactive and interactive modes.                                                          |
 
 ## Feedback
 
