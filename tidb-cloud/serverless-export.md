@@ -52,7 +52,7 @@ You can export data in the following formats:
 - `SQL` (default): export data in SQL format.
 - `CSV`: export data in CSV format.
 
-Then the schema and data will be exported in the following naming rules:
+The schema and data are exported according to the following naming conventions:
 
 - Database schema: {database}-schema-create.sql
 - Table schema: {database}.{table}-schema.sql
