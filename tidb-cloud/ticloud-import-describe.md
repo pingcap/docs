@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless import describe`.
 
 # ticloud serverless import describe
 
-Get the import details of a data import task:
+Describe a data import task:
 
 ```shell
 ticloud serverless import describe [flags]
@@ -28,7 +28,7 @@ ticloud serverless import describe
 Describe an import task in non-interactive mode:
 
 ```shell
-ticloud serverless import describe --project-id <project-id> --cluster-id <cluster-id> --import-id <import-id>
+ticloud serverless import describe --cluster-id <cluster-id> --import-id <import-id>
 ```
 
 ## Flags
@@ -40,7 +40,6 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | -c, --cluster-id string | Specifies the ID of the cluster.                        | Yes      | Only works in non-interactive mode.                  |
 | -h, --help              | Shows help information for this command. | No       | Works in both non-interactive and interactive modes. |
 | --import-id string      | Specifies the ID of the import task.         | Yes      | Only works in non-interactive mode.                  |
-| -p, --project-id string | Specifies the ID of the project.                        | Yes      | Only works in non-interactive mode.                  |
 
 ## Inherited flags
 

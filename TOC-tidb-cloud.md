@@ -642,10 +642,7 @@
         - [cancel](/tidb-cloud/ticloud-import-cancel.md)
         - [describe](/tidb-cloud/ticloud-import-describe.md)
         - [list](/tidb-cloud/ticloud-import-list.md)
-        - start
-          - [local](/tidb-cloud/ticloud-import-start-local.md)
-          - [s3](/tidb-cloud/ticloud-import-start-s3.md)
-          - [mysql](/tidb-cloud/ticloud-import-start-mysql.md)
+        - [start](/tidb-cloud/ticloud-import-start.md)
       - export
         - [create](/tidb-cloud/ticloud-serverless-export-create.md)
         - [describe](/tidb-cloud/ticloud-serverless-export-describe.md)

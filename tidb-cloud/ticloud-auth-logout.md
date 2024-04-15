@@ -5,7 +5,7 @@ summary: The reference of `ticloud auth logout`.
 
 # ticloud auth logout
 
-Log out of TiDB Cloud CLI:
+Log out of TiDB Cloud:
 
 ```shell
 ticloud auth logout [flags]
@@ -13,7 +13,7 @@ ticloud auth logout [flags]
 
 ## Examples
 
-To log out of TiDB Cloud CLI:
+To log out of TiDB Cloud:
 
 ```shell
 ticloud auth logout

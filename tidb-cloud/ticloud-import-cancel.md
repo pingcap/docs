@@ -22,20 +22,19 @@ ticloud serverless import cancel
 Cancel an import task in non-interactive mode:
 
 ```shell
-ticloud serverless import cancel --project-id <project-id> --cluster-id <cluster-id> --import-id <import-id>
+ticloud serverless import cancel --cluster-id <cluster-id> --import-id <import-id>
 ```
 
 ## Flags
 
 In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
-| Flag                    | Description                                                   | Required | Note                                                 |
-|-------------------------|---------------------------------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | Specifies the ID of the cluster.                              | Yes      | Only works in non-interactive mode.                  |
-| --force                 | Cancels the import task without confirmation. | No       | Works in both non-interactive and interactive modes. |
-| -h, --help              | Shows help information for this command.                      | No       | Works in both non-interactive and interactive modes. |
-| --import-id string      | Specifies the ID of the import task.                          | Yes      | Only works in non-interactive mode.                  |
-| -p, --project-id string | Specifies the ID of the project.                              | Yes      | Only works in non-interactive mode.                  |
+| Flag                    | Description                                  | Required | Note                                                 |
+|-------------------------|----------------------------------------------|----------|------------------------------------------------------|
+| -c, --cluster-id string | Specifies the ID of the cluster.                                  | Yes      | Only works in non-interactive mode.                  |
+| --force                 | Cancels an import task without confirmation. | No       | Works in both non-interactive and interactive modes. |
+| -h, --help              | Shows help information for this command.     | No       | Works in both non-interactive and interactive modes. |
+| --import-id string      | Specifies the ID of the import task.         | Yes      | Only works in non-interactive mode.                  |
 
 ## Inherited flags
 

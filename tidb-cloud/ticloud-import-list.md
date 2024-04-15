@@ -28,13 +28,13 @@ ticloud serverless import list
 List import tasks in non-interactive mode:
 
 ```shell
-ticloud serverless import list --project-id <project-id> --cluster-id <cluster-id>
+ticloud serverless import list --cluster-id <cluster-id>
 ```
 
 List import tasks for a specified cluster in the JSON format:
 
 ```shell
-ticloud serverless import list --project-id <project-id> --cluster-id <cluster-id> --output json
+ticloud serverless import list --cluster-id <cluster-id> --output json
 ```
 
 ## Flags
@@ -46,7 +46,6 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | -c, --cluster-id string | Specifies the ID of the cluster.                                                                                                               | Yes      | Only works in non-interactive mode.                  |
 | -h, --help              | Shows help information for this command.                                                                                       | No       | Works in both non-interactive and interactive modes. |
 | -o, --output string     | Specifies the output format (`human` by default). Valid values are `human` or `json`. To get a complete result, use the `json` format. | No       | Works in both non-interactive and interactive modes. |
-| -p, --project-id string | Specifies the ID of the project.                                                                                                               | Yes      | Only works in non-interactive mode.                  |
 
 ## Inherited flags
 

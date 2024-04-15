@@ -5,7 +5,7 @@ summary: The reference of `ticloud auth login`.
 
 # ticloud auth login
 
-Authenticate with TiDB Cloud CLI:
+Authenticate with TiDB Cloud:
 
 ```shell
 ticloud auth login [flags]
@@ -13,13 +13,13 @@ ticloud auth login [flags]
 
 ## Examples
 
-To log into TiDB Cloud CLI:
+To log into TiDB Cloud:
 
 ```shell
 ticloud auth login
 ```
 
-To log into TiDB Cloud CLI with insecure storage:
+To log into TiDB Cloud with insecure storage:
 
 ```shell
 ticloud auth login --insecure-storage
