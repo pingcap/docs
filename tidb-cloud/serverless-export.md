@@ -54,9 +54,10 @@ You can export data in the following formats:
 
 Then the schema and data will be exported in the following naming rules:
 
-- Database schema: {schema}-schema-create.sql
-- Table schema: {schema}.{table}-schema.sql
-- Data: {schema}.{table}.{0001}.{sql|csv}
+- Database schema: {database}-schema-create.sql
+- Table schema: {database}.{table}-schema.sql
+- Data: {database}.{table}.{0001}.{sql|csv}
+- Compressed data: {database}.{table}.{0001}.{sql|csv}.{compress}
 
 ### Data compression
 
