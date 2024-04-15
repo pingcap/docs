@@ -31,7 +31,7 @@ Exporting data to local storage has the following limitations:
 
 - Exporting multiple databases to local storage at the same time is not supported.
 - Exported data is saved in the stashing area and will expire after two days. You need to download the exported data in time.
-- TiDB Cloud offers 250 GiB of storage space in the stashing area for each organization per region. If the storage space is full, you will not be able to export data to local storage.
+- If the storage space of stashing area is full, you will not be able to export data to local storage.
 
 **Amazon S3**
 
@@ -51,6 +51,12 @@ You can export data in the following formats:
 
 - `SQL` (default): export data in SQL format.
 - `CSV`: export data in CSV format.
+
+Then the schema and data will be exported in the following naming rules:
+
+- Database schema: {schema}-schema-create.sql
+- Table schema: {schema}.{table}-schema.sql
+- Data: {schema}.{table}.{0001}.{sql|csv}
 
 ### Data compression
 
