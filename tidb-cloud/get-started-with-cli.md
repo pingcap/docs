@@ -8,7 +8,8 @@ summary: Learn how to manage TiDB Cloud resources through the TiDB Cloud CLI.
 TiDB Cloud provides a command-line interface (CLI) [`ticloud`](https://github.com/tidbcloud/tidbcloud-cli) for you to interact with TiDB Cloud from your terminal with a few lines of commands. For example, you can easily perform the following operations using `ticloud`:
 
 - Create, delete, and list your clusters.
-- Import data from Amazon S3 or local files to your clusters.
+- Import data to your clusters.
+- Export data from your clusters.
 
 ## Before you begin
 
@@ -114,7 +115,7 @@ tiup cloud --help
 Run commands with `tiup cloud <command>`. For example:
 
 ```shell
-tiup cloud cluster create
+tiup cloud serverless create
 ```
 
 Update to the latest version by TiUP:
@@ -127,7 +128,7 @@ tiup update cloud
 
 [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) is the best way to get started with TiDB Cloud. In this section, you will learn how to create a TiDB Serverless cluster with TiDB Cloud CLI.
 
-### Create a user profile
+### Create a user profile or log into TiDB Cloud
 
 Before creating a cluster, you need to create a user profile with your TiDB Cloud API Key:
 
@@ -139,23 +140,19 @@ ticloud config create
 >
 > The profile name **MUST NOT** contain `.`.
 
+You can also log into TiDB Cloud with OAuth:
+
+```
+ticloud auth login
+```
+
 ### Create a TiDB Serverless cluster
 
-To create a TiDB Serverless cluster, enter the following command, and then follow the CLI prompts to provide the required information and set the password:
+To create a TiDB Serverless cluster, enter the following command, and then follow the CLI prompts to provide the required information:
 
 ```shell
-ticloud cluster create
+ticloud serverless create
 ```
-
-### Connect to the cluster
-
-After the cluster is created, you can connect to the cluster:
-
-```shell
-ticloud connect
-```
-
-When you are prompted about whether to use the default user, choose `Y` and enter the password that you set when creating the cluster.
 
 ## What's next
 
