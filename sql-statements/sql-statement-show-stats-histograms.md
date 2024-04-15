@@ -1,10 +1,7 @@
 ---
 title: SHOW STATS_HISTOGRAMS
 summary: An overview of the usage of SHOW HISTOGRAMS for TiDB database.
-<<<<<<< HEAD:sql-statements/sql-statement-show-histograms.md
-=======
-aliases: ['/docs/dev/sql-statements/sql-statement-show-histograms/','/tidb/dev/sql-statement-show-histograms']
->>>>>>> 36427f3df4 (ebnf show stats_histograms (#17051)):sql-statements/sql-statement-show-stats-histograms.md
+aliases: ['/tidb/v8.0/sql-statement-show-histograms']
 ---
 
 # SHOW STATS_HISTOGRAMS
