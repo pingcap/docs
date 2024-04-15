@@ -90,10 +90,10 @@ mysql> SHOW SESSION VARIABLES LIKE 'sql_mode';
 User variables start with a `@`.
 
 ```sql
-mysql> SET @myvar := 5;
+SET @myvar := 5;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> SELECT @myvar, @myvar + 1;
+SELECT @myvar, @myvar + 1;
 +--------+------------+
 | @myvar | @myvar + 1 |
 +--------+------------+
