@@ -1,5 +1,5 @@
 ---
-title: ticloud serverless cluster spending-limit
+title: ticloud serverless spending-limit
 summary: The reference of `ticloud serverless spending-limit`.
 ---
 

@@ -45,7 +45,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | --s3.bucket-uri string        | Specifies the bucket URI of the S3. This flag is required when you export data to Amazon S3.                                              | No       | Only works in non-interactive mode.                  |
 | --s3.access-key-id string     | Specifies the access key ID of the S3 bucket. This flag is required when you export data to Amazon S3.                                    | NO       | Only works in non-interactive mode.                  |
 | --s3.secret-access-key string | Specifies the secret access key of the S3 bucket. This flag is required when you export data to Amazon S3.                                | No       | Only works in non-interactive mode.                  |
-| --compression string          | Specifies the compression algorithm of the export file. The supported algorithms include `GZIP` `SNAPPY` `ZSTD` `NONE`. The default value is `GZIP`. | No       | Only works in non-interactive mode.                  |
+| --compression string          | Specifies the compression algorithm of the export file. The supported algorithms include `GZIP`, `SNAPPY`, `ZSTD`, and `NONE`. The default value is `GZIP`. | No       | Only works in non-interactive mode.                  |
 | -h, --help                    | Shows help information for this command.                                                                     | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags

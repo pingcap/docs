@@ -1,5 +1,5 @@
 ---
-title: ticloud serverless cluster shell
+title: ticloud serverless shell
 summary: The reference of `ticloud serverless shell`.
 ---
 

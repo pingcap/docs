@@ -1,5 +1,5 @@
 ---
-title: ticloud serverless cluster update
+title: ticloud serverless update
 summary: The reference of `ticloud serverless update`.
 ---
 

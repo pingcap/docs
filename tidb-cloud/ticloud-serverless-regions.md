@@ -1,5 +1,5 @@
 ---
-title: ticloud serverless cluster regions
+title: ticloud serverless regions
 summary: The reference of `ticloud serverless regions`.
 ---
 
