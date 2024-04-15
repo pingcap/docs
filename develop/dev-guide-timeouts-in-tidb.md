@@ -19,7 +19,30 @@ TiDB's transaction implementation uses the MVCC (Multiple Version Concurrency Co
 
     For transactions that are active and do not exceed a duration of 24 hours, garbage collection (GC) will be blocked during the transaction period, preventing the occurrence of the error `GC life time is shorter than transaction duration`.
 
-If you need longer read time, for example, when you are using **Dumpling** for full backups (**Dumpling** backs up consistent snapshots), you can adjust the value of `tikv_gc_life_time` in the `mysql.tidb` table in TiDB to increase the MVCC version retention time. Note that `tikv_gc_life_time` takes effect globally and immediately. Increasing the value will increase the life time of all existing snapshots, and decreasing it will immediately shorten the life time of all snapshots. Too many MVCC versions will impact TiKV's processing efficiency. So you need to change `tikv_gc_life_time` back to the previous setting in time after doing a full backup with **Dumpling**.
+If you need longer read time temporarily, you can adjust the value of:
+
+- For versions of TiDB prior to `5.0`:
+
+    The `tikv_gc_life_time` in the `mysql.tidb` table in TiDB
+
+- For TiDB version 5.0 and later:
+
+    The system variable [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)
+
+To increase the MVCC version retention time. Note that this variable takes effect globally and immediately. Increasing the value will increase the life time of all existing snapshots, and decreasing it will immediately shorten the life time of all snapshots. Too many MVCC versions will impact the performance of TiDB cluster. So you need to change this variable back to the previous setting in time.
+
+> **Tip:**
+>
+> Specifically, when Dumpling is exporting data from TiDB (less than 1 TB), if the TiDB version is later than or equal to v4.0.0 and Dumpling can access the PD address of the TiDB cluster, Dumpling automatically extends the GC time without affecting the original cluster.
+>
+> However, in either of the following scenarios, Dumpling cannot automatically adjust the GC time:
+>
+> - The data size is very large (more than 1 TB).
+> - Dumpling cannot connect directly to PD, for example, if the TiDB cluster is on TiDB Cloud or on Kubernetes that is separated from Dumpling.
+>
+> In such scenarios, you must manually extend the GC time in advance to avoid export failure due to GC during the export process.
+>
+> For more details, please refer to the section on manually setting the TiDB GC time in the Dumpling tool documentation [Manual Setting of TiDB GC Time](/dumpling-overview.md#manually-set-the-tidb-gc-time).
 
 For more information about GC, see [GC Overview](/garbage-collection-overview.md).
 
