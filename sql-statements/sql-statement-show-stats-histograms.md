@@ -1,33 +1,28 @@
 ---
 title: SHOW STATS_HISTOGRAMS
 summary: An overview of the usage of SHOW HISTOGRAMS for TiDB database.
-aliases: ['/docs/dev/sql-statements/sql-statement-show-histograms/']
+aliases: ['/docs/dev/sql-statements/sql-statement-show-histograms/','/tidb/dev/sql-statement-show-histograms']
 ---
 
 # SHOW STATS_HISTOGRAMS
 
-This statement shows the histogram information collected by the `ANALYZE` statement.
+This statement shows the histogram information collected by the [`ANALYZE` statement](/sql-statements/sql-statement-analyze-table.md) as part of database [statistics](/statistics.md).
 
 ## Synopsis
 
-**ShowStmt**
+```ebnf+diagram
+ShowStatsHistogramsStmt ::=
+    "SHOW" "STATS_HISTOGRAMS" ShowLikeOrWhere?
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
-
-**ShowTargetFiltertable**
-
-![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
-
-**ShowLikeOrWhereOpt**
-
-![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
+ShowLikeOrWhere ::=
+    "LIKE" SimpleExpr
+|   "WHERE" Expression
+```
 
 ## Examples
 
-{{< copyable "sql" >}}
-
 ```sql
-show stats_histograms;
+SHOW STATS_HISTOGRAMS;
 ```
 
 ```sql
@@ -41,10 +36,8 @@ show stats_histograms;
 3 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
-show stats_histograms where table_name = 't2';
+SHOW STATS_HISTOGRAMS WHERE table_name = 't2';
 ```
 
 ```sql
