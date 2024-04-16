@@ -54,10 +54,11 @@ You can export data in the following formats:
 
 The schema and data are exported according to the following naming conventions:
 
-- Database schema: {database}-schema-create.sql
-- Table schema: {database}.{table}-schema.sql
-- Data: {database}.{table}.{0001}.{sql|csv}
-- Compressed data: {database}.{table}.{0001}.{sql|csv}.{compress}
+| item            | not compressed                           | compressed                                          |
+|-----------------|------------------------------------------|-----------------------------------------------------|
+| database schema | {database}-schema-create.sql             | {database}-schema-create.sql.{compress}             |
+| table schema    | {database}.{table}-schema.sql            | {database}.{table}-schema.sql.{compress}            |
+| data            | {database}.{table}.{0001}.{sql&#124;csv} | {database}.{table}.{0001}.{sql&#124;csv}.{compress} |
 
 ### Data compression
 
