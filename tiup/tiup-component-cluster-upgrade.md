@@ -43,17 +43,83 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 - Data type: `BOOLEAN`
 - Default: false
 
+### --ignore-version-check
+
+- Before upgrading, TiUP checks whether the target version is greater than or equal to the current version. To skip this check, you can use the `--ignore-version-check` option.
+- Data type: `BOOLEAN`
+- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+
 ### --offline
 
 - Declares that the current cluster is not running. When this option is specified, TiUP does not evict the service leader to another node or restart the service, but only replaces the binary files of the cluster components.
 - Data type: `BOOLEAN`
 - This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
+### --pd-version
+
+- Specifies the version of PD. If this option is set, the version of PD will no longer be consistent with the cluster version.
+- Data type: `STRINGS`
+- If this option is not set, the version of PD remains consistent with the cluster version.
+
+### --tikv-version
+
+- Specifies the version of TiKV. If this option is set, the version of TiKV will no longer be consistent with the cluster version.
+- Data type: `STRINGS`
+- If this option is not set, the version of TiKV remains consistent with the cluster version.
+
+### --tikv-cdc-version
+
+- Specifies the version of TiKV CDC. If this option is set, the version of TiKV CDC will no longer be consistent with the cluster version.
+- Data type: `STRINGS`
+- If this option is not set, the version of TiKV CDC remains consistent with the cluster version.
+
+### --tiflash-version
+
+- Specifies the version of TiFlash. If this option is set, the version of TiFlash will no longer be consistent with the cluster version.
+- Data type: `STRINGS`
+- If this option is not set, the version of TiFlash remains consistent with the cluster version.
+
+### --cdc-version
+
+- Specifies the version of TiCDC. If this option is set, the version of TiCDC will no longer be consistent with the cluster version.
+- Data type: `STRINGS`
+- If this option is not set, the version of TiCDC remains consistent with the cluster version.
+
+### --tiproxy-version
+
+- Specifies the version of TiProxy. If this option is set, the version of TiProxy will no longer be consistent with the cluster version.
+- Data type: `STRINGS`
+- If this option is not set, the version of TiProxy remains consistent with the cluster version.
+
+### --tidb-dashboard-version
+
+- Specifies the version of TiDB Dashboard. If this option is set, the version of TiDB Dashboard will no longer be consistent with the cluster version.
+- Data type: `STRINGS`
+- If this option is not set, the version of TiDB Dashboard remains consistent with the cluster version.
+
+### --alertmanager-version
+
+- Specifies the version of alert manager. If this option is set, the version of alert manager will no longer be consistent with the cluster version.
+- Data type: `STRINGS`
+- If this option is not set, the version of alert manager remains consistent with the cluster version.
+
+### --blackbox-exporter-version
+
+- Specifies the version of Blackbox Exporter. If this option is set, the version of Blackbox Exporter will no longer be consistent with the cluster version.
+- Data type: `STRINGS`
+- If this option is not set, the version of Blackbox Exporter remains consistent with the cluster version.
+
+### --node-exporter-version
+
+- Specifies the version of Node Exporter. If this option is set, the version of Node Exporter will no longer be consistent with the cluster version.
+- Data type: `STRINGS`
+- If this option is not set, the version of Node Exporter remains consistent with the cluster version.
+
 ### -h, --help
 
 - Prints the help information.
 - Data type: `BOOLEAN`
-- Default: false
+- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
 ## Output
 
