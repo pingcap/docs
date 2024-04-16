@@ -126,7 +126,7 @@ This section exemplifies how to add a TiDB node to the `10.0.1.5` host.
 
     If you see `Scaled cluster <cluster-name> out successfully`, the scale-out operation succeeds.
 
-3. Refresh the cluster configuration:
+3. Refresh the cluster configuration.
 
     > **Note:**
     >
@@ -328,7 +328,7 @@ This section exemplifies how to remove a TiKV node from the `10.0.1.5` host.
 
     If you see `Scaled cluster <cluster-name> in successfully`, the scale-in operation succeeds.
 
-3. Refresh the cluster configuration:
+3. Refresh the cluster configuration.
 
     > **Note:**
     >
