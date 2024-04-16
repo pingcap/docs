@@ -24,7 +24,7 @@ To use the `ticloud` CLI in your terminal, run `ticloud [command] [subcommand]`.
 | Command           | Subcommand                                                               | Description                                                                                             |
 |-------------------|--------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
 | auth              | login, logout                                                            | Login and logout                                                                                        |
-| serverless (alias: s)     | create, delete, describe, list, update, spending-limit, regions, shell   | Manage TiDB Serverless clusters                                                                         |
+| serverless (alias: s)     | create, delete, describe, list, update, spending-limit, region, shell   | Manage TiDB Serverless clusters                                                                         |
 | serverless branch | create, delete, describe, list, shell                                    | Manage TiDB Serverless branches                                                                         |
 | serverless import | cancel, describe, list, start                                            | Manage TiDB Serverless import tasks |
 | serverless export | create, describe, list, cancel, download                                 | Manage TiDB Serverless export tasks                                                                      |
