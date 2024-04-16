@@ -68,17 +68,14 @@ case-sensitive = false
 # The default value is the same as the default SQL mode of TiDB.
 # sql-mode = "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
 
-<<<<<<< HEAD
 # The default value is false, which means that Bi-Directional Replication (BDR) mode is disabled.
 # For more information, see https://docs.pingcap.com/tidb/stable/ticdc-bidirectional-replication
 # bdr-mode = false
-=======
 # The duration for which the changefeed is allowed to automatically retry when internal errors or exceptions occur. The default value is 30 minutes.
 # The changefeed enters the failed state if internal errors or exceptions occur in the changefeed and persist longer than the duration set by this parameter.
 # When the changefeed is in the failed state, you need to restart the changefeed manually for recovery.
 # The format of this parameter is "h m s", for example, "1h30m30s".
 changefeed-error-stuck-duration = "30m"
->>>>>>> 856e4f9dfe (ticdc: refine changefeed related documentations (#16963))
 
 [mounter]
 # The number of threads with which the mounter decodes KV data. The default value is 16.
