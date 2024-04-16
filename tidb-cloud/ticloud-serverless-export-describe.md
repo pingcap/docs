@@ -1,51 +1,45 @@
 ---
-title: ticloud serverless branch list
-summary: The reference of `ticloud serverless branch list`.
+title: ticloud serverless export describe
+summary: The reference of `ticloud serverless export describe`.
 ---
 
-# ticloud serverless branch list
+# ticloud serverless export describe
 
-List all branches for a TiDB Serverless cluster:
+Get the export information of a TiDB Serverless cluster:
 
 ```shell
-ticloud serverless branch list <cluster-id> [flags]
+ticloud serverless export describe [flags]
 ```
 
 Or use the following alias command:
 
 ```shell
-ticloud serverless branch ls <cluster-id> [flags]
+ticloud serverless export get [flags]
 ```
 
 ## Examples
 
-List all branches for a TiDB Serverless cluster in interactive mode:
+Get the export information in interactive mode:
 
 ```shell
-ticloud serverless branch list
+ticloud serverless export describe
 ```
 
-List all branches for a specific TiDB Serverless cluster in non-interactive mode:
+Get the export information in non-interactive mode:
 
 ```shell
-ticloud serverless branch list -c <cluster-id>
-```
-
-List all branches for a specific TiDB Serverless cluster in the JSON format:
-
-```shell
-ticloud serverless branch list <cluster-id> -o json
+ticloud serverless export describe -c <cluster-id> -e <export-id>
 ```
 
 ## Flags
 
 In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
-| Flag                    | Description                                                                                                              | Required | Note                                                 |
-|-------------------------|--------------------------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | Specifies the ID of the cluster.                                                                                                    | Yes      | Only works in non-interactive mode.                  |
-| -h, --help              | Shows help information for this command.                                                                                       | No       | Works in both non-interactive and interactive modes. |
-| -o, --output string     | Specifies the output format (`human` by default). Valid values are `human` or `json`. To get a complete result, use the `json` format. | No       | Works in both non-interactive and interactive modes. |
+| Flag                    | Description                                  | Required | Note                                                 |
+|-------------------------|----------------------------------------------|----------|------------------------------------------------------|
+| -c, --cluster-id string | Specifies the ID of the cluster. | Yes      | Only works in non-interactive mode.                  |
+| -e, --export-id string  | Specifies the ID of the export task.         | Yes      | Only works in non-interactive mode.                  |
+| -h, --help              | Shows help information for this command.           | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
 

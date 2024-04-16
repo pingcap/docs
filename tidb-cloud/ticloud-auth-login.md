@@ -1,45 +1,38 @@
 ---
-title: ticloud serverless cluster delete
-summary: The reference of `ticloud serverless delete`.
+title: ticloud auth login
+summary: The reference of `ticloud auth login`.
 ---
 
-# ticloud serverless delete
+# ticloud auth login
 
-Delete a TiDB Serverless cluster from your project:
-
-```shell
-ticloud serverless delete [flags]
-```
-
-Or use the following alias command:
+Authenticate with TiDB Cloud:
 
 ```shell
-ticloud serverless rm [flags]
+ticloud auth login [flags]
 ```
 
 ## Examples
 
-Delete a TiDB Serverless cluster in interactive mode:
+To log into TiDB Cloud:
 
 ```shell
-ticloud serverless delete
+ticloud auth login
 ```
 
-Delete a TiDB Serverless cluster in non-interactive mode:
+To log into TiDB Cloud with insecure storage:
 
 ```shell
-ticloud serverless delete --cluster-id <cluster-id>
+ticloud auth login --insecure-storage
 ```
 
 ## Flags
 
 In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
-| Flag                    | Description                            | Required | Note                                                 |
-|-------------------------|----------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | Specifies the ID of the cluster to be deleted.    | Yes      | Only works in non-interactive mode.                  |
-| --force                 | Deletes a cluster without confirmation. | No       | Works in both non-interactive and interactive modes. |
-| -h, --help              | Shows help information for this command.     | No       | Works in both non-interactive and interactive modes. |
+| Flag               | Description                                                               | Required | Note                                                 |
+|--------------------|---------------------------------------------------------------------------|----------|------------------------------------------------------|
+| --insecure-storage | Saves authentication credentials in plain text instead of credential store. | No       | Works in both non-interactive and interactive modes. |
+| -h, --help         | Shows help information for this command.                                         | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
 
