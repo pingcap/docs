@@ -10,17 +10,14 @@ This statement shows a list of variables for the scope of either `GLOBAL` or `SE
 
 ## Synopsis
 
-**ShowStmt:**
-
-![ShowStmt](/media/sqlgram/ShowStmt.png)
-
-**ShowTargetFilterable:**
-
-![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
-
-**GlobalScope:**
-
-![GlobalScope](/media/sqlgram/GlobalScope.png)
+```ebnf+diagram
+ShowVariablesStmt ::=
+    "SHOW" ("GLOBAL" | "SESSION")? VARIABLES ShowLikeOrWhere?
+    
+ShowLikeOrWhere ::=
+    "LIKE" SimpleExpr
+|   "WHERE" Expression
+```
 
 ## Examples
 
@@ -146,6 +143,28 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'time_zone%';
 | time_zone     | SYSTEM |
 +---------------+--------+
 1 row in set (0.00 sec)
+
+mysql> SHOW VARIABLES WHERE Variable_name="tidb_window_concurrency";
++-------------------------+-------+
+| Variable_name           | Value |
++-------------------------+-------+
+| tidb_window_concurrency | -1    |
++-------------------------+-------+
+1 row in set (0.00 sec)
+
+mysql> SHOW VARIABLES WHERE Value=300;
++--------------------------------+-------+
+| Variable_name                  | Value |
++--------------------------------+-------+
+| ddl_slow_threshold             | 300   |
+| delayed_insert_timeout         | 300   |
+| innodb_purge_batch_size        | 300   |
+| key_cache_age_threshold        | 300   |
+| slave_checkpoint_period        | 300   |
+| tidb_slow_log_threshold        | 300   |
+| tidb_wait_split_region_timeout | 300   |
++--------------------------------+-------+
+7 rows in set (0.00 sec)
 ```
 
 ## MySQL compatibility

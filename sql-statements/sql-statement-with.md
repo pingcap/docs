@@ -14,7 +14,7 @@ A Common Table Expression (CTE) is a temporary result set that can be referred m
 ```ebnf+diagram
 WithClause ::=
         "WITH" WithList
-|       "WITH" recursive WithList
+|       "WITH" "RECURSIVE" WithList
 ```
 
 **WithList:**
@@ -43,10 +43,8 @@ IdentListWithParenOpt ::=
 
 Non-recursive CTE:
 
-{{< copyable "sql" >}}
-
 ```sql
-WITH CTE AS (SELECT 1, 2) SELECT * FROM cte t1, cte t2;
+WITH cte AS (SELECT 1, 2) SELECT * FROM cte t1, cte t2;
 ```
 
 ```
@@ -59,8 +57,6 @@ WITH CTE AS (SELECT 1, 2) SELECT * FROM cte t1, cte t2;
 ```
 
 Recursive CTE:
-
-{{< copyable "sql" >}}
 
 ```sql
 WITH RECURSIVE cte(a) AS (SELECT 1 UNION SELECT a+1 FROM cte WHERE a < 5) SELECT * FROM cte;
