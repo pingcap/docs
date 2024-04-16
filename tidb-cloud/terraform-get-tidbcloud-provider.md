@@ -48,7 +48,7 @@ For detailed steps, see [TiDB Cloud API documentation](https://docs.pingcap.com/
      required_providers {
        tidbcloud = {
          source = "tidbcloud/tidbcloud"
-         version = "~> 0.1.0"
+         version = "~> 0.2.0"
        }
      }
      required_version = ">= 1.0.0"
