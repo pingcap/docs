@@ -121,7 +121,11 @@ ALTER TABLE t1 ADD INDEX idx1((LOWER(col1)));
 You can also specify the expression index when you create the table:
 
 ```sql
-CREATE TABLE t1(col1 CHAR(10), col2 CHAR(10), INDEX((LOWER(col1))));
+CREATE TABLE t1(
+    col1 CHAR(10), 
+    col2 CHAR(10),
+    INDEX ((LOWER(col1)))
+);
 ```
 
 > **Note:**
@@ -137,10 +141,10 @@ DROP INDEX idx1 ON t1;
 Expression index involves various kinds of expressions. To ensure correctness, only some fully tested functions are allowed for creating an expression index. This means that only these functions are allowed in expressions in a production environment. You can get these functions by querying the `tidb_allow_function_for_expression_index` variable. Currently, the allowed functions are as follows:
 
 ```
-json_array, json_array_append, json_array_insert, json_contains, json_contains_path, json_depth, json_extract, json_insert, json_keys, json_length, json_merge_patch, json_merge_preserve, json_object, json_pretty, json_quote, json_remove, json_replace, json_search, json_set, json_storage_size, json_type, json_unquote, json_valid, lower, md5, reverse, tidb_shard, upper, vitess_hash
+JSON_ARRAY, JSON_ARRAY_APPEND, JSON_ARRAY_INSERT, JSON_CONTAINS, JSON_CONTAINS_PATH, JSON_DEPTH, JSON_EXTRACT, JSON_INSERT, JSON_KEYS, JSON_LENGTH, JSON_MERGE_PATCH, JSON_MERGE_PRESERVE, JSON_OBJECT, JSON_PRETTY, JSON_QUOTE, JSON_REMOVE, JSON_REPLACE, JSON_SEARCH, JSON_SET, JSON_STORAGE_SIZE, JSON_TYPE, JSON_UNQUOTE, JSON_VALID, LOWER, MD5, REVERSE, TIDB_SHARD, UPPER, VITESS_HASH
 ```
 
-For the functions that are not included in the above list, those functions are not fully tested and not recommended for a production environment, which can be seen as experimental. Other expressions such as operators, `cast`, and `case when` are also seen as experimental and not recommended for production.
+For the functions that are not included in the above list, those functions are not fully tested and not recommended for a production environment, which can be seen as experimental. Other expressions such as operators, `CAST`, and `CASE WHEN` are also seen as experimental and not recommended for production.
 
 <CustomContent platform="tidb">
 
