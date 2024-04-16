@@ -11,6 +11,10 @@ TiDB Cloud provides a command-line interface (CLI) [`ticloud`](https://github.co
 - Import data to your clusters.
 - Export data from your clusters.
 
+> **Note:**
+>
+> TiDB Cloud CLI is in beta.
+
 ## Before you begin
 
 - Have a TiDB Cloud account. If you do not have one, [sign up for a free trial](https://tidbcloud.com/free-trial).
