@@ -71,6 +71,7 @@ case-sensitive = false
 # The default value is false, which means that Bi-Directional Replication (BDR) mode is disabled.
 # For more information, see https://docs.pingcap.com/tidb/stable/ticdc-bidirectional-replication
 # bdr-mode = false
+
 # The duration for which the changefeed is allowed to automatically retry when internal errors or exceptions occur. The default value is 30 minutes.
 # The changefeed enters the failed state if internal errors or exceptions occur in the changefeed and persist longer than the duration set by this parameter.
 # When the changefeed is in the failed state, you need to restart the changefeed manually for recovery.
