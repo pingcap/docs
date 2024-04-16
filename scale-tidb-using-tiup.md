@@ -143,7 +143,7 @@ This section exemplifies how to add a TiDB node to the `10.0.1.5` host.
 
         > **Note:**
         >
-        > If you are using TiUP v1.15.0 or a later version, you can skip this step. If you are using a TiUP version earlier than v1.15.0, you need to execute the following command to update the Prometheus configuration and restart Prometheus.
+        > If you are using TiUP v1.15.0 or a later version, skip this step. If you are using a TiUP version earlier than v1.15.0, execute the following command to update the Prometheus configuration and restart Prometheus.
 
         ```shell
         tiup cluster reload <cluster-name> -R prometheus
@@ -345,7 +345,7 @@ This section exemplifies how to remove a TiKV node from the `10.0.1.5` host.
 
         > **Note:**
         >
-        > If you are using TiUP v1.15.0 or a later version, you can skip this step. If you are using a TiUP version earlier than v1.15.0, you need to execute the following command to update the Prometheus configuration and restart Prometheus.
+        > If you are using TiUP v1.15.0 or a later version, skip this step. If you are using a TiUP version earlier than v1.15.0, execute the following command to update the Prometheus configuration and restart Prometheus.
 
         ```shell
         tiup cluster reload <cluster-name> -R prometheus
