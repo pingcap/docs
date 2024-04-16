@@ -132,7 +132,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 9. Clean up the cluster after the test deployment:
 
-    1. Stop the above TiDB service by pressing <kbd>Control+C</kbd>.
+    1. Stop the above TiDB service by pressing <kbd>Control+D</kbd>.
 
     2. Run the following command after the service is stopped:
 
@@ -251,7 +251,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 9. Clean up the cluster after the test deployment:
 
-    1. Stop the process by pressing <kbd>Control+C</kbd>.
+    1. Stop the process by pressing <kbd>Control+D</kbd>.
 
     2. Run the following command after the service is stopped:
 
