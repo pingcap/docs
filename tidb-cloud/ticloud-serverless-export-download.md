@@ -3,7 +3,7 @@ title: ticloud serverless export download
 summary: The reference of `ticloud serverless export download`.
 ---
 
-# ticloud serverless export describe
+# ticloud serverless export download
 
 Download the exported data from a TiDB Serverless cluster to your local storage:
 
