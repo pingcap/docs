@@ -192,7 +192,7 @@ A client TLS object. It is used to access TiDB or PD.
 
 + Default value: `false`
 + Support hot-reload: yes, but only for new connections
-+ Require TLS between TiProxy and TiDB servers. If the TiDB server doesn't support TLS, clients will report an error when connecting to TiProxy.
++ Require TLS between TiProxy and TiDB servers. If the TiDB server does not support TLS, clients will report an error when connecting to TiProxy.
 
 #### `sql-tls`
 
