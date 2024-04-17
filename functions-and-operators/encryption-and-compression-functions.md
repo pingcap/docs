@@ -35,6 +35,6 @@ The [`validate_password.*`](/system-variables.md) variables influence the `VALID
 * `DES_DECRYPT()`, `DES_ENCRYPT()`, `OLD_PASSWORD()`, `ENCRYPT()`: these functions were deprecated in MySQL 5.7 and removed in 8.0.
 * Functions only available in MySQL Enterprise [Issue #2632](https://github.com/pingcap/tidb/issues/2632).
 
-## MySQL Compatibility
+## MySQL compatibility
 
-* TiDB doesn't support the `STATEMENT_DIGEST()` and `STATEMENT_DIGEST_TEXT()` functions.
+* TiDB does not support the `STATEMENT_DIGEST()` and `STATEMENT_DIGEST_TEXT()` functions.
