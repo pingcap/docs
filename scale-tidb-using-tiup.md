@@ -127,7 +127,29 @@ This section exemplifies how to add a TiDB node to the `10.0.1.5` host.
 
     If you see `Scaled cluster <cluster-name> out successfully`, the scale-out operation succeeds.
 
-3. Check the cluster status:
+3. Refresh the cluster configuration.
+
+    > **Note:**
+    >
+    > This operation is only required after you add PD nodes. If you only add TiDB or TiKV nodes, this operation is unnecessary.
+
+    1. Refresh the cluster configuration:
+
+        ```shell
+        tiup cluster reload <cluster-name> --skip-restart
+        ```
+
+    2. Refresh the Prometheus configuration and restart Prometheus:
+
+        > **Note:**
+        >
+        > If you are using TiUP v1.15.0 or a later version, skip this step. If you are using a TiUP version earlier than v1.15.0, execute the following command to update the Prometheus configuration and restart Prometheus.
+
+        ```shell
+        tiup cluster reload <cluster-name> -R prometheus
+        ```
+
+4. Check the cluster status:
 
     {{< copyable "shell-regular" >}}
 
@@ -307,7 +329,29 @@ This section exemplifies how to remove a TiKV node from the `10.0.1.5` host.
 
     If you see `Scaled cluster <cluster-name> in successfully`, the scale-in operation succeeds.
 
-3. Check the cluster status:
+3. Refresh the cluster configuration.
+
+    > **Note:**
+    >
+    > This operation is only required after you remove PD nodes. If you only remove TiDB or TiKV nodes, this operation is unnecessary.
+
+    1. Refresh the cluster configuration:
+
+        ```shell
+        tiup cluster reload <cluster-name> --skip-restart
+        ```
+
+    2. Refresh the Prometheus configuration and restart Prometheus:
+
+        > **Note:**
+        >
+        > If you are using TiUP v1.15.0 or a later version, skip this step. If you are using a TiUP version earlier than v1.15.0, execute the following command to update the Prometheus configuration and restart Prometheus.
+
+        ```shell
+        tiup cluster reload <cluster-name> -R prometheus
+        ```
+
+4. Check the cluster status:
 
     The scale-in process takes some time. You can run the following command to check the scale-in status:
 
