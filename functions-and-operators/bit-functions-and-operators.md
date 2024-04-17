@@ -25,5 +25,8 @@ There are some differences between MySQL 8.0 and earlier versions of MySQL in ha
 
 ## Known issues
 
-- [bitwise operations with binary args behavior changes between MySQL 5.7 and 8.0](https://github.com/pingcap/tidb/issues/30637)
-- [function bit\_count result is Inconsistent with MySQL](https://github.com/pingcap/tidb/issues/44621)
+
+In the following cases, the query results in TiDB are the same as MySQL 5.7 but different from MySQL 8.0.
+
+- Bitwise operations with binary arguments. For more information, see [#30637](https://github.com/pingcap/tidb/issues/30637)
+- The result of the `BIT_COUNT()` function. For more information, see [#44621](https://github.com/pingcap/tidb/issues/44621)
