@@ -82,4 +82,4 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 - `JSON_TABLE()`
 - `JSON_VALUE()`
 
-See also [GitHub Issue #14486](https://github.com/pingcap/tidb/issues/14486)
+For more information, see [#14486](https://github.com/pingcap/tidb/issues/14486).
