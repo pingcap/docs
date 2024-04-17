@@ -72,6 +72,12 @@ case-sensitive = false
 # For more information, see https://docs.pingcap.com/tidb/stable/ticdc-bidirectional-replication
 # bdr-mode = false
 
+# The duration for which the changefeed is allowed to automatically retry when internal errors or exceptions occur. The default value is 30 minutes.
+# The changefeed enters the failed state if internal errors or exceptions occur in the changefeed and persist longer than the duration set by this parameter.
+# When the changefeed is in the failed state, you need to restart the changefeed manually for recovery.
+# The format of this parameter is "h m s", for example, "1h30m30s".
+changefeed-error-stuck-duration = "30m"
+
 [mounter]
 # The number of threads with which the mounter decodes KV data. The default value is 16.
 # worker-num = 16

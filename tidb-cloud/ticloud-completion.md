@@ -1,35 +1,37 @@
 ---
-title: ticloud config edit
-summary: The reference of `ticloud config edit`.
+title: ticloud completion
+summary: The reference of `ticloud completion`.
 ---
 
-# ticloud config edit
+# ticloud completion
 
-If you are using macOS or Linux, you can open the profile configuration file with your default text editor:
+Generate the autocompletion script for the specified shell of TiDB Cloud CLI:
 
 ```shell
-ticloud config edit [flags]
+ticloud completion [command]
 ```
-
-If you are using Windows, after you execute the preceding command, the path of the profile configuration file will be printed instead.
-
-> **Note:**
->
-> To avoid format errors and execution failures, it is NOT recommended to manually edit the configuration file. Instead, you can use [`ticloud config create`](/tidb-cloud/ticloud-config-create.md), [`ticloud config delete`](/tidb-cloud/ticloud-config-delete.md), or [`ticloud config set`](/tidb-cloud/ticloud-config-set.md) to modify the confiturations.
 
 ## Examples
 
-Edit the profile configuration file:
+Generate the autocompletion script for bash:
 
 ```shell
-ticloud config edit
+ticloud completion bash
+```
+
+Generate the autocompletion script for zsh:
+
+```shell
+ticloud completion zsh
 ```
 
 ## Flags
 
-| Flag       | Description              |
-|------------|--------------------------|
- | -h, --help | Shows help information for this command. |
+In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
+
+| Flag                    | Description                                                   | Required | Note                                                 |
+|-------------------------|---------------------------------------------------------------|----------|------------------------------------------------------|
+| -h, --help              | Shows help information for this command.                      | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
 

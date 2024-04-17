@@ -1,34 +1,41 @@
 ---
-title: ticloud serverless import describe
-summary: The reference of `ticloud serverless import describe`.
+title: ticloud serverless branch shell
+summary: The reference of `ticloud serverless branch shell`.
+aliases: ['/tidbcloud/ticloud-connect']
 ---
 
-# ticloud serverless import describe
+# ticloud serverless branch shell
 
-Describe a data import task:
-
-```shell
-ticloud serverless import describe [flags]
-```
-
-Or use the following alias command:
+Connect to a branch of a TiDB Serverless cluster:
 
 ```shell
-ticloud serverless import get [flags]
+ticloud serverless branch shell [flags]
 ```
 
 ## Examples
 
-Describe an import task in interactive mode:
+Connect to a TiDB Serverless branch in interactive mode:
 
 ```shell
-ticloud serverless import describe
+ticloud serverless branch shell
 ```
 
-Describe an import task in non-interactive mode:
+Connect to a TiDB Serverless branch with the default user in non-interactive mode:
 
 ```shell
-ticloud serverless import describe --cluster-id <cluster-id> --import-id <import-id>
+ticloud serverless branch shell -c <cluster-id> -b <branch-id>
+```
+
+Connect to a TiDB Serverless branch with the default user and password in non-interactive mode:
+
+```shell
+ticloud serverless branch shell -c <cluster-id> -b <branch-id> --password <password>
+```
+
+Connect to a TiDB Serverless branch with a specific user and password in non-interactive mode:
+
+```shell
+ticloud serverless branch shell -c <cluster-id> -b <branch-id> -u <user-name> --password <password>
 ```
 
 ## Flags
@@ -37,9 +44,11 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 
 | Flag                    | Description                       | Required | Note                                                 |
 |-------------------------|-----------------------------------|----------|------------------------------------------------------|
+| -b, --branch-id string  | Specifies the ID of the branch.                         | Yes      | Only works in non-interactive mode.                  |
 | -c, --cluster-id string | Specifies the ID of the cluster.                        | Yes      | Only works in non-interactive mode.                  |
 | -h, --help              | Shows help information for this command. | No       | Works in both non-interactive and interactive modes. |
-| --import-id string      | Specifies the ID of the import task.         | Yes      | Only works in non-interactive mode.                  |
+| --password              | Specifies the password of the user.          | No       | Only works in non-interactive mode.                  |
+| -u, --user string       | Specifies the user for login.         | No       | Only works in non-interactive mode.                  |
 
 ## Inherited flags
 

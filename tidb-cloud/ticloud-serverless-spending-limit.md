@@ -1,45 +1,39 @@
 ---
-title: ticloud serverless cluster delete
-summary: The reference of `ticloud serverless delete`.
+title: ticloud serverless spending-limit
+summary: The reference of `ticloud serverless spending-limit`.
 ---
 
-# ticloud serverless delete
+# ticloud serverless spending-limit
 
-Delete a TiDB Serverless cluster from your project:
-
-```shell
-ticloud serverless delete [flags]
-```
-
-Or use the following alias command:
+Set the maximum monthly [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for a TiDB Serverless cluster:
 
 ```shell
-ticloud serverless rm [flags]
+ticloud serverless spending-limit [flags]
 ```
 
 ## Examples
 
-Delete a TiDB Serverless cluster in interactive mode:
+Set the spending limit for a TiDB Serverless cluster in interactive mode:
 
 ```shell
-ticloud serverless delete
+ticloud serverless spending-limit
 ```
 
-Delete a TiDB Serverless cluster in non-interactive mode:
+Set the spending limit for a TiDB Serverless cluster in non-interactive mode:
 
 ```shell
-ticloud serverless delete --cluster-id <cluster-id>
+ticloud serverless spending-limit -c <cluster-id> --monthly <spending-limit-monthly>
 ```
 
 ## Flags
 
 In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
-| Flag                    | Description                            | Required | Note                                                 |
-|-------------------------|----------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | Specifies the ID of the cluster to be deleted.    | Yes      | Only works in non-interactive mode.                  |
-| --force                 | Deletes a cluster without confirmation. | No       | Works in both non-interactive and interactive modes. |
-| -h, --help              | Shows help information for this command.     | No       | Works in both non-interactive and interactive modes. |
+| Flag                    | Description                                 | Required | Note                                                 |
+|-------------------------|---------------------------------------------|----------|------------------------------------------------------|
+| -c, --cluster-id string | Specifies the ID of the cluster.                       | Yes      | Only works in non-interactive mode.                  |
+| --monthly int32         | Specifies the maximum monthly spending limit in USD cents. | Yes      | Only works in non-interactive mode.                  |
+| -h, --help              | Shows help information for this command.          | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
 

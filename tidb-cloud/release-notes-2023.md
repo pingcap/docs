@@ -861,7 +861,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **CLI changes**
 
-- Add a new command [`ticloud cluster connect-info`](/tidb-cloud/ticloud-cluster-connect-info.md) for [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
+- Add a new command `ticloud cluster connect-info` for [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
 
     `ticloud cluster connect-info` is a command that allows you to get the connection string of a cluster. To use this command, [update `ticloud`](/tidb-cloud/ticloud-update.md) to v0.3.2 or a later version.
 
@@ -890,7 +890,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **CLI changes**
 
-- Add a new command [`ticloud connect`](/tidb-cloud/ticloud-connect.md) for [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
+- Add a new command [`ticloud connect`](/tidb-cloud/ticloud-serverless-shell.md) for [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
 
     `ticloud connect` is a command that allows you to connect to your TiDB Cloud cluster from your local machine without installing any SQL clients. After connecting to your TiDB Cloud cluster, you can execute SQL statements in the TiDB Cloud CLI.
 

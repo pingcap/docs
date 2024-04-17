@@ -1,51 +1,47 @@
 ---
-title: ticloud serverless cluster list
-summary: The reference of `ticloud serverless list`.
+title: ticloud serverless update
+summary: The reference of `ticloud serverless update`.
 ---
 
-# ticloud serverless list
+# ticloud serverless update
 
-List all TiDB Serverless clusters in a project:
-
-```shell
-ticloud serverless list [flags]
-```
-
-Or use the following alias command:
+Update a TiDB Serverless cluster:
 
 ```shell
-ticloud serverless ls [flags]
+ticloud serverless update [flags]
 ```
 
 ## Examples
 
-List all TiDB Serverless clusters in interactive mode:
+Update a TiDB Serverless cluster in interactive mode:
 
 ```shell
-ticloud serverless list
+ticloud serverless update
 ```
 
-List all TiDB Serverless clusters in a specified project in non-interactive mode:
+Update the name of a TiDB Serverless cluster in non-interactive mode:
 
 ```shell
-ticloud serverless list -p <project-id>
+ticloud serverless update -c <cluster-id> --display-name <new-display-mame>
 ```
 
-List all TiDB Serverless clusters in a specified project with the JSON format in non-interactive mode:
+Update labels of a TiDB Serverless cluster in non-interactive mode
 
 ```shell
-ticloud serverless list -p <project-id> -o json
+ticloud serverless update -c <cluster-id> --labels "{\"label1\":\"value1\"}"
 ```
 
 ## Flags
 
 In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
-| Flag                    | Description                                                                                                              | Required | Note                                                 |
-|-------------------------|--------------------------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------|
-| -p, --project-id string | Specifies the ID of the project.                                                              | Yes      | Only works in non-interactive mode.                  |
-| -h, --help              | Shows help information for this command.                                                                                       | No       | Works in both non-interactive and interactive modes. |
-| -o, --output string     | Specifies the output format (`human` by default). Valid values are `human` or `json`. To get a complete result, use the `json` format. | No       | Works in both non-interactive and interactive modes. |
+| Flag                     | Description                                           | Required | Note                                                 |
+|--------------------------|-------------------------------------------------------|----------|------------------------------------------------------|
+| -c, --cluster-id string  | Specifies the ID of the cluster.                   | Yes      | Only works in non-interactive mode.                  |
+| -n --display-name string | Specifies a new name for the cluster.      | No       | Only works in non-interactive mode.                  |.
+| --annotations string     | Specifies new annotations for the cluster | No       | Only works in non-interactive mode.                  |
+| --labels string          | Specifies new labels for the cluster.      | No       | Only works in non-interactive mode.                  |
+| -h, --help               | Shows help information for this command.                    | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
 
