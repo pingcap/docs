@@ -5,7 +5,7 @@ summary: Learn how to use the data and time functions.
 
 # Date and Time Functions
 
-TiDB supports all of the [date and time functions](https://dev.mysql.com/doc/refman/8.0/en/numeric-functions.html) available in MySQL 8.0.
+TiDB supports all of the [date and time functions](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html) available in MySQL 8.0.
 
 > **Note:**
 >
