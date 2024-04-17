@@ -10,9 +10,9 @@ Cast functions and operators enable conversion of values from one data type to a
 
 | Name                                     | Description                      |
 | ---------------------------------------- | -------------------------------- |
-| [`BINARY`](/binary) | Cast a string to a binary string |
-| [`CAST()`](/cast) | Cast a value as a certain type   |
-| [`CONVERT()`](/convert) | Cast a value as a certain type   |
+| [`BINARY`](#binary) | Cast a string to a binary string |
+| [`CAST()`](#cast) | Cast a value as a certain type   |
+| [`CONVERT()`](#convert) | Cast a value as a certain type   |
 
 > **Note:**
 >
