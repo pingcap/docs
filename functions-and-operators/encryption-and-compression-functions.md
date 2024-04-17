@@ -29,7 +29,7 @@ TiDB supports most of the [encryption and compression functions](https://dev.mys
 
 The [`block_encryption_mode`](/system-variables.md#block_encryption_mode) variable sets the encryption mode that is used for `AES_ENCRYPT()` and `AES_DECRYPT()`.
 
-The [`validate_password.*`](/system-variables.md) variables influence the `VALIDATE_PASSWORD_STRENGTH()` function.
+The [`validate_password.*`](/system-variables.md) variables affect the `VALIDATE_PASSWORD_STRENGTH()` function.
 
 ## Unsupported functions
 
