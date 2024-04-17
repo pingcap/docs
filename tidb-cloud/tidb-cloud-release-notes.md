@@ -8,6 +8,19 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
+## April 16, 2024
+
+**CLI changes**
+
+- Introduce [TiDB Cloud CLI 1.0.0-beta.1](https://github.com/tidbcloud/tidbcloud-cli), built upon the new [TiDB Cloud API](/tidb-cloud/api-overview.md). The new CLI brings the following new features:
+
+    - [Export data from TiDB Serverless clusters](/tidb-cloud/serverless-export.md)
+    - [Import data from local storage into TiDB Serverless clusters](/tidb-cloud/ticloud-import-start.md)
+    - [Authenticate via OAuth](/tidb-cloud/ticloud-auth-login.md)
+    - [Ask questions via TiDB Bot](/tidb-cloud/ticloud-ai.md)
+
+  Before upgrading your TiDB Cloud CLI, note that this new CLI is incompatible with previous versions. For example, `ticloud cluster` in CLI commands is now updated to `ticloud serverless`. For more information, see [TiDB Cloud CLI reference](/tidb-cloud/cli-reference.md).
+
 ## April 9, 2024
 
 **General changes**
