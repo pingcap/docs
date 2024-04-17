@@ -25,7 +25,6 @@ There are some differences between MySQL 8.0 and earlier versions of MySQL in ha
 
 ## Known issues
 
-
 In the following cases, the query results in TiDB are the same as MySQL 5.7 but different from MySQL 8.0.
 
 - Bitwise operations with binary arguments. For more information, see [#30637](https://github.com/pingcap/tidb/issues/30637)
