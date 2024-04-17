@@ -20,13 +20,13 @@ Cast functions and operators enable conversion of values from one data type to a
 
 ## BINARY
 
-The `BINARY` operator has been deprecated in MySQL 8.0.27. It is recommended to use `CAST(... AS BINARY)` instead both in TiDB and MySQL.
+The [`BINARY`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#operator_binary) operator has been deprecated since MySQL 8.0.27. It is recommended to use `CAST(... AS BINARY)` instead both in TiDB and MySQL.
 
 ## CAST
 
-The `CAST()` function cast an expression to a specific type.
+The [`CAST()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast) function is used to cast an expression to a specific type.
 
-This function is also used to create [Multi-valued Indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes).
+This function is also used to create [Multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes).
 
 Example:
 
@@ -45,9 +45,9 @@ SELECT CAST(0x54694442 AS CHAR);
 
 ## CONVERT
 
-The `CONVERT()` function is used to convert between [character sets](/character-set-and-collation.md).
+The [`CONVERT()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_convert) function is used to convert between [character sets](/character-set-and-collation.md).
 
-Example
+Example:
 
 ```sql
 SELECT CONVERT(0x616263 USING utf8mb4);
