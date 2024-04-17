@@ -6,7 +6,7 @@ aliases: ['/docs/dev/functions-and-operators/json-functions/','/docs/dev/referen
 
 # JSON Functions
 
-TiDB supports most of the JSON functions that shipped with the GA release of MySQL 8.0.
+TiDB supports most of the [JSON functions](https://dev.mysql.com/doc/refman/8.0/en/json-functions.html) available in MySQL 8.0.
 
 ## Functions that create JSON values
 
