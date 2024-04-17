@@ -43,7 +43,7 @@ Starting from v8.0.0, TiDB additionally supports specifying the following expres
 
 * `UPPER(SUBSTRING_INDEX(USER(), '@', 1))`
 * `REPLACE(UPPER(UUID()), '-', '')`
-* `DATE_FORMAT` expressions:
+* `DATE_FORMAT` expressions in the following formats:
     * `DATE_FORMAT(NOW(), '%Y-%m')`
     * `DATE_FORMAT(NOW(), '%Y-%m-%d')`
     * `DATE_FORMAT(NOW(), '%Y-%m-%d %H.%i.%s')`
