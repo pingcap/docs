@@ -10,18 +10,31 @@ TiDB supports all of the [control flow functions](https://dev.mysql.com/doc/refm
 
 | Name                                                                                            | Description                       |
 |:--------------------------------------------------------------------------------------------------|:----------------------------------|
-| [`CASE`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#operator_case)       | Case operator                     |
+| [`CASE`](#case)       | Case operator                     |
 | [`IF()`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_if)         | If/else construct                 |
-| [`IFNULL()`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_ifnull) | Null if/else construct            |
-| [`NULLIF()`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_nullif) | Return NULL if expr1 = expr2      |
+| [`IFNULL()`](#if) | Null if/else construct            |
+| [`NULLIF()`](#nullif) | Return NULL if expr1 = expr2      |
 
 ## CASE
 
-The `CASE` operator allows you to respond on multiple values and conditions.
+The [`CASE`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#operator_case) operator allows you to perform conditional logic and customize query results based on specified conditions.
+
+Syntax:
+
+```sql
+CASE
+    WHEN condition1 THEN result1
+    WHEN condition2 THEN result2
+    ...
+    ELSE default_result
+END
+```
+
+Example:
 
 ```sql
 WITH RECURSIVE d AS (SELECT 1 AS n UNION ALL SELECT n+1 FROM d WHERE n<10)
-SELECT n, CASE WHEN n MOD 2 THEN "odd" ELSE "even" END FROM d
+SELECT n, CASE WHEN n MOD 2 THEN "odd" ELSE "even" END FROM d;
 ```
 
 ```
@@ -44,7 +57,16 @@ SELECT n, CASE WHEN n MOD 2 THEN "odd" ELSE "even" END FROM d
 
 ## IF()
 
-The `IF()` statement allows you to do something based on wheter a value or expression is true or not.
+The [`IF()`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_if) function allows you to perform different actions based on whether a value or expression is true or not.
+
+Syntax:
+
+```sql
+IF(condition, value_if_true, value_if_false)
+```
+
+Example:
+
 
 ```sql
 WITH RECURSIVE d AS (SELECT 1 AS n UNION ALL SELECT n+1 FROM d WHERE n<10)
@@ -71,7 +93,10 @@ SELECT n, IF(n MOD 2, "odd", "even") FROM d;
 
 ## IFNULL()
 
-The `IFNULL()` functions returns the data of the expression if it is not NULL and if it is NULL it returns the data of the second argument of the function.
+The [`IFNULL(expr1,expr2)`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_ifnull) function is used to handle NULL values in queries. If `expr1` is not `NULL`, it returns `expr1`; otherwise, it returns `expr2`.
+
+Example:
+
 
 ```sql
 WITH data AS (SELECT NULL AS x UNION ALL SELECT 1 )
@@ -90,7 +115,10 @@ SELECT x, IFNULL(x,'x has no value') FROM data;
 
 ## NULLIF()
 
-The `NULLIF()` function returns NULL if both arguments are the same or if the first argument is NULL. Otherwise it returns the first argument.
+The [`NULLIF(expr1,expr2)`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_nullif) function returns `NULL` if both arguments are the same or if the first argument is `NULL`. Otherwise, it returns the first argument.
+
+Example:
+
 
 ```sql
 WITH RECURSIVE d AS (SELECT 1 AS n UNION ALL SELECT n+1 FROM d WHERE n<10)
@@ -115,4 +143,4 @@ SELECT n, NULLIF(n+n, n+2) FROM d;
 10 rows in set (0.00 sec)
 ```
 
-Here n+n and n+2 both evaluate to 4 if n is 2, which makes both arguments the same and the function return NULL.
+In this example, when `n` equals `2`, both `n+n` and `n+2` equal to `4`, making both arguments the same and causing the function to return `NULL`.
