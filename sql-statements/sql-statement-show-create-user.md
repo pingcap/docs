@@ -37,7 +37,7 @@ mysql> SHOW GRANTS FOR 'root';
 
 ## MySQL compatibility
 
-* The output of `SHOW CREATE USER` is designed to match MySQL, but several of the `CREATE` options are not yet supported by TiDB. Not yet supported options will be parsed but ignored. See [security compatibility](/security-compatibility-with-mysql.md) for more details.
+* The output of `SHOW CREATE USER` is designed to match MySQL, but several of the `CREATE` options are not yet supported by TiDB. Not yet supported options will be parsed but ignored. See [Security compatibility](/security-compatibility-with-mysql.md) for more details.
 
 ## See also
 
