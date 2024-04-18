@@ -9,7 +9,7 @@ This document provides [Sysbench](https://github.com/akopytov/sysbench) performa
 
 > **Note:**
 >
-> The tests are performed on TiDB v6.1.1, and the test results are based on the condition that the P95 latency is below 105 ms.
+> The tests are performed on TiDB v6.1.1, and the test results are based on the condition that the P95 transaction latency is below 105 ms.
 
 In this document, the transaction models `Read Only`, `Read Write`, and `Write Only` represent read workloads, mixed workloads, and write workloads. 
 
@@ -24,7 +24,7 @@ Test results:
 
 **TiDB (4 vCPU, 16 GiB) \* 1; TiKV (4 vCPU, 16 GiB) \* 3**
 
-| Transaction model | Threads | QPS      | TPS      | Average latency (ms) | P95 latency (ms) |
+| Transaction model | Threads | QPS      | TPS      | Average transaction latency (ms) | P95 transaction latency (ms) |
 |-------------------|---------|----------|----------|----------------------|------------------|
 | Read Only         | 35      | 8,064.89 | 504.06   | 69.43                | 104.84           |
 | Read Write        | 25      | 6,747.60 | 337.38   | 74.10                | 102.97           |
@@ -32,7 +32,7 @@ Test results:
 
 **TiDB (4 vCPU, 16 GiB) \* 2; TiKV (4 vCPU, 16 GiB) \* 3**
 
-| Transaction model | Threads | QPS       | TPS      | Average latency (ms) | P95 latency (ms) |
+| Transaction model | Threads | QPS       | TPS      | Average transaction latency (ms) | P95 transaction latency (ms) |
 |-------------------|---------|-----------|----------|----------------------|------------------|
 | Read Only         | 65      | 16,805.76 | 1,050.36 | 61.88                | 95.81            |
 | Read Write        | 45      | 12,940.36 | 647.02   | 69.55                | 99.33            |
@@ -53,7 +53,7 @@ Test results:
 
 **TiDB (8 vCPU, 16 GiB) \* 2; TiKV (8 vCPU, 32 GiB) \* 3**
 
-| Transaction model | Threads | QPS       | TPS      | Average latency (ms) | P95 latency (ms) |
+| Transaction model | Threads | QPS       | TPS      | Average transaction latency (ms) | P95 transaction latency (ms) |
 |-------------------|---------|-----------|----------|----------------------|------------------|
 | Read Only         | 150     | 37,863.64 | 2,366.48 | 63.38                | 99.33            |
 | Read Write        | 100     | 30,218.42 | 1,510.92 | 66.18                | 94.10            |
@@ -61,7 +61,7 @@ Test results:
 
 **TiDB (8 vCPU, 16 GiB) \* 4; TiKV (8 vCPU, 32 GiB) \* 3**
 
-| Transaction model | Threads | QPS       | TPS      | Average latency (ms) | P95 latency (ms) |
+| Transaction model | Threads | QPS       | TPS      | Average transaction latency (ms) | P95 transaction latency (ms) |
 |-------------------|---------|-----------|----------|----------------------|------------------|
 | Read Only         | 300     | 74,190.40 | 4,636.90 | 64.69                | 104.84           |
 | Read Write        | 200     | 53,351.84 | 2,667.59 | 74.97                | 97.55            |
@@ -69,7 +69,7 @@ Test results:
 
 **TiDB (8 vCPU, 16 GiB) \* 4; TiKV (8 vCPU, 32 GiB) \* 6**
 
-| Transaction model | Threads | QPS       | TPS       | Average latency (ms) | P95 latency (ms) |
+| Transaction model | Threads | QPS       | TPS       | Average transaction latency (ms) | P95 transaction latency (ms) |
 |-------------------|---------|-----------|-----------|----------------------|------------------|
 | Read Only         | 300     | 75,713.04 | 4,732.06  | 63.39                | 102.97           |
 | Read Write        | 200     | 62,640.62 | 3,132.03  | 63.85                | 95.81            |
@@ -77,7 +77,7 @@ Test results:
 
 **TiDB (8 vCPU, 16 GiB) \* 6; TiKV (8 vCPU, 32 GiB) \* 9**
 
-| Transaction model | Threads | QPS        | TPS       | Average latency (ms) | P95 latency (ms) |
+| Transaction model | Threads | QPS        | TPS       | Average transaction latency (ms) | P95 transaction latency (ms) |
 |-------------------|---------|------------|-----------|----------------------|------------------|
 | Read Only         | 450     | 113,407.94 | 7,088.00  | 63.48                | 104.84           |
 | Read Write        | 300     | 92,387.31  | 4,619.37  | 64.93                | 99.33            |
@@ -85,7 +85,7 @@ Test results:
 
 **TiDB (8 vCPU, 16 GiB) \* 9; TiKV (8 vCPU, 32 GiB) \* 6**
 
-| Transaction model | Threads | QPS        | TPS       | Average latency (ms) | P95 latency (ms) |
+| Transaction model | Threads | QPS        | TPS       | Average transaction latency (ms) | P95 transaction latency (ms) |
 |-------------------|---------|------------|-----------|----------------------|------------------|
 | Read Only         | 650     | 168,486.65 | 10,530.42 | 61.72                | 101.13           |
 | Read Write        | 400     | 106,853.63 | 5,342.68  | 74.86                | 101.13           |
@@ -93,7 +93,7 @@ Test results:
 
 **TiDB (8 vCPU, 16 GiB) \* 12; TiKV (8 vCPU, 32 GiB) \* 9**
 
-| Transaction model | Threads | QPS        | TPS       | Average latency (ms) | P95 latency (ms) |
+| Transaction model | Threads | QPS        | TPS       | Average transaction latency (ms) | P95 transaction latency (ms) |
 |-------------------|---------|------------|-----------|----------------------|------------------|
 | Read Only         | 800     | 211,882.77 | 13,242.67 | 60.40                | 101.13           |
 | Read Write        | 550     | 139,393.46 | 6,969.67  | 78.90                | 104.84           |
@@ -110,7 +110,7 @@ Test results:
 
 **TiDB (16 vCPU, 32 GiB) \* 1; TiKV (16 vCPU, 64 GiB) \* 3**
 
-| Transaction model | Threads | QPS      | TPS     | Average latency (ms) | P95 latency (ms) |
+| Transaction model | Threads | QPS      | TPS     | Average transaction latency (ms) | P95 transaction latency (ms) |
 |-------------------|---------|----------|---------|----------------------|------------------|
 | Read Only         | 125     | 37448.41 | 2340.53 | 53.40                | 89.16            |
 | Read Write        | 100     | 28903.99 | 1445.20 | 69.19                | 104.84           |
@@ -118,7 +118,7 @@ Test results:
 
 **TiDB (16 vCPU, 32 GiB) \* 2; TiKV (16 vCPU, 64 GiB) \* 3**
 
-| Transaction model | Threads | QPS      | TPS      | Average latency (ms) | P95 latency (ms) |
+| Transaction model | Threads | QPS      | TPS      | Average transaction latency (ms) | P95 transaction latency (ms) |
 |-------------------|---------|----------|----------|----------------------|------------------|
 | Read Only         | 300     | 77238.30 | 4827.39  | 62.14                | 102.97           |
 | Read Write        | 200     | 58241.15 | 2912.06  | 68.67                | 97.55            |
@@ -135,7 +135,7 @@ Test results:
 
 **TiDB (32 vCPU, 64 GiB) \* 1; TiKV (32 vCPU, 128 GiB) \* 3**
 
-| Transaction model | Threads | QPS      | TPS     | Average latency (ms) | P95 latency (ms) |
+| Transaction model | Threads | QPS      | TPS     | Average transaction latency (ms) | P95 transaction latency (ms) |
 |-------------------|---------|----------|---------|----------------------|------------------|
 | Read Only         | 300     | 83941.16 | 5246    | 57.20                | 87.6             |
 | Read Write        | 250     | 71290.31 | 3565    | 70.10                | 105.0            |
@@ -143,7 +143,7 @@ Test results:
 
 **TiDB (32 vCPU, 64 GiB) \* 2; TiKV (32 vCPU, 128 GiB) \* 3**
 
-| Transaction model | Threads | QPS       | TPS      | Average latency (ms) | P95 latency (ms) |
+| Transaction model | Threads | QPS       | TPS      | Average transaction latency (ms) | P95 transaction latency (ms) |
 |-------------------|---------|-----------|----------|----------------------|------------------|
 | Read Only         | 650     | 163101.68 | 10194    | 63.8                 | 99.3             |
 | Read Write        | 450     | 123152.74 | 6158     | 73.1                 | 101              |
