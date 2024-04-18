@@ -12,23 +12,34 @@ TiDB supports most of the [information functions](https://dev.mysql.com/doc/refm
 
 | Name | Description |
 |:-----|:------------|
-| [`BENCHMARK()`](https://dev.mysql.com/doc/refman/8.0/en/information-functions.html#function_benchmark) | Execute an expression in a loop |
-| [`CONNECTION_ID()`](https://dev.mysql.com/doc/refman/8.0/en/information-functions.html#function_connection-id) | Return the connection ID (thread ID) for the connection  |
-| [`CURRENT_ROLE()`](https://dev.mysql.com/doc/refman/8.0/en/information-functions.html#function_current-role) | Return the role that is in use by the connection |
-| [`CURRENT_USER()`, `CURRENT_USER`](https://dev.mysql.com/doc/refman/8.0/en/information-functions.html#function_current-user) | Return the authenticated user name and host name |
-| [`DATABASE()`](https://dev.mysql.com/doc/refman/8.0/en/information-functions.html#function_database) | Return the default (current) database name  |
-| [`FOUND_ROWS()`](https://dev.mysql.com/doc/refman/8.0/en/information-functions.html#function_found-rows) | For a `SELECT` with a `LIMIT` clause, the number of the rows that are returned if there is no `LIMIT` clause |
-| [`LAST_INSERT_ID()`](https://dev.mysql.com/doc/refman/8.0/en/information-functions.html#function_last-insert-id) | Return the value of the `AUTOINCREMENT` column for the last `INSERT`   |
-| [`ROW_COUNT()`](https://dev.mysql.com/doc/refman/8.0/en/information-functions.html#function_row-count) | The number of rows affected |
-| [`SCHEMA()`](https://dev.mysql.com/doc/refman/8.0/en/information-functions.html#function_schema) | Synonym for `DATABASE()`  |
-| [`SESSION_USER()`](https://dev.mysql.com/doc/refman/8.0/en/information-functions.html#function_session-user) | Synonym for `USER()`    |
-| [`SYSTEM_USER()`](https://dev.mysql.com/doc/refman/8.0/en/information-functions.html#function_system-user) | Synonym for `USER()`   |
-| [`USER()`](https://dev.mysql.com/doc/refman/8.0/en/information-functions.html#function_user) | Return the user name and host name provided by the client    |
-| [`VERSION()`](https://dev.mysql.com/doc/refman/8.0/en/information-functions.html#function_version) | Return a string that indicates the MySQL server version   |
+| [`BENCHMARK()`](#benchmark) | Execute an expression in a loop |
+| [`CONNECTION_ID()`](#connection_id) | Return the connection ID (thread ID) for the connection  |
+| [`CURRENT_ROLE()`](#current_role) | Return the role that is in use by the connection |
+| [`CURRENT_USER()`, `CURRENT_USER`](#current_user) | Return the authenticated user name and host name |
+| [`DATABASE()`](#database) | Return the default (current) database name  |
+| [`FOUND_ROWS()`](#found_rows) | For a `SELECT` with a `LIMIT` clause, the number of the rows that are returned if there is no `LIMIT` clause |
+| [`LAST_INSERT_ID()`](#last_insert_id) | Return the value of the `AUTOINCREMENT` column for the last `INSERT`   |
+| [`ROW_COUNT()`](#row_count) | The number of rows affected |
+| [`SCHEMA()`](#schema) | Synonym for `DATABASE()`  |
+| [`SESSION_USER()`](#session-user) | Synonym for `USER()`    |
+| [`SYSTEM_USER()`](#system-user) | Synonym for `USER()`   |
+| [`USER()`](#user) | Return the user name and host name provided by the client    |
+| [`VERSION()`](#version) | Return a string that indicates the MySQL server version   |
 
 ### BENCHMARK()
 
-The `BENCHMARK()` function runs the expression a number of times.
+The `BENCHMARK()` function executes the given expression a specified number of times.
+
+Syntax:
+
+```sql
+BENCHMARK(count, expression)
+```
+
+- `count`: the number of times the expression to be executed.
+- `expression`: the expression to be executed repeatedly.
+
+Example:
 
 ```sql
 SELECT BENCHMARK(5, SLEEP(2));
@@ -45,9 +56,9 @@ SELECT BENCHMARK(5, SLEEP(2));
 
 ### CONNECTION_ID()
 
-This returns the connection id of the session. Based on the [`enable-32bits-connection-id`](/tidb-configuration-file.md#enable-32bits-connection-id-new-in-v730) configuration option for TiDB this function might return 32-bit or 64-bit ID's.
+The `CONNECTION_ID()` function returns the ID of the connection. Based on the value of the [`enable-32bits-connection-id`](/tidb-configuration-file.md#enable-32bits-connection-id-new-in-v730) configuration item for TiDB, this function returns a 32-bit or 64-bit connection ID.
 
-If [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610) is enabled the connection ID can be used to kill queries across multiple TiDB instances of the same cluster.
+If [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610) is enabled, the connection ID can be used to kill queries across multiple TiDB instances of the same cluster.
 
 ```sql
 SELECT CONNECTION_ID();
@@ -64,7 +75,7 @@ SELECT CONNECTION_ID();
 
 ### CURRENT_ROLE()
 
-This is to get the current [role](/role-based-access-control.md).
+The `CURRENT_ROLE()` function returns the current [role](/role-based-access-control.md) for the current session.
 
 ```sql
 SELECT CURRENT_ROLE();
@@ -81,7 +92,7 @@ SELECT CURRENT_ROLE();
 
 ### CURRENT_USER()
 
-This returns the account that is using the session.
+The `CURRENT_USER()` function returns the account that is used in the current session.
 
 ```sql
 SELECT CURRENT_USER();
@@ -98,7 +109,7 @@ SELECT CURRENT_USER();
 
 ### DATABASE()
 
-This returns the database schema that the current session is using.
+The `DATABASE()` function returns the database schema that the current session is using.
 
 ```sql
 SELECT DATABASE();
@@ -114,6 +125,8 @@ SELECT DATABASE();
 ```
 
 ### FOUND_ROWS()
+
+The `FOUND_ROWS()` function returns the number of rows in the result set of the last executed `SELECT` statement.
 
 ```sql
 SELECT 1 UNION ALL SELECT 2;
@@ -142,25 +155,25 @@ SELECT FOUND_ROWS();
 1 row in set (0.00 sec)
 ```
 
-> **Note**
+> **Note:**
 >
-> `SQL_CALC_FOUND_ROWS` is only accepted if [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40) is set. This query modifier is used in MySQL to calculate the total number of rows even if a `LIMIT` clause is causing the resultset to be shorter. This query modifier has been deprecated in MySQL 8.0.17. It is recommended to use `COUNT(*)` instead.
+> The `SQL_CALC_FOUND_ROWS` query modifier, which calculates the total number of rows  in a result set without considering the `LIMIT` clause, is only accepted if [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40) is enabled. This query modifier is deprecated starting from MySQL 8.0.17.  It is recommended to use `COUNT(*)` instead.
 
 ### LAST_INSERT_ID()
 
-This returns the ID of the last row that was inserted. This works with [`AUTO_INCREMENT`](/auto-increment.md) and [`AUTO_RANDOM`](/auto-random.md) columns.
+The `LAST_INSERT_ID()` function returns the ID of the last inserted row in a table that contains an [`AUTO_INCREMENT`](/auto-increment.md) or [`AUTO_RANDOM`](/auto-random.md) column.
 
-```
-mysql> CREATE TABLE t1(id SERIAL);
+```sql
+CREATE TABLE t1(id SERIAL);
 Query OK, 0 rows affected (0.17 sec)
 
-mysql> INSERT INTO t1() VALUES();
+INSERT INTO t1() VALUES();
 Query OK, 1 row affected (0.03 sec)
 
-mysql> INSERT INTO t1() VALUES();
+INSERT INTO t1() VALUES();
 Query OK, 1 row affected (0.00 sec)
 
-mysql> SELECT LAST_INSERT_ID();
+SELECT LAST_INSERT_ID();
 +------------------+
 | LAST_INSERT_ID() |
 +------------------+
@@ -168,7 +181,7 @@ mysql> SELECT LAST_INSERT_ID();
 +------------------+
 1 row in set (0.00 sec)
 
-mysql> TABLE t1;
+TABLE t1;
 +----+
 | id |
 +----+
@@ -180,23 +193,23 @@ mysql> TABLE t1;
 
 > **Note**
 >
-> The [`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache) might lead to results that differ from what MySQL would give. As ID's are cached on each TiDB node the ID's can be out of order an have gaps. If this is a concern for you then you can enable [MySQL Compatible mode](/auto-increment.md#mysql-compatibility-mode).
+> - In TiDB, [`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache) might lead to results that differ from those returned by MySQL. This discrepancy arises because TiDB caches IDs on each node, potentially leading to IDs that are out of order or have gaps. If maintaining strict ID ordering is essential for your application, you can enable [MySQL compatible mode](/auto-increment.md#mysql-compatibility-mode).
 >
-> In this example the ID's increase by 2 while MySQL would have ID's that increase by one in the same situation. See [Auto-Increment ID](/mysql-compatibility.md#auto-increment-id) in our MySQL Compatibility documentation for more details on this.
+> - In the preceding example, IDs increase by 2 while MySQL would generate IDs incrementing by one in the same scenario. For more compatibility information, see [Auto-increment ID](/mysql-compatibility.md#auto-increment-id).
 
 ### ROW_COUNT()
 
-This returns the number of affected rows.
+The `ROW_COUNT()` function returns the number of affected rows.
 
-```
-mysql> CREATE TABLE t1(id BIGINT UNSIGNED PRIMARY KEY AUTO_RANDOM);
+```sql
+CREATE TABLE t1(id BIGINT UNSIGNED PRIMARY KEY AUTO_RANDOM);
 Query OK, 0 rows affected, 1 warning (0.16 sec)
 
-mysql> INSERT INTO t1() VALUES (),(),();
+INSERT INTO t1() VALUES (),(),();
 Query OK, 3 rows affected (0.02 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 
-mysql> SELECT ROW_COUNT();
+SELECT ROW_COUNT();
 +-------------+
 | ROW_COUNT() |
 +-------------+
@@ -205,9 +218,21 @@ mysql> SELECT ROW_COUNT();
 1 row in set (0.00 sec)
 ```
 
+### SCHEMA()
+
+The `SCHEMA()` function is a synonym for `DATABASE()`.
+
+### SESSION_USER()
+
+The `SESSION_USER()` function is a synonym for `USER()`.
+
+### SYSTEM_USER()
+
+The `SYSTEM_USER()` function is a synonym for `USER()`.
+
 ### USER()
 
-The `USER()` function returns the user of the connection. This might differ slightly from the output of `CURRENT_USER()` as this function shows the actual IP-address instead of a wildcard.
+The `USER()` function returns the user of the current connection. This might differ slightly from the output of `CURRENT_USER()`, as `USER()` displays the actual IP address instead of a wildcard.
 
 ```sql
 SELECT USER(), CURRENT_USER();
@@ -224,18 +249,20 @@ SELECT USER(), CURRENT_USER();
 
 ### VERSION()
 
-This function returns the version of TiDB in a way that is compatible with MySQL. The [`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version) function can be used to get more details.
+The `VERSION()` function returns the TiDB version in a format that is compatible with MySQL. To get a more detailed result, you can use the [`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version) function.
 
-```
-mysql> SELECT VERSION();
+```sql
+SELECT VERSION();
 +--------------------+
 | VERSION()          |
 +--------------------+
 | 8.0.11-TiDB-v7.5.1 |
 +--------------------+
 1 row in set (0.00 sec)
+```
 
-mysql> SELECT TIDB_VERSION()\G
+```sql
+SELECT TIDB_VERSION()\G
 *************************** 1. row ***************************
 TIDB_VERSION(): Release Version: v7.5.1
 Edition: Community
@@ -249,9 +276,9 @@ Store: tikv
 1 row in set (0.00 sec)
 ```
 
-This is from TiDB v7.5.1, which identifies itself as MySQL 8.0.11.
+The preceding example is from TiDB v7.5.1, which identifies itself as MySQL 8.0.11.
 
-The [`server-version`](/tidb-configuration-file.md#server-version) configuration option can be used to influence the reported version.
+If you want to change the returned version, you can modify the [`server-version`](/tidb-configuration-file.md#server-version) configuration item.
 
 ## TiDB specific functions
 
