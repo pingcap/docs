@@ -23,11 +23,39 @@ To learn the standard upgrade process, see the following documents:
 >
 > - PingCAP does not provide bug fixes for non-LTS versions, such as v6.0. It is recommended that you upgrade to v6.1 and later LTS versions whenever possible.
 >
-> - To upgrade TiFlash from versions earlier than v5.3.0 to v5.3.0 or later, you should stop TiFlash and then upgrade it. The following steps help you upgrade TiFlash without interrupting other components:
->
->     - Stop the TiFlash instance: `tiup cluster stop <cluster-name> -R tiflash`
->     - Upgrade the TiDB cluster without restarting it (only updating the files): `tiup cluster upgrade <cluster-name> <version> --offline`, such as `tiup cluster upgrade <cluster-name> v5.3.0 --offline`
->     - Reload the TiDB cluster: `tiup cluster reload <cluster-name>`. After the reload, the TiFlash instance is started and you do not need to manually start it.
+
+## Upgrade TiFlash using TiUP
+
+To upgrade TiFlash from versions earlier than v5.3.0 to v5.3.0 or later, you must stop TiFlash and then upgrade it. When you upgrade TiFlash using TiUP, note the following:
+
+- If the TiUP cluster version is v1.12.0 or later, you cannot stop TiFlash and then upgrade it. If the target version requires a TiUP cluster version of v1.12.0 or later, it is recommended that you first use `tiup cluster:v1.11.3 <subcommand>` to upgrade TiFlash to an intermediate version, perform an online upgrade of the TiDB cluster, upgrade the TiUP version, and then upgrade the TiDB cluster to the target version directly without stopping it.
+- If the TiUP cluster version is earlier than v1.12.0, perform the following steps to upgrade TiFlash.
+
+The following steps help you use TiUP to upgrade TiFlash without interrupting other components:
+
+1. Stop the TiFlash instance:
+
+    ```shell
+    tiup cluster stop <cluster-name> -R tiflash
+    ```
+
+2. Upgrade the TiDB cluster without restarting it (only updating the files):
+
+    ```shell
+    tiup cluster upgrade <cluster-name> <version> --offline 
+    ```
+
+    For example:
+
+    ```shell
+    tiup cluster upgrade <cluster-name> v5.3.0 --offline
+    ```
+
+3. Reload the TiDB cluster. After the reload, the TiFlash instance is started and you do not need to manually start it.
+
+    ```shell
+    tiup cluster reload <cluster-name>
+    ```
 
 ## From 5.x or v6.0 to v6.1
 
