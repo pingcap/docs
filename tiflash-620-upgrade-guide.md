@@ -40,7 +40,12 @@ The following steps help you use TiUP to upgrade TiFlash without interrupting ot
 2. Upgrade the TiDB cluster without restarting it (only updating the files):
 
     ```shell
-    tiup cluster upgrade <cluster-name> <version> --offline`, such as `tiup cluster upgrade <cluster-name> v5.3.0 --offline
+    tiup cluster upgrade <cluster-name> <version> --offline 
+    ```
+    For example:
+
+    ```shell
+    tiup cluster upgrade <cluster-name> v5.3.0 --offline
     ```
 
 3. Reload the TiDB cluster. After the reload, the TiFlash instance is started and you do not need to manually start it.
