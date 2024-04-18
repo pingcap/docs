@@ -11,8 +11,8 @@ TiDB supports all of the [control flow functions](https://dev.mysql.com/doc/refm
 | Name                                                                                            | Description                       |
 |:--------------------------------------------------------------------------------------------------|:----------------------------------|
 | [`CASE`](#case)       | Case operator                     |
-| [`IF()`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_if)         | If/else construct                 |
-| [`IFNULL()`](#if) | Null if/else construct            |
+| [`IF()`](#if)         | If/else construct                 |
+| [`IFNULL()`](#ifnull) | Null if/else construct            |
 | [`NULLIF()`](#nullif) | Return NULL if expr1 = expr2      |
 
 ## CASE
@@ -143,4 +143,4 @@ SELECT n, NULLIF(n+n, n+2) FROM d;
 10 rows in set (0.00 sec)
 ```
 
-In this example, when `n` equals `2`, both `n+n` and `n+2` equal to `4`, making both arguments the same and causing the function to return `NULL`.
+In this example, when `n` equals `2`, both `n+n` and `n+2` equal `4`, making both arguments the same and causing the function to return `NULL`.
