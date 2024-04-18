@@ -738,7 +738,7 @@ This section introduces configuration items related to the Coprocessor Cache fea
 
 ## txn-local-latches
 
-Configuration related to the transaction latch. This parameter might be deprecated in future. It is not recommended to enable it.
+Configuration items related to the transaction latch. These configuration items might be deprecated in the future. It is not recommended to use them.
 
 ### `enabled`
 
