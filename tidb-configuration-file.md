@@ -738,7 +738,7 @@ This section introduces configuration items related to the Coprocessor Cache fea
 
 ## txn-local-latches
 
-Configuration related to the transaction latch. It is recommended to enable it when many local transaction conflicts occur.
+Configuration related to the transaction latch. This parameter might be deprecated in future. It is not recommended to enable it.
 
 ### `enabled`
 
