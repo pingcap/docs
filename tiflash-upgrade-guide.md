@@ -43,6 +43,7 @@ The following steps help you use TiUP to upgrade TiFlash without interrupting ot
     ```shell
     tiup cluster upgrade <cluster-name> <version> --offline 
     ```
+
     For example:
 
     ```shell
