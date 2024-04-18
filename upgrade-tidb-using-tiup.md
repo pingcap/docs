@@ -223,7 +223,7 @@ tiup cluster upgrade <cluster-name> v8.0.0
 >
 > + To keep a stable performance, make sure that all leaders in a TiKV instance are evicted before stopping the instance. You can set `--transfer-timeout` to a larger value, for example, `--transfer-timeout 3600` (unit: second).
 >
-> + To upgrade TiFlash from versions earlier than 5.3 to 5.3 or later, you must stop TiFlash and then upgrade it, and the TiUP version must be no later than v1.12.0. For more information, see [Upgrade TiFlash using TiUP](/tiflash-upgrade-guide.md#upgrade-tiflash-using-tiup).
+> + To upgrade TiFlash from versions earlier than v5.3.0 to v5.3.0 or later, you must stop TiFlash and then upgrade it, and the TiUP version must be earlier than v1.12.0. For more information, see [Upgrade TiFlash using TiUP](/tiflash-upgrade-guide.md#upgrade-tiflash-using-tiup).
 >
 > + Try to avoid creating a new clustered index table when you apply rolling updates to the clusters using TiDB Binlog.
 
