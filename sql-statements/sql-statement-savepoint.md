@@ -154,7 +154,7 @@ SELECT * FROM t1;
 
 When `ROLLBACK TO SAVEPOINT` is used to roll back a transaction to a specified savepoint, MySQL releases the locks held only after the specified savepoint, while in TiDB pessimistic transaction, TiDB does not immediately release the locks held after the specified savepoint. Instead, TiDB releases all locks when the transaction is committed or rolled back.
 
-TiDB doesn't support the `ROLLBACK WORK TO SAVEPOINT ...` syntax that MySQL does.
+TiDB does not support the MySQL syntax `ROLLBACK WORK TO SAVEPOINT ...`.
 
 ## See also
 
