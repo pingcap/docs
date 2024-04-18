@@ -115,3 +115,7 @@ SUBPARTITION_ORDINAL_POSITION: NULL
    TIDB_PLACEMENT_POLICY_NAME: NULL
 2 rows in set (0.00 sec)
 ```
+
+# See also
+
+- [SQL Tuning: Partitions](/explain-partitions.md)
