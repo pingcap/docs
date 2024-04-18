@@ -1,5 +1,6 @@
 ---
 title: TiDB 6.3.0 Release Notes
+summary: TiDB 6.3.0-DMR, released on September 30, 2022, introduces new features and improvements, including encryption at rest using the SM4 algorithm in TiKV, authentication using the SM3 algorithm in TiDB, and support for JSON data type and functions. It also provides execution time metrics at a finer granularity, enhances output for slow logs and `TRACE` statements, and supports deadlock history information in TiDB Dashboard. Additionally, TiDB v6.3.0 introduces new system variables and configuration file parameters, and fixes various bugs and issues. The release also includes improvements in TiKV, PD, TiFlash, Backup & Restore (BR), TiCDC, TiDB Binlog, TiDB Data Migration (DM), and TiDB Lightning.
 ---
 
 # TiDB 6.3.0 Release Notes

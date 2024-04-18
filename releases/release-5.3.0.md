@@ -1,5 +1,6 @@
 ---
 title: TiDB 5.3 Release Notes
+summary: TiDB 5.3.0 introduces temporary tables, table attributes, and user privileges on TiDB Dashboard for improved performance and security. It also enhances TiDB Data Migration, supports parallel import using multiple TiDB Lightning instances, and continuous profiling for better observability. Compatibility changes and configuration file parameters have been modified. The release also includes new SQL features, security enhancements, stability improvements, and diagnostic efficiency. Additionally, bug fixes and improvements have been made to TiDB, TiKV, PD, TiFlash, and TiCDC. The cyclic replication feature between TiDB clusters has been removed. Telemetry now includes information about the usage of the TEMPORARY TABLE feature.
 ---
 
 # TiDB 5.3 Release Notes

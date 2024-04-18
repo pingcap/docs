@@ -1,5 +1,6 @@
 ---
 title: TiDB 6.4.0 Release Notes
+summary: TiDB 6.4.0-DMR introduces new features and improvements, including support for restoring a cluster to a specific point in time, compatibility with Linear Hash partitioning syntax, and a high-performance `AUTO_INCREMENT` mode. It also enhances fault recovery, memory usage control, and statistics collection. TiFlash now supports the SM4 algorithm for encryption at rest, and TiCDC supports replicating data to Kafka. The release also includes bug fixes and improvements across various tools and components.
 ---
 
 # TiDB 6.4.0 Release Notes
