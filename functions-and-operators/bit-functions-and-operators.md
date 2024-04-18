@@ -20,7 +20,7 @@ TiDB supports all of the [bit functions and operators](https://dev.mysql.com/doc
 | [<<](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_left-shift) | Left shift |
 | [>>](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_right-shift) | Right shift |
 
-# MySQL compatibility
+## MySQL compatibility
 
 There are some differences between MySQL 8.0 and earlier versions of MySQL in handling bit functions and operators. TiDB aims to follow the behavior of MySQL 8.0.
 
