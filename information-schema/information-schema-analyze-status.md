@@ -11,8 +11,6 @@ Starting from TiDB v6.1.0, the `ANALYZE_STATUS` table supports showing cluster-l
 
 Starting from TiDB v6.1.0, you can view the history tasks within the last 7 days through the system table `mysql.analyze_jobs`.
 
-{{< copyable "sql" >}}
-
 ```sql
 USE information_schema;
 DESC analyze_status;
@@ -77,3 +75,8 @@ Fields in the `ANALYZE_STATUS` table are described as follows:
 * `REMAINING_SECONDS`: The estimated time (in seconds) remaining for the task to complete.
 * `PROGRESS`: The progress of the task.
 * `ESTIMATED_TOTAL_ROWS`: The total rows that need to be analyzed by the task.
+
+# See also
+
+- [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
+- [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md)

@@ -59,3 +59,8 @@ The columns in the `MEMORY_USAGE` table are described as follows:
 * GC_TOTAL: The number of times Golang GC is triggered by memory usage, from the time TiDB is started to the current time.
 * DISK_USAGE: The disk usage for the current data spill operation, in bytes.
 * QUERY_FORCE_DISK: The number of times data is spilled to disk, from the time TiDB is started to the current time.
+
+# See also
+
+- [TiDB Memory Control](/configure-memory-usage.md)
+- [Tune TiKV Memory Parameter Performance](/tune-tikv-memory-performance.md)
