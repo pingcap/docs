@@ -7,8 +7,6 @@ summary: Learn the `ENGINES` information_schema table.
 
 The `ENGINES` table provides information about storage engines. For compatibility, TiDB will always describe InnoDB as the only supported engine. In addition, other column values in the `ENGINES` table are also fixed values.
 
-{{< copyable "sql" >}}
-
 ```sql
 USE information_schema;
 DESC engines;
@@ -27,8 +25,6 @@ DESC engines;
 +--------------+-------------+------+------+---------+-------+
 6 rows in set (0.00 sec)
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT * FROM engines;
@@ -51,3 +47,7 @@ The description of columns in the `ENGINES` table is as follows:
 * `TRANSACTIONS`: Whether the storage engine supports transactions.
 * `XA`: Whether the storage engine supports XA transactions.
 * `SAVEPOINTS`: Whether the storage engine supports `savepoints`.
+
+# See also
+
+- [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md)

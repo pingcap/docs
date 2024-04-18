@@ -53,3 +53,10 @@ The description of columns in the `COLLATIONS` table is as follows:
 * `IS_DEFAULT`: Whether this collation is the default collation of the character set it belongs to.
 * `IS_COMPILED`: Whether the character set is compiled into the server.
 * `SORTLEN`: The minimum length of memory allocated when the collation sorts characters.
+
+# See also
+
+- [SHOW CHARACTER SET](/sql-statements/sql-statement-show-character-set.md)
+- [SHOW COLLATION](/sql-statements/sql-statement-show-collation.md)
+- [information_schema.CHARACTER_SETS](/information-schema/information-schema-character-sets.md)
+- [information_schema.COLLATION_CHARACTER_SET_APPLICABILITY](/information-schema/information-schema-collation-character-set-applicability.md)

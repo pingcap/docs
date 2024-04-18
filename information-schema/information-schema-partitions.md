@@ -5,7 +5,7 @@ summary: Learn the `PARTITIONS` INFORMATION_SCHEMA table.
 
 # PARTITIONS
 
-The `PARTITIONS` table provides information about partitioned tables.
+The `PARTITIONS` table provides information about [partitioned tables](/partitioned-table.md).
 
 ```sql
 USE INFORMATION_SCHEMA;
