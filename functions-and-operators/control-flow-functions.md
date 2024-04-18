@@ -66,7 +66,6 @@ IF(condition, value_if_true, value_if_false)
 
 Example:
 
-
 ```sql
 WITH RECURSIVE d AS (SELECT 1 AS n UNION ALL SELECT n+1 FROM d WHERE n<10)
 SELECT n, IF(n MOD 2, "odd", "even") FROM d;
@@ -96,7 +95,6 @@ The [`IFNULL(expr1,expr2)`](https://dev.mysql.com/doc/refman/8.0/en/flow-control
 
 Example:
 
-
 ```sql
 WITH data AS (SELECT NULL AS x UNION ALL SELECT 1 )
 SELECT x, IFNULL(x,'x has no value') FROM data;
@@ -117,7 +115,6 @@ SELECT x, IFNULL(x,'x has no value') FROM data;
 The [`NULLIF(expr1,expr2)`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_nullif) function returns `NULL` if both arguments are the same or if the first argument is `NULL`. Otherwise, it returns the first argument.
 
 Example:
-
 
 ```sql
 WITH RECURSIVE d AS (SELECT 1 AS n UNION ALL SELECT n+1 FROM d WHERE n<10)
