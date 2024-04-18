@@ -59,6 +59,10 @@ Use [`ticloud config create`](/tidb-cloud/ticloud-config-create.md) to create a 
 
 Use [`ticloud auth login`](/tidb-cloud/ticloud-auth-login.md) to assign OAuth token to the current profile. If no profiles exist, a profile named `default` will be created automatically.
 
+> **Note:**
+>
+> In the preceding two methods, the TiDB Cloud API key takes precedence over the OAuth token. If both are available in the current profile, the API key will be used.
+
 ### List all user profiles
 
 Use [`ticloud config list`](/tidb-cloud/ticloud-config-list.md) to list all user profiles.
