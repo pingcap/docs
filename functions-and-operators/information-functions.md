@@ -156,7 +156,7 @@ SELECT FOUND_ROWS();
 
 > **Note:**
 >
-> The `SQL_CALC_FOUND_ROWS` query modifier, which calculates the total number of rows  in a result set without considering the `LIMIT` clause, is only accepted if [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40) is enabled. This query modifier is deprecated starting from MySQL 8.0.17.  It is recommended to use `COUNT(*)` instead.
+> The `SQL_CALC_FOUND_ROWS` query modifier, which calculates the total number of rows in a result set without considering the `LIMIT` clause, is only accepted if [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40) is enabled. This query modifier is deprecated starting from MySQL 8.0.17. It is recommended to use `COUNT(*)` instead.
 
 ### LAST_INSERT_ID()
 
@@ -219,15 +219,15 @@ SELECT ROW_COUNT();
 
 ### SCHEMA()
 
-The `SCHEMA()` function is a synonym for `DATABASE()`.
+The `SCHEMA()` function is a synonym for [`DATABASE()`](#database).
 
 ### SESSION_USER()
 
-The `SESSION_USER()` function is a synonym for `USER()`.
+The `SESSION_USER()` function is a synonym for [`USER()`](#user).
 
 ### SYSTEM_USER()
 
-The `SYSTEM_USER()` function is a synonym for `USER()`.
+The `SYSTEM_USER()` function is a synonym for [`USER()`](#user).
 
 ### USER()
 
