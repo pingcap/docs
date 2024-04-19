@@ -453,7 +453,7 @@ EXPORT_SET(bits, on, off, [separator[, number_of_bits]])
 
 Examples:
 
-In the example below `number_of_bits` is set to 5, resulting in 5 values, separated by `|`. As only 3 bits are given the other bits are considered to be unset; in this example setting `number_of_bits` to either `101` or `00101` results in the same output.
+In the following example, `number_of_bits` is set to `5`, resulting in 5 values, separated by `|`. Because only 3 bits are given, the other bits are considered unset. Therefore, setting `number_of_bits` to either `101` or `00101` results in the same output.
 
 ```sql
 SELECT EXPORT_SET(b'101',"ON",'off','|',5);
