@@ -11,7 +11,7 @@ This document describes various timeouts in TiDB to help you troubleshoot errors
 
 TiDB's transaction implementation uses the MVCC (Multiple Version Concurrency Control) mechanism. When the newly written data overwrites the old data, the old data will not be replaced, but kept together with the newly written data. The versions are distinguished by the timestamp. TiDB uses the mechanism of periodic Garbage Collection (GC) to clean up the old data that is no longer needed.
 
-- For TiDB versions earlier than 4.0:
+- For TiDB versions earlier than v4.0:
 
     By default, each MVCC version (consistency snapshots) is kept for 10 minutes. Transactions that take longer than 10 minutes to read will receive an error `GC life time is shorter than transaction duration`.
 
@@ -21,8 +21,8 @@ TiDB's transaction implementation uses the MVCC (Multiple Version Concurrency Co
 
 If you need longer read time temporarily in some cases, you can increase the retention time of MVCC versions:
 
-- For TiDB versions earlier than 5.0: adjust `tikv_gc_life_time` in the `mysql.tidb` table in TiDB.
-- For TiDB v5.0 and later versions: adjust he system variable [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50).
+- For TiDB versions earlier than v5.0: adjust `tikv_gc_life_time` in the `mysql.tidb` table in TiDB.
+- For TiDB v5.0 and later versions: adjust the system variable [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50).
 
 Note that the system variable configuration takes effect globally and immediately. Increasing its value will increase the life time of all existing snapshots, and decreasing it will immediately shorten the life time of all snapshots. Too many MVCC versions will impact the performance of the TiDB cluster. So you need to change this variable back to the previous setting in time.
 
@@ -37,7 +37,7 @@ Note that the system variable configuration takes effect globally and immediatel
 >
 > In such scenarios, you must manually extend the GC time in advance to avoid export failure due to GC during the export process.
 >
-> For more details, see [Manual Setting of TiDB GC Time](/dumpling-overview.md#manually-set-the-tidb-gc-time).
+> For more details, see [Manually set the TiDB GC time](/dumpling-overview.md#manually-set-the-tidb-gc-time).
 
 For more information about GC, see [GC Overview](/garbage-collection-overview.md).
 
