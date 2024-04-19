@@ -56,7 +56,7 @@ WindowClauseOptional ::=
     "WINDOW" WindowDefinition ("," WindowDefinition)*
 
 TableSampleOpt ::=
-    'TABLESAMPLE' 'REGIONS()'
+    'TABLESAMPLE' 'REGIONS' '(' ')'
 ```
 
 ## Description of the syntax elements
