@@ -5,7 +5,7 @@ summary: Learn how to use the data and time functions.
 
 # Date and Time Functions
 
-TiDB supports all of the [date and time functions](https://dev.mysql.com/doc/refman/5.7/en/numeric-functions.html) available in MySQL 5.7.
+TiDB supports all of the [date and time functions](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html) available in MySQL 8.0.
 
 > **Note:**
 >
@@ -81,7 +81,7 @@ For details, see [Date and Time Functions](https://dev.mysql.com/doc/refman/8.0/
 
 ## MySQL compatibility
 
-The function `str_to_date()` is supported by TiDB, but is unable to parse all date and time values. In addition, the following date and time formatting options are **not implemented**:
+The function `STR_TO_DATE()` is supported by TiDB, but is unable to parse all date and time values. In addition, the following date and time formatting options are **not implemented**:
 
 | Format | Description                                                                           |
 |--------|---------------------------------------------------------------------------------------|
@@ -100,4 +100,4 @@ See [issue #30082](https://github.com/pingcap/tidb/issues/30082) for more detail
 
 ## Related system variables
 
-The `default_week_format` variable affects the `WEEK()` function.
+The [`default_week_format`](/system-variables.md#default_week_format) variable affects the `WEEK()` function.
