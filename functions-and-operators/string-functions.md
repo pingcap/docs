@@ -1198,7 +1198,7 @@ This function is similar to [`CHAR()`](#char), but works the other way around.
 
 Examples:
 
-Here we take "a" and "A" and use `ORD()` to get "97" and "65".
+Taking `a` and `A` as an example, `ORD()` returns `97` for `a` and `65` for `A`.
 
 ```sql
 SELECT ORD('a'), ORD('A');
