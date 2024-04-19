@@ -10,82 +10,64 @@ The `SELECT` statement is used to read data from TiDB.
 
 ## Synopsis
 
-**SelectStmt:**
-
-![SelectStmt](/media/sqlgram/SelectStmt.png)
-
-**FromDual:**
-
-![FromDual](/media/sqlgram/FromDual.png)
-
-**SelectStmtOpts:**
-
-![SelectStmtOpts](/media/sqlgram/SelectStmtOpts.png)
-
-**SelectStmtFieldList:**
-
-![SelectStmtFieldList](/media/sqlgram/SelectStmtFieldList.png)
-
-**TableRefsClause:**
-
 ```ebnf+diagram
+SelectStmt ::=
+    ( SelectStmtBasic | SelectStmtFromDualTable | SelectStmtFromTable )
+    OrderByOptional SelectStmtLimit SelectLockOpt SelectStmtIntoOption
+
+FromDual ::=
+    "FROM" "DUAL"
+
+SelectStmtOpts ::=
+    TableOptimizerHints DefaultFalseDistictOpt PriorityOpt SelectStmtSQLSmallResult
+    SelectStmtSQLBigResult SelectStmtSQLBufferResult SelectStmtSQLCache SelectStmtCalcFoundRows
+    SelectStmtStraightJoin
+
+SelectStmtFieldList ::=
+    Field ("," Field)*
+
 TableRefsClause ::=
     TableRef AsOfClause? ( ',' TableRef AsOfClause? )*
 
 AsOfClause ::=
     'AS' 'OF' 'TIMESTAMP' Expression
-```
 
-**WhereClauseOptional:**
+WhereClauseOptional ::=
+    WhereClause?
 
-![WhereClauseOptional](/media/sqlgram/WhereClauseOptional.png)
+SelectStmtGroup ::=
+    GroupByClause?
 
-**SelectStmtGroup:**
+HavingClause ::=
+    ( "HAVING" Expression)?
 
-![SelectStmtGroup](/media/sqlgram/SelectStmtGroup.png)
 
-**HavingClause:**
+OrderByOptional ::=
+    OrderBy?
 
-![HavingClause](/media/sqlgram/HavingClause.png)
+SelectStmtLimit ::=
+    ("LIMIT" LimitOption ( ("," | "OFFSET") LimitOption )?
+| "FETCH" FirstOrNext FetchFirstOpt RowOrRows "ONLY" )
 
-**OrderByOptional:**
+FirstOrNext ::=
+    ("FIRST" | "NEXT")
 
-![OrderByOptional](/media/sqlgram/OrderByOptional.png)
+FetchFirstOpt ::=
+    LimitOption?
 
-**SelectStmtLimit:**
+RowOrRows ::=
+    ("ROW" | "ROWS")
 
-![SelectStmtLimit](/media/sqlgram/SelectStmtLimit.png)
-
-**FirstOrNext:**
-
-![FirstOrNext](/media/sqlgram/FirstOrNext.png)
-
-**FetchFirstOpt:**
-
-![FetchFirstOpt](/media/sqlgram/FetchFirstOpt.png)
-
-**RowOrRows:**
-
-![RowOrRows](/media/sqlgram/RowOrRows.png)
-
-**SelectLockOpt:**
-
-```ebnf+diagram
 SelectLockOpt ::= 
     ( ( 'FOR' 'UPDATE' ( 'OF' TableList )? 'NOWAIT'? )
 |   ( 'LOCK' 'IN' 'SHARE' 'MODE' ) )?
 
 TableList ::=
     TableName ( ',' TableName )*
-```
 
-**WindowClauseOptional**
+WindowClauseOptional ::=
+    "WINDOW" WindowDefinition ("," WindowDefinition)*
 
-![WindowClauseOptional](/media/sqlgram/WindowClauseOptional.png)
-
-**TableSampleOpt**
-
-```ebnf+diagram
 TableSampleOpt ::=
     'TABLESAMPLE' 'REGIONS()'
 ```
