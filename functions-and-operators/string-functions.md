@@ -1308,9 +1308,9 @@ Synonym for [`LENGTH()`](#length).
 
 ### [`ORD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ord)
 
-Return character code for leftmost character of the argument.
+Return the character code for the leftmost character of the given argument.
 
-This function is similar to [`CHAR()`](#char), but works the other way around.
+This function is similar to [`CHAR()`](#char) but works the other way around.
 
 Examples:
 
