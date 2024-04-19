@@ -5,7 +5,7 @@ summary: Learn about the encryption and compression functions.
 
 # Encryption and Compression Functions
 
-TiDB supports most of the [encryption and compression functions](https://dev.mysql.com/doc/refman/5.7/en/encryption-functions.html) available in MySQL 5.7.
+TiDB supports most of the [encryption and compression functions](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html) available in MySQL 8.0.
 
 ## Supported functions
 
@@ -26,9 +26,15 @@ TiDB supports most of the [encryption and compression functions](https://dev.mys
 
 ## Related system variables
 
-The `block_encryption_mode` variable sets the encryption mode that is used for `AES_ENCRYPT()` and `AES_DECRYPT()`.
+The [`block_encryption_mode`](/system-variables.md#block_encryption_mode) variable sets the encryption mode that is used for `AES_ENCRYPT()` and `AES_DECRYPT()`.
+
+The [`validate_password.*`](/system-variables.md) variables affect the `VALIDATE_PASSWORD_STRENGTH()` function.
 
 ## Unsupported functions
 
 * `DES_DECRYPT()`, `DES_ENCRYPT()`, `OLD_PASSWORD()`, `ENCRYPT()`: these functions were deprecated in MySQL 5.7 and removed in 8.0.
 * Functions only available in MySQL Enterprise [Issue #2632](https://github.com/pingcap/tidb/issues/2632).
+
+## MySQL compatibility
+
+* TiDB does not support the `STATEMENT_DIGEST()` and `STATEMENT_DIGEST_TEXT()` functions.
