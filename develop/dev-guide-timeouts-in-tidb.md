@@ -13,9 +13,6 @@ TiDB's transaction implementation uses the MVCC (Multiple Version Concurrency Co
 
 - For TiDB versions earlier than v4.0:
 
-<<<<<<< HEAD
-If you need longer read time, for example, when you are using **Mydumper** for full backups (**Mydumper** backs up consistent snapshots), you can adjust the value of `tikv_gc_life_time` in the `mysql.tidb` table in TiDB to increase the MVCC version retention time. Note that `tikv_gc_life_time` takes effect globally and immediately. Increasing the value will increase the life time of all existing snapshots, and decreasing it will immediately shorten the life time of all snapshots. Too many MVCC versions will impact TiKV's processing efficiency. So you need to change `tikv_gc_life_time` back to the previous setting in time after doing a full backup with **Mydumper**.
-=======
     By default, each MVCC version (consistency snapshots) is kept for 10 minutes. Transactions that take longer than 10 minutes to read will receive an error `GC life time is shorter than transaction duration`.
 
 - For TiDB v4.0 and later versions:
@@ -62,7 +59,6 @@ Note that the system variable configuration takes effect globally and immediatel
 > For more details, see [Manually set the TiDB GC time](https://docs.pingcap.com/tidb/stable/dumpling-overview#manually-set-the-tidb-gc-time).
 
 </CustomContent>
->>>>>>> 2acdc3c5bb (GC Timeout is Out of Date (#17165))
 
 For more information about GC, see [GC Overview](/garbage-collection-overview.md).
 
