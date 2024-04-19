@@ -42,7 +42,7 @@ SelectStmtGroup ::=
 
 SelectStmtLimit ::=
     ("LIMIT" LimitOption ( ("," | "OFFSET") LimitOption )?
-| "FETCH" ("FIRST" | "NEXT") LimitOption ("ROW" | "ROWS") "ONLY" )
+| "FETCH" ("FIRST" | "NEXT") LimitOption? ("ROW" | "ROWS") "ONLY" )
 
 SelectLockOpt ::= 
     ( 'FOR' 'UPDATE' ( 'OF' TableList )? 'NOWAIT'?
