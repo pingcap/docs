@@ -11,25 +11,20 @@ This document describes various timeouts in TiDB to help you troubleshoot errors
 
 TiDB's transaction implementation uses the MVCC (Multiple Version Concurrency Control) mechanism. When the newly written data overwrites the old data, the old data will not be replaced, but kept together with the newly written data. The versions are distinguished by the timestamp. TiDB uses the mechanism of periodic Garbage Collection (GC) to clean up the old data that is no longer needed.
 
-- For versions of TiDB prior to `4.0`:
+- For TiDB versions earlier than 4.0:
 
     By default, each MVCC version (consistency snapshots) is kept for 10 minutes. Transactions that take longer than 10 minutes to read will receive an error `GC life time is shorter than transaction duration`.
 
-- For TiDB version 4.0 and later:
+- For TiDB v4.0 and later versions:
 
-    For transactions that are active and do not exceed a duration of 24 hours, garbage collection (GC) will be blocked during the transaction period, preventing the occurrence of the error `GC life time is shorter than transaction duration`.
+    For running transactions that do not exceed a duration of 24 hours, garbage collection (GC) are blocked during the transaction execution. The error `GC life time is shorter than transaction duration` does not occur.
 
-If you need longer read time temporarily, you can adjust the value of:
+If you need longer read time temporarily in some cases, you can increase the retention time of MVCC versions:
 
-- For versions of TiDB prior to `5.0`:
+- For TiDB versions earlier than 5.0: adjust `tikv_gc_life_time` in the `mysql.tidb` table in TiDB.
+- For TiDB v5.0 and later versions: adjust he system variable [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50).
 
-    The `tikv_gc_life_time` in the `mysql.tidb` table in TiDB
-
-- For TiDB version 5.0 and later:
-
-    The system variable [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)
-
-To increase the MVCC version retention time. Note that this variable takes effect globally and immediately. Increasing the value will increase the life time of all existing snapshots, and decreasing it will immediately shorten the life time of all snapshots. Too many MVCC versions will impact the performance of TiDB cluster. So you need to change this variable back to the previous setting in time.
+Note that the system variable configuration takes effect globally and immediately. Increasing its value will increase the life time of all existing snapshots, and decreasing it will immediately shorten the life time of all snapshots. Too many MVCC versions will impact the performance of the TiDB cluster. So you need to change this variable back to the previous setting in time.
 
 > **Tip:**
 >
@@ -38,11 +33,11 @@ To increase the MVCC version retention time. Note that this variable takes effec
 > However, in either of the following scenarios, Dumpling cannot automatically adjust the GC time:
 >
 > - The data size is very large (more than 1 TB).
-> - Dumpling cannot connect directly to PD, for example, if the TiDB cluster is on TiDB Cloud or on Kubernetes that is separated from Dumpling.
+> - Dumpling cannot connect directly to PD, for example, the TiDB cluster is on TiDB Cloud or on Kubernetes that is separated from Dumpling.
 >
 > In such scenarios, you must manually extend the GC time in advance to avoid export failure due to GC during the export process.
 >
-> For more details, please refer to the section on manually setting the TiDB GC time in the Dumpling tool documentation [Manual Setting of TiDB GC Time](/dumpling-overview.md#manually-set-the-tidb-gc-time).
+> For more details, see [Manual Setting of TiDB GC Time](/dumpling-overview.md#manually-set-the-tidb-gc-time).
 
 For more information about GC, see [GC Overview](/garbage-collection-overview.md).
 
