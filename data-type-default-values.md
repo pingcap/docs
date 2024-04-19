@@ -5,9 +5,15 @@ summary: Learn about default values for data types in TiDB.
 
 # Default Values
 
-The `DEFAULT` value clause in a data type specification indicates a default value for a column. The default value must be a constant and cannot be a function or an expression. But for the time type, you can specify the `NOW`, `CURRENT_TIMESTAMP`, `LOCALTIME`, and `LOCALTIMESTAMP` functions as the default for `TIMESTAMP` and `DATETIME` columns.
+The `DEFAULT` value clause in a data type specification indicates a default value for a column.
 
-You can set default values for all data types. Starting from v8.0.0, TiDB additionally supports [specifying the default values](#specify-expressions-as-default-values) for [`BLOB`](/data-type-string.md#blob-type), [`TEXT`](/data-type-string.md#text-type), and [`JSON`](/data-type-json.md#json-type) data types, but you can only use expressions to set the [default values](#default-values) for them. 
+You can set default values for all data types. Typically, default values must be constants and cannot be functions or expressions, but there are some exceptions:
+
+- For time types, you can use `NOW`, `CURRENT_TIMESTAMP`, `LOCALTIME`, and `LOCALTIMESTAMP` functions as default values for `TIMESTAMP` and `DATETIME` columns.
+- For integer types, you can use the `NEXT VALUE FOR` function to set the next value of a sequence as the default value for a column, and use the [`RAND()`](/functions-and-operators/numeric-functions-and-operators.md) function to generate a random floating-point value as the default value for a column.
+- For string types, you can use the [`UUID()`](/functions-and-operators/miscellaneous-functions.md) function to generate a [universally unique identifier (UUID)](/best-practices/uuid.md) as the default value for a column.
+- For binary types, you can use the [`UUID_TO_BIN()`](/functions-and-operators/miscellaneous-functions.md) function to convert a UUID to the binary format and set the converted value as the default value for a column.
+- Starting from v8.0.0, TiDB additionally supports [specifying the default values](#specify-expressions-as-default-values) for [`BLOB`](/data-type-string.md#blob-type), [`TEXT`](/data-type-string.md#text-type), and [`JSON`](/data-type-json.md#json-type) data types, but you can only use expressions to set the [default values](#default-values) for them.
 
 If a column definition includes no explicit `DEFAULT` value, TiDB determines the default value as follows:
 
@@ -31,34 +37,24 @@ Implicit defaults are defined as follows:
 >
 > Currently, this feature is experimental. It is not recommended that you use it in production environments. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
-Starting from 8.0.13, MySQL supports specifying expressions as default values in the `DEFAULT` clause. For more information, see [Explicit default handling as of MySQL 8.0.13](https://dev.mysql.com/doc/refman/8.0/en/data-type-defaults.html#data-type-defaults-explicit). 
+Starting from 8.0.13, MySQL supports specifying expressions as default values in the `DEFAULT` clause. For more information, see [Explicit default handling as of MySQL 8.0.13](https://dev.mysql.com/doc/refman/8.0/en/data-type-defaults.html#data-type-defaults-explicit).
 
-TiDB has implemented this feature and supports specifying some expressions as default values in the `DEFAULT` clause. Starting from v8.0.0, TiDB additionally supports assigning default values to `BLOB`, `TEXT`, and `JSON` data types. However, you can only use expressions to set the default values for these data types. The following is an example of `BLOB`:
-
-```sql
-CREATE TABLE t2 (b BLOB DEFAULT (RAND()));
-```
-
-TiDB currently supports the following expressions:
-
-* [`RAND()`](/functions-and-operators/numeric-functions-and-operators.md)
-* [`UUID()`](/functions-and-operators/miscellaneous-functions.md)
-* [`UUID_TO_BIN()`](/functions-and-operators/miscellaneous-functions.md)
-
-Starting from TiDB v8.0.0, the `DEFAULT` clause supports using the following expressions to set default values.
+Starting from v8.0.0, TiDB additionally supports specifying the following expressions as default values in the `DEFAULT` clause.
 
 * `UPPER(SUBSTRING_INDEX(USER(), '@', 1))`
-
 * `REPLACE(UPPER(UUID()), '-', '')`
-
-* The `DATE_FORMAT` supports the following formats:
-
+* `DATE_FORMAT` expressions in the following formats:
     * `DATE_FORMAT(NOW(), '%Y-%m')`
     * `DATE_FORMAT(NOW(), '%Y-%m-%d')`
     * `DATE_FORMAT(NOW(), '%Y-%m-%d %H.%i.%s')`
     * `DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s')`
-
 * `STR_TO_DATE('1980-01-01', '%Y-%m-%d')`
+
+Starting from v8.0.0, TiDB additionally supports assigning default values to `BLOB`, `TEXT`, and `JSON` data types. However, you can only use expressions to set the default values for these data types. The following is an example of `BLOB`:
+
+```sql
+CREATE TABLE t2 (b BLOB DEFAULT (RAND()));
+```
 
 > **Note:**
 >
