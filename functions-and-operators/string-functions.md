@@ -1172,15 +1172,15 @@ Return a set of comma-separated strings that have the corresponding bit in bits 
 
 ### [`MID()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_mid)
 
-The `MID(str, pos, len)` function returns a substring starting from the specified `pos` position with the optinal `len` length.
+The `MID(str, pos, len)` function returns a substring starting from the specified `pos` position with the `len` length.
 
-If any of the arguments are NULL the function returns NULL.
+If any of the arguments are `NULL`, the function returns `NULL`.
 
-TiDB doesn't support the two arguments variant of this function. See also [Github Issue #52420](https://github.com/pingcap/tidb/issues/52420).
+TiDB does not support the two-argument variant of this function. For more information, see [#52420](https://github.com/pingcap/tidb/issues/52420).
 
 Examples:
 
-In the example below `MID()` returns the input string from the second until (including) the third character.
+In the following example, `MID()` returns the substring of the input string starting from the second character (`b`) with a length of `3` characters.
 
 ```sql
 SELECT MID('abcdef',2,3);
@@ -1199,11 +1199,11 @@ SELECT MID('abcdef',2,3);
 
 Negation of simple pattern matching.
 
-This function does the opposite of [`LIKE`](#like).
+This function performs the inverse operation of [`LIKE`](#like).
 
 Examples:
 
-In the example below `NOT LIKE` returns 0 (False) as "aaa" is matching the `a%` pattern.
+In the following example, `NOT LIKE` returns `0` (False) because `aaa` matches the `a%` pattern.
 
 ```sql
 SELECT 'aaa' LIKE 'a%', 'aaa' NOT LIKE 'a%';
@@ -1218,7 +1218,7 @@ SELECT 'aaa' LIKE 'a%', 'aaa' NOT LIKE 'a%';
 1 row in set (0.00 sec)
 ```
 
-In the example below `NOT LIKE` returns 1 (True) as "aaa" is not matching the `b%` pattern.
+In the following example, `NOT LIKE` returns `1` (True) because "aaa" does not match the `b%` pattern.
 
 ```sql
 SELECT 'aaa' LIKE 'b%', 'aaa' NOT LIKE 'b%';
