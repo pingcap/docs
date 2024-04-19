@@ -482,7 +482,7 @@ SELECT EXPORT_SET(b'00001111', 'x', '_', '', 8);
 1 row in set (0.00 sec)
 ```
 
-In the example above `bits` is set to `00001111` and this causes the function to return `____` for the bits that are set to 0 and `xxxx` for the bits that are set to 1. Here `x` means "on" and "_" means "off". 
+In the following example, `bits` is set to `00001111`, `on` is set to `x`, and `off` is set to `_`. This causes the function to return `x` for each `1` bit and `_` for each `0` bit. Therefore, when processing with the bits in `01010101` from right to left, the function returns `x_x_x_x_`.
 
 ```sql
 SELECT EXPORT_SET(b'01010101', 'x', '_', '', 8);
