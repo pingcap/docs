@@ -421,7 +421,7 @@ SELECT ELT(3, 'This', 'is', 'TiDB');
 1 row in set (0.00 sec)
 ```
 
-This example returns the third element, which is "TiDB".
+The preceding example returns the third element, which is "TiDB".
 
 ### [`EXPORT_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_export-set)
 
