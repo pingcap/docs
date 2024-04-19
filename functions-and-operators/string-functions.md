@@ -439,13 +439,17 @@ The preceding example returns the third element, which is "TiDB".
 
 `EXPORT_SET()` returns a string that consists of a specified number (`number_of_bits`) of `on`/`off` values for `bits` starting from the right-most (lowest) bit as the first value, optionally separated by `separator`.
 
-If `number_of_bits` is not set, it will use 64 as default (the max size of bits, which is treated as an unsigned 64 bit integer).
 
-The full signature of this function is:
+Syntax:
 
 ```
 EXPORT_SET(bits, on, off, [separator[, number_of_bits]])
 ```
+- `bits`: an integer representing the bit value.
+- `on`: the string to be returned if the corresponding bit is `1`.
+- `off`: the string to be returned if the corresponding bit is `0`.
+- `separator` (optional): the separator character in the result string. 
+- `number_of_bits` (optional): the number of bits to be processed. If it is not set, `64` (the max size of bits) is used by default, which means that `bits` is treated as an unsigned 64-bit integer.
 
 Examples:
 
