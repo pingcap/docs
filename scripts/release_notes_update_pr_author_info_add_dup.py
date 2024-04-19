@@ -174,7 +174,7 @@ def create_release_file(version, dup_notes_levels, dup_notes):
     release_file = os.path.join(ext_path, f'release-{version}.md')
     shutil.copyfile(template_file, release_file)
     # Replace the file content
-    with open(release_file, 'r+') as file:
+    with open(release_file, 'r+', encoding='utf-8') as file:
         content = file.read()
         content = content.replace('x.y.z', version)
         version_parts = version.split('.')
