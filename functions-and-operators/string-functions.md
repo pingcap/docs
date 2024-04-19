@@ -1329,7 +1329,7 @@ SELECT ORD('a'), ORD('A');
 1 row in set (0.00 sec)
 ```
 
-If we take the octal numbers we got from `ORD()` then we can get back to the orignal characters by using the `CHAR()` function. Note that the display of the output might be different if your MySQL client has the `binary-as-hex` option enabled.
+If you take the character code obtained from `ORD()` as input, you can get the original characters back using the `CHAR()` function. Note that the output format might vary depending on whether the `binary-as-hex` option is enabled in your MySQL client.
 
 ```sql
 SELECT CHAR(97), CHAR(65);
