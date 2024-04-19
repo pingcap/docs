@@ -13,7 +13,7 @@ The `SELECT` statement is used to read data from TiDB.
 ```ebnf+diagram
 SelectStmt ::=
     ( SelectStmtBasic | SelectStmtFromDualTable | SelectStmtFromTable )
-    OrderByOptional SelectStmtLimit SelectLockOpt SelectStmtIntoOption
+    OrderBy? SelectStmtLimit? SelectLockOpt? SelectStmtIntoOption
 
 FromDual ::=
     "FROM" "DUAL"
@@ -41,26 +41,13 @@ SelectStmtGroup ::=
 HavingClause ::=
     ( "HAVING" Expression)?
 
-
-OrderByOptional ::=
-    OrderBy?
-
 SelectStmtLimit ::=
     ("LIMIT" LimitOption ( ("," | "OFFSET") LimitOption )?
-| "FETCH" FirstOrNext FetchFirstOpt RowOrRows "ONLY" )
-
-FirstOrNext ::=
-    ("FIRST" | "NEXT")
-
-FetchFirstOpt ::=
-    LimitOption?
-
-RowOrRows ::=
-    ("ROW" | "ROWS")
+| "FETCH" ("FIRST" | "NEXT") LimitOption ("ROW" | "ROWS") "ONLY" )
 
 SelectLockOpt ::= 
-    ( ( 'FOR' 'UPDATE' ( 'OF' TableList )? 'NOWAIT'? )
-|   ( 'LOCK' 'IN' 'SHARE' 'MODE' ) )?
+    ( 'FOR' 'UPDATE' ( 'OF' TableList )? 'NOWAIT'?
+|   'LOCK' 'IN' 'SHARE' 'MODE' )
 
 TableList ::=
     TableName ( ',' TableName )*
