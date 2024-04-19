@@ -1228,7 +1228,7 @@ SELECT CHAR(97), CHAR(65);
 1 row in set (0.01 sec)
 ```
 
-In the example below you can see how `ORD()` handles multibyte characters. Here 101 and 0x65 are both the UTF-8 encoded value for the "e" character, but in different formats. And 50091 and 0xC3AB are also the same value, but for the "ë" character. 
+The following example shows how `ORD()` handles multibyte characters. Here, both `101` and `0x65` have the UTF-8 encoded value for the `e` character, but in different formats. And both `50091` and `0xC3AB` have the same value, but for the `ë` character. 
 
 ```sql
 SELECT ORD('e'), ORD('ë'), HEX('e'), HEX('ë');
