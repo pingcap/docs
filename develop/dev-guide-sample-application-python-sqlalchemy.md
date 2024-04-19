@@ -76,6 +76,10 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 <SimpleTab>
 <div label="TiDB Serverless">
 
+> **Note:**
+>
+> Currently TiDB Serverless clusters come with a limitation that if there is no active connections for 5 minutes, they will shutdown themselves and all connections will be closed. So when using SQLAlchemy against TiDB Serverless clusters, the pooled connections might get `OperationalError` like `Lost connection to MySQL server during query` or `MySQL Connection not available`. You can set `pool_recycle` parameter to `300` to avoid this. For more information about it, refer to [Dealing with Disconnects](https://docs.sqlalchemy.org/en/20/core/pooling.html#dealing-with-disconnects).
+
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
