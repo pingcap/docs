@@ -31,7 +31,7 @@ We will carefully evaluate your request and get back to you soon.
 
 ## Manage daily tasks for MSP customers
 
-Once you are approved as a PingCAP MSP, you will receive an API key for the [MSP Management API](https://docs.pingcap.com/tidbcloud/api/msp/v1beta1). 
+Once you are approved as a PingCAP MSP, you will receive an API key for the [MSP Management API](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp). 
 
 You can use the MSP management API to manage daily tasks:
 
