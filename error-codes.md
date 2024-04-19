@@ -10,7 +10,7 @@ This document describes the problems encountered during the use of TiDB and prov
 
 ## Error codes
 
-TiDB is compatible with the error codes in MySQL, and in most cases returns the same error code as MySQL. For a list of error codes for MySQL, see [MySQL 5.7 Error Message Reference](https://dev.mysql.com/doc/mysql-errors/5.7/en/). In addition, TiDB has the following unique error codes:
+TiDB is compatible with the error codes in MySQL, and in most cases returns the same error code as MySQL. For a list of error codes for MySQL, see [MySQL 8.0 Error Message Reference](https://dev.mysql.com/doc/mysql-errors/8.0/en/). In addition, TiDB has the following unique error codes:
 
 > **Note:**
 >
@@ -464,7 +464,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8228
 
-    Unsupported types are specified when using `setval` on Sequence.
+    Unsupported types are specified when using `SETVAL` on Sequence.
 
     See [Sequence documentation](/sql-statements/sql-statement-create-sequence.md#examples) to find the example of the function.
 
@@ -526,9 +526,13 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     DDL is paused by `ADMIN PAUSE` and cannot be paused again.
 
+* Error Number: 8263
+
+    This DDL cannot be executed under a specific BDR role. Make sure that the cluster is in [bidirectional replication](/ticdc/ticdc-bidirectional-replication.md). If the cluster is not in bidirectional replication, you can use `ADMIN UNSET BDR ROLE;` to make DDL normal.
+
 * Error Number: 9001
 
-    The complete error message: `ERROR 9001 (HY000): PD Server Timeout`
+    The complete error message: `ERROR 9001 (HY000): PD server timeout`
 
     The PD request timed out.
 
@@ -536,7 +540,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 9002
 
-    The complete error message: `ERROR 9002 (HY000): TiKV Server Timeout`
+    The complete error message: `ERROR 9002 (HY000): TiKV server timeout`
 
     The TiKV request timed out.
 

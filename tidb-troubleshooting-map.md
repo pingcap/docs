@@ -59,11 +59,13 @@ Refer to [5 PD issues](#5-pd-issues).
 
 - 3.1.2 TiDB DDL job hangs or executes slowly (use `admin show ddl jobs` to check DDL progress)
 
-    - Cause 1: Network issue with other components (PD/TiKV).
+    - Cause 1: TiDB introduces the [metadata lock](/metadata-lock.md) in v6.3.0, and enables it by default in v6.5.0 and later versions. If the table involved in the DDL operation has intersections with the table involved in the uncommitted transaction, the DDL operation is blocked until the transaction is committed or rolled back.
 
-    - Cause 2: Early versions of TiDB (earlier than v3.0.8) have heavy internal load because of a lot of goroutine at high concurrency.
+    - Cause 2: Network issue with other components (PD/TiKV).
 
-    - Cause 3: In early versions (v2.1.15 & versions < v3.0.0-rc1), PD instances fail to delete TiDB keys, which causes every DDL change to wait for two leases.
+    - Cause 3: Early versions of TiDB (earlier than v3.0.8) have heavy internal load because of a lot of goroutine at high concurrency.
+
+    - Cause 4: In early versions (v2.1.15 & versions < v3.0.0-rc1), PD instances fail to delete TiDB keys, which causes every DDL change to wait for two leases.
 
     - For other unknown causes, [report a bug](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&template=bug-report.md).
 
@@ -470,7 +472,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 ### 6.2 Data Migration
 
-- 6.2.1 TiDB Data Migration (DM) is a migration tool that supports data migration from MySQL/MariaDB into TiDB. For details, see [DM on GitHub](https://github.com/pingcap/dm/).
+- 6.2.1 TiDB Data Migration (DM) is a migration tool that supports data migration from MySQL/MariaDB into TiDB. For details, see [DM overview](/dm/dm-overview.md).
 
 - 6.2.2 `Access denied for user 'root'@'172.31.43.27' (using password: YES)` shows when you run `query status` or check the log.
 
@@ -518,7 +520,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 ### 6.3 TiDB Lightning
 
-- 6.3.1 TiDB Lightning is a tool for fast full import of large amounts of data into a TiDB cluster. See [TiDB Lightning on GitHub](https://github.com/pingcap/tidb/tree/master/br/pkg/lightning).
+- 6.3.1 TiDB Lightning is a tool for fast full import of large amounts of data into a TiDB cluster. See [TiDB Lightning on GitHub](https://github.com/pingcap/tidb/tree/master/lightning).
 
 - 6.3.2 Import speed is too slow.
 

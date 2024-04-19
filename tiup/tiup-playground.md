@@ -22,7 +22,7 @@ This command actually performs the following operations:
 
 - Because this command does not specify the version of the playground component, TiUP first checks the latest version of the installed playground component. Assume that the latest version is v1.12.3, then this command works the same as `tiup playground:v1.12.3`.
 - If you have not used TiUP playground to install the TiDB, TiKV, and PD components, the playground component installs the latest stable version of these components, and then start these instances.
-- Because this command does not specify the version of the TiDB, PD, and TiKV component, TiUP playground uses the latest version of each component by default. Assume that the latest version is v7.5.0, then this command works the same as `tiup playground:v1.12.3 v7.5.0`.
+- Because this command does not specify the version of the TiDB, PD, and TiKV component, TiUP playground uses the latest version of each component by default. Assume that the latest version is v8.0.0, then this command works the same as `tiup playground:v1.12.3 v8.0.0`.
 - Because this command does not specify the number of each component, TiUP playground, by default, starts a smallest cluster that consists of one TiDB instance, one TiKV instance, one PD instance, and one TiFlash instance.
 - After starting each TiDB component, TiUP playground reminds you that the cluster is successfully started and provides you some useful information, such as how to connect to the TiDB cluster through the MySQL client and how to access the [TiDB Dashboard](/dashboard/dashboard-intro.md).
 
@@ -60,6 +60,12 @@ Flags:
       --tiflash.binpath string   Specify the TiFlash instance binary path (optional, for debugging)
       --tiflash.config string    Specify the TiFlash instance configuration file (optional, for debugging)
       --tiflash.timeout int      Specify TiFlash maximum wait time in seconds for starting. 0 means no limit
+      --tiproxy int              TiProxy instance number
+      --tiproxy.binpath string   TiProxy instance binary path
+      --tiproxy.config string    TiProxy instance configuration file
+      --tiproxy.host host        Playground TiProxy host. If not provided, TiProxy will still use host flag as its host
+      --tiproxy.port int         Playground TiProxy port. If not provided, TiProxy will use 6000 as its port
+      --tiproxy.timeout int      TiProxy max wait time in seconds for starting. 0 means no limit (default 60)
       -v, --version              Specify the version of playground
       --without-monitor          Disable the monitoring function of Prometheus and Grafana. If you do not add this flag, the monitoring function is enabled by default.
 ```

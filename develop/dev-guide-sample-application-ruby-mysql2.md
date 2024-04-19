@@ -99,15 +99,15 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     cp .env.example .env
     ```
 
-6. Edit the `.env` file, set up the environment variables as follows, and replace the corresponding placeholders `<>` with connection parameters in the connection dialog:
+6. Edit the `.env` file, set up the environment variables as follows, and replace the corresponding placeholders `{}` with connection parameters in the connection dialog:
 
     ```dotenv
-   DATABASE_HOST=<host>
-   DATABASE_PORT=4000
-   DATABASE_USER=<user>
-   DATABASE_PASSWORD=<password>
-   DATABASE_NAME=test
-   DATABASE_ENABLE_SSL=true
+    DATABASE_HOST={host}
+    DATABASE_PORT=4000
+    DATABASE_USER={user}
+    DATABASE_PASSWORD={password}
+    DATABASE_NAME=test
+    DATABASE_ENABLE_SSL=true
     ```
 
    > **Note**
@@ -133,16 +133,16 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     cp .env.example .env
     ```
 
-5. Edit the `.env` file, set up the environment variables as follows, and replace the corresponding placeholders `<>` with connection parameters in the connection dialog:
+5. Edit the `.env` file, set up the environment variables as follows, and replace the corresponding placeholders `{}` with connection parameters in the connection dialog:
 
     ```dotenv
-    DATABASE_HOST=<host>
+    DATABASE_HOST={host}
     DATABASE_PORT=4000
-    DATABASE_USER=<user>
-    DATABASE_PASSWORD=<password>
+    DATABASE_USER={user}
+    DATABASE_PASSWORD={password}
     DATABASE_NAME=test
     DATABASE_ENABLE_SSL=true
-    DATABASE_SSL_CA=<downloaded_ssl_ca_path>
+    DATABASE_SSL_CA={downloaded_ssl_ca_path}
     ```
 
    > **Note**
@@ -162,13 +162,13 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     cp .env.example .env
     ```
 
-2. Edit the `.env` file, set up the environment variables as follows, and replace the corresponding placeholders `<>` with your own TiDB connection information:
+2. Edit the `.env` file, set up the environment variables as follows, and replace the corresponding placeholders `{}` with your own TiDB connection information:
 
     ```dotenv
-    DATABASE_HOST=<host>
+    DATABASE_HOST={host}
     DATABASE_PORT=4000
-    DATABASE_USER=<user>
-    DATABASE_PASSWORD=<password>
+    DATABASE_USER={user}
+    DATABASE_PASSWORD={password}
     DATABASE_NAME=test
     ```
 
@@ -190,7 +190,7 @@ ruby app.rb
 If the connection is successful, the console will output the version of the TiDB cluster as follows:
 
 ```
-🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v7.5.0)
+🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.0.0)
 ⏳ Loading sample game data...
 ✅ Loaded sample game data.
 

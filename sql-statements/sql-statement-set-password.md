@@ -10,9 +10,10 @@ This statement changes the user password for a user account in the TiDB system d
 
 ## Synopsis
 
-**SetStmt:**
-
-![SetStmt](/media/sqlgram/SetStmt.png)
+```enbf+diagram
+SetPasswordStmt ::=
+    "SET" "PASSWORD" ( "FOR" Username )? "=" ( stringLit | "PASSWORD" "(" stringLit ")" )
+```
 
 ## Examples
 

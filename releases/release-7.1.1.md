@@ -15,6 +15,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
 - TiDB introduces a new system variable `tidb_lock_unchanged_keys` to control whether to lock unchanged keys [#44714](https://github.com/pingcap/tidb/issues/44714) @[ekexium](https://github.com/ekexium)
 
+### Behavior changes
+
+- When processing update event, TiCDC splits an event into delete and insert events if the primary key or non-null unique index value is modified in the event. For more information, see [documentation](/ticdc/ticdc-behavior-change.md#transactions-containing-a-single-update-change).
+
 ## Improvements
 
 + TiDB
@@ -111,6 +115,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
     + Backup & Restore (BR)
 
         - Fix the issue that `checksum mismatch` is falsely reported in some cases [#44472](https://github.com/pingcap/tidb/issues/44472) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that the frequency of `resolve lock` is too high when there is no PITR backup task in the TiDB cluster [#40759](https://github.com/pingcap/tidb/issues/40759) @[joccau](https://github.com/joccau)
 
     + TiCDC
 

@@ -1,6 +1,6 @@
 ---
 title: TiDB Backup & Restore Overview
-summary: Learn about the definition and features of TiDB Backup & Restore.
+summary: TiDB Backup & Restore (BR) ensures high availability of clusters and data safety. It supports disaster recovery with a short RPO, handles misoperations, and provides history data auditing. It is recommended to perform backup operations during off-peak hours and store backup data to compatible storage systems. BR supports full backup and log backup, as well as restoring data to any point in time. It is important to use BR of the same major version as the TiDB cluster for backup and restoration.
 aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/br/','/docs/dev/how-to/maintain/backup-and-restore/br/','/tidb/dev/backup-and-restore-tool/','/tidb/dev/point-in-time-recovery/']
 ---
 
@@ -25,6 +25,7 @@ This section describes the prerequisites for using TiDB backup and restore, incl
 - PITR only supports cluster-level restore and does not support database-level or table-level restore.
 - PITR does not support restoring the data of user tables or privilege tables from system tables.
 - BR does not support running multiple backup tasks on a cluster **at the same time**.
+- BR does not support running snapshot backup tasks and data restore tasks on a cluster **at the same time**.
 - When a PITR is running, you cannot run a log backup task or use TiCDC to replicate data to a downstream cluster.
 
 ### Some tips
@@ -94,7 +95,7 @@ Corresponding to the backup features, you can perform two types of restore: full
 #### Restore performance and impact on TiDB clusters
 
 - Data restore is performed at a scalable speed. Generally, the speed is 100 MiB/s per TiKV node. `br` only supports restoring data to a new cluster and uses the resources of the target cluster as much as possible. For more details, see [Restore performance and impact](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-restore).
-- On each TiKV node, PITR can restore log data at 30 GiB/h. For more details, see [PITR performance and impact](/br/br-pitr-guide.md#performance-and-impact-of-pitr).
+- On each TiKV node, PITR can restore log data at 30 GiB/h. For more details, see [PITR performance and impact](/br/br-pitr-guide.md#performance-capabilities-of-pitr).
 
 ## Backup storage
 
@@ -125,7 +126,7 @@ Backup and restore might go wrong when some TiDB features are enabled or disable
 
 Before performing backup and restore, BR compares the TiDB cluster version with its own and checks their compatibility. If the versions are incompatible, BR reports an error and exits. To forcibly skip the version check, you can set `--check-requirements=false`. Note that skipping the version check might introduce incompatibility in data.
 
-Starting from v7.0.0, TiDB gradually supports performing backup and restore operations through SQL statements. Therefore, it is strongly recommended to use the BR tool of the same major version as the TiDB cluster when backing up and restoring cluster data, and avoid performing data backup and restore operations across major versions. This helps ensure smooth execution of restore operations and data consistency.
+Starting from v7.0.0, TiDB gradually supports performing backup and restore operations through SQL statements. Therefore, it is strongly recommended to use the BR tool of the same major version as the TiDB cluster when backing up and restoring cluster data, and avoid performing data backup and restore operations across major versions. This helps ensure smooth execution of restore operations and data consistency. Starting from v7.6.0, BR restores data in some `mysql` system tables by default, that is, the `--with-sys-table` option is set to `true` by default. When restoring data to a TiDB cluster with a different version, if you encounter an error similar to `[BR:Restore:ErrRestoreIncompatibleSys]incompatible system table` due to different schemas of system tables, you can set `--with-sys-table=false` to skip restoring the system tables and avoid this error.
 
 The compatibility information for BR before TiDB v6.6.0 is as follows:
 

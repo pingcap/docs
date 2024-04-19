@@ -170,6 +170,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
 >
 > This section provides compatibility changes you need to know when you upgrade from v7.1.0 to the current version (v7.2.0). If you are upgrading from v7.0.0 or earlier versions to the current version, you might also need to check the compatibility changes introduced in intermediate versions.
 
+### Behavior changes
+
+- When processing update event, TiCDC splits an event into delete and insert events if the primary key or non-null unique index value is modified in the event. For more information, see [documentation](/ticdc/ticdc-behavior-change.md#transactions-containing-a-single-update-change).
+
 ### System variables
 
 | Variable name | Change type | Description |
@@ -245,7 +249,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
 
     + TiDB Lightning
 
-        - Optimize the retry mechanism during import to avoid errors caused by leader switching [#44478](https://github.com/pingcap/tidb/pull/44478) @[lance6716](https://github.com/lance6716)
+        - Optimize the retry mechanism during import to avoid errors caused by leader switching [#44263](https://github.com/pingcap/tidb/issues/44263) @[lance6716](https://github.com/lance6716)
         - Verify checksum through SQL after the import to improve stability of verification [#41941](https://github.com/pingcap/tidb/issues/41941) @[GMHDBJD](https://github.com/GMHDBJD)
         - Optimize TiDB Lightning OOM issues when importing wide tables [#43853](https://github.com/pingcap/tidb/issues/43853) @[D3Hunter](https://github.com/D3Hunter)
 

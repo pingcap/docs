@@ -8,10 +8,10 @@ aliases: ['/docs/dev/upgrade-tidb-using-tiup/','/docs/dev/how-to/upgrade/using-t
 
 This document is targeted for the following upgrade paths:
 
-- Upgrade from TiDB 4.0 versions to TiDB 7.5.
-- Upgrade from TiDB 5.0-5.4 versions to TiDB 7.5.
-- Upgrade from TiDB 6.0-6.6 to TiDB 7.5.
-- Upgrade from TiDB 7.0-7.4 to TiDB 7.5.
+- Upgrade from TiDB 4.0 versions to TiDB 8.0.
+- Upgrade from TiDB 5.0-5.4 versions to TiDB 8.0.
+- Upgrade from TiDB 6.0-6.6 to TiDB 8.0.
+- Upgrade from TiDB 7.0-7.6 to TiDB 8.0.
 
 > **Warning:**
 >
@@ -23,19 +23,44 @@ This document is targeted for the following upgrade paths:
 
 > **Note:**
 >
-> - If your cluster to be upgraded is v3.1 or an earlier version (v3.0 or v2.1), the direct upgrade to v7.5.0 is not supported. You need to upgrade your cluster first to v4.0 and then to v7.5.0.
+> - If your cluster to be upgraded is v3.1 or an earlier version (v3.0 or v2.1), the direct upgrade to v8.0.0 is not supported. You need to upgrade your cluster first to v4.0 and then to v8.0.0.
 > - If your cluster to be upgraded is earlier than v6.2, the upgrade might get stuck when you upgrade the cluster to v6.2 or later versions in some scenarios. You can refer to [How to fix the issue](#how-to-fix-the-issue-that-the-upgrade-gets-stuck-when-upgrading-to-v620-or-later-versions).
 > - TiDB nodes use the value of the [`server-version`](/tidb-configuration-file.md#server-version) configuration item to verify the current TiDB version. Therefore, to avoid unexpected behaviors, before upgrading the TiDB cluster, you need to set the value of `server-version` to empty or the real version of the current TiDB cluster.
+> - Setting the [`performance.force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710) configuration item to `ON` prolongs the TiDB startup time, which might cause startup timeouts and upgrade failures. To avoid this issue, it is recommended to set a longer waiting timeout for TiUP.
+>     - Scenarios that might be affected:
+>         - The original cluster version is earlier than v6.5.7 and v7.1.0 (which does not support `performance.force-init-stats` yet), and the target version is v7.2.0 or later.
+>         - The original cluster version is equal to or later than v6.5.7 and v7.1.0, and the `performance.force-init-stats` configuration item is set to `ON`.
+>
+>     - Check the value of the `performance.force-init-stats` configuration item:
+>
+>         ```
+>         SHOW CONFIG WHERE type = 'tidb' AND name = 'performance.force-init-stats';
+>         ```
+>
+>     - You can increase the TiUP waiting timeout by adding the command-line option [`--wait-timeout`](/tiup/tiup-component-cluster.md#--wait-timeout). For example, execute the following command to set the waiting timeout to 1200 seconds (20 minutes).
+>
+>         ```shell
+>         tiup update cluster --wait-timeout 1200 [other options]
+>         ```
+>
+>         Generally, a 20-minute waiting timeout is sufficient for most scenarios. For a more precise estimate, search for `init stats info time` in the TiDB log to get the statistics loading time during the previous startup as a reference. For example:
+>
+>         ```
+>         [domain.go:2271] ["init stats info time"] [lite=true] ["take time"=2.151333ms]
+>         ```
+>
+>          If the original cluster is v7.1.0 or earlier, when upgrading to v7.2.0 or later, because of the introduction of [`performance.lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710), the statistics loading time is greatly reduced. In this case, the `init stats info time` before the upgrade is longer than the loading time after the upgrade.
+>     - If you want to shorten the rolling upgrade duration of TiDB and the potential performance impact of missing initial statistical information during the upgrade is acceptable for your cluster, you can set `performance.force-init-stats` to `OFF` before the upgrade by [modifying the configuration of the target instance with TiUP](/maintain-tidb-using-tiup.md#modify-the-configuration). After the upgrade is completed, you can reassess and revert this setting if necessary.
 
 ## Upgrade caveat
 
 - TiDB currently does not support version downgrade or rolling back to an earlier version after the upgrade.
-- For the v4.0 cluster managed using TiDB Ansible, you need to import the cluster to TiUP (`tiup cluster`) for new management according to [Upgrade TiDB Using TiUP (v4.0)](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup). Then you can upgrade the cluster to v7.5.0 according to this document.
-- To update versions earlier than v3.0 to v7.5.0:
+- For the v4.0 cluster managed using TiDB Ansible, you need to import the cluster to TiUP (`tiup cluster`) for new management according to [Upgrade TiDB Using TiUP (v4.0)](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup). Then you can upgrade the cluster to v8.0.0 according to this document.
+- To update versions earlier than v3.0 to v8.0.0:
     1. Update this version to 3.0 using [TiDB Ansible](https://docs.pingcap.com/tidb/v3.0/upgrade-tidb-using-ansible).
     2. Use TiUP (`tiup cluster`) to import the TiDB Ansible configuration.
     3. Update the 3.0 version to 4.0 according to [Upgrade TiDB Using TiUP (v4.0)](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup).
-    4. Upgrade the cluster to v7.5.0 according to this document.
+    4. Upgrade the cluster to v8.0.0 according to this document.
 - Support upgrading the versions of TiDB Binlog, TiCDC, TiFlash, and other components.
 - When upgrading TiFlash from versions earlier than v6.3.0 to v6.3.0 and later versions, note that the CPU must support the AVX2 instruction set under the Linux AMD64 architecture and the ARMv8 instruction set architecture under the Linux ARM64 architecture. For details, see the description in [v6.3.0 Release Notes](/releases/release-6.3.0.md#others).
 - For detailed compatibility changes of different versions, see the [Release Notes](/releases/release-notes.md) of each version. Modify your cluster configuration according to the "Compatibility Changes" section of the corresponding release notes.
@@ -47,7 +72,7 @@ This section introduces the preparation works needed before upgrading your TiDB 
 
 ### Step 1: Review compatibility changes
 
-Review [the compatibility changes](/releases/release-7.5.0.md#compatibility-changes) in TiDB v7.5.0 release notes. If any changes affect your upgrade, take actions accordingly.
+Review [the compatibility changes](/releases/release-8.0.0.md#compatibility-changes) in TiDB v8.0.0 release notes. If any changes affect your upgrade, take actions accordingly.
 
 ### Step 2: Upgrade TiUP or TiUP offline mirror
 
@@ -122,7 +147,7 @@ Now, the offline mirror has been upgraded successfully. If an error occurs durin
 > Skip this step if one of the following situations applies:
 >
 > + You have not modified the configuration parameters of the original cluster. Or you have modified the configuration parameters using `tiup cluster` but no more modification is needed.
-> + After the upgrade, you want to use v7.5.0's default parameter values for the unmodified configuration items.
+> + After the upgrade, you want to use v8.0.0's default parameter values for the unmodified configuration items.
 
 1. Enter the `vi` editing mode to edit the topology file:
 
@@ -138,7 +163,7 @@ Now, the offline mirror has been upgraded successfully. If an error occurs durin
 
 > **Note:**
 >
-> Before you upgrade the cluster to v6.6.0, make sure that the parameters you have modified in v4.0 are compatible in v7.5.0. For details, see [TiKV Configuration File](/tikv-configuration-file.md).
+> Before you upgrade the cluster to v6.6.0, make sure that the parameters you have modified in v4.0 are compatible in v8.0.0. For details, see [TiKV Configuration File](/tikv-configuration-file.md).
 
 ### Step 4: Check the DDL and backup status of the cluster
 
@@ -182,12 +207,12 @@ If your application has a maintenance window for the database to be stopped for 
 tiup cluster upgrade <cluster-name> <version>
 ```
 
-For example, if you want to upgrade the cluster to v7.5.0:
+For example, if you want to upgrade the cluster to v8.0.0:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup cluster upgrade <cluster-name> v7.5.0
+tiup cluster upgrade <cluster-name> v8.0.0
 ```
 
 > **Note:**
@@ -198,10 +223,7 @@ tiup cluster upgrade <cluster-name> v7.5.0
 >
 > + To keep a stable performance, make sure that all leaders in a TiKV instance are evicted before stopping the instance. You can set `--transfer-timeout` to a larger value, for example, `--transfer-timeout 3600` (unit: second).
 >
-> + To upgrade TiFlash from versions earlier than 5.3 to 5.3 or later, you should stop TiFlash and then upgrade it. The following steps help you upgrade TiFlash without interrupting other components:
->    1. Stop the TiFlash instance: `tiup cluster stop <cluster-name> -R tiflash`
->    2. Upgrade the TiDB cluster without restarting it (only updating the files): `tiup cluster upgrade <cluster-name> <version> --offline`, such as `tiup cluster upgrade <cluster-name> v6.3.0 --offline`
->    3. Reload the TiDB cluster: `tiup cluster reload <cluster-name>`. After the reload, the TiFlash instance is started and you do not need to manually start it.
+> + To upgrade TiFlash from versions earlier than v5.3.0 to v5.3.0 or later, you must stop TiFlash and then upgrade it, and the TiUP version must be earlier than v1.12.0. For more information, see [Upgrade TiFlash using TiUP](/tiflash-upgrade-guide.md#upgrade-tiflash-using-tiup).
 >
 > + Try to avoid creating a new clustered index table when you apply rolling updates to the clusters using TiDB Binlog.
 
@@ -214,7 +236,7 @@ Starting from tiup-cluster v1.14.0, you can specify certain components to a spec
 > For components that share a version number, such as TiDB, TiKV, PD, and TiCDC, there are no complete tests to ensure that they work properly in a mixed-version deployment scenario. Ensure that you use this section only in test environments, or with the help of [technical support](/support.md).
 
 ```shell
-tiup cluster upgrade -h | grep "version string"
+tiup cluster upgrade -h | grep "version"
       --alertmanager-version string        Fix the version of alertmanager and no longer follows the cluster version.
       --blackbox-exporter-version string   Fix the version of blackbox-exporter and no longer follows the cluster version.
       --cdc-version string                 Fix the version of cdc and no longer follows the cluster version.
@@ -238,7 +260,7 @@ tiup cluster upgrade -h | grep "version string"
     tiup cluster stop <cluster-name>
     ```
 
-2. Use the `upgrade` command with the `--offline` option to perform the offline upgrade. Fill in the name of your cluster for `<cluster-name>` and the version to upgrade to for `<version>`, such as `v7.5.0`.
+2. Use the `upgrade` command with the `--offline` option to perform the offline upgrade. Fill in the name of your cluster for `<cluster-name>` and the version to upgrade to for `<version>`, such as `v8.0.0`.
 
     {{< copyable "shell-regular" >}}
 
@@ -267,7 +289,7 @@ tiup cluster display <cluster-name>
 ```
 Cluster type:       tidb
 Cluster name:       <cluster-name>
-Cluster version:    v7.5.0
+Cluster version:    v8.0.0
 ```
 
 ## FAQ
@@ -322,7 +344,7 @@ Starting from v6.2.0, TiDB enables the [concurrent DDL framework](/ddl-introduct
 
 ### The evict leader has waited too long during the upgrade. How to skip this step for a quick upgrade?
 
-You can specify `--force`. Then the processes of transferring PD leader and evicting TiKV leader are skipped during the upgrade. The cluster is directly restarted to update the version, which has a great impact on the cluster that runs online. In the following command, `<version>` is the version to upgrade to, such as `v7.5.0`.
+You can specify `--force`. Then the processes of transferring PD leader and evicting TiKV leader are skipped during the upgrade. The cluster is directly restarted to update the version, which has a great impact on the cluster that runs online. In the following command, `<version>` is the version to upgrade to, such as `v8.0.0`.
 
 {{< copyable "shell-regular" >}}
 
@@ -337,5 +359,5 @@ You can upgrade the tool version by using TiUP to install the `ctl` component of
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup install ctl:v7.5.0
+tiup install ctl:v8.0.0
 ```

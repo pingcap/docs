@@ -257,7 +257,7 @@ For more information about the `SET_VAR` hint, see [SET_VAR](/optimizer-hints.md
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 65535]`
-- Controls the step size of `AUTO_INCREMENT` values to be allocated to a column. It is often used in combination with `auto_increment_offset`.
+- Controls the step size of `AUTO_INCREMENT` values to be allocated to a column, and allocation rules for `AUTO_RANDOM` IDs. It is often used in combination with [`auto_increment_offset`](#auto_increment_offset).
 
 ### auto_increment_offset
 
@@ -267,7 +267,7 @@ For more information about the `SET_VAR` hint, see [SET_VAR](/optimizer-hints.md
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 65535]`
-- Controls the initial offset of `AUTO_INCREMENT` values to be allocated to a column. This setting is often used in combination with `auto_increment_increment`. For example:
+- Controls the initial offset of `AUTO_INCREMENT` values to be allocated to a column, and allocation rules for `AUTO_RANDOM` IDs. This setting is often used in combination with [`auto_increment_increment`](#auto_increment_increment). For example:
 
 ```sql
 mysql> CREATE TABLE t1 (a int not null primary key auto_increment);
@@ -443,7 +443,6 @@ mysql> SELECT * FROM t1;
 - Type: Enumeration
 - Default value: `mysql_native_password`
 - Possible values: `mysql_native_password`, `caching_sha2_password`, `tidb_sm3_password`, `tidb_auth_token`, `authentication_ldap_sasl`, and `authentication_ldap_simple`.
-- The `tidb_auth_token` authentication method is used only for the internal operation of TiDB Cloud. **DO NOT** set the variable to this value.
 - This variable sets the authentication method that the server advertises when the server-client connection is being established.
 - To authenticate using the `tidb_sm3_password` method, you can connect to TiDB using [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3).
 
@@ -506,6 +505,16 @@ For more possible values of this variable, see [Authentication plugin status](/s
 - If you need to change the default behavior of the client connection for the expired password, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
+
+### div_precision_increment <span class="version-mark">New in v8.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Integer
+- Default value: `4`
+- Range: `[0, 30]`
+- This variable specifies the number of digits by which to increase the scale of the result of a division operation performed using the `/` operator. This variable is the same as MySQL.
 
 ### error_count
 
@@ -775,6 +784,22 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 1 row in set (0.00 sec)
 ```
 
+### pd_enable_follower_handle_region <span class="version-mark">New in v7.6.0</span>
+
+> **Warning:**
+>
+> The [Active PD Follower](https://docs.pingcap.com/tidb/dev/tune-region-performance#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service) feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to enable the Active PD Follower feature (currently only applicable to requests for Region information). When the value is `OFF`, TiDB only obtains Region information from the PD leader. When the value is `ON`, TiDB evenly distributes requests for Region information to all PD servers, and PD followers can also handle Region requests, thereby reducing the CPU pressure on the PD leader.
+- Scenarios for enabling Active PD Follower:
+    * In a cluster with a large number of Regions, the PD leader experiences high CPU pressure due to the increased overhead of handling heartbeats and scheduling tasks.
+    * In a TiDB cluster with many TiDB instances, the PD leader experiences high CPU pressure due to a high concurrency of requests for Region information.
+
 ### plugin_dir
 
 > **Note:**
@@ -854,6 +879,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 - Setting this variable to `ON` requires you to connect to TiDB from a session that has TLS enabled. This helps prevent lock-out scenarios when TLS is not configured correctly.
 - This setting was previously a `tidb.toml` option (`security.require-secure-transport`), but changed to a system variable starting from TiDB v6.1.0.
+- Starting from v6.5.6, v7.1.2, v7.5.1, and v8.0.0, when Security Enhanced Mode (SEM) is enabled, setting this variable to `ON` is prohibited to avoid potential connectivity issues for users.
 
 ### skip_name_resolve <span class="version-mark">New in v5.2.0</span>
 
@@ -1085,6 +1111,16 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `OFF`
 - This variable is used to set whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
 
+### tidb_analyze_distsql_scan_concurrency <span class="version-mark">New in v7.6.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `4`
+- Range: `[1, 4294967295]`
+- This variable is used to set the concurrency of the `scan` operation when executing the `ANALYZE` operation.
+
 ### tidb_analyze_partition_concurrency
 
 > **Warning:**
@@ -1180,7 +1216,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `1`
+- Default value: `128`. Before v7.6.0, the default value is `1`.
 - Range: `[1, 1024]`
 - This variable specifies the number of partitions that TiDB [automatically analyzes](/statistics.md#automatic-update) when analyzing a partitioned table (which means automatically collecting statistics on a partitioned table).
 - If the value of this variable is smaller than the number of partitions, TiDB automatically analyzes all partitions of the partitioned table in multiple batches. If the value of this variable is greater than or equal to the number of partitions, TiDB analyzes all partitions of the partitioned table at the same time.
@@ -1560,10 +1596,6 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 <CustomContent platform="tidb">
 
-> **Warning:**
->
-> Currently, PITR recovery handles the indexes created by index acceleration during the log backup with extra processing to achieve compatibility. For details, see [Why is the acceleration of adding indexes feature incompatible with PITR?](/faq/backup-and-restore-faq.md#why-is-the-acceleration-of-adding-indexes-feature-incompatible-with-pitr).
-
 > **Note:**
 >
 > * Index acceleration requires a [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) that is writable and has enough free space. If the `temp-dir` is unusable, TiDB falls back to non-accelerated index building. It is recommended to put the `temp-dir` on a SSD disk.
@@ -1577,8 +1609,6 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 > **Warning:**
 >
 > Currently, this feature is not fully compatible with [altering multiple columns or indexes in a single `ALTER TABLE` statement](/sql-statements/sql-statement-alter-table.md). When adding a unique index with the index acceleration, you need to avoid altering other columns or indexes in the same statement.
->
-> Currently, PITR recovery handles the indexes created by index acceleration during the log backup with extra processing to achieve compatibility. For details, see [Why is the acceleration of adding indexes feature incompatible with PITR?](https://docs.pingcap.com/tidb/v7.0/backup-and-restore-faq#why-is-the-acceleration-of-adding-indexes-feature-incompatible-with-pitr).
 
 </CustomContent>
 
@@ -1595,9 +1625,9 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_cloud_storage_uri <span class="version-mark">New in v7.4.0</span>
 
-> **Warning:**
+> **Note:**
 >
-> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> Currently, the [Global Sort](/tidb-global-sort.md) process consumes a large amount of computing and memory resources of TiDB nodes. In scenarios such as adding indexes online while user business applications are running, it is recommended to add new TiDB nodes to the cluster and set the [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) variable of these nodes to `"background"`. In this way, the distributed framework schedules tasks to these nodes, isolating the workload from other TiDB nodes to reduce the impact of executing backend tasks such as `ADD INDEX` and `IMPORT INTO` on user business applications.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -1634,7 +1664,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Integer
 - Default value: `64`
 - Range: `[1, 256]`
-- This variable controls the concurrency of [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md).
+- This variable controls the concurrency of [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md).
 
 ### tidb_ddl_reorg_batch_size
 
@@ -1682,6 +1712,21 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Unit: Threads
 - This variable is used to set the concurrency of the DDL operation in the `re-organize` phase.
 
+### `tidb_enable_fast_create_table` <span class="version-mark">New in v8.0.0</span>
+
+> **Warning:**
+>
+> This variable is currently an experimental feature and it is not recommended to use in a production environment. This feature might change or be removed without prior notice. If you find a bug, please give feedback by raising an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable is used to control whether to enable [TiDB Accelerated Table Creation](/accelerated-table-creation.md).
+- Starting from v8.0.0, TiDB supports accelerating table creation by the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) statement using `tidb_enable_fast_create_table`.
+- This variable is renamed from the variable [`tidb_ddl_version`](https://docs.pingcap.com/tidb/v7.6/system-variables#tidb_ddl_version-new-in-v760) that is introduced in v7.6.0. Starting from v8.0.0, `tidb_ddl_version` no longer takes effect.
+
 ### tidb_default_string_match_selectivity <span class="version-mark">New in v6.2.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -1697,6 +1742,10 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - If the variable is set to a value other than the `0.8`, TiDB adjusts the estimation for `not like`, `not rlike`, and `not regexp` accordingly.
 
 ### tidb_disable_txn_auto_retry
+
+> **Warning:**
+>
+> Starting from v8.0.0, this variable is deprecated, and TiDB no longer supports automatic retries of optimistic transactions. As an alternative, when encountering optimistic transaction conflicts, you can capture the error and retry transactions in your application, or use the [Pessimistic transaction mode](/pessimistic-transaction.md) instead.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -1757,6 +1806,31 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 > **Note:**
 >
 > Starting from v7.0.0, `tidb_dml_batch_size` no longer takes effect on the [`LOAD DATA` statement](/sql-statements/sql-statement-load-data.md).
+
+### tidb_dml_type <span class="version-mark">New in v8.0.0</span>
+
+> **Warning:**
+>
+> The bulk DML execution mode (`tidb_dml_type = "bulk"`) is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues). When TiDB performs large transactions using the bulk DML mode, it might affect the memory usage and execution efficiency of TiCDC, TiFlash, and the resolved-ts module of TiKV, and might cause OOM issues. Therefore, it is not recommended to use this mode when these components or features are enabled.
+
+- Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: String
+- Default value: `"standard"`
+- Value options: `"standard"`, `"bulk"`
+- This variable controls the execution mode of DML statements.
+    - `"standard"` indicates the standard DML execution mode, where TiDB transactions are cached in memory before being committed. This mode is suitable for high-concurrency transaction scenarios with potential conflicts and is the default recommended execution mode.
+    - `"bulk"` indicates the bulk DML execution mode, which is suitable for scenarios where a large amount of data is written, causing excessive memory usage in TiDB.
+        - During the execution of TiDB transactions, the data is not fully cached in the TiDB memory, but is continuously written to TiKV to reduce memory usage and smooth the write pressure.
+        - Only `INSERT`, `UPDATE`, `REPLACE`, and `DELETE` statements are affected by the `"bulk"` mode.
+        - `"bulk"` mode is only suitable for scenarios where a large amount of **data is written without conflicts**. This mode is not efficient for handling write conflicts, as write-write conflicts might cause large transactions to fail and be rolled back.
+        - `"bulk"` mode only takes effect on statements with auto-commit enabled, and requires the [`pessimistic-auto-commit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#pessimistic-auto-commit-new-in-v600) configuration item to be set to `false`.
+        - When using the `"bulk"` mode to execute statements, ensure that the [metadata lock](/metadata-lock.md) remains enabled during the execution process.
+        - `"bulk"` mode cannot be used on [temporary tables](/temporary-tables.md) and [cached tables](/cached-tables.md).
+        - `"bulk"` mode cannot be used on tables containing foreign keys and tables referenced by foreign keys when the foreign key constraint check is enabled (`foreign_key_checks = ON`).
+        - In situations that the environment does not support or is incompatible with the `"bulk"` mode, TiDB falls back to the `"standard"` mode and returns a warning message. To verify if the `"bulk"` mode is used, you can check the `pipelined` field using [`tidb_last_txn_info`](#tidb_last_txn_info-new-in-v409). A `true` value indicates that the `"bulk"` mode is used.
+        - When executing large transactions in the `"bulk"` mode, the transaction duration might be long. For transactions in this mode, the maximum TTL of the transaction lock is the greater value between [`max-txn-ttl`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#max-txn-ttl) and 24 hours. Additionally, if the transaction execution time exceeds the value set by [`tidb_gc_max_wait_time`](#tidb_gc_max_wait_time-new-in-v610), the GC might force a rollback of the transaction, leading to its failure.
+        - This mode is implemented by the Pipelined DML feature. For detailed design and GitHub issues, see [Pipelined DML](https://github.com/pingcap/tidb/blob/master/docs/design/2024-01-09-pipelined-DML.md) and [#50215](https://github.com/pingcap/tidb/issues/50215).
 
 ### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
 
@@ -1823,6 +1897,15 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `ON`
 - Determines whether TiDB automatically updates table statistics as a background operation.
 - This setting was previously a `tidb.toml` option (`performance.run-auto-analyze`), but changed to a system variable starting from TiDB v6.1.0.
+
+### tidb_enable_auto_analyze_priority_queue <span class="version-mark">New in v8.0.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `ON`
+- This variable is used to control whether to enable the priority queue to schedule the tasks of automatically collecting statistics. When this variable is enabled, TiDB prioritizes collecting statistics for tables that are more valuable to collect, such as newly created indexes and partitioned tables with partition changes. Additionally, TiDB prioritizes tables with lower health scores, placing them at the front of the queue.
 
 ### tidb_enable_auto_increment_in_generated
 
@@ -1913,7 +1996,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
-- This variable controls whether to record the execution information of each operator in the slow query log.
+- This variable controls whether to record the execution information of each operator in the slow query log and whether to record the [usage statistics of indexes](/information-schema/information-schema-tidb-index-usage.md).
 
 ### tidb_enable_column_tracking <span class="version-mark">New in v5.4.0</span>
 
@@ -1927,6 +2010,19 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether to enable TiDB to collect `PREDICATE COLUMNS`. After enabling the collection, if you disable it, the information of previously collected `PREDICATE COLUMNS` is cleared. For details, see [Collect statistics on some columns](/statistics.md#collect-statistics-on-some-columns).
+
+### tidb_enable_concurrent_hashagg_spill <span class="version-mark">New in v8.0.0</span>
+
+> **Warning:**
+>
+> Currently, the feature controlled by this variable is experimental. It is not recommended that you use it in production environments. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `ON`
+- This variable controls whether TiDB supports disk spill for the concurrent HashAgg algorithm. When it is `ON`, disk spill can be triggered for the concurrent HashAgg algorithm. This variable will be deprecated after this feature is generally available in a future release.
 
 ### tidb_enable_enhanced_security
 
@@ -2044,6 +2140,16 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether to enable GC-Aware memory track.
+
+### tidb_enable_global_index <span class="version-mark">New in v7.6.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- Possible values: `OFF`, `ON`
+- This variable controls whether to support creating `Global indexes` for partitioned tables. `Global index` is currently in the development stage. **It is not recommended to modify the value of this system variable**.
 
 ### tidb_enable_non_prepared_plan_cache
 
@@ -2612,7 +2718,7 @@ Query OK, 0 rows affected (0.09 sec)
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
-- This variable is used to enable the TSO Follower Proxy feature. When the value is `OFF`, TiDB only gets TSO from the PD leader. After this feature is enabled, TiDB gets TSO by evenly sending requests to all PD nodes and forwarding TSO requests through PD followers. This helps reduce the CPU pressure of PD leader.
+- This variable controls whether to enable the TSO Follower Proxy feature. When the value is `OFF`, TiDB only gets TSO from the PD leader. When the value is `ON`, TiDB evenly distributes requests for TSO to all PD servers, and PD followers can also handle TSO requests, thereby reducing the CPU pressure on the PD leader.
 - Scenarios for enabling TSO Follower Proxy:
     * Due to the high pressure of TSO requests, the CPU of the PD leader reaches a bottleneck, which causes high latency of TSO RPC requests.
     * The TiDB cluster has many TiDB instances, and increasing the value of [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v530) cannot alleviate the high latency issue of TSO RPC requests.
@@ -2811,6 +2917,10 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Possible values: `NO_PRIORITY`, `LOW_PRIORITY`, `HIGH_PRIORITY`, `DELAYED`
 - This variable is used to change the default priority for statements executed on a TiDB server. A use case is to ensure that a particular user that is performing OLAP queries receives lower priority than users performing OLTP queries.
 - The default value `NO_PRIORITY` means that the priority for statements is not forced to change.
+
+> **Note:**
+>
+> Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control.md) to manage resource usage for different SQL statements.
 
 ### tidb_gc_concurrency <span class="version-mark">New in v5.0</span>
 
@@ -3257,6 +3367,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
     - `start_ts`: The start timestamp of the transaction.
     - `for_update_ts`: The `for_update_ts` of the previously executed DML statement. This is an internal term of TiDB used for tests. Usually, you can ignore this information.
     - `error`: The error message, if any.
+    - `ru_consumption`: Consumed [RU](/tidb-resource-control.md#what-is-request-unit-ru) for executing the statement.
 
 ### tidb_last_txn_info <span class="version-mark">New in v4.0.9</span>
 
@@ -3303,6 +3414,17 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 </CustomContent>
 
+### `tidb_load_binding_timeout` <span class="version-mark">New in v8.0.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `200`
+- Range: `(0, 2147483647]`
+- Unit: Milliseconds
+- This variable is used to control the timeout of loading bindings. If the execution time of loading bindings exceeds this value, the loading will stop.
+
 ### `tidb_lock_unchanged_keys` <span class="version-mark">New in v7.1.1 and v7.3.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -3346,8 +3468,20 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
-- This variable is used to set whether to enable the low precision TSO feature. After this feature is enabled, new transactions use a timestamp updated every 2 seconds to read data.
+- This variable is used to set whether to enable the low-precision TSO feature. After this feature is enabled, TiDB uses the cached timestamp to read data. The cached timestamp is updated every 2 seconds by default. Starting from v8.0.0, you can configure the update interval by [`tidb_low_resolution_tso_update_interval`](#tidb_low_resolution_tso_update_interval-new-in-v800).
 - The main applicable scenario is to reduce the overhead of acquiring TSO for small read-only transactions when reading old data is acceptable.
+
+### `tidb_low_resolution_tso_update_interval` <span class="version-mark">New in v8.0.0</span>
+
+- Scope：GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type：Integer
+- Default value：`2000`
+- Range：`[10, 60000]`
+- Unit: Milliseconds
+- This variable is used to set the update interval of the cached timestamp used in the low-precision TSO feature, in milliseconds.
+- This variable is only available when [`tidb_low_resolution_tso`](#tidb_low_resolution_tso) is enabled.
 
 ### tidb_max_auto_analyze_time <span class="version-mark">New in v6.1.0</span>
 
@@ -3961,6 +4095,15 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `OFF`
 - This variable controls whether the non-recursive [Common Table Expressions (CTE)](/sql-statements/sql-statement-with.md) can be executed on TiFlash MPP. By default, when this variable is disabled, CTE is executed on TiDB, which has a large performance gap compared with enabling this feature.
 
+### tidb_opt_enable_fuzzy_binding <span class="version-mark">New in v7.6.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to enable the [Cross-database binding](/sql-plan-management.md#cross-database-binding) feature.
+
 ### tidb_opt_fix_control <span class="version-mark">New in v6.5.3 and v7.1.0</span>
 
 <CustomContent platform="tidb">
@@ -4099,6 +4242,110 @@ mysql> desc select count(distinct a) from test.t;
 - This variable controls the objective of the optimizer. `moderate` maintains the default behavior in versions prior to TiDB v7.4.0, where the optimizer tries to use more information to generate better execution plans. `determinate` mode tends to be more conservative and makes the execution plan more stable.
 - The real-time statistics are the total number of rows and the number of modified rows that are automatically updated based on DML statements. When this variable is set to `moderate` (default), TiDB generates the execution plan based on real-time statistics. When this variable is set to `determinate`, TiDB does not use real-time statistics for generating the execution plan, which will make execution plans more stable.
 - For long-term stable OLTP workload, or if the user is affirmative on the existing execution plans, it is recommended to use the `determinate` mode to reduce the possibility of unexpected execution plan changes. Additionally, you can use the [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md) to prevent the statistics from being modified and further stabilize the execution plan.
+
+### tidb_opt_ordering_index_selectivity_ratio <span class="version-mark">New in v8.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Float
+- Default value: `-1`
+- Range: `[-1, 1]`
+- This variable controls the estimated number of rows for an index that matches the SQL statement `ORDER BY` when there are `ORDER BY` and `LIMIT` clauses in a SQL statement, but does not cover some filter conditions.
+- This addresses the same query patterns as the system variable [tidb_opt_ordering_index_selectivity_threshold](#tidb_opt_ordering_index_selectivity_threshold-new-in-v700).
+- It differs in implementation by applying a ratio or percentage of the possible range that the qualified rows will be found.
+- A value of `-1` (default) or less than `0` disables this ratio. Any value between `0` and `1` applies a ratio of 0% to 100% (for example, `0.5` corresponds to `50%`).
+- In the following examples, the table `t` has a total of 1,000,000 rows. The same query is used, but different values for `tidb_opt_ordering_index_selectivity_ratio` are used. The query in the example contains a `WHERE` clause predicate that qualifies a small percentage of rows (9,000 out of 1,000,000). There is an index that supports the `ORDER BY a` (index `ia`), but the filter on `b` is not included in this index. Depending on the actual data distribution, the rows matching the `WHERE` clause and `LIMIT 1` might be found as the first row accessed when scanning the non-filtering index, or at worst, after nearly all the rows have been processed.
+- Each example uses an index hint to demonstrate the impact on estRows. The final plan selection depends on the availability and cost of other plans.
+- The first example uses the default value `-1`, which uses the existing estimation formula. By default, a small percentage of rows are scanned for estimation before the qualified rows are found.
+
+    ```sql
+    > SET SESSION tidb_opt_ordering_index_selectivity_ratio = -1;
+
+    > EXPLAIN SELECT * FROM t USE INDEX (ia) WHERE b <= 9000 ORDER BY a LIMIT 1;
+    +-----------------------------------+---------+-----------+-----------------------+---------------------------------+
+    | id                                | estRows | task      | access object         | operator info                   |
+    +-----------------------------------+---------+-----------+-----------------------+---------------------------------+
+    | Limit_12                          | 1.00    | root      |                       | offset:0, count:1               |
+    | └─Projection_22                   | 1.00    | root      |                       | test.t.a, test.t.b, test.t.c    |
+    |   └─IndexLookUp_21                | 1.00    | root      |                       |                                 |
+    |     ├─IndexFullScan_18(Build)     | 109.20  | cop[tikv] | table:t, index:ia(a)  | keep order:true                 |
+    |     └─Selection_20(Probe)         | 1.00    | cop[tikv] |                       | le(test.t.b, 9000)              |
+    |       └─TableRowIDScan_19         | 109.20  | cop[tikv] | table:t               | keep order:false                |
+    +-----------------------------------+---------+-----------+-----------------------+---------------------------------+
+    ```
+
+- The second example uses `0`, which assumes that 0% of rows will be scanned before the qualified rows are found. 
+
+    ```sql
+    > SET SESSION tidb_opt_ordering_index_selectivity_ratio = 0;
+
+    > EXPLAIN SELECT * FROM t USE INDEX (ia) WHERE b <= 9000 ORDER BY a LIMIT 1;
+    +-----------------------------------+---------+-----------+-----------------------+---------------------------------+
+    | id                                | estRows | task      | access object         | operator info                   |
+    +-----------------------------------+---------+-----------+-----------------------+---------------------------------+
+    | Limit_12                          | 1.00    | root      |                       | offset:0, count:1               |
+    | └─Projection_22                   | 1.00    | root      |                       | test.t.a, test.t.b, test.t.c    |
+    |   └─IndexLookUp_21                | 1.00    | root      |                       |                                 |
+    |     ├─IndexFullScan_18(Build)     | 1.00    | cop[tikv] | table:t, index:ia(a)  | keep order:true                 |
+    |     └─Selection_20(Probe)         | 1.00    | cop[tikv] |                       | le(test.t.b, 9000)              |
+    |       └─TableRowIDScan_19         | 1.00    | cop[tikv] | table:t               | keep order:false                |
+    +-----------------------------------+---------+-----------+-----------------------+---------------------------------+
+    ```
+
+- The third example uses `0.1`, which assumes that 10% of rows will be scanned before the qualified rows are found. This condition is highly selective, with only 1% of rows meeting the condition. Therefore, in the worst-case scenario, it might be necessary to scan 99% of rows before finding the 1% that qualify. 10% of that 99% is approximately 9.9%, which is reflected in the estRows.
+
+    ```sql
+    > SET SESSION tidb_opt_ordering_index_selectivity_ratio = 0.1;
+
+    > EXPLAIN SELECT * FROM t USE INDEX (ia) WHERE b <= 9000 ORDER BY a LIMIT 1;
+    +-----------------------------------+----------+-----------+-----------------------+---------------------------------+
+    | id                                | estRows  | task      | access object         | operator info                   |
+    +-----------------------------------+----------+-----------+-----------------------+---------------------------------+
+    | Limit_12                          | 1.00     | root      |                       | offset:0, count:1               |
+    | └─Projection_22                   | 1.00     | root      |                       | test.t.a, test.t.b, test.t.c    |
+    |   └─IndexLookUp_21                | 1.00     | root      |                       |                                 |
+    |     ├─IndexFullScan_18(Build)     | 99085.21 | cop[tikv] | table:t, index:ia(a)  | keep order:true                 |
+    |     └─Selection_20(Probe)         | 1.00     | cop[tikv] |                       | le(test.t.b, 9000)              |
+    |       └─TableRowIDScan_19         | 99085.21 | cop[tikv] | table:t               | keep order:false                |
+    +-----------------------------------+----------+-----------+-----------------------+---------------------------------+
+    ```
+
+- The fourth example uses `1.0`, which assumes that 100% of rows will be scanned before the qualified rows are found.
+
+    ```sql
+    > SET SESSION tidb_opt_ordering_index_selectivity_ratio = 1;
+
+    > EXPLAIN SELECT * FROM t USE INDEX (ia) WHERE b <= 9000 ORDER BY a LIMIT 1;
+    +-----------------------------------+-----------+-----------+-----------------------+---------------------------------+
+    | id                                | estRows   | task      | access object         | operator info                   |
+    +-----------------------------------+-----------+-----------+-----------------------+---------------------------------+
+    | Limit_12                          | 1.00      | root      |                       | offset:0, count:1               |
+    | └─Projection_22                   | 1.00      | root      |                       | test.t.a, test.t.b, test.t.c    |
+    |   └─IndexLookUp_21                | 1.00      | root      |                       |                                 |
+    |     ├─IndexFullScan_18(Build)     | 990843.14 | cop[tikv] | table:t, index:ia(a)  | keep order:true                 |
+    |     └─Selection_20(Probe)         | 1.00      | cop[tikv] |                       | le(test.t.b, 9000)              |
+    |       └─TableRowIDScan_19         | 990843.14 | cop[tikv] | table:t               | keep order:false                |
+    +-----------------------------------+-----------+-----------+-----------------------+---------------------------------+
+    ```
+
+- The fifth example also uses `1.0`, but adds a predicate on `a`, limiting the scan range in the worst-case scenario. This is because `WHERE a <= 9000` matches the index, with approximately 9,000 rows would qualify. Given that the filter predicate on `b` is not in the index, all the approximately 9,000 rows are considered to be scanned before finding a row that matches `b <= 9000`.
+
+    ```sql
+    > SET SESSION tidb_opt_ordering_index_selectivity_ratio = 1;
+
+    > EXPLAIN SELECT * FROM t USE INDEX (ia) WHERE a <= 9000 AND b <= 9000 ORDER BY a LIMIT 1;
+    +------------------------------------+---------+-----------+-----------------------+------------------------------------+
+    | id                                 | estRows | task      | access object         | operator info                      |
+    +------------------------------------+---------+-----------+-----------------------+------------------------------------+
+    | Limit_12                           | 1.00    | root      |                       | offset:0, count:1                  |
+    | └─Projection_22                    | 1.00    | root      |                       | test.t.a, test.t.b, test.t.c       |
+    |   └─IndexLookUp_21                 | 1.00    | root      |                       |                                    |
+    |     ├─IndexRangeScan_18(Build)     | 9074.99 | cop[tikv] | table:t, index:ia(a)  | range:[-inf,9000], keep order:true |
+    |     └─Selection_20(Probe)          | 1.00    | cop[tikv] |                       | le(test.t.b, 9000)                 |
+    |       └─TableRowIDScan_19          | 9074.99 | cop[tikv] | table:t               | keep order:false                   |
+    +------------------------------------+---------+-----------+-----------------------+------------------------------------+
+    ```
 
 ### tidb_opt_ordering_index_selectivity_threshold <span class="version-mark">New in v7.0.0</span>
 
@@ -4431,6 +4678,14 @@ SHOW WARNINGS;
 - Default value: `24.0`
 - Indicates the concurrency number of TiFlash computation. This variable is internally used in the Cost Model, and it is NOT recommended to modify its value.
 
+### tidb_opt_use_invisible_indexes <span class="version-mark">New in v8.0.0</span>
+
+- Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether the optimizer can select [invisible indexes](/sql-statements/sql-statement-create-index.md#invisible-index) for query optimization in the current session. Invisible indexes are maintained by DML statements, but will not be used by the query optimizer. This is useful in scenarios where you want to double-check before removing an index permanently. When the variable is set to `ON`, the optimizer can select invisible indexes for query optimization in the session.
+
 ### tidb_opt_write_row_id
 
 > **Note:**
@@ -4520,8 +4775,8 @@ SHOW WARNINGS;
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
-- Default value: `2097152` (which is 2 MB)
-- Range: `[0, 9223372036854775807]`, in bytes. The memory format with the units "KB|MB|GB|TB" is also supported. `0` means no limit.
+- Default value: `2097152` (which is 2 MiB)
+- Range: `[0, 9223372036854775807]`, in bytes. The memory format with the units "KiB|MiB|GiB|TiB" is also supported. `0` means no limit.
 - This variable controls the maximum size of a plan that can be cached in prepared or non-prepared plan cache. If the size of a plan exceeds this value, the plan will not be cached. For more details, see [Memory management of prepared plan cache](/sql-prepared-plan-cache.md#memory-management-of-prepared-plan-cache) and [Non-prepared plan cache](/sql-plan-management.md#usage).
 
 ### tidb_pprof_sql_cpu <span class="version-mark">New in v4.0</span>
@@ -4672,10 +4927,17 @@ SHOW WARNINGS;
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
+- Type: Enumeration
 - Default value: `OFF`
-- This variable controls whether to hide user information in the SQL statement being recorded into the TiDB log and slow log.
-- When you set the variable to `1`, user information is hidden. For example, if the executed SQL statement is `insert into t values (1,2)`, the statement is recorded as `insert into t values (?,?)` in the log.
+- Possible values: `OFF`, `ON`, `MARKER`
+- This variable controls whether to hide the user information in the SQL statement being recorded into the TiDB log and slow log.
+- The default value is `OFF`, which means that the user information is not processed in any way.
+- When you set the variable to `ON`, the user information is hidden. For example, if the executed SQL statement is `INSERT INTO t VALUES (1,2)`, the statement is recorded as `INSERT INTO t VALUES (?,?)` in the log.
+- When you set the variable to `MARKER`, the user information is wrapped in `‹ ›`. For example, if the executed SQL statement is `INSERT INTO t VALUES (1,2)`, the statement is recorded as `INSERT INTO t VALUES (‹1›,‹2›)` in the log. If the input has `‹`, it is escaped as `‹‹`, and `›` is escaped as `››`. Based on the marked logs, you can decide whether to desensitize the marked information when the logs are displayed.
+
+> **Warning:**
+>
+> The `MARKER` option is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 ### tidb_regard_null_as_point <span class="version-mark">New in v5.4.0</span>
 
@@ -4803,6 +5065,20 @@ SHOW WARNINGS;
 - By default, Regions are split for a new table when it is being created in TiDB. After this variable is enabled, the newly split Regions are scattered immediately during the execution of the `CREATE TABLE` statement. This applies to the scenario where data need to be written in batches right after the tables are created in batches, because the newly split Regions can be scattered in TiKV beforehand and do not have to wait to be scheduled by PD. To ensure the continuous stability of writing data in batches, the `CREATE TABLE` statement returns success only after the Regions are successfully scattered. This makes the statement's execution time multiple times longer than that when you disable this variable.
 - Note that if `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` have been set when a table is created, the specified number of Regions are evenly split after the table creation.
 
+### tidb_schema_cache_size <span class="version-mark">New in v8.0.0</span>
+
+> **Warning:**
+>
+> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 9223372036854775807]`
+- This variable controls the size of the schema cache in TiDB. The unit is byte. The default value is `0`, which means that the cache limit feature is not enabled. When this feature is enabled, TiDB uses the value you set as the maximum available memory limit, and uses the Least Recently Used (LRU) algorithm to cache the required tables, effectively reducing the memory occupied by the schema information.
+
 ### tidb_schema_version_cache_limit <span class="version-mark">New in v7.4.0</span>
 
 - Scope: GLOBAL
@@ -4826,8 +5102,8 @@ SHOW WARNINGS;
 - Default value: `80%`
 - Range:
     - You can set the value in the percentage format, which means the percentage of the memory usage relative to the total memory. The value range is `[1%, 99%]`.
-    - You can also set the value in memory size. The value range is `0` and `[536870912, 9223372036854775807]` in bytes. The memory format with the units "KB|MB|GB|TB" is supported. `0` means no memory limit.
-    - If this variable is set to a memory size that is less than 512 MB but not `0`, TiDB uses 512 MB as the actual size.
+    - You can also set the value in memory size. The value range is `0` and `[536870912, 9223372036854775807]` in bytes. The memory format with the units "KiB|MiB|GiB|TiB" is supported. `0` means no memory limit.
+    - If this variable is set to a memory size that is less than 512 MiB but not `0`, TiDB uses 512 MiB as the actual size.
 - This variable specifies the memory limit for a TiDB instance. When the memory usage of TiDB reaches the limit, TiDB cancels the currently running SQL statement with the highest memory usage. After the SQL statement is successfully canceled, TiDB tries to call Golang GC to immediately reclaim memory to relieve memory stress as soon as possible.
 - Only the SQL statements with more memory usage than the [`tidb_server_memory_limit_sess_min_size`](/system-variables.md#tidb_server_memory_limit_sess_min_size-new-in-v640) limit are selected as the SQL statements to be canceled first.
 - Currently, TiDB cancels only one SQL statement at a time. After TiDB completely cancels a SQL statement and recovers resources, if the memory usage is still greater than the limit set by this variable, TiDB starts the next cancel operation.
@@ -4854,8 +5130,8 @@ SHOW WARNINGS;
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `134217728` (which is 128 MB)
-- Range: `[128, 9223372036854775807]`, in bytes. The memory format with the units "KB|MB|GB|TB" is also supported.
+- Default value: `134217728` (which is 128 MiB)
+- Range: `[128, 9223372036854775807]`, in bytes. The memory format with the units "KiB|MiB|GiB|TiB" is also supported.
 - After you enable the memory limit, TiDB will terminate the SQL statement with the highest memory usage on the current instance. This variable specifies the minimum memory usage of the SQL statement to be terminated. If the memory usage of a TiDB instance that exceeds the limit is caused by too many sessions with low memory usage, you can properly lower the value of this variable to allow more sessions to be canceled.
 
 ### tidb_service_scope <span class="version-mark">New in v7.4.0</span>
@@ -4875,6 +5151,7 @@ SHOW WARNINGS;
 > **Note:**
 >
 > - If `tidb_service_scope` is not set for any TiDB node in a cluster, the DXF schedules all TiDB nodes to execute background tasks. If you are concerned about performance impact on current business, you can set `tidb_service_scope` to `background` for a few of the TiDB nodes. Only those nodes will execute background tasks.
+> - In a cluster with several TiDB nodes, it is strongly recommended to set this system variable to `background` on two or more TiDB nodes. If `tidb_service_scope` is set on a single TiDB node only, when the node is restarted or fails, the task will be rescheduled to other TiDB nodes that lack the `background` setting, which will affect these TiDB nodes.
 > - For newly scaled nodes, the DXF tasks are not executed by default to avoid consuming the resources of the scaled node. If you want this scaled node to execute background tasks, you need to manually set `tidb_service_scop` of this node to `background`.
 
 ### tidb_session_alias <span class="version-mark">New in v7.4.0</span>
@@ -5040,6 +5317,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
+- Unit: Byte
 - Default value: `0`, which means that the memory quota is automatically set to half of the total memory size of the TiDB instance.
 - Range: `[0, 1099511627776]`
 - This variable sets the memory quota for the TiDB statistics cache.
@@ -5239,16 +5517,17 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Integer
 - Default value: `4096`
 - Range: `[0, 2147483647]`
+- Unit: Bytes
 
 <CustomContent platform="tidb">
 
-- This variable is used to control the length of the SQL string in [statement summary tables](/statement-summary-tables.md), the [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md) table, and the [TiDB Dashboard](/dashboard/dashboard-intro.md).
+- This variable is used to control the length of the SQL string in [statement summary tables](/statement-summary-tables.md) and the [TiDB Dashboard](/dashboard/dashboard-intro.md).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- This variable is used to control the length of the SQL string in [statement summary tables](/statement-summary-tables.md) and the [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md) table.
+- This variable is used to control the length of the SQL string in [statement summary tables](/statement-summary-tables.md).
 
 </CustomContent>
 
@@ -5350,7 +5629,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `1`
-- Range: `[1, 256]`
+- Range: `[1, 4294967295]`. The maximum value for v7.5.0 and earlier versions is `256`.
 - This variable is used to set the concurrency of scan operations performed when TiDB executes internal SQL statements (such as an automatic update of statistics).
 
 ### tidb_table_cache_lease <span class="version-mark">New in v6.0.0</span>
@@ -5619,7 +5898,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 <CustomContent platform="tidb-cloud">
 
-- This variable is used to control the batch size of transaction commit requests that TiDB sends to TiKV. If most of the transactions in the application workload have a large number of write operations, adjusting this variable to a larger value can improve the performance of batch processing. However, if this variable is set to too large a value and exceeds the limit of TiKV's maximum size of a single log (which is 8 MB by default), the commits might fail.
+- This variable is used to control the batch size of transaction commit requests that TiDB sends to TiKV. If most of the transactions in the application workload have a large number of write operations, adjusting this variable to a larger value can improve the performance of batch processing. However, if this variable is set to too large a value and exceeds the limit of TiKV's maximum size of a single log (which is 8 MiB by default), the commits might fail.
 
 </CustomContent>
 
@@ -5747,7 +6026,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - When the window function is pushed down to TiFlash for execution, you can use this variable to control the concurrency level of the window function execution. The possible values are as follows:
 
     * -1: the Fine Grained Shuffle feature is disabled. The window function pushed down to TiFlash is executed in a single thread.
-    * 0: the Fine Grained Shuffle feature is enabled. If [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610) is set to a valid value (greater than 0), then `tiflash_fine_grained_shuffle_stream_count` is set to the value of [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610). Otherwise, it is set to 8. The actual concurrency level of the window function on TiFlash is: min(`tiflash_fine_grained_shuffle_stream_count`, the number of physical threads on TiFlash nodes).
+    * 0: the Fine Grained Shuffle feature is enabled. If [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610) is set to a valid value (greater than 0), then `tiflash_fine_grained_shuffle_stream_count` is set to the value of [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610). Otherwise, it is automatically estimated based on the CPU resources of the TiFlash compute node. The actual concurrency level of the window function on TiFlash is: min(`tiflash_fine_grained_shuffle_stream_count`, the number of physical threads on TiFlash nodes).
     * Integer greater than 0: the Fine Grained Shuffle feature is enabled. The window function pushed down to TiFlash is executed in multiple threads. The concurrency level is: min(`tiflash_fine_grained_shuffle_stream_count`, the number of physical threads on TiFlash nodes).
 - Theoretically, the performance of the window function increases linearly with this value. However, if the value exceeds the actual number of physical threads, it instead leads to performance degradation.
 
@@ -5979,7 +6258,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Scope: NONE
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `8.0.11-TiDB-`(tidb version)
-- This variable returns the MySQL version, followed by the TiDB version. For example '8.0.11-TiDB-v7.5.0'.
+- This variable returns the MySQL version, followed by the TiDB version. For example '8.0.11-TiDB-v8.0.0'.
 
 ### version_comment
 

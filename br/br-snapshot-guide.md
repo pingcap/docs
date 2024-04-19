@@ -1,6 +1,6 @@
 ---
 title: Snapshot Backup and Restore Guide
-summary: Learn about how to back up and restore TiDB snapshots using the br command-line tool.
+summary: This document describes how to back up and restore TiDB snapshots using the br command-line tool. It includes instructions for snapshot backup, restoring data of a specified time point, and restoring a database or table. The document also covers the performance and impact of snapshot backup and restore.
 aliases: ['/tidb/dev/br-usage-backup/','/tidb/dev/br-usage-restore/','/tidb/dev/br-usage-restore-for-maintain/', '/tidb/dev/br-usage-backup-for-maintain/']
 ---
 
@@ -62,6 +62,12 @@ The output is as follows, corresponding to the physical time `2022-09-08 13:30:0
 
 ## Restore cluster snapshots
 
+> **Note:**
+>
+> - For BR v7.5.0 and earlier versions, the snapshot restore speed per TiKV node is approximately 100 MiB/s.
+> - Starting from BR v7.6.0, to address potential restore bottlenecks in scenarios with large-scale Regions, BR supports accelerating restore through the coarse-grained Region scattering algorithm (experimental). You can enable this feature by specifying the command-line parameter `--granularity="coarse-grained"`.
+> - Starting from BR v8.0.0, the snapshot restore through the coarse-grained Region scattering algorithm is generally available (GA) and enabled by default. BR improves the snapshot restore speed significantly by implementing various optimizations such as adopting the coarse-grained Region scattering algorithm, creating databases and tables in batches, reducing the mutual impact between SST file downloads and ingest operations, and accelerating the restore of table statistics. According to test results from real-world cases, the SST file download speed for snapshot restore is improved by approximately up to 10 times, the data restore speed per TiKV node stabilizes at 1.2 GiB/s, the end-to-end restore speed is improved by approximately 1.5 to 3 times, and 100 TiB of data can be restored within one hour.
+
 You can restore a snapshot backup by running the `br restore full` command. Run `br restore full --help` to see the help information:
 
 The following example restores the [preceding backup snapshot](#back-up-cluster-snapshots) to a target cluster:
@@ -70,6 +76,12 @@ The following example restores the [preceding backup snapshot](#back-up-cluster-
 tiup br restore full --pd "${PD_IP}:2379" \
 --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```
+
+> **Warning:**
+> 
+> The coarse-grained Region scatter algorithm (enabled by setting `--granularity="coarse-grained"`) is experimental. It is recommended that you use this feature to accelerate data recovery in clusters with up to 1,000 tables. Note that this feature does not support checkpoint restore.
+
+To further improve the restore speed of large clusters, starting from v7.6.0, BR supports a coarse-grained Region scatter algorithm (experimental) for faster parallel recovery. You can enable this algorithm by specifying `--granularity="coarse-grained"`. After it is enabled, BR can quickly split the restore task into a large number of small tasks and scatter them to all TiKV nodes in batches, thus fully utilizing the resources of each TiKV node for fast recovery in parallel.
 
 During restore, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the restore task is completed and statistics such as total restore time, average restore speed, and total data size are displayed.
 
@@ -121,7 +133,9 @@ tiup br restore full \
 
 ### Restore tables in the `mysql` schema
 
-Starting from BR v5.1.0, when you back up snapshots, BR backs up the **system tables** in the `mysql` schema and does not restore them by default. Starting from BR v6.2.0, BR restores **data in some system tables** if you configure `--with-sys-table`.
+- Starting from BR v5.1.0, when you back up snapshots, BR automatically backs up the **system tables** in the `mysql` schema, but does not restore these system tables by default. 
+- Starting from v6.2.0, BR lets you specify `--with-sys-table` to restore **data in some system tables**. 
+- Starting from v7.6.0, BR enables `--with-sys-table` by default, which means that BR restores **data in some system tables** by default.
 
 **BR can restore data in the following system tables:**
 
@@ -169,7 +183,7 @@ Starting from BR v5.1.0, when you back up snapshots, BR backs up the **system ta
 
 When you restore data related to system privilege, note the following:
 
-- BR does not restore user data with `user` as `cloud_admin` and `host` as `'%'`. This user is reserved for TiDB Cloud. Do not create a user or role named `cloud_admin` in your cluster, because the user privileges related to `cloud_admin` cannot be restored correctly.
+- Before v7.6.0, BR does not restore user data with `user` as `cloud_admin` and `host` as `'%'`. This user is reserved for TiDB Cloud. Starting from v7.6.0, BR supports restoring all user data (including `cloud_admin`) by default.
 - Before restoring data, BR checks whether the system tables in the target cluster are compatible with those in the backup data. "Compatible" means that all the following conditions are met:
 
     - The target cluster has the same system tables as the backup data.
@@ -200,6 +214,24 @@ The impact of backup on cluster performance can be reduced by limiting the backu
 
 - During data restore, TiDB tries to fully utilize the TiKV CPU, disk IO, and network bandwidth resources. Therefore, it is recommended to restore the backup data on an empty cluster to avoid affecting the running applications.
 - The speed of restoring backup data is much related with the cluster configuration, deployment, and running applications. In internal tests, the restore speed of a single TiKV node can reach 100 MiB/s. The performance and impact of snapshot restore are varied in different user scenarios and should be tested in actual environments.
+- BR provides a coarse-grained Region scattering algorithm to accelerate Region restore in large-scale Region scenarios. The algorithm is controlled by the command-line parameter `--granularity="coarse-grained"` and is enabled by default. This algorithm ensures that each TiKV node receives stable and evenly distributed download tasks, thus fully utilizing the resources of each TiKV node and achieving a rapid parallel recovery. In several real-world cases, the snapshot restore speed of the cluster is improved by about 3 times in large-scale Region scenarios. The following is an example:
+
+    ```bash
+    br restore full \
+    --pd "${PDIP}:2379" \
+    --storage "s3://${Bucket}/${Folder}" \
+    --s3.region "${region}" \
+    --granularity "coarse-grained" \
+    --send-credentials-to-tikv=true \
+    --log-file restorefull.log
+    ```
+
+- Starting from v8.0.0, the `br` command-line tool introduces the `--tikv-max-restore-concurrency` parameter to control the maximum number of files that BR downloads and ingests per TiKV node. By configuring this parameter, you can also control the maximum length of the job queue (the maximum length of the job queue = 32 \* the number of TiKV nodes \* `--tikv-max-restore-concurrency`), thereby controlling the memory consumption of the BR node.
+
+    In normal cases, `--tikv-max-restore-concurrency` is automatically adjusted based on the cluster configuration, so manual configuration is unnecessary. If the **TiKV-Details** > **Backup & Import** > **Import RPC count** monitoring metric in Grafana shows that the number of files BR downloads remains close to 0 for a long time while the number of files that BR ingests consistently reaches the upper limit, it indicates that ingesting file tasks pile up and the job queue has reached its maximum length. In this case, you can take the following measures to alleviate the task pilling-up issue:
+
+    - Set the `--ratelimit` parameter to limit the download speed, ensuring sufficient resources for ingesting file tasks. For example, if the disk throughput of any TiKV node is `x MiB/s` and the network bandwidth for downloading backup files exceeds `x/2 MiB/s`, you can set the parameter as `--ratelimit x/2`. If the disk throughput of any TiKV node is `x MiB/s` and the network bandwidth for downloading backup files is less than or equal to `x/2 MiB/s`, you can leave the parameter `--ratelimit` unset.
+    - Increase the `--tikv-max-restore-concurrency` to increase the maximum length of the job queue.
 
 ## See also
 

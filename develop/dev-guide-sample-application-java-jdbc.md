@@ -1,6 +1,7 @@
 ---
 title: Connect to TiDB with JDBC
 summary: Learn how to connect to TiDB using JDBC. This tutorial gives Java sample code snippets that work with TiDB using JDBC.
+aliases: ['/tidb/dev/sample-application-java','/tidb/dev/dev-guide-sample-application-java']
 ---
 
 # Connect to TiDB with JDBC
@@ -35,6 +36,10 @@ To complete this tutorial, you need:
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> For security considerations, it is recommended that you use `VERIFY_IDENTITY` to establish TLS connections to TiDB clusters when connecting over the internet. Both TiDB Serverless and TiDB Dedicated use Subject Alternative Name (SAN) certificates, which require MySQL Connector/J version to be greater than or equal to [8.0.22](https://dev.mysql.com/doc/relnotes/connector-j/8.0/en/news-8-0-22.html).
 
 **If you don't have a TiDB cluster, you can create one as follows:**
 

@@ -1,6 +1,6 @@
 ---
 title: Backup Storages
-summary: Describes the storage URI format used in TiDB backup and restore.
+summary: TiDB supports backup storage to Amazon S3, Google Cloud Storage, Azure Blob Storage, and NFS. You can specify the URI and authentication for different storage services. BR sends credentials to TiKV by default when using S3, GCS, or Azure Blob Storage. You can disable this for cloud environments. The URI format for each storage service is specified, along with authentication methods. Server-side encryption is supported for Amazon S3 and Azure Blob Storage. BR v6.3.0 also supports AWS S3 Object Lock.
 aliases: ['/docs/dev/br/backup-and-restore-storages/','/tidb/dev/backup-storage-S3/','/tidb/dev/backup-storage-azblob/','/tidb/dev/backup-storage-gcs/','/tidb/dev/external-storage/']
 ---
 
@@ -32,59 +32,13 @@ BACKUP DATABASE * TO 's3://bucket-name/prefix' SEND_CREDENTIALS_TO_TIKV = FALSE;
 
 ### URI format description
 
-This section describes the URI format of the storage services:
+The URI format of the external storage service is as follows:
 
 ```shell
 [scheme]://[host]/[path]?[parameters]
 ```
 
-<SimpleTab groupId="storage">
-<div label="Amazon S3" value="amazon">
-
-- `scheme`: `s3`
-- `host`: `bucket name`
-- `parameters`:
-
-    - `access-key`: Specifies the access key.
-    - `secret-access-key`: Specifies the secret access key.
-    - `session-token`: Specifies the temporary session token. BR does not support this parameter yet.
-    - `use-accelerate-endpoint`: Specifies whether to use the accelerate endpoint on Amazon S3 (defaults to `false`).
-    - `endpoint`: Specifies the URL of custom endpoint for S3-compatible services (for example, `<https://s3.example.com/>`).
-    - `force-path-style`: Use path style access rather than virtual hosted style access (defaults to `true`).
-    - `storage-class`: Specifies the storage class of the uploaded objects (for example, `STANDARD` or `STANDARD_IA`).
-    - `sse`: Specifies the server-side encryption algorithm used to encrypt the uploaded objects (value options: ``, `AES256`, or `aws:kms`).
-    - `sse-kms-key-id`: Specifies the KMS ID if `sse` is set to `aws:kms`.
-    - `acl`: Specifies the canned ACL of the uploaded objects (for example, `private` or `authenticated-read`).
-    - `role-arn`: When you need to access Amazon S3 data from a third party using a specified [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html), you can specify the corresponding [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the IAM role with the `role-arn` URL query parameter, such as `arn:aws:iam::888888888888:role/my-role`. For more information about using an IAM role to access Amazon S3 data from a third party, see [AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html).
-    - `external-id`: When you access Amazon S3 data from a third party, you might need to specify a correct [external ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html) to assume [the IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html). In this case, you can use this `external-id` URL query parameter to specify the external ID and make sure that you can assume the IAM role. An external ID is an arbitrary string provided by the third party together with the IAM role ARN to access the Amazon S3 data. Providing an external ID is optional when assuming an IAM role, which means if the third party does not require an external ID for the IAM role, you can assume the IAM role and access the corresponding Amazon S3 data without providing this parameter.
-
-</div>
-<div label="GCS" value="gcs">
-
-- `scheme`: `gcs` or `gs`
-- `host`: `bucket name`
-- `parameters`:
-
-    - `credentials-file`: Specifies the path to the credentials JSON file on the migration tool node.
-    - `storage-class`: Specifies the storage class of the uploaded objects (for example, `STANDARD` or `COLDLINE`)
-    - `predefined-acl`: Specifies the predefined ACL of the uploaded objects (for example, `private` or `project-private`)
-
-</div>
-<div label="Azure Blob Storage" value="azure">
-
-- `scheme`: `azure` or `azblob`
-- `host`: `container name`
-- `parameters`:
-
-    - `account-name`: Specifies the account name of the storage.
-    - `account-key`: Specifies the access key.
-    - `sas-token`: Specifies the shared access signature (SAS) token.
-    - `access-tier`: Specifies the access tier of the uploaded objects, for example, `Hot`, `Cool`, or `Archive`. The default value is the default access tier of the storage account.
-    - `encryption-scope`: Specifies the [encryption scope](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-scope-manage?tabs=powershell#upload-a-blob-with-an-encryption-scope) for server-side encryption.
-    - `encryption-key`: Specifies the [encryption key](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-customer-provided-keys) for server-side encryption, which uses the AES256 encryption algorithm.
-
-</div>
-</SimpleTab>
+For more information about the URI format, see [URI Formats of External Storage Services](/external-storage-uri.md).
 
 ### URI examples
 
@@ -153,8 +107,8 @@ When storing backup data in a cloud storage system, you need to configure authen
 
 Before backup, configure the following privileges to access the backup directory on S3.
 
-- Minimum privileges for TiKV and Backup & Restore (BR) to access the backup directories during backup: `s3:ListBucket`, `s3:PutObject`, and `s3:AbortMultipartUpload`
-- Minimum privileges for TiKV and BR to access the backup directories during restore: `s3:ListBucket`, `s3:GetObject`, and `s3:PutObject`. BR writes checkpoint information to the `./checkpoints` subdirectory under the backup directory. When restoring log backup data, BR writes the table ID mapping relationship of the restored cluster to the `./pitr_id_maps` subdirectory under the backup directory.
+- Minimum privileges for TiKV and Backup & Restore (BR) to access the backup directories during backup: `s3:ListBucket`, `s3:GetObject`, `s3:DeleteObject`, `s3:PutObject`, and `s3:AbortMultipartUpload`
+- Minimum privileges for TiKV and BR to access the backup directories during restore: `s3:ListBucket`, `s3:GetObject`, `s3:DeleteObject`, and `s3:PutObject`. BR writes checkpoint information to the `./checkpoints` subdirectory under the backup directory. When restoring log backup data, BR writes the table ID mapping relationship of the restored cluster to the `./pitr_id_maps` subdirectory under the backup directory.
 
 If you have not yet created a backup directory, refer to [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) to create an S3 bucket in the specified region. If necessary, you can also create a folder in the bucket by referring to [Create a folder](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
 
@@ -260,4 +214,10 @@ BR supports specifying the Azure server-side encryption scope or providing the e
 
 ## Other features supported by the storage service
 
-BR v6.3.0 supports AWS [S3 Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html). You can enable this feature to prevent backup data from being tampered with or deleted.
+Amazon [S3 Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html) can help prevent backup data from accidental or intentional deletion during a specified retention period, enhancing the security and integrity of data. Starting from v6.3.0, BR supports Amazon S3 Object Lock for snapshot backups, adding an additional layer of security for full backups. Starting from v8.0.0, PITR also supports Amazon S3 Object Lock. Whether for full backups or log data backups, the Object Lock feature ensures more reliable data protection, further strengthening the security of data backup and recovery and meeting regulatory requirements.
+
+BR and PITR automatically detect whether the Amazon S3 Object Lock feature is enabled or disabled. You do not need to perform any additional operations.
+
+> **Warning:**
+>
+> If the Object Lock feature is enabled during the snapshot backup or PITR log backup process, the snapshot backup or log backup might fail. You need to restart the snapshot backup or PITR log backup task to continue the backup.

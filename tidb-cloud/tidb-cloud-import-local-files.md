@@ -98,7 +98,7 @@ CREATE TABLE `import_test` (
 LOAD DATA LOCAL INFILE 'load.txt' INTO TABLE import_test FIELDS TERMINATED BY ',' (name, address);
 ```
 
-If you use `mysql` and encounter `ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.`, you can add `--local-infile=true` in the connection string.
+If you use the `mysql` command-line client and encounter `ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.`, you can add `--local-infile=true` in the connection string.
 
 ### Why can't I query a column with a reserved keyword after importing data into TiDB Cloud?
 
@@ -116,7 +116,8 @@ n=$1
 file_path=$2
 file_extension="${file_path##*.}"
 file_name="${file_path%.*}"
-lines_per_file=$(( $(wc -l < $file_path) / $n ))
+total_lines=$(wc -l < $file_path)
+lines_per_file=$(( (total_lines + n - 1) / n ))
 split -d -a 1 -l $lines_per_file $file_path $file_name.
 for (( i=0; i<$n; i++ ))
 do
