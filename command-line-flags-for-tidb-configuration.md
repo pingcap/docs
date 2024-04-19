@@ -219,6 +219,12 @@ When you start the TiDB cluster, you can use command-line options or environment
 + Sets the CPU affinity of TiDB servers, which is separated by commas. For example, "1,2,3".
 + Default: `""`
 
+## `--redact`
+
++ Determines whether to enable TiDB server to desensitize log files.
++ Default: false
++ You can use `./tidb-server --redact=xxx collect-log <input> <output>` to desensitize or restore the `<input>` log file and output it to `<output>`. When the value is `true`, TiDB desensitizes the log file. When it is `false`, TiDB restores the log file. For more information, see the system variable [`tidb_redact_log`](/system-variables.md#tidb_redact_log).
+
 ## `--repair-mode`
 
 + Determines whether to enable the repair mode, which is only used in the data repair scenario.
