@@ -26,6 +26,8 @@ If you need longer read time temporarily in some cases, you can increase the ret
 
 Note that the system variable configuration takes effect globally and immediately. Increasing its value will increase the life time of all existing snapshots, and decreasing it will immediately shorten the life time of all snapshots. Too many MVCC versions will impact the performance of the TiDB cluster. So you need to change this variable back to the previous setting in time.
 
+<CustomContent platform="tidb">
+
 > **Tip:**
 >
 > Specifically, when Dumpling is exporting data from TiDB (less than 1 TB), if the TiDB version is later than or equal to v4.0.0 and Dumpling can access the PD address of the TiDB cluster, Dumpling automatically extends the GC time without affecting the original cluster.
@@ -38,6 +40,25 @@ Note that the system variable configuration takes effect globally and immediatel
 > In such scenarios, you must manually extend the GC time in advance to avoid export failure due to GC during the export process.
 >
 > For more details, see [Manually set the TiDB GC time](/dumpling-overview.md#manually-set-the-tidb-gc-time).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Tip:**
+>
+> Specifically, when Dumpling is exporting data from TiDB (less than 1 TB), if the TiDB version is later than or equal to v4.0.0 and Dumpling can access the PD address of the TiDB cluster, Dumpling automatically extends the GC time without affecting the original cluster.
+>
+> However, in either of the following scenarios, Dumpling cannot automatically adjust the GC time:
+>
+> - The data size is very large (more than 1 TB).
+> - Dumpling cannot connect directly to PD, for example, the TiDB cluster is on TiDB Cloud or on Kubernetes that is separated from Dumpling.
+>
+> In such scenarios, you must manually extend the GC time in advance to avoid export failure due to GC during the export process.
+>
+> For more details, see [Manually set the TiDB GC time](https://docs.pingcap.com/tidb/stable/dumpling-overview#manually-set-the-tidb-gc-time).
+
+</CustomContent>
 
 For more information about GC, see [GC Overview](/garbage-collection-overview.md).
 
