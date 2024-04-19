@@ -15,16 +15,19 @@ SelectStmt ::=
     ( SelectStmtBasic | SelectStmtFromDualTable | SelectStmtFromTable )
     OrderBy? SelectStmtLimit? SelectLockOpt? SelectStmtIntoOption
 
-FromDual ::=
-    "FROM" "DUAL"
+SelectStmtBasic ::=
+    "SELECT" SelectStmtOpts Field ("," Field)* ( "HAVING" Expression)?
+
+SelectStmtFromDualTable ::=
+    "SELECT" SelectStmtOpts Field ("," Field)* "FROM" "DUAL" WhereClauseOptional
+
+SelectStmtFromTable ::=
+    "SELECT" SelectStmtOpts Field ("," Field)* "FROM" TableRefsClause WhereClauseOptional SelectStmtGroup HavingClause WindowClauseOptional
 
 SelectStmtOpts ::=
     TableOptimizerHints DefaultFalseDistictOpt PriorityOpt SelectStmtSQLSmallResult
     SelectStmtSQLBigResult SelectStmtSQLBufferResult SelectStmtSQLCache SelectStmtCalcFoundRows
     SelectStmtStraightJoin
-
-SelectStmtFieldList ::=
-    Field ("," Field)*
 
 TableRefsClause ::=
     TableRef AsOfClause? ( ',' TableRef AsOfClause? )*
@@ -37,9 +40,6 @@ WhereClauseOptional ::=
 
 SelectStmtGroup ::=
     GroupByClause?
-
-HavingClause ::=
-    ( "HAVING" Expression)?
 
 SelectStmtLimit ::=
     ("LIMIT" LimitOption ( ("," | "OFFSET") LimitOption )?
