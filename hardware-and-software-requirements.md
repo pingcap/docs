@@ -17,7 +17,80 @@ As an open-source distributed SQL database with high performance, TiDB can be de
 
 ## OS and platform requirements
 
+<<<<<<< HEAD
 In v7.1 LTS, TiDB provides multi-level support for different quality standards on the combination of operating systems and CPU architectures.
+=======
+<table>
+<thead>
+  <tr>
+    <th>Operating systems</th>
+    <th>Supported CPU architectures</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Red Hat Enterprise Linux 8.4 or a later 8.x version</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td><ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version</li><li>CentOS 7.3 or a later 7.x version</li></ul></td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>Amazon Linux 2</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>Rocky Linux 9.1 or later</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>Kylin Euler V10 SP1/SP2</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>UnionTech OS (UOS) V20</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>openEuler 22.03 LTS SP1/SP3</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>macOS 12 (Monterey) or later</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>Oracle Enterprise Linux 8 or a later</td>
+    <td>x86_64</td>
+  </tr>
+  <tr>
+    <td>Ubuntu LTS 20.04 or later</td>
+    <td>x86_64</td>
+  </tr>
+  <tr>
+    <td>CentOS 8 Stream</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>Debian 10 (Buster) or later</td>
+    <td>x86_64</td>
+  </tr>
+  <tr>
+    <td>Fedora 38 or later</td>
+    <td>x86_64</td>
+  </tr>
+  <tr>
+    <td>openSUSE Leap later than v15.5 (not including Tumbleweed)</td>
+    <td>x86_64</td>
+  </tr>
+  <tr>
+    <td>SUSE Linux Enterprise Server 15</td>
+    <td>x86_64</td>
+  </tr>
+</tbody>
+</table>
+>>>>>>> 27fba3c2f2 (*: add openEuler 22.03 LTS SP3 (#17293))
 
 + For the following combinations of operating systems and CPU architectures, TiDB **provides enterprise-level production quality**, and the product features have been comprehensively and systematically verified:
 
