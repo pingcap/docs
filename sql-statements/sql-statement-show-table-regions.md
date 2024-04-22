@@ -27,7 +27,6 @@ ShowTableRegionStmt ::=
 
 TableName ::=
     (SchemaName ".")? Identifier
-
 ```
 
 Executing `SHOW TABLE REGIONS` returns the following columns:
