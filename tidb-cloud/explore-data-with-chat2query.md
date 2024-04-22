@@ -1,6 +1,6 @@
 ---
 title: Explore Your Data with AI-Powered Chat2Query (beta)
-summary: Learn how to use Chat2Query, an AI-powered SQL editor in the TiDB Cloud console, to maximize your data value.
+summary: TiDB CloudはAIを活用したChat2Query（ベータ版）を使用すると、データの価値を最大化できます。Chat2Queryでは、AIによってSQLクエリを自動生成したり、手動で作成したりして、データベースに対してSQLクエリを実行できます。制限事項として、AIによって生成されたSQLクエリは100%正確ではない可能性があります。また、Chat2Queryはv6.5.0以降でAWSでホストされているTiDBクラスターでのみサポートされます。Chat2Queryの推奨される使用例は、複雑なSQLクエリを即座に生成したり、TiDBのMySQL互換性をテストしたりすることです。
 ---
 
 # AI を活用した Chat2Query (ベータ版) でデータを探索する {#explore-your-data-with-ai-powered-chat2query-beta}

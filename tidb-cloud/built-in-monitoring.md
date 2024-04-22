@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Built-in Metrics
-summary: Learn how to view TiDB Cloud built-in metrics and understand the meanings of these metrics.
+summary: TiDB Cloudはクラスターの標準メトリックを収集し、パフォーマンスの問題を特定できます。メトリックページで手順に従い、メトリクスを表示します。TiDB専用クラスターのメトリックには、データベース時間、クエリ数、失敗したクエリなどが含まれます。TiDBサーバーレスクラスターのメトリックには、リクエストユニット、使用済みストレージのサイズ、クエリ数などが含まれます。メトリクスが不連続になる場合は、高い負荷やバージョンの問題が考えられます。
 ---
 
 # TiDB Cloudの組み込みメトリクス {#tidb-cloud-built-in-metrics}

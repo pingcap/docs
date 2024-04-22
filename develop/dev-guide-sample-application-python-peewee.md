@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with peewee
-summary: Learn how to connect to TiDB using peewee. This tutorial gives Python sample code snippets that work with TiDB using peewee.
+summary: TiDBはMySQL互換データベースであり、peeweeはPython用の一般的なORMです。このチュートリアルでは、TiDBとpeeweeを使用して環境をセットアップし、TiDBクラスターに接続し、アプリケーションをビルドする方法を学ぶことができます。また、サンプルコードスニペットを使用して独自のアプリケーション開発を完了できます。必要なものはPython 3.8以降、Git、TiDBクラスターです。詳細については、公式ドキュメントを参照してください。
 ---
 
 # peewee で TiDB に接続する {#connect-to-tidb-with-peewee}

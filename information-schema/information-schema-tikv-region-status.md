@@ -1,6 +1,6 @@
 ---
 title: TIKV_REGION_STATUS
-summary: Learn the `TIKV_REGION_STATUS` information_schema table.
+summary: TIKV_REGION_STATUSは、PDのAPIを介してTiKVリージョンの基本情報を示す表です。リージョンID、開始および終了のKey-Value、読み取りおよび書き込みトラフィックなどが含まれます。また、pd-ctlを使用して、書き込みデータが最も多い上位3つのリージョンをクエリすることもできます。
 ---
 
 # TIKV_REGION_STATUS {#tikv-region-status}

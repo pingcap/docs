@@ -1,6 +1,6 @@
 ---
 title: ticloud branch delete
-summary: The reference of `ticloud branch delete`.
+summary: ticloud ブランチの削除クラスターからブランチを削除します。対話モードでブランチを削除します。非対話モードでブランチを削除します。必要なフラグを手動で入力する必要があります。削除するブランチのID、確認せずにブランチを削除します、このコマンドのヘルプ情報、削除するブランチのクラスターID。このコマンドで使用されるアクティブなユーザープロフィール。TiDB Cloud CLI に関して質問や提案がある場合は、お気軽に問題を作成してください。
 ---
 
 # ticloud ブランチの削除 {#ticloud-branch-delete}

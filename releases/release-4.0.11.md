@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.11 Release Notes
-summary: TiDB 4.0.11 was released on February 26, 2021. New features include support for `utf8_unicode_ci` and `utf8mb4_unicode_ci` collations. Improvements were made to inner joins, Grafana dashboards, and slow query metrics. Bug fixes address issues with collation, type inference, and function errors. TiKV improvements include support for multiple clusters in Grafana dashboards and bug fixes for memory diagnostics and OOM errors. PD fixes member health metrics and store limit persistence issues. TiFlash bug fixes address decimal type results, data loss, and crash issues. Tools like TiCDC, BR, and TiDB Lightning also received bug fixes and improvements.
+summary: TiDB 4.0.11は2021年2月26日にリリースされました。新機能には、utf8_unicode_ciとutf8mb4_unicode_ci照合順序のサポートが含まれます。改善点には、外部結合から単純化された内部結合の並べ替えや、複数のステートメントの問題に対する回避策の追加があります。バグの修正には、異常なunicode_ci定数伝播の問題の修正や、TiKVのビルドに失敗する問題の修正が含まれます。TiFlashのバグ修正には、10進数型のmin max結果が間違っているバグの修正や、DDL操作後に書き込まれた一部のデータがデータ圧縮後に失われる可能性がある問題の修正が含まれます。
 ---
 
 # TiDB 4.0.11 リリースノート {#tidb-4-0-11-release-notes}

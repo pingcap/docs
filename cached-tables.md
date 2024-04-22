@@ -1,6 +1,6 @@
 ---
 title: Cached Tables
-summary: Learn the cached table feature in TiDB, which is used for rarely-updated small hotspot tables to improve read performance.
+summary: TiDBのキャッシュテーブル機能について学びましょう。これは、読み取りパフォーマンスを向上させるために、ほとんど更新されない小さなホットスポットテーブルに使用されます。
 ---
 
 # キャッシュされたテーブル {#cached-tables}

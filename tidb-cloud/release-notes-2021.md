@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Release Notes in 2021
-summary: Learn about the release notes of TiDB Cloud in 2021.
+summary: TiDB Cloudは2021年に多くの新機能や改善がありました。例えば、Amazon S3やGCSからのApache ParquetファイルのインポートやVPC CIDRの追加などがあります。また、無料トライアルやPoC無償トライアルも提供されています。さらに、組織の役割管理や請求書の最適化など、多くの機能が追加されました。
 ---
 
 # 2021 年のTiDB Cloudリリース ノート {#tidb-cloud-release-notes-in-2021}

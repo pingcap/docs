@@ -1,6 +1,6 @@
 ---
 title: TiDB Serverless FAQs
-summary: Learn about the most frequently asked questions (FAQs) relating to TiDB Serverless.
+summary: TiDBサーバーレスは、完全なHTAP機能を備えたTiDBデータベースを提供し、自動スケーリングのデプロイメントであり、最大5つのクラスターを作成できます。一部のTiDB Cloud機能は部分的にサポートされており、無料プランも利用可能です。セキュリティはTLSによって確保され、永続データは暗号化されます。クラスターのバージョンは自動的にアップグレードされます。
 ---
 
 # TiDB サーバーレスに関するよくある質問 {#tidb-serverless-faqs}

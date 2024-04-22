@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Three-Node Hybrid Deployment
-summary: TiDB cluster can be deployed in a cost-effective way on three machines. Best practices for this hybrid deployment include adjusting parameters for stability and performance. Limiting resource consumption and adjusting thread pool sizes are key to optimizing the cluster. Adjusting parameters for TiKV background tasks and TiDB execution operators is also important.
+summary: TiDBクラスターの3ノードハイブリッド展開のベストプラクティスについての例を提供します。物理マシン3台に16個のCPUコアと32GBのメモリを使用し、TiDB、TiKV、PDコンポーネントをハイブリッド方式でデプロイします。展開後のクラスターにはTPC-Cテストが行われ、パラメーター調整によりパフォーマンスが向上しました。具体的なパラメーター調整方法も提供されています。
 ---
 
 # 3 ノードのハイブリッド展開のベスト プラクティス {#best-practices-for-three-node-hybrid-deployment}

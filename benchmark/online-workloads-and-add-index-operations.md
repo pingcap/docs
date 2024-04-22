@@ -1,6 +1,6 @@
 ---
 title: Interaction Test on Online Workloads and `ADD INDEX` Operations
-summary: This document tests the interaction effects between online workloads and `ADD INDEX` operations.
+summary: このドキュメントは、オンラインワークロードと`ADD INDEX`操作の相互作用をテストしました。結果は、ターゲット列に頻繁な書き込み操作を行う場合、デフォルトの構成は影響を与えます。ただし、クエリのみを実行する場合やターゲット列が関係ない場合は、デフォルトの構成を使用できます。
 ---
 
 # オンライン ワークロードと<code>ADD INDEX</code>操作の対話テスト {#interaction-test-on-online-workloads-and-code-add-index-code-operations}

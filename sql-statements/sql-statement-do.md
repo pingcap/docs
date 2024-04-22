@@ -1,6 +1,6 @@
 ---
 title: DO | TiDB SQL Statement Reference
-summary: An overview of the usage of DO for the TiDB database.
+summary: DO式は実行されますが、結果は返されません。ほとんどの場合、DO結果を返さないSELECTと同等です。MySQLでは、ストアドプロシージャやトリガーを実行するために使用されます。TiDBではこの機能の使用が限定されています。DOステートメントはMySQLと完全に互換性があります。
 ---
 
 # する {#do}

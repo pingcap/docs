@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.12 Release Notes
-summary: TiDB 4.0.12 was released on April 2, 2021. New features include tools to check the status of `tiflash replica` for online rolling updates. Improvements were made to TiDB, TiKV, PD, TiFlash, and various tools. Bug fixes were also implemented for TiDB, TiKV, PD, TiFlash, TiCDC, Backup & Restore, and TiDB Lightning.
+summary: TiDB 4.0.12は2021年4月2日にリリースされました。新機能には、TiFlashのオンラインローリングアップデートのステータスを確認するツールが追加されています。改善点には、`EXPLAIN`ステートメントの出力情報を絞り込むなどの変更が含まれています。バグの修正も多数行われています。TiKV、PD、TiFlash、ツールなどの各部分で修正が行われています。
 ---
 
 # TiDB 4.0.12 リリースノート {#tidb-4-0-12-release-notes}

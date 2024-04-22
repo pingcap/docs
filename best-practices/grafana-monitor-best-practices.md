@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Monitoring TiDB Using Grafana
-summary: Best Practices for Monitoring TiDB Using Grafana. Deploy a TiDB cluster using TiUP and add Grafana and Prometheus for monitoring. Use metrics to analyze cluster status and diagnose problems. Prometheus collects metrics from TiDB components, and Grafana displays them. Tips for efficient Grafana use include modifying query expressions, switching Y-axis scale, and using API for query results. The platform is powerful for analyzing and diagnosing TiDB cluster status.
+summary: GrafanaとPrometheusを使用してTiDBを監視するためのベストプラクティスについて説明しました。TiDBクラスター内のさまざまなコンポーネントとマシンのメトリクスを収集し、表示するために、Grafana + Prometheusモニタリングプラットフォームのセットがデプロイされます。これにより、TiDBクラスターのステータスを分析し、問題を診断できます。PrometheusのAPIを使用して情報を取得することもできます。
 ---
 
 # Grafana を使用して TiDB をモニタリングするためのベスト プラクティス {#best-practices-for-monitoring-tidb-using-grafana}

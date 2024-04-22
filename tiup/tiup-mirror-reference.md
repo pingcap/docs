@@ -1,6 +1,6 @@
 ---
 title: TiUP Mirror Reference Guide
-summary: Learn the general information of TiUP mirrors.
+summary: TiUPミラーは、コンポーネントとそのメタデータを保存するウェアハウスであり、ローカルディスク上のディレクトリとリモートディスクディレクトリに基づいて開始されたHTTPミラーの2つの形式があります。ミラーは`tiup mirror init`または`tiup mirror clone`を使用して作成でき、ルート証明書やインデックス、コンポーネントのメタデータなどが含まれます。クライアントは、ミラーからダウンロードされたファイルが安全であることを確認するために、`root.json`や`timestamp.json`などのファイルを使用します。
 ---
 
 # TiUPミラー リファレンス ガイド {#tiup-mirror-reference-guide}

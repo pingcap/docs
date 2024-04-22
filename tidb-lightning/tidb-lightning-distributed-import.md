@@ -1,6 +1,6 @@
 ---
 title: Use TiDB Lightning to Import Data in Parallel
-summary: Learn the concept, user scenarios, usages, and limitations of importing data in parallel when using TiDB Lightning.
+summary: TiDB Lightningは、v5.3.0以降、物理インポートモードを使用して複数のテーブルを並行してインポートできます。これにより、大量のデータのインポート時間が短縮されます。並行インポートを使用する際には、競合を処理し、インポートのパフォーマンスを最適化する必要があります。また、エラーが発生した場合は適切に処理することが重要です。
 ---
 
 # TiDB Lightning を使用してデータを並行してインポートする {#use-tidb-lightning-to-import-data-in-parallel}

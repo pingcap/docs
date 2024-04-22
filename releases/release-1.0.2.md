@@ -1,6 +1,6 @@
 ---
 title: TiDB 1.0.2 Release Notes
-summary: TiDB 1.0.2 was released on November 13, 2017. Updates include optimized cost estimation for index point query, support for Alter Table Add Column syntax, and improved query optimization. Placement Driver (PD) scheduling stability was enhanced, and TiKV now supports table splitting and limits key length to 4 KB. Other improvements include more accurate read traffic statistics and bug fixes for LIKE behavior and do_div_mod bug.
+summary: TiDB 1.0.2は、インデックスポイントクエリのコスト見積もりを最適化し、`Alter Table Add Column (ColumnDef ColumnPosition)`構文をサポートします。また、矛盾する`where`条件のクエリを最適化し、`Add Index`操作を最適化して進捗を修正し、繰り返しの操作を削減します。さらに、`Index Look Join`演算子を最適化し、プレフィックスインデックス判定の問題を修正しました。PDは例外的な状況下でのスケジュールの安定性を向上させ、TiKVは複数のテーブルのデータが含まれないようにテーブルの分割をサポートし、キーの長さを制限し、正確な読み取りトラフィック統計を提供します。また、コプロセッサスタックに高度な保護を実装し、`LIKE`動作と`do_div_mod`バグを修正しました。
 ---
 
 # TiDB 1.0.2 リリースノート {#tidb-1-0-2-release-notes}

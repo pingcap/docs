@@ -1,6 +1,6 @@
 ---
 title: Prepared Statements
-summary: Learn about how to use the TiDB prepared statements.
+summary: プリペアドステートメントは、パラメータのみが異なる複数のSQLステートメントをテンプレート化し、セキュリティとパフォーマンスを改善します。アプリケーション全体のデータクエリを実行するために使用することがベストプラクティスです。プリペアドステートメントを作成、使用、および削除するためのSQL構文について説明します。また、プリペアドステートメントの例も示します。JDBCを使用してTiDBに接続する方法についても説明します。
 ---
 
 # 準備されたステートメント {#prepared-statements}

@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.0 RC4 Release Notes
-summary: TiDB 2.0 RC4, released on March 30, 2018, brings improvements in MySQL compatibility, SQL optimization, and stability. Key updates include support for various syntax, bug fixes, and performance optimizations in TiDB, PD, and TiKV. Notable changes include manual Region splitting in PD, memory usage limitation in TiKV, and support for data pattern import. Overall, the release focuses on enhancing functionality and addressing performance issues.
+summary: TiDB 2.0 RC4は、MySQLの互換性、SQLの最適化、安定性が向上しています。TiDBでは、さまざまな問題が修正され、新しい機能が追加されています。PDでは、リージョンの手動分割をサポートし、メトリクスとコード構造を最適化します。TiKVでは、メモリ使用量の制限や警告が発生した場合の動作の構成をサポートし、さまざまな問題が修正されています。
 ---
 
 # TiDB 2.0 RC4 リリースノート {#tidb-2-0-rc4-release-notes}

@@ -1,6 +1,6 @@
 ---
 title: ticloud config describe
-summary: The reference of `ticloud config describe`.
+summary: ticloud 構成の説明は、特定のユーザープロフィールのプロパティ情報を取得します。コマンドは、ticloud config describe <profile-name>またはticloud config get <profile-name>を使用します。例として、ticloud config describe <profile-name>を使用します。フラグには-h、--helpがあります。継承されたフラグには--色なしと-P、--プロファイル文字列があります。質問や提案がある場合は、TiDB Cloud CLIの問題を作成してください。
 ---
 
 # ticloud 構成の説明 {#ticloud-config-describe}

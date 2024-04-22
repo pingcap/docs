@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.1.7 Release Notes
-summary: Learn about the improvements and bug fixes in TiDB 6.1.7.
+summary: TiDB 6.1.7は2023年7月12日にリリースされました。このバージョンでは、内部トランザクションの再試行に悲観的トランザクションを使用して、再試行の失敗を回避し、時間の消費を削減する改善があります。また、TiCDCがバッチUPDATE DMLステートメントをサポートし、TiDB Lightningがインポート後にSQLでチェックサムを検証し、検証の安定性を向上させる改善があります。さらに、多数のバグ修正が含まれています。
 ---
 
 # TiDB 6.1.7 リリースノート {#tidb-6-1-7-release-notes}

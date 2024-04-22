@@ -1,6 +1,6 @@
 ---
 title: CREATE [GLOBAL|SESSION] BINDING
-summary: Use of CREATE BINDING in TiDB database.
+summary: TiDBでは、`GLOBAL`または`SESSION`を指定してバインディングを作成できます。バインディングを使用すると、クエリを変更せずにヒントを挿入できます。バインドされたSQLステートメントはパラメータ化され、システムテーブルに保存されます。オプティマイザーは最小のコストでプランをバインドし、対応するオプティマイザーヒントが使用可能です。また、バインディングを作成する方法やMySQLの互換性についても参照できます。
 ---
 
 # [グローバル|セッション] バインディングの作成 {#create-global-session-binding}

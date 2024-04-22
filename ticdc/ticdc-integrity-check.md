@@ -1,6 +1,6 @@
 ---
 title: TiCDC Data Integrity Validation for Single-Row Data
-summary: Introduce the implementation principle and usage of the TiCDC data integrity validation feature.
+summary: TiCDC v7.1.0以降、単一行データの整合性を検証する機能が導入されました。CRC32アルゴリズムを使用して行のチェックサムを計算し、TiKVに書き込みます。TiCDCは同じアルゴリズムを使用してチェックサムを再計算し、データの整合性を確認します。データ整合性検証を有効にするには、システム変数を設定し、設定ファイルに構成を追加します。チェックサム計算のアルゴリズムは、列のデータ型によって異なります。
 ---
 
 # 単一行データの TiCDC データ整合性検証 {#ticdc-data-integrity-validation-for-single-row-data}

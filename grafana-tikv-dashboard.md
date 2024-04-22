@@ -1,6 +1,6 @@
 ---
 title: Key Monitoring Metrics of TiKV
-summary: Learn some key metrics displayed on the Grafana TiKV dashboard.
+summary: Grafana TiKVダッシュボードに表示されるいくつかの主要なメトリックスを学びます。
 ---
 
 # TiKV の主要なモニタリング指標 {#key-monitoring-metrics-of-tikv}

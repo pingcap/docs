@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1.13 Release Notes
-summary: TiDB 2.1.13 was released on June 21, 2019. It includes features to scatter row IDs, optimize DDL metadata lifetime, fix OOM issue, update statistics, support Region presplit, improve MySQL compatibility, and fix estimation issues. TiKV fixes incomplete snapshots and adds a feature to check the validity of the block-size configuration. TiDB Binlog fixes wrong offset and adds advertise-addr configuration in Drainer.
+summary: TiDB 2.1.13は、ホットスポットの問題を軽減するために、列に`AUTO_INCREMENT`属性が含まれている場合に`SHARD_ROW_ID_BITS`を使用して行 ID を分散する機能を追加します。また、無効な DDL メタデータの存続期間を最適化し、TiDB クラスターのアップグレード後の DDL 操作の通常の実行の回復を高速化します。TiDB 2.1.13では、さまざまな修正や機能の追加が行われています。
 ---
 
 # TiDB 2.1.13 リリースノート {#tidb-2-1-13-release-notes}

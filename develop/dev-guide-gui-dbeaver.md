@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with DBeaver
-summary: Learn how to connect to TiDB using DBeaver Community.
+summary: DBeaverを使用してTiDBに接続するチュートリアルです。TiDBはMySQLと互換性のあるデータベースであり、DBeaver Communityを使用してTiDBクラスターに接続する方法を学ぶことができます。必要なものは、DBeaver Community 23.0.3以降とTiDBクラスターです。接続方法に応じて、TiDB Serverless、TiDB Dedicated、TiDB Self-Hostedの手順があります。詳細な使い方はDBeaverのドキュメントを参照し、TiDBアプリケーション開発のベストプラクティスについて学びましょう。必要な場合は、不和またはサポートチケットを作成して質問してください。
 ---
 
 # DBeaver を使用して TiDB に接続する {#connect-to-tidb-with-dbeaver}

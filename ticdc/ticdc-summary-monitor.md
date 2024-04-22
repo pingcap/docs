@@ -1,6 +1,6 @@
 ---
 title: TiCDC Monitoring Metrics Summary
-summary: Learn about the monitoring metrics of TiCDC.
+summary: TiUPを使用してGrafanaをデプロイすると、TiCDC概要ダッシュボードが自動的に追加されます。ダッシュボードを通じて、TiCDCサーバーと変更フィードのステータスを理解できます。監視パネルには、サーバー、Changefeed、データフロー、トランザクションシンク、MQシンク、クラウドストレージシンク、やり直しの情報が表示されます。それぞれのパネルには、それぞれのメトリクスが示されます。
 ---
 
 # TiCDC モニタリング指標の概要 {#ticdc-monitoring-metrics-summary}

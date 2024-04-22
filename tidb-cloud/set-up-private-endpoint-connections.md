@@ -1,6 +1,6 @@
 ---
 title: Connect to a TiDB Dedicated Cluster via Private Endpoint with AWS
-summary: Learn how to connect to your TiDB Cloud cluster via private endpoint with AWS.
+summary: AWSのプライベートエンドポイントを使用してTiDB専用クラスターに安全に接続する方法について説明します。プライベートエンドポイントはVPC内で公開され、安全かつプライベートな接続を提供します。接続するためには、AWS PrivateLinkを使用してエンドポイントを作成し、プライベートDNSを有効にする必要があります。接続後は、エンドポイントサービスのステータスを確認できます。
 ---
 
 # AWS のプライベート エンドポイント経由で TiDB 専用クラスタに接続する {#connect-to-a-tidb-dedicated-cluster-via-private-endpoint-with-aws}

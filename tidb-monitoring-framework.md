@@ -1,6 +1,6 @@
 ---
 title: TiDB Monitoring Framework Overview
-summary: Use Prometheus and Grafana to build the TiDB monitoring framework.
+summary: TiDBモニタリングフレームワークは、PrometheusとGrafanaを使用しています。Prometheusは時系列データベースであり、柔軟なクエリ言語を備えています。Grafanaはオープンソースのメトリクス分析および視覚化ツールです。TiDBはこれらを使用してパフォーマンスメトリクスを表示します。各グループには複数の監視メトリックのパネルラベルがあり、各パネルには詳細情報が含まれています。
 ---
 
 # TiDB モニタリング フレームワークの概要 {#tidb-monitoring-framework-overview}

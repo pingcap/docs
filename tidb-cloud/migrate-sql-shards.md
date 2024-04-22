@@ -1,6 +1,6 @@
 ---
 title: Migrate and Merge MySQL Shards of Large Datasets to TiDB Cloud
-summary: Learn how to migrate and merge MySQL shards of large datasets to TiDB Cloud.
+summary: 大規模なMySQLデータセットをTiDB Cloudに移行およびマージする方法について説明します。MySQLインスタンス1と2のデータをCSV形式でAmazon S3にエクスポートし、TiDB Cloudクラスターにインポートします。また、TiDB DMを使用して増分データのレプリケーションを実行します。データのインポートとレプリケーションタスクのステータスを確認することができます。
 ---
 
 # 大規模なデータセットの MySQL シャードをTiDB Cloudに移行およびマージ {#migrate-and-merge-mysql-shards-of-large-datasets-to-tidb-cloud}

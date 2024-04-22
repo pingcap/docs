@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud CLI Quick Start
-summary: Learn how to manage TiDB Cloud resources through the TiDB Cloud CLI.
+summary: TiDB Cloudは、ターミナルからCLIを使用して操作できます。クラスターの作成、削除、リスト表示やデータのインポートが簡単に行えます。インストール方法やコマンドの使用方法も簡潔に説明されています。CLIの機能については、CLIリファレンスを参照してください。質問や提案がある場合は、問題を作成するか、貢献を歓迎します。
 ---
 
 # TiDB CloudCLI クイック スタート {#tidb-cloud-cli-quick-start}

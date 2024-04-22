@@ -1,6 +1,6 @@
 ---
 title: TiDB Lightning Overview
-summary: Learn about Lightning and the whole architecture.
+summary: TiDB Lightningは、TiDBクラスターにTBスケールのデータをインポートするためのツールです。DumplingによってエクスポートされたファイルやCSVファイル、Amazon Auroraによって生成されたApache Parquetファイルをサポートしています。また、地元やアマゾンS3、Googleクラウドストレージ、Azure Blobストレージからデータを読み取ることができます。物理インポートモードと論理インポートモードをサポートし、それぞれのバックエンドはlocalとtidbです。物理インポートモードは高速であり、論理インポートモードは低速です。また、インポート時のACID準拠やターゲットテーブルの状態なども異なります。
 ---
 
 # TiDB Lightningの概要 {#tidb-lightning-overview}

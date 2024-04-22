@@ -1,6 +1,6 @@
 ---
 title: Backup Auto-Tune
-summary: TiDB v5.4.0 introduces the auto-tune feature for backup tasks, which is enabled by default. It limits the resources used by backup tasks to reduce their impact on the cluster. You can enable or disable the feature dynamically without restarting the cluster. However, auto-tune may not completely remove the impact of backup on the cluster due to limitations. Adjusting the number of threads used by backup tasks can help mitigate the impact in certain scenarios.
+summary: TiDB v5.4.0 では、バックアップ &amp; リストア (BR) の新機能として、自動調整機能が導入されました。この機能は、バックアップ タスクで使用されるリソースを制御し、クラスターへの影響を軽減します。自動調整機能はデフォルトで有効になっており、バックアップ速度を制限するための粗粒度のソリューションです。ただし、きめ細かい制御ができないため、完全に影響を除去できない可能性があります。
 ---
 
 # バックアップ自動調整<span class="version-mark">v5.4.0 の新機能</span> {#backup-auto-tune-span-class-version-mark-new-in-v5-4-0-span}

@@ -1,5 +1,6 @@
 ---
 title: tiup update
+summary: tiup updateコマンドは、インストールされているコンポーネントまたはTiUP自体を更新するために使用されます。更新操作では古いバージョンは削除されません。成功した場合は`Updated successfully!`が出力されます。ターゲット バージョンが存在しない場合は、。
 ---
 
 # tiup update {#tiup-update}

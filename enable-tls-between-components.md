@@ -1,6 +1,6 @@
 ---
 title: Enable TLS Between TiDB Components
-summary: Learn how to enable TLS authentication between TiDB components.
+summary: TiDBクラスター内のコンポーネント間の暗号化されたデータ送信を有効にする方法について説明します。暗号化された送信が使用されるコンポーネントには、TiDB、TiKV、PD、TiFlashが含まれます。証明書を準備し、構成して有効にすることができます。また、コンポーネントの呼び出し元の身元を確認する方法や、証明書のリロード方法、有効期限についても説明します。
 ---
 
 # TiDB コンポーネント間で TLS を有効にする {#enable-tls-between-tidb-components}

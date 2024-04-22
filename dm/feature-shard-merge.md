@@ -1,6 +1,6 @@
 ---
 title: Merge and Migrate Data from Sharded Tables
-summary: Learn how DM merges and migrates data from sharded tables.
+summary: このドキュメントでは、Data Migration (DM) によって提供されるシャーディング サポート機能を紹介します。DM は、複数のアップストリーム シャード テーブルのデータを TiDB の 1 つのテーブルにマージおよび移行することをサポートします。移行中に、各シャード テーブルの DDL、および DDL の前後の DML を調整する必要があります。DM は悲観的モードと楽観的モードの 2 つの異なるモードをサポートします。悲観的モードでは、DDL を実行するシャードテーブルは DML 移行を一時停止します。楽観的モードでは、DDL を実行するシャードテーブルは DML 移行を続行します。
 ---
 
 # シャードテーブルからのデータのマージと移行 {#merge-and-migrate-data-from-sharded-tables}

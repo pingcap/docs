@@ -1,6 +1,6 @@
 ---
 title: ticloud config list
-summary: The reference of `ticloud config list`.
+summary: ticloud 構成リストすべてリストユーザープロファイル。
 ---
 
 # ticloud 構成リスト {#ticloud-config-list}

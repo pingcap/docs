@@ -1,5 +1,6 @@
 ---
 title: Release Notes
+summary: TiDBリリースのタイムラインを紹介します。
 ---
 
 # TiDB リリースノート {#tidb-release-notes}

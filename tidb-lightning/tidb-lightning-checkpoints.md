@@ -1,6 +1,6 @@
 ---
 title: TiDB Lightning Checkpoints
-summary: Use checkpoints to avoid redoing the previously completed tasks before the crash.
+summary: TiDB Lightningは、大規模なデータベースのインポートにおいて、チェックポイントを使用して進行状況を保存し、再起動後に中断したところからインポートを続行します。チェックポイントはローカルファイルまたはリモートのMySQL互換データベースに保存できます。また、チェックポイントの制御には、エラーの解決や情報の削除などのオプションがあります。
 ---
 
 # TiDB Lightningチェックポイント {#tidb-lightning-checkpoints}

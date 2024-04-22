@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Cloud with Datadog (Beta)
-summary: Learn how to monitor your TiDB cluster with the Datadog integration.
+summary: TiDB CloudはDatadog統合(ベータ版)をサポートしています。統合するには、DatadogアカウントとAPIキーが必要です。統合後は、TiDBクラスターのメトリクスをDatadogダッシュボードで直接表示できます。ただし、TiDBサーバーレスクラスターや特定のクラスターステータスでは統合できません。統合手順はTiDB CloudコンソールとDatadogで行われます。また、DatadogではTiDBクラスターの様々なメトリクスを追跡できます。
 ---
 
 # TiDB Cloudと Datadog を統合する (ベータ版) {#integrate-tidb-cloud-with-datadog-beta}

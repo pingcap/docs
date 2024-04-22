@@ -1,6 +1,6 @@
 ---
 title: Switch DM-worker Connection between Upstream MySQL Instances
-summary: Learn how to switch the DM-worker connection between upstream MySQL instances.
+summary: DM ワーカーが上流の MySQL インスタンス間で接続を切り替える手順について説明します。ダウンタイムメンテナンスや予期せずのクラッシュ時に、同じ移行グループ内の別のインスタンスに接続を切り替える必要があります。また、仮想 IP 経由での接続切り替えやアドレス変更についても説明します。それぞれの手順には厳密な条件がありますので、注意が必要です。
 ---
 
 # アップストリーム MySQL インスタンス間の DM ワーカー接続を切り替える {#switch-dm-worker-connection-between-upstream-mysql-instances}

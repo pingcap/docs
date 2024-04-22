@@ -1,6 +1,6 @@
 ---
 title: SQL Mode
-summary: Learn SQL mode.
+summary: TiDBサーバーはさまざまなSQLモードで動作し、クライアントごとに異なる方法で適用します。SQLモードは、TiDBがサポートするSQL構文とデータ検証チェックのタイプを定義します。SQLモードを設定するには、`SET [SESSION|GLOBAL] sql_mode='modes'`を使用します。`GLOBAL`レベルに設定する場合は、`SUPER`権限を持っていることを確認してください。現在のSQLモードは`SELECT @@sql_mode`ステートメントで確認できます。デフォルト値は`ONLY_FULL_GROUP_BY, STRICT_TRANS_TABLES, NO_ZERO_IN_DATE, NO_ZERO_DATE, ERROR_FOR_DIVISION_BY_ZERO, NO_AUTO_CREATE_USER, NO_ENGINE_SUBSTITUTION`。
 ---
 
 # SQLモード {#sql-mode}

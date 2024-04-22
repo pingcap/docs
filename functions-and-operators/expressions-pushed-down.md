@@ -1,6 +1,6 @@
 ---
 title: List of Expressions for Pushdown
-summary: Learn a list of expressions that can be pushed down to TiKV and the related operations.
+summary: TiDBはTiKVからデータを読み取る際、いくつかの式を処理しようとします。これにより、転送されるデータの量が削減され、負荷が軽減されます。TiFlashも関数と演算子のプッシュダウンをサポートしています。特定のデータ型のみをプッシュダウンする際に予期しない動作が発生した場合、ブロックリストに追加することでそれらのプッシュダウンを禁止できます。
 ---
 
 # プッシュダウンの式のリスト {#list-of-expressions-for-pushdown}

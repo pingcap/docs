@@ -1,6 +1,6 @@
 ---
 title: Tune TiKV Thread Pool Performance
-summary: Learn how to tune TiKV thread pools for optimal performance.
+summary: TiKVのスレッドプールは、gRPC、スケジューラ、Raftstore、StoreWriter、Apply、RocksDB、UnifyReadPoolなどで構成されます。パフォーマンスチューニングのために、各スレッドプールのサイズを適切に調整することが重要です。特に、gRPCスレッドプールのサイズをマシンのCPUコア数に応じて調整することが推奨されます。また、UnifyReadPoolスレッドプールのサイズはCPU使用率に基づいて自動調整することも可能です。RocksDBスレッドプールの設定についても注意が必要です。
 ---
 
 # TiKV スレッド プールのパフォーマンスを調整する {#tune-tikv-thread-pool-performance}

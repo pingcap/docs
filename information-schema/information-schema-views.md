@@ -1,6 +1,6 @@
 ---
 title: VIEWS
-summary: Learn the `VIEWS` INFORMATION_SCHEMA table.
+summary: ビュー表は、SQL ビューに関する情報を提供します。ビューに関する情報を提供します。ビューの定義、所有者、セキュリティタイプなどが含まれます。ビューのフィールドには、ビューが属するカタログの名前、ビューが属するスキーマの名前、ビュー名、ビューの定義、CHECK_OPTIONの値、UPDATE/INSERT/DELETEがビューに適用されるかどうかなどが含まれます。
 ---
 
 # ビュー {#views}

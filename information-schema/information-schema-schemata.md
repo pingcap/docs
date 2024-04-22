@@ -1,6 +1,6 @@
 ---
 title: SCHEMATA
-summary: Learn the `SCHEMATA` information_schema table.
+summary: SCHEMATA表は、データベースに関する情報を示します。テーブルデータはSHOW DATABASESステートメントの結果に相当します。CATALOG_NAMEはデータベースが属するカタログを示し、SCHEMA_NAMEはデータベース名を示します。DEFAULT_CHARACTER_SET_NAMEはデータベースのデフォルトの文字セットを示し、DEFAULT_COLLATION_NAMEはデータベースのデフォルトの照合順序を示します。SQL_PATHの値は常にNULLです。
 ---
 
 # スキーマ {#schemata}

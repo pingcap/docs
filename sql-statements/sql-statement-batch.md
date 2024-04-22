@@ -1,6 +1,6 @@
 ---
 title: BATCH
-summary: An overview of the usage of BATCH for the TiDB database.
+summary: BATCH構文は、DMLステートメントを複数のステートメントに分割して実行します。トランザクションの原子性と分離性は保証されていないため、「非トランザクション」ステートメントです。現在、INSERT、REPLACE、UPDATE、およびDELETEがBATCHでサポートされています。BATCHステートメントで複数テーブル結合を使用する場合、列のフルパスを指定する必要があります。MySQLとの互換性はありません。
 ---
 
 # バッチ {#batch}

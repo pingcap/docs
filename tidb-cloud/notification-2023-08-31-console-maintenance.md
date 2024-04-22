@@ -1,6 +1,6 @@
 ---
 title: 2023-08-31 TiDB Cloud Console Maintenance Notification
-summary: Learn about the details of the TiDB Cloud Console maintenance on August 31, 2023, such as the maintenance window, reason, and impact.
+summary: TiDB Cloudコンソールは2023年8月31日にメンテナンスを実施します。メンテナンス期間はUTC+0の8から10で約2時間かかります。メンテナンスの理由はパフォーマンスと効率の向上であり、影響を受ける機能にはクラスタ管理やバックアップなどが含まれます。メンテナンス完了後、影響を受けた機能が復元されます。お問い合わせがある場合は、支援チームに連絡してください。
 ---
 
 # [2023-08-31] TiDB Cloudコンソール メンテナンスのお知らせ {#2023-08-31-tidb-cloud-console-maintenance-notification}

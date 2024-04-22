@@ -1,6 +1,6 @@
 ---
 title: TiDB Sysbench Performance Test Report -- v6.2.0 vs. v6.1.0
-summary: TiDB v6.2.0 and v6.1.0 show similar performance in the Sysbench test. Point Select performance slightly drops by 3.58%. Update Non-index and Update Index performance are basically unchanged, reduced by 0.85% and 0.47% respectively. Read Write performance is reduced by 1.21%.
+summary: TiDB v6.2.0 とv6.1.0のSysbenchパフォーマンステストの結果は、v6.2.0のパフォーマンスが基本的に同じで、ポイントセレクトのパフォーマンスはわずかに3.58%低下しました。テスト環境はAWS EC2で、ハードウェア構成はPDがm5.xlarge 3台、TiKVがi3.4xlarge 3台、TiDBがc5.4xlarge 3台、システムベンチがc5.9xlarge 1台です。ソフトウェアバージョンはv6.1.0およびv6.2.0を使用し、パラメータ設定は同じです。テスト計画ではTiUPを使用してTiDBをデプロイし、Sysbenchを使用してテストを実行しました。
 ---
 
 # TiDB Sysbench パフォーマンス テスト レポート -- v6.2.0 と v6.1.0 {#tidb-sysbench-performance-test-report-v6-2-0-vs-v6-1-0}

@@ -1,7 +1,7 @@
 ---
 title: SHOW INDEXES [FROM|IN] | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW INDEXES [FROM|IN] for the TiDB database.
 aliases: ['/tidb/v7.5/sql-statement-show-index/', '/tidb/v7.5/sql-statement-show-keys/']
+summary: ステートメント`SHOW INDEXES [FROM|IN]`は、指定されたテーブルのインデックスをリストします。MySQL との互換性があり、`SHOW INDEX [FROM|IN]`、`SHOW KEYS [FROM|IN]`はこのステートメントのエイリアスです。TiDB の`SHOW INDEXES [FROM|IN]`ステートメントは MySQL と完全な互換性があります。
 ---
 
 # インデックスを表示 [From|IN] {#show-indexes-from-in}

@@ -1,6 +1,6 @@
 ---
 title: AUTO_INCREMENT
-summary: Learn the `AUTO_INCREMENT` column attribute of TiDB.
+summary: このドキュメントは、`AUTO_INCREMENT`列属性についての概念、実装原則、自動インクリメント関連の機能、および制限事項を紹介しています。`AUTO_INCREMENT`は、デフォルトの列値を自動的に入力するために使用される列属性であり、パフォーマンス上の理由から値のバッチで`AUTO_INCREMENT`番号が各TiDBサーバーに割り当てられます。MySQL互換モードを使用すると、割り当てられたIDは一意で単調増加し、動作はMySQLとほぼ同じになります。
 ---
 
 # 自動増加 {#auto-increment}

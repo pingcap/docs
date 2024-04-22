@@ -1,6 +1,6 @@
 ---
 title: Migrate from TiDB Self-Hosted to TiDB Cloud
-summary: Learn how to migrate data from TiDB Self-Hosted to TiDB Cloud.
+summary: TiDBセルフホストクラスターからTiDB Cloud（AWS）にデータを移行する手順を説明します。環境を構築し、Dumplingを使用してデータをAmazon S3にエクスポートし、TiCDCを使用して増分データをレプリケートします。移行前にはAWSアカウントとS3バケット、TiDB Cloudアカウントが必要です。DumplingとTiCDCを準備し、データを移行して増分データを確認します。
 ---
 
 # TiDB セルフホストからTiDB Cloudへの移行 {#migrate-from-tidb-self-hosted-to-tidb-cloud}

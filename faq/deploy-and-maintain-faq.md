@@ -1,6 +1,6 @@
 ---
 title: TiDB Deployment FAQs
-summary: Learn about the FAQs related to TiDB deployment.
+summary: TiDB 導入に関するよくある質問には、ソフトウェアとハ​​ードウェアの要件、インストールと展開、および現在のパブリック クラウド ベンダーのサポートに関する情報が含まれています。TiDBはGoogle Cloud GKE、AWS EKS、アリババクラウドACK、JD Cloud、およびUCloudで利用できます。
 ---
 
 # TiDB 導入に関するよくある質問 {#tidb-deployment-faqs}

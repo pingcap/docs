@@ -1,6 +1,6 @@
 ---
 title: Sink to MySQL
-Summary: Learn how to create a changefeed to stream data from TiDB Cloud to MySQL.
+summary: このドキュメントは、TiDB CloudからMySQLにデータをストリーミングする方法について説明しています。制限と前提条件があり、MySQLでターゲットテーブルを作成し、MySQLシンクを作成する手順が記載されています。MySQLシンクを作成する際には、テーブルをフィルターし、開始位置を構成し、変更フィード仕様を指定する必要があります。
 ---
 
 # MySQL にシンクする {#sink-to-mysql}

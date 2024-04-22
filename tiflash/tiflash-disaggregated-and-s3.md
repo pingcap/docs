@@ -1,6 +1,6 @@
 ---
 title: TiFlash Disaggregated Storage and Compute Architecture and S3 Support
-summary: Learn about TiFlash disaggregated storage and compute architecture and S3 Support.
+summary: TiFlashは、TiDB v7.0.0以降、分散storageとコンピューティングアーキテクチャをサポートし、S3またはS3互換のオブジェクトstorageにデータを保存できるようになりました。このアーキテクチャでは、storageとコンピューティングリソースを個別に拡張でき、コスト効率の高いデータ分析サービスに適しています。また、TiFlashは分離されたstorageとコンピューティングアーキテクチャに切り替える際に制限があります。
 ---
 
 # TiFlash の分散型ストレージとコンピューティングアーキテクチャおよび S3 サポート {#tiflash-disaggregated-storage-and-compute-architecture-and-s3-support}

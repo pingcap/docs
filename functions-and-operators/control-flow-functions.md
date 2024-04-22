@@ -1,6 +1,6 @@
 ---
 title: Control Flow Functions
-summary: Learn about the Control Flow functions.
+summary: TiDBはMySQL 5.7で利用可能な制御フロー関数をサポートします。制御フロー関数には、CASE、IF()、IFNULL()、NULLIF()があります。それぞれケース演算子、If/elseコンストラクト、Null if/else構造、expr1 = expr2の場合はNULLを返します。
 ---
 
 # 制御フロー関数 {#control-flow-functions}

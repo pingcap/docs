@@ -1,6 +1,6 @@
 ---
 title: ticloud update
-summary: The reference of `ticloud update`.
+summary: TiDB Cloud CLI を最新バージョンに更新します。ticloud update コマンドを使用します。フラグ -h, --help はこのコマンドのヘルプ情報を表示します。継承されたフラグには、--色なしと-P、--プロファイル文字列があります。質問や提案がある場合は、GitHub の問題ページで報告してください。
 ---
 
 # ティクラウドアップデート {#ticloud-update}

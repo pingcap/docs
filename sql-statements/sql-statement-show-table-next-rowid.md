@@ -1,6 +1,6 @@
 ---
 title: SHOW TABLE NEXT_ROW_ID
-summary: Learn the usage of `SHOW TABLE NEXT_ROW_ID` in TiDB.
+summary: テーブルの`NEXT_ROW_ID`を表示する`SHOW TABLE NEXT_ROW_ID`は、テーブルの特別な列の詳細を示します。これには、自動的に作成される`AUTO_INCREMENT`列やユーザーが作成した`AUTO_RANDOM`や`SEQUENCE`列が含まれます。このステートメントは、新しいテーブルのロウ ID を表示し、MySQL 構文に対する TiDB 拡張機能です。
 ---
 
 # テーブルのNEXT_ROW_IDを表示 {#show-table-next-row-id}

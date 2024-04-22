@@ -1,6 +1,6 @@
 ---
 title: DR Solution Based on Multiple Replicas in a Single Cluster
-summary: Learn about the multi-replica disaster recovery solution for a single cluster.
+summary: このドキュメントは、単一クラスター内の複数のレプリカに基づく災害復旧 (DR) ソリューションについて説明しています。TiDBは複数のレプリカを提供し、地域的なDRをサポートします。クラスターのセットアップ方法、監視方法、DRスイッチオーバーの実行方法が説明されています。TiUPを使用してクラスターを作成し、GrafanaやTiDBダッシュボードでクラスターを監視できます。計画的な切り替えと計画外の切り替えの方法も説明されています。
 ---
 
 # 単一クラスタ内の複数のレプリカに基づく DR ソリューション {#dr-solution-based-on-multiple-replicas-in-a-single-cluster}

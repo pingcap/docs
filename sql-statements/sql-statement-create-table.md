@@ -1,6 +1,6 @@
 ---
 title: CREATE TABLE | TiDB SQL Statement Reference
-summary: An overview of the usage of CREATE TABLE for the TiDB database.
+summary: テーブルの作成ステートメントは、現在のデータベースで新しいテーブルを作成します。MySQLの`CREATE TABLE`ステートメントと同様に動作します。さまざまなオプションがサポートされており、例として`AUTO_INCREMENT`、`SHARD_ROW_ID_BITS`、`PRE_SPLIT_REGIONS`などがあります。テーブルの作成時に条件を付けて作成することも可能です。MySQLとの互換性や他の関連情報も確認できます。
 ---
 
 # テーブルの作成 {#create-table}

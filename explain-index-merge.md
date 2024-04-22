@@ -1,6 +1,6 @@
 ---
 title: Explain Statements Using Index Merge
-summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
+summary: TiDB v4.0 で導入されたインデックス マージは、テーブルにアクセスする際に複数のインデックスを使用し、効率的なクエリを実現します。交差型と共用型の 2 種類があり、v5.4.0 以降の TiDB バージョンではデフォルトで有効になっています。インデックスのマージを使用するには、[`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40)を`ON`に設定します。また、SQL ヒント[`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)を使用して強制的に適用することも可能です。
 ---
 
 # インデックス マージを使用した Explain ステートメント {#explain-statements-using-index-merge}

@@ -1,6 +1,6 @@
 ---
 title: TiCDC Performance Analysis and Tuning Methods
-summary: Introduces the TiCDC metrics on the Performance Overview dashboard to help you better understand and monitor TiCDC workloads.
+summary: TiCDCのパフォーマンス分析とチューニング方法についての記事です。TiCDCクラスターのリソース使用率と主要なパフォーマンスメトリクスを紹介し、データレプリケーションの概要を把握できます。具体的な指標や問題の解決方法も示されています。
 ---
 
 # TiCDC のパフォーマンス分析およびチューニング方法 {#ticdc-performance-analysis-and-tuning-methods}

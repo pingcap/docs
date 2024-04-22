@@ -1,6 +1,6 @@
 ---
 title: TiDB Best Practices
-summary: This document summarizes best practices for using TiDB, covering SQL use and optimization tips for OLAP and OLTP scenarios, with a focus on TiDB-specific optimization options. It also recommends reading three blog posts introducing TiDB's technical principles before diving into the best practices.
+summary: TiDBのベストプラクティスは、SQLの使用とOLAPおよびOLTPシナリオの最適化のヒントを含みます。Raftコンセンサスアルゴリズムや分散トランザクションなどの基本的なメカニズムについて説明し、TiDBの導入、データインポート、クエリ、監視、ドキュメンテーションについても詳細を提供しています。TiDBはデータ量が大きく、トランザクションや強い整合性が必要な場合に適しています。
 ---
 
 # TiDB のベスト プラクティス {#tidb-best-practices}

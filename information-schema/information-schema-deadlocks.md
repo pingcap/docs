@@ -1,6 +1,6 @@
 ---
 title: DEADLOCKS
-summary: Learn the `DEADLOCKS` INFORMATION_SCHEMA table.
+summary: 表`DEADLOCKS`は、TiDBノードで発生したデッドロックエラーの情報を示します。各行にはデッドロックイベントに関連するトランザクションの情報が表示されます。`DEADLOCKS`テーブルの各列フィールドには、デッドロックイベントのIDや発生時刻などの情報が含まれます。再試行可能なデッドロックエラーが発生した場合、内部の自動再試行ではトランザクションエラーが発生しないため、クライアントに対して透過的です。CLUSTER_DEADLOCKSテーブルは、クラスター全体の各TiDBノードで最近発生したデッドロックエラーに関する情報を返します。
 ---
 
 # 行き詰まり {#deadlocks}

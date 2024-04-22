@@ -1,6 +1,6 @@
 ---
 title: Partitioned Raft KV
-summary: Learn about the partitioned Raft KV feature of TiKV.
+summary: TiKV v6.6.0から、新しいTiKVstorageエンジンが導入されました。このエンジンは、複数のRocksDBインスタンスを使用してTiKVリージョンデータを保存し、パーティショニングを通じて複数のRocksDBインスタンスを管理します。これにより、書き込みパフォーマンスが向上し、スケーリング速度が高速化され、同じハードウェアでサポートされるデータ量が増加します。ただし、EBSボリュームスナップショットバックアップやTiFlashへの対応はまだありません。
 ---
 
 # 仕切られたRaftKV {#partitioned-raft-kv}

@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.1 Beta.2 Release Notes
-summary: TiDB 3.1 Beta.2 was released on March 9, 2020. It includes compatibility changes, new features, bug fixes, and improvements for TiDB, TiKV, PD Client, Backup, PD, TiFlash, and TiDB Ansible. Some known issues are fixed in new versions, so it is recommended to use the latest 3.1.x version.
+summary: TiDB 3.1 ベータ.2 は2020年3月9日にリリースされました。このバージョンには、いくつかの既知の問題がありますが、新機能やバグの修正も含まれています。新機能には、TiDBの自動割り当て、DDLステートメントのサポート、オプティマイザーの機能追加などがあります。また、バグの修正も行われており、TiKVやPDなどのさまざまなコンポーネントに修正が加えられています。
 ---
 
 # TiDB 3.1 ベータ.2 リリースノート {#tidb-3-1-beta-2-release-notes}

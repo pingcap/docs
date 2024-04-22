@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1 RC1 Release Notes
-summary: TiDB 2.1 RC1 was released on August 24, 2018, with improvements in stability, SQL optimizer, statistics, and execution engine. The release includes fixes for various issues in SQL optimizer and execution engine. PD introduces version control, rolling update, and region merge features. TiKV supports batch split and row-based region splitting for improved efficiency. Overall, the release focuses on performance optimization and bug fixes.
+summary: TiDB 2.1 RC1は、安定性、SQLオプティマイザー、統計情報、および実行エンジンが大幅に向上しています。SQLオプティマイザーでは、相関サブクエリの問題が修正され、SQL実行エンジンでは、夏時間の計算問題が最適化されました。統計情報の動的収集メカニズムも最適化され、PDでは、リージョンのハートビート処理のパフォーマンスが向上しました。TiKVでは、ホットリージョンでの書き込み操作によるリージョンの分割をサポートし、MVCCフレームワークがリファクタリングされました。
 ---
 
 # TiDB 2.1 RC1 リリースノート {#tidb-2-1-rc1-release-notes}

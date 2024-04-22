@@ -1,6 +1,6 @@
 ---
 title: SHOW ERRORS | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW ERRORS for the TiDB database.
+summary: エラーを表示は、以前のステートメントからのエラーを示し、`SHOW ERRORS`は空のセットを返します。`sql_mode`によってエラーと警告の生成が影響されます。TiDBの`SHOW ERRORS`はMySQLと互換性があります。
 ---
 
 # エラーを表示 {#show-errors}

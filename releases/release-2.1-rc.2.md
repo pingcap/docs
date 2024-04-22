@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1 RC2 Release Notes
-summary: TiDB 2.1 RC2 was released on September 14, 2018, with improvements in stability, SQL optimizer, statistics, and execution engine. The release includes enhancements to SQL optimizer, SQL execution engine, statistics, server, compatibility, expressions, DML, DDL, TiKV Go Client, and Table Partition. PD features, improvements, and bug fixes are also included. TiKV performance, improvements, and bug fixes are part of the release as well.
+summary: TiDB 2.1 RC2は、安定性、SQLオプティマイザー、統計情報、および実行エンジンの大幅な向上が特徴です。SQLオプティマイザーでは、次世代プランナーの提案や定数伝播の最適化ルールの改善が行われました。SQL実行エンジンでは、様々な演算子のパフォーマンスが最適化されています。統計情報やサーバの改善点も多数あります。PDやTiKVにも多くの改善点があります。
 ---
 
 # TiDB 2.1 RC2 リリースノート {#tidb-2-1-rc2-release-notes}

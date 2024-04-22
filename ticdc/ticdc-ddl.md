@@ -1,6 +1,6 @@
 ---
 title: Changefeed DDL Replication
-summary: Learn about the DDL statements supported by TiCDC and some special cases.
+summary: TiCDCはDDLレプリケーションのルールと特殊なケースを説明します。現在、TiCDCは許可リストを使用して、特定のDDLステートメントのみを複製します。また、ADD INDEXおよびCREATE INDEXのDDL操作は非同期に実行され、テーブルの名前変更には制約があります。さらに、SQLモードが構成されていない場合、TiCDCは一部のDDLステートメントを正しく解析できない可能性があります。
 ---
 
 # チェンジフィード DDL レプリケーション {#changefeed-ddl-replication}

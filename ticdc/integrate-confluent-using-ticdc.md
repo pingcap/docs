@@ -1,6 +1,6 @@
 ---
 title: Integrate Data with Confluent Cloud and Snowflake
-summary: Learn how to stream TiDB data to Confluent Cloud, Snowflake, ksqlDB, and SQL Server.
+summary: ConfluentはApache Kafka互換のストリーミングデータプラットフォームで、TiDB v6.1.0以降のTiCDCはConfluent Cloud経由でSnowflake、ksqlDB、SQL Serverにデータをレプリケートする方法を紹介します。手順はラボ環境で実行され、TiUP Playgroundを使用してTiDBクラスターを迅速にデプロイできます。増分データはAvro形式でConfluent Cloudにレプリケートされ、Snowflakeとのデータ統合が完了します。Snowflakeのテーブル構造はTiDBとは異なり、データは増分的にSnowflakeに挿入されます。 Snowflake内のデータはTiDB内のデータのレプリカであることが期待されます。
 ---
 
 # データを Confluent Cloud および Snowflake と統合する {#integrate-data-with-confluent-cloud-and-snowflake}

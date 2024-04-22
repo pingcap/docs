@@ -1,6 +1,6 @@
 ---
 title: TiDB Sysbench Performance Test Report -- v2.1 vs. v2.0
-summary: TiDB 2.1 outperforms TiDB 2.0 in the `Point Select` test, with a 50% increase in query performance. However, the `Update Non-Index` and `Update Index` tests show similar performance between the two versions. The test was conducted in September 2018 in Beijing, China, using a specific test environment and configuration.
+summary: TiDB 2.1とTiDB 2.0のパフォーマンスを比較するためのテストは、ワーキングセットがメモリ内に収まる場合に行われました。テスト結果によると、TiDB 2.1のPoint SelectクエリパフォーマンスはTiDB 2.0より50%向上しています。一方、Update Non-IndexとUpdate Indexの書き込みパフォーマンスはほぼ同じです。
 ---
 
 # TiDB Sysbench パフォーマンス テスト レポート -- v2.1 と v2.0 {#tidb-sysbench-performance-test-report-v2-1-vs-v2-0}

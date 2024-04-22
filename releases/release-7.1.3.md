@@ -1,6 +1,6 @@
 ---
 title: TiDB 7.1.3 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 7.1.3.
+summary: TiDB 7.1.3は2023年12月21日にリリースされました。このバージョンでは、TiCDC Changefeed構成項目のデフォルト値が変更され、新しい構成項目が導入されました。また、TiDB、PD、ツール、TiCDC、TiDB Lightning、TiKV、TiFlashなどの改善点やバグの修正が含まれています。
 ---
 
 # TiDB 7.1.3 リリースノート {#tidb-7-1-3-release-notes}

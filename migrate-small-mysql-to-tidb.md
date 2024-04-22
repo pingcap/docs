@@ -1,6 +1,6 @@
 ---
 title: Migrate Small Datasets from MySQL to TiDB
-summary: Learn how to migrate small datasets from MySQL to TiDB.
+summary: TiDB データ移行 (DM) を使用して、MySQL から TiDB に小規模なデータセットを移行する方法について説明します。移行速度は複数の要因に応じて30 GB/h から 50 GB/h まで変化します。移行タスクを作成し、開始して監視することができます。また、タスクを一時停止、再開、停止することもできます。
 ---
 
 # 小規模なデータセットを MySQL から TiDB に移行する {#migrate-small-datasets-from-mysql-to-tidb}

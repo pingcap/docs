@@ -1,6 +1,6 @@
 ---
 title: TiDB Password Management
-summary: Learn the mechanism of user password management in TiDB.
+summary: TiDBは、パスワード管理ポリシーをサポートし、複雑なパスワードの設定、有効期限の定期的な変更、古いパスワードの再利用の防止、ログイン失敗後の一時的なアカウントロックを提供します。アカウントの信頼性を確保するために、パスワードは内部認証情報として保存されます。また、パスワードの複雑さのポリシーを構成することで、ユーザーのパスワードがポリシーに準拠していることを確認できます。
 ---
 
 # TiDB パスワード管理 {#tidb-password-management}

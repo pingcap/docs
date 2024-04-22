@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.5.4 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 6.5.4.
+summary: TiDB 6.5.4は2023年8月28日にリリースされました。このバージョンでは、大きな結果セットをフェッチする際のメモリ消費問題やRocksDBの定期的な圧縮の無効化などが修正されています。さらに、TiDB、TiKV、PD、TiFlash、ツールなどの各コンポーネントにおいて、パフォーマンスの最適化やバグの修正が行われています。
 ---
 
 # TiDB 6.5.4 リリースノート {#tidb-6-5-4-release-notes}

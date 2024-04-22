@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with Go-MySQL-Driver
-summary: Learn how to connect to TiDB using Go-MySQL-Driver. This tutorial gives Golang sample code snippets that work with TiDB using Go-MySQL-Driver.
+summary: TiDBはMySQL互換データベースであり、Go-MySQL-ドライバーはデータベース/SQLインターフェイスのMySQL実装です。このチュートリアルでは、TiDBとGo-MySQL-ドライバーを使用して環境をセットアップし、TiDBクラスターに接続し、アプリケーションをビルドして実行する方法を学びます。また、基本的なCRUD操作のサンプルコードスニペットも提供されています。このチュートリアルは、TiDBサーバーレス、TiDB専用、およびTiDBセルフホストで動作します。
 ---
 
 # Go-MySQL-Driver を使用して TiDB に接続する {#connect-to-tidb-with-go-mysql-driver}

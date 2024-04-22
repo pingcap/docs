@@ -1,6 +1,6 @@
 ---
 title:  Migrate from Amazon RDS for Oracle to TiDB Cloud Using AWS DMS
-summary: Learn how to migrate data from Amazon RDS for Oracle into TiDB Serverless using AWS Database Migration Service (AWS DMS).
+summary: AWS DMSを使用してAmazon RDS for OracleからTiDB Cloudにデータを移行する方法について説明しました。AWS DMSは異種データベースからのデータ移行を可能にし、具体的な手順を示しました。移行中に問題が発生した場合は、クラウドウォッチのログ情報を確認してトラブルシューティングを行うことができます。
 ---
 
 # AWS DMS を使用して Amazon RDS for Oracle からTiDB Cloudに移行する {#migrate-from-amazon-rds-for-oracle-to-tidb-cloud-using-aws-dms}

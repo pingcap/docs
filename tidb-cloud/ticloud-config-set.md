@@ -1,6 +1,6 @@
 ---
 title: ticloud config set
-summary: The reference of `ticloud config set`.
+summary: ticloud 構成セット は、アクティブユーザープロフィールのプロパティを構成します。設定できるプロパティには、公開鍵、秘密鍵、および API URL があります。特定のユーザープロファイルのプロパティを構成する場合は、コマンドに -P フラグを追加してターゲットユーザープロファイル名を指定できます。フラグには -h、--help があります。継承されたフラグには --色なし、-P、--プロファイル文字列 があります。質問や提案がある場合は、問題を作成してください。
 ---
 
 # ticloud 構成セット {#ticloud-config-set}

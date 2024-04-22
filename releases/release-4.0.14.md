@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.14 Release Notes
-summary: TiDB 4.0.14 was released on July 27, 2021. The release includes compatibility changes, feature enhancements, improvements, bug fixes, and updates to various tools. Some notable changes include default value updates for TiDB and TiKV, support for OIDC SSO in TiDB Dashboard, and bug fixes for TiDB, TiKV, PD, TiFlash, and various tools.
+summary: TiDB 4.0.14は2021年7月27日にリリースされました。このバージョンでは、デフォルト値の変更や機能強化、改善点、バグ修正が行われています。具体的には、TiDBのデフォルト値が変更され、Grafanaダッシュボードがアップグレードされました。また、TiKVではリージョンのマージプロセスが高速化され、PDではスケジューラ間の競合が軽減されました。TiDBダッシュボードも更新され、バグ修正が行われています。
 ---
 
 # TiDB 4.0.14 リリースノート {#tidb-4-0-14-release-notes}

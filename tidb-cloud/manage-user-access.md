@@ -1,6 +1,6 @@
 ---
 title: Identity Access Management
-summary: Learn how to manage identity access in TiDB Cloud.
+summary: このドキュメントは、TiDB Cloudで組織、プロジェクト、ロール、およびユーザー プロファイルへのアクセスを管理する方法について説明しています。組織とプロジェクトに基づいた階層構造を提供し、組織の所有者は組織内に複数のプロジェクトを作成できます。組織レベルまたはプロジェクト レベルでユーザーにロールを付与できます。組織内のすべてのプロジェクトに対するすべての権限は`Project Owner`にあります。
 ---
 
 # ID アクセス管理 {#identity-access-management}

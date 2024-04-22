@@ -1,6 +1,6 @@
 ---
 title: TiDB Control User Guide
-summary: Use TiDB Control to obtain TiDB status information for debugging.
+summary: TiDB Controlは、TiDBのデバッグのためのコマンドラインツールであり、ステータス情報を取得するために使用されます。TiDB Controlを取得する方法や使用方法、コマンドやサブコマンドの説明、グローバルオプションなどがあります。ただし、TiDB Controlは将来の機能と完全な互換性がない可能性があるため、注意が必要です。
 ---
 
 # TiDB コントロール ユーザー ガイド {#tidb-control-user-guide}

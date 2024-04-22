@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with mysql.js
-summary: Learn how to connect to TiDB using mysql.js. This tutorial gives Node.js sample code snippets that work with TiDB using mysql.js.
+summary: TiDBはMySQL互換データベースであり、mysql.jsドライバーはMySQLプロトコルを実装する純粋なNode.js JavaScriptクライアントです。このチュートリアルでは、TiDBとmysql.jsドライバーを使用して環境をセットアップし、TiDBクラスターに接続し、アプリケーションをビルドして実行する方法を学習できます。また、サンプルコードスニペットを参照して、独自のアプリケーション開発を完了できます。
 ---
 
 # mysql.js を使用して TiDB に接続する {#connect-to-tidb-with-mysql-js}

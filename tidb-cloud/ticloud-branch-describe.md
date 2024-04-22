@@ -1,6 +1,6 @@
 ---
 title: ticloud branch describe
-summary: The reference of `ticloud branch describe`.
+summary: ticloud ブランチの説明は、ブランチに関する情報を取得するコマンドです。対話モードでは、ticloud branch describeを使用し、非対話モードでは、必要なフラグを手動で入力する必要があります。フラグには、-b、-h、-cがあります。また、継承されたフラグとして、--色なしと-Pがあります。TiDB Cloud CLIに関する質問や提案がある場合は、問題を作成してください。
 ---
 
 # ticloud ブランチの説明 {#ticloud-branch-describe}

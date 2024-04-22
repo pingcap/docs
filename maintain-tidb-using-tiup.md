@@ -1,6 +1,6 @@
 ---
 title: TiUP Common Operations
-summary: Learn the common operations to operate and maintain a TiDB cluster using TiUP.
+summary: TiUPを使用してTiDBクラスターを管理する一般的な操作について説明します。クラスターリストを表示し、クラスターを開始・停止・破壊することができます。また、構成を変更したり、クラスターのステータスを確認したりすることも可能です。データやログのクリーンアップも行えます。
 ---
 
 # TiUP共通操作 {#tiup-common-operations}

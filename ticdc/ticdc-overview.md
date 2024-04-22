@@ -1,6 +1,6 @@
 ---
 title: TiCDC Overview
-summary: Learn what TiCDC is, what features TiCDC provides, and how to install and deploy TiCDC.
+summary: TiCDCは、TiDBから増分データを複製するツールであり、高可用性および災害復旧ソリューションを提供します。また、リアルタイムのデータ変更を同種システムに複製し、さまざまなデータソースにデータを提供します。主な特長には、RPOとRTOを使用した増分データのレプリケーションや双方向レプリケーションがあります。また、データベース、テーブル、DML、DDLをフィルタリングする機能も備えています。TiCDCは、TiDB、MySQL、Kafka、およびstorageサービスへのデータのレプリケーションをサポートしています。
 ---
 
 # TiCDC の概要 {#ticdc-overview}

@@ -1,6 +1,6 @@
 ---
 title: Timeouts in TiDB
-summary: Learn about timeouts in TiDB, and solutions for troubleshooting errors.
+summary: TiDBのタイムアウトに関するトラブルシューティングについて説明します。GCタイムアウトでは、MVCCメカニズムを使用し、古いデータをクリーンアップします。トランザクションタイムアウトでは、実行できるトランザクションの数に制限があります。SQL実行タイムアウトは単一のSQLステートメントに適用されます。JDBCクエリのタイムアウト設定はTiDBでは機能しません。MySQL互換のタイムアウト制御パラメータも提供されます。データベースとアプリケーションの両方に影響を及ぼすため、これらのセッションレベルの変数を構成することが重要です。
 ---
 
 # TiDB のタイムアウト {#timeouts-in-tidb}

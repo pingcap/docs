@@ -1,6 +1,6 @@
 ---
 title: Naming Conventions for Data Import
-summary: Learn about the naming conventions for CSV, Parquet, Aurora Snapshot, and SQL files during data import.
+summary: TiDB Cloudでは、CSV、Parquet、Aurora Snapshot、SQLのファイル形式でデータをインポートできます。データの正常なインポートを確認するには、スキーマファイルとデータファイルを準備する必要があります。スキーマファイルの命名規則はデータベースとテーブルごとに異なります。データファイルの命名規則は、CSV、Parquet、Aurora Snapshot、SQLそれぞれで異なります。ファイルパターン機能を使用して、名前マッピング関係を確立できます。CSVとParquetファイルについては、それぞれのインポート手順のファイルパターンを参照してください。
 ---
 
 # データインポートの命名規則 {#naming-conventions-for-data-import}

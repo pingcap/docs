@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB Serverless via Public Endpoint
-summary: Learn how to connect to your TiDB Serverless cluster via public endpoint.
+summary: TiDBサーバーレスクラスターにパブリックエンドポイント経由で接続する方法について説明します。クラスターページに移動し、接続ダイアログでエンドポイントタイプを選択し、パスワードを生成して接続文字列を使用してクラスターに接続します。接続後は、TiDBでSQLステートメントを探索することができます。
 ---
 
 # パブリックエンドポイント経由で TiDB サーバーレスに接続する {#connect-to-tidb-serverless-via-public-endpoint}

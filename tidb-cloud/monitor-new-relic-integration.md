@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Cloud with New Relic (Beta)
-summary: Learn how to monitor your TiDB cluster with the New Relic integration.
+summary: TiDB CloudはNew Relic統合（ベータ）をサポートしています。TiDBクラスターのメトリックデータをニューレリックに送信し、ダッシュボードで表示できます。統合するには、New RelicアカウントとAPIキーが必要です。ただし、TiDBサーバーレスクラスターでは使用できません。統合手順は、TiDB CloudコンソールでNew Relic APIキーを入力し、テストして確認することです。また、New Relicで利用可能なメトリクスも確認できます。
 ---
 
 # TiDB Cloudと New Relic を統合 (ベータ版) {#integrate-tidb-cloud-with-new-relic-beta}

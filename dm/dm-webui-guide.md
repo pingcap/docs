@@ -1,6 +1,6 @@
 ---
 title: Use WebUI to Manage DM migration tasks
-summary: Learn how to use WebUI to manage DM migration tasks.
+summary: DM WebUIは、TiDBデータ移行（DM）タスクを管理するためのWebベースのGUIプラットフォームです。多数の移行タスクを管理し、dmctlコマンドラインツールを使用する必要がありません。ただし、DM WebUIは現在実験的機能であり、本番環境での使用はお勧めしません。 DM WebUIには、移行とクラスタのページがあります。移行には、ソース、タスク、およびレプリケーションの詳細ページが含まれます。クラスタには、メンバーページがあり、すべてのマスター・ノードとワーカー・ノード、およびワーカー・ノードとソース間のバインディング関係が表示されます。
 ---
 
 # WebUI を使用して DM 移行タスクを管理する {#use-webui-to-manage-dm-migration-tasks}

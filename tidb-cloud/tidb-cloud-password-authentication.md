@@ -1,6 +1,6 @@
 ---
 title: Password Authentication
-summary: Learn how to manage passwords and enable multi-factor authentication (MFA) in the TiDB Cloud console.
+summary: このドキュメントは、TiDB Cloudコンソールでのパスワード管理とMFAの有効化方法について説明します。電子メールとパスワードを使用してTiDB Cloudにサインアップする場合、パスワードを管理できます。また、Google、GitHub、またはMicrosoftアカウントを使用してサインアップすることもできます。パスワードポリシーには、8文字以上の長さ、大文字、小文字、数字の使用が必要です。パスワードをリセットまたは変更する方法、MFAの有効化または無効化方法も説明されています。
 ---
 
 # パスワード認証 {#password-authentication}

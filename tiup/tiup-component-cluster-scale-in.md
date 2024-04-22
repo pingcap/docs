@@ -1,5 +1,6 @@
 ---
 title: tiup cluster scale-in
+summary: `tiup cluster scale-in`コマンドは、クラスターのスケールインに使用されます。指定されたノードのサービスがオフラインになり、ノードがクラスターから削除され、残りのファイルが削除されます。特定のコンポーネントには特別な処理があり、スケールインプロセスのログが表示されます。オプションには、ノードの指定や強制的な削除の制御などがあります。
 ---
 
 # tiup cluster scale-in {#tiup-cluster-scale-in}

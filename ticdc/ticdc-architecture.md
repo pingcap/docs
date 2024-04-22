@@ -1,6 +1,6 @@
 ---
 title: Architecture and Principles of TiCDC
-summary: Learn the architecture and working principles of TiCDC.
+summary: TiCDCは、分散型のステートレスアーキテクチャを使用し、複数のノードで構成されます。各ノードはキャプチャプロセスを実行し、データの複製を担当します。データのレプリケーションは、プーラー、ソーター、マウンター、シンクのコンポーネントによって行われます。TiCDCは、MySQL、TiDB、およびKafkaデータベースへのデータのレプリケーションをサポートしています。また、TiCDCは、単一テーブル内のトランザクションの一貫性と、複数のテーブル内の最終的なトランザクションの一貫性を保証します。
 ---
 
 # TiCDC のアーキテクチャと原則 {#architecture-and-principles-of-ticdc}

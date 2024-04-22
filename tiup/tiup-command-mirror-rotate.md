@@ -1,5 +1,6 @@
 ---
 title: tiup mirror rotate
+summary: TiUPミラー内の`root.json`は重要なファイルであり、公開鍵を保管し、TiUPの信頼チェーンの基礎となります。`root.json`を更新する必要がある場合、すべての管理者が再署名する必要があります。更新プロセスは自動化されており、`tiup mirror rotate`コマンドを使用して行われます。また、一時サーバーを起動し、ミラー管理者がファイルに署名するのを待ちます。
 ---
 
 # tiup mirror rotate {#tiup-mirror-rotate}

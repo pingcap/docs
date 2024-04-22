@@ -1,6 +1,6 @@
 ---
 title: DDL_JOBS
-summary: Learn the `DDL_JOBS` information_schema table.
+summary: DDL_JOBSテーブルは、ADMIN SHOW DDL JOBSコマンドへのINFORMATION_SCHEMAインターフェイスを提供します。TiDBクラスター内のDDL操作に関する情報が提供されます。テーブルには、JOB_ID、DB_NAME、TABLE_NAME、JOB_TYPE、SCHEMA_STATE、SCHEMA_ID、TABLE_ID、ROW_COUNT、START_TIME、END_TIME、STATE、QUERYの情報が含まれます。JOB_ID 42とJOB_ID 40も同様にテーブルを作成し、同期されました。
 ---
 
 # DDL_JOBS {#ddl-jobs}

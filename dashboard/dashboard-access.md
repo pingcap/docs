@@ -1,6 +1,6 @@
 ---
 title: Access TiDB Dashboard
-summary: To access TiDB Dashboard, visit the specified URL in your browser. For multiple PD instances, replace the address with any PD instance address and port. Use Chrome, Firefox, or Edge browsers of newer versions. Sign in with the TiDB root account or a user-defined SQL user. The session remains valid for 24 hours. Switch between English and Chinese languages. To log out, click the user name and then the Logout button.
+summary: TiDB ダッシュボードにアクセスするには、ブラウザからにアクセスしてください。複数のPDインスタンスがデプロイされている場合は、各PDインスタンスのアドレスとポートに置き換えます。ブラウザの互換性はChrome >= 77、Firefox >= 68、Edge >= 17が必要です。ログイン後は24時間有効で、ログアウトはユーザーページから行います。言語は英語と中国語（簡体字）がサポートされています。
 ---
 
 # TiDB ダッシュボードにアクセスする {#access-tidb-dashboard}

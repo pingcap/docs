@@ -1,6 +1,6 @@
 ---
 title: Troubleshoot Write Conflicts in Optimistic Transactions
-summary: Learn about the reason of and solutions to write conflicts in optimistic transactions.
+summary: 楽観的トランザクションでの書き込み競合のトラブルシューティングについての解説。TiDB v3.0.8以前では、書き込み競合が多く発生する可能性があります。書き込み競合の検出と解決方法について説明しています。TiDB v3.0.8以降では、悲観的トランザクションモードがデフォルトになり、書き込み競合を回避できるようになりました。
 ---
 
 # オプティミスティック トランザクションでの書き込み競合のトラブルシューティング {#troubleshoot-write-conflicts-in-optimistic-transactions}

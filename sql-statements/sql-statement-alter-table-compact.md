@@ -1,6 +1,6 @@
 ---
 title: ALTER TABLE ... COMPACT
-summary: An overview of the usage of ALTER TABLE ... COMPACT for the TiDB database.
+summary: TiDBは、データ圧縮を自動的にスケジュールし、`ALTER TABLE ... COMPACT`ステートメントを使用すると、特定のテーブルの圧縮をすぐに開始できます。このステートメントの実行は、他のSQLステートメントやTiDB機能に影響を与えず、データの一貫性も損ないません。圧縮の進行状況は`INFORMATION_SCHEMA.TIFLASH_TABLES`テーブルの`TOTAL_DELTA_ROWS`列で確認できます。圧縮中にデータが更新された場合は、再度ステートメントを実行して更新を圧縮します。TiDB BinlogやTiCDCにはレプリケートされません。
 ---
 
 # ALTER TABLE ... コンパクト {#alter-table-compact}

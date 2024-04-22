@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with JDBC
-summary: Learn how to connect to TiDB using JDBC. This tutorial gives Java sample code snippets that work with TiDB using JDBC.
+summary: このチュートリアルは、TiDBとJDBCを使用して次のタスクを実行する方法を学ぶことができます。環境をセットアップし、JDBCを使用してTiDBクラスターに接続し、アプリケーションをビルドして実行します。また、基本的なCRUD操作のサンプルコードスニペットも提供されています。このチュートリアルは、TiDBサーバーレス、TiDB専用、およびTiDBセルフホストで動作します。必要なものは、Java開発キット(JDK) 17以降、メイビン3.8以上、ギット、およびTiDBクラスターです。
 ---
 
 # JDBC を使用して TiDB に接続する {#connect-to-tidb-with-jdbc}

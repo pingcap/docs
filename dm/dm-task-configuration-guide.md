@@ -1,6 +1,6 @@
 ---
 title: Data Migration Task Configuration Guide
-summary: Learn how to configure a data migration task in Data Migration (DM).
+summary: このドキュメントは、データ移行タスクの構成方法について紹介しています。データソースの構成やダウンストリームTiDBクラスターの構成、テーブルやbinlogイベントの構成方法などが含まれています。また、シャードマージタスクやその他の構成についても説明されています。
 ---
 
 # データ移行タスクコンフィグレーションガイド {#data-migration-task-configuration-guide}

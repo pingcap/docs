@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.1.2 Release Notes
-summary: TiDB 3.1.2 was released on June 4, 2020. Bug fixes include error handling during backup and restoration with S3 and GCS, and a `DefaultNotFound` error during restoration. Tools like Backup & Restore (BR) now automatically retry on poor network, fix restoration failures, data loss issues, and support AWS KMS for server-side encryption with S3 storage.
+summary: TiDB 3.1.2は2020年6月4日にリリースされました。このバージョンでは、TiKVとツールにいくつかのバグが修正されています。TiKVでは、S3およびGCSでのバックアップおよび復元中のエラー処理の問題が修正され、また`DefaultNotFound`復元中に発生するエラーも修正されました。ツールでは、バックアップと復元 (BR)に関する改善があり、S3およびGCSストレージの安定性が向上し、さらにいくつかの復元エラーが修正されました。
 ---
 
 # TiDB 3.1.2 リリースノート {#tidb-3-1-2-release-notes}

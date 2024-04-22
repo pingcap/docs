@@ -1,5 +1,6 @@
 ---
 title: TiDB 6.1.3 Release Notes
+summary: TiDB 6.1.3は2022年12月5日にリリースされました。このバージョンでは、TiCDCのデフォルト値が変更され、PDのロックの粒度が最適化され、TiDBのGoコンパイラーバージョンがgo1.19にアップグレードされました。さらに、複数のバグが修正され、パフォーマンスが向上しました。PD、TiKV、TiFlash、BR、TiCDC、DMなどのツールにも修正が加えられています。
 ---
 
 # TiDB 6.1.3 リリースノート {#tidb-6-1-3-release-notes}

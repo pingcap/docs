@@ -1,6 +1,6 @@
 ---
 title: High Availability with Multi-AZ Deployments
-summary: TiDB Cloud supports high availability with Multi-AZ deployments.
+summary: TiDBは、Raftコンセンサスアルゴリズムを使用して高い可用性を実珅し、データは異なるアベイラビリティゾーンに冗長的にコピーされます。TiDB CloudクラスターはTiDB、TiKV、TiFlashの3つの主要コンポーネントで構成され、それぞれの高可用性を実現しています。TiDBノードはリージョン内の異なるアベイラビリティゾーンに均等にデプロイされ、TiKVノードは少なくとも3つの可用性ゾーンに均等にデプロイされます。TiFlashノードも同様にリージョン内の異なるアベイラビリティゾーンに均等にデプロイされます。
 ---
 
 # マルチ AZ 展開による高可用性 {#high-availability-with-multi-az-deployments}

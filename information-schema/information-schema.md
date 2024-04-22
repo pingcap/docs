@@ -1,6 +1,6 @@
 ---
 title: Information Schema
-summary: TiDB implements the ANSI-standard information_schema for viewing system metadata.
+summary: 情報スキーマは、システム メタデータを表示する ANSI 標準の方法を提供します。TiDBは、MySQLとの互換性のために含まれるテーブルに加えて、多数のカスタムINFORMATION_SCHEMAテーブルも提供します。多くのINFORMATION_SCHEMAテーブルには、対応するSHOWコマンドがあります。MySQLの互換性に関するテーブルには、CHARACTER_SETS、CHECK_CONSTRAINTS、COLLATIONSなどが含まれます。TiDB拡張機能であるテーブルには、ANALYZE_STATUS、CLIENT_ERRORS_SUMMARY_BY_HOST、CLUSTER_CONFIGなどがあります。
 ---
 
 # 情報スキーマ {#information-schema}

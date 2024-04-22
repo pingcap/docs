@@ -1,6 +1,6 @@
 ---
 title: Deploy a DM Cluster Offline Using TiUP
-summary: Introduce how to deploy a DM cluster offline using TiUP.
+summary: TiUPを使用してDMクラスターをオフラインで展開する方法について説明します。まず、TiUPパッケージマネージャーをオンラインでインストールし、TiUPを使ってミラーを引きます。次に、オフラインTiUPコンポーネントをデプロイし、初期化構成ファイルを編集します。最後に、デプロイメントコマンドを実行してクラスターを開始し、実行ステータスを確認します。
 ---
 
 # TiUPを使用して DMクラスタをオフラインでデプロイ {#deploy-a-dm-cluster-offline-using-tiup}

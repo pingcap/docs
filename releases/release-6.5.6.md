@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.5.6 Release Notes
-summary: Learn about the improvements and bug fixes in TiDB 6.5.6.
+summary: TiDB 6.5.6は2023年12月7日にリリースされました。このバージョンでは、セキュリティ強化モードでの設定変更やオプティマイザの制御などが行われています。さらに、TiCDC Changefeedに新しい構成項目が導入され、TiDBやTiKV、PD、TiFlash、ツールなどの改善点やバグの修正も含まれています。
 ---
 
 # TiDB 6.5.6 リリースノート {#tidb-6-5-6-release-notes}

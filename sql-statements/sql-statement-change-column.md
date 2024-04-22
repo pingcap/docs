@@ -1,6 +1,6 @@
 ---
 title: CHANGE COLUMN | TiDB SQL Statement Reference
-summary: An overview of the usage of CHANGE COLUMN for the TiDB database.
+summary: ALTER TABLE.. CHANGE COLUMNステートメントは、既存のテーブルの列を変更します。変更には、列の名前変更とデータ型の互換性のある型への変更の両方が含まれる場合があります。TiDBは、v5.1.0以降、Reorgデータ型の変更をサポートしています。MySQLの互換性に関して、いくつかの制限があります。
 ---
 
 # 列の変更 {#change-column}

@@ -1,6 +1,6 @@
 ---
 title: GBK
-summary: This document provides details about the TiDB support of the GBK character set.
+summary: TiDB v5.4.0以降、GBK文字セットをサポート。MySQLとの互換性に関する情報を提供。照合順序は異なり、TiDBはGBKをUTF8MB4に変換し、バイナリ照合順序を使用。不正な文字の処理も異なり、TiDBは厳密モードでエラーを報告。TiDBはALTER TABLEステートメントでの文字セット変換をサポートせず、TiFlashはGBKをサポートせず、DM、Lightning、TiCDC、BRもGBKテーブルの処理をサポートしない。
 ---
 
 # GBK {#gbk}

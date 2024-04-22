@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.1 Release Notes
-summary: TiDB 4.0.1 was released on June 12, 2020. New features include support for custom timeout for PD client and new collation framework in TiFlash. Bug fixes address issues with configuration, monitoring metrics, and store information retrieval. Backup & Restore (BR) now includes a version check to avoid compatibility issues.
+summary: TiDB 4.0.1は2020年6月12日にリリースされました。新機能には、TiKVの`--advertise-status-addr`開始フラグの追加、PDの内蔵TiDBダッシュボードの内部プロキシのサポート、TiFlashの新しい照合順序フレームワークのサポートなどがあります。バグの修正には、TiKVの起動ログの設定問題の修正、PDの配置ルールの誤設定を防止する修正などが含まれています。
 ---
 
 # TiDB 4.0.1 リリースノート {#tidb-4-0-1-release-notes}

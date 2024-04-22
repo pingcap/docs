@@ -1,6 +1,6 @@
 ---
 title: SEQUENCES
-summary: Learn the `SEQUENCES` INFORMATION_SCHEMA table.
+summary: シーケンステーブルはシーケンスに関する情報を提供します。MariaDBのシーケンス機能をモデルにしており、テーブルには11行の情報が含まれています。シーケンスを作成し、次の値をクエリしたり、すべてのシーケンスをビューしたりすることができます。SEQUENCESテーブルを使用して、シーケンスに関する情報を取得できます。
 ---
 
 # シーケンス {#sequences}

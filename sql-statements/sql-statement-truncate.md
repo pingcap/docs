@@ -1,6 +1,6 @@
 ---
 title: TRUNCATE | TiDB SQL Statement Reference
-summary: An overview of the usage of TRUNCATE for the TiDB database.
+summary: TRUNCATEステートメントは、テーブルからデータを非トランザクション的に削除します。TRUNCATE前の定義のDROP TABLE + CREATE TABLEと同じ意味があります。TRUNCATE TABLE tableNameとTRUNCATE tableNameはどちらも有効な構文です。MySQLの互換性があります。
 ---
 
 # 切り詰める {#truncate}

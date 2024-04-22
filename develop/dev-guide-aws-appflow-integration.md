@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB with Amazon AppFlow
-summary: Introduce how to integrate TiDB with Amazon AppFlow step by step.
+summary: Amazon AppFlowは、TiDBとSalesforce、Amazon S3、LinkedIn、GitHubなどのデータプロバイダー間でデータのインポートおよびエクスポートを可能にします。TiDBをAmazon AppFlowと統合する手順には、TiDBコネクタの登録、Lambdaの構築とアップロード、フローの作成などが含まれます。フローの実行後、CloudWatchでログを確認できます。TiDBサーバーレスは本番環境ではありません。
 ---
 
 # TiDB と Amazon AppFlow を統合する {#integrate-tidb-with-amazon-appflow}

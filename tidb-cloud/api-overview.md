@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud API Overview
-summary: Learn about what is TiDB Cloud API, its features, and how to use API to manage your TiDB Cloud clusters.
+summary: TiDB CloudAPIは、TiDB Cloud内の管理オブジェクトを管理するためのRESTインターフェースです。APIを通じて、プロジェクト、クラスター、バックアップ、リストア、インポートなどのリソースを自動的かつ効率的に管理できます。APIの機能には、JSONエンティティ、HTTPSのみのアクセス、キーベースのアクセスとダイジェスト認証があります。TiDB CloudAPIの使用を開始するには、TiDB CloudAPIドキュメントのリソースを参照してください。
 ---
 
 # TiDB CloudAPI 概要<span style="color: #fff; background-color: #00bfff; border-radius: 4px; font-size: 0.5em; vertical-align: middle; margin-left: 16px; padding: 0 2px;">ベータ版</span> {#tidb-cloud-api-overview-span-style-color-fff-background-color-00bfff-border-radius-4px-font-size-0-5em-vertical-align-middle-margin-left-16px-padding-0-2px-beta-span}

@@ -1,6 +1,6 @@
 ---
 title: DROP COLUMN | TiDB SQL Statement Reference
-summary: An overview of the usage of DROP COLUMN for the TiDB database.
+summary: テーブルから列を削除する`DROP COLUMN`ステートメントは、TiDBでオンラインで実行されます。これにより、読み取りまたは書き込み操作がブロックされることはありません。ただし、主キー列または複合インデックスの対象となる列の削除はサポートされていません。
 ---
 
 # ドロップカラム {#drop-column}

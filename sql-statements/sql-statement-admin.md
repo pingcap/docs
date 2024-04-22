@@ -1,6 +1,6 @@
 ---
 title: ADMIN | TiDB SQL Statement Reference
-summary: An overview of the usage of ADMIN for the TiDB database.
+summary: TiDBの管理者ステートメントは、TiDBのステータスを表示し、テーブルのデータをチェックするために使用されます。DDL関連のステートメントには、現在実行中のDDLジョブをキャンセルしたり一時停止したりするためのものがあります。また、ADMIN RELOADステートメントは、式によってプッシュダウンされたブロックリストを再ロードするために使用されます。ADMIN PLUGINS関連のステートメントは、プラグインを有効または無効にするために使用されます。ADMIN BINDINGS関連のステートメントは、SQLプランのバインディング情報を操作するために使用されます。ADMIN REPAIRステートメントは、保存されたテーブルのメタデータを修復するために使用されます。ADMIN SHOW NEXT_ROW_IDステートメントは、テーブルの特別な列の詳細を表示するために使用されます。ADMIN SHOW SLOWステートメントは、遅いクエリの詳細を表示するために使用されます。
 ---
 
 # 管理者 {#admin}

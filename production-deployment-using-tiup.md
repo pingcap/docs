@@ -1,6 +1,6 @@
 ---
 title: Deploy a TiDB Cluster Using TiUP
-summary: Learn how to easily deploy a TiDB cluster using TiUP.
+summary: TiUPは、TiDB 4.0で導入されたクラスターの運用および保守ツールです。TiUPクラスターを使用すると、TiDBクラスターのデプロイ、開始、停止、破棄、スケーリング、アップグレードなどの操作が簡単に実行できます。また、TiUPはTiDB、TiFlash、TiDB Binlog、TiCDC、および監視システムの導入をサポートしています。さまざまなトポロジーのTiDBクラスターをデプロイする方法についての詳細な手順も提供されています。
 ---
 
 # TiUPを使用した TiDBクラスタのデプロイ {#deploy-a-tidb-cluster-using-tiup}

@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with MySQL Workbench
-summary: Learn how to connect to TiDB using MySQL Workbench.
+summary: MySQL Workbenchを使用してTiDBに接続する方法を学びます。MySQL WorkbenchはTiDBを完全にサポートしていませんが、TiDBをMySQLとして扱うことができます。TiDBを正式にサポートする他のGUIツールを使用することをお勧めします。接続方法にはTiDB Serverless、TiDB Dedicated、TiDB Self-Hostedのオプションがあります。接続タイムアウトエラーを処理する方法も学ぶことができます。MySQL Workbenchの詳細な使い方やTiDBアプリケーション開発の最適化プラクティスについても学ぶことができます。
 ---
 
 # MySQL Workbench を使用して TiDB に接続する {#connect-to-tidb-with-mysql-workbench}

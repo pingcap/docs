@@ -1,5 +1,6 @@
 ---
 title: TiDB 5.3.4 Release Notes
+summary: TiDB 5.3.4は2022年11月24日にリリースされました。このバージョンでは、TiKVの可用性が向上し、TLS証明書が自動的にリロードされます。また、TiDBやPD、TiFlashなどのバグが修正され、さまざまな問題が解決されました。DumplingとTiCDCも改善され、それぞれの問題が修正されました。
 ---
 
 # TiDB 5.3.4 リリースノート {#tidb-5-3-4-release-notes}

@@ -1,6 +1,6 @@
 ---
 title: INSERT | TiDB SQL Statement Reference
-summary: An overview of the usage of INSERT for the TiDB database.
+summary: このステートメントはテーブルに新しい行を挿入します。TiDB の`INSERT`ステートメントは MySQL と完全な互換性があります。互換性の違いが見つかった場合は、バグを報告。
 ---
 
 # 入れる {#insert}

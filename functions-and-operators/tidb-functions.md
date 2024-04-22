@@ -1,6 +1,6 @@
 ---
 title: TiDB Specific Functions
-summary: Learn about the usage of TiDB specific functions.
+summary: TiDB 固有の機能は、MySQL には存在しない拡張機能です。これには、TIDB_BOUNDED_STALENESS、TIDB_DECODE_KEY、TIDB_DECODE_PLAN、TIDB_IS_DDL_OWNER、TIDB_PARSE_TSO、TIDB_PARSE_TSO_LOGICAL、TIDB_VERSION、TIDB_DECODE_SQL_DIGESTS、VITESS_HASH、TIDB_SHARD、TIDB_ROW_CHECKSUM、CURRENT_RESOURCE_GROUPの関数が含まれます。これらの関数は、TiDB インスタンスの機能を拡張し、リソース制御やデータ整合性検証などの機能を提供します。
 ---
 
 # TiDB 固有の機能 {#tidb-specific-functions}

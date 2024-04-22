@@ -1,6 +1,6 @@
 ---
 title: SHUTDOWN
-summary: An overview of the usage of SHUTDOWN for the TiDB database.
+summary: TiDBの`SHUTDOWN`ステートメントは、データベースのシャットダウン操作を実行するために使用されます。ユーザーは`SHUTDOWN privilege`を持っている必要があります。この機能はTiDBセルフホスト型にのみ適用され、TiDB Cloudでは利用できません。`SHUTDOWN`ステートメントは部分的にMySQLと互換性があります。TiDBでのシャットダウン操作は、クライアントに接続されたTiDBインスタンスを停止します。
 ---
 
 # シャットダウン {#shutdown}

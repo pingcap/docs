@@ -1,6 +1,6 @@
 ---
 title: TiCDC Deployment Topology
-summary: Learn the deployment topology of TiCDC based on the minimal TiDB topology.
+summary: TiCDCは、TiDB 4.0で導入されたツールであり、増分データを複製するために使用されます。TiCDCは、TiDB、MySQL、Kafka、MQ、storageサービスなどの複数のプラットフォームをサポートし、レイテンシーが低く、高可用性を備えています。展開トポロジに関する詳細は、TiUPを使用してTiDBを展開するためのトポロジコンフィグレーションファイルを参照してください。
 ---
 
 # TiCDC 導入トポロジ {#ticdc-deployment-topology}

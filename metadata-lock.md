@@ -1,6 +1,6 @@
 ---
 title: Metadata Lock
-summary: Introduce the concept, principles, and implementation details of metadata lock in TiDB.
+summary: TiDBのメタデータロックは、オンライン非同期スキーマ変更アルゴリズムを使用して、メタデータオブジェクトの変更をサポートします。メタデータが変更された場合、TiDBはエラーを返し、トランザクションはコミットに失敗します。メタデータロックを有効にすると、DDLタスクの実行にパフォーマンスに影響を与える可能性があります。メタデータロックを無効にするには、システム変数tidb_enable_metadata_lockをOFFに設定します。
 ---
 
 # メタデータロック {#metadata-lock}

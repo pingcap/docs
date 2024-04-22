@@ -1,6 +1,6 @@
 ---
 title: Upstream and Downstream Clusters Data Validation and Snapshot Read
-summary: Learn how to check data for TiDB upstream and downstream clusters.
+summary: TiCDCを使用してTiDBの上流および下流のクラスターを構築する際に、同期ポイント機能を有効にすることで、一貫したスナップショット読み取りとデータの整合性の検証が可能になります。同期ポイントを有効にするには、レプリケーションタスクの作成時にTiCDC構成項目の値を設定します。これにより、動的データの整合性を検証する問題が解決され、ほぼリアルタイムの検証が可能になります。
 ---
 
 # 上流および下流クラスターのデータ検証とスナップショット読み取り {#upstream-and-downstream-clusters-data-validation-and-snapshot-read}

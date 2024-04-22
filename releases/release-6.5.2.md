@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.5.2 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 6.5.2.
+summary: TiDB 6.5.2は2023年4月21日にリリースされました。このバージョンでは、TiCDCの互換性の変更とデータ損失の潜在的な問題の修正が行われました。さらに、TiDB、TiFlash、およびツールの改善点やバグの修正が含まれています。PDやTiKVにも修正が加えられ、TiCDCに関連するさまざまな問題が解決されました。
 ---
 
 # TiDB 6.5.2 リリースノート {#tidb-6-5-2-release-notes}

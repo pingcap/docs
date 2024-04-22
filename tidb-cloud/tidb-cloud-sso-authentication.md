@@ -1,6 +1,6 @@
 ---
 title: SSO Authentication
-summary: Learn how to log in to the TiDB Cloud console via your Google, GitHub, or Microsoft account.
+summary: このドキュメントは、TiDB CloudコンソールへのGoogle、GitHub、およびMicrosoftアカウントを使用したSSO認証について説明しています。SSO認証を使用すると、IDと資格情報はサードパーティのプラットフォームに保存されるため、パスワードの変更やMFAの有効化はできません。それぞれのアカウントでのログイン手順が記載されています。
 ---
 
 # SSO認証 {#sso-authentication}

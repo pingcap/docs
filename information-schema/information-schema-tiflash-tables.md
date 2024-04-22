@@ -1,6 +1,6 @@
 ---
 title: TIFLASH_TABLES
-summary: Learn the `TIFLASH_TABLES` information_schema table.
+summary: TIFLASH_TABLES表は、TiFlashのデータテーブルに関する統計情報を提供します。このテーブルのフィールドには、データベース名、テーブル名、セグメント数、行数、サイズなどが含まれます。また、テーブルの安定層やデルタレイヤーに関する情報も提供されます。ただし、このテーブルはTiDBサーバーレスクラスターでは使用できません。また、フィールドは不安定であり、予告なく変更される可能性があるため、本番環境では使用しないでください。
 ---
 
 # TIFLASH_TABLES {#tiflash-tables}

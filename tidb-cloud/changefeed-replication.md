@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Replication
-summary: Learn how to create a replica to stream data from a primary TiDB cluster to a secondary TiDB cluster.
+summary: TiDB Cloudレプリケーションは、プライマリ TiDB クラスター用に読み取り可能なセカンダリ TiDB クラスターを作成できる機能です。地域的な災害や障害が発生した場合にデータベースの迅速な災害復旧を実行でき、ビジネス継続性の実現に役立ちます。セカンダリ クラスターがセットアップされたら、別のリージョンにあるセカンダリ クラスターへの地理的フェールオーバーを手動で開始できます。ただし、現在はベータ版であり、いくつかの制限があります。TiDB Cloudレプリケーションはリクエストがあった場合にのみ利用可能です。
 ---
 
 # TiDB Cloudレプリケーション {#tidb-cloud-replication}

@@ -1,6 +1,6 @@
 ---
 title: Usage Overview of TiDB Backup and Restore
-summary: TiDB Backup and Restore provides best practices for choosing backup methods, managing backup data, and deploying the tool. It recommends using both full and log backups, storing data in recommended storage systems, and setting backup retention periods. The tool can be deployed using the command-line tool, SQL statements, or TiDB Operator on Kubernetes. For detailed usage, refer to the provided documentation.
+summary: TiDBのバックアップと復元機能の使用法について説明します。バックアップ方法の選択、データの管理、ツールの展開方法などが含まれます。推奨される実践方法として、完全バックアップとログバックアップの両方を使用することが挙げられます。バックアップデータの管理方法や復元方法についても詳細に説明されています。また、BRをデプロイして使用する方法についても説明されています。
 ---
 
 # TiDB バックアップと復元の使用法の概要 {#usage-overview-of-tidb-backup-and-restore}

@@ -1,6 +1,6 @@
 ---
 title: Deploy TiDB Lightning
-summary: Deploy TiDB Lightning to quickly import large amounts of new data.
+summary: TiDB Lightningは、データをインポートするためのハードウェア要件と手動展開方法について説明します。TiUPを使用したオンライン導入が推奨され、TiDB Lightningバイナリをダウンロードして手動展開することも可能です。また、TiDB Lightningのアップグレード方法も提供されています。
 ---
 
 # TiDB Lightningのデプロイ {#deploy-tidb-lightning}

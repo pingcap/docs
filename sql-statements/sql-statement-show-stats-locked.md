@@ -1,6 +1,6 @@
 ---
 title: SHOW STATS_LOCKED
-summary: An overview of the usage of SHOW STATS_LOCKED for the TiDB database.
+summary: SHOW STATS_LOCKEDは、統計がロックされているテーブルを示します。テーブルの統計がロックされている場合、SHOW STATS_LOCKEDを実行すると、そのテーブルの統計がロックされていることが示されます。MySQLの構文に対するTiDBの拡張機能です。
 ---
 
 # STATS_LOCKEDを表示 {#show-stats-locked}

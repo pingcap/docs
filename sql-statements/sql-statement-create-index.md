@@ -1,6 +1,6 @@
 ---
 title: CREATE INDEX | TiDB SQL Statement Reference
-summary: An overview of the usage of CREATE INDEX for the TiDB database.
+summary: インデックスの作成は、既存のテーブルに新しいインデックスを追加します。これは`ALTER TABLE .. ADD INDEX`の代替構文であり、MySQL との互換性のために組み込まれています。式インデックスや多値インデックスなど、さまざまな種類のインデックスがあります。また、非表示のインデックスも存在し、クエリ オプティマイザーによって無視されるインデックスです。
 ---
 
 # インデックスの作成 {#create-index}

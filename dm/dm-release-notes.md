@@ -1,6 +1,6 @@
 ---
 title: TiDB Data Migration Release Notes
-summary: TiDB Data Migration Release Notes have been merged into TiDB Release Notes since DM v5.4. For DM Release Notes of v5.4 or later, see the corresponding TiDB Release Notes. For DM Release Notes of v5.3.0 or earlier, refer to the provided links for versions 5.3, 2.0, and 1.0.
+summary: TiDB データ移行のリリースノートは、DM v5.4以降、同じバージョン番号のTiDBリリースノートに統合されました。v5.4以降のDMリリースノートは、対応するTiDBリリースノートのDM関連コンテンツを参照してください。v5.3.0以前のDMリリースノートは、リンクを参照してください。
 ---
 
 # TiDB データ移行リリース ノート {#tidb-data-migration-release-notes}

@@ -1,6 +1,6 @@
 ---
 title: TimeStamp Oracle (TSO) in TiDB
-summary: Learn about TimeStamp Oracle (TSO) in TiDB.
+summary: TiDBのタイムスタンプOracle（TSO）は、クラスター内のコンポーネントにタイムスタンプを割り当てるために重要な役割を果たします。これにより、トランザクションとデータへの時間マーカーが割り当てられます。TSOタイムスタンプには物理タイムスタンプと論理タイムスタンプの2つの部分があります。物理タイムスタンプはUNIXタイムスタンプであり、論理タイムスタンプは増分カウンターです。これにより、TSOタイムスタンプの整合性が保証されます。TSOタイムスタンプはSQLで詳しく検査できます。
 ---
 
 # TiDB のタイムスタンプ Oracle (TSO) {#timestamp-oracle-tso-in-tidb}

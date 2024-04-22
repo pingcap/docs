@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Release Notes in 2022
-summary: Learn about the release notes of TiDB Cloud in 2022.
+summary: 2022年のTiDB Cloudのリリースノートについて学びましょう。
 ---
 
 # 2022 年のTiDB Cloudリリース ノート {#tidb-cloud-release-notes-in-2022}

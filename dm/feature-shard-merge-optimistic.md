@@ -1,6 +1,6 @@
 ---
 title: Merge and Migrate Data from Sharded Tables in Optimistic Mode
-summary: Learn how DM merges and migrates data from sharded tables in the optimistic mode.
+summary: このドキュメントは、楽観的モードのデータ移行について紹介しています。楽観的モードを使用すると、シャードテーブルのデータをマージおよび移行できます。楽観的モードを使用する際には、リスクや制限事項に注意する必要があります。また、楽観的モードの実施原則についても説明されています。
 ---
 
 # オプティミスティックモードでのシャードテーブルからのデータのマージと移行 {#merge-and-migrate-data-from-sharded-tables-in-optimistic-mode}

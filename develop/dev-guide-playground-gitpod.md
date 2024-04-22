@@ -1,6 +1,6 @@
 ---
 title: Gitpod
-summary: Gitpod provides a complete, automated, and pre-configured cloud-native development environment. You can develop, run, and test code directly in the browser without any local configurations.
+summary: Gitpodは、ブラウザで完全な開発環境を取得し、すぐにコードを作成できます。オープンソースのKubernetesアプリケーションであり、新しい自動開発環境をクラウド上に数秒で起動します。開発環境をコードとして記述し、ブラウザまたはデスクトップIDEから直接、リモートおよびクラウドベースの開発環境を開始できます。
 ---
 
 <!-- markdownlint-disable MD029 -->

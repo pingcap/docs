@@ -1,6 +1,6 @@
 ---
 title: TiDB Binlog Cluster Operations
-summary: Learn how to operate the cluster version of TiDB Binlog.
+summary: TiDB Binlogクラスター操作には、PumpとDrainerノードの状態管理、プロセスの開始と終了、binlogctlツールやSQL操作による管理が含まれます。PumpまたはDrainerの状態は`online`、`pausing`、`paused`、`closing`、`offline`のいずれかです。Pumpプロセスの開始中にはDrainerノードに通知し、終了中には一時停止またはオフライン状態になります。Drainerプロセスも同様に管理されます。SQLステートメントを使用してPumpまたはDrainerの状態を確認または変更することも可能です。
 ---
 
 # TiDBBinlogクラスタの操作 {#tidb-binlog-cluster-operations}

@@ -1,6 +1,6 @@
 ---
 title: Create a TiDB Dedicated Cluster
-summary: Learn how to create your TiDB Dedicated cluster.
+summary: このチュートリアルでは、TiDB 専用クラスターのサインアップと作成について説明します。TiDB Cloudアカウントをお持ちでない場合は、TiDB Cloudにサインアップしてください。クラスターを作成したら、安全な設定を構成してください。
 ---
 
 # TiDB 専用クラスタの作成 {#create-a-tidb-dedicated-cluster}

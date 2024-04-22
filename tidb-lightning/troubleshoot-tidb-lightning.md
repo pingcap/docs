@@ -1,6 +1,6 @@
 ---
 title: Troubleshoot TiDB Lightning
-summary: Learn the common problems you might encounter when you use TiDB Lightning and their solutions.
+summary: TiDB Lightningは、インポート速度が遅い場合の原因として、`region-concurrency`設定が高すぎることやテーブルスキーマが複雑すぎることを挙げています。また、ファイルが大きすぎる場合やTiDB Lightningのバージョンが古い場合も問題が発生する可能性があります。エラーが発生した場合は、ログを確認して対処する必要があります。
 ---
 
 # TiDB Lightningのトラブルシューティング {#troubleshoot-tidb-lightning}

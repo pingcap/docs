@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1.14 Release Notes
-summary: TiDB 2.1.14 was released on July 04, 2019. It includes various bug fixes and improvements, such as fixing wrong query results, adding new system variables, optimizing memory usage, and adding new configuration items for TiDB Binlog and TiDB Ansible. Additionally, there are optimizations for TiKV and PD.
+summary: TiDB 2.1.14は2019年7月4日にリリースされました。このバージョンでは、さまざまな修正と機能の追加が行われました。例えば、クエリ結果の修正や自動インクリメント ID の増分ギャップの自動調整などが含まれています。また、TiKVやPD、ツールにも修正や機能の追加が行われています。TiDB Ansibleにも新しい機能が追加されています。
 ---
 
 # TiDB 2.1.14 リリースノート {#tidb-2-1-14-release-notes}

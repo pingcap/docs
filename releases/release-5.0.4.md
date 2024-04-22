@@ -1,5 +1,6 @@
 ---
 title: TiDB 5.0.4 Release Notes
+summary: TiDB 5.0.4は2021年9月27日にリリースされました。このバージョンでは、`SHOW VARIABLES`の新しいセッションでの実行が遅い問題が修正され、`tidb_stmt_summary_max_stmt_count`変数のデフォルト値が`200`から`3000`に変更されました。さらに、多くのバグ修正や機能強化が行われ、TiDB、TiKV、PD、TiFlashなどの各コンポーネントが改善されました。
 ---
 
 # TiDB 5.0.4 リリースノート {#tidb-5-0-4-release-notes}

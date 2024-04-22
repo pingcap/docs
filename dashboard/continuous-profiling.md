@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Instance Profiling - Continuous Profiling
-summary: TiDB Dashboard Continuous Profiling allows experts to collect and analyze performance data continuously from each instance, helping to pinpoint and resolve sophisticated performance problems. It stores more data than Manual Profiling, enabling analysis of both current and historical issues. The feature can be accessed through the dashboard or a browser, and can be enabled and disabled as needed. Performance impact is minimal, making it suitable for production environments.
+summary: TiDB ダッシュボードの継続的プロファイリング機能は、各インスタンスからパフォーマンスデータを収集し、高度なパフォーマンス問題を特定できます。手動プロファイリングと比較して、継続的プロファイリングはデータを継続的に収集し、過去の問題も分析できます。また、CPU、メモリ、ミューテックス競合状態などのパフォーマンスデータが収集されます。継続的プロファイリングを有効にするには、TiUPまたはTiDB Operatorの最新バージョンが必要です。
 ---
 
 # TiDB ダッシュボード インスタンス プロファイリング - 継続的プロファイリング {#tidb-dashboard-instance-profiling-continuous-profiling}

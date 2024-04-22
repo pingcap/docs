@@ -1,6 +1,6 @@
 ---
 title: Troubleshoot Access Denied Errors during Data Import from Amazon S3
-summary: Learn how to troubleshoot access denied errors when importing data from Amazon S3 to TiDB Cloud.
+summary: Amazon S3からTiDB Cloudにデータをインポートする際のアクセス拒否エラーのトラブルシューティング方法について説明します。指定されたロールを引き受けることができない場合は、信頼エンティティを確認し、IAMロールが存在するか確認します。また、IAMユーザーのポリシーとバケットポリシーを確認し、オブジェクトの所有権と暗号化タイプも確認してください。詳細な手順についてはAWSの記事を参照してください。
 ---
 
 # Amazon S3 からのデータインポート中のアクセス拒否エラーのトラブルシューティング {#troubleshoot-access-denied-errors-during-data-import-from-amazon-s3}

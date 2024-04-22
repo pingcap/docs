@@ -1,6 +1,6 @@
 ---
 title: TRACE | TiDB SQL Statement Reference
-summary: An overview of the usage of TRACE for the TiDB database.
+summary: TRACEステートメントは、クエリの実行に関する詳細情報を提供します。TiDBサーバーのステータスポートによって公開されるグラフィカルインターフェイスを通じて表示されます。MySQL構文に対するTiDB拡張機能であり、JSON形式のトレースはTiDBステータスポート経由でアクセスされるトレースビューアに貼り付けることができます。
 ---
 
 # 痕跡 {#trace}

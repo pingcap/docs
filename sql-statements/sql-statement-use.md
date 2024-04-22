@@ -1,6 +1,6 @@
 ---
 title: USE | TiDB SQL Statement Reference
-summary: An overview of the usage of USE for the TiDB database.
+summary: `USE`ステートメントは、ユーザー セッションの現在のデータベースを選択します。TiDB の`USE`ステートメントは MySQL と完全な互換性があります。データベースの作成、テーブルを表示も参照してください。
 ---
 
 # 使用 {#use}

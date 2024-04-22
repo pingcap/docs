@@ -1,6 +1,6 @@
 ---
 title: DELETE | TiDB SQL Statement Reference
-summary: An overview of the usage of DELETE for the TiDB database.
+summary: DELETEステートメントは、指定されたテーブルから行を削除します。MySQLの互換性があります。
 ---
 
 # 消去 {#delete}

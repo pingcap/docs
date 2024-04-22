@@ -1,6 +1,6 @@
 ---
 title: TiDB 5.2.2 Release Notes
-summary: TiDB 5.2.2 was released on October 29, 2021. The release includes various improvements and bug fixes for TiDB, TiKV, PD, TiCDC, TiFlash, and TiDB Binlog. Improvements include showing affected SQL statements in debug logs, support for showing backup and restore data size, and more. Bug fixes address issues such as plan-cache detection, wrong partition pruning, and various other issues related to query functions, client connections, and data replication.
+summary: TiDB 5.2.2は2021年10月29日にリリースされました。改善点には、コプロセッサーがロックを検出したときに影響を受けるSQLステートメントをデバッグログに表示する機能や、データのバックアップおよび復元時のサイズ表示のサポートが含まれます。バグの修正には、plan-cacheの未署名フラグの変更を検出できない問題や、パーティション関数の範囲外の間違ったパーティションプルーニングの修正が含まれます。PDやTiKV、TiFlash、TiCDCなどのツールにもさまざまな修正が含まれています。
 ---
 
 # TiDB 5.2.2 リリースノート {#tidb-5-2-2-release-notes}

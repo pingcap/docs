@@ -1,6 +1,6 @@
 ---
 title: Data Types
-summary: Learn about the data types supported in TiDB.
+summary: TiDBはMySQLのすべてのデータタイプをサポートします。これには、数値型、文字列型、日付と時刻のタイプ、およびJSONタイプが含まれます。データ型の定義はT(M[, D])として指定されます。ここで、Tは特定のデータ型を示し、Mは整数型の最大表示幅を示し、Dは浮動小数点型と固定小数点型に適用されます。fspはTIME、DATETIME、およびTIMESTAMPタイプに適用され、小数秒の精度を表します。fsp値を指定する場合は、0～6の範囲内である必要があります。省略した場合、デフォルトの精度は0です。
 ---
 
 # データ型 {#data-types}

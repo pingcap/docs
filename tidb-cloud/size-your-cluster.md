@@ -1,6 +1,6 @@
 ---
 title: Determine Your TiDB Size
-summary: Learn how to determine the size of your TiDB Cloud cluster.
+summary: TiDB専用クラスターのサイズを決定する方法について説明します。TiDBはコンピューティング専用であり、データは保存されず、水平方向にスケーラブルです。サポートされているvCPUとRAMのサイズは2 vCPU、8 GiB（ベータ版）、4 vCPU、16 GiB、8 vCPU、16 GiB、16 vCPU、32 GiBです。高可用性を実現するために、TiDBクラスターごとに少なくとも2つのTiDBノードを構成することをお勧めします。TiKVはデータの保存を担当し、水平方向にスケーラブルです。サポートされているvCPUとRAMのサイズは2 vCPU、8 GiB（ベータ版）、4 vCPU、16 GiB、8 vCPU、32 GiB、8 vCPU、64 GiB、16 vCPU、64 GiBです。TiFlashはTiKVからのデータをリアルタイムで同期し、リアルタイム分析ワークロードをサポートします。
 ---
 
 # TiDB サイズを決定する {#determine-your-tidb-size}

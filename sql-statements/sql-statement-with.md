@@ -1,6 +1,6 @@
 ---
 title: WITH | TiDB SQL Statement Reference
-summary: An overview of the usage of WITH (Common Table Expression) for the TiDB database.
+summary: 共通テーブル式 (CTE) は、SQL ステートメント内で複数回参照できる一時的な結果セットで、ステートメントの可読性と実行効率を向上させます。`WITH`ステートメントを適用して共通テーブル式を使用できます。非再帰的CTEと再帰的CTEの例があります。MySQLの互換性についても記載されています。
 ---
 
 # と {#with}

@@ -1,6 +1,6 @@
 ---
 title: SESSION_VARIABLES
-summary: Learn the `SESSION_VARIABLES` INFORMATION_SCHEMA table.
+summary: セッション変数テーブルは、セッション変数に関する情報を示します。テーブルデータはSHOW SESSION VARIABLESステートメントの結果と似ています。VARIABLE_NAMEはデータベース内のセッションレベル変数の名前を、VARIABLE_VALUEはその値を表します。10行の出力例も示されています。
 ---
 
 # セッション変数 {#session-variables}

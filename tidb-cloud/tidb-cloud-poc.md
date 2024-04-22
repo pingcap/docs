@@ -1,6 +1,6 @@
 ---
 title: Perform a Proof of Concept (PoC) with TiDB Cloud
-summary: Learn about how to perform a Proof of Concept (PoC) with TiDB Cloud.
+summary: TiDB Cloudは、TiDBの優れた機能を提供するDatabase-as-a-Service(DBaaS)製品で、AWSとGoogle Cloudで利用できます。TiDB Cloudを評価するためには、概念実証(PoC)を開始し、主要な機能を理解し、パフォーマンステストを実行することが最適です。PoC手順には、成功基準の定義、ワークロードの特性の特定、専用クラスターの作成、スキーマとSQLの調整、データのインポート、ワークロードの実行と評価、さらなる機能の探索、環境のクリーンアップが含まれます。PoCを完了するには、TiDB Cloudサポートに連絡してサポートを受けることができます。
 ---
 
 # TiDB Cloudを使用して概念実証 (PoC) を実行する {#perform-a-proof-of-concept-poc-with-tidb-cloud}

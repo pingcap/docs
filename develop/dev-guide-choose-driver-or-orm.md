@@ -1,6 +1,6 @@
 ---
 title: Choose Driver or ORM
-summary: Learn how to choose a driver or ORM framework to connect to TiDB.
+summary: TiDBは、ドライバーとORMに対して2つのサポートレベルを提供します。Javaでは、MySQL-JDBCやTiDB-JDBCを使用することができます。また、HibernateやMyBatisを使用することも可能です。Pythonでは、PyMySQLやmysqlclient、MySQL Connector/Pythonを使用することができます。また、DjangoやSQLAlchemy、peeweeを使用することも可能です。TiDBクラスターに接続する方法については、TiDB Cloudのドキュメントを参照してください。
 ---
 
 # Driverまたは ORM を選択してください {#choose-driver-or-orm}

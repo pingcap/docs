@@ -1,6 +1,6 @@
 ---
 title: Identify Expensive Queries
-summary: TiDB helps identify expensive queries by printing information about statements that exceed the execution time or memory usage threshold. This allows for diagnosing and improving SQL performance. The expensive query log includes details such as execution time, memory usage, user, database, and TiKV Coprocessor task information. This log differs from the slow query log as it prints information as soon as the statement exceeds the resource threshold.
+summary: TiDBを使用すると、SQL実行中の負荷の高いクエリを特定できます。具体的には、実行時間が60秒を超えるか、メモリ使用量が1GBを超えるステートメントに関する情報をログに出力します。高価なクエリログは遅いクエリログとは異なります。ログの例やフィールドの説明も提供されています。
 ---
 
 # 負荷の高いクエリを特定する {#identify-expensive-queries}

@@ -1,6 +1,6 @@
 ---
 title: QUERY WATCH
-summary: An overview of the usage of QUERY WATCH for the TiDB database.
+summary: QUERY WATCHステートメントは、リソースグループ内の暴走クエリの監視リストを手動で管理するために使用されます。この機能は実験的であり、本番環境での使用はお勧めできません。バグを見つけた場合は、GitHubで問題を報告できます。MySQLの互換性があり、TiDBの拡張機能です。QUERY WATCHパラメータを参照してください。暴走クエリの管理についても参照してください。
 ---
 
 # クエリウォッチ {#query-watch}

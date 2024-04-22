@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with SQLAlchemy
-summary: Learn how to connect to TiDB using SQLAlchemy. This tutorial gives Python sample code snippets that work with TiDB using SQLAlchemy.
+summary: このチュートリアルでは、TiDBとSQLAlchemyを使用して、環境のセットアップ、TiDBクラスターへの接続、およびアプリケーションのビルドと実行方法を学ぶことができます。Python 3.8以降とGit、そしてTiDBクラスターが必要です。サンプルアプリケーションコードを実行してTiDBに接続する方法も説明されています。また、TiDBに接続するためのサンプルコードスニペットも提供されています。
 ---
 
 # SQLAlchemy を使用して TiDB に接続する {#connect-to-tidb-with-sqlalchemy}

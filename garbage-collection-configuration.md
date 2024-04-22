@@ -1,6 +1,6 @@
 ---
 title: Garbage Collection Configuration
-summary: Learn about GC configuration parameters.
+summary: ガベージコレクションのコンフィグレーションは、システム変数を使用して構成できます。GCの間隔、データの保持時間制限、スレッド数などを指定できます。また、TiKVはGC I/O制限をサポートしており、通常のリクエストへの影響を軽減できます。TiDB 5.0では、ガベージコレクションの構成方法が変更され、CENTRALモードはサポートされなくなりました。TiDB 6.1.0では、GCセーフポイントを制御するためのシステム変数が導入されました。また、コンパクションフィルターのGCメカニズムも変更され、古いデータを消去した後のパフォーマンス低下を回避します。
 ---
 
 # ガベージコレクションのコンフィグレーション {#garbage-collection-configuration}

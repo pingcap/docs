@@ -1,6 +1,6 @@
 ---
 title: ADD COLUMN | TiDB SQL Statement Reference
-summary: An overview of the usage of ADD COLUMN for the TiDB database.
+summary: ALTER TABLE.. ADD COLUMNステートメントは、既存のテーブルに列を追加します。この操作はTiDBではオンラインで行われ、テーブルへの読み取りも書き込みもブロックされません。新しい列を追加する際の例やMySQLの互換性についても参照してください。
 ---
 
 # 列の追加 {#add-column}

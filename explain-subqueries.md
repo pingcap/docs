@@ -1,6 +1,6 @@
 ---
 title: Explain Statements That Use Subqueries
-summary: Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
+summary: TiDBはサブクエリのパフォーマンスを向上させるために最適化を実行します。サブクエリを使用したExplainステートメントは、内部結合、一意のサブクエリ、セミジョイン、アンチセミ結合、Null認識セミ結合、Null対応アンチセミ結合などの結合タイプを示します。これにより、実行計画を解釈し、パフォーマンスを最適化できます。
 ---
 
 # サブクエリを使用する Explain ステートメント {#explain-statements-that-use-subqueries}

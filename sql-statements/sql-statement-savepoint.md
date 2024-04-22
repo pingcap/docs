@@ -1,6 +1,6 @@
 ---
 title: SAVEPOINT | TiDB SQL Statement Reference
-summary: An overview of the usage of SAVEPOINT for the TiDB database.
+summary: SAVEPOINTは、TiDB v6.2.0で導入された機能です。現在のトランザクションに指定された名前のセーブポイントを設定し、`ROLLBACK TO SAVEPOINT`でロールバックします。`RELEASE SAVEPOINT`は指定されたセーブポイントとその後のすべてのセーブポイントを削除します。MySQLとの互換性については、TiDBはすべてのロックを解放する点で異なります。
 ---
 
 # セーブポイント {#savepoint}

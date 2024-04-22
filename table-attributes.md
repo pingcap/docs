@@ -1,6 +1,6 @@
 ---
 title: Table Attributes
-summary: Learn how to use the table attribute feature of TiDB.
+summary: テーブル属性機能は TiDB v5.3.0 で導入されました。この機能を使用すると、特定の属性をテーブルまたはパーティションに追加して、その属性に対応する操作を実行できます。現在、TiDB は、リージョンのマージ動作を制御するためにテーブルまたはパーティションに`merge_option`属性を追加することのみをサポートしています。テーブル属性を使用してリージョンのマージ動作を制御することができます。属性を設定したりリセットしたりする方法があります。また、属性オーバーライドルールもあります。
 ---
 
 # テーブルの属性 {#table-attributes}

@@ -1,6 +1,6 @@
 ---
 title: FLUSH STATUS | TiDB SQL Statement Reference
-summary: An overview of the usage of FLUSH STATUS for the TiDB database.
+summary: MySQLの`FLUSH STATUS`ステートメントは、TiDBに影響を与えず、集中メトリクス収集にはPrometheusとGrafanaを使用します。このステートメントはMySQLとの互換性のために含まれています。
 ---
 
 # フラッシュステータス {#flush-status}

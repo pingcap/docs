@@ -1,6 +1,6 @@
 ---
 title: TiUP Overview
-summary: Introduce the TiUP tool and its ecosystem.
+summary: TiDB 4.0以降、TiUPはパッケージマネージャーとして機能し、さまざまなクラスターコンポーネントの管理を簡単にします。TiUPは1行のコマンドで任意のコンポーネントを実行できます。TiUPはDarwinとLinuxの両方で1つのコマンドでインストールできます。TiUPエコシステムはTiDBツールの使用を簡単にするために構築されています。利用可能なコマンドにはinstall、list、uninstall、update、status、clean、mirror、helpがあります。利用可能なコンポーネントにはプレイグラウンド、クライアント、クラスター、ベンチがあります。
 ---
 
 # TiUPの概要 {#tiup-overview}

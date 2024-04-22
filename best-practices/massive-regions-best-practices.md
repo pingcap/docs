@@ -1,6 +1,6 @@
 ---
 title: Best Practices for TiKV Performance Tuning with Massive Regions
-summary: TiKV performance tuning involves reducing the number of Regions and messages, increasing Raftstore concurrency, enabling Hibernate Region and Region Merge, adjusting Raft base tick interval, increasing TiKV instances, and adjusting Region size. Other issues include slow PD leader switching and outdated PD routing information.
+summary: TiDBでは、データはリージョンに分割され、それぞれのリージョンに特定のキー範囲のデータが保存されます。大量のリージョンがパフォーマンスに影響を与える可能性があり、Raftstoreのワークフローを学習する必要があります。リージョンの数を減らすためには、Raftstoreの同時実行数を増やしたり、Hibernateリージョンを有効にしたりする方法があります。その他の問題と解決策もあります。
 ---
 
 # 大規模な領域での TiKV性能チューニングのベスト プラクティス {#best-practices-for-tikv-performance-tuning-with-massive-regions}

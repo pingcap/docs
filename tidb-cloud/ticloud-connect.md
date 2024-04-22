@@ -1,6 +1,6 @@
 ---
 title: ticloud connect
-summary: The reference of `ticloud connect`.
+summary: TiDB Cloud CLIは、TiDB Cloudクラスターまたはブランチに接続するためのコマンドです。対話型モードと非対話型モードがあり、必要なフラグを手動で入力する必要があります。また、質問や提案がある場合は、TiDB Cloud CLIの問題を作成してください。
 ---
 
 # ティッククラウド接続 {#ticloud-connect}

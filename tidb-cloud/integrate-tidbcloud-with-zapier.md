@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Cloud with Zapier
-summary: Learn how to connect TiDB Cloud to 5000+ Apps with Zapier.
+summary: TiDB CloudとZapierを統合すると、MySQL互換のHTAPデータベースであるTiDBを使用し、TiDB Cloudの管理を簡単にすることができます。さらに、5000以上のアプリに接続し、ワークフローを自動化することも可能です。具体的な使用方法やテンプレートについては、公式ページで確認できます。
 ---
 
 # TiDB Cloudと Zapier を統合する {#integrate-tidb-cloud-with-zapier}

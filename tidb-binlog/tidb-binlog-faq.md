@@ -1,6 +1,6 @@
 ---
 title: TiDB Binlog FAQs
-summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Binlog.
+summary: TiDBBinlogよくある質問には、TiDB Binlogに関するFAQがまとめられています。TiDB Binlogを有効にすると、TiDBのパフォーマンスに影響はありません。レプリケーションレイテンシーは秒単位で測定され、オフピーク時間では通常約3秒です。Pumpディスクがほぼ満杯の場合は、PumpのGCが正常に動作するかどうかを確認します。Drainerのレプリケーションが中断された場合は、Pumpの状態が正常であるか、および状態offline以外のPumpインスタンスがすべて起動しているかを確認します。DrainerがダウンストリームのMySQLまたはTiDBクラスターにデータをレプリケートするのが遅い場合は、監視項目を確認してください。PumpまたはDrainerノードを一時停止または閉じることができるのはいつですか？
 ---
 
 # TiDBBinlogよくある質問 {#tidb-binlog-faqs}

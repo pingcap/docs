@@ -1,6 +1,6 @@
 ---
 title: Create a Data Source for TiDB Data Migration
-summary: Learn how to create a data source for Data Migration (DM).
+summary: TiDBデータ移行用のデータソースを作成する方法について説明します。データソースには、上流の移行タスクにアクセスするための情報が含まれています。データ移行タスクを作成する前に、データソースを作成する必要があります。データソースの構成や作成方法について詳細に説明します。
 ---
 
 # TiDB データ移行用のデータ ソースの作成 {#create-a-data-source-for-tidb-data-migration}

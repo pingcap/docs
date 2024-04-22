@@ -1,6 +1,6 @@
 ---
 title: DM Advanced Task Configuration File
-summary: This document introduces the advanced task configuration file of Data Migration (DM), covering global and instance configuration. The global configuration includes basic and feature settings, while the instance configuration defines subtasks for data migration from one or multiple MySQL instances in the upstream to the same instance in the downstream.
+summary: このドキュメントは、データ移行 (DM) の高度なタスク構成ファイルについて紹介しています。グローバル構成とインスタンス構成の2つの部分が含まれており、それぞれ基本構成や機能構成セットが設定されています。グローバル構成では、タスクモードやルーティングマッピングルールなどが設定されており、インスタンス構成ではデータ移行のサブタスクが定義されています。設定順序は、グローバル構成を編集した後にインスタンス構成を編集することです。
 ---
 
 # DM 拡張タスクコンフィグレーションファイル {#dm-advanced-task-configuration-file}

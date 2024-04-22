@@ -1,6 +1,6 @@
 ---
 title: TiKV Overview
-summary: An overview of the TiKV storage engine.
+summary: TiKVは、分散型のトランザクションキー/値データベースであり、ACID準拠のトランザクションAPIを提供します。RocksDBに保存されるRaftコンセンサスアルゴリズムとコンセンサス状態の実装により、複数のレプリカ間のデータの一貫性と高可用性を保証します。TiKVはTiDB分散データベースのstorageレイヤーとして、読み取りおよび書き込みサービスを提供し、アプリケーションから書き込まれたデータを永続化します。TiKVクラスターの統計データも保存されます。TiKVはGoogle Spannerの設計に基づいてマルチラフトグループレプリカメカニズムを実装し、水平方向の拡張性に優れており、100 TBを超えるデータを保存するために簡単に拡張できます。
 ---
 
 # TiKVの概要 {#tikv-overview}

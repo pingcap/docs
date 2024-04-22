@@ -1,6 +1,6 @@
 ---
 title: Key Metrics on Performance Overview
-summary: Learn key metrics displayed on the Performance Overview dashboard.
+summary: TiUPを使用してTiDBクラスターをデプロイする場合、監視システムも同時にデプロイされます。GrafanaダッシュボードはPD、TiDB、TiKV、Node_exporter、概要、およびパフォーマンス概要を含む一連のサブダッシュボードに分割されています。パフォーマンス概要ダッシュボードを使用すると、パフォーマンスを効率的に分析し、ユーザー応答時間のボトルネックがデータベースにあるかどうかを確認できます。ボトルネックがデータベース内にある場合は、データベース時間の概要、ワークロードプロファイル、SQLレイテンシー時間の内訳を使用して、データベース内のボトルネックを特定できます。
 ---
 
 # パフォーマンスの概要に関する主要な指標 {#key-metrics-on-performance-overview}

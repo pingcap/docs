@@ -1,5 +1,6 @@
 ---
 title: tiup cluster list
+summary: tiup-clusterは、同じ制御マシンを使用した複数のクラスターの展開をサポートします。tiup cluster listコマンドは、現在ログインしているユーザーによってデプロイされているすべてのクラスターを出力します。デプロイされたクラスターデータはデフォルトで~/.tiup/storage/cluster/clusters/ディレクトリに保存されます。制御マシン上では、現在ログインしているユーザーは他のユーザーがデプロイしたクラスターを表示できません。tiup cluster list [flags]を使用してヘルプ情報を出力します。次のフィールドを含むテーブルを出力します。
 ---
 
 # tiup cluster list {#tiup-cluster-list}

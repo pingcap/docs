@@ -1,6 +1,6 @@
 ---
 title: Explore HTAP
-summary: Learn how to explore and use the features of TiDB HTAP.
+summary: TiDB HTAPは、大量のデータを処理し、DevOpsのコストを削減し、セルフホスト環境またはクラウド環境に簡単にデプロイできるため、データ資産の価値をリアルタイムで実現します。HTAPの使用例は、ハイブリッドワークロード、リアルタイムストリーム処理、データハブなどがあります。TiDB HTAPを使用することで、分析処理パフォーマンスが向上し、ハイブリッドワークロードが分離され、ETLテクノロジースタックが簡素化され、一貫した分析が実現されます。
 ---
 
 # HTAP を探索する {#explore-htap}

@@ -1,6 +1,6 @@
 ---
 title: Guide for Developing a Storage Sink Consumer
-summary: Learn how to design and implement a consumer to consume data changes in storage sinks.
+summary: このドキュメントは、TiDBデータ変更コンシューマーの設計と実装方法について説明しています。TiCDCは標準的なコンシューマーの実装方法を提供せず、Golangで書かれた消費者向けサンプルプログラムを提供しています。消費者はストレージサービスからデータを読み取り、MySQL互換データベースに書き込むことができます。また、消費者はDDLイベントとDMLイベントを適切に処理し、重複排除を実行する必要があります。
 ---
 
 # ストレージ シンク コンシューマの開発ガイド {#guide-for-developing-a-storage-sink-consumer}

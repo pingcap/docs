@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Importing 50 TiB Data
-summary: Learn best practices for importing large volumes of data.
+summary: TiDBに大量のデータをインポートするためのベストプラクティスについてのドキュメントです。TiDB Lightningを使用してデータをインポートする際の重要な要素や手順、構成パラメータの変更方法、トラブルシューティングについて説明しています。大きな単一テーブルをインポートする際のベストプラクティスも提供されています。
 ---
 
 # 50 TiB データをインポートするためのベスト プラクティス {#best-practices-for-importing-50-tib-data}

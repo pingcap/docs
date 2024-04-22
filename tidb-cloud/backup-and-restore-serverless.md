@@ -1,6 +1,6 @@
 ---
 title: Back Up and Restore TiDB Serverless Data
-summary: Learn how to back up and restore your TiDB Serverless cluster.
+summary: TiDBサーバーレスクラスターデータのバックアップと復元について説明します。バックアップは自動でスケジュールされ、復元はインプレースのみサポートされます。バックアップファイルの削除も可能です。復元プロセス中はクラスターは使用できず、復元後に新しい接続を確立できます。ポイントインタイム復元機能はベータ版であり、特定の時点からクラスターを復元できます。
 ---
 
 # TiDB サーバーレス データのバックアップと復元 {#back-up-and-restore-tidb-serverless-data}

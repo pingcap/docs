@@ -1,6 +1,6 @@
 ---
 title: Role-Based Access Control
-summary: This document introduces TiDB RBAC operations and implementation.
+summary: TiDBのロールベースのアクセス制御（RBAC）システムは、MySQL 8.0と互換性があります。ロールの作成、権限の付与、ユーザーへのロールの付与などの操作が可能です。また、デフォルトの役割を設定することもできます。詳細はTiDB権限管理を参照してください。
 ---
 
 # 役割ベースのアクセス制御 {#role-based-access-control}

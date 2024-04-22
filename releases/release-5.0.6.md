@@ -1,6 +1,7 @@
 ---
 title: TiDB 5.0.6 Release Notes
 category: Releases
+summary: TiDB 5.0.6は2021年12月31日にリリースされました。このバージョンでは、TiCDCの改善やKafkaシンクのデフォルト値の変更などが行われました。また、TiDBやTiKV、PD、TiFlashなどのバグも修正されています。さらに、TiCDCやバックアップと復元（BR）、Dumplingなどのツールにも改善が加えられています。
 ---
 
 # TiDB 5.0.6 リリースノート {#tidb-5-0-6-release-notes}

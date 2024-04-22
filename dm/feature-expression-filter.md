@@ -1,6 +1,6 @@
 ---
 title: Filter DMLs Using SQL Expressions
-summary: In incremental data migration, you can filter binlog events using SQL expressions. DM supports filtering data during migration using binlog value filter since v2.0.5. You can configure SQL expressions based on the values in binlog events to determine whether to migrate a row change downstream. For detailed operation and implementation, refer to "Filter DML Events Using SQL Expressions".
+summary: 増分データ移行のプロセスでは、Binlogイベントのフィルタリング機能を使用して特定の種類のbinlogイベントをフィルターできます。DMはv2.0.5以降、binlog value filterを使用した増分移行中のデータのフィルタリングをサポートしています。DMでサポートされているROW形式のbinlogには、binlogイベントのすべての列の値が含まれています。これらの値に従ってSQL式を構成できます。SQL式が行変更をTRUEと評価した場合、DMは行変更をダウンストリームに移行しません。詳細な操作と実装については、SQL式を使用したDMLイベントのフィルタリングを参照してください。
 ---
 
 # SQL式を使用したDMLのフィルタリング {#filter-dmls-using-sql-expressions}

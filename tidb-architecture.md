@@ -1,6 +1,6 @@
 ---
 title: TiDB Architecture
-summary: The key architecture components of the TiDB platform
+summary: TiDBは、柔軟な分散アーキテクチャを持ち、MySQL 5.7プロトコルと完全な互換性があります。高可用性をサポートし、ACIDトランザクションをサポートします。また、豊富なデータ移行ツールを提供します。TiDBはTiDBサーバー、PDサーバー、TiKVサーバー、TiFlashサーバーの4つのコンポーネントで構成されています。
 ---
 
 # TiDBアーキテクチャ {#tidb-architecture}

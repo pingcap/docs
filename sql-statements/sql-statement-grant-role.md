@@ -1,6 +1,6 @@
 ---
 title: GRANT <role> | TiDB SQL Statement Reference
-summary: An overview of the usage of GRANT <role> for the TiDB database.
+summary: ロールをユーザーに割り当てるための`GRANT <role>`ステートメントは、TiDBのMySQL 8.0と完全に互換性があります。ユーザーは`SET ROLE`ステートメントを使用してロールの権限を引き受けるか、`SET ROLE ALL`ステートメントを使用して、割り当てられているすべてのロールを引き受けることができます。これにより、ユーザーは特定のロールに関連付けられた権限を持ち、`SET ROLE`ステートメントを実行する必要がなくなります。
 ---
 
 # <code>GRANT &#x3C;role></code> {#code-grant-x3c-role-code}

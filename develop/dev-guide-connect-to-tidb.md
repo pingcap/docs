@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB
-summary: Learn how to connect to TiDB.
+summary: TiDBはMySQLプロトコルと高い互換性があります。クライアントリンクパラメータの完全なリストについてはMySQLクライアントのオプションを参照してください。TiDBはMySQLクライアント/サーバープロトコルをサポートし、ほとんどのクライアントドライバーとORMフレームワークがMySQLに接続するのと同じようにTiDBに接続できます。MySQLクライアントまたはMySQLシェルの使用を選択できます。TiDBのコマンドラインツールとして使用できるMySQLクライアントを使用してTiDBに接続できます。MySQLシェルを使用してTiDBに接続できます。JDBCドライバーを使用してTiDBに接続できます。Hibernate ORMを使用してTiDBに接続できます。接続パラメータの詳細については各セクションを参照してください。TiDB SQLユーザーの詳細についてはTiDBユーザーアカウント管理を参照してください。
 ---
 
 # TiDB に接続する {#connect-to-tidb}

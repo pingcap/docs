@@ -1,6 +1,6 @@
 ---
 title: String types
-summary: Learn about the string types supported in TiDB.
+summary: TiDBは、CHAR、VARCHAR、BINARY、VARBINARY、BLOB、TEXT、ENUM、SETを含むすべてのMySQL文字列タイプをサポートします。CHARは固定長の文字列で、VARCHARは可変長の文字列です。TEXTは可変長の文字列で、最大長は65,535バイトです。ENUMは列挙された値のリストから選択された値を持つ文字列オブジェクトであり、SETは0個以上の値を持つことができる文字列オブジェクトです。詳細については、MySQLのENUMタイプとSETタイプを参照してください。
 ---
 
 # 文字列型 {#string-types}

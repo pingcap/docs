@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.0 RC3 Release Notes
-summary: TiDB 2.0 RC3, released on March 23, 2018, brings improvements in MySQL compatibility, SQL optimization, and stability. It includes fixes for various issues, optimizations for execution speed, memory control, and DDL job management. PD now supports Region Merge and has optimizations for leader balance and abnormal Regions. TiKV also supports Region Merge, Raft snapshot process, and streaming in Coprocessor, with various improvements in space management and data recovery.
+summary: TiDB 2.0 RC3は、MySQLの互換性、SQLの最適化、安定性が向上しています。TiDBでは、間違った結果が修正され、MySQLとの互換性が向上しました。PDでは、リージョンのマージをサポートし、リーダーのバランスのスケジューリング速度を最適化しました。TiKVでは、リージョンのマージをサポートし、データ削除後のスペース再利用メカニズムを最適化しました。
 ---
 
 # TiDB 2.0 RC3 リリースノート {#tidb-2-0-rc3-release-notes}

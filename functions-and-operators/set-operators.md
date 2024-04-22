@@ -1,6 +1,6 @@
 ---
 title: Set Operations
-summary: Learn the supported set operations in TiDB.
+summary: TiDBは、UNION、EXCEPT、INTERSECT演算子をサポートします。UNION演算子は、重複レコードを削除するUNION DISTINCTと重複を含むUNION ALLをサポートしています。EXCEPT演算子はAにはあるがBにはない要素を返し、INTERSECT演算子は共通部分を返します。括弧を使用して優先順位を指定し、ORDER BYとLIMIT句の使用もサポートしています。
 ---
 
 # 集合演算 {#set-operations}

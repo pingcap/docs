@@ -1,6 +1,6 @@
 ---
 title: TiDB Serverless Branching (Beta) Overview
-summary: Learn the concept of TiDB Serverless branches.
+summary: TiDB Cloudを使用すると、TiDBサーバーレスクラスターのブランチを作成できます。ブランチは元のクラスターからのデータの分岐コピーを含む別個のインスタンスで、隔離された環境を提供します。開発者はブランチを使用して新機能を迅速に反復し、本番データベースに影響を与えることなく問題のトラブルシューティングを行い、変更を簡単に元に戻すことができます。現在、TiDBサーバーレスブランチはベータ版であり、無料です。2023年7月5日以降に作成されたTiDBサーバーレスクラスターのブランチのみを作成できます。また、各ブランチには5 GiBのstorageが許可されます。
 ---
 
 # TiDB サーバーレス ブランチング (ベータ版) の概要 {#tidb-serverless-branching-beta-overview}

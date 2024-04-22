@@ -1,6 +1,6 @@
 ---
 title: Enable TLS for DM Connections
-summary: Learn how to enable TLS for DM connections.
+summary: このドキュメントは、DM 接続での暗号化されたデータ送信を有効にする方法について説明しています。DM マスター、DM ワーカー、および dmctl 間の暗号化されたデータ送信を構成し、証明書を準備して構成します。さらに、コンポーネントの呼び出し元の身元を確認し、証明書をリロードする方法も説明されています。また、DM コンポーネントと上流または下流のデータベース間の暗号化されたデータ送信を有効にする手順も示されています。
 ---
 
 # DM 接続の TLS を有効にする {#enable-tls-for-dm-connections}

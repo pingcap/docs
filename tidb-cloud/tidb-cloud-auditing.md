@@ -1,6 +1,6 @@
 ---
 title: Database Audit Logging
-summary: Learn about how to audit a cluster in TiDB Cloud.
+summary: TiDB Cloudはデータベース監査ログ機能を提供し、ユーザーアクセスの詳細を記録します。監査ログはセキュリティのベストプラクティスであり、無効になっているため、有効にする必要があります。AWSまたはGoogle Cloudの監査ログを有効にする手順も提供されています。監査ログを無効にする場合は、クラスターのページに移動し、監査設定をオフに切り替えます。監査ログにはイベントの詳細が含まれ、フィルタールールを指定してログの範囲を制御できます。
 ---
 
 # データベース監査ログ {#database-audit-logging}

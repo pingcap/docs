@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0 RC Release Notes
-summary: TiDB 4.0 RC released on April 8, 2020. It includes compatibility changes, bug fixes, new features, and tools. TiKV supports the `pipelined` feature in pessimistic transactions, improving TPC-C performance by 20%. TiDB adds case-insensitive collation and enhances the `RECOVER TABLE` syntax. TiKV now supports TLS in the HTTP port. PD supports getting default PD configuration information through the HTTP API. Bug fixes include issues with replication, subquery results, and DDL job internal retry. Tools like TiDB Lightning and TiCDC also have bug fixes and new features.
+summary: TiDB 4.0 RCは2020年4月8日にリリースされました。このバージョンにはいくつかの既知の問題がありますが、新しいバージョンを使用することがお勧めされています。互換性の変更、重要なバグ修正、新機能、バグの修正が含まれています。TiKVでは悲観的トランザクションでの`pipelined`機能がサポートされ、TPC-Cのパフォーマンスが向上しました。PDではHTTP APIを介したデフォルトのPD構成情報の取得がサポートされています。TiDB LightningではバックエンドがTiDBの場合、文字変換エラーによるデータエラーが修正されました。
 ---
 
 # TiDB 4.0 RC リリース ノート {#tidb-4-0-rc-release-notes}

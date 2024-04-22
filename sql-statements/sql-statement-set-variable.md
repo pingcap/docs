@@ -1,6 +1,6 @@
 ---
 title: SET [GLOBAL|SESSION] <variable> | TiDB SQL Statement Reference
-summary: An overview of the usage of SET [GLOBAL|SESSION] <variable> for the TiDB database.
+summary: ステートメント`SET [GLOBAL|SESSION]`は、TiDBの組み込み変数の1つを変更します。`GLOBAL`変数への変更は既存の接続にもローカル接続にも適用されず、新しいセッションのみが値の変更を反映します。`SET GLOBAL`で行われた変更は、クラスター内のすべてのTiDBインスタンスに伝播され、TiDBサーバーが再起動されても保持されます。
 ---
 
 # <code>SET [GLOBAL|SESSION] &#x3C;variable></code> {#code-set-global-session-x3c-variable-code}

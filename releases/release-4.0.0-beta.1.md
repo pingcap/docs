@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.0 Beta.1 Release Notes
-summary: TiDB 4.0.0 Beta.1 was released on February 28, 2020. It includes compatibility changes, new features, and bug fixes. Some highlights include support for SQL performance diagnosis, the `Sequence` function, and TLS support between components. Additionally, TiDB Lightning now has a bug fix for the web interface.
+summary: TiDB 4.0.0 ベータ.1 は2020年2月28日にリリースされました。このバージョンでは、様々な互換性の変更、新機能、バグ修正が行われています。例えば、TiDBでは`log.enable-slow-log`構成項目のタイプが変更され、PDから読み取られた構成アイテムの動的変更がサポートされました。TiKVでは`readpool.unify-read-pool`構成項目が追加され、PDではダッシュボード UIを介したクラスター内のホットスポットの分散へのアクセスがサポートされました。また、TiDBBinlogではコンポーネント間のTLSがサポートされ、TiDB LightningではWebインターフェースのバグが修正されました。
 ---
 
 # TiDB 4.0.0 ベータ.1 リリースノート {#tidb-4-0-0-beta-1-release-notes}

@@ -1,6 +1,6 @@
 ---
 title: Data Check for Tables with Different Schema or Table Names
-summary: Learn the data check for different database names or table names.
+summary: TiDBデータ移行などのレプリケーションツールを使用する際、route-rulesを設定すると、異なるスキーマ名またはテーブル名を持つテーブルを検証できます。sync-diff-inspectorを使用すると、rulesを設定することで、異なるスキーマ名またはテーブル名を持つテーブルを検証できます。設定を簡素化するために、rulesを使用してマッピング関係を設定することができます。上流データベース内のすべてのテーブルは、下流データベースにレプリケートされます。
 ---
 
 # 異なるスキーマまたはテーブル名を持つテーブルのデータ チェック {#data-check-for-tables-with-different-schema-or-table-names}

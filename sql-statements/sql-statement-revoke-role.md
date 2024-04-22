@@ -1,6 +1,6 @@
 ---
 title: REVOKE <role> | TiDB SQL Statement Reference
-summary: An overview of the usage of REVOKE <role> for the TiDB database.
+summary: 指定されたユーザーから以前に割り当てられたロールを削除するステートメントです。MySQL 8.0のロール機能と完全に互換性があります。必要に応じて、バグを報告してください。
 ---
 
 # <code>REVOKE &#x3C;role></code> {#code-revoke-x3c-role-code}

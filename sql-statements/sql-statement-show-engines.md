@@ -1,6 +1,6 @@
 ---
 title: SHOW ENGINES | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW ENGINES for the TiDB database.
+summary: このステートメントは、サポートされているすべてのstorageエンジンを一覧表示するために使用されます。MySQLとの互換性を維持するためにのみ含まれています。このステートメントは常に、サポートされているエンジンとしてInnoDBのみを返します。内部的には、TiDBは通常、storageエンジンとしてTiKVを使用します。
 ---
 
 # ショーエンジン {#show-engines}

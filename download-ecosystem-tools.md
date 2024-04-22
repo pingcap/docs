@@ -1,6 +1,6 @@
 ---
 title: Download TiDB Tools
-summary: Download the most officially maintained versions of TiDB tools.
+summary: TiDB Toolkitには、Dumpling、TiDB Lightning、BRなどのツールが含まれており、インターネットアクセスがある場合はTiUPコマンドを使用してデプロイできます。また、TiDB Operatorを使用する場合はオフラインインストール手順に従ってください。
 ---
 
 # TiDB ツールをダウンロード {#download-tidb-tools}

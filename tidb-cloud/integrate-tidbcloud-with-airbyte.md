@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Cloud with Airbyte
-summary: Learn how to use Airbyte TiDB connector.
+summary: TiDB CloudとAirbyteを統合する方法について説明します。Airbyteはデータ統合エンジンであり、TiDB Cloudに接続する手順や設定方法を示しています。Airbyteをデプロイし、TiDBコネクタをセットアップし、接続を構築することができます。ただし、TiDBコネクタには制限事項があります。CDC機能のサポートやデフォルトの正規化モードでの制限があります。
 ---
 
 # TiDB Cloudと Airbyte を統合する {#integrate-tidb-cloud-with-airbyte}

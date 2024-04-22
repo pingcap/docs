@@ -1,6 +1,6 @@
 ---
 title: Deploy Data Migration Using DM Binary
-summary: Learn how to deploy a Data Migration cluster using DM binary.
+summary: DMバイナリを使用してデータ移行 (DM) クラスターを迅速にデプロイする方法を紹介します。DMバイナリはTiDB Toolkitに含まれており、サンプルシナリオに基づいてDMクラスターをデプロイする手順を説明します。DMマスターとDMワーカーをデプロイする際には、コマンドラインパラメータや設定ファイルを使用して構成します。これで、DMクラスターが正常にデプロイされました。
 ---
 
 # DM バイナリを使用したデータ移行のデプロイ {#deploy-data-migration-using-dm-binary}

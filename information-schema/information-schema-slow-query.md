@@ -1,6 +1,6 @@
 ---
 title: SLOW_QUERY
-summary: Learn the `SLOW_QUERY` INFORMATION_SCHEMA table.
+summary: SLOW_QUERYテーブルは、現在のノードのスロークエリ情報を提供します。テーブル内の列名は、スローログ内のフィールド名に対応しています。このテーブルを使用して問題のあるステートメントを特定し、クエリのパフォーマンスを向上させる方法については、スロークエリログドキュメントを参照してください。CLUSTER_SLOW_QUERYテーブルは、クラスター内のすべてのノードのスロークエリ情報を提供します。INSTANCE列がCLUSTER_SLOW_QUERYに追加されるという点でSLOW_QUERYテーブルのテーブルスキーマと異なります。
 ---
 
 # SLOW_QUERY {#slow-query}

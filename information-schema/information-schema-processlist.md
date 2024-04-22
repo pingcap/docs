@@ -1,6 +1,6 @@
 ---
 title: PROCESSLIST
-summary: Learn the `PROCESSLIST` information_schema table.
+summary: `PROCESSLIST`は、処理中のリクエストを表示するために使用されます。テーブルには追加の列があり、SQL ステートメントのダイジェストを表示する`DIGEST`列やメモリ使用量を示す`MEM`列が含まれます。また、`CLUSTER_PROCESSLIST`は`PROCESSLIST`に対応するクラスタシステムテーブルで、TiDB ノードの情報を照会するために使用されます。`CLUSTER_PROCESSLIST`のテーブル スキーマには`PROCESSLIST`よりも 1 列多い`INSTANCE`列があります。
 ---
 
 # プロセスリスト {#processlist}

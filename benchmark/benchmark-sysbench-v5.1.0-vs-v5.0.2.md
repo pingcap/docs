@@ -1,6 +1,6 @@
 ---
 title: TiDB Sysbench Performance Test Report -- v5.1.0 vs. v5.0.2
-summary: TiDB v5.1.0 shows a 19.4% improvement in Point Select performance compared to v5.0.2. However, the Read Write and Update Index performance is slightly reduced in v5.1.0. The test was conducted on AWS EC2 using Sysbench with specific hardware and software configurations. The test plan involved deploying, importing data, and performing stress tests. Overall, v5.1.0 demonstrates improved Point Select performance but reduced performance in other areas.
+summary: TiDB v5.1.0 とv5.0.2のSysbenchパフォーマンステストの結果は、v5.1.0のポイント選択パフォーマンスが19.4%向上し、読み取り書き込みおよびインデックス更新のパフォーマンスがわずかに低下しています。テスト環境はAWS EC2で、ハードウェア構成はPDがm5.xlarge 3台、TiKVがi3.4xlarge 3台、TiDBがc5.4xlarge 3台、システムベンチがc5.9xlarge 1台です。ソフトウェアバージョンはv5.0.2およびv5.1.0を使用し、パラメータ設定は同じです。
 ---
 
 # TiDB Sysbench パフォーマンス テスト レポート -- v5.1.0 と v5.0.2 {#tidb-sysbench-performance-test-report-v5-1-0-vs-v5-0-2}

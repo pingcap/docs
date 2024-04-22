@@ -1,6 +1,6 @@
 ---
 title: Query Data from a Single Table
-summary: This document describes how to query data from a single table in a database.
+summary: このドキュメントは、SQLおよびさまざまなプログラミング言語を使用して、データベース内の単一テーブルのデータをクエリする方法について説明しています。例として、TiDBの単一テーブルのデータをクエリする方法を示しています。データをクエリする前に、TiDBクラスターを構築し、Bookshopアプリケーションのテーブルスキーマとサンプルデータをインポートする必要があります。クエリの実行、フィルタ結果、結果の並べ替え、クエリ結果の数の制限、および集計クエリについても説明しています。
 ---
 
 <!-- markdownlint-disable MD029 -->

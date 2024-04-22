@@ -1,6 +1,6 @@
 ---
 title: Control Execution Plan
-summary: This chapter introduces methods to control the generation of execution plans in TiDB. It includes using hints, SQL plan management, and the blocklist of optimization rules. Additionally, system variables and the `tidb_opt_fix_control` variable can be modified to control the execution plan. These methods help prevent performance regression caused by behavior changes in the optimizer after cluster upgrades.
+summary: TiDBの制御実行計画に関する章では、実行計画の問題を特定するための方法や、実行計画の生成を制御するための方法が紹介されています。具体的には、オプティマイザーのヒントやSQL計画管理、最適化ルールと式プッシュダウンのブロックリストの使用方法が含まれています。さらに、システム変数の変更によって実行計画の生成を制御する方法も説明されています。これにより、TiDBのパフォーマンスの低下を防ぐことができます。
 ---
 
 # 制御実行計画 {#control-execution-plan}

@@ -1,6 +1,6 @@
 ---
 title: Use an HTAP Cluster
-summary: Learn how to use HTAP cluster in TiDB Cloud.
+summary: HTAPクラスターは、TiDB Cloudのトランザクション処理用に設計されたTiKVと、分析処理用に設計されたTiFlashで構成されます。TiDB Cloudを使用すると、HTAPクラスターを簡単に作成できます。TiKVデータはデフォルトではTiFlashにレプリケートされませんが、SQLステートメントを使用してレプリケートするテーブルを選択できます。TiFlashレプリカを読み取る方法には、賢い選択、エンジンの隔離、手動ヒントの3つの方法があります。TiFlashの詳細については、ドキュメントを参照してください。
 ---
 
 # HTAPクラスタを使用する {#use-an-htap-cluster}

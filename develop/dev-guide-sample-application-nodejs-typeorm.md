@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with TypeORM
-summary: Learn how to connect to TiDB using TypeORM. This tutorial gives Node.js sample code snippets that work with TiDB using TypeORM.
+summary: このチュートリアルでは、Node.js 用の人気のあるオープンソース ORM フレームワークであるTypeORMを使用して、TiDBクラスターに接続する方法を学習できます。環境のセットアップ、TiDBクラスターへの接続、アプリケーションのビルドと実行が含まれます。また、サンプルコードスニペットも提供されています。TiDBサーバーレス、TiDB専用、およびTiDBセルフホストで動作します。Node.jsとGitがインストールされていることが必要です。また、TiDBクラスターが実行中であることも必要です。
 ---
 
 # TypeORM で TiDB に接続する {#connect-to-tidb-with-typeorm}

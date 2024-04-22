@@ -1,6 +1,6 @@
 ---
 title: CREATE SEQUENCE
-summary: An overview of the usage of CREATE SEQUENCE for the TiDB database.
+summary: TiDBの`CREATE SEQUENCE`ステートメントは、シーケンスオブジェクトを作成します。シーケンスは、テーブルや`View`オブジェクトと同等のデータベースオブジェクトであり、カスタマイズされた方法でシリアル化されたIDを生成するために使用されます。シーケンスの構文やパラメーター、およびシーケンスを制御するための式関数も提供されています。MySQLとの互換性もあります。
 ---
 
 # シーケンスの作成 {#create-sequence}

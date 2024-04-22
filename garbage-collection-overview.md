@@ -1,6 +1,6 @@
 ---
 title: GC Overview
-summary: Learn about Garbage Collection in TiDB.
+summary: TiDBはMVCCを使用してトランザクションの同時実行性を制御し、GCの目的は古いデータを消去することです。GCプロセスは安全ポイントを計算し、ロックを解決し、範囲を削除し、GCを実行します。実装の詳細には、ロックの解決、範囲の削除、GCを実行するステップが含まれます。GCはデフォルトで10分ごとにトリガーされ、GCの1ラウンドの実行時間が長すぎると次のGCは開始されません。
 ---
 
 # GCの概要 {#gc-overview}

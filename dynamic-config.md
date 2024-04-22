@@ -1,6 +1,6 @@
 ---
 title: Modify Configuration Dynamically
-summary: Learn how to dynamically modify the cluster configuration.
+summary: このドキュメントでは、TiDB、TiKV、PDなどのコンポーネントの構成を動的に変更する方法について説明します。TiDBインスタンスの構成を変更する方法は、他のコンポーネントとは異なります。TiKVやPDの構成を動的に変更する方法も説明されています。また、TiFlashの構成を変更する方法も示されています。
 ---
 
 # コンフィグレーションを動的に変更する {#modify-configuration-dynamically}

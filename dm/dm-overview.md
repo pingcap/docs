@@ -1,6 +1,6 @@
 ---
 title: TiDB Data Migration Overview
-summary: Learn about the Data Migration tool, the architecture, the key components, and features.
+summary: TiDB データ移行（DM）は、MySQL互換データベースからTiDBへのデータ移行と増分データレプリケーションをサポートする統合されたデータ移行タスク管理プラットフォームです。DMはMySQLとの互換性があり、DMLおよびDDLイベントのレプリケーションをサポートし、MySQLシャードの移行とマージも可能です。さらに、各種フィルターや一元管理、高可用性を提供し、Apache 2.0ライセンスに準拠しています。
 ---
 
 <!-- markdownlint-disable MD007 -->

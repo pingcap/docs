@@ -1,6 +1,6 @@
 ---
 title: CREATE PLACEMENT POLICY
-summary: The usage of CREATE PLACEMENT POLICY in TiDB.
+summary: CREATE PLACEMENT POLICY は、テーブル、パーティション、またはデータベース スキーマに割り当てる名前付き配置ポリシーを作成するために使用されます。この機能は TiDB サーバーレス クラスターでは使用できません。MySQL 構文に対する TiDB 拡張機能です。
 ---
 
 # 配置ポリシーの作成 {#create-placement-policy}

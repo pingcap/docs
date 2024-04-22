@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.1.0 GA Release Notes
-summary: TiDB 3.1.0 GA was released on April 16, 2020. It includes compatibility changes, new features, bug fixes, and improvements for TiDB, TiFlash, TiKV, and tools like Backup & Restore and TiDB Binlog. Notable changes include support for displaying Coprocessor tasks, optimizing hot Region scheduling, and fixing various panic and data loss issues. The release also includes improvements to TiDB Ansible for better monitoring and configuration parameters.
+summary: TiDB 3.1.0 GAは2020年4月16日にリリースされました。このバージョンでは、互換性の変更や新機能、バグの修正が含まれています。例えば、TiDBでは`report-status`構成項目が有効になっているときにHTTPリスニングポートが使用できない場合、TiDBの起動を直接停止するサポートが追加されました。また、TiDBでは`explain format = "dot"`でのコプロセッサータスクの情報の表示をサポートし、ログの冗長なスタック情報を削減する設定項目が追加されました。TiDB AnsibleではTiFlashモニターが追加され、TiDBの起動スクリプトが最適化されました。また、TiDBやTiKV、TiFlashなどのバグも修正されています。
 ---
 
 # TiDB 3.1.0 GA リリースノート {#tidb-3-1-0-ga-release-notes}

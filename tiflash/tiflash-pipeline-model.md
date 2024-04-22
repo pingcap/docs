@@ -1,6 +1,6 @@
 ---
 title: TiFlash Pipeline Execution Model
-summary: Learn about the TiFlash Pipeline Execution Model.
+summary: TiFlashはv7.2.0以降、新しいパイプライン実行モデルをサポートします。このモデルは、従来のスレッドスケジューリングモデルとは異なり、タスクスケジューリングモデルを提供し、オペレーティングシステムのスレッドアプリケーションとスケジューリングのオーバーヘッドを削減します。パイプライン実行モデルは、クエリを複数のパイプラインに分割し、効率を向上させます。また、パイプラインクエリエグゼキューターとタスクスケジューラの2つの主要コンポーネントで構成されます。
 ---
 
 # TiFlashパイプライン実行モデル {#tiflash-pipeline-execution-model}

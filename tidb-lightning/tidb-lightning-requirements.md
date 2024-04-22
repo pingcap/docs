@@ -1,6 +1,6 @@
 ---
 title: TiDB Lightning Requirements for the Target Database
-summary: Learn prerequisites for running TiDB Lightning.
+summary: TiDB Lightningを使用する前に、ターゲットデータベースの権限とストレージスペースを確認する必要があります。権限はインポートモードと機能に基づいて異なり、ストレージ容量はデータソースのサイズ×レプリカの数×2以上である必要があります。データ量はinformation_schema.tablesテーブルのDATA_LENGTHフィールドを使用して見積もることができます。
 ---
 
 # ターゲット データベースのTiDB Lightning要件 {#tidb-lightning-requirements-for-the-target-database}

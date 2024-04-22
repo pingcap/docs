@@ -1,6 +1,6 @@
 ---
 title: TiDB Sysbench Performance Test Report -- v5.3.0 vs. v5.2.2
-summary: TiDB v5.3.0 and v5.2.2 were compared in a Sysbench performance test for Online Transactional Processing (OLTP). Results show that v5.3.0 performance is nearly the same as v5.2.2. Point Select performance of v5.3.0 is reduced by 0.81%, Update Non-index performance is improved by 0.95%, Update Index performance is improved by 1.83%, and Read Write performance is reduced by 0.62%.
+summary: TiDB v5.3.0とv5.2.2のSysbenchパフォーマンステストの結果は、v5.3.0のパフォーマンスがほぼ同じであることを示しています。テスト環境はAWS EC2で、ハードウェア構成とソフトウェアバージョンは同じです。テスト計画ではTiUPを使用してTiDBをデプロイし、Sysbenchを使用してテストを実行しました。結果は、ポイント選択パフォーマンスはわずかに低下し、非インデックス更新のパフォーマンスはわずかに向上しました。更新インデックスのパフォーマンスもわずかに向上しましたが、読み取り/書き込みパフォーマンスはわずかに低下しました。
 ---
 
 # TiDB Sysbench パフォーマンス テスト レポート -- v5.3.0 と v5.2.2 {#tidb-sysbench-performance-test-report-v5-3-0-vs-v5-2-2}

@@ -1,6 +1,6 @@
 ---
 title: TiDB Incremental Backup and Restore Guide
-summary: Incremental data is the differentiated data between starting and end snapshots, along with DDLs. It reduces backup volume and requires setting `tidb_gc_life_time` for incremental backup. Use `br backup` with `--lastbackupts` for incremental backup and ensure all previous data is restored before restoring incremental data.
+summary: TiDBクラスターの増分データは、スナップショットと終了スナップショットの間の差分データとDDLです。増分データはスナップショットバックアップを補完し、データ量を削減します。増分バックアップを実行するには、MVCCデータがTiDB GCメカニズムによってガベージコレクションされていないことを確認してください。増分データをバックアップするには、`--lastbackupts`を指定して`br backup`コマンドを実行します。増分データの復元時には、他の書き込みがないことを確認してください。
 ---
 
 # TiDB 増分バックアップおよび復元ガイド {#tidb-incremental-backup-and-restore-guide}

@@ -1,6 +1,6 @@
 ---
 title: EXPLAIN ANALYZE | TiDB SQL Statement Reference
-summary: An overview of the usage of EXPLAIN ANALYZE for the TiDB database.
+summary: EXPLAIN ANALYZEステートメントは、EXPLAINと同様に機能しますが、実際にステートメントを実行します。これにより、クエリ計画の推定値と実際の値を比較できます。推定値が実際の値と大きく異なる場合は、ANALYZE TABLEを実行することを検討する必要があります。DMLステートメントの実行計画はまだ表示できません。EXPLAIN ANALYZEの出力形式には、actRows、execution info、memory、diskなどの情報列が含まれます。これらの列の詳細は次のとおりです。RUの消費量も含まれます。
 ---
 
 # EXPLAINの説明 {#explain-analyze}

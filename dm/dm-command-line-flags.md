@@ -1,6 +1,6 @@
 ---
 title: TiDB Data Migration Command-line Flags
-summary: Learn about the command-line flags in DM.
+summary: このドキュメントは、DMのコマンドラインフラグについて紹介しています。DMマスターとDMワーカーのそれぞれのフラグについて説明しており、それぞれのオプションやデフォルト値について記載されています。また、dmctlに関連するフラグについても説明されています。
 ---
 
 # TiDB データ移行コマンドライン フラグ {#tidb-data-migration-command-line-flags}

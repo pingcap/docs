@@ -1,6 +1,6 @@
 ---
 title: Stale Read
-summary: Learn how to use Stale Read to accelerate queries under certain conditions.
+summary: TiDBのステイル読み取りは、データの履歴バージョンを読み取るためのメカニズムです。特定の時刻や時間範囲内で履歴データを読み取ることができ、データレプリケーションによるレイテンシーを節約できます。ただし、リアルタイムデータの読み取りが必要な場合は慎重に検討してください。ステートメント、トランザクション、セッションの3つのレベルでステイル読み取りを提供しています。データの読み取りをサポートするために、新しいシステム変数`tidb_read_staleness`を導入しました。
 ---
 
 # ステイル読み取り {#stale-read}

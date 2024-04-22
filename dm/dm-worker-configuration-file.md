@@ -1,6 +1,6 @@
 ---
 title: DM-worker Configuration File
-summary: Learn the configuration file of DM-worker.
+summary: このドキュメントは、DMワーカーの構成について紹介します。構成ファイルのテンプレートと各構成パラメーターの説明が含まれています。構成ファイルのテンプレートには、ワーカーの名前、ログレベル、ログファイルのディレクトリなどが含まれています。グローバルなパラメーターには、ワーカーの名前、ログレベル、ログファイルのディレクトリなどが含まれています。
 ---
 
 # DM ワーカーコンフィグレーションファイル {#dm-worker-configuration-file}

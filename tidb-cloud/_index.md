@@ -2,6 +2,7 @@
 title: TiDB Cloud Documentation
 hide_sidebar: true
 hide_commit: true
+summary: TiDB Cloudは、TiDBをクラウド上で完全に管理されたDatabase-as-a-Service（DBaaS）として提供しています。TiDB Cloudを使用するためのガイド、サンプル、および参照を見つけることができます。TiDB Cloudを選ぶ理由、アーキテクチャ、FAQなどの情報が含まれています。また、TiDB Cloudを試してみる、開発、運用、移行、モニタリング、チューニング、セキュリティ、料金設定、統合、リファレンスなどの学習パスも提供されています。
 ---
 
 <LearningPathContainer platform="tidb-cloud" title="TiDB Cloud" subTitle="TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud. Find the guide, samples, and references you need to use TiDB Cloud.">

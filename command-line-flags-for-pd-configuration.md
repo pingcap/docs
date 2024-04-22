@@ -1,6 +1,6 @@
 ---
 title: PD Configuration Flags
-summary: Learn some configuration flags of PD.
+summary: PDは、コマンドラインフラグと環境変数を使用して構成できます。advertise-client-urlsはクライアントがPDにアクセスするためのアドバタイズURLのリストであり、advertise-peer-urlsは他のPDノードがPDノードにアクセスするためのアドバタイズURLのリストです。client-urlsはPDがリッスンするクライアントURLのリストであり、peer-urlsはPDノードがリッスンするピアURLのリストです。configは設定ファイルであり、data-dirはデータディレクトリへのパスです。initial-clusterはブートストラップ用の初期クラスター構成であり、joinはクラスターに動的に参加するためのものです。Lはログレベルであり、log-fileはログファイルを指定します。log-rotateはログのローテーションを有効または無効にするためのものであり、nameはPDメンバーの名前を指定します。cacert、cert、keyはTLSを有効にするために使用されるファイルのパスを指定します。metrics-addrはPrometheus Pushgatewayのアドレスを指定します。
 ---
 
 # PDコンフィグレーションフラグ {#pd-configuration-flags}

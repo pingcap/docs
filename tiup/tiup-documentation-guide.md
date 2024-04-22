@@ -1,6 +1,6 @@
 ---
 title: TiUP Documentation Map
-summary: Guide you through TiUP documentation with links and introductions.
+summary: TiUPドキュメント マップは、TiUPの概要、用語と概念、コンポーネント管理、FAQ、トラブルシューティングガイド、リファレンスガイドなどの情報を提供します。また、TiUPリソースとして、リリースノートやGitHubの問題リストが含まれています。
 ---
 
 # TiUPドキュメント マップ {#tiup-documentation-map}

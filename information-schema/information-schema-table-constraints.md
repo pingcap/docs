@@ -1,6 +1,6 @@
 ---
 title: TABLE_CONSTRAINTS
-summary: Learn the `TABLE_CONSTRAINTS` information_schema table.
+summary: TABLE_CONSTRAINTSテーブルは、テーブルごとの制約を示します。フィールドには、制約が属するカタログの名前、データベースの名前、制約の名前、テーブルの名前、制約のタイプが含まれます。制約のタイプは、UNIQUE、PRIMARY KEY、またはFOREIGN KEYです。UNIQUEとPRIMARY KEY情報は、SHOW INDEXステートメントの実行結果と同様です。
 ---
 
 # TABLE_CONSTRAINTS {#table-constraints}

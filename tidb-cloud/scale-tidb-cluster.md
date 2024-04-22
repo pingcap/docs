@@ -1,6 +1,6 @@
 ---
 title: Scale Your TiDB Cluster
-summary: Learn how to scale your TiDB Cloud cluster.
+summary: TiDBクラスターは、TiDB、TiKV、TiFlashのノード番号、vCPUとRAM、TiKVとTiFlashのストレージを拡張できます。ノード番号を変更するには、TiDB Cloudコンソールでクラスターを選択し、変更をクリックします。vCPUとRAMを変更するには、同じ手順を実行します。また、TiKVまたはTiFlashのストレージを増やすこともできます。ただし、変更後にクールダウン期間が必要です。TiDB Cloud APIを使用して変更することもできます。
 ---
 
 # TiDBクラスタを拡張する {#scale-your-tidb-cluster}

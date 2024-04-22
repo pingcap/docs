@@ -1,5 +1,6 @@
 ---
 title: tiup dm display
+summary: tiup-dmは、`tiup dm display`コマンドを使用して、DMクラスタ内の各コンポーネントの稼働状況を効率的に確認できます。`tiup dm display <cluster-name> [flags]`コマンドを使用し、クラスタ名を指定して、ノードのIDやロール、ノードのステータスなどを表示できます。オプションとして、ノードやロールを指定することも可能です。出力には、クラスタ名、バージョン、SSHクライアントの種類、ノードID、ロール、ホスト、ポート番号、OS/Arch、ステータス、データディレクトリ、デプロイメントディレクトリが含まれます。
 ---
 
 # tiup dm display {#tiup-dm-display}

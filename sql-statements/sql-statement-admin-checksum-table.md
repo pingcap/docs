@@ -1,6 +1,6 @@
 ---
 title: ADMIN CHECKSUM TABLE | TiDB SQL Statement Reference
-summary: An overview of the usage of ADMIN for the TiDB database.
+summary: ADMIN CHECKSUM TABLEステートメントは、テーブルのデータとインデックスのCRC64チェックサムを計算します。このステートメントは、インポート操作が正常に完了したことを確認するために使用されます。MySQLの構文に対するTiDBの拡張機能です。
 category: reference
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Monitoring and Alert for Backup and Restore
-summary: This document describes monitoring and alert for backup and restore, including log backup monitoring, configuration, Grafana configuration, monitoring metrics, and log backup alerts. It covers the recommended alert items and their configurations for PITR.
+summary: このドキュメントは、バックアップおよび復元機能の監視とアラートについて説明しています。ログバックアップの監視では、Prometheusを使用したモニタリングメトリックの収集がサポートされています。また、グラファナダッシュボードにはポイントインタイムリカバリパネルが含まれています。さらに、ログバックアップのアラート設定方法と推奨されるアラート項目も紹介されています。
 ---
 
 # バックアップと復元の監視とアラート {#monitoring-and-alert-for-backup-and-restore}

@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with mysqlclient
-summary: Learn how to connect to TiDB using mysqlclient. This tutorial gives Python sample code snippets that work with TiDB using mysqlclient.
+summary: TiDBはMySQL互換データベースであり、mysqlクライアントはPython用の人気のあるオープンソースドライバーです。このチュートリアルでは、TiDBとmysqlclientを使用して環境をセットアップし、TiDBクラスターに接続し、アプリケーションをビルドして実行する方法を学習できます。また、サンプルコードスニペットを提供しています。前提条件としてPython 3.10以降、ギット、TiDBクラスターが必要です。詳細については、TiDB公式ドキュメントを参照してください。
 ---
 
 # mysqlclient を使用して TiDB に接続する {#connect-to-tidb-with-mysqlclient}

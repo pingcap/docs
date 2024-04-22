@@ -1,6 +1,6 @@
 ---
 title: Troubleshoot TiDB OOM Issues
-summary: Learn how to diagnose and resolve TiDB OOM (Out of Memory) issues.
+summary: TiDB OOMのトラブルシューティング方法について説明します。典型的なOOM現象やトラブルシューティングのプロセス、一般的な原因と解決策、収集すべき診断情報などが含まれます。また、参照すべき関連情報もあります。
 ---
 
 # TiDB OOM の問題のトラブルシューティング {#troubleshoot-tidb-oom-issues}

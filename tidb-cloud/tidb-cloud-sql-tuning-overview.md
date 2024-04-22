@@ -1,6 +1,6 @@
 ---
 title: SQL Tuning Overview
-summary: Learn about how to tune SQL performance in TiDB Cloud.
+summary: このドキュメントは、TiDB CloudでのSQLチューニングの概要を紹介しています。SQLのパフォーマンスを調整するためには、スキャンデータの範囲を最小限に抑えることや適切なインデックスを使用することが重要です。また、スキーマ設計の最適化やトランザクションの競合、ホットスポットの問題にも注意が必要です。TiDB Cloudには遅いクエリの分析に役立つツールが用意されており、SQLの最適化に関する詳細な情報も提供されています。
 ---
 
 # SQLチューニングの概要 {#sql-tuning-overview}

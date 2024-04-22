@@ -1,6 +1,6 @@
 ---
 title: Configure Cluster Security Settings
-summary: Learn how to configure the root password and allowed IP addresses to connect to your cluster.
+summary: TiDB専用クラスターでは、rootパスワードと許可されたIPアドレスを設定できます。TiDBサーバーレスクラスターの場合は、別のドキュメントを参照してください。TiDB Cloudコンソールでプロジェクトのクラスターページに移動し、ターゲットクラスターの行でSecurity設定を選択します。ダイアログでrootパスワードと許可されるIPアドレスを構成し、適用をクリックします。クラスターの概要ページからも同様の設定が可能です。
 ---
 
 # クラスタのSecurity設定を構成する {#configure-cluster-security-settings}

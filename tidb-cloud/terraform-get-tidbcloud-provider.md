@@ -1,6 +1,6 @@
 ---
 title: Get TiDB Cloud Terraform Provider
-summary: Learn how to get TiDB Cloud Terraform Provider.
+summary: TiDB Cloud Terraform Providerを取得する方法を学習します。TiDB Cloud Terraform ProviderがTerraformレジストリにリリースされました。必要なのは、Terraformをインストールすることだけです。TiDB CloudAPIはHTTPダイジェスト認証を使用し、APIキーの管理をサポートしていません。TiDB Cloud Terraform Providerをダウンロードし、APIキーを使用して構成します。次のステップは、クラスターリソースを使用してクラスターを管理することから始めます。
 ---
 
 # TiDB Cloud Terraform プロバイダーを入手する {#get-tidb-cloud-terraform-provider}

@@ -1,6 +1,6 @@
 ---
 title: Bidirectional Replication Between TiDB Clusters
-summary: Learn how to perform the bidirectional replication between TiDB clusters.
+summary: TiDBクラスター間の双方向レプリケーションは実験的機能であり、TiDB Binlogは一部の機能と互換性がないため、注意が必要です。双方向レプリケーションを有効にするには、DDL操作をレプリケートする方法を使用し、競合を避けるために注意が必要です。また、マークテーブルを使用してデータの変更とbinlogの生成を保証します。DDL操作をレプリケートするには一方向レプリケーション方法を使用し、双方向レプリケーションを構成して有効にします。
 ---
 
 # TiDB クラスター間の双方向レプリケーション {#bidirectional-replication-between-tidb-clusters}

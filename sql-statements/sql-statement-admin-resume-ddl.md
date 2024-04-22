@@ -1,6 +1,6 @@
 ---
 title: ADMIN RESUME DDL JOBS
-summary: An overview of the usage of ADMIN RESUME DDL for the TiDB database.
+summary: 管理者のDDLジョブの履歴書を再開するためには、ADMIN RESUME DDLを使用します。再開が完了した後も、DDLジョブを実行するSQLステートメントは実行中として表示され続けます。再開が失敗した場合は、失敗の具体的な理由が表示されます。このステートメントにより、複数のDDLジョブを再開できます。他のステータスのDDLジョブは再開できず、再開操作は失敗します。ジョブを複数回再開しようとすると、TiDBはエラーを報告します。
 ---
 
 # 管理者の DDL ジョブの履歴書 {#admin-resume-ddl-jobs}

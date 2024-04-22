@@ -1,6 +1,6 @@
 ---
 title: JSON Functions
-summary: Learn about JSON functions.
+summary: TiDBはMySQL 5.7のGAリリースに同梱されているJSON関数のほとんどをサポートしています。JSON値を作成する関数には、JSON_ARRAY、JSON_OBJECT、JSON_QUOTEがあります。JSON値を検索する関数には、JSON_CONTAINS、JSON_CONTAINS_PATH、JSON_EXTRACTなどがあります。JSON値を変更する関数には、JSON_APPEND、JSON_ARRAY_APPEND、JSON_ARRAY_INSERTなどがあります。また、JSON値属性を返す関数やユーティリティ関数、集計関数もあります。JSON関数リファレンスやJSONデータ型も参照してください。
 ---
 
 # JSON関数 {#json-functions}

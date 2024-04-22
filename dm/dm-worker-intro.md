@@ -1,6 +1,6 @@
 ---
 title: DM-worker Introduction
-summary: Learn the features of DM-worker.
+summary: DM-workerはMySQL/MariaDBからTiDBにデータを移行するためのツールです。特徴は、MySQL/MariaDBのセカンダリデータベースとして機能し、binlogイベントを読み取り、複数のTiDBインスタンスにデータを移行できることです。また、DMワーカーにはリレーログ、ダンプ処理ユニット、ロード処理ユニット、binlogレプリケーションなどの複数の論理ユニットが含まれています。それぞれの処理ユニットには必要な権限があります。
 ---
 
 # DMワーカー紹介 {#dm-worker-introduction}

@@ -1,6 +1,6 @@
 ---
 title: TABLE_STORAGE_STATS
-summary: Learn the `TABLE_STORAGE_STATS` INFORMATION_SCHEMA table.
+summary: TABLE_STORAGE_STATSテーブルは、storageエンジン (TiKV) によって格納されるテーブル サイズに関する情報を提供します。テーブルのフィールドは次のように説明されています。TABLE_SCHEMA テーブルが属するスキーマの名前。TABLE_NAME テーブルの名前。TABLE_ID テーブルの ID。PEER_COUNT テーブルのレプリカの数。REGION_COUNT リージョンの数。EMPTY_REGION_COUNT このテーブルにデータが含まれていないリージョンの数。TABLE_SIZE テーブルの合計サイズ (MiB 単位)。TABLE_KEYS テーブル内のレコードの総数。
 ---
 
 # TABLE_STORAGE_STATS {#table-storage-stats}

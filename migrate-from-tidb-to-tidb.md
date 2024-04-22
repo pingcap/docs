@@ -1,6 +1,6 @@
 ---
 title: Migrate from one TiDB cluster to another TiDB cluster
-summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster.
+summary: TiDBクラスター間のデータ移行方法について説明します。データベースの分割、再配置、新しいバージョンへの移行に適用されます。移行プロセスは環境のセットアップ、完全なデータ移行、増分データ移行、そしてサービスの移行から成ります。データのバックアップ、復元、TiCDCの展開、変更フィードの作成、そしてサービスの移行を行います。
 ---
 
 # 1 つの TiDBクラスタから別の TiDBクラスタへの移行 {#migrate-from-one-tidb-cluster-to-another-tidb-cluster}

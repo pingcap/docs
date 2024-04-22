@@ -1,6 +1,6 @@
 ---
 title: SHOW [FULL] PROCESSLIST | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW [FULL] PROCESSLIST for the TiDB database.
+summary: このステートメントは、TiDBサーバーに接続されている現在のセッションをリストします。 `Info`列にはクエリ テキストが含まれますが、オプションのキーワード`FULL`が指定されない限り、クエリ テキストは切り詰められます。TiDBの`State`列は説明的ではありません。 TiDBでは、クエリが並行して実行され、各ゴルーチンが常に異なる状態になるため、状態を単一の値として表すことはより複雑になります。
 ---
 
 # [完全な] プロセスリストを表示 {#show-full-processlist}

@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1.4 Release Notes
-summary: TiDB 2.1.4 and TiDB Ansible 2.1.4 were released on February 15, 2019. The release includes improvements in stability, SQL optimizer, statistics, and execution engine. Fixes include issues with the SQL optimizer/executor, server, DDL, and TiKV. Lightning tool optimizations include memory usage, chunk separation removal, I/O concurrency limitation, batch data import support, and auto compactions in TiKV import mode. Additionally, support for disabling TiKV periodic Level-1 compaction parameter and limiting the number of import engines is added. Sync-diff-inspector now supports splitting chunks using TiDB statistics.
+summary: TiDB 2.1.4は、TiDB Ansible 2.1.4とともにリリースされました。このリリースでは、安定性、SQLオプティマイザー、統計、実行エンジンが大幅に向上しています。TiKVの問題も修正され、稲妻ツールも最適化されました。
 ---
 
 # TiDB 2.1.4 リリースノート {#tidb-2-1-4-release-notes}

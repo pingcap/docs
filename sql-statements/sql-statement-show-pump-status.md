@@ -1,6 +1,6 @@
 ---
 title: SHOW PUMP STATUS
-summary: An overview of the usage of SHOW PUMP STATUS for the TiDB database.
+summary: `SHOW PUMP STATUS`ステートメントは、クラスター内のすべてのPumpノードのステータス情報を表示します。この機能は TiDB セルフホスト型にのみ適用され、TiDB Cloud では利用できません。MySQLの互換性に対する TiDB 拡張機能です。関連情報として、ドレイナーのステータスを表示、ポンプステータスの変更、ドレイナーステータスの変更があります。
 ---
 
 # ポンプのステータスを表示 {#show-pump-status}

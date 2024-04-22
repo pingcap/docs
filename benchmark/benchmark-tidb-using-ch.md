@@ -1,6 +1,6 @@
 ---
 title: How to Run CH-benCHmark Test on TiDB
-summary: Learn how to run CH-benCHmark test on TiDB.
+summary: TiDBのCH-benCHmarkテストの実行方法について説明します。CH-benCHmarkはTPC-CとTPC-Hテストを含む混合ワークロードで、HTAPシステムをテストするための一般的なワークロードです。テストの実行にはTiFlashのデプロイが必要であり、データの読み込み、TiFlashレプリカの作成、統計の収集、テストの実行が含まれます。テストの結果はコンソールに出力され、データの正確性を検証するためのコマンドも提供されています。
 ---
 
 # TiDB で CH-benCHmark テストを実行する方法 {#how-to-run-ch-benchmark-test-on-tidb}

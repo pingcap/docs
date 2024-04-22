@@ -1,6 +1,6 @@
 ---
 title: TiDB 1.1 Alpha Release Notes
-summary: TiDB 1.1 Alpha, released on January 19, 2018, brings significant improvements in MySQL compatibility, SQL optimization, stability, and performance. Key updates include enhanced SQL parser, query optimizer, and executor, as well as server support for the PROXY protocol. PD now offers more APIs, TLS support, and improved scheduling, while TiKV introduces Raft learner support, TLS, and performance optimizations. Additionally, it enhances data recovery tools and improves flow control mechanisms.
+summary: TiDB 1.1 アルファは、MySQL 互換性、SQL 最適化、安定性、パフォーマンスの向上を実現。SQLパーサーは多くの構文をサポートし、SQLクエリオプティマイザーは統計情報のメモリ使用量を削減。SQL実行者はパフォーマンスを向上させ、サーバはPROXYプロトコルをサポート。PDはAPIを追加し、TLSをサポート。TiKVはRaft学習者をサポートし、TLSをサポート。また、RocksDB 構成を最適化してパフォーマンスを向上させる。
 ---
 
 # TiDB 1.1 アルファ リリース ノート {#tidb-1-1-alpha-release-notes}

@@ -1,6 +1,6 @@
 ---
 title: Generate Self-signed Certificates
-summary: Use `openssl` to generate self-signed certificates.
+summary: このドキュメントでは、OpenSSLを使用して自己署名証明書を生成する方法について説明します。また、CA証明書の生成方法や個々のコンポーネントに証明書を発行する手順についても説明します。証明書の生成には、ルートキーとルート証明書を生成する必要があります。さらに、TiKVインスタンスやクライアントに証明書を発行する手順も示します。
 ---
 
 # 証明書を生成する {#generate-self-signed-certificates}

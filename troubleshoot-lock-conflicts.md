@@ -1,6 +1,6 @@
 ---
 title: Troubleshoot Lock Conflicts
-summary: Learn to analyze and resolve lock conflicts in TiDB.
+summary: TiDBは悲観的トランザクションモードを提供し、ロック競合のトラブルシューティングが可能です。ロックビュー機能を使用してロックの問題をトラブルシューティングし、デッドロックエラーを解決することができます。また、デッドロックが発生した場合は、デッドロックを解除するためにトランザクションの1つを手動で終了する必要があります。
 ---
 
 # ロックの競合のトラブルシューティング {#troubleshoot-lock-conflicts}

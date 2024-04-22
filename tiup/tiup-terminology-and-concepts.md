@@ -1,6 +1,6 @@
 ---
 title: TiUP Terminology and Concepts
-summary: Explain the terms and concepts of TiUP.
+summary: TiUPは、コンポーネントをダウンロード、更新、アンインストールするためのコマンドを含むプログラムです。コンポーネントは実行可能なプログラムまたはスクリプトであり、TiUPはさまざまなコンポーネントで関数を拡張します。すべてのコンポーネントはTiUPミラーからダウンロードされ、ミラー ソースは環境変数を使用してカスタマイズできます。
 ---
 
 # TiUP の用語と概念 {#tiup-terminology-and-concepts}

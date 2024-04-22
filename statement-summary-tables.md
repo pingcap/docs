@@ -1,6 +1,6 @@
 ---
 title: Statement Summary Tables
-summary: Learn about Statement Summary Table in TiDB.
+summary: MySQLは統計を使用してSQLを監視するために、ステートメント概要テーブルを提供しています。これらのテーブルには、豊富なフィールドがあり、SQLの問題を特定するのに役立ちます。TiDBは同様のシステムテーブルを提供し、SQLパフォーマンスの問題をトラブルシューティングする方法を紹介しています。また、ステートメントの概要に適切なサイズを設定する方法も説明しています。
 ---
 
 # ステートメント概要テーブル {#statement-summary-tables}

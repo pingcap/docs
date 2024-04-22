@@ -1,6 +1,6 @@
 ---
 title: TiSpark User Guide
-summary: Use TiSpark to provide an HTAP solution to serve as a one-stop solution for both online transactions and analysis.
+summary: TiSparkは、TiDB/TiKV上でApache Sparkを実行するために構築されたシンレイヤーで、分散OLTPデータベースであるTiDBにシームレスに接続して、オンラントランザクションと分析の両方のワンストップソリューションとして機能するHTAPソリューションを提供します。TiSparkはTiKVクラスターとPDクラスターに依存し、Sparkクラスターをセットアップする必要があります。また、TiSparkはETLを構築および保守することなく、トランザクションタスクと分析タスクの両方を同じプラットフォーム上で実行できます。TiSparkはSparkエコシステムのツールを使用できます。
 ---
 
 # TiSpark ユーザーガイド {#tispark-user-guide}

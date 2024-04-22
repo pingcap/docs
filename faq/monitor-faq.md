@@ -1,6 +1,6 @@
 ---
 title: TiDB Monitoring FAQs
-summary: Learn about the FAQs related to TiDB Monitoring.
+summary: TiDBモニタリングに関するFAQには、Prometheus監視フレームワークの詳細と主要な指標の詳細が含まれています。Prometheus監視データはデフォルトで15日ごとに削除されますが、60日に設定することもできます。また、リージョンの健全性はPDメトリック監視ページで監視されます。ステートメント数モニターの"selectsimplefull"はテーブル全体のスキャンを意味し、QPSとStatement OPSの違いはSQLステートメントの範囲にあります。
 ---
 
 # TiDB モニタリングに関するよくある質問 {#tidb-monitoring-faqs}

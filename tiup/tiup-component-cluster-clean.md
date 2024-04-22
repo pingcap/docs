@@ -1,5 +1,6 @@
 ---
 title: tiup cluster clean
+summary: tiup cluster cleanコマンドは、クラスターをリセットし、データとログを削除します。オプションには、--all、--data、--log、--ignore-node、--ignore-role、-h、--helpがあります。本番環境では使用しないでください。
 ---
 
 # tiup cluster clean {#tiup-cluster-clean}

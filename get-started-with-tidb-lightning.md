@@ -1,6 +1,6 @@
 ---
 title: Quick Start for TiDB Lightning
-summary: Learn how to deploy TiDB Lightning and import full backup data to TiDB.
+summary: TiDB Lightningは、MySQLデータをTiDBクラスターにインポートするためのクイックガイドを提供します。ただし、本番環境や開発環境には適用しないでください。データの準備、TiDBクラスターのデプロイ、TiDB Lightningのインストール、開始、そしてデータの整合性を確認する手順が含まれます。
 ---
 
 # TiDB Lightningのクイックスタート {#quick-start-for-tidb-lightning}

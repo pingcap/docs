@@ -1,6 +1,6 @@
 ---
 title: TiCDC FAQs
-summary: Learn the FAQs you might encounter when you use TiCDC.
+summary: TiCDCはデフォルトでポート番号8301を使用するため、TiDB OperatorによってデプロイされたTiCDCクラスターを操作するには、--serverパラメーターを明示的に指定する必要があります。ポート番号8300ではなく、ポート番号8301を使用してください。
 ---
 
 # TiCDC よくある質問 {#ticdc-faqs}

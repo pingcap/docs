@@ -1,6 +1,6 @@
 ---
 title: TIFLASH_REPLICA
-summary: Learn the `TIFLASH_REPLICA` INFORMATION_SCHEMA table.
+summary: TIFLASH_REPLICAテーブルは、TiFlashレプリカの情報を示します。フィールドにはTABLE_SCHEMA、TABLE_NAME、TABLE_ID、REPLICA_COUNT、LOCATION_LABELS、AVAILABLE、PROGRESSが含まれます。AVAILABLEフィールドが1の場合、TiDBはクエリをTiFlashにプッシュダウンできます。PROGRESSが1未満の場合、TiFlashレプリカは遅れており、クエリが失敗する可能性があります。
 ---
 
 # TIFLASH_レプリカ {#tiflash-replica}

@@ -1,6 +1,6 @@
 ---
 title: Explore SQL with TiDB
-summary: Learn about the basic SQL statements for the TiDB database.
+summary: TiDBはMySQLと互換性があり、ほとんどの場合、MySQLステートメントを直接使用できます。DDL、DML、CRUD操作などの基本的なTiDB SQLステートメントについて説明します。データベースの表示、作成、削除、テーブルの作成、表示、削除、インデックスの作成、表示、削除、データの挿入、更新、削除、クエリデータ、ユーザーの作成、認可、削除などが含まれます。
 ---
 
 # TiDB で SQL を探索する {#explore-sql-with-tidb}

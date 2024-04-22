@@ -1,6 +1,6 @@
 ---
 title: Data Migration Billing
-summary: Learn about billing for Data Migration in TiDB Cloud.
+summary: TiDB Cloudのデータ移行には、RCUによる料金がかかります。性能はRCUの値によって異なり、完全なデータ移行はMiB/秒で、増分データ移行は行/秒で測定されます。料金にはリージョンやトラフィック料金が含まれます。詳細は公式サイトを参照してください。
 ---
 
 # データ移行の請求 {#data-migration-billing}

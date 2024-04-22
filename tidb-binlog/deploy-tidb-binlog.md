@@ -1,6 +1,6 @@
 ---
 title: TiDB Binlog Cluster Deployment
-summary: Learn how to deploy TiDB Binlog cluster.
+summary: TiDB Binlogクラスタの展開方法について説明します。PumpとDrainerは64ビットユニバーサルハードウェアサーバープラットフォーム上に展開され、それぞれ3つと1つのサーバーが必要です。TiUPを使用してTiDB Binlogを展開することをお勧めします。バイナリパッケージを使用してTiDB Binlogを展開する手順もあります。PumpとDrainerをデプロイする方法についても説明しています。TiDBサーバーを開始する際には、Pumpが正常に実行されていることを確認する必要があります。
 ---
 
 # TiDBBinlogクラスタの展開 {#tidb-binlog-cluster-deployment}

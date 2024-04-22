@@ -1,6 +1,6 @@
 ---
 title: Migration FAQs
-summary: Learn about the FAQs related to data migration.
+summary: TiDBデータ移行に関するよくある質問のFAQドキュメントには、移行関連ツールに関するリンクが含まれています。MySQL上で実行されているアプリケーションをTiDBに移行する方法やデータのインポートとエクスポートに関する問題、そしてOracleからTiDBに移行する方法などが記載されています。また、データのエクスポート方法やトラフィックを移行する方法についても説明されています。データを削除する際の効率的な方法やデータの読み込み速度を向上させる方法についても記載されています。
 ---
 
 # 移行に関するよくある質問 {#migration-faqs}

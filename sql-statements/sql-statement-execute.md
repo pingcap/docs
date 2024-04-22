@@ -1,6 +1,6 @@
 ---
 title: EXECUTE | TiDB SQL Statement Reference
-summary: An overview of the usage of EXECUTE for the TiDB database.
+summary: `EXECUTE`ステートメントは、サーバー側のプリペアド ステートメントへの SQL インターフェイスを提供します。MySQLの互換性があります。準備する、割り当てを解除するも参照してください。
 ---
 
 # 実行する {#execute}

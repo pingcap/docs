@@ -1,6 +1,6 @@
 ---
 title: Configure SSO for TiDB Dashboard
-summary: TiDB Dashboard supports OIDC-based SSO for sign-in authentication. To enable SSO, fill OIDC Client ID and Discovery URL, authorize impersonation, and save the configuration. To disable SSO, deselect the option and update the configuration. If the SQL user password changes, re-enter it to enable SSO again. After configuration, sign in via SSO by clicking "Sign in via Company Account" and completing the sign-in process. Examples of using Okta, Auth0, and Casdoor for SSO configuration are provided.
+summary: TiDB ダッシュボードは、OIDCベースのSSOをサポートしています。SSOを有効にするには、OIDCクライアントIDとOIDC Discovery URLを入力し、SQLパスワードを偽装します。SSOを無効にするとSQLパスワードが消去されます。パスワード変更後は再入力が必要です。SSO経由でサインインするには、SSOサービスが構成された状態でシステムにサインインします。OktaやAuth0、CasdoorなどのSSOプロバイダーを使用することも可能です。
 ---
 
 # TiDB ダッシュボードの SSO を構成する {#configure-sso-for-tidb-dashboard}

@@ -1,6 +1,6 @@
 ---
 title: ADMIN PAUSE DDL JOBS
-summary: An overview of the usage of ADMIN PAUSE DDL JOBS for the TiDB database.
+summary: DDLジョブを一時停止するには、`ADMIN PAUSE DDL`を使用します。一時停止後、DDLジョブはすぐには戻らず、まだ実行中のように見えます。一時停止が失敗した場合は、失敗の具体的な理由が表示されます。このステートメントはMySQL構文に対するTiDBの拡張機能です。
 ---
 
 # 管理者による DDL ジョブの一時停止 {#admin-pause-ddl-jobs}

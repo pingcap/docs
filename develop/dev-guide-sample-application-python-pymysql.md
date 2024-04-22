@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with PyMySQL
-summary: Learn how to connect to TiDB using PyMySQL. This tutorial gives Python sample code snippets that work with TiDB using PyMySQL.
+summary: PyMySQLはPython用の人気のあるオープンソースドライバーであり、TiDBとPyMySQLを使用して環境をセットアップし、TiDBクラスターに接続し、アプリケーションをビルドして実行する方法を学ぶチュートリアルです。また、基本的なCRUD操作のサンプルコードスニペットも提供されています。このチュートリアルは、TiDBサーバーレス、TiDB専用、およびTiDBセルフホストクラスターで動作します。Python 3.8以降とGit、TiDBクラスターが必要です。サンプルアプリケーションコードを実行してTiDBに接続する方法や、データの挿入、クエリ、更新、削除についても説明されています。
 ---
 
 # PyMySQL を使用して TiDB に接続する {#connect-to-tidb-with-pymysql}

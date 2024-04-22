@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud CLI Reference
-summary: Provides an overview of TiDB Cloud CLI.
+summary: TiDB Cloud CLIは、端末からTiDB Cloudを操作するためのコマンドラインインターフェースです。クラスターの管理、データのインポート、その他の操作が簡単に行えます。コマンドモードには、インタラクティブモードと非対話型モードがあります。ユーザープロファイルの作成、リスト、説明、設定、切り替え、編集、削除が可能です。また、グローバルフラグとして、色の無効化やアクティブなユーザープロファイルの指定ができます。質問や提案がある場合は、問題を作成するか、貢献することができます。
 ---
 
 # TiDB CloudCLI リファレンス {#tidb-cloud-cli-reference}

@@ -1,6 +1,6 @@
 ---
 title: Checkpoint Backup
-summary: TiDB v6.5.0 introduces checkpoint backup feature to continue interrupted backups, reducing the need to start from scratch. It records backed up shards to resume backup progress, but relies on GC mechanism and may require some data to be backed up again. The `br` tool periodically updates `gc-safepoint` to avoid data being garbage collected, and can extend retention period if needed.
+summary: TiDB v6.5.0 以前のバックアップでは、中断後にバックアップされたデータは無効になり、再度バックアップする必要がありました。しかし、TiDB v6.5.0 では、チェックポイントバックアップ機能が導入され、中断されたバックアップを継続できるようになりました。これにより、大規模なクラスターのバックアップコストが削減されます。また、チェックポイントバックアップはGCメカニズムに依存しており、一部のデータは再度バックアップする必要があります。
 ---
 
 # チェックポイントバックアップ {#checkpoint-backup}

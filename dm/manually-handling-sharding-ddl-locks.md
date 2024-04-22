@@ -1,6 +1,6 @@
 ---
 title: Handle Sharding DDL Locks Manually in DM
-summary: Learn how to handle sharding DDL locks manually in DM.
+summary: DMはシャーディングDDLロックを自動的に解決しますが、異常なシナリオではshard-ddl-lockコマンドを使用して手動で処理する必要があります。shard-ddl-lockコマンドを使用すると、DDLロックを表示し、解放するようにDMマスターに要求できます。また、shard-ddl-lock unlockコマンドを使用して、指定されたDDLロックを強制的に解除することができます。
 ---
 
 # DM でシャーディング DDL ロックを手動で処理する {#handle-sharding-ddl-locks-manually-in-dm}

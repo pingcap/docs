@@ -1,6 +1,6 @@
 ---
 title: Encryption and Compression Functions
-summary: Learn about the encryption and compression functions.
+summary: TiDBはMySQL 5.7で利用可能なほとんどの暗号化および圧縮関数をサポートします。サポートされている関数には、MD5、PASSWORD、RANDOM_BYTES、SHA1、SHA2、AES_DECRYPT、AES_ENCRYPT、COMPRESS、UNCOMPRESS、UNCOMPRESSED_LENGTH、VALIDATE_PASSWORD_STRENGTHが含まれます。関連するシステム変数には、block_encryption_modeがあります。サポートされていない関数には、DES_DECRYPT、DES_ENCRYPT、OLD_PASSWORD、ENCRYPTが含まれます。これらの関数はMySQL 5.7で非推奨となり、8.0で削除されました。MySQL Enterpriseでのみ使用できる機能もあります。
 ---
 
 # 暗号化および圧縮機能 {#encryption-and-compression-functions}

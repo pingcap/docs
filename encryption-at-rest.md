@@ -1,6 +1,6 @@
 ---
 title: Encryption at Rest
-summary: Learn how to enable encryption at rest to protect sensitive data.
+summary: 保存時の暗号化は、データが保存されるときに暗号化されることを意味します。TiKVはAESやSM4を使用してデータを透過的に暗号化できます。TiFlashも同様に暗号化をサポートしています。BRを使用してS3にデータをバックアップする際にはS3サーバー側暗号化をサポートします。Azure Blob Storageにバックアップする場合は、暗号化スコープまたは暗号化キーを指定できます。
 ---
 
 # 保存時の暗号化 {#encryption-at-rest}

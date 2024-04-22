@@ -1,6 +1,6 @@
 ---
 title: MODIFY COLUMN | TiDB SQL Statement Reference
-summary: An overview of the usage of MODIFY COLUMN for the TiDB database.
+summary: ALTER TABLE.. MODIFY COLUMNステートメントは、既存のテーブルの列を変更します。データ型と属性の変更が含まれる場合があります。TiDB v5.1.0 以降、Reorg データのデータ型の変更をサポートしています。例えば、VARCHARをBIGINTに変更することができます。また、DECIMAL精度を変更したり、VARCHARの長さを圧縮することも可能です。MySQLの互換性に関して、一部のデータ型の変更はサポートされていません。
 ---
 
 # 列の変更 {#modify-column}

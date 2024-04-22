@@ -1,6 +1,6 @@
 ---
 title: SET RESOURCE GROUP
-summary: An overview of the usage of SET RESOURCE GROUP in the TiDB database.
+summary: SET RESOURCE GROUPは、現在のセッションのリソース グループを設定するために使用されます。この機能はTiDB サーバーレスクラスターでは使用できません。MySQLもリソースグループの設定をサポートしますが、受け入れられるパラメータはTiDBとは異なります。
 ---
 
 # リソースグループの設定 {#set-resource-group}

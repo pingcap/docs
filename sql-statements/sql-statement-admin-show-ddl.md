@@ -1,6 +1,6 @@
 ---
 title: ADMIN SHOW DDL [JOBS|JOB QUERIES] | TiDB SQL Statement Reference
-summary: An overview of the usage of ADMIN for the TiDB database.
+summary: ADMIN SHOW DDL [JOBS|JOB QUERIES]ステートメントは、実行中の DDL ジョブと最近完了した DDL ジョブに関する情報を表示します。現在実行中の DDL ジョブのステータスを表示するには、 `ADMIN SHOW DDL`を使用します。`ADMIN SHOW DDL JOBS`ステートメントは、実行中およびキューイング中のタスクを含む現在の DDL ジョブ キュー内のすべての結果と、完了した DDL ジョブ キュー内の最新の 10 件の結果を表示するために使用されます。`ADMIN SHOW DDL JOB QUERIES`は、`job_id`に対応する DDL ジョブの元の SQL ステートメントを表示します。
 ---
 
 # 管理者表示 DDL [ジョブ|ジョブ クエリ] {#admin-show-ddl-jobs-job-queries}

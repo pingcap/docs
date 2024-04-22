@@ -1,6 +1,6 @@
 ---
 title: Delete Data
-summary: Learn about the SQL syntax, best practices, and examples for deleting data.
+summary: このドキュメントは、TiDB内のデータを削除する方法について説明しています。データを削除する際のベストプラクティスやパフォーマンスに関する考慮事項も含まれています。また、一括削除や非トランザクション一括削除の方法も説明されています。データの削除に関する詳細な情報は、[DELETE 構文](/sql-statements/sql-statement-delete.md)を参照してください。
 ---
 
 # データの削除 {#delete-data}

@@ -1,6 +1,6 @@
 ---
 title: TiDB 7.5.1 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 7.5.1.
+summary: TiDB7.5.1の新機能、互換性の変更、改善、バグ修正について説明します。
 ---
 
 # TiDB 7.5.1 リリースノート {#tidb-7-5-1-release-notes}

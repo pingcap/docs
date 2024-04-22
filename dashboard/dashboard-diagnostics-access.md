@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Cluster Diagnostic Page
-summary: TiDB Dashboard Cluster Diagnostics diagnoses cluster problems and summarizes results into a web page. Access the page through the dashboard or browser. Generate diagnostic and comparison reports for specified time ranges. Historical reports are also available.
+summary: TiDB ダッシュボードのクラスター診断機能は、クラスター内の潜在的な問題を診断し、診断結果と負荷監視情報を要約したWebページを生成します。診断レポートはオフラインで閲覧可能で、クラスターにPrometheusがデプロイされていることが必要です。診断レポートの生成や比較レポートの作成も可能です。
 ---
 
 # TiDB ダッシュボードのクラスタ診断ページ {#tidb-dashboard-cluster-diagnostics-page}

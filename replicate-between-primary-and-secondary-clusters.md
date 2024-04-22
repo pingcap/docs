@@ -1,6 +1,6 @@
 ---
 title: Replicate data between primary and secondary clusters
-summary: Learn how to replicate data from a primary cluster to a secondary cluster.
+summary: TiDBプライマリクラスターとTiDBまたはMySQLセカンダリクラスター間でのデータレプリケーションについて説明します。プロセスには、クラスターの構成、増分データのレプリケーション、REDOログを使用したデータの一貫性の復元が含まれます。TiUP Playgroundを使用してクラスターをデプロイし、sysbenchを使用してデータを初期化し、Minioを使用して外部ストレージを準備します。バックアップとリストア機能を使用して完全なデータを移行し、TiCDCを展開して増分データを複製します。最後に、REDOログを使用してデータの一貫性を確保し、プライマリクラスターとサービスを回復します。
 ---
 
 # プライマリクラスタとセカンダリクラスタの間でデータをレプリケートする {#replicate-data-between-primary-and-secondary-clusters}

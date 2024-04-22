@@ -1,6 +1,6 @@
 ---
 title: Handle Alerts in TiDB Data Migration
-summary: Understand how to deal with the alert information in DM.
+summary: DM内のアラート情報への対処方法を紹介します。すべてのDMマスターノードがオフラインの場合、DM_master_all_downアラートがトリガーされます。DM_worker_offlineアラートは、DMワーカーノードが1時間以上オフラインになっている場合にトリガーされます。DM_DDL_errorは、DMがシャーディングDDL操作を処理しているときに発生します。DM_task_stateアラートは、DMワーカーのサブタスクが20分以上Paused状態になるとトリガーされます。リレーログに関連するアラートルールもあります。ダンプ/ロードに関連するアラートルールもあります。そして、binlogレプリケーションに関連するアラートルールもあります。
 ---
 
 # TiDB データ移行でのアラートの処理 {#handle-alerts-in-tidb-data-migration}

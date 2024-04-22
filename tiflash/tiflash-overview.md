@@ -1,6 +1,6 @@
 ---
 title: TiFlash Overview
-summary: Learn the architecture and key features of TiFlash.
+summary: TiFlashは、TiDBをハイブリッドトランザクション/分析処理（HTAP）データベースにする重要なコンポーネントです。TiFlashは、優れた分離レベルと一貫性保証を提供し、TiKVと同じ読み取り一貫性を持ちます。また、TiFlashには非同期レプリケーション、インテリジェントな選択、コンピューティングの高速化などの主要な機能があります。TiFlashを使用する際は、データのレプリケーションを手動で指定する必要があります。
 ---
 
 # TiFlashの概要 {#tiflash-overview}

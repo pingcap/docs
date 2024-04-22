@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB Dedicated via Standard Connection
-summary: Learn how to connect to your TiDB Cloud cluster via standard connection.
+summary: このドキュメントは、標準接続を介してTiDB専用クラスターに接続する方法について説明しています。標準接続では、トラフィックフィルターを備えたパブリックエンドポイントが公開され、ラップトップからSQLクライアントを介してTiDB専用クラスターに接続できます。接続方法の手順を実行し、TiDBクラスターに正常に接続したら、SQLステートメントを探索することができます。
 ---
 
 # 標準接続経由で TiDB 専用に接続する {#connect-to-tidb-dedicated-via-standard-connection}

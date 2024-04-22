@@ -1,6 +1,6 @@
 ---
 title: TiDB Monitoring API
-summary: Learn the API of TiDB monitoring services.
+summary: TiDB モニタリング API は、ステータスインターフェイスとメトリクスインターフェイスを提供します。ステータスインターフェイスは、HTTP インターフェイスを使用してコンポーネント情報を取得し、TiDBサーバーの実行ステータスとテーブルのstorage情報を取得します。メトリクスインターフェイスは、Prometheus を使用してクラスター全体のステータスとパフォーマンスを監視します。PD インターフェイスは、TiKV サーバーのステータスと負荷分散に関する情報を提供します。
 ---
 
 # TiDB モニタリング API {#tidb-monitoring-api}

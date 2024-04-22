@@ -1,6 +1,6 @@
 ---
 title: Tune TiFlash Performance
-summary: Learn how to tune the performance of TiFlash by planning machine resources and tuning TiDB parameters.
+summary: マシンリソースを計画し、TiDBパラメータを調整することで、TiFlashのパフォーマンスを調整する方法を学びます。
 ---
 
 # TiFlash のパフォーマンスを調整する {#tune-tiflash-performance}

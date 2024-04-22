@@ -1,6 +1,6 @@
 ---
 title: Migration and Import Overview
-summary: Learn an overview of data migration and import scenarios for TiDB Cloud.
+summary: TiDB Cloudでは、さまざまなデータソースからデータを移行できます。MySQL互換データベースからの移行やファイルからのデータインポートが可能です。移行やインポートの方法については、ドキュメントを参照してください。
 ---
 
 # 移行とインポートの概要 {#migration-and-import-overview}

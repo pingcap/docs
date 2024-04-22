@@ -1,6 +1,6 @@
 ---
 title: Customize Configurations of Monitoring Servers
-summary: Learn how to customize the configurations of monitoring servers managed by TiUP
+summary: TiUPを使用してTiDBクラスターをデプロイすると、Prometheus、Grafana、Alertmanagerなどのモニタリングサーバーもデプロイされます。モニタリングサーバーの構成をカスタマイズするには、関連する構成項目をTiDBクラスターのtopology.yamlに追加します。Prometheusのルールとスクレイプ構成ファイルをカスタマイズすることができます。Grafanaのダッシュボードとその他の構成もカスタマイズ可能です。Alertmanagerのリスニングアドレスもカスタマイズできます。TiUP v1.9.0以降でサポートされています。
 ---
 
 # 監視サーバーの構成をカスタマイズする {#customize-configurations-of-monitoring-servers}

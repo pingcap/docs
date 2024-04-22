@@ -1,6 +1,6 @@
 ---
 title: ticloud import list
-summary: The reference of `ticloud import list`.
+summary: ticloudインポートリストは、リストデータのインポートタスクを実行します。インタラクティブモードと非対話モードの両方で使用できます。フラグには、-c、-h、-o、-pがあります。また、継承されたフラグには、--色なしと-Pがあります。質問や提案がある場合は、TiDB Cloud CLIの問題を作成してください。貢献も歓迎します。
 ---
 
 # ticloudインポートリスト {#ticloud-import-list}

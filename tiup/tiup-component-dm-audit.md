@@ -1,5 +1,6 @@
 ---
 title: tiup dm audit
+summary: tiup dm auditコマンドは、すべてのクラスターで実行されたコマンドの履歴と各コマンドの実行ログを表示するために使用されます。`tiup dm audit [audit-id] [flags]`を入力しない場合、稼働記録一覧表は新しい順に出力されます。`[audit-id]`を入力すると、指定した`audit-id`の実行ログがチェックされます。`-h, --help`はヘルプ情報を出力します。`[audit-id]`を指定した場合、該当する実行ログが出力されます。`[audit-id]`が指定されていない場合は、ID、時間、コマンドを含むテーブルが出力されます。
 ---
 
 # tiup dm audit {#tiup-dm-audit}

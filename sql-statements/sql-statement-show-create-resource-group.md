@@ -1,6 +1,6 @@
 ---
 title: SHOW CREATE RESOURCE GROUP
-summary: Learn the usage of SHOW CREATE RESOURCE GROUP in TiDB.
+summary: リソースグループの現在の定義を表示するには、`SHOW CREATE RESOURCE GROUP`ステートメントを使用します。この機能はTiDBサーバーレスクラスターでは使用できません。リソースグループを作成する例として、`rg1`を作成し、その定義を表示することができます。このステートメントはMySQLのTiDB拡張機能です。関連情報として、TiDBリソース制御やリソースグループの作成、変更、削除についても参照できます。
 ---
 
 # 表示 リソースグループの作成 {#show-create-resource-group}

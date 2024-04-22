@@ -1,6 +1,6 @@
 ---
 title: Changefeed Billing
-summary: Learn about billing for changefeeds in TiDB Cloud.
+summary: TiDB Cloudは、TiCDCレプリケーションキャパシティユニット（RCU）で変更フィードのキャパシティを測定します。RCUが高いほど、レプリケーションのパフォーマンスが向上します。料金はTiCDC変更フィードRCUに対して発生します。変更フィードの仕様と対応するレプリケーションパフォーマンスを示す表があります。価格については、変更フィードのコストを参照してください。
 ---
 
 # 変更フィード請求 {#changefeed-billing}

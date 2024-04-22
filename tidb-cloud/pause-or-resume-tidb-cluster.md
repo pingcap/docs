@@ -1,6 +1,6 @@
 ---
 title: Pause or Resume a TiDB Dedicated Cluster
-summary: Learn how to pause or resume a TiDB Dedicated cluster.
+summary: TiDB Cloudでは、TiDB D dedicated クラスターを簡単に一時停止および再開できます。一時停止はデータに影響せず、監視情報の収集とリソース消費が停止します。一時停止後、いつでも再開できます。制限事項として、クラスターのステータスやタスク実行中には一時停止できません。再開後は監視情報の収集が再開し、データの読み取りや書き込みが可能になります。再開には数分かかる場合があります。
 ---
 
 # TiDB 専用クラスタの一時停止または再開 {#pause-or-resume-a-tidb-dedicated-cluster}

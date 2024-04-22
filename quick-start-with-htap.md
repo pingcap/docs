@@ -1,6 +1,6 @@
 ---
 title: Quick start with HTAP
-summary: Learn how to quickly get started with the TiDB HTAP.
+summary: TiDB HTAPのクイック スタート ガイドは、TiDBのハイブリッド トランザクションおよび分析処理 (HTAP) のワンストップ ソリューションを開始する方法を説明します。このガイドでは、TiDB HTAPの基本概念、ステップ、および次の手順について説明しています。HTAPのストレージ エンジン、データ整合性、データ分離、MPP コンピューティング エンジンについても説明しています。また、テスト環境のデプロイ方法やテストデータの準備方法についても記載されています。
 ---
 
 # TiDB HTAPのクイック スタート ガイド {#quick-start-guide-for-tidb-htap}

@@ -1,6 +1,6 @@
 ---
 title: CSV Configurations for Importing Data
-summary: Learn how to use CSV configurations for the Import Data service on TiDB Cloud.
+summary: TiDB Cloud上のデータのインポートサービスのCSV構成を紹介します。CSVコンフィグレーションウィンドウでは、セパレータ、デリミタ、ヘッダー付き、バックスラッシュのエスケープの設定が可能です。セパレータはフィールド区切り文字を定義し、デリミタは引用符で使用する区切り文字を定義します。ヘッダー付きはCSVファイルにヘッダー行が含まれているかどうかを指定し、バックスラッシュのエスケープはフィールド内のバックスラッシュをエスケープ文字として解析するかどうかを定義します。
 ---
 
 # データをインポートするための CSV 構成 {#csv-configurations-for-importing-data}

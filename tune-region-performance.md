@@ -1,6 +1,6 @@
 ---
 title: Tune Region Performance
-summary: Learn how to tune Region performance by adjusting the Region size and how to use buckets to optimize concurrent queries when the Region size is large.
+summary: このドキュメントでは、TiKVのリージョンサイズ調整方法と同時クエリの最適化方法について紹介します。リージョンサイズが大きい場合、バケットを使用して同時クエリを最適化することができます。リージョンサイズのカスタマイズ設定はTiDB v6.1.0以降でサポートされており、リージョンサイズを調整することでパフォーマンスのオーバーヘッドを軽減できます。また、バケットを使用して同時実行性を向上させることも可能です。ただし、これらの機能は実験的なものであり、本番環境での使用はお勧めできません。
 ---
 
 # リージョンのパフォーマンスを調整する {#tune-region-performance}

@@ -1,6 +1,6 @@
 ---
 title: Import CSV Files from Amazon S3 or GCS into TiDB Cloud
-summary: Learn how to import CSV files from Amazon S3 or GCS into TiDB Cloud.
+summary: Amazon S3またはGCSからTiDB CloudにCSVファイルをインポートする方法について説明します。データの一貫性を確保するために、TiDB Cloud空のテーブルにのみCSVファイルをインポートできます。CSVファイルが256MBより大きい場合は、それぞれのサイズが256MB程度の小さなファイルに分割することを検討してください。また、ターゲットテーブルスキーマを作成する必要があります。CSVファイルが配置されているAmazon S3またはGCSディレクトリに、ソースデータのターゲットテーブルスキーマファイルを作成します。
 ---
 
 # Amazon S3 または GCS からTiDB Cloudに CSV ファイルをインポート {#import-csv-files-from-amazon-s3-or-gcs-into-tidb-cloud}

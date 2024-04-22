@@ -1,6 +1,6 @@
 ---
 title: SET PASSWORD | TiDB SQL Statement Reference
-summary: An overview of the usage of SET PASSWORD for the TiDB database.
+summary: TiDBのSET PASSWORDステートメントは、MySQLと完全に互換性があります。ユーザーアカウントのパスワードを変更するために使用されます。新しいパスワードを設定する例として、SET PASSWORD='test';というコマンドが使用されます。MySQLの互換性があるため、バグが見つかった場合は報告することができます。
 ---
 
 # パスワードを設定してください {#set-password}

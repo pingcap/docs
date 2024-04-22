@@ -1,6 +1,6 @@
 ---
 title: SHOW CHARACTER SET | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW CHARACTER SET for the TiDB database.
+summary: TiDBの`SHOW CHARACTER SET`ステートメントは、利用可能な文字セットの静的なリストを提供します。出力には、現在の接続またはユーザーの属性は反映されません。MySQLと完全に互換性があり、文字セットにはデフォルトの照合順序が異なる場合があります。詳細は[MySQLとの互換性]を参照してください。また、照合順序を表示するステートメントや文字セットと照合順序に関する情報も参照してください。
 ---
 
 # キャラクターセットを表示 {#show-character-set}

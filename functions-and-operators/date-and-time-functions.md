@@ -1,6 +1,6 @@
 ---
 title: Date and Time Functions
-summary: Learn how to use the data and time functions.
+summary: TiDBはMySQL 5.7の日付と時刻の関数をサポートしています。ただし、TiDBはMySQLと完全に一致しない場合があります。関数str_to_date()はサポートされていますが、すべての日付と時刻の値を解析することはできません。また、特定の日付と時刻の書式設定オプションは実装されていません。詳細については関連するシステム変数を参照してください。
 ---
 
 # 日付と時刻の関数 {#date-and-time-functions}

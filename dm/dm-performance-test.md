@@ -1,6 +1,6 @@
 ---
 title: DM Cluster Performance Test
-summary: Learn how to test the performance of DM clusters.
+summary: このドキュメントは、DMクラスターのパフォーマンステストに関する方法を説明しています。データ移行速度テストやレイテンシーテストを含むテストシナリオを構築する方法が記載されています。テスト環境のデプロイ方法や性能テストに使用するテーブルスキーマ、フルインポートベンチマークケース、増分レプリケーションのベンチマークケースについても説明されています。
 ---
 
 # DMクラスタのパフォーマンス テスト {#dm-cluster-performance-test}

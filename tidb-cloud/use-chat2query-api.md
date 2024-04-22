@@ -1,6 +1,6 @@
 ---
 title: Get Started with Chat2Query API
-summary: Learn how to use TiDB Cloud Chat2Query API to generate and execute SQL statements using AI by providing instructions.
+summary: TiDB CloudはChat2Query APIを提供し、AIを使用してSQLステートメントを生成および実行できます。APIはHTTPS経由でのみアクセス可能で、データはTLSを使用して暗号化されます。APIキーを作成し、Chat2Dataエンドポイントを呼び出すことで、GitHubリポジトリなどのクエリ結果を取得できます。詳細は公式ドキュメントを参照してください。
 ---
 
 # Chat2Query API を使ってみる {#get-started-with-chat2query-api}

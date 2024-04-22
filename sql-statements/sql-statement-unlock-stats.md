@@ -1,6 +1,6 @@
 ---
 title: UNLOCK STATS
-summary: An overview of the usage of UNLOCK STATS for the TiDB database.
+summary: UNLOCK STATSは、テーブルの統計のロックを解除するために使用されます。MySQLの互換性を持ち、テーブルやパーティションの統計のロックを解除することで、ANALYZEを正常に実行できるようになります。統計やSTATS_LOCKEDを表示する際にも参照されます。
 ---
 
 # ステータスのロックを解除する {#unlock-stats}

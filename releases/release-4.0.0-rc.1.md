@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0 RC.1 Release Notes
-summary: TiDB 4.0 RC.1 was released on April 28, 2020. The release includes compatibility changes, important bug fixes, new features, and bug fixes for TiKV, TiDB, TiFlash, TiCDC, Backup & Restore (BR), and Placement Driver (PD). The bug fixes address issues such as data inconsistency, deadlock, and replication failure. New features include support for sending Coprocessor requests to TiFlash in batches and enabling the load-based split region operation. Additionally, TiFlash now supports pushing down the fromUnixTime and dateFormat functions.
+summary: TiDB 4.0 RC.1は2020年4月28日にリリースされました。このバージョンでは、TiKVの休止状態リージョン機能がデフォルトで無効になり、TiDBBinlogのDrainerでシーケンスDDL操作がサポートされました。さらに、重要なバグ修正や新機能が追加され、バックアップと復元(BR)にも改善が加えられました。TiDBやTiKV、TiFlash、TiCDC、PDなどの各コンポーネントに対するバグ修正や新機能が含まれています。
 ---
 
 # TiDB 4.0 RC.1 リリース ノート {#tidb-4-0-rc-1-release-notes}

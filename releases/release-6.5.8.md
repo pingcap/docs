@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.5.8 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 6.5.8.
+summary: TiDB 6.5.8は2024年2月2日にリリースされました。このバージョンでは、TiKVの構成項目`gc.num-threads`が導入され、TiFlashやツールの改善が行われました。さらに、多数のバグが修正されています。PDやTiKV、TiFlash、ツールなど、さまざまな部分で修正が行われています。
 ---
 
 # TiDB 6.5.8 リリースノート {#tidb-6-5-8-release-notes}

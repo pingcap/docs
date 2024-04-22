@@ -1,6 +1,6 @@
 ---
 title: DROP VIEW | TiDB SQL Statement Reference
-summary: An overview of the usage of DROP VIEW for the TiDB database.
+summary: ドロップビューは、選択されたデータベースからビュー・オブジェクトを削除します。ビューが参照する実表には影響しません。MySQLの互換性があります。
 ---
 
 # ドロップビュー {#drop-view}

@@ -1,6 +1,6 @@
 ---
 title: Support Resources
-summary: Find support resources if you encounter a problem using TiDB.
+summary: TiDBの使用中に問題が発生した場合、PingCAPまたはTiDBコミュニティにサポートを求める方法があります。PingCAPからTiDBエンタープライズ版のサポートを受けるためには、リクエストを送信します。また、TiDB Cloudのサポートを受けるためには、TiDB Cloudコンソールから直接問題を報告するか、TiDB Cloudのサポートに関するドキュメントを参照します。さらに、TiDBコミュニティに助けを求めるためには、TiDBフォーラム、Discordチャンネル、Slackチャンネル、スタックオーバーフローを利用できます。また、バグを報告するためにはGitHub上で問題を送信し、TiDBの実装と設計を学ぶためには、TiDB開発ガイドやTiDB内部フォーラムを参照します。
 ---
 
 # サポートリソース {#support-resources}

@@ -1,6 +1,6 @@
 ---
 title: BACKUP | TiDB SQL Statement Reference
-summary: An overview of the usage of BACKUP for the TiDB database.
+summary: TiDBクラスターで使用される分散バックアップのための`BACKUP`ステートメントは、TiDB自体によって駆動され、BRツールと同じエンジンを使用します。バックアップを実行するには特定の権限が必要であり、タスクは完了するか失敗するまでブロックされます。バックアップはS3やGCSなどの外部ストレージにも保存できます。また、パフォーマンスを微調整するためのオプションも提供されています。MySQLの互換性もあります。
 ---
 
 # バックアップ {#backup}

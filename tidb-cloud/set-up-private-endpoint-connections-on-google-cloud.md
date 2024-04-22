@@ -1,6 +1,6 @@
 ---
 title: Connect to a TiDB Dedicated Cluster via Google Cloud Private Service Connect
-summary: Learn how to connect to your TiDB Cloud cluster via Google Cloud Private Service Connect.
+summary: Google Cloud Private Service Connectを使用してTiDB専用クラスターに安全な接続を確立する方法について説明します。この方法を使用すると、プライベートで安全なエンドポイント接続が可能であり、データが公共のインターネットに公開されることはありません。また、エンドポイント接続はCIDRオーバーラップをサポートし、ネットワーク管理が容易になります。
 ---
 
 # Google Cloud Private Service Connect 経由で TiDB 専用クラスタに接続する {#connect-to-a-tidb-dedicated-cluster-via-google-cloud-private-service-connect}

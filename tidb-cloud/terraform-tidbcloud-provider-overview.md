@@ -1,6 +1,6 @@
 ---
 title: Terraform Integration Overview
-summary: Create, manage, and update your TiDB Cloud resources through Terraform.
+summary: Terraformは、インフラストラクチャをコードとして定義できるツールであり、TiDB Cloud Terraformプロバイダーを使用すると、クラスター、バックアップ、復元などのTiDB Cloudリソースを管理できます。必要な要件は、TiDB Cloudアカウント、Terraformバージョン>= 1.0、およびGoのバージョン>= 1.18です。サポートされているリソースとデータソースには、`tidbcloud_cluster`、`tidbcloud_backup`、`tidbcloud_restore`などが含まれます。
 ---
 
 # Terraform 統合の概要 {#terraform-integration-overview}

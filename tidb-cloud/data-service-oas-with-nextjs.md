@@ -1,6 +1,6 @@
 ---
 title: Use the OpenAPI Specification of a Data App with Next.js
-summary: Learn how to use the OpenAPI Specification of a Data App to generate client code and develop a Next.js application.
+summary: Next.js でのデータアプリのOpenAPI仕様の使用方法を紹介します。まず、TiDBクラスターにテーブルを作成し、サンプルデータを挿入します。次に、データアプリを作成し、APIキーを生成してエンドポイントを作成します。その後、クライアントコードを生成し、Next.jsアプリケーションを開発します。最後に、ローカル開発サーバーでアプリケーションをプレビューします。
 ---
 
 # Next.js でデータ アプリの OpenAPI 仕様を使用する {#use-the-openapi-specification-of-a-data-app-with-next-js}

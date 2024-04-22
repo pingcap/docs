@@ -1,6 +1,6 @@
 ---
 title: Placement Rules in SQL
-summary: Learn how to schedule placement of tables and partitions using SQL statements.
+summary: SQL の配置ルールは、TiKV クラスター内のデータの保存場所を指定できる機能です。複数のデータセンターにデータをデプロイし、異なるアプリケーションからの複数のデータベースを結合し、重要なデータのレプリカの数を増やすことができます。配置ポリシーは、データの物理的な分離を実現し、データの信頼性を向上させます。また、TiDB Lightning が配置ポリシーを含むバックアップ データをインポートするとエラーが報告されるため、注意が必要です。
 ---
 
 # SQL の配置ルール {#placement-rules-in-sql}

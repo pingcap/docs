@@ -1,6 +1,6 @@
 ---
 title: TiDB Binlog Glossary
-summary: Learn the terms used in TiDB Binlog.
+summary: TiDB Binlogは、TiDBからのバイナリログデータを指し、DrainerがKafkaまたはファイルに書き込むバイナリログデータも参照します。TiDBのDMLバイナリログには、INSERT、UPDATE、DELETEの3種類のイベントがあります。チェックポイントは、レプリケーションタスクが一時停止して再開される位置を示し、セーフモードは増分レプリケーションタスクのテーブルスキーマに主キーまたは一意のインデックスが存在する場合にDMLの冪等インポートをサポートするモードを指します。
 ---
 
 # TiDBBinlog用語集 {#tidb-binlog-glossary}

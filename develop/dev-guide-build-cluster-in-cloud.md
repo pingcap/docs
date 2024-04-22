@@ -1,6 +1,6 @@
 ---
 title: Build a TiDB Serverless Cluster
-summary: Learn how to build a TiDB Serverless cluster in TiDB Cloud and connect to it.
+summary: TiDB Cloudを使用してTiDBサーバーレスクラスターを作成し、接続し、サンプルアプリケーションを実行する方法について説明します。アカウントを作成し、クラスターを作成し、接続文字列を取得してMySQLクライアントを使用して接続します。そして、SQLステートメントを実行してTiDB Cloudで正常に動作することを確認します。
 ---
 
 <!-- markdownlint-disable MD029 -->

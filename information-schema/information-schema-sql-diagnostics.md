@@ -1,6 +1,6 @@
 ---
 title: SQL Diagnostics
-summary: Understand SQL diagnostics in TiDB.
+summary: TiDB v4.0で導入されたSQL診断は、システム全体の情報を統合し、監視の概要と自動診断を提供します。クラスタ情報テーブルは、クラスタ内のインスタンス情報を取得し、クラスタ監視テーブルは監視情報を動的に観察します。自動診断は診断結果と診断概要を提供し、システムの障害やリスクを表示します。
 ---
 
 # SQL診断 {#sql-diagnostics}

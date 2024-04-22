@@ -1,6 +1,6 @@
 ---
 title: DATA_LOCK_WAITS
-summary: Learn the `DATA_LOCK_WAITS` information_schema table.
+summary: DATA_LOCK_WAITSテーブルは、TiKVノードで進行中のロック待機情報を示します。悲観的トランザクションのロック待機情報とブロックされている楽観的トランザクションの情報が含まれます。各列フィールドの意味は、KEY、KEY_INFO、TRX_ID、CURRENT_HOLDING_TRX_ID、SQL_DIGEST、SQL_DIGEST_TEXTです。警告として、プロセス権限を持つユーザーのみがクエリできます。楽観的トランザクションの場合、SQL_DIGESTフィールドとSQL_DIGEST_TEXTフィールドはnullです。情報はリアルタイムで取得され、クエリによる情報収集は負荷が高い場合にパフォーマンスリスクがあるため注意が必要です。KEY_INFO列はキーの詳細情報を表示し、JSON形式で表示されます。
 ---
 
 # DATA_LOCK_WAITS {#data-lock-waits}

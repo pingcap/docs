@@ -1,6 +1,6 @@
 ---
 title: TIDB_INDEXES
-summary: Learn the `TIDB_INDEXES` information_schema table.
+summary: TIDB_INDEXESテーブルは、すべてのテーブルのINDEX情報を提供します。TABLE_SCHEMAはインデックスが属するスキーマの名前で、TABLE_NAMEはインデックスが属するテーブルの名前です。NON_UNIQUEはインデックスが一意の場合は0で、それ以外の場合は1です。KEY_NAMEはインデックス名で、SEQ_IN_INDEXはインデックス内の列の連続番号です。COLUMN_NAMEはインデックスが配置されている列の名前で、INDEX_COMMENTはインデックスのコメントです。INDEX_IDはインデックスIDで、IS_VISIBLEはインデックスが表示されるかどうかを示します。CLUSTEREDはクラスター化インデックスかどうかです。
 ---
 
 # TIDB_INDEXES {#tidb-indexes}

@@ -1,6 +1,6 @@
 ---
 title: PD Scheduling Best Practices
-summary: This document summarizes PD scheduling best practices, including scheduling process, load balancing, hot regions scheduling, cluster topology awareness, scale-down and failure recovery, region merge, query scheduling status, and control scheduling strategy. It also covers common scenarios such as uneven distribution of leaders/regions, slow node recovery, and troubleshooting TiKV nodes.
+summary: PDスケジューリングのベストプラクティスについての詳細な説明。スケジューリングプロセスには、情報収集、演算子の生成、演算子の実行が含まれます。さまざまなスケジューラは、異常な状態のストアにピアを追加しないようにします。また、ホットリージョンのスケジュール設定には`hot-region-scheduler`を使用します。クラスタトポロジの認識により、PDはリージョンのレプリカを可能な限り分散できるようになります。
 ---
 
 # PD スケジュールのベスト プラクティス {#pd-scheduling-best-practices}

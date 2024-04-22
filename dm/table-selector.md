@@ -1,6 +1,6 @@
 ---
 title: Table Selector of TiDB Data Migration
-summary: Learn about Table Selector used by the table routing, binlog event filtering, and column mapping rule of Data Migration.
+summary: TiDBのテーブルセレクターは、スキーマ/テーブルのワイルドカード文字に基づく一致ルールを提供します。アスタリスク文字（*）は0個以上の文字に一致し、疑問符（?）は1つの文字に一致します。使用例として、スキーマ名に接頭辞`schema_`を持つすべてのスキーマとテーブルを照合する方法や、スキーマ名に`schema_`プレフィックスがあり、テーブル名に`table_`プレフィックスを持つすべてのテーブルと一致する方法があります。
 ---
 
 # TiDB データ移行のテーブルセレクター {#table-selector-of-tidb-data-migration}

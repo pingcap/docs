@@ -1,6 +1,6 @@
 ---
 title: CLI and Configuration Parameters of TiCDC Changefeeds
-summary: Learn the definitions of CLI and configuration parameters of TiCDC changefeeds.
+summary: TiCDCの変更フィードCLIパラメーターは、レプリケーションタスクの作成方法を示しています。CLIパラメーターには、--changefeed-id、--sink-uri、--start-ts、--target-ts、--configが含まれます。これらのパラメーターを使用して、TiCDCクラスターはデータのプルを開始し、停止します。また、構成パラメーターには、memory-quota、case-sensitive、enable-sync-point、sync-point-interval、sync-point-retentionなどがあります。これらのパラメーターは、データの保存や同期に影響を与えます。
 ---
 
 # TiCDC 変更フィードの CLI およびコンフィグレーションパラメーター {#cli-and-configuration-parameters-of-ticdc-changefeeds}

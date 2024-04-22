@@ -1,6 +1,6 @@
 ---
 title: Use PLAN REPLAYER to Save and Restore the On-Site Information of a Cluster
-summary: Learn how to use PLAN REPLAYER to save and restore the on-site information of a cluster.
+summary: TiDB v5.3.0 では、`PLAN REPLAYER`コマンドが導入され、クラスターのオンサイト情報を簡単に保存および復元できるようになりました。この機能を使用すると、クラスターの問題をトラブルシューティングし、管理のために問題をアーカイブする効率が向上します。また、`PLAN REPLAYER CAPTURE`を使用すると、ターゲット SQL ステートメントと実行プランのオプティマイザー情報を取得できます。
 ---
 
 # PLAN REPLAYER を使用してクラスタのオンサイト情報を保存および復元する {#use-plan-replayer-to-save-and-restore-the-on-site-information-of-a-cluster}

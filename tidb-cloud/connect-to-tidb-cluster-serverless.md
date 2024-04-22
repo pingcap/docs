@@ -1,6 +1,6 @@
 ---
 title: Connect to Your TiDB Serverless Cluster
-summary: Learn how to connect to your TiDB Serverless cluster via different methods.
+summary: TiDB サーバーレス クラスターに接続する方法を紹介します。TiDB サーバーレス クラスターがTiDB Cloud上に作成されたら、プライベートエンドポイント経由で接続するか、パブリックエンドポイント経由で接続するか、Chat2Query 経由で接続することができます。接続方法によっては、データベース サービスへの安全性の高い一方向のアクセスが実現されます。TiDB サーバーレスはTLS接続をサポートしており、アプリケーションから TiDB クラスターへのデータ送信のセキュリティを確保します。TiDB クラスターに正常に接続したら、TiDB で SQL ステートメントを探索することができます。
 ---
 
 # TiDB サーバーレスクラスタに接続する {#connect-to-your-tidb-serverless-cluster}

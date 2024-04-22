@@ -1,6 +1,6 @@
 ---
 title: TIKV_REGION_PEERS
-summary: Learn the `TIKV_REGION_PEERS` INFORMATION_SCHEMA table.
+summary: TIKV_REGION_PEERSテーブルには、TiKVの単一リージョンノードの詳細情報が表示されます。このテーブルはTiDBサーバーレスクラスターでは使用できません。フィールドにはREGION_ID、PEER_ID、STORE_ID、IS_LEARNER、IS_LEADER、STATUS、DOWN_SECONDSが含まれます。例えば、最大値WRITTEN_BYTESで上位3つのリージョンの特定のTiKVアドレスをクエリできます。また、STATUSフィールドには保留中、下、NORMALのステータスがあります。
 ---
 
 # TIKV_REGION_PEERS {#tikv-region-peers}

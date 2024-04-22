@@ -1,6 +1,6 @@
 ---
 title: TiDB Binlog Configuration File
-summary: Learn the configuration items of TiDB Binlog.
+summary: TiDB Binlogの設定項目を紹介します。Pumpセクションでは、アドレス、アドバタイズアドレス、ソケット、pd-url、データディレクトリ、ハートビート間隔、gen-binlog-interval、GC、ログファイル、ログレベル、ノードID、安全に関する設定項目があります。Drainerセクションでは、アドレス、アドバタイズアドレス、ログファイル、ログレベル、ノードID、データディレクトリ、検出間隔、pd-url、初期コミット-ts、同期チェック時間、コンプレッサー、安全に関する設定項目があります。また、syncerセクションでは、データベースタイプ、SQLモード、無視-txn-コミット-ts、無視スキーマ、無視テーブル、レプリケート-do-db、複製実行テーブル、txn-バッチ、ワーカー数、ディスパッチを無効にする、セーフモードに関する設定項目があります。syncer.toセクションでは、mysql/tidb、ファイル、カフカに関する設定項目があります。syncer-to-checkpointセクションでは、type、host、user、password、portに関する設定項目があります。
 ---
 
 # TiDBBinlogコンフィグレーションファイル {#tidb-binlog-configuration-file}

@@ -1,6 +1,6 @@
 ---
 title: TiDB Binlog Monitoring
-summary: Learn how to monitor the cluster version of TiDB Binlog.
+summary: TiDB Binlogを監視するためには、Grafana Webにアクセスし、PumpとDrainerの状態を確認します。Pump監視メトリクスにはストレージサイズ、メタデータ、Binlog QPSなどが含まれます。Drainer監視メトリクスにはチェックポイントTSO、Pump NodeIDによるBinlog QPSなどが含まれます。アラートルールには緊急、重大、警告の3つのカテゴリがあり、それぞれのアラートに対する解決策が記載されています。
 ---
 
 # TiDBBinlogのモニタリング {#tidb-binlog-monitoring}

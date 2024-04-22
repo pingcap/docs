@@ -1,5 +1,6 @@
 ---
 title: tiup dm import
+summary: TiUP DMの`import`コマンドは、DM v1.0クラスターをv2.0以降にアップグレードするために使用されます。このコマンドは、v2.0.0-rc.2以降のバージョンにのみ対応しています。また、クラスターをインポートする前にTiUP DMコンポーネントを最新バージョンにアップグレードする必要があります。インポートされたクラスターには、DMマスターノードが1つだけ存在します。
 ---
 
 # tiup dm import <span class="version-mark">DM v1.0 のアップグレード専用</span> {#tiup-dm-import-span-class-version-mark-only-for-upgrading-dm-v1-0-span}

@@ -1,6 +1,6 @@
 ---
 title: Back Up and Restore RawKV
-summary: TiKV and PD can form a KV database known as RawKV without TiDB. TiKV-BR supports data backup and restore for RawKV. For more details, visit the TiKV-BR User Docs on the TiKV website.
+summary: TiKVとPDは、TiDBなしで使用すると、RawKVと呼ばれるKVデータベースを構成できます。TiKV-BRは、RawKVを使用する製品のデータのバックアップと復元をサポートしています。詳細については、TiKV-BRユーザードキュメントを参照してください。
 ---
 
 # RawKV のバックアップと復元 {#back-up-and-restore-rawkv}

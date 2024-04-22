@@ -1,6 +1,6 @@
 ---
 title: TiDB Environment and System Configuration Check
-summary: Learn the environment check operations before deploying TiDB.
+summary: TiDB導入前の環境確認操作について説明します。TiKVデータの保存にはEXT4ファイルシステムのNVMe SSDを使用することをお勧めします。データディスクをext4ファイルシステムにフォーマットし、ファイルシステムにnodelallocおよびnoatimeマウントオプションを追加します。システムスワップを無効にし、TiDBインスタンスの一時スペースを設定します。ファイアウォールサービスを停止し、NTPサービスを確認してインストールします。オペレーティングシステムの最適なパラメータを確認して設定し、numactlツールをインストールします。
 ---
 
 # TiDB 環境およびシステムコンフィグレーションのチェック {#tidb-environment-and-system-configuration-check}

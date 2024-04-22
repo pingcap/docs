@@ -1,6 +1,6 @@
 ---
 title: Highly Concurrent Write Best Practices
-summary: This document provides best practices for handling highly-concurrent write-heavy workloads in TiDB. It addresses challenges and solutions for data distribution, hotspot cases, and complex hotspot problems. The article also discusses parameter configuration for optimizing performance.
+summary: TiDBの高度な同時書き込みに関するベストプラクティスについて説明します。同時書き込み集中型のシナリオでは、データの分散とスケジューリングの原則が重要です。また、ホットスポットの問題を回避するために、テーブルの事前分割や`AUTO_RANDOM`の使用が推奨されます。さらに、TiDBのラッチを無効にすることで、トランザクションの書き込み競合を減らすことができます。
 ---
 
 # 高度な同時書き込みのベスト プラクティス {#highly-concurrent-write-best-practices}

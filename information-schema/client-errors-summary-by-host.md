@@ -1,6 +1,6 @@
 ---
 title: CLIENT_ERRORS_SUMMARY_BY_HOST
-summary: Learn about the `CLIENT_ERRORS_SUMMARY_BY_HOST` INFORMATION_SCHEMA table.
+summary: TiDBサーバーに接続するクライアントに返されるSQLエラーと警告の概要を示す`CLIENT_ERRORS_SUMMARY_BY_HOST`表は、不正なSQLステートメント、ゼロ除算エラー、範囲外または重複したキー値の挿入、許可エラー、存在しないテーブルなどを含みます。これにより、アプリケーションは適切なアクションを実行することが期待されます。また、リモートホストごとにエラーを要約するため、異なるアプリケーションサーバーのエラーを診断するのに役立ちます。要約されたカウントは`FLUSH CLIENT_ERRORS_SUMMARY`を使用してリセットできます。
 ---
 
 # CLIENT_ERRORS_SUMMARY_BY_HOST {#client-errors-summary-by-host}

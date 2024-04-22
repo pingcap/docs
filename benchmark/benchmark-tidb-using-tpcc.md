@@ -1,6 +1,6 @@
 ---
 title: How to Run TPC-C Test on TiDB
-summary: This document describes how to test TiDB using TPC-C, an online transaction processing benchmark. It specifies the initial state of the database, provides commands for loading data, running the test, and cleaning up test data. The test measures the maximum qualified throughput using tpmC (transactions per minute).
+summary: TiDBでTPC-Cテストを実行する方法について説明します。TPC-CはOLTPベンチマークであり、商品販売モデルを使用してOLTPシステムをテストします。テスト前にデータベースの初期状態を指定し、テストを実行します。テストデータをクリーンアップすることもできます。
 ---
 
 # TiDB で TPC-C テストを実行する方法 {#how-to-run-tpc-c-test-on-tidb}

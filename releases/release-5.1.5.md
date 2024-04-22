@@ -1,6 +1,6 @@
 ---
 title: TiDB 5.1.5 Release Notes
-summary: TiDB 5.1.5 was released on December 28, 2022. The release includes compatibility changes and numerous bug fixes for TiDB, TiKV, PD, TiFlash, and various tools. Bug fixes address issues such as panics, wrong results, and incorrect behaviors. Fixes also include issues related to data loss, memory usage, and incorrect metrics.
+summary: TiDB 5.1.5は2022年12月28日にリリースされました。このバージョンでは、PDの互換性の変更とTiDB、TiKV、PD、TiFlash、TiDBBinlog、BR、TiCDCのバグ修正が含まれています。これにより、ウィンドウ関数のエラー、パーティションテーブルの間違った結果、符号なしBIGINT引数の間違った結果などが修正されました。また、TiFlashの文字列を日時にキャストする際の誤ったmicrosecondやTLSが有効になっているときのpanicなどの問題も修正されています。
 ---
 
 # TiDB 5.1.5 リリースノート {#tidb-5-1-5-release-notes}

@@ -1,6 +1,6 @@
 ---
 title: SHOW PLACEMENT
-summary: The usage of SHOW PLACEMENT in TiDB.
+summary: SHOW PLACEMENTは、配置ポリシーからのすべての配置オプションを要約し、正規形式で表示します。この機能はTiDBサーバーレスクラスターでは使用できません。ステートメントは、配置Driver(PD)による配置スケジュールの現在の進行状況を示すScheduling_Stateフィールドを含む結果セットを返します。PENDINGはPDが配置のスケジュールをまだ開始していないことを示し、INPROGRESSはPDが現在配置をスケジュールしていることを示し、SCHEDULEDはPDが配置を正常にスケジュールしたことを示します。MySQLの互換性に対するTiDBの拡張機能です。
 ---
 
 # 配置を表示 {#show-placement}

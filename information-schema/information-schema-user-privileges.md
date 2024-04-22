@@ -1,6 +1,6 @@
 ---
 title: USER_PRIVILEGES
-summary: Learn the `USER_PRIVILEGES` information_schema table.
+summary: USER_PRIVILEGESテーブルは、グローバル権限に関する情報を示します。この情報はmysql.userシステムテーブルから取得されます。テーブルのフィールドは、GRANTEE（許可されたユーザーの名前）、TABLE_CATALOG（テーブルが属するカタログの名前）、PRIVILEGE_TYPE（付与される権限のタイプ）、IS_GRANTABLE（GRANT OPTION権限がある場合はYES、それ以外の場合はNO）です。
 ---
 
 # USER_PRIVILEGES {#user-privileges}

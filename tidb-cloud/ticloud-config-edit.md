@@ -1,6 +1,6 @@
 ---
 title: ticloud config edit
-summary: The reference of `ticloud config edit`.
+summary: ticloud設定編集は、macOSまたはLinuxを使用している場合は、デフォルトのテキストエディタでプロファイル構成ファイルを開くことができます。Windowsを使用している場合は、前述のコマンドを実行すると、代わりにプロファイル構成ファイルのパスが表示されます。フォーマットエラーや実行エラーを避けるために、構成ファイルを手動で編集することはお勧めしません。代わりに、ticloud config create、ticloud config delete、またはticloud config setを使用して構成を変更できます。プロファイル構成ファイルを編集する例として、ticloud config editコマンドを使用します。フラグには-h、--helpがあります。継承されたフラグには--色なしと-P、--プロファイル文字列があります。質問や提案がある場合は、TiDB Cloud CLIの問題を作成してください。貢献も歓迎します。
 ---
 
 # ticloud設定編集 {#ticloud-config-edit}

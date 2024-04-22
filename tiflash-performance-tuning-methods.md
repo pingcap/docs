@@ -1,6 +1,6 @@
 ---
 title: TiFlash Performance Analysis and Tuning Methods
-summary: Introduces the TiFlash metrics on the Performance Overview dashboard to help you better understand and monitor TiFlash workloads.
+summary: TiFlashのパフォーマンス分析とチューニング方法についてのドキュメントです。TiFlashクラスターのリソース使用率と主要なパフォーマンスメトリクスを紹介します。リソース使用率はCPU、メモリ、IO使用率を監視し、パフォーマンスメトリクスはスループット、レイテンシ、Raft関連、IOスループットを取得します。例として、TiFlash MPPリクエストの処理時間の概要やRaftとCH-benCHmarkのワークロードのIOメトリクスを示しています。
 ---
 
 # TiFlash のパフォーマンス分析およびチューニング方法 {#tiflash-performance-analysis-and-tuning-methods}

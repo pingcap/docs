@@ -1,6 +1,6 @@
 ---
 title: FLUSH TABLES | TiDB SQL Statement Reference
-summary: An overview of the usage of FLUSH TABLES for the TiDB database.
+summary: TiDBには、MySQLのテーブルキャッシュの概念がないため、FLUSH TABLESステートメントは解析されますが、無視されます。また、TiDBはテーブルのロックをサポートしていないため、FLUSH TABLES WITH READ LOCKステートメントはエラーが発生します。代わりに履歴読み取りを使用することをお勧めします。
 ---
 
 # フラッシュテーブル {#flush-tables}

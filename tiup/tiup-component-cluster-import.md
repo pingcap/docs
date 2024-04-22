@@ -1,5 +1,6 @@
 ---
 title: tiup cluster import
+summary: TiDB v4.0以降のリリースでは、TiUPクラスターは、管理のためにクラスターをtiup-clusterコンポーネントに転送する`import`コマンドを提供します。TiDB Ansible構成をTiUPにインポートした後は、TiDB Ansibleを使用しないでください。また、特定の状況下では`import`コマンドを使用しないでください。インポートプロセスのログを表示します。
 ---
 
 # tiup cluster import {#tiup-cluster-import}

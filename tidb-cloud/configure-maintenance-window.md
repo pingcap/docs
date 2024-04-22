@@ -1,6 +1,6 @@
 ---
 title: Configure Maintenance Window
-summary: Learn how to configure maintenance window for your cluster.
+summary: TiDB Cloudサービスの信頼性、セキュリティ、パフォーマンスを確保するために、メンテナンスウィンドウは自動的に実行される指定された時間枠です。メンテナンス期間中は一部の操作が許可され、一部は禁止されます。メンテナンス期間の通知を受け取ることが重要であり、メンテナンスウィンドウのビューと構成を行うことでメンテナンスの影響を最小限に抑えることができます。
 ---
 
 # メンテナンスウィンドウの構成 {#configure-maintenance-window}

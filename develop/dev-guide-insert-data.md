@@ -1,6 +1,6 @@
 ---
 title: Insert Data
-summary: Learn about how to insert data.
+summary: このドキュメントは、TiDBにデータを挿入する方法について説明しています。複数行のデータを挿入する方法や、一括挿入の推奨ツールについて説明しています。また、ホットスポットを避ける方法や、AUTO_RANDOM主キーを使用する際の注意点についても触れています。HTAP機能を使用することで、データの一貫性を自動的に保証します。
 ---
 
 <!-- markdownlint-disable MD029 -->

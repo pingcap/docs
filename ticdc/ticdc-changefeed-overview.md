@@ -1,6 +1,6 @@
 ---
 title: Changefeed Overview
-summary: Learn basic concepts, state definitions, and state transfer of changefeeds.
+summary: チェンジフィードはTiCDCのレプリケーションタスクであり、TiDBクラスター内の指定されたテーブルのデータ変更ログを指定されたダウンストリームにレプリケートします。 TiCDCクラスターで複数の変更フィードを実行および管理できます。レプリケーションタスクの状態は、レプリケーションタスクの実行ステータスを表します。 TiCDCの実行中に、レプリケーションタスクがエラーで失敗したり、手動で一時停止または再開されたり、指定された`TargetTs`に達したりする可能性があります。
 ---
 
 # チェンジフィードの概要 {#changefeed-overview}

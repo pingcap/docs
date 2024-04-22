@@ -1,5 +1,6 @@
 ---
 title: tiup status
+summary: tiup statusコマンドは、tiup [flags] <component> [args...]コマンドでコンポーネントを実行した後、コンポーネントの動作情報を表示します。コンポーネントの情報のみ確認できます。現在も稼働しているコンポーネントとtiup -T/--tagで指定されたタグを介して実行されるコンポーネント。構文はtiup status [flags]で、オプションはなし。出力はName、Component、PID、Status、Created Time、Directory、Binary、Argsのフィールドで構成されるテーブルです。コンポーネントのステータスはUp、ダウンまたは到達不能、廃棄、オフライン保留中、不明のいずれかです。TiUPのPending Offline、PD APIによって返されるOffline、およびTiDBダッシュボードのLeavingは同じステータスを示します。
 ---
 
 # tiup status {#tiup-status}

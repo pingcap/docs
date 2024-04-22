@@ -1,6 +1,6 @@
 ---
 title: Handle Errors in TiDB Data Migration
-summary: Learn about the error system and how to handle common errors when you use DM.
+summary: このドキュメントは、DM 使用時のエラー システムと一般的なエラーの処理方法を紹介しています。エラーシステムでは、エラーコード、エラーの種類、エラー範囲、エラーレベル、エラーの説明が含まれます。エラーのトラブルシューティング手順も提供されています。さらに、一般的なエラーの処理方法も記載されています。エラーの原因や解決策が詳細に説明されています。
 ---
 
 # TiDB データ移行におけるエラーの処理 {#handle-errors-in-tidb-data-migration}

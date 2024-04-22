@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.0.5 Release Notes
-summary: TiDB 2.0.5 was released on July 6, 2018, with improvements in system compatibility and stability. New features include the `tidb_disable_txn_auto_retry` system variable. Bug fixes address issues with user login, data insertion, and command compatibility. PD and TiKV also received fixes for various issues.
+summary: TiDB 2.0.5は、システムの互換性と安定性が向上しました。新機能には、トランザクションの自動再試行を無効にするためのシステム変数が追加され、改善点ではコスト計算の最適化やクエリ条件の選択などが行われました。バグの修正も行われ、PDとTiKVにも修正が加えられました。
 ---
 
 # TiDB 2.0.5 リリースノート {#tidb-2-0-5-release-notes}

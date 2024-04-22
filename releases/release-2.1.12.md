@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1.12 Release Notes
-summary: TiDB 2.1.12 was released on June 13, 2019. It includes various bug fixes and improvements, such as fixing issues with data type mismatches, charset altering, and GRANT operations. The release also improves compatibility with MySQL and addresses issues with functions, data conversion, and error reporting. Additionally, PD and TiKV have also been updated to fix issues related to leader election and data availability during leader transfer and power failure.
+summary: TiDB 2.1.12は2019年6月13日にリリースされました。このバージョンでは、さまざまな問題が修正されています。例えば、インデックスクエリフィードバックのデータ型不一致の問題や、文字セットの変更によるBLOB列の問題などが修正されています。また、MySQLとの互換性も向上されています。PDとTiKVにも修正が加えられており、極端な状況での問題が解消されています。
 ---
 
 # TiDB 2.1.12 リリースノート {#tidb-2-1-12-release-notes}

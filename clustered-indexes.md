@@ -1,6 +1,6 @@
 ---
 title: Clustered Indexes
-summary: Learn the concept, user scenarios, usages, limitations, and compatibility of clustered indexes.
+summary: TiDB v5.0 以降、クラスター化インデックス機能をサポートしています。この機能は、主キーを含むテーブルにデータを格納する方法を制御し、特定のクエリのパフォーマンスを向上できる方法でテーブルを編成します。クラスター化インデックスを含むテーブルは、データの挿入やクエリの条件によってパフォーマンスとスループットの利点があります。一方、欠点もあります。クラスター化インデックス機能にはいくつかの制限事項があります。
 ---
 
 # クラスター化インデックス {#clustered-indexes}

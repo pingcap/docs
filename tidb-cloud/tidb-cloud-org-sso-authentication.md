@@ -1,6 +1,6 @@
 ---
 title: Organization SSO Authentication
-summary: Learn how to log in to the TiDB Cloud console via your customized organization authentication.
+summary: TiDB Cloudは、組織のメンバーが電子メールアドレスとパスワードの代わりにIdPからのアイデンティティを使用してログインできるSSO認証をサポートしています。基本SSOとクラウド組織SSOの2種類があり、クラウド組織SSOは柔軟性とカスタマイズ性が高く、組織のセキュリティとコンプライアンスの要件を満たすことができます。移行前に組織に関する項目を確認し、SSOを有効にするには組織のOwnerロールが必要です。また、カスタムURLや認証方法を決定し、メンバーに移行計画を通知する必要があります。
 ---
 
 # 組織のSSO認証 {#organization-sso-authentication}

@@ -1,6 +1,6 @@
 ---
 title: TiCDC Compatibility
-summary: Learn about compatibility issues of TiCDC and how to handle them.
+summary: TiCDCの互換性に関する問題と対処方法について説明します。CLIと設定ファイルの互換性については、バージョンごとに変更があります。また、v5.0.0-rcのcdc cliツールを使用してv4.0.xクラスターを操作すると非互換性の問題が発生する可能性があります。sort-dirとdata-dirの互換性に関する注意事項もあります。また、一時テーブルの互換性についても説明します。
 ---
 
 # TiCDC の互換性 {#ticdc-compatibility}

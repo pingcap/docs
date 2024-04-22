@@ -1,6 +1,6 @@
 ---
 title: Eliminate Max/Min
-summary: Introduce the rules for eliminating Max/Min functions.
+summary: SQLステートメントに`max` / `min`関数が含まれている場合、TiDBは`max` / `min`最適化ルールを適用し、集計関数をTopN演算子に変換します。1つの`max` / `min`関数が含まれる場合、関連する`group by`句がない場合、最適化ルールが適用されます。複数の`max` / `min`関数が含まれ、それぞれの列に順序を維持するインデックスがある場合、2つのサブクエリのデカルト積として書き換えられます。このようにして、テーブル全体のスキャンが回避され、効率的なクエリ実行が可能となります。
 ---
 
 # 最大値/最小値の削除 {#eliminate-max-min}

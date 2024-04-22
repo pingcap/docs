@@ -1,6 +1,6 @@
 ---
 title: Telemetry
-summary: Learn the telemetry feature, how to disable the feature and view its status.
+summary: テレメトリが有効になると、TiDB、TiUP、およびTiDBダッシュボードは使用状況情報を収集し、PingCAPと共有して製品の改善方法を理解するのに役立ちます。2023年2月20日以降、v6.6.0を含むTiDBおよびTiDBダッシュボードの新しいバージョンではテレメトリ機能がデフォルトで無効になり、使用状況情報は収集されず、PingCAPと共有されません。
 ---
 
 # テレメトリー {#telemetry}

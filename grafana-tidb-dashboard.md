@@ -1,6 +1,6 @@
 ---
 title: TiDB Monitoring Metrics
-summary: Learn some key metrics displayed on the Grafana TiDB dashboard.
+summary: TiUPを使用してTiDBクラスターをデプロイすると、監視システム（PrometheusおよびGrafana）も同時にデプロイされます。Grafanaダッシュボードは、概要、PD、TiDB、TiKV、Node_exporter、Disk Performance、およびPerformance_overviewを含む一連のサブダッシュボードに分割されています。このドキュメントでは、TiDBダッシュボードに表示されるいくつかの主要な監視メトリクスについて説明します。
 ---
 
 # TiDB モニタリングメトリクス {#tidb-monitoring-metrics}

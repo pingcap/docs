@@ -1,6 +1,6 @@
 ---
 title: Column Pruning
-summary: Learn about the usage of column pruning in TiDB.
+summary: 列プルーニングは、演算子で使用されない列を削除し、I/Oリソースの使用量を減らし、最適化を容易にします。例えば、テーブルtに4つの列(a、b、c、d)があり、クエリで列aと列bのみ使用される場合、列cと列dは冗長であり、プルーニングできます。TiDBはロジック最適化フェーズ中にトップダウンスキャンを実行し、冗長な列を削除します。このプロセスは「カラムの剪定」と呼ばれ、columnPrunerルールに対応します。
 ---
 
 # カラムの剪定 {#column-pruning}

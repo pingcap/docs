@@ -1,6 +1,6 @@
 ---
 title: TiDB Cluster Troubleshooting Guide
-summary: Learn how to diagnose and resolve issues when you use TiDB.
+summary: TiDBクラスタのトラブルシューティングガイドは、TiDBの基本的な問題を診断して解決するのに役立ちます。問題が解決しない場合は、バグを報告するための情報を収集してください。データベースに接続できない場合は、サービスが開始されているか確認し、エラーメッセージをチェックします。tidb-serverを起動できない場合は、起動パラメータを確認してください。また、接続が拒否された場合は、ネットワークパラメータを確認してください。データベースアクセスがタイムアウトし、システム負荷が高すぎる場合は、遅いクエリログをチェックし、ハードウェア構成などの情報を提供してください。
 ---
 
 # TiDBクラスタのトラブルシューティング ガイド {#tidb-cluster-troubleshooting-guide}

@@ -1,6 +1,6 @@
 ---
 title: tiup dm upgrade
-summary: The `tiup dm upgrade` command upgrades a specified cluster to a specific version. It requires the cluster name and target version as parameters. The `--offline` option allows for offline upgrades, and the `-h, --help` option prints help information. The output is a log of the service upgrade process.
+summary: tiup dm upgradeコマンドは、指定したクラスターを特定のバージョンにアップグレードするために使用されます。`<cluster-name>`は、操作対象のクラスターの名前であり、`<version>`は、アップグレード先のターゲット バージョンです。オプションには、--offlineと-h, --helpがあります。--offlineは現在のクラスターがオフラインであることを宣言し、-h, --helpはヘルプ情報を出力します。アップグレードのログが出力されます。
 ---
 
 # tiup dm upgrade {#tiup-dm-upgrade}

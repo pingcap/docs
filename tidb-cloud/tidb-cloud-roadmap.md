@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Roadmap
-summary: Learn about TiDB Cloud's roadmap for the next few months. See the new features or improvements in advance, follow the progress, learn about the key milestones on the way.
+summary: TiDB Cloudロードマップは、新機能や改善点を事前に確認し、進捗状況を追跡できます。開発の過程で変更される可能性があります。開発者のエクスペリエンスとエンタープライズグレードの機能、TiDBカーネル、診断とメンテナンス、データのバックアップと移行、セキュリティに関する機能が含まれます。これには、サンプルデータセットの読み込み、Chat2Queryの追加、データサービスのサポート、クラウドプロバイダーマーケットプレイスの向上、TLSローテーション、データ暗号化、データベース監査ログなどが含まれます。
 ---
 
 # TiDB Cloudロードマップ {#tidb-cloud-roadmap}

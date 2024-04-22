@@ -1,6 +1,6 @@
 ---
 title: TiDB 5.4.1 Release Notes
-summary: "TiDB 5.4.1 Release Notes: This release includes compatibility changes, improvements, and bug fixes for TiDB, TiKV, PD, TiFlash, and various tools. Improvements include support for using the PointGet plan, adding more logs and metrics, and displaying multiple Kubernetes clusters in the Grafana dashboard. Bug fixes address issues such as incorrect handling of date_format, wrong data writing, wrong query results, and various panics and errors. Fixes for TiKV, PD, TiFlash, and tools are also included."
+summary: TiDB 5.4.1は2022年5月13日にリリースされました。このバージョンでは、製品設計に互換性の変更は導入されていませんが、バグ修正により互換性も変更される可能性があります。改善点としては、TiDB、TiKV、PD、TiFlash、ツールなどの機能が強化されています。また、バグの修正としては、TiDB、TiKV、PD、TiFlash、ツールなどでさまざまな問題が修正されています。
 ---
 
 # TiDB 5.4.1 リリースノート {#tidb-5-4-1-release-notes}

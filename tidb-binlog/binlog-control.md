@@ -1,6 +1,6 @@
 ---
 title: binlogctl
-summary: Learns how to use `binlogctl`.
+summary: binlogctlは、TiDB Binlogのコマンドラインツールであり、PumpやDrainerの状態を管理し、異常時の対処が可能です。また、PumpやDrainerノードの状態を確認し、一時停止または閉じることができます。さらに、異常な状態の修復も行えます。BinlogctlはTiDB Toolkitに含まれており、コマンドラインパラメータを使用して操作します。PumpやDrainerノードの状態を変更する際は注意が必要です。
 ---
 
 # binlogctl {#binlogctl}

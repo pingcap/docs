@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.7 Release Notes
-summary: TiDB 4.0.7 was released on September 29, 2020. New features include the addition of the `GetAllMembers` function in the PD client and support for generating the metrics relationship graph in TiDB Dashboard. Improvements were made to TiDB, TiKV, PD, TiFlash, and various tools. Bug fixes were also implemented for TiDB, TiKV, PD, TiFlash, and tools like Backup & Restore and Dumpling.
+summary: TiDB 4.0.7は2020年9月29日にリリースされました。新機能にはPDメンバー情報の取得やTiDBダッシュボードのメトリクス関係グラフの生成が含まれます。改善点には`join`オペレーターのランタイム情報追加やTiFlashへの`ROUND`機能のサポートがあります。バグの修正にはショートカットによるベクトル化バグの修正やTLSハンドシェイクの失敗時の問題修正が含まれます。
 ---
 
 # TiDB 4.0.7 リリースノート {#tidb-4-0-7-release-notes}

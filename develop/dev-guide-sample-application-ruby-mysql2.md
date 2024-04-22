@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with mysql2
-summary: Learn how to connect to TiDB using Ruby mysql2. This tutorial gives Ruby sample code snippets that work with TiDB using mysql2 gem.
+summary: TiDBはMySQL互換データベースであり、Ruby用の最も人気のあるMySQLドライバーであるmysql2を使用してTiDBに接続する方法を学ぶチュートリアルです。環境のセットアップ、mysql2を使用してTiDBクラスターに接続、アプリケーションのビルドと実行が含まれます。また、サンプルコードスニペットも提供されています。TiDBクラスターがない場合は、TiDBサーバーレス、専用、またはセルフホストで動作します。
 ---
 
 # mysql2 を使用して TiDB に接続する {#connect-to-tidb-with-mysql2}

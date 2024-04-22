@@ -1,6 +1,6 @@
 ---
 title: TiKV Configuration Flags
-summary: Learn some configuration flags of TiKV.
+summary: TiKVはコマンドラインパラメーターの読み取り可能な単位変換をサポートしています。各フラグにはデフォルト値があり、設定する必要があります。また、TiKVサーバーを機能させるためには、PDサーバーのアドレスを指定する必要があります。これらのフラグを使用してTiKVの設定を行うことができます。
 ---
 
 # TiKVコンフィグレーションフラグ {#tikv-configuration-flags}

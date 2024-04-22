@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with Rails framework and ActiveRecord ORM
-summary: Learn how to connect to TiDB using the Rails framework. This tutorial gives Ruby sample code snippets that work with TiDB using the Rails framework and ActiveRecord ORM.
+summary: TiDBはMySQL互換データベースで、RailsはRubyで書かれたWebアプリケーションフレームワークです。このチュートリアルでは、TiDBとRailsを使用して環境をセットアップし、TiDBクラスターに接続し、アプリケーションをビルドして実行する方法を学びます。また、ActiveRecord ORMを使用した基本的なCRUD操作のサンプルコードも提供されています。前提条件として、Ruby、Bundler、Git、実行中のTiDBクラスターが必要です。詳細な手順やサンプルコードはGitHubリポジトリを参照してください。
 ---
 
 # Rails Framework と ActiveRecord ORM を使用して TiDB に接続する {#connect-to-tidb-with-rails-framework-and-activerecord-orm}

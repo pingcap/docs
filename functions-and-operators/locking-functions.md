@@ -1,6 +1,6 @@
 ---
 title: Locking Functions
-summary: Learn about user-level locking functions in TiDB.
+summary: TiDBはMySQL 5.7のほとんどのユーザーレベルロック関数をサポートしています。サポートされている関数には、GET_LOCK、IS_FREE_LOCK、IS_USED_LOCK、RELEASE_ALL_LOCKS、RELEASE_LOCKがあります。また、TiDBでは最小タイムアウトは1秒、最大タイムアウトは1時間であり、デッドロックは自動的に検出されません。ロックはクラスター内のすべてのTiDBサーバーで有効になります。IS_USED_LOCK()は、ロックを保持しているプロセスのIDを返せない場合に1を返します。
 ---
 
 # ロック機能 {#locking-functions}

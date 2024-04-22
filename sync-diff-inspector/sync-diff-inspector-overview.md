@@ -1,6 +1,6 @@
 ---
 title: sync-diff-inspector User Guide
-summary: Use sync-diff-inspector to compare data and repair inconsistent data.
+summary: sync-diff-inspectorはMySQLデータとTiDBデータを比較し、データの不整合を修復するためのツールです。主な特徴はテーブルのスキーマとデータを比較し、不整合がある場合に修復用のSQLステートメントを生成することです。さらに、異なるスキーマ名やテーブル名を持つテーブルのデータチェックやシャーディングシナリオでのデータチェックをサポートしています。データベース権限とコンフィグレーションファイルの説明も提供されています。sync-diff-inspectorを実行する際には、進捗情報や出力ファイルに注意する必要があります。データ修復のためのSQLステートメントは参考用途のみであり、実行前に確認が必要です。
 ---
 
 # sync-diff-inspector ユーザーガイド {#sync-diff-inspector-user-guide}

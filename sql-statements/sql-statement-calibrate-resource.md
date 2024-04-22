@@ -1,6 +1,6 @@
 ---
 title: CALIBRATE RESOURCE
-summary: An overview of the usage of CALIBRATE RESOURCE for the TiDB database.
+summary: CALIBRATE RESOURCEステートメントは、現在のクラスターのリクエストユニット(RU)を推定して出力するために使用されます。この機能はTiDBセルフホスト型にのみ適用され、TiDB Cloudでは使用できません。権限を確認してください。容量の見積もり方法には、実際のワークロードに基づいて容量を見積もる方法とハードウェア導入に基づいて容量を見積もる方法があります。例として、開始時間と時間ウィンドウを指定して、実際のワークロードに応じたRU容量を表示することができます。
 ---
 
 # <code>CALIBRATE RESOURCE</code> {#code-calibrate-resource-code}

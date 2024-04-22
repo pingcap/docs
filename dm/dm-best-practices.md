@@ -1,6 +1,6 @@
 ---
 title: TiDB Data Migration (DM) Best Practices
-summary: Learn about best practices when you use TiDB Data Migration (DM) to migrate data.
+summary: TiDB データ移行 (DM) は、MySQL 互換データベースから TiDB への完全および増分データ移行をサポートします。DM を使用する際のよくある間違いを回避する方法を紹介します。DM は 1000 の作業ノードの同時管理をサポートし、タスクの最大数は 600 です。データ移行の際には、データの整合性を検証することをお勧めします。
 ---
 
 # TiDB データ移行 (DM) のベスト プラクティス {#tidb-data-migration-dm-best-practices}

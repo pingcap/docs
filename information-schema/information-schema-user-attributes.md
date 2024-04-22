@@ -1,6 +1,6 @@
 ---
 title: USER_ATTRIBUTES
-summary: Learn the `USER_ATTRIBUTES` INFORMATION_SCHEMA table.
+summary: ユーザー属性テーブルは、ユーザーのコメントと属性情報を示します。`mysql.user`システムテーブルから取得されます。フィールドは`USER`（ユーザー名）、`HOST`（接続可能ホスト）、`ATTRIBUTE`（コメントと属性）です。例えば、`CREATE USER`ステートメントでコメントを設定できます。`SELECT * FROM information_schema.user_attributes;`で情報を取得できます。
 ---
 
 # USER_ATTRIBUTES {#user-attributes}

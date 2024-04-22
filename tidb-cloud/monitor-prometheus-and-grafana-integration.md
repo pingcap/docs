@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Cloud with Prometheus and Grafana (Beta)
-summary: Learn how to monitor your TiDB cluster with the Prometheus and Grafana integration.
+summary: TiDB CloudはPrometheus APIエンドポイントを提供し、Prometheusサービスを使用してメトリクスを監視できます。統合するには、Prometheusのscrape_configファイルを取得し、Prometheus構成ファイルに追加します。その後、Grafana GUIダッシュボードを使用してメトリクスを視覚化できます。セキュリティ向上のため、定期的にscrape_configファイルのベアラートークンをローテーションすることが推奨されています。Prometheusで利用可能なメトリクスには、クエリ数、接続数、CPU使用率などが含まれます。GrafanaとTiDB Cloudコンソールで異なる値が表示される場合は、Grafanaのmini step構成を調整して詳細なメトリック値を取得できます。
 ---
 
 # TiDB Cloudを Prometheus および Grafana と統合 (ベータ版) {#integrate-tidb-cloud-with-prometheus-and-grafana-beta}

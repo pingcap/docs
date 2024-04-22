@@ -1,6 +1,6 @@
 ---
 title: SELECT | TiDB SQL Statement Reference
-summary: An overview of the usage of SELECT for the TiDB database.
+summary: SELECTステートメントは、TiDBからデータを読み取るために使用されます。構文要素には、TableOptimizerHints、ALL、DISTINCT、DISTINCTROW、HIGH_PRIORITY、SQL_CALC_FOUND_ROWS、SQL_CACHE、SQL_NO_CACHE、STRAIGHT_JOIN、select_expr、FROM table_references、WHERE where_condition、GROUP BY、HAVING where_condition、ORDER BY、LIMIT、Window window_definition、FOR UPDATE、LOCK IN SHARE MODE、TABLESAMPLEが含まれます。これにより、クエリ結果をファイルに書き込むことも可能です。MySQLとの互換性については、一部の構文がサポートされていないことがあります。
 ---
 
 # 選択する {#select}

@@ -1,6 +1,6 @@
 ---
 title: TiCDC Canal-JSON Protocol
-summary: Learn the concept of TiCDC Canal-JSON Protocol and how to use it.
+summary: TiCDC Canal-JSONは、Alibaba Canalによって定義されたデータ交換形式のプロトコルです。TiCDCは、Canal-JSONメッセージを生成し、TiDBデータ変更イベントをダウンストリームに送信します。DDL、DML、WATERMARKの3つのイベントタイプがあり、TiDB拡張フィールドを含む。Canal-JSONの使用例とメッセージフォーマットの定義も提供されています。公式Canalとの比較では、Deleteイベントのoldフィールドが変更されました。
 ---
 
 # TiCDC Canal-JSON プロトコル {#ticdc-canal-json-protocol}

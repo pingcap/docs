@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.0.3 Release Notes
-summary: TiDB 2.0.3 was released on June 1, 2018, with improvements in system compatibility and stability. It includes various fixes and optimizations for TiDB, PD, and TiKV. Some highlights are support for modifying log level online, fixing issues with unique index and `ON DUPLICATE KEY UPDATE`, and addressing panic issues in specific conditions.
+summary: TiDB 2.0.3は、システムの互換性と安定性が向上しています。TiDBでは、オンラインでのログレベルの変更のサポートやさまざまな問題の修正が行われています。PDでは、ホットキャッシュメトリクスを収集する際の問題が修正され、TiKVでは学習者フラグが誤って報告されるバグが修正されました。
 ---
 
 # TiDB 2.0.3 リリースノート {#tidb-2-0-3-release-notes}

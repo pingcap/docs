@@ -1,6 +1,6 @@
 ---
 title: Manage Spending Limit for TiDB Serverless clusters
-summary: Learn how to manage spending limit for your TiDB Serverless clusters.
+summary: TiDBサーバーレスクラスターの支出制限は、1か月に特定のワークロードに費やすことができる最大金額を指します。組織ごとに最大5つのクラスターを作成できますが、追加のクラスターを作成するにはクレジットカードを追加し、使用量の制限を設定する必要があります。クラスターの無料クォータに達すると、新しい月の初めに使用量が割り当てを増やすまでスロットルされます。既存のクラスターの使用量制限を更新することで、使用量クォータを増やすことができます。
 ---
 
 # TiDB サーバーレス クラスターの支出制限を管理する {#manage-spending-limit-for-tidb-serverless-clusters}

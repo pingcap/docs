@@ -1,7 +1,7 @@
 ---
 title: TiDB Cloud Serverless Driver (Beta)
-summary: Learn how to connect to TiDB Serverless from serverless and edge environments.
 aliases: ['/tidbcloud/serverless-driver-config']
+summary: TiDB CloudサーバーレスDriver(ベータ版)は、従来のTCPベースのMySQLドライバーとは異なり、サーバーレス関数の存続期間が短い性質に適しています。JavaScriptのTiDB Cloudサーバーレスドライバーを使用すると、HTTP経由でTiDBサーバーレスクラスターに接続でき、TCPによる接続オーバーヘッドを削減できます。また、npmを使用してドライバーを簡単にインストールできます。サーバーレスドライバーは、SQLステートメントの実行やデータのクエリが可能であり、ORM統合もサポートされています。価格設定はTiDBサーバーレスの価格モデルに準じます。ただし、現在の制限事項として、1つのクエリで最大10,000行をフェッチでき、1度に実行できるSQLステートメントは1つだけです。また、プライベートエンドポイントとの接続はまだサポートされていません。
 ---
 
 # TiDB CloudサーバーレスDriver(ベータ版) {#tidb-cloud-serverless-driver-beta}

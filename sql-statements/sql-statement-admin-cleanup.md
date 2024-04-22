@@ -1,6 +1,6 @@
 ---
 title: ADMIN CLEANUP INDEX
-summary: An overview of the usage of ADMIN CLEANUP for the TiDB database.
+summary: ADMIN CLEANUP INDEXステートメントは、テーブル内の不整合なデータとインデックスを削除するために使用されます。外部キー制約はサポートされていません。テーブルのデータとインデックスが矛盾している場合、このステートメントを使用してダングリングインデックスを削除できます。TiDBの拡張機能であり、MySQLとの互換性があります。
 ---
 
 # 管理者のクリーンアップインデックス {#admin-cleanup-index}

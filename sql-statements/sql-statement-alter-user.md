@@ -1,6 +1,6 @@
 ---
 title: ALTER USER | TiDB SQL Statement Reference
-summary: An overview of the usage of ALTER USER for the TiDB database.
+summary: TiDBのALTER USERステートメントは、既存のユーザーの情報を変更します。ユーザー名と接続元のホストの組み合わせを変更し、異なる権限を持たせることができます。例えば、パスワードの変更やアカウントのロック、属性やコメントの変更、リソースグループの変更などが可能です。また、パスワードの有効期限ポリシーや再利用ポリシーも変更できます。これにより、ユーザーのセキュリティと管理が容易になります。
 ---
 
 # ユーザーの変更 {#alter-user}

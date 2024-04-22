@@ -1,5 +1,6 @@
 ---
 title: TiDB 6.1.1 Release Notes
+summary: TiDB 6.1.1は2022年9月1日にリリースされました。このバージョンでは、多くの互換性の変更、その他の変更点、改善点、バグの修正が含まれています。具体的には、`SHOW DATABASES LIKE …`ステートメントの大文字と小文字を区別しないようにする変更や、新しいオプティマイザ`SEMI_JOIN_REWRITE`の追加などがあります。また、TiDB LightningやTiDB データ移行 (DM)などのツールにも改善が加えられています。
 ---
 
 # TiDB 6.1.1 リリースノート {#tidb-6-1-1-release-notes}

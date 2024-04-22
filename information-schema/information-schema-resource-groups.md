@@ -1,6 +1,6 @@
 ---
 title: RESOURCE_GROUPS
-summary: Learn the `RESOURCE_GROUPS` information_schema table.
+summary: リソースグループ表には、すべてのリソースグループに関する情報が表示されます。TiDBサーバーレスクラスターでは使用できません。リソースグループの名前、バックフィル速度、優先度、および過剰なシステムリソースの使用を許可するかどうかが表示されます。TiDBは初期化中にデフォルトのリソースグループを自動的に作成します。
 ---
 
 # リソース_グループ {#resource-groups}

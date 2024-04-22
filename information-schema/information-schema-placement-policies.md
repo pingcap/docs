@@ -1,6 +1,6 @@
 ---
 title: PLACEMENT_POLICIES
-summary: Learn the `PLACEMENT_POLICIES` information_schema table.
+summary: `PLACEMENT_POLICIES`表は、すべての配置ポリシーに関する情報を提供します。TiDBサーバーレスクラスターでは使用できません。12行の情報が含まれており、配置ポリシーのみが表示されます。代わりに`SHOW PLACEMENT`ステートメントを使用すると、正規バージョンの配置ルールが表示されます。また、テーブル`t3`を含むすべての情報を表示することもできます。
 ---
 
 # PLACEMENT_POLICIES {#placement-policies}

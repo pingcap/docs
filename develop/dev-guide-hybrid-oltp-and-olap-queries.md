@@ -1,6 +1,6 @@
 ---
 title: HTAP Queries
-summary: Introduce the HTAP queries in TiDB.
+summary: HTAPは、ハイブリッドトランザクションおよび分析処理の略語です。従来、データベースはトランザクション処理と分析処理に分割されていましたが、TiDBデータベースは両方を実行できるため、データプラットフォームの構築が簡素化されます。TiDBは行ベースのstorageエンジンと列型storageエンジンを使用し、ウィンドウ関数をサポートしています。TiFlashを使用するとクエリ速度が向上し、TiDBは自動的に処理エンジンを選択します。
 ---
 
 # HTAP クエリ {#htap-queries}

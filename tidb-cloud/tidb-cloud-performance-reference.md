@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Performance Reference
-summary: Learn TiDB Cloud performance test results.
+summary: TiDB Cloudのパフォーマンスリファレンスは、TiDBクラスタースケールのパフォーマンステスト結果を提供します。テストはTiDB v6.1.1で実行され、トランザクションモデルやスケールごとの試験結果が示されています。例えば、2 vCPUの場合、読み取り専用の平均レイテンシーは68.63ミリ秒でした。8 vCPUの場合、書き込み専用のP95レイテンシーは99.33ミリ秒でした。16 vCPUの場合、読み取り専用の平均レイテンシーは53.40ミリ秒でした。
 ---
 
 # TiDB Cloudパフォーマンス リファレンス {#tidb-cloud-performance-reference}

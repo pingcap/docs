@@ -1,6 +1,6 @@
 ---
 title: ticloud config create
-summary: The reference of `ticloud config create`.
+summary: ticloud 構成の作成ユーザー プロファイル設定を保存するにはユーザープロフィールを作成します。ユーザー プロファイルを作成する前に、TiDB CloudAPI キーを作成する必要があります。対話モードでユーザー プロファイルを作成します。非対話モードでユーザー プロファイルを作成します。非対話型モードでは、必要なフラグを手動で入力する必要があります。継承されたフラグもあります。TiDB Cloud CLI に関して質問や提案がある場合は、お気軽に問題を作成してください。
 ---
 
 # ticloud 構成の作成 {#ticloud-config-create}

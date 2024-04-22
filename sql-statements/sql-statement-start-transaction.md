@@ -1,6 +1,6 @@
 ---
 title: START TRANSACTION | TiDB SQL Statement Reference
-summary: An overview of the usage of START TRANSACTION for the TiDB database.
+summary: TiDB内での取引を開始するためのステートメントは、`START TRANSACTION`です。これにより、新しいトランザクションが開始されます。デフォルトでは、すべてのステートメントが独自のトランザクションで自動コミットされます。MySQLとの互換性が保証されます。`START TRANSACTION`は、MySQLの`START TRANSACTION WITH CONSISTENT SNAPSHOT`に相当します。また、`START TRANSACTION READ ONLY`は解析されますが、書き込み操作は引き続き許可されます。
 ---
 
 # 取引を開始する {#start-transaction}

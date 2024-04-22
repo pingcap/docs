@@ -1,6 +1,6 @@
 ---
 title: KILL
-summary: An overview of the usage of KILL for the TiDB database.
+summary: TiDBの`KILL`ステートメントは、任意のTiDBインスタンスの接続を終了するために使用されます。MySQLの`KILL`ステートメントとは異なり、TiDBの`KILL`ステートメントはクラスター全体の任意のTiDBインスタンス内の接続を終了できます。32ビット接続IDの生成をサポートし、Global Kill機能が有効になっている場合、クエリまたは接続を終了できます。`KILL TIDB`ステートメントを使用しても安全です。
 ---
 
 # 殺す {#kill}

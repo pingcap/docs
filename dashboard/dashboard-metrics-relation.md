@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Metrics Relation Graph
-summary: TiDB Dashboard introduces a feature called metrics relation graph, which helps users understand the duration of each internal process in a TiDB cluster. After logging in, users can access the graph and see the proportion of each monitoring metric's duration to the total query duration. Each box area represents a monitoring metric and provides information such as the total duration and proportion to the total query duration. The graph also illustrates the parent-child relations between nodes, helping users understand the relations of each monitoring metric.
+summary: TiDB ダッシュボードのメトリクス関係グラフは、v4.0.7 で導入された機能で、各内部プロセスの継続時間の監視データの関係グラフを表示します。左側のナビゲーション メニューで**[クラスタ診断]**をクリックすると、メトリック関係グラフを生成するページが表示されます。グラフは、各監視メトリックの関係を示し、親子関係も表示されます。これにより、TiDB クラスター内の合計クエリ継続時間に対する各モニタリング メトリクスの継続時間の割合を理解できます。
 ---
 
 # TiDB ダッシュボードのメトリクス関係グラフ {#tidb-dashboard-metrics-relation-graph}

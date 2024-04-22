@@ -1,6 +1,6 @@
 ---
 title: Use TiDB to Read TiFlash Replicas
-summary: Learn how to use TiDB to read TiFlash replicas.
+summary: TiDBを使用してTiFlashレプリカを読み取る方法には、3つの方法があります。賢い選択では、TiDBオプティマイザーが自動的にTiFlashレプリカを選択します。エンジンの隔離では、すべてのクエリが指定されたエンジンのレプリカを使用するように指定します。手動ヒントでは、TiDBが特定のテーブルに指定されたレプリカを使用するように強制できます。これらの方法を使用して、TiDBは最適なエンジンのレプリカを選択します。
 ---
 
 # TiDB を使用してTiFlashレプリカを読み取る {#use-tidb-to-read-tiflash-replicas}

@@ -1,6 +1,6 @@
 ---
 title: Troubleshoot Inconsistency Between Data and Indexes
-summary: Learn how to deal with errors reported by the consistency check between data and indexes.
+summary: TiDBは、トランザクション実行時にデータとインデックスの不一致をチェックします。エラーが発生した場合は、エラーメッセージを確認し、トラブルシューティングのために支援を受けるか、SQLを書き換えることでエラーを回避できます。また、エラーチェックを無効にすることも可能です。
 ---
 
 # データとインデックス間の不一致のトラブルシューティング {#troubleshoot-inconsistency-between-data-and-indexes}

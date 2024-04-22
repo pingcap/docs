@@ -1,6 +1,6 @@
 ---
 title: Wrong Index Solution
-summary: Learn how to solve the wrong index issue.
+summary: インデックス問題の解決方法。クエリの実行速度が期待に達していない場合、統計の健全性状態を確認し、`ANALYZE`コマンドを実行して統計を更新する。健康状態が低い場合は`ANALYZE`コマンドを実行し、100%に近い場合はCount-Min Sketchを確認。その他の状況では新しいインデックスを追加する。USE_INDEXまたは`use index`オプティマイザー ヒントを使用してインデックスを強制的に選択することもできる。
 ---
 
 # インデックス問題の解決方法 {#wrong-index-solution}

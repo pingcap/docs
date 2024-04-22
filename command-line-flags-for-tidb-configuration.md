@@ -1,6 +1,6 @@
 ---
 title: Configuration Options
-summary: Learn the configuration options in TiDB.
+summary: TiDBクラスターを開始する際には、コマンドラインオプションまたは環境変数を使用して構成できます。デフォルトのTiDBポートは4000（クライアント要求用）および10080（ステータスレポート用）です。構成ファイルを指定する場合、TiDBは構成ファイルを読み取ります。また、TiDBサーバーの監視するホストアドレスやスキーマのリース期間など、さまざまなオプションがあります。PROXYプロトコルを使用してTiDBに接続できるプロキシサーバーのIPアドレスのリストを指定することもできます。
 ---
 
 # コンフィグレーションオプション {#configuration-options}

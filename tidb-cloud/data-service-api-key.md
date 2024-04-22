@@ -1,6 +1,6 @@
 ---
 title: API Keys in Data Service
-summary: Learn how to create, edit, and delete an API key for a Data App.
+summary: TiDB Cloud Data APIは基本認証とダイジェスト認証をサポートします。APIキーには公開キーと秘密キーが含まれ、1分あたり100リクエストの制限があります。APIキーの作成、編集、削除はプロジェクトのデータサービスページで行います。 APIキーを使用する際は正しいキーを指定する必要があります。
 ---
 
 # データサービスの API キー {#api-keys-in-data-service}

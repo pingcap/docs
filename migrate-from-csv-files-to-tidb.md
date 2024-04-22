@@ -1,6 +1,6 @@
 ---
 title: Migrate Data from CSV Files to TiDB
-summary: Learn how to migrate data from CSV files to TiDB.
+summary: TiDB Lightningは、CSVファイルや他の区切り文字形式からデータを読み取り、TiDBに移行できます。移行の前提条件として、TiDB Lightningのインストールとターゲットデータベース権限の取得が必要です。CSVファイルを準備し、ターゲットテーブルスキーマを作成し、構成ファイルを作成します。インポートのパフォーマンスを調整することもできます。最後に、データをインポートして進行状況を確認し、成功したかどうかを確認します。他のファイル形式についてもサポートされています。
 ---
 
 # CSV ファイルから TiDB へのデータの移行 {#migrate-data-from-csv-files-to-tidb}

@@ -1,6 +1,6 @@
 ---
 title: DML Replication Mechanism in Data Migration
-summary: Learn how the core processing unit Sync in DM replicates DML statements.
+summary: このドキュメントは、DMのコア処理ユニットSyncが、データソースまたはリレーログから読み取られたDMLステートメントを処理する方法を紹介しています。DMにおけるDMLイベントの完全な処理フローやDML最適化ロジック、DML実行ロジックについて詳しく説明しています。また、DMは行レベルでデータを複製しますが、トランザクションの一貫性は保証されません。
 ---
 
 # データ移行における DML レプリケーション メカニズム {#dml-replication-mechanism-in-data-migration}

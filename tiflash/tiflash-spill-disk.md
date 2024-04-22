@@ -1,6 +1,6 @@
 ---
 title: TiFlash Spill to Disk
-summary: Learn how TiFlash spills data to disk and how to customize the spill behavior.
+summary: TiFlashは、v7.0.0以降、中間データのディスクへのスピルをサポートし、オペレーターレベルとクエリレベルのスピルを提供します。オペレーターレベルでは、各オペレーターのデータ流出のしきい値を制御し、クエリレベルではクエリの最大メモリ使用量を制限します。これにより、TiFlashが中間結果のスピルをトリガーし、メモリ使用量を削減します。
 ---
 
 # TiFlash のディスクへの流出 {#tiflash-spill-to-disk}

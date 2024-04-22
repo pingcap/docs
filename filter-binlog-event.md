@@ -1,6 +1,6 @@
 ---
 title: Filter Binlog Events
-summary: Learn how to filter binlog events when migrating data.
+summary: このドキュメントは、DMを使用して継続的な増分データレプリケーションを実行する際のbinlogイベントのフィルタリング方法について説明しています。フィルタリングには、スキーマやテーブルに一致するフィルターを追加し、特定のイベントやSQLステートメントを除外することができます。さまざまな適用シナリオについても説明されており、TiDBでサポートされていないSQLステートメントを除外する方法などが記載されています。
 ---
 
 # Binlogイベントのフィルタリング {#filter-binlog-events}

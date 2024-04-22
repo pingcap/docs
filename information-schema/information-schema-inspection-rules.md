@@ -1,6 +1,6 @@
 ---
 title: INSPECTION_RULES
-summary: Learn the `INSPECTION_RULES` information_schema table.
+summary: 検査ルールテーブルは、検査結果で実行される診断テストの情報を示します。TiDBセルフホスト型にのみ適用され、TiDB Cloudでは利用できません。テーブルにはNAME、TYPE、COMMENTの3つのフィールドがあります。15行の結果があり、それぞれのテストにはconfig、version、node-load、critical-errorなどが含まれます。
 ---
 
 # 検査ルール {#inspection-rules}

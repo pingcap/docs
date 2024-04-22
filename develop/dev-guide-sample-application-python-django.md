@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with Django
-summary: Learn how to connect to TiDB using Django. This tutorial gives Python sample code snippets that work with TiDB using Django.
+summary: このチュートリアルでは、TiDBとDjangoを使用して次のタスクを実行する方法を学習できます。環境をセットアップし、Djangoを使用してTiDBクラスターに接続し、アプリケーションをビルドして実行します。また、基本的なCRUD操作のサンプルコードスニペットも提供されます。TiDBサーバーレス、専用、およびセルフホストクラスターで動作します。必要なものはPython 3.8以降、Git、TiDBクラスターです。詳細については、リンク先のチュートリアルを参照してください。
 ---
 
 # Django を使用して TiDB に接続する {#connect-to-tidb-with-django}

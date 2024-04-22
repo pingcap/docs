@@ -1,6 +1,6 @@
 ---
 title: Handle Failed DDL Statements in TiDB Data Migration
-summary: Learn how to handle failed DDL statements when you're using the TiDB Data Migration tool to migrate data.
+summary: TiDB データ移行 (DM) ツールを使用して失敗した DDL ステートメントを処理する方法を紹介します。MySQLからTiDBにデータを移行していて、TiDBが対応するDDLステートメントをサポートしていない場合、エラーが発生して移行プロセスが中断される可能性があります。移行中にTiDBでサポートされていないDDLステートメントが上流で実行され、下流に移行されるため、移行タスクが中断されます。移行が中断された場合はDDLをスキップするか置き換えることができます。
 ---
 
 # TiDB データ移行で失敗した DDL ステートメントを処理する {#handle-failed-ddl-statements-in-tidb-data-migration}

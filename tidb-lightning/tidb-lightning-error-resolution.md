@@ -1,6 +1,6 @@
 ---
 title: TiDB Lightning Error Resolution
-summary: Learn how to resolve type conversion and duplication errors during data import.
+summary: TiDB Lightningは、v5.4.0以降、無効な型変換や一意のキーの競合などのエラーをスキップし、データ処理を続行できるようになりました。エラーレポートが生成され、後で手動で修正できます。`lightning.max-error`、`conflict.strategy`、`conflict.threshold`、`conflict.max-record-rows`などの構成項目が関連します。エラーレポートには、タイプエラーと競合エラーが含まれ、エラーが記録されます。TiDB Lightningは、エラーを検出したときに競合するデータが保存されるデータベースを設定できます。
 ---
 
 # TiDB Lightningエラーの解決 {#tidb-lightning-error-resolution}

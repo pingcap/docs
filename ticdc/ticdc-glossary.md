@@ -1,6 +1,6 @@
 ---
 title: TiCDC Glossary
-summary: Learn the terms about TiCDC and their definitions.
+summary: TiCDC 用語集は、TiCDC 関連の用語と定義を説明します。捕獲はクラスターのレプリケーション タスクが実行される単一の TiCDC インスタンスで、変更されたデータはアップストリーム TiDB クラスターから TiCDC に書き込まれるデータを指します。チェンジフィードはTiCDC の増分レプリケーション タスクで、所有者はTiCDC クラスターを管理し、クラスターのレプリケーション タスクをスケジュールする特別なロールの捕獲です。プロセッサーはTiCDC レプリケーション タスクにデータ テーブルを割り当て、これらのテーブルのレプリケーション処理ユニットを参照します。
 ---
 
 # TiCDC 用語集 {#ticdc-glossary}

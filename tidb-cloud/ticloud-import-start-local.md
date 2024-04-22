@@ -1,6 +1,6 @@
 ---
 title: ticloud import start local
-summary: The reference of `ticloud import start local`.
+summary: ticloud インポートをローカルで開始します。対話モードでインポートタスクを開始する場合は、ticloud import start local <file-path> を使用します。非対話モードでインポートタスクを開始する場合は、ticloud import start local <file-path> --project-id <project-id> --cluster-id <cluster-id> --data-format <data-format> --target-database <target-database> --target-table <target-table> を使用します。フラグは手動で入力する必要があります。必要なフラグには、--バックスラッシュ-エスケープ、-c、--cluster-id、--データ形式、--区切り文字、-p、--プロジェクトID、--区切り文字、--ターゲットデータベース、--ターゲットテーブル、--最後の区切り文字をトリミングがあります。継承されたフラグには、--色なし、-P、--プロファイルがあります。質問や提案がある場合は、TiDB Cloud CLI の問題を作成してください。
 ---
 
 # ticloud インポートをローカルで開始 {#ticloud-import-start-local}

@@ -1,6 +1,6 @@
 ---
 title: Log Redaction
-summary: Learn the log redaction in TiDB components.
+summary: TiDB、TiKV、PD、およびTiFlashの各コンポーネントは、機密データがログに出力されるリスクを回避するためにログ編集を提供します。TiDBでは`global.tidb_redact_log`を`1`に設定し、TiKV、PD、TiFlashではそれぞれ`security.redact-info-log`を`true`に設定します。これにより、機密情報がシールドされ、データセキュリティのリスクが回避されます。
 ---
 
 # ログの編集 {#log-redaction}

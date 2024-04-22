@@ -1,6 +1,6 @@
 ---
 title: Function and Operator Reference
-summary: Learn how to use the functions and operators.
+summary: TiDBでの関数と演算子の使用法はMySQLと似ています。SQLステートメントでは、SELECTステートメントのORDER BYおよびHAVING句、SELECT/DELETE/UPDATEステートメントのWHERE句、およびSETステートメントで式を使用できます。リテラル、列名、NULL、組み込み関数、演算子などを使用して式を作成できます。TiDBがTiKVへのプッシュダウンをサポートする式については、プッシュダウンの式のリストを参照してください。
 ---
 
 # 関数と演算子のリファレンス {#function-and-operator-reference}

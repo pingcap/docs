@@ -1,6 +1,6 @@
 ---
 title: LOCK STATS
-summary: An overview of the usage of LOCK STATS for the TiDB database.
+summary: LOCK STATSは、テーブルまたはパーティションの統計をロックするために使用されます。統計がロックされている場合、TiDBは自動的に更新しません。テーブルまたはパーティションの統計をロックし、ANALYZEを実行することができます。MySQLの互換性もあります。
 ---
 
 # ロック統計 {#lock-stats}

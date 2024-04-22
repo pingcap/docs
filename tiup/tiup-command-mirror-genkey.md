@@ -1,5 +1,6 @@
 ---
 title: tiup mirror genkey
+summary: TiUPのミラー管理者、コンポーネント所有者、一般ユーザーの3つの役割があります。`tiup mirror genkey`コマンドは秘密鍵を生成し、`-n/--name`で名前を指定し、`-p/--public`で公開鍵を表示します。秘密鍵が存在する場合は`Key already exists, skipped`を出力し、存在しない場合は`private key have been write to ${TIUP_HOME}/keys/{name}.json`を出力します。
 ---
 
 # tiup mirror genkey {#tiup-mirror-genkey}

@@ -1,6 +1,6 @@
 ---
 title: ticloud cluster create
-summary: The reference of `ticloud cluster create`.
+summary: ticloud クラスターを作成するためのコマンドは、対話モードと非対話モードの両方で使用できます。非対話モードでは、必要なフラグを手動で入力する必要があります。現在、作成できるクラスターはTiDBサーバーレスのみです。必要なフラグには、クラウドプロバイダー、クラスタ名、クラスタタイプ、プロジェクトID、地域、rootパスワードが含まれます。また、フィードバックや提案がある場合は、TiDB Cloud CLIの問題を作成するか、貢献することができます。
 ---
 
 # ticloud クラスターの作成 {#ticloud-cluster-create}

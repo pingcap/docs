@@ -1,6 +1,6 @@
 ---
 title: Slow Queries Page of TiDB Dashboard
-summary: TiDB Dashboard's Slow Queries page allows users to search and view slow queries in the cluster. Queries with an execution time over 300 milliseconds are considered slow. Users can adjust the threshold and access the page through the dashboard or a browser. They can also change filters, display more columns, export queries, and view execution details.
+summary: TiDB ダッシュボードの「遅いクエリ」ページでは、クラスター内のすべてのスロー クエリを検索して表示できます。実行時間が300ミリ秒を超えるSQLクエリは低速クエリとみなされ、遅いクエリログに記録されます。スロー クエリ ログはデフォルトで有効になっており、システム変数を使用して有効または無効にできます。低速クエリのしきい値はセッション変数またはTiDBパラメータを通じて調整できます。TiDB ダッシュボードにログインした後、左側のナビゲーション メニューで「Slow Queries」をクリックするか、ブラウザで指定のURLにアクセスしてください。
 ---
 
 # TiDB ダッシュボードの「遅いクエリ」ページ {#slow-queries-page-of-tidb-dashboard}

@@ -1,6 +1,6 @@
 ---
 title: TiDB Transaction Isolation Levels
-summary: Learn about the transaction isolation levels in TiDB.
+summary: TiDBは、トランザクション分離レベルを実装しており、SQL-92標準の4つのレベルをサポートしています。TiDBのリピータブルリード分離レベルは、ANSIリピータブルリード分離レベルとは異なります。また、TiDBのRead Committed分離レベルは、MySQLとは異なります。これらの違いにより、TiDBは独自のトランザクション処理を実現しています。
 ---
 
 # TiDBトランザクション分離レベル {#tidb-transaction-isolation-levels}

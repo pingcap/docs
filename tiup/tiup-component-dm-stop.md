@@ -1,5 +1,6 @@
 ---
 title: tiup dm stop
+summary: tiup dm stopコマンドは、指定したクラスターのサービスを停止するために使用されます。コアサービスが停止すると、クラスターはサービスを提供できなくなります。構文は、tiup dm stop <cluster-name> [flags]であり、オプションには-N、--node、-R、--role、-h、--helpがあります。停止したときのログが出力されます。
 ---
 
 # ティアップDM停止 {#tiup-dm-stop}

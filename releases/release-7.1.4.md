@@ -1,6 +1,6 @@
 ---
 title: TiDB 7.1.4 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 7.1.4.
+summary: TiDB 7.1.4は2024年3月11日にリリースされました。このバージョンでは、TiFlashのログ出力のオーバーヘッドが軽減され、TiKVのGCスレッドの数が設定されました。さらに、TiDBやTiKV、PD、TiFlashなどの改善点やバグの修正が含まれています。また、バックアップと復元 (BR)、TiCDC、TiDB Lightningなどのツールにも改善が加えられています。
 ---
 
 # TiDB 7.1.4 リリースノート {#tidb-7-1-4-release-notes}

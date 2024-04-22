@@ -1,6 +1,6 @@
 ---
 title: Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud
-summary: Learn how to import Apache Parquet files from Amazon S3 or GCS into TiDB Cloud.
+summary: Apache ParquetファイルをAmazon S3またはGCSからTiDB Cloudにインポートできます。非圧縮およびSnappy圧縮形式のデータファイルの両方をインポート可能。インポート方法やスキーマの作成方法について説明されています。また、データ型のサポートやトラブルシューティング方法も記載されています。
 ---
 
 # Apache Parquet ファイルを Amazon S3 または GCS からTiDB Cloudにインポートする {#import-apache-parquet-files-from-amazon-s3-or-gcs-into-tidb-cloud}

@@ -1,5 +1,6 @@
 ---
 title: tiup mirror set
+summary: tiup mirror setコマンドは、現在のミラーを切り替えるために使用されます。公式ミラーのアドレスはです。ミラーのアドレスはネットワークアドレスまたはローカルファイルパスの2つの形式があります。ルート証明書を指定するオプションもあります。出力はありません。
 ---
 
 # tiup mirror set {#tiup-mirror-set}

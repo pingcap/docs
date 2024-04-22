@@ -1,6 +1,6 @@
 ---
 title: ALTER RANGE
-summary: An overview of the usage of ALTER RANGE for TiDB.
+summary: ALTER RANGEステートメントは、TiDBの配置ポリシーの範囲を変更するために使用されます。`ALTER RANGE`は`global`と`meta`の2つのパラメータをサポートし、それぞれクラスター内のすべてのデータの範囲とTiDBに格納される内部メタデータの範囲を示します。例えば、配置ポリシーを作成し、それらを特定の範囲に適用することができます。
 ---
 
 # 範囲を変更する {#alter-range}

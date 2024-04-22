@@ -1,6 +1,6 @@
 ---
 title: Data Migration Monitoring Metrics
-summary: Learn about the monitoring metrics when you use Data Migration to migrate data.
+summary: データ移行監視メトリクスは、DMクラスターがTiUPを使用してデプロイされている場合に、監視システムも同時にデプロイされます。DM-workerが提供する監視メトリクスには、タスクの状態、操作ミス、高可用性、ダンプ/ロードユニット、Binlogレプリケーション、リレーログ、およびインスタンスのメトリクスが含まれます。これらのメトリクスには、各項目の説明、アラートの有無、および重大度レベルが含まれます。
 ---
 
 # データ移行監視メトリクス {#data-migration-monitoring-metrics}

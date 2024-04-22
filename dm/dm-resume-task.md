@@ -1,6 +1,6 @@
 ---
 title: Resume a Data Migration Task
-summary: Learn how to resume a data migration task.
+summary: データ移行タスクを再開するためには、`resume-task`コマンドを使用します。このコマンドは、一時停止したタスクを再開する際に使用されます。`-s`フラグを使用してMySQLソースを指定し、指定したソースのサブタスクのみを再開することも可能です。タスク名またはタスクファイルのパスを指定することで、再開するタスクを指定します。再開後の結果は、`op`が"Resume"で`result`がtrueとなります。
 ---
 
 # データ移行タスクを再開する {#resume-a-data-migration-task}

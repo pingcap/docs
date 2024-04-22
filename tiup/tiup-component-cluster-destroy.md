@@ -1,5 +1,6 @@
 ---
 title: tiup cluster destroy
+summary: tiup cluster destroyコマンドは、アプリケーションがオフラインになった後、クラスターによって占有されていたマシンを解放するために使用されます。このコマンドは、クラスターを停止し、各サービスのログディレクトリ、デプロイメントディレクトリ、およびデータディレクトリを削除します。オプションとして、--forceオプションを使用してエラーを無視したり、--retain-node-dataおよび--retain-role-dataオプションを使用してデータを保持するノードやロールを指定することができます。
 ---
 
 # tiup cluster destroy {#tiup-cluster-destroy}

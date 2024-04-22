@@ -1,5 +1,6 @@
 ---
 title: tiup mirror sign
+summary: tiup mirror signコマンドは、TiUP鏡で定義されたメタデータファイルに署名するために使用されます。メタデータファイルはローカルファイルシステムに保存されるか、HTTPプロトコルを使用してリモートに保存される場合があります。構文は"tiup mirror sign <manifest-file> [flags]"で、<manifest-file>は署名されるファイルのアドレスです。オプションには-k、--キーとタイムアウトがあります。出力は正常に実行された場合はありません。
 ---
 
 # tiup mirror sign {#tiup-mirror-sign}

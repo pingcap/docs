@@ -1,6 +1,6 @@
 ---
 title: Migrate and Merge MySQL Shards of Small Datasets to TiDB
-summary: Learn how to migrate and merge small datasets of shards from MySQL to TiDB.
+summary: MySQLデータベースの複数のインスタンスをTiDBに移行し、小規模なデータセットの場合はDMを使用して移行できます。移行手順や注意事項、トラブルシューティングについて学ぶことができます。移行タスクを開始する前に、構成がDMの要件を満たしているかどうかを確認してください。移行タスクの履歴と内部運用メトリックを表示できます。
 ---
 
 # 小規模なデータセットの MySQL シャードを TiDB に移行およびマージする {#migrate-and-merge-mysql-shards-of-small-datasets-to-tidb}

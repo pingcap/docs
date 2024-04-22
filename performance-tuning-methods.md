@@ -1,6 +1,6 @@
 ---
 title: Performance Analysis and Tuning
-summary: Learn how to optimize database system based on database time and how to utilize the TiDB Performance Overview dashboard for performance analysis and tuning.
+summary: データベース時間に基づいてデータベースシステムを最適化し、TiDBパフォーマンスを利用する方法を学ぶ。
 ---
 
 # パフォーマンスの分析とチューニング {#performance-analysis-and-tuning}

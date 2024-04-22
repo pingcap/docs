@@ -1,6 +1,6 @@
 ---
 title: Use TiFlash MPP Mode
-summary: Learn the MPP mode of TiFlash and how to use it.
+summary: TiFlashは、MPPモードを使用してクエリの実行をサポートします。TiDBは、自動的にMPPモードを選択するかどうかを決定します。MPPモードを制御するために、`tidb_allow_mpp`と`tidb_enforce_mpp`の値を変更できます。MPPモードはブロードキャストハッシュ結合、シャッフルハッシュ結合、シャッフルハッシュ集計、Union All、TopN、およびLimitの物理アルゴリズムをサポートします。また、MPPモードでパーティション化されたテーブルにアクセスするには、動的プルーニングモードを有効にする必要があります。
 ---
 
 # TiFlash MPP モードを使用する {#use-tiflash-mpp-mode}

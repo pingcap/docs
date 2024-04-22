@@ -1,6 +1,6 @@
 ---
 title: Date and Time Types
-summary: Learn about the supported date and time types.
+summary: TiDBはMySQLの日付と時刻のデータ型をサポートし、有効な値の範囲や自動生成などの挙動について注意が必要です。さらに、SQLモードの設定によってTiDBの動作が変わる可能性があります。日付型と時刻型の間の変換や2桁の年の部分の取り扱いにも注意が必要です。
 ---
 
 # 日付と時刻のタイプ {#date-and-time-types}

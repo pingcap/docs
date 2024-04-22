@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with GORM
-summary: Learn how to connect to TiDB using GORM. This tutorial gives Golang sample code snippets that work with TiDB using GORM.
+summary: TiDBはMySQL互換データベースであり、GORMはGolang用の人気のあるオープンソースORMフレームワークです。このチュートリアルでは、TiDBとGORMを使用して環境をセットアップし、TiDBクラスターに接続し、アプリケーションをビルドして実行する方法を学びます。また、基本的なCRUD操作のサンプルコードスニペットも提供されています。このチュートリアルは、TiDBサーバーレス、TiDB専用、およびTiDBセルフホストで動作します。
 ---
 
 # GORM を使用して TiDB に接続する {#connect-to-tidb-with-gorm}

@@ -1,6 +1,6 @@
 ---
 title: Cost Model
-summary: Learn how the cost model used by TiDB works during physical optimization.
+summary: TiDBはコストモデルを使用して、インデックスと演算子を選択します。コストモデルバージョン2では、より正確な回帰キャリブレーションを提供し、以前のバージョンよりも正確になっています。コストモデルのバージョンを切り替えると、クエリプランが変更される可能性があります。
 ---
 
 # コストモデル {#cost-model}

@@ -1,6 +1,6 @@
 ---
 title: Compatibility Catalog of TiDB Data Migration
-summary: This document describes the compatibility between DM of different versions and upstream/downstream databases.
+summary: DMは、さまざまなソースからTiDBクラスターへのデータの移行をサポートします。データソースの種類に基づいて、DMには4つの互換性レベルがあります。MySQL 5.6と5.7はGAレベルであり、MySQL 8.0はExperimentalレベルです。マリアDBについては、バージョンによって互換性が異なります。TiDBに関しては、バージョンによって互換性がありますが、DM v5.3.0は推奨されません。
 ---
 
 # TiDB データ移行の互換性カタログ {#compatibility-catalog-of-tidb-data-migration}

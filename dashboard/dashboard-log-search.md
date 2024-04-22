@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Log Search Page
-summary: TiDB Dashboard log search page allows users to search logs, preview results, and download logs. Users can access the page after logging in, and specify time range, log level, keywords, and components for the search. The search result page displays parameter options, search progress, and search results. Users can download selected logs, cancel running tasks, and retry failed tasks. The search history list shows details of past searches and allows users to delete unnecessary history.
+summary: TiDB ダッシュボードのログ検索ページでは、すべてのノードのログを検索し、検索結果をプレビューし、ログをダウンロードできます。ログイン後、「ログの検索」をクリックしてアクセスできます。検索パラメータが提供され、検索結果の詳細ページが表示されます。検索結果ページにはパラメーターオプション、進行状況、検索結果が表示されます。検索の進行状況には実行中、成功、失敗のステータスがあります。検索履歴一覧ページでは、検索履歴リストが表示され、不要な検索履歴は削除できます。
 ---
 
 # TiDB ダッシュボードのログ検索ページ {#tidb-dashboard-log-search-page}

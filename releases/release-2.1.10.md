@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1.10 Release Notes
-summary: TiDB 2.1.10 was released on May 22, 2019, with various bug fixes and improvements. The release includes fixes for issues related to table schema, read results, generated columns, datetime functions, slow logs, and more. Additionally, improvements were made to TiKV and tools like TiDB Lightning and TiDB Binlog. The TiDB Ansible version 2.1.10 also received updates.
+summary: TiDB 2.1.10は2019年5月22日にリリースされました。このバージョンでは、多くのバグが修正され、機能が改善されました。例えば、`tidb_snapshot`を使用して履歴データを読み込む際のテーブルスキーマの不正な問題が修正され、さらに多くの修正が行われています。PDとTiKVにもいくつかの修正が含まれています。TiDB Ansibleも更新され、新しいスクリプトが追加されました。
 ---
 
 # TiDB 2.1.10 リリースノート {#tidb-2-1-10-release-notes}

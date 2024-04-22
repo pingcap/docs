@@ -1,6 +1,6 @@
 ---
 title: Manage Data Source Configurations in TiDB Data Migration
-summary: Learn how to manage upstream MySQL instances in TiDB Data Migration.
+summary: このドキュメントは、TiDB Data Migrationにおけるデータソース構成の管理方法について紹介しています。具体的には、MySQLパスワードの暗号化方法やデータソースの操作方法、上流のMySQLインスタンスとDMワーカー間のバインディングの変更方法について説明しています。暗号化されたパスワードの使用やデータソースのロード、一覧表示、削除方法、バインディングの変更方法について説明しています。データソース構成の確認方法やバインディングの変更例も示しています。
 ---
 
 # TiDB Data Migration でのデータ ソース構成の管理 {#manage-data-source-configurations-in-tidb-data-migration}

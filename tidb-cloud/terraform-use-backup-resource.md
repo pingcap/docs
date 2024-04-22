@@ -1,6 +1,6 @@
 ---
 title: Use Backup Resource
-summary: Learn how to create a backup of a TiDB Cloud cluster using the backup resource.
+summary: このドキュメントでは、TiDB Cloudクラスターのバックアップを作成する方法について学習できます。バックアップリソースを使用すると、TiDB専用クラスターのバックアップを作成および削除できます。バックアップを作成するには、バックアップ用のディレクトリを作成し、`backup.tf`ファイルを作成して`terraform apply`コマンドを実行します。バックアップのステータスを確認するには`terraform state show tidbcloud_backup.${resource-name}`を使用します。バックアップを削除するには、対応する`backup.tf`ファイルが存在するバックアップディレクトリに移動し、`terraform destroy`コマンドを実行します。
 ---
 
 # バックアップリソースの使用 {#use-backup-resource}

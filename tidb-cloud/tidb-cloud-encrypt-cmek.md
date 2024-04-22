@@ -1,6 +1,6 @@
 ---
 title: Encryption at Rest Using Customer-Managed Encryption Keys
-summary: Learn about how to use Customer-Managed Encryption Key (CMEK) in TiDB Cloud.
+summary: TiDB専用クラスター内の静的データを保護するために、顧客管理の暗号化キー (CMEK) を使用します。CMEKが有効な場合、すべてのクラスターがCMEKキーを使用して静的データを暗号化し、バックアップデータも同じキーを使用して暗号化されます。現在、CMEKはAWS KMSのみをサポートしており、プロジェクト作成時にCMEKを有効にする必要があります。AWSでホストされるTiDB専用クラスターのみが作成可能であり、1つのAWSリージョンに対してのみCMEKを有効にできます。
 ---
 
 # 顧客管理の暗号化キーを使用した保存時の暗号化 {#encryption-at-rest-using-customer-managed-encryption-keys}

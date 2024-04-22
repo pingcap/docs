@@ -1,6 +1,6 @@
 ---
 title: Titan Configuration
-summary: Learn how to configure Titan.
+summary: このドキュメントは、Titanの有効化方法とパラメーターについて説明しています。Titanを有効にする方法は2つあります。また、Titanを無効にする手順も記載されています。さらに、レベルマージの有効化方法についても説明されています。これにより、範囲クエリのパフォーマンスが向上し、Titanの影響を軽減できます。
 ---
 
 # Titanコンフィグレーション {#titan-configuration}

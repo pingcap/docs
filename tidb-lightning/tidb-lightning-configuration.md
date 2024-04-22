@@ -1,6 +1,6 @@
 ---
 title: TiDB Lightning Configuration
-summary: Learn about the CLI usage and sample configuration in TiDB Lightning.
+summary: このドキュメントは、TiDB Lightningのグローバル構成とタスク構成のサンプルを提供し、コマンドラインパラメーターの使用法について説明しています。TiDB Lightningには、グローバルとタスクの2つの構成クラスがあり、それぞれ異なる設定があります。また、TiDB Lightningコマンドラインツールを使用してさまざまなアクションを実行することができます。
 ---
 
 # TiDB Lightningコンフィグレーション {#tidb-lightning-configuration}

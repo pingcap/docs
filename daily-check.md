@@ -1,6 +1,6 @@
 ---
 title: Daily Check
-summary: Learn about performance indicators of the TiDB cluster.
+summary: TiDBは分散型データベースであり、TiDBダッシュボードを使用することで、クラスター全体のパフォーマンス指標を確認できます。インスタンス、ホスト、SQL分析、リージョン、KVリクエスト期間、PD TSO待機時間、概要、例外、GCステータスなどの重要な指標が表示されます。これらの指標を確認し、適切な対策を取ることで、TiDBの運用とメンテナンスを効果的に行うことができます。
 ---
 
 # 毎日のチェック {#daily-check}

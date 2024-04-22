@@ -1,5 +1,6 @@
 ---
 title: tiup clean
+summary: `tiup clean`コマンドは、コンポーネントの動作中に生成されたデータをクリアするために使用されます。`tiup clean [name] [flags]`の構文を持ち、`[name]`を省略した場合は、`--all`オプションを追加する必要があります。`--all`オプションはすべての操作記録をクリアし、デフォルト値はfalseです。
 ---
 
 # クリーンアップ {#tiup-clean}

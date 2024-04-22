@@ -1,6 +1,6 @@
 ---
 title: Character Set and Collation
-summary: Learn about the supported character sets and collations in TiDB.
+summary: TiDBは、文字セットと照合順序をサポートしており、utf8mb4がデフォルトの文字セットであり、utf8mb4_binがデフォルトの照合順序です。照合順序を指定する際には、COLLATE句を使用して指定することができます。また、異なるレイヤーで文字セットと照合順序を設定することができます。文字列の比較においては、照合順序の強制値が低い式の照合順序が優先されます。TiDBは、照合順序の新しいフレームワークを導入し、意味的な照合順序の解析をサポートしています。
 ---
 
 # 文字セットと照合順序 {#character-set-and-collation}

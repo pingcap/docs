@@ -1,6 +1,6 @@
 ---
 title: DR Solution Based on BR
-summary: Learn how to implement disaster recovery based on TiDB's backup and restore feature.
+summary: TiDBクラスターには複数のレプリカがあり、単一のデータセンターやリージョンの障害に耐えられます。BR機能は柔軟性、信頼性、回復可能性が高く、コスト効率が優れています。バックアップはいつでも柔軟に行え、データは独立したstorageデバイスに保存されます。予期せぬ事態によるデータ損失や損傷はバックアップデータから回復できます。BRはデータベースの安全性と信頼性を向上させ、費用をかけずに保護できます。TiDBはバックアップと復元の機能を継続的に改善し、詳細なドキュメントも提供しています。
 ---
 
 # BRをベースとしたDRソリューション {#dr-solution-based-on-br}

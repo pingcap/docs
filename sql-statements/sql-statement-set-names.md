@@ -1,6 +1,6 @@
 ---
 title: SET [NAMES|CHARACTER SET] |  TiDB SQL Statement Reference
-summary: An overview of the usage of SET [NAMES|CHARACTER SET] for the TiDB database.
+summary: SET NAMES、SET CHARACTER SET、およびSET CHARSETステートメントは、character_set_client、character_set_results、およびcharacter_set_connectionを変更します。MySQLの互換性は完全であり、互換性の違いがあればバグを報告してください。関連リンクには、グローバルセッション変数の表示、SET <variable>、文字セットと照合順序のサポートが含まれます。
 ---
 
 # SET [名前|文字セット] {#set-names-character-set}
