@@ -1206,7 +1206,7 @@ SELECT CONCAT('«',LTRIM('    hello'),'»');
 
 ### [`MAKE_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_make-set)
 
-The `MAKE_SET()` function returns a set of comma-separated strings based on whether a corresponding bit is set to `1`.
+The `MAKE_SET()` function returns a set of comma-separated strings based on whether a corresponding bit in the `bits` argument is set to `1`.
 
 Syntax:
 
