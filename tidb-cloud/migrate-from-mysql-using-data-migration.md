@@ -200,7 +200,7 @@ In the **Choose the objects to be migrated** step, you can choose existing data 
 
 To migrate data to TiDB Cloud once and for all, choose both **Existing data migration** and **Incremental data migration**, which ensures data consistency between the source and target databases.
 
-You can use **physical mode** or **logical mode** to migrate **existing data**.
+You can use **physical mode** or **logical mode** to migrate **existing data** and **incremental data**.
 
 - The default mode is **logical mode**. This mode exports data from upstream databases as SQL statements, and then executes them on TiDB. In this mode, the target tables before migration can be either empty or non-empty. But the performance is slower than physical mode.
 
