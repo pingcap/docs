@@ -226,7 +226,7 @@ Physical mode exports the upstream data as fast as possible, so [different speci
 
 To migrate only existing data of the source database to TiDB Cloud, choose **Existing data migration**.
 
-You can choose to use physical mode or logical mode to migrate existing data. For more information, see [Migrate existing data and incremental data](#migrate-existing-data-and-incremental-data).
+You can only use logical mode to migrate existing data. For more information, see [Migrate existing data and incremental data](#migrate-existing-data-and-incremental-data).
 
 ### Migrate only incremental data
 
