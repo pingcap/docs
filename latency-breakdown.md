@@ -1,6 +1,6 @@
 ---
 title: Latency Breakdown
-summary: Introduce more details about TiDB latency and how to analyze latency in real use cases.
+summary: レイテンシーをメトリクスに分類し、TiDBのクエリ中の時間コストについての深い洞察が得られます。読み取りクエリの場合、ポイントゲット、バッチポイントゲット、および単純なコプロセッサクエリを分析できます。書き込みクエリの場合、競合の原因をトラブルシューティングし、ロックと専念の継続時間を分析することで遅い書き込みクエリを調査できます。
 ---
 
 # レイテンシの内訳 {#latency-breakdown}

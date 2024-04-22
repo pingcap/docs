@@ -1,6 +1,6 @@
 ---
 title: Data Integration Overview
-summary: Learn the overview of data integration scenarios.
+summary: データ統合は、さまざまなデータソース間でのデータのフロー、転送、統合を意味します。TiDBのTiCDCを使用すると、増分データを他のデータプラットフォームに複製できます。Confluent CloudやSnowflake、Apache Kafka、Apache Flinkなどとの統合も可能です。ビジネスに合った統合ソリューションを選択できます。
 ---
 
 # データ統合の概要 {#data-integration-overview}

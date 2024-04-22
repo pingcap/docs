@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard FAQs
-summary: This document summarizes FAQs about TiDB Dashboard. It covers access-related, UI-related, and deployment issues, providing solutions for each problem. If further assistance is needed, support can be obtained from PingCAP or the community.
+summary: TiDB ダッシュボードに関するよくある質問とその回答がまとめられています。アクセスに関するFAQでは、ファイアウォールやリバースプロキシの設定に関する問題が解説されています。また、UI関連のFAQでは、Prometheusのデプロイやプリペアドプランキャッシュの無効化についての解決方法が記載されています。NgMonitoringのデプロイに関するエラーについても詳細が記載されています。
 ---
 
 # TiDB ダッシュボードに関するよくある質問 {#tidb-dashboard-faqs}

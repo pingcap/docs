@@ -1,6 +1,6 @@
 ---
 title: SHOW COLLATION | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW COLLATION for the TiDB database.
+summary: SHOW COLLATIONステートメントは、MySQLクライアントライブラリと互換性を提供するために照合順序の静的なリストを提供します。新しい照合順序フレームワークが有効な場合、結果は異なります。バイナリ照合順序のみが表示されます。MySQLの互換性は完全であり、TiDBの文字セットにはデフォルトの照合順序が異なる場合があります。
 ---
 
 # 照合順序を表示 {#show-collation}

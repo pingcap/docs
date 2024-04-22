@@ -1,6 +1,6 @@
 ---
 title: Metrics Schema
-summary: Learn the `METRICS_SCHEMA` schema.
+summary: TiDBメトリクスに基づくビューであるMETRICS_SCHEMAは、Prometheusに保存されています。各テーブルのソースはINFORMATION_SCHEMA.METRICS_TABLESで入手できます。これにはuptimeやnode_cpu_usageなどのテーブルが含まれます。また、監視関連のサマリーテーブルのデータソースとして使用されます。例えば、tidb_query_duration監視テーブルはTiDBクエリ実行のパーセンタイル時間をクエリするために使用されます。それぞれのテーブルにはPROMQLやLABELS、QUANTILE、COMMENTなどの情報が含まれます。また、実行計画を表示することもできます。
 ---
 
 # メトリックスキーマ {#metrics-schema}

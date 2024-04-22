@@ -1,6 +1,6 @@
 ---
 title: Optimize Configuration of DM
-summary: Learn how to optimize the configuration of the data migration task to improve the performance of data migration.
+summary: このドキュメントでは、データ移行タスクの構成を最適化してデータ移行のパフォーマンスを向上させる方法を紹介します。データ移行タスクの構成を最適化するためには、`mydumpers`の設定項目を調整し、`rows`オプションを設定してマルチスレッドを使用してデータを同時にエクスポートします。また、`chunk-filesize`オプションを設定してデータを複数のチャンクに分割し、インポート速度を向上させることができます。さらに、`loaders`の設定項目を調整して、データのインポートパフォーマンスを向上させることができます。増分データレプリケーションに関連する設定項目も説明されており、パフォーマンス関連のオプションを適切に構成する方法が示されています。
 ---
 
 # DMのコンフィグレーションを最適化する {#optimize-configuration-of-dm}

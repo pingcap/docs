@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Top SQL page
-summary: TiDB Dashboard Top SQL allows real-time monitoring and visualization of CPU overhead for SQL statements in your database. It helps optimize performance by identifying high CPU load statements and provides detailed execution information. It's suitable for analyzing performance issues and can be accessed through TiDB Dashboard or a browser. The feature has a slight impact on cluster performance and is now generally available for production use.
+summary: TiDBのTop SQLページは、データベース内のSQLステートメントのCPUオーバーヘッドをリアルタイムで監視し、問題を特定するのに役立ちます。特定の期間にわたる高いCPU負荷の原因となっているSQLステートメントを素早く特定し、パフォーマンスの問題を解決できます。また、特定のTiDBまたはTiKVインスタンスのデータの表示を許可します。Top SQLはパフォーマンス以外の問題を特定するためには使用できません。
 ---
 
 # TiDB ダッシュボードのTop SQLページ {#tidb-dashboard-top-sql-page}

@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.16 Release Notes
-summary: TiDB 4.0.16 was released on December 17, 2021. The release includes compatibility changes for TiKV and Tools, improvements for TiDB, TiKV, and Tools, bug fixes for TiDB, TiKV, PD, TiFlash, TiDB Binlog, and TiCDC. The bug fixes address various issues such as query panics, wrong results, panics, and memory leaks. The release also includes fixes for TiCDC replication interruption, OOM in container environments, and memory leak issues.
+summary: TiDB 4.0.16は、TiKVのUTF-8文字列変換エラーを修正し、TiCDCのKafkaシンクのデフォルト値を変更しました。また、Grafanaバージョンをアップグレードし、TiKVのデータ圧縮方法を改善しました。さらに、多くのバグ修正が行われ、TiFlashの起動問題も修正されました。TiDBBinlogとTiCDCにも多くの修正が加えられました。
 ---
 
 # TiDB 4.0.16 リリースノート {#tidb-4-0-16-release-notes}

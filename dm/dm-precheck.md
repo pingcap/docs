@@ -1,6 +1,6 @@
 ---
 title: Migration Task Precheck
-summary: Learn the precheck that DM performs before starting a migration task.
+summary: DMはアップストリームからダウンストリームにデータを移行する前に、事前チェックによりアップストリームのデータベース構成のエラーを検出し、移行がスムーズに行われるようにします。移行タスクの事前チェックは、データベースのバージョン、テーブル スキーマの互換性、ダンプ権限、リージョンの分布などをチェックします。チェック項目を無視することはお勧めできず、適切なスレッド数を指定する必要があります。
 ---
 
 # 移行タスクの事前チェック {#migration-task-precheck}

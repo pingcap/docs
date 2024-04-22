@@ -1,6 +1,6 @@
 ---
 title: TiDB Query Execution Plan Overview
-summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
+summary: TiDBはSQLの宣言型言語であり、クエリ実行計画を考慮して最適な方法でクエリを実行します。`EXPLAIN`ステートメントは選択された実行プランを示し、`EXPLAIN ANALYZE`を使用して実際のクエリを実行し、情報を表示できます。演算子情報には、推定行数やアクセスオブジェクトなどが含まれます。また、オペレーター概要とタスクの概要も提供されます。
 ---
 
 # TiDB クエリ実行計画の概要 {#tidb-query-execution-plan-overview}

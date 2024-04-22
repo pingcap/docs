@@ -1,6 +1,6 @@
 ---
 title: Comparisons between Functions and Syntax of Oracle and TiDB
-summary: Learn the comparisons between functions and syntax of Oracle and TiDB.
+summary: OracleとTiDBの機能と構文を比較します。Oracle関数に基づいて対応するTiDB関数を見つけ、OracleとTiDBの構文の違いを理解するのに役立ちます。関数の比較や構文の違いについて詳細に説明しています。TiDBは、文字列を一重引用符または二重引用符で囲むことができますが、Oracleは一重引用符でのみ囲むことができます。また、TiDBはNULLと空の文字列を区別しますが、Oracleは区別しません。ページネーションやNULL値の並べ替え順序の違いもあります。
 ---
 
 # OracleとTiDBの機能と構文の比較 {#comparisons-between-functions-and-syntax-of-oracle-and-tidb}

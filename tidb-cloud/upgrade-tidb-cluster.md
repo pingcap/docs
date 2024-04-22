@@ -1,6 +1,6 @@
 ---
 title: Upgrade a TiDB Cluster
-summary: Learn how to upgrade a TiDB cluster.
+summary: TiDB Cloudでは、TiDBクラスターをアップグレードする方法が提供されています。定期的にアップグレードする場合、TiDB Cloudはユーザーに電子メールで通知します。また、サポートに連絡してアップグレードリクエストを送信することもできます。アップグレードの期間はTiDB Cloudテクニカルサポートによって確認され、確認された期間内にアップグレードが実行されます。
 ---
 
 # TiDBクラスタのアップグレード {#upgrade-a-tidb-cluster}

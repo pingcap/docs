@@ -1,6 +1,6 @@
 ---
 title: Maintain a TiFlash Cluster
-summary: Learn common operations when you maintain a TiFlash cluster.
+summary: TiFlashクラスターの保守に関する一般的な操作について説明します。TiFlashのバージョンを確認する方法と重要なログ、システムテーブルについて説明します。ログにはデータの複製開始やコプロセッサーリクエストの処理などが含まれます。システムテーブルにはテーブルスキーマ、テーブル名、テーブルID、TiFlashレプリカの数などが含まれます。
 ---
 
 # TiFlashクラスタの管理 {#maintain-a-tiflash-cluster}

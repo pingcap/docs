@@ -1,6 +1,6 @@
 ---
 title: Migrate Data from Amazon Aurora to TiDB
-summary: Learn how to migrate data from Amazon Aurora to TiDB using DB snapshot.
+summary: Amazon AuroraからTiDBへのデータ移行には、2つのプロセスがあります。まず、TiDB Lightningを使用して完全なデータをインポートし、次にDMを使用して増分データを複製します。移行の前提条件として、DumplingとTiDB Lightningをインストールし、必要な権限を取得する必要があります。移行タスクを作成し、実行してから、タスクのステータスを確認し、ログを表示します。
 ---
 
 # Amazon Auroraから TiDB へのデータの移行 {#migrate-data-from-amazon-aurora-to-tidb}

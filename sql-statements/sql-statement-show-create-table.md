@@ -1,6 +1,6 @@
 ---
 title: SHOW CREATE TABLE | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW CREATE TABLE for the TiDB database.
+summary: このステートメントは、SQL を使用して既存のテーブルを再作成するための正確なステートメントを示しています。TiDB の`SHOW CREATE TABLE`ステートメントは MySQL と完全な互換性があります。互換性の違いが見つかった場合は、バグを報告。テーブルの作成、ドロップテーブル、テーブルを表示、次の列を表示も参照。
 ---
 
 # テーブルの作成を表示 {#show-create-table}

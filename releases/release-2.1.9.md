@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1.9 Release Notes
-summary: TiDB 2.1.9 was released on May 6, 2019. It includes various bug fixes and improvements, such as fixing compatibility issues, privilege check problems, and wrong result issues. The release also includes improvements to slow query logs and support for controlling the number of rows returned by operators. Additionally, there are updates to PD, TiKV, TiDB Binlog, TiDB Lightning, and sync-diff-inspector. TiDB Ansible has also been updated with documentation links and parameter removal.
+summary: TiDB 2.1.9は2019年5月6日にリリースされました。このバージョンでは、多くのバグ修正と改善が行われました。例えば、符号なし型オーバーフロー時の`MAKETIME`関数の互換性を修正し、定数フォールディングによって引き起こされるスタック オーバーフローを修正しました。また、遅いクエリログを改善するために、類似した SQL を区別するための`SQL Digest`を追加し、スロークエリステートメントで使用される統計のバージョン情報を追加しました。TiDB Ansibleもリファクタリングされ、ドキュメントのリンクが更新されました。
 ---
 
 # TiDB 2.1.9 リリースノート {#tidb-2-1-9-release-notes}

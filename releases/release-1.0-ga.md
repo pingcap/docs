@@ -1,6 +1,6 @@
 ---
 title: TiDB 1.0 release notes
-summary: TiDB 1.0 is released with a focus on MySQL compatibility, SQL optimization, stability, and performance. It includes enhancements to the SQL query optimizer, internal data format optimization, and support for various operators. PD now supports read flow based balancing and setting store weight. TiKV has improved coprocessor support and performance, and added a Debug API. Special thanks to enterprises, open source software, and individual contributors for their support.
+summary: TiDB 1.0は、2017年10月16日にリリースされました。このリリースは、MySQLの互換性、SQLの最適化、安定性、パフォーマンスに焦点を当てています。TiDBでは、SQLクエリオプティマイザーの調整、内部データ形式の最適化、MySQLの互換性の強化などが行われています。PDでは、読み取りフローベースのバランシングをサポートし、TiKVではコプロセッサーのサポートが強化されています。また、TiSparkベータ版もリリースされています。さらに、多くの企業、組織、個人に感謝の意を表しています。
 ---
 
 # TiDB 1.0 リリースノート {#tidb-1-0-release-notes}

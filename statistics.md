@@ -1,6 +1,6 @@
 ---
 title: Introduction to Statistics
-summary: Learn how the statistics collect table-level and column-level information.
+summary: 統計がテーブルレベルと列レベルの情報を収集する方法について説明します。
 ---
 
 # 統計入門 {#introduction-to-statistics}

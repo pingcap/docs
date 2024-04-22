@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with Spring Boot
-summary: Learn how to connect to TiDB using Spring Boot. This tutorial gives Java sample code snippets that work with TiDB using Spring Boot.
+summary: Spring Bootを使用してTiDBに接続するチュートリアルでは、Spring Data JPAとHibernateを使用してTiDBクラスターに接続し、アプリケーションをビルドして実行する方法を学ぶことができます。必要なものは、Java開発キット(JDK) 17以降、Maven 3.8以上、Git、およびTiDBクラスターです。サンプルアプリケーションコードを実行してTiDBに接続する方法も説明されています。さらに、TiDBに接続するためのサンプルコードスニペットも提供されています。
 ---
 
 # Spring Boot を使用して TiDB に接続する {#connect-to-tidb-with-spring-boot}

@@ -1,6 +1,6 @@
 ---
 title: SHOW PLUGINS
-summary: An overview of the usage of SHOW PLUGINS for the TiDB database.
+summary: TiDBの`SHOW PLUGINS`は、インストールされているすべてのプラグインとそのステータス、バージョン情報を表示します。この機能はTiDBサーバーレスクラスターでは使用できません。MySQLと完全な互換性があります。
 ---
 
 # プラグインを表示 {#show-plugins}

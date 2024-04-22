@@ -1,6 +1,6 @@
 ---
 title: Key Visualizer Page
-summary: TiDB Dashboard's Key Visualizer page analyzes and troubleshoots traffic hotspots in the TiDB cluster. It visually shows traffic changes over time, and allows users to zoom in on specific time periods or region ranges. The page also provides settings to adjust brightness, select metrics, and refresh the heatmap. It identifies common heatmap types and offers solutions to address hotspot issues.
+summary: TiDBのKey Visualizerページは、TiDBの使用状況を視覚的に表示し、トラフィックのホットスポットを特定するために使用されます。ページには、トラフィックの時間経過に伴う変化を示すヒートマップやリージョンの詳細情報が表示されます。Key Visualizerを使用する際には、設定を行い、特定の期間やリージョン範囲を観察し、明るさを調整することができます。さらに、ヒートマップのタイプによって、ワークロードの分散状況やホットスポットの問題を把握することができます。
 ---
 
 # キービジュアライザーページ {#key-visualizer-page}

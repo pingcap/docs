@@ -1,6 +1,6 @@
 ---
 title: SHOW STATS_META
-summary: An overview of the usage of SHOW STATS_META for TiDB database.
+summary: SHOW STATS_METAはテーブル内の行数と変更された行数を表示します。6列を出力し、カラム名はデータベース名、テーブル名、パーティション名、更新時間、修正数、行数です。TiDBがDMLステートメントに従ってmodify_countフィールドとrow_countフィールドを更新すると、update_timeが更新されます。MySQLの互換性があります。
 ---
 
 # 統計_メタを表示 {#show-stats-meta}

@@ -1,6 +1,6 @@
 ---
 title: Decorrelation of Correlated Subquery
-summary: Understand how to decorrelate correlated subqueries.
+summary: サブクエリ関連の最適化について、TiDBが相関サブクエリを非相関化する方法を紹介します。相関サブクエリは外部クエリ結果にバインドされるため、繰り返し実行されることがあります。非相関化すると実行回数が減少し、パフォーマンスが向上します。ただし、外部値が少ない場合は非相関化を実行しないこともあります。また、非相関化を無効にする方法も紹介します。
 ---
 
 # 相関サブクエリの相関解除 {#decorrelation-of-correlated-subquery}

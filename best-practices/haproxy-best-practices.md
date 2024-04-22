@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Using HAProxy in TiDB
-summary: HAProxy is a free, open-source load balancer and proxy server for TCP and HTTP-based applications. It provides high availability, load balancing, health checks, sticky sessions, SSL support, and monitoring. To deploy HAProxy, ensure hardware and software requirements are met, then install and configure it. Use the latest stable version for best results.
+summary: TiDBのHAProxyのベストプラクティスについて説明します。HAProxyはTCPベースのアプリケーションの負荷分散を提供し、TiDBクライアントからはHAProxyによって提供されるフローティング仮想IPアドレスに接続するだけでデータを操作できます。HAProxyの概要や基本的な機能、ハードウェア要件、ソフトウェア要件、HAProxyのデプロイ方法、構成方法、開始方法、停止方法について説明します。
 ---
 
 # TiDB で HAProxy を使用するためのベスト プラクティス {#best-practices-for-using-haproxy-in-tidb}

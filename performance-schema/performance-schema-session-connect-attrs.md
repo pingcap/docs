@@ -1,6 +1,6 @@
 ---
 title: SESSION_CONNECT_ATTRS
-summary: Learn the `SESSION_CONNECT_ATTRS` performance_schema table.
+summary: `SESSION_CONNECT_ATTRS`は、接続属性に関する情報を提供します。セッション属性は、接続の確立時にクライアントによって送信されるキーと値のペアです。共通の属性には、`_client_name`、`_client_version`、`_os`、`_pid`、`_platform`、`program_name`があります。`SESSION_CONNECT_ATTRS`テーブルの列は、`PROCESSLIST_ID`、`ATTR_NAME`、`ATTR_VALUE`、`ORDINAL_POSITION`で構成されています。これにより、セッション属性に関する情報を表示できます。
 ---
 
 # SESSION_CONNECT_ATTRS {#session-connect-attrs}

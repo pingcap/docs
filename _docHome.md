@@ -3,7 +3,7 @@ title: PingCAP Documentation
 hide_sidebar: true
 hide_commit: true
 hide_leftNav: true
-summary: PingCAP Documentation provides how-to guides and references for using TiDB Cloud and TiDB, including data migration and application building. TiDB Cloud is a fully-managed Database-as-a-Service, offering easy access to the power of a cloud-native, distributed SQL database. TiDB is an open-source distributed SQL database with MySQL compatibility, horizontal scalability, and high availability. Developers can access documentation for application development and explore additional resources such as TiDB Playground, PingCAP Education, and community engagement opportunities.
+summary: PingCAP ドキュメントは、TiDB CloudとTiDBの使用方法やデータの移行、アプリケーションの構築に必要なガイドや参照を提供しています。TiDB CloudはフルマネージドのDatabase-as-a-Serviceであり、クラウドネイティブの分散SQLデータベースを活用し、リアルタイム分析用に構築されています。一方、TiDBはオープンソースの分散SQLデータベースであり、MySQLと互換性があり、水平スケーラビリティや高可用性を備えています。また、開発者向けのドキュメントやさまざまなリソースも提供されています。
 ---
 
 <DocHomeContainer title="PingCAP ドキュメント" subTitle="Explore the how-to guides and references you need to use TiDB Cloud and TiDB, migrate data, and build your applications on the database.">

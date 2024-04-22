@@ -1,6 +1,6 @@
 ---
 title: Multi-table Join Queries
-summary: This document describes how to use multi-table join queries.
+summary: 複数のテーブルを結合するために`JOIN`ステートメントを使用します。結合タイプには、内部結合、左外部結合、右外部結合、クロスジョイン、左セミ結合があります。結合アルゴリズムにはインデックス結合、ハッシュ結合、マージ結合があります。結合順序を制御するために`STRAIGHT_JOIN`を使用できます。TiDBはこれらの結合方法をサポートしています。
 ---
 
 # 複数テーブル結合クエリ {#multi-table-join-queries}

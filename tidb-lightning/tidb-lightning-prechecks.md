@@ -1,6 +1,6 @@
 ---
 title: TiDB Lightning Prechecks
-summary: This document describes the checks that TiDB Lightning performs before performing a data migration task. These precheckes ensure that TiDB Lightning can perform the task smoothly.
+summary: TiDB Lightningは、移行タスクを実行する前に構成をチェックする機能を提供します。デフォルトで有効になっており、クラスタのバージョン、権限、ディスクスペース、リージョン分布状況、CSVファイルのサイズ、ブレークポイントからの回復、既存のテーブルとターゲットテーブルの状況をチェックします。これにより、インポートプロセス全体がスムーズに進むようにします。
 ---
 
 # TiDB Lightning事前チェック {#tidb-lightning-prechecks}

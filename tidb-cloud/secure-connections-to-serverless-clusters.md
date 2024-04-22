@@ -1,6 +1,6 @@
 ---
 title: TLS Connections to TiDB Serverless
-summary: Introduce TLS connections in TiDB Serverless.
+summary: TiDBサーバーレスでは、安全なTLS接続を確立するための基本的な手法として、サーバー証明書が独立したサードパーティによって発行されます。接続方法とオペレーティングシステムを選択し、パスワードを生成して接続文字列を使用してクラスターに接続します。ルート証明書の管理やよくある質問についても詳細が記載されています。
 ---
 
 # TiDB サーバーレスへの TLS 接続 {#tls-connections-to-tidb-serverless}

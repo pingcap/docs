@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1.1 Release Notes
-summary: TiDB 2.1.1 was released on December 12, 2018, with improvements in stability, SQL optimizer, statistics information, and execution engine. Fixes include round error of negative date, uncompress function data length check, and transaction retries. Default character set and collation of tables changed to utf8mb4. PD and TiKV also received various fixes and optimizations. Lightning tool optimized analyze mechanism and added support for storing checkpoint information locally. TiDB Binlog fixed output bug of pb files for tables with only primary key column.
+summary: TiDB 2.1.1は、安定性、SQLオプティマイザー、統計情報、および実行エンジンが向上しています。SQLオプティマイザー/エグゼキューターの修正とPDの起動時の構成確認などの問題が修正されました。TiKVではリーダーを新しく作成されたピアに転送しないようにするなどの遅延を最適化する修正があります。
 ---
 
 # TiDB 2.1.1 リリースノート {#tidb-2-1-1-release-notes}

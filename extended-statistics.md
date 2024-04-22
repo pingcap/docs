@@ -1,6 +1,6 @@
 ---
 title: Introduction to Extended Statistics
-summary: Learn how to use extended statistics to guide the optimizer.
+summary: TiDBは基本統計と拡張統計の2種類を収集できます。拡張統計はテーブルと列によってフィルターされた統計であり、手動または自動のANALYZEステートメントで収集できます。拡張統計はデフォルトでは無効であり、有効にするにはシステム変数tidb_enable_extended_statsをONに設定します。拡張統計の登録や削除、エクスポートとインポートも可能です。相関型の拡張統計は範囲クエリの行数推定に使用され、推定誤差を回避します。
 ---
 
 # 拡張統計の概要 {#introduction-to-extended-statistics}

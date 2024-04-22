@@ -1,6 +1,6 @@
 ---
 title: Constraints
-summary: Learn how SQL Constraints apply to TiDB.
+summary: TiDBはMySQLと同様の制約をサポートします。NOT NULL制約はMySQLと同じです。CHECK制約はデフォルトでは無効ですが、有効にすることができます。CHECK制約を追加、削除、有効または無効にすることができます。一意制約は一意のインデックスと主キー列内の非null値が一意であることを意味します。主キー制約には一意制約が含まれます。外部キー制約は実験的機能としてサポートされています。制約の追加、削除、有効または無効にすることができます。
 ---
 
 # 制約 {#constraints}

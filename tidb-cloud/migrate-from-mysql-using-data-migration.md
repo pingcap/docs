@@ -1,7 +1,7 @@
 ---
 title: Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration
-summary: Learn how to migrate data from MySQL-compatible databases hosted in Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, or a local MySQL instance to TiDB Cloud using Data Migration.
 aliases: ['/tidbcloud/migrate-data-into-tidb','/tidbcloud/migrate-incremental-data-from-mysql']
+summary: データ移行を使用して、TiDB CloudにMySQL互換データベースを移行する方法について説明します。この機能は、ソースデータベースの既存のデータと進行中の変更を一度に直接移行するのに役立ちます。移行ジョブの最大数は組織ごとに最大200個で、さらに移行ジョブを作成するにはサポートチケットを提出する必要があります。データ移行はMySQL 5.6、5.7、および8.0のローカルインスタンスまたはパブリッククラウドプロバイダー上でサポートされています。また、AWSやGoogle Cloudなどのクラウドプロバイダー上でのデータ移行もサポートされています。
 ---
 
 # データ移行を使用して MySQL 互換データベースをTiDB Cloudに移行する {#migrate-mysql-compatible-databases-to-tidb-cloud-using-data-migration}

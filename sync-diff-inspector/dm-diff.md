@@ -1,6 +1,6 @@
 ---
 title: Data Check in the DM Replication Scenario
-summary: Learn about how to set a specific `task-name` configuration from `DM-master` to perform a data check.
+summary: TiDBデータ移行などのレプリケーションツールを使用する場合、レプリケーションプロセスの前後でデータの整合性をチェックする必要があります。DM-masterの特定のtask-name設定を使用してデータチェックを実行できます。例えば、dm-task="test"で構成された場合、"test"タスクの下のhb_testスキーマのすべてのテーブルをチェックします。これにより、DMレプリケーション後のデータの整合性を検証し、アップストリームデータベースとダウンストリームデータベース間のスキーマの定期的な一致を自動的に取得します。
 ---
 
 # DM レプリケーション シナリオでのデータ チェック {#data-check-in-the-dm-replication-scenario}

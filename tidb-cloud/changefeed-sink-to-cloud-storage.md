@@ -1,6 +1,6 @@
 ---
 title: Sink to Cloud Storage
-summary: This document explains how to create a changefeed to stream data from TiDB Cloud to Amazon S3 or GCS. It includes restrictions, configuration steps for the destination, replication, and specification, as well as starting the replication process.
+summary: TiDB Cloudからクラウドstorageにデータをストリーミングするためのチェンジフィードを作成する方法について説明します。Amazon S3とGCSがサポートされており、制限としては最大100個の変更フィードを作成できます。また、テーブルやイベントをフィルターし、レプリケーションを開始することができます。変更フィードの名前を指定し、構成を確認してレプリケーションを開始します。
 ---
 
 # クラウドストレージにシンクする {#sink-to-cloud-storage}

@@ -1,6 +1,6 @@
 ---
 title: TiKV Configuration File
-summary: Learn the TiKV configuration file.
+summary: TiKV設定ファイルを学びます。
 ---
 
 # TiKVコンフィグレーションファイル {#tikv-configuration-file}

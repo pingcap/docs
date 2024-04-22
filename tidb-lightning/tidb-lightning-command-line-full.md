@@ -1,6 +1,6 @@
 ---
 title: TiDB Lightning Command Line Flags
-summary: Learn how to configure TiDB Lightning using command line flags.
+summary: TiDB Lightningは、構成ファイルまたはコマンドラインを使用して構成できます。コマンドラインフラグには、ログレベルやインポートモードなどの設定が含まれます。コマンドラインパラメータと構成ファイルの両方を指定した場合は、コマンドラインパラメータが優先されます。また、`tidb-lightning-ctl`を使用してさらにパラメータを設定することもできます。これには、圧縮の実行やエンジンファイルのインポートなどが含まれます。
 ---
 
 # TiDB Lightningコマンドラインフラグ {#tidb-lightning-command-line-flags}

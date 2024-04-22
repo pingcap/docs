@@ -1,6 +1,6 @@
 ---
 title: Server Status Variables
-summary: Use status variables to see the system and session status
+summary: サーバーステータス変数は、サーバーのグローバルステータスとTiDBの現在のセッションのステータスに関する情報を提供します。これらの変数のほとんどは、MySQLと互換性があります。グローバルステータスを表示コマンドを使用するとグローバルステータスを取得でき、セッションステータスを表示コマンドを使用すると現在のセッションのステータスを取得できます。さらに、MySQLとの互換性のためにフラッシュステータスコマンドがサポートされています。SSL_cipher、ssl_cipher_list、ssl_server_not_afterなどの変数があります。それぞれの変数には範囲、タイプ、使用目的が記載されています。
 ---
 
 # サーバーステータス変数 {#server-status-variables}

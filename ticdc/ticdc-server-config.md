@@ -1,6 +1,6 @@
 ---
 title: TiCDC Server Configurations
-summary: Learn the CLI and configuration parameters used in TiCDC.
+summary: TiCDCサーバー構成のCLIおよび構成ファイルのパラメーターについて説明します。`cdc server`コマンドで使用できるオプションには、`addr`、`advertise-addr`、`pd`、`config`、`data-dir`、`gc-ttl`、`log-file`、`log-level`、`ca`、`cert`、`cert-allowed-cn`、`key`、`tz`、`cluster-id`があります。また、`cdc server`構成ファイルのパラメーターには、`addr`、`advertise-addr`、`log-file`、`log-level`、`data-dir`、`gc-ttl`、`tz`、`cluster-id`、`gc-tuner-memory-threshold`、`security`、`capture-session-ttl`、`owner-flush-interval`、`processor-flush-interval`があります。
 ---
 
 # TiCDC サーバー構成 {#ticdc-server-configurations}

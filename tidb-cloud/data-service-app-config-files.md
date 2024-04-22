@@ -1,6 +1,6 @@
 ---
 title: Data App Configuration Files
-summary: This document describes the configuration files of Data App in TiDB Cloud.
+summary: TiDB Cloudのデータアプリ構成ファイルについて説明します。データソース構成は`data_sources/cluster.json`にあり、データアプリのプロパティは`dataapp_config.json`にあります。HTTPエンドポイント構成は`http_endpoints/config.json`にあり、SQLファイルは`http_endpoints/sql/`ディレクトリにあります。それぞれの構成について詳細を示しています。
 ---
 
 # データアプリコンフィグレーションファイル {#data-app-configuration-files}

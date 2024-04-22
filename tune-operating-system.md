@@ -1,6 +1,6 @@
 ---
 title: Tune Operating System Performance
-summary: Learn how to tune the parameters of the operating system.
+summary: CentOS 7の各サブシステムのチューニング方法を紹介します。システムのパフォーマンス分析に基づいて、60秒以内のLinuxパフォーマンス分析やperf、BCC/bpftraceなどのツールを使用して詳細な分析を実行できます。また、CPU周波数スケーリングや割り込みアフィニティ、NUMA CPUバインディングなどのパフォーマンスチューニングも紹介されています。さらに、メモリやストレージ、ファイルシステム、ネットワークのチューニング方法も紹介されています。
 ---
 
 # オペレーティング システムのパフォーマンスを調整する {#tune-operating-system-performance}

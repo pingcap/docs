@@ -1,5 +1,6 @@
 ---
 title: tiup dm reload
+summary: tiup dm reloadコマンドは、クラスターの構成を有効にするために使用されます。指定されたクラスターの構成を更新し、サービスを再起動します。オプションには、再起動するノードや役割を指定することができます。また、--skip-restartオプションを使用すると、ノードを再起動せずに構成のみを更新することができます。
 ---
 
 # tiup dm reload {#tiup-dm-reload}

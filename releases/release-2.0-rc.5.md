@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.0 RC5 Release Notes
-summary: TiDB 2.0 RC5 was released on April 17, 2018, with improvements in MySQL compatibility, SQL optimization, and stability. Fixes and optimizations were made to TiDB, PD, and TiKV components, including support for Raft Learner, reducing scheduling overhead, and adding new batch operations. The release also addressed issues related to memory usage, error reporting, and configuration adjustments.
+summary: TiDB 2.0 RC5は、MySQLの互換性、SQLの最適化、安定性が向上しています。TiDBでは、さまざまな問題が修正され、パフォーマンスが向上しました。PDでは、Raft Learnerのサポートが追加され、スケジュールのオーバーヘッドが削減されました。TiKVでは、さまざまな問題が修正され、機能が追加されました。
 ---
 
 # TiDB 2.0 RC5 リリースノート {#tidb-2-0-rc5-release-notes}

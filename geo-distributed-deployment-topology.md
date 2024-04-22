@@ -1,6 +1,6 @@
 ---
 title: Geo-distributed Deployment topology
-summary: Learn the geo-distributed deployment topology of TiDB.
+summary: このドキュメントは、地理的に分散された展開アーキテクチャと主要な構成を紹介します。例として、上海と北京にある3つのデータセンターのアーキテクチャを挙げています。TiDB、PD、TiKV、モニタリングとグラファナなどの実例とトポロジテンプレートが含まれています。TiKVパラメータ、PDパラメータ、主要パラメータについて詳細な説明があります。
 ---
 
 # 地理的に分散した導入トポロジ {#geo-distributed-deployment-topology}

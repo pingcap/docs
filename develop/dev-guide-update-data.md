@@ -1,6 +1,6 @@
 ---
 title: Update Data
-summary: Learn about how to update data and batch update data.
+summary: このドキュメントは、TiDB内のデータを更新する方法について説明しています。`UPDATE`ステートメントを使用してテーブル内の既存の行を更新する方法や、`INSERT ON DUPLICATE KEY UPDATE`ステートメントを使用して新しいデータを挿入または更新する方法について説明しています。また、一括更新を行う際のベストプラクティスや、`UPDATE`および`INSERT ON DUPLICATE KEY UPDATE`のSQL構文についても説明されています。データを更新する際のベストプラクティスや、一括更新を行う際のスクリプトの作成例も示されています。
 ---
 
 # データを更新する {#update-data}

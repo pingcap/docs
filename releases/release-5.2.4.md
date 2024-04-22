@@ -1,6 +1,7 @@
 ---
 title: TiDB 5.2.4 Release Notes
 category: Releases
+summary: TiDB 5.2.4は2022年4月26日にリリースされました。このバージョンでは、システム変数のデフォルト値が変更され、TiKVの改善点やバグの修正が行われました。さらに、TiCDCやTiDB Lightningなどのツールにも修正が加えられました。
 ---
 
 # TiDB 5.2.4 リリースノート {#tidb-5-2-4-release-notes}

@@ -1,6 +1,6 @@
 ---
 title: Deploy a DM Cluster Using TiUP
-summary: Learn how to deploy TiDB Data Migration using TiUP DM.
+summary: TiUPは、TiDB 4.0で導入されたクラスターの運用および保守ツールであり、Golangで書かれたクラスター管理コンポーネントTiUP DMを提供します。TiUP DMを使用すると、DMクラスターのデプロイ、開始、停止、破棄、スケーリング、アップグレードなどの操作を簡単に実行できます。また、DMクラスターのパラメーターを管理できます。DM v2.0以降のDMバージョンの導入をサポートしており、さまざまなトポロジのDMクラスターを展開する方法を紹介しています。
 ---
 
 # TiUPを使用した DMクラスタのデプロイ {#deploy-a-dm-cluster-using-tiup}

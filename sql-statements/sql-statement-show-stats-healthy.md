@@ -1,6 +1,6 @@
 ---
 title: SHOW STATS_HEALTHY
-summary: An overview of the usage of SHOW STATS_HEALTHY for TiDB database.
+summary: `SHOW STATS_HEALTHY`ステートメントは、統計の正確性を示します。テーブルの健全性が低い場合、クエリ実行プランが影響を受ける可能性があります。`ANALYZE`コマンドを使用してテーブルの状態を改善し、健全性を確認できます。MySQLの拡張機能であり、[分析する]と[統計入門]も参照してください。
 ---
 
 # 統計_健康を表示 {#show-stats-healthy}

@@ -1,6 +1,6 @@
 ---
 title: CREATE ROLE | TiDB SQL Statement Reference
-summary: An overview of the usage of CREATE ROLE for the TiDB database.
+summary: 新しいロールを作成し、ロールベースのアクセス制御の一環としてユーザーに割り当てることができます。ロールを作成し、ユーザーに割り当てる方法を示します。MySQL 8.0 のロール機能と完全に互換性があります。
 ---
 
 # ロールの作成 {#create-role}

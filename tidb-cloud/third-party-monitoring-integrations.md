@@ -1,6 +1,6 @@
 ---
 title: Third-Party Metrics Integrations（Beta）
-summary: Learn how to use third-party metrics integrations.
+summary: TiDB Cloudはサードパーティのメトリクス サービスと統合し、アラートを受信し、パフォーマンス メトリクスを表示できます。統合設定を編集するには特定のロールが必要です。サードパーティ統合は現在ベータ版であり、制限もあります。利用可能な統合にはDatadog、PrometheusとGrafana、New Relicがあります。
 ---
 
 # サードパーティのメトリクス統合（ベータ版） {#third-party-metrics-integrations-beta}

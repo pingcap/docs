@@ -1,6 +1,6 @@
 ---
 title: Two Availability Zones in One Region Deployment
-summary: Learn the deployment solution of two availability zones in one region.
+summary: このドキュメントは、1つのリージョン内の2つのアベイラビリティゾーン（AZ）のデプロイメントモードについて紹介しています。TiDBは通常、高可用性と災害復旧機能を確保するためにマルチAZ展開ソリューションを採用しています。この展開ソリューションは、データレプリケーション自動同期モードを採用しており、2つのAZ間のネットワークレイテンシーは1.5ミリ秒未満で、帯域幅は10 Gbpsを超えています。クラスターの現在のレプリケーションステータスを確認するには、特定のAPIを使用します。
 ---
 
 # 1 つのリージョンでの 2 つのアベイラビリティーゾーンの展開 {#two-availability-zones-in-one-region-deployment}

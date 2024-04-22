@@ -1,6 +1,6 @@
 ---
 title: Precheck Errors, Migration Errors, and Alerts for Data Migration
-summary: Learn how to resolve precheck errors, migration errors, and alerts when using Data Migration.
+summary: データ移行を使用する際の事前チェックエラーの解決方法、移行エラーのトラブルシューティング、およびアラートの購読方法について説明します。事前チェックエラーには、MySQLのserver_idやbinlogの有効化などがあります。移行エラーには、バイナリログの不足や接続エラーがあります。アラートは、データ移行ジョブのエラーや増分移行の一時停止などを通知します。
 ---
 
 # データ移行の事前チェック エラー、移行エラー、およびアラート {#precheck-errors-migration-errors-and-alerts-for-data-migration}

@@ -1,6 +1,6 @@
 ---
 title: DESC | TiDB SQL Statement Reference
-summary: An overview of the usage of `DESC` for the TiDB database.
+summary: これは、MySQLと互換性のために含まれている[`EXPLAIN`](/sql-statements/sql-statement-explain.md)のエイリアスです。
 ---
 
 # 説明 {#desc}

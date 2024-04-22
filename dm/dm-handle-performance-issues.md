@@ -1,6 +1,6 @@
 ---
 title: Handle Performance Issues of TiDB Data Migration
-summary: Learn about common performance issues that might exist in DM and how to deal with them.
+summary: TiDB データ移行のパフォーマンスの問題を診断するために、DM 監視コンポーネントの構成を確認し、モニタリングメトリクスを確認します。また、リレーログユニットやロードユニットのパフォーマンスを監視し、問題があれば対処します。Binlogレプリケーションユニットの場合は、binlog file gap を確認し、問題があれば解決します。データ移行リンクでのレイテンシーが発生する場合は、DML queue remain length を確認し、ボトルネックを特定します。
 ---
 
 # TiDB データ移行のパフォーマンスの問題に対処する {#handle-performance-issues-of-tidb-data-migration}

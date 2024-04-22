@@ -1,6 +1,6 @@
 ---
 title: DM 5.4.0 Benchmark Report
-summary: Learn about the performance of 5.4.0.
+summary: TiDB Data Migration（DM）v5.4.0のベンチマークデータは、ほぼ同じです。 DM v5.3.0のテストの目的、環境、シナリオ、結果については、DM 5.3.0ベンチマークレポートを参照してください。
 ---
 
 # DM 5.4.0 ベンチマーク レポート {#dm-5-4-0-benchmark-report}

@@ -1,6 +1,6 @@
 ---
 title: Avoid Implicit Type Conversions
-summary: Introduces the possible consequences of implicit type conversions in TiDB and ways to avoid them.
+summary: TiDBにおける暗黙的な型変換のルールとその結果、および暗黙的な型変換を回避する方法について説明します。暗黙的な型変換により、人間とコンピューターの対話の使いやすさが向上しますが、インデックスの無効性や精度の低下といった問題が発生する可能性があります。アプリケーションコードでの暗黙的な型変換の使用は避けるべきです。
 ---
 
 # 暗黙的な型変換を避ける {#avoid-implicit-type-conversions}

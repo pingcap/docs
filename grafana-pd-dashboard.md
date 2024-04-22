@@ -1,6 +1,6 @@
 ---
 title: Key Monitoring Metrics of PD
-summary: Learn some key metrics displayed on the Grafana PD dashboard.
+summary: TiUPを使用してTiDBクラスターをデプロイする場合、監視システムも同時にデプロイされます。Grafanaダッシュボードには、PD、TiDB、TiKV、Node_exporter、Disk Performance、Performance_overviewなどのサブダッシュボードが含まれています。PDダッシュボードから主要なメトリクスが表示され、PDのロール、ストレージ容量、現在のstorageサイズ、通常のストアなどが確認できます。また、クラスター、オペレーター、統計-残高、統計-ホットライト、統計-ホットリード、スケジューラ、gRPC、etcd、TiDB、ハートビート、リージョンstorageなどの主要な指標が提供されます。
 ---
 
 # PD の主要なモニタリング指標 {#key-monitoring-metrics-of-pd}

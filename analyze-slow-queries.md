@@ -1,6 +1,6 @@
 ---
 title: Analyze Slow Queries
-summary: Learn how to locate and analyze slow queries.
+summary: 遅いクエリの問題を特定するためには、遅いクエリログとステートメント概要表機能を使用して、遅いクエリを特定し、その理由を分析します。クエリのパフォーマンスのボトルネックを特定し、システムの問題を分析することで、遅いクエリの原因を特定できます。オプティマイザーの問題を分析するには、実行計画が合理的かどうかを判断し、適切な解決策を見つけます。
 ---
 
 # 遅いクエリを分析する {#analyze-slow-queries}

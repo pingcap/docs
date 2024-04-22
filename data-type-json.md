@@ -1,6 +1,6 @@
 ---
 title: TiDB Data Type
-summary: Learn about the JSON data type in TiDB.
+summary: TiDBは、JSONデータ型をサポートしており、バイナリ形式を使用してシリアル化されます。JSON列には自動検証があり、インデックスを付けることができます。TiDBは限られたJSON関数のTiFlashへのプッシュダウンのみをサポートしています。また、JSON列データのエンコード方法が変更されるため、古いTiDBクラスターに復元することはお勧めできません。MySQLとの互換性に関しては、データ形式の正しさをチェックし、JSON配列やオブジェクトを並べ替えることができます。JSONデータ型の詳細については、JSON関数と生成された列を参照してください。
 ---
 
 # JSONタイプ {#json-type}

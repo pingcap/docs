@@ -1,5 +1,6 @@
 ---
 title: TiDB RC3 Release Notes
+summary: TiDB RC3は、MySQL互換性、SQL最適化、安定性、パフォーマンスに焦点を当てたリリースです。権限管理の改善、DDLの高速化、負荷分散ポリシーとプロセスの最適化が含まれています。また、TiDB Ansibleはオープンソースであり、SQLクエリオプティマイザーの機能追加やPD、TiKVの改善もあります。PDはgRPCのサポートや災害復旧ツールキットの提供、TiKVはSST形式のスナップショットのサポートやトランザクション書き込み速度の向上などが含まれています。
 ---
 
 # TiDB RC3 リリースノート {#tidb-rc3-release-notes}

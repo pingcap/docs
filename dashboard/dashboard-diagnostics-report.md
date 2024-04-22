@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Diagnostic Report
-summary: TiDB Dashboard Diagnostic Report introduces diagnostic report content, including basic, diagnostic, load, overview, monitoring, and configuration information. It also includes comparison report details, DIFF_RATIO explanation, and Maximum Different Item table.
+summary: TiDB ダッシュボード診断レポートは、診断レポートの内容や閲覧のヒントを紹介します。レポートは基本情報、診断情報、負荷情報、概要情報、TiDB/PD/TiKV監視情報、およびコンフィグレーション情報で構成されます。さらに、比較レポートでは2つの時間範囲の差異を示し、最大別アイテム表では監視メトリックの違いを示します。
 ---
 
 # TiDB ダッシュボード診断レポート {#tidb-dashboard-diagnostic-report}

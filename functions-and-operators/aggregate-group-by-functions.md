@@ -1,6 +1,6 @@
 ---
 title: Aggregate (GROUP BY) Functions
-summary: Learn about the supported aggregate functions in TiDB.
+summary: TiDBでサポートされている集計関数には、COUNT、COUNT(DISTINCT)、SUM、AVG、MAX、MIN、GROUP_CONCAT、VARIANCE、VAR_POP、STD、STDDEV、VAR_SAMP、STDDEV_SAMP、JSON_OBJECTAGGがあります。また、TiDBはAPPROX_PERCENTILE関数も提供しています。さらに、TiDBのGROUP BY句はWITH ROLLUP修飾子をサポートし、SQLモードのONLY_FULL_GROUP_BYをサポートしています。MySQLとの違いとして、TiDBはいくつかの標準SQLを拡張しており、GROUP BY句内の非列式やエイリアスの使用を許可しています。また、group_concat_max_len変数は、GROUP_CONCAT()関数の最大項目数を設定します。
 ---
 
 # 集計 (GROUP BY) 関数 {#aggregate-group-by-functions}

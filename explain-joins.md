@@ -1,6 +1,6 @@
 ---
 title: Explain Statements That Use Joins
-summary: Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
+summary: TiDBのSQLオプティマイザーは、テーブル結合の順序と最適な結合アルゴリズムを決定します。インデックス結合は少ない行数の場合にお勧めされ、ハッシュ結合は多数の行の場合に効果的です。マージ結合はソートされたデータで使用されます。これらの結合方法は、システム変数の設定によってパフォーマンスが影響を受けます。TiDBはランタイムフィルター機能も提供しています。
 ---
 
 # テーブル結合を使用する Explain ステートメント {#explain-statements-that-use-joins}

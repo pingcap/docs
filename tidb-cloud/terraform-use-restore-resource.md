@@ -1,6 +1,6 @@
 ---
 title: Use Restore Resource
-summary: Learn how to use restore resource.
+summary: このドキュメントは、`tidbcloud_restore`リソースを使用して復元タスクを管理する方法を学習できます。`tidbcloud_restore`リソースの特徴は、バックアップに従ってTiDB専用クラスターの復元タスクを作成することです。復元タスクを作成するには、バックアップを作成した後、`tidbcloud_restore`リソースを使用して復元タスクを作成します。復元タスクのステータスが`PENDING`、クラスターのステータスが`INITIALIZING`であることがわかります。クラスターのステータスが`AVAILABLE`に変化した後、復元タスクは`RUNNING`なり、最終的に`SUCCESS`になります。
 ---
 
 # 復元リソースの使用 {#use-restore-resource}

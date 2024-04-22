@@ -1,6 +1,6 @@
 ---
 title: Migrate Large Datasets from MySQL to TiDB
-summary: Learn how to migrate large datasets from MySQL to TiDB.
+summary: MySQLからTiDBへの大規模なデータセットの移行について、DumplingとTiDB Lightningを使用して完全な移行を実行する方法について説明されています。TiDB Lightningは最大500 GiB/hの速度でデータをインポートできます。移行の前提条件やリソース要件も記載されています。増分データをレプリケートする手順やタスクの監視方法についても説明されています。
 ---
 
 # 大規模なデータセットを MySQL から TiDB に移行する {#migrate-large-datasets-from-mysql-to-tidb}

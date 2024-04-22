@@ -1,7 +1,7 @@
 ---
 title: TiDB Cloud Glossary
-summary: Learn the terms used in TiDB Cloud.
 category: glossary
+summary: TiDB Cloudは、トランザクションの4つの主要なプロパティ（アトミック性、一貫性、分離性、耐久性）を指すACIDをサポートしています。また、AIを活用したSQLエディターであるChat2Queryを使用することで、データの価値を最大化できます。さらに、TiDB Cloudはデータサービスを提供し、カスタムAPI終点を使用したHTTPSリクエスト経由でデータにアクセスできます。組織やプロジェクトの管理、支出制限、VPCピアリングなど、さまざまな機能を提供しています。
 ---
 
 # TiDB Cloud集 {#tidb-cloud-glossary}

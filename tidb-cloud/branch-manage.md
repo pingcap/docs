@@ -1,6 +1,6 @@
 ---
 title: Manage TiDB Serverless Branches
-summary: Learn How to manage TiDB Serverless branches.
+summary: TiDB Cloudコンソールを使用してTiDBサーバーレスブランチを管理する方法について説明します。必要なアクセスは、組織の役割に属している必要があります。ブランチを作成するには、TiDB Cloudコンソールでプロジェクトのクラスターページに移動し、ブランチを作成します。ブランチを表示するには、クラスターのブランチを表示します。ブランチに接続するには、接続情報を使用してブランチに接続します。ブランチを削除するには、削除するターゲットブランチの行で削除をクリックします。
 ---
 
 # TiDB サーバーレス ブランチの管理 {#manage-tidb-serverless-branches}

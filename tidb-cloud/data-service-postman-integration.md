@@ -1,6 +1,6 @@
 ---
 title: Run Data App in Postman
-summary: Learn how to run your Data App in Postman.
+summary: PostmanはAPIライフサイクルを簡素化し、API開発を迅速化するプラットフォームです。TiDB Cloudデータサービスでは、Postmanを使用してデータアプリを簡単にインポートし、API開発エクスペリエンスを強化できます。データアプリをPostmanにインポートし、APIキーを構成した後、Postmanでデータアプリを実行できます。データアプリに新しい変更がある場合は、再度インポートプロセスを実行する必要があります。
 ---
 
 # Postman でデータ アプリを実行する {#run-data-app-in-postman}

@@ -1,6 +1,6 @@
 ---
 title: STATISTICS
-summary: Learn the `STATISTICS` information_schema table.
+summary: `STATISTICS`表は、テーブルのインデックスに関する情報を提供します。`TABLE_CATALOG`は常に`def`で、`TABLE_SCHEMA`はデータベースの名前を示します。`TABLE_NAME`はテーブルの名前で、`NON_UNIQUE`は重複を許すかどうかを示します。`INDEX_SCHEMA`はインデックスが属するデータベースの名前で、`INDEX_NAME`はインデックスの名前です。`SEQ_IN_INDEX`は列番号を示し、`COLUMN_NAME`は列名です。`COLLATION`はソート方法を示し、`CARDINALITY`と`SUB_PART`はTiDBでは使用されません。`PACKED`は常に`NULL`で、`NULLABLE`は列に値`NULL`が含まれるかを示します。`INDEX_TYPE`はインデックスのタイプで、`COMMENT`はその他の情報を提供します。
 ---
 
 # 統計 {#statistics}

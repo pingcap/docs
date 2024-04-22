@@ -1,6 +1,6 @@
 ---
 title: TiDB Tools Overview
-summary: Learn the tools and applicable scenarios.
+summary: TiDBは、デプロイと保守、データ管理、およびSpark SQLの実行に役立つツールを提供します。TiUPは物理マシンまたは仮想マシン上のTiDBパッケージマネージャーであり、TiDB OperatorはKubernetes上でTiDBクラスターを管理する自動運用システムです。また、TiDBはデータ移行、バックアップと復元、増分データレプリケーション、データ検証などのデータ管理ツールも提供します。TiSparkはOLAPクエリツールであり、Sparkの強みとTiKVクラスターとTiDBの機能を組み合わせてHTAPソリューションを提供します。
 ---
 
 # TiDB ツールの概要 {#tidb-tools-overview}

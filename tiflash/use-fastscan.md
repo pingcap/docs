@@ -1,6 +1,6 @@
 ---
 title: Use FastScan
-summary: Introduces a way to speed up querying in OLAP scenarios by using FastScan.
+summary: FastScanを使用すると、TiFlashはOLAPシナリオでクエリを高速化しますが、クエリ結果の精度とデータの一貫性は保証されません。古いデータが含まれる可能性があり、データの一貫性を犠牲にしてクエリ速度を向上させます。セッションまたはグローバルレベルでFastScan機能を有効にすることができます。データ圧縮のタイミングは自動的にトリガーされ、FastScanを無効または有効にする方法もあります。
 ---
 
 # FastScan を使用する {#use-fastscan}

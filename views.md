@@ -1,6 +1,6 @@
 ---
 title: Views
-summary: Learn how to use views in TiDB.
+summary: TiDBはビューをサポートしており、ビューは仮想テーブルとして機能します。ビューを使用すると、安全なフィールドとデータのみを公開し、複雑なクエリを簡単かつ便利にします。ビューのクエリは通常のテーブルのクエリと似ており、ビューのメタデータを取得する方法として、SHOW CREATE TABLEまたはSHOW CREATE VIEWステートメント、INFORMATION_SCHEMA.VIEWSテーブルのクエリ、HTTP APIを使用する方法があります。ただし、TiDBのビューには制限事項があり、マテリアライズドビューはサポートされていません。
 ---
 
 # ビュー {#views}

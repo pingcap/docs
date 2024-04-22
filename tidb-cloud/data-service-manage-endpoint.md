@@ -1,6 +1,6 @@
 ---
 title: Manage an Endpoint
-summary: Learn how to create, develop, test, deploy, and delete an endpoint in a Data App in the TiDB Cloud console.
+summary: エンドポイントは、SQL ステートメントを実行するWeb APIで、クライアントがエンドポイントを呼び出し、リクエストURL内のパラメータの値を指定すると、指定されたパラメータを使用してSQLステートメントを実行し、結果をHTTP応答の一部として返します。エンドポイントを作成する前に、データアプリとAPIキーを作成する必要があります。エンドポイントを自動的に生成することも、手動で作成することもできます。エンドポイントを呼び出すには、HTTPSリクエストを送信します。
 ---
 
 # エンドポイントの管理 {#manage-an-endpoint}

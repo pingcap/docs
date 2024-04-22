@@ -1,6 +1,6 @@
 ---
 title: Replicate Data to Kafka
-summary: Learn how to replicate data to Apache Kafka using TiCDC.
+summary: TiCDCは、Kafkaトピックの制限を超える大きなメッセージを処理するために、外部ストレージにメッセージを送信する機能をサポートしています。この機能を使用すると、メッセージサイズの制限を超える場合でも、メッセージのアドレスが含まれたメッセージがKafkaコンシューマーに送信されます。コンシューマーは、外部ストレージからメッセージを読み取り、データを復元することができます。
 ---
 
 # Kafka へのデータのレプリケーション {#replicate-data-to-kafka}

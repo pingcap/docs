@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.0.8 Release Notes
-summary: TiDB 2.0.8 was released on October 16, 2018, with improvements in system compatibility and stability. The release includes various bug fixes for TiDB and TiKV, addressing issues related to AUTO-ID, etcd session recovery, time zone handling, memory leaks, and join conversions. The TiKV bug fix resolves the increasing memory consumption by Raftstore EntryCache when a node goes down.
+summary: TiDB 2.0.8は、2018年10月16日にリリースされました。このリリースでは、システムの互換性と安定性が大幅に向上しています。改善点として、`Update`ステートメントが対応するAUTO-INCREMENTカラムを変更しない場合、AUTO-IDの増加速度が遅くなります。また、バグの修正として、PDリーダーがダウンしたときにサービスを回復するために新しいetcdセッションをすばやく作成するなどの修正が含まれています。TiKVのバグ修正としては、ノードがダウンするとRaftstoreの`EntryCache`が消費するメモリが増加し続ける問題が修正されています。
 ---
 
 # TiDB 2.0.8 リリースノート {#tidb-2-0-8-release-notes}

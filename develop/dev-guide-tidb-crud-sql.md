@@ -1,6 +1,6 @@
 ---
 title: CRUD SQL in TiDB
-summary: A brief introduction to TiDB's CURD SQL.
+summary: TiDBのCRUD SQLの使用方法を簡単に紹介します。TiDBはMySQLと互換性があり、ほとんどの場合、MySQLステートメントを直接使用できます。SQLを試し、MySQLクエリとTiDBの互換性をテストするには、TiDBプレイグラウンドを試してください。SQLはDDL、DML、DQL、DCLの4種類に分類されます。DMLはINSERT、UPDATE、DELETEを使用し、DQLはSELECTを使用してデータを取得します。
 ---
 
 # TiDB の CRUD SQL {#crud-sql-in-tidb}

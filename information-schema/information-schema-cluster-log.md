@@ -1,6 +1,6 @@
 ---
 title: CLUSTER_LOG
-summary: Learn the `CLUSTER_LOG` information_schema table.
+summary: `CLUSTER_LOG`テーブルを使用すると、TiDBクラスターのログをクエリできます。このテーブルはTiDBセルフホスト型にのみ適用され、TiDB Cloudでは使用できません。クラスターログテーブルを使用する際には、オーバーヘッドを軽減するために検索条件を指定する必要があります。例えば、DDLステートメントの実行プロセスをクエリすることができます。
 ---
 
 # クラスターログ {#cluster-log}

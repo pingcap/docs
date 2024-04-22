@@ -1,6 +1,6 @@
 ---
 title: Security Compatibility with MySQL
-summary: Learn TiDB's security compatibilities with MySQL.
+summary: TiDBはMySQL 5.7と同様のセキュリティ機能をサポートし、MySQL 8.0の一部の機能もサポートします。しかし、カラムレベルの権限や特定のアクセス許可属性、パスワード検証ポリシー、二重パスワードポリシー、ランダムなパスワード生成、多要素認証などのセキュリティ機能はサポートされていません。また、パスワードの有効期限ポリシーや複雑さのポリシーにも違いがあります。TiDBはMySQLとは異なる実装をしています。
 ---
 
 # MySQL とのSecurity互換性 {#security-compatibility-with-mysql}

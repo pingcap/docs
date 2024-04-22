@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Cloud with Vercel
-summary: Learn how to connect your TiDB Cloud clusters to Vercel projects.
+summary: TiDB CloudとVercelを統合すると、MySQL互換のリレーショナルモデルで新しいフロントエンドアプリを迅速に構築できます。VercelプロジェクトにTiDB Cloudクラスターを直接接続するか、データアプリを使用してアクセスすることができます。接続する前に、Vercelアカウントとプロジェクト、TiDB Cloudアカウントとクラスター、データアプリとエンドポイントを準備する必要があります。統合を手動で設定する場合は、Vercelの環境変数に接続情報を宣言します。接続を構成するには、Vercelダッシュボードで統合を管理し、接続を追加または削除します。
 ---
 
 <!-- markdownlint-disable MD029 -->

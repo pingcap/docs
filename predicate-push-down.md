@@ -1,6 +1,6 @@
 ---
 title: Predicates Push Down
-summary: Introduce one of the TiDB's logic optimization rules—Predicate Push Down (PPD).
+summary: このドキュメントは、TiDBのロジック最適化ルールの1つであるPredicate Push Down (PPD)について説明します。PPDは、データフィルタリングをできるだけ早く完了するために、選択演算子をデータソースに近づけることで、データ送信または計算のコストを大幅に削減します。例として、述語をstorageレイヤーにプッシュするケースや結合演算子の下にプッシュするケースなどが挙げられます。ただし、ユーザー変数を含む述語や外部結合上の内部テーブルの述語はプッシュダウンできません。
 ---
 
 # Predicate Push Down(PPD) {#predicates-push-down-ppd}

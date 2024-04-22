@@ -1,6 +1,6 @@
 ---
 title: Data Migration Configuration File Overview
-summary: This document gives an overview of Data Migration configuration files.
+summary: このドキュメントは、DM（データ移行）の設定ファイルの概要を説明しています。DMプロセス構成ファイルには、dm-master.toml、dm-worker.toml、およびsource.yamlが含まれています。また、データ移行タスクの作成手順と重要な概念について説明しています。重要な概念には、source-id、DMマスターID、およびDMワーカーIDが含まれます。
 ---
 
 # データ移行コンフィグレーションファイルの概要 {#data-migration-configuration-file-overview}

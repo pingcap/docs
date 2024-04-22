@@ -1,6 +1,6 @@
 ---
 title: Partition Pruning
-summary: Learn about the usage scenarios of TiDB partition pruning.
+summary: パーティションプルーニングは、パーティション化されたテーブルのパフォーマンスを最適化するもので、不要なパーティションを除外してデータアクセス量を削減します。ハッシュパーティションテーブルでは等価比較のクエリ条件にのみ適用され、レンジパーティションテーブルでは間隔比較のクエリ条件にも適用されます。ただし、実行フェーズ中にのみ取得できるシナリオには適用できません。
 ---
 
 # パーティションのプルーニング {#partition-pruning}

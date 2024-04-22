@@ -1,6 +1,6 @@
 ---
 title: Push-down calculations Supported by TiFlash
-summary: Learn the push-down calculations supported by TiFlash.
+summary: TiFlashは、TableScan、選択、HashAgg、StreamAgg、TopN、リミット、プロジェクト、HashJoin、ウィンドウ関数をサポートしています。TiFlashにプッシュダウンできる式のタイプには、数値関数、論理関数、ビット単位の演算、文字列関数、正規表現の関数、日付関数、JSON関数、変換関数、集計関数、その他の関数があります。ただし、TiFlashにプッシュダウンできない制限もあります。例えば、Bit、Set、Geometryタイプを含む式や一部の関数はTiFlashにプッシュダウンできません。また、ウィンドウ関数の一部もサポートされていません。
 ---
 
 # TiFlashでサポートされるプッシュダウン計算 {#push-down-calculations-supported-by-tiflash}

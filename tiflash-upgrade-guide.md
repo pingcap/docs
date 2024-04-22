@@ -1,7 +1,7 @@
 ---
 title: TiFlash Upgrade Guide
-summary: Learn the precautions when you upgrade TiFlash.
 aliases: ['/tidb/stable/tiflash-620-upgrade-guide']
+summary: TiFlashのアップグレードに関するガイドです。標準的なアップグレードプロセスについては、別のドキュメントを参照してください。また、TiFlashを含むTiDBをメジャーバージョン間でアップグレードすることはお勧めできません。詳細については、TiDBリリースサポートポリシーを参照してください。また、TiFlashを停止してからアップグレードする必要があります。アップグレード後、TiFlashを再起動します。TiFlashのアップグレードには注意が必要です。
 ---
 
 # TiFlashアップグレード ガイド {#tiflash-upgrade-guide}

@@ -1,6 +1,6 @@
 ---
 title: ProxySQL Integration Guide
-summary: Learn how to integrate TiDB Cloud and TiDB (self-hosted) with ProxySQL.
+summary: TiDBとProxySQLを統合する方法についての記事です。ProxySQLは高性能なオープンソースSQLプロキシであり、TiDBとの統合によりアプリケーションのパフォーマンスを向上させることができます。統合には、ProxySQLの構成やクエリルールの設定が含まれます。これにより、アプリケーションはTiDBクラスターとの通信を最適化し、効率的なクエリルーティングが可能となります。
 ---
 
 # TiDB と ProxySQL を統合する {#integrate-tidb-with-proxysql}

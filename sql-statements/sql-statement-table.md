@@ -1,6 +1,6 @@
 ---
 title: TABLE | TiDB SQL Statement Reference
-summary: An overview of the usage of TABLE for the TiDB database.
+summary: テーブルステートメントは、集計や複雑なフィルタリングが不要な場合に使用されます。`SELECT * FROM`の代わりに`TABLE`ステートメントを使用できます。MySQL 8.0.19で導入されたこのステートメントは、テーブルの作成、データの挿入、データの表示、および並べ替えを行うことができます。これにより、データベースの操作がより簡単になります。
 ---
 
 # テーブル {#table}

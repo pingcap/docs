@@ -1,6 +1,6 @@
 ---
 title: CREATE RESOURCE GROUP
-summary: Learn the usage of CREATE RESOURCE GROUP in TiDB.
+summary: リソースグループを作成するためには、`CREATE RESOURCE GROUP`ステートメントを使用します。リソースグループ名パラメーターはグローバルに一意である必要があります。TiDBは`RU_PER_SEC`、`PRIORITY`、`BURSTABLE`、`QUERY_LIMIT`などのオプションをサポートしています。また、MySQLとの互換性はありません。リソースグループの作成、削除、変更、およびユーザーリソースグループの変更に関する詳細情報は、関連リンクを参照してください。
 ---
 
 # リソースグループの作成 {#create-resource-group}

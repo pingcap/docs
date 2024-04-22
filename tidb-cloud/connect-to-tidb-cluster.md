@@ -1,6 +1,6 @@
 ---
 title: Connect to Your TiDB Dedicated Cluster
-summary: Learn how to connect to your TiDB Dedicated cluster via different methods.
+summary: TiDB専用クラスターに接続する方法を紹介します。TiDB専用クラスターがTiDB Cloud上に作成されたら、標準接続、プライベートエンドポイント経由でAWSに接続、プライベートエンドポイント経由でGoogle Cloudに接続、VPCピアリング経由で接続、Chat2Query経由で接続、SQLシェル経由で接続する方法があります。TiDBクラスターに正常に接続したら、TiDBでSQLステートメントを探索することができます。
 ---
 
 # TiDB 専用クラスタに接続する {#connect-to-your-tidb-dedicated-cluster}

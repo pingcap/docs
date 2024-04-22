@@ -1,6 +1,6 @@
 ---
 title: TiCDC OpenAPI v2
-summary: Learn how to use the OpenAPI v2 interface to manage the cluster status and data replication.
+summary: Open API v 2インターフェイスを使用してクラスターの状態とデータレプリケーションを管理する方法を学びます。
 ---
 
 # TiCDC OpenAPI v2 {#ticdc-openapi-v2}

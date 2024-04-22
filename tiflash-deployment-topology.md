@@ -1,6 +1,6 @@
 ---
 title: TiFlash Deployment Topology
-summary: Learn the deployment topology of TiFlash based on the minimal TiDB topology.
+summary: TiFlashは、カラム型storageエンジンであり、リアルタイムHTAPアプリケーションに適しています。展開トポロジには、TiDB、PD、TiKV、TiFlash、モニタリングとグラファナが含まれます。各コンポーネントの物理マシンの構成とIPアドレスが示されています。また、トポロジテンプレートや主要パラメータについても詳細が記載されています。デプロイメントディレクトリを相対パスとして構成すると、クラスターはユーザーのホームディレクトリにデプロイされます。
 ---
 
 # TiFlash導入トポロジ {#tiflash-deployment-topology}

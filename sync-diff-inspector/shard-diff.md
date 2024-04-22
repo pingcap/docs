@@ -1,6 +1,6 @@
 ---
 title: Data Check in the Sharding Scenario
-summary: Learn the data check in the sharding scenario.
+summary: sync-diff-inspectorは、シャーディングシナリオでのデータチェックをサポートします。複数のMySQLインスタンスからTiDBにデータをレプリケートする場合、アップストリームデータとダウンストリームデータをチェックできます。シャードテーブルの数が少ない場合は、Datasource configを使用してテーブルを構成し、対応するrulesを設定します。シャードテーブルが多数ある場合は、table-rulesを使用できます。上流データベースにテーブルが存在する場合、下流データベースもこのテーブルを比較します。
 ---
 
 # シャーディングシナリオでのデータチェック {#data-check-in-the-sharding-scenario}

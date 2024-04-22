@@ -1,6 +1,6 @@
 ---
 title: Import Local Files to TiDB Cloud
-summary: Learn how to import local files to TiDB Cloud.
+summary: TiDB Cloudには、ローカルファイルを直接インポートできる機能があります。現在の制限事項として、1つのタスクにつき50 MiB以内のCSV形式のローカルファイルのみをサポートしています。また、複数のインポートタスクを同時に実行することはできません。インポート後は、予約済みキーワードを含む列をクエリする際には、バッククォートを追加する必要があります。
 ---
 
 # ローカル ファイルをTiDB Cloudにインポートする {#import-local-files-to-tidb-cloud}

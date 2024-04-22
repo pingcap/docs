@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with mysql2 in AWS Lambda Function
-summary: This article describes how to build a CRUD application using TiDB and mysql2 in AWS Lambda Function and provides a simple example code snippet.
+summary: このチュートリアルでは、AWS Lambda 関数でTiDBとmysql2を使用して次のタスクを実行する方法を学習できます。環境をセットアップし、mysql2を使用してTiDBクラスターに接続し、アプリケーションをビルドして実行します。また、基本的なCRUD操作のサンプルコードスニペットも提供されています。このチュートリアルは、TiDBサーバーレスおよびTiDBセルフホストで動作します。必要なものはNode.js 18以降、Git、TiDBクラスター、AWSユーザー、AWS CLI、AWS SAM CLIです。
 ---
 
 # AWS Lambda 関数の mysql2 を使用して TiDB に接続する {#connect-to-tidb-with-mysql2-in-aws-lambda-function}

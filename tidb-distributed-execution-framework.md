@@ -1,6 +1,6 @@
 ---
 title: TiDB Backend Task Distributed Execution Framework
-summary: Learn the use cases, limitations, usage, and implementation principles of the TiDB backend task distributed execution framework.
+summary: TiDBは、バックエンドタスクの分散実行フレームワークを導入しました。このフレームワークは、バックエンドタスクの統合スケジューリングと分散実行を実装し、リソース管理機能を提供します。バックエンドタスクは、データベースオブジェクト内の大量のデータを処理する必要があります。フレームワークを有効にすると、高スケーラビリティ、高可用性、高パフォーマンスが得られます。また、DDL操作やIMPORT INTOステートメントの分散実行をサポートしています。分散フレームワークを使用する前に、高速オンラインDDLモードを有効にする必要があります。
 ---
 
 # TiDB バックエンド タスク分散実行フレームワーク {#tidb-backend-task-distributed-execution-framework}

@@ -1,6 +1,6 @@
 ---
 title: Troubleshoot High Disk I/O Usage in TiDB
-summary: Learn how to locate and address the issue of high TiDB storage I/O usage.
+summary: TiDBのディスクI/O使用率の高さのトラブルシューティングについての記事です。現在のI/Oメトリクスを確認し、モニターやログから問題を特定します。さらに、I/Oの問題を処理する方法も紹介されています。クラスターのデプロイメントツール(TiUP)は、I/Oに関連したアラート項目を持っています。全体的なI/Oパフォーマンスがボトルネックになっている場合は、分散データベースのスケーリング機能を活用して、I/Oパフォーマンスを向上させることができます。
 ---
 
 # TiDB でのディスク I/O 使用率の高さのトラブルシューティング {#troubleshoot-high-disk-i-o-usage-in-tidb}

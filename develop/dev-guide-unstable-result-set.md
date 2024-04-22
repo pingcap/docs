@@ -1,6 +1,6 @@
 ---
 title: Unstable Result Set
-summary: Learn how to handle the error of an unstable result set.
+summary: このドキュメントは、不安定な結果セットエラーを解決する方法について説明します。MySQLでは、GROUP BY構文を正しく使用しないと結果セットが不安定になることがあります。また、ORDER BY構文を使用しない場合や、GROUP_CONCAT()でORDER BYを含めない場合も結果が不安定になります。また、SELECT * FROM T LIMIT Nの結果も不安定になる可能性があります。
 ---
 
 # 不安定な結果セット {#unstable-result-set}

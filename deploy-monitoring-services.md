@@ -1,6 +1,6 @@
 ---
 title: Deploy Monitoring Services for the TiDB Cluster
-summary: Learn how to deploy monitoring services for the TiDB cluster.
+summary: TiDBクラスターのモニタリングおよびアラートサービスを手動で導入する場合、PrometheusとGrafanaを手動でデプロイする必要があります。バイナリパッケージをダウンロードし、Node1、Node2、Node3、およびNode4でnode_exporterを起動します。その後、Node1でPrometheusとGrafanaを起動し、Grafanaの構成を行います。最後に、Prometheusデータソースを追加し、Grafanaダッシュボードをインポートしてコンポーネントのメトリクスを表示します。
 ---
 
 # TiDBクラスタのモニタリング サービスをデプロイ {#deploy-monitoring-services-for-the-tidb-cluster}

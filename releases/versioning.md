@@ -1,6 +1,6 @@
 ---
 title: TiDB Versioning
-summary: Learn the version numbering system of TiDB.
+summary: TiDBは長期サポートのリリースと開発マイルストーンリリースの2つのリリースシリーズを提供します。バージョン管理の形式はX.Y.Zであり、Xは毎年増加し、Yは2つのリリースごとに増分します。長期サポート(LTS)バージョンは約6か月ごとにリリースされ、新機能と改善が導入されます。開発マイルストーンリリース(DMR)はLTSを含まず、約2か月ごとにリリースされます。TiDBエコシステムツールはTiDBサーバーと同じバージョン番号付けシステムを使用します。一般提供(GA)リリースはTiDBの現在のリリースシリーズの安定バージョンであり、リリースCandidate(RC)リリースは新機能と改善点が導入されます。
 ---
 
 # TiDB のバージョン管理 {#tidb-versioning}

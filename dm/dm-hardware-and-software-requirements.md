@@ -1,6 +1,6 @@
 ---
 title: Software and Hardware Requirements for TiDB Data Migration
-summary: Learn the software and hardware requirements for DM cluster.
+summary: TiDBデータマイグレーション（DM）は、Linuxオペレーティングシステムの特定バージョンをサポートします。また、Intelアーキテクチャのサーバーや仮想化環境にも導入可能です。開発およびテスト環境では、DMマスターとDMワーカーを同一サーバー上に配置できますが、本番環境ではお勧めできません。ターゲットTiKVクラスターには、インポートされたデータを保存するのに十分なディスク容量が必要です。
 ---
 
 # TiDB データ移行のソフトウェアおよびハードウェア要件 {#software-and-hardware-requirements-for-tidb-data-migration}

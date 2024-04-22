@@ -1,6 +1,6 @@
 ---
 title: TiDB Data Migration Glossary
-summary: Learn the terms used in TiDB Data Migration.
+summary: TiDB データ移行用語集には、TiDB Data Migration (DM) のログ、モニタリング、構成、およびドキュメントで使用される用語がリストされています。BinlogはTiDBデータベースで生成されたバイナリログファイルを指し、BinlogイベントはMySQLまたはMariaDBサーバーインスタンスに対するデータ変更に関する情報です。チェックポイントは完全データインポートまたは増分レプリケーションタスクが一時停止して再開される位置を示し、ダンプ処理ユニットは上流からすべてのデータをエクスポートするために使用される処理単位です。
 ---
 
 # TiDB データ移行用語集 {#tidb-data-migration-glossary}

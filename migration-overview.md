@@ -1,6 +1,6 @@
 ---
 title: Data Migration Overview
-summary: Learn the overview of data migration scenarios and the solutions.
+summary: TiDBでは、データ移行ソリューションが提供されています。完全なデータ移行や増分レプリケーションなど、さまざまな操作が可能です。また、MySQLやAuroraからのデータ移行もサポートされています。さらに、TiDBクラスター間のデータ複製や増分レプリケーションも可能です。アプリケーションのニーズに応じて、最適な移行ソリューションを選択できます。
 ---
 
 # データ移行の概要 {#data-migration-overview}

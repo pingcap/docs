@@ -1,6 +1,6 @@
 ---
 title: Window Functions
-summary: This document introduces window functions supported in TiDB.
+summary: TiDBのウィンドウ関数の使用法はMySQL 8.0と似ています。ウィンドウ関数を無効にするオプションも提供されています。TiFlashにプッシュダウンできるウィンドウ関数がリストされています。また、CUME_DIST、DENSE_RANK、FIRST_VALUE、LAG、LAST_VALUE、LEAD、NTH_VALUE、NTILE、PERCENT_RANK、RANK、ROW_NUMBERのウィンドウ関数がサポートされています。
 ---
 
 # ウィンドウ関数 {#window-functions}

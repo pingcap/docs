@@ -1,6 +1,6 @@
 ---
 title: TiDB Sysbench Performance Test Report -- v5.4.0 vs. v5.3.0
-summary: TiDB v5.4.0 shows improved performance of 2.59% to 4.85% in write-heavy workloads compared to v5.3.0. Results show performance improvements in point select, update non-index, update index, and read write scenarios.
+summary: TiDB v5.4.0 とv5.3.0のSysbenchパフォーマンステストの結果は、書き込みの多いワークロードにおいて、v5.4.0のパフォーマンスが2.59%～4.85%向上しています。テスト環境はAWS EC2で、ハードウェア構成はPDがm5.xlarge 3台、TiKVがi3.4xlarge 3台、TiDBがc5.4xlarge 3台、システムベンチがc5.9xlarge 1台です。ソフトウェアバージョンはv5.3.0およびv5.4.0を使用し、パラメータ設定は同じです。テスト計画ではTiUPを使用してTiDBをデプロイし、Sysbenchを使用してテストを実行しました。
 ---
 
 # TiDB Sysbench パフォーマンス テスト レポート -- v5.4.0 と v5.3.0 {#tidb-sysbench-performance-test-report-v5-4-0-vs-v5-3-0}

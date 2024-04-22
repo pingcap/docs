@@ -1,6 +1,6 @@
 ---
 title: Miscellaneous Functions
-summary: Learn about miscellaneous functions in TiDB.
+summary: TiDBはMySQL 5.7で利用可能なさまざまな関数をサポートします。サポートされている関数には、ANY_VALUE、BIN_TO_UUID、DEFAULT、INET_ATON、INET_NTOA、INET6_ATON、INET6_NTOA、IS_IPV4、IS_IPV4_COMPAT、IS_IPV4_MAPPED、IS_IPV6、NAME_CONST、SLEEP、UUID、UUID_TO_BIN、VALUESが含まれます。サポートされていない関数には、UUID_SHORT、MASTER_WAIT_POSが含まれます。
 ---
 
 # その他の機能 {#miscellaneous-functions}

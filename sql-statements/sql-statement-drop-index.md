@@ -1,6 +1,6 @@
 ---
 title: DROP INDEX | TiDB SQL Statement Reference
-summary: An overview of the usage of DROP INDEX for the TiDB database.
+summary: ドロップインデックスは、指定されたテーブルからインデックスを削除し、TiKV内のスペースを空きとしてマークします。MySQLの互換性では、CLUSTEREDタイプの主キーの削除はサポートされていません。
 ---
 
 # ドロップインデックス {#drop-index}

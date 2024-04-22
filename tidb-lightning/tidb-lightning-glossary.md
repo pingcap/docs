@@ -1,6 +1,6 @@
 ---
 title: TiDB Lightning Glossary
-summary: List of special terms used in TiDB Lightning.
+summary: TiDB Lightningは、ログ、モニタリング、構成、およびドキュメントで使用される特別な用語について説明します。TiDB Lightningは、統計情報を再構築するために`ANALYZE TABLE`ステートメントを実行し、`AUTO_INCREMENT_ID`カウンターを明示的に有効な値に変更します。また、チェックポイントを保存し、データの検証を行います。さらに、エンジンを開き、KV ペアを送信し、エンジンを閉じます。取り込みは非常に高速な操作であり、SST ファイルは TiKV ストアに摂取されます。
 ---
 
 # TiDB Lightning用語集 {#tidb-lightning-glossary}

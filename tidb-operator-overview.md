@@ -1,6 +1,6 @@
 ---
 title: TiDB Operator
-summary: Learn about TiDB Operator, the automatic operation system for TiDB clusters on Kubernetes.
+summary: TiDB Operatorは、Kubernetes上のTiDBクラスターの自動運用システムであり、TiDBの完全なライフサイクル管理を提供します。TiDB Operatorを使用すると、TiDBはパブリッククラウドまたはプライベートクラウドにデプロイされたKubernetesクラスター内でシームレスに実行できます。現在、TiDB OperatorドキュメントはTiDBドキュメントから独立しており、次のリンクからアクセスできます：Kubernetes上のTiDBドキュメント。
 ---
 
 # TiDB Operator {#tidb-operator}

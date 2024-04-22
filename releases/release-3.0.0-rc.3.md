@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.0-rc.3 Release Notes
-summary: TiDB 3.0.0-rc.3 was released on June 21, 2019, with improvements in stability, usability, features, SQL optimizer, statistics, and execution engine. Fixes and new features were added to TiDB, PD, TiKV, and TiDB Ansible. Notable improvements include automatic loading statistics, manual splitting of table and index regions, and support for pessimistic transactions in TiKV.
+summary: TiDB 3.0.0-rc.3は、TiDB Ansibleバージョン3.0.0-rc.3とともにリリースされました。このリリースでは、安定性、使いやすさ、機能、SQLオプティマイザー、統計、実行エンジンが大幅に向上しています。具体的には、SQLオプティマイザーや実行エンジンの多くの問題が修正され、PDやTiKVなどのツールも改善されています。
 ---
 
 # TiDB 3.0.0-rc.3 リリースノート {#tidb-3-0-0-rc-3-release-notes}

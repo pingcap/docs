@@ -1,6 +1,6 @@
 ---
 title: Create TiFlash Replicas
-summary: Learn how to create TiFlash replicas.
+summary: このドキュメントでは、テーブルとデータベースのTiFlashレプリカを作成し、レプリカのスケジュールに使用可能なゾーンを設定する方法を紹介します。テーブルのTiFlashレプリカを作成するには、DDL ステートメントを使用して特定のテーブルのレプリカを作成します。データベースのTiFlashレプリカを作成するには、同様にDDL ステートメントを使用して特定のデータベース内のすべてのテーブルのレプリカを作成します。TiFlashレプリカのステータスや進行状況を確認する方法も紹介されています。TiFlashレプリカの作成やスケジュール設定に関する注意事項も記載されています。
 ---
 
 # TiFlashレプリカの作成 {#create-tiflash-replicas}

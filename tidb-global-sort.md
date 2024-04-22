@@ -1,6 +1,6 @@
 ---
 title: TiDB Global Sort
-summary: Learn the use cases, limitations, usage, and implementation principles of the TiDB Global Sort.
+summary: TiDBのグローバルソート機能は、データインポートとDDL操作の安定性と効率を向上させます。現在はAmazon S3のみをサポートしており、将来のリリースでは他のstorageインターフェイスもサポートする予定です。この機能により、データの並べ替えが効率的に行えます。グローバルソート機能は`IMPORT INTO`と`CREATE INDEX`の安定性と効率を向上させ、データの効率的かつ並列ソートを保証します。現在はクエリ結果の並べ替えを担当するコンポーネントとしては使用されていません。使用法は、`tidb_enable_dist_task`を`ON`に設定し、`tidb_cloud_storage_uri`を正しいクラウドstorageパスに設定することです。グローバルソート機能のアルゴリズムは、データのスキャンと準備、データの分類と配布の2つのステップで構成されています。
 ---
 
 <!-- markdownlint-disable MD029 -->

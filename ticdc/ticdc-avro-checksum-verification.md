@@ -1,6 +1,6 @@
 ---
 title: TiCDC Row Data Checksum Verification Based on Avro
-summary: Introduce the detailed implementation of TiCDC row data checksum verification.
+summary: このドキュメントは、TiCDCによってKafkaに送信され、Golangを使用してAvroプロトコルによってエンコードされたデータを使用する方法と、単一行データチェックサム機能を使用してデータ検証を実行する方法を紹介します。具体的な手順としては、データをデコードし、対応するスキーマを取得する`getValueMapAndSchema()`メソッドと、チェックサム値を計算して検証する`CalculateAndVerifyChecksum()`メソッドが含まれます。これにより、データの信頼性を確保することができます。
 ---
 
 # Avro に基づく TiCDC 行データ チェックサム検証 {#ticdc-row-data-checksum-verification-based-on-avro}

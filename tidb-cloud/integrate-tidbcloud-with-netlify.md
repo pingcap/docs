@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Cloud with Netlify
-summary: Learn how to connect your TiDB Cloud clusters to Netlify projects.
+summary: TiDB CloudとNetlifyを統合する方法についての記事です。NetlifyはWebプロジェクトを自動化するプラットフォームで、TiDB Cloudをデータベースバックエンドとして使用してNetlifyにフルスタックアプリをデプロイする方法について説明しています。必要な前提条件や手順が詳細に記載されています。TiDB Cloudの接続文字列を取得し、Netlifyにアプリをデプロイする手順が含まれています。
 ---
 
 # TiDB Cloudと Netlify を統合する {#integrate-tidb-cloud-with-netlify}

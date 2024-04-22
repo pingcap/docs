@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB Serverless via Private Endpoint
-summary: Learn how to connect to your TiDB Cloud cluster via private endpoint.
+summary: TiDB Cloudは、AWS VPCでホストされているTiDB Cloudサービスへの安全なプライベートリンク経由でTiDBサーバーレスクラスターに接続する方法を説明します。プライベートエンドポイントを使用することで、安全かつプライベートな接続が可能であり、AWS PrivateLinkを利用したエンドポイント接続はCIDRオーバーラップをサポートし、ネットワーク管理が容易になります。ただし、現在TiDB CloudはAWSでホストされているエンドポイントサービスにのみ対応しており、Google Cloudでホストされている場合は適用されません。
 ---
 
 # プライベートエンドポイント経由で TiDB サーバーレスに接続する {#connect-to-tidb-serverless-via-private-endpoint}

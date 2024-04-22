@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.5.1 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 6.5.1.
+summary: TiDB 6.5.1は2023年3月10日にリリースされました。このバージョンでは、テレメトリ機能がデフォルトで無効になり、使用状況情報は収集されません。また、IPv6アドレスのサポートが追加され、TiDBクラスターの初期化時に実行されるSQLスクリプトの指定がサポートされています。さらに、TiKVの設定項目やTiFlashの起動速度などの改善点やバグの修正が含まれています。
 ---
 
 # TiDB 6.5.1 リリースノート {#tidb-6-5-1-release-notes}

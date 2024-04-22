@@ -1,6 +1,6 @@
 ---
 title: RENAME USER
-summary: An overview of the usage of RENAME USER for the TiDB database.
+summary: RANAME USERは、既存のユーザーの名前を変更するために使用されます。MySQLの互換性が期待されており、バグが見つかった場合は報告できます。関連する操作にはユーザーの作成、助成金の表示、ユーザーの削除があります。
 ---
 
 # ユーザーの名前を変更 {#rename-user}

@@ -1,6 +1,6 @@
 ---
 title: TiDB Tools Use Cases
-summary: Learn the common use cases of TiDB tools and how to choose the tools.
+summary: TiDB ツールの使用例には、物理マシンまたは仮想マシンにデプロイ運用する方法、Kubernetes 上にデプロイ運用する方法、CSV からのデータインポート方法、MySQL/ Auroraからのデータインポート方法、データ移行方法、バックアップと復元方法、データの移行方法、増分データのサブスクリプション方法があります。これらの方法を使用して、TiDB クラスターを効果的に管理できます。
 ---
 
 # TiDB ツールの使用例 {#tidb-tools-use-cases}

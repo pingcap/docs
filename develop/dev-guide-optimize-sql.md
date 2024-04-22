@@ -1,6 +1,6 @@
 ---
 title: SQL Performance Tuning
-summary: Introduces TiDB's SQL performance tuning scheme and analysis approach.
+summary: このドキュメントは、SQL ステートメントの遅延の一般的な理由と、SQL パフォーマンスのチューニングテクニックについて紹介します。遅いクエリの理由は、テーブル全体のスキャンや誤ったインデックスの使用です。解決策として、セカンダリ インデックスやカバリングインデックスの使用、またはプライマリ インデックスの使用があります。JOIN タイプの適切な選択も重要です。
 ---
 
 # SQL性能チューニング {#sql-performance-tuning}

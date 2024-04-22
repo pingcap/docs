@@ -1,6 +1,6 @@
 ---
 title: Check Cluster Status
-summary: Learn how to check the running status of the TiDB cluster.
+summary: TiDBクラスターのステータスを確認するためには、TiUPコマンド、TiDBダッシュボード、およびGrafanaを使用します。また、データベースにログインして簡単なSQL操作を行うこともできます。TiUPコマンドを使用してクラスターのステータスを確認し、TiDBダッシュボードとGrafanaを使用してモニタリング情報を表示します。データベースにログインしてバージョンを確認したり、新しいデータベースやテーブルを作成したり、データを挿入したりすることができます。
 ---
 
 # クラスタのステータスを確認する {#check-cluster-status}

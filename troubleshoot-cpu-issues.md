@@ -1,6 +1,6 @@
 ---
 title: Troubleshoot Increased Read and Write Latency
-summary: Learn how to troubleshoot the issue of increased read and write latency.
+summary: 読み取りおよび書き込みのレイテンシーとジッターのトラブルシューティング方法を紹介します。原因としては、TiDB実行計画の不正確な統計やPDの異常が考えられます。解決方法としては、統計情報の更新や実行計画のバインドがあります。また、TiKVの異常やCPU負荷の増加などの原因と対処方法も紹介されています。クラスタのメンテナンスや新しいインデックスの作成による影響も考慮されています。
 ---
 
 # 読み取りおよび書き込み遅延の増加のトラブルシューティング {#troubleshoot-increased-read-and-write-latency}

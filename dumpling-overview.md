@@ -1,6 +1,6 @@
 ---
 title: Dumpling Overview
-summary: Use the Dumpling tool to export data from TiDB.
+summary: Dumplingは、TiDB/MySQLに保存されているデータをSQLまたはCSVデータファイルとしてエクスポートし、論理完全バックアップまたはエクスポートの作成に使用できます。DumplingはAmazon S3へのデータのエクスポートもサポートしています。TiUPを使用してDumplingを入手し、TiDB ToolkitをダウンロードすることでDumplingを実行できます。DumplingにはSQLやCSVなどの複数の形式でのデータのエクスポートをサポートするメリットがあります。また、データのフィルタリングを容易にするテーブルフィルター機能をサポートします。TiDBに対してさらに最適化が行われており、単一のTiDB SQLステートメントのメモリ制限の構成をサポートします。
 ---
 
 # Dumpling を使用してデータをエクスポートする {#use-dumpling-to-export-data}

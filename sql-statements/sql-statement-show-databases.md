@@ -1,6 +1,6 @@
 ---
 title: SHOW DATABASES | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW DATABASES for the TiDB database.
+summary: 現在のユーザーが権限を持つデータベースのリストを表示します。現在のユーザーがアクセスできないデータベースは、リストに表示されません。`information_schema`データベースは常にデータベースのリストの最初に表示されます。このステートメントの別名は`SHOW SCHEMAS`です。TiDB の`SHOW DATABASES`ステートメントは MySQL と完全な互換性があります。
 ---
 
 # データベースを表示する {#show-databases}

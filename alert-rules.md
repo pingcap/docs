@@ -1,6 +1,6 @@
 ---
 title: TiDB Cluster Alert Rules
-summary: Learn the alert rules in a TiDB cluster.
+summary: TiDBクラスターのアラートルールを学びます。
 ---
 
 <!-- markdownlint-disable MD024 -->

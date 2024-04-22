@@ -1,6 +1,6 @@
 ---
 title: TiDB Storage
-summary: Understand the storage layer of a TiDB database.
+summary: TiDBは、Key-Valueモデルを採用し、RocksDBを使用してデータをディスクに保存します。Raftプロトコルを使用してデータを複製し、リージョンを使用してデータを分散します。また、MVCCをサポートし、分散ACIDトランザクションを実行します。 TiKVは高性能で信頼性の高い分散型Key-Valuestorageを実装しています。
 ---
 
 # TiDB ストレージ {#tidb-storage}

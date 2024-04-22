@@ -1,6 +1,6 @@
 ---
 title: Use Resource Control to Achieve Resource Isolation
-summary: Learn how to use the resource control feature to control and schedule application resources.
+summary: リソース制御機能を使用してアプリケーションリソースを制御およびスケジュールする方法について説明します。
 ---
 
 # リソース制御を使用してリソースの分離を実現する {#use-resource-control-to-achieve-resource-isolation}

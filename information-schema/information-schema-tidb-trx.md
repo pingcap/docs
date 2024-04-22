@@ -1,6 +1,6 @@
 ---
 title: TIDB_TRX
-summary: Learn the `TIDB_TRX` INFORMATION_SCHEMA table.
+summary: `TIDB_TRX`テーブルは、TiDBノード上で実行されているトランザクションに関する情報を提供します。各列フィールドには、トランザクションID、開始時刻、現在実行されているSQLステートメントのダイジェストなどが含まれます。`CLUSTER_TIDB_TRX`テーブルは、クラスター全体のすべてのTiDBノードで実行されているトランザクションの情報を提供し、各行にはノードのIPアドレスとポートが含まれます。注意すべきは、`TIDB_TRX`テーブルはTiDB内部トランザクションの情報の表示をサポートしていないことです。
 ---
 
 # TIDB_TRX {#tidb-trx}

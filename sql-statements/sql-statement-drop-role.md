@@ -1,6 +1,6 @@
 ---
 title: DROP ROLE | TiDB SQL Statement Reference
-summary: An overview of the usage of DROP ROLE for the TiDB database.
+summary: ロールを削除するステートメントは、以前に作成されたロールを削除します。これにより、関連付けられた権限も削除されます。また、`SET DEFAULT ROLE`ステートメントを使用して、ロールをユーザーに関連付けることができます。これにより、ユーザーは特定のロールに関連付けられた権限を持つことができます。また、`DROP ROLE`ステートメントを使用して、ロールを削除することができます。
 ---
 
 # 役割を削除する {#drop-role}

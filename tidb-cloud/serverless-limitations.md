@@ -1,6 +1,6 @@
 ---
 title: TiDB Serverless Limitations and Quotas
-summary: Learn about the limitations of TiDB Serverless.
+summary: TiDBサーバーレスにはいくつかの制限があります。監査ログや繋がり、暗号化、メンテナンス期間、監視と診断、セルフサービスアップグレード、ストリームデータ、その他の機能に制限があります。また、TiDB Cloudの組織ごとに最大5つのTiDBサーバーレスクラスターを作成できます。無料の使用量クォータも提供されますが、クォータを超えると操作がスロットルされます。詳細は公式サイトを参照してください。
 ---
 
 # TiDB サーバーレスの制限とクォータ {#tidb-serverless-limitations-and-quotas}

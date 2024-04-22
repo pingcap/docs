@@ -1,6 +1,6 @@
 ---
 title: Special Handling of DM DDLs
-summary: Learn how DM parses and handles DDL statements according to the statement types.
+summary: TiDB データ マイグレーション (DM) は、DDL ステートメントを解析し、特定のステートメントをスキップします。さらに、特定のステートメントは書き換えられ、シャードマージ移行タスクでは動作が異なります。オンライン DDL 機能も特別な方法で処理されます。詳細はリンク先を参照してください。
 ---
 
 # DM DDL の特別な処理 {#special-handling-of-dm-ddls}

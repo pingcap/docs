@@ -1,6 +1,6 @@
 ---
 title: Export Grafana Snapshots
-summary: Learn how to export snapshots of Grafana Dashboard, and how to visualize these files.
+summary: TiDB v6.0.0以降、PingCAPはMetricsToolを保守しなくなりました。v6.1.0以降、PingCAPはMetricsToolドキュメントを管理しなくなりました。モニタリングメトリックデータをエクスポートするには、PingCAPクリニック診断サービスを使用して、モニタリングメトリック、ログ、クラスタートポロジ、構成、パラメーターなど、TiDBクラスターの診断に必要な情報を取得します。MetricsToolはGrafana v6.xxでのみ使用できます。
 ---
 
 > **警告：**

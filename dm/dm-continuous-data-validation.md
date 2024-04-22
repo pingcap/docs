@@ -1,6 +1,6 @@
 ---
 title: Continuous Data Validation in DM
-summary: Learn how to use continuous data validation and the working principles of continuous data validation.
+summary: DM での継続的なデータ検証は、増分移行シナリオで使用できます。タスク設定ファイルまたはdmctlを使用して有効にできます。検証モードは"none"、"full"、"fast"のいずれかを選択できます。エラー行は手動で処理する必要があります。制限事項として、主キーまたは一意のキーが必要であり、特定のDDL操作が制限されています。 JSONやバイナリデータはサポートされていません。
 ---
 
 # DM での継続的なデータ検証 {#continuous-data-validation-in-dm}

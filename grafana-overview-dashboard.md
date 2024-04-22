@@ -1,6 +1,6 @@
 ---
 title: Key Metrics
-summary: Learn some key metrics displayed on the Grafana Overview dashboard.
+summary: TiUPを使用してTiDBクラスターをデプロイすると、Grafanaダッシュボードには概要、PD、TiDB、TiKV、Node_exporter、Disk Performance、およびPerformance_overviewのサブダッシュボードが含まれます。日常的な操作では、主要なメトリクスが表示される概要ダッシュボードからコンポーネントステータスとクラスター全体の概要を取得できます。このドキュメントでは、これらの主要な指標について詳しく説明します。
 ---
 
 # 主要な指標 {#key-metrics}

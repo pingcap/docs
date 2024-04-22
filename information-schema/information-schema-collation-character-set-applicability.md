@@ -1,6 +1,6 @@
 ---
 title: COLLATION_CHARACTER_SET_APPLICABILITY
-summary: Learn the `COLLATION_CHARACTER_SET_APPLICABILITY` INFORMATION_SCHEMA table.
+summary: COLLATION_CHARACTER_SET_APPLICABILITY表は、照合順序を該当する文字セット名にマップします。MySQLとの互換性のために含まれており、utf8mb4文字セットの照合順序マッピングを示します。COLLATION_NAMEは照合順序の名前で、CHARACTER_SET_NAMEは照合順序が属する文字セットの名前です。これにより、文字セットと照合順序の関連性が把握できます。
 ---
 
 # COLLATION_CHARACTER_SET_APPLICABILITY {#collation-character-set-applicability}

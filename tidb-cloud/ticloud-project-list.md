@@ -1,6 +1,6 @@
 ---
 title: ticloud project list
-summary: The reference of `ticloud project list`.
+summary: ticloudプロジェクトリストは、アクセス可能なすべてのプロジェクトをリストします。コマンドは`ticloud project list`または`ticloud project ls`を使用します。フラグには`-h`と`-o`があり、`-o`フラグは`human`または`json`の値を取ります。また、継承されたフラグには`--色なし`と`-P`があります。質問や提案がある場合は、TiDB Cloud CLIの問題を作成してください。
 ---
 
 # ticloudプロジェクトリスト {#ticloud-project-list}

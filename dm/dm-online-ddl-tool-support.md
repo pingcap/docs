@@ -1,6 +1,6 @@
 ---
 title: TiDB Data Migration Support for Online DDL Tools
-summary: Learn about the support for common online DDL tools, usage, and precautions in DM.
+summary: TiDB Data Migration (DM)は、MySQLエコシステムで広く使用されているgh-ostやpt-oscなどのオンラインDDLツールをサポートしています。DMは、中間データの移行を回避するためにこれらのツールをサポートし、増分レプリケーションに対応するための制限もあります。v2.0.5以降のバージョンでは、タスク構成ファイルでonline-ddlをtrueに設定する必要があります。v2.0.5より前のバージョンでは、online-ddl-scheme構成項目を使用する必要があります。
 ---
 
 # オンライン DDL ツールの TiDB データ移行サポート {#tidb-data-migration-support-for-online-ddl-tools}

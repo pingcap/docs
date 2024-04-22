@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Cloud with n8n
-summary: Learn the use of TiDB Cloud node in n8n.
+summary: TiDB Cloudとn8nを統合するための自動ワークフローの構築方法を紹介します。TiDB CloudAPIキーを取得し、n8nをインストールしてTiDB Cloudノードを追加します。その後、ワークフローを構築し、Hacker NewsのRSSを取得し、TiDBに挿入してブリーフィング電子メールを送信します。操作はnpmとDockerの2つの方法で実行可能です。TiDB Cloudノードは、サーバーレスクラスタの作成、SQLの実行、削除、挿入、更新の操作をサポートしています。
 ---
 
 # TiDB Cloudと n8n を統合する {#integrate-tidb-cloud-with-n8n}

@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.0.4 Release Notes
-summary: TiDB 2.0.4 was released on June 15, 2018, with improvements in system compatibility and stability. It includes various enhancements and fixes for TiDB, PD, and TiKV. Some highlights for TiDB are support for `ALTER TABLE t DROP COLUMN a CASCADE` syntax, refining statement type display, and fixing issues related to data conversion and result order. PD now has improved behavior for the `max-pending-peer-count` argument, while TiKV includes the addition of the RocksDB `PerfContext` interface and fixes for slow `reverse-seek` and crash issues.
+summary: TiDB 2.0.4は、システムの互換性と安定性が向上しました。TiDBでは、ALTER TABLE構文のサポートやクエリコスト推定の精度の最適化などの改善があります。PDでは、未設定のスケジュール引数の動作が改善されました。TiKVでは、RocksDBの問題が修正され、デバッグ用のPerfContextインターフェイスが追加されました。
 ---
 
 # TiDB 2.0.4 リリースノート {#tidb-2-0-4-release-notes}

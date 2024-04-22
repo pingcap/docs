@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.2 Release Notes
-summary: TiDB 4.0.2 was released on July 1, 2020. The new version includes compatibility changes, new features, improvements, bug fixes, and new changes. Some highlights include support for new aggregate functions, improvements in query latency, and bug fixes related to execution plan, runtime errors, and data replication. Additionally, there are new features and improvements in TiKV, PD, TiFlash, and Tools.
+summary: TiDB 4.0.2は2020年7月1日にリリースされました。このバージョンでは、機密情報の削除や新しい機能の追加が行われました。例えば、`INSERT`ステートメントで`MEMORY_QUOTA()`ヒントのサポートやTLS証明書の`SAN`フィールドに基づく認証のサポートなどがあります。さらに、バグの修正や改善点も含まれています。
 ---
 
 # TiDB 4.0.2 リリースノート {#tidb-4-0-2-release-notes}

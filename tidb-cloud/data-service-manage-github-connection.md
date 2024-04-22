@@ -1,6 +1,6 @@
 ---
 title: Deploy Data App Automatically with GitHub
-summary: Learn how to deploy your Data App automatically with GitHub.
+summary: TiDB Cloudは、GitHubを使用してデータアプリを自動的にデプロイできます。GitHub接続で自動同期とデプロイが有効になっている場合、構成ファイルの変更をGitHubにプッシュすると、新しい構成が自動的にデプロイされます。データアプリをGitHubに接続する前に、GitHubアカウントとターゲットブランチを準備してください。データアプリの構成をGitHubと同期するには、デプロイ操作を実行してください。データアプリを変更する際は、GitHub上のファイルを更新するか、TiDB Cloudコンソールで変更を行うことができます。
 ---
 
 # GitHub を使用してデータ アプリを自動的にデプロイ {#deploy-data-app-automatically-with-github}

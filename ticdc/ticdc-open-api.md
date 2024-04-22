@@ -1,6 +1,6 @@
 ---
 title: TiCDC OpenAPI v1
-summary: Learn how to use the OpenAPI interface to manage the cluster status and data replication.
+summary: TiCDC OpenAPI v1 は非推奨であり、将来削除される予定です。TiCDCは、TiCDCクラスターのクエリと操作のためのOpenAPI機能を提供します。APIを使用して、TiCDCクラスター上でメンテナンス操作を実行できます。リクエスト本文と戻り値はJSON形式で、APIの具体的な使用法について説明します。特定のAPIを使用して、TiCDCクラスター上で次のメンテナンス操作を実行できます。APIエラーメッセージテンプレートは、エラーメッセージとエラーコードを提供します。TiCDCノードのステータス情報を取得するAPIは同期インターフェイスで、リクエストが成功すると、該当ノードのステータス情報が返されます。TiCDCクラスターの健全性ステータスを確認するAPIは同期インターフェイスで、クラスターが正常な場合は200 OKが返されます。レプリケーションタスクを作成するAPIは非同期インターフェイスで、リクエストが成功すると202 Acceptedが返されます。
 ---
 
 # TiCDC OpenAPI v1 {#ticdc-openapi-v1}

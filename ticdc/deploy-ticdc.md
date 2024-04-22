@@ -1,6 +1,6 @@
 ---
 title: Deploy and Maintain TiCDC
-summary: Learn the hardware and software recommendations for deploying and running TiCDC, and how to deploy and maintain it.
+summary: TiCDCのデプロイと管理についての推奨事項や手順について説明しています。TiCDCを新しいTiDBクラスターにデプロイしたり、既存のクラスターに追加したりする方法が記載されています。また、TiUPを使用してTiCDCの停止や開始、TLSの有効化、およびステータスの表示方法についても説明されています。
 ---
 
 # TiCDC のデプロイと管理 {#deploy-and-maintain-ticdc}

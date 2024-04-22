@@ -1,6 +1,6 @@
 ---
 title: CREATE DATABASE | TiDB SQL Statement Reference
-summary: An overview of the usage of CREATE DATABASE for the TiDB database.
+summary: TiDBのCREATE DATABASEステートメントは、新しいデータベースを作成し、デフォルトのプロパティを指定します。既存のデータベースを作成する際は、IF NOT EXISTSを指定する必要があります。また、TiDBはMySQLと完全に互換性があります。
 ---
 
 # データベースの作成 {#create-database}

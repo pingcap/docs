@@ -1,6 +1,6 @@
 ---
 title: ticloud import cancel
-summary: The reference of `ticloud import cancel`.
+summary: ティッククラウドインポートキャンセルは、データ インポート タスクをキャンセルします。対話モードでは、"ticloud import cancel"を使用し、非対話モードでは、必要なフラグを手動で入力する必要があります。フラグには、クラスタID、プロジェクトID、インポートタスクのIDなどがあります。また、質問や提案がある場合は、TiDB Cloud CLIの問題を作成してください。
 ---
 
 # ティッククラウドインポートキャンセル {#ticloud-import-cancel}

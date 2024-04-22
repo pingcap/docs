@@ -1,6 +1,6 @@
 ---
 title: Back Up and Restore TiDB Dedicated Data
-summary: Learn how to back up and restore your TiDB Dedicated cluster.
+summary: TiDB Cloud上でTiDB専用クラスターデータをバックアップおよび復元する方法について説明します。自動バックアップでは、毎日設定したバックアップ時刻にデータをバックアップできます。手動バックアップはユーザーが開始するバックアップで、必要に応じてデータを既知の状態にバックアップし、いつでもその状態に復元できます。バックアップデータを新しいクラスターに復元する方法や削除されたクラスターをごみ箱から復元する方法も提供されています。
 ---
 
 # TiDB 専用データのバックアップと復元 {#back-up-and-restore-tidb-dedicated-data}

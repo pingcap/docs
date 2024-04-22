@@ -1,6 +1,6 @@
 ---
 title: DROP STATS
-summary: An overview of the usage of DROP STATS for the TiDB database.
+summary: DROP STATSステートメントは、選択したデータベースから選択したテーブルの統計を削除するために使用されます。このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
 ---
 
 # 統計を削除 {#drop-stats}

@@ -1,6 +1,6 @@
 ---
 title: Precision Math
-summary: Learn about the precision math in TiDB.
+summary: TiDBの精度数学サポートはMySQLと一貫しています。数値型には正確な値のデータ型と数値リテラルが含まれ、DECIMALデータ型は固定小数点型であり、計算は正確です。DECIMAL列の値は10進数9桁を4バイトにパックするバイナリ形式を使用して格納されます。数値式の処理方法は、式の値によって異なります。文字列を数値列に挿入するために、文字列に数値以外の内容が含まれている場合、TiDBは文字列から数値への変換を行います。0による除算の結果はNULLになります。
 ---
 
 # 精密計算 {#precision-math}

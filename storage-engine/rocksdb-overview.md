@@ -1,7 +1,7 @@
 ---
 title: RocksDB Overview
-summary: Learn the basic concepts and working principles of RocksDB.
 category: reference
+summary: RocksDBはFacebookによって開発されたLSMツリーstorageエンジンであり、LevelDBに基づいています。ユーザーが書き込んだキーと値のペアは、先行書き込みログに挿入され、次にメモリ内のSkipListに書き込まれます。データが特定のサイズに達すると、内容はディスク内のSSTファイルにフラッシュされます。RocksDBを使用すると、ユーザーは複数のカラムファミリーを作成できます。バックグラウンドスレッドプールのデフォルトのサイズは8です。
 ---
 
 # RocksDB の概要 {#rocksdb-overview}

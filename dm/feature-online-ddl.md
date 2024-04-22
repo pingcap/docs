@@ -1,6 +1,6 @@
 ---
 title: Migrate from Databases that Use GH-ost/PT-osc
-summary: This document introduces the `online-ddl/online-ddl-scheme` feature of DM.
+summary: データベースのオンライン DDL ツールであるGH-ostとpt-oscを使用して、DDL実行中のテーブルロックによる影響を最小限に抑えながら、MySQLからTiDBにデータを移行することができます。DMは、これらのツールとの連携を許可し、移行プロセスを詳細に分類します。また、カスタマイズされたオンラインスキーマ変更ツールを実験的にサポートし、正規表現を使用して一時テーブルの名前を照合できます。
 ---
 
 # GH-ost/PT-osc を使用するデータベースからの移行 {#migrate-from-databases-that-use-gh-ost-pt-osc}

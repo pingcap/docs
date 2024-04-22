@@ -1,5 +1,6 @@
 ---
 title: TiDB 5.3.1 Release Notes
+summary: TiDB 5.3.1は2022年3月3日にリリースされました。このバージョンでは、TiDB Lightningのデータインポート後の空のリージョンを避けるためにデフォルト値が変更され、ユーザーログインモードのマッピングロジックが最適化され、TiKVのロック解決ステップが減少しました。さらに、PDのファイルのコンテンツ形式が最適化され、TiCDCの様々な機能が改善されました。また、バグの修正も行われ、TiDB、TiKV、PD、TiFlash、BR、DM、TiDB Lightningなどのツールに対する修正が含まれています。
 ---
 
 # TiDB 5.3.1 リリースノート {#tidb-5-3-1-release-notes}

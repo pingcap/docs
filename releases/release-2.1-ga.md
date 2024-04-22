@@ -1,5 +1,6 @@
 ---
 title: TiDB 2.1 GA Release Notes
+summary: TiDB 2.1 GAは、安定性、パフォーマンス、互換性、使いやすさが大幅に向上しています。SQLオプティマイザーは`Index Join`の選択範囲を最適化し、SQL実行者は集計関数をリファクタリングし、PDは可用性を最適化し、TiKVはコプロセッサーを追加しました。また、大量のデータの高速完全インポートをサポートするTiDB Lightningと新しいTiDBBinlogも追加されています。注意事項として、TiDB 2.1は新しいstorageエンジンを採用しているため、v2.0.x 以前へのダウングレードをサポートしていません。
 ---
 
 # TiDB 2.1 GA リリース ノート {#tidb-2-1-ga-release-notes}

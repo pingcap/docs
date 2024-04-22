@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.1 Beta Release Notes
-summary: TiDB 3.1 Beta was released on December 20, 2019. It includes SQL Optimizer improvements and supports the Follower Read feature. TiKV now supports distributed backup and restore, as well as the Follower Read feature. PD also supports distributed backup and restore.
+summary: TiDB 3.1 ベータ版は2019年12月20日にリリースされました。新機能として、SQLオプティマイザーのSQLヒントの充実とFollower Read機能のサポートが追加されました。TiKVでは分散バックアップおよび復元機能、Follower Read機能がサポートされています。PDも分散バックアップおよび復元機能をサポートしています。
 ---
 
 # TiDB 3.1 ベータ版リリースノート {#tidb-3-1-beta-release-notes}

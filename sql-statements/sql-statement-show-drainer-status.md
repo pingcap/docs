@@ -1,6 +1,6 @@
 ---
 title: SHOW DRAINER STATUS
-summary: An overview of the usage of SHOW DRAINER STATUS for the TiDB database.
+summary: SHOW DRAINER STATUSステートメントは、クラスター内のすべてのDrainerノードのステータス情報を表示します。この機能はTiDBセルフホスト型にのみ適用され、TiDB Cloudでは利用できません。MySQLの互換性もあります。関連情報として、ポンプのステータスを表示、ポンプステータスの変更、ドレイナーステータスの変更があります。
 ---
 
 # ドレイナーのステータスを表示 {#show-drainer-status}

@@ -1,6 +1,6 @@
 ---
 title: TiDB Smooth Upgrade
-summary: This document introduces the smooth upgrade feature of TiDB, which supports upgrading TiDB clusters without manually canceling DDL operations.
+summary: TiDBのスムーズなアップグレード機能は、v7.1.0以降のバージョンでサポートされています。この機能を使用するには、デフォルトで有効になっているバージョンを使用するか、/upgrade/startリクエストを送信して有効にする必要があります。アップグレード中には、特定の操作やツールの使用が制限されます。また、プラグインのDDL操作が失敗の原因となる可能性があります。
 ---
 
 # TiDB のスムーズなアップグレード {#tidb-smooth-upgrade}

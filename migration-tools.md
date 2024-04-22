@@ -1,6 +1,6 @@
 ---
 title: TiDB Migration Tools Overview
-summary: Learn an overview of the TiDB migration tools.
+summary: TiDBは、完全なデータ移行、増分データ移行、バックアップと復元、データレプリケーションなどの複数のデータ移行ツールを提供します。ユーザーシナリオ、サポートされるアップストリームとダウンストリーム、利点、制限事項を紹介し、TiUPを使用してツールをインストールする方法も提供されています。TiUPは、TiDBエコシステム内のさまざまなクラスターコンポーネントの管理を支援するパッケージマネージャーとして機能します。
 ---
 
 # TiDB 移行ツールの概要 {#tidb-migration-tools-overview}

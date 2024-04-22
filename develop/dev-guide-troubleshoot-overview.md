@@ -1,6 +1,6 @@
 ---
 title: SQL or Transaction Issues
-summary: Learn how to troubleshoot SQL or transaction issues that might occur during application development.
+summary: このドキュメントは、アプリケーション開発中に発生する可能性のあるSQLまたはトランザクションの問題に関連するドキュメントを紹介しています。SQLクエリのパフォーマンスを向上させたい場合は、SQL性能チューニングの手順に従って問題を解決します。また、トランザクションの問題についてもトラブルシューティング方法が紹介されています。さらに、関連するドキュメントやよくある質問も参照することができます。
 ---
 
 # SQL またはトランザクションの問題 {#sql-or-transaction-issues}

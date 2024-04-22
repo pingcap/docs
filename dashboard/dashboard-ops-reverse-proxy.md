@@ -1,6 +1,6 @@
 ---
 title: Use TiDB Dashboard behind a Reverse Proxy
-summary: TiDB Dashboard can be safely exposed using a reverse proxy. To do this, get the actual TiDB Dashboard address and configure the reverse proxy using either HAProxy or NGINX. You can also customize the path prefix for the TiDB Dashboard service. To enhance security, consider configuring a firewall.
+summary: TiDB ダッシュボードをリバースプロキシを使用して外部に公開する手順について説明します。リバースプロキシを使用することで、TiDB ダッシュボードを安全に公開できます。具体的な手順としては、実際の TiDB ダッシュボードのアドレスを取得し、リバースプロキシを構成することが挙げられます。さらに、パスのプレフィックスをカスタマイズする方法も説明されています。セキュリティを強化するための方法についても言及されています。
 ---
 
 # リバース プロキシの背後で TiDB ダッシュボードを使用する {#use-tidb-dashboard-behind-a-reverse-proxy}

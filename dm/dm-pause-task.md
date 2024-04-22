@@ -1,6 +1,6 @@
 ---
 title: Pause a Data Migration Task
-summary: Learn how to pause a data migration task in TiDB Data Migration.
+summary: データ移行タスクを一時停止するには、`pause-task`コマンドを使用します。このコマンドは、`stop-task`と異なり、移行タスクのみを一時停止し、タスクのステータス情報を照会できます。一時停止したタスクは存在し、新しいタスクを開始できません。また、一時停止したタスクのリレー ログを削除することもできません。通常はトラブルシューティングのために使用されます。
 ---
 
 # データ移行タスクを一時停止する {#pause-a-data-migration-task}

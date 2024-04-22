@@ -1,6 +1,6 @@
 ---
 title: Multiple Availability Zones in One Region Deployment
-summary: Learn the deployment solution to multiple availability zones in one region.
+summary: TiDBは、1つのリージョンで複数のアベイラビリティーゾーンを展開することで、高い可用性とデータの一貫性を実現します。Raftプロトコルを使用してデータの災害復旧を実現し、3つのAZにデプロイすることで、データの整合性を保ちながら読み取りおよび書き込みサービスを提供します。これにより、1つのAZに障害が発生しても自動的にサービスを再開できます。AZ間のネットワークレイテンシーの影響を最小限に抑えるために、最適化されたアーキテクチャを使用することが重要です。
 ---
 
 # 1 つのリージョンでの複数のアベイラビリティーゾーンの展開 {#multiple-availability-zones-in-one-region-deployment}

@@ -1,5 +1,6 @@
 ---
 title: tiup mirror modify
+summary: tiup mirror modifyコマンドは、公開されたコンポーネントを変更するために使用されます。有効なコンポーネント所有者のみが、独自に公開したコンポーネントを変更できます。コンポーネントの公開方法については、publishコマンドを参照してください。コマンドの構文は、tiup mirror modify <component>[version]です。オプションには、-k、--キー、-ヤンク、-隠れる、--スタンドアロンがあります。コマンドが正常に実行された場合、出力はありません。
 ---
 
 # tiup mirror modify {#tiup-mirror-modify}

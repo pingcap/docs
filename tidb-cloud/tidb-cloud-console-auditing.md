@@ -1,6 +1,6 @@
 ---
 title: Console Audit Logging
-summary: Learn about the audit logging feature for the TiDB Cloud console.
+summary: TiDB Cloudは、コンソール監査ログ機能を提供しています。組織の所有者またはコンソール監査管理者の役割が必要です。ログは90日間保存され、組織内のユーザーアクションのみが追跡されます。ログを有効または無効にするには、TiDB Cloudコンソールで設定を変更します。ログはJSONまたはCSV形式でエクスポートできます。ログにはイベントタイプ、操作者、結果などの情報が含まれます。
 ---
 
 # コンソール監査ログ {#console-audit-logging}

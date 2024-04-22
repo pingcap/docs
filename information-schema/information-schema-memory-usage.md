@@ -1,6 +1,6 @@
 ---
 title: MEMORY_USAGE
-summary: Learn the `MEMORY_USAGE` information_schema system table.
+summary: TiDBのMEMORY_USAGEテーブルは、現在のメモリ使用量を示します。列にはMEMORY_TOTAL、MEMORY_LIMIT、MEMORY_CURRENT、MEMORY_MAX_USEDなどがあります。これらはTiDBのメモリに関する情報を提供します。MEMORY_TOTALは利用可能なメモリの合計を示し、MEMORY_LIMITはメモリ使用制限を示します。MEMORY_CURRENTは現在のメモリ使用量を示し、MEMORY_MAX_USEDは開始時からの最大メモリ使用量を示します。また、セッション終了回数やディスク使用量なども提供されます。
 ---
 
 # メモリ使用量 {#memory-usage}

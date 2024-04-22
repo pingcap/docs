@@ -1,6 +1,6 @@
 ---
 title: Minimal Deployment Topology
-summary: Learn the minimal deployment topology of TiDB clusters.
+summary: TiDBクラスターの最小限の展開トポロジについて説明します。実例として、TiDBが2つ、PDが3つ、TiKVが3つ、モニタリングとグラファナが1つ必要です。詳細な構成項目については、TiUPを使用してTiDBを展開するためのトポロジコンフィグレーションファイルを参照してください。
 ---
 
 # 最小限の導入トポロジ {#minimal-deployment-topology}

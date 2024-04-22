@@ -1,6 +1,6 @@
 ---
 title: Migrate Data from TiDB to MySQL-compatible Databases
-summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
+summary: TiDBクラスターからMySQL互換データベースにデータを移行する方法について説明します。プロセス全体には4つのステップが含まれます。ステップ1では環境をセットアップし、ステップ2では完全なデータを移行します。ステップ3では増分データを移行し、ステップ4ではサービスをMySQL互換クラスターに移行します。
 ---
 
 # TiDB から MySQL 互換データベースへのデータの移行 {#migrate-data-from-tidb-to-mysql-compatible-databases}

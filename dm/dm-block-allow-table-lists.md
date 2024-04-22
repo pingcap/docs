@@ -1,6 +1,6 @@
 ---
 title: TiDB Data Migration Block and Allow Lists
-summary: Learn how to use the DM block and allow lists feature.
+summary: TiDB Data Migration (DM)を使用してデータを移行する際には、ブロックおよび許可リストを構成して、一部のデータベースまたはテーブルの操作をフィルタリングしたり、移行したりできます。構成には、`do-dbs`、`ignore-dbs`、`do-tables`、`ignore-tables`などのパラメータがあります。これらのパラメータの値が`~`文字で始まる場合、正規表現として扱われます。フィルタリングプロセスでは、スキーマレベルとテーブルレベルでのフィルタリングが行われます。例えば、`bw-rule`ルールを適用すると、特定のテーブルがフィルタリングされます。
 ---
 
 # TiDB データ移行のブロック リストと許可リスト {#tidb-data-migration-block-and-allow-lists}

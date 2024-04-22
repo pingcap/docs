@@ -1,6 +1,6 @@
 ---
 title: Key Monitoring Metrics of Resource Control
-summary: Learn some key metrics displayed on the Grafana Resource Control dashboard.
+summary: TiUPを使用してTiDBクラスターをデプロイすると、Grafanaダッシュボードからリソース制御ダッシュボードにアクセスできます。リソース制御ダッシュボードには、リクエストユニットに関するメトリクスとリソースに関するメトリクスが表示されます。また、リソースコントローラークライアントに関するメトリクスも確認できます。
 ---
 
 # リソース制御の主要な監視指標 {#key-monitoring-metrics-of-resource-control}

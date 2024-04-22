@@ -1,6 +1,6 @@
 ---
 title: TiDB Log Backup and PITR Guide
-summary: TiDB Log Backup and PITR Guide explains how to back up and restore data using the br command-line tool. It includes instructions for starting log backup, running full backup regularly, and cleaning up outdated data. The guide also provides information on running PITR and the performance capabilities of PITR.
+summary: TiDBログのバックアップとPITRガイドは、TiDBクラスターのデータをバックアップする方法を説明しています。ログバックアップでは、指定されたstorageにデータをタイムリーにバックアップできます。PITRを実行する場合は、ログのバックアップを開始し、完全バックアップを定期的に実行します。バックアップ保持期間内の任意の時点にクラスターを復元するには、`br restore point`を使用します。また、古いデータをクリーンアップする方法も説明されています。PITRのパフォーマンス機能についても記載されています。
 ---
 
 # TiDB ログのバックアップと PITR ガイド {#tidb-log-backup-and-pitr-guide}

@@ -1,5 +1,6 @@
 ---
 title: TiDB 5.4.3 Release Notes
+summary: TiDB 5.4.3は2022年10月13日にリリースされました。このバージョンでは、TiKVやツール、TiCDC、TiFlash、PDなどの改善点やバグ修正が含まれています。具体的には、RocksDBの書き込み停止設定のフロー制御しきい値の構成サポートや、TiDB Binlogの有効な場合の問題修正などがあります。PDやTiKVに関する問題も修正されています。
 ---
 
 # TiDB 5.4.3 リリースノート {#tidb-5-4-3-release-notes}

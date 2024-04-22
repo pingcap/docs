@@ -1,6 +1,6 @@
 ---
 title: ticloud branch create
-summary: The reference of `ticloud branch create`.
+summary: ticloudブランチ作成は、クラスターのブランチを作成するコマンドです。現在、TiDBサーバーレスクラスターに対してのみブランチを作成できます。対話モードと非対話モードで使用でき、必要なフラグを手動で入力する必要があります。フラグには、-c、--cluster-id、--ブランチ名、-h、--色なし、-P、--プロファイルがあります。質問や提案がある場合は、TiDB Cloud CLIの問題を作成してください。
 ---
 
 # ticloudブランチ作成 {#ticloud-branch-create}

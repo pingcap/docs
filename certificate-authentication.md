@@ -1,6 +1,6 @@
 ---
 title: Certificate-Based Authentication for Login
-summary: Learn the certificate-based authentication used for login.
+summary: TiDBは証明書ベースのログイン認証をサポートしており、MySQLユーザーによって採用されています。証明書ベースの認証を使用するには、セキュリティキーと証明書を作成し、TiDBとクライアントの証明書を構成し、ユーザーのログイン時に検証するユーザー証明書情報を設定する必要があります。証明書の更新と置き換えも重要です。
 ---
 
 # 証明書ベースのログイン認証 {#certificate-based-authentication-for-login}

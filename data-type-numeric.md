@@ -1,6 +1,6 @@
 ---
 title: Numeric Types
-summary: Learn about numeric data types supported in TiDB.
+summary: TiDBはMySQLのすべての数値型をサポートします。整数型には、INTEGER/INT、TINYINT、SMALLINT、MEDIUMINT、BIGINTが含まれます。浮動小数点型には、FLOATとDOUBLEが含まれます。固定小数点型には、DECIMALとNUMERICが含まれます。それぞれの型には、特定の範囲とストレージがあります。また、BIT型やBOOLEAN型もサポートされています。
 ---
 
 # 数値型 {#numeric-types}

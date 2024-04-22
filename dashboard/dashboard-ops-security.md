@@ -1,6 +1,6 @@
 ---
 title: Secure TiDB Dashboard
-summary: TiDB Dashboard requires enhanced security measures, including setting a strong password for the root user, creating a least-privileged user, and using a firewall to block untrusted access. It is also recommended to use a reverse proxy and enable TLS for further security.
+summary: TiDB ダッシュボードはセキュリティを強化するために、rootユーザーに強力なパスワードを設定し、最小権限のユーザーを作成することをお勧めします。さらに、信頼できないアクセスをブロックするためにファイアウォールを使用することも重要です。TLSを有効にし、保存されたデータを暗号化することも推奨されます。
 ---
 
 # セキュリティTiDB ダッシュボード {#secure-tidb-dashboard}

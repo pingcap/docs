@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.1.6 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 6.1.6.
+summary: TiDB 6.1.6は2023年4月12日にリリースされました。このバージョンでは、TiCDCの互換性の変更やTiDB、TiKV、PD、TiFlash、TiCDC、TiDB Lightningなどの改善点やバグ修正が含まれています。具体的には、TiCDCのAvroの修正やTiDBのプリペアドプランキャッシュのサポートなどがあります。
 ---
 
 # TiDB 6.1.6 リリースノート {#tidb-6-1-6-release-notes}

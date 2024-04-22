@@ -1,6 +1,6 @@
 ---
 title: TiDB Computing
-summary: Understand the computing layer of the TiDB database.
+summary: TiDBは、TiKVの分散storageを利用して、トランザクション処理とデータ分析を組み合わせたコンピューティングエンジンを構築します。テーブルデータとインデックス付きデータを(Key, Value)のペアにマッピングし、メタデータを管理します。SQLレイヤーは、SQLステートメントをKey-Value操作に変換し、TiKVから結果を取得します。
 ---
 
 # TiDB コンピューティング {#tidb-computing}

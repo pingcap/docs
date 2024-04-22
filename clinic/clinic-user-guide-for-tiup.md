@@ -1,6 +1,6 @@
 ---
 title: Troubleshoot Clusters Using PingCAP Clinic
-summary: PingCAP Clinic Diagnostic Service (PingCAP Clinic) helps troubleshoot TiDB and DM clusters deployed using TiUP. It allows remote troubleshooting and local cluster status checks using Diag client and Clinic Server. Prerequisites include installing Diag, setting an access token, and configuring the region. Troubleshooting remotely involves collecting, viewing, and uploading diagnostic data. Performing a quick check on the cluster status locally involves collecting and diagnosing configuration data. Data upload supports breakpoint upload, and uploaded data is kept on the Clinic Server for a maximum of 180 days.
+summary: PingCAPクリニックを使用して、TiUPを使用してデプロイされたTiDBクラスターおよびDMクラスターのトラブルシューティングをリモートで行うことができます。また、クラスターのステータスをローカルで簡単にチェックすることも可能です。データはクリニックサーバーにアップロードされ、180日間保存されます。
 ---
 
 # PingCAPクリニックを使用したクラスターのトラブルシューティング {#troubleshoot-clusters-using-pingcap-clinic}

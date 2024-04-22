@@ -1,6 +1,6 @@
 ---
 title: SHOW STATS_HISTOGRAMS
-summary: An overview of the usage of SHOW HISTOGRAMS for TiDB database.
+summary: 統計_ヒストグラムを表示は、`ANALYZE`ステートメントによって収集されたヒストグラム情報を示します。MySQLの互換性を持ち、テーブルの統計情報を取得する際に使用されます。ShowStmt、ShowTargetFilterable、ShowLikeOrWhereOptなどの関連情報も表示されます。テーブル名を指定して特定のテーブルの統計情報を取得することも可能です。
 ---
 
 # 統計_ヒストグラムを表示 {#show-stats-histograms}

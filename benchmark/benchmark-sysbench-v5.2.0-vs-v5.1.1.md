@@ -1,6 +1,6 @@
 ---
 title: TiDB Sysbench Performance Test Report -- v5.2.0 vs. v5.1.1
-summary: TiDB v5.2.0 shows an 11.03% improvement in Point Select performance compared to v5.1.1. However, other scenarios show a slight reduction in performance. The hardware and software configurations, test plan, and results are detailed in the report.
+summary: TiDB v5.2.0 とv5.1.1のSysbenchパフォーマンステストの結果は、v5.2.0のポイント選択パフォーマンスが11.03%向上し、他のシナリオのパフォーマンスはわずかに低下しています。テスト環境はAWS EC2で、ハードウェア構成はPDがm5.xlarge 3台、TiKVがi3.4xlarge 3台、TiDBがc5.4xlarge 3台、システムベンチがc5.9xlarge 1台です。ソフトウェアバージョンはv5.1.1およびv5.2.0を使用し、パラメータ設定は同じです。テスト計画ではTiUPを使用してTiDBをデプロイし、Sysbenchを使用してテストを実行しました。
 ---
 
 # TiDB Sysbench パフォーマンス テスト レポート -- v5.2.0 と v5.1.1 {#tidb-sysbench-performance-test-report-v5-2-0-vs-v5-1-1}

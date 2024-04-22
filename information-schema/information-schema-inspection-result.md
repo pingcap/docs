@@ -1,6 +1,6 @@
 ---
 title: INSPECTION_RESULT
-summary: Learn the `INSPECTION_RESULT` diagnostic result table.
+summary: TiDBには、システム内の障害や隠れた問題を検出するための組み込み診断ルールがあります。`INSPECTION_RESULT`診断テーブルを使用して内部診断をトリガーできます。診断結果テーブルの構造は、診断ルールの名前、診断項目、インスタンスタイプなどを示します。診断結果から問題を検出し、条件を指定して問題を診断することもできます。診断モジュールには一連のルールが含まれており、既存の診断ルールをクエリできます。診断ルールは常に改善されています。
 ---
 
 # 検査結果 {#inspection-result}

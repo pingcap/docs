@@ -1,6 +1,6 @@
 ---
 title: TiDB Binlog Tutorial
-summary: Learn to deploy TiDB Binlog with a simple TiDB cluster.
+summary: TiDBBinlogチュートリアルは、MariaDBサーバーにデータをプッシュするように設定された単一ノードのTiDB Binlogデプロイメントから始まります。このチュートリアルは、TiDBアーキテクチャに知識があり、TiDBクラスターをセットアップしている可能性があります。TiDB Binlogは、バイナリログデータを収集し、リアルタイムのデータバックアップとレプリケーションを提供します。また、PumpとDrainerの2つのコンポーネントで構成されています。Binlogctlツールを使用して、クラスター内のポンプとドレイナーの現在のステータスを表示できます。
 ---
 
 # TiDBBinlogのチュートリアル {#tidb-binlog-tutorial}

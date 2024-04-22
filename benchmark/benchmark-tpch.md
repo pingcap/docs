@@ -1,6 +1,6 @@
 ---
 title: TiDB TPC-H 50G Performance Test Report V2.0
-summary: TiDB TPC-H 50G Performance Test compared TiDB 1.0 and TiDB 2.0 in an OLAP scenario. Test results show that TiDB 2.0 outperformed TiDB 1.0 in most queries, with significant improvements in query processing time. Some queries in TiDB 1.0 did not return results, while others had high memory consumption. Future releases plan to support VIEW and address these issues.
+summary: TiDB 1.0とTiDB 2.0のOLAPシナリオにおけるパフォーマンスを比較するテストの結果は次の通りです。テスト環境は異なるため、結果も異なる場合があります。TiDB 2.0の方が多くのクエリで高速である一方、TiDB 1.0は一部のクエリで結果を返さなかったり、メモリ消費が多すぎたりしました。将来のリリースではVIEWサポートを提供する予定です。
 ---
 
 # TiDB TPC-H 50G パフォーマンス テスト レポート {#tidb-tpc-h-50g-performance-test-report}

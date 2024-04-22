@@ -1,6 +1,6 @@
 ---
 title: LOAD DATA | TiDB SQL Statement Reference
-summary: An overview of the usage of LOAD DATA for the TiDB database.
+summary: TiDB v7.0.0 以降、 `LOAD DATA` SQL ステートメントは、S3 および GCS からのデータのインポートをサポートし、新しいパラメータを追加`FIELDS DEFINED NULL BY`。新しいパラメータ`FIELDS DEFINED NULL BY`と、S3 および GCS からのデータのインポートのサポートは実験的もので、本番環境で使用することはお勧めできません。データを読み込む際に、`LOCAL`を使用して、インポートするクライアント上のデータ ファイルを指定できます。S3 および GCSstorageを使用する場合、file パラメーターは有効な S3 または GCS パスである必要があります。データ ファイルが S3 または GCS に保存されている場合、個々のファイルをインポートすることも、ワイルドカード文字`*`を使用してインポートする複数のファイルに一致させることもできます。
 ---
 
 # データを読み込む {#load-data}

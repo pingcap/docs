@@ -1,6 +1,6 @@
 ---
 title: Create a Data Migration Task
-summary: Learn how to create a migration task after the DM cluster is deployed.
+summary: このドキュメントは、DMクラスターが正常にデプロイされた後に簡単なデータ移行タスクを作成する方法について説明しています。サンプルシナリオに基づいてデータ移行タスクを作成する手順や、MySQLデータソースの構成方法、データ移行タスクの作成方法、およびデータの検証方法が記載されています。データ移行タスクを作成する際には、MySQL1インスタンスとMySQL2インスタンスのシャードテーブルをTiDBに移行する手順が示されています。
 ---
 
 # データ移行タスクの作成 {#create-a-data-migration-task}

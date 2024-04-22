@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with MyBatis
-summary: Learn how to connect to TiDB using MyBatis. This tutorial gives Java sample code snippets that work with TiDB using MyBatis.
+summary: このチュートリアルは、TiDBとMyBatisを使用して次のタスクを実行する方法を学ぶことができます。環境をセットアップし、MyBatisを使用してTiDBクラスターに接続し、アプリケーションをビルドして実行します。また、サンプルコードスニペットを参照して独自のアプリケーション開発を完了できます。このチュートリアルは、TiDBサーバーレス、TiDB専用、およびTiDBセルフホストで動作します。必要なものは、Java開発キット(JDK) 17以降、メイビン3.8以上、ギット、およびTiDBクラスターです。
 ---
 
 # MyBatis を使用して TiDB に接続する {#connect-to-tidb-with-mybatis}

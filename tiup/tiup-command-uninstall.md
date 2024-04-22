@@ -1,5 +1,6 @@
 ---
 title: tiup uninstall
+summary: tiup uninstallコマンドは、インストールされているコンポーネントをアンインストールするために使用されます。コマンドには、コンポーネントの名前とバージョンを指定して使用します。オプションとして、--allを使用すると、指定されたコンポーネントのすべてのバージョンをアンインストールできます。また、自己オプションを使用すると、TiUP自体をアンインストールできます。コマンドがエラーなく終了した場合は、"Uninstalled component "%s" successfully!"が出力されます。
 ---
 
 # tiup uninstall {#tiup-uninstall}

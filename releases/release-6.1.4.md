@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.1.4 Release Notes
-summary: Learn about the new features, compatibility changes, improvements, and bug fixes in TiDB 6.1.4.
+summary: TiDB 6.1.4は2023年2月8日にリリースされました。このバージョンでは、パーティション化されたテーブルの列タイプの変更がサポートされなくなりました。また、TiFlashの更新スループットが向上し、ツールの改善も行われました。さらに、多くのバグ修正が含まれています。PD、TiKV、TiFlash、ツールなどのさまざまなコンポーネントに修正が加えられています。
 ---
 
 # TiDB 6.1.4 リリースノート {#tidb-6-1-4-release-notes}

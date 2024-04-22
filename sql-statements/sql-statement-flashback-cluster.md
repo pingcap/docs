@@ -1,6 +1,6 @@
 ---
 title: FLASHBACK CLUSTER
-summary: Learn the usage of FLASHBACK CLUSTER in TiDB databases.
+summary: TiDB v6.4.0 では、`FLASHBACK CLUSTER TO TIMESTAMP`構文が導入され、特定の時点にクラスターを復元できます。v6.5.6、v7.1.3、およびv7.5.1以降では、`FLASHBACK CLUSTER TO TSO`構文が導入され、より正確な回復時点を指定できます。ただし、TiDBサーバーレスクラスターには適用されません。また、ターゲットのタイムスタンプまたはTSOの有効性を確認し、最大TSOを超える時刻を指定しないようにしてください。FLASHBACK CLUSTER TO TIMESTAMPの動作原理は、古いデータを最新のタイムスタンプで書き込み、現在のデータは削除しないことを確認してください。
 aliases: ['/tidb/v7.5/sql-statement-flashback-to-timestamp','/tidb/stable/sql-statement-flashback-to-timestamp','/tidbcloud/sql-statement-flashback-to-timestamp']
 ---
 

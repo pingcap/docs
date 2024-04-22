@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1.8 Release Notes
-summary: TiDB 2.1.8 was released on April 12, 2019. It includes various bug fixes and improvements for TiDB, PD, TiKV, Tools, and TiDB Ansible. Some notable fixes include compatibility issues with MySQL, inaccurate statistics estimation, and performance improvements. The release also adds new configuration items and features for TiDB Binlog Pump and Drainer. Additionally, TiDB Ansible now has version limits for the operating system and rolling updates.
+summary: TiDB 2.1.8は2019年4月12日にリリースされました。このバージョンでは、多くの問題が修正され、機能が改善されています。具体的には、NULL値パラメータの問題、Distinctモードの問題、日付、日時、およびタイムスタンプ タイプの照合順序順序の互換性の問題などが修正されています。PDとTiKVにもいくつかの問題が修正されています。また、TiDB Ansibleもいくつかの機能が追加され、バージョン制限が変更されました。
 ---
 
 # TiDB 2.1.8 リリースノート {#tidb-2-1-8-release-notes}

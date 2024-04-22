@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Serverless Driver Kysely Tutorial
-summary: Learn how to use TiDB Cloud serverless driver with Kysely.
+summary: TiDB Cloudは、Node.js環境およびエッジ環境でTiDB CloudサーバーレスドライバーをKyselyとともに使用する方法について説明します。Kyselyは、タイプセーフでオートコンプリートに適したTypeScript SQLクエリビルダーであり、@tidbcloud/kyselyを提供します。@tidbcloud/kysely には、サーバーレス環境でのパフォーマンスの向上やエッジ環境での使用機能があります。
 ---
 
 # TiDB CloudサーバーレスDriverKysely チュートリアル {#tidb-cloud-serverless-driver-kysely-tutorial}

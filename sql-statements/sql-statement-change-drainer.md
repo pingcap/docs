@@ -1,6 +1,6 @@
 ---
 title: CHANGE DRAINER
-summary: An overview of the usage of CHANGE DRAINER for the TiDB database.
+summary: CHANGE DRAINERステートメントは、クラスター内のDrainerのステータス情報を変更します。この機能はTiDBセルフホスト型にのみ適用され、TiDB Cloudでは利用できません。Drainerの状態が自動的にPDに報告され、異常な状況にある場合にのみ使用できます。MySQLの互換性もあります。
 ---
 
 # チェンジドレイナー {#change-drainer}

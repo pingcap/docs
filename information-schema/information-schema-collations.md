@@ -1,6 +1,6 @@
 ---
 title: COLLATIONS
-summary: Learn the `COLLATIONS` information_schema table.
+summary: `COLLATIONS`表は、`CHARACTER_SETS`表の文字セットに対応する照合順序のリストを提供します。このテーブルはMySQLとの互換性のためにのみ含まれています。`COLLATION_NAME`は照合順序の名前で、`CHARACTER_SET_NAME`は照合順序が属する文字セットの名前です。`ID`は照合順序のIDで、`IS_DEFAULT`はデフォルトの照合順序であるかどうかを示します。`IS_COMPILED`は文字セットがサーバーにコンパイルされるかどうかを示し、`SORTLEN`は照合順序順序で文字をソートするときに割り当てられるメモリの最小長です。
 ---
 
 # 照合順序 {#collations}

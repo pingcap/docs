@@ -1,6 +1,6 @@
 ---
 title: TiDB Scheduling
-summary: Introduces the PD scheduling component in a TiDB cluster.
+summary: TiDBのスケジューリングは、PDを使用してクラスター内のリージョンのスケジュールを設定します。TiKVはデータをリージョンとして編成し、複数のストアにレプリケートします。PDは情報を収集し、スケジュール計画を立てるためにいくつかの戦略を必要とします。これにより、クラスター全体の情報を収集し、調整するスケジューラーが必要です。
 ---
 
 # TiDB スケジューリング {#tidb-scheduling}

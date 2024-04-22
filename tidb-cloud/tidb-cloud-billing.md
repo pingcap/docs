@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Billing
-summary: Learn about TiDB Cloud billing.
+summary: TiDB Cloudは、リソースの使用量に応じて料金が発生します。請求書の管理や支払い方法の設定が可能であり、AWS MarketplaceやGoogle Cloud Marketplaceからのサインアップも可能です。毎月の請求書には、クラスターの使用量、割引、バックアップstorageのコスト、サポートサービスのコスト、クレジットの消費、およびデータ送信のコストが含まれます。また、クレジットの提供や契約の管理も行えます。
 ---
 
 # TiDB Cloudの請求 {#tidb-cloud-billing}

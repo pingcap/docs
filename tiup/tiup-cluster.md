@@ -1,6 +1,6 @@
 ---
 title: Deploy and Maintain an Online TiDB Cluster Using TiUP
-summary: Learns how to deploy and maintain an online TiDB cluster using TiUP.
+summary: TiUPを使用してTiDBクラスターを展開および管理するためのメタファイルのバックアップと復元が重要です。バックアップは次のコマンドで実行できます：tiup cluster meta backup <cluster_name>。メタファイルが失われた場合は、次のコマンドで復元できます：tiup cluster meta restore <cluster_name> <backup_file>。復元操作により、現在のメタファイルが上書きされます。したがって、メタファイルが失われた場合にのみ復元することをお勧めします。
 ---
 
 # TiUPを使用したオンライン TiDBクラスタのデプロイと管理 {#deploy-and-maintain-an-online-tidb-cluster-using-tiup}

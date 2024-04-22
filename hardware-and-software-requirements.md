@@ -1,6 +1,6 @@
 ---
 title: Software and Hardware Recommendations
-summary: Learn the software and hardware recommendations for deploying and running TiDB.
+summary: TiDBは、Intelアーキテクチャサーバー、ARMアーキテクチャサーバー、および主要な仮想化環境に導入でき、ほとんどの主要なハードウェアネットワークとLinuxオペレーティングシステムをサポートしています。TiDBは、オペレーティングシステムとCPUアーキテクチャのさまざまな組み合わせに対してマルチレベルの品質基準を保証し、エンタープライズレベルの本番品質を提供します。また、TiDBのコンパイルと実行にはGolang 1.21以降、さび夜間-2022-07-31以降、GCC 7.x、LLVM 13.0以降が必要です。TiDBの実行にはglibc (2.28-151.el8バージョン)が必要です。
 ---
 
 # ソフトウェアとハ​​ードウェアの推奨事項 {#software-and-hardware-recommendations}

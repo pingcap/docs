@@ -1,6 +1,6 @@
 ---
 title: LOAD STATS
-summary: An overview of the usage of LOAD STATS for the TiDB database.
+summary: LOAD STATSステートメントは、TiDBに統計をロードするために使用されます。TiDBサーバーレスクラスターでは使用できません。LOAD STATS ${stats_path}を使用して特定の統計ファイルをロードすることもできます。絶対パスまたは相対パスにすることができます。相対パスを使用する場合は、tidb-serverで始まるパスから該当するファイルが検索されます。このステートメントは、MySQL構文に対するTiDB拡張機能です。統計を参照するには、統計を参照してください。
 ---
 
 # 負荷統計 {#load-stats}

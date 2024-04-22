@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1.3 Release Notes
-summary: TiDB 2.1.3 and TiDB Ansible 2.1.3 are released with improvements in system stability, SQL optimizer, statistics, and execution engine. Fixes include issues with Prepared Plan Cache, Range computing, `CAST(str AS TIME(N))`, Generated Column, statistics histogram, `Sort Merge Join`, and more. Other improvements include support for Range for `_tidb_rowid` construction queries, `ALLOW_INVALID_DATES` SQL mode, and more. PD and TiKV also have fixes and improvements. TiDB Binlog fixes issues with the Pump client log and data inconsistency caused by unique key containing NULL value.
+summary: TiDB 2.1.3は、システムの安定性、SQLオプティマイザー、統計情報、および実行エンジンが向上しています。具体的な修正点には、プリペアドプランキャッシュのpanic問題の修正、インデックスの範囲計算の修正、文字列が不正`TIME`形式の場合の修正などが含まれます。また、TiDB Ansible 2.1.3もリリースされています。PDやTiKVにも修正が加えられています。TiDBBinlogにもいくつかの修正が加えられています。
 ---
 
 # TiDB 2.1.3 リリースノート {#tidb-2-1-3-release-notes}

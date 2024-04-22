@@ -1,6 +1,6 @@
 ---
 title: PARTITIONS
-summary: Learn the `PARTITIONS` INFORMATION_SCHEMA table.
+summary: PARTITIONSテーブルは、パーティション化されたテーブルに関する情報を提供します。テーブルカタログ、テーブルスキーマ、テーブル名、パーティション名など27行の情報が含まれています。テーブルt1はHASH(id)で2つのパーティションに分割されており、それぞれの情報も含まれています。
 ---
 
 # パーティション {#partitions}

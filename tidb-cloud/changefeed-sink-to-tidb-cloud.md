@@ -1,6 +1,6 @@
 ---
 title: Sink to TiDB Cloud
-Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated cluster to a TiDB Serverless cluster.
+summary: このドキュメントは、TiDB専用クラスターからTiDBサーバーレスクラスターにデータをストリーミングする方法について説明しています。TiDB Cloudへのシンク機能にはいくつかの制限があります。また、TiDB Cloudへのシンクを作成する前にいくつかの前提条件を満たす必要があります。シンクを作成する手順も詳細に記載されています。
 ---
 
 # TiDB Cloudへのシンク {#sink-to-tidb-cloud}

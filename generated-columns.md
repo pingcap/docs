@@ -1,6 +1,6 @@
 ---
 title: Generated Columns
-summary: Learn how to use generated columns.
+summary: このドキュメントでは、生成された列の概念と使用法について紹介します。生成された列は列定義内の式によって計算され、挿入または更新時には値を割り当てることはできません。仮想生成列と格納された生成列の 2 種類があり、JSON データ型からデータを抽出し、インデックスを付けることができます。生成された列の検証や制限事項もあります。
 ---
 
 # 生成された列 {#generated-columns}

@@ -1,6 +1,6 @@
 ---
 title: Common Table Expression
-summary: Learn the CTE feature of TiDB, which help you write SQL statements more efficiently.
+summary: Common Table Expression (CTE)は、SQLステートメント内で複数回参照できる一時的な結果セットで、ステートメントの読みやすさと実行効率を向上させます。非再帰CTEは、WITHステートメントを使用して定義され、再帰CTEはWITH RECURSIVEステートメントを使用して定義されます。CTEを使用すると、複雑なアプリケーションロジックのSQLステートメントを効率的に作成できます。TiDB v5.1以降、TiDBはANSI SQL99標準のCTEと再帰をサポートしています。CTEを使用すると、開発者は長いSQLステートメントを回避し、コードの保守が簡単になります。
 ---
 
 # 共通テーブル式 {#common-table-expression}

@@ -1,6 +1,6 @@
 ---
 title: Developer Guide Overview
-summary: Introduce the overview of the developer guide.
+summary: このガイドは、TiDBの開発者向けに書かれており、TiDBの基本的な動作やトランザクションメカニズムについて説明しています。また、TiDBを使用したアプリケーションの構築方法や対話方法についても示しています。さらに、TiDB Cloudを使用する場合の追加リソースも提供されています。楽観的トランザクションの使用についても注意があります。
 ---
 
 # 開発者ガイドの概要 {#developer-guide-overview}

@@ -1,5 +1,6 @@
 ---
 title: tiup dm replay
+summary: クラスター操作の失敗を回避するために、`tiup dm replay`コマンドを使用して失敗したコマンドを再試行し、正常に実行された手順をスキップできます。`tiup dm replay <audit-id>`コマンドを使用し、`<audit-id>`に対応するコマンドの出力を表示します。操作の再実行による時間の節約が可能です。
 ---
 
 # tiup dm replay {#tiup-dm-replay}

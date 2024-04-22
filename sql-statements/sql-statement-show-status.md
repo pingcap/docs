@@ -1,6 +1,6 @@
 ---
 title: SHOW [GLOBAL|SESSION] STATUS | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW [GLOBAL|SESSION] STATUS for the TiDB database.
+summary: MySQLのSHOW GLOBAL STATUSステートメントは、TiDBに影響を与えず、集中メトリクス収集にはPrometheusとGrafanaを使用します。このステートメントはMySQLとの互換性のために含まれており、グローバルスコープのステータスを表示します。 Ssl_cipher_list、server_id、ddl_schema_version、Ssl_verify_mode、Ssl_version、Ssl_cipherなどの変数名とその値が表示されます。MySQLの互換性のためだけに含まれています。関連するステートメントにはフラッシュステータスがあります。
 ---
 
 # [グローバル|セッション]ステータスを表示 {#show-global-session-status}

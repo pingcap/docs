@@ -1,5 +1,6 @@
 ---
 title: tiup help
+summary: TiUPコマンドライン インターフェイスは、`help`コマンドまたは`--help`オプションを使用して、豊富なヘルプ情報を提供します。`tiup help [command]`を使用して、指定したコマンドのヘルプ情報を表示できます。オプションはありません。出力は`[command]`またはTiUPのヘルプ情報です。
 ---
 
 # tiup help {#tiup-help}

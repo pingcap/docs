@@ -1,6 +1,6 @@
 ---
 title: Analyze and Tune Performance
-summary: Learn how to analyze and tune performance of your TiDB Cloud cluster.
+summary: TiDB Cloudは、パフォーマンスを分析するために遅いクエリ、ステートメント分析、キービジュアライザー、およびインデックスインサイトを提供します。スロークエリを使用すると、クラスター内のすべてのスロークエリを検索して表示し、ステートメント分析を使用すると、ページ上のSQL実行を直接観察し、キービジュアライザーはデータアクセスパターンとデータホットスポットを観察し、インデックスインサイトは遅いクエリに対して推奨インデックスを提供します。
 ---
 
 # パフォーマンスの分析と調整 {#analyze-and-tune-performance}

@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.5.5 Release Notes
-summary: Learn about the improvements and bug fixes in TiDB 6.5.5.
+summary: TiDB 6.5.5は2023年9月21日にリリースされました。このバージョンでは、TiDB、TiKV、PD、ツールの改善とバグ修正が行われています。例えば、TiDBでは新しいオプティマイザー ヒントが追加され、TiKVでは接続再試行のプロセスでPDクライアントのバックオフ メカニズムが追加されました。また、バグ修正ではTiDBのステイル読み取りが使用できないレプリカを修正するなど、多くの修正が行われています。
 ---
 
 # TiDB 6.5.5 リリースノート {#tidb-6-5-5-release-notes}

@@ -1,6 +1,6 @@
 ---
 title: Three Availability Zones in Two Regions Deployment
-summary: Learn the deployment solution to three availability zones in two regions.
+summary: このドキュメントは、2つのリージョンに3つのアベイラビリティゾーンを展開するアーキテクチャと構成について紹介しています。この展開ソリューションは、高い可用性と災害に強いものであり、リージョン間の高可用性を提供します。TiDBは、Raftアルゴリズムを使用して2つのリージョン内の3つのAZアーキテクチャをネイティブにサポートし、データの一貫性と高可用性を保証します。また、ラベルの設計やパラメータ設定の最適化についても説明されています。
 ---
 
 # 2 つのリージョンに 3 つのアベイラビリティーゾーンを展開 {#three-availability-zones-in-two-regions-deployment}

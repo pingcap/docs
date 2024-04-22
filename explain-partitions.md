@@ -1,6 +1,6 @@
 ---
 title: Explain Statements Using Partitions
-summary: Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
+summary: TiDBの`EXPLAIN`ステートメントは、クエリ実行時にアクセスする必要があるパーティションを表示します。パーティションのプルーニングにより、表示されるパーティションはサブセットに過ぎません。パーティションテーブルの最適化と`EXPLAIN`出力の解釈方法について説明します。新しいパーティションテーブルに対するステートメントの例を示し、パーティションのプルーニングによってパーティションが削除されない場合の例も示します。
 ---
 
 # パーティションを使用した Explain ステートメント {#explain-statements-using-partitions}

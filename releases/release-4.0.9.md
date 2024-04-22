@@ -1,5 +1,6 @@
 ---
 title: TiDB 4.0.9 Release Notes
+summary: TiDB 4.0.9は2020年12月21日にリリースされました。このバージョンでは、いくつかの互換性の変更や新機能、改善点、バグの修正が行われています。具体的には、TiFlashの新機能やTiDBダッシュボードの改善点、TiKVやPDのバグ修正などが含まれています。また、バックアップと復元、TiCDC、Dumpling、TiDB Lightningなどのツールにも修正が加えられています。
 ---
 
 # TiDB 4.0.9 リリースノート {#tidb-4-0-9-release-notes}

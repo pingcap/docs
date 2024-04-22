@@ -1,6 +1,6 @@
 ---
 title: DROP PLACEMENT POLICY
-summary: The usage of ALTER PLACEMENT POLICY in TiDB.
+summary: DROP PLACEMENT POLICYは以前の配置ポリシーを削除するために使用されます。配置ポリシーはテーブルやパーティションによって参照されていない場合にのみ削除できます。このステートメントはMySQL構文に対するTiDBの拡張機能です。
 ---
 
 # ドロップ配置ポリシー {#drop-placement-policy}

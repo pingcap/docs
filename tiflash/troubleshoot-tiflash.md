@@ -1,6 +1,6 @@
 ---
 title: Troubleshoot a TiFlash Cluster
-summary: Learn common operations when you troubleshoot a TiFlash cluster.
+summary: TiFlashクラスタのトラブルシューティングに関する記事です。TiFlashの起動できない問題にはRedHat Enterprise Linux 8の確認やulimitパラメータの設定を行うことをお勧めします。TiFlashレプリカが利用できない場合は、PDが`Placement Rules`機能を有効にしているか確認し、TiFlash解析が遅い場合はMPPモードでサポートされていない演算子や関数を確認します。データのレプリケーションが停止する場合はディスク容量や`down peer`の確認を行います。データのレプリケーションが遅い場合は`store limit`を増やすことをお勧めします。
 ---
 
 # TiFlashクラスタのトラブルシューティング {#troubleshoot-a-tiflash-cluster}

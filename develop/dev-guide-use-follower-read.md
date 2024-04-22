@@ -1,6 +1,6 @@
 ---
 title: Follower Read
-summary: Learn how to use Follower Read to optimize query performance.
+summary: このドキュメントでは、Follower Readを使用してクエリのパフォーマンスを最適化する方法を紹介します。TiDBはリージョンに複数のレプリカを含め、リーダー上のデータが変更されると同期的にデータをフォロワーに更新します。Follower Read機能を有効にすると、リーダーの負荷が軽減され、複数のフォロワー間で負荷が分散されるため、システム全体のスループットが向上します。読み取りホットスポットを減らすためや地理的に分散された展開のレイテンシーを削減するために使用されます。
 ---
 
 # Follower Read {#follower-read}

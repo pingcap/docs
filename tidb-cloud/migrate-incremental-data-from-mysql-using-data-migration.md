@@ -1,6 +1,6 @@
 ---
 title: Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration
-summary: Learn how to migrate incremental data from MySQL-compatible databases hosted in Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, or a local MySQL instance to TiDB Cloud using Data Migration.
+summary: MySQL 互換データベースからTiDB Cloudに増分データのみを移行する方法について説明します。増分データを移行する開始位置としてGTIDを指定する場合の制限事項や前提条件についても説明します。移行ジョブの作成から進行状況の確認までの手順も示します。
 ---
 
 # データ移行を使用して、MySQL 互換データベースからTiDB Cloudに増分データのみを移行する {#migrate-only-incremental-data-from-mysql-compatible-databases-to-tidb-cloud-using-data-migration}

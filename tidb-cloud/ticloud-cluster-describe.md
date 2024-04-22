@@ -1,6 +1,6 @@
 ---
 title: ticloud cluster describe
-summary: The reference of `ticloud cluster describe`.
+summary: ticloud クラスターの説明。クラスターに関する情報を取得します。または、次のエイリアス コマンドを使用します。対話モードでクラスター情報を取得します。非対話モードでクラスター情報を取得します。非対話型モードでは、必要なフラグを手動で入力する必要があります。継承されたフラグもあります。TiDB Cloud CLI に関して質問や提案がある場合は、お気軽に問題を作成してください。貢献も歓迎します。
 ---
 
 # ticloud クラスターの説明 {#ticloud-cluster-describe}

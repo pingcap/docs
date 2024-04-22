@@ -1,5 +1,6 @@
 ---
 title: tiup cluster audit
+summary: tiup cluster auditコマンドは、すべてのクラスターで実行されたコマンドの履歴と実行ログを表示します。[audit-id]を指定しない場合、稼働記録一覧表は新しい順に出力されます。[audit-id]を指定すると、指定したaudit-idの実行ログを確認できます。オプションには-h、--helpがあり、指定したaudit-idの実行ログが出力されます。audit-idが指定されていない場合は、ID、時間、コマンドを含むテーブルが出力されます。
 ---
 
 # tiup cluster audit {#tiup-cluster-audit}

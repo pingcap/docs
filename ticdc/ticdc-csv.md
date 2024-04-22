@@ -1,6 +1,6 @@
 ---
 title: TiCDC CSV Protocol
-summary: Learn the concept of TiCDC CSV Protocol and how to use it.
+summary: TiCDC CSV プロトコルは、DML イベントを CSV 形式でクラウドstorageサービスに送信するための構成を提供します。CSVを使用する場合の構成の例やトランザクションの制約、データstorageパス構造、データフォーマットの定義、データ型マッピングなどの詳細が含まれます。CSV ファイルでは、操作タイプのインジケーター、テーブル名、スキーマ名、ソーストランザクションの`commit-ts`、変更されるデータを表す列が定義されます。MySQLの種類とCSVタイプのマッピングも提供されています。
 ---
 
 # TiCDC CSV プロトコル {#ticdc-csv-protocol}

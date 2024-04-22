@@ -1,6 +1,6 @@
 ---
 title: Use Cluster Resource
-summary: Learn how to use the cluster resource to create and modify a TiDB Cloud cluster.
+summary: このドキュメントでは、TiDB Cloudクラスターを管理する方法を学習できます。`tidbcloud_cluster`リソースを使用してクラスターを作成、変更、削除することができます。また、`tidbcloud_projects`と`tidbcloud_cluster_specs`データ ソースを使用して必要な情報を取得する方法も学習します。TiDB クラスターを管理するための手順が詳細に記載されています。
 ---
 
 # クラスタリソースの使用 {#use-cluster-resource}

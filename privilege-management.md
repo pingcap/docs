@@ -1,6 +1,6 @@
 ---
 title: Privilege Management
-summary: Learn how to manage the privilege.
+summary: TiDBはMySQL 5.7の権限管理システムをサポートし、MySQL 8.0の機能もサポートしています。権限関連の操作には、GRANTステートメントを使用して権限を付与し、REVOKEステートメントを使用して権限を取り消します。動的権限はTiDB機能の一部であり、特定の操作に対するアクセスを制御します。権限はmysql.userおよびmysql.dbテーブルで管理され、FLUSH PRIVILEGESステートメントで更新できます。
 ---
 
 # 権限管理 {#privilege-management}

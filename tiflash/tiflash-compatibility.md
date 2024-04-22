@@ -1,6 +1,6 @@
 ---
 title: TiFlash Compatibility Notes
-summary: Learn the TiDB features that are incompatible with TiFlash.
+summary: TiFlashは、TiDBと互換性がない状況があります。例えば、TiFlashではオーバーフローした数値のチェックやウィンドウ機能、TiKVからのデータの読み取り、文字列型の引数をサポートしていません。また、小数除算計算もTiDBとは異なる結果を返すことがあります。これらの互換性のない点に注意が必要です。
 ---
 
 # TiFlash互換性に関する注意事項 {#tiflash-compatibility-notes}

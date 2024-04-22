@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Built-in Alerting
-summary: Learn how to monitor your TiDB cluster by getting alert notification emails from TiDB Cloud.
+summary: TiDB Cloudでは、アラートの表示、編集、通知メールの購読が簡単に行えます。アクティブなアラートとクローズされたアラートを表示し、ルールを編集したり、通知メールを購読したりできます。組み込みアラート条件も提供されており、それぞれの状態に対する推奨アクションが示されています。アラート機能はTiDB専用クラスターでのみ使用できます。
 ---
 
 # TiDB Cloud組み込みアラート {#tidb-cloud-built-in-alerting}

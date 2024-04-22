@@ -1,6 +1,6 @@
 ---
 title: Reparo User Guide
-summary: Learn to use Reparo.
+summary: Reparoは、TiDB Binlogツールであり、増分データを回復するために使用されます。Reparoを使用して、protobuf形式のbinlogデータを解析し、TiDB/MySQLに適用します。ReparoはTiDB Toolkitに含まれており、コマンドラインパラメータや設定ファイルを使用して操作します。データのリカバリや出力先タイプの指定が可能であり、replicate-do-dbやreplicate-do-tableを使用してデータベースやテーブルを指定できます。
 ---
 
 # Reparoユーザーガイド {#reparo-user-guide}

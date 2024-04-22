@@ -1,6 +1,6 @@
 ---
 title: Sink to Apache Kafka
-summary: This document explains how to create a changefeed to stream data from TiDB Cloud to Apache Kafka. It includes restrictions, prerequisites, and steps to configure the changefeed for Apache Kafka. The process involves setting up network connections, adding permissions for Kafka ACL authorization, and configuring the changefeed specification.
+summary: このドキュメントは、TiDB CloudからApache Kafkaにデータをストリーミングするためのチェンジフィードの作成方法について説明しています。制限と前提条件があります。制限には、100個の変更フィードの作成制限やTLS証明書のアップロードの不支援が含まれます。前提条件には、ネットワーク接続のセットアップとKafka ACL認可のためのアクセス許可の追加が含まれます。さらに、Apache Kafkaのチェンジフィードページを開き、チェンジフィードターゲットを構成し、チェンジフィードを設定し、変更フィード仕様を構成し、構成を確認する手順が含まれます。
 ---
 
 # Apache Kafka にシンクする {#sink-to-apache-kafka}

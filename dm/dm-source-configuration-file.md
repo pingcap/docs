@@ -1,6 +1,6 @@
 ---
 title: Upstream Database Configuration File of TiDB Data Migration
-summary: Learn the configuration file of the upstream database
+summary: このドキュメントは、アップストリームデータベースの構成ファイルについて説明しており、構成ファイルのテンプレートと各構成パラメータについて説明しています。構成ファイルには、MySQLインスタンスID、GTIDの有効化、リレーログの有効化などのパラメータが含まれています。また、リレーログのクリーンアップ戦略の構成やタスクステータスチェッカーの設定についても説明されています。Binlogイベントフィルターの設定も可能です。DM v2.0.1では、`enable-gtid`と`enable-relay`を同時に設定しないように注意が必要です。
 ---
 
 # TiDB データ移行の上流データベースコンフィグレーションファイル {#upstream-database-configuration-file-of-tidb-data-migration}

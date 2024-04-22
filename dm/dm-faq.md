@@ -1,6 +1,6 @@
 ---
 title: TiDB Data Migration FAQs
-summary: Learn about frequently asked questions (FAQs) about TiDB Data Migration (DM).
+summary: TiDB データ移行 (DM) は MySQL または MariaDB binlogの標準バージョンのデコードのみをサポートしています。 Alibaba Cloud RDS やその他のクラウド データベースに対してはテストされていません。binlogが標準形式であることが確認された場合、そのバイナリログはサポートされています。 DM は Golang標準ライブラリの正規表現のみをサポートしています。 DM はビュー関連の DDL ステートメントをダウンストリーム TiDB クラスターに複製しません。また、ビュー関連の DML ステートメントをダウンストリーム TiDB クラスターに複製しません。
 ---
 
 # TiDB データ移行に関するよくある質問 {#tidb-data-migration-faqs}

@@ -1,6 +1,6 @@
 ---
 title: Deploy TiDB Dashboard
-summary: TiDB Dashboard is built into PD for v4.0 or higher. No additional deployment is needed. It can also be deployed independently on Kubernetes. When multiple PD instances are deployed, only one serves the Dashboard. Use `tiup cluster display` to check the serving instance. You can disable and re-enable the Dashboard using `tiup ctl`.
+summary: TiDB ダッシュボード UI は、v4.0以降のバージョンのPDコンポーネントに組み込まれており、追加の展開は必要ありません。標準のTiDBクラスターをデプロイするだけで、TiDBダッシュボードが表示されます。TiDB v6.5.0以降およびTiDB Operator v1.4.0以降は、TiDBダッシュボードをKubernetes上の独立したポッドとしてデプロイすることをサポートしています。標準のTiDBクラスターをデプロイする方法については、次のドキュメントを参照してください。複数のPDインスタンスがクラスターにデプロイされている場合、これらのインスタンスのうちの1つだけがTiDBダッシュボードにサービスを提供します。
 ---
 
 # TiDB ダッシュボードのデプロイ {#deploy-tidb-dashboard}

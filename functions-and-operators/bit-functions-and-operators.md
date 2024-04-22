@@ -1,6 +1,6 @@
 ---
 title: Bit Functions and Operators
-summary: Learn about the bit functions and operators.
+summary: TiDBはMySQL 5.7で利用可能なビット関数と演算子をサポートします。ビット関数と演算子には、BIT_COUNT()、&、～、|、^、<<、>>が含まれます。それぞれの機能は、1に設定されているビット数を返したり、ビットごとのAND、反転、OR、XOR、左方移動、右シフトを行います。
 ---
 
 # ビット関数と演算子 {#bit-functions-and-operators}

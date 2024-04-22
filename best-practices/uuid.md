@@ -1,6 +1,6 @@
 ---
 title: UUID Best Practices
-summary: UUIDs, when used as primary keys, offer benefits such as reduced network trips, support in most programming languages and databases, and protection against enumeration attacks. Storing UUIDs as binary in a `BINARY(16)` column is recommended. It's also advised to avoid setting the `swap_flag` with TiDB to prevent hotspots. MySQL compatibility is available for UUIDs.
+summary: UUIDは、AUTO_INCREMENT整数値の代わりに使用されると競合の危険を冒さずに複数のシステム上で生成できます。ほとんどのプログラミング言語とデータベース システムでサポートされており、URLの一部として使用される場合には列挙型攻撃に対して脆弱ではありません。バイナリ形式で保存することでパフォーマンスが向上し、MySQLでも使用できます。
 ---
 
 # UUIDのベストプラクティス {#uuid-best-practices}

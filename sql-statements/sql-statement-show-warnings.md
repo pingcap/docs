@@ -1,6 +1,6 @@
 ---
 title: SHOW WARNINGS | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW WARNINGS for the TiDB database.
+summary: 警告を表示ステートメントは、現在のクライアント接続で以前に実行されたステートメントに対して発生した警告のリストを表示します。MySQLと同様に、sql_modeがエラーと警告を引き起こすステートメントに影響します。TiDBのSHOW WARNINGSステートメントはMySQLと完全に互換性があります。互換性の違いが見つかった場合は、バグを報告してください。エラーを表示も参照してください。
 ---
 
 # 警告を表示 {#show-warnings}

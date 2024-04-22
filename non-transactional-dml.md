@@ -1,6 +1,6 @@
 ---
 title: Non-Transactional DML Statements
-summary: Learn the non-transactional DML statements in TiDB. At the expense of atomicity and isolation, a DML statement is split into multiple statements to be executed in sequence, which improves the stability and ease of use in batch data processing scenarios.
+summary: 非トランザクション DML ステートメントは、複数の SQL ステートメントに分割された DML ステートメントであり、トランザクションのアトミック性と分離性を犠牲にして、バッチ データ処理のパフォーマンスと使いやすさを向上させます。非トランザクション DML ステートメントには、`INSERT INTO ... SELECT`、`REPLACE INTO .. SELECT`、`UPDATE`、`DELETE`が含まれます。ただし、非トランザクション DML ステートメントは、通常の DML ステートメントと同等ではなく、特定の例外的な動作があります。
 ---
 
 # 非トランザクション DML ステートメント {#non-transactional-dml-statements}

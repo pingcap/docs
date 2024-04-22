@@ -1,6 +1,6 @@
 ---
 title: CREATE VIEW | TiDB SQL Statement Reference
-summary: An overview of the usage of CREATE VIEW for the TiDB database.
+summary: ビューの作成ステートメントは、`SELECT`ステートメントを保存し、クエリ可能なオブジェクトとしてテーブルと同様に機能します。TiDBのビューは実体化されず、クエリされると内部でクエリを書き換えてビュー定義とSQLクエリを結合します。現在、TiDB内のビューは挿入または更新できず、`WITH CHECK OPTION`も有効ではありません。ALTER VIEWはサポートされず、代わりにCREATE OR REPLACEを使用できます。また、ALGORITHMフィールドは構文的にのみ互換性がありますが、有効にはなりません。
 ---
 
 # ビューの作成 {#create-view}

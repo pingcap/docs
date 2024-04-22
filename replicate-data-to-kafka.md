@@ -1,6 +1,6 @@
 ---
 title: Integrate Data with Apache Kafka and Apache Flink
-summary: Learn how to replicate TiDB data to Apache Kafka and Apache Flink using TiCDC.
+summary: Apache KafkaとApache Flinkを使用してTiDBデータをレプリケートする方法について説明します。TiCDCを使用してTiDBクラスターをデプロイし、KafkaとFlinkクラスターを作成します。データをTiDBからKafkaにレプリケートし、go-tpcを使用してデータを書き込みます。Kafkaコンソールコンシューマでデータを観察し、Flinkクラスターを構成することもできます。これにより、TiDBデータベースの増分データがKafkaに正常にレプリケートされます。Flinkを使用してKafkaデータを消費することもできます。
 ---
 
 # Apache Kafka および Apache Flink とデータを統合する {#integrate-data-with-apache-kafka-and-apache-flink}

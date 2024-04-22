@@ -1,6 +1,6 @@
 ---
 title: DM Safe Mode
-summary: Introduces the DM safe mode, its purpose, working principles and how to use it.
+summary: DMセーフモードは、増分レプリケーションを安全に実行するための特別な操作モードです。セーフモードでは、SQLステートメントが書き換えられ、重複した挿入や更新操作を防ぎます。セーフモードは自動または手動で有効にできますが、有効にするとパフォーマンスのオーバーヘッドが発生し、データの失われる可能性があります。セーフモードを有効にする際には注意が必要です。
 ---
 
 # DMセーフモード {#dm-safe-mode}

@@ -1,5 +1,6 @@
 ---
 title: tiup cluster meta backup
+summary: TiUPメタファイルは、クラスターの運用と保守 (OM) に使用されます。`tiup cluster meta backup`コマンドを使用してTiUPメタファイルを定期的にバックアップします。`<cluster-name>`は操作対象のクラスターの名前です。`--file`オプションはTiUPメタバックアップファイルを保存するターゲットディレクトリを指定します。`-h, --help`オプションはヘルプ情報を出力します。tiup-clusterの実行ログが出力されます。
 ---
 
 # tiup クラスターのメタバックアップ {#tiup-cluster-meta-backup}

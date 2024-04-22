@@ -1,6 +1,6 @@
 ---
 title: Operators
-summary: Learn about the operators precedence, comparison functions and operators, logical operators, and assignment operators.
+summary: このドキュメントは、演算子の優先順位、比較関数と演算子、論理演算子、代入演算子について説明します。演算子の優先順位は、最高の優先順位から最低の優先順位まで、次のリストに示されています。比較関数と演算子、論理演算子、代入演算子についても詳細が記載されています。MySQLはILIKE演算子をサポートしていません。
 ---
 
 # オペレーター {#operators}

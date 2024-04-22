@@ -1,6 +1,6 @@
 ---
 title: Troubleshoot TiCDC
-summary: Learn how to troubleshoot issues you might encounter when you use TiCDC.
+summary: TiCDCのトラブルシューティングに関する一般的なエラーや対処方法を紹介します。レプリケーションタスクの中断や停止、OOMエラー、タイムゾーン関連のエラーなどがあります。また、Kafkaへのメッセージレプリケーション時のエラーについても解説しています。
 ---
 
 # TiCDC のトラブルシューティング {#troubleshoot-ticdc}

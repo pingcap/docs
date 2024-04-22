@@ -1,6 +1,6 @@
 ---
 title: Build a Simple CRUD App with TiDB and Java
-summary: Learn how to build a simple CRUD application with TiDB and Java.
+summary: TiDBとJavaを使用して簡単なCRUDアプリケーションを構築する方法を学びます。
 ---
 
 <!-- markdownlint-disable MD024 -->

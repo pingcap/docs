@@ -1,5 +1,6 @@
 ---
 title: TiDB 2.1.2 Release Notes
+summary: TiDB 2.1.2は、TiDB Ansible 2.1.2とともにリリースされました。このリリースでは、システムの互換性と安定性が大幅に向上しています。TiDBでは、Kafkaバージョン#8747のTiDB Binlogと互換性を持たせ、さまざまな問題を修正しました。PDでは、リージョン情報更新の問題を修正し、TiKVでは構成互換性の問題を修正しました。また、ツールではさまざまな問題を修正し、TiDB LightningではLightningでサポートされる最小クラスタバージョンを更新しました。
 ---
 
 # TiDB 2.1.2 リリースノート {#tidb-2-1-2-release-notes}

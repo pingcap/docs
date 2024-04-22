@@ -1,6 +1,6 @@
 ---
 title: DROP SEQUENCE
-summary: An overview of the usage of DROP SEQUENCE for the TiDB database.
+summary: DROP SEQUENCEステートメントは、TiDB内のシーケンスオブジェクトを削除します。このステートメントはTiDB拡張機能であり、MariaDBで利用可能なシーケンスに基づいてモデル化されています。SEQUENCEステートメントの例として、"DROP SEQUENCE seq;"や"DROP SEQUENCE seq, seq2;"があります。関連する操作として、シーケンスの作成やシーケンスの作成を表示する操作があります。
 ---
 
 # ドロップシーケンス {#drop-sequence}

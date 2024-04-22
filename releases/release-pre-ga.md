@@ -1,5 +1,6 @@
 ---
 title: Pre-GA release notes
+summary: TiDB Pre-GAは、MySQL互換性、SQL最適化、安定性、パフォーマンスに焦点を当てたリリースです。SQLクエリオプティマイザーの調整、MySQLとの互換性向上、JSONフィールドのサポートなどが含まれます。また、PDクラスターのリーダーの手動変更をサポートし、TiKVではRocksdbインスタンスの使用やレプリカの削除の高速化が行われました。さらに、Sparkベータ版用TiDBコネクタでは、述語プッシュダウンや集約プッシュダウンの実装が行われ、TPC+Hのフルセットを実行可能となりました。
 ---
 
 # プレ GA リリースノート {#pre-ga-release-notes}

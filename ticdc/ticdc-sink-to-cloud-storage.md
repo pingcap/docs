@@ -1,6 +1,6 @@
 ---
 title: Replicate Data to Storage Services
-summary: Learn how to replicate data to storage services using TiCDC, and learn about the storage path of the replicated data.
+summary: TiDB v6.5.0以降、TiCDCはAmazon S3、GCS、Azure Blob Storage、NFSなどのstorageサービスへの行変更イベントの保存をサポートします。TiCDCを使用して増分データをstorageサービスにレプリケートする方法と、データが保存される仕組みについて説明します。データをstorageサービスにレプリケートする方法は、指定されたコマンドを実行することです。シンクURIを構成する方法やストレージパス構造についても説明されています。DDLイベントに関する情報も含まれています。
 ---
 
 # ストレージ サービスへのデータのレプリケーション {#replicate-data-to-storage-services}

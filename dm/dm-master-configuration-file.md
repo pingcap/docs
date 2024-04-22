@@ -1,6 +1,6 @@
 ---
 title: DM-master Configuration File
-summary: Learn the configuration file of DM-master.
+summary: このドキュメントは、DMマスターの構成について紹介します。設定ファイルのテンプレートには、DM-masterの名前やログレベル、アドレスなどのパラメータが含まれています。グローバル構成のパラメータには、DMマスターの名前やログレベル、アドレスなどが含まれています。
 ---
 
 # DMマスターコンフィグレーションファイル {#dm-master-configuration-file}

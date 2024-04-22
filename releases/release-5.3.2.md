@@ -1,6 +1,6 @@
 ---
 title: TiDB 5.3.2 Release Notes
-summary: TiDB 5.3.2 was released on June 29, 2022. It is not recommended to use this version due to a known bug, which has been fixed in v5.3.3. The release includes compatibility changes, improvements, and bug fixes for TiDB, PD, TiKV, TiFlash, and various tools like TiDB Data Migration, TiDB Lightning, Backup & Restore, TiCDC, and TiDB Data Migration.
+summary: TiDB 5.3.2は2022年6月29日にリリースされました。このバージョンには既知のバグがあり、v5.3.3の使用が推奨されています。互換性の変更として、自動IDが範囲外にある場合の問題が修正され、改善点ではTiKVのCPU効率が向上し、バグが修正されました。バグの修正では、Amazon S3の圧縮データのサイズの計算問題などが修正されています。ツールのバックアップと復元では、増分復元後の重複した主キーの修正などが行われています。TiDBデータ移行では、大文字のテーブルが複製できない問題が修正されています。
 ---
 
 # TiDB 5.3.2 リリースノート {#tidb-5-3-2-release-notes}

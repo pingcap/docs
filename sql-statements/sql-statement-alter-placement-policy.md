@@ -1,6 +1,6 @@
 ---
 title: ALTER PLACEMENT POLICY
-summary: The usage of ALTER PLACEMENT POLICY in TiDB.
+summary: ALTER PLACEMENT POLICYは、以前の配置ポリシーを変更するために使用されます。古いポリシーと新しいポリシーはマージされず、置き換えられます。MySQLの構文に対するTiDBの拡張機能です。
 ---
 
 # 配置ポリシーの変更 {#alter-placement-policy}

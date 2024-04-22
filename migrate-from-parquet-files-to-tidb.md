@@ -1,6 +1,6 @@
 ---
 title: Migrate Data from Parquet Files to TiDB
-summary: Learn how to migrate data from parquet files to TiDB.
+summary: このドキュメントは、Apache HiveからParquetファイルを生成し、TiDB Lightningを使用してTiDBにデータを移行する方法について説明しています。Amazon AuroraからParquetファイルをエクスポートする場合は、別のドキュメントを参照してください。前提条件として、TiUPを使用してTiDB Lightningをインストールし、必要なターゲットデータベース権限を取得する必要があります。具体的な手順として、Parquetファイルを準備し、ターゲットテーブルスキーマを作成し、構成ファイルを作成し、データをインポートする必要があります。インポートの進行状況を確認し、インポートが成功したかどうかを確認することも重要です。
 ---
 
 # Parquet ファイルから TiDB へのデータの移行 {#migrate-data-from-parquet-files-to-tidb}

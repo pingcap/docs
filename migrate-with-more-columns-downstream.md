@@ -1,6 +1,6 @@
 ---
 title: Migrate Data to a Downstream TiDB Table with More Columns
-summary: Learn how to migrate data to a downstream TiDB table with more columns than the corresponding upstream table.
+summary: このドキュメントは、ダウンストリーム TiDB テーブルにデータを移行する際の追加手順について説明しています。アップストリームのbinlogをレプリケートする場合、列の不一致によるエラーが発生することがあります。この場合、`binlog-schema`コマンドを使用してテーブルスキーマを設定し、移行タスクを再開します。
 ---
 
 # より多くの列を含むダウンストリーム TiDB テーブルにデータを移行する {#migrate-data-to-a-downstream-tidb-table-with-more-columns}

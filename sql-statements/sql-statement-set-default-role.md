@@ -1,6 +1,6 @@
 ---
 title: SET DEFAULT ROLE | TiDB SQL Statement Reference
-summary: An overview of the usage of SET DEFAULT ROLE for the TiDB database.
+summary: このステートメントは、デフォルトでユーザーに適用される特定のロールを設定します。したがって、 `SET ROLE <rolename>`または`SET ROLE ALL`を実行しなくても、ロールに関連付けられた権限が自動的に付与されます。MySQLの互換性があります。
 ---
 
 # <code>SET DEFAULT ROLE</code> {#code-set-default-role-code}

@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.10 Release Notes
-summary: TiDB 4.0.10 was released on January 15, 2021. New features include redacting user data from logs and configurable size limits for key-value entries. Bug fixes address concurrency issues, duplicate bindings, and incorrect results. Improvements include optimized metrics and upgraded dependencies. Various tools have also been updated and fixed, such as TiCDC, Dumpling, Backup & Restore, TiDB Binlog, and TiDB Lightning.
+summary: TiDB 4.0.10は2021年1月15日にリリースされました。新機能には、PDのログからユーザーデータを編集するための構成項目の追加があります。改善点では、トランザクション内のキーと値のエントリのサイズ制限が構成可能になりました。バグの修正では、同時実行性のバグや重複バインディングの問題が修正されています。TiFlashやツールにもさまざまな修正が加えられています。
 ---
 
 # TiDB 4.0.10 リリースノート {#tidb-4-0-10-release-notes}

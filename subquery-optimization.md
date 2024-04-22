@@ -1,6 +1,6 @@
 ---
 title: Subquery Related Optimizations
-summary: Understand optimizations related to subqueries.
+summary: この記事は、サブクエリ関連の最適化に焦点を当てています。サブクエリの種類ごとに最適化の方法が説明されており、特定の条件下での書き換え例も示されています。TiDBの実行計画や最適化段階での挙動についても触れられています。サブクエリの種類や条件に応じて、最適な実行プランを選択するためのヒントも提供されています。
 ---
 
 # サブクエリ関連の最適化 {#subquery-related-optimizations}

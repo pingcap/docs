@@ -1,6 +1,6 @@
 ---
 title: TiDB Data Migration Quick Start
-summary: Learn how to quickly deploy a DM cluster using binary packages.
+summary: TiDB データ移行 (DM)を使用してMySQLからTiDBにデータを移行する方法について説明します。DMクラスターをデプロイし、データソースを準備し、テストデータを準備し、データ移行タスクを作成し、タスクのステータスを確認します。
 ---
 
 # TiDB データ移行のクイック スタート ガイド {#quick-start-guide-for-tidb-data-migration}

@@ -1,6 +1,6 @@
 ---
 title: ROLLBACK | TiDB SQL Statement Reference
-summary: An overview of the usage of ROLLBACK for the TiDB database.
+summary: ロールバックは、TIDB内の現在のトランザクションのすべての変更を元に戻します。これは、COMMITステートメントの逆の操作です。MySQLの互換性では、TiDBは特定の構文を解析しますが無視します。具体的には、`ROLLBACK AND [NO] RELEASE`および`ROLLBACK AND [NO] CHAIN`です。これらの機能はMySQLで使用されますが、TiDBでは推奨されません。また、関連する操作として、セーブポイント、専念、始める、取引を開始するがあります。
 ---
 
 # ロールバック {#rollback}

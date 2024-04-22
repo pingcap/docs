@@ -1,6 +1,6 @@
 ---
 title: PD Recover User Guide
-summary: Use PD Recover to recover a PD cluster which cannot start or provide services normally.
+summary: PD Recoverは、PDの災害復旧ツールであり、サービスが正常に起動または提供できないPDクラスターを復旧するために使用されます。ソースコードからコンパイルするためには、Goモジュールを使用する必要があります。PDプロジェクトのルートディレクトリでmake pd-recoverコマンドを使用してbin/pd-recoverをコンパイルし、生成します。PD RecoverインストールパッケージはTiDB Toolkitに含まれており、PDクラスターを回復する2つの方法があります。生き残ったPDノードを使用してPDクラスターを回復する方法と、PDクラスターを完全に再構築する方法があります。
 ---
 
 # PD リカバリ ユーザー ガイド {#pd-recover-user-guide}

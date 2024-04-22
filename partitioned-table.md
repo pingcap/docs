@@ -1,6 +1,6 @@
 ---
 title: Partitioning
-summary: Learn how to use partitioning in TiDB.
+summary: TiDBでパーティションを使用する方法を学びます。
 ---
 
 # パーティショニング {#partitioning}

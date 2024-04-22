@@ -1,6 +1,6 @@
 ---
 title: TiDB Architecture FAQs
-summary: Learn about the most frequently asked questions (FAQs) relating to TiDB.
+summary: TiDBは、オープンソースの分散SQLデータベースであり、MySQLと互換性があります。TiDBのアーキテクチャにはTiDBサーバー、PDサーバー、TiKVサーバーの3つのコンポーネントがあります。TiDBはMySQL構文とプロトコルをサポートしていますが、新しいオープンソースデータベースです。また、TiDBは分散トランザクションをサポートし、他のKey-Valuestorageエンジンをサポートします。さらに、TiDBの知識を得る方法として、ドキュメント、ブログ、教育プログラムがあります。
 ---
 
 # TiDBアーキテクチャよくある質問 {#tidb-architecture-faqs}

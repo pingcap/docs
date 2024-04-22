@@ -1,6 +1,6 @@
 ---
 title: Snapshot Backup and Restore Guide
-summary: This document describes how to back up and restore TiDB snapshots using the br command-line tool. It includes instructions for snapshot backup, restoring data of a specified time point, and restoring a database or table. The document also covers the performance and impact of snapshot backup and restore.
+summary: このドキュメントは、TiDBのスナップショットをバックアップおよび復元する方法について説明しています。バックアップはクラスター全体をバックアップし、復元では指定した時点のデータを復元したり、指定したデータベースまたはテーブルのデータを復元したりできます。バックアップにはクラスターのパフォーマンスに一定の影響がありますが、バックアップスレッドの数を制限することで軽減できます。復元速度はクラスターの構成に大きく依存します。
 ---
 
 # スナップショットのバックアップと復元ガイド {#snapshot-backup-and-restore-guide}

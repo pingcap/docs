@@ -1,6 +1,6 @@
 ---
 title: TiDB Binlog Troubleshooting
-summary: Learn the troubleshooting process of TiDB Binlog.
+summary: TiDB Binlogのトラブルシューティングについて説明します。エラーが発生した場合は、監視指標を確認し、binlogctlツールを使用してノードの状態を確認します。さらに、PumpログやDrainerのエラーを確認し、問題が判明したらFAQやエラー処理を参照して解決してください。解決策が見つからない場合は、問題を送信してサポートを求めてください。
 ---
 
 # TiDBBinlogのトラブルシューティング {#tidb-binlog-troubleshooting}

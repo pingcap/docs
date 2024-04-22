@@ -1,6 +1,6 @@
 ---
 title: ADMIN CANCEL DDL | TiDB SQL Statement Reference
-summary: An overview of the usage of ADMIN CANCEL DDL for the TiDB database.
+summary: `ADMIN CANCEL DDL`ステートメントを使用すると、実行中の DDL ジョブをキャンセルできます。`job_id`を使用して`ADMIN SHOW DDL JOBS`を実行し、ジョブを特定します。キャンセル後、DDL ジョブを実行する SQL ステートメントはエラーを返します。すでに完了した DDL ジョブをキャンセルするとエラーが表示されます。このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
 category: reference
 ---
 

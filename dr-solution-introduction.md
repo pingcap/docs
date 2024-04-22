@@ -1,6 +1,6 @@
 ---
 title: Overview of TiDB Disaster Recovery Solutions
-summary: Learn about the disaster recovery solutions provided by TiDB, including disaster recovery based on primary and secondary clusters, disaster recovery based on multiple replicas in a single cluster, and disaster recovery based on backup and restore.
+summary: TiDBの災害復旧ソリューションは、DRの基本概念、コンポーネントアーキテクチャ、および複数のDRソリューションを提供しています。これには、単一クラスター内の複数のレプリカに基づくソリューション、プライマリクラスタとセカンダリクラスタに基づくソリューション、TiCDCと複数のレプリカに基づくソリューション、BRをベースとしたソリューションが含まれます。これらのソリューションは、TCO、エラー許容範囲の目標、RPO、RTO、およびネットワークレイテンシー要件に基づいて比較されます。
 ---
 
 # TiDB 災害復旧ソリューションの概要 {#overview-of-tidb-disaster-recovery-solutions}

@@ -1,6 +1,6 @@
 ---
 title: REPLACE | TiDB SQL Statement Reference
-summary: An overview of the usage of REPLACE for the TiDB database.
+summary: `REPLACE`ステートメントは、`DELETE` + `INSERT`ステートメントを組み合わせたもので、アプリケーションコードを簡素化するために使用できます。TiDB の`REPLACE`ステートメントは MySQL と完全な互換性があります。互換性の違いが見つかった場合は、バグを報告してください。
 ---
 
 # 交換する {#replace}

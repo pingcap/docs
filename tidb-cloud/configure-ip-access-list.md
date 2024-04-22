@@ -1,6 +1,6 @@
 ---
 title: Configure an IP Access List
-summary: Learn how to configure IP addresses that are allowed to access your TiDB Dedicated cluster.
+summary: TiDB TiDB CloudのTiDB専用クラスターでは、インターネットトラフィックをフィルターするIPアクセスリストを構成できます。これにより、特定のIPアドレスのみがクラスターに接続できます。標準接続またはセキュリティ設定でIPアクセスリストを構成できます。最大7つのIPアドレスを追加できますが、任意のIPアドレスによるアクセスは推奨されません。
 ---
 
 # IPアクセスリストの設定 {#configure-an-ip-access-list}

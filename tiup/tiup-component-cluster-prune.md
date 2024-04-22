@@ -1,5 +1,6 @@
 ---
 title: tiup cluster prune
+summary: TiUPクラスターの`tiup cluster prune`コマンドは、クラスター内のスケーリング時に使用されます。このコマンドを実行すると、クリーンアッププロセスのログが出力されます。特定のオプションを指定することで、ヘルプ情報を出力することも可能です。データのスケジュール設定が完了するまで待ってから、手動で実行する必要があります。
 ---
 
 # tiup cluster prune {#tiup-cluster-prune}

@@ -1,6 +1,6 @@
 ---
 title: Daily Check for TiDB Data Migration
-summary: Learn about the daily check of TiDB Data Migration (DM).
+summary: TiDBデータ移行の日常チェック方法についてまとめます。方法1では、query-statusコマンドを使用してタスクの実行ステータスとエラー出力を確認します。方法2では、TiUPを使用してDMクラスターをデプロイし、GrafanaでDM監視メトリックを表示します。方法3では、ログファイルを使用してDMの実行ステータスとエラーを確認します。
 ---
 
 # TiDB データ移行の毎日のチェック {#daily-check-for-tidb-data-migration}

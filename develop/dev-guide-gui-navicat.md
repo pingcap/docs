@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with Navicat
-summary: Learn how to connect to TiDB using Navicat.
+summary: Navicatを使用してTiDBに接続する方法を学ぶチュートリアル。MySQLと互換性のあるNavicatを使用してTiDBに接続できますが、完全なサポートはされていません。代わりに、データグリップやDビーバーなどの他のGUIツールを使用することが推奨されています。接続方法に応じて、TiDBクラスターに接続する手順が示されています。また、TiDBアプリケーション開発やTiDB開発者コースについても言及されています。必要な場合は、不和またはサポートチケットを作成して助けを求めることができます。
 ---
 
 # Navicat を使用して TiDB に接続する {#connect-to-tidb-with-navicat}

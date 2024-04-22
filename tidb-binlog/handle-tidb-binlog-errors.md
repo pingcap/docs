@@ -1,6 +1,6 @@
 ---
 title: TiDB Binlog Error Handling
-summary: Learn how to handle TiDB Binlog errors.
+summary: TiDB Binlogを使用する際に発生する一般的なエラーとその解決策を紹介します。大規模なトランザクションを実行すると、Kafkaのメッセージサイズ制限を超える可能性があります。この場合、Kafkaの構成パラメーターを調整します。また、Pumpがbinlogデータを書き込むためのディスク領域が不足している場合は、ディスク領域をクリーンアップしてPumpを再起動します。さらに、Pumpの起動時にDrainerノードに通知に失敗した場合や、データ損失が発生する場合の対処法も紹介します。Drainerによる増分データのクリーニングメカニズムについても説明します。
 ---
 
 # TiDBBinlogのエラー処理 {#tidb-binlog-error-handling}

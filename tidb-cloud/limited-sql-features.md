@@ -1,6 +1,6 @@
 ---
 title: Limited SQL Features on TiDB Cloud
-summary: Learn about the limited SQL features on TiDB Cloud.
+summary: TiDB Cloudは、TiDB専用とTiDBサーバーレスの間でSQL機能にいくつかの制限があります。例えば、データ配置の構成やリソースグループの構成はTiDBサーバーレスではサポートされていません。また、バックアップと復元操作、遅いクエリの追跡、ステートメント分析などもTiDBサーバーレスでは代わりにTiDB Cloudコンソールを使用する必要があります。また、プラグインや生存時間（TTL）もTiDBサーバーレスでは利用できません。強力なパスワードポリシーが適用され、読み取り専用の変数もあります。
 ---
 
 # TiDB Cloud上の制限された SQL 機能 {#limited-sql-features-on-tidb-cloud}

@@ -1,6 +1,6 @@
 ---
 title: CHARACTER_SETS
-summary: Learn the `CHARACTER_SETS` INFORMATION_SCHEMA table.
+summary: CHARACTER_SETS表は文字セットに関する情報を提供します。TiDBは現在、一部の文字セットのみをサポートしています。CHARACTER_SETSテーブルの列の説明は次のとおりです。CHARACTER_SET_NAME文字セットの名前。DEFAULT_COLLATE_NAME文字セットのデフォルトの照合順序名。DESCRIPTION文字セットの説明。MAXLENこの文字セットに文字を格納するために必要な最大長。
 ---
 
 # CHARACTER_SETS {#character-sets}

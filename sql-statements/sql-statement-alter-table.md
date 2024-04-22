@@ -1,6 +1,6 @@
 ---
 title: ALTER TABLE | TiDB SQL Statement Reference
-summary: An overview of the usage of ALTER TABLE for the TiDB database.
+summary: ALTER TABLEステートメントは、既存のテーブルを新しいテーブル構造に変更します。`ALTER TABLE`は、インデックスの追加、削除、または名前変更、列の追加、削除、変更、テーブルデータのコンパクト化などの目的で使用できます。また、DDL変更でのアルゴリズムのアサート機能をサポートしています。MySQLとの互換性には制限があります。
 ---
 
 # 他の机 {#alter-table}

@@ -1,6 +1,6 @@
 ---
 title: Backup & Restore FAQs
-summary: Learn about Frequently Asked Questions (FAQs) and the solutions of backup and restore.
+summary: TiDBのバックアップ＆リストア（BR）に関するよくある質問と解決策がリストされています。誤ってデータを削除または更新した後、すぐにデータを復元するには、TiDB v6.4.0にはフラッシュバック機能が導入されています。バックアップタスクが実行されると、バックアップタスクの速度が遅くなるのはなぜですか？TiKVは自動調整をサポートしています。PITRは通常、クラスターが完全にサービス停止になった場合、またはデータが破損して他のソリューションを使用して回復できない場合に使用されます。ログバックアップ機能はTiDB Lightningに完全には適合していません。クラスター内でネットワークパーティションに障害が発生すると、バックアップタスクはログのバックアップを続行できなくなります。
 ---
 
 # バックアップと復元に関するよくある質問 {#backup-x26-restore-faqs}

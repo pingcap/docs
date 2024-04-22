@@ -1,5 +1,6 @@
 ---
 title: tiup mirror publish
+summary: tiup mirror publishコマンドは、新しいコンポーネントまたは既存のコンポーネントの新しいバージョンを公開するために使用されます。ターゲットコンポーネントへのアクセス権を持つコンポーネント所有者のみがそれを公開できます。新しいコンポーネント所有者を追加するには、grantコマンドの使用法を参照してください。コマンドの構文は、tiup mirror publish <comp-name> <version> <tarball> <entry> [flags]です。各パラメータの意味は次のとおりです。
 ---
 
 # tiup mirror publish {#tiup-mirror-publish}

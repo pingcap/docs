@@ -1,6 +1,6 @@
 ---
 title: Derive TopN or Limit from Window Functions
-summary: Introduce the optimization rule of deriving TopN or Limit from window functions and how to enable this rule.
+summary: ウィンドウ関数からのTopNまたはLimitの導出は、v7.0.0以降のTiDBでサポートされています。この最適化ルールを使用すると、元のSQLを同等の形式に書き直すことができます。この機能を有効にするには、セッション変数[tidb_opt_derive_topn]をONに設定します。制限事項として、SQL書き換えではROW_NUMBER()ウィンドウ関数のみがサポートされます。また、TiDBは結果ROW_NUMBER()でフィルタリングし、フィルタ条件が<または<=の場合にのみSQLを書き換えることができます。
 ---
 
 # ウィンドウ関数から TopN または Limit を導出する {#derive-topn-or-limit-from-window-functions}

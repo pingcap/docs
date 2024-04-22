@@ -1,6 +1,6 @@
 ---
 title: Explain Statements in the MPP Mode
-summary: Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
+summary: TiDBはMPPモードをサポートし、TiFlashにレプリカがあるテーブルでのみ使用できます。クエリは複数のクエリフラグメントにスライスされ、ExchangeReceiverとExchangeSender演算子があります。MPPモードでは、HashPartition、ブロードキャスト、パススルーの3つの交換タイプがあります。また、EXPLAIN ANALYZEステートメントは実行時情報も出力します。新しいフィールドMPPVersionとCompressionがMPP実行プランに追加され、データ圧縮モードを示します。
 ---
 
 # MPP モードでの Explain ステートメント {#explain-statements-in-the-mpp-mode}

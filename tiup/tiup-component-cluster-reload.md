@@ -1,5 +1,6 @@
 ---
 title: tiup cluster reload
+summary: tiup cluster reloadコマンドは、クラスターの構成を有効にするために使用されます。リモートマシンに制御マシンの構成を公開し、サービスを順番に再起動します。オプションには、エラーを無視して強制的にリロードする--forceや、再起動のタイムアウトを設定する--transfer-timeoutなどがあります。また、ノードや役割を指定して再起動することも可能です。
 ---
 
 # tiup cluster reload {#tiup-cluster-reload}

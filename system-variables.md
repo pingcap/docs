@@ -1,6 +1,6 @@
 ---
 title: System Variables
-summary: Use system variables to optimize performance or alter running behavior.
+summary: システム変数を使用してパフォーマンスを最適化するか、実行動作を変更します。
 ---
 
 # システム変数 {#system-variables}

@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Read-Only Storage Nodes
-summary: This document introduces configuring read-only storage nodes for isolating high-tolerance delay loads from online services. Steps include marking TiKV nodes as read-only, using Placement Rules to store data on read-only nodes as learners, and using Follower Read to read data from read-only nodes.
+summary: 読み取り専用ストレージノードの構成方法とデータの保存方法を紹介します。読み取り専用ノードには、特別なラベルを使用して指定し、配置ルールを使用してデータを保存します。また、Follower Readを使用して読み取り専用ノードからデータを読み取る方法も紹介します。
 ---
 
 # 読み取り専用ストレージ ノードのベスト プラクティス {#best-practices-for-read-only-storage-nodes}

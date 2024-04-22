@@ -1,6 +1,6 @@
 ---
 title: Follower Read
-summary: This document describes the use and implementation of Follower Read.
+summary: Follower Read機能は、リージョンのフォロワー レプリカを使用して読み取りリクエストを処理し、リーダーの負荷を軽減します。これにより、システム全体のスループットが向上します。使用法は、変数`tidb_replica_read`の値を変更することで有効になります。実装メカニズムでは、フォロワー ノードが強力な一貫性のある読み取りを提供し、フォロワー レプリカの選択にはラウンドロビン戦略が採用されます。
 ---
 
 # Follower Read {#follower-read}

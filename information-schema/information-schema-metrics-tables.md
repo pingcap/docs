@@ -1,6 +1,6 @@
 ---
 title: METRICS_TABLES
-summary: Learn the `METRICS_TABLES` system table.
+summary: METRICS_TABLESテーブルは、METRICS_SCHEMAデータベース内の各ビューのPromQL定義を提供します。このテーブルはTiDBセルフホスト型にのみ適用され、TiDB Cloudでは使用できません。テーブル名、PromQL、ラベル、パーセンタイル、コメントのフィールドが含まれます。これにより、監視テーブルの動作原理が説明されます。監視テーブルのデータをクエリすると、クエリ条件を使用してクエリ式が生成されます。5つのテーブルが示され、それぞれのテーブルにはTABLE_NAME、PROMQL、LABELS、QUANTILE、COMMENTの情報が含まれます。
 ---
 
 # METRICS_TABLES {#metrics-tables}

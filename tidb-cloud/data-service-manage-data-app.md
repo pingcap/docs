@@ -1,6 +1,6 @@
 ---
 title: Manage a Data App
-summary: Learn how to create, view, modify, and delete a Data App in the TiDB Cloud console.
+summary: データサービスのデータアプリは、特定のアプリケーションのデータにアクセスするためのエンドポイントのコレクションです。APIキーを使用して認証設定を構成し、データアプリのエンドポイントへのアクセスを制限できます。データアプリを作成するには、プロジェクトのデータサービスページで指示に従います。データアプリのプロパティを編集したり、GitHub接続を管理したり、リンクされたデータソースを管理したりすることができます。また、OpenAPI仕様を使用してエンドポイントと対話することもできます。
 ---
 
 # データアプリを管理する {#manage-a-data-app}

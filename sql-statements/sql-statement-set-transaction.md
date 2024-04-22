@@ -1,6 +1,6 @@
 ---
 title: SET TRANSACTION | TiDB SQL Statement Reference
-summary: An overview of the usage of SET TRANSACTION for the TiDB database.
+summary: SET TRANSACTIONステートメントを使用すると、現在の分離レベルをGLOBALまたはSESSIONに変更できます。この構文は、MySQLとSQL標準の両方と互換性があります。TiDBはトランザクションを読み取り専用として設定する機能をサポートしています。分離レベルREAD-UNCOMMITTEDとSERIALIZABLEはサポートされていません。MySQLと部分的に互換性のあるスナップショット分離テクノロジーを使用することで、分離レベルREPEATABLE-READが実現されます。TiDBはMySQLと互換性のある2つの分離レベル（REPEATABLE-READとREAD-COMMITTED）をサポートします。
 ---
 
 # トランザクションの設定 {#set-transaction}

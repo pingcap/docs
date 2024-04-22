@@ -1,6 +1,6 @@
 ---
 title: TiFlash Data Validation
-summary: Learn the data validation mechanism and tools for TiFlash.
+summary: TiFlashデータ検証メカニズムとツールについて紹介します。データ破損は重大なハードウェア障害によって引き起こされます。TiFlashはデータの整合性を確保するためにデータ検証を実行し、v5.4.0以降はより高度な検証機能が導入されました。検証メカニズムはDeltaTreeファイルに基づいて構築され、自動データ検証と手動データ検証の両方をサポートしています。また、検証ツールも導入され、データの整合性を手動でチェックすることができます。
 ---
 
 # TiFlashデータの検証 {#tiflash-data-validation}

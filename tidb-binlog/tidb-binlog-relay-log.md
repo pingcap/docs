@@ -1,6 +1,6 @@
 ---
 title: TiDB Binlog Relay Log
-summary: Learn how to use relay log to maintain data consistency in extreme cases.
+summary: TiDBBinlogリレー ログは、Drainerが上流からトランザクションを分割し、下流に同時にレプリケートする際に使用されます。Drainerが異常終了すると、リレー ログを使用して下流クラスターの一貫性を確認し、データの一貫性を保ちます。リレー ログは、上流クラスターが利用できない場合に下流クラスターを一貫した状態に復元するためにも使用されます。Drainerはリレー ログを有効にすると、バイナリ ログをディスクに書き込み、下流クラスターにレプリケートします。リレー ログのGC機構により、データが正常にレプリケートされた後、自動的にクリーンアップされます。リレー ログを有効にするには、Drainerに特定の設定を追加する必要があります。
 ---
 
 # TiDBBinlogリレー ログ {#tidb-binlog-relay-log}

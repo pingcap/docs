@@ -1,6 +1,6 @@
 ---
 title: Third-Party Tools Supported by TiDB
-summary: Learn about third-party tools supported by TiDB.
+summary: TiDBはMySQLプロトコルとの高い互換性を持ち、ほとんどのMySQLドライバーやORMフレームワーク、その他のツールと互換性があります。PingCAPはサードパーティツールに対してFullまたは互換性のサポートレベルを提供し、ドライバやORMフレームワーク、GUIツールなどが満杯のサポートを受けています。ただし、特定の機能については完全なテストが行われていない場合があります。
 ---
 
 # TiDB がサポートするサードパーティ ツール {#third-party-tools-supported-by-tidb}

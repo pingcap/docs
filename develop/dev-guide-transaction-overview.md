@@ -1,6 +1,6 @@
 ---
 title: Transaction overview
-summary: A brief introduction to transactions in TiDB.
+summary: TiDBは完全な分散トランザクションをサポートし、楽観的取引と悲観的取引を提供します。トランザクションステートメント、楽観的トランザクションと悲観的トランザクション、トランザクション分離レベルについて紹介します。トランザクションを開始するには、BEGINまたはSTART TRANSACTIONを使用し、COMMITでトランザクションをコミットし、ROLLBACKでトランザクションをロールバックします。トランザクション分離レベルはREAD COMMITTEDとREPEATABLE READをサポートします。
 ---
 
 # トランザクション概要 {#transaction-overview}

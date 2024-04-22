@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Serverless Driver Prisma Tutorial
-summary: Learn how to use TiDB Cloud serverless driver with Prisma ORM.
+summary: TiDB Cloudは、Prismaアダプターを提供し、サーバーレスドライバーを使用してPrismaクライアントをHTTPS経由で利用できるようにします。このチュートリアルでは、Node.js環境でPrismaアダプターを使用する方法について説明します。必要なものはNode.jsとTiDBサーバーレスクラスターです。プロジェクトを作成し、環境を設定し、スキーマを定義し、CRUD操作を実行します。エッジ環境でのPrismaアダプターの使用についても言及されています。
 ---
 
 # TiDB CloudサーバーレスDriverPrisma チュートリアル {#tidb-cloud-serverless-driver-prisma-tutorial}

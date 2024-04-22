@@ -1,6 +1,6 @@
 ---
 title: Performance Tuning Overview
-summary: This document introduces the basic concepts of performance tuning, such as user response time, throughput, and database time, and also provides a general process for performance tuning.
+summary: このドキュメントは、TiDBのパフォーマンスチューニングの概要を紹介しています。ユーザーの応答時間とデータベース時間の基本概念、それらの関係、およびパフォーマンスチューニングプロセスについて説明しています。パフォーマンスチューニングのステップには、調整目標の定義、ベースラインの確立、ボトルネックの特定、ソリューションの提案と評価、実装、結果の評価が含まれます。
 ---
 
 # TiDB性能チューニングの概要 {#tidb-performance-tuning-overview}

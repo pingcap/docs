@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB Dedicated via VPC Peering
-summary: Learn how to connect to TiDB Dedicated via VPC peering.
+summary: VPC ピアリングを使用してTiDB Cloudに接続するためには、TiDB CloudでVPC ピアリングをセットアップする必要があります。VPC ピアリング接続は、プライベート IP アドレスを使用してVPC間のトラフィックをルーティングできるようにする2つのVPC間のネットワーク接続です。VPC ピアリングの設定はクラウドプロバイダーによって異なります。アプリケーションをTiDB Cloudに安全かつプライベートに接続するために、VPC ピアリング接続経由でプライベートエンドポイントを使用することをお勧めします。
 ---
 
 # VPC ピアリング経由で TiDB 専用に接続する {#connect-to-tidb-dedicated-via-vpc-peering}

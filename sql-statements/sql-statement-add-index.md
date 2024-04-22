@@ -1,6 +1,6 @@
 ---
 title: ADD INDEX | TiDB SQL Statement Reference
-summary: An overview of the usage of ADD INDEX for the TiDB database.
+summary: ALTER TABLE.. ADD INDEXステートメントは、既存のテーブルにインデックスを追加します。この操作はTiDBでオンラインで行われ、テーブルへの読み取りも書き込みもブロックされません。DDLステートメントがクラスター内で実行されているときは、TiDBクラスターをアップグレードしないでください。TiDBをv7.1.0から以降のバージョンにアップグレードする場合は、前述の制限を無視できます。
 ---
 
 # インデックスの追加 {#add-index}

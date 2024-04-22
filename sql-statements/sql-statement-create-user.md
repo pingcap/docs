@@ -1,6 +1,6 @@
 ---
 title: CREATE USER | TiDB SQL Statement Reference
-summary: An overview of the usage of CREATE USER for the TiDB database.
+summary: 新しいユーザーを作成するためのステートメントです。パスワードを指定してユーザーを作成し、特定のホストからのみ接続可能なユーザーを作成することができます。さらに、異なる権限を持つ2人のユーザーを作成することも可能です。MySQLの互換性に関する注意もあります。
 ---
 
 # ユーザーを作成 {#create-user}

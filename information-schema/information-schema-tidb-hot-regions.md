@@ -1,6 +1,6 @@
 ---
 title: TIDB_HOT_REGIONS
-summary: Learn the `TIDB_HOT_REGIONS` information_schema table.
+summary: TIDB_HOT_REGIONSテーブルは、現在のホットなリージョンに関する情報を提供します。履歴ホットリージョンについては、TIDB_HOT_REGIONS_HISTORYを参照してください。このテーブルはTiDBセルフホスト型にのみ適用され、TiDB Cloudでは利用できません。テーブルの列の説明は次のとおりです。TABLE_ID、INDEX_ID、DB_NAME、TABLE_NAME、INDEX_NAME、REGION_ID、TYPE、MAX_HOT_DEGREE、REGION_COUNT、FLOW_BYTES。
 ---
 
 # TIDB_HOT_REGIONS {#tidb-hot-regions}

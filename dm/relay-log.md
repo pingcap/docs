@@ -1,6 +1,6 @@
 ---
 title: Data Migration Relay Log
-summary: Learn the directory structure, initial migration rules and data purge of DM relay logs.
+summary: データ移行リレーログは、データベースの変更を説明するイベントを含む番号付きファイルのセットと、リレーログファイルの名前を含むインデックスファイルで構成されます。リレーログが有効になると、DMワーカーは自動的にbinlogをローカル構成ディレクトリに移行します。リレーログを有効にすると、上流データベースへの負担が軽減されます。リレーログを有効にすることが推奨されますが、遅延の影響を受けるシナリオではお勧めできません。
 ---
 
 # データ移行リレーログ {#data-migration-relay-log}

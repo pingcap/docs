@@ -1,6 +1,6 @@
 ---
 title: Response and HTTP Status Codes of Data Service
-summary: This document describes the response and HTTP status codes of Data Service in TiDB Cloud.
+summary: データサービスのAPIエンドポイントを呼び出すと、Data ServiceはHTTP応答を返します。応答には"type"と"data"フィールドが含まれ、"data"には"columns"、"rows"、"result"が含まれます。HTTPステータスコードは200、400、401、404、405、408、429、500があります。それぞれのステータスコードに対応するメッセージが含まれます。
 ---
 
 # データサービスのレスポンスコードとHTTPステータスコード {#response-and-http-status-codes-of-data-service}

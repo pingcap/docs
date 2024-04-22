@@ -1,6 +1,6 @@
 ---
 title: Optimistic Transactions and Pessimistic Transactions
-summary: Learn about optimistic and pessimistic transactions in TiDB.
+summary: 楽観的トランザクションは、同時に複数のユーザーが同じ書籍を購入する際に、在庫が不足する可能性があります。例えば、ボブが7冊の本を購入し、アリスが4冊の本を購入した場合、在庫がなくなる可能性があります。このような場合、アプリケーション側で再試行が必要となります。
 ---
 
 # 楽観的なトランザクションと悲観的なトランザクション {#optimistic-transactions-and-pessimistic-transactions}

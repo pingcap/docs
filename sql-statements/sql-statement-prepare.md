@@ -1,6 +1,6 @@
 ---
 title: PREPARE | TiDB SQL Statement Reference
-summary: An overview of the usage of PREPARE for the TiDB database.
+summary: PREPAREステートメントは、サーバー側のプリペアド ステートメントへのSQLインターフェイスを提供します。MySQLの互換性があります。EXECUTEステートメントを使用してプリペアド ステートメントを実行し、DEALLOCATEステートメントを使用して解放します。
 ---
 
 # 準備する {#prepare}

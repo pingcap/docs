@@ -1,6 +1,6 @@
 ---
 title: TiDB Lightning Web Interface
-summary: Control TiDB Lightning through the web interface.
+summary: TiDB Lightningは、Webページを提供し、サーバーモードを有効にするための方法を提供します。サーバーモードでは、タスクを送信してデータをインポートできます。また、タスクの進行状況や管理も可能です。
 ---
 
 # TiDB LightningWeb インターフェイス {#tidb-lightning-web-interface}

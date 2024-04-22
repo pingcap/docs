@@ -1,6 +1,6 @@
 ---
 title: Manage Table Schemas of Tables to Be Migrated Using TiDB Data Migration
-summary: Learn how to manage the schema of the table to be migrated in DM.
+summary: このドキュメントは、DMを使用してテーブルのスキーマを管理する方法について説明しています。増分レプリケーションを実行する場合、DMは内部テーブルスキーマを維持し、特別な場合や不一致に対処するためのコマンドを提供しています。テーブルスキーマは、完全なデータ移行や増分移行の際に取得され、更新されます。また、テーブルスキーマを取得、変更、削除するためのコマンドも提供されています。
 ---
 
 # TiDB データ移行を使用して移行するテーブルのテーブル スキーマを管理する {#manage-table-schemas-of-tables-to-be-migrated-using-tidb-data-migration}

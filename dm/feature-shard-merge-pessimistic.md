@@ -1,6 +1,6 @@
 ---
 title: Merge and Migrate Data from Sharded Tables in the Pessimistic Mode
-summary: Learn how DM merges and migrates data from sharded tables in the pessimistic mode.
+summary: このドキュメントは、悲観的モードでのシャードテーブルからのデータのマージと移行について説明しています。DMを使用すると、シャーディングテーブルのデータを1つのテーブルにマージおよび移行できます。移行には制限がありますが、DDLステートメントの移行を調整するためにDMが使用されます。
 ---
 
 # 悲観的モードでのシャードテーブルからのデータのマージと移行 {#merge-and-migrate-data-from-sharded-tables-in-the-pessimistic-mode}

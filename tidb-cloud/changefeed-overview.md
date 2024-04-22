@@ -1,6 +1,6 @@
 ---
 title: Changefeed
-summary: TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services.
+summary: TiDB Cloudのチェンジフィードは、データをストリーミングするための機能です。現在、TiDB CloudはApache Kafka、MySQL、TiDB Cloud、およびクラウドstorageへのストリーミングデータをサポートしています。チェンジフィード機能を使用するには、TiDB専用クラスターのバージョンがv6.4.0以降であることを確認してください。また、TiDB Cloudクラスターごとに最大5つの変更フィードのみが許可されます。さらに、チェンジフィード機能はTiDBサーバーレスクラスターの場合は使用できません。
 ---
 
 # チェンジフィード {#changefeed}

@@ -1,6 +1,6 @@
 ---
 title: High Reliability FAQs
-summary: Learn about the FAQs related to high reliability of TiDB.
+summary: TiDBはデータ暗号化をサポートし、TLSを有効にすることでデータを暗号化します。また、サーバーのバージョン文字列を変更することも可能です。認証プロトコルとしてSASLをサポートし、ユーザーのパスワードと権限を変更する際にはALTER USERを使用します。
 ---
 
 # 高信頼性に関するよくある質問 {#high-reliability-faqs}

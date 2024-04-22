@@ -1,6 +1,6 @@
 ---
 title: CHECK_CONSTRAINTS
-summary: Learn the `CHECK_CONSTRAINTS` INFORMATION_SCHEMA table.
+summary: `CHECK_CONSTRAINTS`表には、`CHECK`制約の表に関する情報が記載されています。`CONSTRAINT_CATALOG`は常に`def`で、`CONSTRAINT_SCHEMA`は制約のスキーマを示し、`CONSTRAINT_NAME`は制約の名前を示します。`CHECK_CLAUSE`はチェック制約の句を示します。`CREATE TABLE`ステートメントを使用して`CHECK`制約を追加することができます。
 ---
 
 # CHECK_CONSTRAINTS {#check-constraints}

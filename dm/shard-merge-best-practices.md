@@ -1,6 +1,6 @@
 ---
 title: Best Practices of Data Migration in the Shard Merge Scenario
-summary: Learn the best practices of data migration in the shard merge scenario.
+summary: このドキュメントは、TiDBデータ移行（DM）の機能と制限について説明し、シャード結合シナリオにおけるデータ移行のベストプラクティスを提供しています。シャーディンググループを個別のデータ移行タスクとしてマージおよび移行することをお勧めし、シャーディングDDLロックを手動で処理する方法について説明しています。また、主キーや一意のインデックス間の競合を処理する方法や、上流のRDSにシャードテーブルが含まれる場合の特別な処理についても触れています。速度制限と交通流制御についても言及されています。
 ---
 
 # シャード結合シナリオにおけるデータ移行のベスト プラクティス {#best-practices-of-data-migration-in-the-shard-merge-scenario}

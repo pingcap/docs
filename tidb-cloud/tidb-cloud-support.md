@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Support
-summary: Learn how to contact the support team of TiDB Cloud.
+summary: TiDB Cloudコンソールの右下隅にあるアイコンには、TiDB Cloudのすべてのヘルプとサポート情報が統合されています。PoC、デモ、または無料トライアルクレジットをリクエストするには、TiDB Cloudコンソールの右下隅のアイコンをクリックし、[Contact Sales]をクリックします。サポートを受けるには、クラスター、プロジェクト、組織のサポートを受けることができます。リクエストを受信後、サポートチームが電子メールでご連絡します。
 ---
 
 # TiDB Cloudのサポート {#tidb-cloud-support}

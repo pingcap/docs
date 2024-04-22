@@ -1,6 +1,6 @@
 ---
 title: Filter DML Events Using SQL Expressions
-summary: Learn how to filter DML events using SQL expressions.
+summary: このドキュメントでは、DMを使用して増分データレプリケーションを実行する際に、SQL式を使用してbinlogイベントをフィルタリングする方法を紹介します。増分データレプリケーションを実行する場合、Binlogイベントフィルターを使用して特定の種類のbinlogイベントをフィルターできます。また、DMはv2.0.5以降、binlog value filterを使用してデータをフィルタリングすることをサポートしています。SQL式は1つの列または複数の列で使用でき、TiDBでサポートされているSQL関数を使用することもできます。
 ---
 
 # SQL式を使用したDMLイベントのフィルタリング {#filter-dml-events-using-sql-expressions}

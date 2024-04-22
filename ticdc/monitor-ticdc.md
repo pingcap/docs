@@ -1,6 +1,6 @@
 ---
 title: TiCDC Monitoring Metrics Details
-summary: Learn some key metrics displayed on the Grafana TiCDC dashboard.
+summary: TiUPを使用してTiDBクラスターをデプロイすると、TiCDCのサブダッシュボードが表示されます。このドキュメントでは、TiCDCの主要な指標について詳しく説明します。指標には、サーバ、チェンジフィード、イベント、TiKVが含まれます。それぞれのパネルには、さまざまなメトリックが表示されます。
 ---
 
 # TiCDC モニタリングメトリクスの詳細 {#ticdc-monitoring-metrics-details}

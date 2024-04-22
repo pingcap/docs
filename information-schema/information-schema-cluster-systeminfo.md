@@ -1,6 +1,6 @@
 ---
 title: CLUSTER_SYSTEMINFO
-summary: Learn the `CLUSTER_SYSTEMINFO` kernel parameter table.
+summary: CLUSTER_SYSTEMINFOカーネルパラメータテーブルを使用して、クラスタ内のすべてのサーバーのカーネル構成情報を照会できます。現在、sysctlのシステム情報を取得できます。このテーブルはTiDBセルフホスト型にのみ適用され、TiDB Cloudでは利用できません。フィールドにはTYPE、INSTANCE、SYSTEM_TYPE、SYSTEM_NAME、NAME、VALUEがあります。次の例は、CLUSTER_SYSTEMINFOシステム情報テーブルを使用してクラスター内のすべてのサーバーのカーネルバージョンをクエリする方法を示しています。
 ---
 
 # CLUSTER_SYSTEMINFO {#cluster-systeminfo}

@@ -1,6 +1,6 @@
 ---
 title: TiDB Backup & Restore Overview
-summary: TiDB Backup & Restore (BR) ensures high availability of clusters and data safety. It supports disaster recovery with a short RPO, handles misoperations, and provides history data auditing. It is recommended to perform backup operations during off-peak hours and store backup data to compatible storage systems. BR supports full backup and log backup, as well as restoring data to any point in time. It is important to use BR of the same major version as the TiDB cluster for backup and restoration.
+summary: TiDBは、Raftプロトコルと合理的な導入トポロジーに基づいて、クラスターの高可用性を実現します。データの安全性を確保するために、バックアップ &amp; リストア (BR) 機能を提供します。バックアップは災害復旧 (DR) システムにデータをバックアップし、誤操作に備えます。また、クローンを作成することで、トラブルシューティングやパフォーマンス チューニングに便利です。バックアップデータはAmazon S3、GCS、またはAzure Blob Storageと互換性のあるstorageシステムに保存することをお勧めします。
 ---
 
 # TiDB のバックアップと復元の概要 {#tidb-backup-x26-restore-overview}

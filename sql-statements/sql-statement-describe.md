@@ -1,6 +1,6 @@
 ---
 title: DESCRIBE | TiDB SQL Statement Reference
-summary: An overview of the usage of DESCRIBE for the TiDB database.
+summary: 説明するは、MySQLとの互換性のために含まれている`EXPLAIN`のエイリアスです。
 ---
 
 # 説明する {#describe}

@@ -1,6 +1,6 @@
 ---
 title: TiDB Sysbench Performance Test Report -- v4.0 vs. v3.0
-summary: Compare the Sysbench performance of TiDB 4.0 and TiDB 3.0.
+summary: TiDB 4.0 と TiDB 3.0 の Sysbench パフォーマンスを比較するテストの結果は以下の通りです。ポイント選択パフォーマンスは14%向上し、非インデックス更新パフォーマンスは15%向上しました。また、インデックス更新パフォーマンスは17%向上し、読み取り/書き込みパフォーマンスは31%向上しました。
 ---
 
 # TiDB Sysbench パフォーマンス テスト レポート -- v4.0 と v3.0 {#tidb-sysbench-performance-test-report-v4-0-vs-v3-0}

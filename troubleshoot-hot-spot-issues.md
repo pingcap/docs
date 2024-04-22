@@ -1,6 +1,6 @@
 ---
 title: Troubleshoot Hotspot Issues
-summary: Learn how to locate and resolve read or write hotspot issues in TiDB.
+summary: TiDBは、ホットスポットのトラブルシューティング、解決、回避のためのソリューションを提供します。負荷ホットスポットのバランスをとることで、全体的なパフォーマンスを向上させることができます。また、ホットスポットの問題を特定するための方法や、ホットスポットを処理するための機能も提供されています。
 ---
 
 # ホットスポットの問題のトラブルシューティング {#troubleshoot-hotspot-issues}

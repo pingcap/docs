@@ -1,6 +1,6 @@
 ---
 title: Performance Tuning Practices for OLTP Scenarios
-summary: This document describes how to analyze and tune performance for OLTP workloads.
+summary: TiDBは、パフォーマンスチューニングのための包括的な機能を提供します。異なるシナリオでの実行プランキャッシュや小さなテーブルキャッシュの使用により、クエリ時間が短縮され、QPSが向上します。TiDBダッシュボードを使用して、データベースのパフォーマンスを効率的に分析し、調整できます。
 ---
 
 # OLTP シナリオの性能チューニングの実践 {#performance-tuning-practices-for-oltp-scenarios}

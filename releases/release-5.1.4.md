@@ -1,6 +1,6 @@
 ---
 title: TiDB 5.1.4 Release Notes
-summary: "TiDB 5.1.4 Release Notes: Compatibility changes include default value changes for system variables. Improvements in partition pruning, memory usage tracking, and speed of inserting SST files. Bug fixes address memory leaks, configuration issues, and incorrect query results. Tools like TiCDC and TiFlash also receive various fixes and improvements."
+summary: TiDB 5.1.4は2022年2月22日にリリースされました。このバージョンでは、システム変数`tidb_analyze_version`のデフォルト値が`2`から`1`に変更され、TiKVのTTL機能がRawKVモードのみをサポートするようになりました。さらに、TiDBやTiKV、PD、TiFlash、TiCDCなどの改善点やバグの修正が含まれています。
 ---
 
 # TiDB 5.1.4 リリースノート {#tidb-5-1-4-release-notes}

@@ -1,6 +1,6 @@
 ---
 title: Transactions
-summary: Learn transactions in TiDB.
+summary: TiDBは、悲観的または楽観的トランザクションモードをサポートし、トランザクション関連のステートメント、分離レベル、制約の遅延チェック、トランザクションサイズについて紹介します。共通変数には、autocommit、tidb_disable_txn_auto_retry、tidb_retry_limit、tidb_txn_modeが含まれます。因果的一貫性のあるトランザクションは、非同期コミット機能と1フェーズコミット機能が有効になっている場合にのみ有効になります。
 ---
 
 # 取引 {#transactions}

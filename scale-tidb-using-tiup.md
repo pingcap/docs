@@ -1,6 +1,6 @@
 ---
 title: Scale a TiDB Cluster Using TiUP
-summary: Learn how to scale the TiDB cluster using TiUP.
+summary: TiUPを使用してTiDBクラスターをスケールする方法について説明しました。TiUPを使用してTiDB、TiKV、PD、TiCDC、またはTiFlashクラスターをスケーリングする手順を示しました。スケールアウトやスケールインの手順も説明しました。
 ---
 
 # TiUPを使用して TiDBクラスタをスケールする {#scale-a-tidb-cluster-using-tiup}

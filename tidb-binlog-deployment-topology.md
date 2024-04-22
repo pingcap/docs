@@ -1,6 +1,6 @@
 ---
 title: TiDB Binlog Deployment Topology
-summary: Learn the deployment topology of TiDB Binlog based on the minimal TiDB topology.
+summary: TiDBBinlogは、増分データをレプリケートするために使用されるコンポーネントであり、ほぼリアルタイムのバックアップとレプリケーションを提供します。トポロジ情報には、TiDB、PD、TiKV、Pump、Drainerの構成が含まれており、それぞれの役割とIPアドレスが示されています。さらに、トポロジテンプレートと主要パラメータについても説明されています。デプロイメントディレクトリを相対パスとして構成すると、クラスターはユーザーのホームディレクトリにデプロイされます。
 ---
 
 # TiDBBinlog展開トポロジ {#tidb-binlog-deployment-topology}

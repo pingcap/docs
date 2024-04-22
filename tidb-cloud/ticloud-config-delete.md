@@ -1,6 +1,6 @@
 ---
 title: ticloud config delete
-summary: The reference of `ticloud config delete`.
+summary: ticloud 構成の削除ユーザープロフィールを削除します。プロファイルを削除する際には、--forceフラグを使用して確認なしで削除することができます。また、-P、--プロファイル文字列フラグを使用してアクティブなユーザープロフィールを指定することができます。TiDB Cloud CLIに関する質問や提案がある場合は、問題を作成してください。貢献も歓迎します。
 ---
 
 # ticloud 構成の削除 {#ticloud-config-delete}

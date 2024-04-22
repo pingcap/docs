@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Cloud with Cloudflare
-summary: Learn how deploy Cloudflare Workers with TiDB Cloud.
+summary: TiDB CloudとCloudflare Workersを統合するための手順を以下に示す。Cloudflare WorkersはHTTPリクエストやデータベースへの変更などの特定のイベントに応答してコードを実行できるプラットフォームであり、TiDB CloudとPrisma Data Proxyを使用してCloudflare Workersをデプロイする方法を段階的に説明する。これにより、低レイテンシのパフォーマンスを必要とするアプリケーションや、迅速に拡張する必要があるアプリケーションに特に役立つ。
 ---
 
 # TiDB Cloudと Cloudflare ワーカーを統合する {#integrate-tidb-cloud-with-cloudflare-workers}

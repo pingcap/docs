@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.9 Release Notes
-summary: TiDB 3.0.9 was released on January 14, 2020. It includes fixes for known issues and new features. Some improvements were made to Executor, Server, DDL, Planner, TiKV, PD, Tools, and TiDB Ansible. Notable changes include support for system variables, monitoring metrics, and optimizations for transaction execution latency. Additionally, support for using backlash in the location label name and automatically creating directories for TiDB Lightning deployment was added.
+summary: TiDB 3.0.9は2020年1月14日にリリースされました。このバージョンにはいくつかの既知の問題がありますが、新しいバージョンを使用することがお勧めされています。TiDBでは、集計関数やシステム変数のサポートが追加され、SQLクエリの実行中にpanicが発生した場合にSQL情報をログに出力します。また、TiKVでは構成変更の高速化やトランザクションの監視メトリクスの追加が行われています。PDでは位置ラベル名のサポートやラベルカウンターの修正が行われています。TiDBBinlogやTiDB Ansibleにもさまざまな改善が加えられています。
 ---
 
 # TiDB 3.0.9 リリースノート {#tidb-3-0-9-release-notes}

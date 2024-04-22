@@ -1,6 +1,6 @@
 ---
 title: User-Defined Variables
-summary: Learn how to use user-defined variables.
+summary: このドキュメントでは、TiDBのユーザー定義変数について説明します。ユーザー定義変数はセッション固有であり、`SET`ステートメントを使用して設定し、`SELECT`ステートメントを使用して読み取ります。16進リテラルやバイナリリテラルを使用する場合は、バイナリ文字列として扱われます。MySQLとTiDBでサポートされる構文はほぼ同じです。
 ---
 
 # ユーザー定義変数 {#user-defined-variables}

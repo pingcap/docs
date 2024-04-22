@@ -1,6 +1,6 @@
 ---
 title: Optimizer Fix Controls
-summary: Learn about the Optimizer Fix Controls feature and how to use `tidb_opt_fix_control` to control the TiDB optimizer in a more fine-grained way.
+summary: TiDBは、製品の進化に伴いオプティマイザーの動作が変化し、予期しない結果が生じる可能性があるため、オプティマイザー修正コントロール機能を提供します。修正グループの値を設定することで、動作を制御できます。各修正は特定の目的のために使用される制御項目であり、動作変更の技術的な詳細を含む番号で示されます。修正はONまたはOFFの値を持ち、それぞれの修正に対して異なる影響を与えます。
 ---
 
 # オプティマイザー修正コントロール {#optimizer-fix-controls}

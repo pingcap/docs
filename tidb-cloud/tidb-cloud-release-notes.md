@@ -1,7 +1,7 @@
 ---
 title: TiDB Cloud Release Notes in 2024
-summary: Learn about the release notes of TiDB Cloud in 2024.
 aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
+summary: TiDB Cloudの2024年リリースノートには。
 ---
 
 # 2024 年のTiDB Cloudリリース ノート {#tidb-cloud-release-notes-in-2024}

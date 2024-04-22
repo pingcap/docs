@@ -1,6 +1,6 @@
 ---
 title: Upgrade TiDB Binlog
-summary: Learn how to upgrade TiDB Binlog to the latest cluster version.
+summary: TiDB Binlogを手動でデプロイした場合、PumpとDrainerのアップグレード手順に従ってください。また、TiDB BinlogをKafka/ローカルバージョンからクラスターバージョンにアップグレードする際は、新しいバージョンのPumpをデプロイし、TiDBクラスターサービスを停止してからアップグレードプロセスを実行してください。
 ---
 
 # TiDBBinlogをアップグレードする {#upgrade-tidb-binlog}

@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Introduction
-summary: TiDB Dashboard is a Web UI for monitoring, diagnosing, and managing the TiDB cluster. It shows overall running status, component and host status, traffic distribution, SQL statement execution information, slow queries, cluster diagnostics, log search, resource control, and profiling data collection.
+summary: TiDB ダッシュボードは、TiDB クラスターを監視、診断、管理するための Web UI であり、v4.0 以降で利用可能です。PDコンポーネントに組み込まれており、独立した展開は必要ありません。TiDB ダッシュボードは GitHub でオープンソース化されています。主な機能は、クラスターの実行ステータス表示、コンポーネントとホストの実行ステータス表示、トラフィックの分布と傾向表示、SQL文の実行情報一覧表示、遅いクエリの詳細な実行情報表示、一般的なクラスターの問題を診断し、レポートを生成する、すべてのコンポーネントのログをクエリする、クラスター容量の見積もり、プロファイリング データを収集する。
 ---
 
 # TiDB ダッシュボードの概要 {#tidb-dashboard-introduction}

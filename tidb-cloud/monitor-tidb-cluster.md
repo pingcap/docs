@@ -1,6 +1,6 @@
 ---
 title: Monitor a TiDB Cluster
-summary: Learn how to monitor your TiDB cluster.
+summary: TiDB CloudでTiDBクラスターを監視する方法について説明します。クラスタのステータスやノードのステータスはクラスターページで確認できます。また、クラスターの概要ページや監視ページからメトリックを表示することができます。これにより、クラスターのパフォーマンスの問題を特定し、要件を満たしているかどうかを判断できます。
 ---
 
 # TiDBクラスタを監視する {#monitor-a-tidb-cluster}

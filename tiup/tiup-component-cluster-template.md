@@ -1,5 +1,6 @@
 ---
 title: tiup cluster template
+summary: TiUPには、クラスターをデプロイする前にトポロジファイルを準備する必要があります。 `tiup cluster template`コマンドを使用して、組み込みテンプレートのコンテンツを出力できます。オプションに従って、詳細なトポロジテンプレートや複数のデータセンターのトポロジテンプレートを出力することができます。
 ---
 
 # tiup cluster template {#tiup-cluster-template}

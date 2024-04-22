@@ -1,6 +1,6 @@
 ---
 title: IMPORT INTO
-summary: An overview of the usage of IMPORT INTO in TiDB.
+summary: IMPORT INTOステートメントは、TiDB Lightningの物理インポートモードを介して、CSV、SQL、PARQUETなどのデータをTiDBの空のテーブルにインポートするために使用されます。TiDBセルフホストの場合、Amazon S3、GCS、およびTiDBローカルstorageに保存されているファイルからのデータのインポートをサポートします。制限事項もあります。
 ---
 
 # にインポート {#import-into}

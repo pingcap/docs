@@ -1,6 +1,6 @@
 ---
 title: Share TiDB Dashboard Sessions
-summary: TiDB Dashboard allows users to share their current session with others, eliminating the need for a user password. The inviter can generate an authorization code with specific sharing settings and provide it to the invitee. The invitee can then use the authorization code to sign in without a password.
+summary: TiDB ダッシュボードのセッションを共有すると、他のユーザーがパスワードを入力せずにアクセスして操作できます。招待者は設定ページから共有セッションを調整し、認証コードを生成してユーザーに提供します。招待者は代替認証を使用して認証コードを入力し、TiDB ダッシュボードにアクセスします。
 ---
 
 # TiDB ダッシュボード セッションを共有する {#share-tidb-dashboard-sessions}

@@ -1,6 +1,6 @@
 ---
 title: TiCDC Alert Rules
-summary: Learn about TiCDC alert rules and how to handle the alerts.
+summary: この文書は、TiCDCのアラートルールとそれに対応する解決策について説明しています。重要なアラートとしては、レプリケーションタスクの遅延やエラーが挙げられます。警告アラートでは、複数の所有者やデータ書き込みの遅延などが通知されます。これらのアラートに対処するためには、TiCDCやTiKVのログを収集し、根本原因を特定する必要があります。
 ---
 
 # TiCDC アラート ルール {#ticdc-alert-rules}

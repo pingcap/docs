@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud HTAP Quick Start
-summary: Learn how to get started with HTAP in TiDB Cloud.
+summary: TiDB CloudHTAPは、トランザクション処理用に設計された行ベースのstorageエンジンTiKVと、分析処理用に設計されたカラム型storageTiFlashで構成されます。このチュートリアルでは、TiDB CloudのHTAP機能を体験する方法が説明されています。具体的には、テーブルをTiFlashにレプリケートする方法、TiFlashでクエリを実行する方法、およびパフォーマンスの向上を体験する方法が含まれます。また、TiKVとTiFlashの実行統計を比較する方法も説明されています。
 ---
 
 # TiDB CloudHTAP クイック スタート {#tidb-cloud-htap-quick-start}

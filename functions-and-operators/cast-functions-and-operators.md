@@ -1,6 +1,6 @@
 ---
 title: Cast Functions and Operators
-summary: Learn about the cast functions and operators.
+summary: TiDBは、MySQL 5.7で利用可能なキャスト関数と演算子をサポートします。キャスト関数と演算子を使用すると、データ型を別のデータ型に変換できます。キャスト関数と演算子のリストには、BINARY、CAST()、CONVERT()が含まれます。ただし、TiDBとMySQLでは一貫性のない結果が表示される場合があります。MySQLは科学表記法を表示する場合がありますが、TiDBは常に完全な数値を表示します。
 ---
 
 # キャスト関数と演算子 {#cast-functions-and-operators}

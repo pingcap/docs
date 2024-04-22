@@ -1,6 +1,6 @@
 ---
 title: EXPLAIN Statements Using Views
-summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
+summary: ビューを使用したEXPLAINステートメントは、ビューが参照するテーブルとインデックスを表示します。ビューは仮想テーブルであり、データを格納しないため、ビューの定義とステートメントの残りの部分はSQLの最適化中にマージされます。ビューの述語はベーステーブルにプッシュダウンされ、TiDBはビュー定義とステートメント自体の両方を満たすインデックスを使用します。
 ---
 
 # ビューを使用したEXPLAINステートメント {#explain-statements-using-views}

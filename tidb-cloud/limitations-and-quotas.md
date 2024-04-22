@@ -1,6 +1,6 @@
 ---
 title: TiDB Dedicated Limitations and Quotas
-summary: Learn the limitations and quotas in TiDB Cloud.
+summary: TiDB Cloudでは、TiDB専用クラスター内のコンポーネント数と一般的な使用制限が制限されています。さらに、組織レベルのクォータがあり、TiDBノード、TiKVノード、TiFlashノードの最大数が制限されています。これらの制限やクォータに問題がある場合は、TiDB Cloudのサポートにお問い合わせください。
 ---
 
 # TiDB 専用の制限と割り当て {#tidb-dedicated-limitations-and-quotas}

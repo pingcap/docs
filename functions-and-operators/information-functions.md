@@ -1,6 +1,6 @@
 ---
 title: Information Functions
-summary: Learn about the information functions.
+summary: TiDBはMySQL 5.7のほとんどの情報関数をサポートしています。TiDBがサポートするMySQL関数には、BENCHMARK、CONNECTION_ID、CURRENT_USER、DATABASE、FOUND_ROWS、LAST_INSERT_ID、ROW_COUNT、SCHEMA、SESSION_USER、SYSTEM_USER、USER、VERSIONが含まれます。また、TiDB固有の関数としてCURRENT_RESOURCE_GROUPがあります。一方、CHARSET、COERCIBILITY、COLLATIONはサポートされていません。
 ---
 
 # 情報機能 {#information-functions}

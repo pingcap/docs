@@ -1,6 +1,6 @@
 ---
 title: TiDB Best Practices on Public Cloud
-summary: Learn about the best practices for deploying TiDB on public cloud.
+summary: パブリッククラウドでのTiDBのベストプラクティスには、Raft Engineの専用ディスクの使用、KV RocksDBのコンパクションI/Oフローの削減、クロスAZトラフィックのコスト最適化、Google Cloudのライブマイグレーションイベントの軽減などがあります。これにより、TiDBのパフォーマンス、コスト効率、信頼性、拡張性が最大化されます。
 ---
 
 # パブリック クラウドにおける TiDB のベスト プラクティス {#tidb-best-practices-on-public-cloud}

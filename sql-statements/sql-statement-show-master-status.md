@@ -1,6 +1,6 @@
 ---
 title: SHOW MASTER STATUS
-summary: An overview of the usage of SHOW MASTER STATUS for the TiDB database.
+summary: `SHOW MASTER STATUS`ステートメントは、クラスター内の最新の TSO を表示します。MySQLの互換性はありますが、実行結果は異なります。TiDB関連の他のステータスも参照できます。
 ---
 
 # マスターステータスを表示 {#show-master-status}

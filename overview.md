@@ -1,6 +1,6 @@
 ---
 title: TiDB Introduction
-summary: Learn about the key features and usage scenarios of TiDB.
+summary: TiDBは、オープンソースの分散SQLデータベースであり、MySQLと互換性があります。主な特徴は、簡単な水平スケーリング、金融グレードの高可用性、リアルタイムHTAP、クラウドネイティブな分散データベース、MySQLプロトコルおよびMySQLエコシステムとの互換性です。ユースケースには、金融業界のシナリオ、大量のデータと高い同時実行性のシナリオ、リアルタイムHTAPシナリオ、データ集約と二次処理のシナリオがあります。 TiDBは、さまざまなユースケースに適しています。
 ---
 
 # TiDB の紹介 {#tidb-introduction}

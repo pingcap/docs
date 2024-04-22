@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with Prisma
-summary: Learn how to connect to TiDB using Prisma. This tutorial gives Node.js sample code snippets that work with TiDB using Prisma.
+summary: このチュートリアルでは、TiDBとPrismaを使用して、環境のセットアップ、TiDBクラスターへの接続、アプリケーションのビルドと実行方法を学ぶことができます。必要なものは、Node.js >= 16.x、Git、実行中のTiDBクラスターです。また、サンプルコードを実行してTiDBに接続する方法も説明されています。データの挿入、クエリデータ、データの更新、データの削除などの操作も学ぶことができます。
 ---
 
 # Prisma を使用して TiDB に接続する {#connect-to-tidb-with-prisma}

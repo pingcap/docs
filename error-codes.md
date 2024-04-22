@@ -1,6 +1,6 @@
 ---
 title: Error Codes and Troubleshooting
-summary: Learn about the error codes and solutions in TiDB.
+summary: TiDBのエラーコードとトラブルシューティングについてのドキュメントです。TiDBはMySQLのエラーコードと互換性があり、固有のエラーコードもあります。エラーが発生した場合は、ログを確認し、PDサーバーとTiDBサーバー間のネットワークを確認してください。詳細については、トラブルシューティングとFAQを参照してください。
 ---
 
 # エラーコードとトラブルシューティング {#error-codes-and-troubleshooting}

@@ -1,6 +1,6 @@
 ---
 title: Migrate Data Using Data Migration
-summary: Use the Data Migration tool to migrate the full data and the incremental data.
+summary: データ移行 (DM) ツールを使用してデータを移行する方法を説明します。ステップ1では、DMクラスターをデプロイします。ステップ2では、クラスター情報を確認します。ステップ3では、データソースを作成します。ステップ4では、データ移行タスクを構成します。ステップ5では、データ移行タスクを開始します。ステップ6では、データ移行タスクを確認します。ステップ7では、データ移行タスクを停止します。ステップ8では、タスクを監視し、ログを確認します。
 ---
 
 # データ移行を使用してデータを移行する {#migrate-data-using-data-migration}

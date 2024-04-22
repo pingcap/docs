@@ -1,6 +1,6 @@
 ---
 title: Read Historical Data Using the `AS OF TIMESTAMP` Clause
-summary: Learn how to read historical data using the `AS OF TIMESTAMP` statement clause.
+summary: このドキュメントは、TiDBで`AS OF TIMESTAMP`句を使用して履歴データを読み取る方法について説明しています。このSQLインターフェイスを使用すると、更新または削除前の履歴データを読み取ることができます。`AS OF TIMESTAMP`句は、`SELECT ... FROM ... AS OF TIMESTAMP`、`START TRANSACTION READ ONLY AS OF TIMESTAMP`、`SET TRANSACTION READ ONLY AS OF TIMESTAMP`の3つの方法で使用できます。日時値を設定するか、時刻関数を使用して正確な時点を指定します。また、`TIDB_BOUNDED_STALENESS()`関数を使用して時間範囲を指定することもできます。TiDBノードおよびPDノードにNTPサービスをデプロイする必要があります。
 ---
 
 # <code>AS OF TIMESTAMP</code>句を使用した履歴データの読み取り {#read-historical-data-using-the-code-as-of-timestamp-code-clause}

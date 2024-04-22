@@ -1,6 +1,6 @@
 ---
 title: SHOW PLACEMENT FOR
-summary: The usage of SHOW PLACEMENT FOR in TiDB.
+summary: SHOW PLACEMENT FORは、配置オプションを要約し、特定のテーブル、データベーススキーマ、またはパーティションの正規形式でそれらを示します。この機能はTiDBサーバーレスクラスターでは使用できません。配置Driver(PD)による配置スケジュールの進行状況を示すScheduling_Stateフィールドを含む結果セットを返します。MySQLの互換性があります。
 ---
 
 # のプレースメントを表示 {#show-placement-for}

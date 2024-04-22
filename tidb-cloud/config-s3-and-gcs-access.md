@@ -1,6 +1,6 @@
 ---
 title: Configure Amazon S3 Access and GCS Access
-summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access and Google Cloud Storage (GCS) access.
+summary: Amazon S3とGCSバケットへのクロスアカウントアクセスを構成する方法について説明します。Amazon S3アクセスを構成するには、AWSアクセスキーまたはロールARNを使用します。GCSアクセスを構成するには、Google CloudサービスアカウントIDとIAMロールを作成します。それぞれの手順を実行してTiDB Cloudがバケット内のソースデータにアクセスできるようにします。
 ---
 
 # Amazon S3 アクセスと GCS アクセスを構成する {#configure-amazon-s3-access-and-gcs-access}

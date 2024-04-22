@@ -1,6 +1,6 @@
 ---
 title: TLS Connections to TiDB Dedicated
-summary: Introduce TLS connections in TiDB Dedicated.
+summary: TiDB Cloudでは、TiDB専用クラスターへのセキュリティ接続にTLS接続を使用します。セキュリティ上の理由から、TLS 1.2およびTLS 1.3のみをサポートし、TLS 1.0およびTLS 1.1はサポートされません。TiDB専用クラスターへの接続では、双方向TLS認証はサポートされていません。
 ---
 
 # TiDB 専用の TLS 接続 {#tls-connections-to-tidb-dedicated}

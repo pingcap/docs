@@ -1,6 +1,6 @@
 ---
 title: FOREIGN KEY Constraints
-summary: An overview of the usage of FOREIGN KEY constraints for the TiDB database.
+summary: TiDB v6.6.0以降、外部キー機能と制約をサポート。ただし、実験的であり、本番環境での使用はお勧めしない。外部キーは子テーブルで定義され、命名規則に従う。制限条件もあり、参照操作にはRESTRICT、CASCADE、SET NULL、SET DEFAULT、NO ACTIONが含まれる。外部キー制約チェックは有効で、実行計画を表示することも可能。MySQLとの互換性には注意が必要。
 ---
 
 # 外部キーの制約 {#foreign-key-constraints}

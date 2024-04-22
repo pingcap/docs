@@ -1,6 +1,6 @@
 ---
 title: Changefeed Log Filters
-summary: Learn how to use the table filter and event filter of TiCDC.
+summary: TiCDCはテーブルとイベントによるデータのフィルタリングをサポートしています。テーブルフィルターは特定のデータベースとテーブルを保持またはフィルターで除外できる機能です。イベントフィルタールールはDMLイベントおよびDDLイベントをフィルターで除外できます。matcherはデータベースとテーブルを指定し、ignore-eventはイベントの種類を無視します。ignore-sqlはDDLステートメントを無視し、ignore-delete-value-exprは削除の条件を無視します。ignore-insert-value-exprは挿入の条件を無視し、ignore-update-old-value-exprは古い値の条件を無視します。ignore-update-new-value-exprは新しい値の条件を無視します。
 ---
 
 # 変更フィードログフィルター {#changefeed-log-filters}

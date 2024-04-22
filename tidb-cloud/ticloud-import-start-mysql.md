@@ -1,6 +1,6 @@
 ---
 title: ticloud import start mysql
-summary: The reference of `ticloud import start mysql`.
+summary: ticloudインポート開始mysqlは、MySQL 互換データベースからTiDBサーバーレスクラスターにテーブルをインポートします。対話モードと非対話モードの両方で使用でき、必要なフラグを手動で入力する必要があります。MySQL 8.0の照合順序がサポートされていない場合は、照合順序を変更するか、ターゲットテーブルを手動で作成する必要があります。質問や提案がある場合は、TiDB Cloud CLIの問題を作成してください。
 ---
 
 # ticloudインポート開始mysql {#ticloud-import-start-mysql}

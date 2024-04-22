@@ -1,6 +1,6 @@
 ---
 title: SHOW PLACEMENT LABELS
-summary: The usage of SHOW PLACEMENT LABELS in TiDB.
+summary: SHOW PLACEMENT LABELSは、配置ルールで使用できるラベルと値を要約するために使用されます。この機能はTiDBサーバーレスクラスターでは使用できません。ステートメントはMySQL構文に対するTiDB拡張機能であり、配置ルールやポリシーの作成とも関連しています。
 ---
 
 # 配置ラベルを表示 {#show-placement-labels}

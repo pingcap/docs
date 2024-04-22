@@ -1,6 +1,6 @@
 ---
 title: ticloud branch connect-info
-summary: The reference of `ticloud branch connect-info`.
+summary: ticloud ブランチ接続情報は、対話モードと非対話モードで使用できます。非対話モードでは、必要なフラグを手動で入力する必要があります。対話モードでは、CLI プロンプトに従って入力するだけです。フラグには、クラスターの ID、ブランチの ID、クライアント、オペレーティング システムなどが含まれます。質問や提案がある場合は、TiDB Cloud CLI の問題を作成してください。
 ---
 
 # ticloud ブランチ接続情報 {#ticloud-branch-connect-info}

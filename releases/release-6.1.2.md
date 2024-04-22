@@ -1,5 +1,6 @@
 ---
 title: TiDB 6.1.2 Release Notes
+summary: TiDB 6.1.2は2022年10月24日にリリースされました。このバージョンでは、TiDB、TiKV、PD、TiFlash、TiDB Lightning、TiCDC、BRの改善点とバグの修正が含まれています。改善点には、テーブルでの配置ルールとTiFlashレプリカの同時設定、Raftstoreのメッセージブロードキャストの回避、TiDB Lightningの堅牢性向上などがあります。バグの修正には、データベースレベルの権限の誤消去、PDノードのダウンによるクエリの失敗、TiFlashの間違った結果修正などが含まれます。
 ---
 
 # TiDB 6.1.2 リリースノート {#tidb-6-1-2-release-notes}

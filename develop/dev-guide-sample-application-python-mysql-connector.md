@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with MySQL Connector/Python
-summary: Learn how to connect to TiDB using MySQL Connector/Python. This tutorial gives Python sample code snippets that work with TiDB using MySQL Connector/Python.
+summary: TiDBはMySQL互換データベースであり、MySQLコネクタ/PythonはPython用の公式MySQLドライバーです。このチュートリアルでは、TiDBとMySQL Connector/Pythonを使用して環境をセットアップし、TiDBクラスターに接続し、アプリケーションをビルドして実行する方法を学びます。また、基本的なCRUD操作のサンプルコードスニペットも提供されています。このチュートリアルはTiDBサーバーレス、専用、およびセルフホストクラスターで動作します。Python 3.8以降とGit、そしてTiDBクラスターが必要です。
 ---
 
 # MySQL コネクタ/Python を使用して TiDB に接続する {#connect-to-tidb-with-mysql-connector-python}

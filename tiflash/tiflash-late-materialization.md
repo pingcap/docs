@@ -1,6 +1,6 @@
 ---
 title: TiFlash Late Materialization
-summary: Describe how to use the TiFlash late materialization feature to accelerate queries in OLAP scenarios.
+summary: TiFlash後期マテリアライゼーションは、OLAPシナリオでクエリを高速化する最適化方法です。`tidb_opt_enable_late_materialization`システム変数を使用して、TiFlash遅延実体化を制御できます。遅延実体化を有効にすると、TiFlashはフィルター条件の一部をTableScanオペレーターにプッシュダウンし、特定のクエリのパフォーマンスを向上させます。`tidb_opt_enable_late_materialization`変数はセッションレベルまたはグローバルレベルで変更できます。セッションで遅延実体化を無効にするには、`SET SESSION tidb_opt_enable_late_materialization=OFF;`を使用します。グローバルレベルで無効にするには、`SET GLOBAL tidb_opt_enable_late_materialization=OFF;`を使用します。
 ---
 
 # TiFlash後期マテリアライゼーション {#tiflash-late-materialization}

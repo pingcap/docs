@@ -1,6 +1,6 @@
 ---
 title: Upgrade and After Upgrade FAQs
-summary: Learn about some FAQs and the solutions during and after upgrading TiDB.
+summary: TiDBのアップグレード時またはアップグレード後のFAQと解決策を紹介します。ローリングアップデートを適用すると、実行中のアプリケーションに影響があります。DDLステートメントが実行中の場合はアップグレードしないでください。バイナリを使用してTiDBをアップグレードすることはお勧めできません。アップグレード後には、文字セットのエラーが発生する可能性があります。UTF-8のチェックをスキップすることもできます。
 ---
 
 # アップグレードおよびアップグレード後のよくある質問 {#upgrade-and-after-upgrade-faqs}

@@ -1,6 +1,6 @@
 ---
 title: Schedule Replicas by Topology Labels
-summary: Learn how to schedule replicas by topology labels.
+summary: TiDB クラスターの高可用性と災害復旧機能を向上させるために、TiKV ノードを物理的に分散させることが重要です。PD スケジューラーはトポロジー情報に従って自動的にスケジューリングを実行し、リージョンの各レプリカを分離し、災害復旧の能力を最大化します。展開中にクラスターのトポロジー情報をPDに報告するためにTiKVとPDを適切に構成する必要があります。TiKVおよびTiFlashのラベルを設定する方法やPDのlocation-labelsを構成する方法についても説明されています。TiUPを使用してクラスターを構成することも推奨されています。PDは現在のトポロジに従ってクラスターの災害復旧を最大化します。
 ---
 
 # トポロジーラベルごとにレプリカをスケジュールする {#schedule-replicas-by-topology-labels}

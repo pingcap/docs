@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.0.7 Release Notes
-summary: TiDB 2.0.7 was released on September 7, 2018, with improvements in system compatibility and stability. New features include the addition of the `PROCESSLIST` table in `information_schema`. Bug fixes address issues with index usage, join output, and query conditions. TiKV now opens the `dynamic-level-bytes` parameter by default to reduce space amplification, and updates approximate size and keys count after region merging.
+summary: TiDB 2.0.7は、システムの互換性と安定性が向上しました。新機能には、`information_schema`に`PROCESSLIST`テーブルが追加され、改善にはSQLステートメントの実行詳細が`SLOW QUERY`ログに出力されるなどがあります。バグ修正も多数行われています。TiKVでは、空のクラスターの`dynamic-level-bytes`パラメーターが開かれ、リージョンの結合後の`approximate size`と`approximate keys count`が更新されます。
 ---
 
 # TiDB 2.0.7 リリースノート {#tidb-2-0-7-release-notes}

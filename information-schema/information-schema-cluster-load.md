@@ -1,6 +1,6 @@
 ---
 title: CLUSTER_LOAD
-summary: Learn the `CLUSTER_LOAD` information_schema table.
+summary: CLUSTER_LOADクラスター負荷テーブルは、TiDBクラスターの各インスタンスが配置されているサーバーの現在の負荷情報を提供します。このテーブルはTiDBセルフホスト型にのみ適用され、TiDB Cloudでは利用できません。フィールドにはTYPE、INSTANCE、DEVICE_TYPE、DEVICE_NAME、NAME、VALUEがあります。例えば、CPUの現在の負荷情報をクエリする方法を示しています。
 ---
 
 # CLUSTER_LOAD {#cluster-load}

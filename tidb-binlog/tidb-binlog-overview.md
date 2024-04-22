@@ -1,6 +1,6 @@
 ---
 title: TiDB Binlog Overview
-summary: Learn overview of the cluster version of TiDB Binlog.
+summary: TiDB Binlogは、TiDBからbinlogデータを収集し、リアルタイムのバックアップとレプリケーションを提供するツールです。主な機能にはデータ複製とリアルタイムのバックアップと復元があります。TiDB BinlogアーキテクチャはPumpとDrainerで構成され、binlogctlはTiDB Binlogの操作ツールです。また、TiDB BinlogはTiDB v5.0で導入された一部の機能と互換性がないため、注意が必要です。
 ---
 
 # TiDBBinlogクラスタの概要 {#tidb-binlog-cluster-overview}

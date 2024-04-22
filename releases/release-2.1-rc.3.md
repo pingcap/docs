@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1 RC3 Release Notes
-summary: TiDB 2.1 RC3 was released on September 29, 2018, with improvements in stability, compatibility, SQL optimizer, and execution engine. The release includes fixes and enhancements for SQL optimizer, execution engine, server, compatibility, expressions, DML, DDL, and PD. TiKV also received performance optimizations, new features, and bug fixes.
+summary: TiDB 2.1 RC3は、安定性、互換性、SQLオプティマイザー、および実行エンジンが向上しています。SQLオプティマイザーは、いくつかの問題を修正し、最適化ルールを強化しました。SQL実行エンジンは、パフォーマンスを最適化し、一部のエグゼキュータでのメモリ割り当てコストを削減しました。PDは新機能を追加し、リージョンAPIで詳細な情報を返します。TiKVはパフォーマンスを最適化し、新機能を追加し、バグを修正しました。
 ---
 
 # TiDB 2.1 RC3 リリースノート {#tidb-2-1-rc3-release-notes}

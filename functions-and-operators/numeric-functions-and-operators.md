@@ -1,6 +1,6 @@
 ---
 title: Numeric Functions and Operators
-summary: Learn about the numeric functions and operators.
+summary: TiDBはMySQL 5.7の数値関数と演算子をサポートします。算術演算子には加算、マイナス、乗算、除算、整数の除算、モジュロ演算子、引数の符号を変更する演算子があります。また、数学関数には指数、平方根、対数、三角関数、絶対値、丸め、ランダムな値を返す関数などがあります。これらの関数と演算子はデータベースの計算や処理に役立ちます。
 ---
 
 # 数値関数と演算子 {#numeric-functions-and-operators}

@@ -1,6 +1,6 @@
 ---
 title: TiDB Lightning FAQs
-summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Lightning.
+summary: TiDB Lightningは、TiDB/TiKV/PDクラスターの最小バージョンをサポートし、複数のスキーマのインポートをサポートします。インポート中にエラーが発生しても他のテーブルに影響はありません。データの整合性を確保するためには、チェックサムを実行します。また、TiDB LightningはDumplingを使用してスキーマをコピーすることも可能です。
 ---
 
 # TiDB Lightningよくある質問 {#tidb-lightning-faqs}

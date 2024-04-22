@@ -1,6 +1,6 @@
 ---
 title: Temporary Tables
-summary: Learn the temporary tables feature in TiDB, and learn how to use temporary tables to store intermediate data of an application, which helps reduce table management overhead and improve performance.
+summary: TiDB v5.3.0 で導入された一時テーブル機能は、中間結果を一時的に保存し、テーブルの作成や削除の必要性を減らします。ユーザーシナリオや一時テーブルの種類、メモリ使用量の制限方法について説明しています。ローカル一時テーブルとグローバル一時テーブルの違いや使用例も示しています。一時テーブルは一時的なデータ保存に便利ですが、一部の TiDB 機能との互換性制限があります。
 ---
 
 # 一時テーブル {#temporary-tables}

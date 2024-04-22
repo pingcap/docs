@@ -1,6 +1,6 @@
 ---
 title: TiKV Control User Guide
-summary: Use TiKV Control to manage a TiKV cluster.
+summary: TiKV Control ( `tikv-ctl` ) は、クラスターの管理に使用される TiKV のコマンド ライン ツールです。インストールディレクトリは以下のとおりです。TiUPを使用してクラスターがデプロイされている場合、 `~/.tiup/components/ctl/{VERSION}/`ディレクトリー内に`tikv-ctl`ディレクトリーが存在します。`tikv-ctl`は`tiup`コマンドにも組み込まれます。次のコマンドを実行して`tikv-ctl`ツールを呼び出します。TiKV Control (tikv-ctl) [FLAGS] [OPTIONS] [SUBCOMMAND]。一般的なオプションとして、`tikv-ctl` 2 つの動作モードを提供します。リモート モードとローカル モードがあります。`tikv-ctl` 2 つの単純なコマンド`--to-hex`および`--to-escaped`があり、これらはキーの形式に単純な変更を加えるために使用されます。
 ---
 
 # TiKV Controlユーザーガイド {#tikv-control-user-guide}

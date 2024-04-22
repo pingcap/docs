@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Monitoring Page
-summary: The TiDB Dashboard Monitoring Page allows users to analyze performance efficiently and identify database bottlenecks. Key metrics include database time, SQL execution time, QPS, connection count, TiDB and TiKV CPU, duration, connection idle duration, parse, compile, and execute duration, TiDB KV request duration, TiKV gRPC duration, PD TSO wait/RPC duration, storage async write duration, store duration, apply duration, append log duration, commit log duration, and apply log duration.
+summary: TiDB v6.1.0 で導入されたパフォーマンス概要ダッシュボードは、データベースのパフォーマンスを効率的に分析し、ボトルネックを特定することができます。モニタリングページにアクセスし、TiDBクラスターのメトリクスを調整し、パフォーマンスの概要に関する主要な指標を表示します。また、TiUPを使用してデプロイされた場合は、Grafanaでパフォーマンス概要ダッシュボードを表示することもできます。
 ---
 
 # TiDB ダッシュボード監視ページ {#tidb-dashboard-monitoring-page}

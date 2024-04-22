@@ -1,6 +1,6 @@
 ---
 title: DM Alert Information
-summary: Introduce the alert information of DM.
+summary: TiUPを使用してDMクラスターをデプロイすると、デフォルトで警報システムがデプロイされます。DMアラートルールと解決策の詳細については、アラートを処理するを参照してください。DMアラート情報と監視メトリクスは両方ともPrometheusに基づいています。両者の関係の詳細については、DM監視メトリクスを参照してください。
 ---
 
 # DMアラート情報 {#dm-alert-information}

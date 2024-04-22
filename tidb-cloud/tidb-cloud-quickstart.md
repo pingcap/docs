@@ -1,7 +1,7 @@
 ---
 title: TiDB Cloud Quick Start
-summary: Sign up quickly to try TiDB Cloud and create your TiDB cluster.
 category: quick start
+summary: TiDB Cloudを試して、TiDBクラスターを作成するためにすぐにサインアップしてください。
 ---
 
 # TiDB Cloudクイック スタート {#tidb-cloud-quick-start}

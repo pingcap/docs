@@ -1,6 +1,6 @@
 ---
 title: Hybrid Deployment Topology
-summary: Learn the hybrid deployment topology of TiDB clusters.
+summary: このドキュメントは、TiKVとTiDBのハイブリッド展開のトポロジと主要なパラメーターについて説明しています。ハイブリッド展開は、十分なメモリを備えた複数のCPUプロセッサを使用するシナリオで通常使用されます。物理マシンのリソース使用率を向上させるために、複数のインスタンスを1台のマシンにデプロイできます。詳細な情報はリンク先を参照してください。
 ---
 
 # ハイブリッド展開トポロジ {#hybrid-deployment-topology}

@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with Hibernate
-summary: Learn how to connect to TiDB using Hibernate. This tutorial gives Java sample code snippets that work with TiDB using Hibernate.
+summary: Hibernate は TiDB に接続するための人気のあるオープンソースJava ORM です。このチュートリアルでは、TiDB クラスターに接続する方法を学ぶことができます。必要なものは、Java開発キット (JDK) 17以降、メイビン 3.8以上、ギット、そしてTiDB クラスターです。サンプルアプリを実行してTiDBに接続する方法を説明し、さらにサンプルコードスニペットを提供しています。Hibernateの詳細な使い方やTiDBアプリケーション開発の最適化プラクティスについて学ぶことができます。
 ---
 
 # Hibernate で TiDB に接続する {#connect-to-tidb-with-hibernate}

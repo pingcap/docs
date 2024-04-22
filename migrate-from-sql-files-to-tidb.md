@@ -1,6 +1,6 @@
 ---
 title: Migrate Data from SQL Files to TiDB
-summary: Learn how to migrate data from SQL files to TiDB.
+summary: TiDB Lightningを使用してMySQL SQLファイルからTiDBにデータを移行する方法について説明します。前提条件として、TiUPを使用してTiDB Lightningをインストールし、ターゲットデータベースに必要な権限を付与します。次に、SQLファイルを準備し、ターゲットテーブルスキーマを定義します。その後、構成ファイルを作成し、データをインポートします。インポートが完了すると、TiDB Lightningは自動的に終了します。
 ---
 
 # SQL ファイルから TiDB へのデータの移行 {#migrate-data-from-sql-files-to-tidb}

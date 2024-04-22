@@ -1,6 +1,6 @@
 ---
 title: TIDB_SERVERS_INFO
-summary: Learn the `TIDB_SERVERS_INFO` INFORMATION_SCHEMA table.
+summary: 表`TIDB_SERVERS_INFO`は、TiDBクラスタ内のTiDBサーバーに関する情報を提供します。このテーブルはTiDBサーバーレスクラスターでは使用できません。フィールドにはDDL_ID、IP、PORT、STATUS_PORT、LEASE、VERSION、GIT_HASH、BINLOG_STATUS、LABELSが含まれます。ビューを作成すると、サーバーの情報が表示されます。
 ---
 
 # TIDB_SERVERS_INFO {#tidb-servers-info}

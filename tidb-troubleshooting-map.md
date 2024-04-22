@@ -1,6 +1,6 @@
 ---
 title: TiDB Troubleshooting Map
-summary: Learn how to troubleshoot common errors in TiDB.
+summary: TiDBの一般的なエラーのトラブルシューティング方法を学びます。
 ---
 
 # TiDB トラブルシューティング マップ {#tidb-troubleshooting-map}

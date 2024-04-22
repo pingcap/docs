@@ -1,6 +1,6 @@
 ---
 title: Continuous Replication from Databases that Use gh-ost or pt-osc
-summary: Learn how to use DM to replicate incremental data from databases that use online DDL tools gh-ost or pt-osc
+summary: 本番シナリオでは、DDL実行中のテーブルロックにより、データベースへの読み取りまたは書き込みがブロックされる可能性があります。オンラインDDLツールを使用してDDLを実行し、影響を最小限に抑えることがよくあります。一般的なDDLツールはgh-ostとpt-oscです。DMを使用してMySQLからTiDBにデータを移行する場合、online-ddlを有効にしてDMとgh-ostまたはpt-oscのコラボレーションを許可できます。
 ---
 
 # gh-ost または pt-osc を使用するデータベースからの連続レプリケーション {#continuous-replication-from-databases-that-use-gh-ost-or-pt-osc}

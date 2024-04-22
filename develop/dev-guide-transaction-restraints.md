@@ -1,6 +1,6 @@
 ---
 title: Transaction Restraints
-summary: Learn about transaction restraints in TiDB.
+summary: TiDBのトランザクション制限についての簡単な紹介。サポートされる分離レベルはRC（Read Committed）とSI（Snapshot Isolation）で、SIはRR（Repeatable Read）分離レベルと同等。SIはファントム読み取りを回避できるが、書き込みスキュー例外を回避できない。また、savepointとネストされたトランザクションのサポートもあり、大規模な取引制限もある。ただし、自動コミットされたSELECT FOR UPDATEステートメントはロックを待機しない。
 ---
 
 # トランザクションの制限 {#transaction-restraints}

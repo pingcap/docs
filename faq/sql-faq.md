@@ -1,6 +1,6 @@
 ---
 title: SQL FAQs
-summary: Learn about the FAQs related to TiDB SQL.
+summary: TiDBは、SQL操作に関連するFAQをまとめたドキュメントです。TiDBは二次キーをサポートし、大きなテーブルでのDDL操作は通常問題になりません。適切なクエリプランを選択するには、コストベースのオプティマイザーを使用します。特定のSQLステートメントの実行を防ぐには、MAX_EXECUTION_TIMEヒントを使用します。TiDBはMySQLと互換性のあるシステム変数をサポートしています。ORDER BYを省略した場合、結果の順序が異なることがあります。TiDBはSELECT FOR UPDATEをサポートし、UTF-8文字列がmemcomparableであることを保証します。トランザクション内のステートメントの最大数はデフォルトで5000です。データを削除した後すぐにスペースを解放しませんが、後から挿入されたデータの自動インクリメントIDが前に挿入されたデータのIDより小さいことがあります。TiDBでsql_modeを変更するには、SESSIONまたはGLOBALベースでシステム変数を変更します。
 ---
 
 # SQL FAQ {#sql-faqs}

@@ -1,6 +1,6 @@
 ---
 title: TiDB Installation Packages
-summary: Learn about TiDB installation packages and the specific components included.
+summary: TiDBのバイナリパッケージは、amd64およびarm64アーキテクチャで利用できます。TiDBは2つのバイナリパッケージを提供します。TiDB-community-serverパッケージには、tidb、tikv、tiflash、pd、ctl、grafana、alertmanager、などが含まれます。TiDB-community-toolkitパッケージには、pd-recover、etcdctl、tidb-lightning、dumpling、cdc、dm、br、dba、PCC、drainerなどが含まれます。それぞれのパッケージは、バージョンやシステムのアーキテクチャによって異なります。オフラインで展開する際には、公式ダウンロードページからバイナリパッケージをダウンロードする必要があります。
 ---
 
 # TiDB インストール パッケージ {#tidb-installation-packages}

@@ -1,5 +1,6 @@
 ---
 title: tiup cluster replay
+summary: tiup cluster replayコマンドを使用すると、クラスター操作の失敗したコマンドを再試行し、正常に実行された手順をスキップできます。再試行するコマンドのaudit-idはtiup cluster auditコマンドで確認できます。操作が失敗した場合、再実行する手順を最初から行う必要がありますが、tiup cluster replayコマンドを使用すると時間を節約できます。
 ---
 
 # tiup cluster replay {#tiup-cluster-replay}

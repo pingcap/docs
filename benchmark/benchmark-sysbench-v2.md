@@ -1,6 +1,6 @@
 ---
 title: TiDB Sysbench Performance Test Report -- v2.0.0 vs. v1.0.0
-summary: TiDB 2.0 GA outperforms TiDB 1.0 GA in `Select` and `Insert` tests, with a 10% increase in `Select` query performance and a slight improvement in `Insert` query performance. However, the OLTP performance of both versions is almost the same.
+summary: TiDB 1.0とTiDB 2.0のパフォーマンスを比較するテストを行いました。テスト結果によると、TiDB 2.0 GAのSelectクエリパフォーマンスは、TiDB 1.0 GAに比べて最大で10%程度向上しています。一方、OLTPテストやInsertテストでは、TiDB 2.0 GAとTiDB 1.0 GAのパフォーマンスはほぼ同じです。
 ---
 
 # TiDB Sysbench パフォーマンス テスト レポート -- v2.0.0 と v1.0.0 {#tidb-sysbench-performance-test-report-v2-0-0-vs-v1-0-0}

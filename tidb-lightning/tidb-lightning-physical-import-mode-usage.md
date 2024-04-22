@@ -1,6 +1,6 @@
 ---
 title: Use Physical Import Mode
-summary: Learn how to use the physical import mode in TiDB Lightning.
+summary: TiDB Lightningの物理インポートモードは、構成ファイルの作成、パフォーマンスのチューニング、ディスククォータの構成などを紹介しています。物理インポートモードには制限があり、競合検出には新しいバージョンと古いバージョンがあります。インポート中のスケジュール一時停止の範囲を制御するためのパラメータも提供されています。ディスククォータの構成を有効にすることで、ディスク容量が不足する場合にエラーを回避できます。
 ---
 
 # 物理インポートモードを使用する {#use-physical-import-mode}

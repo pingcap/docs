@@ -1,6 +1,6 @@
 ---
 title: SHARD_ROW_ID_BITS
-summary: Learn the SHARD_ROW_ID_BITS attribute.
+summary: このドキュメントは、`SHARD_ROW_ID_BITS` table 属性を使用して、暗黙的な`_tidb_rowid`がシャードされた後にシャードのビット数を設定する方法を紹介します。非クラスター化主キーを持つテーブルや主キーがないテーブルの場合、`SHARD_ROW_ID_BITS`を構成することでホット スポットの問題を軽減し、データを複数の異なるリージョンに書き込むことができます。詳細については、[ホットスポットの問題のトラブルシューティング ガイド](/troubleshoot-hot-spot-issues.md#use-shard_row_id_bits-to-process-hotspots)を参照してください。例として、`SHARD_ROW_ID_BITS = 4`を使用したテーブルの作成や変更が示されています。
 ---
 
 # SHARD_ROW_ID_BITS {#shard-row-id-bits}

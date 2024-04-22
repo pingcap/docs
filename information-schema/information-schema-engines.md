@@ -1,6 +1,6 @@
 ---
 title: ENGINES
-summary: Learn the `ENGINES` information_schema table.
+summary: 表ENGINESは、storageエンジンに関する情報を示します。TiDBは常にInnoDBをサポートされる唯一のエンジンとして説明します。ENGINESテーブルの他の列の値も固定値です。ENGINESのテーブルの列の説明は次のとおりです。
 ---
 
 # エンジン {#engines}

@@ -1,6 +1,6 @@
 ---
 title: Understanding Stale Read and safe-ts in TiKV
-summary: Introduce the principles of Stale Read and safe-ts in TiKV and provide troubleshooting tips and examples for diagnosing common issues related to Stale Read.
+summary: TiKVのステイル読み取りとsafe-tsについてのガイド。ステイル読み取りはTiDBのデータ履歴バージョンを読み取るためのメカニズムであり、safe-tsに依存しています。resolved-tsはリージョンリーダーによって管理され、問題の診断方法も紹介されています。
 ---
 
 # TiKV のステイル読み取りとsafe-tsを理解する {#understanding-stale-read-and-safe-ts-in-tikv}

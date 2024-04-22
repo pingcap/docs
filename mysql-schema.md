@@ -1,6 +1,6 @@
 ---
 title: mysql Schema
-summary: Learn about the TiDB system tables.
+summary: TiDBのmysqlスキーマには、ユーザーアカウントと権限に関する情報を含むシステムテーブルが含まれています。また、クラスタステータス、サーバー側のヘルプ、統計、実行計画、GCワーカー、キャッシュされたテーブル、TTL関連、暴走クエリ、メタデータロック、DDLステートメント、TiDB Distributed eXecution Framework (DXF)、リソース制御に関連するシステムテーブルがあります。また、その他のシステムテーブルも含まれています。
 ---
 
 # <code>mysql</code>スキーマ {#code-mysql-code-schema}

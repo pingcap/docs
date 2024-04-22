@@ -1,6 +1,6 @@
 ---
 title: Quickly Deploy a Local TiDB Cluster
-summary: Learn how to quickly deploy a local TiDB cluster using the playground component of TiUP.
+summary: TiDB クラスターを迅速にデプロイするために、TiUPのプレイグラウンドコンポーネントを使用します。このコンポーネントを使うと、ローカルにTiDB、TiKV、PDコンポーネントをインストールし、1つのTiDBクラスターを開始することができます。さらに、プレイグラウンドによって開始されたクラスターにすばやく接続するための`client`コンポーネントも提供されています。また、クラスターの情報を表示したり、クラスターをスケールアウトしたり、スケールインしたりすることも可能です。
 ---
 
 # ローカル TiDBクラスタを迅速にデプロイ {#quickly-deploy-a-local-tidb-cluster}

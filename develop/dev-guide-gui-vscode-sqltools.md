@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with Visual Studio Code
-summary: Learn how to connect to TiDB using Visual Studio Code or GitHub Codespaces.
+summary: このチュートリアルでは、Visual Studio Code を使用して TiDB クラスターに接続する方法を学習できます。必要なものは、Visual Studio Code の最新バージョンと SQLツールMySQL/MariaDB/TiDB拡張機能、そしてTiDBクラスターです。接続方法はTiDB Serverless、TiDB Dedicated、TiDB Self-Hostedの3つのオプションに応じて異なります。詳細な手順は記事内で確認できます。
 ---
 
 # Visual Studio Code を使用して TiDB に接続する {#connect-to-tidb-with-visual-studio-code}

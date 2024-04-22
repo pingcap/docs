@@ -1,6 +1,6 @@
 ---
 title: Select Your Cluster Tier
-summary: Learn how to select your cluster tier on TiDB Cloud.
+summary: クラスター層を選択することで、TiDB CloudではTiDBサーバーレスとTiDB専用の2つのオプションが提供されます。TiDBサーバーレスはフルマネージドのマルチテナントTiDB製品であり、無料枠と従量制課金を提供します。一方、TiDB専用はクロスゾーンの高可用性や水平スケーリングを備えた本番環境向けのオプションです。
 ---
 
 # Cluster Tierを選択してください {#select-your-cluster-tier}

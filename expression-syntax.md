@@ -1,6 +1,6 @@
 ---
 title: Expression Syntax
-summary: Learn about the expression syntax in TiDB.
+summary: 式は、値、演算子、または関数の組み合わせです。TiDBでは、Group by句、Where句、Having句、Join条件、ウィンドウ関数など、`SELECT`ステートメントのさまざまな句で使用されます。また、一部のDDLステートメントでは、テーブル作成時のデフォルト値、列、パーティションルールの設定などの式も使用します。式は識別子、述語、数値、文字列、日付式、関数呼び出し、ウィンドウ関数、ParamMarker、システム変数、ユーザー変数、CASE式などのタイプに分類できます。TiDBパーサーの`parser.y`ルールに基づいた式の構文は次の通りです。
 ---
 
 # 式の構文 {#expression-syntax}

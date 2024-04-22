@@ -1,6 +1,6 @@
 ---
 title: CREATE TABLE LIKE | TiDB SQL Statement Reference
-summary: An overview of the usage of CREATE TABLE LIKE for the TiDB database.
+summary: テーブルを作成するステートメントは、既存のテーブルの定義をコピーします。MySQLの互換性があり、`PRE_SPLIT_REGIONS`属性で定義されたテーブルをコピーする場合、新しいテーブルも同じ属性を継承します。テーブルの作成や表示に関する詳細は、関連するドキュメントを参照してください。
 ---
 
 # 次のようなテーブルを作成します {#create-table-like}

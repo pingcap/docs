@@ -1,6 +1,6 @@
 ---
 title: SQL Statements Page of TiDB Dashboard
-summary: The SQL statements page in TiDB Dashboard shows the execution status of all SQL statements in the cluster. It allows users to analyze long-running SQL statements and provides options to access, filter, display more columns, sort, and change settings. The page also includes a feature to limit the number of stored SQL statements. For more details, visit the TiDB Dashboard documentation.
+summary: TiDB ダッシュボードの SQL ステートメント ページには、クラスター内のすべての SQL ステートメントの実行ステータスが表示されます。このページは、合計または 1 回の実行時間が長い SQL ステートメントを分析するためによく使用されます。同じ SQL ステートメントとして分類される一貫した構造を持つ SQL クエリは、このページで表示されます。また、SQL ステートメントの概要ページでは、表示する SQL 実行の時間範囲を変更したり、さらに多くの列を表示したりすることができます。
 ---
 
 # TiDB ダッシュボードの SQL ステートメント ページ {#sql-statements-page-of-tidb-dashboard}

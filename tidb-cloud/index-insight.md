@@ -1,6 +1,6 @@
 ---
 title: Index Insight (Beta)
-summary: Learn how to use the Index Insight feature in TiDB Cloud and obtain index recommendations for slow queries.
+summary: TiDB CloudのIndex Insight（ベータ）機能は、遅いクエリに対して効果的なインデックスの推奨を提供し、クエリのパフォーマンスを最適化します。この機能を使用することで、クエリの実行が高速化され、コスト効率が向上し、最適化プロセスが簡素化されます。また、アプリケーションの効率も向上し、スケーリング操作が効率的になります。 Index Insight機能を有効にする手順やベストプラクティスについても説明されています。
 ---
 
 # インデックスインサイト（ベータ版） {#index-insight-beta}

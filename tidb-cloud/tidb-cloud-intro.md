@@ -1,7 +1,7 @@
 ---
 title: TiDB Cloud Introduction
-summary: Learn about TiDB Cloud and its architecture.
 category: intro
+summary: TiDB Cloudは、オープンソースのハイブリッドトランザクションおよび分析処理（HTAP）データベースであり、フルマネージドのDatabase-as-a-Service（DBaaS）です。開発者とデータベース管理者は、大量のオンライントラフィックを簡単に処理し、複数のデータセットにわたる大量のデータを迅速に分析できます。TiDB Cloudは高速かつカスタマイズされたスケーリング、MySQLの互換性、高可用性と信頼性、リアルタイム分析、エンタープライズグレードのセキュリティ、フルマネージドサービス、マルチクラウドのサポートを提供します。また、TiDB CloudにはTiDBサーバーレスとTiDB専用の展開オプションがあります。
 ---
 
 # TiDB Cloudの紹介 {#tidb-cloud-introduction}

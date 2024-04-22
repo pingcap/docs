@@ -1,6 +1,6 @@
 ---
 title: Delete a TiDB Cluster
-summary: Learn how to delete a TiDB cluster.
+summary: TiDB CloudでTiDBクラスターを削除する手順を説明します。プロジェクトのクラスターページに移動し、削除するクラスターを選択し、削除をクリックします。クラスターを削除するとバックアップファイルはごみ箱に移動されます。自動バックアップからのファイルは7日間保存され、手動バックアップからのファイルには有効期限はありません。削除されたクラスターを復元する場合は、指示に従ってください。
 ---
 
 # TiDBクラスタの削除 {#delete-a-tidb-cluster}

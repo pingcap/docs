@@ -1,6 +1,6 @@
 ---
 title: TiCDC Avro Protocol
-summary: Learn the concept of TiCDC Avro Protocol and how to use it.
+summary: TiCDC Avroは、Apache Avroによって定義され、Confluentプラットフォームでデフォルトのデータ交換形式として選択されるプロトコルです。このドキュメントでは、TiDB拡張フィールド、Avroデータ形式の定義、AvroとConfluentスキーマレジストリの間の対話など、TiCDCでのAvroデータ形式の実装について説明します。Avroを使用する場合、sink-uriでAvroを指定し、Avroメッセージを作成し、ダウンストリームに送信します。また、Avroはスキーマの変更を検出し、最新のスキーマをスキーマレジストリに登録します。
 ---
 
 # TiCDC Avro プロトコル {#ticdc-avro-protocol}

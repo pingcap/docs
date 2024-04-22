@@ -1,6 +1,6 @@
 ---
 title: Quick Start Guide for the TiDB Database Platform
-summary: Learn how to quickly get started with the TiDB platform and see if TiDB is the right choice for you.
+summary: TiDBデータベースプラットフォームのクイックスタートガイドは、TiDBを始めるための最も簡単な方法を提供します。非実稼働環境の場合は、ローカルテストクラスターをデプロイするか、単一マシン上で本番デプロイメントをシミュレートすることができます。また、TiDBプレイグラウンドでTiDBの機能を試すこともできます。展開方法はクイックスタートのみを目的としており、本番や包括的な機能と安定性のテストを目的としたものではありません。
 ---
 
 # TiDB データベース プラットフォームのクイック スタート ガイド {#quick-start-guide-for-the-tidb-database-platform}

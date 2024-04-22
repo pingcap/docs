@@ -1,6 +1,6 @@
 ---
 title: Create a TiDB Serverless Cluster
-summary: Learn how to create your TiDB Serverless cluster.
+summary: TiDB Cloudコンソールを使用して、TiDB サーバーレス クラスターを作成する方法について説明します。まずはTiDB Cloudアカウントを作成し、ログインします。次に、クラスターを作成し、AWSリージョンを選択します。必要に応じてクラスター名を更新し、作成をクリックします。クラスター作成プロセスが開始され、約30秒で作成されます。クラスターが作成されたら、パスワードを設定して接続します。
 ---
 
 # TiDB サーバーレスクラスタの作成 {#create-a-tidb-serverless-cluster}

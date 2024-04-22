@@ -1,5 +1,6 @@
 ---
 title: TiDB 2.0.9 Release Notes
+summary: TiDB 2.0.9は、システムの互換性と安定性が向上しました。TiDBの修正には、統計ヒストグラムの問題、UNION ALLステートメントのpanicの問題、DDLジョブによるスタックオーバーフローの問題などが含まれます。PDの修正には、etcdの起動失敗によるPDサーバーの停止問題などが含まれます。TiKVの修正には、kv_scanインターフェースにend-key制限を追加する問題などが含まれます。
 ---
 
 # TiDB 2.0.9 リリースノート {#tidb-2-0-9-release-notes}

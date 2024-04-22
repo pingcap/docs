@@ -1,6 +1,6 @@
 ---
 title: Replicate Data to MySQL-compatible Databases
-summary: Learn how to replicate data to TiDB or MySQL using TiCDC.
+summary: TiCDCを使用して増分データをMySQL互換データベースにレプリケートする方法について説明します。災害シナリオで結果整合性のあるレプリケーション機能も紹介します。レプリケーションタスクを作成するには、指定されたコマンドを実行します。シンクURIは、ダウンストリームデータベースの接続情報を指定します。災害からの回復には、cdc redoコマンドを使用して手動で回復する必要があります。
 ---
 
 # MySQL 互換データベースへのデータのレプリケーション {#replicate-data-to-mysql-compatible-databases}

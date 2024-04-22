@@ -1,6 +1,6 @@
 ---
 title: Enable TLS Between TiDB Clients and Servers
-summary: Use secure connections to ensure data security.
+summary: TiDBはデフォルトで安全でない接続を許可しますが、セキュリティ上の理由からTLSで保護された接続を要求することが推奨されています。TLSを有効にするには、TiDBサーバーとクライアントアプリケーションの構成が必要です。また、MySQLクライアントもTLS接続を試みます。証明書、キー、CAをリロードすることで、有効期限の監視が可能です。
 ---
 
 # TiDB クライアントとサーバーの間で TLS を有効にする {#enable-tls-between-tidb-clients-and-servers}

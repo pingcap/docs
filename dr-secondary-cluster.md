@@ -1,6 +1,6 @@
 ---
 title: DR Solution Based on Primary and Secondary Clusters
-summary: Learn how to implement primary-secondary disaster recovery based on TiCDC.
+summary: プライマリデータベースとセカンダリデータベースに基づく災害復旧（DR）は、一般的なソリューションです。プライマリクラスタはユーザーのリクエストを処理し、セカンダリクラスタはプライマリクラスタからのデータをバックアップします。障害時にはセカンダリクラスタがサービスを引き継ぎ、ビジネスシステムは中断なく正常に動作します。高可用性と高速スイッチオーバーが利点です。セカンダリクラスタでビジネスデータをクエリする方法も説明されています。
 ---
 
 # プライマリ クラスタとセカンダリ クラスタに基づく DR ソリューション {#dr-solution-based-on-primary-and-secondary-clusters}

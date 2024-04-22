@@ -1,6 +1,6 @@
 ---
 title: Checkpoint Restore
-summary: TiDB v7.1.0 introduces checkpoint restore, allowing interrupted snapshot and log restores to continue without starting from scratch. It records restored shards and table IDs, enabling retries to use the progress point close to the interruption. However, it relies on the GC mechanism and may require some data to be restored again. It's important to avoid modifying cluster data during the restore to ensure accuracy.
+summary: TiDB v7.1.0以降、BRにはチェックポイントリストア機能が導入され、中断されたリストアを続行できるようになります。この機能により、中断された復元のほとんどの回復進行状況を保持できます。大規模なクラスターの場合、これにはかなりの追加コストがかかります。チェックポイントリストアはGCメカニズムに依存しているため、リストアされたすべてのデータを記録することはできません。
 ---
 
 # チェックポイントの復元 {#checkpoint-restore}

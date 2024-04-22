@@ -1,6 +1,6 @@
 ---
 title: Upgrade Cluster Monitoring Services
-summary: Learn how to upgrade the Prometheus, Grafana, and Alertmanager monitoring services for your TiDB cluster.
+summary: TiDBクラスタ監視サービスのアップグレードについて、TiUPを使用して自動的に展開される監視サービスは最新バージョンではないため、手動でアップグレードする必要があります。Prometheus、Grafana、Alertmanagerをアップグレードする手順があります。アップグレード後は、各サーバーのホームページでバージョンを確認して成功を確認してください。
 ---
 
 # TiDBクラスタ監視サービスのアップグレード {#upgrade-tidb-cluster-monitoring-services}

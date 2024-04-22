@@ -1,6 +1,6 @@
 ---
 title: Temporary Tables
-summary: Learn how to create, view, query, and delete temporary tables.
+summary: 一時テーブルは、クエリ結果を再利用する手法です。TiDB v5.3.0 では、ローカル一時テーブルとグローバル一時テーブルの 2 つのタイプが導入されました。一時テーブルを作成するには、`CREATE TEMPORARY TABLE`ステートメントを使用します。一時テーブルを削除するには、`DROP TEMPORARY TABLE`または`DROP GLOBAL TEMPORARY TABLE`構文を使用します。一時テーブルをクエリすると、データが直接取得されます。
 ---
 
 # 一時テーブル {#temporary-tables}

@@ -1,6 +1,6 @@
 ---
 title: Overview for Analyzing and Tuning Performance
-summary: Learn about how to analyze and tune SQL performance in TiDB Cloud.
+summary: TiDB CloudのSQLパフォーマンスの分析と調整について説明します。ユーザーの応答時間は、ネットワークレイテンシーやアプリケーションの処理時間などに影響を受けます。ユーザー応答時間とシステムのスループットは互いに反比例し、ボトルネックを特定する必要があります。TiDB Cloudコンソールでは、ユーザーの応答時間のトラブルシューティングに役立つページがあります。パフォーマンスの問題を解決できない場合は、サポートチームに問い合わせることをお勧めします。
 ---
 
 # パフォーマンスの分析とチューニングの概要 {#overview-for-analyzing-and-tuning-performance}

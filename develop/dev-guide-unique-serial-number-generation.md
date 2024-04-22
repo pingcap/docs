@@ -1,6 +1,6 @@
 ---
 title: Unique Serial Number Generation
-summary: Unique serial number generation solution for developers who generate their own unique IDs.
+summary: このドキュメントは、一意のシリアル番号を生成するための方法について説明しています。自動インクリメント列やシーケンス、そしてSnowflakeのようなソリューションについて触れています。また、番号割り当てソリューションについても説明しており、それぞれの特徴や利点について述べています。生成されたIDはランダム性に欠けるため、ビット反転を行うことでよりランダムなIDを取得できます。
 ---
 
 # 固有のシリアル番号の生成 {#unique-serial-number-generation}

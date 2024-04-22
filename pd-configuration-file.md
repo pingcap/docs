@@ -1,6 +1,6 @@
 ---
 title: PD Configuration File
-summary: Learn the PD configuration file.
+summary: PD 構成ファイルは、コマンドライン パラメーターよりも多くのオプションをサポートしています。
 ---
 
 # PDコンフィグレーションファイル {#pd-configuration-file}

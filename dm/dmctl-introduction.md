@@ -1,6 +1,6 @@
 ---
 title: Maintain DM Clusters Using dmctl
-summary: Learn how to maintain a DM cluster using dmctl.
+summary: dmctlは、DMクラスターを管理するためのコマンドラインツールです。インタラクティブモードでは、DMマスターと対話できます。コマンドモードでは、直後にタスク操作を追加する必要があります。また、v2.0.4以降、DMは環境変数DM_MASTER_ADDRからの-master-addrパラメーターの読み取りをサポートします。
 ---
 
 # dmctl を使用した DM クラスターの管理 {#maintain-dm-clusters-using-dmctl}

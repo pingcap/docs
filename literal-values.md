@@ -1,6 +1,6 @@
 ---
 title: Literal Values
-summary: This article introduces the literal values ​​of TiDB SQL statements.
+summary: TiDBのリテラル値には、文字、数値、日付、時刻、16進数、バイナリ、NULLが含まれます。文字列は引用符で囲まれ、バイナリまたは非バイナリに分類されます。数値は整数、DECIMAL、浮動小数点で表されます。日付と時刻はいくつかの形式で表され、ブール値はTRUEとFALSEです。16進数とビット値はそれぞれX'val'、0xval、b'val'、0bvalで表されます。NULLは空のデータを表します。
 ---
 
 # リテラル値 {#literal-values}

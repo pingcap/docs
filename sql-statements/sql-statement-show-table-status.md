@@ -1,6 +1,6 @@
 ---
 title: SHOW TABLE STATUS | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW TABLE STATUS for the TiDB database.
+summary: テーブルステータスを表示は、TiDB内のテーブルに関する統計を示します。統計が古い場合は、ANALYZE TABLEを実行することをお勧めします。このステートメントはMySQLと完全な互換性があります。
 ---
 
 # テーブルステータスを表示 {#show-table-status}

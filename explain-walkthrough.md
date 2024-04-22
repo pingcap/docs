@@ -1,6 +1,6 @@
 ---
 title: EXPLAIN Walkthrough
-summary: Learn how to use EXPLAIN by walking through an example statement
+summary: SQLの宣言型言語であるため、クエリの効率的な実行を自動的に判断できない。まず`EXPLAIN`ステートメントを使用して現在の実行計画を確認し、最適化を特定する。また、サブクエリの早期実行を無効にすることも検討する。
 ---
 
 # <code>EXPLAIN</code>ウォークスルー {#code-explain-code-walkthrough}

@@ -1,6 +1,6 @@
 ---
 title: TiSpark Deployment Topology
-summary: Learn the deployment topology of TiSpark using TiUP based on the minimal TiDB topology.
+summary: TiSparkは、TiDB/TiKV上でApache Sparkを実行し、OLAPクエリに対応するコンポーネントです。TiSpark導入トポロジと最小クラスタートポロジに基づいた導入方法が紹介されています。また、トポロジ情報とテンプレート、前提条件についても詳細が記載されています。警告として、TiUPクラスターでのTiSparkサポートは非推奨とされています。
 ---
 
 # TiSpark 導入トポロジー {#tispark-deployment-topology}

@@ -1,6 +1,6 @@
 ---
 title: TiDB FAQ Summary
-summary: Summarizes frequently asked questions (FAQs) about TiDB.
+summary: この文書は、TiDBに関するよくある質問をまとめたものです。アーキテクチャと原則、導入、データ移行、データのバックアップと復元、SQL操作、クラスタのアップグレード、クラスタ管理、監視と警告、高可用性と高信頼性、一般的なエラーコードに関する質問が含まれています。
 ---
 
 # TiDB FAQの概要 {#tidb-faq-summary}

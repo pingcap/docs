@@ -1,6 +1,6 @@
 ---
 title: TIFLASH_SEGMENTS
-summary: Learn the `TIFLASH_SEGMENTS` information_schema table.
+summary: TIFLASH_SEGMENTS表は、TiFlashのデータテーブルに関する統計情報を提供します。このテーブルのフィールドには、DATABASE、TABLE、TIDB_DATABASE、TIDB_TABLE、TABLE_ID、IS_TOMBSTONE、SEGMENT_ID、RANGE、EPOCH、ROWS、SIZE、DELTA_RATEなどが含まれます。これらのフィールドは、セグメントのデータやサイズ、デルタレイヤーの情報などを示しています。TiFlashのデータベースやテーブルに関する詳細な情報を取得する際に使用できます。ただし、このテーブルはTiDBサーバーレスクラスターでは使用できません。
 ---
 
 # TIFLASH_SEGMENTS {#tiflash-segments}

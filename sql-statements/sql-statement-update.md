@@ -1,6 +1,6 @@
 ---
 title: UPDATE | TiDB SQL Statement Reference
-summary: An overview of the usage of UPDATE for the TiDB database.
+summary: UPDATEステートメントは、指定されたテーブル内のデータを変更するために使用されます。例えば、テーブルt1のc1が3の行のc1を5に変更することができます。TiDBは、より標準的なSQL動作に従い、列bを更新します。MySQLとは異なり、列bは値aに設定されず、値aはa+1に更新されます。
 ---
 
 # アップデート {#update}

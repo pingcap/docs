@@ -1,6 +1,6 @@
 ---
 title: The Blocklist of Optimization Rules and Expression Pushdown
-summary: Learn about the blocklist to control the optimization rules and the behavior of expression pushdown.
+summary: TiDBの最適化ルールと式プッシュダウンのブロックリストを使用して、動作を制御する方法を紹介します。最適化ルールのブロックリストは、特定の最適化ルールを手動で無効にするために使用されます。式プッシュダウンのブロックリストは、特定のデータ型の一部の式を手動で無効にするために使用されます。これらのブロックリストを使用することで、アプリケーションを迅速に回復できます。
 ---
 
 # 最適化ルールと式プッシュダウンのブロックリスト {#the-blocklist-of-optimization-rules-and-expression-pushdown}

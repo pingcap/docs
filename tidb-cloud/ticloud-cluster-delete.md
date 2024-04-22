@@ -1,6 +1,6 @@
 ---
 title: ticloud cluster delete
-summary: The reference of `ticloud cluster delete`.
+summary: ticloud クラスターを削除する方法について説明します。対話モードでは、"ticloud cluster delete" コマンドを使用し、非対話モードでは、"ticloud cluster delete --project-id <project-id> --cluster-id <cluster-id>" コマンドを使用します。削除するクラスターのIDとプロジェクトIDが必要です。確認なしでクラスターを削除するには、"--force" フラグを使用します。質問や提案がある場合は、TiDB Cloud CLI の問題を作成してください。
 ---
 
 # ticloud クラスターの削除 {#ticloud-cluster-delete}

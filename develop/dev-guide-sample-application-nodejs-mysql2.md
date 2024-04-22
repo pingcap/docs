@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with node-mysql2
-summary: Learn how to connect to TiDB using node-mysql2. This tutorial gives Node.js sample code snippets that work with TiDB using node-mysql2.
+summary: TiDBはMySQL互換データベースであり、node-mysql2はNode.js用の高速mysqljs/mysql互換MySQLドライバーです。このチュートリアルでは、TiDBとnode-mysql2を使用して環境をセットアップし、TiDBクラスターに接続し、アプリケーションをビルドして実行する方法を学習できます。必要なものはNode.js >= 16.xとGit、TiDBクラスターが実行中であることです。サンプルアプリケーションコードを実行してTiDBに接続する方法や、データの挿入、クエリデータ、データの更新、データの削除などの操作方法も学ぶことができます。
 ---
 
 # node-mysql2 を使用して TiDB に接続します {#connect-to-tidb-with-node-mysql2}

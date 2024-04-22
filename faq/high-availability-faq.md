@@ -1,6 +1,6 @@
 ---
 title: High Availability FAQs
-summary: Learn about the FAQs related to high availability of TiDB.
+summary: TiDBの高可用性に関するFAQには、データの冗長的な複製と障害回復のためのRaftコンセンサスアルゴリズムの使用が含まれています。また、TiDBのアーキテクチャは地理的分散とマルチアクティブ性をサポートし、データとアプリケーションの停止は透過的であり、自動的に回復されます。動作はネットワークのレイテンシーと安定性に依存し、レイテンシーを5ミリ秒以内に保つことが推奨されています。TiDBにはすでに同様の使用例があります。
 ---
 
 # 高可用性に関するよくある質問 {#high-availability-faqs}

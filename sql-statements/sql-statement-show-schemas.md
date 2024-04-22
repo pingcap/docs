@@ -1,6 +1,6 @@
 ---
 title: SHOW SCHEMAS | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW SCHEMAS for the TiDB database.
+summary: スキーマの表示は、SHOW DATABASESのエイリアスであり、MySQLとの互換性のために含まれています。
 ---
 
 # スキーマの表示 {#show-schemas}

@@ -1,6 +1,6 @@
 ---
 title: Migrate Data from MariaDB to TiDB
-summary: Learn how to migrate data from MariaDB to TiDB.
+summary: MariaDBからTiDBへのデータ移行には、DumplingとTiDB Lightningを使用する方法やDMを使用してデータをレプリケートする方法があります。移行前に互換性を確認し、ユーザーアカウントと権限を移行します。移行後はアプリケーションを再構成し、データをテストして検証します。同期差分インスペクターを使用してデータの一貫性を確認します。
 ---
 
 # MariaDB から TiDB へのデータの移行 {#migrate-data-from-mariadb-to-tidb}

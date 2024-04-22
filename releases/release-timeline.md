@@ -1,6 +1,6 @@
 ---
 title: TiDB Release Timeline
-summary: Learn about the TiDB release timeline.
+summary: TiDBのリリースタイムラインは、最新のバージョンから順に示されています。2024年3月11日にはバージョン7.1.4がリリースされ、2024年2月29日にはバージョン7.5.1がリリースされました。最も古いバージョンは2016年12月23日にリリースされたrc1です。
 ---
 
 # TiDB リリース タイムライン {#tidb-release-timeline}

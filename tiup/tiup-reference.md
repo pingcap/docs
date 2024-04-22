@@ -1,5 +1,6 @@
 ---
 title: TiUP Reference
+summary: TiUPは、TiDBエコシステムのパッケージマネージャーとして機能し、TiDB、PD、TiKVなどのコンポーネントを管理します。コマンドには、特定のコマンドの情報を取得するための--helpコマンドや、バイナリファイルのパスを出力する--binaryオプションなどがあります。さらに、TiUPには複数のコマンドとその詳細な説明があります。
 ---
 
 # TiUPリファレンス {#tiup-reference}

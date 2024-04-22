@@ -1,6 +1,6 @@
 ---
 title: Type Conversion in Expression Evaluation
-summary: Learn about the type conversion in expression evaluation.
+summary: TiDBはMySQLと同様に動作します。式評価における型変換については、MySQLのドキュメントを参照してください。
 ---
 
 # 式評価における型変換 {#type-conversion-in-expression-evaluation}

@@ -1,6 +1,6 @@
 ---
 title: Deploy a TiDB Cluster on Kubernetes
-summary: Learn how to deploy a TiDB cluster on Kubernetes.
+summary: TiDB Operatorを使用すると、KubernetesにTiDBクラスターをデプロイできます。このオペレーターは、Kubernetes上でTiDBクラスターを自動操作し、導入、アップグレード、スケーリング、バックアップ、フェイルオーバー、構成変更などの管理を提供します。TiDB Operatorを使用すると、TiDBはパブリッククラウドまたはプライベートクラウドにデプロイされたKubernetesクラスター内でシームレスに実行できます。TiDB on KubernetesドキュメントはTiDBドキュメントから独立しており、TiDB Operatorを使用してTiDBクラスターをKubernetesにデプロイする方法の詳細な手順については、Kubernetes上のTiDBドキュメントを参照してください。
 ---
 
 # TiDBクラスタをKubernetes にデプロイ {#deploy-a-tidb-cluster-on-kubernetes}

@@ -1,6 +1,6 @@
 ---
 title: Get Started with Data Service
-summary: Learn how to use TiDB Cloud Data Service to access your data with HTTPS requests.
+summary: データサービス (ベータ) を使用すると、TiDB Cloudデータにアクセスでき、HTTPS と互換性のあるアプリケーションやサービスとシームレスに統合できます。データ アプリを作成し、エンドポイントを開発してテストし、最後にデプロイして呼び出すことができます。詳細については、TiDB Cloudのドキュメントを参照してください。
 ---
 
 # データサービスを始めてみる {#get-started-with-data-service}

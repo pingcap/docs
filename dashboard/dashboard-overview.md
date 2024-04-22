@@ -1,6 +1,6 @@
 ---
 title: Overview Page
-summary: The TiDB overview page displays cluster QPS, latency, top SQL statements, recent slow queries, instance status, and monitor/alert links. Access it via TiDB Dashboard or left navigation menu. QPS and latency require Prometheus monitoring. Top SQL and slow queries need SQL Statements and slow query logs enabled. Instance status shows total and abnormal instances. Monitor and alert links lead to Grafana dashboard, AlertManager, and cluster diagnostics.
+summary: TiDBクラスター全体の概要ページには、QPS、レイテンシー、Top SQLステートメント、最近の遅いクエリ、インスタンス、監視と警告が表示されます。アクセスするにはTiDBダッシュボードにログインするか、左側のナビゲーションメニューで概要をクリックします。それぞれの機能は特定の条件下でのみ使用可能です。
 ---
 
 # 概要ページ {#overview-page}

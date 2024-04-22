@@ -1,6 +1,6 @@
 ---
 title: DEALLOCATE | TiDB SQL Statement Reference
-summary: An overview of the usage of DEALLOCATE for the TiDB database.
+summary: DEALLOCATEステートメントは、サーバー側のプリペアドステートメントへのSQLインターフェイスを提供します。MySQLの互換性があります。PREPAREステートメントと実行ステートメントも参照してください。
 ---
 
 # 割り当てを解除する {#deallocate}

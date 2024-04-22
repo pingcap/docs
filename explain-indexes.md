@@ -1,6 +1,6 @@
 ---
 title: Explain Statements That Use Indexes
-summary: Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
+summary: TiDBは、インデックスを使用してクエリの実行を高速化する演算子をサポートしています。インデックスルックアップ演算子は、セカンダリインデックスからデータを取得する際に使用され、インデックスリーダー演算子はカバーインデックスの最適化をサポートします。また、Point_GetとBatch_Point_Get演算子は、主キーまたは一意キーからデータを直接取得する際に使用されます。さらに、インデックスフルスキャン演算子は、インデックス付きの値に対する一般的なクエリを最適化します。
 ---
 
 # インデックスを使用する Explain ステートメント {#explain-statements-that-use-indexes}

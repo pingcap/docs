@@ -1,6 +1,6 @@
 ---
 title: TiFlash Query Result Materialization
-summary: Learn how to save the query results of TiFlash in a transaction.
+summary: TiFlashクエリ結果を`INSERT INTO SELECT`トランザクションで指定した TiDB テーブルに保存する方法を紹介します。v6.5.0 以降、TiDB は、 TiFlashクエリ結果のテーブルへの保存、つまりTiFlashクエリ結果の具体化をサポートします。`INSERT INTO SELECT`ステートメントの実行中に、TiDB が`SELECT`サブクエリをTiFlashにプッシュダウンすると、 TiFlashクエリ結果を`INSERT INTO`句で指定された TiDB テーブルに保存できます。
 ---
 
 # TiFlashクエリ結果の具体化 {#tiflash-query-result-materialization}

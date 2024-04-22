@@ -1,6 +1,6 @@
 ---
 title: Replicate Data to Pulsar
-summary: Learn how to replicate data to Pulsar using TiCDC.
+summary: TiCDCを使用してPulsarに増分データをレプリケートする方法について説明します。レプリケーションタスクを作成するために必要なコマンドやパラメータについて説明します。シンクURIと変更フィード構成を使用してPulsarを構成する方法についても説明します。また、PulsarのTiCDC認証と認可についても説明します。データベースレベルとテーブルレベルのDDLイベントについても触れます。パーティションディスパッチャーについても説明します。
 ---
 
 # Pulsar へのデータの複製 {#replicate-data-to-pulsar}

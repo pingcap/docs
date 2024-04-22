@@ -1,6 +1,6 @@
 ---
 title: Time Zone Support
-summary: Learn how to set the time zone and its format.
+summary: TiDBのタイムゾーンは、グローバルとセッションのtime_zoneシステム変数によって決定されます。デフォルト値はSYSTEMで、実際のタイムゾーンは初期化時に構成されます。セッションtime_zone変数はグローバルtime_zone変数から値を取得し、クライアントは独自のタイムゾーンを変更できます。タイムゾーンの値の形式はSYSTEM、UTCからのオフセット、名前付きタイムゾーンとして指定できます。セッションのタイムゾーン設定は時間値の表示とstorageに影響します。Timestampデータ型の値はタイムゾーンの影響を受けますが、Datetime/Date/Timeなどの他のデータ型は影響を受けません。データ移行の場合、タイムゾーン設定に特に注意が必要です。
 ---
 
 # タイムゾーンのサポート {#time-zone-support}

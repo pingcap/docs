@@ -1,6 +1,6 @@
 ---
 title: Import Sample Data
-summary: Learn how to import sample data into TiDB Cloud via UI.
+summary: このドキュメントは、TiDB Cloudにサンプルデータをインポートする方法について説明しています。ターゲットクラスターの**インポート**ページを開き、ソースデータの情報を設定し、**[インポートの開始]**をクリックします。データ インポートの進行状況に**[完了]**と表示されたら、サンプル データとデータベース スキーマがTiDB Cloudのデータベースに正常にインポートされます。クラスターに接続した後、ターミナルでクエリを実行して結果を確認できます。
 ---
 
 # サンプルデータのインポート {#import-sample-data}

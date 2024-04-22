@@ -1,6 +1,6 @@
 ---
 title: Import Example Database
-summary: Install the Bikeshare example database.
+summary: TiDBマニュアルで使用されている例では、Capital Bikeshareのシステムデータを使用しています。データは1年に.zipファイルでダウンロードし、約3GBのディスク容量が必要です。データをTiDBにインポートするためのスキーマとインポート方法が提供されています。MySQLクライアントを起動する際は、--local-infile=1オプションを使用します。bashループを使用してすべての.csvファイルをTiDBにインポートすることができます。
 ---
 
 # サンプルデータベースのインポート {#import-example-database}

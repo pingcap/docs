@@ -1,6 +1,6 @@
 ---
 title: AUTO_RANDOM
-summary: Learn the AUTO_RANDOM attribute.
+summary: 新機能`AUTO_RANDOM`は、TiDBの連続するIDの割り当てによる書き込みホットスポットを避けるために使用されます。`AUTO_INCREMENT`の代わりに使用され、`AUTO_RANDOM_BASE`パラメータは増分部分の初期値を設定します。`AUTO_RANDOM`列は主キーに含める必要があり、値はランダムで一意です。`AUTO_RANDOM`の値の構造は64ビットで、シャードビット数と自動割り当て範囲の合計長を指定できます。暗黙的に割り当てられた値は`last_insert_id()`に影響し、制限事項もあります。
 ---
 
 # AUTO_RANDOM <span class="version-mark">v3.1.0 の新機能</span> {#auto-random-span-class-version-mark-new-in-v3-1-0-span}

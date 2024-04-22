@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with Sequelize
-summary: Learn how to connect to TiDB using Sequelize. This tutorial gives Node.js sample code snippets that work with TiDB using Sequelize.
+summary: SequelizeはMySQL互換データベースであり、Node.jsのORMフレームワークです。このチュートリアルでは、TiDBとSequelizeを使用して環境をセットアップし、TiDBクラスターに接続し、アプリケーションをビルドする方法を学ぶことができます。また、サンプルコードスニペットを使用して独自のアプリケーション開発を完了できます。このチュートリアルは、TiDBサーバーレス、TiDB専用、およびTiDBセルフホストで動作します。必要なものはNode.js 18以降、Git、TiDBクラスターです。サンプルアプリを実行してTiDBに接続する方法については、GitHubリポジトリを参照してください。
 ---
 
 # Sequelize で TiDB に接続する {#connect-to-tidb-with-sequelize}

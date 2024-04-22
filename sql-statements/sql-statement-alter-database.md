@@ -1,6 +1,6 @@
 ---
 title: ALTER DATABASE | TiDB SQL Statement Reference
-summary: An overview of the usage of ALTER DATABASE for the TiDB database.
+summary: ALTER DATABASEは、デフォルトの文字セットと照合順序を変更するために使用されます。TiDBはMySQLと完全な互換性があります。文字セットと照合順序のサポートについては、詳細を参照してください。
 ---
 
 # データベースの変更 {#alter-database}

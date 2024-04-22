@@ -1,6 +1,6 @@
 ---
 title: TiDB Data Migration Binlog Event Filter
-summary: Learn how to use the binlog event filter feature of DM.
+summary: TiDB Data Migration (DM)は、binlogイベントフィルター機能を提供します。この機能を使用すると、特定のスキーマやテーブルの指定されたタイプのbinlogイベントのみを受信したり、エラーをフィルタリングしてブロックしたりできます。構成ファイルにルールを追加することで、フィルタリングの粒度を細かく設定できます。さまざまなイベントやSQLステートメントに対して、Do、Ignore、Errorのアクションを指定することができます。詳細は公式ドキュメントを参照してください。
 ---
 
 # TiDB データ移行Binlogイベント フィルター {#tidb-data-migration-binlog-event-filter}

@@ -1,6 +1,6 @@
 ---
 title: EXPLAIN | TiDB SQL Statement Reference
-summary: An overview of the usage of EXPLAIN for the TiDB database.
+summary: EXPLAINステートメントは、クエリの実行計画を示します。EXPLAIN ANALYZEを付加すると、クエリが実行されます。出力には、ID、estRows、task、access object、operator infoの5つの列が含まれます。MySQLとTiDBのEXPLAINの形式と実装には違いがあります。また、EXPLAIN FOR CONNECTIONを使用して現在実行中のSQLクエリの実行プランを取得できます。
 ---
 
 # <code>EXPLAIN</code> {#code-explain-code}

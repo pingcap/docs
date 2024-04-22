@@ -1,6 +1,6 @@
 ---
 title: Tune TiKV Memory Parameter Performance
-summary: Learn how to tune the TiKV parameters for optimal performance.
+summary: TiKVのパフォーマンスを最適化するためには、構成ファイルを変更し、RocksDBのパラメータを調整する必要があります。また、システムメモリの使用量にも注意する必要があります。本番環境では、CPUコアが8個未満またはメモリが32GB未満のマシンにTiKVを展開することはお勧めできません。高い書き込みスループットが必要な場合は、優れたスループット容量を持つディスクを使用することをお勧めします。非常に低い読み取り/書き込みレイテンシーを要求する場合は、IOPSの高いSSDを使用することをお勧めします。
 ---
 
 # TiKV メモリ パラメータのパフォーマンスを調整する {#tune-tikv-memory-parameter-performance}

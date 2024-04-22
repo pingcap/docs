@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1.17 Release Notes
-summary: "TiDB 2.1.17 Release Notes: New features include `WHERE` clause in `SHOW TABLE REGIONS`, `config-check` feature in TiKV and PD, `remove-tombstone` command in pd-ctl, and `worker-count` and `txn-batch` configuration items in Reparo. Improvements in PD’s scheduling process and TiKV’s starting process. Changed behaviors in TiDB slow query logs and configuration files. Fixes and optimizations in SQL Optimizer, SQL Execution Engine, Server, DDL, Monitor, TiKV, PD, TiDB Binlog, TiDB Lightning, and TiDB Ansible."
+summary: TiDB 2.1.17は2019年9月11日にリリースされました。新機能には、`SHOW TABLE REGIONS`構文に`WHERE`句を追加する機能などがあります。改善点としては、PDのスケジューリングプロセスの最適化やTiKVの起動プロセスの最適化があります。さらに、TiDBの構成ファイルに`split-region-max-num`パラメータを追加して、リージョンの最大数を変更する機能も追加されました。TiDBのSQLオプティマイザーやSQL実行エンジン、サーバ、DDL、モニターなどにもさまざまな改善が加えられています。TiKVやPD、ツールにも様々な機能追加や改善が行われています。
 ---
 
 # TiDB 2.1.17 リリースノート {#tidb-2-1-17-release-notes}

@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Cluster Information Page
-summary: The TiDB Dashboard Cluster Information Page allows users to view the running status of TiDB, TiKV, PD, and TiFlash components in the entire cluster, as well as the running status of the host on which these components are located. Users can access the page by logging in to TiDB Dashboard and clicking on Cluster Info in the left navigation menu, or by visiting a specific URL in their browser. The page provides instance, host, and disk lists, showing detailed information about each component and its running status.
+summary: TiDB ダッシュボードのクラスタ情報ページでは、TiDB、TiKV、PD、TiFlashコンポーネントの実行ステータスと、それらのコンポーネントが配置されているホストの実行ステータスが表示されます。クラスタ情報ページにアクセスする方法は2つあります。インスタンスリストには、各インスタンスのアドレス、ステータス、稼働時間、バージョン、Gitハッシュ、デプロイメントディレクトリが表示されます。インスタンスのステータスはUp、ダウンまたは到達不能、廃棄、終了、不明のいずれかです。ホストリストには、ホストのアドレス、CPU数、CPU使用率、メモリサイズ、メモリ使用量が表示されます。ディスクリストには、ホストアドレス、マウントディレクトリ、ファイルシステム、ディスク容量、ディスク使用量、インスタンスが表示されます。
 ---
 
 # TiDB ダッシュボードのクラスタ情報ページ {#tidb-dashboard-cluster-information-page}

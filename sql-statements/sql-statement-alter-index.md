@@ -1,6 +1,6 @@
 ---
 title: ALTER INDEX
-summary: An overview of the usage of ALTER INDEX for the TiDB database.
+summary: ALTER INDEXステートメントは、インデックスの可視性を変更するために使用されます。非表示のインデックスはDMLステートメントによって維持されますが、クエリオプティマイザーによっては使用されません。これは、インデックスを完全に削除する前に再確認する必要があるシナリオで役立ちます。可視性を変更するには、ALTER TABLE ... ALTER INDEX ...ステートメントを使用します。MySQLと同様に、TiDBではPRIMARY KEYを非表示にすることはできません。
 ---
 
 # インデックスの変更 {#alter-index}

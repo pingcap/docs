@@ -1,6 +1,6 @@
 ---
 title: Monitor the TiFlash Cluster
-summary: Learn the monitoring items of TiFlash.
+summary: TiFlashクラスタの監視項目について説明します。TiUPを使用してTiDBクラスターをデプロイする場合、監視システムも同時にデプロイされます。Grafanaダッシュボードは概要、PD、TiDB、TiKV、およびNode_exporterを含む一連のサブダッシュボードに分割されています。TiFlashには3つのダッシュボードパネルがあります。次のセクションではTiFlash-summaryのデフォルトの監視情報を紹介します。
 ---
 
 # TiFlashクラスタの監視 {#monitor-the-tiflash-cluster}

@@ -1,6 +1,6 @@
 ---
 title: Overview of Optimizing SQL Performance
-summary: Provides an overview of SQL performance tuning for TiDB application developers.
+summary: このドキュメントは、TiDBでのSQLパフォーマンスの最適化方法について紹介しています。SQLパフォーマンスのチューニングや適切なスキーマ設計によって、良好なパフォーマンスを得ることができます。具体的には、少ない行をスキャンし、適切なインデックスや結合タイプ、storageエンジンを使用することが重要です。さらに、トランザクションの競合やホットスポットを回避するためのスキーマ設計も重要です。詳細はリンク先を参照してください。
 ---
 
 # SQL パフォーマンスの最適化の概要 {#overview-of-optimizing-sql-performance}

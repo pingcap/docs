@@ -1,6 +1,6 @@
 ---
 title: MySQL Compatibility
-summary: Learn about the compatibility of TiDB with MySQL, and the unsupported and different features.
+summary: TiDBはMySQL 5.7およびMySQL 8.0と高い互換性があります。ただし、一部の機能はサポートされていません。MySQLのエコシステムツールやクライアントはTiDBで使用可能です。TiDBはMySQLレプリケーションプロトコルをサポートしていませんが、特定のツールを提供しています。さらに、サポートされていない機能やデフォルトの違いがあります。MySQLとTiDBの違いについては、詳細なページを参照してください。
 ---
 
 # MySQL の互換性 {#mysql-compatibility}

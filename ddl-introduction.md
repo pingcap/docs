@@ -1,6 +1,6 @@
 ---
 title: Execution Principles and Best Practices of DDL Statements
-summary: Learn about how DDL statements are implemented in TiDB, the online change process, and best practices.
+summary: TiDBのDDLステートメントの実行原則とベストプラクティスについての概要です。オンラインおよび非同期アプローチを使用してDDLステートメントを実行し、DDLステートメントはオフラインとオンラインのタイプに分類されます。また、論理DDLステートメントと物理DDLステートメントにも分類されます。DDLモジュールはDDL所有者として機能し、オンライン非同期変更モードを選択しています。物理DDL実行速度とアプリケーション負荷への影響をバランスさせるためにシステム変数を調整し、複数のDDLリクエストを同時に送信して多数のテーブルを迅速に作成することが推奨されています。
 ---
 
 # DDL ステートメントの実行原則とベスト プラクティス {#execution-principles-and-best-practices-of-ddl-statements}

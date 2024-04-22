@@ -1,6 +1,6 @@
 ---
 title: Local Read under Three Data Centers Deployment
-summary: TiDB's three data center deployment model can cause increased access latency due to cross-center data reads. To mitigate this, the Stale Read feature allows for local historical data access, reducing latency at the expense of real-time data availability. When using Stale Read in geo-distributed scenarios, TiDB accesses local replicas to avoid cross-center network latency. This is achieved by configuring the `zone` label and setting `tidb_replica_read` to `closest-replicas`. For more information on performing Stale Read, refer to the documentation.
+summary: 3つのデータセンター展開では、TiDBはリージョン内の各データセンターに3つのレプリカを持ちます。しかし、異なるデータセンターでクエリが生成された場合、アクセスレイテンシーが増加します。ステイル読み取り機能を使用することで、センター間アクセスを回避し、アクセスレイテンシーを短縮することができます。TiKVノードとTiDBノードの構成には注意が必要であり、ステイル読み取りクエリを受信した場合、TiDBは対応するデータレプリカが存在する同じゾーンラベルを持つTiKVノードにリクエストを送信します。
 ---
 
 # 3 つのデータセンター展開におけるローカル読み取り {#local-read-under-three-data-centers-deployment}

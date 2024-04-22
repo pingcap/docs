@@ -1,5 +1,6 @@
 ---
 title: tiup cluster display
+summary: tiup-clusterは、クラスタ内の各コンポーネントの稼働状況を効率的に確認するための`tiup cluster display`コマンドを提供します。このコマンドを使用すると、クラスター全体のノード情報やダッシュボード情報を表示できます。さらに、ノードやロールを指定して表示することも可能です。ノードのサービスステータスは、Up、ダウン、廃棄、オフライン保留中、不明のいずれかです。
 ---
 
 # tiup cluster display {#tiup-cluster-display}

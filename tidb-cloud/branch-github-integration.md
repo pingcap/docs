@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Serverless Branching (Beta) with GitHub 
-summary: Learn how to integrate the TiDB Serverless branching feature with GitHub.
+summary: TiDBサーバーレスブランチングをGitHubと統合すると、本番データベースに影響を与えることなく、プルリクエストを自動的にテストできます。統合プロセスでは、TiDB CloudブランチングGitHubアプリをインストールし、プルリクエストに従ってTiDBサーバーレスブランチを自動的に管理できます。これにより、新機能やバグ修正に取り組むことができます。
 ---
 
 # TiDB サーバーレス ブランチング (ベータ版) を GitHub と統合する {#integrate-tidb-serverless-branching-beta-with-github}

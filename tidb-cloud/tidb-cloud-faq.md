@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud FAQs
-summary: Learn about the most frequently asked questions (FAQs) relating to TiDB Cloud.
+summary: TiDB Cloudは、TiDBクラスターのデプロイ、管理、保守を簡素化するフルマネージドのクラウドデータベースです。開発者やDBAは、インフラストラクチャ管理やクラスター展開などのタスクを簡単に処理できます。また、MySQLとの互換性があり、AWSやGoogle Cloudで利用できます。セキュリティは暗号化され、99.99%のSLAを提供します。詳細はサポートページを参照してください。
 ---
 
 # TiDB Cloudよくある質問 {#tidb-cloud-faqs}

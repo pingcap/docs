@@ -1,6 +1,6 @@
 ---
 title: Manage TiUP Components with TiUP Commands
-summary: Learn how to manage TiUP components using TiUP commands.
+summary: TiUPコマンドを使用してTiUPエコシステム内のコンポーネントを管理できます。コマンドにはlist、install、update、uninstall、status、clean、help、link、unlinkがあります。コンポーネントリストをクエリするには`tiup list`を使用し、コンポーネントをインストールするには`tiup install`を使用します。コンポーネントをアップグレードするには`tiup update`を使用し、コンポーネントの動作ステータスを問い合わせるには`tiup status`を使用します。コンポーネントをクリーンアップするには`tiup clean`を使用し、コンポーネントをアンインストールするには`tiup uninstall`を使用します。コンポーネントをリンクするには`tiup link`を使用し、リンクを解除するには`tiup unlink`を使用します。TiUPのバージョンを管理するには`tiup update --self`を使用します。
 ---
 
 # TiUPコマンドを使用してTiUPコンポーネントを管理する {#manage-tiup-components-with-tiup-commands}

@@ -1,6 +1,6 @@
 ---
 title: TiDB Memory Control
-summary: Learn how to configure the memory quota of a query and avoid OOM (out of memory).
+summary: TiDBは単一のSQLクエリのメモリ制御を追跡し、OOMを防止するためにシステム変数を使用します。また、クエリのメモリ割り当てやメモリ使用量のしきい値を構成する方法、メモリ使用量のアラームをトリガーする方法などがあります。さらに、フロー制御やディスク流出についても制御が可能です。また、OOMの問題を軽減するためにGOMEMLIMITを構成することもできます。
 ---
 
 # TiDB メモリ制御 {#tidb-memory-control}

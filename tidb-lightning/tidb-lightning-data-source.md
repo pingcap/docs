@@ -1,6 +1,6 @@
 ---
 title: TiDB Lightning Data Sources
-summary: Learn all the data sources supported by TiDB Lightning.
+summary: TiDB Lightningは、CSV、SQL、Parquetファイルなど、複数のデータソースからTiDBクラスターへのデータのインポートをサポートします。データソースを指定するには、`data-source-dir`のパターンに一致するファイルを検索します。データを可能な限り並行して処理し、インポートされるファイルのサイズを256 MiB以下に制限することをお勧めします。データベースとテーブルの名前を変更する方法も提供されています。CSVファイルにはスキーマがなく、テーブルスキーマを提供する必要があります。
 ---
 
 # TiDB Lightningデータ ソース {#tidb-lightning-data-sources}

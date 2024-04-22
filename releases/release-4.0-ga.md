@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0 GA Release Notes
-summary: TiDB 4.0.0 GA was released on May 28, 2020. This version optimized error messages for large-sized transactions, improved usability of `Changefeed` configuration file, added new configuration items and support for various syntax and functions, fixed multiple bugs and issues in TiKV, TiFlash, PD, and Tools, added new monitoring items and support for various features in PD, and fixed various issues in Backup & Restore (BR) and TiCDC.
+summary: TiDB 4.0 GAは2020年5月28日にリリースされました。このバージョンでは、大規模なトランザクションのエラーメッセージが最適化され、Changefeed設定ファイルの構造が改善されました。さらに、バグ修正や新機能の追加が行われ、TiDB、TiFlash、TiKV、PDなどのコンポーネントが改善されました。
 ---
 
 # TiDB 4.0 GA リリース ノート {#tidb-4-0-ga-release-notes}

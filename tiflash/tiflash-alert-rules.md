@@ -1,6 +1,6 @@
 ---
 title: TiFlash Alert Rules
-summary: Learn the alert rules of the TiFlash cluster.
+summary: TiFlashのアラートルールには、スキーマ適用エラー、適用時間、リードインデックスの読み取り時間、および待機時間が含まれます。これらのアラートは、内部問題や通信エラーによってトリガーされます。解決策は、間違ったロジックの修正やTiKVクラスターのステータス確認が必要です。
 ---
 
 # TiFlashアラート ルール {#tiflash-alert-rules}

@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.1.5 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 6.1.5.
+summary: TiDB 6.1.5は2023年2月28日にリリースされました。新しいバージョンでは、テレメトリ機能がデフォルトで無効になり、使用状況情報は収集されません。また、クラスターでデフォルトのテレメトリ構成が使用されている場合、アップグレード後にテレメトリ機能は無効になります。さらに、クラスター化複合インデックスがサポートされ、いくつかのバグが修正されました。
 ---
 
 # TiDB 6.1.5 リリースノート {#tidb-6-1-5-release-notes}

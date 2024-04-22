@@ -1,6 +1,6 @@
 ---
 title: String Functions
-summary: Learn about the string functions in TiDB.
+summary: TiDBはMySQL 5.7で使用可能な文字列関数のほとんどと、MySQL 8.0で使用可能な一部の文字列関数、Oracle 21で使用可能な一部の関数をサポートします。サポートされている関数には、ASCII、BIN、BIT_LENGTH、CHAR、CHAR_LENGTH、CONCATなどがあります。一方、LOAD_FILE、MATCH、SOUNDEXなどの関数はサポートされていません。また、TiDBとMySQLの正規表現の互換性についても説明されています。MySQLとTiDBの間には構文、match_type、データ型の違いがあります。また、空の文字列の置換におけるTiDBとMySQLのサポートも異なります。
 ---
 
 # 文字列関数 {#string-functions}

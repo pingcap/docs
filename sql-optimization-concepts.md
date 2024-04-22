@@ -1,6 +1,6 @@
 ---
 title: SQL Optimization Process
-summary: Learn about the logical and physical optimization of SQL in TiDB.
+summary: TiDBのSQL最適化プロセスは、クエリの解析から論理的な最適化、物理的な最適化、そして実行計画のキャッシュまでの一連のプロセスを示します。クエリテキストはparserで解析され、同等の変更が加えられ、最終的な実行プランが取得されます。また、TiDBでは実行プランを生成するコストを削減するためにキャッシュを有効にすることも選択できます。
 ---
 
 # SQL最適化プロセス {#sql-optimization-process}

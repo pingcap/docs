@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Cloud with dbt
-summary: Learn the use cases of dbt in TiDB Cloud.
+summary: TiDB Cloudとdbtを統合するために、dbt-tidbプラグインを使用します。これにより、分析エンジニアはSQLを使用して直接テーブルやビューを作成し、データを照合できます。dbtとdbt-tidbをインストールし、デモプロジェクトを作成します。プロジェクトを構成し、CSVファイルをロードしてデータを変換します。最後に、ドキュメントを生成してプロジェクトの構造を表示します。これにより、TiDB Cloudでdbtを使用する方法が紹介されます。
 ---
 
 # TiDB Cloudと dbt を統合する {#integrate-tidb-cloud-with-dbt}

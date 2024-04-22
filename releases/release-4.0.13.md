@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.13 Release Notes
-summary: TiDB 4.0.13 was released on May 28, 2021. New features include support for changing `AUTO_INCREMENT` to `AUTO_RANDOM` and the addition of `infoschema.client_errors_summary` tables. Improvements were made to TiDB, TiKV, PD, TiFlash, and Tools. Bug fixes were also implemented for TiDB, TiKV, TiFlash, and Tools, addressing various issues such as query results, panics, and memory usage.
+summary: TiDB 4.0.13は2021年5月28日にリリースされました。新機能には、AUTO_INCREMENT列からAUTO_RANDOM列への変更のサポートやinfoschema.client_errors_summaryテーブルの追加が含まれます。改善点には、CPU使用率が高くなるのを避けるためのテーブルの頻繁な読み取りの回避などがあります。バグの修正には、サブクエリを含むUPDATEステートメントの問題の修正やDIV式の問題の修正などが含まれます。TiKVやTiFlash、ツールの改善点やバグの修正も含まれています。
 ---
 
 # TiDB 4.0.13 リリースノート {#tidb-4-0-13-release-notes}

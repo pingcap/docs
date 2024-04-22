@@ -1,6 +1,6 @@
 ---
 title: CLUSTER_HARDWARE
-summary: Learn the `CLUSTER_HARDWARE` information_schema table.
+summary: `CLUSTER_HARDWARE`ハードウェア システム テーブルは、クラスターの各インスタンスが配置されているサーバーのハードウェア情報を提供します。このテーブルは TiDB セルフホスト型にのみ適用され、 TiDB Cloud では使用できません。`TYPE`フィールドには`tidb` 、 `pd` 、および`tikv`のオプションの値があります。`INSTANCE`フィールドはクラスタ情報テーブルの`INSTANCE`フィールドに対応します。デバイスの種類には `cpu` 、 `memory` 、 `disk` 、および`net`があります。
 ---
 
 # クラスター_ハードウェア {#cluster-hardware}

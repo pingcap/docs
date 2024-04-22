@@ -1,6 +1,6 @@
 ---
 title: TiDB Data Migration Table Routing
-summary: Learn the usage and precautions of table routing in DM.
+summary: TiDB Data Migration (DM) を使用してデータを移行する際に、特定のテーブルを指定されたテーブルに移行するためのテーブルルーティングを構成できます。テーブルルーティングを構成する際には、正規表現やワイルドカードを使用してデータベース名とテーブル名を一致させることができます。さらに、テーブル、スキーマ、ソース情報を抽出し、マージされたテーブルに書き込むことも可能です。これにより、シャードされたスキーマやテーブルを効果的にマージすることができます。
 ---
 
 # TiDB データ移行テーブルのルーティング {#tidb-data-migration-table-routing}

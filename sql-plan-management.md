@@ -1,6 +1,6 @@
 ---
 title: SQL Plan Management (SPM)
-summary: Learn about SQL Plan Management in TiDB.
+summary: TiDBでSQLプラン管理について学びます。
 ---
 
 # SQL 計画管理 (SPM) {#sql-plan-management-spm}

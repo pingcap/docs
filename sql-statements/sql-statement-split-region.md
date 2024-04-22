@@ -1,6 +1,6 @@
 ---
 title: Split Region
-summary: An overview of the usage of Split Region for the TiDB database.
+summary: TiDBでは、新しいテーブルごとにデフォルトで1つのリージョンがセグメント化されます。リージョン内のデータがデフォルトのリージョンサイズ制限を超えると、リージョンは2つに分割され始めます。この機能は、指定されたパラメーターに従って特定のテーブルの複数のリージョンを事前に分割し、それらを各TiKVノードに分散できる事前分割機能を導入します。テーブルの作成時にリージョンを均等に分割するには、SHARD_ROW_ID_BITSとPRE_SPLIT_REGIONSを併用することをお勧めします。
 ---
 
 # 分割リージョン {#split-region}

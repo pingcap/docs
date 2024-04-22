@@ -1,6 +1,6 @@
 ---
 title: ticloud cluster connect-info
-summary: The reference of `ticloud cluster connect-info`.
+summary: ticloud クラスターの接続文字列を取得するためのコマンドです。現在、TiDB サーバーレスクラスターの接続文字列の取得のみをサポートしています。対話型モードと非対話モードで使用可能であり、必要なフラグを手動で入力する必要があります。フラグにはプロジェクトID文字列、クラスターID文字列、クライアント文字列、オペレーティングシステム文字列が含まれます。また、継承されたフラグとして色なしとプロファイル文字列があります。質問や提案がある場合は、TiDB Cloud CLI の問題を作成してください。
 ---
 
 # ticloud クラスターの接続情報 {#ticloud-cluster-connect-info}

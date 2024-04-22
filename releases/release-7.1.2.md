@@ -1,6 +1,6 @@
 ---
 title: TiDB 7.1.2 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 7.1.2.
+summary: TiDB 7.1.2は2023年10月25日にリリースされました。このバージョンでは、セキュリティ強化モードでの設定変更やオプティマイザーのヒントの追加、RocksDBの動作変更などが行われました。さらに、TiKVやPD、TiFlash、ツールなどの改善やバグ修正も含まれています。
 ---
 
 # TiDB 7.1.2 リリースノート {#tidb-7-1-2-release-notes}

@@ -1,6 +1,6 @@
 ---
 title: KEY_COLUMN_USAGE
-summary: Learn the `KEY_COLUMN_USAGE` information_schema table.
+summary: `KEY_COLUMN_USAGE`表は、列のキー制約を示します。`CONSTRAINT_CATALOG`は常に`def`です。`CONSTRAINT_SCHEMA`は制約が属するスキーマの名前。`CONSTRAINT_NAME`は制約の名前。`TABLE_CATALOG`は常に`def`です。`TABLE_SCHEMA`はテーブルが属するスキーマの名前。`TABLE_NAME`は制約のあるテーブルの名前。`COLUMN_NAME`は制約のある列の名前。`ORDINAL_POSITION`は制約内の列の位置。`POSITION_IN_UNIQUE_CONSTRAINT`は一意制約と主キー制約が空。`REFERENCED_TABLE_SCHEMA`は制約によって参照されるスキーマの名前。`REFERENCED_TABLE_NAME`は制約によって参照されるテーブルの名前。`REFERENCED_COLUMN_NAME`は制約によって参照される列の名前。
 ---
 
 # KEY_COLUMN_USAGE {#key-column-usage}

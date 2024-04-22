@@ -1,6 +1,6 @@
 ---
 title: Credits
-summary: Learn about the list and roles of contributors to the TiDB community.
+summary: TiDB 開発者は、新機能の開発、パフォーマンスの向上、安定性の保証、バグ修正に貢献します。また、ライターと翻訳者は、TiDB と関連プロジェクトのドキュメントを作成および翻訳します。すべての貢献者に感謝します。
 ---
 
 # クレジット {#credits}
