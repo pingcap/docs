@@ -201,7 +201,7 @@ In addition, TiDB provides three tables to obtain more information about TTL job
     1 row in set (0.040 sec)
     ```
 
-    The column `table_id` is the ID of the partitioned table, and the `parent_table_id` is the ID of the table, corresponding with the ID in  `infomation_schema.tables`. If the table is not a partitioned table, the two IDs are the same.
+    The column `table_id` is the ID of the partitioned table, and the `parent_table_id` is the ID of the table, corresponding with the ID in the `TIDB_TABLE_ID` column of [`information_schema.tables`](/information-schema/information-schema-tables.md). If the table is not a partitioned table, the two IDs are the same.
 
     The columns `{last, current}_job_{start_time, finish_time, ttl_expire}` describe respectively the start time, finish time, and expiration time used by the TTL job of the last or current execution. The `last_job_summary` column describes the execution status of the last TTL task, including the total number of rows, the number of successful rows, and the number of failed rows.
 
