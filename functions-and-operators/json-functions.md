@@ -6,7 +6,7 @@ aliases: ['/docs/dev/functions-and-operators/json-functions/','/docs/dev/referen
 
 # JSON Functions
 
-TiDB supports most of the JSON functions that shipped with the GA release of MySQL 5.7.
+TiDB supports most of the [JSON functions](https://dev.mysql.com/doc/refman/8.0/en/json-functions.html) available in MySQL 8.0.
 
 ## Functions that create JSON values
 
@@ -35,18 +35,16 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 | Function Name                     | Description |
 | --------------------------------- | ----------- |
 | [JSON_APPEND(json_doc, path, value)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-append) | An alias to `JSON_ARRAY_APPEND` |
-| [JSON_ARRAY_APPEND(json_doc, path, value)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-append) | Appends a value to the end of a JSON array at a specified path |
-| [JSON_ARRAY_INSERT(json_doc, path, val[, path, val] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-insert) | Inserts an array into the json document and returns the modified document |
+| [JSON_ARRAY_APPEND(json_doc, path, val[, path, val] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-append) | Appends values to the end of the indicated arrays within a JSON document and returns the result |
+| [JSON_ARRAY_INSERT(json_doc, path, val[, path, val] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-insert) | Insert values into the specified locations of a JSON document and returns the result |
 | [JSON_INSERT(json_doc, path, val[, path, val] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-insert) | Inserts data into a JSON document and returns the result |
-| [JSON_MERGE(json_doc, json_doc[, json_doc] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge)  | A deprecated alias for `JSON_MERGE_PRESERVE` |
 | [JSON_MERGE_PATCH(json_doc, json_doc[, json_doc] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge-patch)  | Merge JSON documents |
 | [JSON_MERGE_PRESERVE(json_doc, json_doc[, json_doc] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge-preserve)  | Merges two or more JSON documents and returns the merged result |
+| [JSON_MERGE(json_doc, json_doc[, json_doc] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge)  | A deprecated alias for `JSON_MERGE_PRESERVE` |
 | [JSON_REMOVE(json_doc, path[, path] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-remove)    | Removes data from a JSON document and returns the result |
 | [JSON_REPLACE(json_doc, path, val[, path, val] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-replace) | Replaces existing values in a JSON document and returns the result |
 | [JSON_SET(json_doc, path, val[, path, val] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-set)  | Inserts or updates data in a JSON document and returns the result |
 | [JSON_UNQUOTE(json_val)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-unquote) |  Unquotes a JSON value and returns the result as a string |
-| [JSON_ARRAY_APPEND(json_doc, path, val[, path, val] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-append) | Appends values to the end of the indicated arrays within a JSON document and returns the result |
-| [JSON_ARRAY_INSERT(json_doc, path, val[, path, val] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-insert) | Insert values into the specified location of a JSON document and returns the result |
 
 ## Functions that return JSON value attributes
 
@@ -76,3 +74,12 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 
 * [JSON Function Reference](https://dev.mysql.com/doc/refman/8.0/en/json-function-reference.html)
 * [JSON Data Type](/data-type-json.md)
+
+## Unsupported functions
+
+- `JSON_SCHEMA_VALID()`
+- `JSON_SCHEMA_VALIDATION_REPORT()`
+- `JSON_TABLE()`
+- `JSON_VALUE()`
+
+For more information, see [#14486](https://github.com/pingcap/tidb/issues/14486).
