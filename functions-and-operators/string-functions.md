@@ -1218,7 +1218,7 @@ SELECT 'aaa' LIKE 'a%', 'aaa' NOT LIKE 'a%';
 1 row in set (0.00 sec)
 ```
 
-In the following example, `NOT LIKE` returns `1` (True) because "aaa" does not match the `b%` pattern.
+In the following example, `NOT LIKE` returns `1` (True) because `aaa` does not match the `b%` pattern.
 
 ```sql
 SELECT 'aaa' LIKE 'b%', 'aaa' NOT LIKE 'b%';
