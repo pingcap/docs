@@ -1279,7 +1279,7 @@ SELECT MAKE_SET(b'100','foo','bar','baz');
 1 row in set (0.00 sec)
 ```
 
-In the following example, because all bits are `1`, the function only returns all three strings in a comma-separated result set.
+In the following example, because all bits are `1`, the function returns all three strings in a comma-separated result set.
 
 ```sql
 SELECT MAKE_SET(b'111','foo','bar','baz');
