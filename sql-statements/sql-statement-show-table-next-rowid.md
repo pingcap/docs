@@ -38,7 +38,7 @@ SHOW TABLE t NEXT_ROW_ID;
 1 row in set (0.00 sec)
 ```
 
-Data have been written to the table. The TiDB server that inserts the data allocates and caches 30000 IDs at once. Thus, NEXT_GLOBAL_ROW_ID is 30001 now. The number of IDs is controled by the [`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache).
+Data have been written to the table. The TiDB server that inserts the data allocates and caches 30000 IDs at once. Thus, NEXT_GLOBAL_ROW_ID is 30001 now. The number of IDs is controlled by [`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache).
 
 ```sql
 INSERT INTO t VALUES (), (), ();
