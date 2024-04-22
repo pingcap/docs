@@ -26,7 +26,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 <tbody>
   <tr>
     <td rowspan="5">Scalability and Performance</td>
-    <td><a href="https://docs.pingcap.com/zh/tidb/v8.1/br-snapshot-guide#restore-cluster-snapshots">Acceleration of cluster snapshot restore speed (GA in v8.0.0)</a></td>
+    <td><a href="https://docs.pingcap.com/zh/tidb/v8.1/br-snapshot-guide#restore-cluster-snapshots">Acceleration of cluster snapshot restore speed</a> (GA in v8.0.0)</td>
     <td>With this feature, BR can fully leverage the scale advantage of a cluster, enabling all TiKV nodes in the cluster to participate in the preparation step of data restores. This feature can significantly improve the restore speed of large datasets in large-scale clusters. Real-world tests show that this feature can saturate the download bandwidth, with the download speed improving by 8 to 10 times, and the end-to-end restore speed improving by approximately 1.5 to 3 times.</td>
   </tr>
   <tr>
@@ -38,7 +38,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
     <td>TiDB v7.6.0 introduces an experimental feature "Active PD Follower", which allows PD followers to provide Region information query services. This feature improves the capability of the PD cluster to handle <code>GetRegion</code> and <code>ScanRegions</code> requests in clusters with a large number of TiDB nodes and Regions, thereby reducing the CPU pressure on the PD leader.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/zh/tidb/v8.1/system-variables#tidb_dml_type-new-in-v800">Bulk DML for much larger transactions (experimental, introduced in v8.0.0)</a></td>
+    <td><a href="https://docs.pingcap.com/zh/tidb/v8.1/system-variables#tidb_dml_type-new-in-v800">Bulk DML for much larger transactions</a> (experimental, introduced in v8.0.0)</td>
     <td>Large batch DML jobs, such as extensive cleanup jobs, joins, or aggregations, can consume a significant amount of memory and have previously been limited at very large scales. Bulk DML (<code>tidb_dml_type = "bulk"</code>) is a new DML type for handling large batch DML tasks more efficiently while providing transaction guarantees and mitigating OOM issues. This feature differs from import, load, and restore operations when used for data loading.</td>
   </tr>
   <tr>
@@ -52,7 +52,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
   </tr>
   <tr>
     <td rowspan="5">Reliability and availability	</td>
-    <td><a href="https://docs.pingcap.com/zh/tidb/v8.1/ddl-v2">建表性能提升 10 倍</a>（实验特性，从 v7.6.0 开始引入）</td>
+    <td><a href="https://docs.pingcap.com/zh/tidb/v8.1/tidb-global-sort">全局排序成为正式功能</a>（从 v8.0.0 开始 GA）**tw@qiancai**</td>
     <td>全局排序功能旨在提高 IMPORT INTO 和 CREATE INDEX 的稳定性与效率。通过将任务需要处理的数据进行全局排序，可以提高数据写入 TiKV 的稳定性、可控性和可扩展性，从而提供更好的数据导入与 DDL 任务的用户体验及更高质量的服务。目前已经支持 40 TiB 的数据进行导入或者添加索引。</td>
   </tr>
   <tr>
@@ -60,15 +60,15 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
     <td>When managing hundreds of databases with the same schema, it is often necessary to apply SQL bindings across these databases. For example, in SaaS or PaaS data platforms, each user typically operates separate databases with the same schema and runs similar SQL queries on them. In this case, it is impractical to bind SQL for each database one by one. TiDB v7.6.0 introduces cross-database SQL bindings that enable matching bindings across all schema-equivalent databases.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/zh/tidb/v8.1/tiproxy-overview">Support TiProxy (GA in v8.0.0)</a></td>
+    <td><a href="https://docs.pingcap.com/zh/tidb/v8.1/tiproxy-overview">Support TiProxy</a> (GA in v8.0.0)</td>
     <td>Full support for the TiProxy service, easily deployable via deployment tooling, to manage and maintain connections to TiDB so that they live through rolling restarts, upgrades, or scaling events.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/zh/tidb/v8.1/dm-compatibility-catalog">Data Migration (DM) officially supports MySQL 8.0 (GA in v7.6.0)</a></td>
+    <td><a href="https://docs.pingcap.com/zh/tidb/v8.1/dm-compatibility-catalog">Data Migration (DM) officially supports MySQL 8.0</a> (GA in v7.6.0)</td>
     <td>Previously, using DM to migrate data from MySQL 8.0 is an experimental feature and is not available for production environments. TiDB v7.6.0 enhances the stability and compatibility of this feature to help you smoothly and quickly migrate data from MySQL 8.0 to TiDB in production environments. In v7.6.0, this feature becomes generally available (GA).</td>
   </tr>
   <tr>
-    <td>资源管控支持<a href="https://docs.pingcap.com/zh/tidb/v8.1/tidb-resource-control#管理资源消耗超出预期的查询-runaway-queries">管理资源消耗超出预期的查询</a> (GA)</td><!-- **tw@lilin90** -->
+    <td>资源管控支持<a href="https://docs.pingcap.com/zh/tidb/v8.1/tidb-resource-control#管理资源消耗超出预期的查询-runaway-queries">管理资源消耗超出预期的查询</a> (GA) **tw@lilin90**</td>
     <td>通过资源组的规则，TiDB 能够自动识别出运行超出预期的查询，并对该查询进行限流或取消处理。 即使没有被规则识别，用户仍旧可以手工添加查询特征以及对应的手段措施，从而降低突发的查询性能对整个数据库的影响。</td>
   </tr>
   <tr>
@@ -82,7 +82,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
     <td>TiCDC introduces a new protocol, the Simple protocol. This protocol provides in-band schema tracking capabilities by embedding table schema information in DDL and BOOTSTRAP events.</td>
   </tr>
   <tr>
-    <td>TiCDC adds support for <a href="https://docs.pingcap.com/tidb/v8.1/ticdc-debezium">the Debezium format protocol</a>(introduced in v8.0.0)</td>
+    <td>TiCDC adds support for <a href="https://docs.pingcap.com/tidb/v8.1/ticdc-debezium">the Debezium format protocol</a> (introduced in v8.0.0)</td>
     <td>TiCDC introduces a new protocol, the Debezium protocol. TiCDC can now publish data change events to a Kafka sink using a protocol that generates Debezium style messages.</td>
   </tr>
 </tbody>
