@@ -181,7 +181,7 @@ sync-diff-inspector sends progress information to `stdout` when running. Progres
 >
 > To ensure the display effect, keep the display window width above 80 characters.
 
-```progress
+```
 A total of 2 tables need to be compared
 
 Comparing the table structure of ``sbtest`.`sbtest96`` ... equivalent
@@ -192,7 +192,7 @@ _____________________________________________________________________________
 Progress [==========================================================>--] 98% 193/200
 ```
 
-```progress
+```
 A total of 2 tables need to be compared
 
 Comparing the table structure of ``sbtest`.`sbtest96`` ... equivalent
@@ -244,7 +244,7 @@ The running sync-diff-inspector periodically (every 10 seconds) prints the progr
 
 After the check is finished, sync-diff-inspector outputs a report. It is located at `${output}/summary.txt`, and `${output}` is the value of `output-dir` in the `config.toml` file.
 
-```summary
+```
 +---------------------+--------------------+----------------+---------+-----------+
 |        TABLE        | STRUCTURE EQUALITY | DATA DIFF ROWS | UPCOUNT | DOWNCOUNT |
 +---------------------+--------------------+----------------+---------+-----------+
