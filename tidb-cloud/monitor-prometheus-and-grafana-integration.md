@@ -25,20 +25,20 @@ This document describes how to configure your Prometheus service to read key met
 
 ### Step 1. Get a scrape_config file for Prometheus
 
-Before configuring your Prometheus service to read metrics of TiDB Cloud, you need to generate a scrape_config YAML file in TiDB Cloud first. The scrape_config file contains a unique bearer token that allows the Prometheus service to monitor any database clusters in the current project.
+Before configuring your Prometheus service to read metrics of TiDB Cloud, you need to generate a `scrape_config` YAML file in TiDB Cloud first. The `scrape_config` file contains a unique bearer token that allows the Prometheus service to monitor any database clusters in the current project.
 
-To get the scrape_config file for Prometheus, do the following:
+To get the `scrape_config` file for Prometheus, do the following:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
 3. On the **Project Settings** page of your project, click **Integrations** in the left navigation pane, and then click **Integration to Prometheus (BETA)**.
 4. Click **Add File** to generate and show the scrape_config file for the current project.
 
-5. Make a copy of the scrape_config file content for later use.
+5. Make a copy of the `scrape_config` file content for later use.
 
     > **Note:**
     >
-    > For security reasons, TiDB Cloud only shows a newly generated scrape_config file once. Ensure that you copy the content before closing the file window. If you forget to do so, you need to delete the scrape_config file in TiDB Cloud and generate a new one. To delete a scrape_config file, select the file, click **...**, and then click **Delete**.
+    > For security reasons, TiDB Cloud only shows a newly generated `scrape_config` file once. Ensure that you copy the content before closing the file window. If you forget to do so, you need to delete the `scrape_config` file in TiDB Cloud and generate a new one. To delete a `scrape_config` file, select the file, click **...**, and then click **Delete**.
 
 ### Step 2. Integrate with Prometheus
 
@@ -46,9 +46,9 @@ To get the scrape_config file for Prometheus, do the following:
 
     For example, `/etc/prometheus/prometheus.yml`.
 
-2. In the Prometheus configuration file, locate the `scrape_configs` section, and then copy the scrape_config file content obtained from TiDB Cloud to the section.
+2. In the Prometheus configuration file, locate the `scrape_configs` section, and then copy the `scrape_config` file content obtained from TiDB Cloud to the section.
 
-3. In your Prometheus service, check **Status** > **Targets** to confirm that the new scrape_config file has been read. If not, you might need to restart the Prometheus service.
+3. In your Prometheus service, check **Status** > **Targets** to confirm that the new `scrape_config` file has been read. If not, you might need to restart the Prometheus service.
 
 ### Step 3. Use Grafana GUI dashboards to visualize the metrics
 
@@ -62,12 +62,12 @@ For more information about how to use Grafana, see [Grafana documentation](https
 
 ## Best practice of rotating scrape_config
 
-To improve data security, it is a general best practice to periodically rotate scrape_config file bearer tokens.
+To improve data security, it is a general best practice to periodically rotate `scrape_config` file bearer tokens.
 
-1. Follow [Step 1](#step-1-get-a-scrape_config-file-for-prometheus) to create a new scrape_config file for Prometheus.
+1. Follow [Step 1](#step-1-get-a-scrape_config-file-for-prometheus) to create a new `scrape_config` file for Prometheus.
 2. Add the content of the new file to your Prometheus configuration file.
-3. Once you have confirmed that your Prometheus service is still able to read from TiDB Cloud, remove the content of the old scrape_config file from your Prometheus configuration file.
-4. On the **Integration** page of your project, delete the corresponding old scrape_config file to block anyone else from using it to read from the TiDB Cloud Prometheus endpoint.
+3. Once you have confirmed that your Prometheus service is still able to read from TiDB Cloud, remove the content of the old `scrape_config` file from your Prometheus configuration file.
+4. On the **Integration** page of your project, delete the corresponding old `scrape_config` file to block anyone else from using it to read from the TiDB Cloud Prometheus endpoint.
 
 ## Metrics available to Prometheus
 
