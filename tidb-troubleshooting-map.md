@@ -415,7 +415,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
     - The binlog data is too large, so the single message written to Kafka is too large. You need to modify the following configuration of Kafka:
 
-        ```conf
+        ```properties
         message.max.bytes=1073741824
         replica.fetch.max.bytes=1073741824
         fetch.message.max.bytes=1073741824
