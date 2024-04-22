@@ -176,7 +176,7 @@ In addition, TiDB provides three tables to obtain more information about TTL job
 + The `mysql.tidb_ttl_table_status` table contains information about the previously executed TTL job and ongoing TTL job for all TTL tables
 
     ```sql
-    SELECT * FROM mysql.tidb_ttl_table_status LIMIT 1\G
+    TABLE mysql.tidb_ttl_table_status LIMIT 1\G
     ```
 
     ```
