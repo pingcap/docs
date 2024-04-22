@@ -1238,13 +1238,17 @@ SELECT LPAD('TiDB',-2,'>');
 
 ### [`LTRIM()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ltrim)
 
-Remove leading spaces.
+The `LTRIM()` function removes leading spaces from a given string.
 
-If the first argument is NULL then the function returns NULL.
+If the argument is `NULL`, this function returns `NULL`.
 
-This function only strips the space character (U+0020) and not any other space like characters like tab (U+0009) or NBSP (U+00A0).
+> **Note:**
+>
+> This function only removes the space character (U+0020) and does not remove other space-like characters such as tab (U+0009) or non-breaking space (U+00A0).
 
-In the example below the `LTRIM()` function removes the leading spaces of "    hello", which gives "hello" as result.
+Examples:
+
+In the following example, the `LTRIM()` function removes the leading spaces from `'    hello'` and returns `hello`.
 
 ```sql
 SELECT LTRIM('    hello');
@@ -1259,7 +1263,7 @@ SELECT LTRIM('    hello');
 1 row in set (0.00 sec)
 ```
 
-In the example below the `LTRIM()` function removes the leading spaces of "    hello", which gives "hello" as result. We then use [`CONCAT()`](#concat) to add `«` before it and `»` after it. This makes it a bit easier to see that all spaces are removed.
+In the following example, [`CONCAT()`](#concat) is used to enclose the result of `LTRIM('    hello')` with `«` and `»`. This formatting makes it a bit easier to see that all leading spaces are removed.
 
 ```sql
 SELECT CONCAT('«',LTRIM('    hello'),'»');
@@ -1276,11 +1280,20 @@ SELECT CONCAT('«',LTRIM('    hello'),'»');
 
 ### [`MAKE_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_make-set)
 
-Return a set of comma-separated strings that have the corresponding bit in bits set.
+The `MAKE_SET()` function returns a set of comma-separated strings based on whether a corresponding bit is set to `1`.
 
-If the first argument is set to NULL then the function returns NULL.
+Syntax:
 
-In the example below you can see that the bits in the first argument control which of the other arguments are part of the comma separated resultset.
+```sql
+MAKE_SET(bits, str1, str2, ...)
+```
+
+- `bits`: controls which subsequent string arguments to include in the result set. If `bits` is set to `NULL`, the function returns `NULL`.
+- `str1, str2, ...`: a list of strings. Each string corresponds to a bit in the `bits` argument from right to left. `str1` corresponds to the first bit from the right, `str2` corresponds to the second bit from the right, and so on. If the corresponding bit is `1`, the string is included in the result; otherwise, it is not included.
+
+Examples:
+
+In the following example, because all bits are set to `0` in the `bits` argument, the function does not include any subsequent strings in the result and returns an empty string.
 
 ```sql
 SELECT MAKE_SET(b'000','foo','bar','baz');
@@ -1295,7 +1308,7 @@ SELECT MAKE_SET(b'000','foo','bar','baz');
 1 row in set (0.00 sec)
 ```
 
-Here the result is "" (empty string) as all bits are set to 0.
+In the following example, because only the first bit from the right is `1`, the function only returns the first string `foo`.
 
 ```sql
 SELECT MAKE_SET(b'001','foo','bar','baz');
@@ -1310,7 +1323,7 @@ SELECT MAKE_SET(b'001','foo','bar','baz');
 1 row in set (0.00 sec)
 ```
 
-Here the result is "foo" as only the first bit from the right is set to 1.
+In the following example, because only the second bit from the right is `1`, the function only returns the second string `bar`.
 
 ```sql
 SELECT MAKE_SET(b'010','foo','bar','baz');
@@ -1325,7 +1338,7 @@ SELECT MAKE_SET(b'010','foo','bar','baz');
 1 row in set (0.00 sec)
 ```
 
-Here the result is "bar" as only the second bit from the right is set to 1.
+In the following example, because only the third bit from the right is `1`, the function only returns the third string `baz`.
 
 ```sql
 SELECT MAKE_SET(b'100','foo','bar','baz');
@@ -1340,7 +1353,7 @@ SELECT MAKE_SET(b'100','foo','bar','baz');
 1 row in set (0.00 sec)
 ```
 
-Here the result is "baz" as only the third bit from the right is set to 1.
+In the following example, because all bits are `1`, the function only returns all three strings in a comma-separated result set.
 
 ```sql
 SELECT MAKE_SET(b'111','foo','bar','baz');
@@ -1354,8 +1367,6 @@ SELECT MAKE_SET(b'111','foo','bar','baz');
 +------------------------------------+
 1 row in set (0.0002 sec)
 ```
-
-Here the result is "foo,bar,baz" as all three bits are set to 1.
 
 ### [`MID()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_mid)
 
