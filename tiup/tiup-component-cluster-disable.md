@@ -1,6 +1,6 @@
 ---
 title: tiup cluster disable
-summary: tiup cluster disableコマンドは、クラスターサービスの自動有効化を無効にします。`tiup cluster disable <cluster-name>`を使用し、`-N, --node`オプションでノードを指定し、`-R, --role`オプションで役割を指定します。`-h, --help`オプションでヘルプ情報を出力します。実行ログはtiup-clusterの実行ログです。
+summary: tiup cluster disableコマンドは、クラスターサービスの自動有効化を無効にします。tiup cluster disable <cluster-name>を使用し、-N, --nodeオプションでノードを指定し、-R, --roleオプションで役割を指定します。-h, --helpオプションでヘルプ情報を出力します。実行ログはtiup-clusterの実行ログです。
 ---
 
 # tiup cluster disable {#tiup-cluster-disable}

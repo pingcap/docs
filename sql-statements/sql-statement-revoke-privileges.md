@@ -1,6 +1,6 @@
 ---
 title: REVOKE <privileges> | TiDB SQL Statement Reference
-summary: このステートメントは、既存のユーザーから権限を削除します。実行には `GRANT OPTION` 権限と取り消すすべての権限が必要です。MySQLの互換性では、TiDBでは即座に反映されますが、MySQLでは後続の接続でのみ有効になります。
+summary: このステートメントは、既存のユーザーから権限を削除します。実行には GRANT OPTION 権限と取り消すすべての権限が必要です。MySQLの互換性では、TiDBでは即座に反映されますが、MySQLでは後続の接続でのみ有効になります。
 ---
 
 # <code>REVOKE &#x3C;privileges></code> {#code-revoke-x3c-privileges-code}

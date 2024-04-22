@@ -1,6 +1,6 @@
 ---
 title: ANALYZE | TiDB SQL Statement Reference
-summary: TiDBは、テーブルとインデックスに基づいて統計を更新するために`ANALYZE`ステートメントを使用します。統計が独自の推定値と矛盾している場合、自動的に統計を更新します。現在、TiDBは`ANALYZE TABLE`ステートメントを使用して統計情報を収集します。MySQLとは異なり、TiDBの`ANALYZE TABLE`実行には時間がかかることがあります。
+summary: TiDBは、テーブルとインデックスに基づいて統計を更新するためにANALYZEステートメントを使用します。統計が独自の推定値と矛盾している場合、自動的に統計を更新します。現在、TiDBはANALYZE TABLEステートメントを使用して統計情報を収集します。MySQLとは異なり、TiDBのANALYZE TABLE実行には時間がかかることがあります。
 ---
 
 # 分析する {#analyze}

@@ -1,6 +1,6 @@
 ---
 title: SHOW TABLE REGIONS
-summary: テーブル領域を表示するための`SHOW TABLE REGIONS`ステートメントは、TiDB内のテーブルのリージョン情報を表示します。この機能はTiDBサーバーレスクラスターでは使用できません。構文は`SHOW TABLE [table_name] REGIONS [WhereClauseOptional]`です。実行すると、リージョンID、開始キー、終了キー、LeaderID、Leaderの店舗ID、すべてのリージョンレプリカのIDなどが返されます。これらの値は正確なデータではなく、PDから推定されたデータです。リージョンのバランスを自動的に再調整するためには、`SPLIT TABLE REGION`ステートメントを使用します。
+summary: テーブル領域を表示するためのSHOW TABLE REGIONSステートメントは、TiDB内のテーブルのリージョン情報を表示します。この機能はTiDBサーバーレスクラスターでは使用できません。構文はSHOW TABLE [table_name] REGIONS [WhereClauseOptional]です。実行すると、リージョンID、開始キー、終了キー、LeaderID、Leaderの店舗ID、すべてのリージョンレプリカのIDなどが返されます。これらの値は正確なデータではなく、PDから推定されたデータです。リージョンのバランスを自動的に再調整するためには、SPLIT TABLE REGIONステートメントを使用します。
 ---
 
 # テーブル領域を表示 {#show-table-regions}

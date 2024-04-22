@@ -1,6 +1,6 @@
 ---
 title: RECOVER TABLE
-summary: `RECOVER TABLE`は、`DROP TABLE`ステートメントの実行後、GCの有効期間内に削除されたテーブルとそのデータを回復するために使用されます。テーブルが削除され、GCライフタイムが切れた場合、`RECOVER TABLE`で回復することはできません。TiDBバージョンが3.0.0以降の場合、TiDB Binlogを使用するときに`RECOVER TABLE`を使用することはお勧めできません。`RECOVER TABLE`はBinlogバージョン3.0.1でサポートされており、3つの状況で使用できます。テーブルのリカバリは、TiDBがスナップショット読み取りを通じてテーブルメタデータを取得し、その後`CREATE TABLE`と同様のテーブル作成プロセスを経ることによって行われます。
+summary: RECOVER TABLEは、DROP TABLEステートメントの実行後、GCの有効期間内に削除されたテーブルとそのデータを回復するために使用されます。テーブルが削除され、GCライフタイムが切れた場合、RECOVER TABLEで回復することはできません。TiDBバージョンが3.0.0以降の場合、TiDB Binlogを使用するときにRECOVER TABLEを使用することはお勧めできません。RECOVER TABLEはBinlogバージョン3.0.1でサポートされており、3つの状況で使用できます。テーブルのリカバリは、TiDBがスナップショット読み取りを通じてテーブルメタデータを取得し、その後CREATE TABLEと同様のテーブル作成プロセスを経ることによって行われます。
 ---
 
 # テーブルを回復する {#recover-table}

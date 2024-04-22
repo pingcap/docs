@@ -1,6 +1,6 @@
 ---
 title: SHOW CREATE DATABASE
-summary: `SHOW CREATE DATABASE`は、既存のデータベースを再作成するための正確なSQLステートメントを示すために使用されます。`SHOW CREATE SCHEMA`はその同義語です。MySQLの互換性が期待されており、互換性の違いが見つかった場合はバグを報告できます。関連するトピックにはテーブルの作成、ドロップテーブル、テーブルを表示、次の列を表示があります。
+summary: SHOW CREATE DATABASEは、既存のデータベースを再作成するための正確なSQLステートメントを示すために使用されます。SHOW CREATE SCHEMAはその同義語です。MySQLの互換性が期待されており、互換性の違いが見つかった場合はバグを報告できます。関連するトピックにはテーブルの作成、ドロップテーブル、テーブルを表示、次の列を表示があります。
 ---
 
 # 表示 データベースの作成 {#show-create-database}

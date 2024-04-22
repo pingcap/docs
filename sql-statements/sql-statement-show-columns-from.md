@@ -1,6 +1,6 @@
 ---
 title: SHOW [FULL] COLUMNS FROM | TiDB SQL Statement Reference
-summary: ステートメント`SHOW [FULL] COLUMNS FROM <table_name>`は、テーブルまたはビューの列を便利な表形式で記述します。オプションのキーワード`FULL`は、現在のユーザーがその列に対して持つ権限を表示し、`comment`はテーブル定義からの権限を表示します。このステートメントの別名には、`SHOW [FULL] FIELDS FROM <table_name>`、`DESC <table_name>`、`DESCRIBE <table_name>`、および`EXPLAIN <table_name>`があります。MySQLの互換性があります。
+summary: ステートメントSHOW [FULL] COLUMNS FROM <table_name>は、テーブルまたはビューの列を便利な表形式で記述します。オプションのキーワードFULLは、現在のユーザーがその列に対して持つ権限を表示し、commentはテーブル定義からの権限を表示します。このステートメントの別名には、SHOW [FULL] FIELDS FROM <table_name>、DESC <table_name>、DESCRIBE <table_name>、およびEXPLAIN <table_name>があります。MySQLの互換性があります。
 ---
 
 # からの [完全な] 列を表示 {#show-full-columns-from}

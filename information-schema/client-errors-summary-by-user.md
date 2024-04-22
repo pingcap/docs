@@ -1,6 +1,6 @@
 ---
 title: CLIENT_ERRORS_SUMMARY_BY_USER
-summary: 表`CLIENT_ERRORS_SUMMARY_BY_USER`は、TiDBサーバーに接続するクライアントに返される SQL エラーと警告の概要を示しています。これには不正な形式のSQLステートメント、ゼロ除算エラー、範囲外または重複したキー値を挿入しようとしたエラーなどが含まれます。クライアントエラーはMySQLサーバープロトコル経由でクライアントに返され、アプリケーションは適切なアクションを実行することが期待されます。また、`CLIENT_ERRORS_SUMMARY_BY_USER`はユーザーごとにエラーを要約し、エラーを検査するための便利な方法を提供します。
+summary: 表CLIENT_ERRORS_SUMMARY_BY_USERは、TiDBサーバーに接続するクライアントに返される SQL エラーと警告の概要を示しています。これには不正な形式のSQLステートメント、ゼロ除算エラー、範囲外または重複したキー値を挿入しようとしたエラーなどが含まれます。クライアントエラーはMySQLサーバープロトコル経由でクライアントに返され、アプリケーションは適切なアクションを実行することが期待されます。また、CLIENT_ERRORS_SUMMARY_BY_USERはユーザーごとにエラーを要約し、エラーを検査するための便利な方法を提供します。
 ---
 
 # CLIENT_ERRORS_SUMMARY_BY_USER {#client-errors-summary-by-user}

@@ -1,6 +1,6 @@
 ---
 title: TiFlash Command-line Flags
-summary: TiFlashを起動する際に使用できるコマンドラインフラグを紹介します。`server --config-file`はTiFlash構成ファイルのパスを指定し、`dttool migrate`はDTFileのファイル形式を移行します。`dttool bench`は基本的なI/O速度テストを提供し、`dttool inspect`はDTFileの整合性をチェックします。これらのツールを使用して、データ形式の変更や整合性の検証が可能です。
+summary: TiFlashを起動する際に使用できるコマンドラインフラグを紹介します。server --config-fileはTiFlash構成ファイルのパスを指定し、dttool migrateはDTFileのファイル形式を移行します。dttool benchは基本的なI/O速度テストを提供し、dttool inspectはDTFileの整合性をチェックします。これらのツールを使用して、データ形式の変更や整合性の検証が可能です。
 ---
 
 # TiFlashコマンドライン フラグ {#tiflash-command-line-flags}

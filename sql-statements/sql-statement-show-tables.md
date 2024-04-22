@@ -1,6 +1,6 @@
 ---
 title: SHOW [FULL] TABLES | TiDB SQL Statement Reference
-summary: このステートメントは、データベース内のテーブルとビューのリストを表示します。オプションのキーワード`FULL`はテーブルのタイプを示します。別のデータベース内のテーブルを表示するには、`SHOW TABLES IN DatabaseName`を使用します。MySQLの互換性があります。
+summary: このステートメントは、データベース内のテーブルとビューのリストを表示します。オプションのキーワードFULLはテーブルのタイプを示します。別のデータベース内のテーブルを表示するには、SHOW TABLES IN DatabaseNameを使用します。MySQLの互換性があります。
 ---
 
 # [完全な] テーブルを表示 {#show-full-tables}

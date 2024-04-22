@@ -1,6 +1,6 @@
 ---
 title: SHOW ANALYZE STATUS
-summary: TiDBの`SHOW ANALYZE STATUS`ステートメントは、統計収集タスクと履歴タスクを表示します。クラスターレベルのタスク表示をサポートし、再起動後もタスクレコードを表示できます。過去7日間の履歴タスクは`mysql.analyze_jobs`で表示可能で、現在の`ANALYZE`タスクの進行状況も表示できます。MySQLの互換性もあります。
+summary: TiDBのSHOW ANALYZE STATUSステートメントは、統計収集タスクと履歴タスクを表示します。クラスターレベルのタスク表示をサポートし、再起動後もタスクレコードを表示できます。過去7日間の履歴タスクはmysql.analyze_jobsで表示可能で、現在のANALYZEタスクの進行状況も表示できます。MySQLの互換性もあります。
 ---
 
 # 分析ステータスの表示 {#show-analyze-status}

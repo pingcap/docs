@@ -1,6 +1,6 @@
 ---
 title: TIKV_STORE_STATUS
-summary: 表`TIKV_STORE_STATUS`は、PDのAPIを介してTiKVノードの基本情報を示します。列には、ストアのID、アドレス、状態、容量、リーダー数などが含まれます。このテーブルはTiDBサーバーレスクラスターでは使用できません。
+summary: 表TIKV_STORE_STATUSは、PDのAPIを介してTiKVノードの基本情報を示します。列には、ストアのID、アドレス、状態、容量、リーダー数などが含まれます。このテーブルはTiDBサーバーレスクラスターでは使用できません。
 ---
 
 # TIKV_STORE_STATUS {#tikv-store-status}

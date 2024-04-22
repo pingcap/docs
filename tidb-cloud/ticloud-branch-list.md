@@ -1,6 +1,6 @@
 ---
 title: ticloud branch list
-summary: リストしますすべてのブランチをクラスター。コマンド`ticloud branch list <cluster-id>`または`ticloud branch ls <cluster-id>`を使用します。例えば、`ticloud branch list`は対話モードで、`ticloud branch list <cluster-id>`は非対話モードで動作します。JSON形式でリストするには、`ticloud branch list <cluster-id> -o json`を使用します。`branch list`コマンドには`<cluster-id>`引数があります。また、`-h, --help`フラグはこのコマンドのヘルプ情報を提供し、`-o, --出力文字列`フラグは出力形式を指定します。`--色なし`フラグは出力のカラーを無効にし、`-P、--プロファイル文字列`フラグはアクティブなユーザープロフィールを指定します。TiDB Cloud CLIに関する質問や提案がある場合は、問題を作成してください。
+summary: リストしますすべてのブランチをクラスター。コマンドticloud branch list <cluster-id>またはticloud branch ls <cluster-id>を使用します。例えば、ticloud branch listは対話モードで、ticloud branch list <cluster-id>は非対話モードで動作します。JSON形式でリストするには、ticloud branch list <cluster-id> -o jsonを使用します。branch listコマンドには<cluster-id>引数があります。また、-h, --helpフラグはこのコマンドのヘルプ情報を提供し、-o, --出力文字列フラグは出力形式を指定します。--色なしフラグは出力のカラーを無効にし、-P、--プロファイル文字列フラグはアクティブなユーザープロフィールを指定します。TiDB Cloud CLIに関する質問や提案がある場合は、問題を作成してください。
 ---
 
 # ticloudブランチリスト {#ticloud-branch-list}

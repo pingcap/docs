@@ -1,6 +1,6 @@
 ---
 title: TiDB 1.0.5 Release Notes
-summary: TiDB 1.0.5は、Auto_Increment IDの最大値を`Show Create Table`ステートメントに追加し、潜在的なgoroutineリークを修正しました。また、遅いクエリの別ファイルへの出力をサポートし、新しいセッションを作成するときにTiKVから`TimeZone`変数をロードします。PDは特定の状況下でリーダーのバランスが取れなくなる問題を修正し、TiKVはCPU IDの取得が遅い問題を修正しました。1.0.4から1.0.5にアップグレードするには、PD -&gt; TiKV -&gt; TiDBのローリングアップグレードの順序に従います。
+summary: TiDB 1.0.5は、Auto_Increment IDの最大値をShow Create Tableステートメントに追加し、潜在的なgoroutineリークを修正しました。また、遅いクエリの別ファイルへの出力をサポートし、新しいセッションを作成するときにTiKVからTimeZone変数をロードします。PDは特定の状況下でリーダーのバランスが取れなくなる問題を修正し、TiKVはCPU IDの取得が遅い問題を修正しました。1.0.4から1.0.5にアップグレードするには、PD -&gt; TiKV -&gt; TiDBのローリングアップグレードの順序に従います。
 ---
 
 # TiDB 1.0.5 リリースノート {#tidb-1-0-5-release-notes}

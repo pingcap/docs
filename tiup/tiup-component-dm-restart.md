@@ -1,6 +1,6 @@
 ---
 title: tiup dm restart
-summary: ティアップDM再開コマンド`tiup dm restart`は、指定したクラスターのサービスを再起動するために使用されます。再起動プロセス中、関連サービスは一定期間利用できなくなります。構文は`tiup dm restart <cluster-name> [flags]`で、オプションには`-N, --node`、`-R, --role`、`-h, --help`があります。再起動処理のログが出力されます。
+summary: ティアップDM再開コマンドtiup dm restartは、指定したクラスターのサービスを再起動するために使用されます。再起動プロセス中、関連サービスは一定期間利用できなくなります。構文はtiup dm restart <cluster-name> [flags]で、オプションには-N, --node、-R, --role、-h, --helpがあります。再起動処理のログが出力されます。
 ---
 
 # ティアップDM再開 {#tiup-dm-restart}

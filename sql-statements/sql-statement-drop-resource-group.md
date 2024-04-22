@@ -1,6 +1,6 @@
 ---
 title: DROP RESOURCE GROUP
-summary: リソースグループを削除するためには、`DROP RESOURCE GROUP`ステートメントを使用します。ただし、`tidb_enable_resource_control`が`ON`に設定されている場合のみ実行できます。また、予約された`default`リソースグループは削除できません。MySQLとは異なり、TiDBは`FORCE`パラメータをサポートしていません。
+summary: リソースグループを削除するためには、DROP RESOURCE GROUPステートメントを使用します。ただし、tidb_enable_resource_controlがONに設定されている場合のみ実行できます。また、予約されたdefaultリソースグループは削除できません。MySQLとは異なり、TiDBはFORCEパラメータをサポートしていません。
 ---
 
 # リソースグループを削除 {#drop-resource-group}

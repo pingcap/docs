@@ -1,6 +1,6 @@
 ---
 title: SQL Logical Optimization
-summary: この章では、TiDBの最終的なクエリプラン生成に役立つ重要なロジックの書き換えについて説明します。例えば、TiDBで`select * from t where t.a in (select t1.a from t1 where t1.b=t.b)`クエリを実行すると、いくつかの書き換えが行われ、`IN`サブクエリ`t.a in (select t1.a from t1 where t1.b=t.b)`が存在しないことがわかります。この章では、サブクエリ関連の最適化、カラムの剪定、相関サブクエリの相関解除、最大値/最小値の削除、Predicate Push Down、パーティションのプルーニング、TopN およびリミット演算子のプッシュダウン、結合したテーブルの再配置について紹介します。
+summary: この章では、TiDBの最終的なクエリプラン生成に役立つ重要なロジックの書き換えについて説明します。例えば、TiDBでselect * from t where t.a in (select t1.a from t1 where t1.b=t.b)クエリを実行すると、いくつかの書き換えが行われ、INサブクエリt.a in (select t1.a from t1 where t1.b=t.b)が存在しないことがわかります。この章では、サブクエリ関連の最適化、カラムの剪定、相関サブクエリの相関解除、最大値/最小値の削除、Predicate Push Down、パーティションのプルーニング、TopN およびリミット演算子のプッシュダウン、結合したテーブルの再配置について紹介します。
 ---
 
 # SQL論理最適化 {#sql-logical-optimization}

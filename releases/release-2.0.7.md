@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.0.7 Release Notes
-summary: TiDB 2.0.7は、システムの互換性と安定性が向上しました。新機能には、`information_schema`に`PROCESSLIST`テーブルが追加され、改善にはSQLステートメントの実行詳細が`SLOW QUERY`ログに出力されるなどがあります。バグ修正も多数行われています。TiKVでは、空のクラスターの`dynamic-level-bytes`パラメーターが開かれ、リージョンの結合後の`approximate size`と`approximate keys count`が更新されます。
+summary: TiDB 2.0.7は、システムの互換性と安定性が向上しました。新機能には、information_schemaにPROCESSLISTテーブルが追加され、改善にはSQLステートメントの実行詳細がSLOW QUERYログに出力されるなどがあります。バグ修正も多数行われています。TiKVでは、空のクラスターのdynamic-level-bytesパラメーターが開かれ、リージョンの結合後のapproximate sizeとapproximate keys countが更新されます。
 ---
 
 # TiDB 2.0.7 リリースノート {#tidb-2-0-7-release-notes}

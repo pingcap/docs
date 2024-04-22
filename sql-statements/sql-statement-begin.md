@@ -1,6 +1,6 @@
 ---
 title: BEGIN | TiDB SQL Statement Reference
-summary: TiDB内で新しいトランザクションを開始するには、`BEGIN`ステートメントを使用します。これにより、すべてのステートメントが独自のトランザクションで自動コミットされ、MySQLとの互換性が保証されます。TiDBは`BEGIN PESSIMISTIC`または`BEGIN OPTIMISTIC`の構文拡張をサポートし、トランザクションのデフォルトのトランザクションモデルをオーバーライドできます。
+summary: TiDB内で新しいトランザクションを開始するには、BEGINステートメントを使用します。これにより、すべてのステートメントが独自のトランザクションで自動コミットされ、MySQLとの互換性が保証されます。TiDBはBEGIN PESSIMISTICまたはBEGIN OPTIMISTICの構文拡張をサポートし、トランザクションのデフォルトのトランザクションモデルをオーバーライドできます。
 ---
 
 # 始める {#begin}

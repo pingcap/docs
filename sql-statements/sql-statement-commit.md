@@ -1,6 +1,6 @@
 ---
 title: COMMIT | TiDB SQL Statement Reference
-summary: TiDBサーバー内でトランザクションをコミットするためのステートメントは、`COMMIT`です。デフォルトの動作では、すべてのステートメントが独自のトランザクションとなり、自動コミットされます。MySQLとの互換性が保証されています。また、TiDBは構文を解析しますが、`ROLLBACK AND [NO] RELEASE`および`ROLLBACK AND [NO] CHAIN`を無視します。TiDB 3.0.8以降のバージョンでは悲観的ロックを使用し、オプティミスティック ロックが有効な場合は、`UNIQUE`と`PRIMARY KEY`の制約チェックが延期されます。
+summary: TiDBサーバー内でトランザクションをコミットするためのステートメントは、COMMITです。デフォルトの動作では、すべてのステートメントが独自のトランザクションとなり、自動コミットされます。MySQLとの互換性が保証されています。また、TiDBは構文を解析しますが、ROLLBACK AND [NO] RELEASEおよびROLLBACK AND [NO] CHAINを無視します。TiDB 3.0.8以降のバージョンでは悲観的ロックを使用し、オプティミスティック ロックが有効な場合は、UNIQUEとPRIMARY KEYの制約チェックが延期されます。
 ---
 
 # 専念 {#commit}

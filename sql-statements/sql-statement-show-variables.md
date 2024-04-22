@@ -1,6 +1,6 @@
 ---
 title: SHOW [GLOBAL|SESSION] VARIABLES | TiDB SQL Statement Reference
-summary: このステートメントは、`GLOBAL`または`SESSION`のスコープの変数のリストを表示します。スコープが指定されていない場合は、デフォルトのスコープ`SESSION`が適用されます。TiDB 固有の変数をすべてリストし、MySQLと完全な互換性があります。
+summary: このステートメントは、GLOBALまたはSESSIONのスコープの変数のリストを表示します。スコープが指定されていない場合は、デフォルトのスコープSESSIONが適用されます。TiDB 固有の変数をすべてリストし、MySQLと完全な互換性があります。
 ---
 
 # [グローバル|セッション] 変数を表示 {#show-global-session-variables}

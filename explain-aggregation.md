@@ -1,6 +1,6 @@
 ---
 title: Explain Statements That Use Aggregation
-summary: SQL オプティマイザーは、集計時にハッシュ集計またはストリーム集計演算子を選択します。集約はコプロセッサ層と TiDB 層の両方で実行されます。`SHOW TABLE REGIONS`の出力から、テーブルが複数のリージョンに分割されていることがわかります。`EXPLAIN`を使用すると、TiKV 内の各リージョンで`StreamAgg_8`が実行され、TiDB にデータが集約されます。ハッシュ集計アルゴリズムは、ハッシュ テーブルを使用して、集約の実行中に中間結果を保存します。ストリーム集計アルゴリズムは、通常、ハッシュ集計よりもメモリ消費量が少なくなります。TiDB の`GROUP BY`句は`WITH ROLLUP`修飾子をサポートします。
+summary: SQL オプティマイザーは、集計時にハッシュ集計またはストリーム集計演算子を選択します。集約はコプロセッサ層と TiDB 層の両方で実行されます。SHOW TABLE REGIONSの出力から、テーブルが複数のリージョンに分割されていることがわかります。EXPLAINを使用すると、TiKV 内の各リージョンでStreamAgg_8が実行され、TiDB にデータが集約されます。ハッシュ集計アルゴリズムは、ハッシュ テーブルを使用して、集約の実行中に中間結果を保存します。ストリーム集計アルゴリズムは、通常、ハッシュ集計よりもメモリ消費量が少なくなります。TiDB のGROUP BY句はWITH ROLLUP修飾子をサポートします。
 ---
 
 # 集計を使用した Explain ステートメント {#explain-statements-using-aggregation}

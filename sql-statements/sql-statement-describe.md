@@ -1,6 +1,6 @@
 ---
 title: DESCRIBE | TiDB SQL Statement Reference
-summary: 説明するは、MySQLとの互換性のために含まれている`EXPLAIN`のエイリアスです。
+summary: 説明するは、MySQLとの互換性のために含まれているEXPLAINのエイリアスです。
 ---
 
 # 説明する {#describe}

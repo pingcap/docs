@@ -1,6 +1,6 @@
 ---
 title: DROP USER | TiDB SQL Statement Reference
-summary: TiDBシステムデータベースからユーザーを削除するステートメントです。オプションのキーワード`IF EXISTS`を使用すると、ユーザーが存在しない場合にエラーを黙らせることができます。このステートメントには`CREATE USER`権限が必要です。MySQLの互換性では、TiDBで警告は生成されません。
+summary: TiDBシステムデータベースからユーザーを削除するステートメントです。オプションのキーワードIF EXISTSを使用すると、ユーザーが存在しない場合にエラーを黙らせることができます。このステートメントにはCREATE USER権限が必要です。MySQLの互換性では、TiDBで警告は生成されません。
 ---
 
 # ユーザーを削除する {#drop-user}

@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.14 Release Notes
-summary: TiDB 3.0.14は2020年5月9日にリリースされました。このバージョンでは、`performance_schema`と`metrics_schema`のユーザー権限が読み取り専用に調整され、重要なバグが修正されました。さらに、新機能が追加され、バグも修正されています。TiKVにも多くの修正が含まれています。
+summary: TiDB 3.0.14は2020年5月9日にリリースされました。このバージョンでは、performance_schemaとmetrics_schemaのユーザー権限が読み取り専用に調整され、重要なバグが修正されました。さらに、新機能が追加され、バグも修正されています。TiKVにも多くの修正が含まれています。
 ---
 
 # TiDB 3.0.14 リリースノート {#tidb-3-0-14-release-notes}

@@ -1,6 +1,6 @@
 ---
 title: ADMIN CHECK [TABLE|INDEX] | TiDB SQL Statement Reference
-summary: `ADMIN CHECK [TABLE|INDEX]`ステートメントは、テーブルとインデックスのデータの整合性をチェックします。FOREIGN KEY 制約やPRIMARY KEY インデックスにクラスター化された主キーの確認はサポートされていません。問題が見つかった場合は、インデックスを削除して再作成することで解決できます。MySQLの互換性もあります。
+summary: ADMIN CHECK [TABLE|INDEX]ステートメントは、テーブルとインデックスのデータの整合性をチェックします。FOREIGN KEY 制約やPRIMARY KEY インデックスにクラスター化された主キーの確認はサポートされていません。問題が見つかった場合は、インデックスを削除して再作成することで解決できます。MySQLの互換性もあります。
 category: reference
 ---
 

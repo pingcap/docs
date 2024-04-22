@@ -1,6 +1,6 @@
 ---
 title: ticloud import start s3
-summary: Amazon S3からTiDB Cloudにファイルをインポートするためのコマンドは、`ticloud import start s3 [flags]`です。非対話モードでは、`ticloud import start s3`コマンドを使用し、対話モードでは必要なフラグを手動で入力する必要があります。インポートタスクを開始する際には、AWSロールARNやクラスターID、データ形式などのフラグを指定する必要があります。また、TiDB Cloud CLIに関する質問や提案がある場合は、問題を作成するか、貢献を歓迎します。
+summary: Amazon S3からTiDB Cloudにファイルをインポートするためのコマンドは、ticloud import start s3 [flags]です。非対話モードでは、ticloud import start s3コマンドを使用し、対話モードでは必要なフラグを手動で入力する必要があります。インポートタスクを開始する際には、AWSロールARNやクラスターID、データ形式などのフラグを指定する必要があります。また、TiDB Cloud CLIに関する質問や提案がある場合は、問題を作成するか、貢献を歓迎します。
 ---
 
 # ticloud インポート開始 s3 {#ticloud-import-start-s3}

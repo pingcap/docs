@@ -1,6 +1,6 @@
 ---
 title: TiDB User Account Management
-summary: TiDBユーザーアカウント管理についての要点を以下に示します。ユーザー名とパスワードは`mysql.user`システムデータベースのテーブルに保存されます。アカウントは`CREATE USER`ステートメントを使用して作成できます。アカウントを削除するには`DROP USER`ステートメントを使用します。TiDBはアカウントのリソース制限の設定をサポートしていません。パスワードを割り当てるには`CREATE USER`を使用し、`SET PASSWORD FOR`または`ALTER USER`を使用して変更します。権限テーブルを直接変更した場合は`FLUSH PRIVILEGES`を実行して変更を適用します。
+summary: TiDBユーザーアカウント管理についての要点を以下に示します。ユーザー名とパスワードはmysql.userシステムデータベースのテーブルに保存されます。アカウントはCREATE USERステートメントを使用して作成できます。アカウントを削除するにはDROP USERステートメントを使用します。TiDBはアカウントのリソース制限の設定をサポートしていません。パスワードを割り当てるにはCREATE USERを使用し、SET PASSWORD FORまたはALTER USERを使用して変更します。権限テーブルを直接変更した場合はFLUSH PRIVILEGESを実行して変更を適用します。
 ---
 
 # TiDB ユーザーアカウント管理 {#tidb-user-account-management}

@@ -1,6 +1,6 @@
 ---
 title: Create a Data Migration Task
-summary: データ移行タスクを作成するためには、`start-task`コマンドを使用します。`-s`フラグでMySQLソースを指定し、`config-file`で`task.yaml`のファイルパスを指定します。`--remove-meta`フラグでタスクの以前のメタデータを削除するかを指定し、`--start-time`フラグでbinlogレプリケーションの開始時刻を指定します。返された結果は、タスクが正常に開始されたことを示します。
+summary: データ移行タスクを作成するためには、start-taskコマンドを使用します。-sフラグでMySQLソースを指定し、config-fileでtask.yamlのファイルパスを指定します。--remove-metaフラグでタスクの以前のメタデータを削除するかを指定し、--start-timeフラグでbinlogレプリケーションの開始時刻を指定します。返された結果は、タスクが正常に開始されたことを示します。
 ---
 
 # データ移行タスクの作成 {#create-a-data-migration-task}

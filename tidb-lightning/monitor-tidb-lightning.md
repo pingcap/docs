@@ -1,6 +1,6 @@
 ---
 title: TiDB Lightning Monitoring
-summary: TiDB Lightningは、Prometheusによるメトリクス収集をサポートします。手動でインストールする場合は、`tidb-lightning.toml`でメトリクスポートを設定し、Prometheusを構成する必要があります。また、グラファナを使用してメトリクスを視覚化することもできます。監視メトリクスは、`lightning_*`の名前空間で提供され、エンジン、ワーカー、テーブル、チャンクなどの情報を提供します。
+summary: TiDB Lightningは、Prometheusによるメトリクス収集をサポートします。手動でインストールする場合は、tidb-lightning.tomlでメトリクスポートを設定し、Prometheusを構成する必要があります。また、グラファナを使用してメトリクスを視覚化することもできます。監視メトリクスは、lightning_*の名前空間で提供され、エンジン、ワーカー、テーブル、チャンクなどの情報を提供します。
 ---
 
 # TiDB Lightning監視 {#tidb-lightning-monitoring}

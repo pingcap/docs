@@ -1,6 +1,6 @@
 ---
 title: tiup dm upgrade
-summary: tiup dm upgradeコマンドは、指定したクラスターを特定のバージョンにアップグレードするために使用されます。`<cluster-name>`は、操作対象のクラスターの名前であり、`<version>`は、アップグレード先のターゲット バージョンです。オプションには、--offlineと-h, --helpがあります。--offlineは現在のクラスターがオフラインであることを宣言し、-h, --helpはヘルプ情報を出力します。アップグレードのログが出力されます。
+summary: tiup dm upgradeコマンドは、指定したクラスターを特定のバージョンにアップグレードするために使用されます。<cluster-name>は、操作対象のクラスターの名前であり、<version>は、アップグレード先のターゲット バージョンです。オプションには、--offlineと-h, --helpがあります。--offlineは現在のクラスターがオフラインであることを宣言し、-h, --helpはヘルプ情報を出力します。アップグレードのログが出力されます。
 ---
 
 # tiup dm upgrade {#tiup-dm-upgrade}

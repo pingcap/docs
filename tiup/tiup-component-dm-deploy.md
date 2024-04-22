@@ -1,6 +1,6 @@
 ---
 title: tiup dm deploy
-summary: `tiup dm deploy`コマンドは、新しいクラスターをデプロイするために使用されます。構文は`tiup dm deploy <cluster-name> <version> <topology.yaml> [flags]`であり、オプションには-u、-i、-p、-hがあります。出力はデプロイメントログです。
+summary: tiup dm deployコマンドは、新しいクラスターをデプロイするために使用されます。構文はtiup dm deploy <cluster-name> <version> <topology.yaml> [flags]であり、オプションには-u、-i、-p、-hがあります。出力はデプロイメントログです。
 ---
 
 # ティアップDMデプロイ {#tiup-dm-deploy}

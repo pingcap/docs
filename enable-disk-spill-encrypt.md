@@ -1,6 +1,6 @@
 ---
 title: Enable Encryption for Disk Spill
-summary: ディスク流出時の暗号化機能を有効にすると、システム変数`tidb_enable_tmp_storage_on_oom`が`ON`に設定されている場合、一部のオペレーターは実行中の中間結果を一時ファイルとしてディスクに保存し、実行後にそのファイルを削除できます。ディスク スピル ファイルの暗号化を有効にするには、TiDB 構成ファイルの`[security]`セクションの項目`spilled-file-encryption-method`を構成できます。オプションは`aes128-ctr`と`plaintext`です。
+summary: ディスク流出時の暗号化機能を有効にすると、システム変数tidb_enable_tmp_storage_on_oomがONに設定されている場合、一部のオペレーターは実行中の中間結果を一時ファイルとしてディスクに保存し、実行後にそのファイルを削除できます。ディスク スピル ファイルの暗号化を有効にするには、TiDB 構成ファイルの[security]セクションの項目spilled-file-encryption-methodを構成できます。オプションはaes128-ctrとplaintextです。
 ---
 
 # ディスク流出時の暗号化機能を有効にする {#enable-encryption-for-disk-spill}

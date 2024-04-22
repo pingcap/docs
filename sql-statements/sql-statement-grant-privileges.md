@@ -1,6 +1,6 @@
 ---
 title: GRANT <privileges> | TiDB SQL Statement Reference
-summary: このステートメントは、TiDB内の既存のユーザーに権限を割り当てます。権限システムはMySQLに従い、データベース/テーブルのパターンに基づいて資格情報が割り当てられます。実行には`GRANT OPTION`権限と、割り当てたすべての権限が必要です。MySQLと同様に、`USAGE`特権はTiDBサーバーにログインできることを示し、カラムレベルの権限はサポートされていません。また、`NO_AUTO_CREATE_USER` SQLモードが存在しない場合、`GRANT`ステートメントは空のパスワードを持つ新しいユーザーを自動的に作成します。TiDBでは、`GRANT <privileges>`ステートメントが正常に実行されると、実行結果が現在の接続に即座に反映されます。
+summary: このステートメントは、TiDB内の既存のユーザーに権限を割り当てます。権限システムはMySQLに従い、データベース/テーブルのパターンに基づいて資格情報が割り当てられます。実行にはGRANT OPTION権限と、割り当てたすべての権限が必要です。MySQLと同様に、USAGE特権はTiDBサーバーにログインできることを示し、カラムレベルの権限はサポートされていません。また、NO_AUTO_CREATE_USER SQLモードが存在しない場合、GRANTステートメントは空のパスワードを持つ新しいユーザーを自動的に作成します。TiDBでは、GRANT <privileges>ステートメントが正常に実行されると、実行結果が現在の接続に即座に反映されます。
 ---
 
 # <code>GRANT &#x3C;privileges></code> {#code-grant-x3c-privileges-code}

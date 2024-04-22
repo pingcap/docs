@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.11 Release Notes
-summary: TiDB 3.0.11は2020年3月4日にリリースされました。このバージョンには、最大インデックス長を制御する`max-index-length`構成項目が追加され、`information_schema.PARTITIONS`テーブルの表示がサポートされました。また、バグの修正も含まれており、Goroutineリークや誤った結果が発生する問題が修正されています。TiDB Ansibleにもいくつかの修正が含まれています。
+summary: TiDB 3.0.11は2020年3月4日にリリースされました。このバージョンには、最大インデックス長を制御するmax-index-length構成項目が追加され、information_schema.PARTITIONSテーブルの表示がサポートされました。また、バグの修正も含まれており、Goroutineリークや誤った結果が発生する問題が修正されています。TiDB Ansibleにもいくつかの修正が含まれています。
 ---
 
 # TiDB 3.0.11 リリースノート {#tidb-3-0-11-release-notes}

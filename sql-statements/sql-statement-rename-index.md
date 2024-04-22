@@ -1,6 +1,6 @@
 ---
 title: RENAME INDEX | TiDB SQL Statement Reference
-summary: ステートメント`ALTER TABLE .. RENAME INDEX`は、既存のインデックスの名前を新しい名前に変更します。TiDBではこの操作は即座に行われ、メタデータの変更のみが必要です。MySQLの互換性もあります。
+summary: ステートメントALTER TABLE .. RENAME INDEXは、既存のインデックスの名前を新しい名前に変更します。TiDBではこの操作は即座に行われ、メタデータの変更のみが必要です。MySQLの互換性もあります。
 ---
 
 # インデックスの名前を変更 {#rename-index}

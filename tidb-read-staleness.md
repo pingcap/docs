@@ -1,6 +1,6 @@
 ---
 title: Read Historical Data Using the `tidb_read_staleness` System Variable
-summary: TiDB v5.4 では、`tidb_read_staleness`システム変数が導入され、履歴データの読み取りをサポートします。この変数を使用すると、特定の時間範囲内の履歴データを読み取ることができます。また、`tidb_read_staleness`を有効にした後も、データ操作やトランザクションを実行できます。最新のデータを読み取るには、新しいセッションを開始するか、`tidb_read_staleness`の値をリセットします。また、TiKVの`advance-ts-interval`構成項目を変更することで、ステイル読み取りデータの適時性を向上させることができます。
+summary: TiDB v5.4 では、tidb_read_stalenessシステム変数が導入され、履歴データの読み取りをサポートします。この変数を使用すると、特定の時間範囲内の履歴データを読み取ることができます。また、tidb_read_stalenessを有効にした後も、データ操作やトランザクションを実行できます。最新のデータを読み取るには、新しいセッションを開始するか、tidb_read_stalenessの値をリセットします。また、TiKVのadvance-ts-interval構成項目を変更することで、ステイル読み取りデータの適時性を向上させることができます。
 ---
 
 # <code>tidb_read_staleness</code>システム変数を使用した履歴データの読み取り {#read-historical-data-using-the-code-tidb-read-staleness-code-system-variable}

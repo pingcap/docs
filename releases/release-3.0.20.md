@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.20 Release Notes
-summary: TiDB 3.0.20は2020年12月25日にリリースされました。このバージョンでは、`enable-streaming`構成アイテムが非推奨になりました。さらに、`LOAD DATA`ステートメントの準備時にエラーが発生する問題や、`end_point_slow_log_threshold`設定項目が追加された改善点があります。さらに、様々なバグが修正されています。TiDB、TiKV、PDなどの様々なコンポーネントに関する修正が含まれています。
+summary: TiDB 3.0.20は2020年12月25日にリリースされました。このバージョンでは、enable-streaming構成アイテムが非推奨になりました。さらに、LOAD DATAステートメントの準備時にエラーが発生する問題や、end_point_slow_log_threshold設定項目が追加された改善点があります。さらに、様々なバグが修正されています。TiDB、TiKV、PDなどの様々なコンポーネントに関する修正が含まれています。
 ---
 
 # TiDB 3.0.20 リリースノート {#tidb-3-0-20-release-notes}

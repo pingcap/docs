@@ -1,6 +1,6 @@
 ---
 title: Coprocessor Cache
-summary: TiDB v4.0以降、TiKVにプッシュダウンされる計算結果のキャッシュ機能が追加されました。コプロセッサーキャッシュはTiDB構成ファイルの`tikv-client.copr-cache`で構成可能であり、効果は`EXPLAIN ANALYZE`またはGrafana監視パネルで確認できます。キャッシュはリージョン単位であり、ユーザーには透過的です。計算結果には影響せず、SQLの実行時間にのみ影響します。
+summary: TiDB v4.0以降、TiKVにプッシュダウンされる計算結果のキャッシュ機能が追加されました。コプロセッサーキャッシュはTiDB構成ファイルのtikv-client.copr-cacheで構成可能であり、効果はEXPLAIN ANALYZEまたはGrafana監視パネルで確認できます。キャッシュはリージョン単位であり、ユーザーには透過的です。計算結果には影響せず、SQLの実行時間にのみ影響します。
 ---
 
 # コプロセッサーキャッシュ {#coprocessor-cache}

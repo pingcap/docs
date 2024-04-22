@@ -1,6 +1,6 @@
 ---
 title: TiDB Data Migration Shard Merge
-summary: TiDB データ移行 (DM) は、MySQL/MariaDB シャード テーブル内の DML データとDDL データをマージし、マージされたデータをTiDBテーブルに移行します。シャードマージ機能は限られたシナリオでのみサポートされており、タスク構成ファイルで`shard-mode`を設定する必要があります。また、一部の異常なシナリオではDDLロックのシャーディングを手動で処理する必要があります。
+summary: TiDB データ移行 (DM) は、MySQL/MariaDB シャード テーブル内の DML データとDDL データをマージし、マージされたデータをTiDBテーブルに移行します。シャードマージ機能は限られたシナリオでのみサポートされており、タスク構成ファイルでshard-modeを設定する必要があります。また、一部の異常なシナリオではDDLロックのシャーディングを手動で処理する必要があります。
 ---
 
 # TiDB データ移行シャード マージ {#tidb-data-migration-shard-merge}

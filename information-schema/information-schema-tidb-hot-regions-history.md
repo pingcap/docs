@@ -1,6 +1,6 @@
 ---
 title: TIDB_HOT_REGIONS_HISTORY
-summary: 表`TIDB_HOT_REGIONS_HISTORY`は、PDによってローカルに定期的に記録される履歴ホットリージョンに関する情報を提供します。このテーブルはTiDBサーバーレスクラスターでは使用できません。デフォルトでは、記録間隔は10分で、ホットリージョンに関する履歴情報を保存する期間は7日間です。テーブルのフィールドにはUPDATE_TIME、DB_NAME、TABLE_ID、TABLE_NAME、INDEX_NAME、INDEX_ID、REGION_ID、STORE_ID、PEER_ID、IS_LEARNER、IS_LEADER、TYPE、HOT_DEGREE、FLOW_BYTES、KEY_RATE、QUERY_RATEが含まれます。特定の期間内のホットリージョンをクエリするための一般的なユーザーシナリオが提供されています。
+summary: 表TIDB_HOT_REGIONS_HISTORYは、PDによってローカルに定期的に記録される履歴ホットリージョンに関する情報を提供します。このテーブルはTiDBサーバーレスクラスターでは使用できません。デフォルトでは、記録間隔は10分で、ホットリージョンに関する履歴情報を保存する期間は7日間です。テーブルのフィールドにはUPDATE_TIME、DB_NAME、TABLE_ID、TABLE_NAME、INDEX_NAME、INDEX_ID、REGION_ID、STORE_ID、PEER_ID、IS_LEARNER、IS_LEADER、TYPE、HOT_DEGREE、FLOW_BYTES、KEY_RATE、QUERY_RATEが含まれます。特定の期間内のホットリージョンをクエリするための一般的なユーザーシナリオが提供されています。
 ---
 
 # TIDB_HOT_REGIONS_HISTORY {#tidb-hot-regions-history}

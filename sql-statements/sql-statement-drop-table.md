@@ -1,6 +1,6 @@
 ---
 title: DROP TABLE | TiDB SQL Statement Reference
-summary: ドロップテーブルは、データベースからテーブルを削除します。存在しない場合はエラーが返されます。一時テーブルを削除するには、`DROP TEMPORARY TABLE`または`DROP GLOBAL TEMPORARY TABLE`を使用します。通常のテーブルまたは一時テーブルを削除するには、`DROP TABLE`を使用します。MySQLの互換性では、`RESTRICT`と`CASCADE`は構文的にのみサポートされています。関連情報として、テーブルの作成や表示、およびテーブルの表示があります。
+summary: ドロップテーブルは、データベースからテーブルを削除します。存在しない場合はエラーが返されます。一時テーブルを削除するには、DROP TEMPORARY TABLEまたはDROP GLOBAL TEMPORARY TABLEを使用します。通常のテーブルまたは一時テーブルを削除するには、DROP TABLEを使用します。MySQLの互換性では、RESTRICTとCASCADEは構文的にのみサポートされています。関連情報として、テーブルの作成や表示、およびテーブルの表示があります。
 ---
 
 # ドロップテーブル {#drop-table}

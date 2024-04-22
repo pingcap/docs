@@ -1,6 +1,6 @@
 ---
 title: TiDB 5.0.3 Release Notes
-summary: TiDB 5.0.3は、v4.0クラスターがv5.0以降のバージョンにアップグレードされると、変数`tidb_multi_statement_mode`のデフォルト値が`WARN`から`OFF`に変更されます。TiDBはMySQL 5.7のnoop変数`innodb_default_row_format`と互換性を持つようになりました。TiCDCにはHTTP APIが追加され、KafkaシンクにSASL/SCRAMサポートが追加されました。TiFlashには多くの機能が追加され、バグも修正されています。PDもTiDBダッシュボードを更新しました。
+summary: TiDB 5.0.3は、v4.0クラスターがv5.0以降のバージョンにアップグレードされると、変数tidb_multi_statement_modeのデフォルト値がWARNからOFFに変更されます。TiDBはMySQL 5.7のnoop変数innodb_default_row_formatと互換性を持つようになりました。TiCDCにはHTTP APIが追加され、KafkaシンクにSASL/SCRAMサポートが追加されました。TiFlashには多くの機能が追加され、バグも修正されています。PDもTiDBダッシュボードを更新しました。
 ---
 
 # TiDB 5.0.3 リリースノート {#tidb-5-0-3-release-notes}

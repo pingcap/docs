@@ -1,6 +1,6 @@
 ---
 title: TopN and Limit Operator Push Down
-summary: このドキュメントは、TopNおよびLimitオペレータのプッシュダウンについて説明します。TiDB実行プランツリーでは、SQLの`LIMIT`句がLimit演算子ノードに対応し、`ORDER BY`句がSort演算子ノードに対応します。隣接するLimit演算子とSort演算子はTopN演算子ノードとして結合されます。述語のプッシュダウンと同様に、TopNとLimitは実行プランツリー内でデータソースにできるだけ近い位置にプッシュダウンされ、データ送信と計算のオーバーヘッドが大幅に削減されます。
+summary: このドキュメントは、TopNおよびLimitオペレータのプッシュダウンについて説明します。TiDB実行プランツリーでは、SQLのLIMIT句がLimit演算子ノードに対応し、ORDER BY句がSort演算子ノードに対応します。隣接するLimit演算子とSort演算子はTopN演算子ノードとして結合されます。述語のプッシュダウンと同様に、TopNとLimitは実行プランツリー内でデータソースにできるだけ近い位置にプッシュダウンされ、データ送信と計算のオーバーヘッドが大幅に削減されます。
 ---
 
 # TopN およびリミット演算子のプッシュダウン {#topn-and-limit-operator-push-down}

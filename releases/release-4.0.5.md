@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.5 Release Notes
-summary: TiDB 4.0.5は2020年8月31日にリリースされました。このバージョンでは、複数のパーティションの ID 配列をサポートするように`drop partition`と`truncate partition`のジョブ引数が変更され、新機能としてTiKVのエラーコードの定義やTiFlashの統一ログ形式のサポートが追加されました。さらに、多くの改善点やバグの修正が行われています。PDやTiFlash、TiCDC、TiDB Lightningなどのツールにもさまざまな改善が加えられています。
+summary: TiDB 4.0.5は2020年8月31日にリリースされました。このバージョンでは、複数のパーティションの ID 配列をサポートするようにdrop partitionとtruncate partitionのジョブ引数が変更され、新機能としてTiKVのエラーコードの定義やTiFlashの統一ログ形式のサポートが追加されました。さらに、多くの改善点やバグの修正が行われています。PDやTiFlash、TiCDC、TiDB Lightningなどのツールにもさまざまな改善が加えられています。
 ---
 
 # TiDB 4.0.5 リリースノート {#tidb-4-0-5-release-notes}

@@ -1,6 +1,6 @@
 ---
 title: SHOW CREATE SEQUENCE
-summary: シーケンスの詳細情報を表示するための`SHOW CREATE SEQUENCE`は、`SHOW CREATE TABLE`と同様の機能を持ちます。MySQLの互換性については、TiDB拡張機能として実装されており、MariaDBで利用可能なシーケンスに基づいてモデル化されています。関連する操作として、シーケンスの作成とドロップシーケンスがあります。
+summary: シーケンスの詳細情報を表示するためのSHOW CREATE SEQUENCEは、SHOW CREATE TABLEと同様の機能を持ちます。MySQLの互換性については、TiDB拡張機能として実装されており、MariaDBで利用可能なシーケンスに基づいてモデル化されています。関連する操作として、シーケンスの作成とドロップシーケンスがあります。
 ---
 
 # シーケンスの作成を表示 {#show-create-sequence}

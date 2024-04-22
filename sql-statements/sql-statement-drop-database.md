@@ -1,6 +1,6 @@
 ---
 title: DROP DATABASE | TiDB SQL Statement Reference
-summary: `DROP DATABASE`ステートメントは、指定されたデータベースを永久に削除します。削除されたデータベースに関連付けられているユーザー権限は影響を受けません。TiDB の`DROP DATABASE`ステートメントは MySQL と完全な互換性があります。
+summary: DROP DATABASEステートメントは、指定されたデータベースを永久に削除します。削除されたデータベースに関連付けられているユーザー権限は影響を受けません。TiDB のDROP DATABASEステートメントは MySQL と完全な互換性があります。
 ---
 
 # データベースを削除 {#drop-database}

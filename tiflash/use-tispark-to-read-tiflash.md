@@ -1,6 +1,6 @@
 ---
 title: Use TiSpark to Read TiFlash Replicas
-summary: TiSparkを使用してTiFlashレプリカを読み取る方法を紹介します。現在、TiSparkを使用して、TiDBのエンジン分離と同様の方法でTiFlashレプリカを読み取ることができます。`spark.tispark.isolation_read_engines`パラメータを設定する方法で、パラメータ値を`tiflash`に設定すると、TiDBがTiFlashからデータを強制的に読み取ります。このパラメータは、`spark-defaults.conf`ファイルに追加するか、初期化コマンドに`--conf spark.tispark.isolation_read_engines=tiflash`を追加することで構成できます。また、リアルタイムで`spark.conf.set("spark.tispark.isolation_read_engines", "tiflash")`を設定することもできます。
+summary: TiSparkを使用してTiFlashレプリカを読み取る方法を紹介します。現在、TiSparkを使用して、TiDBのエンジン分離と同様の方法でTiFlashレプリカを読み取ることができます。spark.tispark.isolation_read_enginesパラメータを設定する方法で、パラメータ値をtiflashに設定すると、TiDBがTiFlashからデータを強制的に読み取ります。このパラメータは、spark-defaults.confファイルに追加するか、初期化コマンドに--conf spark.tispark.isolation_read_engines=tiflashを追加することで構成できます。また、リアルタイムでspark.conf.set("spark.tispark.isolation_read_engines", "tiflash")を設定することもできます。
 ---
 
 # TiSpark を使用してTiFlashレプリカを読み取る {#use-tispark-to-read-tiflash-replicas}

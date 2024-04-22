@@ -1,6 +1,6 @@
 ---
 title: Distinct Optimization
-summary: TiDBのクエリオプティマイザーには、`distinct`最適化があります。`SELECT DISTINCT`は`GROUP BY`に変換され、集計関数の`DISTINCT`オプションはシングルスレッド実行モデルで実行されます。`tidb_opt_distinct_agg_push_down`を設定すると、計算オーバーヘッドが削減される可能性があります。
+summary: TiDBのクエリオプティマイザーには、distinct 最適化があります。SELECT DISTINCT は GROUP BY に変換され、集計関数の DISTINCT オプションはシングルスレッド実行モデルで実行されます。tidb_opt_distinct_agg_push_down を設定すると、計算オーバーヘッドが削減される可能性があります。
 ---
 
 # クエリの最適化 {#distinct-optimization}

@@ -1,6 +1,6 @@
 ---
 title: Stop a Data Migration Task
-summary: データ移行タスクを停止するためには、`stop-task`コマンドを使用します。`stop-task`と`pause-task`の違いについては、[データ移行タスクを一時停止する](/dm/dm-pause-task.md)を参照してください。使用例として、`stop-task [-s "mysql-replica-01"] task-name`を指定します。フラグ`-s`は停止する移行タスクのサブタスクが実行される MySQL ソースを指定し、`task-name | task-file`はタスク名またはタスクファイルのパスを指定します。停止した結果は、`{"op" "Stop", "result" true, "msg" "", "sources" [{"result" true, "msg" "", "source" "mysql-replica-01", "worker" "worker1"}]}`となります。
+summary: データ移行タスクを停止するためには、stop-taskコマンドを使用します。stop-taskとpause-taskの違いについては、[データ移行タスクを一時停止する](/dm/dm-pause-task.md)を参照してください。使用例として、stop-task [-s "mysql-replica-01"] task-nameを指定します。フラグ-sは停止する移行タスクのサブタスクが実行される MySQL ソースを指定し、task-name | task-fileはタスク名またはタスクファイルのパスを指定します。停止した結果は、{"op" "Stop", "result" true, "msg" "", "sources" [{"result" true, "msg" "", "source" "mysql-replica-01", "worker" "worker1"}]}となります。
 ---
 
 # データ移行タスクの停止 {#stop-a-data-migration-task}

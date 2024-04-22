@@ -1,6 +1,6 @@
 ---
 title: VARIABLES_INFO
-summary: 表`VARIABLES_INFO`は、TiDBインスタンスまたはクラスター内のシステム変数に関する情報を提供します。`VARIABLE_NAME`は変数の名前、`VARIABLE_SCOPE`は変数のスコープ、`DEFAULT_VALUE`はデフォルト値、`CURRENT_VALUE`は現在値、`MIN_VALUE`は最小値、`MAX_VALUE`は最大値、`POSSIBLE_VALUES`は可能な値、`IS_NOOP`は`noop`変数かどうかを示します。
+summary: 表VARIABLES_INFOは、TiDBインスタンスまたはクラスター内のシステム変数に関する情報を提供します。VARIABLE_NAMEは変数の名前、VARIABLE_SCOPEは変数のスコープ、DEFAULT_VALUEはデフォルト値、CURRENT_VALUEは現在値、MIN_VALUEは最小値、MAX_VALUEは最大値、POSSIBLE_VALUESは可能な値、IS_NOOPはnoop変数かどうかを示します。
 ---
 
 # 変数情報 {#variables-info}

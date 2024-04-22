@@ -1,6 +1,6 @@
 ---
 title: SHOW PRIVILEGES | TiDB SQL Statement Reference
-summary: TiDBの`SHOW PRIVILEGES`ステートメントは、MySQLと完全に互換性があります。現在のユーザーの権限を反映しない静的な権限のリストを表示します。権限の例には、テーブルの変更、関数やプロシージャの変更、データベースやテーブルの作成などが含まれます。特権の表示に関する詳細は、[こちら](/sql-statements/sql-statement-show-grants.md)を参照してください。
+summary: TiDBのSHOW PRIVILEGESステートメントは、MySQLと完全に互換性があります。現在のユーザーの権限を反映しない静的な権限のリストを表示します。権限の例には、テーブルの変更、関数やプロシージャの変更、データベースやテーブルの作成などが含まれます。特権の表示に関する詳細は、[こちら](/sql-statements/sql-statement-show-grants.md)を参照してください。
 ---
 
 # 特権を表示 {#show-privileges}

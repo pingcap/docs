@@ -1,6 +1,6 @@
 ---
 title: SHOW PROFILES
-summary: `SHOW PROFILES`ステートメントは現在、空の結果のみを返します。表示手順は、`SHOW PROFILES`を実行するだけです。このステートメントはMySQLとの互換性のために含まれており、常に空の結果が返されます。
+summary: SHOW PROFILESステートメントは現在、空の結果のみを返します。表示手順は、SHOW PROFILESを実行するだけです。このステートメントはMySQLとの互換性のために含まれており、常に空の結果が返されます。
 ---
 
 # プロフィールを表示 {#show-profiles}

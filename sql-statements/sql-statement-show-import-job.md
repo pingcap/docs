@@ -1,6 +1,6 @@
 ---
 title: SHOW IMPORT
-summary: `SHOW IMPORT`ステートメントは、TiDBで作成されたIMPORTジョブを表示するために使用されます。ユーザーが作成したジョブのみを表示できます。必要な権限は`SHOW IMPORT JOBS`と`SHOW IMPORT JOB <job-id>`です。出力フィールドにはジョブID、情報元、ターゲットテーブル、段階、状態、ソースファイルのサイズなどが含まれます。このステートメントはMySQL構文に対するTiDB拡張機能です。関連するステートメントには`IMPORT INTO`と`CANCEL IMPORT JOB`があります。
+summary: SHOW IMPORTステートメントは、TiDBで作成されたIMPORTジョブを表示するために使用されます。ユーザーが作成したジョブのみを表示できます。必要な権限はSHOW IMPORT JOBSとSHOW IMPORT JOB <job-id>です。出力フィールドにはジョブID、情報元、ターゲットテーブル、段階、状態、ソースファイルのサイズなどが含まれます。このステートメントはMySQL構文に対するTiDB拡張機能です。関連するステートメントにはIMPORT INTOとCANCEL IMPORT JOBがあります。
 ---
 
 # インポートを表示 {#show-import}

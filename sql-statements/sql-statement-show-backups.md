@@ -1,6 +1,6 @@
 ---
 title: SHOW [BACKUPS|RESTORES] | TiDB SQL Statement Reference
-summary: TiDBインスタンス上で実行されたバックアップおよび復元タスクのリストを表示するステートメントは、`SUPER`権限が必要です。バックアップタスクをクエリするには`SHOW BACKUPS`を使用し、復元タスクをクエリするには`SHOW RESTORES`を使用します。バックアップの状態や進捗状況を確認することができます。また、宛先URLをフィルタリングするために`LIKE`句や`WHERE`句を使用することも可能です。MySQLの構文に対するTiDBの拡張機能として利用できます。
+summary: TiDBインスタンス上で実行されたバックアップおよび復元タスクのリストを表示するステートメントは、SUPER権限が必要です。バックアップタスクをクエリするにはSHOW BACKUPSを使用し、復元タスクをクエリするにはSHOW RESTORESを使用します。バックアップの状態や進捗状況を確認することができます。また、宛先URLをフィルタリングするためにLIKE句やWHERE句を使用することも可能です。MySQLの構文に対するTiDBの拡張機能として利用できます。
 ---
 
 # [バックアップ|復元]を表示 {#show-backups-restores}

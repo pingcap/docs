@@ -1,6 +1,6 @@
 ---
 title: Export and Import Data Sources and Task Configuration of Clusters
-summary: クラスターのデータソースとタスク構成をエクスポートするために`config`コマンドを使用します。`export`コマンドを使って指定したファイルにエクスポートし、`import`コマンドを使ってファイルからインポートします。パラメータ`dir`はオプションで、デフォルト値は`./configs`です。リレーワーカーに関連する構成の自動インポートはサポートされていません。
+summary: クラスターのデータソースとタスク構成をエクスポートするためにconfigコマンドを使用します。exportコマンドを使って指定したファイルにエクスポートし、importコマンドを使ってファイルからインポートします。パラメータdirはオプションで、デフォルト値は./configsです。リレーワーカーに関連する構成の自動インポートはサポートされていません。
 ---
 
 # データソースのエクスポートとインポート、およびクラスターのタスクコンフィグレーション {#export-and-import-data-sources-and-task-configuration-of-clusters}

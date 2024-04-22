@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.5.3 Release Notes
-summary: TiDB 6.5.3は2023年6月14日にリリースされました。このバージョンでは、TiDB、TiKV、PD、TiCDC、TiDBBinlogにさまざまな改善点とバグ修正が含まれています。例えば、パーティション化テーブルの`TRUNCATE`のパフォーマンス向上や、TiKVのトラフィック削減などがあります。また、TiDBやTiKV、TiFlash、ツールなどのバグも修正されています。
+summary: TiDB 6.5.3は2023年6月14日にリリースされました。このバージョンでは、TiDB、TiKV、PD、TiCDC、TiDBBinlogにさまざまな改善点とバグ修正が含まれています。例えば、パーティション化テーブルのTRUNCATEのパフォーマンス向上や、TiKVのトラフィック削減などがあります。また、TiDBやTiKV、TiFlash、ツールなどのバグも修正されています。
 ---
 
 # TiDB 6.5.3 リリースノート {#tidb-6-5-3-release-notes}

@@ -1,6 +1,6 @@
 ---
 title: TiDB 5.1.2 Release Notes
-summary: TiDB 5.1.2は2021年9月27日にリリースされました。このバージョンでは、多くのバグ修正や改善が行われています。例えば、`greatest(datetime) union null`が空の文字列を返す問題や、`having`句が正しく動作しない問題などが修正されています。また、TiKVやPD、TiFlashなどのツールにも改善点やバグの修正が含まれています。
+summary: TiDB 5.1.2は2021年9月27日にリリースされました。このバージョンでは、多くのバグ修正や改善が行われています。例えば、greatest(datetime) union nullが空の文字列を返す問題や、having句が正しく動作しない問題などが修正されています。また、TiKVやPD、TiFlashなどのツールにも改善点やバグの修正が含まれています。
 ---
 
 # TiDB 5.1.2 リリースノート {#tidb-5-1-2-release-notes}

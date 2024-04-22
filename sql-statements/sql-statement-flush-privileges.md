@@ -1,6 +1,6 @@
 ---
 title: FLUSH PRIVILEGES | TiDB SQL Statement Reference
-summary: FLUSH PRIVILEGESステートメントは、TiDBに権限のメモリ内コピーを再ロードするように指示します。手動で`mysql.user`などのテーブルを編集した後に実行する必要があります。`GRANT`や`REVOKE`ステートメントを使用した後は不要です。`RELOAD`権限が必要です。MySQLと完全な互換性があります。
+summary: FLUSH PRIVILEGESステートメントは、TiDBに権限のメモリ内コピーを再ロードするように指示します。手動でmysql.userなどのテーブルを編集した後に実行する必要があります。GRANTやREVOKEステートメントを使用した後は不要です。RELOAD権限が必要です。MySQLと完全な互換性があります。
 ---
 
 # フラッシュ特典 {#flush-privileges}

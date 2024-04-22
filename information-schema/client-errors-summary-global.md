@@ -1,6 +1,6 @@
 ---
 title: CLIENT_ERRORS_SUMMARY_GLOBAL
-summary: 表`CLIENT_ERRORS_SUMMARY_GLOBAL`は、TiDBサーバーに接続するクライアントに返されたSQLエラーと警告の概要を示します。エラーには不正なSQLステートメントやゼロ除算エラーなどが含まれます。クライアントエラーはMySQLサーバープロトコル経由で返され、アプリケーションは適切なアクションを実行することが期待されます。要約されたカウントは`FLUSH CLIENT_ERRORS_SUMMARY`でリセットできます。サマリーは各TiDBサーバーに対してローカルであり、メモリ内にのみ保持されます。 TiDBサーバーが再起動すると、サマリーは失われます。
+summary: 表CLIENT_ERRORS_SUMMARY_GLOBALは、TiDBサーバーに接続するクライアントに返されたSQLエラーと警告の概要を示します。エラーには不正なSQLステートメントやゼロ除算エラーなどが含まれます。クライアントエラーはMySQLサーバープロトコル経由で返され、アプリケーションは適切なアクションを実行することが期待されます。要約されたカウントはFLUSH CLIENT_ERRORS_SUMMARYでリセットできます。サマリーは各TiDBサーバーに対してローカルであり、メモリ内にのみ保持されます。 TiDBサーバーが再起動すると、サマリーは失われます。
 ---
 
 # CLIENT_ERRORS_SUMMARY_GLOBAL {#client-errors-summary-global}

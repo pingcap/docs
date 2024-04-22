@@ -1,6 +1,6 @@
 ---
 title: tiup dm disable
-summary: クラスターサービスが再起動されると自動的に有効になります。`tiup dm disable`コマンドを使用して、サービスの自動有効化を無効にすることができます。`tiup dm disable <cluster-name>`コマンドを使用して、指定されたクラスターのサービスの自動有効化を無効にします。オプションには、`-N, --node`と`-R, --role`があります。
+summary: クラスターサービスが再起動されると自動的に有効になります。tiup dm disableコマンドを使用して、サービスの自動有効化を無効にすることができます。tiup dm disable <cluster-name>コマンドを使用して、指定されたクラスターのサービスの自動有効化を無効にします。オプションには、-N, --nodeと-R, --roleがあります。
 ---
 
 # ティアップDMを無効にする {#tiup-dm-disable}

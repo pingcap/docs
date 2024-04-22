@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.4 Release Notes
-summary: TiDB 4.0.4は2020年7月31日にリリースされました。このバージョンでは、いくつかのバグが修正されています。例えば、`information_schema.columns`のクエリ時にスタックする問題や、`PointGet`および`BatchPointGet`演算子が`in null`に遭遇したときに発生するエラーなどが修正されています。また、`BatchPointGet`の間違った結果や`HashJoin`演算子が`set`または`enum`タイプに遭遇したときに発生する誤ったクエリ結果の問題も修正されています。
+summary: TiDB 4.0.4は2020年7月31日にリリースされました。このバージョンでは、いくつかのバグが修正されています。例えば、information_schema.columnsのクエリ時にスタックする問題や、PointGetおよびBatchPointGet演算子がin nullに遭遇したときに発生するエラーなどが修正されています。また、BatchPointGetの間違った結果やHashJoin演算子がsetまたはenumタイプに遭遇したときに発生する誤ったクエリ結果の問題も修正されています。
 ---
 
 # TiDB 4.0.4 リリースノート {#tidb-4-0-4-release-notes}

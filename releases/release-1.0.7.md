@@ -1,6 +1,6 @@
 ---
 title: TiDB 1.0.7 Release Notes
-summary: TiDB 1.0.7は、`FIELD_LIST`コマンドの最適化や情報スキーマのデータ競合修正などの更新を含んでいます。PDではスケジュール損失の問題を修正し、TiKVでは`Table Scan`のサポートやリモートモードのサポートを追加しました。1.0.6から1.0.7へのアップグレードは、PD -&gt; TiKV -&gt; TiDBの順序に従って行います。
+summary: TiDB 1.0.7は、FIELD_LISTコマンドの最適化や情報スキーマのデータ競合修正などの更新を含んでいます。PDではスケジュール損失の問題を修正し、TiKVではTable Scanのサポートやリモートモードのサポートを追加しました。1.0.6から1.0.7へのアップグレードは、PD -&gt; TiKV -&gt; TiDBの順序に従って行います。
 ---
 
 # TiDB 1.0.7 リリースノート {#tidb-1-0-7-release-notes}

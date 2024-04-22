@@ -1,6 +1,6 @@
 ---
 title: Read Historical Data Using the `tidb_external_ts` Variable
-summary: TiDB v6.4.0では、`tidb_external_ts`変数が導入され、履歴データの読み取りをサポートします。このシステム変数を使用すると、特定の時点より前のデータを読み取ることができます。`tidb_enable_external_ts_read`を有効にすると、TiDBは読み取り専用になります。これにより、データの不整合が防止されます。使用例では、`tidb_external_ts`を設定して履歴データを読み取る方法が説明されています。
+summary: TiDB v6.4.0では、tidb_external_ts変数が導入され、履歴データの読み取りをサポートします。このシステム変数を使用すると、特定の時点より前のデータを読み取ることができます。tidb_enable_external_ts_readを有効にすると、TiDBは読み取り専用になります。これにより、データの不整合が防止されます。使用例では、tidb_external_tsを設定して履歴データを読み取る方法が説明されています。
 ---
 
 # <code>tidb_external_ts</code>変数を使用した履歴データの読み取り {#read-historical-data-using-the-code-tidb-external-ts-code-variable}

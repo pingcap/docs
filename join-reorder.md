@@ -1,6 +1,6 @@
 ---
 title: Introduction to Join Reorder
-summary: 結合したテーブルの再配置は、複数のテーブルを結合する際の効率を向上させます。TiDBでは、貪欲アルゴリズムと動的プログラミングアルゴリズムの2つの再配置アルゴリズムが使用されます。結合順序は`tidb_opt_join_reorder_threshold`によって制御され、外部結合のサポートは`tidb_enable_outer_join_reorder`によって制御されます。現在、動的プログラミングアルゴリズムは外部結合の再配置を実行できません。
+summary: 結合したテーブルの再配置は、複数のテーブルを結合する際の効率を向上させます。TiDBでは、貪欲アルゴリズムと動的プログラミングアルゴリズムの2つの再配置アルゴリズムが使用されます。結合順序はtidb_opt_join_reorder_thresholdによって制御され、外部結合のサポートはtidb_enable_outer_join_reorderによって制御されます。現在、動的プログラミングアルゴリズムは外部結合の再配置を実行できません。
 ---
 
 # 結合したテーブルの再配置の概要 {#introduction-to-join-reorder}

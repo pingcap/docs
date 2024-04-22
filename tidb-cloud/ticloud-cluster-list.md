@@ -1,6 +1,6 @@
 ---
 title: ticloud cluster list
-summary: ティッククラウドクラスターリストは、プロジェクト内のすべてのクラスターをリストします。コマンドは`ticloud cluster list <project-id>`または`ticloud cluster ls <project-id>`を使用します。フラグには`-h, --help`と`-o, --出力文字列`があります。また、継承されたフラグには`--色なし`と`-P、--プロファイル文字列`があります。質問や提案がある場合は、TiDB Cloud CLIの問題を作成してください。
+summary: ティッククラウドクラスターリストは、プロジェクト内のすべてのクラスターをリストします。コマンドはticloud cluster list <project-id>またはticloud cluster ls <project-id>を使用します。フラグには-h, --helpと-o, --出力文字列があります。また、継承されたフラグには--色なしと-P、--プロファイル文字列があります。質問や提案がある場合は、TiDB Cloud CLIの問題を作成してください。
 ---
 
 # ティッククラウドクラスターリスト {#ticloud-cluster-list}

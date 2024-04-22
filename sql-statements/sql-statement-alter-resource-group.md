@@ -1,6 +1,6 @@
 ---
 title: ALTER RESOURCE GROUP
-summary: `ALTER RESOURCE GROUP`ステートメントは、データベース内のリソース グループを変更するために使用されます。TiDB は、`RU_PER_SEC`、`PRIORITY`、`BURSTABLE`、`QUERY_LIMIT`、`BACKGROUND`のオプションをサポートしています。ただし、`ALTER RESOURCE GROUP`ステートメントは、グローバル変数`tidb_enable_resource_control`が`ON`に設定されている場合にのみ実行できます。MySQLとは異なり、受け入れられるパラメータが異なるため、互換性はありません。
+summary: ALTER RESOURCE GROUPステートメントは、データベース内のリソース グループを変更するために使用されます。TiDB は、RU_PER_SEC、PRIORITY、BURSTABLE、QUERY_LIMIT、BACKGROUNDのオプションをサポートしています。ただし、ALTER RESOURCE GROUPステートメントは、グローバル変数tidb_enable_resource_controlがONに設定されている場合にのみ実行できます。MySQLとは異なり、受け入れられるパラメータが異なるため、互換性はありません。
 ---
 
 # リソースグループの変更 {#alter-resource-group}

@@ -1,6 +1,6 @@
 ---
 title: Binlog Consumer Client User Guide
-summary: Binlog Consumer Clientは、KafkaからTiDBのセカンダリbinlogデータを消費し、特定の形式で出力するために使用されます。DrainerはMySQL、TiDB、ファイル、Kafkaなど複数の種類のダウンストリーミングをサポートしています。また、データ形式の定義については、`secondary_binlog.proto`を参照してください。TiDBツールプロジェクトは、Kafkaでbinlogデータを読み取るために使用されるDriverを提供します。Driverを使用する場合は、KafkaAddr、CommitTS、Offset、ClusterID、Topicを構成する必要があります。
+summary: Binlog Consumer Clientは、KafkaからTiDBのセカンダリbinlogデータを消費し、特定の形式で出力するために使用されます。DrainerはMySQL、TiDB、ファイル、Kafkaなど複数の種類のダウンストリーミングをサポートしています。また、データ形式の定義については、secondary_binlog.protoを参照してください。TiDBツールプロジェクトは、Kafkaでbinlogデータを読み取るために使用されるDriverを提供します。Driverを使用する場合は、KafkaAddr、CommitTS、Offset、ClusterID、Topicを構成する必要があります。
 ---
 
 # Binlog Consumer Clientユーザー ガイド {#binlog-consumer-client-user-guide}

@@ -1,6 +1,6 @@
 ---
 title: METRICS_SUMMARY
-summary: TiDB 4.0 では、`information_schema.metrics_summary`と`information_schema.metrics_summary_by_label`テーブルが導入され、異常な監視メトリックを簡単に検出できます。これにより、TiDBクラスター内の監視データを効率的に確認できます。また、時間範囲を指定して特定の監視項目をクエリすることも可能です。監視集計テーブルを使用すると、ボトルネックを素早く特定できます。
+summary: TiDB 4.0 では、information_schema.metrics_summaryとinformation_schema.metrics_summary_by_labelテーブルが導入され、異常な監視メトリックを簡単に検出できます。これにより、TiDBクラスター内の監視データを効率的に確認できます。また、時間範囲を指定して特定の監視項目をクエリすることも可能です。監視集計テーブルを使用すると、ボトルネックを素早く特定できます。
 ---
 
 # メトリクス_サマリー {#metrics-summary}

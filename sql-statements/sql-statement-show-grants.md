@@ -1,6 +1,6 @@
 ---
 title: SHOW GRANTS | TiDB SQL Statement Reference
-summary: 助成金を表示するステートメントは、ユーザーに関連付けられた権限のリストを示します。MySQLと同様に、`USAGE`権限はTiDBにログインできることを示します。このステートメントはMySQLと完全な互換性があります。
+summary: 助成金を表示するステートメントは、ユーザーに関連付けられた権限のリストを示します。MySQLと同様に、USAGE権限はTiDBにログインできることを示します。このステートメントはMySQLと完全な互換性があります。
 ---
 
 # 助成金を表示する {#show-grants}

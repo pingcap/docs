@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.18 Release Notes
-summary: TiDB 3.0.18は2020年8月21日にリリースされました。改善点としては、TiDBBinlogのPump GC構成のGoの期間形式をサポートします。バグの修正としては、`Hash`関数による`decimal`型の処理や`set`と`enum`のタイプの処理が間違っていると、間違った結果が発生する問題を修正しました。また、TiKVではGC失敗ログを`error`から`warning`レベルに変更しました。TiDB Lightningに関してもいくつかの問題を修正しました。
+summary: TiDB 3.0.18は2020年8月21日にリリースされました。改善点としては、TiDBBinlogのPump GC構成のGoの期間形式をサポートします。バグの修正としては、Hash関数によるdecimal型の処理やsetとenumのタイプの処理が間違っていると、間違った結果が発生する問題を修正しました。また、TiKVではGC失敗ログをerrorからwarningレベルに変更しました。TiDB Lightningに関してもいくつかの問題を修正しました。
 ---
 
 # TiDB 3.0.18 リリースノート {#tidb-3-0-18-release-notes}

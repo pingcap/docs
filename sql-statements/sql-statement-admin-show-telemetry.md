@@ -1,6 +1,6 @@
 ---
 title: ADMIN SHOW TELEMETRY | TiDB SQL Statement Reference
-summary: `ADMIN SHOW TELEMETRY`ステートメントは、PingCAPに報告される情報を示します。この機能はTiDBセルフホスト型にのみ適用され、TiDB Cloudでは利用できません。MySQLの互換性もあります。
+summary: ADMIN SHOW TELEMETRYステートメントは、PingCAPに報告される情報を示します。この機能はTiDBセルフホスト型にのみ適用され、TiDB Cloudでは利用できません。MySQLの互換性もあります。
 ---
 
 # 管理者表示テレメトリー {#admin-show-telemetry}

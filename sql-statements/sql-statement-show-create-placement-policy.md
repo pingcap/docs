@@ -1,6 +1,6 @@
 ---
 title: SHOW CREATE PLACEMENT POLICY
-summary: `SHOW CREATE PLACEMENT POLICY`は、配置ポリシーの定義を表示するために使用されます。現在の定義を確認し、別の TiDB クラスターで再作成できます。この機能は TiDB サーバーレスクラスターでは使用できません。MySQL 構文に対する TiDB 拡張機能です。
+summary: SHOW CREATE PLACEMENT POLICYは、配置ポリシーの定義を表示するために使用されます。現在の定義を確認し、別の TiDB クラスターで再作成できます。この機能は TiDB サーバーレスクラスターでは使用できません。MySQL 構文に対する TiDB 拡張機能です。
 ---
 
 # 表示 配置ポリシーの作成 {#show-create-placement-policy}

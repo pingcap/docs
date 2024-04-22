@@ -1,6 +1,6 @@
 ---
 title: Known Incompatibility Issues with Third-Party Tools
-summary: サードパーティツールとの既知の非互換性の問題は、TiDBで発生します。具体的には、`SELECT CONNECTION_ID()`関数が異なる結果を返し、一部のMySQL JDBC機能がサポートされていません。また、Sequelizeの一部の機能もサポートされていません。これらの問題に対処するためには、回避方法を適用する必要があります。
+summary: サードパーティツールとの既知の非互換性の問題は、TiDBで発生します。具体的には、SELECT CONNECTION_ID()関数が異なる結果を返し、一部のMySQL JDBC機能がサポートされていません。また、Sequelizeの一部の機能もサポートされていません。これらの問題に対処するためには、回避方法を適用する必要があります。
 ---
 
 # サードパーティツールとの既知の非互換性の問題 {#known-incompatibility-issues-with-third-party-tools}

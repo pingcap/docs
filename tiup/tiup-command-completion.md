@@ -1,6 +1,6 @@
 ---
 title: tiup completion
-summary: TiUPは、ユーザーのコストを削減するために、コマンドラインを自動補完する構成ファイルを生成するコマンドを提供しています。現在、TiUPはbashとzshコマンドの完了をサポートしており、使用するシェルのタイプを設定するために`tiup completion <shell>`コマンドを使用します。具体的な使用法として、bashの場合は`tiup completion bash`コマンドをファイルに書き込み、.bash_profileでそのファイルをソースします。zshの場合は`tiup completion zsh`コマンドを使用します。
+summary: TiUPは、ユーザーのコストを削減するために、コマンドラインを自動補完する構成ファイルを生成するコマンドを提供しています。現在、TiUPはbashとzshコマンドの完了をサポートしており、使用するシェルのタイプを設定するためにtiup completion <shell>コマンドを使用します。具体的な使用法として、bashの場合はtiup completion bashコマンドをファイルに書き込み、.bash_profileでそのファイルをソースします。zshの場合はtiup completion zshコマンドを使用します。
 ---
 
 # tiup completion {#tiup-completion}

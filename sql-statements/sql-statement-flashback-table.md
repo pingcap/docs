@@ -1,6 +1,6 @@
 ---
 title: FLASHBACK TABLE
-summary: TiDB 4.0以降、`FLASHBACK TABLE`構文が導入されました。このステートメントを使用すると、GCの存続期間内に削除されたテーブルとデータを復元できます。`tidb_gc_life_time`システム変数は行の保持時間を定義し、`tikv_gc_safe_point`で現在のsafePointを取得できます。テーブルが削除され、GC有効期間が経過した場合は、`FLASHBACK TABLE`ステートメントを使用して削除されたデータを回復できません。TiDB Binlogを使用する場合は、いくつかの条件と要件に注意する必要があります。
+summary: TiDB 4.0以降、FLASHBACK TABLE構文が導入されました。このステートメントを使用すると、GCの存続期間内に削除されたテーブルとデータを復元できます。tidb_gc_life_timeシステム変数は行の保持時間を定義し、tikv_gc_safe_pointで現在のsafePointを取得できます。テーブルが削除され、GC有効期間が経過した場合は、FLASHBACK TABLEステートメントを使用して削除されたデータを回復できません。TiDB Binlogを使用する場合は、いくつかの条件と要件に注意する必要があります。
 ---
 
 # フラッシュバックテーブル {#flashback-table}

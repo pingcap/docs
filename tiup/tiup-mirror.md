@@ -1,6 +1,6 @@
 ---
 title: Create a Private Mirror
-summary: プライベートミラーを作成するためには、`mirror`コマンドを使用します。`tiup mirror clone`コマンドを使用してローカルミラーを構築し、`tiup mirror set`コマンドを使用してリポジトリの場所を指定します。また、`tiup mirror merge`コマンドを使用してカスタムコンポーネントを含むリポジトリをマージできます。これにより、プライベートミラーを更新し、カスタムリポジトリを作成できます。
+summary: プライベートミラーを作成するためには、mirrorコマンドを使用します。tiup mirror cloneコマンドを使用してローカルミラーを構築し、tiup mirror setコマンドを使用してリポジトリの場所を指定します。また、tiup mirror mergeコマンドを使用してカスタムコンポーネントを含むリポジトリをマージできます。これにより、プライベートミラーを更新し、カスタムリポジトリを作成できます。
 ---
 
 # プライベートミラーを作成する {#create-a-private-mirror}

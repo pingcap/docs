@@ -1,6 +1,6 @@
 ---
 title: Read Historical Data Using the System Variable `tidb_snapshot`
-summary: システム変数`tidb_snapshot`を使用して履歴データを読み取る方法について説明します。TiDBは、標準SQLインターフェースを使用して履歴データを直接読み取る機能を実装しています。`tidb_snapshot`システム変数は、履歴データの読み取りをサポートするために導入されました。データが更新または削除された場合でも、SQLインターフェースを使用してその履歴バージョンを読み取ることができます。TiDBは、データバージョンを管理するためにマルチバージョン同時実行制御（MVCC）を実装しています。
+summary: システム変数tidb_snapshotを使用して履歴データを読み取る方法について説明します。TiDBは、標準SQLインターフェースを使用して履歴データを直接読み取る機能を実装しています。tidb_snapshotシステム変数は、履歴データの読み取りをサポートするために導入されました。データが更新または削除された場合でも、SQLインターフェースを使用してその履歴バージョンを読み取ることができます。TiDBは、データバージョンを管理するためにマルチバージョン同時実行制御（MVCC）を実装しています。
 ---
 
 # システム変数<code>tidb_snapshot</code>を使用した履歴データの読み取り {#read-historical-data-using-the-system-variable-code-tidb-snapshot-code}

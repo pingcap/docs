@@ -1,6 +1,6 @@
 ---
 title: MEMORY_USAGE_OPS_HISTORY
-summary: `MEMORY_USAGE_OPS_HISTORY`は、TiDBのメモリ関連操作の履歴を示すテーブルです。列には、セッション終了時のタイムスタンプ、操作、メモリ使用量制限、現在のメモリ使用量、接続ID、メモリ使用量、ディスク使用量、クライアント接続アドレス、データベース名、ユーザー名、SQLステートメントのダイジェスト、SQLステートメントが含まれます。
+summary: MEMORY_USAGE_OPS_HISTORYは、TiDBのメモリ関連操作の履歴を示すテーブルです。列には、セッション終了時のタイムスタンプ、操作、メモリ使用量制限、現在のメモリ使用量、接続ID、メモリ使用量、ディスク使用量、クライアント接続アドレス、データベース名、ユーザー名、SQLステートメントのダイジェスト、SQLステートメントが含まれます。
 ---
 
 # MEMORY_USAGE_OPS_HISTORY {#memory-usage-ops-history}

@@ -1,6 +1,6 @@
 ---
 title: tiup cluster edit-config
-summary: tiup cluster edit-configコマンドを使用すると、クラスターの構成を変更できます。`$EDITOR`環境変数が存在しない場合は、`vi`エディタが使用されます。`tiup cluster edit-config <cluster-name>`コマンドを使用して操作対象のクラスターを指定します。コマンドが正常に実行された場合、出力はありません。
+summary: tiup cluster edit-configコマンドを使用すると、クラスターの構成を変更できます。$EDITOR環境変数が存在しない場合は、viエディタが使用されます。tiup cluster edit-config <cluster-name>コマンドを使用して操作対象のクラスターを指定します。コマンドが正常に実行された場合、出力はありません。
 ---
 
 # tiup cluster edit-config {#tiup-cluster-edit-config}

@@ -1,6 +1,6 @@
 ---
 title: TiDB 5.1.4 Release Notes
-summary: TiDB 5.1.4は2022年2月22日にリリースされました。このバージョンでは、システム変数`tidb_analyze_version`のデフォルト値が`2`から`1`に変更され、TiKVのTTL機能がRawKVモードのみをサポートするようになりました。さらに、TiDBやTiKV、PD、TiFlash、TiCDCなどの改善点やバグの修正が含まれています。
+summary: TiDB 5.1.4は2022年2月22日にリリースされました。このバージョンでは、システム変数tidb_analyze_versionのデフォルト値が2から1に変更され、TiKVのTTL機能がRawKVモードのみをサポートするようになりました。さらに、TiDBやTiKV、PD、TiFlash、TiCDCなどの改善点やバグの修正が含まれています。
 ---
 
 # TiDB 5.1.4 リリースノート {#tidb-5-1-4-release-notes}

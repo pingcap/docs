@@ -1,6 +1,6 @@
 ---
 title: FLASHBACK DATABASE
-summary: TiDB v6.4.0 では、`FLASHBACK DATABASE`構文が導入されました。この構文を使用すると、GCの有効期間内に`DROP`ステートメントによって削除されたデータベースとそのデータを復元できます。また、`tidb_gc_life_time`システム変数を構成することで、履歴データの保存期間を設定できます。`FLASHBACK DATABASE`ステートメントを使用してデータを復元する際には、いくつかの注意点があります。MySQLの互換性も考慮する必要があります。
+summary: TiDB v6.4.0 では、FLASHBACK DATABASE構文が導入されました。この構文を使用すると、GCの有効期間内にDROPステートメントによって削除されたデータベースとそのデータを復元できます。また、tidb_gc_life_timeシステム変数を構成することで、履歴データの保存期間を設定できます。FLASHBACK DATABASEステートメントを使用してデータを復元する際には、いくつかの注意点があります。MySQLの互換性も考慮する必要があります。
 ---
 
 # フラッシュバックデータベース {#flashback-database}

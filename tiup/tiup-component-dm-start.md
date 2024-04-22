@@ -1,6 +1,6 @@
 ---
 title: tiup dm start
-summary: tiup dm startコマンドは、指定したクラスターのサービスの一部またはすべてを開始するために使用されます。`tiup dm start <cluster-name> [flags]`という構文を使用し、オプションとして-N、--node、-R、--role、-h、--helpがあります。このコマンドを使用すると、サービスを開始したときのログが出力されます。
+summary: tiup dm startコマンドは、指定したクラスターのサービスの一部またはすべてを開始するために使用されます。tiup dm start <cluster-name> [flags]という構文を使用し、オプションとして-N、--node、-R、--role、-h、--helpがあります。このコマンドを使用すると、サービスを開始したときのログが出力されます。
 ---
 
 # ティアップDM開始 {#tiup-dm-start}
