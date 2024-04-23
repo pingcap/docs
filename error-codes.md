@@ -431,9 +431,9 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8216
 
-    The usage of AUTO_RANDOM columns is incorrect.
+    The usage of the `AUTO_RANDOM` columns is incorrect.
 
-    See [AUTO_RANDOM](/auto-random.md) to modify.
+    See [`AUTO_RANDOM`](/auto-random.md) to modify.
 
 * Error Number: 8223
 
