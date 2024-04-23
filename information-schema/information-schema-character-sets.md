@@ -55,9 +55,9 @@ The description of columns in the `CHARACTER_SETS` table is as follows:
 * `DESCRIPTION` The description of the character set.
 * `MAXLEN` The maximum length required to store a character in this character set.
 
-# See also
+## See also
 
-- [SHOW CHARACTER SET](/sql-statements/sql-statement-show-character-set.md)
-- [SHOW COLLATION](/sql-statements/sql-statement-show-collation.md)
-- [information_schema.COLLATIONS](/information-schema/information-schema-collations.md)
-- [information_schema.COLLATION_CHARACTER_SET_APPLICABILITY](/information-schema/information-schema-collation-character-set-applicability.md)
+- [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
+- [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)
+- [`INFORMATION_SCHEMA.COLLATIONS`](/information-schema/information-schema-collations.md)
+- [`INFORMATION_SCHEMA.COLLATION_CHARACTER_SET_APPLICABILITY`](/information-schema/information-schema-collation-character-set-applicability.md)

@@ -76,7 +76,7 @@ Fields in the `ANALYZE_STATUS` table are described as follows:
 * `PROGRESS`: The progress of the task.
 * `ESTIMATED_TOTAL_ROWS`: The total rows that need to be analyzed by the task.
 
-# See also
+## See also
 
 - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
 - [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md)

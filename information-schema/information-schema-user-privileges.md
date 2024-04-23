@@ -127,6 +127,6 @@ Fields in the `USER_PRIVILEGES` table are described as follows:
 * `PRIVILEGE_TYPE`: The privilege type to be granted. Only one privilege type is shown in each row.
 * `IS_GRANTABLE`: If you have the `GRANT OPTION` privilege, the value is `YES`; otherwise, the value is `NO`.
 
-# See also
+## See also
 
 - [`SHOW GRANTS`](/sql-statements/sql-statement-show-grants.md)

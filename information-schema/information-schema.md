@@ -8,7 +8,7 @@ aliases: ['/docs/dev/system-tables/system-table-information-schema/','/docs/dev/
 
 Information Schema provides an ANSI-standard way of viewing system metadata. TiDB also provides a number of custom `INFORMATION_SCHEMA` tables, in addition to the tables included for MySQL compatibility.
 
-Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` statements. The benefit of querying `INFORMATION_SCHEMA` is that it is possible to join between tables.
+Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` statement. The benefit of querying `INFORMATION_SCHEMA` is that it is possible to join between tables.
 
 ## Tables for MySQL compatibility
 

@@ -116,6 +116,6 @@ SUBPARTITION_ORDINAL_POSITION: NULL
 2 rows in set (0.00 sec)
 ```
 
-# See also
+## See also
 
-- [SQL Tuning: Partitions](/explain-partitions.md)
+- [Explain statements using partitions](/explain-partitions.md)

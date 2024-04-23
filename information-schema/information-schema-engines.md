@@ -48,6 +48,6 @@ The description of columns in the `ENGINES` table is as follows:
 * `XA`: Whether the storage engine supports XA transactions.
 * `SAVEPOINTS`: Whether the storage engine supports `savepoints`.
 
-# See also
+## See also
 
 - [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md)

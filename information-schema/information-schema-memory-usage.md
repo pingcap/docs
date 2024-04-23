@@ -60,7 +60,7 @@ The columns in the `MEMORY_USAGE` table are described as follows:
 * DISK_USAGE: The disk usage for the current data spill operation, in bytes.
 * QUERY_FORCE_DISK: The number of times data is spilled to disk, from the time TiDB is started to the current time.
 
-# See also
+## See also
 
-- [TiDB Memory Control](/configure-memory-usage.md)
-- [Tune TiKV Memory Parameter Performance](/tune-tikv-memory-performance.md)
+- [TiDB memory control](/configure-memory-usage.md)
+- [Tune TiKV memory parameter performance](/tune-tikv-memory-performance.md)
