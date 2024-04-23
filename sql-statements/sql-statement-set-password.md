@@ -9,7 +9,7 @@ This statement changes the user password for a user account in the TiDB system d
 
 ## Synopsis
 
-```enbf+diagram
+```ebnf+diagram
 SetPasswordStmt ::=
     "SET" "PASSWORD" ( "FOR" Username )? "=" ( stringLit | "PASSWORD" "(" stringLit ")" )
 ```

@@ -172,7 +172,7 @@ Do the following to export data from the upstream TiDB cluster to Amazon S3 usin
 
 3. Run Dumpling to export data to the Amazon S3 bucket.
 
-    ```ymal
+    ```shell
     dumpling \
     -u root \
     -P 4000 \
