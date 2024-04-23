@@ -58,7 +58,7 @@ SELECT ANY_VALUE(id),GROUP_CONCAT(id),name FROM fruits GROUP BY name;
 4 rows in set (0.00 sec)
 ```
 
-In the preceding example, TiDB returns an error for the first `SELECT` statement because the `id` column is non-aggregated and not included in the `GROUP BY` clause. To address the issue, the second `SELECT` query uses `ANY_VALUE()` to get any value from each group and uses `GROUP_CONCAT()` to concatenate all values of the `id` column within each group into a single string. This approach allows you to get one value from each group and all values of the group without changing the SQL mode for non-aggregated columns.
+In the preceding example, TiDB returns an error for the first `SELECT` statement because the `id` column is non-aggregated and not included in the `GROUP BY` clause. To address the issue, the second `SELECT` query uses `ANY_VALUE()` to get any value from each group and uses `GROUP_CONCAT()` to concatenate all values of the `id` column within each group into a single string. This approach enables you to get one value from each group and all values of the group without changing the SQL mode for non-aggregated columns.
 
 ### BIN_TO_UUID()
 
