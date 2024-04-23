@@ -21,8 +21,8 @@ TiDB supports most of the [information functions](https://dev.mysql.com/doc/refm
 | [`LAST_INSERT_ID()`](#last_insert_id) | Return the value of the `AUTOINCREMENT` column for the last `INSERT`   |
 | [`ROW_COUNT()`](#row_count) | The number of rows affected |
 | [`SCHEMA()`](#schema) | Synonym for `DATABASE()`  |
-| [`SESSION_USER()`](#session-user) | Synonym for `USER()`    |
-| [`SYSTEM_USER()`](#system-user) | Synonym for `USER()`   |
+| [`SESSION_USER()`](#session_user) | Synonym for `USER()`    |
+| [`SYSTEM_USER()`](#system_user) | Synonym for `USER()`   |
 | [`USER()`](#user) | Return the user name and host name provided by the client    |
 | [`VERSION()`](#version) | Return a string that indicates the MySQL server version   |
 
