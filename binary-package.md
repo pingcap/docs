@@ -5,7 +5,7 @@ summary: Learn about TiDB installation packages and the specific components incl
 
 # TiDB Installation Packages
 
-Before [deploying TiUP offline](/production-deployment-using-tiup.md#deploy-tiup-offline), you need to download the binary packages of TiDB as described in [Prepare the TiUP offline component package](/production-deployment-using-tiup.md#prepare-the-tiup-offline-component-package).
+Before [deploying TiUP offline](/production-deployment-using-tiup.md#deploy-tiup-offline), you need to download the binary packages of TiDB at the [official download page](https://en.pingcap.com/download/).
 
 TiDB provides two binary packages: `TiDB-community-server` and `TiDB-community-toolkit`
 
