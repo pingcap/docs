@@ -145,7 +145,7 @@ See [`GROUP BY` modifiers](/functions-and-operators/group-by-modifier.md).
 
 ### INET_ATON()
 
-This `INET_ATON()` function converts an IPv4 address in dotted-quad notation into a binary version that can be stored efficiently.
+The `INET_ATON()` function converts an IPv4 address in dotted-quad notation into a binary version that can be stored efficiently.
 
 ```sql
 SELECT INET_ATON('127.0.0.1');
