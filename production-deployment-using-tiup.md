@@ -83,7 +83,7 @@ Perform the following steps in this section to deploy a TiDB cluster offline usi
 
 #### Prepare the TiUP offline component package
 
-**Method 1**: Download the offline mirror packages (TiUP offline package included) of the target TiDB version using the following links. Note that you need to download the server package and toolkit package at the same time.
+**Method 1**: Download the offline mirror packages (TiUP offline package included) of the target TiDB version using the following links. You need to download the server package and toolkit package at the same time. Note that your downloading means you agree with the [Privacy Policy](https://www.pingcap.com/privacy-policy/).
 
 ```
 https://download.pingcap.org/tidb-community-server-{version}-linux-{arch}.tar.gz
