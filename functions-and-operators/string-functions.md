@@ -1371,11 +1371,66 @@ SELECT MAKE_SET(b'111','foo','bar','baz');
 
 ### [`MID()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_mid)
 
-Return a substring starting from the specified position.
+The `MID(str, pos, len)` function returns a substring starting from the specified `pos` position with the `len` length.
+
+If any of the arguments are `NULL`, the function returns `NULL`.
+
+TiDB does not support the two-argument variant of this function. For more information, see [#52420](https://github.com/pingcap/tidb/issues/52420).
+
+Examples:
+
+In the following example, `MID()` returns the substring of the input string starting from the second character (`b`) with a length of `3` characters.
+
+```sql
+SELECT MID('abcdef',2,3);
+```
+
+```
++-------------------+
+| MID('abcdef',2,3) |
++-------------------+
+| bcd               |
++-------------------+
+1 row in set (0.00 sec)
+```
 
 ### [`NOT LIKE`](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_not-like)
 
 Negation of simple pattern matching.
+
+This function performs the inverse operation of [`LIKE`](#like).
+
+Examples:
+
+In the following example, `NOT LIKE` returns `0` (False) because `aaa` matches the `a%` pattern.
+
+```sql
+SELECT 'aaa' LIKE 'a%', 'aaa' NOT LIKE 'a%';
+```
+
+```
++-----------------+---------------------+
+| 'aaa' LIKE 'a%' | 'aaa' NOT LIKE 'a%' |
++-----------------+---------------------+
+|               1 |                   0 |
++-----------------+---------------------+
+1 row in set (0.00 sec)
+```
+
+In the following example, `NOT LIKE` returns `1` (True) because `aaa` does not match the `b%` pattern.
+
+```sql
+SELECT 'aaa' LIKE 'b%', 'aaa' NOT LIKE 'b%';
+```
+
+```
++-----------------+---------------------+
+| 'aaa' LIKE 'b%' | 'aaa' NOT LIKE 'b%' |
++-----------------+---------------------+
+|               0 |                   1 |
++-----------------+---------------------+
+1 row in set (0.00 sec)
+```
 
 ### [`NOT REGEXP`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_not-regexp)
 
