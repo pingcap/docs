@@ -69,7 +69,7 @@ Fields in the `VIEWS` table are described as follows:
 * `CHARACTER_SET_CLIENT`: The value of the `character_set_client` session variable when the view is created.
 * `COLLATION_CONNECTION`: The value of the `collation_connection` session variable when the view is created.
 
-# See also
+## See also
 
 - [`CREATE VIEW`](/sql-statements/sql-statement-create-view.md)
 - [`DROP VIEW`](/sql-statements/sql-statement-drop-view.md)
