@@ -235,7 +235,7 @@ SELECT CustomerName, CHAR_LENGTH(CustomerName) AS LenghtOfName FROM Customers;
 
 The `CHARACTER_LENGTH()` function is the same as the `CHAR_LENGTH()` function. Both functions can be used synonymously because they generate the same output.
 
-## [`CONCAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat)
+### [`CONCAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat)
 
 The `CONCAT()` function concatenates one or more arguments into a single string.
 
@@ -1308,7 +1308,56 @@ Synonym for [`LENGTH()`](#length).
 
 ### [`ORD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ord)
 
-Return character code for leftmost character of the argument.
+Return the character code for the leftmost character of the given argument.
+
+This function is similar to [`CHAR()`](#char) but works the other way around.
+
+Examples:
+
+Taking `a` and `A` as an example, `ORD()` returns `97` for `a` and `65` for `A`.
+
+```sql
+SELECT ORD('a'), ORD('A');
+```
+
+```
++----------+----------+
+| ORD('a') | ORD('A') |
++----------+----------+
+|       97 |       65 |
++----------+----------+
+1 row in set (0.00 sec)
+```
+
+If you take the character code obtained from `ORD()` as input, you can get the original characters back using the `CHAR()` function. Note that the output format might vary depending on whether the `binary-as-hex` option is enabled in your MySQL client.
+
+```sql
+SELECT CHAR(97), CHAR(65);
+```
+
+```
++----------+----------+
+| CHAR(97) | CHAR(65) |
++----------+----------+
+| a        | A        |
++----------+----------+
+1 row in set (0.01 sec)
+```
+
+The following example shows how `ORD()` handles multibyte characters. Here, both `101` and `0x65` are the UTF-8 encoded values for the `e` character, but in different formats. And both `50091` and `0xC3AB` represent the same values, but for the `ë` character. 
+
+```sql
+SELECT ORD('e'), ORD('ë'), HEX('e'), HEX('ë');
+```
+
+```
++----------+-----------+----------+-----------+
+| ORD('e') | ORD('ë')  | HEX('e') | HEX('ë')  |
++----------+-----------+----------+-----------+
+|      101 |     50091 | 65       | C3AB      |
++----------+-----------+----------+-----------+
+1 row in set (0.00 sec)
+```
 
 ### [`POSITION()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_position)
 
