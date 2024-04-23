@@ -13,11 +13,11 @@ TiDB supports all of the [control flow functions](https://dev.mysql.com/doc/refm
 | [`CASE`](#case)       | Case operator                     |
 | [`IF()`](#if)         | If/else construct                 |
 | [`IFNULL()`](#ifnull) | Null if/else construct            |
-| [`NULLIF()`](#nullif) | Return NULL if expr1 = expr2      |
+| [`NULLIF()`](#nullif) | Return `NULL` if expr1 = expr2      |
 
 ## CASE
 
-The [`CASE`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#operator_case) operator allows you to perform conditional logic and customize query results based on specified conditions.
+The [`CASE`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#operator_case) operator enables you to perform conditional logic and customize query results based on specified conditions.
 
 Syntax:
 
@@ -57,7 +57,7 @@ SELECT n, CASE WHEN n MOD 2 THEN "odd" ELSE "even" END FROM d;
 
 ## IF()
 
-The [`IF()`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_if) function allows you to perform different actions based on whether a value or expression is true or not.
+The [`IF()`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_if) function enables you to perform different actions based on whether a value or expression is true or not.
 
 Syntax:
 
