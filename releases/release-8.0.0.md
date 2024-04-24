@@ -9,7 +9,7 @@ Release date: March 29, 2024
 
 TiDB version: 8.0.0
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-tidb) | [Installation packages](https://www.pingcap.com/download/?version=v8.0.0#version-list)
+Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-tidb)
 
 8.0.0 introduces the following key features and improvements:
 
