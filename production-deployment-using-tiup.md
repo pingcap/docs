@@ -83,9 +83,21 @@ Perform the following steps in this section to deploy a TiDB cluster offline usi
 
 #### Prepare the TiUP offline component package
 
-Method 1: On the [official download page](https://www.pingcap.com/download/), select the offline mirror package (TiUP offline package included) of the target TiDB version. Note that you need to download the server package and toolkit package at the same time.
+**Method 1**: Download the offline binary packages (TiUP offline package included) of the target TiDB version using the following links. You need to download both the server and toolkit packages. Note that your downloading means you agree to the [Privacy Policy](https://www.pingcap.com/privacy-policy/).
 
-Method 2: Manually pack an offline component package using `tiup mirror clone`. The detailed steps are as follows:
+```
+https://download.pingcap.org/tidb-community-server-{version}-linux-{arch}.tar.gz
+```
+
+```
+https://download.pingcap.org/tidb-community-toolkit-{version}-linux-{arch}.tar.gz
+```
+
+> **Tip:**
+>
+> `{version}` in the link indicates the version number of TiDB and `{arch}` indicates the architecture of the system, which can be `amd64` or `arm64`. For example, the download link for `v8.0.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-toolkit-v8.0.0-linux-amd64.tar.gz`.
+
+**Method 2**: Manually pack an offline component package using `tiup mirror clone`. The detailed steps are as follows:
 
 1. Install the TiUP package manager online.
 
@@ -197,7 +209,7 @@ The `local_install.sh` script automatically runs the `tiup mirror set tidb-commu
 
 #### Merge offline packages
 
-If you download the offline packages from the [official download page](https://www.pingcap.com/download/), you need to merge the server package and the toolkit package into an offline mirror. If you manually package the offline component packages using the `tiup mirror clone` command, you can skip this step.
+If you download the offline packages via download links, you need to merge the server package and the toolkit package into an offline mirror. If you manually package the offline component packages using the `tiup mirror clone` command, you can skip this step.
 
 Run the following commands to merge the offline toolkit package into the server package directory:
 
