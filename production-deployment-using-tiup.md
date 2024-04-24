@@ -86,7 +86,25 @@ Perform the following steps in this section to deploy a TiDB cluster offline usi
 
 #### Prepare the TiUP offline component package
 
+<<<<<<< HEAD
 To prepare the TiUP offline component package, you can manually pack an offline component package using `tiup mirror clone`.
+=======
+**Method 1**: Download the offline binary packages (TiUP offline package included) of the target TiDB version using the following links. You need to download both the server and toolkit packages. Note that your downloading means you agree to the [Privacy Policy](https://www.pingcap.com/privacy-policy/).
+
+```
+https://download.pingcap.org/tidb-community-server-{version}-linux-{arch}.tar.gz
+```
+
+```
+https://download.pingcap.org/tidb-community-toolkit-{version}-linux-{arch}.tar.gz
+```
+
+> **Tip:**
+>
+> `{version}` in the link indicates the version number of TiDB and `{arch}` indicates the architecture of the system, which can be `amd64` or `arm64`. For example, the download link for `v8.0.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-toolkit-v8.0.0-linux-amd64.tar.gz`.
+
+**Method 2**: Manually pack an offline component package using `tiup mirror clone`. The detailed steps are as follows:
+>>>>>>> b84b781612 (Update TiUP offline deployment steps (#17318))
 
 1. Install the TiUP package manager online.
 
@@ -196,6 +214,23 @@ source /home/tidb/.bash_profile
 
 The `local_install.sh` script automatically runs the `tiup mirror set tidb-community-server-${version}-linux-amd64` command to set the current mirror address to `tidb-community-server-${version}-linux-amd64`.
 
+<<<<<<< HEAD
+=======
+#### Merge offline packages
+
+If you download the offline packages via download links, you need to merge the server package and the toolkit package into an offline mirror. If you manually package the offline component packages using the `tiup mirror clone` command, you can skip this step.
+
+Run the following commands to merge the offline toolkit package into the server package directory:
+
+```bash
+tar xf tidb-community-toolkit-${version}-linux-amd64.tar.gz
+ls -ld tidb-community-server-${version}-linux-amd64 tidb-community-toolkit-${version}-linux-amd64
+cd tidb-community-server-${version}-linux-amd64/
+cp -rp keys ~/.tiup/
+tiup mirror merge ../tidb-community-toolkit-${version}-linux-amd64
+```
+
+>>>>>>> b84b781612 (Update TiUP offline deployment steps (#17318))
 To switch the mirror to another directory, run the `tiup mirror set <mirror-dir>` command. To switch the mirror to the online environment, run the `tiup mirror set https://tiup-mirrors.pingcap.com` command.
 
 ## Step 3. Initialize cluster topology file
