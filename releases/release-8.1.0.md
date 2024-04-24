@@ -130,11 +130,13 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 
 ### SQL
 
-* 支持在 TiDB 建表时使用更多的表达式设置列的默认值的功能成为正式功能（GA）[#50936](https://github.com/pingcap/tidb/issues/50936) @[zimulala](https://github.com/zimulala)**tw@hfxsd** <!--1794-->
+* Support using some expressions to set default column values when creating a table (GA) [#50936](https://github.com/pingcap/tidb/issues/50936) @[zimulala](https://github.com/zimulala)
 
-    在 v8.0.0 之前，建表时指定列的默认值仅限于固定的字符串、数字和日期。从 v8.0.0 开始，TiDB 支持使用部分表达式作为列的默认值，例如将列的默认值设置为 UUID()，从而满足多样化的业务需求。同时在 8.1 版本，支持添加列时，也支持使用表达式作为列的默认值。
+    Before v8.0.0, when you create a table, the default value of a column is limited to strings, numbers, dates, and certain expressions. Starting from v8.0.0, you can use more expressions as the default column values. For example, you can set the default value of a column to `DATE_FORMAT`. This feature helps you meet more diverse requirements. In v8.1.0, this feature becomes GA.
+    
+    Starting from v8.1.0, you can use expressions as default values when adding columns by `ADD COLUMN`.
 
-    更多信息，请参考[用户文档](https://docs.pingcap.com/zh/tidb/dev/data-type-default-values#%E8%A1%A8%E8%BE%BE%E5%BC%8F%E9%BB%98%E8%AE%A4%E5%80%BC)。
+    For more information, see [documentation](/data-type-default-values.md#specify-expressions-as-default-values).
 
 ### DB operations
 
@@ -154,11 +156,11 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 
 ### Security
 
-* 增强 TiDB 日志脱敏（GA） [#52364](https://github.com/pingcap/tidb/issues/52364) @[xhebox](https://github.com/xhebox) **tw@hfxsd** <!--1817-->
+* Enhance TiDB log desensitization (GA) [#52364](https://github.com/pingcap/tidb/issues/52364) @[xhebox](https://github.com/xhebox) **tw@hfxsd** <!--1817-->
 
-    TiDB 日志脱敏增强是通过对日志文件中的 SQL 文本信息进行标记，支持在查看时安全展示敏感数据。你可以控制是否对日志信息进行脱敏，以实现在不同场景下安全使用 TiDB 日志，提升了使用日志脱敏能力的安全性和灵活性。要使用此功能，可以将系统变量 `tidb_redact_log` 的值设置为 `MARKER`，此时 TiDB 的运行日志中的 SQL 文本会被标记，查看时将基于标记进行数据的安全展示，从而保护日志信息。这个功能在 v8.1.0 成为正式功能。
+    The enhancement of TiDB log desensitization is based on marking SQL text information in log files, facilitating deleting of sensitive data when users view the logs. You can control whether to mark log information to enable secure use of TiDB logs in different scenarios, enhancing the security and flexibility of using log desensitization. To use this feature, set the system variable `tidb_redact_log` to `MARKER`. This marks the SQL text in TiDB logs. In addition, you can use the `collect-log` subcommand on the TiDB server to remove marked sensitive data from the logs and display the logs in a data-safe manner. You can also remove all markers and get the normal logs. This feature became generally available in v8.1.0.
 
-    更多信息，请参考[用户文档](/system-variables.md#tidb_redact_log)。
+    For more information, see [documentation](/system-variables.md#tidb_redact_log).
 
 ### Data migration
 
