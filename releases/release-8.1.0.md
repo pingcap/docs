@@ -9,7 +9,7 @@ Release date: xx xx, 2024
 
 TiDB version: 8.1.0
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v8.1/production-deployment-using-tiup) | [Installation packages](https://www.pingcap.com/download/?version=v8.1.0#version-list)
+Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v8.1/production-deployment-using-tiup)
 
 TiDB 8.1.0 is a Long-Term Support Release (LTS).
 
