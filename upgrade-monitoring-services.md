@@ -28,7 +28,16 @@ Download a new installation package from the [Prometheus download page](https://
 
 ### Step 2. Download the Prometheus installation package provided by TiDB
 
-1. Download the TiDB **Server Package** from the [TiDB download page](https://www.pingcap.com/download/) and extract it.
+1. Download the TiDB server package and extract it. Note that your downloading means you agree to the [Privacy Policy](https://www.pingcap.com/privacy-policy/).
+
+    ```
+    https://download.pingcap.org/tidb-community-server-{version}-linux-{arch}.tar.gz
+    ```
+
+    > **Tip:**
+    >
+    > `{version}` in the link indicates the version number of TiDB and `{arch}` indicates the architecture of the system, which can be `amd64` or `arm64`. For example, the download link for `v7.6.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-toolkit-v7.6.0-linux-amd64.tar.gz`.
+
 2. In the extracted files, locate `prometheus-v{version}-linux-amd64.tar.gz` and extract it.
 
     ```bash
@@ -68,7 +77,16 @@ In the following upgrade steps, you need to download the Grafana installation pa
 
 ### Step 2. Download the Grafana installation package provided by TiDB
 
-1. Download the TiDB **Server Package** package from the [TiDB download page](https://www.pingcap.com/download) and extract it.
+1. Download the TiDB server package and extract it. Note that your downloading means you agree to the [Privacy Policy](https://www.pingcap.com/privacy-policy/).
+
+    ```
+    https://download.pingcap.org/tidb-community-server-{version}-linux-{arch}.tar.gz
+    ```
+
+    > **Tip:**
+    >
+    > `{version}` in the link indicates the version number of TiDB and `{arch}` indicates the architecture of the system, which can be `amd64` or `arm64`. For example, the download link for `v7.6.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-toolkit-v7.6.0-linux-amd64.tar.gz`.
+
 2. In the extracted files, locate `grafana-v{version}-linux-amd64.tar.gz` and extract it.
 
     ```bash
