@@ -9,7 +9,7 @@ Release date: March 30, 2023
 
 TiDB version: 7.0.0-[DMR](/releases/versioning.md#development-milestone-releases)
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.0/quick-start-with-tidb) | [Installation package](https://www.pingcap.com/download/?version=v7.0.0#version-list)
+Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.0/quick-start-with-tidb)
 
 In v7.0.0-DMR, the key new features and improvements are as follows:
 
