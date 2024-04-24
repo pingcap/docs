@@ -28,7 +28,7 @@ Download a new installation package from the [Prometheus download page](https://
 
 ### Step 2. Download the Prometheus installation package provided by TiDB
 
-1. Download the TiDB server package. Note that your downloading means you agree with the [Privacy Policy](https://www.pingcap.com/privacy-policy/).
+1. Download the TiDB server package and extract it. Note that your downloading means you agree to the [Privacy Policy](https://www.pingcap.com/privacy-policy/).
 
     ```
     https://download.pingcap.org/tidb-community-server-{version}-linux-{arch}.tar.gz
@@ -77,7 +77,7 @@ In the following upgrade steps, you need to download the Grafana installation pa
 
 ### Step 2. Download the Grafana installation package provided by TiDB
 
-1. Download the TiDB server package. Note that your downloading means you agree with the [Privacy Policy](https://www.pingcap.com/privacy-policy/).
+1. Download the TiDB server package and extract it. Note that your downloading means you agree to the [Privacy Policy](https://www.pingcap.com/privacy-policy/).
 
     ```
     https://download.pingcap.org/tidb-community-server-{version}-linux-{arch}.tar.gz
