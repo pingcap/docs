@@ -221,9 +221,9 @@ When you start the TiDB cluster, you can use command-line options or environment
 
 ## `--redact`
 
-+ Determines whether TiDB server desensitizes log files when using the subcommand `collect-log`.
++ Determines whether the TiDB server desensitizes log files when using the subcommand `collect-log`.
 + Default: false
-+ When the value is `true`, it is a masking operation, and all fields wrapped in `‹ ›` are replaced with `?`. When the value is `false`, it is a restore operation, and all mark symbols are removed. To use this feature, execute `./tidb-server --redact=xxx collect-log <input> <output>` to desensitize or restore the TiDB server log file specified by `<input>` and output it to `<output>`. For more information, see the system variable [`tidb_redact_log`](/system-variables.md#tidb_redact_log).
++ When the value is `true`, it is a masking operation, and all fields wrapped in `‹ ›` mark symbols are replaced with `?`. When the value is `false`, it is a restore operation, and all mark symbols are removed. To use this feature, execute `./tidb-server --redact=xxx collect-log <input> <output>` to desensitize or restore the TiDB server log file specified by `<input>` and output it to `<output>`. For more information, see the system variable [`tidb_redact_log`](/system-variables.md#tidb_redact_log).
 
 ## `--repair-mode`
 
