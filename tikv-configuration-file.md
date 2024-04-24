@@ -1287,7 +1287,7 @@ Configuration items related to RocksDB
 + Default value: 25%
 + Unit: KiB|MiB|GiB
 
-### `track-and-verify-wals-in-manifest` <span class="version-mark">New in v6.5.9 and v8.0.0</span>
+### `track-and-verify-wals-in-manifest` <span class="version-mark">New in v6.5.9 and v7.1.5</span>
 
 + Controls whether to record information about Write Ahead Log (WAL) files in the RocksDB MANIFEST file and whether to verify the integrity of WAL files during startup. For more information, see RocksDB [Track WAL in MANIFEST](https://github.com/facebook/rocksdb/wiki/Track-WAL-in-MANIFEST).
 + Default value: `true`
