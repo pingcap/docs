@@ -9,7 +9,7 @@ Release date: June 29, 2023
 
 TiDB version: 7.2.0
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-tidb) | [Installation packages](https://www.pingcap.com/download/?version=v7.2.0#version-list)
+Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-tidb)
 
 7.2.0 introduces the following key features and improvements:
 
