@@ -217,7 +217,7 @@ TABLE t1;
 >
 > - In TiDB, [`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache) might lead to results that differ from those returned by MySQL. This discrepancy arises because TiDB caches IDs on each node, potentially leading to IDs that are out of order or have gaps. If maintaining strict ID ordering is essential for your application, you can enable [MySQL compatible mode](/auto-increment.md#mysql-compatibility-mode).
 >
-> - In the preceding example, IDs increase by 2 while MySQL would generate IDs incrementing by one in the same scenario. For more compatibility information, see [Auto-increment ID](/mysql-compatibility.md#auto-increment-id).
+> - In the preceding example, IDs increase by 2 while MySQL would generate IDs incrementing by 1 in the same scenario. For more compatibility information, see [Auto-increment ID](/mysql-compatibility.md#auto-increment-id).
 
 ### ROW_COUNT()
 
