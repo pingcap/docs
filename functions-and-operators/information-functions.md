@@ -56,9 +56,21 @@ SELECT BENCHMARK(5, SLEEP(2));
 
 ### CONNECTION_ID()
 
+<CustomContent platform="tidb">
+
 The `CONNECTION_ID()` function returns the ID of the connection. Based on the value of the [`enable-32bits-connection-id`](/tidb-configuration-file.md#enable-32bits-connection-id-new-in-v730) configuration item for TiDB, this function returns a 32-bit or 64-bit connection ID.
 
 If [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610) is enabled, the connection ID can be used to kill queries across multiple TiDB instances of the same cluster.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+The `CONNECTION_ID()` function returns the ID of the connection. Based on the value of the [`enable-32bits-connection-id`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-32bits-connection-id-new-in-v730) configuration item for TiDB, this function returns a 32-bit or 64-bit connection ID.
+
+If [`enable-global-kill`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-global-kill-new-in-v610) is enabled, the connection ID can be used to kill queries across multiple TiDB instances of the same cluster.
+
+</CustomContent>
 
 ```sql
 SELECT CONNECTION_ID();
@@ -75,7 +87,17 @@ SELECT CONNECTION_ID();
 
 ### CURRENT_ROLE()
 
+<CustomContent platform="tidb">
+
 The `CURRENT_ROLE()` function returns the current [role](/role-based-access-control.md) for the current session.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+The `CURRENT_ROLE()` function returns the current [role](https://docs.pingcap.com/tidb/stable/role-based-access-control) for the current session.
+
+</CustomContent>
 
 ```sql
 SELECT CURRENT_ROLE();
@@ -278,7 +300,11 @@ Store: tikv
 
 The preceding example is from TiDB v7.5.1, which identifies itself as MySQL 8.0.11.
 
+<CustomContent platform="tidb">
+
 If you want to change the returned version, you can modify the [`server-version`](/tidb-configuration-file.md#server-version) configuration item.
+
+</CustomContent>
 
 ## TiDB specific functions
 
