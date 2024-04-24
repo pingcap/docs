@@ -63,6 +63,6 @@ SELECT CONVERT(0x616263 USING utf8mb4);
 
 ## MySQL compatibility
 
-- TiDB does not support cast operations on spatial types. For more information, see [#6347](https://github.com/pingcap/tidb/issues/6347).
+- TiDB does not support cast operations on `SPATIAL` types. For more information, see [#6347](https://github.com/pingcap/tidb/issues/6347).
 - TiDB does not support `AT TIME ZONE` for `CAST()`. For more information, see [#51742](https://github.com/pingcap/tidb/issues/51742).
 - `CAST(24 AS YEAR)` returns 2 digits in TiDB and 4 digits in MySQL. For more information, see [#29629](https://github.com/pingcap/tidb/issues/29629).
