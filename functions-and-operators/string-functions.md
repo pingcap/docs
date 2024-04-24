@@ -421,22 +421,22 @@ SELECT ELT(3, 'This', 'is', 'TiDB');
 1 row in set (0.00 sec)
 ```
 
-The preceding example returns the third element, which is "TiDB".
+The preceding example returns the third element, which is `'TiDB'`.
 
 ### [`EXPORT_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_export-set)
 
 `EXPORT_SET()` returns a string that consists of a specified number (`number_of_bits`) of `on`/`off` values for `bits` starting from the right-most (lowest) bit as the first value, optionally separated by `separator`.
-
 
 Syntax:
 
 ```
 EXPORT_SET(bits, on, off, [separator[, number_of_bits]])
 ```
+
 - `bits`: an integer representing the bit value.
 - `on`: the string to be returned if the corresponding bit is `1`.
 - `off`: the string to be returned if the corresponding bit is `0`.
-- `separator` (optional): the separator character in the result string. 
+- `separator` (optional): the separator character in the result string.
 - `number_of_bits` (optional): the number of bits to be processed. If it is not set, `64` (the max size of bits) is used by default, which means that `bits` is treated as an unsigned 64-bit integer.
 
 Examples:
@@ -457,6 +457,7 @@ SELECT EXPORT_SET(b'101',"ON",'off','|',5);
 ```
 
 In the following example, `bits` is set to `00001111`, `on` is set to `x`, and `off` is set to `_`. This causes the function to return `____` for the `0` bits and `xxxx` for the `1` bits. Therefore, when processing with the bits in `00001111` from right to left, the function returns `xxxx____`.
+
 ```sql
 SELECT EXPORT_SET(b'00001111', 'x', '_', '', 8);
 ```
