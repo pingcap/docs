@@ -424,7 +424,7 @@ Returns the element at the index number.
 SELECT ELT(3, 'This', 'is', 'TiDB');
 ```
 
-```
+```sql
 +------------------------------+
 | ELT(3, 'This', 'is', 'TiDB') |
 +------------------------------+
