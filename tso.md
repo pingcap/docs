@@ -72,11 +72,11 @@ You can also extract the logical timestamp `000000000000000100` in binary, which
 You can also parse the timestamp via the CLI tool as follows:
 
 ```shell
-$ tiup ctl:v7.1.0 pd tso 443852055297916932
+$ tiup ctl:v7.1.5 pd tso 443852055297916932
 ```
 
 ```
-system:  2023-08-27 20:33:41.687 +0200 CEST
+system:  2024-04-26 20:33:41.687 +0200 CEST
 logic:   4
 ```
 
