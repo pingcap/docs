@@ -47,7 +47,7 @@ The following errors are always fatal, and cannot be skipped by changing `lightn
 
 ## Conflict errors
 
-You can use the [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) configuration item to increase the tolerance of errors related to data conflict. If this configuration item is set to *N*, TiDB Lightning allows and skips up to *N* conflict errors from the data source before it exits. The default value is `9223372036854775807`, which means that almost all errors are tolerant.
+You can use the [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) configuration item to increase the tolerance of errors related to data conflict. If this configuration item is set to *N*, TiDB Lightning allows and skips up to *N* conflict errors from the data source before it exits. The default value is `10000`, which means that almost all errors are tolerant.
 
 These errors are recorded in a table. After the import is completed, you can view the errors in the database and process them manually. For more information, see [Error Report](#error-report)
 

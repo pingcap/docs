@@ -41,7 +41,7 @@ strategy = ""
 # Controls whether to enable preprocess conflict detection, which checks conflicts in data before importing it to TiDB. In scenarios where the ratio of conflict records is greater than or equal to 1%, it is recommended to set `precheck-conflict-before-import = true` for better performance in conflict detection. In other scenarios, it is recommended to disable it. The default value is false, indicating that TiDB Lightning only checks conflicts after the import. If you set it to true, TiDB Lightning checks conflicts both before and after the import.
 # precheck-conflict-before-import = false
 # threshold = 10000
-# max-record-rows = 100
+# max-record-rows = 10000
 
 [tikv-importer]
 # Import mode. "local" means using the physical import mode.
