@@ -7,7 +7,11 @@ summary: Learn TiDB Cloud performance test results.
 
 This document provides [Sysbench](https://github.com/akopytov/sysbench) performance test results of different TiDB cluster scales, which can be used as a reference when you [determine the cluster size](/tidb-cloud/size-your-cluster.md).
 
-This is an example of the Sysbench configuration file:
+> **Note:**
+>
+> The tests are performed on TiDB v6.1.1, and the test results are based on the condition that the P95 transaction latency is below 105 ms.
+
+Here is an example of a Sysbench configuration file:
 
 ```txt
 mysql-host={TIDB_HOST}
@@ -19,15 +23,11 @@ time=600
 threads={100}
 report-interval=10
 db-driver=mysql
-mysql-ignore-errors=1062,2013,8028,9002,9007 
+mysql-ignore-errors=1062,2013,8028,9002,9007
 auto-inc=false
 ```
 
-> **Note:**
->
-> The tests are performed on TiDB v6.1.1, and the test results are based on the condition that the P95 transaction latency is below 105 ms.
-
-In this document, the transaction models `Read Only`, `Read Write`, and `Write Only` represent read workloads, mixed workloads, and write workloads. 
+In this document, the transaction models `Read Only`, `Read Write`, and `Write Only` represent read workloads, mixed workloads, and write workloads.
 
 ## 4 vCPU performance
 
