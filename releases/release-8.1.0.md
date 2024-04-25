@@ -68,8 +68,8 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
     <td>Previously, using DM to migrate data from MySQL 8.0 is an experimental feature and is not available for production environments. TiDB v7.6.0 enhances the stability and compatibility of this feature to help you smoothly and quickly migrate data from MySQL 8.0 to TiDB in production environments. In v7.6.0, this feature becomes generally available (GA).</td>
   </tr>
   <tr>
-    <td>资源管控支持<a href="https://docs.pingcap.com/zh/tidb/v8.1/tidb-resource-control#管理资源消耗超出预期的查询-runaway-queries">管理资源消耗超出预期的查询</a> (GA) **tw@lilin90**</td>
-    <td>通过资源组的规则，TiDB 能够自动识别出运行超出预期的查询，并对该查询进行限流或取消处理。 即使没有被规则识别，用户仍旧可以手工添加查询特征以及对应的手段措施，从而降低突发的查询性能对整个数据库的影响。</td>
+    <td>TiDB resource control supports <a href="https://docs.pingcap.com/tidb/v8.1/tidb-resource-control#manage-queries-that-consume-more-resources-than-expected-runaway-queries">managing queries that consume more resources than expected</a> (GA)</td>
+    <td>Through the rules of resource groups, TiDB can automatically identify queries that consume more resources than expected, and then limit or cancel these queries. Even if the queries are not identified by the rules, you can still manually add query characteristics and take corresponding measures to reduce the sudden query performance problem's impact on the entire database.</td>
   </tr>
   <tr>
     <td rowspan="1">DB Operations and Observability</td>
@@ -108,17 +108,17 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 
 ### Reliability
 
-* 管理资源消耗超出预期的查询（GA）[#43691](https://github.com/pingcap/tidb/issues/43691)  @[nolouch](https://github.com/nolouch) **tw@lilin90** <!--1447-->
+* Support managing queries that consume more resources than expected (GA) [#43691](https://github.com/pingcap/tidb/issues/43691) @[nolouch](https://github.com/nolouch) **tw@lilin90** <!--1447-->
 
-    突发的 SQL 性能问题引发数据库整体性能下降，是数据库稳定性最常见的挑战。造成 SQL 性能问题的原因有很多，例如未经充分测试的新 SQL、数据量剧烈变化、执行计划突变等，这些问题很难从源头上完全规避。在过去的版本中，TiDB 增加了对资源超出预期的查询的管理能力，用以快速降低 SQL 性能造成的影响范围，这个功能在 v8.1.0 成为正式功能。
-  
-    你可以针对某个资源组 (Resource Group) 设置查询的最长执行时间。当查询的执行时间超过设置值时，自动降低查询的优先级或者取消查询。你还可以设置在一段时间内通过文本或者执行计划立即匹配已经识别出的查询，从而避免问题查询的并发度太高时，在识别阶段就造成大量资源消耗的情况。
-  
-    TiDB 同时支持手动标记查询的功能。利用命令 [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)，你可以根据 SQL 的文本、SQL Digest 或执行计划标记查询，命中的查询可以被降级或取消，达到添加 SQL 黑名单的目的。
-  
-    对资源超出预期查询的自动管理能力，为用户提供了有效的手段，在根本原因被定位之前，该功能可以快速缓解其对整体性能的影响，从而提升数据库的稳定性。
-  
-    更多信息，请参考[用户文档](/tidb-resource-control.md#管理资源消耗超出预期的查询-runaway-queries)。
+    Sudden SQL query performance problems can cause a decline in overall database performance, which is the most common challenge to database stability. The reasons for these problems are diverse, such as untested new SQL statements, drastic changes in data volume, and sudden changes in execution plans. These problems are difficult to avoid completely at the source. In earlier versions, TiDB has added the capability to manage queries that consume more resources than expected to quickly reduce the impact of sudden query performance problems. This feature becomes generally available in v8.1.0.
+
+    You can set the maximum execution time for a query in a resource group. When the execution time of a query exceeds the set value, the priority of the query is automatically reduced or the query is canceled. You can also set immediately matching identified queries through text or execution plans within a period of time, to avoid excessive resource consumption during the identification phase when the concurrency of problematic queries is too high.
+
+    TiDB also supports the manual marking of queries. By using the [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md) command, you can mark queries based on the SQL text, SQL Digest, or execution plan. The queries that match the mark can be downgraded or canceled, achieving the purpose of adding a SQL blocklist.
+
+    The automatic management capability of queries that consume more resources than expected provides users with an effective means to quickly mitigate the impact of query problems on overall performance before the root cause is identified, thereby improving the stability of the database.
+
+    For more information, see [documentation](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries).
 
 ### Availability
 
