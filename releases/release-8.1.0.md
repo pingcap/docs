@@ -70,7 +70,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
   </tr>
   <tr>
     <td>TiDB resource control supports <a href="https://docs.pingcap.com/tidb/v8.1/tidb-resource-control#manage-queries-that-consume-more-resources-than-expected-runaway-queries">managing queries that consume more resources than expected</a> (GA) **tw@lilin90** </td>
-    <td>Through the rules of resource groups, TiDB can automatically identify queries that consume more resources than expected, and then limit or cancel these queries. Even if the queries are not identified by the rules, you can still manually add query characteristics and take corresponding measures to reduce the sudden query performance problem's impact on the entire database.</td>
+    <td>Through the rules of resource groups, TiDB can automatically identify queries that consume more resources than expected, and then limit or cancel these queries. Even if the queries are not identified by the rules, you can still manually add query characteristics and take corresponding measures to reduce the impact of the sudden query performance problem on the entire database.</td>
   </tr>
   <tr>
     <td rowspan="1">DB Operations and Observability</td>
