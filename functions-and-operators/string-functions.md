@@ -418,7 +418,7 @@ Output:
 
 ### [`ELT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_elt)
 
-Returns the element at the index number.
+The `ELT()` function returns the element at the index number.
 
 ```sql
 SELECT ELT(3, 'This', 'is', 'TiDB');
@@ -437,7 +437,7 @@ The preceding example returns the third element, which is `'TiDB'`.
 
 ### [`EXPORT_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_export-set)
 
-`EXPORT_SET()` returns a string that consists of a specified number (`number_of_bits`) of `on`/`off` values, optionally separated by `separator`. These values are based on whether the corresponding bit in the `bits` argument is `1`, where the first value corresponds to the rightmost (lowest) bit of `bits`.
+The `EXPORT_SET()` function returns a string that consists of a specified number (`number_of_bits`) of `on`/`off` values, optionally separated by `separator`. These values are based on whether the corresponding bit in the `bits` argument is `1`, where the first value corresponds to the rightmost (lowest) bit of `bits`.
 
 Syntax:
 
