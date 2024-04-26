@@ -441,7 +441,7 @@ The preceding example returns the third element, which is `'TiDB'`.
 
 Syntax:
 
-```
+```sql
 EXPORT_SET(bits, on, off, [separator[, number_of_bits]])
 ```
 
@@ -459,7 +459,7 @@ In the following example, `number_of_bits` is set to `5`, resulting in 5 values,
 SELECT EXPORT_SET(b'101',"ON",'off','|',5);
 ```
 
-```
+```sql
 +-------------------------------------+
 | EXPORT_SET(b'101',"ON",'off','|',5) |
 +-------------------------------------+
@@ -474,7 +474,7 @@ In the following example, `bits` is set to `00001111`, `on` is set to `x`, and `
 SELECT EXPORT_SET(b'00001111', 'x', '_', '', 8);
 ```
 
-```
+```sql
 +------------------------------------------+
 | EXPORT_SET(b'00001111', 'x', '_', '', 8) |
 +------------------------------------------+
