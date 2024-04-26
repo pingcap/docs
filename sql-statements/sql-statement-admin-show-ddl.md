@@ -54,8 +54,6 @@ OWNER_ADDRESS: 0.0.0.0:4000
 1 row in set (0.00 sec)
 ```
 
-
-
 ### `ADMIN SHOW DDL JOBS`
 
 The `ADMIN SHOW DDL JOBS` statement is used to view all the results in the current DDL job queue, including running and queuing tasks, as well as the latest ten results in the completed DDL job queue. The returned result fields are described as follows:
