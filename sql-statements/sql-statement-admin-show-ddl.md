@@ -11,7 +11,12 @@ The `ADMIN SHOW DDL [JOBS|JOB QUERIES]` statement shows information about runnin
 
 ```ebnf+diagram
 AdminStmt ::=
-    'ADMIN' ( 'SHOW' ( 'DDL' ( 'JOBS' Int64Num? WhereClauseOptional | 'JOB' 'QUERIES' NumList | 'JOB' 'QUERIES' 'LIMIT' m 'OFFSET' n )? | TableName 'NEXT_ROW_ID' | 'SLOW' AdminShowSlow ) | 'CHECK' ( 'TABLE' TableNameList | 'INDEX' TableName Identifier ( HandleRange ( ',' HandleRange )* )? ) | 'RECOVER' 'INDEX' TableName Identifier | 'CLEANUP' ( 'INDEX' TableName Identifier | 'TABLE' 'LOCK' TableNameList ) | 'CHECKSUM' 'TABLE' TableNameList | 'CANCEL' 'DDL' 'JOBS' NumList | 'RELOAD' ( 'EXPR_PUSHDOWN_BLACKLIST' | 'OPT_RULE_BLACKLIST' | 'BINDINGS' ) | 'PLUGINS' ( 'ENABLE' | 'DISABLE' ) PluginNameList | 'REPAIR' 'TABLE' TableName CreateTableStmt | ( 'FLUSH' | 'CAPTURE' | 'EVOLVE' ) 'BINDINGS' )
+    'ADMIN' 'SHOW' 'DDL'
+    ( 
+        'JOBS' Int64Num? WhereClauseOptional 
+    |   'JOB' 'QUERIES' NumList 
+    |   'JOB' 'QUERIES' 'LIMIT' m 'OFFSET' n
+    )
 
 NumList ::=
     Int64Num ( ',' Int64Num )*
@@ -24,23 +29,32 @@ WhereClauseOptional ::=
 
 ### `ADMIN SHOW DDL`
 
-To view the status of the currently running DDL jobs, use `ADMIN SHOW DDL`. The output includes the current schema version, the DDL ID and address of the owner, the running DDL jobs and SQL statements, and the DDL ID of the current TiDB instance.
+To view the status of the currently running DDL jobs, use `ADMIN SHOW DDL`. The output includes the current schema version, the DDL ID and address of the owner, the running DDL jobs and SQL statements, and the DDL ID of the current TiDB instance. The returned result fields are described as follows:
 
-{{< copyable "sql" >}}
+- `SCHEMA_VER`: A number indicating the version of the schema.
+- `OWNER_ID`: The UUID of the DDL owner. See also [`TIDB_IS_DDL_OWNER()`](/functions-and-operators/tidb-functions.md).
+- `OWNER_ADDRESS`: The IP address of the DDL owner.
+- `RUNNING_JOBS`: Running DDL jobs.
+- `SELF_ID`: The UUID of the TiDB node you are connected to. If this is the same as the `OWNER_ID` then you are connected to the DDL owner.
+- `QUERY`: The query.
 
 ```sql
-ADMIN SHOW DDL;
+ADMIN SHOW DDL\G;
 ```
 
 ```sql
 mysql> ADMIN SHOW DDL;
-+------------+--------------------------------------+---------------+--------------+--------------------------------------+-------+
-| SCHEMA_VER | OWNER_ID                             | OWNER_ADDRESS | RUNNING_JOBS | SELF_ID                              | QUERY |
-+------------+--------------------------------------+---------------+--------------+--------------------------------------+-------+
-|         26 | 2d1982af-fa63-43ad-a3d5-73710683cc63 | 0.0.0.0:4000  |              | 2d1982af-fa63-43ad-a3d5-73710683cc63 |       |
-+------------+--------------------------------------+---------------+--------------+--------------------------------------+-------+
+*************************** 1. row ***************************
+   SCHEMA_VER: 26
+     OWNER_ID: 2d1982af-fa63-43ad-a3d5-73710683cc63
+OWNER_ADDRESS: 0.0.0.0:4000
+ RUNNING_JOBS: 
+      SELF_ID: 2d1982af-fa63-43ad-a3d5-73710683cc63
+        QUERY: 
 1 row in set (0.00 sec)
 ```
+
+
 
 ### `ADMIN SHOW DDL JOBS`
 
@@ -52,6 +66,9 @@ The `ADMIN SHOW DDL JOBS` statement is used to view all the results in the curre
 - `DB_NAME`: the name of the database where the DDL operation is performed.
 - `TABLE_NAME`: the name of the table where the DDL operation is performed.
 - `JOB_TYPE`: the type of DDL operation. Common job types include the following:
+    - `create schema`: for [`CREATE SCHEMA`](/sql-statements/sql-statement-create-database.md) operations.
+    - `create table`: for [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) operations.
+    - `create view`:for [`CREATE VIEW`](/sql-statements/sql-statement-create-view.md) operations.
     - `ingest`: Ingestion with accelerated index backfilling as configured by [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630).
     - `txn`: Basic transactional backfill.
     - `txn-merge`: Transactional backfill with a temporary index that gets merged with the original index when the backfill is finished.
@@ -62,7 +79,9 @@ The `ADMIN SHOW DDL JOBS` statement is used to view all the results in the curre
 - `SCHEMA_ID`: the ID of the database where the DDL operation is performed.
 - `TABLE_ID`: the ID of the table where the DDL operation is performed.
 - `ROW_COUNT`: when performing the `ADD INDEX` operation, it is the number of data rows that have been added.
+- `CREATE_TIME`: the create time of the DDL operation.
 - `START_TIME`: the start time of the DDL operation.
+- `END_TIME`: the end time of the DDL operation.
 - `STATE`: the state of the DDL operation. Common states include the following:
     - `queueing`: indicates that the operation job has entered the DDL job queue but has not been executed because it is still waiting for an earlier DDL job to complete. Another reason might be that after executing the `DROP` operation, it will become the `none` state, but it will soon be updated to the `synced` state, indicating that all TiDB instances have been synchronized to that state.
     - `running`: indicates that the operation is being executed.
@@ -100,8 +119,6 @@ The `ADMIN SHOW DDL JOBS` statement is used to view all the results in the curre
 </CustomContent>
 
 The following example shows the results of `ADMIN SHOW DDL JOBS`:
-
-{{< copyable "sql" >}}
 
 ```sql
 ADMIN SHOW DDL JOBS;
@@ -149,8 +166,6 @@ ADMIN SHOW DDL JOBS [NUM] [WHERE where_condition];
 
 To view the original SQL statements of the DDL job corresponding to `job_id`, use `ADMIN SHOW DDL JOB QUERIES`:
 
-{{< copyable "sql" >}}
-
 ```sql
 ADMIN SHOW DDL JOBS;
 ADMIN SHOW DDL JOB QUERIES 51;
@@ -171,8 +186,6 @@ You can only search the running DDL job corresponding to `job_id` within the las
 ### `ADMIN SHOW DDL JOB QUERIES LIMIT m OFFSET n`
 
  To view the original SQL statements of the DDL job within a specified range `[n+1, n+m]` corresponding to `job_id`, use `ADMIN SHOW DDL JOB QUERIES LIMIT m OFFSET n`:
-
- {{< copyable "sql" >}}
 
 ```sql
  ADMIN SHOW DDL JOB QUERIES LIMIT m;  # Retrieve first m rows
@@ -225,6 +238,8 @@ This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 
+* [DDL introduction](/ddl-introduction.md)
 * [ADMIN CANCEL DDL](/sql-statements/sql-statement-admin-cancel-ddl.md)
 * [ADMIN PAUSE DDL](/sql-statements/sql-statement-admin-pause-ddl.md)
 * [ADMIN RESUME DDL](/sql-statements/sql-statement-admin-resume-ddl.md)
+* [INFORMATION_SCHEMA.DDL_JOBS](/information-schema/information-schema-ddl-jobs.md)
