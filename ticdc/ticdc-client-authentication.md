@@ -5,10 +5,10 @@ summary: Introduce how to perform TiCDC client authentication using the command-
 
 # TiCDC Client Authentication
 
-Starting from v8.1.0, TiCDC supports client authentication using mTLS (Mutual Transport Layer Security) or TiDB username and password. 
+Starting from v8.1.0, TiCDC supports client authentication using Mutual Transport Layer Security (mTLS) or TiDB username and password. 
 
-- mTLS authentication provides a method of security control at the transport layer, enabling that TiCDC can verify the client identity.
-- TiDB username and password authentication provides a method of security control at the application layer, ensuring that only authorized users can log in through the TiCDC node.
+- mTLS authentication provides security control at the transport layer, enabling TiCDC to verify the client identity.
+- TiDB username and password authentication provides security control at the application layer, ensuring that only authorized users can log in through the TiCDC node.
 
 These two authentication methods can be used either independently or in combination to meet different scenarios and security requirements. 
 
@@ -33,7 +33,7 @@ These two authentication methods can be used either independently or in combinat
 
     When using the [TiCDC command-line tool](/ticdc/ticdc-manage-changefeed.md), you can specify the client certificate using the following methods. TiCDC will attempt to read the client certificate in the following order:
 
-    1. Specify the certificate and private key using the command-line parameters `--cert` and `--key`. If the server uses a self-signed certificate, you need to specify the trusted CA certificate using the `--ca` parameter.
+    1. Specify the certificate and private key using the command-line parameters `--cert` and `--key`. If the server uses a self-signed certificate, you also need to specify the trusted CA certificate using the `--ca` parameter.
 
         ```bash
         cdc cli changefeed list --cert client.crt --key client.key --ca ca.crt
@@ -53,7 +53,7 @@ These two authentication methods can be used either independently or in combinat
 
     <div label="TiCDC OpenAPI" value="cdc-api">
 
-    When using [TiCDC OpenAPI](/ticdc/ticdc-open-api-v2.md), you can specify the client certificate using `--cert` and `--key`. If the server uses a self-signed certificate, you need to specify the trusted CA certificate using the `--cacert` parameter. For example:
+    When using [TiCDC OpenAPI](/ticdc/ticdc-open-api-v2.md), you can specify the client certificate and private key using `--cert` and `--key`. If the server uses a self-signed certificate, you also need to specify the trusted CA certificate using the `--cacert` parameter. For example:
 
     ```bash
     curl -X GET http://127.0.0.1:8300/api/v2/status --cert client.crt --key client.key --cacert ca.crt
@@ -62,7 +62,7 @@ These two authentication methods can be used either independently or in combinat
     </div>
     </SimpleTab>
 
-## Use TiDB user for client authentication
+## Use TiDB username and password for client authentication
 
 1. [Create a user](/sql-statements/sql-statement-create-user.md) in TiDB and grant the user permission to log in from the TiCDC node.
 
@@ -80,7 +80,7 @@ These two authentication methods can be used either independently or in combinat
     client-allowed-user = ["test"]
     ```
 
-3. Specify the username and password of the user created in step 1:
+3. Specify the username and password of the user created in step 1.
 
     <SimpleTab groupId="cdc">
     <div label="TiCDC command-line tool" value="cdc-cli">
@@ -106,7 +106,7 @@ These two authentication methods can be used either independently or in combinat
         export TICDC_PASSWORD=password
         ```
 
-    4. Specify the username and password using the shared credential file  `~/.ticdc/credentials` . You can modify the configuration using the `cdc cli configure-credentials` command.
+    4. Specify the username and password using the shared credential file  `~/.ticdc/credentials`. You can modify the configuration using the `cdc cli configure-credentials` command.
 
     </div>
 
