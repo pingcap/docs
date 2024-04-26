@@ -34,9 +34,9 @@ To view the status of the currently running DDL jobs, use `ADMIN SHOW DDL`. The 
 - `SCHEMA_VER`: A number indicating the version of the schema.
 - `OWNER_ID`: The UUID of the DDL owner. See also [`TIDB_IS_DDL_OWNER()`](/functions-and-operators/tidb-functions.md).
 - `OWNER_ADDRESS`: The IP address of the DDL owner.
-- `RUNNING_JOBS`: Running DDL jobs.
+- `RUNNING_JOBS`: Details about the running DDL job.
 - `SELF_ID`: The UUID of the TiDB node you are connected to. If this is the same as the `OWNER_ID` then you are connected to the DDL owner.
-- `QUERY`: The query.
+- `QUERY`: The statement of the query.
 
 ```sql
 ADMIN SHOW DDL\G;
