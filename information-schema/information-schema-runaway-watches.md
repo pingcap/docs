@@ -32,10 +32,6 @@ DESC RUNAWAY_WATCHES;
 8 rows in set (0.00 sec)
 ```
 
-> **Warning:**
->
-> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 ## Examples
 
 Query the watch list of runaway queries:
