@@ -15,7 +15,7 @@ AdminStmt ::=
     ( 
         'JOBS' Int64Num? WhereClauseOptional 
     |   'JOB' 'QUERIES' NumList 
-    |   'JOB' 'QUERIES' 'LIMIT' m 'OFFSET' n
+    |   'JOB' 'QUERIES' 'LIMIT' m ( ('OFFSET' | ',') n )?
     )
 
 NumList ::=
