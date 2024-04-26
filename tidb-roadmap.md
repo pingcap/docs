@@ -7,7 +7,7 @@ summary: Learn about what's coming in the future for TiDB.
 
 This roadmap provides a look into the proposed future. This will be continually updated as we release long-term stable (LTS) versions. The purpose is to provide visibility into what is coming, so that you can more closely follow the progress, learn about the key milestones on the way, and give feedback as the development work goes on.
 
-In the course of development, this roadmap is subject to change based on user needs and feedback. As expected, as the columns move right, the items under them are less committed. If you have a feature request or want to prioritize a feature, please file an issue on [GitHub](https://github.com/pingcap/tidb/issues).
+In the course of development, this roadmap is subject to change based on user needs and feedback. Roadmap is for informational purposes only. Please do not create dependent plans. If you have a feature request or want to prioritize a feature, please file an issue on [GitHub](https://github.com/pingcap/tidb/issues).
 
 ## Rolling roadmap highlights
 
@@ -15,8 +15,8 @@ In the course of development, this roadmap is subject to change based on user ne
   <thead>
     <tr>
       <th>Category</th>
-      <th>End of CY23 LTS release</th>
-      <th>Mid of CY24 LTS release</th>
+      <th>End of CY24 LTS release</th>
+      <th>Mid of CY25 LTS release</th>
       <th>Future releases</th>
     </tr>
   </thead>
@@ -27,39 +27,78 @@ In the course of development, this roadmap is subject to change based on user ne
       </td>
       <td>
         <ul>
-          <li>
-            <b>Distributed eXecution Framework (DXF)</b><br /><i>
-            In v7.1.0, TiDB introduced the DXF for tasks (such as DDL and analyze). This is the foundation for parallelizing these tasks across compute nodes. v7.4.0 introduces global sorting in distributed re-organization tasks (such as DDL and import), which greatly mitigates extra resource consumption in storage. Optionally, external shared storage can be leveraged for simplicity and cost savings.</i>
+           <li>
+             <b>TiKV In-Memory Cache </b><br />
+            TiKV maintains the recent copies of hot rows to reduce repeated MVCC scans. 
           </li>
           <br />
+          <li>
+             <b>Global Indexing on partitioned tables</b><br />
+          </li>
           <br />
+          <li>
+             <b>Adaptive concurrency for stats collections</b><br />
+            TiDB decides the degree of parallelism  based on the deployment and hardware specifications, that increases the performance with default options.
+          </li>
+          <br />
+          <li>
+             <b>Rapid Database Restoration</b><br />
+            Accelerate the processing of full restore and PiTR.
+          </li>
+          <br />
+          <li>
+             <b>Unlimited Size of Transactions</b><br />
+            The size of transactions no longer rely on the available memory in TiDB instances, that reduces the chance of transaction failure.
+          </li>
+          <br />
+          <li>
+             <b>Load-based Rebalance in TiProxy</b><br />
+            TiProxy decides the target instances based on the recent load of each TiDB instance, in order to make full use of resources.
+          </li>
         </ul>
       </td>
       <td>
         <ul>
           <li>
-            <b>Enhancements to performance and generalizability of plan cache</b><br />
+            <b>PD microservice - heartbeat</b><br />
+            Heartbeat services in PD can be deployed independently. It reduces the chance that PD becomes the bottleneck of the cluster.
           </li>
           <br />
           <li>
-            <b>Dynamic node scaling via the DXF</b><br />
-            <i>Automatically adjust node allocation to meet resource costs of background tasks, while maintaining stability and performance expectations</i>
+            <b>Less I/O made by stats collections</b><br />
+            TiKV makes partial scanning and returns only necessary data sets when stats collection decides to sample the tables, which reduces the time and resource spent.
           </li>
           <br />
+          <li>
+            <b>Less limitations for pushing Limit to TiKV</b><br />
+          </li>
           <br />
+          <li>
+            <b>Cascades Optimizer </b><br />
+            A sophisticated framework that extends the capabilities of optimizer.
+          </li>
+          <br />
+          <li>
+            <b>Single DM task reaches 150 MiB/s for full data migration</b><br />
+          </li>
+          <br />
+          <li>
+            <b>Enhanced  DDL framework</b><br />
+            Providing scalable and parallel DDL task execution capability, enhancing scalability and performance.
+          </li>
         </ul>
       </td>
       <td>
         <ul>
           <li>
-            <b>Unlimited transaction size</b>
+            <b>Load-based table rebalance</b><br />
+            PD measures the load of each table and decides the rebalance.
           </li>
           <br />
           <li>
-            <b>Federated query</b>
-            <br /><i>TiDB query planner support for multiple storage engines in HTAP use cases.</i>
+            <b>Dealing with massive records in system tables</b><br />
+            Boost the performance of querying system tables with massive records.
           </li>
-          <br />
         </ul>
       </td>
     </tr>
@@ -71,35 +110,72 @@ In the course of development, this roadmap is subject to change based on user ne
       <td>
         <ul>
           <li>
-            <b>Resource control for background tasks</b><br />
-            <i>
-              Control over how background tasks, such as imports, DDL, TTL, auto-analyze, and compactions, can affect foreground traffic
-            </i>
+            <b>Limited memory for backup tasks</b><br />
           </li>
           <br />
           <li>
-            <b>Runaway query control</b><br /><i>
-              An operator-controlled way to greatly enhance performance stability for workloads with unexpectedly expensive queries
-            </i>
+            <b>Limited memory for stats collections</b><br />
+          </li>
+          <br />
+          <li>
+            <b>Managing massive SQL bindings</b><br />
+              Improve the user experience of importing and managing a large number of SQL bindings. 
+          </li>
+          <br />
+          <li>
+            <b>Charging RU intermittently for an expensive SQL</b><br />
+              Measure the RU produced before one large query completes, which mitigates the impacted by expensives SQL in resource groups.
+          </li>
+          <br />
+          <li>
+            <b>Switching resource groups of runaway queries</b><br />
+              When a query is identified as runaway queries, users can put it to a particular resource group, in order to limit its resource. 
           </li>
         </ul>
       </td>
       <td>
         <ul>
           <li>
-            <b>Disaggregation of Placement Driver (PD)</b>
-            <br /><i>Enhance cluster scalability and resilience</i>
+            <b>Limited memory for schema meta</b><br />
           </li>
           <br />
+          <li>
+            <b>Distributed statistic collection</b><br />
+            Collecting statistics in parallel across multiple TiDB instances.
+          </li>
+          <br />
+          <li>
+            <b>Multi-versioned statistics多版本统计信息</b><br />
+            When the statistics are updated, users can manage to review the past copies or rollback.
+          </li>
+          <br />
+          <li>
+            <b>Reliable backup </b><br />
+            Reduce the chance of OOM and secure the availability of backups.
+          </li>
+          <br />
+          <li>
+            <b>The popular operators spill to disk</b><br />
+            To minimize the change of OOM. The target operators: HashAgg / Sort / TopN / HashJoin / WindowFunction / IndexJoin / IndexHashJoin
+          </li>
         </ul>
       </td>
       <td>
         <ul>
           <li>
-            <b>Multi-tenancy</b>
-            <br /><i>Resource isolation on top of resource control</i>
+            <b>Adaptive Resource Group</b><br />
+            TiDB automatically decides reasonable RU for resource groups according to past metrics.
           </li>
           <br />
+          <li>
+            <b>Enforced memory assurance</b><br />
+            TiDB actively manages memory usage across all modules, and prevents excessive memory that  potentially causes system instability. 
+          </li>
+          <br />
+          <li>
+            <b>Plan cache at instance level</b><br />
+            All sessions from the same TiDB instance share plan cache.
+          </li>
         </ul>
       </td>
     </tr>
@@ -110,15 +186,22 @@ In the course of development, this roadmap is subject to change based on user ne
       </td>
       <td>
         <ul>
-          <li>
-            <b>TiCDC integrations with data warehouse or data lake systems</b>
-            <br />
+           <li>
+            <b>Guaranteed query termination</b><br />
+            The running statements can be killed instantly with resources released from TiDB and TiKV.
           </li>
           <br />
           <li>
-            <b>TiDB node labels</b>
-            <br /><i>Assign existing or newly added TiDB nodes for DDL operations to isolate DDL tasks from the compute resources used by online traffic
-</i>
+            <b>Enforced permission on switching groups</b>
+            <br />Switching resource groups needs privileges to be granted.
+          </li>
+          <br />
+          <li>
+            <b>Mapping tables / SQL with hot regions</b>
+          </li>
+          <br />
+          <li>
+            <b>Logical data import mode with "IMPORT INTO"</b>
           </li>
           <br />
         </ul>
@@ -126,25 +209,49 @@ In the course of development, this roadmap is subject to change based on user ne
       <td>
         <ul>
           <li>
-            <b>SQL plan management</b>
-            <br /><i>Mechanism for controlling SQL plan regression</i>
+            <b>Customized preference for stats collections</b>
+            <br />Users are able to set certain options such as staleness ratio at table level.
           </li>
           <br />
           <li>
-            <b>Index Advisor</b>
-            <br /><i>Offer index recommendations to users based on workload, statistics, and execution plans</i>
+            <b>Workload Repository</b>
+            <br />TiDB manages to persist volatile tables which include both cumulative metrics and active metrics. This helps greatly during troubleshooting.
+          </li>
+          <br />
+          <li>
+            <b>Automatic index advisor</b>
+            <br />TiDB finds candidate queries and recommend new indexes or unused indexes to users. 
+          </li>
+          <br />
+          <li>
+            <b>The columns can be altered on partitioned tables</b>
+            <br />Users are able to alter the column type no matter if it's partitioning key or not.
+          </li>
+          <br />
+          <li>
+            <b>Confliction Strategy for IMPORT INTO</b>
+            <br />Users set the strategy for the conficition found during data ingestion, such "error", "ignore" and "replace".
+          </li>
+          <br />
+          <li>
+            <b>End-to-End Observation</b>
+            <br />Introduce a way to breakdown the duration produced by one SQL statement during its lifetime, including the time spent in TiDB, PD, TiKV and TiFlash.
           </li>
         </ul>
       </td>
       <td>
         <ul>
           <li>
-            <b>Materialized views</b>
-            <br /><i>Store pre-computed results as a persistent data view to boost query performance</i>
+            <b>Workload Analysis</b>
+            <br />Mine Workload Repository and make necessary recommendations, such SQL tuning, Stats collections, etc.
           </li>
           <br />
           <li>
-            <b>Heterogeneous database migration support</b>
+            <b>Revisable Primary Key </b>
+          </li>
+          <br />
+          <li>
+            <b>Export Data as SQL statements</b>
           </li>
           <br />
         </ul>
@@ -158,32 +265,40 @@ In the course of development, this roadmap is subject to change based on user ne
       <td>
         <ul>
           <li>
-            <b>Key management via Azure Key Vault</b>
-            <br /><i>Static encryption managed by Azure Key Vault</i>
+            <b>GCP KMS</b>
+            <br />Encryption at rest supports GCP KMS key management.
           </li>
           <br />
           <li>
-            <b>Column-level access control</b>
-            <br /><i>Grant and restrict access to specific columns</i>
+            <b>Dynamic privilege design</b>
+            <br />Improve the dynamic privilege design and restrict the use of "Super".
           </li>
           <br />
+          <li>
+            <b>Marker-based log desensitization</b>
+            <br />Supports the ability to optionally desensitize cluster logs based on usage scenarios.
+          </li>
+          <br />
+          <li>
+            <b>FIPS</b>
+            <br />Encryption scenarios comply with FIPS standards.
+          </li>
         </ul>
       </td>
       <td>
         <ul>
-          <li>
+           <li>
             <b>IAM authentication for AWS</b>
-            <br /><i>TiDB as AWS third-party ARN for AWS IAM access</i>
+            <br />TiDB as AWS third-party ARN for AWS IAM access.
           </li>
           <br />
           <li>
-            <b>Unified TLS CA/Key rotation policy</b>
-            <br /><i>Unified certificate management mechanism for all TiDB components</i>
+            <b>Kerberos</b>
+            <br />Supports Kerberos-based authentication.
           </li>
-          <br></br>
           <li>
-            <b>AWS FIPS support</b>
-            <br /><i>Enable FedRAMP compliance</i>
+            <b>MFA</b>
+            <br />Support multi-factor authentication mechanism.
           </li>
         </ul>
       </td>
@@ -191,17 +306,18 @@ In the course of development, this roadmap is subject to change based on user ne
         <ul>
           <li>
             <b>Label-based access control</b>
-            <br /><i>Access permissions granted by configured labels</i>
+            <br />Access permissions granted by configured labels.
           </li>
           <br />
           <li>
             <b>Enhanced client-side encryption</b>
+            <br />Supports client-side encryption of key fields to enhance data security.
           </li>
           <br />
           <li>
-            <b>Enhanced data masking</b>
+            <b>Dynamic desensitization of business data</b>
+            <br />Data desensitization based on different data application scenarios to protect the data security of important fields.
           </li>
-          <br />
         </ul>
       </td>
     </tr>
@@ -209,31 +325,3 @@ In the course of development, this roadmap is subject to change based on user ne
 </table>
 
 These are non-exhaustive plans and are subject to change. Features might differ per service subscriptions.
-
-## Previously delivered roadmap items
-
-You might have been waiting on some items from the last version. The following lists some previously delivered features. For more details, refer to the [v7.1.0 release notes](/releases/release-7.1.0.md).
-
-- Foundation of multi-tenancy framework: resource control quotas and scheduling for resource groups
-- TiCDC supports object storage sink, including Amazon S3 and Azure Blob Storage (GA)
-- Fastest online `ADD INDEX` (GA)
-- TiFlash late materialization (GA)
-- TiFlash supports spill to disk (GA)
-- LDAP authentication
-- SQL audit log enhancement (Enterprise-only)
-- Partitioned Raft KV storage engine (experimental)
-- General session-level plan cache (experimental)
-- TiCDC distributed per table with Kafka downstream (experimental)
-
-## Recently shipped
-
-- [TiDB 8.0.0 Release Notes](https://docs.pingcap.com/tidb/v8.0/release-8.0.0)
-- [TiDB 7.6.0 Release Notes](https://docs.pingcap.com/tidb/v7.6/release-7.6.0)
-- [TiDB 7.5.0 Release Notes](https://docs.pingcap.com/tidb/v7.5/release-7.5.0)
-- [TiDB 7.4.0 Release Notes](https://docs.pingcap.com/tidb/v7.4/release-7.4.0)
-- [TiDB 7.3.0 Release Notes](https://docs.pingcap.com/tidb/v7.3/release-7.3.0)
-- [TiDB 7.2.0 Release Notes](https://docs.pingcap.com/tidb/v7.2/release-7.2.0)
-- [TiDB 7.1.0 Release Notes](https://docs.pingcap.com/tidb/v7.1/release-7.1.0)
-- [TiDB 7.0.0 Release Notes](https://docs.pingcap.com/tidb/v7.0/release-7.0.0)
-- [TiDB 6.6.0 Release Notes](https://docs.pingcap.com/tidb/v6.6/release-6.6.0)
-- [TiDB 6.5.0 Release Notes](https://docs.pingcap.com/tidb/v6.5/release-6.5.0)
