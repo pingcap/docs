@@ -76,7 +76,7 @@ TiDB version: 5.0.6
     - Fix the `INDEX OUT OF RANGE` error for a MPP query after deleting an empty `dual table` [#28250](https://github.com/pingcap/tidb/issues/28250)
     - Fix the TiDB panic when inserting invalid date values concurrently [#25393](https://github.com/pingcap/tidb/issues/25393)
     - Fix the unexpected `can not found column in Schema column` error for queries in the MPP mode [#30980](https://github.com/pingcap/tidb/issues/30980)
-    - Fix the issue that TiDB might panic when TiFlash is shuting down [#28096](https://github.com/pingcap/tidb/issues/28096)
+    - Fix the issue that TiDB might panic when TiFlash is shutting down [#28096](https://github.com/pingcap/tidb/issues/28096)
     - Fix the unexpected `index out of range` error when the planner is doing join reorder [#24095](https://github.com/pingcap/tidb/issues/24095)
     - Fix wrong results of the control functions (such as `IF` and `CASE WHEN`) when using the `ENUM` type data as parameters of such functions [#23114](https://github.com/pingcap/tidb/issues/23114)
     - Fix the wrong result of `CONCAT(IFNULL(TIME(3))` [#29498](https://github.com/pingcap/tidb/issues/29498)
@@ -114,7 +114,7 @@ TiDB version: 5.0.6
 
     - Fix a panic issue that occurs after the TiKV node is removed [#4344](https://github.com/tikv/pd/issues/4344)
     - Fix the issue that operator can get blocked due to down store [#3353](https://github.com/tikv/pd/issues/3353)
-    - Fix slow leader election caused by stucked Region syncer [#3936](https://github.com/tikv/pd/issues/3936)
+    - Fix slow leader election caused by stuck Region syncer [#3936](https://github.com/tikv/pd/issues/3936)
     - Fix the issue that the speed of removing peers is limited when repairing the down nodes [#4090](https://github.com/tikv/pd/issues/4090)
     - Fix the issue that the hotspot cache cannot be cleared when the Region heartbeat is less than 60 seconds [#4390](https://github.com/tikv/pd/issues/4390)
 

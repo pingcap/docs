@@ -266,7 +266,7 @@ Other monitoring tables in TiDB are as follows:
 The tables related to the monitoring information of PD modules are as follows:
 
 * `Time Consumed by PD Component`: The time consumed by the monitoring metrics of related modules in PD.
-* `Blance Leader/Region`: The monitoring information of `balance-region` and `balance leader` occurred in the cluster within the report time range, such as the number of leaders that are scheduled out from `tikv_note_1` or the number of leaders that are scheduled in.
+* `Balance Leader/Region`: The monitoring information of `balance-region` and `balance leader` occurred in the cluster within the report time range, such as the number of leaders that are scheduled out from `tikv_note_1` or the number of leaders that are scheduled in.
 * `Cluster Status`: The cluster status information, including total number of TiKV nodes, total cluster storage capacity, the number of Regions, and the number of offline TiKV nodes.
 * `Store Status`: Record the status information of each TiKV node, including Region score, leader score, and the number of Regions/leaders.
 * `Etcd Status`: etcd related information in PD.
