@@ -76,4 +76,4 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 - Default value: `OFF`
 - Possible values: `ON`, `OFF`
 - As stated in "Note" section of [Explain Statements Using Index Merge](/explain-index-merge.md), if the optimizer can choose the single index scan method (other than full table scan) for a query plan, the optimizer will not automatically use index merge.
-- This limitation can be disabled by turning on this variable.
+- This limitation can be disabled by turning on this variable. Disabling this limitation enables the optimizer to choose index merge automatically for more quries, but may also make the optimizer miss better execution plans. So It's recommended to do sufficient testing for specific scenarios before disabling this limitation to make sure it won't cause performance regressions.
