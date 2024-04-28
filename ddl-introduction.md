@@ -77,7 +77,7 @@ absent -> delete only -> write only -> write reorg -> public
 For users, the newly created index is unavailable before the `public` state.
 
 <SimpleTab>
-<div label="Online DDL asychronous change before TiDB v6.2.0">
+<div label="Online DDL asynchronous change before TiDB v6.2.0">
 
 Before v6.2.0, the process of handling asynchronous schema changes in the TiDB SQL layer is as follows:
 

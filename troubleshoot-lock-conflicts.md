@@ -263,7 +263,7 @@ You can check whether there is any "LockNotFound" error in the following ways:
     If a "TxnLockNotFound" error occurs, the TiKV log message is like this:
 
     ```log
-    Error: KV error safe to retry restarts txn: Txn(Mvcc(TxnLockNotFound)) [ERROR [Kv.rs:708] ["KvService::batch_raft send response fail"] [err=RemoteStoped]
+    Error: KV error safe to retry restarts txn: Txn(Mvcc(TxnLockNotFound)) [ERROR [Kv.rs:708] ["KvService::batch_raft send response fail"] [err=RemoteStopped]
     ```
 
 Solutions:

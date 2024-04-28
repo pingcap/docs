@@ -11,7 +11,7 @@ The statement `SHOW INDEXES [FROM|IN]` lists the indexes on a specified table. T
 
 ```ebnf+diagram
 ShowIndexStmt ::=
-    "SHOW" ( "INDEX" | "INDEXES" | "KEYS" ) ("FROM" | "IN" ) TableName (("FROM" | "IN") SchemaName )? ShowLikeOrWhere?
+    "SHOW" ( "INDEX" | "INDEXES" | "KEYS" ) ("FROM" | "IN" ) TableName (("FROM" | "IN") SchemaName )? ShowLikeOrWhereOpt?
 
 ShowLikeOrWhere ::=
     "LIKE" SimpleExpr
