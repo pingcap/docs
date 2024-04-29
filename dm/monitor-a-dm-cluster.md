@@ -93,7 +93,7 @@ The following metrics show only when `task-mode` is in the `incremental` or `all
 | total sqls jobs | The number of newly added jobs per unit of time | N/A | N/A |
 | finished sqls jobs | The number of finished jobs per unit of time | N/A | N/A |
 | statement execution latency | The duration that the binlog replication unit executes the statement to the downstream (in seconds) | N/A | N/A |
-| add job duration | The duration tht the binlog replication unit adds a job to the queue (in seconds) | N/A | N/A |
+| add job duration | The duration that the binlog replication unit adds a job to the queue (in seconds) | N/A | N/A |
 | DML conflict detect duration | The duration that the binlog replication unit detects the conflict in DML (in seconds) | N/A | N/A |
 | skipped event duration | The duration that the binlog replication unit skips a binlog event (in seconds) | N/A | N/A |
 | unsynced tables | The number of tables that have not received the shard DDL statement in the current subtask | N/A | N/A |

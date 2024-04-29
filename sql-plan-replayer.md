@@ -31,7 +31,7 @@ Based on `sql-statement`, TiDB sorts out and exports the following on-site infor
 - The table schema in `sql-statement`
 - The statistics of the table in `sql-statement`
 - The result of `EXPLAIN [ANALYZE] sql-statement`
-- Some internal procudures of query optimization
+- Some internal procedures of query optimization
 
 If historical statistics are [enabled](/system-variables.md#tidb_enable_historical_stats), you can specify a time in the `PLAN REPLAYER` statement to get the historical statistics for the corresponding time. You can directly specify a time and date or specify a timestamp. TiDB looks for the historical statistics before the specified time and exports the latest one among them.
 
