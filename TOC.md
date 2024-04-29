@@ -526,10 +526,13 @@
     - [Target Database Requirements](/tidb-lightning/tidb-lightning-requirements.md)
     - Data Sources
       - [Data Match Rules](/tidb-lightning/tidb-lightning-data-source.md)
+      - [Rename databases and tables](/tidb-lightning/tidb-lightning-data-source.md#rename-databases-and-tables)
       - [CSV](/tidb-lightning/tidb-lightning-data-source.md#csv)
       - [SQL](/tidb-lightning/tidb-lightning-data-source.md#sql)
       - [Parquet](/tidb-lightning/tidb-lightning-data-source.md#parquet)
+      - [Compressed files](/tidb-lightning/tidb-lightning-data-source.md#compressed-files)
       - [Customized File](/tidb-lightning/tidb-lightning-data-source.md#match-customized-files)
+      - [Import data from Amazon S3](/tidb-lightning/tidb-lightning-data-source.md#import-data-from-amazon-s3)
     - Physical Import Mode
       - [Requirements and Limitations](/tidb-lightning/tidb-lightning-physical-import-mode.md)
       - [Use Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)
