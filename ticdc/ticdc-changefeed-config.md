@@ -204,6 +204,14 @@ enable-partition-separator = true
 # The encoding method of binary data, which can be 'base64' or 'hex'. The default value is 'base64'.
 # binary-encoding-method = 'base64'
 
+[sink.open]
+# Whether to output the value before the row data changes. The default value is true. When it is disabled, the UPDATE event does not output the "p" field.
+# output-old-value = true
+
+[sink.debezium]
+# Whether to output the value before the row data changes. The default value is true. When it is disabled, the UPDATE event does not output the "before" field.
+# output-old-value = true
+
 # Specifies the replication consistency configurations for a changefeed when using the redo log. For more information, see https://docs.pingcap.com/tidb/stable/ticdc-sink-to-mysql#eventually-consistent-replication-in-disaster-scenarios.
 # Note: The consistency-related configuration items only take effect when the downstream is a database and the redo log feature is enabled.
 [consistent]
