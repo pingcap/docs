@@ -43,7 +43,7 @@ TiDB Ansible version: 3.0.4
 ## TiDB
 
 - SQL Optimizer
-    - Fix the issue that invalid query ranges might be resulted when splitted by feedback [#12170](https://github.com/pingcap/tidb/pull/12170)
+    - Fix the issue that invalid query ranges might be resulted when split by feedback [#12170](https://github.com/pingcap/tidb/pull/12170)
     - Display the returned error of the `SHOW STATS_BUCKETS` statement in hexadecimal rather than return errors when the result contains invalid Keys [#12094](https://github.com/pingcap/tidb/pull/12094)
     - Fix the issue that when a query contains the `SLEEP` function (for example, `select 1 from (select sleep(1)) t;)`), column pruning causes invalid `sleep(1)` during query [#11953](https://github.com/pingcap/tidb/pull/11953)
     - Use index scan to lower IO when a query only concerns the number of columns rather than the table data [#12112](https://github.com/pingcap/tidb/pull/12112)

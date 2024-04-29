@@ -218,10 +218,10 @@ SELECT CHAR_LENGTH("TiDB") AS LengthOfString;
 ```
 
 ```sql
-SELECT CustomerName, CHAR_LENGTH(CustomerName) AS LenghtOfName FROM Customers;
+SELECT CustomerName, CHAR_LENGTH(CustomerName) AS LengthOfName FROM Customers;
 
 +--------------------+--------------+
-| CustomerName       | LenghtOfName |
+| CustomerName       | LengthOfName |
 +--------------------+--------------+
 | Albert Einstein    |           15 |
 | Robert Oppenheimer |           18 |
@@ -236,7 +236,7 @@ SELECT CustomerName, CHAR_LENGTH(CustomerName) AS LenghtOfName FROM Customers;
 
 The `CHARACTER_LENGTH()` function is the same as the `CHAR_LENGTH()` function. Both functions can be used synonymously because they generate the same output.
 
-## [`CONCAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat)
+### [`CONCAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat)
 
 The `CONCAT()` function concatenates one or more arguments into a single string.
 
@@ -419,11 +419,85 @@ Output:
 
 ### [`ELT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_elt)
 
-Return string at index number.
+The `ELT()` function returns the element at the index number.
+
+```sql
+SELECT ELT(3, 'This', 'is', 'TiDB');
+```
+
+```sql
++------------------------------+
+| ELT(3, 'This', 'is', 'TiDB') |
++------------------------------+
+| TiDB                         |
++------------------------------+
+1 row in set (0.00 sec)
+```
+
+The preceding example returns the third element, which is `'TiDB'`.
 
 ### [`EXPORT_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_export-set)
 
-Return a string such that for every bit set in the value bits, you get an on string and for every unset bit, you get an off string.
+The `EXPORT_SET()` function returns a string that consists of a specified number (`number_of_bits`) of `on`/`off` values, optionally separated by `separator`. These values are based on whether the corresponding bit in the `bits` argument is `1`, where the first value corresponds to the rightmost (lowest) bit of `bits`.
+
+Syntax:
+
+```sql
+EXPORT_SET(bits, on, off, [separator[, number_of_bits]])
+```
+
+- `bits`: an integer representing the bit value.
+- `on`: the string to be returned if the corresponding bit is `1`.
+- `off`: the string to be returned if the corresponding bit is `0`.
+- `separator` (optional): the separator character in the result string.
+- `number_of_bits` (optional): the number of bits to be processed. If it is not set, `64` (the max size of bits) is used by default, which means that `bits` is treated as an unsigned 64-bit integer.
+
+Examples:
+
+In the following example, `number_of_bits` is set to `5`, resulting in 5 values, separated by `|`. Because only 3 bits are given, the other bits are considered unset. Therefore, setting `number_of_bits` to either `101` or `00101` results in the same output.
+
+```sql
+SELECT EXPORT_SET(b'101',"ON",'off','|',5);
+```
+
+```sql
++-------------------------------------+
+| EXPORT_SET(b'101',"ON",'off','|',5) |
++-------------------------------------+
+| ON|off|ON|off|off                   |
++-------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the following example, `bits` is set to `00001111`, `on` is set to `x`, and `off` is set to `_`. This causes the function to return `____` for the `0` bits and `xxxx` for the `1` bits. Therefore, when processing with the bits in `00001111` from right to left, the function returns `xxxx____`.
+
+```sql
+SELECT EXPORT_SET(b'00001111', 'x', '_', '', 8);
+```
+
+```sql
++------------------------------------------+
+| EXPORT_SET(b'00001111', 'x', '_', '', 8) |
++------------------------------------------+
+| xxxx____                                 |
++------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the following example, `bits` is set to `00001111`, `on` is set to `x`, and `off` is set to `_`. This causes the function to return `x` for each `1` bit and `_` for each `0` bit. Therefore, when processing with the bits in `01010101` from right to left, the function returns `x_x_x_x_`.
+
+```sql
+SELECT EXPORT_SET(b'01010101', 'x', '_', '', 8);
+```
+
+```sql
++------------------------------------------+
+| EXPORT_SET(b'01010101', 'x', '_', '', 8) |
++------------------------------------------+
+| x_x_x_x_                                 |
++------------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ### [`FIELD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_field)
 
@@ -1239,19 +1313,198 @@ SELECT LPAD('TiDB',-2,'>');
 
 ### [`LTRIM()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ltrim)
 
-Remove leading spaces.
+The `LTRIM()` function removes leading spaces from a given string.
+
+If the argument is `NULL`, this function returns `NULL`.
+
+> **Note:**
+>
+> This function only removes the space character (U+0020) and does not remove other space-like characters such as tab (U+0009) or non-breaking space (U+00A0).
+
+Examples:
+
+In the following example, the `LTRIM()` function removes the leading spaces from `'    hello'` and returns `hello`.
+
+```sql
+SELECT LTRIM('    hello');
+```
+
+```
++--------------------+
+| LTRIM('    hello') |
++--------------------+
+| hello              |
++--------------------+
+1 row in set (0.00 sec)
+```
+
+In the following example, [`CONCAT()`](#concat) is used to enclose the result of `LTRIM('    hello')` with `«` and `»`. This formatting makes it a bit easier to see that all leading spaces are removed.
+
+```sql
+SELECT CONCAT('«',LTRIM('    hello'),'»');
+```
+
+```
++------------------------------------+
+| CONCAT('«',LTRIM('    hello'),'»') |
++------------------------------------+
+| «hello»                            |
++------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ### [`MAKE_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_make-set)
 
-Return a set of comma-separated strings that have the corresponding bit in bits set.
+The `MAKE_SET()` function returns a set of comma-separated strings based on whether a corresponding bit in the `bits` argument is set to `1`.
+
+Syntax:
+
+```sql
+MAKE_SET(bits, str1, str2, ...)
+```
+
+- `bits`: controls which subsequent string arguments to include in the result set. If `bits` is set to `NULL`, the function returns `NULL`.
+- `str1, str2, ...`: a list of strings. Each string corresponds to a bit in the `bits` argument from right to left. `str1` corresponds to the first bit from the right, `str2` corresponds to the second bit from the right, and so on. If the corresponding bit is `1`, the string is included in the result; otherwise, it is not included.
+
+Examples:
+
+In the following example, because all bits are set to `0` in the `bits` argument, the function does not include any subsequent strings in the result and returns an empty string.
+
+```sql
+SELECT MAKE_SET(b'000','foo','bar','baz');
+```
+
+```
++------------------------------------+
+| MAKE_SET(b'000','foo','bar','baz') |
++------------------------------------+
+|                                    |
++------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the following example, because only the first bit from the right is `1`, the function only returns the first string `foo`.
+
+```sql
+SELECT MAKE_SET(b'001','foo','bar','baz');
+```
+
+```
++------------------------------------+
+| MAKE_SET(b'001','foo','bar','baz') |
++------------------------------------+
+| foo                                |
++------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the following example, because only the second bit from the right is `1`, the function only returns the second string `bar`.
+
+```sql
+SELECT MAKE_SET(b'010','foo','bar','baz');
+```
+
+```
++------------------------------------+
+| MAKE_SET(b'010','foo','bar','baz') |
++------------------------------------+
+| bar                                |
++------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the following example, because only the third bit from the right is `1`, the function only returns the third string `baz`.
+
+```sql
+SELECT MAKE_SET(b'100','foo','bar','baz');
+```
+
+```
++------------------------------------+
+| MAKE_SET(b'100','foo','bar','baz') |
++------------------------------------+
+| baz                                |
++------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the following example, because all bits are `1`, the function returns all three strings in a comma-separated result set.
+
+```sql
+SELECT MAKE_SET(b'111','foo','bar','baz');
+```
+
+```
++------------------------------------+
+| MAKE_SET(b'111','foo','bar','baz') |
++------------------------------------+
+| foo,bar,baz                        |
++------------------------------------+
+1 row in set (0.0002 sec)
+```
 
 ### [`MID()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_mid)
 
-Return a substring starting from the specified position.
+The `MID(str, pos, len)` function returns a substring starting from the specified `pos` position with the `len` length.
+
+If any of the arguments are `NULL`, the function returns `NULL`.
+
+TiDB does not support the two-argument variant of this function. For more information, see [#52420](https://github.com/pingcap/tidb/issues/52420).
+
+Examples:
+
+In the following example, `MID()` returns the substring of the input string starting from the second character (`b`) with a length of `3` characters.
+
+```sql
+SELECT MID('abcdef',2,3);
+```
+
+```
++-------------------+
+| MID('abcdef',2,3) |
++-------------------+
+| bcd               |
++-------------------+
+1 row in set (0.00 sec)
+```
 
 ### [`NOT LIKE`](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_not-like)
 
 Negation of simple pattern matching.
+
+This function performs the inverse operation of [`LIKE`](#like).
+
+Examples:
+
+In the following example, `NOT LIKE` returns `0` (False) because `aaa` matches the `a%` pattern.
+
+```sql
+SELECT 'aaa' LIKE 'a%', 'aaa' NOT LIKE 'a%';
+```
+
+```
++-----------------+---------------------+
+| 'aaa' LIKE 'a%' | 'aaa' NOT LIKE 'a%' |
++-----------------+---------------------+
+|               1 |                   0 |
++-----------------+---------------------+
+1 row in set (0.00 sec)
+```
+
+In the following example, `NOT LIKE` returns `1` (True) because `aaa` does not match the `b%` pattern.
+
+```sql
+SELECT 'aaa' LIKE 'b%', 'aaa' NOT LIKE 'b%';
+```
+
+```
++-----------------+---------------------+
+| 'aaa' LIKE 'b%' | 'aaa' NOT LIKE 'b%' |
++-----------------+---------------------+
+|               0 |                   1 |
++-----------------+---------------------+
+1 row in set (0.00 sec)
+```
 
 ### [`NOT REGEXP`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_not-regexp)
 
@@ -1309,7 +1562,56 @@ Synonym for [`LENGTH()`](#length).
 
 ### [`ORD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ord)
 
-Return character code for leftmost character of the argument.
+Return the character code for the leftmost character of the given argument.
+
+This function is similar to [`CHAR()`](#char) but works the other way around.
+
+Examples:
+
+Taking `a` and `A` as an example, `ORD()` returns `97` for `a` and `65` for `A`.
+
+```sql
+SELECT ORD('a'), ORD('A');
+```
+
+```
++----------+----------+
+| ORD('a') | ORD('A') |
++----------+----------+
+|       97 |       65 |
++----------+----------+
+1 row in set (0.00 sec)
+```
+
+If you take the character code obtained from `ORD()` as input, you can get the original characters back using the `CHAR()` function. Note that the output format might vary depending on whether the `binary-as-hex` option is enabled in your MySQL client.
+
+```sql
+SELECT CHAR(97), CHAR(65);
+```
+
+```
++----------+----------+
+| CHAR(97) | CHAR(65) |
++----------+----------+
+| a        | A        |
++----------+----------+
+1 row in set (0.01 sec)
+```
+
+The following example shows how `ORD()` handles multibyte characters. Here, both `101` and `0x65` are the UTF-8 encoded values for the `e` character, but in different formats. And both `50091` and `0xC3AB` represent the same values, but for the `ë` character. 
+
+```sql
+SELECT ORD('e'), ORD('ë'), HEX('e'), HEX('ë');
+```
+
+```
++----------+-----------+----------+-----------+
+| ORD('e') | ORD('ë')  | HEX('e') | HEX('ë')  |
++----------+-----------+----------+-----------+
+|      101 |     50091 | 65       | C3AB      |
++----------+-----------+----------+-----------+
+1 row in set (0.00 sec)
+```
 
 ### [`POSITION()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_position)
 

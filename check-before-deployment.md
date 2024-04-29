@@ -269,7 +269,7 @@ To check whether the NTP service is installed and whether it synchronizes with t
         Unable to talk to NTP daemon. Is it running?
         ```
 
-3. Run the `chronyc tracking` command to check wheter the Chrony service synchronizes with the NTP server.
+3. Run the `chronyc tracking` command to check whether the Chrony service synchronizes with the NTP server.
 
     > **Note:**
     >

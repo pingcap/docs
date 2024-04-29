@@ -10,7 +10,7 @@ This statement is used to list all supported storage engines. The syntax is incl
 
 ## Synopsis
 
-```enbf+diagram
+```ebnf+diagram
 ShowEnginesStmt ::=
     "SHOW" "ENGINES" ShowLikeOrWhere?
 
