@@ -6,8 +6,8 @@ from tempfile import mkstemp
 from shutil import move
 from os import remove
 
-ext_path = r'/Users/userid/Documents/GitHub/mygithubid/docs/releases'  # Specify the directory of the English release notes folder
-main_path = r'/Users/userid/Documents/GitHub/mygithubid/docs/releases/release-7.1.2.md'  # Specify the directory of the English release note file that you are preparing
+ext_path = r'/Users/hfxsd/Documents/docs/releases'  # Specify the directory of the English release notes folder
+main_path = r'/Users/hfxsd/Documents/docs/releases/release-7.1.5.md'  # Specify the directory of the English release note file that you are preparing
 
 # Get existing release notes from the English release notes folder
 def store_exst_rn(ext_path,main_path):

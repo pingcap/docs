@@ -419,11 +419,85 @@ Output:
 
 ### [`ELT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_elt)
 
-Return string at index number.
+The `ELT()` function returns the element at the index number.
+
+```sql
+SELECT ELT(3, 'This', 'is', 'TiDB');
+```
+
+```sql
++------------------------------+
+| ELT(3, 'This', 'is', 'TiDB') |
++------------------------------+
+| TiDB                         |
++------------------------------+
+1 row in set (0.00 sec)
+```
+
+The preceding example returns the third element, which is `'TiDB'`.
 
 ### [`EXPORT_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_export-set)
 
-Return a string such that for every bit set in the value bits, you get an on string and for every unset bit, you get an off string.
+The `EXPORT_SET()` function returns a string that consists of a specified number (`number_of_bits`) of `on`/`off` values, optionally separated by `separator`. These values are based on whether the corresponding bit in the `bits` argument is `1`, where the first value corresponds to the rightmost (lowest) bit of `bits`.
+
+Syntax:
+
+```sql
+EXPORT_SET(bits, on, off, [separator[, number_of_bits]])
+```
+
+- `bits`: an integer representing the bit value.
+- `on`: the string to be returned if the corresponding bit is `1`.
+- `off`: the string to be returned if the corresponding bit is `0`.
+- `separator` (optional): the separator character in the result string.
+- `number_of_bits` (optional): the number of bits to be processed. If it is not set, `64` (the max size of bits) is used by default, which means that `bits` is treated as an unsigned 64-bit integer.
+
+Examples:
+
+In the following example, `number_of_bits` is set to `5`, resulting in 5 values, separated by `|`. Because only 3 bits are given, the other bits are considered unset. Therefore, setting `number_of_bits` to either `101` or `00101` results in the same output.
+
+```sql
+SELECT EXPORT_SET(b'101',"ON",'off','|',5);
+```
+
+```sql
++-------------------------------------+
+| EXPORT_SET(b'101',"ON",'off','|',5) |
++-------------------------------------+
+| ON|off|ON|off|off                   |
++-------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the following example, `bits` is set to `00001111`, `on` is set to `x`, and `off` is set to `_`. This causes the function to return `____` for the `0` bits and `xxxx` for the `1` bits. Therefore, when processing with the bits in `00001111` from right to left, the function returns `xxxx____`.
+
+```sql
+SELECT EXPORT_SET(b'00001111', 'x', '_', '', 8);
+```
+
+```sql
++------------------------------------------+
+| EXPORT_SET(b'00001111', 'x', '_', '', 8) |
++------------------------------------------+
+| xxxx____                                 |
++------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the following example, `bits` is set to `00001111`, `on` is set to `x`, and `off` is set to `_`. This causes the function to return `x` for each `1` bit and `_` for each `0` bit. Therefore, when processing with the bits in `01010101` from right to left, the function returns `x_x_x_x_`.
+
+```sql
+SELECT EXPORT_SET(b'01010101', 'x', '_', '', 8);
+```
+
+```sql
++------------------------------------------+
+| EXPORT_SET(b'01010101', 'x', '_', '', 8) |
++------------------------------------------+
+| x_x_x_x_                                 |
++------------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ### [`FIELD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_field)
 
