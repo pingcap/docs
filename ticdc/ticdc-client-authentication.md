@@ -14,7 +14,7 @@ These two authentication methods can be used either independently or in combinat
 
 > **Note:**
 >
-> TiCDC client authentication is only available when [TLS is enabled](/enable-tls-between-clients-and-servers.md).
+> In the production environment, it is recommended to use TiCDC client authentication only when [TLS is enabled](/enable-tls-between-clients-and-servers.md).
 
 ## Use mTLS for client authentication
 
