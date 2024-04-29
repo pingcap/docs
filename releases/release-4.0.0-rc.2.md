@@ -1,5 +1,6 @@
 ---
 title: TiDB 4.0 RC.2 Release Notes
+summary: TiDB 4.0 RC.2 was released on May 15, 2020. The release includes compatibility changes, important bug fixes, new features, and bug fixes for TiDB, TiKV, PD, TiFlash, and various tools. Some notable changes include the removal of the size limit for a single transaction when TiDB Binlog is enabled, support for the BACKUP and RESTORE commands, and the addition of encryption-related monitoring metrics in Grafana dashboard. Additionally, there are numerous bug fixes for issues such as wrong partition selection, incorrect index range building, and performance reduction. The release also introduces new features like support for the auto_random option in the CREATE TABLE statement and the ability to manage replication tasks using cdc cli.
 ---
 
 # TiDB 4.0 RC.2 Release Notes
@@ -88,7 +89,7 @@ TiDB version: 4.0.0-rc.2
 
     - Change the name of the Count graph of **Read Index** in Grafana to **Ops**
     - Optimize the data for opening file descriptors when the system load is low to reduce system resource consumption
-    - Add the capacity-related configuration parameter to limit the the data storage capacity
+    - Add the capacity-related configuration parameter to limit the data storage capacity
 
 + Tools
 
@@ -159,7 +160,7 @@ TiDB version: 4.0.0-rc.2
     - Fix the issue that the backup data cannot be restored from GCS [#7739](https://github.com/tikv/tikv/pull/7739)
     - Fix the issue that KMS key ID is not validated during encryption at rest [#7719](https://github.com/tikv/tikv/pull/7719)
     - Fix the underlying correctness issue of the Coprocessor in compilers of different architecture  [#7714](https://github.com/tikv/tikv/pull/7714) [#7730](https://github.com/tikv/tikv/pull/7730)
-    - Fix the `snapshot ingestion` error when encrytion is enabled [#7815](https://github.com/tikv/tikv/pull/7815)
+    - Fix the `snapshot ingestion` error when encryption is enabled [#7815](https://github.com/tikv/tikv/pull/7815)
     - Fix the `Invalid cross-device link` error when rewriting the configuration file [#7817](https://github.com/tikv/tikv/pull/7817)
     - Fix the issue of wrong toml format when writing the configuration file to an empty file [#7817](https://github.com/tikv/tikv/pull/7817)
     - Fix the issue that a destroyed peer in Raftstore can still process requests [#7836](https://github.com/tikv/tikv/pull/7836)

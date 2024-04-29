@@ -1,5 +1,6 @@
 ---
 title: Pre-GA release notes
+summary: TiDB Pre-GA release on August 30, 2017, focuses on MySQL compatibility, SQL optimization, stability, and performance. TiDB introduces SQL query optimizer enhancements, MySQL compatibility, JSON type support, and memory consumption reduction. Placement Driver (PD) now supports manual leader change, while TiKV uses dedicated Rocksdb for Raft log storage and improves performance. TiDB Connector for Spark Beta Release implements predicates pushdown, aggregation pushdown, and range pruning, capable of running TPC+H queries.
 ---
 
 # Pre-GA Release Notes
