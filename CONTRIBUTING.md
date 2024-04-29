@@ -43,6 +43,7 @@ Please check out these templates before you submit a pull request:
 
 Currently, we maintain the following versions of TiDB documentation, each with a separate branch:
 
+<<<<<<< HEAD
 | Docs branch name | Version description |
 | :--- | :--- |
 | `master` branch | the latest development version |
@@ -63,6 +64,11 @@ Currently, we maintain the following versions of TiDB documentation, each with a
 > Previously, we maintain all versions in the `master` branch, with directories like `dev` (the latest development version), `v3.0` and so on. Each docs version is updated very frequently and changes to one version often apply to another version or other versions as well.
 >
 > Since February 21, 2020, to reduce manual editing and updating work among versions, we have started to maintain each version in a separate branch and introduced sre-bot (now ti-chi-bot) to automatically file PRs to other versions as long as you add corresponding cherry-pick labels to your PR.
+=======
+- The [documentation under development](https://docs.pingcap.com/tidb/dev) is maintained in the `master` branch.
+- The [published documentation](https://docs.pingcap.com/tidb/stable/) is maintained in the corresponding `release-<version>` branch. For example, TiDB v7.5 documentation is maintained in the `release-7.5` branch.
+- The [archived documentation](https://docs-archive.pingcap.com/) is no longer maintained and does not receive any further updates.
+>>>>>>> 6936c1e67e (fix typos in docs (#17381))
 
 ### Use cherry-pick labels
 
