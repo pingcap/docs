@@ -81,7 +81,7 @@ TiDB version: 4.0.16
 + PD
 
     - Fix a panic issue that occurs after the TiKV node is removed [#4344](https://github.com/tikv/pd/issues/4344)
-    - Fix slow leader election caused by stucked region syncer [#3936](https://github.com/tikv/pd/issues/3936)
+    - Fix slow leader election caused by stuck region syncer [#3936](https://github.com/tikv/pd/issues/3936)
     - Support that the evict leader scheduler can schedule regions with unhealthy peers [#4093](https://github.com/tikv/pd/issues/4093)
 
 + TiFlash

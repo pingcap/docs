@@ -5232,10 +5232,10 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
-- When accesing a partitioned table in [dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode), TiDB aggregates the statistics of each partition to generate GlobalStats. This variable controls the generation of GlobalStats when partition statistics are missing.
+- When accessing a partitioned table in [dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode), TiDB aggregates the statistics of each partition to generate GlobalStats. This variable controls the generation of GlobalStats when partition statistics are missing.
 
     - If this variable is `ON`, TiDB skips missing partition statistics when generating GlobalStats so the generation of GlobalStats is not affected.
-    - If this variable is `OFF`, TiDB stops generating GloablStats when it detects any missing partition statistics.
+    - If this variable is `OFF`, TiDB stops generating GlobalStats when it detects any missing partition statistics.
 
 ### tidb_skip_utf8_check
 
