@@ -1,5 +1,6 @@
 ---
 title: TiDB 6.3.0 Release Notes
+summary: TiDB 6.3.0-DMR, released on September 30, 2022, introduces new features and improvements, including encryption at rest using the SM4 algorithm in TiKV, authentication using the SM3 algorithm in TiDB, and support for JSON data type and functions. It also provides execution time metrics at a finer granularity, enhances output for slow logs and `TRACE` statements, and supports deadlock history information in TiDB Dashboard. Additionally, TiDB v6.3.0 introduces new system variables and configuration file parameters, and fixes various bugs and issues. The release also includes improvements in TiKV, PD, TiFlash, Backup & Restore (BR), TiCDC, TiDB Binlog, TiDB Data Migration (DM), and TiDB Lightning.
 ---
 
 # TiDB 6.3.0 Release Notes
@@ -335,7 +336,7 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
 
     - Fix the issue that the privilege check is skipped for `PREPARE` statements [#35784](https://github.com/pingcap/tidb/issues/35784) @[lcwangchao](https://github.com/lcwangchao)
     - Fix the issue that the system variable `tidb_enable_noop_variable` can be set to `WARN` [#36647](https://github.com/pingcap/tidb/issues/36647) @[lcwangchao](https://github.com/lcwangchao)
-    - Fix the issue that when an expression index is defined, the `ORDINAL_POSITION` column of the `INFORMAITON_SCHEMA.COLUMNS` table might be incorrect [#31200](https://github.com/pingcap/tidb/issues/31200) @[bb7133](https://github.com/bb7133)
+    - Fix the issue that when an expression index is defined, the `ORDINAL_POSITION` column of the `INFORMATION_SCHEMA.COLUMNS` table might be incorrect [#31200](https://github.com/pingcap/tidb/issues/31200) @[bb7133](https://github.com/bb7133)
     - Fix the issue that TiDB does not report an error when the timestamp is larger than `MAXINT32` [#31585](https://github.com/pingcap/tidb/issues/31585) @[bb7133](https://github.com/bb7133)
     - Fix the issue that TiDB server cannot be started when the enterprise plugin is used [#37319](https://github.com/pingcap/tidb/issues/37319) @[xhebox](https://github.com/xhebox)
     - Fix the incorrect output of `SHOW CREATE PLACEMENT POLICY` [#37526](https://github.com/pingcap/tidb/issues/37526) @[xhebox](https://github.com/xhebox)
@@ -353,7 +354,7 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
     - Fix the issue that the cast and comparison between binary strings and JSON in TiDB are incompatible with MySQL [#31918](https://github.com/pingcap/tidb/issues/31918) [#25053](https://github.com/pingcap/tidb/issues/25053) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that `JSON_OBJECTAGG` and `JSON_ARRAYAGG` in TiDB are not compatible with MySQL on binary values [#25053](https://github.com/pingcap/tidb/issues/25053) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that the comparison between JSON opaque values causes panic [#37315](https://github.com/pingcap/tidb/issues/37315) @[YangKeao](https://github.com/YangKeao)
-    - Fix the issue that the single precision float cannot be used in JSON aggregation funtions [#37287](https://github.com/pingcap/tidb/issues/37287) @[YangKeao](https://github.com/YangKeao)
+    - Fix the issue that the single precision float cannot be used in JSON aggregation functions [#37287](https://github.com/pingcap/tidb/issues/37287) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that the `UNION` operator might return unexpected empty result [#36903](https://github.com/pingcap/tidb/issues/36903) @[tiancaiamao](https://github.com/tiancaiamao)
     - Fix the issue that the result of the `castRealAsTime` expression is inconsistent with MySQL [#37462](https://github.com/pingcap/tidb/issues/37462) @[mengxin9014](https://github.com/mengxin9014)
     - Fix the issue that pessimistic DML operations lock non-unique index keys [#36235](https://github.com/pingcap/tidb/issues/36235) @[ekexium](https://github.com/ekexium)
