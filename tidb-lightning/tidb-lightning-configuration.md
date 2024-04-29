@@ -136,7 +136,7 @@ driver = "file"
 strategy = ""
 # Controls whether to enable preprocess conflict detection, which checks conflicts in data before importing it to TiDB. The default value is false, indicating that TiDB Lightning only checks conflicts after the import. If you set it to true, TiDB Lightning checks conflicts both before and after the import. This parameter can be used only in the physical import mode. It is not recommended to set `precheck-conflict-before-import = true` for now.
 # precheck-conflict-before-import = false
-# Controls the maximum number of conflict errors that can be handled when strategy is "replace" or "ignore". You can set it only when strategy is "replace" or "ignore". The default value is 10000. If you set the value larger than 10000, it is possible that the import will have performance degradation or fail due to potential errors. 
+# Controls the maximum number of conflict errors that can be handled when strategy is "replace" or "ignore". You can set it only when the strategy is "replace" or "ignore". The default value is 10000. If you set a value larger than 10000, the import process might experience performance degradation or failure due to potential errors. 
 # threshold = 10000
 # Controls the maximum number of records in the `conflict_records` table. The default value is 10000. 
 # Starting from v8.1.0, there is no need to configure `max-record-rows` manually, because TiDB Lightning automatically assigns the value of `max-record-rows` with the value of `threshold`, regardless of the user input. `max-record-rows` will be deprecated in a future release.
