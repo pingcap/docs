@@ -149,7 +149,7 @@ ORDER BY
 4 rows in set (0.031 sec)
 ```
 
-`TIDB_DECODE_KEY` returns valid JSON on success and retuns the argument value if it fails to decode.
+`TIDB_DECODE_KEY` returns valid JSON on success and returns the argument value if it fails to decode.
 
 ### TIDB_DECODE_PLAN
 
