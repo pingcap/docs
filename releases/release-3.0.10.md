@@ -50,7 +50,7 @@ TiDB Ansible version: 3.0.10
 
 + Raftstore
     - Fix the system panic issue #6460 or data loss issue #598 caused by Region merge failure [#6481](https://github.com/tikv/tikv/pull/6481)
-    - Support `yield` to optimize scheduling fairness, and support pre-transfering the leader to improve leader scheduling stability [#6563](https://github.com/tikv/tikv/pull/6563)
+    - Support `yield` to optimize scheduling fairness, and support pre-transferring the leader to improve leader scheduling stability [#6563](https://github.com/tikv/tikv/pull/6563)
 
 ## PD
 

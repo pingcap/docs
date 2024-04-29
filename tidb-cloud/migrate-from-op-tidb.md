@@ -187,7 +187,7 @@ Do the following to export data from the upstream TiDB cluster to Amazon S3 usin
 
     The `-t` option specifies the number of threads for the export. Increasing the number of threads improves the concurrency of Dumpling and the export speed, and also increases the database's memory consumption. Therefore, do not set a too large number for this parameter.
 
-    For mor information, see [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-to-sql-files).
+    For more information, see [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-to-sql-files).
 
 4. Check the export data. Usually the exported data includes the following:
 

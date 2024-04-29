@@ -94,6 +94,6 @@ When using the intersection-type index merge to access tables, the optimizer can
 >
 > - If the optimizer can choose the single index scan method (other than full table scan) for a query plan, the optimizer will not automatically use index merge. For the optimizer to use index merge, you need to use the optimizer hint.
 >
-> - Index Merge is not supported in [tempoaray tables](/temporary-tables.md) for now.
+> - Index Merge is not supported in [temporary tables](/temporary-tables.md) for now.
 >
 > - The intersection-type index merge will not automatically be selected by the optimizer. You must specify the **table name and index name** using the [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) hint for it to be selected.
