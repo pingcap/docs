@@ -1,5 +1,6 @@
 ---
 title: TiDB 5.4 Release Notes
+summary: TiDB 5.4 introduces support for the GBK character set, Index Merge, reading stale data, persisting statistics configuration, and using Raft Engine as the log storage engine of TiKV. It also improves backup impact, supports Azure Blob storage, and enhances TiFlash and the MPP engine. Compatibility changes include new system variables and configuration file parameters. Other improvements cover SQL, security, performance, stability, high availability, data migration, diagnostic efficiency, and deployment. Bug fixes address issues in TiDB, TiKV, PD, TiFlash, BR, TiCDC, DM, TiDB Lightning, and TiDB Binlog.
 ---
 
 # TiDB 5.4 Release Notes
