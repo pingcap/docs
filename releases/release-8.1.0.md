@@ -78,13 +78,17 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
     <td>Proper index design is a crucial prerequisite to maintaining database performance. TiDB v8.0.0 introduces the <a href="https://docs.pingcap.com/tidb/v8.1/information-schema-tidb-index-usage"><code>INFORMATION_SCHEMA.TIDB_INDEX_USAGE</code></a> table and the <a href="https://docs.pingcap.com/tidb/v8.1/sys-schema-unused-indexes"><code>sys.schema_unused_indexes</code></a> view to provide usage statistics of indexes. This feature helps you assess the efficiency of indexes in the database and optimize the index design.</td>
   </tr>
   <tr>
-    <td rowspan="2">Data Migration</td>
+    <td rowspan="3">Data Migration</td>
     <td>TiCDC adds support for <a href="https://docs.pingcap.com/tidb/v8.1/ticdc-simple-protocol">the Simple protocol</a> (introduced in v8.0.0)</td>
     <td>TiCDC introduces a new protocol, the Simple protocol. This protocol provides in-band schema tracking capabilities by embedding table schema information in DDL and BOOTSTRAP events.</td>
   </tr>
   <tr>
     <td>TiCDC adds support for <a href="https://docs.pingcap.com/tidb/v8.1/ticdc-debezium">the Debezium format protocol</a> (introduced in v8.0.0)</td>
     <td>TiCDC introduces a new protocol, the Debezium protocol. TiCDC can now publish data change events to a Kafka sink using a protocol that generates Debezium style messages.</td>
+  </tr>
+  <tr>
+    <td>TiCDC adds new <a href="https://docs.pingcap.com/tidb/v8.1/ticdc-client-authentication.md">Client authentication capabilities</a></td>
+    <td>TiCDC introduces support for both certificate based client authentication, and authentication using TiDB credentials. Theses features enable CLI or API clients to authenticate their connections to TiCDC.</td>
   </tr>
 </tbody>
 </table>
