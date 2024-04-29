@@ -36,7 +36,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `slow-log-threshold`
 
-+ The threshold for outputing slow logs. If the processing time is longer than this threshold, slow logs are output.
++ The threshold for outputting slow logs. If the processing time is longer than this threshold, slow logs are output.
 + Default value: `"1s"`
 
 ### `memory-usage-limit`

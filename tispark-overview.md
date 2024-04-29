@@ -147,9 +147,9 @@ Add the following configuration in `spark-defaults.conf`:
 
 ```
 spark.sql.extensions  org.apache.spark.sql.TiExtensions
-spark.tispark.pd.addresses  ${your_pd_adress}
+spark.tispark.pd.addresses  ${your_pd_address}
 spark.sql.catalog.tidb_catalog  org.apache.spark.sql.catalyst.catalog.TiCatalog
-spark.sql.catalog.tidb_catalog.pd.addresses  ${your_pd_adress}
+spark.sql.catalog.tidb_catalog.pd.addresses  ${your_pd_address}
 ```
 
 Start spark-shell with the `--jars` option.

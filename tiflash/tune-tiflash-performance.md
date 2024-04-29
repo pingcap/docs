@@ -229,7 +229,7 @@ ALTER TABLE employees COMPACT PARTITION pNorth, pEast TIFLASH REPLICA;
 
 ### Replace Shuffled Hash Join with Broadcast Hash Join
 
-For `Join` operations with small tables, the Broadcast Hash Join algorithm can avoid transfering large tables, thereby improving the computing performance.
+For `Join` operations with small tables, the Broadcast Hash Join algorithm can avoid transferring large tables, thereby improving the computing performance.
 
 - The [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50) variable controls whether to use the Broadcast Hash Join algorithm. If the table size (unit: byte) is smaller than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
 
@@ -243,7 +243,7 @@ For `Join` operations with small tables, the Broadcast Hash Join algorithm can a
     set @@tidb_broadcast_join_threshold_count = 100000;
     ```
 
-The following example shows the query result before and after `tidb_broadcast_join_threshold_size` is re-configured. Before the re-configuration, the `ExchangeType` of `ExchangeSender_29` is `HashPartition`. After the value of this variable chages to `10000000`, the `ExchangeType` of `ExchangeSender_29` changes to `Broadcast`.
+The following example shows the query result before and after `tidb_broadcast_join_threshold_size` is re-configured. Before the re-configuration, the `ExchangeType` of `ExchangeSender_29` is `HashPartition`. After the value of this variable changes to `10000000`, the `ExchangeType` of `ExchangeSender_29` changes to `Broadcast`.
 
 Before `tidb_broadcast_join_threshold_size` is re-configured:
 

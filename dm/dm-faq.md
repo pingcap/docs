@@ -364,7 +364,7 @@ To solve this issue, you are recommended to maintain DM clusters using TiUP. In 
 
 ## Why DM-master cannot be connected when I use dmctl to execute commands?
 
-When using dmctl execute commands, you might find the connection to DM master fails (even if you have specified the parameter value of `--master-addr` in the command), and the error message is like `RawCause: context deadline exceeded, Workaround: please check your network connection.`. But afer checking the network connection using commands like `telnet <master-addr>`, no exception is found.
+When using dmctl execute commands, you might find the connection to DM master fails (even if you have specified the parameter value of `--master-addr` in the command), and the error message is like `RawCause: context deadline exceeded, Workaround: please check your network connection.`. But after checking the network connection using commands like `telnet <master-addr>`, no exception is found.
 
 In this case, you can check the environment variable `https_proxy` (note that it is **https**). If this variable is configured, dmctl automatically connects the host and port specified by `https_proxy`. If the host does not have a corresponding `proxy` forwarding service, the connection fails.
 

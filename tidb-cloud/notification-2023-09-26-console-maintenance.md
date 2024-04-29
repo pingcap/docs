@@ -20,7 +20,7 @@ This notification describes the details that you need to know about the [TiDB Cl
 
 ## Reason for maintenance
 
-We're upgrading the management infrastucture of the TiDB Cloud Serverless to enhance performance and efficiency, delivering a better experience for all users. This is part of our ongoing commitment to providing high-quality services.
+We're upgrading the management infrastructure of the TiDB Cloud Serverless to enhance performance and efficiency, delivering a better experience for all users. This is part of our ongoing commitment to providing high-quality services.
 
 ## Impact
 
