@@ -15,7 +15,6 @@ For comparisons between functions and syntax of Oracle and TiDB, see [Comparison
 
 ## Supported functions
 
-<<<<<<< HEAD
 | Name                                                                                                                                          | Description                                                                                                                               |
 |:----------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------|
 | [`ASCII()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ascii)                                                     | Return numeric value of left-most character                                                                                               |
