@@ -100,7 +100,7 @@ The following steps describe how to clean up backup data that exceeds the backup
 4. Delete snapshot data earlier than the snapshot backup `FULL_BACKUP_TS`:
 
     ```shell
-    rm -rf s3://backup-101/snapshot-${date}
+    aws s3 rm --recursive s3://backup-101/snapshot-${date}
     ```
 
 ## Performance capabilities of PITR
