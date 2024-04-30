@@ -468,7 +468,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Checkpoint TS of Tasks: Checkpoint TS for each task
 - Flush Duration: The heat map of how long it takes for moving cached data to external storage
 - Initial Scanning Duration: The heat map of how long it takes for incremental scanning when creating a new listening stream
-- Convert Raft Event Duration: The heat map of how long it takes to transform a Raft task into backup data after creating a listening stream
+- Convert Raft Event Duration: The heat map of how long it takes to transform a Raft log entry into backup data after creating a listening stream
 - Command Batch Size: The batch size (within a single Raft group) of the listening Raft command
 - Save to Temp File Duration: The heat map of how long it takes to temporarily store a batch of backup data (spanning several Tasks) into the temporary file area
 - Write to Temp File Duration: The heat map of how long it takes to temporarily store a batch of backup data (from a particular task) into the temporary files area
