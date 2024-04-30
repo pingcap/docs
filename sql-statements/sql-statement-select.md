@@ -19,10 +19,10 @@ SelectStmtBasic ::=
     "SELECT" SelectStmtOpts Field ("," Field)* ( "HAVING" Expression)?
 
 SelectStmtFromDualTable ::=
-    "SELECT" SelectStmtOpts Field ("," Field)* "FROM" "DUAL" WhereClauseOptional
+    "SELECT" SelectStmtOpts Field ("," Field)* "FROM" "DUAL" WhereClause?
 
 SelectStmtFromTable ::=
-    "SELECT" SelectStmtOpts Field ("," Field)* "FROM" TableRefsClause WhereClauseOptional SelectStmtGroup HavingClause WindowClauseOptional
+    "SELECT" SelectStmtOpts Field ("," Field)* "FROM" TableRefsClause WhereClauseOptional GroupByClause? HavingClause WindowClause?
 
 SelectStmtOpts ::=
     TableOptimizerHints DefaultFalseDistictOpt PriorityOpt SelectStmtSQLSmallResult
@@ -34,12 +34,6 @@ TableRefsClause ::=
 
 AsOfClause ::=
     'AS' 'OF' 'TIMESTAMP' Expression
-
-WhereClauseOptional ::=
-    WhereClause?
-
-SelectStmtGroup ::=
-    GroupByClause?
 
 SelectStmtLimit ::=
     ("LIMIT" LimitOption ( ("," | "OFFSET") LimitOption )?
