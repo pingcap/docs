@@ -1,5 +1,6 @@
 ---
 title: TiDB 2.1.2 Release Notes
+summary: TiDB 2.1.2 and TiDB Ansible 2.1.2 were released on December 22, 2018. The release includes improvements in system compatibility and stability. Key updates include compatibility with TiDB Binlog of the Kafka version, improved exit mechanism during rolling updates, and fixes for various issues. PD and TiKV also received updates, such as fixing Region merge issues and support for configuration format in the unit of 'DAY'. Additionally, TiDB Lightning and TiDB Binlog were updated to support new features and eliminate bottlenecks.
 ---
 
 # TiDB 2.1.2 Release Notes

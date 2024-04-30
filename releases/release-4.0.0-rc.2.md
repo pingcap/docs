@@ -1,5 +1,6 @@
 ---
 title: TiDB 4.0 RC.2 Release Notes
+summary: TiDB 4.0 RC.2 was released on May 15, 2020. The release includes compatibility changes, important bug fixes, new features, and bug fixes for TiDB, TiKV, PD, TiFlash, and various tools. Some notable changes include the removal of the size limit for a single transaction when TiDB Binlog is enabled, support for the BACKUP and RESTORE commands, and the addition of encryption-related monitoring metrics in Grafana dashboard. Additionally, there are numerous bug fixes for issues such as wrong partition selection, incorrect index range building, and performance reduction. The release also introduces new features like support for the auto_random option in the CREATE TABLE statement and the ability to manage replication tasks using cdc cli.
 ---
 
 # TiDB 4.0 RC.2 Release Notes

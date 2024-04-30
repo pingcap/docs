@@ -1,5 +1,6 @@
 ---
 title: TiDB 3.0.15 Release Notes
+summary: TiDB 3.0.15 was released on June 5, 2020. New features include support for admin recover index and admin check index statements on partitioned tables, as well as optimization of memory allocation mechanism. Bug fixes address issues such as incorrect results in PointGet and inconsistent results between TiDB and MySQL when XOR operates on a floating-point number. TiKV fixes issues related to memory defragmentation and gRPC disconnection.
 ---
 
 # TiDB 3.0.15 Release Notes

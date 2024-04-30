@@ -1,5 +1,6 @@
 ---
 title: TiDB 2.1 GA Release Notes
+summary: TiDB 2.1 GA was released on November 30, 2018, with significant improvements in stability, performance, compatibility, and usability. The release includes optimizations in SQL optimizer, SQL executor, statistics, expressions, server, DDL, compatibility, Placement Driver (PD), TiKV, and tools. It also introduces TiDB Lightning for fast full data import and supports new TiDB Binlog. However, TiDB 2.1 does not support downgrading to v2.0.x or earlier due to the adoption of the new storage engine. Additionally, parallel DDL is enabled in TiDB 2.1, so clusters with TiDB version earlier than 2.0.1 cannot upgrade to 2.1 using rolling update. If upgrading from TiDB 2.0.6 or earlier to TiDB 2.1, ongoing DDL operations may slow down the upgrading process.
 ---
 
 # TiDB 2.1 GA Release Notes
