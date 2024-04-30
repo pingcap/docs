@@ -46,7 +46,7 @@ SelectLockOpt ::=
 TableList ::=
     TableName ( ',' TableName )*
 
-WindowClauseOptional ::=
+WindowClause ::=
     "WINDOW" WindowDefinition ("," WindowDefinition)*
 
 TableSampleOpt ::=
