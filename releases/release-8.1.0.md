@@ -87,8 +87,8 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
     <td>TiCDC introduces a new protocol, the Debezium protocol. TiCDC can now publish data change events to a Kafka sink using a protocol that generates Debezium style messages.</td>
   </tr>
   <tr>
-    <td>TiCDC adds new <a href="https://docs.pingcap.com/tidb/v8.1/ticdc-client-authentication.md">Client authentication capabilities</a></td>
-    <td>TiCDC introduces support for both certificate based client authentication, and authentication using TiDB credentials. Theses features enable CLI or API clients to authenticate their connections to TiCDC.</td>
+    <td>TiCDC adds support for <a href="https://docs.pingcap.com/tidb/v8.1/ticdc-client-authentication.md">client authentication</a> (introduced in v8.1.0) **tw@Oreoxmt**</td>
+    <td>TiCDC supports client authentication using Mutual Transport Layer Security (mTLS) or TiDB username and password. This feature enable CLI or OpenAPI clients to authenticate their connections to TiCDC.</td>
   </tr>
 </tbody>
 </table>
