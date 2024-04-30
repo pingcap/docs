@@ -77,7 +77,7 @@ The `ADMIN SHOW DDL JOBS` statement is used to view all the results in the curre
 - `SCHEMA_ID`: the ID of the database where the DDL operation is performed.
 - `TABLE_ID`: the ID of the table where the DDL operation is performed.
 - `ROW_COUNT`: when performing the `ADD INDEX` operation, it is the number of data rows that have been added.
-- `CREATE_TIME`: the create time of the DDL operation.
+- `CREATE_TIME`: the creation time of the DDL operation.
 - `START_TIME`: the start time of the DDL operation.
 - `END_TIME`: the end time of the DDL operation.
 - `STATE`: the state of the DDL operation. Common states include the following:
