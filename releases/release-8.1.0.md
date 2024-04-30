@@ -185,6 +185,12 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 
     For more information, see [documentation](/tidb-lightning/tidb-lightning-configuration.md).
 
+* TiCDC adds support for client authentication [#10636](https://github.com/pingcap/tiflow/issues/10636) @[CharlesCheung96](https://github.com/CharlesCheung96)
+
+    In v8.1.0. TiCDC adds support for configuring the TiCDC service to require client authentication when using the TiCDC CLI or API. This provides the option for you to configure the use of client certificates with TiCDC in order to establish mutual TLS. This improvement also provides the option for configuring the use of username and password based authentication.
+    
+    For more information, see [documentation](/ticdc/ticdc-client-authentication.md).
+
 ## Compatibility changes
 
 > **Note:**
