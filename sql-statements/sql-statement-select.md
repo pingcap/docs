@@ -21,7 +21,8 @@ SelectStmtFromDualTable ::=
     "SELECT" SelectStmtOpts Field ("," Field)* "FROM" "DUAL" WhereClause?
 
 SelectStmtFromTable ::=
-    "SELECT" SelectStmtOpts Field ("," Field)* "FROM" TableRefsClause WhereClauseOptional GroupByClause? HavingClause WindowClause?
+    "SELECT" SelectStmtOpts Field ("," Field)* "FROM" TableRefsClause
+    WhereClause? GroupByClause? ( "HAVING" Expression)? WindowClause?
 
 SelectStmtOpts ::=
     TableOptimizerHints DefaultFalseDistictOpt PriorityOpt SelectStmtSQLSmallResult
