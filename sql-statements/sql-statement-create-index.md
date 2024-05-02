@@ -121,7 +121,7 @@ ALTER TABLE t1 ADD INDEX idx1((LOWER(col1)));
 You can also specify the expression index when you create the table:
 
 ```sql
-CREATE TABLE t1(
+CREATE TABLE t1 (
     col1 CHAR(10), 
     col2 CHAR(10),
     INDEX ((LOWER(col1)))
