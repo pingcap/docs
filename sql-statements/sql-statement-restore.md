@@ -41,6 +41,7 @@ RestoreOption ::=
     "RATE_LIMIT" '='? LengthNum "MB" '/' "SECOND"
 |   "CONCURRENCY" '='? LengthNum
 |   "CHECKSUM" '='? Boolean
+|   "CHECKSUM_CONCURRENCY '='? LengthNum
 |   "SEND_CREDENTIALS_TO_TIKV" '='? Boolean
 
 Boolean ::=
@@ -129,9 +130,11 @@ RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/'
 
 Use `RATE_LIMIT` to limit the average download speed per TiKV node to reduce network bandwidth.
 
-By default, TiDB node would run 128 restore threads. This value can be adjusted with the `CONCURRENCY` option.
+Before restore is completed, `RESTORE` would perform a checksum against the data from the archive to verify correctness. 
 
-Before restore is completed, `RESTORE` would perform a checksum against the data from the archive to verify correctness. This step can be disabled with the `CHECKSUM` option if you are confident that this is unnecessary.
+Use `CHECKSUM` to disable the check if you are confident that this is unnecessary.
+
+Use `CHECKSUM_CONCURRENCY` to controll the concurrency of checksumming in one table (default 4)
 
 {{< copyable "sql" >}}
 
