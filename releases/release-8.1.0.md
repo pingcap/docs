@@ -214,7 +214,8 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
 |        |                              |      |
-|        |                              |      |
+| [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) | Modified | Changes the default value from `OFF` to `ON`. This means that Distributed eXecution Framework (DXF) is enabled by default, which fully utilizes the resources of the TiDB cluster and greatly improves the performance of `ADD INDEX` and `IMPORT INTO` tasks. If your cluster was upgraded from an earlier version, the variable retains its value before the upgrade. |
+| [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) | Modified  | Changes the optional value from  "" or `background` to a string with a length of up to 64 characters, which enables you to control the service scope of each TiDB node more flexibly. Available legal characters include digits `0-9`, letters `a-zA-Z`, underscore `_`, and hyphen `-`. The Distributed eXecution Framework (DXF) determines which TiDB nodes can be scheduled to execute distributed tasks based on the value of this variable. For specific rules, see [Task scheduling](/tidb-distributed-execution-framework.md#task-scheduling). |
 |        |                              |      |
 |        |                              |      |
 
@@ -222,7 +223,8 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 
 | Configuration file | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
-|          |          |          |          |
+| TiDB Lightning | [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) | Modified | Changes the default value from `9223372036854775807` to `10000` to quickly interrupt abnormal tasks so that you can make corresponding adjustments as soon as possible. This saves time and computational resources by avoiding the scenario where a large amount of conflicting data is discovered after the import, caused by abnormal data sources or incorrect table schema definitions. |
+| TiDB Lightning | [`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-configuration) | Modified | Starting from v8.1.0, there is no need to configure `conflict.max-record-rows` manually, because TiDB Lightning automatically assigns the value of `conflict.max-record-rows` with the value of `conflict.threshold`, regardless of the user input. `conflict.max-record-rows` will be deprecated in a future release. |
 |          |          |          |          |
 |          |          |          |          |
 |          |          |          |          |
