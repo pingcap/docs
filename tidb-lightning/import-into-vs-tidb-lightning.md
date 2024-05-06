@@ -15,47 +15,47 @@ As a result, TiDB has gradually integrated some functionalities of TiDB Lightnin
 
 The following sections describe the differences between `IMPORT INTO` and TiDB Lightning in multiple dimensions.
 
-## Deployment cost
+### Deployment cost
 
-### `IMPORT INTO`
+#### `IMPORT INTO`
 
 `IMPORT INTO` does not requrie separate deployment. You can run it directly on TiDB nodes, which eliminates additional deployment work.
 
-### TiDB Lightning
+#### TiDB Lightning
 
 By contrast, TiDB Lightning requires [separate server deployment](/tidb-lightning/deploy-tidb-lightning.md).
 
-## Resource utilization
+### Resource utilization
 
-### `IMPORT INTO`
+#### `IMPORT INTO`
 
 You can share TiDB nodes with other businesses or use them at different times to fully use the resources. For stable business operations with optimal import performance, you can specify [specific TiDB nodes](/system-variables.md#tidb_service_scope-new-in-v740) to be dedicated solely to `IMPORT INTO` for data import.
 
 When using TiDB Global Sort, there is no need to mount large local disks. TiDB Global Sort can be done using S3. Once completed, you can delete the data to save storage costs.
 
-### TiDB Lightning
+#### TiDB Lightning
 
 Separate servers are required to deploy and run TiDB Lightning. When there are no import tasks being executed, these machine resources remain idle. This idle time is even longer in scenarios where import tasks are executed periodically.
 
 If the volume of imported data is large, it is necessary to prepare large local disks to sort the data to be imported.
 
-## Task configuration and integration
+### Task configuration and integration
 
-### `IMPORT INTO`
+#### `IMPORT INTO`
 
 You can directly write SQL statements to submit import tasks, which is easy to call and integrate.
 
-### TiDB Lightning
+#### TiDB Lightning
 
 By contrast, TiDB Lightning requires you to write [task configuration files](/tidb-lightning/tidb-lightning-configuration.md), which are complex and not easily called by third parties.
 
-## Task scheduling
+### Task scheduling
 
-### `IMPORT INTO`
+#### `IMPORT INTO`
 
 `IMPORT INTO` is naturally distributed. For example, when you import 40 TiB of source data files into one target table, after submitting the SQL statement, TiDB will automatically split it into multiple sub-tasks and schedule them to execute distributed import tasks on different TiDB nodes.
 
-### TiDB Lightning
+#### TiDB Lightning
 
 Configuration for TiDB Lightning is complex, inefficient, and prone to errors.
 
@@ -63,9 +63,9 @@ For example, if you start 10 parallel TiDB Lightning imports, you need to write 
 
 In addition, you need to configure the shared metadata table and other configuration information for these 10 TiDB Lightning instances.
 
-## Global Sort vs. local sort
+### Global Sort vs. local sort
 
-### `IMPORT INTO`
+#### `IMPORT INTO`
 
 Based on global sort, tens of TiB of source data can be transmitted to multiple TiDB nodes, where the encoded data KV pairs and index KV pairs are transferred to S3 for global sorting before being written to TiKV.
 
@@ -73,13 +73,13 @@ Because it is globally sorted, data imported from various TiDB nodes into TiKV d
 
 After the import is completed, the data used for global sorting on S3 will be automatically deleted, saving storage costs.
 
-### TiDB Lightning
+#### TiDB Lightning
 
 TiDB Lightning only supports local sort. For example, for tens of TiB of source data, if TiDB Lightning does not have large local disks configured, or if multiple TiDB Lightning instances are used for parallel import, each TiDB Lightning instance will only use local disks to sort the data responsible for the import. Due to the inability to perform global sorting, there will be overlap between the data imported into TiKV by multiple TiDB Lightning instances, especially in scenarios where index data is more prevalent, triggering TiKV to perform compaction operations. Bcause compaction is a very resource-intensive operation, it will lead to a decrease in TiKV's write performance and stability.
 
 In addition, after data import is complete, you still need to retain the local disks of TiDB Lightning for the next import. The cost is relatively higher compared to S3.
 
-## Performance
+### Performance
 
 Currently, there are no performance test comparison results under equivalent test environments between `IMPORT INTO` and TiDB Lightning.
 
@@ -95,23 +95,23 @@ AWS:
 - Importing 40 TiB of data, 10 TiDB (16C32G) 20 TiKV nodes (16C27G), the average single TiDB node import speed is approximately 222 GiB/h.
 - Importing 10 TiB of data, 5 TiDB (16C32G) 10 TiKV (16C27G), the average single TiDB node import speed is approximately 307 GiB/h.
 
-## High availability
+### High availability
 
-### `IMPORT INTO`
+#### `IMPORT INTO`
 
 After a TiDB node failure, tasks on that node are automatically transferred to the remaining TiDB nodes to continue running.
 
-### TiDB Lightning
+#### TiDB Lightning
 
 After a TiDB Lightning instance node failure, you need to perform manual recovery of tasks on a new node based on previously recorded checkpoints, allowing for resumption of task execution.
 
-## Scalability
+### Scalability
 
-### `IMPORT INTO`
+#### `IMPORT INTO`
 
 Due to the use of Global Sort, data imported into TiKV does not overlap, resulting in better scalability compared to TiDB Lightning.
 
-### TiDB Lightning
+#### TiDB Lightning
 
 Due to only supporting local sort, data imported into TiKV might overlap when adding TiDB Lightning instances, resulting in more compaction operations for TiKV, limiting scalability relative to `IMPORT INTO`.
 
