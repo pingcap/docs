@@ -150,6 +150,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
     Feature descriptions (including what the feature is, why it is valuable for users, and how to use this feature generally)
 
     For more information, see [documentation](doc-link).
+
 * Enable the TiDB Distributed eXecution Framework (DXF) by default to enhance the performance and stability of `ADD INDEX` or `IMPORT INTO` tasks in parallel execution [#52441](https://github.com/pingcap/tidb/issues/52441) @[D3Hunter](https://github.com/D3Hunter) **tw@qiancai**
 
     The DXF becomes generally available (GA) in v7.5.0, but it is disabled by default. This means that an `ADD INDEX` or `IMPORT INTO` task is executed only by one TiDB node by default.
