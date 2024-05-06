@@ -88,7 +88,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
   </tr>
   <tr>
     <td>TiCDC adds support for <a href="https://docs.pingcap.com/tidb/v8.1/ticdc-client-authentication.md">client authentication</a> (introduced in v8.1.0) **tw@Oreoxmt**</td>
-    <td>TiCDC supports client authentication using Mutual Transport Layer Security (mTLS) or TiDB username and password. This feature enable CLI or OpenAPI clients to authenticate their connections to TiCDC.</td>
+    <td>TiCDC supports client authentication using mutual Transport Layer Security (mTLS) or TiDB username and password. This feature enables CLI or OpenAPI clients to authenticate their connections to TiCDC.</td>
   </tr>
 </tbody>
 </table>
@@ -193,10 +193,10 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 
     For more information, see [documentation](/tidb-lightning/tidb-lightning-configuration.md).
 
-* TiCDC adds support for client authentication [#10636](https://github.com/pingcap/tiflow/issues/10636) @[CharlesCheung96](https://github.com/CharlesCheung96)
+* TiCDC adds support for client authentication [#10636](https://github.com/pingcap/tiflow/issues/10636) @[CharlesCheung96](https://github.com/CharlesCheung96) **tw@Oreoxmt** <!--1717-->
 
-    In v8.1.0. TiCDC adds support for configuring the TiCDC service to require client authentication when using the TiCDC CLI or API. This provides the option for you to configure the use of client certificates with TiCDC in order to establish mutual TLS. This improvement also provides the option for configuring the use of username and password based authentication.
-    
+    In v8.1.0, TiCDC supports client authentication when using the TiCDC CLI or OpenAPI. This feature enables you to configure TiCDC to require client authentication using client certificates, thereby establishing mutual Transport Layer Security (mTLS). Additionally, you can configure authentication based on TiDB username and password.
+
     For more information, see [documentation](/ticdc/ticdc-client-authentication.md).
 
 ## Compatibility changes
