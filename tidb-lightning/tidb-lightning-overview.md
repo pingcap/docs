@@ -20,6 +20,10 @@ TiDB Lightning can read data from the following sources:
 - [Amazon S3](/external-storage-uri.md#amazon-s3-uri-format)
 - [Google Cloud Storage](/external-storage-uri.md#gcs-uri-format)
 
+> **Note:**
+>
+> Compared with TiDB Lightning, [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) has greatly improved in terms of deployment, resource utilization, task configuration convenience, ease of invocation and integration, automated distributed task scheduling and management, enhanced import stability based on Global Sort, high availability, and scalability. It is recommended that you consider using `IMPORT INTO` instead of TiDB Lightning in appropriate scenarios.
+
 ## TiDB Lightning architecture
 
 ![Architecture of TiDB Lightning tool set](/media/tidb-lightning-architecture.png)
