@@ -79,7 +79,7 @@ Adjust the following system variables related to Fast Online DDL:
 
 ## Usage
 
-1. To enable the DXF, set the value of [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) to `ON`:
+1. To enable the DXF, set the value of [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) to `ON` (this variable is enabled by default starting from v8.1.0, so you can skip this step if your cluster is newly created):
 
     ```sql
     SET GLOBAL tidb_enable_dist_task = ON;
@@ -94,12 +94,20 @@ Adjust the following system variables related to Fast Online DDL:
     * [`tidb_ddl_error_count_limit`](/system-variables.md#tidb_ddl_error_count_limit)
     * [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size): use the default value. The recommended maximum value is `1024`.
 
-3. Starting from v7.4.0, for TiDB Self-Hosted, you can adjust the number of TiDB nodes that perform the DXF tasks according to actual needs. After deploying a TiDB cluster, you can set the instance-level system variable [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) for each TiDB node in the cluster. When `tidb_service_scope` of a TiDB node is set to `background`, the TiDB node can execute the DXF tasks. When `tidb_service_scope` of a TiDB node is set to the default value "", the TiDB node cannot execute the DXF tasks. If `tidb_service_scope` is not set for any TiDB node in a cluster, the DXF schedules all TiDB nodes to execute tasks by default.
+## Task scheduling
 
-    > **Note:**
-    >
-    > - In a cluster with several TiDB nodes, it is strongly recommended to set `tidb_service_scope` to `background` on two or more TiDB nodes. If `tidb_service_scope` is set on a single TiDB node only, when the node is restarted or fails, the task will be rescheduled to other TiDB nodes that lack the `background` setting, which will affect these TiDB nodes.
-    > - During the execution of a distributed task, changes to the `tidb_service_scope` configuration will not take effect for the current task, but will take effect from the next task.
+By default, the DXF schedules all TiDB nodes to execute distributed tasks. Starting from v7.4.0, for TiDB Self-Hosted, you can control which TiDB nodes can be scheduled by the DXF to execute distributed tasks by configuring [`tidb_service_scope`](/system-variables.md#tidb_service_scope-introduced-since-v740).
+
+- For versions from v7.4.0 to v8.0.0, the optional values of [`tidb_service_scope`](/system-variables.md#tidb_service_scope-introduced-since-v740) are `''` or `background`. If the current cluster has TiDB nodes with `tidb_service_scope = 'background'`, the DXF schedules tasks to these nodes for execution. If the current cluster does not have TiDB nodes with `tidb_service_scope = 'background'`, whether due to faults or normal scaling in, the DXF schedules tasks to nodes with `tidb_service_scope = ''` for execution.
+
+- Starting from v8.1.0, you can set [`tidb_service_scope`](/system-variables.md#tidb_service_scope-introduced-since-v740) to any legal value. When a distributed task is submitted, the task binds to the `tidb_service_scope` value of the currently connected TiDB node, and the DXF only schedules the task to the TiDB nodes with the same `tidb_service_scope` value for execution. However, for configuration compatibility with earlier versions, if a distributed task is submitted on a node with `tidb_service_scope = ''` and the current cluster has TiDB nodes with `tidb_service_scope = 'background'`, the DXF schedules the task to TiDB nodes with `tidb_service_scope = 'background'` for execution.
+
+If new nodes are added during task execution, the DXF determines whether to schedule tasks to the new nodes for execution based on the preceding rules. If you do not want newly added nodes to execute tasks, it is recommended to set `tidb_service_scope` for these nodes in advance.
+
+> **Note:**
+>
+> - For versions from v7.4.0 to v8.0.0, in clusters with multiple TiDB nodes, it is strongly recommended to set `tidb_service_scope` to `background` on two or more TiDB nodes. If this variable is set only on a single TiDB node, when that node restarts or fails, tasks will be rescheduled to TiDB nodes with `tidb_service_scope = ''`, which affects applications running on of these TiDB nodes.
+> - During the execution of a distributed task, changes to the `tidb_service_scope` configuration will not take effect for the current task, but will take effect from the next task.
 
 ## Implementation principles
 
