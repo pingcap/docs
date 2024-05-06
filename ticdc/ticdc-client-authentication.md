@@ -26,7 +26,7 @@ These two authentication methods can be used either independently or in combinat
     mtls = true
     ```
 
-2. Configure the client certificate:
+2. Configure the client certificate.
 
     <SimpleTab groupId="cdc">
     <div label="TiCDC command-line tool" value="cdc-cli">
