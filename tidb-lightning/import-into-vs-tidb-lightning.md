@@ -7,7 +7,7 @@ summary: Learn about the differences between `IMPORT INTO` and TiDB Lightning.
 
 Many users have provided feedback that the deployment, configuration, and maintenance of [TiDB Lightning](/tidb-lightning/tidb-lightning-configuration.md) are quite complex, especially in scenarios involving [parallel importing](/tidb-lightning/tidb-lightning-distributed-import.md) of large volumes of data.
 
-As a result, TiDB has gradually integrated some functionalities of TiDB Lightning into the [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) SQL statement. You can directly execute data imports through `IMPORT INTO`, thereby improving the efficiency of data importation. In addition, `IMPORT INTO` supports some functionalities that TiDB Lightning does not, such as automatic distributed task scheduling and [TiDB Global Sort](/tidb-global-sort.md).
+As a result, TiDB has gradually integrated some functionalities of TiDB Lightning into the [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) SQL statement. You can directly import data by executing `IMPORT INTO`, thereby improving the efficiency of data import. In addition, `IMPORT INTO` supports some functionalities that TiDB Lightning does not, such as automatic distributed task scheduling and [TiDB Global Sort](/tidb-global-sort.md).
 
 `IMPORT INTO` is introduced in v7.2.0 and becomes generally available (GA) in v7.5.0. Once the `IMPORT INTO` capability can fully replace TiDB Lightning, TiDB Lightning will be deprecated. At that time, a notification will be provided in advance on the official website.
 
@@ -19,7 +19,7 @@ The following sections describe the differences between `IMPORT INTO` and TiDB L
 
 #### `IMPORT INTO`
 
-`IMPORT INTO` does not requrie separate deployment. You can run it directly on TiDB nodes, which eliminates additional deployment work.
+`IMPORT INTO` does not require separate deployment. You can run it directly on TiDB nodes, which eliminates additional deployment work.
 
 #### TiDB Lightning
 
