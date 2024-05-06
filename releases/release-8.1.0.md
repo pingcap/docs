@@ -79,15 +79,15 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
   </tr>
   <tr>
     <td rowspan="3">Data Migration</td>
-    <td>TiCDC adds support for <a href="https://docs.pingcap.com/tidb/v8.1/ticdc-simple-protocol">the Simple protocol</a> (introduced in v8.0.0)</td>
+    <td>TiCDC supports <a href="https://docs.pingcap.com/tidb/v8.1/ticdc-simple-protocol">the Simple protocol</a> (introduced in v8.0.0)</td>
     <td>TiCDC introduces a new protocol, the Simple protocol. This protocol provides in-band schema tracking capabilities by embedding table schema information in DDL and BOOTSTRAP events.</td>
   </tr>
   <tr>
-    <td>TiCDC adds support for <a href="https://docs.pingcap.com/tidb/v8.1/ticdc-debezium">the Debezium format protocol</a> (introduced in v8.0.0)</td>
+    <td>TiCDC supports <a href="https://docs.pingcap.com/tidb/v8.1/ticdc-debezium">the Debezium format protocol</a> (introduced in v8.0.0)</td>
     <td>TiCDC introduces a new protocol, the Debezium protocol. TiCDC can now publish data change events to a Kafka sink using a protocol that generates Debezium style messages.</td>
   </tr>
   <tr>
-    <td>TiCDC adds support for <a href="https://docs.pingcap.com/tidb/v8.1/ticdc-client-authentication.md">client authentication</a> (introduced in v8.1.0) **tw@Oreoxmt**</td>
+    <td>TiCDC supports <a href="https://docs.pingcap.com/tidb/v8.1/ticdc-client-authentication.md">client authentication</a> (introduced in v8.1.0) **tw@Oreoxmt**</td>
     <td>TiCDC supports client authentication using mutual Transport Layer Security (mTLS) or TiDB username and password. This feature enables CLI or OpenAPI clients to authenticate their connections to TiCDC.</td>
   </tr>
 </tbody>
@@ -193,7 +193,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 
     For more information, see [documentation](/tidb-lightning/tidb-lightning-configuration.md).
 
-* TiCDC adds support for client authentication [#10636](https://github.com/pingcap/tiflow/issues/10636) @[CharlesCheung96](https://github.com/CharlesCheung96) **tw@Oreoxmt** <!--1717-->
+* TiCDC supports client authentication [#10636](https://github.com/pingcap/tiflow/issues/10636) @[CharlesCheung96](https://github.com/CharlesCheung96) **tw@Oreoxmt** <!--1717-->
 
     In v8.1.0, TiCDC supports client authentication when using the TiCDC CLI or OpenAPI. This feature enables you to configure TiCDC to require client authentication using client certificates, thereby establishing mutual Transport Layer Security (mTLS). Additionally, you can configure authentication based on TiDB username and password.
 
