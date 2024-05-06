@@ -31,11 +31,11 @@ By contrast, TiDB Lightning requires [separate server deployment](/tidb-lightnin
 
 You can share TiDB nodes with other businesses or use them at different times to fully use the resources. For stable business operations with optimal import performance, you can specify [specific TiDB nodes](/system-variables.md#tidb_service_scope-new-in-v740) to be dedicated solely to `IMPORT INTO` for data import.
 
-When using TiDB Global Sort, there is no need to mount large local disks. TiDB Global Sort can be done using S3. Once completed, you can delete the data to save storage costs.
+When you use TiDB Global Sort, there is no need to mount large local disks. TiDB Global Sort can be done using S3. Once completed, you can delete the data to save storage costs.
 
 #### TiDB Lightning
 
-Separate servers are required to deploy and run TiDB Lightning. When there are no import tasks being executed, these machine resources remain idle. This idle time is even longer in scenarios where import tasks are executed periodically.
+You need separate servers to deploy and run TiDB Lightning. When there are no import tasks being executed, these machine resources remain idle. This idle time is even longer in scenarios where import tasks are executed periodically, resulting in a waste of resources.
 
 If the volume of imported data is large, it is necessary to prepare large local disks to sort the data to be imported.
 
@@ -59,7 +59,7 @@ By contrast, TiDB Lightning requires you to write [task configuration files](/ti
 
 Configuration for TiDB Lightning is complex, inefficient, and prone to errors.
 
-For example, if you start 10 parallel TiDB Lightning imports, you need to write 10 TiDB Lightning configuration files, and configure each configuration file with the range of source files to be read by each TiDB Lightning instance. TiDB Lightning instance 1 reads the first 100 files, instance 2 reads the next 100 files, and so on.
+For example, if you start 10 TiDB Lightning instances to import data in parallel, you need to write 10 TiDB Lightning configuration files, and configure each configuration file with the range of source files to be read by each TiDB Lightning instance. TiDB Lightning instance 1 reads the first 100 files, instance 2 reads the next 100 files, and so on.
 
 In addition, you need to configure the shared metadata table and other configuration information for these 10 TiDB Lightning instances.
 
@@ -67,7 +67,7 @@ In addition, you need to configure the shared metadata table and other configura
 
 #### `IMPORT INTO`
 
-Based on global sort, tens of TiB of source data can be transmitted to multiple TiDB nodes, where the encoded data KV pairs and index KV pairs are transferred to S3 for global sorting before being written to TiKV.
+Based on TiDB Global Sort, tens of TiB of source data can be transmitted to multiple TiDB nodes, where the encoded data KV pairs and index KV pairs are transferred to S3 for global sorting before being written to TiKV.
 
 Because it is globally sorted, data imported from various TiDB nodes into TiKV does not overlap, allowing it to be ingested directly into the RocksDB's L6 layer. This eliminates the need for TiKV to perform compaction operations, resulting in significant improvement in both write performance and stability of TiKV.
 
@@ -103,7 +103,7 @@ After a TiDB node failure, tasks on that node are automatically transferred to t
 
 #### TiDB Lightning
 
-After a TiDB Lightning instance node failure, you need to perform manual recovery of tasks on a new node based on previously recorded checkpoints, allowing for resumption of task execution.
+After a TiDB Lightning instance node failure, you need to perform manual recovery of tasks on a new node based on previously recorded checkpoints.
 
 ### Scalability
 
@@ -121,7 +121,7 @@ Currently, `IMPORT INTO` still lacks some functionalities that cannot replace Ti
 
 - Logical import
 
-    Before importing data with `IMPORT INTO`, the target table must be empty. If you need to import data into a table that already contains data, it is recommended to use methods like `LOAD DATA` or direct insertion. TiDB v8.0 supports batch DML for executing large transactions.
+    Before importing data with `IMPORT INTO`, the target table must be empty. If you need to import data into a table that already contains data, it is recommended to use methods like [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) or direct insertion. TiDB v8.0 supports [bulk DML](/system-variables.md#tidb_dml_type-new-in-v800) for executing large transactions.
 
 - Conflict data handling
 
@@ -135,4 +135,4 @@ In future versions, these functionalities will be supported by `IMPORT INTO`, al
 
 ## Summary
 
-Compared with TiDB Lightning, `IMPORT INTO` has greatly improved  in terms of deployment, resource utilization, task configuration convenience, ease of invocation and integration, automated distributed task scheduling and management, enhanced import stability based on Global Sort, high availability, and scalability. It is recommended that you consider using `IMPORT INTO` instead of TiDB Lightning in appropriate scenarios.
+Compared with TiDB Lightning, `IMPORT INTO` has greatly improved  in terms of deployment, resource utilization, task configuration convenience, ease of invocation and integration, automated distributed task scheduling and management, enhanced import stability based on Global Sort, high availability, and scalability. It is recommended that you use `IMPORT INTO` instead of TiDB Lightning in appropriate scenarios.
