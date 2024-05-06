@@ -68,8 +68,8 @@ The `ADMIN SHOW DDL JOBS` statement is used to view all the results in the curre
     - `create table`: for [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) operations.
     - `create view`: for [`CREATE VIEW`](/sql-statements/sql-statement-create-view.md) operations.
     - `ingest`: ingestion with accelerated index backfilling as configured by [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630).
-    - `txn`: basic transactional backfill.
-    - `add index /* txn-merge */`: transactional backfill with a temporary index that gets merged with the original index when the backfill is finished.
+    - `txn`: basic transactional backfilling.
+    - `add index /* txn-merge */`: transactional backfilling with a temporary index that gets merged with the original index when the backfilling is finished.
 - `SCHEMA_STATE`: the current state of the schema object that the DDL operates on. If `JOB_TYPE` is `ADD INDEX`, it is the state of the index; if `JOB_TYPE` is `ADD COLUMN`, it is the state of the column; if `JOB_TYPE` is `CREATE TABLE`, it is the state of the table. Common states include the following:
     - `none`: indicates that it does not exist. Generally, after the `DROP` operation or after the `CREATE` operation fails and rolls back, it will become the `none` state.
     - `delete only`, `write only`, `delete reorganization`, `write reorganization`: these four states are intermediate states. For their specific meanings, see [How the Online DDL Asynchronous Change Works in TiDB](/ddl-introduction.md#how-the-online-ddl-asynchronous-change-works-in-tidb). As the intermediate state conversion is fast, these states are generally not visible during operation. Only when performing `ADD INDEX` operation can the `write reorganization` state be seen, indicating that index data is being added.
