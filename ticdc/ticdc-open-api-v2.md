@@ -388,13 +388,13 @@ The `sink.csv` parameters are described as follows:
 
 | Parameter name     | Description                                                                                                                                                                |
 |:-------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `output_out_value` | `BOOLEAN` type. Whether to output the value before the row data changes. The default value is `true`. When it is disabled, the UPDATE event does not output the "p" field. |
+| `output_old_value` | `BOOLEAN` type. It controls whether to output the value before the row data changes. The default value is `true`. When it is disabled, the UPDATE event does not output the "p" field. |
 
 `sink.debezium` parameters are described as follows:
 
 | Parameter name     | Description                                                                                                                                                                   |
 |:-------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `output_out_value` | `BOOLEAN` type. Whether to output the value before the row data changes. The default value is true. When it is disabled, the UPDATE event does not output the "before" field. |
+| `output_old_value` | `BOOLEAN` type. It controls whether to output the value before the row data changes. The default value is true. When it is disabled, the UPDATE event does not output the "before" field. |
 
 ### Example
 
