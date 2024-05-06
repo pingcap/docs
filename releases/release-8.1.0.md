@@ -52,8 +52,8 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
   </tr>
   <tr>
     <td rowspan="5">Reliability and availability</td>
-    <td><a href="https://docs.pingcap.com/tidb/v8.1/tidb-global-sort">Global Sort (GA in v8.0.0) </a>**tw@qiancai**</td>
-    <td>The Global Sort feature aims to improve the stability and efficiency of `IMPORT INTO` and `CREATE INDEX`. By globally sorting the data to be processed, this feature improves the stability, controllability, and scalability of data writing to TiKV, consequently enhancing the user experience and service quality of data import and index creation. With global sorting enabled, each `IMPORT INTO` or `CREATE INDEX` statement now supports importing or adding indexes for up to 40 TiB of data.
+    <td><a href="https://docs.pingcap.com/tidb/v8.1/tidb-global-sort">Global Sort</a> (GA in v8.0.0) **tw@qiancai**</td>
+    <td>The Global Sort feature aims to improve the stability and efficiency of <code>IMPORT INTO</code> and <code>CREATE INDEX</code>. By globally sorting the data to be processed, this feature improves the stability, controllability, and scalability of data writing to TiKV, consequently enhancing the user experience and service quality of data import and index creation. With global sorting enabled, each <code>IMPORT INTO</code> or <code>CREATE INDEX</code> statement now supports importing or adding indexes for up to 40 TiB of data.
 </td>
   </tr>
   <tr>
