@@ -9,7 +9,7 @@ Release date: March 29, 2024
 
 TiDB version: 8.0.0
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-tidb) | [Installation packages](https://www.pingcap.com/download/?version=v8.0.0#version-list)
+Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-tidb)
 
 8.0.0 introduces the following key features and improvements:
 
@@ -392,6 +392,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
     - MemoryTracker can track the memory usage of the `IndexLookup` operator [#45901](https://github.com/pingcap/tidb/issues/45901) @[solotzg](https://github.com/solotzg)
     - MemoryTracker can track the memory usage of the `MemTableReaderExec` operator [#51456](https://github.com/pingcap/tidb/issues/51456) @[wshwsh12](https://github.com/wshwsh12)
     - Support loading Regions in batch from PD to speed up the conversion process from the KV range to Regions when querying large tables [#51326](https://github.com/pingcap/tidb/issues/51326) @[SeaRise](https://github.com/SeaRise)
+    - Optimize the query performance of the system tables `INFORMATION_SCHEMA.TABLES`, `INFORMATION_SCHEMA.STATISTICS`, `INFORMATION_SCHEMA.KEY_COLUMN_USAGE`, and `INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS`. Compared with earlier versions, the performance has been improved by up to 100 times. [#50305](https://github.com/pingcap/tidb/issues/50305) @[ywqzzy](https://github.com/ywqzzy)
 
 + TiKV
 
