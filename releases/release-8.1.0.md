@@ -155,7 +155,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 
     The DXF becomes generally available (GA) in v7.5.0, but it is disabled by default. This means that an `ADD INDEX` or `IMPORT INTO` task is executed only by one TiDB node by default.
 
-    Starting from v8.1.0, TiDB enables this feature by default ([`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-introduced-since-v710) defaults to `ON`). When enabled, the distributed execution framework can schedule multiple TiDB nodes to execute the same `ADD INDEX` or `IMPORT INTO` task in parallel, fully utilizing the resources of the TiDB cluster and greatly improving the performance of these tasks. In addition, you can linearly improve the performance of `ADD INDEX` and `IMPORT INTO` tasks by adding TiDB nodes and configuring [`tidb_service_scope`](/system-variables.md#tidb_service_scope-introduced-since-v740) for the newly added nodes.
+    Starting from v8.1.0, TiDB enables this feature by default ([`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) defaults to `ON`). When enabled, the distributed execution framework can schedule multiple TiDB nodes to execute the same `ADD INDEX` or `IMPORT INTO` task in parallel, fully utilizing the resources of the TiDB cluster and greatly improving the performance of these tasks. In addition, you can linearly improve the performance of `ADD INDEX` and `IMPORT INTO` tasks by adding TiDB nodes and configuring [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) for the newly added nodes.
 
     For more information, see [documentation](/tidb-distributed-execution-framework.md).
 
