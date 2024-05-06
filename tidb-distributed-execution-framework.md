@@ -107,7 +107,7 @@ If new nodes are added during task execution, the DXF determines whether to sche
 > **Note:**
 >
 > - For versions from v7.4.0 to v8.0.0, in clusters with multiple TiDB nodes, it is strongly recommended to set `tidb_service_scope` to `background` on two or more TiDB nodes. If this variable is set only on a single TiDB node, when that node restarts or fails, tasks will be rescheduled to TiDB nodes with `tidb_service_scope = ''`, which affects applications running on these TiDB nodes.
-> - During the execution of a distributed task, changes to the `tidb_service_scope` configuration will not take effect for the current task, but will take effect from the next task.
+> - During the execution of a distributed task, changes to the `tidb_service_scope` configuration do not take effect for the current task, but take effect from the next task.
 
 ## Implementation principles
 
