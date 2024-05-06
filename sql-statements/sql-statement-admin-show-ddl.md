@@ -43,7 +43,6 @@ ADMIN SHOW DDL\G;
 ```
 
 ```sql
-mysql> ADMIN SHOW DDL \G
 *************************** 1. row ***************************
    SCHEMA_VER: 26
      OWNER_ID: 2d1982af-fa63-43ad-a3d5-73710683cc63
