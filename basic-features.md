@@ -252,7 +252,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Cross-cluster RawKV replication](/tikv-configuration-file.md#api-version-new-in-v610) | E | E | E | E | N | N | N | N | N |
 | [Green GC](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50) | E | E | E | E | E | E | E | E | E |
 | [Resource control](/tidb-resource-control.md) | Y | Y | Y | N | N | N | N | N | N |
-| [Runaway Queries management](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries) | E | E | N | N | N | N | N | N | N |
+| [Runaway Queries management](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries) | Y | E | N | N | N | N | N | N | N |
 | [Background tasks management](/tidb-resource-control.md#manage-background-tasks) | E | E | N | N | N | N | N | N | N |
 | [TiFlash Disaggregated Storage and Compute Architecture and S3 Support](/tiflash/tiflash-disaggregated-and-s3.md) | Y | Y | E | N | N | N | N | N | N |
 | [Selecting TiDB nodes for the Distributed eXecution Framework (DXF) tasks](/system-variables.md#tidb_service_scope-new-in-v740) | Y | Y | N | N | N | N | N | N | N |
