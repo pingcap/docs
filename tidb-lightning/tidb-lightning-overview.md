@@ -22,7 +22,7 @@ TiDB Lightning can read data from the following sources:
 
 > **Note:**
 >
-> Compared with TiDB Lightning, [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) has greatly improved in terms of deployment, resource utilization, task configuration convenience, ease of invocation and integration, automated distributed task scheduling and management, enhanced import stability based on Global Sort, high availability, and scalability. It is recommended that you consider using `IMPORT INTO` instead of TiDB Lightning in appropriate scenarios.
+> Compared with TiDB Lightning, [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) has greatly improved in terms of deployment, resource utilization, task configuration convenience, ease of invocation and integration, automated distributed task scheduling and management, enhanced import stability based on [TiDB Global Sort](/tidb-global-sort.md), high availability, and scalability. It is recommended that you consider using `IMPORT INTO` instead of TiDB Lightning in appropriate scenarios.
 
 ## TiDB Lightning architecture
 
