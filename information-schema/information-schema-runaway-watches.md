@@ -41,7 +41,7 @@ DESC RUNAWAY_WATCHES;
 Query the watch list of runaway queries:
 
 ```sql
-SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES;
+SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES\G
 ```
 
 The output is as follows:
@@ -77,7 +77,7 @@ QUERY WATCH ADD RESOURCE GROUP rg1 SQL TEXT EXACT TO 'select * from sbtest.sbtes
 Query the watch list of runaway queries again:
 
 ```sql
-SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES\G;
+SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES\G
 ```
 
 The output is as follows:
