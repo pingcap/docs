@@ -1621,7 +1621,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - This variable is used to control whether to enable the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md). After the framework is enabled, the DXF tasks such as DDL and import will be distributedly executed and completed by multiple TiDB nodes in the cluster.
 - Starting from TiDB v7.1.0, the DXF supports distributedly executing the [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) statement for partitioned tables.
 - Starting from TiDB v7.2.0, the DXF supports distributedly executing the [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) statement for import jobs.
-- Starting from TiDB v8.1.0, this variable is enabled by default. If your cluster was upgraded from an earlier version, the variable retains its value before the upgrade.
+- Starting from TiDB v8.1.0, this variable is enabled by default. If you want to upgrade a cluster with the DXF enabled to v8.1.0 or later, disable the DXF (by setting `tidb_enable_dist_task` to `OFF`) before the upgrade, which avoids `ADD INDEX` operations during the upgrade causing data index inconsistency. After the upgrade, you can manually enable the DXF.
 - This variable is renamed from `tidb_ddl_distribute_reorg`.
 
 ### tidb_cloud_storage_uri <span class="version-mark">New in v7.4.0</span>
