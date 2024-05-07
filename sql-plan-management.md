@@ -255,7 +255,7 @@ To use this binding method, you need to first get the `plan_digest` correspondin
     ```sql
     CREATE TABLE t(id INT PRIMARY KEY , a INT, KEY(a));
     SELECT /*+ IGNORE_INDEX(t, a) */ * FROM t WHERE a = 1;
-    SELECT * FROM INFORMATION_SCHEMA.STATEMENTS_SUMMARY WHERE QUERY_SAMPLE_TEXT = 'SELECT /*+ IGNORE_INDEX(t, a) */ * FROM t WHERE a = 1'\G;
+    SELECT * FROM INFORMATION_SCHEMA.STATEMENTS_SUMMARY WHERE QUERY_SAMPLE_TEXT = 'SELECT /*+ IGNORE_INDEX(t, a) */ * FROM t WHERE a = 1'\G
     ```
 
     The following is a part of the example query result of `statements_summary`:
@@ -284,7 +284,7 @@ To use this binding method, you need to first get the `plan_digest` correspondin
 To verify whether the created binding takes effect, you can [view bindings](#view-bindings):
 
 ```sql
-SHOW BINDINGS\G;
+SHOW BINDINGS\G
 ```
 
 ```
