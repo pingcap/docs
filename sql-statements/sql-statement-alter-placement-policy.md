@@ -67,7 +67,7 @@ AdvancedPlacementOption ::=
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
 CREATE TABLE t1 (i INT) PLACEMENT POLICY=p1; -- Assign policy p1 to table t1
 ALTER PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1,us-west-2" FOLLOWERS=4; -- The rules of t1 will be updated automatically.
-SHOW CREATE PLACEMENT POLICY p1\G;
+SHOW CREATE PLACEMENT POLICY p1\G
 ```
 
 ```
