@@ -218,7 +218,7 @@ In addition, TiDB provides three tables to obtain more information about TTL job
              table_id: 85
       parent_table_id: 85
          table_schema: test_schema
-          t able_name: TestTable
+          table_name: TestTable
        partition_name: NULL
           create_time: 2023-02-15 17:43:46
           finish_time: 2023-02-15 17:45:46
