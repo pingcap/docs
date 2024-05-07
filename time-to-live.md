@@ -211,9 +211,15 @@ In addition, TiDB provides three tables to obtain more information about TTL job
               job_id: f221620c-ab84-4a28-9d24-b47ca2b5a301
             table_id: 85
       parent_table_id: 85
+<<<<<<< HEAD
         table_schema: test_schema
           table_name: TestTable
       partition_name: NULL
+=======
+         table_schema: test_schema
+           table_name: TestTable
+       partition_name: NULL
+>>>>>>> 3c8b5d2b3d (Fix typo (#17422))
           create_time: 2023-02-15 17:43:46
           finish_time: 2023-02-15 17:45:46
           ttl_expire: 2023-02-15 16:43:46
