@@ -14,6 +14,10 @@ The `IMPORT INTO` statement lets you import data to TiDB via the [Physical Impor
 >
 > Currently, `IMPORT INTO ... FROM SELECT` is experimental. It is not recommended that you use it in production environments. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
+> **Note:**
+>
+> Compared with [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md), `IMPORT INTO` has greatly improved in terms of deployment, resource utilization, task configuration convenience, ease of invocation and integration, automated distributed task scheduling and management, enhanced import stability based on [TiDB Global Sort](/tidb-global-sort.md), high availability, and scalability. It is recommended that you consider using `IMPORT INTO` instead of TiDB Lightning in appropriate scenarios.
+
 ## Restrictions
 
 - `IMPORT INTO` only supports importing data into existing empty tables in the database.
