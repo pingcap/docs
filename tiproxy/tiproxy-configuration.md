@@ -84,12 +84,6 @@ Configuration for SQL port.
 + Possible values: ``, `v2`
 + Enable the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) on the port. By enabling the PROXY protocol, TiProxy can pass the real client IP address to TiDB. `v2` indicates using the PROXY protocol version 2, and `` indicates disabling the PROXY protocol. If the PROXY protocol is enabled on TiProxy, you need to also enable the [PROXY protocol](/tidb-configuration-file.md#proxy-protocol) on the TiDB server.
 
-#### `require-backend-tls`
-
-+ Default value: `true`
-+ Support hot-reload: yes, but only for new connections
-+ Require TLS between TiProxy and TiDB servers. If the TiDB server doesn't support TLS, clients will report an error when connecting to TiProxy.
-
 ### api
 
 Configurations for HTTP gateway.
@@ -193,6 +187,12 @@ For server TLS object:
 #### `cluster-tls`
 
 A client TLS object. It is used to access TiDB or PD.
+
+#### `require-backend-tls`
+
++ Default value: `false`
++ Support hot-reload: yes, but only for new connections
++ Require TLS between TiProxy and TiDB servers. If the TiDB server does not support TLS, clients will report an error when connecting to TiProxy.
 
 #### `sql-tls`
 
