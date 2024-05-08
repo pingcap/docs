@@ -60,7 +60,7 @@ tiup br backup full --pd "${PD_IP}:2379" \
 To restore the cluster to any point in time within the backup retention period, you can use `tiup br restore point`. When you run this command, you need to specify the **time point you want to restore**, **the latest snapshot backup data before the time point**, and the **log backup data**. BR will automatically determine and read data needed for the restore, and then restore these data to the specified cluster in order.
 
 ```shell
-br restore point --pd "${PD_IP}:2379" \
+tiup br restore point --pd "${PD_IP}:2379" \
 --storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}' \
 --full-backup-storage='s3://backup-101/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}' \
 --restored-ts '2022-05-15 18:00:00+0800'

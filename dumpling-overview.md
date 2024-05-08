@@ -87,7 +87,7 @@ Dumpling exports data to SQL files by default. You can also export data to SQL f
 {{< copyable "shell-regular" >}}
 
 ```shell
-dumpling -u root -P 4000 -h 127.0.0.1 --filetype sql -t 8 -o /tmp/test -r 200000 -F 256MiB
+tiup dumpling -u root -P 4000 -h 127.0.0.1 --filetype sql -t 8 -o /tmp/test -r 200000 -F 256MiB
 ```
 
 In the command above:

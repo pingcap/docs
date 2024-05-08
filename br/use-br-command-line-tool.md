@@ -20,7 +20,7 @@ tiup br backup full --pd "${PD_IP}:2379" \
 
 Explanations for the preceding command are as follows:
 
-* `backup`: the sub-command of `br`.
+* `backup`: the sub-command of `tiup br`.
 * `full`: the sub-command of `tiup br backup`.
 * `-s` (or `--storage`): the option that specifies the path where the backup files are stored. `"s3://backup-data/snapshot-202209081330/"` is the parameter of `-s`.
 * `--pd`: the option that specifies the PD service address. `"${PD_IP}:2379"` is the parameter of `--pd`.

@@ -217,7 +217,7 @@ The impact of backup on cluster performance can be reduced by limiting the backu
 - BR provides a coarse-grained Region scattering algorithm to accelerate Region restore in large-scale Region scenarios. The algorithm is controlled by the command-line parameter `--granularity="coarse-grained"` and is enabled by default. This algorithm ensures that each TiKV node receives stable and evenly distributed download tasks, thus fully utilizing the resources of each TiKV node and achieving a rapid parallel recovery. In several real-world cases, the snapshot restore speed of the cluster is improved by about 3 times in large-scale Region scenarios. The following is an example:
 
     ```bash
-    br restore full \
+    tiup br restore full \
     --pd "${PDIP}:2379" \
     --storage "s3://${Bucket}/${Folder}" \
     --s3.region "${region}" \
