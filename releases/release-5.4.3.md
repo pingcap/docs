@@ -1,5 +1,6 @@
 ---
 title: TiDB 5.4.3 Release Notes
+summary: TiDB 5.4.3 was released on October 13, 2022. The release includes various improvements and bug fixes for TiKV, Tools, TiCDC, TiFlash, PD, and other tools. Improvements include support for configuring RocksDB write stall settings, optimizing Scatter Region to batch mode, and reducing performance overhead in multi-Region scenarios. Bug fixes address issues such as incorrect output of `SHOW CREATE PLACEMENT POLICY`, DDL statements getting stuck after PD node replacement, and various issues causing incorrect results and errors in TiDB, TiKV, PD, TiFlash, and other tools. The release also provides workarounds and affected versions for specific issues.
 ---
 
 # TiDB 5.4.3 Release Notes

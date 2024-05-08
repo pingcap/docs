@@ -144,7 +144,7 @@ In the  preceding command and result:
     - `checkpoint-ts`: The largest transaction `TS` in the current `changefeed`. Note that this `TS` has been successfully written to the downstream.
     - `admin-job-type`: The status of a changefeed:
         - `0`: The state is normal.
-        - `1`: The task is paused. When the task is paused, all replicated `processor`s exit. The configuration and the replication status of the task are retained, so you can resume the task from `checkpiont-ts`.
+        - `1`: The task is paused. When the task is paused, all replicated `processor`s exit. The configuration and the replication status of the task are retained, so you can resume the task from `checkpoint-ts`.
         - `2`: The task is resumed. The replication task resumes from `checkpoint-ts`.
         - `3`: The task is removed. When the task is removed, all replicated `processor`s are ended, and the configuration information of the replication task is cleared up. Only the replication status is retained for later queries.
 - `task-status` indicates the state of each replication sub-task in the queried changefeed.

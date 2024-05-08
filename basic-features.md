@@ -258,7 +258,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Selecting TiDB nodes for the Distributed eXecution Framework (DXF) tasks](/system-variables.md#tidb_service_scope-new-in-v740) | Y | Y | Y | N | N | N | N | N | N | N | N | N |
 | PD Follower Proxy (controlled by [`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530)) | Y | Y | Y | Y | Y | Y | Y | Y | N | N | N | N |
 | [Active PD Follower](/tune-region-performance.md#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service) (controlled by [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)) | E | E | N | N | N | N | N | N | N | N | N | N |
-| [PD microservices](/pd-microservices.md) | Y | N | N | N | N | N | N | N | N | N | N | N |
+| [PD microservices](/pd-microservices.md) | E | N | N | N | N | N | N | N | N | N | N | N |
 | [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md) | Y | Y | Y | E | N | N | N | N | N | N | N | N |
 | [Global Sort](/tidb-global-sort.md) | Y | E | E | N | N | N | N | N | N | N | N | N |
 
