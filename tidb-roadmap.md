@@ -28,76 +28,75 @@ In the course of development, this roadmap is subject to change based on user ne
       <td>
         <ul>
            <li>
-             <b>TiKV In-Memory Cache </b><br />
-            TiKV maintains the recent copies of hot rows to reduce repeated MVCC scans. 
+             <b>TiKV in-memory data cache</b><br />
+            TiKV maintains recent versions of data in memory to reduce redundant MVCC scans, thus improving performance.
           </li>
           <br />
           <li>
-             <b>Global Indexing on partitioned tables</b><br />
+             <b>Global indexing for partitioned tables</b><br />
           </li>
           <br />
           <li>
-             <b>Adaptive concurrency for stats collections</b><br />
-            TiDB decides the degree of parallelism  based on the deployment and hardware specifications, that increases the performance with default options.
+             <b>Adaptive concurrency for statistics collection</b><br />
+            TiDB automatically adjusts the parallelism and scan concurrency of statistics collection tasks based on the number of deployed nodes and hardware specifications, improving collection speed.
           </li>
           <br />
           <li>
-             <b>Rapid Database Restoration</b><br />
-            Accelerate the processing of full restore and PiTR.
+             <b>Rapid database recovery</b><br />
+            Reduce the time required for full database recovery and point-in-time recovery (PITR).
           </li>
           <br />
           <li>
-             <b>Unlimited Size of Transactions</b><br />
-            The size of transactions no longer rely on the available memory in TiDB instances, that reduces the chance of transaction failure.
+             <b>Unlimited-size transactions</b><br />
+            The volume of data processed by uncommitted transactions is no longer limited by the available memory of TiDB nodes, thus improving the success rate of transactions and batch tasks.
           </li>
           <br />
           <li>
-             <b>Load-based Rebalance in TiProxy</b><br />
-            TiProxy decides the target instances based on the recent load of each TiDB instance, in order to make full use of resources.
+             <b>Load-based traffic routing by TiProxy</b><br />
+            TiProxy forwards traffic based on the load status of the target TiDB, maximizing hardware resource utilization.
           </li>
         </ul>
       </td>
       <td>
         <ul>
           <li>
-            <b>PD microservice - heartbeat</b><br />
-            Heartbeat services in PD can be deployed independently. It reduces the chance that PD becomes the bottleneck of the cluster.
+            <b>Microservice for PD heartbeat</b><br />
+            Heartbeat services in PD can be independently deployed and scaled, preventing PD from becoming a bottleneck for the cluster's resources.
           </li>
           <br />
           <li>
-            <b>Less I/O made by stats collections</b><br />
-            TiKV makes partial scanning and returns only necessary data sets when stats collection decides to sample the tables, which reduces the time and resource spent.
+            <b>Less I/O consumption during statistics collection</b><br />
+            Users can choose to scan only a portion of the data samples on TiKV during statistics collection, reducing time and resource consumption.
           </li>
           <br />
           <li>
-            <b>Less limitations for pushing Limit to TiKV</b><br />
+            <b>Less limitations for pushing down Limit operator to TiKV</b><br />
           </li>
           <br />
           <li>
-            <b>Cascades Optimizer </b><br />
-            A sophisticated framework that extends the capabilities of optimizer.
+            <b>Cascades optimizer framework</b><br />
+            Introduce a more mature and powerful optimizer framework to expand the capabilities of the current optimizer.
           </li>
           <br />
           <li>
-            <b>Single DM task reaches 150 MiB/s for full data migration</b><br />
+            <b>Single DM task reaches 150 MiB/s during full data migration</b><br />
           </li>
           <br />
           <li>
-            <b>Enhanced  DDL framework</b><br />
-            Providing scalable and parallel DDL task execution capability, enhancing scalability and performance.
+            <b>Enhanced DDL execution framework</b><br />
+            Provide a scalable parallel DDL execution framework to improve the performance and stability of DDL operations.
           </li>
         </ul>
       </td>
       <td>
         <ul>
           <li>
-            <b>Load-based table rebalance</b><br />
-            PD measures the load of each table and decides the rebalance.
+            <b>Table-level load balancing</b><br />
+            PD determines data scheduling strategies based on the load situation of each Region on every table.
           </li>
-          <br />
           <li>
-            <b>Dealing with massive records in system tables</b><br />
-            Boost the performance of querying system tables with massive records.
+            <b>Improve performance of handling system tables with large data volumes</b><br />
+            Enhance the performance of querying large data volumes in system tables to reduce query overhead.
           </li>
         </ul>
       </td>
@@ -110,71 +109,72 @@ In the course of development, this roadmap is subject to change based on user ne
       <td>
         <ul>
           <li>
-            <b>Limited memory for backup tasks</b><br />
+            <b>Limited memory consumption for backup tasks</b><br />
           </li>
           <br />
           <li>
-            <b>Limited memory for stats collections</b><br />
+            <b>Limited memory consumption for statistics collection</b><br />
           </li>
           <br />
           <li>
-            <b>Managing massive SQL bindings</b><br />
-              Improve the user experience of importing and managing a large number of SQL bindings. 
+            <b>Manage massive SQL bindings</b><br />
+              Improve the user experience of SQL binding, making it convenient for users to create and manage a large number of execution plans to stabilize database performance.
           </li>
           <br />
           <li>
-            <b>Charging RU intermittently for an expensive SQL</b><br />
-              Measure the RU produced before one large query completes, which mitigates the impacted by expensives SQL in resource groups.
+            <b>Enhance resource group control over complex SQL</b><br />
+              Regularly assess the Request Unit (RU) consumption of complex SQL before completion of execution to prevent excessively large impacts on the entire system during execution.
           </li>
           <br />
           <li>
-            <b>Switching resource groups of runaway queries</b><br />
-              When a query is identified as runaway queries, users can put it to a particular resource group, in order to limit its resource. 
+            <b>Automatically switch resource groups for runaway queries</b><br />
+              When a query is identified as a runaway query, users can choose to adjust it to a specific resource group and set an upper limit on resource consumption.
           </li>
         </ul>
       </td>
       <td>
         <ul>
           <li>
-            <b>Limited memory for schema meta</b><br />
+            <b>Limited memory consumption of schema metadata</b><br />
+            Enhance the stability of large-scale clusters.
           </li>
           <br />
           <li>
             <b>Distributed statistic collection</b><br />
-            Collecting statistics in parallel across multiple TiDB instances.
+            Statistics collection supports parallel execution across multiple TiDB nodes to improve collection efficiency.
           </li>
           <br />
           <li>
-            <b>Multi-versioned statistics</b><br />
-            When the statistics are updated, users can manage to review the past copies or rollback.
+            <b>Multi-version statistics</b><br />
+            After the statistics information is updated, users can view the historical versions and choose to restore them to a previous version.
           </li>
           <br />
           <li>
-            <b>Reliable backup </b><br />
-            Reduce the chance of OOM and secure the availability of backups.
+            <b>Reliable data backup</b><br />
+            Reduce potential issues like insufficient memory during data backup and ensure the availability of backup data.
           </li>
           <br />
           <li>
-            <b>The popular operators spill to disk</b><br />
-            To minimize the change of OOM. The target operators: HashAgg / Sort / TopN / HashJoin / WindowFunction / IndexJoin / IndexHashJoin
+            <b>Common operators support spilling to disk</b><br />
+            Common operators like HashAgg, Sort, TopN, HashJoin, WindowFunction, IndexJoin, and IndexHashJoin support spilling to disk, reducing the risk of out-of-memory (OOM).
           </li>
         </ul>
       </td>
       <td>
         <ul>
           <li>
-            <b>Adaptive Resource Group</b><br />
-            TiDB automatically decides reasonable RU for resource groups according to past metrics.
+            <b>Adaptive resource group</b><br />
+            Resource groups automatically adjust their reservation unit (RU) settings based on past execution patterns.
           </li>
           <br />
           <li>
-            <b>Enforced memory assurance</b><br />
-            TiDB actively manages memory usage across all modules, and prevents excessive memory that  potentially causes system instability. 
+            <b>Enhanced memory protection</b><br />
+            TiDB actively monitors the memory usage of all modules and prevents memory operations that might impact system stability.
           </li>
           <br />
           <li>
-            <b>Plan cache at instance level</b><br />
-            All sessions from the same TiDB instance share plan cache.
+            <b>Instance-level execution plan cache</b><br />
+            All sessions within the same TiDB instance can share the execution plan cache, improving memory utilization.
           </li>
         </ul>
       </td>
@@ -187,21 +187,21 @@ In the course of development, this roadmap is subject to change based on user ne
       <td>
         <ul>
            <li>
-            <b>Guaranteed query termination</b><br />
-            The running statements can be killed instantly with resources released from TiDB and TiKV.
+            <b>Reliable query termination</b><br />
+            Running SQL statements can be immediately terminated, and the corresponding resources are released from TiDB and TiKV.
           </li>
           <br />
           <li>
-            <b>Enforced permission on switching groups</b>
-            <br />Switching resource groups needs privileges to be granted.
+            <b>Permission control for switching resource groups</b>
+            <br />Only users granted specific permissions can switch their resource groups, preventing resource abuse.
           </li>
           <br />
           <li>
-            <b>Mapping tables / SQL with hot regions</b>
+            <b>Mapping tables or SQL with hot Regions</b>
           </li>
           <br />
           <li>
-            <b>Logical data import mode with "IMPORT INTO"</b>
+            <b>Logical data import mode with <code>IMPORT INTO</code></b>
           </li>
           <br />
         </ul>
@@ -209,49 +209,49 @@ In the course of development, this roadmap is subject to change based on user ne
       <td>
         <ul>
           <li>
-            <b>Customized preference for stats collections</b>
-            <br />Users are able to set certain options such as staleness ratio at table level.
+            <b>Fine-grained customization of statistics collection</b>
+            <br />Users can modify the statistics collection strategy for specific tables, such as healthiness and parallelism levels.
           </li>
           <br />
           <li>
             <b>Workload Repository</b>
-            <br />TiDB manages to persist volatile tables which include both cumulative metrics and active metrics. This helps greatly during troubleshooting.
+            <br />TiDB persists load information in memory, including cumulative and real-time statistics data, which aids in troubleshooting and analysis.
           </li>
           <br />
           <li>
             <b>Automatic index advisor</b>
-            <br />TiDB finds candidate queries and recommend new indexes or unused indexes to users. 
+            <br />TiDB automatically analyzes SQL statements that can be optimized and recommends creating or dropping indexes.
           </li>
           <br />
           <li>
-            <b>The columns can be altered on partitioned tables</b>
-            <br />Users are able to alter the column type no matter if it's partitioning key or not.
+            <b>Support modifying column types in partitioned tables</b>
+            <br />Users can modify the data type of columns in partitioned tables, regardless of whether the column is a partitioning key.
           </li>
           <br />
           <li>
-            <b>Confliction Strategy for IMPORT INTO</b>
-            <br />Users set the strategy for the conficition found during data ingestion, such "error", "ignore" and "replace".
+            <b>Conflict strategy for <code>IMPORT INTO</code></b>
+            <br />Users can set the conflict resolution strategy when importing data, such as exiting with an error, ignoring, or replacing in case of conflicts.
           </li>
           <br />
           <li>
-            <b>End-to-End Observation</b>
-            <br />Introduce a way to breakdown the duration produced by one SQL statement during its lifetime, including the time spent in TiDB, PD, TiKV and TiFlash.
+            <b>End-to-End monitoring</b>
+            <br />Track the time consumption of individual SQL statements throughout their entire lifecycle, including TiDB, TiKV, PD, and TiFlash components.
           </li>
         </ul>
       </td>
       <td>
         <ul>
           <li>
-            <b>Workload Analysis</b>
-            <br />Mine Workload Repository and make necessary recommendations, such SQL tuning, Stats collections, etc.
+            <b>Workload analysis</b>
+            <br />Analyze historical workload data from the Workload Repository and provide optimization recommendations, such as SQL tuning and adjustments to statistics collection strategies.
           </li>
           <br />
           <li>
-            <b>Revisable Primary Key </b>
+            <b>Revisable primary key</b>
           </li>
           <br />
           <li>
-            <b>Export Data as SQL statements</b>
+            <b>Export data as SQL statements</b>
           </li>
           <br />
         </ul>
@@ -265,23 +265,23 @@ In the course of development, this roadmap is subject to change based on user ne
       <td>
         <ul>
           <li>
-            <b>GCP KMS</b>
-            <br />Encryption at rest supports GCP KMS key management.
+            <b>Google Cloud KMS</b>
+            <br />Enhance the key management mechanism for static encryption based on Google Cloud KMS, making it generally available.
           </li>
           <br />
           <li>
-            <b>Dynamic privilege design</b>
-            <br />Improve the dynamic privilege design and restrict the use of "Super".
+            <b>Improved dynamic privilege</b>
+            <br />Improve the dynamic privilege design and limit the implementation of Super privilege.
           </li>
           <br />
           <li>
             <b>Marker-based log desensitization</b>
-            <br />Supports the ability to optionally desensitize cluster logs based on usage scenarios.
+            <br />Support marking sensitive information in the cluster log, and then you can determine whether to desensitize it according to the usage scenario.
           </li>
           <br />
           <li>
             <b>FIPS</b>
-            <br />Encryption scenarios comply with FIPS standards.
+            <br />Encryption scenarios comply with FIPS.
           </li>
         </ul>
       </td>
@@ -294,7 +294,7 @@ In the course of development, this roadmap is subject to change based on user ne
           <br />
           <li>
             <b>Kerberos</b>
-            <br />Supports Kerberos-based authentication.
+            <br />Support Kerberos-based authentication.
           </li>
           <li>
             <b>MFA</b>
@@ -306,17 +306,17 @@ In the course of development, this roadmap is subject to change based on user ne
         <ul>
           <li>
             <b>Label-based access control</b>
-            <br />Access permissions granted by configured labels.
+            <br />Support data access control by configuring labels.
           </li>
           <br />
           <li>
             <b>Enhanced client-side encryption</b>
-            <br />Supports client-side encryption of key fields to enhance data security.
+            <br />Support client-side encryption of key fields to enhance data security.
           </li>
           <br />
           <li>
             <b>Dynamic desensitization of business data</b>
-            <br />Data desensitization based on different data application scenarios to protect the data security of important fields.
+            <br />Data desensitization based on different data application scenarios to ensure data security in important fields.
           </li>
         </ul>
       </td>
@@ -324,4 +324,6 @@ In the course of development, this roadmap is subject to change based on user ne
   </tbody>
 </table>
 
-These are non-exhaustive plans and are subject to change. Features might differ per service subscriptions.
+> **Note:**
+>
+> These are non-exhaustive plans and are subject to change. Features might differ per service subscriptions.
