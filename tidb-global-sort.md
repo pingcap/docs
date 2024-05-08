@@ -37,7 +37,7 @@ Currently, the Global Sort feature is not used as a component of the query execu
 
 To enable Global Sort, follow these steps:
 
-1. Enable the DXF by setting the value of [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) to `ON` (this variable is enabled by default starting from v8.1.0, so you can skip this step if your cluster is newly created):
+1. Enable the DXF by setting the value of [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) to `ON`. Starting from v8.1.0, this variable is enabled by default. For newly created clusters of v8.1.0 or later versions, you can skip this step.
 
     ```sql
     SET GLOBAL tidb_enable_dist_task = ON;
