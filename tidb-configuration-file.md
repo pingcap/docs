@@ -207,6 +207,8 @@ The TiDB configuration file supports more options than command-line parameters. 
 > When using a platform that uses SystemD the default stop timeout is 90 seconds. Setting [`TimeoutStopSec=`](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html#TimeoutStopSec=) can be used when you need a longer timeout.
 >
 > When using TiUP Cluster the default for [`--wait-timeout`](/tiup/tiup-component-cluster#--wait-timeout) is 120 seconds.
+>
+> When using Kubernetes the default [`terminationGracePeriodSeconds`](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#lifecycle) is 30 seconds.
 
 ### `enable-global-kill` <span class="version-mark">New in v6.1.0</span>
 
