@@ -97,8 +97,8 @@ The description of each metric in the **Events** panel is as follows:
 - Entry sorter sort duration percentile: The time (P95, P99, and P999) spent by TiCDC sorting events within one second
 - Entry sorter merge duration: The histogram of the time spent by TiCDC nodes merging sorted events
 - Entry sorter merge duration percentile: The time (P95, P99, and P999) spent by TiCDC merging sorted events within one second
-- Mounter unmarshal duration: The histogram of the time spent by TiCDC nodes unmarshaling events
-- Mounter unmarshal duration percentile: The time (P95, P99, and P999) spent by TiCDC unmarshaling events within one second
+- Mounter unmarshal duration: The histogram of the time spent by TiCDC nodes unmarshalling events
+- Mounter unmarshal duration percentile: The time (P95, P99, and P999) spent by TiCDC unmarshalling events within one second
 - KV client dispatch events/s: The number of events that the KV client module dispatches among the TiCDC nodes
 - KV client batch resolved size: The batch size of resolved timestamp messages that TiKV sends to TiCDC
 

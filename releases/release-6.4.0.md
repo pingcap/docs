@@ -1,5 +1,6 @@
 ---
 title: TiDB 6.4.0 Release Notes
+summary: TiDB 6.4.0-DMR introduces new features and improvements, including support for restoring a cluster to a specific point in time, compatibility with Linear Hash partitioning syntax, and a high-performance `AUTO_INCREMENT` mode. It also enhances fault recovery, memory usage control, and statistics collection. TiFlash now supports the SM4 algorithm for encryption at rest, and TiCDC supports replicating data to Kafka. The release also includes bug fixes and improvements across various tools and components.
 ---
 
 # TiDB 6.4.0 Release Notes
@@ -168,7 +169,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
 * Be compatible with the Linear Hash partitioning syntax [#38450](https://github.com/pingcap/tidb/issues/38450) @[mjonss](https://github.com/mjonss)
 
-    In the earlier version, TiDB has supported the Hash, Range, and List partitioning. Starting from v6.4.0, TiDB can also be compatible with the syntaxt of [MySQL Linear Hash partitioning](https://dev.mysql.com/doc/refman/5.7/en/partitioning-linear-hash.html).
+    In the earlier version, TiDB has supported the Hash, Range, and List partitioning. Starting from v6.4.0, TiDB can also be compatible with the syntax of [MySQL Linear Hash partitioning](https://dev.mysql.com/doc/refman/5.7/en/partitioning-linear-hash.html).
 
     In TiDB, you can execute the existing DDL statements of your MySQL Linear Hash partitions directly, and TiDB will create the corresponding Hash partition tables (note that there is no Linear Hash partition inside TiDB). You can also execute the existing DML statements of your MySQL Linear Hash partitions directly, and TiDB will return the query result of the corresponding TiDB Hash partitions normally. This feature ensures the TiDB syntax compatibility with MySQL Linear Hash partitions and facilitates seamless migration from MySQL-based applications to TiDB.
 
@@ -340,7 +341,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     - Add a new configuration item `apply-yield-write-size` to control the maximum number of bytes that the Apply thread can write for one Finite-state Machine in one round of poll, and relieve Raftstore congestion when the Apply thread writes a large volume of data [#13313](https://github.com/tikv/tikv/issues/13313) @[glorv](https://github.com/glorv)
     - Warm up the entry cache before migrating the leader of Region to avoid QPS jitter during the leader transfer process [#13060](https://github.com/tikv/tikv/issues/13060) @[cosven](https://github.com/cosven)
-    - Support pushing down the `json_constains` operator to Coprocessor [#13592](https://github.com/tikv/tikv/issues/13592) @[lizhenhuan](https://github.com/lizhenhuan)
+    - Support pushing down the `json_constrains` operator to Coprocessor [#13592](https://github.com/tikv/tikv/issues/13592) @[lizhenhuan](https://github.com/lizhenhuan)
     - Add the asynchronous function for `CausalTsProvider` to improve the flush performance in some scenarios [#13428](https://github.com/tikv/tikv/issues/13428) @[zeminzhou](https://github.com/zeminzhou)
 
 + PD

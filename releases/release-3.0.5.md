@@ -1,6 +1,7 @@
 ---
 title: TiDB 3.0.5 Release Notes
 aliases: ['/docs/dev/releases/release-3.0.5/','/docs/dev/releases/3.0.5/']
+summary: TiDB 3.0.5 was released on October 25, 2019, with various improvements and bug fixes. The release includes enhancements to the SQL optimizer, SQL execution engine, server, DDL, monitor, TiKV, PD, TiDB Binlog, TiDB Lightning, and TiDB Ansible. Improvements include support for boundary checking on Window Functions, fixing issues with index join and outer join, and adding monitoring metrics for various operations. Additionally, TiKV received storage and performance optimizations, while PD saw improvements in storage precision and HTTP request handling. TiDB Ansible also received updates to monitoring metrics and configuration file simplification.
 ---
 
 # TiDB 3.0.5 Release Notes

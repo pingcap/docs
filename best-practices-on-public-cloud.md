@@ -180,7 +180,7 @@ To reduce the number of Regions and alleviate the heartbeat overhead on the syst
 
 ## After tuning
 
-After the tunning, the following effects can be observed:
+After the tuning, the following effects can be observed:
 
 - The TSO requests per second are decreased to 64,800.
 - The CPU utilization is significantly reduced from approximately 4,600% to 1,400%.

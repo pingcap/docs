@@ -42,7 +42,7 @@ This section lists the flags of the client program `tiproxyctl`.
 ### `--curls`
 
 + Specifies the server addresses. You can add multiple listening addresses.
-+ Type: `comma seperated lists of ip:port`
++ Type: `comma separated lists of ip:port`
 + Default: `localhost:3080`
 + Server API gateway addresses.
 
