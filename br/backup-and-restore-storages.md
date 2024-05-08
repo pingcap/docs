@@ -128,7 +128,7 @@ It is recommended that you configure access to S3 using either of the following 
     Associate an IAM role that can access S3 with EC2 instances where the TiKV and BR nodes run. After the association, BR can directly access the backup directories in S3 without additional settings.
 
     ```shell
-    br backup full --pd "${PD_IP}:2379" \
+    tiup br backup full --pd "${PD_IP}:2379" \
     --storage "s3://${host}/${path}"
     ```
 

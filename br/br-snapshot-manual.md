@@ -29,10 +29,10 @@ For more information about snapshot backup and restore, refer to:
 
 ## Back up cluster snapshots
 
-You can back up the latest or specified snapshot of the TiDB cluster using the `br backup full` command. For more information about the command, run the `br backup full --help` command.
+You can back up the latest or specified snapshot of the TiDB cluster using the `tiup br backup full` command. For more information about the command, run the `tiup br backup full --help` command.
 
 ```shell
-br backup full \
+tiup br backup full \
     --pd "${PD_IP}:2379" \
     --backupts '2022-09-08 13:30:00' \
     --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
@@ -42,7 +42,7 @@ br backup full \
 
 In the preceding command:
 
-- `--backupts`: The time point of the snapshot. The format can be [TSO](/glossary.md#tso) or timestamp, such as `400036290571534337` or `2018-05-11 01:42:23`. If the data of this snapshot is garbage collected, the `br backup` command returns an error and 'br' exits. If you leave this parameter unspecified, `br` picks the snapshot corresponding to the backup start time.
+- `--backupts`: The time point of the snapshot. The format can be [TSO](/glossary.md#tso) or timestamp, such as `400036290571534337` or `2018-05-11 01:42:23`. If the data of this snapshot is garbage collected, the `tiup br backup` command returns an error and 'br' exits. If you leave this parameter unspecified, `br` picks the snapshot corresponding to the backup start time.
 - `--ratelimit`: The maximum speed **per TiKV** performing backup tasks. The unit is in MiB/s.
 - `--log-file`: The target file where `br` log is written.
 
@@ -62,12 +62,12 @@ Backup & Restore (BR) supports backing up partial data of a specified database o
 
 ### Back up a database
 
-To back up a database in a cluster, run the `br backup db` command.
+To back up a database in a cluster, run the `tiup br backup db` command.
 
 The following example backs up the `test` database to Amazon S3:
 
 ```shell
-br backup db \
+tiup br backup db \
     --pd "${PD_IP}:2379" \
     --db test \
     --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
@@ -79,12 +79,12 @@ In the preceding command, `--db` specifies the database name, and other paramete
 
 ### Back up a table
 
-To back up a table in a cluster, run the `br backup table` command.
+To back up a table in a cluster, run the `tiup br backup table` command.
 
 The following example backs up the `test.usertable` table to Amazon S3:
 
 ```shell
-br backup table \
+tiup br backup table \
     --pd "${PD_IP}:2379" \
     --db test \
     --table usertable \
@@ -97,12 +97,12 @@ In the preceding command, `--db` and `--table` specify the database name and tab
 
 ### Back up multiple tables with table filter
 
-To back up multiple tables with more criteria, run the `br backup full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`.
+To back up multiple tables with more criteria, run the `tiup br backup full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`.
 
 The following example backs up tables that match the `db*.tbl*` filter rule to Amazon S3:
 
 ```shell
-br backup full \
+tiup br backup full \
     --pd "${PD_IP}:2379" \
     --filter 'db*.tbl*' \
     --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
@@ -119,7 +119,7 @@ If you do not set this parameter to `false`, the `br` command-line tool uses the
 The following is an example of backing up cluster snapshot data and backing up table statistics with `--ignore-stats=false`:
 
 ```shell
-br backup full \
+tiup br backup full \
 --storage local:///br_data/ --pd "${PD_IP}:2379" --log-file restore.log \
 --ignore-stats=false
 ```
@@ -150,7 +150,7 @@ Since TiDB v5.3.0, you can encrypt backup data by configuring the following para
 The following is an example:
 
 ```shell
-br backup full\
+tiup br backup full\
     --pd ${PD_IP}:2379 \
     --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
     --crypter.method aes128-ctr \
