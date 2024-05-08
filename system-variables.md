@@ -1063,7 +1063,6 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Type: Boolean
 - Default value: `ON`
 - Controls whether to use the MPP mode of TiFlash to execute queries. The value options are as follows:
-    - `0` or `OFF`, which means that the MPP mode will not be used.
     - `0` or `OFF`, which means that the MPP mode will not be used. For v7.3.0 or a later version, if you set the value of this variable to `0` or `OFF`, you also need to enable the [`tidb_allow_tiflash_cop`](/system-variables.md#tidb_allow_tiflash_cop-introduced-in-v730) variable. Otherwise, queries might return errors.
     - `1` or `ON`, which means that the optimizer determines whether to use the MPP mode based on the cost estimation (by default).
 
