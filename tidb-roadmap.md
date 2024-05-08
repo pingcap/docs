@@ -7,7 +7,7 @@ summary: Learn about what's coming in the future for TiDB.
 
 This roadmap provides a look into the proposed future. This will be continually updated as we release long-term stable (LTS) versions. The purpose is to provide visibility into what is coming, so that you can more closely follow the progress, learn about the key milestones on the way, and give feedback as the development work goes on.
 
-In the course of development, this roadmap is subject to change based on user needs and feedback. Roadmap is for informational purposes only. Please do not create dependent plans. If you have a feature request or want to prioritize a feature, please file an issue on [GitHub](https://github.com/pingcap/tidb/issues).
+In the course of development, this roadmap is subject to change based on user needs and feedback. Please do not schedule release plans on the content of the roadmap. If you have a feature request or want to prioritize a feature, please file an issue on [GitHub](https://github.com/pingcap/tidb/issues).
 
 ## Rolling roadmap highlights
 
@@ -145,7 +145,7 @@ In the course of development, this roadmap is subject to change based on user ne
           </li>
           <br />
           <li>
-            <b>Multi-versioned statistics多版本统计信息</b><br />
+            <b>Multi-versioned statistics</b><br />
             When the statistics are updated, users can manage to review the past copies or rollback.
           </li>
           <br />
