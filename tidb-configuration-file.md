@@ -202,6 +202,12 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: `0`
 - When TiDB is waiting for shutdown (in the grace period), the HTTP status will indicate a failure, which allows the load balancers to reroute traffic.
 
+> **Note:**
+>
+> When using a platform that uses SystemD the default stop timeout is 90 seconds. Setting [`TimeoutStopSec=`](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html#TimeoutStopSec=) can be used when you need a longer timeout.
+>
+> When using TiUP Cluster the default for [`--wait-timeout`](/tiup/tiup-component-cluster#--wait-timeout) is 120 seconds.
+
 ### `enable-global-kill` <span class="version-mark">New in v6.1.0</span>
 
 + Controls whether to enable the Global Kill (terminating queries or connections across instances) feature.
