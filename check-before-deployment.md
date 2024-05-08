@@ -607,7 +607,7 @@ Take the following steps to check the current operating system configuration and
     >
     > - `vm.min_free_kbytes` is a Linux kernel parameter that controls the minimum amount of free memory reserved by the system, measured in KiB.
     > - The setting of `vm.min_free_kbytes` affects the memory reclaim mechanism. Setting it too large reduces the available memory, while setting it too small might cause memory request speeds to exceed background reclaim speeds, leading to memory reclamation and consequent delays in memory allocation.
-    > - It is recommended to set `vm.min_free_kbytes` to `1048576` KiB (1 GiB) at least. If [NUMA is installed](/check-before-deployment.md#installing-the-numactl-tool), it is recommended to set it to `number of NUMA nodes * 1048576` KiB.
+    > - It is recommended to set `vm.min_free_kbytes` to `1048576` KiB (1 GiB) at least. If [NUMA is installed](/check-before-deployment.md#install-the-numactl-tool), it is recommended to set it to `number of NUMA nodes * 1048576` KiB.
     > - For servers with memory sizes less than 16 GiB, it is recommended to keep the default value of `vm.min_free_kbytes` unchanged.
 
 10. Execute the following command to configure the user's `limits.conf` file:
