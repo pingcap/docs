@@ -7,7 +7,7 @@ summary: Learn about what's coming in the future for TiDB.
 
 This roadmap provides a look into the proposed future. This will be continually updated as we release long-term stable (LTS) versions. The purpose is to provide visibility into what is coming, so that you can more closely follow the progress, learn about the key milestones on the way, and give feedback as the development work goes on.
 
-In the course of development, this roadmap is subject to change based on user needs and feedback. Please do not schedule release plans on the content of the roadmap. If you have a feature request or want to prioritize a feature, please file an issue on [GitHub](https://github.com/pingcap/tidb/issues).
+In the course of development, this roadmap is subject to change based on user needs and feedback. **DO NOT** schedule your release plans according to the content of the roadmap. If you have a feature request or want to prioritize a feature, please file an issue on [GitHub](https://github.com/pingcap/tidb/issues).
 
 ## Rolling roadmap highlights
 
@@ -53,7 +53,7 @@ In the course of development, this roadmap is subject to change based on user ne
           <br />
           <li>
              <b>Load-based traffic routing by TiProxy</b><br />
-            TiProxy forwards traffic based on the load status of the target TiDB, maximizing hardware resource utilization.
+            TiProxy forwards traffic based on the workload of the target TiDB node, maximizing hardware resource utilization.
           </li>
         </ul>
       </td>
@@ -65,12 +65,12 @@ In the course of development, this roadmap is subject to change based on user ne
           </li>
           <br />
           <li>
-            <b>Less I/O consumption during statistics collection</b><br />
+            <b>Less I/O consumption for statistics collection</b><br />
             Users can choose to scan only a portion of the data samples on TiKV during statistics collection, reducing time and resource consumption.
           </li>
           <br />
           <li>
-            <b>Less limitations for pushing down Limit operator to TiKV</b><br />
+            <b>Remove the limitation for pushing down Limit operator to TiKV</b><br />
           </li>
           <br />
           <li>
@@ -92,11 +92,11 @@ In the course of development, this roadmap is subject to change based on user ne
         <ul>
           <li>
             <b>Table-level load balancing</b><br />
-            PD determines data scheduling strategies based on the load situation of each Region on every table.
+            PD determines data scheduling strategies based on the workload of each Region on every table.
           </li>
           <li>
             <b>Improve performance of handling system tables with large data volumes</b><br />
-            Enhance the performance of querying large data volumes in system tables to reduce query overhead.
+            Enhance query performance and reduce query overhead for system tables with large data volumes.
           </li>
         </ul>
       </td>
@@ -109,11 +109,11 @@ In the course of development, this roadmap is subject to change based on user ne
       <td>
         <ul>
           <li>
-            <b>Limited memory consumption for backup tasks</b><br />
+            <b>Limit memory consumption for backup tasks</b><br />
           </li>
           <br />
           <li>
-            <b>Limited memory consumption for statistics collection</b><br />
+            <b>Limit memory consumption for statistics collection</b><br />
           </li>
           <br />
           <li>
@@ -123,7 +123,7 @@ In the course of development, this roadmap is subject to change based on user ne
           <br />
           <li>
             <b>Enhance resource group control over complex SQL</b><br />
-              Regularly assess the Request Unit (RU) consumption of complex SQL before completion of execution to prevent excessively large impacts on the entire system during execution.
+              Regularly assess the Request Unit (RU) consumption of complex SQL before completion of SQL execution to prevent excessively large impacts on the entire system during execution.
           </li>
           <br />
           <li>
@@ -135,18 +135,18 @@ In the course of development, this roadmap is subject to change based on user ne
       <td>
         <ul>
           <li>
-            <b>Limited memory consumption of schema metadata</b><br />
+            <b>Limit memory consumption of schema metadata</b><br />
             Enhance the stability of large-scale clusters.
           </li>
           <br />
           <li>
-            <b>Distributed statistic collection</b><br />
+            <b>Distributed statistics collection</b><br />
             Statistics collection supports parallel execution across multiple TiDB nodes to improve collection efficiency.
           </li>
           <br />
           <li>
             <b>Multi-version statistics</b><br />
-            After the statistics information is updated, users can view the historical versions and choose to restore them to a previous version.
+            After statistics are updated, users can view the historical versions and choose to restore them to an earlier version.
           </li>
           <br />
           <li>
@@ -156,7 +156,7 @@ In the course of development, this roadmap is subject to change based on user ne
           <br />
           <li>
             <b>Common operators support spilling to disk</b><br />
-            Common operators like HashAgg, Sort, TopN, HashJoin, WindowFunction, IndexJoin, and IndexHashJoin support spilling to disk, reducing the risk of out-of-memory (OOM).
+            Common operators such as HashAgg, Sort, TopN, HashJoin, WindowFunction, IndexJoin, and IndexHashJoin support spilling to disk, reducing the risk of out-of-memory (OOM).
           </li>
         </ul>
       </td>
@@ -164,12 +164,12 @@ In the course of development, this roadmap is subject to change based on user ne
         <ul>
           <li>
             <b>Adaptive resource group</b><br />
-            Resource groups automatically adjust their reservation unit (RU) settings based on past execution patterns.
+            Resource groups automatically adjust their Request Unit (RU) settings based on past execution patterns.
           </li>
           <br />
           <li>
             <b>Enhanced memory protection</b><br />
-            TiDB actively monitors the memory usage of all modules and prevents memory operations that might impact system stability.
+            TiDB actively monitors the memory usage of all components and prevents memory operations that might impact system stability.
           </li>
           <br />
           <li>
@@ -193,7 +193,7 @@ In the course of development, this roadmap is subject to change based on user ne
           <br />
           <li>
             <b>Permission control for switching resource groups</b>
-            <br />Only users granted specific permissions can switch their resource groups, preventing resource abuse.
+            <br />Only users with specific permissions can switch their resource groups, thus preventing resource abuse.
           </li>
           <br />
           <li>
@@ -210,12 +210,12 @@ In the course of development, this roadmap is subject to change based on user ne
         <ul>
           <li>
             <b>Fine-grained customization of statistics collection</b>
-            <br />Users can modify the statistics collection strategy for specific tables, such as healthiness and parallelism levels.
+            <br />Users can modify the statistics collection strategy for specific tables, such as healthiness and parallelism.
           </li>
           <br />
           <li>
             <b>Workload Repository</b>
-            <br />TiDB persists load information in memory, including cumulative and real-time statistics data, which aids in troubleshooting and analysis.
+            <br />TiDB persists workload information in memory, including cumulative and real-time statistic data, which aids in troubleshooting and analysis.
           </li>
           <br />
           <li>
@@ -224,8 +224,8 @@ In the course of development, this roadmap is subject to change based on user ne
           </li>
           <br />
           <li>
-            <b>Support modifying column types in partitioned tables</b>
-            <br />Users can modify the data type of columns in partitioned tables, regardless of whether the column is a partitioning key.
+            <b>Support modifying column types for partitioned tables</b>
+            <br />Users can modify the data type of columns in partitioned tables, regardless of whether a column is a partitioning key.
           </li>
           <br />
           <li>
@@ -235,7 +235,7 @@ In the course of development, this roadmap is subject to change based on user ne
           <br />
           <li>
             <b>End-to-End monitoring</b>
-            <br />Track the time consumption of individual SQL statements throughout their entire lifecycle, including TiDB, TiKV, PD, and TiFlash components.
+            <br />Track the time consumption of individual SQL statements throughout their entire lifecycle, including consumption on TiDB, TiKV, PD, and TiFlash components.
           </li>
         </ul>
       </td>
@@ -266,7 +266,7 @@ In the course of development, this roadmap is subject to change based on user ne
         <ul>
           <li>
             <b>Google Cloud KMS</b>
-            <br />Enhance the key management mechanism for static encryption based on Google Cloud KMS, making it generally available.
+            <br />Enhance the key management mechanism for static encryption based on Google Cloud KMS, making it generally available (GA).
           </li>
           <br />
           <li>
@@ -276,7 +276,7 @@ In the course of development, this roadmap is subject to change based on user ne
           <br />
           <li>
             <b>Marker-based log desensitization</b>
-            <br />Support marking sensitive information in the cluster log, and then you can determine whether to desensitize it according to the usage scenario.
+            <br />Support marking sensitive information in the cluster log. Then, you can determine whether to desensitize it according to the usage scenario.
           </li>
           <br />
           <li>
@@ -298,7 +298,7 @@ In the course of development, this roadmap is subject to change based on user ne
           </li>
           <li>
             <b>MFA</b>
-            <br />Support multi-factor authentication mechanism.
+            <br />Support the multi-factor authentication mechanism.
           </li>
         </ul>
       </td>
@@ -316,7 +316,7 @@ In the course of development, this roadmap is subject to change based on user ne
           <br />
           <li>
             <b>Dynamic desensitization of business data</b>
-            <br />Data desensitization based on different data application scenarios to ensure data security in important fields.
+            <br />Support desensitizing data based on different data application scenarios to ensure data security in important fields.
           </li>
         </ul>
       </td>
