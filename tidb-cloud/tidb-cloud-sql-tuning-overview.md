@@ -41,7 +41,7 @@ You can view some key information in **SQL Statement**.
 
     ![Details2](/media/dashboard/dashboard-statement-detail2.png)
 
-- Related Slow Query
+- Related slow query
 
 In addition to the information in the **Statement** dashboard, there are also some SQL best practices for TiDB Cloud as described in the following sections.
 
