@@ -41,7 +41,6 @@ RestoreOption ::=
     "RATE_LIMIT" '='? LengthNum "MB" '/' "SECOND"
 |   "CONCURRENCY" '='? LengthNum
 |   "CHECKSUM" '='? Boolean
-|   "CHECKSUM_CONCURRENCY '='? LengthNum
 |   "SEND_CREDENTIALS_TO_TIKV" '='? Boolean
 
 Boolean ::=
@@ -133,8 +132,6 @@ Use `RATE_LIMIT` to limit the average download speed per TiKV node to reduce net
 Before restore is completed, `RESTORE` would perform a checksum against the data from the archive to verify correctness. 
 
 Use `CHECKSUM` to disable the check if you are confident that this is unnecessary.
-
-Use `CHECKSUM_CONCURRENCY` to controll the concurrency of checksumming in one table (default 4)
 
 {{< copyable "sql" >}}
 

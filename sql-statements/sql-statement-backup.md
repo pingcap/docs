@@ -37,7 +37,6 @@ BackupOption ::=
     "RATE_LIMIT" '='? LengthNum "MB" '/' "SECOND"
 |   "CONCURRENCY" '='? LengthNum
 |   "CHECKSUM" '='? Boolean
-|   "CHECKSUM_CONCURRENCY '='? LengthNum
 |   "SEND_CREDENTIALS_TO_TIKV" '='? Boolean
 |   "LAST_BACKUP" '='? BackupTSO
 |   "SNAPSHOT" '='? ( BackupTSO | LengthNum TimestampUnit "AGO" )
@@ -142,8 +141,6 @@ Use `RATE_LIMIT` to limit the average upload speed per TiKV node to reduce netwo
 Before backup is completed, `BACKUP` would perform a checksum against the data on the cluster to verify correctness. 
 
 Use `CHECKSUM` to disable the check if you are confident that this is unnecessary.
-
-Use `CHECKSUM_CONCURRENCY` to controll the concurrency of checksumming in one table (default 4)
 
 Use `CONCURRENCY` to specify the number of concurrent tasks BR can execute for backing up tables and indices. This parameter controls the thread pool size within BR, optimizing the performance and efficiency of backup operations.
 
