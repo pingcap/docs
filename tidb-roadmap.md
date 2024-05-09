@@ -38,7 +38,7 @@ In the course of development, this roadmap is subject to change based on user ne
           <br />
           <li>
              <b>Adaptive concurrency for statistics collection</b><br />
-            TiDB automatically adjusts the parallelism and scan concurrency of statistics collection tasks based on the number of deployed nodes and hardware specifications, improving collection speed.
+            TiDB automatically adjusts the parallelism and scan concurrency of statistics collection tasks based on the number of deployed nodes and hardware specifications, improving the speed of statistics collection.
           </li>
           <br />
           <li>
@@ -128,7 +128,7 @@ In the course of development, this roadmap is subject to change based on user ne
           <br />
           <li>
             <b>Automatically switch resource groups for runaway queries</b><br />
-              When a query is identified as a runaway query, users can choose to adjust it to a specific resource group and set an upper limit on resource consumption.
+              When a query is identified as a runaway query, users can choose to switch it to a specific resource group and set an upper limit on resource consumption.
           </li>
         </ul>
       </td>
@@ -215,7 +215,7 @@ In the course of development, this roadmap is subject to change based on user ne
           <br />
           <li>
             <b>Workload Repository</b>
-            <br />TiDB persists workload information in memory, including cumulative and real-time statistic data, which aids in troubleshooting and analysis.
+            <br />TiDB persists workload information in memory to permanent volume, including cumulative and real-time statistic data, which aids in troubleshooting and analysis.
           </li>
           <br />
           <li>
@@ -243,7 +243,7 @@ In the course of development, this roadmap is subject to change based on user ne
         <ul>
           <li>
             <b>Workload analysis</b>
-            <br />Analyze historical workload data from the Workload Repository and provide optimization recommendations, such as SQL tuning and adjustments to statistics collection strategies.
+            <br />Analyze historical workload data from the Workload Repository and provide optimization recommendations, such as SQL tuning and statistics collection.
           </li>
           <br />
           <li>
