@@ -145,9 +145,9 @@ Use `CHECKSUM` to disable the check if you are confident that this is unnecessar
 
 Use `CHECKSUM_CONCURRENCY` to controll the concurrency of checksumming in one table (default 4)
 
-Use `CONCURRENCY` to specify the number of concurrent tasks BR can execute for backing up tables and indices. This parameter controls the thread pool size within BR, optimizing the performance and efficiency of backup operations.(default 4)
+Use `CONCURRENCY` to specify the number of concurrent tasks BR can execute for backing up tables and indices. This parameter controls the thread pool size within BR, optimizing the performance and efficiency of backup operations.
 
-One task represents one table range (or one index range) according to the backup schemas. If there is one table with one index.there will be two tasks to back up this table. This value should increase if you need to back up lots of tables or indices. 
+One task represents one table range or one index range, according to the backup schemas. For one table with one index, two tasks are used to back up this table. The default value of `CONCURRENCY` is 4. If you need to back up lots of tables or indices, increase its value.
 
 {{< copyable "sql" >}}
 
