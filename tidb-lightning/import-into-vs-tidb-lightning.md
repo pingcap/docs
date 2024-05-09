@@ -77,7 +77,7 @@ After the import is completed, the data used for global sorting on Amazon S3 wil
 
 TiDB Lightning only supports local sort. For example, for tens of TiB of source data, if TiDB Lightning does not have large local disks configured, or if multiple TiDB Lightning instances are used for parallel import, each TiDB Lightning instance will only use local disks to sort the data responsible for the import. Due to the inability to perform global sorting, there will be overlap between the data imported into TiKV by multiple TiDB Lightning instances, especially in scenarios where index data is more prevalent, triggering TiKV to perform compaction operations. Bcause compaction is a very resource-intensive operation, it will lead to a decrease in TiKV's write performance and stability.
 
-If you want to continue importing data later, you will need to keep the TiDB Lightning machine and the disks on the machine for the next import. The cost of using TiDB Lightning is relatively high, compared with `IMPORT INTO` using Amazon S3 on a pay-as-you-go basis.
+If you want to continue importing data later, you will need to keep the TiDB Lightning server and the disks on the server for the next import. The cost of using preallocated disks is relatively high, compared with `IMPORT INTO` using Amazon S3 on a pay-as-you-go basis.
 
 ### Performance
 
