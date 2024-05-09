@@ -108,7 +108,6 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
     The automatic management capability of queries that consume more resources than expected provides users with an effective means to quickly mitigate the impact of query problems on overall performance before the root cause is identified, thereby improving the stability of the database.
 
     For more information, see [documentation](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries).
-tion, see [documentation](doc-link).
 
 ### SQL
 
@@ -206,13 +205,14 @@ tion, see [documentation](doc-link).
 
 + TiDB
   <!--tw@Oreoxmt 7 -->
-    - 提升了外键在 SHOW CREATE TABLE 结果中显示的 MySQL 兼容性 [#51837](https://github.com/pingcap/tidb/issues/51837) @[negachov](https://github.com/negachov)
-    - 提升了表达式默认值在 SHOW CREATE TABLE 结果中显示的 MySQL 兼容性 [#52939](https://github.com/pingcap/tidb/issues/52939) @[CbcWestwolf](https://github.com/CbcWestwolf)
-    - 允许使用 ingest 模式并发添加多个索引 [#52596](https://github.com/pingcap/tidb/issues/52596) @[lance6716](https://github.com/lance6716)
-    - 允许将系统变量 `tidb_service_scope` 设置为不同的值，从而更好地利用分布式框架功能 [#52441](https://github.com/pingcap/tidb/issues/52441) @[ywqzzy](https://github.com/ywqzzy)
-    - 增强 TiDB 对总是 false 的 DNF 的处理，直接忽略这种过滤条件 [#40997](https://github.com/pingcap/tidb/issues/40997) @[hi-rustin](https://github.com/hi-rustin)
-    - 不允许将 tidb_auto_analyze_ratio 参数设置为 0 [#51582](https://github.com/pingcap/tidb/issues/51582) @[hi-rustin](https://github.com/hi-rustin)
-    - 如果查询有除了全表扫描以外的单索引扫描方式可以选择，优化器不会自动选择索引合并。现在可以通过 Optimizer Fix Controls 机制解除这个限制 [#52869](https://github.com/pingcap/tidb/issues/52869) @[time-and-fate](https://github.com/time-and-fate)
+    - Improve the MySQL compatibility of foreign keys displayed in the output of `SHOW CREATE TABLE` [#51837](https://github.com/pingcap/tidb/issues/51837) @[negachov](https://github.com/negachov)
+    - Improve the MySQL compatibility of expression default values displayed in the output of `SHOW CREATE TABLE` [#52939](https://github.com/pingcap/tidb/issues/52939) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    - Support adding multiple indexes concurrently in the ingest mode [#52596](https://github.com/pingcap/tidb/issues/52596) @[lance6716](https://github.com/lance6716)
+    - Support configuring the system variable `tidb_service_scope` with various values, enhancing the utilization of the Distributed eXecution Framework [#52441](https://github.com/pingcap/tidb/issues/52441) @[ywqzzy](https://github.com/ywqzzy)
+    - Enhance the handling of DNFs that are always `false` by directly ignoring such filter conditions [#40997](https://github.com/pingcap/tidb/issues/40997) @[hi-rustin](https://github.com/hi-rustin)
+    - Do not support setting the system variable `tidb_auto_analyze_ratio` to `0` [#51582](https://github.com/pingcap/tidb/issues/51582) @[hi-rustin](https://github.com/hi-rustin)
+    - Support using Optimizer Fix Controls to remove the limitation that the optimizer does not automatically select Index Merge when the query can select a single index scan method other than a full table scan [#52869](https://github.com/pingcap/tidb/issues/52869) @[time-and-fate](https://github.com/time-and-fate)
+    - Add the `total_kv_read_wall_time` metric to the column `execution info` of Coprocessor operators [#28937](https://github.com/pingcap/tidb/issues/28937) @[cfzjywxk](https://github.com/cfzjywxk)
     - (dup): release-7.1.5.md > Improvements> TiDB - Add a timeout mechanism for LDAP authentication to avoid the issue of resource lock (RLock) not being released in time [#51883](https://github.com/pingcap/tidb/issues/51883) @[YangKeao](https://github.com/YangKeao)
 
 + TiKV
@@ -271,18 +271,18 @@ tion, see [documentation](doc-link).
 
 + TiDB
   <!--tw@Oreoxmt 以下 12 条 -->
-    - 修复当 SQL 涉及包含多值索引的表时，执行可能报错“Can't find a proper physical plan for this query”的问题 [#49438](https://github.com/pingcap/tidb/issues/49438) @[qw4990](https://github.com/qw4990)
-    - 修复自动分析在 OOM 后卡住的问题 [#51993](https://github.com/pingcap/tidb/issues/51993) @[hi-rustin](https://github.com/hi-rustin)
-    - 修复使用 BR 恢复一张表之后，即使这张表没有统计信息，统计信息健康度也显示 100 的问题 [#29769](https://github.com/pingcap/tidb/issues/29769) @[winoros](https://github.com/winoros)
-    - 修复了 TiDB 在升级过程中会为系统表创建统计信息的问题 [#52040](https://github.com/pingcap/tidb/issues/52040) @[hi-rustin](https://github.com/hi-rustin)
-    - 修复 TiDB 在统计信息初始化完成前就进行自动分析的问题 [#52346](https://github.com/pingcap/tidb/issues/52346) @[hi-rustin](https://github.com/hi-rustin)
-    - 修复启用 `tidb_mem_quota_analyze` 时，自动分析使用的内存超过限制可能导致 TiDB crash 的问题 [#52601](https://github.com/pingcap/tidb/issues/52601) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复 TiDB 统计信息同步加载机制无限重试加载空统计信息并打印“fail to get stats version for this histogram”日志的问题 [#52657](https://github.com/pingcap/tidb/issues/52657) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复在关闭新排序规则框架的时候，涉及不同排序规则的表达式可能导致查询 panic 的问题 [#52772](https://github.com/pingcap/tidb/issues/52772) @[wjhuang2016](https://github.com/wjhuang2016)
-    - 修复 `CPS by type` 监控项显示错误的问题 [#52605](https://github.com/pingcap/tidb/issues/52605) @[nolouch](https://github.com/nolouch)
-    - 修复查询 `INFORMATION_SCHEMA.TIKV_REGION_STATUS` 出现空指针的问题 [#52013](https://github.com/pingcap/tidb/issues/52013) @[JmPotato](https://github.com/JmPotato)
-    - 修正了指定非法列默认值时的错误提示信息 [#51592](https://github.com/pingcap/tidb/issues/51592) @[danqixu](https://github.com/danqixu)
-    - 修复了 ingest 模式添加索引时，在边角案例下导致数据索引不一致的问题 [#51954](https://github.com/pingcap/tidb/issues/51954) @[lance6716](https://github.com/lance6716)
+    - Fix the issue that executing SQL statements containing tables with multi-valued indexes might return the `Can't find a proper physical plan for this query` error [#49438](https://github.com/pingcap/tidb/issues/49438) @[qw4990](https://github.com/qw4990)
+    - Fix the issue that auto analyze gets stuck after an OOM error occurs [#51993](https://github.com/pingcap/tidb/issues/51993) @[hi-rustin](https://github.com/hi-rustin)
+    - Fix the issue that after using BR to restore a table that has no statistics, the statistics health is still 100% [#29769](https://github.com/pingcap/tidb/issues/29769) @[winoros](https://github.com/winoros)
+    - Fix the issue that TiDB creates statistics for system tables during upgrade [#52040](https://github.com/pingcap/tidb/issues/52040) @[hi-rustin](https://github.com/hi-rustin)
+    - Fix the issue that auto analyze is triggered before the initialization of statistics finishes [#52346](https://github.com/pingcap/tidb/issues/52346) @[hi-rustin](https://github.com/hi-rustin)
+    - Fix the issue that TiDB might crash when `tidb_mem_quota_analyze` is enabled and the memory used by auto analyze exceeds the limit [#52601](https://github.com/pingcap/tidb/issues/52601) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that the TiDB synchronously loading statistics mechanism retries to load empty statistics indefinitely and prints the `fail to get stats version for this histogram` log [#52657](https://github.com/pingcap/tidb/issues/52657) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that expressions containing different collations might cause the query to panic when the new framework for collations is disabled [#52772](https://github.com/pingcap/tidb/issues/52772) @[wjhuang2016](https://github.com/wjhuang2016)
+    - Fix the issue that the `CPS by type` metric displays incorrect values [#52605](https://github.com/pingcap/tidb/issues/52605) @[nolouch](https://github.com/nolouch)
+    - Fix the issue that the null pointer error occurs when querying `INFORMATION_SCHEMA.TIKV_REGION_STATUS` [#52013](https://github.com/pingcap/tidb/issues/52013) @[JmPotato](https://github.com/JmPotato)
+    - Fix the incorrect error message displayed when an invalid default value is specified for a column [#51592](https://github.com/pingcap/tidb/issues/51592) @[danqixu](https://github.com/danqixu)
+    - Fix the issue that adding indexes in the ingest mode might cause inconsistent data index in some corner cases [#51954](https://github.com/pingcap/tidb/issues/51954) @[lance6716](https://github.com/lance6716)
   <!--tw@lilin90 以下 18 条 -->
     - 修复了恢复含有外键的表时，DDL 卡住的问题 [#51838](https://github.com/pingcap/tidb/issues/51838) @[YangKeao](https://github.com/YangKeao)
     - 修复了加索引期间 TiDB 网络隔离导致加索引失败的问题 [#51846](https://github.com/pingcap/tidb/issues/51846) @[ywqzzy](https://github.com/ywqzzy)
