@@ -129,9 +129,9 @@ RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/'
 
 Use `RATE_LIMIT` to limit the average download speed per TiKV node to reduce network bandwidth.
 
-Before restore is completed, `RESTORE` would perform a checksum against the data from the archive to verify correctness. 
+Before the restore is completed, `RESTORE` would perform a checksum against the data in the backup files to verify correctness.
 
-Use `CHECKSUM` to disable the check if you are confident that this is unnecessary.
+You can use the `CHECKSUM` parameter to disable the check if you are confident that this verification is unnecessary.
 
 {{< copyable "sql" >}}
 
