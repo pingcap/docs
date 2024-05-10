@@ -1,6 +1,6 @@
 ---
 title: br Command-line Manual
-summary: The `br` command-line tool is used for snapshot backup, log backup, and point-in-time recovery (PITR) in TiDB clusters. It consists of sub-commands, options, and parameters, with common options like `--pd` for PD service address and `-s` for storage path. Sub-commands include `br backup`, `br log`, and `br restore`, each with specific functionalities. Backup commands include `full`, `db`, and `table` options, while log backup and restore commands have various tasks for managing backup operations.
+summary: The `br` command-line tool is used for snapshot backup, log backup, and point-in-time recovery (PITR) in TiDB clusters. It consists of sub-commands, options, and parameters, with common options like `--pd` for PD service address and `-s` for storage path. Sub-commands include `tiup br backup`, `tiup br log`, and `tiup br restore`, each with specific functionalities. Backup commands include `full`, `db`, and `table` options, while log backup and restore commands have various tasks for managing backup operations.
 ---
 
 # br Command-line Manual
@@ -14,26 +14,26 @@ A `br` command consists of sub-commands, options, and parameters. A sub-command 
 The following is a complete `br` command:
 
 ```shell
-br backup full --pd "${PD_IP}:2379" \
+tiup br backup full --pd "${PD_IP}:2379" \
 --storage "s3://backup-data/snapshot-202209081330/"
 ```
 
 Explanations for the preceding command are as follows:
 
-* `backup`: the sub-command of `br`.
-* `full`: the sub-command of `br backup`.
+* `backup`: the sub-command of `tiup br`.
+* `full`: the sub-command of `tiup br backup`.
 * `-s` (or `--storage`): the option that specifies the path where the backup files are stored. `"s3://backup-data/snapshot-202209081330/"` is the parameter of `-s`.
 * `--pd`: the option that specifies the PD service address. `"${PD_IP}:2379"` is the parameter of `--pd`.
 
 ### Commands and sub-commands
 
-A `br` command consists of multiple layers of sub-commands. Currently, br command-line tool has the following sub-commands:
+A `tiup br` command consists of multiple layers of sub-commands. Currently, br command-line tool has the following sub-commands:
 
-* `br backup`: used to back up the data of the TiDB cluster.
-* `br log`: used to start and manage log backup tasks.
-* `br restore`: used to restore backup data of the TiDB cluster.
+* `tiup br backup`: used to back up the data of the TiDB cluster.
+* `tiup br log`: used to start and manage log backup tasks.
+* `tiup br restore`: used to restore backup data of the TiDB cluster.
 
-`br backup` and `br restore` include the following sub-commands:
+`tiup br backup` and `tiup br restore` include the following sub-commands:
 
 * `full`: used to back up or restore all the cluster data.
 * `db`: used to back up or restore a specified database of the cluster.
@@ -53,7 +53,7 @@ A `br` command consists of multiple layers of sub-commands. Currently, br comman
 
 ## Commands of full backup
 
-To back up cluster data, run the `br backup` command. You can add the `full` or `table` sub-command to specify the scope of your backup operation: the whole cluster (`full`) or a single table (`table`).
+To back up cluster data, run the `tiup br backup` command. You can add the `full` or `table` sub-command to specify the scope of your backup operation: the whole cluster (`full`) or a single table (`table`).
 
 - [Back up TiDB cluster snapshots](/br/br-snapshot-manual.md#back-up-cluster-snapshots)
 - [Back up a database](/br/br-snapshot-manual.md#back-up-a-database)
@@ -63,7 +63,7 @@ To back up cluster data, run the `br backup` command. You can add the `full` or 
 
 ## Commands of log backup
 
-To start log backup and manage log backup tasks, run the `br log` command.
+To start log backup and manage log backup tasks, run the `tiup br log` command.
 
 - [Start a log backup task](/br/br-pitr-manual.md#start-a-backup-task)
 - [Query the backup status](/br/br-pitr-manual.md#query-the-backup-status)
@@ -74,7 +74,7 @@ To start log backup and manage log backup tasks, run the `br log` command.
 
 ## Commands of restoring backup data
 
-To restore cluster data, run the `br restore` command. You can add the `full`, `db`, or `table` sub-command to specify the scope of your restore: the whole cluster (`full`), a single database (`db`), or a single table (`table`).
+To restore cluster data, run the `tiup br restore` command. You can add the `full`, `db`, or `table` sub-command to specify the scope of your restore: the whole cluster (`full`), a single database (`db`), or a single table (`table`).
 
 - [Point-in-time recovery](/br/br-pitr-manual.md#restore-to-a-specified-point-in-time-pitr)
 - [Restore cluster snapshots](/br/br-snapshot-manual.md#restore-cluster-snapshots)
