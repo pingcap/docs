@@ -54,7 +54,6 @@ SHOW STATS_BUCKETS WHERE Table_name='t';
 6 rows in set (0.00 sec)
 ```
 
-
 ## MySQL compatibility
 
 This statement is a TiDB extension to MySQL syntax.

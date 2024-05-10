@@ -84,6 +84,7 @@ DROP STATS TableName GLOBAL;
 ```
 Query OK, 0 rows affected (0.00 sec)
 ```
+
 The preceding statement only deletes GlobalStats generated in dynamic pruning mode of the specified table.
 
 ## MySQL compatibility
