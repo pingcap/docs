@@ -158,9 +158,7 @@ For more information, refer to [Understand the Query Execution Plan](/explain-ov
 
 ### Built-in functions
 
-TiDB supports most of the built-in functions in MySQL, but not all. You can use the statement `SHOW BUILTINS` to get a list of the available functions.
-
-For more information, refer to the [TiDB SQL Grammar](https://pingcap.github.io/sqlgram/#functioncallkeyword).
+TiDB supports most of the built-in functions in MySQL, but not all. You can use the statement [`SHOW BUILTINS`](/sql-statements/sql-statement-show-builtins.md) to get a list of the available functions.
 
 ### DDL operations
 
