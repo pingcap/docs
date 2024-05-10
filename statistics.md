@@ -330,7 +330,7 @@ If you want to persist the column configuration in the `ANALYZE` statement (incl
 - When TiDB collects statistics automatically or when you manually collect statistics by executing the `ANALYZE` statement without specifying the column configuration, TiDB continues using the previously persisted configuration for statistics collection.
 - When you manually execute the `ANALYZE` statement multiple times with column configuration specified, TiDB overwrites the previously recorded persistent configuration using the new configuration specified by the latest `ANALYZE` statement.
 
-To locate `PREDICATE COLUMNS` and columns on which statistics have been collected, use the [`SHOW COLUMN_STATS_USAGE`](/sql-statements/show-column-stats-usage.md) statement.
+To locate `PREDICATE COLUMNS` and columns on which statistics have been collected, use the [`SHOW COLUMN_STATS_USAGE`](/sql-statements/sql-statement-show-column-stats-usage.md) statement.
 
 In the following example, after executing `ANALYZE TABLE t PREDICATE COLUMNS;`, TiDB collects statistics on columns `b`, `c`, and `d`, where column `b` is a `PREDICATE COLUMN` and columns `c` and `d` are index columns.
 
@@ -465,7 +465,7 @@ You can use the [`SHOW STATS_HISTOGRAMS`](/sql-statements/sql-statement-show-sta
 
 ### Buckets of histogram
 
-You can use the [`SHOW STATS_BUCKETS`](/sql-statements/show-stats-buckets.md) statement to view each bucket of the histogram.
+You can use the [`SHOW STATS_BUCKETS`](/sql-statements/sql-statement-show-stats-buckets.md statement to view each bucket of the histogram.
 
 ### Top-N information
 
