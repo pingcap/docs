@@ -20,7 +20,7 @@ For the first five TiDB Serverless clusters in your organization, whether they a
 - Row-based storage: 5 GiB
 - [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit): 50 million RUs per month
 
-Once a cluster reaches its usage quota, it immediately denies any new connection attempts until you [increase the quota](#update-spending-limit) or the usage is reset upon the start of a new month. Existing connections established before reaching the quota will automatically be throttled to 10 RU/s. For example, when the storage of a cluster exceeds 5 GiB for a free cluster, the cluster automatically restricts any new connection attempts.
+Once a cluster reaches its usage quota, it immediately denies any new connection attempts until you [increase the quota](#update-spending-limit) or the usage is reset upon the start of a new month. Existing connections established before reaching the quota will not be affected, but will be throttled automatically. For example, when the storage of a cluster exceeds 5 GiB for a free cluster, the cluster automatically restricts any new connection attempts.
 
 To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
 

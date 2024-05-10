@@ -85,7 +85,7 @@ A spike in RU usage can occur due to necessary background jobs in TiDB. These jo
 
 ### What happens when my cluster exhausts its free quota or exceeds its spending limit?
 
-Once a cluster reaches its free quota or spending limit, the cluster immediately denies any new connection attempts until the quota is increased or the usage is reset at the start of a new month. Existing connections established before reaching the quota will automatically be throttled to 10 RU/s. For more information, see [TiDB Serverless Limitations and Quotas](/tidb-cloud/serverless-limitations.md#usage-quota).
+Once a cluster reaches its free quota or spending limit, the cluster immediately denies any new connection attempts until the quota is increased or the usage is reset at the start of a new month. Existing connections established before reaching the quota will not be affected, but will be throttled automatically. For more information, see [TiDB Serverless Limitations and Quotas](/tidb-cloud/serverless-limitations.md#usage-quota).
 
 ### Why do I observe spikes in RU usage while importing data?
 
