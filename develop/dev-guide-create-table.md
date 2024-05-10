@@ -183,7 +183,7 @@ CREATE TABLE `bookshop`.`ratings` (
 );
 ```
 
-In addition, if the current time is also filled in by default when the data is being updated, the following statements can be used (but only the current time related statements can be filled in after `ON UPDATE`):
+In addition, if the current time is also filled in by default when the data is being updated, the following statements can be used (but only the current-time related expressions can be filled in after `ON UPDATE`):
 
 ```sql
 CREATE TABLE `bookshop`.`ratings` (
