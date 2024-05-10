@@ -314,7 +314,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 
 + PD
   <!--tw@qiancai 9 -->
-    - Fix the issue that TSO might get stuck when toggling PD microservice mode on and off [#7849](https://github.com/tikv/pd/issues/7849) @[JmPotato](https://github.com/JmPotato)
+    - Fix the issue that TSO might get stuck when toggling the PD microservice mode on and off [#7849](https://github.com/tikv/pd/issues/7849) @[JmPotato](https://github.com/JmPotato)
     - Fix the issue that the `State` monitoring metric for DR Auto-Sync does not show any data [#7974](https://github.com/tikv/pd/issues/7974) @[lhy1024](https://github.com/lhy1024)
     - Fix the issue that checking binary versions might cause PD panic [#7978](https://github.com/tikv/pd/issues/7978) @[JmPotato](https://github.com/JmPotato)
     - Fix the type conversion error that occurs when TTL parameters are parsed [#7980](https://github.com/tikv/pd/issues/7980) @[HuSharp](https://github.com/HuSharp)
@@ -367,7 +367,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
     + TiDB Lightning
       <!--tw@qiancai 4 -->
         - Fix the issue that TiDB Lightning reports `no database selected` during data import due to incompatible SQL statements in the source files [#51800](https://github.com/pingcap/tidb/issues/51800) @[lance6716](https://github.com/lance6716)
-        - Fix the issue where TiDB Lightning might print sensitive information to logs in server mode [#36374](https://github.com/pingcap/tidb/issues/36374) @[kennytm](https://github.com/kennytm)
+        - Fix the issue that TiDB Lightning might print sensitive information to logs in server mode [#36374](https://github.com/pingcap/tidb/issues/36374) @[kennytm](https://github.com/kennytm)
         - Fix the issue that killing the PD Leader causes TiDB Lightning to report the `invalid store ID 0` error during data import [#50501](https://github.com/pingcap/tidb/issues/50501) @[Leavrth](https://github.com/Leavrth)
         - Fix the issue that TiDB Lightning reports the `Unknown column in where clause` error when processing conflicting data using the `replace` method [#52886](https://github.com/pingcap/tidb/issues/52886) @[lyzx2001](https://github.com/lyzx2001)
         - (dup): release-7.1.5.md > Bug fixes> Tools> TiDB Lightning - Fix the issue that TiDB Lightning panics when importing an empty table of Parquet format [#52518](https://github.com/pingcap/tidb/issues/52518) @[kennytm](https://github.com/kennytm)
