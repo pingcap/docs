@@ -295,6 +295,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
     - 修复了执行 IMPORT INTO 大数据量任务时卡住的问题 [#52884](https://github.com/pingcap/tidb/issues/52884) @[lance6716](https://github.com/lance6716)
     - 修复了记录 GRPC 错误时 TIDB 意外重启的问题 [#52179](https://github.com/pingcap/tidb/issues/52179) @[guo-shaoge](https://github.com/guo-shaoge)
     - 修复了 IndexHashJoin 在执行 Anti Left Outer Semi Join 计算时输出冗余数据的问题 [#52923](https://github.com/pingcap/tidb/issues/52923) @[yibin87](https://github.com/yibin87)
+    - 修复关联子查询中 TopN 算子结果不正确的问题 [#52777](https://github.com/pingcap/tidb/issues/52777) @[yibin87](https://github.com/yibin87)
     - 修复了 HashJoin Probe 执行时间统计不精确的问题 [#52227](https://github.com/pingcap/tidb/issues/52227) @[windtalker](https://github.com/windtalker)
     - 修复了在分区裁剪模式为 static 情况下，使用 tablesample 返回错误结果的问题 [#52282](https://github.com/pingcap/tidb/issues/52282) @[tangenta](https://github.com/tangenta)
     - 修复 TTL 功能在非默认时区下的错误 [#51675](https://github.com/pingcap/tidb/issues/51675) @[lcwangchao](https://github.com/lcwangchao)
