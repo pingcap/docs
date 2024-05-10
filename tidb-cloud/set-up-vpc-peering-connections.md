@@ -67,14 +67,14 @@ This section describes how to set up VPC peering connections on AWS. For Google 
 
     The **VPC Peering** configuration is displayed by default.
 
-4. Click **Add**, choose the AWS icon, first choose the TiDB Cloud VPC Region and then fill in the required information of your existing AWS VPC:
+4. Click **Add**, choose the AWS icon, choose the **TiDB Cloud VPC Region**, and then fill in the required information of your existing AWS VPC:
 
     - Your existing VPC Region
     - AWS Account ID
     - VPC ID
     - VPC CIDR
 
-    You can get these information from your VPC details on the VPC dashboard. TiDB Cloud supports to create VPC peerings between VPCs from two different regions.
+    You can get these information from your VPC details on the VPC dashboard. TiDB Cloud supports creating VPC peerings between VPCs from two different regions.
 
     ![VPC peering](/media/tidb-cloud/vpc-peering/vpc-peering-creating-infos.png)
 
@@ -213,7 +213,7 @@ Now you have successfully set up the VPC peering connection. Next, [connect to t
 
     The **VPC Peering** configuration is displayed by default.
 
-4. Click **Add**, choose the Google Cloud icon, first choose the TiDB Cloud VPC Region and then fill in the required information of your existing Google Cloud VPC:
+4. Click **Add**, choose the Google Cloud icon, choose the **TiDB Cloud VPC Region**, and then fill in the required information of your existing Google Cloud VPC:
 
     > **Tip:**
     >
