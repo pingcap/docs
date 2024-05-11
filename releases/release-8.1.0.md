@@ -296,7 +296,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
     - Fix the issue that TiDB unexpectedly restarts when logging gRPC errors [#52179](https://github.com/pingcap/tidb/issues/52179) @[guo-shaoge](https://github.com/guo-shaoge)
     - Fix the issue that IndexHashJoin outputs redundant data when calculating Anti Left Outer Semi Join [#52923](https://github.com/pingcap/tidb/issues/52923) @[yibin87](https://github.com/yibin87)
     - Fix the incorrect result of the TopN operator in correlated subqueries [#52777](https://github.com/pingcap/tidb/issues/52777) @[yibin87](https://github.com/yibin87)
-    - Fix the inaccurate execution time statistics of HashJoin Probe [#52227](https://github.com/pingcap/tidb/issues/52227) @[windtalker](https://github.com/windtalker)
+    - Fix the inaccurate execution time statistics of HashJoin probe [#52222](https://github.com/pingcap/tidb/issues/52222) @[windtalker](https://github.com/windtalker)
     - Fix the issue that using `TABLESAMPLE` returns incorrect results in static partition pruning mode [#52282](https://github.com/pingcap/tidb/issues/52282) @[tangenta](https://github.com/tangenta)
     - Fix the error of TTL in non-default time zone [#51675](https://github.com/pingcap/tidb/issues/51675) @[lcwangchao](https://github.com/lcwangchao)
     - Fix the incorrect calculation and display of the number of connections in the monitoring panel [#51889](https://github.com/pingcap/tidb/issues/51889) @[YangKeao](https://github.com/YangKeao)
