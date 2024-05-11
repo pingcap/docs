@@ -293,7 +293,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
     - Fix the issue that the temporary data cannot be cleaned up after adding indexes fails [#52639](https://github.com/pingcap/tidb/issues/52639) @[lance6716](https://github.com/lance6716)
     - Fix the issue that the metadata lock fails to prevent DDL operations from executing in the plan cache scenario [#51407](https://github.com/pingcap/tidb/issues/51407) @[wjhuang2016](https://github.com/wjhuang2016)
     - Fix the issue that the `IMPORT INTO` operation gets stuck when processing importing tasks of a large amount of data [#52884](https://github.com/pingcap/tidb/issues/52884) @[lance6716](https://github.com/lance6716)
-    - Fix the issue that TiDB unexpectedly restarts when logging gRPC errors [#52179](https://github.com/pingcap/tidb/issues/52179) @[guo-shaoge](https://github.com/guo-shaoge)
+    - Fix the issue that TiDB unexpectedly restarts when logging gRPC errors [#51301](https://github.com/pingcap/tidb/issues/51301) @[guo-shaoge](https://github.com/guo-shaoge)
     - Fix the issue that IndexHashJoin outputs redundant data when calculating Anti Left Outer Semi Join [#52923](https://github.com/pingcap/tidb/issues/52923) @[yibin87](https://github.com/yibin87)
     - Fix the incorrect result of the TopN operator in correlated subqueries [#52777](https://github.com/pingcap/tidb/issues/52777) @[yibin87](https://github.com/yibin87)
     - Fix the inaccurate execution time statistics of HashJoin probe [#52222](https://github.com/pingcap/tidb/issues/52222) @[windtalker](https://github.com/windtalker)
