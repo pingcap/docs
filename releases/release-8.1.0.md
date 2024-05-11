@@ -210,9 +210,9 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
     - Support adding multiple indexes concurrently in the ingest mode [#52596](https://github.com/pingcap/tidb/issues/52596) @[lance6716](https://github.com/lance6716)
     - Support configuring the system variable `tidb_service_scope` with various values, enhancing the utilization of the Distributed eXecution Framework [#52441](https://github.com/pingcap/tidb/issues/52441) @[ywqzzy](https://github.com/ywqzzy)
     - Enhance the handling of DNF items that are always `false` by directly ignoring such filter conditions, thus avoiding unnecessary full table scans [#40997](https://github.com/pingcap/tidb/issues/40997) @[hi-rustin](https://github.com/hi-rustin)
-    - Do not support setting the system variable `tidb_auto_analyze_ratio` to `0` [#51582](https://github.com/pingcap/tidb/issues/51582) @[hi-rustin](https://github.com/hi-rustin)
     - Support using Optimizer Fix Controls to remove the limitation that the optimizer does not automatically choose Index Merge for a query when the optimizer can choose the single index scan method (other than full table scan) for the query [#52869](https://github.com/pingcap/tidb/issues/52869) @[time-and-fate](https://github.com/time-and-fate)
     - Add the `total_kv_read_wall_time` metric to the column `execution info` of Coprocessor operators [#28937](https://github.com/pingcap/tidb/issues/28937) @[cfzjywxk](https://github.com/cfzjywxk)
+    - Add the `RU (max)` metric on the Resource Control dashboard[#49318](https://github.com/pingcap/tidb/issues/49318) @[nolouch](https://github.com/nolouch)
     - (dup): release-7.1.5.md > Improvements> TiDB - Add a timeout mechanism for LDAP authentication to avoid the issue of resource lock (RLock) not being released in time [#51883](https://github.com/pingcap/tidb/issues/51883) @[YangKeao](https://github.com/YangKeao)
 
 + TiKV
