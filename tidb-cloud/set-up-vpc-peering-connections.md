@@ -74,7 +74,7 @@ This section describes how to set up VPC peering connections on AWS. For Google 
     - VPC ID
     - VPC CIDR
 
-    You can get these information from your VPC details on the VPC dashboard. TiDB Cloud supports creating VPC peerings between VPCs from two different regions.
+    You can get these information from your VPC details on the VPC dashboard. TiDB Cloud supports creating VPC peerings between VPCs in the same region or from two different regions.
 
     ![VPC peering](/media/tidb-cloud/vpc-peering/vpc-peering-creating-infos.png)
 
