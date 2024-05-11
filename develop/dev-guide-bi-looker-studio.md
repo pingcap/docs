@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB Cloud with Looker Studio
-summary: Learn how to connect to TiDB Cloud using Looker Studio
+summary: Learn how to connect to TiDB Cloud using Looker Studio.
 ---
 
 # Connect to TiDB Cloud with Looker Studio
@@ -31,13 +31,13 @@ You can use the S&P 500 dataset provided as an Interactive Tutorial of TiDB Serv
 <SimpleTab>
 <div label="TiDB Serverless">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and click the question mark icon in the bottom-right corner. A Help dialog is displayed. 
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and click **?** in the lower-right corner. A **Help** dialog is displayed. 
 
-2. Click **Interactive Tutorials**. Then click **S&P 500 Analysis**.
+2. In the dialog, click **Interactive Tutorials**, and then click **S&P 500 Analysis**.
 
-3. In the **Import S&P 500 Dataset** dialog, select your Serverless cluster. Then click the **Import Dataset** button. It will start importing briefly.
+3. Select your TiDB Serverless cluster, and then click **Import Dataset** to import the S&P 500 dataset to your cluster.
 
-4. After the status changed to **Imported**, you can close this dialog. Click the **Exit Tutorial** button in the bottom-left corner of the dialog. 
+4. After the import status changes to **IMPORTED**, click **Exit Tutorial** to close this dialog.
 
 </div>
 </SimpleTab>
@@ -63,17 +63,17 @@ You can use the S&P 500 dataset provided as an Interactive Tutorial of TiDB Serv
     >
     > If you have created a password before, use the original password or click **Reset Password** to generate a new one.
 
-5. Open Looker Studio and create a Blank Report. Select the **MySQL** connector in the **Add data to report** screen.
+5. Sign in to [Looker Studio](https://lookerstudio.google.com/), click **Create** > **Report**, and then select the **MySQL** connector on the **Add data to report** page.
 
 6. In the **BASIC** setting pane, configure the following connection parameters:
 
     - **Host Name or IP**: enter the `HOST` parameter from the TiDB Cloud connection dialog.
     - **Port(Optional)**: enter the `PORT` parameter from the TiDB Cloud connection dialog.
-    - **Database**: enter the database you want to connect to. In this tutorial, set `sp500insight`.
+    - **Database**: enter the database you want to connect to. For this tutorial, enter `sp500insight`.
     - **Username**: enter the `USERNAME` parameter from the TiDB Cloud connection dialog.
     - **Password**: enter the `PASSWORD` parameter from the TiDB Cloud connection dialog.
-    - Check **Enable SSL**.
-        - Click the icon on the right of **MySQL SSL Client Configuration Files**. Then, select the downloaded CA file in step 3. 
+    - Select the **Enable SSL** option.
+        - Click the upload icon to the right of **MySQL SSL Client Configuration Files**. Then, select the downloaded CA file in step 3. 
 
     ![Looker Studio: configure connection settings for TiDB cloud](/media/develop/looker-studio-configure-connection.png)
 
@@ -120,15 +120,15 @@ If the authentication succeeds, you can see tables in the database.
 
 10. Click **AUTHENTICATE**. 
 
-If the authentication succeeds, you can see tables in the database. 
+If the authentication succeeds, you can see tables in the database on the right side. 
 </div>
 </SimpleTab>
 
 ## Create a simple chart
 
-Now, you can use TiDB cluster as a data source. Let's make a simple chart with data. 
+Now, you can use the TiDB cluster as a data source and make a simple chart with data. 
 
-1. In the setting pane, select **CUSTOM QUERY**. 
+1. In the right pane, click **CUSTOM QUERY**. 
 
 2. Put the SQL below, then click **Add** in the bottom-right corner. 
 
@@ -143,31 +143,30 @@ Now, you can use TiDB cluster as a data source. Let's make a simple chart with d
     FROM companies
         LEFT JOIN index_compositions ic ON companies.stock_symbol = ic.stock_symbol
     GROUP BY sector
-    ORDER BY 5 ASC
+    ORDER BY 5 ASC;
     ```
 
-    If you see **You are about to add data to this report** dialog, click **ADD TO REPORT**.
+    If you see the **You are about to add data to this report** dialog, click **ADD TO REPORT**. Then, a table is displayed in the report. 
 
-3. You see a table in the report. Click **Add a chart**, then select `Combo chart` in the `Line` category.
+3. In the toolbar of the report, click **Add a chart**, and then select `Combo chart` in the `Line` category.
 
 4. In the **Chart** settings pane, configure the following parameters:
 
-    - **Dimension**: `sector`.
-    - **Metric**: `companies` and `total_market_cap`.
+    - In the **SETUP** Tab:
+        - **Dimension**: `sector`.
+        - **Metric**: `companies` and `total_market_cap`.
     - In the **STYLE** Tab:
-      - Series #1 check `Line`.
-      - Series #1 axis `Right`.
-      - Series #2 check `Bars`.
-      - Series #2 axis `Left`.
+      - Series #1: select the `Line` option and the `Right` axis.
+      - Series #2: select the `Bars` option and the `Left` axis.
     - Leave others as defaults.
 
-You can see a combo chart below:
+Then, you can see a combo chart similar as follows:
 
 ![Looker Studio: A simple Combo Chart](/media/develop/looker-studio-simple-chart.png)
 
 ## Next steps
 
-- Learn more usage of Looker Studio from [Looker Studio Help](https://support.google.com/looker-studio)
+- Learn more usage of Looker Studio from [Looker Studio Help](https://support.google.com/looker-studio).
 - Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
 - Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
 
