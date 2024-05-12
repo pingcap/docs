@@ -47,17 +47,17 @@ You can use the S&P 500 dataset provided as an Interactive Tutorial of TiDB Serv
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. Set **Operating System** to `Windows` in the connection dialog. Then Set **Connect With** to `General`. You can download [CA cert](https://letsencrypt.org/certs/isrgrootx1.pem) at the note below. 
-
-    > **Tip:**
-    >
-    > As TiDB Serverless requires a secure TLS connection between the client and the cluster, you need this CA cert for connection settings on Looker Studio.
-
-4. Click **Generate Password** to create a random password.
+3. Set **Connect With** to `General` in the connection dialog. Then click **Generate Password** to create a random password.
 
     > **Tip:**
     >
     > If you have created a password before, use the original password or click **Reset Password** to generate a new one.
+    
+4. Download the [CA cert](https://letsencrypt.org/certs/isrgrootx1.pem).
+
+    > **Tip:**
+    >
+    > As TiDB Serverless requires a secure TLS connection between the client and the cluster, you need this CA cert for connection settings on Looker Studio.
 
 5. Sign in to [Looker Studio](https://lookerstudio.google.com/), click **Create** > **Report**, and then select the **MySQL** connector on the **Add data to report** page.
 
@@ -69,7 +69,7 @@ You can use the S&P 500 dataset provided as an Interactive Tutorial of TiDB Serv
     - **Username**: enter the `USERNAME` parameter from the TiDB Cloud connection dialog.
     - **Password**: enter the `PASSWORD` parameter from the TiDB Cloud connection dialog.
     - Select the **Enable SSL** option.
-        - Click the upload icon to the right of **MySQL SSL Client Configuration Files**. Then, select the downloaded CA file in step 3. 
+        - Click the upload icon to the right of **MySQL SSL Client Configuration Files**. Then, select the downloaded CA file in step 4. 
 
     ![Looker Studio: configure connection settings for TiDB cloud](/media/develop/looker-studio-configure-connection.png)
 
