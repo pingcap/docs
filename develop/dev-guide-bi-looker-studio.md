@@ -9,10 +9,6 @@ TiDB is a MySQL-compatible database, and [Looker Studio](https://lookerstudio.go
 
 In this tutorial, you can learn how to connect to your TiDB cluster using Looker Studio.
 
-> **Note:**
->
-> - For this tutorial we will use a serverless cluster. Looker Studio can also be used with dedicated clusters.
-
 ## Prerequisites
 
 To complete this tutorial, you need:
