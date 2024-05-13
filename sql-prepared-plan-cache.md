@@ -6,13 +6,6 @@ aliases: ['/tidb/dev/sql-prepare-plan-cache']
 
 # SQL Prepared Execution Plan Cache
 
-> **Warning:**
->
-> If a cached `UPDATE` or `DELETE` statement encounters a DDL operation that modifies the relevant schema during execution, it might cause data inconsistency between tables and indexes. For more information, see [Issue #51407](https://github.com/pingcap/tidb/issues/51407). It is recommended to monitor the status of this issue and upgrade to [the latest LTS version](https://docs.pingcap.com/tidb/stable) to resolve this issue. Before upgrading, you can try the following workarounds:
-> 
-> - Before executing DDL, temporarily [disable the prepared plan cache](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610), and re-enable it after the DDL is complete.
-> - Avoid executing DDL during business peak hours. After executing DDL, immediately run [`ADMIN CHECK TABLE`](/sql-statements/sql-statement-admin-check-table-index.md) to check the consistency between tables and indexes. If errors are found, rebuild the relevant indexes.
-
 TiDB supports execution plan caching for `Prepare` and `Execute` queries. This includes both forms of prepared statements:
 
 - Using the `COM_STMT_PREPARE` and `COM_STMT_EXECUTE` protocol features.
@@ -70,7 +63,7 @@ Starting from v6.1.0, the execution plan cache is enabled by default. You can co
 
 > **Note:**
 >
-> The execution plan cache feature applies only to `Prepare`/`Execute` queries and does not take effect for normal queries.
+> The [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610) system variable controls the execution plan cache only for `Prepare`/`Execute` queries, not for normal queries. For the execution plan cache for normal queries, see [SQL Non-Prepared Execution Plan Cache](/sql-non-prepared-plan-cache.md).
 
 After the execution plan cache feature is enabled, you can use the session-level system variable [`last_plan_from_cache`](/system-variables.md#last_plan_from_cache-new-in-v40) to see whether the previous `Execute` statement used the cached execution plan, for example:
 

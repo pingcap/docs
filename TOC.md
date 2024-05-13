@@ -564,6 +564,7 @@
         - [Replicate Data to Pulsar](/ticdc/ticdc-sink-to-pulsar.md)
         - [Replicate Data to Storage Services](/ticdc/ticdc-sink-to-cloud-storage.md)
       - [Manage Changefeeds](/ticdc/ticdc-manage-changefeed.md)
+      - [TiCDC Client Authentication](/ticdc/ticdc-client-authentication.md)
       - [Log Filter](/ticdc/ticdc-filter.md)
       - [DDL Replication](/ticdc/ticdc-ddl.md)
       - [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
