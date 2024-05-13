@@ -1,33 +1,34 @@
 ---
-title: Connect to TiDB Cloud with Looker Studio
-summary: Learn how to connect to TiDB Cloud using Looker Studio.
+title: Connect to TiDB Serverless with Looker Studio
+summary: Learn how to connect to TiDB Serverless using Looker Studio.
 ---
 
-# Connect to TiDB Cloud with Looker Studio
+# Connect to TiDB Serverless with Looker Studio
 
-TiDB is a MySQL-compatible database, and [Looker Studio](https://lookerstudio.google.com/) is a free web-based BI tool that can visualize data from various sources. 
+TiDB is a MySQL-compatible database, TiDB Serverless is a fully managed TiDB offering, and [Looker Studio](https://lookerstudio.google.com/) is a free web-based BI tool that can visualize data from various sources.
 
-In this tutorial, you can learn how to connect to your TiDB cluster using Looker Studio.
+In this tutorial, you can learn how to connect to your TiDB Serverless cluster with Looker Studio.
+
+> **Note:**
+>
+>- Most steps in this tutorial work with TiDB Dedicated as well. However, for TiDB Dedicated, you need to import your dataset following [Import data from files to TiDB Cloud](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud) and get the connection information for your cluster following [Connect to TiDB Dedicated](/tidb-cloud/connect-via-standard-connection.md). In addition, when connecting to TiDB Dedicated, you need to allow access from `142.251.74.0/23`. For more information about connection from Looker Studio, see [Looker Studio documentation](https://support.google.com/looker-studio/answer/7088031#zippy=%2Cin-this-article).
 
 ## Prerequisites
 
 To complete this tutorial, you need:
 
-- Google Account. 
-- A TiDB cluster.
+- A Google account
+- A TiDB Serverless cluster
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**If you don't have a TiDB Serverless cluster, you can create one as follows:**
 
-- Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Serverless cluster.
+- [Create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md)
 
-## Import Dataset
+## Step 1. Import a dataset
 
-You can use the S&P 500 dataset provided as an Interactive Tutorial of TiDB Serverless. 
+You can import the S&P 500 dataset provided in the interactive tutorial of TiDB Serverless.
 
-<SimpleTab>
-<div label="TiDB Serverless">
-
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and click **?** in the lower-right corner. A **Help** dialog is displayed. 
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and click **?** in the lower-right corner. A **Help** dialog is displayed.
 
 2. In the dialog, click **Interactive Tutorials**, and then click **S&P 500 Analysis**.
 
@@ -35,98 +36,54 @@ You can use the S&P 500 dataset provided as an Interactive Tutorial of TiDB Serv
 
 4. After the import status changes to **IMPORTED**, click **Exit Tutorial** to close this dialog.
 
-</div>
-</SimpleTab>
-
-## Connect to TiDB cluster
-
-<SimpleTab>
-<div label="TiDB Serverless">
+## Step 2. Get the connection information for your cluster
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. Set **Connect With** to `General` in the connection dialog. Then click **Generate Password** to create a random password.
+3. In the connection dialog, Set **Connect With** to `General`, and then click **Generate Password** to create a random password.
 
     > **Tip:**
     >
     > If you have created a password before, use the original password or click **Reset Password** to generate a new one.
-    
+
 4. Download the [CA cert](https://letsencrypt.org/certs/isrgrootx1.pem).
 
     > **Tip:**
     >
-    > As TiDB Serverless requires a secure TLS connection between the client and the cluster, you need this CA cert for connection settings on Looker Studio.
+    > TiDB Serverless requires a secure TLS connection between the client and the cluster, so you need this CA cert for connection settings in Looker Studio.
 
-5. Sign in to [Looker Studio](https://lookerstudio.google.com/), click **Create** > **Report**, and then select the **MySQL** connector on the **Add data to report** page.
+## Step 3. Connect to your TiDB cluster with Looker Studio
 
-6. In the **BASIC** setting pane, configure the following connection parameters:
+1. Log into [Looker Studio](https://lookerstudio.google.com/), and then click **Create** > **Report** in the left navigation pane.
 
-    - **Host Name or IP**: enter the `HOST` parameter from the TiDB Cloud connection dialog.
-    - **Port(Optional)**: enter the `PORT` parameter from the TiDB Cloud connection dialog.
+2. On the displayed page, select the **MySQL** connector, and then click **AUTHORIZE**.
+
+3. In the **BASIC** setting pane, configure the connection parameters.
+
+    - **Host Name or IP**: enter the `HOST` parameter from the TiDB Serverless connection dialog.
+    - **Port(Optional)**: enter the `PORT` parameter from the TiDB Serverless connection dialog.
     - **Database**: enter the database you want to connect to. For this tutorial, enter `sp500insight`.
-    - **Username**: enter the `USERNAME` parameter from the TiDB Cloud connection dialog.
-    - **Password**: enter the `PASSWORD` parameter from the TiDB Cloud connection dialog.
-    - Select the **Enable SSL** option.
-        - Click the upload icon to the right of **MySQL SSL Client Configuration Files**. Then, select the downloaded CA file in step 4. 
+    - **Username**: enter the `USERNAME` parameter from the TiDB Serverless connection dialog.
+    - **Password**: enter the `PASSWORD` parameter from the TiDB Serverless connection dialog.
+    - **Enable SSL**: select this option, and then click the upload icon to the right of **MySQL SSL Client Configuration Files** to upload the CA file downloaded from [Step 2](#step-2-get-the-connection-information-for-your-cluster).
 
-    ![Looker Studio: configure connection settings for TiDB cloud](/media/develop/looker-studio-configure-connection.png)
+    ![Looker Studio: configure connection settings for TiDB Serverless](/media/tidb-cloud/looker-studio-configure-connection.png)
 
-7. Click **AUTHENTICATE**. 
+4. Click **AUTHENTICATE**.
 
-If the authentication succeeds, you can see tables in the database. 
+If the authentication succeeds, you can see tables in the database.
 
-</div>
-<div label="TiDB Dedicated">
+## Step 4. Create a simple chart
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+Now, you can use the TiDB cluster as a data source and create a simple chart with data.
 
-2. Click **...** menu in the upper-right corner. Then, select **Security Settings**. Settings dialog shows up. 
+1. In the right pane, click **CUSTOM QUERY**.
 
-3. Click **Generate** to generate root password and **Copy** it to the clipboard.
+    ![Looker Studio: custom query](/media/tidb-cloud/looker-studio-custom-query.png)
 
-    > **Tip:**
-    >
-    > If you have created a password before, use the original password or click **Regenerate** to generate a new one.
-
-4. Allow access from Looker Studio by adding `142.251.74.0/23` to **IP Address**, then click **Add to IP list**.
-
-    > **Tip:**
-    >
-    > For more details about the connection from Looker Studio, refer to [Connect to MySQL](https://support.google.com/looker-studio/answer/7088031#zippy=%2Cin-this-article).
-
-5. Click **Apply** to close the dialog.
-
-6. Click **Connect** in the upper-right corner. A connection dialog is displayed.
-
-7. You can download CA File with the link under **Step 2**. 
-
-8. Open Looker Studio and create a Blank Report. Select the **MySQL** connector in the **Add data to report** screen.
-
-9. In the **BASIC** setting pane, configure the following connection parameters:
-
-    - **Host Name or IP**: enter the `HOST` parameter from the TiDB Cloud connection dialog.
-    - **Port(Optional)**: enter the `PORT` parameter from the TiDB Cloud connection dialog.
-    - **Database**: enter the database you want to connect to. In this tutorial, set `sp500insight`.
-    - **Username**: enter the `USERNAME` parameter from the TiDB Cloud connection dialog.
-    - **Password**: enter the `PASSWORD` parameter from the TiDB Cloud connection dialog.
-    - Check **Enable SSL**.
-        - Click the icon on the right of **MySQL SSL Client Configuration Files**. Then, select the downloaded CA file before. 
-
-10. Click **AUTHENTICATE**. 
-
-If the authentication succeeds, you can see tables in the database on the right side. 
-</div>
-</SimpleTab>
-
-## Create a simple chart
-
-Now, you can use the TiDB cluster as a data source and make a simple chart with data. 
-
-1. In the right pane, click **CUSTOM QUERY**. 
-
-2. Put the SQL below, then click **Add** in the bottom-right corner. 
+2. Copy the following code to the **Enter Custom Query** area, then click **Add** in the lower-right corner.
 
     ```sql
     SELECT sector,
@@ -142,11 +99,11 @@ Now, you can use the TiDB cluster as a data source and make a simple chart with 
     ORDER BY 5 ASC;
     ```
 
-    If you see the **You are about to add data to this report** dialog, click **ADD TO REPORT**. Then, a table is displayed in the report. 
+    If you see the **You are about to add data to this report** dialog, click **ADD TO REPORT**. Then, a table is displayed in the report.
 
 3. In the toolbar of the report, click **Add a chart**, and then select `Combo chart` in the `Line` category.
 
-4. In the **Chart** settings pane, configure the following parameters:
+4. In the **Chart** settings pane on the right, configure the following parameters:
 
     - In the **SETUP** Tab:
         - **Dimension**: `sector`.
@@ -154,11 +111,11 @@ Now, you can use the TiDB cluster as a data source and make a simple chart with 
     - In the **STYLE** Tab:
       - Series #1: select the `Line` option and the `Right` axis.
       - Series #2: select the `Bars` option and the `Left` axis.
-    - Leave others as defaults.
+    - Leave other fields as defaults.
 
 Then, you can see a combo chart similar as follows:
 
-![Looker Studio: A simple Combo Chart](/media/develop/looker-studio-simple-chart.png)
+![Looker Studio: A simple Combo chart](/media/tidb-cloud/looker-studio-simple-chart.png)
 
 ## Next steps
 
