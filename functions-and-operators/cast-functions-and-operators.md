@@ -34,15 +34,15 @@ The following types are supported:
 | `UNSIGNED [INTEGER]` | Unsigned Integer | Yes                                                        |
 | `BINARY(n)`          | Binary string    | No                                                         |
 | `CHAR(n)`            | Character string | Yes, but only if a length is specified                     |
-| `DATE`               | Date             | No                                                         |
-| `DATETIME(fsp)`      | Date/Time, fsp is optional | No                                               |
+| `DATE`               | Date             | Yes                                                        |
+| `DATETIME(fsp)`      | Date/Time, fsp is optional | Yes                                              |
 | `DECIMAL(n, m)`      | Decimal Number, N and M are optional and are 10 an 0 if not specified. | No   |
 | `DOUBLE`             | Double precision floating point number | No                                   |
 | `FLOAT(n)`           | Floating point number, precision is optional and should be between 0 and 53. | No |
 | `JSON`               | JSON             | No                                                         |
-| `REAL`               | Floating point number | No                                                    |
+| `REAL`               | Floating point number | Yes                                                   |
 | `SIGNED [INTEGER]`   | Signed Integer   | Yes                                                        |
-| `TIME(fsp)`          | Time             | No                                                         |
+| `TIME(fsp)`          | Time             | Yes                                                        |
 | `YEAR`               | Year             | No                                                         |
 
 Examples:
