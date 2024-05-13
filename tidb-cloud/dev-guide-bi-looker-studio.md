@@ -42,7 +42,7 @@ You can import the S&P 500 dataset provided in the interactive tutorial of TiDB 
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. In the connection dialog, Set **Connect With** to `General`, and then click **Generate Password** to create a random password.
+3. In the connection dialog, set **Connect With** to `General`, and then click **Generate Password** to create a random password.
 
     > **Tip:**
     >
@@ -83,7 +83,7 @@ Now, you can use the TiDB cluster as a data source and create a simple chart wit
 
     ![Looker Studio: custom query](/media/tidb-cloud/looker-studio-custom-query.png)
 
-2. Copy the following code to the **Enter Custom Query** area, then click **Add** in the lower-right corner.
+2. Copy the following code to the **Enter Custom Query** area, and then click **Add** in the lower-right corner.
 
     ```sql
     SELECT sector,
