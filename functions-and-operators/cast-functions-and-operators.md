@@ -31,7 +31,6 @@ The following types are supported:
 
 | Type                 | Description      | Can be used with multi-valued-indexes                      |
 |----------------------|------------------|------------------------------------------------------------|
-| `UNSIGNED [INTEGER]` | Unsigned Integer | Yes                                                        |
 | `BINARY(n)`          | Binary string    | No                                                         |
 | `CHAR(n)`            | Character string | Yes, but only if a length is specified                     |
 | `DATE`               | Date             | Yes                                                        |
@@ -43,6 +42,7 @@ The following types are supported:
 | `REAL`               | Floating point number | Yes                                                   |
 | `SIGNED [INTEGER]`   | Signed Integer   | Yes                                                        |
 | `TIME(fsp)`          | Time             | Yes                                                        |
+| `UNSIGNED [INTEGER]` | Unsigned Integer | Yes                                                        |
 | `YEAR`               | Year             | No                                                         |
 
 Examples:
