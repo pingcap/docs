@@ -278,7 +278,7 @@ The following column types are supported by MySQL but **not** by TiDB:
 
 ### Regular expression compatibility with MySQL
 
-For information about TiDB regular expression compatibility with MySQL, see [Regular expression compatibility with MySQL](/functions-and-operators/string-functions.md#regular-expression-compatibility-with-mysql).
+For information about TiDB regular expression compatibility with MySQL, including `REGEXP_INSTR()`, `REGEXP_LIKE()`, `REGEXP_REPLACE()` and `REGEXP_SUBSTR()`, see [Regular expression compatibility with MySQL](/functions-and-operators/string-functions.md#regular-expression-compatibility-with-mysql).
 
 ### Incompatibility due to deprecated features
 
