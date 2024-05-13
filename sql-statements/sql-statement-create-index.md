@@ -245,7 +245,7 @@ Multi-valued indexes are a kind of secondary index defined on an array column. I
 
 ### Create multi-valued indexes
 
-You can create multi-valued indexes by using the `CAST(... AS ... ARRAY)` expression in the index definition, as creating an expression index.
+You can create multi-valued indexes by using the [`CAST(... AS ... ARRAY)`](/functions-and-operators/cast-functions-and-operators.md#cast) expression in the index definition, as creating an expression index.
 
 ```sql
 mysql> CREATE TABLE customers (
