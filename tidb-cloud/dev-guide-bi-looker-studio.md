@@ -11,7 +11,7 @@ In this tutorial, you can learn how to connect to your TiDB Serverless cluster w
 
 > **Note:**
 >
->- Most steps in this tutorial work with TiDB Dedicated as well. However, for TiDB Dedicated, you need to import your dataset following [Import data from files to TiDB Cloud](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud) and get the connection information for your cluster following [Connect to TiDB Dedicated](/tidb-cloud/connect-via-standard-connection.md). In addition, when connecting to TiDB Dedicated, you need to allow access from `142.251.74.0/23`. For more information about connection from Looker Studio, see [Looker Studio documentation](https://support.google.com/looker-studio/answer/7088031#zippy=%2Cin-this-article).
+> Most steps in this tutorial work with TiDB Dedicated as well. However, for TiDB Dedicated, you need to import your dataset following [Import data from files to TiDB Cloud](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud) and get the connection information for your cluster following [Connect to TiDB Dedicated](/tidb-cloud/connect-via-standard-connection.md). In addition, when connecting to TiDB Dedicated, you need to allow access from `142.251.74.0/23`. For more information about connection from Looker Studio, see [Looker Studio documentation](https://support.google.com/looker-studio/answer/7088031#zippy=%2Cin-this-article).
 
 ## Prerequisites
 
