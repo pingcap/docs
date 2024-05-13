@@ -585,6 +585,11 @@ Configuration items related to performance.
 + Default value: `5`
 + Currently, the valid value range is `[1, 128]`.
 
+### `concurrently-init-stats` <span class="version-mark">New in v8.1.0 and v7.5.2</span>
+
++ Controls whether to init statistics concurrently during TiDB startup.
++ Default value: `false`
+
 ### `stats-load-queue-size` <span class="version-mark">New in v5.4.0</span>
 
 + The maximum number of column requests that the TiDB synchronously loading statistics feature can cache.
