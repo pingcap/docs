@@ -573,7 +573,7 @@ Configuration items related to performance.
 
 ### `concurrently-init-stats` <span class="version-mark">New in v8.1.0 and v7.5.2</span>
 
-+ Controls whether to init statistics concurrently during TiDB startup.
++ Controls whether to initialize statistics concurrently during TiDB startup.
 + Default value: `false`
 
 ### `lite-init-stats` <span class="version-mark">New in v7.1.0</span>
