@@ -27,7 +27,7 @@
       - [Navicat](/develop/dev-guide-gui-navicat.md)
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - BI
-      - [Looker Studio](/develop/dev-guide-bi-looker-studio.md)
+      - [Looker Studio](/tidb-cloud/dev-guide-bi-looker-studio.md)
     - Java
       - [JDBC](/develop/dev-guide-sample-application-java-jdbc.md)
       - [MyBatis](/develop/dev-guide-sample-application-java-mybatis.md)
