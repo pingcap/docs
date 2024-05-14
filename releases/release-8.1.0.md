@@ -218,7 +218,10 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 
 + TiKV
 
+  <!--tw@Oreoxmt 2 -->
     - (dup): release-6.5.9.md > Improvements> TiKV - Avoid performing IO operations on snapshot files in raftstore threads to improve TiKV stability [#16564](https://github.com/tikv/tikv/issues/16564) @[Connor1996](https://github.com/Connor1996)
+    - Accelerate the shutdown speed of TiKV [#16680](https://github.com/tikv/tikv/issues/16680) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Add metrics for memory usage per thread [#15927](https://github.com/tikv/tikv/issues/15927) @[Connor1996](https://github.com/Connor1996)
 
 + PD
   <!--tw@qiancai 1 -->
