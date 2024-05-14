@@ -108,15 +108,15 @@ On the right pane of the endpoint details page, you can click the **Properties**
     >
     >    ```GET /var/{var2}```
     >
-    >   These two routes will conflict with each other because `GET /var/123` matches both;
-    > - Routes with dynamic parameters have lower priority than absolute routes, such as:
+    >   These two path will conflict with each other because `GET /var/123` matches both;
+    > - Paths with dynamic parameters have lower priority than absolute paths, such as:
     >
     >    ```GET /var/{var1}```
     >
     >    ```GET /var/123```
     >
     >   These two routes will not conflict because `GET /var/123` prioritizes matching with the latter;
-    > - The Path parameter can be directly used in SQL, and more information can be found in [Configure parameters] (#configure-parameters)
+    > - The Path parameter can be directly used in SQL, and more information can be found in [Configure parameters](#configure-parameters)
 
 
 - **Endpoint URL**: (read-only) the URL is automatically generated based on the region where the corresponding cluster is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
