@@ -55,7 +55,7 @@ You can use `shard-ddl-lock [task] [flags]` to view the DDL lock information on 
 shard-ddl-lock test
 ```
 
-<details>
+<details open>
 <summary>Expected output</summary>
 
 ```

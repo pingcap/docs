@@ -55,7 +55,7 @@ It is recommended that you use TiProxy for the scenarios that TiProxy is suitabl
 
 ## Installation and usage
 
-This section describes how to deploy and change TiProxy using TiUP. For how to deploy TiProxy using TiDB Operator in Kubernetes, see [TiDB Operator documentation](https://docs.pingcap.com/tidb-in-kubernetes/stable).
+This section describes how to deploy and change TiProxy using TiUP. For how to deploy TiProxy using TiDB Operator in Kubernetes, see [TiDB Operator documentation](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tiproxy).
 
 ### Deploy TiProxy
 
@@ -126,7 +126,7 @@ When using TiUP to change the TiProxy configuration, if the configuration item t
 
 When you deploy TiProxy, it is recommended to specify the version of TiProxy so that TiProxy will not be upgraded when you upgrade the TiDB cluster.
 
-If you need to upgrade TiProxy, add [`--tiproxy-version`](/tiup/tiup-component-cluster-upgrade.md) in the upgrade command to specify the version of TiProxy:
+If you need to upgrade TiProxy, add [`--tiproxy-version`](/tiup/tiup-component-cluster-upgrade.md#--tiproxy-version) in the upgrade command to specify the version of TiProxy:
 
 ```shell
 tiup cluster upgrade <cluster-name> <version> --tiproxy-version <tiproxy-version>

@@ -9,21 +9,10 @@ This statement sets a specific role to be applied to a user by default. Thus, th
 
 ## Synopsis
 
-**SetDefaultRoleStmt:**
-
-![SetDefaultRoleStmt](/media/sqlgram/SetDefaultRoleStmt.png)
-
-**SetDefaultRoleOpt:**
-
-![SetDefaultRoleOpt](/media/sqlgram/SetDefaultRoleOpt.png)
-
-**RolenameList:**
-
-![RolenameList](/media/sqlgram/RolenameList.png)
-
-**UsernameList:**
-
-![UsernameList](/media/sqlgram/UsernameList.png)
+```ebnf+diagram
+SetDefaultRoleStmt ::=
+    "SET" "DEFAULT" "ROLE" ( "NONE" | "ALL" | Rolename ("," Rolename)* ) "TO" Username ("," Username)*
+```
 
 ## Examples
 

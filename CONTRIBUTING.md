@@ -44,7 +44,7 @@ Please check out these templates before you submit a pull request:
 We use separate branches to maintain different versions of TiDB documentation.
 
 - The [documentation under development](https://docs.pingcap.com/tidb/dev) is maintained in the `master` branch.
-- The [published documentation](https://docs.pingcap.com/tidb/stable/) is maintained in the corresponding `release-<verion>` branch. For example, TiDB v7.5 documentation is maintained in the `release-7.5` branch.
+- The [published documentation](https://docs.pingcap.com/tidb/stable/) is maintained in the corresponding `release-<version>` branch. For example, TiDB v7.5 documentation is maintained in the `release-7.5` branch.
 - The [archived documentation](https://docs-archive.pingcap.com/) is no longer maintained and does not receive any further updates.
 
 ### Use cherry-pick labels

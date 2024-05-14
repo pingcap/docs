@@ -9,7 +9,7 @@ Release date: June 29, 2023
 
 TiDB version: 7.2.0
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-tidb) | [Installation packages](https://www.pingcap.com/download/?version=v7.2.0#version-list)
+Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-tidb)
 
 7.2.0 introduces the following key features and improvements:
 
@@ -169,6 +169,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
 > **Note:**
 >
 > This section provides compatibility changes you need to know when you upgrade from v7.1.0 to the current version (v7.2.0). If you are upgrading from v7.0.0 or earlier versions to the current version, you might also need to check the compatibility changes introduced in intermediate versions.
+
+### Behavior changes
+
+- When processing update event, TiCDC splits an event into delete and insert events if the primary key or non-null unique index value is modified in the event. For more information, see [documentation](/ticdc/ticdc-behavior-change.md#transactions-containing-a-single-update-change).
 
 ### System variables
 

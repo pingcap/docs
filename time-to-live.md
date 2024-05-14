@@ -176,29 +176,32 @@ In addition, TiDB provides three tables to obtain more information about TTL job
 + The `mysql.tidb_ttl_table_status` table contains information about the previously executed TTL job and ongoing TTL job for all TTL tables
 
     ```sql
-    MySQL [(none)]> SELECT * FROM mysql.tidb_ttl_table_status LIMIT 1\G;
+    TABLE mysql.tidb_ttl_table_status LIMIT 1\G
+    ```
+
+    ```
     *************************** 1. row ***************************
                           table_id: 85
-                  parent_table_id: 85
+                   parent_table_id: 85
                   table_statistics: NULL
-                      last_job_id: 0b4a6d50-3041-4664-9516-5525ee6d9f90
-              last_job_start_time: 2023-02-15 20:43:46
+                       last_job_id: 0b4a6d50-3041-4664-9516-5525ee6d9f90
+               last_job_start_time: 2023-02-15 20:43:46
               last_job_finish_time: 2023-02-15 20:44:46
-              last_job_ttl_expire: 2023-02-15 19:43:46
+               last_job_ttl_expire: 2023-02-15 19:43:46
                   last_job_summary: {"total_rows":4369519,"success_rows":4369519,"error_rows":0,"total_scan_task":64,"scheduled_scan_task":64,"finished_scan_task":64}
                     current_job_id: NULL
               current_job_owner_id: NULL
             current_job_owner_addr: NULL
-        current_job_owner_hb_time: NULL
+         current_job_owner_hb_time: NULL
             current_job_start_time: NULL
             current_job_ttl_expire: NULL
-                current_job_state: NULL
+                 current_job_state: NULL
                 current_job_status: NULL
     current_job_status_update_time: NULL
     1 row in set (0.040 sec)
     ```
 
-    The column `table_id` is the ID of the partitioned table, and the `parent_table_id` is the ID of the table, corresponding with the ID in  `infomation_schema.tables`. If the table is not a partitioned table, the two IDs are the same.
+    The column `table_id` is the ID of the partitioned table, and the `parent_table_id` is the ID of the table, corresponding with the ID in [`information_schema.tables`](/information-schema/information-schema-tables.md). If the table is not a partitioned table, the two IDs are the same.
 
     The columns `{last, current}_job_{start_time, finish_time, ttl_expire}` describe respectively the start time, finish time, and expiration time used by the TTL job of the last or current execution. The `last_job_summary` column describes the execution status of the last TTL task, including the total number of rows, the number of successful rows, and the number of failed rows.
 
@@ -206,25 +209,28 @@ In addition, TiDB provides three tables to obtain more information about TTL job
 + The `mysql.tidb_ttl_job_history` table contains information about the TTL jobs that have been executed. The record of TTL job history is kept for 90 days.
 
     ```sql
-    MySQL [(none)]> SELECT * FROM mysql.tidb_ttl_job_history LIMIT 1\G;
-    *************************** 1. row ***************************
-              job_id: f221620c-ab84-4a28-9d24-b47ca2b5a301
-            table_id: 85
-      parent_table_id: 85
-        table_schema: test_schema
-          table_name: TestTable
-      partition_name: NULL
-          create_time: 2023-02-15 17:43:46
-          finish_time: 2023-02-15 17:45:46
-          ttl_expire: 2023-02-15 16:43:46
-        summary_text: {"total_rows":9588419,"success_rows":9588419,"error_rows":0,"total_scan_task":63,"scheduled_scan_task":63,"finished_scan_task":63}
-        expired_rows: 9588419
-        deleted_rows: 9588419
-    error_delete_rows: 0
-              status: finished
+    TABLE mysql.tidb_ttl_job_history LIMIT 1\G
     ```
 
-    The column `table_id` is the ID of the partitioned table, and the `parent_table_id` is the ID of the table, corresponding with the ID in  `infomation_schema.tables`. `table_schema`, `table_name`, and `partition_name` correspond to the database, table name, and partition name. `create_time`, `finish_time`, and `ttl_expire` indicate the creation time, end time, and expiration time of the TTL task. `expired_rows` and `deleted_rows` indicate the number of expired rows and the number of rows deleted successfully.
+    ```
+    *************************** 1. row ***************************
+               job_id: f221620c-ab84-4a28-9d24-b47ca2b5a301
+             table_id: 85
+      parent_table_id: 85
+         table_schema: test_schema
+           table_name: TestTable
+       partition_name: NULL
+          create_time: 2023-02-15 17:43:46
+          finish_time: 2023-02-15 17:45:46
+           ttl_expire: 2023-02-15 16:43:46
+         summary_text: {"total_rows":9588419,"success_rows":9588419,"error_rows":0,"total_scan_task":63,"scheduled_scan_task":63,"finished_scan_task":63}
+         expired_rows: 9588419
+         deleted_rows: 9588419
+    error_delete_rows: 0
+               status: finished
+    ```
+
+    The column `table_id` is the ID of the partitioned table, and the `parent_table_id` is the ID of the table, corresponding with the ID in  `information_schema.tables`. `table_schema`, `table_name`, and `partition_name` correspond to the database, table name, and partition name. `create_time`, `finish_time`, and `ttl_expire` indicate the creation time, end time, and expiration time of the TTL task. `expired_rows` and `deleted_rows` indicate the number of expired rows and the number of rows deleted successfully.
 
 ## Compatibility with TiDB tools
 

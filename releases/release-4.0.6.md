@@ -106,7 +106,7 @@ TiDB version: 4.0.6
     - Fix a bug of converting the `enum` and `set` types [#19778](https://github.com/pingcap/tidb/pull/19778)
     - Add a privilege check for `SHOW STATS_META` and `SHOW STATS_BUCKET` [#19760](https://github.com/pingcap/tidb/pull/19760)
     - Fix the error of unmatched column lengths caused by `builtinGreatestStringSig` and `builtinLeastStringSig` [#19758](https://github.com/pingcap/tidb/pull/19758)
-    - If unnecessary errors or warnings occur, the vectorized control expresions fall back to their scalar execution [#19749](https://github.com/pingcap/tidb/pull/19749)
+    - If unnecessary errors or warnings occur, the vectorized control expression fall back to their scalar execution [#19749](https://github.com/pingcap/tidb/pull/19749)
     - Fix the error of the `Apply` operator when the type of the correlation column is `Bit` [#19692](https://github.com/pingcap/tidb/pull/19692)
     - Fix the issue that occurs when the user queries `processlist` and `cluster_log` in MySQL 8.0 client [#19690](https://github.com/pingcap/tidb/pull/19690)
     - Fix the issue that plans of the same type have different plan digests [#19684](https://github.com/pingcap/tidb/pull/19684)

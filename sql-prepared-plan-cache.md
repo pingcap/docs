@@ -63,7 +63,7 @@ Starting from v6.1.0, the execution plan cache is enabled by default. You can co
 
 > **Note:**
 >
-> The execution plan cache feature applies only to `Prepare`/`Execute` queries and does not take effect for normal queries.
+> The [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610) system variable controls the execution plan cache only for `Prepare`/`Execute` queries, not for normal queries. For the execution plan cache for normal queries, see [SQL Non-Prepared Execution Plan Cache](/sql-non-prepared-plan-cache.md).
 
 After the execution plan cache feature is enabled, you can use the session-level system variable [`last_plan_from_cache`](/system-variables.md#last_plan_from_cache-new-in-v40) to see whether the previous `Execute` statement used the cached execution plan, for example:
 
