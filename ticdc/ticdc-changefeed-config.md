@@ -204,8 +204,11 @@ enable-partition-separator = true
 # output-handle-key = false
 # Whether to output the value before the row data changes. The default value is false. 
 # When it is enabled, the UPDATE event will output two rows of data: the first row is a DELETE event that outputs the data before the change; the second row is an INSERT event that outputs the changed data.
+<<<<<<< HEAD
 # When it is enabled, the "is-update" column will be added before the data column. This column is used to identify whether the change data of the current row comes from the Update event or the original Insert/Delete event.
 # If the change data of the current row comes from the Update event, the "is-update" column is true, otherwise it is false.
+=======
+>>>>>>> 84730ca9923ed52704c9467749260c319398b8b2
 # output-old-value = false
 
 # Starting from v8.0.0, TiCDC supports the Simple message encoding protocol. The following are the configuration parameters for the Simple protocol.
