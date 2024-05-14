@@ -316,6 +316,8 @@ The `sink` parameters are described as follows:
 | `transaction_atomicity` | `STRING` type. The atomicity level of the transaction. (Optional)                                                                                                                                              |
 | `only_output_updated_columns` | `BOOLEAN` type. For MQ sinks using the `canal-json` or `open-protocol` protocol, you can specify whether only output the modified columns. The default value is `false`. (Optional) |
 | `cloud_storage_config` | The storage sink configuration. (Optional) |
+| `open`                        | The Open Protocol configuration. (Optional)                                                                             |
+| `debezium`                    | The Debezium Protocol configuration. (Optional)                                                                             |
 
 `sink.column_selectors` is an array. The parameters are described as follows:
 
@@ -349,7 +351,7 @@ The `sink.csv` parameters are described as follows:
 | `partition` | `STRING` type. The target partition for dispatching events.    |
 | `topic`     | `STRING` type. The target topic for dispatching events.        |
 
-`sink.cloud_storage_config`  parameters are described as follows:
+`sink.cloud_storage_config` parameters are described as follows:
 
 | Parameter name | Description |
 |:-----------------|:---------------------------------------|
@@ -359,6 +361,18 @@ The `sink.csv` parameters are described as follows:
 | `file_expiration_days`   | `INT` type. The duration to retain files, which takes effect only when `date-separator` is configured as `day`. |
 | `file_cleanup_cron_spec`   | `STRING` type. The running cycle of the scheduled cleanup task, compatible with the crontab configuration, with a format of `<Second> <Minute> <Hour> <Day of the month> <Month> <Day of the week (Optional)>`. |
 | `flush_concurrency`   | `INT` type. The concurrency for uploading a single file. |
+
+`sink.open` parameters are described as follows:
+
+| Parameter name     | Description                                                                                                                                                                |
+|:-------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `output_old_value` | `BOOLEAN` type. It controls whether to output the value before the row data changes. The default value is `true`. When it is disabled, the UPDATE event does not output the "p" field. |
+
+`sink.debezium` parameters are described as follows:
+
+| Parameter name     | Description                                                                                                                                                                   |
+|:-------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `output_old_value` | `BOOLEAN` type. It controls whether to output the value before the row data changes. The default value is true. When it is disabled, the UPDATE event does not output the "before" field. |
 
 ### Example
 

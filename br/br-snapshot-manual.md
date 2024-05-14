@@ -29,10 +29,10 @@ For more information about snapshot backup and restore, refer to:
 
 ## Back up cluster snapshots
 
-You can back up the latest or specified snapshot of the TiDB cluster using the `br backup full` command. For more information about the command, run the `br backup full --help` command.
+You can back up the latest or specified snapshot of the TiDB cluster using the `tiup br backup full` command. For more information about the command, run the `tiup br backup full --help` command.
 
 ```shell
-br backup full \
+tiup br backup full \
     --pd "${PD_IP}:2379" \
     --backupts '2022-09-08 13:30:00' \
     --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
@@ -42,7 +42,7 @@ br backup full \
 
 In the preceding command:
 
-- `--backupts`: The time point of the snapshot. The format can be [TSO](/glossary.md#tso) or timestamp, such as `400036290571534337` or `2018-05-11 01:42:23`. If the data of this snapshot is garbage collected, the `br backup` command returns an error and 'br' exits. If you leave this parameter unspecified, `br` picks the snapshot corresponding to the backup start time.
+- `--backupts`: The time point of the snapshot. The format can be [TSO](/glossary.md#tso) or timestamp, such as `400036290571534337` or `2018-05-11 01:42:23`. If the data of this snapshot is garbage collected, the `tiup br backup` command returns an error and 'br' exits. If you leave this parameter unspecified, `br` picks the snapshot corresponding to the backup start time.
 - `--ratelimit`: The maximum speed **per TiKV** performing backup tasks. The unit is in MiB/s.
 - `--log-file`: The target file where `br` log is written.
 
@@ -62,12 +62,12 @@ Backup & Restore (BR) supports backing up partial data of a specified database o
 
 ### Back up a database
 
-To back up a database in a cluster, run the `br backup db` command.
+To back up a database in a cluster, run the `tiup br backup db` command.
 
 The following example backs up the `test` database to Amazon S3:
 
 ```shell
-br backup db \
+tiup br backup db \
     --pd "${PD_IP}:2379" \
     --db test \
     --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
@@ -79,12 +79,12 @@ In the preceding command, `--db` specifies the database name, and other paramete
 
 ### Back up a table
 
-To back up a table in a cluster, run the `br backup table` command.
+To back up a table in a cluster, run the `tiup br backup table` command.
 
 The following example backs up the `test.usertable` table to Amazon S3:
 
 ```shell
-br backup table \
+tiup br backup table \
     --pd "${PD_IP}:2379" \
     --db test \
     --table usertable \
@@ -97,12 +97,12 @@ In the preceding command, `--db` and `--table` specify the database name and tab
 
 ### Back up multiple tables with table filter
 
-To back up multiple tables with more criteria, run the `br backup full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`.
+To back up multiple tables with more criteria, run the `tiup br backup full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`.
 
 The following example backs up tables that match the `db*.tbl*` filter rule to Amazon S3:
 
 ```shell
-br backup full \
+tiup br backup full \
     --pd "${PD_IP}:2379" \
     --filter 'db*.tbl*' \
     --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
@@ -119,7 +119,7 @@ If you do not set this parameter to `false`, the `br` command-line tool uses the
 The following is an example of backing up cluster snapshot data and backing up table statistics with `--ignore-stats=false`:
 
 ```shell
-br backup full \
+tiup br backup full \
 --storage local:///br_data/ --pd "${PD_IP}:2379" --log-file restore.log \
 --ignore-stats=false
 ```
@@ -127,7 +127,7 @@ br backup full \
 After backing up data with the preceding configuration, when you restore data, the `br` command-line tool automatically restores table statistics if table statistics are included in the backup (Starting from v8.0.0, the `br` command-line tool introduces the `--load-stats` parameter, which controls whether to restore backup statistics. The default behavior is to restore backup statistics. There is no need to set it to `false` in most cases):
 
 ```shell
-br restore full \
+tiup br restore full \
 --storage local:///br_data/ --pd "${PD_IP}:2379" --log-file restore.log
 ```
 
@@ -150,7 +150,7 @@ Since TiDB v5.3.0, you can encrypt backup data by configuring the following para
 The following is an example:
 
 ```shell
-br backup full\
+tiup br backup full\
     --pd ${PD_IP}:2379 \
     --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
     --crypter.method aes128-ctr \
@@ -164,10 +164,10 @@ br backup full\
 
 ## Restore cluster snapshots
 
-You can restore a TiDB cluster snapshot by running the `br restore full` command.
+You can restore a TiDB cluster snapshot by running the `tiup br restore full` command.
 
 ```shell
-br restore full \
+tiup br restore full \
     --pd "${PD_IP}:2379" \
     --with-sys-table \
     --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
@@ -193,12 +193,12 @@ You can use `br` to restore partial data of a specified database or table from b
 
 ### Restore a database
 
-To restore a database to a cluster, run the `br restore db` command.
+To restore a database to a cluster, run the `tiup br restore db` command.
 
 The following example restores the `test` database from the backup data to the target cluster:
 
 ```shell
-br restore db \
+tiup br restore db \
     --pd "${PD_IP}:2379" \
     --db "test" \
     --ratelimit 128 \
@@ -214,12 +214,12 @@ In the preceding command, `--db` specifies the name of the database to be restor
 
 ### Restore a table
 
-To restore a single table to a cluster, run the `br restore table` command.
+To restore a single table to a cluster, run the `tiup br restore table` command.
 
 The following example restores the `test.usertable` table from Amazon S3 to the target cluster:
 
 ```shell
-br restore table \
+tiup br restore table \
     --pd "${PD_IP}:2379" \
     --db "test" \
     --table "usertable" \
@@ -232,12 +232,12 @@ In the preceding command, `--table` specifies the name of the table to be restor
 
 ### Restore multiple tables with table filter
 
-To restore multiple tables with more complex filter rules, run the `br restore full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`.
+To restore multiple tables with more complex filter rules, run the `tiup br restore full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`.
 
 The following example restores tables that match the `db*.tbl*` filter rule from Amazon S3 to the target cluster:
 
 ```shell
-br restore full \
+tiup br restore full \
     --pd "${PD_IP}:2379" \
     --filter 'db*.tbl*' \
     --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
@@ -246,12 +246,12 @@ br restore full \
 
 ### Restore execution plan bindings from the `mysql` schema
 
-To restore execution plan bindings of a cluster, you can run the `br restore full` command, including the `--with-sys-table` option and also the `--filter` or `-f` option to specify the `mysql` schema to be restored.
+To restore execution plan bindings of a cluster, you can run the `tiup br restore full` command, including the `--with-sys-table` option and also the `--filter` or `-f` option to specify the `mysql` schema to be restored.
 
 The following is an example of restoring the `mysql.bind_info` table:
 
 ```shell
-br restore full \
+tiup br restore full \
     --pd "${PD_IP}:2379" \
     --filter 'mysql.bind_info' \
     --with-sys-table \
@@ -286,7 +286,7 @@ ADMIN RELOAD BINDINGS;
 After encrypting the backup data, you need to pass in the corresponding decryption parameters to restore the data. Ensure that the decryption algorithm and key are correct. If the decryption algorithm or key is incorrect, the data cannot be restored. The following is an example:
 
 ```shell
-br restore full\
+tiup br restore full\
     --pd "${PD_IP}:2379" \
     --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
     --crypter.method aes128-ctr \
