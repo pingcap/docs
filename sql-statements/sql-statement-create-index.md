@@ -165,7 +165,7 @@ allow-expression-index = true
 > - Volatile functions, such as `RAND()` and `NOW()`.
 > - [System variables](/system-variables.md) and [user variables](/user-defined-variables.md).
 > - Subqueries.
-> - [`AUTO_INCREMENT`](/auto-increment.md) column. You can remove this restriction by setting the value of [`tidb_enable_auto_increment_in_generated`](/system-variables.md#tidb_enable_auto_increment_in_generated) (system variable) to `true`.
+> - [`AUTO_INCREMENT`](/auto-increment.md) columns. You can remove this restriction by setting the value of [`tidb_enable_auto_increment_in_generated`](/system-variables.md#tidb_enable_auto_increment_in_generated) (system variable) to `true`.
 > - [Window functions](/functions-and-operators/window-functions.md).
 > - ROW functions, such as `CREATE TABLE t (j JSON, INDEX k (((j,j))));`.
 > - [Aggregate functions](/functions-and-operators/aggregate-group-by-functions.md).
