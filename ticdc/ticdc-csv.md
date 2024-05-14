@@ -48,8 +48,8 @@ In the CSV file, each column is defined as follows:
 - Column 2: Table name.
 - Column 3: Schema name.
 - Column 4: The `commit-ts` of the source transaction. This column is optional.
-- Column 5: `is-update` column only exists when `output-old-value` is true, and is used to identify whether the row change comes from the Update event (set as true) or from the Insert/Delete event (set as false).
-- Column 6 to the last column: One or more columns that represent data to be changed.
+- Column 5: The `is-update` column only exists when the value of `output-old-value` is true, which is used to identify whether the row data change comes from the UPDATE event (the value of the column is true) or the INSERT/DELETE event (the value is false).
+- Column 6 to the last column: One or more columns with data changes.
 
 Assume that table `hr.employee` is defined as follows:
 
