@@ -89,9 +89,35 @@ On the right pane of the endpoint details page, you can click the **Properties**
 
 - **Path**: the path that users use to access the endpoint.
 
-    - The combination of the request method and the path must be unique within a Data App.
-    - Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in a path. A path must start with a slash (`/`) and end with a letter, number, or underscore (`_`). For example, `/my_endpoint/get_id`.
     - The length of the path must be less than 64 characters.
+    - The combination of the request method and the path must be unique within a Data App.
+    - Usually, only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in a path. A path must start with a slash (`/`) and end with a letter, number, or underscore (`_`). For example, `/my_endpoint/get_id`.
+    - Path supports dynamic parameters, which need to be wrapped in curly braces, such as `{var}`. The name of the path parameter supports letters, numbers, and underscores, and can only start with a letter or an underline.
+
+    > **Note:**
+    >
+    > - The path parameter needs to occupy a separate level and does not support prefixes and suffixes.
+    >
+    >    *Valid*: ```/var/{var}、/{var}```
+    >
+    >    *Invalid*:```/var{var}、/{var}var```
+    >
+    > - Paths with the same method and prefix may cause path conflicts, as shown in the following example:.
+    >
+    >    ```GET /var/{var1}```
+    >
+    >    ```GET /var/{var2}```
+    >
+    >   These two routes will conflict with each other because `GET /var/123` matches both;
+    > - Routes with dynamic parameters have lower priority than absolute routes, such as:
+    >
+    >    ```GET /var/{var1}```
+    >
+    >    ```GET /var/123```
+    >
+    >   These two routes will not conflict because `GET /var/123` prioritizes matching with the latter;
+    > - The Path parameter can be directly used in SQL, and more information can be found in [Configure parameters] (#configure-parameters)
+
 
 - **Endpoint URL**: (read-only) the URL is automatically generated based on the region where the corresponding cluster is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
 
@@ -191,7 +217,13 @@ In the **Definition** section, you can view and manage the following properties 
 
 - The parameter name: the name can only include letters, digits, and underscores (`_`) and must start with a letter or an underscore (`_`). **DO NOT** use `page` and `page_size` as parameter names, which are reserved for pagination of request results.
 - **Required**: specifies whether the parameter is required in the request. The default configuration is set to not required.
+    > **Tip:**
+    >
+    > The path parameter is required by default and cannot be modified.
 - **Type**: specifies the data type of the parameter. Supported values are `STRING`, `NUMBER`, `INTEGER`, `BOOLEAN`, and `ARRAY`. When using a `STRING` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `STRING` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.
+    > **Tip:**
+    >
+    > The path parameter currently only supports two types: `STRING` and `INTEGER`.
 - **Enum Value**: (optional) specifies the valid values for the parameter and is available only when the parameter type is `STRING`, `INTEGER`, or `NUMBER`.
 
     - If you leave this field empty, the parameter can be any value of the specified type.
@@ -203,6 +235,9 @@ In the **Definition** section, you can view and manage the following properties 
     - For `ARRAY` type, you need to separate multiple values with a comma (`,`).
     - Make sure that the value can be converted to the type of parameter. Otherwise, the endpoint returns an error.
     - If you do not set a test value for a parameter, the default value is used when testing the endpoint.
+- **Location**: specifies the location of the parameter and can not be modified.
+    - For path parameters, the location is `Path`.
+    - For others, if the request method is `GET` or `DELETE`, parameter's location is `Query`, if it's `POST` or `PUT`, locatioin is `Body`.
 
 In the **Test Values** section, you can view and set test parameters. These values are used as the parameter values when you test the endpoint. Make sure that the value can be converted to the type of parameter. Otherwise, the endpoint returns an error.
 
