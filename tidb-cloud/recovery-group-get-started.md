@@ -39,9 +39,14 @@ To create a Recovery Group, perform the following steps:
 
     > **Note**
     >
-    > When assigning databases to the group you can select specific databases to the recovery group, or select all databases on the primary cluster (current and future).
+    > When assigning databases to the group you can select specific databases to the recovery group, or select all (non-system) databases on the primary cluster (current and future).
     > If you **Assign all databases (current and future)** then any future databases added to the cluster will be automatically included in this recovery group and replicated to the secondary cluster.
     > If you **Assign specific databases** then you will select the specific databases on the primary cluster that you want to replicate to the secondary cluster. If any databases are added to the primary cluster in the future, then these will not be automatically replicated as part of this recovery group.
+    > During the initial synchronization, due to the volume of data transferred, the online query performance at the primary or secondary clusters may be affected. Schedule the initial protection of databases for a less busy period.
+
+    > **Warning**
+    > 
+    > As part of the initial data replication, the content of the selected databases will be replaced at the secondary cluster by the content of the databases from the primary cluster. If you wish to preserve the unique content on the secondary cluster please complete a backup before completing the setup of the the Recovery Group.
 
 8. Review the summary information and click **Create** to begin protecting the databases as part of a new Recovery Group.
 
@@ -61,6 +66,10 @@ After creating a Recovery Group, view the **Recovery Group Detail** page to view
     > The page also provides metrics on the throughput of the recovery groups replication, and the replication latency experienced.
 
 4. The status of the Recovery Group will read as **Available** when the replication relationship is fully established and functioning.
+
+    > **Warning**
+    >
+    > As part of the setup of a Recovery Group, an account will be created on the secondary cluster that will be used by the replication process. This account will be named following the pattern `cloud-rg-*`. Deleting or modifying this account will cause the replication to be interrupted.
 
 ## What's next
 

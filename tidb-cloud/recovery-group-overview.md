@@ -17,7 +17,9 @@ A Recovery Group consists of a set of replicated databases that can be failed ov
 - Primary Cluster: the cluster where the database is actively written by the application
 - Secondary Cluster: the cluster where replicas of the database are located
 
-You can also describe the basic working principles here, or integrate the principles into the component introduction above.
+> **Note**
+>
+> Client connections to the replica copy of the database are not explicitly forced to be read-only by the Recovery Group feature. Ensuring that the application connecting to the replica copy only performs read-only queries is the responsibility of the application.
 
 ## Key features/Limitations
 
