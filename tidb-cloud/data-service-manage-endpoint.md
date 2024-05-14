@@ -96,7 +96,7 @@ On the right pane of the endpoint details page, you can click the **Properties**
 
     > **Note:**
     >
-    > - In a path, each parameter must be at a separate level and do not support prefixes or suffixes.
+    > - In a path, each parameter must be at a separate level and does not support prefixes or suffixes.
     >
     >    *Valid path*: ```/var/{var}``` and  ```/{var}```
     >
