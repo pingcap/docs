@@ -2322,7 +2322,7 @@ Output:
 
 ## Regular expression compatibility with MySQL
 
-The following sections describe the regular expression compatibility with MySQL, including `REGEXP_INSTR()`, `REGEXP_LIKE()`, `REGEXP_REPLACE()` and `REGEXP_SUBSTR()`.
+The following sections describe the regular expression compatibility with MySQL, including `REGEXP_INSTR()`, `REGEXP_LIKE()`, `REGEXP_REPLACE()`, and `REGEXP_SUBSTR()`.
 
 ### Syntax compatibility
 
