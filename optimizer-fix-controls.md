@@ -26,6 +26,12 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 ## Optimizer Fix Controls reference
 
+### [`33031`](https://github.com/pingcap/tidb/issues/33031) <span class="version-mark">New in v8.0.0</span>
+
+- Default value: `OFF`
+- Possible values: `ON`, `OFF`
+- This variable controls whether to allow plan cache for partitioned tables. If it is set to `ON`, neither [Prepared statement plan cache](/sql-prepared-plan-cache.md) nor [Non-prepared statement plan cache](/sql-non-prepared-plan-cache.md) will be enabled for [partitioned tables](/partitioned-table.md).
+
 ### [`44262`](https://github.com/pingcap/tidb/issues/44262) <span class="version-mark">New in v6.5.3 and v7.2.0</span>
 
 - Default value: `OFF`
@@ -64,3 +70,10 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 - Possible values: `[0, 2147483647]`
 - This variable sets the threshold for the optimizer's heuristic strategy to select access paths. If the estimated rows for an access path (such as `Index_A`) is much smaller than that of other access paths (default `1000` times), the optimizer skips the cost comparison and directly selects `Index_A`.
 - `0` means to disable this heuristic strategy.
+
+### [`52869`](https://github.com/pingcap/tidb/issues/52869) <span class="version-mark">New in v8.1.0</span>
+
+- Default value: `OFF`
+- Possible values: `ON`, `OFF`
+- As stated in the **Note** of [Explain Statements Using Index Merge](/explain-index-merge.md#examples), if the optimizer can choose the single index scan method (other than full table scan) for a query plan, the optimizer will not automatically use index merge.
+- You can remove this limitation by enabling this fix control. Removing this limitation enables the optimizer to choose index merge automatically in more queries, but might cause the optimizer to ignore the optimal execution plans. Therefore, it is recommended to conduct sufficient tests on actual use cases before removing this limitation to make sure that it will not cause performance regressions.

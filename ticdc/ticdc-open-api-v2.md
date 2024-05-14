@@ -92,7 +92,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/status
 
 ```json
 {
-  "version": "v7.6.0",
+  "version": "v8.0.0",
   "git_hash": "10413bded1bdb2850aa6d7b94eb375102e9c44dc",
   "id": "d2912e63-3349-447c-90ba-72a4e04b5e9e",
   "pid": 1447,
@@ -158,15 +158,6 @@ This interface is used to submit a replication task to TiCDC. If the request is 
     "enable_old_value": true,
     "enable_sync_point": true,
     "filter": {
-      "do_dbs": [
-        "string"
-      ],
-      "do_tables": [
-        {
-          "database_name": "string",
-          "table_name": "string"
-        }
-      ],
       "event_filters": [
         {
           "ignore_delete_value_expr": "string",
@@ -182,15 +173,6 @@ This interface is used to submit a replication task to TiCDC. If the request is 
           "matcher": [
             "string"
           ]
-        }
-      ],
-      "ignore_dbs": [
-        "string"
-      ],
-      "ignore_tables": [
-        {
-          "database_name": "string",
-          "table_name": "string"
         }
       ],
       "ignore_txn_start_ts": [
@@ -297,10 +279,6 @@ The `filter` parameters are described as follows:
 
 | Parameter name | Description |
 |:-----------------|:---------------------------------------|
-| `do_dbs`              | `STRING ARRAY` type. The databases to be replicated. (Optional)                                       |
-| `do_tables`           | The tables to be replicated. (Optional)                                                     |
-| `ignore_dbs`          | `STRING ARRAY` type. The databases to be ignored. (Optional)            |
-| `ignore_tables`       | The tables to be ignored. (Optional)        |
 | `event_filters`       | The configuration to filter events. (Optional)  |
 | `ignore_txn_start_ts` | `UINT64 ARRAY` type. Specifying this will ignore transactions that specify `start_ts`, such as `[1, 2]`. (Optional)   |
 | `rules`               | `STRING ARRAY` type. The rules for table schema filtering, such as `['foo*.*', 'bar*.*']`. For more information, see [Table Filter](/table-filter.md). (Optional)  |
@@ -332,12 +310,14 @@ The `sink` parameters are described as follows:
 | `date_separator`        | `STRING` type. Indicates the date separator type of the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. (Optional) |
 | `dispatchers`           | An configuration array for event dispatching. (Optional)                                                                                                                                                       |
 | `encoder_concurrency`   | `INT` type. The number of encoder threads in the MQ sink. The default value is `16`. (Optional)                                                                                                                |
-| `protocol`              | `STRING` type. For MQ sinks, you can specify the protocol format of the message. The following protocols are currently supported: `canal-json`, `open-protocol`, `canal`, `avro`, and `maxwell`.               |
+| `protocol`              | `STRING` type. For MQ sinks, you can specify the protocol format of the message. The following protocols are currently supported: `canal-json`, `open-protocol`, `avro`, and `maxwell`.               |
 | `schema_registry`       | `STRING` type. The schema registry address. (Optional)                                                                                                                                                         |
 | `terminator`            | `STRING` type. The terminator is used to separate two data change events. The default value is null, which means `"\r\n"` is used as the terminator. (Optional)                                                |
 | `transaction_atomicity` | `STRING` type. The atomicity level of the transaction. (Optional)                                                                                                                                              |
 | `only_output_updated_columns` | `BOOLEAN` type. For MQ sinks using the `canal-json` or `open-protocol` protocol, you can specify whether only output the modified columns. The default value is `false`. (Optional) |
 | `cloud_storage_config` | The storage sink configuration. (Optional) |
+| `open`                        | The Open Protocol configuration. (Optional)                                                                             |
+| `debezium`                    | The Debezium Protocol configuration. (Optional)                                                                             |
 
 `sink.column_selectors` is an array. The parameters are described as follows:
 
@@ -356,11 +336,11 @@ The `sink.csv` parameters are described as follows:
 | `quote`                  | `STRING` type. The quotation character used to surround fields in the CSV file. If the value is empty, no quotation is used. The default value is `"`. |
 | `binary_encoding_method` | `STRING` type. The encoding method of binary data, which can be `"base64"` or `"hex"`. The default value is `"base64"`. |
 
-`sink.dispatchers`: for the sink of MQ type, you can use this parameter to configure the event dispatcher. The following dispatchers are supported: `default`, `ts`, `rowid`, and `table`. The dispatcher rules are as follows:
+`sink.dispatchers`: for the sink of MQ type, you can use this parameter to configure the event dispatcher. The following dispatchers are supported: `default`, `ts`, `index-value`, and `table`. The dispatcher rules are as follows:
 
 - `default`: dispatches events in the `table` mode.
 - `ts`: uses the commitTs of the row change to create the hash value and dispatch events.
-- `rowid`: uses the name and value of the selected HandleKey column to create the hash value and dispatch events.
+- `index-value`: uses the name and value of the selected HandleKey column to create the hash value and dispatch events.
 - `table`: uses the schema name of the table and the table name to create the hash value and dispatch events.
 
 `sink.dispatchers` is an array. The parameters are described as follows:
@@ -371,7 +351,7 @@ The `sink.csv` parameters are described as follows:
 | `partition` | `STRING` type. The target partition for dispatching events.    |
 | `topic`     | `STRING` type. The target topic for dispatching events.        |
 
-`sink.cloud_storage_config`  parameters are described as follows:
+`sink.cloud_storage_config` parameters are described as follows:
 
 | Parameter name | Description |
 |:-----------------|:---------------------------------------|
@@ -381,6 +361,18 @@ The `sink.csv` parameters are described as follows:
 | `file_expiration_days`   | `INT` type. The duration to retain files, which takes effect only when `date-separator` is configured as `day`. |
 | `file_cleanup_cron_spec`   | `STRING` type. The running cycle of the scheduled cleanup task, compatible with the crontab configuration, with a format of `<Second> <Minute> <Hour> <Day of the month> <Month> <Day of the week (Optional)>`. |
 | `flush_concurrency`   | `INT` type. The concurrency for uploading a single file. |
+
+`sink.open` parameters are described as follows:
+
+| Parameter name     | Description                                                                                                                                                                |
+|:-------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `output_old_value` | `BOOLEAN` type. It controls whether to output the value before the row data changes. The default value is `true`. When it is disabled, the UPDATE event does not output the "p" field. |
+
+`sink.debezium` parameters are described as follows:
+
+| Parameter name     | Description                                                                                                                                                                   |
+|:-------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `output_old_value` | `BOOLEAN` type. It controls whether to output the value before the row data changes. The default value is true. When it is disabled, the UPDATE event does not output the "before" field. |
 
 ### Example
 
@@ -412,15 +404,6 @@ If the request is successful, `200 OK` is returned. If the request fails, an err
     "enable_old_value": true,
     "enable_sync_point": true,
     "filter": {
-      "do_dbs": [
-        "string"
-      ],
-      "do_tables": [
-        {
-          "database_name": "string",
-          "table_name": "string"
-        }
-      ],
       "event_filters": [
         {
           "ignore_delete_value_expr": "string",
@@ -436,15 +419,6 @@ If the request is successful, `200 OK` is returned. If the request fails, an err
           "matcher": [
             "string"
           ]
-        }
-      ],
-      "ignore_dbs": [
-        "string"
-      ],
-      "ignore_tables": [
-        {
-          "database_name": "string",
-          "table_name": "string"
         }
       ],
       "ignore_txn_start_ts": [
@@ -616,15 +590,6 @@ To modify the changefeed configuration, follow the steps of `pause the replicati
     "enable_old_value": true,
     "enable_sync_point": true,
     "filter": {
-      "do_dbs": [
-        "string"
-      ],
-      "do_tables": [
-        {
-          "database_name": "string",
-          "table_name": "string"
-        }
-      ],
       "event_filters": [
         {
           "ignore_delete_value_expr": "string",
@@ -640,15 +605,6 @@ To modify the changefeed configuration, follow the steps of `pause the replicati
           "matcher": [
             "string"
           ]
-        }
-      ],
-      "ignore_dbs": [
-        "string"
-      ],
-      "ignore_tables": [
-        {
-          "database_name": "string",
-          "table_name": "string"
         }
       ],
       "ignore_txn_start_ts": [

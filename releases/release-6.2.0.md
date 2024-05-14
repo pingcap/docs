@@ -1,5 +1,6 @@
 ---
 title: TiDB 6.2.0 Release Notes
+summary: TiDB 6.2.0-DMR introduces new features like visual execution plans, monitoring page, and lock view. It also supports concurrent DDL operations and enhances the performance of aggregation operations. TiKV now supports automatic CPU usage tuning and detailed configuration information listing. TiFlash adds FastScan for data scanning and improves error handling. BR now supports continuous data validation and automatically identifies the region of Amazon S3 buckets. TiCDC supports filtering DDL and DML events. There are also compatibility changes, bug fixes, and improvements across various tools.
 ---
 
 # TiDB 6.2.0 Release Notes
@@ -328,7 +329,7 @@ Since TiDB v6.2.0, backing up and restoring RawKV using BR is deprecated.
 
     - Support the `SHOW COUNT(*) WARNINGS` and `SHOW COUNT(*) ERRORS` statements [#25068](https://github.com/pingcap/tidb/issues/25068) @[likzn](https://github.com/likzn)
     - Add validation check for some system variables [#35048](https://github.com/pingcap/tidb/issues/35048) @[morgo](https://github.com/morgo)
-    - Optimize the error messages for some type conversions [#32447](https://github.com/pingcap/tidb/issues/32744) @[fanrenhoo](https://github.com/fanrenhoo)
+    - Optimize the error messages for some type conversions [#32744](https://github.com/pingcap/tidb/issues/32744) @[fanrenhoo](https://github.com/fanrenhoo)
     - The `KILL` command now supports DDL operations [#24144](https://github.com/pingcap/tidb/issues/24144) @[morgo](https://github.com/morgo)
     - Make the output of `SHOW TABLES/DATABASES LIKE …` more MySQL-compatible. The column names in the output contain the `LIKE` value [#35116](https://github.com/pingcap/tidb/issues/35116) @[likzn](https://github.com/likzn)
     - Improve the performance of JSON-related functions [#35859](https://github.com/pingcap/tidb/issues/35859) @[wjhuang2016](https://github.com/wjhuang2016)

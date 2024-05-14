@@ -8,9 +8,10 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 
 # TiDB Global Sort
 
-> **Warning:**
+> **Note:**
 >
-> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> - Currently, the Global Sort process consumes a large amount of computing and memory resources of TiDB nodes. In scenarios such as adding indexes online while user business applications are running, it is recommended to add new TiDB nodes to the cluster, configure the [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) variable for these nodes, and connect to these nodes to create tasks. In this way, the distributed framework schedules tasks to these nodes, isolating the workload from other TiDB nodes to reduce the impact of executing backend tasks such as `ADD INDEX` and `IMPORT INTO` on user business applications.
+> - When the Global Sort feature is used, it is recommended to use TiDB nodes with at least 16 cores of CPU and 32 GiB of memory to avoid OOM.
 
 > **Note:**
 >
@@ -20,7 +21,7 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 
 The TiDB Global Sort feature enhances the stability and efficiency of data import and DDL (Data Definition Language) operations. It serves as a general operator in the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md), providing a global sort service on cloud.
 
-The Global Sort feature currently only supports using Amazon S3 as cloud storage. In future releases, it will be extended to support multiple shared storage interfaces, such as POSIX, enabling seamless integration with different storage systems. This flexibility enables efficient and adaptable data sorting for various use cases.
+Currently, the Global Sort feature supports using Amazon S3 as cloud storage.
 
 ## Use cases
 
@@ -36,7 +37,7 @@ Currently, the Global Sort feature is not used as a component of the query execu
 
 To enable Global Sort, follow these steps:
 
-1. Enable the DXF by setting the value of [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) to `ON`:
+1. Enable the DXF by setting the value of [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) to `ON`. Starting from v8.1.0, this variable is enabled by default. For newly created clusters of v8.1.0 or later versions, you can skip this step.
 
     ```sql
     SET GLOBAL tidb_enable_dist_task = ON;

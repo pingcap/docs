@@ -19,6 +19,8 @@ A data source contains the information for accessing the upstream migration task
 
     In DM configuration files, it is recommended to use the password encrypted with dmctl. You can follow the example below to obtain the encrypted password of the data source, which can be used to write the configuration file later.
 
+    Starting from v8.0.0, you must configure [`secret-key-path`](/dm/dm-master-configuration-file.md) for DM-master before using the `tiup dmctl encrypt` command.
+
     {{< copyable "shell-regular" >}}
 
     ```bash
@@ -82,7 +84,7 @@ The returned results are as follows:
 
 After creating a data source, you can use the following command to query the data source:
 
-- If you konw the `source-id` of the data source, you can use the `dmctl config source <source-id>` command to directly check the configuration of the data source:
+- If you know the `source-id` of the data source, you can use the `dmctl config source <source-id>` command to directly check the configuration of the data source:
 
     {{< copyable "shell-regular" >}}
 

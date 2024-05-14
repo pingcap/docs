@@ -1,5 +1,6 @@
 ---
 title: TiDB 5.4.3 Release Notes
+summary: TiDB 5.4.3 was released on October 13, 2022. The release includes various improvements and bug fixes for TiKV, Tools, TiCDC, TiFlash, PD, and other tools. Improvements include support for configuring RocksDB write stall settings, optimizing Scatter Region to batch mode, and reducing performance overhead in multi-Region scenarios. Bug fixes address issues such as incorrect output of `SHOW CREATE PLACEMENT POLICY`, DDL statements getting stuck after PD node replacement, and various issues causing incorrect results and errors in TiDB, TiKV, PD, TiFlash, and other tools. The release also provides workarounds and affected versions for specific issues.
 ---
 
 # TiDB 5.4.3 Release Notes
@@ -75,7 +76,7 @@ TiDB version: 5.4.3
 
     + TiDB Lightning
 
-        - Fix the issue that an auto-increment column of the `BIGINT` type might be out of range [#27397](https://github.com/pingcap/tidb/issues/27937)
+        - Fix the issue that an auto-increment column of the `BIGINT` type might be out of range [#27937](https://github.com/pingcap/tidb/issues/27937)
         - Fix the issue that de-duplication might cause TiDB Lightning to panic in extreme cases [#34163](https://github.com/pingcap/tidb/issues/34163)
         - Fix the issue that TiDB Lightning does not support columns starting with slash, number, or non-ascii characters in Parquet files [#36980](https://github.com/pingcap/tidb/issues/36980)
         - Fix the issue that TiDB Lightning fails to connect to TiDB when TiDB uses an IPv6 host [#35880](https://github.com/pingcap/tidb/issues/35880)

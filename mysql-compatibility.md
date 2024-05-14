@@ -172,7 +172,7 @@ In TiDB, all supported DDL changes can be performed online. However, there are s
 * The `ALGORITHM={INSTANT,INPLACE,COPY}` syntax functions only as an assertion in TiDB, and does not modify the `ALTER` algorithm. See [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md) for further details.
 * Adding/Dropping the primary key of the `CLUSTERED` type is unsupported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 * Different types of indexes (`HASH|BTREE|RTREE|FULLTEXT`) are not supported, and will be parsed and ignored when specified.
-* TiDB supports `HASH`, `RANGE`, `LIST`, and `KEY` partitioning types. Currently, the `KEY` partition type does not support partition statements with an empty partition column list. For an unsupported partition type, TiDB returns `Warning: Unsupported partition type %s, treat as normal table`, where `%s` is the specific unsupported partition type.
+* TiDB supports `HASH`, `RANGE`, `LIST`, and `KEY` partitioning types. For an unsupported partition type, TiDB returns `Warning: Unsupported partition type %s, treat as normal table`, where `%s` is the specific unsupported partition type.
 * Range, Range COLUMNS, List, and List COLUMNS partitioned tables support `ADD`, `DROP`, `TRUNCATE`, and `REORGANIZE` operations. Other partition operations are ignored.
 * Hash and Key partitioned tables support `ADD`, `COALESCE`, and `TRUNCATE` operations. Other partition operations are ignored.
 * The following syntaxes are not supported for partitioned tables:
@@ -276,6 +276,10 @@ TiDB supports named timezones with the following considerations:
 The following column types are supported by MySQL but **not** by TiDB:
 
 - `SQL_TSI_*` (includes SQL_TSI_MONTH, SQL_TSI_WEEK, SQL_TSI_DAY, SQL_TSI_HOUR, SQL_TSI_MINUTE, and SQL_TSI_SECOND, but excludes SQL_TSI_YEAR)
+
+### Regular expressions
+
+For information about TiDB regular expression compatibility with MySQL, including `REGEXP_INSTR()`, `REGEXP_LIKE()`, `REGEXP_REPLACE()`, and `REGEXP_SUBSTR()`, see [Regular expression compatibility with MySQL](/functions-and-operators/string-functions.md#regular-expression-compatibility-with-mysql).
 
 ### Incompatibility due to deprecated features
 

@@ -21,7 +21,7 @@ The statement returns a result set in which the `Scheduling_State` field indicat
 
 ```ebnf+diagram
 ShowStmt ::=
-    "PLACEMENT" "FOR" ShowPlacementTarget
+    "SHOW" "PLACEMENT" "FOR" ShowPlacementTarget
 
 ShowPlacementTarget ::=
     DatabaseSym DBName
@@ -31,17 +31,15 @@ ShowPlacementTarget ::=
 
 ## Examples
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4;
 ALTER DATABASE test PLACEMENT POLICY=p1;
 CREATE TABLE t1 (a INT);
 SHOW PLACEMENT FOR DATABASE test;
 SHOW PLACEMENT FOR TABLE t1;
-SHOW CREATE TABLE t1\G;
+SHOW CREATE TABLE t1\G
 CREATE TABLE t3 (a INT) PARTITION BY RANGE (a) (PARTITION p1 VALUES LESS THAN (10), PARTITION p2 VALUES LESS THAN (20));
-SHOW PLACEMENT FOR TABLE t3 PARTITION p1\G;
+SHOW PLACEMENT FOR TABLE t3 PARTITION p1\G
 ```
 
 ```

@@ -18,7 +18,7 @@ Currently, this method supports importing one CSV file for one task into either 
     - If the extra columns are not the primary keys or the unique keys, no error will be reported. Instead, these extra columns will be populated with their [default values](/data-type-default-values.md).
     - If the extra columns are the primary keys or the unique keys and do not have the `auto_increment` or `auto_random` attribute, an error will be reported. In that case, it is recommended that you choose one of the following strategies:
         - Provide a source file that includes these the primary keys or the unique keys columns.
-        - Set the attributes of the the primary key or the unique key columns to `auto_increment` or `auto_random`.
+        - Set the attributes of the primary key or the unique key columns to `auto_increment` or `auto_random`.
 - If a column name is a reserved [keyword](/keywords.md) in TiDB, TiDB Cloud automatically adds backticks `` ` `` to enclose the column name. For example, if the column name is `order`, TiDB Cloud automatically adds backticks `` ` `` to change it to `` `order` `` and imports the data into the target table.
 
 ## Import local files
@@ -98,7 +98,7 @@ CREATE TABLE `import_test` (
 LOAD DATA LOCAL INFILE 'load.txt' INTO TABLE import_test FIELDS TERMINATED BY ',' (name, address);
 ```
 
-If you use `mysql` and encounter `ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.`, you can add `--local-infile=true` in the connection string.
+If you use the `mysql` command-line client and encounter `ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.`, you can add `--local-infile=true` in the connection string.
 
 ### Why can't I query a column with a reserved keyword after importing data into TiDB Cloud?
 

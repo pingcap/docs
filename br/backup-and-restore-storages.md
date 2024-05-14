@@ -19,7 +19,7 @@ By default, BR sends a credential to each TiKV node when using Amazon S3, GCS, o
 Note that this operation is not applicable to cloud environments. If you use IAM Role authorization, each node has its own role and permissions. In this case, you need to configure `--send-credentials-to-tikv=false` (or `-c=0` in short) to disable sending credentials:
 
 ```bash
-./br backup full -c=0 -u pd-service:2379 --storage 's3://bucket-name/prefix'
+tiup br backup full -c=0 -u pd-service:2379 --storage 's3://bucket-name/prefix'
 ```
 
 If you back up or restore data using the [`BACKUP`](/sql-statements/sql-statement-backup.md) and [`RESTORE`](/sql-statements/sql-statement-restore.md) statements, you can add the `SEND_CREDENTIALS_TO_TIKV = FALSE` option:
@@ -32,59 +32,13 @@ BACKUP DATABASE * TO 's3://bucket-name/prefix' SEND_CREDENTIALS_TO_TIKV = FALSE;
 
 ### URI format description
 
-This section describes the URI format of the storage services:
+The URI format of the external storage service is as follows:
 
 ```shell
 [scheme]://[host]/[path]?[parameters]
 ```
 
-<SimpleTab groupId="storage">
-<div label="Amazon S3" value="amazon">
-
-- `scheme`: `s3`
-- `host`: `bucket name`
-- `parameters`:
-
-    - `access-key`: Specifies the access key.
-    - `secret-access-key`: Specifies the secret access key.
-    - `session-token`: Specifies the temporary session token. BR does not support this parameter yet.
-    - `use-accelerate-endpoint`: Specifies whether to use the accelerate endpoint on Amazon S3 (defaults to `false`).
-    - `endpoint`: Specifies the URL of custom endpoint for S3-compatible services (for example, `<https://s3.example.com/>`).
-    - `force-path-style`: Use path style access rather than virtual hosted style access (defaults to `true`).
-    - `storage-class`: Specifies the storage class of the uploaded objects (for example, `STANDARD` or `STANDARD_IA`).
-    - `sse`: Specifies the server-side encryption algorithm used to encrypt the uploaded objects (value options: ``, `AES256`, or `aws:kms`).
-    - `sse-kms-key-id`: Specifies the KMS ID if `sse` is set to `aws:kms`.
-    - `acl`: Specifies the canned ACL of the uploaded objects (for example, `private` or `authenticated-read`).
-    - `role-arn`: When you need to access Amazon S3 data from a third party using a specified [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html), you can specify the corresponding [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the IAM role with the `role-arn` URL query parameter, such as `arn:aws:iam::888888888888:role/my-role`. For more information about using an IAM role to access Amazon S3 data from a third party, see [AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html).
-    - `external-id`: When you access Amazon S3 data from a third party, you might need to specify a correct [external ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html) to assume [the IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html). In this case, you can use this `external-id` URL query parameter to specify the external ID and make sure that you can assume the IAM role. An external ID is an arbitrary string provided by the third party together with the IAM role ARN to access the Amazon S3 data. Providing an external ID is optional when assuming an IAM role, which means if the third party does not require an external ID for the IAM role, you can assume the IAM role and access the corresponding Amazon S3 data without providing this parameter.
-
-</div>
-<div label="GCS" value="gcs">
-
-- `scheme`: `gcs` or `gs`
-- `host`: `bucket name`
-- `parameters`:
-
-    - `credentials-file`: Specifies the path to the credentials JSON file on the migration tool node.
-    - `storage-class`: Specifies the storage class of the uploaded objects (for example, `STANDARD` or `COLDLINE`)
-    - `predefined-acl`: Specifies the predefined ACL of the uploaded objects (for example, `private` or `project-private`)
-
-</div>
-<div label="Azure Blob Storage" value="azure">
-
-- `scheme`: `azure` or `azblob`
-- `host`: `container name`
-- `parameters`:
-
-    - `account-name`: Specifies the account name of the storage.
-    - `account-key`: Specifies the access key.
-    - `sas-token`: Specifies the shared access signature (SAS) token.
-    - `access-tier`: Specifies the access tier of the uploaded objects, for example, `Hot`, `Cool`, or `Archive`. The default value is the default access tier of the storage account.
-    - `encryption-scope`: Specifies the [encryption scope](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-scope-manage?tabs=powershell#upload-a-blob-with-an-encryption-scope) for server-side encryption.
-    - `encryption-key`: Specifies the [encryption key](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-customer-provided-keys) for server-side encryption, which uses the AES256 encryption algorithm.
-
-</div>
-</SimpleTab>
+For more information about the URI format, see [URI Formats of External Storage Services](/external-storage-uri.md).
 
 ### URI examples
 
@@ -96,14 +50,14 @@ This section provides some URI examples by using `external` as the `host` parame
 **Back up snapshot data to Amazon S3**
 
 ```shell
-./br backup full -u "${PD_IP}:2379" \
+tiup br backup full -u "${PD_IP}:2379" \
 --storage "s3://external/backup-20220915?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```
 
 **Restore snapshot data from Amazon S3**
 
 ```shell
-./br restore full -u "${PD_IP}:2379" \
+tiup br restore full -u "${PD_IP}:2379" \
 --storage "s3://external/backup-20220915?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```
 
@@ -113,14 +67,14 @@ This section provides some URI examples by using `external` as the `host` parame
 **Back up snapshot data to GCS**
 
 ```shell
-./br backup full --pd "${PD_IP}:2379" \
+tiup br backup full --pd "${PD_IP}:2379" \
 --storage "gcs://external/backup-20220915?credentials-file=${credentials-file-path}"
 ```
 
 **Restore snapshot data from GCS**
 
 ```shell
-./br restore full --pd "${PD_IP}:2379" \
+tiup br restore full --pd "${PD_IP}:2379" \
 --storage "gcs://external/backup-20220915?credentials-file=${credentials-file-path}"
 ```
 
@@ -130,14 +84,14 @@ This section provides some URI examples by using `external` as the `host` parame
 **Back up snapshot data to Azure Blob Storage**
 
 ```shell
-./br backup full -u "${PD_IP}:2379" \
+tiup br backup full -u "${PD_IP}:2379" \
 --storage "azure://external/backup-20220915?account-name=${account-name}&account-key=${account-key}"
 ```
 
 **Restore the `test` database from snapshot backup data in Azure Blob Storage**
 
 ```shell
-./br restore db --db test -u "${PD_IP}:2379" \
+tiup br restore db --db test -u "${PD_IP}:2379" \
 --storage "azure://external/backup-20220915account-name=${account-name}&account-key=${account-key}"
 ```
 
@@ -153,8 +107,8 @@ When storing backup data in a cloud storage system, you need to configure authen
 
 Before backup, configure the following privileges to access the backup directory on S3.
 
-- Minimum privileges for TiKV and Backup & Restore (BR) to access the backup directories during backup: `s3:ListBucket`, `s3:PutObject`, and `s3:AbortMultipartUpload`
-- Minimum privileges for TiKV and BR to access the backup directories during restore: `s3:ListBucket`, `s3:GetObject`, and `s3:PutObject`. BR writes checkpoint information to the `./checkpoints` subdirectory under the backup directory. When restoring log backup data, BR writes the table ID mapping relationship of the restored cluster to the `./pitr_id_maps` subdirectory under the backup directory.
+- Minimum privileges for TiKV and Backup & Restore (BR) to access the backup directories during backup: `s3:ListBucket`, `s3:GetObject`, `s3:DeleteObject`, `s3:PutObject`, and `s3:AbortMultipartUpload`
+- Minimum privileges for TiKV and BR to access the backup directories during restore: `s3:ListBucket`, `s3:GetObject`, `s3:DeleteObject`, and `s3:PutObject`. BR writes checkpoint information to the `./checkpoints` subdirectory under the backup directory. When restoring log backup data, BR writes the table ID mapping relationship of the restored cluster to the `./pitr_id_maps` subdirectory under the backup directory.
 
 If you have not yet created a backup directory, refer to [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) to create an S3 bucket in the specified region. If necessary, you can also create a folder in the bucket by referring to [Create a folder](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
 
@@ -174,7 +128,7 @@ It is recommended that you configure access to S3 using either of the following 
     Associate an IAM role that can access S3 with EC2 instances where the TiKV and BR nodes run. After the association, BR can directly access the backup directories in S3 without additional settings.
 
     ```shell
-    br backup full --pd "${PD_IP}:2379" \
+    tiup br backup full --pd "${PD_IP}:2379" \
     --storage "s3://${host}/${path}"
     ```
 
@@ -241,7 +195,7 @@ You can configure the account used to access GCS by specifying the access key. I
     - Use BR to back up data to Azure Blob Storage:
 
         ```shell
-        ./br backup full -u "${PD_IP}:2379" \
+        tiup br backup full -u "${PD_IP}:2379" \
         --storage "azure://external/backup-20220915?account-name=${account-name}"
         ```
 
@@ -260,4 +214,10 @@ BR supports specifying the Azure server-side encryption scope or providing the e
 
 ## Other features supported by the storage service
 
-BR v6.3.0 supports AWS [S3 Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html). You can enable this feature to prevent backup data from being tampered with or deleted.
+Amazon [S3 Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html) can help prevent backup data from accidental or intentional deletion during a specified retention period, enhancing the security and integrity of data. Starting from v6.3.0, BR supports Amazon S3 Object Lock for snapshot backups, adding an additional layer of security for full backups. Starting from v8.0.0, PITR also supports Amazon S3 Object Lock. Whether for full backups or log data backups, the Object Lock feature ensures more reliable data protection, further strengthening the security of data backup and recovery and meeting regulatory requirements.
+
+BR and PITR automatically detect whether the Amazon S3 Object Lock feature is enabled or disabled. You do not need to perform any additional operations.
+
+> **Warning:**
+>
+> If the Object Lock feature is enabled during the snapshot backup or PITR log backup process, the snapshot backup or log backup might fail. You need to restart the snapshot backup or PITR log backup task to continue the backup.

@@ -20,7 +20,7 @@ server_configs:
     log.level: "error"
 ```
 
-It is also recommended to make sure [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610) is enabled and that you allow sysbench to use prepared statements by using `--db-ps-mode=auto`. See the [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md) for documetnation about what the SQL plan cache does and how to monitor it.
+It is also recommended to make sure [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610) is enabled and that you allow sysbench to use prepared statements by using `--db-ps-mode=auto`. See the [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md) for documentation about what the SQL plan cache does and how to monitor it.
 
 > **Note:**
 >

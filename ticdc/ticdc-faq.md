@@ -108,20 +108,20 @@ If you use the `cdc cli changefeed create` command without specifying the `-conf
 - Replicates all tables except system tables
 - Only replicates tables that contain [valid indexes](/ticdc/ticdc-overview.md#best-practices)
 
-## Does TiCDC support outputting data changes in the Canal format?
+## Does TiCDC support outputting data changes in the Canal protocol?
 
-Yes. To enable Canal output, specify the protocol as `canal` in the `--sink-uri` parameter. For example:
+Yes. Note that for the Canal protocol, TiCDC only supports the JSON output format, while the protobuf format is not officially supported yet. To enable Canal output, specify `protocol` as `canal-json` in the `--sink-uri` configuration. For example:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&protocol=canal" --config changefeed.toml
+cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&protocol=canal-json" --config changefeed.toml
 ```
 
 > **Note:**
 >
 > * This feature is introduced in TiCDC 4.0.2.
-> * TiCDC currently supports outputting data changes in the Canal format only to MQ sinks such as Kafka.
+> * TiCDC currently supports outputting data changes in the Canal-JSON format only to MQ sinks such as Kafka.
 
 For more information, refer to [TiCDC changefeed configurations](/ticdc/ticdc-changefeed-config.md).
 
@@ -136,7 +136,7 @@ For more information, refer to [TiCDC changefeed configurations](/ticdc/ticdc-ch
 
 ## When TiCDC replicates data to Kafka, can I control the maximum size of a single message in TiDB?
 
-When `protocol` is set to `avro` or `canal-json`, messages are sent per row change. A single Kafka message contains only one row change and is generally no larger than Kafka's limit. Therefore, there is no need to limit the size of a single message. If the size of a single Kafka message does exceed Kakfa's limit, refer to [Why does the latency from TiCDC to Kafka become higher and higher?](/ticdc/ticdc-faq.md#why-does-the-latency-from-ticdc-to-kafka-become-higher-and-higher).
+When `protocol` is set to `avro` or `canal-json`, messages are sent per row change. A single Kafka message contains only one row change and is generally no larger than Kafka's limit. Therefore, there is no need to limit the size of a single message. If the size of a single Kafka message does exceed Kafka's limit, refer to [Why does the latency from TiCDC to Kafka become higher and higher?](/ticdc/ticdc-faq.md#why-does-the-latency-from-ticdc-to-kafka-become-higher-and-higher).
 
 When `protocol` is set to `open-protocol`, messages are sent in batches. Therefore, one Kafka message might be excessively large. To avoid this situation, you can configure the `max-message-bytes` parameter to control the maximum size of data sent to the Kafka broker each time (optional, `10MB` by default). You can also configure the `max-batch-size` parameter (optional, `16` by default) to specify the maximum number of change records in each Kafka message.
 
@@ -270,15 +270,15 @@ If you need to replicate `recover table` to the downstream TiDB, you should have
 
 When upstream write traffic is at peak hours, the downstream may fail to consume all data in a timely manner, resulting in data pile-up. TiCDC uses disks to process the data that is piled up. TiCDC needs to write data to disks during normal operation. However, this is not usually the bottleneck for replication throughput and replication latency, given that writing to disks only results in latency within a hundred milliseconds. TiCDC also uses memory to accelerate reading data from disks to improve replication performance.
 
-## Why does replication using TiCDC stall or even stop after data restore using TiDB Lightning and BR from upstream?
+## Why does replication using TiCDC stall or even stop after data restore using TiDB Lightning physical import mode and BR from upstream?
 
-Currently, TiCDC is not yet fully compatible with TiDB Lightning and BR. Therefore, avoid using TiDB Lightning and BR on tables that are replicated by TiCDC. Otherwise, unknown errors might occur, such as TiCDC replication getting stuck, a significant spike in replication latency, or data loss.
+Currently, TiCDC is not yet fully compatible with [TiDB Lightning physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) and BR. Therefore, avoid using TiDB Lightning physical import mode and BR on tables that are replicated by TiCDC. Otherwise, unknown errors might occur, such as TiCDC replication getting stuck, a significant spike in replication latency, or data loss.
 
-If you need to use TiDB Lightning or BR to restore data for some tables replicated by TiCDC, take these steps:
+If you need to use TiDB Lightning physical import mode or BR to restore data for some tables replicated by TiCDC, take these steps:
 
 1. Remove the TiCDC replication task related to these tables.
 
-2. Use TiDB Lightning or BR to restore data separately in the upstream and downstream clusters of TiCDC.
+2. Use TiDB Lightning physical import mode or BR to restore data separately in the upstream and downstream clusters of TiCDC.
 
 3. After the restoration is complete and data consistency between the upstream and downstream clusters is verified, create a new TiCDC replication task for incremental replication, with the timestamp (TSO) from the upstream backup as the `start-ts` for the task. For example, assuming the snapshot timestamp of the BR backup in the upstream cluster is `431434047157698561`, you can create a new TiCDC replication task using the following command:
 

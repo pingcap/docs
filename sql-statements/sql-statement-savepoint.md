@@ -36,6 +36,19 @@ RELEASE SAVEPOINT identifier
 
     After the transaction is committed or rolled back, all savepoints in the transaction will be deleted.
 
+## Synopsis
+
+```ebnf+diagram
+SavepointStmt ::=
+    "SAVEPOINT" Identifier
+
+RollbackToStmt ::=
+    "ROLLBACK" "TO" "SAVEPOINT"? Identifier
+
+ReleaseSavepointStmt ::=
+    "RELEASE" "SAVEPOINT" Identifier
+```
+
 ## Examples
 
 Create a table `t1`:
@@ -140,6 +153,8 @@ SELECT * FROM t1;
 ## MySQL compatibility
 
 When `ROLLBACK TO SAVEPOINT` is used to roll back a transaction to a specified savepoint, MySQL releases the locks held only after the specified savepoint, while in TiDB pessimistic transaction, TiDB does not immediately release the locks held after the specified savepoint. Instead, TiDB releases all locks when the transaction is committed or rolled back.
+
+TiDB does not support the MySQL syntax `ROLLBACK WORK TO SAVEPOINT ...`.
 
 ## See also
 

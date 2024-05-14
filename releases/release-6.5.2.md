@@ -9,7 +9,7 @@ Release date: April 21, 2023
 
 TiDB version: 6.5.2
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.5/production-deployment-using-tiup) | [Installation packages](https://www.pingcap.com/download/?version=v6.5.2#version-list)
+Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.5/production-deployment-using-tiup)
 
 ## Compatibility changes
 
@@ -65,7 +65,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     - Fix the issue that full index scans might cause errors when prepared plan cache is enabled [#42150](https://github.com/pingcap/tidb/issues/42150) @[fzzf678](https://github.com/fzzf678)
     - Fix the issue that IndexMerge might produce incorrect results when prepare plan cache is enabled [#41828](https://github.com/pingcap/tidb/issues/41828) @[qw4990](https://github.com/qw4990)
     - Fix the issue that the configuration of `max_prepared_stmt_count` does not take effect [#39735](https://github.com/pingcap/tidb/issues/39735) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
-    - Fix the issue that IndexMerge might produce incorrect results when prepare plan cache is enabled [#41828](https://github.com/pingcap/tidb/issues/41828) @[qw4990](https://github.com/qw4990) @[XuHuaiyu](https://github.com/XuHuaiyu)
+    - Fix the issue that global memory control might incorrectly kill SQL statements with memory usage less than `tidb_server_memory_limit_sess_min_size` [#42662](https://github.com/pingcap/tidb/issues/42662) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - Fix the issue that Index Join might cause panic in dynamic trimming mode of partition tables [#40596](https://github.com/pingcap/tidb/issues/40596) @[tiancaiamao](https://github.com/tiancaiamao)
 
 + TiKV

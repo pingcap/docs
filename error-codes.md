@@ -432,9 +432,9 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8216
 
-    The usage of automatic random columns is incorrect.
+    The usage of the `AUTO_RANDOM` columns is incorrect.
 
-    See [auto random](/auto-random.md) to modify.
+    See [`AUTO_RANDOM`](/auto-random.md) to modify.
 
 * Error Number: 8223
 
@@ -464,7 +464,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8228
 
-    Unsupported types are specified when using `setval` on Sequence.
+    Unsupported types are specified when using `SETVAL` on Sequence.
 
     See [Sequence documentation](/sql-statements/sql-statement-create-sequence.md#examples) to find the example of the function.
 
@@ -532,7 +532,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 9001
 
-    The complete error message: `ERROR 9001 (HY000): PD Server Timeout`
+    The complete error message: `ERROR 9001 (HY000): PD server timeout`
 
     The PD request timed out.
 
@@ -540,7 +540,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 9002
 
-    The complete error message: `ERROR 9002 (HY000): TiKV Server Timeout`
+    The complete error message: `ERROR 9002 (HY000): TiKV server timeout`
 
     The TiKV request timed out.
 

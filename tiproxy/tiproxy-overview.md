@@ -11,7 +11,7 @@ TiProxy is an optional component. You can also use a third-party proxy component
 
 The following figure shows the architecture of TiProxy:
 
-![TiProxy architecture](/media/tiproxy/tiproxy-architecture.png)
+<img src="https://download.pingcap.com/images/docs/tiproxy/tiproxy-architecture.png" alt="TiProxy architecture" width="500"></img>
 
 ## Main features
 
@@ -23,7 +23,7 @@ TiProxy can migrate connections from one TiDB server to another without breaking
 
 As shown in the following figure, the client originally connects to TiDB 1 through TiProxy. After the connection migration, the client actually connects to TiDB 2. When TiDB 1 is about to be offline or the ratio of connections on TiDB 1 to connections on TiDB 2 exceeds the set threshold, the connection migration is triggered. The client is unaware of the connection migration.
 
-![TiProxy connection migration](/media/tiproxy/tiproxy-session-migration.png)
+<img src="https://download.pingcap.com/images/docs/tiproxy/tiproxy-session-migration.png" alt="TiProxy connection migration" width="400"></img>
 
 Connection migration usually occurs in the following scenarios:
 
@@ -55,11 +55,11 @@ It is recommended that you use TiProxy for the scenarios that TiProxy is suitabl
 
 ## Installation and usage
 
-This section describes how to deploy and change TiProxy using TiUP. For how to deploy TiProxy using TiDB Operator in Kubernetes, see [TiDB Operator documentation](https://docs.pingcap.com/tidb-in-kubernetes/stable).
+This section describes how to deploy and change TiProxy using TiUP. For how to deploy TiProxy using TiDB Operator in Kubernetes, see [TiDB Operator documentation](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tiproxy).
 
 ### Deploy TiProxy
 
-1. Generate a self-signed certificate.
+1. Before TiUP v1.15.0, you need to manually generate a self-signed certificate.
 
     Generate a self-signed certificate for the TiDB instance and place the certificate on all TiDB instances to ensure that all TiDB instances have the same certificate. For detailed steps, see [Generate self-signed certificates](/generate-self-signed-certificates.md).
 
@@ -67,8 +67,8 @@ This section describes how to deploy and change TiProxy using TiUP. For how to d
 
     When using TiProxy, you also need to configure the following items for the TiDB instances:
 
-    - Configure the [`security.session-token-signing-cert`](/tidb-configuration-file.md#session-token-signing-cert-new-in-v640) and [`security.session-token-signing-key`](/tidb-configuration-file.md#session-token-signing-key-new-in-v640) of TiDB instances to the path of the certificate. Otherwise, the connection cannot be migrated.
-    - Configure the [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) of TiDB instances to a value greater than the longest transaction duration of the application. Otherwise, the client might disconnect when the TiDB server is offline. For details, see [TiProxy usage limitations](#limitations).
+    - Before TiUP v1.15.0, configure the [`security.session-token-signing-cert`](/tidb-configuration-file.md#session-token-signing-cert-new-in-v640) and [`security.session-token-signing-key`](/tidb-configuration-file.md#session-token-signing-key-new-in-v640) of TiDB instances to the path of the certificate. Otherwise, the connection cannot be migrated.
+    - Configure the [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) of TiDB instances to a value greater than the longest transaction duration of the application. Otherwise, the client might disconnect when the TiDB server is offline. You can view the transaction duration through the [Transaction metrics on the TiDB monitoring dashboard](/grafana-tidb-dashboard.md#transaction). For details, see [TiProxy usage limitations](#limitations).
 
     A configuration example is as follows:
 
@@ -100,7 +100,7 @@ This section describes how to deploy and change TiProxy using TiUP. For how to d
 
     ```yaml
     component_versions:
-      tiproxy: "v0.2.0"
+      tiproxy: "v1.0.0"
     server_configs:
       tiproxy:
         security.server-tls.ca: "/var/ssl/ca.pem"
@@ -126,7 +126,7 @@ When using TiUP to change the TiProxy configuration, if the configuration item t
 
 When you deploy TiProxy, it is recommended to specify the version of TiProxy so that TiProxy will not be upgraded when you upgrade the TiDB cluster.
 
-If you need to upgrade TiProxy, add [`--tiproxy-version`](/tiup/tiup-component-cluster-upgrade.md) in the upgrade command to specify the version of TiProxy:
+If you need to upgrade TiProxy, add [`--tiproxy-version`](/tiup/tiup-component-cluster-upgrade.md#--tiproxy-version) in the upgrade command to specify the version of TiProxy:
 
 ```shell
 tiup cluster upgrade <cluster-name> <version> --tiproxy-version <tiproxy-version>
@@ -202,3 +202,8 @@ The following table lists some supported connectors:
 | Python     | PyMySQL                | 0.7                          |
 
 Note that some connectors call the common library to connect to the database, and these connectors are not listed in the table. You can refer to the above table for the required version of the corresponding library. For example, MySQL/Ruby uses libmysqlclient to connect to the database, so it requires that the libmysqlclient used by MySQL/Ruby is version 5.5.7 or later.
+
+## TiProxy resources
+
+- [TiProxy Release Notes](https://github.com/pingcap/tiproxy/releases)
+- [TiProxy Issues](https://github.com/pingcap/tiup/issues): Lists TiProxy GitHub issues

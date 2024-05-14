@@ -1,6 +1,7 @@
 ---
 title: TiDB 5.2.4 Release Notes
 category: Releases
+summary: Learn about the new features, compatibility changes, improvements, and bug fixes in TiDB 5.2.4.
 ---
 
 # TiDB 5.2.4 Release Notes
@@ -88,7 +89,7 @@ TiDB version: 5.2.4
     - Fix the issue that the system variable `max_allowed_packet` does not take effect [#31422](https://github.com/pingcap/tidb/issues/31422)
     - Fix the issue that the `REPLACE` statement incorrectly changes other rows when the auto ID is out of range [#29483](https://github.com/pingcap/tidb/issues/29483)
     - Fix the issue that the slow query log cannot output log normally and might consume too much memory [#32656](https://github.com/pingcap/tidb/issues/32656)
-    - Fix the issue that the result of NATURAL JOIN might include unexpected columns [#24981](https://github.com/pingcap/tidb/issues/29481)
+    - Fix the issue that the result of NATURAL JOIN might include unexpected columns [#29481](https://github.com/pingcap/tidb/issues/29481)
     - Fix the issue that using `ORDER BY` and `LIMIT` together in one statement might output wrong results if a prefix-column index is used to query data [#29711](https://github.com/pingcap/tidb/issues/29711)
     - Fix the issue that the DOUBLE type auto-increment column might be changed when the optimistic transaction retries [#29892](https://github.com/pingcap/tidb/issues/29892)
     - Fix the issue that the STR_TO_DATE function cannot handle the preceding zero of the microsecond part correctly [#30078](https://github.com/pingcap/tidb/issues/30078)
@@ -165,7 +166,7 @@ TiDB version: 5.2.4
     + TiCDC
 
         - Fix the issue that default values cannot be replicated [#3793](https://github.com/pingcap/tiflow/issues/3793)
-        - Fix a bug that sequence is incorrectly replicated in some cases [#4563](https://github.com/pingcap/tiflow/issues/4552)
+        - Fix a bug that sequence is incorrectly replicated in some cases [#4552](https://github.com/pingcap/tiflow/issues/4552)
         - Fix a bug that a TiCDC node exits abnormally when a PD leader is killed [#4248](https://github.com/pingcap/tiflow/issues/4248)
         - Fix a bug that MySQL sink generates duplicated `replace` SQL statements when `batch-replace-enable` is disabled [#4501](https://github.com/pingcap/tiflow/issues/4501)
         - Fix the issue of panic and data inconsistency that occurs when outputting the default column value [#3929](https://github.com/pingcap/tiflow/issues/3929)

@@ -9,7 +9,7 @@ Release date: June 13, 2022
 
 TiDB version: 6.1.0
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup) | [Installation packages](https://www.pingcap.com/download/?version=v6.1.0#version-list)
+Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
 
 In 6.1.0, the key new features or improvements are as follows:
 
@@ -342,7 +342,7 @@ In 6.1.0, the key new features or improvements are as follows:
     - CDC supports RawKV [#11965](https://github.com/tikv/tikv/issues/11965)
     - Support splitting a large snapshot file into multiple files [#11595](https://github.com/tikv/tikv/issues/11595)
     - Move the snapshot garbage collection from Raftstore to background thread to prevent snapshot GC from blocking Raftstore message loops [#11966](https://github.com/tikv/tikv/issues/11966)
-    - Support dynamic setting of the the maximum message length (`max-grpc-send-msg-len`) and the maximum batch size of gPRC messages (`raft-msg-max-batch-size`) [#12334](https://github.com/tikv/tikv/issues/12334)
+    - Support dynamic setting of the maximum message length (`max-grpc-send-msg-len`) and the maximum batch size of gPRC messages (`raft-msg-max-batch-size`) [#12334](https://github.com/tikv/tikv/issues/12334)
     - Support executing online unsafe recovery plan through Raft [#10483](https://github.com/tikv/tikv/issues/10483)
 
 + PD
@@ -418,7 +418,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
     + TiDB Data Migration (DM)
 
-        - Fix the `start-time` time zone issue and change DM behavior from using the downstream time zone to using the upstream time zone [#5271](https://github.com/pingcap/tiflow/issues/5471)
+        - Fix the `start-time` time zone issue and change DM behavior from using the downstream time zone to using the upstream time zone [#5471](https://github.com/pingcap/tiflow/issues/5471)
         - Fix the issue that DM occupies more disk space after the task automatically resumes [#3734](https://github.com/pingcap/tiflow/issues/3734) [#5344](https://github.com/pingcap/tiflow/issues/5344)
         - Fix the problem that checkpoint flush may cause the data of failed rows to be skipped [#5279](https://github.com/pingcap/tiflow/issues/5279)
         - Fix the issue that in some cases manually executing the filtered DDL in the downstream might cause task resumption failure [#5272](https://github.com/pingcap/tiflow/issues/5272)
@@ -434,5 +434,5 @@ In 6.1.0, the key new features or improvements are as follows:
         - Fix the issue that the precheck does not check local disk resources and cluster availability [#34213](https://github.com/pingcap/tidb/issues/34213)
         - Fix the issue of incorrect routing for schemas [#33381](https://github.com/pingcap/tidb/issues/33381)
         - Fix the issue that the PD configuration is not restored correctly when TiDB Lightning panics [#31733](https://github.com/pingcap/tidb/issues/31733)
-        - Fix the issue of Local-backend import failure caused by out-of-bounds data in the `auto_increment` column [#29737](https://github.com/pingcap/tidb/issues/27937)
+        - Fix the issue of Local-backend import failure caused by out-of-bounds data in the `auto_increment` column [#27937](https://github.com/pingcap/tidb/issues/27937)
         - Fix the issue of local backend import failure when the `auto_random` or `auto_increment` column is null [#34208](https://github.com/pingcap/tidb/issues/34208)

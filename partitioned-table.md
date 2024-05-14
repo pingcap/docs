@@ -610,7 +610,7 @@ Starting from v7.0.0, TiDB supports Key partitioning. For TiDB versions earlier 
 
 Both Key partitioning and Hash partitioning can evenly distribute data into a certain number of partitions. The difference is that Hash partitioning only supports distributing data based on a specified integer expression or an integer column, while Key partitioning supports distributing data based on a column list, and partitioning columns of Key partitioning are not limited to the integer type. The Hash algorithm of TiDB for Key partitioning is different from that of MySQL, so the table data distribution is also different.
 
-To create a Key partitioned table, you need to append a `PARTITION BY KEY (columList)` clause to the `CREATE TABLE` statement. `columList` is a column list with one or more column names. The data type of each column in the list can be any type except `BLOB`, `JSON`, and `GEOMETRY` (Note that TiDB does not support `GEOMETRY`). In addition, you might also need to append `PARTITIONS num` (where `num` is a positive integer indicating how many partitions a table is divided into), or append the definition of the partition names. For example, adding `(PARTITION p0, PARTITION p1)` means dividing the table into two partitions named `p0` and `p1`.
+To create a Key partitioned table, you need to append a `PARTITION BY KEY (columnList)` clause to the `CREATE TABLE` statement. `columnList` is a column list with one or more column names. The data type of each column in the list can be any type except `BLOB`, `JSON`, and `GEOMETRY` (Note that TiDB does not support `GEOMETRY`). In addition, you might also need to append `PARTITIONS num` (where `num` is a positive integer indicating how many partitions a table is divided into), or append the definition of the partition names. For example, adding `(PARTITION p0, PARTITION p1)` means dividing the table into two partitions named `p0` and `p1`.
 
 The following operation creates a Key partitioned table, which is divided into 4 partitions by `store_id`:
 
@@ -665,11 +665,11 @@ PARTITION BY KEY(fname, store_id)
 PARTITIONS 4;
 ```
 
-Currently, TiDB does not support creating Key partitioned tables if the partition column list specified in `PARTITION BY KEY` is empty. For example, after you execute the following statement, TiDB will create a non-partitioned table and return an `Unsupported partition type KEY, treat as normal table` warning.
+Similar to MySQL, TiDB supports creating Key partitioned tables with an empty partition column list specified in `PARTITION BY KEY`. For example, the following statement creates a partitioned table using the primary key `id` as the partitioning key:
 
 ```sql
 CREATE TABLE employees (
-    id INT NOT NULL,
+    id INT NOT NULL PRIMARY KEY,
     fname VARCHAR(30),
     lname VARCHAR(30),
     hired DATE NOT NULL DEFAULT '1970-01-01',
@@ -681,6 +681,20 @@ CREATE TABLE employees (
 PARTITION BY KEY()
 PARTITIONS 4;
 ```
+
+If the table lacks a primary key but contains a unique key, the unique key is used as the partitioning key:
+
+```sql
+CREATE TABLE k1 (
+    id INT NOT NULL,
+    name VARCHAR(20),
+    UNIQUE KEY (id)
+)
+PARTITION BY KEY()
+PARTITIONS 2;
+```
+
+However, the previous statement will fail if the unique key column is not defined as `NOT NULL`.
 
 #### How TiDB handles Linear Hash partitions
 
@@ -1682,8 +1696,6 @@ YEARWEEK()
 
 Currently, TiDB supports Range partitioning, Range COLUMNS partitioning, List partitioning, List COLUMNS partitioning, Hash partitioning, and Key partitioning. Other partitioning types that are available in MySQL are not supported yet in TiDB.
 
-Currently, TiDB does not support using an empty partition column list for Key partitioning.
-
 With regard to partition management, any operation that requires moving data in the bottom implementation is not supported currently, including but not limited to: adjust the number of partitions in a Hash partitioned table, modify the Range of a Range partitioned table, and merge partitions.
 
 For the unsupported partitioning types, when you create a table in TiDB, the partitioning information is ignored and the table is created in the regular form with a warning reported.
@@ -1987,7 +1999,7 @@ mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 
 
 From example 2, you can see that in `dynamic` mode, the execution plan with IndexJoin is selected when you execute the query.
 
-Currently, neither `static` nor `dynamic` pruning mode supports prepared statements plan cache.
+Currently, `static` pruning mode does not support plan cache for both prepared and non-prepared statements.
 
 #### Update statistics of partitioned tables in dynamic pruning mode
 

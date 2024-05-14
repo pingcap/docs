@@ -9,7 +9,7 @@ Release date: December 7, 2023
 
 TiDB version: 6.5.6
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.5/production-deployment-using-tiup) | [Installation packages](https://www.pingcap.com/download/?version=v6.5.6#version-list)
+Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.5/production-deployment-using-tiup)
 
 ## Compatibility changes
 
@@ -141,7 +141,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
         - Fix the issue that the log backup might get stuck in some scenarios when backing up large wide tables [#15714](https://github.com/tikv/tikv/issues/15714) @[YuJuncen](https://github.com/YuJuncen)
         - Fix the issue that frequent flushes cause log backup to get stuck [#15602](https://github.com/tikv/tikv/issues/15602) @[3pointer](https://github.com/3pointer)
-        - Fix the issue that the retry after an EC2 metadata connection reset cause degraded backup and restore performance [#46750](https://github.com/pingcap/tidb/issues/47650) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that the retry after an EC2 metadata connection reset cause degraded backup and restore performance [#47650](https://github.com/pingcap/tidb/issues/47650) @[Leavrth](https://github.com/Leavrth)
         - Fix the issue that running PITR multiple times within 1 minute might cause data loss [#15483](https://github.com/tikv/tikv/issues/15483) @[YuJuncen](https://github.com/YuJuncen)
         - Fix the issue that the default values for BR SQL commands and CLI are different, which might cause OOM issues [#48000](https://github.com/pingcap/tidb/issues/48000) @[YuJuncen](https://github.com/YuJuncen)
         - Fix the issue that log backup might panic when the PD owner is transferred [#47533](https://github.com/pingcap/tidb/issues/47533) @[YuJuncen](https://github.com/YuJuncen)

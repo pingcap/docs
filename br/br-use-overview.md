@@ -16,8 +16,8 @@ Before using TiDB backup and restore features, it is recommended that you unders
 
 **TiDB provides two types of backup. Which one should I use?** Full backup contains the full data of a cluster at a certain point in time. Log backup contains the data changes written to TiDB. It is recommended to use both types of backup at the same time:
 
-- **[Start log backup](/br/br-pitr-guide.md#start-log-backup)**: Run the `br log start` command to start the log backup task. After that, the task keeps running on all TiKV nodes and backs up TiDB data changes to the specified storage in small batches regularly.
-- **Perform [snapshot (full) backup](/br/br-snapshot-guide.md#back-up-cluster-snapshots) regularly**: Run the `br backup full` command to back up the snapshot of the cluster to the specified storage. For example, back up the cluster snapshot at 0:00 AM every day.
+- **[Start log backup](/br/br-pitr-guide.md#start-log-backup)**: Run the `tiup br log start` command to start the log backup task. After that, the task keeps running on all TiKV nodes and backs up TiDB data changes to the specified storage in small batches regularly.
+- **Perform [snapshot (full) backup](/br/br-snapshot-guide.md#back-up-cluster-snapshots) regularly**: Run the `tiup br backup full` command to back up the snapshot of the cluster to the specified storage. For example, back up the cluster snapshot at 0:00 AM every day.
 
 ### How to manage backup data?
 
@@ -53,13 +53,13 @@ If the TiDB cluster is deployed in a self-built data center, the following pract
 
 Assume that you need to set the life cycle for each backup data, for example, 7 days. Such a life cycle is called **backup retention period**, which will also be mentioned in backup tutorials.
 
-* To perform PITR, you need to restore the full backup before the restore point, and the log backup between the full backup and the restore point. Therefore, **It is recommended to only delete the log backup before the full snapshot**. For log backups that exceed the backup retention period, you can use `br log truncate` command to delete the backup before the specified time point.
+* To perform PITR, you need to restore the full backup before the restore point, and the log backup between the full backup and the restore point. Therefore, **It is recommended to only delete the log backup before the full snapshot**. For log backups that exceed the backup retention period, you can use `tiup br log truncate` command to delete the backup before the specified time point.
 * For backup data that exceeds the retention period, you can delete or archive the backup directory.
 
 ### How to restore data?
 
-- To restore only full backup data, you can use `br restore` to perform a full restore of the specified backup.
-- If you have started log backup and regularly performed a full backup, you can run the `br restore point` command to restore data to any time point within the backup retention period.
+- To restore only full backup data, you can use `tiup br restore` to perform a full restore of the specified backup.
+- If you have started log backup and regularly performed a full backup, you can run the `tiup br restore point` command to restore data to any time point within the backup retention period.
 
 ## Deploy and use BR
 

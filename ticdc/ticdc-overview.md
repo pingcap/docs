@@ -24,7 +24,7 @@ TiCDC has the following key capabilities:
 - Replicating incremental data between TiDB clusters with second-level RPO and minute-level RTO.
 - Bidirectional replication between TiDB clusters, allowing the creation of a multi-active TiDB solution using TiCDC.
 - Replicating incremental data from a TiDB cluster to a MySQL database or other MySQL-compatible databases with low latency.
-- Replicating incremental data from a TiDB cluster to a Kafka cluster. The recommended data format includes [Canal-JSON](/ticdc/ticdc-canal-json.md) and [Avro](/ticdc/ticdc-avro-protocol.md).
+- Replicating incremental data from a TiDB cluster to a Kafka cluster. The recommended data format includes [Canal-JSON](/ticdc/ticdc-canal-json.md), [Avro](/ticdc/ticdc-avro-protocol.md), and [Debezium](/ticdc/ticdc-debezium.md).
 - Replicating incremental data from a TiDB cluster to storage services, such as Amazon S3, GCS, Azure Blob Storage, and NFS.
 - Replicating tables with the ability to filter databases, tables, DMLs, and DDLs.
 - High availability with no single point of failure, supporting dynamically adding and deleting TiCDC nodes.
@@ -93,6 +93,6 @@ Currently, the following scenarios are not supported:
 
 - A TiKV cluster that uses RawKV alone.
 - The [`CREATE SEQUENCE` DDL operation](/sql-statements/sql-statement-create-sequence.md) and the [`SEQUENCE` function](/sql-statements/sql-statement-create-sequence.md#sequence-function) in TiDB. When the upstream TiDB uses `SEQUENCE`, TiCDC ignores `SEQUENCE` DDL operations/functions performed upstream. However, DML operations using `SEQUENCE` functions can be correctly replicated.
-- Currently, performing [BR data recovery](/br/backup-and-restore-overview.md) and [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) imports on tables and databases that are being replicated by TiCDC is not supported. For more information, see [Why does replication using TiCDC stall or even stop after data restore using TiDB Lightning and BR from upstream](/ticdc/ticdc-faq.md#why-does-replication-using-ticdc-stall-or-even-stop-after-data-restore-using-tidb-lightning-and-br-from-upstream).
+- Currently, performing [BR data recovery](/br/backup-and-restore-overview.md) and [TiDB Lightning physical import](/tidb-lightning/tidb-lightning-physical-import-mode.md) imports on tables and databases that are being replicated by TiCDC is not supported. For more information, see [Why does replication using TiCDC stall or even stop after data restore using TiDB Lightning and BR from upstream](/ticdc/ticdc-faq.md#why-does-replication-using-ticdc-stall-or-even-stop-after-data-restore-using-tidb-lightning-physical-import-mode-and-br-from-upstream).
 
 TiCDC only partially supports scenarios involving large transactions in the upstream. For details, refer to the [TiCDC FAQ](/ticdc/ticdc-faq.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk), where you can find details on whether TiCDC supports replicating large transactions and any associated risks.

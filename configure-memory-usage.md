@@ -57,7 +57,7 @@ Currently, the memory limit set by `tidb_server_memory_limit` **DOES NOT** termi
 >
 > + During the startup process, TiDB does not guarantee that the [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) limit is enforced. If the free memory of the operating system is insufficient, TiDB might still encounter OOM. You need to ensure that the TiDB instance has enough available memory.
 > + In the process of memory control, the total memory usage of TiDB might slightly exceed the limit set by `tidb_server_memory_limit`.
-> + Since v6.5.0, the configruation item `server-memory-quota` is deprecated. To ensure compatibility, after you upgrade your cluster to v6.5.0 or a later version, `tidb_server_memory_limit` will inherit the value of `server-memory-quota`. If you have not configured `server-memory-quota` before the upgrade, the default value of `tidb_server_memory_limit` is used, which is `80%`.
+> + Since v6.5.0, the configuration item `server-memory-quota` is deprecated. To ensure compatibility, after you upgrade your cluster to v6.5.0 or a later version, `tidb_server_memory_limit` will inherit the value of `server-memory-quota`. If you have not configured `server-memory-quota` before the upgrade, the default value of `tidb_server_memory_limit` is used, which is `80%`.
 
 When the memory usage of a tidb-server instance reaches a certain proportion of the total memory (the proportion is controlled by the system variable [`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640)), tidb-server will try to trigger a Golang GC to relieve memory stress. To avoid frequent GCs that cause performance issues due to the instance memory fluctuating around the threshold, this GC method will trigger GC at most once every minute.
 
@@ -130,6 +130,10 @@ The following example constructs a memory-intensive SQL statement that triggers 
 
 5. By checking the directory of status files (In the preceding example, the directory is `/tiup/deploy/tidb-4000/log/oom_record`), you can see a record directory with the corresponding timestamp (for example, `record2022-10-09T17:18:38+08:00`). The record directory includes three files: `goroutinue`, `heap`, and `running_sql`. These three files are suffixed with the time when status files are logged. They respectively record goroutine stack information, the usage status of heap memory, and the running SQL information when the alarm is triggered. For the content in `running_sql`, refer to [`expensive-queries`](/identify-expensive-queries.md).
 
+## Reduce the memory usage for write transactions in tidb-server
+
+The transaction model used by TiDB requires that all write operations of transactions are first cached in memory before being committed. When TiDB writes large transactions, memory usage might increase and become a bottleneck. To reduce or avoid high memory usage by large transactions under various constraints, you can adjust the [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) system variable to `"bulk"` or use [Non-transactional DML statements](/non-transactional-dml.md).
+
 ## Other memory control behaviors of tidb-server
 
 ### Flow control
@@ -145,8 +149,8 @@ TiDB supports disk spill for execution operators. When the memory usage of a SQL
 
 - The disk spill behavior is jointly controlled by the following parameters: [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom), [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path), and [`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota).
 - When the disk spill is triggered, TiDB outputs a log containing the keywords `memory exceeds quota, spill to disk now` or `memory exceeds quota, set aggregate mode to spill-mode`.
-- Disk spill for the Sort, MergeJoin, and HashJoin operator is introduced in v4.0.0; disk spill for the HashAgg operator is introduced in v5.2.0.
-- When the SQL executions containing Sort, MergeJoin, or HashJoin cause OOM, TiDB triggers disk spill by default. When SQL executions containing HashAgg cause OOM, TiDB does not trigger disk spill by default. You can configure the system variable `tidb_executor_concurrency = 1` to trigger disk spill for HashAgg.
+- Disk spill for the Sort, MergeJoin, and HashJoin operators is introduced in v4.0.0; disk spill for the non-concurrent algorithm of the HashAgg operator is introduced in v5.2.0; disk spill for the concurrent algorithm of the HashAgg operator is introduced in v8.0.0.
+- When the SQL executions containing Sort, MergeJoin, HashJoin, or HashAgg cause OOM, TiDB triggers disk spill by default. 
 
 > **Note:**
 >
@@ -178,15 +182,7 @@ The following example uses a memory-consuming SQL statement to demonstrate the d
     ERROR 1105 (HY000): Out Of Memory Quota![conn_id=3]
     ```
 
-4. Configure the system variable `tidb_executor_concurrency` to 1. With this configuration, when out of memory, HashAgg automatically tries to trigger disk spill.
-
-    {{< copyable "sql" >}}
-
-    ```sql
-    SET tidb_executor_concurrency = 1;
-    ```
-
-5. Execute the same SQL statement. You can find that this time, the statement is successfully executed and no error message is returned. From the following detailed execution plan, you can see that HashAgg has used 600 MB of hard disk space.
+4. Execute the same SQL statement. You can find that this time, the statement is successfully executed and no error message is returned. From the following detailed execution plan, you can see that HashAgg has used 600 MB of hard disk space.
 
     {{< copyable "sql" >}}
 

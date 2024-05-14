@@ -1,6 +1,7 @@
 ---
 title: TiDB 3.0.0-rc.2 Release Notes
 aliases: ['/docs/dev/releases/release-3.0.0-rc.2/','/docs/dev/releases/3.0.0-rc.2/']
+summary: TiDB 3.0.0-rc.2 was released on May 28, 2019, with improvements in stability, usability, features, SQL optimizer, statistics, and execution engine. The release includes enhancements to the SQL optimizer, execution engine, server, DDL, PD, TiKV, and tools like TiDB Binlog and TiDB Lightning. Some notable improvements include support for Index Join in more scenarios, handling virtual columns properly, and adding a metric to track data replication downstream.
 ---
 
 # TiDB 3.0.0-rc.2 Release Notes
