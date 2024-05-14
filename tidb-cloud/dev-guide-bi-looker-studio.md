@@ -11,7 +11,13 @@ In this tutorial, you can learn how to connect to your TiDB Serverless cluster w
 
 > **Note:**
 >
-> Most steps in this tutorial work with TiDB Dedicated as well. However, for TiDB Dedicated, you need to import your dataset following [Import data from files to TiDB Cloud](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud) and get the connection information for your cluster following [Connect to TiDB Dedicated](/tidb-cloud/connect-via-standard-connection.md). In addition, when connecting to TiDB Dedicated, you need to allow access from `142.251.74.0/23`. For more information about connection from Looker Studio, see [Looker Studio documentation](https://support.google.com/looker-studio/answer/7088031#zippy=%2Cin-this-article).
+> Most steps in this tutorial work with TiDB Dedicated as well. However, for TiDB Dedicated, you need to note the following:
+> 
+> - Import your dataset following [Import data from files to TiDB Cloud](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud).
+> - Get the connection information for your cluster following [Connect to TiDB Dedicated](/tidb-cloud/connect-via-standard-connection.md). 
+> - When connecting to TiDB Dedicated, you need to allow access from `142.251.74.0/23`.
+>
+> For more information about connection from Looker Studio, see [Looker Studio documentation](https://support.google.com/looker-studio/answer/7088031#zippy=%2Cin-this-article).
 
 ## Prerequisites
 
@@ -22,7 +28,7 @@ To complete this tutorial, you need:
 
 **If you don't have a TiDB Serverless cluster, you can create one as follows:**
 
-- [Create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md)
+- [Create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)
 
 ## Step 1. Import a dataset
 
@@ -35,6 +41,12 @@ You can import the S&P 500 dataset provided in the interactive tutorial of TiDB 
 3. Select your TiDB Serverless cluster, and then click **Import Dataset** to import the S&P 500 dataset to your cluster.
 
 4. After the import status changes to **IMPORTED**, click **Exit Tutorial** to close this dialog.
+
+If you encounter any issues during import, you can cancel this import task as follows:
+
+1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your TiDB Serverless cluster to go to its overview page.
+2. In the left navigation pane, click **Import**. 
+3. Find the import task named **sp500-insight**, click **...** in the **Action** column, and then click **Cancel**.
 
 ## Step 2. Get the connection information for your cluster
 
@@ -58,7 +70,7 @@ You can import the S&P 500 dataset provided in the interactive tutorial of TiDB 
 
 1. Log into [Looker Studio](https://lookerstudio.google.com/), and then click **Create** > **Report** in the left navigation pane.
 
-2. On the displayed page, select the **MySQL** connector, and then click **AUTHORIZE**.
+2. On the displayed page, search and select the **MySQL** connector, and then click **AUTHORIZE**.
 
 3. In the **BASIC** setting pane, configure the connection parameters.
 
