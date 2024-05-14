@@ -10,13 +10,16 @@ The `SHOW PROFILES` statement currently only returns an empty result.
 
 ## Synopsis
 
-**ShowStmt:**
+```ebnf+diagram
+ShowProfilesStmt ::=
+    "SHOW" "PROFILES" ShowLikeOrWhere?
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
+ShowLikeOrWhere ::=
+    "LIKE" SimpleExpr
+|   "WHERE" Expression
+```
 
 ## Examples
-
-{{< copyable "sql" >}}
 
 ```sql
 SHOW PROFILES;

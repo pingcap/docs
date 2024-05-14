@@ -16,7 +16,7 @@ cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://ro
 ```shell
 Create changefeed successfully!
 ID: simple-replication-task
-Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2024-01-25T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":false,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v7.6.0"}
+Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2024-03-28T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":false,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v8.0.0"}
 ```
 
 - `--changefeed-id`: The ID of the replication task. The format must match the `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
@@ -67,6 +67,12 @@ case-sensitive = false
 # Starting from v6.5.6, v7.1.3, and v7.5.0, this configuration item specifies the SQL mode used when parsing DDL statements. Multiple modes are separated by commas.
 # The default value is the same as the default SQL mode of TiDB.
 # sql-mode = "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+
+# The duration for which the changefeed is allowed to automatically retry when internal errors or exceptions occur. The default value is 30 minutes.
+# The changefeed enters the failed state if internal errors or exceptions occur in the changefeed and persist longer than the duration set by this parameter.
+# When the changefeed is in the failed state, you need to restart the changefeed manually for recovery.
+# The format of this parameter is "h m s", for example, "1h30m30s".
+changefeed-error-stuck-duration = "30m"
 
 [mounter]
 # The number of threads with which the mounter decodes KV data. The default value is 16.
@@ -194,10 +200,12 @@ enable-partition-separator = true
 # The encoding method of binary data, which can be 'base64' or 'hex'. The default value is 'base64'.
 # binary-encoding-method = 'base64'
 # Whether to output handle key information. The default value is false. 
-# This variable is for internal implementation only and setting this variable is not recommended.
+# This configuration parameter is for internal implementation only, so it is not recommended to set it.
 # output-handle-key = false
 # Whether to output the value before the row data changes. The default value is false. 
-# After being turned on, the Update event will output two lines of data. The first line is a Delete event, which outputs the data before the change, and the second line is a Insert event, which outputs the changed data.
+# When it is enabled, the UPDATE event will output two rows of data: the first row is a DELETE event that outputs the data before the change; the second row is an INSERT event that outputs the changed data.
+# When it is enabled, the "is-update" column will be added before the data column. This column is used to identify whether the change data of the current row comes from the Update event or the original Insert/Delete event.
+# If the change data of the current row comes from the Update event, the "is-update" column is true, otherwise it is false.
 # output-old-value = false
 
 # Starting from v8.0.0, TiCDC supports the Simple message encoding protocol. The following are the configuration parameters for the Simple protocol.
@@ -221,6 +229,14 @@ enable-partition-separator = true
 # encoding-format controls the encoding format of the Simple protocol messages. Currently, the Simple protocol message supports "json" and "avro" encoding formats.
 # The default value is "json".
 # encoding-format = "json"
+
+[sink.open]
+# Whether to output the value before the row data changes. The default value is true. When it is disabled, the UPDATE event does not output the "p" field.
+# output-old-value = true
+
+[sink.debezium]
+# Whether to output the value before the row data changes. The default value is true. When it is disabled, the UPDATE event does not output the "before" field.
+# output-old-value = true
 
 # Specifies the replication consistency configurations for a changefeed when using the redo log. For more information, see https://docs.pingcap.com/tidb/stable/ticdc-sink-to-mysql#eventually-consistent-replication-in-disaster-scenarios.
 # Note: The consistency-related configuration items only take effect when the downstream is a database and the redo log feature is enabled.

@@ -46,7 +46,7 @@ This document describes how to deploy a DM cluster offline using TiUP.
         tiup mirror clone tidb-dm-${version}-linux-amd64 --os=linux --arch=amd64 \
             --dm-master=${version} --dm-worker=${version} --dmctl=${version} \
             --alertmanager=v0.17.0 --grafana=v4.0.3 --prometheus=v4.0.3 \
-            --tiup=v$(tiup --version|grep 'tiup'|awk -F ' ' '{print $1}') --dm=v$(tiup --version|grep 'tiup'|awk -F ' ' '{print $1}')
+            --dm=v$(tiup --version|grep 'tiup'|awk -F ' ' '{print $1}')
         ```
 
         The command above creates a directory named `tidb-dm-${version}-linux-amd64` in the current directory, which contains the component package managed by TiUP.
@@ -127,7 +127,7 @@ alertmanager_servers:
 >
 > - Use `.` to indicate the subcategory of the configuration, such as `log.slow-threshold`. For more formats, see [TiUP configuration template](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml).
 >
-> - For more parameter description, see [master `config.toml.example`](https://github.com/pingcap/dm/blob/master/dm/master/dm-master.toml) and [worker `config.toml.example`](https://github.com/pingcap/dm/blob/master/dm/worker/dm-worker.toml).
+> - For more parameter description, see [master `config.toml.example`](https://github.com/pingcap/tiflow/blob/master/dm/master/dm-master.toml) and [worker `config.toml.example`](https://github.com/pingcap/tiflow/blob/master/dm/worker/dm-worker.toml).
 >
 > - Make sure that the ports among the following components are interconnected:
 >     - The `peer_port` (`8291` by default) among the DM-master nodes are interconnected.

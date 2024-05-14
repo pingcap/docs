@@ -416,7 +416,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
     - The binlog data is too large, so the single message written to Kafka is too large. You need to modify the following configuration of Kafka:
 
-        ```conf
+        ```properties
         message.max.bytes=1073741824
         replica.fetch.max.bytes=1073741824
         fetch.message.max.bytes=1073741824
@@ -472,7 +472,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 ### 6.2 Data Migration
 
-- 6.2.1 TiDB Data Migration (DM) is a migration tool that supports data migration from MySQL/MariaDB into TiDB. For details, see [DM on GitHub](https://github.com/pingcap/dm/).
+- 6.2.1 TiDB Data Migration (DM) is a migration tool that supports data migration from MySQL/MariaDB into TiDB. For details, see [DM overview](/dm/dm-overview.md).
 
 - 6.2.2 `Access denied for user 'root'@'172.31.43.27' (using password: YES)` shows when you run `query status` or check the log.
 
@@ -520,7 +520,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 ### 6.3 TiDB Lightning
 
-- 6.3.1 TiDB Lightning is a tool for fast full import of large amounts of data into a TiDB cluster. See [TiDB Lightning on GitHub](https://github.com/pingcap/tidb/tree/master/br/pkg/lightning).
+- 6.3.1 TiDB Lightning is a tool for fast full import of large amounts of data into a TiDB cluster. See [TiDB Lightning on GitHub](https://github.com/pingcap/tidb/tree/master/lightning).
 
 - 6.3.2 Import speed is too slow.
 

@@ -22,7 +22,7 @@ Besides basic backup and restore, snapshot backup and restore also provides the 
 > - The following examples assume that Amazon S3 access keys and secret keys are used to authorize permissions. If IAM roles are used to authorize permissions, you need to set `--send-credentials-to-tikv` to `false`.
 > - If other storage systems or authorization methods are used to authorize permissions, adjust the parameter settings according to [Backup Storages](/br/backup-and-restore-storages.md).
 
-You can back up a TiDB cluster snapshot by running the `br backup full` command. Run `br backup full --help` to see the help information:
+You can back up a TiDB cluster snapshot by running the `tiup br backup full` command. Run `tiup br backup full --help` to see the help information:
 
 ```shell
 tiup br backup full --pd "${PD_IP}:2379" \
@@ -33,7 +33,7 @@ tiup br backup full --pd "${PD_IP}:2379" \
 
 In the preceding command:
 
-- `--backupts`: The time point of the snapshot. The format can be [TSO](/glossary.md#tso) or timestamp, such as `400036290571534337` or `2018-05-11 01:42:23`. If the data of this snapshot is garbage collected, the `br backup` command returns an error and `br` exits. If you leave this parameter unspecified, `br` picks the snapshot corresponding to the backup start time.
+- `--backupts`: The time point of the snapshot. The format can be [TSO](/glossary.md#tso) or timestamp, such as `400036290571534337` or `2018-05-11 01:42:23`. If the data of this snapshot is garbage collected, the `tiup br backup` command returns an error and `br` exits. If you leave this parameter unspecified, `br` picks the snapshot corresponding to the backup start time.
 - `--storage`: The storage address of the backup data. Snapshot backup supports Amazon S3, Google Cloud Storage, and Azure Blob Storage as backup storage. The preceding command uses Amazon S3 as an example. For more details, see [URI Formats of External Storage Services](/external-storage-uri.md).
 - `--ratelimit`: The maximum speed **per TiKV** performing backup tasks. The unit is in MiB/s.
 
@@ -62,7 +62,13 @@ The output is as follows, corresponding to the physical time `2022-09-08 13:30:0
 
 ## Restore cluster snapshots
 
-You can restore a snapshot backup by running the `br restore full` command. Run `br restore full --help` to see the help information:
+> **Note:**
+>
+> - For BR v7.5.0 and earlier versions, the snapshot restore speed per TiKV node is approximately 100 MiB/s.
+> - Starting from BR v7.6.0, to address potential restore bottlenecks in scenarios with large-scale Regions, BR supports accelerating restore through the coarse-grained Region scattering algorithm (experimental). You can enable this feature by specifying the command-line parameter `--granularity="coarse-grained"`.
+> - Starting from BR v8.0.0, the snapshot restore through the coarse-grained Region scattering algorithm is generally available (GA) and enabled by default. BR improves the snapshot restore speed significantly by implementing various optimizations such as adopting the coarse-grained Region scattering algorithm, creating databases and tables in batches, reducing the mutual impact between SST file downloads and ingest operations, and accelerating the restore of table statistics. According to test results from real-world cases, the SST file download speed for snapshot restore is improved by approximately up to 10 times, the data restore speed per TiKV node stabilizes at 1.2 GiB/s, the end-to-end restore speed is improved by approximately 1.5 to 3 times, and 100 TiB of data can be restored within one hour.
+
+You can restore a snapshot backup by running the `tiup br restore full` command. Run `tiup br restore full --help` to see the help information:
 
 The following example restores the [preceding backup snapshot](#back-up-cluster-snapshots) to a target cluster:
 
@@ -90,7 +96,7 @@ BR supports restoring partial data of a specified database or table from backup 
 
 **Restore a database**
 
-To restore a database to a cluster, run the `br restore db` command. The following example restores the `test` database from the backup data to the target cluster:
+To restore a database to a cluster, run the `tiup br restore db` command. The following example restores the `test` database from the backup data to the target cluster:
 
 ```shell
 tiup br restore db \
@@ -103,7 +109,7 @@ In the preceding command, `--db` specifies the name of the database to be restor
 
 **Restore a table**
 
-To restore a single table to a cluster, run the `br restore table` command. The following example restores the `test.usertable` table from the backup data to the target cluster:
+To restore a single table to a cluster, run the `tiup br restore table` command. The following example restores the `test.usertable` table from the backup data to the target cluster:
 
 ```shell
 tiup br restore table --pd "${PD_IP}:2379" \
@@ -116,7 +122,7 @@ In the preceding command, `--db` specifies the name of the database to be restor
 
 **Restore multiple tables with table filter**
 
-To restore multiple tables with more complex filter rules, run the `br restore full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`. The following example restores tables that match the `db*.tbl*` filter rule from the backup data to the target cluster:
+To restore multiple tables with more complex filter rules, run the `tiup br restore full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`. The following example restores tables that match the `db*.tbl*` filter rule from the backup data to the target cluster:
 
 ```shell
 tiup br restore full \
@@ -208,10 +214,10 @@ The impact of backup on cluster performance can be reduced by limiting the backu
 
 - During data restore, TiDB tries to fully utilize the TiKV CPU, disk IO, and network bandwidth resources. Therefore, it is recommended to restore the backup data on an empty cluster to avoid affecting the running applications.
 - The speed of restoring backup data is much related with the cluster configuration, deployment, and running applications. In internal tests, the restore speed of a single TiKV node can reach 100 MiB/s. The performance and impact of snapshot restore are varied in different user scenarios and should be tested in actual environments.
-- Starting from v7.6.0, to accelerate restore speed in large-scale Region scenarios, BR introduces an experimental feature that allows you to enable a coarse-grained Region scatter algorithm by specifying the command-line parameter `--granularity="coarse-grained"`. This algorithm ensures that each TiKV node receives stable and evenly distributed download tasks, thus fully utilizing the resources of each TiKV node and achieving a rapid parallel recovery. In several real-world cases, the snapshot restore speed of the cluster is improved by about 10 times in large-scale Region scenarios. The following is an example:
+- BR provides a coarse-grained Region scattering algorithm to accelerate Region restore in large-scale Region scenarios. The algorithm is controlled by the command-line parameter `--granularity="coarse-grained"` and is enabled by default. This algorithm ensures that each TiKV node receives stable and evenly distributed download tasks, thus fully utilizing the resources of each TiKV node and achieving a rapid parallel recovery. In several real-world cases, the snapshot restore speed of the cluster is improved by about 3 times in large-scale Region scenarios. The following is an example:
 
     ```bash
-    br restore full \
+    tiup br restore full \
     --pd "${PDIP}:2379" \
     --storage "s3://${Bucket}/${Folder}" \
     --s3.region "${region}" \
@@ -219,6 +225,13 @@ The impact of backup on cluster performance can be reduced by limiting the backu
     --send-credentials-to-tikv=true \
     --log-file restorefull.log
     ```
+
+- Starting from v8.0.0, the `br` command-line tool introduces the `--tikv-max-restore-concurrency` parameter to control the maximum number of files that BR downloads and ingests per TiKV node. By configuring this parameter, you can also control the maximum length of the job queue (the maximum length of the job queue = 32 \* the number of TiKV nodes \* `--tikv-max-restore-concurrency`), thereby controlling the memory consumption of the BR node.
+
+    In normal cases, `--tikv-max-restore-concurrency` is automatically adjusted based on the cluster configuration, so manual configuration is unnecessary. If the **TiKV-Details** > **Backup & Import** > **Import RPC count** monitoring metric in Grafana shows that the number of files BR downloads remains close to 0 for a long time while the number of files that BR ingests consistently reaches the upper limit, it indicates that ingesting file tasks pile up and the job queue has reached its maximum length. In this case, you can take the following measures to alleviate the task pilling-up issue:
+
+    - Set the `--ratelimit` parameter to limit the download speed, ensuring sufficient resources for ingesting file tasks. For example, if the disk throughput of any TiKV node is `x MiB/s` and the network bandwidth for downloading backup files exceeds `x/2 MiB/s`, you can set the parameter as `--ratelimit x/2`. If the disk throughput of any TiKV node is `x MiB/s` and the network bandwidth for downloading backup files is less than or equal to `x/2 MiB/s`, you can leave the parameter `--ratelimit` unset.
+    - Increase the `--tikv-max-restore-concurrency` to increase the maximum length of the job queue.
 
 ## See also
 

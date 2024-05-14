@@ -17,7 +17,7 @@ The states in the preceding state transfer diagram are described as follows:
 
 - `Normal`: The replication task runs normally and the checkpoint-ts proceeds normally. A changefeed in this state blocks GC to advance.
 - `Stopped`: The replication task is stopped, because the user manually pauses the changefeed. The changefeed in this state blocks GC operations.
-- `Warning`: The replication task returns an error. The replication cannot continue due to some recoverable errors. The changefeed in this state keeps trying to resume until the state transfers to `Normal`. The maximum retry time is 30 minutes. If it exceeds this time, the changefeed enters a failed state. The changefeed in this state blocks GC operations.
+- `Warning`: The replication task returns an error. The replication cannot continue due to some recoverable errors. The changefeed in this state keeps trying to resume until the state transfers to `Normal`. The default retry time is 30 minutes (which can be adjusted by [`changefeed-error-stuck-duration`](/ticdc/ticdc-changefeed-config.md)). If it exceeds this time, the changefeed enters a failed state. The changefeed in this state blocks GC operations.
 - `Finished`: The replication task is finished and has reached the preset `TargetTs`. The changefeed in this state does not block GC operations.
 - `Failed`: The replication task fails. The changefeed in this state does not keep trying to resume. To give you enough time to handle the failure, the changefeed in this state blocks GC operations. The duration of the blockage is specified by the `gc-ttl` parameter, with a default value of 24 hours. If the underlying issue is resolved within this duration, you can manually resume the changefeed. Otherwise, if the changefeed remains in this state beyond the `gc-ttl` duration, the replication task cannot resume and cannot be recovered.
 
@@ -44,4 +44,4 @@ You can manage a TiCDC cluster and its replication tasks using the command-line 
 
 You can also use the HTTP interface (the TiCDC OpenAPI feature) to manage a TiCDC cluster and its replication tasks. For details, see [TiCDC OpenAPI](/ticdc/ticdc-open-api.md).
 
-If your TiCDC is deployed using TiUP, you can start `cdc cli` by running the `tiup cdc:v<CLUSTER_VERSION> cli` command. Replace `v<CLUSTER_VERSION>` with the TiCDC cluster version, such as `v7.6.0`. You can also run `cdc cli` directly.
+If your TiCDC is deployed using TiUP, you can start `cdc cli` by running the `tiup cdc:v<CLUSTER_VERSION> cli` command. Replace `v<CLUSTER_VERSION>` with the TiCDC cluster version, such as `v8.0.0`. You can also run `cdc cli` directly.

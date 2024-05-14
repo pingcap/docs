@@ -7,17 +7,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         name: Download translator repo
         with:
           repository: "shczhen/markdown-translator"
           path: "markdown-translator"
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         name: Download specified branch of docs repo
         with:
           ref: "release-7.5"
           path: "docs"
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         name: Setup node 18
         with:
           node-version: 18

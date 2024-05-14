@@ -365,6 +365,7 @@
       - [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)
       - [`ALTER RANGE`](/sql-statements/sql-statement-alter-range.md)
       - [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md)
+      - [`ALTER SEQUENCE`](/sql-statements/sql-statement-alter-sequence.md)
       - [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
       - [`ALTER TABLE COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)
       - [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
@@ -472,7 +473,7 @@
       - [`SHOW PROFILES`](/sql-statements/sql-statement-show-profiles.md)
       - [`SHOW SCHEMAS`](/sql-statements/sql-statement-show-schemas.md)
       - [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md)
-      - [`SHOW STATS_HISTOGRAMS`](/sql-statements/sql-statement-show-histograms.md)
+      - [`SHOW STATS_HISTOGRAMS`](/sql-statements/sql-statement-show-stats-histograms.md)
       - [`SHOW STATS_LOCKED`](/sql-statements/sql-statement-show-stats-locked.md)
       - [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)
       - [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md)
@@ -518,6 +519,7 @@
       - [Miscellaneous Functions](/functions-and-operators/miscellaneous-functions.md)
       - [Precision Math](/functions-and-operators/precision-math.md)
       - [Set Operations](/functions-and-operators/set-operators.md)
+      - [Sequence Functions](/functions-and-operators/sequence-functions.md)
       - [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md)
       - [TiDB Specific Functions](/functions-and-operators/tidb-functions.md)
     - [Clustered Indexes](/clustered-indexes.md)
@@ -601,9 +603,12 @@
       - PERFORMANCE_SCHEMA
         - [Overview](/performance-schema/performance-schema.md)
         - [`SESSION_CONNECT_ATTRS`](/performance-schema/performance-schema-session-connect-attrs.md)
+      - SYS
+        - [Overview](/sys-schema/sys-schema.md)
+        - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
     - [Metadata Lock](/metadata-lock.md)
     - [Use UUIDs](/best-practices/uuid.md)
-    - [TiDB DDL V2](/ddl-v2.md)
+    - [TiDB Accelerated Table Creation](/accelerated-table-creation.md)
   - [System Variables](/system-variables.md)
   - [Server Status Variables](/status-variables.md)
   - Storage Engines

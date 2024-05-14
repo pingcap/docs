@@ -27,6 +27,7 @@ delimiter = ',' # Before v7.6.0, you can only set the delimiter to a single char
 quote = '"'
 null = '\N'
 include-commit-ts = true
+output-old-value = false
 ```
 
 ## Transactional constraints
@@ -47,7 +48,8 @@ In the CSV file, each column is defined as follows:
 - Column 2: Table name.
 - Column 3: Schema name.
 - Column 4: The `commit-ts` of the source transaction. This column is optional.
-- Column 5 to the last column: One or more columns that represent data to be changed.
+- Column 5: `is-update` column only exists when `output-old-value` is true, and is used to identify whether the row change comes from the Update event (set as true) or from the Insert/Delete event (set as false).
+- Column 6 to the last column: One or more columns that represent data to be changed.
 
 Assume that table `hr.employee` is defined as follows:
 
@@ -61,7 +63,7 @@ CREATE TABLE `employee` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ```
 
-The DML events of this table are stored in the CSV format as follows:
+When `include-commit-ts = true` and `output-old-value = false`, the DML events of this table are stored in the CSV format as follows:
 
 ```shell
 "I","employee","hr",433305438660591626,101,"Smith","Bob","2014-06-04","New York"
@@ -69,6 +71,18 @@ The DML events of this table are stored in the CSV format as follows:
 "D","employee","hr",433305438660591629,101,"Smith","Bob","2017-03-13","Dallas"
 "I","employee","hr",433305438660591630,102,"Alex","Alice","2017-03-14","Shanghai"
 "U","employee","hr",433305438660591630,102,"Alex","Alice","2018-06-15","Beijing"
+```
+
+When `include-commit-ts = true` and `output-old-value = true`, the DML events of this table are stored in the CSV format as follows:
+
+```
+"I","employee","hr",433305438660591626,false,101,"Smith","Bob","2014-06-04","New York"
+"D","employee","hr",433305438660591627,true,101,"Smith","Bob","2015-10-08","Shanghai"
+"I","employee","hr",433305438660591627,true,101,"Smith","Bob","2015-10-08","Los Angeles"
+"D","employee","hr",433305438660591629,false,101,"Smith","Bob","2017-03-13","Dallas"
+"I","employee","hr",433305438660591630,false,102,"Alex","Alice","2017-03-14","Shanghai"
+"D","employee","hr",433305438660591630,true,102,"Alex","Alice","2017-03-14","Beijing"
+"I","employee","hr",433305438660591630,true,102,"Alex","Alice","2018-06-15","Beijing"
 ```
 
 ## Data type mapping

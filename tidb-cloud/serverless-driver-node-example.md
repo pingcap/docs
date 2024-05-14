@@ -75,7 +75,7 @@ The serverless driver supports both CommonJS and ES modules. The following steps
     node index.js
     ```
 
-## Compatability with earlier versions of Node.js
+## Compatibility with earlier versions of Node.js
 
 If you are using Node.js earlier than 18.0.0, which does not have a global `fetch` function, you can take the following steps to get `fetch`:
 

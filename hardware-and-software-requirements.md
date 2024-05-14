@@ -51,7 +51,7 @@ As an open-source distributed SQL database with high performance, TiDB can be de
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
-    <td>openEuler 22.03 LTS SP1</td>
+    <td>openEuler 22.03 LTS SP1/SP3</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
@@ -102,7 +102,7 @@ As an open-source distributed SQL database with high performance, TiDB can be de
 |  Libraries required for compiling and running TiDB |  Version   |
 |   :---   |   :---   |
 |   Golang  |  1.21 or later |
-|   Rust    |   nightly-2022-07-31 or later  |
+|   Rust    |   nightly-2023-12-28 or later  |
 |  GCC      |   7.x      |
 |  LLVM     |  13.0 or later  |
 
@@ -112,7 +112,7 @@ Library required for running TiDB: glibc (2.28-151.el8 version)
 
 The following CPU architectures are supported:
 
-- x86_64. Starting from TiDB v6.6.0, the [x84-64-v2 instruction set](https://developers.redhat.com/blog/2021/01/05/building-red-hat-enterprise-linux-9-for-the-x86-64-v2-microarchitecture-level) is required.
+- x86_64. Starting from TiDB v6.6.0, the [x86-64-v2 instruction set](https://developers.redhat.com/blog/2021/01/05/building-red-hat-enterprise-linux-9-for-the-x86-64-v2-microarchitecture-level) is required.
 - ARM 64
 
 ## Software recommendations
