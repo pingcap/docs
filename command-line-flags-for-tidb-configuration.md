@@ -193,6 +193,11 @@ When you start the TiDB cluster, you can use command-line options or environment
 - The temporary directory of TiDB
 - Default: `"/tmp/tidb"`
 
+## `--tidb-service-scope`
+
++ Specifies the initial value of [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) for the current TiDB instance.
++ Default: `""`
+
 ## `--token-limit`
 
 - The number of sessions allowed to run concurrently in TiDB. It is used for traffic control.
