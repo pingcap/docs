@@ -10,10 +10,6 @@ The `IMPORT INTO` statement lets you import data to TiDB via the [Physical Impor
 - `IMPORT INTO ... FROM FILE`: imports data files in formats such as `CSV`, `SQL`, and `PARQUET` into an empty table in TiDB.
 - `IMPORT INTO ... FROM SELECT`: imports the query result of a `SELECT` statement into an empty table in TiDB. You can also use it to import historical data queried with [`AS OF TIMESTAMP`](/as-of-timestamp.md).
 
-> **Warning:**
->
-> Currently, `IMPORT INTO ... FROM SELECT` is experimental. It is not recommended that you use it in production environments. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 ## Restrictions
 
 - `IMPORT INTO` only supports importing data into existing empty tables in the database.
