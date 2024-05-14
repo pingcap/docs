@@ -62,5 +62,16 @@ The columns in the `MEMORY_USAGE` table are described as follows:
 
 ## See also
 
+<CustomContent platform="tidb">
+
 - [TiDB memory control](/configure-memory-usage.md)
 - [Tune TiKV memory parameter performance](/tune-tikv-memory-performance.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- [TiDB memory control](https://docs.pingcap.com/tidb/stable/configure-memory-usage)
+- [Tune TiKV memory parameter performance](https://docs.pingcap.com/tidb/stable/tune-tikv-memory-performance)
+
+</CustomContent>
