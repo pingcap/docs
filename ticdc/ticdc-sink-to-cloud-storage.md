@@ -78,7 +78,7 @@ Before replicating data, you need to set appropriate access privileges for the d
     - `s3:ListMultipartUploadParts`
     - `s3:ListBucketMultipartUploads`
 
-If you have not created a synchronization data storage directory, you can refer to [Create a Bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) to create an S3 storage bucket in the specified region. If you need to use a folder, you can refer to [Organizing objects in the Amazon S3 console by using folders](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html) to create a folder in the storage bucket.
+If you have not created a replication data storage directory, you can refer to [Create a Bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) to create an S3 storage bucket in the specified region. If you need to use a folder, you can refer to [Organizing objects in the Amazon S3 console by using folders](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html) to create a folder in the storage bucket.
 
 You can configure an account to access Amazon S3 in either of the following two ways:
 
@@ -93,7 +93,7 @@ You can configure an account to access Amazon S3 in either of the following two 
 
 - Method 2: Access based on the IAM Role
 
-    Associate an [IAM role configured to access S3 access](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) to the EC2 instance running TiCDC server. After successful setup, TiCDC can directly access the corresponding backup catalog in S3 without additional setup.
+    Associate an [IAM role with configured privileges to access Amazon S3 ](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) to the EC2 instance running TiCDC server. After successful setup, TiCDC can directly access the corresponding backup catalog in Amazon S3 without additional setup.
 
 </div>
 <div label="GCS" value="gcs">
@@ -104,7 +104,7 @@ The following is an example configuration for GCS:
 --sink-uri="gcs://bucket/prefix?protocol=canal-json"
 ```
 
-You can configure the accounts that have access to GCS by specifying an access key. If the `credentials-file` parameter is specified, authentication is performed according to the specified `credentials-file`. In addition to specifying the key file in the URI, the following methods are supported:
+You can configure the accounts that have access to GCS by specifying an access key. Authentication is performed according to the specified `credentials-file`. In addition to specifying the key file in the URI, the following methods are supported:
 
 - Read the contents of a file located in the path specified by the `$GOOGLE_APPLICATION_CREDENTIALS` environment variable.
 - Retrieve the contents of the file in `~/.config/gcloud/application_default_credentials.json
