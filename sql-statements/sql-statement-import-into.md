@@ -10,6 +10,14 @@ The `IMPORT INTO` statement lets you import data to TiDB via the [Physical Impor
 - `IMPORT INTO ... FROM FILE`: imports data files in formats such as `CSV`, `SQL`, and `PARQUET` into an empty table in TiDB.
 - `IMPORT INTO ... FROM SELECT`: imports the query result of a `SELECT` statement into an empty table in TiDB. You can also use it to import historical data queried with [`AS OF TIMESTAMP`](/as-of-timestamp.md).
 
+<CustomContent platform="tidb">
+
+> **Note:**
+>
+> Compared with [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md), `IMPORT INTO` can be directly executed on TiDB nodes, supports automated distributed task scheduling and [TiDB Global Sort](/tidb-global-sort.md), and offers significant improvements in deployment, resource utilization, task configuration convenience, ease of invocation and integration, high availability, and scalability. It is recommended that you consider using `IMPORT INTO` instead of TiDB Lightning in appropriate scenarios.
+
+</CustomContent>
+
 ## Restrictions
 
 - `IMPORT INTO` only supports importing data into existing empty tables in the database.
