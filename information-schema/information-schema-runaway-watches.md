@@ -32,16 +32,12 @@ DESC RUNAWAY_WATCHES;
 8 rows in set (0.00 sec)
 ```
 
-> **Warning:**
->
-> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 ## Examples
 
 Query the watch list of runaway queries:
 
 ```sql
-SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES;
+SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES\G
 ```
 
 The output is as follows:
@@ -77,7 +73,7 @@ QUERY WATCH ADD RESOURCE GROUP rg1 SQL TEXT EXACT TO 'select * from sbtest.sbtes
 Query the watch list of runaway queries again:
 
 ```sql
-SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES\G;
+SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES\G
 ```
 
 The output is as follows:

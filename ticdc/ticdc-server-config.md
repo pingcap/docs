@@ -47,6 +47,12 @@ gc-tuner-memory-threshold = 0
   ca-path = ""
   cert-path = ""
   key-path = ""
+  # This parameter controls whether to enable the TLS client authentication. The default value is false.
+  mtls = false
+  # This parameter controls whether to use username and password for client authentication. The default value is false.
+  client-user-required = false
+  # This parameter lists the usernames that are allowed for client authentication. Authentication requests with usernames not in this list will be rejected. The default value is null.
+  client-allowed-user = ["username_1", "username_2"]
 
 # The session duration between TiCDC and etcd services, measured in seconds. This parameter is optional and its default value is 10.
 capture-session-ttl = 10 # 10s

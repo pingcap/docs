@@ -38,7 +38,7 @@ You can configure the following parameters using `tidb-lightning`:
 | `--key <file>` | Private key path for TLS connection | `security.key-path` |
 | `--server-mode` | Start TiDB Lightning in server mode | `lightning.server-mode` |
 
-If you specify both a command line parameter and the corresponding setting in the configuration file, the command line parameter takes precedence. For example, running `./tidb-lightning -L debug --config cfg.toml` would always set the log level to "debug" regardless of the content of `cfg.toml`.
+If you specify both a command line parameter and the corresponding setting in the configuration file, the command line parameter takes precedence. For example, running `tiup tidb-lightning -L debug --config cfg.toml` would always set the log level to "debug" regardless of the content of `cfg.toml`.
 
 ## `tidb-lightning-ctl`
 
