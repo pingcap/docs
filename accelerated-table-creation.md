@@ -1,5 +1,6 @@
 ---
 title: TiDB Accelerated Table Creation
+aliases: ['/tidb/stable/ddl-v2/']
 summary: Learn the concept, principles, and implementation details of performance optimization for creating tables in TiDB.
 ---
 

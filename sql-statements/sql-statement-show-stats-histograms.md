@@ -1,5 +1,6 @@
 ---
 title: SHOW STATS_HISTOGRAMS
+aliases: ['/tidb/stable/sql-statement-show-histograms']
 summary: An overview of the usage of SHOW HISTOGRAMS for TiDB database.
 ---
 
