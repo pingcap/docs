@@ -1,21 +1,21 @@
 ---
 title: Connect to TiDB with mysql2 in Next.js
-summary: Next.jsのmysql2を使用してTiDBに接続するチュートリアルでは、Next.jsでTiDBとmysql2を使用して環境をセットアップし、TiDBクラスターに接続し、アプリケーションをビルドして実行する方法を学ぶことができます。必要なものはNode.js 18以降、Git、TiDBクラスターです。サンプルアプリを実行してTiDBに接続する手順も説明されています。また、サンプルコードスニペットを参照して独自のアプリケーション開発を行うことができます。
+summary: This article describes how to build a CRUD application using TiDB and mysql2 in Next.js and provides a simple example code snippet.
 ---
 
-# Next.js の mysql2 を使用して TiDB に接続する {#connect-to-tidb-with-mysql2-in-next-js}
+# Next.js で mysql2 を使用して TiDB に接続する {#connect-to-tidb-with-mysql2-in-next-js}
 
-TiDB は MySQL 互換データベースであり、 [mysql2](https://github.com/sidorares/node-mysql2)は Node.js 用の人気のあるオープンソース ドライバーです。
+TiDB は MySQL 互換のデータベースであり、 [マイSQL2](https://github.com/sidorares/node-mysql2) Node.js 用の人気のあるオープンソース ドライバーです。
 
-このチュートリアルでは、Next.js で TiDB と mysql2 を使用して次のタスクを実行する方法を学習できます。
+このチュートリアルでは、Next.js で TiDB と mysql2 を使用して次のタスクを実行する方法を学習します。
 
--   環境をセットアップします。
+-   環境を設定します。
 -   mysql2 を使用して TiDB クラスターに接続します。
--   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作の[サンプルコードスニペット](#sample-code-snippets)を見つけることができます。
+-   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作用の[サンプルコードスニペット](#sample-code-snippets)を見つけることができます。
 
 > **注記**
 >
-> このチュートリアルは、TiDB サーバーレスおよび TiDB セルフホストで動作します。
+> このチュートリアルは、TiDB Serverless と TiDB Self-Hosted で動作します。
 
 ## 前提条件 {#prerequisites}
 
@@ -29,37 +29,37 @@ TiDB は MySQL 互換データベースであり、 [mysql2](https://github.com/
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
--   [ローカル テスト TiDB クラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
+-   (推奨) [TiDB サーバーレス クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
--   [ローカル テスト TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
+-   (推奨) [TiDB サーバーレス クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
 
-## サンプル アプリを実行して TiDB に接続する {#run-the-sample-app-to-connect-to-tidb}
+## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
-このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を説明します。
+このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を示します。
 
 > **注記**
 >
 > 完全なコード スニペットと実行手順については、 [tidb-nextjs-vercel-クイックスタート](https://github.com/tidb-samples/tidb-nextjs-vercel-quickstart) GitHub リポジトリを参照してください。
 
-### ステップ 1: サンプル アプリ リポジトリのクローンを作成する {#step-1-clone-the-sample-app-repository}
+### ステップ1: サンプルアプリのリポジトリをクローンする {#step-1-clone-the-sample-app-repository}
 
-ターミナル ウィンドウで次のコマンドを実行して、サンプル コード リポジトリのクローンを作成します。
+サンプル コード リポジトリを複製するには、ターミナル ウィンドウで次のコマンドを実行します。
 
 ```bash
 git clone git@github.com:tidb-samples/tidb-nextjs-vercel-quickstart.git
 cd tidb-nextjs-vercel-quickstart
 ```
 
-### ステップ 2: 依存関係をインストールする {#step-2-install-dependencies}
+### ステップ2: 依存関係をインストールする {#step-2-install-dependencies}
 
 次のコマンドを実行して、サンプル アプリに必要なパッケージ ( `mysql2`を含む) をインストールします。
 
@@ -67,7 +67,7 @@ cd tidb-nextjs-vercel-quickstart
 npm install
 ```
 
-### ステップ 3: 接続情報を構成する {#step-3-configure-connection-information}
+### ステップ3: 接続情報を構成する {#step-3-configure-connection-information}
 
 選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
@@ -75,31 +75,31 @@ npm install
 
 <div label="TiDB Serverless">
 
-1.  [**クラスター**ページ](https://tidbcloud.com/console/clusters)に移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
+1.  [**クラスター**ページ](https://tidbcloud.com/console/clusters)に移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
+2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3.  接続ダイアログの設定が動作環境と一致していることを確認してください。
+3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **エンドポイント タイプは**`Public`に設定されます
+    -   **エンドポイントタイプは**`Public`に設定されています
 
-    -   **ブランチは**`main`に設定されています
+    -   **ブランチ**は`main`に設定されています
 
-    -   **[接続先] は**`General`に設定されています
+    -   **接続先は**`General`に設定されています
 
-    -   **オペレーティング システムが**環境に一致します。
+    -   **オペレーティング システムは**環境に適合します。
 
     > **注記**
     >
-    > Node.js アプリケーションでは、TLS (SSL) 接続を確立するときにデフォルトで組み込みの[Mozilla CA 証明書](https://wiki.mozilla.org/CA/Included_Certificates)を使用するため、SSL CA 証明書を提供する必要はありません。
+    > Node.js アプリケーションでは、TLS (SSL) 接続を確立するときに Node.js がデフォルトで組み込みの[Mozilla CA 証明書](https://wiki.mozilla.org/CA/Included_Certificates)使用するため、SSL CA 証明書を提供する必要はありません。
 
-4.  **「パスワードの生成」**をクリックして、ランダムなパスワードを作成します。
+4.  ランダムなパスワードを作成するには、 **「パスワードの生成」を**クリックします。
 
     > **ヒント**
     >
-    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成できます。
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成することができます。
 
-5.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
+5.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
     ```bash
     # Linux
@@ -111,7 +111,7 @@ npm install
     Copy-Item ".env.example" -Destination ".env"
     ```
 
-6.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。結果の例は次のとおりです。
+6.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
 
     ```bash
     TIDB_HOST='{gateway-region}.aws.tidbcloud.com'
@@ -121,7 +121,7 @@ npm install
     TIDB_DB_NAME='test'
     ```
 
-    `{}`のプレースホルダーを、接続ダイアログで取得した値に置き換えます。
+    `{}`のプレースホルダーを接続ダイアログで取得した値に置き換えます。
 
 7.  `.env`ファイルを保存します。
 
@@ -129,7 +129,7 @@ npm install
 
 <div label="TiDB Self-Hosted">
 
-1.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
+1.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
     ```bash
     # Linux
@@ -141,7 +141,7 @@ npm install
     Copy-Item ".env.example" -Destination ".env"
     ```
 
-2.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。結果の例は次のとおりです。
+2.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
 
     ```bash
     TIDB_HOST='{tidb_server_host}'
@@ -151,7 +151,7 @@ npm install
     TIDB_DB_NAME='test'
     ```
 
-    `{}`のプレースホルダーを、 **「接続」**ウィンドウで取得した値に置き換えます。 TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
+    `{}`のプレースホルダーを、**接続**ウィンドウで取得した値に置き換えます。TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
 
 3.  `.env`ファイルを保存します。
 
@@ -159,7 +159,7 @@ npm install
 
 </SimpleTab>
 
-### ステップ 4: コードを実行して結果を確認する {#step-4-run-the-code-and-check-the-result}
+### ステップ4: コードを実行して結果を確認する {#step-4-run-the-code-and-check-the-result}
 
 1.  アプリケーションを起動します。
 
@@ -167,11 +167,11 @@ npm install
     npm run dev
     ```
 
-2.  ブラウザを開いて`http://localhost:3000`にアクセスします。 (実際のポート番号については端末を確認してください。デフォルトは`3000`です。)
+2.  ブラウザを開いて`http://localhost:3000`にアクセスします。(実際のポート番号についてはターミナルで確認してください。デフォルトは`3000`です。)
 
-3.  **「RUN SQL」**をクリックしてサンプルコードを実行します。
+3.  サンプル コードを実行するには、 **[SQL の実行] を**クリックします。
 
-4.  端末の出力を確認します。出力が次のような場合、接続は成功しています。
+4.  ターミナルの出力を確認します。出力が次のようになる場合、接続は成功しています。
 
     ```json
     {
@@ -185,11 +185,11 @@ npm install
 
 ## サンプルコードスニペット {#sample-code-snippets}
 
-次のサンプル コード スニペットを参照して、独自のアプリケーション開発を完了できます。
+次のサンプル コード スニペットを参照して、独自のアプリケーション開発を完了することができます。
 
-完全なサンプル コードとその実行方法については、 [tidb-nextjs-vercel-クイックスタート](https://github.com/tidb-samples/tidb-nextjs-vercel-quickstart)リポジトリを確認してください。
+完全なサンプル コードとその実行方法については、 [tidb-nextjs-vercel-クイックスタート](https://github.com/tidb-samples/tidb-nextjs-vercel-quickstart)リポジトリを参照してください。
 
-### TiDB に接続する {#connect-to-tidb}
+### TiDBに接続する {#connect-to-tidb}
 
 次のコードは、環境変数で定義されたオプションを使用して TiDB への接続を確立します。
 
@@ -224,7 +224,7 @@ export function getPool() {
 }
 ```
 
-### データの挿入 {#insert-data}
+### データを挿入 {#insert-data}
 
 次のクエリは、単一の`Player`レコードを作成し、 `ResultSetHeader`オブジェクトを返します。
 
@@ -233,22 +233,22 @@ const [rsh] = await pool.query('INSERT INTO players (coins, goods) VALUES (?, ?)
 console.log(rsh.insertId);
 ```
 
-詳細については、 [データの挿入](/develop/dev-guide-insert-data.md)を参照してください。
+詳細については[データを挿入](/develop/dev-guide-insert-data.md)を参照してください。
 
 ### クエリデータ {#query-data}
 
-次のクエリは、ID `1`による単一の`Player`レコードを返します。
+次のクエリは、 ID `1`の単一の`Player`レコードを返します。
 
 ```javascript
 const [rows] = await pool.query('SELECT id, coins, goods FROM players WHERE id = ?;', [1]);
 console.log(rows[0]);
 ```
 
-詳細については、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md)を参照してください。
+詳細については[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)を参照してください。
 
-### データを更新する {#update-data}
+### データの更新 {#update-data}
 
-次のクエリは、ID `1`の`Player`に`50`コインと`50`グッズを追加します。
+次のクエリは、 ID `1`の`Player`にコイン`50`と商品`50`を追加します。
 
 ```javascript
 const [rsh] = await pool.query(
@@ -258,9 +258,9 @@ const [rsh] = await pool.query(
 console.log(rsh.affectedRows);
 ```
 
-詳細については、 [データを更新する](/develop/dev-guide-update-data.md)を参照してください。
+詳細については[データの更新](/develop/dev-guide-update-data.md)を参照してください。
 
-### データの削除 {#delete-data}
+### データを削除する {#delete-data}
 
 次のクエリは、ID `1`の`Player`レコードを削除します。
 
@@ -269,31 +269,31 @@ const [rsh] = await pool.query('DELETE FROM players WHERE id = ?;', [1]);
 console.log(rsh.affectedRows);
 ```
 
-詳細については、 [データの削除](/develop/dev-guide-delete-data.md)を参照してください。
+詳細については[データを削除する](/develop/dev-guide-delete-data.md)を参照してください。
 
-## 便利なメモ {#useful-notes}
+## 役に立つメモ {#useful-notes}
 
--   [接続プール](https://github.com/sidorares/node-mysql2#using-connection-pools)を使用してデータベース接続を管理すると、接続の頻繁な確立と破棄によって生じるパフォーマンスのオーバーヘッドを軽減できます。
--   SQL インジェクションを回避するには、 [準備されたステートメント](https://github.com/sidorares/node-mysql2#using-prepared-statements)を使用することをお勧めします。
--   複雑な SQL ステートメントがあまり含まれないシナリオでは、 [続編](https://sequelize.org/) 、 [TypeORM](https://typeorm.io/) 、または[プリズマ](https://www.prisma.io/)のような ORM フレームワークを使用すると、開発効率が大幅に向上します。
+-   [接続プール](https://github.com/sidorares/node-mysql2#using-connection-pools)を使用してデータベース接続を管理すると、接続の確立と破棄を頻繁に行うことによって発生するパフォーマンスのオーバーヘッドを削減できます。
+-   SQL インジェクションを回避するには、 [準備されたステートメント](https://github.com/sidorares/node-mysql2#using-prepared-statements)使用することをお勧めします。
+-   複雑な SQL ステートメントがあまり含まれないシナリオでは、 [続編](https://sequelize.org/) 、 [タイプORM](https://typeorm.io/) 、 [プリズマ](https://www.prisma.io/)などの ORM フレームワークを使用すると、開発効率が大幅に向上します。
 
 ## 次のステップ {#next-steps}
 
--   ORM と Next.js を使用して複雑なアプリケーションを構築する方法の詳細については、 [私たちの書店デモ](https://github.com/pingcap/tidb-prisma-vercel-demo)を参照してください。
--   node-mysql2 ドライバーの使用法については[node-mysql2 のドキュメント](https://github.com/sidorares/node-mysql2/tree/master/documentation/en)から学びましょう。
--   TiDB アプリケーション開発[単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ベスト プラクティスについて[取引](/develop/dev-guide-transaction-overview.md) 、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[データの削除](/develop/dev-guide-delete-data.md) [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)ください。
--   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
+-   ORM と Next.js を使用して複雑なアプリケーションを構築する方法の詳細については、 [書店デモ](https://github.com/pingcap/tidb-prisma-vercel-demo)参照してください。
+-   [node-mysql2 のドキュメント](https://sidorares.github.io/node-mysql2/docs/documentation)から node-mysql2 ドライバーの使用方法について詳しく学びます。
+-   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入](/develop/dev-guide-insert-data.md) 、 [データの更新](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブル読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
+-   プロフェッショナル[TiDB 開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## 助けが必要？ {#need-help}
 
 <CustomContent platform="tidb">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[サポートチケットを作成する](/support.md)について質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](/support.md)について質問します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[サポートチケットを作成する](https://support.pingcap.com/)について質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
 
 </CustomContent>

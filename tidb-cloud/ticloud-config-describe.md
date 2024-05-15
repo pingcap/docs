@@ -1,9 +1,9 @@
 ---
 title: ticloud config describe
-summary: ticloud 構成の説明は、特定のユーザープロフィールのプロパティ情報を取得します。コマンドは、ticloud config describe <profile-name>またはticloud config get <profile-name>を使用します。例として、ticloud config describe <profile-name>を使用します。フラグには-h、--helpがあります。継承されたフラグには--色なしと-P、--プロファイル文字列があります。質問や提案がある場合は、TiDB Cloud CLIの問題を作成してください。
+summary: The reference of `ticloud config describe`.
 ---
 
-# ticloud 構成の説明 {#ticloud-config-describe}
+# ticloud 設定の説明 {#ticloud-config-describe}
 
 特定の[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)のプロパティ情報を取得します。
 
@@ -25,19 +25,20 @@ ticloud config get <profile-name> [flags]
 ticloud config describe <profile-name>
 ```
 
-## フラグ {#flags}
+## 旗 {#flags}
 
-| フラグ        | 説明           |
-| ---------- | ------------ |
-| -h, --help | このコマンドのヘルプ情報 |
+| フラグ        | 説明                  |
+| ---------- | ------------------- |
+| -h, --help | このコマンドのヘルプ情報を表示します。 |
 
 ## 継承されたフラグ {#inherited-flags}
 
-| フラグ            | 説明                                                                               | 必須  | 注記                                                                 |
-| -------------- | -------------------------------------------------------------------------------- | --- | ------------------------------------------------------------------ |
-| --色なし          | 出力のカラーを無効にします。                                                                   | いいえ | 非対話型モードでのみ動作します。インタラクティブ モードでは、一部の UI コンポーネントで色の無効化が機能しない可能性があります。 |
-| -P、--プロファイル文字列 | このコマンドで使用されるアクティブな[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                           |
+| フラグ               | 説明                                                                             | 必須  | 注記                                                             |
+| ----------------- | ------------------------------------------------------------------------------ | --- | -------------------------------------------------------------- |
+| --色なし             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話型モードでのみ機能します。対話型モードでは、一部の UI コンポーネントで色を無効にしても機能しない可能性があります。 |
+| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                       |
+| -D、--デバッグ         | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                       |
 
 ## フィードバック {#feedback}
 
-TiDB Cloud CLI に関して質問や提案がある場合は、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、貢献も歓迎します。
+TiDB Cloud CLI に関してご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)作成してください。また、あらゆる貢献を歓迎します。

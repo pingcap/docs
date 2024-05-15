@@ -1,29 +1,26 @@
 ---
 title: SHOW [GLOBAL|SESSION] VARIABLES | TiDB SQL Statement Reference
-summary: このステートメントは、GLOBALまたはSESSIONのスコープの変数のリストを表示します。スコープが指定されていない場合は、デフォルトのスコープSESSIONが適用されます。TiDB 固有の変数をすべてリストし、MySQLと完全な互換性があります。
+summary: An overview of the usage of SHOW [GLOBAL|SESSION] VARIABLES for the TiDB database.
 ---
 
-# [グローバル|セッション] 変数を表示 {#show-global-session-variables}
+# [グローバル|セッション]変数を表示 {#show-global-session-variables}
 
-このステートメントは、 `GLOBAL`または`SESSION`のいずれかのスコープの変数のリストを表示します。スコープが指定されていない場合は、デフォルトのスコープ`SESSION`が適用されます。
+このステートメントは、スコープ`GLOBAL`または`SESSION`の変数のリストを表示します。スコープが指定されていない場合は、デフォルトのスコープ`SESSION`が適用されます。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
-**表示手順:**
-
-![ShowStmt](/media/sqlgram/ShowStmt.png)
-
-**ShowTargetFilterable:**
-
-![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
-
-**グローバルスコープ:**
-
-![GlobalScope](/media/sqlgram/GlobalScope.png)
+```ebnf+diagram
+ShowVariablesStmt ::=
+    "SHOW" ("GLOBAL" | "SESSION")? VARIABLES ShowLikeOrWhere?
+    
+ShowLikeOrWhere ::=
+    "LIKE" SimpleExpr
+|   "WHERE" Expression
+```
 
 ## 例 {#examples}
 
-TiDB 固有の変数をすべてリストします。詳細な説明は[システム変数](/system-variables.md)を参照してください。
+TiDB 固有の変数をすべて一覧表示します。詳細な説明については、 [システム変数](/system-variables.md)を参照してください。
 
 ```sql
 mysql> SHOW GLOBAL VARIABLES LIKE 'tidb%';
@@ -145,12 +142,34 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'time_zone%';
 | time_zone     | SYSTEM |
 +---------------+--------+
 1 row in set (0.00 sec)
+
+mysql> SHOW VARIABLES WHERE Variable_name="tidb_window_concurrency";
++-------------------------+-------+
+| Variable_name           | Value |
++-------------------------+-------+
+| tidb_window_concurrency | -1    |
++-------------------------+-------+
+1 row in set (0.00 sec)
+
+mysql> SHOW VARIABLES WHERE Value=300;
++--------------------------------+-------+
+| Variable_name                  | Value |
++--------------------------------+-------+
+| ddl_slow_threshold             | 300   |
+| delayed_insert_timeout         | 300   |
+| innodb_purge_batch_size        | 300   |
+| key_cache_age_threshold        | 300   |
+| slave_checkpoint_period        | 300   |
+| tidb_slow_log_threshold        | 300   |
+| tidb_wait_split_region_timeout | 300   |
++--------------------------------+-------+
+7 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
-TiDB の`SHOW [GLOBAL|SESSION] VARIABLES`ステートメントは MySQL と完全な互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) .
+TiDB の`SHOW [GLOBAL|SESSION] VARIABLES`ステートメントは MySQL と完全に互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) 。
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
 -   [`SET [GLOBAL|SESSION]`](/sql-statements/sql-statement-set-variable.md)

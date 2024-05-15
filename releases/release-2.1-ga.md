@@ -1,71 +1,71 @@
 ---
 title: TiDB 2.1 GA Release Notes
-summary: TiDB 2.1 GAは、安定性、パフォーマンス、互換性、使いやすさが大幅に向上しています。SQLオプティマイザーはIndex Joinの選択範囲を最適化し、SQL実行者は集計関数をリファクタリングし、PDは可用性を最適化し、TiKVはコプロセッサーを追加しました。また、大量のデータの高速完全インポートをサポートするTiDB Lightningと新しいTiDBBinlogも追加されています。注意事項として、TiDB 2.1は新しいstorageエンジンを採用しているため、v2.0.x 以前へのダウングレードをサポートしていません。
+summary: TiDB 2.1 GA was released on November 30, 2018, with significant improvements in stability, performance, compatibility, and usability. The release includes optimizations in SQL optimizer, SQL executor, statistics, expressions, server, DDL, compatibility, Placement Driver (PD), TiKV, and tools. It also introduces TiDB Lightning for fast full data import and supports new TiDB Binlog. However, TiDB 2.1 does not support downgrading to v2.0.x or earlier due to the adoption of the new storage engine. Additionally, parallel DDL is enabled in TiDB 2.1, so clusters with TiDB version earlier than 2.0.1 cannot upgrade to 2.1 using rolling update. If upgrading from TiDB 2.0.6 or earlier to TiDB 2.1, ongoing DDL operations may slow down the upgrading process.
 ---
 
-# TiDB 2.1 GA リリース ノート {#tidb-2-1-ga-release-notes}
+# TiDB 2.1 GA リリースノート {#tidb-2-1-ga-release-notes}
 
-2018 年 11 月 30 日に、TiDB 2.1 GA がリリースされました。このリリースの次の更新を参照してください。 TiDB 2.0 と比較して、このリリースでは安定性、パフォーマンス、互換性、使いやすさが大幅に向上しています。
+2018 年 11 月 30 日に、TiDB 2.1 GA がリリースされました。このリリースの次の更新を参照してください。TiDB 2.0 と比較して、このリリースでは安定性、パフォーマンス、互換性、および使いやすさが大幅に向上しています。
 
-## TiDB {#tidb}
+## ティビ {#tidb}
 
--   SQLオプティマイザー
+-   SQL オプティマイザー
 
-    -   `Index Join`の選択範囲を最適化して実行パフォーマンスを向上させます。
+    -   実行パフォーマンスを向上させるために選択範囲`Index Join`を最適化します
 
-    -   外表の選択を`Index Join`に最適化し、行数の推定値が小さい表を外表として使用します。
+    -   `Index Join`の外部テーブルの選択を最適化し、行数の推定値が小さいテーブルを外部テーブルとして使用します。
 
-    -   適切なインデックスが利用できない場合でもマージ結合を使用できるように結合ヒント`TIDB_SMJ`を最適化します。
+    -   適切なインデックスがなくてもマージ結合を使用できるように結合ヒント`TIDB_SMJ`最適化します。
 
-    -   結合ヒント`TIDB_INLJ`を最適化して結合する内部テーブルを指定する
+    -   結合ヒント`TIDB_INLJ`を最適化して、結合する内部テーブルを指定します。
 
-    -   相関サブクエリを最適化し、フィルターをプッシュダウンし、インデックス選択範囲を拡張して、一部のクエリの効率を桁違いに向上させます。
+    -   相関サブクエリを最適化し、フィルタをプッシュダウンし、インデックスの選択範囲を拡張することで、一部のクエリの効率が桁違いに向上します。
 
-    -   `UPDATE`ステートメントと`DELETE`ステートメントでのインデックス ヒントと結合ヒントの使用のサポート
+    -   `UPDATE`番目と`DELETE`のステートメントでインデックスヒントと結合ヒントの使用をサポートします。
 
     -   より多くの関数の押し下げをサポート: `ABS` / `CEIL` / `FLOOR` / `IS TRUE` / `IS FALSE`
 
-    -   組み込み関数`IF`および`IFNULL`定数折りたたみアルゴリズムを最適化します。
+    -   組み込み関数`IF`と`IFNULL`の定数畳み込みアルゴリズムを最適化する
 
-    -   `EXPLAIN`ステートメントの出力を最適化し、階層構造を使用して演算子間の関係を表示します。
+    -   `EXPLAIN`文の出力を最適化し、階層構造を使用して演算子間の関係を示します。
 
--   SQL実行者
+-   SQLエグゼキュータ
 
-    -   すべての集計関数をリファクタリングし、 `Stream`と`Hash`の集計演算子の実行効率を向上させます。
+    -   すべての集計関数をリファクタリングし、 `Stream`と`Hash`の集計演算子の実行効率を改善します。
 
-    -   並列`Hash Aggregate`演算子を実装し、一部のシナリオでコンピューティング パフォーマンスを 350% 向上させます。
+    -   並列`Hash Aggregate`演算子を実装し、いくつかのシナリオで計算パフォーマンスを350%向上
 
-    -   並列`Project`演算子を実装すると、一部のシナリオでパフォーマンスが 74% 向上します。
+    -   並列`Project`演算子を実装し、いくつかのシナリオでパフォーマンスを74%向上
 
-    -   `Hash Join`の内部テーブルと外部テーブルのデータを同時に読み込み、実行パフォーマンスを向上させます。
+    -   実行パフォーマンスを向上させるために、 `Hash Join`の内部テーブルと外部テーブルのデータを同時に読み取ります。
 
-    -   `REPLACE INTO`ステートメントの実行速度を最適化し、パフォーマンスを 10 倍近く向上させます。
+    -   `REPLACE INTO`文の実行速度を最適化し、パフォーマンスを約10倍向上
 
     -   時間データ型のメモリ使用量を最適化し、時間データ型のメモリ使用量を 50% 削減します。
 
-    -   ポイント選択パフォーマンスを最適化し、Sysbench のポイント選択効率の結果を 60% 向上させます。
+    -   ポイント選択のパフォーマンスを最適化し、Sysbench のポイント選択効率の結果を 60% 向上します。
 
-    -   幅の広いテーブルの挿入または更新における TiDB のパフォーマンスが 20 倍向上します。
+    -   ワイドテーブルの挿入や更新における TiDB のパフォーマンスを 20 倍向上
 
-    -   構成ファイル内の単一ステートメントのメモリ上限の構成をサポート
+    -   設定ファイル内の単一ステートメントのメモリ上限の設定をサポート
 
     -   ハッシュ結合の実行を最適化します。結合タイプが内部結合またはセミ結合で、内部テーブルが空の場合、外部テーブルからデータを読み取らずに結果を返します。
 
-    -   [`EXPLAIN ANALYZE`文](/sql-statements/sql-statement-explain-analyze.md)を使用して、各演算子の実行時間や返された行数などの実行時統計を確認できるようになりました。
+    -   [`EXPLAIN ANALYZE`ステートメント](/sql-statements/sql-statement-explain-analyze.md)を使用して、各演算子の実行時間と返された行数を含む実行時統計をチェックする機能をサポートします。
 
 -   統計
 
-    -   一日の特定の時間帯のみ自動分析統計を有効にするサポート
+    -   一日の特定の時間帯のみに自動分析統計を有効にすることをサポート
 
-    -   クエリのフィードバックに従ってテーブル統計を自動的に更新するサポート
+    -   クエリのフィードバックに応じてテーブル統計を自動的に更新する機能をサポート
 
-    -   `ANALYZE TABLE WITH BUCKETS`ステートメントを使用したヒストグラム内のバケット数の構成のサポート
+    -   `ANALYZE TABLE WITH BUCKETS`ステートメントを使用してヒストグラム内のバケットの数を設定できるようになりました。
 
-    -   等価クエリと範囲クエリの混合クエリに対してヒストグラムを使用して行数推定アルゴリズムを最適化します。
+    -   等価クエリと範囲クエリの混合クエリのヒストグラムを使用して行数推定アルゴリズムを最適化します。
 
--   式
+-   表現
 
-    -   次の組み込み関数をサポートします。
+    -   次の組み込み関数をサポートします:
 
         -   `json_contains`
 
@@ -75,43 +75,43 @@ summary: TiDB 2.1 GAは、安定性、パフォーマンス、互換性、使い
 
 -   サーバ
 
-    -   競合するトランザクションのパフォーマンスを最適化するために、tidb-server インスタンス内でローカルに競合するトランザクションをキューに入れることをサポートします。
+    -   競合トランザクションのパフォーマンスを最適化するために、tidb-server インスタンス内でローカルに競合するトランザクションをキューイングすることをサポートします。
 
-    -   サーバー側カーソルのサポート
-
-    <!---->
-
-    -   [HTTP API](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)を追加します
-
-        -   TiKV クラスター内のテーブル リージョンの分散
-
-        -   `general log`を開くかどうかを制御します。
-
-        -   オンラインでのログレベルの変更のサポート
-
-        -   TiDB クラスター情報を確認する
+    -   サーバーサイドカーソルをサポート
 
     <!---->
 
-    -   [`auto_analyze_ratio`システム変数を追加して、Analyze の比率を制御します。](/faq/sql-faq.md#whats-the-trigger-strategy-for-auto-analyze-in-tidb)
+    -   [HTTP API](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)加える
 
-    -   [トランザクションの自動再試行時間を制御するために`tidb_retry_limit`システム変数を追加します。](/system-variables.md#tidb_retry_limit)
+        -   TiKVクラスター内のテーブル領域の分布を分散する
 
-    -   [`tidb_disable_txn_auto_retry`システム変数を追加して、トランザクションを自動的に再試行するかどうかを制御します](/system-variables.md#tidb_disable_txn_auto_retry)
+        -   `general log`開くかどうかを制御します
 
-    -   [`admin show slow`ステートメントを使用したスロー クエリの取得のサポート](/identify-slow-queries.md#admin-show-slow-command)
+        -   オンラインでのログレベルの変更をサポート
 
-    -   [`tidb_slow_log_threshold`環境変数を追加して、遅いログのしきい値を自動的に設定します。](/system-variables.md#tidb_slow_log_threshold)
+        -   TiDBクラスタ情報を確認する
 
-    -   [`tidb_query_log_max_len`環境変数を追加して、ログ内で動的に切り詰められる SQL ステートメントの長さを設定します。](/system-variables.md#tidb_query_log_max_len)
+    <!---->
+
+    -   [分析の比率を制御するための`auto_analyze_ratio`システム変数を追加します。](/faq/sql-faq.md#whats-the-trigger-strategy-for-auto-analyze-in-tidb)
+
+    -   [トランザクションの自動再試行回数を制御するために`tidb_retry_limit`システム変数を追加します。](/system-variables.md#tidb_retry_limit)
+
+    -   [トランザクションが自動的に再試行されるかどうかを制御するための`tidb_disable_txn_auto_retry`システム変数を追加します。](/system-variables.md#tidb_disable_txn_auto_retry)
+
+    -   [遅いクエリを取得するために`admin show slow`ステートメントの使用をサポートします](/identify-slow-queries.md#admin-show-slow-command)
+
+    -   [`tidb_slow_log_threshold`環境変数を追加して、スローログのしきい値を自動的に設定します。](/system-variables.md#tidb_slow_log_threshold)
+
+    -   [`tidb_query_log_max_len`環境変数を追加して、ログ内で切り捨てられるSQL文の長さを動的に設定します。](/system-variables.md#tidb_query_log_max_len)
 
 -   DDL
 
-    -   時間のかかるインデックスの追加操作が他の操作をブロックすることを回避するために、インデックスの追加ステートメントと他のステートメントの並列実行をサポートします。
+    -   時間のかかるインデックス追加操作が他の操作をブロックするのを避けるために、インデックス追加ステートメントと他のステートメントの並列実行をサポートします。
 
-    -   `ADD INDEX`の実行速度を最適化し、一部のシナリオで大幅に改善します。
+    -   `ADD INDEX`の実行速度を最適化し、いくつかのシナリオで大幅に改善しました
 
-    -   TiDB が`DDL Owner`であるかどうかの判断を容易にするために`select tidb_is_ddl_owner()`ステートメントをサポートします。
+    -   TiDBが`DDL Owner`であるかどうかの判断を容易にするために`select tidb_is_ddl_owner()`ステートメントをサポートする
 
     -   `ALTER TABLE FORCE`構文をサポートする
 
@@ -119,168 +119,168 @@ summary: TiDB 2.1 GAは、安定性、パフォーマンス、互換性、使い
 
     -   `admin show ddl jobs`の出力情報にテーブル名とデータベース名を追加します。
 
-    -   [DDL 所有者を解放し、新しい DDL 所有者の選択を開始するための`ddl/owner/resign` HTTP インターフェイスの使用のサポート](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)
+    -   [`ddl/owner/resign` HTTP インターフェースを使用して DDL 所有者を解放し、新しい DDL 所有者の選出を開始することをサポートします。](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)
 
 -   互換性
 
-    -   より多くの MySQL 構文をサポートする
+    -   より多くのMySQL構文をサポート
 
-    -   `BIT`集計関数が`ALL`パラメータをサポートするようにします。
+    -   `BIT`集計関数が`ALL`パラメータをサポートするようにする
 
-    -   `SHOW PRIVILEGES`ステートメントをサポートします
+    -   `SHOW PRIVILEGES`声明を支持する
 
-    -   `LOAD DATA`ステートメントで`CHARACTER SET`構文をサポートします
+    -   `LOAD DATA`ステートメントの`CHARACTER SET`構文をサポートする
 
-    -   `CREATE USER`ステートメントで`IDENTIFIED WITH`構文をサポートします
+    -   `CREATE USER`ステートメントの`IDENTIFIED WITH`構文をサポートする
 
-    -   `LOAD DATA IGNORE LINES`ステートメントをサポートします
+    -   `LOAD DATA IGNORE LINES`声明を支持する
 
-    -   `Show ProcessList`ステートメントはより正確な情報を返します
+    -   `Show ProcessList`文はより正確な情報を返します
 
-## 配置Driver(PD) {#placement-driver-pd}
+## 配置Driver（PD） {#placement-driver-pd}
 
--   可用性の最適化
+-   可用性を最適化する
 
-    -   バージョン管理メカニズムを導入し、クラスターのローリング アップデートを互換的にサポートします。
+    -   バージョン管理メカニズムを導入し、クラスタのローリングアップデートを互換性を持ってサポートする
 
-    -   ネットワーク分離後にネットワークが回復したときにリーダーの再選を回避するため、PD ノード間で[`Raft PreVote`を有効にする](https://github.com/pingcap/pd/blob/5c7b18cf3af91098f07cf46df0b59fbf8c7c5462/conf/config.toml#L22)
+    -   ネットワーク分離後にネットワークが回復したときにリーダーの再選出を回避するためにPDノード間で[`Raft PreVote`有効にする](https://github.com/pingcap/pd/blob/5c7b18cf3af91098f07cf46df0b59fbf8c7c5462/conf/config.toml#L22)
 
-    -   デフォルトで`raft learner`有効にすると、スケジュール中のマシンの障害によってデータが利用できなくなるリスクが軽減されます。
+    -   スケジュール中にマシン障害によってデータが利用できなくなるリスクを軽減するために、デフォルトで`raft learner`有効にします。
 
-    -   TSO 割り当ては、システム クロックの逆行による影響を受けなくなりました。
+    -   TSO割り当てはシステムクロックの逆戻りの影響を受けなくなりました
 
-    -   メタデータによってもたらされるオーバーヘッドを削減する`Region merge`機能をサポートします。
+    -   メタデータによってもたらされるオーバーヘッドを削減する`Region merge`機能をサポートする
 
--   スケジューラーを最適化する
+-   スケジューラを最適化する
 
-    -   ダウンストアの処理を最適化し、レプリカの作成を高速化します。
+    -   ダウンストアの処理を最適化してレプリカの作成を高速化
 
-    -   ホットスポット スケジューラを最適化して、トラフィック統計情報が不安定な場合の適応性を向上させます。
+    -   ホットスポットスケジューラを最適化し、トラフィック統計情報の変動に対する適応性を向上させる
 
-    -   コーディネーターの起動を最適化して、PD の再起動によって生じる不必要なスケジューリングを削減します。
+    -   PDの再起動による不要なスケジュールを削減するためにコーディネーターの起動を最適化します。
 
-    -   Balance Scheduler が小さなリージョンを頻繁にスケジュールする問題を最適化します。
+    -   バランススケジューラが小さな領域を頻繁にスケジュールする問題を最適化します。
 
-    -   リージョン内の行数を考慮してリージョンのマージを最適化します。
+    -   リージョン内の行数を考慮してリージョンのマージを最適化します
 
-    -   [スケジュール ポリシーを制御するコマンドをさらに追加します。](/pd-control.md#config-show--set-option-value--placement-rules)
+    -   [スケジュールポリシーを制御するためのコマンドを追加する](/pd-control.md#config-show--set-option-value--placement-rules)
 
-    -   スケジューリング シナリオをシミュレートするために[PDシミュレータ](https://github.com/pingcap/pd/tree/release-2.1/tools/pd-simulator)を改善します。
+    -   スケジューリングシナリオをシミュレートするために[PDシミュレータ](https://github.com/pingcap/pd/tree/release-2.1/tools/pd-simulator)改善
 
--   APIと運用ツール
+-   APIと操作ツール
 
-    -   `TiDB reverse scan`機能をサポートするには[`GetPrevRegion`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L40)を追加します
+    -   `TiDB reverse scan`機能をサポートするために[`GetPrevRegion`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L40)追加します
 
-    -   [`BatchSplitRegion`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L54)を追加すると、TiKVリージョンの分割が高速化されます。
+    -   [`BatchSplitRegion`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L54)追加すると TiKVリージョン分割が高速化されます
 
-    -   TiDB で分散 GC をサポートするには[`GCSafePoint`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L64-L66)を追加します。
+    -   TiDBで分散GCをサポートするには[`GCSafePoint`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L64-L66)追加します
 
-    -   TiDB で分散 GC をサポートするには、 [`GetAllStores`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L32)を追加します。
-
-    <!---->
-
-    -   pd-ctl は以下をサポートします。
-        -   [リージョン分割の統計の使用](/pd-control.md#operator-check--show--add--remove)
-
-        -   [`jq`を呼び出して JSON 出力をフォーマットする](/pd-control.md#jq-formatted-json-output-usage)
-
-        -   [指定した店舗のリージョン情報を確認する](/pd-control.md#region-store-store_id)
-
-        -   [バージョン別にソートされた上位 Nリージョンリストを確認する](/pd-control.md#region-topconfver-limit)
-
-        -   [サイズ順に並べ替えられた上位 Nリージョンリストを確認する](/pd-control.md#region-topsize-limit)
-
-        -   [より正確な TSO エンコーディング](/pd-control.md#tso)
+    -   TiDBで分散GCをサポートするために[`GetAllStores`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L32)追加します。
 
     <!---->
 
-    -   [PD回復](/pd-recover.md)は`max-replica`パラメータを指定する必要はありません
+    -   pd-ctl は以下をサポートします:
+        -   [リージョン分割の統計情報を使用する](/pd-control.md#operator-check--show--add--remove)
+
+        -   [`jq`呼び出してJSON出力をフォーマットする](/pd-control.md#jq-formatted-json-output-usage)
+
+        -   [指定された店舗のリージョン情報を確認する](/pd-control.md#region-store-store_id)
+
+        -   [バージョン別にソートされた上位Nリージョンリストを確認する](/pd-control.md#region-topconfver-limit)
+
+        -   [規模順に並べられた上位Nリージョンリストを確認する](/pd-control.md#region-topsize-limit)
+
+        -   [より正確なTSOエンコーディング](/pd-control.md#tso)
+
+    <!---->
+
+    -   [pd-回復](/pd-recover.md) `max-replica`パラメータを提供する必要がない
 
 -   メトリクス
 
     -   `Filter`の関連指標を追加
 
-    -   etcd Raftステートマシンに関するメトリクスを追加
+    -   etcd Raftステートマシンに関するメトリクスを追加する
 
 -   パフォーマンス
 
-    -   リージョンハートビートのパフォーマンスを最適化し、ハートビートによってもたらされるメモリオーバーヘッドを削減します。
+    -   リージョンハートビートのパフォーマンスを最適化し、ハートビートによって生じるメモリオーバーヘッドを削減します。
 
     -   リージョンツリーのパフォーマンスを最適化する
 
     -   ホットスポット統計の計算パフォーマンスを最適化する
 
-## TiKV {#tikv}
+## ティクヴ {#tikv}
 
 -   コプロセッサー
 
-    -   組み込み関数をさらに追加する
+    -   組み込み関数を追加する
 
-    -   [コプロセッサー`ReadPool`を追加して、リクエスト処理の同時実行性を向上させます。](https://github.com/tikv/rfcs/blob/master/text/0010-read-pool.md)
+    -   [リクエスト処理の同時実行性を向上させるためにコプロセッサー`ReadPool`を追加します](https://github.com/tikv/rfcs/blob/master/text/0010-read-pool.md)
 
     -   時間関数の解析問題とタイムゾーン関連の問題を修正
 
-    -   プッシュダウン集計コンピューティングのメモリ使用量を最適化する
+    -   プッシュダウン集計計算のメモリ使用量を最適化する
 
 -   トランザクション
 
-    -   MVCC の読み取りロジックとメモリ使用量を最適化してスキャン操作のパフォーマンスを向上させ、フル テーブル スキャンのパフォーマンスが TiDB 2.0 よりも 1 倍向上しました。
+    -   MVCC の読み取りロジックとメモリ使用量を最適化してスキャン操作のパフォーマンスを向上させ、フルテーブルスキャンのパフォーマンスは TiDB 2.0 よりも 1 倍向上しました。
 
-    -   連続したロールバック レコードをフォールドして読み取りパフォーマンスを確保します
+    -   連続ロールバックレコードを折り畳んで読み取りパフォーマンスを確保します
 
-    -   [`UnsafeDestroyRange` API を追加して、テーブル/インデックスを削除するためのスペースの収集をサポートします。](https://github.com/tikv/rfcs/blob/master/text/0002-unsafe-destroy-range.md)
+    -   [`UnsafeDestroyRange` API を追加して、テーブル/インデックスの削除のためのスペースの収集をサポートします。](https://github.com/tikv/rfcs/blob/master/text/0002-unsafe-destroy-range.md)
 
-    -   書き込みへの影響を軽減するために GC モジュールを分離する
+    -   GCモジュールを分離して書き込みへの影響を軽減する
 
-    -   `kv_scan`コマンドに`upper bound`サポートを追加します。
+    -   `kv_scan`コマンドに`upper bound`サポートを追加します
 
 -   Raftstore
 
-    -   RocksDB の停止を回避するためにスナップショット書き込みプロセスを改善します。
+    -   RocksDB の停止を回避するためにスナップショット書き込みプロセスを改善する
 
-    -   [`LocalReader`スレッドを追加して読み取りリクエストを処理し、読み取りリクエストの遅延を短縮します。](https://github.com/tikv/rfcs/pull/17)
+    -   [読み取り要求を処理するための`LocalReader`スレッドを追加し、読み取り要求の遅延を減らします。](https://github.com/tikv/rfcs/pull/17)
 
-    -   [大量の書き込みによってもたらされる大きなリージョンを回避するために`BatchSplit`をサポートします](https://github.com/tikv/rfcs/pull/6)
+    -   [大量の書き込みによる大きなリージョンを回避するために、 `BatchSplit`サポートします。](https://github.com/tikv/rfcs/pull/6)
 
-    -   I/O オーバーヘッドを削減するために、統計に従って`Region Split`サポートします。
+    -   統計に従って`Region Split`サポートし、I/Oオーバーヘッドを削減します
 
-    -   キーの数に応じて`Region Split`サポートし、インデックス スキャンの同時実行性を向上させます。
+    -   インデックススキャンの同時実行性を向上させるためにキーの数に応じて`Region Split`サポートします
 
-    -   Raftメッセージ プロセスを改善して、 `Region Split`によってもたらされる不必要な遅延を回避します。
+    -   `Region Split`によってもたらされる不要な遅延を回避するためにRaftメッセージプロセスを改善します
 
-    -   サービスに対するネットワーク分離の影響を軽減するには、デフォルトで`PreVote`機能を有効にします。
+    -   ネットワーク分離によるサービスへの影響を軽減するために、 `PreVote`機能をデフォルトで有効にします。
 
 -   ストレージエンジン
 
-    -   RocksDB の`CompactFiles`バグを修正し、Lightning を使用したデータのインポートへの影響を軽減します。
+    -   RocksDBの`CompactFiles`バグを修正し、Lightningを使用したデータのインポートへの影響を軽減します
 
-    -   RocksDB を v5.15 にアップグレードして、スナップショット ファイルの破損の可能性がある問題を修正します
+    -   スナップショットファイルの破損の可能性のある問題を修正するために、RocksDB を v5.15 にアップグレードしてください。
 
-    -   フラッシュが書き込みをブロックする可能性がある問題を回避するために`IngestExternalFile`を改善しました。
+    -   フラッシュが書き込みをブロックする問題を回避するために`IngestExternalFile`改善しました
 
 -   tikv-ctl
 
-    -   [RocksDB 関連の問題を診断するための`ldb`コマンドを追加します。](https://tikv.org/docs/3.0/reference/tools/tikv-ctl/#ldb-command)
+    -   [RocksDB関連の問題を診断するための`ldb`コマンドを追加します](https://tikv.org/docs/3.0/reference/tools/tikv-ctl/#ldb-command)
 
-    -   `compact`コマンドは、最下位レベルでデータを圧縮するかどうかの指定をサポートします。
+    -   `compact`コマンドは、最下層のデータを圧縮するかどうかの指定をサポートします。
 
 ## ツール {#tools}
 
--   大量のデータの高速完全インポート: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)
+-   大量のデータの高速フルインポート: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)
 
--   新しい[TiDBBinlog](/tidb-binlog/tidb-binlog-overview.md)をサポート
+-   新規サポート[TiDBBinlog](/tidb-binlog/tidb-binlog-overview.md)
 
-## アップグレードに関する注意事項 {#upgrade-caveat}
+## アップグレードの注意事項 {#upgrade-caveat}
 
--   TiDB 2.1 は、新しいstorageエンジンを採用しているため、v2.0.x 以前へのダウングレードをサポートしていません。
-
-<!---->
-
--   TiDB 2.1 では並列 DDL が有効になっているため、TiDB バージョン 2.0.1 より前のクラスターは、ローリング アップデートを使用して 2.1 にアップグレードできません。次の 2 つのオプションのいずれかを選択できます。
-
-    -   クラスターを停止し、2.1 に直接アップグレードします。
-    -   2.0.1 以降の 2.0.x バージョンにロール アップデートしてから、2.1 バージョンにロール アップデートします。
+-   TiDB 2.1は、新しいstorageエンジンの採用により、v2.0.x以前へのダウングレードをサポートしていません。
 
 <!---->
 
--   TiDB 2.0.6 以前から TiDB 2.1 にアップグレードする場合は、進行中の DDL 操作、特に時間のかかる`Add Index`操作があるかどうかを確認してください。これは、DDL 操作によりアップグレード プロセスが遅くなるためです。進行中の DDL 操作がある場合は、DDL 操作が終了するまで待ってから、ロール更新を実行します。
+-   TiDB 2.1 では並列 DDL が有効になっているため、TiDB バージョン 2.0.1 より前のクラスターはローリング アップデートを使用して 2.1 にアップグレードできません。次の 2 つのオプションのいずれかを選択できます。
+
+    -   クラスターを停止し、直接2.1にアップグレードします
+    -   2.0.1 以降の 2.0.x バージョンにロール アップデートし、その後 2.1 バージョンにロール アップデートします。
+
+<!---->
+
+-   TiDB 2.0.6 以前から TiDB 2.1 にアップグレードする場合は、進行中の DDL 操作、特に時間のかかる`Add Index`操作があるかどうかを確認してください。DDL 操作によってアップグレード プロセスが遅くなるためです。進行中の DDL 操作がある場合は、DDL 操作が完了するまで待ってからロール更新を行ってください。

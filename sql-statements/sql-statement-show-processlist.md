@@ -1,21 +1,18 @@
 ---
 title: SHOW [FULL] PROCESSLIST | TiDB SQL Statement Reference
-summary: このステートメントは、TiDBサーバーに接続されている現在のセッションをリストします。 Info列にはクエリ テキストが含まれますが、オプションのキーワードFULLが指定されない限り、クエリ テキストは切り詰められます。TiDBのState列は説明的ではありません。 TiDBでは、クエリが並行して実行され、各ゴルーチンが常に異なる状態になるため、状態を単一の値として表すことはより複雑になります。
+summary: An overview of the usage of SHOW [FULL] PROCESSLIST for the TiDB database.
 ---
 
-# [完全な] プロセスリストを表示 {#show-full-processlist}
+# [フル]プロセスリストを表示 {#show-full-processlist}
 
-このステートメントは、同じ TiDBサーバーに接続されている現在のセッションをリストします。 `Info`列にはクエリ テキストが含まれますが、オプションのキーワード`FULL`が指定されない限り、クエリ テキストは切り詰められます。
+このステートメントは、同じ TiDBサーバーに接続されている現在のセッションを一覧表示します。1 列に`Info`クエリ テキストが含まれますが、オプションのキーワード`FULL`が指定されていない限り切り捨てられます。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
-**ShowProcesslistStmt:**
-
-![ShowProcesslistStmt](/media/sqlgram/ShowProcesslistStmt.png)
-
-**オプトフル:**
-
-![OptFull](/media/sqlgram/OptFull.png)
+```ebnf+diagram
+ShowProcesslistStmt ::=
+    "SHOW" "FULL"? "PROCESSLIST"
+```
 
 ## 例 {#examples}
 
@@ -29,10 +26,11 @@ mysql> SHOW PROCESSLIST;
 1 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
--   TiDB の`State`列は説明的ではありません。 TiDB では、クエリが並行して実行され、各ゴルーチンが常に異なる状態になるため、状態を単一の値として表すことはより複雑になります。
+-   TiDB の`State`列目は説明的ではありません。クエリが並列で実行され、各ゴルーチンが常に異なる状態になるため、状態を単一の値として表すのは TiDB ではより複雑になります。
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
--   [[TIDB]を殺す](/sql-statements/sql-statement-kill.md)
+-   [殺す [TIDB]](/sql-statements/sql-statement-kill.md)
+-   [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)

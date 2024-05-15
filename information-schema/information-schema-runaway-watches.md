@@ -1,11 +1,11 @@
 ---
 title: RUNAWAY_WATCHES
-summary: RUNAWAY_WATCHES表は、暴走クエリの監視リストを示します。リソースの消費が予想よりも多いクエリを監視します。この機能は実験的であり、本番環境での使用はお勧めできません。監視項目をリソース グループに追加することができます。RUNAWAY_WATCHESテーブルの各列フィールドには、ID、リソースグループ名、開始時刻、終了時刻、監視タイプ、ソース、およびアクションが含まれます。
+summary: Learn the `RUNAWAY_WATCHES` INFORMATION_SCHEMA table.
 ---
 
-# 暴走時計 {#runaway-watches}
+# ランナウェイウォッチ {#runaway-watches}
 
-`RUNAWAY_WATCHES`表は、予想よりも多くのリソースを消費する暴走クエリの監視リストを示しています。詳細については、 [暴走クエリ](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries)を参照してください。
+`RUNAWAY_WATCHES`表には、予想よりも多くのリソースを消費するランナウェイ クエリの監視リストが表示されます。詳細については、 [ランナウェイクエリ](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries)を参照してください。
 
 > **注記：**
 >
@@ -34,17 +34,17 @@ DESC RUNAWAY_WATCHES;
 
 > **警告：**
 >
-> この機能は実験的です。本番環境で使用することはお勧めできません。この機能は予告なく変更または削除される場合があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
+> この機能は実験的ものです。本番環境での使用は推奨されません。この機能は予告なしに変更または削除される可能性があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)報告できます。
 
 ## 例 {#examples}
 
-暴走クエリの監視リストをクエリします。
+ランナウェイクエリのウォッチリストをクエリします。
 
 ```sql
-SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES;
+SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES\G
 ```
 
-出力は次のとおりです。
+出力は次のようになります。
 
 ```sql
 *************************** 1. row ***************************
@@ -68,19 +68,19 @@ RESOURCE_GROUP_NAME: rg2
 2 rows in set (0.00 sec)
 ```
 
-監視項目をリソース グループ`rg1`のリストに追加します。
+リソース グループ`rg1`のリストに監視項目を追加します。
 
 ```sql
 QUERY WATCH ADD RESOURCE GROUP rg1 SQL TEXT EXACT TO 'select * from sbtest.sbtest1';
 ```
 
-暴走クエリの監視リストを再度クエリします。
+ランナウェイ クエリの監視リストを再度クエリします。
 
 ```sql
-SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES\G;
+SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES\G
 ```
 
-出力は次のとおりです。
+出力は次のようになります。
 
 ```sql
 *************************** 1. row ***************************
@@ -113,15 +113,15 @@ RESOURCE_GROUP_NAME: rg1
 3 row in set (0.00 sec)
 ```
 
-`RUNAWAY_WATCHES`テーブルの各列フィールドの意味は次のとおりです。
+`RUNAWAY_WATCHES`表の各列フィールドの意味は次のとおりです。
 
--   `ID` : ウォッチアイテムのID。
--   `RESOURCE_GROUP_NAME` : リソースグループの名前。
+-   `ID` : 監視項目の ID。
+-   `RESOURCE_GROUP_NAME` : リソース グループの名前。
 -   `START_TIME` : 開始時刻。
--   `END_TIME` : 終了時刻。 `UNLIMITED` 、ウォッチ アイテムの有効期間が無制限であることを意味します。
+-   `END_TIME` : 終了時刻。2 `UNLIMITED` 、監視項目の有効期間が無制限であることを意味します。
 -   `WATCH` : クイック識別の一致タイプ。値は次のとおりです。
-    -   `Plan` 、プラン ダイジェストが一致することを示します。この場合、 `WATCH_TEXT`列目には計画ダイジェストが表示されます。
-    -   `Similar` 、SQL ダイジェストが一致することを示します。この場合、 `WATCH_TEXT`列目に SQL ダイジェストが表示されます。
-    -   `Exact` 、SQL テキストが一致することを示します。この場合、 `WATCH_TEXT`列目に SQL テキストが表示されます。
--   `SOURCE` : 監視アイテムのソース。 `QUERY_LIMIT`ルールで識別された場合は、識別された TiDB IP アドレスが表示されます。手動で追加した場合は`manual`が表示されます。
--   `ACTION` : 識別後の対応する動作。
+    -   `Plan` 、プラン ダイジェストが一致していることを示します。この場合、 `WATCH_TEXT`列目にプラン ダイジェストが表示されます。
+    -   `Similar` 、SQL ダイジェストが一致したことを示します。この場合、 `WATCH_TEXT`列目に SQL ダイジェストが表示されます。
+    -   `Exact` SQL テキストが一致したことを示します。この場合、 `WATCH_TEXT`列目に SQL テキストが表示されます。
+-   `SOURCE` : `QUERY_LIMIT`項目のソース。2 ルールで識別された場合は、識別された TiDB IP アドレスが表示されます。手動で追加された場合は、 `manual`が表示されます。
+-   `ACTION` : 識別後の対応する操作。

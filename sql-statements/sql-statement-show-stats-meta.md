@@ -1,45 +1,42 @@
 ---
 title: SHOW STATS_META
-summary: SHOW STATS_METAはテーブル内の行数と変更された行数を表示します。6列を出力し、カラム名はデータベース名、テーブル名、パーティション名、更新時間、修正数、行数です。TiDBがDMLステートメントに従ってmodify_countフィールドとrow_countフィールドを更新すると、update_timeが更新されます。MySQLの互換性があります。
+summary: An overview of the usage of SHOW STATS_META for TiDB database.
 ---
 
-# 統計_メタを表示 {#show-stats-meta}
+# STATS_METAを表示 {#show-stats-meta}
 
-`SHOW STATS_META`を使用すると、テーブル内の行数とそのテーブル内で変更された行数を表示できます。このステートメントを使用する場合、 `ShowLikeOrWhere`節で必要な情報をフィルタリングできます。
+`SHOW STATS_META`使用すると、テーブル内の行数とそのテーブルで変更された行数を表示できます。このステートメントを使用する場合、 `ShowLikeOrWhere`句によって必要な情報をフィルターできます。
 
-現在、 `SHOW STATS_META`ステートメントは 6 列を出力します。
+現在、 `SHOW STATS_META`ステートメントは 6 つの列を出力します。
 
 | カラム名     | 説明       |
 | -------- | -------- |
 | データベース名  | データベース名  |
 | テーブル名    | テーブル名    |
 | パーティション名 | パーティション名 |
-| 更新時間     | 最終更新時間   |
-| 修正数      | 変更された行数  |
+| 更新時間     | 最終更新日時   |
+| 修正回数     | 変更された行数  |
 | 行数       | 合計行数     |
 
 > **注記：**
 >
-> TiDB が DML ステートメントに従って`modify_count`フィールドと`row_count`フィールドを更新すると、 `update_time`が更新されます。したがって`update_time` `ANALYZE`ステートメントの最後の実行時刻ではありません。
+> `update_time` 、TiDB が DML ステートメントに従って`modify_count`および`row_count`フィールドを更新するときに更新されます。したがって、 `update_time` `ANALYZE`ステートメントの最後の実行時間ではありません。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
-**ショースタンド**
+```ebnf+diagram
+ShowStatsMetaStmt ::=
+    "SHOW" "STATS_META" ShowLikeOrWhere?
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
-
-**ShowTargetFiltertable**
-
-![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
-
-**ShowLikeOrWhereOpt**
-
-![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
+ShowLikeOrWhere ::=
+    "LIKE" SimpleExpr
+|   "WHERE" Expression
+```
 
 ## 例 {#examples}
 
 ```sql
-show stats_meta;
+SHOW STATS_META;
 ```
 
 ```sql
@@ -56,7 +53,7 @@ show stats_meta;
 ```
 
 ```sql
-show stats_meta where table_name = 't2';
+SHOW STATS_META WHERE table_name = 't2';
 ```
 
 ```sql
@@ -68,11 +65,11 @@ show stats_meta where table_name = 't2';
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
 -   [分析する](/sql-statements/sql-statement-analyze-table.md)
 -   [統計入門](/statistics.md)

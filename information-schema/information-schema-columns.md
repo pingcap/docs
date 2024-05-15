@@ -1,18 +1,18 @@
 ---
 title: COLUMNS
-summary: テーブルCOLUMNSには、列に関する詳細情報が含まれています。各列には、テーブルの情報やデータ型、NULL許容性、デフォルト値などが含まれています。また、列にインデックスが付けられているかどうかや権限情報も含まれています。これにより、テーブルの構造や列の情報を簡単に取得することができます。
+summary: Learn the `COLUMNS` INFORMATION_SCHEMA table.
 ---
 
 # コラム {#columns}
 
-`COLUMNS`表には、表内の列に関する詳細情報が記載されています。
+`COLUMNS`表には、表内の列に関する詳細な情報が記載されています。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC COLUMNS;
 ```
 
-出力は次のとおりです。
+出力は次のようになります。
 
 ```sql
 +--------------------------+---------------+------+------+---------+-------+
@@ -43,14 +43,14 @@ DESC COLUMNS;
 21 rows in set (0.00 sec)
 ```
 
-テーブル`test.t1`を作成し、テーブル`COLUMNS`の情報をクエリします。
+テーブル`test.t1`を作成し、テーブル`COLUMNS`の情報を照会します。
 
 ```sql
 CREATE TABLE test.t1 (a int);
 SELECT * FROM COLUMNS WHERE table_schema='test' AND TABLE_NAME='t1'\G
 ```
 
-出射結果は以下の通り：
+出力は次のようになります。
 
 ```sql
 *************************** 1. row ***************************
@@ -78,33 +78,33 @@ CHARACTER_MAXIMUM_LENGTH: NULL
 1 row in set (0.02 sec)
 ```
 
-`COLUMNS`のテーブルの列の説明は次のとおりです。
+`COLUMNS`表の列の説明は次のとおりです。
 
--   `TABLE_CATALOG` : 列を含むテーブルが属するカタログの名前。値は常に`def`です。
--   `TABLE_SCHEMA` : 列を含むテーブルが存在するスキーマの名前。
+-   `TABLE_CATALOG` : 列を持つテーブルが属するカタログの名前。値は常に`def`です。
+-   `TABLE_SCHEMA` : 列を含むテーブルが配置されているスキーマの名前。
 -   `TABLE_NAME` : 列を含むテーブルの名前。
 -   `COLUMN_NAME` : 列の名前。
 -   `ORDINAL_POSITION` : テーブル内の列の位置。
--   `COLUMN_DEFAULT` : 列のデフォルト値。明示的なデフォルト値が`NULL`である場合、または列定義に`default`句が含まれていない場合、この値は`NULL`です。
--   `IS_NULLABLE` : 列が NULL 可能かどうか。列に null 値を格納できる場合、この値は`YES`です。それ以外の場合は`NO`です。
--   `DATA_TYPE` : 列のデータのタイプ。
--   `CHARACTER_MAXIMUM_LENGTH` : 文字列列の場合、文字数の最大長。
--   `CHARACTER_OCTET_LENGTH` : 文字列列の最大長 (バイト単位)。
+-   `COLUMN_DEFAULT` : 列のデフォルト値。明示的なデフォルト値が`NULL`場合、または列定義に`default`句が含まれていない場合、この値は`NULL`になります。
+-   `IS_NULLABLE` : 列が NULL 可能かどうか。列が NULL 値を格納できる場合、この値は`YES`になります。そうでない場合は`NO`になります。
+-   `DATA_TYPE` : 列内のデータのタイプ。
+-   `CHARACTER_MAXIMUM_LENGTH` : 文字列列の場合、文字の最大長。
+-   `CHARACTER_OCTET_LENGTH` : 文字列列の場合、最大長（バイト単位）。
 -   `NUMERIC_PRECISION` : 数値型列の数値精度。
--   `NUMERIC_SCALE` : 数値型の列の数値スケール。
--   `DATETIME_PRECISION` : 時間型の列の場合、小数点以下の秒の精度。
+-   `NUMERIC_SCALE` : 数値型列の数値スケール。
+-   `DATETIME_PRECISION` : 時刻型列の場合、小数秒の精度。
 -   `CHARACTER_SET_NAME` : 文字列列の文字セットの名前。
 -   `COLLATION_NAME` : 文字列列の照合順序の名前。
 -   `COLUMN_TYPE` : 列のタイプ。
--   `COLUMN_KEY` : この列にインデックスが付けられているかどうか。このフィールドには次の値が含まれる場合があります。
-    -   空: この列にはインデックスが作成されていないか、この列はインデックスが作成されており、複数列の一意でないインデックスの 2 番目の列です。
+-   `COLUMN_KEY` : この列がインデックス化されているかどうか。このフィールドには次の値が含まれます。
+    -   空: この列はインデックス化されていません。または、この列はインデックス化されており、複数列の一意でないインデックスの 2 番目の列です。
     -   `PRI` : この列は主キーまたは複数の主キーの 1 つです。
     -   `UNI` : この列は一意のインデックスの最初の列です。
-    -   `MUL` : この列は、特定の値が複数回出現することが許可される、一意でないインデックスの最初の列です。
+    -   `MUL` : 列は、特定の値が複数回出現することを許可される、一意でないインデックスの最初の列です。
 -   `EXTRA` : 指定された列の追加情報。
 -   `PRIVILEGES` : 現在のユーザーがこの列に対して持つ権限。現在、この値は TiDB で固定されており、常に`select,insert,update,references`です。
 -   `COLUMN_COMMENT` : 列定義に含まれるコメント。
--   `GENERATION_EXPRESSION` : 生成された列の場合、この値は列値の計算に使用される式を表示します。非生成列の場合、値は空です。
+-   `GENERATION_EXPRESSION` : 生成された列の場合、この値には列の値を計算するために使用される式が表示されます。非生成列の場合、値は空です。
 
 対応する`SHOW`ステートメントは次のとおりです。
 
@@ -112,7 +112,7 @@ CHARACTER_MAXIMUM_LENGTH: NULL
 SHOW COLUMNS FROM t1 FROM test;
 ```
 
-出力は次のとおりです。
+出力は次のようになります。
 
 ```sql
 +-------+---------+------+------+---------+-------+

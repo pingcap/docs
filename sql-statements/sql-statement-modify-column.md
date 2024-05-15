@@ -1,19 +1,19 @@
 ---
 title: MODIFY COLUMN | TiDB SQL Statement Reference
-summary: ALTER TABLE.. MODIFY COLUMNステートメントは、既存のテーブルの列を変更します。データ型と属性の変更が含まれる場合があります。TiDB v5.1.0 以降、Reorg データのデータ型の変更をサポートしています。例えば、VARCHARをBIGINTに変更することができます。また、DECIMAL精度を変更したり、VARCHARの長さを圧縮することも可能です。MySQLの互換性に関して、一部のデータ型の変更はサポートされていません。
+summary: An overview of the usage of MODIFY COLUMN for the TiDB database.
 ---
 
 # 列の変更 {#modify-column}
 
-`ALTER TABLE.. MODIFY COLUMN`ステートメントは、既存のテーブルの列を変更します。変更には、データ型と属性の変更が含まれる場合があります。同時に名前を変更するには、代わりに[`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)ステートメントを使用します。
+`ALTER TABLE.. MODIFY COLUMN`ステートメントは、既存のテーブルの列を変更します。変更には、データ型と属性の変更が含まれます。同時に名前を変更するには、代わりに[`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)ステートメントを使用します。
 
-v5.1.0 以降、TiDB は、以下を含む (ただしこれらに限定されない) Reorg データのデータ型の変更をサポートしています。
+v5.1.0 以降、TiDB は Reorg データのデータ型の変更をサポートしています。これには以下が含まれますが、これらに限定されません。
 
--   `VARCHAR`を`BIGINT`に変更する
--   `DECIMAL`精度を変更する
--   `VARCHAR(10)` ～ `VARCHAR(5)`の長さを圧縮する
+-   `VARCHAR`を`BIGINT`に変更
+-   `DECIMAL`精度の変更
+-   `VARCHAR(10)`の長さを`VARCHAR(5)`に圧縮する
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AlterTableStmt
@@ -73,7 +73,7 @@ ALTER TABLE t1 MODIFY col1 BIGINT;
     Query OK, 0 rows affected (0.09 sec)
 
 ```sql
-SHOW CREATE TABLE t1\G;
+SHOW CREATE TABLE t1\G
 ```
 
 ```sql
@@ -109,7 +109,7 @@ ALTER TABLE t1 MODIFY col1 VARCHAR(5);
     Query OK, 0 rows affected (2.52 sec)
 
 ```sql
-SHOW CREATE TABLE t1\G;
+SHOW CREATE TABLE t1\G
 ```
 
 ```sql
@@ -130,13 +130,13 @@ CREATE TABLE `t1` (
 >         alter table t1 modify column col1 varchar(4);
 >         ERROR 1406 (22001): Data Too Long, field len 4, data len 5
 >
-> -   Async Commit 機能との互換性のため、DDL ステートメントは、Reorg Data への処理を開始する前に一定時間 (約 2.5 秒) 待機します。
+> -   非同期コミット機能との互換性のため、DDL ステートメントは、再編成データへの処理を開始する前に一定時間 (約 2.5 秒) 待機します。
 >
 >         Query OK, 0 rows affected (2.52 sec)
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
--   主キー列の Reorg-Data タイプの変更はサポートされていませんが、Meta-Only タイプの変更はサポートされています。例えば：
+-   主キー列の Reorg-Data タイプの変更はサポートされていませんが、Meta-Only タイプの変更はサポートされています。例:
 
     ```sql
     CREATE TABLE t (a int primary key);
@@ -156,7 +156,7 @@ CREATE TABLE `t1` (
     Query OK, 0 rows affected (0.01 sec)
     ```
 
--   生成された列の列タイプの変更はサポートされていません。例えば：
+-   生成された列の列タイプの変更はサポートされていません。例:
 
     ```sql
     CREATE TABLE t (a INT, b INT as (a+1));
@@ -164,7 +164,7 @@ CREATE TABLE `t1` (
     ERROR 8200 (HY000): Unsupported modify column: column is generated
     ```
 
--   パーティション化されたテーブルの列タイプの変更はサポートされていません。例えば：
+-   パーティション化されたテーブルの列タイプの変更はサポートされていません。例:
 
     ```sql
     CREATE TABLE t (c1 INT, c2 INT, c3 INT) partition by range columns(c1) ( partition p0 values less than (10), partition p1 values less than (maxvalue));
@@ -172,7 +172,7 @@ CREATE TABLE `t1` (
     ERROR 8200 (HY000): Unsupported modify column: table is partition table
     ```
 
--   一部のデータ型 (たとえば、一部の TIME 型、Bit、Set、Enum、JSON) の変更はサポートされていません。これは、TiDB と MySQL の間の`cast`の動作の互換性の問題によりサポートされていません。
+-   一部のデータ型 (たとえば、一部の TIME 型、Bit、Set、Enum、JSON) の変更は、TiDB と MySQL 間の`cast`の関数の動作に関する互換性の問題によりサポートされていません。
 
     ```sql
     CREATE TABLE t (a DECIMAL(13, 7));
@@ -180,10 +180,10 @@ CREATE TABLE `t1` (
     ERROR 8200 (HY000): Unsupported modify column: change from original type decimal(13,7) to datetime is currently unsupported yet
     ```
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
 -   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
--   [テーブルの作成を表示](/sql-statements/sql-statement-show-create-table.md)
--   [列の追加](/sql-statements/sql-statement-add-column.md)
--   [ドロップカラム](/sql-statements/sql-statement-drop-column.md)
+-   [表示テーブルの作成](/sql-statements/sql-statement-show-create-table.md)
+-   [列を追加](/sql-statements/sql-statement-add-column.md)
+-   [ドロップコラム](/sql-statements/sql-statement-drop-column.md)
 -   [列の変更](/sql-statements/sql-statement-change-column.md)

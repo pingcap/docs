@@ -1,17 +1,18 @@
 ---
 title: SET PASSWORD | TiDB SQL Statement Reference
-summary: TiDBのSET PASSWORDステートメントは、MySQLと完全に互換性があります。ユーザーアカウントのパスワードを変更するために使用されます。新しいパスワードを設定する例として、SET PASSWORD='test';というコマンドが使用されます。MySQLの互換性があるため、バグが見つかった場合は報告することができます。
+summary: An overview of the usage of SET PASSWORD for the TiDB database.
 ---
 
 # パスワードを設定してください {#set-password}
 
 このステートメントは、TiDB システム データベース内のユーザー アカウントのユーザー パスワードを変更します。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
-**セットステート:**
-
-![SetStmt](/media/sqlgram/SetStmt.png)
+```ebnf+diagram
+SetPasswordStmt ::=
+    "SET" "PASSWORD" ( "FOR" Username )? "=" ( stringLit | "PASSWORD" "(" stringLit ")" )
+```
 
 ## 例 {#examples}
 
@@ -53,11 +54,11 @@ mysql> SHOW CREATE USER 'newuser';
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
-TiDB の`SET PASSWORD`ステートメントは MySQL と完全な互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) .
+TiDB の`SET PASSWORD`ステートメントは MySQL と完全に互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) 。
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
 -   [ユーザーを作成](/sql-statements/sql-statement-create-user.md)
 

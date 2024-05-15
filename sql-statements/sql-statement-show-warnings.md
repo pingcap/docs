@@ -1,17 +1,18 @@
 ---
 title: SHOW WARNINGS | TiDB SQL Statement Reference
-summary: 警告を表示ステートメントは、現在のクライアント接続で以前に実行されたステートメントに対して発生した警告のリストを表示します。MySQLと同様に、sql_modeがエラーと警告を引き起こすステートメントに影響します。TiDBのSHOW WARNINGSステートメントはMySQLと完全に互換性があります。互換性の違いが見つかった場合は、バグを報告してください。エラーを表示も参照してください。
+summary: An overview of the usage of SHOW WARNINGS for the TiDB database.
 ---
 
 # 警告を表示 {#show-warnings}
 
-このステートメントは、現在のクライアント接続で以前に実行されたステートメントに対して発生した警告のリストを表示します。 MySQL と同様に、 `sql_mode`どのステートメントがエラーと警告を引き起こすかに大きく影響します。
+このステートメントは、現在のクライアント接続で以前に実行されたステートメントに対して発生した警告のリストを表示します。MySQL と同様に、 `sql_mode`どのステートメントがエラーと警告を引き起こすかに大きく影響します。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
-**警告メッセージの表示:**
-
-![ShowWarningsStmt](/media/sqlgram/ShowWarningsStmt.png)
+```ebnf+diagram
+ShowWarningsStmt ::=
+    "SHOW" "WARNINGS"
+```
 
 ## 例 {#examples}
 
@@ -73,10 +74,10 @@ mysql> SELECT * FROM t1;
 
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
-TiDB の`SHOW WARNINGS`ステートメントは MySQL と完全な互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) .
+TiDB の`SHOW WARNINGS`ステートメントは MySQL と完全に互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) 。
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
 -   [エラーを表示](/sql-statements/sql-statement-show-errors.md)

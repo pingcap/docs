@@ -1,19 +1,24 @@
 ---
 title: SHOW ERRORS | TiDB SQL Statement Reference
-summary: エラーを表示は、以前のステートメントからのエラーを示し、SHOW ERRORSは空のセットを返します。sql_modeによってエラーと警告の生成が影響されます。TiDBのSHOW ERRORSはMySQLと互換性があります。
+summary: An overview of the usage of SHOW ERRORS for the TiDB database.
 ---
 
 # エラーを表示 {#show-errors}
 
-このステートメントは、以前に実行されたステートメントからのエラーを示します。エラー バッファは、ステートメントが正常に実行されるとすぐにクリアされます。この場合、 `SHOW ERRORS`空のセットを返します。
+このステートメントは、以前に実行されたステートメントのエラーを表示します。ステートメントが正常に実行されるとすぐにエラー バッファーはクリアされます。その場合、 `SHOW ERRORS`空のセットを返します。
 
-どのステートメントがエラーと警告を生成するかの動作は、現在の`sql_mode`に大きく影響されます。
+どのステートメントがエラーを生成するか、または警告を生成するかの動作は、現在の`sql_mode`に大きく影響されます。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
-**ShowErrorsStmt:**
+```ebnf+diagram
+ShowErrorsStmt ::=
+    "SHOW" "ERRORS" ShowLikeOrWhere?
 
-![ShowErrorsStmt](/media/sqlgram/ShowErrorsStmt.png)
+ShowLikeOrWhere ::=
+    "LIKE" SimpleExpr
+|   "WHERE" Expression
+```
 
 ## 例 {#examples}
 
@@ -45,10 +50,10 @@ mysql> SHOW ERRORS;
 Empty set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
-TiDB の`SHOW ERRORS`ステートメントは MySQL と完全な互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) .
+TiDB の`SHOW ERRORS`ステートメントは MySQL と完全に互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) 。
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
 -   [警告を表示](/sql-statements/sql-statement-show-warnings.md)

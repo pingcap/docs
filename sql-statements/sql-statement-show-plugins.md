@@ -1,25 +1,22 @@
 ---
 title: SHOW PLUGINS
-summary: TiDBのSHOW PLUGINSは、インストールされているすべてのプラグインとそのステータス、バージョン情報を表示します。この機能はTiDBサーバーレスクラスターでは使用できません。MySQLと完全な互換性があります。
+summary: An overview of the usage of SHOW PLUGINS for the TiDB database.
 ---
 
 # プラグインを表示 {#show-plugins}
 
-`SHOW PLUGINS` TiDB にインストールされているすべてのプラグインを、各プラグインのステータスとバージョン情報を含めて表示します。
+`SHOW PLUGINS` 、各プラグインのステータスとバージョン情報を含む、TiDB にインストールされているすべてのプラグインを表示します。
 
 > **注記：**
 >
 > この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
-**表示手順:**
-
-![ShowStmt](/media/sqlgram/ShowStmt.png)
-
-**ShowTargetFilterable:**
-
-![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
+```ebnf+diagram
+ShowPluginsStmt ::=
+    "SHOW" "PLUGINS" ShowLikeOrWhere?
+```
 
 ## 例 {#examples}
 
@@ -45,6 +42,10 @@ SHOW PLUGINS LIKE 'a%';
     +-------+--------------+-------+-----------------------------+---------+---------+
     1 row in set (0.000 sec)
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
-TiDB の`SHOW PLUGINS`ステートメントは MySQL と完全な互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) .
+TiDB の`SHOW PLUGINS`ステートメントは MySQL と完全に互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) 。
+
+## 参照 {#see-also}
+
+-   [`ADMIN PLUGINS`](/sql-statements/sql-statement-admin.md#admin-plugins-related-statement)

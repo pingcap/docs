@@ -1,13 +1,13 @@
 ---
 title: CLI and Configuration Parameters of TiCDC Changefeeds
-summary: TiCDCの変更フィードCLIパラメーターは、レプリケーションタスクの作成方法を示しています。CLIパラメーターには、--changefeed-id、--sink-uri、--start-ts、--target-ts、--configが含まれます。これらのパラメーターを使用して、TiCDCクラスターはデータのプルを開始し、停止します。また、構成パラメーターには、memory-quota、case-sensitive、enable-sync-point、sync-point-interval、sync-point-retentionなどがあります。これらのパラメーターは、データの保存や同期に影響を与えます。
+summary: Learn the definitions of CLI and configuration parameters of TiCDC changefeeds.
 ---
 
-# TiCDC 変更フィードの CLI およびコンフィグレーションパラメーター {#cli-and-configuration-parameters-of-ticdc-changefeeds}
+# TiCDC 変更フィードの CLI とコンフィグレーションパラメータ {#cli-and-configuration-parameters-of-ticdc-changefeeds}
 
-## 変更フィード CLI パラメータ {#changefeed-cli-parameters}
+## Changefeed CLI パラメータ {#changefeed-cli-parameters}
 
-このセクションでは、レプリケーション (変更フィード) タスクの作成方法を示して、TiCDC 変更フィードのコマンド ライン パラメーターを紹介します。
+このセクションでは、レプリケーション (changefeed) タスクを作成する方法を示しながら、TiCDC changefeed のコマンドライン パラメータを紹介します。
 
 ```shell
 cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task"
@@ -19,21 +19,21 @@ ID: simple-replication-task
 Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2024-02-29T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":false,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v7.5.1"}
 ```
 
--   `--changefeed-id` : レプリケーション タスクの ID。形式は`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`正規表現と一致する必要があります。この ID が指定されていない場合、TiCDC は UUID (バージョン 4 形式) を ID として自動的に生成します。
+-   `--changefeed-id` : レプリケーション タスクの ID。形式は`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`正規表現と一致する必要があります。この ID が指定されていない場合、TiCDC は ID として UUID (バージョン 4 形式) を自動的に生成します。
 
--   `--sink-uri` : レプリケーションタスクの下流アドレス。 `--sink-uri`を以下の形式で設定します。現在、このスキームは`mysql` 、 `tidb` 、および`kafka`をサポートしています。
+-   `--sink-uri` : レプリケーション タスクのダウンストリーム アドレス。次の形式に従って`--sink-uri`設定します。現在、このスキームは`mysql` 、 `tidb` 、および`kafka`をサポートしています。
 
         [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
 
-    シンク URI に`! * ' ( ) ; : @ & = + $ , / ? % # [ ]`などの特殊文字が含まれている場合は、特殊文字をエスケープする必要があります (たとえば、 [URIエンコーダ](https://www.urlencoder.org/) 。
+    シンク URI に`! * ' ( ) ; : @ & = + $ , / ? % # [ ]`などの特殊文字が含まれている場合は、 [URI エンコーダ](https://www.urlencoder.org/)のように特殊文字をエスケープする必要があります。
 
--   `--start-ts` : チェンジフィードの開始 TSO を指定します。この TSO から、TiCDC クラスターはデータのプルを開始します。デフォルト値は現在時刻です。
+-   `--start-ts` : 変更フィードの開始 TSO を指定します。この TSO から、TiCDC クラスターはデータのプルを開始します。デフォルト値は現在の時刻です。
 
--   `--target-ts` : チェンジフィードの終了 TSO を指定します。この TSO に対して、TiCDC クラスターはデータのプルを停止します。デフォルト値は空です。これは、TiCDC がデータのプルを自動的に停止しないことを意味します。
+-   `--target-ts` : 変更フィード終了 TSO を指定します。この TSO まで、TiCDC クラスターはデータのプルを停止します。デフォルト値は空です。つまり、TiCDC はデータのプルを自動的に停止しません。
 
--   `--config` : チェンジフィードの設定ファイルを指定します。
+-   `--config` : 変更フィードの構成ファイルを指定します。
 
-## 変更フィード構成パラメータ {#changefeed-configuration-parameters}
+## Changefeed 構成パラメータ {#changefeed-configuration-parameters}
 
 このセクションでは、レプリケーション タスクの構成について説明します。
 
@@ -72,6 +72,12 @@ case-sensitive = false
 # The default value is false, which means that Bi-Directional Replication (BDR) mode is disabled.
 # For more information, see https://docs.pingcap.com/tidb/stable/ticdc-bidirectional-replication
 # bdr-mode = false
+
+# The duration for which the changefeed is allowed to automatically retry when internal errors or exceptions occur. The default value is 30 minutes.
+# The changefeed enters the failed state if internal errors or exceptions occur in the changefeed and persist longer than the duration set by this parameter.
+# When the changefeed is in the failed state, you need to restart the changefeed manually for recovery.
+# The format of this parameter is "h m s", for example, "1h30m30s".
+changefeed-error-stuck-duration = "30m"
 
 [mounter]
 # The number of threads with which the mounter decodes KV data. The default value is 16.

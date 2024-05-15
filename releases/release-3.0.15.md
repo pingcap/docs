@@ -1,47 +1,47 @@
 ---
 title: TiDB 3.0.15 Release Notes
-summary: TiDB 3.0.15は2020年6月5日にリリースされました。新機能には、パーティションテーブル内のクエリでのプランキャッシュ機能の禁止、admin recover indexおよびadmin check indexステートメントのサポート、レンジパーティションテーブルのin条件のパーティションプルーニングのサポートなどが含まれます。バグの修正には、ディープコピーを使用したHash集計関数のenumとset型のデータの正確さの問題の修正、整数オーバーフロー処理ロジックの修正、CHAR()関数の不正な処理ロジックの修正などがあります。TiKVの修正には、メモリのデフラグが有効にならない問題の修正、スナップショットファイルの誤って削除される問題の修正、大きすぎるメッセージパッケージによるgRPC切断の修正が含まれます。
+summary: TiDB 3.0.15 was released on June 5, 2020. New features include support for admin recover index and admin check index statements on partitioned tables, as well as optimization of memory allocation mechanism. Bug fixes address issues such as incorrect results in PointGet and inconsistent results between TiDB and MySQL when XOR operates on a floating-point number. TiKV fixes issues related to memory defragmentation and gRPC disconnection.
 ---
 
 # TiDB 3.0.15 リリースノート {#tidb-3-0-15-release-notes}
 
-発売日：2020年6月5日
+発売日: 2020年6月5日
 
 TiDB バージョン: 3.0.15
 
 ## 新機能 {#new-features}
 
--   TiDB
+-   ティビ
 
-    -   パーティション テーブル内のクエリでプラン キャッシュ機能を使用することを禁止します[#16759](https://github.com/pingcap/tidb/pull/16759)
-    -   パーティションテーブルで`admin recover index`および`admin check index`ステートメントをサポート[#17315](https://github.com/pingcap/tidb/pull/17315) [#17390](https://github.com/pingcap/tidb/pull/17390)
-    -   レンジ パーティション テーブル[#17318](https://github.com/pingcap/tidb/pull/17318)の`in`条件のパーティション プルーニングをサポートします。
-    -   `SHOW CREATE TABLE`の出力を最適化し、パーティション名に引用符を追加します[#16315](https://github.com/pingcap/tidb/pull/16315)
-    -   `GROUP_CONCAT`機能[#16988](https://github.com/pingcap/tidb/pull/16988)の`ORDER BY`句をサポートします。
-    -   `CMSketch`統計のメモリ割り当てメカニズムを最適化して、パフォーマンスに対するガベージコレクション(GC) の影響を軽減します[#17543](https://github.com/pingcap/tidb/pull/17543)
+    -   パーティションテーブル内のクエリでプランキャッシュ機能の使用を禁止する[＃16759](https://github.com/pingcap/tidb/pull/16759)
+    -   パーティションテーブル[＃17315](https://github.com/pingcap/tidb/pull/17315) [＃17390](https://github.com/pingcap/tidb/pull/17390)の`admin recover index`と`admin check index`ステートメントをサポートする
+    -   範囲パーティション化されたテーブル[＃17318](https://github.com/pingcap/tidb/pull/17318)の`in`条件のパーティション プルーニングをサポート
+    -   `SHOW CREATE TABLE`の出力を最適化し、パーティション名[＃16315](https://github.com/pingcap/tidb/pull/16315)に引用符を追加します。
+    -   `GROUP_CONCAT`関数[＃16988](https://github.com/pingcap/tidb/pull/16988)の`ORDER BY`節をサポートする
+    -   `CMSketch`統計のメモリ割り当てメカニズムを最適化して、ガベージコレクション（GC）がパフォーマンスに与える影響を軽減する[＃17543](https://github.com/pingcap/tidb/pull/17543)
 
 -   PD
 
-    -   リーダー[#2479](https://github.com/pingcap/pd/pull/2479)の数に基づいて PD がスケジューリングを実行するポリシーを追加します。
+    -   PDがリーダー数に応じてスケジュールを実行するポリシーを追加する[＃2479](https://github.com/pingcap/pd/pull/2479)
 
 ## バグの修正 {#bug-fixes}
 
--   TiDB
+-   ティビ
 
-    -   ディープ コピーを使用して、 `Hash`集計関数の`enum`と`set`型のデータをコピーします。正確さの問題を修正する[#16890](https://github.com/pingcap/tidb/pull/16890)
-    -   整数オーバーフロー[#16753](https://github.com/pingcap/tidb/pull/16753)の処理ロジックが間違っているため、 `PointGet`が間違った結果を返す問題を修正
-    -   クエリ述語[#16557](https://github.com/pingcap/tidb/pull/16557)で`CHAR()`関数が使用されている場合に、不正な処理ロジックが原因で不正な結果が発生する問題を修正します。
-    -   `IsTrue`と`IsFalse`関数のstorageレイヤーと計算レイヤーで結果が矛盾する問題を修正[#16627](https://github.com/pingcap/tidb/pull/16627)
-    -   `case when` [#16993](https://github.com/pingcap/tidb/pull/16993)などの一部の式の誤った`NotNull`フラグを修正しました。
-    -   一部のシナリオ[#17014](https://github.com/pingcap/tidb/pull/17014)で、オプティマイザーが`TableDual`物理プランを見つけられない問題を修正します。
-    -   ハッシュパーティションテーブル[#17051](https://github.com/pingcap/tidb/pull/17051)でパーティション選択の構文が正しく有効にならない問題を修正します。
-    -   XOR が浮動小数点数[#16976](https://github.com/pingcap/tidb/pull/16976)で演算される場合に、TiDB と MySQL の間で一貫性のない結果が修正されました。
-    -   準備された方法で DDL ステートメントを実行するときに発生するエラーを修正します[#17415](https://github.com/pingcap/tidb/pull/17415)
-    -   ID アロケーター[#17548](https://github.com/pingcap/tidb/pull/17548)でバッチ サイズを計算する誤った処理ロジックを修正しました。
-    -   時間が高価なしきい値[#17534](https://github.com/pingcap/tidb/pull/17534)を超えると、 `MAX_EXEC_TIME` SQL ヒントが有効にならない問題を修正します。
+    -   ディープコピーを使用して、 `Hash`集計関数の`enum`と`set`型のデータをコピーします。正確性の問題を修正しました[＃16890](https://github.com/pingcap/tidb/pull/16890)
+    -   整数オーバーフロー[＃16753](https://github.com/pingcap/tidb/pull/16753)の処理ロジックが間違っているため、 `PointGet`誤った結果を返す問題を修正しました。
+    -   クエリ述語[＃16557](https://github.com/pingcap/tidb/pull/16557)で`CHAR()`関数が使用されている場合に、誤った処理ロジックによって誤った結果が発生する問題を修正しました。
+    -   `IsTrue`と`IsFalse`の関数[＃16627](https://github.com/pingcap/tidb/pull/16627)のstorageレイヤーと計算レイヤーで結果が一致しない問題を修正
+    -   いくつかの式で誤った`NotNull`フラグを修正します (例: `case when` [＃16993](https://github.com/pingcap/tidb/pull/16993)
+    -   一部のシナリオでオプティマイザが`TableDual`の物理プランを見つけられない問題を修正[＃17014](https://github.com/pingcap/tidb/pull/17014)
+    -   ハッシュパーティションテーブル[＃17051](https://github.com/pingcap/tidb/pull/17051)でパーティション選択の構文が正しく反映されない問題を修正
+    -   浮動小数点数[＃16976](https://github.com/pingcap/tidb/pull/16976)に対して XOR 演算を実行すると TiDB と MySQL の間で結果が矛盾する問題を修正
+    -   準備された方法でDDL文を実行するときに発生するエラーを修正[＃17415](https://github.com/pingcap/tidb/pull/17415)
+    -   IDアロケータ[＃17548](https://github.com/pingcap/tidb/pull/17548)のバッチサイズ計算の誤った処理ロジックを修正
+    -   時間が高価なしきい値[＃17534](https://github.com/pingcap/tidb/pull/17534)を超えると`MAX_EXEC_TIME`ヒントが有効にならない問題を修正
 
--   TiKV
+-   ティクヴ
 
-    -   長時間実行するとメモリのデフラグが有効にならない問題を修正[#7790](https://github.com/tikv/tikv/pull/7790)
-    -   TiKV が誤って再起動された後、スナップショット ファイルを誤って削除することによって引き起こされるpanicの問題を修正します[#7925](https://github.com/tikv/tikv/pull/7925)
-    -   大きすぎるメッセージ パッケージによって引き起こされる gRPC 切断を修正します[#7822](https://github.com/tikv/tikv/pull/7822)
+    -   長時間実行後にメモリのデフラグが効かなくなる問題を修正[＃7790](https://github.com/tikv/tikv/pull/7790)
+    -   TiKV が誤って再起動された後にスナップショット ファイルを誤って削除することで発生するpanic問題を修正しました[＃7925](https://github.com/tikv/tikv/pull/7925)
+    -   メッセージ パッケージが大きすぎるために発生する gRPC 切断を修正[＃7822](https://github.com/tikv/tikv/pull/7822)

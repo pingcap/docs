@@ -1,13 +1,13 @@
 ---
 title: ALTER INDEX
-summary: ALTER INDEXステートメントは、インデックスの可視性を変更するために使用されます。非表示のインデックスはDMLステートメントによって維持されますが、クエリオプティマイザーによっては使用されません。これは、インデックスを完全に削除する前に再確認する必要があるシナリオで役立ちます。可視性を変更するには、ALTER TABLE ... ALTER INDEX ...ステートメントを使用します。MySQLと同様に、TiDBではPRIMARY KEYを非表示にすることはできません。
+summary: An overview of the usage of ALTER INDEX for the TiDB database.
 ---
 
 # インデックスの変更 {#alter-index}
 
-`ALTER INDEX`ステートメントは、インデックスの可視性を`Visible`または`Invisible`に変更するために使用されます。非表示のインデックスは DML ステートメントによって維持されますが、クエリ オプティマイザーによっては使用されません。これは、インデックスを完全に削除する前に再確認する必要があるシナリオで役立ちます。
+`ALTER INDEX`ステートメントは、インデックスの可視性を`Visible`または`Invisible`に変更するために使用されます。非表示のインデックスは DML ステートメントによって維持されますが、クエリ オプティマイザーでは使用されません。これは、インデックスを永続的に削除する前に再確認したい場合に役立ちます。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AlterTableStmt
@@ -47,7 +47,7 @@ SHOW CREATE TABLE t1;
 1 row in set (0.00 sec)
 ```
 
-オプティマイザは、**非表示のインデックス**`c1`を使用できません。
+オプティマイザーは**非表示のインデックス**`c1`を使用できません。
 
 ```sql
 EXPLAIN SELECT c1 FROM t1 ORDER BY c1;
@@ -64,7 +64,7 @@ EXPLAIN SELECT c1 FROM t1 ORDER BY c1;
 3 rows in set (0.00 sec)
 ```
 
-比較すると、 `c2`は**可視インデックス**であり、オプティマイザで使用できます。
+比較すると、 `c2`**可視インデックス**であり、オプティマイザーで使用できます。
 
 ```sql
 EXPLAIN SELECT c2 FROM t1 ORDER BY c2;
@@ -80,7 +80,7 @@ EXPLAIN SELECT c2 FROM t1 ORDER BY c2;
 2 rows in set (0.00 sec)
 ```
 
-`USE INDEX` SQL ヒントを使用してインデックスを強制的に使用したとしても、オプティマイザは依然として非表示のインデックスを使用できません。それ以外の場合は、エラーが返されます。
+`USE INDEX` SQL ヒントを使用して強制的にインデックスを使用した場合でも、オプティマイザーは非表示のインデックスを使用できません。そうでない場合は、エラーが返されます。
 
 ```sql
 SELECT * FROM t1 USE INDEX(c1);
@@ -92,7 +92,7 @@ ERROR 1176 (42000): Key 'c1' doesn't exist in table 't1'
 
 > **注記：**
 >
-> ここでの「不可視」とは、オプティマイザのみに不可視であることを意味します。非表示のインデックスを変更または削除することもできます。
+> ここでの「非表示」とは、オプティマイザに対してのみ非表示であることを意味します。非表示のインデックスを変更または削除することは可能です。
 
 ```sql
 ALTER TABLE t1 DROP INDEX c1;
@@ -102,16 +102,16 @@ ALTER TABLE t1 DROP INDEX c1;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
 -   TiDB の非表示インデックスは、MySQL 8.0 の同等の機能に基づいてモデル化されています。
--   MySQL と同様に、TiDB では`PRIMARY KEY`を非表示にすることはできません。
--   MySQL には、すべての非表示のインデックスを再び*表示できる*ようにするオプティマイザー スイッチ`use_invisible_indexes=on`が用意されています。この機能は TiDB では利用できません。
+-   MySQL と同様に、TiDB では`PRIMARY KEY`インデックスを非表示にすることはできません。
+-   MySQL には、非表示のインデックスをすべて再び*表示できる*ようにするオプティマイザ スイッチ`use_invisible_indexes=on`が用意されています。この機能は TiDB では使用できません。
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
 -   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
 -   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
--   [インデックスの追加](/sql-statements/sql-statement-add-index.md)
--   [ドロップインデックス](/sql-statements/sql-statement-drop-index.md)
--   [インデックスの名前を変更](/sql-statements/sql-statement-rename-index.md)
+-   [インデックスを追加](/sql-statements/sql-statement-add-index.md)
+-   [インデックスを削除](/sql-statements/sql-statement-drop-index.md)
+-   [インデックス名の変更](/sql-statements/sql-statement-rename-index.md)

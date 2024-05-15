@@ -1,33 +1,22 @@
 ---
 title: SET DEFAULT ROLE | TiDB SQL Statement Reference
-summary: このステートメントは、デフォルトでユーザーに適用される特定のロールを設定します。したがって、 SET ROLE <rolename>またはSET ROLE ALLを実行しなくても、ロールに関連付けられた権限が自動的に付与されます。MySQLの互換性があります。
+summary: An overview of the usage of SET DEFAULT ROLE for the TiDB database.
 ---
 
 # <code>SET DEFAULT ROLE</code> {#code-set-default-role-code}
 
 このステートメントは、デフォルトでユーザーに適用される特定のロールを設定します。したがって、 `SET ROLE <rolename>`または`SET ROLE ALL`を実行しなくても、ロールに関連付けられた権限が自動的に付与されます。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
-**SetDefaultRoleStmt:**
-
-![SetDefaultRoleStmt](/media/sqlgram/SetDefaultRoleStmt.png)
-
-**SetDefaultRoleOpt:**
-
-![SetDefaultRoleOpt](/media/sqlgram/SetDefaultRoleOpt.png)
-
-**役割名リスト:**
-
-![RolenameList](/media/sqlgram/RolenameList.png)
-
-**ユーザー名リスト:**
-
-![UsernameList](/media/sqlgram/UsernameList.png)
+```ebnf+diagram
+SetDefaultRoleStmt ::=
+    "SET" "DEFAULT" "ROLE" ( "NONE" | "ALL" | Rolename ("," Rolename)* ) "TO" Username ("," Username)*
+```
 
 ## 例 {#examples}
 
-`root`ユーザーとして TiDB に接続します。
+`root`人のユーザーとして TiDB に接続します。
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u root
@@ -49,7 +38,7 @@ GRANT analyticsteam TO jennifer;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-`jennifer`ユーザーとして TiDB に接続します。
+`jennifer`人のユーザーとして TiDB に接続します。
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u jennifer
@@ -91,26 +80,26 @@ SHOW TABLES IN test;
 1 row in set (0.00 sec)
 ```
 
-`root`ユーザーとして TiDB に接続します。
+`root`人のユーザーとして TiDB に接続します。
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u root
 ```
 
-ステートメント`SET DEFAULT ROLE`使用して、ロール`analyticsteam`を`jennifer`に関連付けることができます。
+ステートメント`SET DEFAULT ROLE` 、ロール`analyticsteam`を`jennifer`に関連付けるために使用できます。
 
 ```sql
 SET DEFAULT ROLE analyticsteam TO jennifer;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-`jennifer`ユーザーとして TiDB に接続します。
+`jennifer`人のユーザーとして TiDB に接続します。
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u jennifer
 ```
 
-この後、ユーザー`jennifer`はロール`analyticsteam`に関連付けられた権限を持ち、ユーザー`jennifer`はステートメント`SET ROLE`を実行する必要がなくなります。
+この後、ユーザー`jennifer`ロール`analyticsteam`に関連付けられた権限を持ち、 `jennifer`ステートメント`SET ROLE`を実行する必要がなくなります。
 
 ```sql
 SHOW GRANTS;
@@ -132,18 +121,18 @@ SHOW TABLES IN test;
 1 row in set (0.00 sec)
 ```
 
-`SET DEFAULT ROLE`関連付けられたロール`GRANT`ユーザーに自動的に割り当てません。 `jennifer`が付与していないロールに対して`SET DEFAULT ROLE`を実行しようとすると、次のエラーが発生します。
+`SET DEFAULT ROLE` 、ユーザーに関連付けられたロールを自動的に`GRANT`付与しません。 `jennifer`付与されていないロールに対して`SET DEFAULT ROLE`を付与しようとすると、次のエラーが発生します。
 
 ```sql
 SET DEFAULT ROLE analyticsteam TO jennifer;
 ERROR 3530 (HY000): `analyticsteam`@`%` is is not granted to jennifer@%
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
-TiDB の`SET DEFAULT ROLE`ステートメントは、MySQL 8.0 のロール機能と完全な互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) .
+TiDB の`SET DEFAULT ROLE`ステートメントは、MySQL 8.0 のロール機能と完全に互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) 。
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
 -   [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)
 -   [`DROP ROLE`](/sql-statements/sql-statement-drop-role.md)
@@ -153,6 +142,6 @@ TiDB の`SET DEFAULT ROLE`ステートメントは、MySQL 8.0 のロール機�
 
 <CustomContent platform="tidb">
 
--   [役割ベースのアクセス制御](/role-based-access-control.md)
+-   [ロールベースのアクセス制御](/role-based-access-control.md)
 
 </CustomContent>

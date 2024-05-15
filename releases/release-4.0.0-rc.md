@@ -1,104 +1,104 @@
 ---
 title: TiDB 4.0 RC Release Notes
-summary: TiDB 4.0 RCは2020年4月8日にリリースされました。このバージョンにはいくつかの既知の問題がありますが、新しいバージョンを使用することがお勧めされています。互換性の変更、重要なバグ修正、新機能、バグの修正が含まれています。TiKVでは悲観的トランザクションでのpipelined機能がサポートされ、TPC-Cのパフォーマンスが向上しました。PDではHTTP APIを介したデフォルトのPD構成情報の取得がサポートされています。TiDB LightningではバックエンドがTiDBの場合、文字変換エラーによるデータエラーが修正されました。
+summary: TiDB 4.0 RC released on April 8, 2020. It includes compatibility changes, bug fixes, new features, and tools. TiKV supports the `pipelined` feature in pessimistic transactions, improving TPC-C performance by 20%. TiDB adds case-insensitive collation and enhances the `RECOVER TABLE` syntax. TiKV now supports TLS in the HTTP port. PD supports getting default PD configuration information through the HTTP API. Bug fixes include issues with replication, subquery results, and DDL job internal retry. Tools like TiDB Lightning and TiCDC also have bug fixes and new features.
 ---
 
-# TiDB 4.0 RC リリース ノート {#tidb-4-0-rc-release-notes}
+# TiDB 4.0 RC リリースノート {#tidb-4-0-rc-release-notes}
 
-発売日：2020年4月8日
+発売日: 2020年4月8日
 
 TiDB バージョン: 4.0.0-rc
 
-TiUPバージョン：0.0.3
+TiUPバージョン: 0.0.3
 
 > **警告：**
 >
-> このバージョンではいくつかの既知の問題が見つかり、これらの問題は新しいバージョンで修正されています。最新の 4.0.x バージョンを使用することをお勧めします。
+> このバージョンではいくつかの既知の問題が見つかりましたが、これらの問題は新しいバージョンで修正されています。最新の 4.0.x バージョンを使用することをお勧めします。
 
 ## 互換性の変更 {#compatibility-changes}
 
--   TiDB
+-   ティビ
 
-    -   tidb-server ステータス ポートが占有されている場合、アラート ログを返す代わりに開始を拒否します[#15177](https://github.com/pingcap/tidb/pull/15177)
+    -   tidb-server ステータス ポートが使用中の場合、アラート ログを返す代わりに開始を拒否します[＃15177](https://github.com/pingcap/tidb/pull/15177)
 
--   TiKV
+-   ティクヴ
 
-    -   悲観的トランザクションで`pipelined`機能をサポートし、TPC-C のパフォーマンスを 20% 向上させます。リスクとしては、実行中のロック障害によりトランザクションのコミットが失敗する可能性があることです[#6984](https://github.com/tikv/tikv/pull/6984)
-    -   新しいクラスターでは`unify-read-pool`構成項目をデフォルトで有効にし、古いクラスターではこの項目の以前の設定を使用します[#7059](https://github.com/tikv/tikv/pull/7059)
+    -   悲観的トランザクションの`pipelined`機能をサポートし、TPC-Cのパフォーマンスを20%向上させます。実行中のロック失敗によりトランザクションのコミットが失敗するリスクがあります[＃6984](https://github.com/tikv/tikv/pull/6984)
+    -   新しいクラスターではデフォルトで`unify-read-pool`構成項目を有効にし、古いクラスターではこの項目の以前の設定を使用します[＃7059](https://github.com/tikv/tikv/pull/7059)
 
 -   ツール
 
     -   TiDBBinlog
 
-        -   Common Name [#934](https://github.com/pingcap/tidb-binlog/pull/934)を検証するための設定項目を追加します
+        -   共通名[＃934](https://github.com/pingcap/tidb-binlog/pull/934)を検証するための設定項目を追加する
 
 ## 重要なバグ修正 {#important-bug-fixes}
 
--   TiDB
+-   ティビ
 
-    -   `PREPARE`ステートメントを使用して DDL ジョブを実行すると、内部レコード[#15435](https://github.com/pingcap/tidb/pull/15435)のジョブ クエリが正しくないために、上流と下流の間のレプリケーションが失敗する可能性がある問題を修正します。
-    -   `Read Commited`分離レベル[#15471](https://github.com/pingcap/tidb/pull/15471)でのサブクエリの結果が正しくない問題を修正
-    -   インライン投影の最適化[#15411](https://github.com/pingcap/tidb/pull/15411)によって引き起こされる不正確な結果の問題を修正します。
-    -   SQLヒント`INL_MERGE_JOIN`が正しく実行されない場合がある問題を修正[#15515](https://github.com/pingcap/tidb/pull/15515)
-    -   `AutoRandom`属性を持つ列に負の数値が明示的に書き込まれると、これらの列がリベースされる問題を修正します[#15397](https://github.com/pingcap/tidb/pull/15397)
+    -   内部レコード[＃15435](https://github.com/pingcap/tidb/pull/15435)のジョブクエリが正しくないため、 `PREPARE`ステートメントを使用して DDL ジョブを実行すると、アップストリームとダウンストリーム間のレプリケーションが失敗する可能性がある問題を修正しました。
+    -   分離レベル`Read Committed` [＃15471](https://github.com/pingcap/tidb/pull/15471)でのサブクエリ結果が不正確になる問題を修正
+    -   インライン投影の最適化によって誤った結果が発生する問題を修正[＃15411](https://github.com/pingcap/tidb/pull/15411)
+    -   SQLヒント`INL_MERGE_JOIN`が場合によっては誤って実行される問題を修正[＃15515](https://github.com/pingcap/tidb/pull/15515)
+    -   `AutoRandom`属性の列に負の数が明示的に書き込まれると、それらの列がリベースされる問題を修正[＃15397](https://github.com/pingcap/tidb/pull/15397)
 
 ## 新機能 {#new-features}
 
--   TiDB
+-   ティビ
 
-    -   大文字と小文字を区別しない照合順序を追加して、ユーザーが新しいクラスターで`utf8mb4_general_ci`と`utf8_general_ci`有効にできるようにします[#33](https://github.com/pingcap/tidb/projects/33)
-    -   切り捨てられたテーブルのリカバリをサポートするために`RECOVER TABLE`構文を拡張します[#15398](https://github.com/pingcap/tidb/pull/15398)
-    -   tidb-server ステータス ポートが占有されている場合、アラート ログを返す代わりに開始を拒否します[#15177](https://github.com/pingcap/tidb/pull/15177)
-    -   シーケンスをデフォルトの列値として使用する場合の書き込みパフォーマンスを最適化する[#15216](https://github.com/pingcap/tidb/pull/15216)
-    -   DDL ジョブの詳細をクエリする`DDLJobs`システム テーブルを追加します[#14837](https://github.com/pingcap/tidb/pull/14837)
-    -   `aggFuncSum`パフォーマンスを最適化する[#14887](https://github.com/pingcap/tidb/pull/14887)
-    -   `EXPLAIN` [#15507](https://github.com/pingcap/tidb/pull/15507)の出力を最適化する
+    -   大文字と小文字を区別しない照合順序を追加して、ユーザーが新しいクラスター[＃33](https://github.com/pingcap/tidb/projects/33)で`utf8mb4_general_ci`と`utf8_general_ci`を有効にできるようにします。
+    -   切り捨てられたテーブル[＃15398](https://github.com/pingcap/tidb/pull/15398)回復をサポートするために`RECOVER TABLE`構文を拡張します
+    -   tidb-server ステータス ポートが使用中の場合、アラート ログを返す代わりに開始を拒否します[＃15177](https://github.com/pingcap/tidb/pull/15177)
+    -   デフォルトの列値としてシーケンスを使用する書き込みパフォーマンスを最適化する[＃15216](https://github.com/pingcap/tidb/pull/15216)
+    -   DDLジョブ[＃14837](https://github.com/pingcap/tidb/pull/14837)の詳細を照会するためのシステムテーブル`DDLJobs`を追加します
+    -   `aggFuncSum`パフォーマンス[＃14887](https://github.com/pingcap/tidb/pull/14887)を最適化する
+    -   `EXPLAIN` [＃15507](https://github.com/pingcap/tidb/pull/15507)の出力を最適化する
 
--   TiKV
+-   ティクヴ
 
-    -   悲観的トランザクションで`pipelined`機能をサポートし、TPC-C のパフォーマンスを 20% 向上させます。リスクとしては、実行中のロック障害によりトランザクションのコミットが失敗する可能性があることです[#6984](https://github.com/tikv/tikv/pull/6984)
-    -   HTTP ポート[#5393](https://github.com/tikv/tikv/pull/5393)での TLS のサポート
-    -   新しいクラスターでは`unify-read-pool`構成項目をデフォルトで有効にし、古いクラスターではこの項目の以前の設定を使用します[#7059](https://github.com/tikv/tikv/pull/7059)
+    -   悲観的トランザクションの`pipelined`機能をサポートし、TPC-Cのパフォーマンスを20%向上させます。実行中のロック失敗によりトランザクションのコミットが失敗するリスクがあります[＃6984](https://github.com/tikv/tikv/pull/6984)
+    -   HTTPポート[＃5393](https://github.com/tikv/tikv/pull/5393)でTLSをサポート
+    -   新しいクラスターではデフォルトで`unify-read-pool`構成項目を有効にし、古いクラスターではこの項目の以前の設定を使用します[＃7059](https://github.com/tikv/tikv/pull/7059)
 
 -   PD
 
-    -   HTTP API [#2258](https://github.com/pingcap/pd/pull/2258)を介したデフォルトの PD 構成情報の取得のサポート
+    -   HTTP API [＃2258](https://github.com/pingcap/pd/pull/2258)を介してデフォルトの PD 構成情報を取得する機能をサポート
 
 -   ツール
 
     -   TiDBBinlog
 
-        -   Common Name [#934](https://github.com/pingcap/tidb-binlog/pull/934)を検証するための設定項目を追加します
+        -   共通名[＃934](https://github.com/pingcap/tidb-binlog/pull/934)を検証するための設定項目を追加します
 
     -   TiDB Lightning
 
-        -   TiDB Lightning [#281](https://github.com/pingcap/tidb-lightning/pull/281) [#275](https://github.com/pingcap/tidb-lightning/pull/275)のパフォーマンスを最適化する
+        -   TiDB Lightning [＃281](https://github.com/pingcap/tidb-lightning/pull/281) [＃275](https://github.com/pingcap/tidb-lightning/pull/275)のパフォーマンスを最適化する
 
 ## バグの修正 {#bug-fixes}
 
--   TiDB
+-   ティビ
 
-    -   `PREPARE`ステートメントを使用して DDL ジョブを実行すると、内部レコード[#15435](https://github.com/pingcap/tidb/pull/15435)のジョブ クエリが正しくないために、上流と下流の間のレプリケーションが失敗する可能性がある問題を修正します。
-    -   `Read Commited`分離レベル[#15471](https://github.com/pingcap/tidb/pull/15471)でのサブクエリの結果が正しくない問題を修正
-    -   `INSERT ... VALUES`を使用して`BIT(N)`データ型を指定すると誤った動作が発生する可能性がある問題を修正します[#15350](https://github.com/pingcap/tidb/pull/15350)
-    -   `ErrorCount`の値が正しく合計されないため、DDL ジョブの内部再試行が予期した結果を完全に達成できない問題を修正します[#15373](https://github.com/pingcap/tidb/pull/15373)
-    -   TiDB がTiFlash [#15505](https://github.com/pingcap/tidb/pull/15505)に接続するとガベージ コレクションが異常に動作することがある問題を修正
-    -   インライン投影の最適化[#15411](https://github.com/pingcap/tidb/pull/15411)によって引き起こされる誤った結果の問題を修正します。
-    -   SQLヒント`INL_MERGE_JOIN`が正しく実行されない場合がある問題を修正[#15515](https://github.com/pingcap/tidb/pull/15515)
-    -   `AutoRandom`属性を持つ列に負の数値が明示的に書き込まれると、これらの列がリベースされる問題を修正します[#15397](https://github.com/pingcap/tidb/pull/15397)
+    -   内部レコード[＃15435](https://github.com/pingcap/tidb/pull/15435)のジョブクエリが正しくないため、 `PREPARE`ステートメントを使用して DDL ジョブを実行すると、アップストリームとダウンストリーム間のレプリケーションが失敗する可能性がある問題を修正しました。
+    -   分離レベル`Read Committed` [＃15471](https://github.com/pingcap/tidb/pull/15471)でのサブクエリ結果が不正確になる問題を修正
+    -   `INSERT ... VALUES`を使用して`BIT(N)`データ型[＃15350](https://github.com/pingcap/tidb/pull/15350)を指定する場合に発生する可能性のある誤った動作の問題を修正しました。
+    -   `ErrorCount`の値が正しく合計されないため、DDL ジョブの内部再試行で期待どおりの結果が完全に得られない問題を修正しました[＃15373](https://github.com/pingcap/tidb/pull/15373)
+    -   TiDBがTiFlash [＃15505](https://github.com/pingcap/tidb/pull/15505)に接続したときにガベージコレクションが異常に動作する可能性がある問題を修正
+    -   インライン投影の最適化によって誤った結果が発生する問題を修正[＃15411](https://github.com/pingcap/tidb/pull/15411)
+    -   SQLヒント`INL_MERGE_JOIN`が誤って実行される場合がある問題を修正[＃15515](https://github.com/pingcap/tidb/pull/15515)
+    -   `AutoRandom`属性の列に負の数が明示的に書き込まれると、それらの列がリベースされる問題を修正[＃15397](https://github.com/pingcap/tidb/pull/15397)
 
--   TiKV
-    -   Follower Readpanicが有効になっている場合にリーダーを転送することによって発生する可能性のあるパニックを修正しました[#7101](https://github.com/tikv/tikv/pull/7101)
+-   ティクヴ
+    -   Follower Read機能が有効になっているときにリーダーを転送すると発生する可能性のあるpanicを修正[＃7101](https://github.com/tikv/tikv/pull/7101)
 
 -   ツール
 
     -   TiDB Lightning
 
-        -   バックエンドがTiDB [#283](https://github.com/pingcap/tidb-lightning/pull/283)の場合、文字変換エラーによりデータエラーが発生する問題を修正
+        -   バックエンドがTiDB [＃283](https://github.com/pingcap/tidb-lightning/pull/283)の場合に文字変換エラーによって発生するデータエラーの問題を修正しました。
 
-    -   TiCDC
+    -   ティCDC
 
-        -   MySQL シンクが DDL ステートメント[#353](https://github.com/pingcap/tiflow/pull/353)を実行しているときに、ダウンストリームに`test`スキーマが存在しない場合にエラーが返される問題を修正します。
-        -   CDC cli [#351](https://github.com/pingcap/tiflow/pull/351)でのリアルタイム対話モードのサポート
-        -   データレプリケーション中にアップストリームのテーブルをレプリケートできるかどうかのチェックをサポート[#368](https://github.com/pingcap/tiflow/pull/368)
-        -   Kafka [#344](https://github.com/pingcap/tiflow/pull/344)への非同期書き込みをサポート
+        -   MySQLシンクがDDL文[＃353](https://github.com/pingcap/tiflow/pull/353)を実行する際に、下流に`test`スキーマが存在しない場合エラーが返される問題を修正
+        -   CDC cli [＃351](https://github.com/pingcap/tiflow/pull/351)のリアルタイムインタラクティブモードをサポート
+        -   データレプリケーション中に上流のテーブルが複製可能かどうかのチェックをサポート[＃368](https://github.com/pingcap/tiflow/pull/368)
+        -   Kafka [＃344](https://github.com/pingcap/tiflow/pull/344)への非同期書き込みをサポート

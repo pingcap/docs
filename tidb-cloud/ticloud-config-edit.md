@@ -1,21 +1,21 @@
 ---
 title: ticloud config edit
-summary: ticloud設定編集は、macOSまたはLinuxを使用している場合は、デフォルトのテキストエディタでプロファイル構成ファイルを開くことができます。Windowsを使用している場合は、前述のコマンドを実行すると、代わりにプロファイル構成ファイルのパスが表示されます。フォーマットエラーや実行エラーを避けるために、構成ファイルを手動で編集することはお勧めしません。代わりに、ticloud config create、ticloud config delete、またはticloud config setを使用して構成を変更できます。プロファイル構成ファイルを編集する例として、ticloud config editコマンドを使用します。フラグには-h、--helpがあります。継承されたフラグには--色なしと-P、--プロファイル文字列があります。質問や提案がある場合は、TiDB Cloud CLIの問題を作成してください。貢献も歓迎します。
+summary: The reference of `ticloud config edit`.
 ---
 
-# ticloud設定編集 {#ticloud-config-edit}
+# ticloud 設定編集 {#ticloud-config-edit}
 
-macOS または Linux を使用している場合は、デフォルトのテキスト エディタでプロファイル構成ファイルを開くことができます。
+macOS または Linux を使用している場合は、デフォルトのテキスト エディターでプロファイル構成ファイルを開くことができます。
 
 ```shell
 ticloud config edit [flags]
 ```
 
-Windows を使用している場合は、前述のコマンドを実行すると、代わりにプロファイル構成ファイルのパスが表示されます。
+Windows を使用している場合は、上記のコマンドを実行すると、代わりにプロファイル構成ファイルのパスが出力されます。
 
 > **注記：**
 >
-> フォーマット エラーや実行エラーを避けるために、構成ファイルを手動で編集することはお勧めしません。代わりに、 [`ticloud config create`](/tidb-cloud/ticloud-config-create.md) 、 [`ticloud config delete`](/tidb-cloud/ticloud-config-delete.md) 、または[`ticloud config set`](/tidb-cloud/ticloud-config-set.md)を使用して構成を変更できます。
+> フォーマットエラーや実行エラーを回避するために、構成ファイルを手動で編集することはお勧めしません。代わりに、 [`ticloud config create`](/tidb-cloud/ticloud-config-create.md) 、 [`ticloud config delete`](/tidb-cloud/ticloud-config-delete.md) 、または[`ticloud config set`](/tidb-cloud/ticloud-config-set.md)を使用して構成を変更することができます。
 
 ## 例 {#examples}
 
@@ -25,19 +25,20 @@ Windows を使用している場合は、前述のコマンドを実行すると
 ticloud config edit
 ```
 
-## フラグ {#flags}
+## 旗 {#flags}
 
-| フラグ        | 説明           |
-| ---------- | ------------ |
-| -h, --help | このコマンドのヘルプ情報 |
+| フラグ        | 説明                  |
+| ---------- | ------------------- |
+| -h, --help | このコマンドのヘルプ情報を表示します。 |
 
 ## 継承されたフラグ {#inherited-flags}
 
-| フラグ            | 説明                                                                               | 必須  | 注記                                                                 |
-| -------------- | -------------------------------------------------------------------------------- | --- | ------------------------------------------------------------------ |
-| --色なし          | 出力のカラーを無効にします。                                                                   | いいえ | 非対話型モードでのみ動作します。インタラクティブ モードでは、一部の UI コンポーネントで色の無効化が機能しない可能性があります。 |
-| -P、--プロファイル文字列 | このコマンドで使用されるアクティブな[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                           |
+| フラグ               | 説明                                                                             | 必須  | 注記                                                             |
+| ----------------- | ------------------------------------------------------------------------------ | --- | -------------------------------------------------------------- |
+| --色なし             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話型モードでのみ機能します。対話型モードでは、一部の UI コンポーネントで色を無効にしても機能しない可能性があります。 |
+| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                       |
+| -D、--デバッグ         | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                       |
 
 ## フィードバック {#feedback}
 
-TiDB Cloud CLI に関して質問や提案がある場合は、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、貢献も歓迎します。
+TiDB Cloud CLI に関してご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)作成してください。また、あらゆる貢献を歓迎します。

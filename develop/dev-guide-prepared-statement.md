@@ -1,18 +1,18 @@
 ---
 title: Prepared Statements
-summary: プリペアドステートメントは、パラメータのみが異なる複数のSQLステートメントをテンプレート化し、セキュリティとパフォーマンスを改善します。アプリケーション全体のデータクエリを実行するために使用することがベストプラクティスです。プリペアドステートメントを作成、使用、および削除するためのSQL構文について説明します。また、プリペアドステートメントの例も示します。JDBCを使用してTiDBに接続する方法についても説明します。
+summary: Learn about how to use the TiDB prepared statements.
 ---
 
-# 準備されたステートメント {#prepared-statements}
+# 準備された声明 {#prepared-statements}
 
-[プリペアドステートメント](/sql-statements/sql-statement-prepare.md)パラメータのみが異なる複数の SQL ステートメントをテンプレート化します。 SQL ステートメントをパラメーターから分離します。これを使用すると、SQL ステートメントの次の側面を改善できます。
+[プリペアドステートメント](/sql-statements/sql-statement-prepare.md) 、パラメータのみが異なる複数の SQL 文をテンプレート化します。SQL 文とパラメータを分離します。これを使用して、SQL 文の次の側面を改善できます。
 
--   **Security**: パラメータとステートメントが分離されているため、 [SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)攻撃のリスクが回避されます。
--   **パフォーマンス**: ステートメントは TiDBサーバー上で事前に解析されるため、後続の実行にはパラメーターのみが渡され、SQL ステートメント全体の解析、SQL ステートメント文字列の結合、およびネットワーク送信のコストが節約されます。
+-   **Security**: パラメータとステートメントが分離されているため、 [SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)攻撃のリスクを回避できます。
+-   **パフォーマンス**: ステートメントは TiDBサーバー上で事前に解析されるため、後続の実行ではパラメータのみが渡され、SQL ステートメント全体の解析、SQL ステートメント文字列の結合、およびネットワーク転送のコストが節約されます。
 
-ほとんどのアプリケーションでは、SQL ステートメントを列挙できます。限られた数の SQL ステートメントを使用して、アプリケーション全体のデータ クエリを実行できます。したがって、プリペアドステートメントを使用することがベスト プラクティスです。
+ほとんどのアプリケーションでは、SQL ステートメントを列挙できます。限られた数の SQL ステートメントを使用して、アプリケーション全体のデータ クエリを完了できます。そのため、プリペアドステートメントを使用するのがベスト プラクティスです。
 
-## SQL 構文 {#sql-syntax}
+## SQL構文 {#sql-syntax}
 
 このセクションでは、プリペアドステートメントを作成、実行、および削除するための SQL 構文について説明します。
 
@@ -25,13 +25,13 @@ PREPARE {prepared_statement_name} FROM '{prepared_statement_sql}';
 |            パラメータ名           |                説明                |
 | :-------------------------: | :------------------------------: |
 | `{prepared_statement_name}` |          プリペアドステートメントの名前         |
-|  `{prepared_statement_sql}` | プレースホルダーとして疑問符を付けプリペアドステートメントSQL |
+|  `{prepared_statement_sql}` | プレースホルダとして疑問符が付いたプリペアドステートメントSQL |
 
-詳細については[PREPARE 文](/sql-statements/sql-statement-prepare.md)参照してください。
+詳細については[PREPARE ステートメント](/sql-statements/sql-statement-prepare.md)参照してください。
 
 ### プリペアドステートメントを使用する {#use-the-prepared-statement}
 
-プリペアドステートメントは**ユーザー変数を**パラメータとしてのみ使用できるため、 [`EXECUTE`文](/sql-statements/sql-statement-execute.md)がプリペアドステートメントを呼び出す前に、 [`SET`ステートメント](/sql-statements/sql-statement-set-variable.md)を使用して変数を設定します。
+プリペアドステートメントは、**ユーザー変数**のみをパラメーターとして使用できるため、 [`EXECUTE`ステートメント](/sql-statements/sql-statement-execute.md)プリペアドステートメントを呼び出す前に、 [`SET`ステートメント](/sql-statements/sql-statement-set-variable.md)を使用して変数を設定します。
 
 ```sql
 SET @{parameter_name} = {parameter_value};
@@ -41,12 +41,12 @@ EXECUTE {prepared_statement_name} USING @{parameter_name};
 |            パラメータ名           |                                          説明                                          |
 | :-------------------------: | :----------------------------------------------------------------------------------: |
 |      `{parameter_name}`     |                                        ユーザー変数名                                       |
-|     `{parameter_value}`     |                                       ユーザー変数の値                                       |
+|     `{parameter_value}`     |                                        ユーザー変数値                                       |
 | `{prepared_statement_name}` | 前処理ステートメントの名前[プリペアドステートメントを作成する](#create-a-prepared-statement)で定義された名前と同じである必要があります。 |
 
-詳細については[`EXECUTE`文](/sql-statements/sql-statement-execute.md)参照してください。
+詳細については[`EXECUTE`ステートメント](/sql-statements/sql-statement-execute.md)参照してください。
 
-### プリペアドステートメントを削除します {#delete-the-prepared-statement}
+### プリペアドステートメントを削除する {#delete-the-prepared-statement}
 
 ```sql
 DEALLOCATE PREPARE {prepared_statement_name};
@@ -56,15 +56,15 @@ DEALLOCATE PREPARE {prepared_statement_name};
 | :-------------------------: | :----------------------------------------------------------------------------------: |
 | `{prepared_statement_name}` | 前処理ステートメントの名前[プリペアドステートメントを作成する](#create-a-prepared-statement)で定義された名前と同じである必要があります。 |
 
-詳細については[`DEALLOCATE`文](/sql-statements/sql-statement-deallocate.md)参照してください。
+詳細については[`DEALLOCATE`ステートメント](/sql-statements/sql-statement-deallocate.md)参照してください。
 
 ## 例 {#examples}
 
-このセクションでは、プリペアド ステートメントの 2 つの例 ( `SELECT`データと`INSERT`データ) について説明します。
+このセクションでは、準備されたステートメントの 2 つの例 ( `SELECT`データと`INSERT`データ) について説明します。
 
 ### <code>SELECT</code>例 {#code-select-code-example}
 
-たとえば、 [`bookshop`アプリケーション](/develop/dev-guide-bookshop-schema-design.md#books-table)のうち`id = 1`を含む書籍をクエリする必要があります。
+たとえば、 [`bookshop`アプリケーション](/develop/dev-guide-bookshop-schema-design.md#books-table)のうち`id = 1`を含む本をクエリする必要があります。
 
 <SimpleTab groupId="language">
 
@@ -129,7 +129,7 @@ try (Connection connection = ds.getConnection()) {
 
 ### <code>INSERT</code>例 {#code-insert-code-example}
 
-例として[`books`テーブル](/develop/dev-guide-bookshop-schema-design.md#books-table)を使用すると、 `title = TiDB Developer Guide` 、 `type = Science & Technology` 、 `stock = 100` 、 `price = 0.0` 、および`published_at = NOW()` (挿入の現在の時刻) を持つ本を挿入する必要があります。 `books`テーブルの**主キー**に`AUTO_RANDOM`属性を指定する必要がないことに注意してください。データの挿入の詳細については、 [データの挿入](/develop/dev-guide-insert-data.md)を参照してください。
+[`books`](/develop/dev-guide-bookshop-schema-design.md#books-table)例にすると、 `title = TiDB Developer Guide` 、 `type = Science & Technology` 、 `stock = 100` 、 `price = 0.0` 、 `published_at = NOW()` (挿入時の現在時刻) を含む本を挿入する必要があります。 `books`テーブルの**主キー**に`AUTO_RANDOM`属性を指定する必要がないことに注意してください。データの挿入の詳細については、 [データの挿入](/develop/dev-guide-insert-data.md)を参照してください。
 
 <SimpleTab groupId="language">
 
@@ -184,28 +184,28 @@ try (Connection connection = ds.getConnection()) {
 }
 ```
 
-ご覧のとおり、JDBC はプリペアド ステートメントのライフ サイクルの制御に役立ち、アプリケーションでプリペアド ステートメントを手動で作成、使用、または削除する必要はありません。ただし、TiDB は MySQL と互換性があるため、クライアント側で MySQL JDBC Driverを使用するためのデフォルト設定では、***サーバー側の***プリペアドステートメントオプションが有効ではなく、クライアント側のプリペアドステートメントが使用されることに注意してください。
+ご覧のとおり、JDBC を使用すると準備済みステートメントのライフ サイクルを制御でき、アプリケーションで準備済みステートメントを手動で作成、使用、または削除する必要がありません。ただし、TiDB は MySQL と互換性があるため、クライアント側で MySQL JDBCDriverを使用するためのデフォルト構成では、***サーバー側の***プリペアドステートメントオプションを有効にするのではなく、クライアント側のプリペアドステートメントを使用することに注意してください。
 
-次の構成は、JDBC で TiDB サーバー側のプリペアド ステートメントを使用するのに役立ちます。
+次の構成は、JDBC で TiDB サーバー側の準備済みステートメントを使用するのに役立ちます。
 
-|          パラメータ          |                  手段                 |            推奨シナリオ           |        推奨されるコンフィグレーション        |
-| :---------------------: | :---------------------------------: | :-------------------------: | :---------------------------: |
-|   `useServerPrepStmts`  |   サーバー側を使用してプリペアドステートメントを有効にするかどうか  | プリペアドステートメントを複数回使用する必要がある場合 |             `true`            |
-|     `cachePrepStmts`    |   クライアントが準備されたステートメントをキャッシュするかどうか   |  `useServerPrepStmts=true`時 |             `true`            |
-| `prepStmtCacheSqlLimit` | プリペアドステートメントの最大サイズ (デフォルトでは 256 文字) |  プリペアドステートメントが 256 文字を超える場合 | プリペアドステートメントの実際のサイズに応じて構成されます |
-|   `prepStmtCacheSize`   |    準備されたステートメントの最大数 (デフォルトでは 25)    |  準備されたステートメントの数が 25 を超える場合  |   実際の準備済みステートメントの数に応じて構成されます  |
+|          パラメータ          |                 手段                 |            推奨シナリオ           |          推奨コンフィグレーション         |
+| :---------------------: | :--------------------------------: | :-------------------------: | :---------------------------: |
+|   `useServerPrepStmts`  |   サーバー側を使用して準備済みステートメントを有効にするかどうか  | プリペアドステートメントを複数回使用する必要がある場合 |             `true`            |
+|     `cachePrepStmts`    |   クライアントが準備されたステートメントをキャッシュするかどうか  |  `useServerPrepStmts=true`  |             `true`            |
+| `prepStmtCacheSqlLimit` | プリペアドステートメントの最大サイズ（デフォルトでは 256 文字） |   プリペアドステートメントが256文字を超える場合  | プリペアドステートメントの実際のサイズに応じて構成されます |
+|   `prepStmtCacheSize`   |    準備されたステートメントの最大数（デフォルトでは 25）    |   準備されたステートメントの数が25を超える場合   |  準備されたステートメントの実際の数に応じて構成されます  |
 
-以下は、JDBC 接続文字列構成の一般的なシナリオです。ホスト: `127.0.0.1` 、ポート: `4000` 、ユーザー名: `root` 、パスワード: null、デフォルトのデータベース: `test` :
+以下は、JDBC 接続文字列構成の一般的なシナリオです。ホスト: `127.0.0.1` 、ポート: `4000` 、ユーザー名: `root` 、パスワード: null、デフォルト データベース: `test` :
 
     jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPrepStmts=true&prepStmtCacheSqlLimit=2048&prepStmtCacheSize=256&rewriteBatchedStatements=true&allowMultiQueries=true
 
-データの挿入時に他の JDBC パラメータを変更する必要がある場合は、第[行を挿入する](/develop/dev-guide-insert-data.md#insert-rows)章を参照してください。
+データを挿入するときに他の JDBC パラメータを変更する必要がある場合は、 [行を挿入する](/develop/dev-guide-insert-data.md#insert-rows)章も参照してください。
 
 Javaの完全な例については、以下を参照してください。
 
--   [JDBC を使用して TiDB に接続する](/develop/dev-guide-sample-application-java-jdbc.md)
+-   [JDBC で TiDB に接続する](/develop/dev-guide-sample-application-java-jdbc.md)
 -   [Hibernate で TiDB に接続する](/develop/dev-guide-sample-application-java-hibernate.md)
--   [Spring Boot を使用して TiDB に接続する](/develop/dev-guide-sample-application-java-spring-boot.md)
+-   [Spring Boot で TiDB に接続する](/develop/dev-guide-sample-application-java-spring-boot.md)
 
 </div>
 

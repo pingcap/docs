@@ -1,29 +1,30 @@
 ---
 title: SHOW CONFIG
-summary: SHOW CONFIGステートメントは、TiDBの様々なコンポーネントの現在の構成を表示するために使用されます。システム変数情報を取得したい場合は、[変数を表示]構文を使用します。この機能はTiDBセルフホスト型にのみ適用され、TiDB Cloudでは利用できません。MySQLの互換性もあります。
+summary: Overview of the use of SHOW CONFIG in the TiDB database
 ---
 
 # 設定を表示 {#show-config}
 
-`SHOW CONFIG`ステートメントは、TiDB のさまざまなコンポーネントの現在の構成を示すために使用されます。構成変数とシステム変数は異なる次元で機能するため、混同しないように注意してください。システム変数情報を取得したい場合は、 [変数を表示](/sql-statements/sql-statement-show-variables.md)構文を使用します。
+`SHOW CONFIG`ステートメントは、TiDB のさまざまなコンポーネントの現在の構成を表示するために使用されます。構成変数とシステム変数は異なる次元で動作するため、混同しないでください。システム変数情報を取得する場合は、 [変数を表示](/sql-statements/sql-statement-show-variables.md)構文を使用します。
 
 > **注記：**
 >
-> この機能は TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
+> この機能は TiDB Self-Hosted にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
-**表示手順:**
+```ebnf+diagram
+ShowConfigStmt ::=
+    "SHOW" "CONFIG" ShowLikeOrWhere?
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
-
-**ShowTargetFilterable:**
-
-![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
+ShowLikeOrWhere ::=
+    "LIKE" SimpleExpr
+|   "WHERE" Expression
+```
 
 ## 例 {#examples}
 
-すべての構成を表示します。
+すべての構成を表示:
 
 ```sql
 SHOW CONFIG;
@@ -66,10 +67,10 @@ SHOW CONFIG LIKE 'tidb';
     ...
     40 rows in set (0.01 sec)
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
 -   [変数を表示](/sql-statements/sql-statement-show-variables.md)

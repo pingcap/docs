@@ -1,26 +1,34 @@
 ---
 title: TRACE | TiDB SQL Statement Reference
-summary: TRACEステートメントは、クエリの実行に関する詳細情報を提供します。TiDBサーバーのステータスポートによって公開されるグラフィカルインターフェイスを通じて表示されます。MySQL構文に対するTiDB拡張機能であり、JSON形式のトレースはTiDBステータスポート経由でアクセスされるトレースビューアに貼り付けることができます。
+summary: An overview of the usage of TRACE for the TiDB database.
 ---
 
 # 痕跡 {#trace}
 
-`TRACE`ステートメントは、クエリの実行に関する詳細情報を提供します。これは、TiDB サーバーのステータス ポートによって公開されるグラフィカル インターフェイスを通じて表示されることを目的としています。
+`TRACE`ステートメントは、クエリ実行に関する詳細情報を提供します。これは、TiDB サーバーのステータス ポートによって公開されるグラフィカル インターフェイスを通じて表示されることを目的としています。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
-**トレーススタック:**
+```ebnf+diagram
+TraceStmt ::=
+    "TRACE" ( "FORMAT" "=" stringLit )? TracableStmt
 
-![TraceStmt](/media/sqlgram/TraceStmt.png)
+TracableStmt ::=
+    ( SelectStmt | DeleteFromStmt | UpdateStmt | InsertIntoStmt | ReplaceIntoStmt | UnionStmt | LoadDataStmt | BeginTransactionStmt | CommitStmt | RollbackStmt | SetStmt )
+```
 
-**追跡可能なシステム:**
-
-![TraceableStmt](/media/sqlgram/TraceableStmt.png)
+| フォーマット | 説明              |
+| ------ | --------------- |
+| 行      | ツリー形式で出力        |
+| json   | JSON形式の構造化された出力 |
+| ログ     | ログベースの出力        |
 
 ## 例 {#examples}
 
+### 行 {#row}
+
 ```sql
-trace format='row' select * from mysql.user;
+TRACE FORMAT='row' SELECT * FROM mysql.user;
 ```
 
     +--------------------------------------------+-----------------+------------+
@@ -42,20 +50,48 @@ trace format='row' select * from mysql.user;
     +--------------------------------------------+-----------------+------------+
     13 rows in set (0.00 sec)
 
+### 翻訳 {#json}
+
 ```sql
-trace format='json' select * from mysql.user;
+TRACE FORMAT='json' SELECT * FROM mysql.user;
 ```
 
-JSON 形式のトレースは、TiDB ステータス ポート経由でアクセスされるトレース ビューアに貼り付けることができます。
+JSON 形式のトレースは、TiDB ステータス ポート経由でアクセスできるトレース ビューアーに貼り付けることができます。
 
 ![TiDB Trace Viewer-1](/media/trace-paste.png)
 
 ![TiDB Trace Viewer-2](/media/trace-view.png)
 
-## MySQLの互換性 {#mysql-compatibility}
+### ログ {#log}
 
-このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
+```sql
+TRACE FORMAT='log' SELECT * FROM mysql.user;
+```
 
-## こちらも参照 {#see-also}
+    +----------------------------+--------------------------------------------------------+------+------------------------------------+
+    | time                       | event                                                  | tags | spanName                           |
+    +----------------------------+--------------------------------------------------------+------+------------------------------------+
+    | 2024-04-08 08:41:47.358734 | --- start span trace ----                              |      | trace                              |
+    | 2024-04-08 08:41:47.358737 | --- start span session.ExecuteStmt ----                |      | session.ExecuteStmt                |
+    | 2024-04-08 08:41:47.358746 | --- start span executor.Compile ----                   |      | executor.Compile                   |
+    | 2024-04-08 08:41:47.358984 | --- start span session.runStmt ----                    |      | session.runStmt                    |
+    | 2024-04-08 08:41:47.359035 | --- start span TableReaderExecutor.Open ----           |      | TableReaderExecutor.Open           |
+    | 2024-04-08 08:41:47.359047 | --- start span distsql.Select ----                     |      | distsql.Select                     |
+    | 2024-04-08 08:41:47.359073 | --- start span *executor.TableReaderExecutor.Next ---- |      | *executor.TableReaderExecutor.Next |
+    | 2024-04-08 08:41:47.359077 | table scan table: user, range: [[-inf,+inf]]           |      | *executor.TableReaderExecutor.Next |
+    | 2024-04-08 08:41:47.359094 | --- start span regionRequest.SendReqCtx ----           |      | regionRequest.SendReqCtx           |
+    | 2024-04-08 08:41:47.359098 | send Cop request to region 16 at store1                |      | regionRequest.SendReqCtx           |
+    | 2024-04-08 08:41:47.359237 | --- start span *executor.TableReaderExecutor.Next ---- |      | *executor.TableReaderExecutor.Next |
+    | 2024-04-08 08:41:47.359240 | table scan table: user, range: [[-inf,+inf]]           |      | *executor.TableReaderExecutor.Next |
+    | 2024-04-08 08:41:47.359242 | execute done, ReturnRow: 1, ModifyRow: 0               |      | trace                              |
+    | 2024-04-08 08:41:47.359252 | execute done, modify row: 0                            |      | trace                              |
+    +----------------------------+--------------------------------------------------------+------+------------------------------------+
+    14 rows in set (0.0008 sec)
 
--   [EXPLAINの説明](/sql-statements/sql-statement-explain-analyze.md)
+## MySQL 互換性 {#mysql-compatibility}
+
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
+
+## 参照 {#see-also}
+
+-   [EXPLAIN分析](/sql-statements/sql-statement-explain-analyze.md)

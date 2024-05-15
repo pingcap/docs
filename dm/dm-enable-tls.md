@@ -1,35 +1,35 @@
 ---
 title: Enable TLS for DM Connections
-summary: このドキュメントは、DM 接続での暗号化されたデータ送信を有効にする方法について説明しています。DM マスター、DM ワーカー、および dmctl 間の暗号化されたデータ送信を構成し、証明書を準備して構成します。さらに、コンポーネントの呼び出し元の身元を確認し、証明書をリロードする方法も説明されています。また、DM コンポーネントと上流または下流のデータベース間の暗号化されたデータ送信を有効にする手順も示されています。
+summary: Learn how to enable TLS for DM connections.
 ---
 
-# DM 接続の TLS を有効にする {#enable-tls-for-dm-connections}
+# DM接続にTLSを有効にする {#enable-tls-for-dm-connections}
 
-このドキュメントでは、DM 接続 (DM マスター、DM ワーカー、および dmctl コンポーネント間の接続、および DM とアップストリームまたはダウンストリーム データベース間の接続を含む) で暗号化されたデータ送信を有効にする方法について説明します。
+このドキュメントでは、DM マスター、DM ワーカー、dmctl コンポーネント間の接続、および DM と上流または下流のデータベース間の接続を含む、DM 接続の暗号化されたデータ転送を有効にする方法について説明します。
 
-## DM マスター、DM ワーカー、および dmctl 間の暗号化されたデータ送信を有効にする {#enable-encrypted-data-transmission-between-dm-master-dm-worker-and-dmctl}
+## DMマスター、DMワーカー、dmctl間の暗号化されたデータ転送を有効にする {#enable-encrypted-data-transmission-between-dm-master-dm-worker-and-dmctl}
 
-このセクションでは、DM マスター、DM ワーカー、および dmctl の間で暗号化されたデータ送信を有効にする方法を紹介します。
+このセクションでは、DM マスター、DM ワーカー、dmctl 間の暗号化されたデータ転送を有効にする方法を紹介します。
 
-### 暗号化されたデータ送信を構成して有効にする {#configure-and-enable-encrypted-data-transmission}
+### 暗号化されたデータ転送を設定して有効にする {#configure-and-enable-encrypted-data-transmission}
 
 1.  証明書を準備します。
 
-    サーバー証明書はDM-masterとDM-workerで別々に用意することを推奨します。 2 つのコンポーネントが相互に認証できることを確認してください。 dmctl に対して 1 つのクライアント証明書を共有することを選択できます。
+    DM-master と DM-worker のサーバー証明書を別々に用意することをお勧めします。2 つのコンポーネントが相互に認証できることを確認してください。dmctl に 1 つのクライアント証明書を共有することもできます。
 
-    自己署名証明書を生成するには、 `openssl` 、 `cfssl` 、および`easy-rsa`などの`openssl`に基づくその他のツールを使用できます。
+    自己署名証明書を生成するには、 `openssl` 、 `cfssl` 、および`easy-rsa`などの`openssl`に基づいたその他のツールを使用できます。
 
-    `openssl`を選択すると[自己署名証明書の生成](/dm/dm-generate-self-signed-certificates.md)を参照できます。
+    `openssl`選択した場合は[自己署名証明書の生成](/dm/dm-generate-self-signed-certificates.md)を参照できます。
 
 2.  証明書を構成します。
 
     > **注記：**
     >
-    > 同じ証明書セットを使用するように DM マスター、DM ワーカー、および dmctl を構成できます。
+    > DM-master、DM-worker、および dmctl が同じ証明書セットを使用するように構成できます。
 
     -   DMマスター
 
-        構成ファイルまたはコマンドライン引数で構成します。
+        設定ファイルまたはコマンドライン引数で設定します。
 
         ```toml
         ssl-ca = "/path/to/ca.pem"
@@ -39,7 +39,7 @@ summary: このドキュメントは、DM 接続での暗号化されたデー�
 
     -   DMワーカー
 
-        構成ファイルまたはコマンドライン引数で構成します。
+        設定ファイルまたはコマンドライン引数で設定します。
 
         ```toml
         ssl-ca = "/path/to/ca.pem"
@@ -49,21 +49,21 @@ summary: このドキュメントは、DM 接続での暗号化されたデー�
 
     -   dmctl
 
-        DM クラスターで暗号化送信を有効にした後、dmctl を使用してクラスターに接続する必要がある場合は、クライアント証明書を指定します。例えば：
+        DM クラスターで暗号化された送信を有効にした後、dmctl を使用してクラスターに接続する必要がある場合は、クライアント証明書を指定します。例:
 
         ```bash
         ./dmctl --master-addr=127.0.0.1:8261 --ssl-ca /path/to/ca.pem --ssl-cert /path/to/client-cert.pem --ssl-key /path/to/client-key.pem
         ```
 
-### コンポーネントの呼び出し元の身元を確認する {#verify-component-caller-s-identity}
+### コンポーネント呼び出し元のIDを確認する {#verify-component-caller-s-identity}
 
-共通名は発信者の確認に使用されます。一般に、呼び出し先は、呼び出し元が提供したキー、証明書、および CA の検証に加えて、呼び出し元の ID を検証する必要があります。たとえば、DM ワーカーには DM マスターのみがアクセスでき、他の訪問者は正規の証明書を持っていてもブロックされます。
+共通名は、発信者の検証に使用されます。通常、着信側は、発信者が提供するキー、証明書、および CA を検証するだけでなく、発信者の ID も検証する必要があります。たとえば、DM-worker には DM-master のみがアクセスでき、他の訪問者は正当な証明書を持っていてもブロックされます。
 
-コンポーネントの呼び出し元の ID を検証するには、証明書の生成時に`Common Name` (CN) を使用して証明書ユーザー ID をマークし、呼び出し先の`Common Name`リストを構成して呼び出し元の ID を確認する必要があります。
+コンポーネントの呼び出し元の ID を確認するには、証明書を生成するときに`Common Name` (CN) を使用して証明書のユーザー ID をマークし、呼び出し先の`Common Name`リストを構成して呼び出し元の ID を確認する必要があります。
 
 -   DMマスター
 
-    構成ファイルまたはコマンドライン引数で構成します。
+    設定ファイルまたはコマンドライン引数で設定します。
 
     ```toml
     cert-allowed-cn = ["dm"]
@@ -71,31 +71,31 @@ summary: このドキュメントは、DM 接続での暗号化されたデー�
 
 -   DMワーカー
 
-    構成ファイルまたはコマンドライン引数で構成します。
+    設定ファイルまたはコマンドライン引数で設定します。
 
     ```toml
     cert-allowed-cn = ["dm"]
     ```
 
-### 証明書をリロードする {#reload-certificates}
+### 証明書を再読み込み {#reload-certificates}
 
-証明書とキーをリロードするには、新しい接続が作成されるたびに、DM マスター、DM ワーカー、および dmctl が現在の証明書とキー ファイルを再読み込みします。
+証明書とキーを再ロードするために、DM-master、DM-worker、および dmctl は、新しい接続が作成されるたびに現在の証明書とキー ファイルを再読み取りします。
 
-`ssl-ca` `ssl-cert`または`ssl-key`で指定されたファイルが更新されたら、DM コンポーネントを再起動して証明書とキー ファイルをリロードし、相互に再接続します。
+`ssl-ca` `ssl-cert`または`ssl-key`で指定されたファイルが更新された場合は、DM コンポーネントを再起動して証明書とキー ファイルを再読み込みし、相互に再接続します。
 
-## DM コンポーネントと上流または下流のデータベース間の暗号化されたデータ送信を有効にする {#enable-encrypted-data-transmission-between-dm-components-and-the-upstream-or-downstream-database}
+## DMコンポーネントと上流または下流のデータベース間の暗号化されたデータ転送を有効にする {#enable-encrypted-data-transmission-between-dm-components-and-the-upstream-or-downstream-database}
 
-このセクションでは、DM コンポーネントとアップストリームまたはダウンストリームのデータベース間の暗号化されたデータ送信を有効にする方法を紹介します。
+このセクションでは、DM コンポーネントと上流または下流のデータベース間の暗号化されたデータ転送を有効にする方法について説明します。
 
-### 上流データベースの暗号化されたデータ送信を有効にする {#enable-encrypted-data-transmission-for-upstream-database}
+### 上流データベースへの暗号化されたデータ転送を有効にする {#enable-encrypted-data-transmission-for-upstream-database}
 
-1.  アップストリーム データベースを構成し、暗号化サポートを有効にし、サーバー証明書を設定します。詳しい操作方法は[暗号化された接続の使用](https://dev.mysql.com/doc/refman/8.0/en/using-encrypted-connections.html)を参照してください。
+1.  アップストリームデータベースを設定し、暗号化サポートを有効にし、サーバー証明書を設定します。詳細な操作については、 [暗号化された接続の使用](https://dev.mysql.com/doc/refman/8.0/en/using-encrypted-connections.html)を参照してください。
 
-2.  ソース構成ファイルに MySQL クライアント証明書を設定します。
+2.  ソース構成ファイルで MySQL クライアント証明書を設定します。
 
     > **注記：**
     >
-    > すべての DM マスター コンポーネントと DM ワーカー コンポーネントが、指定されたパスを介して証明書とキー ファイルを読み取ることができることを確認してください。
+    > すべての DM マスターおよび DM ワーカー コンポーネントが指定されたパスを介して証明書とキー ファイルを読み取ることができることを確認します。
 
     ```yaml
     from:
@@ -105,15 +105,15 @@ summary: このドキュメントは、DM 接続での暗号化されたデー�
             ssl-key: "/path/to/mysql-key.pem"
     ```
 
-### ダウンストリーム TiDB の暗号化データ送信を有効にする {#enable-encrypted-data-transmission-for-downstream-tidb}
+### 下流のTiDBへの暗号化されたデータ転送を有効にする {#enable-encrypted-data-transmission-for-downstream-tidb}
 
-1.  暗号化された接続を使用するようにダウンストリーム TiDB を構成します。詳しい操作については[安全な接続を使用するように TiDBサーバーを構成する](/enable-tls-between-clients-and-servers.md#configure-tidb-server-to-use-secure-connections)を参照してください。
+1.  暗号化された接続を使用するようにダウンストリーム TiDB を構成します。詳細な操作については、 [安全な接続を使用するように TiDBサーバーを構成する](/enable-tls-between-clients-and-servers.md#configure-tidb-server-to-use-secure-connections)を参照してください。
 
-2.  タスク構成ファイルに TiDB クライアント証明書を設定します。
+2.  タスク構成ファイルで TiDB クライアント証明書を設定します。
 
     > **注記：**
     >
-    > すべての DM マスター コンポーネントと DM ワーカー コンポーネントが、指定されたパスを介して証明書とキー ファイルを読み取ることができることを確認してください。
+    > すべての DM マスターおよび DM ワーカー コンポーネントが指定されたパスを介して証明書とキー ファイルを読み取ることができることを確認します。
 
     ```yaml
     target-database:

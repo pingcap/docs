@@ -1,18 +1,18 @@
 ---
 title: SEQUENCES
-summary: シーケンステーブルはシーケンスに関する情報を提供します。MariaDBのシーケンス機能をモデルにしており、テーブルには11行の情報が含まれています。シーケンスを作成し、次の値をクエリしたり、すべてのシーケンスをビューしたりすることができます。SEQUENCESテーブルを使用して、シーケンスに関する情報を取得できます。
+summary: Learn the `SEQUENCES` INFORMATION_SCHEMA table.
 ---
 
 # シーケンス {#sequences}
 
-表`SEQUENCES`はシーケンスに関する情報を提供します。 [シーケンス機能](/sql-statements/sql-statement-create-sequence.md) 、MariaDB の同様の機能をモデルにしています。
+`SEQUENCES`テーブルはシーケンスに関する情報を提供します。3 [シーケンス機能](/sql-statements/sql-statement-create-sequence.md) MariaDB の同様の機能に基づいてモデル化されています。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC SEQUENCES;
 ```
 
-出力は次のとおりです。
+出力は次のようになります。
 
 ```sql
 +-----------------+--------------+------+------+---------+-------+
@@ -33,19 +33,19 @@ DESC SEQUENCES;
 11 rows in set (0.00 sec)
 ```
 
-シーケンス`test.seq`を作成し、シーケンスの次の値をクエリします。
+シーケンス`test.seq`を作成し、シーケンスの次の値を照会します。
 
 ```sql
 CREATE SEQUENCE test.seq;
-SELECT nextval(test.seq);
+SELECT NEXTVAL(test.seq);
 SELECT * FROM sequences\G
 ```
 
-出力は次のとおりです。
+出力は次のようになります。
 
 ```sql
 +-------------------+
-| nextval(test.seq) |
+| NEXTVAL(test.seq) |
 +-------------------+
 |                 1 |
 +-------------------+
@@ -58,7 +58,7 @@ SELECT * FROM sequences\G
 SELECT * FROM SEQUENCES\G
 ```
 
-出力は次のとおりです。
+出力は次のようになります。
 
 ```sql
 *************************** 1. row ***************************

@@ -1,23 +1,24 @@
 ---
 title: SHOW DATABASES | TiDB SQL Statement Reference
-summary: 現在のユーザーが権限を持つデータベースのリストを表示します。現在のユーザーがアクセスできないデータベースは、リストに表示されません。information_schemaデータベースは常にデータベースのリストの最初に表示されます。このステートメントの別名はSHOW SCHEMASです。TiDB のSHOW DATABASESステートメントは MySQL と完全な互換性があります。
+summary: An overview of the usage of SHOW DATABASES for the TiDB database.
 ---
 
-# データベースを表示する {#show-databases}
+# データベースを表示 {#show-databases}
 
-このステートメントは、現在のユーザーが権限を持つデータベースのリストを表示します。現在のユーザーがアクセスできないデータベースは、リストに表示されません。 `information_schema`データベースは常にデータベースのリストの最初に表示されます。
+このステートメントは、現在のユーザーが権限を持つデータベースのリストを表示します。現在のユーザーがアクセス権を持たないデータベースは、リストに表示されません。データベース`information_schema`は常にデータベース リストの最初に表示されます。
 
-`SHOW SCHEMAS`はこのステートメントの別名です。
+`SHOW SCHEMAS`このステートメントのエイリアスです。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
-**ShowDatabasesStmt:**
+```ebnf+diagram
+ShowDatabasesStmt ::=
+    "SHOW" "DATABASES" ShowLikeOrWhere?
 
-![ShowDatabasesStmt](/media/sqlgram/ShowDatabasesStmt.png)
-
-**ShowLikeOrWhereOpt:**
-
-![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
+ShowLikeOrWhere ::=
+    "LIKE" SimpleExpr
+|   "WHERE" Expression
+```
 
 ## 例 {#examples}
 
@@ -49,12 +50,13 @@ mysql> SHOW DATABASES;
 5 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
-TiDB の`SHOW DATABASES`ステートメントは MySQL と完全な互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) .
+TiDB の`SHOW DATABASES`ステートメントは MySQL と完全に互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) 。
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
--   [スキーマの表示](/sql-statements/sql-statement-show-schemas.md)
--   [データベースを削除](/sql-statements/sql-statement-drop-database.md)
+-   [スキーマを表示](/sql-statements/sql-statement-show-schemas.md)
+-   [データベースの削除](/sql-statements/sql-statement-drop-database.md)
 -   [データベースの作成](/sql-statements/sql-statement-create-database.md)
+-   [`INFORMATION_SCHEMA.SCHEMATA`](/information-schema/information-schema-schemata.md)

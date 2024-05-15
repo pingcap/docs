@@ -1,80 +1,80 @@
 ---
 title: TiDB Installation Packages
-summary: TiDBのバイナリパッケージは、amd64およびarm64アーキテクチャで利用できます。TiDBは2つのバイナリパッケージを提供します。TiDB-community-serverパッケージには、tidb、tikv、tiflash、pd、ctl、grafana、alertmanager、などが含まれます。TiDB-community-toolkitパッケージには、pd-recover、etcdctl、tidb-lightning、dumpling、cdc、dm、br、dba、PCC、drainerなどが含まれます。それぞれのパッケージは、バージョンやシステムのアーキテクチャによって異なります。オフラインで展開する際には、公式ダウンロードページからバイナリパッケージをダウンロードする必要があります。
+summary: Learn about TiDB installation packages and the specific components included.
 ---
 
 # TiDB インストール パッケージ {#tidb-installation-packages}
 
-[TiUP をオフラインで展開する](/production-deployment-using-tiup.md#deploy-tiup-offline)の前に、 [公式ダウンロードページ](https://en.pingcap.com/download/)で TiDB のバイナリ パッケージをダウンロードする必要があります。
+[TiUPをオフラインで展開する](/production-deployment-using-tiup.md#deploy-tiup-offline)前に、 [TiUPオフラインコンポーネントパッケージを準備する](/production-deployment-using-tiup.md#prepare-the-tiup-offline-component-package)で説明されているように TiDB のバイナリ パッケージをダウンロードする必要があります。
 
-TiDB バイナリ パッケージは、amd64 および arm64 アーキテクチャで利用できます。どちらのアーキテクチャでも、TiDB は 2 つのバイナリ パッケージ`TiDB-community-server`と`TiDB-community-toolkit`を提供します。
+TiDB バイナリ パッケージは、 amd64 および arm64 アーキテクチャで利用できます。どちらのアーキテクチャでも、TiDB は`TiDB-community-server`と`TiDB-community-toolkit` 2 つのバイナリ パッケージを提供します。
 
-`TiDB-community-server`パッケージには以下の内容が含まれます。
+`TiDB-community-server`パッケージには以下の内容が入っています。
 
-| コンテンツ                                         | 変更履歴       |
-| --------------------------------------------- | ---------- |
-| tidb-{バージョン}-linux-{arch}.tar.gz              |            |
-| tikv-{バージョン}-linux-{arch}.tar.gz              |            |
-| tiflash-{バージョン}-linux-{arch}.tar.gz           |            |
-| pd-{バージョン}-linux-{arch}.tar.gz                |            |
-| ctl-{バージョン}-linux-{arch}.tar.gz               |            |
-| grafana-{バージョン}-linux-{arch}.tar.gz           |            |
-| alertmanager-{バージョン}-linux-{arch}.tar.gz      |            |
-| blackbox_exporter-{バージョン}-linux-{arch}.tar.gz |            |
-| prometheus-{バージョン}-linux-{arch}.tar.gz        |            |
-| node_exporter-{バージョン}-linux-{arch}.tar.gz     |            |
-| tiup-linux-{arch}.tar.gz                      |            |
-| tiup-{バージョン}-linux-{arch}.tar.gz              |            |
-| local_install.sh                              |            |
-| クラスタ-{バージョン}-linux-{arch}.tar.gz              |            |
-| Insight-{バージョン}-linux-{arch}.tar.gz           |            |
-| diag-{バージョン}-linux-{arch}.tar.gz              | v6.0.0の新機能 |
-| influxdb-{バージョン}-linux-{arch}.tar.gz          |            |
-| playground-{バージョン}-linux-{arch}.tar.gz        |            |
-
-> **注記：**
->
-> `{version}`インストールするコンポーネントまたはサーバーのバージョンによって異なります。 `{arch}`システムのアーキテクチャに応じて`amd64`または`arm64`になります。
-
-`TiDB-community-toolkit`パッケージには以下の内容が含まれます。
-
-| コンテンツ                                         | 変更履歴       |
-| --------------------------------------------- | ---------- |
-| pd-recover-{バージョン}-linux-{arch}.tar.gz        |            |
-| etcdctl                                       | v6.0.0の新機能 |
-| tiup-linux-{arch}.tar.gz                      |            |
-| tiup-{バージョン}-linux-{arch}.tar.gz              |            |
-| tidb-lightning-{バージョン}-linux-{arch}.tar.gz    |            |
-| tidb-ライトニング-ctl                               |            |
-| dumpling-{バージョン}-linux-{arch}.tar.gz          |            |
-| cdc-{バージョン}-linux-{arch}.tar.gz               |            |
-| dm-{バージョン}-linux-{arch}.tar.gz                |            |
-| dm-worker-{バージョン}-linux-{arch}.tar.gz         |            |
-| dm-master-{バージョン}-linux-{arch}.tar.gz         |            |
-| dmctl-{バージョン}-linux-{arch}.tar.gz             |            |
-| br-{バージョン}-linux-{arch}.tar.gz                |            |
-| パッケージ-{バージョン}-linux-{arch}.tar.gz             |            |
-| ベンチ-{バージョン}-linux-{arch}.tar.gz               |            |
-| errdoc-{バージョン}-linux-{arch}.tar.gz            |            |
-| dba-{バージョン}-linux-{arch}.tar.gz               |            |
-| PCC-{バージョン}-linux-{arch}.tar.gz               |            |
-| ポンプ-{バージョン}-linux-{arch}.tar.gz               |            |
-| drainer-{バージョン}-linux-{arch}.tar.gz           |            |
-| binlogctl                                     | v6.0.0の新機能 |
-| 同期差分インスペクター                                   |            |
-| レパロ                                           |            |
-| アービタ                                          |            |
-| サーバー-{バージョン}-linux-{arch}.tar.gz              | v6.2.0の新機能 |
-| grafana-{バージョン}-linux-{arch}.tar.gz           | v6.2.0の新機能 |
-| alertmanager-{バージョン}-linux-{arch}.tar.gz      | v6.2.0の新機能 |
-| prometheus-{バージョン}-linux-{arch}.tar.gz        | v6.2.0の新機能 |
-| blackbox_exporter-{バージョン}-linux-{arch}.tar.gz | v6.2.0の新機能 |
-| node_exporter-{バージョン}-linux-{arch}.tar.gz     | v6.2.0の新機能 |
+| コンテンツ                                            | 変更履歴        |
+| ------------------------------------------------ | ----------- |
+| tidb-{バージョン}-linux-{アーキテクチャ}.tar.gz              |             |
+| tikv-{バージョン}-linux-{アーキテクチャ}.tar.gz              |             |
+| tiflash-{バージョン}-linux-{アーキテクチャ}.tar.gz           |             |
+| pd-{バージョン}-linux-{アーキテクチャ}.tar.gz                |             |
+| ctl-{バージョン}-linux-{アーキテクチャ}.tar.gz               |             |
+| grafana-{バージョン}-linux-{アーキテクチャ}.tar.gz           |             |
+| alertmanager-{バージョン}-linux-{アーキテクチャ}.tar.gz      |             |
+| blackbox_exporter-{バージョン}-linux-{アーキテクチャ}.tar.gz |             |
+| prometheus-{バージョン}-linux-{アーキテクチャ}.tar.gz        |             |
+| node_exporter-{バージョン}-linux-{アーキテクチャ}.tar.gz     |             |
+| tiup-linux-{arch}.tar.gz                         |             |
+| tiup-{バージョン}-linux-{アーキテクチャ}.tar.gz              |             |
+| ローカルインストール                                       |             |
+| cluster-{バージョン}-linux-{アーキテクチャ}.tar.gz           |             |
+| insight-{バージョン}-linux-{アーキテクチャ}.tar.gz           |             |
+| diag-{バージョン}-linux-{アーキテクチャ}.tar.gz              | v6.0.0 の新機能 |
+| influxdb-{バージョン}-linux-{アーキテクチャ}.tar.gz          |             |
+| プレイグラウンド-{バージョン}-linux-{アーキテクチャ}.tar.gz          |             |
 
 > **注記：**
 >
-> `{version}`インストールしているツールのバージョンによって異なります。 `{arch}`システムのアーキテクチャに応じて`amd64`または`arm64`になります。
+> `{version}` 、インストールするコンポーネントまたはサーバーのバージョンによって異なります。 `{arch}`システムのアーキテクチャによって異なり、 `amd64`または`arm64`になります。
 
-## こちらも参照 {#see-also}
+`TiDB-community-toolkit`パッケージには以下の内容が入っています。
 
-[TiUP をオフラインでデプロイ](/production-deployment-using-tiup.md#deploy-tiup-offline)
+| コンテンツ                                            | 変更履歴        |
+| ------------------------------------------------ | ----------- |
+| pd-recover-{バージョン}-linux-{アーキテクチャ}.tar.gz        |             |
+| 等価                                               | v6.0.0 の新機能 |
+| tiup-linux-{arch}.tar.gz                         |             |
+| tiup-{バージョン}-linux-{アーキテクチャ}.tar.gz              |             |
+| tidb-lightning-{バージョン}-linux-{アーキテクチャ}.tar.gz    |             |
+| tidb-ライトニング-ctl                                  |             |
+| dumpling-{バージョン}-linux-{アーキテクチャ}.tar.gz          |             |
+| cdc-{バージョン}-linux-{アーキテクチャ}.tar.gz               |             |
+| dm-{バージョン}-linux-{アーキテクチャ}.tar.gz                |             |
+| dm-worker-{バージョン}-linux-{アーキテクチャ}.tar.gz         |             |
+| dm-master-{バージョン}-linux-{アーキテクチャ}.tar.gz         |             |
+| dmctl-{バージョン}-linux-{アーキテクチャ}.tar.gz             |             |
+| br-{バージョン}-linux-{アーキテクチャ}.tar.gz                |             |
+| パッケージ-{バージョン}-linux-{アーキテクチャ}.tar.gz             |             |
+| bench-{バージョン}-linux-{アーキテクチャ}.tar.gz             |             |
+| errdoc-{バージョン}-linux-{アーキテクチャ}.tar.gz            |             |
+| dba-{バージョン}-linux-{アーキテクチャ}.tar.gz               |             |
+| PCC-{バージョン}-linux-{アーキテクチャ}.tar.gz               |             |
+| pump-{バージョン}-linux-{アーキテクチャ}.tar.gz              |             |
+| drainer-{バージョン}-linux-{アーキテクチャ}.tar.gz           |             |
+| binlogctl                                        | v6.0.0 の新機能 |
+| 同期差分インスペクター                                      |             |
+| レパロ                                              |             |
+| アービタ                                             |             |
+| サーバー-{バージョン}-linux-{アーキテクチャ}.tar.gz              | v6.2.0 の新機能 |
+| grafana-{バージョン}-linux-{アーキテクチャ}.tar.gz           | v6.2.0 の新機能 |
+| alertmanager-{バージョン}-linux-{アーキテクチャ}.tar.gz      | v6.2.0 の新機能 |
+| prometheus-{バージョン}-linux-{アーキテクチャ}.tar.gz        | v6.2.0 の新機能 |
+| blackbox_exporter-{バージョン}-linux-{アーキテクチャ}.tar.gz | v6.2.0 の新機能 |
+| node_exporter-{バージョン}-linux-{アーキテクチャ}.tar.gz     | v6.2.0 の新機能 |
+
+> **注記：**
+>
+> `{version}`インストールするツールのバージョンによって異なります。 `{arch}`システムのアーキテクチャによって異なり、 `amd64`または`arm64`になります。
+
+## 参照 {#see-also}
+
+[TiUPをオフラインでデプロイ](/production-deployment-using-tiup.md#deploy-tiup-offline)

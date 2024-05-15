@@ -1,19 +1,19 @@
 ---
 title: SHOW CREATE DATABASE
-summary: SHOW CREATE DATABASEは、既存のデータベースを再作成するための正確なSQLステートメントを示すために使用されます。SHOW CREATE SCHEMAはその同義語です。MySQLの互換性が期待されており、互換性の違いが見つかった場合はバグを報告できます。関連するトピックにはテーブルの作成、ドロップテーブル、テーブルを表示、次の列を表示があります。
+summary: An overview of the use of SHOW CREATE DATABASE in the TiDB database.
 ---
 
-# 表示 データベースの作成 {#show-create-database}
+# 表示データベースの作成 {#show-create-database}
 
-`SHOW CREATE DATABASE`は、既存のデータベースを再作成するための正確な SQL ステートメントを示すために使用されます。 `SHOW CREATE SCHEMA`はその同義語です。
+`SHOW CREATE DATABASE`は、既存のデータベースを再作成するための正確な SQL ステートメントを表示するために使用されます。2 `SHOW CREATE SCHEMA`それの同義語です。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
-**ShowCreateDatabaseStmt:**
+**データベースステートメントの作成を表示:**
 
 ```ebnf+diagram
 ShowCreateDatabaseStmt ::=
-    "SHOW" "CREATE" "DATABASE" | "SCHEMA" ("IF" "NOT" "EXISTS")? DBName
+    "SHOW" "CREATE" ("DATABASE" | "SCHEMA") ("IF" "NOT" "EXISTS")? DBName
 ```
 
 ## 例 {#examples}
@@ -52,13 +52,13 @@ SHOW CREATE SCHEMA IF NOT EXISTS test;
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
-`SHOW CREATE DATABASE`は MySQL と完全な互換性があることが期待されています。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support)を実行できます。
+`SHOW CREATE DATABASE` MySQL と完全に互換性があると予想されます。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support)実行できます。
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
 -   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
--   [ドロップテーブル](/sql-statements/sql-statement-drop-table.md)
+-   [テーブルを削除](/sql-statements/sql-statement-drop-table.md)
 -   [テーブルを表示](/sql-statements/sql-statement-show-tables.md)
--   [次の列を表示](/sql-statements/sql-statement-show-columns-from.md)
+-   [列を表示](/sql-statements/sql-statement-show-columns-from.md)

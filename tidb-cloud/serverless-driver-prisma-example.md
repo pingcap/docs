@@ -1,28 +1,74 @@
 ---
 title: TiDB Cloud Serverless Driver Prisma Tutorial
-summary: TiDB Cloudは、Prismaアダプターを提供し、サーバーレスドライバーを使用してPrismaクライアントをHTTPS経由で利用できるようにします。このチュートリアルでは、Node.js環境でPrismaアダプターを使用する方法について説明します。必要なものはNode.jsとTiDBサーバーレスクラスターです。プロジェクトを作成し、環境を設定し、スキーマを定義し、CRUD操作を実行します。エッジ環境でのPrismaアダプターの使用についても言及されています。
+summary: Learn how to use TiDB Cloud serverless driver with Prisma ORM.
 ---
 
-# TiDB CloudサーバーレスDriverPrisma チュートリアル {#tidb-cloud-serverless-driver-prisma-tutorial}
+# TiDB CloudレスDriverPrisma チュートリアル {#tidb-cloud-serverless-driver-prisma-tutorial}
 
-[プリズマ](https://www.prisma.io/docs)は、開発者が直観的、効率的、安全な方法でデータベースを操作できるようにするオープンソースの次世代 ORM (オブジェクト リレーショナル マッピング) です。 TiDB Cloudは[@tidbcloud/プリズマアダプター](https://github.com/tidbcloud/prisma-adapter)を提供し、 [TiDB Cloudサーバーレス ドライバー](/tidb-cloud/serverless-driver.md)で[プリズマクライアント](https://www.prisma.io/docs/concepts/components/prisma-client) HTTPS 経由で使用できるようにします。従来の TCP 方式と比較して、 [@tidbcloud/プリズマアダプター](https://github.com/tidbcloud/prisma-adapter)には次の利点があります。
+[プリズマ](https://www.prisma.io/docs)オープンソースの次世代 ORM (オブジェクト リレーショナル マッピング) であり、開発者が直感的、効率的、かつ安全な方法でデータベースを操作できるようにします。TiDB TiDB Cloud は[@tidbcloud/プリズマアダプタ](https://github.com/tidbcloud/prisma-adapter)を提供し、 [TiDB Cloudサーバーレス ドライバー](/tidb-cloud/serverless-driver.md)で HTTPS 経由で[プリズマクライアント](https://www.prisma.io/docs/concepts/components/prisma-client)を使用できます。従来の TCP 方式と比較して、 [@tidbcloud/プリズマアダプタ](https://github.com/tidbcloud/prisma-adapter)次の利点があります。
 
--   サーバーレス環境でのパフォーマンスの向上
--   エッジ環境で Prisma クライアントを使用できる可能性 (詳細については[#21394](https://github.com/prisma/prisma/issues/21394)を参照)
+-   サーバーレス環境での Prisma Client のパフォーマンスが向上
+-   エッジ環境で Prisma Client を使用する機能
 
-このチュートリアルでは、Prisma アダプターでTiDB Cloudサーバーレス ドライバーを使用する方法について説明します。
+このチュートリアルでは、サーバーレス環境とエッジ環境で[@tidbcloud/プリズマアダプタ](https://github.com/tidbcloud/prisma-adapter)使用する方法について説明します。
 
-## Node.js 環境で Prisma アダプターを使用する {#use-the-prisma-adapter-in-node-js-environments}
+## インストール {#install}
+
+[@tidbcloud/プリズマアダプタ](https://github.com/tidbcloud/prisma-adapter)と[TiDB Cloudサーバーレス ドライバー](/tidb-cloud/serverless-driver.md)両方をインストールする必要があります。 [ネプ](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)またはお好みのパッケージ マネージャーを使用してインストールできます。
+
+npm を例にとると、インストールには次のコマンドを実行できます。
+
+```shell
+npm install @tidbcloud/prisma-adapter
+npm install @tidbcloud/serverless
+```
+
+## <code>driverAdapters</code>有効にする {#enable-code-driveradapters-code}
+
+Prisma アダプターを使用するには、 `schema.prisma`ファイルの`driverAdapters`機能を有効にする必要があります。例:
+
+```prisma
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+}
+```
+
+## Prismaクライアントを初期化する {#initialize-prisma-client}
+
+Prisma Client を使用する前に、 `@tidbcloud/prisma-adapter`で初期化する必要があります。例:
+
+```js
+import { connect } from '@tidbcloud/serverless';
+import { PrismaTiDBCloud } from '@tidbcloud/prisma-adapter';
+import { PrismaClient } from '@prisma/client';
+
+// Initialize Prisma Client
+const connection = connect({ url: ${DATABASE_URL} });
+const adapter = new PrismaTiDBCloud(connection);
+const prisma = new PrismaClient({ adapter });
+```
+
+その後、Prisma Client からのクエリをTiDB Cloudサーバーレス ドライバーに送信して処理することができます。
+
+## Node.js環境でPrismaアダプターを使用する {#use-the-prisma-adapter-in-node-js-environments}
+
+このセクションでは、Node.js 環境で`@tidbcloud/prisma-adapter`使用する方法の例を示します。
 
 ### あなたが始める前に {#before-you-begin}
 
 このチュートリアルを完了するには、次のものが必要です。
 
 -   [Node.js](https://nodejs.org/en) &gt;= 18.0.0。
--   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)または好みのパッケージ マネージャー。
--   TiDB サーバーレス クラスター。何も持っていない場合は、 [TiDB サーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)を実行できます。
+-   [ネプ](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)またはお好みのパッケージ マネージャーを使用します。
+-   TiDB サーバーレス クラスター。ない場合は、 [TiDBサーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)使用できます。
 
-### ステップ 1. プロジェクトを作成する {#step-1-create-a-project}
+### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
 1.  `prisma-example`という名前のプロジェクトを作成します。
 
@@ -31,13 +77,13 @@ summary: TiDB Cloudは、Prismaアダプターを提供し、サーバーレス�
 
 2.  `@tidbcloud/prisma-adapter`ドライバー アダプター、 `@tidbcloud/serverless`サーバーレス ドライバー、および Prisma CLI をインストールします。
 
-    次のコマンドは、パッケージ マネージャーとして npm を使用します。 `npm install @tidbcloud/serverless`を実行すると、プロジェクト ディレクトリに`node_modules`ディレクトリと`package.json`ファイルが作成されます。
+    次のコマンドは、パッケージ マネージャーとして npm を使用します。1 を実行すると`node_modules` `npm install @tidbcloud/serverless`と`package.json`ファイルが作成されます。
 
         npm install @tidbcloud/prisma-adapter
         npm install @tidbcloud/serverless
         npm install prisma --save-dev
 
-3.  `package.json`ファイルに`type: "module"`を追加して ES モジュールを指定します。
+3.  `package.json`ファイルで、 `type: "module"`を追加して ES モジュールを指定します。
 
     ```json
     {
@@ -53,13 +99,13 @@ summary: TiDB Cloudは、Prismaアダプターを提供し、サーバーレス�
     }
     ```
 
-### ステップ 2. 環境を設定する {#step-2-set-the-environment}
+### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-1.  TiDB サーバーレス クラスターの概要ページで、右上隅の**[接続]**をクリックし、表示されたダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
+1.  TiDB Serverless クラスターの概要ページで、右上隅の**[接続]**をクリックし、表示されるダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
 
         mysql://[username]:[password]@[host]:4000/[database]?sslaccept=strict
 
-2.  プロジェクトのルート ディレクトリに`.env`という名前のファイルを作成し、次のように`DATABASE_URL`という名前の環境変数を定義し、この変数内のプレースホルダ`[]`接続文字列内の対応するパラメータに置き換えます。
+2.  プロジェクトのルート ディレクトリに`.env`という名前のファイルを作成し、次のように`DATABASE_URL`という名前の環境変数を定義して、この変数内のプレースホルダー`[]`を接続文字列内の対応するパラメーターに置き換えます。
 
     ```dotenv
     DATABASE_URL='mysql://[username]:[password]@[host]:4000/[database]?sslaccept=strict'
@@ -67,15 +113,15 @@ summary: TiDB Cloudは、Prismaアダプターを提供し、サーバーレス�
 
     > **注記：**
     >
-    > `@tidbcloud/prisma-adapter`は、HTTPS 経由の Prisma クライアントの使用のみをサポートします。 [プリズママイグレーション](https://www.prisma.io/docs/concepts/components/prisma-migrate)と[プリズマの内観](https://www.prisma.io/docs/concepts/components/introspection)では、従来の TCP 接続が引き続き使用されます。 Prisma Client のみを使用する必要がある場合は、 `DATABASE_URL` `mysql://[username]:[password]@[host]/[database]`形式に簡素化できます。
+    > `@tidbcloud/prisma-adapter` 、HTTPS 経由の Prisma Client の使用のみをサポートします。 [プリズマ移行](https://www.prisma.io/docs/concepts/components/prisma-migrate)および[プリズマ イントロスペクション](https://www.prisma.io/docs/concepts/components/introspection)では、従来の TCP 接続が引き続き使用されます。 Prisma Client のみを使用する必要がある場合は、 `DATABASE_URL` `mysql://[username]:[password]@[host]/[database]`形式に簡略化できます。
 
-3.  `dotenv`をインストールして、 `.env`ファイルから環境変数をロードします。
+3.  `.env`ファイルから環境変数を読み込むには`dotenv`インストールします。
 
         npm install dotenv
 
-### ステップ 3. スキーマを定義する {#step-3-define-your-schema}
+### ステップ3. スキーマを定義する {#step-3-define-your-schema}
 
-1.  `schema.prisma`という名前のファイルを作成します。このファイルには、 `driverAdapters`プレビュー機能を含め、 `DATABASE_URL`環境変数を参照します。ファイルの例を次に示します。
+1.  `schema.prisma`という名前のファイルを作成します。このファイルには、 `driverAdapters`プレビュー機能を含め、 `DATABASE_URL`環境変数を参照します。次にファイルの例を示します。
 
         // schema.prisma
         generator client {
@@ -108,19 +154,19 @@ summary: TiDB Cloudは、Prismaアダプターを提供し、サーバーレス�
           name  String? @db.VarChar(255)
         }
 
-3.  データベースを Prisma スキーマと同期します。 TiDB サーバーレス クラスターにデータベース テーブルを手動で作成することも、Prisma CLI を使用して次のように自動的に作成することもできます。
+3.  データベースを Prisma スキーマと同期します。TiDB Serverless クラスターにデータベース テーブルを手動で作成することも、次のように Prisma CLI を使用して自動的に作成することもできます。
 
         npx prisma db push
 
-    このコマンドは、 `@tidbcloud/prisma-adapter`使用した HTTPS 接続ではなく、従来の TCP 接続を通じて TiDB サーバーレス クラスターに`user`テーブルを作成します。これは、Prisma Migrate と同じエンジンを使用しているためです。このコマンドの詳細については、 [スキーマのプロトタイプを作成する](https://www.prisma.io/docs/concepts/components/prisma-migrate/db-push)を参照してください。
+    このコマンドは、 `@tidbcloud/prisma-adapter`を使用した HTTPS 接続ではなく、従来の TCP 接続を介して TiDB Serverless クラスターに`user`テーブルを作成します。これは、Prisma Migrate と同じエンジンを使用するためです。このコマンドの詳細については、 [スキーマのプロトタイプを作成する](https://www.prisma.io/docs/concepts/components/prisma-migrate/db-push)を参照してください。
 
-4.  Prisma クライアントを生成します。
+4.  Prisma クライアントを生成します:
 
         npx prisma generate
 
-    このコマンドは、Prisma スキーマに基づいて Prisma Client を生成します。
+    このコマンドは、Prisma スキーマに基づいて Prisma クライアントを生成します。
 
-### ステップ 4. CRUD 操作を実行する {#step-4-execute-crud-operations}
+### ステップ4. CRUD操作を実行する {#step-4-execute-crud-operations}
 
 1.  `hello-word.js`という名前のファイルを作成し、次のコードを追加して Prisma Client を初期化します。
 
@@ -140,7 +186,7 @@ summary: TiDB Cloudは、Prismaアダプターを提供し、サーバーレス�
     const prisma = new PrismaClient({ adapter });
     ```
 
-2.  Prisma Client を使用していくつかの CRUD 操作を実行します。例えば：
+2.  Prisma Client を使用していくつかの CRUD 操作を実行します。例:
 
     ```js
     // Insert
@@ -163,7 +209,7 @@ summary: TiDB Cloudは、Prismaアダプターを提供し、サーバーレス�
     })
     ```
 
-3.  Prisma Client を使用していくつかのトランザクション操作を実行します。例えば：
+3.  Prisma Client を使用していくつかのトランザクション操作を実行します。例:
 
     ```js
     const createUser1 = prisma.user.create({
@@ -198,6 +244,9 @@ summary: TiDB Cloudは、Prismaアダプターを提供し、サーバーレス�
     }
     ```
 
-## エッジ環境で Prisma アダプターを使用する {#use-the-prisma-adapter-in-edge-environments}
+## エッジ環境でPrismaアダプターを使用する {#use-the-prisma-adapter-in-edge-environments}
 
-現在、 `@tidbcloud/prisma-adapter` Vercel Edge Function や Cloudflare Workers などのエッジ環境とは互換性がありません。ただし、これらの環境をサポートする計画があります。詳細については、 [#21394](https://github.com/prisma/prisma/issues/21394)を参照してください。
+Vercel Edge FunctionsやCloudflare Workersなどのエッジ環境では、 `@tidbcloud/prisma-adapter` v5.11.0以降のバージョンを使用できます。
+
+-   [Vercel エッジ関数の例](https://github.com/tidbcloud/serverless-driver-example/tree/main/prisma/prisma-vercel-example)
+-   [Cloudflare Workersの例](https://github.com/tidbcloud/serverless-driver-example/tree/main/prisma/prisma-cloudflare-worker-example)

@@ -1,17 +1,18 @@
 ---
 title: SHOW BUILTINS
-summary: TiDBのSHOW BUILTINSは、すべての組み込み関数をリストします。このステートメントは、MySQL構文に対するTiDBの拡張機能であり、268行の結果が表示されます。
+summary: The usage of SHOW BUILTINS in TiDB.
 ---
 
 # ビルトインを表示 {#show-builtins}
 
-`SHOW BUILTINS`は、TiDB でサポートされているすべての組み込み関数をリストするために使用されます。
+`SHOW BUILTINS` 、TiDB でサポートされているすべての組み込み関数を一覧表示するために使用されます。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
-**ShowBuiltinsStmt:**
-
-![ShowBuiltinsStmt](/media/sqlgram/ShowBuiltinsStmt.png)
+```ebnf+diagram
+ShowBuiltinsStmt ::=
+    "SHOW" "BUILTINS"
+```
 
 ## 例 {#examples}
 
@@ -294,6 +295,6 @@ SHOW BUILTINS;
     +-----------------------------+
     268 rows in set (0.00 sec)
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。

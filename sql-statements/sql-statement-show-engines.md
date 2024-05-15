@@ -1,20 +1,21 @@
 ---
 title: SHOW ENGINES | TiDB SQL Statement Reference
-summary: このステートメントは、サポートされているすべてのstorageエンジンを一覧表示するために使用されます。MySQLとの互換性を維持するためにのみ含まれています。このステートメントは常に、サポートされているエンジンとしてInnoDBのみを返します。内部的には、TiDBは通常、storageエンジンとしてTiKVを使用します。
+summary: An overview of the usage of SHOW ENGINES for the TiDB database.
 ---
 
-# ショーエンジン {#show-engines}
+# エンジンを表示 {#show-engines}
 
-このステートメントは、サポートされているすべてのstorageエンジンを一覧表示するために使用されます。この構文は、MySQL との互換性を維持するためにのみ含まれています。
+このステートメントは、サポートされているすべてのstorageエンジンを一覧表示するために使用されます。この構文は、MySQL との互換性のためだけに含まれています。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
-**ShowEnginesStmt:**
+```ebnf+diagram
+ShowEnginesStmt ::=
+    "SHOW" "ENGINES" ShowLikeOrWhere?
 
-![ShowEnginesStmt](/media/sqlgram/ShowEnginesStmt.png)
-
-```sql
-SHOW ENGINES;
+ShowLikeOrWhere ::=
+    "LIKE" SimpleExpr
+|   "WHERE" Expression
 ```
 
 ## 例 {#examples}
@@ -29,6 +30,6 @@ mysql> SHOW ENGINES;
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
--   このステートメントは常に、サポートされているエンジンとして InnoDB のみを返します。内部的には、TiDB は通常、storageエンジンとして TiKV を使用します。
+-   このステートメントは、サポートされているエンジンとして常に InnoDB のみを返します。内部的には、TiDB は通常、storageエンジンとして[ティクヴ](/tikv-overview.md)を使用します。
