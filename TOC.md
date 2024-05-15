@@ -521,6 +521,7 @@
       - [Release Notes](/dm/dm-release-notes.md)
   - TiDB Lightning
     - [Overview](/tidb-lightning/tidb-lightning-overview.md)
+    - [`IMPORT INTO` vs. TiDB Lightning](/tidb-lightning/import-into-vs-tidb-lightning.md)
     - [Get Started](/get-started-with-tidb-lightning.md)
     - [Deploy TiDB Lightning](/tidb-lightning/deploy-tidb-lightning.md)
     - [Target Database Requirements](/tidb-lightning/tidb-lightning-requirements.md)
@@ -564,6 +565,7 @@
         - [Replicate Data to Pulsar](/ticdc/ticdc-sink-to-pulsar.md)
         - [Replicate Data to Storage Services](/ticdc/ticdc-sink-to-cloud-storage.md)
       - [Manage Changefeeds](/ticdc/ticdc-manage-changefeed.md)
+      - [TiCDC Client Authentication](/ticdc/ticdc-client-authentication.md)
       - [Log Filter](/ticdc/ticdc-filter.md)
       - [DDL Replication](/ticdc/ticdc-ddl.md)
       - [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)

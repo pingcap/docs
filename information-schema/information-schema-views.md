@@ -5,7 +5,7 @@ summary: Learn the `VIEWS` INFORMATION_SCHEMA table.
 
 # VIEWS
 
-The `VIEWS` table provides information about SQL views.
+The `VIEWS` table provides information about [SQL views](/views.md).
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -68,3 +68,8 @@ Fields in the `VIEWS` table are described as follows:
 * `SECURITY_TYPE`: The value of `SQL SECURITY`. The value options are `DEFINER` and `INVOKER`.
 * `CHARACTER_SET_CLIENT`: The value of the `character_set_client` session variable when the view is created.
 * `COLLATION_CONNECTION`: The value of the `collation_connection` session variable when the view is created.
+
+## See also
+
+- [`CREATE VIEW`](/sql-statements/sql-statement-create-view.md)
+- [`DROP VIEW`](/sql-statements/sql-statement-drop-view.md)

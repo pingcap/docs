@@ -34,10 +34,6 @@ Implicit defaults are defined as follows:
 
 ## Specify expressions as default values
 
-> **Warning:**
->
-> Currently, this feature is experimental. It is not recommended that you use it in production environments. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 Starting from 8.0.13, MySQL supports specifying expressions as default values in the `DEFAULT` clause. For more information, see [Explicit default handling as of MySQL 8.0.13](https://dev.mysql.com/doc/refman/8.0/en/data-type-defaults.html#data-type-defaults-explicit).
 
 Starting from v8.0.0, TiDB additionally supports specifying the following expressions as default values in the `DEFAULT` clause.
@@ -56,7 +52,3 @@ Starting from v8.0.0, TiDB additionally supports assigning default values to `BL
 ```sql
 CREATE TABLE t2 (b BLOB DEFAULT (RAND()));
 ```
-
-> **Note:**
->
-> Currently, the `ADD COLUMN` statement does not support using expressions as default values.
