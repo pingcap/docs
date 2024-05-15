@@ -1100,7 +1100,7 @@ Configuration items related to Coprocessor.
 
 ### `enable-region-bucket` <span class="version-mark">New in v6.1.0</span>
 
-+ Determines whether to divide a Region into smaller ranges called buckets. The bucket is used as the unit of the concurrent query to improve the scan concurrency. For more about the design of the bucket, refer to [Dynamic size Region](https://github.com/tikv/rfcs/blob/release-8.1/text/0082-dynamic-size-region.md).
++ Determines whether to divide a Region into smaller ranges called buckets. The bucket is used as the unit of the concurrent query to improve the scan concurrency. For more about the design of the bucket, refer to [Dynamic size Region](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md).
 + Default value: false
 
 > **Warning:**
