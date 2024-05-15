@@ -120,7 +120,6 @@ On the right pane of the endpoint details page, you can click the **Properties**
     >
     > - Path parameters can be used directly in SQL. For more information, see [Configure parameters](#configure-parameters).
 
-
 - **Endpoint URL**: (read-only) the default URL is automatically generated based on the region where the corresponding cluster is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`. To configure a custom domain for the Data App, see [Custom Domain in Data Service](/tidb-cloud/data-service-custom-domain.md).
 
 - **Request Method**: the HTTP method of the endpoint. The following methods are supported:
