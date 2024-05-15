@@ -8,7 +8,7 @@ aliases: ['/docs/dev/tikv-configuration-file/','/docs/dev/reference/configuratio
 
 <!-- markdownlint-disable MD001 -->
 
-The TiKV configuration file supports more options than command-line parameters. You can find the default configuration file in [etc/config-template.toml](https://github.com/tikv/tikv/blob/master/etc/config-template.toml) and rename it to `config.toml`.
+The TiKV configuration file supports more options than command-line parameters. You can find the default configuration file in [etc/config-template.toml](https://github.com/tikv/tikv/blob/release-8.1/etc/config-template.toml) and rename it to `config.toml`.
 
 This document only describes the parameters that are not included in command-line parameters. For more details, see [command-line parameter](/command-line-flags-for-tikv-configuration.md).
 
@@ -1100,7 +1100,7 @@ Configuration items related to Coprocessor.
 
 ### `enable-region-bucket` <span class="version-mark">New in v6.1.0</span>
 
-+ Determines whether to divide a Region into smaller ranges called buckets. The bucket is used as the unit of the concurrent query to improve the scan concurrency. For more about the design of the bucket, refer to [Dynamic size Region](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md).
++ Determines whether to divide a Region into smaller ranges called buckets. The bucket is used as the unit of the concurrent query to improve the scan concurrency. For more about the design of the bucket, refer to [Dynamic size Region](https://github.com/tikv/rfcs/blob/release-8.1/text/0082-dynamic-size-region.md).
 + Default value: false
 
 > **Warning:**

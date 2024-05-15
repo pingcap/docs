@@ -127,7 +127,7 @@ alertmanager_servers:
 >
 > - Use `.` to indicate the subcategory of the configuration, such as `log.slow-threshold`. For more formats, see [TiUP configuration template](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml).
 >
-> - For more parameter description, see [master `config.toml.example`](https://github.com/pingcap/tiflow/blob/master/dm/master/dm-master.toml) and [worker `config.toml.example`](https://github.com/pingcap/tiflow/blob/master/dm/worker/dm-worker.toml).
+> - For more parameter description, see [master `config.toml.example`](https://github.com/pingcap/tiflow/blob/release-8.1/dm/master/dm-master.toml) and [worker `config.toml.example`](https://github.com/pingcap/tiflow/blob/release-8.1/dm/worker/dm-worker.toml).
 >
 > - Make sure that the ports among the following components are interconnected:
 >     - The `peer_port` (`8291` by default) among the DM-master nodes are interconnected.

@@ -74,7 +74,7 @@ Other:
 
 ## Message format
 
-In the Simple protocol, each message contains only one event. The Simple protocol supports encoding messages in JSON and Avro formats. This document uses JSON format as an example. For Avro format messages, their fields and meanings are the same as those in JSON format messages, but the encoding format is different. For details about the Avro format, see [Simple Protocol Avro Schema](https://github.com/pingcap/tiflow/blob/master/pkg/sink/codec/simple/message.json).
+In the Simple protocol, each message contains only one event. The Simple protocol supports encoding messages in JSON and Avro formats. This document uses JSON format as an example. For Avro format messages, their fields and meanings are the same as those in JSON format messages, but the encoding format is different. For details about the Avro format, see [Simple Protocol Avro Schema](https://github.com/pingcap/tiflow/blob/release-8.1/pkg/sink/codec/simple/message.json).
 
 ### DDL
 
@@ -711,4 +711,4 @@ The following table describes the value range of the `mysqlType` field in the Ti
 
 ### Avro schema definition
 
-The Simple protocol supports outputting messages in Avro format. For details about the Avro format, see [Simple Protocol Avro Schema](https://github.com/pingcap/tiflow/blob/master/pkg/sink/codec/simple/message.json).
+The Simple protocol supports outputting messages in Avro format. For details about the Avro format, see [Simple Protocol Avro Schema](https://github.com/pingcap/tiflow/blob/release-8.1/pkg/sink/codec/simple/message.json).

@@ -80,7 +80,7 @@ On November 30, 2018, TiDB 2.1 GA is released. See the following updates in this
 
     - Support Server Side Cursor
 
-    + Add the [HTTP API](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)
+    + Add the [HTTP API](https://github.com/pingcap/tidb/blob/release-8.1/docs/tidb_http_api.md)
 
         - Scatter the distribution of table Regions in the TiKV cluster
 
@@ -116,7 +116,7 @@ On November 30, 2018, TiDB 2.1 GA is released. See the following updates in this
 
     - Add the table name and database name in the output information of `admin show ddl jobs`
 
-    - [Support using the `ddl/owner/resign` HTTP interface to release the DDL owner and start electing a new DDL owner](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)
+    - [Support using the `ddl/owner/resign` HTTP interface to release the DDL owner and start electing a new DDL owner](https://github.com/pingcap/tidb/blob/release-8.1/docs/tidb_http_api.md)
 
 + Compatibility
 
@@ -209,7 +209,7 @@ On November 30, 2018, TiDB 2.1 GA is released. See the following updates in this
 
     - Add more built-in functions
 
-    - [Add Coprocessor `ReadPool` to improve the concurrency in processing the requests](https://github.com/tikv/rfcs/blob/master/text/0010-read-pool.md)
+    - [Add Coprocessor `ReadPool` to improve the concurrency in processing the requests](https://github.com/tikv/rfcs/blob/release-8.1/text/0010-read-pool.md)
 
     - Fix the time function parsing issue and the time zone related issues
 
@@ -221,7 +221,7 @@ On November 30, 2018, TiDB 2.1 GA is released. See the following updates in this
 
     - Fold the continuous Rollback records to ensure the read performance
 
-    - [Add the `UnsafeDestroyRange` API to support to collecting space for the dropping table/index](https://github.com/tikv/rfcs/blob/master/text/0002-unsafe-destroy-range.md)
+    - [Add the `UnsafeDestroyRange` API to support to collecting space for the dropping table/index](https://github.com/tikv/rfcs/blob/release-8.1/text/0002-unsafe-destroy-range.md)
 
     - Separate the GC module to reduce the impact on write
 

@@ -303,10 +303,10 @@ The following examples cover seven common scenarios. You need to modify the conf
 
 For more configuration description, see the following configuration examples:
 
-- [TiDB `config.toml.example`](https://github.com/pingcap/tidb/blob/master/pkg/config/config.toml.example)
-- [TiKV `config.toml.example`](https://github.com/tikv/tikv/blob/master/etc/config-template.toml)
-- [PD `config.toml.example`](https://github.com/pingcap/pd/blob/master/conf/config.toml)
-- [TiFlash `config.toml.example`](https://github.com/pingcap/tiflash/blob/master/etc/config-template.toml)
+- [TiDB `config.toml.example`](https://github.com/pingcap/tidb/blob/release-8.1/pkg/config/config.toml.example)
+- [TiKV `config.toml.example`](https://github.com/tikv/tikv/blob/release-8.1/etc/config-template.toml)
+- [PD `config.toml.example`](https://github.com/pingcap/pd/blob/release-8.1/conf/config.toml)
+- [TiFlash `config.toml.example`](https://github.com/pingcap/tiflash/blob/release-8.1/etc/config-template.toml)
 
 ## Step 4. Run the deployment command
 

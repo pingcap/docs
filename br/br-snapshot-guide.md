@@ -157,7 +157,7 @@ tiup br restore full \
 
 - Statistics tables (`mysql.stat_*`). But statistics can be restored. See [Back up statistics](/br/br-snapshot-manual.md#back-up-statistics).
 - System variable tables (`mysql.tidb` and `mysql.global_variables`)
-- [Other system tables](https://github.com/pingcap/tidb/blob/master/br/pkg/restore/systable_restore.go#L31)
+- [Other system tables](https://github.com/pingcap/tidb/blob/release-8.1/br/pkg/restore/systable_restore.go#L31)
 
 ```
 +-----------------------------------------------------+
