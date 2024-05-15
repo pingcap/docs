@@ -59,11 +59,44 @@ For `[query_parameters]` in the URI, the following parameters can be configured:
 
 ### Configure sink URI for external storage
 
+When storing data in a cloud storage system, you need to set different authentication parameters depending on the cloud service provider. This section describes the authentication methods when using Amazon S3, Google Cloud Storage (GCS), and Azure Blob Storage, and how to configure accounts to access the corresponding storage services.
+
+<SimpleTab groupId="storage">
+<div label="Amazon S3" value="amazon">
+
 The following is an example configuration for Amazon S3:
 
 ```shell
 --sink-uri="s3://bucket/prefix?protocol=canal-json"
 ```
+
+Before replicating data, you need to set appropriate access permissions for the directory in Amazon S3:
+
+- Minimum permissions required by TiCDC: `s3:ListBucket`, `s3:PutObject`, and `s3:GetObject`.
+- If the changefeed configuration item `sink.cloud-storage-config.flush-concurrency` is greater than 1, which means parallel uploading of single files is enabled, you need to additionally add permissions related to [ListParts](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html):
+    - `s3:AbortMultipartUpload`
+    - `s3:ListMultipartUploadParts`
+    - `s3:ListBucketMultipartUploads`
+
+If you have not created a replication data storage directory, refer to [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) to create an S3 bucket in the specified region. If necessary, you can also create a folder in the bucket by referring to [Organize objects in the Amazon S3 console by using folders](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html).
+
+You can configure an account to access Amazon S3 in the following ways:
+
+- Method 1: Specify the access key
+
+    If you specify an access key and a secret access key, authentication is performed according to them. In addition to specifying the key in the URI, the following methods are supported:
+
+    - TiCDC reads the `$AWS_ACCESS_KEY_ID` and `$AWS_SECRET_ACCESS_KEY` environment variables.
+    - TiCDC reads the `$AWS_ACCESS_KEY` and `$AWS_SECRET_KEY` environment variables.
+    - TiCDC reads the shared credentials file in the path specified by the `$AWS_SHARED_CREDENTIALS_FILE` environment variable.
+    - TiCDC reads the shared credentials file in the `~/.aws/credentials` path.
+
+- Method 2: Access based on an IAM role
+
+    Associate an [IAM role with configured permissions to access Amazon S3](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) to the EC2 instance running the TiCDC server. After successful setup, TiCDC can directly access the corresponding directories in Amazon S3 without additional settings.
+
+</div>
+<div label="GCS" value="gcs">
 
 The following is an example configuration for GCS:
 
@@ -71,11 +104,37 @@ The following is an example configuration for GCS:
 --sink-uri="gcs://bucket/prefix?protocol=canal-json"
 ```
 
+You can configure the account used to access GCS by specifying an access key. Authentication is performed according to the specified `credentials-file`. In addition to specifying the key in the URI, the following methods are supported:
+
+- TiCDC reads the file in the path specified by the `$GOOGLE_APPLICATION_CREDENTIALS` environment variable.
+- TiCDC reads the file `~/.config/gcloud/application_default_credentials.json`.
+- TiCDC obtains credentials from the metadata server when the cluster is running in GCE or GAE.
+
+</div>
+<div label="Azure Blob Storage" value="azure">
+
 The following is an example configuration for Azure Blob Storage:
 
 ```shell
 --sink-uri="azure://bucket/prefix?protocol=canal-json"
 ```
+
+You can configure an account to access Azure Blob Storage in the following ways:
+
+- Method 1: Specify a shared access signature
+
+    If you configure `account-name` and `sas-token` in the URI, the storage account name and shared access signature token specified by this parameter are used. Because the shared access signature token has the `&` character, you need to encode it as `%26` before adding it to the URI. You can also directly encode the entire `sas-token` using percent-encoding.
+
+- Method 2: Specify the access key
+
+    If you configure `account-name` and `account-key` in the URI, the storage account name and key specified by this parameter are used. In addition to specifying the key file in the URI, TiCDC can also read the key from the environment variable `$AZURE_STORAGE_KEY`.
+
+- Method 3: Use Azure AD to restore the backup
+
+    Configure the environment variables `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET`.
+
+</div>
+</SimpleTab>
 
 > **Tip:**
 >
