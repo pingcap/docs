@@ -9,7 +9,7 @@ Many users have provided feedback that the deployment, configuration, and mainte
 
 Based on the feedback, TiDB has gradually integrated some functionalities of TiDB Lightning into the [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) SQL statement. You can directly import data by executing `IMPORT INTO`, thereby improving the efficiency of data import. In addition, `IMPORT INTO` supports some functionalities that TiDB Lightning does not, such as automatic distributed task scheduling and [TiDB Global Sort](/tidb-global-sort.md).
 
-`IMPORT INTO` is introduced in v7.2.0 and becomes generally available (GA) in v7.5.0. It will continue to be improved and optimized in future versions. Once the `IMPORT INTO` capability can fully replace TiDB Lightning, TiDB Lightning will be deprecated. At that time, relevant notification will be provided in advance in the TiDB Release Notes and documentation.
+`IMPORT INTO` is introduced in v7.2.0 and becomes generally available (GA) in v7.5.0. It will continue to be improved and optimized in future versions. Once the `IMPORT INTO` capability can fully replace TiDB Lightning, TiDB Lightning will be deprecated. At that time, relevant notification will be provided in advance in TiDB Release Notes and documentation.
 
 ## Comparison between `IMPORT INTO` and TiDB Lightning
 
