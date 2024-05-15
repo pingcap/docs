@@ -70,10 +70,10 @@ The following is an example configuration for Amazon S3:
 --sink-uri="s3://bucket/prefix?protocol=canal-json"
 ```
 
-Before replicating data, you need to set appropriate access privileges for the directory in Amazon S3:
+Before replicating data, you need to set appropriate access permissions for the directory in Amazon S3:
 
-- The minimum privileges required by TiCDC: `s3:ListBucket`, `s3:PutObject`, and `s3:GetObject`.
-- If the parameter `sink.cloud-storage-config.flush-concurrency` of changefeed is greater than 1, it means that parallel uploading of single files is enabled. In this case, you need to additionally add [ListParts](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html) privileges:
+- The minimum permissions required by TiCDC: `s3:ListBucket`, `s3:PutObject`, and `s3:GetObject`.
+- If the parameter `sink.cloud-storage-config.flush-concurrency` of changefeed is greater than 1, it means that parallel uploading of single files is enabled. In this case, you need to additionally add [ListParts](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html) permissions:
     - `s3:AbortMultipartUpload`
     - `s3:ListMultipartUploadParts`
     - `s3:ListBucketMultipartUploads`
