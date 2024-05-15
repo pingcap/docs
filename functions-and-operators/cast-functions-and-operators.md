@@ -30,25 +30,25 @@ This function is also used to create [Multi-valued indexes](/sql-statements/sql-
 
 The following types are supported:
 
-| Type                 | Description      | Can be used with multi-valued-indexes                      |
+| Type                 | Description      | Whether it can be used with multi-valued-indexes                      |
 |----------------------|------------------|------------------------------------------------------------|
 | `BINARY(n)`          | Binary string    | No                                                         |
 | `CHAR(n)`            | Character string | Yes, but only if a length is specified                     |
 | `DATE`               | Date             | Yes                                                        |
-| `DATETIME(fsp)`      | Date/Time, fsp is optional | Yes                                              |
-| `DECIMAL(n, m)`      | Decimal Number, N and M are optional and are 10 an 0 if not specified. | No   |
+| `DATETIME(fsp)`      | Date/time, where `fsp` is optional | Yes                                              |
+| `DECIMAL(n, m)`      | Decimal number, where `n` and `m` are optional and are `10` and `0` if not specified | No   |
 | `DOUBLE`             | Double precision floating point number | No                                   |
-| `FLOAT(n)`           | Floating point number, precision is optional and should be between 0 and 53. | No |
+| `FLOAT(n)`           | Floating point number, where `n` is optional and should be between `0` and `53` | No |
 | `JSON`               | JSON             | No                                                         |
 | `REAL`               | Floating point number | Yes                                                   |
-| `SIGNED [INTEGER]`   | Signed Integer   | Yes                                                        |
+| `SIGNED [INTEGER]`   | Signed integer   | Yes                                                        |
 | `TIME(fsp)`          | Time             | Yes                                                        |
-| `UNSIGNED [INTEGER]` | Unsigned Integer | Yes                                                        |
+| `UNSIGNED [INTEGER]` | Unsigned integer | Yes                                                        |
 | `YEAR`               | Year             | No                                                         |
 
 Examples:
 
-This statement converts a binary string from a HEX literal to a `CHAR`
+The following statement converts a binary string from a HEX literal to a `CHAR`.
 
 ```sql
 SELECT CAST(0x54694442 AS CHAR);
@@ -63,7 +63,7 @@ SELECT CAST(0x54694442 AS CHAR);
 1 row in set (0.0002 sec)
 ```
 
-In the following example we cast the values of the `a` attribute of the value of the JSON column to an unsigned integer. Note that casting to an array is only supported as part of an index definition for multi-valued-indexes.
+The following statement casts the values of the `a` attribute extracted from the JSON column to an unsigned array. Note that casting to an array is only supported as part of an index definition for multi-valued indexes.
 
 ```sql
 CREATE TABLE t (
