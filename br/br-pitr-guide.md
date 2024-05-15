@@ -1,7 +1,6 @@
 ---
 title: TiDB Log Backup and PITR Guide
 summary: TiDB Log Backup and PITR Guide explains how to back up and restore data using the br command-line tool. It includes instructions for starting log backup, running full backup regularly, and cleaning up outdated data. The guide also provides information on running PITR and the performance capabilities of PITR.
-aliases: ['/tidb/dev/pitr-usage']
 ---
 
 # TiDB Log Backup and PITR Guide

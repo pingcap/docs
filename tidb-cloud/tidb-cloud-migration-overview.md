@@ -1,7 +1,6 @@
 ---
 title: Migration and Import Overview
 summary: Learn an overview of data migration and import scenarios for TiDB Cloud.
-aliases: ['/tidbcloud/export-data-from-tidb-cloud']
 ---
 
 # Migration and Import Overview
