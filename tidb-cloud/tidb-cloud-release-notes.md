@@ -8,6 +8,20 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
+## May 14, 2024
+
+**General changes**
+
+- Expand the selection of time zones in the [**Time Zone**](/tidb-cloud/manage-user-access.md#set-the-time-zone-for-your-organization) section to better accommodate customers from diverse regions.
+
+- Support [creating a VPC peering](/tidb-cloud/set-up-vpc-peering-connections.md) when your VPC is in a different region from the VPC of TiDB Cloud.
+
+- [Data Service (beta)](https://tidbcloud.com/console/data-service) supports path parameters alongside query parameters.
+
+    This feature enhances resource identification with structured URLs and improves user experience, search engine optimization (SEO), and client integration, offering developers more flexibility and better alignment with industry standards.
+
+    For more information, see [Basic properties](/tidb-cloud/data-service-manage-endpoint.md#basic-properties).
+
 ## April 16, 2024
 
 **CLI changes**
