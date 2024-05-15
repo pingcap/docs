@@ -91,9 +91,9 @@ You can configure an account to access Amazon S3 in either of the following two 
     - Read the shared credentials file, with the path specified by the `$AWS_SHARED_CREDENTIALS_FILE` environment variable
     - Read the shared credentials file, with the path `~/.aws/credentials`
 
-- Method 2: Access based on the IAM Role
+- Method 2: Access based on an IAM role
 
-    Associate an [IAM role with configured privileges to access Amazon S3 ](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) to the EC2 instance running TiCDC server. After successful setup, TiCDC can directly access the corresponding backup catalog in Amazon S3 without additional setup.
+    Associate an [IAM role with configured permissions to access Amazon S3 ](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) to the EC2 instance running TiCDC server. After successful setup, TiCDC can directly access the corresponding backup catalog in Amazon S3 without additional setup.
 
 </div>
 <div label="GCS" value="gcs">
