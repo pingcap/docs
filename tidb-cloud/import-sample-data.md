@@ -7,6 +7,9 @@ summary: Learn how to import sample data into TiDB Cloud via UI.
 
 This document describes how to import the sample data into TiDB Cloud via the UI. The sample data used is the system data from Capital Bikeshare, released under the Capital Bikeshare Data License Agreement. Before importing the sample data, you need to have one TiDB cluster.
 
+<SimpleTab>
+<div label="AWS">
+
 1. Open the **Import** page for your target cluster.
 
     1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
@@ -17,12 +20,7 @@ This document describes how to import the sample data into TiDB Cloud via the UI
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-2. Configure the source data information.
-
-    <SimpleTab>
-    <div label="AWS">
-
-    On the **Import** page:
+2. Configure the source data information. On the **Import** page:
 
     - For a TiDB Dedicated cluster, click **Import Data** in the upper-right corner.
     - For a TiDB Serverless cluster, click the **import data from S3** link above the upload area.
@@ -37,11 +35,27 @@ This document describes how to import the sample data into TiDB Cloud via the UI
 
     If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
 
-    </div>
+3. You can choose to import into pre-created tables, or import schema and data from the source. When you import sample data, choose **Import schema and data from S3**.
 
-    <div label="Google Cloud">
+    - **Import into pre-created tables** allows you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. You can click **Chat2Query** in the left navigation pane to create tables. For more information about how to use Chat2Query, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md). 
+    - **Import schema and data from S3** allows you to import SQL scripts for creating a table and import corresponding table data stored in S3 into TiDB.
 
-    If your TiDB cluster is hosted by Google Cloud, click **Import Data** in the upper-right corner, and then fill in the following parameters:
+4. Click **Start Import**.
+
+</div>
+<div label="Google Cloud">
+
+1. Open the **Import** page for your target cluster.
+
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+
+        > **Tip:**
+        >
+        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+
+    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+
+2. Click **Import Data** in the upper-right corner, and then fill in the following parameters:
 
     - **Data Format**: select **SQL File**. TiDB Cloud supports importing compressed files in the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`. If you want to import compressed SQL files, name the files in the `${db_name}.${table_name}.${suffix}.sql.${compress}` format, in which `${suffix}` is optional and can be any integer such as '000001'. For example, if you want to import the `trips.000001.sql.gz` file to the `bikeshare.trips` table, you can rename the file as `bikeshare.trips.000001.sql.gz`. Note that you only need to compress the data files, not the database or table schema files. Note that you only need to compress the data files, not the database or table schema files. The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
     - **Bucket gsutil URI**: enter the sample data URI `gs://tidbcloud-samples-us-west1/`.
@@ -49,16 +63,15 @@ This document describes how to import the sample data into TiDB Cloud via the UI
 
     If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
 
-    </div>
-    </SimpleTab>
+3. You can choose to import into pre-created tables, or import schema and data from the source. When you import sample data, choose **Import schema and data from GCS**.
 
-3. You can choose to import into pre-created tables, or import schema and data from the source.
-
-    - **Import into pre-created tables** allows you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. You can click **Chat2Query** in the left navigation pane to create tables. For more information about how to use Chat2Query, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md).
-    - **Import schema and data from S3** (This field is visible only for AWS S3) allows you to import SQL scripts for creating a table and import corresponding table data stored in S3 into TiDB.
-    - **Import schema and data from GCS** (This field is visible only for GCS) allows you to import SQL scripts that create a table along with its corresponding data stored in GCS directly into TiDB.
+    - **Import into pre-created tables** allows you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. You can click **Chat2Query** in the left navigation pane to create tables. For more information about how to use Chat2Query, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md). 
+    - **Import schema and data from GCS** allows you to import SQL scripts that create a table along with its corresponding data stored in GCS directly into TiDB.
 
 4. Click **Start Import**.
+
+</div>
+</SimpleTab>
 
 When the data import progress shows **Completed**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud.
 
