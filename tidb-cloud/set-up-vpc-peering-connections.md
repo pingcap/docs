@@ -67,14 +67,14 @@ This section describes how to set up VPC peering connections on AWS. For Google 
 
     The **VPC Peering** configuration is displayed by default.
 
-4. Click **Add**, choose the AWS icon, and then fill in the required information of your existing AWS VPC:
+4. Click **Add**, choose the AWS icon, choose the **TiDB Cloud VPC Region**, and then fill in the required information of your existing AWS VPC:
 
-    - Region
+    - Your existing VPC Region
     - AWS Account ID
     - VPC ID
     - VPC CIDR
 
-    You can get these information from your VPC details on the VPC dashboard.
+    You can get these information from your VPC details on the VPC dashboard. TiDB Cloud supports creating VPC peerings between VPCs in the same region or from two different regions.
 
     ![VPC peering](/media/tidb-cloud/vpc-peering/vpc-peering-creating-infos.png)
 
@@ -145,7 +145,7 @@ Use either of the following two options to approve and configure the VPC peering
     aws ec2 describe-route-tables --region "$app_region" --filters Name=vpc-id,Values="$app_vpc_id" --query 'RouteTables[*].RouteTableId' --output text | tr "\t" "\n" | while read row
     do
         app_route_table_id="$row"
-        aws ec2 create-route --route-table-id "$app_route_table_id" --destination-cidr-block "$tidbcloud_project_cidr" --vpc-peering-connection-id "$pcx_tidb_to_app_id"
+        aws ec2 create-route --region "$app_region" --route-table-id "$app_route_table_id" --destination-cidr-block "$tidbcloud_project_cidr" --vpc-peering-connection-id "$pcx_tidb_to_app_id"
     done
     ```
 
@@ -213,13 +213,12 @@ Now you have successfully set up the VPC peering connection. Next, [connect to t
 
     The **VPC Peering** configuration is displayed by default.
 
-4. Click **Add**, choose the Google Cloud icon, and then fill in the required information of your existing Google Cloud VPC:
+4. Click **Add**, choose the Google Cloud icon, choose the **TiDB Cloud VPC Region**, and then fill in the required information of your existing Google Cloud VPC:
 
     > **Tip:**
     >
     > You can follow instructions next to the **Application Google Cloud Project ID** and **VPC Network Name** fields to find the project ID and VPC network name.
 
-    - Region
     - Application Google Cloud Project ID
     - VPC Network Name
     - VPC CIDR
