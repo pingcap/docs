@@ -18,7 +18,7 @@ The `IMPORT INTO` statement lets you import data to TiDB via the [Physical Impor
 
 > **Note:**
 >
-> Compared with [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md), `IMPORT INTO` has greatly improved in terms of deployment, resource utilization, task configuration convenience, ease of invocation and integration, automated distributed task scheduling and management, enhanced import stability based on [TiDB Global Sort](/tidb-global-sort.md), high availability, and scalability. It is recommended that you consider using `IMPORT INTO` instead of TiDB Lightning in appropriate scenarios.
+> Compared with [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md), `IMPORT INTO` can be directly executed on TiDB nodes, supports automated distributed task scheduling and [TiDB Global Sort](/tidb-global-sort.md), and offers significant improvements in deployment, resource utilization, task configuration convenience, ease of invocation and integration, high availability, and scalability. It is recommended that you consider using `IMPORT INTO` instead of TiDB Lightning in appropriate scenarios.
 
 </CustomContent>
 
