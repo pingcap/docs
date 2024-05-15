@@ -349,7 +349,7 @@ If you encounter problems when connecting to TiDB using the tools listed in this
 
 | GUI                                                       | Latest tested version | Support level | Tutorial                                                                             |
 |-----------------------------------------------------------|-----------------------|---------------|--------------------------------------------------------------------------------------|
-| [Beekeeper Studio](https://www.beekeeperstudio.io/)       | >4.2.9                | Full          |                                                                                      |
+| [Beekeeper Studio](https://www.beekeeperstudio.io/)       | 4.3.0                 | Full          | N/A                                                                                  |
 | [JetBrains DataGrip](https://www.jetbrains.com/datagrip/) | 2023.2.1              | Full          | [Connect to TiDB with JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)        |
 | [DBeaver](https://dbeaver.io/)                            | 23.0.3                | Full          | [Connect to TiDB with DBeaver](/develop/dev-guide-gui-dbeaver.md)                    |
 | [Visual Studio Code](https://code.visualstudio.com/)      | 1.72.0                | Full          | [Connect to TiDB with Visual Studio Code](/develop/dev-guide-gui-vscode-sqltools.md) |
