@@ -90,7 +90,6 @@ When Amazon S3 is used as the storage for global sorting, the performance test r
 | 40 TiB data (2.26 billion rows, 19 KiB per row) | 10 TiDB (16C32G) nodes and 20 TiKV (16C27G) nodes | 222 GiB/h |
 | 10 TiB data (565 million rows, 19 KiB per row) | 5 TiDB (16C32G) nodes and 10 TiKV (16C27G) nodes | 307 GiB/h |
 
-
 ### High availability
 
 #### `IMPORT INTO`
