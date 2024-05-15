@@ -80,13 +80,17 @@ The `ADMIN SHOW DDL JOBS` statement is used to view all the results in the curre
 - `START_TIME`: the start time of the DDL operation.
 - `END_TIME`: the end time of the DDL operation.
 - `STATE`: the state of the DDL operation. Common states include the following:
+    - `none`: indicates that the operation has not started yet.
     - `queueing`: indicates that the operation job has entered the DDL job queue but has not been executed because it is still waiting for an earlier DDL job to complete. Another reason might be that after executing the `DROP` operation, it will become the `none` state, but it will soon be updated to the `synced` state, indicating that all TiDB instances have been synchronized to that state.
     - `running`: indicates that the operation is being executed.
     - `synced`: indicates that the operation has been executed successfully and all TiDB instances have been synchronized to this state.
     - `rollback done`: indicates that the operation has failed and the rollback has been completed.
     - `rollingback`: indicates that the operation has failed and is rolling back.
     - `cancelling`: indicates that the operation is being canceled. This state only appears when you use the [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md) command to cancel the DDL job.
+    - `cancelled`: indicates that the operation has been canceled.
+    - `pausing`: indicates that the operation is being paused.
     - `paused`: indicates that the operation has been paused. This state only appears when you use the [`ADMIN PAUSED DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) command to pause the DDL job. You can use the [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md) command to resume the DDL job.
+    - `done`: indicates that the operation has been successfully executed on the owner node, but other TiDB instances have not yet synchronized the state, usually due to an uncommitted transaction that holds a metadata lock blocking the state change.
 
 </CustomContent>
 
