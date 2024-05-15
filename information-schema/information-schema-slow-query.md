@@ -5,7 +5,17 @@ summary: Learn the `SLOW_QUERY` INFORMATION_SCHEMA table.
 
 # SLOW_QUERY
 
-The `SLOW_QUERY` table provides the slow query information of the current node, which is the parsing result of the TiDB slow log file. The column names in the table are corresponding to the field names in the slow log.
+<CustomContent platform="tidb">
+
+The `SLOW_QUERY` table provides the slow query information of the current node, which is the parsing result of the TiDB [slow log file](/tidb-configuration-file.md#slow-query-file). The column names in the table are corresponding to the field names in the slow log.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+The `SLOW_QUERY` table provides the slow query information of the current node, which is the parsing result of the TiDB [slow log file](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#slow-query-file). The column names in the table are corresponding to the field names in the slow log.
+
+</CustomContent>
 
 > **Note:**
 >
