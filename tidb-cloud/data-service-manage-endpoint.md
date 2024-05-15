@@ -100,7 +100,7 @@ On the right pane of the endpoint details page, you can click the **Properties**
     >
     >    *Valid path*: ```/var/{var}``` and  ```/{var}```
     >
-    >    *Invalid path*:```/var{var}``` and ```/{var}var```
+    >    *Invalid path*: ```/var{var}``` and ```/{var}var```
     >
     > - Paths with the same method and prefix might conflict, as in the following example:
     >
@@ -117,6 +117,7 @@ On the right pane of the endpoint details page, you can click the **Properties**
     >    ```GET /var/123```
     >
     >   These two paths will not conflict because `GET /var/123` takes precedence.
+    >
     > - Path parameters can be used directly in SQL. For more information, see [Configure parameters](#configure-parameters).
 
 
