@@ -37,8 +37,8 @@ This document describes how to import the sample data into TiDB Cloud via the UI
 
 3. You can choose to import into pre-created tables, or import schema and data from the source.
 
-    - **Import into pre-created tables** allows you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. You can click **Chat2Query** in the left navigation pane to create tables. For more information about how to use Chat2Query, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md). **Do not choose this method when you import sample data.**
-    - **Import schema and data from S3** (This field is visible only for AWS S3) allows you to import SQL scripts for creating a table and import corresponding table data stored in S3 into TiDB.
+    - **Import into pre-created tables** allows you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. You can click **Chat2Query** in the left navigation pane to create tables. For more information about how to use Chat2Query, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md). 
+    - **Import schema and data from S3** (This field is visible only for AWS S3) allows you to import SQL scripts for creating a table and import corresponding table data stored in S3 into TiDB. **When you import sample data, choose this method.**
 
 4. Click **Start Import**.
 
@@ -55,7 +55,7 @@ This document describes how to import the sample data into TiDB Cloud via the UI
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-2. Configure the source data information. If your TiDB cluster is hosted by Google Cloud, click **Import Data** in the upper-right corner, and then fill in the following parameters:
+2. Configure the source data information:
 
     - **Data Format**: select **SQL File**. TiDB Cloud supports importing compressed files in the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`. If you want to import compressed SQL files, name the files in the `${db_name}.${table_name}.${suffix}.sql.${compress}` format, in which `${suffix}` is optional and can be any integer such as '000001'. For example, if you want to import the `trips.000001.sql.gz` file to the `bikeshare.trips` table, you can rename the file as `bikeshare.trips.000001.sql.gz`. Note that you only need to compress the data files, not the database or table schema files. Note that you only need to compress the data files, not the database or table schema files. The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
     - **Bucket gsutil URI**: enter the sample data URI `gs://tidbcloud-samples-us-west1/`.
@@ -65,8 +65,8 @@ This document describes how to import the sample data into TiDB Cloud via the UI
 
 3. You can choose to import into pre-created tables, or import schema and data from the source.
 
-    - **Import into pre-created tables** allows you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. You can click **Chat2Query** in the left navigation pane to create tables. For more information about how to use Chat2Query, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md). **Do not choose this method when you import sample data.**
-    - **Import schema and data from GCS** (This field is visible only for GCS) allows you to import SQL scripts that create a table along with its corresponding data stored in GCS directly into TiDB.
+    - **Import into pre-created tables** allows you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. You can click **Chat2Query** in the left navigation pane to create tables. For more information about how to use Chat2Query, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md). 
+    - **Import schema and data from GCS** (This field is visible only for GCS) allows you to import SQL scripts that create a table along with its corresponding data stored in GCS directly into TiDB. **When you import sample data, choose this method.**
 
 4. Click **Start Import**.
 
