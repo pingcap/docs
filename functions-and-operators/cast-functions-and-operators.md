@@ -77,8 +77,8 @@ INSERT INTO t VALUES (3, JSON_OBJECT('a',JSON_ARRAY(7,8,9)));
 ANALYZE TABLE t;
 ```
 
-```
-mysql> EXPLAIN SELECT * FROM t WHERE 1 MEMBER OF(j->'$.a')\G
+```sql
+ EXPLAIN SELECT * FROM t WHERE 1 MEMBER OF(j->'$.a')\G
 *************************** 1. row ***************************
            id: IndexMerge_10
       estRows: 2.00
