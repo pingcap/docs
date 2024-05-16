@@ -65,7 +65,7 @@ To get the RUs and storage used by your cluster, view the **Usage this month** p
 
 ### How can I optimize my workload to minimize the number of RUs consumed?
 
-Ensure that your queries have been carefully optimized for optimal performance by following the guidelines in [Optimizing SQL Performance](/develop/dev-guide-optimize-sql-overview.md). In addition, minimizing the amount of egress traffic is also crucial for reducing RUs consumption. To achieve this, it is recommended to return only the necessary columns and rows in your query, which in turn helps reduce network egress traffic. This can be achieved by carefully selecting and filtering the columns and rows to be returned, thereby optimizing network utilization.
+Ensure that your queries have been carefully optimized for optimal performance by following the guidelines in [Optimizing SQL Performance](/develop/dev-guide-optimize-sql-overview.md). To find out what SQL statements that cost most RUs, Go to **Diagnosis > Statements**, where you can observe SQL execution and find out the top statements order by **Total RU** or **Mean RU**. For more information, see [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis). In addition, minimizing the amount of egress traffic is also crucial for reducing RUs consumption. To achieve this, it is recommended to return only the necessary columns and rows in your query, which in turn helps reduce network egress traffic. This can be achieved by carefully selecting and filtering the columns and rows to be returned, thereby optimizing network utilization.
 
 ### How storage is metered for TiDB Serverless？
 
