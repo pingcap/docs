@@ -1,6 +1,5 @@
 ---
 title: TiDB 3.0 GA Release Notes
-aliases: ['/docs/dev/releases/release-3.0-ga/','/docs/dev/releases/3.0-ga/']
 summary: TiDB 3.0 GA was released on June 28, 2019, with improved stability, usability, and performance. New features include Window Functions, Views, partitioned tables, and the plugin framework. The SQL Optimizer has been optimized for better performance, and DDL now supports fast recovery of mistakenly deleted tables. TiKV now supports distributed GC, multi-thread Raftstore, and batch receiving and sending Raft messages. Tools like TiDB Lightning and TiDB Binlog have also been enhanced with new features and performance improvements. The TiDB Ansible has been upgraded to support deployment and operations for TiDB Lightning, and to optimize monitoring components.
 ---
 

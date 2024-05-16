@@ -1,7 +1,6 @@
 ---
 title: TLS Connections to TiDB Serverless
 summary: Introduce TLS connections in TiDB Serverless.
-aliases: ['/tidbcloud/secure-connections-to-serverless-tier-clusters']
 ---
 
 # TLS Connections to TiDB Serverless
