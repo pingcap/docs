@@ -136,5 +136,7 @@ As shown in the preceding diagram, the execution of tasks in the DXF is mainly h
 </CustomContent>
 
 [`ADD INDEX`]: </sql-statements/sql-statement-add-index.md>
+
 [`IMPORT INTO`]: </sql-statements/sql-statement-import-into.md>
+
 [`tidb_service_scope`]: </system-variables.md#tidb_service_scope-new-in-v740>
