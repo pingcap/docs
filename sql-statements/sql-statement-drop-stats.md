@@ -18,6 +18,38 @@ TableName ::=
     Identifier ('.' Identifier)?
 ```
 
+## Usage
+
+The following statement deletes all statistics of `TableName`. If a partitioned table is specified, this statement deletes statistics of all partitions in this table as well as [GlobalStats generated in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
+
+```sql
+DROP STATS TableName
+```
+
+```
+Query OK, 0 rows affected (0.00 sec)
+```
+
+The following statement only deletes statistics of the specified partitions in `PartitionNameList`.
+
+```sql
+DROP STATS TableName PARTITION PartitionNameList;
+```
+
+```
+Query OK, 0 rows affected (0.00 sec)
+```
+
+The following statement only deletes GlobalStats generated in dynamic pruning mode of the specified table.
+
+```sql
+DROP STATS TableName GLOBAL;
+```
+
+```
+Query OK, 0 rows affected (0.00 sec)
+```
+
 ## Examples
 
 ```sql
@@ -56,36 +88,6 @@ SHOW STATS_META WHERE db_name='test' and table_name='t';
 ```
 Empty set (0.00 sec)
 ```
-
-```sql
-DROP STATS TableName
-```
-
-```
-Query OK, 0 rows affected (0.00 sec)
-```
-
-The preceding statement deletes all statistics of `TableName`. If a partitioned table is specified, this statement will delete statistics of all partitions in this table as well as GlobalStats generated in dynamic pruning mode.
-
-```sql
-DROP STATS TableName PARTITION PartitionNameList;
-```
-
-```
-Query OK, 0 rows affected (0.00 sec)
-```
-
-This preceding statement only deletes statistics of the specified partitions in `PartitionNameList`.
-
-```sql
-DROP STATS TableName GLOBAL;
-```
-
-```
-Query OK, 0 rows affected (0.00 sec)
-```
-
-The preceding statement only deletes GlobalStats generated in dynamic pruning mode of the specified table.
 
 ## MySQL compatibility
 
