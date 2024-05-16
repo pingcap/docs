@@ -5,7 +5,9 @@ summary: An overview of the usage of SHOW COLUMN_STATS_USAGE for TiDB database.
 
 # SHOW COLUMN_STATS_USAGE
 
-The `SHOW COLUMN_STATS_USAGE` statement returns the following 6 columns:
+The `SHOW COLUMN_STATS_USAGE` statement shows the last usage time and collection time of column statistics. You can also use it to locate `PREDICATE COLUMNS` and columns on which statistics have been collected.
+
+Currently, the `SHOW COLUMN_STATS_USAGE` statement returns the following columns:
 
 | Column name | Description            |
 | -------- | ------------- |
