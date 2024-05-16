@@ -10,6 +10,8 @@ The `IMPORT INTO` statement lets you import data to TiDB via the [Physical Impor
 - `IMPORT INTO ... FROM FILE`: imports data files in formats such as `CSV`, `SQL`, and `PARQUET` into an empty table in TiDB.
 - `IMPORT INTO ... FROM SELECT`: imports the query result of a `SELECT` statement into an empty table in TiDB. You can also use it to import historical data queried with [`AS OF TIMESTAMP`](/as-of-timestamp.md).
 
+The [`TiDB Distributed eXecution Framework (DXF)`](/tidb-distributed-execution-framework.md) can be used to speedup the operation of this statement.
+
 <CustomContent platform="tidb">
 
 > **Note:**
@@ -360,3 +362,4 @@ This statement is a TiDB extension to MySQL syntax.
 
 * [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md)
 * [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
+* [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md)
