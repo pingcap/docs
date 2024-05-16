@@ -9,7 +9,7 @@ The `SHOW STATS_HEALTHY` statement shows an estimation of how accurate statistic
 
 The health of a table can be improved by running the [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) statement. `ANALYZE` runs automatically when the health drops below the [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio) threshold.
 
-Currently, the `SHOW STATS_HEALTHY` statement outputs 4 columns:
+Currently, the `SHOW STATS_HEALTHY` statement returns the following columns:
 
 | Column name | Description            |
 | -------- | ------------- |

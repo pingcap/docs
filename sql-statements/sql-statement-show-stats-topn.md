@@ -5,7 +5,9 @@ summary: An overview of the usage of SHOW STATS_TOPN for TiDB database.
 
 # SHOW STATS_TOPN
 
-Currently, the `SHOW STATS_TOPN` statement returns the following 7 columns:
+The `SHOW STATS_TOPN` statement shows the Top-N information in [statistics](/statistics.md).
+
+Currently, the `SHOW STATS_TOPN` statement returns the following columns:
 
 | Column name | Description |
 | ---- | ----|

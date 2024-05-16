@@ -8,7 +8,7 @@ aliases: ['/docs/dev/sql-statements/sql-statement-show-histograms/','/tidb/dev/s
 
 This statement shows the histogram information collected by the [`ANALYZE` statement](/sql-statements/sql-statement-analyze-table.md) as part of database [statistics](/statistics.md).
 
-Currently, the `SHOW STATS_HISTOGRAMS` statement outputs 15 columns:
+Currently, the `SHOW STATS_HISTOGRAMS` statement returns the following columns:
 
 | Column name | Description            |
 | -------- | ------------- |

@@ -5,9 +5,9 @@ summary: An overview of the usage of SHOW STATS_BUCKETS for TiDB database.
 
 # SHOW STATS_BUCKETS
 
-This statement returns information about all the buckets.
+The `SHOW STATS_BUCKETS` statement shows the bucket information in [statistics](/statistics.md).
 
-Currently, the `SHOW STATS_BUCKETS` statement returns the following 11 columns:
+Currently, the `SHOW STATS_BUCKETS` statement returns the following columns:
 
 | Column name | Description   |
 | :-------- | :------------- |
