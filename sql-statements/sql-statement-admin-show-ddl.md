@@ -81,7 +81,7 @@ The `ADMIN SHOW DDL JOBS` statement is used to view all the results in the curre
 - `END_TIME`: the end time of the DDL operation.
 - `STATE`: the state of the DDL operation. Common states include the following:
     - `none`: indicates that the operation has not started yet.
-    - `queueing`: indicates that the operation job has entered the DDL job queue but has not been executed because it is still waiting for an earlier DDL job to complete. Another reason might be that after executing the `DROP` operation, it will become the `none` state, but it will soon be updated to the `synced` state, indicating that all TiDB instances have been synchronized to that state.
+    - `queueing`: indicates that the operation job has entered the DDL job queue but has not been executed because it is still waiting for an earlier DDL job to complete. Another reason might be that after executing the `DROP` operation, it will become the `done` state, but it will soon be updated to the `synced` state, indicating that all TiDB instances have been synchronized to that state.
     - `running`: indicates that the operation is being executed.
     - `synced`: indicates that the operation has been executed successfully and all TiDB instances have been synchronized to this state.
     - `rollback done`: indicates that the operation has failed and the rollback has been completed.
