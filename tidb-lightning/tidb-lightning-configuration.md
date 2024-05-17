@@ -129,8 +129,8 @@ driver = "file"
 # - "": in the physical import mode, TiDB Lightning does not detect or handle conflicting data. If the source file contains conflicting primary or unique key records, the subsequent step reports an error. In the logical import mode, TiDB Lightning converts the "" strategy to the "error" strategy for processing.
 # - "error": when detecting conflicting primary or unique key records in the imported data, TiDB Lightning terminates the import and reports an error.
 # - "replace": when encountering conflicting primary or unique key records, TiDB Lightning retains the latest data and overwrites the old data.
-#              The conflicting data are recorded in the `lightning_task_info.conflict_error_v2` table (recording conflicting data detected by post-import conflict detection in the physical import mode) and the `conflict_records` table (recording conflicting data detected by preprocess conflict detection in both logical and physical import modes) of the target TiDB cluster.
-#              If you set `conflict.strategy = "replace"` in physical import mode, the conflicting data can be checked in the `lightning_task_info.conflict_view` view.
+#              The conflicting data are recorded in the `lightning_task_info.conflict_view` view of the target TiDB cluster.
+#              If the value for column is_precheck_conflict is 0, it stands for conflicting data detected by post-import conflict detection in the physical import mode; If the value for column is_precheck_conflict is 1, it stands for conflicting data detected by preprocess conflict detection in both logical and physical import modes.
 #              You can manually insert the correct records into the target table based on your application requirements. Note that the target TiKV must be v5.2.0 or later versions.
 # - "ignore": when encountering conflicting primary or unique key records, TiDB Lightning retains the old data and ignores the new data. This option can only be used in the logical import mode.
 strategy = ""
@@ -138,7 +138,7 @@ strategy = ""
 # precheck-conflict-before-import = false
 # Controls the maximum number of conflict errors that can be handled when strategy is "replace" or "ignore". You can set it only when the strategy is "replace" or "ignore". The default value is 10000. If you set a value larger than 10000, the import process might experience performance degradation.
 # threshold = 10000
-# Controls the maximum number of records in the `conflict_records` table. The default value is 10000. 
+# Controls the maximum number of records in the `conflict_records` table. The default value is 10000.
 # Starting from v8.1.0, there is no need to configure `max-record-rows` manually, because TiDB Lightning automatically assigns the value of `max-record-rows` with the value of `threshold`, regardless of the user input. `max-record-rows` will be deprecated in a future release.
 # In the physical import mode, if the strategy is "replace", the conflict records that are overwritten are recorded.
 # In the logical import mode, if the strategy is "ignore", the conflict records that are ignored are recorded; if the strategy is "replace", the conflict records are not recorded.
