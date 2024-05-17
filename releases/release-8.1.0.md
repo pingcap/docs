@@ -166,6 +166,10 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 >
 > This section provides compatibility changes you need to know when you upgrade from v8.0.0 to the current version (v8.1.0). If you are upgrading from v7.6.0 or earlier versions to the current version, you might also need to check the compatibility changes introduced in intermediate versions.
 
+### Behavior changes
+
+* In earlier versions, TiDB Lightning treats the configuration item `tidb.tls` values `"false"` and `""` the same, as well as `"skip-verify"` and `"preferred"`. Starting from v8.1.0, TiDB Lightning distinguishes the behavior of `"false"`, `""`, `"skip-verify"`, and `"preferred"` for `tidb.tls`. For more information, see [TiDB Lightning configuration](https://chatgpt.com/tidb-lightning-configuration.md).
+
 ### System variables
 
 | Variable name | Change type | Description |
@@ -295,6 +299,8 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
     - Fix the issue that TiFlash might return transiently incorrect results in high-concurrency read scenarios [#8845](https://github.com/pingcap/tiflash/issues/8845) @[JinheLin](https://github.com/JinheLin)
     - Fix the issue that in the disaggregated storage and compute architecture, the disk `used_size` metric displayed in Grafana is incorrect after you modify the value of the `storage.remote.cache.capacity` configuration item for TiFlash compute nodes [#8920](https://github.com/pingcap/tiflash/issues/8920) @[JinheLin](https://github.com/JinheLin)
     - Fix the issue that TiFlash metadata might become corrupted and cause the process to panic when upgrading a cluster from a version earlier than v6.5.0 to v6.5.0 or later [#9039](https://github.com/pingcap/tiflash/issues/9039) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix the issue that TiFlash might panic when the compute node process is stopped in the disaggregated storage and compute architecture [#8860](https://github.com/pingcap/tiflash/issues/8860) @[guo-shaoge](https://github.com/guo-shaoge)
+    - Fix the issue that TiFlash might throw an error when executing queries containing the virtual generated column [#8787](https://github.com/pingcap/tiflash/issues/8787) @[guo-shaoge](https://github.com/guo-shaoge)
 
 + Tools
 
@@ -311,6 +317,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
         - Fix the unstable test case `TestGetMergeRegionSizeAndCount` [#52095](https://github.com/pingcap/tidb/issues/52095) @[3pointer](https://github.com/3pointer)
         - Fix the unstable integration test `br_tikv_outage` [#52673](https://github.com/pingcap/tidb/issues/52673) @[Leavrth](https://github.com/Leavrth)
         - Fix the issue that the test case `TestGetTSWithRetry` takes too long to execute [#52547](https://github.com/pingcap/tidb/issues/52547) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that TiKV might panic when resuming a paused log backup task with unstable network connections to PD [#17020](https://github.com/tikv/tikv/issues/17020) @[YuJuncen](https://github.com/YuJuncen)
 
     + TiCDC
 
