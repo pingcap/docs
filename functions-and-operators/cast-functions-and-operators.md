@@ -29,17 +29,17 @@ This function is also used to create [Multi-valued indexes](/sql-statements/sql-
 
 The following types are supported:
 
-| Type                 | Description      | Whether it can be used with multi-valued-indexes                      |
+| Type                 | Description      | Whether it can be used with multi-valued indexes                      |
 |----------------------|------------------|------------------------------------------------------------|
 | `BINARY(n)`          | Binary string    | No                                                         |
 | `CHAR(n)`            | Character string | Yes, but only if a length is specified                     |
 | `DATE`               | Date             | Yes                                                        |
 | `DATETIME(fsp)`      | Date/time, where `fsp` is optional | Yes                                              |
 | `DECIMAL(n, m)`      | Decimal number, where `n` and `m` are optional and are `10` and `0` if not specified | No   |
-| `DOUBLE`             | Double precision floating point number | No                                   |
-| `FLOAT(n)`           | Floating point number, where `n` is optional and should be between `0` and `53` | No |
+| `DOUBLE`             | Double precision floating-point number | No                                   |
+| `FLOAT(n)`           | Floating-point number, where `n` is optional and should be between `0` and `53` | No |
 | `JSON`               | JSON             | No                                                         |
-| `REAL`               | Floating point number | Yes                                                   |
+| `REAL`               | Floating-point number | Yes                                                   |
 | `SIGNED [INTEGER]`   | Signed integer   | Yes                                                        |
 | `TIME(fsp)`          | Time             | Yes                                                        |
 | `UNSIGNED [INTEGER]` | Unsigned integer | Yes                                                        |
