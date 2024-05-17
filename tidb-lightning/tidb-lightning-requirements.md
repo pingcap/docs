@@ -23,7 +23,7 @@ Based on the import mode and features enabled, the target database users should 
       <td rowspan="2">Mandatory</td>
       <td rowspan="2">Basic functions</td>
       <td>Target table</td>
-      <td>CREATE, SELECT, INSERT, UPDATE, DELETE, DROP, ALTER</td>
+      <td>CREATE, SELECT, INSERT, UPDATE, DELETE, DROP, ALTER, REFERENCES</td>
       <td>DROP is required only when tidb-lightning-ctl runs the checkpoint-destroy-all command</td>
    </tr>
    <tr>
@@ -76,6 +76,10 @@ Based on the import mode and features enabled, the target database users should 
       <td>Required when checkpoint information is stored in databases, instead of files</td>
    </tr>
 </table>
+
+> **Note:**
+>
+> If you have not assigned the `REFERENCES` privilege to the downstream database user, you can manually create the target table in the downstream database in advance to ensure a smooth data import.
 
 ## Storage space of the target database
 
