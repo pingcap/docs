@@ -79,7 +79,9 @@ Based on the import mode and features enabled, the target database users should 
 
 > **Note:**
 >
-> If you have not granted the `REFERENCES` privilege to the downstream database user, you can manually create the target table in the downstream database in advance to ensure smooth data import.
+> 
+> - If the target table does not use foreign keys, the `REFERENCES` privilege is not required.
+> - If you have not granted the `REFERENCES` privilege to the downstream database user, you can manually create the target table in the downstream database in advance to ensure smooth data import.
 
 ## Storage space of the target database
 
