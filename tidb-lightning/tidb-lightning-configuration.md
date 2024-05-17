@@ -269,11 +269,11 @@ sql-mode = "ONLY_FULL_GROUP_BY,NO_AUTO_CREATE_USER"
 max-allowed-packet = 67_108_864
 
 # Whether to use TLS for SQL connections. Valid values are:
-#  * ""            - force TLS (same as "cluster") if [tidb.security] section is populated, otherwise same as "false"
-#  * "false"       - disable TLS
+#  * ""            - force TLS (same as "cluster") if [tidb.security] section is populated, otherwise same as "false".
+#  * "false"       - same as "".
 #  * "cluster"     - force TLS and verify the server's certificate with the CA specified in the [tidb.security] section
-#  * "skip-verify" - force TLS but do not verify the server's certificate (insecure!)
-#  * "preferred"   - same as "skip-verify", but if the server does not support TLS, fallback to unencrypted connection
+#  * "skip-verify" - force TLS but do not verify the server's certificate (insecure!). If the server does not support TLS, fallback to unencrypted connection.
+#  * "preferred"   - same as "skip-verify". 
 # tls = ""
 
 # Specifies certificates and keys for TLS-enabled MySQL connections.
