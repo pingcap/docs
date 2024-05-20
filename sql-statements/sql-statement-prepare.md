@@ -18,6 +18,12 @@ PrepareSQL ::=
 |   UserVariable
 ```
 
+> **Note:**
+>
+> For each `PREPARE` statement, the maximum number of placeholders is 65535.
+
+To limit the number of `PREPARE` statements in the current TiDB instance, you can use the [`max_prepared_stmt_count`](/system-variables.md#max_prepared_stmt_count) system variable.
+
 ## Examples
 
 ```sql
