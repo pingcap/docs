@@ -379,11 +379,11 @@ sql-mode = "ONLY_FULL_GROUP_BY,NO_AUTO_CREATE_USER"
 max-allowed-packet = 67_108_864
 
 # Whether to use TLS for SQL connections. Valid values are:
-#  * ""            - force TLS (same as "cluster") if [tidb.security] section is populated, otherwise same as "false"
-#  * "false"       - disable TLS
-#  * "cluster"     - force TLS and verify the server's certificate with the CA specified in the [tidb.security] section
-#  * "skip-verify" - force TLS but do not verify the server's certificate (insecure!)
-#  * "preferred"   - same as "skip-verify", but if the server does not support TLS, fallback to unencrypted connection
+#  - "": if configuration items in the [tidb.security] section are configured, TiDB Lightning requires TLS for SQL connections (same behavior as "cluster"). Otherwise, it uses an unencrypted connection.
+#  - "false": same behavior as "".
+#  - "cluster": requires TLS and verifies the server's certificate with the CA specified in the [tidb.security] section.
+#  - "skip-verify": requires TLS but does not verify the server's certificate (insecure). If the server does not support TLS, the connection falls back to an unencrypted state.
+#  - "preferred": same behavior as "skip-verify".
 # tls = ""
 
 # Specifies certificates and keys for TLS-enabled MySQL connections.
