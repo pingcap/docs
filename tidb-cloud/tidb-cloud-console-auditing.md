@@ -121,7 +121,7 @@ The console audit logs record various user activities on the TiDB Cloud console 
 | PauseCluster                   | Pause a cluster                                                                  |
 | ResumeCluster                  | Resume a cluster                                                                 |
 | ScaleCluster                   | Scale a cluster                                                                  |
-| DownloadTiDBClusterCA          | Download TiDB cluster CA certificate                                             |
+| DownloadTiDBClusterCA          | Download CA cert certificate                                             |
 | OpenWebSQLConsole              | Connect to a TiDB cluster through Web SQL                                        |
 | SetRootPassword                | Set the root password of a TiDB cluster                                          |
 | UpdateIPAccessList             | Update the IP access list of a TiDB cluster                                      |
