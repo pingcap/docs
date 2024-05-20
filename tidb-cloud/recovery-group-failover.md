@@ -5,7 +5,7 @@ summary: Learn how to use a Recovery Group to Failover and Reprotect databases b
 
 # Failover and Reprotect Databases
 
-Databases that are part of a replication group are replicated from one cluster to another (typically in a different region of the cloud service provider).
+Databases that are part of a recovery group are replicated from one cluster to another (typically in a different region of the cloud service provider).
 
 The **Failover** action promotes the replicated copy of the databases at the secondary region to be the new primary copy. Ensuring ongoing availability in the event of a regional outage.
 
