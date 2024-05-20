@@ -66,7 +66,6 @@ The console audit logs record various user activities on the TiDB Cloud console 
 >
 > Currently, most event types on the TiDB Cloud console can be audited, and you can find them in the following table. For the remaining event types that are not covered yet, TiDB Cloud will continuously work on including them as well.
 
-<<<<<<< HEAD
 | Console audit event type       | Description                                                      |
 |--------------------------------|------------------------------------------------------------------|
 | CreateOrganization             | Create an organization                                           |
@@ -122,7 +121,7 @@ The console audit logs record various user activities on the TiDB Cloud console 
 | PauseCluster                   | Pause a cluster                                                  |
 | ResumeCluster                  | Resume a cluster                                                 |
 | ScaleCluster                   | Scale a cluster                                                  |
-| DownloadTiDBClusterCA          | Download TiDB cluster CA certificate                             |
+| DownloadTiDBClusterCA          | Download CA certificate                             |
 | OpenWebSQLConsole              | Connect to a TiDB cluster through Web SQL                        |
 | SetRootPassword                | Set the root password of a TiDB cluster                          |
 | UpdateIPAccessList             | Update the IP access list of a TiDB cluster                      |
@@ -154,97 +153,6 @@ The console audit logs record various user activities on the TiDB Cloud console 
 | CreateBranch                   | Create a TiDB Serverless branch                                  |
 | DeleteBranch                   | Delete a TiDB Serverless branch                                  |
 | SetBranchRootPassword          | Set root password for a TiDB Serverless branch                   |
-=======
-| Console audit event type       | Description                                                                      |
-|--------------------------------|----------------------------------------------------------------------------------|
-| CreateOrganization             | Create an organization                                                           |
-| LoginOrganization              | Log in to an organization                                                        |
-| SwitchOrganization             | Switch from the current organization to another organization                     |
-| LogoutOrganization             | Log out from an organization                                                     |
-| InviteUserToOrganization       | Invite a user to join the organization                                           |
-| DeleteInvitationToOrganization | Delete a user's invitation to join the organization                              |
-| ResendInvitationToOrganization | Resend an invitation for a user to join the organization                         |
-| ConfirmJoinOrganization        | The invited user confirms joining the organization                               |
-| DeleteUserFromOrganization     | Delete a joined user from the organization                                       |
-| UpdateUserRoleInOrganization   | Update the role of a user in the organization                                    |
-| CreateAPIKey                   | Create an API Key                                                                |
-| EditAPIKey                     | Edit an API Key                                                                  |
-| DeleteAPIKey                   | Delete an API Key                                                                |
-| UpdateTimezone                 | Update the time zone of your organization                                        |
-| ShowBill                       | Show organization bill                                                           |
-| DownloadBill                   | Download organization bill                                                       |
-| ShowCredits                    | Show organization credits                                                        |
-| AddPaymentCard                 | Add a payment card                                                               |
-| UpdatePaymentCard              | Update a payment card                                                            |
-| DeletePaymentCard              | Delete a payment card                                                            |
-| SetDefaultPaymentCard          | Set a default payment card                                                       |
-| EditBillingProfile             | Edit billing profile information                                                 |
-| ContractAction                 | Organize contract-related activities                                             |
-| EnableConsoleAuditLog          | Enable console audit logging                                                     |
-| ShowConsoleAuditLog            | Show console audit logs                                                          |
-| InviteUserToProject            | Invite a user to join a project                                                  |
-| DeleteInvitationToProject      | Delete a user's invitation to join the project                                   |
-| ResendInvitationToProject      | Resend an invitation for a user to join the project                              |
-| ConfirmJoinProject             | The invited user confirms joining the project                                    |
-| DeleteUserFromProject          | Delete a joined user from the project                                            |
-| CreateProject                  | Create a project                                                                 |
-| CreateProjectCIDR              | Create a new project CIDR                                                        |
-| CreateAWSVPCPeering            | Create an AWS VPC Peering                                                        |
-| DeleteAWSVPCPeering            | Delete an AWS VPC Peering                                                        |
-| CreateGCPVPCPeering            | Create a Google Cloud VPC Peering                                                         |
-| DeleteGCPVPCPeering            | Delete a Google Cloud VPC Peering                                                         |
-| CreatePrivateEndpointService   | Create private endpoint service                                                  |
-| DeletePrivateEndpointService   | Delete private endpoint service                                                  |
-| CreateAWSPrivateEndPoint       | Create an AWS private endpoint                                                   |
-| DeleteAWSPrivateEndPoint       | Delete AWS private endpoint                                                      |
-| SubscribeAlerts                | Subscribe alerts                                                                 |
-| UnsubscribeAlerts              | Unsubscribe alerts                                                               |
-| CreateDatadogIntegration       | Create datadog integration                                                       |
-| DeleteDatadogIntegration       | Delete datadog integration                                                       |
-| CreateVercelIntegration        | Create vercel integration                                                        |
-| DeleteVercelIntegration        | Delete vercel integration                                                        |
-| CreatePrometheusIntegration    | Create Prometheus integration                                                    |
-| DeletePrometheusIntegration    | Delete Prometheus integration                                                    |
-| CreateCluster                  | Create a cluster                                                                 |
-| DeleteCluster                  | Delete a cluster                                                                 |
-| PauseCluster                   | Pause a cluster                                                                  |
-| ResumeCluster                  | Resume a cluster                                                                 |
-| ScaleCluster                   | Scale a cluster                                                                  |
-| DownloadTiDBClusterCA          | Download CA certificate                                             |
-| OpenWebSQLConsole              | Connect to a TiDB cluster through Web SQL                                        |
-| SetRootPassword                | Set the root password of a TiDB cluster                                          |
-| UpdateIPAccessList             | Update the IP access list of a TiDB cluster                                      |
-| SetAutoBackup                  | Set the automatic backup mechanism of a TiDB cluster                             |
-| DoManualBackup                 | Perform a manual backup of TiDB cluster                                          |
-| DeleteBackupTask               | Delete a backup task                                                             |
-| DeleteBackup                   | Delete a backup file                                                             |
-| RestoreFromBackup              | Restore to a TiDB cluster based on the backup files                              |
-| RestoreFromTrash               | Restore to a TiDB cluster based on the backup files in the trash                 |
-| ImportDataFromAWS              | Import data from AWS                                                             |
-| ImportDataFromGCP              | Import data from Google Cloud                                                             |
-| ImportDataFromLocal            | Import data from local disks                                                     |
-| CreateMigrationJob             | Create a migration job                                                           |
-| SuspendMigrationJob            | Suspend a migration job                                                          |
-| ResumeMigrationJob             | Resume a migration job                                                           |
-| DeleteMigrationJob             | Delete a migration job                                                           |
-| ShowDiagnose                   | Show diagnosis information                                                       |
-| DBAuditLogAction               | Set the activity of database audit logging                                       |
-| AddDBAuditFilter               | Add a database audit log filter                                                  |
-| DeleteDBAuditFilter            | Delete a database audit log filter                                               |
-| EditProject                    | Edit the information of a project                                                |
-| DeleteProject                  | Delete a project                                                                 |
-| BindSupportPlan                | Bind a support plan                                                              |
-| CancelSupportPlan              | Cancel a support plan                                                            |
-| UpdateOrganizationName         | Update the organization name                                                     |
-| SetSpendLimit                  | Edit the spending limit of a TiDB Serverless cluster                             |
-| UpdateMaintenanceWindow        | Modify maintenance window start time                                             |
-| DeferMaintenanceTask           | Defer a maintenance task                                                         |
-| CreateBranch                   | Create a TiDB Serverless branch                                                  |
-| DeleteBranch                   | Delete a TiDB Serverless branch                                                  |
-| SetBranchRootPassword          | Set root password for a TiDB Serverless branch                                   |
-| ConnectBranchGitHub            | Connect the cluster with a GitHub repository to enable branching integration     |
-| DisconnectBranchGitHub         | Disconnect the cluster from a GitHub repository to disable branching integration |
->>>>>>> 608069f034 (update the UI string for downloading CA (#17568))
 
 ## Console audit log fields
 
