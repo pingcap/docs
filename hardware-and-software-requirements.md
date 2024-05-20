@@ -17,84 +17,106 @@ As an open-source distributed SQL database with high performance, TiDB can be de
 
 ## OS and platform requirements
 
-<table>
-<thead>
-  <tr>
-    <th>Operating systems</th>
-    <th>Supported CPU architectures</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>Red Hat Enterprise Linux 8.4 or a later 8.x version</td>
-    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-  </tr>
-  <tr>
-    <td><ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version</li><li>CentOS 7.3 or a later 7.x version</li></ul></td>
-    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-  </tr>
-  <tr>
-    <td>Amazon Linux 2</td>
-    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-  </tr>
-  <tr>
-    <td>Rocky Linux 9.1 or later</td>
-    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-  </tr>
-  <tr>
-    <td>Kylin Euler V10 SP1/SP2</td>
-    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-  </tr>
-  <tr>
-    <td>UnionTech OS (UOS) V20</td>
-    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-  </tr>
-  <tr>
-    <td>openEuler 22.03 LTS SP1/SP3</td>
-    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-  </tr>
-  <tr>
-    <td>macOS 12 (Monterey) or later</td>
-    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-  </tr>
-  <tr>
-    <td>Oracle Enterprise Linux 8 or a later</td>
-    <td>x86_64</td>
-  </tr>
-  <tr>
-    <td>Ubuntu LTS 20.04 or later</td>
-    <td>x86_64</td>
-  </tr>
-  <tr>
-    <td>CentOS 8 Stream</td>
-    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-  </tr>
-  <tr>
-    <td>Debian 10 (Buster) or later</td>
-    <td>x86_64</td>
-  </tr>
-  <tr>
-    <td>Fedora 38 or later</td>
-    <td>x86_64</td>
-  </tr>
-  <tr>
-    <td>openSUSE Leap later than v15.5 (not including Tumbleweed)</td>
-    <td>x86_64</td>
-  </tr>
-  <tr>
-    <td>SUSE Linux Enterprise Server 15</td>
-    <td>x86_64</td>
-  </tr>
-</tbody>
-</table>
+In v8.1 LTS, TiDB ensures multi-level quality standards for various combinations of operating systems and CPU architectures.
 
-> **Note:**
->
-> - For Oracle Enterprise Linux, TiDB supports the Red Hat Compatible Kernel (RHCK) and does not support the Unbreakable Enterprise Kernel provided by Oracle Enterprise Linux.
-> - According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS Linux 8 ended on December 31, 2021. CentOS Stream 8 continues to be supported by the CentOS organization.
-> - Support for Ubuntu 16.04 will be removed in future versions of TiDB. Upgrading to Ubuntu 18.04 or later is strongly recommended.
-> - If you are using the 32-bit version of an operating system listed in the preceding table, TiDB **is not guaranteed** to be compilable, buildable or deployable on the 32-bit operating system and the corresponding CPU architecture, or TiDB does not actively adapt to the 32-bit operating system.
-> - Other operating system versions not mentioned above might work but are not officially supported.
++ For the following combinations of operating systems and CPU architectures, TiDB **provides enterprise-level production quality**, and the product features have been comprehensively and systematically verified:
+
+    <table>
+    <thead>
+      <tr>
+        <th>Operating systems</th>
+        <th>Supported CPU architectures</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Red Hat Enterprise Linux 8.4 or a later 8.x version</td>
+        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+      </tr>
+      <tr>
+        <td><ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version</li><li>CentOS 7.3 or a later 7.x version</li></ul></td>
+        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+      </tr>
+      <tr>
+        <td>Amazon Linux 2</td>
+        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+      </tr>
+      <tr>
+        <td>Rocky Linux 9.1 or later</td>
+        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+      </tr>
+      <tr>
+        <td>Kylin Euler V10 SP1/SP2</td>
+        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+      </tr>
+      <tr>
+        <td>UnionTech OS (UOS) V20</td>
+        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+      </tr>
+      <tr>
+        <td>openEuler 22.03 LTS SP1/SP3</td>
+        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+      </tr>
+    </tbody>
+    </table>
+
+    > **Note:**
+    >
+    > According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS Linux 8 ended on December 31, 2021. CentOS Stream 8 continues to be supported by the CentOS organization.
+
++ For the following combinations of operating systems and CPU architectures, you can compile, build, and deploy TiDB. In addition, you can also use the basic features of OLTP, OLAP, and the data tools. However, TiDB **does not guarantee enterprise-level production quality**:
+
+    <table>
+    <thead>
+      <tr>
+        <th>Operating systems</th>
+        <th>Supported CPU architectures</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>macOS 12 (Monterey) or later</td>
+        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+      </tr>
+      <tr>
+        <td>Oracle Enterprise Linux 8 or a later</td>
+        <td>x86_64</td>
+      </tr>
+      <tr>
+        <td>Ubuntu LTS 20.04 or later</td>
+        <td>x86_64</td>
+      </tr>
+      <tr>
+        <td>CentOS 8 Stream</td>
+        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+      </tr>
+      <tr>
+        <td>Debian 10 (Buster) or later</td>
+        <td>x86_64</td>
+      </tr>
+      <tr>
+        <td>Fedora 38 or later</td>
+        <td>x86_64</td>
+      </tr>
+      <tr>
+        <td>openSUSE Leap later than v15.5 (not including Tumbleweed)</td>
+        <td>x86_64</td>
+      </tr>
+      <tr>
+        <td>SUSE Linux Enterprise Server 15</td>
+        <td>x86_64</td>
+      </tr>
+    </tbody>
+    </table>
+
+    > **Note:**
+    >
+    > - For Oracle Enterprise Linux, TiDB supports the Red Hat Compatible Kernel (RHCK) and does not support the Unbreakable Enterprise Kernel provided by Oracle Enterprise Linux.
+    > - Support for Ubuntu 16.04 will be removed in future versions of TiDB. Upgrading to Ubuntu 18.04 or later is strongly recommended.
+
++ If you are using the 32-bit version of an operating system listed in the preceding two tables, TiDB **is not guaranteed** to be compilable, buildable or deployable on the 32-bit operating system and the corresponding CPU architecture, or TiDB does not actively adapt to the 32-bit operating system.
+
++ Other operating system versions not mentioned above might work but are not officially supported.
 
 ### Libraries required for compiling and running TiDB
 
@@ -232,7 +254,7 @@ As an open-source distributed SQL database, TiDB requires the following network 
 <tbody>
   <tr>
     <td>TiDB</td>
-    <td><ul><li>At least 30 GB for the log disk</li><li>Starting from v6.5.0, Fast Online DDL (controlled by the <a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_ddl_enable_fast_reorg-new-in-v630">tidb_ddl_enable_fast_reorg</a> variable) is enabled by default to accelerate DDL operations, such as adding indexes. If DDL operations involving large objects exist in your application, or you want to use <a href="https://docs.pingcap.com/tidb/dev/sql-statement-import-into">IMPORT INTO</a> to import data, it is highly recommended to prepare additional SSD disk space for TiDB (100 GB or more). For detailed configuration instructions, see <a href="https://docs.pingcap.com/tidb/dev/check-before-deployment#set-temporary-spaces-for-tidb-instances-recommended">Set a temporary space for a TiDB instance</a></li></ul></td>
+    <td><ul><li>At least 30 GB for the log disk</li><li>Starting from v6.5.0, Fast Online DDL (controlled by the <a href="https://docs.pingcap.com/tidb/v8.1/system-variables#tidb_ddl_enable_fast_reorg-new-in-v630">tidb_ddl_enable_fast_reorg</a> variable) is enabled by default to accelerate DDL operations, such as adding indexes. If DDL operations involving large objects exist in your application, or you want to use <a href="https://docs.pingcap.com/tidb/v8.1/sql-statement-import-into">IMPORT INTO</a> to import data, it is highly recommended to prepare additional SSD disk space for TiDB (100 GB or more). For detailed configuration instructions, see <a href="https://docs.pingcap.com/tidb/v8.1/check-before-deployment#set-temporary-spaces-for-tidb-instances-recommended">Set a temporary space for a TiDB instance</a></li></ul></td>
     <td>Lower than 90%</td>
   </tr>
   <tr>

@@ -18,7 +18,7 @@ Depending on whether the feature needs to be controlled by a switch, there are t
     - Upgrade from v7.1.1 to v7.2.0 or v7.3.0
     - Upgrade from v7.2.0 to v7.3.0
 
-- The feature is disabled by default, and can be enabled by sending the `/upgrade/start` request. For details, see [TiDB HTTP API](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md). The supported versions are as follows:
+- The feature is disabled by default, and can be enabled by sending the `/upgrade/start` request. For details, see [TiDB HTTP API](https://github.com/pingcap/tidb/blob/release-8.1/docs/tidb_http_api.md). The supported versions are as follows:
     - Upgrade from v7.1.2 and later v7.1 versions (that is, v7.1.x, where x >= 2) to v7.4.0 and later versions
     - Upgrade from v7.4.0 to later versions
 

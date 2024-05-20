@@ -69,7 +69,7 @@ In the error system, usually, the information of a specific error is as follows:
 
     Whether DM outputs the error stack information depends on the error severity and the necessity. The error stack records the complete stack call information when the error occurs. If you cannot figure out the error cause based on the basic information and the error message, you can trace the execution path of the code when the error occurs using the error stack.
 
-For the complete list of error codes, refer to the [error code lists](https://github.com/pingcap/tiflow/blob/master/dm/_utils/terror_gen/errors_release.txt).
+For the complete list of error codes, refer to the [error code lists](https://github.com/pingcap/tiflow/blob/release-8.1/dm/_utils/terror_gen/errors_release.txt).
 
 ## Troubleshooting
 
