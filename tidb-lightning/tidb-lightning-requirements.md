@@ -79,9 +79,8 @@ Based on the import mode and features enabled, the target database users should 
 
 > **Note:**
 >
-> 
-> - If the target table does not use foreign keys, the `REFERENCES` privilege is not required.
-> - If you have not granted the `REFERENCES` privilege to the downstream database user, you can manually create the target table in the downstream database in advance to ensure smooth data import.
+> - If the target table does not use the foreign key, the `REFERENCES` privilege is not required.
+> - If the target table uses the foreign key, you need to grant the `REFERENCES` privilege for the downstream database user, or manually create the target table in the downstream database in advance to ensure smooth data import.
 
 ## Storage space of the target database
 
