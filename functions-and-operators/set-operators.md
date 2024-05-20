@@ -116,7 +116,7 @@ TiDB supports using parentheses to specify the precedence of set operations. Exp
 
 ## Use `ORDER BY` and `LIMIT`
 
-TiDB supports using `ORDER BY` and `LIMIT` clause in set operations. These two clauses must be at the end of the entire statement.
+TiDB supports using `ORDER BY` or `LIMIT` clause on the entire result of set operations. These two clauses must be at the end of the entire statement.
 
 ```sql
 (SELECT * FROM t1 UNION ALL SELECT * FROM t1 INTERSECT SELECT * FROM t2) ORDER BY a LIMIT 2;
