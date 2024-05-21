@@ -271,7 +271,7 @@ The method of downloading the file of `PLAN REPLAYER CAPTURE` is the same as tha
 
 ### Remove the capture tasks
 
-If a capture task is no longer needed, you can remove it using `PLAN REPLAYER CAPTURE REMOVE` statement. For example:
+If a capture task is no longer needed, you can remove it using the `PLAN REPLAYER CAPTURE REMOVE` statement. For example:
 
 ```sql
 mysql> PLAN REPLAYER CAPTURE '077a87a576e42360c95530ccdac7a1771c4efba17619e26be50a4cfd967204a0' '4838af52c1e07fc8694761ad193d16a689b2128bc5ced9d13beb31ae27b370ce';
