@@ -169,6 +169,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 ### Behavior changes
 
 * In earlier versions, the `tidb.tls` configuration item in TiDB Lightning treats values `"false"` and `""` the same, as well as treating the values `"preferred"` and `"skip-verify"` the same. Starting from v8.1.0, TiDB Lightning distinguishes the behavior of `"false"`, `""`, `"skip-verify"`, and `"preferred"` for `tidb.tls`. For more information, see [TiDB Lightning configuration](/tidb-lightning/tidb-lightning-configuration.md).
+* In earlier versions, when tidb exit, the primary node of autoid service would execute `forceRebase` for tables with AUTO_ID_CACHE=1 attribute, the purpose of this behaviour is to ensure the allocated autoid been continuous. However, when there are a lot of tables with AUTO_ID_CACHE=1 attribute, the `forceRebase` operation takes a long time, blocking the restart of that tidb. In the current version, the `forceRebase` behavior is removed, so it may cause 'hole' in the allocated autoid, but tidb would not block when restart.
 
 ### System variables
 
