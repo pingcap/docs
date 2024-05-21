@@ -1,5 +1,5 @@
 ---
-title: Delete Recovery Group
+title: Delete a Recovery Group
 summary: Learn how to delete a Recovery Group when it is no longer needed
 ---
 
