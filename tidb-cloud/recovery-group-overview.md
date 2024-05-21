@@ -1,15 +1,15 @@
 ---
 title: Recovery Group Overview (Beta)
-summary: Learn how to protect your databases against disasters by using TiDB Cloud Recovery Groups.
+summary: Learn how to protect your databases against disasters by using TiDB Cloud recovery groups.
 ---
 
 # Recovery Group Overview (Beta)
 
-TiDB Cloud Recovery Groups allow you to replicate your databases between TiDB Cloud Dedicated clusters for protection against regional disasters. Recovery Groups allow you to orchestrate the failover of databases from one cluster to another. After failover to the secondary cluster, if the original cluster becomes available again, you can re-establish replication in the reverse direction to reprotect the databases.
+A TiDB Cloud recovery group allows you to replicate your databases between TiDB Cloud Dedicated clusters for protection against regional disasters. You can orchestrate the failover of databases from one cluster to another. After failover to the secondary cluster, if the original cluster becomes available again, you can re-establish replication in the reverse direction to reprotect the databases.
 
 ## Architecture
 
-A Recovery Group consists of a set of replicated databases that can be failed over together between two TiDB Dedicated Clusters. Each Recovery Group is assigned a primary cluster, databases on this primary cluster are associated with the group and are then replicated to the secondary cluster.
+A recovery group consists of a set of replicated databases that can be failed over together between two TiDB Dedicated clusters. Each recovery group is assigned a primary cluster, databases on this primary cluster are associated with the group and are then replicated to the secondary cluster.
 
 ![Recovery Group](/media/tidb-cloud/recovery-group/recovery-group-overview.png)
 
@@ -21,10 +21,10 @@ A Recovery Group consists of a set of replicated databases that can be failed ov
 >
 > Client connections to the replica copy of the database are not explicitly forced to be read-only by the Recovery Group feature. Ensuring that the application connecting to the replica copy only performs read-only queries is the responsibility of the application.
 
-## Key features/Limitations
+## Key features and limitations
 
-- Recovery Groups support TiDB Cloud Dedicated Clusters that are deployed on AWS.
-- Recovery Groups are established between two clusters.
+- Currently only TiDB Cloud Dedicated clusters that are deployed on AWS support recovery groups.
+- Recovery groups are established between two clusters.
 - Bi-directional replication of a database is not supported with recovery groups.
 
 > **Warning**

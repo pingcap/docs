@@ -1,6 +1,6 @@
 ---
 title: Failover and Reprotect Databases
-summary: Learn how to use a Recovery Group to Failover and Reprotect databases between TiDB Cloud clusters
+summary: Learn how to use a Recovery Group to failover and reprotect databases between TiDB Cloud clusters.
 ---
 
 # Failover and Reprotect Databases
@@ -13,21 +13,21 @@ When the regional outage has concluded, the ability to reverse the replication f
 
 ## Prerequisites
 
-Prior to performing a failover, the Recovery Group should have been created and be successfully replicating to the secondary cluster. See [Get Started with Recovery Groups](/tidb-cloud/recovery-group-get-started.md)
+Prior to performing a failover, the recovery group should have been created and be successfully replicating to the secondary cluster. See [Get Started with Recovery Groups](/tidb-cloud/recovery-group-get-started.md)
 
 ![Protected Recovery Group](/media/tidb-cloud/recovery-group/recovery-group-protected.png)
 
-## Failover Databases using Recovery Group
+## Failover databases using a recovery group
 
-In the event of a disaster the recovery group is used to fail over databases to the secondary cluster.
+In the event of a disaster, the recovery group is used to failover databases to the secondary cluster.
 
-1. In the TiDB Cloud console, click **Project Settings** in the left navigation pane.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), click **Project Settings** in the left navigation pane.
 
-2. On the project settings navigation pane, click **Recovery Group**.
+2. On the **Project Settings** navigation pane, click **Recovery Group**.
 
-3. On the recovery group page, click the name of the recovery group that you wish to failover.
+3. On the **Recovery Group** page, click the name of the recovery group that you wish to failover.
 
-4. Click the action menu for the recovery group, and click **Failover**. The failover dialog will open.
+4. Click the **Action** menu for the recovery group, and then click **Failover**. The failover dialog will open.
 
     > **Warning**
     >
@@ -39,7 +39,7 @@ In the event of a disaster the recovery group is used to fail over databases to 
 
     ![Fail Over Recovery Group](/media/tidb-cloud/recovery-group/recovery-group-failover.png)
 
-## Reprotect Databases using Recovery Group
+## Reprotect databases using a recovery group
 
 After a failover completes, the replica databases on the secondary cluster are now the primary copy. However, these databases are unprotected against future disasters as the replication relationship is stopped by the failover process.
 
@@ -47,22 +47,22 @@ If the cluster that was impacted by the disaster is able to be brought online ag
 
 ![Unprotected Recovery Group](/media/tidb-cloud/recovery-group/recovery-group-unprotected.png)
 
-1. In the TiDB Cloud console, click **Project Settings** in the left navigation pane.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), click **Project Settings** in the left navigation pane.
 
-2. On the project settings navigation pane, click **Recovery Group**.
+2. On the **Project Settings** navigation pane, click **Recovery Group**.
 
-3. On the recovery group page, click the name of the recovery group that you wish to reprotect.
+3. On the **Recovery Group** page, click the name of the recovery group that you wish to reprotect.
 
     > **Note**
     >
     > The **Recovery Group Detail** page provides information about the recovery group including current status and replication topology.
-    > During the reprotect synchronization, due to the volume of data transferred, the online query performance at the primary or secondary clusters may be affected. Schedule the reprotection of databases for a less busy period.
+    > During the reprotect synchronization, due to the volume of data transferred, the online query performance at the primary or secondary clusters might be affected. Schedule the reprotection of databases for a less busy period.
 
     > **Warning**
     > 
-    > As part of the data replication necessary to perform the reprotect operation, the content of the selected databases will be replaced at the target cluster by the content of the databases from the (new) primary cluster. If you wish to preserve the unique content on the target cluster please complete a backup before performing the Reprotect operation.
+    > As part of the data replication necessary to perform the reprotect operation, the content of the selected databases will be replaced at the target cluster by the content of the databases from the (new) primary cluster. If you wish to preserve the unique content on the target cluster, complete a backup before performing the Reprotect operation.
 
-4. Click the action menu for the recovery group, and click **Reprotect**. The reprotect dialog will open.
+4. Click the **Action** menu for the recovery group, and then click **Reprotect**. The reprotect dialog appears.
 
 5. Confirm the reprotect operation by clicking **I understand, Failover Group** to begin the reprotect operation.
 
@@ -70,7 +70,7 @@ If the cluster that was impacted by the disaster is able to be brought online ag
 
 ## What's next
 
-After creating the recovery group you may want to familiarize yourself with the failover and reprotect operations. These operations are used to (1) **Failover** the primary cluster for the replicated databases from one cluster to the other, and then to later (2) reestablish replication in the opposite direction to **Reprotect** the failed over databases.
+After creating the recovery group, you might want to familiarize yourself with the failover and reprotect operations. These operations are used to **Failover** the primary cluster for the replicated databases from one cluster to the other, and then to later reestablish replication in the opposite direction to **Reprotect** the failed over databases.
 
 - [Failover Databases](/tidb-cloud/recovery-group-failover.md)
 - [Reprotect Databases](/tidb-cloud/recovery-group-reprotect.md)

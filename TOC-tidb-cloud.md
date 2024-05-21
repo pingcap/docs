@@ -257,7 +257,7 @@
   - [Recovery Group Overview](/tidb-cloud/recovery-group-overview.md)
   - [Get Started](/tidb-cloud/recovery-group-get-started.md)
   - [Failover and Reprotect Databases](/tidb-cloud/recovery-group-failover.md)
-  - [Delete Recovery Group](/tidb-cloud/recovery-group-delete.md)
+  - [Delete a Recovery Group](/tidb-cloud/recovery-group-delete.md)
 - Security
   - Identity Access Control
     - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
