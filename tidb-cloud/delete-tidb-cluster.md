@@ -17,8 +17,8 @@ You can delete a cluster at any time by performing the following steps:
     > Alternatively, you can also click the name of the target cluster to go to its overview page, and then click **...** in the upper-right corner.
 
 3. Click **Delete** in the drop-down menu.
-4. In the cluster deleting window, the prompt message will inform you of the number of backups and the charging policy for
-   backups if you have at least one manual or automatic backups. If you click **Continue** or if no backups are present, you will be prompted to enter `<organization name>/<project name>/<cluster name>` to confirm the deletion.
+4. In the cluster deleting window, the prompt message will inform you of the number of backups and the charging policy for backups if you have at
+   least one manual or automatic backups. If you click **Continue** or if no backups are present, you will be prompted to enter `<organization name>/<project name>/<cluster name>` to confirm the deletion.
 
     If you want to restore the cluster sometime in the future, make sure that you have a backup of the cluster. Otherwise, you cannot restore it anymore. For more information about how to back up TiDB Dedicated clusters, see [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md).
 
@@ -30,8 +30,8 @@ You can delete a cluster at any time by performing the following steps:
 
  Once a backed up TiDB Dedicated cluster is deleted, the existing backup files of the cluster are moved to the recycle bin.
 
-- Automatic backups will expire and be automatically deleted once the retention period has passed. The default retention
-  period is 7 days if you don't modify it. 
+- Automatic backups will expire and be automatically deleted once the retention period has passed. The default retention period is 7 days if you don't
+  modify it. 
 - Manual backups will be kept in the Recycle Bin until manually deleted.
 
   > **Note:**
