@@ -47,7 +47,7 @@ TiDB Serverless は従量課金モデルを採用しており、storageスペー
 組織内の最初の 5 つの TiDB Serverless クラスターに対して、 TiDB Cloud はそれぞれに次の無料使用量割り当てを提供します。
 
 -   行ベースのstorage: 5 GiB
--   [リクエストユニット (RU)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 月間5000万RU
+-   [リクエストユニット (RU)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 毎月5000万RU
 
 スケーラブル クラスターを使用している場合、無料割り当て量を超えた使用量には料金が発生します。無料クラスターの場合、無料割り当て量に達すると、スケーラブル クラスターにアップグレードするか、新しい月の開始時に使用量がリセットされるまで、このクラスターの読み取りおよび書き込み操作は制限されます。
 
@@ -55,7 +55,7 @@ TiDB Serverless は従量課金モデルを採用しており、storageスペー
 
 ### 無料プランの制限は何ですか? {#what-are-the-limitations-of-the-free-plan}
 
-無料プランでは、実際のワークロードに基づいて、クラスターのパフォーマンスは最大 10,000 RU/秒に制限されます。また、クエリあたりのメモリ割り当ては 256 MiB に制限されます。クラスターのパフォーマンスを最大化するには、 [スケーラブルなクラスター](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan)にアップグレードして商用サービスを有効にすることを選択できます。
+無料プランでは、スケーラブルでないリソースが原因でクラスターのパフォーマンスが制限されます。このため、クエリあたりのメモリ割り当てが 256 MiB に制限され、1 秒あたりのリクエスト ユニット (RU) に顕著なボトルネックが発生する可能性があります。クラスターのパフォーマンスを最大化し、これらの制限を回避するには、 [スケーラブルなクラスター](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan)にアップグレードします。
 
 ### ワークロードに必要な RU の数を見積もり、月間予算を計画するにはどうすればよいですか? {#how-can-i-estimate-the-number-of-rus-required-by-my-workloads-and-plan-my-monthly-budget}
 

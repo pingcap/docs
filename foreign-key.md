@@ -1,16 +1,16 @@
 ---
 title: FOREIGN KEY Constraints
-summary: TiDB v6.6.0以降、外部キー機能と制約をサポート。ただし、実験的であり、本番環境での使用はお勧めしない。外部キーは子テーブルで定義され、命名規則に従う。制限条件もあり、参照操作にはRESTRICT、CASCADE、SET NULL、SET DEFAULT、NO ACTIONが含まれる。外部キー制約チェックは有効で、実行計画を表示することも可能。MySQLとの互換性には注意が必要。
+summary: An overview of the usage of FOREIGN KEY constraints for the TiDB database.
 ---
 
-# 外部キーの制約 {#foreign-key-constraints}
+# 外部キー制約 {#foreign-key-constraints}
 
-TiDB は v6.6.0 以降、関連データのテーブル間参照を可能にする外部キー機能と、データの一貫性を維持するための外部キー制約をサポートします。
+v6.6.0 以降、TiDB は、関連データのテーブル間参照を可能にする外部キー機能と、データの一貫性を維持するための外部キー制約をサポートします。
 
 > **警告：**
 >
-> -   現在、外部キー機能は実験的です。本番環境で使用することはお勧めできません。この機能は予告なく変更または削除される場合があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
-> -   外部キー機能は通常、 [参照整合性](https://en.wikipedia.org/wiki/Referential_integrity)制約チェックを強制するために使用されます。パフォーマンスの低下を引き起こす可能性があるため、パフォーマンスを重視するシナリオで使用する前に、徹底的なテストを実施することをお勧めします。
+> -   現在、外部キー機能は実験的です。本番環境での使用は推奨されません。この機能は予告なしに変更または削除される可能性があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)報告できます。
+> -   外部キー機能は通常、 [参照整合性](https://en.wikipedia.org/wiki/Referential_integrity)制約チェックを強制するために使用されます。パフォーマンスの低下を引き起こす可能性があるため、パフォーマンスが重要なシナリオで使用する前に徹底的なテストを実施することをお勧めします。
 
 外部キーは子テーブルで定義されます。構文は次のとおりです。
 
@@ -32,12 +32,12 @@ ReferenceOption
 
 ## ネーミング {#naming}
 
-外部キーの命名は次の規則に従います。
+外部キーの命名は、次の規則に従います。
 
--   `CONSTRAINT identifier`で名前が指定されている場合は、指定された名前が使用されます。
--   `CONSTRAINT identifier`で名前が指定されていないが、 `FOREIGN KEY identifier`で名前が指定されている場合は、 `FOREIGN KEY identifier`で指定した名前が使用されます。
--   `CONSTRAINT identifier`も`FOREIGN KEY identifier`名前を指定しない場合は、 `fk_1` 、 `fk_2` 、 `fk_3`などの名前が自動的に生成されます。
--   外部キー名は、現在のテーブル内で一意である必要があります。それ以外の場合、外部キーの作成時にエラー`ERROR 1826: Duplicate foreign key constraint name 'fk'`が報告されます。
+-   `CONSTRAINT identifier`に名前が指定されている場合は、指定された名前が使用されます。
+-   `CONSTRAINT identifier`に名前が指定されておらず、 `FOREIGN KEY identifier`に名前が指定されている場合は、 `FOREIGN KEY identifier`に指定された名前が使用されます。
+-   `CONSTRAINT identifier`と`FOREIGN KEY identifier`どちらにも名前が指定されていない場合は、 `fk_1` 、 `fk_2` 、 `fk_3`などの名前が自動的に生成されます。
+-   外部キー名は現在のテーブル内で一意である必要があります。そうでない場合、外部キーの作成時にエラー`ERROR 1826: Duplicate foreign key constraint name 'fk'`が報告されます。
 
 ## 制限 {#restrictions}
 
@@ -45,42 +45,42 @@ ReferenceOption
 
 -   親テーブルも子テーブルも一時テーブルではありません。
 
--   ユーザーは親テーブルに対する`REFERENCES`権限を持っています。
+-   ユーザーには親テーブルに対する権限`REFERENCES`あります。
 
--   親テーブルと子テーブルの外部キーによって参照される列は、同じデータ型で、同じサイズ、精度、長さ、文字セット、および照合順序を持ちます。
+-   親テーブルと子テーブルの外部キーによって参照される列は、同じデータ型であり、サイズ、精度、長さ、文字セット、および照合順序が同じです。
 
--   外部キー内の列はそれ自体を参照できません。
+-   外部キーの列は、それ自体を参照することはできません。
 
--   外部キーの列と参照される親テーブルの列は同じインデックスを持ち、インデックス内の列の順序は外部キーの列の順序と一致します。これは、外部キー制約チェックを実行するときにインデックスを使用してテーブル全体のスキャンを回避するためです。
+-   外部キーの列と参照先の親テーブルの列には同じインデックスがあり、インデックスの列の順序は外部キーの列の順序と一致します。これは、外部キー制約チェックを実行するときに、インデックスを使用してテーブル全体のスキャンを回避するためです。
 
-    -   親テーブルに対応する外部キー インデックスがない場合は、エラー`ERROR 1822: Failed to add the foreign key constraint. Missing index for constraint 'fk' in the referenced table 't'`が報告されます。
-    -   子テーブルに対応する外部キー インデックスがない場合は、外部キーと同じ名前のインデックスが自動的に作成されます。
+    -   親テーブルに対応する外部キー インデックスがない場合、エラー`ERROR 1822: Failed to add the foreign key constraint. Missing index for constraint 'fk' in the referenced table 't'`が報告されます。
+    -   子テーブルに対応する外部キー インデックスがない場合、外部キーと同じ名前のインデックスが自動的に作成されます。
 
--   `BLOB`または`TEXT`タイプの列での外部キーの作成はサポートされていません。
+-   `BLOB`または`TEXT`タイプの列に外部キーを作成することはサポートされていません。
 
--   パーティションテーブルでの外部キーの作成はサポートされていません。
+-   パーティションテーブルに外部キーを作成することはサポートされていません。
 
--   仮想生成列での外部キーの作成はサポートされていません。
+-   仮想生成列に外部キーを作成することはサポートされていません。
 
 ## 参照操作 {#reference-operations}
 
-`UPDATE`または`DELETE`操作が親テーブルの外部キー値に影響を与える場合、子テーブルの対応する外部キー値は、外部キー定義の`ON UPDATE`または`ON DELETE`句で定義された参照操作によって決定されます。参照操作には次のものが含まれます。
+`UPDATE`または`DELETE`操作が親テーブルの外部キー値に影響する場合、子テーブルの対応する外部キー値は、外部キー定義の`ON UPDATE`または`ON DELETE`句で定義された参照操作によって決定されます。参照操作には次のものが含まれます。
 
--   `CASCADE` : `UPDATE`または`DELETE`操作が親テーブルに影響を与える場合、子テーブル内の一致する行が自動的に更新または削除されます。カスケード操作は深さ優先で実行されます。
--   `SET NULL` : `UPDATE`または`DELETE`操作が親テーブルに影響を与える場合、子テーブル内の一致する外部キー列を自動的に`NULL`に設定します。
--   `RESTRICT` : 子テーブルに一致する行が含まれる場合、 `UPDATE`または`DELETE`操作を拒否します。
--   `NO ACTION` ： `RESTRICT`と同じ。
--   `SET DEFAULT` ： `RESTRICT`と同じ。
+-   `CASCADE` : `UPDATE`または`DELETE`操作が親テーブルに影響する場合、子テーブル内の一致する行を自動的に更新または削除します。カスケード操作は深さ優先方式で実行されます。
+-   `SET NULL` : `UPDATE`または`DELETE`操作が親テーブルに影響する場合、子テーブルの一致する外部キー列を`NULL`に自動的に設定します。
+-   `RESTRICT` : 子テーブルに一致する行が含まれている場合、 `UPDATE`または`DELETE`操作を拒否します。
+-   `NO ACTION` : `RESTRICT`と同じ。
+-   `SET DEFAULT` : `RESTRICT`と同じ。
 
-親テーブルに一致する外部キー値がない場合、子テーブルに対する`INSERT`または`UPDATE`操作は拒否されます。
+親テーブルに一致する外部キー値がない場合、子テーブルでの`INSERT`または`UPDATE`操作は拒否されます。
 
-外部キー定義で`ON DELETE`または`ON UPDATE`が指定されていない場合、デフォルトの動作は`NO ACTION`です。
+外部キー定義で`ON DELETE`または`ON UPDATE`指定されていない場合、デフォルトの動作は`NO ACTION`なります。
 
-外部キーが`STORED GENERATED COLUMN`で定義されている場合、 `CASCADE` 、 `SET NULL` 、および`SET DEFAULT`の参照はサポートされません。
+外部キーが`STORED GENERATED COLUMN`に定義されている場合、 `CASCADE` 、 `SET NULL` 、および`SET DEFAULT`参照はサポートされません。
 
 ## 外部キーの使用例 {#usage-examples-of-foreign-keys}
 
-次の例では、単一列の外部キーを使用して、親テーブルと子テーブルを関連付けます。
+次の例では、単一列の外部キーを使用して親テーブルと子テーブルを関連付けます。
 
 ```sql
 CREATE TABLE parent (
@@ -95,7 +95,7 @@ CREATE TABLE child (
 );
 ```
 
-以下は、 `product_order`テーブルに他の 2 つのテーブルを参照する 2 つの外部キーがある、より複雑な例です。 1 つの外部キーは`product`テーブルの 2 つのインデックスを参照し、もう 1 つは`customer`テーブルの 1 つのインデックスを参照します。
+以下は、 `product_order`テーブルに他の 2 つのテーブルを参照する 2 つの外部キーがある、より複雑な例です。1 つの外部キーは`product`テーブル上の 2 つのインデックスを参照し、もう 1 つは`customer`テーブル上の 1 つのインデックスを参照します。
 
 ```sql
 CREATE TABLE product (
@@ -151,7 +151,7 @@ ALTER TABLE table_name
 ALTER TABLE table_name DROP FOREIGN KEY fk_identifier;
 ```
 
-外部キー制約の作成時に名前が付けられている場合は、その名前を参照して外部キー制約を削除できます。それ以外の場合は、自動的に生成された制約名を使用して制約を削除する必要があります。 `SHOW CREATE TABLE`を使用すると、外部キー名を表示できます。
+外部キー制約が作成時に名前が付けられている場合は、その名前を参照して外部キー制約を削除できます。それ以外の場合は、制約を削除するには自動的に生成された制約名を使用する必要があります。外部キー名を表示するには、 `SHOW CREATE TABLE`使用します。
 
 ```sql
 mysql> SHOW CREATE TABLE child\G
@@ -167,30 +167,30 @@ Create Table: CREATE TABLE `child` (
 
 ## 外部キー制約チェック {#foreign-key-constraint-check}
 
-TiDB は、システム変数[`foreign_key_checks`](/system-variables.md#foreign_key_checks)によって制御される外部キー制約チェックをサポートしています。デフォルトでは、この変数は`ON`に設定されており、外部キー制約チェックが有効であることを意味します。この変数には`GLOBAL`と`SESSION` 2 つのスコープがあります。この変数を有効にしておくと、外部キー参照関係の整合性を確保できます。
+TiDB は、システム変数[`foreign_key_checks`](/system-variables.md#foreign_key_checks)によって制御される外部キー制約チェックをサポートしています。デフォルトでは、この変数は`ON`に設定されており、外部キー制約チェックが有効になっていることを意味します。この変数には、 `GLOBAL`と`SESSION` 2 つのスコープがあります。この変数を有効にしておくと、外部キー参照関係の整合性を確保できます。
 
-外部キー制約チェックを無効にした場合の影響は次のとおりです。
+外部キー制約チェックを無効にすると、次の効果が得られます。
 
 -   外部キーによって参照される親テーブルを削除する場合、外部キー制約チェックが無効になっている場合にのみ削除が成功します。
--   データをデータベースにインポートする場合、テーブルの作成順序が外部キーの依存関係の順序と異なる場合があり、これによりテーブルの作成が失敗する可能性があります。外部キー制約チェックが無効になっている場合にのみ、テーブルを正常に作成できます。さらに、外部キー制約チェックを無効にすると、データのインポートが高速化されます。
--   データベースにデータをインポートするときに、子テーブルのデータが最初にインポートされると、エラーが報告されます。外部キー制約チェックが無効になっている場合にのみ、子テーブルのデータを正常にインポートできます。
--   実行さ`ALTER TABLE`操作に外部キーの変更が含まれる場合、この操作は外部キー制約チェックが無効になっている場合にのみ成功します。
+-   データベースにデータをインポートする場合、テーブルの作成順序が外部キーの依存関係の順序と異なることがあり、テーブルの作成が失敗する可能性があります。外部キー制約チェックが無効になっている場合にのみ、テーブルを正常に作成できます。また、外部キー制約チェックを無効にすると、データのインポートが高速化されます。
+-   データベースにデータをインポートするときに、子テーブルのデータを最初にインポートすると、エラーが報告されます。外部キー制約チェックが無効になっている場合にのみ、子テーブルのデータを正常にインポートできます。
+-   実行される`ALTER TABLE`つの操作に外部キーの変更が含まれる場合、この操作は外部キー制約チェックが無効になっている場合にのみ成功します。
 
-外部キー制約チェックが無効になっている場合、次の場合を除き、外部キー制約チェックおよび参照操作は実行されません。
+外部キー制約チェックが無効になっている場合、次のシナリオを除き、外部キー制約チェックと参照操作は実行されません。
 
--   `ALTER TABLE`の実行により外部キーの定義が間違っている可能性がある場合でも、実行中にエラーが報告されます。
--   外部キーに必要なインデックスを削除する場合は、最初に外部キーを削除する必要があります。それ以外の場合は、エラーが報告されます。
--   外部キーを作成しても、関連する条件や制限を満たさない場合、エラーが報告されます。
+-   `ALTER TABLE`の実行によって外部キーの定義が間違ってしまう可能性がある場合は、実行中にエラーが報告されます。
+-   外部キーに必要なインデックスを削除する場合は、まず外部キーを削除する必要があります。そうしないと、エラーが報告されます。
+-   外部キーを作成したが、関連する条件または制限を満たしていない場合は、エラーが報告されます。
 
 ## ロック {#locking}
 
-`INSERT`または`UPDATE`が子テーブルの場合、外部キー制約は、対応する外部キー値が親テーブルに存在するかどうかをチェックし、親テーブルの行をロックして、外部キー制約に違反する他の操作によって外部キー値が削除されるのを防ぎます。ロック動作は、親テーブル内の外部キー値が存在する行に対して`SELECT FOR UPDATE`操作を実行することと同じです。
+`INSERT`または`UPDATE`が子テーブルの場合、外部キー制約は、対応する外部キー値が親テーブルに存在するかどうかを確認し、外部キー制約に違反する他の操作によって外部キー値が削除されるのを防ぐために、親テーブルの行をロックします。ロック動作は、親テーブルで外部キー値が配置されている行に対して`SELECT FOR UPDATE`操作を実行することと同じです。
 
-TiDB は現在`LOCK IN SHARE MODE`をサポートしていないため、子テーブルが多数の同時書き込みを受け入れ、参照される外部キー値のほとんどが同じである場合、深刻なロックの競合が発生する可能性があります。大量の子テーブルデータを書き込む場合は、 [`foreign_key_checks`](/system-variables.md#foreign_key_checks)無効にすることをお勧めします。
+TiDB は現在`LOCK IN SHARE MODE`サポートしていないため、子テーブルが大量の同時書き込みを受け入れ、参照される外部キー値のほとんどが同じである場合、深刻なロック競合が発生する可能性があります。大量の子テーブルデータを書き込む場合は[`foreign_key_checks`](/system-variables.md#foreign_key_checks)無効にすることをお勧めします。
 
 ## 外部キーの定義とメタデータ {#definition-and-metadata-of-foreign-keys}
 
-外部キー制約の定義を表示するには、 [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)ステートメントを実行します。
+外部キー制約の定義を表示するには、次[`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)ステートメントを実行します。
 
 ```sql
 mysql> SHOW CREATE TABLE child\G
@@ -204,7 +204,7 @@ Create Table: CREATE TABLE `child` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 ```
 
-次のシステム テーブルのいずれかを使用して、外部キーに関する情報を取得することもできます。
+次のいずれかのシステム テーブルを使用して、外部キーに関する情報を取得することもできます。
 
 -   [`INFORMATION_SCHEMA.KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md)
 -   [`INFORMATION_SCHEMA.TABLE_CONSTRAINTS`](/information-schema/information-schema-table-constraints.md)
@@ -257,9 +257,9 @@ TABLE_NAME                | child
 REFERENCED_TABLE_NAME     | parent
 ```
 
-## 外部キーを使用して実行計画をビュー {#view-execution-plans-with-foreign-keys}
+## 外部キーを使用した実行プランのビュー {#view-execution-plans-with-foreign-keys}
 
-`EXPLAIN`ステートメントを使用して実行計画を表示できます。 `Foreign_Key_Check`演算子は、実行される DML ステートメントに対して外部キー制約チェックを実行します。
+`EXPLAIN`ステートメントを使用して実行プランを表示できます。3 `Foreign_Key_Check`は、実行される DML ステートメントに対して外部キー制約チェックを実行します。
 
 ```sql
 mysql> explain insert into child values (1,1);
@@ -271,7 +271,7 @@ mysql> explain insert into child values (1,1);
 +-----------------------+---------+------+---------------+-------------------------------+
 ```
 
-`EXPLAIN ANALYZE`ステートメントを使用すると、外部キー参照動作の実行を表示できます。 `Foreign_Key_Cascade`演算子は、実行される DML ステートメントの外部キー参照を実行します。
+`EXPLAIN ANALYZE`ステートメントを使用して、外部キー参照動作の実行を表示できます。3 `Foreign_Key_Cascade`は、実行される DML ステートメントの外部キー参照を実行します。
 
 ```sql
 mysql> explain analyze delete from parent where id = 1;
@@ -292,7 +292,7 @@ mysql> explain analyze delete from parent where id = 1;
 
 ### TiDB バージョン間の互換性 {#compatibility-between-tidb-versions}
 
-v6.6.0 より前では、TiDB は外部キーを作成する構文をサポートしていますが、作成された外部キーは無効です。 v6.6.0 より前に作成された TiDB クラスターを v6.6.0 以降にアップグレードした場合、アップグレード前に作成された外部キーは依然として無効です。 v6.6.0 以降のバージョンで作成された外部キーのみが有効です。無効な外部キーを削除し、新しい外部キーを作成して、外部キー制約を有効にすることができます。 `SHOW CREATE TABLE`ステートメントを使用して、外部キーが有効かどうかを確認できます。無効な外部キーには`/* FOREIGN KEY INVALID */`コメントがあります。
+v6.6.0 より前の TiDB では、外部キーを作成する構文がサポートされていますが、作成された外部キーは無効です。v6.6.0 より前に作成された TiDB クラスターを v6.6.0 以降にアップグレードすると、アップグレード前に作成された外部キーは無効のままになります。v6.6.0 以降のバージョンで作成`SHOW CREATE TABLE`れた外部キーのみが有効になります。無効な外部キーを削除して新しい外部キーを作成し、外部キー制約を有効にすることができます。1 ステートメントを使用して、外部キーが有効かどうかを確認できます。無効な外部キーには`/* FOREIGN KEY INVALID */`コメントがあります。
 
 ```sql
 mysql> SHOW CREATE TABLE child\G
@@ -306,15 +306,15 @@ Create Table | CREATE TABLE `child` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 ```
 
-### TiDB ツールとの互換性 {#compatibility-with-tidb-tools}
+### TiDBツールとの互換性 {#compatibility-with-tidb-tools}
 
 <CustomContent platform="tidb">
 
--   [TiDBBinlog](/tidb-binlog/tidb-binlog-overview.md)は外部キーをサポートしません。
--   [DM](/dm/dm-overview.md)は外部キーをサポートしません。 DM は、データを TiDB にレプリケートするときに、ダウンストリーム TiDB の[`foreign_key_checks`](/system-variables.md#foreign_key_checks)を無効にします。したがって、外部キーによって引き起こされるカスケード操作は上流から下流にレプリケートされず、データの不整合が発生する可能性があります。
--   [TiCDC](/ticdc/ticdc-overview.md) v6.6.0 は外部キーと互換性があります。 TiCDC の以前のバージョンでは、外部キーを含むテーブルを複製するときにエラーが報告される場合がありました。 v6.6.0 より前の TiCDC バージョンを使用する場合は、ダウンストリーム TiDB クラスターの`foreign_key_checks`無効にすることをお勧めします。
--   [BR](/br/backup-and-restore-overview.md) v6.6.0 は外部キーと互換性があります。 BRの以前のバージョンでは、外部キーを含むテーブルを v6.6.0 以降のクラスターに復元するときにエラーが報告される場合があります。 v6.6.0 より前のBRを使用する場合は、クラスターを復元する前にダウンストリーム TiDB クラスターの`foreign_key_checks`無効にすることをお勧めします。
--   [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用する場合は、データをインポートする前にダウンストリーム TiDB クラスターの`foreign_key_checks`無効にすることをお勧めします。
+-   [TiDBBinlog](/tidb-binlog/tidb-binlog-overview.md)外部キーをサポートしません。
+-   [DM](/dm/dm-overview.md)外部キーをサポートしていません。DM は、データを TiDB に複製するときに、下流の TiDB の[`foreign_key_checks`](/system-variables.md#foreign_key_checks)無効にします。そのため、外部キーによって発生するカスケード操作は上流から下流に複製されず、データの不整合が発生する可能性があります。
+-   [ティCDC](/ticdc/ticdc-overview.md) v6.6.0 は外部キーと互換性があります。以前のバージョンの TiCDC では、外部キーを持つテーブルを複製するときにエラーが報告される可能性があります。v6.6.0 より前のバージョンの TiCDC を使用する場合は、ダウンストリーム TiDB クラスターの`foreign_key_checks`無効にすることをお勧めします。
+-   [BR](/br/backup-and-restore-overview.md) v6.6.0 は外部キーと互換性があります。以前のバージョンのBRでは、外部キーを持つテーブルを v6.6.0 以降のクラスターに復元するときにエラーが報告される可能性があります。v6.6.0 より前のBRを使用する場合は、クラスターを復元する前に、ダウンストリーム TiDB クラスターの`foreign_key_checks`を無効にすることをお勧めします。
+-   [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)使用する場合、ターゲット テーブルが外部キーを使用している場合は、データをインポートする前に、ダウンストリーム TiDB クラスターの`foreign_key_checks`無効にすることをお勧めします。v6.6.0 より前のバージョンでは、このシステム変数を無効にしても効果がなく、ダウンストリーム データベース ユーザーに`REFERENCES`権限を付与するか、ダウンストリーム データベースにターゲット テーブルを事前に手動で作成して、スムーズなデータ インポートを確保する必要があります。
 
 </CustomContent>
 
@@ -322,15 +322,15 @@ Create Table | CREATE TABLE `child` (
 
 <CustomContent platform="tidb">
 
--   アップストリーム データベースとダウンストリーム データベースの間でデータを比較するために[同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用する場合、データベースのバージョンが異なり、 [ダウンストリーム TiDB 内の無効な外部キー](#compatibility-between-tidb-versions)ある場合、 sync-diff-inspector はテーブル スキーマの不一致エラーを報告する可能性があります。これは、TiDB v6.6.0 が無効な外部キーに対して`/* FOREIGN KEY INVALID */`コメントを追加するためです。
+-   [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用して上流データベースと下流データベース間でデータを比較する場合、データベースのバージョンが異なり、 [下流の TiDB に無効な外部キーがある](#compatibility-between-tidb-versions)があると、sync-diff-inspector によってテーブル スキーマの不整合エラーが報告されることがあります。これは、TiDB v6.6.0 で無効な外部キーに対して`/* FOREIGN KEY INVALID */`コメントが追加されたためです。
 
 </CustomContent>
 
 ### MySQLとの互換性 {#compatibility-with-mysql}
 
-名前を指定せずに外部キーを作成すると、TiDB によって生成される名前は MySQL によって生成される名前とは異なります。たとえば、TiDB によって生成される外部キー名は`fk_1` 、 `fk_2` 、および`fk_3`ですが、MySQL によって生成される外部キー名は`table_name_ibfk_1` 、 `table_name_ibfk_2` 、および`table_name_ibfk_3`です。
+名前を指定せずに外部キーを作成すると、TiDB によって生成される名前は MySQL によって生成される名前とは異なります。たとえば、TiDB によって生成される外部キー名は`fk_1` 、 `fk_2` 、 `fk_3`ですが、MySQL によって生成される外部キー名は`table_name_ibfk_1` 、 `table_name_ibfk_2` 、 `table_name_ibfk_3`です。
 
-MySQL と TiDB は両方とも「インライン`REFERENCES`仕様」を解析しますが、無視します。 `FOREIGN KEY`の定義の一部である`REFERENCES`仕様のみがチェックされ、適用されます。次の例では、 `REFERENCES`句を使用して外部キー制約を作成します。
+MySQL と TiDB はどちらも「インライン`REFERENCES`仕様」を解析しますが無視します。5 `FOREIGN KEY`の定義の一部である`REFERENCES`仕様のみがチェックされ、適用されます。次の例では、 `REFERENCES`句を使用して外部キー制約を作成します。
 
 ```sql
 CREATE TABLE parent (

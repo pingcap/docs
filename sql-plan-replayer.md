@@ -5,7 +5,7 @@ summary: Learn how to use PLAN REPLAYER to save and restore the on-site informat
 
 # PLAN REPLAYERを使用してクラスタのオンサイト情報を保存および復元する {#use-plan-replayer-to-save-and-restore-the-on-site-information-of-a-cluster}
 
-TiDB クラスターの問題を特定してトラブルシューティングする場合、多くの場合、システムと実行プランに関する情報を提供する必要があります。より便利かつ効率的に情報を取得し、クラスターの問題をトラブルシューティングできるようにするために、TiDB v5.3.0 で`PLAN REPLAYER`コマンドが導入されました。このコマンドを使用すると、クラスターのオンサイト情報を簡単に保存および復元でき、トラブルシューティングの効率が向上し、管理のために問題をより簡単にアーカイブできるようになります。
+TiDB クラスターの問題を特定してトラブルシューティングする場合、多くの場合、システムと実行プランに関する情報を提供する必要があります。より便利かつ効率的に情報を取得し、クラスターの問題をトラブルシューティングできるように、TiDB v5.3.0 では`PLAN REPLAYER`コマンドが導入されています。このコマンドを使用すると、クラスターのオンサイト情報を簡単に保存および復元でき、トラブルシューティングの効率が向上し、管理のために問題をより簡単にアーカイブできるようになります。
 
 `PLAN REPLAYER`の特徴は以下の通りです。
 
@@ -252,6 +252,29 @@ mysql> SELECT * FROM mysql.plan_replayer_status;
 > **注記：**
 >
 > `PLAN REPLAYER CAPTURE`の結果ファイルは、TiDB クラスターに最大 1 週間保存されます。1 週間後、TiDB はファイルを削除します。
+
+### キャプチャタスクを削除する {#remove-the-capture-tasks}
+
+キャプチャ タスクが不要になった場合は、 `PLAN REPLAYER CAPTURE REMOVE`ステートメントを使用して削除できます。例:
+
+```sql
+mysql> PLAN REPLAYER CAPTURE '077a87a576e42360c95530ccdac7a1771c4efba17619e26be50a4cfd967204a0' '4838af52c1e07fc8694761ad193d16a689b2128bc5ced9d13beb31ae27b370ce';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SELECT * FROM mysql.plan_replayer_task;
++------------------------------------------------------------------+------------------------------------------------------------------+---------------------+
+| sql_digest                                                       | plan_digest                                                      | update_time         |
++------------------------------------------------------------------+------------------------------------------------------------------+---------------------+
+| 077a87a576e42360c95530ccdac7a1771c4efba17619e26be50a4cfd967204a0 | 4838af52c1e07fc8694761ad193d16a689b2128bc5ced9d13beb31ae27b370ce | 2024-05-21 11:26:10 |
++------------------------------------------------------------------+------------------------------------------------------------------+---------------------+
+1 row in set (0.01 sec)
+
+mysql> PLAN REPLAYER CAPTURE REMOVE '077a87a576e42360c95530ccdac7a1771c4efba17619e26be50a4cfd967204a0' '4838af52c1e07fc8694761ad193d16a689b2128bc5ced9d13beb31ae27b370ce';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SELECT * FROM mysql.plan_replayer_task;
+Empty set (0.01 sec)
+```
 
 ## <code>PLAN REPLAYER CONTINUOUS CAPTURE</code>を使用する {#use-code-plan-replayer-continuous-capture-code}
 

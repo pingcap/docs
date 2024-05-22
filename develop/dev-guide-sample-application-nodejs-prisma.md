@@ -1,59 +1,59 @@
 ---
 title: Connect to TiDB with Prisma
-summary: このチュートリアルでは、TiDBとPrismaを使用して、環境のセットアップ、TiDBクラスターへの接続、アプリケーションのビルドと実行方法を学ぶことができます。必要なものは、Node.js >= 16.x、Git、実行中のTiDBクラスターです。また、サンプルコードを実行してTiDBに接続する方法も説明されています。データの挿入、クエリデータ、データの更新、データの削除などの操作も学ぶことができます。
+summary: Learn how to connect to TiDB using Prisma. This tutorial gives Node.js sample code snippets that work with TiDB using Prisma.
 ---
 
-# Prisma を使用して TiDB に接続する {#connect-to-tidb-with-prisma}
+# PrismaでTiDBに接続する {#connect-to-tidb-with-prisma}
 
-TiDB は MySQL 互換データベースであり、 [プリズマ](https://github.com/prisma/prisma)は Node.js 用の人気のあるオープンソース ORM フレームワークです。
+TiDB は MySQL 互換のデータベースであり、 [プリズマ](https://github.com/prisma/prisma) Node.js 用の人気のあるオープンソース ORM フレームワークです。
 
-このチュートリアルでは、TiDB と Prisma を使用して次のタスクを実行する方法を学習できます。
+このチュートリアルでは、TiDB と Prisma を使用して次のタスクを実行する方法を学習します。
 
--   環境をセットアップします。
+-   環境を設定します。
 -   Prisma を使用して TiDB クラスターに接続します。
--   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作の[サンプルコードスニペット](#sample-code-snippets)を見つけることができます。
+-   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作用の[サンプルコードスニペット](#sample-code-snippets)を見つけることができます。
 
 > **注記：**
 >
-> このチュートリアルは、TiDB サーバーレス、TiDB 専用、および TiDB セルフホストで動作します。
+> このチュートリアルは、TiDB Serverless、TiDB Dedicated、および TiDB Self-Hosted で機能します。
 
 ## 前提条件 {#prerequisites}
 
 このチュートリアルを完了するには、次のものが必要です。
 
--   [Node.js](https://nodejs.org/en) &gt;= 16.x がマシンにインストールされている。
+-   [Node.js](https://nodejs.org/en) &gt;= 16.x がマシンにインストールされています。
 -   [ギット](https://git-scm.com/downloads)マシンにインストールされています。
--   TiDB クラスターが実行中です。
+-   実行中の TiDB クラスター。
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
 <CustomContent platform="tidb">
 
--   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
--   [ローカル テスト TiDB クラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
+-   (推奨) [TiDB サーバーレス クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
--   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
--   [ローカル テスト TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
+-   (推奨) [TiDB サーバーレス クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
 
-## サンプル アプリを実行して TiDB に接続する {#run-the-sample-app-to-connect-to-tidb}
+## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
-このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を説明します。
+このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を示します。
 
-### ステップ 1: サンプル アプリ リポジトリのクローンを作成する {#step-1-clone-the-sample-app-repository}
+### ステップ1: サンプルアプリのリポジトリをクローンする {#step-1-clone-the-sample-app-repository}
 
-ターミナル ウィンドウで次のコマンドを実行して、サンプル コード リポジトリのクローンを作成します。
+サンプル コード リポジトリを複製するには、ターミナル ウィンドウで次のコマンドを実行します。
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-nodejs-prisma-quickstart.git
 cd tidb-nodejs-prisma-quickstart
 ```
 
-### ステップ 2: 依存関係をインストールする {#step-2-install-dependencies}
+### ステップ2: 依存関係をインストールする {#step-2-install-dependencies}
 
 次のコマンドを実行して、サンプル アプリに必要なパッケージ ( `prisma`を含む) をインストールします。
 
@@ -61,7 +61,7 @@ cd tidb-nodejs-prisma-quickstart
 npm install
 ```
 
-<details><summary><b>依存関係を既存のプロジェクトにインストールする</b></summary>
+<details><summary><b>既存のプロジェクトに依存関係をインストールする</b></summary>
 
 既存のプロジェクトの場合は、次のコマンドを実行してパッケージをインストールします。
 
@@ -71,33 +71,33 @@ npm install prisma typescript ts-node @types/node --save-dev
 
 </details>
 
-### ステップ 3: 接続パラメータを指定する {#step-3-provide-connection-parameters}
+### ステップ3: 接続パラメータを指定する {#step-3-provide-connection-parameters}
 
 選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
 <SimpleTab>
 <div label="TiDB Serverless">
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
+2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3.  接続ダイアログの設定が動作環境と一致していることを確認してください。
+3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **エンドポイント タイプは**`Public`に設定されます。
-    -   **ブランチは**`main`に設定されます。
-    -   **[接続先] は**`Prisma`に設定されます。
-    -   **[オペレーティング システム] は、**アプリケーションを実行するオペレーティング システムと一致します。
+    -   **エンドポイント タイプは**`Public`に設定されています。
+    -   **ブランチ**は`main`に設定されています。
+    -   **Connect With は**`Prisma`に設定されています。
+    -   **オペレーティング システムは**、アプリケーションを実行するオペレーティング システムと一致します。
 
-4.  パスワードをまだ設定していない場合は、 **「パスワードの生成」を**クリックしてランダムなパスワードを生成します。
+4.  まだパスワードを設定していない場合は、 **「パスワードの生成」**をクリックしてランダムなパスワードを生成します。
 
-5.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
+5.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
     ```shell
     cp .env.example .env
     ```
 
-6.  `.env`ファイルを編集し、次のように環境変数`DATABASE_URL`を設定し、接続ダイアログ内の対応するプレースホルダー`{}`を接続文字列に置き換えます。
+6.  `.env`ファイルを編集し、環境変数`DATABASE_URL`を次のように設定し、接続ダイアログ内の対応するプレースホルダー`{}`を接続文字列に置き換えます。
 
     ```dotenv
     DATABASE_URL='{connection_string}'
@@ -105,11 +105,11 @@ npm install prisma typescript ts-node @types/node --save-dev
 
     > **注記**
     >
-    > TiDB サーバーレスの場合、パブリック エンドポイントを使用する場合は、 `sslaccept=strict`設定して TLS 接続を有効にする**必要があります**。
+    > TiDB Serverless の場合、パブリック エンドポイントを使用するときは、 `sslaccept=strict`設定して TLS 接続を有効にする**必要があります**。
 
 7.  `.env`ファイルを保存します。
 
-8.  `prisma/schema.prisma`では、接続プロバイダーとして`mysql`設定し、接続 URL として`env("DATABASE_URL")`設定します。
+8.  `prisma/schema.prisma`で、接続プロバイダーとして`mysql`を設定し、接続 URL として`env("DATABASE_URL")`設定します。
 
     ```prisma
     datasource db {
@@ -121,21 +121,21 @@ npm install prisma typescript ts-node @types/node --save-dev
 </div>
 <div label="TiDB Dedicated">
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
+2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3.  **[どこからでもアクセスを許可]**をクリックし、 **[TiDB クラスター CA のダウンロード]**をクリックして CA 証明書をダウンロードします。
+3.  **「どこからでもアクセスを許可」**をクリックし、 **「CA 証明書のダウンロード」**をクリックして CA 証明書をダウンロードします。
 
-    接続文字列の取得方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
+    接続文字列を取得する方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
 
-4.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
+4.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
     ```shell
     cp .env.example .env
     ```
 
-5.  `.env`ファイルを編集し、次のように環境変数`DATABASE_URL`を設定し、接続ダイアログ上の対応するプレースホルダー`{}`接続パラメーターに置き換えます。
+5.  `.env`ファイルを編集し、環境変数`DATABASE_URL`を次のように設定し、接続ダイアログで対応するプレースホルダー`{}`を接続パラメータに置き換えます。
 
     ```dotenv
     DATABASE_URL='mysql://{user}:{password}@{host}:4000/test?sslaccept=strict&sslcert={downloaded_ssl_ca_path}'
@@ -143,11 +143,11 @@ npm install prisma typescript ts-node @types/node --save-dev
 
     > **注記**
     >
-    > TiDB サーバーレスの場合、パブリック エンドポイントを使用する場合は`sslaccept=strict`設定して TLS 接続を有効にすることが**推奨され**ます。 `sslaccept=strict`を設定して TLS 接続を有効にする場合は、 `sslcert=/path/to/ca.pem`を介して接続ダイアログからダウンロードした CA 証明書のファイル パスを指定する**必要があります**。
+    > TiDB Serverless の場合、パブリックエンドポイントを使用する場合は、 `sslaccept=strict`設定して TLS 接続を有効にすることを**お勧めします**。 `sslaccept=strict`を設定して TLS 接続を有効にする場合は、 `sslcert=/path/to/ca.pem`を介して接続ダイアログからダウンロードした CA 証明書のファイル パスを指定する**必要があります**。
 
 6.  `.env`ファイルを保存します。
 
-7.  `prisma/schema.prisma`では、接続プロバイダーとして`mysql`設定し、接続 URL として`env("DATABASE_URL")`設定します。
+7.  `prisma/schema.prisma`で、接続プロバイダーとして`mysql`を設定し、接続 URL として`env("DATABASE_URL")`設定します。
 
     ```prisma
     datasource db {
@@ -159,13 +159,13 @@ npm install prisma typescript ts-node @types/node --save-dev
 </div>
 <div label="TiDB Self-Hosted">
 
-1.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
+1.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
     ```shell
     cp .env.example .env
     ```
 
-2.  `.env`ファイルを編集し、次のように環境変数`DATABASE_URL`を設定し、対応するプレースホルダー`{}` TiDB クラスターの接続パラメーターに置き換えます。
+2.  `.env`ファイルを編集し、環境変数`DATABASE_URL`を次のように設定し、対応するプレースホルダー`{}`を TiDB クラスターの接続パラメータに置き換えます。
 
     ```dotenv
     DATABASE_URL='mysql://{user}:{password}@{host}:4000/test'
@@ -175,7 +175,7 @@ npm install prisma typescript ts-node @types/node --save-dev
 
 3.  `.env`ファイルを保存します。
 
-4.  `prisma/schema.prisma`では、接続プロバイダーとして`mysql`設定し、接続 URL として`env("DATABASE_URL")`設定します。
+4.  `prisma/schema.prisma`で、接続プロバイダーとして`mysql`を設定し、接続 URL として`env("DATABASE_URL")`設定します。
 
     ```prisma
     datasource db {
@@ -187,9 +187,9 @@ npm install prisma typescript ts-node @types/node --save-dev
 </div>
 </SimpleTab>
 
-### ステップ 4. データベース スキーマを初期化する {#step-4-initialize-the-database-schema}
+### ステップ4. データベーススキーマを初期化する {#step-4-initialize-the-database-schema}
 
-次のコマンドを実行して[プリズママイグレーション](https://www.prisma.io/docs/concepts/components/prisma-migrate)を呼び出し、 `prisma/prisma.schema`で定義したデータ モデルを使用してデータベースを初期化します。
+次のコマンドを実行して[プリズマ移行](https://www.prisma.io/docs/concepts/components/prisma-migrate)呼び出し、 `prisma/prisma.schema`で定義されたデータ モデルを使用してデータベースを初期化します。
 
 ```shell
 npx prisma migrate dev
@@ -222,7 +222,7 @@ model Profile {
 }
 ```
 
-Prisma でデータ モデルを定義する方法については、ドキュメント[データ・モデル](https://www.prisma.io/docs/concepts/components/prisma-schema/data-model)を参照してください。
+Prisma でデータ モデルを定義する方法については、 [データ・モデル](https://www.prisma.io/docs/concepts/components/prisma-schema/data-model)ドキュメントを確認してください。
 
 **予想される実行出力:**
 
@@ -230,11 +230,11 @@ Prisma でデータ モデルを定義する方法については、ドキュメ
 
     ✔ Generated Prisma Client (5.1.1 | library) to ./node_modules/@prisma/client in 54ms
 
-このコマンドは、 `prisma/prisma.schema`に基づいて TiDB データベースにアクセスする場合も[プリズマクライアント](https://www.prisma.io/docs/concepts/components/prisma-client)を生成します。
+このコマンドは、 `prisma/prisma.schema`に基づいて TiDB データベースにアクセスするための[プリズマクライアント](https://www.prisma.io/docs/concepts/components/prisma-client)生成します。
 
-### ステップ 5: コードを実行する {#step-5-run-the-code}
+### ステップ5: コードを実行する {#step-5-run-the-code}
 
-次のコマンドを実行してサンプル コードを実行します。
+サンプルコードを実行するには、次のコマンドを実行します。
 
 ```shell
 npm start
@@ -274,13 +274,13 @@ void main();
 
 ## サンプルコードスニペット {#sample-code-snippets}
 
-次のサンプル コード スニペットを参照して、独自のアプリケーション開発を完了できます。
+次のサンプル コード スニペットを参照して、独自のアプリケーション開発を完了することができます。
 
-完全なサンプル コードとその実行方法については、 [tidb-samples/tidb-nodejs-prisma-quickstart](https://github.com/tidb-samples/tidb-nodejs-prisma-quickstart)リポジトリを確認してください。
+完全なサンプル コードとその実行方法については、 [tidb-samples/tidb-nodejs-prisma-クイックスタート](https://github.com/tidb-samples/tidb-nodejs-prisma-quickstart)リポジトリを参照してください。
 
-### データの挿入 {#insert-data}
+### データを挿入 {#insert-data}
 
-次のクエリは、単一の`Player`レコードを作成し、TiDB によって生成された`id`フィールドを含む、作成された`Player`オブジェクトを返します。
+次のクエリは、単一の`Player`レコードを作成し、TiDB によって生成された`id`フィールドを含む作成された`Player`オブジェクトを返します。
 
 ```javascript
 const player: Player = await prisma.player.create({
@@ -293,11 +293,11 @@ const player: Player = await prisma.player.create({
 });
 ```
 
-詳細については、 [データの挿入](/develop/dev-guide-insert-data.md)を参照してください。
+詳細については[データを挿入](/develop/dev-guide-insert-data.md)を参照してください。
 
 ### クエリデータ {#query-data}
 
-次のクエリは、レコードが見つからない場合、ID `101`または`null`を持つ単一の`Player`オブジェクトを返します。
+次のクエリは、レコードが見つからない場合は ID `101`または`null`を持つ単一の`Player`オブジェクトを返します。
 
 ```javascript
 const player: Player | null = prisma.player.findUnique({
@@ -307,11 +307,11 @@ const player: Player | null = prisma.player.findUnique({
 });
 ```
 
-詳細については、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md)を参照してください。
+詳細については[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)を参照してください。
 
-### データを更新する {#update-data}
+### データの更新 {#update-data}
 
-次のクエリは、ID `101`の`Player`に`50`コインと`50`グッズを追加します。
+次のクエリは、 ID `101`の`Player`にコイン`50`と商品`50`を追加します。
 
 ```javascript
 await prisma.player.update({
@@ -329,9 +329,9 @@ await prisma.player.update({
 });
 ```
 
-詳細については、 [データを更新する](/develop/dev-guide-update-data.md)を参照してください。
+詳細については[データの更新](/develop/dev-guide-update-data.md)を参照してください。
 
-### データの削除 {#delete-data}
+### データを削除する {#delete-data}
 
 次のクエリは、ID `101`の`Player`削除します。
 
@@ -343,38 +343,38 @@ await prisma.player.delete({
 });
 ```
 
-詳細については、 [データの削除](/develop/dev-guide-delete-data.md)を参照してください。
+詳細については[データを削除する](/develop/dev-guide-delete-data.md)を参照してください。
 
-## 便利なメモ {#useful-notes}
+## 役に立つメモ {#useful-notes}
 
-### 外部キー制約と Prisma リレーション モードの比較 {#foreign-key-constraints-vs-prisma-relation-mode}
+### 外部キー制約と Prisma リレーション モード {#foreign-key-constraints-vs-prisma-relation-mode}
 
-[参照整合性](https://en.wikipedia.org/wiki/Referential_integrity?useskin=vector)を確認するには、外部キー制約または Prisma リレーション モードを使用できます。
+[参照整合性](https://en.wikipedia.org/wiki/Referential_integrity?useskin=vector)確認するには、外部キー制約または Prisma リレーション モードを使用できます。
 
--   [外部キー](https://docs.pingcap.com/tidb/stable/foreign-key)は、TiDB v6.6.0 以降でサポートされる実験的機能であり、関連データのクロステーブル参照と、データの一貫性を維持するための外部キー制約が可能になります。
+-   [外部キー](https://docs.pingcap.com/tidb/stable/foreign-key)は、TiDB v6.6.0 からサポートされている実験的機能であり、関連データのテーブル間参照と、データの一貫性を維持するための外部キー制約を可能にします。
 
     > **警告：**
     >
-    > **外部キーは、小規模および中規模のデータ シナリオに適しています。**大量のデータで外部キーを使用すると、重大なパフォーマンスの問題が発生し、システムに予期しない影響を与える可能性があります。外部キーを使用する予定がある場合は、最初に徹底的な検証を実行し、慎重に使用してください。
+    > **外部キーは、小規模および中規模のデータ シナリオに適しています。**大規模なデータ ボリュームで外部キーを使用すると、重大なパフォーマンスの問題が発生し、システムに予期しない影響が生じる可能性があります。外部キーを使用する場合は、まず徹底的な検証を実施し、慎重に使用してください。
 
--   [プリズマ関係モード](https://www.prisma.io/docs/concepts/components/prisma-schema/relations/relation-mode)は、Prisma クライアント側での参照整合性のエミュレーションです。ただし、参照整合性を維持するために追加のデータベース クエリが必要になるため、パフォーマンスに影響があることに注意してください。
+-   [プリズマ関係モード](https://www.prisma.io/docs/concepts/components/prisma-schema/relations/relation-mode) 、Prisma クライアント側での参照整合性のエミュレーションです。ただし、参照整合性を維持するために追加のデータベース クエリが必要になるため、パフォーマンスに影響があることに注意してください。
 
 ## 次のステップ {#next-steps}
 
--   ORM フレームワーク Prisma ドライバーの詳しい使用方法を[Prisma のドキュメント](https://www.prisma.io/docs)から学びます。
--   [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) で TiDB [トランザクション](/develop/dev-guide-transaction-overview.md) [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md) [データを更新する](/develop/dev-guide-update-data.md)ベスト プラクティス[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)学習[データの削除](/develop/dev-guide-delete-data.md)ます。
--   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
+-   ORM フレームワーク Prisma ドライバーの使用方法を[Prismaのドキュメント](https://www.prisma.io/docs)から詳しく学びます。
+-   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入](/develop/dev-guide-insert-data.md) 、 [データの更新](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
+-   プロフェッショナル[TiDB 開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## 助けが必要？ {#need-help}
 
 <CustomContent platform="tidb">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[サポートチケットを作成する](/support.md)について質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](/support.md)について質問します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[サポートチケットを作成する](https://support.pingcap.com/)について質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
 
 </CustomContent>
