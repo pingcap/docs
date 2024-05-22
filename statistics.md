@@ -565,7 +565,6 @@ LOAD STATS 'file_name'
 
 `file_name` is the file name of the statistics to be imported.
 
-
 ## Lock statistics
 
 Starting from v6.5.0, TiDB supports locking statistics. After the statistics of a table or a partition are locked, the statistics of the table cannot be modified and the `ANALYZE` statement cannot be executed on the table. For example:
