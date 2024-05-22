@@ -74,4 +74,3 @@ After creating the recovery group, you might want to familiarize yourself with t
 
 - [Failover Databases](/tidb-cloud/recovery-group-failover.md)
 - [Reprotect Databases](/tidb-cloud/recovery-group-reprotect.md)
-

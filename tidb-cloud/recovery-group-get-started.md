@@ -76,4 +76,3 @@ After creating a Recovery Group, view the **Recovery Group Detail** page to view
 After creating the recovery group, you might want to familiarize yourself with the failover and reprotect operations. These operations are used to **Failover** the primary cluster for the replicated databases from one cluster to the other, and then to later reestablish replication in the opposite direction to **Reprotect** the failed over databases.
 
 - [Failover and Reprotect Databases](/tidb-cloud/recovery-group-failover.md)
-

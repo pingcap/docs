@@ -25,4 +25,3 @@ When a recovery group is no longer needed to manage the replication of a set of 
     > - The databases associated with the recovery group are no longer protected against disaster.
 
 5. Confirm that you understand the impacting of the deletion by typing the name of the recovery group and clicking **I understand, delete it** to delete the recovery group.
-
