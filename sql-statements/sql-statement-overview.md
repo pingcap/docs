@@ -77,6 +77,8 @@ TiDB uses SQL statements that try to follow the ISO/IEC SQL standards and are ex
 
 ## Administrative statements
 
+<CustomContent platform="tidb">
+
 | SQL Statement | Description |
 |---------------|-------------|
 | [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) | Cancels a DDL job. |
@@ -92,6 +94,27 @@ TiDB uses SQL statements that try to follow the ISO/IEC SQL standards and are ex
 | [`SET <variable>`](/sql-statements/sql-statement-set-variable.md) | Sets a variable. |
 | [`SET NAMES`](/sql-statements/sql-statement-set-names.md) | Set a character set and collation. |
 | [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md) | Splits a region into smaller regions. |
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+| SQL Statement | Description |
+|---------------|-------------|
+| [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) | Cancels a DDL job. |
+| [`ADMIN CHECK [TABLE\|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | Checks the integrity of a table or index. |
+| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md) | Computes and checks the checksum of a table. |
+| [`ADMIN CLEANUP`](/sql-statements/sql-statement-admin-cleanup.md) | Cleans up residual files or resources. |
+| [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md) | Pauses DDL operations. |
+| [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md) | Resumes DDL operations. |
+| [`ADMIN SHOW DDL [JOBS\|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md) | Shows DDL jobs or job queries. |
+| [`ADMIN`](/sql-statements/sql-statement-admin.md) | Performs various administrative tasks. |
+| [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md) | Flushes a table. |
+| [`SET <variable>`](/sql-statements/sql-statement-set-variable.md) | Sets a variable. |
+| [`SET NAMES`](/sql-statements/sql-statement-set-names.md) | Set a character set and collation. |
+| [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md) | Splits a region into smaller regions. |
+
+</CustomContent>
 
 ## Data import and export
 
@@ -130,6 +153,8 @@ TiDB uses SQL statements that try to follow the ISO/IEC SQL standards and are ex
 
 ## Resource groups
 
+<CustomContent platform="tidb">
+
 | SQL Statement | Description |
 |---------------|-------------|
 | [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md) | Modifies a resource group. |
@@ -139,6 +164,21 @@ TiDB uses SQL statements that try to follow the ISO/IEC SQL standards and are ex
 | [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md) | Manage runaway query watch list. |
 | [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md) | Sets a resource group. |
 | [`SHOW CREATE RESOURCE GROUP`](/sql-statements/sql-statement-show-create-resource-group.md) | Shows the CREATE statement for a resource group. |
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+| SQL Statement | Description |
+|---------------|-------------|
+| [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md) | Modifies a resource group. |
+| [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md) | Creates a new resource group. |
+| [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md) | Drops a resource group. |
+| [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md) | Manage runaway query watch list. |
+| [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md) | Sets a resource group. |
+| [`SHOW CREATE RESOURCE GROUP`](/sql-statements/sql-statement-show-create-resource-group.md) | Shows the CREATE statement for a resource group. |
+
+</CustomContent>
 
 ## Utility statements
 
@@ -165,6 +205,8 @@ TiDB uses SQL statements that try to follow the ISO/IEC SQL standards and are ex
 
 ## Instance management
 
+<CustomContent platform="tidb">
+
 | SQL Statement | Description |
 |---------------|-------------|
 | [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md) | Modifies an instance. |
@@ -176,6 +218,23 @@ TiDB uses SQL statements that try to follow the ISO/IEC SQL standards and are ex
 | [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md) | Shows active threads. |
 | [`SHOW PROFILES`](/sql-statements/sql-statement-show-profiles.md) | Shows query profiles. |
 | [`SHUTDOWN`](/sql-statements/sql-statement-shutdown.md) | Shuts down the database server. |
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+| SQL Statement | Description |
+|---------------|-------------|
+| [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md) | Modifies an instance. |
+| [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md) | Resets status variables. |
+| [`KILL`](/sql-statements/sql-statement-kill.md) | Kills a process. |
+| [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md) | Shows available storage engines. |
+| [`SHOW MASTER STATUS`](/sql-statements/sql-statement-show-master-status.md) | Shows the status of the master server. |
+| [`SHOW PLUGINS`](/sql-statements/sql-statement-show-plugins.md) | Shows installed plugins. |
+| [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md) | Shows active threads. |
+| [`SHOW PROFILES`](/sql-statements/sql-statement-show-profiles.md) | Shows query profiles. |
+
+</CustomContent>
 
 ## Locking statements
 
@@ -208,6 +267,8 @@ TiDB uses SQL statements that try to follow the ISO/IEC SQL standards and are ex
 | [`SHOW GRANTS`](/sql-statements/sql-statement-show-grants.md) | Shows grants for a user. |
 | [`SHOW PRIVILEGES`](/sql-statements/sql-statement-show-privileges.md) | Shows available privileges. |
 
+<CustomContent platform="tidb">
+
 ## TiDB Binlog & TiCDC
 
 | SQL Statement | Description |
@@ -218,6 +279,8 @@ TiDB uses SQL statements that try to follow the ISO/IEC SQL standards and are ex
 | [`SHOW DRAINER STATUS`](/sql-statements/sql-statement-show-drainer-status.md) | Shows the status of the drainer. |
 | [`SHOW MASTER STATUS`](/sql-statements/sql-statement-show-master-status.md) | Shows the status of the master server. |
 | [`SHOW PUMP STATUS`](/sql-statements/sql-statement-show-pump-status.md) | Shows the status of the pump. |
+
+</CustomContent>
 
 ## Statistics and plan management
 
