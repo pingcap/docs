@@ -34,4 +34,4 @@ A recovery group consists of a set of replicated databases that can be failed ov
 ## What's next
 
 - To get started with recovery groups, see [Create Database Recovery Group](/tidb-cloud/recovery-group-get-started.md).
-- To learn how to use a recovery group, see [Failover Databases](/tidb-cloud/recovery-group-failover.md) and [Reprotect Databases](/tidb-cloud/recovery-group-reprotect.md)
+- To learn how to use a recovery group, see [Failover and Reprotect Databases](/tidb-cloud/recovery-group-failover.md).

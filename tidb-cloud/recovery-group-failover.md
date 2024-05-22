@@ -73,4 +73,4 @@ If the cluster that was impacted by the disaster is able to be brought online ag
 After creating the recovery group, you might want to familiarize yourself with the failover and reprotect operations. These operations are used to **Failover** the primary cluster for the replicated databases from one cluster to the other, and then to later reestablish replication in the opposite direction to **Reprotect** the failed over databases.
 
 - [Failover Databases](/tidb-cloud/recovery-group-failover.md)
-- [Reprotect Databases](/tidb-cloud/recovery-group-reprotect.md)
+- [Failover and Reprotect Databases](/tidb-cloud/recovery-group-failover.md)
