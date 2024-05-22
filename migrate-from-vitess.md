@@ -29,6 +29,6 @@ The following two examples show how Dumpling and TiDB Lightning work together to
 
 ### DM
 
-The following example shows how DM migrates data from Vitess to TiDB.
+The following example shows how [DM](/dm/dm-overview.md) migrates data from Vitess to TiDB.
 
 ![Vitess to TiDB with DM](/media/vitess_to_tidb_dm.png)
