@@ -56,5 +56,5 @@ This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 
-* [ANALYZE](/sql-statements/sql-statement-analyze-table.md)
+* [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)
 * [Introduction to Statistics](/statistics.md)
