@@ -13,10 +13,10 @@ Currently, the `SHOW STATS_HEALTHY` statement returns the following columns:
 
 | Column name | Description            |
 | -------- | ------------- |
-| Db_name | Database name |
-| Table_name | Table name |
-| Partition_name | Partition name |
-| Healthy | Healthy percentage between 0 and 100 |
+| `Db_name` | The database name |
+| `Table_name` | The table name |
+| `Partition_name` | The partition name |
+| `Healthy` | The healthy percentage between 0 and 100 |
 
 ## Synopsis
 

@@ -11,10 +11,10 @@ Currently, the `SHOW STATS_LOCKED` statement returns the following columns:
 
 | Column name | Description            |
 | -------- | ------------- |
-| Db_name | Database name |
-| Table_name | Table name |
-| Partition_name | Partition name |
-| Status | Statistics status, such as `locked` |
+| `Db_name` | The database name |
+| `Table_name` | The table name |
+| `Partition_name` | The partition name |
+| `Status` | The statistics status, such as `locked` |
 
 ## Synopsis
 

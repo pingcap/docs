@@ -13,20 +13,20 @@ Currently, the `SHOW STATS_HISTOGRAMS` statement returns the following columns:
 | Column name | Description            |
 | -------- | ------------- |
 | Db_name | Database name |
-| Table_name | Table name |
-| Partition_name | Partition name |
-| Column_name | Column name |
-| Is_index | 1 if this is an index, else 0 |
-| Update_time | Update time |
-| Distinct_count | Distinct count |
-| Null_count | NULL count |
-| Avg_col_size | Average col size |
-| Correlation | Correlation |
-| Load_status | Load status like `allEvicted`, `allLoaded`, etc |
-| Total_mem_usage | Total memory usage |
-| Hist_mem_usage | Historical memory usage |
-| Topn_mem_usage | TopN memory usage |
-| Cms_mem_usage | CMS memory usage |
+| `Table_name` | The table name |
+| `Partition_name` | The partition name |
+| `Column_name` | The column name |
+| `Is_index` | Whether it is an index column or not |
+| `Update_time` | The update time |
+| `Distinct_count` | The distinct count |
+| `Null_count` | NULL count |
+| `Avg_col_size` | The average col size |
+| `Correlation` | Correlation |
+| `Load_status` | Load status, such as `allEvicted` and `allLoaded` |
+| `Total_mem_usage` | The total memory usage |
+| `Hist_mem_usage` | The historical memory usage |
+| `Topn_mem_usage` | The TopN memory usage |
+| `Cms_mem_usage` | The CMS memory usage |
 
 ## Synopsis
 
