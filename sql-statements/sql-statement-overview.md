@@ -185,7 +185,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 
 | SQL Statement | Description |
 |---------------|-------------|
-| [`DESC`](/sql-statements/sql-statement-desc.md) | Describes the structure of a table. |
+| [`DESC`](/sql-statements/sql-statement-desc.md) | An alias to `DESCRIBE`, which shows the structure of a table. |
 | [`DESCRIBE`](/sql-statements/sql-statement-describe.md) | Shows the structure of a table. |
 | [`DO`](/sql-statements/sql-statement-do.md) | Executes an expression but does not return any results. |
 | [`EXPLAIN`](/sql-statements/sql-statement-explain.md) | Shows the execution plan of a query. |
