@@ -5,6 +5,8 @@ summary: TiDB has released multiple versions, including 8.0.0-DMR, 7.6.0-DMR, 7.
 
 # TiDB Release Notes
 
+<EmailSubscriptionWrapper />
+
 ## 7.5
 
 - [7.5.1](/releases/release-7.5.1.md): 2024-02-29

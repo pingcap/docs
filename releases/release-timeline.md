@@ -7,6 +7,8 @@ summary: Learn about the TiDB release timeline.
 
 This document shows all the released TiDB versions in reverse chronological order.
 
+<EmailSubscriptionWrapper />
+
 | Version | Release Date |
 | :--- | :--- |
 | [7.1.5](/releases/release-7.1.5.md) | 2024-04-26 |
