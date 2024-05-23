@@ -202,7 +202,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`SHOW ERRORS`](/sql-statements/sql-statement-show-errors.md) | Shows errors from previously executed statements. |
 | [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md) | Included for [compatibility with MySQL](/mysql-compatibility.md). TiDB uses [Prometheus and Grafana](/tidb-monitoring-framework.md) for centralized metrics collection instead of `SHOW STATUS` for most metrics. |
 | [`SHOW VARIABLES`](/sql-statements/sql-statement-show-variables.md) | Shows system variables. |
-| [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md) | Shows warning messages. |
+| [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md) | Shows warnings and notes from previously executed statements. |
 
 ## Instance management
 
