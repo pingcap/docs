@@ -90,7 +90,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`ADMIN SHOW DDL [JOBS\|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md) | Shows DDL jobs or job queries. |
 | [`ADMIN SHOW TELEMETRY`](/sql-statements/sql-statement-admin-show-telemetry.md) | Shows telemetry data. |
 | [`ADMIN`](/sql-statements/sql-statement-admin.md) | Performs various administrative tasks. |
-| [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md) |  Included for MySQL compatibility. It has no effective usage in TiDB. |
+| [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md) |  Included for [MySQL compatibility](/mysql-compatibility.md). It has no effective usage in TiDB. |
 | [`SET <variable>`](/sql-statements/sql-statement-set-variable.md) | Modifies a system variable or user variable. |
 | [`SET [NAMES\|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md) | Set a character set and collation. |
 | [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md) | Splits a Region into smaller Regions. |
@@ -109,7 +109,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md) | Resumes DDL operations. |
 | [`ADMIN SHOW DDL [JOBS\|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md) | Shows DDL jobs or job queries. |
 | [`ADMIN`](/sql-statements/sql-statement-admin.md) | Performs various administrative tasks. |
-| [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md) |  Included for MySQL compatibility. It has no effective usage in TiDB. |
+| [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md) |  Included for [MySQL compatibility](/mysql-compatibility.md). It has no effective usage in TiDB. |
 | [`SET <variable>`](/sql-statements/sql-statement-set-variable.md) | Modifies a system variable or user variable. |
 | [`SET [NAMES\|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md) | Set a character set and collation. |
 | [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md) | Splits a Region into smaller Regions. |
@@ -200,7 +200,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md) | Lists character sets. |
 | [`SHOW COLLATIONS`](/sql-statements/sql-statement-show-collation.md) | Lists collations. |
 | [`SHOW ERRORS`](/sql-statements/sql-statement-show-errors.md) | Shows errors from previously executed statements. |
-| [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md) | Included for compatibility with MySQL. TiDB uses Prometheus and Grafana for centralized metrics collection instead of `SHOW STATUS` for most metrics. |
+| [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md) | Included for [compatibility with MySQL](/mysql-compatibility.md). TiDB uses [Prometheus and Grafana](/tidb-monitoring-framework.md) for centralized metrics collection instead of `SHOW STATUS` for most metrics. |
 | [`SHOW VARIABLES`](/sql-statements/sql-statement-show-variables.md) | Shows system variables. |
 | [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md) | Shows warning messages. |
 
@@ -211,13 +211,13 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | SQL Statement | Description |
 |---------------|-------------|
 | [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md) | Modifies an instance. |
-| [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md) | Included for compatibility with MySQL. TiDB uses Prometheus and Grafana for centralized metrics collection instead of `SHOW STATUS` for most metrics. |
+| [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md) | Included for [compatibility with MySQL](/mysql-compatibility.md). TiDB uses [Prometheus and Grafana](/tidb-monitoring-framework.md) for centralized metrics collection instead of `SHOW STATUS` for most metrics. |
 | [`KILL`](/sql-statements/sql-statement-kill.md) | Kills a connection in any TiDB instance in the current TiDB cluster. |
 | [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md) | Shows the configuration of various components of TiDB. |
 | [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md) | Shows available storage engines. |
 | [`SHOW PLUGINS`](/sql-statements/sql-statement-show-plugins.md) | Shows installed plugins. |
 | [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md) | Shows the current sessions connected to the same TiDB server. |
-| [`SHOW PROFILES`](/sql-statements/sql-statement-show-profiles.md) | Shows query profiles. |
+| [`SHOW PROFILES`](/sql-statements/sql-statement-show-profiles.md) | Shows query profiles. Included for [compatibility with MySQL](/mysql-compatibility.md). Currently only returns an empty result. |
 | [`SHUTDOWN`](/sql-statements/sql-statement-shutdown.md) | Stops the client-connected TiDB instance, not the entire TiDB cluster. |
 
 </CustomContent>
@@ -227,7 +227,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | SQL Statement | Description |
 |---------------|-------------|
 | [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md) | Modifies an instance. |
-| [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md) | Included for compatibility with MySQL. TiDB uses Prometheus and Grafana for centralized metrics collection instead of `SHOW STATUS` for most metrics. |
+| [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md) | Included for [compatibility with MySQL](/mysql-compatibility.md). TiDB uses [Prometheus and Grafana](/tidb-monitoring-framework.md) for centralized metrics collection instead of `SHOW STATUS` for most metrics. |
 | [`KILL`](/sql-statements/sql-statement-kill.md) | Kills a connection in any TiDB instance in the current TiDB cluster. |
 | [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md) | Shows available storage engines. |
 | [`SHOW MASTER STATUS`](/sql-statements/sql-statement-show-master-status.md) | Shows the latest TSO in the cluster. |
