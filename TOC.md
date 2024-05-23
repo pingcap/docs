@@ -732,7 +732,7 @@
       - [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md)
       - [`ALTER SEQUENCE`](/sql-statements/sql-statement-alter-sequence.md)
       - `ALTER TABLE`
-        - [`Overview`](/sql-statements/sql-statement-alter-table.md)
+        - [Overview](/sql-statements/sql-statement-alter-table.md)
         - [`ADD COLUMN`](/sql-statements/sql-statement-add-column.md)
         - [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
         - [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
