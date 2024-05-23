@@ -5,6 +5,8 @@ summary: Learn about the new features, compatibility changes, improvements, and 
 
 # TiDB 8.1.0 Release Notes
 
+<EmailSubscriptionWrapper />
+
 Release date: May 24, 2024
 
 TiDB version: 8.1.0
@@ -113,7 +115,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 * Support using more expressions to set default column values when creating a table (GA) [#50936](https://github.com/pingcap/tidb/issues/50936) @[zimulala](https://github.com/zimulala)
 
     Before v8.0.0, when you create a table, the default value of a column is limited to strings, numbers, dates, and certain expressions. Starting from v8.0.0, you can use more expressions as the default column values. For example, you can set the default value of a column to `DATE_FORMAT`. This feature helps you meet more diverse requirements. In v8.1.0, this feature becomes GA.
-    
+
     Starting from v8.1.0, you can use expressions as default values when adding columns by `ADD COLUMN`.
 
     For more information, see [documentation](/data-type-default-values.md#specify-expressions-as-default-values).
