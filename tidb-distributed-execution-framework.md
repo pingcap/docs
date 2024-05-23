@@ -36,7 +36,7 @@ Currently, the DXF supports the distributed execution of the [`ADD INDEX`] and [
     CREATE INDEX idx1 ON table t1(c1);
     ```
 
-- [`IMPORT INTO`] is used to import data in formats such as CSV, SQL, and Parquet into an empty table. For more information, see [`IMPORT INTO`].
+- [`IMPORT INTO`] is used to import data in formats such as CSV, SQL, and Parquet into an empty table.
 
 ## Limitation
 
