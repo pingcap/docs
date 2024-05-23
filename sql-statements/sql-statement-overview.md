@@ -216,7 +216,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md) | Shows the configuration of various components of TiDB. |
 | [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md) | Shows available storage engines. |
 | [`SHOW PLUGINS`](/sql-statements/sql-statement-show-plugins.md) | Shows installed plugins. |
-| [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md) | Shows active threads. |
+| [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md) | Shows the current sessions connected to the same TiDB server. |
 | [`SHOW PROFILES`](/sql-statements/sql-statement-show-profiles.md) | Shows query profiles. |
 | [`SHUTDOWN`](/sql-statements/sql-statement-shutdown.md) | Stops the client-connected TiDB instance, not the entire TiDB cluster. |
 
