@@ -291,7 +291,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`CREATE BINDING`](/sql-statements/sql-statement-create-binding.md) | Creates an execution plan binding for a SQL statement. |
 | [`DROP BINDING`](/sql-statements/sql-statement-drop-binding.md) | Drops an execution plan binding from a SQL statement. |
 | [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md) | Drops statistics from a table. |
-| [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) | Analyze query execution. |
+| [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) | Works similar to `EXPLAIN`, with the major difference that it will execute the statement. |
 | [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md) | Load statistics into TiDB. |
 | [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md) | Show statistics collection tasks. |
 | [`SHOW BINDINGS`](/sql-statements/sql-statement-show-bindings.md) | Show created SQL bindings. |
