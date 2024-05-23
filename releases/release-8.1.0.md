@@ -222,6 +222,10 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 
     - Optimize the logic for `OperatorController` to reduce the overhead of competition locks [#7897](https://github.com/tikv/pd/issues/7897) @[nolouch](https://github.com/nolouch)
 
++ TiFlash
+
+    - Mitigate the issue that TiFlash might panic due to updating certificates after TLS is enabled [#8535](https://github.com/pingcap/tiflash/issues/8535) @[windtalker](https://github.com/windtalker)
+
 + Tools
 
     + Backup & Restore (BR)
