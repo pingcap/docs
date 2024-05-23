@@ -131,7 +131,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 |---------------|-------------|
 | [`ADMIN RECOVER INDEX`](/sql-statements/sql-statement-admin-recover.md) | Recovers the consistency based on the redundant indexes. |
 | [`BACKUP`](/sql-statements/sql-statement-backup.md) | Perform a distributed backup of the TiDB cluster. |
-| [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) | Restores the cluster to a previous state. |
+| [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) | Restores the cluster to a specific snapshot. |
 | [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) | Restores a database and its data that are deleted by the `DROP` statement. |
 | [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md) | Restore the tables and data dropped by the `DROP` or `TRUNCATE` operation. |
 | [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md) | Recovers a deleted table and the data on it. |
