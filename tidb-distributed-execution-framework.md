@@ -15,7 +15,7 @@ This document describes the use cases, limitations, usage, and implementation pr
 
 ## Use cases
 
-In a database management system, in addition to the core transactional processing (TP) and analytical processing (AP) workloads, there are other important tasks, such as DDL operations, [`IMPORT INTO`], [TTL](/time-to-live.md), [Analyze](/sql-statements/sql-statement-analyze-table.md), and Backup/Restore. These tasks need to process a large amount of data in database objects (tables), so they typically have the following characteristics:
+In a database management system, in addition to the core transactional processing (TP) and analytical processing (AP) workloads, there are other important tasks, such as DDL operations, [`IMPORT INTO`], [TTL](/time-to-live.md), [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md), and Backup/Restore. These tasks need to process a large amount of data in database objects (tables), so they typically have the following characteristics:
 
 - Need to process all data in a schema or a database object (table).
 - Might need to be executed periodically, but at a low frequency.
