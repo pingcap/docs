@@ -110,7 +110,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`ADMIN SHOW DDL [JOBS\|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md) | Shows DDL jobs or job queries. |
 | [`ADMIN`](/sql-statements/sql-statement-admin.md) | Performs various administrative tasks. |
 | [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md) |  Included for MySQL compatibility. It has no effective usage in TiDB. |
-| [`SET <variable>`](/sql-statements/sql-statement-set-variable.md) | Sets a variable. |
+| [`SET <variable>`](/sql-statements/sql-statement-set-variable.md) | Modifies a system variable or user variable. |
 | [`SET [NAMES\|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md) | Set a character set and collation. |
 | [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md) | Splits a Region into smaller Regions. |
 
