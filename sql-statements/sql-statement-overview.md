@@ -20,7 +20,7 @@ TiDB uses SQL statements that try to follow the ISO/IEC SQL standards and are ex
 | [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md) | Creates a new database. |
 | [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md) | Creates a new index on a table. |
 | [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md) | Creates a new sequence object. |
-| [`CREATE TABLE LIKE`](/sql-statements/sql-statement-create-table-like.md) | Creates a table that is like another table. |
+| [`CREATE TABLE LIKE`](/sql-statements/sql-statement-create-table-like.md) | Copies the definition of an existing table, without copying any data. |
 | [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) | Creates a new table. |
 | [`CREATE VIEW`](/sql-statements/sql-statement-create-view.md) | Creates a new view. |
 | [`DROP DATABASE`](/sql-statements/sql-statement-drop-database.md) | Drops an existing database. |
@@ -84,7 +84,7 @@ TiDB uses SQL statements that try to follow the ISO/IEC SQL standards and are ex
 | [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) | Cancels a DDL job. |
 | [`ADMIN CHECK [TABLE\|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | Checks the integrity of a table or index. |
 | [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md) | Computes and checks the checksum of a table. |
-| [`ADMIN CLEANUP`](/sql-statements/sql-statement-admin-cleanup.md) | Cleans up residual files or resources. |
+| [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md) | Cleans up indexes from a table. |
 | [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md) | Pauses DDL operations. |
 | [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md) | Resumes DDL operations. |
 | [`ADMIN SHOW DDL [JOBS\|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md) | Shows DDL jobs or job queries. |
@@ -92,7 +92,7 @@ TiDB uses SQL statements that try to follow the ISO/IEC SQL standards and are ex
 | [`ADMIN`](/sql-statements/sql-statement-admin.md) | Performs various administrative tasks. |
 | [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md) | Flushes a table. |
 | [`SET <variable>`](/sql-statements/sql-statement-set-variable.md) | Sets a variable. |
-| [`SET NAMES`](/sql-statements/sql-statement-set-names.md) | Set a character set and collation. |
+| [`SET [NAMES\|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md) | Set a character set and collation. |
 | [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md) | Splits a region into smaller regions. |
 
 </CustomContent>
@@ -104,14 +104,14 @@ TiDB uses SQL statements that try to follow the ISO/IEC SQL standards and are ex
 | [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) | Cancels a DDL job. |
 | [`ADMIN CHECK [TABLE\|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | Checks the integrity of a table or index. |
 | [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md) | Computes and checks the checksum of a table. |
-| [`ADMIN CLEANUP`](/sql-statements/sql-statement-admin-cleanup.md) | Cleans up residual files or resources. |
+| [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md) | Cleans up indexes from a table. |
 | [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md) | Pauses DDL operations. |
 | [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md) | Resumes DDL operations. |
 | [`ADMIN SHOW DDL [JOBS\|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md) | Shows DDL jobs or job queries. |
 | [`ADMIN`](/sql-statements/sql-statement-admin.md) | Performs various administrative tasks. |
 | [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md) | Flushes a table. |
 | [`SET <variable>`](/sql-statements/sql-statement-set-variable.md) | Sets a variable. |
-| [`SET NAMES`](/sql-statements/sql-statement-set-names.md) | Set a character set and collation. |
+| [`SET [NAMES\|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md) | Set a character set and collation. |
 | [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md) | Splits a region into smaller regions. |
 
 </CustomContent>

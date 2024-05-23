@@ -195,7 +195,7 @@ CREATE TABLE `bookshop`.`ratings` (
 );
 ```
 
-See [default values](/data-type-default-values.md) for more details on what default values are supported for what datatypes.
+For more information on default values of different data types, see [default values](/data-type-default-values.md).
 
 ### Prevent duplicate values
 
