@@ -194,6 +194,8 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 
 ## Show statements
 
+<CustomContent platform="tidb">
+
 | SQL Statement | Description |
 |---------------|-------------|
 | [`SHOW BUILTINS`](/sql-statements/sql-statement-show-builtins.md) | Lists builtin functions. |
@@ -203,6 +205,22 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md) | Included for [compatibility with MySQL](/mysql-compatibility.md). TiDB uses [Prometheus and Grafana](/tidb-monitoring-framework.md) for centralized metrics collection instead of `SHOW STATUS` for most metrics. |
 | [`SHOW VARIABLES`](/sql-statements/sql-statement-show-variables.md) | Shows system variables. |
 | [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md) | Shows warnings and notes from previously executed statements. |
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+| SQL Statement | Description |
+|---------------|-------------|
+| [`SHOW BUILTINS`](/sql-statements/sql-statement-show-builtins.md) | Lists builtin functions. |
+| [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md) | Lists character sets. |
+| [`SHOW COLLATIONS`](/sql-statements/sql-statement-show-collation.md) | Lists collations. |
+| [`SHOW ERRORS`](/sql-statements/sql-statement-show-errors.md) | Shows errors from previously executed statements. |
+| [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md) | Included for [compatibility with MySQL](/mysql-compatibility.md). TiDB Cloud provides [Monitoring](/tidb-cloud/monitor-tidb-cluster.md) for centralized metrics collection instead of `SHOW STATUS` for most metrics. |
+| [`SHOW VARIABLES`](/sql-statements/sql-statement-show-variables.md) | Shows system variables. |
+| [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md) | Shows warnings and notes from previously executed statements. |
+
+</CustomContent>
 
 ## Instance management
 
@@ -227,7 +245,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | SQL Statement | Description |
 |---------------|-------------|
 | [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md) | Modifies an instance. |
-| [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md) | Included for [compatibility with MySQL](/mysql-compatibility.md). TiDB uses [Prometheus and Grafana](/tidb-monitoring-framework.md) for centralized metrics collection instead of `SHOW STATUS` for most metrics. |
+| [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md) | Included for [compatibility with MySQL](/mysql-compatibility.md). TiDB Cloud provides [Monitoring](/tidb-cloud/monitor-tidb-cluster.md) for centralized metrics collection instead of `SHOW STATUS` for most metrics. |
 | [`KILL`](/sql-statements/sql-statement-kill.md) | Kills a connection in any TiDB instance in the current TiDB cluster. |
 | [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md) | Shows available storage engines. |
 | [`SHOW MASTER STATUS`](/sql-statements/sql-statement-show-master-status.md) | Shows the latest TSO in the cluster. |
