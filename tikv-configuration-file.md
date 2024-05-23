@@ -1238,6 +1238,10 @@ Configuration items related to RocksDB
 
 ### `info-log-max-size`
 
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.file.max-size`](#max-size-new-in-v540).
+
 + The maximum size of Info log
 + Default value: `"1GB"`
 + Minimum value: `0`
@@ -1245,10 +1249,18 @@ Configuration items related to RocksDB
 
 ### `info-log-roll-time`
 
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV, so this configuration item is deprecated. TiKV no longer supports automatic log splitting based on time. Instead, you can use the configuration item [`log.file.max-size`](#max-size-new-in-v540) to set the threshold for automatic log splitting based on file size.
+
 + The time interval at which Info logs are truncated. If the value is `0s`, logs are not truncated.
 + Default value: `"0s"`
 
 ### `info-log-keep-log-file-num`
+
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.file.max-backups`](#max-backups-new-in-v540).
 
 + The maximum number of kept log files
 + Default value: `10`
@@ -1260,6 +1272,10 @@ Configuration items related to RocksDB
 + Default value: `""`
 
 ### `info-log-level`
+
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.level`](#level-new-in-v540).
 
 + Log levels of RocksDB
 + Default value: `"info"`
@@ -1750,6 +1766,10 @@ Configuration items related to `raftdb`
 
 ### `info-log-max-size`
 
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.file.max-size`](#max-size-new-in-v540).
+
 + The maximum size of Info logs
 + Default value: `"1GB"`
 + Minimum value: `0`
@@ -1757,10 +1777,18 @@ Configuration items related to `raftdb`
 
 ### `info-log-roll-time`
 
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV, so this configuration item is deprecated. TiKV no longer supports automatic log splitting based on time. Instead, you can use the configuration item [`log.file.max-size`](#max-size-new-in-v540) to set the threshold for automatic log splitting based on file size.
+
 + The interval at which Info logs are truncated. If the value is `0s`, logs are not truncated.
 + Default value: `"0s"` (which means logs are not truncated)
 
 ### `info-log-keep-log-file-num`
+
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.file.max-backups`](#max-backups-new-in-v540).
 
 + The maximum number of Info log files kept in RaftDB
 + Default value: `10`
@@ -1772,6 +1800,10 @@ Configuration items related to `raftdb`
 + Default value: `""`
 
 ### `info-log-level`
+
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.level`](#level-new-in-v540).
 
 + Log levels of RaftDB
 + Default value: `"info"`
