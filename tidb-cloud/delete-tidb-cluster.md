@@ -32,7 +32,7 @@ You can delete a cluster at any time by performing the following steps:
 
  Once a backed up TiDB Dedicated cluster is deleted, the existing backup files of the cluster are moved to the recycle bin.
 
-- Automatic backups will expire and be automatically deleted once the retention period has passed. The default retention period is 7 days if you don't modify it. 
+- Automatic backups will expire and be automatically deleted once the retention period ends. The default retention period is 7 days if you don't modify it.
 - Manual backups will be kept in the Recycle Bin until manually deleted.
 
   > **Note:**
