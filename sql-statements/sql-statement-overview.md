@@ -36,7 +36,7 @@ TiDB uses SQL statements that try to follow the ISO/IEC SQL standards and are ex
 | [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md) | Shows all databases. |
 | [`SHOW FIELDS FROM`](/sql-statements/sql-statement-show-fields-from.md) | Shows columns of a table. |
 | [`SHOW INDEXES`](/sql-statements/sql-statement-show-indexes.md) | Shows indexes of a table. |
-| [`SHOW SCHEMAS`](/sql-statements/sql-statement-show-schemas.md) | Shows all schemas. |
+| [`SHOW SCHEMAS`](/sql-statements/sql-statement-show-schemas.md) | An alias to `SHOW DATABASES`, which shows a list of databases that the current user has privileges to. |
 | [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md) | Shows the next row ID for a table. |
 | [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md) | Shows regions of a table. |
 | [`SHOW TABLE STATUS`](/sql-statements/sql-statement-show-table-status.md) | Shows the status of tables. |
