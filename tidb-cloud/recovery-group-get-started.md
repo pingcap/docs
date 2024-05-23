@@ -68,7 +68,7 @@ After creating a recovery group, you can view its status information on the **Re
 
     > **Warning**
     >
-    > During the setup of a recovery group, an account named following the pattern `cloud-rg-* will be created on the secondary cluster for the replication process. Deleting or modifying this account will interrupt the replication.
+    > During the setup of a recovery group, an account named following the pattern `cloud-rg-*` will be created on the secondary cluster for the replication process. Deleting or modifying this account will interrupt the replication.
 
 ## What's next
 
