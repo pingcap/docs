@@ -200,7 +200,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md) | Lists character sets. |
 | [`SHOW COLLATIONS`](/sql-statements/sql-statement-show-collation.md) | Lists collations. |
 | [`SHOW ERRORS`](/sql-statements/sql-statement-show-errors.md) | Shows errors from previously executed statements. |
-| [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md) | Shows server status. |
+| [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md) | Included for compatibility with MySQL. TiDB uses Prometheus and Grafana for centralized metrics collection instead of `SHOW STATUS` for most metrics. |
 | [`SHOW VARIABLES`](/sql-statements/sql-statement-show-variables.md) | Shows system variables. |
 | [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md) | Shows warning messages. |
 
@@ -211,7 +211,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | SQL Statement | Description |
 |---------------|-------------|
 | [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md) | Modifies an instance. |
-| [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md) | Resets status variables. |
+| [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md) | Included for compatibility with MySQL. TiDB uses Prometheus and Grafana for centralized metrics collection instead of `SHOW STATUS` for most metrics. |
 | [`KILL`](/sql-statements/sql-statement-kill.md) | Kills a connection in any TiDB instance in the current TiDB cluster. |
 | [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md) | Shows the configuration of various components of TiDB. |
 | [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md) | Shows available storage engines. |
