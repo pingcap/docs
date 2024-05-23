@@ -24,11 +24,31 @@ The [`BINARY`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#opera
 
 ## CAST
 
-The [`CAST()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast) function is used to cast an expression to a specific type.
+The [`CAST(<expression> AS <type> [ARRAY])`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast) function is used to cast an expression to a specific type.
 
 This function is also used to create [Multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes).
 
-Example:
+The following types are supported:
+
+| Type                 | Description      | Whether it can be used with multi-valued indexes                      |
+|----------------------|------------------|------------------------------------------------------------|
+| `BINARY(n)`          | Binary string    | No                                                         |
+| `CHAR(n)`            | Character string | Yes, but only if a length is specified                     |
+| `DATE`               | Date             | Yes                                                        |
+| `DATETIME(fsp)`      | Date/time, where `fsp` is optional | Yes                                              |
+| `DECIMAL(n, m)`      | Decimal number, where `n` and `m` are optional and are `10` and `0` if not specified | No   |
+| `DOUBLE`             | Double precision floating-point number | No                                   |
+| `FLOAT(n)`           | Floating-point number, where `n` is optional and should be between `0` and `53` | No |
+| `JSON`               | JSON             | No                                                         |
+| `REAL`               | Floating-point number | Yes                                                   |
+| `SIGNED [INTEGER]`   | Signed integer   | Yes                                                        |
+| `TIME(fsp)`          | Time             | Yes                                                        |
+| `UNSIGNED [INTEGER]` | Unsigned integer | Yes                                                        |
+| `YEAR`               | Year             | No                                                         |
+
+Examples:
+
+The following statement converts a binary string from a HEX literal to a `CHAR`.
 
 ```sql
 SELECT CAST(0x54694442 AS CHAR);
@@ -41,6 +61,43 @@ SELECT CAST(0x54694442 AS CHAR);
 | TiDB                     |
 +--------------------------+
 1 row in set (0.0002 sec)
+```
+
+The following statement casts the values of the `a` attribute extracted from the JSON column to an unsigned array. Note that casting to an array is only supported as part of an index definition for multi-valued indexes.
+
+```sql
+CREATE TABLE t (
+    id INT PRIMARY KEY,
+    j JSON,
+    INDEX idx_a ((CAST(j->'$.a' AS UNSIGNED ARRAY)))
+);
+INSERT INTO t VALUES (1, JSON_OBJECT('a',JSON_ARRAY(1,2,3)));
+INSERT INTO t VALUES (2, JSON_OBJECT('a',JSON_ARRAY(4,5,6)));
+INSERT INTO t VALUES (3, JSON_OBJECT('a',JSON_ARRAY(7,8,9)));
+ANALYZE TABLE t;
+```
+
+```sql
+ EXPLAIN SELECT * FROM t WHERE 1 MEMBER OF(j->'$.a')\G
+*************************** 1. row ***************************
+           id: IndexMerge_10
+      estRows: 2.00
+         task: root
+access object: 
+operator info: type: union
+*************************** 2. row ***************************
+           id: ├─IndexRangeScan_8(Build)
+      estRows: 2.00
+         task: cop[tikv]
+access object: table:t, index:idx_a(cast(json_extract(`j`, _utf8mb4'$.a') as unsigned array))
+operator info: range:[1,1], keep order:false, stats:partial[j:unInitialized]
+*************************** 3. row ***************************
+           id: └─TableRowIDScan_9(Probe)
+      estRows: 2.00
+         task: cop[tikv]
+access object: table:t
+operator info: keep order:false, stats:partial[j:unInitialized]
+3 rows in set (0.00 sec)
 ```
 
 ## CONVERT
