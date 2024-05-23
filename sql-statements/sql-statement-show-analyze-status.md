@@ -13,6 +13,21 @@ Starting from TiDB v6.1.0, you can view the history tasks within the last 7 days
 
 Starting from TiDB v7.3.0, you can view the progress of the current `ANALYZE` task through the system table `mysql.analyze_jobs` or `SHOW ANALYZE STATUS`.
 
+Currently, the `SHOW ANALYZE STATUS` statement returns the following columns:
+
+| Column name      | Description |
+| :--------------- | :------------- |
+| `Table_schema`   | The database name |
+| `Table_name`     | The table name |
+| `Partition_name` | The partition name |
+| `Job_info`       | The task information. If an index is analyzed, this information will include the index name. When `tidb_analyze_version =2`, this information will include configuration items such as sample rate. |
+| `Processed_rows` | The number of rows that have been analyzed |
+| `Start_time`     | The time at which the task starts |
+| `State`          | The state of a task, including `pending`, `running`, `finished`, and `failed` |
+| `Fail_reason`    | The reason why the task fails. If the execution is successful, the value is `NULL`. |
+| `Instance`       | The TiDB instance that executes the task |
+| `Process_id`     | The process ID that executes the task |
+
 ## Synopsis
 
 ```ebnf+diagram
