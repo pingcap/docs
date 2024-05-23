@@ -12,7 +12,7 @@ TiDB uses statistics as input to the optimizer to estimate the number of rows pr
 
 ### Automatic update
 
-For the `INSERT`, `DELETE`, or `UPDATE` statements, TiDB automatically updates the number of rows and modified rows in statistics.
+For the [`INSERT`](/sql-statements/sql-statement-insert.md), [`DELETE`](/sql-statements/sql-statement-delete.md), or [`UPDATE`](/sql-statements/sql-statement-update.md) statements, TiDB automatically updates the number of rows and modified rows in statistics.
 
 <CustomContent platform="tidb">
 
@@ -132,8 +132,6 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
 - To collect statistics on specific columns, use the following syntax:
 
-    {{< copyable "sql" >}}
-
     ```sql
     ANALYZE TABLE TableName COLUMNS ColumnNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
@@ -162,8 +160,6 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
     2. After the query pattern of your business is relatively stable, collect statistics on `PREDICATE COLUMNS` by using the following syntax:
 
-        {{< copyable "sql" >}}
-
         ```sql
         ANALYZE TABLE TableName PREDICATE COLUMNS [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
         ```
@@ -172,12 +168,10 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
         > **Note:**
         >
-        > - If the `mysql.column_stats_usage` system table does not contain any `PREDICATE COLUMNS` recorded for that table, the preceding syntax collects statistics on all columns and all indexes in that table.
+        > - If the [`mysql.column_stats_usage`](/mysql-schema.md) system table does not contain any `PREDICATE COLUMNS` recorded for that table, the preceding syntax collects statistics on all columns and all indexes in that table.
         > - Any columns excluded from collection (either by manually listing columns or using `PREDICATE COLUMNS`) will not have their statistics overwritten. When executing a new type of SQL query, the optimizer will use the old statistics for such columns if it exists or pseudo column statistics if columns never had statistics collected. The next ANALYZE using `PREDICATE COLUMNS` will collect the statistics on those columns.
 
 - To collect statistics on all columns and indexes, use the following syntax:
-
-    {{< copyable "sql" >}}
 
     ```sql
     ANALYZE TABLE TableName ALL COLUMNS [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
@@ -187,15 +181,11 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
 - To collect statistics on all partitions in `PartitionNameList` in `TableName`, use the following syntax:
 
-    {{< copyable "sql" >}}
-
     ```sql
     ANALYZE TABLE TableName PARTITION PartitionNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
 - To collect index statistics on all partitions in `PartitionNameList` in `TableName`, use the following syntax:
-
-    {{< copyable "sql" >}}
 
     ```sql
     ANALYZE TABLE TableName PARTITION PartitionNameList INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
@@ -206,8 +196,6 @@ If a table has many columns, collecting statistics on all the columns can cause 
     > **Warning:**
     >
     > Currently, collecting statistics on `PREDICATE COLUMNS` is an experimental feature. It is not recommended that you use it in production environments.
-
-    {{< copyable "sql" >}}
 
     ```sql
     ANALYZE TABLE TableName PARTITION PartitionNameList [COLUMNS ColumnNameList|PREDICATE COLUMNS|ALL COLUMNS] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
@@ -342,22 +330,7 @@ If you want to persist the column configuration in the `ANALYZE` statement (incl
 - When TiDB collects statistics automatically or when you manually collect statistics by executing the `ANALYZE` statement without specifying the column configuration, TiDB continues using the previously persisted configuration for statistics collection.
 - When you manually execute the `ANALYZE` statement multiple times with column configuration specified, TiDB overwrites the previously recorded persistent configuration using the new configuration specified by the latest `ANALYZE` statement.
 
-To locate `PREDICATE COLUMNS` and columns on which statistics have been collected, use the following syntax:
-
-```sql
-SHOW COLUMN_STATS_USAGE [ShowLikeOrWhere];
-```
-
-The `SHOW COLUMN_STATS_USAGE` statement returns the following 6 columns:
-
-| Column name | Description            |
-| -------- | ------------- |
-| `Db_name`  |  The database name    |
-| `Table_name` | The table name |
-| `Partition_name` | The partition name |
-| `Column_name` | The column name |
-| `Last_used_at` | The last time when the column statistics were used in the query optimization |
-| `Last_analyzed_at` | The last time when the column statistics were collected |
+To locate `PREDICATE COLUMNS` and columns on which statistics have been collected, use the [`SHOW COLUMN_STATS_USAGE`](/sql-statements/sql-statement-show-column-stats-usage.md) statement.
 
 In the following example, after executing `ANALYZE TABLE t PREDICATE COLUMNS;`, TiDB collects statistics on columns `b`, `c`, and `d`, where column `b` is a `PREDICATE COLUMN` and columns `c` and `d` are index columns.
 
@@ -401,7 +374,7 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
 
 ## Versions of statistics
 
-The `tidb_analyze_version` variable controls the statistics collected by TiDB. Currently, two versions of statistics are supported: `tidb_analyze_version = 1` and `tidb_analyze_version = 2`.
+The [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510) variable controls the statistics collected by TiDB. Currently, two versions of statistics are supported: `tidb_analyze_version = 1` and `tidb_analyze_version = 2`.
 
 - For TiDB Self-Hosted, the default value of this variable changes from `1` to `2` starting from v5.3.0.
 - For TiDB Cloud, the default value of this variable changes from `1` to `2` starting from v6.5.0.
@@ -459,30 +432,7 @@ You can view the `ANALYZE` status and statistics information using the following
 
 ### `ANALYZE` state
 
-When executing the `ANALYZE` statement, you can view the current state of `ANALYZE` using the following SQL statement:
-
-{{< copyable "sql" >}}
-
-```sql
-SHOW ANALYZE STATUS [ShowLikeOrWhere]
-```
-
-This statement returns the state of `ANALYZE`. You can use `ShowLikeOrWhere` to filter the information you need.
-
-Currently, the `SHOW ANALYZE STATUS` statement returns the following 11 columns:
-
-| Column name | Description            |
-| :-------- | :------------- |
-| table_schema  |  The database name    |
-| table_name | The table name |
-| partition_name| The partition name |
-| job_info | The task information. If an index is analyzed, this information will include the index name. When `tidb_analyze_version =2`, this information will include configuration items such as sample rate. |
-| processed_rows | The number of rows that have been analyzed |
-| start_time | The time at which the task starts |
-| state | The state of a task, including `pending`, `running`, `finished`, and `failed` |
-| fail_reason | The reason why the task fails. If the execution is successful, the value is `NULL`. |
-| instance | The TiDB instance that executes the task |
-| process_id | The process ID that executes the task |
+When executing the `ANALYZE` statement, you can view the current state of `ANALYZE` using [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md).
 
 Starting from TiDB v6.1.0, the `SHOW ANALYZE STATUS` statement supports showing cluster-level tasks. Even after a TiDB restart, you can still view task records before the restart using this statement. Before TiDB v6.1.0, the `SHOW ANALYZE STATUS` statement can only show instance-level tasks, and task records are cleared after a TiDB restart.
 
@@ -503,172 +453,27 @@ mysql> SHOW ANALYZE STATUS [ShowLikeOrWhere];
 
 ### Metadata of tables
 
-You can use the `SHOW STATS_META` statement to view the total number of rows and the number of updated rows.
-
-{{< copyable "sql" >}}
-
-```sql
-SHOW STATS_META [ShowLikeOrWhere];
-```
-
-The syntax of `ShowLikeOrWhereOpt` is as follows:
-
-![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
-
-Currently, the `SHOW STATS_META` statement returns the following 6 columns:
-
-| Column name | Description  |
-| :-------- | :------------- |
-| `db_name`  |  The database name    |
-| `table_name` | The table name |
-| `partition_name`| The partition name |
-| `update_time` | The time of the update |
-| `modify_count` | The number of modified rows |
-| `row_count` | The total number of rows |
-
-> **Note:**
->
-> When TiDB automatically updates the total number of rows and the number of modified rows according to DML statements, `update_time` is also updated. Therefore, `update_time` does not necessarily indicate the last time when the `ANALYZE` statement is executed.
+You can use the [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md) statement to view the total number of rows and the number of updated rows.
 
 ### Health state of tables
 
-You can use the `SHOW STATS_HEALTHY` statement to check the health state of tables and roughly estimate the accuracy of the statistics. When `modify_count` >= `row_count`, the health state is 0; when `modify_count` < `row_count`, the health state is (1 - `modify_count`/`row_count`) * 100.
-
-The syntax is as follows:
-
-{{< copyable "sql" >}}
-
-```sql
-SHOW STATS_HEALTHY [ShowLikeOrWhere];
-```
-
-The synopsis of `SHOW STATS_HEALTHY` is:
-
-![ShowStatsHealthy](/media/sqlgram/ShowStatsHealthy.png)
-
-Currently, the `SHOW STATS_HEALTHY` statement returns the following 4 columns:
-
-| Column name | Description  |
-| :-------- | :------------- |
-| `db_name`  | The database name    |
-| `table_name` | The table name |
-| `partition_name` | The partition name |
-| `healthy` | The health state of tables |
+You can use the [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md) statement to check the health state of tables and roughly estimate the accuracy of the statistics. When `modify_count` >= `row_count`, the health state is 0; when `modify_count` < `row_count`, the health state is (1 - `modify_count`/`row_count`) * 100.
 
 ### Metadata of columns
 
-You can use the `SHOW STATS_HISTOGRAMS` statement to view the number of different values and the number of `NULL` in all the columns.
-
-Syntax as follows:
-
-{{< copyable "sql" >}}
-
-```sql
-SHOW STATS_HISTOGRAMS [ShowLikeOrWhere]
-```
-
-This statement returns the number of different values and the number of `NULL` in all the columns. You can use `ShowLikeOrWhere` to filter the information you need.
-
-Currently, the `SHOW STATS_HISTOGRAMS` statement returns the following 10 columns:
-
-| Column name | Description    |
-| :-------- | :------------- |
-| `db_name`  |  The database name    |
-| `table_name` | The table name |
-| `partition_name` | The partition name |
-| `column_name` | The column name (when `is_index` is `0`) or the index name (when `is_index` is `1`) |
-| `is_index` | Whether it is an index column or not |
-| `update_time` | The time of the update |
-| `distinct_count` | The number of different values |
-| `null_count` | The number of `NULL` |
-| `avg_col_size` | The average length of columns |
-| correlation | The Pearson correlation coefficient of the column and the integer primary key, which indicates the degree of association between the two columns|
+You can use the [`SHOW STATS_HISTOGRAMS`](/sql-statements/sql-statement-show-stats-histograms.md) statement to view the number of different values and the number of `NULL` in all the columns.
 
 ### Buckets of histogram
 
-You can use the `SHOW STATS_BUCKETS` statement to view each bucket of the histogram.
-
-The syntax is as follows:
-
-{{< copyable "sql" >}}
-
-```sql
-SHOW STATS_BUCKETS [ShowLikeOrWhere]
-```
-
-The diagram is as follows:
-
-![SHOW STATS_BUCKETS](/media/sqlgram/SHOW_STATS_BUCKETS.png)
-
-This statement returns information about all the buckets. You can use `ShowLikeOrWhere` to filter the information you need.
-
-Currently, the `SHOW STATS_BUCKETS` statement returns the following 11 columns:
-
-| Column name | Description   |
-| :-------- | :------------- |
-| `db_name`  |  The database name    |
-| `table_name` | The table name |
-| `partition_name` | The partition name |
-| `column_name` | The column name (when `is_index` is `0`) or the index name (when `is_index` is `1`) |
-| `is_index` | Whether it is an index column or not |
-| `bucket_id` | The ID of a bucket |
-| `count` | The number of all the values that falls on the bucket and the previous buckets |
-| `repeats` | The occurrence number of the maximum value |
-| `lower_bound` | The minimum value |
-| `upper_bound` | The maximum value |
-| `ndv` | The number of different values in the bucket. When `tidb_analyze_version` = `1`, `ndv` is always `0`, which has no actual meaning. |
+You can use the [`SHOW STATS_BUCKETS`](/sql-statements/sql-statement-show-stats-buckets.md statement to view each bucket of the histogram.
 
 ### Top-N information
 
-You can use the `SHOW STATS_TOPN` statement to view the Top-N information currently collected by TiDB.
-
-The syntax is as follows:
-
-{{< copyable "sql" >}}
-
-```sql
-SHOW STATS_TOPN [ShowLikeOrWhere];
-```
-
-Currently, the `SHOW STATS_TOPN` statement returns the following 7 columns:
-
-| Column name | Description |
-| ---- | ----|
-| `db_name` | The database name |
-| `table_name` | The table name |
-| `partition_name` | The partition name |
-| `column_name` | The column name (when `is_index` is `0`) or the index name (when `is_index` is `1`) |
-| `is_index` | Whether it is an index column or not |
-| `value` | The value of this column |
-| `count` | How many times the value appears |
+You can use the [`SHOW STATS_TOPN`](/sql-statements/sql-statement-show-stats-topn.md) statement to view the Top-N information currently collected by TiDB.
 
 ## Delete statistics
 
-You can run the `DROP STATS` statement to delete statistics.
-
-{{< copyable "sql" >}}
-
-```sql
-DROP STATS TableName
-```
-
-The preceding statement deletes all statistics of `TableName`. If a partitioned table is specified, this statement will delete statistics of all partitions in this table as well as GlobalStats generated in dynamic pruning mode.
-
-{{< copyable "sql" >}}
-
-```sql
-DROP STATS TableName PARTITION PartitionNameList;
-```
-
-This preceding statement only deletes statistics of the specified partitions in `PartitionNameList`.
-
-{{< copyable "sql" >}}
-
-```sql
-DROP STATS TableName GLOBAL;
-```
-
-The preceding statement only deletes GlobalStats generated in dynamic pruning mode of the specified table.
+You can run the [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md) statement to delete statistics.
 
 ## Load statistics
 
@@ -726,23 +531,17 @@ The interface to export statistics is as follows:
 
 + To obtain the JSON format statistics of the `${table_name}` table in the `${db_name}` database:
 
-    {{< copyable "" >}}
-
     ```
     http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}
     ```
 
     For example:
 
-    {{< copyable "" >}}
-
-    ```
+    ```shell
     curl -s http://127.0.0.1:10080/stats/dump/test/t1 -o /tmp/t1.json
     ```
 
 + To obtain the JSON format statistics of the `${table_name}` table in the `${db_name}` database at specific time:
-
-    {{< copyable "" >}}
 
     ```
     http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}/${yyyyMMddHHmmss}
@@ -756,11 +555,11 @@ The interface to export statistics is as follows:
 
 Generally, the imported statistics refer to the JSON file obtained using the export interface.
 
-Syntax:
+Loading statistics can be done with the [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md) statement.
 
-{{< copyable "sql" >}}
+For example:
 
-```
+```sql
 LOAD STATS 'file_name'
 ```
 
@@ -837,7 +636,7 @@ mysql> SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-In addition, you can also lock the statistics of a partition using `LOCK STATS`. For example:
+In addition, you can also lock the statistics of a partition using [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md). For example:
 
 Create a partition table `t`, and insert data into it. When the statistics of partition `p1` are not locked, the `ANALYZE` statement can be successfully executed.
 
