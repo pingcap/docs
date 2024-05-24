@@ -1123,10 +1123,6 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 ### tidb_analyze_partition_concurrency
 
-> **Warning:**
->
-> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
-
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No

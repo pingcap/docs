@@ -105,26 +105,3 @@ TiCDC processes this type of DDL as follows:
 ### DDL statement considerations
 
 When executing cross-database DDL statements (such as `CREATE TABLE db1.t1 LIKE t2`) in the upstream, it is recommended that you explicitly specify all relevant database names in DDL statements (such as `CREATE TABLE db1.t1 LIKE db2.t2`). Otherwise, cross-database DDL statements might not be executed correctly in the downstream due to the lack of database name information.
-
-### SQL mode
-
-By default, TiCDC uses the default SQL mode of TiDB to parse DDL statements. If your upstream TiDB cluster uses a non-default SQL mode, you must specify the SQL mode in the TiCDC configuration file. Otherwise, TiCDC might fail to parse DDL statements correctly. For more information about TiDB SQL mode, see [SQL Mode](/sql-mode.md).
-
-For example, if the upstream TiDB cluster uses the `ANSI_QUOTES` mode, you must specify the SQL mode in the changefeed configuration file as follows:
-
-```toml
-# In the value, "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" is the default SQL mode of TiDB.
-# "ANSI_QUOTES" is the SQL mode added to your upstream TiDB cluster.
-
-sql-mode = "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION,ANSI_QUOTES"
-```
-
-If the SQL mode is not configured, TiCDC might fail to parse some DDL statements correctly. For example:
-
-```sql
-CREATE TABLE "t1" ("a" int PRIMARY KEY);
-```
-
-Because in the default SQL mode of TiDB, double quotation marks are treated as strings rather than identifiers, TiCDC fails to parse the DDL statement correctly.
-
-Therefore, when creating a replication task, it is recommended that you specify the SQL mode used by the upstream TiDB cluster in the configuration file.
