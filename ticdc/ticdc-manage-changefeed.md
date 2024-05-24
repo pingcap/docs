@@ -135,7 +135,7 @@ cdc cli changefeed query --server=http://10.0.10.25:8300 --changefeed-id=simple-
 }
 ```
 
-In the  preceding command and result:
+In the preceding command and result:
 
 - `info` is the replication configuration of the queried changefeed.
 - `status` is the replication state of the queried changefeed.
