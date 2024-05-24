@@ -337,6 +337,9 @@
     - [Introduction](/tidb-distributed-execution-framework.md)
     - [TiDB Global Sort](/tidb-global-sort.md)
   - Benchmarks
+    - TiDB v8.1
+      - [TPC-C Performance Test Report](/tidb-cloud/v8.1-performance-benchmarking-with-tpcc.md)
+      - [Sysbench Performance Test Report](/tidb-cloud/v8.1-performance-benchmarking-with-sysbench.md)
     - TiDB v7.5
       - [TPC-C Performance Test Report](/tidb-cloud/v7.5-performance-benchmarking-with-tpcc.md)
       - [Sysbench Performance Test Report](/tidb-cloud/v7.5-performance-benchmarking-with-sysbench.md)
