@@ -106,6 +106,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md) | Computes the checksum of a table. |
 | [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md) | Cleans up indexes from a table. |
 | [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md) | Pauses DDL operations. |
+| [`ADMIN RECOVER INDEX`](/sql-statements/sql-statement-admin-recover.md) | Recovers the consistency based on the redundant indexes. |
 | [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md) | Resumes DDL operations. |
 | [`ADMIN SHOW DDL [JOBS\|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md) | Shows DDL jobs or job queries. |
 | [`ADMIN`](/sql-statements/sql-statement-admin.md) | Performs various administrative tasks. |
@@ -129,7 +130,6 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 
 | SQL Statement | Description |
 |---------------|-------------|
-| [`ADMIN RECOVER INDEX`](/sql-statements/sql-statement-admin-recover.md) | Recovers the consistency based on the redundant indexes. |
 | [`BACKUP`](/sql-statements/sql-statement-backup.md) | Perform a distributed backup of the TiDB cluster. |
 | [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) | Restores the cluster to a specific snapshot. |
 | [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) | Restores a database and its data that are deleted by the `DROP` statement. |
