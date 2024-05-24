@@ -10,7 +10,7 @@ The `ADMIN SHOW DDL [JOBS|JOB QUERIES]` statement shows information about runnin
 ## Synopsis
 
 ```ebnf+diagram
-AdminStmt ::=
+AdminShowDDLStmt ::=
     'ADMIN' 'SHOW' 'DDL'
     ( 
         'JOBS' Int64Num? WhereClauseOptional 
