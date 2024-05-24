@@ -285,7 +285,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`SHOW GRANTS`](/sql-statements/sql-statement-show-grants.md) | Shows privileges associated with a user. |
 | [`SHOW PRIVILEGES`](/sql-statements/sql-statement-show-privileges.md) | Shows available privileges. |
 
-## TiDB Binlog & TiCDC
+## TiCDC & TiDB Binlog
 
 <CustomContent platform="tidb">
 
