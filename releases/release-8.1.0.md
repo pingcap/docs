@@ -32,7 +32,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
     <td>With this feature, BR can fully leverage the scale advantage of a cluster, enabling all TiKV nodes in the cluster to participate in the preparation step of data restores. This feature can significantly improve the restore speed of large datasets in large-scale clusters. Real-world tests show that this feature can saturate the download bandwidth, with the download speed improving by 8 to 10 times, and the end-to-end restore speed improving by approximately 1.5 to 3 times.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v8.1/ddl-v2">Achieve up to 10 times faster for creating tables in batch</a> (experimental, introduced in v7.6.0)</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.1/accelerated-table-creation">Achieve up to 10 times faster for creating tables in batch</a> (experimental, introduced in v7.6.0)</td>
     <td>With the implementation of the new DDL architecture in v7.6.0, the performance of batch table creation has witnessed a remarkable improvement, up to 10 times faster. This substantial enhancement drastically reduces the time needed for creating numerous tables. This acceleration is particularly noteworthy in SaaS scenarios, where the prevalence of high volumes of tables, ranging from tens to hundreds of thousands, is a common challenge.</td>
   </tr>
   <tr>
@@ -88,7 +88,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
     <td>TiCDC introduces a new protocol, the Debezium protocol. TiCDC can now publish data change events to a Kafka sink using a protocol that generates Debezium style messages.</td>
   </tr>
   <tr>
-    <td>TiCDC supports <a href="https://docs.pingcap.com/tidb/v8.1/ticdc-client-authentication.md">client authentication</a> (introduced in v8.1.0)</td>
+    <td>TiCDC supports <a href="https://docs.pingcap.com/tidb/v8.1/ticdc-client-authentication">client authentication</a> (introduced in v8.1.0)</td>
     <td>TiCDC supports client authentication using mutual Transport Layer Security (mTLS) or TiDB username and password. This feature enables CLI or OpenAPI clients to authenticate their connections to TiCDC.</td>
   </tr>
 </tbody>
@@ -347,7 +347,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 
 ## Performance test
 
-To learn about the performance of TiDB v8.1.0, you can refer to the [TPC-C performance test report](https://docs.pingcap.com/tidbcloud/v8.1.0-performance-benchmarking-with-tpcc) and [Sysbench performance test report](https://docs.pingcap.com/tidbcloud/v8.1.0-performance-benchmarking-with-sysbench) of the TiDB Dedicated cluster.
+To learn about the performance of TiDB v8.1.0, you can refer to the [TPC-C performance test report](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-tpcc) and [Sysbench performance test report](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-sysbench) of the TiDB Dedicated cluster.
 
 ## Contributors
 
