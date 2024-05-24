@@ -8,7 +8,9 @@ aliases: ['/docs/dev/sql-statements/sql-statement-add-index/','/docs/dev/referen
 
 The `ALTER TABLE.. ADD INDEX` statement adds an index to an existing table. This operation is online in TiDB, which means that neither reads or writes to the table are blocked by adding an index.
 
-The [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md) can be used to speed up the operation of this statement.
+> **Tip:**
+>
+> The [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md) can be used to speed up the operation of this statement.
 
 <CustomContent platform="tidb">
 
