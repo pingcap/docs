@@ -102,7 +102,7 @@ By default, the DXF schedules all TiDB nodes to execute distributed tasks. Start
 
 - Starting from v8.1.0, you can set [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) to any valid value. When a distributed task is submitted, the task binds to the [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) value of the currently connected TiDB node, and the DXF only schedules the task to the TiDB nodes with the same [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) value for execution. However, for configuration compatibility with earlier versions, if a distributed task is submitted on a node with `tidb_service_scope = ''` and the current cluster has TiDB nodes with `tidb_service_scope = 'background'`, the DXF schedules the task to TiDB nodes with `tidb_service_scope = 'background'` for execution.
 
-Starting from v8.1.0, if new nodes are added during task execution, the DXF determines whether to schedule tasks to the new nodes for execution based on the preceding rules. If you do not want newly added nodes to execute tasks, it is recommended to set [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) for those nodes that are not newly added in advance.
+Starting from v8.1.0, if new nodes are added during task execution, the DXF determines whether to schedule tasks to the new nodes for execution based on the preceding rules. If you do not want newly added nodes to execute tasks, it is recommended to set a different [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) for those newly added nodes in advance.
 
 > **Note:**
 >
