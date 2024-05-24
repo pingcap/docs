@@ -103,7 +103,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 |---------------|-------------|
 | [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) | Cancels a DDL job. |
 | [`ADMIN CHECK [TABLE\|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | Checks the integrity of a table or index. |
-| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md) | Computes and checks the checksum of a table. |
+| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md) | Computes the checksum of a table. |
 | [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md) | Cleans up indexes from a table. |
 | [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md) | Pauses DDL operations. |
 | [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md) | Resumes DDL operations. |
@@ -159,7 +159,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | SQL Statement | Description |
 |---------------|-------------|
 | [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md) | Modifies a resource group. |
-| [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md) | Estimates and outputs the [`Request Unit (RU)`](/tidb-resource-control.md#what-is-request-unit-ru) capacity of the current cluster. |
+| [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md) | Estimates and outputs the [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) capacity of the current cluster. |
 | [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md) | Creates a new resource group. |
 | [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md) | Drops a resource group. |
 | [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md) | Manage runaway query watch list. |
@@ -235,7 +235,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md) | Shows available storage engines. |
 | [`SHOW PLUGINS`](/sql-statements/sql-statement-show-plugins.md) | Shows installed plugins. |
 | [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md) | Shows the current sessions connected to the same TiDB server. |
-| [`SHOW PROFILES`](/sql-statements/sql-statement-show-profiles.md) | Shows query profiles. Included for [compatibility with MySQL](/mysql-compatibility.md). Currently only returns an empty result. |
+| [`SHOW PROFILES`](/sql-statements/sql-statement-show-profiles.md) | Shows query profiles. Included for [compatibility with MySQL](/mysql-compatibility.md). Currently, it only returns an empty result. |
 | [`SHUTDOWN`](/sql-statements/sql-statement-shutdown.md) | Stops the client-connected TiDB instance, not the entire TiDB cluster. |
 
 </CustomContent>
