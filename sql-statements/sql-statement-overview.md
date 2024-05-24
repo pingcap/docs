@@ -248,7 +248,6 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md) | Included for [compatibility with MySQL](/mysql-compatibility.md). TiDB Cloud provides [Monitoring](/tidb-cloud/monitor-tidb-cluster.md) for centralized metrics collection instead of `SHOW STATUS` for most metrics. |
 | [`KILL`](/sql-statements/sql-statement-kill.md) | Kills a connection in any TiDB instance in the current TiDB cluster. |
 | [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md) | Shows available storage engines. |
-| [`SHOW MASTER STATUS`](/sql-statements/sql-statement-show-master-status.md) | Shows the latest TSO in the cluster. |
 | [`SHOW PLUGINS`](/sql-statements/sql-statement-show-plugins.md) | Shows installed plugins. |
 | [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md) | Shows the current sessions connected to the same TiDB server. |
 | [`SHOW PROFILES`](/sql-statements/sql-statement-show-profiles.md) | Shows query profiles. Included for [compatibility with MySQL](/mysql-compatibility.md). Currently only returns an empty result. |
@@ -286,9 +285,9 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`SHOW GRANTS`](/sql-statements/sql-statement-show-grants.md) | Shows privileges associated with a user. |
 | [`SHOW PRIVILEGES`](/sql-statements/sql-statement-show-privileges.md) | Shows available privileges. |
 
-<CustomContent platform="tidb">
-
 ## TiDB Binlog & TiCDC
+
+<CustomContent platform="tidb">
 
 | SQL Statement | Description |
 |---------------|-------------|
@@ -298,6 +297,14 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`SHOW DRAINER STATUS`](/sql-statements/sql-statement-show-drainer-status.md) | Shows the status for all Drainer nodes in the cluster. |
 | [`SHOW MASTER STATUS`](/sql-statements/sql-statement-show-master-status.md) | Shows the latest TSO in the cluster. |
 | [`SHOW PUMP STATUS`](/sql-statements/sql-statement-show-pump-status.md) | Shows the status information for all Pump nodes in the cluster. |
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+| SQL Statement | Description |
+|---------------|-------------|
+| [`SHOW MASTER STATUS`](/sql-statements/sql-statement-show-master-status.md) | Shows the latest TSO in the cluster. |
 
 </CustomContent>
 
