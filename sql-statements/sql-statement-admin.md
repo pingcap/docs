@@ -179,7 +179,8 @@ AdminStmt ::=
         ) 
         | 'PLUGINS' ( 'ENABLE' | 'DISABLE' ) PluginNameList 
         | 'REPAIR' 'TABLE' TableName CreateTableStmt 
-        | ( 'FLUSH' | 'CAPTURE' | 'EVOLVE' ) 'BINDINGS' )
+        | ( 'FLUSH' | 'CAPTURE' | 'EVOLVE' ) 'BINDINGS'
+    )
 ```
 
 ## Examples
