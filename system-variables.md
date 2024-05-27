@@ -1326,9 +1326,9 @@ This variable is associated with a feature available since v6.2.0 and not usable
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
-- Default value: In v6.1.0, the default value is `ON`. After v6.1.0, the default value is `OFF`.
+- Default value: In v6.1.0, the default value is `ON`. In v6.1.1 and later 6.1 patch versions, the default value is `OFF`.
 - Since v6.1.0, the [Join Reorder](/join-reorder.md) algorithm of TiDB supports Outer Join. This variable controls the support behavior. The default value is `OFF`, which means the Join Reorder's support for Outer Join is disabled by default.
-- For a cluster upgraded from a version earlier than v6.1.0, the default value is `OFF`. For a cluster upgraded from v6.1.0, the default value is `ON`.
+- If your TiDB cluster is upgraded from an earlier version to v6.1.0, the default value of this variable after the upgrade is `ON`.  If your TiDB cluster is upgraded from an earlier version to v6.1.1 or a later 6.1 patch version, the default value of this variable after the upgrade is `OFF`.
 
 ### `tidb_enable_inl_join_inner_multi_pattern` <span class="version-mark">New in v6.1.6</span>
 
