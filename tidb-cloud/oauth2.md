@@ -32,4 +32,4 @@ It is the most common OAuth 2.0 grant type. You can use it for both web apps and
 
 ## Use OAuth to access TiDB Cloud
 
-If your app needs access to TiDB Cloud by using OAuth, submit a request to [become a Cloud & Technology Partner](https://www.pingcap.com/partners/become-a-partner/). We will reach out to you.
+If your app needs access to TiDB Cloud by using OAuth, submit a request to [become a Cloud & Technology Partner](https://www.pingcap.com/partners/become-a-partner/) (select **Cloud & Technology Partner** in **Partner Program**). We will reach out to you.
