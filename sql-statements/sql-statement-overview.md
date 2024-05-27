@@ -1,3 +1,7 @@
+---
+title: SQL Statement Overview
+summary: Learn about SQL statement overview.
+---
 # SQL Statement Overview
 
 TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensions for MySQL and TiDB-specific statements where necessary.
@@ -130,9 +134,9 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 
 | SQL Statement | Description |
 |---------------|-------------|
-| [`BACKUP`](/sql-statements/sql-statement-backup.md) | Perform a distributed backup of the TiDB cluster. |
+| [`BACKUP`](/sql-statements/sql-statement-backup.md) | Performs a distributed backup of the TiDB cluster. |
 | [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) | Restores the cluster to a specific snapshot. |
-| [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) | Restores a database and its data that are deleted by the `DROP` statement. |
+| [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) | Restores a database and its data deleted by the `DROP` statement. |
 | [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md) | Restore the tables and data dropped by the `DROP` or `TRUNCATE` operation. |
 | [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md) | Recovers a deleted table and the data on it. |
 | [`RESTORE`](/sql-statements/sql-statement-restore.md) | Restores a database from a backup. |
@@ -162,7 +166,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md) | Estimates and outputs the [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) capacity of the current cluster. |
 | [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md) | Creates a new resource group. |
 | [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md) | Drops a resource group. |
-| [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md) | Manage runaway query watch list. |
+| [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md) | Manages the runaway query watch list. |
 | [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md) | Sets a resource group. |
 | [`SHOW CREATE RESOURCE GROUP`](/sql-statements/sql-statement-show-create-resource-group.md) | Shows the `CREATE` statement for a resource group. |
 
@@ -175,7 +179,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md) | Modifies a resource group. |
 | [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md) | Creates a new resource group. |
 | [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md) | Drops a resource group. |
-| [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md) | Manage runaway query watch list. |
+| [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md) | Manages the runaway query watch list. |
 | [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md) | Sets a resource group. |
 | [`SHOW CREATE RESOURCE GROUP`](/sql-statements/sql-statement-show-create-resource-group.md) | Shows the `CREATE` statement for a resource group. |
 
@@ -301,7 +305,9 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
-
+> **Note:**
+>
+> [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) & [TiDB Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview) are tools for replicating TiDB data to the upstream for TiDB Self-Hosted. Most SQL statements for TiCDC and TiDB Binlog are not applicable to TiDB Cloud. For TiDB Cloud, you can use the [Changefeed](/tidb-cloud/changefeed-overview.md) feature in the [TiDB Cloud console](https://tidbcloud.com) instead to stream data. 
 | SQL Statement | Description |
 |---------------|-------------|
 | [`SHOW MASTER STATUS`](/sql-statements/sql-statement-show-master-status.md) | Shows the latest TSO in the cluster. |
@@ -317,9 +323,9 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`DROP BINDING`](/sql-statements/sql-statement-drop-binding.md) | Drops an execution plan binding from a SQL statement. |
 | [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md) | Drops statistics from a table. |
 | [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) | Works similar to `EXPLAIN`, with the major difference that it will execute the statement. |
-| [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md) | Load statistics into TiDB. |
-| [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md) | Show statistics collection tasks. |
-| [`SHOW BINDINGS`](/sql-statements/sql-statement-show-bindings.md) | Show created SQL bindings. |
+| [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md) | Loads statistics into TiDB. |
+| [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md) | Shows statistics collection tasks. |
+| [`SHOW BINDINGS`](/sql-statements/sql-statement-show-bindings.md) | Shows created SQL bindings. |
 | [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md) | Shows an estimation of how accurate statistics are believed to be. |
 | [`SHOW STATS_HISTOGRAMS`](/sql-statements/sql-statement-show-stats-histograms.md) | Shows the histogram information in statistics. |
 | [`SHOW STATS_LOCKED`](/sql-statements/sql-statement-show-stats-locked.md) | Shows the tables whose statistics are locked. |

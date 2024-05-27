@@ -35,7 +35,7 @@ SQL is divided into the following 4 types according to their functions:
 
 - **DCL (Data Control Language)**: It is used to define access privileges and security levels.
 
-The following mainly introduces DML and DQL. For more information about DDL and DCL, see [Explore SQL with TiDB](/basic-sql-operations.md) or [SQL statement overview](/sql-statements/sql-statement-overview.md).
+The following mainly introduces DML and DQL. For more information about DDL and DCL, see [Explore SQL with TiDB](/basic-sql-operations.md) or [SQL Statement Overview](/sql-statements/sql-statement-overview.md).
 
 ## Data Manipulation Language
 
