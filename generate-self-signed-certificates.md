@@ -1,6 +1,6 @@
 ---
 title: Generate Self-signed Certificates
-summary: `openssl` を使用して自己署名証明書を生成します。
+summary: openssl を使用して自己署名証明書を生成します。
 ---
 
 # 証明書を生成する {#generate-self-signed-certificates}

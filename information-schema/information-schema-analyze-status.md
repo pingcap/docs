@@ -1,6 +1,6 @@
 ---
 title: ANALYZE_STATUS
-summary: `ANALYZE_STATUS` information_schema テーブルについて学習します。
+summary: ANALYZE_STATUS information_schema テーブルについて学習します。
 ---
 
 # 分析ステータス {#analyze-status}

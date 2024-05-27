@@ -1,6 +1,6 @@
 ---
 title: SESSION_CONNECT_ATTRS
-summary: `SESSION_CONNECT_ATTRS` パフォーマンス スキーマ テーブルについて学習します。
+summary: SESSION_CONNECT_ATTRS パフォーマンス スキーマ テーブルについて学習します。
 ---
 
 # セッション接続属性 {#session-connect-attrs}

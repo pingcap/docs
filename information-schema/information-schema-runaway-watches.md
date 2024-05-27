@@ -1,6 +1,6 @@
 ---
 title: RUNAWAY_WATCHES
-summary: `RUNAWAY_WATCHES` INFORMATION_SCHEMA テーブルについて学習します。
+summary: RUNAWAY_WATCHES INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
 # ランナウェイウォッチ {#runaway-watches}

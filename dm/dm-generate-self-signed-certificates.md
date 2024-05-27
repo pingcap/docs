@@ -1,6 +1,6 @@
 ---
 title: Generate Self-signed Certificates for TiDB Data Migration
-summary: `openssl` を使用して自己署名証明書を生成します。
+summary: openssl を使用して自己署名証明書を生成します。
 ---
 
 # TiDB データ移行用の自己署名証明書を生成する {#generate-self-signed-certificates-for-tidb-data-migration}

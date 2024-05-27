@@ -1,6 +1,6 @@
 ---
 title: INSPECTION_RULES
-summary: `INSPECTION_RULES` information_schema テーブルについて学習します。
+summary: INSPECTION_RULES information_schema テーブルについて学習します。
 ---
 
 # 検査ルール {#inspection-rules}

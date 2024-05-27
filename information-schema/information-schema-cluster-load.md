@@ -1,6 +1,6 @@
 ---
 title: CLUSTER_LOAD
-summary: `CLUSTER_LOAD` information_schema テーブルについて学習します。
+summary: CLUSTER_LOAD information_schema テーブルについて学習します。
 ---
 
 # クラスターロード {#cluster-load}

@@ -1,6 +1,6 @@
 ---
 title: COLLATION_CHARACTER_SET_APPLICABILITY
-summary: `COLLATION_CHARACTER_SET_APPLICABILITY` INFORMATION_SCHEMA テーブルについて学習します。
+summary: COLLATION_CHARACTER_SET_APPLICABILITY INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
 # 照合文字セットの適用性 {#collation-character-set-applicability}

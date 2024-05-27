@@ -1,6 +1,6 @@
 ---
 title: Read Historical Data Using the `tidb_read_staleness` System Variable
-summary: `tidb_read_staleness` システム変数を使用して履歴データを読み取る方法を学習します。
+summary: tidb_read_staleness システム変数を使用して履歴データを読み取る方法を学習します。
 ---
 
 # <code>tidb_read_staleness</code>システム変数を使用して履歴データを読み取る {#read-historical-data-using-the-code-tidb-read-staleness-code-system-variable}

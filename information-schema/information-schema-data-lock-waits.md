@@ -1,6 +1,6 @@
 ---
 title: DATA_LOCK_WAITS
-summary: `DATA_LOCK_WAITS` information_schema テーブルについて学習します。
+summary: DATA_LOCK_WAITS information_schema テーブルについて学習します。
 ---
 
 # データロック待機 {#data-lock-waits}

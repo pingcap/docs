@@ -1,6 +1,6 @@
 ---
 title: MEMORY_USAGE_OPS_HISTORY
-summary: `MEMORY_USAGE_OPS_HISTORY` information_schema システム テーブルについて学習します。
+summary: MEMORY_USAGE_OPS_HISTORY information_schema システム テーブルについて学習します。
 ---
 
 # メモリ使用状況OPS履歴 {#memory-usage-ops-history}

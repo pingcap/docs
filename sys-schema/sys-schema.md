@@ -1,6 +1,6 @@
 ---
 title: sys Schema
-summary: `sys` スキーマ内のシステム テーブルについて学習します。
+summary: sys スキーマ内のシステム テーブルについて学習します。
 ---
 
 # <code>sys</code>スキーマ {#code-sys-code-schema}

@@ -1,6 +1,6 @@
 ---
 title: SCHEMATA
-summary: `SCHEMATA` information_schema テーブルについて学習します。
+summary: SCHEMATA information_schema テーブルについて学習します。
 ---
 
 # スキーマ {#schemata}

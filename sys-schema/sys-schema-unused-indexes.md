@@ -1,6 +1,6 @@
 ---
 title: schema_unused_indexes
-summary: `sys` スキーマの `schema_unused_indexes` テーブルについて学習します。
+summary: sys スキーマの `schema_unused_indexes` テーブルについて学習します。
 ---
 
 # <code>schema_unused_indexes</code> {#code-schema-unused-indexes-code}

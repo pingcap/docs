@@ -1,6 +1,6 @@
 ---
 title: PARTITIONS
-summary: `PARTITIONS` INFORMATION_SCHEMA テーブルについて学習します。
+summary: PARTITIONS INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
 # パーティション {#partitions}

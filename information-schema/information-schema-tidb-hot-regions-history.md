@@ -1,6 +1,6 @@
 ---
 title: TIDB_HOT_REGIONS_HISTORY
-summary: `TIDB_HOT_REGIONS_HISTORY` information_schema テーブルについて学習します。
+summary: TIDB_HOT_REGIONS_HISTORY information_schema テーブルについて学習します。
 ---
 
 # TIDB_ホット_リージョン_履歴 {#tidb-hot-regions-history}

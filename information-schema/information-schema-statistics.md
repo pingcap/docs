@@ -1,6 +1,6 @@
 ---
 title: STATISTICS
-summary: `STATISTICS` information_schema テーブルについて学習します。
+summary: STATISTICS information_schema テーブルについて学習します。
 ---
 
 # 統計 {#statistics}

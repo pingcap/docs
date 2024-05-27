@@ -1,6 +1,6 @@
 ---
 title: binlogctl
-summary: `binlogctl` の使い方を学びます。
+summary: binlogctl の使い方を学びます。
 ---
 
 # binlogctl {#binlogctl}

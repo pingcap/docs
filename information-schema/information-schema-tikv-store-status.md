@@ -1,6 +1,6 @@
 ---
 title: TIKV_STORE_STATUS
-summary: `TIKV_STORE_STATUS` INFORMATION_SCHEMA テーブルについて学習します。
+summary: TIKV_STORE_STATUS INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
 # TIKV_ストアステータス {#tikv-store-status}

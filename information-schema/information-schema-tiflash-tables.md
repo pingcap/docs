@@ -1,6 +1,6 @@
 ---
 title: TIFLASH_TABLES
-summary: `TIFLASH_TABLES` information_schema テーブルについて学習します。
+summary: TIFLASH_TABLES information_schema テーブルについて学習します。
 ---
 
 # TIFLASH_テーブル {#tiflash-tables}

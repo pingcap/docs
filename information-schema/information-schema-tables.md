@@ -1,6 +1,6 @@
 ---
 title: TABLES
-summary: `TABLES` information_schema テーブルについて学習します。
+summary: TABLES information_schema テーブルについて学習します。
 ---
 
 # テーブル {#tables}
@@ -68,8 +68,8 @@ SELECT * FROM tables WHERE table_schema='mysql' AND table_name='user'\G
                CHECK_TIME: NULL
           TABLE_COLLATION: utf8mb4_bin
                  CHECKSUM: NULL
-           CREATE_OPTIONS: 
-            TABLE_COMMENT: 
+           CREATE_OPTIONS:
+            TABLE_COMMENT:
             TIDB_TABLE_ID: 5
 TIDB_ROW_ID_SHARDING_INFO: NULL
 1 row in set (0.00 sec)

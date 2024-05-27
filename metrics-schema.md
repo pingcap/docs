@@ -1,6 +1,6 @@
 ---
 title: Metrics Schema
-summary: `METRICS_SCHEMA` スキーマについて学習します。
+summary: METRICS_SCHEMA スキーマについて学習します。
 ---
 
 # メトリクススキーマ {#metrics-schema}
