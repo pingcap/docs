@@ -206,4 +206,4 @@ TiProxy では、クライアントが使用するコネクタが[認証プラ�
 ## TiProxy リソース {#tiproxy-resources}
 
 -   [TiProxy リリースノート](https://github.com/pingcap/tiproxy/releases)
--   [TiProxy の問題](https://github.com/pingcap/tiup/issues) : TiProxy GitHub の問題を一覧表示します
+-   [TiProxy の問題](https://github.com/pingcap/tiup/issues): TiProxy GitHub の問題を一覧表示します
