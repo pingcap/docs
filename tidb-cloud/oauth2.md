@@ -28,6 +28,7 @@ It is usually used by browserless or input-constrained devices in the device flo
 It is the most common OAuth 2.0 grant type, which enables both web apps and native apps to get an access token after a user authorizes an app.
 
 ## Use OAuth to access TiDB Cloud
+
 You can access TiDB Cloud CLI using the OAuth 2.0 Device Code grant type:
 
 - [ticloud auth login](/tidb-cloud/ticloud-auth-login.md): Authenticate with TiDB Cloud
