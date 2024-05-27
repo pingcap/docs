@@ -10,7 +10,17 @@ The `ADMIN CHECKSUM TABLE` statement calculates a CRC64 checksum for the data an
 
 The [checksum](/tidb-lightning/tidb-lightning-glossary.md#checksum) is calculated over the table data and properties like the `table_id`. This means that two tables with the same data but a different table_id will get different checksums.
 
+<CustomContent platform="tidb">
+
 This statement is used to calculate a checksum that can be compared with the checksum that [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) has calculated locally. This statement is usually executed by [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+This statement is used to calculate a checksum that can be compared with the checksum that TiDB Lightning has calculated locally. This statement is usually executed by TiDB Lightning.
+
+</CustomContent>
 
 ## Synopsis
 
