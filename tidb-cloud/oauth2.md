@@ -21,7 +21,7 @@ The OAuth framework specifies several grant types for different use cases. TiDB 
 
 It is usually used by browserless or input-constrained devices in the device flow to exchange a previously obtained device code for an access token.
 
-TiDB Cloud CLI supports OAuth 2.0 as follows:
+TiDB Cloud CLI supports the OAuth 2.0 Device Code grant type:
 
 - [ticloud auth login](/tidb-cloud/ticloud-auth-login.md): Authenticate with TiDB Cloud
 - [ticloud auth logout](/tidb-cloud/ticloud-auth-logout.md): Log out of TiDB Cloud
