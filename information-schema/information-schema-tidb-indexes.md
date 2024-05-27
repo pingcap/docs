@@ -1,6 +1,6 @@
 ---
 title: TIDB_INDEXES
-summary: `TIDB_INDEXES` information_schema テーブルについて学習します。
+summary: TIDB_INDEXES information_schema テーブルについて学習します。
 ---
 
 # TIDB_インデックス {#tidb-indexes}

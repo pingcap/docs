@@ -1,6 +1,6 @@
 ---
 title: COLUMNS
-summary: `COLUMNS` INFORMATION_SCHEMA テーブルについて学習します。
+summary: COLUMNS INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
 # コラム {#columns}

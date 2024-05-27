@@ -1,6 +1,6 @@
 ---
 title: CLUSTER_CONFIG
-summary: `CLUSTER_CONFIG` information_schema テーブルについて学習します。
+summary: CLUSTER_CONFIG information_schema テーブルについて学習します。
 ---
 
 # クラスター構成 {#cluster-config}

@@ -1,6 +1,6 @@
 ---
 title: SESSION_VARIABLES
-summary: `SESSION_VARIABLES` INFORMATION_SCHEMA テーブルについて学習します。
+summary: SESSION_VARIABLES INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
 # セッション変数 {#session-variables}

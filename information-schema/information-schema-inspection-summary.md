@@ -1,6 +1,6 @@
 ---
 title: INSPECTION_SUMMARY
-summary: `INSPECTION_SUMMARY` 検査概要テーブルについて学習します。
+summary: INSPECTION_SUMMARY 検査概要テーブルについて学習します。
 ---
 
 # 検査概要 {#inspection-summary}

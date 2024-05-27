@@ -1,6 +1,6 @@
 ---
 title: CLIENT_ERRORS_SUMMARY_BY_USER
-summary: `CLIENT_ERRORS_SUMMARY_BY_USER` INFORMATION_SCHEMA テーブルについて学習します。
+summary: CLIENT_ERRORS_SUMMARY_BY_USER INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
 # クライアントエラーの概要 {#client-errors-summary-by-user}

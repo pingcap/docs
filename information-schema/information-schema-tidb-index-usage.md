@@ -1,6 +1,6 @@
 ---
 title: TIDB_INDEX_USAGE
-summary: `TIDB_INDEX_USAGE` INFORMATION_SCHEMA テーブルについて学習します。
+summary: TIDB_INDEX_USAGE INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
 # TIDB_インデックス使用法 {#tidb-index-usage}

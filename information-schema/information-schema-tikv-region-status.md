@@ -1,6 +1,6 @@
 ---
 title: TIKV_REGION_STATUS
-summary: `TIKV_REGION_STATUS` information_schema テーブルについて学習します。
+summary: TIKV_REGION_STATUS information_schema テーブルについて学習します。
 ---
 
 # TIKV_地域ステータス {#tikv-region-status}

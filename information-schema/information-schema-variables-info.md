@@ -1,6 +1,6 @@
 ---
 title: VARIABLES_INFO
-summary: `VARIABLES_INFO` information_schema テーブルについて学習します。
+summary: VARIABLES_INFO information_schema テーブルについて学習します。
 ---
 
 # 変数情報 {#variables-info}
