@@ -4,6 +4,8 @@ title: Release Notes
 
 # TiDB Release Notes
 
+<EmailSubscriptionWrapper />
+
 ## 6.1
 
 - [6.1.7](/releases/release-6.1.7.md): 2023-07-12

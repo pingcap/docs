@@ -5,6 +5,8 @@ summary: Learn about the TiDB release timeline.
 
 # TiDB Release Timeline
 
+<EmailSubscriptionWrapper />
+
 This document shows all the released TiDB versions in reverse chronological order.
 
 | Version | Release Date |
