@@ -183,7 +183,7 @@ CREATE TABLE `bookshop`.`ratings` (
 );
 ```
 
-In addition, if the current time is also filled in by default when the data is being updated, the following statements can be used (but only the [current time related statements](https://pingcap.github.io/sqlgram/#NowSymOptionFraction) can be filled in after `ON UPDATE`, and [more options](https://pingcap.github.io/sqlgram/#DefaultValueExpr) are supported after `DEFAULT`):
+In addition, if the current time is also filled in by default when the data is being updated, the following statements can be used (but only the current-time related expressions can be filled in after `ON UPDATE`):
 
 ```sql
 CREATE TABLE `bookshop`.`ratings` (
@@ -194,6 +194,8 @@ CREATE TABLE `bookshop`.`ratings` (
   PRIMARY KEY (`book_id`,`user_id`) CLUSTERED
 );
 ```
+
+For more information on default values of different data types, see [default values](/data-type-default-values.md).
 
 ### Prevent duplicate values
 

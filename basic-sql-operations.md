@@ -14,7 +14,7 @@ To experiment with SQL and test out TiDB compatibility with MySQL queries, you c
 
 </CustomContent>
 
-This page walks you through the basic TiDB SQL statements such as DDL, DML and CRUD operations. For a complete list of TiDB statements, see [TiDB SQL Syntax Diagram](https://pingcap.github.io/sqlgram/).
+This page walks you through the basic TiDB SQL statements such as DDL, DML and CRUD operations. For a complete list of TiDB statements, see [TiDB SQL Syntax](/sql-statements/sql-statement-overview.md)).
 
 ## Category
 
