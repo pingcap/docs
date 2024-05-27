@@ -1,6 +1,7 @@
 ---
 title: tiup mirror set
 summary: tiup mirror set コマンドは、現在のミラーをローカル ファイル システムとリモート ネットワーク アドレスの間で切り替えます。公式のミラー アドレスは。中間者攻撃を防ぐために、ネットワーク ミラーのルート証明書を指定するには。出力は生成されません。
+---
 
 # tiup mirror set {#tiup-mirror-set}
 
