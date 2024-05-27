@@ -1,7 +1,8 @@
 ---
 title: SQL Statement Overview
-summary: Learn about SQL statement overview.
+summary: Learn about supported SQL statements in TiDB.
 ---
+
 # SQL Statement Overview
 
 TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensions for MySQL and TiDB-specific statements where necessary.
@@ -305,9 +306,11 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
+
 > **Note:**
 >
 > [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) & [TiDB Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview) are tools for replicating TiDB data to the upstream for TiDB Self-Hosted. Most SQL statements for TiCDC and TiDB Binlog are not applicable to TiDB Cloud. For TiDB Cloud, you can use the [Changefeed](/tidb-cloud/changefeed-overview.md) feature in the [TiDB Cloud console](https://tidbcloud.com) instead to stream data. 
+
 | SQL Statement | Description |
 |---------------|-------------|
 | [`SHOW MASTER STATUS`](/sql-statements/sql-statement-show-master-status.md) | Shows the latest TSO in the cluster. |
