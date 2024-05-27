@@ -1,6 +1,6 @@
 ---
 title: ticloud config use
-summary: `ticloud config use` のリファレンス。
+summary: ticloud config use のリファレンス。
 ---
 
 # ticloud 設定の使用 {#ticloud-config-use}

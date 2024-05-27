@@ -1,6 +1,6 @@
 ---
 title: ticloud config list
-summary: `ticloud config list` のリファレンス。
+summary: ticloud config list のリファレンス。
 ---
 
 # ticloud 設定リスト {#ticloud-config-list}

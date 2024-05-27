@@ -1,6 +1,6 @@
 ---
 title: ticloud cluster list
-summary: `ticloud cluster list` のリファレンス。
+summary: ticloud cluster list のリファレンス。
 ---
 
 # ticloud クラスター リスト {#ticloud-cluster-list}

@@ -1,6 +1,6 @@
 ---
 title: ticloud import cancel
-summary: `ticloud import cancel` の参照。
+summary: ticloud import cancel の参照。
 ---
 
 # ticloud インポート キャンセル {#ticloud-import-cancel}

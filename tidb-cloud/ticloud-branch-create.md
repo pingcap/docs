@@ -1,6 +1,6 @@
 ---
 title: ticloud branch create
-summary: `ticloud branch create` のリファレンス。
+summary: ticloud branch create のリファレンス。
 ---
 
 # ticloud ブランチ作成 {#ticloud-branch-create}

@@ -1,6 +1,6 @@
 ---
 title: ticloud import describe
-summary: `ticloud import describe` のリファレンス。
+summary: ticloud import describe のリファレンス。
 ---
 
 # ticloud インポート 説明 {#ticloud-import-describe}

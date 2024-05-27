@@ -1,6 +1,6 @@
 ---
 title: tiup cluster replay
-summary: `tiup cluster replay` コマンドを使用すると、失敗したクラスター操作を再試行し、正常に実行された手順をスキップできます。 `tiup cluster replay <audit-id>` を使用して、指定された監査 ID でコマンドを再試行します。 ` tiup cluster audit ` コマンドで監査 IDをビュー。 出力は、指定された監査 ID の結果です。
+summary: tiup cluster replay コマンドを使用すると、失敗したクラスター操作を再試行し、正常に実行された手順をスキップできます。 `tiup cluster replay <audit-id>` を使用して、指定された監査 ID でコマンドを再試行します。 ` tiup cluster audit ` コマンドで監査 IDをビュー。 出力は、指定された監査 ID の結果です。
 ---
 
 # tiup cluster replay {#tiup-cluster-replay}

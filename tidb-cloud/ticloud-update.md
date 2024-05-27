@@ -1,6 +1,6 @@
 ---
 title: ticloud update
-summary: `ticloud update` のリファレンス。
+summary: ticloud update のリファレンス。
 ---
 
 # ticloud アップデート {#ticloud-update}

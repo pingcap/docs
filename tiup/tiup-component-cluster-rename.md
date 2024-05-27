@@ -1,6 +1,6 @@
 ---
 title: tiup cluster rename
-summary: `tiup cluster rename` コマンドは、デプロイ後にクラスター名を変更するために使用されます。`grafana_servers` の `dashboard_dir` フィールドがTiUPクラスター用に構成されている場合は、追加の手順が必要です。コマンドの構文は `tiup cluster rename <old-cluster-name> <new-cluster-name>` です。`-h, --help` オプションはヘルプ情報を出力。出力はtiup-clusterの実行ログです。
+summary: tiup cluster rename コマンドは、デプロイ後にクラスター名を変更するために使用されます。`grafana_servers` の `dashboard_dir` フィールドがTiUPクラスター用に構成されている場合は、追加の手順が必要です。コマンドの構文は `tiup cluster rename <old-cluster-name> <new-cluster-name>` です。`-h, --help` オプションはヘルプ情報を出力。出力はtiup-clusterの実行ログです。
 ---
 
 # tiup cluster rename {#tiup-cluster-rename}

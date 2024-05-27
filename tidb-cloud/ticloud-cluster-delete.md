@@ -1,6 +1,6 @@
 ---
 title: ticloud cluster delete
-summary: `ticloud cluster delete` のリファレンス。
+summary: ticloud cluster delete のリファレンス。
 ---
 
 # ticloud クラスターの削除 {#ticloud-cluster-delete}

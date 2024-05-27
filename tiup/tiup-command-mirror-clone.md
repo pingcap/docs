@@ -1,6 +1,6 @@
 ---
 title: tiup mirror clone
-summary: `tiup mirror clone` コマンドは、既存のミラーまたはそのコンポーネントを複製して、異なる署名キーを持つ新しいミラーを作成するために使用されます。構文は `tiup mirror clone <target-dir> [global version] [flags]` です。オプションには、ミラー全体の複製、プラットフォームとオペレーティング システムの指定、プレフィックスによるコンポーネントバージョンの一致などがあります。
+summary: tiup mirror clone コマンドは、既存のミラーまたはそのコンポーネントを複製して、異なる署名キーを持つ新しいミラーを作成するために使用されます。構文は `tiup mirror clone <target-dir> [global version] [flags]` です。オプションには、ミラー全体の複製、プラットフォームとオペレーティング システムの指定、プレフィックスによるコンポーネントバージョンの一致などがあります。
 ---
 
 # tiup mirror clone {#tiup-mirror-clone}

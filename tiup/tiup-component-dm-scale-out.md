@@ -1,6 +1,6 @@
 ---
 title: tiup dm scale-out
-summary: `tiup dm scale-out` コマンドは、新しいノードへの SSH 接続を確立し、必要なディレクトリを作成し、デプロイしてサービスを開始することで、クラスターをスケールアウトするために使用されます。
+summary: tiup dm scale-out コマンドは、新しいノードへの SSH 接続を確立し、必要なディレクトリを作成し、デプロイしてサービスを開始することで、クラスターをスケールアウトするために使用されます。
 ---
 
 # tiup dm scale-out {#tiup-dm-scale-out}

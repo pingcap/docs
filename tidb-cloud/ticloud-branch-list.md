@@ -1,6 +1,6 @@
 ---
 title: ticloud branch list
-summary: `ticloud ブランチ リスト` の参照。
+summary: ticloud ブランチ リスト の参照。
 ---
 
 # ticloud ブランチ リスト {#ticloud-branch-list}
