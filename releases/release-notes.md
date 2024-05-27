@@ -4,6 +4,8 @@ title: Release Notes
 
 # TiDB Release Notes
 
+<EmailSubscriptionWrapper />
+
 ## 5.4
 
 - [5.4.3](/releases/release-5.4.3.md): 2022-10-13
