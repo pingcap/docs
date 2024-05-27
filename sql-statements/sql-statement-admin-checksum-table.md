@@ -6,9 +6,11 @@ category: reference
 
 # ADMIN CHECKSUM TABLE
 
-The `ADMIN CHECKSUM TABLE` statement calculates a CRC64 checksum for the data and indexes of a table. This statement is used by programs such as TiDB Lightning to ensure that import operations have completed successfully.
+The `ADMIN CHECKSUM TABLE` statement calculates a CRC64 checksum for the data and indexes of a table.
 
-The checksum will likely be different between different servers and if the table is re-created.
+The [checksum](/tidb-lightning/tidb-lightning-glossary.md#checksum) is calculated over the table data and properties like the `table_id`. This means that two tables with the same data but a different table_id will get different checksums.
+
+This statement is used to calculate a checksum that can be compared with the checksum that [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) has calculated locally. This statement is usually executed by [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md).
 
 ## Synopsis
 
