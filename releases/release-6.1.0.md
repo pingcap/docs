@@ -4,6 +4,8 @@ title: TiDB 6.1.0 Release Notes
 
 # TiDB 6.1.0 Release Notes
 
+<EmailSubscriptionWrapper />
+
 Release date: June 13, 2022
 
 TiDB version: 6.1.0
