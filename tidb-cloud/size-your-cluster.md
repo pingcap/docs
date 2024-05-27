@@ -23,9 +23,9 @@ To learn performance test results of different cluster scales, see [TiDB Cloud P
 
 The supported vCPU and RAM sizes include the following:
 
-| Standard Size | High Memory Size | 
+| Standard size | High memory size | 
 |:---------:|:----------------:|
-| 4 vCPU, 16 GiB  |          |
+| 4 vCPU, 16 GiB  | N/A          |
 | 8 vCPU, 16 GiB    | 8 vCPU, 32 GiB        |
 | 16 vCPU, 32 GiB  | 16 vCPU, 64 GiB         |
 | 32 vCPU, 64 GiB   | 32 vCPU, 128 GiB        |
@@ -89,12 +89,12 @@ To learn performance test results of different cluster scales, see [TiDB Cloud P
 
 The supported vCPU and RAM sizes include the following:
 
-| Standard Size | High Memory Size | 
+| Standard size | High memory size | 
 |:---------:|:----------------:|
-| 4 vCPU, 16 GiB  |  NA        |
+| 4 vCPU, 16 GiB  |  N/A        |
 | 8 vCPU, 32 GiB    | 8 vCPU, 64 GiB        |
 | 16 vCPU, 64 GiB  | Coming soon       |
-| 32 vCPU, 128 GiB   |  NA  |
+| 32 vCPU, 128 GiB   |  N/A  |
 
 > **Note:**
 >
