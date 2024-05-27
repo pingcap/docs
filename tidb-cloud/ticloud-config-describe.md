@@ -1,6 +1,6 @@
 ---
 title: ticloud config describe
-summary: `ticloud config describe` のリファレンス。
+summary: ticloud config describe のリファレンス。
 ---
 
 # ticloud 設定の説明 {#ticloud-config-describe}

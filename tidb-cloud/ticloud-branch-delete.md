@@ -1,6 +1,6 @@
 ---
 title: ticloud branch delete
-summary: `ticloud branch delete` の参照。
+summary: ticloud branch delete の参照。
 ---
 
 # ticloud ブランチ削除 {#ticloud-branch-delete}

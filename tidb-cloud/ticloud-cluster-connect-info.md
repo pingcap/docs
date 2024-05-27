@@ -1,6 +1,6 @@
 ---
 title: ticloud cluster connect-info
-summary: `ticloud cluster connect-info` のリファレンス。
+summary: ticloud cluster connect-info のリファレンス。
 ---
 
 # ticloud クラスター接続情報 {#ticloud-cluster-connect-info}

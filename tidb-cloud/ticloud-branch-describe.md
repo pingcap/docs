@@ -1,6 +1,6 @@
 ---
 title: ticloud branch describe
-summary: `ticloud branch describe` のリファレンス。
+summary: ticloud branch describe のリファレンス。
 ---
 
 # ticloudブランチの説明 {#ticloud-branch-describe}

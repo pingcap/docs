@@ -1,6 +1,6 @@
 ---
 title: ticloud import start local
-summary: `ticloud import start local` の参照。
+summary: ticloud import start local の参照。
 ---
 
 # ticloud インポート ローカル開始 {#ticloud-import-start-local}

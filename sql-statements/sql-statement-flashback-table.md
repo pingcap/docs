@@ -1,6 +1,6 @@
 ---
 title: FLASHBACK TABLE
-summary: `FLASHBACK TABLE` ステートメントを使用してテーブルを回復する方法を学習します。
+summary: FLASHBACK TABLE ステートメントを使用してテーブルを回復する方法を学習します。
 ---
 
 # フラッシュバックテーブル {#flashback-table}

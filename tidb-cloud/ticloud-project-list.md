@@ -1,6 +1,6 @@
 ---
 title: ticloud project list
-summary: `ticloud プロジェクト リスト` の参照。
+summary: ticloud プロジェクト リスト の参照。
 ---
 
 # ticloud プロジェクト リスト {#ticloud-project-list}

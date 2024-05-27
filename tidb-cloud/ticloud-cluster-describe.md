@@ -1,6 +1,6 @@
 ---
 title: ticloud cluster describe
-summary: `ticloud cluster describe` のリファレンス。
+summary: ticloud cluster describe のリファレンス。
 ---
 
 # ticloud クラスターの説明 {#ticloud-cluster-describe}

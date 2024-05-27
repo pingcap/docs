@@ -1,6 +1,6 @@
 ---
 title: tiup dm destroy
-summary: `tiup dm destroy` コマンドは、クラスターを停止し、各サービスのログ、デプロイメント、およびデータ ディレクトリを削除し、`tiup-dm` によって作成された親ディレクトリも削除します。構文は `tiup dm destroy <cluster-name> [flags]` です。オプション `-h, --help` はヘルプ情報を出力。出力は tiup-dm の実行ログです。
+summary: tiup dm destroy コマンドは、クラスターを停止し、各サービスのログ、デプロイメント、およびデータ ディレクトリを削除し、`tiup-dm` によって作成された親ディレクトリも削除します。構文は `tiup dm destroy <cluster-name> [flags]` です。オプション `-h, --help` はヘルプ情報を出力。出力は tiup-dm の実行ログです。
 ---
 
 # tiup dm 破壊する {#tiup-dm-destroy}

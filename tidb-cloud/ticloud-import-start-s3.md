@@ -1,6 +1,6 @@
 ---
 title: ticloud import start s3
-summary: `ticloud import start s3` のリファレンス。
+summary: ticloud import start s3 のリファレンス。
 ---
 
 # ticloud インポート開始 s3 {#ticloud-import-start-s3}

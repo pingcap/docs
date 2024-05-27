@@ -1,6 +1,6 @@
 ---
 title: tiup cluster edit-config
-summary: `tiup cluster edit-config` コマンドを使用すると、デプロイメント後にクラスター構成を変更できます。エディターを使用して、`$EDITOR` 環境変数で指定されたトポロジ ファイルを変更できます。構成を変更するときにマシンを追加または削除することはできないことに注意してください。コマンドの実行後、構成は制御マシンでのみ変更されるため、構成を再読み込みするには `tiup cluster reload` を実行する必要があります。
+summary: tiup cluster edit-config コマンドを使用すると、デプロイメント後にクラスター構成を変更できます。エディターを使用して、`$EDITOR` 環境変数で指定されたトポロジ ファイルを変更できます。構成を変更するときにマシンを追加または削除することはできないことに注意してください。コマンドの実行後、構成は制御マシンでのみ変更されるため、構成を再読み込みするには `tiup cluster reload` を実行する必要があります。
 ---
 
 # tiup cluster edit-config {#tiup-cluster-edit-config}

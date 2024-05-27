@@ -1,6 +1,6 @@
 ---
 title: tiup dm enable
-summary: `tiup dm enable` コマンドは、マシンの再起動後にクラスター サービスの自動有効化を有効にするために使用されます。指定されたノードで `systemctl enable <service>` を実行します。オプションには、自動有効化するノードまたはロールの指定が含まれます。出力は tiup-dm の実行ログです。
+summary: tiup dm enable コマンドは、マシンの再起動後にクラスター サービスの自動有効化を有効にするために使用されます。指定されたノードで `systemctl enable <service>` を実行します。オプションには、自動有効化するノードまたはロールの指定が含まれます。出力は tiup-dm の実行ログです。
 ---
 
 # tiup dm 有効 {#tiup-dm-enable}

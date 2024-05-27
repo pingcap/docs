@@ -1,6 +1,6 @@
 ---
 title: ticloud connect
-summary: `ticloud connect` のリファレンス。
+summary: ticloud connect のリファレンス。
 ---
 
 # ticloud接続 {#ticloud-connect}

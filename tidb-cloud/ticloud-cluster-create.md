@@ -1,6 +1,6 @@
 ---
 title: ticloud cluster create
-summary: `ticloud cluster create` のリファレンス。
+summary: ticloud cluster create のリファレンス。
 ---
 
 # ticloud クラスター作成 {#ticloud-cluster-create}
