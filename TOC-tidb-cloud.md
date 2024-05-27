@@ -263,6 +263,7 @@
     - [Basic SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md)
     - [Organization SSO Authentication](/tidb-cloud/tidb-cloud-org-sso-authentication.md)
     - [Identity Access Management](/tidb-cloud/manage-user-access.md)
+    - [OAuth 2.0](/tidb-cloud/oauth2.md)
   - Network Access Control
     - TiDB Serverless
       - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
