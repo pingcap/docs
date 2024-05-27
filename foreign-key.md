@@ -1,18 +1,18 @@
 ---
 title: FOREIGN KEY Constraints
-summary: An overview of the usage of FOREIGN KEY constraints for the TiDB database.
+summary: TiDB データベースの FOREIGN KEY 制約の使用法の概要。
 ---
 
-# FOREIGN KEY Constraints
+# 外部キー制約 {#foreign-key-constraints}
 
-Starting from v6.6.0, TiDB supports the foreign key feature, which allows cross-table referencing of related data, and foreign key constraints to maintain data consistency.
+v6.6.0 以降、TiDB は、関連データのテーブル間参照を可能にする外部キー機能と、データの一貫性を維持するための外部キー制約をサポートします。
 
-> **Warning:**
+> **警告：**
 >
-> - Currently, the foreign key feature is experimental. It is not recommended that you use it in production environments. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> - The foreign key feature is typically employed to enforce [referential integrity](https://en.wikipedia.org/wiki/Referential_integrity) constraint checks. It might cause performance degradation, so it is recommended to conduct thorough testing before using it in performance-sensitive scenarios.
+> -   現在、外部キー機能は実験的です。本番環境での使用は推奨されません。この機能は予告なしに変更または削除される可能性があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)報告できます。
+> -   外部キー機能は通常、 [参照整合性](https://en.wikipedia.org/wiki/Referential_integrity)制約チェックを強制するために使用されます。パフォーマンスの低下を引き起こす可能性があるため、パフォーマンスが重要なシナリオで使用する前に徹底的なテストを実施することをお勧めします。
 
-The foreign key is defined in the child table. The syntax is as follows:
+外部キーは子テーブルで定義されます。構文は次のとおりです。
 
 ```ebnf+diagram
 ForeignKeyDef
@@ -30,51 +30,57 @@ ReferenceOption
            | 'NO' 'ACTION'
 ```
 
-## Naming
+## ネーミング {#naming}
 
-The naming of a foreign key follows the following rules:
+外部キーの命名は、次の規則に従います。
 
-- If a name is specified in `CONSTRAINT identifier`, the specified name is used.
-- If no name is specified in `CONSTRAINT identifier`, but a name is specified in `FOREIGN KEY identifier`, the name specified in the `FOREIGN KEY identifier` is used.
-- If neither `CONSTRAINT identifier` nor `FOREIGN KEY identifier` specifies a name, a name is automatically generated, such as `fk_1`, `fk_2`, and `fk_3`.
-- The foreign key name must be unique in the current table. Otherwise, an error `ERROR 1826: Duplicate foreign key constraint name 'fk'` is reported when the foreign key is created.
+-   `CONSTRAINT identifier`に名前が指定されている場合は、指定された名前が使用されます。
+-   `CONSTRAINT identifier`に名前が指定されておらず、 `FOREIGN KEY identifier`に名前が指定されている場合は、 `FOREIGN KEY identifier`に指定された名前が使用されます。
+-   `CONSTRAINT identifier`と`FOREIGN KEY identifier`どちらにも名前が指定されていない場合は、 `fk_1` 、 `fk_2` 、 `fk_3`などの名前が自動的に生成されます。
+-   外部キー名は現在のテーブル内で一意である必要があります。そうでない場合、外部キーの作成時にエラー`ERROR 1826: Duplicate foreign key constraint name 'fk'`が報告されます。
 
-## Restrictions
+## 制限 {#restrictions}
 
-When creating a foreign key, the following conditions must be met:
+外部キーを作成するときは、次の条件を満たす必要があります。
 
-- Neither the parent table nor the child table is a temporary table.
-- The user has the `REFERENCES` privilege on the parent table.
-- The columns referenced by the foreign key in the parent table and the child table are of the same data type and have the same size, precision, length, character set, and collation.
-- The columns in the foreign key cannot reference themselves.
-- The columns in the foreign key and the columns in the referenced parent table have the same index, and the order of the columns in the index matches that in the foreign key. This is to use the index to avoid full table scans when performing foreign key constraint checks.
+-   親テーブルも子テーブルも一時テーブルではありません。
 
-    - If there is no corresponding foreign key index in the parent table, an error `ERROR 1822: Failed to add the foreign key constraint. Missing index for constraint 'fk' in the referenced table 't'` is reported.
-    - If there is no corresponding foreign key index in the child table, an index is automatically created with the same name as the foreign key.
+-   ユーザーには親テーブルに対する権限`REFERENCES`あります。
 
-- It is not supported to create a foreign key on a column of the `BLOB` or `TEXT` type.
-- It is not supported to create a foreign key on a partitioned table.
-- It is not supported to create a foreign key on a virtual generated column.
+-   親テーブルと子テーブルの外部キーによって参照される列は、同じデータ型であり、サイズ、精度、長さ、文字セット、および照合順序が同じです。
 
-## Reference operations
+-   外部キーの列は、それ自体を参照することはできません。
 
-If an `UPDATE` or `DELETE` operation affects a foreign key value in the parent table, the corresponding foreign key value in the child table is determined by the reference operation defined by the `ON UPDATE` or `ON DELETE` clause in the foreign key definition. The reference operations include the following:
+-   外部キーの列と参照先の親テーブルの列には同じインデックスがあり、インデックスの列の順序は外部キーの列の順序と一致します。これは、外部キー制約チェックを実行するときに、インデックスを使用してテーブル全体のスキャンを回避するためです。
 
-- `CASCADE`: automatically updates or deletes the matching rows in the child table when the `UPDATE` or `DELETE` operation affects the parent table. The cascade operation is performed in a depth-first manner.
-- `SET NULL`: automatically sets the matching foreign key columns in the child table to `NULL` when the `UPDATE` or `DELETE` operation affects the parent table.
-- `RESTRICT`: denies the `UPDATE` or `DELETE` operation if the child table contains matching rows.
-- `NO ACTION`: the same as `RESTRICT`.
-- `SET DEFAULT`: the same as `RESTRICT`.
+    -   親テーブルに対応する外部キー インデックスがない場合、エラー`ERROR 1822: Failed to add the foreign key constraint. Missing index for constraint 'fk' in the referenced table 't'`が報告されます。
+    -   子テーブルに対応する外部キー インデックスがない場合、外部キーと同じ名前のインデックスが自動的に作成されます。
 
-If there is no matching foreign key value in the parent table, the `INSERT` or `UPDATE` operation on the child table is denied.
+-   `BLOB`または`TEXT`タイプの列に外部キーを作成することはサポートされていません。
 
-If the foreign key definition does not specify `ON DELETE` or `ON UPDATE`, the default behavior is `NO ACTION`.
+-   パーティションテーブルに外部キーを作成することはサポートされていません。
 
-If the foreign key is defined on a `STORED GENERATED COLUMN`, the `CASCADE`, `SET NULL`, and `SET DEFAULT` references are not supported.
+-   仮想生成列に外部キーを作成することはサポートされていません。
 
-## Usage examples of foreign keys
+## 参照操作 {#reference-operations}
 
-The following example uses a single-column foreign key to associate the parent table and the child table:
+`UPDATE`または`DELETE`操作が親テーブルの外部キー値に影響する場合、子テーブルの対応する外部キー値は、外部キー定義の`ON UPDATE`または`ON DELETE`句で定義された参照操作によって決定されます。参照操作には次のものが含まれます。
+
+-   `CASCADE` : `UPDATE`または`DELETE`操作が親テーブルに影響する場合、子テーブル内の一致する行を自動的に更新または削除します。カスケード操作は深さ優先方式で実行されます。
+-   `SET NULL` : `UPDATE`または`DELETE`操作が親テーブルに影響する場合、子テーブルの一致する外部キー列を`NULL`に自動的に設定します。
+-   `RESTRICT` : 子テーブルに一致する行が含まれている場合、 `UPDATE`または`DELETE`操作を拒否します。
+-   `NO ACTION` : `RESTRICT`と同じ。
+-   `SET DEFAULT` : `RESTRICT`と同じ。
+
+親テーブルに一致する外部キー値がない場合、子テーブルでの`INSERT`または`UPDATE`操作は拒否されます。
+
+外部キー定義で`ON DELETE`または`ON UPDATE`指定されていない場合、デフォルトの動作は`NO ACTION`なります。
+
+外部キーが`STORED GENERATED COLUMN`に定義されている場合、 `CASCADE` 、 `SET NULL` 、および`SET DEFAULT`参照はサポートされません。
+
+## 外部キーの使用例 {#usage-examples-of-foreign-keys}
+
+次の例では、単一列の外部キーを使用して親テーブルと子テーブルを関連付けます。
 
 ```sql
 CREATE TABLE parent (
@@ -89,7 +95,7 @@ CREATE TABLE child (
 );
 ```
 
-The following is a more complex example where the `product_order` table has two foreign keys that reference the other two tables. One foreign key references two indexes on the `product` table, and the other references a single index on the `customer` table:
+以下は、 `product_order`テーブルに他の 2 つのテーブルを参照する 2 つの外部キーがある、より複雑な例です。1 つの外部キーは`product`テーブル上の 2 つのインデックスを参照し、もう 1 つは`customer`テーブル上の 1 つのインデックスを参照します。
 
 ```sql
 CREATE TABLE product (
@@ -122,9 +128,9 @@ CREATE TABLE product_order (
 );
 ```
 
-## Create a foreign key constraint
+## 外部キー制約を作成する {#create-a-foreign-key-constraint}
 
-To create a foreign key constraint, you can use the following `ALTER TABLE` statement:
+外部キー制約を作成するには、次の`ALTER TABLE`ステートメントを使用できます。
 
 ```sql
 ALTER TABLE table_name
@@ -135,17 +141,17 @@ ALTER TABLE table_name
     [ON UPDATE reference_option]
 ```
 
-The foreign key can be self-referencing, that is, referencing the same table. When you add a foreign key constraint to a table using `ALTER TABLE`, you need to first create an index on the parent table column that the foreign key references.
+外部キーは自己参照、つまり同じテーブルを参照することができます。 `ALTER TABLE`を使用してテーブルに外部キー制約を追加する場合は、まず外部キーが参照する親テーブルの列にインデックスを作成する必要があります。
 
-## Delete a foreign key constraint
+## 外部キー制約を削除する {#delete-a-foreign-key-constraint}
 
-To delete a foreign key constraint, you can use the following `ALTER TABLE` statement:
+外部キー制約を削除するには、次の`ALTER TABLE`ステートメントを使用できます。
 
 ```sql
 ALTER TABLE table_name DROP FOREIGN KEY fk_identifier;
 ```
 
-If the foreign key constraint is named when it is created, you can reference the name to delete the foreign key constraint. Otherwise, you have to use the constraint name automatically generated to delete the constraint. You can use `SHOW CREATE TABLE` to view the foreign key name:
+外部キー制約が作成時に名前が付けられている場合は、その名前を参照して外部キー制約を削除できます。それ以外の場合は、制約を削除するには自動的に生成された制約名を使用する必要があります。外部キー名を表示するには、 `SHOW CREATE TABLE`使用します。
 
 ```sql
 mysql> SHOW CREATE TABLE child\G
@@ -159,32 +165,32 @@ Create Table: CREATE TABLE `child` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 ```
 
-## Foreign key constraint check
+## 外部キー制約チェック {#foreign-key-constraint-check}
 
-TiDB supports foreign key constraint check, which is controlled by the system variable [`foreign_key_checks`](/system-variables.md#foreign_key_checks). By default, this variable is set to `ON`, meaning that the foreign key constraint check is enabled. This variable has two scopes: `GLOBAL` and `SESSION`. Keeping this variable enabled can ensure the integrity of foreign key reference relationships.
+TiDB は、システム変数[`foreign_key_checks`](/system-variables.md#foreign_key_checks)によって制御される外部キー制約チェックをサポートしています。デフォルトでは、この変数は`ON`に設定されており、外部キー制約チェックが有効になっていることを意味します。この変数には、 `GLOBAL`と`SESSION` 2 つのスコープがあります。この変数を有効にしておくと、外部キー参照関係の整合性を確保できます。
 
-The effect of disabling foreign key constraint check is as follows:
+外部キー制約チェックを無効にすると、次の効果が得られます。
 
-- When you delete a parent table referenced by a foreign key, the deletion can succeed only when the foreign key constraint check is disabled.
-- When you import data to a database, the order of creating tables might be different from the foreign key dependency order, which might cause the creation of tables to fail. Only when the foreign key constraint check is disabled can the tables be created successfully. In addition, disabling the foreign key constraint check can speed up data import.
-- When you import data to a database, if the data of the child table is imported first, an error will be reported. Only when the foreign key constraint check is disabled can the data of the child table be imported successfully.
-- If an `ALTER TABLE` operation to be executed involves a change of the foreign key, this operation succeeds only when the foreign key constraint check is disabled.
+-   外部キーによって参照される親テーブルを削除する場合、外部キー制約チェックが無効になっている場合にのみ削除が成功します。
+-   データベースにデータをインポートする場合、テーブルの作成順序が外部キーの依存関係の順序と異なることがあり、テーブルの作成が失敗する可能性があります。外部キー制約チェックが無効になっている場合にのみ、テーブルを正常に作成できます。また、外部キー制約チェックを無効にすると、データのインポートが高速化されます。
+-   データベースにデータをインポートするときに、子テーブルのデータを最初にインポートすると、エラーが報告されます。外部キー制約チェックが無効になっている場合にのみ、子テーブルのデータを正常にインポートできます。
+-   実行される`ALTER TABLE`つの操作に外部キーの変更が含まれる場合、この操作は外部キー制約チェックが無効になっている場合にのみ成功します。
 
-When the foreign key constraint check is disabled, the foreign key constraint check and reference operation are not executed, except for the following scenarios:
+外部キー制約チェックが無効になっている場合、次のシナリオを除き、外部キー制約チェックと参照操作は実行されません。
 
-- If the execution of `ALTER TABLE` might result in wrong definition of the foreign key, an error is still reported during the execution.
-- When deleting the index required by the foreign key, you should delete the foreign key first. Otherwise, an error is reported.
-- When you create a foreign key but it does not meet related conditions or restrictions, an error is reported.
+-   `ALTER TABLE`の実行によって外部キーの定義が間違ってしまう可能性がある場合は、実行中にエラーが報告されます。
+-   外部キーに必要なインデックスを削除する場合は、まず外部キーを削除する必要があります。そうしないと、エラーが報告されます。
+-   外部キーを作成したが、関連する条件または制限を満たしていない場合は、エラーが報告されます。
 
-## Locking
+## ロック {#locking}
 
-When `INSERT` or `UPDATE` a child table, the foreign key constraint checks whether the corresponding foreign key value exists in the parent table, and locks the row in the parent table to avoid the foreign key value being deleted by other operations violating the foreign key constraint. The locking behavior is equivalent to performing a `SELECT FOR UPDATE` operation on the row where the foreign key value is located in the parent table.
+`INSERT`または`UPDATE`が子テーブルの場合、外部キー制約は、対応する外部キー値が親テーブルに存在するかどうかを確認し、外部キー制約に違反する他の操作によって外部キー値が削除されるのを防ぐために、親テーブルの行をロックします。ロック動作は、親テーブルで外部キー値が配置されている行に対して`SELECT FOR UPDATE`操作を実行することと同じです。
 
-Because TiDB currently does not support `LOCK IN SHARE MODE`, if a child table accepts a large number of concurrent writes and most of the referenced foreign key values are the same, there might be serious locking conflicts. It is recommended to disable [`foreign_key_checks`](/system-variables.md#foreign_key_checks) when writing a large number of child table data.
+TiDB は現在`LOCK IN SHARE MODE`サポートしていないため、子テーブルが大量の同時書き込みを受け入れ、参照される外部キー値のほとんどが同じである場合、深刻なロック競合が発生する可能性があります。大量の子テーブルデータを書き込む場合は[`foreign_key_checks`](/system-variables.md#foreign_key_checks)無効にすることをお勧めします。
 
-## Definition and metadata of foreign keys
+## 外部キーの定義とメタデータ {#definition-and-metadata-of-foreign-keys}
 
-To view the definition of a foreign key constraint, execute the [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md) statement:
+外部キー制約の定義を表示するには、次[`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)ステートメントを実行します。
 
 ```sql
 mysql> SHOW CREATE TABLE child\G
@@ -198,15 +204,15 @@ Create Table: CREATE TABLE `child` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 ```
 
-You can also get information about foreign keys using either of the following system tables:
+次のいずれかのシステム テーブルを使用して、外部キーに関する情報を取得することもできます。
 
-- [`INFORMATION_SCHEMA.KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md)
-- [`INFORMATION_SCHEMA.TABLE_CONSTRAINTS`](/information-schema/information-schema-table-constraints.md)
-- [`INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS`](/information-schema/information-schema-referential-constraints.md)
+-   [`INFORMATION_SCHEMA.KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md)
+-   [`INFORMATION_SCHEMA.TABLE_CONSTRAINTS`](/information-schema/information-schema-table-constraints.md)
+-   [`INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS`](/information-schema/information-schema-referential-constraints.md)
 
-The following provides examples:
+以下に例を示します。
 
-Get information about foreign keys from the `INFORMATION_SCHEMA.KEY_COLUMN_USAGE` system table:
+`INFORMATION_SCHEMA.KEY_COLUMN_USAGE`システム テーブルから外部キーに関する情報を取得します。
 
 ```sql
 mysql> SELECT TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME, CONSTRAINT_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE REFERENCED_TABLE_SCHEMA IS NOT NULL;
@@ -220,7 +226,7 @@ mysql> SELECT TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME, CONSTRAINT_NAME FROM INFORM
 +--------------+---------------+------------------+-----------------+
 ```
 
-Get information about foreign keys from the `INFORMATION_SCHEMA.TABLE_CONSTRAINTS` system table:
+`INFORMATION_SCHEMA.TABLE_CONSTRAINTS`システム テーブルから外部キーに関する情報を取得します。
 
 ```sql
 mysql> SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE CONSTRAINT_TYPE='FOREIGN KEY'\G
@@ -233,7 +239,7 @@ TABLE_NAME         | child
 CONSTRAINT_TYPE    | FOREIGN KEY
 ```
 
-Get information about foreign keys from the `INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS` system table:
+`INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS`システム テーブルから外部キーに関する情報を取得します。
 
 ```sql
 mysql> SELECT * FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS\G
@@ -251,9 +257,9 @@ TABLE_NAME                | child
 REFERENCED_TABLE_NAME     | parent
 ```
 
-## View execution plans with foreign keys
+## 外部キーを使用した実行プランのビュー {#view-execution-plans-with-foreign-keys}
 
-You can use the `EXPLAIN` statement to view execution plans. The `Foreign_Key_Check` operator performs the foreign key constraint check on DML statements that are executed.
+`EXPLAIN`ステートメントを使用して実行プランを表示できます。3 `Foreign_Key_Check`は、実行される DML ステートメントに対して外部キー制約チェックを実行します。
 
 ```sql
 mysql> explain insert into child values (1,1);
@@ -265,7 +271,7 @@ mysql> explain insert into child values (1,1);
 +-----------------------+---------+------+---------------+-------------------------------+
 ```
 
-You can use the `EXPLAIN ANALYZE` statement to view the execution of the foreign key reference behavior. The `Foreign_Key_Cascade` operator performs foreign key referencing for DML statements that are executed.
+`EXPLAIN ANALYZE`ステートメントを使用して、外部キー参照動作の実行を表示できます。3 `Foreign_Key_Cascade`は、実行される DML ステートメントの外部キー参照を実行します。
 
 ```sql
 mysql> explain analyze delete from parent where id = 1;
@@ -282,11 +288,11 @@ mysql> explain analyze delete from parent where id = 1;
 +----------------------------------+---------+---------+-----------+---------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+-----------+------+
 ```
 
-## Compatibility
+## 互換性 {#compatibility}
 
-### Compatibility between TiDB versions
+### TiDB バージョン間の互換性 {#compatibility-between-tidb-versions}
 
-Before v6.6.0, TiDB supports the syntax of creating foreign keys, but the created foreign keys are ineffective. If you upgrade a TiDB cluster created before v6.6.0 to v6.6.0 or later, the foreign keys created before the upgrade are still ineffective. Only the foreign keys created in v6.6.0 or later versions are effective. You can delete the invalid foreign key and create a new one to make the foreign key constraints effective. You can use the `SHOW CREATE TABLE` statement to check whether the foreign keys are effective. The invalid foreign key has a `/* FOREIGN KEY INVALID */` comment.
+v6.6.0 より前の TiDB では、外部キーを作成する構文がサポートされていますが、作成された外部キーは無効です。v6.6.0 より前に作成された TiDB クラスターを v6.6.0 以降にアップグレードすると、アップグレード前に作成された外部キーは無効のままになります。v6.6.0 以降のバージョンで作成`SHOW CREATE TABLE`れた外部キーのみが有効になります。無効な外部キーを削除して新しい外部キーを作成し、外部キー制約を有効にすることができます。1 ステートメントを使用して、外部キーが有効かどうかを確認できます。無効な外部キーには`/* FOREIGN KEY INVALID */`コメントがあります。
 
 ```sql
 mysql> SHOW CREATE TABLE child\G
@@ -300,31 +306,31 @@ Create Table | CREATE TABLE `child` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 ```
 
-### Compatibility with TiDB tools
+### TiDBツールとの互換性 {#compatibility-with-tidb-tools}
 
 <CustomContent platform="tidb">
 
-- [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) does not support foreign keys.
-- [DM](/dm/dm-overview.md) does not support foreign keys. DM disables the [`foreign_key_checks`](/system-variables.md#foreign_key_checks) of the downstream TiDB when replicating data to TiDB. Therefore, the cascading operations caused by foreign keys are not replicated from the upstream to the downstream, which might cause data inconsistency.
-- [TiCDC](/ticdc/ticdc-overview.md) v6.6.0 is compatible with foreign keys. The previous versions of TiCDC might report an error when replicating tables with foreign keys. It is recommended to disable the `foreign_key_checks` of the downstream TiDB cluster when using a TiCDC version earlier than v6.6.0.
-- [BR](/br/backup-and-restore-overview.md) v6.6.0 is compatible with foreign keys. The previous versions of BR might report an error when restoring tables with foreign keys to a v6.6.0 or later cluster. It is recommended to disable the `foreign_key_checks` of the downstream TiDB cluster before restoring the cluster when using a BR earlier than v6.6.0.
-- When you use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md), if the target table uses a foreign key, it is recommended to disable the `foreign_key_checks` of the downstream TiDB cluster before importing data. For versions earlier than v6.6.0, disabling this system variable does not take effect, and you need to grant the `REFERENCES` privilege for the downstream database user, or manually create the target table in the downstream database in advance to ensure smooth data import.
+-   [TiDBBinlog](/tidb-binlog/tidb-binlog-overview.md)外部キーをサポートしません。
+-   [DM](/dm/dm-overview.md)外部キーをサポートしていません。DM は、データを TiDB に複製するときに、下流の TiDB の[`foreign_key_checks`](/system-variables.md#foreign_key_checks)無効にします。そのため、外部キーによって発生するカスケード操作は上流から下流に複製されず、データの不整合が発生する可能性があります。
+-   [ティCDC](/ticdc/ticdc-overview.md) v6.6.0 は外部キーと互換性があります。以前のバージョンの TiCDC では、外部キーを持つテーブルを複製するときにエラーが報告される可能性があります。v6.6.0 より前のバージョンの TiCDC を使用する場合は、ダウンストリーム TiDB クラスターの`foreign_key_checks`無効にすることをお勧めします。
+-   [BR](/br/backup-and-restore-overview.md) v6.6.0 は外部キーと互換性があります。以前のバージョンのBRでは、外部キーを持つテーブルを v6.6.0 以降のクラスターに復元するときにエラーが報告される可能性があります。v6.6.0 より前のBRを使用する場合は、クラスターを復元する前に、ダウンストリーム TiDB クラスターの`foreign_key_checks`を無効にすることをお勧めします。
+-   [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)使用する場合、ターゲット テーブルが外部キーを使用している場合は、データをインポートする前に、ダウンストリーム TiDB クラスターの`foreign_key_checks`無効にすることをお勧めします。v6.6.0 より前のバージョンでは、このシステム変数を無効にしても効果がなく、ダウンストリーム データベース ユーザーに`REFERENCES`権限を付与するか、ダウンストリーム データベースにターゲット テーブルを事前に手動で作成して、スムーズなデータ インポートを確保する必要があります。
 
 </CustomContent>
 
-- [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) is compatible with foreign keys.
+-   [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)は外部キーと互換性があります。
 
 <CustomContent platform="tidb">
 
-- When you use [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) to compare data between the upstream and downstream databases, if the database versions are different and there is [an invalid foreign key in the downstream TiDB](#compatibility-between-tidb-versions), sync-diff-inspector might report a table schema inconsistent error. This is because TiDB v6.6.0 adds a `/* FOREIGN KEY INVALID */` comment for the invalid foreign key.
+-   [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用して上流データベースと下流データベース間でデータを比較する場合、データベースのバージョンが異なり、 [下流の TiDB に無効な外部キーがある](#compatibility-between-tidb-versions)があると、sync-diff-inspector によってテーブル スキーマの不整合エラーが報告されることがあります。これは、TiDB v6.6.0 で無効な外部キーに対して`/* FOREIGN KEY INVALID */`コメントが追加されたためです。
 
 </CustomContent>
 
-### Compatibility with MySQL
+### MySQLとの互換性 {#compatibility-with-mysql}
 
-When you create a foreign key without specifying a name, the name generated by TiDB is different from that generated by MySQL. For example, the foreign key name generated by TiDB is `fk_1`, `fk_2`, and `fk_3`, while the foreign key name generated by MySQL is `table_name_ibfk_1`, `table_name_ibfk_2`, and `table_name_ibfk_3`.
+名前を指定せずに外部キーを作成すると、TiDB によって生成される名前は MySQL によって生成される名前とは異なります。たとえば、TiDB によって生成される外部キー名は`fk_1` 、 `fk_2` 、 `fk_3`ですが、MySQL によって生成される外部キー名は`table_name_ibfk_1` 、 `table_name_ibfk_2` 、 `table_name_ibfk_3`です。
 
-Both MySQL and TiDB parse but ignore "inline `REFERENCES` specifications". Only `REFERENCES` specifications that are part of `FOREIGN KEY` definitions are checked and enforced. The following example creates a foreign key constraint using a `REFERENCES` clause:
+MySQL と TiDB はどちらも「インライン`REFERENCES`仕様」を解析しますが無視します。5 `FOREIGN KEY`の定義の一部である`REFERENCES`仕様のみがチェックされ、適用されます。次の例では、 `REFERENCES`句を使用して外部キー制約を作成します。
 
 ```sql
 CREATE TABLE parent (
@@ -339,7 +345,7 @@ CREATE TABLE child (
 SHOW CREATE TABLE child;
 ```
 
-The output shows that the `child` table does not contain any foreign keys:
+出力は、 `child`テーブルに外部キーが含まれていないことを示しています。
 
 ```sql
 +-------+-------------------------------------------------------------+

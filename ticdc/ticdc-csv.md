@@ -1,21 +1,21 @@
 ---
 title: TiCDC CSV Protocol
-summary: Learn the concept of TiCDC CSV Protocol and how to use it.
+summary: TiCDC CSV プロトコルの概念とその使用方法を学びます。
 ---
 
-# TiCDC CSV Protocol
+# TiCDC CSV プロトコル {#ticdc-csv-protocol}
 
-When using a cloud storage service as the downstream sink, you can send DML events to the cloud storage service in CSV format.
+クラウドstorageサービスをダウンストリーム シンクとして使用する場合、DML イベントを CSV 形式でクラウドstorageサービスに送信できます。
 
-## Use CSV
+## CSVを使用する {#use-csv}
 
-The following is an example of the configuration when using the CSV protocol:
+CSV プロトコルを使用する場合の構成例を次に示します。
 
 ```shell
 cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="csv-test" --sink-uri="s3://bucket/prefix" --config changefeed.toml
 ```
 
-The configuration in the `changefeed.toml` file is as follows:
+`changefeed.toml`ファイル内の構成は次のとおりです。
 
 ```toml
 [sink]
@@ -30,28 +30,28 @@ include-commit-ts = true
 output-old-value = false
 ```
 
-## Transactional constraints
+## トランザクション制約 {#transactional-constraints}
 
-- In a single CSV file, the `commit-ts` of a row is equal to or smaller than that of the subsequent row.
-- The same transactions of a single table are stored in the same CSV file.
-- Multiple tables of the same transaction can be stored in different CSV files.
+-   単一の CSV ファイルでは、行の`commit-ts`後続の行の 1 と等しいか、それより小さくなります。
+-   単一テーブルの同じトランザクションが同じ CSV ファイルに保存されます。
+-   同じトランザクションの複数のテーブルを異なる CSV ファイルに保存できます。
 
-## Data storage path structure
+## データstorageパス構造 {#data-storage-path-structure}
 
-For more information about the storage path structure of the data, see [Storage path structure](/ticdc/ticdc-sink-to-cloud-storage.md#storage-path-structure).
+データのstorageパス構造の詳細については、 [ストレージパス構造](/ticdc/ticdc-sink-to-cloud-storage.md#storage-path-structure)参照してください。
 
-## Definition of the data format
+## データ形式の定義 {#definition-of-the-data-format}
 
-In the CSV file, each column is defined as follows:
+CSV ファイルでは、各列は次のように定義されます。
 
-- Column 1: The operation-type indicator, including `I`, `U`, and `D`. `I` means `INSERT`, `U` means `UPDATE`, and `D` means `DELETE`.
-- Column 2: Table name.
-- Column 3: Schema name.
-- Column 4: The `commit-ts` of the source transaction. This column is optional.
-- Column 5: The `is-update` column only exists when the value of `output-old-value` is true, which is used to identify whether the row data change comes from the UPDATE event (the value of the column is true) or the INSERT/DELETE event (the value is false).
-- Column 6 to the last column: One or more columns with data changes.
+-   カラム1: 操作タイプ インジケータ。 `I` 、 `U` 、 `D`が含まれます。 `I`は`INSERT` 、 `U`は`UPDATE` 、 `D` `DELETE`を意味します。
+-   カラム2: テーブル名。
+-   カラム3: スキーマ名。
+-   カラム4: ソース トランザクションの`commit-ts`この列はオプションです。
+-   カラム5: 列`is-update`は、値`output-old-value`が true の場合にのみ存在し、行データの変更が UPDATE イベント (列の値が true) によるものか、INSERT/DELETE イベント (値が false) によるものかを識別するために使用されます。
+-   6カラムから最後の列まで: データが変更された 1 つ以上の列。
 
-Assume that table `hr.employee` is defined as follows:
+表`hr.employee`が次のように定義されていると仮定します。
 
 ```sql
 CREATE TABLE `employee` (
@@ -63,7 +63,7 @@ CREATE TABLE `employee` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ```
 
-When `include-commit-ts = true` and `output-old-value = false`, the DML events of this table are stored in the CSV format as follows:
+`include-commit-ts = true`および`output-old-value = false`場合、このテーブルの DML イベントは次のように CSV 形式で保存されます。
 
 ```shell
 "I","employee","hr",433305438660591626,101,"Smith","Bob","2014-06-04","New York"
@@ -73,32 +73,30 @@ When `include-commit-ts = true` and `output-old-value = false`, the DML events o
 "U","employee","hr",433305438660591630,102,"Alex","Alice","2018-06-15","Beijing"
 ```
 
-When `include-commit-ts = true` and `output-old-value = true`, the DML events of this table are stored in the CSV format as follows:
+`include-commit-ts = true`および`output-old-value = true`場合、このテーブルの DML イベントは次のように CSV 形式で保存されます。
 
-```
-"I","employee","hr",433305438660591626,false,101,"Smith","Bob","2014-06-04","New York"
-"D","employee","hr",433305438660591627,true,101,"Smith","Bob","2015-10-08","Shanghai"
-"I","employee","hr",433305438660591627,true,101,"Smith","Bob","2015-10-08","Los Angeles"
-"D","employee","hr",433305438660591629,false,101,"Smith","Bob","2017-03-13","Dallas"
-"I","employee","hr",433305438660591630,false,102,"Alex","Alice","2017-03-14","Shanghai"
-"D","employee","hr",433305438660591630,true,102,"Alex","Alice","2017-03-14","Beijing"
-"I","employee","hr",433305438660591630,true,102,"Alex","Alice","2018-06-15","Beijing"
-```
+    "I","employee","hr",433305438660591626,false,101,"Smith","Bob","2014-06-04","New York"
+    "D","employee","hr",433305438660591627,true,101,"Smith","Bob","2015-10-08","Shanghai"
+    "I","employee","hr",433305438660591627,true,101,"Smith","Bob","2015-10-08","Los Angeles"
+    "D","employee","hr",433305438660591629,false,101,"Smith","Bob","2017-03-13","Dallas"
+    "I","employee","hr",433305438660591630,false,102,"Alex","Alice","2017-03-14","Shanghai"
+    "D","employee","hr",433305438660591630,true,102,"Alex","Alice","2017-03-14","Beijing"
+    "I","employee","hr",433305438660591630,true,102,"Alex","Alice","2018-06-15","Beijing"
 
-## Data type mapping
+## データ型マッピング {#data-type-mapping}
 
-| MySQL type                                          | CSV type | Example                          | Description                                   |
-|-----------------------------------------------------|----------|------------------------------|---------------------------------------|
-| `BOOLEAN`/`TINYINT`/`SMALLINT`/`INT`/`MEDIUMINT`/`BIGINT` | Integer | `123` | - |
-| `FLOAT`/`DOUBLE`                                        | Float    | `153.123`                      |  -                                     |
-| `NULL`                                                | Null     | `\N`                          | -                                      |
-| `TIMESTAMP`/`DATETIME`                                  | String   | `"1973-12-30 15:30:00.123456"` | Format: `yyyy-MM-dd HH:mm:ss.%06d`         |
-| `DATE`                                                | String   | `"2000-01-01"`                 | Format: `yyyy-MM-dd`                       |
-| `TIME`                                                | String   | `"23:59:59"`                   | Format: `yyyy-MM-dd`                         |
-| `YEAR`                                                | Integer  | `1970`                         |  -                                     |
-| `VARCHAR`/`JSON`/`TINYTEXT`/`MEDIUMTEXT`/`LONGTEXT`/`TEXT`/`CHAR` | String   | `"test"`                       | UTF-8 encoded                       |
-| `VARBINARY`/`TINYBLOB`/`MEDIUMBLOB`/`LONGBLOB`/`BLOB`/`BINARY`  | String   | `"6Zi/5pav"` or `"e998bfe696af"`                  | Base64 or hex encoded                      |
-| `BIT`                                                 | Integer  | `81`                           | -                                      |
-| `DECIMAL`                                             | String   | `"129012.1230000"`             | -                                      |
-| `ENUM`                                                | String   | `"a"`                          | -                                     |
-| `SET`                                                 | String   | `"a,b"`                        | -                                     |
+| MySQLタイプ                                                                      | CSVタイプ | 例                               | 説明                                 |
+| ----------------------------------------------------------------------------- | ------ | ------------------------------- | ---------------------------------- |
+| `BOOLEAN` / `TINYINT` / `SMALLINT` / `INT` / `MEDIUMINT` / `BIGINT`           | 整数     | `123`                           | <li></li>                          |
+| `FLOAT` / `DOUBLE`                                                            | 浮く     | `153.123`                       | <li></li>                          |
+| `NULL`                                                                        | ヌル     | `\N`                            | <li></li>                          |
+| `TIMESTAMP` / `DATETIME`                                                      | 弦      | `"1973-12-30 15:30:00.123456"`  | フォーマット: `yyyy-MM-dd HH:mm:ss.%06d` |
+| `DATE`                                                                        | 弦      | `"2000-01-01"`                  | フォーマット: `yyyy-MM-dd`               |
+| `TIME`                                                                        | 弦      | `"23:59:59"`                    | フォーマット: `yyyy-MM-dd`               |
+| `YEAR`                                                                        | 整数     | `1970`                          | <li></li>                          |
+| `VARCHAR` / `JSON` / `TINYTEXT` / `MEDIUMTEXT` / `LONGTEXT` / `TEXT` / `CHAR` | 弦      | `"test"`                        | UTF-8エンコード                         |
+| `VARBINARY` / `TINYBLOB` / `MEDIUMBLOB` / `LONGBLOB` / `BLOB` / `BINARY`      | 弦      | `"6Zi/5pav"`または`"e998bfe696af"` | Base64または16進数エンコード                 |
+| `BIT`                                                                         | 整数     | `81`                            | <li></li>                          |
+| `DECIMAL`                                                                     | 弦      | `"129012.1230000"`              | <li></li>                          |
+| `ENUM`                                                                        | 弦      | `"a"`                           | <li></li>                          |
+| `SET`                                                                         | 弦      | `"a,b"`                         | <li></li>                          |

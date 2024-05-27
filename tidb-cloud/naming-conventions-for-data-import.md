@@ -1,37 +1,37 @@
 ---
 title: Naming Conventions for Data Import
-summary: Learn about the naming conventions for CSV, Parquet, Aurora Snapshot, and SQL files during data import.
+summary: データのインポート時の CSV、Parquet、 Aurora Snapshot、SQL ファイルの命名規則について説明します。
 ---
 
-# Naming Conventions for Data Import
+# データインポートの命名規則 {#naming-conventions-for-data-import}
 
-You can import data into TiDB Cloud in the following file formats: CSV, Parquet, Aurora Snapshot, and SQL. To make sure that your data is imported successfully, you need to prepare the following two types of files:
+TiDB Cloudには、CSV、Parquet、 Aurora Snapshot、SQL のファイル形式でデータをインポートできます。データが正常にインポートされるようにするには、次の 2 種類のファイルを準備する必要があります。
 
-- **Schema file**. Prepare the database schema file (optional) and the table schema file, both in SQL format (`.sql`). If the table schema file is not provided, you need to create the corresponding table manually in the target database in advance.
-- **Data file**. Prepare a data file that conforms to the naming conventions for importing data. If the data file name can not meet the requirements, it is recommended to use [**File Pattern**](#file-pattern) to perform the import task. Otherwise, the import task cannot scan the data files you want to import.
+-   **スキーマファイル**。データベーススキーマファイル（オプション）とテーブルスキーマファイルをSQL形式（ `.sql` ）で準備します。テーブルスキーマファイルが提供されていない場合は、事前にターゲットデータベースに対応するテーブルを手動で作成する必要があります。
+-   **データ ファイル**。データをインポートするための命名規則に準拠したデータ ファイルを準備します。データ ファイル名が要件を満たせない場合は、 [**ファイルパターン**](#file-pattern)を使用してインポート タスクを実行することをお勧めします。そうしないと、インポート タスクはインポートするデータ ファイルをスキャンできません。
 
-## Naming conventions for schema files
+## スキーマファイルの命名規則 {#naming-conventions-for-schema-files}
 
-This section describes the naming conventions for database and table schema files. The naming conventions for schema files are the same for all the following types of source files: CSV, Parquet, Aurora Snapshot, and SQL.
+このセクションでは、データベースおよびテーブル スキーマ ファイルの命名規則について説明します。スキーマ ファイルの命名規則は、CSV、Parquet、 Aurora Snapshot、SQL のすべての種類のソース ファイルで同じです。
 
-The naming conventions for schema files are as follows:
+スキーマ ファイルの命名規則は次のとおりです。
 
-- Database schema file (optional): `${db_name}-schema-create.sql`
-- Table schema file: `${db_name}.${table_name}-schema.sql`
+-   データベーススキーマファイル（オプション）: `${db_name}-schema-create.sql`
+-   テーブルスキーマファイル: `${db_name}.${table_name}-schema.sql`
 
-The following is an example of a database schema file:
+以下はデータベース スキーマ ファイルの例です。
 
-- Name: `import_db-schema-create.sql`
-- File content:
+-   名前: `import_db-schema-create.sql`
+-   ファイルの内容:
 
     ```sql
     CREATE DATABASE import_db;
     ```
 
-The following is an example of a table schema file:
+以下はテーブル スキーマ ファイルの例です。
 
-- Name: `import_db.test_table-schema.sql`
-- File content:
+-   名前: `import_db.test_table-schema.sql`
+-   ファイルの内容:
 
     ```sql
     CREATE TABLE test_table (
@@ -40,86 +40,86 @@ The following is an example of a table schema file:
     );
     ```
 
-## Naming conventions for data files
+## データファイルの命名規則 {#naming-conventions-for-data-files}
 
-This section describes the naming conventions for data files. Depending on the type of source files, the naming conventions for data files are different.
+このセクションでは、データ ファイルの命名規則について説明します。ソース ファイルの種類に応じて、データ ファイルの命名規則は異なります。
 
-### CSV
+### CSVファイル {#csv}
 
-When you import CSV files, name the data files as follows:
+CSV ファイルをインポートするときは、データ ファイルに次のように名前を付けます。
 
 `${db_name}.${table_name}${suffix}.csv.${compress}`
 
-`${suffix}` is optional and can be one of the following formats, where *`xxx`* can be any number:
+`${suffix}`はオプションであり、次のいずれかの形式にすることができます。xxx *`xxx`*任意の数字にすることができます。
 
-- *`.xxx`*, such as `.01`
-- *`._xxx_xxx_xxx`*, such as `._0_0_01`
-- *`_xxx_xxx_xxx`*, such as `_0_0_01`
+-   *`.xxx`* 、例えば`.01`
+-   *`._xxx_xxx_xxx`* 、例えば`._0_0_01`
+-   *`_xxx_xxx_xxx`* 、例えば`_0_0_01`
 
-`${compress}` is the compression format and it is optional. TiDB Cloud supports the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`.
+`${compress}`は圧縮形式で、オプションです。TiDB TiDB Cloud は、 `.gzip` 、 `.gz` 、 `.zstd` 、 `.zst` 、 `.snappy`の形式をサポートしています。
 
-For example, the target database and table of all the following files are `import_db` and `test_table`:
+たとえば、次のすべてのファイルのターゲット データベースとテーブルは`import_db`と`test_table`です。
 
-- `import_db.test_table.csv`
-- `import_db.test_table.01.csv`
-- `import_db.test_table._0_0_01.csv`
-- `import_db.test_table_0_0_01.csv`
-- `import_db.test_table_0_0_01.csv.gz`
+-   `import_db.test_table.csv`
+-   `import_db.test_table.01.csv`
+-   `import_db.test_table._0_0_01.csv`
+-   `import_db.test_table_0_0_01.csv`
+-   `import_db.test_table_0_0_01.csv.gz`
 
-> **Note:**
+> **注記：**
 >
-> The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
+> Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。Snappy 圧縮の他のバリエーションはサポートされていません。
 
-### Parquet
+### 寄木細工 {#parquet}
 
-When you import Parquet files, name the data files as follows:
+Parquet ファイルをインポートするときは、データ ファイルに次のように名前を付けます。
 
-`${db_name}.${table_name}${suffix}.parquet` (`${suffix}` is optional)
+`${db_name}.${table_name}${suffix}.parquet` ( `${suffix}`はオプション)
 
-For example:
+例えば：
 
-- `import_db.test_table.parquet`
-- `import_db.test_table.01.parquet`
+-   `import_db.test_table.parquet`
+-   `import_db.test_table.01.parquet`
 
-### Aurora Snapshot
+### Auroraスナップショット {#aurora-snapshot}
 
-For Aurora Snapshot files, all files with the `.parquet` suffix in the `${db_name}.${table_name}/` folder conform to the naming convention. A data file name can contain any prefix consisting of "a-z, 0-9, - , _ , ." and suffix ".parquet".
+Auroraスナップショット ファイルの場合、 `${db_name}.${table_name}/`フォルダー内の`.parquet`サフィックスを持つすべてのファイルは命名規則に準拠しています。データ ファイル名には、「az、0-9、-、_、.」で構成される任意のプレフィックスと「.parquet」サフィックスを含めることができます。
 
-For example:
+例えば：
 
-- `import_db.test_table/mydata.parquet`
-- `import_db.test_table/part001/mydata.parquet`
-- `import_db.test_table/part002/mydata-part002.parquet`
+-   `import_db.test_table/mydata.parquet`
+-   `import_db.test_table/part001/mydata.parquet`
+-   `import_db.test_table/part002/mydata-part002.parquet`
 
-### SQL
+### 構文 {#sql}
 
-When you import SQL files, name the data files as follows:
+SQL ファイルをインポートするときは、データ ファイルに次のように名前を付けます。
 
 `${db_name}.${table_name}${suffix}.sql.${compress}`
 
-`${suffix}` is optional and can be one of the following formats, where *`xxx`* can be any number:
+`${suffix}`はオプションであり、次のいずれかの形式にすることができます。xxx *`xxx`*任意の数字にすることができます。
 
-- *`.xxx`*, such as `.01`
-- *`._xxx_xxx_xxx`*, such as `._0_0_01`
-- *`_xxx_xxx_xxx`*, such as `_0_0_01`
+-   *`.xxx`* 、例えば`.01`
+-   *`._xxx_xxx_xxx`* 、例えば`._0_0_01`
+-   *`_xxx_xxx_xxx`* 、例えば`_0_0_01`
 
-`${compress}` is the compression format and it is optional. TiDB Cloud supports the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`.
+`${compress}`は圧縮形式で、オプションです。TiDB TiDB Cloud は、 `.gzip` 、 `.gz` 、 `.zstd` 、 `.zst` 、 `.snappy`の形式をサポートしています。
 
-For example:
+例えば：
 
-- `import_db.test_table.sql`
-- `import_db.test_table.01.sql`
-- `import_db.test_table.01.sql.gz`
+-   `import_db.test_table.sql`
+-   `import_db.test_table.01.sql`
+-   `import_db.test_table.01.sql.gz`
 
-If the SQL file is exported through TiDB Dumpling with the default configuration, it conforms to the naming convention by default.
+SQL ファイルがデフォルト設定で TiDB Dumplingを介してエクスポートされる場合、デフォルトで命名規則に準拠します。
 
-> **Note:**
+> **注記：**
 >
-> The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
+> Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。Snappy 圧縮の他のバリエーションはサポートされていません。
 
-## File pattern
+## ファイルパターン {#file-pattern}
 
-If the source data file of CSV or Parquet does not conform to the naming convention, you can use the file pattern feature to establish the name mapping relationship between the source data file and the target table. This feature does not support Aurora Snapshot and SQL data files.
+CSV または Parquet のソース データ ファイルが命名規則に準拠していない場合は、ファイル パターン機能を使用して、ソース データ ファイルとターゲット テーブル間の名前マッピング関係を確立できます。この機能は、 Auroraスナップショットおよび SQL データ ファイルをサポートしていません。
 
-- For CSV files, see **File Pattern** in [Step 4. Import CSV files to TiDB Cloud](/tidb-cloud/import-csv-files.md#step-4-import-csv-files-to-tidb-cloud)
-- For Parquet files, see **File Pattern** in [Step 4. Import Parquet files to TiDB Cloud](/tidb-cloud/import-parquet-files.md#step-4-import-parquet-files-to-tidb-cloud) 
+-   CSVファイルについては、 [ステップ4. CSVファイルをTiDB Cloudにインポートする](/tidb-cloud/import-csv-files.md#step-4-import-csv-files-to-tidb-cloud)の**ファイルパターン**を参照してください。
+-   Parquetファイルについては、 [ステップ4. ParquetファイルをTiDB Cloudにインポートする](/tidb-cloud/import-parquet-files.md#step-4-import-parquet-files-to-tidb-cloud)の**ファイルパターン**を参照してください。

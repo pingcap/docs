@@ -1,59 +1,57 @@
 ---
 title: Bidirectional Replication Between TiDB Clusters
-summary: Learn how to perform the bidirectional replication between TiDB clusters.
+summary: TiDB クラスター間の双方向レプリケーションを実行する方法を学習します。
 ---
 
-# Bidirectional Replication between TiDB Clusters
+# TiDB クラスター間の双方向レプリケーション {#bidirectional-replication-between-tidb-clusters}
 
-> **Warning:**
+> **警告：**
 >
-> - Currently, bidirectional replication is still an experimental feature. It is **NOT** recommended to use it in the production environment.
-> - TiDB Binlog is not compatible with some features introduced in TiDB v5.0 and they cannot be used together. For details, see [Notes](/tidb-binlog/tidb-binlog-overview.md#notes).
-> - Starting from TiDB v7.5.0, technical support for the data replication feature of TiDB Binlog is no longer provided. It is strongly recommended to use [TiCDC](/ticdc/ticdc-overview.md) as an alternative solution for data replication.
-> - Although TiDB v7.5.0 still supports the real-time backup and restoration feature of TiDB Binlog, this component will be completely deprecated in future versions. It is recommended to use [PITR](/br/br-pitr-guide.md) as an alternative solution for data recovery.
+> -   現在、双方向レプリケーションはまだ実験的機能です。本番環境での使用は推奨され**ません**。
+> -   TiDB Binlog はTiDB v5.0 で導入された一部の機能と互換性がなく、併用できません。詳細については[ノート](/tidb-binlog/tidb-binlog-overview.md#notes)を参照してください。
+> -   TiDB v7.5.0 以降、TiDB Binlogのデータ レプリケーション機能のテクニカル サポートは提供されなくなりました。データ レプリケーションの代替ソリューションとして[ティCDC](/ticdc/ticdc-overview.md)を使用することを強くお勧めします。
+> -   TiDB v7.5.0 では、TiDB Binlogのリアルタイム バックアップと復元機能が引き続きサポートされていますが、このコンポーネントは将来のバージョンでは完全に廃止される予定です。データ復旧の代替ソリューションとして[ピトル](/br/br-pitr-guide.md)を使用することをお勧めします。
 
-This document describes the bidirectional replication between two TiDB clusters, how the replication works, how to enable it, and how to replicate DDL operations.
+このドキュメントでは、2 つの TiDB クラスター間の双方向レプリケーション、レプリケーションの仕組み、有効化の方法、および DDL 操作をレプリケートする方法について説明します。
 
-## User scenario
+## ユーザーシナリオ {#user-scenario}
 
-If you want two TiDB clusters to exchange data changes with each other, TiDB Binlog allows you to do that. For example, you want cluster A and cluster B to replicate data with each other.
+2 つの TiDB クラスターが相互にデータの変更を交換する場合は、TiDB Binlog を使用するとそれが可能になります。たとえば、クラスター A とクラスター B が相互にデータを複製するとします。
 
-> **Note:**
+> **注記：**
 >
-> The data written to these two clusters must be conflict-free, that is, in the two clusters, the same primary key or the rows with the unique index of the tables must not be modified.
+> これら 2 つのクラスターに書き込まれるデータは競合がないことが必要です。つまり、2 つのクラスターで、同じ主キーまたはテーブルの一意のインデックスを持つ行を変更してはなりません。
 
-The user scenario is shown as below:
+ユーザーシナリオは以下のようになります。
 
 ![Architect](/media/binlog/bi-repl1.jpg)
 
-## Implementation details
+## 実装の詳細 {#implementation-details}
 
 ![Mark Table](/media/binlog/bi-repl2.png)
 
-If the bidirectional replication is enabled between cluster A and cluster B, the data written to cluster A will be replicated to cluster B, and then these data changes will be replicated back to cluster A, which causes an infinite loop of replication. From the figure above, you can see that during the data replication, Drainer marks the binlog events, and filters out the marked events to avoid such a replication loop.
+クラスター A とクラスター B の間で双方向レプリケーションが有効になっている場合、クラスター A に書き込まれたデータはクラスター B にレプリケートされ、その後これらのデータ変更がクラスター A にレプリケートされ、レプリケーションの無限ループが発生します。上の図から、データ レプリケーション中にDrainer がbinlogイベントをマークし、マークされたイベントをフィルターしてこのようなレプリケーション ループを回避することがわかります。
 
-The detailed implementation is described as follows:
+詳細な実装は次のように説明されます。
 
-1. Start the TiDB Binlog replication program for each of the two clusters.
-2. When the transaction to be replicated passes through the Drainer of cluster A, this Drainer adds the [`_drainer_repl_mark` table](#mark-table) to the transaction, writes this DML event update to the mark table, and replicate this transaction to cluster B.
-3. Cluster B returns binlog events with the `_drainer_repl_mark` mark table to cluster A. The Drainer of cluster B identifies the mark table with the DML event when parsing the binlog event, and gives up replicating this binlog event to cluster A.
+1.  2 つのクラスターそれぞれに対して TiDB Binlogレプリケーション プログラムを起動します。
+2.  複製されるトランザクションがクラスター A のDrainerを通過すると、このDrainer はトランザクションに[`_drainer_repl_mark`テーブル](#mark-table)を追加し、この DML イベント更新をマーク テーブルに書き込み、このトランザクションをクラスター B に複製します。
+3.  クラスタB は、マーク テーブル`_drainer_repl_mark`を含むbinlogイベントをクラスター A に返します。クラスター B のDrainer は、 binlogイベントを解析するときに DML イベントを含むマーク テーブルを識別し、このbinlogイベントをクラスター A に複製することを中止します。
 
-The replication process from cluster B to cluster A is the same as above. The two clusters can be upstream and downstream of each other.
+クラスター B からクラスター A へのレプリケーション プロセスは上記と同じです。2 つのクラスターは、互いに上流と下流に存在できます。
 
-> **Note:**
+> **注記：**
 >
-> * When updating the `_drainer_repl_mark` mark table, data changes are required to generate binlogs.
-> * DDL operations are not transactional, so you need to use the one-way replication method to replicate DDL operations. See [Replicate DDL operations](#replicate-ddl-operations) for details.
+> -   `_drainer_repl_mark`マーク テーブルを更新する場合、バイナリ ログを生成するためにデータの変更が必要になります。
+> -   DDL 操作はトランザクションではないため、DDL 操作をレプリケートするには一方向レプリケーション方式を使用する必要があります。詳細については[DDL操作を複製する](#replicate-ddl-operations)参照してください。
 
-Drainer can use a unique ID for each connection to downstream to avoid conflicts. `channel_id` is used to indicate a channel for bidirectional replication. The two clusters should have the same `channel_id` configuration (with the same value).
+Drainerは、競合を避けるために、ダウンストリームへの接続ごとに一意の ID を使用できます。1 `channel_id`双方向レプリケーションのチャネルを示すために使用されます。2 つのクラスターは同じ`channel_id`構成 (同じ値) を持つ必要があります。
 
-If you add or delete columns in the upstream, there might be extra or missing columns of the data to be replicated to the downstream. Drainer allows this situation by ignoring the extra columns or by inserting default values to the missing columns.
+アップストリームで列を追加または削除すると、ダウンストリームに複製されるデータの列が余分に存在したり、不足したりする可能性があります。Drainerは、余分な列を無視するか、不足している列にデフォルト値を挿入することで、この状況に対応します。
 
-## Mark table
+## マークテーブル {#mark-table}
 
-The `_drainer_repl_mark` mark table has the following structure:
-
-{{< copyable "sql" >}}
+`_drainer_repl_mark`マーク テーブルの構造は次のとおりです。
 
 ```sql
 CREATE TABLE `_drainer_repl_mark` (
@@ -65,29 +63,25 @@ CREATE TABLE `_drainer_repl_mark` (
 );
 ```
 
-Drainer uses the following SQL statement to update `_drainer_repl_mark`, which ensures data change and the generation of binlog:
-
-{{< copyable "sql" >}}
+Drainer は次の SQL ステートメントを使用して`_drainer_repl_mark`更新し、データの変更とbinlogの生成を保証します。
 
 ```sql
 update drainer_repl_mark set val = val + 1 where id = ? && channel_id = ?;
 ```
 
-## Replicate DDL operations
+## DDL操作を複製する {#replicate-ddl-operations}
 
-Because Drainer cannot add the mark table to DDL operations, you can only use the one-way replication method to replicate DDL operations.
+Drainer はDDL 操作にマーク テーブルを追加できないため、DDL 操作をレプリケートするには一方向のレプリケーション メソッドのみを使用できます。
 
-For example, if DDL replication is enabled from cluster A to cluster B, then the replication is disabled from cluster B to cluster A. This means that all DDL operations are performed on cluster A.
+たとえば、クラスター A からクラスター B への DDL レプリケーションが有効になっている場合、クラスター B からクラスター A へのレプリケーションは無効になります。つまり、すべての DDL 操作はクラスター A で実行されます。
 
-> **Note:**
+> **注記：**
 >
-> DDL operations cannot be executed on two clusters at the same time. When a DDL operation is executed, if any DML operation is being executed at the same time or any DML binlog is being replicated, the upstream and downstream table structures of the DML replication might be inconsistent.
+> DDL 操作は、2 つのクラスターで同時に実行できません。DDL 操作の実行時に、DML 操作が同時に実行されていたり、DMLbinlogがレプリケートされていたりすると、DML レプリケーションの上流と下流のテーブル構造に不整合が生じる可能性があります。
 
-## Configure and enable bidirectional replication
+## 双方向レプリケーションを構成して有効にする {#configure-and-enable-bidirectional-replication}
 
-For bidirectional replication between cluster A and cluster B, assume that all DDL operations are executed on cluster A. On the replication path from cluster A to cluster B, add the following configuration to Drainer:
-
-{{< copyable "" >}}
+クラスター A とクラスター B 間の双方向レプリケーションでは、すべての DDL 操作がクラスター A で実行されると想定します。クラスター A からクラスター B へのレプリケーション パスで、 Drainerに次の構成を追加します。
 
 ```toml
 [syncer]
@@ -108,9 +102,7 @@ db-name = "tidb_binlog"
 tbl-name = "checkpoint"
 ```
 
-On the replication path from cluster B to cluster A, add the following configuration to Drainer:
-
-{{< copyable "" >}}
+クラスター B からクラスター A へのレプリケーション パスで、 Drainerに次の構成を追加します。
 
 ```toml
 [syncer]

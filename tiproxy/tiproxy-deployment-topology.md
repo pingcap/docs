@@ -1,36 +1,36 @@
 ---
 title: TiProxy Deployment Topology
-summary: Learn the deployment topology of TiProxy based on the minimal TiDB topology.
+summary: 最小限の TiDB トポロジに基づく TiProxy のデプロイメント トポロジについて学習します。
 ---
 
-# TiProxy Deployment Topology
+# TiProxy 展開トポロジ {#tiproxy-deployment-topology}
 
-This document describes the deployment topology of [TiProxy](/tiproxy/tiproxy-overview.md) based on the minimal TiDB topology.
+このドキュメントでは、最小限の TiDB トポロジに基づく[Tiプロキシ](/tiproxy/tiproxy-overview.md)のデプロイメント トポロジについて説明します。
 
-TiProxy is a L7 proxy server for TiDB, which can balance connections and migrate sessions when possible.
+TiProxy は TiDB 用の L7 プロキシサーバーであり、接続のバランスを取り、可能な場合はセッションを移行できます。
 
-## Topology information
+## トポロジ情報 {#topology-information}
 
-| Instance | Count | Physical machine configuration | IP | Configuration |
-| :-- | :-- | :-- | :-- | :-- |
-| TiDB | 3 | 16 VCore 32GB * 3 | 10.0.1.4 <br/> 10.0.1.5 <br/> 10.0.1.6 | Default port <br/> Global directory configuration |
-| PD | 3 | 4 VCore 8GB * 3 | 10.0.1.1 <br/> 10.0.1.2 <br/> 10.0.1.3 | Default port <br/> Global directory configuration |
-| TiKV | 3 | 16 VCore 32GB 2TB (nvme ssd) * 3 | 10.0.1.7 <br/> 10.0.1.8 <br/> 10.0.1.9 | Default port <br/> Global directory configuration |
-| TiProxy | 3 | 4 VCore 8 GB * 1  | 10.0.1.11 | Default port <br/> Global directory configuration |
-| Monitoring & Grafana | 1 | 4 VCore 8GB * 1 500GB (ssd) | 10.0.1.13 | Default port <br/> Global directory configuration |
+| 実例             | カウント | 物理マシン構成                          | IP                                   | コンフィグレーション                 |
+| :------------- | :--- | :------------------------------- | :----------------------------------- | :------------------------- |
+| ティビ            | 3    | 16 VCore 32GB * 3                | 10.0.1.4<br/> 10.0.1.5<br/> 10.0.1.6 | デフォルトポート<br/>グローバルディレクトリ構成 |
+| PD             | 3    | 4 VCore 8GB * 3                  | 10.0.1.1<br/> 10.0.1.2<br/> 10.0.1.3 | デフォルトポート<br/>グローバルディレクトリ構成 |
+| ティクヴ           | 3    | 16 VCore 32GB 2TB (nvme ssd) * 3 | 10.0.1.7<br/> 10.0.1.8<br/> 10.0.1.9 | デフォルトポート<br/>グローバルディレクトリ構成 |
+| Tiプロキシ         | 3    | 4 VCore 8 GB * 1                 | 10.0.1.11                            | デフォルトポート<br/>グローバルディレクトリ構成 |
+| モニタリングとGrafana | 1    | 4 VCore 8GB * 1 500GB (SSD)      | 10.0.1.13                            | デフォルトポート<br/>グローバルディレクトリ構成 |
 
-### Topology templates
+### トポロジーテンプレート {#topology-templates}
 
-For more information about the template for TiProxy, see [The simple template for the TiProxy topology](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiproxy.yaml).
+TiProxy のテンプレートの詳細については、 [TiProxyトポロジのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiproxy.yaml)参照してください。
 
-For detailed descriptions of the configuration items in the preceding TiDB cluster topology file, see [Topology Configuration File for Deploying TiDB Using TiUP](/tiup/tiup-cluster-topology-reference.md).
+前述の TiDB クラスタ トポロジ ファイルの構成項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
-### Key parameters
+### 主なパラメータ {#key-parameters}
 
-- The instance level `"-host"` configuration in `tiproxy_servers` only supports IP, not domain name.
-- For detailed TiProxy parameter description, see [TiProxy Configuration](/tiproxy/tiproxy-configuration.md).
+-   `tiproxy_servers`のインスタンス レベル`"-host"`構成では、ドメイン名ではなく IP のみがサポートされます。
+-   TiProxyパラメータの詳細な説明については、 [TiProxy のコンフィグレーション](/tiproxy/tiproxy-configuration.md)参照してください。
 
-> **Note:**
+> **注記：**
 >
-> - You do not need to manually create the `tidb` user in the configuration file. The TiUP cluster component automatically creates the `tidb` user on the target machines. You can customize the user, or keep the user consistent with the control machine.
-> - If you configure the deployment directory as a relative path, the cluster will be deployed in the home directory of the user.
+> -   構成ファイルで`tidb`ユーザーを手動で作成する必要はありません。TiUP クラスターコンポーネントは、ターゲット マシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズすることも、ユーザーをコントロール マシンと一致させることもできます。
+> -   デプロイメント ディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリにデプロイされます。

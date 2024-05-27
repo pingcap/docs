@@ -1,52 +1,52 @@
 ---
 title: TiDB 3.0.12 Release Notes
-summary: TiDB 3.0.12 was released on March 16, 2020. It includes compatibility changes, new features, bug fixes, and improvements for TiDB, TiKV, PD, and TiDB Ansible. Some known issues are fixed in new versions, so it is recommended to use the latest 3.0.x version. New features include dynamic loading of replaced certificate files, flow limiting for DDL requests, and support for exiting the TiDB server when binlog write fails. Bug fixes address issues with locking, error message display, decimal point accuracy, and data index inconsistency. Additionally, improvements have been made to TiKV's flow control mechanism and PD's Region information processing.
+summary: TiDB 3.0.12 は、2020 年 3 月 16 日にリリースされました。これには、TiDB、TiKV、PD、TiDB Ansible の互換性の変更、新機能、バグ修正、および改善が含まれています。新しいバージョンでは既知の問題がいくつか修正されているため、最新の 3.0.x バージョンを使用することをお勧めします。新しい機能には、置き換えられた証明書ファイルの動的読み込み、DDL 要求のフロー制限、およびbinlog書き込みが失敗した場合に TiDBサーバーを終了するためのサポートが含まれます。バグ修正では、ロック、エラー メッセージの表示、小数点の精度、およびデータ インデックスの不整合に関する問題に対処しています。さらに、TiKV のフロー制御メカニズムと PD のリージョン情報処理が改善されました。
 ---
 
-# TiDB 3.0.12 Release Notes
+# TiDB 3.0.12 リリースノート {#tidb-3-0-12-release-notes}
 
-Release date: March 16, 2020
+発売日: 2020年3月16日
 
-TiDB version: 3.0.12
+TiDB バージョン: 3.0.12
 
-TiDB Ansible version: 3.0.12
+TiDB Ansible バージョン: 3.0.12
 
-> **Warning:**
+> **警告：**
 >
-> Some known issues are found in this version, and these issues are fixed in new versions. It is recommended that you use the latest 3.0.x version.
+> このバージョンではいくつかの既知の問題が見つかりましたが、これらの問題は新しいバージョンで修正されています。最新の 3.0.x バージョンを使用することをお勧めします。
 
-## Compatibility Changes
+## 互換性の変更 {#compatibility-changes}
 
-+ TiDB
-    - Fix the issue of inaccurate timing of prewrite binlog in slow query log. The original timing field was called `Binlog_prewrite_time`. After this fix, the name is changed to `Wait_prewrite_binlog_time`. [#15276](https://github.com/pingcap/tidb/pull/15276)
+-   ティビ
+    -   スロークエリログの事前書き込みbinlogのタイミングが不正確になる問題を修正しました。元のタイミングフィールドは`Binlog_prewrite_time`と呼ばれていました。この修正後、名前は`Wait_prewrite_binlog_time`に変更されました[＃15276](https://github.com/pingcap/tidb/pull/15276)
 
-## New Features
+## 新機能 {#new-features}
 
-+ TiDB
-    - Support dynamic loading of the replaced certificate file by using the `alter instance` statement [#15080](https://github.com/pingcap/tidb/pull/15080) [#15292](https://github.com/pingcap/tidb/pull/15292)
-    - Add the `cluster-verify-cn` configuration item. After configuration, the status service can only be used when with the corresponding CN certificate. [#15164](https://github.com/pingcap/tidb/pull/15164)
-    - Add a flow limiting feature for DDL requests in each TiDB server to reduce the error reporting frequency of DDL request conflicts [#15148](https://github.com/pingcap/tidb/pull/15148)
-    - Support exiting of the TiDB server when binlog write fails [#15339](https://github.com/pingcap/tidb/pull/15339)
+-   ティビ
+    -   `alter instance`ステートメント[＃15080](https://github.com/pingcap/tidb/pull/15080) [＃15292](https://github.com/pingcap/tidb/pull/15292)を使用して、置き換えられた証明書ファイルの動的読み込みをサポートします。
+    -   `cluster-verify-cn`設定項目を追加します。設定後、ステータス サービスは対応する CN 証明書がある場合にのみ使用できます[＃15164](https://github.com/pingcap/tidb/pull/15164)
+    -   各 TiDBサーバーの DDL 要求のフロー制限機能を追加して、DDL 要求の競合のエラー報告頻度を減らします[＃15148](https://github.com/pingcap/tidb/pull/15148)
+    -   binlog書き込みが失敗した場合に TiDBサーバーの終了をサポートする[＃15339](https://github.com/pingcap/tidb/pull/15339)
 
-+ Tools
-    - TiDB Binlog
-        - Add the `kafka-client-id` configuration item in Drainer, which supports connecting to Kafka clients to configure the client ID [#929](https://github.com/pingcap/tidb-binlog/pull/929)
+-   ツール
+    -   TiDBBinlog
+        -   Drainerに`kafka-client-id`設定項目を追加します。これは、Kafkaクライアントへの接続をサポートし、クライアントID [＃929](https://github.com/pingcap/tidb-binlog/pull/929)を設定します。
 
-## Bug Fixes
+## バグの修正 {#bug-fixes}
 
-+ TiDB
-    - Make `GRANT`, `REVOKE` guarantee atomicity when modifying multiple users [#15092](https://github.com/pingcap/tidb/pull/15092)
-    - Fix the issue that the locking of pessimistic lock on the partition table failed to lock the correct row [#15114](https://github.com/pingcap/tidb/pull/15114)
-    - Make the error message display according to the value of `max-index-length` in the configuration when the index length exceeds the limit [#15130](https://github.com/pingcap/tidb/pull/15130)
-    - Fix the incorrect decimal point issue of the `FROM_UNIXTIME` function [#15270](https://github.com/pingcap/tidb/pull/15270)
-    - Fix the issue of conflict detection failure or data index inconsistency caused by deleting records written by oneself in a transaction [#15176](https://github.com/pingcap/tidb/pull/15176)
+-   ティビ
+    -   `GRANT`複数のユーザーを変更するときにアトミック`REVOKE`を保証する[＃15092](https://github.com/pingcap/tidb/pull/15092)
+    -   パーティションテーブル上の悲観的ロックのロックが正しい行[＃15114](https://github.com/pingcap/tidb/pull/15114)をロックできなかった問題を修正しました。
+    -   インデックスの長さが制限[＃15130](https://github.com/pingcap/tidb/pull/15130)を超えた場合に、構成の値`max-index-length`に従ってエラー メッセージを表示するようにします。
+    -   `FROM_UNIXTIME`関数[＃15270](https://github.com/pingcap/tidb/pull/15270)の小数点の誤りを修正
+    -   トランザクション[＃15176](https://github.com/pingcap/tidb/pull/15176)で自分自身が書き込んだレコードを削除することによって発生する競合検出の失敗またはデータ インデックスの不整合の問題を修正しました。
 
-+ TiKV
-    - Fix the issue of conflict detection failure or data index inconsistency caused by inserting an existing key into a transaction and then deleting it immediately when disabling the consistency check parameter [#7054](https://github.com/tikv/tikv/pull/7054)
-    - Introduce a flow control mechanism in Raftstore to solve the problem that without flow control, it might lead to too slow tracking and cause the cluster to be stuck, and the transaction size might cause frequent reconnection of TiKV connections [#7072](https://github.com/tikv/tikv/pull/7072) [#6993](https://github.com/tikv/tikv/pull/6993)
+-   ティクヴ
+    -   整合性チェックパラメータ[＃7054](https://github.com/tikv/tikv/pull/7054)を無効にすると、既存のキーをトランザクションに挿入してすぐに削除することによって発生する競合検出の失敗またはデータ インデックスの不整合の問題を修正しました。
+    -   Raftstoreにフロー制御メカニズムを導入して、フロー制御がないと追跡が遅くなりすぎてクラスターがスタックしたり、トランザクション サイズによって TiKV 接続が頻繁に再接続されたりする可能性がある問題を解決します[＃7072](https://github.com/tikv/tikv/pull/7072) [＃6993](https://github.com/tikv/tikv/pull/6993)
 
-+ PD
-    - Fix the issue of incorrect Region information caused by data race when PD processes Region heartbeats [#2233](https://github.com/pingcap/pd/pull/2233)
+-   PD
+    -   PD がリージョンハートビート[＃2233](https://github.com/pingcap/pd/pull/2233)を処理するときにデータ競合によって発生するリージョン情報の誤りの問題を修正しました。
 
-+ TiDB Ansible
-    - Support deploying multiple Grafana/Prometheus/Alertmanager in a cluster [#1198](https://github.com/pingcap/tidb-ansible/pull/1198)
+-   TiDB アンシブル
+    -   クラスター[＃1198](https://github.com/pingcap/tidb-ansible/pull/1198)内で複数の Grafana/Prometheus/Alertmanager のデプロイをサポート

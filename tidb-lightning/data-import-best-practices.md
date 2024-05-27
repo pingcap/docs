@@ -1,155 +1,155 @@
 ---
 title: Best Practices for Importing 50 TiB Data
-summary: Learn best practices for importing large volumes of data.
+summary: 大量のデータをインポートするためのベスト プラクティスを学びます。
 ---
 
-# Best Practices for Importing 50 TiB Data
+# 50 TiB データのインポートに関するベスト プラクティス {#best-practices-for-importing-50-tib-data}
 
-This document provides best practices for importing large volumes of data into TiDB, including some key factors and steps that affect data import. We have successfully imported data of a large single table over 50 TiB into both the internal environment and customer's environment, and have accumulated best practices based on these real application scenarios, which can help you import data more smoothly and efficiently.
+このドキュメントでは、データのインポートに影響するいくつかの重要な要素と手順を含む、大量のデータを TiDB にインポートするためのベスト プラクティスについて説明します。当社は、50 TiB を超える大規模な単一テーブルのデータを社内環境と顧客環境の両方に正常にインポートしており、これらの実際のアプリケーション シナリオに基づいてベスト プラクティスを蓄積しています。これにより、データをよりスムーズかつ効率的にインポートできるようになります。
 
-TiDB Lightning ([Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md)) is a comprehensive and efficient data import tool used for importing data into empty tables and initializing empty clusters, and uses files as the data source. TiDB Lightning provides two running modes: a single instance and [parallel import](/tidb-lightning/tidb-lightning-distributed-import.md). You can import source files of different sizes.
+TiDB Lightning （ [物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md) ）は、空のテーブルにデータをインポートしたり、空のクラスターを初期化したりするために使用される包括的で効率的なデータインポートツールであり、ファイルをデータソースとして使用します。TiDB TiDB Lightningには、単一インスタンスと[並行輸入](/tidb-lightning/tidb-lightning-distributed-import.md) 2つの実行モードがあります。さまざまなサイズのソースファイルをインポートできます。
 
-- If the data size of the source files is within 10 TiB, it is recommended to use a single instance of TiDB Lightning for the import.
-- If the data size of the source files exceeds 10 TiB, it is recommended to use multiple instances of TiDB Lightning for [Parallel Import](/tidb-lightning/tidb-lightning-distributed-import.md).
-- If the source file data scale is exceptionally large (larger than 50 TiB), in addition to parallel importing, you need to make certain preparations and optimizations based on the characteristics of the source data, table definitions, and parameter configurations to achieve smoother and faster large-scale data import.
+-   ソース ファイルのデータ サイズが 10 TiB 以内の場合は、インポートにTiDB Lightningの単一インスタンスを使用することをお勧めします。
+-   ソースファイルのデータサイズが 10 TiB を超える場合は、 [並行輸入](/tidb-lightning/tidb-lightning-distributed-import.md)に対してTiDB Lightningの複数のインスタンスを使用することをお勧めします。
+-   ソース ファイルのデータ規模が非常に大きい場合 (50 TiB を超える場合) は、並列インポートに加えて、ソース データの特性、テーブル定義、およびパラメーター構成に基づいて特定の準備と最適化を行い、大規模データのインポートをよりスムーズかつ高速に実行する必要があります。
 
-The following sections apply to both importing multiple tables and importing large single tables:
+次のセクションは、複数のテーブルのインポートと大きな単一のテーブルのインポートの両方に適用されます。
 
-- [Key factors](#key-factors)
-- [Prepare source files](#prepare-source-files)
-- [Estimate storage space](#estimate-storage-space)
-- [Change configuration parameters](#change-configuration-parameters)
-- [Resolve the "checksum mismatch" error](#resolve-the-checksum-mismatch-error)
-- [Enable checkpoint](#enable-checkpoint)
-- [Troubleshooting](#troubleshooting)
+-   [キーファクタ](#key-factors)
+-   [ソースファイルの準備](#prepare-source-files)
+-   [storage容量の見積もり](#estimate-storage-space)
+-   [設定パラメータを変更する](#change-configuration-parameters)
+-   [「チェックサム不一致」エラーを解決する](#resolve-the-checksum-mismatch-error)
+-   [チェックポイントを有効にする](#enable-checkpoint)
+-   [トラブルシューティング](#troubleshooting)
 
-The best practices for importing large single tables are described separately in the following section because of its special requirements:
+大きな単一テーブルをインポートするためのベスト プラクティスは、特別な要件があるため、次のセクションで別途説明します。
 
-- [Best practices for importing a large single table](#best-practices-for-importing-a-large-single-table)
+-   [大きな単一テーブルをインポートするためのベストプラクティス](#best-practices-for-importing-a-large-single-table)
 
-## Key factors
+## キーファクタ {#key-factors}
 
-When you import data, some key factors can affect import performance and might even cause import to fail. Some common critical factors are as follows:
+データをインポートする場合、いくつかの重要な要素がインポートのパフォーマンスに影響し、インポートが失敗する原因となることがあります。一般的な重要な要素は次のとおりです。
 
-- Source files
+-   ソースファイル
 
-    - Whether the data within a single file is sorted by the primary key. Sorted data can achieve optimal import performance.
-    - Whether overlapping primary keys or non-null unique indexes exist between source files imported by multiple TiDB Lightning instances. The smaller the overlap is, the better the import performance.
+    -   単一ファイル内のデータが主キーによってソートされているかどうか。ソートされたデータは最適なインポート パフォーマンスを実現できます。
+    -   複数のTiDB Lightningインスタンスによってインポートされたソース ファイル間に、重複する主キーまたは null 以外の一意のインデックスが存在するかどうか。重複が小さいほど、インポートのパフォーマンスは向上します。
 
-- Table definitions
+-   表の定義
 
-    - The number and size of secondary indexes per table can affect the import speed. Fewer indexes result in faster imports and less space consumption after import.
-    - Index data size = Number of indexes \* Index size \* Number of rows.
+    -   テーブルごとのセカンダリ インデックスの数とサイズは、インポート速度に影響する可能性があります。インデックスが少ないほど、インポートが高速になり、インポート後のスペース消費も少なくなります。
+    -   インデックス データ サイズ = インデックスの数 * インデックス サイズ * 行数。
 
-- Compression ratio
+-   圧縮比
 
-    - Data imported into a TiDB cluster is stored in a compressed format. The compression ratio cannot be calculated in advance. It can only be determined after the data is actually imported into the TiKV cluster.
-    - As a best practice, you can first import a small portion of the data (for example, 10%) to obtain the corresponding compression ratio of the cluster, and then use it to estimate the compression ratio of the entire data import.
+    -   TiDB クラスターにインポートされたデータは圧縮形式で保存されます。圧縮率は事前に計算できません。データが実際に TiKV クラスターにインポートされた後にのみ決定できます。
+    -   ベスト プラクティスとして、最初にデータのごく一部 (たとえば、10%) をインポートしてクラスターの対応する圧縮率を取得し、それを使用してデータ インポート全体の圧縮率を推定することができます。
 
-- Configuration parameters
+-   コンフィグレーションパラメータ
 
-    - `region-concurrency`: The concurrency of TiDB Lightning main logical processing.
-    - `send-kv-pairs`: The number of Key-Value pairs sent by TiDB Lightning to TiKV in a single request.
-    - `disk-quota`: The disk quota used by TiDB Lightning local temp files when using the physical import mode.
-    - `GOMEMLIMIT`: TiDB Lightning is implemented in the Go language. [Configure `GOMEMLIMIT` properly.](#change-configuration-parameters)
+    -   `region-concurrency` : TiDB Lightningメイン論理処理の同時実行性。
+    -   `send-kv-pairs` : 1 回のリクエストでTiDB Lightningから TiKV に送信されるキーと値のペアの数。
+    -   `disk-quota` : 物理インポート モードを使用するときにTiDB Lightningローカル一時ファイルによって使用されるディスク クォータ。
+    -   `GOMEMLIMIT` : TiDB LightningはGo言語で実装されています[`GOMEMLIMIT`適切に設定します。](#change-configuration-parameters)
 
-- Data validation
+-   データ検証
 
-    After data and index import is completed, the [`ADMIN CHECKSUM`](/sql-statements/sql-statement-admin-checksum-table.md) statement is executed on each table, and the checksum value is compared with the local checksum value of TiDB Lightning. When many tables exist, or an individual table has a large number of rows, the checksum phase can take a long time.
+    データとインデックスのインポートが完了すると、各テーブルに対して[`ADMIN CHECKSUM`](/sql-statements/sql-statement-admin-checksum-table.md)ステートメントが実行され、チェックサム値がTiDB Lightningのローカル チェックサム値と比較されます。テーブルが多数存在する場合、または個々のテーブルに多数の行がある場合、チェックサム フェーズに長い時間がかかることがあります。
 
-- The analyze operation
+-   分析操作
 
-    After the checksum is successfully completed, the [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) statement is executed on each table to generate the optimal execution plan. The analyze operation can be time-consuming when dealing with a large number of tables or an individual table with a significant amount of data.
+    チェックサムが正常に完了すると、各テーブルで[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)ステートメントが実行され、最適な実行プランが生成されます。多数のテーブルや大量のデータを含む個々のテーブルを処理する場合、分析操作には時間がかかることがあります。
 
-- Relevant issues
+-   関連する問題
 
-    During the actual process of importing 50 TiB of data, certain issues might occur that are only exposed when dealing with a massive number of source files and large-scale clusters. When choosing a product version, it is recommended to check whether the corresponding issues have been fixed.
+    実際に 50 TiB のデータをインポートするプロセスでは、膨大な数のソース ファイルと大規模なクラスターを処理する場合にのみ発生する特定の問題が発生する可能性があります。製品バージョンを選択するときは、該当する問題が修正されているかどうかを確認することをお勧めします。
 
-    The following issues have been resolved in v6.5.3, v7.1.0, and later versions:
+    v6.5.3、v7.1.0 以降のバージョンでは、次の問題が解決されています。
 
-    - [Issue-14745](https://github.com/tikv/tikv/issues/14745): After the import is completed, a large number of temporary files are left in the TiKV import directory.
-    - [Issue-6426](https://github.com/tikv/pd/issues/6426): The PD [range scheduling](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import) interface might fail to scatter regions, resulting in timeout issues. Before v6.2.0, global scheduling is disabled by default, which can avoid triggering this problem.
-    - [Issue-43079](https://github.com/pingcap/tidb/pull/43079): TiDB Lightning fails to refresh the Region Peers information during retry for NotLeader errors.
-    - [Issue-43291](https://github.com/pingcap/tidb/issues/43291): TiDB Lightning does not retry in cases where temporary files are not found (the "No such file or directory" error).
+    -   [問題-14745](https://github.com/tikv/tikv/issues/14745) : インポートが完了すると、TiKV インポート ディレクトリに大量の一時ファイルが残ります。
+    -   [問題-6426](https://github.com/tikv/pd/issues/6426) : PD [範囲スケジュール](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import)インターフェイスが領域を分散できず、タイムアウトの問題が発生する可能性があります。v6.2.0 より前では、グローバル スケジューリングはデフォルトで無効になっているため、この問題の発生を回避できます。
+    -   [問題-43079](https://github.com/pingcap/tidb/pull/43079) : TiDB Lightning は、 NotLeader エラーの再試行中にリージョンピア情報を更新できません。
+    -   [問題-43291](https://github.com/pingcap/tidb/issues/43291) : 一時ファイルが見つからない場合 (「そのようなファイルまたはディレクトリはありません」というエラー)、 TiDB Lightning は再試行しません。
 
-## Prepare source files
+## ソースファイルの準備 {#prepare-source-files}
 
-- When generating source files, it is preferable to sort them by the primary key within a single file. If the table definition does not have a primary key, you can add an auto-increment primary key. In this case, the order of the file content does not matter.
-- When assigning source files to multiple TiDB Lightning instances, try to avoid the situation where overlapping primary keys or non-null unique indexes exist between multiple source files. If the generated files are globally sorted, they can be distributed into different TiDB Lightning instances based on ranges to achieve optimal import performance.
-- Control each file to be less than 96 MiB in size during file generation.
-- If a file is exceptionally large and exceeds 256 MiB, enable [`strict-format`](/migrate-from-csv-files-to-tidb.md#step-4-tune-the-import-performance-optional).
+-   ソース ファイルを生成するときは、1 つのファイル内で主キーで並べ替えることをお勧めします。テーブル定義に主キーがない場合は、自動増分主キーを追加できます。この場合、ファイルの内容の順序は関係ありません。
+-   ソース ファイルを複数のTiDB Lightningインスタンスに割り当てる場合は、複数のソース ファイル間で重複する主キーや null 以外の一意のインデックスが存在する状況を回避するようにしてください。生成されたファイルがグローバルにソートされている場合は、範囲に基づいて異なるTiDB Lightningインスタンスに分散して、最適なインポート パフォーマンスを実現できます。
+-   ファイル生成中に各ファイルのサイズが 96 MiB 未満になるように制御します。
+-   ファイルが非常に大きく、256 MiB を超える場合は、 [`strict-format`](/migrate-from-csv-files-to-tidb.md#step-4-tune-the-import-performance-optional)有効にします。
 
-## Estimate storage space
+## storage容量の見積もり {#estimate-storage-space}
 
-You can use either of the following two methods to estimate the storage space required for importing data:
+データのインポートに必要なstorage容量を見積もるには、次の 2 つの方法のいずれかを使用できます。
 
-- Assuming the total data size is **A**, the total index size is **B**, the replication factor is **3**, and the compression ratio is **α** (typically around 2.5), the overall occupied space can be calculated as: **(A+B)\*3/α**. This method is primarily used for estimating without performing any data import, to plan the cluster topology.
-- Import only 10% of the data and multiply the actual occupied space by 10 to estimate the final space usage for that batch of data. This method is more accurate, especially when you import a large amount of data.
+-   合計データ サイズが**A** 、合計インデックス サイズが**B** 、レプリケーション係数が**3** 、圧縮率が**α** (通常は約 2.5) であると仮定すると、全体の占有スペースは**(A+B)*3/α**として計算できます。この方法は主に、データのインポートを実行せずに推定し、クラスター トポロジを計画するために使用されます。
+-   データの 10% のみをインポートし、実際に占有されているスペースを 10 倍にして、そのデータ バッチの最終的なスペース使用量を見積もります。この方法は、特に大量のデータをインポートする場合に、より正確です。
 
-Note that it is recommended to reserve 20% of storage space, because background tasks such as compaction and snapshot replication also consume a portion of the storage space.
+圧縮やスナップショットのレプリケーションなどのバックグラウンド タスクもstorage領域の一部を消費するため、storage領域の 20% を予約することをお勧めします。
 
-## Change configuration parameters
+## 設定パラメータを変更する {#change-configuration-parameters}
 
-- `region-concurrency`: The concurrency of TiDB Lightning main logical processing. During parallel importing, it is recommended to set it to 75% of the CPU cores to prevent resource overload and potential OOM issues.
-- `send-kv-pairs`: The number of Key-Value pairs sent by TiDB Lightning to TiKV in a single request. It is recommended to adjust this value based on the formula send-kv-pairs \* row-size < 1 MiB. Starting from v7.2.0, this parameter is replaced by `send-kv-size`, and no additional setting is required.
-- `disk-quota`: It is recommended to ensure that the sorting directory space of TiDB Lightning is larger than the size of the data source. If you cannot ensure that, you can set `disk-quota` to 80% of the sorting directory space of TiDB Lightning. In this way, TiDB Lightning will sort and write data in batches according to the specified `disk-quota`, but note that this approach might result in lower import performance compared to a complete sorting process.
-- `GOMEMLIMIT`: TiDB Lightning is implemented in the Go language. Setting `GOMEMLIMIT` to 80% of the instance memory to reduce the probability of OOM caused by the Go GC mechanism.
+-   `region-concurrency` : TiDB Lightningのメイン論理処理の同時実行性。並列インポート中は、リソースの過負荷と潜在的な OOM の問題を防ぐために、CPU コアの 75% に設定することをお勧めします。
+-   `send-kv-pairs` : TiDB Lightningが 1 回のリクエストで TiKV に送信するキーと値のペアの数。この値は、send-kv-pairs * row-size &lt; 1 MiB という式に基づいて調整することをお勧めします。v7.2.0 以降では、このパラメータは`send-kv-size`に置き換えられ、追加の設定は必要ありません。
+-   `disk-quota` : TiDB Lightningのソートディレクトリ領域がデータソースのサイズよりも大きいことを確認することをお勧めします。それができない場合は、 `disk-quota` TiDB Lightningのソートディレクトリ領域の 80% に設定できます。このように、 TiDB Lightning は指定された`disk-quota`に従ってデータをバッチでソートして書き込みますが、この方法では完全なソートプロセスと比較してインポートのパフォーマンスが低下する可能性があることに注意してください。
+-   `GOMEMLIMIT` : TiDB Lightning はGo 言語で実装されています。インスタンスメモリの 80% を`GOMEMLIMIT`に設定すると、Go GC メカニズムによって発生する OOM の可能性が減ります。
 
-For more information about TiDB Lightning parameters, see [TiDB Lightning configuration parameters](/tidb-lightning/tidb-lightning-configuration.md).
+TiDB Lightningパラメータの詳細については、 [TiDB Lightning構成パラメータ](/tidb-lightning/tidb-lightning-configuration.md)参照してください。
 
-## Resolve the "checksum mismatch" error
+## 「チェックサム不一致」エラーを解決する {#resolve-the-checksum-mismatch-error}
 
-Conflicts might occur during data validation. The error message is "checksum mismatch". To resolve this issue, take the following steps as needed:
+データ検証中に競合が発生する可能性があります。エラー メッセージは「チェックサムが一致しません」です。この問題を解決するには、必要に応じて次の手順を実行します。
 
-1. In the source data, check for conflicted primary keys or unique keys, and resolve the conflicts before reimporting. In most cases, this is the most common cause.
-2. Check if the table primary key or unique key definition is reasonable. If not, modify the table definition and reimport data.
-3. If the issue persists after following the preceding two steps, further examination is required to determine whether a small amount (less than 10%) of unexpected conflicting data exists in the source data. To let TiDB Lightning detect and resolve conflicting data, enable [conflict detection](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection).
+1.  ソース データで競合する主キーまたは一意キーがないか確認し、再インポートする前に競合を解決します。ほとんどの場合、これが最も一般的な原因です。
+2.  テーブルの主キーまたは一意キーの定義が適切かどうかを確認します。適切でない場合は、テーブル定義を変更してデータを再インポートします。
+3.  前の 2 つの手順を実行しても問題が解決しない場合は、ソース データに少量 (10% 未満) の予期しない競合データが存在するかどうかを確認するために、さらに調査する必要があります。TiDB TiDB Lightning で競合データを検出して解決するには、 [競合検出](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection)有効にします。
 
-## Enable checkpoint
+## チェックポイントを有効にする {#enable-checkpoint}
 
-For importing a large volume of data, it is essential to refer to [Lightning Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md) and enable checkpoints. It is recommended to prioritize using MySQL as the driver to avoid losing the checkpoint information if TiDB Lightning is running in a container environment where the container might exit and delete the checkpoint information.
+大量データのインポートには、 [ライトニングチェックポイント](/tidb-lightning/tidb-lightning-checkpoints.md)を参考にチェックポイントを有効にすることが必須です。コンテナが終了してチェックポイント情報が削除される可能性があるコンテナ環境でTiDB Lightningを動作させる場合は、チェックポイント情報が失われないように、ドライバーとして MySQL を優先して使用することをお勧めします。
 
-If you encounter insufficient space in downstream TiKV during import, you can manually run the `kill` command (without the `-9` option) on all TiDB Lightning instances. After scaling up the capacity, you can resume the import based on the checkpoint information.
+インポート中にダウンストリーム TiKV の容量が不足した場合は、すべてのTiDB Lightningインスタンスで`kill`コマンド ( `-9`オプションなし) を手動で実行できます。容量を拡大した後、チェックポイント情報に基づいてインポートを再開できます。
 
-## Best practices for importing a large single table
+## 大きな単一テーブルをインポートするためのベストプラクティス {#best-practices-for-importing-a-large-single-table}
 
-Importing multiple tables can increase the time required for checksum and analyze operations, sometimes exceeding the time required for data import itself. However, it is generally not necessary to adjust the configuration. If one or more large tables exist among the multiple tables, it is recommended to separate the source files of these large tables and import them separately.
+複数のテーブルをインポートすると、チェックサムや分析操作に必要な時間が長くなり、データのインポート自体に必要な時間を超える場合があります。ただし、通常は構成を調整する必要はありません。複数のテーブルの中に 1 つ以上の大きなテーブルが存在する場合は、これらの大きなテーブルのソース ファイルを分離して個別にインポートすることをお勧めします。
 
-This section provides the best practices for importing large single tables. There is no strict definition for a large single table, but it is generally considered to meet one of the following criteria:
+このセクションでは、大きな単一テーブルをインポートするためのベスト プラクティスについて説明します。大きな単一テーブルには厳密な定義はありませんが、一般的には次のいずれかの基準を満たすものと見なされます。
 
-- The table size exceeds 10 TiB.
-- The number of rows exceeds 1 billion and the number of columns exceeds 50 in a wide table.
+-   テーブルサイズが10 TiBを超えています。
+-   幅の広い表では行数が 10 億を超え、列数が 50 を超えます。
 
-### Generate source files
+### ソースファイルを生成する {#generate-source-files}
 
-Follow the steps outlined in the [Prepare source files](#prepare-source-files).
+[ソースファイルの準備](#prepare-source-files)に記載されている手順に従ってください。
 
-For a large single table, if global sorting is not achievable but sorting within each file based on the primary key is possible, and the file is a standard CSV file, it is recommended to generate large single files with each around 20 GiB.
+大きな単一テーブルの場合、グローバルなソートは実行できないが、主キーに基づいて各ファイル内でのソートは可能であり、ファイルが標準の CSV ファイルである場合は、それぞれ約 20 GiB の大きな単一ファイルを生成することをお勧めします。
 
-Then, enable `strict-format`. This approach reduces the overlap of primary and unique keys in the imported files between TiDB Lightning instances, and TiDB Lightning instances can split the large files before importing to achieve optimal import performance.
+次に、 `strict-format`を有効にします。このアプローチにより、TiDB Lightningインスタンス間でインポートされたファイルの主キーと一意のキーの重複が削減され、 TiDB Lightningインスタンスはインポート前に大きなファイルを分割して、最適なインポート パフォーマンスを実現できます。
 
-### Plan cluster topology
+### クラスタトポロジを計画する {#plan-cluster-topology}
 
-Prepare TiDB Lightning instances to make each instance process 5 TiB to 10 TiB of source data. Deploy one TiDB Lightning instance on each node. For the specifications of the nodes, refer to the [environment requirements](/tidb-lightning/tidb-lightning-physical-import-mode.md#environment-requirements) of TiDB Lightning instances.
+各インスタンスが 5 TiB ～ 10 TiB のソース データを処理できるように、 TiDB Lightningインスタンスを準備します。各ノードに 1 つのTiDB Lightningインスタンスをデプロイ。ノードの仕様については、 TiDB Lightningインスタンスの[環境要件](/tidb-lightning/tidb-lightning-physical-import-mode.md#environment-requirements)を参照してください。
 
-### Change configuration parameters
+### 設定パラメータを変更する {#change-configuration-parameters}
 
-- Set `region-concurrency` to 75% of the number of cores of the TiDB Lightning instance.
-- Set `send-kv-pairs` to `3200`. This method applies to TiDB v7.1.0 and earlier versions. Starting from v7.2.0, this parameter is replaced by `send-kv-size`, and no additional setting is required.
-- Adjust `GOMEMLIMIT` to 80% of the memory on the node where the instance is located.
+-   TiDB Lightningインスタンスのコア数の`region-concurrency` ～ 75% を設定します。
+-   `send-kv-pairs`を`3200`に設定します。この方法は、TiDB v7.1.0 以前のバージョンに適用されます。v7.2.0 以降では、このパラメータは`send-kv-size`に置き換えられ、追加の設定は必要ありません。
+-   インスタンスが配置されているノード上のメモリを`GOMEMLIMIT` ～ 80% に調整します。
 
-If the PD Scatter Region latency during the import process exceeds 30 minutes, consider the following optimizations:
+インポート プロセス中の PD 散布リージョンのレイテンシーが30 分を超える場合は、次の最適化を検討してください。
 
-- Check whether the TiKV cluster encounters any I/O bottlenecks.
-- Increase TiKV `raftstore.apply-pool-size` from the default value of `2` to `4` or `8`.
-- Reduce TiDB Lightning `region-split-concurrency` to half the number of CPU cores, with a minimum value of `1`.
+-   TiKV クラスターで I/O ボトルネックが発生しているかどうかを確認します。
+-   TiKV `raftstore.apply-pool-size`デフォルト値の`2`から`4`または`8`に増やします。
+-   TiDB Lightning `region-split-concurrency` CPU コア数の半分に減らします (最小値は`1` )。
 
-### Disable the analyze operation
+### 分析操作を無効にする {#disable-the-analyze-operation}
 
-In the case of a large single table (for example, with over 1 billion rows and more than 50 columns), it is recommended to disable the `analyze` operation (`analyze="off"`) during the import process, and manually execute the [`ANALYZE TABLE`](/sql-statements//sql-statement-analyze-table.md) statement after the import is completed.
+単一のテーブルが大きい場合（たとえば、行数が 10 億行以上、列数が 50 列以上）、インポート処理中に`analyze`操作（ `analyze="off"` ）を無効にし、インポートが完了した後に[`ANALYZE TABLE`](/sql-statements//sql-statement-analyze-table.md)ステートメントを手動で実行することをお勧めします。
 
-For more information about the configuration of `analyze`, see [TiDB Lightning task configuration](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task).
+`analyze`の設定の詳細については、 [TiDB Lightningタスク構成](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)を参照してください。
 
-## Troubleshooting
+## トラブルシューティング {#troubleshooting}
 
-If you encounter problems while using TiDB Lightning, see [Troubleshoot TiDB Lightning](/tidb-lightning/troubleshoot-tidb-lightning.md).
+TiDB Lightningの使用中に問題が発生した場合は、 [TiDB Lightningシューティング](/tidb-lightning/troubleshoot-tidb-lightning.md)参照してください。

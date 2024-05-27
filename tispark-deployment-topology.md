@@ -1,46 +1,46 @@
 ---
 title: TiSpark Deployment Topology
-summary: Learn the deployment topology of TiSpark using TiUP based on the minimal TiDB topology.
+summary: 最小限の TiDB トポロジに基づくTiUPを使用した TiSpark のデプロイメント トポロジを学習します。
 ---
 
-# TiSpark Deployment Topology
+# TiSpark デプロイメント トポロジ {#tispark-deployment-topology}
 
-> **Warning:**
+> **警告：**
 >
-> TiSpark support in the TiUP cluster is deprecated. It is **NOT** recommended to use it.
+> TiUPクラスターでの TiSpark サポートは非​​推奨です。使用することはお勧めし**ません**。
 
-This document introduces the TiSpark deployment topology and how to deploy TiSpark based on the minimum cluster topology.
+このドキュメントでは、TiSpark のデプロイメント トポロジと、最小のクラスター トポロジに基づいて TiSpark をデプロイする方法について説明します。
 
-TiSpark is a component built for running Apache Spark on top of TiDB/TiKV to answer complex OLAP queries. It brings benefits of both the Spark platform and the distributed TiKV cluster to TiDB and makes TiDB a one-stop solution for both online transactions and analytics.
+TiSpark は、TiDB/TiKV 上で Apache Spark を実行し、複雑な OLAP クエリに応答するために構築されたコンポーネントです。Spark プラットフォームと分散 TiKV クラスターの両方の利点を TiDB にもたらし、TiDB をオンライン トランザクションと分析の両方のワンストップ ソリューションにします。
 
-For more information about the TiSpark architecture and how to use it, see [TiSpark User Guide](/tispark-overview.md).
+TiSparkアーキテクチャとその使用方法の詳細については、 [TiSpark ユーザーガイド](/tispark-overview.md)参照してください。
 
-## Topology information
+## トポロジ情報 {#topology-information}
 
-| Instance | Count | Physical machine configuration | IP | Configuration |
-| :-- | :-- | :-- | :-- | :-- |
-| TiDB | 3 | 16 VCore 32GB * 1 | 10.0.1.1 <br/> 10.0.1.2 <br/> 10.0.1.3 | Default port <br/>  Global directory configuration |
-| PD | 3 | 4 VCore 8GB * 1 |10.0.1.4 <br/> 10.0.1.5 <br/> 10.0.1.6 | Default port <br/> Global directory configuration |
-| TiKV | 3 | 16 VCore 32GB 2TB (nvme ssd) * 1 | 10.0.1.7 <br/> 10.0.1.8 <br/> 10.0.1.9 | Default port <br/> Global directory configuration |
-| TiSpark | 3 | 8 VCore 16GB * 1 | 10.0.1.21 (master) <br/> 10.0.1.22 (worker) <br/> 10.0.1.23 (worker) | Default port <br/> Global directory configuration |
-| Monitoring & Grafana | 1 | 4 VCore 8GB * 1 500GB (ssd) | 10.0.1.11 | Default port <br/> Global directory configuration |
+| 実例             | カウント | 物理マシン構成                          | IP                                                           | コンフィグレーション                 |
+| :------------- | :--- | :------------------------------- | :----------------------------------------------------------- | :------------------------- |
+| ティビ            | 3    | 16 VCore 32GB * 1                | 10.0.1.1<br/> 10.0.1.2<br/> 10.0.1.3                         | デフォルトポート<br/>グローバルディレクトリ構成 |
+| PD             | 3    | 4 VCore 8GB * 1                  | 10.0.1.4<br/> 10.0.1.5<br/> 10.0.1.6                         | デフォルトポート<br/>グローバルディレクトリ構成 |
+| ティクヴ           | 3    | 16 VCore 32GB 2TB (nvme ssd) * 1 | 10.0.1.7<br/> 10.0.1.8<br/> 10.0.1.9                         | デフォルトポート<br/>グローバルディレクトリ構成 |
+| ティスパーク         | 3    | 8 VCore 16GB * 1                 | 10.0.1.21 (マスター)<br/> 10.0.1.22 (ワーカー)<br/> 10.0.1.23 (ワーカー) | デフォルトポート<br/>グローバルディレクトリ構成 |
+| モニタリングとGrafana | 1    | 4 VCore 8GB * 1 500GB (SSD)      | 10.0.1.11                                                    | デフォルトポート<br/>グローバルディレクトリ構成 |
 
-## Topology templates
+## トポロジーテンプレート {#topology-templates}
 
-- [Simple TiSpark topology template](https://github.com/pingcap/docs/blob/master/config-templates/simple-tispark.yaml)
-- [Complex TiSpark topology template](https://github.com/pingcap/docs/blob/master/config-templates/complex-tispark.yaml)
+-   [シンプルな TiSpark トポロジー テンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-tispark.yaml)
+-   [複雑な TiSpark トポロジ テンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tispark.yaml)
 
-For detailed descriptions of the configuration items in the above TiDB cluster topology file, see [Topology Configuration File for Deploying TiDB Using TiUP](/tiup/tiup-cluster-topology-reference.md).
+上記の TiDB クラスタ トポロジ ファイルの構成項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
-> **Note:**
+> **注記：**
 >
-> - You do not need to manually create the `tidb` user in the configuration file. The TiUP cluster component automatically creates the `tidb` user on the target machines. You can customize the user, or keep the user consistent with the control machine.
-> - If you configure the deployment directory as a relative path, the cluster will be deployed in the home directory of the user.
+> -   構成ファイルで`tidb`ユーザーを手動で作成する必要はありません。TiUP クラスターコンポーネントは、ターゲット マシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズすることも、ユーザーをコントロール マシンと一致させることもできます。
+> -   デプロイメント ディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリにデプロイされます。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-TiSpark is based on the Apache Spark cluster, so before you start the TiDB cluster that contains TiSpark, you must ensure that Java Runtime Environment (JRE) 8 is installed on the server that deploys TiSpark. Otherwise, TiSpark cannot be started.
+TiSpark は Apache Spark クラスターに基づいているため、TiSpark を含む TiDB クラスターを起動する前に、TiSpark をデプロイするサーバーにJava Runtime Environment (JRE) 8 がインストールされていることを確認する必要があります。そうでない場合、TiSpark を起動できません。
 
-TiUP does not support installing JRE automatically. You need to install it on your own. For detailed installation instruction, see [How to download and install prebuilt OpenJDK packages](https://openjdk.java.net/install/).
+TiUP はJRE の自動インストールをサポートしていません。自分でインストールする必要があります。詳細なインストール手順については、 [ビルド済みの OpenJDK パッケージをダウンロードしてインストールする方法](https://openjdk.java.net/install/)参照してください。
 
-If JRE 8 has already been installed on the deployment server but is not in the path of the system's default package management tool, you can specify the path of the JRE environment to be used by setting the `java_home` parameter in the topology configuration. This parameter corresponds to the `JAVA_HOME` system environment variable.
+JRE 8 がデプロイメントサーバーにすでにインストールされているが、システムのデフォルト パッケージ管理ツールのパスにない場合は、トポロジ構成で`java_home`パラメータを設定することで、使用する JRE 環境のパスを指定できます。このパラメータは、 `JAVA_HOME`システム環境変数に対応します。

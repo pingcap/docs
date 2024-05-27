@@ -1,17 +1,17 @@
 ---
 title: SHOW COLLATION | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW COLLATION for the TiDB database.
+summary: TiDB データベースの SHOW COLLATION の使用法の概要。
 ---
 
-# SHOW COLLATION
+# 照合を表示 {#show-collation}
 
-This statement provides a static list of collations, and is included to provide compatibility with MySQL client libraries.
+このステートメントは照合順序の静的リストを提供し、MySQL クライアント ライブラリとの互換性を提供するために含まれています。
 
-> **Note:**
+> **注記：**
 >
-> Results of `SHOW COLLATION` vary when the ["new collation framework"](/character-set-and-collation.md#new-framework-for-collations) is enabled. For new collation framework details, refer to [Character Set and Collation](/character-set-and-collation.md).
+> `SHOW COLLATION`の結果は、 [「新しい照合順序フレームワーク」](/character-set-and-collation.md#new-framework-for-collations)が有効な場合に変わります。新しい照合順序フレームワークの詳細については、 [文字セットと照合順序](/character-set-and-collation.md)を参照してください。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowCollationStmt ::=
@@ -22,53 +22,49 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## Examples
+## 例 {#examples}
 
-When new collation framework is disabled, only binary collations are displayed.
-
-```sql
-SHOW COLLATION;
-```
-
-```
-+-------------+---------+------+---------+----------+---------+
-| Collation   | Charset | Id   | Default | Compiled | Sortlen |
-+-------------+---------+------+---------+----------+---------+
-| utf8mb4_bin | utf8mb4 |   46 | Yes     | Yes      |       1 |
-| latin1_bin  | latin1  |   47 | Yes     | Yes      |       1 |
-| binary      | binary  |   63 | Yes     | Yes      |       1 |
-| ascii_bin   | ascii   |   65 | Yes     | Yes      |       1 |
-| utf8_bin    | utf8    |   83 | Yes     | Yes      |       1 |
-+-------------+---------+------+---------+----------+---------+
-5 rows in set (0.02 sec)
-```
-
-When new collation framework is enabled, `utf8_general_ci` and `utf8mb4_general_ci` are additionally supported.
+新しい照合順序フレームワークが無効になっている場合は、バイナリ照合のみが表示されます。
 
 ```sql
 SHOW COLLATION;
 ```
 
-```
-+--------------------+---------+------+---------+----------+---------+
-| Collation          | Charset | Id   | Default | Compiled | Sortlen |
-+--------------------+---------+------+---------+----------+---------+
-| ascii_bin          | ascii   |   65 | Yes     | Yes      |       1 |
-| binary             | binary  |   63 | Yes     | Yes      |       1 |
-| gbk_bin            | gbk     |   87 |         | Yes      |       1 |
-| gbk_chinese_ci     | gbk     |   28 | Yes     | Yes      |       1 |
-| latin1_bin         | latin1  |   47 | Yes     | Yes      |       1 |
-| utf8_bin           | utf8    |   83 | Yes     | Yes      |       1 |
-| utf8_general_ci    | utf8    |   33 |         | Yes      |       1 |
-| utf8_unicode_ci    | utf8    |  192 |         | Yes      |       1 |
-| utf8mb4_bin        | utf8mb4 |   46 | Yes     | Yes      |       1 |
-| utf8mb4_general_ci | utf8mb4 |   45 |         | Yes      |       1 |
-| utf8mb4_unicode_ci | utf8mb4 |  224 |         | Yes      |       1 |
-+--------------------+---------+------+---------+----------+---------+
-11 rows in set (0.001 sec)
+    +-------------+---------+------+---------+----------+---------+
+    | Collation   | Charset | Id   | Default | Compiled | Sortlen |
+    +-------------+---------+------+---------+----------+---------+
+    | utf8mb4_bin | utf8mb4 |   46 | Yes     | Yes      |       1 |
+    | latin1_bin  | latin1  |   47 | Yes     | Yes      |       1 |
+    | binary      | binary  |   63 | Yes     | Yes      |       1 |
+    | ascii_bin   | ascii   |   65 | Yes     | Yes      |       1 |
+    | utf8_bin    | utf8    |   83 | Yes     | Yes      |       1 |
+    +-------------+---------+------+---------+----------+---------+
+    5 rows in set (0.02 sec)
+
+新しい照合順序フレームワークが有効になっている場合、 `utf8_general_ci`と`utf8mb4_general_ci`追加でサポートされます。
+
+```sql
+SHOW COLLATION;
 ```
 
-To filter on the character set, you can add a `WHERE` clause.
+    +--------------------+---------+------+---------+----------+---------+
+    | Collation          | Charset | Id   | Default | Compiled | Sortlen |
+    +--------------------+---------+------+---------+----------+---------+
+    | ascii_bin          | ascii   |   65 | Yes     | Yes      |       1 |
+    | binary             | binary  |   63 | Yes     | Yes      |       1 |
+    | gbk_bin            | gbk     |   87 |         | Yes      |       1 |
+    | gbk_chinese_ci     | gbk     |   28 | Yes     | Yes      |       1 |
+    | latin1_bin         | latin1  |   47 | Yes     | Yes      |       1 |
+    | utf8_bin           | utf8    |   83 | Yes     | Yes      |       1 |
+    | utf8_general_ci    | utf8    |   33 |         | Yes      |       1 |
+    | utf8_unicode_ci    | utf8    |  192 |         | Yes      |       1 |
+    | utf8mb4_bin        | utf8mb4 |   46 | Yes     | Yes      |       1 |
+    | utf8mb4_general_ci | utf8mb4 |   45 |         | Yes      |       1 |
+    | utf8mb4_unicode_ci | utf8mb4 |  224 |         | Yes      |       1 |
+    +--------------------+---------+------+---------+----------+---------+
+    11 rows in set (0.001 sec)
+
+文字セットでフィルタリングするには、 `WHERE`句を追加できます。
 
 ```sql
 SHOW COLLATION WHERE Charset="utf8mb4";
@@ -87,11 +83,11 @@ SHOW COLLATION WHERE Charset="utf8mb4";
 5 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-The usage of the `SHOW COLLATION` statement in TiDB is fully compatible with MySQL. However, charsets in TiDB might have different default collations compared with MySQL. For details, refer to [Compatibility with MySQL](/mysql-compatibility.md). If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB の`SHOW COLLATION`ステートメントの使用法は、MySQL と完全に互換性があります。ただし、TiDB の文字セットは、MySQL と比較してデフォルトの照合順序が異なる場合があります。詳細については、 [MySQLとの互換性](/mysql-compatibility.md)を参照してください。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support)を参照してください。
 
-## See also
+## 参照 {#see-also}
 
-* [SHOW CHARACTER SET](/sql-statements/sql-statement-show-character-set.md)
-* [Character Set and Collation](/character-set-and-collation.md)
+-   [文字セットを表示](/sql-statements/sql-statement-show-character-set.md)
+-   [文字セットと照合順序](/character-set-and-collation.md)

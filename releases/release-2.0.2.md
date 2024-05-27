@@ -1,30 +1,30 @@
 ---
 title: TiDB 2.0.2 Release Notes
-summary: TiDB 2.0.2 was released on May 21, 2018, with improvements in system stability. The release includes fixes for Decimal division expression, support for `USE INDEX` syntax in `Delete` statement, and timeout mechanism for writing Binlog in TiDB. PD now filters disconnected nodes in balance leader scheduler, modifies transfer leader operator timeout, and fixes scheduling issues. TiKV fixes Raft log printing, supports configuring gRPC parameters, leader election timeout range, and resolves snapshot intermediate file deletion issue.
+summary: TiDB 2.0.2 は、システムの安定性の向上を伴い、2018 年 5 月 21 日にリリースされました。このリリースには、小数除算式の修正、`Delete` ステートメントの `USE INDEX` 構文のサポート、および TiDB でのBinlog書き込みのタイムアウト メカニズムが含まれています。PD は、バランス リーダー スケジューラで切断されたノードをフィルターし、転送リーダー オペレータのタイムアウトを変更し、スケジューリングの問題を修正しました。TiKV は、 Raftログ印刷を修正し、gRPC パラメータの構成、リーダー選出のタイムアウト範囲をサポートし、スナップショット中間ファイルの削除の問題を解決しました。
 ---
 
-# TiDB 2.0.2 Release Notes
+# TiDB 2.0.2 リリースノート {#tidb-2-0-2-release-notes}
 
-On May 21, 2018, TiDB 2.0.2 is released. Compared with TiDB 2.0.1, this release has great improvement in system stability.
+2018 年 5 月 21 日に、TiDB 2.0.2 がリリースされました。TiDB 2.0.1 と比較して、このリリースではシステムの安定性が大幅に向上しています。
 
-## TiDB
+## ティビ {#tidb}
 
-- Fix the issue of pushing down the Decimal division expression
-- Support using the `USE INDEX` syntax in the `Delete` statement
-- Forbid using the `shard_row_id_bits` feature in columns with `Auto-Increment`
-- Add the timeout mechanism for writing Binlog
+-   小数点除算式の押し下げの問題を修正
+-   `Delete`ステートメントで`USE INDEX`構文の使用をサポート
+-   `Auto-Increment`列目では`shard_row_id_bits`機能の使用を禁止する
+-   Binlog書き込みのタイムアウト機構を追加する
 
-## PD
+## PD {#pd}
 
-- Make the balance leader scheduler filter the disconnected nodes
-- Modify the timeout of the transfer leader operator to 10s
-- Fix the issue that the label scheduler does not schedule when the cluster Regions are in an unhealthy state
-- Fix the improper scheduling issue of `evict leader scheduler`
+-   バランスリーダースケジューラが切断されたノードをフィルタリングするようにする
+-   転送リーダーオペレータのタイムアウトを10秒に変更します
+-   クラスターのリージョンが異常な状態にあるときにラベル スケジューラがスケジュールを実行しない問題を修正しました。
+-   `evict leader scheduler`の不適切なスケジュール問題を修正
 
-## TiKV
+## ティクヴ {#tikv}
 
-- Fix the issue that the Raft log is not printed
-- Support configuring more gRPC related parameters
-- Support configuring the timeout range of leader election
-- Fix the issue that the obsolete learner is not deleted
-- Fix the issue that the snapshot intermediate file is mistakenly deleted
+-   Raftログが印刷されない問題を修正
+-   より多くのgRPC関連パラメータの設定をサポート
+-   リーダー選出のタイムアウト範囲の設定をサポート
+-   古くなった学習者が削除されない問題を修正
+-   スナップショット中間ファイルが誤って削除される問題を修正

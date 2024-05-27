@@ -1,19 +1,17 @@
 ---
 title: INSPECTION_SUMMARY
-summary: Learn the `INSPECTION_SUMMARY` inspection summary table.
+summary: `INSPECTION_SUMMARY` 検査概要テーブルについて学習します。
 ---
 
-# INSPECTION_SUMMARY
+# 検査概要 {#inspection-summary}
 
-In some scenarios, you might need to pay attention only to the monitoring summary of specific links or modules. For example, the number of threads for Coprocessor in the thread pool is configured as 8. If the CPU usage of Coprocessor reaches 750%, you can determine that a risk exists and Coprocessor might become a bottleneck in advance. However, some monitoring metrics vary greatly due to different user workloads, so it is difficult to define specific thresholds. It is important to troubleshoot issues in this scenario, so TiDB provides the `inspection_summary` table for link summary.
+シナリオによっては、特定のリンクまたはモジュールの監視サマリーのみに注意を払う必要がある場合があります。たとえば、スレッド プール内のコプロセッサーのスレッド数は 8 に設定されています。コプロセッサーの CPU 使用率が 750% に達した場合、リスクが存在し、コプロセッサーがボトルネックになる可能性があることを事前に判断できます。ただし、一部の監視メトリックはユーザー ワークロードの違いにより大きく異なるため、特定のしきい値を定義することは困難です。このシナリオでは問題のトラブルシューティングが重要であるため、TiDB はリンク サマリーの`inspection_summary`テーブルを提供します。
 
-> **Note:**
+> **注記：**
 >
-> This table is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> この表は TiDB Self-Hosted にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
-The structure of the `information_schema.inspection_summary` inspection summary table is as follows:
-
-{{< copyable "sql" >}}
+`information_schema.inspection_summary`検査概要表の構造は次のとおりです。
 
 ```sql
 USE information_schema;
@@ -37,28 +35,26 @@ DESC inspection_summary;
 9 rows in set (0.00 sec)
 ```
 
-Field description:
+フィールドの説明:
 
-* `RULE`: Summary rules. Because new rules are being added continuously, you can execute the `select * from inspection_rules where type='summary'` statement to query the latest rule list.
-* `INSTANCE`: The monitored instance.
-* `METRICS_NAME`: The monitoring metrics name.
-* `QUANTILE`: Takes effect on monitoring tables that contain `QUANTILE`. You can specify multiple percentiles by pushing down predicates. For example, you can execute `select * from inspection_summary where rule='ddl' and quantile in (0.80, 0.90, 0.99, 0.999)` to summarize the DDL-related monitoring metrics and query the P80/P90/P99/P999 results. `AVG_VALUE`, `MIN_VALUE`, and `MAX_VALUE` respectively indicate the average value, minimum value, and maximum value of the aggregation.
-* `COMMENT`: The comment about the corresponding monitoring metric.
+-   `RULE` : 要約ルール。新しいルールが継続的に追加されるため、 `select * from inspection_rules where type='summary'`ステートメントを実行して最新のルール リストを照会できます。
+-   `INSTANCE` : 監視対象インスタンス。
+-   `METRICS_NAME` : 監視メトリック名。
+-   `QUANTILE` : `QUANTILE`を含む監視テーブルに有効です。述語をプッシュダウンすることで、複数のパーセンタイルを指定できます。たとえば、 `select * from inspection_summary where rule='ddl' and quantile in (0.80, 0.90, 0.99, 0.999)`を実行して DDL 関連の監視メトリックを要約し、P80/P90/P99/P999 の結果を照会できます。 `AVG_VALUE` 、 `MIN_VALUE` 、および`MAX_VALUE` 、それぞれ集計の平均値、最小値、および最大値を示します。
+-   `COMMENT` : 対応する監視メトリックに関するコメント。
 
-> **Note:**
+> **注記：**
 >
-> Because summarizing all results causes overhead, it is recommended to display the specific `rule` in the SQL predicate to reduce overhead. For example, executing `select * from inspection_summary where rule in ('read-link', 'ddl')` summarizes the read link and DDL-related monitoring metrics.
+> すべての結果を要約するとオーバーヘッドが発生するため、オーバーヘッドを削減するには、SQL 述語で特定の`rule`表示することをお勧めします。たとえば、 `select * from inspection_summary where rule in ('read-link', 'ddl')`を実行すると、読み取りリンクと DDL 関連の監視メトリックが要約されます。
 
-Usage example:
+使用例:
 
-Both the diagnostic result table and the diagnostic monitoring summary table can specify the diagnostic time range using `hint`. `select /*+ time_range('2020-03-07 12:00:00','2020-03-07 13:00:00') */* from inspection_summary` is the monitoring summary for the `2020-03-07 12:00:00` to `2020-03-07 13:00:00` period. Like the monitoring summary table, you can use the `inspection_summary` table to quickly find the monitoring items with large differences by comparing the data of two different periods.
+診断結果テーブルと診断監視サマリーテーブルはどちらも`hint`使用して診断時間範囲を指定できます。 `select /*+ time_range('2020-03-07 12:00:00','2020-03-07 13:00:00') */* from inspection_summary` `2020-03-07 12:00:00` ～ `2020-03-07 13:00:00`期間の監視サマリーです。 監視サマリーテーブルと同様に、 `inspection_summary`テーブルを使用すると、2 つの異なる期間のデータを比較して、差異の大きい監視項目をすばやく見つけることができます。
 
-The following example compares the monitoring metrics of read links in two time periods:
+次の例では、2 つの期間における読み取りリンクの監視メトリックを比較します。
 
-* `(2020-01-16 16:00:54.933, 2020-01-16 16:10:54.933)`
-* `(2020-01-16 16:10:54.933, 2020-01-16 16:20:54.933)`
-
-{{< copyable "sql" >}}
+-   `(2020-01-16 16:00:54.933, 2020-01-16 16:10:54.933)`
+-   `(2020-01-16 16:10:54.933, 2020-01-16 16:20:54.933)`
 
 ```sql
 SELECT

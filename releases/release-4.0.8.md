@@ -1,157 +1,157 @@
 ---
 title: TiDB 4.0.8 Release Notes
-summary: TiDB 4.0.8 was released on October 30, 2020. New features include support for the new aggregate function `APPROX_PERCENTILE` and pushing down `CAST` functions in TiFlash. Improvements were made to TiDB, TiKV, PD, and TiFlash. Bug fixes were also implemented for TiDB, TiKV, PD, TiFlash, Backup and Restore (BR), TiCDC, and TiDB Lightning.
+summary: TiDB 4.0.8 は 2020 年 10 月 30 日にリリースされました。新機能には、新しい集計関数 `APPROX_PERCENTILE` のサポートと、 TiFlashでの `CAST`関数のプッシュダウンが含まれます。TiDB、TiKV、PD、およびTiFlashに改善が加えられました。TiDB、TiKV、PD、 TiFlash、バックアップと復元 (BR)、TiCDC、およびTiDB Lightning のバグ修正も実装されました。
 ---
 
-# TiDB 4.0.8 Release Notes
+# TiDB 4.0.8 リリースノート {#tidb-4-0-8-release-notes}
 
-Release date: October 30, 2020
+発売日: 2020年10月30日
 
-TiDB version: 4.0.8
+TiDB バージョン: 4.0.8
 
-## New Features
+## 新機能 {#new-features}
 
-+ TiDB
+-   ティビ
 
-    - Support the new aggregate function `APPROX_PERCENTILE` [#20197](https://github.com/pingcap/tidb/pull/20197)
+    -   新しい集計関数`APPROX_PERCENTILE` [＃20197](https://github.com/pingcap/tidb/pull/20197)をサポート
 
-+ TiFlash
+-   TiFlash
 
-    - Support pushing down `CAST` functions
+    -   プッシュダウン`CAST`関数をサポート
 
-+ Tools
+-   ツール
 
-    + TiCDC
+    -   ティCDC
 
-        - Support snapshot-level consistent replication [#932](https://github.com/pingcap/tiflow/pull/932)
+        -   スナップショットレベルの一貫性のあるレプリケーションをサポート[＃932](https://github.com/pingcap/tiflow/pull/932)
 
-## Improvements
+## 改善点 {#improvements}
 
-+ TiDB
+-   ティビ
 
-    - Prioritize low-selectivity indexes in the greedy search procedure of `Selectivity()` [#20154](https://github.com/pingcap/tidb/pull/20154)
-    - Record more RPC runtime information in Coprocessor runtime statistics [#19264](https://github.com/pingcap/tidb/pull/19264)
-    - Speed up parsing the slow log to improve query performance [#20556](https://github.com/pingcap/tidb/pull/20556)
-    - Wait for timeout execution plans during the plan binding stage to record more debug information when the SQL optimizer is verifying potential new plans [#20530](https://github.com/pingcap/tidb/pull/20530)
-    - Add the execution retry time in the slow log and the slow query result [#20495](https://github.com/pingcap/tidb/pull/20495) [#20494](https://github.com/pingcap/tidb/pull/20494)
-    - Add the `table_storage_stats` system table [#20431](https://github.com/pingcap/tidb/pull/20431)
-    - Add the RPC runtime statistical information for the `INSERT`/`UPDATE`/`REPLACE` statement [#20430](https://github.com/pingcap/tidb/pull/20430)
-    - Add the operator information in the result of `EXPLAIN FOR CONNECTION` [#20384](https://github.com/pingcap/tidb/pull/20384)
-    - Adjust the TiDB error log to the `DEBUG` level for the client connection/disconnection activities [#20321](https://github.com/pingcap/tidb/pull/20321)
-    - Add monitoring metrics for Coprocessor Cache [#20293](https://github.com/pingcap/tidb/pull/20293)
-    - Add the runtime information of pessimistic lock keys [#20199](https://github.com/pingcap/tidb/pull/20199)
-    - Add two extra sections of time consumption information in the runtime information and `trace` span [#20187](https://github.com/pingcap/tidb/pull/20187)
-    - Add the runtime information of transaction commit in the slow log [#20185](https://github.com/pingcap/tidb/pull/20185)
-    - Disable the index merge join [#20599](https://github.com/pingcap/tidb/pull/20599)
-    - Add the ISO 8601 and timezone supports for temporal string literals [#20670](https://github.com/pingcap/tidb/pull/20670)
+    -   `Selectivity()` [＃20154](https://github.com/pingcap/tidb/pull/20154)の貪欲検索手順で選択性の低いインデックスを優先する
+    -   コプロセッサー実行時統計[＃19264](https://github.com/pingcap/tidb/pull/19264)に、より多くの RPC 実行時情報を記録します。
+    -   スローログの解析を高速化してクエリパフォーマンスを向上[＃20556](https://github.com/pingcap/tidb/pull/20556)
+    -   SQL オプティマイザが潜在的な新しいプランを検証しているときに、より多くのデバッグ情報を記録するために、プラン バインディング ステージ中にタイムアウト実行プランを待機します[＃20530](https://github.com/pingcap/tidb/pull/20530)
+    -   スローログに実行再試行時間を追加し、スロークエリの結果[＃20495](https://github.com/pingcap/tidb/pull/20495) [＃20494](https://github.com/pingcap/tidb/pull/20494)
+    -   `table_storage_stats`システムテーブル[＃20431](https://github.com/pingcap/tidb/pull/20431)を追加
+    -   `INSERT` `REPLACE` [＃20430](https://github.com/pingcap/tidb/pull/20430)のRPC実行時統計情報を追加します`UPDATE`
+    -   `EXPLAIN FOR CONNECTION` [＃20384](https://github.com/pingcap/tidb/pull/20384)の結果にオペレータ情報を追加する
+    -   クライアント接続/切断アクティビティのTiDBエラーログを`DEBUG`レベルに調整します[＃20321](https://github.com/pingcap/tidb/pull/20321)
+    -   コプロセッサーキャッシュ[＃20293](https://github.com/pingcap/tidb/pull/20293)の監視メトリックを追加
+    -   悲観的ロックキー[#20199](https://github.com/pingcap/tidb/pull/20199)のランタイム情報を追加
+    -   実行時間情報に時間消費情報のセクションを2つ追加し、 `trace`スパン[＃20187](https://github.com/pingcap/tidb/pull/20187)
+    -   スローログ[＃20185](https://github.com/pingcap/tidb/pull/20185)にトランザクションコミットの実行時情報を追加する
+    -   インデックスマージ結合を無効にする[＃20599](https://github.com/pingcap/tidb/pull/20599)
+    -   時間文字列リテラルに ISO 8601 とタイムゾーンのサポートを追加[＃20670](https://github.com/pingcap/tidb/pull/20670)
 
-+ TiKV
+-   ティクヴ
 
-    - Add the **Fast-Tune** panel page to assist performance diagnostics [#8804](https://github.com/tikv/tikv/pull/8804)
-    - Add the `security.redact-info-log` configuration item, which redacts user data from logs [#8746](https://github.com/tikv/tikv/pull/8746)
-    - Reformat the metafile of error codes [#8877](https://github.com/tikv/tikv/pull/8877)
-    - Enable dynamically changing the `pessimistic-txn.pipelined` configuration [#8853](https://github.com/tikv/tikv/pull/8853)
-    - Enable the memory profiling features by default [#8801](https://github.com/tikv/tikv/pull/8801)
+    -   パフォーマンス診断を支援するための**Fast-Tune**パネルページを追加[＃8804](https://github.com/tikv/tikv/pull/8804)
+    -   ログからユーザーデータを削除する`security.redact-info-log`構成項目を追加します[＃8746](https://github.com/tikv/tikv/pull/8746)
+    -   エラーコード[＃8877](https://github.com/tikv/tikv/pull/8877)のメタファイルを再フォーマットする
+    -   `pessimistic-txn.pipelined`構成[＃8853](https://github.com/tikv/tikv/pull/8853)を動的に変更できるようにする
+    -   メモリプロファイリング機能をデフォルトで有効にする[＃8801](https://github.com/tikv/tikv/pull/8801)
 
-+ PD
+-   PD
 
-    - Generate the metafile of errors [#3090](https://github.com/pingcap/pd/pull/3090)
-    - Add the additional information for the operator [#3009](https://github.com/pingcap/pd/pull/3009)
+    -   エラーのメタファイルを生成する[＃3090](https://github.com/pingcap/pd/pull/3090)
+    -   オペレータ[＃3009](https://github.com/pingcap/pd/pull/3009)の追加情報を追加します
 
-+ TiFlash
+-   TiFlash
 
-    - Add monitoring metrics of Raft logs
-    - Add monitoring metrics of memory usage for `cop` tasks
-    - Make the `min`/`max` index more accurate when data is deleted
-    - Improve query performance in the case of a small data volume
-    - Add the `errors.toml` file to support the standard error code
+    -   Raftログの監視メトリックを追加する
+    -   `cop`タスクのメモリ使用量の監視メトリックを追加します
+    -   データが削除されたときに`min`インデックス`max`より正確にする
+    -   データ量が少ない場合のクエリパフォーマンスの向上
+    -   標準エラーコードをサポートするために`errors.toml`ファイルを追加します
 
-+ Tools
+-   ツール
 
-    + Backup and Restore (BR)
+    -   バックアップと復元 (BR)
 
-        - Speed up the restore process by pipelining `split` and `ingest` [#427](https://github.com/pingcap/br/pull/427)
-        - Support manually restoring PD schedulers [#530](https://github.com/pingcap/br/pull/530)
-        - Use `pause` schedulers instead of `remove` schedulers [#551](https://github.com/pingcap/br/pull/551)
+        -   `split`と`ingest`をパイプライン化して復元プロセスを高速化します[＃427](https://github.com/pingcap/br/pull/427)
+        -   PDスケジューラの手動復元をサポート[＃530](https://github.com/pingcap/br/pull/530)
+        -   `remove`スケジューラの代わりに`pause`スケジューラを使用する[＃551](https://github.com/pingcap/br/pull/551)
 
-    + TiCDC
+    -   ティCDC
 
-        - Print statistics in MySQL sink periodically [#1023](https://github.com/pingcap/tiflow/pull/1023)
+        -   MySQLシンクの統計情報を定期的に印刷する[＃1023](https://github.com/pingcap/tiflow/pull/1023)
 
-    + Dumpling
+    -   Dumpling
 
-        - Support dumpling data directly to S3 storages [#155](https://github.com/pingcap/dumpling/pull/155)
-        - Support dumping views [#158](https://github.com/pingcap/dumpling/pull/158)
-        - Support dumping the table that only contains generated columns [#166](https://github.com/pingcap/dumpling/pull/166)
+        -   S3ストレージへのダンプリングデータの直接サポート[＃155](https://github.com/pingcap/dumpling/pull/155)
+        -   ダンプビューのサポート[＃158](https://github.com/pingcap/dumpling/pull/158)
+        -   生成された列のみを含むテーブルのダンプをサポート[＃166](https://github.com/pingcap/dumpling/pull/166)
 
-    + TiDB Lightning
+    -   TiDB Lightning
 
-        - Support multi-byte CSV delimiters and separators [#406](https://github.com/pingcap/tidb-lightning/pull/406)
-        - Speed up the restore process by disabling some PD schedulers [#408](https://github.com/pingcap/tidb-lightning/pull/408)
-        - Use the GC-TTL API for checksum GC safepoint in the v4.0 cluster to avoid the GC error [#396](https://github.com/pingcap/tidb-lightning/pull/396)
+        -   マルチバイトCSV区切り文字とセパレータをサポート[＃406](https://github.com/pingcap/tidb-lightning/pull/406)
+        -   一部のPDスケジューラを無効にして復元プロセスを高速化する[＃408](https://github.com/pingcap/tidb-lightning/pull/408)
+        -   v4.0 クラスタのチェックサム GC セーフポイントに GC-TTL API を使用して、GC エラー[＃396](https://github.com/pingcap/tidb-lightning/pull/396)を回避します。
 
-## Bug Fixes
+## バグの修正 {#bug-fixes}
 
-+ TiDB
+-   ティビ
 
-    - Fix the unexpected panic that occurs when using partitioned tables [#20565](https://github.com/pingcap/tidb/pull/20565)
-    - Fix the wrong result of outer join when filtering the outer side using index merge join [#20427](https://github.com/pingcap/tidb/pull/20427)
-    - Fix the issue that the `NULL` value is returned when converting data to the `BIT` type if the data is too long [#20363](https://github.com/pingcap/tidb/pull/20363)
-    - Fix the corrupted default value for the `BIT` type column [#20340](https://github.com/pingcap/tidb/pull/20340)
-    - Fix the overflow error that might occur when converting the `BIT` type to the `INT64` type [#20312](https://github.com/pingcap/tidb/pull/20312)
-    - Fix the possible wrong result of the propagate column optimization for the hybrid type column [#20297](https://github.com/pingcap/tidb/pull/20297)
-    - Fix the panic that might occur when storing outdated plans from the plan cache [#20246](https://github.com/pingcap/tidb/pull/20246)
-    - Fix the bug that the returned result is mistakenly truncated if `FROM_UNIXTIME` and `UNION ALL` are used together [#20240](https://github.com/pingcap/tidb/pull/20240)
-    - Fix the issue that wrong results might be returned when the `Enum` type value is converted to the `Float` type [#20235](https://github.com/pingcap/tidb/pull/20235)
-    - Fix the possible panic of `RegionStore.accessStore` [#20210](https://github.com/pingcap/tidb/pull/20210)
-    - Fix the wrong result returned when sorting the maximum unsigned integer in `BatchPointGet` [#20205](https://github.com/pingcap/tidb/pull/20205)
-    - Fix the bug that the coercibilities of `Enum` and `Set` are wrong [#20364](https://github.com/pingcap/tidb/pull/20364)
-    - Fix an issue of ambiguous `YEAR` conversion [#20292](https://github.com/pingcap/tidb/pull/20292)
-    - Fix the issue of wrong reported result that occurs when the **KV duration** panel contains `store0` [#20260](https://github.com/pingcap/tidb/pull/20260)
-    - Fix the issue that the `Float` type data is mistakenly inserted regardless of the `out of range` error [#20252](https://github.com/pingcap/tidb/pull/20252)
-    - Fix the bug that the generated column does not handle bad `NULL` values [#20216](https://github.com/pingcap/tidb/pull/20216)
-    - Fix the inaccurate error information for the `YEAR` type data that is out of range [#20170](https://github.com/pingcap/tidb/pull/20170)
-    - Fix the unexpected `invalid auto-id` error that might occur during the pessimistic transaction retry [#20134](https://github.com/pingcap/tidb/pull/20134)
-    - Fix the issue that the constraint is not checked when using `ALTER TABLE` to change the `Enum`/`Set` type [#20046](https://github.com/pingcap/tidb/pull/20046)
-    - Fix the wrong runtime information of `cop` tasks recorded when multiple operators are used for concurrency [#19947](https://github.com/pingcap/tidb/pull/19947)
-    - Fix the issue that read-only system variables cannot be explicitly selected as the session variables [#19944](https://github.com/pingcap/tidb/pull/19944)
-    - Fix the issue that the duplicate `ORDER BY` condition might cause sub-optimal execution plans [#20333](https://github.com/pingcap/tidb/pull/20333)
-    - Fix the issue that the generated metric profile might fail if the font size exceeds the maximum allowable value [#20637](https://github.com/pingcap/tidb/pull/20637)
+    -   パーティションテーブルの使用時に発生する予期しないpanicを修正[＃20565](https://github.com/pingcap/tidb/pull/20565)
+    -   インデックスマージ結合[＃20427](https://github.com/pingcap/tidb/pull/20427)を使用して外側をフィルタリングする際の外側結合の誤った結果を修正
+    -   データが長すぎる場合にデータを`BIT`型に変換すると`NULL`値が返される問題を修正しました[＃20363](https://github.com/pingcap/tidb/pull/20363)
+    -   `BIT`型列[＃20340](https://github.com/pingcap/tidb/pull/20340)の破損したデフォルト値を修正
+    -   `BIT`型を`INT64`型に変換するときに発生する可能性のあるオーバーフローエラーを修正[＃20312](https://github.com/pingcap/tidb/pull/20312)
+    -   ハイブリッド型列[＃20297](https://github.com/pingcap/tidb/pull/20297)の列伝播最適化で誤った結果が発生する可能性があった問題を修正しました。
+    -   プランキャッシュ[＃20246](https://github.com/pingcap/tidb/pull/20246)から古いプランを保存するときに発生する可能性のあるpanicを修正
+    -   `FROM_UNIXTIME`と`UNION ALL`一緒に使用すると返される結果が誤って切り捨てられるバグを修正[＃20240](https://github.com/pingcap/tidb/pull/20240)
+    -   `Enum`型の値を`Float`型に変換すると間違った結果が返される可能性がある問題を修正しました[＃20235](https://github.com/pingcap/tidb/pull/20235)
+    -   `RegionStore.accessStore` [#20210](https://github.com/pingcap/tidb/pull/20210)の可能性のあるpanicを修正
+    -   `BatchPointGet` [#20205](https://github.com/pingcap/tidb/pull/20205)で最大の符号なし整数をソートしたときに返される誤った結果を修正しました
+    -   `Enum`と`Set`の強制力が間違っているバグを修正[＃20364](https://github.com/pingcap/tidb/pull/20364)
+    -   あいまいな`YEAR`変換[＃20292](https://github.com/pingcap/tidb/pull/20292)の問題を修正
+    -   **KV期間**パネルに`store0` [＃20260](https://github.com/pingcap/tidb/pull/20260)含まれている場合に発生する誤った報告結果の問題を修正しました。
+    -   `out of range`エラー[＃20252](https://github.com/pingcap/tidb/pull/20252)に関係なく`Float`タイプのデータが誤って挿入される問題を修正
+    -   生成された列が不正な値`NULL`を処理しないバグを修正[#20216](https://github.com/pingcap/tidb/pull/20216)
+    -   範囲外の`YEAR`型データに対する不正確なエラー情報を修正[#20170](https://github.com/pingcap/tidb/pull/20170)
+    -   悲観的トランザクション再試行中に発生する可能性のある予期しないエラー`invalid auto-id`を修正[＃20134](https://github.com/pingcap/tidb/pull/20134)
+    -   `ALTER TABLE`使用して`Enum`タイプ[＃20046](https://github.com/pingcap/tidb/pull/20046)を変更するときに制約がチェックされない問題`Set`修正
+    -   複数の演算子を並行処理に使用した場合に記録される`cop`タスクの誤った実行時間情報を修正[＃19947](https://github.com/pingcap/tidb/pull/19947)
+    -   読み取り専用システム変数をセッション変数として明示的に選択できない問題を修正[＃19944](https://github.com/pingcap/tidb/pull/19944)
+    -   重複した`ORDER BY`条件により、最適でない実行プラン[＃20333](https://github.com/pingcap/tidb/pull/20333)が発生する可能性がある問題を修正
+    -   フォントサイズが最大許容値を超えると、生成されたメトリックプロファイルが失敗する可能性がある問題を修正[＃20637](https://github.com/pingcap/tidb/pull/20637)
 
-+ TiKV
+-   ティクヴ
 
-    - Fix the bug that the mutex conflict in encryption causes pd-worker to process heartbeats slowly [#8869](https://github.com/tikv/tikv/pull/8869)
-    - Fix the issue that the memory profile is mistakenly generated [#8790](https://github.com/tikv/tikv/pull/8790)
-    - Fix the failure to back up databases on GCS when the storage class is specified [#8763](https://github.com/tikv/tikv/pull/8763)
-    - Fix the bug that a learner cannot find a leader when the Region is restarted or newly split [#8864](https://github.com/tikv/tikv/pull/8864)
+    -   暗号化におけるミューテックスの競合により pd-worker がハートビートの処理を遅くするバグを修正[＃8869](https://github.com/tikv/tikv/pull/8869)
+    -   メモリプロファイルが誤って生成される問題を修正[＃8790](https://github.com/tikv/tikv/pull/8790)
+    -   storageクラス[＃8763](https://github.com/tikv/tikv/pull/8763)が指定されている場合に GCS 上のデータベースをバックアップできない問題を修正
+    -   リージョンが再起動されたり、新しく分割されたりしたときに学習者がリーダーを見つけられないバグを修正[＃8864](https://github.com/tikv/tikv/pull/8864)
 
-+ PD
+-   PD
 
-    - Fix a bug that Key Visualizer of TiDB Dashboard might cause PD panic in some cases [#3096](https://github.com/pingcap/pd/pull/3096)
-    - Fix the bug that PD might panic if a PD store is down for more than 10 minutes [#3069](https://github.com/pingcap/pd/pull/3069)
+    -   TiDBダッシュボードのキービジュアライザーがPDpanicを引き起こす可能性があるバグを修正[＃3096](https://github.com/pingcap/pd/pull/3096)
+    -   PD ストアが 10 分以上ダウンすると PD がpanicになる可能性があるバグを修正[＃3069](https://github.com/pingcap/pd/pull/3069)
 
-+ TiFlash
+-   TiFlash
 
-    - Fix the issue of wrong timestamp in the log message
-    - Fix the issue that during the multi-disk TiFlash deployment, the wrong capacity causes the creation of TiFlash replicas to fail
-    - Fix the bug that TiFlash might throw errors about broken data files after restart
-    - Fix the issue that broken files might be left on disk after TiFlash crashes
-    - Fix the bug that it might take a long time to wait for index during learner reads if the proxy cannot catch up with the latest Raft lease information
-    - Fix the bug that the proxy writes too much Region state information to the key-value engine while replaying the outdated Raft log
+    -   ログメッセージのタイムスタンプが間違っている問題を修正
+    -   マルチディスクTiFlash展開中に、容量が間違っているとTiFlashレプリカの作成が失敗する問題を修正しました。
+    -   再起動後にTiFlash が壊れたデータファイルに関するエラーをスローする可能性があるバグを修正しました。
+    -   TiFlashがクラッシュした後に壊れたファイルがディスク上に残る可能性がある問題を修正
+    -   プロキシが最新のRaftリース情報に追いつけない場合、学習者の読み取り中にインデックスを待つのに長い時間がかかる可能性があるバグを修正しました。
+    -   古いRaftログを再生中にプロキシがキー値エンジンに過剰なリージョン状態情報を書き込むバグを修正しました。
 
-+ Tools
+-   ツール
 
-    + Backup and Restore (BR)
+    -   バックアップと復元 (BR)
 
-        - Fix the `send on closed channel` panic during restore [#559](https://github.com/pingcap/br/pull/559)
+        -   復元中のpanic`send on closed channel`を修正[＃559](https://github.com/pingcap/br/pull/559)
 
-    + TiCDC
+    -   ティCDC
 
-        - Fix the unexpected exit caused by the failure to update the GC safepoint [#979](https://github.com/pingcap/tiflow/pull/979)
-        - Fix the issue that the task status is unexpectedly flushed because of the incorrect mod revision cache [#1017](https://github.com/pingcap/tiflow/pull/1017)
-        - Fix the unexpected empty Maxwell messages [#978](https://github.com/pingcap/tiflow/pull/978)
+        -   GCセーフポイント[＃979](https://github.com/pingcap/tiflow/pull/979)更新失敗による予期しない終了を修正
+        -   不正なmodリビジョンキャッシュ[＃1017](https://github.com/pingcap/tiflow/pull/1017)が原因でタスクステータスが予期せずフラッシュされる問題を修正
+        -   予期しない空の Maxwell メッセージ[＃978](https://github.com/pingcap/tiflow/pull/978)修正
 
-    + TiDB Lightning
+    -   TiDB Lightning
 
-        - Fix the issue of wrong column information [#420](https://github.com/pingcap/tidb-lightning/pull/420)
-        - Fix the infinity loop that occurs when retrying to get Region information in the local mode [#418](https://github.com/pingcap/tidb-lightning/pull/418)
+        -   列情報の誤りの問題を修正[＃420](https://github.com/pingcap/tidb-lightning/pull/420)
+        -   ローカルモード[＃418](https://github.com/pingcap/tidb-lightning/pull/418)でリージョン情報の取得を再試行するときに発生する無限ループを修正

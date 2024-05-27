@@ -1,37 +1,37 @@
 ---
 title: ticloud config use
-summary: The reference of `ticloud config use`.
+summary: `ticloud config use` のリファレンス。
 ---
 
-# ticloud config use
+# ticloud 設定の使用 {#ticloud-config-use}
 
-Set a specified profile as the active [user profile](/tidb-cloud/cli-reference.md#user-profile):
+指定したプロファイルをアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)として設定します。
 
 ```shell
 ticloud config use <profile-name> [flags]
 ```
 
-## Examples
+## 例 {#examples}
 
-Set the `test` profile as the active user profile:
+`test`プロファイルをアクティブ ユーザー プロファイルとして設定します。
 
 ```shell
 ticloud config use test
 ```
 
-## Flags
+## 旗 {#flags}
 
-| Flag       | Description              |
-|------------|--------------------------|
-| -h, --help | Help information for this command |
+| フラグ        | 説明           |
+| ---------- | ------------ |
+| -h, --help | このコマンドのヘルプ情報 |
 
-## Inherited flags
+## 継承されたフラグ {#inherited-flags}
 
-| Flag                 | Description                                   | Required | Note                                                                                                                    |
-|----------------------|-----------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                      | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                                      |
+| フラグ               | 説明                                                                             | 必須  | 注記                                                             |
+| ----------------- | ------------------------------------------------------------------------------ | --- | -------------------------------------------------------------- |
+| --色なし             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話型モードでのみ機能します。対話型モードでは、一部の UI コンポーネントで色を無効にしても機能しない可能性があります。 |
+| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                       |
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI に関してご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)作成してください。また、あらゆる貢献を歓迎します。

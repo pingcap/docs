@@ -1,30 +1,30 @@
 ---
 title: Continuous Data Validation in DM
-summary: Learn how to use continuous data validation and the working principles of continuous data validation.
+summary: 継続的なデータ検証の使用方法と継続的なデータ検証の動作原理を学習します。
 ---
 
-# Continuous Data Validation in DM
+# DM における継続的なデータ検証 {#continuous-data-validation-in-dm}
 
-This document describes how to use continuous data validation in DM, its working principles, and its limitations.
+このドキュメントでは、DM での継続的なデータ検証の使用方法、その動作原理、およびその制限について説明します。
 
-## User scenario
+## ユーザーシナリオ {#user-scenario}
 
-In the process of incrementally migrating data from the upstream database to the downstream database, there is a small probability that the flow of data leads to data corruption or data loss. For scenarios where data consistency is required, such as the credit and securities industries, after the migration is complete, you can perform full data validation to ensure data consistency.
+上流データベースから下流データベースにデータを段階的に移行するプロセスでは、データの流れによってデータの破損やデータの損失が発生する可能性がわずかにあります。クレジット業界や証券業界など、データの一貫性が求められるシナリオでは、移行が完了した後、完全なデータ検証を実行してデータの一貫性を確保できます。
 
-However, in incremental migration scenarios, the upstream and downstream are continuously writing data. Because data is constantly changing in the upstream and downstream, it is difficult to perform full data validation (for example, use [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)) to all data in the tables.
+ただし、増分移行シナリオでは、アップストリームとダウンストリームが継続的にデータを書き込みます。アップストリームとダウンストリームでデータが絶えず変更されるため、テーブル内のすべてのデータに対して完全なデータ検証 (たとえば、 [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)使用) を実行することは困難です。
 
-In incremental migration scenarios, you can use the continuous data validation feature in DM. This feature ensures data integrity and consistency during incremental migration where data is continuously written into the downstream.
+増分移行シナリオでは、DM の継続的なデータ検証機能を使用できます。この機能により、データがダウンストリームに継続的に書き込まれる増分移行中にデータの整合性と一貫性が確保されます。
 
-## Enable continuous data validation
+## 継続的なデータ検証を有効にする {#enable-continuous-data-validation}
 
-You can enable continuous data validation using either of the following methods:
+次のいずれかの方法を使用して、継続的なデータ検証を有効にすることができます。
 
-- Enable in the task configuration file.
-- Enable using dmctl.
+-   タスク構成ファイルで有効にします。
+-   dmctl を使用して有効にします。
 
-### Method 1: Enable in the task configuration file
+### 方法1: タスク構成ファイルで有効にする {#method-1-enable-in-the-task-configuration-file}
 
-To enable continuous data validation, add the following configuration items to the task configuration file:
+継続的なデータ検証を有効にするには、タスク構成ファイルに次の構成項目を追加します。
 
 ```yaml
 # Add the following configuration items to the upstream database that needs to be validated:
@@ -39,51 +39,49 @@ validators:
     row-error-delay: 30m # If a row cannot pass the validation within the specified time, it will be marked as an error row. The default value is 30m, which means 30 minutes.
 ```
 
-The configuration items are described as follows:
+構成項目は次のように説明されます。
 
-* `mode`: validation mode. The possible values are `none`, `full`, and `fast`.
-    * `none`: the default value, which means no validation is performed.
-    * `full`: compares the changed row and the row obtained in the downstream database.
-    * `fast`: only checks if the changed row exists in the downstream database.
-* `worker-count`: the number of validation workers in the background. Each worker is a goroutine.
-* `row-error-delay`: if a row cannot pass the validation within the specified time, it will be marked as an error row. The default value is 30 minutes.
+-   `mode` : 検証モード。可能な値は`none` 、 `full` 、および`fast`です。
+    -   `none` : デフォルト値。検証は実行されないことを意味します。
+    -   `full` : 変更された行と下流のデータベースで取得された行を比較します。
+    -   `fast` : 変更された行がダウンストリーム データベースに存在するかどうかのみをチェックします。
+-   `worker-count` : バックグラウンドの検証ワーカーの数。各ワーカーは goroutine です。
+-   `row-error-delay` : 指定された時間内に行が検証に合格できない場合、エラー行としてマークされます。デフォルト値は 30 分です。
 
-For the complete configuration, refer to [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md).
+完全な構成については、 [DM 高度なタスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
 
-### Method 2: Enable using dmctl
+### 方法2: dmctlを使用して有効にする {#method-2-enable-using-dmctl}
 
-To enable continuous data validation, run the `dmctl validation start` command:
+継続的なデータ検証を有効にするには、 `dmctl validation start`コマンドを実行します。
 
-```
-Usage:
-  dmctl validation start [--all-task] [task-name] [flags]
+    Usage:
+      dmctl validation start [--all-task] [task-name] [flags]
 
-Flags:
-      --all-task            whether applied to all tasks
-  -h, --help                help for start
-      --mode string         specify the mode of validation: full (default), fast; this flag will be ignored if the validation task has been ever enabled but currently paused (default "full")
-      --start-time string   specify the start time of binlog for validation, e.g. '2021-10-21 00:01:00' or 2021-10-21T00:01:00
-```
+    Flags:
+          --all-task            whether applied to all tasks
+      -h, --help                help for start
+          --mode string         specify the mode of validation: full (default), fast; this flag will be ignored if the validation task has been ever enabled but currently paused (default "full")
+          --start-time string   specify the start time of binlog for validation, e.g. '2021-10-21 00:01:00' or 2021-10-21T00:01:00
 
-* `--mode`: specify the validation mode. The possible values are `fast` and `full`.
-* `--start-time`: specify the start time for validation. The format follows `2021-10-21 00:01:00` or `2021-10-21T00:01:00`.
-* `task`: specify the name of the task to enable continuous validation for. You can use `--all-task` to enable validation for all tasks.
+-   `--mode` : 検証モードを指定します。指定できる値は`fast`と`full`です。
+-   `--start-time` : 検証の開始時刻を指定します。形式は`2021-10-21 00:01:00`または`2021-10-21T00:01:00`に従います。
+-   `task` : 継続的な検証を有効にするタスクの名前を指定します。2 `--all-task`使用すると、すべてのタスクの検証を有効にすることができます。
 
-For example:
+例えば：
 
 ```shell
 dmctl --master-addr=127.0.0.1:8261 validation start --start-time 2021-10-21T00:01:00 --mode full my_dm_task
 ```
 
-## Use continuous data validation
+## 継続的なデータ検証を使用する {#use-continuous-data-validation}
 
-When you use continuous data validation, you can use dmctl to view the status of the validation and to handle the error rows. "Error rows" refers to the rows that are found to be inconsistent between the upstream and downstream databases.
+継続的なデータ検証を使用する場合、dmctl を使用して検証のステータスを表示し、エラー行を処理できます。「エラー行」とは、上流データベースと下流データベース間で不一致が検出された行を指します。
 
-### View the validation status
+### 検証ステータスをビュー {#view-the-validation-status}
 
-You can view the validation status using either of the following methods:
+検証ステータスは、次のいずれかの方法で表示できます。
 
-Method 1: run the `dmctl query-status <task-name>` command. If continuous data validation is enabled, the validation result is displayed in the `validation` field of each subtask. Example output:
+方法 1: `dmctl query-status <task-name>`コマンドを実行します。継続的なデータ検証が有効になっている場合は、検証結果が各サブタスクの`validation`フィールドに表示されます。出力例:
 
 ```json
 "subTaskStatus": [
@@ -114,16 +112,14 @@ Method 1: run the `dmctl query-status <task-name>` command. If continuous data v
 ]
 ```
 
-Method 2: run the `dmctl validation status <taskname>` command.
+方法 2: コマンド`dmctl validation status <taskname>`を実行します。
 
-```
-dmctl validation status [--table-stage stage] <task-name> [flags]
-Flags:
-  -h, --help                 help for status
-      --table-stage string   filter validation tables by stage: running/stopped
-```
+    dmctl validation status [--table-stage stage] <task-name> [flags]
+    Flags:
+      -h, --help                 help for status
+          --table-stage string   filter validation tables by stage: running/stopped
 
-In the preceding command, you can use `--table-stage` to filter the tables that are being validated or stop validation. Example output:
+上記のコマンドでは、 `--table-stage`使用して検証対象のテーブルをフィルター処理したり、検証を停止したりできます。出力例:
 
 ```json
 {
@@ -157,18 +153,16 @@ In the preceding command, you can use `--table-stage` to filter the tables that 
 }
 ```
 
-If you want to view the details of the error rows, such as error types and error time, run the `dmctl validation show-error` command:
+エラーの種類やエラー時間などのエラー行の詳細を表示するには、 `dmctl validation show-error`コマンドを実行します。
 
-```
-Usage:
-  dmctl validation show-error [--error error-state] <task-name> [flags]
+    Usage:
+      dmctl validation show-error [--error error-state] <task-name> [flags]
 
-Flags:
-      --error string   filtering type of error: all, ignored, or unprocessed (default "unprocessed")
-  -h, --help           help for show-error
-```
+    Flags:
+          --error string   filtering type of error: all, ignored, or unprocessed (default "unprocessed")
+      -h, --help           help for show-error
 
-Example output:
+出力例:
 
 ```json
 {
@@ -191,115 +185,105 @@ Example output:
 }
 ```
 
-### Handle error rows
+### エラー行の処理 {#handle-error-rows}
 
-After continuous data validation returns error rows, you need to manually handle the error rows.
+継続的なデータ検証でエラー行が返されたら、エラー行を手動で処理する必要があります。
 
-When continuous data validation finds error rows, the validation does not stop immediately. Instead, it records the error rows for you to handle. Before the error rows are processed, the default status is `unprocessed`. If you manually correct the error rows in the downstream, the validation does not automatically retrieve the latest status of the corrected data. The error rows are still recorded in the `error` field.
+継続的なデータ検証でエラー行が見つかった場合、検証はすぐには停止しません。代わりに、処理できるようにエラー行を記録します。エラー行が処理される前のデフォルトのステータスは`unprocessed`です。下流でエラー行を手動で修正した場合、検証では修正されたデータの最新のステータスが自動的に取得されません。エラー行は`error`フィールドに記録されたままです。
 
-If you do not want to see an error row in the validation status, or if you want to mark an error row as resolved, you can locate the error row id using the `validation show-error` command and subsequently handle it with the given error id:
+検証ステータスにエラー行を表示したくない場合、またはエラー行を解決済みとしてマークしたい場合は、 `validation show-error`コマンドを使用してエラー行 ID を見つけ、その後、指定されたエラー ID を使用して処理することができます。
 
-dmctl provides three error handling commands:
+dmctl は 3 つのエラー処理コマンドを提供します。
 
-- `clear-error`: clear the error row. The `show-error` command does not show the error row anymore.
+-   `clear-error` : エラー行をクリアします。2 コマンドで`show-error`エラー行が表示されなくなります。
 
-    ```
+        Usage:
+          dmctl validation clear-error <task-name> <error-id|--all> [flags]
+
+        Flags:
+              --all    all errors
+          -h, --help   help for clear-error
+
+-   `ignore-error` : エラー行を無視します。このエラー行は「無視」としてマークされます。
+
+        Usage:
+          dmctl validation ignore-error <task-name> <error-id|--all> [flags]
+
+        Flags:
+              --all    all errors
+          -h, --help   help for ignore-error
+
+-   `resolve-error` : エラー行は手動で処理され、「解決済み」としてマークされます。
+
+        Usage:
+          dmctl validation resolve-error <task-name> <error-id|--all> [flags]
+
+        Flags:
+              --all    all errors
+          -h, --help   help for resolve-error
+
+## 継続的なデータ検証を停止する {#stop-continuous-data-validation}
+
+継続的なデータ検証を停止するには、コマンド`validation stop`を実行します。
+
     Usage:
-      dmctl validation clear-error <task-name> <error-id|--all> [flags]
+      dmctl validation stop [--all-task] [task-name] [flags]
 
     Flags:
-          --all    all errors
-      -h, --help   help for clear-error
-    ```
+          --all-task   whether applied to all tasks
+      -h, --help       help for stop
 
-- `ignore-error`: ignore the error row. This error row is marked as "ignored".
+詳しい使い方については[`dmctl validation start`](#method-2-enable-using-dmctl)を参照してください。
 
-    ```
+## 継続的なデータ検証のカットオーバーポイントを設定する {#set-the-cutover-point-for-continuous-data-validation}
+
+アプリケーションを別のデータベースに切り替える前に、データの整合性を確保するために、データが特定の位置にレプリケートされた直後に継続的なデータ検証を実行する必要がある場合があります。これを実現するには、この特定の位置を継続的検証のカットオーバー ポイントとして設定できます。
+
+継続的なデータ検証のカットオーバー ポイントを設定するには、 `validation update`コマンドを使用します。
+
     Usage:
-      dmctl validation ignore-error <task-name> <error-id|--all> [flags]
+      dmctl validation update <task-name> [flags]
 
     Flags:
-          --all    all errors
-      -h, --help   help for ignore-error
-    ```
+          --cutover-binlog-gtid string   specify the cutover binlog gtid for validation, only valid when source config's gtid is enabled, e.g. '1642618e-cf65-11ec-9e3d-0242ac110002:1-30'
+          --cutover-binlog-pos string    specify the cutover binlog name for validation, should include binlog name and pos in brackets, e.g. '(mysql-bin.000001, 5989)'
+      -h, --help                         help for update
 
-- `resolve-error`: the error row is manually handled and marked as "resolved".
+-   `--cutover-binlog-gtid` : 検証のカットオーバー位置を`1642618e-cf65-11ec-9e3d-0242ac110002:1-30`の形式で指定します。アップストリーム クラスターで GTID が有効になっている場合にのみ有効です。
+-   `--cutover-binlog-pos` : 検証のカットオーバー位置を`(mysql-bin.000001, 5989)`の形式で指定します。
+-   `task-name` : 継続的なデータ検証のタスクの名前。このパラメータは**必須**です。
 
-    ```
-    Usage:
-      dmctl validation resolve-error <task-name> <error-id|--all> [flags]
+## 実装 {#implementation}
 
-    Flags:
-          --all    all errors
-      -h, --help   help for resolve-error
-    ```
-
-## Stop continuous data validation
-
-To stop the continuous data validation, run the `validation stop` command:
-
-```
-Usage:
-  dmctl validation stop [--all-task] [task-name] [flags]
-
-Flags:
-      --all-task   whether applied to all tasks
-  -h, --help       help for stop
-```
-
-For detailed usage, refer to [`dmctl validation start`](#method-2-enable-using-dmctl).
-
-## Set the cutover point for continuous data validation
-
-Before switching the application to another database, you might need to perform continuous data validation immediately after the data is replicated to a specific position to ensure data integrity. To achieve this, you can set this specific position as the cutover point for continuous validation.
-
-To set the cutover point for continuous data validation, use the `validation update` command:
-
-```
-Usage:
-  dmctl validation update <task-name> [flags]
-
-Flags:
-      --cutover-binlog-gtid string   specify the cutover binlog gtid for validation, only valid when source config's gtid is enabled, e.g. '1642618e-cf65-11ec-9e3d-0242ac110002:1-30'
-      --cutover-binlog-pos string    specify the cutover binlog name for validation, should include binlog name and pos in brackets, e.g. '(mysql-bin.000001, 5989)'
-  -h, --help                         help for update
-```
-
-* `--cutover-binlog-gtid`: specifies the cutover position for validation, in the format of `1642618e-cf65-11ec-9e3d-0242ac110002:1-30`. Only valid when GTID is enabled in the upstream cluster.
-* `--cutover-binlog-pos`: specifies the cutover position for validation, in the format of `(mysql-bin.000001, 5989)`.
-* `task-name`: the name of the task for continuous data validation. This parameter is **required**.
-
-## Implementation
-
-The architecture of continuous data validation (validator) in DM is as follows:
+DM における継続的なデータ検証 (バリデータ) のアーキテクチャは次のとおりです。
 
 ![validator summary](/media/dm/dm-validator-summary.jpeg)
 
-The lifecycle of continuous data validation is as follows:
+継続的なデータ検証のライフサイクルは次のとおりです。
 
 ![validator lifecycle](/media/dm/dm-validator-lifecycle.jpeg)
 
-The detailed implementation of continuous data validation is as follows:
+継続的なデータ検証の詳細な実装は次のとおりです。
 
-1. The validator pulls a binlog event from the upstream and gets the changed rows:
-    - The validator only checks a event that has been incrementally migrated by the syncer. If the event has not been processed by the syncer, the validator pauses and waits for the syncer to complete processing.
-    - If the event has been processed by the syncer, the validator moves on to the following steps.
-2. The validator parses the binlog event and filters out the rows based on the block and allow lists, the table filters, and table routing. After that, the validator submits the changed rows to the validation worker that runs in the background.
-3. The validation worker merges the changed rows that affect the same table and the same primary key to avoid validating "expired" data. The changed rows are cached in memory.
-4. When the validation worker has accumulated a certain number of changed rows or when a certain time interval is passed, the validation worker queries the downstream database using the primary keys to get the current data and compares it with the changed rows.
-5. The validation worker performs the data validation. If the validation mode is `full`, the validation worker compares data of the changed rows with data of the downstream database. if the validation mode is `fast`, the validation worker only checks the existence of the changed rows.
-    - If the changed rows pass the validation, the changed row is removed from the memory.
-    - If the changed rows fail the validation, the validator does not report an error immediately but waits for a certain time interval before validating the row again.
-    - If a changed row cannot pass the validation within the specified time (specified by the user), the validator marks the row as an error row and writes it to the meta database in the downstream. You can view the information of error rows by querying the migration task. For details, refer to [View the validation status](#view-the-validation-status) and [Handle error rows](#handle-error-rows).
+1.  バリデーターはアップストリームからbinlogイベントを取得し、変更された行を取得します。
+    -   バリデーターは、シンカーによって増分移行されたイベントのみをチェックします。イベントがシンカーによって処理されていない場合、バリデーターは一時停止し、シンカーが処理を完了するまで待機します。
+    -   イベントがシンカーによって処理された場合、バリデーターは次の手順に進みます。
+2.  バリデーターは、 binlogイベントを解析し、ブロック リストと許可リスト、テーブル フィルター、およびテーブル ルーティングに基づいて行をフィルターします。その後、バリデーターは、変更された行を、バックグラウンドで実行される検証ワーカーに送信します。
+3.  検証ワーカーは、同じテーブルと同じ主キーに影響する変更された行をマージして、「期限切れ」のデータの検証を回避します。変更された行はメモリにキャッシュされます。
+4.  検証ワーカーが変更された行を一定数蓄積した場合、または一定の時間間隔が経過した場合、検証ワーカーは主キーを使用して下流のデータベースを照会し、現在のデータを取得し、変更された行と比較します。
+5.  検証ワーカーはデータ検証を実行します。検証モードが`full`の場合、検証ワーカーは変更された行のデータを下流のデータベースのデータと比較します。検証モードが`fast`の場合、検証ワーカーは変更された行の存在のみをチェックします。
+    -   変更された行が検証に合格した場合、変更された行はメモリから削除されます。
+    -   変更された行が検証に失敗した場合、検証はすぐにエラーを報告せず、一定の時間間隔を待ってから行を再度検証します。
+    -   変更された行が指定時間（ユーザーが指定）内に検証に合格できない場合、バリデーターはその行をエラー行としてマークし、下流のメタデータベースに書き込みます。移行タスクを照会することで、エラー行の情報を表示できます。詳細については、 [検証ステータスをビュー](#view-the-validation-status)および[エラー行の処理](#handle-error-rows)を参照してください。
 
-## Limitations
+## 制限事項 {#limitations}
 
-- The source table to be validated must have a primary key or a not-null unique key.
-- When DM migrates DDL from the upstream database, the following limitations apply:
-    - The DDL must not change the primary key, or change the order of columns, or delete existing columns.
-    - The table must not be dropped.
-- Does not support tasks that use expressions to filter events.
-- The precision of floating-point numbers is different between TiDB and MySQL. Differences smaller than 10^-6 are considered equal.
-- Does not support the following data types:
-    - JSON
-    - Binary data
+-   検証するソース テーブルには、主キーまたは null 以外の一意のキーが必要です。
+-   DM がアップストリーム データベースから DDL を移行する場合、次の制限が適用されます。
+    -   DDL では、主キーを変更したり、列の順序を変更したり、既存の列を削除したりしてはなりません。
+    -   テーブルを削除しないでください。
+-   式を使用してイベントをフィルタリングするタスクはサポートされません。
+-   浮動小数点数の精度は、TiDB と MySQL では異なります。10^-6 未満の差は等しいとみなされます。
+-   次のデータ型はサポートされていません。
+    -   翻訳
+    -   バイナリデータ

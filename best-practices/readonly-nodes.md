@@ -1,37 +1,35 @@
 ---
 title: Best Practices for Read-Only Storage Nodes
-summary: This document introduces configuring read-only storage nodes for isolating high-tolerance delay loads from online services. Steps include marking TiKV nodes as read-only, using Placement Rules to store data on read-only nodes as learners, and using Follower Read to read data from read-only nodes.
+summary: このドキュメントでは、オンライン サービスから高許容遅延負荷を分離するための読み取り専用storageノードの構成について説明します。手順には、TiKV ノードを読み取り専用としてマークし、配置ルールを使用して読み取り専用ノードに学習者としてデータを保存し、Follower Readを使用して読み取り専用ノードからデータを読み取ることが含まれます。
 ---
 
-# Best Practices for Read-Only Storage Nodes
+# 読み取り専用ストレージノードのベストプラクティス {#best-practices-for-read-only-storage-nodes}
 
-This document introduces how to configure read-only storage nodes and how to direct backup, analysis, testing, and other traffic to these nodes. In this way, loads with high tolerance for delay can be physically isolated from important online services.
+このドキュメントでは、読み取り専用storageノードを構成する方法と、バックアップ、分析、テスト、およびその他のトラフィックをこれらのノードに送信する方法について説明します。これにより、遅延に対する許容度の高い負荷を重要なオンライン サービスから物理的に分離できます。
 
-## Procedures
+## 手順 {#procedures}
 
-### 1. Specify some TiKV nodes as read-only
+### 1. 一部のTiKVノードを読み取り専用として指定する {#1-specify-some-tikv-nodes-as-read-only}
 
-To specify some TiKV nodes as read-only, you can mark these nodes with a special label (use `$` as the prefix of the label key). Unless you explicitly specify these nodes to store some data using Placement Rules, PD does not schedule any data to these nodes.
+一部の TiKV ノードを読み取り専用として指定するには、これらのノードに特別なラベルを付けます (ラベル キーのプレフィックスとして`$`を使用します)。配置ルールを使用してこれらのノードにデータを保存するように明示的に指定しない限り、PD はこれらのノードにデータをスケジュールしません。
 
-You can configure a read-only node by running the `tiup cluster edit-config` command:
+`tiup cluster edit-config`コマンドを実行して読み取り専用ノードを構成できます。
 
-```
-tikv_servers:
-  - host: ...
-    ...
-    labels:
-      $mode: readonly
-```
+    tikv_servers:
+      - host: ...
+        ...
+        labels:
+          $mode: readonly
 
-### 2. Use Placement Rules to store data on read-only nodes as learners
+### 2. 配置ルールを使用して、学習者として読み取り専用ノードにデータを保存する {#2-use-placement-rules-to-store-data-on-read-only-nodes-as-learners}
 
-1. Run the `pd-ctl config placement-rules` command to export the default Placement Rules:
+1.  `pd-ctl config placement-rules`コマンドを実行して、デフォルトの配置ルールをエクスポートします。
 
     ```shell
     pd-ctl config placement-rules rule-bundle load --out="rules.json"
     ```
 
-    If you have not configured Placement Rules before, the output is as follows:
+    以前に配置ルールを構成していない場合、出力は次のようになります。
 
     ```json
     [
@@ -53,7 +51,7 @@ tikv_servers:
     ]
     ```
 
-2. Store all data on the read-only nodes as a learner. The following example is based on the default configuration:
+2.  すべてのデータを学習者として読み取り専用ノードに保存します。次の例は、デフォルトの構成に基づいています。
 
     ```json
     [
@@ -93,38 +91,36 @@ tikv_servers:
     ]
     ```
 
-3. Use the `pd-ctl config placement-rules` command to write the preceding configurations to PD:
+3.  `pd-ctl config placement-rules`コマンドを使用して、上記の構成を PD に書き込みます。
 
     ```shell
     pd-ctl config placement-rules rule-bundle save --in="rules.json"
     ```
 
-> **Note:**
+> **注記：**
 >
-> - If you perform the preceding operations on a cluster with a large dataset, the entire cluster might need some time to completely replicate data to read-only nodes. During this period, the read-only nodes might not be able to provide services.
-> - Because of the special implementation of backup, the learner number of each label cannot exceed 1. Otherwise, it will generate duplicate data during backup.
+> -   大規模なデータセットを持つクラスターで前述の操作を実行すると、クラスター全体で読み取り専用ノードにデータを完全に複製するのに時間がかかる場合があります。この期間中、読み取り専用ノードはサービスを提供できない可能性があります。
+> -   バックアップの特別な実装のため、各ラベルの学習者数は 1 を超えることはできません。そうしないと、バックアップ中に重複データが生成されます。
 
-### 3. Use Follower Read to read data from read-only nodes
+### 3. Follower Readを使用して読み取り専用ノードからデータを読み取る {#3-use-follower-read-to-read-data-from-read-only-nodes}
 
-#### 3.1 Use Follower Read in TiDB
+#### 3.1 TiDBでFollower Readを使用する {#3-1-use-follower-read-in-tidb}
 
-To read data from read-only nodes when using TiDB, you can set the system variable [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40) to `learner`:
+TiDB を使用するときに読み取り専用ノードからデータを読み取るには、システム変数[`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)を`learner`に設定します。
 
 ```sql
 set tidb_replica_read=learner;
 ```
 
-#### 3.2 Use Follower Read in TiSpark
+#### 3.2 TiSparkでFollower Readを使用する {#3-2-use-follower-read-in-tispark}
 
-To read data from read-only nodes when using TiSpark, you can set the configuration item `spark.tispark.replica_read` to `learner` in the Spark configuration file:
+TiSpark を使用するときに読み取り専用ノードからデータを読み取るには、Spark 構成ファイルで構成項目`spark.tispark.replica_read` ～ `learner`を設定します。
 
-```
-spark.tispark.replica_read learner
-```
+    spark.tispark.replica_read learner
 
-#### 3.3 Use Follower Read when backing up cluster data
+#### 3.3 クラスターデータのバックアップ時にFollower Readを使用する {#3-3-use-follower-read-when-backing-up-cluster-data}
 
-To read data from read-only nodes when backing up cluster data, you can specify the `--replica-read-label` option in the br command line. Note that when running the following command in shell, you need to use single quotes to wrap the label to prevent `$` from being parsed.
+クラスター データをバックアップするときに読み取り専用ノードからデータを読み取るには、br コマンド ラインで`--replica-read-label`オプションを指定できます。シェルで次のコマンドを実行するときは、 `$`解析されないようにラベルを一重引用符で囲む必要があることに注意してください。
 
 ```shell
 tiup br backup full ... --replica-read-label '$mode:readonly'

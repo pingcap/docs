@@ -1,28 +1,28 @@
 ---
 title: Runtime Filter
-summary: Learn the working principles of Runtime Filter and how to use it.
+summary: ランタイム フィルターの動作原理とその使用方法を学びます。
 ---
 
-# Runtime Filter
+# ランタイムフィルター {#runtime-filter}
 
-Runtime Filter is a new feature introduced in TiDB v7.3, which aims to improve the performance of hash join in MPP scenarios. By generating filters dynamically to filter the data of hash join in advance, TiDB can reduce the amount of data scanning and the amount of calculation of hash join at runtime, ultimately improving the query performance.
+ランタイム フィルターは TiDB v7.3 で導入された新機能で、MPP シナリオでのハッシュ結合のパフォーマンスを向上させることを目的としています。ハッシュ結合のデータを事前にフィルター処理するフィルターを動的に生成することで、TiDB は実行時のデータ スキャンの量とハッシュ結合の計算の量を削減し、最終的にクエリ パフォーマンスを向上させることができます。
 
-## Concepts
+## コンセプト {#concepts}
 
-- Hash join: a way to implement the join relational algebra. It gets the result of Join by building a hash table on one side and continuously matching the hash table on the other side.
-- Build side: one side of hash join used to build a hash table. In this document, the right table of hash join is called the build side by default.
-- Probe side: one side of hash join used to continuously match the hash table. In this document, the left table of hash join is called the probe side by default.
-- Filter: also known as predicate, which refers to the filter condition in this document.
+-   ハッシュ結合: 結合リレーショナル代数を実装する方法。一方にハッシュ テーブルを構築し、他方のハッシュ テーブルを継続的に照合することで、結合の結果を取得します。
+-   ビルド側: ハッシュ テーブルを構築するために使用されるハッシュ結合の片側。このドキュメントでは、ハッシュ結合の右側のテーブルはデフォルトでビルド側と呼ばれます。
+-   プローブ側: ハッシュ テーブルを継続的に照合するために使用されるハッシュ結合の片側。このドキュメントでは、ハッシュ結合の左側のテーブルをデフォルトでプローブ側と呼びます。
+-   フィルター: 述語とも呼ばれ、このドキュメント内のフィルター条件を指します。
 
-## Working principles of Runtime Filter
+## ランタイムフィルターの動作原理 {#working-principles-of-runtime-filter}
 
-Hash join performs the join operation by building a hash table based on the right table and continuously probing the hash table using the left table. If some join key values cannot hit the hash table during the probing process, it means that the data does not exist in the right table and will not appear in the final join result. Therefore, if TiDB can **filter out the join key data in advance** during scanning, it will reduce the scanning time and network overhead, thereby greatly improving the join efficiency.
+ハッシュ結合は、右テーブルに基づいてハッシュ テーブルを構築し、左テーブルを使用してハッシュ テーブルを継続的にプローブすることで結合操作を実行します。プローブ プロセス中に一部の結合キー値がハッシュ テーブルにヒットしない場合は、データが右テーブルに存在しないことを意味し、最終的な結合結果には表示されません。したがって、TiDB がスキャン中に**結合キー データを事前にフィルター処理**できれば、スキャン時間とネットワーク オーバーヘッドが削減され、結合効率が大幅に向上します。
 
-Runtime Filter is a **dynamic predicate** generated during the query planning phase. This predicate has the same function as other predicates in the TiDB Selection operator. These predicates are all applied to the Table Scan operation to filter out rows that do not match the predicate. The only difference is that the parameter values in Runtime Filter come from the results generated during the hash join build process.
+ランタイム フィルターは、クエリ計画フェーズ中に生成される**動的な述語**です。この述語は、TiDB 選択演算子内の他の述語と同じ機能を持ちます。これらの述語はすべてテーブル スキャン操作に適用され、述語に一致しない行をフィルター処理します。唯一の違いは、ランタイム フィルターのパラメーター値がハッシュ結合構築プロセス中に生成された結果から取得されることです。
 
-### Example
+### 例 {#example}
 
-Assume that there is a join query between the `store_sales` table and the `date_dim` table, and the join method is hash join. `store_sales` is a fact table that mainly stores the sales data of stores, and the number of rows is 1 million. `date_dim` is a time dimension table that mainly stores date information. You want to query the sales data of the year 2001, so 365 rows of the `date_dim` table are involved in the join operation.
+`store_sales`テーブルと`date_dim`テーブルの間に結合クエリがあり、結合方法はハッシュ結合であるとします。5 `store_sales`主に店舗の売上データを格納するファクト テーブルで、行数は 100 万です。7 `date_dim`主に日付情報を格納する時間ディメンション テーブルです。2001 年の売上データをクエリしたいので、 `date_dim`テーブルの 365 行が結合操作に関係します。
 
 ```sql
 SELECT * FROM store_sales, date_dim
@@ -30,68 +30,66 @@ WHERE ss_date_sk = d_date_sk
     AND d_year = 2001;
 ```
 
-The execution plan of hash join is usually as follows:
+ハッシュ結合の実行プランは通常次のようになります。
 
-```
-                 +-------------------+
-                 | PhysicalHashJoin  |
-        +------->|                   |<------+
-        |        +-------------------+       |
-        |                                    |
-        |                                    |
-  100w  |                                    | 365
-        |                                    |
-        |                                    |
-+-------+-------+                   +--------+-------+
-| TableFullScan |                   | TableFullScan  |
-|  store_sales  |                   |    date_dim    |
-+---------------+                   +----------------+
-```
+                     +-------------------+
+                     | PhysicalHashJoin  |
+            +------->|                   |<------+
+            |        +-------------------+       |
+            |                                    |
+            |                                    |
+      100w  |                                    | 365
+            |                                    |
+            |                                    |
+    +-------+-------+                   +--------+-------+
+    | TableFullScan |                   | TableFullScan  |
+    |  store_sales  |                   |    date_dim    |
+    +---------------+                   +----------------+
 
-*(The above figure omits the exchange node and other nodes.)*
+*（上図では交換ノードとその他のノードは省略しています。）*
 
-The execution process of Runtime Filter is as follows:
+ランタイム フィルターの実行プロセスは次のとおりです。
 
-1. Scan the data of the `date_dim` table.
-2. `PhysicalHashJoin` calculates a filter condition based on the data of the build side, such as `date_dim in (2001/01/01~2001/12/31)`.
-3. Send the filter condition to the `TableFullScan` operator that is waiting to scan `store_sales`.
-4. The filter condition is applied to `store_sales`, and the filtered data is passed to `PhysicalHashJoin`, thereby reducing the amount of data scanned by the probe side and the amount of calculation of matching the hash table.
+1.  `date_dim`テーブルのデータをスキャンします。
+2.  `PhysicalHashJoin` `date_dim in (2001/01/01~2001/12/31)`などのビルド側のデータに基づいてフィルター条件を計算します。
+3.  スキャン`store_sales`を待機している`TableFullScan`オペレータにフィルター条件を送信します。
+4.  `store_sales`にフィルタ条件を適用し、フィルタリングされたデータを`PhysicalHashJoin`に渡すことで、プローブ側でスキャンするデータ量とハッシュテーブルとのマッチングの計算量を削減します。
 
-```
-                         2. Build RF values
-            +-------->+-------------------+
-            |         |PhysicalHashJoin   |<-----+
-            |    +----+                   |      |
-4. After RF |    |    +-------------------+      | 1. Scan T2
-    5000    |    |3. Send RF                     |      365
-            |    | filter data                   |
-            |    |                               |
-      +-----+----v------+                +-------+--------+
-      |  TableFullScan  |                | TableFullScan  |
-      |  store_sales    |                |    date_dim    |
-      +-----------------+                +----------------+
-```
+<!---->
 
-*(RF is short for Runtime Filter)*
+                             2. Build RF values
+                +-------->+-------------------+
+                |         |PhysicalHashJoin   |<-----+
+                |    +----+                   |      |
+    4. After RF |    |    +-------------------+      | 1. Scan T2
+        5000    |    |3. Send RF                     |      365
+                |    | filter data                   |
+                |    |                               |
+          +-----+----v------+                +-------+--------+
+          |  TableFullScan  |                | TableFullScan  |
+          |  store_sales    |                |    date_dim    |
+          +-----------------+                +----------------+
 
-From the above two figures, you can see that the amount of data scanned by `store_sales` is reduced from 1 million to 5000. By reducing the amount of data scanned by `TableFullScan`, Runtime Filter can reduce the number of times to match the hash table, avoiding unnecessary I/O and network transmission, thus significantly improving the efficiency of the join operation.
+*(RF はランタイム フィルターの略です)*
 
-## Use Runtime Filter
+上記 2 つの図から、スキャンされるデータ量が`store_sales`で 100 万から 5000 に削減されていることがわかります。スキャンされるデータ量が`TableFullScan`削減されることにより、Runtime Filter はハッシュ テーブルとの照合回数を削減し、不要な I/O とネットワーク転送を回避できるため、結合操作の効率が大幅に向上します。
 
-To use Runtime Filter, you need to create a table with TiFlash replicas and set [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720) to `LOCAL`.
+## ランタイムフィルターを使用する {#use-runtime-filter}
 
-Taking the TPC-DS dataset as an example, this section uses the `catalog_sales` table and the `date_dim` table for join operations to illustrate how Runtime Filter improves query efficiency.
+ランタイム フィルターを使用するには、 TiFlashレプリカを含むテーブルを作成し、 [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720)を`LOCAL`に設定する必要があります。
 
-### Step 1. Create TiFlash replicas for tables to be joined
+このセクションでは、TPC-DS データセットを例に、結合操作にテーブル`catalog_sales`とテーブル`date_dim`を使用して、ランタイム フィルターによってクエリの効率がどのように向上するかを説明します。
 
-Add a TiFlash replica to each of the `catalog_sales` table and the `date_dim` table.
+### ステップ1. 結合するテーブルのTiFlashレプリカを作成する {#step-1-create-tiflash-replicas-for-tables-to-be-joined}
+
+テーブル`catalog_sales`とテーブル`date_dim`のそれぞれにTiFlashレプリカを追加します。
 
 ```sql
 ALTER TABLE catalog_sales SET tiflash REPLICA 1;
 ALTER TABLE date_dim SET tiflash REPLICA 1;
 ```
 
-Wait until the TiFlash replicas of the two tables are ready, that is, the `AVAILABLE` and `PROGRESS` fields of the replicas are both `1`.
+2 つのテーブルのTiFlashレプリカが準備されるまで、つまりレプリカの`AVAILABLE`フィールドと`PROGRESS`フィールドが両方とも`1`なるまで待機します。
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.TIFLASH_REPLICA WHERE TABLE_NAME='catalog_sales';
@@ -109,15 +107,15 @@ SELECT * FROM INFORMATION_SCHEMA.TIFLASH_REPLICA WHERE TABLE_NAME='date_dim';
 +--------------+------------+----------+---------------+-----------------+-----------+----------+
 ```
 
-### Step 2. Enable Runtime Filter
+### ステップ2. ランタイムフィルターを有効にする {#step-2-enable-runtime-filter}
 
-To enable Runtime Filter, set the value of the system variable [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720  ) to `LOCAL`.
+ランタイム フィルターを有効にするには、システム変数[`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720)の値を`LOCAL`に設定します。
 
 ```sql
 SET tidb_runtime_filter_mode="LOCAL";
 ```
 
-Check whether the change is successful:
+変更が成功したかどうかを確認します。
 
 ```sql
 SHOW VARIABLES LIKE "tidb_runtime_filter_mode";
@@ -128,11 +126,11 @@ SHOW VARIABLES LIKE "tidb_runtime_filter_mode";
 +--------------------------+-------+
 ```
 
-If the value of the system variable is `LOCAL`, Runtime Filter is enabled.
+システム変数の値が`LOCAL`場合、ランタイム フィルターは有効になります。
 
-### Step 3. Execute the query
+### ステップ3. クエリを実行する {#step-3-execute-the-query}
 
-Before executing the query, use the [`EXPLAIN` statement](/sql-statements/sql-statement-explain.md) to show the execution plan and check whether Runtime Filter has taken effect.
+クエリを実行する前に、 [`EXPLAIN`ステートメント](/sql-statements/sql-statement-explain.md)を使用して実行プランを表示し、ランタイム フィルターが有効になっているかどうかを確認します。
 
 ```sql
 EXPLAIN SELECT cs_ship_date_sk FROM catalog_sales, date_dim
@@ -140,33 +138,29 @@ WHERE d_date = '2002-2-01' AND
      cs_ship_date_sk = d_date_sk;
 ```
 
-When Runtime Filter takes effect, the corresponding Runtime Filter is mounted on the `HashJoin` node and the `TableScan` node, indicating that Runtime Filter is applied successfully.
+ランタイム フィルターが有効になると、対応するランタイム フィルターがノード`HashJoin`とノード`TableScan`にマウントされ、ランタイム フィルターが正常に適用されたことが示されます。
 
-```
-TableFullScan: runtime filter:0[IN] -> tpcds50.catalog_sales.cs_ship_date_sk
-HashJoin: runtime filter:0[IN] <- tpcds50.date_dim.d_date_sk |
-```
+    TableFullScan: runtime filter:0[IN] -> tpcds50.catalog_sales.cs_ship_date_sk
+    HashJoin: runtime filter:0[IN] <- tpcds50.date_dim.d_date_sk |
 
-The complete query execution plan is as follows:
+完全なクエリ実行プランは次のとおりです。
 
-```
-+----------------------------------------+-------------+--------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
-| id                                     | estRows     | task         | access object       | operator info                                                                                                                                 |
-+----------------------------------------+-------------+--------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
-| TableReader_53                         | 37343.19    | root         |                     | MppVersion: 1, data:ExchangeSender_52                                                                                                         |
-| └─ExchangeSender_52                    | 37343.19    | mpp[tiflash] |                     | ExchangeType: PassThrough                                                                                                                     |
-|   └─Projection_51                      | 37343.19    | mpp[tiflash] |                     | tpcds50.catalog_sales.cs_ship_date_sk                                                                                                         |
-|     └─HashJoin_48                      | 37343.19    | mpp[tiflash] |                     | inner join, equal:[eq(tpcds50.date_dim.d_date_sk, tpcds50.catalog_sales.cs_ship_date_sk)], runtime filter:0[IN] <- tpcds50.date_dim.d_date_sk |
-|       ├─ExchangeReceiver_29(Build)     | 1.00        | mpp[tiflash] |                     |                                                                                                                                               |
-|       │ └─ExchangeSender_28            | 1.00        | mpp[tiflash] |                     | ExchangeType: Broadcast, Compression: FAST                                                                                                    |
-|       │   └─TableFullScan_26           | 1.00        | mpp[tiflash] | table:date_dim      | pushed down filter:eq(tpcds50.date_dim.d_date, 2002-02-01 00:00:00.000000), keep order:false                                                  |
-|       └─Selection_31(Probe)            | 71638034.00 | mpp[tiflash] |                     | not(isnull(tpcds50.catalog_sales.cs_ship_date_sk))                                                                                            |
-|         └─TableFullScan_30             | 71997669.00 | mpp[tiflash] | table:catalog_sales | pushed down filter:empty, keep order:false, runtime filter:0[IN] -> tpcds50.catalog_sales.cs_ship_date_sk                                     |
-+----------------------------------------+-------------+--------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
-9 rows in set (0.01 sec)
-```
+    +----------------------------------------+-------------+--------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
+    | id                                     | estRows     | task         | access object       | operator info                                                                                                                                 |
+    +----------------------------------------+-------------+--------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
+    | TableReader_53                         | 37343.19    | root         |                     | MppVersion: 1, data:ExchangeSender_52                                                                                                         |
+    | └─ExchangeSender_52                    | 37343.19    | mpp[tiflash] |                     | ExchangeType: PassThrough                                                                                                                     |
+    |   └─Projection_51                      | 37343.19    | mpp[tiflash] |                     | tpcds50.catalog_sales.cs_ship_date_sk                                                                                                         |
+    |     └─HashJoin_48                      | 37343.19    | mpp[tiflash] |                     | inner join, equal:[eq(tpcds50.date_dim.d_date_sk, tpcds50.catalog_sales.cs_ship_date_sk)], runtime filter:0[IN] <- tpcds50.date_dim.d_date_sk |
+    |       ├─ExchangeReceiver_29(Build)     | 1.00        | mpp[tiflash] |                     |                                                                                                                                               |
+    |       │ └─ExchangeSender_28            | 1.00        | mpp[tiflash] |                     | ExchangeType: Broadcast, Compression: FAST                                                                                                    |
+    |       │   └─TableFullScan_26           | 1.00        | mpp[tiflash] | table:date_dim      | pushed down filter:eq(tpcds50.date_dim.d_date, 2002-02-01 00:00:00.000000), keep order:false                                                  |
+    |       └─Selection_31(Probe)            | 71638034.00 | mpp[tiflash] |                     | not(isnull(tpcds50.catalog_sales.cs_ship_date_sk))                                                                                            |
+    |         └─TableFullScan_30             | 71997669.00 | mpp[tiflash] | table:catalog_sales | pushed down filter:empty, keep order:false, runtime filter:0[IN] -> tpcds50.catalog_sales.cs_ship_date_sk                                     |
+    +----------------------------------------+-------------+--------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
+    9 rows in set (0.01 sec)
 
-Now, execute the SQL query, and Runtime Filter is applied.
+ここで、SQL クエリを実行すると、ランタイム フィルターが適用されます。
 
 ```sql
 SELECT cs_ship_date_sk FROM catalog_sales, date_dim
@@ -174,11 +168,11 @@ WHERE d_date = '2002-2-01' AND
      cs_ship_date_sk = d_date_sk;
 ```
 
-### Step 4. Performance comparison
+### ステップ4. パフォーマンスの比較 {#step-4-performance-comparison}
 
-This example uses the 50 GB TPC-DS data. After Runtime Filter is enabled, the query time is reduced from 0.38 seconds to 0.17 seconds, and efficiency is improved by 50%. You can use the `ANALYZE` statement to view the execution time of each operator after Runtime Filter takes effect.
+この例では、50 GB の TPC-DS データを使用します。ランタイム フィルターを有効にすると、クエリ時間は 0.38 秒から 0.17 秒に短縮され、効率は 50% 向上します。1 ステートメントを使用すると`ANALYZE`ランタイム フィルターが有効になった後の各演算子の実行時間を表示できます。
 
-The following is the execution information of the query when Runtime Filter is not enabled:
+ランタイム フィルターが有効になっていない場合のクエリの実行情報は次のとおりです。
 
 ```sql
 EXPLAIN ANALYZE SELECT cs_ship_date_sk FROM catalog_sales, date_dim WHERE d_date = '2002-2-01' AND cs_ship_date_sk = d_date_sk;
@@ -198,7 +192,7 @@ EXPLAIN ANALYZE SELECT cs_ship_date_sk FROM catalog_sales, date_dim WHERE d_date
 9 rows in set (0.38 sec)
 ```
 
-The following is the execution information of the query when Runtime Filter is enabled:
+ランタイム フィルターが有効な場合のクエリの実行情報は次のとおりです。
 
 ```sql
 EXPLAIN ANALYZE SELECT cs_ship_date_sk FROM catalog_sales, date_dim
@@ -220,39 +214,39 @@ EXPLAIN ANALYZE SELECT cs_ship_date_sk FROM catalog_sales, date_dim
 9 rows in set (0.17 sec)
 ```
 
-By comparing the execution information of the two queries, you can find the following improvements:
+2 つのクエリの実行情報を比較すると、次の改善点がわかります。
 
-* IO reduction: by comparing the `total_scanned_rows` of the TableFullScan operator, you can see that the scan volume of `TableFullScan` is reduced by 2/3 after Runtime Filter is enabled.
-* Hash join performance improvement: the execution duration of the `HashJoin` operator is reduced from 376.1 ms to 157.6 ms.
+-   IO 削減: TableFullScan 演算子の`total_scanned_rows`と比較すると、ランタイム フィルターを有効にすると`TableFullScan`のスキャン量が 2/3 削減されることがわかります。
+-   ハッシュ結合のパフォーマンスの向上: `HashJoin`演算子の実行時間が 376.1 ミリ秒から 157.6 ミリ秒に短縮されました。
 
-### Best practices
+### ベストプラクティス {#best-practices}
 
-Runtime Filter is applicable to the scenario where a large table and a small table are joined, such as a join query of a fact table and a dimension table. When the dimension table has a small amount of hit data, it means that the filter has fewer values, so the fact table can filter out the data that does not meet the conditions more effectively. Compared with the default scenario where the entire fact table is scanned, this significantly improves the query performance.
+ランタイム フィルターは、ファクト テーブルとディメンション テーブルの結合クエリなど、大きなテーブルと小さなテーブルが結合されるシナリオに適用できます。ディメンション テーブルにヒット データが少ない場合、フィルターの値が少なくなるため、ファクト テーブルは条件を満たさないデータをより効果的にフィルターできます。ファクト テーブル全体をスキャンする既定のシナリオと比較すると、クエリのパフォーマンスが大幅に向上します。
 
-The join operation of the `Sales` table and the `date_dim` table in TPC-DS is a typical example.
+TPC-DS における`Sales`のテーブルと`date_dim`テーブルの結合操作が典型的な例です。
 
-## Configure Runtime Filter
+## ランタイムフィルターを構成する {#configure-runtime-filter}
 
-When using Runtime Filter, you can configure the mode and predicate type of Runtime Filter.
+ランタイム フィルターを使用する場合、ランタイム フィルターのモードと述語タイプを構成できます。
 
-### Runtime Filter mode
+### ランタイムフィルターモード {#runtime-filter-mode}
 
-The mode of Runtime Filter is the relationship between the **Filter Sender operator** and **Filter Receiver operator**. There are three modes: `OFF`, `LOCAL`, and `GLOBAL`. In v7.3.0, only `OFF` and `LOCAL` modes are supported. The Runtime Filter mode is controlled by the system variable [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720).
+ランタイム フィルターのモードは、**フィルター センダー演算子**と**フィルター レシーバー演算子**の関係です。モードは`LOCAL` `OFF` 3 つがあります。v7.3.0 では、モード`OFF`と`GLOBAL` `LOCAL`がサポートされています。ランタイム フィルター モードは、システム変数[`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720)によって制御されます。
 
-- `OFF`: Runtime Filter is disabled. After it is disabled, the query behavior is the same as in previous versions.
-- `LOCAL`: Runtime Filter is enabled in the local mode. In the local mode, the **Filter Sender operator** and **Filter Receiver operator** are in the same MPP task. In other words, Runtime Filter can be applied to the scenario where the HashJoin operator and TableScan operator are in the same task. Currently, Runtime Filter only supports the local mode. To enable this mode, set it to `LOCAL`.
-- `GLOBAL`: currently, the global mode is not supported. You cannot set Runtime Filter to this mode.
+-   `OFF` : ランタイム フィルターは無効です。無効にした後のクエリの動作は以前のバージョンと同じです。
+-   `LOCAL` : ランタイム フィルターはローカル モードで有効になります。ローカル モードでは、**フィルター センダー オペレーター**と**フィルター レシーバー オペレーターは**同じ MPP タスク内にあります。つまり、ランタイム フィルターは、HashJoin オペレーターと TableScan オペレーターが同じタスク内にあるシナリオに適用できます。現在、ランタイム フィルターはローカル モードのみをサポートしています。このモードを有効にするには、 `LOCAL`に設定します。
+-   `GLOBAL` : 現在、グローバル モードはサポートされていません。ランタイム フィルターをこのモードに設定することはできません。
 
-### Runtime Filter type
+### ランタイムフィルタータイプ {#runtime-filter-type}
 
-The type of Runtime Filter is the type of the predicate used by the generated Filter operator. Currently, only one type is supported: `IN`, which means that the generated predicated is similar to `k1 in (xxx)`. The Runtime Filter type is controlled by the system variable [`tidb_runtime_filter_type`](/system-variables.md#tidb_runtime_filter_type-new-in-v720).
+ランタイム フィルターのタイプは、生成されたフィルター演算子によって使用される述語のタイプです。現在サポートされているタイプは`IN`のみです。これは、生成された述語が`k1 in (xxx)`に似ていることを意味します。ランタイム フィルターのタイプは、システム変数[`tidb_runtime_filter_type`](/system-variables.md#tidb_runtime_filter_type-new-in-v720)によって制御されます。
 
-- `IN`: the default type. It means that the generated Runtime Filter uses the `IN` type predicate.
+-   `IN` : デフォルトのタイプ。生成されたランタイム フィルターは`IN`タイプの述語を使用することを意味します。
 
-## Limitations
+## 制限事項 {#limitations}
 
-- Runtime Filter is an optimization in the MPP architecture and can only be applied to queries pushed down to TiFlash.
-- Join type: Left outer, Full outer, and Anti join (when the left table is the probe side) do not support Runtime Filter. Because Runtime Filter filters the data involved in the join in advance, the preceding types of join do not discard the unmatched data, so Runtime Filter cannot be used.
-- Equal join expression: When the probe column in the equal join expression is a complex expression, or when the probe column type is JSON, Blob, Array, or other complex data types, Runtime Filter is not generated. The main reason is that the preceding types of columns are rarely used as the join column. Even if the Filter is generated, the filtering rate is usually low.
+-   ランタイム フィルターは MPPアーキテクチャの最適化であり、 TiFlashにプッシュダウンされたクエリにのみ適用できます。
+-   結合タイプ: 左外部、完全外部、および反結合 (左テーブルがプローブ側の場合) は、ランタイム フィルターをサポートしていません。ランタイム フィルターは結合に関係するデータを事前にフィルター処理するため、前述のタイプの結合では一致しないデータが破棄されず、ランタイム フィルターは使用できません。
+-   等価結合式: 等価結合式のプローブ列が複雑な式である場合、またはプローブ列の型が JSON、Blob、配列、またはその他の複雑なデータ型である場合、ランタイム フィルターは生成されません。主な理由は、前述の型の列が結合列として使用されることはほとんどないためです。フィルターが生成された場合でも、フィルタリング率は通常低くなります。
 
-For the preceding limitations, if you need to confirm whether Runtime Filter is generated correctly, you can use the [`EXPLAIN` statement](/sql-statements/sql-statement-explain.md) to verify the execution plan.
+上記の制限事項について、ランタイム フィルターが正しく生成されたかどうかを確認する必要がある場合は、 [`EXPLAIN`ステートメント](/sql-statements/sql-statement-explain.md)使用して実行プランを検証できます。

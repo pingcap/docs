@@ -1,21 +1,21 @@
 ---
 title: Upgrade a TiDB Cluster
-summary: Learn how to upgrade a TiDB cluster.
+summary: TiDB クラスターをアップグレードする方法を学びます。
 ---
 
-# Upgrade a TiDB Cluster
+# TiDBクラスタのアップグレード {#upgrade-a-tidb-cluster}
 
-This document describes how to upgrade a TiDB cluster on TiDB Cloud. TiDB Cloud provides two upgrade mechanisms for upgrading your TiDB version.
+このドキュメントでは、TiDB Cloud上の TiDB クラスターをアップグレードする方法について説明します。TiDB TiDB Cloud には、TiDB バージョンをアップグレードするための 2 つのアップグレード メカニズムが用意されています。
 
-## Regularly upgrade
+## 定期的にアップグレードする {#regularly-upgrade}
 
-For the TiDB version that is too low, TiDB Cloud will regularly upgrade it uniformly, and notify users via email before and after the upgrade.
+TiDB バージョンが低すぎる場合、 TiDB Cloud は定期的に均一にアップグレードし、アップグレードの前後にユーザーに電子メールで通知します。
 
-## Contact support to upgrade
+## アップグレードするにはサポートにお問い合わせください {#contact-support-to-upgrade}
 
-To submit an upgrade request, perform the steps in [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to contact our support team. Note to provide the following information in the **Description** box:
+アップグレード リクエストを送信するには、手順[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)を実行してサポート チームに連絡してください。**説明**ボックスに次の情報を入力してください。
 
-- Cloud Provider: Google Cloud or AWS
-- Cluster Name: xxx
+-   クラウドプロバイダー: Google Cloud または AWS
+-   クラスタ名: xxx
 
-TiDB Cloud technical support will confirm with you the time period for the upgrade. After you have confirmed the upgrade time, TiDB Cloud technical support will do the upgrade in the confirmed time period.
+TiDB Cloudテクニカル サポートがアップグレードの期間をお客様に確認します。アップグレードの期間を確認した後、 TiDB Cloudテクニカル サポートは確認された期間内にアップグレードを実行します。

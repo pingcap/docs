@@ -1,38 +1,38 @@
 ---
 title: TiDB 2.1.2 Release Notes
-summary: TiDB 2.1.2 and TiDB Ansible 2.1.2 were released on December 22, 2018. The release includes improvements in system compatibility and stability. Key updates include compatibility with TiDB Binlog of the Kafka version, improved exit mechanism during rolling updates, and fixes for various issues. PD and TiKV also received updates, such as fixing Region merge issues and support for configuration format in the unit of 'DAY'. Additionally, TiDB Lightning and TiDB Binlog were updated to support new features and eliminate bottlenecks.
+summary: TiDB 2.1.2 および TiDB Ansible 2.1.2 は、2018 年 12 月 22 日にリリースされました。このリリースには、システムの互換性と安定性の向上が含まれています。主な更新には、Kafka バージョンの TiDB Binlogとの互換性、ローリング更新中の終了メカニズムの改善、およびさまざまな問題の修正が含まれます。PD および TiKV も、リージョンのマージ問題の修正や「DAY」単位の構成形式のサポートなどの更新を受けました。さらに、 TiDB Lightningおよび TiDB Binlog が更新され、新機能のサポートとボトルネックの解消が図られました。
 ---
 
-# TiDB 2.1.2 Release Notes
+# TiDB 2.1.2 リリースノート {#tidb-2-1-2-release-notes}
 
-On December 22, 2018, TiDB 2.1.2 is released. The corresponding TiDB Ansible 2.1.2 is also released. Compared with TiDB 2.1.1, this release has great improvement in system compatibility and stability.
+2018 年 12 月 22 日に、TiDB 2.1.2 がリリースされました。対応する TiDB Ansible 2.1.2 もリリースされました。TiDB 2.1.1 と比較して、このリリースではシステムの互換性と安定性が大幅に向上しています。
 
-## TiDB
+## ティビ {#tidb}
 
-- Make TiDB compatible with TiDB Binlog of the Kafka version [#8747](https://github.com/pingcap/tidb/pull/8747)
-- Improve the exit mechanism of TiDB in a rolling update [#8707](https://github.com/pingcap/tidb/pull/8707)
-- Fix the panic issue caused by adding the index for the generated column in some cases [#8676](https://github.com/pingcap/tidb/pull/8676)
-- Fix the issue that the optimizer cannot find the optimal query plan when `TIDB_SMJ Hint` exists in the SQL statement in some cases [#8729](https://github.com/pingcap/tidb/pull/8729)
-- Fix the issue that `AntiSemiJoin` returns an incorrect result in some cases [#8730](https://github.com/pingcap/tidb/pull/8730)
-- Improve the valid character check of the `utf8` character set [#8754](https://github.com/pingcap/tidb/pull/8754)
-- Fix the issue that the field of the time type might return an incorrect result when the write operation is performed before the read operation in a transaction [#8746](https://github.com/pingcap/tidb/pull/8746)
+-   TiDB を Kafka バージョン[＃8747](https://github.com/pingcap/tidb/pull/8747)の TiDB Binlogと互換性を持たせる
+-   ローリングアップデート[＃8707](https://github.com/pingcap/tidb/pull/8707)におけるTiDBの終了メカニズムの改善
+-   生成された列にインデックスを追加することで発生するpanic問題を修正[＃8676](https://github.com/pingcap/tidb/pull/8676)
+-   一部のケースでSQL文に`TIDB_SMJ Hint`存在する場合にオプティマイザが最適なクエリプランを見つけられない問題を修正[＃8729](https://github.com/pingcap/tidb/pull/8729)
+-   `AntiSemiJoin`場合によっては誤った結果が返される問題を修正[＃8730](https://github.com/pingcap/tidb/pull/8730)
+-   `utf8`文字セット[＃8754](https://github.com/pingcap/tidb/pull/8754)の有効文字チェックの改善
+-   トランザクション[＃8746](https://github.com/pingcap/tidb/pull/8746)で読み取り操作の前に書き込み操作を実行すると、時間型のフィールドが誤った結果を返す可能性がある問題を修正しました。
 
-## PD
+## PD {#pd}
 
-- Fix the Region information update issue about Region merge [#1377](https://github.com/pingcap/pd/pull/1377)
+-   リージョン統合[＃1377](https://github.com/pingcap/pd/pull/1377)に関するリージョン情報更新の問題を修正
 
-## TiKV
+## ティクヴ {#tikv}
 
-- Support the configuration format in the unit of `DAY` (`d`) and fix the configuration compatibility issue [#3931](https://github.com/tikv/tikv/pull/3931)
-- Fix the possible panic issue caused by `Approximate Size Split` [#3942](https://github.com/tikv/tikv/pull/3942)
-- Fix two issues about Region merge [#3822](https://github.com/tikv/tikv/pull/3822), [#3873](https://github.com/tikv/tikv/pull/3873)
+-   `DAY` （ `d` ）単位の設定フォーマットをサポートし、設定互換性の問題を修正[＃3931](https://github.com/tikv/tikv/pull/3931)
+-   `Approximate Size Split` [＃3942](https://github.com/tikv/tikv/pull/3942)によって引き起こされる可能性のあるpanic問題を修正
+-   リージョンマージ[＃3822](https://github.com/tikv/tikv/pull/3822) [＃3873](https://github.com/tikv/tikv/pull/3873) 2つの問題を修正
 
-## Tools
+## ツール {#tools}
 
-+ TiDB Lightning
-    - Make TiDB 2.1.0 the minimum cluster version supported by Lightning
-    - Fix the content error of the file involving parsed `JSON` data in Lightning [#144](https://github.com/pingcap/tidb-tools/issues/144)
-    - Fix the issue that `Too many open engines` occurs after the checkpoint is used to restart Lightning
-+ TiDB Binlog
-    - Eliminate some bottlenecks of Drainer writing data to Kafka
-    - Support the Kafka version of TiDB Binlog
+-   TiDB Lightning
+    -   Lightning でサポートされる最小のクラスタバージョンを TiDB 2.1.0 にする
+    -   Lightning [＃144](https://github.com/pingcap/tidb-tools/issues/144)で解析された`JSON`データを含むファイルのコンテンツ エラーを修正しました
+    -   チェックポイントを使用してLightningを再起動した後に`Too many open engines`が発生する問題を修正しました
+-   TiDBBinlog
+    -   Drainer がKafka にデータを書き込む際のボトルネックを解消
+    -   TiDB BinlogのKafkaバージョンをサポート

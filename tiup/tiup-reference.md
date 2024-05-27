@@ -1,13 +1,13 @@
 ---
 title: TiUP Reference
-summary: TiUP is the package manager for the TiDB ecosystem, managing components like TiDB, PD, and TiKV. It supports commands like install, list, uninstall, update, status, clean, mirror, telemetry, completion, env, and help. It also manages the cluster and TiDB Data Migration (DM) cluster.
+summary: TiUP は、TiDB エコシステムのパッケージ マネージャーであり、TiDB、PD、TiKV などのコンポーネントを管理します。install、list、uninstall、update、status、clean、mirror、telemetry、completion、env、help などのコマンドをサポートします。また、クラスターと TiDB データ移行 (DM) クラスターも管理します。
 ---
 
-# TiUP Reference
+# TiUPリファレンス {#tiup-reference}
 
-TiUP serves as the package manager of the TiDB ecosystem. It manages components in the TiDB ecosystem, such as TiDB, PD, and TiKV.
+TiUP は、TiDB エコシステムのパッケージ マネージャーとして機能します。TiDB、PD、TiKV など、TiDB エコシステム内のコンポーネントを管理します。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup [flags] <command> [args...]        # Executes a command
@@ -15,65 +15,66 @@ tiup [flags] <command> [args...]        # Executes a command
 tiup [flags] <component> [args...]      # Runs a component
 ```
 
-You can use the `--help` command to get the information of a specific command. The summary of each command shows its parameters and their usage. Mandatory parameters are shown in angle brackets, and optional parameters are shown in square brackets.
+`--help`コマンドを使用すると、特定のコマンドの情報を取得できます。各コマンドの概要には、そのパラメータとその使用方法が表示されます。必須パラメータは山括弧で示され、オプション パラメータは角括弧で示されます。
 
-`<command>` represents the command name. For the list of supported commands, see the [Command list](#command-list) below. `<component>` represents the component name. For the list of supported components, see the [Component list](#component-list) below.
+`<command>`コマンド名を表します。サポートされているコマンドのリストについては、以下の[コマンドリスト](#command-list)を参照してください。4 `<component>`コンポーネント名を表します。サポートされているコンポーネントのリストについては、以下の[コンポーネントリスト](#component-list)を参照してください。
 
-## Options
+## オプション {#options}
 
-### --binary
+### - バイナリ {#binary}
 
-- If you enable this option, the specified binary file path is printed.
+-   このオプションを有効にすると、指定されたバイナリ ファイル パスが印刷されます。
 
-    - Executing `tiup --binary <component>` will have the path of the latest stable installed `<component>` component printed. If `<component>` is not installed, an error is returned.
-    - Executing `tiup --binary <component>:<version>` will have the path of the installed `<component>` component's `<version>` printed. If this `<version>` is not printed, an error is returned.
+    -   `tiup --binary <component>`を実行すると、最新の安定版がインストールされた`<component>`コンポーネントのパスが出力されます。5 `<component>`インストールされていない場合は、エラーが返されます。
+    -   `tiup --binary <component>:<version>`を実行すると、インストールされた`<component>`コンポーネントの`<version>`のパスが出力されます。この`<version>`が出力されない場合は、エラーが返されます。
 
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   データ型: `BOOLEAN`
 
-> **Note:**
+-   このオプションはデフォルトでは無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないようにします。
+
+> **注記：**
 >
-> This option can only be used in commands of the `tiup [flags] <component> [args...]` format.
+> このオプションは、 `tiup [flags] <component> [args...]`形式のコマンドでのみ使用できます。
 
-### --binpath
+### --binパス {#binpath}
 
-> **Note:**
+> **注記：**
 >
-> This option can only be used in commands of the `tiup [flags] <component> [args...]` format.
+> このオプションは、 `tiup [flags] <component> [args...]`形式のコマンドでのみ使用できます。
 
-- Specifies the path of the component to be executed. When a component is executed, if you do not want to use the binary file in the TiUP mirror, you can add this option to specify using the binary file in a custom path.
-- Data type: `STRING`
+-   実行するコンポーネントのパスを指定します。コンポーネントの実行時に、 TiUPミラー内のバイナリ ファイルを使用しない場合は、このオプションを追加して、カスタム パス内のバイナリ ファイルを使用するように指定できます。
+-   データ型: `STRING`
 
-### -T, --tag
+### -T, --タグ {#t-tag}
 
-- Specifies a tag for the component to be started. Some components need to use disk storage during the execution, and TiUP allocates a temporary storage directory for this execution. If you want TiUP to allocate a fixed directory, you can use `-T/--tag` to specify the name of the directory, so that the same batch of files can be read and written in multiple executions with the same tag.
-- Data type: `STRING`
+-   開始するコンポーネントのタグを指定します。一部のコンポーネントは実行中にディスクstorageを使用する必要があり、 TiUP はこの実行用に一時storageディレクトリを割り当てます。TiUPで固定ディレクトリを割り当てる場合は、 `-T/--tag`使用してディレクトリ名を指定します。これにより、同じタグを使用して複数の実行で同じファイルのバッチを読み書きできます。
+-   データ型: `STRING`
 
-### -v, --version
+### -v, --バージョン {#v-version}
 
-Prints the TiUP version.
+TiUPバージョンを印刷します。
 
-### --help
+### - ヘルプ {#help}
 
-Prints the help information.
+ヘルプ情報を出力します。
 
-## Command list
+## コマンドリスト {#command-list}
 
-TiUP has multiple commands, and these commands have multiple sub-commands. For the specific commands and their detailed descriptions, click the corresponding links in the list below:
+TiUPには複数のコマンドがあり、これらのコマンドには複数のサブコマンドがあります。特定のコマンドとその詳細な説明については、以下のリストの対応するリンクをクリックしてください。
 
-- [install](/tiup/tiup-command-install.md): Installs a component.
-- [list](/tiup/tiup-command-list.md): Shows the component list.
-- [uninstall](/tiup/tiup-command-uninstall.md): Uninstalls a component.
-- [update](/tiup/tiup-command-update.md): Updates the installed component.
-- [status](/tiup/tiup-command-status.md): Shows the running status of a component.
-- [clean](/tiup/tiup-command-clean.md): Cleans the data directory of a component.
-- [mirror](/tiup/tiup-command-mirror.md): Manages the mirror.
-- [telemetry](/tiup/tiup-command-telemetry.md): Enables or disables the telemetry.
-- [completion](/tiup/tiup-command-completion.md): Completes the TiUP command.
-- [env](/tiup/tiup-command-env.md): Shows the TiUP-related environment variables.
-- [help](/tiup/tiup-command-help.md): Shows the help information of a command or component.
+-   [インストール](/tiup/tiup-command-install.md) :コンポーネントをインストールします。
+-   [リスト](/tiup/tiup-command-list.md) :コンポーネントリストを表示します。
+-   [アンインストール](/tiup/tiup-command-uninstall.md) :コンポーネントをアンインストールします。
+-   [アップデート](/tiup/tiup-command-update.md) : インストールされているコンポーネントを更新します。
+-   [状態](/tiup/tiup-command-status.md) :コンポーネントの実行ステータスを表示します。
+-   [クリーン](/tiup/tiup-command-clean.md) :コンポーネントのデータディレクトリをクリーンアップします。
+-   [鏡](/tiup/tiup-command-mirror.md) : ミラーを管理します。
+-   [テレメトリー](/tiup/tiup-command-telemetry.md) : テレメトリを有効または無効にします。
+-   [完了](/tiup/tiup-command-completion.md) : TiUPコマンドを完了します。
+-   [環境](/tiup/tiup-command-env.md) : TiUP関連の環境変数を表示します。
+-   [ヘルプ](/tiup/tiup-command-help.md) : コマンドまたはコンポーネントのヘルプ情報を表示します。
 
-## Component list
+## コンポーネントリスト {#component-list}
 
-- [cluster](/tiup/tiup-component-cluster.md): Manages the TiDB cluster in a production environment.
-- [dm](/tiup/tiup-component-dm.md): Manages the TiDB Data Migration (DM) cluster in a production environment.
+-   [集まる](/tiup/tiup-component-cluster.md) : 実本番環境で TiDB クラスターを管理します。
+-   [dm](/tiup/tiup-component-dm.md) :本番環境で TiDB データ移行 (DM) クラスターを管理します。

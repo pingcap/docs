@@ -1,36 +1,36 @@
 ---
 title: TiCDC Deployment Topology
-summary: Learn the deployment topology of TiCDC based on the minimal TiDB topology.
+summary: 最小限の TiDB トポロジに基づく TiCDC のデプロイメント トポロジを学習します。
 ---
 
-# TiCDC Deployment Topology
+# TiCDC 展開トポロジ {#ticdc-deployment-topology}
 
-> **Note:**
+> **注記：**
 >
-> TiCDC is a feature for general availability (GA) since v4.0.6. You can use it in the production environment.
+> TiCDC は、v4.0.6 以降で一般提供 (GA) されている機能です。本番環境で使用できます。
 
-This document describes the deployment topology of [TiCDC](/ticdc/ticdc-overview.md) based on the minimal cluster topology.
+このドキュメントでは、最小限のクラスター トポロジに基づく[ティCDC](/ticdc/ticdc-overview.md)のデプロイメント トポロジについて説明します。
 
-TiCDC is a tool for replicating the incremental data of TiDB, introduced in TiDB 4.0. It supports multiple downstream platforms, such as TiDB, MySQL, Kafka, MQ, and storage services. Compared with TiDB Binlog, TiCDC has lower latency and native high availability.
+TiCDC は、TiDB 4.0 で導入された、TiDB の増分データを複製するためのツールです。TiDB、MySQL、Kafka、MQ、storageサービスなど、複数のダウンストリーム プラットフォームをサポートしています。TiDB Binlogと比較すると、TiCDC はレイテンシーが低く、ネイティブで高い可用性を備えています。
 
-## Topology information
+## トポロジ情報 {#topology-information}
 
-| Instance | Count | Physical machine configuration | IP | Configuration |
-| :-- | :-- | :-- | :-- | :-- |
-| TiDB | 3 | 16 VCore 32GB * 1 | 10.0.1.1 <br/> 10.0.1.2 <br/> 10.0.1.3 | Default port <br/> Global directory configuration |
-| PD | 3 | 4 VCore 8GB * 1 | 10.0.1.4 <br/> 10.0.1.5 <br/> 10.0.1.6 | Default port <br/> Global directory configuration |
-| TiKV | 3 | 16 VCore 32GB 2TB (nvme ssd) * 1 | 10.0.1.7 <br/> 10.0.1.8 <br/> 10.0.1.9 | Default port <br/> Global directory configuration |
-| CDC | 3 | 8 VCore 16GB * 1 | 10.0.1.11 <br/> 10.0.1.12 <br/> 10.0.1.13 | Default port <br/> Global directory configuration |
-| Monitoring & Grafana | 1 | 4 VCore 8GB * 1 500GB (ssd) | 10.0.1.11 | Default port <br/> Global directory configuration |
+| 実例             | カウント | 物理マシン構成                          | IP                                      | コンフィグレーション                 |
+| :------------- | :--- | :------------------------------- | :-------------------------------------- | :------------------------- |
+| ティビ            | 3    | 16 VCore 32GB * 1                | 10.0.1.1<br/> 10.0.1.2<br/> 10.0.1.3    | デフォルトポート<br/>グローバルディレクトリ構成 |
+| PD             | 3    | 4 VCore 8GB * 1                  | 10.0.1.4<br/> 10.0.1.5<br/> 10.0.1.6    | デフォルトポート<br/>グローバルディレクトリ構成 |
+| ティクヴ           | 3    | 16 VCore 32GB 2TB (nvme ssd) * 1 | 10.0.1.7<br/> 10.0.1.8<br/> 10.0.1.9    | デフォルトポート<br/>グローバルディレクトリ構成 |
+| CDC            | 3    | 8 VCore 16GB * 1                 | 10.0.1.11<br/> 10.0.1.12<br/> 10.0.1.13 | デフォルトポート<br/>グローバルディレクトリ構成 |
+| モニタリングとGrafana | 1    | 4 VCore 8GB * 1 500GB (SSD)      | 10.0.1.11                               | デフォルトポート<br/>グローバルディレクトリ構成 |
 
-### Topology templates
+### トポロジーテンプレート {#topology-templates}
 
-- [The simple template for the TiCDC topology](https://github.com/pingcap/docs/blob/master/config-templates/simple-cdc.yaml)
-- [The complex template for the TiCDC topology](https://github.com/pingcap/docs/blob/master/config-templates/complex-cdc.yaml)
+-   [TiCDCトポロジのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-cdc.yaml)
+-   [TiCDCトポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-cdc.yaml)
 
-For detailed descriptions of the configuration items in the above TiDB cluster topology file, see [Topology Configuration File for Deploying TiDB Using TiUP](/tiup/tiup-cluster-topology-reference.md).
+上記の TiDB クラスタ トポロジ ファイルの構成項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
-> **Note:**
+> **注記：**
 >
-> - You do not need to manually create the `tidb` user in the configuration file. The TiUP cluster component automatically creates the `tidb` user on the target machines. You can customize the user, or keep the user consistent with the control machine.
-> - If you configure the deployment directory as a relative path, the cluster will be deployed in the home directory of the user.
+> -   構成ファイルで`tidb`ユーザーを手動で作成する必要はありません。TiUP クラスターコンポーネントは、ターゲット マシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズすることも、ユーザーをコントロール マシンと一致させることもできます。
+> -   デプロイメント ディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリにデプロイされます。

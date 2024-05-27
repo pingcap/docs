@@ -1,31 +1,31 @@
 ---
 title: Bit Functions and Operators
-summary: Learn about the bit functions and operators.
+summary: ビット関数と演算子について学習します。
 ---
 
-# Bit Functions and Operators
+# ビット関数と演算子 {#bit-functions-and-operators}
 
-TiDB supports all of the [bit functions and operators](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html) available in MySQL 8.0.
+TiDB は、MySQL 8.0 で利用可能な[ビット関数と演算子](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html)のすべてをサポートします。
 
-**Bit functions and operators:**
+**ビット関数と演算子:**
 
-| Name | Description |
-| :------| :------------- |
-| [`BIT_COUNT()`](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#function_bit-count) | Return the number of bits that are set as 1 |
-| [&](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-and) | Bitwise AND |
-| [~](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-invert) | Bitwise inversion |
-| [\|](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-or) | Bitwise OR |
-| [^](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-xor) | Bitwise XOR |
-| [<<](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_left-shift) | Left shift |
-| [>>](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_right-shift) | Right shift |
+| 名前                                                                                             | 説明                  |
+| :--------------------------------------------------------------------------------------------- | :------------------ |
+| [`BIT_COUNT()`](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#function_bit-count) | 1に設定されているビットの数を返します |
+| [＆](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-and)           | ビットAND              |
+| [〜](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-invert)        | ビット反転               |
+| [|](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-or)            | ビットOR               |
+| [^](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-xor)           | ビット単位の排他的論理和        |
+| [&lt;&lt;](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_left-shift)     | 左方移動                |
+| [&gt;&gt;](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_right-shift)    | 右シフト                |
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-There are some differences between MySQL 8.0 and earlier versions of MySQL in handling bit functions and operators. TiDB aims to follow the behavior of MySQL 8.0.
+MySQL 8.0 と以前のバージョンの MySQL では、ビット関数と演算子の処理にいくつかの違いがあります。TiDB は、MySQL 8.0 の動作に従うことを目指しています。
 
-## Known issues
+## 既知の問題点 {#known-issues}
 
-In the following cases, the query results in TiDB are the same as MySQL 5.7 but different from MySQL 8.0.
+以下の場合、TiDB のクエリ結果はMySQL 5.7と同じですが、MySQL 8.0 とは異なります。
 
-- Bitwise operations with binary arguments. For more information, see [#30637](https://github.com/pingcap/tidb/issues/30637).
-- The result of the `BIT_COUNT()` function. For more information, see [#44621](https://github.com/pingcap/tidb/issues/44621).
+-   バイナリ引数を使用したビット演算。詳細については、 [＃30637](https://github.com/pingcap/tidb/issues/30637)参照してください。
+-   `BIT_COUNT()`関数の結果。詳細については、 [＃44621](https://github.com/pingcap/tidb/issues/44621)を参照してください。

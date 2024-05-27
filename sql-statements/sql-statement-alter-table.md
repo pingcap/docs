@@ -1,17 +1,17 @@
 ---
 title: ALTER TABLE | TiDB SQL Statement Reference
-summary: An overview of the usage of ALTER TABLE for the TiDB database.
+summary: TiDB データベースの ALTER TABLE の使用法の概要。
 ---
 
-# ALTER TABLE
+# 他の机 {#alter-table}
 
-This statement modifies an existing table to conform to a new table structure. The statement `ALTER TABLE` can be used to:
+このステートメントは、既存のテーブルを新しいテーブル構造に適合するように変更します。ステートメント`ALTER TABLE`は次の目的で使用できます。
 
-- [`ADD`](/sql-statements/sql-statement-add-index.md), [`DROP`](/sql-statements/sql-statement-drop-index.md), or [`RENAME`](/sql-statements/sql-statement-rename-index.md) indexes
-- [`ADD`](/sql-statements/sql-statement-add-column.md), [`DROP`](/sql-statements/sql-statement-drop-column.md), [`MODIFY`](/sql-statements/sql-statement-modify-column.md) or [`CHANGE`](/sql-statements/sql-statement-change-column.md) columns
-- [`COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) table data
+-   [`ADD`](/sql-statements/sql-statement-add-index.md) 、 [`DROP`](/sql-statements/sql-statement-drop-index.md) 、または[`RENAME`](/sql-statements/sql-statement-rename-index.md)インデックス
+-   [`ADD`](/sql-statements/sql-statement-add-column.md) [`DROP`](/sql-statements/sql-statement-drop-column.md)または[`MODIFY`](/sql-statements/sql-statement-modify-column.md) [`CHANGE`](/sql-statements/sql-statement-change-column.md)
+-   [`COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)テーブルデータ
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AlterTableStmt ::=
@@ -61,11 +61,9 @@ PlacementPolicyOption ::=
 |   "PLACEMENT" "POLICY" (EqOpt | "SET") "DEFAULT"
 ```
 
-## Examples
+## 例 {#examples}
 
-Create a table with some initial data:
-
-{{< copyable "sql" >}}
+初期データを含むテーブルを作成します。
 
 ```sql
 CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -79,9 +77,7 @@ Query OK, 5 rows affected (0.03 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 ```
 
-The following query requires a full table scan because the column c1 is not indexed:
-
-{{< copyable "sql" >}}
+次のクエリでは、列 c1 にインデックスが付けられていないため、完全なテーブルスキャンが必要です。
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
@@ -98,9 +94,7 @@ EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 3 rows in set (0.00 sec)
 ```
 
-The statement [`ALTER TABLE .. ADD INDEX`](/sql-statements/sql-statement-add-index.md) can be used to add an index on the table t1. `EXPLAIN` confirms that the original query now uses an index range scan, which is more efficient:
-
-{{< copyable "sql" >}}
+ステートメント[`ALTER TABLE .. ADD INDEX`](/sql-statements/sql-statement-add-index.md)テーブル t1 にインデックスを追加するために使用できます。3 `EXPLAIN` 、元のクエリでインデックス範囲スキャンが使用されるようになり、より効率的になっていることを確認します。
 
 ```sql
 ALTER TABLE t1 ADD INDEX (c1);
@@ -119,9 +113,7 @@ Query OK, 0 rows affected (0.30 sec)
 2 rows in set (0.00 sec)
 ```
 
-TiDB supports the ability to assert that DDL changes will use a particular `ALTER` algorithm. This is only an assertion, and does not change the actual algorithm which will be used to modify the table. It can be useful if you only want to permit instant DDL changes during the peak hours of your cluster:
-
-{{< copyable "sql" >}}
+TiDB は、DDL 変更が特定の`ALTER`アルゴリズムを使用することをアサートする機能をサポートしています。これは単なるアサーションであり、テーブルの変更に使用される実際のアルゴリズムは変更しません。これは、クラスターのピーク時間帯にのみ即時の DDL 変更を許可したい場合に便利です。
 
 ```sql
 ALTER TABLE t1 DROP INDEX c1, ALGORITHM=INSTANT;
@@ -131,9 +123,7 @@ ALTER TABLE t1 DROP INDEX c1, ALGORITHM=INSTANT;
 Query OK, 0 rows affected (0.24 sec)
 ```
 
-Using the `ALGORITHM=INSTANT` assertion on an operation that requires the `INPLACE` algorithm results in a statement error:
-
-{{< copyable "sql" >}}
+`INPLACE`アルゴリズムを必要とする操作で`ALGORITHM=INSTANT`アサーションを使用すると、ステートメント エラーが発生します。
 
 ```sql
 ALTER TABLE t1 ADD INDEX (c1), ALGORITHM=INSTANT;
@@ -143,9 +133,7 @@ ALTER TABLE t1 ADD INDEX (c1), ALGORITHM=INSTANT;
 ERROR 1846 (0A000): ALGORITHM=INSTANT is not supported. Reason: Cannot alter table by INSTANT. Try ALGORITHM=INPLACE.
 ```
 
-However, using the `ALGORITHM=COPY` assertion for an `INPLACE` operation generates a warning instead of an error. This is because TiDB interprets the assertion as _this algorithm or better_. This behavior difference is useful for MySQL compatibility because the algorithm TiDB uses might differ from MySQL:
-
-{{< copyable "sql" >}}
+ただし、 `INPLACE`操作に`ALGORITHM=COPY`アサーションを使用すると、エラーではなく警告が生成されます。これは、TiDB がアサーションを*this algorithm or better*として解釈するためです。この動作の違いは、TiDB が使用するアルゴリズムが MySQL と異なる可能性があるため、MySQL との互換性に役立ちます。
 
 ```sql
 ALTER TABLE t1 ADD INDEX (c1), ALGORITHM=COPY;
@@ -163,39 +151,39 @@ Query OK, 0 rows affected, 1 warning (0.25 sec)
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-The following major restrictions apply to `ALTER TABLE` in TiDB:
+TiDB の`ALTER TABLE`には次の主な制限が適用されます。
 
-- When altering multiple schema objects in a single `ALTER TABLE` statement:
+-   `ALTER TABLE`つのステートメントで複数のスキーマ オブジェクトを変更する場合:
 
-    - Modifying the same object in multiple changes is not supported.
-    - TiDB validates statements according to the table schema **before execution**. For example, an error returns when `ALTER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT AFTER c1;` is executed because column `c1` does not exist in the table.
-    - For an `ALTER TABLE` statement, the order of execution in TiDB is one change after another from left to right, which is incompatible with MySQL in some cases.
+    -   複数の変更で同じオブジェクトを変更することはサポートされていません。
+    -   TiDB は**、実行前に**テーブル スキーマに従ってステートメントを検証します。たとえば、列`c1`テーブルに存在しないため、 `ALTER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT AFTER c1;`を実行するとエラーが返されます。
+    -   `ALTER TABLE`ステートメントの場合、TiDB での実行順序は左から右への変更が 1 つずつ順番に実行されるため、場合によっては MySQL と互換性がありません。
 
-- Changes of the [Reorg-Data](/sql-statements/sql-statement-modify-column.md#reorg-data-change) types on primary key columns are not supported.
+-   主キー列の[再編成データ](/sql-statements/sql-statement-modify-column.md#reorg-data-change)種類の変更はサポートされていません。
 
-- Changes of column types on partitioned tables are not supported.
+-   パーティション化されたテーブル上の列タイプの変更はサポートされていません。
 
-- Changes of column types on generated columns are not supported.
+-   生成された列の列タイプの変更はサポートされていません。
 
-- Changes of some data types (for example, some TIME, Bit, Set, Enum, and JSON types) are not supported due to the compatibility issues of the `CAST` function's behavior between TiDB and MySQL.
+-   一部のデータ型 (たとえば、一部の TIME、Bit、Set、Enum、JSON 型) の変更は、TiDB と MySQL 間の`CAST`関数の動作の互換性の問題によりサポートされていません。
 
-- Spatial data types are not supported.
+-   空間データ型はサポートされていません。
 
-- `ALTER TABLE t CACHE | NOCACHE` is a TiDB extension to MySQL syntax. For details, see [Cached Tables](/cached-tables.md).
+-   `ALTER TABLE t CACHE | NOCACHE` 、MySQL 構文に対する TiDB 拡張です。詳細については、 [キャッシュされたテーブル](/cached-tables.md)を参照してください。
 
-For further restrictions, see [MySQL Compatibility](/mysql-compatibility.md#ddl-operations).
+詳細な制限については[MySQL 互換性](/mysql-compatibility.md#ddl-operations)を参照してください。
 
-## See also
+## 参照 {#see-also}
 
-- [MySQL Compatibility](/mysql-compatibility.md#ddl-operations)
-- [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
-- [DROP COLUMN](/sql-statements/sql-statement-drop-column.md)
-- [ADD INDEX](/sql-statements/sql-statement-add-index.md)
-- [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
-- [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
-- [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
-- [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
-- [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
-- [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+-   [MySQL 互換性](/mysql-compatibility.md#ddl-operations)
+-   [列を追加](/sql-statements/sql-statement-add-column.md)
+-   [ドロップコラム](/sql-statements/sql-statement-drop-column.md)
+-   [インデックスを追加](/sql-statements/sql-statement-add-index.md)
+-   [インデックスを削除](/sql-statements/sql-statement-drop-index.md)
+-   [インデックス名の変更](/sql-statements/sql-statement-rename-index.md)
+-   [インデックスの変更](/sql-statements/sql-statement-alter-index.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [テーブルを削除](/sql-statements/sql-statement-drop-table.md)
+-   [表示テーブルの作成](/sql-statements/sql-statement-show-create-table.md)

@@ -1,19 +1,21 @@
 ---
 title: Date and Time Types
-summary: Learn about the supported date and time types.
+summary: サポートされている日付と時刻の種類について説明します。
 ---
 
-# Date and Time Types
+# 日付と時刻の種類 {#date-and-time-types}
 
-TiDB supports all MySQL date and time data types to store temporal values: [`DATE`](#date-type), [`TIME`](#time-type), [`DATETIME`](#datetime-type), [`TIMESTAMP`](#timestamp-type), and [`YEAR`](#year-type). For more information, see [Date and Time Data Types in MySQL](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-types.html).
+TiDB は、時間値を格納するためにすべての MySQL 日付と時刻のデータ型をサポートしています: [`DATE`](#date-type) 、 [`TIME`](#time-type) 、 [`DATETIME`](#datetime-type) 、 [`TIMESTAMP`](#timestamp-type) 、および[`YEAR`](#year-type) 。詳細については、 [MySQL の日付と時刻のデータ型](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-types.html)を参照してください。
 
-Each of these types has its range of valid values, and uses a zero value to indicate that it is an invalid value. In addition, the `TIMESTAMP` and `DATETIME` types can automatically generate new time values on modification.
+これらの各タイプには有効な値の範囲があり、無効な値であることを示すためにゼロ値が使用されます。さらに、タイプ`TIMESTAMP`と`DATETIME`では、変更時に新しい時間値を自動的に生成できます。
 
-When dealing with date and time value types, note:
+日付と時刻の値の型を扱うときは、次の点に注意してください。
 
-+ Although TiDB tries to interpret different formats, the date-portion must be in the format of year-month-day (for example, '1998-09-04'), rather than month-day-year or day-month-year.
-+ If the year-portion of a date is specified as 2 digits, TiDB converts it based on [specific rules](#two-digit-year-portion-contained-in-the-date).
-+ If a numeric value is needed in the context, TiDB automatically converts the date or time value into a numeric type. For example:
+-   TiDB はさまざまな形式を解釈しようとしますが、日付部分は月-日-年や日-月-年ではなく、年-月-日 (たとえば、「1998-09-04」) の形式である必要があります。
+
+-   日付の年の部分が 2 桁で指定されている場合、TiDB はそれを[特定のルール](#two-digit-year-portion-contained-in-the-date)に基づいて変換します。
+
+-   コンテキストで数値が必要な場合、TiDB は日付または時刻の値を自動的に数値型に変換します。例:
 
     ```sql
     mysql> SELECT NOW(), NOW()+0, NOW(3)+0;
@@ -24,7 +26,7 @@ When dealing with date and time value types, note:
     +---------------------+----------------+--------------------+
     ```
 
-+ TiDB might automatically convert invalid values or values beyond the supported range to a zero value of that type. This behavior is dependent on the SQL Mode set. For example:
+-   TiDB は、無効な値またはサポートされている範囲を超える値を、その型のゼロ値に自動的に変換する場合があります。この動作は、SQL モードの設定によって異なります。例:
 
     ```sql
     mysql> show create table t1;
@@ -61,97 +63,99 @@ When dealing with date and time value types, note:
     1 row in set (0.01 sec)
     ```
 
-+ Setting different SQL modes can change TiDB behaviors.
-+ If the SQL mode `NO_ZERO_DATE` is not enabled, TiDB allows month or day in the columns of `DATE` and `DATETIME` to be zero value, for example, '2009-00-00' or '2009-01-00'. If this date type is to be calculated in a function, for example, in `DATE_SUB()` or `DATE_ADD()`, the result can be incorrect.
-+ By default, TiDB enables the SQL mode `NO_ZERO_DATE`. This mode prevents storing zero values such as '0000-00-00'.
+-   異なる SQL モードを設定すると、TiDB の動作が変わる場合があります。
 
-Different types of zero value are shown in the following table:
+-   SQL モード`NO_ZERO_DATE`が有効になっていない場合、TiDB では、列`DATE`と`DATETIME`の月または日にゼロ値 (例: &#39;2009-00-00&#39; または &#39;2009-01-00&#39;) が許可されます。この日付タイプを関数で計算する場合 (例: `DATE_SUB()`または`DATE_ADD()` )、結果が不正確になる可能性があります。
 
-| Date Type | "Zero" Value |
-| :------   |  :----       |
-| DATE      | '0000-00-00' |
-| TIME      | '00:00:00'   |
-| DATETIME  | '0000-00-00 00:00:00' |
-| TIMESTAMP | '0000-00-00 00:00:00' |
-| YEAR      | 0000         |
+-   デフォルトでは、TiDB は SQL モード`NO_ZERO_DATE`を有効にします。このモードでは、「0000-00-00」などのゼロ値が保存されるのを防ぎます。
 
-Invalid `DATE`, `DATETIME`, `TIMESTAMP` values are automatically converted to the corresponding type of zero value ( '0000-00-00' or '0000-00-00 00:00:00' ) if the SQL mode permits such usage.
+ゼロ値のさまざまなタイプを次の表に示します。
 
-## Supported types
+| 日付タイプ   | 「ゼロ」値                         |
+| :------ | :---------------------------- |
+| 日付      | &#39;0000-00-00&#39;          |
+| 時間      | &#39;00:00:00&#39;            |
+| 日付時刻    | &#39;0000-00-00 00:00:00&#39; |
+| タイムスタンプ | &#39;0000-00-00 00:00:00&#39; |
+| 年       | 0000                          |
 
-### `DATE` type
+無効な`DATE` 、 `DATETIME` 、 `TIMESTAMP`の値は、SQL モードで許可されている場合、対応するタイプのゼロ値 ( &#39;0000-00-00&#39; または &#39;0000-00-00 00:00:00&#39; ) に自動的に変換されます。
 
-`DATE` only contains date-portion and no time-portion, displayed in `YYYY-MM-DD` format. The supported range is '0000-01-01' to '9999-12-31':
+## サポートされているタイプ {#supported-types}
+
+### <code>DATE</code>型 {#code-date-code-type}
+
+`DATE`日付部分のみが含まれ、時刻部分は含まれず、 `YYYY-MM-DD`形式で表示されます。サポートされている範囲は &#39;0000-01-01&#39; から &#39;9999-12-31&#39; です。
 
 ```sql
 DATE
 ```
 
-### `TIME` type
+### <code>TIME</code>型 {#code-time-code-type}
 
-For the `TIME` type, the format is `HH:MM:SS[.fraction]` and valid values range from '-838:59:59.000000' to '838:59:59.000000'. `TIME` is used not only to indicate the time within a day but also to indicate the time interval between 2 events. An optional `fsp` value in the range from 0 to 6 may be given to specify fractional seconds precision. If omitted, the default precision is 0:
+`TIME`型の場合、形式は`HH:MM:SS[.fraction]`で、有効な値の範囲は &#39;-838:59:59.000000&#39; から &#39;838:59:59.000000&#39; です。5 `TIME` 、1 日の時間を示すだけでなく、2 つのイベント間の時間間隔を示すためにも使用されます。オプションで 0 から 6 の範囲の`fsp`値を指定して、小数秒の精度を指定することもできます。省略した場合、デフォルトの精度は 0 です。
 
 ```sql
 TIME[(fsp)]
 ```
 
-> **Note:**
+> **注記：**
 >
-> Pay attention to the abbreviated form of `TIME`. For example, '11:12' means '11:12:00' instead of '00:11:12'. However, '1112' means '00:11:12'. These differences are caused by the presence or absence of the `:` character.
+> `TIME`の省略形に注意してください。たとえば、「11:12」は「00:11:12」ではなく「11:12:00」を意味します。ただし、「1112」は「00:11:12」を意味します。これらの違いは、 `:`文字の有無によって生じます。
 
-### `DATETIME` type
+### <code>DATETIME</code>型 {#code-datetime-code-type}
 
-`DATETIME` contains both date-portion and time-portion. Valid values range from '0000-01-01 00:00:00.000000' to '9999-12-31 23:59:59.999999'.
+`DATETIME`には日付部分と時刻部分の両方が含まれます。有効な値の範囲は、「0000-01-01 00:00:00.000000」から「9999-12-31 23:59:59.999999」までです。
 
-TiDB displays `DATETIME` values in `YYYY-MM-DD HH:MM:SS[.fraction]` format, but permits assignment of values to `DATETIME` columns using either strings or numbers. An optional fsp value in the range from 0 to 6 may be given to specify fractional seconds precision. If omitted, the default precision is 0:
+TiDB は`DATETIME`値を`YYYY-MM-DD HH:MM:SS[.fraction]`の形式で表示しますが、文字列または数値を使用して`DATETIME`列に値を割り当てることができます。小数秒の精度を指定するには、0 から 6 の範囲のオプションの fsp 値を指定できます。省略した場合、デフォルトの精度は 0 です。
 
 ```sql
 DATETIME[(fsp)]
 ```
 
-### `TIMESTAMP` type
+### <code>TIMESTAMP</code>型 {#code-timestamp-code-type}
 
-`TIMESTAMP` contains both date-portion and time-portion. Valid values range from '1970-01-01 00:00:01.000000' to '2038-01-19 03:14:07.999999' in UTC time. An optional fsp value in the range from 0 to 6 may be given to specify fractional seconds precision. If omitted, the default precision is 0.
+`TIMESTAMP`には日付部分と時刻部分の両方が含まれます。有効な値の範囲は、UTC 時間で &#39;1970-01-01 00:00:01.000000&#39; から &#39;2038-01-19 03:14:07.999999&#39; です。小数秒の精度を指定するには、0 から 6 の範囲のオプションの fsp 値を指定できます。省略した場合、デフォルトの精度は 0 です。
 
-In `TIMESTAMP`, zero is not permitted to appear in the month-portion or day-portion. The only exception is zero value itself '0000-00-00 00:00:00'.
+`TIMESTAMP`では、月部分または日部分にゼロを使用することはできません。唯一の例外は、ゼロ値自体「0000-00-00 00:00:00」です。
 
 ```sql
 TIMESTAMP[(fsp)]
 ```
 
-#### Timezone Handling
+#### タイムゾーンの処理 {#timezone-handling}
 
-When `TIMESTAMP` is to be stored, TiDB converts the `TIMESTAMP` value from the current time zone to UTC time zone. When `TIMESTAMP` is to be retrieved, TiDB converts the stored `TIMESTAMP` value from UTC time zone to the current time zone (Note: `DATETIME` is not handled in this way). The default time zone for each connection is the server's local time zone, which can be modified by the environment variable `time_zone`.
+`TIMESTAMP`を保存する場合、TiDB は`TIMESTAMP`値を現在のタイムゾーンから UTC タイムゾーンに変換します。5 `TIMESTAMP`取得する場合、TiDB は保存されている`TIMESTAMP`値を UTC タイムゾーンから現在のタイムゾーンに変換します (注: `DATETIME`このようには処理されません)。各接続のデフォルトのタイムゾーンはサーバーのローカル タイムゾーンであり、環境変数`time_zone`で変更できます。
 
-> **Warning:**
+> **警告：**
 >
-> As in MySQL, the `TIMESTAMP` data type suffers from the [Year 2038 Problem](https://en.wikipedia.org/wiki/Year_2038_problem). For storing values that may span beyond 2038, please consider using the `DATETIME` type instead.
+> MySQL と同様に、 `TIMESTAMP`データ型は[2038年問題](https://en.wikipedia.org/wiki/Year_2038_problem)の影響を受けます。2038 を超える可能性がある値を保存する場合は、代わりに`DATETIME`型の使用を検討してください。
 
-### `YEAR` type
+### <code>YEAR</code>型 {#code-year-code-type}
 
-The `YEAR` type is specified in the format 'YYYY'. Supported values range from 1901 to 2155, or the zero value of 0000:
+`YEAR`型は &#39;YYYY&#39; の形式で指定されます。サポートされる値の範囲は 1901 から 2155、またはゼロ値 0000 です。
 
 ```sql
 YEAR[(4)]
 ```
 
-`YEAR` follows the following format rules:
+`YEAR`次のフォーマット規則に従います。
 
-+ Four-digit numeral ranges from 1901 to 2155
-+ Four-digit string ranges from '1901' to '2155'
-+ One-digit or two-digit numeral ranges from 1 to 99. Accordingly, 1-69 is converted to 2001-2069 and 70-99 is converted to 1970-1999
-+ One-digit or two-digit string ranges from '0' to '99'
-+ Value 0 is taken as 0000 whereas the string '0' or '00' is taken as 2000
+-   4桁の数字の範囲は1901年から2155年まで
+-   4桁の文字列の範囲は「1901」から「2155」までです
+-   1桁または2桁の数字の範囲は1から99です。したがって、1〜69は2001〜2069に変換され、70〜99は1970〜1999に変換されます。
+-   1桁または2桁の文字列の範囲は「0」から「99」までです
+-   値0は0000として扱われ、文字列「0」または「00」は2000として扱われます。
 
-Invalid `YEAR` value is automatically converted to 0000 (if users are not using the `NO_ZERO_DATE` SQL mode).
+無効な値`YEAR`自動的に 0000 に変換されます (ユーザーが`NO_ZERO_DATE` SQL モードを使用していない場合)。
 
-## Automatic initialization and update of `TIMESTAMP` and `DATETIME`
+## <code>TIMESTAMP</code>と<code>DATETIME</code>の自動初期化と更新 {#automatic-initialization-and-update-of-code-timestamp-code-and-code-datetime-code}
 
-Columns with `TIMESTAMP` or `DATETIME` value type can be automatically initialized or updated to the current time.
+`TIMESTAMP`または`DATETIME`値タイプを持つ列は、自動的に初期化されるか、現在の時刻に更新されます。
 
-For any column with `TIMESTAMP` or `DATETIME` value type in the table, you can set the default or auto-update value as current timestamp.
+テーブル内の`TIMESTAMP`または`DATETIME`値タイプを持つ列に対して、デフォルト値または自動更新値を現在のタイムスタンプとして設定できます。
 
-These properties can be set by setting `DEFAULT CURRENT_TIMESTAMP` and `ON UPDATE CURRENT_TIMESTAMP` when the column is being defined. DEFAULT can also be set as a specific value, such as `DEFAULT 0` or `DEFAULT '2000-01-01 00:00:00'`.
+これらのプロパティは、列を定義するときに`DEFAULT CURRENT_TIMESTAMP`と`ON UPDATE CURRENT_TIMESTAMP`設定することで設定できます。DEFAULT は、 `DEFAULT 0`や`DEFAULT '2000-01-01 00:00:00'`などの特定の値として設定することもできます。
 
 ```sql
 CREATE TABLE t1 (
@@ -160,7 +164,7 @@ CREATE TABLE t1 (
 );
 ```
 
-The default value for `DATETIME` is `NULL` unless it is specified as `NOT NULL`. For the latter situation, if no default value is set, the default value is be 0.
+`DATETIME`のデフォルト値は、 `NOT NULL`が指定されていない限り`NULL`です。後者の状況では、デフォルト値が設定されていない場合、デフォルト値は 0 になります。
 
 ```sql
 CREATE TABLE t1 (
@@ -169,21 +173,21 @@ CREATE TABLE t1 (
 );
 ```
 
-## Decimal part of time value
+## 時間値の小数部分 {#decimal-part-of-time-value}
 
-`DATETIME` and `TIMESTAMP` values can contain a fractional part of up to 6 digits which is accurate to microseconds. In any column of `DATETIME` or `TIMESTAMP` types, a fractional part is stored instead of being discarded. With a fractional part, the value is in the format of 'YYYY-MM-DD HH:MM:SS[.fraction]', and the fraction ranges from 000000 to 999999. A decimal point must be used to separate the fraction from the rest.
+`DATETIME`と`TIMESTAMP`値には、マイクロ秒単位の精度で最大 6 桁の小数部を含めることができます`DATETIME`または`TIMESTAMP`タイプの列では、小数部は破棄されずに保存されます。小数部がある場合、値は &#39;YYYY-MM-DD HH:MM:SS[.fraction]&#39; の形式になり、小数部の範囲は 000000 から 999999 です。小数部と残りの部分を区切るには、小数点を使用する必要があります。
 
-+ Use `type_name(fsp)` to define a column that supports fractional precision, where `type_name` can be `TIME`, `DATETIME` or `TIMESTAMP`. For example,
+-   小数精度をサポートする列を定義するには`type_name(fsp)`使用します。3 `type_name` `TIME` 、 `DATETIME` 、または`TIMESTAMP`になります。たとえば、
 
     ```sql
     CREATE TABLE t1 (t TIME(3), dt DATETIME(6));
     ```
 
-  `fsp` must range from 0 to 6.
+    `fsp` 0 から 6 の範囲でなければなりません。
 
-  `0` means there is no fractional part. If `fsp` is omitted, the default is 0.
+    `0`小数部がないことを意味します。2 `fsp`省略すると、デフォルトは 0 になります。
 
-+ When inserting `TIME`, `DATETIME` or `TIMESTAMP` which contain a fractional part, if the number of digit of the fraction is too few, or too many, rounding might be needed in the situation. For example:
+-   小数部分を含む`TIME` 、 `DATETIME` 、または`TIMESTAMP`挿入する場合、小数の桁数が少なすぎるか多すぎると、状況に応じて四捨五入が必要になることがあります。例:
 
     ```sql
     mysql> CREATE TABLE fractest( c1 TIME(2), c2 DATETIME(2), c3 TIMESTAMP(2) );
@@ -202,31 +206,31 @@ CREATE TABLE t1 (
     1 row in set (0.00 sec)
     ```
 
-## Conversions between date and time types
+## 日付と時刻の型間の変換 {#conversions-between-date-and-time-types}
 
-Sometimes we need to make conversions between date and time types. But some conversions might lead to information loss. For example, `DATE`, `DATETIME` and `TIMESTAMP` values all have their own respective ranges. `TIMESTAMP` should be no earlier than the year 1970 in UTC time or no later than UTC time '2038-01-19 03:14:07'. Based on this rule, '1968-01-01' is a valid date value of `DATE` or `DATETIME`, but becomes 0 when it is converted to `TIMESTAMP`.
+場合によっては、日付型と時刻型の間で変換を行う必要があります。しかし、一部の変換では情報が失われることがあります。たとえば、 `DATE` 、 `DATETIME` 、 `TIMESTAMP`の値はすべてそれぞれの範囲を持っています。 `TIMESTAMP` 、UTC 時間で 1970 年より前、または UTC 時間 &#39;2038-01-19 03:14:07&#39; より後であってはなりません。このルールに基づくと、 &#39;1968-01-01&#39; は`DATE`または`DATETIME`の有効な日付値ですが、 `TIMESTAMP`に変換すると 0 になります。
 
-The conversions of `DATE`:
+`DATE`の変換:
 
-+ When `DATE` is converted to `DATETIME` or `TIMESTAMP`, a time-portion '00:00:00' is added, because DATE does not contain any time information
-+ When `DATE` is converted to `TIME`, the result is '00:00:00'
+-   `DATE` `DATETIME`または`TIMESTAMP`に変換すると、DATEには時間情報が含まれていないため、時間部分「00:00:00」が追加されます。
+-   `DATE` `TIME`に変換すると、結果は「00:00:00」になります。
 
-Conversions of `DATETIME` or `TIMESTAMP`:
+`DATETIME`または`TIMESTAMP`の変換:
 
-+ When `DATETIME` or `TIMESTAMP` is converted to `DATE`, the time and fractional part is discarded. For example, '1999-12-31 23:59:59.499' is converted to '1999-12-31'
-+ When `DATETIME` or `TIMESTAMP` is converted to TIME, the date-portion is discarded, because `TIME` does not contain any date information
+-   `DATETIME`または`TIMESTAMP` `DATE`に変換すると、時間と小数部分は切り捨てられます。たとえば、「1999-12-31 23:59:59.499」は「1999-12-31」に変換されます。
+-   `DATETIME`または`TIMESTAMP` TIMEに変換すると、 `TIME`日付情報が含まれていないため、日付部分は破棄されます。
 
-When we convert `TIME` to other time and date formats, the date-portion is automatically specified as `CURRENT_DATE()`. The final converted result is a date that consists of `TIME` and `CURRENT_DATE()`. This is to say that if the value of TIME is beyond the range from '00:00:00' to '23:59:59', the converted date-portion does not indicate the current day.
+`TIME`他の時刻と日付の形式に変換すると、日付部分は自動的に`CURRENT_DATE()`として指定されます。最終的な変換結果は、 `TIME`と`CURRENT_DATE()`で構成される日付です。つまり、 TIME の値が &#39;00:00:00&#39; から &#39;23:59:59&#39; の範囲外の場合、変換された日付部分は現在の日を示しません。
 
-When `TIME` is converted to `DATE`, the process is similar, and the time-portion is discarded.
+`TIME` `DATE`に変換する場合もプロセスは同様であり、時間部分は破棄されます。
 
-Using the `CAST()` function can explicitly convert a value to a `DATE` type. For example:
+`CAST()`関数を使用すると、値を`DATE`型に明示的に変換できます。例:
 
 ```sql
 date_col = CAST(datetime_col AS DATE)
 ```
 
-Converting `TIME` and `DATETIME` to numeric format. For example:
+`TIME`と`DATETIME`数値形式に変換します。例:
 
 ```sql
 mysql> SELECT CURTIME(), CURTIME()+0, CURTIME(3)+0;
@@ -243,19 +247,19 @@ mysql> SELECT NOW(), NOW()+0, NOW(3)+0;
 +---------------------|----------------|--------------------+
 ```
 
-## Two-digit year-portion contained in the date
+## 日付に含まれる2桁の年の部分 {#two-digit-year-portion-contained-in-the-date}
 
-The two-digit year-portion contained in date does not explicitly indicate the actual year and is ambiguous.
+日付に含まれる 2 桁の年部分は実際の年を明示的に示しておらず、あいまいです。
 
-For `DATETIME`, `DATE` and `TIMESTAMP` types, TiDB follows the following rules to eliminate ambiguity:
+`DATETIME` `DATE`タイプの場合、TiDB は曖昧さを排除するために次のルール`TIMESTAMP`従います。
 
-- Values between 01 and 69 is converted to a value between 2001 and 2069
-- Values between 70 and 99 is converted to a value between 1970 and 1999
+-   01から69までの値は2001から2069までの値に変換されます
+-   70から99までの値は1970から1999までの値に変換されます
 
-These rules also apply to the `YEAR` type, with one exception:
+これらのルールは`YEAR`タイプにも適用されますが、1 つの例外があります。
 
-When numeral `00` is inserted to `YEAR(4)`, the result is 0000 rather than 2000.
+数字の`00` `YEAR(4)`に代入すると、結果は 2000 ではなく 0000 になります。
 
-If you want the result to be 2000, specify the value to be 2000.
+結果を 2000 にしたい場合は、値を 2000 に指定します。
 
-The two-digit year-portion might not be properly calculated in some functions such `MIN()` and `MAX()`. For these functions, the four-digit format suites better.
+2 桁の年部分は、 `MIN()`や`MAX()`などの一部の関数では正しく計算されない場合があります。これらの関数では、 4 桁の形式の方が適しています。

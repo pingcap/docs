@@ -1,108 +1,108 @@
 ---
 title: TiDB 6.5.2 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 6.5.2.
+summary: TiDB 6.5.2 の互換性の変更、改善、バグ修正について説明します。
 ---
 
-# TiDB 6.5.2 Release Notes
+# TiDB 6.5.2 リリースノート {#tidb-6-5-2-release-notes}
 
-Release date: April 21, 2023
+発売日: 2023年4月21日
 
-TiDB version: 6.5.2
+TiDB バージョン: 6.5.2
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.5/production-deployment-using-tiup)
+クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v6.5/quick-start-with-tidb) | [実稼働環境への導入](https://docs.pingcap.com/tidb/v6.5/production-deployment-using-tiup)
 
-## Compatibility changes
+## 互換性の変更 {#compatibility-changes}
 
-- TiCDC fixes the issue of incorrect encoding of `FLOAT` data in Avro [#8490](https://github.com/pingcap/tiflow/issues/8490) @[3AceShowHand](https://github.com/3AceShowHand)
+-   TiCDC は、Avro [＃8490](https://github.com/pingcap/tiflow/issues/8490) @ [3エースショーハンド](https://github.com/3AceShowHand)の`FLOAT`データのエンコードが正しくない問題を修正しました。
 
-    When upgrading the TiCDC cluster to v6.5.2 or a later v6.5.x version, if a table replicated using Avro contains the `FLOAT` data type, you need to manually adjust the compatibility policy of Confluent Schema Registry to `None` before upgrading so that the changefeed can successfully update the schema. Otherwise, after upgrading, the changefeed will be unable to update the schema and enter an error state.
+    TiCDC クラスターを v6.5.2 またはそれ以降の v6.5.x バージョンにアップグレードする場合、Avro を使用してレプリケートされたテーブルに`FLOAT`データ型が含まれている場合は、アップグレード前に Confluent Schema Registry の互換性ポリシーを手動で`None`に調整して、changefeed がスキーマを正常に更新できるようにする必要があります。そうしないと、アップグレード後に changefeed がスキーマを更新できず、エラー状態になります。
 
-- To fix the potential issue of data loss during replication of partitioned tables to storage services, the default value of the TiCDC [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) configuration item is changed from `false` to `true`. This means that partitions in a table are stored in separate directories by default. It is recommended that you keep the value as `true` to avoid the data loss issue. [#8724](https://github.com/pingcap/tiflow/issues/8724) @[CharlesCheung96](https://github.com/CharlesCheung96)
+-   パーティション化されたテーブルをstorageサービスにレプリケーションする際にデータ損失が発生する可能性がある問題を修正するため、TiCDC [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)構成項目のデフォルト値が`false`から`true`に変更されました。これは、テーブル内のパーティションがデフォルトで別のディレクトリに保存されることを意味します。データ損失の問題を回避するには、値を`true`のままにしておくことをお勧めします[＃8724](https://github.com/pingcap/tiflow/issues/8724) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
 
-## Improvements
+## 改善点 {#improvements}
 
-+ TiDB
+-   ティビ
 
-    - Support caching the execution plan for `BatchPointGet` in Prepared Plan Cache [#42125](https://github.com/pingcap/tidb/issues/42125) @[qw4990](https://github.com/qw4990)
-    - Support more SQL formats for Index Join [#40505](https://github.com/pingcap/tidb/issues/40505) @[Yisaer](https://github.com/Yisaer)
-    - Change the log level of some Index Merge readers from `"info"` to `"debug"` [#41949](https://github.com/pingcap/tidb/issues/41949) @[yibin87](https://github.com/yibin87)
-    - Optimize the `distsql_concurrency` setting for Range partitioned tables with Limit to reduce query latency [#41480](https://github.com/pingcap/tidb/issues/41480) @[you06](https://github.com/you06)
+    -   プリペアドプランキャッシュ[＃42125](https://github.com/pingcap/tidb/issues/42125) @ [qw4990](https://github.com/qw4990)で`BatchPointGet`の実行プランのキャッシュをサポートします
+    -   インデックス結合[#40505](https://github.com/pingcap/tidb/issues/40505) @ [イサール](https://github.com/Yisaer)のより多くの SQL 形式をサポート
+    -   一部のインデックスマージリーダーのログレベルを`"info"`から`"debug"` [＃41949](https://github.com/pingcap/tidb/issues/41949) @ [いいえ](https://github.com/yibin87)に変更します
+    -   クエリのレイテンシーを減らすために、制限付き範囲パーティションテーブルの`distsql_concurrency`設定を最適化します[＃41480](https://github.com/pingcap/tidb/issues/41480) @ [あなた06](https://github.com/you06)
 
-+ TiFlash
+-   TiFlash
 
-    - Reduce CPU consumption of task scheduling during TiFlash reads [#6495](https://github.com/pingcap/tiflash/issues/6495) @[JinheLin](https://github.com/JinheLin)
-    - Improve performance of data import from BR and TiDB Lightning to TiFlash with default configurations [#7272](https://github.com/pingcap/tiflash/issues/7272) @[breezewish](https://github.com/breezewish)
+    -   TiFlash読み取り中のタスク スケジューリングの CPU 消費を削減[＃6495](https://github.com/pingcap/tiflash/issues/6495) @ [ジンヘリン](https://github.com/JinheLin)
+    -   デフォルト設定[＃7272](https://github.com/pingcap/tiflash/issues/7272) @ [そよ風のような](https://github.com/breezewish)でBRおよびTiDB LightningからTiFlashへのデータ インポートのパフォーマンスを向上
 
-+ Tools
+-   ツール
 
-    + TiCDC
+    -   ティCDC
 
-        - Release TiCDC Open API v2.0 [#8743](https://github.com/pingcap/tiflow/issues/8743) @[sdojjy](https://github.com/sdojjy)
-        - Introduce `gomemlimit` to prevent TiCDC from OOM issues [#8675](https://github.com/pingcap/tiflow/issues/8675) @[amyangfei](https://github.com/amyangfei)
-        - Use the multi-statement approach to optimize the replication performance in scenarios involving batch execution of `UPDATE` statements [#8057](https://github.com/pingcap/tiflow/issues/8057) @[amyangfei](https://github.com/amyangfei)
-        - Support splitting transactions in the redo applier to improve its throughput and reduce RTO in disaster recovery scenarios [#8318](https://github.com/pingcap/tiflow/issues/8318) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - Support applying DDL events in redo logs [#8361](https://github.com/pingcap/tiflow/issues/8361) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        -   TiCDC オープン API v2.0 [＃8743](https://github.com/pingcap/tiflow/issues/8743) @ [スドジ](https://github.com/sdojjy)をリリース
+        -   TiCDC の OOM 問題を防ぐために`gomemlimit`導入する[＃8675](https://github.com/pingcap/tiflow/issues/8675) @ [アミヤンフェイ](https://github.com/amyangfei)
+        -   マルチステートメントアプローチを使用して、 `UPDATE`のステートメント[＃8057](https://github.com/pingcap/tiflow/issues/8057) @ [アミヤンフェイ](https://github.com/amyangfei)のバッチ実行を伴うシナリオでレプリケーションのパフォーマンスを最適化します。
+        -   災害復旧シナリオでのスループットの向上とRTOの短縮のために、REDOアプライヤでのトランザクション分割をサポートする[＃8318](https://github.com/pingcap/tiflow/issues/8318)​​ @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
+        -   REDOログ[＃8361](https://github.com/pingcap/tiflow/issues/8361) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)へのDDLイベントの適用をサポート
 
-    + TiDB Lightning
+    -   TiDB Lightning
 
-        - Support importing CSV data files with BOM headers [#40744](https://github.com/pingcap/tidb/issues/40744) @[dsdashun](https://github.com/dsdashun)
+        -   BOM ヘッダー[＃40744](https://github.com/pingcap/tidb/issues/40744) @ [ダシュン](https://github.com/dsdashun)を含む CSV データ ファイルのインポートをサポート
 
-## Bug fixes
+## バグの修正 {#bug-fixes}
 
-+ TiDB
-    - Fix the issue that after a new column is added in the cache table, the value is `NULL` instead of the default value of the column [#42928](https://github.com/pingcap/tidb/issues/42928) @[lqs](https://github.com/lqs)
-    - Fix the issue of DDL retry caused by write conflict when executing `TRUNCATE TABLE` for partitioned tables with many partitions and TiFlash replicas [#42940](https://github.com/pingcap/tidb/issues/42940) @[mjonss](https://github.com/mjonss)
-    - Fix the issue of missing table names in the `ADMIN SHOW DDL JOBS` result when a `DROP TABLE` operation is being executed [#42268](https://github.com/pingcap/tidb/issues/42268) @[tiancaiamao](https://github.com/tiancaiamao)
-    - Fix the issue that TiDB server cannot start due to an error in reading the cgroup information with the error message "can't read file memory.stat from cgroup v1: open /sys/memory.stat no such file or directory" [#42659](https://github.com/pingcap/tidb/issues/42659) @[hawkingrei](https://github.com/hawkingrei)
-    - Fix frequent write conflicts in transactions when performing DDL data backfill [#24427](https://github.com/pingcap/tidb/issues/24427) @[mjonss](https://github.com/mjonss)
-    - Fix the issue that TiDB panic occurs due to inconsistent InfoSchema being obtained when generating the execution plan [#41622](https://github.com/pingcap/tidb/issues/41622) @[tiancaiamao](https://github.com/tiancaiamao)
-    - Fix the issue that when modifying the floating-point type using DDL to keep the length unchanged and reduce the decimal places, the old data still remains the same [#41281](https://github.com/pingcap/tidb/issues/41281) @[zimulala](https://github.com/zimulala)
-    - Fix the issue that after executing `PointUpdate` within a transaction, TiDB returns incorrect results for the `SELECT` statement [#28011](https://github.com/pingcap/tidb/issues/28011) @[zyguan](https://github.com/zyguan)
-    - Fix the issue that, when using Cursor Fetch and running other statements among Execute, Fetch, and Close, the Fetch and Close commands might return incorrect results or cause TiDB to panic [#40094](https://github.com/pingcap/tidb/issues/40094) @[YangKeao](https://github.com/YangKeao)
-    - Fix the issue that `INSERT IGNORE` and `REPLACE` statements do not lock keys that do not modify values [#42121](https://github.com/pingcap/tidb/issues/42121) @[zyguan](https://github.com/zyguan)
-    - Fix the issue that TiFlash reports an error for generated columns during execution [#40663](https://github.com/pingcap/tidb/issues/40663) @[guo-shaoge](https://github.com/guo-shaoge)
-    - Fix the issue that TiDB might produce incorrect results when different partitioned tables appear in a single SQL statement [#42135](https://github.com/pingcap/tidb/issues/42135) @[mjonss](https://github.com/mjonss)
-    - Fix the issue that full index scans might cause errors when prepared plan cache is enabled [#42150](https://github.com/pingcap/tidb/issues/42150) @[fzzf678](https://github.com/fzzf678)
-    - Fix the issue that IndexMerge might produce incorrect results when prepare plan cache is enabled [#41828](https://github.com/pingcap/tidb/issues/41828) @[qw4990](https://github.com/qw4990)
-    - Fix the issue that the configuration of `max_prepared_stmt_count` does not take effect [#39735](https://github.com/pingcap/tidb/issues/39735) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
-    - Fix the issue that global memory control might incorrectly kill SQL statements with memory usage less than `tidb_server_memory_limit_sess_min_size` [#42662](https://github.com/pingcap/tidb/issues/42662) @[XuHuaiyu](https://github.com/XuHuaiyu)
-    - Fix the issue that Index Join might cause panic in dynamic trimming mode of partition tables [#40596](https://github.com/pingcap/tidb/issues/40596) @[tiancaiamao](https://github.com/tiancaiamao)
+-   ティビ
+    -   キャッシュ テーブルに新しい列が追加された後、列[＃42928](https://github.com/pingcap/tidb/issues/42928) @ [ルクス](https://github.com/lqs)のデフォルト値ではなく値が`NULL`なる問題を修正しました。
+    -   多数のパーティションとTiFlashレプリカ[＃42940](https://github.com/pingcap/tidb/issues/42940) @ [ミョンス](https://github.com/mjonss)を持つパーティション テーブルに対して`TRUNCATE TABLE`実行するときに書き込み競合によって発生する DDL 再試行の問題を修正しました。
+    -   `DROP TABLE`操作が実行されているときに`ADMIN SHOW DDL JOBS`結果にテーブル名が表示されない問題を修正[＃42268](https://github.com/pingcap/tidb/issues/42268) @ [天菜まお](https://github.com/tiancaiamao)
+    -   cgroup 情報の読み取りエラーにより、TiDBサーバーが起動できない問題を修正しました。エラー メッセージは「cgroup v1 からファイルメモリ.stat を読み取れません: /sys/ メモリ.stat を開いても、そのようなファイルまたはディレクトリはありません」です[＃42659](https://github.com/pingcap/tidb/issues/42659) @ [ホーキングレイ](https://github.com/hawkingrei)
+    -   DDL データ バックフィル[＃24427](https://github.com/pingcap/tidb/issues/24427) @ [ミョンス](https://github.com/mjonss)を実行するときにトランザクションで頻繁に発生する書き込み競合を修正
+    -   実行プラン[＃41622](https://github.com/pingcap/tidb/issues/41622) @ [天菜まお](https://github.com/tiancaiamao)を生成する際に不整合な InfoSchema が取得され、TiDBpanicが発生する問題を修正しました。
+    -   DDL を使用して浮動小数点型を変更し、長さを変更せずに小数点以下の桁数を減らしても、古いデータは同じままになる問題を修正しました[＃41281](https://github.com/pingcap/tidb/issues/41281) @ [ジムララ](https://github.com/zimulala)
+    -   トランザクション内で`PointUpdate`実行した後、TiDB が`SELECT`ステートメント[＃28011](https://github.com/pingcap/tidb/issues/28011) @ [ジグアン](https://github.com/zyguan)に対して誤った結果を返す問題を修正しました。
+    -   カーソルフェッチを使用し、実行、フェッチ、クローズ間で他のステートメントを実行すると、フェッチコマンドとクローズコマンドが誤った結果を返したり、TiDB がpanicを起こしたりする可能性がある問題を修正しました[＃40094](https://github.com/pingcap/tidb/issues/40094) @ [ヤンケオ](https://github.com/YangKeao)
+    -   `INSERT IGNORE`と`REPLACE`ステートメントが値[＃42121](https://github.com/pingcap/tidb/issues/42121) @ [ジグアン](https://github.com/zyguan)を変更しないキーをロックしない問題を修正しました
+    -   実行中にTiFlash が生成された列のエラーを報告する問題を修正[＃40663](https://github.com/pingcap/tidb/issues/40663) @ [グオシャオゲ](https://github.com/guo-shaoge)
+    -   単一の SQL ステートメントに異なるパーティション テーブルが出現すると、TiDB が誤った結果を生成する可能性がある問題を修正しました[＃42135](https://github.com/pingcap/tidb/issues/42135) @ [ミョンス](https://github.com/mjonss)
+    -   準備済みプランキャッシュが有効になっている場合にフルインデックススキャンでエラーが発生する可能性がある問題を修正[＃42150](https://github.com/pingcap/tidb/issues/42150) @ [ふーふー](https://github.com/fzzf678)
+    -   準備プランキャッシュが有効になっている場合に IndexMerge が誤った結果を生成する可能性がある問題を修正[＃41828](https://github.com/pingcap/tidb/issues/41828) @ [qw4990](https://github.com/qw4990)
+    -   `max_prepared_stmt_count`の設定が有効にならない問題を修正[＃39735](https://github.com/pingcap/tidb/issues/39735) @ [翻訳者](https://github.com/xuyifangreeneyes)
+    -   グローバルメモリ制御により、メモリ使用量が`tidb_server_memory_limit_sess_min_size` [＃42662](https://github.com/pingcap/tidb/issues/42662) @ [徐淮宇](https://github.com/XuHuaiyu)未満の SQL 文が誤って強制終了される可能性がある問題を修正しました。
+    -   パーティションテーブル[＃40596](https://github.com/pingcap/tidb/issues/40596) @ [天菜まお](https://github.com/tiancaiamao)の動的トリミングモードでインデックス結合がpanicを引き起こす可能性がある問題を修正しました。
 
-+ TiKV
+-   ティクヴ
 
-    - Fix the issue that TiKV does not correctly parse the `:` character when processing the cgroup path [#14538](https://github.com/tikv/tikv/issues/14538) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
+    -   TiKV が cgroup パス[＃14538](https://github.com/tikv/tikv/issues/14538) @ [スペードA-タン](https://github.com/SpadeA-Tang)を処理するときに`:`文字を正しく解析しない問題を修正しました。
 
-+ PD
+-   PD
 
-    - Fix the issue that PD might unexpectedly add multiple Learners to a Region [#5786](https://github.com/tikv/pd/issues/5786) @[HunDunDM](https://github.com/HunDunDM)
-    - Fix the issue that switching placement rule might cause uneven distribution of leaders [#6195](https://github.com/tikv/pd/issues/6195) @[bufferflies](https://github.com/bufferflies)
+    -   PD が予期せず複数の学習者をリージョン[＃5786](https://github.com/tikv/pd/issues/5786) @ [ハンダンDM](https://github.com/HunDunDM)に追加する可能性がある問題を修正しました。
+    -   配置ルールを切り替えるとリーダー[＃6195](https://github.com/tikv/pd/issues/6195) @ [バッファフライ](https://github.com/bufferflies)の分布が不均等になる可能性がある問題を修正しました。
 
-+ TiFlash
+-   TiFlash
 
-    - Fix the issue that TiFlash cannot recognize generated columns [#6801](https://github.com/pingcap/tiflash/issues/6801) @[guo-shaoge](https://github.com/guo-shaoge)
-    - Fix the issue that Decimal division does not round up the last digit in certain cases [#7022](https://github.com/pingcap/tiflash/issues/7022) @[LittleFall](https://github.com/LittleFall)
-    - Fix the issue that Decimal cast rounds up incorrectly in certain cases [#6994](https://github.com/pingcap/tiflash/issues/6994) @[windtalker](https://github.com/windtalker)
-    - Fix the issue that TopN/Sort operators produce incorrect results after enabling the new collation [#6807](https://github.com/pingcap/tiflash/issues/6807) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    - Fix the issue of TiFlash process failures due to TiCDC incompatibility [#7212](https://github.com/pingcap/tiflash/issues/7212) @[hongyunyan](https://github.com/hongyunyan)
+    -   TiFlashが生成された列[＃6801](https://github.com/pingcap/tiflash/issues/6801) @ [グオシャオゲ](https://github.com/guo-shaoge)を認識できない問題を修正
+    -   特定のケースで小数点以下の桁が切り上げられない問題を修正[＃7022](https://github.com/pingcap/tiflash/issues/7022) @ [リトルフォール](https://github.com/LittleFall)
+    -   特定のケースで[＃6994](https://github.com/pingcap/tiflash/issues/6994) @ [風の話し手](https://github.com/windtalker)の Decimal キャストが誤って切り上げられる問題を修正しました
+    -   新しい照合順序[＃6807](https://github.com/pingcap/tiflash/issues/6807) @ [翻訳者](https://github.com/xzhangxian1008)を有効にした後に TopN/Sort 演算子が誤った結果を生成する問題を修正しました。
+    -   TiCDC の非互換性によるTiFlashプロセス障害の問題を修正[＃7212](https://github.com/pingcap/tiflash/issues/7212) @ [ホンユンヤン](https://github.com/hongyunyan)
 
-+ Tools
+-   ツール
 
-    + Backup & Restore (BR)
+    -   バックアップと復元 (BR)
 
-        - Fix the issue that the frequency of `resolve lock` is too high when there is no PITR backup task in the TiDB cluster [#40759](https://github.com/pingcap/tidb/issues/40759) @[joccau](https://github.com/joccau)
-        - Fix the issue of insufficient wait time for splitting Region retry during the PITR recovery process [#42001](https://github.com/pingcap/tidb/issues/42001) @[joccau](https://github.com/joccau)
+        -   TiDB クラスター[＃40759](https://github.com/pingcap/tidb/issues/40759) @ [ジョッカウ](https://github.com/joccau)に PITR バックアップ タスクがない場合に`resolve lock`の頻度が高すぎる問題を修正
+        -   PITR リカバリ プロセス[＃42001](https://github.com/pingcap/tidb/issues/42001) @ [ジョッカウ](https://github.com/joccau)中に分割リージョンの再試行の待機時間が不十分になる問題を修正
 
-    + TiCDC
+    -   ティCDC
 
-        - Fix the issue that the partition separator does not work when TiCDC replicates data to object storage [#8581](https://github.com/pingcap/tiflow/issues/8581) @[CharlesCheung96](https://github.com/CharlesCheung96) @[hi-rustin](https://github.com/hi-rustin)
-        - Fix the issue that table scheduling might cause data loss when TiCDC replicates data to object storage [#8256](https://github.com/pingcap/tiflow/issues/8256) @[zhaoxinyu](https://github.com/zhaoxinyu)
-        - Fix the issue that the replication gets stuck due to non-reentrant DDL statements [#8662](https://github.com/pingcap/tiflow/issues/8662) @[hicqu](https://github.com/hicqu)
-        - Fix the issue that TiCDC scaling might cause data loss when TiCDC replicates data to object storage [#8666](https://github.com/pingcap/tiflow/issues/8666) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - Fix the issue that the memory usage of `db sorter` is not controlled by `cgroup memory limit` [#8588](https://github.com/pingcap/tiflow/issues/8588) @[amyangfei](https://github.com/amyangfei)
-        - Fix the issue that data loss might occur in special cases during the apply of Redo log [#8591](https://github.com/pingcap/tiflow/issues/8591) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - Fix the issue that the memory usage of `db sorter` is not controlled by `cgroup memory limit` [#8588](https://github.com/pingcap/tiflow/issues/8588) @[amyangfei](https://github.com/amyangfei)
-        - Fix the issue that the disorder of `UPDATE` and `INSERT` statements during data replication might cause the `Duplicate entry` error [#8597](https://github.com/pingcap/tiflow/issues/8597) @[sdojjy](https://github.com/sdojjy)
-        - Fix the abnormal exit issue of the TiCDC service caused by network isolation between PD and TiCDC [#8562](https://github.com/pingcap/tiflow/issues/8562) @[overvenus](https://github.com/overvenus)
-        - Fix the issue that graceful upgrade for TiCDC clusters fails on Kubernetes [#8484](https://github.com/pingcap/tiflow/issues/8484) @[overvenus](https://github.com/overvenus)
-        - Fix the issue that the TiCDC server panics when all downstream Kafka servers are unavailable [#8523](https://github.com/pingcap/tiflow/issues/8523) @[3AceShowHand](https://github.com/3AceShowHand)
-        - Fix the issue that restarting the changefeed might cause data loss or that the checkpoint cannot advance [#8242](https://github.com/pingcap/tiflow/issues/8242) @[overvenus](https://github.com/overvenus)
+        -   TiCDC がデータをオブジェクトstorage[＃8581](https://github.com/pingcap/tiflow/issues/8581) @ [チャールズ・チュン96](https://github.com/CharlesCheung96) @ [ハイラスティン](https://github.com/hi-rustin)に複製するときにパーティション セパレーターが機能しない問題を修正しました
+        -   TiCDC がオブジェクトstorage[＃8256](https://github.com/pingcap/tiflow/issues/8256) @ [趙新宇](https://github.com/zhaoxinyu)にデータを複製するときにテーブル スケジューリングによってデータが失われる可能性がある問題を修正しました。
+        -   非再入可能 DDL ステートメント[＃8662](https://github.com/pingcap/tiflow/issues/8662) @ [ヒック](https://github.com/hicqu)が原因でレプリケーションが停止する問題を修正しました
+        -   TiCDC がオブジェクトstorage[＃8666](https://github.com/pingcap/tiflow/issues/8666) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)にデータを複製するときに、TiCDC スケーリングによってデータ損失が発生する可能性がある問題を修正しました。
+        -   `db sorter`のメモリ使用量が`cgroup memory limit` [＃8588](https://github.com/pingcap/tiflow/issues/8588) @ [アミヤンフェイ](https://github.com/amyangfei)で制御されない問題を修正
+        -   Redo ログ[＃8591](https://github.com/pingcap/tiflow/issues/8591) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)の適用中に特別な場合にデータ損失が発生する可能性がある問題を修正しました。
+        -   `db sorter`のメモリ使用量が`cgroup memory limit` [＃8588](https://github.com/pingcap/tiflow/issues/8588) @ [アミヤンフェイ](https://github.com/amyangfei)で制御されない問題を修正
+        -   データ複製中に`UPDATE`と`INSERT`のステートメントが混在すると`Duplicate entry`エラー[＃8597](https://github.com/pingcap/tiflow/issues/8597) @ [スドジ](https://github.com/sdojjy)が発生する可能性がある問題を修正しました。
+        -   PD と TiCDC [＃8562](https://github.com/pingcap/tiflow/issues/8562) @ [金星の上](https://github.com/overvenus)間のネットワーク分離によって発生する TiCDC サービスの異常終了問題を修正
+        -   Kubernetes [＃8484](https://github.com/pingcap/tiflow/issues/8484) @ [金星の上](https://github.com/overvenus)で TiCDC クラスターの正常なアップグレードが失敗する問題を修正
+        -   すべての下流 Kafka サーバーが利用できない場合に TiCDCサーバーがパニックになる問題を修正[＃8523](https://github.com/pingcap/tiflow/issues/8523) @ [3エースショーハンド](https://github.com/3AceShowHand)
+        -   変更フィードを再開するとデータが失われる可能性がある、またはチェックポイントが[＃8242](https://github.com/pingcap/tiflow/issues/8242) @ [金星の上](https://github.com/overvenus)に進めない問題を修正しました。

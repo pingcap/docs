@@ -1,37 +1,37 @@
 ---
 title: Checkpoint Backup
-summary: TiDB v6.5.0 introduces checkpoint backup feature to continue interrupted backups, reducing the need to start from scratch. It records backed up shards to resume backup progress, but relies on GC mechanism and may require some data to be backed up again. The `br` tool periodically updates `gc-safepoint` to avoid data being garbage collected, and can extend retention period if needed.
+summary: TiDB v6.5.0 では、中断されたバックアップを続行するためのチェックポイント バックアップ機能が導入され、最初からやり直す必要性が減ります。バックアップされたシャードを記録してバックアップの進行を再開しますが、GC メカニズムに依存しているため、一部のデータを再度バックアップする必要がある場合があります。`br` ツールは、データがガベージ コレクションされるのを防ぐために `gc-safepoint` を定期的に更新し、必要に応じて保持期間を延長できます。
 ---
 
-# Checkpoint Backup
+# チェックポイントバックアップ {#checkpoint-backup}
 
-Snapshot backup might be interrupted due to recoverable errors, such as disk exhaustion and node crash. Before TiDB v6.5.0, data that is backed up before the interruption would be invalidated even after the error is addressed, and you need to start the backup from scratch. For large clusters, this incurs considerable extra cost.
+スナップショット バックアップは、ディスクの枯渇やノードのクラッシュなどの回復可能なエラーにより中断される可能性があります。TiDB v6.5.0 より前では、中断前にバックアップされたデータはエラーが解決された後でも無効になり、バックアップを最初から開始する必要がありました。大規模なクラスターの場合、これにはかなりの追加コストがかかります。
 
-In TiDB v6.5.0, Backup & Restore (BR) introduces the checkpoint backup feature to allow continuing an interrupted backup. This feature can retain most data of the interrupted backup.
+TiDB v6.5.0 では、バックアップと復元 (BR) にチェックポイント バックアップ機能が導入され、中断されたバックアップを続行できるようになりました。この機能により、中断されたバックアップのほとんどのデータを保持できます。
 
-## Application scenarios
+## アプリケーションシナリオ {#application-scenarios}
 
-If your TiDB cluster is large and cannot afford to back up again after a failure, you can use the checkpoint backup feature. The br command-line tool (hereinafter referred to as `br`) periodically records the shards that have been backed up. In this way, the next backup retry can use the backup progress close to the abnormal exit.
+TiDB クラスターが大きく、障害発生後に再度バックアップする余裕がない場合は、チェックポイント バックアップ機能を使用できます。br コマンドライン ツール (以下、 `br`と略します) は、バックアップされたシャードを定期的に記録します。これにより、次回のバックアップ再試行では、異常終了に近いバックアップの進行状況を使用できます。
 
-## Implementation details
+## 実装の詳細 {#implementation-details}
 
-During a snapshot backup, `br` encodes the tables into the corresponding key space, and generates backup RPC requests before sending them to TiKV nodes. After receiving the backup request, TiKV nodes back up the data within the requested range. Every time a TiKV node finishes backing up data of a Region, it returns the backup information of this range to `br`.
+スナップショットバックアップ中、 `br`​​テーブルを対応するキースペースにエンコードし、バックアップ RPC 要求を生成してから TiKV ノードに送信します。バックアップ要求を受信すると、 TiKV ノードは要求された範囲内のデータをバックアップします。 TiKV ノードは、リージョンのデータのバックアップを完了するたびに、この範囲のバックアップ情報を`br`に返します。
 
-`br` records the information returned by TiKV nodes, which helps `br` get the key ranges that have been backed up. The checkpoint backup feature periodically uploads the new backup information to external storage so that the key ranges that have been backed up can be persisted.
+`br` TiKV ノードから返された情報を記録し、 `br`バックアップされたキー範囲を取得するのに役立ちます。チェックポイント バックアップ機能は、定期的に新しいバックアップ情報を外部storageにアップロードし、バックアップされたキー範囲を永続化できるようにします。
 
-When `br` retries the backup, it reads the key ranges that have been backed up from external storage, and compares them with the key ranges of the backup task. The differential data helps `br` to determine the key range that still needs to be backed up in checkpoint backup.
+`br`バックアップを再試行すると、外部storageからバックアップされたキー範囲が読み取られ、バックアップ タスクのキー範囲と比較されます。差分データは、チェックポイント バックアップでまだバックアップする必要があるキー範囲を`br`判断するのに役立ちます。
 
-## Usage limitations
+## 使用制限 {#usage-limitations}
 
-Checkpoint backup relies on the GC mechanism and cannot recover all data that has been backed up. The following sections provide the details.
+チェックポイント バックアップは GC メカニズムに依存しており、バックアップされたすべてのデータを回復することはできません。詳細については、次のセクションで説明します。
 
-### Backup retry must be prior to GC
+### バックアップの再試行はGCの前に行う必要があります {#backup-retry-must-be-prior-to-gc}
 
-During the backup, `br` periodically updates the `gc-safepoint` of the backup snapshot in PD to avoid data being garbage collected. When `br` exits, the `gc-safepoint` cannot be updated in time. As a result, before the next backup retry, the data might have been garbage collected.
+バックアップ中、 `br` PD 内のバックアップ スナップショットの`gc-safepoint`定期的に更新して、データがガベージ コレクションされるのを回避します。5 `br`終了すると、 `gc-safepoint`時間内に更新できません。その結果、次のバックアップ再試行の前に、データがガベージ コレクションされる可能性があります。
 
-To avoid this situation, `br` keeps the `gc-safepoint` for about one hour by default when `gcttl` is not specified. You can set the `gcttl` parameter to extend the retention period if needed .
+この状況を回避するために、 `gcttl`が指定されていない場合、 `br`デフォルトで`gc-safepoint`約 1 時間保持します。必要に応じて`gcttl`パラメータを設定して保持期間を延長できます。
 
-The following example sets `gcttl` to 15 hours (54000 seconds) to extend the retention period of `gc-safepoint`:
+次の例では、 `gcttl`を 15 時間 (54000 秒) に設定して、保持期間`gc-safepoint`を延長します。
 
 ```shell
 tiup br backup full \
@@ -39,14 +39,14 @@ tiup br backup full \
 --gcttl 54000
 ```
 
-> **Note:**
+> **注記：**
 >
-> The `gc-safepoint` created before backup is deleted after the snapshot backup is completed. You do not need to delete it manually.
+> バックアップ前に作成された`gc-safepoint` 、スナップショット バックアップが完了すると削除されます。手動で削除する必要はありません。
 
-### Some data needs to be backed up again
+### 一部のデータは再度バックアップする必要があります {#some-data-needs-to-be-backed-up-again}
 
-When `br` retries backup, some data that has been backed up might need to be backed up again, including the data being backed up and the data not recorded by the checkpoint.
+`br`バックアップを再試行する場合、バックアップ中のデータやチェックポイントで記録されていないデータなど、バックアップ済みのデータの一部を再度バックアップする必要がある場合があります。
 
-- If the interruption is caused by an error, `br` will persist the meta information of the data backed up before exit. In this case, only the data being backed up needs to be backed up again in the next retry.
+-   中断がエラーによって発生した場合、 `br`終了前にバックアップされたデータのメタ情報を保持します。この場合、次回の再試行では、バックアップ中のデータのみを再度バックアップする必要があります。
 
-- If the `br` process is interrupted by the system, `br` cannot persist the meta information of the data backed up to the external storage. Since `br` persists the meta information every 30 seconds, data backed up in the last 30 seconds before interruption cannot be persisted and needs to be backed up again in the next retry.
+-   `br`プロセスがシステムによって中断された場合、 `br`外部storageにバックアップされたデータのメタ情報を永続化できません。5 `br` 30 秒ごとにメタ情報を永続化するため、中断前の最後の 30 秒間にバックアップされたデータは永続化できず、次の再試行時に再度バックアップする必要があります。

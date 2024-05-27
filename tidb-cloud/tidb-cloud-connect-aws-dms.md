@@ -1,140 +1,140 @@
 ---
 title: Connect AWS DMS to TiDB Cloud clusters
-summary: Learn how to migrate data from or into TiDB Cloud using AWS Database Migration Service (AWS DMS).
+summary: AWS Database Migration Service (AWS DMS) を使用して、TiDB Cloud から、またはTiDB Cloudにデータを移行する方法を学びます。
 ---
 
-# Connect AWS DMS to TiDB Cloud clusters
+# AWS DMS をTiDB Cloudクラスターに接続する {#connect-aws-dms-to-tidb-cloud-clusters}
 
-[AWS Database Migration Service (AWS DMS)](https://aws.amazon.com/dms/) is a cloud service that makes it possible to migrate relational databases, data warehouses, NoSQL databases, and other types of data stores. You can use AWS DMS to migrate your data from or into TiDB Cloud clusters. This document describes how to connect AWS DMS to a TiDB Cloud cluster.
+[AWS データベース移行サービス (AWS DMS)](https://aws.amazon.com/dms/) 、リレーショナル データベース、データ ウェアハウス、NoSQL データベース、およびその他の種類のデータ ストアの移行を可能にするクラウド サービスです。AWS DMS を使用して、 TiDB Cloudクラスターから、または TiDB Cloud クラスターにデータを移行できます。このドキュメントでは、AWS DMS をTiDB Cloudクラスターに接続する方法について説明します。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-### An AWS account with enough access
+### 十分なアクセス権を持つAWSアカウント {#an-aws-account-with-enough-access}
 
-You are expected to have an AWS account with enough access to manage DMS-related resources. If not, refer to the following AWS documents:
+DMS 関連のリソースを管理するのに十分なアクセス権を持つ AWS アカウントを持っている必要があります。そうでない場合は、次の AWS ドキュメントを参照してください。
 
-- [Sign up for an AWS account](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.SettingUp.html#sign-up-for-aws)
-- [Identity and access management for AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/security-iam.html)
+-   [AWSアカウントにサインアップする](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.SettingUp.html#sign-up-for-aws)
+-   [AWS データベース移行サービスの ID およびアクセス管理](https://docs.aws.amazon.com/dms/latest/userguide/security-iam.html)
 
-### A TiDB Cloud account and a TiDB cluster
+### TiDB Cloudアカウントと TiDB クラスター {#a-tidb-cloud-account-and-a-tidb-cluster}
 
-You are expected to have a TiDB Cloud account and a TiDB Serverless or TiDB Dedicated cluster. If not, refer to the following documents to create one:
+TiDB Cloudアカウントと、TiDB Serverless または TiDB Dedicated クラスターが必要です。ない場合は、次のドキュメントを参照して作成してください。
 
-- [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
-- [Create a TiDB Dedicated cluster](/tidb-cloud/create-tidb-cluster.md)
+-   [TiDB サーバーレス クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
+-   [TiDB専用クラスターを作成する](/tidb-cloud/create-tidb-cluster.md)
 
-## Configure network
+## ネットワークを構成する {#configure-network}
 
-Before creating DMS resources, you need to configure network properly to ensure DMS can communicate with TiDB Cloud clusters. If you are unfamiliar with AWS, contact AWS Support. The following provides several possible configurations for your reference.
+DMS リソースを作成する前に、DMS がTiDB Cloudクラスターと通信できるようにネットワークを適切に構成する必要があります。AWS に詳しくない場合は、AWS サポートにお問い合わせください。以下に、参考までにいくつかの可能な構成を示します。
 
 <SimpleTab>
 
 <div label="TiDB Serverless">
 
-For TiDB Serverless, your clients can connect to clusters via public endpoint or private endpoint.
+TiDB Serverless の場合、クライアントはパブリック エンドポイントまたはプライベート エンドポイントを介してクラスターに接続できます。
 
-- To [connect to a TiDB Serverless cluster via public endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md), do one of the following to make sure that the DMS replication instance can access the internet.
+-   [パブリックエンドポイント経由でTiDB Serverlessクラスタに接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)の場合、次のいずれかを実行して、DMS レプリケーション インスタンスがインターネットにアクセスできることを確認します。
 
-    - Deploy the replication instance in public subnets and enable **Public accessible**. For more information, see [Configuration for internet access](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access).
+    -   パブリックサブネットにレプリケーションインスタンスをデプロイ、**パブリックアクセス**を有効にします。詳細については、 [インターネットアクセスのコンフィグレーション](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)を参照してください。
 
-    - Deploy the replication instance in private subnets and route traffic in the private subnets to public subnets. In this case, you need at least three subnets, two private subnets, and one public subnet. The two private subnets form a subnet group where the replication instance lives. Then you need to create a NAT gateway in the public subnet and route traffic of the two private subnets to the NAT gateway. For more information, see [Access the internet from a private subnet](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access).
+    -   レプリケーション インスタンスをプライベート サブネットにデプロイ、プライベート サブネットのトラフィックをパブリック サブネットにルーティングします。この場合、少なくとも 3 つのサブネット (2 つのプライベート サブネットと 1 つのパブリック サブネット) が必要です。2 つのプライベート サブネットは、レプリケーション インスタンスが存在するサブネット グループを形成します。次に、パブリック サブネットに NAT ゲートウェイを作成し、2 つのプライベート サブネットのトラフィックを NAT ゲートウェイにルーティングする必要があります。詳細については、 [プライベートサブネットからインターネットにアクセスする](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access)参照してください。
 
-- To connect to a TiDB Serverless cluster via private endpoint, [set up a private endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) first and deploy the replication instance in private subnets.
+-   プライベート エンドポイント経由で TiDB Serverless クラスターに接続するには、 [プライベートエンドポイントを設定する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)プライベート サブネットにレプリケーション インスタンスをデプロイします。
 
 </div>
 
 <div label="TiDB Dedicated">
 
-For TiDB Dedicated, your clients can connect to clusters via public endpoint, private endpoint, or VPC peering.
+TiDB Dedicated の場合、クライアントはパブリック エンドポイント、プライベート エンドポイント、または VPC ピアリングを介してクラスターに接続できます。
 
-- To [connect to a TiDB Dedicated cluster via public endpoint](/tidb-cloud/connect-via-standard-connection.md), do one of the following to make sure that the DMS replication instance can access the internet. In addition, you need to add the public IP address of the replication instance or NAT gateway to the cluster's [IP access list](/tidb-cloud/configure-ip-access-list.md).
+-   [パブリックエンドポイント経由でTiDB専用クラスタに接続する](/tidb-cloud/connect-via-standard-connection.md)を実行するには、次のいずれかを実行して、DMS レプリケーション インスタンスがインターネットにアクセスできることを確認します。さらに、レプリケーション インスタンスまたは NAT ゲートウェイのパブリック IP アドレスをクラスターの[IPアクセスリスト](/tidb-cloud/configure-ip-access-list.md)に追加する必要があります。
 
-    - Deploy the replication instance in public subnets and enable **Public accessible**. For more information, see [Configuration for internet access](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access).
+    -   パブリックサブネットにレプリケーションインスタンスをデプロイ、**パブリックアクセス**を有効にします。詳細については、 [インターネットアクセスのコンフィグレーション](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)を参照してください。
 
-    - Deploy the replication instance in private subnets and route traffic in the private subnets to public subnets. In this case, you need at least three subnets, two private subnets, and one public subnet. The two private subnets form a subnet group where the replication instance lives. Then you need to create a NAT gateway in the public subnet and route traffic of the two private subnets to the NAT gateway. For more information, see [Access the internet from a private subnet](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access).
+    -   レプリケーション インスタンスをプライベート サブネットにデプロイ、プライベート サブネットのトラフィックをパブリック サブネットにルーティングします。この場合、少なくとも 3 つのサブネット (2 つのプライベート サブネットと 1 つのパブリック サブネット) が必要です。2 つのプライベート サブネットは、レプリケーション インスタンスが存在するサブネット グループを形成します。次に、パブリック サブネットに NAT ゲートウェイを作成し、2 つのプライベート サブネットのトラフィックを NAT ゲートウェイにルーティングする必要があります。詳細については、 [プライベートサブネットからインターネットにアクセスする](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access)参照してください。
 
-- To connect to a TiDB Dedicated cluster via private endpoint, [set up a private endpoint](/tidb-cloud/set-up-private-endpoint-connections.md) first and deploy the replication instance in private subnets.
+-   プライベート エンドポイント経由で TiDB 専用クラスターに接続するには、まず[プライベートエンドポイントを設定する](/tidb-cloud/set-up-private-endpoint-connections.md)実行し、プライベート サブネットにレプリケーション インスタンスをデプロイします。
 
-- To connect to a TiDB Dedicated cluster via VPC peering, [set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) first and deploy the replication instance in private subnets.
+-   VPC ピアリング経由で TiDB 専用クラスターに接続するには、まず[VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)実行し、プライベート サブネットにレプリケーション インスタンスをデプロイします。
 
 </div>
 </SimpleTab>
 
-## Create an AWS DMS replication instance
+## AWS DMS レプリケーションインスタンスを作成する {#create-an-aws-dms-replication-instance}
 
-1. In the AWS DMS console, go to the [**Replication instances**](https://console.aws.amazon.com/dms/v2/home#replicationInstances) page and switch to the corresponding region. It is recommended to use the same region for AWS DMS as TiDB Cloud.
+1.  AWS DMS コンソールで、 [**レプリケーションインスタンス**](https://console.aws.amazon.com/dms/v2/home#replicationInstances)ページに移動し、対応するリージョンに切り替えます。AWS DMS にはTiDB Cloudと同じリージョンを使用することをお勧めします。
 
-   ![Create replication instance](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-replication-instances.png)
+    ![Create replication instance](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-replication-instances.png)
 
-2. Click **Create replication instance**.
+2.  **レプリケーションインスタンスの作成を**クリックします。
 
-3. Fill in an instance name, ARN, and description.
+3.  インスタンス名、ARN、説明を入力します。
 
-4. In the **Instance configuration** section, configure the instance:
-    - **Instance class**: select an appropriate instance class. For more information, see [Choosing replication instance types](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Types.html).
-    - **Engine version**: keep the default configuration.
-    - **High Availability**: select **Multi-AZ** or **Single-AZ** based on your business needs.
+4.  **インスタンス構成**セクションで、インスタンスを構成します。
+    -   **インスタンスクラス**: 適切なインスタンスクラスを選択します。詳細については、 [レプリケーションインスタンスタイプの選択](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Types.html)を参照してください。
+    -   **エンジン バージョン**: デフォルト設定を維持します。
+    -   **高可用性**: ビジネス ニーズに応じて、**マルチ AZ**または**シングル AZ**を選択します。
 
-5. Configure the storage in the **Allocated storage (GiB)** field.
+5.  **割り当てられたstorage(GiB)**フィールドでstorageを構成します。
 
-6. Configure connectivity and security. You can refer to [the previous section](#configure-network) for network configuration.
+6.  接続性とセキュリティを構成します。ネットワーク構成については[前のセクション](#configure-network)を参照してください。
 
-    - **Network type - new**: select **IPv4**.
-    - **Virtual private cloud (VPC) for IPv4**: select the VPC that you need.
-    - **Replication subnet group**: select a subnet group for your replication instance.
-    - **Public accessible**: set it based on your network configuration.
+    -   **ネットワークタイプ - 新規**: **IPv4**を選択します。
+    -   **IPv4 用の仮想プライベート クラウド (VPC)** : 必要な VPC を選択します。
+    -   **レプリケーション サブネット グループ**: レプリケーション インスタンスのサブネット グループを選択します。
+    -   **パブリックアクセス可能**: ネットワーク構成に基づいて設定します。
 
     ![Connectivity and security](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-connectivity-security.png)
 
-7. Configure the **Advanced settings**, **Maintenance**, and **Tags** sections if needed, and then click **Create replication instance** to finish the instance creation.
+7.  必要に応じて、 **[詳細設定]** 、 **[メンテナンス**]、 **[タグ]**セクションを構成し、 **[レプリケーション インスタンスの作成] を**クリックしてインスタンスの作成を完了します。
 
-> **Note:**
+> **注記：**
 >
-> AWS DMS also supports serverless replications. For detailed steps, see [Creating a serverless replication](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Serverless.Components.html#CHAP_Serverless.create). Unlike replication instances, AWS DMS serverless replications do not provide the **Public accessible** option.
+> AWS DMS はサーバーレスレプリケーションもサポートしています。詳細な手順については、 [サーバーレスレプリケーションの作成](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Serverless.Components.html#CHAP_Serverless.create)参照してください。レプリケーションインスタンスとは異なり、AWS DMS サーバーレスレプリケーションでは**パブリックアクセス可能**オプションは提供されません。
 
-## Create TiDB Cloud DMS endpoints
+## TiDB Cloud DMSエンドポイントを作成する {#create-tidb-cloud-dms-endpoints}
 
-For connectivity, the steps for using TiDB Cloud clusters as a source or as a target are similar, but DMS does have some different database setting requirements for source and target. For more information, see [Using MySQL as a source](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.html) or [Using MySQL as a target](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.html). When using a TiDB Cloud cluster as a source, you can only **Migrate existing data** because TiDB does not support MySQL binlog.
+接続に関しては、 TiDB Cloudクラスターをソースとして使用する場合もターゲットとして使用する場合も手順は似ていますが、DMS ではソースとターゲットでデータベース設定要件が異なります。詳細については、 [MySQLをソースとして使用する](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.html)または[MySQLをターゲットとして使用する](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.html)を参照してください。TiDB TiDB Cloudクラスターをソースとして使用する場合、TiDB は MySQL binlogをサポートしていないため、**既存のデータの移行**のみが可能です。
 
-1. In the AWS DMS console, go to the [**Endpoints**](https://console.aws.amazon.com/dms/v2/home#endpointList) page and switch to the corresponding region.
+1.  AWS DMS コンソールで、 [**エンドポイント**](https://console.aws.amazon.com/dms/v2/home#endpointList)ページに移動し、対応するリージョンに切り替えます。
 
     ![Create endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-create-endpoint.png)
 
-2. Click **Create endpoint** to create the target database endpoint.
+2.  **エンドポイントの作成を**クリックして、ターゲット データベース エンドポイントを作成します。
 
-3. In the **Endpoint type** section, select **Source endpoint** or **Target endpoint**.
+3.  **[エンドポイント タイプ]**セクションで、 **[ソース エンドポイント]**または**[ターゲット エンドポイント]**を選択します。
 
-4. In the **Endpoint configuration** section, fill in the **Endpoint identifier** and ARN fields. Then, select **MySQL** as **Source engine** or **Target engine**.
+4.  **エンドポイント設定**セクションで、**エンドポイント識別子**と ARN フィールドに入力します。次に、**ソース エンジン**または**ターゲット エンジン**として**MySQL**を選択します。
 
-5. For the **Access to endpoint database** field, select the **Provide access information manually** checkbox and fill in cluster information as follows:
+5.  **[エンドポイント データベースへのアクセス]**フィールドで、 **[アクセス情報を手動で提供する]**チェックボックスをオンにし、次のようにクラスター情報を入力します。
 
     <SimpleTab>
 
     <div label="TiDB Serverless">
 
-    - **Server name**: `HOST` of TiDB Serverless cluster.
-    - **Port**: `PORT` of TiDB Serverless cluster.
-    - **User name**: User of TiDB Serverless cluster for migration. Make sure it meets DMS requirements.
-    - **Password**: Password of the TiDB Serverless cluster user.
-    - **Secure Socket Layer (SSL) mode**: If you are connecting via public endpoint, it is highly recommended to set the mode to **verify-full** to ensure transport security. If you are connecting via private endpoint, you can set the mode to **none**.
-    - (Optional) **CA certificate**: Use the [ISRG Root X1 certificate](https://letsencrypt.org/certs/isrgrootx1.pem). For more information, see [TLS Connections to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md).
+    -   **サーバー名**: TiDB Serverless クラスターの`HOST` 。
+    -   **ポート**: TiDB Serverless クラスターの`PORT` 。
+    -   **ユーザー名**: 移行用の TiDB Serverless クラスターのユーザー。DMS 要件を満たしていることを確認してください。
+    -   **パスワード**: TiDB Serverless クラスター ユーザーのパスワード。
+    -   **セキュリティ Socket Layer (SSL) モード**: パブリック エンドポイント経由で接続する場合は、トランスポート セキュリティを確保するために、モードを**verify-full に**設定することを強くお勧めします。プライベート エンドポイント経由で接続する場合は、モードを**none**に設定できます。
+    -   (オプション) **CA 証明書**: [ISRG ルート X1 証明書](https://letsencrypt.org/certs/isrgrootx1.pem)を使用します。詳細については、 [TiDB サーバーレスへの TLS 接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)参照してください。
 
     </div>
 
     <div label="TiDB Dedicated">
 
-    - **Server name**: `HOST` of TiDB Dedicated cluster.
-    - **Port**: `PORT` of TiDB Dedicated cluster.
-    - **User name**: User of TiDB Dedicated cluster for migration. Make sure it meets DMS requirements.
-    - **Password**: Password of TiDB Dedicated cluster user.
-    - **Secure Socket Layer (SSL) mode**: If you are connecting via public endpoint, it is highly recommended to set the mode to **verify-full** to ensure transport security. If you are connecting via private endpoint, you can set it to **none**.
-    - (Optional) **CA certificate**: Get the CA certificate according to [TLS connections to TiDB Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md).
+    -   **サーバー名**: TiDB 専用クラスターの`HOST` 。
+    -   **ポート**: TiDB 専用クラスターの`PORT` 。
+    -   **ユーザー名**: 移行用の TiDB 専用クラスターのユーザー。DMS 要件を満たしていることを確認してください。
+    -   **パスワード**: TiDB 専用クラスター ユーザーのパスワード。
+    -   **セキュリティ Socket Layer (SSL) モード**: パブリック エンドポイント経由で接続する場合は、トランスポート セキュリティを確保するために、モードを**verify-full に**設定することを強くお勧めします。プライベート エンドポイント経由で接続する場合は、 **none**に設定できます。
+    -   (オプション) **CA 証明書**: [TiDB専用へのTLS接続](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)に従って CA 証明書を取得します。
 
     </div>
-    </SimpleTab>
+     </SimpleTab>
 
-     ![Provide access information manually](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-configure-endpoint.png)
+    ![Provide access information manually](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-configure-endpoint.png)
 
-6. If you want to create the endpoint as a **Target endpoint**, expand the **Endpoint settings** section, select the **Use endpoint connection attributes** checkbox, and then set **Extra connection attributes** to `Initstmt=SET FOREIGN_KEY_CHECKS=0;`.
+6.  エンドポイントを**ターゲット エンドポイント**として作成する場合は、**エンドポイント設定**セクションを展開し、**エンドポイント接続属性を使用する**チェックボックスをオンにして、**追加の接続属性を**`Initstmt=SET FOREIGN_KEY_CHECKS=0;`に設定します。
 
-7. Configure the **KMS Key** and **Tags** sections if needed. Click **Create endpoint** to finish the instance creation.
+7.  必要に応じて、 **KMS キー**と**タグの**セクションを構成します。**エンドポイントの作成を**クリックして、インスタンスの作成を完了します。

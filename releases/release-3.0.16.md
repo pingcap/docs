@@ -1,55 +1,55 @@
 ---
 title: TiDB 3.0.16 Release Notes
-summary: TiDB 3.0.16 was released on July 03, 2020. The release includes improvements such as support for 'is null' filter condition, handling of SQL timeout issues, and removal of sensitive information in slow query logs. Bug fixes include resolving data inconsistency issues, fixing panic issues, and addressing errors in JSON comparison and query results. TiKV and PD also received bug fixes for issues related to store heartbeats, peer removal, and error handling.
+summary: TiDB 3.0.16 は、2020 年 7 月 3 日にリリースされました。このリリースには、「is null」フィルター条件のサポート、SQL タイムアウト問題の処理、低速クエリ ログ内の機密情報の削除などの改善が含まれています。バグ修正には、データの不整合の問題の解決、panic問題の修正、JSON 比較とクエリ結果のエラーへの対処が含まれます。TiKV と PD では、ストア ハートビート、ピアの削除、エラー処理に関連する問題のバグ修正も行われました。
 ---
 
-# TiDB 3.0.16 Release Notes
+# TiDB 3.0.16 リリースノート {#tidb-3-0-16-release-notes}
 
-Release date: July 03, 2020
+発売日: 2020年7月3日
 
-TiDB version: 3.0.16
+TiDB バージョン: 3.0.16
 
-## Improvements
+## 改善点 {#improvements}
 
-+ TiDB
+-   ティビ
 
-    - Support the `is null` filter condition in hash partition pruning [#17308](https://github.com/pingcap/tidb/pull/17308)
-    - Assign different `Backoffer`s to each Region to avoid the SQL timeout issue when multiple Region requests fail at the same time [#17583](https://github.com/pingcap/tidb/pull/17583)
-    - Split separate Regions for the newly added partition [#17668](https://github.com/pingcap/tidb/pull/17668)
-    - Discard feedbacks generated from the `delete` or `update` statement [#17841](https://github.com/pingcap/tidb/pull/17841)
-    - Correct the usage of `json.Unmarshal` in `job.DecodeArgs` to be compatible with future Go versions [#17887](https://github.com/pingcap/tidb/pull/17887)
-    - Remove sensitive information in the slow query log and the statement summary table [#18128](https://github.com/pingcap/tidb/pull/18128)
-    - Match the MySQL behavior with `DateTime` delimiters [#17499](https://github.com/pingcap/tidb/pull/17499)
-    - Handle `%h` in date formats in the range that is consistent with MySQL [#17496](https://github.com/pingcap/tidb/pull/17496)
+    -   ハッシュパーティションプルーニング[＃17308](https://github.com/pingcap/tidb/pull/17308)における`is null`フィルタ条件をサポート
+    -   複数のリージョンリクエストが同時に失敗した場合にSQLタイムアウトの問題を回避するために、各リージョンに異なる`Backoffer`秒を割り当てます[＃17583](https://github.com/pingcap/tidb/pull/17583)
+    -   新しく追加されたパーティション[＃17668](https://github.com/pingcap/tidb/pull/17668)の領域を分割する
+    -   `delete`または`update`ステートメント[＃17841](https://github.com/pingcap/tidb/pull/17841)から生成されたフィードバックを破棄します
+    -   将来の Go バージョン[＃17887](https://github.com/pingcap/tidb/pull/17887)と互換性を持たせるために、 `job.DecodeArgs`の`json.Unmarshal`の使用法を修正します。
+    -   スロークエリログとステートメントサマリーテーブル[＃18128](https://github.com/pingcap/tidb/pull/18128)の機密情報を削除します。
+    -   MySQLの動作を`DateTime`区切り文字[＃17499](https://github.com/pingcap/tidb/pull/17499)に一致させる
+    -   MySQL [＃17496](https://github.com/pingcap/tidb/pull/17496)と一致する範囲の日付形式で`%h`処理する
 
-+ TiKV
+-   ティクヴ
 
-    - Avoid sending store heartbeats to PD after snapshots are received [#8145](https://github.com/tikv/tikv/pull/8145)
-    - Improve the PD client log [#8091](https://github.com/tikv/tikv/pull/8091)
+    -   スナップショットを受信した後にストアハートビートをPDに送信しないようにする[＃8145](https://github.com/tikv/tikv/pull/8145)
+    -   PDクライアントログ[＃8091](https://github.com/tikv/tikv/pull/8091)改善
 
-## Bug Fixes
+## バグの修正 {#bug-fixes}
 
-+ TiDB
+-   ティビ
 
-    - Fix the data inconsistency issue occurred because the lock of a written and deleted primary key in one transaction is resolved by another transaction [#18248](https://github.com/pingcap/tidb/pull/18248)
-    - Fix the `Got too many pings` gRPC error log in the PD server-side followers [#17944](https://github.com/pingcap/tidb/pull/17944)
-    - Fix the panic issue that might occur when the child of HashJoin returns the `TypeNull` column [#17935](https://github.com/pingcap/tidb/pull/17935)
-    - Fix the error message when access is denied [#17722](https://github.com/pingcap/tidb/pull/17722)
-    - Fix JSON comparison issue for the `int` and `float` types [#17715](https://github.com/pingcap/tidb/pull/17715)
-    - Update the failpoint which causes data race [#17710](https://github.com/pingcap/tidb/pull/17710)
-    - Fix the issue that the timeout pre-split Regions might not work when creating tables [#17617](https://github.com/pingcap/tidb/pull/17617)
-    - Fix the panic caused by ambiguous error messages after the sending failure [#17378](https://github.com/pingcap/tidb/pull/17378)
-    - Fix the issue that `FLASHBACK TABLE` might fail in some special cases [#17165](https://github.com/pingcap/tidb/pull/17165)
-    - Fix the issue of inaccurate range calculation results when statements only have string columns [#16658](https://github.com/pingcap/tidb/pull/16658)
-    - Fix the query error occurred when the `only_full_group_by` SQL mode is set [#16620](https://github.com/pingcap/tidb/pull/16620)
-    - Fix the issue that the field length of results returned from the `case when` function is inaccurate [#16562](https://github.com/pingcap/tidb/pull/16562)
-    - Fix the type inference for the decimal property in the `count` aggregate function [#17702](https://github.com/pingcap/tidb/pull/17702)
+    -   あるトランザクションで書き込まれ削除された主キーのロックが別のトランザクションによって解決されたために発生したデータの不整合の問題を修正しました[＃18248](https://github.com/pingcap/tidb/pull/18248)
+    -   PDサーバー側フォロワー[＃17944](https://github.com/pingcap/tidb/pull/17944)の`Got too many pings`エラーログを修正
+    -   HashJoinの子が`TypeNull`列目[＃17935](https://github.com/pingcap/tidb/pull/17935)を返すときに発生する可能性のあるpanic問題を修正しました。
+    -   アクセスが拒否されたときのエラーメッセージを修正[＃17722](https://github.com/pingcap/tidb/pull/17722)
+    -   `int`と`float`タイプの JSON 比較の問題を修正[＃17715](https://github.com/pingcap/tidb/pull/17715)
+    -   データ競合[＃17710](https://github.com/pingcap/tidb/pull/17710)原因となる障害ポイントを更新する
+    -   テーブル[＃17617](https://github.com/pingcap/tidb/pull/17617)の作成時にタイムアウト前の分割領域が機能しない可能性がある問題を修正しました。
+    -   送信失敗後のあいまいなエラーメッセージによるpanicを修正[＃17378](https://github.com/pingcap/tidb/pull/17378)
+    -   `FLASHBACK TABLE`特殊なケースで失敗する可能性がある問題を修正[＃17165](https://github.com/pingcap/tidb/pull/17165)
+    -   ステートメントに文字列列[＃16658](https://github.com/pingcap/tidb/pull/16658)のみがある場合に範囲計算結果が不正確になる問題を修正しました
+    -   `only_full_group_by` SQLモードが[＃16620](https://github.com/pingcap/tidb/pull/16620)に設定されている場合に発生するクエリエラーを修正
+    -   `case when`関数から返される結果のフィールド長が不正確であるという問題を修正[＃16562](https://github.com/pingcap/tidb/pull/16562)
+    -   `count`集計関数[＃17702](https://github.com/pingcap/tidb/pull/17702)の 10 進プロパティの型推論を修正
 
-+ TiKV
+-   ティクヴ
 
-    - Fix the potential wrong result read from ingested files [#8039](https://github.com/tikv/tikv/pull/8039)
-    - Fix the issue that a peer cannot be removed when its store is isolated during multiple merge processes [#8005](https://github.com/tikv/tikv/pull/8005)
+    -   取り込まれたファイルから読み取られる潜在的な誤った結果を修正[＃8039](https://github.com/tikv/tikv/pull/8039)
+    -   複数のマージプロセス中にストアが分離されている場合にピアを削除できない問題を修正[＃8005](https://github.com/tikv/tikv/pull/8005)
 
-+ PD
+-   PD
 
-    - Fix the `404` error when querying Region keys in PD Control [#2577](https://github.com/pingcap/pd/pull/2577)
+    -   PD Control [＃2577](https://github.com/pingcap/pd/pull/2577)でリージョンキーを照会する際の`404`エラーを修正

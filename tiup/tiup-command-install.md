@@ -1,28 +1,28 @@
 ---
 title: tiup install
-summary: The tiup install command is used to download and decompress component packages from the mirror repository for later use. If the component does not exist in the repository, it tries to download it and then runs it automatically. The syntax is "tiup install <component1>[:version] [component2...N] [flags]". There are no options, and the output includes download information or error messages if the component or version does not exist.
+summary: tiup installコマンドは、後で使用するためにミラー リポジトリからコンポーネントパッケージをダウンロードして解凍するために使用されます。コンポーネントがリポジトリに存在しない場合は、ダウンロードを試行し、自動的に実行します。構文は「tiup install <component1>[:version] [component2...N] [flags]」です。オプションはなく、コンポーネントまたはバージョンが存在しない場合は、出力にダウンロード情報またはエラー メッセージが含まれます。
 ---
 
-# tiup install
+# tiup install {#tiup-install}
 
-The `tiup install` command is used for component installation. It downloads the component package of a specified version from the mirror repository and decompresses it in the local TiUP data directory for later use. In addition, when TiUP needs to run a component that does not exist in the mirror repository, it tries to download the component first and then runs it automatically. If the component does not exist in the repository, an error is reported.
+`tiup install`コマンドは、コンポーネントのインストールに使用されます。このコマンドは、指定されたバージョンのコンポーネントパッケージをミラー リポジトリからダウンロードし、後で使用するためにローカルのTiUPデータ ディレクトリに解凍します。また、 TiUP は、ミラー リポジトリに存在しないコンポーネントを実行する必要がある場合、まずコンポーネントをダウンロードしてから自動的に実行します。コンポーネントがリポジトリに存在しない場合は、エラーが報告されます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup install <component1>[:version] [component2...N] [flags]
 ```
 
-`<component1>` and `<component2>` represent component names, and `[version]` represents an optional version number. If `version` is not added, the latest stable version of the specified component is installed. `[component2...N]` means that you can specify multiple components or multiple versions of the same component at the same time.
+`<component1>`と`<component2>`コンポーネント名を表し、 `[version]`オプションのバージョン番号を表します。6 `version`追加されていない場合は、指定されたコンポーネントの最新の安定バージョンがインストールされます。8 `[component2...N]` 、複数のコンポーネント、または同じコンポーネントの複数のバージョンを同時に指定できることを意味します。
 
-## Option
+## オプション {#option}
 
-None
+なし
 
-## Output
+## 出力 {#output}
 
-- Normally outputs the download information of the component.
-- If the component does not exist, the `The component "%s" not found` error is reported.
-- If the version does not exist, the `version %s not supported by component %s` error is reported.
+-   通常、コンポーネントのダウンロード情報を出力します。
+-   コンポーネントが存在しない場合は、エラー`The component "%s" not found`が報告されます。
+-   バージョンが存在しない場合は、エラー`version %s not supported by component %s`が報告されます。
 
-[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPリファレンスコマンドリスト](/tiup/tiup-reference.md#command-list)

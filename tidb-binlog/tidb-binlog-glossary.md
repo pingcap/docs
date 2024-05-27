@@ -1,26 +1,26 @@
 ---
 title: TiDB Binlog Glossary
-summary: Learn the terms used in TiDB Binlog.
+summary: TiDB Binlogで使用される用語を学習します。
 ---
 
-# TiDB Binlog Glossary
+# TiDBBinlog用語集 {#tidb-binlog-glossary}
 
-This document lists the terms used in the logs, monitoring, configurations, and documentation of TiDB Binlog.
+このドキュメントでは、 TiDB Binlogのログ、監視、構成、およびドキュメントで使用される用語をリストします。
 
-## Binlog
+## Binlog {#binlog}
 
-In TiDB Binlog, binlogs refer to the binary log data from TiDB. They also refer to the binary log data that Drainer writes to Kafka or files. The former and the latter are in different formats. In addition, binlogs in TiDB and binlogs in MySQL are also in different formats.
+TiDB Binlogでは、binlog は TiDB からのバイナリ ログ データを指します。また、 Drainerが Kafka またはファイルに書き込むバイナリ ログ データも指します。前者と後者は形式が異なります。また、TiDB の binlog と MySQL の binlog も形式が異なります。
 
-## Binlog event
+## Binlogイベント {#binlog-event}
 
-The DML binlogs from TiDB have three types of event: `INSERT`, `UPDATE`, and `DELETE`. In the monitoring dashboard of Drainer, you can see the number of different events that correspond to the replication data.
+Drainerからの DML バイナリログには、 `INSERT` 、 `UPDATE` 、 `DELETE` 3 種類のイベントがあります。Drainer の監視ダッシュボードでは、レプリケーション データに対応するさまざまなイベントの数を確認できます。
 
-## Checkpoint
+## チェックポイント {#checkpoint}
 
-A checkpoint indicates the position from which a replication task is paused and resumed, or is stopped and restarted. It records the commit-ts that Drainer replicates to the downstream. When restarted, Drainer reads the checkpoint and starts replicating data from the corresponding commit-ts.
+チェックポイントは、レプリケーション タスクが一時停止されて再開される位置、または停止されて再起動される位置を示します。チェックポイントは、 Drainer がダウンストリームにレプリケートする commit-ts を記録します。再起動すると、 Drainer はチェックポイントを読み取り、対応する commit-ts からデータのレプリケートを開始します。
 
-## Safe mode
+## セーフモード {#safe-mode}
 
-Safe mode refers to the mode that supports the idempotent import of DML when a primary key or unique index exists in the table schema in the incremental replication task.
+セーフ モードとは、増分レプリケーション タスクのテーブル スキーマに主キーまたは一意のインデックスが存在する場合に、DML のべき等インポートをサポートするモードを指します。
 
-In this mode, the `INSERT` statement is re-written as `REPLACE`, and the `UPDATE` statement is re-written as `DELETE` and `REPLACE`. Then the re-written statement is executed to the downstream. Safe mode is automatically enabled within 5 minutes after Drainer is started. You can manually enable the mode by modifying the `safe-mode` parameter in the configuration file, but this configuration is valid only when the downstream is MySQL or TiDB.
+このモードでは、 `INSERT`ステートメントは`REPLACE`に、 `UPDATE`ステートメントは`DELETE`と`REPLACE`に書き換えられ、書き換えられたステートメントが下流に実行されます。セーフ モードは、 Drainer の起動後 5 分以内に自動的に有効になります。設定ファイルの`safe-mode`パラメータを変更することで、このモードを手動で有効にできますが、この設定は下流が MySQL または TiDB の場合にのみ有効です。

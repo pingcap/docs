@@ -1,40 +1,40 @@
 ---
 title: TiDB Cloud Data Service (Beta) Overview
-summary: Learn about Data Service in TiDB Cloud and its scenarios.
+summary: TiDB Cloudのデータ サービスとそのシナリオについて学習します。
 ---
 
-# TiDB Cloud Data Service (Beta) Overview
+# TiDB Cloudデータ サービス (ベータ版) の概要 {#tidb-cloud-data-service-beta-overview}
 
-TiDB Cloud [Data Service (beta)](https://tidbcloud.com/console/data-service) is a fully managed low-code backend-as-a-service solution that simplifies backend application development, empowering developers to rapidly build highly scalable, secure, data-driven applications.
+TiDB Cloud [データ サービス (ベータ版)](https://tidbcloud.com/console/data-service)は、バックエンド アプリケーション開発を簡素化し、開発者が高度にスケーラブルで安全なデータ駆動型アプリケーションを迅速に構築できるようにする、完全に管理されたローコードのバックエンド サービス ソリューションです。
 
-Data Service enables you to access TiDB Cloud data via an HTTPS request using a custom API endpoint. This feature uses a serverless architecture to handle computing resources and elastic scaling, so you can focus on the query logic in endpoints without worrying about infrastructure or maintenance costs.
+データ サービスを使用すると、カスタム API エンドポイントを使用して HTTPS リクエスト経由でTiDB Cloudデータにアクセスできます。この機能は、サーバーレスアーキテクチャを使用してコンピューティング リソースと柔軟なスケーリングを処理するため、インフラストラクチャやメンテナンスのコストを気にすることなく、エンドポイントのクエリ ロジックに集中できます。
 
-> **Note:**
+> **注記：**
 >
-> Data Service is available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters. To use Data Service in TiDB Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> データ サービスは[TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターで利用できます。TiDB 専用クラスターでデータ サービスを使用するには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 
-An endpoint in Data Service is a web API that you can customize to execute SQL statements. You can specify parameters for your SQL statements, such as the value used in the `WHERE` clause. When a client calls an endpoint and provides values for the parameters in a request URL, the endpoint executes the corresponding SQL statement with the provided parameters and returns the results as part of the HTTP response.
+Data Service のエンドポイントは、SQL ステートメントを実行するためにカスタマイズできる Web API です。SQL ステートメントのパラメーター ( `WHERE`句で使用される値など) を指定できます。クライアントがエンドポイントを呼び出し、要求 URL でパラメーターの値を指定すると、エンドポイントは指定されたパラメーターを使用して対応する SQL ステートメントを実行し、結果を HTTP 応答の一部として返します。
 
-To manage endpoints more efficiently, you can use Data Apps. A Data App in Data Service is a collection of endpoints that you can use to access data for a specific application. By creating a Data App, you can group your endpoints and configure authorization settings using API keys to restrict access to endpoints. In this way, you can ensure that only authorized users can access and manipulate your data, making your application more secure.
+エンドポイントをより効率的に管理するには、データ アプリを使用できます。データ サービスのデータ アプリは、特定のアプリケーションのデータにアクセスするために使用できるエンドポイントのコレクションです。データ アプリを作成すると、エンドポイントをグループ化し、API キーを使用して承認設定を構成し、エンドポイントへのアクセスを制限できます。このようにして、承認されたユーザーのみがデータにアクセスして操作できるようにし、アプリケーションのセキュリティを強化できます。
 
-> **Tip:**
+> **ヒント：**
 >
-> TiDB Cloud provides a Chat2Query API for TiDB clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions.
+> TiDB Cloud は、 TiDB クラスター用の Chat2Query API を提供します。有効にすると、 TiDB Cloud は**Chat2Query**と呼ばれるシステム データ アプリと、データ サービス内の Chat2Data エンドポイントを自動的に作成します。このエンドポイントを呼び出して、指示を与えることで AI が SQL ステートメントを生成して実行できるようにすることができます。
 >
-> For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
+> 詳細については[Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)参照してください。
 
-## Scenarios
+## シナリオ {#scenarios}
 
-Data Service allows you to seamlessly integrate TiDB Cloud with any application or service that is compatible with HTTPS. The following are some typical usage scenarios:
+データ サービスを使用すると、 TiDB Cloud をHTTPS と互換性のある任意のアプリケーションまたはサービスとシームレスに統合できます。次に、一般的な使用シナリオをいくつか示します。
 
-- Access the database of your TiDB cluster directly from a mobile or web application.
-- Use serverless edge functions to call endpoints and avoid scalability issues caused by database connection pooling.
-- Integrate TiDB Cloud with data visualization projects by using Data Service as a data source. This avoids exposing your database connection username and password, making your API more secure and easier to use.
-- Connect to your database from an environment that the MySQL interface does not support. This provides more flexibility and options for you to access data.
+-   モバイル アプリケーションまたは Web アプリケーションから直接 TiDB クラスターのデータベースにアクセスします。
+-   サーバーレス エッジ関数を使用してエンドポイントを呼び出し、データベース接続プールによって発生するスケーラビリティの問題を回避します。
+-   データ サービスをデータ ソースとして使用して、 TiDB Cloudをデータ視覚化プロジェクトと統合します。これにより、データベース接続のユーザー名とパスワードが公開されることがなくなり、API がより安全で使いやすくなります。
+-   MySQL インターフェースがサポートしていない環境からデータベースに接続します。これにより、データにアクセスするための柔軟性とオプションが向上します。
 
-## What's next
+## 次は何ですか {#what-s-next}
 
-- [Get Started with Data Service](/tidb-cloud/data-service-get-started.md)
-- [Get Started with Chat2Query API](/tidb-cloud/use-chat2query-api.md)
-- [Manage a Data App](/tidb-cloud/data-service-manage-data-app.md)
-- [Manage an Endpoint](/tidb-cloud/data-service-manage-endpoint.md)
+-   [データサービスを始める](/tidb-cloud/data-service-get-started.md)
+-   [Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)
+-   [データアプリを管理する](/tidb-cloud/data-service-manage-data-app.md)
+-   [エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)

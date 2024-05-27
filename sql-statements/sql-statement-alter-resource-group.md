@@ -1,17 +1,17 @@
 ---
 title: ALTER RESOURCE GROUP
-summary: Learn the usage of ALTER RESOURCE GROUP in TiDB.
+summary: TiDB での ALTER RESOURCE GROUP の使用方法を学習します。
 ---
 
-# ALTER RESOURCE GROUP
+# リソースグループの変更 {#alter-resource-group}
 
-The `ALTER RESOURCE GROUP` statement is used to modify a resource group in a database.
+`ALTER RESOURCE GROUP`ステートメントは、データベース内のリソース グループを変更するために使用されます。
 
-> **Note:**
+> **注記：**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AlterResourceGroupStmt ::=
@@ -74,33 +74,31 @@ DirectBackgroundOption ::=
     "TASK_TYPES" EqOpt stringLit
 ```
 
-TiDB supports the following `DirectResourceGroupOption`, where [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) is a unified abstraction unit in TiDB for CPU, IO, and other system resources.
+TiDB は次の`DirectResourceGroupOption`をサポートします。3 [リクエストユニット (RU)](/tidb-resource-control.md#what-is-request-unit-ru) 、CPU、IO、およびその他のシステム リソース用の TiDB 内の統一された抽象化単位です。
 
-| Option     | Description                         | Example                |
-|---------------|-------------------------------------|------------------------|
-| `RU_PER_SEC` | Rate of RU backfilling per second | `RU_PER_SEC = 500` indicates that this resource group is backfilled with 500 RUs per second |
-| `PRIORITY`    | The absolute priority of tasks to be processed on TiKV  | `PRIORITY = HIGH` indicates that the priority is high. If not specified, the default value is `MEDIUM`. |
-| `BURSTABLE`   | If the `BURSTABLE` attribute is set, TiDB allows the corresponding resource group to use the available system resources when the quota is exceeded. |
-| `QUERY_LIMIT` | When the query execution meets this condition, the query is identified as a runaway query and the corresponding action is executed. | `QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=EXACT DURATION='10m')` indicates that the query is identified as a runaway query when the execution time exceeds 60 seconds. The query is terminated. All SQL statements with the same SQL text will be terminated immediately in the coming 10 minutes. `QUERY_LIMIT=()` or `QUERY_LIMIT=NULL` means that runaway control is not enabled. See [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries). |
-| `BACKGROUND`  | Configure the background tasks. For more details, see [Manage background tasks](/tidb-resource-control.md#manage-background-tasks). | `BACKGROUND=(TASK_TYPES="br,stats")` indicates that the backup and restore and statistics collection related tasks are scheduled as background tasks. |
+| オプション         | 説明                                                                                                        | 例                                                                                                                                                                                                                                                                                                                                                                                  |
+| ------------- | --------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `RU_PER_SEC`  | 1秒あたりのRUバックフィル速度                                                                                          | `RU_PER_SEC = 500` 、このリソース グループが 1 秒あたり 500 RU でバックフィルされることを示します。                                                                                                                                                                                                                                                                                                                  |
+| `PRIORITY`    | TiKVで処理されるタスクの絶対的な優先度                                                                                     | `PRIORITY = HIGH`優先度が高いことを示します。指定しない場合、デフォルト値は`MEDIUM`です。                                                                                                                                                                                                                                                                                                                          |
+| `BURSTABLE`   | `BURSTABLE`属性が設定されている場合、TiDB は、クォータを超えたときに、対応するリソース グループが使用可能なシステム リソースを使用することを許可します。                     |                                                                                                                                                                                                                                                                                                                                                                                    |
+| `QUERY_LIMIT` | クエリ実行がこの条件を満たす場合、クエリはランナウェイ クエリとして識別され、対応するアクションが実行されます。                                                  | `QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=EXACT DURATION='10m')` 、実行時間が 60 秒を超えるとクエリがランナウェイ クエリとして識別されることを示します。クエリは終了します。同じ SQL テキストを持つすべての SQL ステートメントは、今後 10 分以内に即時に終了します`QUERY_LIMIT=()`または`QUERY_LIMIT=NULL` 、ランナウェイ制御が有効になっていないことを意味します。6 [ランナウェイクエリ](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries)参照してください。 |
+| `BACKGROUND`  | バックグラウンドタスクを設定します。詳細については、 [バックグラウンドタスクを管理する](/tidb-resource-control.md#manage-background-tasks)参照してください。 | `BACKGROUND=(TASK_TYPES="br,stats")` 、バックアップと復元、および統計収集関連のタスクがバックグラウンド タスクとしてスケジュールされていることを示します。                                                                                                                                                                                                                                                                                   |
 
-> **Note:**
+> **注記：**
 >
-> - The `ALTER RESOURCE GROUP` statement can only be executed when the global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) is set to `ON`.
-> - The `ALTER RESOURCE GROUP` statement supports incremental changes, leaving unspecified parameters unchanged. However, both `QUERY_LIMIT` and `BACKGROUND` are used as a whole and cannot be partially modified.
-> - Currently, only the `default` resource group supports modifying the `BACKGROUND` configuration.
+> -   `ALTER RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)が`ON`に設定されている場合にのみ実行できます。
+> -   `ALTER RESOURCE GROUP`ステートメントは増分変更をサポートし、指定されていないパラメータは変更されません。ただし、 `QUERY_LIMIT`と`BACKGROUND`両方とも全体として使用され、部分的に変更することはできません。
+> -   現在、 `BACKGROUND`構成の変更をサポートしているのは`default`リソース グループのみです。
 
-## Examples
+## 例 {#examples}
 
-Create a resource group named `rg1` and modify its properties.
+`rg1`という名前のリソース グループを作成し、そのプロパティを変更します。
 
 ```sql
 DROP RESOURCE GROUP IF EXISTS rg1;
 ```
 
-```
-Query OK, 0 rows affected (0.22 sec)
-```
+    Query OK, 0 rows affected (0.22 sec)
 
 ```sql
 CREATE RESOURCE GROUP IF NOT EXISTS rg1
@@ -149,7 +147,7 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
 1 rows in set (1.30 sec)
 ```
 
-Modify the `BACKGROUND` option for the `default` resource group.
+`default`リソース グループの`BACKGROUND`オプションを変更します。
 
 ```sql
 ALTER RESOURCE GROUP default BACKGROUND = (TASK_TYPES = "br,ddl");
@@ -172,12 +170,12 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='default';
 1 rows in set (1.30 sec)
 ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-MySQL also supports [ALTER RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/alter-resource-group.html). However, the acceptable parameters are different from that of TiDB so that they are not compatible.
+MySQL も[リソースグループの変更](https://dev.mysql.com/doc/refman/8.0/en/alter-resource-group.html)サポートしていますが、許容されるパラメータが TiDB と異なるため互換性がありません。
 
-## See also
+## 参照 {#see-also}
 
-* [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
-* [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
-* [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru)
+-   [リソースグループを削除](/sql-statements/sql-statement-drop-resource-group.md)
+-   [リソースグループの作成](/sql-statements/sql-statement-create-resource-group.md)
+-   [リクエストユニット (RU)](/tidb-resource-control.md#what-is-request-unit-ru)

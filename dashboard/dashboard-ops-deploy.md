@@ -1,62 +1,59 @@
 ---
 title: Deploy TiDB Dashboard
-summary: TiDB Dashboard is built into PD for v4.0 or higher. No additional deployment is needed. It can also be deployed independently on Kubernetes. When multiple PD instances are deployed, only one serves the Dashboard. Use `tiup cluster display` to check the serving instance. You can disable and re-enable the Dashboard using `tiup ctl`.
+summary: TiDB ダッシュボードは、v4.0 以降の PD に組み込まれています。追加のデプロイメントは必要ありません。Kubernetes に独立してデプロイすることもできます。複数の PD インスタンスがデプロイされている場合、ダッシュボードとして機能するのは 1 つだけです。サービス提供インスタンスを確認するには、`tiup cluster displayを使用します。`tiup ctl` を使用してダッシュボードを無効にしたり、再度有効にしたりできます。
 ---
 
-# Deploy TiDB Dashboard
+# TiDBダッシュボードをデプロイ {#deploy-tidb-dashboard}
 
-The TiDB Dashboard UI is built into the PD component for v4.0 or higher versions, and no additional deployment is required. Simply deploy a standard TiDB cluster, and TiDB Dashboard will be there.
+TiDB ダッシュボード UI は、v4.0 以降のバージョンの PDコンポーネントに組み込まれているため、追加のデプロイメントは必要ありません。標準の TiDB クラスターをデプロイするだけで、TiDB ダッシュボードが利用可能になります。
 
-> **Note:**
+> **注記：**
 >
-> TiDB v6.5.0 (and later) and TiDB Operator v1.4.0 (and later) support deploying TiDB Dashboard as an independent Pod on Kubernetes. For details, see [Deploy TiDB Dashboard independently in TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently).
+> TiDB v6.5.0（以降）およびTiDB Operator v1.4.0（以降）では、Kubernetes上の独立したポッドとしてTiDB Dashboardをデプロイすることがサポートされています。詳細については、 [TiDB ダッシュボードをTiDB Operatorに独立してデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently)参照してください。
 
-See the following documents to learn how to deploy a standard TiDB cluster:
+標準の TiDB クラスターをデプロイする方法については、次のドキュメントを参照してください。
 
-+ [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md)
-+ [Deploy TiDB in Production Environment](/production-deployment-using-tiup.md)
-+ [Kubernetes environment deployment](https://docs.pingcap.com/tidb-in-kubernetes/stable/access-dashboard)
+-   [TiDB データベース プラットフォームのクイック スタート ガイド](/quick-start-with-tidb.md)
+-   [本番環境にTiDBをデプロイ](/production-deployment-using-tiup.md)
+-   [Kubernetes環境の展開](https://docs.pingcap.com/tidb-in-kubernetes/stable/access-dashboard)
 
-> **Note:**
+> **注記：**
 >
-> You cannot deploy TiDB Dashboard in a TiDB cluster earlier than v4.0.
+> v4.0 より前の TiDB クラスターに TiDB ダッシュボードをデプロイすることはできません。
 
-## Deployment with multiple PD instances
+## 複数のPDインスタンスを使用したデプロイメント {#deployment-with-multiple-pd-instances}
 
-When multiple PD instances are deployed in the cluster, only one of these instances serves the TiDB Dashboard.
+クラスターに複数の PD インスタンスがデプロイされている場合、これらのインスタンスのうち 1 つだけが TiDB ダッシュボードとして機能します。
 
-When PD instances are running for the first time, they automatically negotiate with each other to choose one instance to serve the TiDB Dashboard. TiDB Dashboard will not run on other PD instances. The TiDB Dashboard service will always be provided by the chosen PD instance no matter PD instances are restarted or new PD instances are joined. However, there will be a re-negotiation when the PD instance that serves TiDB Dashboard is removed from the cluster (scaled-in). The negotiation process does not need user intervention.
+PD インスタンスが初めて実行されると、インスタンス間で自動的にネゴシエートされ、TiDB ダッシュボードを提供するインスタンスが 1 つ選択されます。TiDB ダッシュボードは他の PD インスタンスでは実行されません。PD インスタンスが再起動されたり、新しい PD インスタンスが参加したりしても、TiDB ダッシュボード サービスは、選択された PD インスタンスによって常に提供されます。ただし、TiDB ダッシュボードを提供する PD インスタンスがクラスターから削除されると (スケールインされると)、再ネゴシエーションが行われます。ネゴシエーション プロセスでは、ユーザーの介入は必要ありません。
 
-When you access a PD instance that does not serve TiDB Dashboard, the browser will be redirected automatically to guide you to access the PD instance that serves the TiDB Dashboard, so that you can access the service normally. This process is illustrated in the image below.
+TiDB ダッシュボードを提供していない PD インスタンスにアクセスすると、ブラウザが自動的にリダイレクトされ、TiDB ダッシュボードを提供している PD インスタンスへのアクセスが誘導され、正常にサービスにアクセスできるようになります。このプロセスは、以下の画像に示されています。
 
 ![Process Schematic](/media/dashboard/dashboard-ops-multiple-pd.png)
 
-> **Note:**
+> **注記：**
 >
-> The PD instance that serves TiDB Dashboard might not be a PD leader.
+> TiDB ダッシュボードを提供する PD インスタンスは、PD リーダーではない可能性があります。
 
-### Check the PD instance that actually serves TiDB Dashboard
+### 実際にTiDBダッシュボードを提供しているPDインスタンスを確認する {#check-the-pd-instance-that-actually-serves-tidb-dashboard}
 
-For a running cluster deployed using TiUP, you can use the `tiup cluster display` command to see which PD instance serves TiDB Dashboard. Replace `CLUSTER_NAME` with the cluster name.
-
-{{< copyable "shell-regular" >}}
+TiUPを使用してデプロイされた実行中のクラスターの場合、 `tiup cluster display`コマンドを使用して、どの PD インスタンスが TiDB ダッシュボードを提供しているかを確認できます。3 `CLUSTER_NAME`クラスター名に置き換えます。
 
 ```bash
 tiup cluster display CLUSTER_NAME --dashboard
 ```
 
-A sample output is as follows:
+サンプル出力は次のとおりです。
 
 ```bash
 http://192.168.0.123:2379/dashboard/
 ```
 
-> **Note:**
+> **注記：**
 >
-> This feature is available only in the later version of the `tiup cluster` deployment tool (v1.0.3 or later).
+> この機能は、 `tiup cluster`デプロイメント ツールの新しいバージョン (v1.0.3 以降) でのみ使用できます。
 >
-> <details>
-> <summary>Upgrade TiUP Cluster</summary>
+> <details><summary>TiUPクラスタのアップグレード</summary>
 >
 > ```bash
 > tiup update --self
@@ -65,81 +62,67 @@ http://192.168.0.123:2379/dashboard/
 >
 > </details>
 
-### Switch to another PD instance to serve TiDB Dashboard
+### TiDBダッシュボードを提供するために別のPDインスタンスに切り替える {#switch-to-another-pd-instance-to-serve-tidb-dashboard}
 
-For a running cluster deployed using TiUP, you can use the `tiup ctl:v<CLUSTER_VERSION> pd` command to change the PD instance that serves TiDB Dashboard, or re-specify a PD instance to serve TiDB Dashboard when it is disabled:
-
-{{< copyable "shell-regular" >}}
+TiUPを使用してデプロイされた実行中のクラスターの場合、 `tiup ctl:v<CLUSTER_VERSION> pd`コマンドを使用して、TiDB ダッシュボードを提供する PD インスタンスを変更したり、無効になっている場合に TiDB ダッシュボードを提供する PD インスタンスを再指定したりできます。
 
 ```bash
 tiup ctl:v<CLUSTER_VERSION> pd -u http://127.0.0.1:2379 config set dashboard-address http://9.9.9.9:2379
 ```
 
-In the command above:
+上記のコマンドでは:
 
-- Replace `127.0.0.1:2379` with the IP and port of any PD instance.
-- Replace `9.9.9.9:2379` with the IP and port of the new PD instance that you desire to run the TiDB Dashboard service.
+-   `127.0.0.1:2379`任意の PD インスタンスの IP とポートに置き換えます。
+-   `9.9.9.9:2379` 、TiDB ダッシュボード サービスを実行する新しい PD インスタンスの IP とポートに置き換えます。
 
-You can use the `tiup cluster display` command to see whether the modification is taking effect (replace `CLUSTER_NAME` with the cluster name):
-
-{{< copyable "shell-regular" >}}
+変更が有効になっているかどうかを確認するには、 `tiup cluster display`コマンドを使用します ( `CLUSTER_NAME`クラスター名に置き換えます)。
 
 ```bash
 tiup cluster display CLUSTER_NAME --dashboard
 ```
 
-> **Warning:**
+> **警告：**
 >
-> If you change the instance to run TiDB Dashboard, the local data stored in the previous TiDB Dashboard instance will be lost, including the Key Visualize history and search history.
+> TiDB ダッシュボードを実行するインスタンスを変更すると、Key Visualize 履歴や検索履歴など、以前の TiDB ダッシュボード インスタンスに保存されたローカル データが失われます。
 
-## Disable TiDB Dashboard
+## TiDBダッシュボードを無効にする {#disable-tidb-dashboard}
 
-For a running cluster deployed using TiUP, use the `tiup ctl:v<CLUSTER_VERSION> pd` command to disable TiDB Dashboard on all PD instances (replace `127.0.0.1:2379` with the IP and port of any PD instance):
-
-{{< copyable "shell-regular" >}}
+TiUPを使用してデプロイされた実行中のクラスターの場合は、 `tiup ctl:v<CLUSTER_VERSION> pd`コマンドを使用してすべての PD インスタンスで TiDB ダッシュボードを無効にします ( `127.0.0.1:2379`任意の PD インスタンスの IP とポートに置き換えます)。
 
 ```bash
 tiup ctl:v<CLUSTER_VERSION> pd -u http://127.0.0.1:2379 config set dashboard-address none
 ```
 
-After disabling TiDB Dashboard, checking which PD instance provides the TiDB Dashboard service will fail:
+TiDB ダッシュボードを無効にすると、どの PD インスタンスが TiDB ダッシュボード サービスを提供しているかの確認が失敗します。
 
-```
-Error: TiDB Dashboard is disabled
-```
+    Error: TiDB Dashboard is disabled
 
-Visiting the TiDB Dashboard address of any PD instance via the browser will also fail:
+ブラウザ経由で任意の PD インスタンスの TiDB ダッシュボード アドレスにアクセスしても失敗します。
 
-```
-Dashboard is not started.
-```
+    Dashboard is not started.
 
-## Re-enable TiDB Dashboard
+## TiDBダッシュボードを再度有効にする {#re-enable-tidb-dashboard}
 
-For a running cluster deployed using TiUP, use the `tiup ctl:v<CLUSTER_VERSION> pd` command to request PD to renegotiate an instance to run TiDB Dashboard (replace `127.0.0.1:2379` with the IP and port of any PD instance):
-
-{{< copyable "shell-regular" >}}
+TiUPを使用してデプロイされた実行中のクラスターの場合は、 `tiup ctl:v<CLUSTER_VERSION> pd`コマンドを使用して、PD にインスタンスの再ネゴシエートを要求し、TiDB ダッシュボードを実行します ( `127.0.0.1:2379`任意の PD インスタンスの IP とポートに置き換えます)。
 
 ```bash
 tiup ctl:v<CLUSTER_VERSION> pd -u http://127.0.0.1:2379 config set dashboard-address auto
 ```
 
-After executing the command above, you can use the `tiup cluster display` command to view the TiDB Dashboard instance address automatically negotiated by PD (replace `CLUSTER_NAME` with the cluster name):
-
-{{< copyable "shell-regular" >}}
+上記のコマンドを実行した後、 `tiup cluster display`コマンドを使用して、PD によって自動的にネゴシエートされた TiDB ダッシュボード インスタンス アドレスを表示できます ( `CLUSTER_NAME`クラスター名に置き換えます)。
 
 ```bash
 tiup cluster display CLUSTER_NAME --dashboard
 ```
 
-You can also re-enable TiDB Dashboard by manually specifying the PD instance that serves TiDB Dashboard. See [Switch to another PD instance to serve TiDB Dashboard](#switch-to-another-pd-instance-to-serve-tidb-dashboard).
+TiDB ダッシュボードを提供する PD インスタンスを手動で指定することで、TiDB ダッシュボードを再度有効にすることもできます。 [TiDBダッシュボードを提供するために別のPDインスタンスに切り替える](#switch-to-another-pd-instance-to-serve-tidb-dashboard)参照してください。
 
-> **Warning:**
+> **警告：**
 >
-> If the newly enabled TiDB Dashboard instance is different with the previous instance that served the TiDB Dashboard, the local data stored in the previous TiDB Dashboard instance will be lost, including Key Visualize history and search history.
+> 新しく有効になった TiDB ダッシュボード インスタンスが、TiDB ダッシュボードを提供していた以前のインスタンスと異なる場合、Key Visualize 履歴や検索履歴など、以前の TiDB ダッシュボード インスタンスに保存されたローカル データは失われます。
 
-## What's next
+## 次は何ですか {#what-s-next}
 
-- To learn how to access and log into the TiDB Dashboard UI, see [Access TiDB Dashboard](/dashboard/dashboard-access.md).
+-   TiDB ダッシュボード UI にアクセスしてログインする方法については、 [TiDBダッシュボードにアクセスする](/dashboard/dashboard-access.md)参照してください。
 
-- To learn how to enhance the security of TiDB Dashboard, such as configuring a firewall, see [Secure TiDB Dashboard](/dashboard/dashboard-ops-security.md).
+-   ファイアウォールの設定など、TiDB ダッシュボードのセキュリティを強化する方法については、 [セキュリティTiDB ダッシュボード](/dashboard/dashboard-ops-security.md)を参照してください。

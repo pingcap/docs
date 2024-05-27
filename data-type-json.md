@@ -1,16 +1,16 @@
 ---
 title: TiDB Data Type
-summary: Learn about the JSON data type in TiDB.
+summary: TiDB の JSON データ型について学習します。
 ---
 
-# JSON Type
+# JSON型 {#json-type}
 
-TiDB supports the `JSON` (JavaScript Object Notation) data type, which is useful for storing semi-structured data. The `JSON` data type provides the following advantages over storing `JSON`-format strings in a string column:
+TiDB は、半構造化データを格納するのに役立つ`JSON` (JavaScript Object Notation) データ型をサポートしています。 `JSON`データ型には、文字列列に`JSON`形式の文字列を格納する場合と比べて、次の利点があります。
 
-- Use the Binary format for serialization. The internal format permits quick read access to `JSON` document elements.
-- Automatic validation of the JSON documents stored in `JSON` columns. Only valid documents can be stored.
+-   シリアル化にはバイナリ形式を使用します。内部形式により、 `JSON`ドキュメント要素への迅速な読み取りアクセスが可能になります。
+-   `JSON`列に保存された JSON ドキュメントの自動検証。有効なドキュメントのみを保存できます。
 
-`JSON` columns, like columns of other binary types, are not indexed directly, but you can index the fields in the `JSON` document in the form of generated column:
+`JSON`列は、他のバイナリ タイプの列と同様に直接インデックス付けされませんが、生成された列の形式で`JSON`ドキュメント内のフィールドをインデックス付けできます。
 
 ```sql
 CREATE TABLE city (
@@ -23,17 +23,17 @@ INSERT INTO city (id,detail) VALUES (1, '{"name": "Beijing", "population": 100}'
 SELECT id FROM city WHERE population >= 100;
 ```
 
-For more information, see [JSON Functions](/functions-and-operators/json-functions.md) and [Generated Columns](/generated-columns.md).
+詳細については[JSON関数](/functions-and-operators/json-functions.md)および[生成された列](/generated-columns.md)を参照してください。
 
-## Restrictions
+## 制限 {#restrictions}
 
-- Currently, TiDB only supports pushing down limited `JSON` functions to TiFlash. For more information, see [Push-down expressions](/tiflash/tiflash-supported-pushdown-calculations.md#push-down-expressions).
-- TiDB Backup & Restore (BR) changes how JSON column data is encoded in v6.3.0. Therefore, it is not recommended to use BR to restore data containing JSON columns to a TiDB cluster earlier than v6.3.0.
-- Do not use any replication tool to replicate data containing non-standard `JSON` data types, such as `DATE`, `DATETIME`, and `TIME`.
+-   現在、 TiDB はTiFlashへの限定された`JSON`関数のプッシュダウンのみをサポートしています。詳細については、 [プッシュダウン式](/tiflash/tiflash-supported-pushdown-calculations.md#push-down-expressions)を参照してください。
+-   TiDB バックアップ &amp; リストア (BR) は、v6.3.0 で JSON 列データのエンコード方法を変更します。したがって、 BRを使用して JSON 列を含むデータを v6.3.0 より前の TiDB クラスターにリストアすることはお勧めしません。
+-   `DATE` 、 `DATETIME` 、 `TIME`などの非標準`JSON`データ型を含むデータをレプリケートする場合は、レプリケーション ツールを使用しないでください。
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-- When you create JSON columns with data in the `BINARY` type, MySQL mislabels the data as the `STRING` type currently, while TiDB processes it as the `BINARY` type correctly.
+-   `BINARY`型のデータを含む JSON 列を作成すると、MySQL は現在そのデータを`STRING`型として誤ってラベル付けしますが、TiDB はそれを`BINARY`型として正しく処理します。
 
     ```sql
     CREATE TABLE test(a json);
@@ -49,9 +49,9 @@ For more information, see [JSON Functions](/functions-and-operators/json-functio
     1 row in set (0.01 sec)
     ```
 
-    For more information, see issue [#37443](https://github.com/pingcap/tidb/issues/37443).
+    詳細については、第[＃37443](https://github.com/pingcap/tidb/issues/37443)号を参照してください。
 
-- When converting the data type from `ENUM` or `SET` to `JSON`, TiDB checks the correctness of data format. For example, executing the following SQL statements in TiDB will return an error.
+-   データ型を`ENUM`または`SET`から`JSON`に変換する場合、TiDB はデータ形式の正確性をチェックします。たとえば、TiDB で次の SQL ステートメントを実行すると、エラーが返されます。
 
     ```sql
     CREATE TABLE t(e ENUM('a'));
@@ -60,11 +60,11 @@ For more information, see [JSON Functions](/functions-and-operators/json-functio
     ERROR 3140 (22032): Invalid JSON text: The document root must not be followed by other values.
     ```
 
-    For more information, see issue [#9999](https://github.com/pingcap/tidb/issues/9999).
+    詳細については、第[＃9999](https://github.com/pingcap/tidb/issues/9999)号を参照してください。
 
-- In TiDB, you can use `ORDER BY` to sort JSON arrays or JSON objects.
+-   TiDB では、 `ORDER BY`使用して JSON 配列または JSON オブジェクトをソートできます。
 
-    In MySQL, if you use `ORDER BY` to sort JSON arrays or JSON objects, MySQL returns a warning and the sorting result does not match the result of the comparison operation:
+    MySQL では、 `ORDER BY`使用して JSON 配列または JSON オブジェクトをソートすると、MySQL から警告が返され、ソート結果が比較演算の結果と一致しなくなります。
 
     ```sql
     CREATE TABLE t(j JSON);
@@ -90,9 +90,9 @@ For more information, see [JSON Functions](/functions-and-operators/json-functio
     2 rows in set (0.00 sec)
     ```
 
-    For more information, see issue [#37506](https://github.com/pingcap/tidb/issues/37506).
+    詳細については、第[＃37506](https://github.com/pingcap/tidb/issues/37506)号を参照してください。
 
-- When you insert data to a JSON column, TiDB implicitly converts the value of the data to the `JSON` type.
+-   JSON 列にデータを挿入すると、TiDB は暗黙的にデータの値を`JSON`型に変換します。
 
     ```sql
     CREATE TABLE t(col JSON);
@@ -101,4 +101,4 @@ For more information, see [JSON Functions](/functions-and-operators/json-functio
     INSERT INTO t VALUES (3);
     ```
 
-For more information about the `JSON` data type, see [JSON functions](/functions-and-operators/json-functions.md) and [Generated Columns](/generated-columns.md).
+`JSON`データ型の詳細については、 [JSON関数](/functions-and-operators/json-functions.md)および[生成された列](/generated-columns.md)を参照してください。

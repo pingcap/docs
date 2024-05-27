@@ -1,38 +1,38 @@
 ---
 title: TiDB 2.0 RC4 Release Notes
-summary: TiDB 2.0 RC4, released on March 30, 2018, brings improvements in MySQL compatibility, SQL optimization, and stability. Key updates include support for various syntax, bug fixes, and performance optimizations in TiDB, PD, and TiKV. Notable changes include manual Region splitting in PD, memory usage limitation in TiKV, and support for data pattern import. Overall, the release focuses on enhancing functionality and addressing performance issues.
+summary: 2018 年 3 月 30 日にリリースされた TiDB 2.0 RC4 では、MySQL の互換性、SQL の最適化、安定性が向上しています。主な更新には、TiDB、PD、TiKV でのさまざまな構文のサポート、バグ修正、パフォーマンスの最適化が含まれます。注目すべき変更には、PD での手動リージョン分割、TiKV でのメモリ使用量の制限、データ パターンのインポートのサポートなどがあります。全体として、このリリースは機能の強化とパフォーマンスの問題への対処に重点を置いています。
 ---
 
-# TiDB 2.0 RC4 Release Notes
+# TiDB 2.0 RC4 リリースノート {#tidb-2-0-rc4-release-notes}
 
-On March 30, 2018, TiDB 2.0 RC4 is released. This release has great improvement in MySQL compatibility, SQL optimization and stability.
+2018 年 3 月 30 日に、TiDB 2.0 RC4 がリリースされました。このリリースでは、MySQL 互換性、SQL 最適化、安定性が大幅に向上しています。
 
-## TiDB
+## ティビ {#tidb}
 
-- Support `SHOW GRANTS FOR CURRENT_USER();`
-- Fix the issue that the `Expression` in `UnionScan` is not cloned
-- Support the `SET TRANSACTION` syntax
-- Fix the potential goroutine leak issue in `copIterator`
-- Fix the issue that `admin check table` misjudges the unique index including null
-- Support displaying floating point numbers using scientific notation
-- Fix the type inference issue during binary literal computing
-- Fix the issue in parsing the `CREATE VIEW` statement
-- Fix the panic issue when one statement contains both `ORDER BY` and `LIMIT 0`
-- Improve the execution performance of `DecodeBytes`
-- Optimize `LIMIT 0` to `TableDual`, to avoid building useless execution plans
+-   サポート`SHOW GRANTS FOR CURRENT_USER();`
+-   `UnionScan`分の`Expression`が複製されない問題を修正
+-   `SET TRANSACTION`構文をサポートする
+-   `copIterator`の潜在的なゴルーチンリーク問題を修正
+-   `admin check table` nullを含む一意のインデックスを誤って判断する問題を修正
+-   科学的記数法を使用した浮動小数点数の表示をサポート
+-   バイナリリテラル計算中の型推論の問題を修正
+-   `CREATE VIEW`文の解析の問題を修正
+-   1 つのステートメントに`ORDER BY`と`LIMIT 0`両方が含まれている場合に発生するpanic問題を修正しました。
+-   `DecodeBytes`の実行パフォーマンスを向上させる
+-   無駄な実行計画の作成を避けるために、 `LIMIT 0` ～ `TableDual`を最適化します。
 
-## PD
+## PD {#pd}
 
-- Support splitting Region manually to handle the hot spot in a single Region
-- Fix the issue that the label property is not displayed when `pdctl` runs `config show all`
-- Optimize metrics and code structure
+-   単一リージョン内のホットスポットを処理するためにリージョンを手動で分割することをサポートします
+-   `pdctl` `config show all`を実行するとラベルプロパティが表示されない問題を修正
+-   メトリクスとコード構造を最適化する
 
-## TiKV
+## ティクヴ {#tikv}
 
-- Limit the memory usage during receiving snapshots, to avoid OOM in extreme conditions
-- Support configuring the behavior of Coprocessor when it encounters warnings
-- Support importing the data pattern in TiKV
-- Support splitting Region in the middle
-- Increase the speed of CI test
-- Use `crossbeam channel`
-- Fix the issue that too many logs are output caused by leader missing when TiKV is isolated
+-   極端な状況でOOMを回避するために、スナップショットの受信中にメモリ使用量を制限します。
+-   警告が発生した場合のコプロセッサーの動作の設定をサポート
+-   TiKVでのデータパターンのインポートをサポート
+-   中央でのリージョン分割をサポート
+-   CIテストの速度を上げる
+-   `crossbeam channel`使用します
+-   TiKVが分離されているときにリーダーが見つからないためにログが大量に出力される問題を修正

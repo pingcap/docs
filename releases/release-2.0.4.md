@@ -1,41 +1,41 @@
 ---
 title: TiDB 2.0.4 Release Notes
-summary: TiDB 2.0.4 was released on June 15, 2018, with improvements in system compatibility and stability. It includes various enhancements and fixes for TiDB, PD, and TiKV. Some highlights for TiDB are support for `ALTER TABLE t DROP COLUMN a CASCADE` syntax, refining statement type display, and fixing issues related to data conversion and result order. PD now has improved behavior for the `max-pending-peer-count` argument, while TiKV includes the addition of the RocksDB `PerfContext` interface and fixes for slow `reverse-seek` and crash issues.
+summary: TiDB 2.0.4 は、システムの互換性と安定性の向上を伴い、2018 年 6 月 15 日にリリースされました。これには、TiDB、PD、および TiKV のさまざまな機能強化と修正が含まれています。TiDB のハイライトとしては、`ALTER TABLE t DROP COLUMN a CASCADE` 構文のサポート、ステートメント タイプ表示の改善、およびデータ変換と結果の順序に関連する問題の修正などがあります。PD では、`max-pending-peer-count` 引数の動作が改善され、TiKV では、RocksDB `PerfContext` インターフェイスが追加され、`reverse-seek` の速度低下とクラッシュの問題が修正されています。
 ---
 
-# TiDB 2.0.4 Release Notes
+# TiDB 2.0.4 リリースノート {#tidb-2-0-4-release-notes}
 
-On June 15, 2018, TiDB 2.0.4 is released. Compared with TiDB 2.0.3, this release has great improvement in system compatibility and stability.
+2018 年 6 月 15 日に、TiDB 2.0.4 がリリースされました。TiDB 2.0.3 と比較して、このリリースではシステムの互換性と安定性が大幅に向上しています。
 
-## TiDB
+## ティビ {#tidb}
 
-- Support the `ALTER TABLE t DROP COLUMN a CASCADE` syntax
-- Support configuring the value of `tidb_snapshot` to TSO
-- Refine the display of statement types in monitoring items
-- Optimize the accuracy of query cost estimation
-- Configure the `backoff max delay` parameter of gRPC
-- Support configuring the memory threshold of a single statement in the configuration file
-- Refactor the error of Optimizer
-- Fix the side effects of the `Cast Decimal` data
-- Fix the wrong result issue of the `Merge Join` operator in specific scenarios
-- Fix the issue of converting the Null object to String
-- Fix the issue of casting the JSON type of data to the JSON type
-- Fix the issue that the result order is not consistent with MySQL in the condition of `Union` + `OrderBy`
-- Fix the compliance rules issue when the `Union` statement checks the `Limit/OrderBy` clause
-- Fix the compatibility issue of the `Union All` result
-- Fix a bug in predicate pushdown
-- Fix the compatibility issue of the `Union` statement with the `For Update` clause
-- Fix the issue that the `concat_ws` function mistakenly truncates the result
+-   `ALTER TABLE t DROP COLUMN a CASCADE`構文をサポートする
+-   TSOに`tidb_snapshot`の値を設定することをサポート
+-   監視項目のステートメントタイプの表示を改良
+-   クエリコストの見積り精度を最適化する
+-   gRPCの`backoff max delay`パラメータを設定する
+-   設定ファイル内の単一ステートメントのメモリしきい値の設定をサポート
+-   オプティマイザのエラーをリファクタリングする
+-   `Cast Decimal`データの副作用を修正
+-   特定のシナリオで`Merge Join`演算子の結果が間違っている問題を修正
+-   NullオブジェクトをStringに変換する問題を修正
+-   JSON型のデータをJSON型にキャストする問題を修正
+-   `Union` + `OrderBy`の条件で結果の順序がMySQLと一致しない問題を修正
+-   `Union`のステートメントが`Limit/OrderBy`の句をチェックするときのコンプライアンス ルールの問題を修正します。
+-   `Union All`の結果の互換性の問題を修正
+-   述語プッシュダウンのバグを修正
+-   `Union`番目のステートメントと`For Update`番目の句の互換性の問題を修正します
+-   `concat_ws`関数が誤って結果を切り捨てる問題を修正
 
-## PD
+## PD {#pd}
 
-- Improve the behavior of the unset scheduling argument `max-pending-peer-count` by changing it to no limit for the maximum number of `PendingPeer`s
+-   未設定のスケジュール引数`max-pending-peer-count`の動作を、最大`PendingPeer`秒の制限なしに変更して改善しました。
 
-## TiKV
+## ティクヴ {#tikv}
 
-- Add the RocksDB `PerfContext` interface for debugging
-- Remove the `import-mode` parameter
-- Add the `region-properties` command for `tikv-ctl`
-- Fix the issue that `reverse-seek` is slow when many RocksDB tombstones exist
-- Fix the crash issue caused by `do_sub`
-- Make GC record the log when GC encounters many versions of data
+-   デバッグ用のRocksDB `PerfContext`インターフェースを追加する
+-   `import-mode`パラメータを削除します
+-   `tikv-ctl`に`region-properties`コマンドを追加
+-   RocksDB の墓石が多数存在する場合に`reverse-seek`遅くなる問題を修正
+-   `do_sub`によって引き起こされたクラッシュ問題を修正
+-   GC がデータの複数のバージョンに遭遇したときにログを記録するようにする

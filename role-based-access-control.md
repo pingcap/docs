@@ -1,74 +1,64 @@
 ---
 title: Role-Based Access Control
-summary: This document introduces TiDB RBAC operations and implementation.
+summary: このドキュメントでは、TiDB RBAC の操作と実装について説明します。
 ---
 
-# Role-Based Access Control
+# ロールベースのアクセス制御 {#role-based-access-control}
 
-The implementation of TiDB's role-based access control (RBAC) system is similar to that of MySQL 8.0. TiDB is compatible with most RBAC syntax of MySQL.
+TiDB のロールベース アクセス制御 (RBAC) システムの実装は、MySQL 8.0 の実装と似ています。TiDB は、MySQL のほとんどの RBAC 構文と互換性があります。
 
-This document introduces TiDB RBAC-related operations and implementation.
+このドキュメントでは、TiDB RBAC 関連の操作と実装について説明します。
 
-## RBAC operations
+## RBAC 操作 {#rbac-operations}
 
-A role is a collection of a series of privileges. You can do the following operations:
+ロールは一連の権限の集合です。次の操作を実行できます。
 
-- Create a role.
-- Delete a role.
-- Grant a privilege to a role.
-- Grant a role to another user. That user can obtain the privileges involved in the role, after enabling the role.
+-   ロールを作成します。
+-   ロールを削除します。
+-   ロールに権限を付与します。
+-   別のユーザーにロールを付与します。ロールを有効にすると、そのユーザーはロールに関連する権限を取得できます。
 
-### Create a role
+### ロールを作成する {#create-a-role}
 
-For example, you can use the following statement to create the roles `app_developer`, `app_read`, and `app_write`:
-
-{{< copyable "sql" >}}
+たとえば、次のステートメントを使用して、ロール`app_developer` 、 `app_read` 、および`app_write`を作成できます。
 
 ```sql
 CREATE ROLE 'app_developer', 'app_read', 'app_write';
 ```
 
-For the role naming format and rule, see [TiDB User Account Management](/user-account-management.md).
+ロールの命名形式とルールについては、 [TiDB ユーザーアカウント管理](/user-account-management.md)参照してください。
 
-Roles are stored in the `mysql.user` table and the host name part of the role name (if omitted) defaults to `'%'`. The name of the role you are trying to create must be unique; otherwise, an error is reported.
+ロールは`mysql.user`テーブルに保存され、ロール名のホスト名部分 (省略されている場合) はデフォルトで`'%'`になります。作成しようとしているロールの名前は一意である必要があります。一意でない場合は、エラーが報告されます。
 
-To create a role, you need the `CREATE ROLE` or `CREATE USER` privilege.
+ロールを作成するには、権限`CREATE ROLE`または`CREATE USER`が必要です。
 
-### Grant a privilege to a role
+### ロールに権限を付与する {#grant-a-privilege-to-a-role}
 
-The operation of granting a privilege to a role is the same with that of granting a privilege to a user. For details, see [TiDB Privilege Management](/privilege-management.md).
+ロールに権限を付与する操作は、ユーザーに権限を付与する操作と同じです。詳細については、 [TiDB権限管理](/privilege-management.md)を参照してください。
 
-For example, you can use the following statement to grant the `app_read` role the privilege to read the `app_db` database:
-
-{{< copyable "sql" >}}
+たとえば、次のステートメントを使用して、 `app_read`ロールに`app_db`データベースを読み取る権限を付与できます。
 
 ```sql
 GRANT SELECT ON app_db.* TO 'app_read'@'%';
 ```
 
-You can use the following statement to grant the `app_write` role the privilege to write data to the `app_db` database:
-
-{{< copyable "sql" >}}
+次のステートメントを使用して、 `app_write`ロールに`app_db`データベースにデータを書き込む権限を付与できます。
 
 ```sql
 GRANT INSERT, UPDATE, DELETE ON app_db.* TO 'app_write'@'%';
 ```
 
-You can use the following statement to grant the `app_developer` role all privileges on the `app_db` database:
-
-{{< copyable "sql" >}}
+次のステートメントを使用して、 `app_developer`ロールに`app_db`データベースのすべての権限を付与できます。
 
 ```sql
 GRANT ALL ON app_db.* TO 'app_developer';
 ```
 
-### Grant a role to a user
+### ユーザーにロールを付与する {#grant-a-role-to-a-user}
 
-Assume that a user `dev1` has the developer role with all the privileges on `app_db`; two users `read_user1` and `read_user2` have the read-only privilege on `app_db`; and a user `rw_user1` has read and write privileges on `app_db`.
+ユーザー`dev1` `app_db`に対するすべての権限を持つ開発者ロールを持ち、ユーザー`read_user1`と`read_user2` `app_db`に対する読み取り専用権限を持ち、ユーザー`rw_user1`が`app_db`に対する読み取り権限と書き込み権限を持っているとします。
 
-Use `CREATE USER` to create the users:
-
-{{< copyable "sql" >}}
+`CREATE USER`使用してユーザーを作成します。
 
 ```sql
 CREATE USER 'dev1'@'localhost' IDENTIFIED BY 'dev1pass';
@@ -77,7 +67,7 @@ CREATE USER 'read_user2'@'localhost' IDENTIFIED BY 'read_user2pass';
 CREATE USER 'rw_user1'@'localhost' IDENTIFIED BY 'rw_user1pass';
 ```
 
-Then use `GRANT` to grant roles to users
+次に`GRANT`使用してユーザーにロールを付与します
 
 ```sql
 GRANT 'app_developer' TO 'dev1'@'localhost';
@@ -85,11 +75,11 @@ GRANT 'app_read' TO 'read_user1'@'localhost', 'read_user2'@'localhost';
 GRANT 'app_read', 'app_write' TO 'rw_user1'@'localhost';
 ```
 
-To grant a role to another user or revoke a role, you need the `SUPER` privilege.
+別のユーザーにロールを付与したり、ロールを取り消したりするには、 `SUPER`権限が必要です。
 
-Granting a role to a user does not mean enabling the role immediately. Enabling a role is another operation.
+ユーザーにロールを付与しても、そのロールがすぐに有効になるわけではありません。ロールを有効にするには、別の操作が必要です。
 
-The following operations might form a "relation loop:"
+次の操作は「関係ループ」を形成する可能性があります。
 
 ```sql
 CREATE USER 'u1', 'u2';
@@ -102,32 +92,26 @@ GRANT 'r2' TO 'u2';
 GRANT 'u2' TO 'r2';
 ```
 
-TiDB supports this multi-level authorization relationship. You can use it to implement privilege inheritance.
+TiDB はこの複数レベルの承認関係をサポートしています。これを使用して権限の継承を実装できます。
 
-### Check a role's privileges
+### ロールの権限を確認する {#check-a-role-s-privileges}
 
-You can use the `SHOW GRANTS` statement to check what privileges have been granted to the user.
+`SHOW GRANTS`ステートメントを使用して、ユーザーに付与されている権限を確認できます。
 
-To check privilege-related information of another user, you need the `SELECT` privilege on the `mysql` database.
-
-{{< copyable "sql" >}}
+他のユーザーの権限関連情報を確認するには、 `mysql`データベースに対する`SELECT`権限が必要です。
 
 ```sql
 SHOW GRANTS FOR 'dev1'@'localhost';
 ```
 
-```
-+-------------------------------------------------+
-| Grants for dev1@localhost                       |
-+-------------------------------------------------+
-| GRANT USAGE ON *.* TO `dev1`@`localhost`        |
-| GRANT `app_developer`@`%` TO `dev1`@`localhost` |
-+-------------------------------------------------+
-```
+    +-------------------------------------------------+
+    | Grants for dev1@localhost                       |
+    +-------------------------------------------------+
+    | GRANT USAGE ON *.* TO `dev1`@`localhost`        |
+    | GRANT `app_developer`@`%` TO `dev1`@`localhost` |
+    +-------------------------------------------------+
 
-You can use the `USING` option in `SHOW GRANTS` to check a role's privileges:
-
-{{< copyable "sql" >}}
+`SHOW GRANTS`の`USING`オプションを使用して、ロールの権限を確認できます。
 
 ```sql
 SHOW GRANTS FOR 'dev1'@'localhost' USING 'app_developer';
@@ -143,50 +127,40 @@ SHOW GRANTS FOR 'dev1'@'localhost' USING 'app_developer';
 +----------------------------------------------------------+
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 SHOW GRANTS FOR 'rw_user1'@'localhost' USING 'app_read', 'app_write';
 ```
 
-```
-+------------------------------------------------------------------------------+
-| Grants for rw_user1@localhost                                                |
-+------------------------------------------------------------------------------+
-| GRANT USAGE ON *.* TO `rw_user1`@`localhost`                                 |
-| GRANT SELECT, INSERT, UPDATE, DELETE ON `app_db`.* TO `rw_user1`@`localhost` |
-| GRANT `app_read`@`%`,`app_write`@`%` TO `rw_user1`@`localhost`               |
-+------------------------------------------------------------------------------+
-```
-
-{{< copyable "sql" >}}
+    +------------------------------------------------------------------------------+
+    | Grants for rw_user1@localhost                                                |
+    +------------------------------------------------------------------------------+
+    | GRANT USAGE ON *.* TO `rw_user1`@`localhost`                                 |
+    | GRANT SELECT, INSERT, UPDATE, DELETE ON `app_db`.* TO `rw_user1`@`localhost` |
+    | GRANT `app_read`@`%`,`app_write`@`%` TO `rw_user1`@`localhost`               |
+    +------------------------------------------------------------------------------+
 
 ```sql
 SHOW GRANTS FOR 'read_user1'@'localhost' USING 'app_read';
 ```
 
-```
-+--------------------------------------------------------+
-| Grants for read_user1@localhost                        |
-+--------------------------------------------------------+
-| GRANT USAGE ON *.* TO `read_user1`@`localhost`         |
-| GRANT SELECT ON `app_db`.* TO `read_user1`@`localhost` |
-| GRANT `app_read`@`%` TO `read_user1`@`localhost`       |
-+--------------------------------------------------------+
-```
+    +--------------------------------------------------------+
+    | Grants for read_user1@localhost                        |
+    +--------------------------------------------------------+
+    | GRANT USAGE ON *.* TO `read_user1`@`localhost`         |
+    | GRANT SELECT ON `app_db`.* TO `read_user1`@`localhost` |
+    | GRANT `app_read`@`%` TO `read_user1`@`localhost`       |
+    +--------------------------------------------------------+
 
-You can use `SHOW GRANTS` or `SHOW GRANTS FOR CURRENT_USER()` to check the current user's privileges. `SHOW GRANTS` and `SHOW GRANTS FOR CURRENT_USER()` are different in the following aspects:
+現在のユーザーの権限を確認するには、 `SHOW GRANTS`または`SHOW GRANTS FOR CURRENT_USER()`を使用します。5 と`SHOW GRANTS FOR CURRENT_USER()` `SHOW GRANTS`次の点で異なります。
 
-- `SHOW GRANTS` shows the privilege of the enabled role for the current user.
-- `SHOW GRANTS FOR CURRENT_USER()` does not show the enabled role's privilege.
+-   `SHOW GRANTS` 、現在のユーザーに対して有効なロールの権限を示します。
+-   `SHOW GRANTS FOR CURRENT_USER()`有効なロールの権限は表示されません。
 
-### Set the default role
+### デフォルトロールを設定する {#set-the-default-role}
 
-After a role is granted to a user, it does not take effect immediately. Only after the user enables this role, he can use the privilege the role owns.
+ロールがユーザーに付与されても、すぐには有効になりません。ユーザーがこのロールを有効にした後にのみ、ロールが所有する権限を使用できます。
 
-You can set default roles for a user. When the user logs in, the default roles are automatically enabled.
-
-{{< copyable "sql" >}}
+ユーザーにデフォルトのロールを設定できます。ユーザーがログインすると、デフォルトのロールが自動的に有効になります。
 
 ```sql
 SET DEFAULT ROLE
@@ -194,37 +168,31 @@ SET DEFAULT ROLE
     TO user [, user ]
 ```
 
-For example, you can use the following statement to set default roles of `rw_user1@localhost` to `app_read` and `app_write`:
-
-{{< copyable "sql" >}}
+たとえば、次のステートメントを使用して、デフォルトのロール`rw_user1@localhost` ～ `app_read`および`app_write`を設定できます。
 
 ```sql
 SET DEFAULT ROLE app_read, app_write TO 'rw_user1'@'localhost';
 ```
 
-You can use the following statement to set default roles of `dev1@localhost` to all roles:
-
-{{< copyable "sql" >}}
+次のステートメントを使用して、すべてのロールにデフォルトのロール`dev1@localhost`を設定できます。
 
 ```sql
 SET DEFAULT ROLE ALL TO 'dev1'@'localhost';
 ```
 
-You can use the following statement to disable all default roles of `dev1@localhost`:
-
-{{< copyable "sql" >}}
+次のステートメントを使用して、 `dev1@localhost`のすべてのデフォルト ロールを無効にすることができます。
 
 ```sql
 SET DEFAULT ROLE NONE TO 'dev1'@'localhost';
 ```
 
-> **Note:**
+> **注記：**
 >
-> You need to grant the role to the user before you set the default role to this role.
+> このロールにデフォルト ロールを設定する前に、ユーザーにロールを付与する必要があります。
 
-### Enable a role in the current session
+### 現在のセッションでロールを有効にする {#enable-a-role-in-the-current-session}
 
-You can enable some role(s) in the current session.
+現在のセッションでいくつかのロールを有効にすることができます。
 
 ```sql
 SET ROLE {
@@ -236,193 +204,157 @@ SET ROLE {
 }
 ```
 
-For example, after `rw_user1` logs in, you can use the following statement to enable roles `app_read` and `app_write` that are valid only in the current session:
-
-{{< copyable "sql" >}}
+たとえば、 `rw_user1`ログインした後、次のステートメントを使用して、現在のセッションでのみ有効なロール`app_read`と`app_write`を有効にできます。
 
 ```sql
 SET ROLE 'app_read', 'app_write';
 ```
 
-You can use the following statement to enable the default role of the current user:
-
-{{< copyable "sql" >}}
+現在のユーザーのデフォルト ロールを有効にするには、次のステートメントを使用できます。
 
 ```sql
 SET ROLE DEFAULT
 ```
 
-You can use the following statement to enable all roles granted to the current user:
-
-{{< copyable "sql" >}}
+次のステートメントを使用して、現在のユーザーに付与されているすべてのロールを有効にすることができます。
 
 ```sql
 SET ROLE ALL
 ```
 
-You can use the following statement to disable all roles:
-
-{{< copyable "sql" >}}
+すべてのロールを無効にするには、次のステートメントを使用できます。
 
 ```sql
 SET ROLE NONE
 ```
 
-You can use the following statement to enable roles except `app_read`:
-
-{{< copyable "sql" >}}
+`app_read`以外のロールを有効にするには、次のステートメントを使用できます。
 
 ```sql
 SET ROLE ALL EXCEPT 'app_read'
 ```
 
-> **Note:**
+> **注記：**
 >
-> If you use `SET ROLE` to enable a role, this role is valid only in the current session.
+> `SET ROLE`を使用してロールを有効にすると、このロールは現在のセッションでのみ有効になります。
 
-### Check the current enabled role
+### 現在有効なロールを確認する {#check-the-current-enabled-role}
 
-The current user can use the `CURRENT_ROLE()` function to check which role has been enabled by the current user.
+現在のユーザーは、 `CURRENT_ROLE()`関数を使用して、現在のユーザーによって有効になっているロールを確認できます。
 
-For example, you can grant default roles to `rw_user1'@'localhost`:
-
-{{< copyable "sql" >}}
+たとえば、 `rw_user1'@'localhost`にデフォルトのロールを付与できます。
 
 ```sql
 SET DEFAULT ROLE ALL TO 'rw_user1'@'localhost';
 ```
 
-After `rw_user1@localhost` logs in, you can execute the following statement:
-
-{{< copyable "sql" >}}
+`rw_user1@localhost`がログインしたら、次のステートメントを実行できます。
 
 ```sql
 SELECT CURRENT_ROLE();
 ```
 
-```
-+--------------------------------+
-| CURRENT_ROLE()                 |
-+--------------------------------+
-| `app_read`@`%`,`app_write`@`%` |
-+--------------------------------+
-```
-
-{{< copyable "sql" >}}
+    +--------------------------------+
+    | CURRENT_ROLE()                 |
+    +--------------------------------+
+    | `app_read`@`%`,`app_write`@`%` |
+    +--------------------------------+
 
 ```sql
 SET ROLE 'app_read'; SELECT CURRENT_ROLE();
 ```
 
-```
-+----------------+
-| CURRENT_ROLE() |
-+----------------+
-| `app_read`@`%` |
-+----------------+
-```
+    +----------------+
+    | CURRENT_ROLE() |
+    +----------------+
+    | `app_read`@`%` |
+    +----------------+
 
-### Revoke a role
+### 役割を取り消す {#revoke-a-role}
 
-You can use the following statement to revoke the `app_read` role granted to the users `read_user1@localhost` and `read_user2@localhost`:
-
-{{< copyable "sql" >}}
+次のステートメントを使用して、ユーザー`read_user1@localhost`と`read_user2@localhost`に付与された`app_read`ロールを取り消すことができます。
 
 ```sql
 REVOKE 'app_read' FROM 'read_user1'@'localhost', 'read_user2'@'localhost';
 ```
 
-You can use the following statement to revoke the roles `app_read` and `app_write` granted to the `rw_user1@localhost` user:
-
-{{< copyable "sql" >}}
+次のステートメントを使用して、 `rw_user1@localhost`ユーザーに付与されたロール`app_read`と`app_write`を取り消すことができます。
 
 ```sql
 REVOKE 'app_read', 'app_write' FROM 'rw_user1'@'localhost';
 ```
 
-The operation of revoking a role from a user is atomic. If you fail to revoke a role, this operation rolls back.
+ユーザーからロールを取り消す操作はアトミックです。ロールの取り消しに失敗した場合、この操作はロールバックされます。
 
-### Revoke a privilege
+### 権限を取り消す {#revoke-a-privilege}
 
-The `REVOKE` statement is reverse to `GRANT`. You can use `REVOKE` to revoke the privileges of `app_write`.
-
-{{< copyable "sql" >}}
+`REVOKE`ステートメントは`GRANT`の逆です。 `REVOKE`を使用して`app_write`の権限を取り消すことができます。
 
 ```sql
 REVOKE INSERT, UPDATE, DELETE ON app_db.* FROM 'app_write';
 ```
 
-For details, see [TiDB Privilege Management](/privilege-management.md).
+詳細は[TiDB権限管理](/privilege-management.md)参照。
 
-### Delete a role
+### 役割を削除する {#delete-a-role}
 
-You can use the following statement to delete roles `app_read` and `app_write`:
-
-{{< copyable "sql" >}}
+次のステートメントを使用して、ロール`app_read`と`app_write`を削除できます。
 
 ```sql
 DROP ROLE 'app_read', 'app_write';
 ```
 
-This operation deletes the role records of `app_read` and `app_write` in the `mysql.user` table and related records in the authorization table, and terminates the authorization related to the two roles.
+この操作により、 `mysql.user`テーブルの`app_read`と`app_write`のロール レコードと承認テーブル内の関連レコードが削除され、2 つのロールに関連する承認が終了します。
 
-To delete a role, you need the `DROP ROLE` or `DROP USER` privilege.
+ロールを削除するには、権限`DROP ROLE`または`DROP USER`が必要です。
 
-### Authorization table
+### 承認テーブル {#authorization-table}
 
-In addition to four system [privilege tables](/privilege-management.md#privilege-table), the RBAC system introduces two new system privilege tables:
+4 つのシステム[権限テーブル](/privilege-management.md#privilege-table)に加えて、RBAC システムでは 2 つの新しいシステム権限テーブルが導入されています。
 
-- `mysql.role_edges`: records the authorization relationship of the role and user.
-- `mysql.default_roles`: records default roles of each user.
+-   `mysql.role_edges` : ロールとユーザーの承認関係を記録します。
+-   `mysql.default_roles` : 各ユーザーのデフォルトのロールを記録します。
 
-#### `mysql.role_edges`
+#### <code>mysql.role_edges</code> {#code-mysql-role-edges-code}
 
-`mysql.role_edges` contains the following data:
-
-{{< copyable "sql" >}}
+`mysql.role_edges`次のデータが含まれます。
 
 ```sql
 SELECT * FROM mysql.role_edges;
 ```
 
-```
-+-----------+-----------+---------+---------+-------------------+
-| FROM_HOST | FROM_USER | TO_HOST | TO_USER | WITH_ADMIN_OPTION |
-+-----------+-----------+---------+---------+-------------------+
-| %         | r_1       | %       | u_1     | N                 |
-+-----------+-----------+---------+---------+-------------------+
-1 row in set (0.00 sec)
-```
+    +-----------+-----------+---------+---------+-------------------+
+    | FROM_HOST | FROM_USER | TO_HOST | TO_USER | WITH_ADMIN_OPTION |
+    +-----------+-----------+---------+---------+-------------------+
+    | %         | r_1       | %       | u_1     | N                 |
+    +-----------+-----------+---------+---------+-------------------+
+    1 row in set (0.00 sec)
 
-- `FROM_HOST` and `FROM_USER` indicate the role's host name and user name respectively.
-- `TO_HOST` and `TO_USER` indicate the host name and user name of the user to which a role is granted.
+-   `FROM_HOST`と`FROM_USER`それぞれロールのホスト名とユーザー名を示します。
+-   `TO_HOST`と`TO_USER` 、ロールが付与されるユーザーのホスト名とユーザー名を示します。
 
-#### `mysql.default_roles`
+#### <code>mysql.default_roles</code> {#code-mysql-default-roles-code}
 
-`mysql.default_roles` shows which roles have been enabled by default for each user.
-
-{{< copyable "sql" >}}
+`mysql.default_roles` 、各ユーザーに対してデフォルトで有効になっているロールを示します。
 
 ```sql
 SELECT * FROM mysql.default_roles;
 ```
 
-```
-+------+------+-------------------+-------------------+
-| HOST | USER | DEFAULT_ROLE_HOST | DEFAULT_ROLE_USER |
-+------+------+-------------------+-------------------+
-| %    | u_1  | %                 | r_1               |
-| %    | u_1  | %                 | r_2               |
-+------+------+-------------------+-------------------+
-2 rows in set (0.00 sec)
-```
+    +------+------+-------------------+-------------------+
+    | HOST | USER | DEFAULT_ROLE_HOST | DEFAULT_ROLE_USER |
+    +------+------+-------------------+-------------------+
+    | %    | u_1  | %                 | r_1               |
+    | %    | u_1  | %                 | r_2               |
+    +------+------+-------------------+-------------------+
+    2 rows in set (0.00 sec)
 
-- `HOST` and `USER` indicate the user's host name and user name respectively.
-- `DEFAULT_ROLE_HOST` and `DEFAULT_ROLE_USER` indicate the host name and user name of the default role respectively.
+-   `HOST`と`USER`それぞれユーザーのホスト名とユーザー名を示します。
+-   `DEFAULT_ROLE_HOST`と`DEFAULT_ROLE_USER` 、それぞれデフォルト ロールのホスト名とユーザー名を示します。
 
-### References
+### 参考文献 {#references}
 
-Because RBAC, user management, and privilege management are closely related, you can refer to operation details in the following resources:
+RBAC、ユーザー管理、権限管理は密接に関連しているため、操作の詳細については次のリソースを参照してください。
 
-- [TiDB Privilege Management](/privilege-management.md)
-- [TiDB User Account Management](/user-account-management.md)
+-   [TiDB権限管理](/privilege-management.md)
+-   [TiDB ユーザーアカウント管理](/user-account-management.md)

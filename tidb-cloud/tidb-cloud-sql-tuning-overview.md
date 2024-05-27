@@ -1,77 +1,77 @@
 ---
 title: SQL Tuning Overview
-summary: Learn about how to tune SQL performance in TiDB Cloud.
+summary: TiDB Cloudで SQL パフォーマンスを調整する方法について説明します。
 ---
 
-# SQL Tuning Overview
+# SQL チューニングの概要 {#sql-tuning-overview}
 
-This document introduces how to tune SQL performance in TiDB Cloud. To get the best SQL performance, you can do the following:
+このドキュメントでは、TiDB Cloudで SQL パフォーマンスを調整する方法を紹介します。最高の SQL パフォーマンスを得るには、次の操作を実行できます。
 
-- Tune SQL performance. There are many ways to optimize SQL performance, such as analyzing query statements, optimizing execution plans, and optimizing full table scan.
-- Optimize schema design. Depending on your business workload type, you may need to optimize the schemas to avoid transaction conflicts or hotspots.
+-   SQL パフォーマンスを調整します。クエリ ステートメントの分析、実行プランの最適化、完全なテーブル スキャンの最適化など、SQL パフォーマンスを最適化する方法は多数あります。
+-   スキーマ設計を最適化します。ビジネス ワークロードの種類によっては、トランザクションの競合やホットスポットを回避するためにスキーマを最適化する必要がある場合があります。
 
-## Tune SQL performance
+## SQLパフォーマンスの調整 {#tune-sql-performance}
 
-To improve the performance of SQL statements, consider the following principles.
+SQL ステートメントのパフォーマンスを向上させるには、次の原則を考慮してください。
 
-- Minimize the scope of the scanned data. It is always a best practice to scan only the minimum scope of data and avoid scanning all data.
-- Use appropriate indexes. For each column in the `WHERE` clause in a SQL statement, make sure that there is a corresponding index. Otherwise, the `WHERE` clause will scan the full table and result in poor performance.
-- Use appropriate Join types. Depending on the size and correlation of each table in the query, it is very important to choose the right Join type. Generally, the cost-based optimizer in TiDB automatically chooses the optimal Join type. However, in some cases, you may need to specify the Join type manually. For details, see [Explain Statements That Use Joins](/explain-joins.md).
-- Use appropriate storage engines. It is recommended to use the TiFlash storage engine for Hybrid Transactional and Analytical Processing (HTAP) workloads. See [HTAP Queries](/develop/dev-guide-hybrid-oltp-and-olap-queries.md).
+-   スキャンするデータの範囲を最小限に抑えます。常に、最小限の範囲のデータのみをスキャンし、すべてのデータをスキャンしないようにすることがベスト プラクティスです。
+-   適切なインデックスを使用します。SQL ステートメントの`WHERE`節の各列には、対応するインデックスがあることを確認してください。そうでない場合、 `WHERE`節はテーブル全体をスキャンし、パフォーマンスが低下します。
+-   適切な結合タイプを使用します。クエリ内の各テーブルのサイズと相関関係に応じて、適切な結合タイプを選択することが非常に重要です。通常、TiDB のコストベース オプティマイザーは最適な結合タイプを自動的に選択します。ただし、場合によっては結合タイプを手動で指定する必要があります。詳細については、 [テーブル結合を使用するステートメントを説明する](/explain-joins.md)参照してください。
+-   適切なstorageエンジンを使用します。ハイブリッド トランザクションおよび分析処理 (HTAP) ワークロードには、 TiFlashstorageエンジンを使用することをお勧めします。1 [HTAP クエリ](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)参照してください。
 
-TiDB Cloud provides several tools to help you analyze slow queries on a cluster. The following sections describe several approaches to optimize slow queries.
+TiDB Cloud は、クラスター上の低速クエリを分析するのに役立ついくつかのツールを提供します。次のセクションでは、低速クエリを最適化するためのいくつかの方法について説明します。
 
-### Use Statement on the Diagnosis tab
+### 診断タブのステートメントを使用する {#use-statement-on-the-diagnosis-tab}
 
-The TiDB Cloud console provides a **[SQL Statement](/tidb-cloud/tune-performance.md#statement-analysis)** sub-tab on the **Diagnosis** tab. It collects the execution statistics of SQL statements of all databases on the cluster. You can use it to identify and analyze SQL statements that consume a long time in total or in a single execution.
+TiDB Cloudコンソールの**[診断]**タブには**<a href="/tidb-cloud/tune-performance.md#statement-analysis">[SQL ステートメント]</a>**サブタブがあります。このサブタブは、クラスター上のすべてのデータベースの SQL ステートメントの実行統計を収集します。これを使用して、合計または 1 回の実行で長い時間を消費する SQL ステートメントを識別して分析できます。
 
-Note that on this sub-tab, SQL queries with the same structure (even if the query parameters do not match) are grouped into the same SQL statement. For example, `SELECT * FROM employee WHERE id IN (1, 2, 3)` and `select * from EMPLOYEE where ID in (4, 5)` are both part of the same SQL statement `select * from employee where id in (...)`.
+このサブタブでは、同じ構造を持つ SQL クエリ (クエリ パラメータが一致しない場合でも) が同じ SQL ステートメントにグループ化されることに注意してください。たとえば、 `SELECT * FROM employee WHERE id IN (1, 2, 3)`と`select * from EMPLOYEE where ID in (4, 5)`どちらも同じ SQL ステートメント`select * from employee where id in (...)`の一部です。
 
-You can view some key information in **Statement**.
+**ステートメント**でいくつかの重要な情報を表示できます。
 
-- SQL statement overview: including SQL digest, SQL template ID, the time range currently viewed, the number of execution plans, and the database where the execution takes place.
-- Execution plan list: if a SQL statement has more than one execution plan, the list is displayed. You can select different execution plans and the details of the selected execution plan are displayed at the bottom of the list. If there is only one execution plan, the list will not be displayed.
-- Execution plan details: shows the details of the selected execution plan. It collects the execution plans of such SQL type and the corresponding execution time from several perspectives to help you get more information. See [Execution plan in details](https://docs.pingcap.com/tidb/stable/dashboard-statement-details#statement-execution-details-of-tidb-dashboard) (area 3 in the image below).
+-   SQL ステートメントの概要: SQL ダイジェスト、SQL テンプレート ID、現在表示されている時間範囲、実行プランの数、実行が行われるデータベースなどが含まれます。
+-   実行プラン リスト: SQL ステートメントに複数の実行プランがある場合は、リストが表示されます。異なる実行プランを選択でき、選択した実行プランの詳細がリストの下部に表示されます。実行プランが 1 つしかない場合は、リストは表示されません。
+-   実行プランの詳細: 選択した実行プランの詳細を表示します。SQL タイプの実行プランと対応する実行時間を複数の観点から収集し、詳細情報の取得に役立ちます。1 (下の画像の領域[実行計画の詳細](https://docs.pingcap.com/tidb/stable/dashboard-statement-details#statement-execution-details-of-tidb-dashboard) ) を参照してください。
 
 ![Details](/media/dashboard/dashboard-statement-detail.png)
 
-In addition to the information in the **Statement** dashboard, there are also some SQL best practices for TiDB Cloud as described in the following sections.
+**ステートメント**ダッシュボードの情報に加えて、次のセクションで説明するように、TiDB Cloudの SQL ベスト プラクティスもいくつかあります。
 
-### Check the execution plan
+### 実行計画を確認する {#check-the-execution-plan}
 
-You can use [`EXPLAIN`](/explain-overview.md) to check the execution plan calculated by TiDB for a statement during compiling. In other words, TiDB estimates hundreds or thousands of possible execution plans and selects an optimal execution plan that consumes the least resource and executes the fastest.
+[`EXPLAIN`](/explain-overview.md)使用すると、コンパイル中に TiDB によって計算されたステートメントの実行プランを確認できます。つまり、TiDB は数百または数千の実行プランを推定し、消費するリソースが最も少なく、実行速度が最も速い最適な実行プランを選択します。
 
-If the execution plan selected by TiDB is not optimal, you can use EXPLAIN or [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) to diagnose it.
+TiDB によって選択された実行プランが最適でない場合は、 EXPLAINまたは[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)使用して診断できます。
 
-### Optimize the execution plan
+### 実行計画を最適化する {#optimize-the-execution-plan}
 
-After parsing the original query text by `parser` and basic validity verification, TiDB first makes some logical equivalent changes to the query. For more information, see [SQL Logical Optimization](/sql-logical-optimization.md).
+元のクエリ テキストを`parser`で解析し、基本的な有効性を検証した後、TiDB はまずクエリに対して論理的に同等の変更を加えます。詳細については、 [SQL 論理最適化](/sql-logical-optimization.md)を参照してください。
 
-Through these equivalence changes, the query can become easier to handle in the logical execution plan. After the equivalence changes, TiDB gets a query plan structure that is equivalent to the original query, and then gets a final execution plan based on the data distribution and the specific execution overhead of an operator. For more information, see [SQL Physical Optimization](/sql-physical-optimization.md).
+これらの等価性の変更により、クエリは論理実行プランで処理しやすくなります。等価性の変更後、TiDB は元のクエリと同等のクエリ プラン構造を取得し、その後、データ分布と演算子の特定の実行オーバーヘッドに基づいて最終的な実行プランを取得します。詳細については、 [SQL 物理最適化](/sql-physical-optimization.md)参照してください。
 
-Also, TiDB can choose to enable execution plan cache to reduce the creation overhead of the execution plan when executing the `PREPARE` statement, as introduced in [Prepare Execution Plan Cache](/sql-prepared-plan-cache.md).
+また、TiDB では、 [実行プランキャッシュの準備](/sql-prepared-plan-cache.md)で紹介されているように、 `PREPARE`ステートメントを実行するときに実行プランの作成オーバーヘッドを削減するために、実行プラン キャッシュを有効にすることを選択できます。
 
-### Optimize full table scan
+### フルテーブルスキャンの最適化 {#optimize-full-table-scan}
 
-The most common reason for slow SQL queries is that the `SELECT` statements perform full table scan or use incorrect indexes. You can use EXPLAIN or EXPLAIN ANALYZE to view the execution plan of a query and locate the cause of the slow execution. There are [three methods](/develop/dev-guide-optimize-sql.md) that you can use to optimize.
+SQL クエリが遅くなる最も一般的な理由は、 `SELECT`ステートメントがフル テーブル スキャンを実行するか、間違ったインデックスを使用することですEXPLAINまたはEXPLAIN ANALYZE を使用して、クエリの実行プランを表示し、実行が遅い原因を特定できます。最適化に使用できるものは[3つの方法](/develop/dev-guide-optimize-sql.md)あります。
 
-- Use secondary index
-- Use covering index
-- Use primary index
+-   セカンダリインデックスを使用する
+-   カバーインデックスを使用する
+-   プライマリインデックスを使用する
 
-### DML best practices
+### DMLのベストプラクティス {#dml-best-practices}
 
-See [DML best practices](/develop/dev-guide-optimize-sql-best-practices.md#dml-best-practices).
+[DMLのベストプラクティス](/develop/dev-guide-optimize-sql-best-practices.md#dml-best-practices)参照。
 
-### DDL best practices when selecting primary keys
+### 主キーを選択する際の DDL のベスト プラクティス {#ddl-best-practices-when-selecting-primary-keys}
 
-See [Guidelines to follow when selecting primary keys](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key).
+[主キーを選択する際のガイドライン](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key)参照。
 
-### Index best practices
+### インデックスのベストプラクティス {#index-best-practices}
 
-[Best practices for indexing](/develop/dev-guide-index-best-practice.md) include best practices for creating indexes and using indexes.
+[インデックス作成のベストプラクティス](/develop/dev-guide-index-best-practice.md)には、インデックスの作成と使用に関するベスト プラクティスが含まれています。
 
-The speed of creating indexes is conservative by default, and the index creation process can be accelerated by [modifying variables](/develop/dev-guide-optimize-sql-best-practices.md#add-index-best-practices) in some scenarios.
+デフォルトではインデックス作成の速度は控えめですが、シナリオによってはインデックス作成プロセスを[変数の変更](/develop/dev-guide-optimize-sql-best-practices.md#add-index-best-practices)高速化できます。
 
 <!--
 ### Use the slow log memory mapping table
@@ -85,33 +85,33 @@ The recommended analysis process for slow queries is as follows.
 3. [Analyze optimizer issues](/analyze-slow-queries.md#analyze-optimizer-issues). Analyze whether there is a better execution plan.
 -->
 
-## Optimize schema design
+## スキーマ設計を最適化する {#optimize-schema-design}
 
-If you still cannot get better performance based on SQL performance tuning, you may need to check your schema design and data read model to avoid transaction conflicts and hotspots.
+SQL パフォーマンス チューニングを行ってもパフォーマンスが向上しない場合は、トランザクションの競合やホットスポットを回避するために、スキーマ設計とデータ読み取りモデルを確認する必要がある場合があります。
 
-### Transaction conflicts
+### トランザクションの競合 {#transaction-conflicts}
 
-For more information on how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts#troubleshoot-lock-conflicts).
+トランザクションの競合を特定して解決する方法の詳細については、 [ロック競合のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts#troubleshoot-lock-conflicts)を参照してください。
 
-### Hotspot issues
+### ホットスポットの問題 {#hotspot-issues}
 
-You can analyze hotspot issues using [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer).
+[キービジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)を使用してホットスポットの問題を分析できます。
 
-You can use Key Visualizer to analyze the usage patterns of TiDB clusters and troubleshoot traffic hotspots. This page provides a visual representation of the TiDB cluster's traffic over time.
+Key Visualizer を使用すると、TiDB クラスターの使用パターンを分析し、トラフィックのホットスポットをトラブルシューティングできます。このページでは、TiDB クラスターのトラフィックの経時的な変化を視覚的に表示します。
 
-You can observe the following information in Key Visualizer. You may need to understand some [basic concepts](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer#basic-concepts) first.
+Key Visualizer では次の情報を確認できます。まず、いくつか[基本概念](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer#basic-concepts)理解しておく必要があるかもしれません。
 
-- A large heat map that shows the overall traffic over time
-- The detailed information about a coordinate of the heat map
-- The identification information such as tables and indexes that is displayed on the left side
+-   全体的なトラフィックを時間の経過とともに表示する大きなヒートマップ
+-   ヒートマップの座標に関する詳細情報
+-   左側に表示される表や索引などの識別情報
 
-In Key Visualizer, there are [four common heat map results](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer#common-heatmap-types).
+Key Visualizer には[4つの一般的なヒートマップの結果](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer#common-heatmap-types)あります。
 
-- Evenly distributed workload: desired result
-- Alternating brightness and darkness along the X-axis (time): need to check the resources at peak times
-- Alternating brightness and darkness along the Y-axis: need to check the degree of hotspot aggregation generated
-- Bright diagonal lines: need to check the business model
+-   均等に分散された作業負荷：望ましい結果
+-   X軸（時間）に沿って明暗が交互に変化：ピーク時にリソースをチェックする必要がある
+-   Y軸に沿って明暗が交互に変化：生成されたホットスポットの集約度合いを確認する必要がある
+-   明るい斜線：ビジネスモデルを確認する必要がある
 
-In both cases of X-axis and Y-axis alternating bright and dark, you need to address read and write pressure.
+X 軸と Y 軸が交互に明暗を繰り返すどちらの場合も、読み取りおよび書き込みの圧力に対処する必要があります。
 
-For more information about SQL performance optimization, see [SQL Optimization](https://docs.pingcap.com/tidb/stable/sql-faq#sql-optimization) in SQL FAQs.
+SQL パフォーマンスの最適化の詳細については、「SQL FAQ」の[SQL 最適化](https://docs.pingcap.com/tidb/stable/sql-faq#sql-optimization)参照してください。

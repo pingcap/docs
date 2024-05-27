@@ -1,76 +1,76 @@
 ---
 title: TiProxy Overview
-summary: Learn the main features, installation, and usage of TiProxy.
+summary: TiProxy の主な機能、インストール、および使用方法について学習します。
 ---
 
-# TiProxy Overview
+# TiProxy の概要 {#tiproxy-overview}
 
-TiProxy is the official proxy component of PingCAP. It is placed between the client and the TiDB server to provide load balancing, connection persistence, service discovery, and other features for TiDB.
+TiProxy は、PingCAP の公式プロキシコンポーネントです。クライアントと TiDBサーバーの間に配置され、負荷分散、接続の永続性、サービス検出、および TiDB のその他の機能を提供します。
 
-TiProxy is an optional component. You can also use a third-party proxy component or connect directly to the TiDB server without using a proxy.
+TiProxy はオプションのコンポーネントです。サードパーティのプロキシコンポーネントを使用することも、プロキシを使用せずに TiDBサーバーに直接接続することもできます。
 
-The following figure shows the architecture of TiProxy:
+次の図は、TiProxy のアーキテクチャを示しています。
 
-<img src="https://download.pingcap.com/images/docs/tiproxy/tiproxy-architecture.png" alt="TiProxy architecture" width="500"></img>
+<img src="https://download.pingcap.com/images/docs/tiproxy/tiproxy-architecture.png" alt="TiProxy アーキテクチャ" width="500">
 
-## Main features
+## 主な特徴 {#main-features}
 
-TiProxy provides connection migration, service discovery, and quick deployment.
+TiProxy は、接続の移行、サービスの検出、および迅速な展開を提供します。
 
-### Connection migration
+### 接続の移行 {#connection-migration}
 
-TiProxy can migrate connections from one TiDB server to another without breaking the client connection.
+TiProxy は、クライアント接続を切断することなく、ある TiDBサーバーから別の TiDB サーバーに接続を移行できます。
 
-As shown in the following figure, the client originally connects to TiDB 1 through TiProxy. After the connection migration, the client actually connects to TiDB 2. When TiDB 1 is about to be offline or the ratio of connections on TiDB 1 to connections on TiDB 2 exceeds the set threshold, the connection migration is triggered. The client is unaware of the connection migration.
+次の図に示すように、クライアントは最初、TiProxy を介して TiDB 1 に接続します。接続の移行後、クライアントは実際には TiDB 2 に接続します。TiDB 1 がオフラインになる直前、または TiDB 1 の接続と TiDB 2 の接続の比率が設定されたしきい値を超えると、接続の移行がトリガーされます。クライアントは接続の移行を認識しません。
 
-<img src="https://download.pingcap.com/images/docs/tiproxy/tiproxy-session-migration.png" alt="TiProxy connection migration" width="400"></img>
+<img src="https://download.pingcap.com/images/docs/tiproxy/tiproxy-session-migration.png" alt="TiProxy接続の移行" width="400">
 
-Connection migration usually occurs in the following scenarios:
+接続の移行は通常、次のシナリオで発生します。
 
-- When a TiDB server performs scaling in, rolling upgrade, or rolling restart, TiProxy can migrate connections from the TiDB server that is about to be offline to other TiDB servers to keep the client connection alive.
-- When a TiDB server performs scaling out, TiProxy can migrate existing connections to the new TiDB server to achieve real-time load balancing without resetting the client connection pool.
+-   TiDBサーバーがスケールイン、ローリング アップグレード、またはローリング再起動を実行すると、TiProxy はオフラインになる予定の TiDBサーバーから他の TiDB サーバーへの接続を移行して、クライアント接続を維持できます。
+-   TiDBサーバーがスケールアウトを実行すると、TiProxy は既存の接続を新しい TiDBサーバーに移行して、クライアント接続プールをリセットせずにリアルタイムの負荷分散を実現できます。
 
-### Service discovery
+### サービス検出 {#service-discovery}
 
-When a TiDB server performs scaling in or scaling out, if you use a common load balancer, you need to manually update the TiDB server list. However, TiProxy can automatically discover the TiDB server list without manual intervention.
+TiDBサーバーがスケールインまたはスケールアウトを実行する場合、共通のロード バランサーを使用している場合は、TiDBサーバーリストを手動で更新する必要があります。ただし、TiProxy は手動介入なしで TiDBサーバーリストを自動的に検出できます。
 
-### Quick deployment
+### 迅速な展開 {#quick-deployment}
 
-TiProxy is integrated into [TiUP](https://github.com/pingcap/tiup), [TiDB Operator](https://github.com/pingcap/tidb-operator), [TiDB Dashboard](/dashboard/dashboard-intro.md), and [Grafana](/tiproxy/tiproxy-grafana.md), which reduces the deployment, operation, and management costs.
+TiProxy は[TiUP](https://github.com/pingcap/tiup) 、 [TiDB Operator](https://github.com/pingcap/tidb-operator) 、 [TiDBダッシュボード](/dashboard/dashboard-intro.md) 、および[グラファナ](/tiproxy/tiproxy-grafana.md)に統合されており、導入、運用、および管理のコストが削減されます。
 
-## User scenarios
+## ユーザーシナリオ {#user-scenarios}
 
-TiProxy is suitable for the following scenarios:
+TiProxy は次のシナリオに適しています。
 
-- Connection persistence: When a TiDB server performs scaling in, rolling upgrade, or rolling restart, the client connection is broken, resulting in an error. If the client does not have an idempotent error retry mechanism, you need to manually check and fix the error, which greatly increases the labor cost. TiProxy can keep the client connection, so that the client does not report an error.
-- Frequent scaling in and scaling out: The workload of an application might change periodically. To save costs, you can deploy TiDB on the cloud and automatically scale in and scale out TiDB servers according to the workload. However, scaling in might cause the client to disconnect, and scaling out might result in unbalanced load. TiProxy can keep the client connection and achieve load balancing.
+-   接続の永続性: TiDBサーバーがスケールイン、ローリング アップグレード、またはローリング リスタートを実行すると、クライアント接続が切断され、エラーが発生します。クライアントにべき等エラー再試行メカニズムがない場合は、手動でエラーを確認して修正する必要があり、人件費が大幅に増加します。TiProxy はクライアント接続を維持できるため、クライアントはエラーを報告しません。
+-   頻繁なスケールインとスケールアウト: アプリケーションのワークロードは定期的に変化する可能性があります。コストを節約するために、クラウドに TiDB をデプロイし、ワークロードに応じて TiDB サーバーを自動的にスケールインおよびスケールアウトすることができます。ただし、スケールインするとクライアントが切断される可能性があり、スケールアウトすると負荷が不均衡になる可能性があります。TiProxy はクライアント接続を維持し、負荷分散を実現できます。
 
-TiProxy is not suitable for the following scenarios:
+TiProxy は次のシナリオには適していません。
 
-- Sensitive to performance: The performance of TiProxy is lower than that of HAProxy and other load balancers, so using TiProxy will reduce the QPS. For details, refer to [TiProxy Performance Test Report](/tiproxy/tiproxy-performance-test.md).
-- Sensitive to cost: If the TiDB cluster uses hardware load balancers, virtual IP, or the load balancer provided by Kubernetes, adding TiProxy will increase the cost. In addition, if you deploy the TiDB cluster across availability zones on the cloud, adding TiProxy will also increase the traffic cost across availability zones.
-- TiDB server failover: TiProxy can keep the client connection only when the TiDB server is offline or restarted as planned. If the TiDB server is offline unexpectedly, the connection is still broken.
+-   パフォーマンスに敏感: TiProxy のパフォーマンスは HAProxy や他のロードバランサーに比べて低いため、TiProxy を使用すると QPS が低下します。詳細については[TiProxy パフォーマンス テスト レポート](/tiproxy/tiproxy-performance-test.md)を参照してください。
+-   コストに敏感: TiDB クラスターがハードウェア ロード バランサー、仮想 IP、または Kubernetes が提供するロード バランサーを使用している場合、TiProxy を追加するとコストが増加します。さらに、クラウド上のアベイラビリティ ゾーン全体に TiDB クラスターを展開する場合、TiProxy を追加するとアベイラビリティ ゾーン全体のトラフィック コストも増加します。
+-   TiDBサーバーのフェイルオーバー: TiProxy は、TiDBサーバーがオフラインの場合、または計画どおりに再起動された場合にのみクライアント接続を維持できます。TiDBサーバーが予期せずオフラインになった場合、接続は切断されたままになります。
 
-It is recommended that you use TiProxy for the scenarios that TiProxy is suitable for and use HAProxy or other proxies when your application is sensitive to performance.
+TiProxy が適しているシナリオでは TiProxy を使用し、アプリケーションがパフォーマンスに敏感な場合は HAProxy またはその他のプロキシを使用することをお勧めします。
 
-## Installation and usage
+## インストールと使用方法 {#installation-and-usage}
 
-This section describes how to deploy and change TiProxy using TiUP. For how to deploy TiProxy using TiDB Operator in Kubernetes, see [TiDB Operator documentation](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tiproxy).
+このセクションでは、 TiUPを使用して TiProxy をデプロイおよび変更する方法について説明します。Kubernetes でTiDB Operatorを使用して TiProxy をデプロイする方法については、 [TiDB Operatorのドキュメント](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tiproxy)を参照してください。
 
-### Deploy TiProxy
+### TiProxy をデプロイ {#deploy-tiproxy}
 
-1. Before TiUP v1.15.0, you need to manually generate a self-signed certificate.
+1.  TiUP v1.15.0 より前では、自己署名証明書を手動で生成する必要があります。
 
-    Generate a self-signed certificate for the TiDB instance and place the certificate on all TiDB instances to ensure that all TiDB instances have the same certificate. For detailed steps, see [Generate self-signed certificates](/generate-self-signed-certificates.md).
+    TiDB インスタンスの自己署名証明書を生成し、その証明書をすべての TiDB インスタンスに配置して、すべての TiDB インスタンスが同じ証明書を持つようにします。詳細な手順については、 [自己署名証明書を生成する](/generate-self-signed-certificates.md)参照してください。
 
-2. Configure the TiDB instances.
+2.  TiDB インスタンスを構成します。
 
-    When using TiProxy, you also need to configure the following items for the TiDB instances:
+    TiProxy を使用する場合は、TiDB インスタンスに対して次の項目も構成する必要があります。
 
-    - Before TiUP v1.15.0, configure the [`security.session-token-signing-cert`](/tidb-configuration-file.md#session-token-signing-cert-new-in-v640) and [`security.session-token-signing-key`](/tidb-configuration-file.md#session-token-signing-key-new-in-v640) of TiDB instances to the path of the certificate. Otherwise, the connection cannot be migrated.
-    - Configure the [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) of TiDB instances to a value greater than the longest transaction duration of the application. Otherwise, the client might disconnect when the TiDB server is offline. You can view the transaction duration through the [Transaction metrics on the TiDB monitoring dashboard](/grafana-tidb-dashboard.md#transaction). For details, see [TiProxy usage limitations](#limitations).
+    -   TiUP v1.15.0 より前では、TiDB インスタンスの[`security.session-token-signing-cert`](/tidb-configuration-file.md#session-token-signing-cert-new-in-v640)と[`security.session-token-signing-key`](/tidb-configuration-file.md#session-token-signing-key-new-in-v640)証明書のパスに設定してください。そうしないと、接続を移行できません。
+    -   TiDB インスタンスの[`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) 、アプリケーションの最長トランザクション期間よりも大きい値に設定します。そうしないと、TiDBサーバーがオフラインのときにクライアントが切断される可能性があります。トランザクション期間は[TiDB モニタリング ダッシュボードのトランザクションメトリック](/grafana-tidb-dashboard.md#transaction)で確認できます。詳細については、 [TiProxyの使用制限](#limitations)を参照してください。
 
-    A configuration example is as follows:
+    設定例は次のとおりです。
 
     ```yaml
     server_configs:
@@ -83,20 +83,20 @@ This section describes how to deploy and change TiProxy using TiUP. For how to d
         graceful-wait-before-shutdown: 15
     ```
 
-3. Configure the TiProxy instances.
+3.  TiProxy インスタンスを構成します。
 
-    To ensure the high availability of TiProxy, it is recommended to deploy at least two TiProxy instances. You can use hardware load balancers to distribute traffic to each TiProxy instance, or configure virtual IP to route the traffic to the available TiProxy instance.
+    TiProxy の高可用性を確保するには、少なくとも 2 つの TiProxy インスタンスを展開することをお勧めします。ハードウェア ロード バランサーを使用して各 TiProxy インスタンスにトラフィックを分散するか、仮想 IP を構成してトラフィックを使用可能な TiProxy インスタンスにルーティングすることができます。
 
-    When selecting the model and number of TiProxy instances, consider the following factors:
+    TiProxy インスタンスのモデルと数を選択するときは、次の要素を考慮してください。
 
-    - For the workload type and maximum QPS, see [TiProxy Performance Test Report](/tiproxy/tiproxy-performance-test.md).
-    - Because the number of TiProxy instances is less than that of TiDB servers, the network bandwidth of TiProxy is more likely to become a bottleneck than that of TiDB servers. Therefore, you also need to consider the network bandwidth. For example, in AWS, the baseline network bandwidth of the same series of EC2 is not proportional to the number of CPU cores. For details, see [Network performance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/compute-optimized-instances.html#compute-network-performance). In such cases, when the network bandwidth becomes a bottleneck, splitting the TiProxy instance into more and smaller instances can improve QPS.
+    -   ワークロードの種類と最大 QPS については、 [TiProxy パフォーマンス テスト レポート](/tiproxy/tiproxy-performance-test.md)参照してください。
+    -   TiProxy インスタンスの数は TiDB サーバの数よりも少ないため、TiProxy のネットワーク帯域が TiDB サーバよりもボトルネックになりやすいです。そのため、ネットワーク帯域も考慮する必要があります。例えば、AWS では、EC2 同シリーズのベースラインネットワーク帯域は CPU コア数に比例しません。詳細は[ネットワークパフォーマンス](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/compute-optimized-instances.html#compute-network-performance)参照してください。このような場合、ネットワーク帯域がボトルネックになるときは、TiProxy インスタンスをより多くの小さなインスタンスに分割すると QPS が向上することがあります。
 
-    It is recommended to specify the version number of TiProxy in the topology configuration so that TiProxy will not be upgraded when you upgrade the TiDB cluster through [`tiup cluster upgrade`](/tiup/tiup-component-cluster-upgrade.md). Otherwise, the client connection might be disconnected during TiProxy upgrade.
+    TiDB クラスタを[`tiup cluster upgrade`](/tiup/tiup-component-cluster-upgrade.md)にアップグレードするときに TiProxy がアップグレードされないように、トポロジ構成で TiProxy のバージョン番号を指定することをお勧めします。そうしないと、TiProxy のアップグレード中にクライアント接続が切断される可能性があります。
 
-    To configure TiProxy configuration items, see [TiProxy configuration](/tiproxy/tiproxy-configuration.md).
+    TiProxy 構成項目を構成するには、 [TiProxy の設定](/tiproxy/tiproxy-configuration.md)参照してください。
 
-    A configuration example is as follows:
+    設定例は次のとおりです。
 
     ```yaml
     component_versions:
@@ -108,102 +108,102 @@ This section describes how to deploy and change TiProxy using TiUP. For how to d
         security.server-tls.key: "/var/ssl/key.pem"
     ```
 
-4. Start the cluster.
+4.  クラスターを起動します。
 
-    To start the cluster using TiUP, see [TiUP documentation](/tiup/tiup-documentation-guide.md).
+    TiUPを使用してクラスターを起動するには、 [TiUPドキュメント](/tiup/tiup-documentation-guide.md)参照してください。
 
-5. Connect to TiProxy.
+5.  TiProxyに接続します。
 
-    After the cluster is deployed, the cluster exposes the ports of TiDB server and TiProxy at the same time. The client should connect to the port of TiProxy instead of the port of TiDB server.
+    クラスターがデプロイされると、クラスターは TiDBサーバーと TiProxy のポートを同時に公開します。クライアントは、TiDBサーバーのポートではなく、TiProxy のポートに接続する必要があります。
 
-### Modify TiProxy configuration
+### TiProxy構成の変更 {#modify-tiproxy-configuration}
 
-To ensure that TiProxy keeps the client connection, do not restart TiProxy unless necessary. Therefore, most of the TiProxy configuration items can be modified online. For the list of configuration items that support online change, see [TiProxy configuration](/tiproxy/tiproxy-configuration.md).
+TiProxy がクライアント接続を維持するには、必要な場合を除いて TiProxy を再起動しないでください。したがって、TiProxy 構成項目のほとんどはオンラインで変更できます。オンライン変更をサポートする構成項目のリストについては、 [TiProxy の設定](/tiproxy/tiproxy-configuration.md)参照してください。
 
-When using TiUP to change the TiProxy configuration, if the configuration item to be changed supports online change, you can use the [`--skip-restart`](/tiup/tiup-component-cluster-reload.md#--skip-restart) option to avoid restarting TiProxy.
+TiUPを使用して TiProxy 設定を変更する場合、変更する構成項目がオンライン変更をサポートしている場合は、 [`--skip-restart`](/tiup/tiup-component-cluster-reload.md#--skip-restart)オプションを使用して TiProxy の再起動を回避できます。
 
-### Upgrade TiProxy
+### TiProxy をアップグレードする {#upgrade-tiproxy}
 
-When you deploy TiProxy, it is recommended to specify the version of TiProxy so that TiProxy will not be upgraded when you upgrade the TiDB cluster.
+TiProxy をデプロイする場合は、TiDB クラスターをアップグレードしても TiProxy がアップグレードされないように、TiProxy のバージョンを指定することをお勧めします。
 
-If you need to upgrade TiProxy, add [`--tiproxy-version`](/tiup/tiup-component-cluster-upgrade.md#--tiproxy-version) in the upgrade command to specify the version of TiProxy:
+TiProxy をアップグレードする必要がある場合は、アップグレード コマンドに[`--tiproxy-version`](/tiup/tiup-component-cluster-upgrade.md#--tiproxy-version)追加して、TiProxy のバージョンを指定します。
 
 ```shell
 tiup cluster upgrade <cluster-name> <version> --tiproxy-version <tiproxy-version>
 ```
 
-### Restart the TiDB cluster
+### TiDBクラスタを再起動する {#restart-the-tidb-cluster}
 
-When you restart the TiDB cluster using [`tiup cluster restart`](/tiup/tiup-component-cluster-restart.md), TiDB servers are not rolling restarted, which causes the client connection to be disconnected. Therefore, avoid using this command.
+[`tiup cluster restart`](/tiup/tiup-component-cluster-restart.md)を使用して TiDB クラスターを再起動すると、TiDB サーバーはローリング再起動されず、クライアント接続が切断されます。したがって、このコマンドの使用は避けてください。
 
-Instead, when you upgrade the cluster using [`tiup cluster upgrade`](/tiup/tiup-component-cluster-upgrade.md) or reload the configuration using [`tiup cluster reload`](/tiup/tiup-component-cluster-reload.md), TiDB servers are rolling restarted, so the client connection is not affected.
+代わりに、 [`tiup cluster upgrade`](/tiup/tiup-component-cluster-upgrade.md)使用してクラスターをアップグレードするか、 [`tiup cluster reload`](/tiup/tiup-component-cluster-reload.md)使用して構成を再ロードすると、 TiDB サーバーがローリング再起動されるため、クライアント接続は影響を受けません。
 
-## Compatibility with other components
+## 他のコンポーネントとの互換性 {#compatibility-with-other-components}
 
-- TiProxy only supports TiDB v6.5.0 and later versions.
-- TiProxy's TLS connection has incompatible features with TiDB. For details, see [Security](#security).
-- TiDB Dashboard and Grafana support TiProxy from v7.6.0.
-- TiUP supports TiProxy from v1.14.1, and TiDB Operator supports TiProxy from v1.5.1.
-- Because the interface provided by the status port of TiProxy is different from that of TiDB server, when you use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to import data, the target database should be the address of TiDB server, not the address of TiProxy.
+-   TiProxy は TiDB v6.5.0 以降のバージョンのみをサポートします。
+-   TiProxy の TLS 接続には TiDB と互換性のない機能があります。詳細については[Security](#security)を参照してください。
+-   TiDB ダッシュボードと Grafana は、v7.6.0 から TiProxy をサポートしています。
+-   TiUP はv1.14.1 から TiProxy をサポートし、 TiDB Operator はv1.5.1 から TiProxy をサポートします。
+-   TiProxy のステータス ポートによって提供されるインターフェイスは TiDBサーバーのインターフェイスと異なるため、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)使用してデータをインポートする場合、ターゲット データベースは TiProxy のアドレスではなく、TiDBサーバーのアドレスにする必要があります。
 
-## Security
+## Security {#security}
 
-TiProxy provides TLS connections. The TLS connection between the client and TiProxy is enabled according to the following rules:
+TiProxy は TLS 接続を提供します。クライアントと TiProxy 間の TLS 接続は、次のルールに従って有効化されます。
 
-- If the [`security.server-tls`](/tiproxy/tiproxy-configuration.md#server-tls) configuration of TiProxy is set to not use TLS connection, the TLS connection between the client and TiProxy is not enabled regardless of whether the client enables TLS connection.
-- If the [`security.server-tls`](/tiproxy/tiproxy-configuration.md#server-tls) configuration of TiProxy is set to use TLS connection, the TLS connection between the client and TiProxy is enabled only when the client enables TLS connection.
+-   TiProxy の[`security.server-tls`](/tiproxy/tiproxy-configuration.md#server-tls)の構成が TLS 接続を使用しないように設定されている場合、クライアントが TLS 接続を有効にしているかどうかに関係なく、クライアントと TiProxy 間の TLS 接続は有効になりません。
+-   TiProxy の[`security.server-tls`](/tiproxy/tiproxy-configuration.md#server-tls)の構成が TLS 接続を使用するように設定されている場合、クライアントと TiProxy 間の TLS 接続は、クライアントが TLS 接続を有効にした場合にのみ有効になります。
 
-The TLS connection between TiProxy and TiDB server is enabled according to the following rules:
+TiProxy と TiDBサーバー間の TLS 接続は、次のルールに従って有効化されます。
 
-- If TiProxy's [`security.require-backend-tls`](/tiproxy/tiproxy-configuration.md#require-backend-tls) is set to `true`, TiProxy and TiDB server always enable TLS connection regardless of whether the client enables TLS connection. If TiProxy's [`security.sql-tls`](/tiproxy/tiproxy-configuration.md#sql-tls) is set to not use TLS or TiDB server does not configure TLS certificate, the client reports an error.
-- If TiProxy's [`security.require-backend-tls`](/tiproxy/tiproxy-configuration.md#require-backend-tls) is set to `false`, TiProxy's [`security.sql-tls`](/tiproxy/tiproxy-configuration.md#sql-tls) is configured with TLS and TiDB server is configured with a TLS certificate, TiProxy and TiDB server only enable TLS connection when the client enables TLS connection.
-- If TiProxy's [`security.require-backend-tls`](/tiproxy/tiproxy-configuration.md#require-backend-tls) is set to `false`, TiProxy's [`security.sql-tls`](/tiproxy/tiproxy-configuration.md#sql-tls) is set to not use TLS or TiDB server does not configure a TLS certificate, TiProxy and TiDB server do not enable TLS connection.
+-   TiProxy の[`security.require-backend-tls`](/tiproxy/tiproxy-configuration.md#require-backend-tls) `true`に設定されている場合、クライアントが TLS 接続を有効にしているかどうかに関係なく、TiProxy と TiDBサーバーは常に TLS 接続を有効にします。TiProxy の[`security.sql-tls`](/tiproxy/tiproxy-configuration.md#sql-tls)が TLS を使用しないように設定されているか、TiDBサーバーが TLS 証明書を構成していない場合、クライアントはエラーを報告します。
+-   TiProxy の[`security.require-backend-tls`](/tiproxy/tiproxy-configuration.md#require-backend-tls) `false`に設定され、TiProxy の[`security.sql-tls`](/tiproxy/tiproxy-configuration.md#sql-tls) TLS で構成され、TiDBサーバーが TLS 証明書で構成されている場合、TiProxy と TiDBサーバーは、クライアントが TLS 接続を有効にした場合にのみ TLS 接続を有効にします。
+-   TiProxy の[`security.require-backend-tls`](/tiproxy/tiproxy-configuration.md#require-backend-tls) `false`に設定されている場合、TiProxy の[`security.sql-tls`](/tiproxy/tiproxy-configuration.md#sql-tls) TLS を使用しないように設定されているか、TiDBサーバーが TLS 証明書を構成していない場合、TiProxy と TiDBサーバーはTLS 接続を有効にしません。
 
-TiProxy has the following behaviors incompatible with TiDB:
+TiProxy には、TiDB と互換性のない次の動作があります。
 
-- The `STATUS` and `SHOW STATUS` statements might return different TLS information. The `STATUS` statement returns the TLS information between the client and TiProxy, while the `SHOW STATUS` statement returns the TLS information between TiProxy and TiDB server.
-- TiProxy does not support [certificate-based authentication](/certificate-authentication.md). Otherwise, the client might fail to log in because the TLS certificate between the client and TiProxy is different from that between TiProxy and TiDB server, and TiDB server verifies the TLS certificate based on the TLS certificate on TiProxy.
+-   `STATUS`と`SHOW STATUS`ステートメントは異なる TLS 情報を返す可能性があります。5 `STATUS`ステートメントはクライアントと TiProxy 間の TLS 情報を返し、 `SHOW STATUS`ステートメントは TiProxy と TiDBサーバー間の TLS 情報を返します。
+-   TiProxy は[証明書ベースの認証](/certificate-authentication.md)サポートしていません。そうでない場合、クライアントと TiProxy 間の TLS 証明書が TiProxy と TiDBサーバー間の TLS 証明書と異なり、TiDBサーバーがTiProxy 上の TLS 証明書に基づいて TLS 証明書を検証するため、クライアントがログインに失敗する可能性があります。
 
-## Limitations
+## 制限事項 {#limitations}
 
-TiProxy cannot keep the client connection in the following scenarios:
+TiProxy は、次のシナリオではクライアント接続を維持できません。
 
-- TiDB is offline unexpectedly. TiProxy only keeps the client connection when the TiDB server is offline or restarted as planned, and does not support failover of the TiDB server.
-- TiProxy performs scaling in, upgrade, or restart. Once TiProxy is offline, the client connection is broken.
-- TiDB actively disconnects the connection. For example, when a session does not send a request for a period of time longer than `wait_timeout`, TiDB actively disconnects the connection, and TiProxy also disconnects the client connection.
+-   TiDB が予期せずオフラインになりました。TiProxy は、TiDBサーバーがオフラインの場合、または計画どおりに再起動された場合にのみクライアント接続を維持し、TiDBサーバーのフェイルオーバーをサポートしません。
+-   TiProxy はスケールイン、アップグレード、または再起動を実行します。TiProxy がオフラインになると、クライアント接続は切断されます。
+-   TiDB は接続をアクティブに切断します。たとえば、セッションが`wait_timeout`より長い期間リクエストを送信しない場合、TiDB は接続をアクティブに切断し、TiProxy もクライアント接続を切断します。
 
-TiProxy cannot migrate connections in the following scenarios, and thus cannot keep the client connection or achieve load balancing:
+TiProxy は次のシナリオでは接続を移行できないため、クライアント接続を維持したり負荷分散を実現したりすることができません。
 
-- The duration of a single statement or a single transaction exceeds the [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) configured on the TiDB server.
-- The session uses the cursor to read data, and the cursor is not closed or the data is not read within the [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) configured on the TiDB server.
-- The session creates a [local temporary table](/temporary-tables.md#local-temporary-tables).
-- The session holds a [user-level lock](/functions-and-operators/locking-functions.md).
-- The session holds a [table lock](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md).
-- The session creates a [prepared statement](/develop/dev-guide-prepared-statement.md), and the prepared statement is invalid. For example, the table related to the prepared statement is dropped after the prepared statement is created.
-- The session creates a session-level [execution plan binding](/sql-plan-management.md#sql-binding), and the binding is invalid. For example, the table related to the binding is dropped after the binding is created.
-- After the session is created, the user used by the session is deleted or the username is changed.
+-   単一のステートメントまたは単一のトランザクションの継続時間が、TiDBサーバーで構成された[`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50)超えています。
+-   セッションはカーソルを使用してデータを読み取りますが、カーソルが閉じられていないか、TiDBサーバーで構成された[`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50)時間以内にデータが読み取られません。
+-   セッションは[ローカル一時テーブル](/temporary-tables.md#local-temporary-tables)作成します。
+-   セッションは[ユーザーレベルロック](/functions-and-operators/locking-functions.md)です。
+-   セッションは[テーブルロック](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)です。
+-   セッションは[プリペアドステートメント](/develop/dev-guide-prepared-statement.md)を作成し、プリペアドステートメントは無効です。たとえば、プリペアドステートメントが作成された後に、プリペアドステートメントに関連するテーブルが削除されます。
+-   セッションはセッションレベル[実行プランバインディング](/sql-plan-management.md#sql-binding)を作成しますが、バインディングは無効です。たとえば、バインディングの作成後に、バインディングに関連するテーブルが削除されます。
+-   セッションが作成された後、セッションで使用されたユーザーが削除されるか、ユーザー名が変更されます。
 
-## Supported connectors
+## サポートされているコネクタ {#supported-connectors}
 
-TiProxy requires that the connector used by the client supports [authentication plugins](https://dev.mysql.com/doc/refman/8.0/en/pluggable-authentication.html). Otherwise, the connection might fail.
+TiProxy では、クライアントが使用するコネクタが[認証プラグイン](https://dev.mysql.com/doc/refman/8.0/en/pluggable-authentication.html)サポートしている必要があります。そうでない場合、接続が失敗する可能性があります。
 
-The following table lists some supported connectors:
+次の表に、サポートされているコネクタの一部を示します。
 
-| Language   | Connector              | The minimum supported version |
-|------------|------------------------|------------------------------|
-| Java       | MySQL Connector/J      | 5.1.19                       |
-| C          | libmysqlclient         | 5.5.7                        |
-| Go         | Go SQL Driver          | 1.4.0                        |
-| JavaScript | MySQL Connector/Node.js | 1.0.2                        |
-| JavaScript | mysqljs/mysql          | 2.15.0                       |
-| JavaScript | node-mysql2            | 1.0.0-rc-6                   |
-| PHP        | mysqlnd                | 5.4                          |
-| Python     | MySQL Connector/Python | 1.0.7                        |
-| Python     | PyMySQL                | 0.7                          |
+| 言語         | コネクタ               | サポートされる最小バージョン |
+| ---------- | ------------------ | -------------- |
+| Java       | MySQL コネクタ/J       | 5.1.19         |
+| Ｃ          | libmysqlクライアント     | 5.5.7          |
+| 行く         | Go SQLDriver       | 1.4.0          |
+| JavaScript | MySQL コネクタ/Node.js | 1.0.2          |
+| JavaScript | mysqljs/mysql      | 2.15.0         |
+| JavaScript | ノード-mysql2         | 1.0.0-rc-6     |
+| PHP の      | mysqlnd            | 5.4            |
+| パイソン       | MySQL コネクタ/Python  | 1.0.7          |
+| パイソン       | pyMySQL の          | 0.7            |
 
-Note that some connectors call the common library to connect to the database, and these connectors are not listed in the table. You can refer to the above table for the required version of the corresponding library. For example, MySQL/Ruby uses libmysqlclient to connect to the database, so it requires that the libmysqlclient used by MySQL/Ruby is version 5.5.7 or later.
+一部のコネクタは共通ライブラリを呼び出してデータベースに接続しますが、これらのコネクタは表に記載されていません。対応するライブラリの必要なバージョンについては、上記の表を参照してください。たとえば、MySQL/Ruby は libmysqlclient を使用してデータベースに接続するため、MySQL/Ruby が使用する libmysqlclient はバージョン 5.5.7 以降である必要があります。
 
-## TiProxy resources
+## TiProxy リソース {#tiproxy-resources}
 
-- [TiProxy Release Notes](https://github.com/pingcap/tiproxy/releases)
-- [TiProxy Issues](https://github.com/pingcap/tiup/issues): Lists TiProxy GitHub issues
+-   [TiProxy リリースノート](https://github.com/pingcap/tiproxy/releases)
+-   [TiProxy の問題](https://github.com/pingcap/tiup/issues) : TiProxy GitHub の問題を一覧表示します

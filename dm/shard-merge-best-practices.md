@@ -1,46 +1,46 @@
 ---
 title: Best Practices of Data Migration in the Shard Merge Scenario
-summary: Learn the best practices of data migration in the shard merge scenario.
+summary: シャードマージのシナリオにおけるデータ移行のベスト プラクティスを学習します。
 ---
 
-# Best Practices of Data Migration in the Shard Merge Scenario
+# シャードマージシナリオにおけるデータ移行のベストプラクティス {#best-practices-of-data-migration-in-the-shard-merge-scenario}
 
-This document describes the features and limitations of [TiDB Data Migration (DM)](/dm/dm-overview.md) in the shard merge scenario and provides a data migration best practice guide for your application (the default "pessimistic" mode is used).
+このドキュメントでは、シャード マージ シナリオにおける[TiDB データ移行 (DM)](/dm/dm-overview.md)の機能と制限について説明し、アプリケーションのデータ移行のベスト プラクティス ガイドを提供します (デフォルトの「悲観的」モードが使用されます)。
 
-## Use a separate data migration task
+## 別のデータ移行タスクを使用する {#use-a-separate-data-migration-task}
 
-In the [Merge and Migrate Data from Sharded Tables](/dm/feature-shard-merge-pessimistic.md#principles) document, the definition of "sharding group" is given: A sharding group consists of all upstream tables that need to be merged and migrated into the same downstream table.
+[シャードテーブルからのデータのマージと移行](/dm/feature-shard-merge-pessimistic.md#principles)ドキュメントでは、「シャーディング グループ」の定義が次のように示されています。シャーディング グループは、同じダウンストリーム テーブルにマージおよび移行する必要があるすべてのアップストリーム テーブルで構成されます。
 
-The current sharding DDL mechanism has some [usage restrictions](/dm/feature-shard-merge-pessimistic.md#restrictions) to coordinate the schema changes brought by DDL operations in different sharded tables. If these restrictions are violated due to unexpected reasons, you need to [handle sharding DDL locks manually in DM](/dm/manually-handling-sharding-ddl-locks.md), or even redo the entire data migration task.
+現在のシャーディング DDL メカニズムには、異なるシャーディングされたテーブルでの DDL 操作によってもたらされるスキーマ変更を調整するための[使用制限](/dm/feature-shard-merge-pessimistic.md#restrictions)あります。予期しない理由によりこれらの制限に違反した場合は、 [DMでシャーディングDDLロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)を実行するか、データ移行タスク全体をやり直す必要があります。
 
-To mitigate the impact on data migration when an exception occurs, it is recommended to merge and migrate each sharding group as a separate data migration task. **This might enable that only a small number of data migration tasks need to be handled manually while others remain unaffected.**
+例外が発生した場合にデータ移行への影響を軽減するには、各シャーディング グループを個別のデータ移行タスクとしてマージして移行することをお勧めします。**これにより、少数のデータ移行タスクのみを手動で処理し、他のタスクには影響を与えないようにすることができます。**
 
-## Handle sharding DDL locks manually
+## シャーディングDDLロックを手動で処理する {#handle-sharding-ddl-locks-manually}
 
-You can easily conclude from [Merge and Migrate Data from Sharded Tables](/dm/feature-shard-merge-pessimistic.md#principles) that DM's sharding DDL lock is a mechanism for coordinating the execution of DDL operations to the downstream from multiple upstream sharded tables.
+[シャードテーブルからのデータのマージと移行](/dm/feature-shard-merge-pessimistic.md#principles)から、DM のシャーディング DDL ロックは、複数の上流シャーディングされたテーブルから下流への DDL 操作の実行を調整するためのメカニズムであることが簡単にわかります。
 
-Therefore, when you find any sharding DDL lock on `DM-master` through `shard-ddl-lock` command, or any `unresolvedGroups` or `blockingDDLs` on some DM-workers through `query-status` command, do not rush to manually release the sharding DDL lock through `shard-ddl-lock unlock` commands.
+したがって、 `DM-master` ～ `shard-ddl-lock`コマンドでシャーディング DDL ロックが見つかった場合、または`query-status`コマンドで一部の DM ワーカーに`unresolvedGroups`または`blockingDDLs`が見つかった場合は、 `shard-ddl-lock unlock`コマンドでシャーディング DDL ロックを手動で解除しようと急いではいけません。
 
-Instead, you can:
+代わりに、次のことができます。
 
-- Follow the corresponding manual solution to handle the scenario if the failure of automatically releasing the sharding DDL lock is one of the [listed abnormal scenarios](/dm/manually-handling-sharding-ddl-locks.md#supported-scenarios).
-- Redo the entire data migration task if it is an unsupported scenario: First, empty the data in the downstream database and the `dm_meta` information associated with the migration task; then, re-execute the full and incremental data replication.
+-   シャーディング DDL ロックの自動解放の失敗が 1 の[異常なシナリオを列挙](/dm/manually-handling-sharding-ddl-locks.md#supported-scenarios)つである場合は、対応する手動ソリューションに従ってシナリオを処理します。
+-   サポートされていないシナリオの場合は、データ移行タスク全体をやり直します。まず、ダウンストリーム データベースのデータと移行タスクに関連付けられている`dm_meta`情報を空にし、次に、完全および増分データ レプリケーションを再実行します。
 
-## Handle conflicts between primary keys or unique indexes across multiple sharded tables
+## 複数のシャードテーブル間の主キーまたは一意のインデックス間の競合を処理する {#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables}
 
-Data from multiple sharded tables might cause conflicts between the primary keys or unique indexes. You need to check each primary key or unique index based on the sharding logic of these sharded tables. The following are three cases related to primary keys or unique indexes:
+複数のシャード テーブルのデータにより、主キーまたは一意のインデックス間で競合が発生する可能性があります。これらのシャード テーブルのシャーディング ロジックに基づいて、各主キーまたは一意のインデックスを確認する必要があります。主キーまたは一意のインデックスに関連する 3 つのケースを次に示します。
 
-- Shard key: Usually, the same shard key only exists in one sharded table, which means no data conflict is caused on shard key.
-- Auto-increment primary key: The auto-increment primary key of each sharded tables counts separately, so their range might overlap. In this case, you need to refer to the next section [Handle conflicts of auto-increment primary key](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key) to solve it.
-- Other primary keys or unique indexes: you need to analyze them based on the business logic. If data conflict, you can also refer to the next section [Handle conflicts of auto-increment primary key](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key) to solve it.
+-   シャード キー: 通常、同じシャード キーは 1 つのシャード テーブルにのみ存在するため、シャード キーでデータの競合は発生しません。
+-   自動増分主キー: 各シャードテーブルの自動増分主キーは個別にカウントされるため、範囲が重複する可能性があります。この場合、次のセクション[自動増分主キーの競合を処理する](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key)を参照して解決する必要があります。
+-   その他の主キーまたは一意のインデックス: ビジネス ロジックに基づいて分析する必要があります。データが競合する場合は、次のセクション[自動増分主キーの競合を処理する](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key)を参照して解決することもできます。
 
-## Handle conflicts of auto-increment primary key
+## 自動増分主キーの競合を処理する {#handle-conflicts-of-auto-increment-primary-key}
 
-This section introduces two recommended solutions to handle conflicts of auto-increment primary key.
+このセクションでは、自動インクリメント主キーの競合を処理するための 2 つの推奨ソリューションを紹介します。
 
-### Remove the `PRIMARY KEY` attribute from the column
+### 列から<code>PRIMARY KEY</code>属性を削除します {#remove-the-code-primary-key-code-attribute-from-the-column}
 
-Assume that the upstream schemas are as follows:
+アップストリーム スキーマが次のとおりであると仮定します。
 
 ```sql
 CREATE TABLE `tbl_no_pk` (
@@ -52,14 +52,14 @@ CREATE TABLE `tbl_no_pk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ```
 
-If the following requirements are satisfied:
+以下の要件を満たしている場合:
 
-- The `auto_pk_c1` column has no impact on the application and does not depend on the column's `PRIMARY KEY` attribute.
-- The `uk_c2` column has the `UNIQUE KEY` attribute, and it is globally unique in all upstream sharded tables.
+-   `auto_pk_c1`列目はアプリケーションに影響を与えず、列目の`PRIMARY KEY`属性に依存しません。
+-   `uk_c2`列には`UNIQUE KEY`属性があり、すべての上流のシャード テーブル内でグローバルに一意です。
 
-Then you can perform the following steps to fix the `ERROR 1062 (23000): Duplicate entry '***' for key 'PRIMARY'` error that is possibly caused by the `auto_pk_c1` column when you merge sharded tables.
+次に、次の手順を実行して、シャードされたテーブルをマージするときに`auto_pk_c1`番目の列によって発生する可能性のある`ERROR 1062 (23000): Duplicate entry '***' for key 'PRIMARY'`エラーを修正できます。
 
-1. Before the full data migration, create a table in the downstream database for merging and migrating data, and modify the `PRIMARY KEY` attribute of the `auto_pk_c1` column to normal index.
+1.  完全なデータ移行の前に、ダウンストリーム データベースにデータをマージおよび移行するためのテーブルを作成し、 `auto_pk_c1`列目の`PRIMARY KEY`属性を通常のインデックスに変更します。
 
     ```sql
     CREATE TABLE `tbl_no_pk_2` (
@@ -71,19 +71,19 @@ Then you can perform the following steps to fix the `ERROR 1062 (23000): Duplica
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1
     ```
 
-2. Add the following configuration in `task.yaml` to skip the check of auto-increment primary key conflict:
+2.  自動インクリメント主キーの競合のチェックをスキップするには、 `task.yaml`に次の構成を追加します。
 
     ```yaml
     ignore-checking-items: ["auto_increment_ID"]
     ```
 
-3. Start the full and incremental data replication task.
+3.  完全および増分データ レプリケーション タスクを開始します。
 
-4. Run `query-status` to verify whether the data migration task is successfully processed and whether the data from the upstream has already been merged and migrated to the downstream database.
+4.  実行`query-status` 、データ移行タスクが正常に処理されたかどうか、および上流のデータがすでにマージされて下流のデータベースに移行されているかどうかを確認します。
 
-### Use a composite primary key
+### 複合主キーを使用する {#use-a-composite-primary-key}
 
-Assume that the upstream schemas are as follows:
+アップストリーム スキーマが次のとおりであると仮定します。
 
 ```sql
 CREATE TABLE `tbl_multi_pk` (
@@ -94,15 +94,15 @@ CREATE TABLE `tbl_multi_pk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ```
 
-If the following requirements are satisfied:
+以下の要件を満たしている場合:
 
-* The application does not depend on the `PRIMARY KEY` attribute of the `auto_pk_c1` column.
-* The composite primary key that consists of the `auto_pk_c1` and `uuid_c2` columns is globally unique.
-* It is acceptable to use a composite primary key in the application.
+-   アプリケーションは、 `auto_pk_c1`列目の`PRIMARY KEY`属性に依存しません。
+-   `auto_pk_c1`列目と`uuid_c2`列目で構成される複合主キーはグローバルに一意です。
+-   アプリケーションでは複合主キーを使用することが可能です。
 
-Then you can perform the following steps to fix the `ERROR 1062 (23000): Duplicate entry '***' for key 'PRIMARY'` error that is possibly caused by the `auto_pk_c1` column when you merge sharded tables.
+次に、次の手順を実行して、シャードされたテーブルをマージするときに`auto_pk_c1`列によって発生する可能性のある`ERROR 1062 (23000): Duplicate entry '***' for key 'PRIMARY'`エラーを修正できます。
 
-1. Before the full data migration, create a table in the downstream database for merging and migrating data. Do not specify the `PRIMARY KEY` attribute for the `auto_pk_c1` column, but use the `auto_pk_c1` and `uuid_c2` columns to make up a composite primary key.
+1.  完全なデータ移行の前に、ダウンストリーム データベースに、データのマージと移行のためのテーブルを作成します。3 列目に`PRIMARY KEY`属性を指定せず、 `auto_pk_c1`列目と`uuid_c2`列目を`auto_pk_c1`して複合主キーを構成します。
 
     ```sql
     CREATE TABLE `tbl_multi_pk_c2` (
@@ -113,52 +113,52 @@ Then you can perform the following steps to fix the `ERROR 1062 (23000): Duplica
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1
     ```
 
-2. Start the full and incremental data migration task.
+2.  完全および増分データ移行タスクを開始します。
 
-3. Run `query-status` to verify whether the data migration task is successfully processed and whether the data from upstream has already been merged and migrated to the downstream database.
+3.  実行`query-status` 、データ移行タスクが正常に処理されたかどうか、および上流のデータがすでにマージされて下流のデータベースに移行されているかどうかを確認します。
 
-## Special processing when the upstream RDS contains sharded tables
+## アップストリーム RDS にシャードテーブルが含まれている場合の特別な処理 {#special-processing-when-the-upstream-rds-contains-sharded-tables}
 
-If the upstream data source is an RDS and it contains sharded tables, the table names in MySQL binlog might be invisible when connecting to a SQL client. For example, if the upstream is a UCloud distributed database, the table name in the binlog might have an extra prefix `_0001`. Therefore, you need to configure [table routing](/dm/dm-table-routing.md) based on the table names in binlog, instead of those in the SQL client.
+アップストリーム データ ソースが RDS であり、シャード テーブルが含まれている場合、SQL クライアントに接続するときに MySQL binlog内のテーブル名が表示されないことがあります。たとえば、アップストリームが UCloud 分散データベースである場合、 binlog内のテーブル名に追加のプレフィックス`_0001`が付くことがあります。したがって、SQL クライアント内のテーブル名ではなく、 binlog内のテーブル名に基づいて[テーブルルーティング](/dm/dm-table-routing.md)を構成する必要があります。
 
-## Create/drop tables in the upstream
+## アップストリームでテーブルを作成/削除する {#create-drop-tables-in-the-upstream}
 
-In [Merge and Migrate Data from Sharded Tables](/dm/feature-shard-merge-pessimistic.md#principles), it is clear that the coordination of sharding DDL lock depends on whether the downstream database receives the DDL statements of all upstream sharded tables. In addition, DM currently **does not support** dynamically creating or dropping sharded tables in the upstream. Therefore, to create or drop sharded tables in the upstream, it is recommended to perform the following steps.
+[シャードテーブルからのデータのマージと移行](/dm/feature-shard-merge-pessimistic.md#principles)では、シャーディング DDL ロックの調整は、下流データベースがすべての上流シャード テーブルの DDL ステートメントを受信するかどうかに依存することは明らかです。また、DM は現在、上流でのシャード テーブルの動的な作成または削除を**サポートしていません**。したがって、上流でシャード テーブルを作成または削除するには、次の手順を実行することをお勧めします。
 
-### Create sharded tables in the upstream
+### アップストリームにシャードテーブルを作成する {#create-sharded-tables-in-the-upstream}
 
-If you need to create a new sharded table in the upstream, perform the following steps:
+アップストリームに新しいシャード テーブルを作成する必要がある場合は、次の手順を実行します。
 
-1. Wait for the coordination of all executed sharding DDL in the upstream sharded tables to finish.
+1.  アップストリームのシャード テーブルで実行されたすべてのシャーディング DDL の調整が完了するまで待機します。
 
-2. Run `stop-task` to stop the data migration task.
+2.  データ移行タスクを停止するには、 `stop-task`実行します。
 
-3. Create a new sharded table in the upstream.
+3.  アップストリームに新しいシャード テーブルを作成します。
 
-4. Make sure that the configuration in the `task.yaml` file allows the newly added sharded table to be merged in one downstream table with other existing sharded tables.
+4.  `task.yaml`ファイルの構成で、新しく追加されたシャード テーブルを他の既存のシャード テーブルと 1 つのダウンストリーム テーブルにマージできることを確認します。
 
-5. Run `start-task` to start the task.
+5.  タスクを開始するには`start-task`実行します。
 
-6. Run `query-status` to verify whether the data migration task is successfully processed and whether the data from upstream has already been merged and migrated to the downstream database.
+6.  実行`query-status` 、データ移行タスクが正常に処理されたかどうか、および上流のデータがすでにマージされて下流のデータベースに移行されているかどうかを確認します。
 
-### Drop sharded tables in the upstream
+### アップストリームのシャードテーブルを削除する {#drop-sharded-tables-in-the-upstream}
 
-If you need to drop a sharded table in the upstream, perform the following steps:
+アップストリームでシャードされたテーブルを削除する必要がある場合は、次の手順を実行します。
 
-1. Drop the sharded table, run [`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/8.0/en/show-binlog-events.html) to fetch the `End_log_pos` corresponding to the `DROP TABLE` statement in the binlog events, and mark it as *Pos-M*.
+1.  シャード化されたテーブルを削除し、 [`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/8.0/en/show-binlog-events.html)実行して、 binlogイベント内の`DROP TABLE`のステートメントに対応する`End_log_pos`を取得し、それを*Pos-M*としてマークします。
 
-2. Run `query-status` to fetch the position (`syncerBinlog`) corresponding to the binlog event that has been processed by DM, and mark it as *Pos-S*.
+2.  `query-status`実行して、DMによって処理されたbinlogイベントに対応する位置（ `syncerBinlog` ）を取得し、それを*Pos-S*としてマークします。
 
-3. When *Pos-S* is greater than *Pos-M*, it means that DM has processed all of the `DROP TABLE` statements, and the data of the table before dropping has been migrated to the downstream, so the subsequent operation can be performed. Otherwise, wait for DM to finish migrating the data.
+3.  *Pos-S*が*Pos-M*より大きい場合、DM が`DROP TABLE`のステートメントをすべて処理し、ドロップ前のテーブルのデータが下流に移行されているため、後続の操作を実行できることを意味します。それ以外の場合は、DM がデータの移行を完了するまで待機します。
 
-4. Run `stop-task` to stop the task.
+4.  タスクを停止するには`stop-task`実行します。
 
-5. Make sure that the configuration in the `task.yaml` file ignores the dropped sharded table in the upstream.
+5.  `task.yaml`ファイル内の構成で、アップストリーム内の削除されたシャード テーブルが無視されることを確認します。
 
-6. Run `start-task` to start the task.
+6.  タスクを開始するには`start-task`実行します。
 
-7. Run `query-status` to verify whether the data migration task is successfully processed.
+7.  `query-status`を実行して、データ移行タスクが正常に処理されたかどうかを確認します。
 
-## Speed limits and traffic flow control
+## 速度制限と交通流制御 {#speed-limits-and-traffic-flow-control}
 
-When data from multiple upstream MySQL or MariaDB instances is merged and migrated to the same TiDB cluster in the downstream, every DM-worker corresponding to each upstream instance executes full and incremental data replication concurrently. This means that the default degree of concurrency (`pool-size` in full data migration and `worker-count` in incremental data replication) accumulates as the number of DM-workers increases, which might overload the downstream database. In this case, you need to conduct a preliminary performance analysis based on TiDB and DM monitoring metrics and adjust the value of each concurrency parameter. In the future, DM is expected to support partially automated traffic flow control.
+複数の上流 MySQL または MariaDB インスタンスからのデータが下流の同じ TiDB クラスターにマージされて移行されると、各上流インスタンスに対応するすべての DM ワーカーが、フルデータレプリケーションと増分データレプリケーションを同時に実行します。つまり、DM ワーカーの数が増えるにつれて、デフォルトの同時実行度 (フルデータ移行では`pool-size` 、増分データレプリケーションでは`worker-count` ) が蓄積され、下流データベースに過負荷がかかる可能性があります。この場合、TiDB と DM の監視メトリックに基づいて予備的なパフォーマンス分析を実施し、各同時実行パラメータの値を調整する必要があります。将来的には、DM は部分的に自動化されたトラフィックフロー制御をサポートする予定です。

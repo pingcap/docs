@@ -1,27 +1,27 @@
 ---
 title: Periodically Delete Data Using TTL (Time to Live)
-summary: Time to live (TTL) is a feature that allows you to manage TiDB data lifetime at the row level. In this document, you can learn how to use TTL to automatically expire and delete old data.
+summary: Time to Live (TTL) は、行レベルで TiDB データの有効期間を管理できる機能です。このドキュメントでは、TTL を使用して古いデータを自動的に期限切れにして削除する方法について説明します。
 ---
 
-# Periodically Delete Expired Data Using TTL (Time to Live)
+# TTL (Time to Live) を使用して期限切れのデータを定期的に削除する {#periodically-delete-expired-data-using-ttl-time-to-live}
 
-Time to live (TTL) is a feature that allows you to manage TiDB data lifetime at the row level. For a table with the TTL attribute, TiDB automatically checks data lifetime and deletes expired data at the row level. This feature can effectively save storage space and enhance performance in some scenarios.
+Time to Live (TTL) は、行レベルで TiDB データの有効期間を管理できる機能です。TTL 属性を持つテーブルの場合、TiDB は自動的にデータの有効期間をチェックし、行レベルで期限切れのデータを削除します。この機能により、一部のシナリオではstorageスペースを効果的に節約し、パフォーマンスを向上させることができます。
 
-The following are some common scenarios for TTL:
+TTL の一般的なシナリオを以下に示します。
 
-* Regularly delete verification codes and short URLs.
-* Regularly delete unnecessary historical orders.
-* Automatically delete intermediate results of calculations.
+-   確認コードと短縮 URL を定期的に削除してください。
+-   不要な履歴注文を定期的に削除します。
+-   計算の中間結果を自動的に削除します。
 
-TTL is designed to help users clean up unnecessary data periodically and in a timely manner without affecting the online read and write workloads. TTL concurrently dispatches different jobs to different TiDB nodes to delete data in parallel in the unit of table. TTL does not guarantee that all expired data is deleted immediately, which means that even if some data is expired, the client might still read that data some time after the expiration time until that data is deleted by the background TTL job.
+TTL は、オンラインの読み取りおよび書き込みワークロードに影響を与えることなく、ユーザーが不必要なデータを定期的かつタイムリーにクリーンアップできるように設計されています。TTL は、異なるジョブを異なる TiDB ノードに同時にディスパッチして、テーブル単位でデータを並行して削除します。TTL では、期限切れのデータがすぐに削除されることは保証されません。つまり、一部のデータが期限切れになった場合でも、バックグラウンド TTL ジョブによってそのデータが削除されるまで、クライアントは有効期限が切れてからしばらく経ってからそのデータを読み取る可能性があります。
 
-## Syntax
+## 構文 {#syntax}
 
-You can configure the TTL attribute of a table using the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) or [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md) statement.
+[`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)または[`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)ステートメントを使用して、テーブルの TTL 属性を設定できます。
 
-### Create a table with a TTL attribute
+### TTL属性を持つテーブルを作成する {#create-a-table-with-a-ttl-attribute}
 
-- Create a table with a TTL attribute:
+-   TTL 属性を持つテーブルを作成します。
 
     ```sql
     CREATE TABLE t1 (
@@ -30,9 +30,9 @@ You can configure the TTL attribute of a table using the [`CREATE TABLE`](/sql-s
     ) TTL = `created_at` + INTERVAL 3 MONTH;
     ```
 
-    The preceding example creates a table `t1` and specifies `created_at` as the TTL timestamp column, which indicates the creation time of the data. The example also sets the longest time that a row is allowed to live in the table to 3 months through `INTERVAL 3 MONTH`. Data that lives longer than this value will be deleted later.
+    前の例では、テーブル`t1`を作成し、データの作成時刻を示す TTL タイムスタンプ列として`created_at`を指定します。また、この例では、行がテーブル内で存続できる最長期間を 3 か月から`INTERVAL 3 MONTH`に設定します。この値よりも長く存続するデータは後で削除されます。
 
-- Set the `TTL_ENABLE` attribute to enable or disable the feature of cleaning up expired data:
+-   期限切れのデータをクリーンアップする機能を有効または無効にするには、 `TTL_ENABLE`属性を設定します。
 
     ```sql
     CREATE TABLE t1 (
@@ -41,9 +41,9 @@ You can configure the TTL attribute of a table using the [`CREATE TABLE`](/sql-s
     ) TTL = `created_at` + INTERVAL 3 MONTH TTL_ENABLE = 'OFF';
     ```
 
-    If `TTL_ENABLE` is set to `OFF`, even if other TTL options are set, TiDB does not automatically clean up expired data in this table. For a table with the TTL attribute, `TTL_ENABLE` is `ON` by default.
+    `TTL_ENABLE` `OFF`に設定されている場合、他の TTL オプションが設定されていても、TiDB はこのテーブル内の期限切れデータを自動的にクリーンアップしません。TTL 属性を持つテーブルの場合、デフォルトでは`TTL_ENABLE`が`ON`なります。
 
-- To be compatible with MySQL, you can set a TTL attribute using a comment:
+-   MySQL との互換性を保つために、コメントを使用して TTL 属性を設定できます。
 
     ```sql
     CREATE TABLE t1 (
@@ -52,35 +52,35 @@ You can configure the TTL attribute of a table using the [`CREATE TABLE`](/sql-s
     ) /*T![ttl] TTL = `created_at` + INTERVAL 3 MONTH TTL_ENABLE = 'OFF'*/;
     ```
 
-    In TiDB, using the table TTL attribute or using comments to configure TTL is equivalent. In MySQL, the comment is ignored and an ordinary table is created.
+    TiDB では、テーブル TTL 属性を使用するか、コメントを使用して TTL を構成することは同等です。MySQL では、コメントは無視され、通常のテーブルが作成されます。
 
-### Modify the TTL attribute of a table
+### テーブルのTTL属性を変更する {#modify-the-ttl-attribute-of-a-table}
 
-- Modify the TTL attribute of a table:
+-   テーブルの TTL 属性を変更します。
 
     ```sql
     ALTER TABLE t1 TTL = `created_at` + INTERVAL 1 MONTH;
     ```
 
-    You can use the preceding statement to modify a table with an existing TTL attribute or to add a TTL attribute to a table without a TTL attribute.
+    上記のステートメントを使用して、既存の TTL 属性を持つテーブルを変更したり、TTL 属性のないテーブルに TTL 属性を追加したりできます。
 
-- Modify the value of `TTL_ENABLE` for a table with the TTL attribute:
+-   TTL 属性を持つテーブルの値を`TTL_ENABLE`に変更します。
 
     ```sql
     ALTER TABLE t1 TTL_ENABLE = 'OFF';
     ```
 
-- To remove all TTL attributes of a table:
+-   テーブルのすべての TTL 属性を削除するには:
 
     ```sql
     ALTER TABLE t1 REMOVE TTL;
     ```
 
-### TTL and the default values of data types
+### TTLとデータ型のデフォルト値 {#ttl-and-the-default-values-of-data-types}
 
-You can use TTL together with [default values of the data types](/data-type-default-values.md). The following are two common usage examples:
+TTL は[データ型のデフォルト値](/data-type-default-values.md)と一緒に使用できます。次に、一般的な使用例を 2 つ示します。
 
-* Use `DEFAULT CURRENT_TIMESTAMP` to specify the default value of a column as the current creation time and use this column as the TTL timestamp column. Records that were created 3 months ago are expired:
+-   `DEFAULT CURRENT_TIMESTAMP`使用すると、列のデフォルト値を現在の作成時刻として指定し、この列を TTL タイムスタンプ列として使用します。3 か月前に作成されたレコードは期限切れです。
 
     ```sql
     CREATE TABLE t1 (
@@ -89,7 +89,7 @@ You can use TTL together with [default values of the data types](/data-type-defa
     ) TTL = `created_at` + INTERVAL 3 MONTH;
     ```
 
-* Specify the default value of a column as the creation time or the latest update time and use this column as the TTL timestamp column. Records that have not been updated for 3 months are expired:
+-   列のデフォルト値を作成時刻または最終更新時刻として指定し、この列を TTL タイムスタンプ列として使用します。3 か月間更新されていないレコードは期限切れになります。
 
     ```sql
     CREATE TABLE t1 (
@@ -98,9 +98,9 @@ You can use TTL together with [default values of the data types](/data-type-defa
     ) TTL = `created_at` + INTERVAL 3 MONTH;
     ```
 
-### TTL and generated columns
+### TTLと生成された列 {#ttl-and-generated-columns}
 
-You can use TTL together with [generated columns](/generated-columns.md) to configure complex expiration rules. For example:
+TTL を[生成された列](/generated-columns.md)と組み合わせて使用​​すると、複雑な有効期限ルールを設定できます。例:
 
 ```sql
 CREATE TABLE message (
@@ -114,9 +114,9 @@ CREATE TABLE message (
 ) TTL = `expire_at` + INTERVAL 0 DAY;
 ```
 
-The preceding statement uses the `expire_at` column as the TTL timestamp column and sets the expiration time according to the message type. If the message is an image, it expires in 5 days. Otherwise, it expires in 30 days.
+上記のステートメントは、 `expire_at`列を TTL タイムスタンプ列として使用し、メッセージの種類に応じて有効期限を設定します。メッセージが画像の場合、5 日で有効期限が切れます。それ以外の場合は、30 日で有効期限が切れます。
 
-You can use TTL together with the [JSON type](/data-type-json.md). For example:
+TTL を[JSON型](/data-type-json.md)と一緒に使用できます。例:
 
 ```sql
 CREATE TABLE orders (
@@ -126,178 +126,175 @@ CREATE TABLE orders (
 ) TTL = `created_at` + INTERVAL 3 month;
 ```
 
-## TTL job
+## TTLジョブ {#ttl-job}
 
-For each table with a TTL attribute, TiDB internally schedules a background job to clean up expired data. You can customize the execution period of these jobs by setting the `TTL_JOB_INTERVAL` attribute for the table. The following example sets the background cleanup jobs for the table `orders` to run once every 24 hours:
+TTL 属性を持つ各テーブルについて、TiDB は期限切れのデータをクリーンアップするためのバックグラウンド ジョブを内部的にスケジュールします。テーブルの`TTL_JOB_INTERVAL`属性を設定することで、これらのジョブの実行期間をカスタマイズできます。次の例では、テーブル`orders`のバックグラウンド クリーンアップ ジョブを 24 時間ごとに 1 回実行するように設定します。
 
 ```sql
 ALTER TABLE orders TTL_JOB_INTERVAL = '24h';
 ```
 
-`TTL_JOB_INTERVAL` is set to `1h` by default.
+デフォルトでは`TTL_JOB_INTERVAL`は`1h`に設定されています。
 
-When executing a TTL job, TiDB will split the table into up to 64 tasks, with the Region being the smallest unit. These tasks will be executed distributedly. You can limit the number of concurrent TTL tasks across the entire cluster by setting the system variable [`tidb_ttl_running_tasks`](/system-variables.md#tidb_ttl_running_tasks-new-in-v700). However, not all TTL jobs for all kinds of tables can be split into tasks. For more details on which kinds of tables' TTL jobs cannot be split into tasks, refer to the [Limitations](#limitations) section.
+TTL ジョブを実行すると、TiDB はテーブルを最大 64 個のタスクに分割します。最小単位はリージョンです。これらのタスクは分散して実行されます。システム変数[`tidb_ttl_running_tasks`](/system-variables.md#tidb_ttl_running_tasks-new-in-v700)を設定することで、クラスター全体で同時実行可能な TTL タスクの数を制限できます。ただし、すべての種類のテーブルのすべての TTL ジョブをタスクに分割できるわけではありません。どの種類のテーブルの TTL ジョブをタスクに分割できないかの詳細については、セクション[制限事項](#limitations)を参照してください。
 
-To disable the execution of TTL jobs, in addition to setting the `TTL_ENABLE='OFF'` table option, you can also disable the execution of TTL jobs in the entire cluster by setting the [`tidb_ttl_job_enable`](/system-variables.md#tidb_ttl_job_enable-new-in-v650) global variable:
+TTL ジョブの実行を無効にするには、 `TTL_ENABLE='OFF'`テーブル オプションを設定することに加えて、 [`tidb_ttl_job_enable`](/system-variables.md#tidb_ttl_job_enable-new-in-v650)グローバル変数を設定してクラスター全体で TTL ジョブの実行を無効にすることもできます。
 
 ```sql
 SET @@global.tidb_ttl_job_enable = OFF;
 ```
 
-In some scenarios, you might want to allow TTL jobs to run only in a certain time window. In this case, you can set the [`tidb_ttl_job_schedule_window_start_time`](/system-variables.md#tidb_ttl_job_schedule_window_start_time-new-in-v650) and [`tidb_ttl_job_schedule_window_end_time`](/system-variables.md#tidb_ttl_job_schedule_window_end_time-new-in-v650) global variables to specify the time window. For example:
+シナリオによっては、TTL ジョブを特定の時間枠でのみ実行できるようにしたい場合があります。この場合、グローバル変数[`tidb_ttl_job_schedule_window_start_time`](/system-variables.md#tidb_ttl_job_schedule_window_start_time-new-in-v650)と[`tidb_ttl_job_schedule_window_end_time`](/system-variables.md#tidb_ttl_job_schedule_window_end_time-new-in-v650)を設定して時間枠を指定できます。例:
 
 ```sql
 SET @@global.tidb_ttl_job_schedule_window_start_time = '01:00 +0000';
 SET @@global.tidb_ttl_job_schedule_window_end_time = '05:00 +0000';
 ```
 
-The preceding statement allows TTL jobs to be scheduled only between 1:00 and 5:00 UTC. By default, the time window is set to `00:00 +0000` to `23:59 +0000`, which allows the jobs to be scheduled at any time.
+上記のステートメントでは、TTL ジョブを UTC の 1:00 から 5:00 の間にのみスケジュールできます。デフォルトでは、時間ウィンドウは`00:00 +0000`から`23:59 +0000`に設定されており、ジョブをいつでもスケジュールできます。
 
-## Observability
+## 可観測性 {#observability}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注記：**
 >
-> This section is only applicable to TiDB Self-Hosted. Currently, TiDB Cloud does not provide TTL metrics.
+> このセクションは、TiDB セルフホストにのみ適用されます。現在、 TiDB Cloud はTTL メトリックを提供していません。
 
 </CustomContent>
 
-TiDB collects runtime information about TTL periodically and provides visualized charts of these metrics in Grafana. You can see these metrics in the TiDB -> TTL panel in Grafana.
+TiDB は定期的に TTL に関する実行時情報を収集し、Grafana でこれらのメトリックの視覚化されたグラフを提供します。これらのメトリックは、Grafana の TiDB -&gt; TTL パネルで確認できます。
 
 <CustomContent platform="tidb">
 
-For details of the metrics, see the TTL section in [TiDB Monitoring Metrics](/grafana-tidb-dashboard.md).
+メトリックの詳細については、 [TiDB モニタリング メトリック](/grafana-tidb-dashboard.md)の TTL セクションを参照してください。
 
 </CustomContent>
 
-In addition, TiDB provides three tables to obtain more information about TTL jobs:
+さらに、TiDB は TTL ジョブに関する詳細情報を取得するための 3 つのテーブルを提供します。
 
-+ The `mysql.tidb_ttl_table_status` table contains information about the previously executed TTL job and ongoing TTL job for all TTL tables
+-   `mysql.tidb_ttl_table_status`テーブルには、すべての TTL テーブルについて、以前に実行された TTL ジョブと進行中の TTL ジョブに関する情報が含まれています。
 
     ```sql
     TABLE mysql.tidb_ttl_table_status LIMIT 1\G
     ```
 
-    ```
-    *************************** 1. row ***************************
-                          table_id: 85
-                   parent_table_id: 85
-                  table_statistics: NULL
-                       last_job_id: 0b4a6d50-3041-4664-9516-5525ee6d9f90
-               last_job_start_time: 2023-02-15 20:43:46
-              last_job_finish_time: 2023-02-15 20:44:46
-               last_job_ttl_expire: 2023-02-15 19:43:46
-                  last_job_summary: {"total_rows":4369519,"success_rows":4369519,"error_rows":0,"total_scan_task":64,"scheduled_scan_task":64,"finished_scan_task":64}
-                    current_job_id: NULL
-              current_job_owner_id: NULL
-            current_job_owner_addr: NULL
-         current_job_owner_hb_time: NULL
-            current_job_start_time: NULL
-            current_job_ttl_expire: NULL
-                 current_job_state: NULL
-                current_job_status: NULL
-    current_job_status_update_time: NULL
-    1 row in set (0.040 sec)
-    ```
+        *************************** 1. row ***************************
+                              table_id: 85
+                       parent_table_id: 85
+                      table_statistics: NULL
+                           last_job_id: 0b4a6d50-3041-4664-9516-5525ee6d9f90
+                   last_job_start_time: 2023-02-15 20:43:46
+                  last_job_finish_time: 2023-02-15 20:44:46
+                   last_job_ttl_expire: 2023-02-15 19:43:46
+                      last_job_summary: {"total_rows":4369519,"success_rows":4369519,"error_rows":0,"total_scan_task":64,"scheduled_scan_task":64,"finished_scan_task":64}
+                        current_job_id: NULL
+                  current_job_owner_id: NULL
+                current_job_owner_addr: NULL
+             current_job_owner_hb_time: NULL
+                current_job_start_time: NULL
+                current_job_ttl_expire: NULL
+                     current_job_state: NULL
+                    current_job_status: NULL
+        current_job_status_update_time: NULL
+        1 row in set (0.040 sec)
 
-    The column `table_id` is the ID of the partitioned table, and the `parent_table_id` is the ID of the table, corresponding with the ID in [`information_schema.tables`](/information-schema/information-schema-tables.md). If the table is not a partitioned table, the two IDs are the same.
+    列`table_id`はパーティションテーブルの ID であり、列`parent_table_id`テーブルの ID で、列[`information_schema.tables`](/information-schema/information-schema-tables.md)の ID に対応します。テーブルがパーティションテーブルでない場合、2 つの ID は同じになります。
 
-    The columns `{last, current}_job_{start_time, finish_time, ttl_expire}` describe respectively the start time, finish time, and expiration time used by the TTL job of the last or current execution. The `last_job_summary` column describes the execution status of the last TTL task, including the total number of rows, the number of successful rows, and the number of failed rows.
+    列`{last, current}_job_{start_time, finish_time, ttl_expire}`は、それぞれ、前回または現在の実行の TTL ジョブで使用された開始時刻、終了時刻、有効期限を示します。列`last_job_summary`は、行の合計数、成功した行の数、失敗した行の数など、最後の TTL タスクの実行ステータスを示します。
 
-+ The `mysql.tidb_ttl_task` table contains information about the ongoing TTL subtasks. A TTL job is split into many subtasks, and this table records the subtasks that are currently being executed.
-+ The `mysql.tidb_ttl_job_history` table contains information about the TTL jobs that have been executed. The record of TTL job history is kept for 90 days.
+-   `mysql.tidb_ttl_task`テーブルには、進行中の TTL サブタスクに関する情報が含まれています。TTL ジョブは多くのサブタスクに分割され、このテーブルには現在実行中のサブタスクが記録されます。
+
+-   `mysql.tidb_ttl_job_history`テーブルには、実行された TTL ジョブに関する情報が含まれています。TTL ジョブ履歴の記録は 90 日間保持されます。
 
     ```sql
     TABLE mysql.tidb_ttl_job_history LIMIT 1\G
     ```
 
-    ```
-    *************************** 1. row ***************************
-               job_id: f221620c-ab84-4a28-9d24-b47ca2b5a301
-             table_id: 85
-      parent_table_id: 85
-         table_schema: test_schema
-           table_name: TestTable
-       partition_name: NULL
-          create_time: 2023-02-15 17:43:46
-          finish_time: 2023-02-15 17:45:46
-           ttl_expire: 2023-02-15 16:43:46
-         summary_text: {"total_rows":9588419,"success_rows":9588419,"error_rows":0,"total_scan_task":63,"scheduled_scan_task":63,"finished_scan_task":63}
-         expired_rows: 9588419
-         deleted_rows: 9588419
-    error_delete_rows: 0
-               status: finished
-    ```
+        *************************** 1. row ***************************
+                   job_id: f221620c-ab84-4a28-9d24-b47ca2b5a301
+                 table_id: 85
+          parent_table_id: 85
+             table_schema: test_schema
+               table_name: TestTable
+           partition_name: NULL
+              create_time: 2023-02-15 17:43:46
+              finish_time: 2023-02-15 17:45:46
+               ttl_expire: 2023-02-15 16:43:46
+             summary_text: {"total_rows":9588419,"success_rows":9588419,"error_rows":0,"total_scan_task":63,"scheduled_scan_task":63,"finished_scan_task":63}
+             expired_rows: 9588419
+             deleted_rows: 9588419
+        error_delete_rows: 0
+                   status: finished
 
-    The column `table_id` is the ID of the partitioned table, and the `parent_table_id` is the ID of the table, corresponding with the ID in  `information_schema.tables`. `table_schema`, `table_name`, and `partition_name` correspond to the database, table name, and partition name. `create_time`, `finish_time`, and `ttl_expire` indicate the creation time, end time, and expiration time of the TTL task. `expired_rows` and `deleted_rows` indicate the number of expired rows and the number of rows deleted successfully.
+    列`table_id`はパーティションテーブルの ID で、 `parent_table_id`テーブルの ID で、 `information_schema.tables`の ID に対応します。 `table_schema` 、 `table_name` 、および`partition_name` 、データベース、テーブル名、およびパーティション名に対応します。 `create_time` 、 `finish_time` 、および`ttl_expire` 、TTL タスクの作成時刻、終了時刻、および有効期限を示します。 `expired_rows`と`deleted_rows` 、期限切れの行数と正常に削除された行数を示します。
 
-## Compatibility with TiDB tools
+## TiDBツールとの互換性 {#compatibility-with-tidb-tools}
 
-TTL can be used with other TiDB migration, backup, and recovery tools.
+TTL は、他の TiDB 移行、バックアップ、およびリカバリ ツールでも使用できます。
 
-| Tool name | Minimum supported version | Description |
-| --- | --- | --- |
-| Backup & Restore (BR) | v6.6.0 | After you restore data using BR, the `TTL_ENABLE` attribute of the tables will be set to `OFF`. This prevents TiDB from immediately deleting expired data after backup and restore. You need to manually turn on the `TTL_ENABLE` attribute to re-enable TTL for each table. |
-| TiDB Lightning | v6.6.0 | After you import data using TiDB Lighting, the `TTL_ENABLE` attribute of the imported table will be set to `OFF`.  This prevents TiDB from immediately deleting expired data after importing. You need to manually turn on the `TTL_ENABLE` attribute to re-enable TTL for each table. |
-| TiCDC | v7.0.0 | The `TTL_ENABLE` attribute in the downstream will be automatically set to `OFF`. The upstream TTL deletions will be synchronized to the downstream. Therefore, to prevent duplicate deletions, the `TTL_ENABLE` attribute of the downstream tables will be forcibly set to `OFF`. |
+| ツール名           | サポートされる最小バージョン | 説明                                                                                                                                                                           |
+| -------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| バックアップと復元 (BR) | バージョン6.6.0     | BRを使用してデータを復元すると、テーブルの`TTL_ENABLE`属性が`OFF`に設定されます。これにより、バックアップと復元後に TiDB が期限切れのデータをすぐに削除することがなくなります。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。                   |
+| TiDB Lightning | バージョン6.6.0     | TiDB Lighting を使用してデータをインポートすると、インポートされたテーブルの`TTL_ENABLE`属性が`OFF`に設定されます。これにより、TiDB がインポート後に期限切れのデータをすぐに削除することがなくなります。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。 |
+| ティCDC          | バージョン7.0.0     | ダウンストリームの`TTL_ENABLE`属性は自動的に`OFF`に設定されます。アップストリームの TTL 削除はダウンストリームに同期されます。したがって、重複削除を防ぐために、ダウンストリーム テーブルの`TTL_ENABLE`属性は強制的に`OFF`に設定されます。                                    |
 
-## Compatibility with SQL
+## SQLとの互換性 {#compatibility-with-sql}
 
-| Feature name | Description |
-| :-- | :---- |
-| [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md) |  `FLASHBACK TABLE` will set the `TTL_ENABLE` attribute of the tables to `OFF`. This prevents TiDB from immediately deleting expired data after the flashback. You need to manually turn on the `TTL_ENABLE` attribute to re-enable TTL for each table. |
-| [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) | `FLASHBACK DATABASE` will set the `TTL_ENABLE` attribute of the tables to `OFF`, and the `TTL_ENABLE` attribute will not be modified. This prevents TiDB from immediately deleting expired data after the flashback. You need to manually turn on the `TTL_ENABLE` attribute to re-enable TTL for each table. |
-| [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) | `FLASHBACK CLUSTER` will set the system variable [`TIDB_TTL_JOB_ENABLE`](/system-variables.md#tidb_ttl_job_enable-new-in-v650) to `OFF` and do not change the value of the `TTL_ENABLE` attribute. |
+| 機能名                                                                         | 説明                                                                                                                                                                                 |
+| :-------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)       | `FLASHBACK TABLE` 、テーブルの`TTL_ENABLE`属性を`OFF`に設定します。これにより、フラッシュバック後に TiDB が期限切れのデータをすぐに削除することがなくなります。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。                         |
+| [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) | `FLASHBACK DATABASE`はテーブルの`TTL_ENABLE`属性を`OFF`に設定し、 `TTL_ENABLE`属性は変更されません。これにより、フラッシュバック後に TiDB が期限切れのデータをすぐに削除することがなくなります。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。 |
+| [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)   | `FLASHBACK CLUSTER`はシステム変数[`TIDB_TTL_JOB_ENABLE`](/system-variables.md#tidb_ttl_job_enable-new-in-v650)を`OFF`に設定し、属性`TTL_ENABLE`の値は変更しません。                                         |
 
-## Limitations
+## 制限事項 {#limitations}
 
-Currently, the TTL feature has the following limitations:
+現在、TTL 機能には次の制限があります。
 
-* The TTL attribute cannot be set on temporary tables, including local temporary tables and global temporary tables.
-* A table with the TTL attribute does not support being referenced by other tables as the primary table in a foreign key constraint.
-* It is not guaranteed that all expired data is deleted immediately. The time when expired data is deleted depends on the scheduling interval and scheduling window of the background cleanup job.
-* For tables that use [clustered indexes](/clustered-indexes.md), if the primary key is neither an integer nor a binary string type, the TTL job cannot be split into multiple tasks. This will cause the TTL job to be executed sequentially on a single TiDB node. If the table contains a large amount of data, the execution of the TTL job might become slow.
-* TTL is not available for [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
+-   TTL 属性は、ローカル一時テーブルやグローバル一時テーブルなどの一時テーブルには設定できません。
+-   TTL 属性を持つテーブルは、外部キー制約のプライマリ テーブルとして他のテーブルから参照されることをサポートしていません。
+-   すべての期限切れデータがすぐに削除されることは保証されません。期限切れデータが削除される時間は、バックグラウンド クリーンアップ ジョブのスケジュール間隔とスケジュール ウィンドウによって異なります。
+-   [クラスター化インデックス](/clustered-indexes.md)を使用するテーブルの場合、主キーが整数型でもバイナリ文字列型でもない場合は、TTL ジョブを複数のタスクに分割できません。これにより、TTL ジョブは単一の TiDB ノードで順番に実行されます。テーブルに大量のデータが含まれている場合、TTL ジョブの実行が遅くなる可能性があります。
+-   TTLは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)では使用できません。
 
-## FAQs
+## よくある質問 {#faqs}
 
 <CustomContent platform="tidb">
 
-- How can I determine whether the deletion is fast enough to keep the data size relatively stable?
+-   削除がデータ サイズを比較的安定させるのに十分な速さであるかどうかをどのように判断すればよいでしょうか?
 
-    In the [Grafana `TiDB` dashboard](/grafana-tidb-dashboard.md), the panel `TTL Insert Rows Per Hour` records the total number of rows inserted in the previous hour. The corresponding `TTL Delete Rows Per Hour` records the total number of rows deleted by the TTL task in the previous hour. If `TTL Insert Rows Per Hour` is higher than `TTL Delete Rows Per Hour` for a long time, it means that the rate of insertion is higher than the rate of deletion and the total amount of data will increase. For example:
+    [Grafana `TiDB`ダッシュボード](/grafana-tidb-dashboard.md)では、パネル`TTL Insert Rows Per Hour`は過去 1 時間に挿入された行の合計数を記録します。対応する`TTL Delete Rows Per Hour`は、過去 1 時間に TTL タスクによって削除された行の合計数を記録します。7 `TTL Insert Rows Per Hour`長期間にわたって`TTL Delete Rows Per Hour`よりも高い場合は、挿入率が削除率よりも高く、データの合計量が増加することを意味します。例:
 
     ![insert fast example](/media/ttl/insert-fast.png)
 
-    It is worth noting that since TTL does not guarantee that the expired rows will be deleted immediately, and the rows currently inserted will be deleted in a future TTL task, even if the speed of TTL deletion is lower than the speed of insertion in a short period of time, it does not necessarily mean that the speed of TTL is too slow. You need to consider the situation in its context.
+    注意すべき点は、TTL は期限切れの行がすぐに削除されることを保証するものではなく、現在挿入されている行は将来の TTL タスクで削除されるため、短期間で TTL 削除の速度が挿入の速度よりも遅い場合でも、必ずしも TTL の速度が遅すぎることを意味するわけではないということです。状況をその文脈で考慮する必要があります。
 
-- How can I determine whether the bottleneck of a TTL task is in scanning or deleting?
+-   TTL タスクのボトルネックがスキャンにあるか削除にあるかをどのように判断できますか?
 
-    Look at the `TTL Scan Worker Time By Phase` and `TTL Delete Worker Time By Phase` panels. If the scan worker is in the `dispatch` phase for a large percentage of time and the delete worker is rarely in the `idle` phase, then the scan worker is waiting for the delete worker to finish the deletion. If the cluster resources are still free at this point, you can consider increasing `tidb_ttl_ delete_worker_count` to increase the number of delete workers. For example:
+    `TTL Scan Worker Time By Phase`と`TTL Delete Worker Time By Phase`パネルを見てください。スキャン ワーカーが`dispatch`フェーズに多くの時間いるのに、削除ワーカーが`idle`フェーズにほとんどいない場合、スキャン ワーカーは削除ワーカーが削除を完了するのを待っています。この時点でクラスター リソースがまだ空いている場合は、 `tidb_ttl_ delete_worker_count`を増やして削除ワーカーの数を増やすことを検討できます。例:
 
     ![scan fast example](/media/ttl/scan-fast.png)
 
-    In contrast, if the scan worker is rarely in the `dispatch` phase and the delete worker is in the `idle` phase for a long time, then the scan worker is relatively busy. For example:
+    対照的に、スキャン ワーカーが第`dispatch`フェーズにほとんどなく、削除ワーカーが第`idle`フェーズに長時間ある場合、スキャン ワーカーは比較的ビジー状態です。例:
 
     ![delete fast example](/media/ttl/delete-fast.png)
 
-    The percentage of scan and delete in TTL jobs is related to the machine configuration and data distribution, so the monitoring data at each moment is only representative of the TTL Jobs being executed. You can read the table `mysql.tidb_ttl_job_history` to determine which TTL job is running at a certain moment and the corresponding table of the job.
+    TTL ジョブのスキャンと削除の割合はマシン構成とデータ分布に関連しているため、各瞬間の監視データは実行中の TTL ジョブのみを表します。表`mysql.tidb_ttl_job_history`を読むと、特定の瞬間にどの TTL ジョブが実行されているか、およびジョブに対応する表を確認できます。
 
-- How to configure `tidb_ttl_scan_worker_count` and `tidb_ttl_delete_worker_count` properly?
+-   `tidb_ttl_scan_worker_count`と`tidb_ttl_delete_worker_count`適切に設定するにはどうすればいいですか?
 
-    1. Refer to the question "How to determine whether the bottleneck of TTL tasks is in scanning or deleting?" to consider whether to increase the value of `tidb_ttl_scan_worker_count` or `tidb_ttl_delete_worker_count`.
-    2. If the number of TiKV nodes is high, increase the value of `tidb_ttl_scan_worker_count` can make the TTL task workload more balanced.
+    1.  「TTL タスクのボトルネックがスキャンにあるか削除にあるかを判断するにはどうすればよいでしょうか?」という質問を参照して、 `tidb_ttl_scan_worker_count`または`tidb_ttl_delete_worker_count`の値を増やすかどうかを検討してください。
+    2.  TiKV ノードの数が多い場合は、値を`tidb_ttl_scan_worker_count`増やすと、TTL タスクのワークロードがより均等になります。
 
-   Since too many TTL workers will cause a lot of pressure, you need to evaluate the CPU level of TiDB and the disk and CPU usage of TiKV together. Depending on different scenarios and needs (whether you need to speed up TTL as much as possible, or to reduce the impact of TTL on other queries), you can adjust the value of `tidb_ttl_scan_worker_count` and `tidb_ttl_delete_worker_count` to improve the speed of TTL scanning and deleting or reduce the performance impact brought by TTL tasks.
+    TTL ワーカーが多すぎると大きな負担がかかるため、TiDB の CPU レベルと TiKV のディスクおよび CPU 使用率を一緒に評価する必要があります。さまざまなシナリオとニーズ (TTL を可能な限り高速化する必要があるか、TTL が他のクエリに与える影響を減らす必要があるか) に応じて、 `tidb_ttl_scan_worker_count`と`tidb_ttl_delete_worker_count`の値を調整して、TTL スキャンと削除の速度を向上させたり、TTL タスクによってもたらされるパフォーマンスへの影響を減らしたりすることができます。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-- How to configure `tidb_ttl_scan_worker_count` and `tidb_ttl_delete_worker_count` properly?
+-   `tidb_ttl_scan_worker_count`と`tidb_ttl_delete_worker_count`適切に設定するにはどうすればいいですか?
 
-   If the number of TiKV nodes is high, increase the value of `tidb_ttl_scan_worker_count` can make the TTL task workload more balanced.
+    TiKV ノードの数が多い場合は、値を`tidb_ttl_scan_worker_count`増やすと、TTL タスクのワークロードがより均等になります。
 
-   But too many TTL workers will cause a lot of pressure, you need to evaluate the CPU level of TiDB and the disk and CPU usage of TiKV together. Depending on different scenarios and needs (whether you need to speed up TTL as much as possible, or to reduce the impact of TTL on other queries), you can adjust the value of `tidb_ttl_scan_worker_count` and `tidb_ttl_delete_worker_count` to improve the speed of TTL scanning and deleting or reduce the performance impact brought by TTL tasks.
+    ただし、TTL ワーカーが多すぎると大きな負担がかかるため、TiDB の CPU レベルと TiKV のディスクおよび CPU 使用率を一緒に評価する必要があります。さまざまなシナリオとニーズ (TTL を可能な限り高速化する必要があるか、TTL が他のクエリに与える影響を減らす必要があるか) に応じて、 `tidb_ttl_scan_worker_count`と`tidb_ttl_delete_worker_count`の値を調整して、TTL スキャンと削除の速度を向上させたり、TTL タスクによってもたらされるパフォーマンスへの影響を減らしたりすることができます。
 
 </CustomContent>

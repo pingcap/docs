@@ -1,63 +1,66 @@
 ---
 title: TiDB 2.1 RC5 Release Notes
-summary: TiDB 2.1 RC5 was released on November 12, 2018, with improvements in stability, SQL optimizer, statistics, and execution engine. Fixes include issues with IndexReader, IndexScan Prepared statement, Union statement, and JSON data conversion. Server improvements include log readability, table data retrieval, and environment variable additions. PD fixes issues related to Region key reading, `regions/check` API, PD restart join, and event loss. TiKV improves error messages, adds panic mark file, downgrades grpcio, and adds an upper limit to the `kv_scan` interface. Tools now support the TiDB-Binlog cluster.
+summary: TiDB 2.1 RC5 は、安定性、SQL オプティマイザー、統計、実行エンジンの改善を伴い、2018 年 11 月 12 日にリリースされました。修正には、IndexReader、IndexScan Prepared ステートメント、Union ステートメント、JSON データ変換に関する問題が含まれます。サーバーの改善には、ログの可読性、テーブル データの取得、環境変数の追加が含まれます。PD では、リージョンキーの読み取り、`regions/check` API、PD 再起動結合、イベント損失に関する問題が修正されています。TiKV では、エラー メッセージが改善され、panicマーク ファイルが追加され、grpcio がダウングレードされ、`kv_scan` インターフェイスに上限が追加されました。ツールでは、TiDB-Binlog クラスターがサポートされるようになりました。
 ---
 
 <!-- markdownlint-disable MD032 -->
 
-# TiDB 2.1 RC5 Release Notes
+# TiDB 2.1 RC5 リリースノート {#tidb-2-1-rc5-release-notes}
 
-On November 12, 2018, TiDB 2.1 RC5 is released. Compared with TiDB 2.1 RC4, this release has great improvement in stability, SQL optimizer, statistics information, and execution engine.
+2018 年 11 月 12 日に、TiDB 2.1 RC5 がリリースされました。TiDB 2.1 RC4 と比較して、このリリースでは安定性、SQL オプティマイザー、統計情報、実行エンジンが大幅に改善されています。
 
-## TiDB
+## ティビ {#tidb}
 
-+ SQL Optimizer
-    - Fix the issue that `IndexReader` reads the wrong handle in some cases [#8132](https://github.com/pingcap/tidb/pull/8132)
-    - Fix the issue occurred while the `IndexScan Prepared` statement uses `Plan Cache` [#8055](https://github.com/pingcap/tidb/pull/8055)
-    - Fix the issue that the result of the `Union` statement is unstable [#8165](https://github.com/pingcap/tidb/pull/8165)
-+ SQL Execution Engine
-    - Improve the performance of TiDB on inserting or updating wide tables [#8024](https://github.com/pingcap/tidb/pull/8024)
-    - Support the unsigned `int` flag in the `Truncate` built-in function [#8068](https://github.com/pingcap/tidb/pull/8068)
-    - Fix the error occurred while converting JSON data to the decimal type [#8109](https://github.com/pingcap/tidb/pull/8109)
-    - Fix the error occurred when you `Update` the float type [#8170](https://github.com/pingcap/tidb/pull/8170)
-+ Statistics
-    - Fix the incorrect statistics issue during point queries in some cases [#8035](https://github.com/pingcap/tidb/pull/8035)
-    - Fix the selectivity estimation of statistics for primary key in some cases [#8149](https://github.com/pingcap/tidb/pull/8149)
-    - Fix the issue that the statistics of deleted tables are not cleared up for a long period of time [#8182](https://github.com/pingcap/tidb/pull/8182)
-+ Server
-    + Improve the readability of logs and make logs better
-        - [#8063](https://github.com/pingcap/tidb/pull/8063)
-        - [#8053](https://github.com/pingcap/tidb/pull/8053)
-        - [#8224](https://github.com/pingcap/tidb/pull/8224)
-    - Fix the error occurred when obtaining the table data of `infoschema.profiling` [#8096](https://github.com/pingcap/tidb/pull/8096)
-    - Replace the unix socket with the pumps client to write binlogs [#8098](https://github.com/pingcap/tidb/pull/8098)
-    - Add the threshold value for the `tidb_slow_log_threshold` environment variable, which dynamically sets the slow log [#8094](https://github.com/pingcap/tidb/pull/8094)
-    - Add the original length of a SQL statement truncated while the `tidb_query_log_max_len` environment variable dynamically sets logs [#8200](https://github.com/pingcap/tidb/pull/8200)
-    - Add the `tidb_opt_write_row_id` environment variable to control whether to allow writing `_tidb_rowid` [#8218](https://github.com/pingcap/tidb/pull/8218)
-    - Add an upper bound to the `Scan` command of ticlient, to avoid overbound scan [#8081](https://github.com/pingcap/tidb/pull/8081), [#8247](https://github.com/pingcap/tidb/pull/8247)
-+ DDL
-    - Fix the issue that executing DDL statements in transactions encounters an error in some cases [#8056](https://github.com/pingcap/tidb/pull/8056)
-    - Fix the issue that executing `truncate table` in partition tables does not take effect [#8103](https://github.com/pingcap/tidb/pull/8103)
-    - Fix the issue that the DDL operation does not roll back correctly after being cancelled in some cases [#8057](https://github.com/pingcap/tidb/pull/8057)
-    - Add the `admin show next_row_id` command to return the next available row ID [#8268](https://github.com/pingcap/tidb/pull/8268)
+-   SQL オプティマイザー
+    -   `IndexReader`場合によっては間違ったハンドルを読み取る問題を修正[＃8132](https://github.com/pingcap/tidb/pull/8132)
+    -   `IndexScan Prepared`文が`Plan Cache` [＃8055](https://github.com/pingcap/tidb/pull/8055)を使用しているときに発生する問題を修正
+    -   `Union`文の結果が不安定になる問題を修正[＃8165](https://github.com/pingcap/tidb/pull/8165)
+-   SQL実行エンジン
+    -   ワイドテーブル[＃8024](https://github.com/pingcap/tidb/pull/8024)挿入または更新時の TiDB のパフォーマンスを向上
+    -   `Truncate`組み込み関数[＃8068](https://github.com/pingcap/tidb/pull/8068)で unsigned `int`フラグをサポートする
+    -   JSONデータを10進数型に変換する際に発生したエラーを修正しました[＃8109](https://github.com/pingcap/tidb/pull/8109)
+    -   `Update` float型[＃8170](https://github.com/pingcap/tidb/pull/8170)で発生したエラーを修正
+-   統計
+    -   ポイントクエリ中に一部のケースで統計情報が正しく表示されない問題を修正[＃8035](https://github.com/pingcap/tidb/pull/8035)
+    -   いくつかのケースにおける主キーの統計の選択性推定を修正[＃8149](https://github.com/pingcap/tidb/pull/8149)
+    -   削除されたテーブルの統計が長期間クリアされない問題を修正[＃8182](https://github.com/pingcap/tidb/pull/8182)
+-   サーバ
+    -   ログの読みやすさを改善し、ログをより良くする
+        -   [＃8063](https://github.com/pingcap/tidb/pull/8063)
+        -   [＃8053](https://github.com/pingcap/tidb/pull/8053)
+        -   [＃8224](https://github.com/pingcap/tidb/pull/8224)
 
-## PD
+    <!---->
 
-+ Fix the issues related to `pd-ctl` reading the Region key
-    - [#1298](https://github.com/pingcap/pd/pull/1298)
-    - [#1299](https://github.com/pingcap/pd/pull/1299)
-    - [#1308](https://github.com/pingcap/pd/pull/1308)
-+ Fix the issue that the `regions/check` API returns the wrong result [#1311](https://github.com/pingcap/pd/pull/1311)
-+ Fix the issue that PD cannot restart join after a PD join failure [#1279](https://github.com/pingcap/pd/pull/1279)
-+ Fix the issue that `watch leader` might lose events in some cases [#1317](https://github.com/pingcap/pd/pull/1317)
+    -   `infoschema.profiling` [＃8096](https://github.com/pingcap/tidb/pull/8096)のテーブルデータを取得する際に発生したエラーを修正
+    -   バイナリログを書き込むために、UNIXソケットをポンプクライアントに置き換えます[＃8098](https://github.com/pingcap/tidb/pull/8098)
+    -   `tidb_slow_log_threshold`環境変数のしきい値を追加します。これは、スローログ[＃8094](https://github.com/pingcap/tidb/pull/8094)を動的に設定します。
+    -   `tidb_query_log_max_len`環境変数が動的にログ[＃8200](https://github.com/pingcap/tidb/pull/8200)を設定する間に切り捨てられたSQL文の元の長さを追加します
+    -   `tidb_opt_write_row_id`環境変数を追加して、書き込みを許可するかどうかを制御する`_tidb_rowid` [＃8218](https://github.com/pingcap/tidb/pull/8218)
+    -   ticlientの`Scan`コマンドに上限[＃8247](https://github.com/pingcap/tidb/pull/8247)追加して、オーバーバウンドスキャン[＃8081](https://github.com/pingcap/tidb/pull/8081)を回避する
+-   DDL
+    -   トランザクション内でDDL文を実行するとエラーが発生する場合がある問題を修正[＃8056](https://github.com/pingcap/tidb/pull/8056)
+    -   パーティションテーブルで`truncate table`実行しても効果がない問題を修正[＃8103](https://github.com/pingcap/tidb/pull/8103)
+    -   DDL操作がキャンセルされた後に正しくロールバックされない場合がある問題を修正[＃8057](https://github.com/pingcap/tidb/pull/8057)
+    -   次の利用可能な行ID [＃8268](https://github.com/pingcap/tidb/pull/8268)を返すために`admin show next_row_id`コマンドを追加します
 
-## TiKV
+## PD {#pd}
 
-+ Improve the error message of `WriteConflict` [#3750](https://github.com/tikv/tikv/pull/3750)
-+ Add the panic mark file [#3746](https://github.com/tikv/tikv/pull/3746)
-+ Downgrade grpcio to avoid the segment fault issue caused by the new version of gRPC [#3650](https://github.com/tikv/tikv/pull/3650)
-+ Add an upper limit to the `kv_scan` interface [#3749](https://github.com/tikv/tikv/pull/3749)
+-   `pd-ctl`リージョンキーの読み取りに関連する問題を修正
+    -   [＃1298](https://github.com/pingcap/pd/pull/1298)
+    -   [＃1299](https://github.com/pingcap/pd/pull/1299)
+    -   [＃1308](https://github.com/pingcap/pd/pull/1308)
+-   `regions/check` APIが間違った結果を返す問題を修正[＃1311](https://github.com/pingcap/pd/pull/1311)
+-   PD参加失敗後にPDが参加を再開できない問題を修正[＃1279](https://github.com/pingcap/pd/pull/1279)
+-   `watch leader`場合によってはイベントが失われる可能性がある問題を修正[＃1317](https://github.com/pingcap/pd/pull/1317)
 
-## Tools
+## ティクヴ {#tikv}
 
-- Support the TiDB-Binlog cluster, which is not compatible with the older version of binlog [#8093](https://github.com/pingcap/tidb/pull/8093), [documentation](/tidb-binlog/tidb-binlog-overview.md)
+-   `WriteConflict` [＃3750](https://github.com/tikv/tikv/pull/3750)のエラーメッセージを改善する
+-   panicマークファイル[＃3746](https://github.com/tikv/tikv/pull/3746)を追加
+-   gRPC [＃3650](https://github.com/tikv/tikv/pull/3650)の新バージョンによって発生するセグメント障害の問題を回避するために、grpcio をダウングレードします。
+-   `kv_scan`インターフェース[＃3749](https://github.com/tikv/tikv/pull/3749)に上限を追加する
+
+## ツール {#tools}
+
+-   古いバージョンのbinlog [＃8093](https://github.com/pingcap/tidb/pull/8093)と互換性のないTiDB-Binlogクラスターをサポートします[ドキュメンテーション](/tidb-binlog/tidb-binlog-overview.md)

@@ -1,25 +1,25 @@
 ---
 title: TiCDC Simple Protocol
-summary: Learn how to use the TiCDC Simple protocol and the data format implementation.
+summary: TiCDC シンプル プロトコルとデータ形式の実装の使用方法を学習します。
 ---
 
-# TiCDC Simple Protocol
+# TiCDC シンプルプロトコル {#ticdc-simple-protocol}
 
-TiCDC Simple protocol is a row-level data change notification protocol that provides data sources for monitoring, caching, full-text indexing, analysis engines, and primary-secondary replication between heterogeneous databases. This document describes how to use the TiCDC Simple protocol and the data format implementation.
+TiCDC シンプル プロトコルは、監視、キャッシュ、フルテキスト インデックス、分析エンジン、異種データベース間のプライマリ/セカンダリ レプリケーション用のデータ ソースを提供する行レベルのデータ変更通知プロトコルです。このドキュメントでは、TiCDC シンプル プロトコルの使用法とデータ形式の実装について説明します。
 
-## Use the TiCDC Simple protocol
+## TiCDCシンプルプロトコルを使用する {#use-the-ticdc-simple-protocol}
 
-When you use Kafka as the downstream, specify `protocol` as `"simple"` in the changefeed configuration. Then TiCDC encodes each row change or DDL event as a message, and sends the data change event to the downstream.
+Kafka をダウンストリームとして使用する場合は、changefeed 構成で`protocol`を`"simple"`に指定します。すると、TiCDC は各行の変更または DDL イベントをメッセージとしてエンコードし、データ変更イベントをダウンストリームに送信します。
 
-The configuration example for using the Simple protocol is as follows:
+シンプル プロトコルを使用するための構成例は次のとおりです。
 
-`sink-uri` configuration:
+`sink-uri`構成:
 
 ```shell
 --sink-uri = "kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0"
 ```
 
-Changefeed configuration:
+Changefeed 構成:
 
 ```toml
 [sink]
@@ -46,39 +46,39 @@ send-bootstrap-to-all-partition = true
 encoding-format = "json"
 ```
 
-## Message types
+## メッセージの種類 {#message-types}
 
-The TiCDC Simple protocol has the following message types.
+TiCDC シンプル プロトコルには、次のメッセージ タイプがあります。
 
 DDL:
 
-- `CREATE`: the creating table event.
-- `RENAME`: the renaming table event.
-- `CINDEX`: the creating index event.
-- `DINDEX`: the deleting index event.
-- `ERASE`: the deleting table event.
-- `TRUNCATE`: the truncating table event.
-- `ALTER`: the altering table event, including adding columns, dropping columns, modifying column types, and other `ALTER TABLE` statements supported by TiCDC.
-- `QUERY`: other DDL events.
+-   `CREATE` : テーブル作成イベント。
+-   `RENAME` : テーブルの名前変更イベント。
+-   `CINDEX` : インデックス作成イベント。
+-   `DINDEX` : インデックス削除イベント。
+-   `ERASE` : テーブル削除イベント。
+-   `TRUNCATE` : テーブル切り捨てイベント。
+-   `ALTER` : 列の追加、列の削除、列の種類の変更、および TiCDC でサポートされているその他の`ALTER TABLE`つのステートメントを含む、テーブル変更イベント。
+-   `QUERY` : その他の DDL イベント。
 
-DML:
+DM: いいえ
 
-- `INSERT`: the inserting event.
-- `UPDATE`: the updating event.
-- `DELETE`: the deleting event.
+-   `INSERT` : 挿入イベント。
+-   `UPDATE` : 更新イベント。
+-   `DELETE` : 削除イベント。
 
-Other:
+他の：
 
-- `WATERMARK`: containing a TSO (that is, a 64-bit timestamp) of the upstream TiDB cluster, which marks the table replication progress. All events earlier than the watermark have been sent to the downstream.
-- `BOOTSTRAP`: containing the schema information of a table, used to build the table schema for the downstream.
+-   `WATERMARK` : 上流 TiDB クラスターの TSO (つまり、64 ビットのタイムスタンプ) を含み、テーブル レプリケーションの進行状況を示します。ウォーターマークより前のすべてのイベントは下流に送信されています。
+-   `BOOTSTRAP` : ダウンストリームのテーブル スキーマを構築するために使用されるテーブルのスキーマ情報が含まれます。
 
-## Message format
+## メッセージ形式 {#message-format}
 
-In the Simple protocol, each message contains only one event. The Simple protocol supports encoding messages in JSON and Avro formats. This document uses JSON format as an example. For Avro format messages, their fields and meanings are the same as those in JSON format messages, but the encoding format is different. For details about the Avro format, see [Simple Protocol Avro Schema](https://github.com/pingcap/tiflow/blob/release-8.1/pkg/sink/codec/simple/message.json).
+Simple プロトコルでは、各メッセージには 1 つのイベントのみが含まれます。Simple プロトコルは、JSON 形式と Avro 形式のメッセージのエンコードをサポートしています。このドキュメントでは、例として JSON 形式を使用します。Avro 形式のメッセージの場合、フィールドと意味は JSON 形式のメッセージと同じですが、エンコード形式が異なります。Avro 形式の詳細については、 [シンプルプロトコル Avro スキーマ](https://github.com/pingcap/tiflow/blob/release-8.1/pkg/sink/codec/simple/message.json)参照してください。
 
-### DDL
+### DDL {#ddl}
 
-TiCDC encodes a DDL event in the following JSON format:
+TiCDC は、DDL イベントを次の JSON 形式でエンコードします。
 
 ```json
 {
@@ -227,23 +227,23 @@ TiCDC encodes a DDL event in the following JSON format:
 }
 ```
 
-The fields in the preceding JSON data are explained as follows:
+上記の JSON データのフィールドは次のように説明されます。
 
-| Field         | Type    | Description                                                   |
-| ------------- | ------- | ------------------------------------------------------------- |
-| `version`     | Number  | The version number of the protocol, which is currently `1`.     |
-| `type`        | String  | The DDL event type, including `CREATE`, `RENAME`, `CINDEX`, `DINDEX`, `ERASE`, `TRUNCATE`, `ALTER`, and `QUERY`. |
-| `sql`         | String  | The DDL statement.                                            |
-| `commitTs`    | Number  | The commit timestamp when the DDL statement execution is completed in the upstream.    |
-| `buildTs`     | Number  | The UNIX timestamp when the message is successfully encoded within TiCDC. |
-| `tableSchema` | Object  | The current schema information of the table. For more information, see [TableSchema definition](#tableschema-definition).  |
-| `preTableSchema` | Object | The schema information of the table before the DDL statement is executed. All DDL events, except the `CREATE` type of DDL event, have this field.  |
+| 分野               | タイプ | 説明                                                                                                 |
+| ---------------- | --- | -------------------------------------------------------------------------------------------------- |
+| `version`        | 番号  | プロトコルのバージョン番号。現在は`1`です。                                                                            |
+| `type`           | 弦   | DDL イベント タイプ`CREATE` 、 `RENAME` 、 `CINDEX` 、 `DINDEX` 、 `ERASE` 、 `TRUNCATE` 、 `ALTER` 、 `QUERY` 。 |
+| `sql`            | 弦   | DDL ステートメント。                                                                                       |
+| `commitTs`       | 番号  | DDL ステートメントの実行がアップストリームで完了したときのコミット タイムスタンプ。                                                       |
+| `buildTs`        | 番号  | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。                                                         |
+| `tableSchema`    | 物体  | テーブルの現在のスキーマ情報。詳細については、 [テーブルスキーマの定義](#tableschema-definition)参照してください。                            |
+| `preTableSchema` | 物体  | DDL ステートメントが実行される前のテーブルのスキーマ情報。1 種類の DDL イベントを除くすべて`CREATE` DDL イベントにこのフィールドがあります。                 |
 
-### DML
+### DMML の {#dml}
 
-#### INSERT
+#### 入れる {#insert}
 
-TiCEC encodes an `INSERT` event in the following JSON format:
+TiCEC は、 `INSERT`イベントを次の JSON 形式でエンコードします。
 
 ```json
 {
@@ -264,25 +264,25 @@ TiCEC encodes an `INSERT` event in the following JSON format:
 }
 ```
 
-The fields in the preceding JSON data are explained as follows:
+上記の JSON データのフィールドは次のように説明されます。
 
-| Field         | Type    | Description                                               |
-| ------------- | ------- | --------------------------------------------------------- |
-| `version`     | Number  | The version number of the protocol, which is currently `1`. |
-| `database`    | String  | The name of the database.                                 |
-| `table`       | String  | The name of the table.                                    |
-| `tableID`     | Number  | The ID of the table.                                      |
-| `type`        | String  | The DML event type, including `INSERT`, `UPDATE`, and `DELETE`. |
-| `commitTs`    | Number  | The commit timestamp when the DML statement execution is completed in the upstream. |
-| `buildTs`     | Number  | The UNIX timestamp when the message is successfully encoded within TiCDC. |
-| `schemaVersion` | Number | The schema version number of the table when the DML message is encoded. |
-| `data`        | Object  | The inserted data, where the field name is the column name and the field value is the column value. |
+| 分野              | タイプ | 説明                                              |
+| --------------- | --- | ----------------------------------------------- |
+| `version`       | 番号  | プロトコルのバージョン番号。現在は`1`です。                         |
+| `database`      | 弦   | データベースの名前。                                      |
+| `table`         | 弦   | テーブルの名前。                                        |
+| `tableID`       | 番号  | テーブルの ID。                                       |
+| `type`          | 弦   | DML イベント タイプ`INSERT` 、 `UPDATE` 、 `DELETE`を含む)。 |
+| `commitTs`      | 番号  | アップストリームで DML ステートメントの実行が完了したときのコミット タイムスタンプ。   |
+| `buildTs`       | 番号  | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。      |
+| `schemaVersion` | 番号  | DML メッセージがエンコードされるときのテーブルのスキーマ バージョン番号。         |
+| `data`          | 物体  | 挿入されたデータ。フィールド名は列名、フィールド値は列値です。                 |
 
-The `INSERT` event contains the `data` field, and does not contain the `old` field.
+`INSERT`イベントには`data`フィールドが含まれ、 `old`フィールドは含まれません。
 
-#### UPDATE
+#### アップデート {#update}
 
-TiCDC encodes an `UPDATE` event in the following JSON format:
+TiCDC は、 `UPDATE`イベントを次の JSON 形式でエンコードします。
 
 ```json
 {
@@ -309,26 +309,26 @@ TiCDC encodes an `UPDATE` event in the following JSON format:
 }
 ```
 
-The fields in the preceding JSON data are explained as follows:
+上記の JSON データのフィールドは次のように説明されます。
 
-| Field         | Type    | Description                                               |
-| ------------- | ------- | --------------------------------------------------------- |
-| `version`     | Number  | The version number of the protocol, which is currently `1`. |
-| `database`    | String  | The name of the database.                                 |
-| `table`       | String  | The name of the table.                                    |
-| `tableID`     | Number  | The ID of the table.                                      |
-| `type`        | String  | The DML event type, including `INSERT`, `UPDATE`, and `DELETE`. |
-| `commitTs`    | Number  | The commit timestamp when the DML statement execution is completed in the upstream. |
-| `buildTs`     | Number  | The UNIX timestamp when the message is successfully encoded within TiCDC. |
-| `schemaVersion` | Number | The schema version number of the table when the DML message is encoded. |
-| `data`        | Object  | The data after updating, where the field name is the column name and the field value is the column value. |
-| `old`         | Object  | The data before updating, where the field name is the column name and the field value is the column value. |
+| 分野              | タイプ | 説明                                              |
+| --------------- | --- | ----------------------------------------------- |
+| `version`       | 番号  | プロトコルのバージョン番号。現在は`1`です。                         |
+| `database`      | 弦   | データベースの名前。                                      |
+| `table`         | 弦   | テーブルの名前。                                        |
+| `tableID`       | 番号  | テーブルの ID。                                       |
+| `type`          | 弦   | DML イベント タイプ`INSERT` 、 `UPDATE` 、 `DELETE`を含む)。 |
+| `commitTs`      | 番号  | アップストリームで DML ステートメントの実行が完了したときのコミット タイムスタンプ。   |
+| `buildTs`       | 番号  | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。      |
+| `schemaVersion` | 番号  | DML メッセージがエンコードされるときのテーブルのスキーマ バージョン番号。         |
+| `data`          | 物体  | 更新後のデータ。フィールド名は列名、フィールド値は列値です。                  |
+| `old`           | 物体  | 更新前のデータ。フィールド名は列名、フィールド値は列値です。                  |
 
-The `UPDATE` event contains both the `data` and `old` fields, which represent the data after and before updating respectively.
+`UPDATE`イベントには、それぞれ更新後のデータと更新前のデータを表す`data`フィールドと`old`フィールドの両方が含まれます。
 
-#### DELETE
+#### 消去 {#delete}
 
-TiCDC encodes a `DELETE` event in the following JSON format:
+TiCDC は、 `DELETE`イベントを次の JSON 形式でエンコードします。
 
 ```json
 {
@@ -349,25 +349,25 @@ TiCDC encodes a `DELETE` event in the following JSON format:
 }
 ```
 
-The fields in the preceding JSON data are explained as follows:
+上記の JSON データのフィールドは次のように説明されます。
 
-| Field         | Type    | Description                                               |
-| ------------- | ------- | --------------------------------------------------------- |
-| `version`     | Number  | The version number of the protocol, which is currently `1`. |
-| `database`    | String  | The name of the database.                                 |
-| `table`       | String  | The name of the table.                                    |
-| `tableID`     | Number  | The ID of the table.                                      |
-| `type`        | String  | The DML event type, including `INSERT`, `UPDATE`, and `DELETE`. |
-| `commitTs`    | Number  | The commit timestamp when the DML statement execution is completed in the upstream. |
-| `buildTs`     | Number  | The UNIX timestamp when the message is successfully encoded within TiCDC. |
-| `schemaVersion` | Number | The schema version number of the table when the DML message is encoded. |
-| `old`         | Object  | The deleted data, where the field name is the column name and the field value is the column value. |
+| 分野              | タイプ | 説明                                              |
+| --------------- | --- | ----------------------------------------------- |
+| `version`       | 番号  | プロトコルのバージョン番号。現在は`1`です。                         |
+| `database`      | 弦   | データベースの名前。                                      |
+| `table`         | 弦   | テーブルの名前。                                        |
+| `tableID`       | 番号  | テーブルの ID。                                       |
+| `type`          | 弦   | DML イベント タイプ`INSERT` 、 `UPDATE` 、 `DELETE`を含む)。 |
+| `commitTs`      | 番号  | アップストリームで DML ステートメントの実行が完了したときのコミット タイムスタンプ。   |
+| `buildTs`       | 番号  | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。      |
+| `schemaVersion` | 番号  | DML メッセージがエンコードされるときのテーブルのスキーマ バージョン番号。         |
+| `old`           | 物体  | 削除されたデータ。フィールド名は列名、フィールド値は列値です。                 |
 
-The `DELETE` event contains the `old` field, and does not contain the `data` field.
+`DELETE`イベントには`old`フィールドが含まれ、 `data`フィールドは含まれません。
 
-### WATERMARK
+### 透かし {#watermark}
 
-TiCDC encodes a `WATERMARK` event in the following JSON format:
+TiCDC は、 `WATERMARK`イベントを次の JSON 形式でエンコードします。
 
 ```json
 {
@@ -378,18 +378,18 @@ TiCDC encodes a `WATERMARK` event in the following JSON format:
 }
 ```
 
-The fields in the preceding JSON data are explained as follows:
+上記の JSON データのフィールドは次のように説明されます。
 
-| Field         | Type    | Description                                               |
-| ------------- | ------- | --------------------------------------------------------- |
-| `version`     | Number  | The version number of the protocol, which is currently `1`. |
-| `type`        | String  | The `WATERMARK` event type.                               |
-| `commitTs`    | Number  | The commit timestamp of the `WATERMARK`.                  |
-| `buildTs`     | Number  | The UNIX timestamp when the message is successfully encoded within TiCDC. |
+| 分野         | タイプ | 説明                                         |
+| ---------- | --- | ------------------------------------------ |
+| `version`  | 番号  | プロトコルのバージョン番号。現在は`1`です。                    |
+| `type`     | 弦   | `WATERMARK`イベントタイプ。                        |
+| `commitTs` | 番号  | `WATERMARK`のコミットタイムスタンプ。                   |
+| `buildTs`  | 番号  | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。 |
 
-### BOOTSTRAP
+### ブートストラップ {#bootstrap}
 
-TiCDC encodes a `BOOTSTRAP` event in the following JSON format:
+TiCDC は`BOOTSTRAP`イベントを次の JSON 形式でエンコードします。
 
 ```json
 {
@@ -463,72 +463,72 @@ TiCDC encodes a `BOOTSTRAP` event in the following JSON format:
 }
 ```
 
-The fields in the preceding JSON data are explained as follows:
+上記の JSON データのフィールドは次のように説明されます。
 
-| Field         | Type    | Description                                               |
-| ------------- | ------- | --------------------------------------------------------- |
-| `version`     | Number  | The version number of the protocol, which is currently `1`. |
-| `type`        | String  | The `BOOTSTRAP` event type.                               |
-| `commitTs`    | Number  | The `commitTs` of the `BOOTSTRAP` is `0`. Because it is generated internally by TiCDC, its `commitTs` is meaningless. |
-| `buildTs`     | Number  | The UNIX timestamp when the message is successfully encoded within TiCDC. |
-| `tableSchema` | Object  | The schema information of the table. For more information, see [TableSchema definition](#tableschema-definition). |
+| 分野            | タイプ | 説明                                                                               |
+| ------------- | --- | -------------------------------------------------------------------------------- |
+| `version`     | 番号  | プロトコルのバージョン番号。現在は`1`です。                                                          |
+| `type`        | 弦   | `BOOTSTRAP`イベントタイプ。                                                              |
+| `commitTs`    | 番号  | `BOOTSTRAP`のうちの`commitTs`は`0`です。これは TiCDC によって内部的に生成されるため、その`commitTs`は意味がありません。 |
+| `buildTs`     | 番号  | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。                                       |
+| `tableSchema` | 物体  | テーブルのスキーマ情報。詳細については、 [テーブルスキーマの定義](#tableschema-definition)参照してください。             |
 
-## Message generation and sending rules
+## メッセージの生成と送信ルール {#message-generation-and-sending-rules}
 
-### DDL
+### DDL {#ddl}
 
-- Generation time: TiCDC sends a DDL event after all transactions before this DDL event have been sent.
-- Destination: TiCDC sends DDL events to all partitions of the corresponding topic.
+-   生成時間: TiCDC は、この DDL イベントの前のすべてのトランザクションが送信された後に DDL イベントを送信します。
+-   宛先: TiCDC は、対応するトピックのすべてのパーティションに DDL イベントを送信します。
 
-### DML
+### DMML の {#dml}
 
-- Generation time: TiCDC sends DML events in the order of the `commitTs` of the transaction.
-- Destination: TiCDC sends DDL events to the corresponding partition of the corresponding topic according to the user-configured dispatch rules.
+-   生成時間: TiCDC はトランザクションの`commitTs`の順序で DML イベントを送信します。
+-   宛先: TiCDC は、ユーザーが設定したディスパッチ ルールに従って、対応するトピックの対応するパーティションに DDL イベントを送信します。
 
-### WATERMARK
+### 透かし {#watermark}
 
-- Generation time: TiCDC sends `WATERMARK` events periodically to mark the replication progress of a changefeed. The current interval is 1 second.
-- Destination: TiCDC sends `WATERMARK` events to all partitions of the corresponding topic.
+-   生成時間: TiCDC は、変更フィードのレプリケーションの進行状況を示すために、定期的に`WATERMARK`イベントを送信します。現在の間隔は 1 秒です。
+-   宛先: TiCDC は、対応するトピックのすべてのパーティションに`WATERMARK`イベントを送信します。
 
-### BOOTSTRAP
+### ブートストラップ {#bootstrap}
 
-- Generation time:
-    - After creating a new changefeed, before the first DML event of a table is sent, TiCDC sends a `BOOTSTRAP` event to the downstream to build the table schema.
-    - Additionally, TiCDC sends `BOOTSTRAP` events periodically to allow newly joined consumers to build the table schema. The default interval is 120 seconds or every 10000 messages. You can adjust the sending interval by configuring the `send-bootstrap-interval-in-sec` and `send-bootstrap-in-msg-count` parameters in the `sink` configuration.
-    - If a table does not receive any new DML messages within 30 minutes, the table is considered inactive. TiCDC stops sending `BOOTSTRAP` events for the table until new DML events are received.
-- Destination: By default, TiCDC sends `BOOTSTRAP` events to all partitions of the corresponding topic. You can adjust the sending strategy by configuring the `send-bootstrap-to-all-partition` parameter in the sink configuration.
+-   生成時間:
+    -   新しい変更フィードを作成した後、テーブルの最初の DML イベントが送信される前に、TiCDC はテーブル スキーマを構築するために`BOOTSTRAP`イベントをダウンストリームに送信します。
+    -   さらに、TiCDC は、新しく参加したコンシューマーがテーブル スキーマを構築できるように、 `BOOTSTRAP`イベント`sink`定期的に送信します。デフォルトの間隔は 120 秒または 10000 メッセージごとです。7 構成で`send-bootstrap-interval-in-sec`および`send-bootstrap-in-msg-count`パラメータを構成することで、送信間隔を調整できます。
+    -   テーブルが 30 分以内に新しい DML メッセージを受信しない場合、テーブルは非アクティブであると見なされます。TiCDC は、新しい DML イベントが受信されるまで、テーブルへの`BOOTSTRAP`イベントの送信を停止します。
+-   送信先: デフォルトでは、TiCDC は対応するトピックのすべてのパーティションに`BOOTSTRAP`イベントを送信します。シンク構成で`send-bootstrap-to-all-partition`パラメータを構成することで、送信戦略を調整できます。
 
-## Message consumption methods
+## メッセージの消費方法 {#message-consumption-methods}
 
-Because the TiCDC Simple protocol does not include the schema information of the table when sending a DML message, the downstream needs to receive the DDL or BOOTSTRAP message and cache the schema information of the table before consuming a DML message. When receiving a DML message, the downstream obtains the corresponding table schema information from the cache by searching the `table` name and `schemaVersion` fields of the DML message, and then correctly consumes the DML message.
+TiCDC Simple プロトコルは、DML メッセージを送信するときにテーブルのスキーマ情報を含まないため、ダウンストリームは DDL または BOOTSTRAP メッセージを受信し、DML メッセージを消費する前にテーブルのスキーマ情報をキャッシュする必要があります。ダウンストリームは、DML メッセージを受信すると、DML メッセージの`table`名前と`schemaVersion`フィールドを検索してキャッシュから対応するテーブル スキーマ情報を取得し、DML メッセージを正しく消費します。
 
-The following describes how the downstream consumes DML messages based on DDL or BOOTSTRAP messages. According to preceding descriptions, the following information is known:
+以下では、ダウンストリームが DDL または BOOTSTRAP メッセージに基づいて DML メッセージを使用する方法について説明します。前述の説明によると、次の情報がわかっています。
 
-- Each DML message contains a `schemaVersion` field to mark the schema version number of the table corresponding to the DML message.
-- Each DDL message contains a `tableSchema` and `preTableSchema` field to mark the schema information of the table before and after the DDL event.
-- Each BOOTSTRAP message contains a `tableSchema` field to mark the schema information of the table corresponding to the BOOTSTRAP message.
+-   各 DML メッセージには、DML メッセージに対応するテーブルのスキーマ バージョン番号をマークするための`schemaVersion`フィールドが含まれています。
+-   各 DDL メッセージには、DDL イベントの前後のテーブルのスキーマ情報をマークするための`tableSchema`フィールドと`preTableSchema`フィールドが含まれています。
+-   各 BOOTSTRAP メッセージには、BOOTSTRAP メッセージに対応するテーブルのスキーマ情報をマークするための`tableSchema`フィールドが含まれています。
 
-The consumption methods are introduced in the following two scenarios.
+消費方法は次の2つのシナリオで紹介されています。
 
-### Scenario 1: The consumer starts consuming from the beginning
+### シナリオ1: 消費者が最初から消費を始める {#scenario-1-the-consumer-starts-consuming-from-the-beginning}
 
-In this scenario, the consumer starts consuming from the creation of a table, so the consumer can receive all DDL and BOOTSTRAP messages of the table. In this case, the consumer can obtain the schema information of the table through the `table` name and `schemaVersion` field of the DML message. The detailed process is as follows:
+このシナリオでは、コンシューマーはテーブルの作成から消費を開始するため、テーブルのすべての DDL および BOOTSTRAP メッセージを受信できます。この場合、コンシューマーは DML メッセージの`table`名前と`schemaVersion`フィールドを通じてテーブルのスキーマ情報を取得できます。詳細なプロセスは次のとおりです。
 
 ![TiCDC Simple Protocol consumer scene 1](/media/ticdc/ticdc-simple-consumer-1.png)
 
-### Scenario 2: The consumer starts consuming from the middle
+### シナリオ2: 消費者が中間層から消費を始める {#scenario-2-the-consumer-starts-consuming-from-the-middle}
 
-When a new consumer joins the consumer group, it might start consuming from the middle, so it might miss earlier DDL and BOOTSTRAP messages of the table. In this case, the consumer might receive some DML messages before obtaining the schema information of the table. Therefore, the consumer needs to wait for a period of time until it receives the DDL or BOOTSTRAP message to obtain the schema information of the table. Because TiCDC sends BOOTSTRAP messages periodically, the consumer can always obtain the schema information of the table within a period of time. The detailed process is as follows:
+新しいコンシューマーがコンシューマー グループに参加すると、途中から消費を開始する可能性があるため、テーブルの以前の DDL および BOOTSTRAP メッセージを見逃す可能性があります。この場合、コンシューマーはテーブルのスキーマ情報を取得する前にいくつかの DML メッセージを受信する可能性があります。したがって、コンシューマーはテーブルのスキーマ情報を取得するために DDL または BOOTSTRAP メッセージを受信するまで一定時間待機する必要があります。TiCDC は BOOTSTRAP メッセージを定期的に送信するため、コンシューマーは常に一定期間内にテーブルのスキーマ情報を取得できます。詳細なプロセスは次のとおりです。
 
 ![TiCDC Simple Protocol consumer scene 2](/media/ticdc/ticdc-simple-consumer-2.png)
 
-## Reference
+## 参照 {#reference}
 
-### TableSchema definition
+### テーブルスキーマの定義 {#tableschema-definition}
 
-TableSchema is a JSON object that contains the schema information of the table, including the table name, table ID, table version number, column information, and index information. The JSON message format is as follows:
+TableSchema は、テーブル名、テーブル ID、テーブル バージョン番号、列情報、インデックス情報など、テーブルのスキーマ情報を含む JSON オブジェクトです。JSON メッセージの形式は次のとおりです。
 
-``` json
+```json
 {
     "schema":"simple",
     "table":"user",
@@ -594,26 +594,26 @@ TableSchema is a JSON object that contains the schema information of the table, 
 }
 ```
 
-The preceding JSON data is explained as follows:
+上記の JSON データの説明は次のとおりです。
 
-| Field      | Type   | Description                                                         |
-| ---------- | ------ | ------------------------------------------------------------------- |
-| `schema`   | String | The name of the database.                                           |
-| `table`    | String | The name of the table.                                              |
-| `tableID`  | Number | The ID of the table.                                                |
-| `version`  | Number | The schema version number of the table.                             |
-| `columns`  | Array  | The column information, including the column name, data type, whether it can be null, and the default value. |
-| `indexes`  | Array  | The index information, including the index name, whether it is unique, whether it is a primary key, and the index columns. |
+| 分野        | タイプ | 説明                                                       |
+| --------- | --- | -------------------------------------------------------- |
+| `schema`  | 弦   | データベースの名前。                                               |
+| `table`   | 弦   | テーブルの名前。                                                 |
+| `tableID` | 番号  | テーブルの ID。                                                |
+| `version` | 番号  | テーブルのスキーマ バージョン番号。                                       |
+| `columns` | 配列  | 列名、データ型、null が可能かどうか、デフォルト値などの列情報。                       |
+| `indexes` | 配列  | インデックス名、インデックスが一意かどうか、インデックスが主キーかどうか、インデックス列などのインデックス情報。 |
 
-You can uniquely identify the schema information of a table by the table name and the schema version number.
+テーブル名とスキーマ バージョン番号によって、テーブルのスキーマ情報を一意に識別できます。
 
-> **Note:**
+> **注記：**
 >
-> Due to the implementation limitations of TiDB, the schema version number of a table does not change when the `RENAME TABLE` DDL operation is executed.
+> TiDB の実装上の制限により、 `RENAME TABLE` DDL 操作が実行されても、テーブルのスキーマ バージョン番号は変更されません。
 
-#### Column definition
+#### カラムの定義 {#column-definition}
 
-Column is a JSON object that contains the schema information of the column, including the column name, data type, whether it can be null, and the default value.
+カラムは、列名、データ型、null が可能かどうか、デフォルト値など、列のスキーマ情報を含む JSON オブジェクトです。
 
 ```json
 {
@@ -629,18 +629,18 @@ Column is a JSON object that contains the schema information of the column, incl
 }
 ```
 
-The preceding JSON data is explained as follows:
+上記の JSON データの説明は次のとおりです。
 
-| Field      | Type   | Description                                                         |
-| ---------- | ------ | ------------------------------------------------------------------- |
-| `name`     | String | The name of the column.                                             |
-| `dataType` | Object | The data type information, including the MySQL data type, character set, collation, and field length. |
-| `nullable` | Boolean | Whether the column can be null.                                    |
-| `default`  | String | The default value of the column.                                    |
+| 分野         | タイプ | 説明                                     |
+| ---------- | --- | -------------------------------------- |
+| `name`     | 弦   | 列の名前。                                  |
+| `dataType` | 物体  | MySQL データ型、文字セット、照合順序、フィールド長などのデータ型情報。 |
+| `nullable` | ブール | 列が null になるかどうか。                       |
+| `default`  | 弦   | 列のデフォルト値。                              |
 
-#### Index definition
+#### インデックスの定義 {#index-definition}
 
-Index is a JSON object that contains the schema information of the index, including the index name, whether it is unique, whether it is a primary key, and the index column.
+インデックスは、インデックス名、インデックスが一意かどうか、主キーであるかどうか、インデックス列など、インデックスのスキーマ情報を含む JSON オブジェクトです。
 
 ```json
 {
@@ -654,61 +654,61 @@ Index is a JSON object that contains the schema information of the index, includ
 }
 ```
 
-The preceding JSON data is explained as follows:
+上記の JSON データの説明は次のとおりです。
 
-| Field      | Type   | Description                                                         |
-| ---------- | ------ | ------------------------------------------------------------------- |
-| `name`     | String | The name of the index.                                              |
-| `unique`   | Boolean | Whether the index is unique.                                       |
-| `primary`  | Boolean | Whether the index is a primary key.                                |
-| `nullable` | Boolean | Whether the index can be null.                                     |
-| `columns`  | Array  | The column names included in the index.                             |
+| 分野         | タイプ | 説明                    |
+| ---------- | --- | --------------------- |
+| `name`     | 弦   | インデックスの名前。            |
+| `unique`   | ブール | インデックスが一意であるかどうか。     |
+| `primary`  | ブール | インデックスが主キーであるかどうか。    |
+| `nullable` | ブール | インデックスが null になるかどうか。 |
+| `columns`  | 配列  | インデックスに含まれる列名。        |
 
-### mysqlType reference table
+### mysqlType 参照テーブル {#mysqltype-reference-table}
 
-The following table describes the value range of the `mysqlType` field in the TiCDC Simple protocol and its type in TiDB (Golang) and Avro (Java). When you need to parse DML messages, you can correctly parse the data according to this table and the `mysqlType` field in the DML message, depending on the protocol and language you use.
+次の表は、TiCDC Simple プロトコルの`mysqlType`フィールドの値の範囲と、TiDB (Golang) および Avro (Java) でのその型を示しています。DML メッセージを解析する必要がある場合は、使用するプロトコルと言語に応じて、この表と DML メッセージの`mysqlType`フィールドに従ってデータを正しく解析できます。
 
-**TiDB type (Golang)** represents the type of the corresponding `mysqlType` when it is processed in TiDB and TiCDC (Golang). **Avro type (Java)** represents the type of the corresponding `mysqlType` when it is encoded into Avro format messages.
+**TiDB 型 (Golang) は、** TiDB および TiCDC (Golang) で処理されるときに対応する`mysqlType`の型を表します。Avro**型 (Java) は、** Avro 形式のメッセージにエンコードされるときに対応する`mysqlType`の型を表します。
 
-| mysqlType | Value range | TiDB type (Golang) | Avro type (Java) |
-| --- | --- | --- | --- |
-| tinyint | [-128, 127] | int64 | long |
-| tinyint unsigned | [0, 255] | uint64 | long |
-| smallint | [-32768, 32767] | int64 | long |
-| smallint unsigned | [0, 65535] | uint64 | long |
-| mediumint | [-8388608, 8388607] | int64 | long |
-| mediumint unsigned | [0, 16777215] | uint64 | long |
-| int | [-2147483648, 2147483647] | int64 | long |
-| int unsigned | [0, 4294967295] | uint64 | long |
-| bigint | [-9223372036854775808, 9223372036854775807] | int64 | long |
-| bigint unsigned | [0, 9223372036854775807] | uint64 | long |
-| bigint unsigned | [9223372036854775808, 18446744073709551615] | uint64 | string |
-| float | / | float32 | float |
-| double | / | float64 | double |
-| decimal | / | string | string |
-| varchar | / | []uint8 | string |
-| char | / | []uint8 | string |
-| varbinary | / | []uint8 | bytes |
-| binary | / | []uint8 | bytes |
-| tinytext | / | []uint8 | string |
-| text | / | []uint8 | string |
-| mediumtext | / | []uint8 | string |
-| longtext | / | []uint8 | string |
-| tinyblob | / | []uint8 | bytes |
-| blob | / | []uint8 | bytes |
-| mediumblob | / | []uint8 | bytes |
-| longblob | / | []uint8 | bytes |
-| date | / | string | string |
-| datetime | / | string | string |
-| timestamp | / | string | string |
-| time | / | string | string |
-| year | / | int64 | long |
-| enum | / | uint64 | long |
-| set | / | uint64 | long |
-| bit | / | uint64 | long |
-| json | / | string | string |
-| bool | / | int64 | long |
+| mysqlタイプ       | 値の範囲                                        | TiDB タイプ (Golang) | Avro 型 (Java) |
+| -------------- | ------------------------------------------- | ----------------- | ------------- |
+| ちっちゃい          | [-128, 127]                                 | 整数64              | 長さ            |
+| tinyint 符号なし   | [0, 255]                                    | uint64            | 長さ            |
+| 小さい整数          | [-32768, 32767]                             | 整数64              | 長さ            |
+| 符号なし小整数        | [0, 65535]                                  | uint64            | 長さ            |
+| 中程度            | [-8388608, 8388607]                         | 整数64              | 長さ            |
+| mediumint 符号なし | [0, 16777215]                               | uint64            | 長さ            |
+| 整数             | [-2147483648, 2147483647]                   | 整数64              | 長さ            |
+| 符号なし整数         | [0, 4294967295]                             | uint64            | 長さ            |
+| ビッグイント         | [-9223372036854775808, 9223372036854775807] | 整数64              | 長さ            |
+| bigint 符号なし    | [0, 9223372036854775807]                    | uint64            | 長さ            |
+| bigint 符号なし    | [9223372036854775808, 18446744073709551615] | uint64            | 弦             |
+| 浮く             | /                                           | 浮動小数点数32          | 浮く            |
+| ダブル            | /                                           | フロート64            | ダブル           |
+| 小数点            | /                                           | 弦                 | 弦             |
+| varchar        | /                                           | []uint8           | 弦             |
+| 文字             | /                                           | []uint8           | 弦             |
+| varbinary      | /                                           | []uint8           | バイト           |
+| バイナリ           | /                                           | []uint8           | バイト           |
+| 小さなテキスト        | /                                           | []uint8           | 弦             |
+| 文章             | /                                           | []uint8           | 弦             |
+| 中テキスト          | /                                           | []uint8           | 弦             |
+| 長文             | /                                           | []uint8           | 弦             |
+| 小さな塊           | /                                           | []uint8           | バイト           |
+| ブロブ            | /                                           | []uint8           | バイト           |
+| 中くらいの塊         | /                                           | []uint8           | バイト           |
+| ロングブロブ         | /                                           | []uint8           | バイト           |
+| 日付             | /                                           | 弦                 | 弦             |
+| 日付時刻           | /                                           | 弦                 | 弦             |
+| タイムスタンプ        | /                                           | 弦                 | 弦             |
+| 時間             | /                                           | 弦                 | 弦             |
+| 年              | /                                           | 整数64              | 長さ            |
+| 列挙型            | /                                           | uint64            | 長さ            |
+| セット            | /                                           | uint64            | 長さ            |
+| 少し             | /                                           | uint64            | 長さ            |
+| json           | /                                           | 弦                 | 弦             |
+| ブール            | /                                           | 整数64              | 長さ            |
 
-### Avro schema definition
+### Avro スキーマ定義 {#avro-schema-definition}
 
-The Simple protocol supports outputting messages in Avro format. For details about the Avro format, see [Simple Protocol Avro Schema](https://github.com/pingcap/tiflow/blob/release-8.1/pkg/sink/codec/simple/message.json).
+Simple プロトコルは、Avro 形式でのメッセージの出力をサポートしています。Avro 形式の詳細については、 [シンプルプロトコル Avro スキーマ](https://github.com/pingcap/tiflow/blob/release-8.1/pkg/sink/codec/simple/message.json)を参照してください。

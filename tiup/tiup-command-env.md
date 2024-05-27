@@ -1,29 +1,29 @@
 ---
 title: tiup env
-summary: TiUP provides flexible and customized interfaces using environment variables. The `tiup env` command queries user-defined environment variables and their values. Use `tiup env [name1...N]` to view specified variables, or all by default. No options. Output is a list of "{key}"="{value}" if not specified, or the "{value}" list in order if specified. Empty value means TiUP uses default.
+summary: TiUP は、環境変数を使用して柔軟でカスタマイズされたインターフェイスを提供します。`tiup env` コマンドは、ユーザー定義の環境変数とその値を照会します。`tiup env [name1...N]` を使用して、指定された変数、またはデフォルトですべての変数を表示します。オプションはありません。出力は、指定されていない場合は "{key}"="{value}" のリスト、指定されている場合は "{value}" のリストになります。値が空の場合、 TiUP はデフォルトを使用します。
 ---
 
-# tiup env
+# tiup env {#tiup-env}
 
-TiUP provides users with flexible and customized interfaces, some of which are implemented using environment variables. The `tiup env` command is used to query the user-defined environment variables that TiUP supports and their values.
+TiUP は`tiup env`ユーザーに柔軟でカスタマイズされたインターフェースを提供します。その一部は環境変数を使用して実装されています。1 コマンドは、 TiUPがサポートするユーザー定義の環境変数とその値を照会するために使用されます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup env [name1...N]
 ```
 
-`[name1...N]` is used to view the specified environment variables. If it is not specified, all supported environment variables are viewed by default.
+`[name1...N]`指定された環境変数を表示するために使用されます。指定されていない場合は、サポートされているすべての環境変数がデフォルトで表示されます。
 
-## Option
+## オプション {#option}
 
-None
+なし
 
-## Output
+## 出力 {#output}
 
-- If `[name1...N]` is not specified, a list of "{key}"="{value}" is output.
-- If `[name1...N]` is specified, the "{value}" list is output in order.
+-   `[name1...N]`を指定しない場合は、「{key}」=&quot;{value}&quot; のリストが出力されます。
+-   `[name1...N]`を指定すると、「{value}」リストが順番に出力されます。
 
-In the above output, if `value` is empty, it means that the value of the environment variable is not set. In this case, TiUP uses the default value.
+上記の出力で、 `value`空の場合は、環境変数の値が設定されていないことを意味します。この場合、 TiUP はデフォルト値を使用します。
 
-[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPリファレンスコマンドリスト](/tiup/tiup-reference.md#command-list)

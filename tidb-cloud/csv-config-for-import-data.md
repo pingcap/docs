@@ -1,74 +1,74 @@
 ---
 title: CSV Configurations for Importing Data
-summary: Learn how to use CSV configurations for the Import Data service on TiDB Cloud.
+summary: TiDB Cloudのインポート データ サービスで CSV 構成を使用する方法を学習します。
 ---
 
-# CSV Configurations for Importing Data
+# データをインポートするための CSV 構成 {#csv-configurations-for-importing-data}
 
-This document introduces CSV configurations for the Import Data service on TiDB Cloud.
+このドキュメントでは、 TiDB Cloudのデータインポート サービスの CSV 構成について説明します。
 
-The following is the CSV Configuration window when you use the Import Data service on TiDB Cloud to import CSV files. For more information, see [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md).
+以下は、 TiDB Cloudのデータインポート サービスを使用して CSV ファイルをインポートする場合の CSVコンフィグレーションウィンドウです。詳細については、 [Amazon S3 または GCS からTiDB Cloudに CSV ファイルをインポートする](/tidb-cloud/import-csv-files.md)参照してください。
 
 ![CSV Configurations](/media/tidb-cloud/import-data-csv-config.png)
 
-## Separator
+## セパレータ {#separator}
 
-- Definition: defines the field separator. It can be one or multiple characters, but must not be empty.
+-   定義: フィールド区切り文字を定義します。1 文字または複数文字を指定できますが、空にすることはできません。
 
-- Common values:
+-   共通の値:
 
-    * `,` for CSV (comma-separated values). As shown in the above screenshot, "1", "Michael", and "male" represent three fields.
-    * `"\t"` for TSV (tab-separated values).
+    -   CSV (カンマ区切り値) の場合は`,`上記のスクリーンショットに示すように、「1」、「Michael」、「male」は 3 つのフィールドを表します。
+    -   TSV (タブ区切り値)の場合は`"\t"` 。
 
-- Default: `,`
+-   デフォルト: `,`
 
-## Delimiter
+## デリミタ {#delimiter}
 
-- Definition: defines the delimiter used for quoting. If **Delimiter** is empty, all fields are unquoted.
+-   定義: 引用符に使用する区切り文字を定義します。**区切り文字**が空の場合、すべてのフィールドは引用符で囲まれません。
 
-- Common values:
+-   共通の値:
 
-    * `'"'` quotes fields with double-quote. As shown in the above screenshot, `"Michael","male"` represents two fields. Note that there must be a `,` between the two fields. If the data is `"Michael""male"` (without `,`), the import task will fail to parse. If the data is `"Michael,male"` (with only one double-quote), it is parsed as one field.
-    * `''` disables quoting.
+    -   `'"'`フィールドを二重引用符で囲みます。上のスクリーンショットに示すように、 `"Michael","male"` 2 つのフィールドを表します。2 つのフィールドの間には`,`なければならないことに注意してください。データが`"Michael""male"` ( `,`なし) の場合、インポート タスクは解析に失敗します。データが`"Michael,male"` (二重引用符が 1 つだけ) の場合、1 つのフィールドとして解析されます。
+    -   `''`引用を無効にします。
 
-- Default: `"`
+-   デフォルト: `"`
 
-## With header
+## ヘッダー付き {#with-header}
 
-- Definition: whether *all* CSV files contain a header row. If **With header** is `True`, the first row is used as the column names. If **With header** is `False`, the first row is treated as an ordinary data row.
+-   定義:*すべての*CSV ファイルにヘッダー行が含まれているかどうか。**ヘッダー**が`True`の場合、最初の行は列名として使用されます。**ヘッダー**が`False`の場合、最初の行は通常のデータ行として扱われます。
 
-- Default: `True`
+-   デフォルト: `True`
 
-## Backslash escape
+## バックスラッシュエスケープ {#backslash-escape}
 
-- Definition: whether to parse backslash inside fields as escape characters. If **Backslash escape** is `True`, the following sequences are recognized and converted:
+-   定義: フィールド内のバックスラッシュをエスケープ文字として解析するかどうか。**バックスラッシュ エスケープ**が`True`の場合、次のシーケンスが認識され、変換されます。
 
-    | Sequence | Converted to             |
-    |----------|--------------------------|
-    | `\0`     | Null character (`U+0000`)  |
-    | `\b`     | Backspace (`U+0008`)       |
-    | `\n`     | Line feed (`U+000A`)       |
-    | `\r`     | Carriage return (`U+000D`) |
-    | `\t`     | Tab (`U+0009`)             |
-    | `\Z`     | Windows EOF (`U+001A`)     |
+    | シーケンス | に変換                    |
+    | ----- | ---------------------- |
+    | `\0`  | ヌル文字 ( `U+0000` )      |
+    | `\b`  | バックスペース ( `U+0008` )   |
+    | `\n`  | 改行 ( `U+000A` )        |
+    | `\r`  | キャリッジリターン ( `U+000D` ) |
+    | `\t`  | タブ ( `U+0009` )        |
+    | `\Z`  | ウィンドウズEOF ( `U+001A` ) |
 
-    In all other cases (for example, `\"`), the backslash is stripped, leaving the next character (`"`) in the field. The character left has no special roles (for example, delimiters) and is just an ordinary character. Quoting does not affect whether backslash is parsed as an escape character.
+    その他の場合（たとえば、 `\"` ）は、バックスラッシュが削除され、フィールドに次の文字（ `"` ）が残ります。残った文字には特別な役割（たとえば、区切り文字）はなく、通常の文字です。引用符で囲んでも、バックスラッシュがエスケープ文字として解析されるかどうかは影響しません。
 
-    Take the following fields as an example.
+    次のフィールドを例に挙げます。
 
-    - If the value is `True`, `"nick name is \"Mike\""` will be parsed as `nick name is "Mike"` and written to the target table.
-    - If the value is `False`, it will be parsed as three fields: `"nick name is \"` , `Mike\`, and `""`. But it cannot be parsed correctly because the fields are not separated from each other.
+    -   値が`True`の場合、 `"nick name is \"Mike\""` `nick name is "Mike"`として解析され、ターゲット テーブルに書き込まれます。
+    -   値が`False`の場合、 `"nick name is \"` 、 `Mike\` 、 `""` 3 つのフィールドとして解析されます。ただし、フィールドが互いに分離されていないため、正しく解析できません。
 
-    For standard CSV files, if there are double-quoted characters in a field to be recorded, you need to use two double-quotes for escaping. In this case, using `Backslash escape = True` will result in a parsing error, while using `Backslash escape = False` will correctly parse. A typical scenario is when the imported field contains JSON content. A standard CSV JSON field is normally stored as follows:
+    標準の CSV ファイルの場合、記録するフィールドに二重引用符で囲まれた文字が含まれている場合は、エスケープのために二重引用符を 2 つ使用する必要があります。この場合、 `Backslash escape = True`使用すると解析エラーが発生しますが、 `Backslash escape = False`使用すると正しく解析されます。一般的なシナリオは、インポートされたフィールドに JSON コンテンツが含まれている場合です。標準の CSV JSON フィールドは通常、次のように保存されます。
 
     `"{""key1"":""val1"", ""key2"": ""val2""}"`
 
-    In this case, you can set `Backslash escape = False` and the field will be correctly escaped to the database as follows:
+    この場合、 `Backslash escape = False`設定すると、フィールドは次のようにデータベースに正しくエスケープされます。
 
     `{"key1": "val1", "key2": "val2"}`
 
-    If the content of the CSV source file is saved as JSON in the following way, then consider setting `Backslash escape = True` as follows. But this is not the standard format for CSV.
+    CSV ソース ファイルの内容が次のように JSON として保存されている場合は、次のように`Backslash escape = True`設定することを検討してください。ただし、これは CSV の標準形式ではありません。
 
     `"{\"key1\": \"val1\", \"key2\":\"val2\" }"`
 
-- Default: `True`
+-   デフォルト: `True`

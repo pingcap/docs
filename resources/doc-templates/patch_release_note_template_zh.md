@@ -1,161 +1,161 @@
 ---
 title: TiDB x.y.z Release Notes
-summary: 了解 TiDB x.y.z 版本的兼容性变更、改进提升，以及错误修复。
+summary: TiDB x.y.z バージョンの互換性の変更、改善、およびエラーの修正について理解します。
 ---
 
-# TiDB x.y.z Release Notes
+# TiDB xyz リリースノート {#tidb-x-y-z-release-notes}
 
-发版日期：2023 年 x 月 x 日
+発行日：2023 年 x 月 x 日
 
-TiDB 版本：x.y.z
+TiDB バージョン：xyz
 
-试用链接：[快速体验](https://docs.pingcap.com/zh/tidb/vx.y/quick-start-with-tidb) | [生产部署](https://docs.pingcap.com/zh/tidb/vx.y/production-deployment-using-tiup) | [下载离线包](https://cn.pingcap.com/product-community/?version=vx.y.z#version-list)
+試験リンク： [快速体验](https://docs.pingcap.com/zh/tidb/vx.y/quick-start-with-tidb) | [生産部署](https://docs.pingcap.com/zh/tidb/vx.y/production-deployment-using-tiup) | [ダウンロードオンラインパック](https://cn.pingcap.com/product-community/?version=vx.y.z#version-list)
 
-## 兼容性变更
+## 互換性の変更
 
-- note [#issue](https://github.com/pingcap/${repo-name}/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-- placeholder
+-   注[＃問題](https://github.com/pingcap/$%7Brepo-name%7D/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+-   プレースホルダー
 
-## 改进提升
+## 改善提案
 
-+ TiDB
+-   ティビ
 
-    - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-    - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-    - placeholder
+    -   注[＃問題](https://github.com/pingcap/tidb/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+    -   注[＃問題](https://github.com/pingcap/tidb/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+    -   プレースホルダー
 
-+ TiKV
+-   ティクヴ
 
-    - note [#issue](https://github.com/tikv/tikv/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-    - note [#issue](https://github.com/tikv/tikv/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-    - placeholder
+    -   注[＃問題](https://github.com/tikv/tikv/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+    -   注[＃問題](https://github.com/tikv/tikv/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+    -   プレースホルダー
 
-+ PD
+-   PD
 
-    - note [#issue](https://github.com/tikv/pd/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-    - note [#issue](https://github.com/tikv/pd/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-    - placeholder
+    -   注[＃問題](https://github.com/tikv/pd/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+    -   注[＃問題](https://github.com/tikv/pd/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+    -   プレースホルダー
 
-+ TiFlash
+-   TiFlash
 
-    - note [#issue](https://github.com/pingcap/tiflash/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-    - note [#issue](https://github.com/pingcap/tiflash/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-    - placeholder
+    -   注[＃問題](https://github.com/pingcap/tiflash/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+    -   注[＃問題](https://github.com/pingcap/tiflash/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+    -   プレースホルダー
 
-+ Tools
+-   ツール
 
-    + Backup & Restore (BR)
+    -   バックアップと復元 (BR)
 
-        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - placeholder
+        -   注[＃問題](https://github.com/pingcap/tidb/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   注[＃問題](https://github.com/pingcap/tidb/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   プレースホルダー
 
-    + TiCDC
+    -   ティCDC
 
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - placeholder
+        -   注[＃問題](https://github.com/pingcap/tiflow/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   注[＃問題](https://github.com/pingcap/tiflow/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   プレースホルダー
 
-    + TiDB Data Migration (DM)
+    -   TiDB データ移行 (DM)
 
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - placeholder
+        -   注[＃問題](https://github.com/pingcap/tiflow/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   注[＃問題](https://github.com/pingcap/tiflow/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   プレースホルダー
 
-    + TiDB Lightning
+    -   TiDB Lightning
 
-        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - placeholder
+        -   注[＃問題](https://github.com/pingcap/tidb/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   注[＃問題](https://github.com/pingcap/tidb/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   プレースホルダー
 
-    + Dumpling
+    -   Dumpling
 
-        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - placeholder
+        -   注[＃問題](https://github.com/pingcap/tidb/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   注[＃問題](https://github.com/pingcap/tidb/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   プレースホルダー
 
-    + TiUP
+    -   TiUP
 
-        - note [#issue](https://github.com/pingcap/tiup/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tiup/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - placeholder
+        -   注[＃問題](https://github.com/pingcap/tiup/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   注[＃問題](https://github.com/pingcap/tiup/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   プレースホルダー
 
-    + TiDB Binlog
+    -   TiDBBinlog
 
-        - note [#issue](https://github.com/pingcap/tidb-binlog/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tidb-binlog/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - placeholder
+        -   注[＃問題](https://github.com/pingcap/tidb-binlog/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   注[＃問題](https://github.com/pingcap/tidb-binlog/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   プレースホルダー
 
-## 错误修复
+## 错误修復
 
-+ TiDB
+-   ティビ
 
-    - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-    - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-    - placeholder
+    -   注[＃問題](https://github.com/pingcap/tidb/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+    -   注[＃問題](https://github.com/pingcap/tidb/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+    -   プレースホルダー
 
-+ TiKV
+-   ティクヴ
 
-    - note [#issue](https://github.com/tikv/tikv/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-    - note [#issue](https://github.com/tikv/tikv/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-    - placeholder
+    -   注[＃問題](https://github.com/tikv/tikv/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+    -   注[＃問題](https://github.com/tikv/tikv/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+    -   プレースホルダー
 
-+ PD
+-   PD
 
-    - note [#issue](https://github.com/tikv/pd/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-    - note [#issue](https://github.com/tikv/pd/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-    - placeholder
+    -   注[＃問題](https://github.com/tikv/pd/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+    -   注[＃問題](https://github.com/tikv/pd/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+    -   プレースホルダー
 
-+ TiFlash
+-   TiFlash
 
-    - note [#issue](https://github.com/pingcap/tiflash/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-    - note [#issue](https://github.com/pingcap/tiflash/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-    - placeholder
+    -   注[＃問題](https://github.com/pingcap/tiflash/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+    -   注[＃問題](https://github.com/pingcap/tiflash/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+    -   プレースホルダー
 
-+ Tools
+-   ツール
 
-    + Backup & Restore (BR)
+    -   バックアップと復元 (BR)
 
-        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - placeholder
+        -   注[＃問題](https://github.com/pingcap/tidb/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   注[＃問題](https://github.com/pingcap/tidb/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   プレースホルダー
 
-    + TiCDC
+    -   ティCDC
 
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - placeholder
+        -   注[＃問題](https://github.com/pingcap/tiflow/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   注[＃問題](https://github.com/pingcap/tiflow/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   プレースホルダー
 
-    + TiDB Data Migration (DM)
+    -   TiDB データ移行 (DM)
 
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - placeholder
+        -   注[＃問題](https://github.com/pingcap/tiflow/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   注[＃問題](https://github.com/pingcap/tiflow/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   プレースホルダー
 
-    + TiDB Lightning
+    -   TiDB Lightning
 
-        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - placeholder
+        -   注[＃問題](https://github.com/pingcap/tidb/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   注[＃問題](https://github.com/pingcap/tidb/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   プレースホルダー
 
-    + Dumpling
+    -   Dumpling
 
-        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - placeholder
+        -   注[＃問題](https://github.com/pingcap/tidb/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   注[＃問題](https://github.com/pingcap/tidb/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   プレースホルダー
 
-    + TiUP
+    -   TiUP
 
-        - note [#issue](https://github.com/pingcap/tiup/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tiup/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - placeholder
+        -   注[＃問題](https://github.com/pingcap/tiup/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   注[＃問題](https://github.com/pingcap/tiup/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   プレースホルダー
 
-    + TiDB Binlog
+    -   TiDBBinlog
 
-        - note [#issue](https://github.com/pingcap/tidb-binlog/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tidb-binlog/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - placeholder
+        -   注[＃問題](https://github.com/pingcap/tidb-binlog/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   注[＃問題](https://github.com/pingcap/tidb-binlog/issues/$%7Bissue-id%7D) @ [貢献者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
+        -   プレースホルダー
 
-## Other dup notes
+## その他の重複ノート {#other-dup-notes}
 
-- placeholder
+-   プレースホルダー

@@ -1,18 +1,18 @@
 ---
 title: REFERENTIAL_CONSTRAINTS
-summary: Learn the `REFERENTIAL_CONSTRAINTS` INFORMATION_SCHEMA table.
+summary: `REFERENTIAL_CONSTRAINTS` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# REFERENTIAL_CONSTRAINTS
+# 参照制約 {#referential-constraints}
 
-The `REFERENTIAL_CONSTRAINTS` table provides information about [`FOREIGN KEY`](/foreign-key.md) relationships between tables.
+`REFERENTIAL_CONSTRAINTS`テーブルは、テーブル間の[`FOREIGN KEY`](/foreign-key.md)の関係に関する情報を提供します。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC REFERENTIAL_CONSTRAINTS;
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 +---------------------------+--------------+------+------+---------+-------+
@@ -50,7 +50,7 @@ CREATE TABLE test.child (
 SELECT * FROM REFERENTIAL_CONSTRAINTS\G
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 *************************** 1. row ***************************

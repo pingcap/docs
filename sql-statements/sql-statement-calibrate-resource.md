@@ -1,17 +1,17 @@
 ---
 title: CALIBRATE RESOURCE
-summary: An overview of the usage of CALIBRATE RESOURCE for the TiDB database.
+summary: TiDB データベースの CALIBRATE RESOURCE の使用法の概要。
 ---
 
-# `CALIBRATE RESOURCE`
+# <code>CALIBRATE RESOURCE</code> {#code-calibrate-resource-code}
 
-The `CALIBRATE RESOURCE` statement is used to estimate and output the ['Request Unit (RU)`](/tidb-resource-control#what-is-request-unit-ru) capacity of the current cluster.
+`CALIBRATE RESOURCE`ステートメントは、現在のクラスターの[「リクエストユニット（RU）」](/tidb-resource-control#what-is-request-unit-ru)容量を推定して出力するために使用されます。
 
-> **Note:**
+> **注記：**
 >
-> This feature is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> この機能は TiDB Self-Hosted にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 CalibrateResourceStmt ::= 'CALIBRATE' 'RESOURCE' WorkloadOption
@@ -22,48 +22,48 @@ WorkloadOption ::=
 
 ```
 
-## Privileges
+## 権限 {#privileges}
 
-To execute this command, make sure that the following requirements are met:
+このコマンドを実行するには、次の要件が満たされていることを確認してください。
 
-- You have enabled [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660).
-- The user has `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
-- The user has the `SELECT` privilege for all tables in the `METRICS_SCHEMA` schema.
+-   [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)有効にしました。
+-   ユーザーには`SUPER`または`RESOURCE_GROUP_ADMIN`権限があります。
+-   ユーザーには、 `METRICS_SCHEMA`スキーマ内のすべてのテーブルに対する`SELECT`権限があります。
 
-## Methods for estimating capacity
+## 容量を推定する方法 {#methods-for-estimating-capacity}
 
-TiDB provides two methods for estimation:
+TiDB は推定に 2 つの方法を提供します。
 
-### Estimate capacity based on actual workload
+### 実際の作業負荷に基づいて容量を見積もる {#estimate-capacity-based-on-actual-workload}
 
-If your application is already running in a production environment, or you can run actual business tests, it is recommended to use the actual workload over a period of time to estimate the total capacity. To improve the accuracy of the estimation, observe the following constraints:
+アプリケーションがすでに本番環境で実行されている場合、または実際のビジネス テストを実行できる場合は、一定期間の実際のワークロードを使用して合計容量を見積もることをお勧めします。見積りの精度を向上させるには、次の制約に従ってください。
 
-- Use the `START_TIME` parameter to specify the time point at which the estimation starts, in the format of `2006-01-02 15:04:05`. The default estimation end time is the current time.
-- After specifying the `START_TIME` parameter, you can use the `END_TIME` parameter to specify the estimation end time, or use the `DURATION` parameter to specify the estimation time window from `START_TIME`.
-- The time window ranges from 10 minutes to 24 hours.
-- In the specified time window, if the CPU utilization of TiDB and TiKV is too low, you cannot estimate the capacity.
+-   `START_TIME`パラメータを使用して、推定を開始する時点を`2006-01-02 15:04:05`の形式で指定します。デフォルトの推定終了時刻は現在の時刻です。
+-   `START_TIME`パラメータを指定した後、 `END_TIME`パラメータを使用して推定終了時間を指定するか、 `DURATION`パラメータを使用して`START_TIME`からの推定時間ウィンドウを指定できます。
+-   時間枠は 10 分から 24 時間までです。
+-   指定された時間枠内で、TiDB と TiKV の CPU 使用率が低すぎる場合、容量を見積もることはできません。
 
-> **Note:**
+> **注記：**
 >
-> TiKV does not monitor CPU usage metrics on macOS. It does not support capacity estimation based on the actual workload on macOS.
+> TiKV は macOS 上の CPU 使用率メト​​リックを監視しません。macOS 上の実際のワークロードに基づく容量推定はサポートされていません。
 
-### Estimate capacity based on hardware deployment
+### ハードウェアの展開に基づいて容量を見積もる {#estimate-capacity-based-on-hardware-deployment}
 
-This method mainly estimates capacity based on the current cluster configuration, combined with the empirical values observed for different workloads. Because different types of workloads require different ratios of hardware, the output capacity of the same configuration of hardware might be different. The `WORKLOAD` parameter here accepts the following different workload types. The default value is `TPCC`.
+この方法は、主に現在のクラスター構成と、さまざまなワークロードで観測された経験値に基づいて容量を推定します。ワークロードの種類によって必要なハードウェアの比率が異なるため、同じハードウェア構成の出力容量は異なる場合があります。ここでの`WORKLOAD`パラメーターは、次の異なるワークロード タイプを受け入れます。デフォルト値は`TPCC`です。
 
-- `TPCC`: applies to workloads with heavy data write. It is estimated based on a workload model similar to `TPC-C`.
-- `OLTP_WRITE_ONLY`: applies to workloads with heavy data write. It is estimated based on a workload model similar to `sysbench oltp_write_only`.
-- `OLTP_READ_WRITE`: applies to workloads with even data read and write. It is estimated based on a workload model similar to `sysbench oltp_read_write`.
-- `OLTP_READ_ONLY`: applies to workloads with heavy data read. It is estimated based on a workload model similar to `sysbench oltp_read_only`.
-- `TPCH_10`: applies to AP queries. It is estimated based on 22 queries from `TPCH-10G`.
+-   `TPCC` : 大量のデータ書き込みを伴うワークロードに適用されます。 `TPC-C`と同様のワークロード モデルに基づいて推定されます。
+-   `OLTP_WRITE_ONLY` : 大量のデータ書き込みを伴うワークロードに適用されます。 `sysbench oltp_write_only`と同様のワークロード モデルに基づいて推定されます。
+-   `OLTP_READ_WRITE` : 偶数データの読み取りと書き込みのワークロードに適用されます。 `sysbench oltp_read_write`と同様のワークロード モデルに基づいて推定されます。
+-   `OLTP_READ_ONLY` : 大量のデータ読み取りが行われるワークロードに適用されます。 `sysbench oltp_read_only`と同様のワークロード モデルに基づいて推定されます。
+-   `TPCH_10` : AP クエリに適用されます。2 からの 22 のクエリに基づいて推定されます`TPCH-10G`
 
-> **Note:**
+> **注記：**
 >
-> The RU capacity of a cluster varies with the topology of the cluster and the hardware and software configuration of each component. The actual RU that each cluster can provide is also related to the actual workload. The estimated value based on hardware deployment is for reference only and might differ from the actual maximum value. It is recommended to [estimate capacity based on actual workload](#estimate-capacity-based-on-actual-workload).
+> クラスターの RU 容量は、クラスターのトポロジと各コンポーネントのハードウェアおよびソフトウェア構成によって異なります。各クラスターが提供できる実際の RU も、実際のワークロードに関連します。ハードウェア展開に基づく推定値は参考値のみであり、実際の最大値とは異なる場合があります[実際の作業負荷に基づいて容量を見積もる](#estimate-capacity-based-on-actual-workload)にすることをお勧めします。
 
-## Examples
+## 例 {#examples}
 
-Specify the start time `START_TIME` and the time window `DURATION` to view the RU capacity according to the actual workload.
+実際のワークロードに応じて RU 容量を表示するには、開始時刻`START_TIME`と時間ウィンドウ`DURATION`を指定します。
 
 ```sql
 CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '20m';
@@ -75,7 +75,7 @@ CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '20m';
 1 row in set (0.01 sec)
 ```
 
-Specify the start time `START_TIME` and the end time `END_TIME` to view the RU capacity according to the actual workload.
+実際のワークロードに応じて RU 容量を表示するには、開始時刻`START_TIME`と終了時刻`END_TIME`を指定します。
 
 ```sql
 CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' END_TIME '2023-04-18 08:20:00';
@@ -87,7 +87,7 @@ CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' END_TIME '2023-04-18 08:20:0
 1 row in set (0.01 sec)
 ```
 
-When the time window range `DURATION` does not fall between 10 minutes and 24 hours, an error occurs.
+時間ウィンドウ範囲`DURATION` 10 分から 24 時間の範囲にない場合は、エラーが発生します。
 
 ```sql
 CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '25h';
@@ -96,21 +96,21 @@ CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '9m';
 ERROR 1105 (HY000): the duration of calibration is too short, which could lead to inaccurate output. Please make the duration between 10m0s and 24h0m0s
 ```
 
-The monitoring metrics for the [capacity estimation based on the actual workload](#estimate-capacity-based-on-actual-workload) feature include `tikv_cpu_quota`, `tidb_server_maxprocs`, `resource_manager_resource_unit`, `process_cpu_usage`, `tiflash_cpu_quota`, `tiflash_resource_manager_resource_unit`, and `tiflash_process_cpu_usage`. If the CPU quota monitoring data is empty, there will be an error with the corresponding monitoring metric name, as shown in the following example:
+[実際の作業負荷に基づく容量推定](#estimate-capacity-based-on-actual-workload)機能の監視メトリックには、 `tikv_cpu_quota` 、 `tidb_server_maxprocs` 、 `resource_manager_resource_unit` 、 `process_cpu_usage` 、 `tiflash_cpu_quota` 、 `tiflash_resource_manager_resource_unit` 、および`tiflash_process_cpu_usage`含まれます。CPU クォータ監視データが空の場合、次の例に示すように、対応する監視メトリック名にエラーが発生します。
 
 ```sql
 CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '60m';
 Error 1105 (HY000): There is no CPU quota metrics, metrics 'tikv_cpu_quota' is empty
 ```
 
-If the workload in the time window is too low, or the `resource_manager_resource_unit` and `process_cpu_usage` monitoring data is missing, the following error will be reported. In addition, because TiKV does not monitor CPU utilization on macOS, it does not support capacity estimation based on the actual workload, and will also report this error.
+時間ウィンドウ内のワークロードが低すぎる場合、または`resource_manager_resource_unit`と`process_cpu_usage`監視データが欠落している場合は、次のエラーが報告されます。また、TiKV は macOS 上の CPU 使用率を監視しないため、実際のワークロードに基づく容量推定をサポートしておらず、このエラーも報告されます。
 
 ```sql
 CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '60m';
 ERROR 1105 (HY000): The workload in selected time window is too low, with which TiDB is unable to reach a capacity estimation; please select another time window with higher workload, or calibrate resource by hardware instead
 ```
 
-Specify `WORKLOAD` to view the RU capacity. The default value is `TPCC`.
+RU 容量を表示するには`WORKLOAD`指定します。デフォルト値は`TPCC`です。
 
 ```sql
 CALIBRATE RESOURCE;

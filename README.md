@@ -1,65 +1,65 @@
-# TiDB Documentation
+# TiDB ドキュメント {#tidb-documentation}
 
-Welcome to TiDB documentation!
+TiDB ドキュメントへようこそ!
 
-This repository stores all the source files of [TiDB Docs at the PingCAP website](https://docs.pingcap.com/tidb/stable), while the [pingcap/docs-cn](https://github.com/pingcap/docs-cn) repository stores all the source files of [TiDB Documentation in Chinese](https://docs.pingcap.com/zh/tidb/stable).
+このリポジトリには[PingCAP ウェブサイトの TiDB ドキュメント](https://docs.pingcap.com/tidb/stable)のすべてのソース ファイルが格納され、 [pingcap/ドキュメント](https://github.com/pingcap/docs-cn)リポジトリには[中国語版 TiDB ドキュメント](https://docs.pingcap.com/zh/tidb/stable)のすべてのソース ファイルが格納されます。
 
-If you find documentation issues, feel free to [create an Issue](https://github.com/pingcap/docs/issues/new/choose) to let us know or directly [create a Pull Request](/CONTRIBUTING.md#how-to-contribute) to help fix or update it.
+ドキュメントに問題が見つかった場合は、お気軽に[問題を作成する](https://github.com/pingcap/docs/issues/new/choose)までご連絡いただくか、直接[プルリクエストを作成する](/CONTRIBUTING.md#how-to-contribute)ご連絡いただき、修正または更新をお手伝いください。
 
-If you want to locally customize and output TiDB documentation in PDF format to meet the needs of specific scenarios, such as freely sorting or deleting certain contents in TiDB documentation, please refer to [TiDB Documentation PDF Generation Tutorial](/resources/tidb-pdf-generation-tutorial.md).
+TiDB ドキュメント内の特定のコンテンツを自由に並べ替えたり削除したりするなど、特定のシナリオのニーズに合わせて TiDB ドキュメントをローカルでカスタマイズして PDF 形式で出力する場合は、 [TiDB ドキュメント PDF 生成チュートリアル](/resources/tidb-pdf-generation-tutorial.md)を参照してください。
 
-Currently, the official documentation supports two languages:
+現在、公式ドキュメントは次の 2 つの言語をサポートしています。
 
-- `en`: [documentation in English](https://docs.pingcap.com/tidb/stable)
-- `zh`: [documentation in Chinese](https://docs.pingcap.com/zh/tidb/stable)
+-   `en` : [英語のドキュメント](https://docs.pingcap.com/tidb/stable)
+-   `zh` : [中国語のドキュメント](https://docs.pingcap.com/zh/tidb/stable)
 
-You can use Google Translate to view the documentation in different languages. For example:
+Google 翻訳を使用すると、さまざまな言語でドキュメントを表示できます。例:
 
-- `fr`: [documentation in French](https://docs-pingcap-com.translate.goog/tidb/stable?_x_tr_sl=auto&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp&_x_tr_hist=true)
-- `ja`: [documentation in Japanese](https://docs-pingcap-com.translate.goog/tidb/stable?_x_tr_sl=auto&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp&_x_tr_hist=true)
-- `ko`: [documentation in Korean](https://docs-pingcap-com.translate.goog/tidb/stable?_x_tr_sl=auto&_x_tr_tl=ko&_x_tr_hl=en&_x_tr_pto=wapp&_x_tr_hist=true)
-- `de`: [documentation in German](https://docs-pingcap-com.translate.goog/tidb/stable?_x_tr_sl=auto&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp&_x_tr_hist=true)
-- `es`: [documentation in Spanish](https://docs-pingcap-com.translate.goog/tidb/stable?_x_tr_sl=auto&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp&_x_tr_hist=true)
+-   `fr` : [フランス語のドキュメント](https://docs-pingcap-com.translate.goog/tidb/stable?_x_tr_sl=auto&#x26;_x_tr_tl=fr&#x26;_x_tr_hl=en&#x26;_x_tr_pto=wapp&#x26;_x_tr_hist=true)
+-   `ja` : [日本語のドキュメント](https://docs-pingcap-com.translate.goog/tidb/stable?_x_tr_sl=auto&#x26;_x_tr_tl=ja&#x26;_x_tr_hl=en&#x26;_x_tr_pto=wapp&#x26;_x_tr_hist=true)
+-   `ko` : [韓国語のドキュメント](https://docs-pingcap-com.translate.goog/tidb/stable?_x_tr_sl=auto&#x26;_x_tr_tl=ko&#x26;_x_tr_hl=en&#x26;_x_tr_pto=wapp&#x26;_x_tr_hist=true)
+-   `de` : [ドイツ語のドキュメント](https://docs-pingcap-com.translate.goog/tidb/stable?_x_tr_sl=auto&#x26;_x_tr_tl=de&#x26;_x_tr_hl=en&#x26;_x_tr_pto=wapp&#x26;_x_tr_hist=true)
+-   `es` : [スペイン語のドキュメント](https://docs-pingcap-com.translate.goog/tidb/stable?_x_tr_sl=auto&#x26;_x_tr_tl=es&#x26;_x_tr_hl=en&#x26;_x_tr_pto=wapp&#x26;_x_tr_hist=true)
 
-## Documentation versions
+## ドキュメントのバージョン {#documentation-versions}
 
-Currently, we maintain the following versions of TiDB documentation in different branches:
+現在、さまざまなブランチで次のバージョンの TiDB ドキュメントを管理しています。
 
-| Branch name | TiDB docs version |
-| :---------|:----------|
-| [`master`](https://github.com/pingcap/docs/tree/master) | The latest development version |
-| [`release-8.1`](https://github.com/pingcap/docs/tree/release-8.1) | 8.1 LTS (Long-Term Support) |
-| [`release-8.0`](https://github.com/pingcap/docs/tree/release-8.0) | 8.0 Development Milestone Release |
-| [`release-7.6`](https://github.com/pingcap/docs/tree/release-7.6) | 7.6 Development Milestone Release |
-| [`release-7.5`](https://github.com/pingcap/docs/tree/release-7.5) | 7.5 LTS (Long-Term Support) |
-| [`release-7.4`](https://github.com/pingcap/docs/tree/release-7.4) | 7.4 Development Milestone Release (Archived documentation, no longer updated) |
-| [`release-7.3`](https://github.com/pingcap/docs/tree/release-7.3) | 7.3 Development Milestone Release (Archived documentation, no longer updated) |
-| [`release-7.2`](https://github.com/pingcap/docs/tree/release-7.2) | 7.2 Development Milestone Release (Archived documentation, no longer updated) |
-| [`release-7.1`](https://github.com/pingcap/docs/tree/release-7.1) | 7.1 LTS (Long-Term Support) version |
-| [`release-7.0`](https://github.com/pingcap/docs/tree/release-7.0) | 7.0 Development Milestone Release (Archived documentation, no longer updated) |
-| [`release-6.6`](https://github.com/pingcap/docs/tree/release-6.6) | 6.6 Development Milestone Release (Archived documentation, no longer updated) |
-| [`release-6.5`](https://github.com/pingcap/docs/tree/release-6.5) | 6.5 LTS (Long-Term Support) version |
-| [`release-6.4`](https://github.com/pingcap/docs/tree/release-6.4) | 6.4 Development Milestone Release (Archived documentation, no longer updated) |
-| [`release-6.3`](https://github.com/pingcap/docs/tree/release-6.3) | 6.3 Development Milestone Release (Archived documentation, no longer updated) |
-| [`release-6.2`](https://github.com/pingcap/docs/tree/release-6.2) | 6.2 Development Milestone Release (Archived documentation, no longer updated) |
-| [`release-6.1`](https://github.com/pingcap/docs/tree/release-6.1) | 6.1 LTS (Long-Term Support) version |
-| [`release-6.0`](https://github.com/pingcap/docs/tree/release-6.0) | 6.0 Development Milestone Release (Archived documentation, no longer updated) |
-| [`release-5.4`](https://github.com/pingcap/docs/tree/release-5.4) | 5.4 stable version |
-| [`release-5.3`](https://github.com/pingcap/docs/tree/release-5.3) | 5.3 stable version |
-| [`release-5.2`](https://github.com/pingcap/docs/tree/release-5.2) | 5.2 stable version |
-| [`release-5.1`](https://github.com/pingcap/docs/tree/release-5.1) | 5.1 stable version |
-| [`release-5.0`](https://github.com/pingcap/docs/tree/release-5.0) | 5.0 stable version (Archived documentation, no longer updated) |
-| [`release-4.0`](https://github.com/pingcap/docs/tree/release-4.0) | 4.0 stable version (Archived documentation, no longer updated) |
-| [`release-3.1`](https://github.com/pingcap/docs/tree/release-3.1) | 3.1 stable version (Archived documentation, no longer updated) |
-| [`release-3.0`](https://github.com/pingcap/docs/tree/release-3.0) | 3.0 stable version (Archived documentation, no longer updated) |
-| [`release-2.1`](https://github.com/pingcap/docs/tree/release-2.1) | 2.1 stable version (Archived documentation, no longer updated) |
+| 支店名                                                               | TiDB ドキュメント バージョン                               |
+| :---------------------------------------------------------------- | :---------------------------------------------- |
+| [`master`](https://github.com/pingcap/docs/tree/master)           | 最新の開発バージョン                                      |
+| [`release-8.1`](https://github.com/pingcap/docs/tree/release-8.1) | 8.1 LTS (長期サポート)                                |
+| [`release-8.0`](https://github.com/pingcap/docs/tree/release-8.0) | 8.0 開発マイルストーンリリース                               |
+| [`release-7.6`](https://github.com/pingcap/docs/tree/release-7.6) | 7.6 開発マイルストーンリリース                               |
+| [`release-7.5`](https://github.com/pingcap/docs/tree/release-7.5) | 7.5 LTS (長期サポート)                                |
+| [`release-7.4`](https://github.com/pingcap/docs/tree/release-7.4) | 7.4 開発マイルストーン リリース (アーカイブされたドキュメント、更新されなくなりました) |
+| [`release-7.3`](https://github.com/pingcap/docs/tree/release-7.3) | 7.3 開発マイルストーン リリース (アーカイブされたドキュメント、更新されなくなりました) |
+| [`release-7.2`](https://github.com/pingcap/docs/tree/release-7.2) | 7.2 開発マイルストーン リリース (アーカイブされたドキュメント、更新されなくなりました) |
+| [`release-7.1`](https://github.com/pingcap/docs/tree/release-7.1) | 7.1 LTS（長期サポート）バージョン                            |
+| [`release-7.0`](https://github.com/pingcap/docs/tree/release-7.0) | 7.0 開発マイルストーン リリース (アーカイブされたドキュメント、更新されなくなりました) |
+| [`release-6.6`](https://github.com/pingcap/docs/tree/release-6.6) | 6.6 開発マイルストーン リリース (アーカイブされたドキュメント、更新されなくなりました) |
+| [`release-6.5`](https://github.com/pingcap/docs/tree/release-6.5) | 6.5 LTS（長期サポート）バージョン                            |
+| [`release-6.4`](https://github.com/pingcap/docs/tree/release-6.4) | 6.4 開発マイルストーン リリース (アーカイブされたドキュメント、更新されなくなりました) |
+| [`release-6.3`](https://github.com/pingcap/docs/tree/release-6.3) | 6.3 開発マイルストーン リリース (アーカイブされたドキュメント、更新されなくなりました) |
+| [`release-6.2`](https://github.com/pingcap/docs/tree/release-6.2) | 6.2 開発マイルストーン リリース (アーカイブされたドキュメント、更新されなくなりました) |
+| [`release-6.1`](https://github.com/pingcap/docs/tree/release-6.1) | 6.1 LTS（長期サポート）バージョン                            |
+| [`release-6.0`](https://github.com/pingcap/docs/tree/release-6.0) | 6.0 開発マイルストーン リリース (アーカイブされたドキュメント、更新されなくなりました) |
+| [`release-5.4`](https://github.com/pingcap/docs/tree/release-5.4) | 5.4 安定版                                         |
+| [`release-5.3`](https://github.com/pingcap/docs/tree/release-5.3) | 5.3 安定版                                         |
+| [`release-5.2`](https://github.com/pingcap/docs/tree/release-5.2) | 5.2 安定版                                         |
+| [`release-5.1`](https://github.com/pingcap/docs/tree/release-5.1) | 5.1 安定版                                         |
+| [`release-5.0`](https://github.com/pingcap/docs/tree/release-5.0) | 5.0 安定バージョン (アーカイブされたドキュメント、更新されなくなりました)        |
+| [`release-4.0`](https://github.com/pingcap/docs/tree/release-4.0) | 4.0 安定バージョン (アーカイブされたドキュメント、更新されなくなりました)        |
+| [`release-3.1`](https://github.com/pingcap/docs/tree/release-3.1) | 3.1 安定バージョン (アーカイブされたドキュメント、更新されなくなりました)        |
+| [`release-3.0`](https://github.com/pingcap/docs/tree/release-3.0) | 3.0 安定バージョン (アーカイブされたドキュメント、更新されなくなりました)        |
+| [`release-2.1`](https://github.com/pingcap/docs/tree/release-2.1) | 2.1 安定バージョン (アーカイブされたドキュメント、更新されなくなりました)        |
 
-## Contributing
+## 貢献する {#contributing}
 
-[<img src="media/contribution-map.png" alt="contribution-map" width="180"></img>](https://github.com/pingcap/docs/blob/master/credits.md)
+[<img src="media/contribution-map.png" alt="貢献マップ" width="180">](https://github.com/pingcap/docs/blob/master/credits.md)
 
-See [TiDB Documentation Contributing Guide](/CONTRIBUTING.md) to become a contributor! 🤓
+貢献者になるには[TiDB ドキュメント貢献ガイド](/CONTRIBUTING.md)ご覧ください! 🤓
 
-## License
+## ライセンス {#license}
 
-All documentation starting from TiDB v7.0 is available under the terms of [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
+TiDB v7.0 以降のすべてのドキュメントは、 [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)の条件に基づいて利用できます。

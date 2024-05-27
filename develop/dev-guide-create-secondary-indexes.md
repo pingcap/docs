@@ -1,86 +1,86 @@
 ---
 title: Create a Secondary Index
-summary: Learn steps, rules, and examples to create a secondary index.
+summary: セカンダリ インデックスを作成する手順、ルール、および例を学習します。
 ---
 
-# Create a Secondary Index
+# セカンダリインデックスを作成する {#create-a-secondary-index}
 
-This document describes how to create a secondary index using SQL and various programming languages and lists the rules of index creation. In this document, the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application is taken as an example to walk you through the steps of secondary index creation.
+このドキュメントでは、SQL とさまざまなプログラミング言語を使用してセカンダリ インデックスを作成する方法を説明し、インデックス作成のルールを示します。このドキュメントでは、 [書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションを例に、セカンダリ インデックスの作成手順を説明します。
 
-## Before you start
+## 始める前に {#before-you-start}
 
-Before creating a secondary index, do the following:
+セカンダリ インデックスを作成する前に、次の操作を実行します。
 
-- [Build a TiDB Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
-- Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md).
-- [Create a Database](/develop/dev-guide-create-database.md).
-- [Create a Table](/develop/dev-guide-create-table.md).
+-   [TiDB サーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
+-   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)読んでください。
+-   [データベースを作成する](/develop/dev-guide-create-database.md) 。
+-   [テーブルを作成する](/develop/dev-guide-create-table.md) 。
 
-## What is secondary index
+## セカンダリインデックスとは {#what-is-secondary-index}
 
-A secondary index is a logical object in a TiDB cluster. You can simply regard it as a sorting type of data that TiDB uses to improve the query performance. In TiDB, creating a secondary index is an online operation, which does not block any data read and write operations on a table. For each index, TiDB creates references for each row in a table and sorts the references by selected columns instead of by data directly.
+セカンダリ インデックスは、TiDB クラスター内の論理オブジェクトです。これは、クエリ パフォーマンスを向上させるために TiDB が使用するデータの並べ替えタイプと見なすことができます。TiDB では、セカンダリ インデックスの作成はオンライン操作であり、テーブルでのデータの読み取りおよび書き込み操作をブロックしません。各インデックスについて、TiDB はテーブル内の各行の参照を作成し、データではなく選択した列で参照を並べ替えます。
 
 <CustomContent platform="tidb">
 
-For more information about secondary indexes, see [Secondary Indexes](/best-practices/tidb-best-practices.md#secondary-index).
+セカンダリインデックスの詳細については、 [セカンダリインデックス](/best-practices/tidb-best-practices.md#secondary-index)参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-For more information about secondary indexes, see [Secondary Indexes](https://docs.pingcap.com/tidb/stable/tidb-best-practices#secondary-index).
+セカンダリインデックスの詳細については、 [セカンダリインデックス](https://docs.pingcap.com/tidb/stable/tidb-best-practices#secondary-index)参照してください。
 
 </CustomContent>
 
-In TiDB, you can either [add a secondary index to an existing table](#add-a-secondary-index-to-an-existing-table) or [create a secondary index when creating a new table](#create-a-secondary-index-when-creating-a-new-table).
+TiDB では、 [既存のテーブルにセカンダリインデックスを追加する](#add-a-secondary-index-to-an-existing-table)または[新しいテーブルを作成するときにセカンダリインデックスを作成する](#create-a-secondary-index-when-creating-a-new-table)いずれかを選択できます。
 
-## Add a secondary index to an existing table
+## 既存のテーブルにセカンダリインデックスを追加する {#add-a-secondary-index-to-an-existing-table}
 
-To add a secondary index to an existing table, you can use the [CREATE INDEX](/sql-statements/sql-statement-create-index.md) statement as follows:
+既存のテーブルにセカンダリ インデックスを追加するには、次のように[インデックスの作成](/sql-statements/sql-statement-create-index.md)ステートメントを使用します。
 
 ```sql
 CREATE INDEX {index_name} ON {table_name} ({column_names});
 ```
 
-Parameter description:
+パラメータの説明:
 
-- `{index_name}`: the name of a secondary index.
-- `{table_name}`: the table name.
-- `{column_names}`: the names of the columns to be indexed, separated by semi-colon commas.
+-   `{index_name}` : セカンダリインデックスの名前。
+-   `{table_name}` : テーブル名。
+-   `{column_names}` : インデックスを作成する列の名前。セミコロンで区切られます。
 
-## Create a secondary index when creating a new table
+## 新しいテーブルを作成するときにセカンダリインデックスを作成する {#create-a-secondary-index-when-creating-a-new-table}
 
-To create a secondary index at the same time as table creation, you can add a clause containing the `KEY` keyword to the end of the [CREATE TABLE](/sql-statements/sql-statement-create-table.md) statement:
+テーブルの作成と同時にセカンダリ インデックスを作成するには、 [テーブルの作成](/sql-statements/sql-statement-create-table.md)ステートメントの末尾に`KEY`キーワードを含む句を追加します。
 
 ```sql
 KEY `{index_name}` (`{column_names}`)
 ```
 
-Parameter description:
+パラメータの説明:
 
-- `{index_name}`: the name of a secondary index.
-- `{column_names}`: the names of the columns to be indexed, separated by semi-colon commas.
+-   `{index_name}` : セカンダリインデックスの名前。
+-   `{column_names}` : インデックスを作成する列の名前。セミコロンで区切られます。
 
-## Rules in secondary index creation
+## セカンダリインデックス作成のルール {#rules-in-secondary-index-creation}
 
-See [Best Practices for Indexing](/develop/dev-guide-index-best-practice.md).
+[インデックス作成のベストプラクティス](/develop/dev-guide-index-best-practice.md)参照。
 
-## Example
+## 例 {#example}
 
-Suppose you want the `bookshop` application to support **searching for all books published in a given year**.
+`bookshop`アプリケーション**で、特定の年に出版されたすべての書籍の検索を**サポートするとします。
 
-The fields in the `books` table are as follows:
+`books`テーブルのフィールドは次のとおりです。
 
-| Field name   | Type          | Field description                                                          |
-|--------------|---------------|------------------------------------------------------------------|
-| id           | bigint(20)    | Unique ID of the book                                            |
-| title        | varchar(100)  | Book title                                                       |
-| type         | enum          | Types of books (for example, magazines, animations, and teaching aids) |
-| stock        | bigint(20)    | Stock                                                            |
-| price        | decimal(15,2) | Price                                                            |
-| published_at | datetime      | Date of publishing                                                  |
+| フィールド名 | タイプ          | フィールドの説明               |
+| ------ | ------------ | ---------------------- |
+| id     | ビッグイント(20)   | 本の一意のID                |
+| タイトル   | varchar(100) | 書籍名                    |
+| タイプ    | 列挙型          | 書籍の種類（雑誌、アニメーション、教材など） |
+| ストック   | ビッグイント(20)   | ストック                   |
+| 価格     | 小数点(15,2)    | 価格                     |
+| 公開日時   | 日付時刻         | 発行日                    |
 
-The `books` table is created using the following SQL statement:
+`books`テーブルは、次の SQL ステートメントを使用して作成されます。
 
 ```sql
 CREATE TABLE `bookshop`.`books` (
@@ -94,92 +94,86 @@ CREATE TABLE `bookshop`.`books` (
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 ```
 
-To support the searching by year feature, you need to write a SQL statement to **search for all books published in a given year**. Taking 2022 as an example, write a SQL statement as follows:
+年による検索機能をサポートするには、**特定の年に出版されたすべての書籍を検索する**SQL ステートメントを記述する必要があります。2022 年を例にとると、次のように SQL ステートメントを記述します。
 
 ```sql
 SELECT * FROM `bookshop`.`books` WHERE `published_at` >= '2022-01-01 00:00:00' AND `published_at` < '2023-01-01 00:00:00';
 ```
 
-To check the execution plan of the SQL statement, you can use the [`EXPLAIN`](/sql-statements/sql-statement-explain.md) statement.
+SQL ステートメントの実行プランを確認するには、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)ステートメントを使用できます。
 
 ```sql
 EXPLAIN SELECT * FROM `bookshop`.`books` WHERE `published_at` >= '2022-01-01 00:00:00' AND `published_at` < '2023-01-01 00:00:00';
 ```
 
-The following is an example output of the execution plan:
+以下は実行プランの出力例です。
 
-```
-+-------------------------+----------+-----------+---------------+--------------------------------------------------------------------------------------------------------------------------+
-| id                      | estRows  | task      | access object | operator info                                                                                                            |
-+-------------------------+----------+-----------+---------------+--------------------------------------------------------------------------------------------------------------------------+
-| TableReader_7           | 346.32   | root      |               | data:Selection_6                                                                                                         |
-| └─Selection_6           | 346.32   | cop[tikv] |               | ge(bookshop.books.published_at, 2022-01-01 00:00:00.000000), lt(bookshop.books.published_at, 2023-01-01 00:00:00.000000) |
-|   └─TableFullScan_5     | 20000.00 | cop[tikv] | table:books   | keep order:false                                                                                                         |
-+-------------------------+----------+-----------+---------------+--------------------------------------------------------------------------------------------------------------------------+
-3 rows in set (0.61 sec)
-```
+    +-------------------------+----------+-----------+---------------+--------------------------------------------------------------------------------------------------------------------------+
+    | id                      | estRows  | task      | access object | operator info                                                                                                            |
+    +-------------------------+----------+-----------+---------------+--------------------------------------------------------------------------------------------------------------------------+
+    | TableReader_7           | 346.32   | root      |               | data:Selection_6                                                                                                         |
+    | └─Selection_6           | 346.32   | cop[tikv] |               | ge(bookshop.books.published_at, 2022-01-01 00:00:00.000000), lt(bookshop.books.published_at, 2023-01-01 00:00:00.000000) |
+    |   └─TableFullScan_5     | 20000.00 | cop[tikv] | table:books   | keep order:false                                                                                                         |
+    +-------------------------+----------+-----------+---------------+--------------------------------------------------------------------------------------------------------------------------+
+    3 rows in set (0.61 sec)
 
-In the example output, **TableFullScan** is displayed in the `id` column, which means that TiDB is ready to do a full table scan on the `books` table in this query. In the case of a large amount of data, however, a full table scan might be quite slow and cause a fatal impact.
+出力例では、 **TableFullScan が**`id`列に表示されています。これは、TiDB がこのクエリの`books`のテーブルに対して完全なテーブル スキャンを実行する準備ができていることを意味します。ただし、大量のデータの場合、完全なテーブル スキャンは非常に遅くなり、致命的な影響を与える可能性があります。
 
-To avoid such impact, you can add an index for the `published_at` column to the `books` table as follows:
+このような影響を回避するには、次のように`published_at`列目のインデックスを`books`テーブルに追加します。
 
 ```sql
 CREATE INDEX `idx_book_published_at` ON `bookshop`.`books` (`bookshop`.`books`.`published_at`);
 ```
 
-After adding the index, execute the `EXPLAIN` statement again to check the execution plan.
+インデックスを追加した後、 `EXPLAIN`ステートメントを再度実行して実行プランを確認します。
 
-The following is an example output.
+以下は出力例です。
 
-```
-+-------------------------------+---------+-----------+--------------------------------------------------------+-------------------------------------------------------------------+
-| id                            | estRows | task      | access object                                          | operator info                                                     |
-+-------------------------------+---------+-----------+--------------------------------------------------------+-------------------------------------------------------------------+
-| IndexLookUp_10                | 146.01  | root      |                                                        |                                                                   |
-| ├─IndexRangeScan_8(Build)     | 146.01  | cop[tikv] | table:books, index:idx_book_published_at(published_at) | range:[2022-01-01 00:00:00,2023-01-01 00:00:00), keep order:false |
-| └─TableRowIDScan_9(Probe)     | 146.01  | cop[tikv] | table:books                                            | keep order:false                                                  |
-+-------------------------------+---------+-----------+--------------------------------------------------------+-------------------------------------------------------------------+
-3 rows in set (0.18 sec)
-```
+    +-------------------------------+---------+-----------+--------------------------------------------------------+-------------------------------------------------------------------+
+    | id                            | estRows | task      | access object                                          | operator info                                                     |
+    +-------------------------------+---------+-----------+--------------------------------------------------------+-------------------------------------------------------------------+
+    | IndexLookUp_10                | 146.01  | root      |                                                        |                                                                   |
+    | ├─IndexRangeScan_8(Build)     | 146.01  | cop[tikv] | table:books, index:idx_book_published_at(published_at) | range:[2022-01-01 00:00:00,2023-01-01 00:00:00), keep order:false |
+    | └─TableRowIDScan_9(Probe)     | 146.01  | cop[tikv] | table:books                                            | keep order:false                                                  |
+    +-------------------------------+---------+-----------+--------------------------------------------------------+-------------------------------------------------------------------+
+    3 rows in set (0.18 sec)
 
-In the output, **IndexRangeScan** is displayed instead of **TableFullScan**, which means that TiDB is ready to use indexes to do this query.
+出力では、 **TableFullScan**の代わりに**IndexRangeScan**が表示されます。これは、TiDB がインデックスを使用してこのクエリを実行する準備ができていることを意味します。
 
-The words such as **TableFullScan** and **IndexRangeScan** in the execution plan are [operators](/explain-overview.md#operator-overview) in TiDB. For more information about execution plans and operators, see [TiDB Query Execution Plan Overview](/explain-overview.md).
+実行プラン内の**TableFullScan**や**IndexRangeScan**などの単語は TiDB では[オペレーター](/explain-overview.md#operator-overview)です。実行プランと演算子の詳細については[TiDB クエリ実行プランの概要](/explain-overview.md)を参照してください。
 
 <CustomContent platform="tidb">
 
-The execution plan does not return the same operator every time. This is because TiDB uses a **Cost-Based Optimization (CBO)** approach, in which an execution plan depends on both rules and data distribution. For more information about TiDB SQL performance, see [SQL Tuning Overview](/sql-tuning-overview.md).
+実行プランは毎回同じ演算子を返すわけではありません。これは、TiDB が**コストベース最適化 (CBO)**アプローチを使用しているためです。このアプローチでは、実行プランはルールとデータ分布の両方に依存します。TiDB TiDB SQLパフォーマンスの詳細については、 [SQL チューニングの概要](/sql-tuning-overview.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-The execution plan does not return the same operator every time. This is because TiDB uses a **Cost-Based Optimization (CBO)** approach, in which an execution plan depends on both rules and data distribution. For more information about TiDB SQL performance, see [SQL Tuning Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md).
+実行プランは毎回同じ演算子を返すわけではありません。これは、TiDB が**コストベース最適化 (CBO)**アプローチを使用しているためです。このアプローチでは、実行プランはルールとデータ分布の両方に依存します。TiDB TiDB SQLパフォーマンスの詳細については、 [SQL チューニングの概要](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)を参照してください。
 
 </CustomContent>
 
-> **Note:**
+> **注記：**
 >
-> TiDB also supports explicit use of indexes when querying, and you can use [Optimizer Hints](/optimizer-hints.md) or [SQL Plan Management (SPM)](/sql-plan-management.md) to artificially control the use of indexes. But if you do not know well about indexes, optimizer hints, or SPM, **DO NOT** use this feature to avoid any unexpected results.
+> TiDB はクエリ実行時にインデックスを明示的に使用することもサポートしており、 [オプティマイザのヒント](/optimizer-hints.md)または[SQL プラン管理 (SPM)](/sql-plan-management.md)を使用してインデックスの使用を人為的に制御できます。ただし、インデックス、オプティマイザー ヒント、または SPM についてよく知らない場合は、予期しない結果を回避するためにこの機能を使用**しないでください**。
 
-To query the indexes on a table, you can use the [SHOW INDEXES](/sql-statements/sql-statement-show-indexes.md) statement:
+テーブルのインデックスをクエリするには、次[インデックスを表示](/sql-statements/sql-statement-show-indexes.md)ステートメントを使用できます。
 
 ```sql
 SHOW INDEXES FROM `bookshop`.`books`;
 ```
 
-The following is an example output:
+出力例は次のとおりです。
 
-```
-+-------+------------+-----------------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+-----------+
-| Table | Non_unique | Key_name              | Seq_in_index | Column_name  | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression | Clustered |
-+-------+------------+-----------------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+-----------+
-| books |          0 | PRIMARY               |            1 | id           | A         |           0 |     NULL | NULL   |      | BTREE      |         |               | YES     | NULL       | YES       |
-| books |          1 | idx_book_published_at |            1 | published_at | A         |           0 |     NULL | NULL   |      | BTREE      |         |               | YES     | NULL       | NO        |
-+-------+------------+-----------------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+-----------+
-2 rows in set (1.63 sec)
-```
+    +-------+------------+-----------------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+-----------+
+    | Table | Non_unique | Key_name              | Seq_in_index | Column_name  | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression | Clustered |
+    +-------+------------+-----------------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+-----------+
+    | books |          0 | PRIMARY               |            1 | id           | A         |           0 |     NULL | NULL   |      | BTREE      |         |               | YES     | NULL       | YES       |
+    | books |          1 | idx_book_published_at |            1 | published_at | A         |           0 |     NULL | NULL   |      | BTREE      |         |               | YES     | NULL       | NO        |
+    +-------+------------+-----------------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+-----------+
+    2 rows in set (1.63 sec)
 
-## Next step
+## 次のステップ {#next-step}
 
-After creating a database and adding tables and secondary indexes to it, you can start adding the data [write](/develop/dev-guide-insert-data.md) and [read](/develop/dev-guide-get-data-from-single-table.md) features to your application.
+データベースを作成し、テーブルとセカンダリ インデックスを追加したら、アプリケーションにデータ[書く](/develop/dev-guide-insert-data.md)と[読む](/develop/dev-guide-get-data-from-single-table.md)機能を追加できます。

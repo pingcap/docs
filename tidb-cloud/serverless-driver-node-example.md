@@ -1,55 +1,51 @@
 ---
 title: TiDB Cloud Serverless Driver Node.js Tutorial
-summary: Learn how to use TiDB Cloud serverless driver in a local Node.js project.
+summary: ローカル Node.js プロジェクトでTiDB Cloudサーバーレス ドライバーを使用する方法を学習します。
 ---
 
-# TiDB Cloud Serverless Driver Node.js Tutorial
+# TiDB CloudレスDriverNode.js チュートリアル {#tidb-cloud-serverless-driver-node-js-tutorial}
 
-This tutorial describes how to use TiDB Cloud serverless driver in a local Node.js project.
+このチュートリアルでは、ローカル Node.js プロジェクトでTiDB Cloudサーバーレス ドライバーを使用する方法について説明します。
 
-> **Note:**
+> **注記：**
 >
-> - This tutorial is applicable to TiDB Serverless clusters only. 
-> - To learn how to use TiDB Cloud serverless driver with Cloudflare Workers, Vercel Edge Functions, and Netlify Edge Functions, check out our [Insights into Automotive Sales](https://car-sales-insight.vercel.app/) and the [sample repository](https://github.com/tidbcloud/car-sales-insight).
+> -   このチュートリアルは、TiDB Serverless クラスターにのみ適用されます。
+> -   Cloudflare Workers、Vercel Edge Functions、Netlify Edge Functions でTiDB Cloudサーバーレス ドライバーを使用する方法については、 [自動車販売に関する洞察](https://car-sales-insight.vercel.app/)と[サンプルリポジトリ](https://github.com/tidbcloud/car-sales-insight)ご覧ください。
 
-## Before you begin
+## あなたが始める前に {#before-you-begin}
 
-To complete this step-by-step tutorial, you need the following:
+このステップバイステップのチュートリアルを完了するには、次のものが必要です。
 
-- [Node.js](https://nodejs.org/en) >= 18.0.0.
-- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
-- A TiDB Serverless cluster. If you don't have any, you can [create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+-   [Node.js](https://nodejs.org/en) &gt;= 18.0.0。
+-   [ネプ](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)またはお好みのパッケージ マネージャーを使用します。
+-   TiDB サーバーレス クラスター。ない場合は、 [TiDBサーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)使用できます。
 
-## Step 1. Create a local Node.js project
+## ステップ1. ローカルNode.jsプロジェクトを作成する {#step-1-create-a-local-node-js-project}
 
-1. Create a project named `node-example`:
+1.  `node-example`という名前のプロジェクトを作成します。
 
     ```shell
     mkdir node-example
     cd node-example
     ```
 
-2. Install the TiDB Cloud serverless driver using npm or your preferred package manager.
+2.  npm または任意のパッケージ マネージャーを使用して、 TiDB Cloudサーバーレス ドライバーをインストールします。
 
-    The following command takes installation with npm as an example. Executing this command will create a `node_modules` directory and a `package.json` file in your project directory.
+    次のコマンドは、npm を使用したインストールを例にしています。このコマンドを実行すると、プロジェクト ディレクトリに`node_modules`ディレクトリと`package.json`ファイルが作成されます。
 
-    ```
-    npm install @tidbcloud/serverless
-    ```
+        npm install @tidbcloud/serverless
 
-## Step 2. Use the serverless driver
+## ステップ2. サーバーレスドライバーを使用する {#step-2-use-the-serverless-driver}
 
-The serverless driver supports both CommonJS and ES modules. The following steps take the usage of the ES module as an example.
+サーバーレス ドライバーは、CommonJS モジュールと ES モジュールの両方をサポートしています。次の手順では、ES モジュールの使用例を示します。
 
-1. On the overview page of your TiDB Cloud Serverless cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
+1.  TiDB Cloud Serverless クラスターの概要ページで、右上隅の**[接続]**をクリックし、表示されるダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
 
-    ```
-   mysql://[username]:[password]@[host]/[database]
-    ```
-   
-2. In the `package.json` file, specify the ES module by adding `type: "module"`. 
+        mysql://[username]:[password]@[host]/[database]
 
-    For example:
+2.  `package.json`ファイルで、 `type: "module"`を追加して ES モジュールを指定します。
+
+    例えば：
 
     ```json
     {
@@ -60,36 +56,32 @@ The serverless driver supports both CommonJS and ES modules. The following steps
     }
     ```
 
-3. Create a file named `index.js` in your project directory and add the following code:
+3.  プロジェクト ディレクトリに`index.js`という名前のファイルを作成し、次のコードを追加します。
 
     ```js
     import { connect } from '@tidbcloud/serverless'
-    
+
     const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]'}) // replace with your TiDB Serverless cluster information
     console.log(await conn.execute("show tables"))
     ```
 
-4. Run your project with the following command:
+4.  次のコマンドでプロジェクトを実行します。
 
-    ```
-    node index.js
-    ```
+        node index.js
 
-## Compatibility with earlier versions of Node.js
+## Node.js の以前のバージョンとの互換性 {#compatibility-with-earlier-versions-of-node-js}
 
-If you are using Node.js earlier than 18.0.0, which does not have a global `fetch` function, you can take the following steps to get `fetch`:
+グローバル`fetch`関数を持たない Node.js 18.0.0 より前のバージョンを使用している場合は、次の手順で`fetch`を取得できます。
 
-1. Install a package that provides `fetch`, such as `undici`:
+1.  `undici`など、 `fetch`を提供するパッケージをインストールします。
 
-    ```
-    npm install undici
-    ``` 
+        npm install undici
 
-2. Pass the `fetch` function to the `connect` function:
+2.  `fetch`関数を`connect`関数に渡します。
 
     ```js
     import { connect } from '@tidbcloud/serverless'
     import { fetch } from 'undici'
-    
+
     const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]',fetch})
     ```

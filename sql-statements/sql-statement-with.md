@@ -1,15 +1,15 @@
 ---
 title: WITH | TiDB SQL Statement Reference
-summary: An overview of the usage of WITH (Common Table Expression) for the TiDB database.
+summary: TiDB データベースの WITH (共通テーブル式) の使用法の概要。
 ---
 
-# WITH
+# と {#with}
 
-A Common Table Expression (CTE) is a temporary result set that can be referred multiple times within a SQL statement to improve the statement's readability and execution efficiency. You can apply the `WITH` statement to use Common Table Expressions.
+共通テーブル式 (CTE) は、SQL ステートメント内で複数回参照できる一時的な結果セットであり、ステートメントの可読性と実行効率を向上させます。共通テーブル式を使用するには、 `WITH`ステートメントを適用できます。
 
-## Synopsis
+## 概要 {#synopsis}
 
-**WithClause:**
+**句:**
 
 ```ebnf+diagram
 WithClause ::=
@@ -17,7 +17,7 @@ WithClause ::=
 |       "WITH" "RECURSIVE" WithList
 ```
 
-**WithList:**
+**リスト付き:**
 
 ```ebnf+diagram
 WithList ::=
@@ -25,68 +25,64 @@ WithList ::=
 |       CommonTableExpr
 ```
 
-**CommonTableExpr:**
+**共通テーブル表現:**
 
 ```ebnf+diagram
 CommonTableExpr ::=
         Identifier IdentListWithParenOpt "AS" SubSelect
 ```
 
-**IdentListWithParenOpt:**
+**親オプション付き識別子リスト:**
 
 ```ebnf+diagram
 IdentListWithParenOpt ::=
 ( '(' IdentList ')' )?
 ```
 
-## Examples
+## 例 {#examples}
 
-Non-recursive CTE:
+非再帰CTE:
 
 ```sql
 WITH cte AS (SELECT 1, 2) SELECT * FROM cte t1, cte t2;
 ```
 
-```
-+---+---+---+---+
-| 1 | 2 | 1 | 2 |
-+---+---+---+---+
-| 1 | 2 | 1 | 2 |
-+---+---+---+---+
-1 row in set (0.00 sec)
-```
+    +---+---+---+---+
+    | 1 | 2 | 1 | 2 |
+    +---+---+---+---+
+    | 1 | 2 | 1 | 2 |
+    +---+---+---+---+
+    1 row in set (0.00 sec)
 
-Recursive CTE:
+再帰CTE:
 
 ```sql
 WITH RECURSIVE cte(a) AS (SELECT 1 UNION SELECT a+1 FROM cte WHERE a < 5) SELECT * FROM cte;
 ```
 
-```
-+---+
-| a |
-+---+
-| 1 |
-| 2 |
-| 3 |
-| 4 |
-| 5 |
-+---+
-5 rows in set (0.00 sec)
-```
+    +---+
+    | a |
+    +---+
+    | 1 |
+    | 2 |
+    | 3 |
+    | 4 |
+    | 5 |
+    +---+
+    5 rows in set (0.00 sec)
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-* In strict mode, when the data length recursively calculated exceeds the data length of the seed part, TiDB returns a warning while MySQL returns an error. In non-strict mode, the behavior of TiDB is consistent with that of MySQL.
-* The data type for recursive CTE is determined by the seed part. The data type of the seed part is not completely consistent with MySQL in some cases (such as functions).
-* In the case of multiple `UNION` / `UNION ALL` operators, MySQL does not allow `UNION` to be followed by `UNION ALL`, but TiDB does.
-* If there is a problem with the definition of a CTE, TiDB will report an error, while MySQL will not if the CTE is not referred.
+-   厳密モードでは、再帰的に計算されたデータ長がシード部分のデータ長を超えると、TiDB は警告を返し、MySQL はエラーを返します。非厳密モードでは、TiDB の動作は MySQL の動作と一致します。
+-   再帰 CTE のデータ型はシード部分によって決まります。シード部分のデータ型は、場合によっては MySQL と完全に一致しません (関数など)。
+-   `UNION` / `UNION ALL`演算子が複数ある場合、MySQL では`UNION`の後に`UNION ALL`を続けることはできませんが、TiDB では可能です。
+-   CTE の定義に問題がある場合、TiDB はエラーを報告しますが、CTE が参照されていない場合、MySQL はエラーを報告しません。
 
-## See also
+## 参照 {#see-also}
 
-* [Developer Guide: Common Table Expression](/develop/dev-guide-use-common-table-expression.md)
-* [SELECT](/sql-statements/sql-statement-select.md)
-* [INSERT](/sql-statements/sql-statement-insert.md)
-* [DELETE](/sql-statements/sql-statement-delete.md)
-* [UPDATE](/sql-statements/sql-statement-update.md)
-* [REPLACE](/sql-statements/sql-statement-replace.md)
+-   [開発者ガイド: 共通テーブル式](/develop/dev-guide-use-common-table-expression.md)
+-   [選択する](/sql-statements/sql-statement-select.md)
+-   [入れる](/sql-statements/sql-statement-insert.md)
+-   [消去](/sql-statements/sql-statement-delete.md)
+-   [アップデート](/sql-statements/sql-statement-update.md)
+-   [交換する](/sql-statements/sql-statement-replace.md)

@@ -1,27 +1,27 @@
 ---
 title: FLASHBACK DATABASE
-summary: Learn the usage of FLASHBACK DATABASE in TiDB databases.
+summary: TiDB データベースでの FLASHBACK DATABASE の使用方法を学習します。
 ---
 
-# FLASHBACK DATABASE
+# フラッシュバックデータベース {#flashback-database}
 
-TiDB v6.4.0 introduces the `FLASHBACK DATABASE` syntax. You can use `FLASHBACK DATABASE` to restore a database and its data that are deleted by the `DROP` statement within the Garbage Collection (GC) life time.
+TiDB v6.4.0 では`FLASHBACK DATABASE`構文が導入されています。3 `FLASHBACK DATABASE`使用すると、ガベージ コレクション (GC) の有効期間内に`DROP`ステートメントによって削除されたデータベースとそのデータを復元できます。
 
-You can set the retention time of historical data by configuring the [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) system variable. The default value is `10m0s`. You can query the current `safePoint`, that is, the time point GC has been performed up to, using the following SQL statement:
+[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)システム変数を設定することで、履歴データの保持時間を設定できます。デフォルト値は`10m0s`です。次の SQL 文を使用して、現在の`safePoint` 、つまり GC が実行された時点を照会できます。
 
 ```sql
 SELECT * FROM mysql.tidb WHERE variable_name = 'tikv_gc_safe_point';
 ```
 
-As long as a database is deleted by `DROP` after the `tikv_gc_safe_point` time, you can use `FLASHBACK DATABASE` to restore the database.
+`tikv_gc_safe_point`回目以降に`DROP`でデータベースが削除されていれば、 `FLASHBACK DATABASE`使用してデータベースを復元できます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```sql
 FLASHBACK DATABASE DBName [TO newDBName]
 ```
 
-### Synopsis
+### 概要 {#synopsis}
 
 ```ebnf+diagram
 FlashbackDatabaseStmt ::=
@@ -30,21 +30,21 @@ FlashbackToNewName ::=
     ( 'TO' Identifier )?
 ```
 
-## Notes
+## ノート {#notes}
 
-* If the database is deleted before the `tikv_gc_safe_point` time, you cannot restore the data using the `FLASHBACK DATABASE` statement. The `FLASHBACK DATABASE` statement returns an error similar to `ERROR 1105 (HY000): Can't find dropped database 'test' in GC safe point 2022-11-06 16:10:10 +0800 CST`.
+-   `tikv_gc_safe_point`回目より前にデータベースが削除された場合、 `FLASHBACK DATABASE`ステートメントを使用してデータを復元することはできません。 `FLASHBACK DATABASE`ステートメントは`ERROR 1105 (HY000): Can't find dropped database 'test' in GC safe point 2022-11-06 16:10:10 +0800 CST`と同様のエラーを返します。
 
-* You cannot restore the same database multiple times using the `FLASHBACK DATABASE` statement. Because the database restored by `FLASHBACK DATABASE` has the same schema ID as the original database, restoring the same database multiple times leads to duplicate schema IDs. In TiDB, the database schema ID must be globally unique.
+-   `FLASHBACK DATABASE`ステートメントを使用して同じデータベースを複数回復元することはできません。3 `FLASHBACK DATABASE`復元されたデータベースは元のデータベースと同じスキーマ ID を持つため、同じデータベースを複数回復元するとスキーマ ID が重複します。TiDB では、データベース スキーマ ID はグローバルに一意である必要があります。
 
-* When TiDB Binlog is enabled, note the following when you use `FLASHBACK DATABASE`:
+-   TiDB Binlogが有効になっている場合、 `FLASHBACK DATABASE`使用するときは次の点に注意してください。
 
-    * The downstream secondary database must support `FLASHBACK DATABASE`.
-    * The GC life time of the secondary database must be longer than that of the primary database. Otherwise, the latency between the upstream and the downstream might lead to data restoration failure in the downstream.
-    * If TiDB Binlog replication encounters an error, you need to filter out the database in TiDB Binlog and then manually import full data for this database.
+    -   ダウンストリームセカンダリデータベースは`FLASHBACK DATABASE`サポートする必要があります。
+    -   セカンダリ データベースの GC 有効期間は、プライマリ データベースの GC 有効期間よりも長くする必要があります。そうでない場合、アップストリームとダウンストリーム間のレイテンシーにより、ダウンストリームでのデータ復元が失敗する可能性があります。
+    -   TiDB Binlogレプリケーションでエラーが発生した場合は、TiDB Binlog内のデータベースをフィルター処理し、このデータベースの完全なデータを手動でインポートする必要があります。
 
-## Example
+## 例 {#example}
 
-- Restore the `test` database that is deleted by `DROP`:
+-   `DROP`によって削除された`test`データベースを復元します。
 
     ```sql
     DROP DATABASE test;
@@ -54,7 +54,7 @@ FlashbackToNewName ::=
     FLASHBACK DATABASE test;
     ```
 
-- Restore the `test` database that is deleted by `DROP` and rename it to `test1`:
+-   `DROP`で削除された`test`データベースを復元し、名前を`test1`に変更します。
 
     ```sql
     DROP DATABASE test;
@@ -64,6 +64,6 @@ FlashbackToNewName ::=
     FLASHBACK DATABASE test TO test1;
     ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。

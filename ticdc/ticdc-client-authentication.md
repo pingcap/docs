@@ -1,24 +1,24 @@
 ---
 title: TiCDC Client Authentication
-summary: Introduce how to perform TiCDC client authentication using the command-line tool or OpenAPI.
+summary: コマンドライン ツールまたは OpenAPI を使用して TiCDC クライアント認証を実行する方法を紹介します。
 ---
 
-# TiCDC Client Authentication
+# TiCDC クライアント認証 {#ticdc-client-authentication}
 
-Starting from v8.1.0, TiCDC supports client authentication using Mutual Transport Layer Security (mTLS) or TiDB username and password. 
+v8.1.0 以降、TiCDC は Mutual Transport Layer Security (mTLS) または TiDB ユーザー名とパスワードを使用したクライアント認証をサポートします。
 
-- mTLS authentication provides security control at the transport layer, enabling TiCDC to verify the client identity.
-- TiDB username and password authentication provides security control at the application layer, ensuring that only authorized users can log in through the TiCDC node.
+-   mTLS 認証はトランスポートレイヤーでのセキュリティ制御を提供し、TiCDC がクライアント ID を検証できるようにします。
+-   TiDB のユーザー名とパスワードの認証により、アプリケーションレイヤーでセキュリティ制御が提供され、許可されたユーザーのみが TiCDC ノードを通じてログインできるようになります。
 
-These two authentication methods can be used either independently or in combination to meet different scenarios and security requirements. 
+これら 2 つの認証方法は、さまざまなシナリオやセキュリティ要件を満たすために、単独でも組み合わせても使用できます。
 
-> **Note:**
+> **注記：**
 >
-> To ensure the security of network access, it is strongly recommended to use TiCDC client authentication only when [TLS is enabled](/enable-tls-between-clients-and-servers.md). If TLS is not enabled, the username and password are transmitted as plaintext over the network, which can lead to serious credential leaks.
+> ネットワーク アクセスのセキュリティを確保するため、 [TLSが有効になっています](/enable-tls-between-clients-and-servers.md)場合にのみ TiCDC クライアント認証を使用することを強くお勧めします。TLS が有効になっていないと、ユーザー名とパスワードがネットワーク上でプレーンテキストとして送信され、重大な資格情報漏洩につながる可能性があります。
 
-## Use mTLS for client authentication
+## クライアント認証にmTLSを使用する {#use-mtls-for-client-authentication}
 
-1. In the TiCDC server, configure the `security.mtls` parameter as `true` to enable mTLS authentication:
+1.  TiCDCサーバーで、 `security.mtls`パラメータを`true`に設定して、mTLS 認証を有効にします。
 
     ```toml
     [security]
@@ -26,20 +26,20 @@ These two authentication methods can be used either independently or in combinat
     mtls = true
     ```
 
-2. Configure the client certificate.
+2.  クライアント証明書を構成します。
 
     <SimpleTab groupId="cdc">
-    <div label="TiCDC command-line tool" value="cdc-cli">
+     <div label="TiCDC command-line tool" value="cdc-cli">
 
-    When using the [TiCDC command-line tool](/ticdc/ticdc-manage-changefeed.md), you can specify the client certificate using the following methods. TiCDC will attempt to read the client certificate in the following order:
+    [TiCDC コマンドラインツール](/ticdc/ticdc-manage-changefeed.md)使用する場合、次の方法でクライアント証明書を指定できます。TiCDC は次の順序でクライアント証明書の読み取りを試みます。
 
-    1. Specify the certificate and private key using the command-line parameters `--cert` and `--key`. If the server uses a self-signed certificate, you also need to specify the trusted CA certificate using the `--ca` parameter.
+    1.  コマンドラインパラメータ`--cert`と`--key`を使用して、証明書と秘密キーを指定します。サーバーが自己署名証明書を使用する場合は、パラメータ`--ca`を使用して信頼できる CA 証明書も指定する必要があります。
 
         ```bash
         cdc cli changefeed list --cert client.crt --key client.key --ca ca.crt
         ```
 
-    2. Specify the paths to the certificate, private key, and CA certificate using the environment variables `TICDC_CERT_PATH`, `TICDC_KEY_PATH`, and `TICDC_CA_PATH`.
+    2.  環境`TICDC_KEY_PATH` `TICDC_CERT_PATH`を使用して`TICDC_CA_PATH`証明書、秘密鍵、CA 証明書へのパスを指定します。
 
         ```bash
         export TICDC_CERT_PATH=client.crt
@@ -47,30 +47,30 @@ These two authentication methods can be used either independently or in combinat
         export TICDC_CA_PATH=ca.crt
         ```
 
-    3. Specify the certificate using the shared credential file `~/.ticdc/credentials`. You can modify the configuration using the `cdc cli configure-credentials` command.
+    3.  共有資格情報ファイル`~/.ticdc/credentials`を使用して証明書を指定します。 `cdc cli configure-credentials`コマンドを使用して設定を変更できます。
 
     </div>
 
     <div label="TiCDC OpenAPI" value="cdc-api">
 
-    When using [TiCDC OpenAPI](/ticdc/ticdc-open-api-v2.md), you can specify the client certificate and private key using `--cert` and `--key`. If the server uses a self-signed certificate, you also need to specify the trusted CA certificate using the `--cacert` parameter. For example:
+    [TiCDC オープンAPI](/ticdc/ticdc-open-api-v2.md)使用する場合、 `--cert`と`--key`を使用してクライアント証明書と秘密鍵を指定できます。サーバーが自己署名証明書を使用する場合は、 `--cacert`パラメータを使用して信頼できる CA 証明書も指定する必要があります。例:
 
     ```bash
     curl -X GET http://127.0.0.1:8300/api/v2/status --cert client.crt --key client.key --cacert ca.crt
     ```
 
     </div>
-    </SimpleTab>
+     </SimpleTab>
 
-## Use TiDB username and password for client authentication
+## クライアント認証にTiDBのユーザー名とパスワードを使用する {#use-tidb-username-and-password-for-client-authentication}
 
-1. [Create a user](/sql-statements/sql-statement-create-user.md) in TiDB and grant the user permission to log in from the TiCDC node.
+1.  TiDB で[ユーザーを作成する](/sql-statements/sql-statement-create-user.md)作成し、ユーザーに TiCDC ノードからログインする権限を付与します。
 
     ```sql
     CREATE USER 'test'@'ticdc_ip_address' IDENTIFIED BY 'password';
     ```
 
-2. In the TiCDC server, configure `security.client-user-required` and `security.client-allowed-user` to enable username and password authentication:
+2.  TiCDCサーバーで、ユーザー名とパスワードの認証を有効にするために`security.client-user-required`と`security.client-allowed-user`設定します。
 
     ```toml
     [security]
@@ -80,43 +80,43 @@ These two authentication methods can be used either independently or in combinat
     client-allowed-user = ["test"]
     ```
 
-3. Specify the username and password of the user created in step 1.
+3.  手順 1 で作成したユーザーのユーザー名とパスワードを指定します。
 
     <SimpleTab groupId="cdc">
-    <div label="TiCDC command-line tool" value="cdc-cli">
+     <div label="TiCDC command-line tool" value="cdc-cli">
 
-    When using the [TiCDC command-line tool](/ticdc/ticdc-manage-changefeed.md), you can specify the username and password using the following methods. TiCDC will attempt to read the client certificate in the following order:
+    [TiCDC コマンドラインツール](/ticdc/ticdc-manage-changefeed.md)使用する場合、次の方法でユーザー名とパスワードを指定できます。TiCDC は次の順序でクライアント証明書の読み取りを試みます。
 
-    1. Specify the username and password using the command-line parameters `--user` and `--password`:
+    1.  コマンドラインパラメータ`--user`と`--password`を使用してユーザー名とパスワードを指定します。
 
         ```bash
         cdc cli changefeed list --user test --password password
         ```
 
-    2. Specify the username using the command-line parameter `--user`. Then, enter the password in the terminal:
+    2.  コマンドラインパラメータ`--user`を使用してユーザー名を指定します。次に、ターミナルにパスワードを入力します。
 
         ```bash
         cdc cli changefeed list --user test
         ```
 
-    3. Specify the username and password using the environment variables `TICDC_USER` and `TICDC_PASSWORD`:
+    3.  環境変数`TICDC_USER`と`TICDC_PASSWORD`を使用してユーザー名とパスワードを指定します。
 
         ```bash
         export TICDC_USER=test
         export TICDC_PASSWORD=password
         ```
 
-    4. Specify the username and password using the shared credential file  `~/.ticdc/credentials`. You can modify the configuration using the `cdc cli configure-credentials` command.
+    4.  共有資格情報ファイル`~/.ticdc/credentials`を使用してユーザー名とパスワードを指定します。 `cdc cli configure-credentials`コマンドを使用して設定を変更できます。
 
     </div>
 
     <div label="TiCDC OpenAPI" value="cdc-api">
 
-    When using [TiCDC OpenAPI](/ticdc/ticdc-open-api-v2.md), you can specify the username and password using `--user <user>:<password>`. For example:
+    [TiCDC オープンAPI](/ticdc/ticdc-open-api-v2.md)使用する場合は、 `--user <user>:<password>`を使用してユーザー名とパスワードを指定できます。例:
 
     ```bash
     curl -X GET http://127.0.0.1:8300/api/v2/status --user test:password
     ```
 
     </div>
-    </SimpleTab>
+     </SimpleTab>

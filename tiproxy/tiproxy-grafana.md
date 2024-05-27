@@ -1,69 +1,69 @@
 ---
 title: TiProxy Monitoring Metrics
-summary: Learn the monitoring items of TiProxy.
+summary: TiProxy の監視項目について学習します。
 ---
 
-# TiProxy Monitoring Metrics
+# TiProxy 監視メトリクス {#tiproxy-monitoring-metrics}
 
-This document describes the monitoring items of TiProxy.
+このドキュメントでは、TiProxy の監視項目について説明します。
 
-If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus & Grafana) is deployed at the same time. For more information, see [Overview of the Monitoring Framework](/tidb-monitoring-framework.md).
+TiUPを使用して TiDB クラスターをデプロイすると、監視システム (Prometheus および Grafana) も同時にデプロイされます。詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)参照してください。
 
-The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, TiProxy, and Node\_exporter. A lot of metrics are there to help you diagnose. Each dashboard contains panel groups and their panels.
+Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、TiProxy、Node_exporter を含む一連のサブダッシュボードに分かれています。診断に役立つメトリックが多数あります。各ダッシュボードには、パネル グループとそのパネルが含まれています。
 
-TiProxy has four panel groups. The metrics on these panels indicate the current status of TiProxy.
+TiProxy には 4 つのパネル グループがあります。これらのパネルのメトリックは、TiProxy の現在のステータスを示します。
 
-- **TiProxy-Server**: instance information.
-- **TiProxy-Query-Summary**: SQL query metrics like CPS. 
-- **TiProxy-Backend**: information on TiDB nodes that TiProxy might connect to.
-- **TiProxy-Balance**: loadbalance mertrics.
+-   **TiProxy-Server** : インスタンス情報。
+-   **TiProxy-Query-Summary** : CPS などの SQL クエリ メトリック。
+-   **TiProxy-Backend** : TiProxy が接続する可能性のある TiDB ノードに関する情報。
+-   **TiProxy-Balance** : 負荷分散メトリック。
 
-## Server
+## サーバ {#server}
 
-- CPU Usage: the CPU utilization of each TiProxy instance
-- Memory Usage: the memory usage of each TiProxy instance
-- Uptime: the runtime of each TiProxy instance since last restart
-- Connection Count: the number of clients connected to each TiProxy instance
-- Create Connection OPM: the number of connections created on each TiProxy instance every minute
-- Disconnection OPM: the number of disconnections for each reason every minute. Reasons include:
-    - success: the client disconnects normally
-    - client network break: the client does not send a `QUIT` command before it disconnects. It may also be caused by a network problem or the client shutting down
-    - client handshake fail: the client fails to handshake with TiProxy
-    - auth fail: the access is denied by TiDB
-    - SQL error: TiDB returns other SQL errors
-    - proxy shutdown: TiProxy is shutting down
-    - malformed packet: TiProxy fails to parse the MySQL packet
-    - get backend fail: TiProxy fails to find an available backend for the connection
-    - proxy error: other TiProxy errors
-    - backend network break: fails to read from or write to the TiDB. This may be caused by a network problem or the TiDB server shutting down
-    - backend handshake fail: TiProxy fails to handshake with the TiDB server
-- Goroutine Count: the number of Goroutines on each TiProxy instance
+-   CPU 使用率: 各 TiProxy インスタンスの CPU 使用率
+-   メモリ使用量: 各 TiProxy インスタンスのメモリ使用量
+-   稼働時間: 前回の再起動以降の各 TiProxy インスタンスの実行時間
+-   接続数: 各 TiProxy インスタンスに接続されているクライアントの数
+-   接続作成 OPM: 各 TiProxy インスタンスで 1 分ごとに作成される接続の数
+-   切断 OPM: 1 分ごとの各理由による切断の数。理由には以下が含まれます。
+    -   成功: クライアントは正常に切断されます
+    -   クライアントネットワークの切断: クライアントが切断する前に`QUIT`コマンドを送信しません。ネットワークの問題やクライアントのシャットダウンによっても発生する可能性があります。
+    -   クライアントのハンドシェイク失敗: クライアントが TiProxy とのハンドシェイクに失敗しました
+    -   認証失敗: TiDB によってアクセスが拒否されました
+    -   SQL エラー: TiDB は他の SQL エラーを返します
+    -   プロキシシャットダウン: TiProxy はシャットダウンしています
+    -   不正なパケット: TiProxy は MySQL パケットを解析できません
+    -   バックエンドの取得失敗: TiProxy は接続に使用可能なバックエンドを見つけることができません
+    -   プロキシ エラー: その他の TiProxy エラー
+    -   バックエンドネットワークの中断: TiDB の読み取りまたは書き込みに失敗しました。これは、ネットワークの問題または TiDBサーバーのシャットダウンが原因である可能性があります。
+    -   バックエンドのハンドシェイクが失敗しました: TiProxy は TiDBサーバーとのハンドシェイクに失敗しました
+-   Goroutine 数: 各 TiProxy インスタンス上の Goroutine の数
 
-## Query-Summary
+## クエリの概要 {#query-summary}
 
-- Duration: average, P95, P99 SQL statement execution duration. It includes the duration of SQL statement execution on TiDB servers, so it is higher than the duration on the TiDB Grafana panel
-- P99 Duration By Instance: P99 statement execution duration of each TiProxy instance
-- P99 Duration By Backend: P99 statement execution duration of the statements that are executed on each TiDB instance
-- CPS by Instance: command per second of each TiProxy instance
-- CPS by Backend: command per second of each TiDB instance
-- CPS by CMD: command per second grouped by SQL command type
-- Handshake Duration: average, P95, and P99 duration of the handshake phase between the client and TiProxy
+-   期間: 平均、P95、P99 SQL ステートメント実行期間。TiDB サーバーでの SQL ステートメント実行期間も含まれるため、TiDB Grafana パネルでの期間よりも長くなります。
+-   インスタンスごとの P99 実行時間: 各 TiProxy インスタンスの P99 ステートメント実行時間
+-   バックエンド別の P99 実行時間: 各 TiDB インスタンスで実行されるステートメントの P99 ステートメント実行時間
+-   インスタンスごとの CPS: 各 TiProxy インスタンスの 1 秒あたりのコマンド数
+-   バックエンド別の CPS: 各 TiDB インスタンスの 1 秒あたりのコマンド数
+-   CPS by CMD: SQL コマンド タイプ別にグループ化された 1 秒あたりのコマンド数
+-   ハンドシェイク期間: クライアントと TiProxy 間のハンドシェイク フェーズの平均、P95、および P99 期間
 
-## Balance
+## バランス {#balance}
 
-- Backend Connections: connection counts between each TiDB instance and each TiProxy instance. For example, `10.24.31.1:6000 | 10.24.31.2:4000` indicates the connections between TiProxy instance `10.24.31.1:6000` and TiDB instance `10.24.31.2:4000`
-- Session Migration OPM: the number of session migrations that happened every minute, recording sessions on which TiDB instance migrated to the other. For example, `succeed: 10.24.31.2:4000 => 10.24.31.3:4000` indicates the number of sessions that are successfully migrated from TiDB instance `10.24.31.2:4000` to TiDB instance `10.24.31.3:4000`
-- Session Migration Duration: average, P95, P99 session migration duration.
+-   バックエンド接続: 各 TiDB インスタンスと各 TiProxy インスタンス間の接続数。たとえば、 `10.24.31.1:6000 | 10.24.31.2:4000` TiProxy インスタンス`10.24.31.1:6000`と TiDB インスタンス`10.24.31.2:4000`間の接続を示します。
+-   セッション移行 OPM: 1 分ごとに発生したセッション移行の数。TiDB インスタンスが別のインスタンスに移行したセッションを記録します。たとえば、 `succeed: 10.24.31.2:4000 => 10.24.31.3:4000` TiDB インスタンス`10.24.31.2:4000`から TiDB インスタンス`10.24.31.3:4000`に正常に移行されたセッションの数を示します。
+-   セッション移行期間: 平均、P95、P99 セッション移行期間。
 
-## Backend
+## バックエンド {#backend}
 
-- Get Backend Duration: the average, p95, p99 duration of TiProxy connecting to a TiDB instance
-- Ping Backend Duration: the network latency between each TiProxy instance and each TiProxy instance. For example, `10.24.31.1:6000 | 10.24.31.2:4000` indicates the network latency between TiProxy instance `10.24.31.1:6000` and TiDB instance `10.24.31.2:4000`
-- Health Check Cycle: the duration of a cycle of the health check between a TiProxy instance and all TiDB instances. For example, `10.24.31.1:6000` indicates the duration of the latest health check that TiProxy instance `10.24.31.1:6000` executes on all the TiDB instances. If this duration is higher than 3 seconds, TiProxy may not be timely to refresh the backend TiDB list
+-   バックエンド期間の取得: TiProxy が TiDB インスタンスに接続する平均、p95、p99 期間
+-   Pingバックエンド期間: 各TiProxyインスタンスと各TiProxyインスタンス間のネットワークレイテンシー。たとえば、 `10.24.31.1:6000 | 10.24.31.2:4000` TiProxyインスタンス`10.24.31.1:6000`とTiDBインスタンス`10.24.31.2:4000`間のネットワークレイテンシーを示します。
+-   ヘルスチェックサイクル: TiProxy インスタンスとすべての TiDB インスタンス間のヘルスチェックサイクルの期間。たとえば、 `10.24.31.1:6000` 、TiProxy インスタンス`10.24.31.1:6000`がすべての TiDB インスタンスに対して実行する最新のヘルスチェックの期間を示します。この期間が 3 秒を超える場合、TiProxy はバックエンドの TiDB リストをタイムリーに更新できない可能性があります。
 
-## Traffic
+## 渋滞 {#traffic}
 
-- Bytes/Second from Backends: the amount of data, in bytes, sent from each TiDB instance to each TiProxy instance per second.
-- Packets/Second from Backends: the number of MySQL packets sent from each TiDB instance to each TiProxy instance per second.
-- Bytes/Second to Backends: the amount of data, in bytes, sent from each TiProxy instance to each TiDB instance per second.
-- Packets/Second to Backends: the number of MySQL packets sent from each TiProxy instance to each TiDB instance per second.
+-   バックエンドからのバイト/秒: 各 TiDB インスタンスから各 TiProxy インスタンスに 1 秒あたりに送信されるデータの量 (バイト単位)。
+-   バックエンドからのパケット/秒: 各 TiDB インスタンスから各 TiProxy インスタンスに 1 秒あたりに送信される MySQL パケットの数。
+-   バックエンドへのバイト/秒: 各 TiProxy インスタンスから各 TiDB インスタンスに 1 秒あたりに送信されるデータの量 (バイト単位)。
+-   バックエンドへのパケット数/秒: 各 TiProxy インスタンスから各 TiDB インスタンスに 1 秒あたりに送信される MySQL パケットの数。

@@ -1,50 +1,50 @@
 ---
 title: tiup dm deploy
-summary: The `tiup dm deploy` command is used to deploy a new cluster. It requires the cluster name, version, and a prepared topology file. Optional flags include user, identity file, password, and help. The output is the deployment log.
+summary: `tiup dm deploy` コマンドは、新しいクラスターをデプロイするために使用されます。クラスター名、バージョン、および準備されたトポロジ ファイルが必要です。オプションのフラグには、ユーザー、ID ファイル、パスワード、およびヘルプが含まれます。出力はデプロイメント ログです。
 ---
 
-# tiup dm deploy
+# tiup dm デプロイ {#tiup-dm-deploy}
 
-The `tiup dm deploy` command is used to deploy a new cluster.
+`tiup dm deploy`コマンドは、新しいクラスターをデプロイするために使用されます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm deploy <cluster-name> <version> <topology.yaml> [flags]
 ```
 
-- `<cluster-name>`: the name of the new cluster, which cannot be the same as the existing cluster names.
-- `<version>`: the version number of the DM cluster to be deployed, such as `v2.0.0`.
-- `<topology.yaml>`: the prepared [topology file](/tiup/tiup-dm-topology-reference.md).
+-   `<cluster-name>` : 新しいクラスターの名前。既存のクラスター名と同じにすることはできません。
+-   `<version>` : デプロイする DM クラスターのバージョン番号 (例: `v2.0.0` 。
+-   `<topology.yaml>` : 準備された[トポロジファイル](/tiup/tiup-dm-topology-reference.md) 。
 
-## Options
+## オプション {#options}
 
-### -u, --user
+### -u、--ユーザー {#u-user}
 
-- Specifies the user name used to connect to the target machine. This user must have the secret-free sudo root permission on the target machine.
-- Data type: `STRING`
-- Default: the current user who executes the command.
+-   ターゲット マシンへの接続に使用するユーザー名を指定します。このユーザーには、ターゲット マシンに対するシークレットフリーの sudo ルート権限が必要です。
+-   データ型: `STRING`
+-   デフォルト: コマンドを実行する現在のユーザー。
 
-### -i, --identity_file
+### -i, --identity_file {#i-identity-file}
 
-- Specifies the key file used to connect to the target machine.
-- Data type: `STRING`
-- Default: `~/.ssh/id_rsa`
+-   ターゲット マシンに接続するために使用されるキー ファイルを指定します。
+-   データ型: `STRING`
+-   デフォルト: `~/.ssh/id_rsa`
 
-### -p, --password
+### -p, --パスワード {#p-password}
 
-- Specifies the password used to connect to the target machine. Do not use this option and `-i/--identity_file` at the same time.
-- Data type: `BOOLEAN`
-- Default: false
+-   ターゲット マシンへの接続に使用するパスワードを指定します。このオプションと`-i/--identity_file`同時に使用しないでください。
+-   データ型: `BOOLEAN`
+-   デフォルト: false
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- Default: false
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   デフォルト: false
 
-## Output
+## 出力 {#output}
 
-The deployment log.
+デプロイメント ログ。
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

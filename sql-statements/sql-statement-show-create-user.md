@@ -1,20 +1,20 @@
 ---
 title: SHOW CREATE USER | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW CREATE USER for the TiDB database.
+summary: TiDB データベースに対する SHOW CREATE USER の使用法の概要。
 ---
 
-# SHOW CREATE USER
+# ユーザーの作成を表示 {#show-create-user}
 
-This statement shows how to re-create a user using the `CREATE USER` syntax.
+このステートメントは、 `CREATE USER`構文を使用してユーザーを再作成する方法を示しています。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowCreateUserStmt ::=
     "SHOW" "CREATE" "USER" (Username ("@" Hostname)? | "CURRENT_USER" ( "(" ")" )? )
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> SHOW CREATE USER 'root';
@@ -34,22 +34,22 @@ mysql> SHOW GRANTS FOR 'root';
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
 <CustomContent platform="tidb">
 
-* The output of `SHOW CREATE USER` is designed to match MySQL, but several of the `CREATE` options are not yet supported by TiDB. Not yet supported options will be parsed but ignored. See [Security compatibility](/security-compatibility-with-mysql.md) for more details.
+-   `SHOW CREATE USER`の出力は MySQL と一致するように設計されていますが、 `CREATE`のオプションのいくつかはまだ TiDB でサポートされていません。まだサポートされていないオプションは解析されますが無視されます。詳細については[Securityの互換性](/security-compatibility-with-mysql.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-* The output of `SHOW CREATE USER` is designed to match MySQL, but several of the `CREATE` options are not yet supported by TiDB. Not yet supported options will be parsed but ignored. See [Security compatibility](https://docs.pingcap.com/tidb/stable/security-compatibility-with-mysql/) for more details.
+-   `SHOW CREATE USER`の出力は MySQL と一致するように設計されていますが、 `CREATE`のオプションのうちいくつかはまだ TiDB でサポートされていません。まだサポートされていないオプションは解析されますが無視されます。詳細については[Securityの互換性](https://docs.pingcap.com/tidb/stable/security-compatibility-with-mysql/)を参照してください。
 
 </CustomContent>
 
-## See also
+## 参照 {#see-also}
 
-* [CREATE USER](/sql-statements/sql-statement-create-user.md)
-* [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
-* [DROP USER](/sql-statements/sql-statement-drop-user.md)
+-   [ユーザーを作成](/sql-statements/sql-statement-create-user.md)
+-   [ショーグラント](/sql-statements/sql-statement-show-grants.md)
+-   [ユーザーを削除](/sql-statements/sql-statement-drop-user.md)

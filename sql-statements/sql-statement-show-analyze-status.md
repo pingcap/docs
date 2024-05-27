@@ -1,34 +1,34 @@
 ---
 title: SHOW ANALYZE STATUS
-summary: An overview of the usage of SHOW ANALYZE STATUS for the TiDB database.
+summary: TiDB データベースに対する SHOW ANALYZE STATUS の使用法の概要。
 ---
 
-# SHOW ANALYZE STATUS
+# 分析ステータスを表示 {#show-analyze-status}
 
-The `SHOW ANALYZE STATUS` statement shows the statistics collection tasks being executed by TiDB and a limited number of historical task records.
+`SHOW ANALYZE STATUS`ステートメントは、TiDB によって実行されている統計収集タスクと、限られた数の履歴タスク レコードを表示します。
 
-Starting from TiDB v6.1.0, the `SHOW ANALYZE STATUS` statement supports showing cluster-level tasks. Even after a TiDB restart, you can still view task records before the restart using this statement. Before TiDB v6.1.0, the `SHOW ANALYZE STATUS` statement can only show instance-level tasks, and task records are cleared after a TiDB restart.
+TiDB v6.1.0 以降では、 `SHOW ANALYZE STATUS`ステートメントはクラスター レベルのタスクの表示をサポートします。TiDB を再起動した後でも、このステートメントを使用して再起動前のタスク レコードを表示できます。TiDB v6.1.0 より前では、 `SHOW ANALYZE STATUS`ステートメントはインスタンス レベルのタスクのみを表示でき、タスク レコードは TiDB の再起動後にクリアされます。
 
-Starting from TiDB v6.1.0, you can view the history tasks within the last 7 days through the system table `mysql.analyze_jobs`.
+TiDB v6.1.0 以降では、システム テーブル`mysql.analyze_jobs`を通じて過去 7 日間の履歴タスクを表示できます。
 
-Starting from TiDB v7.3.0, you can view the progress of the current `ANALYZE` task through the system table `mysql.analyze_jobs` or `SHOW ANALYZE STATUS`.
+TiDB v7.3.0 以降では、システム テーブル`mysql.analyze_jobs`または`SHOW ANALYZE STATUS`を通じて現在の`ANALYZE`タスクの進行状況を表示できます。
 
-Currently, the `SHOW ANALYZE STATUS` statement returns the following columns:
+現在、 `SHOW ANALYZE STATUS`ステートメントは次の列を返します。
 
-| Column name      | Description |
-| :--------------- | :------------- |
-| `Table_schema`   | The database name |
-| `Table_name`     | The table name |
-| `Partition_name` | The partition name |
-| `Job_info`       | The task information. If an index is analyzed, this information will include the index name. When `tidb_analyze_version =2`, this information will include configuration items such as sample rate. |
-| `Processed_rows` | The number of rows that have been analyzed |
-| `Start_time`     | The time at which the task starts |
-| `State`          | The state of a task, including `pending`, `running`, `finished`, and `failed` |
-| `Fail_reason`    | The reason why the task fails. If the execution is successful, the value is `NULL`. |
-| `Instance`       | The TiDB instance that executes the task |
-| `Process_id`     | The process ID that executes the task |
+| カラム名             | 説明                                                                                                 |
+| :--------------- | :------------------------------------------------------------------------------------------------- |
+| `Table_schema`   | データベース名                                                                                            |
+| `Table_name`     | テーブル名                                                                                              |
+| `Partition_name` | パーティション名                                                                                           |
+| `Job_info`       | タスク情報。インデックスが分析される場合、この情報にはインデックス名が含まれます。 `tidb_analyze_version =2`場合、この情報にはサンプル レートなどの構成項目が含まれます。 |
+| `Processed_rows` | 分析された行数                                                                                            |
+| `Start_time`     | タスクが開始される時間                                                                                        |
+| `State`          | `failed`の状態`running` `pending`含む`finished`                                                         |
+| `Fail_reason`    | タスクが失敗した理由。実行が成功した場合、値は`NULL`なります。                                                                 |
+| `Instance`       | タスクを実行するTiDBインスタンス                                                                                 |
+| `Process_id`     | タスクを実行するプロセスID                                                                                     |
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowAnalyzeStatusStmt ::= 'SHOW' 'ANALYZE' 'STATUS' ShowLikeOrWhereOpt
@@ -36,7 +36,7 @@ ShowAnalyzeStatusStmt ::= 'SHOW' 'ANALYZE' 'STATUS' ShowLikeOrWhereOpt
 ShowLikeOrWhereOpt ::= 'LIKE' SimpleExpr | 'WHERE' Expression
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> create table t(x int, index idx(x)) partition by hash(x) partitions 2;
@@ -80,10 +80,10 @@ mysql> show analyze status;
 6 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## 参照 {#see-also}
 
-* [ANALYZE_STATUS table](/information-schema/information-schema-analyze-status.md)
+-   [ANALYZE_STATUS テーブル](/information-schema/information-schema-analyze-status.md)

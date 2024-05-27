@@ -1,17 +1,17 @@
 ---
 title: Cost Model
-summary: Learn how the cost model used by TiDB works during physical optimization.
+summary: 物理的な最適化中に TiDB によって使用されるコスト モデルがどのように機能するかを学習します。
 ---
 
-# Cost Model
+# コストモデル {#cost-model}
 
-TiDB uses a cost model to choose an index and operator during [physical optimization](/sql-physical-optimization.md). The process is illustrated in the following diagram:
+TiDB は、 [物理的な最適化](/sql-physical-optimization.md)の間にコスト モデルを使用してインデックスと演算子を選択します。このプロセスを次の図に示します。
 
 ![CostModel](/media/cost-model.png)
 
-TiDB calculates the access cost of each index and the execution cost of each physical operator in plans (such as HashJoin and IndexJoin) and chooses the minimum cost plan.
+TiDB は、各インデックスのアクセス コストとプラン内の各物理演算子 (HashJoin や IndexJoin など) の実行コストを計算し、最小コストのプランを選択します。
 
-The following is a simplified example to explain how the cost model works. Suppose that there is a table `t`:
+以下は、コスト モデルの仕組みを説明する簡略化された例です。表`t`があるとします。
 
 ```sql
 mysql> SHOW CREATE TABLE t;
@@ -29,23 +29,23 @@ mysql> SHOW CREATE TABLE t;
 1 row in set (0.00 sec)
 ```
 
-When executing the `SELECT * FROM t WHERE b < 100 and c < 100` statement, suppose that TiDB estimates 20 rows meet the `b < 100` condition and 500 rows meet `c < 100`, and the length of `INT` type indexes is 8. Then TiDB calculates the cost for two indexes:
+`SELECT * FROM t WHERE b < 100 and c < 100`ステートメントを実行するときに、TiDB が`b < 100`条件を満たす行が 20 行、 `c < 100`条件を満たす行が 500 行で、 `INT`タイプのインデックスの長さが 8 であると推定するとします。この場合、TiDB は 2 つのインデックスのコストを計算します。
 
-+ The cost of index `b` = row count of `b < 100` \* length of index `b` = 20 * 8 = 160
-+ The cost of index `c` = row count of `c < 100` \* length of index `c` = 500 * 8 = 4000
+-   インデックス`b`のコスト = 行数`b < 100` * インデックス`b`の長さ = 20 * 8 = 160
+-   インデックス`c`のコスト = 行数`c < 100` * インデックス`c`の長さ = 500 * 8 = 4000
 
-Because the cost of index `b` is lower, TiDB chooses `b` as the index.
+インデックス`b`のコストが低いため、TiDB はインデックスとして`b`選択します。
 
-The preceding example is simplified and only used to explain the basic principle. In real SQL executions, the TiDB cost model is more complex.
+上記の例は簡略化されており、基本原理を説明するためにのみ使用されています。実際の SQL 実行では、TiDB コスト モデルはより複雑になります。
 
-## Cost Model Version 2
+## コストモデル バージョン 2 {#cost-model-version-2}
 
-TiDB v6.2.0 introduces Cost Model Version 2, a new cost model.
+TiDB v6.2.0 では、新しいコスト モデルであるコスト モデル バージョン 2 が導入されています。
 
-Cost Model Version 2 provides a more accurate regression calibration of the cost formula, adjusts some of the cost formulas, and is more accurate than the previous version of the cost formula.
+コスト モデル バージョン 2 では、コスト式のより正確な回帰キャリブレーションが提供され、コスト式の一部が調整され、以前のバージョンのコスト式よりも正確になっています。
 
-To switch the version of cost model, you can set the [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-new-in-v620) variable.
+コストモデルのバージョンを切り替えるには、 [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-new-in-v620)変数を設定します。
 
-> **Note:**
+> **注記：**
 >
-> Switching the version of the cost model might cause changes to query plans.
+> コスト モデルのバージョンを切り替えると、クエリ プランが変更される可能性があります。

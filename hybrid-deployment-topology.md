@@ -1,74 +1,68 @@
 ---
 title: Hybrid Deployment Topology
-summary: Learn the hybrid deployment topology of TiDB clusters.
+summary: TiDB クラスターのハイブリッド展開トポロジについて学習します。
 ---
 
-# Hybrid Deployment Topology
+# ハイブリッド展開トポロジ {#hybrid-deployment-topology}
 
-This document describes the topology and key parameters of the TiKV and TiDB hybrid deployment.
+このドキュメントでは、TiKV と TiDB のハイブリッド展開のトポロジと主要なパラメータについて説明します。
 
-The hybrid deployment is usually used in the following scenario:
+ハイブリッド展開は通常、次のシナリオで使用されます。
 
-The deployment machine has multiple CPU processors with sufficient memory. To improve the utilization rate of the physical machine resources, multiple instances can be deployed on a single machine, that is, TiDB and TiKV's CPU resources are isolated through NUMA node bindings. PD and Prometheus are deployed together, but their data directories need to use separate file systems.
+デプロイメントマシンには、十分なメモリを備えた複数の CPU プロセッサがあります。物理マシンリソースの利用率を向上させるために、1 台のマシンに複数のインスタンスをデプロイできます。つまり、TiDB と TiKV の CPU リソースは、NUMA ノードバインディングによって分離されます。PD と Prometheus は一緒にデプロイされますが、それらのデータディレクトリは別のファイルシステムを使用する必要があります。
 
-## Topology information
+## トポロジ情報 {#topology-information}
 
-| Instance | Count | Physical machine configuration | IP | Configuration |
-| :-- | :-- | :-- | :-- | :-- |
-| TiDB | 6 | 32 VCore 64GB | 10.0.1.1<br/> 10.0.1.2<br/> 10.0.1.3 | Configure NUMA to bind CPU cores |
-| PD | 3 | 16 VCore 32 GB | 10.0.1.4<br/> 10.0.1.5<br/> 10.0.1.6 | Configure the `location_labels` parameter |
-| TiKV | 6 | 32 VCore 64GB | 10.0.1.7<br/> 10.0.1.8<br/> 10.0.1.9 | 1. Separate the instance-level port and status_port; <br/> 2. Configure the global parameters `readpool`, `storage` and `raftstore`; <br/> 3. Configure labels of the instance-level host; <br/> 4. Configure NUMA to bind CPU cores |
-| Monitoring & Grafana | 1 | 4 VCore 8GB * 1 500GB (ssd)  | 10.0.1.10 | Default configuration |
+| 実例             | カウント | 物理マシン構成                     | IP                                   | コンフィグレーション                                                                                                                                                       |
+| :------------- | :--- | :-------------------------- | :----------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ティビ            | 6    | 32 VCore 64GB               | 10.0.1.1<br/> 10.0.1.2<br/> 10.0.1.3 | CPUコアをバインドするためにNUMAを構成する                                                                                                                                         |
+| PD             | 3    | 16 VCore 32 GB              | 10.0.1.4<br/> 10.0.1.5<br/> 10.0.1.6 | `location_labels`パラメータを設定する                                                                                                                                      |
+| ティクヴ           | 6    | 32 VCore 64GB               | 10.0.1.7<br/> 10.0.1.8<br/> 10.0.1.9 | <li>インスタンスレベルのポートと status_port を分離します。<br/> 2. `storage`パラメータ`readpool` `raftstore`設定します。<br/> 3. インスタンスレベルのホストのラベルを構成します。<br/> 4. CPUコアをバインドするためにNUMAを構成する</li> |
+| モニタリングとGrafana | 1    | 4 VCore 8GB * 1 500GB (SSD) | 10.0.1.10                            | デフォルト設定                                                                                                                                                          |
 
-### Topology templates
+### トポロジーテンプレート {#topology-templates}
 
-- [The simple template for the hybrid deployment](https://github.com/pingcap/docs/blob/master/config-templates/simple-multi-instance.yaml)
-- [The complex template for the hybrid deployment](https://github.com/pingcap/docs/blob/master/config-templates/complex-multi-instance.yaml)
+-   [ハイブリッド展開のためのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-multi-instance.yaml)
+-   [ハイブリッド展開のための複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-multi-instance.yaml)
 
-For detailed descriptions of the configuration items in the above TiDB cluster topology file, see [Topology Configuration File for Deploying TiDB Using TiUP](/tiup/tiup-cluster-topology-reference.md).
+上記の TiDB クラスタ トポロジ ファイルの構成項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
-### Key parameters
+### 主なパラメータ {#key-parameters}
 
-This section introduces the key parameters when you deploy multiple instances on a single machine, which is mainly used in scenarios when multiple instances of TiDB and TiKV are deployed on a single machine. You need to fill in the results into the configuration template according to the calculation methods provided below.
+このセクションでは、1 台のマシンに複数のインスタンスを展開する場合の重要なパラメータについて説明します。これは主に、1 台のマシンに TiDB と TiKV の複数のインスタンスを展開するシナリオで使用されます。以下の計算方法に従って、結果を構成テンプレートに入力する必要があります。
 
-- Optimize the configuration of TiKV
+-   TiKVの設定を最適化する
 
-    - To configure `readpool` to be self-adaptive to the thread pool. By configuring the `readpool.unified.max-thread-count` parameter, you can make `readpool.storage` and `readpool.coprocessor` share a unified thread pool, and set the self-adaptive switch respectively.
+    -   `readpool`スレッド プールに自己`readpool.unified.max-thread-count`するように設定します。3 パラメータを設定することで、 `readpool.storage`と`readpool.coprocessor`が統合スレッド プールを共有し、それぞれ自己適応スイッチを設定できます。
 
-        - Enable `readpool.storage` and `readpool.coprocessor`:
+        -   `readpool.storage`と`readpool.coprocessor`有効にする:
 
             ```yaml
             readpool.storage.use-unified-pool: true
             readpool.coprocessor.use-unified-pool: true
             ```
 
-        - The calculation method:
+        -   計算方法：
 
-            ```
-            readpool.unified.max-thread-count = cores * 0.8 / the number of TiKV instances
-            ```
+                readpool.unified.max-thread-count = cores * 0.8 / the number of TiKV instances
 
-    - To configure the storage CF (all RocksDB column families) to be self-adaptive to memory. By configuring the `storage.block-cache.capacity` parameter, you can make CF automatically balance the memory usage.
+    -   storageCF (すべての RocksDB 列ファミリ) をメモリに自己適応するように構成します。1 `storage.block-cache.capacity`パラメータを構成すると、CF が自動的にメモリ使用量をバランスさせることができます。
 
-        - The calculation method:
+        -   計算方法：
 
-            ```
-            storage.block-cache.capacity = (MEM_TOTAL * 0.5 / the number of TiKV instances)
-            ```
+                storage.block-cache.capacity = (MEM_TOTAL * 0.5 / the number of TiKV instances)
 
-    - If multiple TiKV instances are deployed on the same physical disk, add the `capacity` parameter in the TiKV configuration:
+    -   複数の TiKV インスタンスが同じ物理ディスクにデプロイされている場合は、TiKV 構成に`capacity`パラメータを追加します。
 
-        ```
-        raftstore.capacity = disk total capacity / the number of TiKV instances
-        ```
+            raftstore.capacity = disk total capacity / the number of TiKV instances
 
-- The label scheduling configuration
+-   ラベルスケジュール設定
 
-    Since multiple instances of TiKV are deployed on a single machine, if the physical machines go down, the Raft Group might lose two of the default three replicas, which causes the cluster unavailability. To address this issue, you can use the label to enable the smart scheduling of PD, which ensures that the Raft Group has more than two replicas in multiple TiKV instances on the same machine.
+    1 台のマシンに複数の TiKV インスタンスがデプロイされているため、物理マシンがダウンすると、 Raftグループはデフォルトの 3 つのレプリカのうち 2 つを失い、クラスターが使用できなくなる可能性があります。この問題に対処するには、ラベルを使用して PD のスマート スケジューリングを有効にします。これにより、 Raftグループが同じマシン上の複数の TiKV インスタンスに 2 つ以上のレプリカを持つようになります。
 
-    - The TiKV configuration
+    -   TiKVの構成
 
-        The same host-level label information is configured for the same physical machine:
+        同じ物理マシンに対して同じホストレベルのラベル情報が構成されています。
 
         ```yml
         config:
@@ -76,26 +70,26 @@ This section introduces the key parameters when you deploy multiple instances on
             host: tikv1
         ```
 
-    - The PD configuration
+    -   PD構成
 
-        To enable PD to identify and scheduling Regions, configure the labels type for PD:
+        PD がリージョンを識別してスケジュールできるようにするには、PD のラベル タイプを構成します。
 
         ```yml
         pd:
           replication.location-labels: ["host"]
         ```
 
-- `numa_node` core binding
+-   `numa_node`コアバインディング
 
-    - In the instance parameter module, configure the corresponding `numa_node` parameter and add the number of CPU cores.
-    
-    - Before using NUMA to bind cores, make sure that the numactl tool is installed, and confirm the information of CPUs in the physical machines. After that, configure the parameters.
+    -   インスタンスパラメータモジュールで、対応するパラメータ`numa_node`を設定し、CPU コアの数を追加します。
 
-    - The `numa_node` parameter corresponds to the `numactl --membind` configuration.
+    -   NUMA を使用してコアをバインドする前に、numactl ツールがインストールされていることを確認し、物理マシンの CPU の情報を確認します。その後、パラメータを設定します。
 
-> **Note:**
+    -   `numa_node`パラメータは`numactl --membind`構成に対応します。
+
+> **注記：**
 >
-> - When editing the configuration file template, modify the required parameter, IP, port, and directory.
-> - Each component uses the global `<deploy_dir>/<components_name>-<port>` as their `deploy_dir` by default. For example, if TiDB specifies the `4001` port, its `deploy_dir` is `/tidb-deploy/tidb-4001` by default. Therefore, in multi-instance scenarios, when specifying a non-default port, you do not need to specify the directory again.
-> - You do not need to manually create the `tidb` user in the configuration file. The TiUP cluster component automatically creates the `tidb` user on the target machines. You can customize the user, or keep the user consistent with the control machine.
-> - If you configure the deployment directory as a relative path, the cluster will be deployed in the home directory of the user.
+> -   構成ファイル テンプレートを編集するときは、必要なパラメーター、IP、ポート、およびディレクトリを変更します。
+> -   各コンポーネントは、デフォルトでグローバル`<deploy_dir>/<components_name>-<port>` `deploy_dir`として使用します。たとえば、TiDB が`4001`ポートを指定した場合、デフォルトでは`deploy_dir`は`/tidb-deploy/tidb-4001`になります。したがって、マルチインスタンス シナリオでは、デフォルト以外のポートを指定するときに、ディレクトリを再度指定する必要はありません。
+> -   構成ファイルで`tidb`ユーザーを手動で作成する必要はありません。TiUP クラスターコンポーネントは、ターゲット マシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズすることも、ユーザーをコントロール マシンと一致させることもできます。
+> -   デプロイメント ディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリにデプロイされます。

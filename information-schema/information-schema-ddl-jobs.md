@@ -1,11 +1,11 @@
 ---
 title: DDL_JOBS
-summary: Learn the `DDL_JOBS` information_schema table.
+summary: `DDL_JOBS` information_schema テーブルについて学習します。
 ---
 
-# DDL_JOBS
+# DDL_ジョブ {#ddl-jobs}
 
-The `DDL_JOBS` table provides an `INFORMATION_SCHEMA` interface to the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md) command. It provides information about DDL operations in the TiDB cluster, such as the current status, DDL statements, start time, end time, database names, and table names.
+`DDL_JOBS`テーブルは、 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドへの`INFORMATION_SCHEMA`インターフェイスを提供します。現在のステータス、DDL ステートメント、開始時刻、終了時刻、データベース名、テーブル名など、TiDB クラスター内の DDL 操作に関する情報を提供します。
 
 ```sql
 USE information_schema;

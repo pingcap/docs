@@ -1,25 +1,25 @@
 ---
 title: Locking Functions
-summary: Learn about user-level locking functions in TiDB.
+summary: TiDB のユーザー レベルのロック関数について学習します。
 ---
 
-# Locking Functions
+# ロック機能 {#locking-functions}
 
-TiDB supports most of the user-level [locking functions](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html) available in MySQL 8.0.
+TiDB は、MySQL 8.0 で利用可能なユーザー レベル[ロック関数](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html)のほとんどをサポートします。
 
-## Supported functions
+## サポートされている関数 {#supported-functions}
 
-| Name                                                                                                                 | Description                                                           |
-|:---------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------|
-| [`GET_LOCK(lockName, timeout)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_get-lock)    | Acquires an advisory lock. The `lockName` parameter must be NO longer than 64 characters. Waits maximum `timeout` seconds before timing out and returns a failure.         |
-| [`IS_FREE_LOCK(lockName)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_is-free-lock) | Checks if a lock is free. |
-| [`IS_USED_LOCK(lockName)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_is-used-lock) | Checks if a lock is in use. If true, it returns the corresponding connection ID. |
-| [`RELEASE_ALL_LOCKS()`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_release-all-locks)   | Releases all locks held by the current session.                        |
-| [`RELEASE_LOCK(lockName)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_release-lock)     | Releases a previously acquired lock. The `lockName` parameter must be NO longer than 64 characters. |
+| 名前                                                                                                                 | 説明                                                                                       |
+| :----------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------- |
+| [`GET_LOCK(lockName, timeout)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_get-lock)  | アドバイザリ ロックを取得します。1 パラメータ`lockName` 64 文字以内でなければなりません。タイムアウトするまで最大`timeout`秒間待機し、失敗を返します。 |
+| [`IS_FREE_LOCK(lockName)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_is-free-lock)   | ロックが空いているかどうかを確認します。                                                                     |
+| [`IS_USED_LOCK(lockName)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_is-used-lock)   | ロックが使用中かどうかを確認します。true の場合は、対応する接続​​ ID を返します。                                           |
+| [`RELEASE_ALL_LOCKS()`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_release-all-locks) | 現在のセッションによって保持されているすべてのロックを解除します。                                                        |
+| [`RELEASE_LOCK(lockName)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_release-lock)   | 以前に取得したロックを解除します。1 パラメータ`lockName` 64 文字を超えてはなりません。                                      |
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-* The minimum timeout permitted by TiDB is 1 second, and the maximum timeout is 1 hour (3600 seconds). This differs from MySQL, where both 0 second and unlimited timeouts (`timeout=-1`) are permitted. TiDB will automatically convert out-of-range values to the nearest permitted value and convert `timeout=-1` to 3600 seconds.
-* TiDB does not automatically detect deadlocks caused by user-level locks. Deadlocked sessions will timeout after a maximum of 1 hour, but can also be manually resolved by using [`KILL`](/sql-statements/sql-statement-kill.md) on one of the affected sessions. You can also prevent deadlocks by always acquiring user-level locks in the same order.
-* Locks take effect on all TiDB servers in the cluster. This differs from MySQL Cluster and Group Replication where locks are local to a single server.
-* `IS_USED_LOCK()` returns `1` if it is called from another session and is unable to return the ID of the process that is holding the lock.
+-   TiDB で許可される最小タイムアウトは 1 秒、最大タイムアウトは 1 時間 (3600 秒) です。これは、0 秒と無制限のタイムアウト ( `timeout=-1` ) の両方が許可されている MySQL とは異なります。TiDB は、範囲外の値を最も近い許可された値に自動的に変換し、 `timeout=-1` 3600 秒に変換します。
+-   TiDB は、ユーザー レベルのロックによって発生したデッドロックを自動的に検出しません。デッドロックされたセッションは最大 1 時間後にタイムアウトしますが、影響を受けるセッションの 1 つで[`KILL`](/sql-statements/sql-statement-kill.md)使用して手動で解決することもできます。また、ユーザー レベルのロックを常に同じ順序で取得することで、デッドロックを防ぐこともできます。
+-   ロックは、クラスタ内のすべての TiDB サーバーで有効になります。これは、ロックが単一のサーバーに対してローカルである MySQL クラスタおよびグループ レプリケーションとは異なります。
+-   `IS_USED_LOCK()` 、別のセッションから呼び出され、ロックを保持しているプロセスの ID を返すことができない場合は`1`を返します。

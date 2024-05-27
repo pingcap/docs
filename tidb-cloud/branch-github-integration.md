@@ -1,77 +1,77 @@
 ---
 title: Integrate TiDB Serverless Branching (Beta) with GitHub 
-summary: Learn how to integrate the TiDB Serverless branching feature with GitHub.
+summary: TiDB サーバーレス ブランチ機能を GitHub と統合する方法を学びます。
 ---
 
-# Integrate TiDB Serverless Branching (Beta) with GitHub 
+# TiDB サーバーレス ブランチング (ベータ版) を GitHub と統合する {#integrate-tidb-serverless-branching-beta-with-github}
 
-> **Note:**
+> **注記：**
 >
-> The integration is built upon [TiDB Serverless branching](/tidb-cloud/branch-overview.md). Make sure that you are familiar with TiDB Serverless branching before reading this document.
+> 統合は[TiDB サーバーレスブランチ](/tidb-cloud/branch-overview.md)に基づいて構築されています。このドキュメントを読む前に、TiDB Serverless ブランチングについて理解していることを確認してください。
 
-If you use GitHub for application development, you can integrate TiDB Serverless branching into your GitHub CI/CD pipeline, which lets you automatically test your pull requests with branches without affecting the production database.
+アプリケーション開発に GitHub を使用する場合は、TiDB Serverless ブランチを GitHub CI/CD パイプラインに統合できます。これにより、本番データベースに影響を与えることなく、ブランチを使用してプル リクエストを自動的にテストできます。
 
-In the integration process, you will be prompted to install the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) GitHub App. The app can automatically manage TiDB Serverless branches according to pull requests in your GitHub repository. For example, when you create a pull request, the app will create a corresponding branch for your TiDB Serverless cluster, in which you can work on new features or bug fixes in isolation without affecting the production database.
+統合プロセスでは、 [TiDB Cloudブランチ](https://github.com/apps/tidb-cloud-branching) GitHub アプリをインストールするように求められます。このアプリは、GitHub リポジトリのプル リクエストに従って TiDB Serverless ブランチを自動的に管理できます。たとえば、プル リクエストを作成すると、アプリは TiDB Serverless クラスターの対応するブランチを作成します。このブランチでは、本番データベースに影響を与えることなく、新機能やバグ修正を個別に行うことができます。
 
-This document covers the following topics:
+このドキュメントでは、次のトピックについて説明します。
 
-1. How to integrate TiDB Serverless branching with GitHub
-2. How does the TiDB Cloud Branching app work
-3. How to build a branching-based CI workflow to test every pull request using branches rather than the production cluster
+1.  TiDB サーバーレス ブランチを GitHub と統合する方法
+2.  TiDB Cloudブランチングアプリはどのように機能しますか
+3.  本番のクラスターではなくブランチを使用してすべてのプルリクエストをテストするためのブランチベースの CI ワークフローを構築する方法
 
-## Before you begin
+## あなたが始める前に {#before-you-begin}
 
-Before the integration, make sure that you have the following:
+統合する前に、次のものを用意してください。
 
-- A GitHub account
-- A GitHub repository for your application
-- A [TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+-   GitHubアカウント
+-   アプリケーション用のGitHubリポジトリ
+-   [TiDB サーバーレス クラスター](/tidb-cloud/create-tidb-cluster-serverless.md)
 
-## Integrate TiDB Serverless branching with your GitHub repository
+## TiDB サーバーレス ブランチを GitHub リポジトリに統合する {#integrate-tidb-serverless-branching-with-your-github-repository}
 
-To integrate TiDB Serverless branching with your GitHub repository, take the following steps:
+TiDB Serverless ブランチを GitHub リポジトリに統合するには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Serverless cluster to go to its overview page.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲットの TiDB Serverless クラスターの名前をクリックして概要ページに移動します。
 
-2. Click **Branches** in the left navigation pane.
+2.  左側のナビゲーション ペインで**[ブランチ] を**クリックします。
 
-3. In the upper-right corner of the **Branches** page, click **Connect to GitHub**.
+3.  **「ブランチ」**ページの右上隅にある**「GitHub に接続」を**クリックします。
 
-    - If you have not logged into GitHub, you will be asked to log into GitHub first.
-    - If it is the first time you use the integration, you will be asked to authorize the **TiDB Cloud Branching** app.
+    -   GitHub にログインしていない場合は、まず GitHub にログインするように求められます。
+    -   統合を初めて使用する場合は、 **TiDB Cloud Branching**アプリを承認するように求められます。
 
-   <img src="https://download.pingcap.com/images/docs/tidb-cloud/branch/github-authorize.png" width="80%" />
+    <img src="https://download.pingcap.com/images/docs/tidb-cloud/branch/github-authorize.png" width="80%" />
 
-4. In the **Connect to GitHub** dialog, select a GitHub account in the **GitHub Account** drop-down list.
+4.  **「GitHub に接続」**ダイアログで、 **「GitHub アカウント」**ドロップダウン リストから GitHub アカウントを選択します。
 
-    If your account does not exist in the list, click **Install Other Account**, and then follow the on-screen instructions to install the account.
+    アカウントがリストに存在しない場合は、 **「その他のアカウントのインストール」**をクリックし、画面の指示に従ってアカウントをインストールします。
 
-5. Select your target repository in the **GitHub Repository** drop-down list. If the list is long, you can search the repository by typing the name.
+5.  **GitHub リポジトリ**のドロップダウン リストでターゲット リポジトリを選択します。リストが長い場合は、名前を入力してリポジトリを検索できます。
 
-6. Click **Connect** to connect between your TiDB Serverless cluster and your GitHub repository.
+6.  **「接続」**をクリックして、TiDB Serverless クラスターと GitHub リポジトリを接続します。
 
-   <img src="https://download.pingcap.com/images/docs/tidb-cloud/branch/github-connect.png" width="40%" />
+    <img src="https://download.pingcap.com/images/docs/tidb-cloud/branch/github-connect.png" width="40%" />
 
-## TiDB Cloud Branching app behaviors
+## TiDB Cloudブランチングアプリの動作 {#tidb-cloud-branching-app-behaviors}
 
-After you connect your TiDB Serverless cluster to your GitHub repository, for each pull request in this repository, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) GitHub App can automatically manage its corresponding TiDB Serverless branch. The following lists the default behaviors for pull request changes:
+TiDB Serverless クラスターを GitHub リポジトリに接続すると、このリポジトリ内の各プル リクエストに対して、 [TiDB Cloudブランチ](https://github.com/apps/tidb-cloud-branching) GitHub App が対応する TiDB Serverless ブランチを自動的に管理できるようになります。プル リクエストの変更に対するデフォルトの動作を次に示します。
 
-| Pull request changes               | TiDB Cloud Branching app behaviors                                                                                                                                                                                                                                                                                                                                        |
-|------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Create a pull request              | When you create a pull request in the repository, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app creates a branch for your TiDB Serverless cluster. The branch name is in the `${github_branch_name}_${pr_id}_${commit_sha}` format. Note that the number of branches has a [limit](/tidb-cloud/branch-overview.md#limitations-and-quotas). |
-| Push new commits to a pull request | Every time you push a new commit to a pull request in the repository, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app deletes the previous TiDB Serverless branch and creates a new branch for the latest commit.                                                                                                                            |
-| Close or merge a pull request      | When you close or merge a pull request, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app deletes the branch for this pull request.                                                                                                                                                                                                            |
-| Reopen a pull request              | When you reopen a pull request, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app creates a branch for the lasted commit of the pull request.                                                                                                                                                                                                  |
+| プルリクエストの変更             | TiDB Cloudブランチングアプリの動作                                                                                                                                                                                                                                                       |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| プルリクエストを作成する           | リポジトリにプル リクエストを作成すると、 [TiDB Cloudブランチ](https://github.com/apps/tidb-cloud-branching)アプリによって TiDB Serverless クラスターのブランチが作成されます。ブランチ名は`${github_branch_name}_${pr_id}_${commit_sha}`形式です。ブランチの数には[制限](/tidb-cloud/branch-overview.md#limitations-and-quotas)含まれていることに注意してください。 |
+| 新しいコミットをプルリクエストにプッシュする | リポジトリ内のプル リクエストに新しいコミットをプッシュするたびに、 [TiDB Cloudブランチ](https://github.com/apps/tidb-cloud-branching)アプリは以前の TiDB Serverless ブランチを削除し、最新のコミット用の新しいブランチを作成します。                                                                                                                    |
+| プルリクエストをクローズまたはマージする   | プル リクエストをクローズまたはマージすると、 [TiDB Cloudブランチ](https://github.com/apps/tidb-cloud-branching)アプリによってこのプル リクエストのブランチが削除されます。                                                                                                                                                         |
+| プルリクエストを再開する           | プル リクエストを再度開くと、 [TiDB Cloudブランチ](https://github.com/apps/tidb-cloud-branching)アプリによってプル リクエストの最新のコミットのブランチが作成されます。                                                                                                                                                           |
 
-## Configure TiDB Cloud Branching app
+## TiDB Cloud Branching アプリを構成する {#configure-tidb-cloud-branching-app}
 
-To configure the behaviors of [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app, you can add a `tidbcloud.yml` file to the root directory of your repository, and then add the desired configurations to this file according to the following instructions.
+[TiDB Cloudブランチ](https://github.com/apps/tidb-cloud-branching)アプリの動作を構成するには、リポジトリのルート ディレクトリに`tidbcloud.yml`ファイルを追加し、次の手順に従ってこのファイルに必要な構成を追加します。
 
-### branch.blockList
+### ブランチ.ブロックリスト {#branch-blocklist}
 
-**Type:** array of string. **Default:** `[]`.
+**タイプ:**文字列の配列。**デフォルト:** `[]` 。
 
-Specify the GitHub branches that forbid the TiDB Cloud Branching app, even if they are in the `allowList`.
+`allowList`内にある場合でも、 TiDB Cloud Branching アプリを禁止する GitHub ブランチを指定します。
 
 ```yaml
 github:
@@ -81,11 +81,11 @@ github:
             - ".*_blackList"
 ```
 
-### branch.allowList
+### ブランチ.allowList {#branch-allowlist}
 
-**type:** array of string. **Default:** `[.*]`.
+**タイプ:**文字列の配列。**デフォルト:** `[.*]` 。
 
-Specify the GitHub branches that allow the TiDB Cloud Branching app.
+TiDB Cloud Branching アプリを許可する GitHub ブランチを指定します。
 
 ```yaml
 github:
@@ -94,11 +94,11 @@ github:
             - ".*_db"
 ```
 
-### branch.autoReserved
+### ブランチ.自動予約 {#branch-autoreserved}
 
-**Type:** boolean. **Default:** `false`.
+**タイプ:**ブール値。**デフォルト:** `false` 。
 
-If it is set to `true`, the TiDB Cloud Branching app will not delete the TiDB Serverless branch that is created in the previous commit.
+`true`に設定すると、 TiDB Cloud Branching アプリは、前のコミットで作成された TiDB Serverless ブランチを削除しません。
 
 ```yaml
 github:
@@ -106,11 +106,11 @@ github:
         autoReserved: false
 ```
 
-### branch.autoDestroy
+### ブランチ.自動破棄 {#branch-autodestroy}
 
-**Type:** boolean. **Default:** `true`.
+**タイプ:**ブール値。**デフォルト:** `true` 。
 
-If it is set to `false`, the TiDB Cloud Branching app will not delete the TiDB Serverless branch when a pull request is closed or merged.
+`false`に設定すると、プル リクエストがクローズまたはマージされたときに、 TiDB Cloud Branching アプリは TiDB Serverless ブランチを削除しません。
 
 ```yaml
 github:
@@ -118,50 +118,50 @@ github:
         autoDestroy: true
 ```
 
-## Create a branching CI workflow
+## 分岐CIワークフローを作成する {#create-a-branching-ci-workflow}
 
-One of the best practices for using branches is to create a branching CI workflow. With the workflow, you can test your code using a TiDB Serverless branch instead of using the production cluster before merging the pull request. You can find a live demo [here](https://github.com/shiyuhang0/tidbcloud-branch-gorm-example).
+ブランチを使用するベスト プラクティスの 1 つは、ブランチ CI ワークフローを作成することです。このワークフローを使用すると、プル リクエストをマージする前に、本番クラスターを使用する代わりに、TiDB Serverless ブランチを使用してコードをテストできます。ライブ デモ[ここ](https://github.com/shiyuhang0/tidbcloud-branch-gorm-example)を参照してください。
 
-Here are the main steps to create the workflow:
+ワークフローを作成する主な手順は次のとおりです。
 
-1. [Integrate TiDB Serverless branching with your GitHub repository](#integrate-tidb-serverless-branching-with-your-github-repository).
+1.  [TiDB サーバーレス ブランチを GitHub リポジトリに統合する](#integrate-tidb-serverless-branching-with-your-github-repository) 。
 
-2. Get the branch connection information.
+2.  ブランチ接続情報を取得します。
 
-   You can use the [wait-for-tidbcloud-branch](https://github.com/tidbcloud/wait-for-tidbcloud-branch) action to wait for the readiness of the TiDB Serverless branch and get the connection information of the branch.
+    [tidbcloud ブランチを待つ](https://github.com/tidbcloud/wait-for-tidbcloud-branch)アクションを使用して、TiDB Serverless ブランチの準備が完了するまで待機し、ブランチの接続情報を取得できます。
 
-    Example usage:
+    使用例:
 
-   ```yaml
-   steps:
-     - name: Wait for TiDB Serverless branch to be ready
-       uses: tidbcloud/wait-for-tidbcloud-branch@v0
-       id: wait-for-branch
-       with:
-         token: ${{ secrets.GITHUB_TOKEN }}
-         public-key: ${{ secrets.TIDB_CLOUD_API_PUBLIC_KEY }}
-         private-key: ${{ secrets.TIDB_CLOUD_API_PRIVATE_KEY }}
+    ```yaml
+    steps:
+      - name: Wait for TiDB Serverless branch to be ready
+        uses: tidbcloud/wait-for-tidbcloud-branch@v0
+        id: wait-for-branch
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          public-key: ${{ secrets.TIDB_CLOUD_API_PUBLIC_KEY }}
+          private-key: ${{ secrets.TIDB_CLOUD_API_PRIVATE_KEY }}
 
-     - name: Test with TiDB Serverless branch
-        run: |
-           echo "The host is ${{ steps.wait-for-branch.outputs.host }}"
-           echo "The user is ${{ steps.wait-for-branch.outputs.user }}"
-           echo "The password is ${{ steps.wait-for-branch.outputs.password }}"
-   ```
-   
-   - `token`: GitHub will automatically create a [GITHUB_TOKEN](https://docs.github.com/en/actions/security-guides/automatic-token-authentication) secret. You can use it directly.
-   - `public-key` and `private-key`: The TiDB Cloud [API key](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
+      - name: Test with TiDB Serverless branch
+         run: |
+            echo "The host is ${{ steps.wait-for-branch.outputs.host }}"
+            echo "The user is ${{ steps.wait-for-branch.outputs.user }}"
+            echo "The password is ${{ steps.wait-for-branch.outputs.password }}"
+    ```
 
-3. Modify your test code.
+    -   `token` : GitHub は自動的に[トークン](https://docs.github.com/en/actions/security-guides/automatic-token-authentication)シークレットを作成します。これを直接使用できます。
+    -   `public-key`および`private-key` : TiDB Cloud[APIキー](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management) 。
 
-   Modify your test code to accept the connection information from GitHub Actions. For example, you can accept the connection information through the environment, as demonstrated in the [live demo](https://github.com/shiyuhang0/tidbcloud-branch-gorm-example).
+3.  テストコードを変更します。
 
-## What's next
+    GitHub Actions からの接続情報を受け入れるようにテスト コードを変更します。たとえば、 [ライブデモ](https://github.com/shiyuhang0/tidbcloud-branch-gorm-example)に示すように、環境を通じて接続情報を受け入れることができます。
 
-Learn how to use the branching GitHub integration with the following examples:
+## 次は何ですか {#what-s-next}
 
-- [branching-gorm-example](https://github.com/tidbcloud/branching-gorm-example)
-- [branching-django-example](https://github.com/tidbcloud/branching-django-example)
-- [branching-rails-example](https://github.com/tidbcloud/branching-rails-example)
+次の例を使用して、ブランチング GitHub 統合の使用方法を学習します。
 
-You can also build your branching CI/CD workflow without the branching GitHub integration. For example, you can use [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli) and GitHub Actions to customize your CI/CD workflows.
+-   [分岐-ゴーム-例](https://github.com/tidbcloud/branching-gorm-example)
+-   [分岐-Django-例](https://github.com/tidbcloud/branching-django-example)
+-   [分岐レールの例](https://github.com/tidbcloud/branching-rails-example)
+
+ブランチング GitHub 統合を使用せずに、ブランチング CI/CD ワークフローを構築することもできます。たとえば、 [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli)と GitHub Actions を使用して CI/CD ワークフローをカスタマイズできます。

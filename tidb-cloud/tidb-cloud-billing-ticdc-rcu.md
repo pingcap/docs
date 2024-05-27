@@ -1,30 +1,30 @@
 ---
 title: Changefeed Billing
-summary: Learn about billing for changefeeds in TiDB Cloud.
+summary: TiDB Cloudの変更フィードに対する課金について説明します。
 ---
 
-# Changefeed Billing
+# チェンジフィード課金 {#changefeed-billing}
 
-TiDB Cloud measures the capacity of [changefeeds](/tidb-cloud/changefeed-overview.md) in TiCDC Replication Capacity Units (RCUs). When you [create a changefeed](/tidb-cloud/changefeed-overview.md#create-a-changefeed) for a cluster, you can select an appropriate specification. The higher the RCU, the better the replication performance. You will be charged for these TiCDC changefeed RCUs.
+TiDB Cloud は、 [チェンジフィード](/tidb-cloud/changefeed-overview.md)の容量を TiCDC レプリケーション容量単位 (RCU) で測定します。クラスターに[チェンジフィードを作成する](/tidb-cloud/changefeed-overview.md#create-a-changefeed)設定すると、適切な仕様を選択できます。RCU が高いほど、レプリケーション パフォーマンスが向上します。これらの TiCDC 変更フィード RCU に対して料金が発生します。
 
-## Number of TiCDC RCUs
+## TiCDC RCU の数 {#number-of-ticdc-rcus}
 
-The following table lists the specifications and corresponding replication performances for changefeeds:
+次の表は、変更フィードの仕様と対応するレプリケーション パフォーマンスを示しています。
 
-| Specification | Maximum replication performance |
-|---------------|---------------------------------|
-| 2 RCUs        | 5,000 rows/s                    |
-| 4 RCUs        | 10,000 rows/s                   |
-| 8 RCUs        | 20,000 rows/s                   |
-| 16 RCUs       | 40,000 rows/s                   |
-| 24 RCUs       | 60,000 rows/s                   |
-| 32 RCUs       | 80,000 rows/s                   |
-| 40 RCUs       | 100,000 rows/s                  |
+| 仕様       | 最大のレプリケーションパフォーマンス |
+| -------- | ------------------ |
+| 2 RCU    | 5,000行/秒           |
+| 4 つの RCU | 10,000行/秒          |
+| 8 RCU    | 20,000行/秒          |
+| 16 RCU   | 40,000 行/秒         |
+| 24 RCU   | 60,000行/秒          |
+| 32 RCU   | 80,000行/秒          |
+| 40 RCU   | 100,000行/秒         |
 
-> **Note:**
+> **注記：**
 >
-> The preceding performance data is for reference only and might vary in different scenarios.
+> 上記のパフォーマンス データは参考用であり、シナリオによって異なる場合があります。
 
-## Price
+## 価格 {#price}
 
-To learn about the supported regions and the price of TiDB Cloud for each TiCDC RCU, see [Changefeed Cost](https://www.pingcap.com/tidb-cloud-pricing-details/#changefeed-cost).
+各 TiCDC RCU でサポートされているリージョンとTiDB Cloudの価格については、 [チェンジフィードコスト](https://www.pingcap.com/tidb-cloud-pricing-details/#changefeed-cost)参照してください。

@@ -1,17 +1,17 @@
 ---
 title: SHOW CREATE RESOURCE GROUP
-summary: Learn the usage of SHOW CREATE RESOURCE GROUP in TiDB.
+summary: TiDB での SHOW CREATE RESOURCE GROUP の使用方法を学習します。
 ---
 
-# SHOW CREATE RESOURCE GROUP
+# リソースグループの作成を表示 {#show-create-resource-group}
 
-You can use the `SHOW CREATE RESOURCE GROUP` statement to view the current definition of a resource group.
+`SHOW CREATE RESOURCE GROUP`ステートメントを使用して、リソース グループの現在の定義を表示できます。
 
-> **Note:**
+> **注記：**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowCreateResourceGroupStmt ::=
@@ -22,16 +22,16 @@ ResourceGroupName ::=
 |   "DEFAULT"
 ```
 
-## Examples
+## 例 {#examples}
 
-Create a resource group `rg1`.
+リソース グループ`rg1`を作成します。
 
 ```sql
 CREATE RESOURCE GROUP rg1 RU_PER_SEC=100;
 Query OK, 0 rows affected (0.10 sec)
 ```
 
-View the definition of `rg1`.
+`rg1`の定義をビュー。
 
 ```sql
 SHOW CREATE RESOURCE GROUP rg1;
@@ -44,13 +44,13 @@ SHOW CREATE RESOURCE GROUP rg1;
 1 row in set (0.01 sec)
 ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension for MySQL.
+このステートメントは、MySQL の TiDB 拡張機能です。
 
-## See also
+## 参照 {#see-also}
 
-* [TiDB RESOURCE CONTROL](/tidb-resource-control.md)
-* [CREATE RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
-* [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
-* [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
+-   [TiDB リソース制御](/tidb-resource-control.md)
+-   [リソースグループの作成](/sql-statements/sql-statement-alter-resource-group.md)
+-   [リソースグループの変更](/sql-statements/sql-statement-alter-resource-group.md)
+-   [リソースグループを削除](/sql-statements/sql-statement-drop-resource-group.md)

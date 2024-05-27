@@ -1,44 +1,44 @@
 ---
 title: Troubleshoot TiProxy
-summary: Learn some common problems, causes, and solutions for TiProxy.
+summary: TiProxy の一般的な問題、原因、および解決策について説明します。
 ---
 
-# Troubleshoot TiProxy
+# TiProxy のトラブルシューティング {#troubleshoot-tiproxy}
 
-This document describes some common problems, causes, and solutions for TiProxy.
+このドキュメントでは、TiProxy の一般的な問題、原因、および解決策について説明します。
 
-## Cannot connect to TiProxy
+## TiProxyに接続できません {#cannot-connect-to-tiproxy}
 
-You can troubleshoot the issue by following these steps:
+次の手順に従って、問題をトラブルシューティングできます。
 
-1. Check if the [connector version](/tiproxy/tiproxy-overview.md#supported-connectors) is supported. If the connector is not in the list, check if the connector supports [authentication plugins](https://dev.mysql.com/doc/refman/8.0/en/pluggable-authentication.html).
-2. If the client reports `No available TiDB instances, please make sure TiDB is available`, check if there is a TiDB server and if the SQL port and HTTP status port of the TiDB server can be connected normally.
-3. If the client reports `Require TLS enabled on TiProxy when require-backend-tls=true`, check if TiProxy is correctly configured with TLS certificates.
-4. If the client reports `Verify TiDB capability failed, please upgrade TiDB`, check if the TiDB server version is v6.5.0 or later.
-5. If the client reports `TiProxy fails to connect to TiDB, please make sure TiDB is available`, check if the TiProxy node can connect to the TiDB server.
-6. If the client reports `Require TLS enabled on TiDB when require-backend-tls=true`, check if TiDB is correctly configured with TLS certificates.
-7. If the client reports `TiProxy fails to connect to TiDB, please make sure TiDB proxy-protocol is set correctly`, check if [`proxy.proxy-protocol`](/tiproxy/tiproxy-configuration.md#proxy-protocol) is enabled on TiProxy and [`proxy-protocol`](/tidb-configuration-file.md#proxy-protocol) is not enabled on the TiDB server.
-8. Check if TiProxy is configured with [`max-connections`](/tiproxy/tiproxy-configuration.md#max-connections) and if the number of connections on TiProxy exceeds the maximum connection limit.
-9. Check the TiProxy log for error messages.
+1.  [コネクタバージョン](/tiproxy/tiproxy-overview.md#supported-connectors)サポートされているかどうかを確認します。コネクタがリストにない場合は、コネクタが[認証プラグイン](https://dev.mysql.com/doc/refman/8.0/en/pluggable-authentication.html)をサポートしているかどうかを確認します。
+2.  クライアントが`No available TiDB instances, please make sure TiDB is available`を報告する場合は、TiDBサーバーが存在するかどうか、および TiDBサーバーの SQL ポートと HTTP ステータス ポートに正常に接続できるかどうかを確認します。
+3.  クライアントが`Require TLS enabled on TiProxy when require-backend-tls=true`を報告する場合は、TiProxy が TLS 証明書で正しく構成されているかどうかを確認します。
+4.  クライアントが`Verify TiDB capability failed, please upgrade TiDB`を報告する場合は、TiDBサーバーのバージョンが v6.5.0 以降であるかどうかを確認します。
+5.  クライアントが`TiProxy fails to connect to TiDB, please make sure TiDB is available`を報告した場合は、 TiProxy ノードが TiDBサーバーに接続できるかどうかを確認します。
+6.  クライアントが`Require TLS enabled on TiDB when require-backend-tls=true`を報告する場合は、TiDB が TLS 証明書で正しく構成されているかどうかを確認します。
+7.  クライアントが`TiProxy fails to connect to TiDB, please make sure TiDB proxy-protocol is set correctly`を報告した場合は、 TiProxy で[`proxy.proxy-protocol`](/tiproxy/tiproxy-configuration.md#proxy-protocol)が有効になっているかどうか、 TiDBサーバーで[`proxy-protocol`](/tidb-configuration-file.md#proxy-protocol)が有効になっていないかどうかを確認します。
+8.  TiProxy が[`max-connections`](/tiproxy/tiproxy-configuration.md#max-connections)に設定され、TiProxy 上の接続数が最大接続制限を超えているかどうかを確認します。
+9.  TiProxy ログでエラー メッセージを確認してください。
 
-## TiProxy does not migrate connections
+## TiProxyは接続を移行しません {#tiproxy-does-not-migrate-connections}
 
-You can troubleshoot the issue by following these steps:
+次の手順に従って、問題をトラブルシューティングできます。
 
-1. Whether the [TiProxy limitations](/tiproxy/tiproxy-overview.md#limitations) are not met. You can further confirm this by checking the TiProxy log.
-2. Whether [`security.session-token-signing-cert`](/tidb-configuration-file.md#session-token-signing-cert-new-in-v640), [`security.session-token-signing-key`](/tidb-configuration-file.md#session-token-signing-key-new-in-v640), and [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) are correctly configured on TiDB.
+1.  [TiProxy の制限](/tiproxy/tiproxy-overview.md#limitations)満たされていないかどうか。TiProxy ログを確認することでこれをさらに確認できます。
+2.  [`security.session-token-signing-cert`](/tidb-configuration-file.md#session-token-signing-cert-new-in-v640) [`security.session-token-signing-key`](/tidb-configuration-file.md#session-token-signing-key-new-in-v640) [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50)で正しく構成されているかどうか。
 
-## Unbalanced CPU usage on TiDB server
+## TiDBサーバーの CPU 使用率が不均衡 {#unbalanced-cpu-usage-on-tidb-server}
 
-Check if the number of connections on TiDB server is balanced. If not, troubleshoot by following the [TiProxy does not migrate connections](#tiproxy-does-not-migrate-connections) section.
+TiDBサーバーの接続数が均等であるかどうかを確認します。均等でない場合は、セクション[TiProxyは接続を移行しません](#tiproxy-does-not-migrate-connections)に従ってトラブルシューティングを行います。
 
-If the number of connections is balanced, it might be that some connections occupy a high CPU usage while other connections are relatively idle. TiProxy balances connections based on the number of connections on the TiDB server, not the actual load.
+接続数がバランスされている場合、一部の接続は CPU 使用率が高く、他の接続は比較的アイドル状態である可能性があります。TiProxy は、実際の負荷ではなく、TiDBサーバー上の接続数に基づいて接続のバランスをとります。
 
-## Latency is significantly increased
+## レイテンシーが大幅に増加 {#latency-is-significantly-increased}
 
-You can troubleshoot the issue by following these steps:
+次の手順に従って、問題をトラブルシューティングできます。
 
-1. Check the latency on TiProxy through Grafana. If the latency on TiProxy is not high, it means that the client load is high or the network latency between the client and TiProxy is high.
-2. Check the latency on the TiDB server through Grafana. If the latency on the TiDB server is high, follow the steps in [Latency increases significantly](/tidb-troubleshooting-map.md#2-latency-increases-significantly) to troubleshoot.
-3. Check the [network duration between TiProxy and TiDB server](/tiproxy/tiproxy-grafana.md#backend) through Grafana.
-4. Check the CPU usage on TiProxy. If the CPU usage is over 90%, you need to scale out TiProxy.
+1.  Grafana を通じて TiProxy のレイテンシーを確認します。TiProxy のレイテンシーが高くない場合は、クライアントの負荷が高いか、クライアントと TiProxy 間のネットワークレイテンシーが高いことを意味します。
+2.  Grafana を使用して TiDBサーバーのレイテンシーを確認します。TiDBサーバーのレイテンシーが高い場合は、 [遅延が大幅に増加する](/tidb-troubleshooting-map.md#2-latency-increases-significantly)手順に従ってトラブルシューティングを行います。
+3.  Grafana で[TiProxyとTiDBサーバー間のネットワーク継続時間](/tiproxy/tiproxy-grafana.md#backend)確認します。
+4.  TiProxy の CPU 使用率を確認します。CPU 使用率が 90% を超える場合は、TiProxy をスケールアウトする必要があります。

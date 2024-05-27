@@ -1,8 +1,8 @@
 ---
 title: DESCRIBE | TiDB SQL Statement Reference
-summary: An overview of the usage of DESCRIBE for the TiDB database.
+summary: TiDB データベースでの DESCRIBE の使用法の概要。
 ---
 
-# DESCRIBE
+# 説明する {#describe}
 
-This statement is an alias to [`EXPLAIN`](/sql-statements/sql-statement-explain.md). It is included for compatibility with MySQL.
+このステートメントは[`EXPLAIN`](/sql-statements/sql-statement-explain.md)のエイリアスです。MySQL との互換性のために含まれています。

@@ -1,299 +1,277 @@
 ---
 title: TiDB Cloud Serverless Driver Kysely Tutorial
-summary: Learn how to use TiDB Cloud serverless driver with Kysely.
+summary: Kysely でTiDB Cloudサーバーレス ドライバーを使用する方法を学びます。
 ---
 
-# TiDB Cloud Serverless Driver Kysely Tutorial
+# TiDB CloudレスDriverKysely チュートリアル {#tidb-cloud-serverless-driver-kysely-tutorial}
 
-[Kysely](https://kysely.dev/docs/intro) is a type-safe and autocompletion-friendly TypeScript SQL query builder. TiDB Cloud offers [@tidbcloud/kysely](https://github.com/tidbcloud/kysely), enabling you to use Kysely over HTTPS with [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md). Compared with the traditional TCP way, [@tidbcloud/kysely](https://github.com/tidbcloud/kysely) brings the following benefits:
+[キセリ](https://kysely.dev/docs/intro)は、型安全で自動補完対応の TypeScript SQL クエリ ビルダーです。TiDB TiDB Cloud は[翻訳:](https://github.com/tidbcloud/kysely)を提供し、 [TiDB Cloudサーバーレス ドライバー](/tidb-cloud/serverless-driver.md)使用して HTTPS 経由で Kysely を使用できます。従来の TCP 方式と比較して、 [翻訳:](https://github.com/tidbcloud/kysely)次の利点があります。
 
-- Better performance in serverless environments.
-- Ability to use Kysely in edge environments.
+-   サーバーレス環境でのパフォーマンスが向上します。
+-   エッジ環境で Kysely を使用する機能。
 
-This tutorial describes how to use TiDB Cloud serverless driver with Kysely in Node.js environments and edge environments.
+このチュートリアルでは、Node.js 環境とエッジ環境で Kysely とTiDB Cloudサーバーレス ドライバーを使用する方法について説明します。
 
-## Use TiDB Cloud Kysely dialect in Node.js environments
+## Node.js環境でTiDB Cloud Kysely方言を使用する {#use-tidb-cloud-kysely-dialect-in-node-js-environments}
 
-This section describes how to use TiDB Cloud serverless driver with Kysely in Node.js environments.
+このセクションでは、Node.js 環境で Kysely とTiDB Cloudサーバーレス ドライバーを使用する方法について説明します。
 
-### Before you begin
+### あなたが始める前に {#before-you-begin}
 
-To complete this tutorial, you need the following:
+このチュートリアルを完了するには、次のものが必要です。
 
-- [Node.js](https://nodejs.org/en) >= 18.0.0.
-- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
-- A TiDB Serverless cluster. If you don't have any, you can [create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+-   [Node.js](https://nodejs.org/en) &gt;= 18.0.0。
+-   [ネプ](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)またはお好みのパッケージ マネージャーを使用します。
+-   TiDB サーバーレス クラスター。ない場合は、 [TiDBサーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)使用できます。
 
-### Step 1. Create a project
+### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
-1. Create a project named `kysely-node-example`:
+1.  `kysely-node-example`という名前のプロジェクトを作成します。
 
-    ```
-    mkdir kysely-node-example
-    cd kysely-node-example
-    ```
+        mkdir kysely-node-example
+        cd kysely-node-example
 
-2. Install the `kysely`, `@tidbcloud/kysely`, and `@tidbcloud/serverless` packages:
+2.  `kysely` `@tidbcloud/serverless` `@tidbcloud/kysely`インストールします。
 
-   ```
-   npm install kysely @tidbcloud/kysely @tidbcloud/serverless
-   ```
+        npm install kysely @tidbcloud/kysely @tidbcloud/serverless
 
-3. In the root directory of your project, locate the `package.json` file, and then specify the ES module by adding `type: "module"` to the file:
+3.  プロジェクトのルート ディレクトリで、 `package.json`ファイルを見つけ、ファイルに`type: "module"`追加して ES モジュールを指定します。
 
-   ```json
-   {
-     "type": "module",
-     "dependencies": {
-       "@tidbcloud/kysely": "^0.0.4",
-       "@tidbcloud/serverless": "^0.0.7",
-       "kysely": "^0.26.3",
-     }
-   }
-   ```
-   
-4. In the root directory of your project, add a `tsconfig.json` file to define the TypeScript compiler options. Here is an example file:
-
-   ```json
-   {
-     "compilerOptions": {
-       "module": "ES2022",
-       "target": "ES2022",
-       "moduleResolution": "node",
-       "strict": false,
-       "declaration": true,
-       "outDir": "dist",
-       "removeComments": true,
-       "allowJs": true,
-       "esModuleInterop": true,
-       "resolveJsonModule": true
-     }
-   }
-   ```
-
-### Step 2. Set the environment
-
-1. On the overview page of your TiDB Serverless cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
-
-    ```
-    mysql://[username]:[password]@[host]/[database]
+    ```json
+    {
+      "type": "module",
+      "dependencies": {
+        "@tidbcloud/kysely": "^0.0.4",
+        "@tidbcloud/serverless": "^0.0.7",
+        "kysely": "^0.26.3",
+      }
+    }
     ```
 
-2. Set the environment variable `DATABASE_URL` in your local environment. For example, in Linux or macOS, you can run the following command:
+4.  プロジェクトのルート ディレクトリに、TypeScript コンパイラ オプションを定義する`tsconfig.json`ファイルを追加します。次にサンプル ファイルを示します。
+
+    ```json
+    {
+      "compilerOptions": {
+        "module": "ES2022",
+        "target": "ES2022",
+        "moduleResolution": "node",
+        "strict": false,
+        "declaration": true,
+        "outDir": "dist",
+        "removeComments": true,
+        "allowJs": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true
+      }
+    }
+    ```
+
+### ステップ2. 環境を設定する {#step-2-set-the-environment}
+
+1.  TiDB Serverless クラスターの概要ページで、右上隅の**[接続]**をクリックし、表示されるダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
+
+        mysql://[username]:[password]@[host]/[database]
+
+2.  ローカル環境で環境変数`DATABASE_URL`を設定します。たとえば、Linux または macOS では、次のコマンドを実行できます。
 
     ```bash
     export DATABASE_URL='mysql://[username]:[password]@[host]/[database]'
     ```
-   
-### Step 3. Use Kysely to query data
 
-1. Create a table in your TiDB Serverless cluster and insert some data. 
+### ステップ3. Kyselyを使用してデータをクエリする {#step-3-use-kysely-to-query-data}
 
-    You can use [Chat2Query in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
+1.  TiDB Serverless クラスターにテーブルを作成し、データを挿入します。
 
-   ```sql
-   CREATE TABLE `test`.`person`  (
-     `id` int(11) NOT NULL AUTO_INCREMENT,
-     `name` varchar(255) NULL DEFAULT NULL,
-     `gender` enum('male','female') NULL DEFAULT NULL,
-     PRIMARY KEY (`id`) USING BTREE
-   );
-   
-   insert into test.person values (1,'pingcap','male')
-   ```
+    [TiDB Cloudコンソールの Chat2Query](/tidb-cloud/explore-data-with-chat2query.md)使用して SQL ステートメントを実行できます。次に例を示します。
 
-2. In the root directory of your project, create a file named `hello-word.ts` and add the following code:
+    ```sql
+    CREATE TABLE `test`.`person`  (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `name` varchar(255) NULL DEFAULT NULL,
+      `gender` enum('male','female') NULL DEFAULT NULL,
+      PRIMARY KEY (`id`) USING BTREE
+    );
 
-   ```ts
-   import { Kysely,GeneratedAlways,Selectable } from 'kysely'
-   import { TiDBServerlessDialect } from '@tidbcloud/kysely'
-   
-   // Types
-   interface Database {
-     person: PersonTable
-   }
-   
-   interface PersonTable {
-     id: GeneratedAlways<number>
-     name: string
-     gender: "male" | "female"
-   }
-   
-   // Dialect
-   const db = new Kysely<Database>({
-     dialect: new TiDBServerlessDialect({
-       url: process.env.DATABASE_URL
-     }),
-   })
-   
-   // Simple Querying
-   type Person = Selectable<PersonTable>
-   export async function findPeople(criteria: Partial<Person> = {}) {
-     let query = db.selectFrom('person')
-   
-     if (criteria.name){
-       query = query.where('name', '=', criteria.name)
-     }
-   
-     return await query.selectAll().execute()
-   }
-   
-   console.log(await findPeople())
-   ```
-
-### Step 4. Run the Typescript code
-
-1. Install `ts-node` to transform TypeScript into JavaScript, and then install `@types/node` to provide TypeScript type definitions for Node.js.
-
-   ```
-   npm install -g ts-node
-   npm i --save-dev @types/node
-   ```
-   
-2. Run the Typescript code with the following command:
-
-   ```
-   ts-node --esm hello-world.ts
-   ```
-
-## Use TiDB Cloud Kysely dialect in edge environments
-
-This section takes the TiDB Cloud Kysely dialect in Vercel Edge Function as an example.
-
-### Before you begin
-
-To complete this tutorial, you need the following:
-
-- A [Vercel](https://vercel.com/docs) account that provides edge environment.
-- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
-- A TiDB Serverless cluster. If you don't have any, you can [create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
-
-### Step 1. Create a project
-
-1. Install the Vercel CLI:
-
-    ```
-    npm i -g vercel@latest
+    insert into test.person values (1,'pingcap','male')
     ```
 
-2. Create a [Next.js](https://nextjs.org/) project called `kysely-example` using the following terminal commands:
+2.  プロジェクトのルート ディレクトリに`hello-word.ts`という名前のファイルを作成し、次のコードを追加します。
 
-   ```
-   npx create-next-app@latest kysely-example --ts --no-eslint --tailwind --no-src-dir --app --import-alias "@/*"
-   cd kysely-example
-   ```
-   
-3. Install the `kysely`, `@tidbcloud/kysely`, and `@tidbcloud/serverless` packages:
+    ```ts
+    import { Kysely,GeneratedAlways,Selectable } from 'kysely'
+    import { TiDBServerlessDialect } from '@tidbcloud/kysely'
 
-   ```
-   npm install kysely @tidbcloud/kysely @tidbcloud/serverless
-   ```
+    // Types
+    interface Database {
+      person: PersonTable
+    }
 
-### Step 2. Set the environment
+    interface PersonTable {
+      id: GeneratedAlways<number>
+      name: string
+      gender: "male" | "female"
+    }
 
-On the overview page of your TiDB Serverless cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
+    // Dialect
+    const db = new Kysely<Database>({
+      dialect: new TiDBServerlessDialect({
+        url: process.env.DATABASE_URL
+      }),
+    })
 
-```
-mysql://[username]:[password]@[host]/[database]
-```
+    // Simple Querying
+    type Person = Selectable<PersonTable>
+    export async function findPeople(criteria: Partial<Person> = {}) {
+      let query = db.selectFrom('person')
 
-### Step 3. Create an edge function
+      if (criteria.name){
+        query = query.where('name', '=', criteria.name)
+      }
 
-1. Create a table in your TiDB Serverless cluster and insert some data.
+      return await query.selectAll().execute()
+    }
 
-    You can use [Chat2Query in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
+    console.log(await findPeople())
+    ```
 
-   ```sql
-   CREATE TABLE `test`.`person`  (
-     `id` int(11) NOT NULL AUTO_INCREMENT,
-     `name` varchar(255) NULL DEFAULT NULL,
-     `gender` enum('male','female') NULL DEFAULT NULL,
-     PRIMARY KEY (`id`) USING BTREE
-   );
-   
-   insert into test.person values (1,'pingcap','male')
-   ```
+### ステップ4. Typescriptコードを実行する {#step-4-run-the-typescript-code}
 
-2. In the `app` directory of your project, create a file `/api/edge-function-example/route.ts` and add the following code:
+1.  `ts-node`インストールして TypeScript を JavaScript に変換し、次に`@types/node`インストールして Node.js に TypeScript 型定義を提供します。
 
-   ```ts
-   import { NextResponse } from 'next/server';
-   import type { NextRequest } from 'next/server';
-   import { Kysely,GeneratedAlways,Selectable } from 'kysely'
-   import { TiDBServerlessDialect } from '@tidbcloud/kysely'
-   
-   export const runtime = 'edge';
-   
-   // Types
-   interface Database {
-     person: PersonTable
-   }
-   
-   interface PersonTable {
-     id: GeneratedAlways<number>
-     name: string
-     gender: "male" | "female" | "other"
-   }
-   
-   // Dialect
-   const db = new Kysely<Database>({
-     dialect: new TiDBServerlessDialect({
-       url: process.env.DATABASE_URL
-     }),
-   })
-   
-   // Query
-   type Person = Selectable<PersonTable>
-   async function findPeople(criteria: Partial<Person> = {}) {
-     let query = db.selectFrom('person')
-   
-     if (criteria.name){
-       query = query.where('name', '=', criteria.name)
-     }
-   
-     return await query.selectAll().execute()
-   }
-   
-   export async function GET(request: NextRequest) {
-   
-     const searchParams = request.nextUrl.searchParams
-     const query = searchParams.get('query')
-   
-     let response = null;
-     if (query) {
-       response = await findPeople({name: query})
-     } else {
-       response = await findPeople()
-     }
-   
-     return NextResponse.json(response);
-   }
-   ```
-   
-   The preceding code accepts a query parameter `query` and returns the result of the query. If the query parameter is not provided, it returns all records in the `person` table.
+        npm install -g ts-node
+        npm i --save-dev @types/node
 
-3. Test your code locally:
+2.  次のコマンドで Typescript コードを実行します。
 
-   ```
-   export DATABASE_URL='mysql://[username]:[password]@[host]/[database]'
-   next dev
-   ```
-   
-4. Navigate to `http://localhost:3000/api/edge-function-example` to get the response from your route.
+        ts-node --esm hello-world.ts
 
-### Step 4. Deploy your code to Vercel
+## エッジ環境でTiDB Cloud Kysely 方言を使用する {#use-tidb-cloud-kysely-dialect-in-edge-environments}
 
-1. Deploy your code to Vercel with the `DATABASE_URL` environment variable:
+このセクションでは、Vercel Edge Function のTiDB Cloud Kysely 方言を例に説明します。
 
-   ```
-   vercel -e DATABASE_URL='mysql://[username]:[password]@[host]/[database]' --prod
-   ```
+### あなたが始める前に {#before-you-begin}
 
-    After the deployment is complete, you will get the URL of your project. 
+このチュートリアルを完了するには、次のものが必要です。
 
-2. Navigate to the `${Your-URL}/api/edge-function-example` page to get the response from your route.
+-   エッジ環境を提供する[ヴェルセル](https://vercel.com/docs)アカウント。
+-   [ネプ](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)またはお好みのパッケージ マネージャーを使用します。
+-   TiDB サーバーレス クラスター。ない場合は、 [TiDBサーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)使用できます。
 
-## What's next
+### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
-- Learn more about [Kysely](https://kysely.dev/docs/intro) and [@tidbcloud/kysely](https://github.com/tidbcloud/kysely)
-- Learn how to [integrate TiDB Cloud with Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
+1.  Vercel CLI をインストールします。
+
+        npm i -g vercel@latest
+
+2.  次のターミナル コマンドを使用して、 `kysely-example`という[次](https://nextjs.org/)プロジェクトを作成します。
+
+        npx create-next-app@latest kysely-example --ts --no-eslint --tailwind --no-src-dir --app --import-alias "@/*"
+        cd kysely-example
+
+3.  `kysely` `@tidbcloud/serverless` `@tidbcloud/kysely`インストールします。
+
+        npm install kysely @tidbcloud/kysely @tidbcloud/serverless
+
+### ステップ2. 環境を設定する {#step-2-set-the-environment}
+
+TiDB Serverless クラスターの概要ページで、右上隅の**[接続]**をクリックし、表示されるダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
+
+    mysql://[username]:[password]@[host]/[database]
+
+### ステップ3. エッジ関数を作成する {#step-3-create-an-edge-function}
+
+1.  TiDB Serverless クラスターにテーブルを作成し、データを挿入します。
+
+    [TiDB Cloudコンソールの Chat2Query](/tidb-cloud/explore-data-with-chat2query.md)使用して SQL ステートメントを実行できます。次に例を示します。
+
+    ```sql
+    CREATE TABLE `test`.`person`  (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `name` varchar(255) NULL DEFAULT NULL,
+      `gender` enum('male','female') NULL DEFAULT NULL,
+      PRIMARY KEY (`id`) USING BTREE
+    );
+
+    insert into test.person values (1,'pingcap','male')
+    ```
+
+2.  プロジェクトの`app`ディレクトリにファイル`/api/edge-function-example/route.ts`を作成し、次のコードを追加します。
+
+    ```ts
+    import { NextResponse } from 'next/server';
+    import type { NextRequest } from 'next/server';
+    import { Kysely,GeneratedAlways,Selectable } from 'kysely'
+    import { TiDBServerlessDialect } from '@tidbcloud/kysely'
+
+    export const runtime = 'edge';
+
+    // Types
+    interface Database {
+      person: PersonTable
+    }
+
+    interface PersonTable {
+      id: GeneratedAlways<number>
+      name: string
+      gender: "male" | "female" | "other"
+    }
+
+    // Dialect
+    const db = new Kysely<Database>({
+      dialect: new TiDBServerlessDialect({
+        url: process.env.DATABASE_URL
+      }),
+    })
+
+    // Query
+    type Person = Selectable<PersonTable>
+    async function findPeople(criteria: Partial<Person> = {}) {
+      let query = db.selectFrom('person')
+
+      if (criteria.name){
+        query = query.where('name', '=', criteria.name)
+      }
+
+      return await query.selectAll().execute()
+    }
+
+    export async function GET(request: NextRequest) {
+
+      const searchParams = request.nextUrl.searchParams
+      const query = searchParams.get('query')
+
+      let response = null;
+      if (query) {
+        response = await findPeople({name: query})
+      } else {
+        response = await findPeople()
+      }
+
+      return NextResponse.json(response);
+    }
+    ```
+
+    上記のコードはクエリ パラメータ`query`を受け入れ、クエリの結果を返します。クエリ パラメータが指定されていない場合は、テーブル`person`内のすべてのレコードを返します。
+
+3.  コードをローカルでテストします。
+
+        export DATABASE_URL='mysql://[username]:[password]@[host]/[database]'
+        next dev
+
+4.  ルートからの応答を取得するには、 `http://localhost:3000/api/edge-function-example`に移動します。
+
+### ステップ4. コードをVercelにデプロイ {#step-4-deploy-your-code-to-vercel}
+
+1.  `DATABASE_URL`環境変数を使用してコードを Vercel にデプロイ。
+
+        vercel -e DATABASE_URL='mysql://[username]:[password]@[host]/[database]' --prod
+
+    デプロイが完了すると、プロジェクトの URL が取得されます。
+
+2.  ルートからの応答を取得するには、 `${Your-URL}/api/edge-function-example`ページに移動します。
+
+## 次は何ですか {#what-s-next}
+
+-   [キセリ](https://kysely.dev/docs/intro)と[翻訳:](https://github.com/tidbcloud/kysely)について詳しく見る
+-   方法を学ぶ[TiDB CloudとVercelを統合する](/tidb-cloud/integrate-tidbcloud-with-vercel.md)

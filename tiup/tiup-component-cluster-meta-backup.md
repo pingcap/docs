@@ -1,34 +1,34 @@
 ---
 title: tiup cluster meta backup
-summary: The TiUP meta file is crucial for cluster operation and maintenance. Use `tiup cluster meta backup` to regularly back up the file. Use `tiup dm list` to check the cluster name. Specify the target directory with `--file` option. Use `-h, --help` for help information. The output includes execution logs of tiup-cluster.
+summary: TiUPメタファイルは、クラスターの運用と保守に不可欠です。`tiup cluster meta backup` を使用して、ファイルを定期的にバックアップします。`tiup dm list` を使用してクラスター名を確認します。`--file` オプションでターゲット ディレクトリを指定します。ヘルプ情報を表示するには、`-h, --help` を使用します。出力には、 tiup-clusterの実行ログが含まれます。
 ---
 
-# tiup cluster meta backup
+# tiup クラスタ メタ バックアップ {#tiup-cluster-meta-backup}
 
-The TiUP meta file is used for cluster operation and maintenance (OM). If this file is lost, you cannot use TiUP to manage the cluster. To avoid this situation, you can use the `tiup cluster meta backup` command to back up the TiUP meta file regularly.
+TiUPメタ ファイルは、クラスターの運用と保守 (OM) に使用されます。このファイルが失われると、 TiUPを使用してクラスターを管理できなくなります。この状況を回避するには、 `tiup cluster meta backup`コマンドを使用して、 TiUPメタ ファイルを定期的にバックアップします。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster meta backup <cluster-name> [flags]
 ```
 
-`<cluster-name>` is the name of the cluster to be operated on. If you forget the cluster name, you can check it using the [`tiup dm list`](/tiup/tiup-component-dm-list.md) command.
+`<cluster-name>`は操作対象となるクラスターの名前です。クラスター名を忘れた場合は、 [`tiup dm list`](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
 
-## Options
+## オプション {#options}
 
-### --file (string, defaults to the current directory)
+### --file (文字列、デフォルトは現在のディレクトリ) {#file-string-defaults-to-the-current-directory}
 
-Specifies the target directory to store the TiUP meta backup file.
+TiUPメタ バックアップ ファイルを保存するターゲット ディレクトリを指定します。
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `Boolean`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型: `Boolean`
+-   このオプションはデフォルトでは無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないようにします。
 
-## Output
+## 出力 {#output}
 
-The execution logs of tiup-cluster.
+tiup-clusterの実行ログ。
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP クラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

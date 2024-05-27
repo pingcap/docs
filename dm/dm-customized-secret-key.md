@@ -1,36 +1,37 @@
 ---
 title: Customize a Secret Key for DM Encryption and Decryption
-summary: Learn how to customize a secret key to encrypt and decrypt passwords used in the DM（Data Migration）data source and migration task configurations.
+summary: DM（データ移行）データ ソースおよび移行タスク構成で使用されるパスワードを暗号化および復号化するための秘密キーをカスタマイズする方法を学習します。
 ---
 
-# Customize a Secret Key for DM Encryption and Decryption
+# DM 暗号化と復号化のための秘密鍵をカスタマイズする {#customize-a-secret-key-for-dm-encryption-and-decryption}
 
-Before v8.0.0, [DM](/dm/dm-overview.md) uses a [fixed AES-256 secret key](https://github.com/pingcap/tiflow/blob/1252979421fc83ffa2a1548d981e505f7fc0b909/dm/pkg/encrypt/encrypt.go#L27) to encrypt and decrypt passwords in the data source and migration task configurations. However, using a fixed secret key might pose security risks, especially in environments where security is crucial. To enhance security, starting from v8.0.0, DM removes the fixed secret key and enables you to customize a secret key.
+v8.0.0 より前では、 [DM](/dm/dm-overview.md) [固定AES-256秘密鍵](https://github.com/pingcap/tiflow/blob/1252979421fc83ffa2a1548d981e505f7fc0b909/dm/pkg/encrypt/encrypt.go#L27)を使用して、データ ソースおよび移行タスク構成のパスワードを暗号化および復号化します。ただし、固定の秘密キーを使用すると、特にセキュリティが重要な環境では、セキュリティ リスクが生じる可能性があります。セキュリティを強化するために、v8.0.0 以降、DM は固定の秘密キーを削除し、秘密キーをカスタマイズできるようになりました。
 
-## Usage
+## 使用法 {#usage}
 
-1. Create a custom key file, which must contain a 64-character hexadecimal AES-256 secret key.
-2. In the DM-master [command-line flags](/dm/dm-command-line-flags.md) or [configuration file](/dm/dm-master-configuration-file.md), specify `secret-key-path` as the path of your custom key file.
+1.  64 文字の 16 進数 AES-256 秘密キーを含むカスタム キー ファイルを作成します。
+2.  DM-master [コマンドラインフラグ](/dm/dm-command-line-flags.md)または[設定ファイル](/dm/dm-master-configuration-file.md)で、カスタム キー ファイルのパスとして`secret-key-path`指定します。
 
-## Upgrade from a version earlier than v8.0.0
+## v8.0.0 より前のバージョンからアップグレードする {#upgrade-from-a-version-earlier-than-v8-0-0}
 
-Because DM no longer uses the fixed secret key starting from v8.0.0, pay attention to the following when upgrading DM from versions earlier than v8.0.0:
+DM は v8.0.0 以降では固定秘密キーを使用しなくなったため、DM を v8.0.0 より前のバージョンからアップグレードする場合は、次の点に注意してください。
 
-- If plaintext passwords are used in both [data source configurations](/dm/dm-source-configuration-file.md) and [migration task configurations](/dm/task-configuration-file-full.md), no additional steps are required for the upgrade.
-- If encrypted passwords are used in [data source configurations](/dm/dm-source-configuration-file.md) and [migration task configurations](/dm/task-configuration-file-full.md) or if you want to use encrypted passwords in the future, you need to do the following:
-    1. Add the `secret-key-path` parameter to the [DM-master configuration file](/dm/dm-master-configuration-file.md) and specify it as the path of your custom key file. The file must contain a 64-character hexadecimal AES-256 key. If the [fixed AES-256 secret key](https://github.com/pingcap/tiflow/blob/1252979421fc83ffa2a1548d981e505f7fc0b909/dm/pkg/encrypt/encrypt.go#L27) was used for encryption before upgrading, you can copy this secret key to your key file. Make sure all DM-master nodes use the same secret key configuration.
-    2. Perform a rolling upgrade of DM-master first, followed by a rolling upgrade of DM-worker. For more information, see [Rolling upgrade](/dm/maintain-dm-using-tiup.md#rolling-upgrade).
+-   [データソース構成](/dm/dm-source-configuration-file.md)と[移行タスクの構成](/dm/task-configuration-file-full.md)両方でプレーンテキスト パスワードが使用されている場合、アップグレードに追加の手順は必要ありません。
+-   [データソース構成](/dm/dm-source-configuration-file.md)と[移行タスクの構成](/dm/task-configuration-file-full.md)で暗号化されたパスワードが使用されている場合、または将来的に暗号化されたパスワードを使用する場合は、次の手順を実行する必要があります。
+    1.  `secret-key-path`パラメータを[DMマスター構成ファイル](/dm/dm-master-configuration-file.md)に追加し、カスタム キー ファイルのパスとして指定します。ファイルには、64 文字の 16 進数 AES-256 キーが含まれている必要があります。アップグレード前に[固定AES-256秘密鍵](https://github.com/pingcap/tiflow/blob/1252979421fc83ffa2a1548d981e505f7fc0b909/dm/pkg/encrypt/encrypt.go#L27)を暗号化に使用していた場合は、この秘密キーをキー ファイルにコピーできます。すべての DM マスター ノードで同じ秘密キー構成が使用されていることを確認してください。
+    2.  最初に DM-master のローリング アップグレードを実行し、次に DM-worker のローリング アップグレードを実行します。詳細については、 [ローリングアップグレード](/dm/maintain-dm-using-tiup.md#rolling-upgrade)を参照してください。
 
-## Update the secret key for encryption and decryption
+## 暗号化と復号化の秘密鍵を更新する {#update-the-secret-key-for-encryption-and-decryption}
 
-To update the secret key used for encryption and decryption, take the following steps:
+暗号化と復号化に使用される秘密キーを更新するには、次の手順を実行します。
 
-1. Update `secret-key-path` in the [DM-master configuration file](/dm/dm-master-configuration-file.md).
+1.  [DMマスター構成ファイル](/dm/dm-master-configuration-file.md)のアップデート`secret-key-path` 。
 
-    > **Note:**
+    > **注記：**
     >
-    > - Make sure all DM-master nodes are updated to the same secret key configuration.
-    > - During the secret key update, do not create new [data source configuration files](/dm/dm-source-configuration-file.md) or [migration task configuration files](/dm/task-configuration-file-full.md).
+    > -   すべての DM マスター ノードが同じ秘密キー構成に更新されていることを確認します。
+    > -   秘密鍵の更新中は、新しい[データソース構成ファイル](/dm/dm-source-configuration-file.md)または[移行タスク構成ファイル](/dm/task-configuration-file-full.md)を作成しないでください。
 
-2. Perform a rolling restart of DM-master.
-3. Use the passwords encrypted with `tiup dmctl encrypt` (dmctl version >= v8.0.0) when you create new [data source configuration files](/dm/dm-source-configuration-file.md) and [migration task configuration files](/dm/task-configuration-file-full.md).
+2.  DM マスターのローリング再起動を実行します。
+
+3.  新しい[データソース構成ファイル](/dm/dm-source-configuration-file.md)と[移行タスク構成ファイル](/dm/task-configuration-file-full.md)を作成するときは、 `tiup dmctl encrypt` (dmctl バージョン &gt;= v8.0.0) で暗号化されたパスワードを使用します。

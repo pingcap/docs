@@ -1,61 +1,61 @@
 ---
 title: TiFlash Pipeline Execution Model
-summary: Learn about the TiFlash Pipeline Execution Model.
+summary: TiFlashパイプライン実行モデルについて学習します。
 ---
 
-# TiFlash Pipeline Execution Model
+# TiFlashパイプライン実行モデル {#tiflash-pipeline-execution-model}
 
-This document introduces the TiFlash pipeline execution model.
+このドキュメントでは、TiFlashパイプライン実行モデルについて説明します。
 
-Starting from v7.2.0, TiFlash supports a new execution model, the pipeline execution model.
+v7.2.0 以降、 TiFlash は新しい実行モデルであるパイプライン実行モデルをサポートします。
 
-- For v7.2.0 and v7.3.0: The pipeline execution model is experimental and is controlled by [`tidb_enable_tiflash_pipeline_model`](https://docs.pingcap.com/tidb/v7.2/system-variables#tidb_enable_tiflash_pipeline_model-introduced-since-v720).
-- For v7.4.0 and later versions: The pipeline execution model becomes generally available. It is an internal feature of TiFlash and is tightly integrated with TiFlash resource control. When you enable TiFlash resource control, the pipeline execution model is automatically enabled. For more information about how to use TiFlash resource control, refer to [Use resource control to achieve resource isolation](/tidb-resource-control.md#parameters-for-resource-control). Additionally, starting from v7.4.0, the system variable `tidb_enable_tiflash_pipeline_model` is deprecated.
+-   v7.2.0 および v7.3.0 の場合: パイプライン実行モデルは実験的で、 [`tidb_enable_tiflash_pipeline_model`](https://docs.pingcap.com/tidb/v7.2/system-variables#tidb_enable_tiflash_pipeline_model-introduced-since-v720)によって制御されます。
+-   v7.4.0 以降のバージョンの場合: パイプライン実行モデルが一般提供されました。これはTiFlashの内部機能であり、 TiFlashリソース制御と緊密に統合されています。TiFlash リソース制御を有効にすると、パイプライン実行モデルが自動的に有効になります。TiFlash リソース制御の使用方法の詳細については、 [リソース制御を使用してリソースの分離を実現する](/tidb-resource-control.md#parameters-for-resource-control)を参照してください。また、v7.4.0 以降では、システム変数`tidb_enable_tiflash_pipeline_model`は非推奨です。
 
-Inspired by the paper [Morsel-Driven Parallelism: A NUMA-Aware Query Evaluation Framework for the Many-Core Age](https://dl.acm.org/doi/10.1145/2588555.2610507), the TiFlash pipeline execution model provides a fine-grained task scheduling model, which is different from the traditional thread scheduling model. It reduces the overhead of operating system thread application and scheduling and provides a fine-grained scheduling mechanism.
+論文[Morsel 駆動型並列処理: マルチコア時代に向けた NUMA 対応クエリ評価フレームワーク](https://dl.acm.org/doi/10.1145/2588555.2610507)にヒントを得て、 TiFlashパイプライン実行モデルは、従来のスレッド スケジューリング モデルとは異なる、きめ細かいタスク スケジューリング モデルを提供します。これにより、オペレーティング システムのスレッド アプリケーションとスケジューリングのオーバーヘッドが削減され、きめ細かいスケジューリング メカニズムが提供されます。
 
-## Design and implementation
+## 設計と実装 {#design-and-implementation}
 
-The original TiFlash stream model is a thread scheduling execution model. Each query independently applies for several threads to execute in coordination.
+オリジナルのTiFlashストリーム モデルは、スレッド スケジューリング実行モデルです。各クエリは、複数のスレッドが連携して実行するように独立して適用されます。
 
-The thread scheduling model has the following two defects:
+スレッド スケジューリング モデルには、次の 2 つの欠陥があります。
 
-- In high-concurrency scenarios, too many threads cause a large number of context switches, resulting in high thread scheduling costs.
-- The thread scheduling model cannot accurately measure the resource usage of queries or do fine-grained resource control.
+-   同時実行性の高いシナリオでは、スレッドが多すぎるとコンテキストスイッチの数が多くなり、スレッドのスケジューリングコストが高くなります。
+-   スレッド スケジューリング モデルでは、クエリのリソース使用量を正確に測定したり、きめ細かいリソース制御を行うことはできません。
 
-The new pipeline execution model makes the following optimizations:
+新しいパイプライン実行モデルでは、次の最適化が行われます。
 
-- The queries are divided into multiple pipelines and executed in sequence. In each pipeline, the data blocks are kept in the cache as much as possible to achieve better temporal locality and improve the efficiency of the entire execution process.
-- To get rid of the native thread scheduling model of the operating system and implement a more fine-grained scheduling mechanism, each pipeline is instantiated into several tasks and uses the task scheduling model. At the same time, a fixed thread pool is used to reduce the overhead of operating system thread scheduling.
+-   クエリは複数のパイプラインに分割され、順番に実行されます。各パイプラインでは、データ ブロックが可能な限りキャッシュに保持されるため、時間的な局所性が向上し、実行プロセス全体の効率が向上します。
+-   オペレーティング システムのネイティブ スレッド スケジューリング モデルを排除し、よりきめ細かいスケジューリング メカニズムを実装するために、各パイプラインは複数のタスクにインスタンス化され、タスク スケジューリング モデルが使用されます。同時に、固定スレッド プールを使用して、オペレーティング システムのスレッド スケジューリングのオーバーヘッドが削減されます。
 
-The architecture of the pipeline execution model is as follows:
+パイプライン実行モデルのアーキテクチャは次のとおりです。
 
 ![TiFlash pipeline execution model design](/media/tiflash/tiflash-pipeline-model.png)
 
-As shown in the preceding figure, the pipeline execution model consists of two main components: the pipeline query executor and the task scheduler.
+上の図に示すように、パイプライン実行モデルは、パイプライン クエリ エグゼキュータとタスク スケジューラという 2 つの主要コンポーネントで構成されます。
 
-- The pipeline query executor
+-   パイプラインクエリエグゼキュータ
 
-    The pipeline query executor converts the query request sent from the TiDB node into a pipeline directed acyclic graph (DAG).
+    パイプライン クエリ エグゼキュータは、TiDB ノードから送信されたクエリ要求をパイプライン有向非巡回グラフ (DAG) に変換します。
 
-    It will find the pipeline breaker operators in the query and split the query into several pipelines according to the pipeline breakers. Then, it assembles the pipelines into a DAG according to the dependency relationship between the pipelines.
+    クエリ内のパイプライン ブレーカー演算子を見つけ、パイプライン ブレーカーに従ってクエリを複数のパイプラインに分割します。次に、パイプライン間の依存関係に従ってパイプラインを DAG に組み立てます。
 
-    A pipeline breaker is an operator that has a pause/blocking logic. This type of operator continuously receives data blocks from the upstream operator until all data blocks are received, and then return the processing result to the downstream operator. This type of operator breaks the data processing pipeline, so it is called a pipeline breaker. One of the pipeline breakers is the Aggregation operator, which writes all the data of the upstream operator into a hash table before calculating the data in the hash table and returning the result to the downstream operator.
+    パイプライン ブレーカーは、一時停止/ブロッキング ロジックを持つ演算子です。このタイプの演算子は、すべてのデータ ブロックを受信するまで上流演算子から継続的にデータ ブロックを受信し、その後、処理結果を下流演算子に返します。このタイプの演算子はデータ処理パイプラインを中断するため、パイプライン ブレーカーと呼ばれます。パイプライン ブレーカーの 1 つに集計演算子があります。これは、上流演算子のすべてのデータをハッシュ テーブルに書き込んでから、ハッシュ テーブルでデータを計算し、結果を下流演算子に返します。
 
-    After the query is converted into a pipeline DAG, the pipeline query executor executes each pipeline in sequence according to the dependency relationship. The pipeline is instantiated into several tasks according to the query concurrency and submitted to the task scheduler for execution.
+    クエリがパイプライン DAG に変換された後、パイプライン クエリ エグゼキュータは依存関係に従って各パイプラインを順番に実行します。パイプラインは、クエリの同時実行性に応じて複数のタスクにインスタンス化され、タスク スケジューラに送信されて実行されます。
 
-- Task scheduler
+-   タスクスケジューラ
 
-    The task scheduler executes the tasks submitted by the pipeline query executor. The tasks are dynamically switched between different components in the task scheduler according to the different execution logic.
+    タスク スケジューラは、パイプライン クエリ エグゼキュータによって送信されたタスクを実行します。タスクは、さまざまな実行ロジックに従って、タスク スケジューラ内のさまざまなコンポーネント間で動的に切り替えられます。
 
-    - CPU task thread pool
+    -   CPUタスクスレッドプール
 
-        Executes the CPU-intensive calculation logic in the task, such as data filtering and function calculation.
+        データのフィルタリングや関数の計算など、タスク内で CPU を集中的に使用する計算ロジックを実行します。
 
-    - IO task thread pool
+    -   IOタスクスレッドプール
 
-        Executes the IO-intensive calculation logic in the task, such as writing intermediate results to disk.
+        中間結果をディスクに書き込むなど、タスク内で IO 集約型の計算ロジックを実行します。
 
-    - Wait reactor
+    -   待機リアクター
 
-        Executes the wait logic in the task, such as waiting for the network layer to transfer the data packet to the calculation layer.
+        ネットワークレイヤーがデータパケットを計算レイヤーに転送するのを待つなど、タスク内の待機ロジックを実行します。

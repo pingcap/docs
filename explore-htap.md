@@ -1,122 +1,122 @@
 ---
 title: Explore HTAP
-summary: Learn how to explore and use the features of TiDB HTAP.
+summary: TiDB HTAPの機能を調べて使用する方法を学習します。
 ---
 
-# Explore HTAP
+# HTAPを探索する {#explore-htap}
 
-This guide describes how to explore and use the features of TiDB Hybrid Transactional and Analytical Processing (HTAP).
+このガイドでは、TiDB ハイブリッド トランザクションおよび分析処理 (HTAP) の機能を調べて使用する方法について説明します。
 
-> **Note:**
+> **注記：**
 >
-> If you are new to TiDB HTAP and want to start using it quickly, see [Quick start with HTAP](/quick-start-with-htap.md).
+> TiDB HTAPを初めて使用し、すぐに使い始めたい場合は、 [HTAP のクイックスタート](/quick-start-with-htap.md)参照してください。
 
-## Use cases
+## ユースケース {#use-cases}
 
-TiDB HTAP can handle the massive data that increases rapidly, reduce the cost of DevOps, and be deployed in either self-hosted or cloud environments easily, which brings the value of data assets in real time.
+TiDB HTAP は、急速に増加する膨大なデータを処理し、DevOps のコストを削減し、セルフホスト環境またはクラウド環境のいずれかに簡単に展開できるため、データ資産の価値をリアルタイムで高めることができます。
 
-The following are the typical use cases of HTAP:
+HTAP の一般的な使用例は次のとおりです。
 
-- Hybrid workload
+-   ハイブリッドワークロード
 
-    When using TiDB for real-time Online Analytical Processing (OLAP) in hybrid load scenarios, you only need to provide an entry point of TiDB to your data. TiDB automatically selects different processing engines based on the specific business.
+    ハイブリッド ロード シナリオでリアルタイムのオンライン分析処理 (OLAP) に TiDB を使用する場合、データへの TiDB のエントリ ポイントを提供するだけで済みます。TiDB は、特定のビジネスに基づいて、さまざまな処理エンジンを自動的に選択します。
 
-- Real-time stream processing
+-   リアルタイムストリーム処理
 
-    When using TiDB in real-time stream processing scenarios, TiDB ensures that all the data flowed in constantly can be queried in real time. At the same time, TiDB also can handle highly concurrent data workloads and Business Intelligence (BI) queries.
+    リアルタイム ストリーム処理シナリオで TiDB を使用すると、TiDB は、継続的に流入するすべてのデータをリアルタイムでクエリできることを保証します。同時に、TiDB は、高度な同時データ ワークロードとビジネス インテリジェンス (BI) クエリも処理できます。
 
-- Data hub
+-   データハブ
 
-    When using TiDB as a data hub, TiDB can meet specific business needs by seamlessly connecting the data for the application and the data warehouse.
+    TiDB をデータ ハブとして使用すると、TiDB はアプリケーションのデータとデータ ウェアハウスをシームレスに接続することで、特定のビジネス ニーズを満たすことができます。
 
-For more information about use cases of TiDB HTAP, see [blogs about HTAP on the PingCAP website](https://en.pingcap.com/blog/?tag=htap).
+TiDB HTAPの使用例の詳細については、 [PingCAP ウェブサイトの HTAP に関するブログ](https://en.pingcap.com/blog/?tag=htap)参照してください。
 
-To enhance the overall performance of TiDB, it is recommended to use HTAP in the following technical scenarios:
+TiDB の全体的なパフォーマンスを向上させるには、次の技術シナリオで HTAP を使用することをお勧めします。
 
-- Improve analytical processing performance
+-   分析処理パフォーマンスの向上
 
-    If your application involves complex analytical queries, such as aggregation and join operations, and these queries are performed on a large amount of data (more than 10 million rows), the row-based storage engine [TiKV](/tikv-overview.md) might not meet your performance requirements if the tables in these queries cannot effectively use indexes or have low index selectivity.
+    アプリケーションに集計や結合操作などの複雑な分析クエリが含まれており、これらのクエリが大量のデータ (1,000 万行以上) に対して実行される場合、これらのクエリ内のテーブルがインデックスを効果的に使用できないか、インデックスの選択性が低いと、行ベースのstorageエンジン[ティクヴ](/tikv-overview.md)ではパフォーマンス要件を満たさない可能性があります。
 
-- Hybrid workload isolation
+-   ハイブリッドワークロード分離
 
-   While dealing with high-concurrency Online Transactional Processing (OLTP) workloads, your system might also need to handle some OLAP workloads. To ensure the overall system stability, you expect to avoid the impact of OLAP queries on OLTP performance.
+    システムは、同時実行性の高いオンライン トランザクション処理 (OLTP) ワークロードを処理する一方で、一部の OLAP ワークロードも処理する必要がある場合があります。システム全体の安定性を確保するには、OLAP クエリが OLTP パフォーマンスに与える影響を回避する必要があります。
 
-- Simplify the ETL technology stack
+-   ETLテクノロジースタックを簡素化
 
-    When the amount of data to be processed is of medium scale (less than 100 TB), the data processing and scheduling processes are relatively simple, and the concurrency is not high (less than 10), you might want to simplify the technology stack of your system. By replacing multiple different technology stacks used in OLTP, ETL, and OLAP systems with a single database, you can meet the requirements of both transactional systems and analytical systems. This reduces technical complexity and the need for maintenance personnel.
+    処理するデータの量が中規模 (100 TB 未満) で、データ処理およびスケジュール プロセスが比較的単純で、同時実行性が高くない (10 未満) 場合は、システムのテクノロジ スタックを簡素化することをお勧めします。OLTP、ETL、OLAP システムで使用される複数の異なるテクノロジ スタックを単一のデータベースに置き換えることで、トランザクション システムと分析システムの両方の要件を満たすことができます。これにより、技術的な複雑さが軽減され、保守担当者の必要性が軽減されます。
 
-- Strongly consistent analysis
+-   強い一貫性のある分析
 
-    To achieve real-time, strongly consistent data analysis and calculation, and ensure the analysis results to be completely consistent with the transactional data, you need to avoid data latency and inconsistency issues.
+    リアルタイムで強力な一貫性のあるデータ分析と計算を実現し、分析結果がトランザクション データと完全に一致するようにするには、データのレイテンシーと不整合の問題を回避する必要があります。
 
-## Architecture
+## アーキテクチャ {#architecture}
 
-In TiDB, a row-based storage engine [TiKV](/tikv-overview.md) for Online Transactional Processing (OLTP) and a columnar storage engine [TiFlash](/tiflash/tiflash-overview.md) for Online Analytical Processing (OLAP) co-exist, replicate data automatically, and keep strong consistency.
+TiDB では、オンライン トランザクション処理 (OLTP) 用の行ベースのstorageエンジン[ティクヴ](/tikv-overview.md)とオンライン分析処理 (OLAP) 用の列ベースのstorageエンジン[TiFlash](/tiflash/tiflash-overview.md)が共存し、データを自動的に複製し、強力な一貫性を維持します。
 
-For more information about the architecture, see [architecture of TiDB HTAP](/tiflash/tiflash-overview.md#architecture).
+アーキテクチャの詳細については、 [TiDB HTAPのアーキテクチャ](/tiflash/tiflash-overview.md#architecture)参照してください。
 
-## Environment preparation
+## 環境の準備 {#environment-preparation}
 
-Before exploring the features of TiDB HTAP, you need to deploy TiDB and the corresponding storage engines according to the data volume. If the data volume is large (for example, 100 T), it is recommended to use TiFlash Massively Parallel Processing (MPP) as the primary solution and TiSpark as the supplementary solution.
+TiDB HTAPの機能を検討する前に、データ量に応じて TiDB と対応するstorageエンジンを導入する必要があります。データ量が大きい場合 (たとえば、100 T)、 TiFlash Massively Parallel Processing (MPP) を主なソリューションとして使用し、TiSpark を補助的なソリューションとして使用することをお勧めします。
 
-- TiFlash
+-   TiFlash
 
-    - If you have deployed a TiDB cluster with no TiFlash node, add the TiFlash nodes in the current TiDB cluster. For detailed information, see [Scale out a TiFlash cluster](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
-    - If you have not deployed a TiDB cluster, see [Deploy a TiDB Cluster using TiUP](/production-deployment-using-tiup.md). Based on the minimal TiDB topology, you also need to deploy the [topology of TiFlash](/tiflash-deployment-topology.md).
-    - When deciding how to choose the number of TiFlash nodes, consider the following scenarios:
+    -   TiFlashノードのない TiDB クラスターをデプロイした場合は、現在の TiDB クラスターにTiFlashノードを追加します。詳細については、 [TiFlashクラスターをスケールアウトする](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)参照してください。
+    -   TiDB クラスターをデプロイしていない場合は、 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)参照してください。最小限の TiDB トポロジに基づいて、 [TiFlashのトポロジー](/tiflash-deployment-topology.md)もデプロイする必要があります。
+    -   TiFlashノードの数を選択する方法を決定するときは、次のシナリオを考慮してください。
 
-        - If your use case requires OLTP with small-scale analytical processing and Ad-Hoc queries, deploy one or several TiFlash nodes. They can dramatically increase the speed of analytic queries.
-        - If the OLTP throughput does not cause significant pressure to I/O usage rate of the TiFlash nodes, each TiFlash node uses more resources for computation, and thus the TiFlash cluster can have near-linear scalability. The number of TiFlash nodes should be tuned based on expected performance and response time.
-        - If the OLTP throughput is relatively high (for example, the write or update throughput is higher than 10 million lines/hours), due to the limited write capacity of network and physical disks, the I/O between TiKV and TiFlash becomes a bottleneck and is also prone to read and write hotspots. In this case, the number of TiFlash nodes has a complex non-linear relationship with the computation volume of analytical processing, so you need to tune the number of TiFlash nodes based on the actual status of the system.
+        -   ユースケースで小規模な分析処理とアドホック クエリを伴う OLTP が必要な場合は、1 つまたは複数のTiFlashノードを導入します。これにより、分析クエリの速度が大幅に向上します。
+        -   OLTP スループットがTiFlashノードの I/O 使用率に大きな負担をかけない場合、各TiFlashノードは計算TiFlash多くのリソースを使用するため、 TiFlashクラスターはほぼ線形のスケーラビリティを実現できます。TiFlash ノードの数は、予想されるパフォーマンスと応答時間に基づいて調整する必要があります。
+        -   OLTP スループットが比較的高い場合 (たとえば、書き込みまたは更新スループットが 1,000 万行/時間を超える場合)、ネットワークと物理ディスクの書き込み容量が限られているため、TiKV とTiFlash間の I/O がボトルネックになり、読み取りと書き込みのホットスポットも発生しやすくなります。この場合、 TiFlashノードの数は分析処理の計算量と複雑な非線形関係にあるため、システムの実際の状態に基づいてTiFlashノードの数を調整する必要があります。
 
-- TiSpark
+-   ティスパーク
 
-    - If your data needs to be analyzed with Spark, deploy TiSpark. For specific process, see [TiSpark User Guide](/tispark-overview.md).
+    -   データを Spark で分析する必要がある場合は、TiSpark をデプロイします。具体的なプロセスについては、 [TiSpark ユーザーガイド](/tispark-overview.md)参照してください。
 
 <!--    - Real-time stream processing
   - If you want to build an efficient and easy-to-use real-time data warehouse with TiDB and Flink, you are welcome to participate in Apache Flink x TiDB meetups.-->
 
-## Data preparation
+## データ準備 {#data-preparation}
 
-After TiFlash is deployed, TiKV does not replicate data to TiFlash automatically. You need to manually specify which tables need to be replicated to TiFlash. After that, TiDB creates the corresponding TiFlash replicas.
+TiFlashがデプロイされた後、TiKV はTiFlashにデータを自動的に複製しません。どのテーブルをTiFlashに複製する必要があるかを手動で指定する必要があります。その後、TiDB は対応するTiFlashレプリカを作成します。
 
-- If there is no data in the TiDB Cluster, migrate the data to TiDB first. For detailed information, see [data migration](/migration-overview.md).
-- If the TiDB cluster already has the replicated data from upstream, after TiFlash is deployed, data replication does not automatically begin. You need to manually specify the tables to be replicated to TiFlash. For detailed information, see [Use TiFlash](/tiflash/tiflash-overview.md#use-tiflash).
+-   TiDB クラスタにデータがない場合、まずデータを TiDB に移行します。詳細については、 [データ移行](/migration-overview.md)参照してください。
+-   TiDB クラスターにアップストリームから複製されたデータがすでに存在する場合、 TiFlashの導入後、データの複製は自動的には開始されません。 TiFlashに複製するテーブルを手動で指定する必要があります。 詳細については、 [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)参照してください。
 
-## Data processing
+## 情報処理 {#data-processing}
 
-With TiDB, you can simply enter SQL statements for query or write requests. For the tables with TiFlash replicas, TiDB uses the front-end optimizer to automatically choose the optimal execution plan.
+TiFlashを使用すると、クエリまたは書き込み要求に対して SQL ステートメントを入力するだけで済みます。TiFlash レプリカを持つテーブルの場合、TiDB はフロントエンド オプティマイザーを使用して最適な実行プランを自動的に選択します。
 
-> **Note:**
+> **注記：**
 >
-> The MPP mode of TiFlash is enabled by default. When an SQL statement is executed, TiDB automatically determines whether to run in the MPP mode through the optimizer.
+> TiFlashの MPP モードはデフォルトで有効になっています。SQL ステートメントが実行されると、TiDB はオプティマイザーを通じて MPP モードで実行するかどうかを自動的に判断します。
 >
-> - To disable the MPP mode of TiFlash, set the value of the [tidb_allow_mpp](/system-variables.md#tidb_allow_mpp-new-in-v50) system variable to `OFF`.
-> - To forcibly enable MPP mode of TiFlash for query execution, set the values of [tidb_allow_mpp](/system-variables.md#tidb_allow_mpp-new-in-v50) and [tidb_enforce_mpp](/system-variables.md#tidb_enforce_mpp-new-in-v51) to `ON`.
-> - To check whether TiDB chooses the MPP mode to execute a specific query, see [Explain Statements in the MPP Mode](/explain-mpp.md#explain-statements-in-the-mpp-mode). If the output of `EXPLAIN` statement includes the `ExchangeSender` and `ExchangeReceiver` operators, the MPP mode is in use.
+> -   TiFlashの MPP モードを無効にするには、 [tidb_allow_mpp](/system-variables.md#tidb_allow_mpp-new-in-v50)システム変数の値を`OFF`に設定します。
+> -   クエリ実行のためにTiFlashの MPP モードを強制的に有効にするには、 [tidb_allow_mpp](/system-variables.md#tidb_allow_mpp-new-in-v50)と[tidb_enforce_mpp](/system-variables.md#tidb_enforce_mpp-new-in-v51)の値を`ON`に設定します。
+> -   TiDB が特定のクエリを実行するために MPP モードを選択するかどうかを確認するには、 [MPP モードでステートメントを説明する](/explain-mpp.md#explain-statements-in-the-mpp-mode)参照してください。 `EXPLAIN`ステートメントの出力に`ExchangeSender`および`ExchangeReceiver`演算子が含まれている場合、 MPP モードが使用されています。
 
-## Performance monitoring
+## パフォーマンス監視 {#performance-monitoring}
 
-When using TiDB, you can monitor the TiDB cluster status and performance metrics in either of the following ways:
+TiDB を使用する場合、次のいずれかの方法で TiDB クラスターのステータスとパフォーマンス メトリックを監視できます。
 
-- [TiDB Dashboard](/dashboard/dashboard-intro.md): you can see the overall running status of the TiDB cluster, analyse distribution and trends of read and write traffic, and learn the detailed execution information of slow queries.
-- [Monitoring system (Prometheus & Grafana)](/grafana-overview-dashboard.md): you can see the monitoring parameters of TiDB cluster-related components including PD, TiDB, TiKV, TiFlash, TiCDC, and Node_exporter.
+-   [TiDBダッシュボード](/dashboard/dashboard-intro.md) : TiDB クラスターの全体的な実行ステータスを確認したり、読み取りおよび書き込みトラフィックの分布と傾向を分析したり、遅いクエリの詳細な実行情報を確認したりできます。
+-   [監視システム (Prometheus &amp; Grafana)](/grafana-overview-dashboard.md) : PD、TiDB、TiKV、 TiFlash、TiCDC、Node_exporter などの TiDB クラスター関連コンポーネントの監視パラメータを確認できます。
 
-To see the alert rules of TiDB cluster and TiFlash cluster, see [TiDB cluster alert rules](/alert-rules.md) and [TiFlash alert rules](/tiflash/tiflash-alert-rules.md).
+TiDB クラスターとTiFlashクラスターのアラート ルールを確認するには、 [TiDB クラスタアラートルール](/alert-rules.md)と[TiFlashアラートルール](/tiflash/tiflash-alert-rules.md)を参照してください。
 
-## Troubleshooting
+## トラブルシューティング {#troubleshooting}
 
-If any issue occurs during using TiDB, refer to the following documents:
+TiDB の使用中に問題が発生した場合は、次のドキュメントを参照してください。
 
-- [Analyze slow queries](/analyze-slow-queries.md)
-- [Identify expensive queries](/identify-expensive-queries.md)
-- [Troubleshoot hotspot issues](/troubleshoot-hot-spot-issues.md)
-- [TiDB cluster troubleshooting guide](/troubleshoot-tidb-cluster.md)
-- [Troubleshoot a TiFlash Cluster](/tiflash/troubleshoot-tiflash.md)
+-   [遅いクエリを分析する](/analyze-slow-queries.md)
+-   [コストの高いクエリを特定する](/identify-expensive-queries.md)
+-   [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)
+-   [TiDB クラスタのトラブルシューティング ガイド](/troubleshoot-tidb-cluster.md)
+-   [TiFlashクラスタのトラブルシューティング](/tiflash/troubleshoot-tiflash.md)
 
-You are also welcome to create [GitHub Issues](https://github.com/pingcap/tiflash/issues) or submit your questions on [AskTUG](https://asktug.com/).
+[GitHub の問題](https://github.com/pingcap/tiflash/issues)を作成したり、 [TUGに質問する](https://asktug.com/)に質問を送信したりすることもできます。
 
-## What's next
+## 次は何ですか {#what-s-next}
 
-- To check the TiFlash version, critical logs, system tables, see [Maintain a TiFlash cluster](/tiflash/maintain-tiflash.md).
-- To remove a specific TiFlash node, see [Scale out a TiFlash cluster](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
+-   TiFlash のバージョン、重要なログ、システム テーブルを確認するには、 [TiFlashクラスターを管理](/tiflash/maintain-tiflash.md)参照してください。
+-   特定のTiFlashノードを削除するには、 [TiFlashクラスターをスケールアウトする](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)参照してください。

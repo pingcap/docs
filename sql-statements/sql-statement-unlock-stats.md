@@ -1,13 +1,13 @@
 ---
 title: UNLOCK STATS
-summary: An overview of the usage of UNLOCK STATS for the TiDB database.
+summary: TiDB データベースの UNLOCK STATS の使用法の概要。
 ---
 
-# UNLOCK STATS
+# 統計情報のロックを解除 {#unlock-stats}
 
-`UNLOCK STATS` is used to unlock the statistics of a table or tables.
+`UNLOCK STATS` 、テーブルまたはテーブルの統計のロックを解除するために使用されます。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 UnlockStatsStmt ::=
@@ -23,11 +23,11 @@ PartitionNameList ::=
     Identifier ( ',' Identifier )*
 ```
 
-## Examples
+## 例 {#examples}
 
-Refer to the examples in [LOCK STATS](/sql-statements/sql-statement-lock-stats.md) and create a table `t` and lock its statistics.
+[ロック統計](/sql-statements/sql-statement-lock-stats.md)の例を参照して、テーブル`t`を作成し、その統計をロックします。
 
-Unlock the statistics of table `t`, and `ANALYZE` can be successfully executed.
+表`t`の統計をロック解除すると、 `ANALYZE`正常に実行できます。
 
 ```sql
 mysql> UNLOCK STATS t;
@@ -45,9 +45,9 @@ mysql> SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-Refer to examples in [LOCK STATS](/sql-statements/sql-statement-lock-stats.md) and create a table `t` and lock the statistics of its partition `p1`.
+[ロック統計](/sql-statements/sql-statement-lock-stats.md)の例を参照してテーブル`t`を作成し、そのパーティション`p1`の統計をロックします。
 
-Unlock the statistics of partition `p1`, and `ANALYZE` can be successfully executed.
+パーティション`p1`と`ANALYZE`の統計をロック解除すると、正常に実行できます。
 
 ```sql
 mysql> UNLOCK STATS t PARTITION p1;
@@ -65,12 +65,12 @@ mysql> SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## 参照 {#see-also}
 
-* [Statistics](/statistics.md#lock-statistics)
-* [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
-* [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)
+-   [統計](/statistics.md#lock-statistics)
+-   [ロック統計](/sql-statements/sql-statement-lock-stats.md)
+-   [STATS_LOCKED を表示](/sql-statements/sql-statement-show-stats-locked.md)

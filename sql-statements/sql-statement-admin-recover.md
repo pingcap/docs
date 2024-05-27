@@ -1,22 +1,22 @@
 ---
 title: ADMIN RECOVER INDEX
-summary: An overview of the usage of ADMIN RECOVER INDEX for the TiDB database.
+summary: TiDB データベースの ADMIN RECOVER INDEX の使用法の概要。
 ---
 
-# ADMIN RECOVER INDEX
+# 管理者回復インデックス {#admin-recover-index}
 
-When the row data and index data are inconsistent, you can use the `ADMIN RECOVER INDEX` statement to recover the consistency based on the redundant indexes. Note that this syntax does not support [foreign key constraints](/foreign-key.md) yet.
+行データとインデックス データが不整合な場合は、 `ADMIN RECOVER INDEX`ステートメントを使用して、冗長インデックスに基づいて整合性を回復できます。この構文は[外部キー制約](/foreign-key.md)まだサポートしていないことに注意してください。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AdminCleanupStmt ::=
     'ADMIN' 'RECOVER' 'INDEX' TableName IndexName
 ```
 
-## Examples
+## 例 {#examples}
 
-Assume that the `tbl` table in a database has inconsistent row data and index due to some reasons (for example, some row data is lost in the cluster in a disaster recovery scenario):
+何らかの理由により、データベース内の`tbl`テーブルに一貫性のない行データとインデックスがあるとします (たとえば、災害復旧シナリオでクラスター内の一部の行データが失われるなど)。
 
 ```sql
 SELECT * FROM tbl;
@@ -26,13 +26,13 @@ ADMIN CHECK INDEX tbl idx ;
 ERROR 1105 (HY000): handle &kv.CommonHandle{encoded:[]uint8{0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xf8}, colEndOffsets:[]uint16{0xa}}, index:types.Datum{k:0x5, decimal:0x0, length:0x0, i:0, collation:"utf8mb4_bin", b:[]uint8{0x0}, x:interface {}(nil)} != record:<nil>
 ```
 
-It can be seen from the error message of the `SELECT` query that, the `tbl` table contains three rows of data and two rows of index data, which means inconsistent row data and index data. At the same time, at least one row of data has no corresponding index. In this case, you can use the `ADMIN RECOVER INDEX` statement to supplement the missing index:
+`SELECT`クエリのエラー メッセージから、 `tbl`テーブルには 3 行のデータと 2 行のインデックス データが含まれていることがわかります。これは、行データとインデックス データが矛盾していることを意味します。同時に、少なくとも 1 行のデータには対応するインデックスがありません。この場合、 `ADMIN RECOVER INDEX`ステートメントを使用して、不足しているインデックスを補うことができます。
 
 ```sql
 ADMIN RECOVER INDEX tbl idx;
 ```
 
-The execution result is as follows:
+実行結果は以下のとおりです。
 
 ```sql
 ADMIN RECOVER INDEX tbl idx;
@@ -44,7 +44,7 @@ ADMIN RECOVER INDEX tbl idx;
 1 row in set (0.00 sec)
 ```
 
-You can execute the `ADMIN CHECK INDEX` statement again to check the consistency of data and index, and verify whether the data has been restored to normal state:
+`ADMIN CHECK INDEX`ステートメントを再度実行して、データとインデックスの一貫性をチェックし、データが通常の状態に復元されたかどうかを確認できます。
 
 ```sql
 ADMIN CHECK INDEX tbl idx;
@@ -53,39 +53,39 @@ Query OK, 0 rows affected (0.01 sec)
 
 <CustomContent platform="tidb">
 
-> **Note:**
+> **注記：**
 >
-> When the data and index are inconsistent due to the loss of replicas:
+> レプリカの損失によりデータとインデックスが不整合になった場合:
 >
-> - There might be a loss of both row data and index data. To address the issue, use the [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md) and `ADMIN RECOVER INDEX` statements together to recover the consistency of row data and index data.
-> - The `ADMIN RECOVER INDEX` statement is always executed in a single thread. When the table data is large, it is recommended to recover the index data by rebuilding the index.
-> - When you execute the `ADMIN RECOVER INDEX` statement, the corresponding table or index is not locked and TiDB allows other sessions to modify the table records at the same time. However, in this case, `ADMIN RECOVER INDEX` might not be able to handle all table records correctly. Therefore, when you execute `ADMIN RECOVER INDEX`, avoid modifying the table data at the same time.
-> - If you use the enterprise edition of TiDB, you can [submit a request](/support.md) to contact the support engineer for help.
+> -   行データとインデックス データの両方が失われている可能性があります。この問題に対処するには、 [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md)と`ADMIN RECOVER INDEX`ステートメントを一緒に使用して、行データとインデックス データの一貫性を回復します。
+> -   `ADMIN RECOVER INDEX`ステートメントは常に 1 つのスレッドで実行されます。テーブル データが大きい場合は、インデックスを再構築してインデックス データを回復することをお勧めします。
+> -   `ADMIN RECOVER INDEX`文を実行すると、対応するテーブルまたはインデックスはロックされず、TiDB は他のセッションが同時にテーブル レコードを変更することを許可します。ただし、この場合、 `ADMIN RECOVER INDEX`すべてのテーブル レコードを正しく処理できない可能性があります。したがって、 `ADMIN RECOVER INDEX`実行するときは、テーブル データを同時に変更しないようにしてください。
+> -   TiDB のエンタープライズ エディションを使用している場合は、サポート エンジニアに問い合わせて支援を受けることができ[リクエストを送信する](/support.md) 。
 >
-> The `ADMIN RECOVER INDEX` statement is not atomic: if the statement is interrupted during execution, it is recommended to execute it again until it succeeds.
+> `ADMIN RECOVER INDEX`ステートメントはアトミックではありません。ステートメントが実行中に中断された場合は、成功するまで再度実行することをお勧めします。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注記：**
 >
-> When the data and index are inconsistent due to the loss of replicas:
+> レプリカの損失によりデータとインデックスが不整合になった場合:
 >
-> - There might be a loss of both row data and index data. To address the issue, use the [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md) and `ADMIN RECOVER INDEX` statements together to recover the consistency of row data and index data.
-> - The `ADMIN RECOVER INDEX` statement is always executed in a single thread. When the table data is large, it is recommended to recover the index data by rebuilding the index.
-> - When you execute the `ADMIN RECOVER INDEX` statement, the corresponding table or index is not locked and TiDB allows other sessions to modify the table records at the same time. However, in this case, `ADMIN RECOVER INDEX` might not be able to handle all table records correctly. Therefore, when you execute `ADMIN RECOVER INDEX`, avoid modifying the table data at the same time.
-> - If you use the enterprise edition of TiDB, you can [submit a request](https://support.pingcap.com/hc/en-us) to contact the support engineer for help.
+> -   行データとインデックス データの両方が失われている可能性があります。この問題に対処するには、 [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md)と`ADMIN RECOVER INDEX`ステートメントを一緒に使用して、行データとインデックス データの一貫性を回復します。
+> -   `ADMIN RECOVER INDEX`ステートメントは常に 1 つのスレッドで実行されます。テーブル データが大きい場合は、インデックスを再構築してインデックス データを回復することをお勧めします。
+> -   `ADMIN RECOVER INDEX`文を実行すると、対応するテーブルまたはインデックスはロックされず、TiDB は他のセッションが同時にテーブル レコードを変更することを許可します。ただし、この場合、 `ADMIN RECOVER INDEX`すべてのテーブル レコードを正しく処理できない可能性があります。したがって、 `ADMIN RECOVER INDEX`実行するときは、テーブル データを同時に変更しないようにしてください。
+> -   TiDB のエンタープライズ エディションを使用している場合は、サポート エンジニアに問い合わせて支援を受けることができ[リクエストを送信する](https://support.pingcap.com/hc/en-us) 。
 >
-> The `ADMIN RECOVER INDEX` statement is not atomic: if the statement is interrupted during execution, it is recommended to execute it again until it succeeds.
+> `ADMIN RECOVER INDEX`ステートメントはアトミックではありません。ステートメントが実行中に中断された場合は、成功するまで再度実行することをお勧めします。
 
 </CustomContent>
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## 参照 {#see-also}
 
-* [`ADMIN CHECK TABLE/INDEX`](/sql-statements/sql-statement-admin-check-table-index.md)
-* [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md)
+-   [`ADMIN CHECK TABLE/INDEX`](/sql-statements/sql-statement-admin-check-table-index.md)
+-   [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md)

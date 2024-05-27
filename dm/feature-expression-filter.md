@@ -1,14 +1,14 @@
 ---
 title: Filter DMLs Using SQL Expressions
-summary: In incremental data migration, you can filter binlog events using SQL expressions. DM supports filtering data during migration using binlog value filter since v2.0.5. You can configure SQL expressions based on the values in binlog events to determine whether to migrate a row change downstream. For detailed operation and implementation, refer to "Filter DML Events Using SQL Expressions".
+summary: 増分データ移行では、SQL 式を使用してbinlogイベントをフィルタリングできます。DM は、v2.0.5 以降、 binlog値フィルタを使用した移行中のデータのフィルタリングをサポートしています。binlog イベントの値に基づいて SQL 式を構成し、行の変更を下流に移行するかどうかを決定できます。詳細な操作とbinlogについては、「SQL 式を使用した DML イベントのフィルタリング」を参照してください。
 ---
 
-# Filter DMLs Using SQL Expressions
+# SQL 式を使用して DML をフィルタリングする {#filter-dmls-using-sql-expressions}
 
-## Overview
+## 概要 {#overview}
 
-In the process of incremental data migration, you can filter certain types of binlog events using the [Filter Binlog Events](/filter-binlog-event.md) feature. For example, for archiving or auditing purposes, you can filter out `DELETE` events when migrating data to the downstream. However, Binlog Event Filter cannot judge with a greater granularity on whether to filter out a specific row of `DELETE` events.
+増分データ移行のプロセスでは、 [Binlogイベントをフィルタリングする](/filter-binlog-event.md)機能を使用して特定の種類のbinlogイベントをフィルターできます。たとえば、アーカイブまたは監査の目的で、データをダウンストリームに移行するときに`DELETE`イベントをフィルターできます。ただし、 Binlogイベント フィルターでは、 `DELETE`イベントの特定の行をフィルターするかどうかを、より細かく判断することはできません。
 
-To solve the above issue, DM supports filtering data during incremental migration using `binlog value filter` since v2.0.5. The binlog in the `ROW` format supported by DM has the values of all columns in binlog events. You can configure SQL expressions according to these values. If the SQL expressions evaluate a row change as `TRUE`, DM will not migrate the row change downstream.
+上記の問題を解決するために、DM は v2.0.5 以降、 `binlog value filter`使用して増分移行中にデータをフィルタリングすることをサポートしています。DM がサポートする`ROW`形式のbinlogには、 binlogイベントのすべての列の値があります。これらの値に応じて SQL 式を設定できます。SQL 式が行の変更を`TRUE`として評価した場合、DM は行の変更を下流に移行しません。
 
-For detailed operation and implementation, see [Filter DML Events Using SQL Expressions](/filter-dml-event.md).
+詳しい操作と実装については[SQL 式を使用して DML イベントをフィルタリングする](/filter-dml-event.md)参照してください。

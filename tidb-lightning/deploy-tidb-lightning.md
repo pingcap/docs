@@ -1,46 +1,46 @@
 ---
 title: Deploy TiDB Lightning
-summary: Deploy TiDB Lightning to quickly import large amounts of new data.
+summary: TiDB Lightningをデプロイ、大量の新しいデータを迅速にインポートします。
 ---
 
-# Deploy TiDB Lightning
+# TiDB Lightning をデプロイ {#deploy-tidb-lightning}
 
-This document describes the hardware requirements of using TiDB Lightning to import data, and how to deploy it manually. Requirements on hardware resources vary with the import modes. For details, refer to the following docs:
+このドキュメントでは、TiDB Lightningを使用してデータをインポートするためのハードウェア要件と、手動でデプロイする方法について説明します。ハードウェア リソースの要件は、インポート モードによって異なります。詳細については、次のドキュメントを参照してください。
 
-- [Physical Import Mode Requirements and Limitations](/tidb-lightning/tidb-lightning-physical-import-mode.md#requirements-and-restrictions)
-- [Logical Import Mode Requirements and Limitations](/tidb-lightning/tidb-lightning-logical-import-mode.md)
+-   [物理インポート モードの要件と制限](/tidb-lightning/tidb-lightning-physical-import-mode.md#requirements-and-restrictions)
+-   [論理インポート モードの要件と制限](/tidb-lightning/tidb-lightning-logical-import-mode.md)
 
-## Online deployment using TiUP (recommended)
+## TiUPを使用したオンライン展開 (推奨) {#online-deployment-using-tiup-recommended}
 
-1. Install TiUP using the following command:
+1.  次のコマンドを使用してTiUP をインストールします。
 
     ```shell
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-    This command automatically adds TiUP to the `PATH` environment variable. You need to start a new terminal session or run `source ~/.bashrc` before you can use TiUP. (According to your environment, you may need to run `source ~/.profile`. For the specific command, check the output of TiUP.)
+    このコマンドは、 TiUP を`PATH`環境変数に自動的に追加します。 TiUP を使用するには、新しいターミナルセッションを開始するか、 `source ~/.bashrc`を実行する必要があります。 (環境によっては、 `source ~/.profile`実行する必要がある場合があります。特定のコマンドについては、 TiUPの出力を確認してください。)
 
-2. Install TiDB Lightning using TiUP:
+2.  TiUPを使用してTiDB Lightningをインストールします。
 
     ```shell
     tiup install tidb-lightning
     ```
 
-## Manual deployment
+## 手動展開 {#manual-deployment}
 
-### Download TiDB Lightning binaries
+### TiDB Lightningバイナリをダウンロード {#download-tidb-lightning-binaries}
 
-Refer to [Download TiDB Tools](/download-ecosystem-tools.md) and download TiDB Lightning binaries. TiDB Lightning is completely compatible with early versions of TiDB. It is recommended to use the latest version of TiDB Lightning.
+[TiDBツールをダウンロード](/download-ecosystem-tools.md)を参照して、 TiDB Lightningバイナリをダウンロードしてください。TiDB TiDB Lightning は、TiDB の初期バージョンと完全に互換性があります。最新バージョンのTiDB Lightningを使用することをお勧めします。
 
-Unzip the TiDB Lightning binary package to obtain the `tidb-lightning` executable file:
+TiDB Lightningバイナリ パッケージを解凍して、 `tidb-lightning`実行可能ファイルを取得します。
 
 ```bash
 tar -zxvf tidb-lightning-${version}-linux-amd64.tar.gz
 chmod +x tidb-lightning
 ```
 
-### Upgrade TiDB Lightning
+### TiDB Lightning のアップグレード {#upgrade-tidb-lightning}
 
-You can upgrade TiDB Lightning by replacing the binaries alone without further configurations. After the upgrade, you need to restart TiDB Lightning. For details, see [How to properly restart TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning).
+TiDB Lightning は、追加の設定をせずにバイナリのみを置き換えることでアップグレードできます。アップグレード後は、 TiDB Lightningを再起動する必要があります。詳細については、 [TiDB Lightningを適切に再起動する方法](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning)参照してください。
 
-If an import task is running, we recommend you to wait until it finishes before upgrading TiDB Lightning. Otherwise, there might be chances that you need to reimport from scratch, because there is no guarantee that checkpoints work across versions.
+インポート タスクが実行中の場合は、タスクが完了するまで待ってからTiDB Lightning をアップグレードすることをお勧めします。そうしないと、チェックポイントがバージョン間で機能するという保証がないため、最初から再インポートする必要がある可能性があります。

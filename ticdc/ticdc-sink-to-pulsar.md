@@ -1,15 +1,15 @@
 ---
 title: Replicate Data to Pulsar
-summary: Learn how to replicate data to Pulsar using TiCDC.
+summary: TiCDC を使用してデータを Pulsar に複製する方法を学びます。
 ---
 
-# Replicate Data to Pulsar
+# Pulsarにデータを複製する {#replicate-data-to-pulsar}
 
-This document describes how to create a changefeed that replicates incremental data to Pulsar using TiCDC.
+このドキュメントでは、TiCDC を使用して増分データを Pulsar に複製する変更フィードを作成する方法について説明します。
 
-## Create a replication task to replicate incremental data to Pulsar
+## 増分データをPulsarに複製するレプリケーションタスクを作成する {#create-a-replication-task-to-replicate-incremental-data-to-pulsar}
 
-Create a replication task by running the following command:
+次のコマンドを実行してレプリケーション タスクを作成します。
 
 ```shell
 cdc cli changefeed create \
@@ -26,51 +26,51 @@ ID: simple-replication-task
 Info: {"upstream_id":7277814241002263370,"namespace":"default","id":"simple-replication-task","sink_uri":"pulsar://127.0.0.1:6650/consumer-test?protocol=canal-json","create_time":"2024-05-24T14:42:32.000904+08:00","start_ts":444203257406423044,"config":{"memory_quota":1073741824,"case_sensitive":false,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":false,"bdr_mode":false,"sync_point_interval":600000000000,"sync_point_retention":86400000000000,"filter":{"rules":["pulsar_test.*"]},"mounter":{"worker_num":16},"sink":{"protocol":"canal-json","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false,"binary_encoding_method":"base64"},"dispatchers":[{"matcher":["pulsar_test.*"],"partition":"","topic":"test_{schema}_{table}"}],"encoder_concurrency":16,"terminator":"\r\n","date_separator":"day","enable_partition_separator":true,"only_output_updated_columns":false,"delete_only_output_handle_key_columns":false,"pulsar_config":{"connection-timeout":30,"operation-timeout":30,"batching-max-messages":1000,"batching-max-publish-delay":10,"send-timeout":30},"advance_timeout":150},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"use_file_backend":false},"scheduler":{"enable_table_across_nodes":false,"region_threshold":100000,"write_key_threshold":0},"integrity":{"integrity_check_level":"none","corruption_handle_level":"warn"}},"state":"normal","creator_version":"v8.1.0","resolved_ts":444203257406423044,"checkpoint_ts":444203257406423044,"checkpoint_time":"2024-05-24 14:42:31.410"}
 ```
 
-The meaning of each parameter is as follows:
+各パラメータの意味は次のとおりです。
 
-- `--server`: the address of a TiCDC server in the TiCDC cluster.
-- `--changefeed-id`: the ID of the replication task. The format must match the regular expression `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`. If the ID is not specified, TiCDC automatically generates a UUID (in the version 4 format) as the ID.
-- `--sink-uri`: the downstream address of the replication task. See [Use Sink URI to configure Pulsar](#sink-uri).
-- `--start-ts`: the start TSO of the changefeed. The TiCDC cluster starts pulling data from this TSO. The default value is the current time.
-- `--target-ts`: the target TSO of the changefeed. The TiCDC cluster stops pulling data at this TSO. It is empty by default, which means that TiCDC does not automatically stop pulling data.
-- `--config`: the changefeed configuration file. See [TiCDC changefeed configuration parameters](/ticdc/ticdc-changefeed-config.md).
+-   `--server` : TiCDC クラスター内の TiCDCサーバーのアドレス。
+-   `--changefeed-id` : レプリケーション タスクの ID。形式は正規表現`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`と一致する必要があります。ID が指定されていない場合、TiCDC は ID として UUID (バージョン 4 形式) を自動的に生成します。
+-   `--sink-uri` : レプリケーションタスクのダウンストリームアドレス[シンクURIを使用してPulsarを構成する](#sink-uri)を参照してください。
+-   `--start-ts` : 変更フィードの開始 TSO。TiCDC クラスターはこの TSO からデータの取得を開始します。デフォルト値は現在の時刻です。
+-   `--target-ts` : 変更フィードのターゲット TSO。TiCDC クラスターはこの TSO でデータのプルを停止します。デフォルトでは空であり、TiCDC はデータのプルを自動的に停止しないことを意味します。
+-   `--config` : changefeed 構成ファイル[TiCDC チェンジフィード構成パラメータ](/ticdc/ticdc-changefeed-config.md)参照してください。
 
-## Use Sink URI and changefeed config to configure Pulsar
+## Pulsar を構成するには、Sink URI と changefeed config を使用します。 {#use-sink-uri-and-changefeed-config-to-configure-pulsar}
 
-You can use Sink URI to specify the connection information for the TiCDC target system, and use changefeed config to configure parameters related to Pulsar.
+Sink URI を使用して TiCDC ターゲット システムの接続情報を指定し、changefeed config を使用して Pulsar に関連するパラメータを構成できます。
 
-### Sink URI
+### シンクURI {#sink-uri}
 
-A Sink URI follows the following format:
+シンク URI は次の形式に従います。
 
 ```shell
 [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
 ```
 
-Configuration example 1:
+コンフィグレーション例1:
 
 ```shell
 --sink-uri="pulsar://127.0.0.1:6650/persistent://abc/def/yktest?protocol=canal-json"
 ```
 
-Configuration example 2:
+コンフィグレーション例2:
 
 ```shell
 --sink-uri="pulsar://127.0.0.1:6650/yktest?protocol=canal-json"
 ```
 
-The configurable parameters in a URI are as follows:
+URI で設定可能なパラメータは次のとおりです。
 
-| Parameter           | Description                                                   |
-| :------------------ | :------------------------------------------------------------ |
-| `127.0.0.1`          | The IP address by which the downstream Pulsar provides service.             |
-| `6650`               | The connection port for the downstream Pulsar.                              |
-| `persistent://abc/def/yktest`   |  As shown in the preceding configuration example 1, this parameter is used to specify the tenant, namespace, and topic of Pulsar.   |
-| `yktest`    | As shown in the preceding configuration example 2, if the topic you want to specify is in the default namespace `default` of the default tenant `public` in Pulsar, you can configure the URI with just the topic name, for example, `yktest`. This is equivalent to specifying the topic as `persistent://public/default/yktest`. |
+| パラメータ                         | 説明                                                                                                                                                                              |
+| :---------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `127.0.0.1`                   | ダウンストリーム Pulsar がサービスを提供する IP アドレス。                                                                                                                                             |
+| `6650`                        | 下流の Pulsar の接続ポート。                                                                                                                                                              |
+| `persistent://abc/def/yktest` | 前の構成例 1 に示されているように、このパラメータは Pulsar のテナント、名前空間、およびトピックを指定するために使用されます。                                                                                                            |
+| `yktest`                      | 前の設定例 2 に示すように、指定するトピックが Pulsar のデフォルト テナント`public`のデフォルト名前空間`default`にある場合は、トピック名のみを使用して URI を設定できます (例: `yktest` 。これは、トピックを`persistent://public/default/yktest`として指定するのと同じです。 |
 
-### Changefeed config parameters
+### Changefeed 設定パラメータ {#changefeed-config-parameters}
 
-The following are examples of changefeed config parameters:
+以下は changefeed 構成パラメータの例です。
 
 ```toml
 [sink]
@@ -135,29 +135,29 @@ batching-max-publish-delay=10
 send-timeout=30
 ```
 
-### Best practice
+### ベストプラクティス {#best-practice}
 
-* You need to specify the `protocol` parameter when creating a changefeed. Currently, only the `canal-json` protocol is supported for replicating data to Pulsar.
-* The `pulsar-producer-cache-size` parameter indicates the number of producers cached in the Pulsar client. Because each producer in Pulsar can only correspond to one topic, TiCDC adopts the LRU method to cache producers, and the default limit is 10240. If the number of topics you need to replicate is larger than the default value, you need to increase the number.
+-   チェンジフィードを作成するときは、 `protocol`パラメータを指定する必要があります。現在、Pulsar へのデータの複製には`canal-json`プロトコルのみがサポートされています。
+-   `pulsar-producer-cache-size`パラメータは、Pulsar クライアントにキャッシュされるプロデューサーの数を示します。Pulsar の各プロデューサーは 1 つのトピックにしか対応できないため、TiCDC はプロデューサーをキャッシュするために LRU 方式を採用しており、デフォルトの制限は 10240 です。複製する必要があるトピックの数がデフォルト値より大きい場合は、数を増やす必要があります。
 
-### TLS encrypted transmission
+### TLS暗号化送信 {#tls-encrypted-transmission}
 
-Starting from v7.5.1 and v8.0.0, TiCDC supports TLS encrypted transmission for Pulsar. The configuration example is as follows:
+v7.5.1 および v8.0.0 以降、TiCDC は Pulsar の TLS 暗号化伝送をサポートします。設定例は次のとおりです。
 
-Sink URI:
+シンクURI:
 
 ```shell
 --sink-uri="pulsar+ssl://127.0.0.1:6651/persistent://public/default/yktest?protocol=canal-json"
 ```
 
-Configuration:
+コンフィグレーション：
 
 ```toml
 [sink.pulsar-config]
 tls-trust-certs-file-path="/data/pulsar/tls-trust-certs-file"
 ```
 
-If the `tlsRequireTrustedClientCertOnConnect=true` parameter is configured for your Pulsar server, you also need to configure the `tls-key-file-path` and `tls-certificate-file` parameters in the changefeed configuration file. For example:
+Pulsarサーバーに`tlsRequireTrustedClientCertOnConnect=true`パラメータが設定されている場合は、changefeed 設定ファイルで`tls-key-file-path`と`tls-certificate-file`パラメータも設定する必要があります。例:
 
 ```toml
 [sink.pulsar-config]
@@ -166,34 +166,34 @@ tls-certificate-file="/data/pulsar/tls-certificate-file"
 tls-key-file-path="/data/pulsar/tls-key-file"
 ```
 
-### TiCDC authentication and authorization for Pulsar
+### Pulsar の TiCDC 認証と承認 {#ticdc-authentication-and-authorization-for-pulsar}
 
-The following is a sample configuration when you use token authentication with Pulsar:
+以下は、Pulsar でトークン認証を使用する場合のサンプル構成です。
 
-- Token
+-   トークン
 
-    Sink URI: 
+    シンクURI:
 
     ```shell
     --sink-uri="pulsar://127.0.0.1:6650/persistent://public/default/yktest?protocol=canal-json"
     ```
 
-    Config parameter: 
+    設定パラメータ:
 
     ```shell
     [sink.pulsar-config]
     authentication-token = "xxxxxxxxxxxxx"
     ```
 
-- Token from file
+-   ファイルからのトークン
 
-    Sink URI: 
+    シンクURI:
 
     ```shell
     --sink-uri="pulsar://127.0.0.1:6650/persistent://public/default/yktest?protocol=canal-json"
     ```
 
-    Config parameter: 
+    設定パラメータ:
 
     ```toml
     [sink.pulsar-config]
@@ -201,15 +201,15 @@ The following is a sample configuration when you use token authentication with P
     token-from-file="/data/pulsar/token-file.txt"
     ```
 
-- mTLS authentication
+-   mTLS認証
 
-    Sink URI: 
+    シンクURI:
 
     ```shell
     --sink-uri="pulsar+ssl://127.0.0.1:6651/persistent://public/default/yktest?protocol=canal-json"
     ```
 
-    Config parameters: 
+    設定パラメータ:
 
     ```toml
     [sink.pulsar-config]
@@ -221,17 +221,17 @@ The following is a sample configuration when you use token authentication with P
     tls-trust-certs-file-path="/data/pulsar/tls-trust-certs-file"
     ```
 
-- OAuth2 authentication
+-   OAuth2認証
 
-    Starting from v7.5.1 and v8.0.0, TiCDC supports the OAuth2 authentication for Pulsar.
+    v7.5.1 および v8.0.0 以降、TiCDC は Pulsar の OAuth2 認証をサポートします。
 
-    Sink URI: 
+    シンクURI:
 
     ```shell
     --sink-uri="pulsar://127.0.0.1:6650/persistent://public/default/yktest?protocol=canal-json"
     ```
 
-    Config parameters: 
+    設定パラメータ:
 
     ```toml
     [sink.pulsar-config]
@@ -247,11 +247,11 @@ The following is a sample configuration when you use token authentication with P
     oauth2.oauth2-scope="xxxx"
     ```
 
-## Customize the dispatching rules for topics and partitions in Pulsar Sink
+## Pulsar Sink のトピックとパーティションのディスパッチルールをカスタマイズする {#customize-the-dispatching-rules-for-topics-and-partitions-in-pulsar-sink}
 
-### Matching rules for Matcher
+### Matcherのマッチングルール {#matching-rules-for-matcher}
 
-Take the `dispatchers` configuration item in the following sample configuration file as an example:
+次のサンプル構成ファイルの`dispatchers`構成項目を例に挙げます。
 
 ```toml
 [sink]
@@ -264,67 +264,67 @@ dispatchers = [
 ]
 ```
 
-- The tables that match a matcher rule are dispatched according to the policy specified by the corresponding topic expression. For example, the table `test3.aa` is dispatched according to `Topic expression 2`, and the table `test5.aa` is dispatched according to `Topic expression 3`.
-- For a table that matches more than one matcher rule, it is dispatched according to the first matching topic expression. For example, the table `test1.aa` is dispatched according to `Topic expression 1`.
-- For tables that do not match any matcher, the corresponding data change events are sent to the default topic specified in `-sink-uri`. For example, the table `test10.aa` is sent to the default topic.
-- For tables that match the matcher rule but do not have a topic dispatcher specified, the corresponding data changes are sent to the default topic specified in `-sink-uri`. For example, the table `test6.abc` is sent to the default topic.
+-   マッチャールールに一致するテーブルは、対応するトピック式で指定されたポリシーに従ってディスパッチされます。たとえば、テーブル`test3.aa`は`Topic expression 2`に従ってディスパッチされ、テーブル`test5.aa`は`Topic expression 3`に従ってディスパッチされます。
+-   複数のマッチャールールに一致するテーブルの場合、最初に一致するトピック式に従ってディスパッチされます。たとえば、テーブル`test1.aa`は`Topic expression 1`に従ってディスパッチされます。
+-   どのマッチャーにも一致しないテーブルの場合、対応するデータ変更イベントは`-sink-uri`で指定されたデフォルトのトピックに送信されます。たとえば、テーブル`test10.aa`はデフォルトのトピックに送信されます。
+-   マッチャー ルールに一致するがトピック ディスパッチャーが指定されていないテーブルの場合、対応するデータ変更は`-sink-uri`で指定されたデフォルト トピックに送信されます。たとえば、テーブル`test6.abc`はデフォルト トピックに送信されます。
 
-### Topic dispatcher
+### トピックディスパッチャ {#topic-dispatcher}
 
-You can use `topic = "xxx"` to specify a topic dispatcher and use topic expressions to implement flexible topic dispatching policies. It is recommended that the total number of topics be less than 1000.
+`topic = "xxx"`使用してトピック ディスパッチャーを指定し、トピック式を使用して柔軟なトピック ディスパッチ ポリシーを実装できます。トピックの合計数は 1000 未満にすることをお勧めします。
 
-The format of a topic expression is `[prefix]{schema}[middle][{table}][suffix]`. The following are the meanings of each part:
+トピック表現の形式は`[prefix]{schema}[middle][{table}][suffix]`です。各部分の意味は次のとおりです。
 
-- `prefix`: Optional. Represents the prefix of the topic name.
-- `{schema}`: Optional. Represents the database name.
-- `middle`: Optional. Represents the separator between a database name and a table name.
-- `{table}`: Optional. Represents the table name.
-- `suffix`: Optional. Represents the suffix of the topic name.
+-   `prefix` : オプション。トピック名のプレフィックスを表します。
+-   `{schema}` : オプション。データベース名を表します。
+-   `middle` : オプション。データベース名とテーブル名の間の区切り文字を表します。
+-   `{table}` : オプション。テーブル名を表します。
+-   `suffix` : オプション。トピック名のサフィックスを表します。
 
-`prefix`, `middle`, and `suffix` only support uppercase and lowercase letters (`a-z`, `A-Z`), numbers (`0-9`), dots (`.`), underscores (`_`), and hyphens (`-`). `{schema}` and `{table}` must be lowercase. Placeholders such as `{Schema}` and `{TABLE}` that contain uppercase letters are invalid.
+`prefix` 、 `middle` 、 `suffix` 、大文字と小文字 ( `a-z` 、 `A-Z` )、数字 ( `0-9` )、ドット ( `.` )、アンダースコア ( `_` )、ハイフン ( `-` ) のみをサポートします。 `{schema}`と`{table}`小文字にする必要があります。 `{Schema}`や`{TABLE}`などの大文字を含むプレースホルダーは無効です。
 
-The following are some examples:
+以下に例をいくつか示します。
 
-- `matcher = ['test1.table1', 'test2.table2'], topic = "hello_{schema}_{table}"`
-    - Data change events corresponding to the table `test1.table1` are despatched to a topic named `hello_test1_table1`.
-    - Data change events corresponding to the table `test2.table2` are despatched to a topic named `hello_test2_table2`.
+-   `matcher = ['test1.table1', 'test2.table2'], topic = "hello_{schema}_{table}"`
+    -   テーブル`test1.table1`に対応するデータ変更イベントは、 `hello_test1_table1`という名前のトピックに送信されます。
+    -   テーブル`test2.table2`に対応するデータ変更イベントは、 `hello_test2_table2`という名前のトピックに送信されます。
 
-- `matcher = ['test3.*', 'test4.*'], topic = "hello_{schema}_world"`
-    - Data change events for all tables under `test3` are despatched to a topic named `hello_test3_world`.
-    - Data change events for all tables under `test4` are despatched to a topic named `hello_test4_world`.
+-   `matcher = ['test3.*', 'test4.*'], topic = "hello_{schema}_world"`
+    -   `test3`の下にあるすべてのテーブルのデータ変更イベントは、 `hello_test3_world`という名前のトピックに送信されます。
+    -   `test4`の下にあるすべてのテーブルのデータ変更イベントは、 `hello_test4_world`という名前のトピックに送信されます。
 
-- `matcher = ['*.*'], topic = "{schema}_{table}"`
-    - For all tables that TiCDC listens on, they are despatched to separate topics according to the `databaseName_tableName` rule. For example, for the table `test.account`, TiCDC despatches its data change log to a topic named `test_account`.
+-   `matcher = ['*.*'], topic = "{schema}_{table}"`
+    -   TiCDC がリッスンするすべてのテーブルは、 `databaseName_tableName`ルールに従って個別のトピックに送信されます。たとえば、テーブル`test.account`の場合、TiCDC はデータ変更ログを`test_account`という名前のトピックに送信します。
 
-### Dispatch DDL events
+### DDLイベントをディスパッチする {#dispatch-ddl-events}
 
-#### Database-level DDL events
+#### データベースレベルのDDLイベント {#database-level-ddl-events}
 
-DDL statements such as `CREATE DATABASE` and `DROP DATABASE` that are not related to a specific table are called database-level DDL statements. Events corresponding to database-level DDL statements are dispatched to the default topic specified in `--sink-uri`.
+`CREATE DATABASE`や`DROP DATABASE`のように特定のテーブルに関連しない DDL 文をデータベース レベルの DDL 文と呼びます。データベース レベルの DDL 文に対応するイベントは、 `--sink-uri`で指定したデフォルト トピックにディスパッチされます。
 
-#### Table-level DDL events
+#### テーブルレベルの DDL イベント {#table-level-ddl-events}
 
-DDL statements such as `ALTER TABLE` and `CREATE TABLE` that are related to a specific table are called table-level DDL statements. Events corresponding to table-level DDL statements are dispatched to an appropriate topic according to the configuration of `dispatchers`.
+`ALTER TABLE`や`CREATE TABLE`のように特定のテーブルに関連するDDL文をテーブルレベルDDL文と呼びます。テーブルレベルDDL文に対応するイベントは、 `dispatchers`の設定に従って適切なトピックにディスパッチされます。
 
-For example, for a `dispatchers` configuration like `matcher = ['test.*'], topic = {schema}_{table}`, the DDL events are despatched as follows:
+たとえば、 `matcher = ['test.*'], topic = {schema}_{table}`のような`dispatchers`構成の場合、DDL イベントは次のように送信されます。
 
-- If a DDL event only involves a single table, the DDL event is dispatched to the appropriate topic as it is. For example, for the DDL event `DROP TABLE test.table1`, the event is dispatched to the topic named `test_table1`.
+-   DDL イベントが 1 つのテーブルのみに関係する場合、DDL イベントはそのまま適切なトピックにディスパッチされます。たとえば、DDL イベント`DROP TABLE test.table1`の場合、イベントは`test_table1`という名前のトピックにディスパッチされます。
 
-- If a DDL event involves more than one table (`RENAME TABLE`, `DROP TABLE`, and `DROP VIEW` might all involve more than one table), the single DDL event is split into multiple ones and dispatched to appropriate topics. For example, for the DDL event `RENAME TABLE test.table1 TO test.table10, test.table2 TO test.table20`, the processing is as follows:
+-   DDL イベントに複数のテーブルが関係する場合 ( `RENAME TABLE` 、 `DROP TABLE` 、および`DROP VIEW`すべて複数のテーブルが関係する可能性があります)、単一の DDL イベントが複数に分割され、適切なトピックにディスパッチされます。たとえば、DDL イベント`RENAME TABLE test.table1 TO test.table10, test.table2 TO test.table20`の場合、処理は次のようになります。
 
-    - Dispatch the DDL event for `RENAME TABLE test.table1 TO test.table10` to a topic named `test_table1`.
-    - Dispatch the DDL event for `RENAME TABLE test.table2 TO test.table20` to a topic named `test_table2`.
+    -   `RENAME TABLE test.table1 TO test.table10`の DDL イベントを`test_table1`という名前のトピックにディスパッチします。
+    -   `RENAME TABLE test.table2 TO test.table20`の DDL イベントを`test_table2`という名前のトピックにディスパッチします。
 
-### Partition dispatcher
+### パーティションディスパッチャ {#partition-dispatcher}
 
-Currently, TiCDC only supports consumers to consume messages using the exclusive subscription model, that is, each consumer can consume messages from all partitions in a topic.
+現在、TiCDC は、排他的サブスクリプション モデルを使用してメッセージを消費するコンシューマーのみをサポートしています。つまり、各コンシューマーはトピック内のすべてのパーティションからメッセージを消費できます。
 
-You can specify a partition dispatcher with `partition = "xxx"`. The following partition dispatches are supported: `default`, `ts`, `index-value`, and `table`. If you fill in any other string, TiCDC will pass that string as the `key` of the message in the messages sent to the Pulsar server.
+`partition = "xxx"`でパーティションディスパッチャを指定できます。サポートされているパーティションディスパッチは`default` 、 `ts` 、 `index-value` 、および`table`です。他の文字列を入力すると、TiCDC はその文字列を Pulsarサーバーに送信されるメッセージの`key`として渡します。
 
-The dispatching rules are as follows:
+発送ルールは以下のとおりです。
 
-- `default`: By default, events are dispatched by the schema name and table name, which is the same as when `table` is specified.
-- `ts`: Use commitTs of row changes to perform hash calculation and dispatch events.
-- `index-value`: Use the value of the table primary key or unique index to perform hash calculation and dispatch events.
-- `table`: Use the schema name and table name to perform hash calculation and dispatch events.
-- Other self-defined string: The self-defined string is used directly as the key for the Pulsar message, and the Pulsar producer uses this key value for dispatching.
+-   `default` : デフォルトでは、スキーマ名とテーブル名によってイベントがディスパッチされます。これは、 `table`を指定した場合と同じです。
+-   `ts` : 行変更の commitT を使用してハッシュ計算を実行し、イベントをディスパッチします。
+-   `index-value` : テーブルの主キーまたは一意のインデックスの値を使用してハッシュ計算を実行し、イベントをディスパッチします。
+-   `table` : スキーマ名とテーブル名を使用してハッシュ計算を実行し、イベントをディスパッチします。
+-   その他の自己定義文字列: 自己定義文字列は Pulsar メッセージのキーとして直接使用され、Pulsar プロデューサーはこのキー値をディスパッチに使用します。

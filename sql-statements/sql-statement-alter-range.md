@@ -1,29 +1,29 @@
 ---
 title: ALTER RANGE
-summary: An overview of the usage of ALTER RANGE for TiDB.
+summary: TiDB の ALTER RANGE の使用法の概要。
 ---
 
-# ALTER RANGE
+# 範囲の変更 {#alter-range}
 
-Currently, the `ALTER RANGE` statement can only be used to modify the range of a specific placement policy in TiDB.
+現在、 `ALTER RANGE`ステートメントは、TiDB 内の特定の配置ポリシーの範囲を変更するためにのみ使用できます。
 
-> **Note:**
+> **注記：**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AlterRangeStmt ::=
     'ALTER' 'RANGE' Identifier PlacementPolicyOption
 ```
 
-`ALTER RANGE` supports the following two parameters:
+`ALTER RANGE`次の 2 つのパラメータをサポートします。
 
-- `global`: indicates the range of all data in a cluster.
-- `meta`: indicates the range of internal metadata stored in TiDB.
+-   `global` : クラスター内のすべてのデータの範囲を示します。
+-   `meta` : TiDB に保存されている内部メタデータの範囲を示します。
 
-## Examples
+## 例 {#examples}
 
 ```sql
 CREATE PLACEMENT POLICY `deploy111` CONSTRAINTS='{"+region=us-east-1":1, "+region=us-east-2": 1, "+region=us-west-1": 1}';
@@ -33,4 +33,4 @@ ALTER RANGE global PLACEMENT POLICY = "deploy111";
 ALTER RANGE meta PLACEMENT POLICY = "five_replicas";
 ```
 
-The preceding example creates two placement policies (`deploy111` and `five_replicas`), specifies constraints for different regions, and then applies the `deploy111` placement policy to all data in the cluster range and the `five_replicas` placement policy to the metadata range.
+上記の例では、2 つの配置ポリシー ( `deploy111`と`five_replicas` ) を作成し、異なるリージョンの制約を指定してから、配置ポリシー`deploy111`をクラスター範囲内のすべてのデータに適用し、配置ポリシー`five_replicas`をメタデータ範囲に適用します。

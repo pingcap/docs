@@ -1,17 +1,17 @@
 ---
 title: ADMIN SHOW TELEMETRY | TiDB SQL Statement Reference
-summary: An overview of the usage of ADMIN SHOW TELEMETRY for the TiDB database.
+summary: TiDB データベースに対する ADMIN SHOW TELEMETRY の使用法の概要。
 ---
 
-# ADMIN SHOW TELEMETRY
+# 管理者はテレメトリを表示 {#admin-show-telemetry}
 
-The `ADMIN SHOW TELEMETRY` statement shows the information that will be reported back to PingCAP as part of the [telemetry](/telemetry.md) feature.
+`ADMIN SHOW TELEMETRY`ステートメントは、 [テレメトリー](/telemetry.md)機能の一部として PingCAP に報告される情報を示しています。
 
-> **Note:**
+> **注記：**
 >
-> This feature is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> この機能は TiDB Self-Hosted にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AdminStmt ::=
@@ -19,9 +19,7 @@ AdminStmt ::=
 
 ```
 
-## Examples
-
-{{< copyable "sql" >}}
+## 例 {#examples}
 
 ```sql
 ADMIN SHOW TELEMETRY\G
@@ -425,11 +423,11 @@ DATA_PREVIEW: {
 1 row in set (0.0259 sec)
 ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-The `ADMIN` statement is a TiDB extension to MySQL syntax.
+`ADMIN`ステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## 参照 {#see-also}
 
-* [Telemetry](/telemetry.md)
-* [`tidb_enable_telemetry` System Variable](/system-variables.md#tidb_enable_telemetry-new-in-v402)
+-   [テレメトリー](/telemetry.md)
+-   [`tidb_enable_telemetry`システム変数](/system-variables.md#tidb_enable_telemetry-new-in-v402)

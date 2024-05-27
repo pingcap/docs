@@ -1,35 +1,35 @@
 ---
 title: TiCDC Debezium Protocol
-summary: Learn the concept of the TiCDC Debezium Protocol and how to use it.
+summary: TiCDC Debezium プロトコルの概念とその使用方法を学びます。
 ---
 
-# TiCDC Debezium Protocol
+# TiCDC デベジウム プロトコル {#ticdc-debezium-protocol}
 
-[Debezium](https://debezium.io/) is a tool for capturing database changes. It converts each captured database change into a message called an "event" and sends these events to Kafka. Starting from v8.0.0, TiCDC supports sending TiDB changes to Kafka using a Debezium style output format, simplifying migration from MySQL databases for users who had previously been using Debezium's MySQL integration.
+[デベジウム](https://debezium.io/) 、データベースの変更をキャプチャするためのツールです。キャプチャされた各データベースの変更を「イベント」と呼ばれるメッセージに変換し、これらのイベントを Kafka に送信します。v8.0.0 以降、TiCDC は Debezium スタイルの出力形式を使用して TiDB の変更を Kafka に送信することをサポートし、これまで Debezium の MySQL 統合を使用していたユーザーにとって MySQL データベースからの移行を簡素化します。
 
-## Use the Debezium message format
+## Debeziumメッセージ形式を使用する {#use-the-debezium-message-format}
 
-When you use Kafka as the downstream sink, specify the `protocol` field as `debezium` in `sink-uri` configuration. Then TiCDC encapsulates the Debezium messages based on the events and sends TiDB data change events to the downstream.
+Kafka をダウンストリーム シンクとして使用する場合は、 `sink-uri`構成で`protocol`フィールドを`debezium`に指定します。すると、TiCDC はイベントに基づいて Debezium メッセージをカプセル化し、TiDB データ変更イベントをダウンストリームに送信します。
 
-Currently, the Debezium protocol only supports Row Changed events and directly ignores DDL events and WATERMARK events. A Row changed event represents a data change in a row. When a row changes, the Row Changed event is sent, including relevant information about the row both before and after the change. A WATERMARK event marks the replication progress of a table, indicating that all events earlier than the watermark have been sent to the downstream.
+現在、Debezium プロトコルは行変更イベントのみをサポートしており、DDL イベントと WATERMARK イベントは直接無視します。行変更イベントは、行内のデータ変更を表します。行が変更されると、変更前と変更後の行に関する関連情報を含む行変更イベントが送信されます。WATERMARK イベントは、テーブルのレプリケーションの進行状況を示し、ウォーターマークより前のすべてのイベントがダウンストリームに送信されたことを示します。
 
-The configuration example for using the Debezium message format is as follows:
+Debezium メッセージ形式を使用するための構成例は次のとおりです。
 
 ```shell
 cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-debezium" --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&protocol=debezium"
 ```
 
-The Debezium output format contains the schema information of the current row so that downstream consumers can better understand the data structure of the current row. For scenarios where schema information is unnecessary, you can also disable the schema output by setting the `debezium-disable-schema` parameter to `true` in the changefeed configuration file or `sink-uri`.
+Debezium 出力形式には、現在の行のスキーマ情報が含まれているため、下流のコンシューマーは現在の行のデータ構造をよりよく理解できます。スキーマ情報が不要なシナリオでは、changefeed 構成ファイルで`debezium-disable-schema`パラメータを`true`または`sink-uri`に設定して、スキーマ出力を無効にすることもできます。
 
-In addition, the original Debezium format does not include important fields such as the unique transaction identifier of the `CommitTS` in TiDB. To ensure data integrity, TiCDC adds two fields, `CommitTs` and `ClusterID`, to the Debezium format to identify the relevant information of TiDB data changes.
+さらに、元の Debezium 形式には、TiDB の`CommitTS`の一意のトランザクション識別子などの重要なフィールドが含まれていません。データの整合性を確保するために、TiCDC は、TiDB データの変更の関連情報を識別できるように、Debezium 形式に`CommitTs`と`ClusterID` 2 つのフィールドを追加します。
 
-## Message format definition
+## メッセージ形式の定義 {#message-format-definition}
 
-This section describes the format definition of the DML event output in the Debezium format.
+このセクションでは、Debezium 形式の DML イベント出力の形式定義について説明します。
 
-### DML event
+### DMLイベント {#dml-event}
 
-TiCDC encodes a DML event in the following format:
+TiCDC は DML イベントを次の形式でエンコードします。
 
 ```json
 {
@@ -114,25 +114,25 @@ TiCDC encodes a DML event in the following format:
 }
 ```
 
-The key fields of the preceding JSON data are explained as follows:
+上記の JSON データの主要なフィールドは次のように説明されます。
 
-| Field      | Type   | Description                                            |
-|:----------|:-------|:-------------------------------------------------------|
-| payload.op        | String | The type of the change event. `"c"` indicates an `INSERT` event, `"u"` indicates an `UPDATE` event, and `"d"` indicates a `DELETE` event.  |
-| payload.ts_ms     | Number | The timestamp (in milliseconds) when TiCDC generates this message. |
-| payload.before    | JSON   | The data value before the change event of a statement. For `"c"` events, the value of the `before` field is `null`.     |
-| payload.after     | JSON   | The data value after the change event of a statement. For `"d"` events, the value of the `after` field is `null`.     |
-| payload.source.commit_ts     | Number  | The `CommitTs` identifier when TiCDC generates this message.       |
-| payload.source.db     | String   | The name of the database where the event occurs.    |
-| payload.source.table     | String  |  The name of the table where the event occurs.   |
-| schema.fields     | JSON   |  The type information of each field in the payload, including the schema information of the row data before and after the change.   |
+| 分野                | タイプ | 説明                                                                            |
+| :---------------- | :-- | :---------------------------------------------------------------------------- |
+| ペイロード.op          | 弦   | 変更イベントのタイプ。1 `"c"` `INSERT`イベント、 `"u"`は`UPDATE`イベント、 `"d"` `DELETE`イベントを示します。 |
+| ペイロード.ts_ms       | 番号  | TiCDC がこのメッセージを生成したときのタイムスタンプ (ミリ秒単位)。                                        |
+| ペイロード.before      | 翻訳  | ステートメントの変更イベント前のデータ値。 `"c"`イベントの場合、 `before`フィールドの値は`null`です。                 |
+| ペイロード後            | 翻訳  | ステートメントの変更イベント後のデータ値。 `"d"`イベントの場合、 `after`フィールドの値は`null`です。                  |
+| ペイロード.ソース.コミット_ts | 番号  | TiCDC がこのメッセージを生成するときの`CommitTs`識別子。                                          |
+| ペイロード.ソース.db      | 弦   | イベントが発生したデータベースの名前。                                                           |
+| ペイロード.ソース.テーブル    | 弦   | イベントが発生するテーブルの名前。                                                             |
+| スキーマフィールド         | 翻訳  | 変更前後の行データのスキーマ情報を含む、ペイロード内の各フィールドの型情報。                                        |
 
-### Data type mapping
+### データ型マッピング {#data-type-mapping}
 
-The data format mapping in the TiCDC Debezium message basically follows the [Debezium data type mapping rules](https://debezium.io/documentation/reference/2.4/connectors/mysql.html#mysql-data-types), which is generally consistent with the native message of the Debezium Connector for MySQL. However, for some data types, the following differences exist between TiCDC Debezium and Debezium Connector messages:
+TiCDC Debezium メッセージのデータ形式マッピングは基本的に[Debezium データ型マッピングルール](https://debezium.io/documentation/reference/2.4/connectors/mysql.html#mysql-data-types)に従います。これは、MySQL 用の Debezium Connector のネイティブ メッセージとほぼ一致しています。ただし、一部のデータ型については、TiCDC Debezium メッセージと Debezium Connector メッセージの間に次の違いがあります。
 
-- Currently, TiDB does not support spatial data types, including GEOMETRY, LINESTRING, POLYGON, MULTIPOINT, MULTILINESTRING, MULTIPOLYGON, and GEOMETRYCOLLECTION.
+-   現在、TiDB は、GEOMETRY、LINESTRING、POLYGON、MULTIPOINT、MULTILINESTRING、MULTIPOLYGON、GEOMETRYCOLLECTION などの空間データ型をサポートしていません。
 
-- For string-like data types, including Varchar, String, VarString, TinyBlob, MediumBlob, BLOB, and LongBlob, when the column has the BINARY flag, TiCDC encodes it as a String type after encoding it in Base64; when the column does not have the BINARY flag, TiCDC encodes it directly as a String type. The native Debezium Connector encodes it in different ways according to `binary.handling.mode`.
+-   Varchar、String、VarString、TinyBlob、MediumBlob、BLOB、LongBlob などの文字列のようなデータ型の場合、列に BINARY フラグがある場合、TiCDC はそれを Base64 でエンコードした後、String 型としてエンコードします。列に BINARY フラグがない場合、TiCDC はそれを直接 String 型としてエンコードします。ネイティブ Debezium Connector は、 `binary.handling.mode`に従ってさまざまな方法でエンコードします。
 
-- For the Decimal data type, including `DECIMAL` and `NUMERIC`, TiCDC uses the float64 type to represent it. The native Debezium Connector encodes it in float32 or float64 according to the different precision of the data type.
+-   `DECIMAL`や`NUMERIC`などの Decimal データ型の場合、TiCDC は float64 型を使用してそれを表します。ネイティブの Debezium Connector は、データ型の異なる精度に応じて、これを float32 または float64 でエンコードします。

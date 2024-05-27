@@ -1,23 +1,23 @@
 ---
 title: TiDB 1.0.1 Release Notes
-summary: TiDB 1.0.1 was released on November 1, 2017. Updates include support for canceling DDL Job, optimizing the `IN` expression, correcting the result type of the `Show` statement, supporting log slow query into a separate log file, and fixing bugs. TiKV now supports flow control with write bytes, reduces Raft allocation, increases coprocessor stack size to 10MB, and removes the useless log from the coprocessor.
+summary: TiDB 1.0.1 は 2017 年 11 月 1 日にリリースされました。更新内容には、DDL ジョブのキャンセルのサポート、`IN` 式の最適化、`Show` ステートメントの結果タイプの修正、別のログ ファイルへのスロー クエリのログ記録のサポート、バグの修正が含まれています。TiKV は、書き込みバイトによるフロー制御をサポートし、 Raft割り当てを削減し、コプロセッサ スタック サイズを 10 MB に増やし、コプロセッサから不要なログを削除します。
 ---
 
-# TiDB 1.0.1 Release Notes
+# TiDB 1.0.1 リリースノート {#tidb-1-0-1-release-notes}
 
-On November 1, 2017, TiDB 1.0.1 is released with the following updates:
+2017 年 11 月 1 日に、次の更新を含む TiDB 1.0.1 がリリースされました。
 
-## TiDB
+## ティビ {#tidb}
 
-- Support canceling DDL Job.
-- Optimize the `IN` expression.
-- Correct the result type of the `Show` statement.
-- Support log slow query into a separate log file.
-- Fix bugs.
+-   DDL ジョブのキャンセルをサポートします。
+-   `IN`式を最適化します。
+-   `Show`ステートメントの結果の型を修正します。
+-   遅いクエリを別のログ ファイルに記録することをサポートします。
+-   バグを修正しました。
 
-## TiKV
+## ティクヴ {#tikv}
 
-- Support flow control with write bytes.
-- Reduce Raft allocation.
-- Increase coprocessor stack size to 10MB.
-- Remove the useless log from the coprocessor.
+-   書き込みバイトによるフロー制御をサポートします。
+-   Raft の割り当てを減らします。
+-   コプロセッサのスタック サイズを 10 MB に増やします。
+-   コプロセッサから不要なログを削除します。

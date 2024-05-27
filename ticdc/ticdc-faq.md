@@ -1,40 +1,38 @@
 ---
 title: TiCDC FAQs
-summary: Learn the FAQs you might encounter when you use TiCDC.
+summary: TiCDC を使用する際に遭遇する可能性のある FAQ について説明します。
 ---
 
-# TiCDC FAQs
+# TiCDC よくある質問 {#ticdc-faqs}
 
-This document introduces the common questions that you might encounter when using TiCDC.
+このドキュメントでは、TiCDC の使用時に発生する可能性のある一般的な質問について説明します。
 
-> **Note:**
+> **注記：**
 >
-> In this document, the server address specified in `cdc cli` commands is `--server=http://127.0.0.1:8300`. When you use the command, replace the address with your actual PD address.
+> このドキュメントでは、 `cdc cli`コマンドで指定されているサーバーアドレスは`--server=http://127.0.0.1:8300`です。コマンドを使用するときは、アドレスを実際の PD アドレスに置き換えてください。
 
-## How do I choose `start-ts` when creating a task in TiCDC?
+## TiCDC でタスクを作成するときに<code>start-ts</code>選択するにはどうすればよいですか? {#how-do-i-choose-code-start-ts-code-when-creating-a-task-in-ticdc}
 
-The `start-ts` of a replication task corresponds to a Timestamp Oracle (TSO) in the upstream TiDB cluster. TiCDC requests data from this TSO in a replication task. Therefore, the `start-ts` of the replication task must meet the following requirements:
+レプリケーション タスクの`start-ts` 、上流の TiDB クラスターの Timestamp Oracle (TSO) に対応します。TiCDC は、レプリケーション タスクでこの TSO からデータを要求します。したがって、レプリケーション タスクの`start-ts`次の要件を満たす必要があります。
 
-- The value of `start-ts` is larger than the `tikv_gc_safe_point` value of the current TiDB cluster. Otherwise, an error occurs when you create a task.
-- Before starting a task, ensure that the downstream has all data before `start-ts`. For scenarios such as replicating data to message queues, if the data consistency between upstream and downstream is not required, you can relax this requirement according to your application need.
+-   `start-ts`の値は、現在の TiDB クラスターの`tikv_gc_safe_point`値よりも大きいです。それ以外の場合、タスクを作成するときにエラーが発生します。
+-   タスクを開始する前に、ダウンストリームに`start-ts`より前のすべてのデータが揃っていることを確認してください。メッセージ キューにデータを複製するなどのシナリオでは、アップストリームとダウンストリーム間のデータの一貫性が必要ない場合は、アプリケーションのニーズに応じてこの要件を緩和できます。
 
-If you do not specify `start-ts`, or specify `start-ts` as `0`, when a replication task is started, TiCDC gets a current TSO and starts the task from this TSO.
+`start-ts`指定しない場合、または`start-ts` `0`として指定した場合、レプリケーション タスクが開始されると、TiCDC は現在の TSO を取得し、この TSO からタスクを開始します。
 
-## Why can't some tables be replicated when I create a task in TiCDC?
+## TiCDC でタスクを作成するときに、一部のテーブルを複製できないのはなぜですか? {#why-can-t-some-tables-be-replicated-when-i-create-a-task-in-ticdc}
 
-When you execute `cdc cli changefeed create` to create a replication task, TiCDC checks whether the upstream tables meet the [replication requirements](/ticdc/ticdc-overview.md#best-practices). If some tables do not meet the requirements, `some tables are not eligible to replicate` is returned with a list of ineligible tables. You can choose `Y` or `y` to continue creating the task, and all updates on these tables are automatically ignored during the replication. If you choose an input other than `Y` or `y`, the replication task is not created.
+`cdc cli changefeed create`実行してレプリケーション タスクを作成すると、TiCDC はアップストリーム テーブルが[レプリケーション要件](/ticdc/ticdc-overview.md#best-practices)満たしているかどうかを確認します。一部のテーブルが要件を満たしていない場合、不適格なテーブルのリストとともに`some tables are not eligible to replicate`が返されます。タスクの作成を続行するには`Y`または`y`を選択できます。その場合、レプリケーション中はこれらのテーブルのすべての更新が自動的に無視されます。 `Y`または`y`以外の入力を選択した場合、レプリケーション タスクは作成されません。
 
-## How do I view the state of TiCDC replication tasks?
+## TiCDC レプリケーション タスクの状態を確認するにはどうすればよいですか? {#how-do-i-view-the-state-of-ticdc-replication-tasks}
 
-To view the status of TiCDC replication tasks, use `cdc cli`. For example:
-
-{{< copyable "shell-regular" >}}
+TiCDC レプリケーション タスクのステータスを表示するには、 `cdc cli`使用します。例:
 
 ```shell
 cdc cli changefeed list --server=http://127.0.0.1:8300
 ```
 
-The expected output is as follows:
+期待される出力は次のとおりです。
 
 ```json
 [{
@@ -48,109 +46,107 @@ The expected output is as follows:
 }]
 ```
 
-* `checkpoint`: TiCDC has replicated all data before this timestamp to downstream.
-* `state`: The state of this replication task. For more information about each state and its meaning, see [Changefeed states](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer).
+-   `checkpoint` : TiCDC はこのタイムスタンプより前のすべてのデータをダウンストリームに複製しました。
+-   `state` : このレプリケーション タスクの状態。各状態とその意味の詳細については、 [チェンジフィードの状態](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer)を参照してください。
 
-> **Note:**
+> **注記：**
 >
-> This feature is introduced in TiCDC 4.0.3.
+> この機能は TiCDC 4.0.3 で導入されました。
 
-## What is `gc-ttl` in TiCDC?
+## TiCDC の<code>gc-ttl</code>とは何ですか? {#what-is-code-gc-ttl-code-in-ticdc}
 
-Since v4.0.0-rc.1, PD supports external services in setting the service-level GC safepoint. Any service can register and update its GC safepoint. PD ensures that the key-value data later than this GC safepoint is not cleaned by GC.
+v4.0.0-rc.1 以降、PD はサービス レベルの GC セーフポイントの設定において外部サービスをサポートします。どのサービスでも GC セーフポイントを登録および更新できます。PD は、この GC セーフポイント以降のキー値データが GC によってクリーンアップされないようにします。
 
-When the replication task is unavailable or interrupted, this feature ensures that the data to be consumed by TiCDC is retained in TiKV without being cleaned by GC.
+この機能により、レプリケーション タスクが利用できないか中断された場合、TiCDC によって消費されるデータは GC によってクリーンアップされることなく TiKV に保持されます。
 
-When starting the TiCDC server, you can specify the Time To Live (TTL) duration of GC safepoint by configuring `gc-ttl`. You can also [use TiUP to modify](/ticdc/deploy-ticdc.md#modify-ticdc-cluster-configurations-using-tiup) `gc-ttl`. The default value is 24 hours. In TiCDC, this value means:
+TiCDCサーバーを起動するときに、 `gc-ttl`を設定して GC セーフポイントの Time To Live (TTL) 期間を指定できます。 [TiUPを使用して変更する](/ticdc/deploy-ticdc.md#modify-ticdc-cluster-configurations-using-tiup) `gc-ttl`も指定できます。デフォルト値は 24 時間です。TiCDC では、この値は次の意味を持ちます。
 
-- The maximum time the GC safepoint is retained at the PD after the TiCDC service is stopped.
-- When TiKV's GC is blocked by TiCDC's GC safepoint, `gc-ttl` indicates the maximum replication delay of a TiCDC replication task. If the delay of the replication task exceeds the value set by `gc-ttl`, the replication task enters into the `failed` state and reports the `ErrGCTTLExceeded` error. It cannot be recovered, and no longer blocks GC safepoint to advance.
+-   TiCDC サービスが停止された後、GC セーフポイントが PD に保持される最大時間。
+-   TiKV の GC が TiCDC の GC セーフポイントによってブロックされている場合、 `gc-ttl`​​ TiCDC レプリケーション タスクの最大レプリケ​​ーション遅延を示します。レプリケーション タスクの遅延が`gc-ttl`で設定された値を超えると、レプリケーション タスクは`failed`状態になり、 `ErrGCTTLExceeded`エラーが報告されます。回復できず、GC セーフポイントの進行をブロックしなくなります。
 
-The second behavior above is introduced in TiCDC v4.0.13 and later versions. The purpose is to prevent a replication task in TiCDC from suspending for too long, causing the GC safepoint of the upstream TiKV cluster not to continue for a long time and retaining too many outdated data versions, thus affecting the performance of the upstream cluster.
+上記の 2 番目の動作は、TiCDC v4.0.13 以降のバージョンで導入されています。その目的は、TiCDC のレプリケーション タスクが長時間中断され、上流 TiKV クラスターの GC セーフポイントが長時間継続せず、古いデータ バージョンが多すぎるままになり、上流クラスターのパフォーマンスに影響が出るのを防ぐことです。
 
-> **Note:**
+> **注記：**
 >
-> In some scenarios, for example, when you use TiCDC for incremental replication after full replication with Dumpling/BR, the default 24 hours of `gc-ttl` may not be sufficient. You need to specify an appropriate value for `gc-ttl` when you start the TiCDC server.
+> 一部のシナリオでは、たとえばDumpling/ BRによる完全レプリケーション後に TiCDC を使用して増分レプリケーションを行う場合、デフォルトの 24 時間である`gc-ttl`では不十分な場合があります。TiCDCサーバーを起動するときに、適切な値`gc-ttl`を指定する必要があります。
 
-## What is the complete behavior of TiCDC garbage collection (GC) safepoint?
+## TiCDCガベージコレクション(GC) セーフポイントの完全な動作は何ですか? {#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint}
 
-If a replication task starts after the TiCDC service starts, the TiCDC owner updates the PD service GC safepoint with the smallest value of `checkpoint-ts` among all replication tasks. The service GC safepoint ensures that TiCDC does not delete data generated at that time and after that time. If the replication task is interrupted, or manually stopped, the `checkpoint-ts` of this task does not change. Meanwhile, PD's corresponding service GC safepoint is not updated either.
+TiCDC サービスの開始後にレプリケーション タスクが開始されると、TiCDC 所有者は、すべてのレプリケーション タスクの中で最小値`checkpoint-ts`で PD サービス GC セーフポイントを更新します。サービス GC セーフポイントにより、TiCDC はその時点およびその時点以降に生成されたデータを削除しません。レプリケーション タスクが中断された場合、または手動で停止された場合、このタスクの`checkpoint-ts`は変更されません。一方、PD の対応するサービス GC セーフポイントも更新されません。
 
-If the replication task is suspended longer than the time specified by `gc-ttl`, the replication task enters the `failed` status and cannot be resumed. The PD corresponding service GC safepoint will continue.
+レプリケーションタスクが`gc-ttl`で指定した時間より長く中断された場合、レプリケーションタスクは`failed`状態になり、再開できません。PD 対応サービス GC セーフポイントは継続されます。
 
-The default Time-To-Live (TTL) that TiCDC sets for a service GC safepoint is 24 hours, which means that the GC mechanism does not delete the data required by TiCDC for continuing replication if the TiCDC service can be recovered within 24 hours after it is interrupted.
+TiCDC がサービス GC セーフポイントに設定するデフォルトの Time-To-Live (TTL) は 24 時間です。つまり、TiCDC サービスが中断されてから 24 時間以内に回復できる場合、GC メカニズムは TiCDC がレプリケーションを続行するために必要なデータを削除しません。
 
-## How to recover a replication task after it fails?
+## レプリケーション タスクが失敗した後に回復するにはどうすればよいですか? {#how-to-recover-a-replication-task-after-it-fails}
 
-1. Use `cdc cli changefeed query` to query the error information of the replication task and fix the error as soon as possible.
-2. Increase the value of `gc-ttl` to allow more time to fix the error, ensuring that the replication task does not enter the `failed` status due to the replication delay exceeding `gc-ttl` after the error is fixed.
-3. After evaluating the impact on the system, increase the value of [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) in TiDB to block GC and retain data, ensuring that the replication task does not enter the `failed` status due to GC cleaning data after the error is fixed.
+1.  `cdc cli changefeed query`を使用してレプリケーション タスクのエラー情報を照会し、できるだけ早くエラーを修正します。
+2.  値を`gc-ttl`に増やすと、エラーを修正するための時間が長くなり、エラーが修正された後にレプリケーション遅延が`gc-ttl`を超えたためにレプリケーション タスクが`failed`ステータスにならないようになります。
+3.  システムへの影響を評価した後、TiDB の値を[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)増やして GC をブロックし、データを保持して、エラーが修正された後に GC によるデータのクリーニングによってレプリケーション タスクが`failed`ステータスにならないようにします。
 
-## How to understand the relationship between the TiCDC time zone and the time zones of the upstream/downstream databases?
+## TiCDC タイム ゾーンと上流/下流データベースのタイム ゾーンの関係を理解するにはどうすればよいでしょうか? {#how-to-understand-the-relationship-between-the-ticdc-time-zone-and-the-time-zones-of-the-upstream-downstream-databases}
 
-||Upstream time zone| TiCDC time zone|Downstream time zone|
-| :-: | :-: | :-: | :-: |
-| Configuration method | See [Time Zone Support](/configure-time-zone.md) | Configured using the `--tz` parameter when you start the TiCDC server |  Configured using the `time-zone` parameter in `sink-uri` |
-| Description | The time zone of the upstream TiDB, which affects DML operations of the timestamp type and DDL operations related to timestamp type columns.| TiCDC assumes that the upstream TiDB's time zone is the same as the TiCDC time zone configuration, and performs related operations on the timestamp column.| The downstream MySQL processes the timestamp in the DML and DDL operations according to the downstream time zone setting.|
+|              |                                   上流タイムゾーン                                  |                                   TiCDC タイムゾーン                                  |                               下流タイムゾーン                               |
+| :----------: | :-------------------------------------------------------------------------: | :-----------------------------------------------------------------------------: | :------------------------------------------------------------------: |
+| コンフィグレーション方法 |                   [タイムゾーンのサポート](/configure-time-zone.md)参照                  |                     TiCDCサーバーを起動するときに`--tz`パラメータを使用して設定されます                     |                  `sink-uri`の`time-zone`パラメータを使用して構成                  |
+|      説明      | アップストリーム TiDB のタイムゾーン。タイムスタンプ タイプの DML 操作と、タイムスタンプ タイプの列に関連する DDL 操作に影響します。 | TiCDC は、上流の TiDB のタイム ゾーンが TiCDC のタイム ゾーン構成と同じであると想定し、タイムスタンプ列に対して関連する操作を実行します。 | ダウンストリーム MySQL は、ダウンストリームのタイムゾーン設定に従って、DML および DDL 操作のタイムスタンプを処理します。 |
 
- > **Note:**
- >
- > Be careful when you set the time zone of the TiCDC server, because this time zone is used for converting the time type. Keep the upstream time zone, TiCDC time zone, and the downstream time zone consistent. The TiCDC server chooses its time zone in the following priority:
- >
- > - TiCDC first uses the time zone specified using `--tz`.
- > - When `--tz` is not available, TiCDC tries to read the time zone set using the `TZ` environment variable.
- > - When the `TZ` environment variable is not available, TiCDC uses the default time zone of the machine.
+> **注記：**
+>
+> TiCDCサーバーのタイム ゾーンを設定するときは注意してください。このタイム ゾーンは時間タイプの変換に使用されるためです。アップストリーム タイム ゾーン、TiCDC タイム ゾーン、ダウンストリーム タイム ゾーンの一貫性を維持してください。TiCDCサーバーは、次の優先順位でタイム ゾーンを選択します。
+>
+> -   TiCDC はまず`--tz`を使用して指定されたタイム ゾーンを使用します。
+> -   `--tz`利用できない場合、TiCDC は`TZ`環境変数を使用してタイム ゾーン セットを読み取ろうとします。
+> -   `TZ`環境変数が使用できない場合、TiCDC はマシンのデフォルトのタイム ゾーンを使用します。
 
-## What is the default behavior of TiCDC if I create a replication task without specifying the configuration file in `--config`?
+## <code>--config</code>で構成ファイルを指定せずにレプリケーション タスクを作成した場合、TiCDC のデフォルトの動作はどうなりますか? {#what-is-the-default-behavior-of-ticdc-if-i-create-a-replication-task-without-specifying-the-configuration-file-in-code-config-code}
 
-If you use the `cdc cli changefeed create` command without specifying the `-config` parameter, TiCDC creates the replication task in the following default behaviors:
+`-config`パラメータを指定せずに`cdc cli changefeed create`コマンドを使用すると、TiCDC は次のデフォルト動作でレプリケーション タスクを作成します。
 
-- Replicates all tables except system tables
-- Only replicates tables that contain [valid indexes](/ticdc/ticdc-overview.md#best-practices)
+-   システムテーブルを除くすべてのテーブルを複製します
+-   [有効なインデックス](/ticdc/ticdc-overview.md#best-practices)含むテーブルのみを複製します
 
-## Does TiCDC support outputting data changes in the Canal protocol?
+## TiCDC は Canal プロトコルでのデータ変更の出力をサポートしていますか? {#does-ticdc-support-outputting-data-changes-in-the-canal-protocol}
 
-Yes. Note that for the Canal protocol, TiCDC only supports the JSON output format, while the protobuf format is not officially supported yet. To enable Canal output, specify `protocol` as `canal-json` in the `--sink-uri` configuration. For example:
-
-{{< copyable "shell-regular" >}}
+はい。Canal プロトコルの場合、TiCDC は JSON 出力形式のみをサポートしており、protobuf 形式はまだ正式にサポートされていないことに注意してください。Canal 出力を有効にするには、 `--sink-uri`構成で`protocol`を`canal-json`に指定します。例:
 
 ```shell
 cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&protocol=canal-json" --config changefeed.toml
 ```
 
-> **Note:**
+> **注記：**
 >
-> * This feature is introduced in TiCDC 4.0.2.
-> * TiCDC currently supports outputting data changes in the Canal-JSON format only to MQ sinks such as Kafka.
+> -   この機能は TiCDC 4.0.2 で導入されました。
+> -   TiCDC は現在、Kafka などの MQ シンクにのみ、Canal-JSON 形式でデータ変更を出力することをサポートしています。
 
-For more information, refer to [TiCDC changefeed configurations](/ticdc/ticdc-changefeed-config.md).
+詳細については[TiCDC チェンジフィード構成](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
-## Why does the latency from TiCDC to Kafka become higher and higher?
+## TiCDC から Kafka へのレイテンシーがどんどん高くなるのはなぜですか? {#why-does-the-latency-from-ticdc-to-kafka-become-higher-and-higher}
 
-* Check [how do I view the state of TiCDC replication tasks](#how-do-i-view-the-state-of-ticdc-replication-tasks).
-* Adjust the following parameters of Kafka:
+-   チェック[TiCDC レプリケーション タスクの状態を表示するにはどうすればいいですか?](#how-do-i-view-the-state-of-ticdc-replication-tasks) 。
+-   Kafka の次のパラメータを調整します。
 
-    * Increase the `message.max.bytes` value in `server.properties` to `1073741824` (1 GB).
-    * Increase the `replica.fetch.max.bytes` value in `server.properties` to `1073741824` (1 GB).
-    * Increase the `fetch.message.max.bytes` value in `consumer.properties` to make it larger than the `message.max.bytes` value.
+    -   `server.properties`の`message.max.bytes`値を`1073741824` (1 GB) に増やします。
+    -   `server.properties`の`replica.fetch.max.bytes`値を`1073741824` (1 GB) に増やします。
+    -   `consumer.properties`の`fetch.message.max.bytes`値を増やして、 `message.max.bytes`値より大きくします。
 
-## When TiCDC replicates data to Kafka, can I control the maximum size of a single message in TiDB?
+## TiCDC がデータを Kafka に複製する場合、TiDB 内の単一メッセージの最大サイズを制御できますか? {#when-ticdc-replicates-data-to-kafka-can-i-control-the-maximum-size-of-a-single-message-in-tidb}
 
-When `protocol` is set to `avro` or `canal-json`, messages are sent per row change. A single Kafka message contains only one row change and is generally no larger than Kafka's limit. Therefore, there is no need to limit the size of a single message. If the size of a single Kafka message does exceed Kafka's limit, refer to [Why does the latency from TiCDC to Kafka become higher and higher?](/ticdc/ticdc-faq.md#why-does-the-latency-from-ticdc-to-kafka-become-higher-and-higher).
+`protocol` `avro`または`canal-json`に設定すると、行の変更ごとにメッセージが送信されます。1 つの Kafka メッセージには 1 つの行の変更のみが含まれ、通常は Kafka の制限を超えることはありません。したがって、1 つのメッセージのサイズを制限する必要はありません。1 つの Kafka メッセージのサイズが Kafka の制限を超える場合は、 [TiCDC から Kafka へのレイテンシーがどんどん高くなるのはなぜですか?](/ticdc/ticdc-faq.md#why-does-the-latency-from-ticdc-to-kafka-become-higher-and-higher)を参照してください。
 
-When `protocol` is set to `open-protocol`, messages are sent in batches. Therefore, one Kafka message might be excessively large. To avoid this situation, you can configure the `max-message-bytes` parameter to control the maximum size of data sent to the Kafka broker each time (optional, `10MB` by default). You can also configure the `max-batch-size` parameter (optional, `16` by default) to specify the maximum number of change records in each Kafka message.
+`protocol`を`open-protocol`に設定すると、メッセージはバッチで送信されます。そのため、1 つの Kafka メッセージは大きすぎる可能性があります。この状況を回避するには、 `max-message-bytes`パラメータを設定して、Kafka ブローカーに毎回送信されるデータの最大サイズを制御できます (オプション、デフォルトは`10MB` )。また、 `max-batch-size`パラメータを設定して (オプション、デフォルトは`16` )、各 Kafka メッセージの変更レコードの最大数を指定することもできます。
 
-## If I modify a row multiple times in a transaction, will TiCDC output multiple row change events?
+## トランザクションで行を複数回変更した場合、TiCDC は複数の行変更イベントを出力しますか? {#if-i-modify-a-row-multiple-times-in-a-transaction-will-ticdc-output-multiple-row-change-events}
 
-No. When you modify the same row in one transaction multiple times, TiDB only sends the latest modification to TiKV. Therefore, TiCDC can only obtain the result of the latest modification.
+いいえ。1 つのトランザクションで同じ行を複数回変更した場合、TiDB は最新の変更のみを TiKV に送信します。したがって、TiCDC は最新の変更の結果のみを取得できます。
 
-## When TiCDC replicates data to Kafka, does a message contain multiple types of data changes?
+## TiCDC がデータを Kafka に複製する場合、メッセージには複数の種類のデータ変更が含まれますか? {#when-ticdc-replicates-data-to-kafka-does-a-message-contain-multiple-types-of-data-changes}
 
-Yes. A single message might contain multiple `update`s or `delete`s, and `update` and `delete` might co-exist.
+はい。1 つのメッセージに複数の`update`または`delete`が含まれる場合があり、 `update`と`delete`共存する場合もあります。
 
-## When TiCDC replicates data to Kafka, how do I view the timestamp, table name, and schema name in the output of TiCDC Open Protocol?
+## TiCDC がデータを Kafka に複製する場合、TiCDC Open Protocol の出力でタイムスタンプ、テーブル名、スキーマ名をどのように表示すればよいですか? {#when-ticdc-replicates-data-to-kafka-how-do-i-view-the-timestamp-table-name-and-schema-name-in-the-output-of-ticdc-open-protocol}
 
-The information is included in the key of Kafka messages. For example:
+情報は Kafka メッセージのキーに含まれています。例:
 
 ```json
 {
@@ -161,70 +157,68 @@ The information is included in the key of Kafka messages. For example:
 }
 ```
 
-For more information, refer to [TiCDC Open Protocol event format](/ticdc/ticdc-open-protocol.md#event-format).
+詳細については[TiCDC オープン プロトコル イベント形式](/ticdc/ticdc-open-protocol.md#event-format)を参照してください。
 
-## When TiCDC replicates data to Kafka, how do I know the timestamp of the data changes in a message?
+## TiCDC がデータを Kafka に複製する場合、メッセージ内のデータ変更のタイムスタンプをどのように確認すればよいですか? {#when-ticdc-replicates-data-to-kafka-how-do-i-know-the-timestamp-of-the-data-changes-in-a-message}
 
-You can get the unix timestamp by moving `ts` in the key of the Kafka message by 18 bits to the right.
+Kafka メッセージのキーの`ts`を 18 ビット右に移動すると、UNIX タイムスタンプを取得できます。
 
-## How does TiCDC Open Protocol represent `null`?
+## TiCDC オープン プロトコルは<code>null</code>どのように表現しますか? {#how-does-ticdc-open-protocol-represent-code-null-code}
 
-In TiCDC Open Protocol, the type code `6` represents `null`.
+TiCDC オープン プロトコルでは、タイプ コード`6` `null`表します。
 
-| Type | Code | Output Example | Note |
-|:--|:--|:--|:--|
-| Null | 6 | `{"t":6,"v":null}` | |
+| タイプ | コード | 出力例                | 注記 |
+| :-- | :-- | :----------------- | :- |
+| ヌル  | 6   | `{"t":6,"v":null}` |    |
 
-For more information, refer to [TiCDC Open Protocol column type code](/ticdc/ticdc-open-protocol.md#column-type-code).
+詳細については[TiCDC オープンプロトコル列タイプコード](/ticdc/ticdc-open-protocol.md#column-type-code)を参照してください。
 
-## How can I tell if a Row Changed Event of TiCDC Open Protocol is an `INSERT` event or an `UPDATE` event?
+## TiCDC オープン プロトコルの行変更イベントが<code>INSERT</code>イベントなのか<code>UPDATE</code>イベントなのかをどのように判断すればよいですか? {#how-can-i-tell-if-a-row-changed-event-of-ticdc-open-protocol-is-an-code-insert-code-event-or-an-code-update-code-event}
 
-* `UPDATE` event contains both `"p"` and `"u"` fields
-* `INSERT` event only contains the `"u"` field
-* `DELETE` event only contains the `"d"` field
+-   `UPDATE`イベントには`"p"`フィールドと`"u"`フィールドの両方が含まれます
+-   `INSERT`イベントには`"u"`フィールドのみが含まれます
+-   `DELETE`イベントには`"d"`フィールドのみが含まれます
 
-For more information, refer to [Open protocol Row Changed Event format](/ticdc/ticdc-open-protocol.md#row-changed-event).
+詳細については[オープンプロトコル行変更イベント形式](/ticdc/ticdc-open-protocol.md#row-changed-event)を参照してください。
 
-## How much PD storage does TiCDC use?
+## TiCDC はどのくらいの PDstorageを使用しますか? {#how-much-pd-storage-does-ticdc-use}
 
-TiCDC uses etcd in PD to store and regularly update the metadata. Because the time interval between the MVCC of etcd and PD's default compaction is one hour, the amount of PD storage that TiCDC uses is proportional to the amount of metadata versions generated within this hour. However, in v4.0.5, v4.0.6, and v4.0.7, TiCDC has a problem of frequent writing, so if there are 1000 tables created or scheduled in an hour, it then takes up all the etcd storage and returns the `etcdserver: mvcc: database space exceeded` error. You need to clean up the etcd storage after getting this error. See [etcd maintenance space-quota](https://etcd.io/docs/v3.4.0/op-guide/maintenance/#space-quota) for details. It is recommended to upgrade your cluster to v4.0.9 or later versions.
+TiCDC は、PD の etcd を使用してメタデータを保存し、定期的に更新します。etcd の MVCC と PD のデフォルトの圧縮の間の時間間隔は 1 時間であるため、TiCDC が使用する PDstorageの量は、この 1 時間以内に生成されるメタデータ バージョンの量に比例します。ただし、v4.0.5、v4.0.6、v4.0.7 では、TiCDC に頻繁な書き込みの問題があるため、1 時間に 1000 個のテーブルが作成またはスケジュールされると、etcdstorageがすべて消費され、 `etcdserver: mvcc: database space exceeded`エラーが返されます。このエラーが発生したら、etcdstorageをクリーンアップする必要があります。詳細については、 [etcd メンテナンス スペース クォータ](https://etcd.io/docs/v3.4.0/op-guide/maintenance/#space-quota)を参照してください。クラスターを v4.0.9 以降のバージョンにアップグレードすることをお勧めします。
 
-## Does TiCDC support replicating large transactions? Is there any risk?
+## TiCDC は大規模なトランザクションの複製をサポートしていますか? リスクはありますか? {#does-ticdc-support-replicating-large-transactions-is-there-any-risk}
 
-TiCDC provides partial support for large transactions (more than 5 GB in size). Depending on different scenarios, the following risks might exist:
+TiCDC は、大規模なトランザクション (サイズが 5 GB を超える) を部分的にサポートします。さまざまなシナリオに応じて、次のリスクが存在する可能性があります。
 
-- The latency of primary-secondary replication might greatly increase.
-- When TiCDC's internal processing capacity is insufficient, the replication task error `ErrBufferReachLimit` might occur.
-- When TiCDC's internal processing capacity is insufficient or the throughput capacity of TiCDC's downstream is insufficient, out of memory (OOM) might occur.
+-   プライマリ - セカンダリ レプリケーションのレイテンシーが大幅に増加する可能性があります。
+-   TiCDC の内部処理能力が不足すると、レプリケーション タスク エラー`ErrBufferReachLimit`が発生する可能性があります。
+-   TiCDC の内部処理能力が不足している場合、または TiCDC のダウンストリームのスループット能力が不足している場合、メモリ不足 (OOM) が発生する可能性があります。
 
-Since v6.2, TiCDC supports splitting a single-table transaction into multiple transactions. This can greatly reduce the latency and memory consumption of replicating large transactions. Therefore, if your application does not have a high requirement on transaction atomicity, it is recommended to enable the splitting of large transactions to avoid possible replication latency and OOM. To enable the splitting, set the value of the sink uri parameter [`transaction-atomicity`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb) to `none`.
+v6.2 以降、TiCDC は単一テーブル トランザクションを複数のトランザクションに分割することをサポートしています。これにより、大規模なトランザクションをレプリケートする際のレイテンシーとメモリ消費を大幅に削減できます。したがって、アプリケーションでトランザクションの原子性に対する要件が高くない場合は、レプリケーションのレイテンシーと OOM を回避するために、大規模なトランザクションの分割を有効にすることをお勧めします。分割を有効にするには、sink uri パラメータの値を[`transaction-atomicity`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb)から`none`に設定します。
 
-If you still encounter an error above, it is recommended to use BR to restore the incremental data of large transactions. The detailed operations are as follows:
+上記のエラーが引き続き発生する場合は、 BRを使用して大規模トランザクションの増分データを復元することをお勧めします。詳細な操作は次のとおりです。
 
-1. Record the `checkpoint-ts` of the changefeed that is terminated due to large transactions, use this TSO as the `--lastbackupts` of the BR incremental backup, and execute [incremental data backup](/br/br-incremental-guide.md#back-up-incremental-data).
-2. After backing up the incremental data, you can find a log record similar to `["Full backup Failed summary : total backup ranges: 0, total success: 0, total failed: 0"] [BackupTS=421758868510212097]` in the BR log output. Record the `BackupTS` in this log.
-3. [Restore the incremental data](/br/br-incremental-guide.md#restore-incremental-data).
-4. Create a new changefeed and start the replication task from `BackupTS`.
-5. Delete the old changefeed.
+1.  大規模なトランザクションにより終了した変更フィードの`checkpoint-ts`を記録し、この TSO をBR増分バックアップの`--lastbackupts`として使用し、 [増分データバックアップ](/br/br-incremental-guide.md#back-up-incremental-data)を実行します。
+2.  増分データをバックアップした後、 BRログ出力に`["Full backup Failed summary : total backup ranges: 0, total success: 0, total failed: 0"] [BackupTS=421758868510212097]`に似たログ レコードが見つかります。このログに`BackupTS`を記録します。
+3.  [増分データを復元する](/br/br-incremental-guide.md#restore-incremental-data) 。
+4.  新しい変更フィードを作成し、レプリケーション タスクを`BackupTS`から開始します。
+5.  古い変更フィードを削除します。
 
-## Does TiCDC replicate data changes caused by lossy DDL operations to the downstream?
+## TiCDC は、損失のある DDL 操作によって発生したデータの変更をダウンストリームに複製しますか? {#does-ticdc-replicate-data-changes-caused-by-lossy-ddl-operations-to-the-downstream}
 
-Lossy DDL refers to DDL that might cause data changes when executed in TiDB. Some common lossy DDL operations include:
+非可逆 DDL とは、TiDB で実行されたときにデータの変更を引き起こす可能性がある DDL を指します。一般的な非可逆 DDL 操作には次のようなものがあります。
 
-- Modifying the type of a column, for example, INT -> VARCHAR
-- Modifying the length of a column, for example, VARCHAR(20) -> VARCHAR(10)
-- Modifying the precision of a column, for example, DECIMAL(10, 3) -> DECIMAL(10, 2)
-- Modifying the UNSIGNED or SIGNED attribute of a column, for example, INT UNSIGNED -> INT SIGNED
+-   列の型を変更する（例：INT -&gt; VARCHAR）
+-   列の長さを変更する。例：VARCHAR(20) -&gt; VARCHAR(10)
+-   列の精度を変更する。例: DECIMAL(10, 3) -&gt; DECIMAL(10, 2)
+-   列の UNSIGNED または SIGNED 属性の変更 (例: INT UNSIGNED -&gt; INT SIGNED)
 
-Before TiDB v7.1.0, TiCDC replicates DML events with identical old and new data to the downstream. When the downstream is MySQL, these DML events do not cause any data changes until the downstream receives and executes the DDL statement. However, when the downstream is Kafka or a cloud storage service, TiCDC writes a row of redundant data to the downstream.
+TiDB v7.1.0 より前では、TiCDC は、古いデータと新しいデータが同一の DML イベントをダウンストリームに複製します。ダウンストリームが MySQL の場合、ダウンストリームが DDL ステートメントを受信して​​実行するまで、これらの DML イベントによってデータが変更されることはありません。ただし、ダウンストリームが Kafka またはクラウドstorageサービスの場合、TiCDC は冗長データの行をダウンストリームに書き込みます。
 
-Starting from TiDB v7.1.0, TiCDC eliminates these redundant DML events and no longer replicates them to downstream.
+TiDB v7.1.0 以降、TiCDC はこれらの冗長な DML イベントを排除し、ダウンストリームに複製しなくなりました。
 
-## The default value of the time type field is inconsistent when replicating a DDL statement to the downstream MySQL 5.7. What can I do?
+## DDL ステートメントをダウンストリームMySQL 5.7に複製するときに、時間型フィールドのデフォルト値が一致しません。どうすればよいでしょうか? {#the-default-value-of-the-time-type-field-is-inconsistent-when-replicating-a-ddl-statement-to-the-downstream-mysql-5-7-what-can-i-do}
 
-Suppose that the `create table test (id int primary key, ts timestamp)` statement is executed in the upstream TiDB. When TiCDC replicates this statement to the downstream MySQL 5.7, MySQL uses the default configuration. The table schema after the replication is as follows. The default value of the `timestamp` field becomes `CURRENT_TIMESTAMP`:
-
-{{< copyable "sql" >}}
+上流の TiDB で`create table test (id int primary key, ts timestamp)`文が実行されたとします。TiCDC がこの文を下流のMySQL 5.7に`timestamp`すると、MySQL はデフォルト設定を使用します。複製後のテーブル スキーマは次のようになります。3 フィールドのデフォルト値は`CURRENT_TIMESTAMP`になります。
 
 ```sql
 mysql root@127.0.0.1:test> show create table test;
@@ -240,88 +234,88 @@ mysql root@127.0.0.1:test> show create table test;
 1 row in set
 ```
 
-From the result, you can see that the table schema before and after the replication is inconsistent. This is because the default value of `explicit_defaults_for_timestamp` in TiDB is different from that in MySQL. See [MySQL Compatibility](/mysql-compatibility.md#default-differences) for details.
+結果から、レプリケーション前後のテーブルスキーマが不整合になっていることがわかります。これは、TiDB のデフォルト値`explicit_defaults_for_timestamp`が MySQL のデフォルト値と異なるためです。詳細は[MySQL 互換性](/mysql-compatibility.md#default-differences)を参照してください。
 
-Since v5.0.1 or v4.0.13, for each replication to MySQL, TiCDC automatically sets `explicit_defaults_for_timestamp = ON` to ensure that the time type is consistent between the upstream and downstream. For versions earlier than v5.0.1 or v4.0.13, pay attention to the compatibility issue caused by the inconsistent `explicit_defaults_for_timestamp` value when using TiCDC to replicate the time type data.
+v5.0.1 または v4.0.13 以降では、MySQL へのレプリケーションごとに、TiCDC は自動的に`explicit_defaults_for_timestamp = ON`設定して、アップストリームとダウンストリームの間で時間タイプが一貫していることを確認します。v5.0.1 または v4.0.13 より前のバージョンでは、TiCDC を使用して時間タイプ データをレプリケートするときに、不一致な`explicit_defaults_for_timestamp`値によって発生する互換性の問題に注意してください。
 
-## Why do `INSERT`/`UPDATE` statements from the upstream become `REPLACE INTO` after being replicated to the downstream if I set `safe-mode` to `true` when I create a TiCDC replication task?
+## TiCDC レプリケーション タスクを作成するときに<code>safe-mode</code>を<code>true</code>に設定すると、アップストリームからの<code>INSERT</code> / <code>UPDATE</code>ステートメントがダウンストリームにレプリケートされた後に<code>REPLACE INTO</code>になるのはなぜですか? {#why-do-code-insert-code-code-update-code-statements-from-the-upstream-become-code-replace-into-code-after-being-replicated-to-the-downstream-if-i-set-code-safe-mode-code-to-code-true-code-when-i-create-a-ticdc-replication-task}
 
-TiCDC guarantees that all data is replicated at least once. When there is duplicate data in the downstream, write conflicts occur. To avoid this problem, TiCDC converts `INSERT` and `UPDATE` statements into `REPLACE INTO` statements. This behavior is controlled by the `safe-mode` parameter.
+TiCDC は、すべてのデータが少なくとも 1 回は複製されることを保証します。ダウンストリームに重複データがあると、書き込み競合が発生します。この問題を回避するために、TiCDC は`INSERT`および`UPDATE`ステートメントを`REPLACE INTO`ステートメントに変換します。この動作は`safe-mode`パラメータによって制御されます。
 
-In versions earlier than v6.1.3, `safe-mode` defaults to `true`, which means all `INSERT` and `UPDATE` statements are converted into `REPLACE INTO` statements. In v6.1.3 and later versions, TiCDC can automatically determine whether the downstream has duplicate data, and the default value of `safe-mode` changes to `false`. If no duplicate data is detected, TiCDC replicates `INSERT` and `UPDATE` statements without conversion.
+v6.1.3 より前のバージョンでは、 `safe-mode`​​デフォルトで`true`に設定され、 `INSERT`と`UPDATE`ステートメントはすべて`REPLACE INTO`ステートメントに変換されます。v6.1.3 以降のバージョンでは、TiCDC はダウンストリームに重複データがあるかどうかを自動的に判断し、デフォルト値の`safe-mode`は`false`に変更されます。重複データが検出されない場合、TiCDC は`INSERT`と`UPDATE`ステートメントを変換せずに複製します。
 
-## When the sink of the replication downstream is TiDB or MySQL, what permissions do users of the downstream database need?
+## レプリケーション ダウンストリームのシンクが TiDB または MySQL の場合、ダウンストリーム データベースのユーザーにはどのような権限が必要ですか? {#when-the-sink-of-the-replication-downstream-is-tidb-or-mysql-what-permissions-do-users-of-the-downstream-database-need}
 
-When the sink is TiDB or MySQL, the users of the downstream database need the following permissions:
+シンクが TiDB または MySQL の場合、ダウンストリーム データベースのユーザーには次の権限が必要です。
 
-- `Select`
-- `Index`
-- `Insert`
-- `Update`
-- `Delete`
-- `Create`
-- `Drop`
-- `Alter`
-- `Create View`
+-   `Select`
+-   `Index`
+-   `Insert`
+-   `Update`
+-   `Delete`
+-   `Create`
+-   `Drop`
+-   `Alter`
+-   `Create View`
 
-If you need to replicate `recover table` to the downstream TiDB, you should have the `Super` permission.
+`recover table`ダウンストリーム TiDB に複製する必要がある場合は、 `Super`権限が必要です。
 
-## Why does TiCDC use disks? When does TiCDC write to disks? Does TiCDC use memory buffer to improve replication performance?
+## TiCDC がディスクを使用するのはなぜですか? TiCDC はいつディスクに書き込みますか? TiCDC はレプリケーション パフォーマンスを向上させるためにメモリバッファーを使用しますか? {#why-does-ticdc-use-disks-when-does-ticdc-write-to-disks-does-ticdc-use-memory-buffer-to-improve-replication-performance}
 
-When upstream write traffic is at peak hours, the downstream may fail to consume all data in a timely manner, resulting in data pile-up. TiCDC uses disks to process the data that is piled up. TiCDC needs to write data to disks during normal operation. However, this is not usually the bottleneck for replication throughput and replication latency, given that writing to disks only results in latency within a hundred milliseconds. TiCDC also uses memory to accelerate reading data from disks to improve replication performance.
+アップストリームの書き込みトラフィックがピーク時になると、ダウンストリームがすべてのデータをタイムリーに消費できず、データが蓄積される可能性があります。TiCDC は、蓄積されたデータを処理するためにディスクを使用します。TiCDC は通常の動作中にディスクにデータを書き込む必要があります。ただし、ディスクへの書き込みでは 100 ミリ秒以内のレイテンシーしか発生しないため、これは通常、レプリケーション スループットとレプリケーションレイテンシーのボトルネックにはなりません。TiCDC は、メモリを使用してディスクからのデータの読み取りを高速化し、レプリケーション パフォーマンスを向上させます。
 
-## Why does replication using TiCDC stall or even stop after data restore using TiDB Lightning physical import mode and BR from upstream?
+## TiDB Lightning物理インポート モードとアップストリームからのBRを使用してデータを復元した後、TiCDC を使用したレプリケーションが停止したり、停止したりするのはなぜですか? {#why-does-replication-using-ticdc-stall-or-even-stop-after-data-restore-using-tidb-lightning-physical-import-mode-and-br-from-upstream}
 
-Currently, TiCDC is not yet fully compatible with [TiDB Lightning physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) and BR. Therefore, avoid using TiDB Lightning physical import mode and BR on tables that are replicated by TiCDC. Otherwise, unknown errors might occur, such as TiCDC replication getting stuck, a significant spike in replication latency, or data loss.
+現在、TiCDC は[TiDB Lightning物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)およびBRとまだ完全に互換性がありません。したがって、TiCDC によってレプリケートされるテーブルでは、 TiDB Lightning物理インポート モードとBR を使用しないでください。そうしないと、TiCDC レプリケーションが停止したり、レプリケーションレイテンシーが著しく増加したり、データが失われたりといった不明なエラーが発生する可能性があります。
 
-If you need to use TiDB Lightning physical import mode or BR to restore data for some tables replicated by TiCDC, take these steps:
+TiCDC によってレプリケートされた一部のテーブルのデータを復元するためにTiDB Lightning物理インポート モードまたはBRを使用する必要がある場合は、次の手順を実行します。
 
-1. Remove the TiCDC replication task related to these tables.
+1.  これらのテーブルに関連する TiCDC レプリケーション タスクを削除します。
 
-2. Use TiDB Lightning physical import mode or BR to restore data separately in the upstream and downstream clusters of TiCDC.
+2.  TiCDC の上流クラスターと下流クラスターでデータを個別に復元するには、 TiDB Lightning物理インポート モードまたはBRを使用します。
 
-3. After the restoration is complete and data consistency between the upstream and downstream clusters is verified, create a new TiCDC replication task for incremental replication, with the timestamp (TSO) from the upstream backup as the `start-ts` for the task. For example, assuming the snapshot timestamp of the BR backup in the upstream cluster is `431434047157698561`, you can create a new TiCDC replication task using the following command:
+3.  復元が完了し、上流クラスターと下流クラスター間のデータの整合性が検証されたら、上流バックアップのタイムスタンプ (TSO) をタスクの`start-ts`として、増分レプリケーション用の新しい TiCDC レプリケーション タスクを作成します。たとえば、上流クラスターのBRバックアップのスナップショット タイムスタンプが`431434047157698561`であると仮定すると、次のコマンドを使用して新しい TiCDC レプリケーション タスクを作成できます。
 
     ```shell
     cdc cli changefeed create -c "upstream-to-downstream-some-tables" --start-ts=431434047157698561 --sink-uri="mysql://root@127.0.0.1:4000? time-zone="
     ```
 
-## After a changefeed resumes from pause, its replication latency gets higher and higher and returns to normal only after a few minutes. Why?
+## 変更フィードが一時停止から再開すると、レプリケーションのレイテンシーがどんどん長くなり、数分後にようやく正常に戻ります。なぜでしょうか? {#after-a-changefeed-resumes-from-pause-its-replication-latency-gets-higher-and-higher-and-returns-to-normal-only-after-a-few-minutes-why}
 
-When a changefeed is resumed, TiCDC needs to scan the historical versions of data in TiKV to catch up with the incremental data logs generated during the pause. The replication process proceeds only after the scan is completed. The scan process might take several to tens of minutes.
+変更フィードが再開されると、TiCDC は、一時停止中に生成された増分データ ログに追いつくために、TiKV 内のデータの履歴バージョンをスキャンする必要があります。レプリケーション プロセスは、スキャンが完了した後にのみ続行されます。スキャン プロセスには数分から数十分かかる場合があります。
 
-## How should I deploy TiCDC to replicate data between two TiDB cluster located in different regions?
+## 異なるリージョンにある 2 つの TiDB クラスター間でデータを複製するには、TiCDC をどのようにデプロイすればよいですか? {#how-should-i-deploy-ticdc-to-replicate-data-between-two-tidb-cluster-located-in-different-regions}
 
-For TiCDC versions earlier than v6.5.2, it is recommended that you deploy TiCDC in the downstream TiDB cluster. If the network latency between the upstream and downstream is high, for example, more than 100 ms, the latency produced when TiCDC executes SQL statements to the downstream might increase dramatically due to the MySQL transmission protocol issues. This results in a decrease in system throughput. However, deploying TiCDC in the downstream can greatly ease this problem. After optimization, starting from TiCDC v6.5.2, it is recommended that you deploy TiCDC in the upstream TiDB cluster.
+v6.5.2 より前のバージョンの TiCDC の場合、ダウンストリーム TiDB クラスターに TiCDC をデプロイすることをお勧めします。アップストリームとダウンストリーム間のネットワークレイテンシーが高い場合 (たとえば、100 ミリ秒を超える場合)、MySQL 転送プロトコルの問題により、TiCDC がダウンストリームに対して SQL ステートメントを実行するときに発生するレイテンシーが大幅に増加する可能性があります。これにより、システム スループットが低下します。ただし、ダウンストリームに TiCDC をデプロイすると、この問題が大幅に軽減されます。最適化後、TiCDC v6.5.2 以降では、アップストリーム TiDB クラスターに TiCDC をデプロイすることをお勧めします。
 
-## What is the order of executing DML and DDL statements?
+## DML および DDL ステートメントの実行順序は何ですか? {#what-is-the-order-of-executing-dml-and-ddl-statements}
 
-Currently, TiCDC adopts the following order:
+現在、TiCDC は次の順序を採用しています。
 
-1. TiCDC blocks the replication progress of the tables affected by DDL statements until the DDL `CommiTs`. This ensures that DML statements executed before DDL `CommiTs` can be successfully replicated to the downstream first.
-2. TiCDC continues with the replication of DDL statements. If there are multiple DDL statements, TiCDC replicates them in a serial manner.
-3. After the DDL statements are executed in the downstream, TiCDC will continue with the replication of DML statements executed after DDL `CommiTs`.
+1.  TiCDC は、DDL `CommiTs`まで、DDL ステートメントの影響を受けるテーブルのレプリケーションの進行をブロックします。これにより、DDL `CommiTs`より前に実行された DML ステートメントがダウンストリームに正常にレプリケートされることが保証されます。
+2.  TiCDC は DDL ステートメントのレプリケーションを続行します。複数の DDL ステートメントがある場合、TiCDC はそれらを順番にレプリケートします。
+3.  DDL ステートメントがダウンストリームで実行された後、TiCDC は DDL `CommiTs`の後に実行された DML ステートメントのレプリケーションを続行します。
 
-## How should I check whether the upstream and downstream data is consistent?
+## アップストリームデータとダウンストリームデータが一貫しているかどうかをどのように確認すればよいですか? {#how-should-i-check-whether-the-upstream-and-downstream-data-is-consistent}
 
-If the downstream is a TiDB cluster or MySQL instance, it is recommended that you compare the data using [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md).
+ダウンストリームが TiDB クラスターまたは MySQL インスタンスの場合は、 [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用してデータを比較することをお勧めします。
 
-## Replication of a single table can only be run on a single TiCDC node. Will it be possible to use multiple TiCDC nodes to replicate data of multiple tables?
+## 単一テーブルのレプリケーションは、単一の TiCDC ノードでのみ実行できます。複数の TiCDC ノードを使用して複数のテーブルのデータをレプリケートすることは可能ですか? {#replication-of-a-single-table-can-only-be-run-on-a-single-ticdc-node-will-it-be-possible-to-use-multiple-ticdc-nodes-to-replicate-data-of-multiple-tables}
 
-Starting from v7.1.0, TiCDC supports the MQ sink to replicate data change logs at the granularity of TiKV Regions, which achieves scalable processing capability and allows TiCDC to replicate a single table with a large number of Regions. To enable this feature, you can configure the following parameter in the [TiCDC configuration file](/ticdc/ticdc-changefeed-config.md):
+v7.1.0 以降、TiCDC は、TiKV リージョンの粒度でデータ変更ログをレプリケートする MQ シンクをサポートしています。これにより、スケーラブルな処理能力が実現され、TiCDC は多数のリージョンで単一のテーブルをレプリケートできます。この機能を有効にするには、 [TiCDC 構成ファイル](/ticdc/ticdc-changefeed-config.md)で次のパラメータを設定します。
 
 ```toml
 [scheduler]
 enable-table-across-nodes = true
 ```
 
-## Does TiCDC replication get stuck if the upstream has long-running uncommitted transactions?
+## アップストリームに長時間実行されているコミットされていないトランザクションがある場合、TiCDC レプリケーションは停止しますか? {#does-ticdc-replication-get-stuck-if-the-upstream-has-long-running-uncommitted-transactions}
 
-TiDB has a transaction timeout mechanism. When a transaction runs for a period longer than [`max-txn-ttl`](/tidb-configuration-file.md#max-txn-ttl), TiDB forcibly rolls it back. TiCDC waits for the transaction to be committed before proceeding with the replication, which causes replication delay.
+TiDB にはトランザクション タイムアウト メカニズムがあります。トランザクションが[`max-txn-ttl`](/tidb-configuration-file.md#max-txn-ttl)より長い期間実行されると、TiDB はそれを強制的にロールバックします。TiCDC は、レプリケーションを続行する前にトランザクションがコミットされるのを待機するため、レプリケーションの遅延が発生します。
 
-## Why can't I use the `cdc cli` command to operate a TiCDC cluster deployed by TiDB Operator?
+## TiDB Operatorによってデプロイされた TiCDC クラスターを<code>cdc cli</code>コマンドを使用して操作できないのはなぜですか? {#why-can-t-i-use-the-code-cdc-cli-code-command-to-operate-a-ticdc-cluster-deployed-by-tidb-operator}
 
-This is because the default port number of the TiCDC cluster deployed by TiDB Operator is `8301`, while the default port number of the `cdc cli` command to connect to the TiCDC server is `8300`. When using the `cdc cli` command to operate the TiCDC cluster deployed by TiDB Operator, you need to explicitly specify the `--server` parameter, as follows:
+これは、 TiDB Operatorによってデプロイされた TiCDC クラスターのデフォルトのポート番号が`8301`あるのに対し、 TiCDCサーバーに接続するための`cdc cli`コマンドのデフォルトのポート番号が`8300`であるためです。 TiDB Operatorによってデプロイされた TiCDC クラスターを`cdc cli`コマンドを使用して操作する場合は、次のように`--server`パラメータを明示的に指定する必要があります。
 
 ```shell
 ./cdc cli changefeed list --server "127.0.0.1:8301"

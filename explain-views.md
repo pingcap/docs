@@ -1,25 +1,23 @@
 ---
 title: EXPLAIN Statements Using Views
-summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
+summary: TiDB の `EXPLAIN` ステートメントによって返される実行プラン情報について学習します。
 ---
 
-# EXPLAIN Statements Using Views
+# ビューを使用したEXPLAINステートメント {#explain-statements-using-views}
 
-`EXPLAIN` displays the tables and indexes that a [view](/views.md) references, not the name of the view itself. This is because views are only virtual tables and do not store any data themselves. The definition of the view and the rest of the statement are merged together during SQL optimization.
+`EXPLAIN` 、ビュー自体の名前ではなく、 [ビュー](/views.md)が参照するテーブルとインデックスを表示します。これは、ビューが仮想テーブルにすぎず、それ自体にデータを格納しないためです。ビューの定義とステートメントの残りの部分は、SQL の最適化中に結合されます。
 
 <CustomContent platform="tidb">
 
-From the [bikeshare example database](/import-example-data.md), you can see that the following two queries are executed in a similar manner:
+[バイクシェアのサンプルデータベース](/import-example-data.md)から、次の 2 つのクエリが同様の方法で実行されていることがわかります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-From the [bikeshare example database](/tidb-cloud/import-sample-data.md), you can see that the following two queries are executed in a similar manner:
+[バイクシェアのサンプルデータベース](/tidb-cloud/import-sample-data.md)から、次の 2 つのクエリが同様の方法で実行されていることがわかります。
 
 </CustomContent>
-
-{{< copyable "sql" >}}
 
 ```sql
 ALTER TABLE trips ADD INDEX (duration);
@@ -52,9 +50,7 @@ Query OK, 0 rows affected (0.13 sec)
 3 rows in set (0.00 sec)
 ```
 
-Similarly, predicates from the view are pushed down to the base table:
-
-{{< copyable "sql" >}}
+同様に、ビューからの述語はベース テーブルにプッシュダウンされます。
 
 ```sql
 EXPLAIN SELECT * FROM long_trips WHERE bike_number = 'W00950';
@@ -82,11 +78,9 @@ EXPLAIN SELECT * FROM trips WHERE bike_number = 'W00950';
 3 rows in set (0.00 sec)
 ```
 
-In the first statement above, you can see that the index is used to satisfy the view definition, and then the `bike_number = 'W00950'` is applied when TiDB reads the table row. In the second statement, there are no indexes to satisfy the statement, and a `TableFullScan` is used.
+上記の最初のステートメントでは、ビュー定義を満たすためにインデックスが使用され、TiDB がテーブル行を読み取るときに`bike_number = 'W00950'`適用されていることがわかります。2 番目のステートメントでは、ステートメントを満たすインデックスがないため、 `TableFullScan`が使用されています。
 
-TiDB makes use of indexes that satisfy both the view definition and the statement itself. Consider the following composite index:
-
-{{< copyable "sql" >}}
+TiDB は、ビュー定義とステートメント自体の両方を満たすインデックスを使用します。次の複合インデックスを検討してください。
 
 ```sql
 ALTER TABLE trips ADD INDEX (bike_number, duration);
@@ -116,4 +110,4 @@ Query OK, 0 rows affected (2 min 31.20 sec)
 3 rows in set (0.00 sec)
 ```
 
-In the first statement, TiDB is able to use both parts of the composite index `(bike_number, duration)`. In the second statement, only the first part which is `bike_number` of the index `(bike_number, duration)` is used.
+最初のステートメントでは、TiDB は複合インデックス`(bike_number, duration)`の両方の部分を使用できます。2 番目のステートメントでは、インデックス`(bike_number, duration)`の最初の部分`bike_number`のみが使用されます。

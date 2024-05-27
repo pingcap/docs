@@ -1,20 +1,20 @@
 ---
 title: SHOW CREATE TABLE | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW CREATE TABLE for the TiDB database.
+summary: TiDB データベースに対する SHOW CREATE TABLE の使用法の概要。
 ---
 
-# SHOW CREATE TABLE
+# 表示テーブルの作成 {#show-create-table}
 
-This statement shows the exact statement to recreate an existing table using SQL.
+このステートメントは、SQL を使用して既存のテーブルを再作成するための正確なステートメントを示しています。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowCreateTableStmt ::=
     "SHOW" "CREATE" "TABLE" (SchemaName ".")? TableName
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (a INT);
@@ -29,13 +29,13 @@ Create Table: CREATE TABLE `t1` (
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-The `SHOW CREATE TABLE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB の`SHOW CREATE TABLE`ステートメントは MySQL と完全に互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) 。
 
-## See also
+## 参照 {#see-also}
 
-* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
-* [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
-* [SHOW TABLES](/sql-statements/sql-statement-show-tables.md)
-* [SHOW COLUMNS FROM](/sql-statements/sql-statement-show-columns-from.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [テーブルを削除](/sql-statements/sql-statement-drop-table.md)
+-   [テーブルを表示](/sql-statements/sql-statement-show-tables.md)
+-   [列を表示](/sql-statements/sql-statement-show-columns-from.md)

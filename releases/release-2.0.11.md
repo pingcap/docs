@@ -1,20 +1,20 @@
 ---
 title: TiDB 2.0.11 Release Notes
-summary: TiDB 2.0.11 and TiDB Ansible 2.0.11 were released on January 3, 2019. The release includes improvements in system compatibility and stability. Fixes include handling errors when PD is in an abnormal condition, compatibility issues with MySQL, error message reporting, prefix index range, and panic issues with the `UPDATE` statement. TiKV also fixed two issues related to Region merge.
+summary: TiDB 2.0.11 および TiDB Ansible 2.0.11 は、2019 年 1 月 3 日にリリースされました。このリリースには、システムの互換性と安定性の向上が含まれています。修正には、PD が異常な状態にある場合のエラー処理、MySQL との互換性の問題、エラー メッセージの報告、プレフィックス インデックスの範囲、`UPDATE` ステートメントのpanicの問題が含まれます。TiKV では、リージョンに関連する 2 つの問題も修正されました。
 ---
 
-# TiDB 2.0.11 Release Notes
+# TiDB 2.0.11 リリースノート {#tidb-2-0-11-release-notes}
 
-On January 03, 2019, TiDB 2.0.11 is released. The corresponding TiDB Ansible 2.0.11 is also released. Compared with TiDB 2.0.10, this release has great improvement in system compatibility and stability.
+2019 年 1 月 3 日に、TiDB 2.0.11 がリリースされました。対応する TiDB Ansible 2.0.11 もリリースされました。TiDB 2.0.10 と比較して、このリリースではシステムの互換性と安定性が大幅に向上しています。
 
-## TiDB
+## ティビ {#tidb}
 
-- Fix the issue that the error is not handled properly when PD is in an abnormal condition [#8764](https://github.com/pingcap/tidb/pull/8764)
-- Fix the issue that the `Rename` operation on a table in TiDB is not compatible with that in MySQL [#8809](https://github.com/pingcap/tidb/pull/8809)
-- Fix the issue that the error message is wrongly reported when the `ADMIN CHECK TABLE` operation is performed in the process of executing the `ADD INDEX` statement [#8750](https://github.com/pingcap/tidb/pull/8750)
-- Fix the issue that the prefix index range is incorrect in some cases [#8877](https://github.com/pingcap/tidb/pull/8877)
-- Fix the panic issue of the `UPDATE` statement when columns are added in some cases [#8904](https://github.com/pingcap/tidb/pull/8904)
+-   PDが異常な状態にあるときにエラーが適切に処理されない問題を修正[＃8764](https://github.com/pingcap/tidb/pull/8764)
+-   TiDBのテーブルに対する`Rename`操作がMySQL [＃8809](https://github.com/pingcap/tidb/pull/8809)の操作と互換性がない問題を修正
+-   `ADD INDEX`ステートメント[＃8750](https://github.com/pingcap/tidb/pull/8750)の実行中に`ADMIN CHECK TABLE`操作が実行されると、エラー メッセージが誤って報告される問題を修正しました。
+-   プレフィックスインデックスの範囲が間違っている場合がある問題を修正[＃8877](https://github.com/pingcap/tidb/pull/8877)
+-   場合によっては列が追加されたときに`UPDATE`ステートメントでpanicが発生する問題を修正[＃8904](https://github.com/pingcap/tidb/pull/8904)
 
-## TiKV
+## ティクヴ {#tikv}
 
-- Fix two issues about Region merge [#4003](https://github.com/tikv/tikv/pull/4003), [#4004](https://github.com/tikv/tikv/pull/4004)
+-   リージョンマージ[＃4003](https://github.com/tikv/tikv/pull/4003) [＃4004](https://github.com/tikv/tikv/pull/4004) 2つの問題を修正

@@ -1,30 +1,30 @@
 ---
 title: tiup completion
-summary: TiUP provides the `tiup completion` command to generate a configuration file for automatic command-line completion, supporting `bash` and `zsh` commands. To complete `bash` commands, install `bash-completion` and use the `tiup completion <shell>` syntax to set the shell type. For `bash`, write the command into a file and source it in `.bash_profile`. For `zsh`, use the `tiup completion zsh` command.
+summary: TiUP は、`bash` および `zsh` コマンドをサポートする、自動コマンドライン補完用の設定ファイルを生成するtiup completionコマンドを提供します。`bash` コマンドを補完するには、`bash-completion` をインストールし、`tiup completion <shell>` 構文を使用してシェル タイプを設定します。`bash` の場合は、コマンドをファイルに記述し、`.bash_profile` でソース化します。`zsh` の場合は、`tiup completion zsh` コマンドを使用します。
 ---
 
-# tiup completion
+# tiup completion {#tiup-completion}
 
-To reduce user costs, TiUP provides the `tiup completion` command to generate a configuration file for automatic command-line completion. Currently, TiUP supports completing `bash` and `zsh` commands.
+ユーザーのコスト削減のため、 TiUP は自動コマンドライン補完用の構成ファイルを生成する`tiup completion`コマンドを提供します。現在、 TiUP は`bash`と`zsh`コマンドの補完をサポートしています。
 
-If you want to complete `bash` commands, you need to install `bash-completion` first. See the following instructions:
+`bash`コマンドを完了するには、まず`bash-completion`をインストールする必要があります。次の手順を参照してください。
 
-- On macOS: If your bash version is earlier than 4.1, run `brew install bash-completion`; otherwise, run `brew install bash-completion@2`.
-- On Linux: Use a package manager to install `bash-completion`. For example, run `yum install bash-completion` or `apt install bash-completion`.
+-   macOS の場合: bash バージョンが 4.1 より前の場合は`brew install bash-completion`実行し、それ以外の場合は`brew install bash-completion@2`実行します。
+-   Linux の場合: パッケージ マネージャーを使用して`bash-completion`インストールします。たとえば、 `yum install bash-completion`または`apt install bash-completion`を実行します。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup completion <shell>
 ```
 
-`<shell>` is used to set the type of shell you use. Currently, `bash` and `zsh` are supported.
+`<shell>`は、使用するシェルの種類を設定するために使用されます。現在、 `bash`と`zsh`がサポートされています。
 
-## Usage
+## 使用法 {#usage}
 
-### bash
+### バッシュ {#bash}
 
-Write the `tiup completion bash` command into a file and source the file in `.bash_profile`. See the following example:
+`tiup completion bash`コマンドをファイルに書き込み、 `.bash_profile`でそのファイルをソースします。次の例を参照してください。
 
 ```shell
 tiup completion bash > ~/.tiup.completion.bash
@@ -37,10 +37,10 @@ source '$HOME/.tiup.completion.bash'
 source $HOME/.bash_profile
 ```
 
-### zsh
+### 翻訳 {#zsh}
 
 ```shell
 tiup completion zsh > "${fpath[1]}/_tiup"
 ```
 
-[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPリファレンスコマンドリスト](/tiup/tiup-reference.md#command-list)

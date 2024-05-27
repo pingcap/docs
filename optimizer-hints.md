@@ -1,103 +1,95 @@
 ---
 title: Optimizer Hints
-summary: Use Optimizer Hints to influence query execution plans
+summary: オプティマイザヒントを使用してクエリ実行プランに影響を与える
 ---
 
-# Optimizer Hints
+# オプティマイザーのヒント {#optimizer-hints}
 
-TiDB supports optimizer hints, which are based on the comment-like syntax introduced in MySQL 5.7. For example, one of the common syntaxes is `/*+ HINT_NAME([t1_name [, t2_name] ...]) */`. Use of optimizer hints is recommended in cases where the TiDB optimizer selects a less optimal query plan.
+TiDB は、 MySQL 5.7で導入されたコメントのような構文に基づいたオプティマイザヒントをサポートしています。たとえば、一般的な構文の 1 つは`/*+ HINT_NAME([t1_name [, t2_name] ...]) */`です。TiDB オプティマイザがあまり最適でないクエリプランを選択する場合は、オプティマイザヒントの使用が推奨されます。
 
-If you encounter a situation where hints do not take effect, see [Troubleshoot common issues that hints do not take effect](#troubleshoot-common-issues-that-hints-do-not-take-effect).
+ヒントが有効にならない状況に遭遇した場合は、 [ヒントが効かない一般的な問題のトラブルシューティング](#troubleshoot-common-issues-that-hints-do-not-take-effect)参照してください。
 
-## Syntax
+## 構文 {#syntax}
 
-Optimizer hints are case insensitive and specified within `/*+ ... */` comments following the `SELECT`, `INSERT`, `UPDATE` or `DELETE` keyword in a SQL statement.
+オプティマイザ ヒントは大文字と小文字を区別せず、SQL ステートメントの`SELECT` 、 `INSERT` 、 `UPDATE` 、または`DELETE`キーワードに続く`/*+ ... */`コメント内で指定されます。
 
-Multiple hints can be specified by separating with commas. For example, the following query uses three different hints:
-
-{{< copyable "sql" >}}
+複数のヒントは、コンマで区切って指定できます。たとえば、次のクエリでは 3 つの異なるヒントが使用されています。
 
 ```sql
 SELECT /*+ USE_INDEX(t1, idx1), HASH_AGG(), HASH_JOIN(t1) */ count(*) FROM t t1, t t2 WHERE t1.a = t2.b;
 ```
 
-How optimizer hints affect query execution plans can be observed in the output of [`EXPLAIN`](/sql-statements/sql-statement-explain.md) and [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md).
+オプティマイザヒントがクエリ実行プランにどのように影響するかは、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)と[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)の出力で確認できます。
 
-An incorrect or incomplete hint will not result in a statement error. This is because hints are intended to have only a _hint_ (suggestion) semantic to query execution. Similarly, TiDB will at most return a warning if a hint is not applicable.
+ヒントが不正確または不完全な場合、ステートメント エラーは発生しません。これは、ヒントがクエリ実行に対する*ヒント*(提案) の意味のみを持つことを意図しているためです。同様に、TiDB はヒントが適用できない場合、せいぜい警告を返します。
 
-> **Note:**
+> **注記：**
 >
-> If the comments do not follow behind the specified keywords, they will be treated as common MySQL comments. The comments do not take effect, and no warning is reported.
+> 指定されたキーワードの後に​​コメントが続かない場合は、一般的な MySQL コメントとして扱われます。コメントは有効にならず、警告も報告されません。
 
-Currently, TiDB supports two categories of hints, which are different in scope. The first category of hints takes effect in the scope of query blocks, such as [`/*+ HASH_AGG() */`](#hash_agg); the second category of hints takes effect in the whole query, such as [`/*+ MEMORY_QUOTA(1024 MB)*/`](#memory_quotan).
+現在、TiDB は、範囲が異なる 2 つのカテゴリのヒントをサポートしています。最初のカテゴリのヒントは、 [`/*+ HASH_AGG() */`](#hash_agg)のようにクエリ ブロックのスコープ内で有効になり、2 番目のカテゴリのヒントは、 [`/*+ MEMORY_QUOTA(1024 MB)*/`](#memory_quotan)のようにクエリ全体で有効になります。
 
-Each query or sub-query in a statement corresponds to a different query block, and each query block has its own name. For example:
-
-{{< copyable "sql" >}}
+ステートメント内の各クエリまたはサブクエリは異なるクエリ ブロックに対応し、各クエリ ブロックには独自の名前があります。例:
 
 ```sql
 SELECT * FROM (SELECT * FROM t) t1, (SELECT * FROM t) t2;
 ```
 
-The above query statement has three query blocks: the outermost `SELECT` corresponds to the first query block, whose name is `sel_1`; the two `SELECT` sub-queries correspond to the second and the third query block, whose names are `sel_2` and `sel_3`, respectively. The sequence of the numbers is based on the appearance of `SELECT` from left to right. If you replace the first `SELECT` with `DELETE` or `UPDATE`, then the corresponding query block names are `del_1` or `upd_1`.
+上記のクエリ ステートメントには 3 つのクエリ ブロックがあります。最も外側の`SELECT`最初のクエリ ブロック (名前は`sel_1`に対応します。2 つの`SELECT`サブクエリは 2 番目と 3 番目のクエリ ブロック (名前はそれぞれ`sel_2`と`sel_3`に対応します。数字の順序は、左から右への`SELECT`の出現に基づいています。最初の`SELECT` `DELETE`または`UPDATE`に置き換えると、対応するクエリ ブロック名は`del_1`または`upd_1`なります。
 
-## Hints that take effect in query blocks
+## クエリブロックで有効になるヒント {#hints-that-take-effect-in-query-blocks}
 
-This category of hints can follow behind **any** `SELECT`, `UPDATE` or `DELETE` keywords. To control the effective scope of the hint, use the name of the query block in the hint. You can make the hint parameters clear by accurately identifying each table in the query (in case of duplicated table names or aliases). If no query block is specified in the hint, the hint takes effect in the current block by default.
+このカテゴリのヒントは、 `SELECT` 、または`DELETE` `UPDATE`**キーワード**の後に​​続くことができます。ヒントの有効範囲を制御するには、ヒントでクエリ ブロックの名前を使用します。クエリ内の各テーブルを正確に識別することで、ヒント パラメータを明確にすることができます (テーブル名またはエイリアスが重複している場合)。ヒントでクエリ ブロックが指定されていない場合、ヒントはデフォルトで現在のブロックで有効になります。
 
-For example:
-
-{{< copyable "sql" >}}
+例えば：
 
 ```sql
 SELECT /*+ HASH_JOIN(@sel_1 t1@sel_1, t3) */ * FROM (SELECT t1.a, t1.b FROM t t1, t t2 WHERE t1.a = t2.a) t1, t t3 WHERE t1.b = t3.b;
 ```
 
-This hint takes effect in the `sel_1` query block, and its parameters are the `t1` and `t3` tables in `sel_1` (`sel_2` also contains a `t1` table).
+このヒントは`sel_1`クエリ ブロックで有効になり、そのパラメータは`sel_1`の`t1`および`t3`テーブルです ( `sel_2`は`t1`テーブルも含まれます)。
 
-As described above, you can specify the name of the query block in the hint in the following ways:
+前述のように、ヒント内のクエリ ブロックの名前は次の方法で指定できます。
 
-- Set the query block name as the first parameter of the hint, and separate it from other parameters with a space. In addition to `QB_NAME`, all the hints listed in this section also have another optional hidden parameter `@QB_NAME`. By using this parameter, you can specify the effective scope of this hint.
-- Append `@QB_NAME` to a table name in the parameter to explicitly specify which query block this table belongs to.
+-   クエリ ブロック名をヒントの最初のパラメータとして設定し、他のパラメータとスペースで区切ります。 `QB_NAME`に加えて、このセクションにリストされているすべてのヒントには、別のオプションの隠しパラメータ`@QB_NAME`もあります。このパラメータを使用すると、このヒントの有効範囲を指定できます。
+-   このテーブルがどのクエリ ブロックに属しているかを明示的に指定するには、パラメータ内のテーブル名に`@QB_NAME`追加します。
 
-> **Note:**
+> **注記：**
 >
-> You must put the hint in or before the query block where the hint takes effect. If the hint is put after the query block, it cannot take effect.
+> ヒントは、ヒントが有効なクエリ ブロック内またはその前に置く必要があります。ヒントをクエリ ブロックの後に置くと、ヒントは有効になりません。
 
-### QB_NAME
+### QB_NAME {#qb-name}
 
-If the query statement is a complicated statement that includes multiple nested queries, the ID and name of a certain query block might be mistakenly identified. The hint `QB_NAME` can help us in this regard.
+クエリ ステートメントが複数のネストされたクエリを含む複雑なステートメントである場合、特定のクエリ ブロックの ID と名前が誤って識別される可能性があります。この点については、ヒント`QB_NAME`が役立ちます。
 
-`QB_NAME` means Query Block Name. You can specify a new name to a query block. The specified `QB_NAME` and the previous default name are both valid. For example:
-
-{{< copyable "sql" >}}
+`QB_NAME`クエリ ブロック名を意味します。クエリ ブロックに新しい名前を指定できます。指定された`QB_NAME`と以前のデフォルト名はどちらも有効です。例:
 
 ```sql
 SELECT /*+ QB_NAME(QB1) */ * FROM (SELECT * FROM t) t1, (SELECT * FROM t) t2;
 ```
 
-This hint specifies the outer `SELECT` query block's name to `QB1`, which makes `QB1` and the default name `sel_1` both valid for the query block.
+このヒントは、外側の`SELECT`クエリ ブロックの名前を`QB1`に指定します。これにより、 `QB1`とデフォルト名`sel_1`の両方がクエリ ブロックに対して有効になります。
 
-> **Note:**
+> **注記：**
 >
-> In the above example, if the hint specifies the `QB_NAME` to `sel_2` and does not specify a new `QB_NAME` for the original second `SELECT` query block, then `sel_2` becomes an invalid name for the second `SELECT` query block.
+> 上記の例では、ヒントが`QB_NAME`から`sel_2`を指定し、元の 2 番目のクエリ ブロック`SELECT`に新しい`QB_NAME`を指定していない場合、 `sel_2` 2 番目のクエリ ブロック`SELECT`に対して無効な名前になります。
 
-### SET_VAR(VAR_NAME=VAR_VALUE)
+### SET_VAR(変数名=変数値) {#set-var-var-name-var-value}
 
-You can temporarily modify the value of system variables during statement execution by using the `SET_VAR(VAR_NAME=VAR_VALUE)` hint. After the statement is executed, the value of the system variable in the current session is automatically restored to the original value. This hint can be used to modify some system variables related to the optimizer and executor. For a list of system variables that can be modified using this hint, refer to [System variables](/system-variables.md).
+`SET_VAR(VAR_NAME=VAR_VALUE)`ヒントを使用すると、ステートメントの実行中にシステム変数の値を一時的に変更できます。ステートメントの実行後、現在のセッションのシステム変数の値は自動的に元の値に復元されます。このヒントは、オプティマイザーとエグゼキューターに関連する一部のシステム変数を変更するために使用できます。このヒントを使用して変更できるシステム変数のリストについては、 [システム変数](/system-variables.md)を参照してください。
 
-> **Warning:**
+> **警告：**
 >
-> It is strongly recommended not to modify variables that are not explicitly supported, as this might cause unpredictable behavior.
+> 予期しない動作が発生する可能性があるため、明示的にサポートされていない変数を変更しないことを強くお勧めします。
 
-The following is an example:
+次に例を示します。
 
 ```sql
 SELECT /*+ SET_VAR(MAX_EXECUTION_TIME=1234) */ @@MAX_EXECUTION_TIME;
 SELECT @@MAX_EXECUTION_TIME;
 ```
 
-After executing the preceding SQL statements, the first query returns the value `1234` set in the hint, instead of the default value of `MAX_EXECUTION_TIME`. The second query returns the default value of the variable.
+上記の SQL ステートメントを実行すると、最初のクエリはデフォルト値`MAX_EXECUTION_TIME`ではなく、ヒントに設定された値`1234`を返します。2 番目のクエリは変数のデフォルト値を返します。
 
 ```sql
 +----------------------+
@@ -114,119 +106,111 @@ After executing the preceding SQL statements, the first query returns the value 
 1 row in set (0.00 sec)
 ```
 
-### MERGE_JOIN(t1_name [, tl_name ...])
+### MERGE_JOIN(t1_name [, tl_name ...]) {#merge-join-t1-name-tl-name}
 
-The `MERGE_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the sort-merge join algorithm for the given table(s). Generally, this algorithm consumes less memory but takes longer processing time. If there is a very large data volume or insufficient system memory, it is recommended to use this hint. For example:
-
-{{< copyable "sql" >}}
+`MERGE_JOIN(t1_name [, tl_name ...])`ヒントは、指定されたテーブルに対してソートマージ結合アルゴリズムを使用するようにオプティマイザに指示します。通常、このアルゴリズムはメモリの消費量が少なくなりますが、処理時間は長くなります。データ量が非常に多い場合やシステムメモリが不足している場合は、このヒントを使用することをお勧めします。例:
 
 ```sql
 select /*+ MERGE_JOIN(t1, t2) */ * from t1, t2 where t1.id = t2.id;
 ```
 
-> **Note:**
+> **注記：**
 >
-> `TIDB_SMJ` is the alias for `MERGE_JOIN` in TiDB 3.0.x and earlier versions. If you are using any of these versions, you must apply the `TIDB_SMJ(t1_name [, tl_name ...])` syntax for the hint. For the later versions of TiDB, `TIDB_SMJ` and `MERGE_JOIN` are both valid names for the hint, but `MERGE_JOIN` is recommended.
+> `TIDB_SMJ` 、TiDB 3.0.x 以前のバージョンでは`MERGE_JOIN`の別名です。これらのバージョンのいずれかを使用している場合は、ヒントに`TIDB_SMJ(t1_name [, tl_name ...])`構文を適用する必要があります。TiDB のそれ以降のバージョンでは、 `TIDB_SMJ`と`MERGE_JOIN`どちらもヒントの有効な名前ですが、 `MERGE_JOIN`推奨されます。
 
-### NO_MERGE_JOIN(t1_name [, tl_name ...])
+### NO_MERGE_JOIN(t1_name [, tl_name ...]) {#no-merge-join-t1-name-tl-name}
 
-The `NO_MERGE_JOIN(t1_name [, tl_name ...])` hint tells the optimizer not to use the sort-merge join algorithm for the given table(s). For example:
+ヒント`NO_MERGE_JOIN(t1_name [, tl_name ...])`は、指定されたテーブルに対してソートマージ結合アルゴリズムを使用しないようにオプティマイザに指示します。例:
 
 ```sql
 SELECT /*+ NO_MERGE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 ```
 
-### INL_JOIN(t1_name [, tl_name ...])
+### INL_JOIN(t1_name [, tl_name ...]) {#inl-join-t1-name-tl-name}
 
-The `INL_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the index nested loop join algorithm for the given table(s). This algorithm might consume less system resources and take shorter processing time in some scenarios and might produce an opposite result in other scenarios. If the result set is less than 10,000 rows after the outer table is filtered by the `WHERE` condition, it is recommended to use this hint. For example:
-
-{{< copyable "sql" >}}
+`INL_JOIN(t1_name [, tl_name ...])`ヒントは、オプティマイザに、指定されたテーブルに対してインデックス ネスト ループ結合アルゴリズムを使用するように指示します。このアルゴリズムは、一部のシナリオではシステム リソースの消費が少なく、処理時間が短くなる場合がありますが、他のシナリオでは逆の結果が生成される場合があります。外部テーブルが`WHERE`条件でフィルター処理された後、結果セットが 10,000 行未満である場合は、このヒントを使用することをお勧めします。例:
 
 ```sql
 SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1, t2, t3 WHERE t1.id = t2.id AND t2.id = t3.id;
 ```
 
-In the preceding SQL statement, the `INL_JOIN(t1, t2)` hint tells the optimizer to use the index nested loop join algorithm for `t1` and `t2`. Note that this does not mean that the index nested loop join algorithm is used between `t1` and `t2`. Instead, the hint indicates that `t1` and `t2` each use the index nested loop join algorithm with another table (`t3`).
+前述の SQL 文では、ヒント`INL_JOIN(t1, t2)`はオプティマイザに、 `t1`と`t2`に対してインデックス ネスト ループ結合アルゴリズムを使用するように指示しています。これは、インデックス ネスト ループ結合アルゴリズムが`t1`と`t2`の間で使用されることを意味しているわけではないことに注意してください。代わりに、ヒントは、 `t1`と`t2`それぞれ別のテーブル ( `t3` ) に対してインデックス ネスト ループ結合アルゴリズムを使用することを示しています。
 
-The parameter(s) given in `INL_JOIN()` is the candidate table for the inner table when you create the query plan. For example, `INL_JOIN(t1)` means that TiDB only considers using `t1` as the inner table to create a query plan. If the candidate table has an alias, you must use the alias as the parameter in `INL_JOIN()`; if it does not have an alias, use the table's original name as the parameter. For example, in the `select /*+ INL_JOIN(t1) */ * from t t1, t t2 where t1.a = t2.b;` query, you must use the `t` table's alias `t1` or `t2` rather than `t` as `INL_JOIN()`'s parameter.
+`INL_JOIN()`で指定されたパラメータは、クエリ プランを作成するときに内部テーブルの候補テーブルです。たとえば、 `INL_JOIN(t1)`は、TiDB がクエリ プランを作成するために内部テーブルとして`t1`を使用することを検討することを意味します。候補テーブルに別名がある場合は、 `INL_JOIN()`のパラメータとして別名を使用する必要があります。別名がない場合は、テーブルの元の名前をパラメータとして使用します。たとえば、 `select /*+ INL_JOIN(t1) */ * from t t1, t t2 where t1.a = t2.b;`クエリでは、 `INL_JOIN()`のパラメータとして`t`ではなく、 `t`テーブルの別名`t1`または`t2`使用する必要があります。
 
-> **Note:**
+> **注記：**
 >
-> `TIDB_INLJ` is the alias for `INL_JOIN` in TiDB 3.0.x and earlier versions. If you are using any of these versions, you must apply the `TIDB_INLJ(t1_name [, tl_name ...])` syntax for the hint. For the later versions of TiDB, `TIDB_INLJ` and `INL_JOIN` are both valid names for the hint, but `INL_JOIN` is recommended.
+> `TIDB_INLJ` 、TiDB 3.0.x 以前のバージョンでは`INL_JOIN`の別名です。これらのバージョンのいずれかを使用している場合は、ヒントに`TIDB_INLJ(t1_name [, tl_name ...])`構文を適用する必要があります。TiDB のそれ以降のバージョンでは、 `TIDB_INLJ`と`INL_JOIN`どちらもヒントの有効な名前ですが、 `INL_JOIN`推奨されます。
 
-### NO_INDEX_JOIN(t1_name [, tl_name ...])
+### NO_INDEX_JOIN(t1_name [, tl_name ...]) {#no-index-join-t1-name-tl-name}
 
-The `NO_INDEX_JOIN(t1_name [, tl_name ...])` hint tells the optimizer not to use the index nested loop join algorithm for the given table(s). For example:
+ヒント`NO_INDEX_JOIN(t1_name [, tl_name ...])`は、指定されたテーブルに対してインデックス ネスト ループ結合アルゴリズムを使用しないようにオプティマイザに指示します。例:
 
 ```sql
 SELECT /*+ NO_INDEX_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 ```
 
-### INL_HASH_JOIN
+### INL_HASH_JOIN {#inl-hash-join}
 
-The `INL_HASH_JOIN(t1_name [, tl_name])` hint tells the optimizer to use the index nested loop hash join algorithm. The conditions for using this algorithm are the same with the conditions for using the index nested loop join algorithm. The difference between the two algorithms is that `INL_JOIN` creates a hash table on the joined inner table, but `INL_HASH_JOIN` creates a hash table on the joined outer table. `INL_HASH_JOIN` has a fixed limit on memory usage, while the memory used by `INL_JOIN` depends on the number of rows matched in the inner table.
+`INL_HASH_JOIN(t1_name [, tl_name])`ヒントは、インデックス ネスト ループ ハッシュ結合アルゴリズムを使用するようにオプティマイザに指示します。このアルゴリズムを使用する条件は、インデックス ネスト ループ結合アルゴリズムを使用する条件と同じです。2 つのアルゴリズムの違いは、 `INL_JOIN`結合された内部テーブルにハッシュ テーブルを作成しますが、 `INL_HASH_JOIN`結合された外部テーブルにハッシュ テーブルを作成することです。7 `INL_HASH_JOIN`はメモリ使用量の制限が固定されていますが、 `INL_JOIN`で使用されるメモリは内部テーブルで一致する行数によって異なります。
 
-### NO_INDEX_HASH_JOIN(t1_name [, tl_name ...])
+### NO_INDEX_HASH_JOIN(t1_name [, tl_name ...]) {#no-index-hash-join-t1-name-tl-name}
 
-The `NO_INDEX_HASH_JOIN(t1_name [, tl_name ...])` hint tells the optimizer not to use the index nested loop hash join algorithm for the given table(s).
+ヒント`NO_INDEX_HASH_JOIN(t1_name [, tl_name ...])`は、指定されたテーブルに対してインデックス ネスト ループ ハッシュ結合アルゴリズムを使用しないようにオプティマイザに指示します。
 
-### INL_MERGE_JOIN
+### INL_マージ結合 {#inl-merge-join}
 
-The `INL_MERGE_JOIN(t1_name [, tl_name])` hint tells the optimizer to use the index nested loop merge join algorithm. The conditions for using this algorithm are the same with the conditions for using the index nested loop join algorithm.
+ヒント`INL_MERGE_JOIN(t1_name [, tl_name])`は、インデックス ネスト ループ マージ結合アルゴリズムを使用するようにオプティマイザに指示します。このアルゴリズムを使用する条件は、インデックス ネスト ループ結合アルゴリズムを使用する条件と同じです。
 
-### NO_INDEX_MERGE_JOIN(t1_name [, tl_name ...])
+### NO_INDEX_MERGE_JOIN(t1_name [, tl_name ...]) {#no-index-merge-join-t1-name-tl-name}
 
-The `NO_INDEX_MERGE_JOIN(t1_name [, tl_name ...])` hint tells the optimizer not to use the index nested loop merge join algorithm for the given table(s).
+ヒント`NO_INDEX_MERGE_JOIN(t1_name [, tl_name ...])`は、指定されたテーブルに対してインデックス ネスト ループ マージ結合アルゴリズムを使用しないようにオプティマイザに指示します。
 
-### HASH_JOIN(t1_name [, tl_name ...])
+### HASH_JOIN(t1_name [, tl_name ...]) {#hash-join-t1-name-tl-name}
 
-The `HASH_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the hash join algorithm for the given table(s). This algorithm allows the query to be executed concurrently with multiple threads, which achieves a higher processing speed but consumes more memory. For example:
-
-{{< copyable "sql" >}}
+`HASH_JOIN(t1_name [, tl_name ...])`ヒントは、指定されたテーブルに対してハッシュ結合アルゴリズムを使用するようにオプティマイザに指示します。このアルゴリズムにより、クエリを複数のスレッドで同時に実行できるため、処理速度が向上しますが、メモリの消費量も増加します。例:
 
 ```sql
 select /*+ HASH_JOIN(t1, t2) */ * from t1, t2 where t1.id = t2.id;
 ```
 
-> **Note:**
+> **注記：**
 >
-> `TIDB_HJ` is the alias for `HASH_JOIN` in TiDB 3.0.x and earlier versions. If you are using any of these versions, you must apply the `TIDB_HJ(t1_name [, tl_name ...])` syntax for the hint. For the later versions of TiDB, `TIDB_HJ` and `HASH_JOIN` are both valid names for the hint, but `HASH_JOIN` is recommended.
+> `TIDB_HJ` 、TiDB 3.0.x 以前のバージョンでは`HASH_JOIN`の別名です。これらのバージョンのいずれかを使用している場合は、ヒントに`TIDB_HJ(t1_name [, tl_name ...])`構文を適用する必要があります。TiDB のそれ以降のバージョンでは、 `TIDB_HJ`と`HASH_JOIN`どちらもヒントの有効な名前ですが、 `HASH_JOIN`推奨されます。
 
-### NO_HASH_JOIN(t1_name [, tl_name ...])
+### NO_HASH_JOIN(t1_name [, tl_name ...]) {#no-hash-join-t1-name-tl-name}
 
-The `NO_HASH_JOIN(t1_name [, tl_name ...])` hint tells the optimizer not to use the hash join algorithm for the given table(s). For example:
+ヒント`NO_HASH_JOIN(t1_name [, tl_name ...])`は、指定されたテーブルに対してハッシュ結合アルゴリズムを使用しないようにオプティマイザに指示します。例:
 
 ```sql
 SELECT /*+ NO_HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 ```
 
-### HASH_JOIN_BUILD(t1_name [, tl_name ...])
+### HASH_JOIN_BUILD(t1_name [, tl_name ...]) {#hash-join-build-t1-name-tl-name}
 
-The `HASH_JOIN_BUILD(t1_name [, tl_name ...])` hint tells the optimizer to use the hash join algorithm on specified tables with these tables working as the build side. In this way, you can build hash tables using specific tables. For example:
+`HASH_JOIN_BUILD(t1_name [, tl_name ...])`ヒントは、指定されたテーブルをビルド側としてハッシュ結合アルゴリズムを使用するようにオプティマイザに指示します。このようにして、特定のテーブルを使用してハッシュ テーブルを構築できます。例:
 
 ```sql
 SELECT /*+ HASH_JOIN_BUILD(t1) */ * FROM t1, t2 WHERE t1.id = t2.id;
 ```
 
-### HASH_JOIN_PROBE(t1_name [, tl_name ...])
+### HASH_JOIN_PROBE(t1_name [, tl_name ...]) {#hash-join-probe-t1-name-tl-name}
 
-The `HASH_JOIN_PROBE(t1_name [, tl_name ...])` hint tells the optimizer to use the hash join algorithm on specified tables with these tables working as the probe side. In this way, you can execute the hash join algorithm with specific tables as the probe side. For example:
+`HASH_JOIN_PROBE(t1_name [, tl_name ...])`ヒントは、指定されたテーブルをプローブ側としてハッシュ結合アルゴリズムを使用するようにオプティマイザに指示します。このようにして、特定のテーブルをプローブ側としてハッシュ結合アルゴリズムを実行できます。例:
 
 ```sql
 SELECT /*+ HASH_JOIN_PROBE(t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 ```
 
-### SEMI_JOIN_REWRITE()
+### セミジョインリライト() {#semi-join-rewrite}
 
-The `SEMI_JOIN_REWRITE()` hint tells the optimizer to rewrite the semi-join query to an ordinary join query. Currently, this hint only works for `EXISTS` subqueries.
+`SEMI_JOIN_REWRITE()`ヒントは、セミ結合クエリを通常の結合クエリに書き換えるようにオプティマイザに指示します。現在、このヒントは`EXISTS`サブクエリに対してのみ機能します。
 
-If this hint is not used to rewrite the query, when the hash join is selected in the execution plan, the semi-join query can only use the subquery to build a hash table. In this case, when the result of the subquery is bigger than that of the outer query, the execution speed might be slower than expected.
+このヒントを使用してクエリを書き換えないと、実行プランでハッシュ結合が選択されたときに、セミ結合クエリはサブクエリを使用してハッシュ テーブルを構築することしかできません。この場合、サブクエリの結果が外部クエリの結果よりも大きいと、実行速度が予想よりも遅くなる可能性があります。
 
-Similarly, when the index join is selected in the execution plan, the semi-join query can only use the outer query as the driving table. In this case, when the result of the subquery is smaller than that of the outer query, the execution speed might be slower than expected.
+同様に、実行プランでインデックス結合が選択されている場合、セミ結合クエリは駆動テーブルとして外部クエリのみを使用できます。この場合、サブクエリの結果が外部クエリの結果よりも小さいと、実行速度が予想よりも遅くなる可能性があります。
 
-When `SEMI_JOIN_REWRITE()` is used to rewrite the query, the optimizer can extend the selection range to select a better execution plan.
-
-{{< copyable "sql" >}}
+`SEMI_JOIN_REWRITE()`を使用してクエリを書き換えると、オプティマイザーは選択範囲を拡張して、より適切な実行プランを選択できます。
 
 ```sql
 -- Does not use SEMI_JOIN_REWRITE() to rewrite the query.
@@ -244,8 +228,6 @@ EXPLAIN SELECT * FROM t WHERE EXISTS (SELECT 1 FROM t1 WHERE t1.a = t.a);
 |   └─IndexFullScan_22        | 9990.00 | cop[tikv] | table:t, index:idx(a)  | keep order:true, stats:pseudo                     |
 +-----------------------------+---------+-----------+------------------------+---------------------------------------------------+
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 -- Uses SEMI_JOIN_REWRITE() to rewrite the query.
@@ -266,50 +248,46 @@ EXPLAIN SELECT * FROM t WHERE EXISTS (SELECT /*+ SEMI_JOIN_REWRITE() */ 1 FROM t
 +------------------------------+---------+-----------+------------------------+---------------------------------------------------------------------------------------------------------------+
 ```
 
-From the preceding example, you can see that when using the `SEMI_JOIN_REWRITE()` hint, TiDB can select the execution method of IndexJoin based on the driving table `t1`.
+前述の例から、ヒント`SEMI_JOIN_REWRITE()`を使用すると、TiDB は駆動テーブル`t1`に基づいて IndexJoin の実行方法を選択できることがわかります。
 
-### SHUFFLE_JOIN(t1_name [, tl_name ...])
+### SHUFFLE_JOIN(t1_name [, tl_name ...]) {#shuffle-join-t1-name-tl-name}
 
-The `SHUFFLE_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the Shuffle Join algorithm on specified tables. This hint only takes effect in the MPP mode. For example:
+`SHUFFLE_JOIN(t1_name [, tl_name ...])`ヒントは、指定されたテーブルで Shuffle Join アルゴリズムを使用するようにオプティマイザに指示します。このヒントは MPP モードでのみ有効です。例:
 
 ```sql
 SELECT /*+ SHUFFLE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 ```
 
-> **Note:**
+> **注記：**
 >
-> - Before using this hint, make sure that the current TiDB cluster can support using TiFlash MPP mode in the query. For details, refer to [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md).
-> - This hint can be used in combination with the [`HASH_JOIN_BUILD` hint](#hash_join_buildt1_name--tl_name-) and [`HASH_JOIN_PROBE` hint](#hash_join_probet1_name--tl_name-) to control the Build side and Probe side of the Shuffle Join algorithm.
+> -   このヒントを使用する前に、現在の TiDB クラスターがクエリでTiFlash MPP モードの使用をサポートできることを確認してください。詳細については、 [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
+> -   このヒントは、 [`HASH_JOIN_BUILD`ヒント](#hash_join_buildt1_name--tl_name-)および[`HASH_JOIN_PROBE`ヒント](#hash_join_probet1_name--tl_name-)と組み合わせて使用​​して、シャッフル結合アルゴリズムのビルド側とプローブ側を制御できます。
 
-### BROADCAST_JOIN(t1_name [, tl_name ...])
+### BROADCAST_JOIN(t1_name [, tl_name ...]) {#broadcast-join-t1-name-tl-name}
 
-`BROADCAST_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the Broadcast Join algorithm on specified tables. This hint only takes effect in the MPP mode. For example:
+`BROADCAST_JOIN(t1_name [, tl_name ...])`ヒントは、指定されたテーブルでブロードキャスト結合アルゴリズムを使用するようにオプティマイザに指示します。このヒントは MPP モードでのみ有効です。例:
 
 ```sql
 SELECT /*+ BROADCAST_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 ```
 
-> **Note:**
+> **注記：**
 >
-> - Before using this hint, make sure that the current TiDB cluster can support using TiFlash MPP mode in the query. For details, refer to [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md).
->- This hint can be used in combination with the [`HASH_JOIN_BUILD` hint](#hash_join_buildt1_name--tl_name-) and [`HASH_JOIN_PROBE` hint](#hash_join_probet1_name--tl_name-) to control the Build side and Probe side of the Broadcast Join algorithm.
+> -   このヒントを使用する前に、現在の TiDB クラスターがクエリでTiFlash MPP モードの使用をサポートできることを確認してください。詳細については、 [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
+> -   このヒントは、 [`HASH_JOIN_BUILD`ヒント](#hash_join_buildt1_name--tl_name-)および[`HASH_JOIN_PROBE`ヒント](#hash_join_probet1_name--tl_name-)と組み合わせて使用​​して、ブロードキャスト結合アルゴリズムのビルド側とプローブ側を制御できます。
 
-### NO_DECORRELATE()
+### NO_DECORRELATE() {#no-decorrelate}
 
-The `NO_DECORRELATE()` hint tells the optimizer not to try to perform decorrelation for the correlated subquery in the specified query block. This hint is applicable to the `EXISTS`, `IN`, `ANY`, `ALL`, `SOME` subqueries and scalar subqueries that contain correlated columns (that is, correlated subqueries).
+`NO_DECORRELATE()`ヒントは、指定されたクエリ ブロック内の相関サブクエリに対して非相関化を実行しないようにオプティマイザに指示します。このヒントは、相関列 (つまり、相関サブクエリ) を含む`EXISTS` 、 `IN` 、 `ANY` 、 `ALL` 、 `SOME`サブクエリおよびスカラー サブクエリに適用されます。
 
-When this hint is used in a query block, the optimizer will not try to perform decorrelation for the correlated columns between the subquery and its outer query block, but always use the Apply operator to execute the query.
+このヒントがクエリ ブロックで使用される場合、オプティマイザーはサブクエリとその外部クエリ ブロック間の相関列の非相関化を実行しようとはせず、常に Apply 演算子を使用してクエリを実行します。
 
-By default, TiDB tries to [perform decorrelation](/correlated-subquery-optimization.md) for correlated subqueries to achieve higher execution efficiency. However, in [some scenarios](/correlated-subquery-optimization.md#restrictions), decorrelation might actually reduce the execution efficiency. In this case, you can use this hint to manually tell the optimizer not to perform decorrelation. For example:
-
-{{< copyable "sql" >}}
+デフォルトでは、 TiDB は相関サブクエリに対して[相関除去を実行する](/correlated-subquery-optimization.md)を試みて、より高い実行効率を実現します。ただし、 [いくつかのシナリオ](/correlated-subquery-optimization.md#restrictions)では、非相関化によって実行効率が実際に低下する可能性があります。この場合、このヒントを使用して、オプティマイザに非相関化を実行しないように手動で指示できます。例:
 
 ```sql
 create table t1(a int, b int);
 create table t2(a int, b int, index idx(b));
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 -- Not using NO_DECORRELATE().
@@ -332,9 +310,7 @@ explain select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.
 +----------------------------------+----------+-----------+---------------+--------------------------------------------------------------------------------------------------------------+
 ```
 
-From the preceding execution plan, you can see that the optimizer has automatically performed decorrelation. The decorrelated execution plan does not have the Apply operator. Instead, the plan has join operations between the subquery and the outer query block. The original filter condition (`t2.b = t1.b`) with the correlated column becomes a regular join condition.
-
-{{< copyable "sql" >}}
+上記の実行プランから、オプティマイザが自動的に非相関化を実行したことがわかります。非相関化実行プランには Apply 演算子がありません。代わりに、プランにはサブクエリと外部クエリ ブロック間の結合操作があります。相関列を含む元のフィルター条件 ( `t2.b = t1.b` ) は、通常の結合条件になります。
 
 ```sql
 -- Using NO_DECORRELATE().
@@ -358,75 +334,67 @@ explain select * from t1 where t1.a < (select /*+ NO_DECORRELATE() */ sum(t2.a) 
 +------------------------------------------+-----------+-----------+------------------------+--------------------------------------------------------------------------------------+
 ```
 
-From the preceding execution plan, you can see that the optimizer does not perform decorrelation. The execution plan still contains the Apply operator. The filter condition (`t2.b = t1.b`) with the correlated column is still the filter condition when accessing the `t2` table.
+上記の実行プランから、オプティマイザが非相関化を実行していないことがわかります。実行プランには、まだ Apply 演算子が含まれています。相関列を含むフィルタ条件 ( `t2.b = t1.b` ) は、 `t2`テーブルにアクセスするときのフィルタ条件のままです。
 
-### HASH_AGG()
+### HASH_AGG() {#hash-agg}
 
-The `HASH_AGG()` hint tells the optimizer to use the hash aggregation algorithm in all the aggregate functions in the specified query block. This algorithm allows the query to be executed concurrently with multiple threads, which achieves a higher processing speed but consumes more memory. For example:
-
-{{< copyable "sql" >}}
+`HASH_AGG()`ヒントは、指定されたクエリ ブロック内のすべての集計関数でハッシュ集計アルゴリズムを使用するようにオプティマイザに指示します。このアルゴリズムにより、クエリを複数のスレッドで同時に実行できるため、処理速度が向上しますが、メモリの消費量も増加します。例:
 
 ```sql
 select /*+ HASH_AGG() */ count(*) from t1, t2 where t1.a > 10 group by t1.id;
 ```
 
-### STREAM_AGG()
+### ストリームAGG() {#stream-agg}
 
-The `STREAM_AGG()` hint tells the optimizer to use the stream aggregation algorithm in all the aggregate functions in the specified query block. Generally, this algorithm consumes less memory but takes longer processing time. If there is a very large data volume or insufficient system memory, it is recommended to use this hint. For example:
-
-{{< copyable "sql" >}}
+`STREAM_AGG()`ヒントは、指定されたクエリ ブロック内のすべての集計関数でストリーム集計アルゴリズムを使用するようにオプティマイザに指示します。通常、このアルゴリズムはメモリの消費量が少なくなりますが、処理時間は長くなります。データ量が非常に多い場合やシステムメモリが不足している場合は、このヒントを使用することをお勧めします。例:
 
 ```sql
 select /*+ STREAM_AGG() */ count(*) from t1, t2 where t1.a > 10 group by t1.id;
 ```
 
-### MPP_1PHASE_AGG()
+### MPP_1PHASE_AGG() {#mpp-1phase-agg}
 
-`MPP_1PHASE_AGG()` tells the optimizer to use the one-phase aggregation algorithm for all aggregate functions in the specified query block. This hint only takes effect in the MPP mode. For example:
+`MPP_1PHASE_AGG()`指定されたクエリ ブロック内のすべての集計関数に対して 1 フェーズ集計アルゴリズムを使用するようにオプティマイザに指示します。このヒントは MPP モードでのみ有効です。例:
 
 ```sql
 SELECT /*+ MPP_1PHASE_AGG() */ COUNT(*) FROM t1, t2 WHERE t1.a > 10 GROUP BY t1.id;
 ```
 
-> **Note:**
+> **注記：**
 >
-> Before using this hint, make sure that the current TiDB cluster can support using TiFlash MPP mode in the query. For details, refer to [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md).
+> このヒントを使用する前に、現在の TiDB クラスターがクエリでTiFlash MPP モードの使用をサポートできることを確認してください。詳細については、 [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
 
-### MPP_2PHASE_AGG()
+### MPP_2PHASE_AGG() {#mpp-2phase-agg}
 
-`MPP_2PHASE_AGG()` tells the optimizer to use the two-phase aggregation algorithm for all aggregate functions in the specified query block. This hint only takes effect in the MPP mode. For example:
+`MPP_2PHASE_AGG()`指定されたクエリ ブロック内のすべての集計関数に対して 2 フェーズ集計アルゴリズムを使用するようにオプティマイザに指示します。このヒントは MPP モードでのみ有効です。例:
 
 ```sql
 SELECT /*+ MPP_2PHASE_AGG() */ COUNT(*) FROM t1, t2 WHERE t1.a > 10 GROUP BY t1.id;
 ```
 
-> **Note:**
+> **注記：**
 >
-> Before using this hint, make sure that the current TiDB cluster can support using TiFlash MPP mode in the query. For details, refer to [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md).
+> このヒントを使用する前に、現在の TiDB クラスターがクエリでTiFlash MPP モードの使用をサポートできることを確認してください。詳細については、 [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
 
-### USE_INDEX(t1_name, idx1_name [, idx2_name ...])
+### USE_INDEX(t1_name, idx1_name [, idx2_name ...]) {#use-index-t1-name-idx1-name-idx2-name}
 
-The `USE_INDEX(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to use only the given index(es) for a specified `t1_name` table. For example, applying the following hint has the same effect as executing the `select * from t t1 use index(idx1, idx2);` statement.
-
-{{< copyable "sql" >}}
+`USE_INDEX(t1_name, idx1_name [, idx2_name ...])`ヒントは、指定された`t1_name`テーブルに対して指定されたインデックスのみを使用するようにオプティマイザに指示します。たとえば、次のヒントを適用すると、 `select * from t t1 use index(idx1, idx2);`ステートメントを実行するのと同じ効果があります。
 
 ```sql
 SELECT /*+ USE_INDEX(t1, idx1, idx2) */ * FROM t1;
 ```
 
-> **Note:**
+> **注記：**
 >
-> If you specify only the table name but not index name in this hint, the execution does not consider any index but scan the entire table.
+> このヒントでテーブル名のみを指定し、インデックス名を指定しない場合、実行ではインデックスは考慮されず、テーブル全体がスキャンされます。
 
-### FORCE_INDEX(t1_name, idx1_name [, idx2_name ...])
+### FORCE_INDEX(t1_name, idx1_name [, idx2_name ...]) {#force-index-t1-name-idx1-name-idx2-name}
 
-The `FORCE_INDEX(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to use only the given index(es).
+ヒント`FORCE_INDEX(t1_name, idx1_name [, idx2_name ...])`は、指定されたインデックスのみを使用するようにオプティマイザーに指示します。
 
-The usage and effect of `FORCE_INDEX(t1_name, idx1_name [, idx2_name ...])` are the same as the usage and effect of `USE_INDEX(t1_name, idx1_name [, idx2_name ...])`.
+`FORCE_INDEX(t1_name, idx1_name [, idx2_name ...])`の使い方と効果は`USE_INDEX(t1_name, idx1_name [, idx2_name ...])`の使い方と効果と同じです。
 
-The following 4 queries have the same effect:
-
-{{< copyable "sql" >}}
+次の 4 つのクエリは同じ効果があります。
 
 ```sql
 SELECT /*+ USE_INDEX(t, idx1) */ * FROM t;
@@ -435,25 +403,23 @@ SELECT * FROM t use index(idx1);
 SELECT * FROM t force index(idx1);
 ```
 
-### IGNORE_INDEX(t1_name, idx1_name [, idx2_name ...])
+### IGNORE_INDEX(t1_name, idx1_name [, idx2_name ...]) {#ignore-index-t1-name-idx1-name-idx2-name}
 
-The `IGNORE_INDEX(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to ignore the given index(es) for a specified `t1_name` table. For example, applying the following hint has the same effect as executing the `select * from t t1 ignore index(idx1, idx2);` statement.
-
-{{< copyable "sql" >}}
+`IGNORE_INDEX(t1_name, idx1_name [, idx2_name ...])`ヒントは、指定された`t1_name`テーブルの指定されたインデックスを無視するようにオプティマイザに指示します。たとえば、次のヒントを適用すると、 `select * from t t1 ignore index(idx1, idx2);`ステートメントを実行するのと同じ効果があります。
 
 ```sql
 select /*+ IGNORE_INDEX(t1, idx1, idx2) */ * from t t1;
 ```
 
-### ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])
+### ORDER_INDEX(t1_name, idx1_name [, idx2_name ...]) {#order-index-t1-name-idx1-name-idx2-name}
 
-The `ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to use only the given index for a specified table and read the specified index in order.
+ヒント`ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])`は、指定されたテーブルに対して指定されたインデックスのみを使用し、指定されたインデックスを順番に読み取るようにオプティマイザに指示します。
 
-> **Warning:**
+> **警告：**
 >
-> This hint might cause SQL statements to fail. It is recommended to test it first. If an error occurs during the test, remove the hint. If the test runs normally, you can continue using it.
+> このヒントにより、SQL ステートメントが失敗する可能性があります。最初にテストすることをお勧めします。テスト中にエラーが発生した場合は、ヒントを削除します。テストが正常に実行された場合は、引き続き使用できます。
 
-This hint is usually applied in the following scenario:
+このヒントは通常、次のシナリオで適用されます。
 
 ```sql
 CREATE TABLE t(a INT, b INT, key(a), key(b));
@@ -471,18 +437,18 @@ EXPLAIN SELECT /*+ ORDER_INDEX(t, a) */ a FROM t ORDER BY a LIMIT 10;
 +----------------------------+---------+-----------+---------------------+-------------------------------+
 ```
 
-The optimizer generates two types of plan for this query: `Limit + IndexScan(keep order: true)` and `TopN + IndexScan(keep order: false)`. When the `ORDER_INDEX` hint is used, the optimizer chooses the first plan that reads the index in order.
+オプティマイザは、このクエリに対して`Limit + IndexScan(keep order: true)`と`TopN + IndexScan(keep order: false)` 2 種類のプランを生成します。 `ORDER_INDEX`ヒントを使用すると、オプティマイザはインデックスを順番に読み取る最初のプランを選択します。
 
-> **Note:**
+> **注記：**
 >
-> - If the query itself does not need to read the index in order (that is, without a hint, the optimizer does not generate a plan that reads the index in order in any situation), when the `ORDER_INDEX` hint is used, the error `Can't find a proper physical plan for this query` occurs. In this case, you need to remove the corresponding `ORDER_INDEX` hint.
-> - The index on a partitioned table cannot be read in order, so do not use the `ORDER_INDEX` hint on the partitioned table and its related indexes.
+> -   クエリ自体がインデックスを順番に読み取る必要がない場合（つまり、ヒントがない場合、オプティマイザはどのような状況でもインデックスを順番に読み取るプランを生成しません）、 `ORDER_INDEX`ヒントを使用するとエラー`Can't find a proper physical plan for this query`が発生します。この場合、対応する`ORDER_INDEX`ヒントを削除する必要があります。
+> -   パーティションテーブル上のインデックスは順番に読み取ることができないため、パーティションテーブルとその関連インデックスに対して`ORDER_INDEX`ヒントを使用しないでください。
 
-### NO_ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])
+### NO_ORDER_INDEX(t1_name, idx1_name [, idx2_name ...]) {#no-order-index-t1-name-idx1-name-idx2-name}
 
-The `NO_ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to use only the given index for a specified table and not to read the specified index in order. This hint is usually applied in the following scenario.
+ヒント`NO_ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])`は、指定されたテーブルに対して指定されたインデックスのみを使用し、指定されたインデックスを順番に読み取らないようにオプティマイザに指示します。このヒントは通常、次のシナリオに適用されます。
 
-The following example shows that the effect of the query statement is equivalent to `SELECT * FROM t t1 use index(idx1, idx2);`:
+次の例は、クエリ ステートメントの効果が`SELECT * FROM t t1 use index(idx1, idx2);`と同等であることを示しています。
 
 ```sql
 CREATE TABLE t(a INT, b INT, key(a), key(b));
@@ -500,80 +466,70 @@ EXPLAIN SELECT /*+ NO_ORDER_INDEX(t, a) */ a FROM t ORDER BY a LIMIT 10;
 +----------------------------+----------+-----------+---------------------+--------------------------------+
 ```
 
-The same as the example of `ORDER_INDEX` hint, the optimizer generates two types of plans for this query: `Limit + IndexScan(keep order: true)` and `TopN + IndexScan(keep order: false)`. When the `NO_ORDER_INDEX` hint is used, the optimizer will choose the latter plan to read the index out of order.
+ヒント`ORDER_INDEX`の例と同じように、オプティマイザはこのクエリに対して`Limit + IndexScan(keep order: true)`と`TopN + IndexScan(keep order: false)` 2 種類のプランを生成します。ヒント`NO_ORDER_INDEX`を使用すると、オプティマイザは後者のプランを選択してインデックスを順不同で読み取ります。
 
-### AGG_TO_COP()
+### AGG_TO_COP() {#agg-to-cop}
 
-The `AGG_TO_COP()` hint tells the optimizer to push down the aggregate operation in the specified query block to the coprocessor. If the optimizer does not push down some aggregate function that is suitable for pushdown, then it is recommended to use this hint. For example:
-
-{{< copyable "sql" >}}
+ヒント`AGG_TO_COP()`は、指定されたクエリ ブロック内の集計操作をコプロセッサにプッシュダウンするようにオプティマイザに指示します。オプティマイザがプッシュダウンに適した集計関数をプッシュダウンしない場合は、このヒントを使用することをお勧めします。例:
 
 ```sql
 select /*+ AGG_TO_COP() */ sum(t1.a) from t t1;
 ```
 
-### LIMIT_TO_COP()
+### LIMIT_TO_COP() {#limit-to-cop}
 
-The `LIMIT_TO_COP()` hint tells the optimizer to push down the `Limit` and `TopN` operators in the specified query block to the coprocessor. If the optimizer does not perform such an operation, it is recommended to use this hint. For example:
-
-{{< copyable "sql" >}}
+`LIMIT_TO_COP()`ヒントは、指定されたクエリ ブロック内の`Limit`と`TopN`演算子をコプロセッサにプッシュダウンするようにオプティマイザに指示します。オプティマイザがこのような操作を実行しない場合は、このヒントを使用することをお勧めします。例:
 
 ```sql
 SELECT /*+ LIMIT_TO_COP() */ * FROM t WHERE a = 1 AND b > 10 ORDER BY c LIMIT 1;
 ```
 
-### READ_FROM_STORAGE(TIFLASH[t1_name [, tl_name ...]], TIKV[t2_name [, tl_name ...]])
+### READ_FROM_STORAGE(TIFLASH[t1_name [, tl_name ...]], TIKV[t2_name [, tl_name ...]]) {#read-from-storage-tiflash-t1-name-tl-name-tikv-t2-name-tl-name}
 
-The `READ_FROM_STORAGE(TIFLASH[t1_name [, tl_name ...]], TIKV[t2_name [, tl_name ...]])` hint tells the optimizer to read specific table(s) from specific storage engine(s). Currently, this hint supports two storage engine parameters - `TIKV` and `TIFLASH`. If a table has an alias, use the alias as the parameter of `READ_FROM_STORAGE()`; if the table does not has an alias, use the table's original name as the parameter. For example:
-
-{{< copyable "sql" >}}
+`READ_FROM_STORAGE(TIFLASH[t1_name [, tl_name ...]], TIKV[t2_name [, tl_name ...]])`ヒントは、オプティマイザに特定のstorageエンジンから特定のテーブルを読み取るように指示します。現在、このヒントは`TIKV`と`TIFLASH` 2 つのstorageエンジン パラメータをサポートしています。テーブルに別名がある場合は、別名を`READ_FROM_STORAGE()`のパラメータとして使用します。テーブルに別名がない場合は、テーブルの元の名前をパラメータとして使用します。例:
 
 ```sql
 select /*+ READ_FROM_STORAGE(TIFLASH[t1], TIKV[t2]) */ t1.a from t t1, t t2 where t1.a = t2.a;
 ```
 
-### USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])
+### USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...]) {#use-index-merge-t1-name-idx1-name-idx2-name}
 
-The `USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to access a specific table with the index merge method. Index merge has two types: intersection type and union type. For details, see [Explain Statements Using Index Merge](/explain-index-merge.md).
+`USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])`ヒントは、インデックス マージ方式を使用して特定のテーブルにアクセスするようにオプティマイザに指示します。インデックス マージには、交差型と結合型の 2 つのタイプがあります。詳細については、 [インデックスマージを使用したステートメントの説明](/explain-index-merge.md)を参照してください。
 
-If you explicitly specify the list of indexes, TiDB selects indexes from the list to build index merge; if you do not specify the list of indexes, TiDB selects indexes from all available indexes to build index merge.
+インデックスのリストを明示的に指定すると、TiDB はリストからインデックスを選択してインデックス マージを構築します。インデックスのリストを指定しないと、TiDB は使用可能なすべてのインデックスからインデックスを選択してインデックス マージを構築します。
 
-For the intersection-type index merge, the given list of indexes is a required parameter in the hint. For the union-type index merge, the given list of indexes is an optional parameter in the hint. See the following example.
-
-{{< copyable "sql" >}}
+交差型インデックス マージの場合、指定されたインデックス リストはヒントの必須パラメータです。 和集合型インデックス マージの場合、指定されたインデックス リストはヒントのオプション パラメータです。 次の例を参照してください。
 
 ```sql
 SELECT /*+ USE_INDEX_MERGE(t1, idx_a, idx_b, idx_c) */ * FROM t1 WHERE t1.a > 10 OR t1.b > 10;
 ```
 
-When multiple `USE_INDEX_MERGE` hints are made to the same table, the optimizer tries to select the index from the union of the index sets specified by these hints.
+同じテーブルに対して複数の`USE_INDEX_MERGE`ヒントが作成されると、オプティマイザはこれらのヒントによって指定されたインデックス セットの結合からインデックスを選択しようとします。
 
-> **Note:**
+> **注記：**
 >
-> The parameters of `USE_INDEX_MERGE` refer to index names, rather than column names. The index name of the primary key is `primary`.
+> `USE_INDEX_MERGE`のパラメータは列名ではなくインデックス名を参照します。主キーのインデックス名は`primary`です。
 
-### LEADING(t1_name [, tl_name ...])
+### LEADING(t1_name [, tl_name ...]) {#leading-t1-name-tl-name}
 
-The `LEADING(t1_name [, tl_name ...])` hint reminds the optimizer that, when generating the execution plan, to determine the order of multi-table joins according to the order of table names specified in the hint. For example:
-
-{{< copyable "sql" >}}
+ヒント`LEADING(t1_name [, tl_name ...])`は、実行プランを生成するときに、ヒントで指定されたテーブル名の順序に従って複数テーブルの結合の順序を決定するようにオプティマイザに通知します。例:
 
 ```sql
 SELECT /*+ LEADING(t1, t2) */ * FROM t1, t2, t3 WHERE t1.id = t2.id and t2.id = t3.id;
 ```
 
-In the above query with multi-table joins, the order of joins is determined by the order of table names specified in the `LEADING()` hint. The optimizer will first join `t1` and `t2` and then join the result with `t3`. This hint is more general than [`STRAIGHT_JOIN`](#straight_join).
+複数テーブル結合を含む上記のクエリでは、結合の順序は`LEADING()`ヒントで指定されたテーブル名の順序によって決まります。オプティマイザーは最初に`t1`と`t2`を結合し、次にその結果を`t3`と結合します。このヒントは[`STRAIGHT_JOIN`](#straight_join)よりも一般的です。
 
-The `LEADING` hint does not take effect in the following situations:
+`LEADING`ヒントは次の状況では有効になりません。
 
-+ Multiple `LEADING` hints are specified.
-+ The table name specified in the `LEADING` hint does not exist.
-+ A duplicated table name is specified in the `LEADING` hint.
-+ The optimizer cannot perform join operations according to the order as specified by the `LEADING` hint.
-+ The `straight_join()` hint already exists.
-+ The query contains an outer join together with the Cartesian product.
+-   `LEADING`ヒントが複数指定されています。
+-   `LEADING`ヒントで指定されたテーブル名は存在しません。
+-   `LEADING`ヒントに重複したテーブル名が指定されています。
+-   オプティマイザーは、ヒント`LEADING`で指定された順序に従って結合操作を実行できません。
+-   `straight_join()`ヒントがすでに存在します。
+-   クエリには、外部結合とデカルト積が含まれています。
 
-In the preceding situations, a warning is generated.
+上記の状況では、警告が生成されます。
 
 ```sql
 -- Multiple `LEADING` hints are specified.
@@ -591,13 +547,13 @@ SHOW WARNINGS;
 +---------+------+-------------------------------------------------------------------------------------------------------------------+
 ```
 
-> **Note:**
+> **注記：**
 >
-> If the query statement includes an outer join, in the hint you can specify only the tables whose join order can be swapped. If there is a table in the hint whose join order cannot be swapped, the hint will be invalid. For example, in `SELECT * FROM t1 LEFT JOIN (t2 JOIN t3 JOIN t4) ON t1.a = t2.a;`, if you want to control the join order of `t2`, `t3`, and `t4` tables, you cannot specify `t1` in the `LEADING` hint.
+> クエリ ステートメントに外部結合が含まれている場合、ヒントでは結合順序を入れ替えることができるテーブルのみを指定できます。ヒントに結合順序を入れ替えることができないテーブルが含まれている場合、ヒントは無効になります。たとえば、 `SELECT * FROM t1 LEFT JOIN (t2 JOIN t3 JOIN t4) ON t1.a = t2.a;`で`t2` 、 `t3` 、 `t4`テーブルの結合順序を制御する場合、 `LEADING`ヒントに`t1`指定することはできません。
 
-### MERGE()
+### マージ（） {#merge}
 
-Using the `MERGE()` hint in queries with common table expressions (CTE) can disable the materialization of the subqueries and expand the subquery inlines into CTE. This hint is only applicable to non-recursive CTE. In some scenarios, using `MERGE()` brings higher execution efficiency than the default behavior of allocating a temporary space. For example, pushing down query conditions or in nesting CTE queries:
+共通テーブル式 (CTE) を含むクエリで`MERGE()`ヒントを使用すると、サブクエリのマテリアライゼーションを無効にし、サブクエリのインラインを CTE に拡張できます。このヒントは、非再帰 CTE にのみ適用されます。シナリオによっては、 `MERGE()`使用すると、一時領域を割り当てるデフォルトの動作よりも実行効率が高くなります。たとえば、クエリ条件をプッシュダウンする場合や、CTE クエリをネストする場合などです。
 
 ```sql
 -- Uses the hint to push down the predicate of the outer query.
@@ -607,34 +563,34 @@ WITH CTE AS (SELECT /*+ MERGE() */ * FROM tc WHERE tc.a < 60) SELECT * FROM CTE 
 WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * FROM t2), CTE4 AS (SELECT * FROM t3) SELECT * FROM CTE3, CTE4) SELECT * FROM CTE1, CTE2;
 ```
 
-> **Note:**
+> **注記：**
 >
-> `MERGE()` is only applicable to simple CTE queries. It is not applicable in the following situations:
+> `MERGE()`は単純な CTE クエリにのみ適用されます。次の状況には適用されません。
 >
-> - [Recursive CTE](https://docs.pingcap.com/tidb/stable/dev-guide-use-common-table-expression#recursive-cte)
-> - Subqueries with inlines that cannot be expanded, such as aggregate operators, window functions, and `DISTINCT`.
+> -   [再帰CTE](https://docs.pingcap.com/tidb/stable/dev-guide-use-common-table-expression#recursive-cte)
+> -   集計演算子、ウィンドウ関数、 `DISTINCT`など、展開できないインラインを含むサブクエリ。
 >
-> When the number of CTE references is too high, the query performance might be lower than the default materialization behavior.
+> CTE 参照の数が多すぎると、クエリのパフォーマンスがデフォルトのマテリアライゼーション動作よりも低くなる可能性があります。
 
-## Hints that take effect globally
+## 世界中で効果を発揮するヒント {#hints-that-take-effect-globally}
 
-The global hint works in [views](/views.md). When specified as a global hint, the hint defined in a query can take effect inside the view. To specify a global hint, first use the `QB_NAME` hint to define a query block name, and then add the target hints in the form of `ViewName@QueryBlockName`.
+グローバルヒントは[ビュー](/views.md)で機能します。グローバルヒントとして指定すると、クエリで定義されたヒントがビュー内で有効になります。グローバルヒントを指定するには、まず`QB_NAME`ヒントを使用してクエリブロック名を定義し、次に`ViewName@QueryBlockName`の形式で対象ヒントを追加します。
 
-### Step 1: Define the query block name of the view using the `QB_NAME` hint
+### ステップ1: <code>QB_NAME</code>ヒントを使用してビューのクエリブロック名を定義する {#step-1-define-the-query-block-name-of-the-view-using-the-code-qb-name-code-hint}
 
-Use the [`QB_NAME` hint](#qb_name) to define a new name for each query block of the view. The definition of the `QB_NAME` hint for views is the same as that for [query blocks](#qb_name), but the syntax is extended from `QB_NAME(QB)` to `QB_NAME(QB, ViewName@QueryBlockName [.ViewName@QueryBlockName .ViewName@QueryBlockName ...])`.
+[`QB_NAME`ヒント](#qb_name)使用して、ビューの各クエリ ブロックに新しい名前を定義します。ビューの`QB_NAME`ヒントの定義は[クエリブロック](#qb_name)と同じですが、構文は`QB_NAME(QB)`から`QB_NAME(QB, ViewName@QueryBlockName [.ViewName@QueryBlockName .ViewName@QueryBlockName ...])`に拡張されています。
 
-> **Note:**
+> **注記：**
 >
-> There is a white space between `@QueryBlockName` and the immediately following `.ViewName@QueryBlockName`. Otherwise, the `.ViewName@QueryBlockName` will be treated as a part of the `QueryBlockName`. For example, `QB_NAME(v2_1, v2@SEL_1 .@SEL_1)` is valid, while `QB_NAME(v2_1, v2@SEL_1.@SEL_1)` cannot be parsed correctly.
+> `@QueryBlockName`と直後の`.ViewName@QueryBlockName`の間には空白があります。そうでない場合、 `.ViewName@QueryBlockName`は`QueryBlockName`の一部として扱われます。たとえば、 `QB_NAME(v2_1, v2@SEL_1 .@SEL_1)`有効ですが、 `QB_NAME(v2_1, v2@SEL_1.@SEL_1)`正しく解析できません。
 
-- For a simple statement with a single view and no subqueries, the following example specifies the first query block name of view `v`:
+-   単一のビューとサブクエリのない単純なステートメントの場合、次の例では、ビュー`v`の最初のクエリ ブロック名を指定します。
 
     ```sql
     SELECT /* Comment: The name of the current query block is the default @SEL_1 */ * FROM v;
     ```
 
-    For view `v`, the first view name in the list (`ViewName@QueryBlockName [.ViewName@QueryBlockName .ViewName@QueryBlockName ...]`) starting from the query statement is `v@SEL_1`. The first query block of the view `v` can be declared as `QB_NAME(v_1, v@SEL_1 .@SEL_1)`, or simply written as `QB_NAME(v_1, v)`, omitting `@SEL_1`:
+    ビュー`v`の場合、クエリステートメントから始まるリスト ( `ViewName@QueryBlockName [.ViewName@QueryBlockName .ViewName@QueryBlockName ...]` ) の最初のビュー名は`v@SEL_1`です。ビュー`v`の最初のクエリブロックは`QB_NAME(v_1, v@SEL_1 .@SEL_1)`として宣言するか、 `@SEL_1`を省略して単に`QB_NAME(v_1, v)`と記述できます。
 
     ```sql
     CREATE VIEW v AS SELECT /* Comment: The name of the current query block is the default @SEL_1 */ * FROM t;
@@ -643,16 +599,16 @@ Use the [`QB_NAME` hint](#qb_name) to define a new name for each query block of 
     SELECT /*+ QB_NAME(v_1, v) USE_INDEX(t@v_1, idx) */ * FROM v;
     ```
 
-- For a complex statement with nested views and subqueries, the following example specifies the names for each of two query blocks of the view `v1` and `v2`:
+-   ネストされたビューとサブクエリを含む複雑なステートメントの場合、次の例では、ビュー`v1`と`v2`の 2 つのクエリ ブロックのそれぞれの名前を指定します。
 
     ```sql
     SELECT /* Comment: The name of the current query block is the default @SEL_1 */ * FROM v2 JOIN (
         SELECT /* Comment: The name of the current query block is the default @SEL_2 */ * FROM v2) vv;
     ```
 
-    For the first view `v2`, the first view name in the list starting from the first query statement is `v2@SEL_1`. For the second view `v2`, the first view name is `v2@SEL_2`. The following example only considers the first view `v2`.
+    最初のビュー`v2`の場合、最初のクエリ ステートメントから始まるリストの最初のビュー名は`v2@SEL_1`です。2 番目のビュー`v2`の場合、最初のビュー名は`v2@SEL_2`です。次の例では、最初のビュー`v2`のみを考慮します。
 
-    The first query block of view `v2` can be declared as `QB_NAME(v2_1, v2@SEL_1 .@SEL_1)`, and the second query block of the view `v2` can be declared as `QB_NAME(v2_2, v2@SEL_1 .@SEL_2)`:
+    ビュー`v2`の最初のクエリ ブロックは`QB_NAME(v2_1, v2@SEL_1 .@SEL_1)`として宣言でき、ビュー`v2`の 2 番目のクエリ ブロックは`QB_NAME(v2_2, v2@SEL_1 .@SEL_2)`として宣言できます。
 
     ```sql
     CREATE VIEW v2 AS
@@ -662,7 +618,7 @@ Use the [`QB_NAME` hint](#qb_name) to define a new name for each query block of 
         ) tt;
     ```
 
-    For view `v1`, the first view name in the list starting from the preceding statement is `v2@SEL_1 .v1@SEL_2`. The first query block in view `v1` can be declared as `QB_NAME(v1_1, v2@SEL_1 .v1@SEL_2 .@SEL_1)`, and the second query block in view `v1` can be declared as `QB_NAME(v1_2, v2@SEL_1 .v1@SEL_2 .@SEL_2)`:
+    ビュー`v1`の場合、前のステートメントから始まるリストの最初のビュー名は`v2@SEL_1 .v1@SEL_2`です。ビュー`v1`の最初のクエリ ブロックは`QB_NAME(v1_1, v2@SEL_1 .v1@SEL_2 .@SEL_1)`として宣言でき、ビュー`v1`の 2 番目のクエリ ブロックは`QB_NAME(v1_2, v2@SEL_1 .v1@SEL_2 .@SEL_2)`として宣言できます。
 
     ```sql
     CREATE VIEW v1 AS SELECT * FROM t JOIN /* Comment: For view `v1`, the name of the current query block is the default @SEL_1. So, the current query block view list is v2@SEL_1 .@SEL_2 .v1@SEL_1 */
@@ -671,206 +627,190 @@ Use the [`QB_NAME` hint](#qb_name) to define a new name for each query block of 
         ) tt;
     ```
 
-> **Note:**
+> **注記：**
 >
-> - To use global hints with views, you must define the corresponding `QB_NAME` hints in the view. Otherwise, the global hints will not take effect.
+> -   ビューでグローバル ヒントを使用するには、ビュー内に対応する`QB_NAME`ヒントを定義する必要があります。そうしないと、グローバル ヒントは有効になりません。
 >
-> - When using a hint to specify multiple table names in a view, you need to ensure that the table names appearing in the same hint are in the same query block of the same view.
+> -   ヒントを使用してビュー内の複数のテーブル名を指定する場合、同じヒントに表示されるテーブル名が同じビューの同じクエリ ブロック内にあることを確認する必要があります。
 >
-> - When you define the `QB_NAME` hint in a view for the outermost query block:
+> -   最も外側のクエリ ブロックのビューで`QB_NAME`ヒントを定義すると、次のようになります。
 >
->     - For the first item of the view list in the `QB_NAME`, if the `@SEL_` is not explicitly declared, the default is consistent with the query block position where the `QB_NAME` is defined. That is, the query `SELECT /*+ QB_NAME(qb1, v2) */ * FROM v2 JOIN (SELECT /*+ QB_NAME(qb2, v2) */ * FROM v2) vv;` is equivalent to `SELECT /*+ QB_NAME(qb1, v2@SEL_1) */ * FROM v2 JOIN (SELECT /*+ QB_NAME(qb2, v2@SEL_2) */ * FROM v2) vv;`.
->     - For items other than the first item of the view list in the `QB_NAME`, only `@SEL_1` can be omitted. That is, if `@SEL_1` is declared in the first query block of the current view, `@SEL_1` can be omitted. Otherwise, `@SEL_` cannot be omitted. For the preceding example:
+>     -   `QB_NAME`のビュー リストの最初の項目については、 `@SEL_`が明示的に宣言されていない場合、デフォルトは`QB_NAME`が定義されているクエリ ブロックの位置と一致します。つまり、クエリ`SELECT /*+ QB_NAME(qb1, v2) */ * FROM v2 JOIN (SELECT /*+ QB_NAME(qb2, v2) */ * FROM v2) vv;`は`SELECT /*+ QB_NAME(qb1, v2@SEL_1) */ * FROM v2 JOIN (SELECT /*+ QB_NAME(qb2, v2@SEL_2) */ * FROM v2) vv;`と同等です。
+>     -   `QB_NAME`のビュー リストの最初の項目以外の項目については、 `@SEL_1`のみを省略できます。つまり、現在のビューの最初のクエリ ブロックで`@SEL_1`が宣言されている場合は、 `@SEL_1`を省略できます。それ以外の場合は、 `@SEL_`を省略できません。上記の例の場合:
 >
->         - The first query block of the view `v2` can be declared as `QB_NAME(v2_1, v2)`.
->         - The second query block of the view `v2` can be declared as `QB_NAME(v2_2, v2.@SEL_2)`.
->         - The first query block of the view `v1` can be declared as `QB_NAME(v1_1, v2.v1@SEL_2)`.
->         - The second query block of the view `v1` can be declared as `QB_NAME(v1_2, v2.v1@SEL_2 .@SEL_2)`.
+>         -   ビュー`v2`の最初のクエリ ブロックは`QB_NAME(v2_1, v2)`として宣言できます。
+>         -   ビュー`v2`の 2 番目のクエリ ブロックは`QB_NAME(v2_2, v2.@SEL_2)`として宣言できます。
+>         -   ビュー`v1`の最初のクエリ ブロックは`QB_NAME(v1_1, v2.v1@SEL_2)`として宣言できます。
+>         -   ビュー`v1`の 2 番目のクエリ ブロックは`QB_NAME(v1_2, v2.v1@SEL_2 .@SEL_2)`として宣言できます。
 
-### Step 2: Add the target hints
+### ステップ2: ターゲットヒントを追加する {#step-2-add-the-target-hints}
 
-After defining the `QB_NAME` hint for query blocks of the view, you can add required [hints that take effect in query blocks](#hints-that-take-effect-in-query-blocks) in the form of `ViewName@QueryBlockName` to make them effective inside the view. For example:
+ビューのクエリ ブロックに`QB_NAME`ヒントを定義した後、必要な[クエリブロックで有効になるヒント](#hints-that-take-effect-in-query-blocks) `ViewName@QueryBlockName`の形式で追加して、ビュー内で有効にすることができます。例:
 
-- Specify the `MERGE_JOIN()` hint for the first query block of the view `v2`:
+-   ビュー`v2`の最初のクエリ ブロックに`MERGE_JOIN()`ヒントを指定します。
 
     ```sql
     SELECT /*+ QB_NAME(v2_1, v2) merge_join(t@v2_1) */ * FROM v2;
     ```
 
-- Specify the `MERGE_JOIN()` and `STREAM_AGG()` hints for the second query block of the view `v2`:
+-   ビュー`v2`の 2 番目のクエリ ブロックにヒント`MERGE_JOIN()`と`STREAM_AGG()`を指定します。
 
     ```sql
     SELECT /*+ QB_NAME(v2_2, v2.@SEL_2) merge_join(t1@v2_2) stream_agg(@v2_2) */ * FROM v2;
     ```
 
-- Specify the `HASH_JOIN()` hint for the first query block of the view `v1`:
+-   ビュー`v1`の最初のクエリ ブロックに`HASH_JOIN()`ヒントを指定します。
 
     ```sql
     SELECT /*+ QB_NAME(v1_1, v2.v1@SEL_2) hash_join(t@v1_1) */ * FROM v2;
     ```
 
-- Specify the `HASH_JOIN()` and `HASH_AGG()` hints for the second query block of the view `v1`:
+-   ビュー`v1`の 2 番目のクエリ ブロックにヒント`HASH_JOIN()`と`HASH_AGG()`を指定します。
 
     ```sql
     SELECT /*+ QB_NAME(v1_2, v2.v1@SEL_2 .@SEL_2) hash_join(t1@v1_2) hash_agg(@v1_2) */ * FROM v2;
     ```
 
-## Hints that take effect in the whole query
+## クエリ全体に影響するヒント {#hints-that-take-effect-in-the-whole-query}
 
-This category of hints can only follow behind the **first** `SELECT`, `UPDATE` or `DELETE` keyword, which is equivalent to modifying the value of the specified system variable when this query is executed. The priority of the hint is higher than that of existing system variables.
+このカテゴリのヒントは、**最初の**`SELECT` 、 `UPDATE` 、または`DELETE`キーワードの後に​​のみ指定できます。これは、このクエリの実行時に指定されたシステム変数の値を変更することと同じです。ヒントの優先順位は、既​​存のシステム変数の優先順位よりも高くなります。
 
-> **Note:**
+> **注記：**
 >
-> This category of hints also has an optional hidden variable `@QB_NAME`, but the hint takes effect in the whole query even if you specify the variable.
+> このカテゴリのヒントにはオプションの隠し変数`@QB_NAME`ありますが、変数を指定した場合でもヒントはクエリ全体に適用されます。
 
-### NO_INDEX_MERGE()
+### インデックスマージなし() {#no-index-merge}
 
-The `NO_INDEX_MERGE()` hint disables the index merge feature of the optimizer.
+ヒント`NO_INDEX_MERGE()`は、オプティマイザのインデックス マージ機能を無効にします。
 
-For example, the following query will not use index merge:
-
-{{< copyable "sql" >}}
+たとえば、次のクエリではインデックスのマージは使用されません。
 
 ```sql
 select /*+ NO_INDEX_MERGE() */ * from t where t.a > 0 or t.b > 0;
 ```
 
-In addition to this hint, setting the `tidb_enable_index_merge` system variable also controls whether to enable this feature.
+このヒントに加えて、 `tidb_enable_index_merge`システム変数を設定することで、この機能を有効にするかどうかも制御できます。
 
-> **Note:**
+> **注記：**
 >
-> - `NO_INDEX_MERGE` has a higher priority over `USE_INDEX_MERGE`. When both hints are used, `USE_INDEX_MERGE` does not take effect.
-> - For a subquery, `NO_INDEX_MERGE` only takes effect when it is placed at the outermost level of the subquery.
+> -   `NO_INDEX_MERGE` `USE_INDEX_MERGE`よりも優先度が高くなります。両方のヒントが使用される場合、 `USE_INDEX_MERGE`効果がありません。
+> -   サブクエリの場合、 `NO_INDEX_MERGE`サブクエリの最も外側のレベルに配置された場合にのみ有効になります。
 
-### USE_TOJA(boolean_value)
+### USE_TOJA(ブール値) {#use-toja-boolean-value}
 
-The `boolean_value` parameter can be `TRUE` or `FALSE`. The `USE_TOJA(TRUE)` hint enables the optimizer to convert an `in` condition (containing a sub-query) to join and aggregation operations. Comparatively, the `USE_TOJA(FALSE)` hint disables this feature.
+`boolean_value`パラメータは`TRUE`または`FALSE`になります。 `USE_TOJA(TRUE)`ヒントにより、オプティマイザは`in`条件 (サブクエリを含む) を結合および集計操作に変換できます。比較すると、 `USE_TOJA(FALSE)`ヒントはこの機能を無効にします。
 
-For example, the following query will convert `in (select t2.a from t2) subq` to corresponding join and aggregation operations:
-
-{{< copyable "sql" >}}
+たとえば、次のクエリは`in (select t2.a from t2) subq`対応する結合および集計操作に変換します。
 
 ```sql
 select /*+ USE_TOJA(TRUE) */ t1.a, t1.b from t1 where t1.a in (select t2.a from t2) subq;
 ```
 
-In addition to this hint, setting the `tidb_opt_insubq_to_join_and_agg` system variable also controls whether to enable this feature.
+このヒントに加えて、 `tidb_opt_insubq_to_join_and_agg`システム変数を設定することで、この機能を有効にするかどうかも制御できます。
 
-### MAX_EXECUTION_TIME(N)
+### 最大実行時間(N) {#max-execution-time-n}
 
-The `MAX_EXECUTION_TIME(N)` hint places a limit `N` (a timeout value in milliseconds) on how long a statement is permitted to execute before the server terminates it. In the following hint, `MAX_EXECUTION_TIME(1000)` means that the timeout is 1000 milliseconds (that is, 1 second):
-
-{{< copyable "sql" >}}
+`MAX_EXECUTION_TIME(N)`ヒントは、サーバーがステートメントを終了する前にステートメントの実行が許可される時間に制限`N` (ミリ秒単位のタイムアウト値) を設定します。次のヒントでは、 `MAX_EXECUTION_TIME(1000)`タイムアウトが 1000 ミリ秒 (つまり 1 秒) であることを意味します。
 
 ```sql
 select /*+ MAX_EXECUTION_TIME(1000) */ * from t1 inner join t2 where t1.id = t2.id;
 ```
 
-In addition to this hint, the `global.max_execution_time` system variable can also limit the execution time of a statement.
+このヒントに加えて、 `global.max_execution_time`システム変数はステートメントの実行時間を制限することもできます。
 
-### MEMORY_QUOTA(N)
+### メモリクォータ(N) {#memory-quota-n}
 
-The `MEMORY_QUOTA(N)` hint places a limit `N` (a threshold value in MB or GB) on how much memory a statement is permitted to use. When a statement's memory usage exceeds this limit, TiDB produces a log message based on the statement's over-limit behavior or just terminates it.
+`MEMORY_QUOTA(N)`ヒントは、ステートメントが使用できるメモリ量に制限`N` (MB または GB 単位のしきい値) を設定します。ステートメントのメモリ使用量がこの制限を超えると、TiDB はステートメントの制限超過動作に基づいてログ メッセージを生成するか、ステートメントを終了します。
 
-In the following hint, `MEMORY_QUOTA(1024 MB)` means that the memory usage is limited to 1024 MB:
-
-{{< copyable "sql" >}}
+次のヒントでは、 `MEMORY_QUOTA(1024 MB)`メモリ使用量が 1024 MB に制限されていることを意味します。
 
 ```sql
 select /*+ MEMORY_QUOTA(1024 MB) */ * from t;
 ```
 
-In addition to this hint, the [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) system variable can also limit the memory usage of a statement.
+このヒントに加えて、 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)システム変数を使用してステートメントのメモリ使用量を制限することもできます。
 
-### READ_CONSISTENT_REPLICA()
+### READ_CONSISTENT_REPLICA() {#read-consistent-replica}
 
-The `READ_CONSISTENT_REPLICA()` hint enables the feature of reading consistent data from the TiKV follower node. For example:
-
-{{< copyable "sql" >}}
+ヒント`READ_CONSISTENT_REPLICA()`は、TiKV フォロワー ノードから一貫性のあるデータを読み取る機能を有効にします。例:
 
 ```sql
 select /*+ READ_CONSISTENT_REPLICA() */ * from t;
 ```
 
-In addition to this hint, setting the `tidb_replica_read` environment variable to `'follower'` or `'leader'` also controls whether to enable this feature.
+このヒントに加えて、環境変数`tidb_replica_read` `'follower'`または`'leader'`に設定することで、この機能を有効にするかどうかも制御できます。
 
-### IGNORE_PLAN_CACHE()
+### IGNORE_PLAN_CACHE() {#ignore-plan-cache}
 
-The `IGNORE_PLAN_CACHE()` hint reminds the optimizer not to use the Plan Cache when handling the current `prepare` statement.
+`IGNORE_PLAN_CACHE()`ヒントは、現在の`prepare`ステートメントを処理するときにプラン キャッシュを使用しないようにオプティマイザーに通知します。
 
-This hint is used to temporarily disable the Plan Cache for a certain type of queries when [prepare-plan-cache](/sql-prepared-plan-cache.md) is enabled.
+このヒントは、 [プランキャッシュの準備](/sql-prepared-plan-cache.md)が有効な場合に、特定の種類のクエリのプラン キャッシュを一時的に無効にするために使用されます。
 
-In the following example, the Plan Cache is forcibly disabled when executing the `prepare` statement.
-
-{{< copyable "sql" >}}
+次の例では、 `prepare`ステートメントを実行するときにプラン キャッシュが強制的に無効になります。
 
 ```sql
 prepare stmt from 'select  /*+ IGNORE_PLAN_CACHE() */ * from t where t.id = ?';
 ```
 
-### STRAIGHT_JOIN()
+### ストレート結合() {#straight-join}
 
-The `STRAIGHT_JOIN()` hint reminds the optimizer to join tables in the order of table names in the `FROM` clause when generating the join plan.
-
-{{< copyable "sql" >}}
+`STRAIGHT_JOIN()`ヒントは、結合プランを生成するときに、 `FROM`句のテーブル名の順序でテーブルを結合するようにオプティマイザーに通知します。
 
 ```sql
 SELECT /*+ STRAIGHT_JOIN() */ * FROM t t1, t t2 WHERE t1.a = t2.a;
 ```
 
-> **Note:**
+> **注記：**
 >
-> - `STRAIGHT_JOIN` has higher priority over `LEADING`. When both hints are used, `LEADING` does not take effect.
-> - It is recommended to use the `LEADING` hint, which is more general than the `STRAIGHT_JOIN` hint.
+> -   `STRAIGHT_JOIN`は`LEADING`よりも優先されます。両方のヒントが使用される場合、 `LEADING`効果がありません。
+> -   `STRAIGHT_JOIN`ヒントよりも一般的な`LEADING`ヒントを使用することをお勧めします。
 
-### NTH_PLAN(N)
+### NTH_PLAN(N) {#nth-plan-n}
 
-The `NTH_PLAN(N)` hint reminds the optimizer to select the `N`th physical plan found during the physical optimization. `N` must be a positive integer.
+ヒント`NTH_PLAN(N)`は、物理最適化中に見つかった`N`番目の物理プランを選択するようにオプティマイザに通知します。5 `N`正の整数である必要があります。
 
-If the specified `N` is beyond the search range of the physical optimization, TiDB will return a warning and select the optimal physical plan based on the strategy that ignores this hint.
+指定された`N`物理最適化の検索範囲を超える場合、TiDB は警告を返し、このヒントを無視する戦略に基づいて最適な物理プランを選択します。
 
-This hint does not take effect when the cascades planner is enabled.
+カスケード プランナーが有効な場合、このヒントは効果がありません。
 
-In the following example, the optimizer is forced to select the third physical plan found during the physical optimization:
-
-{{< copyable "sql" >}}
+次の例では、オプティマイザーは物理的な最適化中に見つかった 3 番目の物理プランを選択するように強制されます。
 
 ```sql
 SELECT /*+ NTH_PLAN(3) */ count(*) from t where a > 5;
 ```
 
-> **Note:**
+> **注記：**
 >
-> `NTH_PLAN(N)` is mainly used for testing, and its compatibility is not guaranteed in later versions. Use this hint **with caution**.
+> `NTH_PLAN(N)`は主にテストに使用され、それ以降のバージョンとの互換性は保証されません。このヒントは**注意して**使用してください。
 
-### RESOURCE_GROUP(resource_group_name)
+### RESOURCE_GROUP(リソースグループ名) {#resource-group-resource-group-name}
 
-`RESOURCE_GROUP(resource_group_name)` is used for [Resource Control](/tidb-resource-control.md) to isolate resources. This hint temporarily executes the current statement using the specified resource group. If the specified resource group does not exist, this hint will be ignored.
+`RESOURCE_GROUP(resource_group_name)`は[リソース管理](/tidb-resource-control.md)に使用され、リソースを分離します。このヒントは、指定されたリソース グループを使用して現在のステートメントを一時的に実行します。指定されたリソース グループが存在しない場合、このヒントは無視されます。
 
-Example:
+例：
 
 ```sql
 SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 ```
 
-## Troubleshoot common issues that hints do not take effect
+## ヒントが効かない一般的な問題のトラブルシューティング {#troubleshoot-common-issues-that-hints-do-not-take-effect}
 
-### Hints do not take effect because your MySQL command-line client strips hints
+### MySQLコマンドラインクライアントがヒントを削除するため、ヒントは有効になりません。 {#hints-do-not-take-effect-because-your-mysql-command-line-client-strips-hints}
 
-MySQL command-line clients earlier than 5.7.7 strip optimizer hints by default. If you want to use the Hint syntax in these earlier versions, add the `--comments` option when starting the client. For example: `mysql -h 127.0.0.1 -P 4000 -uroot --comments`.
+5.7.7 より前の MySQL コマンドライン クライアントは、デフォルトでオプティマイザ ヒントを削除します。これらの以前のバージョンでヒント構文を使用する場合は、クライアントの起動時に`--comments`オプションを追加します。例: `mysql -h 127.0.0.1 -P 4000 -uroot --comments` 。
 
-### Hints do not take effect because the database name is not specified
+### データベース名が指定されていないため、ヒントは有効になりません {#hints-do-not-take-effect-because-the-database-name-is-not-specified}
 
-If you do not specify the database name when creating a connection, hints might not take effect. For example:
+接続を作成するときにデータベース名を指定しないと、ヒントが有効にならない場合があります。例:
 
-When connecting to TiDB, you use the `mysql -h127.0.0.1 -P4000 -uroot` command without the `-D` option, and then execute the following SQL statements:
+TiDB に接続するときは、 `-D`オプションなしで`mysql -h127.0.0.1 -P4000 -uroot`コマンドを使用し、次の SQL ステートメントを実行します。
 
 ```sql
 SELECT /*+ use_index(t, a) */ a FROM test.t;
 SHOW WARNINGS;
 ```
 
-Because TiDB cannot identify the database for table `t`, the `use_index(t, a)` hint does not take effect.
+TiDB はテーブル`t`のデータベースを識別できないため、ヒント`use_index(t, a)`は有効になりません。
 
 ```sql
 +---------+------+----------------------------------------------------------------------+
@@ -881,9 +821,9 @@ Because TiDB cannot identify the database for table `t`, the `use_index(t, a)` h
 1 row in set (0.00 sec)
 ```
 
-### Hints do not take effect because the database name is not explicitly specified in cross-table queries
+### クロステーブルクエリでデータベース名が明示的に指定されていないため、ヒントは有効になりません。 {#hints-do-not-take-effect-because-the-database-name-is-not-explicitly-specified-in-cross-table-queries}
 
-When executing cross-table queries, you need to explicitly specify database names. Otherwise, hints might not take effect. For example:
+クロステーブルクエリを実行するときは、データベース名を明示的に指定する必要があります。そうしないと、ヒントが有効にならない可能性があります。例:
 
 ```sql
 USE test1;
@@ -894,7 +834,7 @@ SELECT /*+ use_index(t1, a) */ * FROM test1.t1, t2;
 SHOW WARNINGS;
 ```
 
-In the preceding statements, because table `t1` is not in the current `test2` database, the `use_index(t1, a)` hint does not take effect.
+上記のステートメントでは、テーブル`t1`が現在の`test2`データベースに存在しないため、 `use_index(t1, a)`ヒントは有効になりません。
 
 ```sql
 +---------+------+----------------------------------------------------------------------------------+
@@ -905,18 +845,18 @@ In the preceding statements, because table `t1` is not in the current `test2` da
 1 row in set (0.00 sec)
 ```
 
-In this case, you need to specify the database name explicitly by using `use_index(test1.t1, a)` instead of `use_index(t1, a)`.
+この場合、 `use_index(t1, a)`ではなく`use_index(test1.t1, a)`を使用してデータベース名を明示的に指定する必要があります。
 
-### Hints do not take effect because they are placed in wrong locations
+### ヒントは間違った場所に配置されているため有効になりません {#hints-do-not-take-effect-because-they-are-placed-in-wrong-locations}
 
-Hints cannot take effect if they are not placed directly after the specific keywords. For example:
+ヒントは、特定のキーワードの直後に配置されていない場合は有効になりません。例:
 
 ```sql
 SELECT * /*+ use_index(t, a) */ FROM t;
 SHOW WARNINGS;
 ```
 
-The warning is as follows:
+警告は次のとおりです。
 
 ```sql
 +---------+------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -927,11 +867,11 @@ The warning is as follows:
 1 row in set (0.01 sec)
 ```
 
-In this case, you need to place the hint directly after the `SELECT` keyword. For more details, see the [Syntax](#syntax) section.
+この場合、ヒントを`SELECT`キーワードの直後に配置する必要があります。詳細については、 [構文](#syntax)セクションを参照してください。
 
-### INL_JOIN hint does not take effect due to collation incompatibility
+### INL_JOINヒントは照合順序順序の非互換性のため有効になりません {#inl-join-hint-does-not-take-effect-due-to-collation-incompatibility}
 
-When the collation of the join key is incompatible between two tables, the `IndexJoin` operator cannot be utilized to execute the query. In this case, the [`INL_JOIN` hint](#inl_joint1_name--tl_name-) does not take effect. For example:
+2 つのテーブル間で結合キーの照合順序順序に互換性がない場合、 `IndexJoin`演算子を使用してクエリを実行することはできません。この場合、 [`INL_JOIN`ヒント](#inl_joint1_name--tl_name-)有効になりません。例:
 
 ```sql
 CREATE TABLE t1 (k varchar(8), key(k)) COLLATE=utf8mb4_general_ci;
@@ -939,7 +879,7 @@ CREATE TABLE t2 (k varchar(8), key(k)) COLLATE=utf8mb4_bin;
 EXPLAIN SELECT /*+ tidb_inlj(t1) */ * FROM t1, t2 WHERE t1.k=t2.k;
 ```
 
-The execution plan is as follows:
+実行計画は次のとおりです。
 
 ```sql
 +-----------------------------+----------+-----------+----------------------+----------------------------------------------+
@@ -954,7 +894,7 @@ The execution plan is as follows:
 5 rows in set, 1 warning (0.00 sec)
 ```
 
-In the preceding statements, the collations of `t1.k` and `t2.k` are incompatible (`utf8mb4_general_ci` and `utf8mb4_bin` respectively), which prevents the `INL_JOIN` or `TIDB_INLJ` hint from taking effect.
+前述のステートメントでは、照合順序`t1.k`と`t2.k`に互換性がないため (それぞれ`utf8mb4_general_ci`と`utf8mb4_bin` )、ヒント`INL_JOIN`または`TIDB_INLJ`有効になりません。
 
 ```sql
 SHOW WARNINGS;
@@ -966,9 +906,9 @@ SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-### `INL_JOIN` hint does not take effect because of join order
+### <code>INL_JOIN</code>ヒントは結合順序のため有効になりません {#code-inl-join-code-hint-does-not-take-effect-because-of-join-order}
 
-The [`INL_JOIN(t1, t2)`](#inl_joint1_name--tl_name-) or `TIDB_INLJ(t1, t2)` hint semantically instructs `t1` and `t2` to act as inner tables in an `IndexJoin` operator to join with other tables, rather than directly joining them using an `IndexJoin` operator. For example:
+[`INL_JOIN(t1, t2)`](#inl_joint1_name--tl_name-)または`TIDB_INLJ(t1, t2)`ヒントは、 `IndexJoin`演算子を使用して直接結合するのではなく、 `t1`と`t2` `IndexJoin`演算子の内部テーブルとして動作させて他のテーブルと結合するように意味的に指示します。例:
 
 ```sql
 EXPLAIN SELECT /*+ inl_join(t1, t3) */ * FROM t1, t2, t3 WHERE t1.id = t2.id AND t2.id = t3.id AND t1.id = t3.id;
@@ -986,9 +926,9 @@ EXPLAIN SELECT /*+ inl_join(t1, t3) */ * FROM t1, t2, t3 WHERE t1.id = t2.id AND
 +---------------------------------+----------+-----------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-In the preceding example, `t1` and `t3` are not directly joined together by an `IndexJoin`.
+前の例では、 `t1`と`t3` `IndexJoin`によって直接結合されていません。
 
-To perform a direct `IndexJoin` between `t1` and `t3`, you can first use [`LEADING(t1, t3)` hint](#leadingt1_name--tl_name-) to specify the join order of `t1` and `t3`, and then use the `INL_JOIN` hint to specify the join algorithm. For example:
+`t1`と`t3`の間で直接`IndexJoin`実行するには、まず[`LEADING(t1, t3)`ヒント](#leadingt1_name--tl_name-)を使用して`t1`と`t3`の結合順序を指定し、次に`INL_JOIN`ヒントを使用して結合アルゴリズムを指定します。例:
 
 ```sql
 EXPLAIN SELECT /*+ leading(t1, t3), inl_join(t3) */ * FROM t1, t2, t3 WHERE t1.id = t2.id AND t2.id = t3.id AND t1.id = t3.id;
@@ -1008,12 +948,12 @@ EXPLAIN SELECT /*+ leading(t1, t3), inl_join(t3) */ * FROM t1, t2, t3 WHERE t1.i
 9 rows in set (0.01 sec)
 ```
 
-### Using hints causes the `Can't find a proper physical plan for this query` error
+### ヒントを使用すると<code>Can&#39;t find a proper physical plan for this query</code>エラーが発生します。 {#using-hints-causes-the-code-can-t-find-a-proper-physical-plan-for-this-query-code-error}
 
-The `Can't find a proper physical plan for this query` error might occur in the following scenarios:
+`Can't find a proper physical plan for this query`エラーは次のシナリオで発生する可能性があります。
 
-- A query itself does not require reading indexes in order. That is, for this query, the optimizer does not generate a plan to read indexes in order in any case without using hints. In this case, if the `ORDER_INDEX` hint is specified, this error occurs. To resolve this issue, remove the corresponding `ORDER_INDEX` hint.
-- A query excludes all possible join methods by using the `NO_JOIN` related hints.
+-   クエリ自体は、インデックスを順番に読み取る必要はありません。つまり、このクエリでは、ヒントを使用せずにインデックスを順番に読み取るプランをオプティマイザーが生成することはありません。この場合、 `ORDER_INDEX`ヒントが指定されていると、このエラーが発生します。この問題を解決するには、対応する`ORDER_INDEX`ヒントを削除します。
+-   クエリは、 `NO_JOIN`関連するヒントを使用して、可能なすべての結合方法を除外します。
 
 ```sql
 CREATE TABLE t1 (a INT);
@@ -1022,7 +962,7 @@ EXPLAIN SELECT /*+ NO_HASH_JOIN(t1), NO_MERGE_JOIN(t1) */ * FROM t1, t2 WHERE t1
 ERROR 1815 (HY000): Internal : Can't find a proper physical plan for this query
 ```
 
-- The system variable [`tidb_opt_enable_hash_join`](/system-variables.md#tidb_opt_enable_hash_join-new-in-v656-v712-and-v740) is set to `OFF`, and all other join types are also excluded.
+-   システム変数[`tidb_opt_enable_hash_join`](/system-variables.md#tidb_opt_enable_hash_join-new-in-v656-v712-and-v740)は`OFF`に設定され、他のすべての結合タイプも除外されます。
 
 ```sql
 CREATE TABLE t1 (a INT);

@@ -1,337 +1,342 @@
 ---
 title: Introduction to Statistics
-summary: Learn how the statistics collect table-level and column-level information.
+summary: 統計がテーブルレベルおよび列レベルの情報を収集する方法を学習します。
 ---
 
-# Introduction to Statistics
+# 統計入門 {#introduction-to-statistics}
 
-TiDB uses statistics as input to the optimizer to estimate the number of rows processed in each plan step for a SQL statement. The optimizer estimates the cost of each available plan choice, including [index accesses](/choose-index.md) and the sequence of table joins, and produces a cost for each available plan. The optimizer then picks the execution plan with the lowest overall cost.
+TiDB は、統計情報をオプティマイザへの入力として使用し、SQL ステートメントの各プラン ステップで処理される行数を推定します。オプティマイザは、 [インデックスアクセス](/choose-index.md)とテーブル結合のシーケンスを含む、使用可能な各プラン選択のコストを推定し、使用可能な各プランのコストを生成します。次に、オプティマイザは、全体的なコストが最も低い実行プランを選択します。
 
-## Collect statistics
+## 統計を収集する {#collect-statistics}
 
-### Automatic update
+### 自動更新 {#automatic-update}
 
-For the [`INSERT`](/sql-statements/sql-statement-insert.md), [`DELETE`](/sql-statements/sql-statement-delete.md), or [`UPDATE`](/sql-statements/sql-statement-update.md) statements, TiDB automatically updates the number of rows and modified rows in statistics.
+[`INSERT`](/sql-statements/sql-statement-insert.md) 、 [`DELETE`](/sql-statements/sql-statement-delete.md) 、または[`UPDATE`](/sql-statements/sql-statement-update.md)ステートメントの場合、TiDB は統計内の行数と変更された行数を自動的に更新します。
 
 <CustomContent platform="tidb">
 
-TiDB persists the update information regularly and the update cycle is 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease). The default value of `stats-lease` is `3s`. If you specify the value as `0`, TiDB stops updating statistics automatically.
+TiDB は定期的に更新情報を保持し、更新サイクルは 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease)です。デフォルト値は`stats-lease`で、 `3s`です。値を`0`に指定すると、TiDB は統計の更新を自動的に停止します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-TiDB persists the update information every 60 seconds.
+TiDB は 60 秒ごとに更新情報を保持します。
 
 </CustomContent>
 
-Based upon the number of changes to a table, TiDB will automatically schedule [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) to collect statistics on those tables. This is controlled by the [`tidb_enable_auto_anlyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) system variable and the following `tidb_auto_analyze%` variables.
+テーブルへの変更の数に基づいて、TiDB はそれらのテーブルの統計情報を収集するスケジュールを自動的に[`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)設定します。これは、 [`tidb_enable_auto_anlyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610)システム変数と次の`tidb_auto_analyze%`の変数によって制御されます。
 
-|  System Variable | Default Value | Description |
-|---|---|---|
-| [`tidb_enable_auto_anlyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) | true | Controls whether TiDB automatically executes ANALYZE. |
-| [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio) | 0.5 | The threshold value of automatic update |
-| [`tidb_auto_analyze_start_time`](/system-variables.md#tidb_auto_analyze_start_time) | `00:00 +0000` | The start time in a day when TiDB can perform automatic update |
-| [`tidb_auto_analyze_end_time`](/system-variables.md#tidb_auto_analyze_end_time)   | `23:59 +0000` | The end time in a day when TiDB can perform automatic update |
-| [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640) | `128` | The number of partitions that TiDB automatically analyzes when analyzing a partitioned table (that is, when automatically updating statistics on a partitioned table) |
-| [`tidb_enable_auto_analyze_priority_queue`](/system-variables.md#tidb_enable_auto_analyze_priority_queue-new-in-v800) | `ON` | Controls whether to enable the priority queue to schedule the tasks of automatically collecting statistics. When this variable is enabled, TiDB prioritizes collecting statistics for tables that are more valuable to collect, such as newly created indexes and partitioned tables with partition changes. Additionally, TiDB prioritizes tables with lower health scores, placing them at the front of the queue. |
+| システム変数                                                                                                                | デフォルト値        | 説明                                                                                                                                                                               |
+| --------------------------------------------------------------------------------------------------------------------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`tidb_enable_auto_anlyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610)                                | 真実            | TiDB が ANALYZE を自動的に実行するかどうかを制御します。                                                                                                                                              |
+| [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio)                                             | 0.5           | 自動更新の閾値                                                                                                                                                                          |
+| [`tidb_auto_analyze_start_time`](/system-variables.md#tidb_auto_analyze_start_time)                                   | `00:00 +0000` | TiDBが自動更新を実行できる1日の開始時刻                                                                                                                                                           |
+| [`tidb_auto_analyze_end_time`](/system-variables.md#tidb_auto_analyze_end_time)                                       | `23:59 +0000` | TiDBが自動更新を実行できる1日の終了時刻                                                                                                                                                           |
+| [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640)   | `128`         | パーティションテーブルを分析するときに TiDB が自動的に分析するパーティションの数 (つまり、パーティションテーブルの統計を自動的に更新するとき)                                                                                                      |
+| [`tidb_enable_auto_analyze_priority_queue`](/system-variables.md#tidb_enable_auto_analyze_priority_queue-new-in-v800) | `ON`          | 優先キューを有効にして、統計を自動的に収集するタスクをスケジュールするかどうかを制御します。この変数を有効にすると、TiDB は、新しく作成されたインデックスやパーティションが変更されたパーティション テーブルなど、収集する価値の高いテーブルの統計の収集を優先します。さらに、TiDB はヘルス スコアが低いテーブルを優先し、キューの先頭に配置します。 |
 
-When the ratio of the number of modified rows to the total number of rows of `tbl` in a table is greater than `tidb_auto_analyze_ratio`, and the current time is between `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time`, TiDB executes the `ANALYZE TABLE tbl` statement in the background to automatically update the statistics on this table.
+テーブル内の変更された行数と`tbl`の行の合計数の比率が`tidb_auto_analyze_ratio`より大きく、現在の時刻が`tidb_auto_analyze_start_time`から`tidb_auto_analyze_end_time`間である場合、TiDB はバックグラウンドで`ANALYZE TABLE tbl`ステートメントを実行し、このテーブルの統計を自動的に更新します。
 
-To avoid the situation that modifying data on a small table frequently triggers the automatic update, when a table has less than 1000 rows, modifications do not trigger the automatic update in TiDB. You can use the `SHOW STATS_META` statement to view the number of rows in a table.
+小さなテーブルのデータを変更すると頻繁に自動更新がトリガーされる状況を回避するために、テーブルの行数が 1000 未満の場合、変更によって TiDB の自動更新はトリガーされません。 `SHOW STATS_META`ステートメントを使用して、テーブル内の行数を表示できます。
 
-> **Note:**
+> **注記：**
 >
-> Currently, the automatic update does not record the configuration items input at manual `ANALYZE`. Therefore, when you use the `WITH` syntax to control the collecting behavior of `ANALYZE`, you need to manually set scheduled tasks to collect statistics.
+> 現在、自動更新では、手動`ANALYZE`で入力した設定項目は記録されません。そのため、 `WITH`構文を使用して`ANALYZE`の収集動作を制御する場合は、統計情報を収集するためのスケジュールされたタスクを手動で設定する必要があります。
 
-### Manual collection
+### 手動収集 {#manual-collection}
 
-Currently, TiDB collects statistical information as a full collection. You can execute the `ANALYZE TABLE` statement to collect statistics.
+現在、TiDB は完全なコレクションとして統計情報を収集します。統計を収集するには、 `ANALYZE TABLE`ステートメントを実行できます。
 
-You can perform full collection using the following syntax.
+次の構文を使用して完全なコレクションを実行できます。
 
-+ To collect statistics of all the tables in `TableNameList`:
+-   `TableNameList`内のすべてのテーブルの統計を収集するには:
 
     ```sql
     ANALYZE TABLE TableNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
-+ `WITH NUM BUCKETS` specifies the maximum number of buckets in the generated histogram.
-+ `WITH NUM TOPN` specifies the maximum number of the generated `TOPN`s.
-+ `WITH NUM CMSKETCH DEPTH` specifies the depth of the CM Sketch.
-+ `WITH NUM CMSKETCH WIDTH` specifies the width of the CM Sketch.
-+ `WITH NUM SAMPLES` specifies the number of samples.
-+ `WITH FLOAT_NUM SAMPLERATE` specifies the sampling rate.
+-   `WITH NUM BUCKETS` 、生成されたヒストグラム内のバケットの最大数を指定します。
 
-`WITH NUM SAMPLES` and `WITH FLOAT_NUM SAMPLERATE` correspond to two different algorithms of collecting samples.
+-   `WITH NUM TOPN`生成される`TOPN`の最大数を指定します。
 
-See [Histograms](#histogram), [Top-N](#top-n-values) and [CMSketch](#count-min-sketch) (Count-Min Sketch) for detailed explanations. For `SAMPLES`/`SAMPLERATE`, see [Improve collection performance](#improve-collection-performance).
+-   `WITH NUM CMSKETCH DEPTH` CM スケッチの深さを指定します。
 
-For information on persisting the options for easier reuse, see [Persist ANALYZE configurations](#persist-analyze-configurations).
+-   `WITH NUM CMSKETCH WIDTH` CM スケッチの幅を指定します。
 
-## Types of statistics
+-   `WITH NUM SAMPLES`サンプル数を指定します。
 
-### Histogram
+-   `WITH FLOAT_NUM SAMPLERATE`サンプリング レートを指定します。
 
-Histogram statistics are used by the optimizer to estimate selectivity of an interval or range predicate, and might also be used to determine the number of distinct values within a column for estimation of equal/IN predicates in Version 2 of statistics (refer to [Versions of Statistics](#versions-of-statistics)).
+`WITH NUM SAMPLES`と`WITH FLOAT_NUM SAMPLERATE`サンプルを収集する 2 つの異なるアルゴリズムに対応します。
 
-A histogram is an approximate representation of the distribution of data. It divides the entire range of values into a series of buckets, and uses simple data to describe each bucket, such as the number of values ​​falling in the bucket. In TiDB, an equal-depth histogram is created for the specific columns of each table. The equal-depth histogram can be used to estimate the interval query.
+詳しい説明については[ヒストグラム](#histogram) 、 [トップN](#top-n-values) 、 [CMSketch](#count-min-sketch) (Count-Min Sketch) を参照してください。 `SAMPLES` / `SAMPLERATE`については[収集パフォーマンスの向上](#improve-collection-performance)を参照してください。
 
-Here "equal-depth" means that the number of values ​​falling into each bucket is as equal as possible. For example, for a given set {1.6, 1.9, 1.9, 2.0, 2.4, 2.6, 2.7, 2.7, 2.8, 2.9, 3.4, 3.5}, you want to generate 4 buckets. The equal-depth histogram is as follows. It contains four buckets [1.6, 1.9], [2.0, 2.6], [2.7, 2.8], [2.9, 3.5]. The bucket depth is 3.
+オプションを永続化して再利用しやすくする方法については、 [ANALYZE構成を永続化する](#persist-analyze-configurations)参照してください。
+
+## 統計の種類 {#types-of-statistics}
+
+### ヒストグラム {#histogram}
+
+ヒストグラム統計は、間隔述語または範囲述語の選択性を推定するためにオプティマイザによって使用され、統計のバージョン 2 で等号/IN 述語を推定するために列内の異なる値の数を決定するために使用されることもあります ( [統計のバージョン](#versions-of-statistics)を参照)。
+
+ヒストグラムは、データの分布を大まかに表したものです。値の範囲全体を一連のバケットに分割し、バケットに含まれる値の数など、単純なデータを使用して各バケットを説明します。TiDB では、各テーブルの特定の列に対して等深度ヒストグラムが作成されます。等深度ヒストグラムを使用して、間隔クエリを推定できます。
+
+ここで「等深度」とは、各バケットに入る値の数が可能な限り等しくなることを意味します。たとえば、特定のセット {1.6、1.9、1.9、2.0、2.4、2.6、2.7、2.7、2.8、2.9、3.4、3.5} に対して、4 つのバケットを生成するとします。等深度ヒストグラムは次のようになります。[1.6、1.9]、[2.0、2.6]、[2.7、2.8]、[2.9、3.5] の 4 つのバケットが含まれます。バケットの深さは 3 です。
 
 ![Equal-depth Histogram Example](/media/statistics-1.png)
 
-For details about the parameter that determines the upper limit to the number of histogram buckets, refer to [Manual Collection](#manual-collection). When the number of buckets is larger, the accuracy of the histogram is higher; however, higher accuracy is at the cost of the usage of memory resources. You can adjust this number appropriately according to the actual scenario.
+ヒストグラムのバケット数の上限を決定するパラメータの詳細については、 [手動収集](#manual-collection)を参照してください。バケット数が多いほどヒストグラムの精度は高くなりますが、精度が高くなるとメモリリソースの使用量が増大します。実際のシナリオに応じて、この数値を適切に調整できます。
 
-### Count-Min Sketch
+### カウントミニマムスケッチ {#count-min-sketch}
 
-> **Note:**
+> **注記：**
 >
-> Count-Min Sketch is used in statistics Version 1 only for equal/IN predicate selectivity estimation. In Version 2, other statistics are used due to challenges in managing Count-Min sketch to avoid collisions as discussed below.
+> Count-Min スケッチは、統計バージョン 1 では、equal/IN 述語の選択性推定にのみ使用されます。バージョン 2 では、以下で説明するように、衝突を回避するために Count-Min スケッチを管理することが困難なため、他の統計が使用されます。
 
-Count-Min Sketch is a hash structure. When an equivalence query contains `a = 1` or `IN` query (for example, `a IN (1, 2, 3)`), TiDB uses this data structure for estimation.
+Count-Min Sketch はハッシュ構造です。等価クエリに`a = 1`または`IN`クエリ (たとえば`a IN (1, 2, 3)` ) が含まれる場合、TiDB はこのデータ構造を使用して推定を行います。
 
-A hash collision might occur since Count-Min Sketch is a hash structure. In the [`EXPLAIN`](/sql-statements/sql-statement-explain.md) statement, if the estimate of the equivalent query deviates greatly from the actual value, it can be considered that a larger value and a smaller value have been hashed together. In this case, you can take one of the following ways to avoid the hash collision:
+Count-Min Sketch [`EXPLAIN`](/sql-statements/sql-statement-explain.md)ハッシュ構造であるため、ハッシュ衝突が発生する可能性があります。1 文で、等価クエリの推定値が実際の値と大きく異なる場合、大きい値と小さい値が一緒にハッシュされていると考えられます。この場合、ハッシュ衝突を回避するには、次のいずれかの方法を実行します。
 
-- Modify the `WITH NUM TOPN` parameter. TiDB stores the high-frequency (top x) data separately, with the other data stored in Count-Min Sketch. Therefore, to prevent a larger value and a smaller value from being hashed together, you can increase the value of `WITH NUM TOPN`. In TiDB, its default value is 20. The maximum value is 1024. For more information about this parameter, see [Manual collection](#manual-collection).
-- Modify two parameters `WITH NUM CMSKETCH DEPTH` and `WITH NUM CMSKETCH WIDTH`. Both affect the number of hash buckets and the collision probability. You can increase the values of the two parameters appropriately according to the actual scenario to reduce the probability of hash collision, but at the cost of higher memory usage of statistics. In TiDB, the default value of `WITH NUM CMSKETCH DEPTH` is 5, and the default value of `WITH NUM CMSKETCH WIDTH` is 2048. For more information about the two parameters, see [Manual collection](#manual-collection).
+-   `WITH NUM TOPN`パラメータを変更します。TiDB は高頻度 (上位 x) データを別々に保存し、その他のデータは Count-Min Sketch に保存します。したがって、大きい値と小さい値が一緒にハッシュされるのを防ぐには、 `WITH NUM TOPN`の値を増やすことができます。TiDB では、デフォルト値は 20 です。最大値は 1024 です。このパラメータの詳細については、 [手動収集](#manual-collection)を参照してください。
+-   2 つのパラメータ`WITH NUM CMSKETCH DEPTH`と`WITH NUM CMSKETCH WIDTH`を変更します。どちらもハッシュ バケットの数と衝突確率に影響します。実際のシナリオに応じて 2 つのパラメータの値を適切に増やすと、ハッシュ衝突の確率を下げることができますが、統計のメモリ使用量が高くなります。TiDB では、デフォルト値`WITH NUM CMSKETCH DEPTH`は 5、デフォルト値`WITH NUM CMSKETCH WIDTH`は 2048 です。2 つのパラメータの詳細については、 [手動収集](#manual-collection)を参照してください。
 
-### Top-N values
+### 上位Nの値 {#top-n-values}
 
-Top-N values are values with the top N occurrences in a column or index. Top-N statistics are often referred to as frequency statistics or data skew.
+上位 N 値は、列またはインデックス内で上位 N 個出現する値です。上位 N 統計は、頻度統計またはデータ スキューと呼ばれることもあります。
 
-TiDB records the values and occurrences of Top-N values. The default value is 20, meaning the top 20 most frequent values are collected. The maximum value is 1024. For details about the parameter that determines the number of values collected, see [Manual collection](#manual-collection).
+TiDB は、Top-N 値の値と発生回数を記録します。デフォルト値は 20 で、最も頻繁に発生する上位 20 個の値が収集されることを意味します。最大値は 1024 です。収集される値の数を決定するパラメータの詳細については、 [手動収集](#manual-collection)参照してください。
 
-## Selective statistics collection
+## 選択的統計収集 {#selective-statistics-collection}
 
-### Collect statistics on indexes
+### インデックスの統計を収集する {#collect-statistics-on-indexes}
 
-To collect statistics on all indexes in `IndexNameList` in `TableName`, use the following syntax:
+`IndexNameList` in `TableName`のすべてのインデックスの統計を収集するには、次の構文を使用します。
 
 ```sql
 ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
 ```
 
-When `IndexNameList` is empty, this syntax collects statistics on all indexes in `TableName`.
+`IndexNameList`が空の場合、この構文は`TableName`内のすべてのインデックスの統計を収集します。
 
-> **Note:**
+> **注記：**
 >
-> To ensure that the statistical information before and after the collection is consistent, when `tidb_analyze_version` is `2`, this syntax collects statistics on the entire table (including all columns and indexes), instead of only on indexes.
+> 収集前後の統計情報の一貫性を確保するために、 `tidb_analyze_version`が`2`の場合、この構文はインデックスだけでなく、テーブル全体 (すべての列とインデックスを含む) の統計を収集します。
 
-### Collect statistics on some columns
+### いくつかの列の統計を収集する {#collect-statistics-on-some-columns}
 
-In most cases, the optimizer only uses statistics on columns in the `WHERE`, `JOIN`, `ORDER BY`, and `GROUP BY` statements. These columns can be referred to as `PREDICATE COLUMNS`.
+ほとんどの場合、オプティマイザは`WHERE` 、 `JOIN` 、 `ORDER BY` 、および`GROUP BY`ステートメントの列の統計のみを使用します。これらの列は`PREDICATE COLUMNS`として参照できます。
 
-If a table has many columns, collecting statistics on all the columns can cause a large overhead. To reduce the overhead, you can collect statistics on only specific columns (that you choose) or `PREDICATE COLUMNS` to be used by the optimizer. To persist the column list of any subset of columns for reuse in future, see [Persist column configurations](#persist-column-configurations).
+テーブルに多数の列がある場合、すべての列の統計を収集すると、大きなオーバーヘッドが発生する可能性があります。オーバーヘッドを削減するには、特定の列（選択した列）のみの統計を収集するか、オプティマイザーが使用する`PREDICATE COLUMNS`のみの統計を収集します。将来再利用できるように列のサブセットの列リストを保持するには、 [列構成の保持](#persist-column-configurations)を参照してください。
 
-> **Note:**
+> **注記：**
 >
-> - Collecting statistics on predicate columns is only applicable for [`tidb_analyze_version = 2`](/system-variables.md#tidb_analyze_version-new-in-v510).
-> - Starting from TiDB v7.2.0, TiDB also introduces the [`tidb_analyze_skip_column_types`](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720) system variable, indicating which types of columns are skipped for statistics collection when executing the `ANALYZE` command to collect statistics. The system variable is only applicable for `tidb_analyze_version = 2`.
+> -   述語列の統計の収集は[`tidb_analyze_version = 2`](/system-variables.md#tidb_analyze_version-new-in-v510)にのみ適用されます。
+> -   TiDB v7.2.0 以降、TiDB では[`tidb_analyze_skip_column_types`](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720)システム変数も導入され、統計を収集する`ANALYZE`コマンドを実行するときに、統計収集でスキップされる列の種類を示します。システム変数は`tidb_analyze_version = 2`にのみ適用されます。
 
-- To collect statistics on specific columns, use the following syntax:
+-   特定の列の統計を収集するには、次の構文を使用します。
 
     ```sql
     ANALYZE TABLE TableName COLUMNS ColumnNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
-    In the syntax, `ColumnNameList` specifies the name list of the target columns. If you need to specify more than one column, use comma `,` to separate the column names. For example, `ANALYZE table t columns a, b`. Besides collecting statistics on the specific columns in a specific table, this syntax collects statistics on the indexed columns and all indexes in that table at the same time.
+    構文では、 `ColumnNameList`​​ターゲット列の名前リストを指定します。複数の列を指定する必要がある場合は、列名をコンマ`,`で区切ります。たとえば、 `ANALYZE table t columns a, b` 。この構文では、特定のテーブルの特定の列の統計を収集するだけでなく、インデックス付き列とそのテーブルのすべてのインデックスの統計も同時に収集します。
 
-- To collect statistics on `PREDICATE COLUMNS`, do the following:
+-   `PREDICATE COLUMNS`の統計を収集するには、次の手順を実行します。
 
-    > **Warning:**
+    > **警告：**
     >
-    > Currently, collecting statistics on `PREDICATE COLUMNS` is an experimental feature. It is not recommended that you use it in production environments.
+    > 現在、 `PREDICATE COLUMNS`の統計収集は実験的機能です。本番環境での使用はお勧めしません。
 
-    1. Set the value of the [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540) system variable to `ON` to enable TiDB to collect `PREDICATE COLUMNS`.
+    1.  TiDB が`PREDICATE COLUMNS`を収集できるようにするには、 [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540)システム変数の値を`ON`に設定します。
 
         <CustomContent platform="tidb">
 
-        After the setting, TiDB writes the `PREDICATE COLUMNS` information to the `mysql.column_stats_usage` system table every 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease).
+        設定後、TiDB は 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease)ごとに`PREDICATE COLUMNS`情報を`mysql.column_stats_usage`システム テーブルに書き込みます。
 
         </CustomContent>
 
         <CustomContent platform="tidb-cloud">
 
-        After the setting, TiDB writes the `PREDICATE COLUMNS` information to the `mysql.column_stats_usage` system table every 300 seconds.
+        設定後、TiDB は 300 秒ごとに`PREDICATE COLUMNS`情報を`mysql.column_stats_usage`システム テーブルに書き込みます。
 
         </CustomContent>
 
-    2. After the query pattern of your business is relatively stable, collect statistics on `PREDICATE COLUMNS` by using the following syntax:
+    2.  ビジネスのクエリ パターンが比較的安定したら、次の構文を使用して`PREDICATE COLUMNS`の統計を収集します。
 
         ```sql
         ANALYZE TABLE TableName PREDICATE COLUMNS [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
         ```
 
-        Besides collecting statistics on `PREDICATE COLUMNS` in a specific table, this syntax collects statistics on indexed columns and all indexes in that table at the same time.
+        この構文は、特定のテーブル内の`PREDICATE COLUMNS`の統計を収集するだけでなく、そのテーブル内のインデックス付き列とすべてのインデックスの統計を同時に収集します。
 
-        > **Note:**
+        > **注記：**
         >
-        > - If the [`mysql.column_stats_usage`](/mysql-schema.md) system table does not contain any `PREDICATE COLUMNS` recorded for that table, the preceding syntax collects statistics on all columns and all indexes in that table.
-        > - Any columns excluded from collection (either by manually listing columns or using `PREDICATE COLUMNS`) will not have their statistics overwritten. When executing a new type of SQL query, the optimizer will use the old statistics for such columns if it exists or pseudo column statistics if columns never had statistics collected. The next ANALYZE using `PREDICATE COLUMNS` will collect the statistics on those columns.
+        > -   [`mysql.column_stats_usage`](/mysql-schema.md)システム テーブルにそのテーブルに対して記録された`PREDICATE COLUMNS`含まれていない場合、上記の構文は、そのテーブル内のすべての列とすべてのインデックスの統計を収集します。
+        > -   コレクションから除外された列 (手動で列をリストするか、 `PREDICATE COLUMNS`使用することで) の統計は上書きされません。新しいタイプの SQL クエリを実行すると、オプティマイザは、そのような列の古い統計 (存在する場合) または列の統計が収集されていない場合は疑似列統計を使用します。 `PREDICATE COLUMNS`を使用する次の ANALYZE では、それらの列の統計が収集されます。
 
-- To collect statistics on all columns and indexes, use the following syntax:
+-   すべての列とインデックスの統計を収集するには、次の構文を使用します。
 
     ```sql
     ANALYZE TABLE TableName ALL COLUMNS [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
-### Collect statistics on partitions
+### パーティションの統計を収集する {#collect-statistics-on-partitions}
 
-- To collect statistics on all partitions in `PartitionNameList` in `TableName`, use the following syntax:
+-   `PartitionNameList` in `TableName`のすべてのパーティションの統計を収集するには、次の構文を使用します。
 
     ```sql
     ANALYZE TABLE TableName PARTITION PartitionNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
-- To collect index statistics on all partitions in `PartitionNameList` in `TableName`, use the following syntax:
+-   `PartitionNameList` in `TableName`のすべてのパーティションのインデックス統計を収集するには、次の構文を使用します。
 
     ```sql
     ANALYZE TABLE TableName PARTITION PartitionNameList INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
-- If you only need to [collect statistics on some columns](/statistics.md#collect-statistics-on-some-columns) of some partitions in a table, use the following syntax:
+-   テーブル内の一部のパーティションの[いくつかの列の統計を収集する](/statistics.md#collect-statistics-on-some-columns)だけが必要な場合は、次の構文を使用します。
 
-    > **Warning:**
+    > **警告：**
     >
-    > Currently, collecting statistics on `PREDICATE COLUMNS` is an experimental feature. It is not recommended that you use it in production environments.
+    > 現在、 `PREDICATE COLUMNS`の統計収集は実験的機能です。本番環境での使用はお勧めしません。
 
     ```sql
     ANALYZE TABLE TableName PARTITION PartitionNameList [COLUMNS ColumnNameList|PREDICATE COLUMNS|ALL COLUMNS] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
-#### Collect statistics of partitioned tables in dynamic pruning mode
+#### 動的プルーニングモードでパーティションテーブルの統計を収集する {#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode}
 
-When accessing partitioned tables in [dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode) (which is the default since v6.3.0), TiDB collects table-level statistics, which is called GlobalStats. Currently, GlobalStats is aggregated from statistics of all partitions. In dynamic pruning mode, a statistics update of any partitioned table can trigger the GlobalStats to be updated.
+[動的剪定モード](/partitioned-table.md#dynamic-pruning-mode)でパーティション テーブルにアクセスすると (v6.3.0 以降のデフォルト)、TiDB はテーブル レベルの統計 (GlobalStats と呼ばれる) を収集します。現在、GlobalStats はすべてのパーティションの統計から集計されます。動的プルーニング モードでは、パーティションテーブルの統計の更新によって GlobalStats の更新がトリガーされることがあります。
 
-If partitions are empty, or columns for some partitions are missing, then the collection behavior is controlled by the [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730) variable:
+パーティションが空の場合、または一部のパーティションの列が欠落している場合、コレクションの動作は[`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730)変数によって制御されます。
 
-- When GlobalStats update is triggered and [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730) is `OFF`:
+-   GlobalStats 更新がトリガーされ、 [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730)が`OFF`場合:
 
-    - If some partitions have no statistics (such as a new partition that has never been analyzed), GlobalStats generation is interrupted and a warning message is displayed saying that no statistics are available on partitions.
+    -   一部のパーティションに統計がない場合 (分析されたことのない新しいパーティションなど)、GlobalStats の生成が中断され、パーティションに統計がないことを示す警告メッセージが表示されます。
 
-    - If statistics of some columns are absent in specific partitions (different columns are specified for analyzing in these partitions), GlobalStats generation is interrupted when statistics of these columns are aggregated, and a warning message is displayed saying that statistics of some columns are absent in specific partitions.
+    -   特定のパーティションに一部の列の統計情報がない場合 (これらのパーティションで分析用に異なる列が指定されている場合)、これらの列の統計情報が集計されるときに GlobalStats の生成が中断され、特定のパーティションに一部の列の統計情報が存在しないことを示す警告メッセージが表示されます。
 
-- When GlobalStats update is triggered and [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730) is `ON`:
+-   GlobalStats 更新がトリガーされ、 [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730)が`ON`場合:
 
-    - If statistics of all or some columns are missing for some partitions, TiDB skips these missing partition statistics when generating GlobalStats so the generation of GlobalStats is not affected.
+    -   一部のパーティションのすべての列または一部の列の統計が欠落している場合、TiDB は GlobalStats を生成するときにこれらの欠落しているパーティションの統計をスキップするため、GlobalStats の生成には影響しません。
 
-In dynamic pruning mode, the Analyze configurations of partitions and tables should be the same. Therefore, if you specify the `COLUMNS` configuration following the `ANALYZE TABLE TableName PARTITION PartitionNameList` statement or the `OPTIONS` configuration following `WITH`, TiDB will ignore them and return a warning.
+動的プルーニング モードでは、パーティションとテーブルの Analyze 構成は同じである必要があります。したがって、 `ANALYZE TABLE TableName PARTITION PartitionNameList`ステートメントの後に`COLUMNS`構成を指定したり、 `WITH`の後に`OPTIONS`構成を指定したりした場合、TiDB はそれらを無視し、警告を返します。
 
-## Improve collection performance
+## 収集パフォーマンスの向上 {#improve-collection-performance}
 
-> **Note:**
+> **注記：**
 >
-> - The execution time of `ANALYZE TABLE` in TiDB might be longer than that in MySQL or InnoDB. In InnoDB, only a small number of pages are sampled, while by default in TiDB a comprehensive set of statistics are completely rebuilt.
+> -   TiDB での`ANALYZE TABLE`の実行時間は、MySQL や InnoDB よりも長くなる可能性があります。InnoDB では少数のページのみがサンプリングされますが、TiDB ではデフォルトで包括的な統計セットが完全に再構築されます。
 
-TiDB provides two options to improve the performance of statistics collection:
+TiDB は、統計収集のパフォーマンスを向上させる 2 つのオプションを提供します。
 
-- Collecting statistics on a subset of the columns. See [Collecting statistics on some columns](#collect-statistics-on-some-columns).
-- Sampling.
+-   列のサブセットに関する統計を収集します。 [いくつかの列の統計情報を収集する](#collect-statistics-on-some-columns)を参照してください。
+-   サンプリング。
 
-### Statistics sampling
+### 統計サンプリング {#statistics-sampling}
 
-Sampling is available via two separate options of the `ANALYZE` statement - with each corresponding to a different collection algorithm:
+サンプリングは、 `ANALYZE`ステートメントの 2 つの別個のオプションを介して実行できます。それぞれが異なる収集アルゴリズムに対応しています。
 
-- `WITH NUM SAMPLES` specifies the size of the sampling set, which is implemented in the reservoir sampling method in TiDB. When a table is large, it is not recommended to use this method to collect statistics. Because the intermediate result set of the reservoir sampling contains redundant results, it causes additional pressure on resources such as memory.
-- `WITH FLOAT_NUM SAMPLERATE` is a sampling method introduced in v5.3.0. With the value range `(0, 1]`, this parameter specifies the sampling rate. It is implemented in the way of Bernoulli sampling in TiDB, which is more suitable for sampling larger tables and performs better in collection efficiency and resource usage.
+-   `WITH NUM SAMPLES` 、TiDB のリザーバ サンプリング メソッドで実装されるサンプリング セットのサイズを指定します。テーブルが大きい場合、このメソッドを使用して統計を収集することはお勧めしません。リザーバ サンプリングの中間結果セットには冗長な結果が含まれるため、メモリなどのリソースに余分な負荷がかかります。
+-   `WITH FLOAT_NUM SAMPLERATE` 、v5.3.0 で導入されたサンプリング方法です。値の範囲が`(0, 1]`の場合、このパラメータはサンプリング レートを指定します。これは、TiDB のベルヌーイ サンプリングの方法で実装されており、より大きなテーブルのサンプリングに適しており、収集効率とリソース使用率が向上します。
 
-Before v5.3.0, TiDB uses the reservoir sampling method to collect statistics. Since v5.3.0, the TiDB Version 2 statistics uses the Bernoulli sampling method to collect statistics by default. To re-use the reservoir sampling method, you can use the `WITH NUM SAMPLES` statement.
+v5.3.0 より前の TiDB では、統計を収集するためにリザーバ サンプリング メソッドが使用されていました。v5.3.0 以降、TiDB バージョン 2 の統計では、デフォルトでベルヌーイ サンプリング メソッドが使用されて統計が収集されます。リザーバ サンプリング メソッドを再利用するには、 `WITH NUM SAMPLES`ステートメントを使用できます。
 
-The current sampling rate is calculated based on an adaptive algorithm. When you can observe the number of rows in a table using [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md), you can use this number of rows to calculate the sampling rate corresponding to 100,000 rows. If you cannot observe this number, you can use the sum of all the values in the `APPROXIMATE_KEYS` column in the results of [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md) of the table as another reference to calculate the sampling rate.
+現在のサンプリング レートは、適応アルゴリズムに基づいて計算されます。 [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)を使用して表の行数を観察できる場合は、この行数を使用して 100,000 行に対応するサンプリング レートを計算できます。 この数を観察できない場合は、表の[`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)の結果の`APPROXIMATE_KEYS`列のすべての値の合計を別の基準として使用して、サンプリング レートを計算できます。
 
 <CustomContent platform="tidb">
 
-> **Note:**
+> **注記：**
 >
-> Normally, `STATS_META` is more credible than `APPROXIMATE_KEYS`. However, after importing data through the methods like [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview), the result of `STATS_META` is `0`. To handle this situation, you can use `APPROXIMATE_KEYS` to calculate the sampling rate when the result of `STATS_META` is much smaller than the result of `APPROXIMATE_KEYS`.
+> 通常、 `STATS_META` `APPROXIMATE_KEYS`よりも信頼性が高いです。ただし、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)などの方法でデータをインポートした後、 `STATS_META`の結果は`0`なります。この状況に対処するには、 `STATS_META`の結果が`APPROXIMATE_KEYS`の結果よりもはるかに小さい場合に、 `APPROXIMATE_KEYS`使用してサンプリング レートを計算できます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注記：**
 >
-> Normally, `STATS_META` is more credible than `APPROXIMATE_KEYS`. However, after importing data through TiDB Cloud console (see [Import Sample Data](/tidb-cloud/import-sample-data.md)), the result of `STATS_META` is `0`. To handle this situation, you can use `APPROXIMATE_KEYS` to calculate the sampling rate when the result of `STATS_META` is much smaller than the result of `APPROXIMATE_KEYS`.
+> 通常、 `STATS_META` `APPROXIMATE_KEYS`よりも信頼性が高いです。ただし、 TiDB Cloudコンソール ( [サンプルデータのインポート](/tidb-cloud/import-sample-data.md)を参照) からデータをインポートした後、 `STATS_META`の結果は`0`なります。この状況に対処するには、 `STATS_META`の結果が`APPROXIMATE_KEYS`の結果よりもはるかに小さい場合に、 `APPROXIMATE_KEYS`使用してサンプリング レートを計算できます。
 
 </CustomContent>
 
-### The memory quota for collecting statistics
+### 統計情報を収集するためのメモリ割り当て {#the-memory-quota-for-collecting-statistics}
 
-> **Warning:**
+> **警告：**
 >
-> Currently, the `ANALYZE` memory quota is an experimental feature, and the memory statistics might be inaccurate in production environments.
+> 現在、 `ANALYZE`メモリクォータは実験的機能であり、本番環境ではメモリ統計が不正確になる可能性があります。
 
-Since TiDB v6.1.0, you can use the system variable [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610) to control the memory quota for collecting statistics in TiDB.
+TiDB v6.1.0 以降では、システム変数[`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)を使用して、TiDB で統計を収集するためのメモリクォータを制御できます。
 
-To set a proper value of `tidb_mem_quota_analyze`, consider the data size of the cluster. When the default sampling rate is used, the main considerations are the number of columns, the size of column values, and the memory configuration of TiDB. Consider the following suggestions when you configure the maximum and minimum values:
+適切な値`tidb_mem_quota_analyze`を設定するには、クラスターのデータ サイズを考慮してください。デフォルトのサンプリング レートを使用する場合、主な考慮事項は、列の数、列値のサイズ、および TiDB のメモリ構成です。最大値と最小値を構成するときは、次の提案を考慮してください。
 
-> **Note:**
+> **注記：**
 >
-> The following suggestions are for reference only. You need to configure the values based on the real scenario.
+> 以下の提案は参考用です。実際のシナリオに基づいて値を設定する必要があります。
 >
-> - Minimum value: should be greater than the maximum memory usage when TiDB collects statistics from the table with the most columns. An approximate reference: when TiDB collects statistics from a table with 20 columns using the default configuration, the maximum memory usage is about 800 MiB; when TiDB collects statistics from a table with 160 columns using the default configuration, the maximum memory usage is about 5 GiB.
-> - Maximum value: should be less than the available memory when TiDB is not collecting statistics.
+> -   最小値: TiDB が最も多くの列を持つテーブルから統計を収集する場合の最大メモリ使用量よりも大きくする必要があります。おおよその目安: TiDB がデフォルト設定を使用して 20 列のテーブルから統計を収集する場合、最大メモリ使用量は約 800 MiB です。TiDB がデフォルト設定を使用して 160 列のテーブルから統計を収集する場合、最大メモリ使用量は約 5 GiB です。
+> -   最大値: TiDB が統計を収集していない場合は、使用可能なメモリよりも小さくする必要があります。
 
-## Persist ANALYZE configurations
+## ANALYZE構成を永続化する {#persist-analyze-configurations}
 
-Since v5.4.0, TiDB supports persisting some `ANALYZE` configurations. With this feature, the existing configurations can be easily reused for future statistics collection.
+v5.4.0 以降、TiDB はいくつかの`ANALYZE`つの構成の永続化をサポートしています。この機能により、将来の統計収集に既存の構成を簡単に再利用できます。
 
-The following are the `ANALYZE` configurations that support persistence:
+永続性をサポートする`ANALYZE`構成は次のとおりです。
 
-| Configurations | Corresponding ANALYZE syntax |
-| --- | --- |
-| The number of histogram buckets | WITH NUM BUCKETS |
-| The number of Top-N  | WITH NUM TOPN |
-| The number of samples | WITH NUM SAMPLES |
-| The sampling rate | WITH FLOATNUM SAMPLERATE |
-| The `ANALYZE` column type | AnalyzeColumnOption ::= ( 'ALL COLUMNS' \| 'PREDICATE COLUMNS' \| 'COLUMNS' ColumnNameList ) |
-| The `ANALYZE` column | ColumnNameList ::= Identifier ( ',' Identifier )* |
+| 構成            | 対応するANALYZE構文                                                                            |
+| ------------- | ---------------------------------------------------------------------------------------- |
+| ヒストグラムバケットの数  | バケット数                                                                                    |
+| トップNの数        | 番号付きトップ                                                                                  |
+| サンプル数         | サンプル数                                                                                    |
+| サンプリングレート     | FLOATNUM SAMPLERATE 付き                                                                   |
+| `ANALYZE`列タイプ | AnalyzeColumnOption ::= ( &#39;すべての列&#39; | &#39;述語列&#39; | &#39;列&#39; ColumnNameList ) |
+| `ANALYZE`列目   | ColumnNameList ::= 識別子 ( &#39;,&#39; 識別子 )*                                              |
 
-### Enable ANALYZE configuration persistence
+### ANALYZE構成の永続性を有効にする {#enable-analyze-configuration-persistence}
 
 <CustomContent platform="tidb">
 
-The `ANALYZE` configuration persistence feature is enabled by default (the system variable `tidb_analyze_version` is `2` and `tidb_persist_analyze_options` is `ON` by default).
+`ANALYZE`構成の永続性機能はデフォルトで有効になっています (システム変数`tidb_analyze_version`は`2`で`tidb_persist_analyze_options`はデフォルトで`ON`です)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-The `ANALYZE` configuration persistence feature is disabled by default. To enable the feature, ensure that the system variable `tidb_persist_analyze_options` is `ON` and set the system variable `tidb_analyze_version` to `2`.
+`ANALYZE`構成の永続性機能は、デフォルトで無効になっています。この機能を有効にするには、システム変数`tidb_persist_analyze_options`が`ON`であることを確認し、システム変数`tidb_analyze_version`を`2`に設定します。
 
 </CustomContent>
 
-You can use this feature to record the persistence configurations specified in the `ANALYZE` statement when executing the statement manually. Once recorded, the next time TiDB automatically updates statistics or you manually collect statistics without specifying these configuration, TiDB will collect statistics according to the recorded configurations.
+この機能を使用すると、ステートメントを手動で実行するときに、 `ANALYZE`ステートメントで指定された永続性設定を記録できます。記録されると、次に TiDB が統計を自動的に更新するか、これらの設定を指定せずに手動で統計を収集するときに、TiDB は記録された設定に従って統計を収集します。
 
-To query the configuration persisted on a specific table used for auto analyze operations, you can use the following SQL statement:
+auto analyze操作に使用される特定のテーブルに保存されている構成を照会するには、次の SQL ステートメントを使用できます。
 
 ```sql
 SELECT sample_num, sample_rate, buckets, topn, column_choice, column_ids FROM mysql.analyze_options opt JOIN information_schema.tables tbl ON opt.table_id = tbl.tidb_table_id WHERE tbl.table_schema = '{db_name}' AND tbl.table_name = '{table_name}';
 ```
 
-TiDB will overwrite the previously recorded persistent configuration using the new configurations specified by the latest `ANALYZE` statement. For example, if you run `ANALYZE TABLE t WITH 200 TOPN;`, it will set the top 200 values in the `ANALYZE` statement. Subsequently, executing `ANALYZE TABLE t WITH 0.1 SAMPLERATE;` will set both the top 200 values and a sampling rate of 0.1 for auto `ANALYZE` statements, similar to `ANALYZE TABLE t WITH 200 TOPN, 0.1 SAMPLERATE;`.
+TiDB は、最新の`ANALYZE`ステートメントで指定された新しい構成を使用して、以前に記録された永続構成を上書きします。たとえば、 `ANALYZE TABLE t WITH 200 TOPN;`実行すると、 `ANALYZE`ステートメントの上位 200 個の値が設定されます。続いて`ANALYZE TABLE t WITH 0.1 SAMPLERATE;`を実行すると、 `ANALYZE TABLE t WITH 200 TOPN, 0.1 SAMPLERATE;`と同様に、上位 200 個の値と auto `ANALYZE`ステートメントのサンプリング レート 0.1 の両方が設定されます。
 
-### Disable ANALYZE configuration persistence
+### ANALYZE構成の永続性を無効にする {#disable-analyze-configuration-persistence}
 
-To disable the `ANALYZE` configuration persistence feature, set the `tidb_persist_analyze_options` system variable to `OFF`. Because the `ANALYZE` configuration persistence feature is not applicable to `tidb_analyze_version = 1`, setting `tidb_analyze_version = 1` can also disable the feature.
+`ANALYZE`構成の永続性機能を無効にするには、 `tidb_persist_analyze_options`システム変数を`OFF`に設定します。 `ANALYZE`構成の永続性機能は`tidb_analyze_version = 1`には適用されないため、 `tidb_analyze_version = 1`を設定することでもこの機能を無効にすることができます。
 
-After disabling the `ANALYZE` configuration persistence feature, TiDB does not clear the persisted configuration records. Therefore, if you enable this feature again, TiDB continues to collect statistics using the previously recorded persistent configurations.
+`ANALYZE`構成の永続性機能を無効にした後、TiDB は永続化された構成レコードをクリアしません。したがって、この機能を再度有効にすると、TiDB は以前に記録された永続的な構成を使用して統計を収集し続けます。
 
-> **Note:**
+> **注記：**
 >
-> When you enable the `ANALYZE` configuration persistence feature again, if the previously recorded persistence configurations are no longer applicable to the latest data, you need to execute the `ANALYZE` statement manually and specify the new persistence configurations.
+> `ANALYZE`構成の永続性機能を再度有効にしたときに、以前に記録された永続性構成が最新のデータに適用できなくなった場合は、 `ANALYZE`ステートメントを手動で実行し、新しい永続性構成を指定する必要があります。
 
-### Persist column configurations
+### 列構成の保持 {#persist-column-configurations}
 
-If you want to persist the column configuration in the `ANALYZE` statement (including `COLUMNS ColumnNameList`, `PREDICATE COLUMNS`, and `ALL COLUMNS`), set the value of the `tidb_persist_analyze_options` system variable to `ON` to enable the [ANALYZE configuration persistence](#persist-analyze-configurations) feature. After enabling the ANALYZE configuration persistence feature:
+`ANALYZE`ステートメントの列構成 ( `COLUMNS ColumnNameList` 、 `PREDICATE COLUMNS` 、 `ALL COLUMNS`を含む) を永続化する場合は、 `tidb_persist_analyze_options`システム変数の値を`ON`に設定して[構成の永続性を分析する](#persist-analyze-configurations)機能を有効にします。ANALYZE 構成永続化機能を有効にした後、次の操作を実行します。
 
-- When TiDB collects statistics automatically or when you manually collect statistics by executing the `ANALYZE` statement without specifying the column configuration, TiDB continues using the previously persisted configuration for statistics collection.
-- When you manually execute the `ANALYZE` statement multiple times with column configuration specified, TiDB overwrites the previously recorded persistent configuration using the new configuration specified by the latest `ANALYZE` statement.
+-   TiDB が自動的に統計を収集する場合、または列構成を指定せずに`ANALYZE`ステートメントを実行して手動で統計を収集する場合、TiDB は統計収集に以前に保持された構成を引き続き使用します。
+-   列構成を指定して`ANALYZE`ステートメントを手動で複数回実行すると、TiDB は最新の`ANALYZE`ステートメントで指定された新しい構成を使用して、以前に記録された永続的な構成を上書きします。
 
-To locate `PREDICATE COLUMNS` and columns on which statistics have been collected, use the [`SHOW COLUMN_STATS_USAGE`](/sql-statements/sql-statement-show-column-stats-usage.md) statement.
+統計が収集された`PREDICATE COLUMNS`と列を見つけるには、 [`SHOW COLUMN_STATS_USAGE`](/sql-statements/sql-statement-show-column-stats-usage.md)ステートメントを使用します。
 
-In the following example, after executing `ANALYZE TABLE t PREDICATE COLUMNS;`, TiDB collects statistics on columns `b`, `c`, and `d`, where column `b` is a `PREDICATE COLUMN` and columns `c` and `d` are index columns.
+次の例では、 `ANALYZE TABLE t PREDICATE COLUMNS;`実行した後、 TiDB は列`b` 、 `c` 、および`d`の統計を収集します。ここで、列`b`は`PREDICATE COLUMN`であり、列`c`と`d`はインデックス列です。
 
 ```sql
 SET GLOBAL tidb_enable_column_tracking = ON;
@@ -371,36 +376,36 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
 3 rows in set (0.00 sec)
 ```
 
-## Versions of statistics
+## 統計のバージョン {#versions-of-statistics}
 
-The [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510) variable controls the statistics collected by TiDB. Currently, two versions of statistics are supported: `tidb_analyze_version = 1` and `tidb_analyze_version = 2`.
+[`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)変数は、TiDB によって収集される統計を制御します。現在、 `tidb_analyze_version = 1`と`tidb_analyze_version = 2` 2 つのバージョンの統計がサポートされています。
 
-- For TiDB Self-Hosted, the default value of this variable changes from `1` to `2` starting from v5.3.0.
-- For TiDB Cloud, the default value of this variable changes from `1` to `2` starting from v6.5.0.
-- If your cluster is upgraded from an earlier version, the default value of `tidb_analyze_version` does not change after the upgrade.
+-   TiDB Self-Hosted の場合、この変数のデフォルト値は、v5.3.0 以降で`1`から`2`に変更されます。
+-   TiDB Cloudの場合、この変数のデフォルト値は、v6.5.0 以降で`1`から`2`に変更されます。
+-   クラスターが以前のバージョンからアップグレードされた場合、アップグレード後もデフォルト値`tidb_analyze_version`は変更されません。
 
-Version 2 is preferred, and will continue to be enhanced to ultimately replace Version 1 completely. Compared to Version 1, Version 2 improves the accuracy of many of the statistics collected for larger data volumes. Version 2 also improves collection performance by removing the need to collect Count-Min sketch statistics for predicate selectivity estimation, and also supporting automated collection only on selected columns (see [Collecting statistics on some columns](#collect-statistics-on-some-columns)).
+バージョン 2 が推奨されており、最終的にはバージョン 1 を完全に置き換えるために引き続き機能強化される予定です。バージョン 1 と比較すると、バージョン 2 では、より大規模なデータ ボリュームに対して収集される多くの統計の精度が向上しています。また、バージョン 2 では、述語選択性の推定のために Count-Min スケッチ統計を収集する必要がなくなり、選択した列のみの自動収集もサポートされるようになったため、収集パフォーマンスが向上しています ( [いくつかの列の統計情報を収集する](#collect-statistics-on-some-columns)を参照)。
 
-The following table lists the information collected by each version for usage in the optimizer estimates:
+次の表は、オプティマイザーの推定で使用するために各バージョンで収集される情報を示しています。
 
-| Information | Version 1 | Version 2|
-| --- | --- | ---|
-| The total number of rows in the table | √ | √ |
-| Equal/IN predicate estimation | √ (Column/Index Top-N & Count-Min Sketch) | √ (Column/Index Top-N & Histogram) |
-| Range predicate estimation | √ (Column/Index Top-N & Histogram) | √ (Column/Index Top-N & Histogram) |
-| `NULL` predicate estimation | √ | √ |
-| The average length of columns | √ | √ |
-| The average length of indexes | √ | √ |
+| 情報          | バージョン 1                            | バージョン2                         |
+| ----------- | ---------------------------------- | ------------------------------ |
+| 表内の行の総数     | √                                  | √                              |
+| 等号/IN述語推定   | √ (カラム/ インデックス トップ N と カウント最小スケッチ) | √ (カラム/ インデックス トップ N と ヒストグラム) |
+| 範囲述語推定      | √ (カラム/ インデックス トップ N と ヒストグラム)     | √ (カラム/ インデックス トップ N と ヒストグラム) |
+| `NULL`述語推定  | √                                  | √                              |
+| 列の平均長さ      | √                                  | √                              |
+| インデックスの平均長さ | √                                  | √                              |
 
-### Switch between statistics versions
+### 統計バージョンを切り替える {#switch-between-statistics-versions}
 
-It is recommended to ensure that all tables/indexes (and partitions) utilize statistics collection from the same version. Version 2 is recommended, however, it is not recommended to switch from one version to another without a justifiable reason such as an issue experienced with the version in use. A switch between versions might take a period of time when no statistics are available until all tables have been analyzed with the new version, which might negatively affect the optimizer plan choices if statistics are not available.
+すべてのテーブル/インデックス (およびパーティション) が同じバージョンの統計収集を利用するようにすることをお勧めします。バージョン 2 が推奨されますが、使用中のバージョンで問題が発生したなどの正当な理由がない限り、あるバージョンから別のバージョンに切り替えることはお勧めしません。バージョン間の切り替えでは、すべてのテーブルが新しいバージョンで分析されるまで統計が利用できない期間が発生する可能性があり、統計が利用できない場合はオプティマイザー プランの選択に悪影響を与える可能性があります。
 
-Examples of justifications to switch might include - with Version 1, there could be inaccuracies in equal/IN predicate estimation due to hash collisions when collecting Count-Min sketch statistics. Solutions are listed in the [Count-Min Sketch](#count-min-sketch) section. Alternatively, setting `tidb_analyze_version = 2` and rerunning `ANALYZE` on all objects is also a solution. In the early release of Version 2, there was a risk of memory overflow after `ANALYZE`. This issue is resolved, but initially, one solution was to `set tidb_analyze_version = 1` and rerun `ANALYZE` on all objects.
+切り替えの正当な理由の例としては、バージョン 1 では、Count-Min スケッチ統計を収集するときにハッシュ衝突が原因で、equal/IN 述語の推定が不正確になる可能性があることが挙げられます。解決策は[カウントミニマムスケッチ](#count-min-sketch)セクションに記載されています。または、 `tidb_analyze_version = 2`を設定して、すべてのオブジェクトで`ANALYZE`を再実行することも解決策です。バージョン 2 の初期リリースでは、 `ANALYZE`後にメモリオーバーフローが発生するリスクがありました。この問題は解決されていますが、当初は、 `set tidb_analyze_version = 1`を設定して、すべてのオブジェクトで`ANALYZE`を再実行するという解決策がありました。
 
-To prepare `ANALYZE` for switching between versions:
+バージョン間の切り替え`ANALYZE`準備するには:
 
-- If the `ANALYZE` statement is executed manually, manually analyze every table to be analyzed.
+-   `ANALYZE`ステートメントを手動で実行する場合は、分析対象のすべてのテーブルを手動で分析します。
 
     ```sql
     SELECT DISTINCT(CONCAT('ANALYZE TABLE ', table_schema, '.', table_name, ';'))
@@ -409,7 +414,7 @@ To prepare `ANALYZE` for switching between versions:
     WHERE stats_ver = 2;
     ```
 
-- If TiDB automatically executes the `ANALYZE` statement because the auto-analysis has been enabled, execute the following statement that generates the [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md) statement:
+-   自動分析が有効になっているため、TiDB が`ANALYZE`ステートメントを自動的に実行する場合は、 [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md)ステートメントを生成する次のステートメントを実行します。
 
     ```sql
     SELECT DISTINCT(CONCAT('DROP STATS ', table_schema, '.', table_name, ';'))
@@ -418,28 +423,28 @@ To prepare `ANALYZE` for switching between versions:
     WHERE stats_ver = 2;
     ```
 
-- If the result of the preceding statement is too long to copy and paste, you can export the result to a temporary text file and then perform execution from the file like this:
+-   前のステートメントの結果が長すぎてコピーして貼り付けることができない場合は、結果を一時テキスト ファイルにエクスポートし、次のようにファイルから実行することができます。
 
     ```sql
     SELECT DISTINCT ... INTO OUTFILE '/tmp/sql.txt';
     mysql -h ${TiDB_IP} -u user -P ${TIDB_PORT} ... < '/tmp/sql.txt'
     ```
 
-## View statistics
+## 統計情報をビュー {#view-statistics}
 
-You can view the `ANALYZE` status and statistics information using the following statements.
+次のステートメントを使用して、 `ANALYZE`ステータスと統計情報を表示できます。
 
-### `ANALYZE` state
+### <code>ANALYZE</code>状態 {#code-analyze-code-state}
 
-When executing the `ANALYZE` statement, you can view the current state of `ANALYZE` using [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md).
+`ANALYZE`ステートメントを実行すると、 [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md)を使用して`ANALYZE`の現在の状態を表示できます。
 
-Starting from TiDB v6.1.0, the `SHOW ANALYZE STATUS` statement supports showing cluster-level tasks. Even after a TiDB restart, you can still view task records before the restart using this statement. Before TiDB v6.1.0, the `SHOW ANALYZE STATUS` statement can only show instance-level tasks, and task records are cleared after a TiDB restart.
+TiDB v6.1.0 以降では、 `SHOW ANALYZE STATUS`ステートメントはクラスター レベルのタスクの表示をサポートします。TiDB を再起動した後でも、このステートメントを使用して再起動前のタスク レコードを表示できます。TiDB v6.1.0 より前では、 `SHOW ANALYZE STATUS`ステートメントはインスタンス レベルのタスクのみを表示でき、タスク レコードは TiDB の再起動後にクリアされます。
 
-`SHOW ANALYZE STATUS` shows the most recent task records only. Starting from TiDB v6.1.0, you can view the history tasks within the last 7 days through the system table `mysql.analyze_jobs`.
+`SHOW ANALYZE STATUS`最新のタスク レコードのみを表示します。TiDB v6.1.0 以降では、システム テーブル`mysql.analyze_jobs`を通じて過去 7 日間の履歴タスクを表示できます。
 
-When [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610) is set and an automatic `ANALYZE` task running in the TiDB background uses more memory than this threshold, the task will be retried. You can see failed and retried tasks in the output of the `SHOW ANALYZE STATUS` statement.
+[`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)が設定され、TiDB のバックグラウンドで実行されている自動`ANALYZE`タスクがこのしきい値を超えるメモリを使用すると、タスクは再試行されます。 `SHOW ANALYZE STATUS`ステートメントの出力で、失敗したタスクと再試行されたタスクを確認できます。
 
-When [`tidb_max_auto_analyze_time`](/system-variables.md#tidb_max_auto_analyze_time-new-in-v610) is greater than 0 and an automatic `ANALYZE` task running in the TiDB background takes more time than this threshold, the task will be terminated.
+[`tidb_max_auto_analyze_time`](/system-variables.md#tidb_max_auto_analyze_time-new-in-v610)が 0 より大きく、TiDB のバックグラウンドで実行されている自動`ANALYZE`タスクにこのしきい値を超える時間がかかる場合、タスクは終了します。
 
 ```sql
 mysql> SHOW ANALYZE STATUS [ShowLikeOrWhere];
@@ -450,125 +455,121 @@ mysql> SHOW ANALYZE STATUS [ShowLikeOrWhere];
 | test         | sbtest1    |                | auto analyze table all columns with 100 topn, 0.5 samplerate                              |              0 | 2022-05-07 16:40:50 | 2022-05-07 16:41:09 | failed   | analyze panic due to memory quota exceeds, please try with smaller samplerate |
 ```
 
-### Metadata of tables
+### テーブルのメタデータ {#metadata-of-tables}
 
-You can use the [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md) statement to view the total number of rows and the number of updated rows.
+[`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)ステートメントを使用すると、行の合計数と更新された行の数を表示できます。
 
-### Health state of tables
+### テーブルの健全性状態 {#health-state-of-tables}
 
-You can use the [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md) statement to check the health state of tables and roughly estimate the accuracy of the statistics. When `modify_count` >= `row_count`, the health state is 0; when `modify_count` < `row_count`, the health state is (1 - `modify_count`/`row_count`) * 100.
+[`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md)ステートメントを使用すると、テーブルの正常性状態を確認し、統計の精度を大まかに見積もることができます。 `modify_count` &gt;= `row_count`の場合、正常性状態は 0 です。 `modify_count` &lt; `row_count`の場合、正常性状態は (1 - `modify_count` / `row_count` ) * 100 です。
 
-### Metadata of columns
+### 列のメタデータ {#metadata-of-columns}
 
-You can use the [`SHOW STATS_HISTOGRAMS`](/sql-statements/sql-statement-show-stats-histograms.md) statement to view the number of different values and the number of `NULL` in all the columns.
+[`SHOW STATS_HISTOGRAMS`](/sql-statements/sql-statement-show-stats-histograms.md)ステートメントを使用すると、すべての列の異なる値の数と`NULL`の数を表示できます。
 
-### Buckets of histogram
+### ヒストグラムのバケット {#buckets-of-histogram}
 
-You can use the [`SHOW STATS_BUCKETS`](/sql-statements/sql-statement-show-stats-buckets.md statement to view each bucket of the histogram.
+[ `SHOW STATS_BUCKETS` ](/sql-statements/sql-statement-show-stats-buckets.md ステートメントを使用して、ヒストグラムの各バケットを表示できます。
 
-### Top-N information
+### トップN情報 {#top-n-information}
 
-You can use the [`SHOW STATS_TOPN`](/sql-statements/sql-statement-show-stats-topn.md) statement to view the Top-N information currently collected by TiDB.
+[`SHOW STATS_TOPN`](/sql-statements/sql-statement-show-stats-topn.md)ステートメントを使用すると、TiDB によって現在収集されている Top-N 情報を表示できます。
 
-## Delete statistics
+## 統計情報を削除 {#delete-statistics}
 
-You can run the [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md) statement to delete statistics.
+統計を削除するには、 [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md)ステートメントを実行します。
 
-## Load statistics
+## 負荷統計 {#load-statistics}
 
-> **Note:**
+> **注記：**
 >
-> Loading statistics is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> [TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは読み込み統計は利用できません。
 
-By default, depending on the size of column statistics, TiDB loads statistics differently as follows:
+デフォルトでは、列統計のサイズに応じて、TiDB は次のように異なる方法で統計をロードします。
 
-- For statistics that consume small amounts of memory (such as count, distinctCount, and nullCount), as long as the column data is updated, TiDB automatically loads the corresponding statistics into memory for use in the SQL optimization stage.
-- For statistics that consume large amounts of memory (such as histograms, TopN, and Count-Min Sketch), to ensure the performance of SQL execution, TiDB loads the statistics asynchronously on demand. Take histograms as an example. TiDB loads histogram statistics on a column into memory only when the optimizer uses the histogram statistics on that column. On-demand asynchronous statistics loading does not affect the performance of SQL execution but might provide incomplete statistics for SQL optimization.
+-   メモリを少量しか消費しない統計 (count、distinctCount、nullCount など) の場合、列データが更新されている限り、TiDB は対応する統計をメモリに自動的にロードし、SQL 最適化ステージで使用します。
+-   大量のメモリを消費する統計 (ヒストグラム、TopN、Count-Min Sketch など) の場合、SQL 実行のパフォーマンスを確保するために、TiDB はオンデマンドで統計を非同期的にロードします。ヒストグラムを例に挙げると、TiDB は、オプティマイザがその列のヒストグラム統計を使用する場合にのみ、その列のヒストグラム統計をメモリにロードします。オンデマンドの非同期統計のロードは、SQL 実行のパフォーマンスには影響しませんが、SQL 最適化に不完全な統計を提供する可能性があります。
 
-Since v5.4.0, TiDB introduces the synchronously loading statistics feature. This feature allows TiDB to synchronously load large-sized statistics (such as histograms, TopN, and Count-Min Sketch statistics) into memory when you execute SQL statements, which improves the completeness of statistics for SQL optimization.
+v5.4.0 以降、TiDB では統計の同期ロード機能が導入されています。この機能により、SQL ステートメントを実行するときに、TiDB は大規模な統計 (ヒストグラム、TopN、Count-Min Sketch 統計など) をメモリにメモリにロードできるようになり、SQL 最適化の統計の完全性が向上します。
 
-To enable this feature, set the value of the [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540) system variable to a timeout (in milliseconds) that SQL optimization can wait for at most to synchronously load complete column statistics. The default value of this variable is `100`, indicating that the feature is enabled.
+この機能を有効にするには、 [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)システム変数の値を、SQL 最適化が完全な列統計を同期的にロードするまで待機できる最大タイムアウト (ミリ秒単位) に設定します。この変数のデフォルト値は`100`で、この機能が有効であることを示します。
 
 <CustomContent platform="tidb">
 
-After enabling the synchronously loading statistics feature, you can further configure the feature as follows:
+統計の同期読み込み機能を有効にした後、次のように機能をさらに構成できます。
 
-- To control how TiDB behaves when the waiting time of SQL optimization reaches the timeout, modify the value of the [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) system variable. The default value of this variable is `ON`, indicating that after the timeout, the SQL optimization process does not use any histogram, TopN, or CMSketch statistics on any columns. If this variable is set to `OFF`, after the timeout, SQL execution fails.
-- To specify the maximum number of columns that the synchronously loading statistics feature can process concurrently, modify the value of the [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540) option in the TiDB configuration file. The default value is `5`.
-- To specify the maximum number of column requests that the synchronously loading statistics feature can cache, modify the value of the [`stats-load-queue-size`](/tidb-configuration-file.md#stats-load-queue-size-new-in-v540) option in the TiDB configuration file. The default value is `1000`.
+-   SQL 最適化の待機時間がタイムアウトに達したときの TiDB の動作を制御するには、 [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540)システム変数の値を変更します。この変数のデフォルト値は`ON`で、タイムアウト後、SQL 最適化プロセスではどの列でもヒストグラム、TopN、または CMSketch 統計が使用されないことを示します。この変数が`OFF`に設定されている場合、タイムアウト後、SQL 実行は失敗します。
+-   同期ロード統計機能が同時に処理できる列の最大数を指定するには、TiDB 構成ファイルの[`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540)オプションの値を変更します。デフォルト値は`5`です。
+-   同期的にロードする統計機能がキャッシュできる列リクエストの最大数を指定するには、TiDB 構成ファイルの[`stats-load-queue-size`](/tidb-configuration-file.md#stats-load-queue-size-new-in-v540)オプションの値を変更します。デフォルト値は`1000`です。
 
-During TiDB startup, SQL statements executed before the initial statistics are fully loaded might have suboptimal execution plans, thus causing performance issues. To avoid such issues, TiDB v7.1.0 introduces the configuration parameter [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710). With this option, you can control whether TiDB provides services only after statistics initialization has been finished during startup. Starting from v7.2.0, this parameter is enabled by default.
+TiDB の起動時に、初期統計が完全にロードされる前に実行される SQL ステートメントの実行プランが最適ではない場合があり、パフォーマンスの問題が発生します。このような問題を回避するために、TiDB v7.1.0 では構成パラメータ[`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710)が導入されています。このオプションを使用すると、起動時に統計の初期化が完了した後にのみ TiDB がサービスを提供するかどうかを制御できます。v7.2.0 以降では、このパラメータはデフォルトで有効になっています。
 
-Starting from v7.1.0, TiDB introduces [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) for lightweight statistics initialization.
+v7.1.0 以降、TiDB では軽量統計の初期化に[`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)導入されています。
 
-- When the value of `lite-init-stats` is `true`, statistics initialization does not load any histogram, TopN, or Count-Min Sketch of indexes or columns into memory.
-- When the value of `lite-init-stats` is `false`, statistics initialization loads histograms, TopN, and Count-Min Sketch of indexes and primary keys into memory but does not load any histogram, TopN, or Count-Min Sketch of non-primary key columns into memory. When the optimizer needs the histogram, TopN, and Count-Min Sketch of a specific index or column, the necessary statistics are loaded into memory synchronously or asynchronously.
+-   `lite-init-stats`の値が`true`の場合、統計の初期化では、インデックスまたは列のヒストグラム、TopN、または Count-Min Sketch がメモリにロードされません。
+-   `lite-init-stats`の値が`false`の場合、統計の初期化では、インデックスと主キーのヒストグラム、TopN、Count-Min Sketch がメモリにロードされますが、主キー以外の列のヒストグラム、TopN、Count-Min Sketch はメモリにロードされません。オプティマイザーが特定のインデックスまたは列のヒストグラム、TopN、Count-Min Sketch を必要とする場合、必要な統計が同期的または非同期的にメモリにロードされます。
 
-The default value of `lite-init-stats` is `true`, which means to enable lightweight statistics initialization. Setting `lite-init-stats` to `true` speeds up statistics initialization and reduces TiDB memory usage by avoiding unnecessary statistics loading.
+デフォルト値`lite-init-stats`は`true`で、軽量統計の初期化を有効にすることを意味します。 `lite-init-stats`から`true`に設定すると、統計の初期化が高速化され、不要な統計の読み込みが回避されるため、TiDB のメモリ使用量が削減されます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-After enabling the synchronously loading statistics feature, you can control how TiDB behaves when the waiting time of SQL optimization reaches the timeout by modifying the value of the [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) system variable. The default value of this variable is `ON`, indicating that after the timeout, the SQL optimization process does not use any histogram, TopN, or CMSketch statistics on any columns. If this variable is set to `OFF`, after the timeout, SQL execution fails.
+統計の同期ロード機能を有効にした後、 [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540)システム変数の値を変更することで、SQL 最適化の待機時間がタイムアウトに達したときの TiDB の動作を制御できます。この変数のデフォルト値は`ON`で、タイムアウト後、SQL 最適化プロセスはどの列でもヒストグラム、TopN、または CMSketch 統計を使用しないことを示します。この変数が`OFF`に設定されている場合、タイムアウト後、SQL 実行は失敗します。
 
 </CustomContent>
 
-## Import and export statistics
+## 輸入と輸出の統計 {#import-and-export-statistics}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注記：**
 >
-> This section is not applicable to TiDB Cloud.
+> このセクションはTiDB Cloudには適用されません。
 
 </CustomContent>
 
-### Export statistics
+### 輸出統計 {#export-statistics}
 
-The interface to export statistics is as follows:
+統計をエクスポートするためのインターフェースは次のとおりです。
 
-+ To obtain the JSON format statistics of the `${table_name}` table in the `${db_name}` database:
+-   `${db_name}`データベース内の`${table_name}`テーブルの JSON 形式の統計を取得するには:
 
-    ```
-    http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}
-    ```
+        http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}
 
-    For example:
+    例えば：
 
     ```shell
     curl -s http://127.0.0.1:10080/stats/dump/test/t1 -o /tmp/t1.json
     ```
 
-+ To obtain the JSON format statistics of the `${table_name}` table in the `${db_name}` database at specific time:
+-   特定の時間における`${db_name}`データベース内の`${table_name}`テーブルの JSON 形式の統計を取得するには:
 
-    ```
-    http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}/${yyyyMMddHHmmss}
-    ```
+        http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}/${yyyyMMddHHmmss}
 
-### Import statistics
+### 輸入統計 {#import-statistics}
 
-> **Note:**
+> **注記：**
 >
-> When you start the MySQL client, use the `--local-infile=1` option.
+> MySQL クライアントを起動するときは、 `--local-infile=1`オプションを使用します。
 
-Generally, the imported statistics refer to the JSON file obtained using the export interface.
+通常、インポートされた統計は、エクスポート インターフェイスを使用して取得された JSON ファイルを参照します。
 
-Loading statistics can be done with the [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md) statement.
+統計の読み込みは[`LOAD STATS`](/sql-statements/sql-statement-load-stats.md)ステートメントで実行できます。
 
-For example:
+例えば：
 
 ```sql
 LOAD STATS 'file_name'
 ```
 
-`file_name` is the file name of the statistics to be imported.
+`file_name`はインポートする統計のファイル名です。
 
-## Lock statistics
+## ロック統計 {#lock-statistics}
 
-Starting from v6.5.0, TiDB supports locking statistics. After the statistics of a table or a partition are locked, the statistics of the table cannot be modified and the `ANALYZE` statement cannot be executed on the table. For example:
+v6.5.0 以降、TiDB は統計のロックをサポートしています。テーブルまたはパーティションの統計がロックされると、テーブルの統計は変更できなくなり、テーブルに対して`ANALYZE`ステートメントを実行することもできなくなります。例:
 
-Create table `t`, and insert data into it. When the statistics of table `t` are not locked, the `ANALYZE` statement can be successfully executed.
+テーブル`t`を作成し、そこにデータを挿入します。テーブル`t`の統計がロックされていない場合、 `ANALYZE`ステートメントは正常に実行できます。
 
 ```sql
 mysql> CREATE TABLE t(a INT, b INT);
@@ -590,7 +591,7 @@ mysql> SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-Lock the statistics of table `t` and execute `ANALYZE`. The warning message shows that the `ANALYZE` statement has skipped table `t`.
+テーブル`t`の統計をロックし、 `ANALYZE`を実行します。警告メッセージは、 `ANALYZE`ステートメントがテーブル`t`をスキップしたことを示します。
 
 ```sql
 mysql> LOCK STATS t;
@@ -617,7 +618,7 @@ mysql> SHOW WARNINGS;
 2 rows in set (0.00 sec)
 ```
 
-Unlock the statistics of table `t` and `ANALYZE` can be successfully executed again.
+表`t`および`ANALYZE`の統計のロックを解除すると、再度正常に実行できます。
 
 ```sql
 mysql> UNLOCK STATS t;
@@ -635,9 +636,9 @@ mysql> SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-In addition, you can also lock the statistics of a partition using [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md). For example:
+さらに、 [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md)使用してパーティションの統計をロックすることもできます。例:
 
-Create a partition table `t`, and insert data into it. When the statistics of partition `p1` are not locked, the `ANALYZE` statement can be successfully executed.
+パーティション テーブル`t`を作成し、そこにデータを挿入します。パーティション`p1`の統計がロックされていない場合、 `ANALYZE`ステートメントは正常に実行できます。
 
 ```sql
 mysql> CREATE TABLE t(a INT, b INT) PARTITION BY RANGE (a) (PARTITION p0 VALUES LESS THAN (10), PARTITION p1 VALUES LESS THAN (20), PARTITION p2 VALUES LESS THAN (30));
@@ -664,7 +665,7 @@ mysql> SHOW WARNINGS;
 6 rows in set (0.01 sec)
 ```
 
-Lock the statistics of partition `p1` and execute `ANALYZE`. The warning message shows that the `ANALYZE` statement has skipped partition `p1`.
+パーティション`p1`の統計をロックし、 `ANALYZE`を実行します。警告メッセージは、 `ANALYZE`ステートメントがパーティション`p1`をスキップしたことを示します。
 
 ```sql
 mysql> LOCK STATS t PARTITION p1;
@@ -691,7 +692,7 @@ mysql> SHOW WARNINGS;
 2 rows in set (0.00 sec)
 ```
 
-Unlock the statistics of partition `p1` and `ANALYZE` can be successfully executed again.
+パーティション`p1`と`ANALYZE`の統計情報のロック解除を再度正常に実行できます。
 
 ```sql
 mysql> UNLOCK STATS t PARTITION p1;
@@ -709,97 +710,97 @@ mysql> SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-### Behaviors of locking statistics
+### 統計情報のロックの動作 {#behaviors-of-locking-statistics}
 
-* If you lock the statistics on a partitioned table, the statistics of all partitions on the partitioned table are locked.
-* If you truncate a table or partition, the statistics lock on the table or partition will be released.
+-   パーティションテーブルの統計をロックすると、パーティションテーブルのすべてのパーティションの統計がロックされます。
+-   テーブルまたはパーティションを切り捨てると、テーブルまたはパーティションの統計ロックが解除されます。
 
-The following table describes the behaviors of locking statistics:
+次の表は、統計のロックの動作を示しています。
 
-| | Delete the whole table | Truncate the whole table | Truncate a partition | Create a new partition | Delete a partition | Reorganize a partition | Exchange a partition |
-|----------------------------|------------|----------------------------------------------------------------|----------------------------------------------------------------|----------------|----------------------------------------------|----------------------------------------------|--------------------------|
-| A non-partitioned table is locked | The lock is invalid | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | / | / | / | / | / |
-| A partitioned table and the whole table is locked | The lock is invalid | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | The old partition lock information is invalid, and the new partition is automatically locked | The new partition is automatically locked | The lock information of the deleted partition is cleared, and the lock of the whole table continues to take effect | The lock information of the deleted partition is cleared, and the new partition is automatically locked | The lock information is transferred to the exchanged table, and the new partition is automatically locked |
-| A partitioned table and only some partitions are locked | The lock is invalid | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | / | The deleted partition lock information is cleared | The deleted partition lock information is cleared | The lock information is transferred to the exchanged table |
+|                                    | テーブル全体を削除する | テーブル全体を切り捨てる                             | パーティションを切り捨てる                                | 新しいパーティションを作成する        | パーティションを削除する                                     | パーティションを再編成する                                   | パーティションを交換する                                 |
+| ---------------------------------- | ----------- | ---------------------------------------- | -------------------------------------------- | ---------------------- | ------------------------------------------------ | ----------------------------------------------- | -------------------------------------------- |
+| パーティションテーブルがロックされている               | ロックが無効です    | TiDBは古いテーブルを削除するためロックは無効であり、ロック情報も削除される。 | /                                            | /                      | /                                                | /                                               | /                                            |
+| パーティションテーブルとテーブル全体がロックされている        | ロックが無効です    | TiDBは古いテーブルを削除するためロックは無効であり、ロック情報も削除される。 | 古いパーティションのロック情報は無効であり、新しいパーティションは自動的にロックされます | 新しいパーティションは自動的にロックされます | 削除されたパーティションのロック情報はクリアされ、テーブル全体のロックは引き続き有効になります。 | 削除されたパーティションのロック情報はクリアされ、新しいパーティションは自動的にロックされます | ロック情報は交換されたテーブルに転送され、新しいパーティションは自動的にロックされます。 |
+| パーティションテーブルで、一部のパーティションのみがロックされている | ロックが無効です    | TiDBは古いテーブルを削除するためロックは無効であり、ロック情報も削除される。 | TiDBは古いテーブルを削除するためロックは無効であり、ロック情報も削除される。     | /                      | 削除されたパーティションのロック情報はクリアされます                       | 削除されたパーティションのロック情報はクリアされます                      | ロック情報は交換テーブルに転送される                           |
 
-## Manage `ANALYZE` tasks and concurrency
+## <code>ANALYZE</code>タスクと同時実行を管理する {#manage-code-analyze-code-tasks-and-concurrency}
 
-### Terminate background `ANALYZE` tasks
+### バックグラウンドの<code>ANALYZE</code>タスクを終了する {#terminate-background-code-analyze-code-tasks}
 
-Since TiDB v6.0, TiDB supports using the `KILL` statement to terminate an `ANALYZE` task running in the background. If you find that an `ANALYZE` task running in the background consumes a lot of resources and affects your application, you can terminate the `ANALYZE` task by taking the following steps:
+TiDB v6.0 以降、TiDB は`KILL`ステートメントを使用してバックグラウンドで実行されている`ANALYZE`タスクを終了することをサポートしています。バックグラウンドで実行されている`ANALYZE`タスクが大量のリソースを消費し、アプリケーションに影響を与えていることがわかった場合は、次の手順を実行して`ANALYZE`タスクを終了できます。
 
-1. Execute the following SQL statement:
+1.  次の SQL ステートメントを実行します。
 
     ```sql
     SHOW ANALYZE STATUS
     ```
 
-    By checking the `instance` column and the `process_id` column in the result, you can get the TiDB instance address and the task `ID` of the background `ANALYZE` task.
+    結果の`instance`列目と`process_id`列目を確認すると、TiDB インスタンスのアドレスとバックグラウンド`ANALYZE`タスクのタスク`ID`を取得できます。
 
-2. Terminate the `ANALYZE` task that is running in the background.
+2.  バックグラウンドで実行されている`ANALYZE`タスクを終了します。
 
     <CustomContent platform="tidb">
 
-    - If [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610) is `true` (`true` by default), you can execute the `KILL TIDB ${id};` statement directly, where `${id}` is the `ID` of the background `ANALYZE` task obtained from the previous step.
-    - If `enable-global-kill` is `false`, you need to use a client to connect to the TiDB instance that is executing the backend `ANALYZE` task, and then execute the `KILL TIDB ${id};` statement. If you use a client to connect to another TiDB instance, or if there is a proxy between the client and the TiDB cluster, the `KILL` statement cannot terminate the background `ANALYZE` task.
+    -   [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610)が`true` (デフォルトでは`true` ) の場合、 `KILL TIDB ${id};`ステートメントを直接実行できます。ここで、 `${id}`前の手順で取得されたバックグラウンド`ANALYZE`タスクの`ID`です。
+    -   `enable-global-kill`が`false`の場合、クライアントを使用して、バックエンド`ANALYZE`タスクを実行している TiDB インスタンスに接続してから、 `KILL TIDB ${id};`ステートメントを実行する必要があります。クライアントを使用して別の TiDB インスタンスに接続した場合、またはクライアントと TiDB クラスターの間にプロキシがある場合、 `KILL`ステートメントはバックグラウンド`ANALYZE`タスクを終了できません。
 
     </CustomContent>
 
     <CustomContent platform="tidb-cloud">
 
-    To terminate the `ANALYZE` task, you can execute the `KILL TIDB ${id};` statement, where `${id}` is the `ID` of the background `ANALYZE` task obtained from the previous step.
+    `ANALYZE`タスクを終了するには、 `KILL TIDB ${id};`ステートメントを実行します。ここで、 `${id}`前の手順で取得したバックグラウンド`ANALYZE`タスクの`ID`です。
 
     </CustomContent>
 
-For more information on the `KILL` statement, see [`KILL`](/sql-statements/sql-statement-kill.md).
+`KILL`ステートメントの詳細については、 [`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
 
-### Control `ANALYZE` concurrency
+### <code>ANALYZE</code>同時実行を制御する {#control-code-analyze-code-concurrency}
 
-When you run the `ANALYZE` statement, you can adjust the concurrency using system variables, to control its effect on the system.
+`ANALYZE`ステートメントを実行すると、システム変数を使用して同時実行性を調整し、システムへの影響を制御できます。
 
-The relationships of the relevant system variables are shown below:
+関連するシステム変数の関係を以下に示します。
 
-![analyze_concurrency](/media/analyze_concurrency.png)
+![analyze\_concurrency](/media/analyze_concurrency.png)
 
-`tidb_build_stats_concurrency`, `tidb_build_sampling_stats_concurrency`, and `tidb_analyze_partition_concurrency` are in an upstream-downstream relationship, as shown in the preceding diagram. The actual total concurrency is: `tidb_build_stats_concurrency` * (`tidb_build_sampling_stats_concurrency` + `tidb_analyze_partition_concurrency`). When modifying these variables, you need to consider their respective values at the same time. It is recommended to adjust them one by one in the order of `tidb_analyze_partition_concurrency`, `tidb_build_sampling_stats_concurrency`, `tidb_build_stats_concurrency`, and observe the impact on the system. The larger the values of these three variables, the greater the resource overhead on the system.
+`tidb_build_stats_concurrency` 、 `tidb_build_sampling_stats_concurrency` 、 `tidb_analyze_partition_concurrency` 、上の図に示すように、上流と下流の関係にあります。実際の合計同時実行数は、 `tidb_build_stats_concurrency` * ( `tidb_build_sampling_stats_concurrency` + `tidb_analyze_partition_concurrency` ) です。これらの変数を変更するときは、それぞれの値を同時に考慮する必要があります。 `tidb_analyze_partition_concurrency` 、 `tidb_build_sampling_stats_concurrency` 、 `tidb_build_stats_concurrency`の順に 1 つずつ調整し、システムへの影響を観察することをお勧めします。これら 3 つの変数の値が大きいほど、システムのリソース オーバーヘッドが大きくなります。
 
-#### `tidb_build_stats_concurrency`
+#### <code>tidb_build_stats_concurrency</code> {#code-tidb-build-stats-concurrency-code}
 
-When you run the `ANALYZE` statement, the task is divided into multiple small tasks. Each task only works on statistics of one column or index. You can use the [`tidb_build_stats_concurrency`](/system-variables.md#tidb_build_stats_concurrency) variable to control the number of simultaneous small tasks. The default value is `2`. The default value is `4` for v7.4.0 and earlier versions.
+`ANALYZE`ステートメントを実行すると、タスクは複数の小さなタスクに分割されます。各タスクは、1 つの列またはインデックスの統計情報のみを処理します。 [`tidb_build_stats_concurrency`](/system-variables.md#tidb_build_stats_concurrency)変数を使用して、同時実行される小さなタスクの数を制御できます。デフォルト値は`2`です。v7.4.0 以前のバージョンでは、デフォルト値は`4`です。
 
-#### `tidb_build_sampling_stats_concurrency`
+#### <code>tidb_build_sampling_stats_concurrency</code> {#code-tidb-build-sampling-stats-concurrency-code}
 
-When analyzing ordinary columns, you can use [`tidb_build_sampling_stats_concurrency`](/system-variables.md#tidb_build_sampling_stats_concurrency-new-in-v750) to control the concurrency of executing sampling tasks. The default value is `2`.
+通常の列を分析する場合、 [`tidb_build_sampling_stats_concurrency`](/system-variables.md#tidb_build_sampling_stats_concurrency-new-in-v750)使用してサンプリング タスクの実行の同時実行を制御できます。デフォルト値は`2`です。
 
-#### `tidb_analyze_partition_concurrency`
+#### <code>tidb_analyze_partition_concurrency</code> {#code-tidb-analyze-partition-concurrency-code}
 
-When running the `ANALYZE` statement, you can use [`tidb_analyze_partition_concurrency`](/system-variables.md#tidb_analyze_partition_concurrency) to control the concurrency of reading and writing statistics for a partitioned table. The default value is `2`. The default value is `1` for v7.4.0 and earlier versions.
+`ANALYZE`ステートメントを実行する場合、 [`tidb_analyze_partition_concurrency`](/system-variables.md#tidb_analyze_partition_concurrency)使用して、パーティションテーブルの統計の読み取りと書き込みの同時実行を制御できます。デフォルト値は`2`です。v7.4.0 以前のバージョンの場合、デフォルト値は`1`です。
 
-#### `tidb_distsql_scan_concurrency`
+#### <code>tidb_distsql_scan_concurrency</code> {#code-tidb-distsql-scan-concurrency-code}
 
-When you analyze regular columns, you can use the [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) variable to control the number of Regions to be read at one time. The default value is `15`. Note that changing the value will affect query performance. Adjust the value carefully.
+通常の列を分析する場合、 [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)変数を使用して、一度に読み取るリージョンの数を制御できます。デフォルト値は`15`です。値を変更するとクエリのパフォーマンスに影響することに注意してください。値を慎重に調整してください。
 
-#### `tidb_index_serial_scan_concurrency`
+#### <code>tidb_index_serial_scan_concurrency</code> {#code-tidb-index-serial-scan-concurrency-code}
 
-When you analyze index columns, you can use the [`tidb_index_serial_scan_concurrency`](/system-variables.md#tidb_index_serial_scan_concurrency) variable to control the number of Regions to be read at one time. The default value is `1`. Note that changing the value will affect query performance. Adjust the value carefully.
+インデックス列を分析する場合、 [`tidb_index_serial_scan_concurrency`](/system-variables.md#tidb_index_serial_scan_concurrency)変数を使用して、一度に読み取るリージョンの数を制御できます。デフォルト値は`1`です。値を変更するとクエリのパフォーマンスに影響することに注意してください。値を慎重に調整してください。
 
-## See also
+## 参照 {#see-also}
 
 <CustomContent platform="tidb">
 
-* [LOAD STATS](/sql-statements/sql-statement-load-stats.md)
-* [DROP STATS](/sql-statements/sql-statement-drop-stats.md)
-* [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
-* [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
-* [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)
+-   [ロード統計](/sql-statements/sql-statement-load-stats.md)
+-   [ドロップ統計](/sql-statements/sql-statement-drop-stats.md)
+-   [ロック統計](/sql-statements/sql-statement-lock-stats.md)
+-   [統計情報のロックを解除](/sql-statements/sql-statement-unlock-stats.md)
+-   [STATS_LOCKED を表示](/sql-statements/sql-statement-show-stats-locked.md)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-* [LOAD STATS](/sql-statements/sql-statement-load-stats.md)
-* [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
-* [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
-* [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)
+-   [ロード統計](/sql-statements/sql-statement-load-stats.md)
+-   [ロック統計](/sql-statements/sql-statement-lock-stats.md)
+-   [統計情報のロックを解除](/sql-statements/sql-statement-unlock-stats.md)
+-   [STATS_LOCKED を表示](/sql-statements/sql-statement-show-stats-locked.md)
 
 </CustomContent>

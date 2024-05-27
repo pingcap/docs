@@ -1,35 +1,35 @@
 ---
 title: TiDB Cloud Serverless Driver (Beta)
-summary: Learn how to connect to TiDB Serverless from serverless and edge environments.
+summary: サーバーレス環境およびエッジ環境から TiDB Serverless に接続する方法を学習します。
 ---
 
-# TiDB Cloud Serverless Driver (Beta)
+# TiDB CloudサーバーレスDriver(ベータ版) {#tidb-cloud-serverless-driver-beta}
 
-## Why use TiDB Cloud Serverless Driver (Beta)
+## TiDB Cloud Serverless Driver (ベータ版) を使用する理由 {#why-use-tidb-cloud-serverless-driver-beta}
 
-Traditional TCP-based MySQL drivers are not suitable for serverless functions due to their expectation of long-lived, persistent TCP connections, which contradict the short-lived nature of serverless functions. Moreover, in edge environments such as [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/), where comprehensive TCP support and full Node.js compatibility may be lacking, these drivers may not work at all.
+従来の TCP ベースの MySQL ドライバーは、長寿命で永続的な TCP 接続を期待しており、サーバーレス関数の短寿命の性質と矛盾するため、サーバーレス関数には適していません。さらに、包括的な TCP サポートと完全な Node.js 互換性が欠如している可能性のある[Vercel エッジ機能](https://vercel.com/docs/functions/edge-functions)や[Cloudflare ワーカー](https://workers.cloudflare.com/)などのエッジ環境では、これらのドライバーがまったく機能しない可能性があります。
 
-[TiDB Cloud serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to your TiDB Serverless cluster over HTTP, which is generally supported by serverless environments. With it, it is now possible to connect to TiDB Serverless clusters from edge environments and reduce connection overhead with TCP while keeping the similar development experience of traditional TCP-based MySQL drivers. 
+JavaScript 用の[TiDB Cloudサーバーレス ドライバー (ベータ版)](https://github.com/tidbcloud/serverless-js)を使用すると、サーバーレス環境で一般的にサポートされている HTTP 経由で TiDB Serverless クラスターに接続できます。これにより、従来の TCP ベースの MySQL ドライバーと同様の開発エクスペリエンスを維持しながら、エッジ環境から TiDB Serverless クラスターに接続し、TCP による接続オーバーヘッドを削減できるようになりました。
 
-> **Note:**
+> **注記：**
 >
-> If you prefer programming with RESTful API rather than SQL or ORM, you can use [Data Service (beta)](/tidb-cloud/data-service-overview.md).
+> SQL や ORM ではなく RESTful API でプログラミングしたい場合は、 [データ サービス (ベータ版)](/tidb-cloud/data-service-overview.md)使用できます。
 
-## Install the serverless driver
+## サーバーレスドライバーをインストールする {#install-the-serverless-driver}
 
-You can install the driver with npm:
+npm を使用してドライバーをインストールできます。
 
 ```bash
 npm install @tidbcloud/serverless
 ```
 
-## Use the serverless driver
+## サーバーレスドライバーを使用する {#use-the-serverless-driver}
 
-You can use the serverless driver to query data of a TiDB Serverless cluster or perform interactive transactions.
+サーバーレス ドライバーを使用して、TiDB サーバーレス クラスターのデータを照会したり、対話型トランザクションを実行したりできます。
 
-### Query
+### クエリ {#query}
 
-To query data from a TiDB Serverless cluster, you need to create a connection first. Then you can use the connection to execute raw SQL queries. For example:
+TiDB Serverless クラスターからデータをクエリするには、まず接続を作成する必要があります。次に、接続を使用して生の SQL クエリを実行できます。例:
 
 ```ts
 import { connect } from '@tidbcloud/serverless'
@@ -38,9 +38,9 @@ const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]'})
 const results = await conn.execute('select * from test where id = ?',[1])
 ```
 
-### Transaction (experimental)
+### トランザクション（実験的） {#transaction-experimental}
 
-You can also perform interactive transactions with the serverless driver. For example:
+サーバーレス ドライバーを使用して対話型トランザクションを実行することもできます。例:
 
 ```ts
 import { connect } from '@tidbcloud/serverless'
@@ -58,9 +58,9 @@ try {
 }
 ```
 
-## Edge examples
+## エッジの例 {#edge-examples}
 
-Here are some examples of using the serverless driver in edge environments. For a complete example, you can also try this [live demo](https://github.com/tidbcloud/car-sales-insight).
+エッジ環境でサーバーレス ドライバーを使用する例をいくつか示します。完全な例については、こちら[ライブデモ](https://github.com/tidbcloud/car-sales-insight)も試してください。
 
 <SimpleTab>
 
@@ -79,7 +79,7 @@ export async function GET(request: NextRequest) {
 }
 ```
 
-Learn more about [using TiDB Cloud serverless driver in Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md).
+[Vercel でTiDB Cloudサーバーレス ドライバーを使用する](/tidb-cloud/integrate-tidbcloud-with-vercel.md)について詳しく学びます。
 
 </div>
 
@@ -99,7 +99,7 @@ export default {
 };
 ```
 
-Learn more about [using TiDB Cloud serverless driver in Cloudflare Workers](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md).
+[Cloudflare Workers でTiDB Cloudサーバーレス ドライバーを使用する](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)について詳しく学びます。
 
 </div>
 
@@ -115,7 +115,7 @@ export default async () => {
 }
 ```
 
-Learn more about [using TiDB Cloud serverless driver in Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md#use-the-edge-function).
+[Netlify でTiDB Cloudサーバーレス ドライバーを使用する](/tidb-cloud/integrate-tidbcloud-with-netlify.md#use-the-edge-function)について詳しく学びます。
 
 </div>
 
@@ -143,32 +143,32 @@ const result = await conn.execute('show tables')
 
 </SimpleTab>
 
-## Configure the serverless driver
+## サーバーレスドライバーを構成する {#configure-the-serverless-driver}
 
-You can configure TiDB Cloud serverless driver at both the connection level and the SQL level.
+TiDB Cloudサーバーレス ドライバーは、接続レベルと SQL レベルの両方で構成できます。
 
-### Connection level configurations
+### 接続レベルの構成 {#connection-level-configurations}
 
-At the connection level, you can make the following configurations:
+接続レベルでは、次の構成を行うことができます。
 
-| Name         | Type       | Default value | Description                                                                                                                                                                  |
-|--------------|------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `username`   | string     | N/A           | Username of TiDB Serverless                                                                                                                                                  |
-| `password`   | string     | N/A           | Password of TiDB Serverless                                                                                                                                                  |
-| `host`       | string     | N/A           | Hostname of TiDB Serverless                                                                                                                                                  |
-| `database`   | string     | `test`        | Database of TiDB Serverless                                                                                                                                                  |
-| `url`        | string     | N/A           | The URL for the database, in the `mysql://[username]:[password]@[host]/[database]` format, where `database` can be skipped if you intend to connect to the default database. |
-| `fetch`      | function   | global fetch  | Custom fetch function. For example, you can use the `undici` fetch in node.js.                                                                                               |
-| `arrayMode`  | bool       | `false`       | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.                                                                         |
-| `fullResult` | bool       | `false`       | Whether to return full result object instead of just rows. To get more detailed results, set it to `true`.                                                                   |
+| 名前           | タイプ | デフォルト値    | 説明                                                                                                         |
+| ------------ | --- | --------- | ---------------------------------------------------------------------------------------------------------- |
+| `username`   | 弦   | 該当なし      | TiDB Serverlessのユーザー名                                                                                      |
+| `password`   | 弦   | 該当なし      | TiDB Serverlessのパスワード                                                                                      |
+| `host`       | 弦   | 該当なし      | TiDB Serverlessのホスト名                                                                                       |
+| `database`   | 弦   | `test`    | TiDB Serverlessのデータベース                                                                                     |
+| `url`        | 弦   | 該当なし      | データベースの URL は`mysql://[username]:[password]@[host]/[database]`形式で、デフォルトのデータベースに接続する場合は`database`をスキップできます。 |
+| `fetch`      | 関数  | グローバルフェッチ | カスタム フェッチ関数。たとえば、node.js の`undici`フェッチを使用できます。                                                             |
+| `arrayMode`  | ブール | `false`   | 結果をオブジェクトではなく配列として返すかどうか。パフォーマンスを向上させるには、 `true`に設定します。                                                    |
+| `fullResult` | ブール | `false`   | 行だけではなく完全な結果オブジェクトを返すかどうか。より詳細な結果を取得するには、 `true`に設定します。                                                    |
 
-**Database URL**
+**データベースURL**
 
-> **Note:**
+> **注記：**
 >
-> If your username, password, or database name contains special characters, you must [percentage-encode](https://en.wikipedia.org/wiki/Percent-encoding) these characters when passing them by the URL. For example, the password `password1@//?` needs to be encoded as `password1%40%2F%2F%3F` in the URL.
+> ユーザー名、パスワード、またはデータベース名に特殊文字が含まれている場合は、URL で渡すときにこれらの文字を[パーセンテージエンコード](https://en.wikipedia.org/wiki/Percent-encoding)エンコードする必要があります。たとえば、パスワード`password1@//?`は、URL では`password1%40%2F%2F%3F`としてエンコードする必要があります。
 
-When `url` is configured, there is no need to configure `host`, `username`, `password`, and `database` separately. The following codes are equivalent:
+`url`設定されている場合、 `host` 、 `username` 、 `password` 、および`database`個別に設定する必要はありません。次のコードは同等です。
 
 ```ts
 const config = {
@@ -191,107 +191,107 @@ const config = {
 const conn = connect(config)
 ```
 
-### SQL level options
+### SQL レベル オプション {#sql-level-options}
 
-> **Note:**
+> **注記：**
 >
-> The SQL level options have a higher priority over connection level configurations.
+> SQL レベルのオプションは、接続レベルの構成よりも優先されます。
 
-At the SQL level, you can configure the following options:
+SQL レベルでは、次のオプションを構成できます。
 
-| Option       | Type | Default value | Description                                                                                                |
-|--------------|------|---------------|------------------------------------------------------------------------------------------------------------|
-| `arrayMode`  | bool | `false`       | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.       |
-| `fullResult` | bool | `false`       | Whether to return full result object instead of just rows. To get more detailed results, set it to `true`. |
+| オプション        | タイプ | デフォルト値  | 説明                                                      |
+| ------------ | --- | ------- | ------------------------------------------------------- |
+| `arrayMode`  | ブール | `false` | 結果をオブジェクトではなく配列として返すかどうか。パフォーマンスを向上させるには、 `true`に設定します。 |
+| `fullResult` | ブール | `false` | 行だけではなく完全な結果オブジェクトを返すかどうか。より詳細な結果を取得するには、 `true`に設定します。 |
 
-For example:
+例えば：
 
 ```ts
 const conn = connect({url: process.env['DATABASE_URL'] || 'mysql://[username]:[password]@[host]/[database]'})
 const results = await conn.execute('select * from test',null,{arrayMode:true,fullResult:true})
 ```
 
-Starting from TiDB Cloud serverless driver v0.0.7, you can also configure the following SQL level option when you use transactions:
+TiDB Cloudサーバーレス ドライバー v0.0.7 以降では、トランザクションを使用するときに次の SQL レベル オプションを構成することもできます。
 
-| Option       | Type   | Default value     | Description                                                                        |
-|--------------|--------|-------------------|------------------------------------------------------------------------------------|
-| `isolation`  | string | `REPEATABLE READ` | The transaction isolation level, which can be set to `READ COMMITTED` or `REPEATABLE READ`.    |
+| オプション       | タイプ | デフォルト値            | 説明                                                          |
+| ----------- | --- | ----------------- | ----------------------------------------------------------- |
+| `isolation` | 弦   | `REPEATABLE READ` | トランザクション分離レベル。 `READ COMMITTED`または`REPEATABLE READ`に設定できます。 |
 
-The `isolation` option can only be used in the `begin` function. Here is an example:
+`isolation`オプションは`begin`関数でのみ使用できます。次に例を示します。
 
 ```ts
 const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]'})
 const tx = await conn.begin({isolation:"READ COMMITTED"})
 ```
 
-## Features
+## 特徴 {#features}
 
-### Supported SQL statements
+### サポートされているSQL文 {#supported-sql-statements}
 
-DDL is supported and the following SQL statements are supported:  `SELECT`, `SHOW`, `EXPLAIN`, `USE`, `INSERT`, `UPDATE`, `DELETE`, `BEGIN`, `COMMIT`, `ROLLBACK`, and `SET`.
+DDL が`EXPLAIN`されて`DELETE` `USE`次の SQL `SHOW` `INSERT`サポートされて`BEGIN` `COMMIT` : `SELECT` `SET` `UPDATE` `ROLLBACK` 。
 
-### Data type mapping
+### データ型マッピング {#data-type-mapping}
 
-The type mapping between TiDB Serverless and Javascript is as follows:
+TiDB Serverless と Javascript 間の型マッピングは次のとおりです。
 
-| TiDB Serverless type | Javascript type |
-|----------------------|-----------------|
-| TINYINT              | number          |
-| UNSIGNED TINYINT     | number          |
-| BOOL                 | number          |
-| SMALLINT             | number          |
-| UNSIGNED SMALLINT    | number          |
-| MEDIUMINT            | number          |
-| INT                  | number          |
-| UNSIGNED INT         | number          |
-| YEAR                 | number          |
-| FLOAT                | number          |
-| DOUBLE               | number          |
-| BIGINT               | string          |
-| UNSIGNED BIGINT      | string          |
-| DECIMAL              | string          |
-| CHAR                 | string          |
-| VARCHAR              | string          |
-| BINARY               | string          |
-| VARBINARY            | string          |
-| TINYTEXT             | string          |
-| TEXT                 | string          |
-| MEDIUMTEXT           | string          |
-| LONGTEXT             | string          |
-| TINYBLOB             | string          |
-| BLOB                 | string          |
-| MEDIUMBLOB           | string          |
-| LONGBLOB             | string          |
-| DATE                 | string          |
-| TIME                 | string          |
-| DATETIME             | string          |
-| TIMESTAMP            | string          |
-| ENUM                 | string          |
-| SET                  | string          |
-| BIT                  | string          |
-| JSON                 | object          |
-| NULL                 | null            |
-| Others               | string          |
+| TiDB サーバーレスタイプ | Javascriptタイプ |
+| -------------- | ------------- |
+| 小さな            | 番号            |
+| 符号なし TINYINT   | 番号            |
+| ブール            | 番号            |
+| スモールイント        | 番号            |
+| 符号なし小整数        | 番号            |
+| ミディアムミント       | 番号            |
+| 内部             | 番号            |
+| 符号なし整数         | 番号            |
+| 年              | 番号            |
+| 浮く             | 番号            |
+| ダブル            | 番号            |
+| ビッグイント         | 弦             |
+| 符号なしBIGINT     | 弦             |
+| 小数点            | 弦             |
+| 文字             | 弦             |
+| バルチャー          | 弦             |
+| バイナリ           | 弦             |
+| バイナリ           | 弦             |
+| 小さなテキスト        | 弦             |
+| TEXT           | 弦             |
+| 中テキスト          | 弦             |
+| 長文             | 弦             |
+| タイニーブロブ        | 弦             |
+| ブロブ            | 弦             |
+| ミディアムブロブ       | 弦             |
+| ロングロブ          | 弦             |
+| 日付             | 弦             |
+| 時間             | 弦             |
+| 日付時刻           | 弦             |
+| タイムスタンプ        | 弦             |
+| 列挙             | 弦             |
+| セット            | 弦             |
+| 少し             | 弦             |
+| 翻訳             | 物体            |
+| ヌル             | ヌル            |
+| その他            | 弦             |
 
-### ORM integrations
+### ORM統合 {#orm-integrations}
 
-TiDB Cloud serverless driver has been integrated with the following ORMs:
+TiDB Cloudサーバーレス ドライバーは、次の ORM と統合されています。
 
-- [TiDB Cloud serverless driver Kysely dialect](https://github.com/tidbcloud/kysely).
-- [TiDB Cloud serverless driver Prisma adapter](https://github.com/tidbcloud/prisma-adapter).
+-   [TiDB Cloudサーバーレス ドライバー Kysely 方言](https://github.com/tidbcloud/kysely) 。
+-   [TiDB Cloudレス ドライバー Prisma アダプター](https://github.com/tidbcloud/prisma-adapter) 。
 
-## Pricing
+## 価格 {#pricing}
 
-The serverless driver itself is free, but accessing data with the driver generates [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) and storage usage. The pricing follows the [TiDB Serverless pricing](https://www.pingcap.com/tidb-serverless-pricing-details/) model.
+サーバーレス ドライバー自体は無料ですが、ドライバーを使用してデータにアクセスすると、 [リクエストユニット (RU)](/tidb-cloud/tidb-cloud-glossary.md#request-unit)とstorage使用量が発生します。価格は[TiDB サーバーレスの価格](https://www.pingcap.com/tidb-serverless-pricing-details/)モデルに従います。
 
-## Limitations
+## 制限事項 {#limitations}
 
-Currently, using serverless driver has the following limitations:
+現在、サーバーレス ドライバーの使用には次の制限があります。
 
-- Up to 10,000 rows can be fetched in a single query.
-- You can execute only a single SQL statement at a time. Multiple SQL statements in one query are not supported yet.
-- Connection with [private endpoints](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) is not supported yet.
+-   1 回のクエリで最大 10,000 行を取得できます。
+-   一度に実行できる SQL ステートメントは 1 つだけです。1 つのクエリで複数の SQL ステートメントを実行することはまだサポートされていません。
+-   [プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)との接続はまだサポートされていません。
 
-## What's next
+## 次は何ですか {#what-s-next}
 
-- Learn how to [use TiDB Cloud serverless driver in a local Node.js project](/tidb-cloud/serverless-driver-node-example.md).
+-   [ローカル Node.js プロジェクトでTiDB Cloudサーバーレス ドライバーを使用する](/tidb-cloud/serverless-driver-node-example.md)の方法を学びます。

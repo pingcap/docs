@@ -1,13 +1,13 @@
 ---
 title: DROP DATABASE | TiDB SQL Statement Reference
-summary: An overview of the usage of DROP DATABASE for the TiDB database.
+summary: TiDB データベースに対する DROP DATABASE の使用法の概要。
 ---
 
-# DROP DATABASE
+# データベースの削除 {#drop-database}
 
-The `DROP DATABASE` statement permanently removes a specified database schema, and all of the tables and views that were created inside. User privileges that are associated with the dropped database remain unaffected.
+`DROP DATABASE`ステートメントは、指定されたデータベース スキーマと、その中に作成されたすべてのテーブルおよびビューを完全に削除します。削除されたデータベースに関連付けられているユーザー権限は影響を受けません。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 DropDatabaseStmt ::=
@@ -16,7 +16,7 @@ DropDatabaseStmt ::=
 IfExists ::= ( 'IF' 'EXISTS' )?
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> SHOW DATABASES;
@@ -44,11 +44,11 @@ mysql> SHOW DATABASES;
 3 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-The `DROP DATABASE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB の`DROP DATABASE`ステートメントは MySQL と完全に互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) 。
 
-## See also
+## 参照 {#see-also}
 
-* [CREATE DATABASE](/sql-statements/sql-statement-create-database.md)
-* [ALTER DATABASE](/sql-statements/sql-statement-alter-database.md)
+-   [データベースの作成](/sql-statements/sql-statement-create-database.md)
+-   [データベースの変更](/sql-statements/sql-statement-alter-database.md)

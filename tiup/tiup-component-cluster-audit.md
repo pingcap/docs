@@ -1,35 +1,35 @@
 ---
 title: tiup cluster audit
-summary: The tiup cluster audit command is used to view commands executed on all clusters in the history and the execution log of each command. If [audit-id] is specified, the corresponding execution log is output. If not specified, a table with fields ID, Time, and Command is output in reverse chronological order. The -h, --help option prints help information and is disabled by default.
+summary: tiup cluster auditコマンドは、すべてのクラスターで実行されたコマンドを、各コマンドの履歴と実行ログで表示するために使用されます。[audit-id] が指定されている場合は、対応する実行ログが出力されます。指定されていない場合は、ID、時間、コマンドのフィールドを含むテーブルが逆時系列で出力されます。 -h, --helpオプションはヘルプ情報を出力が、デフォルトでは無効になっています。
 ---
 
-# tiup cluster audit
+# tiup cluster audit {#tiup-cluster-audit}
 
-The `tiup cluster audit` command is used to view commands executed on all clusters in the history and the execution log of each command.
+`tiup cluster audit`コマンドは、すべてのクラスターで実行されたコマンドを、各コマンドの履歴と実行ログで表示するために使用されます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster audit [audit-id] [flags]
 ```
 
-- If you do not fill in the `[audit-id]`, the table of operation records is output in reverse chronological order. The first column is the `audit-id`.
-- If you fill in the `[audit-id]`, it means checking the execution log of the specified `audit-id`.
+-   `[audit-id]`を記入しない場合は、逆時系列で操作記録表が出力されます。最初の列は`audit-id`です。
+-   `[audit-id]`を記入した場合は、指定した`audit-id`の実行ログを確認することを意味します。
 
-## Option
+## オプション {#option}
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `Boolean`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型: `Boolean`
+-   このオプションはデフォルトでは無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないようにします。
 
-## Outputs
+## 出力 {#outputs}
 
-- If `[audit-id]` is specified, the corresponding execution log is output.
-- If `[audit-id]` is not specified, a table with the following fields is output:
-    - ID: the `audit-id` corresponding to the record
-    - Time: the execution time of the command corresponding to the record
-    - Command: the command corresponding to the record
+-   `[audit-id]`を指定すると、対応する実行ログが出力されます。
+-   `[audit-id]`指定されていない場合は、次のフィールドを含むテーブルが出力されます。
+    -   ID: レコードに対応する`audit-id`
+    -   時間: レコードに対応するコマンドの実行時間
+    -   コマンド: レコードに対応するコマンド
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

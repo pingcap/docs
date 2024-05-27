@@ -1,13 +1,13 @@
 ---
 title: Data Check in the DM Replication Scenario
-summary: Learn about how to set a specific `task-name` configuration from `DM-master` to perform a data check.
+summary: データ チェックを実行するために、`DM-master` から特定の `task-name` 構成を設定する方法について学習します。
 ---
 
-# Data Check in the DM Replication Scenario
+# DM レプリケーション シナリオにおけるデータ チェック {#data-check-in-the-dm-replication-scenario}
 
-When using replication tools such as [TiDB Data Migration](/dm/dm-overview.md), you need to check the data consistency before and after the replication process. You can set a specific `task-name` configuration from `DM-master` to perform a data check.
+[TiDB データ移行](/dm/dm-overview.md)などのレプリケーション ツールを使用する場合、レプリケーション処理の前後でデータの整合性を確認する必要があります`DM-master`から特定の`task-name`構成を設定して、データ チェックを実行できます。
 
-The following is a simple configuration example. To learn the complete configuration, refer to [Sync-diff-inspector User Guide](/sync-diff-inspector/sync-diff-inspector-overview.md).
+以下は簡単な設定例です。完全な設定については[Sync-diff-inspector ユーザーガイド](/sync-diff-inspector/sync-diff-inspector-overview.md)を参照してください。
 
 ```toml
 # Diff Configuration.
@@ -37,4 +37,4 @@ dm-task = "test"
     target-check-tables = ["hb_test.*"]
 ```
 
-This example is configured in dm-task = "test", which checks all the tables of hb_test schema under the "test" task. It automatically gets the regular matching of the schemas between upstream and downstream databases to verify the data consistency after DM replication.
+この例では、dm-task = &quot;test&quot; に設定されており、&quot;test&quot; タスクの下にある hb_test スキーマのすべてのテーブルをチェックします。これにより、アップストリーム データベースとダウンストリーム データベース間のスキーマの定期的なマッチングが自動的に取得され、DM レプリケーション後のデータの一貫性が検証されます。

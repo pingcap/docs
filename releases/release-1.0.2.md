@@ -1,29 +1,29 @@
 ---
 title: TiDB 1.0.2 Release Notes
-summary: TiDB 1.0.2 was released on November 13, 2017. Updates include optimized cost estimation for index point query, support for Alter Table Add Column syntax, and improved query optimization. Placement Driver (PD) scheduling stability was enhanced, and TiKV now supports table splitting and limits key length to 4 KB. Other improvements include more accurate read traffic statistics and bug fixes for LIKE behavior and do_div_mod bug.
+summary: TiDB 1.0.2 は 2017 年 11 月 13 日にリリースされました。更新内容には、インデックス ポイント クエリのコスト見積もりの​​最適化、Alter Table Add カラム構文のサポート、クエリ最適化の改善などが含まれています。Placement Driver (PD) のスケジュール安定性が強化され、TiKV はテーブル分割をサポートし、キーの長さを 4 KB に制限するようになりました。その他の改善点には、読み取りトラフィック統計の精度向上、LIKE 動作のバグ修正、do_div_mod バグなどがあります。
 ---
 
-# TiDB 1.0.2 Release Notes
+# TiDB 1.0.2 リリースノート {#tidb-1-0-2-release-notes}
 
-On November 13, 2017, TiDB 1.0.2 is released with the following updates:
+2017 年 11 月 13 日に、次の更新を含む TiDB 1.0.2 がリリースされました。
 
-## TiDB
+## ティビ {#tidb}
 
-- Optimize the cost estimation of index point query
-- Support the `Alter Table Add Column (ColumnDef ColumnPosition)` syntax
-- Optimize the queries whose `where` conditions are contradictory
-- Optimize the `Add Index` operation to rectify the progress and reduce repetitive operations
-- Optimize the `Index Look Join` operator to accelerate the query speed for small data size
-- Fix the issue with prefix index judgment
+-   インデックスポイントクエリのコスト見積もりを最適化する
+-   `Alter Table Add Column (ColumnDef ColumnPosition)`構文をサポートする
+-   `where`の条件が矛盾するクエリを最適化する
+-   `Add Index`操作を最適化して進行状況を修正し、繰り返し操作を削減します
+-   `Index Look Join`演算子を最適化して、小さなデータ サイズのクエリ速度を高速化します。
+-   プレフィックスインデックス判定の問題を修正
 
-## Placement Driver (PD)
+## 配置Driver（PD） {#placement-driver-pd}
 
-- Improve the stability of scheduling under exceptional situations
+-   例外的な状況下でのスケジュールの安定性を向上
 
-## TiKV
+## ティクヴ {#tikv}
 
-- Support splitting table to ensure one region does not contain data from multiple tables
-- Limit the length of a key to be no more than 4 KB
-- More accurate read traffic statistics
-- Implement deep protection on the coprocessor stack
-- Fix the `LIKE` behavior and the `do_div_mod` bug
+-   1 つの領域に複数のテーブルのデータが含まれないようにテーブルを分割する機能をサポート
+-   キーの長さを4KB以下に制限する
+-   より正確な読み取りトラフィック統計
+-   コプロセッサスタックに強力な保護を実装する
+-   `LIKE`動作と`do_div_mod`バグを修正

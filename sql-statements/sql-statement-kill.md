@@ -1,90 +1,82 @@
 ---
 title: KILL
-summary: An overview of the usage of KILL for the TiDB database.
+summary: TiDB データベースに対する KILL の使用法の概要。
 ---
 
-# KILL
+# 殺す {#kill}
 
-The `KILL` statement is used to terminate a connection in any TiDB instance in the current TiDB cluster. Starting from TiDB v6.2.0, you can also use the `KILL` statement to terminate ongoing DDL jobs. 
+`KILL`ステートメントは、現在の TiDB クラスター内の任意の TiDB インスタンスの接続を終了するために使用されます。TiDB v6.2.0 以降では、 `KILL`ステートメントを使用して進行中の DDL ジョブを終了することもできます。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 KillStmt ::= 'KILL' 'TIDB'? ( 'CONNECTION' | 'QUERY' )? CONNECTION_ID
 ```
 
-## Examples
+## 例 {#examples}
 
-The following example shows how to get all active queries in the current cluster and terminate any one of them.
-
-{{< copyable "sql" >}}
+次の例は、現在のクラスター内のすべてのアクティブなクエリを取得し、そのうちの 1 つを終了する方法を示しています。
 
 ```sql
 SELECT ID, USER, INSTANCE, INFO FROM INFORMATION_SCHEMA.CLUSTER_PROCESSLIST;
 ```
 
-```
-+---------------------+------+-----------------+-----------------------------------------------------------------------------+
-| ID                  | USER | INSTANCE        | INFO                                                                        |
-+---------------------+------+-----------------+-----------------------------------------------------------------------------+
-| 8306449708033769879 | root | 127.0.0.1:10082 | select sleep(30), 'foo'                                                     |
-| 5857102839209263511 | root | 127.0.0.1:10080 | select sleep(50)                                                            |
-| 5857102839209263513 | root | 127.0.0.1:10080 | SELECT ID, USER, INSTANCE, INFO FROM INFORMATION_SCHEMA.CLUSTER_PROCESSLIST |
-+---------------------+------+-----------------+-----------------------------------------------------------------------------+
-```
-
-{{< copyable "sql" >}}
+    +---------------------+------+-----------------+-----------------------------------------------------------------------------+
+    | ID                  | USER | INSTANCE        | INFO                                                                        |
+    +---------------------+------+-----------------+-----------------------------------------------------------------------------+
+    | 8306449708033769879 | root | 127.0.0.1:10082 | select sleep(30), 'foo'                                                     |
+    | 5857102839209263511 | root | 127.0.0.1:10080 | select sleep(50)                                                            |
+    | 5857102839209263513 | root | 127.0.0.1:10080 | SELECT ID, USER, INSTANCE, INFO FROM INFORMATION_SCHEMA.CLUSTER_PROCESSLIST |
+    +---------------------+------+-----------------+-----------------------------------------------------------------------------+
 
 ```sql
 KILL 5857102839209263511;
 ```
 
-```
-Query OK, 0 rows affected (0.00 sec)
-```
+    Query OK, 0 rows affected (0.00 sec)
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-- The `KILL` statement of MySQL can only terminate a connection in the currently connected MySQL instance, while the `KILL` statement of TiDB can terminate a connection in any TiDB instance in the entire cluster.
-- In v7.2.0 and earlier versions, using the MySQL command line <kbd>Control+C</kbd> to terminate a query or connection in TiDB is not supported.
+-   MySQL の`KILL`ステートメントは現在接続されている MySQL インスタンス内の接続のみを終了できますが、TiDB の`KILL`ステートメントはクラスター全体の任意の TiDB インスタンス内の接続を終了できます。
+-   v7.2.0 以前のバージョンでは、MySQL コマンドラインの<kbd>Control+C</kbd>を使用して TiDB 内のクエリまたは接続を終了することはサポートされていません。
 
-## Behavior change descriptions
+## 行動変化の説明 {#behavior-change-descriptions}
 
 <CustomContent platform="tidb">
 
-Starting from v7.3.0, TiDB supports generating 32-bit connection IDs, which is enabled by default and controlled by the [`enable-32bits-connection-id`](/tidb-configuration-file.md#enable-32bits-connection-id-new-in-v730) configuration item. When both the Global Kill feature and 32-bit connection ID are enabled, TiDB generates a 32-bit connection ID and you can terminate queries or connections in the MySQL command-line using <kbd>Control+C</kbd>.
+v7.3.0 以降、TiDB は 32 ビット接続 ID の生成をサポートしています。これはデフォルトで有効になっており、 [`enable-32bits-connection-id`](/tidb-configuration-file.md#enable-32bits-connection-id-new-in-v730)構成項目によって制御されます。Global Kill 機能と 32 ビット接続 ID の両方が有効になっている場合、TiDB は 32 ビット接続 ID を生成し、MySQL コマンドラインで<kbd>Control+C</kbd>を使用してクエリまたは接続を終了できます。
 
-> **Warning:**
+> **警告：**
 >
-> When the number of TiDB instances in the cluster exceeds 2048 or the concurrent connection count of a single TiDB instance exceeds 1048576, the 32-bit connection ID space becomes insufficient and is automatically upgraded to 64-bit connection IDs. During the upgrade process, existing business and established connections are unaffected. However, subsequent new connections cannot be terminated using <kbd>Control+C</kbd> in the MySQL command-line.
+> クラスター内の TiDB インスタンスの数が 2048 を超えるか、単一の TiDB インスタンスの同時接続数が 1048576 を超えると、32 ビット接続 ID スペースが不足し、自動的に 64 ビット接続 ID にアップグレードされます。アップグレード プロセス中、既存のビジネス接続と確立された接続は影響を受けません。ただし、後続の新しい接続は、MySQL コマンドラインで<kbd>Control+C</kbd>を使用して終了することはできません。
 
-Starting from v6.1.0, TiDB supports the Global Kill feature, which is enabled by default and controlled by the [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610) configuration.
+v6.1.0 以降、TiDB は Global Kill 機能をサポートしています。この機能はデフォルトで有効になっており、 [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610)構成によって制御されます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Starting from v7.3.0, TiDB supports generating 32-bit connection IDs, which is enabled by default. When both the Global Kill feature and 32-bit connection ID are enabled, You can terminate queries or connections in the MySQL command-line using <kbd>Control+C</kbd>.
+v7.3.0 以降、TiDB は 32 ビット接続 ID の生成をサポートしており、これはデフォルトで有効になっています。Global Kill 機能と 32 ビット接続 ID の両方が有効になっている場合は、MySQL コマンドラインで<kbd>Control+C</kbd>を使用してクエリまたは接続を終了できます。
 
-Starting from v6.1.0, TiDB supports the Global Kill feature, which is enabled by default.
+v6.1.0 以降、TiDB は Global Kill 機能をサポートしており、デフォルトで有効になっています。
 
 </CustomContent>
 
-When the Global Kill feature is enabled, both `KILL` and `KILL TIDB` statements can terminate queries or connections across instances so you do not need to worry about erroneously terminating queries or connections. When you use a client to connect to any TiDB instance and execute the `KILL` or `KILL TIDB` statement, the statement will be forwarded to the target TiDB instance. If there is a proxy between the client and the TiDB cluster, the `KILL` and `KILL TIDB` statements will also be forwarded to the target TiDB instance for execution.
+Global Kill 機能が有効になっている場合、 `KILL`と`KILL TIDB`両方のステートメントでインスタンス間のクエリまたは接続を終了できるため、クエリまたは接続が誤って終了することを心配する必要はありません。クライアントを使用して任意の TiDB インスタンスに接続し、 `KILL`または`KILL TIDB`ステートメントを実行すると、ステートメントはターゲット TiDB インスタンスに転送されます。クライアントと TiDB クラスターの間にプロキシがある場合は、 `KILL`と`KILL TIDB`ステートメントもターゲット TiDB インスタンスに転送されて実行されます。
 
-If the Global Kill feature is not enabled or you are using a TiDB version earlier than v6.1.0, note the following:
+Global Kill 機能が有効になっていない場合、または v6.1.0 より前のバージョンの TiDB を使用している場合は、次の点に注意してください。
 
-- By default, `KILL` is not compatible with MySQL. This helps prevent against a case of a connection being terminated by a wrong TiDB server, because it is common to place multiple TiDB servers behind a load balancer. To terminate other connections on the currently connected TiDB instance, you need to add the `TIDB` suffix explicitly by executing the `KILL TIDB` statement.
+-   デフォルトでは、 `KILL` MySQL と互換性がありません。これは、ロード バランサーの背後に複数の TiDB サーバーを配置するのが一般的であるため、間違った TiDBサーバーによって接続が終了するケースを防ぐのに役立ちます。現在接続されている TiDB インスタンス上の他の接続を終了するには、 `KILL TIDB`ステートメントを実行して、 `TIDB`サフィックスを明示的に追加する必要があります。
 
 <CustomContent platform="tidb">
 
-- It is **STRONGLY NOT RECOMMENDED** to set [`compatible-kill-query = true`](/tidb-configuration-file.md#compatible-kill-query) in your configuration file UNLESS you are certain that clients will be always connected to the same TiDB instance. This is because pressing <kbd>Control+C</kbd> in the default MySQL client opens a new connection in which `KILL` is executed. If there is a proxy between the client and the TiDB cluster, the new connection might be routed to a different TiDB instance, which possibly kills a different session by mistake.
+-   クライアントが常に同じ TiDB インスタンスに接続されることが確実でない限り、構成ファイルで[`compatible-kill-query = true`](/tidb-configuration-file.md#compatible-kill-query)を設定することは**強く推奨されません**。これは、デフォルトの MySQL クライアントで<kbd>Control+C</kbd>を押すと、 `KILL`が実行される新しい接続が開かれるためです。クライアントと TiDB クラスターの間にプロキシがある場合、新しい接続は別の TiDB インスタンスにルーティングされる可能性があり、誤って別のセッションが強制終了される可能性があります。
 
 </CustomContent>
 
-- The `KILL TIDB` statement is a TiDB extension. The feature of this statement is similar to the MySQL `KILL [CONNECTION|QUERY]` command and the MySQL command line <kbd>Control+C</kbd>. It is safe to use `KILL TIDB` on the same TiDB instance.
+-   `KILL TIDB`ステートメントは TiDB の拡張機能です。このステートメントの機能は、MySQL `KILL [CONNECTION|QUERY]`コマンドおよび MySQL コマンドライン<kbd>Control+C</kbd>に似ています。同じ TiDB インスタンスで`KILL TIDB`を使用するのは安全です。
 
-## See also
+## 参照 {#see-also}
 
-* [SHOW \[FULL\] PROCESSLIST](/sql-statements/sql-statement-show-processlist.md)
-* [CLUSTER_PROCESSLIST](/information-schema/information-schema-processlist.md#cluster_processlist)
+-   [[フル]プロセスリストを表示](/sql-statements/sql-statement-show-processlist.md)
+-   [クラスタープロセスリスト](/information-schema/information-schema-processlist.md#cluster_processlist)

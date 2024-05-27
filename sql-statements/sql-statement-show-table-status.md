@@ -1,13 +1,13 @@
 ---
 title: SHOW TABLE STATUS | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW TABLE STATUS for the TiDB database.
+summary: TiDB データベースの SHOW TABLE STATUS の使用法の概要。
 ---
 
-# SHOW TABLE STATUS
+# テーブルステータスを表示 {#show-table-status}
 
-This statement shows various statistics about tables in TiDB. If the statistics appear out of date, it is recommended to run [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md).
+このステートメントは、TiDB 内のテーブルに関するさまざまな統計を表示します。統計が古いと思われる場合は、 [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)実行することをお勧めします。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowTableStatusStmt ::=
@@ -18,7 +18,7 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -76,13 +76,13 @@ Max_data_length: 0
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-The `SHOW TABLE STATUS` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB の`SHOW TABLE STATUS`ステートメントは MySQL と完全に互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) 。
 
-## See also
+## 参照 {#see-also}
 
-* [SHOW TABLES](/sql-statements/sql-statement-show-tables.md)
-* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
-* [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
-* [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+-   [テーブルを表示](/sql-statements/sql-statement-show-tables.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [テーブルを削除](/sql-statements/sql-statement-drop-table.md)
+-   [表示テーブルの作成](/sql-statements/sql-statement-show-create-table.md)

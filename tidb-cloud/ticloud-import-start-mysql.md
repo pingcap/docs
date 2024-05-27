@@ -1,79 +1,79 @@
 ---
 title: ticloud import start mysql
-summary: The reference of `ticloud import start mysql`.
+summary: `ticloud import start mysql` のリファレンス。
 ---
 
-# ticloud import start mysql
+# ticloud インポート開始 mysql {#ticloud-import-start-mysql}
 
-Import a table from a MySQL-compatible database to a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) cluster:
+MySQL 互換データベースから[TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターにテーブルをインポートします。
 
 ```shell
 ticloud import start mysql [flags]
 ```
 
-> **Note:**
+> **注記：**
 >
-> - Before running this command, make sure that you have installed the MySQL command-line tool first. For more details, see [Installation](/tidb-cloud/get-started-with-cli.md#installation).
-> - If the target table already exists in the target database, to use this command for table import, make sure that the target table name is the same as the source table name and add the `skip-create-table` flag in the command.
-> - If the target table does not exist in the target database, executing this command automatically creates a table with the same name as the source table in the target database.
+> -   このコマンドを実行する前に、まず MySQL コマンドライン ツールがインストールされていることを確認してください。詳細については、 [インストール](/tidb-cloud/get-started-with-cli.md#installation)参照してください。
+> -   ターゲット データベースにターゲット テーブルが既に存在する場合、このコマンドをテーブル インポートに使用するには、ターゲット テーブル名がソース テーブル名と同じであることを確認して、コマンドに`skip-create-table`フラグを追加します。
+> -   ターゲット データベースにターゲット テーブルが存在しない場合は、このコマンドを実行すると、ターゲット データベースにソース テーブルと同じ名前のテーブルが自動的に作成されます。
 
-## Examples
+## 例 {#examples}
 
-- Start an import task in interactive mode:
+-   対話モードでインポート タスクを開始します。
 
     ```shell
     ticloud import start mysql
     ```
 
-- Start an import task in non-interactive mode (using the TiDB Serverless cluster default user `<username-prefix>.root`):
+-   非対話型モードでインポート タスクを開始します (TiDB Serverless クラスターのデフォルト ユーザー`<username-prefix>.root`を使用)。
 
     ```shell
     ticloud import start mysql --project-id <project-id> --cluster-id <cluster-id> --source-host <source-host> --source-port <source-port> --source-user <source-user> --source-password <source-password> --source-database <source-database> --source-table <source-table> --target-database <target-database> --target-password <target-password>
     ```
 
-- Start an import task in non-interactive mode (using a specific user):
+-   非対話型モードでインポート タスクを開始します (特定のユーザーを使用)。
 
     ```shell
     ticloud import start mysql --project-id <project-id> --cluster-id <cluster-id> --source-host <source-host> --source-port <source-port> --source-user <source-user> --source-password <source-password> --source-database <source-database> --source-table <source-table> --target-database <target-database> --target-password <target-password> --target-user <target-user>
     ```
 
-- Start an import task that skips creating the target table if it already exists in the target database:
+-   ターゲット データベースにターゲット テーブルが既に存在する場合は、ターゲット テーブルの作成をスキップするインポート タスクを開始します。
 
     ```shell
     ticloud import start mysql --project-id <project-id> --cluster-id <cluster-id> --source-host <source-host> --source-port <source-port> --source-user <source-user> --source-password <source-password> --source-database <source-database> --source-table <source-table> --target-database <target-database> --target-password <target-password> --skip-create-table
     ```
 
-> **Note:**
+> **注記：**
 >
-> MySQL 8.0 uses `utf8mb4_0900_ai_ci` as the default collation, which is currently not supported by TiDB. If your source table uses the `utf8mb4_0900_ai_ci` collation, before the import, you need to either alter the source table collation to a [supported collation of TiDB](/character-set-and-collation.md#character-sets-and-collations-supported-by-tidb) or manually create the target table in TiDB.
+> MySQL 8.0 では、デフォルトの照合順序として`utf8mb4_0900_ai_ci`使用されますが、これは現在 TiDB ではサポートされていません。ソース テーブルで`utf8mb4_0900_ai_ci`照合順序が使用されている場合は、インポート前に、ソース テーブルの照合順序を[TiDBの照合順序をサポート](/character-set-and-collation.md#character-sets-and-collations-supported-by-tidb)に変更するか、TiDB でターゲット テーブルを手動で作成する必要があります。
 
-## Flags
+## 旗 {#flags}
 
-In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
+非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLI プロンプトに従ってフラグを入力するだけです。
 
-| Flag | Description | Required | Note |
-|---|---|---|---|
-| -c, --cluster-id string | Specifies the cluster ID. | Yes | Only works in non-interactive mode. |
-| -h, --help | Displays help information for this command. | No | Works in both non-interactive and interactive modes. |
-| -p, --project-id string | Specifies the project ID. | Yes | Only works in non-interactive mode. |
-| --skip-create-table | Skips creating the target table if it already exists in the target database. | No | Only works in non-interactive mode. |
-| --source-database string | The name of the source MySQL database. | Yes | Only works in non-interactive mode. |
-| --source-host string | The host of the source MySQL instance. | Yes | Only works in non-interactive mode. |
-| --source-password string | The password for the source MySQL instance. | Yes | Only works in non-interactive mode. |
-| --source-port int | The port of the source MySQL instance. | Yes | Only works in non-interactive mode. |
-| --source-table string | The source table name in the source MySQL database. | Yes | Only works in non-interactive mode. |
-| --source-user string | The user to log in to the source MySQL instance. | Yes | Only works in non-interactive mode. |
-| --target-database string | The target database name in the TiDB Serverless cluster. | Yes | Only works in non-interactive mode. |
-| --target-password string | The password for the target TiDB Serverless cluster. | Yes | Only works in non-interactive mode. |
-| --target-user string | The user to log in to the target TiDB Serverless cluster. | No | Only works in non-interactive mode. |
+| フラグ                   | 説明                                                       | 必須  | 注記                       |
+| --------------------- | -------------------------------------------------------- | --- | ------------------------ |
+| -c, --cluster-id 文字列  | クラスター ID を指定します。                                         | はい  | 非対話型モードでのみ動作します。         |
+| -h, --help            | このコマンドのヘルプ情報を表示します。                                      | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
+| -p, --プロジェクトID 文字列    | プロジェクト ID を指定します。                                        | はい  | 非対話型モードでのみ動作します。         |
+| --テーブルの作成をスキップ        | ターゲット データベースにターゲット テーブルが既に存在する場合は、ターゲット テーブルの作成をスキップします。 | いいえ | 非対話型モードでのみ動作します。         |
+| --source-database 文字列 | ソース MySQL データベースの名前。                                     | はい  | 非対話型モードでのみ動作します。         |
+| --source-host 文字列     | ソース MySQL インスタンスのホスト。                                    | はい  | 非対話型モードでのみ動作します。         |
+| --source-password 文字列 | ソース MySQL インスタンスのパスワード。                                  | はい  | 非対話型モードでのみ動作します。         |
+| --source-port 整数      | ソース MySQL インスタンスのポート。                                    | はい  | 非対話型モードでのみ動作します。         |
+| --ソーステーブル文字列          | ソース MySQL データベース内のソース テーブル名。                             | はい  | 非対話型モードでのみ動作します。         |
+| --source-user 文字列     | ソース MySQL インスタンスにログインするユーザー。                             | はい  | 非対話型モードでのみ動作します。         |
+| --ターゲットデータベース文字列      | TiDB Serverless クラスター内のターゲット データベース名。                    | はい  | 非対話型モードでのみ動作します。         |
+| --target-password 文字列 | ターゲット TiDB Serverless クラスターのパスワード。                       | はい  | 非対話型モードでのみ動作します。         |
+| --ターゲットユーザー文字列        | ターゲット TiDB Serverless クラスターにログインするユーザー。                  | いいえ | 非対話型モードでのみ動作します。         |
 
-## Inherited flags
+## 継承されたフラグ {#inherited-flags}
 
-| Flag | Description | Required | Note |
-|---|---|---|---|
-| --no-color | Disables color in output. | No | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No | Works in both non-interactive and interactive modes. |
+| フラグ               | 説明                                                                             | 必須  | 注記                                                           |
+| ----------------- | ------------------------------------------------------------------------------ | --- | ------------------------------------------------------------ |
+| --色なし             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話モードでのみ機能します。対話モードでは、一部の UI コンポーネントで色を無効にしても機能しない可能性があります。 |
+| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                     |
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI に関してご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)作成してください。また、あらゆる貢献を歓迎します。

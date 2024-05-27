@@ -1,55 +1,55 @@
 ---
 title: TiDB 4.0.1 Release Notes
-summary: TiDB 4.0.1 was released on June 12, 2020. New features include support for custom timeout for PD client and new collation framework in TiFlash. Bug fixes address issues with configuration, monitoring metrics, and store information retrieval. Backup & Restore (BR) now includes a version check to avoid compatibility issues.
+summary: TiDB 4.0.1 は 2020 年 6 月 12 日にリリースされました。新機能には、PD クライアントのカスタム タイムアウトのサポートとTiFlashの新しい照合順序フレームワークが含まれます。バグ修正により、構成、監視メトリック、およびストア情報の取得に関する問題が対処されます。バックアップと復元 ( BR) には、互換性の問題を回避するためのバージョン チェックが含まれるようになりました。
 ---
 
-# TiDB 4.0.1 Release Notes
+# TiDB 4.0.1 リリースノート {#tidb-4-0-1-release-notes}
 
-Release date: June 12, 2020
+発売日: 2020年6月12日
 
-TiDB version: 4.0.1
+TiDB バージョン: 4.0.1
 
-## New Features
+## 新機能 {#new-features}
 
-+ TiKV
+-   ティクヴ
 
-    - Add the `--advertise-status-addr` start flag to specify the status address to advertise [#8046](https://github.com/tikv/tikv/pull/8046)
+    -   `--advertise-status-addr`開始フラグを追加して、 [＃8046](https://github.com/tikv/tikv/pull/8046)をアドバタイズするステータスアドレスを指定します。
 
-+ PD
+-   PD
 
-    - Support the internal proxy for the built-in TiDB Dashboard [#2511](https://github.com/pingcap/pd/pull/2511)
-    - Support setting a custom timeout for PD client [#2509](https://github.com/pingcap/pd/pull/2509)
+    -   組み込みのTiDBダッシュボード[＃2511](https://github.com/pingcap/pd/pull/2511)の内部プロキシをサポート
+    -   PDクライアント[＃2509](https://github.com/pingcap/pd/pull/2509)のカスタムタイムアウト設定をサポート
 
-+ TiFlash
+-   TiFlash
 
-    - Support the TiDB new collation framework
-    - Support pushing down the `If`/`BitAnd/BitOr`/`BitXor/BitNot`/`Json_length` functions to TiFlash
-    - Support the Resolve Lock logic for large transactions in TiFlash
+    -   TiDBの新しい照合順序フレームワークをサポート
+    -   `If` / `BitAnd/BitOr` / `BitXor/BitNot` / `Json_length`関数をTiFlashにプッシュダウンするサポート
+    -   TiFlashの大規模トランザクションのResolve Lockロジックをサポート
 
-+ Tools
+-   ツール
 
-    - Backup & Restore (BR)
+    -   バックアップと復元 (BR)
 
-        - Add a version check when starting BR to avoid the issue that BR and the TiDB cluster are incompatible [#311](https://github.com/pingcap/br/pull/311)
+        -   BRとTiDBクラスタの互換性がない問題を回避するために、 BRの起動時にバージョンチェックを追加します[＃311](https://github.com/pingcap/br/pull/311)
 
-## Bug Fixes
+## バグの修正 {#bug-fixes}
 
-+ TiKV
+-   ティクヴ
 
-    - Fix the issue that the `use-unified-pool` configuration in the startup log is incorrectly printed [#7946](https://github.com/tikv/tikv/pull/7946)
-    - Fix the issue that the tikv-ctl does not support relative path [#7963](https://github.com/tikv/tikv/pull/7963)
-    - Fix the bug that the monitoring metric of Point Selects is inaccurate [#8033](https://github.com/tikv/tikv/pull/8033)
-    - Fix the issue that a peer might not be destroyed after the network isolation disappears [#8006](https://github.com/tikv/tikv/pull/8006)
-    - Fix the issue that a request for read index might get outdated commit index [#8043](https://github.com/tikv/tikv/pull/8043)
-    - Improve the reliability of backup and restore with S3 and GCS storages [#7917](https://github.com/tikv/tikv/pull/7917)
+    -   起動ログの`use-unified-pool`構成が誤って印刷される問題を修正[＃7946](https://github.com/tikv/tikv/pull/7946)
+    -   tikv-ctlが相対パス[＃7963](https://github.com/tikv/tikv/pull/7963)をサポートしない問題を修正
+    -   ポイントセレクトのモニタリングメトリックが不正確になるバグを修正[＃8033](https://github.com/tikv/tikv/pull/8033)
+    -   ネットワーク分離が消えた後にピアが破棄されない可能性がある問題を修正[＃8006](https://github.com/tikv/tikv/pull/8006)
+    -   読み取りインデックスのリクエストで古いコミットインデックス[＃8043](https://github.com/tikv/tikv/pull/8043)が取得される可能性がある問題を修正しました
+    -   S3 と GCS ストレージによるバックアップと復元の信頼性の向上[＃7917](https://github.com/tikv/tikv/pull/7917)
 
-+ PD
+-   PD
 
-    - Prevent misconfiguration of Placement Rules in some situations [#2516](https://github.com/pingcap/pd/pull/2516)
-    - Fix the issue that deleting the Placement Rule might cause panic [#2515](https://github.com/pingcap/pd/pull/2515)
-    - Fix a bug that the store information cannot be obtained when the store's used size is zero [#2474](https://github.com/pingcap/pd/pull/2474)
+    -   特定の状況で配置ルールの誤った設定を防ぐ[＃2516](https://github.com/pingcap/pd/pull/2516)
+    -   配置ルールを削除するとpanicが発生する可能性がある問題を修正[＃2515](https://github.com/pingcap/pd/pull/2515)
+    -   ストアの使用サイズがゼロの場合にストア情報が取得できないバグを修正[＃2474](https://github.com/pingcap/pd/pull/2474)
 
-+ TiFlash
+-   TiFlash
 
-    - Fix the issue that default value of the `bit` type column in TiFlash is incorrectly parsed
-    - Fix the miscalculation of `1970-01-01 00:00:00 UTC` in some timezones in TiFlash
+    -   TiFlashの`bit`型列のデフォルト値が正しく解析されない問題を修正
+    -   TiFlashの一部のタイムゾーンにおける`1970-01-01 00:00:00 UTC`の誤算を修正

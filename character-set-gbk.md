@@ -1,11 +1,11 @@
 ---
 title: GBK
-summary: This document provides details about the TiDB support of the GBK character set.
+summary: このドキュメントでは、GBK 文字セットの TiDB サポートについて詳しく説明します。
 ---
 
-# GBK
+# イギリス {#gbk}
 
-Since v5.4.0, TiDB supports the GBK character set. This document provides the TiDB support and compatibility information of the GBK character set.
+v5.4.0 以降、TiDB は GBK 文字セットをサポートしています。このドキュメントでは、TiDB の GBK 文字セットのサポートと互換性に関する情報を提供します。
 
 ```sql
 SHOW CHARACTER SET WHERE CHARSET = 'gbk';
@@ -25,27 +25,27 @@ SHOW COLLATION WHERE CHARSET = 'gbk';
 1 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-This section provides the compatibility information between MySQL and TiDB.
+このセクションでは、MySQL と TiDB 間の互換性に関する情報を提供します。
 
-### Collations
+### 照合順序 {#collations}
 
-The default collation of the GBK character set in MySQL is `gbk_chinese_ci`. Unlike MySQL, the default collation of the GBK character set in TiDB is `gbk_bin`. Additionally, because TiDB converts GBK to UTF8MB4 and then uses a binary collation, the `gbk_bin` collation in TiDB is not the same as the `gbk_bin` collation in MySQL.
+MySQL の GBK 文字セットのデフォルトの照合順序は`gbk_chinese_ci`です。MySQL とは異なり、TiDB の GBK 文字セットのデフォルトの照合順序は`gbk_bin`です。また、TiDB は GBK を UTF8MB4 に変換してからバイナリ照合順序を使用するため、TiDB の`gbk_bin`照合順序は MySQL の`gbk_bin`照合順序と同じではありません。
 
 <CustomContent platform="tidb">
 
-To make TiDB compatible with the collations of MySQL GBK character set, when you first initialize the TiDB cluster, you need to set the TiDB option [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) to `true` to enable the [new framework for collations](/character-set-and-collation.md#new-framework-for-collations).
+TiDB を MySQL GBK 文字セットの照合順序と互換性を持たせるには、最初に TiDB クラスターを初期化するときに、TiDB オプション[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)を`true`に設定して[照合のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)を有効にする必要があります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-To make TiDB compatible with the collations of MySQL GBK character set, when you first initialize the TiDB cluster, TiDB Cloud enables the [new framework for collations](/character-set-and-collation.md#new-framework-for-collations) by default.
+TiDB を MySQL GBK 文字セットの照合順序と互換性を持たせるために、TiDB クラスターを最初に初期化するときに、 TiDB Cloud はデフォルトで[照合のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)有効にします。
 
 </CustomContent>
 
-After enabling the new framework for collations, if you check the collations corresponding to the GBK character set, you can see that the TiDB GBK default collation is changed to `gbk_chinese_ci`.
+照合の新しいフレームワークを有効にした後、GBK 文字セットに対応する照合を確認すると、TiDB GBK のデフォルトの照合順序が`gbk_chinese_ci`に変更されていることがわかります。
 
 ```sql
 SHOW CHARACTER SET WHERE CHARSET = 'gbk';
@@ -66,46 +66,50 @@ SHOW COLLATION WHERE CHARSET = 'gbk';
 2 rows in set (0.00 sec)
 ```
 
-### Illegal character compatibility
+### 不正な文字の互換性 {#illegal-character-compatibility}
 
-* If the system variables [`character_set_client`](/system-variables.md#character_set_client) and [`character_set_connection`](/system-variables.md#character_set_connection) are not set to `gbk` at the same time, TiDB handles illegal characters in the same way as MySQL.
-* If `character_set_client` and `character_set_connection` are both set to `gbk`, TiDB handles illegal characters differently than MySQL.
+-   システム変数[`character_set_client`](/system-variables.md#character_set_client)と[`character_set_connection`](/system-variables.md#character_set_connection)同時に`gbk`に設定されていない場合、TiDB は MySQL と同じ方法で不正な文字を処理します。
+-   `character_set_client`と`character_set_connection`両方が`gbk`に設定されている場合、TiDB は不正な文字を MySQL とは異なる方法で処理します。
 
-    - MySQL handles illegal GBK character sets in reading and writing operations differently.
-    - TiDB handles illegal GBK character sets in reading and writing operations in the same way. In the SQL strict mode, TiDB reports an error when either reading or writing illegal GBK characters. In the non-strict mode, TiDB replaces illegal GBK characters with `?` when either reading or writing illegal GBK characters.
+    -   MySQL は、読み取り操作と書き込み操作で不正な GBK 文字セットを異なる方法で処理します。
+    -   TiDB は、読み取り操作と書き込み操作で不正な GBK 文字セットを同じ方法で処理します。SQL 厳密モードでは、不正な GBK 文字の読み取りまたは書き込みを行うと、TiDB はエラーを報告します。非厳密モードでは、不正な GBK 文字の読み取りまたは書き込みを行うと、TiDB は不正な GBK 文字を`?`に置き換えます。
 
-For example, after `SET NAMES gbk`, if you create a table using the `CREATE TABLE gbk_table(a VARCHAR(32) CHARACTER SET gbk)` statement in MySQL and TiDB respectively and then execute the SQL statements in the following table, you can see the detailed differences.
+例えば、 `SET NAMES gbk`後に、 MySQL と TiDB でそれぞれ`CREATE TABLE gbk_table(a VARCHAR(32) CHARACTER SET gbk)`ステートメントを使用してテーブルを作成し、次の表の SQL ステートメントを実行すると、詳細な違いを確認できます。
 
-| Database    |    If the configured SQL mode contains either `STRICT_ALL_TABLES` or `STRICT_TRANS_TABLES`                                               | If the configured SQL mode contains neither `STRICT_ALL_TABLES` nor `STRICT_TRANS_TABLES`                                                                     |
-|-------|-------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
-| MySQL | `SELECT HEX('一a');` <br /> `e4b88061`<br /><br />`INSERT INTO gbk_table values('一a');`<br /> `Incorrect Error`       | `SELECT HEX('一a');` <br /> `e4b88061`<br /><br />`INSERT INTO gbk_table VALUES('一a');`<br />`SELECT HEX(a) FROM gbk_table;`<br /> `e4b8` |
-| TiDB  | `SELECT HEX('一a');` <br /> `Incorrect Error`<br /><br />`INSERT INTO gbk_table VALUES('一a');`<br /> `Incorrect Error` | `SELECT HEX('一a');` <br /> `e4b83f`<br /><br />`INSERT INTO gbk_table VALUES('一a');`<br />`SELECT HEX(a) FROM gbk_table;`<br /> `e4b83f`  |
+| データベース   | 設定されたSQLモードに`STRICT_ALL_TABLES`または`STRICT_TRANS_TABLES`含まれている場合                                                   | 設定されたSQLモードに`STRICT_ALL_TABLES`も`STRICT_TRANS_TABLES`含まれていない場合                                                                       |
+| -------- | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| マイグレーション | `SELECT HEX('一a');`<br/> `e4b88061`<br/><br/> `INSERT INTO gbk_table values('一a');`<br/> `Incorrect Error`        | `SELECT HEX('一a');`<br/> `e4b88061`<br/><br/> `INSERT INTO gbk_table VALUES('一a');`<br/> `SELECT HEX(a) FROM gbk_table;`<br/> `e4b8` |
+| ティビ      | `SELECT HEX('一a');`<br/> `Incorrect Error`<br/><br/> `INSERT INTO gbk_table VALUES('一a');`<br/> `Incorrect Error` | `SELECT HEX('一a');`<br/> `e4b83f`<br/><br/> `INSERT INTO gbk_table VALUES('一a');`<br/> `SELECT HEX(a) FROM gbk_table;`<br/> `e4b83f` |
 
-In the above table, the result of `SELECT HEX('a');` in the `utf8mb4` byte set is `e4b88061`.
+上記の表では、 `utf8mb4`バイト セットの`SELECT HEX('a');`の結果は`e4b88061`なります。
 
-### Other MySQL compatibility
+### その他のMySQL互換性 {#other-mysql-compatibility}
 
-- Currently, TiDB does not support using the `ALTER TABLE` statement to convert other character set types to `gbk` or from `gbk` to other character set types.
+-   現在、TiDB は、 `ALTER TABLE`ステートメントを使用して他の文字セット タイプを`gbk`に変換したり、 `gbk`を他の文字セット タイプに変換したりすることはサポートしていません。
 
-* TiDB does not support the use of `_gbk`. For example:
+<!---->
 
-  ```sql
-  CREATE TABLE t(a CHAR(10) CHARSET BINARY);
-  Query OK, 0 rows affected (0.00 sec)
-  INSERT INTO t VALUES (_gbk'啊');
-  ERROR 1115 (42000): Unsupported character introducer: 'gbk'
-  ```
+-   TiDB は`_gbk`の使用をサポートしていません。例:
 
-- Currently, for binary characters of the `ENUM` and `SET` types, TiDB deals with them as the `utf8mb4` character set.
+    ```sql
+    CREATE TABLE t(a CHAR(10) CHARSET BINARY);
+    Query OK, 0 rows affected (0.00 sec)
+    INSERT INTO t VALUES (_gbk'啊');
+    ERROR 1115 (42000): Unsupported character introducer: 'gbk'
+    ```
 
-## Component compatibility
+<!---->
 
-- Currently, TiFlash does not support the GBK character set.
+-   現在、 `ENUM`および`SET`タイプのバイナリ文字については、TiDB は`utf8mb4`文字セットとして処理します。
 
-- TiDB Data Migration (DM) does not support migrating `charset=GBK` tables to TiDB clusters earlier than v5.4.0.
+## コンポーネントの互換性 {#component-compatibility}
 
-- TiDB Lightning does not support importing `charset=GBK` tables to TiDB clusters earlier than v5.4.0.
+-   現在、 TiFlash はGBK 文字セットをサポートしていません。
 
-- TiCDC versions earlier than v6.1.0 do not support replicating `charset=GBK` tables. No version of TiCDC supports replicating `charset=GBK` tables to TiDB clusters earlier than v6.1.0.
+-   TiDB データ移行 (DM) は、v5.4.0 より前の TiDB クラスターへの`charset=GBK`テーブルの移行をサポートしていません。
 
-- Backup & Restore (BR) versions earlier than v5.4.0 do not support recovering `charset=GBK` tables. No version of BR supports recovering `charset=GBK` tables to TiDB clusters earlier than v5.4.0.
+-   TiDB Lightning は、 v5.4.0 より前の TiDB クラスターへの`charset=GBK`テーブルのインポートをサポートしていません。
+
+-   v6.1.0 より前のバージョンの TiCDC では、 `charset=GBK`テーブルのレプリケーションはサポートされていません。v6.1.0 より前のバージョンの TiCDC では、 `charset=GBK`テーブルの TiDB クラスターへのレプリケーションはサポートされていません。
+
+-   v5.4.0 より前のバージョンのバックアップと復元 (BR) では、 `charset=GBK`テーブルの復元はサポートされていません。v5.4.0 より前のバージョンのBRでは、 `charset=GBK`テーブルの TiDB クラスターへの復元はサポートされていません。

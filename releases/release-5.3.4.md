@@ -1,60 +1,60 @@
 ---
 title: TiDB 5.3.4 Release Notes
-summary: TiDB 5.3.4 was released on November 24, 2022. The release includes improvements to TiKV and bug fixes for TiDB, PD, TiFlash, Dumpling, and TiCDC. Some of the key bug fixes include issues related to TLS certificate reloading, Region cache cleanup, wrong data writing, database-level privileges, and authentication failures. Other fixes address issues with logical operators, stream timeout, leader switchover, and data dumping.
+summary: TiDB 5.3.4 は 2022 年 11 月 24 日にリリースされました。このリリースには、TiKV の改善と、TiDB、PD、 TiFlash、 Dumpling、TiCDC のバグ修正が含まれています。主なバグ修正には、TLS 証明書の再読み込み、リージョンキャッシュのクリーンアップ、誤ったデータの書き込み、データベース レベルの権限、認証の失敗に関連する問題が含まれます。その他の修正では、論理演算子、ストリームのタイムアウト、リーダーの切り替え、データのダンプに関する問題に対処しています。
 ---
 
-# TiDB 5.3.4 Release Notes
+# TiDB 5.3.4 リリースノート {#tidb-5-3-4-release-notes}
 
-Release date: November 24, 2022
+発売日: 2022年11月24日
 
-TiDB version: 5.3.4
+TiDB バージョン: 5.3.4
 
-## Improvements
+## 改善点 {#improvements}
 
-+ TiKV
+-   ティクヴ
 
-    - Reload TLS certificate automatically for each update to improve availability [#12546](https://github.com/tikv/tikv/issues/12546)
+    -   可用性を向上させるために、更新ごとに TLS 証明書を自動的に再読み込みします[＃12546](https://github.com/tikv/tikv/issues/12546)
 
-## Bug fixes
+## バグの修正 {#bug-fixes}
 
-+ TiDB
+-   ティビ
 
-    - Fix the issue that the Region cache is not cleaned up in time when the Region is merged [#37141](https://github.com/pingcap/tidb/issues/37141)
-    - Fix the issue that TiDB writes wrong data due to the wrong encoding of the `ENUM` or `SET` column [#32302](https://github.com/pingcap/tidb/issues/32302)
-    - Fix the issue that database-level privileges are incorrectly cleaned up [#38363](https://github.com/pingcap/tidb/issues/38363)
-    - Fix the issue that the `grantor` field is missing in the `mysql.tables_priv` table [#38293](https://github.com/pingcap/tidb/issues/38293)
-    - Fix the issue that `KILL TIDB` cannot take effect immediately on idle connections [#24031](https://github.com/pingcap/tidb/issues/24031)
-    - Fix the issue that the return type of `date_add` and `date_sub` is different between TiDB and MySQL [#36394](https://github.com/pingcap/tidb/issues/36394), [#27573](https://github.com/pingcap/tidb/issues/27573)
-    - Fix the incorrect `INSERT_METHOD` value when Parser restores table options [#38368](https://github.com/pingcap/tidb/issues/38368)
-    - Fix the issue that authentication fails when a MySQL client of v5.1 or earlier connects to the TiDB server [#29725](https://github.com/pingcap/tidb/issues/29725)
-    - Fix wrong results of `GREATEST` and `LEAST` when passing in unsigned `BIGINT` arguments [#30101](https://github.com/pingcap/tidb/issues/30101)
-    - Fix the issue that the result of `concat(ifnull(time(3))` in TiDB is different from that in MySQL [#29498](https://github.com/pingcap/tidb/issues/29498)
-    - Fix the issue that the `avg()` function returns `ERROR 1105 (HY000): other error for mpp stream: Could not convert to the target type - -value is out of range.` when queried from TiFlash [#29952](https://github.com/pingcap/tidb/issues/29952)
-    - Fix the issue that `ERROR 1105 (HY000): close of nil channel` is returned when using `HashJoinExec` [#30289](https://github.com/pingcap/tidb/issues/30289)
-    - Fix the issue that TiKV and TiFlash return different results when querying logical operations [#37258](https://github.com/pingcap/tidb/issues/37258)
-    - Fix the issue that the `EXPLAIN ANALYZE` statement with DML executors might return result before the transaction commit finishes [#37373](https://github.com/pingcap/tidb/issues/37373)
-    - Fix the issue that Region cache is not cleared properly after merging many Regions [#37174](https://github.com/pingcap/tidb/issues/37174)
-    - Fix the issue that the `EXECUTE` statement might throw an unexpected error in specific scenarios [#37187](https://github.com/pingcap/tidb/issues/37187)
-    - Fix the issue that `GROUP CONCAT` with `ORDER BY` might fail when the `ORDER BY` clause contains a correlated subquery [#18216](https://github.com/pingcap/tidb/issues/18216)
-    - Fix wrong results returned when length and width are incorrectly set for Decimal and Real when using plan cache [#29565](https://github.com/pingcap/tidb/issues/29565)
+    -   リージョンがマージされたときにリージョンキャッシュが時間内にクリーンアップされない問題を修正[＃37141](https://github.com/pingcap/tidb/issues/37141)
+    -   `ENUM`または`SET`目のエンコードが間違っているためにTiDBが間違ったデータを書き込む問題を修正しました[＃32302](https://github.com/pingcap/tidb/issues/32302)
+    -   データベースレベルの権限が誤ってクリーンアップされる問題を修正[＃38363](https://github.com/pingcap/tidb/issues/38363)
+    -   `mysql.tables_priv`テーブル[＃38293](https://github.com/pingcap/tidb/issues/38293)の`grantor`フィールドが欠落している問題を修正
+    -   `KILL TIDB`アイドル接続ですぐに効果を発揮できない問題を修正[＃24031](https://github.com/pingcap/tidb/issues/24031)
+    -   TiDBとMySQL [＃36394](https://github.com/pingcap/tidb/issues/36394) [＃27573](https://github.com/pingcap/tidb/issues/27573)間で戻り値の型`date_add`と`date_sub`が異なる問題を修正
+    -   パーサーがテーブルオプション[＃38368](https://github.com/pingcap/tidb/issues/38368)を復元するときに誤った`INSERT_METHOD`値を修正します
+    -   バージョン5.1以前のMySQLクライアントがTiDBサーバー[＃29725](https://github.com/pingcap/tidb/issues/29725)に接続する際に認証が失敗する問題を修正
+    -   符号なし`BIGINT`引数[#30101](https://github.com/pingcap/tidb/issues/30101)を渡すときに`GREATEST`と`LEAST`の間違った結果を修正
+    -   TiDBの`concat(ifnull(time(3))`の結果がMySQL [＃29498](https://github.com/pingcap/tidb/issues/29498)の結果と異なる問題を修正
+    -   TiFlash [＃29952](https://github.com/pingcap/tidb/issues/29952)からクエリされたときに`avg()`関数が`ERROR 1105 (HY000): other error for mpp stream: Could not convert to the target type - -value is out of range.`を返す問題を修正
+    -   `HashJoinExec` [＃30289](https://github.com/pingcap/tidb/issues/30289)を使用すると`ERROR 1105 (HY000): close of nil channel`返される問題を修正
+    -   論理演算をクエリするときに TiKV とTiFlash が異なる結果を返す問題を修正[＃37258](https://github.com/pingcap/tidb/issues/37258)
+    -   DMLエグゼキュータを使用した`EXPLAIN ANALYZE`文がトランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました[＃37373](https://github.com/pingcap/tidb/issues/37373)
+    -   多数のリージョンをマージした後にリージョンキャッシュが適切にクリアされない問題を修正[＃37174](https://github.com/pingcap/tidb/issues/37174)
+    -   特定のシナリオで`EXECUTE`ステートメントが予期しないエラーをスローする可能性がある問題を修正[＃37187](https://github.com/pingcap/tidb/issues/37187)
+    -   `ORDER BY`節に相関サブクエリ[＃18216](https://github.com/pingcap/tidb/issues/18216)が含まれている場合に`GROUP CONCAT` with `ORDER BY`が失敗する可能性がある問題を修正しました。
+    -   プラン キャッシュ[＃29565](https://github.com/pingcap/tidb/issues/29565)を使用するときに、10 進数と実数の長さと幅が誤って設定されている場合に返される誤った結果を修正しました。
 
-+ PD
+-   PD
 
-    - Fix the issue that PD cannot correctly handle dashboard proxy requests [#5321](https://github.com/tikv/pd/issues/5321)
-    - Fix the issue that the TiFlash learner replica might not be created in specific scenarios [#5401](https://github.com/tikv/pd/issues/5401)
-    - Fix inaccurate Stream timeout and accelerate leader switchover [#5207](https://github.com/tikv/pd/issues/5207)
+    -   PDがダッシュボードプロキシリクエストを正しく処理できない問題を修正[＃5321](https://github.com/tikv/pd/issues/5321)
+    -   特定のシナリオでTiFlash学習レプリカが作成されない可能性がある問題を修正[＃5401](https://github.com/tikv/pd/issues/5401)
+    -   不正確なストリームタイムアウトを修正し、リーダーの切り替えを高速化[＃5207](https://github.com/tikv/pd/issues/5207)
 
-+ TiFlash
+-   TiFlash
 
-    - Fix the issue that logical operators return wrong results when the argument type is UInt8 [#6127](https://github.com/pingcap/tiflash/issues/6127)
-    - Fix the issue that TiFlash bootstrap fails when `0.0` is used as the default value for integers, for example, `` `i` int(11) NOT NULL DEFAULT '0.0'`` [#3157](https://github.com/pingcap/tiflash/issues/3157)
+    -   引数の型がUInt8 [＃6127](https://github.com/pingcap/tiflash/issues/6127)の場合に論理演算子が間違った結果を返す問題を修正
+    -   整数のデフォルト値として`0.0`が使用されるとTiFlashブートストラップが失敗する問題を修正しました (例: `` `i` int(11) NOT NULL DEFAULT '0.0'`` [＃3157](https://github.com/pingcap/tiflash/issues/3157)
 
-+ Tools
+-   ツール
 
-    + Dumpling
+    -   Dumpling
 
-        - Fix the issue that Dumpling cannot dump data when the `--compress` option and the S3 output directory are set simultaneously [#30534](https://github.com/pingcap/tidb/issues/30534)
+        -   `--compress`オプションと S3 出力ディレクトリが同時に設定されている場合にDumpling がデータをダンプできない問題を修正[＃30534](https://github.com/pingcap/tidb/issues/30534)
 
-    + TiCDC
+    -   ティCDC
 
-        - Fix the issue that changefeed state is incorrect because a MySQL-related error is not reported to the owner in time [#6698](https://github.com/pingcap/tiflow/issues/6698)
+        -   MySQL関連のエラーが時間内に所有者に報告されないため、changefeedの状態が正しくない問題を修正しました[＃6698](https://github.com/pingcap/tiflow/issues/6698)

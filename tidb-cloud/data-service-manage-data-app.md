@@ -1,198 +1,207 @@
 ---
 title: Manage a Data App
-summary: Learn how to create, view, modify, and delete a Data App in the TiDB Cloud console.
+summary: TiDB Cloudコンソールでデータ アプリを作成、表示、変更、削除する方法を学習します。
 ---
 
-# Manage a Data App
+# データアプリを管理する {#manage-a-data-app}
 
-A Data App in Data Service (beta) is a collection of endpoints that you can use to access data for a specific application. You can configure authorization settings using API keys to restrict access to endpoints in a Data App.
+データ サービス (ベータ版) のデータ アプリは、特定のアプリケーションのデータにアクセスするために使用できるエンドポイントのコレクションです。API キーを使用して承認設定を構成し、データ アプリのエンドポイントへのアクセスを制限できます。
 
-This document describes how to manage your Data Apps in the TiDB Cloud console. On the [**Data Service**](https://tidbcloud.com/console/data-service) page, you can manage all Data Apps, endpoints, and API keys.
+このドキュメントで[**データサービス**](https://tidbcloud.com/console/data-service) 、 TiDB Cloudコンソールでデータ アプリを管理する方法について説明します。1 ページで、すべてのデータ アプリ、エンドポイント、API キーを管理できます。
 
-## Create a Data App
+## データアプリを作成する {#create-a-data-app}
 
-To create a Data App for your project, perform the following steps:
+プロジェクトのデータ アプリを作成するには、次の手順を実行します。
 
-1. On the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project, click <MDSvgIcon name="icon-create-data-app" /> **Create DataApp** in the left pane.
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページで、<mdsvgicon name="icon-create-data-app">左側のペインで**DataApp を作成します**。</mdsvgicon>
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If this is the first Data App in your project, click **Create Data App** in the middle of the page.
+    > これがプロジェクトの最初のデータ アプリである場合は、ページの中央にある**[データ アプリの作成] を**クリックします。
 
-2. Enter a name, a description, and select clusters that you want the Data App to access.
+2.  名前と説明を入力し、データ アプリがアクセスするクラスターを選択します。
 
-    > **Note:**
+    > **注記：**
     >
-    > By default, the Data App type is **Standard Data App**. If you want to create a **Chat2Query Data App**, refer to [Get Started with Chat2Query API](/tidb-cloud/use-chat2query-api.md) instead of this document.
+    > デフォルトでは、データ アプリの種類は**標準データ アプリ**です。Chat2Query**データ アプリ**を作成する場合は、このドキュメントではなく[Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)を参照してください。
 
-3. (Optional) To automatically deploy endpoints of the Data App to your preferred GitHub repository and branch, enable **Connect to GitHub**, and then do the following:
+3.  (オプション) データ アプリのエンドポイントを優先 GitHub リポジトリとブランチに自動的にデプロイするには、 **GitHub に接続**を有効にして、次の操作を行います。
 
-    1. Click **Install on GitHub**, and then follow the on-screen instructions to install **TiDB Cloud Data Service** as an application on your target repository.
-    2. Click **Authorize** to authorize access to the application on GitHub.
-    3. Specify the target repository, branch, and directory where you want to save the configuration files of your Data App.
+    1.  **「GitHub にインストール」を**クリックし、画面の指示に従って、 **TiDB Cloud Data Service**をアプリケーションとしてターゲット リポジトリにインストールします。
+    2.  **「承認」**をクリックして、GitHub 上のアプリケーションへのアクセスを承認します。
+    3.  データ アプリの構成ファイルを保存するターゲット リポジトリ、ブランチ、およびディレクトリを指定します。
 
-        > **Note:**
+        > **注記：**
         >
-        > - The directory must start with a slash (`/`). For example, `/mydata`. If the directory you specified does not exist in the target repository and branch, it will be created automatically.
-        > - The combination of repository, branch, and directory identifies the path of the configuration files, which must be unique among Data Apps. If your specified path is already used by another Data App, you need to specify a new path instead. Otherwise, the endpoints configured in the TiDB Cloud console for the current Data App will overwrite the files in your specified path.
-        > - If your specified path contains configuration files copied from another Data App and you want to import these files to the current Data App, see [Import configurations of an existing Data App](/tidb-cloud/data-service-manage-github-connection.md#import-configurations-of-an-existing-data-app).
+        > -   ディレクトリはスラッシュ ( `/` ) で始まる必要があります。たとえば、 `/mydata` 。指定したディレクトリがターゲット リポジトリとブランチに存在しない場合は、自動的に作成されます。
+        > -   リポジトリ、ブランチ、ディレクトリの組み合わせによって構成ファイルのパスが識別されます。このパスはデータ アプリ間で一意である必要があります。指定したパスが別のデータ アプリで既に使用されている場合は、代わりに新しいパスを指定する必要があります。そうしないと、現在のデータ アプリのTiDB Cloudコンソールで構成されたエンドポイントによって、指定したパスのファイルが上書きされます。
+        > -   指定したパスに別のデータ アプリからコピーされた構成ファイルが含まれており、これらのファイルを現在のデータ アプリにインポートする場合は、 [既存のデータアプリの構成をインポートする](/tidb-cloud/data-service-manage-github-connection.md#import-configurations-of-an-existing-data-app)を参照してください。
 
-4. Click **Create Data App**.
+4.  **[データ アプリの作成] を**クリックします。
 
-    The newly created Data App is added to the top of the list. A default `untitled endpoint` is created for the new Data App.
+    新しく作成されたデータ アプリがリストの先頭に追加されます。新しいデータ アプリにはデフォルトで`untitled endpoint`が作成されます。
 
-5. If you have configured to connect your Data App to GitHub, check your specified GitHub directory. You will find that the [Data App configuration files](/tidb-cloud/data-service-app-config-files.md) have been committed to the directory by `tidb-cloud-data-service`, which means that your Data App is connected to GitHub successfully.
+5.  データ アプリを GitHub に接続するように構成している場合は、指定した GitHub ディレクトリを確認してください。 [データアプリ構成ファイル](/tidb-cloud/data-service-app-config-files.md)が`tidb-cloud-data-service`によってディレクトリにコミットされていることがわかります。これは、データ アプリが GitHub に正常に接続されていることを意味します。
 
-    For your new Data App, **Auto Sync & Deployment** and **Review Draft** are enabled by default so you can easily synchronize Data App changes between TiDB Cloud console and GitHub and review changes before the deployment. For more information about the GitHub integration, see [Deploy your Data App changes with GitHub automatically](/tidb-cloud/data-service-manage-github-connection.md).
+    新しいデータ アプリでは、**自動同期とデプロイメント**および**ドラフトの確認が**デフォルトで有効になっているため、 TiDB Cloudコンソールと GitHub 間でデータ アプリの変更を簡単に同期し、デプロイメント前に変更を確認できます。GitHub 統合の詳細については、 [データアプリの変更を GitHub で自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
 
-## Configure a Data App
+## データアプリを構成する {#configure-a-data-app}
 
-You can edit the name, version, or description of a Data App, and manage its GitHub connection, linked data sources, API keys, endpoints, and deployments.
+データ アプリの名前、バージョン、説明を編集したり、GitHub 接続、リンクされたデータ ソース、API キー、エンドポイント、デプロイメントを管理したりできます。
 
-### Edit Data App properties
+### データアプリのプロパティを編集する {#edit-data-app-properties}
 
-You can edit the name, version, and description of a Data App. To edit Data App properties, perform the following steps:
+データ アプリの名前、バージョン、説明を編集できます。データ アプリのプロパティを編集するには、次の手順を実行します。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, click the name of your target Data App to view its details.
-3. In the **Data App Properties** area, click <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="gray.1"><path d="M11 3.99998H6.8C5.11984 3.99998 4.27976 3.99998 3.63803 4.32696C3.07354 4.61458 2.6146 5.07353 2.32698 5.63801C2 6.27975 2 7.11983 2 8.79998V17.2C2 18.8801 2 19.7202 2.32698 20.362C2.6146 20.9264 3.07354 21.3854 3.63803 21.673C4.27976 22 5.11984 22 6.8 22H15.2C16.8802 22 17.7202 22 18.362 21.673C18.9265 21.3854 19.3854 20.9264 19.673 20.362C20 19.7202 20 18.8801 20 17.2V13M7.99997 16H9.67452C10.1637 16 10.4083 16 10.6385 15.9447C10.8425 15.8957 11.0376 15.8149 11.2166 15.7053C11.4184 15.5816 11.5914 15.4086 11.9373 15.0627L21.5 5.49998C22.3284 4.67156 22.3284 3.32841 21.5 2.49998C20.6716 1.67156 19.3284 1.67155 18.5 2.49998L8.93723 12.0627C8.59133 12.4086 8.41838 12.5816 8.29469 12.7834C8.18504 12.9624 8.10423 13.1574 8.05523 13.3615C7.99997 13.5917 7.99997 13.8363 7.99997 14.3255V16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>, modify the App name, version, or description, and then click **Confirm**.
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
+2.  左側のペインで、対象のデータ アプリの名前をクリックして詳細を表示します。
+3.  **データアプリのプロパティ**領域で、 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="gray.1"><path d="M11 3.99998H6.8C5.11984 3.99998 4.27976 3.99998 3.63803 4.32696C3.07354 4.61458 2.6146 5.07353 2.32698 5.63801C2 6.27975 2 7.11983 2 8.79998V17.2C2 18.8801 2 19.7202 2.32698 20.362C2.6146 20.9264 3.07354 21.3854 3.63803 21.673C4.27976 22 5.11984 22 6.8 22H15.2C16.8802 22 17.7202 22 18.362 21.673C18.9265 21.3854 19.3854 20.9264 19.673 20.362C20 19.7202 20 18.8801 20 17.2V13M7.99997 16H9.67452C10.1637 16 10.4083 16 10.6385 15.9447C10.8425 15.8957 11.0376 15.8149 11.2166 15.7053C11.4184 15.5816 11.5914 15.4086 11.9373 15.0627L21.5 5.49998C22.3284 4.67156 22.3284 3.32841 21.5 2.49998C20.6716 1.67156 19.3284 1.67155 18.5 2.49998L8.93723 12.0627C8.59133 12.4086 8.41838 12.5816 8.29469 12.7834C8.18504 12.9624 8.10423 13.1574 8.05523 13.3615C7.99997 13.5917 7.99997 13.8363 7.99997 14.3255V16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>をクリックし、アプリ名、バージョン、または説明を変更して、 **「確認」**をクリックします。
 
-### Manage GitHub connection
+### GitHub接続を管理する {#manage-github-connection}
 
-For more information, see [Deploy automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
+詳細については[GitHubで自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)参照してください。
 
-### Integrate your Data App with GPTs
+### データアプリをGPTと統合する {#integrate-your-data-app-with-gpts}
 
-You can integrate your Data App with [GPTs](https://openai.com/blog/introducing-gpts) to enhance your applications with intelligent capabilities.
+データ アプリを[GPT](https://openai.com/blog/introducing-gpts)と統合して、インテリジェントな機能でアプリケーションを強化できます。
 
-To integrate your Data App with GPTs, perform the following steps:
+データ アプリを GPT と統合するには、次の手順を実行します。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, locate your target Data App and click the name of your target Data App to view its details.
-3. In the **Integration with GPTs** area, click **Get Configuration**.
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
+
+2.  左側のペインで、対象のデータ アプリを見つけて、対象のデータ アプリの名前をクリックして詳細を表示します。
+
+3.  **GPT との統合**領域で、**コンフィグレーションの取得を**クリックします。
 
     ![Get Configuration](/media/tidb-cloud/data-service/GPTs1.png)
 
-4. In the displayed dialog box, you can see the following fields:
+4.  表示されたダイアログ ボックスには、次のフィールドが表示されます。
 
-    a. **API Specification URL**: copy the URL of the OpenAPI Specification of your Data App. For more information, see [Use the OpenAPI Specification](#use-the-openapi-specification).
+    a. **API 仕様 URL** : データ アプリの OpenAPI 仕様の URL をコピーします。詳細については、 [OpenAPI仕様を使用する](#use-the-openapi-specification)を参照してください。
 
-    b. **API Key**: enter the API key of your Data App. If you do not have an API key yet, click **Create API Key** to create one. For more information, see [Create an API key](/tidb-cloud/data-service-api-key.md#create-an-api-key).
+    b. **API キー**: データ アプリの API キーを入力します。API キーをまだお持ちでない場合は、 **「API キーの作成」**をクリックして作成します。詳細については、 [APIキーを作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)を参照してください。
 
-    c. **API Key Encoded**: copy the base64 encoded string equivalent to the API key you have provided.
+    c.**エンコードされた API キー**: 指定した API キーに相当する base64 でエンコードされた文字列をコピーします。
 
     ![GPTs Dialog Box](/media/tidb-cloud/data-service/GPTs2.png)
 
-5. Use the copied API Specification URL and the encoded API key in your GPT configuration.
+5.  コピーした API 仕様 URL とエンコードされた API キーを GPT 構成で使用します。
 
-### Manage linked data sources
+### リンクされたデータソースを管理する {#manage-linked-data-sources}
 
-You can add or remove linked clusters for a Data App.
+データ アプリのリンクされたクラスターを追加または削除できます。
 
-To link a cluster to a Data App, perform the following steps:
+クラスターをデータ アプリにリンクするには、次の手順を実行します。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, locate your target Data App and click the name of your target Data App to view its details.
-3. In the **Linked Data Sources** area, click **Add Cluster**.
-4. In the displayed dialog box, select a cluster from the list and click **Add**.
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
+2.  左側のペインで、対象のデータ アプリを見つけて、対象のデータ アプリの名前をクリックして詳細を表示します。
+3.  **[リンクされたデータ ソース]**領域で、 **[クラスタの追加]**をクリックします。
+4.  表示されたダイアログボックスで、リストからクラスターを選択し、 **「追加」を**クリックします。
 
-To remove a linked cluster from a Data App, perform the following steps:
+データ アプリからリンクされたクラスターを削除するには、次の手順を実行します。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, locate your target Data App and click the name of your target Data App to view its details.
-3. In the **Linked Data Sources** area, locate the target linked cluster you want to remove from the Data App, and click **Delete** in the **Action** column.
-4. In the displayed dialog box, confirm the removal.
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
+2.  左側のペインで、対象のデータ アプリを見つけて、対象のデータ アプリの名前をクリックして詳細を表示します。
+3.  **[リンクされたデータ ソース]**領域で、データ アプリから削除する対象のリンクされたクラスターを見つけて、 **[アクション]**列の**[削除] を**クリックします。
+4.  表示されたダイアログボックスで削除を確認します。
 
-    After you remove a linked cluster, the cluster is not deleted, but the existing endpoints in the Data App cannot access it.
+    リンクされたクラスターを削除しても、クラスターは削除されませんが、データ アプリ内の既存のエンドポイントはクラスターにアクセスできなくなります。
 
-### Manage an API key
+### APIキーを管理する {#manage-an-api-key}
 
-For more information, see [Manage an API key](/tidb-cloud/data-service-api-key.md).
+詳細については[APIキーを管理する](/tidb-cloud/data-service-api-key.md)参照してください。
 
-### Manage an endpoint
+### エンドポイントを管理する {#manage-an-endpoint}
 
-For more information, see [Manage an endpoint](/tidb-cloud/data-service-manage-endpoint.md).
+詳細については[エンドポイントを管理する](/tidb-cloud/data-service-manage-endpoint.md)参照してください。
 
-### Manage deployments
+### 展開の管理 {#manage-deployments}
 
-To manage deployments, perform the following steps:
+デプロイメントを管理するには、次の手順を実行します。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, locate your target Data App and click the name of your target Data App to view its details.
-3. In the **Deployment Configuration** area, click **Config**. The dialog for deployment configuration is displayed.
-4. In the dialog, choose your desired setting of **Auto Sync & Deployment** and **Review Draft**.
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
 
-    - **Auto Sync & Deployment**
+2.  左側のペインで、対象のデータ アプリを見つけて、対象のデータ アプリの名前をクリックして詳細を表示します。
 
-        - This option can be enabled only when your Data App is connected to GitHub. For more information, see [Deploy automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
-        - When it is enabled, the changes made in your specified GitHub directory can be automatically deployed in TiDB Cloud, and the changes made in the TiDB Cloud console can be pushed to GitHub as well. You can find the corresponding deployment and commit information in the Data App deployment history.
-        - When it is disabled, the changes made in your specified GitHub directory will **NOT** be deployed in TiDB Cloud, and the changes made in the TiDB Cloud console will **NOT** be pushed to GitHub either.
+3.  **デプロイメントコンフィグレーション**領域で、**構成を**クリックします。デプロイメント構成のダイアログが表示されます。
 
-    - **Review Draft**
+4.  ダイアログで、**自動同期と展開**と**ドラフトの確認**の希望の設定を選択します。
 
-        - When it is enabled, you can review the Data App changes you made in the TiDB Cloud console before the deployment. Based on the review, you can either deploy or discard the changes.
-        - When it is disabled, the Data App changes you made in the TiDB Cloud console are deployed directly.
+    -   **自動同期と展開**
 
-5. In the **Action** column, you can edit or re-deploy your changes according to your needs.
+        -   このオプションは、データ アプリが GitHub に接続されている場合にのみ有効にできます。詳細については、 [GitHubで自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
+        -   有効にすると、指定した GitHub ディレクトリで行われた変更がTiDB Cloudに自動的にデプロイされ、 TiDB Cloudコンソールで行われた変更も GitHub にプッシュされます。対応するデプロイとコミットの情報は、データ アプリのデプロイ履歴で確認できます。
+        -   無効にすると、指定した GitHub ディレクトリで行われた変更はTiDB Cloudにデプロイされ**ず**、 TiDB Cloudコンソールで行われた変更も GitHub にプッシュされませ**ん**。
 
-## Use the OpenAPI Specification
+    -   **レビュー草稿**
 
-Data Service (beta) supports generating the OpenAPI Specification 3.0 for each Data App, which enables you to interact with your endpoints in a standardized format. You can use this specification to generate standardized OpenAPI documentation, client SDKs, and server stubs.
+        -   有効にすると、デプロイ前にTiDB Cloudコンソールで行ったデータ アプリの変更を確認できます。確認に基づいて、変更をデプロイするか破棄するかを選択できます。
+        -   無効にすると、 TiDB Cloudコンソールで行ったデータ アプリの変更が直接デプロイされます。
 
-### Download the OpenAPI Specification
+5.  **「アクション」**列では、必要に応じて変更を編集または再展開できます。
 
-To download the OpenAPI Specification in JSON or YAML format for a Data App, perform the following steps:
+## OpenAPI仕様を使用する {#use-the-openapi-specification}
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, click the name of your target Data App to view its details.
-3. In the **API Specification** area, click **Download** and select **JSON** or **YAML**.
+データ サービス (ベータ版) は、各データ アプリの OpenAPI 仕様 3.0 の生成をサポートしており、標準化された形式でエンドポイントとやり取りできるようになります。この仕様を使用して、標準化された OpenAPI ドキュメント、クライアント SDK、サーバースタブを生成できます。
 
-    If this is your first time downloading the OpenAPI Specification, you need to authorize the request when prompted.
+### OpenAPI仕様をダウンロードする {#download-the-openapi-specification}
 
-4. Then, the OpenAPI Specification is downloaded to your local machine.
+データ アプリの OpenAPI 仕様を JSON または YAML 形式でダウンロードするには、次の手順を実行します。
 
-### View the OpenAPI documentation
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
 
-Data Service (beta) provides autogenerated OpenAPI documentation for each Data App. In the documentation, you can view the endpoints, parameters, and responses, and try out the endpoints.
+2.  左側のペインで、対象のデータ アプリの名前をクリックして詳細を表示します。
 
-To access the OpenAPI documentation, perform the following steps:
+3.  **API 仕様**領域で、 **「ダウンロード」を**クリックし、 **JSON**または**YAML**を選択します。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, click the name of your target Data App to view its details.
-3. In the upper-right corner of the page, click **View API Docs**.
+    OpenAPI 仕様を初めてダウンロードする場合は、プロンプトが表示されたらリクエストを承認する必要があります。
 
-    If this is your first time using the OpenAPI Specification, you need to authorize the request when prompted.
+4.  次に、OpenAPI 仕様がローカル マシンにダウンロードされます。
 
-4. Then, the OpenAPI documentation is opened in a new tab. In the documentation, you can view the following information:
+### OpenAPIドキュメントをビュー {#view-the-openapi-documentation}
 
-    - Data App name, version, and description.
-    - Endpoints grouped by tags.
+データ サービス (ベータ版) では、各データ アプリに対して自動生成された OpenAPI ドキュメントが提供されます。ドキュメントでは、エンドポイント、パラメーター、応答を表示し、エンドポイントを試すことができます。
 
-5. (Optional) To try out an endpoint, take the following steps:
+OpenAPI ドキュメントにアクセスするには、次の手順を実行します。
 
-    1. Click **Authorize** and enter your Data App public key as **Username** and private key as **Password** in the displayed dialog box.
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
 
-        For more information, see [Manage an API key](/tidb-cloud/data-service-api-key.md).
+2.  左側のペインで、対象のデータ アプリの名前をクリックして詳細を表示します。
 
-    2. Locate your target endpoint, provide the required parameters, and then click **Try it out**. You can view the response in the **Response body** area.
+3.  ページの右上隅にある**「API ドキュメントのビュー」を**クリックします。
 
-  For more information about how to use the OpenAPI documentation, see [Swagger UI](https://swagger.io/tools/swagger-ui/).
+    OpenAPI 仕様を初めて使用する場合は、プロンプトが表示されたらリクエストを承認する必要があります。
 
-## Delete a Data App
+4.  次に、OpenAPI ドキュメントが新しいタブで開きます。ドキュメントでは、次の情報を確認できます。
 
-> **Note:**
+    -   データ アプリの名前、バージョン、説明。
+    -   タグ別にグループ化されたエンドポイント。
+
+5.  (オプション) エンドポイントを試すには、次の手順を実行します。
+
+    1.  **[承認] を**クリックし、表示されたダイアログ ボックスに、データ アプリの公開キーを**ユーザー名**として、秘密キーを**パスワード**として入力します。
+
+        詳細については[APIキーを管理する](/tidb-cloud/data-service-api-key.md)参照してください。
+
+    2.  ターゲット エンドポイントを見つけて、必要なパラメータを指定して、 **[試してみる]**をクリックします。応答は**[応答本文]**領域で確認できます。
+
+OpenAPI ドキュメントの使用方法の詳細については、 [スワッガーUI](https://swagger.io/tools/swagger-ui/)参照してください。
+
+## データアプリを削除する {#delete-a-data-app}
+
+> **注記：**
 >
-> Before you delete a Data App, make sure that all endpoints are not online. Otherwise, you cannot delete the Data App. To undeploy an endpoint, refer to [Undeploy an endpoint](/tidb-cloud/data-service-manage-endpoint.md#undeploy-an-endpoint).
+> データ アプリを削除する前に、すべてのエンドポイントがオンラインになっていないことを確認してください。そうでない場合、データ アプリを削除できません。エンドポイントをアンデプロイするには、 [エンドポイントのデプロイ解除](/tidb-cloud/data-service-manage-endpoint.md#undeploy-an-endpoint)を参照してください。
 
-To delete a Data App, perform the following steps:
+データ アプリを削除するには、次の手順を実行します。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, locate your target Data App and click the name of your target Data App to view its details.
-3. In the **Danger Zone** area, click **Delete Data App**. A dialog box for confirmation is displayed.
-4. Type your `<organization name>/<project name>/<data app name>`, and then click **I understand, delete**.
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
+2.  左側のペインで、対象のデータ アプリを見つけて、対象のデータ アプリの名前をクリックして詳細を表示します。
+3.  **危険ゾーン**エリアで、 **「データアプリの削除」**をクリックします。確認のダイアログボックスが表示されます。
+4.  `<organization name>/<project name>/<data app name>`を入力し、 **[理解して削除] を**クリックします。
 
-    Once a Data App is deleted, the existing endpoints and API keys in the Data App are also deleted. If this Data App is connected to GitHub, deleting the App does not delete the files in the corresponding GitHub repository.
+    データ アプリを削除すると、データ アプリ内の既存のエンドポイントと API キーも削除されます。このデータ アプリが GitHub に接続されている場合、アプリを削除しても、対応する GitHub リポジトリ内のファイルは削除されません。
 
-## Learn more
+## もっと詳しく知る {#learn-more}
 
-- [Run Data App in Postman](/tidb-cloud/data-service-postman-integration.md)
+-   [Postmanでデータアプリを実行する](/tidb-cloud/data-service-postman-integration.md)

@@ -1,127 +1,127 @@
 ---
 title: Tune Operating System Performance
-summary: Learn how to tune the parameters of the operating system.
+summary: オペレーティング システムのパラメータを調整する方法を学習します。
 ---
 
-# Tune Operating System Performance
+# オペレーティングシステムのパフォーマンスを調整する {#tune-operating-system-performance}
 
-This document introduces how to tune each subsystem of CentOS 7.
+このドキュメントでは、CentOS 7 の各サブシステムをチューニングする方法を紹介します。
 
-> **Note:**
+> **注記：**
 >
-> + The default configuration of the CentOS 7 operating system is suitable for most services running under moderate workloads. Adjusting the performance of a particular subsystem might negatively affects other subsystems. Therefore, before tuning the system, back up all the user data and configuration information.
-> + Fully test all the changes in the test environment before applying them to the production environment.
+> -   CentOS 7 オペレーティング システムのデフォルト構成は、中程度のワークロードで実行されるほとんどのサービスに適しています。特定のサブシステムのパフォーマンスを調整すると、他のサブシステムに悪影響を与える可能性があります。したがって、システムを調整する前に、すべてのユーザー データと構成情報をバックアップしてください。
+> -   すべての変更を本番環境に適用する前に、テスト環境で完全にテストします。
 
-## Performance analysis methods
+## パフォーマンス分析方法 {#performance-analysis-methods}
 
-System tuning must be based on the results of system performance analysis. This section lists common methods for performance analysis.
+システム チューニングは、システム パフォーマンス分析の結果に基づいて行う必要があります。このセクションでは、パフォーマンス分析の一般的な方法を示します。
 
-### In 60 seconds
+### 60秒で {#in-60-seconds}
 
-[*Linux Performance Analysis in 60,000 Milliseconds*](http://www.brendangregg.com/Articles/Netflix_Linux_Perf_Analysis_60s.pdf) is published by the author Brendan Gregg and the Netflix Performance Engineering team. All tools used can be obtained from the official release of Linux. You can analyze outputs of the following list items to troubleshoot most common performance issues.
+[*60,000 ミリ秒での Linux パフォーマンス分析*](http://www.brendangregg.com/Articles/Netflix_Linux_Perf_Analysis_60s.pdf) 、著者 Brendan Gregg と Netflix パフォーマンス エンジニアリング チームによって公開されています。使用されているすべてのツールは、Linux の公式リリースから入手できます。次のリスト項目の出力を分析して、最も一般的なパフォーマンスの問題をトラブルシューティングできます。
 
-+ `uptime`
-+ `dmesg | tail`
-+ `vmstat 1`
-+ `mpstat -P ALL 1`
-+ `pidstat 1`
-+ `iostat -xz 1`
-+ `free -m`
-+ `sar -n DEV 1`
-+ `sar -n TCP,ETCP 1`
-+ `top`
+-   `uptime`
+-   `dmesg | tail`
+-   `vmstat 1`
+-   `mpstat -P ALL 1`
+-   `pidstat 1`
+-   `iostat -xz 1`
+-   `free -m`
+-   `sar -n DEV 1`
+-   `sar -n TCP,ETCP 1`
+-   `top`
 
-For detailed usage, see the corresponding `man` instructions.
+詳しい使用方法については、対応する`man`手順を参照してください。
 
-### perf
+### パフォーマンス {#perf}
 
-perf is an important performance analysis tool provided by the Linux kernel, which covers hardware level (CPU/PMU, performance monitoring unit) features and software features (software counters, trace points). For detailed usage, see [perf Examples](http://www.brendangregg.com/perf.html#Background).
+perf は Linux カーネルが提供する重要なパフォーマンス解析ツールであり、ハードウェアレベル (CPU/PMU、パフォーマンス監視ユニット) の機能とソフトウェア機能 (ソフトウェア カウンター、トレース ポイント) をカバーしています。詳細な使用方法については[パフォーマンスの例](http://www.brendangregg.com/perf.html#Background)を参照してください。
 
-### BCC/bpftrace
+### BCC/bpftrace {#bcc-bpftrace}
 
-Starting from CentOS 7.6, the Linux kernel has supported Berkeley Packet Filter (BPF). Therefore, you can choose proper tools to conduct an in-depth analysis based on the results in [In 60 seconds](#in-60-seconds). Compared with perf/ftrace, BPF provides programmability and smaller performance overhead. Compared with kprobe, BPF provides higher security and is more suitable for the production environments. For detailed usage of the BCC toolkit, see [BPF Compiler Collection (BCC)](https://github.com/iovisor/bcc/blob/master/README.md).
+CentOS 7.6 以降、Linux カーネルは Berkeley Packet Filter (BPF) をサポートしています。したがって、 [60秒で](#in-60-seconds)の結果に基づいて詳細な分析を行うための適切なツールを選択できます。 perf/ftrace と比較すると、BPF はプログラム可能でパフォーマンス オーバーヘッドが少なくなっています。 kprobe と比較すると、BPF はセキュリティが高く、本番環境に適しています。 BCC ツールキットの詳細な使用方法については、 [BPF コンパイラ コレクション (BCC)](https://github.com/iovisor/bcc/blob/master/README.md)を参照してください。
 
-## Performance tuning
+## 性能調整 {#performance-tuning}
 
-This section introduces performance tuning based on the classified kernel subsystems.
+このセクションでは、分類されたカーネル サブシステムに基づいたパフォーマンス チューニングについて説明します。
 
-### CPU—frequency scaling
+### CPU - 周波数スケーリング {#cpu-frequency-scaling}
 
-cpufreq is a module that dynamically adjusts the CPU frequency. It supports five modes. To ensure service performance, select the performance mode and fix the CPU frequency at the highest supported operating frequency without dynamic adjustment. The command for this operation is `cpupower frequency-set --governor performance`.
+cpufreq は、CPU 周波数を動的に調整するモジュールです。5 つのモードをサポートしています。サービスのパフォーマンスを確保するには、パフォーマンス モードを選択し、動的な調整を行わずに、サポートされている最高の動作周波数に CPU 周波数を固定します。この操作のコマンドは`cpupower frequency-set --governor performance`です。
 
-### CPU—interrupt affinity
+### CPU—割り込みアフィニティ {#cpu-interrupt-affinity}
 
-- Automatic balance can be implemented through the `irqbalance` service.
-- Manual balance:
-    - Identify the devices that need to balance interrupts. Starting from CentOS 7.5, the system automatically configures the best interrupt affinity for certain devices and their drivers, such as devices that use the `be2iscsi` driver and NVMe settings. You can no longer manually configure interrupt affinity for such devices.
-    - For other devices, check the chip manual to see whether these devices support distributing interrupts.
-        - If they do not, all interrupts of these devices are routed to the same CPU and cannot be modified.
-        - If they do, calculate the `smp_affinity` mask and set the corresponding configuration file. For details, see the [kernel document](https://www.kernel.org/doc/Documentation/IRQ-affinity.txt).
+-   `irqbalance`サービスを通じて自動バランスを実現できます。
+-   手動バランス:
+    -   割り込みのバランスをとる必要があるデバイスを特定します。CentOS 7.5 以降では、 `be2iscsi`ドライバーと NVMe 設定を使用するデバイスなど、特定のデバイスとそのドライバーに対して最適な割り込みアフィニティがシステムによって自動的に構成されます。このようなデバイスの割り込みアフィニティを手動で構成することはできなくなりました。
+    -   その他のデバイスについては、チップのマニュアルを参照して、これらのデバイスが割り込みの分散をサポートしているかどうかを確認してください。
+        -   そうでない場合、これらのデバイスのすべての割り込みは同じ CPU にルーティングされ、変更できません。
+        -   該当する場合は、 `smp_affinity`マスクを計算し、対応する構成ファイルを設定します。詳細については、 [カーネルドキュメント](https://www.kernel.org/doc/Documentation/IRQ-affinity.txt)を参照してください。
 
-### NUMA CPU binding
+### NUMA CPU バインディング {#numa-cpu-binding}
 
-To avoid accessing memory across Non-Uniform Memory Access (NUMA) nodes as much as possible, you can bind a thread/process to certain CPU cores by setting the CPU affinity of the thread. For ordinary programs, you can use the `numactl` command for the CPU binding. For detailed usage, see the Linux manual pages. For network interface card (NIC) interrupts, see [tune network](#network-tuning).
+Non-Uniform Memory Access (NUMA) ノードをまたいでメモリへのアクセスをできるだけ避けるために、スレッドの CPU アフィニティを設定することで、スレッド/プロセスを特定の CPU コアにバインドすることができます。通常のプログラムの場合、CPU バインドには`numactl`コマンドを使用できます。詳細な使用方法については、Linux のマニュアル ページを参照してください。ネットワーク インターフェイス カード (NIC) 割り込みについては、 [ネットワークを調整する](#network-tuning)を参照してください。
 
-### Memory—transparent huge page (THP)
+### メモリ - 透過的巨大ページ (THP) {#memory-transparent-huge-page-thp}
 
-It is **NOT** recommended to use THP for database applications, because databases often have sparse rather than continuous memory access patterns. If high-level memory fragmentation is serious, a higher latency will occur when THP pages are allocated. If the direct compaction is enabled for THP, the CPU usage will surge. Therefore, it is recommended to disable THP.
+データベースは連続的なメモリアクセス パターンではなく、散在的なメモリ アクセス パターンを持つことが多いため、データベース アプリケーションに THP を使用することは推奨され**ません**。高レベルのメモリ断片化が深刻な場合は、THP ページが割り当てられるときにレイテンシーが高くなります。THP の直接圧縮を有効にすると、CPU 使用率が急上昇します。したがって、THP を無効にすることをお勧めします。
 
 ```shell
 echo never > /sys/kernel/mm/transparent_hugepage/enabled
 echo never > /sys/kernel/mm/transparent_hugepage/defrag
 ```
 
-### Memory—virtual memory parameters
+### メモリ - 仮想メモリパラメータ {#memory-virtual-memory-parameters}
 
-- `dirty_ratio` percentage ratio. When the total amount of dirty page caches reach this percentage ratio of the total system memory, the system starts to use the `pdflush` operation to write the dirty page caches to disk. The default value of `dirty_ratio` is 20% and usually does not need adjustment. For high-performance SSDs such as NVMe devices, lowering this value helps improve the efficiency of memory reclamation.
-- `dirty_background_ratio` percentage ratio. When the total amount of dirty page caches reach this percentage ratio of the total system memory, the system starts to write the dirty page caches to the disk in the background. The default value of `dirty_background_ratio` is 10% and usually does not need adjustment. For high-performance SSDs such as NVMe devices, setting a lower value helps improve the efficiency of memory reclamation.
+-   `dirty_ratio`パーセント比率。ダーティ ページ キャッシュの合計量がシステムメモリ全体のこのパーセント比率に達すると、システムは`pdflush`操作を使用してダーティ ページ キャッシュをディスクに書き込み始めます。デフォルト値の`dirty_ratio`は 20% であり、通常は調整する必要はありません。NVMe デバイスなどの高性能 SSD の場合、この値を下げるとメモリ再利用の効率が向上します。
+-   `dirty_background_ratio`パーセント比率。ダーティ ページ キャッシュの合計量がシステムメモリ全体のこのパーセント比率に達すると、システムはバックグラウンドでダーティ ページ キャッシュをディスクに書き込み始めます。デフォルト値の`dirty_background_ratio`は 10% であり、通常は調整する必要はありません。NVMe デバイスなどの高性能 SSD の場合、値を低く設定すると、メモリ再利用の効率が向上します。
 
-### Storage and file system
+### ストレージとファイルシステム {#storage-and-file-system}
 
-The core I/O stack link is long, including the file system layer, the block device layer, and the driver layer.
+コア I/O スタック リンクは長く、ファイル システムレイヤー、ブロック デバイスレイヤー、およびドライバーレイヤーが含まれます。
 
-#### I/O scheduler
+#### I/Oスケジューラ {#i-o-scheduler}
 
-The I/O scheduler determines when and how long I/O operations run on the storage device. It is also called I/O elevator. For SSD devices, it is recommended to set the I/O scheduling policy to `noop`.
+I/O スケジューラは、storageデバイス上で I/O 操作が実行されるタイミングと期間を決定します。I/O エレベーターとも呼ばれます。SSD デバイスの場合、I/O スケジューリング ポリシーを`noop`に設定することをお勧めします。
 
 ```shell
 echo noop > /sys/block/${SSD_DEV_NAME}/queue/scheduler
 ```
 
-#### Formatting parameters—block size
+#### フォーマットパラメータ - ブロックサイズ {#formatting-parameters-block-size}
 
-Blocks are the working units of the file system. The block size determines how much data can be stored in a single block, and thus determines the minimum amount of data to be written or read each time.
+ブロックはファイル システムの作業単位です。ブロック サイズによって、1 つのブロックに保存できるデータの量が決まり、これにより、1 回に書き込まれたり読み取られたりするデータの最小量が決まります。
 
-The default block size is suitable for most scenarios. However, if the block size (or the size of multiple blocks) is the same or slightly larger than the amount of data normally read or written each time, the file system performs better and the data storage efficiency is higher. Small files still use the entire block. Files can be distributed among multiple blocks, but this will increase runtime overhead.
+デフォルトのブロック サイズは、ほとんどのシナリオに適しています。ただし、ブロック サイズ (または複数のブロックのサイズ) が、通常毎回読み書きされるデータの量と同じか、わずかに大きい場合、ファイル システムのパフォーマンスが向上し、データstorageの効率が高くなります。小さなファイルでも、ブロック全体が使用されます。ファイルは複数のブロックに分散できますが、これにより実行時のオーバーヘッドが増加します。
 
-When using the `mkfs` command to format a device, specify the block size as a part of the file system options. The parameters that specify the block size vary with the file system. For details, see the corresponding `mkfs` manual pages, such as using `man mkfs.ext4`.
+`mkfs`コマンドを使用してデバイスをフォーマットする場合は、ファイル システム オプションの一部としてブロック サイズを指定します。ブロック サイズを指定するパラメーターは、ファイル システムによって異なります。詳細については、 `man mkfs.ext4`使用など、対応する`mkfs`マニュアル ページを参照してください。
 
-#### `mount` parameters
+#### <code>mount</code>パラメータ {#code-mount-code-parameters}
 
-If the `noatime` option is enabled in the `mount` command, the update of metadata is disabled when files are read. If the `nodiratime` behavior is enabled, the update of metadata is disabled when the directory is read.
+`mount`コマンドで`noatime`オプションが有効になっている場合、ファイルの読み取り時にメタデータの更新が無効になります。 `nodiratime`動作が有効になっている場合、ディレクトリの読み取り時にメタデータの更新が無効になります。
 
-### Network tuning
+### ネットワークチューニング {#network-tuning}
 
-The network subsystem consists of many different parts with sensitive connections. The CentOS 7 network subsystem is designed to provide the best performance for most workloads and automatically optimizes the performance of these workloads. Therefore, usually you do not need to manually adjust network performance.
+ネットワーク サブシステムは、敏感な接続を持つさまざまな部分で構成されています。CentOS 7 のネットワーク サブシステムは、ほとんどのワークロードに対して最高のパフォーマンスを提供するように設計されており、これらのワークロードのパフォーマンスを自動的に最適化します。したがって、通常はネットワーク パフォーマンスを手動で調整する必要はありません。
 
-Network issues are usually caused by issues of hardware or related devices. So before tuning the protocol stack, rule out hardware issues.
+ネットワークの問題は通常、ハードウェアまたは関連デバイスの問題によって発生します。したがって、プロトコル スタックを調整する前に、ハードウェアの問題を排除してください。
 
-Although the network stack is largely self-optimizing, the following aspects in the network packet processing might become the bottleneck and affect performance:
+ネットワーク スタックは大部分が自己最適化されていますが、ネットワーク パケット処理における次の側面がボトルネックとなり、パフォーマンスに影響を及ぼす可能性があります。
 
-- NIC hardware cache: To correctly observe the packet loss at the hardware level, use the `ethtool -S ${NIC_DEV_NAME}` command to observe the `drops` field. When packet loss occurs, it might be that the processing speed of the hard/soft interrupts cannot catch up with the receiving speed of NIC. If the received buffer size is less than the upper limit, you can also try to increase the RX buffer to avoid packet loss. The query command is: `ethtool -g ${NIC_DEV_NAME}`, and the modification command is `ethtool -G ${NIC_DEV_NAME}`.
+-   NIC ハードウェア キャッシュ: ハードウェア レベルでパケット損失を正しく観察するには、 `ethtool -S ${NIC_DEV_NAME}`コマンドを使用して`drops`フィールドを観察します。パケット損失が発生すると、ハード/ソフト割り込みの処理速度が NIC の受信速度に追いつかない可能性があります。受信バッファ サイズが上限より小さい場合は、パケット損失を回避するために RX バッファを増やすこともできます。クエリ コマンドは`ethtool -g ${NIC_DEV_NAME}` 、変更コマンドは`ethtool -G ${NIC_DEV_NAME}`です。
 
-- Hardware interrupts: If the NIC supports the Receive-Side Scaling (RSS, also called multi-NIC receiving) feature, observe the `/proc/interrupts` NIC interrupts. If the interrupts are uneven, see [CPU—frequency scaling](#cpufrequency-scaling), [CPU—interrupt affinity](#cpuinterrupt-affinity), and [NUMA CPU binding](#numa-cpu-binding). If the NIC does not support RSS or the number of RSS is much smaller than the number of physical CPU cores, configure Receive Packet Steering (RPS, which can be regarded as the software implementation of RSS), and the RPS extension Receive Flow Steering (RFS). For detailed configuration, see the [kernel document](https://www.kernel.org/doc/Documentation/networking/scaling.txt).
+-   ハードウェア割り込み: NIC が Receive-Side Scaling (RSS、マルチ NIC 受信とも呼ばれる) 機能をサポートしている場合は、 `/proc/interrupts` NIC 割り込みを確認します。割り込みが不均等な場合は、 [CPU - 周波数スケーリング](#cpufrequency-scaling) 、 [CPU—割り込みアフィニティ](#cpuinterrupt-affinity) 、および[NUMA CPU バインディング](#numa-cpu-binding)を参照してください。NIC が RSS をサポートしていない場合、または RSS の数が物理 CPU コアの数よりも大幅に少ない場合は、 Receive Packet Steering (RPS、RSS のソフトウェア実装と見なすことができます) と、RPS 拡張 Receive Flow Steering (RFS) を構成します。詳細な構成については、 [カーネルドキュメント](https://www.kernel.org/doc/Documentation/networking/scaling.txt)を参照してください。
 
-- Software interrupts: Observe the monitoring of `/proc/net/softnet_stat`. If the values of the other columns except the third column are increasing, properly adjust the value of `net.core.netdev_budget` or `net.core.dev_weight` for `softirq` to get more CPU time. In addition, you also need to check the CPU usage to determine which tasks are frequently using the CPU and whether they can be optimized.
+-   ソフトウェア割り込み: `/proc/net/softnet_stat`の監視を観察します。3 列目以外の他の列の値が増加している場合は、 `softirq`の`net.core.netdev_budget`または`net.core.dev_weight`の値を適切に調整して、CPU 時間を増やします。また、CPU 使用率をチェックして、どのタスクが頻繁に CPU を使用しているか、それらを最適化できるかどうかを判断する必要もあります。
 
-- Receive queue of application sockets: Monitor the `Resv-q` column of `ss -nmp`. If the queue is full, consider increasing the size of the application socket cache or use the automatic cache adjustment method. In addition, consider whether you can optimize the architecture of the application layer and reduce the interval between reading sockets.
+-   アプリケーション ソケットの受信キュー: `ss -nmp`の`Resv-q`列を監視します。キューがいっぱいの場合は、アプリケーション ソケット キャッシュのサイズを増やすか、自動キャッシュ調整方法を使用することを検討してください。また、アプリケーションレイヤーのアーキテクチャを最適化し、ソケットの読み取り間隔を短縮できるかどうかも検討してください。
 
-- Ethernet flow control: If the NIC and switch support the flow control feature, you can use this feature to leave some time for the kernel to process the data in the NIC queue, to avoid the issue of NIC buffer overflow.
+-   イーサネット フロー制御: NIC とスイッチがフロー制御機能をサポートしている場合は、この機能を使用して、カーネルが NIC キュー内のデータを処理するための時間を確保し、NIC バッファ オーバーフローの問題を回避できます。
 
-- Interrupts coalescing: Too frequent hardware interrupts reduces system performance, and too late hardware interrupts causes packet loss. Newer NICs support the interrupt coalescing feature and allow the driver to automatically adjust the number of hardware interrupts. You can execute `ethtool -c ${NIC_DEV_NAME}` to check and `ethtool -C ${NIC_DEV_NAME}` to enable this feature. The adaptive mode allows the NIC to automatically adjust the interrupt coalescing. In this mode, the driver checks the traffic mode and kernel receiving mode, and evaluates the coalescing settings in real time to prevent packet loss. NICs of different brands have different features and default configurations. For details, see the NIC manuals.
+-   割り込みの統合: ハードウェア割り込みが頻繁すぎるとシステム パフォーマンスが低下し、ハードウェア割り込みが遅すぎるとパケット損失が発生します。新しい NIC は割り込み統合機能をサポートしており、ドライバーがハードウェア割り込みの数を自動的に調整できます。この機能を確認するには`ethtool -c ${NIC_DEV_NAME}`実行し、有効にするには`ethtool -C ${NIC_DEV_NAME}`実行します。アダプティブ モードでは、NIC が割り込み統合を自動的に調整できます。このモードでは、ドライバーがトラフィック モードとカーネル受信モードをチェックし、統合設定をリアルタイムで評価してパケット損失を防止します。異なるブランドの NIC には、異なる機能とデフォルト構成があります。詳細については、NIC のマニュアルを参照してください。
 
-- Adapter queue: Before processing the protocol stack, the kernel uses this queue to buffer the data received by the NIC, and each CPU has its own backlog queue. The maximum number of packets that can be cached in this queue is `netdev_max_backlog`. Observe the second column of `/proc/net/softnet_stat`. When the second column of a row continues to increase, it means that the CPU [row-1] queue is full and the data packet is lost. To resolve this problem, continue to double the `net.core.netdev_max_backlog` value.
+-   アダプタ キュー: プロトコル スタックを処理する前に、カーネルはこのキューを使用して NIC が受信したデータをバッファリングします。各 CPU には独自のバックログ キューがあります。このキューにキャッシュできるパケットの最大数は`netdev_max_backlog`です`/proc/net/softnet_stat`の 2 列目に注目してください。行の 2 列目が増加し続ける場合、CPU [行 1] キューがいっぱいでデータ パケットが失われていることを意味します。この問題を解決するには、 `net.core.netdev_max_backlog`値を 2 倍に増やし続けます。
 
-- Send queue: The length value of a send queue determines the number of packets that can be queued before sending. The default value is `1000`, which is sufficient for 10 Gbps. But if you have observed the value of TX errors from the output of `ip -s link`, you can try to double it: `ip link set dev ${NIC_DEV_NAME} txqueuelen 2000`.
+-   送信キュー: 送信キューの長さの値によって、送信前にキューに入れることができるパケットの数が決まります。デフォルト値は`1000`で、10 Gbps には十分です。ただし、 `ip -s link`の出力から TX エラーの値を確認した場合は、それを 2 倍の`ip link set dev ${NIC_DEV_NAME} txqueuelen 2000`にしてみてください。
 
-- Driver: NIC drivers usually provide tuning parameters. See the device hardware manual and its driver documentation.
+-   Driver: NIC ドライバーは通常、チューニング パラメーターを提供します。デバイスのハードウェア マニュアルとそのドライバーのドキュメントを参照してください。

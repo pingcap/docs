@@ -1,131 +1,131 @@
 ---
 title: Create TiFlash Replicas
-summary: Learn how to create TiFlash replicas.
+summary: TiFlashレプリカを作成する方法を学びます。
 ---
 
-# Create TiFlash Replicas
+# TiFlashレプリカを作成する {#create-tiflash-replicas}
 
-This document introduces how to create TiFlash replicas for tables and for databases, and set available zones for replica scheduling.
+このドキュメントでは、テーブルとデータベースのTiFlashレプリカを作成し、レプリカのスケジュールに使用可能なゾーンを設定する方法について説明します。
 
-## Create TiFlash replicas for tables
+## テーブルのTiFlashレプリカを作成する {#create-tiflash-replicas-for-tables}
 
-After TiFlash is connected to the TiKV cluster, data replication by default does not begin. You can send a DDL statement to TiDB through a MySQL client to create a TiFlash replica for a specific table:
+TiFlashが TiKV クラスターに接続された後、デフォルトではデータ レプリケーションは開始されません。MySQL クライアントを介して DDL ステートメントを TiDB に送信し、特定のテーブルのTiFlashレプリカを作成できます。
 
 ```sql
 ALTER TABLE table_name SET TIFLASH REPLICA count;
 ```
 
-The parameter of the above command is described as follows:
+上記コマンドのパラメータは以下のように記述されます。
 
-- `count` indicates the number of replicas. When the value is `0`, the replica is deleted.
+-   `count`レプリカの数を示します。値が`0`の場合、レプリカは削除されます。
 
-If you execute multiple DDL statements on the same table, only the last statement is ensured to take effect. In the following example, two DDL statements are executed on the table `tpch50`, but only the second statement (to delete the replica) takes effect.
+同じテーブルに対して複数の DDL ステートメントを実行する場合、最後のステートメントのみが有効になります。次の例では、テーブル`tpch50`に対して 2 つの DDL ステートメントが実行されていますが、2 番目のステートメント (レプリカを削除する) のみが有効になります。
 
-Create two replicas for the table:
+テーブルのレプリカを 2 つ作成します。
 
 ```sql
 ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 2;
 ```
 
-Delete the replica:
+レプリカを削除します。
 
 ```sql
 ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 ```
 
-**Notes:**
+**ノート：**
 
-* If the table `t` is replicated to TiFlash through the above DDL statements, the table created using the following statement will also be automatically replicated to TiFlash:
+-   上記の DDL ステートメントを通じてテーブル`t`がTiFlashに複製されると、次のステートメントを使用して作成されたテーブルも自動的にTiFlashに複製されます。
 
     ```sql
     CREATE TABLE table_name like t;
     ```
 
-* For versions earlier than v4.0.6, if you create the TiFlash replica before using TiDB Lightning to import the data, the data import will fail. You must import data to the table before creating the TiFlash replica for the table.
+-   v4.0.6 より前のバージョンでは、 TiDB Lightningを使用してデータをインポートする前にTiFlashレプリカを作成すると、データのインポートは失敗します。テーブルのTiFlashレプリカを作成する前に、テーブルにデータをインポートする必要があります。
 
-* If TiDB and TiDB Lightning are both v4.0.6 or later, no matter a table has TiFlash replica(s) or not, you can import data to that table using TiDB Lightning. Note that this might slow the TiDB Lightning procedure, which depends on the NIC bandwidth on the lightning host, the CPU and disk load of the TiFlash node, and the number of TiFlash replicas.
+-   TiDB とTiDB Lightning の両方が v4.0.6 以降の場合、テーブルにTiFlashレプリカがあるかどうかに関係なく、 TiDB Lightningを使用してそのテーブルにデータをインポートできます。ただし、これにより、 TiDB Lightning の手順が遅くなる場合があります。これは、Lightning ホストの NIC 帯域幅、 TiFlashノードの CPU とディスクの負荷、およびTiFlashレプリカの数によって異なります。
 
-* It is recommended that you do not replicate more than 1,000 tables because this lowers the PD scheduling performance. This limit will be removed in later versions.
+-   PD スケジューリングのパフォーマンスが低下するため、1,000 を超えるテーブルをレプリケートしないことをお勧めします。この制限は、今後のバージョンでは削除される予定です。
 
-* In v5.1 and later versions, setting the replicas for the system tables is no longer supported. Before upgrading the cluster, you need to clear the replicas of the relevant system tables. Otherwise, you cannot modify the replica settings of the system tables after you upgrade the cluster to a later version.
+-   v5.1 以降のバージョンでは、システム テーブルのレプリカの設定はサポートされなくなりました。クラスターをアップグレードする前に、関連するシステム テーブルのレプリカをクリアする必要があります。そうしないと、クラスターを新しいバージョンにアップグレードした後に、システム テーブルのレプリカ設定を変更できなくなります。
 
-### Check replication progress
+### レプリケーションの進行状況を確認する {#check-replication-progress}
 
-You can check the status of the TiFlash replicas of a specific table using the following statement. The table is specified using the `WHERE` clause. If you remove the `WHERE` clause, you will check the replica status of all tables.
+次のステートメントを使用して`WHERE`特定のテーブルのTiFlashレプリカのステータスを確認できます。テーブルは`WHERE`句を使用して指定されます。3 句を削除すると、すべてのテーブルのレプリカ ステータスがチェックされます。
 
 ```sql
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>' and TABLE_NAME = '<table_name>';
 ```
 
-In the result of above statement:
+上記のステートメントの結果:
 
-* `AVAILABLE` indicates whether the TiFlash replicas of this table are available or not. `1` means available and `0` means unavailable. Once the replicas become available, this status does not change. If you use DDL statements to modify the number of replicas, the replication status will be recalculated.
-* `PROGRESS` means the progress of the replication. The value is between `0.0` and `1.0`. `1` means at least one replica is replicated.
+-   `AVAILABLE` 、このテーブルのTiFlashレプリカが使用可能かどうかを示します。2 `1`使用可能、 `0`使用不可を意味します。レプリカが使用可能になると、このステータスは変更されません。DDL ステートメントを使用してレプリカの数を変更すると、レプリケーション ステータスが再計算されます。
+-   `PROGRESS`レプリケーションの進行状況を意味します。値は`0.0`から`1.0`の間です。6 `1`少なくとも 1 つのレプリカがレプリケートされていることを意味します。
 
-## Create TiFlash replicas for databases
+## データベースのTiFlashレプリカを作成する {#create-tiflash-replicas-for-databases}
 
-Similar to creating TiFlash replicas for tables, you can send a DDL statement to TiDB through a MySQL client to create a TiFlash replica for all tables in a specific database:
+テーブルのTiFlashレプリカを作成する場合と同様に、MySQL クライアントを介して DDL ステートメントを TiDB に送信し、特定のデータベース内のすべてのテーブルのTiFlashレプリカを作成できます。
 
 ```sql
 ALTER DATABASE db_name SET TIFLASH REPLICA count;
 ```
 
-In this statement, `count` indicates the number of replicas. When you set it to `0`, replicas are deleted.
+このステートメントでは、 `count`​​レプリカの数を示します。 `0`に設定すると、レプリカが削除されます。
 
-Examples:
+例:
 
-- Create two replicas for all tables in the database `tpch50`:
+-   データベース`tpch50`内のすべてのテーブルに対して 2 つのレプリカを作成します。
 
     ```sql
     ALTER DATABASE `tpch50` SET TIFLASH REPLICA 2;
     ```
 
-- Delete TiFlash replicas created for the database `tpch50`:
+-   データベース`tpch50`用に作成されたTiFlashレプリカを削除します。
 
     ```sql
     ALTER DATABASE `tpch50` SET TIFLASH REPLICA 0;
     ```
 
-> **Note:**
+> **注記：**
 >
-> - This statement actually performs a series of DDL operations, which are resource-intensive. If the statement is interrupted during the execution, executed operations are not rolled back and unexecuted operations do not continue.
+> -   このステートメントは、実際にはリソースを大量に消費する一連の DDL 操作を実行します。ステートメントの実行中に中断された場合、実行された操作はロールバックされず、実行されていない操作は続行されません。
 >
-> - After executing the statement, do not set the number of TiFlash replicas or perform DDL operations on this database until **all tables in this database are replicated**. Otherwise, unexpected results might occur, which include:
->     - If you set the number of TiFlash replicas to 2 and then change the number to 1 before all tables in the database are replicated, the final number of TiFlash replicas of all the tables is not necessarily 1 or 2.
->     - After executing the statement, if you create tables in this database before the completion of the statement execution, TiFlash replicas **might or might not** be created for these new tables.
->     - After executing the statement, if you add indexes for tables in the database before the completion of the statement execution, the statement might hang and resume only after the indexes are added.
+> -   ステートメントを実行した後、**このデータベース内のすべてのテーブルがレプリケートされる**まで、 TiFlashレプリカの数を設定したり、このデータベースで DDL 操作を実行したりしないでください。そうしないと、次のような予期しない結果が発生する可能性があります。
+>     -   TiFlashレプリカの数を 2 に設定し、データベース内のすべてのテーブルがレプリケートされる前にその数を 1 に変更した場合、すべてのテーブルのTiFlashレプリカの最終的な数は必ずしも 1 または 2 になるとは限りません。
+>     -   ステートメントを実行した後、ステートメントの実行が完了する前にこのデータベースにテーブルを作成すると、これらの新しいテーブルに対してTiFlashレプリカが作成される**場合と作成されない場合があります**。
+>     -   ステートメントを実行した後、ステートメントの実行が完了する前にデータベース内のテーブルにインデックスを追加すると、ステートメントがハングし、インデックスが追加された後にのみ再開される可能性があります。
 >
-> - If you create tables in this database **after** the completion of the statement execution, TiFlash replicas are not created automatically for these new tables.
+> -   ステートメントの実行が完了した**後に**このデータベースにテーブルを作成した場合、これらの新しいテーブルに対してTiFlashレプリカは自動的に作成されません。
 >
-> - This statement skips system tables, views, temporary tables, and tables with character sets not supported by TiFlash.
+> -   このステートメントは、システム テーブル、ビュー、一時テーブル、およびTiFlashでサポートされていない文字セットを持つテーブルをスキップします。
 
-### Check replication progress
+### レプリケーションの進行状況を確認する {#check-replication-progress}
 
-Similar to creating TiFlash replicas for tables, successful execution of the DDL statement does not mean the completion of replication. You can execute the following SQL statement to check the progress of replication on target tables:
+テーブルのTiFlashレプリカを作成する場合と同様に、DDL ステートメントの実行が成功してもレプリケーションが完了したことにはなりません。次の SQL ステートメントを実行して、ターゲット テーブルのレプリケーションの進行状況を確認できます。
 
 ```sql
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>';
 ```
 
-To check tables without TiFlash replicas in the database, you can execute the following SQL statement:
+データベース内にTiFlashレプリカのないテーブルを確認するには、次の SQL ステートメントを実行します。
 
 ```sql
 SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>" and TABLE_NAME not in (SELECT TABLE_NAME FROM information_schema.tiflash_replica where TABLE_SCHEMA = "<db_name>");
 ```
 
-## Speed up TiFlash replication
+## TiFlashレプリケーションを高速化 {#speed-up-tiflash-replication}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注記：**
 >
-> This section is not applicable to TiDB Cloud.
+> このセクションはTiDB Cloudには適用されません。
 
 </CustomContent>
 
-Before TiFlash replicas are added, each TiKV instance performs a full table scan and sends the scanned data to TiFlash as a "snapshot" to create replicas. By default, TiFlash replicas are added slowly with fewer resources usage in order to minimize the impact on the online service. If there are spare CPU and disk IO resources in your TiKV and TiFlash nodes, you can accelerate TiFlash replication by performing the following steps.
+TiFlashレプリカが追加される前に、各 TiKV インスタンスは完全なテーブル スキャンを実行し、スキャンされたデータを「スナップショット」としてTiFlashに送信してレプリカを作成します。デフォルトでは、オンライン サービスへの影響を最小限に抑えるために、 TiFlashレプリカはリソース使用量を抑えながらゆっくりと追加されます。TiKV ノードとTiFlashノードに余裕のある CPU とディスク IO リソースがある場合は、次の手順を実行してTiFlashレプリケーションを高速化できます。
 
-1. Temporarily increase the snapshot write speed limit for each TiKV and TiFlash instance by using the [Dynamic Config SQL statement](https://docs.pingcap.com/tidb/stable/dynamic-config):
+1.  [動的構成SQLステートメント](https://docs.pingcap.com/tidb/stable/dynamic-config)を使用して、各 TiKV およびTiFlashインスタンスのスナップショット書き込み速度制限を一時的に上げます。
 
     ```sql
     -- The default value for both configurations are 100MiB, i.e. the maximum disk bandwidth used for writing snapshots is no more than 100MiB/s.
@@ -133,95 +133,93 @@ Before TiFlash replicas are added, each TiKV instance performs a full table scan
     SET CONFIG tiflash `raftstore-proxy.server.snap-max-write-bytes-per-sec` = '300MiB';
     ```
 
-    After executing these SQL statements, the configuration changes take effect immediately without restarting the cluster. However, since the replication speed is still restricted by the PD limit globally, you cannot observe the acceleration for now.
+    これらの SQL 文を実行すると、クラスターを再起動せずに構成の変更がすぐに有効になります。ただし、レプリケーション速度は依然として PD 制限によってグローバルに制限されているため、現時点では高速化を確認することはできません。
 
-2. Use [PD Control](https://docs.pingcap.com/tidb/stable/pd-control) to progressively ease the new replica speed limit.
+2.  新しいレプリカの速度制限を徐々に緩和するには、 [PD Control](https://docs.pingcap.com/tidb/stable/pd-control)使用します。
 
-    The default new replica speed limit is 30, which means, approximately 30 Regions add TiFlash replicas every minute. Executing the following command will adjust the limit to 60 for all TiFlash instances, which doubles the original speed:
+    デフォルトの新しいレプリカの速度制限は 30 です。つまり、約 30 のリージョンが毎分TiFlashレプリカを追加します。次のコマンドを実行すると、すべてのTiFlashインスタンスの制限が 60 に調整され、元の速度が 2 倍になります。
 
     ```shell
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 add-peer
     ```
 
-    > In the preceding command, you need to replace `v<CLUSTER_VERSION>` with the actual cluster version, such as `v8.1.0` and `<PD_ADDRESS>:2379` with the address of any PD node. For example:
+    > 上記のコマンドでは、 `v<CLUSTER_VERSION>`実際のクラスター バージョンに置き換える必要があります (例: `v8.1.0`と`<PD_ADDRESS>:2379`任意の PD ノードのアドレスに置き換える)。次に例を示します。
     >
     > ```shell
     > tiup ctl:v8.1.0 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
     > ```
 
-    Within a few minutes, you will observe a significant increase in CPU and disk IO resource usage of the TiFlash nodes, and TiFlash should create replicas faster. At the same time, the TiKV nodes' CPU and disk IO resource usage increases as well.
+    数分以内に、 TiFlashノードの CPU とディスク IO リソースの使用率が大幅に増加し、 TiFlashによるレプリカの作成速度が速くなります。同時に、TiKV ノードの CPU とディスク IO リソースの使用率も増加します。
 
-    If the TiKV and TiFlash nodes still have spare resources at this point and the latency of your online service does not increase significantly, you can further ease the limit, for example, triple the original speed:
+    この時点で TiKV ノードとTiFlashノードにまだ余分なリソースがあり、オンライン サービスのレイテンシーが大幅に増加しない場合は、制限をさらに緩和して、たとえば元の速度を 3 倍にすることができます。
 
     ```shell
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 90 add-peer
     ```
 
-3. After the TiFlash replication is complete, revert to the default configuration to reduce the impact on online services.
+3.  TiFlashレプリケーションが完了したら、オンライン サービスへの影響を軽減するために、デフォルト構成に戻します。
 
-    Execute the following PD Control command to restore the default new replica speed limit:
+    デフォルトの新しいレプリカ速度制限を復元するには、次のPD Controlコマンドを実行します。
 
     ```shell
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 30 add-peer
     ```
 
-    Execute the following SQL statements to restore the default snapshot write speed limit:
+    デフォルトのスナップショット書き込み速度制限を復元するには、次の SQL ステートメントを実行します。
 
     ```sql
     SET CONFIG tikv `server.snap-io-max-bytes-per-sec` = '100MiB';
     SET CONFIG tiflash `raftstore-proxy.server.snap-max-write-bytes-per-sec` = '100MiB';
     ```
 
-## Set available zones
+## 利用可能なゾーンを設定する {#set-available-zones}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注記：**
 >
-> This section is not applicable to TiDB Cloud.
+> このセクションはTiDB Cloudには適用されません。
 
 </CustomContent>
 
-When configuring replicas, if you need to distribute TiFlash replicas to multiple data centers for disaster recovery, you can configure available zones by following the steps below:
+レプリカを構成するときに、災害復旧のためにTiFlashレプリカを複数のデータセンターに配布する必要がある場合は、次の手順に従って使用可能なゾーンを構成できます。
 
-1. Specify labels for TiFlash nodes in the cluster configuration file.
+1.  クラスター構成ファイルでTiFlashノードのラベルを指定します。
 
-    ```
-    tiflash_servers:
-      - host: 172.16.5.81
-          logger.level: "info"
-        learner_config:
-          server.labels:
-            zone: "z1"
-      - host: 172.16.5.82
-        config:
-          logger.level: "info"
-        learner_config:
-          server.labels:
-            zone: "z1"
-      - host: 172.16.5.85
-        config:
-          logger.level: "info"
-        learner_config:
-          server.labels:
-            zone: "z2"
-    ```
+        tiflash_servers:
+          - host: 172.16.5.81
+              logger.level: "info"
+            learner_config:
+              server.labels:
+                zone: "z1"
+          - host: 172.16.5.82
+            config:
+              logger.level: "info"
+            learner_config:
+              server.labels:
+                zone: "z1"
+          - host: 172.16.5.85
+            config:
+              logger.level: "info"
+            learner_config:
+              server.labels:
+                zone: "z2"
 
-    Note that the `flash.proxy.labels` configuration in earlier versions cannot handle special characters in the available zone name correctly. It is recommended to use the `server.labels` in `learner_config` to configure the name of an available zone.
+    以前のバージョンの`flash.proxy.labels`構成では、使用可能なゾーン名内の特殊文字を正しく処理できないことに注意してください。使用可能なゾーンの名前を構成するには、 `learner_config`の`server.labels`を使用することをお勧めします。
 
-2. After starting a cluster, specify the labels when creating replicas.
+2.  クラスターを起動した後、レプリカを作成するときにラベルを指定します。
 
     ```sql
     ALTER TABLE table_name SET TIFLASH REPLICA count LOCATION LABELS location_labels;
     ```
 
-    For example:
+    例えば：
 
     ```sql
     ALTER TABLE t SET TIFLASH REPLICA 2 LOCATION LABELS "zone";
     ```
 
-3. PD schedules the replicas based on the labels. In this example, PD respectively schedules two replicas of the table `t` to two available zones. You can use pd-ctl to view the scheduling.
+3.  PD はラベルに基づいてレプリカをスケジュールします。この例では、PD はテーブル`t`の 2 つのレプリカをそれぞれ 2 つの利用可能なゾーンにスケジュールします。スケジュールを表示するには、pd-ctl を使用できます。
 
     ```shell
     > tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store
@@ -254,8 +252,8 @@ When configuring replicas, if you need to distribute TiFlash replicas to multipl
 
 <CustomContent platform="tidb">
 
-For more information about scheduling replicas by using labels, see [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md), [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md), and [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md).
+ラベルを使用してレプリカをスケジュールする方法の詳細については、 [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md) 、 [1 つの地域展開における複数のデータセンター](/multi-data-centers-in-one-city-deployment.md) 、および[2 つの地域に配置された 3 つのデータ センター](/three-data-centers-in-two-cities-deployment.md)を参照してください。
 
-TiFlash supports configuring the replica selection strategy for different zones. For more information, see [`tiflash_replica_read`](/system-variables.md#tiflash_replica_read-new-in-v730).
+TiFlash は、さまざまなゾーンのレプリカ選択戦略の構成をサポートしています。詳細については、 [`tiflash_replica_read`](/system-variables.md#tiflash_replica_read-new-in-v730)を参照してください。
 
 </CustomContent>

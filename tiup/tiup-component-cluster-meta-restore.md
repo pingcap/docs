@@ -1,35 +1,35 @@
 ---
 title: tiup cluster meta restore
-summary: To restore the TiUP meta file, use the `tiup cluster meta restore` command with cluster name and backup file path. The restore operation overwrites the current meta file, so it should only be done when the file is lost. The `-h` or `--help` option prints help information. The output includes the execution logs of tiup-cluster.
+summary: TiUPメタ ファイルを復元するには、クラスター名とバックアップ ファイル パスを指定して `tiup cluster meta restore` コマンドを使用します。復元操作により現在のメタ ファイルが上書きされるため、ファイルが失われた場合にのみ実行する必要があります。`-h` または `--help` オプションはヘルプ情報を出力。出力にはtiup-clusterの実行ログが含まれます。
 ---
 
-# tiup cluster meta restore
+# tiup クラスタ メタ リストア {#tiup-cluster-meta-restore}
 
-To restore the TiUP meta file, you can use the `tiup cluster meta restore` command to restore from the backup file.
+TiUPメタ ファイルを復元するには、 `tiup cluster meta restore`コマンドを使用してバックアップ ファイルから復元できます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster meta restore <cluster-name> <backup-file> [flags]
 ```
 
-- `<cluster-name>` is the name of the cluster to be operated on.
-- `<backup-file>` is the path to the TiUP meta backup file.
+-   `<cluster-name>`は操作対象となるクラスターの名前です。
+-   `<backup-file>`はTiUPメタ バックアップ ファイルへのパスです。
 
-> **Note:**
+> **注記：**
 >
-> The restore operation overwrites the current meta file. It is recommended to restore the meta file only when it is lost.
+> 復元操作により、現在のメタ ファイルが上書きされます。メタ ファイルは、失われた場合にのみ復元することをお勧めします。
 
-## Options
+## オプション {#options}
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `Boolean`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型: `Boolean`
+-   このオプションはデフォルトでは無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないようにします。
 
-## Output
+## 出力 {#output}
 
-The execution logs of tiup-cluster.
+tiup-clusterの実行ログ。
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP クラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

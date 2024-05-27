@@ -1,35 +1,35 @@
 ---
 title: Enable TLS for DM Connections
-summary: Learn how to enable TLS for DM connections.
+summary: DM 接続で TLS を有効にする方法を学習します。
 ---
 
-# Enable TLS for DM Connections
+# DM接続にTLSを有効にする {#enable-tls-for-dm-connections}
 
-This document describes how to enable encrypted data transmission for DM connections, including connections between the DM-master, DM-worker, and dmctl components, and connections between DM and the upstream or downstream database.
+このドキュメントでは、DM マスター、DM ワーカー、dmctl コンポーネント間の接続、および DM と上流または下流のデータベース間の接続を含む、DM 接続の暗号化されたデータ転送を有効にする方法について説明します。
 
-## Enable encrypted data transmission between DM-master, DM-worker, and dmctl
+## DMマスター、DMワーカー、dmctl間の暗号化されたデータ転送を有効にする {#enable-encrypted-data-transmission-between-dm-master-dm-worker-and-dmctl}
 
-This section introduces how to enable encrypted data transmission between DM-master, DM-worker, and dmctl.
+このセクションでは、DM マスター、DM ワーカー、dmctl 間の暗号化されたデータ転送を有効にする方法を紹介します。
 
-### Configure and enable encrypted data transmission
+### 暗号化されたデータ転送を設定して有効にする {#configure-and-enable-encrypted-data-transmission}
 
-1. Prepare certificates.
+1.  証明書を準備します。
 
-    It is recommended to prepare a server certificate for DM-master and DM-worker separately. Make sure that the two components can authenticate each other. You can choose to share one client certificate for dmctl.
+    DM-master と DM-worker のサーバー証明書を別々に用意することをお勧めします。2 つのコンポーネントが相互に認証できることを確認してください。dmctl のクライアント証明書を 1 つ共有することもできます。
 
-    To generate self-signed certificates, you can use `openssl`, `cfssl` and other tools based on `openssl`, such as `easy-rsa`.
+    自己署名証明書を生成するには、 `openssl` 、 `cfssl` 、および`easy-rsa`などの`openssl`に基づいたその他のツールを使用できます。
 
-    If you choose `openssl`, you can refer to [generating self-signed certificates](/dm/dm-generate-self-signed-certificates.md).
+    `openssl`選択した場合は[自己署名証明書の生成](/dm/dm-generate-self-signed-certificates.md)を参照できます。
 
-2. Configure certificates.
+2.  証明書を構成します。
 
-    > **Note:**
+    > **注記：**
     >
-    > You can configure DM-master, DM-worker, and dmctl to use the same set of certificates.
+    > DM-master、DM-worker、および dmctl が同じ証明書セットを使用するように構成できます。
 
-    - DM-master
+    -   DMマスター
 
-        Configure in the configuration file or command-line arguments:
+        設定ファイルまたはコマンドライン引数で設定します。
 
         ```toml
         ssl-ca = "/path/to/ca.pem"
@@ -37,9 +37,9 @@ This section introduces how to enable encrypted data transmission between DM-mas
         ssl-key = "/path/to/master-key.pem"
         ```
 
-    - DM-worker
+    -   DMワーカー
 
-        Configure in the configuration file or command-line arguments:
+        設定ファイルまたはコマンドライン引数で設定します。
 
         ```toml
         ssl-ca = "/path/to/ca.pem"
@@ -47,57 +47,55 @@ This section introduces how to enable encrypted data transmission between DM-mas
         ssl-key = "/path/to/worker-key.pem"
         ```
 
-    - dmctl
+    -   dmctl
 
-        After enabling encrypted transmission in a DM cluster, if you need to connect to the cluster using dmctl, specify the client certificate. For example:
-
-        {{< copyable "shell-regular" >}}
+        DM クラスターで暗号化された送信を有効にした後、dmctl を使用してクラスターに接続する必要がある場合は、クライアント証明書を指定します。例:
 
         ```bash
         ./dmctl --master-addr=127.0.0.1:8261 --ssl-ca /path/to/ca.pem --ssl-cert /path/to/client-cert.pem --ssl-key /path/to/client-key.pem
         ```
 
-### Verify component caller's identity
+### コンポーネント呼び出し元のIDを確認する {#verify-component-caller-s-identity}
 
-The Common Name is used for caller verification. In general, the callee needs to verify the caller's identity, in addition to verifying the key, the certificates, and the CA provided by the caller. For example, DM-worker can only be accessed by DM-master, and other visitors are blocked even though they have legitimate certificates.
+共通名は、発信者の検証に使用されます。通常、着信側は、発信者が提供するキー、証明書、および CA を検証するだけでなく、発信者の ID も検証する必要があります。たとえば、DM-worker には DM-master のみがアクセスでき、他の訪問者は正当な証明書を持っていてもブロックされます。
 
-To verify component caller's identity, you need to mark the certificate user identity using `Common Name` (CN) when generating the certificate, and to check the caller's identity by configuring the `Common Name` list for the callee.
+コンポーネントの呼び出し元の ID を確認するには、証明書を生成するときに`Common Name` (CN) を使用して証明書のユーザー ID をマークし、呼び出し先の`Common Name`リストを構成して呼び出し元の ID を確認する必要があります。
 
-- DM-master
+-   DMマスター
 
-    Configure in the configuration file or command-line arguments:
-
-    ```toml
-    cert-allowed-cn = ["dm"]
-    ```
-
-- DM-worker
-
-    Configure in the configuration file or command-line arguments:
+    設定ファイルまたはコマンドライン引数で設定します。
 
     ```toml
     cert-allowed-cn = ["dm"]
     ```
 
-### Reload certificates
+-   DMワーカー
 
-To reload the certificates and the keys, DM-master, DM-worker, and dmctl reread the current certificates and the key files each time a new connection is created.
+    設定ファイルまたはコマンドライン引数で設定します。
 
-When the files specified by `ssl-ca`, `ssl-cert` or `ssl-key` are updated, restart DM components to reload the certificates and the key files and reconnect with each other.
+    ```toml
+    cert-allowed-cn = ["dm"]
+    ```
 
-## Enable encrypted data transmission between DM components and the upstream or downstream database
+### 証明書を再読み込み {#reload-certificates}
 
-This section introduces how to enable encrypted data transmission between DM components and the upstream or downstream database.
+証明書とキーを再ロードするために、DM-master、DM-worker、および dmctl は、新しい接続が作成されるたびに現在の証明書とキー ファイルを再読み取りします。
 
-### Enable encrypted data transmission for upstream database
+`ssl-ca` `ssl-cert`または`ssl-key`で指定されたファイルが更新された場合は、DM コンポーネントを再起動して証明書とキー ファイルを再読み込みし、相互に再接続します。
 
-1. Configure the upstream database, enable the encryption support, and set the server certificate. For detailed operations, see [Using encrypted connections](https://dev.mysql.com/doc/refman/8.0/en/using-encrypted-connections.html).
+## DMコンポーネントと上流または下流のデータベース間の暗号化されたデータ転送を有効にする {#enable-encrypted-data-transmission-between-dm-components-and-the-upstream-or-downstream-database}
 
-2. Set the MySQL client certificate in the source configuration file:
+このセクションでは、DM コンポーネントと上流または下流のデータベース間の暗号化されたデータ転送を有効にする方法について説明します。
 
-    > **Note:**
+### 上流データベースへの暗号化されたデータ転送を有効にする {#enable-encrypted-data-transmission-for-upstream-database}
+
+1.  アップストリームデータベースを設定し、暗号化サポートを有効にし、サーバー証明書を設定します。詳細な操作については、 [暗号化された接続の使用](https://dev.mysql.com/doc/refman/8.0/en/using-encrypted-connections.html)参照してください。
+
+2.  ソース構成ファイルで MySQL クライアント証明書を設定します。
+
+    > **注記：**
     >
-    > Make sure that all DM-master and DM-worker components can read the certificates and the key files via specified paths.
+    > すべての DM マスターおよび DM ワーカー コンポーネントが指定されたパスを介して証明書とキー ファイルを読み取ることができることを確認します。
 
     ```yaml
     from:
@@ -107,15 +105,15 @@ This section introduces how to enable encrypted data transmission between DM com
             ssl-key: "/path/to/mysql-key.pem"
     ```
 
-### Enable encrypted data transmission for downstream TiDB
+### 下流のTiDBへの暗号化されたデータ転送を有効にする {#enable-encrypted-data-transmission-for-downstream-tidb}
 
-1. Configure the downstream TiDB to use encrypted connections. For detailed operations, refer to [Configure TiDB server to use secure connections](/enable-tls-between-clients-and-servers.md#configure-tidb-server-to-use-secure-connections).
+1.  暗号化された接続を使用するようにダウンストリーム TiDB を構成します。詳細な操作については、 [安全な接続を使用するように TiDBサーバーを構成する](/enable-tls-between-clients-and-servers.md#configure-tidb-server-to-use-secure-connections)を参照してください。
 
-2. Set the TiDB client certificate in the task configuration file:
+2.  タスク構成ファイルで TiDB クライアント証明書を設定します。
 
-    > **Note:**
+    > **注記：**
     >
-    > Make sure that all DM-master and DM-worker components can read the certificates and the key files via specified paths.
+    > すべての DM マスターおよび DM ワーカー コンポーネントが指定されたパスを介して証明書とキー ファイルを読み取ることができることを確認します。
 
     ```yaml
     target-database:

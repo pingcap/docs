@@ -1,73 +1,63 @@
 ---
 title: Integrate TiDB Cloud with Cloudflare
-summary: Learn how to deploy Cloudflare Workers with TiDB Cloud.
+summary: TiDB Cloudを使用して Cloudflare Workers をデプロイする方法を学びます。
 ---
 
-# Integrate TiDB Cloud with Cloudflare Workers
+# TiDB Cloudを Cloudflare Workers と統合する {#integrate-tidb-cloud-with-cloudflare-workers}
 
-[Cloudflare Workers](https://workers.cloudflare.com/) is a platform that allows you to run code in response to specific events, such as HTTP requests or changes to a database. Cloudflare Workers is easy to use and can be used to build a variety of applications, including custom APIs, serverless functions, and microservices. It is particularly useful for applications that require low-latency performance or need to scale quickly.
+[Cloudflare ワーカー](https://workers.cloudflare.com/) 、HTTP リクエストやデータベースの変更など、特定のイベントに応じてコードを実行できるプラットフォームです。Cloudflare Workers は使いやすく、カスタム API、サーバーレス関数、マイクロサービスなど、さまざまなアプリケーションの構築に使用できます。特に、低レイテンシーのパフォーマンスが必要なアプリケーションや、迅速に拡張する必要があるアプリケーションに役立ちます。
 
-You may find it hard to connect to TiDB Cloud from Cloudflare Workers because Cloudflare Workers runs on the V8 engine which cannot make direct TCP connections. You can use [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md) to help you connect to Cloudflare Workers over HTTP connection.
+Cloudflare Workers は直接 TCP 接続できない V8 エンジンで実行されるため、Cloudflare Workers からTiDB Cloudに接続するのは難しい場合があります。1 [TiDB Cloudサーバーレス ドライバー](/tidb-cloud/serverless-driver.md)使用すると、HTTP 接続を介して Cloudflare Workers に接続できます。
 
-This document shows how to connect to Cloudflare Workers with TiDB Cloud serverless driver step by step.
+このドキュメントでは、TiDB Cloudサーバーレス ドライバーを使用して Cloudflare Workers に接続する方法を段階的に説明します。
 
-> **Note:**
+> **注記：**
 >
-> TiDB Cloud serverless driver can only be used in TiDB Serverless.
+> TiDB Cloudサーバーレス ドライバーは、TiDB Serverless でのみ使用できます。
 
-## Before you begin
+## あなたが始める前に {#before-you-begin}
 
-Before you try the steps in this article, you need to prepare the following things:
+この記事の手順を試す前に、次のものを準備する必要があります。
 
-- A TiDB Cloud account and a TiDB Serverless cluster on TiDB Cloud. For more details, see [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster).
-- A [Cloudflare Workers account](https://dash.cloudflare.com/login).
-- [npm](https://docs.npmjs.com/about-npm) is installed.
+-   TiDB CloudアカウントとTiDB Cloud上の TiDB Serverless クラスター。詳細については、 [TiDB Cloudクイック スタート](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)を参照してください。
+-   A [Cloudflare Workers アカウント](https://dash.cloudflare.com/login) 。
+-   [ネプ](https://docs.npmjs.com/about-npm)がインストールされています。
 
-## Step 1: Set up Wrangler
+## ステップ1: Wranglerを設定する {#step-1-set-up-wrangler}
 
-[Wrangler](https://developers.cloudflare.com/workers/wrangler/) is the official Cloudflare Worker CLI. You can use it to generate, build, preview, and publish your Workers.
+[ラングラー](https://developers.cloudflare.com/workers/wrangler/)は公式の Cloudflare Worker CLI です。これを使用して、Worker を生成、構築、プレビュー、公開できます。
 
-1. Install Wrangler:
+1.  Wrangler をインストールします。
 
-   ```
-   npm install wrangler
-   ```
+        npm install wrangler
 
-2. To authenticate Wrangler, run wrangler login:
+2.  Wrangler を認証するには、wrangler login を実行します。
 
-    ```
-    wrangler login
-    ```
+        wrangler login
 
-3. Use Wrangler to create a worker project:
+3.  Wrangler を使用してワーカー プロジェクトを作成します。
 
-    ```
-    wrangler init tidb-cloud-cloudflare
-    ```
+        wrangler init tidb-cloud-cloudflare
 
-4. In your terminal, you will be asked a series of questions related to your project. Choose the default values for all questions.
+4.  ターミナルでは、プロジェクトに関連する一連の質問が表示されます。すべての質問に対してデフォルト値を選択します。
 
-## Step 2: Install the serverless driver
+## ステップ2: サーバーレスドライバーをインストールする {#step-2-install-the-serverless-driver}
 
-1. Enter your project directory:
+1.  プロジェクト ディレクトリを入力してください:
 
-    ```
-    cd tidb-cloud-cloudflare
-    ```
+        cd tidb-cloud-cloudflare
 
-2. Install the serverless driver with npm:
+2.  npm を使用してサーバーレス ドライバーをインストールします。
 
-    ```
-    npm install @tidbcloud/serverless
-    ```
+        npm install @tidbcloud/serverless
 
-   This adds the serverless driver dependency in `package.json`.
+    これにより、 `package.json`にサーバーレス ドライバーの依存関係が追加されます。
 
-## Step 3: Develop the Cloudflare Worker function
+## ステップ3: Cloudflare Worker機能を開発する {#step-3-develop-the-cloudflare-worker-function}
 
-You need to modify the `src/index.ts` according to your needs.
+必要に応じて`src/index.ts`変更する必要があります。
 
-For example, if you want to show all the databases, you can use the following code:
+たとえば、すべてのデータベースを表示する場合は、次のコードを使用できます。
 
 ```ts
 import { connect } from '@tidbcloud/serverless'
@@ -86,32 +76,28 @@ export default {
 };
 ```
 
-## Step 4: Set the DATABASE_URL in your environment
+## ステップ4: 環境でDATABASE_URLを設定する {#step-4-set-the-database-url-in-your-environment}
 
-The `DATABASE_URL` follows the `mysql://username:password@host/database` format. You can set the environment variable with wrangler cli:
+`DATABASE_URL` `mysql://username:password@host/database`形式に従います。環境変数は wrangler cli で設定できます。
 
-```
-wrangler secret put <DATABASE_URL>
-```
+    wrangler secret put <DATABASE_URL>
 
-You can also edit the `DATABASE_URL` secret via the Cloudflare Workers dashboard.
+Cloudflare Workers ダッシュボードから`DATABASE_URL`シークレットを編集することもできます。
 
-## Step 5: Publish to Cloudflare Workers
+## ステップ5: Cloudflare Workersに公開する {#step-5-publish-to-cloudflare-workers}
 
-You're now ready to deploy to Cloudflare Workers.
+これで、Cloudflare Workers にデプロイする準備が整いました。
 
-In your project directory, run the following command:
+プロジェクト ディレクトリで、次のコマンドを実行します。
 
-```
-npx wrangler publish
-```
+    npx wrangler publish
 
-## Step 6: Try your Cloudflare Workers
+## ステップ6: Cloudflare Workersを試す {#step-6-try-your-cloudflare-workers}
 
-1. Go to [Cloudflare dashboard](https://dash.cloudflare.com) to find your worker. You can find the URL of your worker on the overview page.
+1.  [Cloudflareダッシュボード](https://dash.cloudflare.com)に進み、ワーカーを見つけます。ワーカーの URL は概要ページで確認できます。
 
-2. Visit the URL and you will get the result.
+2.  URL にアクセスすると結果が表示されます。
 
-## Examples
+## 例 {#examples}
 
-See the [Cloudflare Workers example](https://github.com/tidbcloud/car-sales-insight/tree/main/examples/cloudflare-workers).
+[Cloudflare Workersの例](https://github.com/tidbcloud/car-sales-insight/tree/main/examples/cloudflare-workers)参照してください。

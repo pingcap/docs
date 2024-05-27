@@ -1,148 +1,148 @@
 ---
 title: Table Attributes
-summary: Learn how to use the table attribute feature of TiDB.
+summary: TiDB のテーブル属性機能の使用方法を学習します。
 ---
 
-# Table Attributes
+# テーブル属性 {#table-attributes}
 
-The Table Attributes feature is introduced in TiDB v5.3.0. Using this feature, you can add specific attributes to a table or partition to perform the operations corresponding to the attributes. For example, you can use table attributes to control the Region merge behavior.
+テーブル属性機能は、TiDB v5.3.0 で導入されました。この機能を使用すると、テーブルまたはパーティションに特定の属性を追加して、その属性に対応する操作を実行できます。たとえば、テーブル属性を使用してリージョンのマージ動作を制御できます。
 
 <CustomContent platform="tidb">
 
-Currently, TiDB only supports adding the `merge_option` attribute to a table or partition to control the Region merge behavior. The `merge_option` attribute is only part of how to deal with hotspots. For more information, refer to [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
+現在、TiDB は、リージョンのマージ動作を制御するために、テーブルまたはパーティションに`merge_option`属性を追加することのみをサポートしています。 `merge_option`属性は、ホットスポットを処理する方法の一部にすぎません。詳細については、 [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Currently, TiDB only supports adding the `merge_option` attribute to a table or partition to control the Region merge behavior. The `merge_option` attribute is only part of how to deal with hotspots.
+現在、TiDB は、リージョンのマージ動作を制御するために、テーブルまたはパーティションに`merge_option`属性を追加することのみをサポートしています。3 属性`merge_option` 、ホットスポットを処理する方法の一部にすぎません。
 
 </CustomContent>
 
-> **Note:**
+> **注記：**
 >
-> - When you use TiDB Binlog or TiCDC to perform replication or use BR to perform incremental backup, the replication or backup operations skip the DDL statement that sets table attributes. To use table attributes in the downstream or in the backup cluster, you need to manually execute the DDL statement in the downstream or in the backup cluster.
+> -   TiDB Binlogまたは TiCDC を使用してレプリケーションを実行したり、 BRを使用して増分バックアップを実行したりする場合、レプリケーションまたはバックアップ操作では、テーブル属性を設定する DDL ステートメントがスキップされます。ダウンストリームまたはバックアップ クラスターでテーブル属性を使用するには、ダウンストリームまたはバックアップ クラスターで DDL ステートメントを手動で実行する必要があります。
 
-## Usage
+## 使用法 {#usage}
 
-The table attribute is in the form of `key=value`. Multiple attributes are separated by commas. In the following examples, `t` is the name of the table to be modified, `p` is the name of the partition to be modified. Items in `[]` are optional.
+テーブル属性は`key=value`の形式です。複数の属性はカンマで区切られます。次の例では、 `t`変更するテーブルの名前、 `p`変更するパーティションの名前です。 `[]`の項目はオプションです。
 
-+ Set attributes for a table or partition:
+-   テーブルまたはパーティションの属性を設定します。
 
     ```sql
     ALTER TABLE t [PARTITION p] ATTRIBUTES [=] 'key=value[, key1=value1...]';
     ```
 
-+ Reset attributes for a table or partition:
+-   テーブルまたはパーティションの属性をリセットします。
 
     ```sql
     ALTER TABLE t [PARTITION p] ATTRIBUTES [=] DEFAULT;
     ```
 
-+ See the attributes of all tables and partitions:
+-   すべてのテーブルとパーティションの属性を表示します。
 
     ```sql
     SELECT * FROM information_schema.attributes;
     ```
 
-+ See the attribute configured to a table or partition:
+-   テーブルまたはパーティションに設定された属性を確認します。
 
     ```sql
     SELECT * FROM information_schema.attributes WHERE id='schema/t[/p]';
     ```
 
-+ See all tables and partitions that have a specific attribute:
+-   特定の属性を持つすべてのテーブルとパーティションを表示します。
 
     ```sql
     SELECT * FROM information_schema.attributes WHERE attributes LIKE '%key%';
     ```
 
-## Attribute override rules
+## 属性オーバーライドルール {#attribute-override-rules}
 
-The attribute configured to a table takes effect on all partitions of the table. However, there is one exception: If the table and partition are configured with the same attribute but different attribute values, the partition attribute overrides the table attribute. For example, suppose that the table `t` is configured with the `key=value` attribute, and the partition `p` is configured with `key=value1`.
+テーブルに設定された属性は、テーブルのすべてのパーティションに反映されます。ただし、例外が 1 つあります。テーブルとパーティションが同じ属性で、属性値が異なるように設定されている場合は、パーティション属性がテーブル属性よりも優先されます。たとえば、テーブル`t`が`key=value`属性で構成され、パーティション`p`が`key=value1`属性で構成されているとします。
 
 ```sql
 ALTER TABLE t ATTRIBUTES[=]'key=value';
 ALTER TABLE t PARTITION p ATTRIBUTES[=]'key=value1';
 ```
 
-In this case, `key=value1` is the attribute that actually takes effect on the `p1` partition.
+この場合、 `key=value1` `p1`パーティションに実際に適用される属性です。
 
-## Control the Region merge behavior using table attributes
+## テーブル属性を使用してリージョンの結合動作を制御する {#control-the-region-merge-behavior-using-table-attributes}
 
-### User scenarios
+### ユーザーシナリオ {#user-scenarios}
 
-If there is a write hotspot or read hotspot, you can use table attributes to control the Region merge behavior. You can first add the `merge_option` attribute to a table or partition and then set its value to `deny`. The two scenarios are as follows.
+書き込みホットスポットまたは読み取りホットスポットがある場合は、テーブル属性を使用してリージョンのマージ動作を制御できます。最初にテーブルまたはパーティションに`merge_option`属性を追加し、その値を`deny`に設定できます。次の 2 つのシナリオがあります。
 
-#### Write hotspot on a newly created table or partition
+#### 新しく作成されたテーブルまたはパーティションにホットスポットを書き込む {#write-hotspot-on-a-newly-created-table-or-partition}
 
-If a hotspot issue occurs when data is written to a newly created table or partition, you usually need to split and scatter Regions. However, if there is a certain time interval between the split/scatter operation and writes, these operations do not truly avoid the write hotspot. This is because the split operation performed when the table or partition is created produces empty Regions, so if the time interval exists, the split Regions might be merged. To handle this case, you can add the `merge_option` attribute to the table or partition and set the attribute value to `deny`.
+新しく作成されたテーブルまたはパーティションにデータが書き込まれるときにホットスポットの問題が発生する場合は、通常、リージョンを分割して分散する必要があります。ただし、分割/分散操作と書き込みの間に一定の時間間隔がある場合、これらの操作では書き込みホットスポットが実際に回避されるわけではありません。これは、テーブルまたはパーティションの作成時に実行される分割操作によって空のリージョンが生成されるため、時間間隔が存在すると、分割されたリージョンが結合される可能性があるためです。このケースを処理するには、テーブルまたはパーティションに`merge_option`属性を追加し、属性値を`deny`に設定します。
 
-#### Periodic read hotspot in read-only scenarios
+#### 読み取り専用シナリオでの定期的な読み取りホットスポット {#periodic-read-hotspot-in-read-only-scenarios}
 
-Suppose that in a read-only scenario, you try to reduce the periodic read hotspot that occurs on a table or partition by manually splitting Regions, and you do not want the manually split Regions to be merged after the hotspot issue is resolved. In this case, you can add the `merge_option` attribute to the table or partition and set its value to `deny`.
+読み取り専用シナリオで、手動で領域を分割してテーブルまたはパーティションで発生する定期的な読み取りホットスポットを削減しようとし、ホットスポットの問題が解決された後に手動で分割した領域をマージしたくないとします。この場合、テーブルまたはパーティションに`merge_option`属性を追加し、その値を`deny`に設定できます。
 
-### Usage
+### 使用法 {#usage}
 
-+ Prevent the Regions of a table from merging:
+-   テーブルの領域が結合されないようにする:
 
     ```sql
     ALTER TABLE t ATTRIBUTES 'merge_option=deny';
     ```
 
-+ Allow merging Regions belonging to a table:
+-   テーブルに属するリージョンの結合を許可します。
 
     ```sql
     ALTER TABLE t ATTRIBUTES 'merge_option=allow';
     ```
 
-+ Reset attributes of a table:
+-   テーブルの属性をリセットします。
 
     ```sql
     ALTER TABLE t ATTRIBUTES DEFAULT;
     ```
 
-+ Prevent the Regions of a partition from merging:
+-   パーティションの領域が結合されるのを防ぎます。
 
     ```sql
     ALTER TABLE t PARTITION p ATTRIBUTES 'merge_option=deny';
     ```
 
-+ Allow merging Regions belonging to a partition:
+-   パーティションに属する領域の結合を許可します。
 
     ```sql
     ALTER TABLE t PARTITION p ATTRIBUTES 'merge_option=allow';
     ```
 
-+ See all tables or partitions configured the `merge_option` attribution:
+-   `merge_option`属性が構成されているすべてのテーブルまたはパーティションを表示します。
 
     ```sql
     SELECT * FROM information_schema.attributes WHERE attributes LIKE '%merge_option%';
     ```
 
-### Attribute override rules
+### 属性オーバーライドルール {#attribute-override-rules}
 
 ```sql
 ALTER TABLE t ATTRIBUTES 'merge_option=deny';
 ALTER TABLE t PARTITION p ATTRIBUTES 'merge_option=allow';
 ```
 
-When the above two attributes are configured at the same time, the Regions belonging to the partition `p` can actually be merged. When the attribute of the partition is reset, the partition `p` inherits the attribute from the table `t`, and the Regions cannot be merged.
+上記 2 つの属性を同時に設定すると、パーティション`p`に属するリージョンを実際にマージできます。パーティションの属性がリセットされると、パーティション`p`テーブル`t`から属性を継承し、リージョンをマージできなくなります。
 
 <CustomContent platform="tidb">
 
-> **Note:**
+> **注記：**
 >
-> - For a table with partitions, if the `merge_option` attribute is configured at the table level only, even if `merge_option=allow`, the table is still split into multiple Regions by default according to the actual number of partitions. To merge all Regions, you need to [reset the attribute of the table](#usage).
-> - When using the `merge_option` attribute, you need to pay attention to the PD configuration parameter [`split-merge-interval`](/pd-configuration-file.md#split-merge-interval). Suppose that the `merge_option` attribute is not configured. In this case, if Regions meet conditions, Regions can be merged after the interval specified by `split-merge-interval`. If the `merge_option` attribute is configured, PD decides whether to merge Regions after the specified interval according to the `merge_option` configuration.
+> -   パーティションを持つテーブルの場合、 `merge_option`属性がテーブル レベルのみで構成されている場合は、 `merge_option=allow`であっても、実際のパーティション数に応じてテーブルはデフォルトで複数のリージョンに分割されます。すべてのリージョンをマージするには、 [テーブルの属性をリセットする](#usage)が必要です。
+> -   `merge_option`属性を使用する場合は、PD 構成パラメータ[`split-merge-interval`](/pd-configuration-file.md#split-merge-interval)に注意する必要があります。 `merge_option`属性が設定されていないと仮定します。この場合、リージョンが条件を満たしている場合、 `split-merge-interval`で指定された間隔後にリージョンをマージできます。 `merge_option`属性が設定されている場合、PD は`merge_option`構成に従って、指定された間隔後にリージョンをマージするかどうかを決定します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注記：**
 >
-> - For a table with partitions, if the `merge_option` attribute is configured at the table level only, even if `merge_option=allow`, the table is still split into multiple Regions by default according to the actual number of partitions. To merge all Regions, you need to [reset the attribute of the table](#usage).
-> - Suppose that the `merge_option` attribute is not configured. In this case, if Regions meet conditions, Regions can be merged after one hour. If the `merge_option` attribute is configured, PD decides whether to merge Regions after one hour according to the `merge_option` configuration.
+> -   パーティションを持つテーブルの場合、 `merge_option`属性がテーブル レベルのみで構成されている場合は、 `merge_option=allow`であっても、実際のパーティション数に応じてテーブルはデフォルトで複数のリージョンに分割されます。すべてのリージョンをマージするには、 [テーブルの属性をリセットする](#usage)が必要です。
+> -   `merge_option`属性が設定されていないとします。この場合、リージョンが条件を満たしていれば、1 時間後にリージョンをマージできます。3 属性が設定されている場合、PD は`merge_option`設定に従って 1 時間`merge_option`にリージョンをマージするかどうかを決定します。
 
 </CustomContent>

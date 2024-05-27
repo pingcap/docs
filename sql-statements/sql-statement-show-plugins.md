@@ -1,55 +1,51 @@
 ---
 title: SHOW PLUGINS
-summary: An overview of the usage of SHOW PLUGINS for the TiDB database.
+summary: TiDB データベースの SHOW PLUGINS の使用法の概要。
 ---
 
-# SHOW PLUGINS
+# プラグインを表示 {#show-plugins}
 
-`SHOW PLUGINS` shows all plugins installed in TiDB, including each plugin's status and version information.
+`SHOW PLUGINS` 、各プラグインのステータスとバージョン情報を含む、TiDB にインストールされているすべてのプラグインを表示します。
 
-> **Note:**
+> **注記：**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowPluginsStmt ::=
     "SHOW" "PLUGINS" ShowLikeOrWhere?
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 SHOW PLUGINS;
 ```
 
-```
-+-------+--------------+-------+-----------------------------+---------+---------+
-| Name  | Status       | Type  | Library                     | License | Version |
-+-------+--------------+-------+-----------------------------+---------+---------+
-| audit | Ready-enable | Audit | /tmp/tidb/plugin/audit-1.so |         | 1       |
-+-------+--------------+-------+-----------------------------+---------+---------+
-1 row in set (0.000 sec)
-```
+    +-------+--------------+-------+-----------------------------+---------+---------+
+    | Name  | Status       | Type  | Library                     | License | Version |
+    +-------+--------------+-------+-----------------------------+---------+---------+
+    | audit | Ready-enable | Audit | /tmp/tidb/plugin/audit-1.so |         | 1       |
+    +-------+--------------+-------+-----------------------------+---------+---------+
+    1 row in set (0.000 sec)
 
 ```sql
 SHOW PLUGINS LIKE 'a%';
 ```
 
-```
-+-------+--------------+-------+-----------------------------+---------+---------+
-| Name  | Status       | Type  | Library                     | License | Version |
-+-------+--------------+-------+-----------------------------+---------+---------+
-| audit | Ready-enable | Audit | /tmp/tidb/plugin/audit-1.so |         | 1       |
-+-------+--------------+-------+-----------------------------+---------+---------+
-1 row in set (0.000 sec)
-```
+    +-------+--------------+-------+-----------------------------+---------+---------+
+    | Name  | Status       | Type  | Library                     | License | Version |
+    +-------+--------------+-------+-----------------------------+---------+---------+
+    | audit | Ready-enable | Audit | /tmp/tidb/plugin/audit-1.so |         | 1       |
+    +-------+--------------+-------+-----------------------------+---------+---------+
+    1 row in set (0.000 sec)
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-The `SHOW PLUGINS` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB の`SHOW PLUGINS`ステートメントは MySQL と完全に互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) 。
 
-## See also
+## 参照 {#see-also}
 
-- [`ADMIN PLUGINS`](/sql-statements/sql-statement-admin.md#admin-plugins-related-statement)
+-   [`ADMIN PLUGINS`](/sql-statements/sql-statement-admin.md#admin-plugins-related-statement)

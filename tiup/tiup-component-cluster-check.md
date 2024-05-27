@@ -1,256 +1,254 @@
 ---
 title: tiup cluster check
-summary: TiUP Cluster provides a `check` command to ensure hardware and software environments meet production requirements. It checks OS version, CPU support, time synchronization, system limits, and more. Options include automatic repair and enabling checks for CPU core number, memory size, and disk performance. Use `tiup cluster check <topology.yml | cluster-name> [flags]` command to perform checks. Use `--apply` to attempt automatic repair. Use `-N, --node` and `-R, --role` to specify nodes and roles to check. Use `--enable-cpu`, `--enable-disk`, and `--enable-mem` to enable specific checks.
+summary: TiUP クラスタ は、ハードウェアおよびソフトウェア環境が本番要件を満たしていることを確認するための `check` コマンドを提供します。このコマンドは、OS バージョン、CPU サポート、時間同期、システム制限などをチェックします。オプションには、自動修復や、CPU コア数、メモリサイズ、ディスク パフォーマンスのチェックの有効化が含まれます。チェックを実行するには、`tiup cluster check <topology.yml | cluster-name> [flags]` コマンドを使用します。自動修復を試行するには、`--apply` を使用します。チェックするノードとロールを指定するには、`-N、--node` および `-R、--role` を使用します。特定のチェックを有効にするには、`--enable-cpu`、`--enable-disk`、および `--enable-mem` を使用します。
 ---
 
-# tiup cluster check
+# tiup cluster check {#tiup-cluster-check}
 
-For a formal production environment, before the environment goes live, you need to perform a series of checks to ensure the clusters are in their best performance. To simplify the manual check steps, TiUP Cluster provides the `check` command to check whether the hardware and software environments of the target machines of a specified cluster meet the requirements to work normally.
+正式な本番環境では、環境が稼働する前に、一連のチェックを実行して、クラスターが最高のパフォーマンスを発揮していることを確認する必要があります。手動チェック手順を簡素化するために、 TiUP クラスタ は、指定されたクラスターのターゲット マシンのハードウェアおよびソフトウェア環境が正常に動作するための要件を満たしているかどうかを確認する`check`コマンドを提供します。
 
-## List of check items
+## チェック項目一覧 {#list-of-check-items}
 
-### Operating system version
+### オペレーティング システムのバージョン {#operating-system-version}
 
-Check the operating system distribution and version of the deployed machines. Currently, only CentOS 7 is supported for deployment. More system versions may be supported in later releases for compatibility improvement.
+展開されたマシンのオペレーティング システムのディストリビューションとバージョンを確認します。現在、展開では CentOS 7 のみがサポートされています。互換性の向上のため、今後のリリースではさらに多くのシステム バージョンがサポートされる可能性があります。
 
-### CPU EPOLLEXCLUSIVE
+### CPU EPOLLEX限定 {#cpu-epollexclusive}
 
-Check whether the CPU of the target machine supports EPOLLEXCLUSIVE.
+対象マシンのCPUがEPOLLEXCLUSIVEをサポートしているかどうかを確認します。
 
-### numactl
+### ヌマクトル {#numactl}
 
-Check whether numactl is installed on the target machine. If tied cores are configured on the target machine, you must install numactl.
+ターゲット マシンに numactl がインストールされているかどうかを確認します。ターゲット マシンに結び付けられたコアが構成されている場合は、numactl をインストールする必要があります。
 
-### System time
+### システム時刻 {#system-time}
 
-Check whether the system time of the target machine is synchronized. Compare the system time of the target machine with that of the central control machine, and report an error if the deviation exceeds a certain threshold (500 ms).
+対象マシンのシステム時刻が同期されているかどうかを確認します。対象マシンのシステム時刻と中央制御マシンのシステム時刻を比較し、偏差が一定のしきい値（500 ミリ秒）を超える場合はエラーを報告します。
 
-### System time zone
+### システムのタイムゾーン {#system-time-zone}
 
-Check whether the system time zone of the target machines is synchronized. Compare the time zone configuration of these machines and report an error if the time zone is inconsistent.
+対象マシンのシステム タイム ゾーンが同期されているかどうかを確認します。これらのマシンのタイム ゾーン構成を比較し、タイム ゾーンが一致していない場合はエラーを報告します。
 
-### Time synchronization service
+### 時刻同期サービス {#time-synchronization-service}
 
-Check whether the time synchronization service is configured on the target machine. Namely, check whether ntpd is running.
+ターゲット マシンで時刻同期サービスが設定されているかどうかを確認します。つまり、ntpd が実行されているかどうかを確認します。
 
-### Swap partitioning
+### スワップパーティション {#swap-partitioning}
 
-Check whether swap partitioning is enabled on the target machine. It is recommended to disable swap partitioning.
+ターゲット マシンでスワップ パーティションが有効になっているかどうかを確認します。スワップ パーティションを無効にすることをお勧めします。
 
-### Kernel parameters
+### カーネルパラメータ {#kernel-parameters}
 
-Check the values of the following kernel parameters:
+次のカーネル パラメータの値を確認します。
 
-- `net.ipv4.tcp_tw_recycle`: 0
-- `net.ipv4.tcp_syncookies`: 0
-- `net.core.somaxconn`: 32768
-- `vm.swappiness`: 0
-- `vm.overcommit_memory`: 0 or 1
-- `fs.file-max`: 1000000
+-   `net.ipv4.tcp_tw_recycle` : 0
+-   `net.ipv4.tcp_syncookies` : 0
+-   `net.core.somaxconn` : 32768
+-   `vm.swappiness` : 0
+-   `vm.overcommit_memory` : 0 または 1
+-   `fs.file-max` : 1000000
 
-### Transparent Huge Pages (THP)
+### 透過的な巨大ページ (THP) {#transparent-huge-pages-thp}
 
-Check whether THP is enabled on the target machine. It is recommended to disable THP.
+ターゲット マシンで THP が有効になっているかどうかを確認します。THP を無効にすることをお勧めします。
 
-### System limits
+### システム制限 {#system-limits}
 
-Check the limit values in the `/etc/security/limits.conf` file:
+`/etc/security/limits.conf`ファイルの制限値を確認します。
 
-```
-<deploy-user> soft nofile 1000000
-<deploy-user> hard nofile 1000000
-<deploy-user> soft stack 10240
-```
+    <deploy-user> soft nofile 1000000
+    <deploy-user> hard nofile 1000000
+    <deploy-user> soft stack 10240
 
-`<deploy-user>` is the user who deploys and runs the TiDB cluster, and the last column is the minimum value required for the system.
+`<deploy-user>`は TiDB クラスターを展開して実行するユーザーであり、最後の列はシステムに必要な最小値です。
 
-### SELinux
+### カーネル {#selinux}
 
-Check whether SELinux is enabled. It is recommended to disable SELinux.
+SELinux が有効になっているかどうかを確認します。SELinux を無効にすることをお勧めします。
 
-### Firewall
+### ファイアウォール {#firewall}
 
-Check whether the FirewallD service is enabled. It is recommended to either disable the FirewallD service or add permission rules for each service in the TiDB cluster.
+FirewallD サービスが有効になっているかどうかを確認します。FirewallD サービスを無効にするか、TiDB クラスター内の各サービスに権限ルールを追加することをお勧めします。
 
-### irqbalance
+### irqバランス {#irqbalance}
 
-Check whether the irqbalance service is enabled. It is recommended to enable the irqbalance service.
+irqbalance サービスが有効になっているかどうかを確認します。irqbalance サービスを有効にすることをお勧めします。
 
-### Disk mount options
+### ディスクマウントオプション {#disk-mount-options}
 
-Check the mount options for ext4 partitions. Make sure the mount options include the nodelalloc option and the noatime option.
+ext4 パーティションのマウント オプションを確認します。マウント オプションに nodelalloc オプションと noatime オプションが含まれていることを確認します。
 
-### Port usage
+### ポートの使用 {#port-usage}
 
-Check if the ports defined in the topology (including the auto-completion default ports) are already used by the processes on the target machine.
+トポロジで定義されているポート (自動補完のデフォルト ポートを含む) が、ターゲット マシン上のプロセスによってすでに使用されているかどうかを確認します。
 
-> **Note:**
+> **注記：**
 >
-> The port usage check assumes that a cluster is not started yet. If a cluster is already deployed and started, the port usage check on the cluster fails because the ports must be in use in this case.
+> ポート使用状況チェックでは、クラスターがまだ起動されていないことを前提としています。クラスターがすでにデプロイされ起動されている場合、ポートは使用中であるはずなので、クラスターでのポート使用状況チェックは失敗します。
 
-### CPU core number
+### CPUコア数 {#cpu-core-number}
 
-Check the CPU information of the target machine. For a production cluster, it is recommended that the number of the CPU logical core is greater than or equal to 16.
+対象マシンの CPU 情報を確認します。本番クラスターの場合、CPU 論理コアの数は 16 以上が推奨されます。
 
-> **Note:**
+> **注記：**
 >
-> CPU core number is not checked by default. To enable the check, you need to add the `-enable-cpu` option to the command.
+> CPU コア数はデフォルトではチェックされません。チェックを有効にするには、コマンドに`-enable-cpu`オプションを追加する必要があります。
 
-### Memory size
+### メモリー容量 {#memory-size}
 
-Check the memory size of the target machine. For a production cluster, it is recommended that the total memory capacity is greater than or equal to 32GB.
+対象マシンのメモリサイズを確認します。本番クラスターの場合、合計メモリ容量は 32 GB 以上が推奨されます。
 
-> **Note:**
+> **注記：**
 >
-> Memory size is not checked by default. To enable the check, you need to add the `-enable-mem` option to the command.
+> メモリ サイズはデフォルトではチェックされません。チェックを有効にするには、コマンドに`-enable-mem`オプションを追加する必要があります。
 
-### Fio disk performance test
+### Fioディスクパフォ​​ーマンステスト {#fio-disk-performance-test}
 
-Use flexible I/O tester (fio) to test the performance of the disk where `data_dir` is located, including the following three test items:
+フレキシブル I/O テスター (fio) を使用して、次の 3 つのテスト項目を含む、 `data_dir`が配置されているディスクのパフォーマンスをテストします。
 
-- fio_randread_write_latency
-- fio_randread_write
-- fio_randread
+-   fio_randread_write_latency
+-   fio_randread_write
+-   fio_randread
 
-> **Note:**
+> **注記：**
 >
-> The fio disk performance test is not performed by default. To perform the test, you need to add the `-enable-disk` option to the command.
+> fio ディスク パフォーマンス テストはデフォルトでは実行されません。テストを実行するには、コマンドに`-enable-disk`オプションを追加する必要があります。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster check <topology.yml | cluster-name> [flags]
 ```
 
-- If a cluster is not deployed yet, you need to pass the [topology.yml](/tiup/tiup-cluster-topology-reference.md) file that is used to deploy the cluster. According to the content in this file, tiup-cluster connects to the corresponding machine to perform the check.
-- If a cluster is already deployed, you can use the `<cluster-name>` as the check object.
-- If you want to check the scale-out YAML file for an existing cluster, you can use both `<scale-out.yml>` and `<cluster-name>` as the check objects.
+-   クラスターがまだデプロイされていない場合は、クラスターをデプロイするために使用される[トポロジー.yml](/tiup/tiup-cluster-topology-reference.md)ファイルを渡す必要があります。このファイルの内容に従って、 tiup-cluster は対応するマシンに接続してチェックを実行します。
+-   クラスターがすでにデプロイされている場合は、チェック オブジェクトとして`<cluster-name>`使用できます。
+-   既存のクラスターのスケールアウト YAML ファイルをチェックする場合は、チェック オブジェクトとして`<scale-out.yml>`と`<cluster-name>`両方を使用できます。
 
-> **Note:**
+> **注記：**
 >
-> If `<cluster-name>` is used for the check, you need to add the `--cluster` option in the command.
+> チェックに`<cluster-name>`使用する場合は、コマンドに`--cluster`オプションを追加する必要があります。
 
-## Options
+## オプション {#options}
 
-### --apply
+### - 適用する {#apply}
 
-- Attempts to automatically repair the failed check items. Currently, tiup-cluster only attempts to repair the following check items:
-    - SELinux
-    - firewall
-    - irqbalance
-    - kernel parameters
-    - System limits
-    - THP (Transparent Huge Pages)
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   失敗したチェック項目を自動的に修復しようとします。現在、 tiup-cluster は次のチェック項目のみを修復しようとします。
+    -   カーネル
+    -   ファイアウォール
+    -   irqバランス
+    -   カーネルパラメータ
+    -   システム制限
+    -   THP (透過的な巨大ページ)
+-   データ型: `BOOLEAN`
+-   このオプションは、値`false`でデフォルトで無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないようにする必要があります。
 
-> **Note:**
+> **注記：**
 >
-> `tiup cluster check` also supports repairing the `scale-out.yml` file for an existing cluster with the following command format:
+> `tiup cluster check`では、次のコマンド形式を使用して、既存のクラスターの`scale-out.yml`ファイルの修復もサポートされています。
 >
->```shell
+> ```shell
 > tiup cluster check <cluster-name> scale-out.yml --cluster --apply --user root [-p] [-i /home/root/.ssh/gcp_rsa]
->```
+> ```
 
-### --cluster
+### - 集まる {#cluster}
 
-- Indicates that the check is for a cluster that has been deployed.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
-- Command format:
+-   チェックがデプロイ済みのクラスターに対するものであることを示します。
+-   データ型: `BOOLEAN`
+-   このオプションは、デフォルトで値`false`で無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないようにする必要があります。
+-   コマンド形式:
 
     ```shell
     tiup cluster check <topology.yml | cluster-name> --cluster [flags]
     ```
 
-> **Note:**
+> **注記：**
 >
-> - If the `tiup cluster check <cluster-name>` command is used, you must add the `--cluster` option: `tiup cluster check <cluster-name> --cluster`.
-> - `tiup cluster check` also supports checking the `scale-out.yml` file for an existing cluster with the following command format:
+> -   `tiup cluster check <cluster-name>`コマンドを使用する場合は、 `--cluster`オプション`tiup cluster check <cluster-name> --cluster`を追加する必要があります。
+> -   `tiup cluster check`では、次のコマンド形式を使用して、既存のクラスターの`scale-out.yml`ファイルを確認することもサポートされています。
 >
->   ```shell
->   tiup cluster check <cluster-name> scale-out.yml --cluster --user root [-p] [-i /home/root/.ssh/gcp_rsa]
->   ```
+>     ```shell
+>     tiup cluster check <cluster-name> scale-out.yml --cluster --user root [-p] [-i /home/root/.ssh/gcp_rsa]
+>     ```
 
-### -N, --node
+### -N、--ノード {#n-node}
 
-- Specifies the nodes to be checked. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the cluster status table returned by the [`tiup cluster display`](/tiup/tiup-component-cluster-display.md) command.
-- Data type: `STRINGS`
-- If this option is not specified in the command, all nodes are checked by default.
+-   チェックするノードを指定します。このオプションの値は[`tiup cluster display`](/tiup/tiup-component-cluster-display.md)ノード ID のコンマ区切りリストです。1 コマンドによって返されるクラスター ステータス テーブルの最初の列からノード ID を取得できます。
+-   データ型: `STRINGS`
+-   コマンドでこのオプションが指定されていない場合、デフォルトですべてのノードがチェックされます。
 
-> **Note:**
+> **注記：**
 >
-> If the `-R, --role` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are checked.
+> `-R, --role`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`の両方の指定に一致するサービス ノードのみがチェックされます。
 
-### -R, --role
+### -R, --役割 {#r-role}
 
-- Specifies the roles to be checked. The value of this option is a comma-separated list of node roles. You can get the roles of nodes from the second column of the cluster status table returned by the [`tiup cluster display`](/tiup/tiup-component-cluster-display.md) command.
-- Data type: `STRINGS`
-- If this option is not specified in the command, all roles are checked by default.
+-   チェックするロールを指定します。このオプションの値は、ノード ロールのコンマ区切りリストです。1 コマンドによって返されるクラスター ステータス テーブルの 2 番目の列から[`tiup cluster display`](/tiup/tiup-component-cluster-display.md)のロールを取得できます。
+-   データ型: `STRINGS`
+-   コマンドでこのオプションが指定されていない場合、すべてのロールがデフォルトでチェックされます。
 
-> **Note:**
+> **注記：**
 >
-> If the `-N, --node` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are checked.
+> `-N, --node`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`の両方の指定に一致するサービス ノードのみがチェックされます。
 
-### --enable-cpu
+### --CPUを有効にする {#enable-cpu}
 
-- Enables the check of CPU core number.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   CPU コア数のチェックを有効にします。
+-   データ型: `BOOLEAN`
+-   このオプションは、デフォルトで値`false`で無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないようにする必要があります。
 
-### --enable-disk
+### --ディスクを有効にする {#enable-disk}
 
-- Enables the fio disk performance test.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   fio ディスク パフォーマンス テストを有効にします。
+-   データ型: `BOOLEAN`
+-   このオプションは、値`false`でデフォルトで無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないようにする必要があります。
 
-### --enable-mem
+### --enable-mem {#enable-mem}
 
-- Enables the memory size check.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   メモリサイズのチェックを有効にします。
+-   データ型: `BOOLEAN`
+-   このオプションは、値`false`でデフォルトで無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないようにする必要があります。
 
-### --u, --user
+### --u、--ユーザー {#u-user}
 
-- Specifies the user name to connect to the target machine. The specified user needs to have the password-free sudo root privileges on the target machine.
-- Data type: `STRING`
-- If this option is not specified in the command, the user who executes the command is used as the default value.
+-   ターゲット マシンに接続するためのユーザー名を指定します。指定されたユーザーは、ターゲット マシン上でパスワード不要の sudo ルート権限を持っている必要があります。
+-   データ型: `STRING`
+-   このオプションがコマンドで指定されていない場合は、コマンドを実行するユーザーがデフォルト値として使用されます。
 
-> **Note:**
+> **注記：**
 >
-> This option is valid only if the `-cluster` option is false. Otherwise, the value of this option is fixed to the username specified in the topology file for the cluster deployment.
+> このオプションは、 `-cluster`オプションが false の場合にのみ有効です。それ以外の場合、このオプションの値は、クラスター展開のトポロジ ファイルで指定されたユーザー名に固定されます。
 
-### -i, --identity_file
+### -i, --identity_file {#i-identity-file}
 
-- Specifies the key file to connect to the target machine.
-- Data type: `STRING`
-- The option is enabled by default with `~/.ssh/id_rsa` (the default value) passed in.
+-   ターゲット マシンに接続するためのキー ファイルを指定します。
+-   データ型: `STRING`
+-   このオプションは、 `~/.ssh/id_rsa` (デフォルト値) が渡されるとデフォルトで有効になります。
 
-> **Note:**
+> **注記：**
 >
-> This option is valid only if the `--cluster` option is false. Otherwise, the value of this option is fixed to `${TIUP_HOME}/storage/cluster/clusters/<cluster-name>/ssh/id_rsa`.
+> このオプションは、 `--cluster`オプションが false の場合にのみ有効です。それ以外の場合、このオプションの値は`${TIUP_HOME}/storage/cluster/clusters/<cluster-name>/ssh/id_rsa`に固定されます。
 
-### -p, --password
+### -p, --パスワード {#p-password}
 
-- Logs in with a password when connecting to the target machine.
-    - If the `--cluster` option is added for a cluster, the password is the password of the user specified in the topology file when the cluster was deployed.
-    - If the `--cluster` option is not added for a cluster, the password is the password of the user specified in the `-u/--user` option.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   ターゲットマシンに接続するときにパスワードを使用してログインします。
+    -   クラスターに`--cluster`オプションが追加された場合、パスワードはクラスターがデプロイされたときにトポロジ ファイルで指定されたユーザーのパスワードになります。
+    -   クラスターにオプション`--cluster`が追加されていない場合、パスワードはオプション`-u/--user`で指定されたユーザーのパスワードになります。
+-   データ型: `BOOLEAN`
+-   このオプションは、値`false`でデフォルトで無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないようにする必要があります。
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information of the related commands.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   関連するコマンドのヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   このオプションは、デフォルトで値`false`で無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないようにする必要があります。
 
-## Output
+## 出力 {#output}
 
-A table containing the following fields:
+次のフィールドを含むテーブル:
 
-- `Node`: the target node
-- `Check`: the check item
-- `Result`: the check result (Pass, Warn, or Fail)
-- `Message`: the result description
+-   `Node` : ターゲットノード
+-   `Check` : チェック項目
+-   `Result` : チェック結果 (合格、警告、不合格)
+-   `Message` : 結果の説明
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

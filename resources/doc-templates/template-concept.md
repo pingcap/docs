@@ -1,71 +1,72 @@
 ---
 title: (The same as L1 heading) Concept such as "Garbage Collection Overview" in 59 characters or less. Include the keywords of this document. Test title here https://moz.com/learn/seo/title-tag
-summary: Summarize this doc in 115 to 145 characters. Start with an SEO-friendly verb that tells users what they can get from this doc. For example, "Learn how to quickly get started with the TiDB database". If your intro paragraph describes your article's intent, you can use it here, edited for length.
+summary: このドキュメントを 115 ～ 145 文字で要約します。このドキュメントから何が得られるかをユーザーに伝える SEO に適した動詞で始めます。たとえば、「TiDB データベースをすぐに使い始める方法を学ぶ」などです。導入段落で記事の意図を説明している場合は、長さを調整してここで使用できます。
 ---
 
-# L1 heading (the same as title in the metadata)
+# L1 見出し (メタデータのタイトルと同じ) {#l1-heading-the-same-as-title-in-the-metadata}
 
-> About this template:
+> このテンプレートについて:
 >
-> - This document is a template for concept topics, focusing on introducing concepts and explanatory information. You can directly copy and use this template and delete unnecessary annotations. An example of this type of document: [TiCDC Overview](/ticdc/ticdc-overview.md).
-> - For a new document, please add a link to the appropriate location in the `TOC.md` file (consider where users are most likely to look for this document in the table of contents).
-> - The headings within the document cannot skip levels, and try to avoid using level 5 headings.
+> -   このドキュメントは、概念の紹介と説明情報に重点を置いた概念トピックのテンプレートです。このテンプレートを直接コピーして使用し、不要な注釈を削除できます。このタイプのドキュメントの例: [TiCDC の概要](/ticdc/ticdc-overview.md) 。
+> -   新しいドキュメントの場合は、 `TOC.md`ファイル内の適切な場所へのリンクを追加してください (ユーザーが目次内でこのドキュメントを探す可能性が最も高い場所を考慮してください)。
+> -   ドキュメント内の見出しはレベルをスキップできないため、レベル 5 の見出しの使用は避けてください。
 
-**Required** In the first paragraph, summarize the content of this document in a few sentences.
+**必須**最初の段落では、このドキュメントの内容を数文で要約します。
 
-You can clarify the important terms and definitions within one to three sentences in this paragraph.
+この段落では、1 ～ 3 文で重要な用語と定義を明確にすることができます。
 
-## L2 heading (e.g. Architecture)
+## L2 見出し (例:アーキテクチャ) {#l2-heading-e-g-architecture}
 
-Taking the overall architecture as an example, you can first introduce the core components in one or two sentences, and then provide the corresponding architecture diagram.
+全体的なアーキテクチャを例にとると、まず 1 ～ 2 文でコア コンポーネントを紹介し、次に対応するアーキテクチャ図を提供できます。
 
 <!--  ![Architecture](/path/to/image)  -->
-Keep image size <= 300 KB. Use `.png` or `.jpg`; do not use `.gif` or `.svg`.
 
-Write a more detailed description below the image. Use unordered lists (`*`/`+`/`-`) to introduce each component.
+画像サイズは 300 KB 以下にしてください。 `.png`または`.jpg`を使用し、 `.gif`または`.svg`使用しないでください。
 
-- Component 1: xxx
-- Component 2: xxx
+画像の下に、より詳しい説明を記入します。順序なしリスト ( `*` / `+` / `-` ) を使用して、各コンポーネントを紹介します。
 
-You can also describe the basic working principles here, or integrate the principles into the component introduction above.
+-   コンポーネント 1: xxx
+-   コンポーネント2: xxx
 
-### L3 heading (optional, e.g. “xxx component”)
+ここで基本的な動作原理を説明することも、原理を上記のコンポーネントの紹介に統合することもできます。
 
-If the component is complicated, you can elaborate it in a separate section like this one.
+### L3 見出し（オプション、例：「xxxコンポーネント」） {#l3-heading-optional-e-g-xxx-component}
 
-### L3 heading
+コンポーネントが複雑な場合は、このセクションのように別のセクションで詳しく説明できます。
+
+### L3 見出し {#l3-heading}
 
 xxx
 
-## L2 heading (optional, e.g. "Key features/Limitations")
+## L2 見出し (オプション、例: 「主な機能/制限事項」) {#l2-heading-optional-e-g-key-features-limitations}
 
-In the second L2 heading, introduce the basic info that users need to know beforehand, such as key features, usage scenarios, and limitations.
+2 番目の L2 見出しでは、主な機能、使用シナリオ、制限など、ユーザーが事前に知っておく必要のある基本情報を紹介します。
 
-You can leave out this section if there's no need to provide this information.
+この情報を提供する必要がない場合は、このセクションを省略できます。
 
-If you need to add notes or warnings, strictly follow the following format.
+注釈や警告を追加する必要がある場合は、次の形式に厳密に従ってください。
 
-> **Warning**
+> **警告**
 >
-> If the information might bring risks to users, such as system availability, security, data loss, etc., use a warning. For example, the current feature is an experimental feature and is not recommended for production environments.
+> 情報によって、システムの可用性、セキュリティ、データ損失などのリスクがユーザーにもたらされる可能性がある場合は、警告を使用します。たとえば、現在の機能は実験的機能であり、本番環境では推奨されません。
 
-> **Note**
+> **注記**
 >
-> For general tips and notes, use a note. For example, when reading historical data, even if the current table structure is different from the table structure of the historical data, the historical data will be returned in the table structure of the historical data at that time.
+> 一般的なヒントや注意事項については、ノートを参照してください。たとえば、履歴データを読み込む場合、現在のテーブル構造が履歴データのテーブル構造と異なっていても、履歴データはその時の履歴データのテーブル構造で返されます。
 
-If the notes or warnings are nested in a list, indent them with four spaces.
+メモや警告がリスト内にネストされている場合は、4 つのスペースでインデントします。
 
-To prevent incorrect display, all indentation on the PingCAP website must be 4 spaces.
+誤った表示を防ぐため、PingCAP Web サイトのすべてのインデントは 4 スペースにする必要があります。
 
-## What's next
+## 次は何ですか {#what-s-next}
 
-In this section, provide more related documents that users might want to read, such as:
+このセクションでは、ユーザーが読みたいと思う可能性のある次のような関連ドキュメントを提供します。
 
-- To learn how to deploy and maintain TiCDC, see [Deploy and Maintain TiCDC](/ticdc/deploy-ticdc.md).
-- To learn changefeeds, see [Changefeed Overview](/ticdc/ticdc-changefeed-overview.md).
+-   TiCDC の導入および保守方法については、 [TiCDC のデプロイと管理](/ticdc/deploy-ticdc.md)を参照してください。
+-   changefeeds の詳細については、 [チェンジフィードの概要](/ticdc/ticdc-changefeed-overview.md)参照してください。
 
-You can also directly provide the documents that users might be interested in, such as:
+次のような、ユーザーが興味を持ちそうなドキュメントを直接提供することもできます。
 
-- [Explore HTAP](/explore-htap.md)
-- [TiCDC FAQs](/ticdc/ticdc-faq.md)
-- [TiCDC Glossary](/ticdc/ticdc-glossary.md)
+-   [HTAPを探索する](/explore-htap.md)
+-   [TiCDC よくある質問](/ticdc/ticdc-faq.md)
+-   [TiCDC 用語集](/ticdc/ticdc-glossary.md)

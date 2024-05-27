@@ -1,42 +1,42 @@
 ---
 title: 2023-11-14 TiDB Cloud Dedicated Scale Feature Maintenance Notification
-summary: Learn about the details of TiDB Cloud Dedicated Scale Feature Maintenance on November 14, 2023, such as the maintenance window and impact.
+summary: 2023 年 11 月 14 日のTiDB Cloud Dedicated Scale 機能メンテナンスの詳細 (メンテナンス ウィンドウや影響など) について説明します。
 ---
 
-# [2023-11-14] TiDB Cloud Dedicated Scale Feature Maintenance Notification
+# [2023-11-14] TiDB Cloud専用スケール機能メンテナンスのお知らせ {#2023-11-14-tidb-cloud-dedicated-scale-feature-maintenance-notification}
 
-This notification describes the details that you need to know about the maintenance for [Scale feature](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster#scale-your-tidb-cluster) of TiDB Cloud Dedicated on November 14, 2023.
+この通知では、2023 年 11 月 14 日のTiDB Cloud Dedicated の[スケール機能](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster#scale-your-tidb-cluster)のメンテナンスについて知っておく必要のある詳細について説明します。
 
-## Maintenance window
+## メンテナンス期間 {#maintenance-window}
 
-- Start time: 2023-11-14 16:00 (UTC+0)
-- End time: 2023-11-21 16:00 (UTC+0)
-- Duration: 7 days
+-   開始時間: 2023-11-14 16:00 (UTC+0)
+-   終了時間: 2023-11-21 16:00 (UTC+0)
+-   期間: 7日間
 
-> **Note:**
+> **注記：**
 >
-> Updated on 2023-11-16: The end time of the maintenance window has been extended from 2023-11-16 to 2023-11-21.
+> 2023-11-16 更新: メンテナンス ウィンドウの終了時刻が 2023-11-16 から 2023-11-21 に延長されました。
 
-## Impact
+## インパクト {#impact}
 
-During the maintenance window, [change vCPU and RAM](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster#change-vcpu-and-ram) is disabled and you can not change vCPU and RAM for your Dedicated Clusters. However, you can still change the node number or storage in the Modify Cluster page. Your TiDB cluster will maintain its regular operations for data read and write, ensuring no adverse effects on your online business.
+メンテナンス期間中は、 [vCPUとRAMを変更する](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster#change-vcpu-and-ram)が無効になり、専用クラスターの vCPU と RAM を変更することはできません。ただし、[クラスタの変更] ページでノード番号またはstorageを変更することはできます。TiDB クラスターは、データの読み取りと書き込みの通常の操作を維持し、オンライン ビジネスに悪影響を与えないようにします。
 
-### Affected features of TiDB Cloud console UI
+### TiDB Cloudコンソール UI の影響を受ける機能 {#affected-features-of-tidb-cloud-console-ui}
 
-- Cluster level
-    - Cluster management
-        - Modify clusters
-            - Change the vCPU and RAM of TiDB, TiKV, or TiFlash nodes.
- 
-### Affected features of TiDB Cloud API
+-   クラスタレベル
+    -   クラスタ管理
+        -   クラスターを変更する
+            -   TiDB、TiKV、またはTiFlashノードの vCPU と RAM を変更します。
 
-- Cluster management
-    - [UpdateCluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)
+### TiDB Cloud API の影響を受ける機能 {#affected-features-of-tidb-cloud-api}
 
-## Completion and resumption
+-   クラスタ管理
+    -   [クラスターの更新](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)
 
-Once the maintenance is successfully completed, the affected functionalities will be reinstated, offering you an even better experience.
+## 完了と再開 {#completion-and-resumption}
 
-## Get support
+メンテナンスが正常に完了すると、影響を受けた機能が復元され、さらに優れたエクスペリエンスが提供されます。
 
-If you have any questions or need assistance, contact our [support team](/tidb-cloud/tidb-cloud-support.md). We are here to address your concerns and provide any necessary guidance.
+## 支持を得ます {#get-support}
+
+ご質問やサポートが必要な場合は、 [支援チーム](/tidb-cloud/tidb-cloud-support.md)ご連絡ください。お客様の懸念に対処し、必要なガイダンスを提供いたします。

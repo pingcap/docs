@@ -1,23 +1,21 @@
 ---
 title: CHANGE DRAINER
-summary: An overview of the usage of CHANGE DRAINER for the TiDB database.
+summary: TiDB データベースの CHANGE DRAINER の使用法の概要。
 ---
 
-# CHANGE DRAINER
+# ドレイナーの変更 {#change-drainer}
 
-The `CHANGE DRAINER` statement modifies the status information for Drainer in the cluster.
+`CHANGE DRAINER`ステートメントは、クラスター内のDrainerのステータス情報を変更します。
 
-> **Note:**
+> **注記：**
 >
-> This feature is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> この機能は TiDB Self-Hosted にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
-> **Tip:**
+> **ヒント：**
 >
-> Drainer's state is automatically reported to PD while running. Only when Drainer is under abnormal circumstances and its state is inconsistent with the state information stored in PD, you can use the `CHANGE DRAINER` statement to modify the state information stored in PD.
+> Drainer の状態は実行中に自動的に PD に報告されます。Drainerが異常な状況にあり、その状態が PD に保存されている状態情報と一致しない場合にのみ、 `CHANGE DRAINER`ステートメントを使用して PD に保存されている状態情報を変更できます。
 
-## Examples
-
-{{< copyable "sql" >}}
+## 例 {#examples}
 
 ```sql
 SHOW DRAINER STATUS;
@@ -34,9 +32,7 @@ SHOW DRAINER STATUS;
 2 rows in set (0.00 sec)
 ```
 
-It can be seen that drainer1's state has not been updated for more than a day, the Drainer is in an abnormal state, but the `State` remains `Online`. After using `CHANGE DRAINER`, the Drainer's `State` is changed to 'paused':
-
-{{< copyable "sql" >}}
+ドレイナー 1 の状態は 1 日以上更新されていないことがわかります。Drainerは異常な状態ですが、 `State` `Online`ままです。 `CHANGE DRAINER`を使用した後、ドレイナーの`State` 「一時停止」に変更されます。
 
 ```sql
 CHANGE DRAINER TO NODE_STATE ='paused' FOR NODE_ID 'drainer1';
@@ -45,8 +41,6 @@ CHANGE DRAINER TO NODE_STATE ='paused' FOR NODE_ID 'drainer1';
 ```sql
 Query OK, 0 rows affected (0.01 sec)
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 SHOW DRAINER STATUS;
@@ -63,12 +57,12 @@ SHOW DRAINER STATUS;
 2 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## 参照 {#see-also}
 
-* [SHOW PUMP STATUS](/sql-statements/sql-statement-show-pump-status.md)
-* [SHOW DRAINER STATUS](/sql-statements/sql-statement-show-drainer-status.md)
-* [CHANGE PUMP STATUS](/sql-statements/sql-statement-change-pump.md)
+-   [ポンプの状態を表示](/sql-statements/sql-statement-show-pump-status.md)
+-   [ドレイナーステータスを表示](/sql-statements/sql-statement-show-drainer-status.md)
+-   [ポンプステータスの変更](/sql-statements/sql-statement-change-pump.md)

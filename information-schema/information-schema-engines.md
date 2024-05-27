@@ -1,11 +1,11 @@
 ---
 title: ENGINES
-summary: Learn the `ENGINES` information_schema table.
+summary: `ENGINES` information_schema テーブルについて学習します。
 ---
 
-# ENGINES
+# エンジン {#engines}
 
-The `ENGINES` table provides information about storage engines. For compatibility, TiDB will always describe InnoDB as the only supported engine. In addition, other column values in the `ENGINES` table are also fixed values.
+`ENGINES`テーブルはstorageエンジンに関する情報を提供します。互換性のため、TiDB は常に InnoDB のみをサポートするエンジンとして記述します。また、 `ENGINES`テーブルの他の列の値も固定値です。
 
 ```sql
 USE information_schema;
@@ -30,24 +30,22 @@ DESC engines;
 SELECT * FROM engines;
 ```
 
-```
-+--------+---------+------------------------------------------------------------+--------------+------+------------+
-| ENGINE | SUPPORT | COMMENT                                                    | TRANSACTIONS | XA   | SAVEPOINTS |
-+--------+---------+------------------------------------------------------------+--------------+------+------------+
-| InnoDB | DEFAULT | Supports transactions, row-level locking, and foreign keys | YES          | YES  | YES        |
-+--------+---------+------------------------------------------------------------+--------------+------+------------+
-1 row in set (0.01 sec)
-```
+    +--------+---------+------------------------------------------------------------+--------------+------+------------+
+    | ENGINE | SUPPORT | COMMENT                                                    | TRANSACTIONS | XA   | SAVEPOINTS |
+    +--------+---------+------------------------------------------------------------+--------------+------+------------+
+    | InnoDB | DEFAULT | Supports transactions, row-level locking, and foreign keys | YES          | YES  | YES        |
+    +--------+---------+------------------------------------------------------------+--------------+------+------------+
+    1 row in set (0.01 sec)
 
-The description of columns in the `ENGINES` table is as follows:
+`ENGINES`表の列の説明は次のとおりです。
 
-* `ENGINES`: The name of the storage engine.
-* `SUPPORT`: The level of support that the server has on the storage engine. In TiDB, the value is always `DEFAULT`.
-* `COMMENT`: The brief comment on the storage engine.
-* `TRANSACTIONS`: Whether the storage engine supports transactions.
-* `XA`: Whether the storage engine supports XA transactions.
-* `SAVEPOINTS`: Whether the storage engine supports `savepoints`.
+-   `ENGINES` :storageエンジンの名前。
+-   `SUPPORT` :サーバーがstorageエンジンに対して持つサポート レベル。TiDB では、値は常に`DEFAULT`です。
+-   `COMMENT` :storageエンジンに関する簡単なコメント。
+-   `TRANSACTIONS` :storageエンジンがトランザクションをサポートするかどうか。
+-   `XA` :storageエンジンが XA トランザクションをサポートするかどうか。
+-   `SAVEPOINTS` :storageエンジンが`savepoints`サポートするかどうか。
 
-## See also
+## 参照 {#see-also}
 
-- [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md)
+-   [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md)

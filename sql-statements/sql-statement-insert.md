@@ -1,13 +1,13 @@
 ---
 title: INSERT | TiDB SQL Statement Reference
-summary: An overview of the usage of INSERT for the TiDB database.
+summary: TiDB データベースでの INSERT の使用法の概要。
 ---
 
-# INSERT
+# 入れる {#insert}
 
-This statement inserts new rows into a table.
+このステートメントはテーブルに新しい行を挿入します。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 InsertIntoStmt ::=
@@ -41,7 +41,7 @@ OnDuplicateKeyUpdate ::=
     ( 'ON' 'DUPLICATE' 'KEY' 'UPDATE' AssignmentList )?
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (a INT);
@@ -95,13 +95,13 @@ mysql> SELECT * FROM t2;
 5 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-The `INSERT` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB の`INSERT`ステートメントは MySQL と完全に互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) 。
 
-## See also
+## 参照 {#see-also}
 
-* [DELETE](/sql-statements/sql-statement-delete.md)
-* [SELECT](/sql-statements/sql-statement-select.md)
-* [UPDATE](/sql-statements/sql-statement-update.md)
-* [REPLACE](/sql-statements/sql-statement-replace.md)
+-   [消去](/sql-statements/sql-statement-delete.md)
+-   [選択する](/sql-statements/sql-statement-select.md)
+-   [アップデート](/sql-statements/sql-statement-update.md)
+-   [交換する](/sql-statements/sql-statement-replace.md)

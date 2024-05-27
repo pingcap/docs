@@ -1,129 +1,129 @@
 ---
 title: tiup cluster upgrade
-summary: The tiup cluster upgrade command is used to upgrade a specified cluster to a specific version. It requires the cluster name and target version as input. Options include --force to ignore errors and start the cluster, --transfer-timeout to set maximum wait time for node migration, --ignore-config-check to skip configuration check, and --offline to replace binary files without restarting the cluster. The output is the log of the upgrading progress.
+summary: tiup cluster upgradeコマンドは、指定されたクラスターを特定のバージョンにアップグレードするために使用されます。入力として、クラスター名とターゲット バージョンが必要です。オプションには、エラーを無視してクラスターを起動する--force 、ノード移行の最大待機時間を設定する--transfer-timeout 、構成チェックをスキップする --ignore-config-check、クラスターを再起動せずにバイナリ ファイルを置き換える--offlineなどがあります。出力は、アップグレードの進行状況のログです。
 ---
 
-# tiup cluster upgrade
+# tiup cluster upgrade {#tiup-cluster-upgrade}
 
-The `tiup cluster upgrade` command is used to upgrade the specified cluster to a specific version.
+`tiup cluster upgrade`コマンドは、指定されたクラスターを特定のバージョンにアップグレードするために使用されます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster upgrade <cluster-name> <version> [flags]
 ```
 
-- `<cluster-name>`: the cluster name to operate on. If you forget the cluster name, you can check it with the [cluster list](/tiup/tiup-component-cluster-list.md) command.
-- `<version>`: the target version to upgrade to, such as `v8.1.0`. Currently, it is only allowed to upgrade to a version higher than the current cluster, that is, no downgrade is allowed. It is also not allowed to upgrade to the nightly version.
+-   `<cluster-name>` : 操作対象のクラスター名。クラスター名を忘れた場合は、 [クラスターリスト](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
+-   `<version>` : アップグレードするターゲット バージョン (例: `v8.1.0` 。現在、現在のクラスターよりも高いバージョンへのアップグレードのみが許可されており、ダウングレードは許可されていません。また、ナイトリー バージョンへのアップグレードも許可されていません。
 
-## Options
+## オプション {#options}
 
-### --force
+### &#x20;--force {#force}
 
-- To upgrade the cluster, you need to ensure that the cluster is currently started. In some cases, you might want to upgrade when the cluster is not started. At this time, you can use `--force` to ignore the error during the upgrade, forcibly replace the binary file and start the cluster.
-- Data type: `BOOLEAN`
-- Default: false
+-   クラスターをアップグレードするには、クラスターが現在起動していることを確認する必要があります。場合によっては、クラスターが起動していないときにアップグレードする必要があるかもしれません。このとき、 `--force`使用してアップグレード中のエラーを無視し、バイナリ ファイルを強制的に置き換えてクラスターを起動することができます。
+-   データ型: `BOOLEAN`
+-   デフォルト: false
 
-> **Note:**
+> **注記：**
 >
-> Forcing an upgrade of the cluster that is providing services might result in service unavailability. Unstarted clusters are started automatically after a successful upgrade.
+> サービスを提供しているクラスターのアップグレードを強制すると、サービスが利用できなくなる可能性があります。起動されていないクラスターは、アップグレードが成功すると自動的に起動されます。
 
-### --transfer-timeout
+### --transfer-timeout {#transfer-timeout}
 
-- When upgrading PD or TiKV, the leader of the upgraded node is migrated to other nodes first. The migration process takes some time, and you can set the maximum wait time (in seconds) by the `-transfer-timeout` option. After the timeout, the wait is skipped and the service is upgraded directly.
-- Data type: `uint`
-- Default: 600
+-   PD または TiKV をアップグレードする場合、アップグレードされたノードのリーダーが最初に他のノードに移行されます。移行プロセスには時間がかかり、 `-transfer-timeout`オプションで最大待機時間 (秒単位) を設定できます。タイムアウト後、待機はスキップされ、サービスは直接アップグレードされます。
+-   データ型: `uint`
+-   デフォルト: 600
 
-> **Note:**
+> **注記：**
 >
-> If the wait is skipped and the service is upgraded directly, the service performance might jitter.
+> 待機をスキップしてサービスを直接アップグレードすると、サービスのパフォーマンスが不安定になる可能性があります。
 
-### --ignore-config-check
+### --設定チェックを無視 {#ignore-config-check}
 
-- After the binary is updated, a configuration check is performed on the TiDB, TiKV and PD components using `<binary> --config-check <config-file>`. `<binary>` is the path to the newly deployed binary and `<config-file>` is the configuration file generated based on the user configuration. To skip this check, you can use the `--ignore-config-check` option.
-- Data type: `BOOLEAN`
-- Default: false
+-   バイナリが更新されると、 `<binary> --config-check <config-file>`を使用して TiDB、TiKV、および PD コンポーネントの構成チェックが実行されます。 `<binary>`新しくデプロイされたバイナリへのパスであり、 `<config-file>`ユーザー構成に基づいて生成された構成ファイルです。 このチェックをスキップするには、 `--ignore-config-check`オプションを使用できます。
+-   データ型: `BOOLEAN`
+-   デフォルト: false
 
-### --ignore-version-check
+### --バージョンチェックを無視 {#ignore-version-check}
 
-- Before upgrading, TiUP checks whether the target version is greater than or equal to the current version. To skip this check, you can use the `--ignore-version-check` option.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   アップグレードする前に、 TiUP はターゲット バージョンが現在のバージョン以上であるかどうかを確認します。このチェックをスキップするには、 `--ignore-version-check`オプションを使用できます。
+-   データ型: `BOOLEAN`
+-   このオプションは、値`false`でデフォルトで無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないようにする必要があります。
 
-### --offline
+### &#x20;--offline {#offline}
 
-- Declares that the current cluster is not running. When this option is specified, TiUP does not evict the service leader to another node or restart the service, but only replaces the binary files of the cluster components.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   現在のクラスターが実行されていないことを宣言します。このオプションを指定すると、 TiUP はサービス リーダーを別のノードに移動したり、サービスを再起動したりせず、クラスター コンポーネントのバイナリ ファイルのみを置き換えます。
+-   データ型: `BOOLEAN`
+-   このオプションは、デフォルトで値`false`で無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないようにする必要があります。
 
-### --pd-version
+### --pdバージョン {#pd-version}
 
-- Specifies the version of PD. If this option is set, the version of PD will no longer be consistent with the cluster version.
-- Data type: `STRINGS`
-- If this option is not set, the version of PD remains consistent with the cluster version.
+-   PD のバージョンを指定します。このオプションを設定すると、PD のバージョンはクラスターのバージョンと一致しなくなります。
+-   データ型: `STRINGS`
+-   このオプションが設定されていない場合、PD のバージョンはクラスターのバージョンと一致し続けます。
 
-### --tikv-version
+### --tikv バージョン {#tikv-version}
 
-- Specifies the version of TiKV. If this option is set, the version of TiKV will no longer be consistent with the cluster version.
-- Data type: `STRINGS`
-- If this option is not set, the version of TiKV remains consistent with the cluster version.
+-   TiKV のバージョンを指定します。このオプションを設定すると、TiKV のバージョンはクラスターのバージョンと一致しなくなります。
+-   データ型: `STRINGS`
+-   このオプションが設定されていない場合、TiKV のバージョンはクラスターのバージョンと一致し続けます。
 
-### --tikv-cdc-version
+### --tikv-cdc バージョン {#tikv-cdc-version}
 
-- Specifies the version of TiKV CDC. If this option is set, the version of TiKV CDC will no longer be consistent with the cluster version.
-- Data type: `STRINGS`
-- If this option is not set, the version of TiKV CDC remains consistent with the cluster version.
+-   TiKV CDC のバージョンを指定します。このオプションを設定すると、TiKV CDC のバージョンはクラスターのバージョンと一致しなくなります。
+-   データ型: `STRINGS`
+-   このオプションが設定されていない場合、TiKV CDC のバージョンはクラスターのバージョンと一致したままになります。
 
-### --tiflash-version
+### --tiflash バージョン {#tiflash-version}
 
-- Specifies the version of TiFlash. If this option is set, the version of TiFlash will no longer be consistent with the cluster version.
-- Data type: `STRINGS`
-- If this option is not set, the version of TiFlash remains consistent with the cluster version.
+-   TiFlashのバージョンを指定します。このオプションを設定すると、 TiFlashのバージョンはクラスターのバージョンと一致しなくなります。
+-   データ型: `STRINGS`
+-   このオプションが設定されていない場合、 TiFlashのバージョンはクラスターのバージョンと一致したままになります。
 
-### --cdc-version
+### --cdc バージョン {#cdc-version}
 
-- Specifies the version of TiCDC. If this option is set, the version of TiCDC will no longer be consistent with the cluster version.
-- Data type: `STRINGS`
-- If this option is not set, the version of TiCDC remains consistent with the cluster version.
+-   TiCDC のバージョンを指定します。このオプションを設定すると、TiCDC のバージョンはクラスターのバージョンと一致しなくなります。
+-   データ型: `STRINGS`
+-   このオプションが設定されていない場合、TiCDC のバージョンはクラスターのバージョンと一致し続けます。
 
-### --tiproxy-version
+### --tiproxy バージョン {#tiproxy-version}
 
-- Specifies the version of TiProxy. If this option is set, the version of TiProxy will no longer be consistent with the cluster version.
-- Data type: `STRINGS`
-- If this option is not set, the version of TiProxy remains consistent with the cluster version.
+-   TiProxy のバージョンを指定します。このオプションを設定すると、TiProxy のバージョンはクラスターのバージョンと一致しなくなります。
+-   データ型: `STRINGS`
+-   このオプションが設定されていない場合、TiProxy のバージョンはクラスターのバージョンと一致したままになります。
 
-### --tidb-dashboard-version
+### --tidb ダッシュボードバージョン {#tidb-dashboard-version}
 
-- Specifies the version of TiDB Dashboard. If this option is set, the version of TiDB Dashboard will no longer be consistent with the cluster version.
-- Data type: `STRINGS`
-- If this option is not set, the version of TiDB Dashboard remains consistent with the cluster version.
+-   TiDB ダッシュボードのバージョンを指定します。このオプションを設定すると、TiDB ダッシュボードのバージョンはクラスターのバージョンと一致しなくなります。
+-   データ型: `STRINGS`
+-   このオプションが設定されていない場合、TiDB ダッシュボードのバージョンはクラスターのバージョンと一致し続けます。
 
-### --alertmanager-version
+### --アラートマネージャバージョン {#alertmanager-version}
 
-- Specifies the version of alert manager. If this option is set, the version of alert manager will no longer be consistent with the cluster version.
-- Data type: `STRINGS`
-- If this option is not set, the version of alert manager remains consistent with the cluster version.
+-   アラート マネージャーのバージョンを指定します。このオプションを設定すると、アラート マネージャーのバージョンはクラスターのバージョンと一致しなくなります。
+-   データ型: `STRINGS`
+-   このオプションが設定されていない場合、アラート マネージャーのバージョンはクラスターのバージョンと一致したままになります。
 
-### --blackbox-exporter-version
+### --blackbox-exporter-バージョン {#blackbox-exporter-version}
 
-- Specifies the version of Blackbox Exporter. If this option is set, the version of Blackbox Exporter will no longer be consistent with the cluster version.
-- Data type: `STRINGS`
-- If this option is not set, the version of Blackbox Exporter remains consistent with the cluster version.
+-   Blackbox Exporter のバージョンを指定します。このオプションを設定すると、Blackbox Exporter のバージョンはクラスターのバージョンと一致しなくなります。
+-   データ型: `STRINGS`
+-   このオプションが設定されていない場合、Blackbox Exporter のバージョンはクラスターのバージョンと一致したままになります。
 
-### --node-exporter-version
+### --node-exporter-version {#node-exporter-version}
 
-- Specifies the version of Node Exporter. If this option is set, the version of Node Exporter will no longer be consistent with the cluster version.
-- Data type: `STRINGS`
-- If this option is not set, the version of Node Exporter remains consistent with the cluster version.
+-   Node Exporter のバージョンを指定します。このオプションを設定すると、Node Exporter のバージョンはクラスターのバージョンと一致しなくなります。
+-   データ型: `STRINGS`
+-   このオプションが設定されていない場合、Node Exporter のバージョンはクラスターのバージョンと一致したままになります。
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   このオプションは、値`false`でデフォルトで無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないようにする必要があります。
 
-## Output
+## 出力 {#output}
 
-The log of the upgrading progress.
+アップグレードの進行状況のログ。
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP クラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

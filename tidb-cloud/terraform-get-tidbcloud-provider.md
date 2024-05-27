@@ -1,114 +1,106 @@
 ---
 title: Get TiDB Cloud Terraform Provider
-summary: Learn how to get TiDB Cloud Terraform Provider.
+summary: TiDB Cloud Terraform Provider を取得する方法を学びます。
 ---
 
-# Get TiDB Cloud Terraform Provider
+# TiDB Cloud Terraform プロバイダーを入手 {#get-tidb-cloud-terraform-provider}
 
-You will learn how to get TiDB Cloud Terraform Provider in this document.
+このドキュメントでは、 TiDB Cloud Terraform Provider を取得する方法について説明します。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-Make sure that the requirements in [TiDB Cloud Terraform Provider Overview](/tidb-cloud/terraform-tidbcloud-provider-overview.md#requirements) are met.
+[TiDB CloudTerraform プロバイダーの概要](/tidb-cloud/terraform-tidbcloud-provider-overview.md#requirements)の要件が満たされていることを確認してください。
 
-## Step 1. Install Terraform
+## ステップ1. Terraformをインストールする {#step-1-install-terraform}
 
-TiDB Cloud Terraform Provider has been released to [Terraform Registry](https://registry.terraform.io/). All you need to do is install Terraform (>=1.0).
+TiDB Cloud Terraform Provider が[テラフォームレジストリ](https://registry.terraform.io/)にリリースされました。必要なのは Terraform (&gt;=1.0) をインストールすることだけです。
 
-For macOS, you can install Terraform with Homebrew according to the following steps.
+macOS の場合、次の手順に従ってHomebrewを使用して Terraform をインストールできます。
 
-1. Install the HashiCorp tap, a repository with all the required Homebrew packages.
+1.  必要なすべてのHomebrewパッケージを含むリポジトリである HashiCorp タップをインストールします。
 
     ```shell
     brew tap hashicorp/tap
     ```
 
-2. Install Terraform with `hashicorp/tap/terraform`.
+2.  `hashicorp/tap/terraform`を使用して Terraform をインストールします。
 
     ```shell
     brew install hashicorp/tap/terraform
     ```
 
-For other operating systems, see [Terraform documentation](https://learn.hashicorp.com/tutorials/terraform/install-cli) for instructions.
+その他のオペレーティング システムについては、手順[Terraform ドキュメント](https://learn.hashicorp.com/tutorials/terraform/install-cli)参照してください。
 
-## Step 2. Create an API key
+## ステップ2. APIキーを作成する {#step-2-create-an-api-key}
 
-TiDB Cloud API uses HTTP Digest Authentication. It protects your private key from being sent over the network.
+TiDB Cloud API は HTTP ダイジェスト認証を使用します。これにより、秘密鍵がネットワーク経由で送信されるのを防ぎます。
 
-Currently, TiDB Cloud Terraform Provider does not support managing API keys. So you need to create an API key in the [TiDB Cloud console](https://tidbcloud.com/console/clusters).
+現在、 TiDB Cloud Terraform Provider は API キーの管理をサポートしていません。そのため、 [TiDB Cloudコンソール](https://tidbcloud.com/console/clusters)で API キーを作成する必要があります。
 
-For detailed steps, see [TiDB Cloud API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
+詳細な手順については[TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)参照してください。
 
-## Step 3. Download TiDB Cloud Terraform Provider
+## ステップ3. TiDB Cloud Terraform Providerをダウンロードする {#step-3-download-tidb-cloud-terraform-provider}
 
-1. Create a `main.tf` file:
+1.  `main.tf`ファイルを作成します。
 
-   ```
-   terraform {
-     required_providers {
-       tidbcloud = {
-         source = "tidbcloud/tidbcloud"
-         version = "~> 0.1.0"
-       }
-     }
-     required_version = ">= 1.0.0"
-   }
-   ```
+        terraform {
+          required_providers {
+            tidbcloud = {
+              source = "tidbcloud/tidbcloud"
+              version = "~> 0.1.0"
+            }
+          }
+          required_version = ">= 1.0.0"
+        }
 
-   - The `source` attribute specifies the target Terraform provider to be downloaded from [Terraform Registry](https://registry.terraform.io/).
-   - The `version` attribute is optional, which specifies the version of the Terraform provider. If it is not specified, the latest provider version is used by default.
-   - The `required_version` is optional, which specifies the version of Terraform. If it is not specified, the latest Terraform version is used by default.
+    -   `source`属性は、 [テラフォームレジストリ](https://registry.terraform.io/)からダウンロードする対象の Terraform プロバイダーを指定します。
+    -   `version`属性はオプションで、Terraform プロバイダーのバージョンを指定します。指定されていない場合は、デフォルトで最新のプロバイダー バージョンが使用されます。
+    -   `required_version`はオプションで、Terraform のバージョンを指定します。指定されていない場合は、デフォルトで最新の Terraform バージョンが使用されます。
 
-2. Run the `terraform init` command to download TiDB Cloud Terraform Provider from Terraform Registry.
+2.  `terraform init`コマンドを実行して、Terraform Registry からTiDB Cloud Terraform Provider をダウンロードします。
 
-   ```
-   $ terraform init
+        $ terraform init
 
-   Initializing the backend...
+        Initializing the backend...
 
-   Initializing provider plugins...
-   - Reusing previous version of tidbcloud/tidbcloud from the dependency lock file
-   - Using previously-installed tidbcloud/tidbcloud v0.1.0
+        Initializing provider plugins...
+        - Reusing previous version of tidbcloud/tidbcloud from the dependency lock file
+        - Using previously-installed tidbcloud/tidbcloud v0.1.0
 
-   Terraform has been successfully initialized!
+        Terraform has been successfully initialized!
 
-   You may now begin working with Terraform. Try running "terraform plan" to see
-   any changes that are required for your infrastructure. All Terraform commands
-   should now work.
+        You may now begin working with Terraform. Try running "terraform plan" to see
+        any changes that are required for your infrastructure. All Terraform commands
+        should now work.
 
-   If you ever set or change modules or backend configuration for Terraform,
-   rerun this command to reinitialize your working directory. If you forget, other
-   commands will detect it and remind you to do so if necessary.
-   ```
+        If you ever set or change modules or backend configuration for Terraform,
+        rerun this command to reinitialize your working directory. If you forget, other
+        commands will detect it and remind you to do so if necessary.
 
-## Step 4. Configure TiDB Cloud Terraform Provider with the API key
+## ステップ4. APIキーを使用してTiDB Cloud Terraform Providerを構成する {#step-4-configure-tidb-cloud-terraform-provider-with-the-api-key}
 
-You can configure the `main.tf` file as follows:
+`main.tf`ファイルを次のように構成できます。
 
-```
-terraform {
-  required_providers {
-    tidbcloud = {
-      source = "tidbcloud/tidbcloud"
+    terraform {
+      required_providers {
+        tidbcloud = {
+          source = "tidbcloud/tidbcloud"
+        }
+      }
     }
-  }
-}
 
-provider "tidbcloud" {
-  public_key = "your_public_key"
-  private_key = "your_private_key"
-}
-```
+    provider "tidbcloud" {
+      public_key = "your_public_key"
+      private_key = "your_private_key"
+    }
 
-`public_key` and `private_key` are the API key's public key and private key. You can also pass them through the environment variables:
+`public_key`と`private_key` API キーの公開鍵と秘密鍵です。環境変数を介して渡すこともできます。
 
-```
-export TIDBCLOUD_PUBLIC_KEY = ${public_key}
-export TIDBCLOUD_PRIVATE_KEY = ${private_key}
-```
+    export TIDBCLOUD_PUBLIC_KEY = ${public_key}
+    export TIDBCLOUD_PRIVATE_KEY = ${private_key}
 
-Now, you can use the TiDB Cloud Terraform Provider.
+これで、 TiDB Cloud Terraform プロバイダーを使用できるようになります。
 
-## Next step
+## 次のステップ {#next-step}
 
-Get started by managing a cluster with the [cluster resource](/tidb-cloud/terraform-use-cluster-resource.md).
+[クラスターリソース](/tidb-cloud/terraform-use-cluster-resource.md)を使用してクラスターの管理を開始します。

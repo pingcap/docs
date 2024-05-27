@@ -1,157 +1,156 @@
 ---
 title: Key Monitoring Metrics of PD
-summary: Learn some key metrics displayed on the Grafana PD dashboard.
+summary: Grafana PD ダッシュボードに表示されるいくつかの主要なメトリックについて学習します。
 ---
 
-# Key Monitoring Metrics of PD
+# PDの主要な監視指標 {#key-monitoring-metrics-of-pd}
 
-If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus & Grafana) is deployed at the same time. For more information, see [Overview of the Monitoring Framework](/tidb-monitoring-framework.md).
+TiUPを使用して TiDB クラスターをデプロイすると、監視システム (Prometheus および Grafana) も同時にデプロイされます。詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)参照してください。
 
-The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Disk Performance, and Performance\_overview. A lot of metrics are there to help you diagnose.
+Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter、Disk Performance、Performance_overview などの一連のサブダッシュボードに分かれています。診断に役立つメトリックが多数あります。
 
-You can get an overview of the component PD status from the PD dashboard, where the key metrics are displayed. This document provides a detailed description of these key metrics.
+PD ダッシュボードでは、主要なメトリックが表示され、コンポーネントのPD ステータスの概要を確認できます。このドキュメントでは、これらの主要なメトリックについて詳しく説明します。
 
-The following is the description of PD Dashboard metrics items:
+PD ダッシュボード メトリック項目の説明は次のとおりです。
 
-- PD role: The role of the current PD instance
-- Storage capacity: The total storage capacity for this TiDB cluster
-- Current storage size: The storage size that is currently used by the TiDB cluster
-- Current storage usage: The current storage usage rate
-- Normal stores: The count of healthy storage instances
-- Number of Regions: The total count of cluster Regions
-- Abnormal stores: The count of unhealthy stores. The normal value is `0`. If the number is bigger than `0`, it means at least one instance is abnormal.
-- Region health: The health status of Regions indicated via the count of unusual Regions including pending peers, down peers, extra peers, offline peers, missing peers, learner peers and incorrect namespaces. Generally, the number of pending peers should be less than `100`. The missing peers should not be persistently greater than `0`. If many empty Regions exist, enable Region Merge in time.
-- Current peer count: The current count of all cluster peers
-![PD Dashboard - Header](/media/pd-dashboard-header-v4.png)
+-   PDロール: 現在のPDインスタンスのロール
+-   ストレージ容量: この TiDB クラスターの合計storage容量
+-   現在のstorageサイズ: TiDB クラスターで現在使用されているstorageサイズ
+-   現在のstorage使用量: 現在のstorage使用率
+-   通常のストア: 正常なstorageインスタンスの数
+-   リージョン数: クラスターリージョンの合計数
+-   異常なストア: 不健全なストアの数。正常値は`0`です。数値が`0`より大きい場合、少なくとも 1 つのインスタンスが異常であることを意味します。
+-   リージョンの健全性: 保留中のピア、ダウンしているピア、余分なピア、オフラインのピア、欠落しているピア、学習者ピア、および不正な名前空間を含む異常なリージョンの数によって示されるリージョンの健全性状態。通常、保留中のピアの数は`100`未満である必要があります。欠落しているピアは、永続的に`0`を超えてはなりません。空のリージョンが多数存在する場合は、適時にリージョンのマージを有効にしてください。
+-   現在のピア数: すべてのクラスタピアの現在の数![PD Dashboard - Header](/media/pd-dashboard-header-v4.png)
 
-## Key metrics description
+## 主要な指標の説明 {#key-metrics-description}
 
-## Cluster
+## クラスタ {#cluster}
 
-- PD scheduler config: The list of PD scheduler configurations
-- Cluster ID: The unique identifier of the cluster
-- Current TSO: The physical part of current allocated TSO
-- Current ID allocation: The maximum allocatable ID for new store/peer
-- Region label isolation level: The number of Regions in different label levels
-- Label distribution: The distribution status of the labels in the cluster
-- Store Limit: The flow control limitation of scheduling on the Store
+-   PDスケジューラ設定: PDスケジューラ設定のリスト
+-   クラスタID: クラスターの一意の識別子
+-   現在のTSO: 現在割り当てられているTSOの物理部分
+-   現在のID割り当て: 新しいストア/ピアに割り当てられる最大ID
+-   リージョンラベル分離レベル: 異なるラベルレベルの地域数
+-   ラベルの配布: クラスター内のラベルの配布状況
+-   ストア制限: ストアでのスケジュールのフロー制御制限
 
 ![PD Dashboard - Cluster metrics](/media/pd-dashboard-cluster-v4.png)
 
-## Operator
+## オペレーター {#operator}
 
-- Schedule operator create: The number of newly created operators per type
-- Schedule operator check: The number of checked operator per type. It mainly checks whether the current step is finished; if yes, it returns the next step to be executed
-- Schedule operator finish: The number of finished operators per type
-- Schedule operator timeout: The number of timeout operators per type
-- Schedule operator replaced or canceled: The number of replaced or canceled operators per type
-- Schedule operators count by state: The number of operators per state
-- Operator finish duration: The maximum duration of finished operators
-- Operator step duration: The maximum duration of finished operator steps
+-   オペレータ作成のスケジュール: タイプごとに新しく作成されるオペレータの数
+-   スケジュール演算子チェック: 種類ごとにチェックされる演算子の数。主に現在のステップが終了したかどうかをチェックし、終了した場合は、実行する次のステップを返します。
+-   スケジュールオペレータ終了: タイプごとに終了したオペレータの数
+-   スケジュールオペレータのタイムアウト: タイプごとのタイムアウトオペレータの数
+-   スケジュールオペレータの交代またはキャンセル: タイプごとに交代またはキャンセルされたオペレータの数
+-   州別のスケジュールオペレーター数: 州ごとのオペレーターの数
+-   オペレータ終了時間: 終了したオペレータの最大時間
+-   オペレータステップの所要時間: 完了したオペレータステップの最大所要時間
 
 ![PD Dashboard - Operator metrics](/media/pd-dashboard-operator-v4.png)
 
-## Statistics - Balance
+## 統計- バランス {#statistics-balance}
 
-- Store capacity: The capacity size per TiKV instance
-- Store available: The available capacity size per TiKV instance
-- Store used: The used capacity size per TiKV instance
-- Size amplification: The size amplification ratio per TiKV instance, which is equal to (Store Region size)/(Store used capacity size)
-- Size available ratio: The size availability ratio per TiKV instance, which is equal to (Store available capacity size)/(Store capacity size)
-- Store leader score: The leader score per TiKV instance
-- Store Region score: The Region score per TiKV instance
-- Store leader size: The total leader size per TiKV instance
-- Store Region size: The total Region size per TiKV instance
-- Store leader count: The leader count per TiKV instance
-- Store Region count: The Region count per TiKV instance
+-   ストア容量: TiKVインスタンスあたりの容量サイズ
+-   利用可能なストア: TiKVインスタンスあたりの利用可能な容量サイズ
+-   使用済みストア: TiKVインスタンスごとの使用済み容量サイズ
+-   サイズ増幅: TiKVインスタンスあたりのサイズ増幅率。これは、(ストアリージョンのサイズ)/(ストアの使用済み容量のサイズ)に等しい。
+-   利用可能なサイズ比率: TiKV インスタンスあたりの利用可能なサイズ比率。これは (ストアの利用可能な容量サイズ)/(ストアの容量サイズ) に等しくなります。
+-   ストアリーダースコア: TiKVインスタンスごとのリーダースコア
+-   ストアリージョンスコア: TiKVインスタンスごとのリージョンスコア
+-   ストアリーダーサイズ: TiKVインスタンスあたりのリーダーサイズの合計
+-   ストアリージョンサイズ: TiKVインスタンスあたりのリージョンの合計サイズ
+-   ストアリーダー数: TiKVインスタンスごとのリーダー数
+-   ストアリージョン数: TiKVインスタンスあたりのリージョン数
 
 ![PD Dashboard - Balance metrics](/media/pd-dashboard-balance-v4.png)
 
-## Statistics - hot write
+## 統計- ホットライト {#statistics-hot-write}
 
-- Hot Region's leader distribution: The total number of leader Regions that have become write hotspots on each TiKV instance
-- Total written bytes on hot leader Regions: The total written bytes by leader Regions that have become write hotspots on each TiKV instance
-- Hot write Region's peer distribution: The total number of peer Regions that have become write hotspots on each TiKV instance
-- Total written bytes on hot peer Regions: The written bytes of all peer Regions that have become write hotspots on each TiKV instance
-- Store Write rate bytes: The total written bytes on each TiKV instance
-- Store Write rate keys: The total written keys on each TiKV instance
-- Hot cache write entry number: The number of peers on each TiKV instance that are in the write hotspot statistics module
-- Selector events: The event count of Selector in the hotspot scheduling module
-- Direction of hotspot move leader: The direction of leader movement in the hotspot scheduling. The positive number means scheduling into the instance. The negative number means scheduling out of the instance
-- Direction of hotspot move peer: The direction of peer movement in the hotspot scheduling. The positive number means scheduling into the instance. The negative number means scheduling out of the instance
+-   ホットリージョンのリーダー分布: 各 TiKV インスタンスで書き込みホットスポットとなったリーダーリージョンの合計数
+-   ホットリーダー領域の合計書き込みバイト数: 各 TiKV インスタンスで書き込みホットスポットとなったリーダー領域による合計書き込みバイト数
+-   ホット書き込みリージョンのピア分布: 各 TiKV インスタンスで書き込みホットスポットとなったピアリージョンの合計数
+-   ホットピアリージョンの合計書き込みバイト数: 各 TiKV インスタンスで書き込みホットスポットとなったすべてのピアリージョンの書き込みバイト数
+-   ストア書き込みレートバイト: 各 TiKV インスタンスに書き込まれた合計バイト数
+-   書き込みレートキーの保存: 各 TiKV インスタンスに書き込まれたキーの合計
+-   ホットキャッシュ書き込みエントリ数: 書き込みホットスポット統計モジュールにある各 TiKV インスタンス上のピアの数
+-   セレクターイベント: ホットスポットスケジューリングモジュールのセレクターのイベント数
+-   ホットスポット移動リーダーの方向: ホットスポット スケジューリングにおけるリーダーの移動方向。正の数はインスタンスへのスケジューリングを意味します。負の数はインスタンスからのスケジューリングを意味します。
+-   ホットスポット移動ピアの方向: ホットスポット スケジューリングにおけるピアの移動方向。正の数はインスタンスへのスケジューリングを意味します。負の数はインスタンスからのスケジューリングを意味します。
 
 ![PD Dashboard - Hot write metrics](/media/pd-dashboard-hotwrite-v4.png)
 
-## Statistics - hot read
+## 統計- ホットリード {#statistics-hot-read}
 
-- Hot Region's peer distribution: The total number of peer Regions that have become read hotspots on each TiKV instance
-- Total read bytes on hot peer Regions: The total read bytes of peers that have become read hotspots on each TiKV instance
-- Store read rate bytes: The total read bytes of each TiKV instance
-- Store read rate keys: The total read keys of each TiKV instance
-- Hot cache read entry number: The number of peers that are in the read hotspot statistics module on each TiKV instance
+-   ホットリージョンのピア分布: 各 TiKV インスタンスで読み取りホットスポットとなったピアリージョンの合計数
+-   ホットピア領域の合計読み取りバイト数: 各 TiKV インスタンスで読み取りホットスポットとなったピアの合計読み取りバイト数
+-   ストア読み取りレートバイト: 各 TiKV インスタンスの合計読み取りバイト数
+-   読み取りレートキーを保存: 各 TiKV インスタンスの合計読み取りキー
+-   ホット キャッシュ読み取りエントリ数: 各 TiKV インスタンスの読み取りホットスポット統計モジュールにあるピアの数
 
 ![PD Dashboard - Hot read metrics](/media/pd-dashboard-hotread-v4.png)
 
-## Scheduler
+## スケジューラ {#scheduler}
 
-- Scheduler is running: The current running schedulers
-- Balance leader movement: The leader movement details among TiKV instances
-- Balance Region movement: The Region movement details among TiKV instances
-- Balance leader event: The count of balance leader events
-- Balance Region event: The count of balance Region events
-- Balance leader scheduler: The inner status of balance leader scheduler
-- Balance Region scheduler: The inner status of balance Region scheduler
-- Replica checker: The replica checker's status
-- Rule checker: The rule checker's status
-- Region merge checker: The merge checker's status
-- Filter target: The number of attempts that the store is selected as the scheduling target but failed to pass the filter
-- Filter source: The number of attempts that the store is selected as the scheduling source but failed to pass the filter
-- Balance Direction: The number of times that the Store is selected as the target or source of scheduling
+-   スケジューラが実行中: 現在実行中のスケジューラ
+-   リーダーの動きのバランス: TiKVインスタンス間のリーダーの動きの詳細
+-   バランスリージョン移動: TiKVインスタンス間のリージョン移動の詳細
+-   バランスリーダーイベント:バランスリーダーイベントの数
+-   バランスリージョンイベント: バランスリージョンイベントの数
+-   バランスリーダースケジューラ: バランスリーダースケジューラの内部状態
+-   バランスリージョンスケジューラ: バランスリージョンスケジューラの内部状態
+-   レプリカチェッカー: レプリカチェッカーのステータス
+-   ルールチェッカー: ルールチェッカーのステータス
+-   リージョンマージチェッカー: マージチェッカーのステータス
+-   フィルターターゲット: 店舗がスケジュールターゲットとして選択されたが、フィルターを通過できなかった試行回数
+-   フィルターソース: ストアがスケジュールソースとして選択されたが、フィルターを通過できなかった試行回数
+-   バランス方向: ストアがスケジュールのターゲットまたはソースとして選択された回数
 
 ![PD Dashboard - Scheduler metrics](/media/pd-dashboard-scheduler-v4.png)
 
-## gRPC
+## GRPC とは {#grpc}
 
-- Completed commands rate: The rate per command type at which gRPC commands are completed
-- 99% Completed commands duration: The rate per command type at which gRPC commands are completed (P99)
+-   完了コマンド率: gRPC コマンドが完了するコマンド タイプごとの率
+-   99% 完了コマンド期間: gRPC コマンドが完了するコマンド タイプごとの割合 (P99)
 
 ![PD Dashboard - gRPC metrics](/media/pd-dashboard-grpc-v2.png)
 
-## etcd
+## など {#etcd}
 
-- Handle transactions count: The rate at which etcd handles transactions
-- 99% Handle transactions duration: The transaction handling rate (P99)
-- 99% WAL fsync duration: The time consumed for writing WAL into the persistent storage. It is less than `1s` (P99)
-- 99% Peer round trip time seconds: The network latency for etcd (P99) | The value is less than `1s`
-- etcd disk WAL fsync rate: The rate of writing WAL into the persistent storage
-- Raft term: The current term of Raft
-- Raft committed index: The last committed index of Raft
-- Raft applied index: The last applied index of Raft
+-   トランザクション処理数: etcdがトランザクションを処理する速度
+-   99% トランザクション処理期間: トランザクション処理率 (P99)
+-   99% WAL fsync 期間: WAL を永続storageに書き込むのにかかる時間。1 `1s` (P99)
+-   99% ピア ラウンド トリップ時間 (秒): etcd のネットワークレイテンシー(P99) | 値は`1s`未満です
+-   etcd ディスク WAL fsync レート: 永続storageへの WAL の書き込みレート
+-   Raftの用語: Raftの現在の用語
+-   Raftコミットインデックス: Raftの最後のコミットインデックス
+-   Raft適用インデックス: Raftの最後に適用されたインデックス
 
 ![PD Dashboard - etcd metrics](/media/pd-dashboard-etcd-v2.png)
 
-## TiDB
+## ティビ {#tidb}
 
-- PD Server TSO handle time and Client recv time: The duration between PD receiving the TSO request and the PD client getting the TSO response
-- Handle requests count: The count of TiDB requests
-- Handle requests duration: The time consumed for handling TiDB requests. It should be less than `100ms` (P99)
+-   PDサーバTSO処理時間とクライアント受信時間: PDがTSO要求を受信して​​からPDクライアントがTSO応答を受信するまでの時間
+-   処理要求数: TiDB要求の数
+-   リクエスト処理時間: TiDB リクエストの処理にかかる時間。1 `100ms`である必要があります (P99)
 
 ![PD Dashboard - TiDB metrics](/media/pd-dashboard-tidb-v4.png)
 
-## Heartbeat
+## ハートビート {#heartbeat}
 
-- Heartbeat region event QPS: The QPS of handling heartbeat messages, including updating the cache and persisting data
-- Region heartbeat report: The count of heartbeats reported to PD per instance
-- Region heartbeat report error: The count of heartbeats with the `error` status
-- Region heartbeat report active: The count of heartbeats with the `ok` status
-- Region schedule push: The count of corresponding schedule commands sent from PD per TiKV instance
-- 99% Region heartbeat latency: The heartbeat latency per TiKV instance (P99)
+-   ハートビート領域イベントQPS: キャッシュの更新やデータの永続化を含むハートビートメッセージの処理のQPS
+-   リージョンハートビートレポート: インスタンスごとにPDに報告されたハートビートの数
+-   リージョンハートビートレポートエラー: ステータス`error`ハートビートの数
+-   リージョンハートビートレポートがアクティブ: ステータスが`ok`ハートビートの数
+-   リージョンスケジュールプッシュ: TiKVインスタンスごとにPDから送信された対応するスケジュールコマンドの数
+-   99%リージョンハートビートレイテンシー: TiKV インスタンスあたりのハートビートレイテンシー(P99)
 
 ![PD Dashboard - Heartbeat metrics](/media/pd-dashboard-heartbeat-v4.png)
 
-## Region storage
+## リージョンstorage {#region-storage}
 
-- Syncer Index: The maximum index in the Region change history recorded by the leader
-- history last index: The last index where the Region change history is synchronized successfully with the follower
+-   Syncer Index: リーダーによって記録されたリージョン変更履歴の最大インデックス
+-   履歴最終インデックス:リージョン変更履歴がフォロワーと正常に同期された最後のインデックス
 
 ![PD Dashboard - Region storage](/media/pd-dashboard-region-storage.png)

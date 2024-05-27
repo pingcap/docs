@@ -1,13 +1,13 @@
 ---
 title: ALTER USER | TiDB SQL Statement Reference
-summary: An overview of the usage of ALTER USER for the TiDB database.
+summary: TiDB データベースの ALTER USER の使用法の概要。
 ---
 
-# ALTER USER
+# ユーザーの変更 {#alter-user}
 
-This statement changes an existing user inside the TiDB privilege system. In the MySQL privilege system, a user is the combination of a username and the host from which they are connecting from. Thus, it is possible to create a user `'newuser2'@'192.168.1.1'` who is only able to connect from the IP address `192.168.1.1`. It is also possible to have two users have the same user-portion, and different permissions as they login from different hosts.
+このステートメントは、TiDB 権限システム内の既存のユーザーを変更します。MySQL 権限システムでは、ユーザーはユーザー名と接続元のホストの組み合わせです。したがって、IP アドレス`192.168.1.1`からのみ接続できるユーザー`'newuser2'@'192.168.1.1'`を作成できます。また、2 人のユーザーに同じユーザー部分を持たせ、異なるホストからログインするときに異なる権限を持たせることもできます。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AlterUserStmt ::=
@@ -44,7 +44,7 @@ RequireClauseOpt ::= ('REQUIRE' ('NONE' | 'SSL' | 'X509' | RequireListElement ('
 RequireListElement ::= 'ISSUER' Issuer | 'SUBJECT' Subject | 'CIPHER' Cipher | 'SAN' SAN | 'TOKEN_ISSUER' TokenIssuer
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE USER 'newuser' IDENTIFIED BY 'newuserpassword';
@@ -59,34 +59,30 @@ mysql> SHOW CREATE USER 'newuser';
 1 row in set (0.00 sec)
 ```
 
-### Modify basic user information
+### 基本的なユーザー情報を変更する {#modify-basic-user-information}
 
-Change the password for user `newuser`:
+ユーザー`newuser`のパスワードを変更します:
 
-```
-mysql> ALTER USER 'newuser' IDENTIFIED BY 'newnewpassword';
-Query OK, 0 rows affected (0.02 sec)
+    mysql> ALTER USER 'newuser' IDENTIFIED BY 'newnewpassword';
+    Query OK, 0 rows affected (0.02 sec)
 
-mysql> SHOW CREATE USER 'newuser';
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| CREATE USER for newuser@%                                                                                                                                            |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| CREATE USER 'newuser'@'%' IDENTIFIED WITH 'mysql_native_password' AS '*FB8A1EA1353E8775CA836233E367FBDFCB37BE73' REQUIRE NONE PASSWORD EXPIRE DEFAULT ACCOUNT UNLOCK |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    mysql> SHOW CREATE USER 'newuser';
+    +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | CREATE USER for newuser@%                                                                                                                                            |
+    +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | CREATE USER 'newuser'@'%' IDENTIFIED WITH 'mysql_native_password' AS '*FB8A1EA1353E8775CA836233E367FBDFCB37BE73' REQUIRE NONE PASSWORD EXPIRE DEFAULT ACCOUNT UNLOCK |
+    +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
-Lock the user `newuser`:
+ユーザー`newuser`ロックする:
 
 ```sql
 ALTER USER 'newuser' ACCOUNT LOCK;
 ```
 
-```
-Query OK, 0 rows affected (0.02 sec)
-```
+    Query OK, 0 rows affected (0.02 sec)
 
-Modify the attributes of `newuser`:
+`newuser`の属性を変更します:
 
 ```sql
 ALTER USER 'newuser' ATTRIBUTE '{"newAttr": "value", "deprecatedAttr": null}';
@@ -102,7 +98,7 @@ SELECT * FROM information_schema.user_attributes;
 1 rows in set (0.00 sec)
 ```
 
-Modify the comment of `newuser` using `ALTER USER ... COMMENT`:
+`ALTER USER ... COMMENT`を使用して`newuser`のコメントを変更します。
 
 ```sql
 ALTER USER 'newuser' COMMENT 'Here is the comment';
@@ -118,7 +114,7 @@ SELECT * FROM information_schema.user_attributes;
 1 rows in set (0.00 sec)
 ```
 
-Remove the comment of `newuser` using `ALTER USER ... ATTRIBUTE`:
+`ALTER USER ... ATTRIBUTE`を使用して`newuser`のコメントを削除します。
 
 ```sql
 ALTER USER 'newuser' ATTRIBUTE '{"comment": null}';
@@ -134,77 +130,67 @@ SELECT * FROM information_schema.user_attributes;
 1 rows in set (0.00 sec)
 ```
 
-Change the automatic password expiration policy for `newuser` to never expire via `ALTER USER ... PASSWORD EXPIRE NEVER`:
+`ALTER USER ... PASSWORD EXPIRE NEVER`を実行して、 `newuser`の自動パスワード有効期限ポリシーを無期限に変更します。
 
 ```sql
 ALTER USER 'newuser' PASSWORD EXPIRE NEVER;
 ```
 
-```
-Query OK, 0 rows affected (0.02 sec)
-```
+    Query OK, 0 rows affected (0.02 sec)
 
-Modify the password reuse policy for `newuser` to disallow the reuse of any password used within the last 90 days using `ALTER USER ... PASSWORD REUSE INTERVAL ... DAY`:
+`ALTER USER ... PASSWORD REUSE INTERVAL ... DAY`を使用して、 `newuser`のパスワード再利用ポリシーを変更し、過去 90 日以内に使用されたパスワードの再利用を禁止します。
 
 ```sql
 ALTER USER 'newuser' PASSWORD REUSE INTERVAL 90 DAY;
 ```
 
-```
-Query OK, 0 rows affected (0.02 sec)
-```
+    Query OK, 0 rows affected (0.02 sec)
 
-### Modify the resource group bound to the user
+### ユーザーにバインドされているリソース グループを変更する {#modify-the-resource-group-bound-to-the-user}
 
-Use `ALTER USER ... RESOURCE GROUP` to modify the resource group of the user `newuser` to `rg1`.
+`ALTER USER ... RESOURCE GROUP`使用して、ユーザー`newuser` ～ `rg1`のリソース グループを変更します。
 
 ```sql
 ALTER USER 'newuser' RESOURCE GROUP rg1;
 ```
 
-```
-Query OK, 0 rows affected (0.02 sec)
-```
+    Query OK, 0 rows affected (0.02 sec)
 
-View the resource group bound to the current user:
+現在のユーザーにバインドされているリソース グループをビュー。
 
 ```sql
 SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user WHERE user = "newuser";
 ```
 
-```
-+---------+---------------------------------------------------+
-| USER    | JSON_EXTRACT(User_attributes, "$.resource_group") |
-+---------+---------------------------------------------------+
-| newuser | "rg1"                                             |
-+---------+---------------------------------------------------+
-1 row in set (0.02 sec)
-```
+    +---------+---------------------------------------------------+
+    | USER    | JSON_EXTRACT(User_attributes, "$.resource_group") |
+    +---------+---------------------------------------------------+
+    | newuser | "rg1"                                             |
+    +---------+---------------------------------------------------+
+    1 row in set (0.02 sec)
 
-Unbind the user to a resource group, that is, bind the user to the `default` resource group.
+ユーザーをリソース グループからバインド解除します。つまり、ユーザーを`default`リソース グループにバインドします。
 
 ```sql
 ALTER USER 'newuser' RESOURCE GROUP `default`;
 SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user WHERE user = "newuser";
 ```
 
-```
-+---------+---------------------------------------------------+
-| USER    | JSON_EXTRACT(User_attributes, "$.resource_group") |
-+---------+---------------------------------------------------+
-| newuser | "default"                                         |
-+---------+---------------------------------------------------+
-1 row in set (0.02 sec)
-```
+    +---------+---------------------------------------------------+
+    | USER    | JSON_EXTRACT(User_attributes, "$.resource_group") |
+    +---------+---------------------------------------------------+
+    | newuser | "default"                                         |
+    +---------+---------------------------------------------------+
+    1 row in set (0.02 sec)
 
-## See also
+## 参照 {#see-also}
 
 <CustomContent platform="tidb">
 
-* [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
+-   [MySQL とのSecurity互換性](/security-compatibility-with-mysql.md)
 
 </CustomContent>
 
-* [CREATE USER](/sql-statements/sql-statement-create-user.md)
-* [DROP USER](/sql-statements/sql-statement-drop-user.md)
-* [SHOW CREATE USER](/sql-statements/sql-statement-show-create-user.md)
+-   [ユーザーを作成](/sql-statements/sql-statement-create-user.md)
+-   [ユーザーを削除](/sql-statements/sql-statement-drop-user.md)
+-   [ユーザーの作成を表示](/sql-statements/sql-statement-show-create-user.md)

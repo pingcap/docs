@@ -1,74 +1,74 @@
 ---
 title: TiDB 3.0.10 Release Notes
-summary: TiDB 3.0.10 was released on February 20, 2020. It includes various bug fixes and improvements for TiDB, TiKV, PD, and TiDB Ansible. Some notable fixes include wrong Join results, data visibility issues, and system panic problems. TiDB Ansible also added new monitoring items to the dashboard. The release notes recommend using the latest 3.0.x version due to known issues in this release.
+summary: TiDB 3.0.10 は、2020 年 2 月 20 日にリリースされました。これには、TiDB、TiKV、PD、および TiDB Ansible のさまざまなバグ修正と改善が含まれています。注目すべき修正には、間違った結合結果、データ可視性の問題、およびシステムpanicの問題が含まれます。TiDB Ansible は、ダッシュボードに新しい監視項目も追加しました。リリース ノートでは、このリリースの既知の問題のため、最新の 3.0.x バージョンを使用することを推奨しています。
 ---
 
-# TiDB 3.0.10 Release Notes
+# TiDB 3.0.10 リリースノート {#tidb-3-0-10-release-notes}
 
-Release date: February 20, 2020
+発売日: 2020年2月20日
 
-TiDB version: 3.0.10
+TiDB バージョン: 3.0.10
 
-TiDB Ansible version: 3.0.10
+TiDB Ansible バージョン: 3.0.10
 
-> **Warning:**
+> **警告：**
 >
-> Some known issues are found in this version, and these issues are fixed in new versions. It is recommended that you use the latest 3.0.x version.
+> このバージョンではいくつかの既知の問題が見つかりましたが、これらの問題は新しいバージョンで修正されています。最新の 3.0.x バージョンを使用することをお勧めします。
 
-## TiDB
+## ティビ {#tidb}
 
-- Fix wrong `Join` results when `IndexLookUpJoin` uses `OtherCondition` to construct `InnerRange` [#14599](https://github.com/pingcap/tidb/pull/14599)
-- Delete the `tidb_pprof_sql_cpu` configuration item and add the `tidb_pprof_sql_cpu` variable [#14416](https://github.com/pingcap/tidb/pull/14416)
-- Fix the issue that users can query all databases only when they have global privileges [#14386](https://github.com/pingcap/tidb/pull/14386)
-- Fix the issue that data visibility does not meet expectations due to transaction timeout when executing `PointGet` operations [#14480](https://github.com/pingcap/tidb/pull/14480)
-- Change the timing of pessimistic transaction activation to delayed activation, consistent with the optimistic transaction mode [#14474](https://github.com/pingcap/tidb/pull/14474)
-- Fix the incorrect time zone results when the `unixtimestamp` expression calculates the time zone of the table partitions [#14476](https://github.com/pingcap/tidb/pull/14476)
-- Add the `tidb_session_statement_deadlock_detect_duration_seconds` monitoring item to monitor deadlock detection duration [#14484](https://github.com/pingcap/tidb/pull/14484)
-- Fix the system panic issue caused by some logic errors of GC workers [#14439](https://github.com/pingcap/tidb/pull/14439)
-- Correct the expression name of the `IsTrue` function [#14516](https://github.com/pingcap/tidb/pull/14516)
-- Fix the issue that some memory usage is counted inaccurately [#14533](https://github.com/pingcap/tidb/pull/14533)
-- Fix the system panic issue caused by incorrect processing logic during CM-Sketch statistics initialization [#14470](https://github.com/pingcap/tidb/pull/14470)
-- Fix the issue of inaccurate partition pruning when querying partitioned tables [#14546](https://github.com/pingcap/tidb/pull/14546)
-- Fix the issue that the default database name of the SQL statement in SQL bindings is set incorrectly [#14548](https://github.com/pingcap/tidb/pull/14548)
-- Fix the issue that `json_key` is not compatible with MySQL [#14561](https://github.com/pingcap/tidb/pull/14561)
-- Add the feature of automatically updating the statistics of partitioned tables [#14566](https://github.com/pingcap/tidb/pull/14566)
-- Fix the issue that the plan ID changes when the `PointGet` operation is executed (the plan ID is expected to be `1` always) [#14595](https://github.com/pingcap/tidb/pull/14595)
-- Fix the system panic issue caused by incorrect processing logic when SQL bindings do not match exactly [#14263](https://github.com/pingcap/tidb/pull/14263)
-- Add the `tidb_session_statement_pessimistic_retry_count` monitoring item to monitor the number of retries after the failure to lock pessimistic transactions [#14619](https://github.com/pingcap/tidb/pull/14619)
-- Fix the incorrect privilege check for `show binding` statements [#14618](https://github.com/pingcap/tidb/pull/14618)
-- Fix the issue that the query cannot be killed because the `backoff` logic does not include checking the `killed` tag [#14614](https://github.com/pingcap/tidb/pull/14614)
-- Improve the performance of statement summary by reducing the time to hold internal locks [#14627](https://github.com/pingcap/tidb/pull/14627)
-- Fix the issue that TiDB's result of parsing strings to time is incompatible with MySQL [#14570](https://github.com/pingcap/tidb/pull/14570)
-- Record the user login failures in audit logs [#14620](https://github.com/pingcap/tidb/pull/14620)
-- Add the `tidb_session_ statement_lock_keys_count` monitoring item to monitor the number of lock keys for pessimistic transactions [#14634](https://github.com/pingcap/tidb/pull/14634)
-- Fix the issue that characters in JSON such as `&`, `<`, and `>` are incorrectly escaped [#14637](https://github.com/pingcap/tidb/pull/14637)
-- Fix the system panic issue caused by excessive memory usage when the `HashJoin` operation is building a hash table [#14642](https://github.com/pingcap/tidb/pull/14642)
-- Fix the panic issue caused by incorrect processing logic when an SQL binding processes illegal records [#14645](https://github.com/pingcap/tidb/pull/14645)
-- ix a MySQL incompatibility issue by adding Truncated error detection to decimal division calculation [#14673](https://github.com/pingcap/tidb/pull/14673)
-- Fix the issue of successfully granting users privileges on a table that does not exist [#14611](https://github.com/pingcap/tidb/pull/14611)
+-   `IndexLookUpJoin` `OtherCondition`を使用して`InnerRange` [＃14599](https://github.com/pingcap/tidb/pull/14599)を構築したときに間違った`Join`結果が発生する問題を修正
+-   `tidb_pprof_sql_cpu`設定項目を削除し、 `tidb_pprof_sql_cpu`変数[＃14416](https://github.com/pingcap/tidb/pull/14416)を追加します。
+-   ユーザーがグローバル権限を持っている場合にのみすべてのデータベースを照会できる問題を修正[＃14386](https://github.com/pingcap/tidb/pull/14386)
+-   `PointGet`操作[＃14480](https://github.com/pingcap/tidb/pull/14480)を実行するときにトランザクション タイムアウトによりデータの可視性が期待どおりにならない問題を修正しました
+-   楽観的トランザクションモード[＃14474](https://github.com/pingcap/tidb/pull/14474)と一致するように、悲観的トランザクションのアクティベーションのタイミングを遅延アクティベーションに変更する
+-   `unixtimestamp`式がテーブル パーティション[＃14476](https://github.com/pingcap/tidb/pull/14476)のタイム ゾーンを計算するときに、誤ったタイム ゾーン結果が返される問題を修正しました。
+-   デッドロック検出期間を監視するための監視項目を`tidb_session_statement_deadlock_detect_duration_seconds`追加します[＃14484](https://github.com/pingcap/tidb/pull/14484)
+-   GCワーカー[＃14439](https://github.com/pingcap/tidb/pull/14439)のいくつかのロジックエラーによって引き起こされるシステムpanicの問題を修正
+-   `IsTrue`関数[＃14516](https://github.com/pingcap/tidb/pull/14516)の式名を修正
+-   一部のメモリ使用量が不正確にカウントされる問題を修正[＃14533](https://github.com/pingcap/tidb/pull/14533)
+-   CM-Sketch 統計初期化中の誤った処理ロジックによって発生するシステムpanicの問題を修正[＃14470](https://github.com/pingcap/tidb/pull/14470)
+-   パーティションテーブルをクエリする際の不正確なパーティションプルーニングの問題を修正[＃14546](https://github.com/pingcap/tidb/pull/14546)
+-   SQLバインディング内のSQLステートメントのデフォルトのデータベース名が誤って設定されている問題を修正[＃14548](https://github.com/pingcap/tidb/pull/14548)
+-   `json_key` MySQL [＃14561](https://github.com/pingcap/tidb/pull/14561)と互換性がない問題を修正
+-   パーティションテーブルの統計情報を自動更新する機能を追加[＃14566](https://github.com/pingcap/tidb/pull/14566)
+-   `PointGet`操作を実行するとプラン ID が変わる問題を修正 (プラン ID は常に`1`になるはずです) [＃14595](https://github.com/pingcap/tidb/pull/14595)
+-   SQLバインディングが正確[＃14263](https://github.com/pingcap/tidb/pull/14263)一致しない場合に誤った処理ロジックによって発生するシステムpanicの問題を修正しました。
+-   悲観的トランザクション[＃14619](https://github.com/pingcap/tidb/pull/14619)のロック失敗後の再試行回数を監視するための監視項目`tidb_session_statement_pessimistic_retry_count`を追加します。
+-   `show binding`ステートメント[＃14618](https://github.com/pingcap/tidb/pull/14618)の不正な権限チェックを修正
+-   `backoff`ロジックに`killed`タグ[＃14614](https://github.com/pingcap/tidb/pull/14614)のチェックが含まれていないため、クエリを強制終了できない問題を修正しました。
+-   内部ロックを保持する時間を短縮することでステートメントサマリーのパフォーマンスを向上[＃14627](https://github.com/pingcap/tidb/pull/14627)
+-   TiDBの文字列を時間に変換する結果がMySQL [＃14570](https://github.com/pingcap/tidb/pull/14570)と互換性がない問題を修正
+-   監査ログにユーザーのログイン失敗を記録する[＃14620](https://github.com/pingcap/tidb/pull/14620)
+-   悲観的トランザクション[＃14634](https://github.com/pingcap/tidb/pull/14634)のロックキーの数を監視するための`tidb_session_ statement_lock_keys_count`監視項目を追加します。
+-   JSON内の`&` `>`の文字が誤ってエスケープされる問題`<`修正しました[＃14637](https://github.com/pingcap/tidb/pull/14637)
+-   `HashJoin`操作でハッシュ テーブル[＃14642](https://github.com/pingcap/tidb/pull/14642)を構築しているときにメモリ使用量が過剰になることで発生するシステムpanicの問題を修正しました。
+-   SQL バインディングが不正なレコードを処理するときに、誤った処理ロジックによって発生するpanic問題を修正しました[＃14645](https://github.com/pingcap/tidb/pull/14645)
+-   ix 小数点割り算計算に切り捨てエラー検出を追加することでMySQLの非互換性の問題を修正[＃14673](https://github.com/pingcap/tidb/pull/14673)
+-   存在しないテーブルに対する権限をユーザーに付与してしまう問題を修正[＃14611](https://github.com/pingcap/tidb/pull/14611)
 
-## TiKV
+## ティクヴ {#tikv}
 
-+ Raftstore
-    - Fix the system panic issue #6460 or data loss issue #598 caused by Region merge failure [#6481](https://github.com/tikv/tikv/pull/6481)
-    - Support `yield` to optimize scheduling fairness, and support pre-transferring the leader to improve leader scheduling stability [#6563](https://github.com/tikv/tikv/pull/6563)
+-   Raftstore
+    -   リージョンマージの失敗によるシステムpanicの問題 #6460 またはデータ損失の問題 #598 を修正[＃6481](https://github.com/tikv/tikv/pull/6481)
+    -   スケジューリングの公平性を最適化するために`yield`サポートし、リーダーのスケジューリングの安定性を向上させるためにリーダーの事前転送をサポートする[＃6563](https://github.com/tikv/tikv/pull/6563)
 
-## PD
+## PD {#pd}
 
-- Fix the invalid cache issue by supporting automatically updating the Region cache information when the system traffic changes [#2103](https://github.com/pingcap/pd/pull/2103)
-- Use leader lease time to determine TSO service validity [#2117](https://github.com/pingcap/pd/pull/2117)
+-   システムトラフィックの変化時にリージョンキャッシュ情報を自動的に更新できるようにすることで、無効なキャッシュの問題を修正しました[＃2103](https://github.com/pingcap/pd/pull/2103)
+-   リーダーリース時間を使用してTSOサービスの有効性を判断する[＃2117](https://github.com/pingcap/pd/pull/2117)
 
-## Tools
+## ツール {#tools}
 
-+ TiDB Binlog
-    - Support relay log in Drainer [#893](https://github.com/pingcap/tidb-binlog/pull/893)
-+ TiDB Lightning
-    - Make some configuration items use default values when a config file is missing [#255](https://github.com/pingcap/tidb-lightning/pull/255)
-    - Fix the issue that the web interface cannot be opened in the non-server mode [#259](https://github.com/pingcap/tidb-lightning/pull/259)
+-   TiDBBinlog
+    -   Drainer[＃893](https://github.com/pingcap/tidb-binlog/pull/893)のリレーログをサポート
+-   TiDB Lightning
+    -   設定ファイルが見つからない場合に、一部の設定項目でデフォルト値を使用するようにする[＃255](https://github.com/pingcap/tidb-lightning/pull/255)
+    -   非サーバーモードでWebインターフェースを開けない問題を修正[＃259](https://github.com/pingcap/tidb-lightning/pull/259)
 
-## TiDB Ansible
+## TiDB アンシブル {#tidb-ansible}
 
-- Fix the issue that the command execution fails due to the failure to obtain PD leader in some scenarios [#1121](https://github.com/pingcap/tidb-ansible/pull/1121)
-- Add the `Deadlock Detect Duration` monitoring item in the TiDB dashboard [#1127](https://github.com/pingcap/tidb-ansible/pull/1127)
-- Add the `Statement Lock Keys Count` monitoring item in the TiDB dashboard [#1132](https://github.com/pingcap/tidb-ansible/pull/1132)
-- Add the `Statement Pessimistic Retry Count` monitoring item in the TiDB dashboard [#1133](https://github.com/pingcap/tidb-ansible/pull/1133)
+-   一部のシナリオでPDリーダーの取得に失敗したためにコマンドの実行が失敗する問題を修正[＃1121](https://github.com/pingcap/tidb-ansible/pull/1121)
+-   TiDBダッシュボード[＃1127](https://github.com/pingcap/tidb-ansible/pull/1127)に`Deadlock Detect Duration`監視項目を追加する
+-   TiDBダッシュボード[＃1132](https://github.com/pingcap/tidb-ansible/pull/1132)に`Statement Lock Keys Count`監視項目を追加する
+-   TiDBダッシュボード[＃1133](https://github.com/pingcap/tidb-ansible/pull/1133)に`Statement Pessimistic Retry Count`監視項目を追加する

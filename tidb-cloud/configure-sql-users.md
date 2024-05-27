@@ -1,121 +1,121 @@
 ---
 title: Manage Database Users and Roles
-summary: Learn how to manage database users and roles in the TiDB Cloud console.
+summary: TiDB Cloudコンソールでデータベース ユーザーとロールを管理する方法を学習します。
 ---
 
-# Manage Database Users and Roles
+# データベースユーザーとロールの管理 {#manage-database-users-and-roles}
 
-This document describes how to manage database users and roles using the **SQL Users** page in the [TiDB Cloud console](https://tidbcloud.com/).
+このドキュメントでは、 [TiDB Cloudコンソール](https://tidbcloud.com/) **SQL ユーザー**ページを使用してデータベース ユーザーとロールを管理する方法について説明します。
 
-> **Note:**
+> **注記：**
 >
-> - The **SQL Users** page is in beta and is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for the SQL Users page" in the **Description** field and click **Submit**.
-> - Database users and roles are independent of [organization and project users and roles](/tidb-cloud/manage-user-access.md). Database users are used to access databases in a TiDB cluster, while organization and project users are used to access organizations and projects in the [TiDB Cloud console](https://tidbcloud.com/).
-> - In addition to the **SQL Users** page, you can also manage database users and roles by connecting to your cluster with a SQL client and writing SQL statements. For more information, see [TiDB User Account Management](https://docs.pingcap.com/tidb/dev/user-account-management).
+> -   **SQL ユーザー**ページはベータ版であり、リクエストがあった場合にのみ利用できます。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**[?]**をクリックし、 **[サポートのリクエスト**] をクリックします。次に、 **[説明]**フィールドに「SQL ユーザー ページに申し込む」と入力し、 **[送信] を**クリックします。
+> -   データベース ユーザーとロールは[組織とプロジェクトのユーザーと役割](/tidb-cloud/manage-user-access.md)とは独立しています。データベース ユーザーは TiDB クラスター内のデータベースにアクセスするために使用されますが、組織ユーザーとプロジェクト ユーザーは[TiDB Cloudコンソール](https://tidbcloud.com/)内の組織とプロジェクトにアクセスするために使用されます。
+> -   **SQL ユーザー**ページに加えて、SQL クライアントを使用してクラスターに接続し、SQL ステートメントを記述することで、データベース ユーザーとロールを管理することもできます。詳細については、 [TiDB ユーザーアカウント管理](https://docs.pingcap.com/tidb/dev/user-account-management)を参照してください。
 
-## Roles of database users
+## データベースユーザーの役割 {#roles-of-database-users}
 
-In TiDB Cloud, you can grant both a built-in role and multiple custom roles (if available) to a SQL user for role-based access control.
+TiDB Cloudでは、ロールベースのアクセス制御のために、組み込みロールと複数のカスタム ロール (使用可能な場合) の両方を SQL ユーザーに付与できます。
 
-- Built-in roles
+-   組み込みロール
 
-    TiDB Cloud provides the following built-in roles to help you control the database access of SQL users. You can grant one of the built-in roles to a SQL user.
+    TiDB Cloud には、 SQL ユーザーのデータベース アクセスを制御するのに役立つ次の組み込みロールが用意されています。組み込みロールの 1 つを SQL ユーザーに付与できます。
 
-    - `Database Admin`
-    - `Database Read-Write`
-    - `Database Read-Only`
+    -   `Database Admin`
+    -   `Database Read-Write`
+    -   `Database Read-Only`
 
-- Custom roles
+-   カスタムロール
 
-    In addition to a built-in role, if your cluster has custom roles that are created using the [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md) statement, you can also grant these custom roles to a SQL user when you create or edit SQL users in the TiDB Cloud console.
+    組み込みロールに加えて、クラスターに[`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)ステートメントを使用して作成されたカスタム ロールがある場合は、 TiDB Cloudコンソールで SQL ユーザーを作成または編集するときに、これらのカスタム ロールを SQL ユーザーに付与することもできます。
 
-After a SQL user is granted both a built-in role and multiple custom roles, the user's permissions will be the union of all the permissions derived from these roles.
+SQL ユーザーに組み込みロールと複数のカスタム ロールの両方が付与されると、ユーザーの権限はこれらのロールから派生したすべての権限の結合になります。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-- To manage database users and roles using the **SQL Users** page, you must be in the `Organization Owner` role of your organization or the `Project Owner` role of your project.
-- If you are in the `Project Data Access Read-Write` or `Project Data Access Read-Only` role of a project, you can only view database users on the **SQL Users** page of that project.
+-   **SQL ユーザー**ページを使用してデータベース ユーザーとロールを管理するには、組織の`Organization Owner`ロールまたはプロジェクトの`Project Owner`ロールに属している必要があります。
+-   プロジェクトのロール`Project Data Access Read-Write`または`Project Data Access Read-Only`の場合、そのプロジェクトの**SQL ユーザー**ページでのみデータベース ユーザーを表示できます。
 
-## Create a SQL user
+## SQLユーザーを作成する {#create-a-sql-user}
 
-To create a SQL user, take the following steps:
+SQL ユーザーを作成するには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
-2. Click your cluster name, and then click **SQL Users** in the left navigation pane.
+2.  クラスター名をクリックし、左側のナビゲーション ペインで**[SQL ユーザー]**をクリックします。
 
-3. Click **Create SQL User** in the upper-right corner.
+3.  右上隅の**「SQL ユーザーの作成」を**クリックします。
 
-    A dialog for the SQL user configuration is displayed.
+    SQL ユーザー構成のダイアログが表示されます。
 
-4. In the dialog, provide the information of the SQL user as follows:
+4.  ダイアログで、SQL ユーザーの情報を次のように入力します。
 
-    1. Enter the name of the SQL user.
-    2. Either create a password for the SQL user or let TiDB Cloud automatically generate a password for the user.
-    3. Grant roles to the SQL user.
+    1.  SQL ユーザーの名前を入力します。
+    2.  SQL ユーザーのパスワードを作成するか、 TiDB Cloudでユーザーのパスワードを自動的に生成します。
+    3.  SQL ユーザーにロールを付与します。
 
-        - **Built-in Role**: you need to select a built-in role for the SQL user in the **Built-in Role** drop-down list.
+        -   **組み込みロール**:**組み込みロール**ドロップダウン リストで SQL ユーザーの組み込みロールを選択する必要があります。
 
-        - **Custom Role**: if your cluster has custom roles that are created using the [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md) statement, you can grant custom roles to the SQL user by selecting the roles from the **Custom Role** drop-down list. Otherwise, the **Custom Roles** drop-down list is invisible here.
+        -   **カスタム ロール**: クラスターに[`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)ステートメントを使用して作成されたカスタム ロールがある場合は、 **[カスタム ロール]**ドロップダウン リストからロールを選択して、SQL ユーザーにカスタム ロールを付与できます。それ以外の場合、 **[カスタム ロール]**ドロップダウン リストはここでは表示されません。
 
-      For each SQL user, you can grant a built-in role and multiple custom roles (if any).
+    各 SQL ユーザーに対して、組み込みロールと複数のカスタム ロール (存在する場合) を付与できます。
 
-5. Click **Create**.
+5.  **[作成]を**クリックします。
 
-## View SQL users
+## SQL ユーザーをビュー {#view-sql-users}
 
-To view SQL users of a cluster, take the following steps:
+クラスターの SQL ユーザーを表示するには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
-2. Click your cluster name, and then click **SQL Users** in the left navigation pane.
+2.  クラスター名をクリックし、左側のナビゲーション ペインで**[SQL ユーザー]**をクリックします。
 
-## Edit a SQL user
+## SQL ユーザーを編集する {#edit-a-sql-user}
 
-To edit the password or roles of a SQL user, take the following steps:
+SQL ユーザーのパスワードまたはロールを編集するには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
-2. Click your cluster name, and then click **SQL Users** in the left navigation pane.
+2.  クラスター名をクリックし、左側のナビゲーション ペインで**[SQL ユーザー]**をクリックします。
 
-3. In the row of the SQL user to be edited, click **...** in the **Action** column, and then click **Edit**.
+3.  編集する SQL ユーザーの行で、 **[アクション]**列の [ **...]**をクリックし、 **[編集] を**クリックします。
 
-    A dialog for the SQL user configuration is displayed.
+    SQL ユーザー構成のダイアログが表示されます。
 
-4. In the dialog, you can edit the user password and roles as needed, and then click **Update**.
+4.  ダイアログでは、必要に応じてユーザーのパスワードとロールを編集し、 **「更新」**をクリックできます。
 
-    > **Note:**
+    > **注記：**
     >
-    > The roles of the default `<prefix>.root` user do not support modification. You can only change the password.
+    > デフォルトの`<prefix>.root`ユーザーの役割は変更をサポートしていません。パスワードのみ変更できます。
 
-## Delete a SQL user
+## SQL ユーザーを削除する {#delete-a-sql-user}
 
-To delete a SQL user, take the following steps:
+SQL ユーザーを削除するには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
-2. Click your cluster name, and then click **SQL Users** in the left navigation pane.
+2.  クラスター名をクリックし、左側のナビゲーション ペインで**[SQL ユーザー]**をクリックします。
 
-3. In the row of the SQL user to be edited, click **...** in the **Action** column, and then click **Delete**.
+3.  編集する SQL ユーザーの行で、 **[アクション]**列の [ **...]**をクリックし、 **[削除] を**クリックします。
 
-    > **Note:**
+    > **注記：**
     >
-    > The default `<prefix>.root` user does not support deletion.
+    > デフォルトの`<prefix>.root`ユーザーは削除をサポートしていません。
 
-4. Confirm the deletion.
+4.  削除を確認します。

@@ -1,39 +1,39 @@
 ---
 title: String Functions
-summary: Learn about the string functions in TiDB.
+summary: TiDB の文字列関数について学習します。
 ---
 
-# String Functions
+# 文字列関数 {#string-functions}
 
-TiDB supports most of the [string functions](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html) available in MySQL 8.0, and some of the [functions](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlqr/SQL-Functions.html#GUID-93EC62F8-415D-4A7E-B050-5D5B2C127009) available in Oracle 21.
+TiDB は、MySQL 8.0 で利用可能な[文字列関数](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html)のほとんどと、Oracle 21 で利用可能な[関数](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlqr/SQL-Functions.html#GUID-93EC62F8-415D-4A7E-B050-5D5B2C127009)の一部をサポートしています。
 
 <CustomContent platform="tidb">
 
-For comparisons between functions and syntax of Oracle and TiDB, see [Comparisons between Functions and Syntax of Oracle and TiDB](/oracle-functions-to-tidb.md).
+Oracle と TiDB の関数と構文の比較については、 [Oracle と TiDB の機能と構文の比較](/oracle-functions-to-tidb.md)参照してください。
 
 </CustomContent>
 
-## Supported functions
+## サポートされている関数 {#supported-functions}
 
-### [`ASCII()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ascii)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ascii"><code>ASCII()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-ascii-code-ascii-code-a}
 
-The `ASCII(str)` function is used to get the ASCII value of the leftmost character in the given argument. The argument can be either a string or a number.
+`ASCII(str)`関数は、指定された引数の左端の文字の ASCII 値を取得するために使用されます。引数は文字列または数値のいずれかになります。
 
-- If the argument is not empty, the function returns the ASCII value of the leftmost character.
-- If the argument is an empty string, the function returns `0`.
-- If the argument is `NULL`, the function returns `NULL`.
+-   引数が空でない場合、関数は左端の文字の ASCII 値を返します。
+-   引数が空の文字列の場合、関数は`0`返します。
+-   引数が`NULL`の場合、関数は`NULL`返します。
 
-> **Note:**
+> **注記：**
 >
-> `ASCII(str)` only works for characters represented using 8 bits of binary digits (one byte).
+> `ASCII(str)` 8 ビットの 2 進数 (1 バイト) を使用して表される文字に対してのみ機能します。
 
-Example:
+例：
 
 ```sql
 SELECT ASCII('A'), ASCII('TiDB'), ASCII(23);
 ```
 
-Output:
+出力：
 
 ```sql
 +------------+---------------+-----------+
@@ -43,24 +43,24 @@ Output:
 +------------+---------------+-----------+
 ```
 
-### [`BIN()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bin)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bin"><code>BIN()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-bin-code-bin-code-a}
 
-The `BIN()` function is used to convert the given argument into a string representation of its binary value. The argument can be either a string or a number.
+`BIN()`関数は、指定された引数をそのバイナリ値の文字列表現に変換するために使用されます。引数は文字列または数値のいずれかになります。
 
-- If the argument is a positive number, the function returns a string representation of its binary value.
-- If the argument is a negative number, the function converts the absolute value of the argument to its binary representation, inverts each bit of the binary value (changing `0` to `1` and `1` to `0`), and then adds `1` to the inverted value.
-- If the argument is a string containing only digits, the function returns the result according to those digits. For example, the results for `"123"` and `123` are the same.
-- If the argument is a string and its first character is not a digit (such as `"q123"`), the function returns `0`.
-- If the argument is a string that consists of digits and non-digits, the function returns the result according to the consecutive digits at the beginning of the argument. For example, the results for `"123q123"` and `123` are the same, but `BIN('123q123')` generates a warning like `Truncated incorrect INTEGER value: '123q123'`.
-- If the argument is `NULL`, the function returns `NULL`.
+-   引数が正の数の場合、関数はそのバイナリ値の文字列表現を返します。
+-   引数が負の数の場合、関数は引数の絶対値をバイナリ表現に変換し、バイナリ値の各ビットを反転し（ `0`を`1`に、 `1` `0`に変更）、反転した値に`1`を加算します。
+-   引数が数字のみを含む文字列の場合、関数はその数字に応じて結果を返します。たとえば、 `"123"`と`123`の結果は同じになります。
+-   引数が文字列で、その最初の文字が数字ではない場合（ `"q123"`など）、関数は`0`を返します。
+-   引数が数字と非数字で構成される文字列の場合、関数は引数の先頭の連続する数字に従って結果を返します。たとえば、 `"123q123"`と`123`の結果は同じですが、 `BIN('123q123')`場合は`Truncated incorrect INTEGER value: '123q123'`ような警告が生成されます。
+-   引数が`NULL`の場合、関数は`NULL`返します。
 
-Example 1:
+例1:
 
 ```sql
 SELECT BIN(123), BIN('123q123');
 ```
 
-Output 1:
+出力1:
 
 ```sql
 +----------+----------------+
@@ -70,13 +70,13 @@ Output 1:
 +----------+----------------+
 ```
 
-Example 2:
+例2:
 
 ```sql
 SELECT BIN(-7);
 ```
 
-Output 2:
+出力2:
 
 ```sql
 +------------------------------------------------------------------+
@@ -86,11 +86,11 @@ Output 2:
 +------------------------------------------------------------------+
 ```
 
-### [`BIT_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bit-length)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bit-length"><code>BIT_LENGTH()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-bit-length-code-bit-length-code-a}
 
-The `BIT_LENGTH()` function is used to return the length of a given argument in bits.
+`BIT_LENGTH()`関数は、指定された引数の長さをビット単位で返すために使用されます。
 
-Examples:
+例:
 
 ```sql
 SELECT BIT_LENGTH("TiDB");
@@ -102,7 +102,7 @@ SELECT BIT_LENGTH("TiDB");
 +--------------------+
 ```
 
-8 bits per character x 4 characters = 32 bits
+1文字あたり8ビット×4文字=32ビット
 
 ```sql
 SELECT BIT_LENGTH("PingCAP 123");
@@ -114,7 +114,7 @@ SELECT BIT_LENGTH("PingCAP 123");
 +---------------------------+
 ```
 
-8 bits per character (space is counted because it is a non-alphanumeric character) x 11 characters = 88 bits
+1文字あたり8ビット（スペースは英数字以外の文字なのでカウントされます）×11文字=88ビット
 
 ```sql
 SELECT CustomerName, BIT_LENGTH(CustomerName) AS BitLengthOfName FROM Customers;
@@ -127,15 +127,15 @@ SELECT CustomerName, BIT_LENGTH(CustomerName) AS BitLengthOfName FROM Customers;
 +--------------------+-----------------+
 ```
 
-> **Note:**
+> **注記：**
 >
-> The preceding example operates under the assumption that there is a database with a table named `Customers` and a column inside the table named `CustomerName`.
+> 上記の例は、 `Customers`という名前のテーブルと、テーブル内に`CustomerName`という名前の列を持つデータベースが存在するという前提で動作します。
 
-### [`CHAR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char"><code>CHAR()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-char-code-char-code-a}
 
-The `CHAR()` function is used to get the corresponding character of a specific ASCII value. It performs the opposite operation of `ASCII()`, which returns the ASCII value of a specific character. If multiple arguments are supplied, the function works on all arguments and are then concaternated together.
+`CHAR()`関数は、特定の ASCII 値に対応する文字を取得するために使用されます。これは、特定の文字の ASCII 値を返す`ASCII()`の逆の操作を実行します。複数の引数が指定された場合、関数はすべての引数に対して動作し、それらは連結されます。
 
-Examples:
+例:
 
 ```sql
 SELECT CHAR(65);
@@ -157,7 +157,7 @@ SELECT CHAR(84);
 +------------+
 ```
 
-The `CHAR()` function can also be used to get the corresponding character of ASCII values that extend beyond the standard ASCII range (`0` - `127`).
+`CHAR()`関数は、標準の ASCII 範囲 ( `0` - `127` ) を超える ASCII 値の対応する文字を取得するためにも使用できます。
 
 ```sql
 /*For extended ASCII: */
@@ -171,7 +171,7 @@ SELECT CHAR(128);
 +------------+
 ```
 
-The `CHAR()` function can also get the corresponding character value of a unicode value.
+`CHAR()`関数は、Unicode 値に対応する文字値を取得することもできます。
 
 ```sql
 /* For Unicode: */
@@ -191,20 +191,18 @@ SELECT CHAR(50089);
 SELECT CHAR(65,66,67);
 ```
 
-```
-+----------------+
-| CHAR(65,66,67) |
-+----------------+
-| ABC            |
-+----------------+
-1 row in set (0.00 sec)
-```
+    +----------------+
+    | CHAR(65,66,67) |
+    +----------------+
+    | ABC            |
+    +----------------+
+    1 row in set (0.00 sec)
 
-### [`CHAR_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char-length)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char-length"><code>CHAR_LENGTH()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-char-length-code-char-length-code-a}
 
-The `CHAR_LENGTH()` function is used to get the total number of characters in a given argument as an integer.
+`CHAR_LENGTH()`関数は、指定された引数内の文字の合計数を整数として取得するために使用されます。
 
-Examples:
+例:
 
 ```sql
 SELECT CHAR_LENGTH("TiDB") AS LengthOfString;
@@ -227,33 +225,33 @@ SELECT CustomerName, CHAR_LENGTH(CustomerName) AS LengthOfName FROM Customers;
 +--------------------+--------------+
 ```
 
-> **Note:**
+> **注記：**
 >
-> The preceding example operates under the assumption that there is a database with a table named `Customers` and a column inside the table named `CustomerName`.
+> 上記の例は、 `Customers`という名前のテーブルと、テーブル内に`CustomerName`という名前の列を持つデータベースが存在するという前提で動作します。
 
-### [`CHARACTER_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_character-length)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_character-length"><code>CHARACTER_LENGTH()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-character-length-code-character-length-code-a}
 
-The `CHARACTER_LENGTH()` function is the same as the `CHAR_LENGTH()` function. Both functions can be used synonymously because they generate the same output.
+`CHARACTER_LENGTH()`関数は`CHAR_LENGTH()`関数と同じです。両方の関数は同じ出力を生成するため、同義語として使用できます。
 
-### [`CONCAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat"><code>CONCAT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-concat-code-concat-code-a}
 
-The `CONCAT()` function concatenates one or more arguments into a single string.
+`CONCAT()`関数は、1 つ以上の引数を 1 つの文字列に連結します。
 
-Syntax:
+構文：
 
 ```sql
 CONCAT(str1,str2,...)
 ```
 
-`str1, str2, ...` is a list of arguments to be concatenated. Each argument can be a string or a number.
+`str1, str2, ...`は連結される引数のリストです。各引数は文字列または数値にすることができます。
 
-Example:
+例：
 
 ```sql
 SELECT CONCAT('TiDB', ' ', 'Server', '-', 1, TRUE);
 ```
 
-Output:
+出力：
 
 ```sql
 +---------------------------------------------+
@@ -263,15 +261,15 @@ Output:
 +---------------------------------------------+
 ```
 
-If any of the arguments is `NULL`, `CONCAT()` returns `NULL`.
+引数のいずれかが`NULL`場合、 `CONCAT()` `NULL`を返します。
 
-Example:
+例：
 
 ```sql
 SELECT CONCAT('TiDB', NULL, 'Server');
 ```
 
-Output:
+出力：
 
 ```sql
 +--------------------------------+
@@ -281,13 +279,13 @@ Output:
 +--------------------------------+
 ```
 
-In addition to the `CONCAT()` function, you can concatenate strings by placing them adjacent to each other as in the following example. Note that this method does not support numeric types.
+`CONCAT()`関数に加えて、次の例のように文字列を隣接させて連結することもできます。このメソッドは数値型をサポートしていないことに注意してください。
 
 ```sql
 SELECT 'Ti' 'DB' ' ' 'Server';
 ```
 
-Output:
+出力：
 
 ```sql
 +-------------+
@@ -297,26 +295,26 @@ Output:
 +-------------+
 ```
 
-### [`CONCAT_WS()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat-ws)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat-ws"><code>CONCAT_WS()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-concat-ws-code-concat-ws-code-a}
 
-The `CONCAT_WS()` function is a form of [`CONCAT()`](#concat) with a separator, which returns a string concatenated by the specified separator.
+`CONCAT_WS()`関数は、区切り文字付きの[`CONCAT()`](#concat)の形式で、指定された区切り文字で連結された文字列を返します。
 
-Syntax:
+構文：
 
 ```sql
 CONCAT_WS(separator,str1,str2,...)
 ```
 
-- `separator`: the first argument is the separator, which concatenates the remaining arguments that are not `NULL`.
-- `str1, str2, ...`: a list of arguments to be concatenated. Each argument can be a string or a number.
+-   `separator` : 最初の引数は区切り文字であり、 `NULL`以外の残りの引数を連結します。
+-   `str1, str2, ...` : 連結される引数のリスト。各引数は文字列または数値にすることができます。
 
-Example:
+例：
 
 ```sql
 SELECT CONCAT_WS(',', 'TiDB Server', 'TiKV', 'PD');
 ```
 
-Output:
+出力：
 
 ```sql
 +---------------------------------------------+
@@ -326,15 +324,15 @@ Output:
 +---------------------------------------------+
 ```
 
-- If the separator is an empty string, `CONCAT_WS()` is equivalent to `CONCAT()` and returns the concatenated string of the remaining arguments.
+-   区切り文字が空の文字列の場合、 `CONCAT_WS()` `CONCAT()`と同等となり、残りの引数の連結された文字列を返します。
 
-    Example:
+    例：
 
     ```sql
     SELECT CONCAT_WS('', 'TiDB Server', 'TiKV', 'PD');
     ```
 
-    Output:
+    出力：
 
     ```sql
     +--------------------------------------------+
@@ -344,15 +342,15 @@ Output:
     +--------------------------------------------+
     ```
 
-- If the separator is `NULL`, `CONCAT_WS()` returns `NULL`.
+-   区切り文字が`NULL`の場合、 `CONCAT_WS()` `NULL`を返します。
 
-    Example:
+    例：
 
     ```sql
     SELECT CONCAT_WS(NULL, 'TiDB Server', 'TiKV', 'PD');
     ```
 
-    Output:
+    出力：
 
     ```sql
     +----------------------------------------------+
@@ -362,15 +360,15 @@ Output:
     +----------------------------------------------+
     ```
 
-- If only one of the arguments to be concatenated is not `NULL`, `CONCAT_WS()` returns that argument.
+-   連結される引数の 1 つだけが`NULL`でない場合、 `CONCAT_WS()`その引数を返します。
 
-    Example:
+    例：
 
     ```sql
     SELECT CONCAT_WS(',', 'TiDB Server', NULL);
     ```
 
-    Output:
+    出力：
 
     ```sql
     +-------------------------------------+
@@ -380,15 +378,15 @@ Output:
     +-------------------------------------+
     ```
 
-- If there are `NULL` arguments to be concatenated, `CONCAT_WS()` skips these `NULL` arguments.
+-   連結する引数が`NULL`ある場合、 `CONCAT_WS()`これら`NULL`の引数をスキップします。
 
-    Example:
+    例：
 
     ```sql
     SELECT CONCAT_WS(',', 'TiDB Server', NULL, 'PD');
     ```
 
-    Output:
+    出力：
 
     ```sql
     +-------------------------------------------+
@@ -398,15 +396,15 @@ Output:
     +-------------------------------------------+
     ```
 
-- If there are empty strings to be concatenated, `CONCAT_WS()` does not skip empty strings.
+-   連結する空の文字列がある場合、 `CONCAT_WS()`空の文字列をスキップしません。
 
-    Example:
+    例：
 
     ```sql
     SELECT CONCAT_WS(',', 'TiDB Server', '', 'PD');
     ```
 
-    Output:
+    出力：
 
     ```sql
     +-----------------------------------------+
@@ -416,9 +414,9 @@ Output:
     +-----------------------------------------+
     ```
 
-### [`ELT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_elt)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_elt"><code>ELT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-elt-code-elt-code-a}
 
-The `ELT()` function returns the element at the index number.
+`ELT()`関数はインデックス番号の要素を返します。
 
 ```sql
 SELECT ELT(3, 'This', 'is', 'TiDB');
@@ -433,27 +431,27 @@ SELECT ELT(3, 'This', 'is', 'TiDB');
 1 row in set (0.00 sec)
 ```
 
-The preceding example returns the third element, which is `'TiDB'`.
+上記の例では、3 番目の要素である`'TiDB'`が返されます。
 
-### [`EXPORT_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_export-set)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_export-set"><code>EXPORT_SET()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-export-set-code-export-set-code-a}
 
-The `EXPORT_SET()` function returns a string that consists of a specified number (`number_of_bits`) of `on`/`off` values, optionally separated by `separator`. These values are based on whether the corresponding bit in the `bits` argument is `1`, where the first value corresponds to the rightmost (lowest) bit of `bits`.
+`EXPORT_SET()`関数は、指定された数 ( `number_of_bits` ) の`on` / `off`個の値 (オプションで`separator`で区切られる) で構成される文字列を返します。これらの値は、 `bits`引数の対応するビットが`1`であるかどうかに基づいており、最初の値は`bits`の右端 (最下位) ビットに対応します。
 
-Syntax:
+構文：
 
 ```sql
 EXPORT_SET(bits, on, off, [separator[, number_of_bits]])
 ```
 
-- `bits`: an integer representing the bit value.
-- `on`: the string to be returned if the corresponding bit is `1`.
-- `off`: the string to be returned if the corresponding bit is `0`.
-- `separator` (optional): the separator character in the result string.
-- `number_of_bits` (optional): the number of bits to be processed. If it is not set, `64` (the max size of bits) is used by default, which means that `bits` is treated as an unsigned 64-bit integer.
+-   `bits` : ビット値を表す整数。
+-   `on` : 対応するビットが`1`の場合に返される文字列。
+-   `off` : 対応するビットが`0`の場合に返される文字列。
+-   `separator` (オプション): 結果文字列の区切り文字。
+-   `number_of_bits` (オプション): 処理するビット数。設定されていない場合は、デフォルトで`64` (ビットの最大サイズ) が使用され、 `bits`は符号なし 64 ビット整数として扱われます。
 
-Examples:
+例:
 
-In the following example, `number_of_bits` is set to `5`, resulting in 5 values, separated by `|`. Because only 3 bits are given, the other bits are considered unset. Therefore, setting `number_of_bits` to either `101` or `00101` results in the same output.
+次の例では、 `number_of_bits`が`5`に設定され、 `|`で区切られた 5 つの値が生成されます。 3 ビットのみが指定されているため、他のビットは設定されていないと見なされます。 したがって、 `number_of_bits` `101`または`00101`に設定すると、出力は同じになります。
 
 ```sql
 SELECT EXPORT_SET(b'101',"ON",'off','|',5);
@@ -468,7 +466,7 @@ SELECT EXPORT_SET(b'101',"ON",'off','|',5);
 1 row in set (0.00 sec)
 ```
 
-In the following example, `bits` is set to `00001111`, `on` is set to `x`, and `off` is set to `_`. This causes the function to return `____` for the `0` bits and `xxxx` for the `1` bits. Therefore, when processing with the bits in `00001111` from right to left, the function returns `xxxx____`.
+次の例では、 `bits`は`00001111`に、 `on`は`x`に、 `off`は`_`に設定されています。これにより、関数は`0`ビットに対して`____`を返し、 `1`ビットに対して`xxxx`返します。したがって、 `00001111`のビットを右から左に処理すると、関数は`xxxx____`を返します。
 
 ```sql
 SELECT EXPORT_SET(b'00001111', 'x', '_', '', 8);
@@ -483,7 +481,7 @@ SELECT EXPORT_SET(b'00001111', 'x', '_', '', 8);
 1 row in set (0.00 sec)
 ```
 
-In the following example, `bits` is set to `00001111`, `on` is set to `x`, and `off` is set to `_`. This causes the function to return `x` for each `1` bit and `_` for each `0` bit. Therefore, when processing with the bits in `01010101` from right to left, the function returns `x_x_x_x_`.
+次の例では、 `bits`は`00001111`に、 `on`は`x`に、 `off`は`_`に設定されています。これにより、関数は`1`ビットごとに`x`を返し、 `0`ビットごとに`_`返します。したがって、 `01010101`のビットを右から左に処理すると、関数は`x_x_x_x_`を返します。
 
 ```sql
 SELECT EXPORT_SET(b'01010101', 'x', '_', '', 8);
@@ -498,11 +496,11 @@ SELECT EXPORT_SET(b'01010101', 'x', '_', '', 8);
 1 row in set (0.00 sec)
 ```
 
-### [`FIELD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_field)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_field"><code>FIELD()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-field-code-field-code-a}
 
-Return the index (position) of the first argument in the subsequent arguments.
+後続の引数の最初の引数のインデックス (位置) を返します。
 
-In the following example, the first argument of `FIELD()` is `needle`, and it matches the second argument in the following list, so the function returns `2`.
+次の例では、 `FIELD()`の最初の引数は`needle`であり、次のリストの 2 番目の引数と一致するため、関数は`2`返します。
 
 ```sql
 SELECT FIELD('needle', 'A', 'needle', 'in', 'a', 'haystack');
@@ -514,13 +512,13 @@ SELECT FIELD('needle', 'A', 'needle', 'in', 'a', 'haystack');
 1 row in set (0.00 sec)
 ```
 
-### [`FIND_IN_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_find-in-set)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_find-in-set"><code>FIND_IN_SET()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-find-in-set-code-find-in-set-code-a}
 
-Return the index position of the first argument within the second argument.
+2 番目の引数内の最初の引数のインデックス位置を返します。
 
-This function is often used with the [`SET`](/data-type-string.md#set-type) data type.
+この関数は、 [`SET`](/data-type-string.md#set-type)データ型でよく使用されます。
 
-In the following example, `Go` is the fourth element in the set `COBOL,BASIC,Rust,Go,Java,Fortran`, so the function returns `4`.
+次の例では、 `Go`​​セット`COBOL,BASIC,Rust,Go,Java,Fortran`の 4 番目の要素なので、関数は`4`返します。
 
 ```sql
 SELECT FIND_IN_SET('Go', 'COBOL,BASIC,Rust,Go,Java,Fortran');
@@ -532,28 +530,28 @@ SELECT FIND_IN_SET('Go', 'COBOL,BASIC,Rust,Go,Java,Fortran');
 1 row in set (0.00 sec)
 ```
 
-### [`FORMAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_format)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_format"><code>FORMAT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-format-code-format-code-a}
 
-The `FORMAT(X,D[,locale])` function is used to format the number `X` to a format similar to `"#,###,###. ##"`, rounded to `D` decimal places, and return the result as a string.
+`FORMAT(X,D[,locale])`関数は、数値`X` `"#,###,###. ##"`と同様の形式にフォーマットし、小数点以下`D`桁に丸めて、結果を文字列として返すために使用されます。
 
-Arguments:
+引数:
 
-- `X`: the number to be formatted. It can be a direct numeric value, a numeric string, or a number in scientific notation.
-- `D`: the number of decimal places for the returned value. The function rounds the number `X` to `D` decimal places. If `D` is greater than the actual number of decimal places in `X`, the result is padded with zeros to the corresponding length.
-- `[locale]`: specifies a locale setting to be used for grouping between decimal points, thousands separators, and separators for resultant numbers. A valid locale value is the same as the valid value of the [`lc_time_names`](https://dev.mysql.com/doc/refman/8.3/en/server-system-variables.html#sysvar_lc_time_names) system variable. If not specified or the region setting is `NULL`, the `'en_US'` region setting is used by default. This argument is optional.
+-   `X` : 書式設定する数値。直接の数値、数値文字列、または科学的記数法の数値にすることができます。
+-   `D` : 返される値の小数点以下の桁数。関数は数値`X`を小数点以下の`D`桁に丸めます。 `D` `X`の実際の小数点以下の桁数より大きい場合、結果は対応する長さまでゼロで埋められます。
+-   `[locale]` : 小数点、千単位の区切り、および結果の数値の区切りのグループ化に使用するロケール設定を指定します。有効なロケール値は、 [`lc_time_names`](https://dev.mysql.com/doc/refman/8.3/en/server-system-variables.html#sysvar_lc_time_names)システム変数の有効な値と同じです。指定されていない場合、または地域設定が`NULL`の場合、デフォルトで`'en_US'`地域設定が使用されます。この引数はオプションです。
 
-Behaviors:
+動作:
 
-- If the first argument is a string and contains only numbers, the function returns a result based on that numeric value. For example, `FORMAT('12.34', 1)` and `FORMAT(12.34, 1)` return the same result.
-- If the first argument is a number represented in scientific notation (using `E/e`), the function returns the result based on that number. For example, `FORMAT('1E2', 3)` returns `100.000`.
-- If the first argument is a string starting with non-numeric characters, the function returns zero and a warning `(Code 1292)`. For example, `FORMAT('q12.36', 5)` returns `0.00000`, but also includes a warning `Warning (Code 1292): Truncated incorrect DOUBLE value: 'q12.36'`.
-- If the first argument is a string mixing numbers and non-numbers, the function returns a result based on the consecutive numeric part at the beginning of the argument, and also includes a warning `(Code 1292)`. For example, `FORMAT('12.36q56.78', 1)` returns the same numeric result as `FORMAT('12.36', 1)`, but includes a warning `Warning (Code 1292): Truncated incorrect DOUBLE value: '12.36q56.78'`.
-- If the second argument is zero or a negative number, the function truncates the decimal part and returns an integer.
-- If any of the arguments is `NULL`, the function returns `NULL`.
+-   最初の引数が文字列で、数字のみが含まれている場合、関数はその数値に基づいて結果を返します。たとえば、 `FORMAT('12.34', 1)`と`FORMAT(12.34, 1)`同じ結果を返します。
+-   最初の引数が科学的記数法（ `E/e`を使用）で表される数値の場合、関数はその数値に基づいて結果を返します。たとえば、 `FORMAT('1E2', 3)` `100.000`を返します。
+-   最初の引数が数字以外の文字で始まる文字列の場合、関数は 0 と警告`(Code 1292)`返します。たとえば、 `FORMAT('q12.36', 5)` `0.00000`を返しますが、警告`Warning (Code 1292): Truncated incorrect DOUBLE value: 'q12.36'`も含まれます。
+-   最初の引数が数値と非数値が混在する文字列の場合、関数は引数の先頭の連続する数値部分に基づいて結果を返し、警告`(Code 1292)`も含まれます。たとえば、 `FORMAT('12.36q56.78', 1)` `FORMAT('12.36', 1)`と同じ数値結果を返しますが、警告`Warning (Code 1292): Truncated incorrect DOUBLE value: '12.36q56.78'`が含まれます。
+-   2 番目の引数が 0 または負の数の場合、関数は小数部分を切り捨てて整数を返します。
+-   引数のいずれかが`NULL`場合、関数は`NULL`を返します。
 
-Examples:
+例:
 
-The following examples show how to format the number 12.36 to different decimal places:
+次の例は、数値 12.36 をさまざまな小数点以下の桁にフォーマットする方法を示しています。
 
 ```sql
 mysql> SELECT FORMAT(12.36, 1);
@@ -582,16 +580,16 @@ mysql> SELECT FORMAT(12.36, 2);
 +------------------+
 ```
 
-### [`FROM_BASE64()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_from-base64)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_from-base64"><code>FROM_BASE64()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-from-base64-code-from-base64-code-a}
 
-The `FROM_BASE64()` function is used to decode a [Base64](https://datatracker.ietf.org/doc/html/rfc4648) encoded string and return the decoded result in its hexadecimal form.
+`FROM_BASE64()`関数は、 [ベース64](https://datatracker.ietf.org/doc/html/rfc4648)でエンコードされた文字列をデコードし、デコードされた結果を 16 進形式で返すために使用されます。
 
-- This function accepts a single argument, that is, the Base64 encoded string to be decoded.
-- If the argument is `NULL` or not a valid Base64 encoded string, the `FROM_BASE64()` function returns `NULL`.
+-   この関数は、デコードする Base64 でエンコードされた文字列という単一の引数を受け入れます。
+-   引数が`NULL`であるか、有効な Base64 エンコードされた文字列でない場合、 `FROM_BASE64()`関数は`NULL`を返します。
 
-Examples:
+例:
 
-The following example shows how to decode the Base64 encoded string `'SGVsbG8gVGlEQg=='`. This string is the result of encoding `'Hello TiDB'`, using the [`TO_BASE64()`](#to_base64) function.
+次の例は、Base64 でエンコードされた文字列`'SGVsbG8gVGlEQg=='`をデコードする方法を示しています。この文字列は、 [`TO_BASE64()`](#to_base64)関数を使用して`'Hello TiDB'`をエンコードした結果です。
 
 ```sql
 mysql> SELECT TO_BASE64('Hello TiDB');
@@ -618,7 +616,7 @@ mysql> SELECT CONVERT(FROM_BASE64('SGVsbG8gVGlEQg==') USING utf8mb4);
 +--------------------------------------------------------+
 ```
 
-The following example shows how to decode the Base64 encoded number `MTIzNDU2`. This string is the result of encoding `123456`, which can be done using the [`TO_BASE64()`](#to_base64) function.
+次の例は、Base64 でエンコードされた数値`MTIzNDU2`をデコードする方法を示しています。この文字列は、 [`TO_BASE64()`](#to_base64)関数を使用して実行できる`123456`のエンコードの結果です。
 
 ```sql
 mysql> SELECT FROM_BASE64('MTIzNDU2');
@@ -629,15 +627,15 @@ mysql> SELECT FROM_BASE64('MTIzNDU2');
 +--------------------------------------------------+
 ```
 
-### [`HEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_hex)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_hex"><code>HEX()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-hex-code-hex-code-a}
 
-The `HEX()` function is used to convert the given argument into a string representation of its hexadecimal value. The argument can be either a string or a number.
+`HEX()`関数は、指定された引数をその 16 進数値の文字列表現に変換するために使用されます。引数は文字列または数値のいずれかになります。
 
-- If the argument is a string, `HEX(str)` returns a hexadecimal string representation of `str`. The function converts each byte of each character in `str` into two hexadecimal digits. For example, the character `a` in a UTF-8 or ASCII character set is represented as a binary value of `00111101`, or `61` in hexadecimal notation.
-- If the argument is a number, `HEX(n)` returns a hexadecimal string representation of `n`. The function treats the argument `n` as a `BIGINT` number, equivalent to using `CONV(n, 10, 16)`.
-- If the argument is `NULL`, the function returns `NULL`.
+-   引数が文字列の場合、 `HEX(str)` `str`の 16 進文字列表現を返します。関数は、 `str`の各文字の各バイトを 2 つの 16 進数字に変換します。たとえば、UTF-8 または ASCII 文字セットの文字`a` 、バイナリ値`00111101` 、つまり 16 進表記では`61`として表されます。
+-   引数が数値の場合、 `HEX(n)` `n`の 16 進文字列表現を返します。この関数は引数`n` `BIGINT`数値として扱い、 `CONV(n, 10, 16)`を使用する場合と同等になります。
+-   引数が`NULL`の場合、関数は`NULL`返します。
 
-Examples:
+例:
 
 ```sql
 SELECT X'616263', HEX('abc'), UNHEX(HEX('abc')), 0x616263;
@@ -675,15 +673,15 @@ SELECT HEX(NULL);
 +-----------+
 ```
 
-### [`INSERT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_insert)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_insert"><code>INSERT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-insert-code-insert-code-a}
 
-The `INSERT(str, pos, len, newstr)` function is used to replace a substring in `str` (that starts at position `pos` and is `len` characters long) with the string `newstr`. This function is multibyte safe.
+`INSERT(str, pos, len, newstr)`関数は、 `str`内の部分文字列 (位置`pos`から始まり、長さが`len`文字) を文字列`newstr`に置き換えるために使用されます。この関数はマルチバイトセーフです。
 
-- If `pos` exceeds the length of `str`, the function returns the original string `str` without modification.
-- If `len` exceeds the remaining length of `str` from position `pos`, the function replaces the rest of the string from position `pos`.
-- If any argument is `NULL`, the function returns `NULL`.
+-   `pos` `str`の長さを超える場合、関数は変更せずに元の文字列`str`を返します。
+-   `len`位置`pos`からの残りの長さ`str`を超える場合、関数は位置`pos`からの残りの文字列を置き換えます。
+-   いずれかの引数が`NULL`場合、関数は`NULL`を返します。
 
-Examples:
+例:
 
 ```sql
 SELECT INSERT('He likes tennis', 4, 5, 'plays');
@@ -739,19 +737,19 @@ SELECT INSERT('あああああああ', 2, 3, 'xx');
 +---------------------------------------------+
 ```
 
-### [`INSTR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_instr)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_instr"><code>INSTR()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-instr-code-instr-code-a}
 
-The `INSTR(str, substr)` function is used to get the position of the first occurrence of `substr` in `str`. Each argument can be either a string or a number. This function is the same as the two-argument version of [`LOCATE(substr, str)`](#locate), but with the order of the arguments reversed.
+`INSTR(str, substr)`関数は、 `str`内で`substr`が最初に出現する位置を取得するために使用されます。各引数は文字列または数値のいずれかになります。この関数は、引数が 2 つのバージョンの[`LOCATE(substr, str)`](#locate)と同じですが、引数の順序が逆になっています。
 
-> **Note:**
+> **注記：**
 >
-> The case sensitivity of `INSTR(str, substr)` is determined by the [collations](/character-set-and-collation.md) used in TiDB. Binary collations (with the suffix `_bin`) are case-sensitive, while general collations (with the suffix `_general_ci` or `_ai_ci`, and) are case-insensitive.
+> `INSTR(str, substr)`の大文字と小文字の区別は、TiDB で使用される[照合順序](/character-set-and-collation.md)によって決まります。バイナリ照合順序 (サフィックス`_bin`付き) では大文字と小文字が区別されますが、一般照合順序 (サフィックス`_general_ci`または`_ai_ci`付き) では大文字と小文字は区別されません。
 
-- If either argument is a number, the function treats the number as a string.
-- If `substr` is not in `str`, the function returns `0`. Otherwise, it returns the position of the first occurrence of `substr` in `str`.
-- If either argument is `NULL`, the function returns `NULL`.
+-   いずれかの引数が数値の場合、関数はその数値を文字列として扱います。
+-   `substr` `str`にない場合、関数は`0`返します。そうでない場合は、 `str`内で`substr`が最初に出現する位置を返します。
+-   いずれかの引数が`NULL`場合、関数は`NULL`を返します。
 
-Examples:
+例:
 
 ```sql
 SELECT INSTR("pingcap.com", "tidb");
@@ -803,27 +801,27 @@ SELECT INSTR(0123, "12");
 +-------------------+
 ```
 
-### [`LCASE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lcase)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lcase"><code>LCASE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-lcase-code-lcase-code-a}
 
-The `LCASE(str)` function is a synonym for [`LOWER(str)`](#lower), which returns the lowercase of the given argument. 
+`LCASE(str)`関数は[`LOWER(str)`](#lower)の同義語で、指定された引数の小文字を返します。
 
-### [`LEFT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_left)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_left"><code>LEFT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-left-code-left-code-a}
 
-The `LEFT()` function returns a specified number of characters from the left side of a string.
+`LEFT()`関数は、文字列の左側から指定された数の文字を返します。
 
-Syntax:
+構文：
 
 ```sql
 LEFT(`str`, `len`)
 ```
 
-- `str`: the original string to extract characters. If `str` contains a multibyte character, the function counts it as a single code point. 
-- `len`: the length of characters to be returned. 
-    - If `len` is equal to or less than 0, the function returns an empty string.
-    - If `len` is equal to or greater than the length of `str`, the function returns the original `str`. 
-- If any argument is `NULL`, the function returns `NULL`.
+-   `str` : 文字を抽出する元の文字列。2 `str`マルチバイト文字が含まれている場合、関数はそれを単一のコード ポイントとしてカウントします。
+-   `len` : 返される文字の長さ。
+    -   `len` 0 以下の場合、関数は空の文字列を返します。
+    -   `len` `str`の長さ以上である場合、関数は元の`str`を返します。
+-   いずれかの引数が`NULL`場合、関数は`NULL`を返します。
 
-Examples:
+例:
 
 ```sql
 SELECT LEFT('ABCED', 3);
@@ -882,15 +880,15 @@ SELECT LEFT(NULL, 3);
 +------------------------------+
 ```
 
-### [`LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_length)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_length"><code>LENGTH()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-length-code-length-code-a}
 
-The `LENGTH()` function returns the length of a string in bytes.
+`LENGTH()`関数は文字列の長さをバイト単位で返します。
 
-`LENGTH()` counts a multibyte character as multiple bytes while `CHAR_LENGTH()` counts a multibyte character as a single code point.
+`LENGTH()`マルチバイト文字を複数のバイトとしてカウントし、 `CHAR_LENGTH()`マルチバイト文字を単一のコード ポイントとしてカウントします。
 
-If the argument is `NULL`, the function returns `NULL`.
+引数が`NULL`の場合、関数は`NULL`返します。
 
-Examples:
+例:
 
 ```sql
 SELECT LENGTH('ABC');
@@ -924,16 +922,16 @@ SELECT LENGTH(NULL);
 +--------------+
 ```
 
-### [`LIKE`](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_like)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_like"><code>LIKE</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-comparison-functions-html-operator-like-code-like-code-a}
 
-The `LIKE` operator is used for simple string matching. The expression `expr LIKE pat [ESCAPE 'escape_char']` returns `1` (`TRUE`) or `0` (`FALSE`). If either `expr` or `pat` is `NULL`, the result is `NULL`.
+`LIKE`演算子は単純な文字列マッチングに使用されます。式`expr LIKE pat [ESCAPE 'escape_char']`は`1` ( `TRUE` ) または`0` ( `FALSE` ) を返します。13 または`expr` `pat`いずれかが`NULL`の場合、結果は`NULL`になります。
 
-You can use the following two wildcard parameters with `LIKE`:
+`LIKE`では次の 2 つのワイルドカード パラメータを使用できます。
 
-- `%` matches any number of characters, including zero characters.
-- `_` matches exactly one character.
+-   `%` 、ゼロ文字を含む任意の数の文字に一致します。
+-   `_` 1 文字のみに一致します。
 
-The following examples use the `utf8mb4_bin` collation:
+次の例では、 `utf8mb4_bin`照合順序を使用しています。
 
 ```sql
 SET collation_connection='utf8mb4_bin';
@@ -990,7 +988,7 @@ SELECT '🍣🍺sushi🍣🍺' LIKE '%🍣%' AS result;
 +--------+
 ```
 
-The default escape character is `\`:
+デフォルトのエスケープ文字は`\`です。
 
 ```sql
 SELECT 'sushi!!!' LIKE 'sushi\_' AS result;
@@ -1010,7 +1008,7 @@ SELECT 'sushi_' LIKE 'sushi\_' AS result;
 +--------+
 ```
 
-To specify a different escape character, such as `*`, you can use the `ESCAPE` clause:
+`*`などの別のエスケープ文字を指定するには、 `ESCAPE`句を使用します。
 
 ```sql
 SELECT 'sushi_' LIKE 'sushi*_' ESCAPE '*' AS result;
@@ -1030,7 +1028,7 @@ SELECT 'sushi!' LIKE 'sushi*_' ESCAPE '*' AS result;
 +--------+
 ```
 
-You can use the `LIKE` operator to match a numeric value:
+`LIKE`演算子を使用して数値を一致させることができます。
 
 ```sql
 SELECT 10 LIKE '1%' AS result;
@@ -1050,7 +1048,7 @@ SELECT 10000 LIKE '12%' AS result;
 +--------+
 ```
 
-To specify a collation explicitly, such as `utf8mb4_unicode_ci`, you can use `COLLATE`:
+`utf8mb4_unicode_ci`などの照合順序を明示的に指定するには、 `COLLATE`使用します。
 
 ```sql
 SELECT '🍣🍺Sushi🍣🍺' COLLATE utf8mb4_unicode_ci LIKE '%SUSHI%' AS result;
@@ -1061,15 +1059,15 @@ SELECT '🍣🍺Sushi🍣🍺' COLLATE utf8mb4_unicode_ci LIKE '%SUSHI%' AS resu
 +--------+
 ```
 
-### [`LOCATE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_locate)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_locate"><code>LOCATE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-locate-code-locate-code-a}
 
-The `LOCATE(substr, str[, pos])` function is used to get the position of the first occurrence of a specified substring `substr` in a string `str`. The `pos` argument is optional and specifies the starting position for the search.
+`LOCATE(substr, str[, pos])`関数は、文字列`str`内の指定された部分文字列`substr`の最初の出現位置を取得するために使用されます。 `pos`引数はオプションであり、検索の開始位置を指定します。
 
-- If the substring `substr` is not present in `str`, the function returns `0`.
-- If any argument is `NULL`, the function returns `NULL`.
-- This function is multibyte safe and performs a case-sensitive search only if at least one argument is a binary string.
+-   部分文字列`substr`が`str`に存在しない場合、関数は`0`返します。
+-   いずれかの引数が`NULL`場合、関数は`NULL`を返します。
+-   この関数はマルチバイトセーフであり、少なくとも 1 つの引数がバイナリ文字列である場合にのみ大文字と小文字を区別した検索を実行します。
 
-The following examples use the `utf8mb4_bin` collation:
+次の例では、 `utf8mb4_bin`照合順序を使用しています。
 
 ```sql
 SET collation_connection='utf8mb4_bin';
@@ -1153,7 +1151,7 @@ SELECT LOCATE('い', 'たいでぃーびー', 3);
 +-------------------------------------------+
 ```
 
-The following examples use the `utf8mb4_unicode_ci` collation:
+次の例では、 `utf8mb4_unicode_ci`照合順序を使用しています。
 
 ```sql
 SET collation_connection='utf8mb4_unicode_ci';
@@ -1183,7 +1181,7 @@ SELECT LOCATE('🍺', '🍣🍣🍣🍺🍺');
 +----------------------------------------+
 ```
 
-The following multibyte and binary string examples use the `utf8mb4_bin` collation:
+次のマルチバイト文字列とバイナリ文字列の例では、 `utf8mb4_bin`照合順序順序が使用されています。
 
 ```sql
 SET collation_connection='utf8mb4_bin';
@@ -1240,15 +1238,15 @@ SELECT LOCATE(_binary'B', 'aBcde');
 +-----------------------------+
 ```
 
-### [`LOWER()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lower)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lower"><code>LOWER()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-lower-code-lower-code-a}
 
-The `LOWER(str)` function is used to convert all characters in the given argument `str` to lowercase. The argument can be either a string or a number.
+`LOWER(str)`関数は、指定された引数`str`内のすべての文字を小文字に変換するために使用されます。引数は文字列または数値のいずれかになります。
 
-- If the argument is a string, the function returns the string in lowercase.
-- If the argument is a number, the function returns the number without leading zeros.
-- If the argument is `NULL`, the function returns `NULL`.
+-   引数が文字列の場合、関数は小文字で文字列を返します。
+-   引数が数値の場合、関数は先頭のゼロを除いた数値を返します。
+-   引数が`NULL`の場合、関数は`NULL`返します。
 
-Examples:
+例:
 
 ```sql
 SELECT LOWER("TiDB");
@@ -1270,15 +1268,15 @@ SELECT LOWER(-012);
 +-------------+
 ```
 
-### [`LPAD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lpad)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lpad"><code>LPAD()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-lpad-code-lpad-code-a}
 
-The `LPAD(str, len, padstr)` function returns the string argument, left-padded with the specified string `padstr` to a length of `len` characters.
+`LPAD(str, len, padstr)`関数は、指定された文字列`padstr`を左側に埋め込んで`len`文字の長さにした文字列引数を返します。
 
-- If `len` is less than the length of the string `str`, the function truncates the string `str` to the length of `len`.
-- If `len` is a negative number, the function returns `NULL`.
-- If any argument is `NULL`, the function returns `NULL`.
+-   `len`文字列`str`の長さより短い場合、関数は文字列`str`を`len`の長さに切り捨てます。
+-   `len`負の数の場合、関数は`NULL`を返します。
+-   いずれかの引数が`NULL`場合、関数は`NULL`を返します。
 
-Examples:
+例:
 
 ```sql
 SELECT LPAD('TiDB',8,'>');
@@ -1310,212 +1308,192 @@ SELECT LPAD('TiDB',-2,'>');
 1 row in set (0.00 sec)
 ```
 
-### [`LTRIM()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ltrim)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ltrim"><code>LTRIM()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-ltrim-code-ltrim-code-a}
 
-The `LTRIM()` function removes leading spaces from a given string.
+`LTRIM()`関数は、指定された文字列の先頭のスペースを削除します。
 
-If the argument is `NULL`, this function returns `NULL`.
+引数が`NULL`の場合、この関数は`NULL`返します。
 
-> **Note:**
+> **注記：**
 >
-> This function only removes the space character (U+0020) and does not remove other space-like characters such as tab (U+0009) or non-breaking space (U+00A0).
+> この関数は、スペース文字 (U+0020) のみを削除し、タブ (U+0009) や改行なしスペース (U+00A0) などの他のスペースのような文字は削除しません。
 
-Examples:
+例:
 
-In the following example, the `LTRIM()` function removes the leading spaces from `'    hello'` and returns `hello`.
+次の例では、 `LTRIM()`関数は`'    hello'`から先頭のスペースを削除し、 `hello`を返します。
 
 ```sql
 SELECT LTRIM('    hello');
 ```
 
-```
-+--------------------+
-| LTRIM('    hello') |
-+--------------------+
-| hello              |
-+--------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------+
+    | LTRIM('    hello') |
+    +--------------------+
+    | hello              |
+    +--------------------+
+    1 row in set (0.00 sec)
 
-In the following example, [`CONCAT()`](#concat) is used to enclose the result of `LTRIM('    hello')` with `«` and `»`. This formatting makes it a bit easier to see that all leading spaces are removed.
+次の例では、 [`CONCAT()`](#concat)使用して、 `LTRIM('    hello')`の結果を`«`と`»`で囲んでいます。この書式設定により、先頭のスペースがすべて削除されていることが少しわかりやすくなります。
 
 ```sql
 SELECT CONCAT('«',LTRIM('    hello'),'»');
 ```
 
-```
-+------------------------------------+
-| CONCAT('«',LTRIM('    hello'),'»') |
-+------------------------------------+
-| «hello»                            |
-+------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------+
+    | CONCAT('«',LTRIM('    hello'),'»') |
+    +------------------------------------+
+    | «hello»                            |
+    +------------------------------------+
+    1 row in set (0.00 sec)
 
-### [`MAKE_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_make-set)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_make-set"><code>MAKE_SET()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-make-set-code-make-set-code-a}
 
-The `MAKE_SET()` function returns a set of comma-separated strings based on whether a corresponding bit in the `bits` argument is set to `1`.
+`MAKE_SET()`関数は、 `bits`引数の対応するビットが`1`に設定されているかどうかに基づいて、コンマで区切られた文字列のセットを返します。
 
-Syntax:
+構文：
 
 ```sql
 MAKE_SET(bits, str1, str2, ...)
 ```
 
-- `bits`: controls which subsequent string arguments to include in the result set. If `bits` is set to `NULL`, the function returns `NULL`.
-- `str1, str2, ...`: a list of strings. Each string corresponds to a bit in the `bits` argument from right to left. `str1` corresponds to the first bit from the right, `str2` corresponds to the second bit from the right, and so on. If the corresponding bit is `1`, the string is included in the result; otherwise, it is not included.
+-   `bits` : 結果セットに含める後続の文字列引数を制御します。 `bits`が`NULL`に設定されている場合、関数は`NULL`を返します。
+-   `str1, str2, ...` : 文字列のリスト。各文字列は、右から左への`bits`引数のビットに対応します。 `str1`右から最初のビットに対応し、 `str2`右から 2 番目のビットに対応します。以下同様です。対応するビットが`1`の場合、文字列は結果に含まれます。それ以外の場合は含まれません。
 
-Examples:
+例:
 
-In the following example, because all bits are set to `0` in the `bits` argument, the function does not include any subsequent strings in the result and returns an empty string.
+次の例では、引数`bits`のすべてのビットが`0`に設定されているため、関数は結果に後続の文字列を含めず、空の文字列を返します。
 
 ```sql
 SELECT MAKE_SET(b'000','foo','bar','baz');
 ```
 
-```
-+------------------------------------+
-| MAKE_SET(b'000','foo','bar','baz') |
-+------------------------------------+
-|                                    |
-+------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------+
+    | MAKE_SET(b'000','foo','bar','baz') |
+    +------------------------------------+
+    |                                    |
+    +------------------------------------+
+    1 row in set (0.00 sec)
 
-In the following example, because only the first bit from the right is `1`, the function only returns the first string `foo`.
+次の例では、右から最初のビットのみが`1`であるため、関数は最初の文字列`foo`のみを返します。
 
 ```sql
 SELECT MAKE_SET(b'001','foo','bar','baz');
 ```
 
-```
-+------------------------------------+
-| MAKE_SET(b'001','foo','bar','baz') |
-+------------------------------------+
-| foo                                |
-+------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------+
+    | MAKE_SET(b'001','foo','bar','baz') |
+    +------------------------------------+
+    | foo                                |
+    +------------------------------------+
+    1 row in set (0.00 sec)
 
-In the following example, because only the second bit from the right is `1`, the function only returns the second string `bar`.
+次の例では、右から 2 番目のビットのみが`1`であるため、関数は 2 番目の文字列`bar`のみを返します。
 
 ```sql
 SELECT MAKE_SET(b'010','foo','bar','baz');
 ```
 
-```
-+------------------------------------+
-| MAKE_SET(b'010','foo','bar','baz') |
-+------------------------------------+
-| bar                                |
-+------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------+
+    | MAKE_SET(b'010','foo','bar','baz') |
+    +------------------------------------+
+    | bar                                |
+    +------------------------------------+
+    1 row in set (0.00 sec)
 
-In the following example, because only the third bit from the right is `1`, the function only returns the third string `baz`.
+次の例では、右から 3 番目のビットのみが`1`であるため、関数は 3 番目の文字列`baz`のみを返します。
 
 ```sql
 SELECT MAKE_SET(b'100','foo','bar','baz');
 ```
 
-```
-+------------------------------------+
-| MAKE_SET(b'100','foo','bar','baz') |
-+------------------------------------+
-| baz                                |
-+------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------+
+    | MAKE_SET(b'100','foo','bar','baz') |
+    +------------------------------------+
+    | baz                                |
+    +------------------------------------+
+    1 row in set (0.00 sec)
 
-In the following example, because all bits are `1`, the function returns all three strings in a comma-separated result set.
+次の例では、すべてのビットが`1`あるため、関数は 3 つの文字列すべてをコンマ区切りの結果セットで返します。
 
 ```sql
 SELECT MAKE_SET(b'111','foo','bar','baz');
 ```
 
-```
-+------------------------------------+
-| MAKE_SET(b'111','foo','bar','baz') |
-+------------------------------------+
-| foo,bar,baz                        |
-+------------------------------------+
-1 row in set (0.0002 sec)
-```
+    +------------------------------------+
+    | MAKE_SET(b'111','foo','bar','baz') |
+    +------------------------------------+
+    | foo,bar,baz                        |
+    +------------------------------------+
+    1 row in set (0.0002 sec)
 
-### [`MID()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_mid)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_mid"><code>MID()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-mid-code-mid-code-a}
 
-The `MID(str, pos, len)` function returns a substring starting from the specified `pos` position with the `len` length.
+`MID(str, pos, len)`関数は、指定された`pos`位置から始まり`len`長さの部分文字列を返します。
 
-If any of the arguments are `NULL`, the function returns `NULL`.
+引数のいずれかが`NULL`場合、関数は`NULL`を返します。
 
-TiDB does not support the two-argument variant of this function. For more information, see [#52420](https://github.com/pingcap/tidb/issues/52420).
+TiDB はこの関数の 2 つの引数のバリアントをサポートしていません。詳細については、 [＃52420](https://github.com/pingcap/tidb/issues/52420)参照してください。
 
-Examples:
+例:
 
-In the following example, `MID()` returns the substring of the input string starting from the second character (`b`) with a length of `3` characters.
+次の例では、 `MID()` ​​、入力文字列の 2 番目の文字 ( `b` ) から始まる`3`文字の長さの部分文字列を返します。
 
 ```sql
 SELECT MID('abcdef',2,3);
 ```
 
-```
-+-------------------+
-| MID('abcdef',2,3) |
-+-------------------+
-| bcd               |
-+-------------------+
-1 row in set (0.00 sec)
-```
+    +-------------------+
+    | MID('abcdef',2,3) |
+    +-------------------+
+    | bcd               |
+    +-------------------+
+    1 row in set (0.00 sec)
 
-### [`NOT LIKE`](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_not-like)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_not-like"><code>NOT LIKE</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-comparison-functions-html-operator-not-like-code-not-like-code-a}
 
-Negation of simple pattern matching.
+単純なパターンマッチングの否定。
 
-This function performs the inverse operation of [`LIKE`](#like).
+この関数は[`LIKE`](#like)の逆演算を実行します。
 
-Examples:
+例:
 
-In the following example, `NOT LIKE` returns `0` (False) because `aaa` matches the `a%` pattern.
+次の例では、 `aaa`が`a%`パターンと一致するため、 `NOT LIKE` `0` (False) を返します。
 
 ```sql
 SELECT 'aaa' LIKE 'a%', 'aaa' NOT LIKE 'a%';
 ```
 
-```
-+-----------------+---------------------+
-| 'aaa' LIKE 'a%' | 'aaa' NOT LIKE 'a%' |
-+-----------------+---------------------+
-|               1 |                   0 |
-+-----------------+---------------------+
-1 row in set (0.00 sec)
-```
+    +-----------------+---------------------+
+    | 'aaa' LIKE 'a%' | 'aaa' NOT LIKE 'a%' |
+    +-----------------+---------------------+
+    |               1 |                   0 |
+    +-----------------+---------------------+
+    1 row in set (0.00 sec)
 
-In the following example, `NOT LIKE` returns `1` (True) because `aaa` does not match the `b%` pattern.
+次の例では、 `aaa` `b%`パターンと一致しないため、 `NOT LIKE` `1` (True) を返します。
 
 ```sql
 SELECT 'aaa' LIKE 'b%', 'aaa' NOT LIKE 'b%';
 ```
 
-```
-+-----------------+---------------------+
-| 'aaa' LIKE 'b%' | 'aaa' NOT LIKE 'b%' |
-+-----------------+---------------------+
-|               0 |                   1 |
-+-----------------+---------------------+
-1 row in set (0.00 sec)
-```
+    +-----------------+---------------------+
+    | 'aaa' LIKE 'b%' | 'aaa' NOT LIKE 'b%' |
+    +-----------------+---------------------+
+    |               0 |                   1 |
+    +-----------------+---------------------+
+    1 row in set (0.00 sec)
 
-### [`NOT REGEXP`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_not-regexp)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_not-regexp"><code>NOT REGEXP</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-regexp-html-operator-not-regexp-code-not-regexp-code-a}
 
-Negation of [`REGEXP`](#regexp).
+[`REGEXP`](#regexp)の否定。
 
-### [`OCT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_oct)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_oct"><code>OCT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-oct-code-oct-code-a}
 
-Return a string containing [octal](https://en.wikipedia.org/wiki/Octal) (base 8) representation of a number.
+数値の[8進数](https://en.wikipedia.org/wiki/Octal) (基数 8) 表現を含む文字列を返します。
 
-Examples:
+例:
 
-The following example generates a sequence of numbers from 0 to 20 using a [recursive common table expression (CTE)](/develop/dev-guide-use-common-table-expression.md#recursive-cte) and then uses the `OCT()` function to convert each number to its octal representation. Decimal values from 0 to 7 have identical representations in octal. Decimal numbers from 8 to 15 correspond to octal numbers from 10 to 17.
+次の例では、 [再帰共通テーブル式 (CTE)](/develop/dev-guide-use-common-table-expression.md#recursive-cte)を使用して 0 から 20 までの数値のシーケンスを生成し、 `OCT()`関数を使用して各数値を 8 進数表現に変換します。0 から 7 までの 10 進数値は、8 進数でも同じ表現になります。8 から 15 までの 10 進数値は、10 から 17 までの 8 進数値に対応します。
 
 ```sql
 WITH RECURSIVE nr(n) AS (
@@ -1526,128 +1504,118 @@ WITH RECURSIVE nr(n) AS (
 SELECT n, OCT(n) FROM nr;
 ```
 
-```
-+------+--------+
-| n    | OCT(n) |
-+------+--------+
-|    0 | 0      |
-|    1 | 1      |
-|    2 | 2      |
-|    3 | 3      |
-|    4 | 4      |
-|    5 | 5      |
-|    6 | 6      |
-|    7 | 7      |
-|    8 | 10     |
-|    9 | 11     |
-|   10 | 12     |
-|   11 | 13     |
-|   12 | 14     |
-|   13 | 15     |
-|   14 | 16     |
-|   15 | 17     |
-|   16 | 20     |
-|   17 | 21     |
-|   18 | 22     |
-|   19 | 23     |
-|   20 | 24     |
-+------+--------+
-20 rows in set (0.00 sec)
-```
+    +------+--------+
+    | n    | OCT(n) |
+    +------+--------+
+    |    0 | 0      |
+    |    1 | 1      |
+    |    2 | 2      |
+    |    3 | 3      |
+    |    4 | 4      |
+    |    5 | 5      |
+    |    6 | 6      |
+    |    7 | 7      |
+    |    8 | 10     |
+    |    9 | 11     |
+    |   10 | 12     |
+    |   11 | 13     |
+    |   12 | 14     |
+    |   13 | 15     |
+    |   14 | 16     |
+    |   15 | 17     |
+    |   16 | 20     |
+    |   17 | 21     |
+    |   18 | 22     |
+    |   19 | 23     |
+    |   20 | 24     |
+    +------+--------+
+    20 rows in set (0.00 sec)
 
-### [`OCTET_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_octet-length)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_octet-length"><code>OCTET_LENGTH()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-octet-length-code-octet-length-code-a}
 
-Synonym for [`LENGTH()`](#length).
+[`LENGTH()`](#length)の同義語。
 
-### [`ORD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ord)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ord"><code>ORD()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-ord-code-ord-code-a}
 
-Return the character code for the leftmost character of the given argument.
+指定された引数の左端の文字の文字コードを返します。
 
-This function is similar to [`CHAR()`](#char) but works the other way around.
+この関数は[`CHAR()`](#char)と似ていますが、逆の動作をします。
 
-Examples:
+例:
 
-Taking `a` and `A` as an example, `ORD()` returns `97` for `a` and `65` for `A`.
+`a`と`A`を例にとると、 `ORD()` `a`に対して`97`返し、 `A`に対して`65`返します。
 
 ```sql
 SELECT ORD('a'), ORD('A');
 ```
 
-```
-+----------+----------+
-| ORD('a') | ORD('A') |
-+----------+----------+
-|       97 |       65 |
-+----------+----------+
-1 row in set (0.00 sec)
-```
+    +----------+----------+
+    | ORD('a') | ORD('A') |
+    +----------+----------+
+    |       97 |       65 |
+    +----------+----------+
+    1 row in set (0.00 sec)
 
-If you take the character code obtained from `ORD()` as input, you can get the original characters back using the `CHAR()` function. Note that the output format might vary depending on whether the `binary-as-hex` option is enabled in your MySQL client.
+`ORD()`から取得した文字コードを入力として受け取ると、 `CHAR()`関数を使用して元の文字を戻すことができます。出力形式は、MySQL クライアントで`binary-as-hex`オプションが有効になっているかどうかによって異なる場合があることに注意してください。
 
 ```sql
 SELECT CHAR(97), CHAR(65);
 ```
 
-```
-+----------+----------+
-| CHAR(97) | CHAR(65) |
-+----------+----------+
-| a        | A        |
-+----------+----------+
-1 row in set (0.01 sec)
-```
+    +----------+----------+
+    | CHAR(97) | CHAR(65) |
+    +----------+----------+
+    | a        | A        |
+    +----------+----------+
+    1 row in set (0.01 sec)
 
-The following example shows how `ORD()` handles multibyte characters. Here, both `101` and `0x65` are the UTF-8 encoded values for the `e` character, but in different formats. And both `50091` and `0xC3AB` represent the same values, but for the `ë` character. 
+次の例は、 `ORD()`マルチバイト文字を処理する方法を示しています。ここでは、 `101`と`0x65`はどちらも`e`文字目の UTF-8 エンコード値ですが、形式が異なります。また、 `50091`と`0xC3AB`はどちらも`ë`文字目の同じ値を表します。
 
 ```sql
 SELECT ORD('e'), ORD('ë'), HEX('e'), HEX('ë');
 ```
 
-```
-+----------+-----------+----------+-----------+
-| ORD('e') | ORD('ë')  | HEX('e') | HEX('ë')  |
-+----------+-----------+----------+-----------+
-|      101 |     50091 | 65       | C3AB      |
-+----------+-----------+----------+-----------+
-1 row in set (0.00 sec)
-```
+    +----------+-----------+----------+-----------+
+    | ORD('e') | ORD('ë')  | HEX('e') | HEX('ë')  |
+    +----------+-----------+----------+-----------+
+    |      101 |     50091 | 65       | C3AB      |
+    +----------+-----------+----------+-----------+
+    1 row in set (0.00 sec)
 
-### [`POSITION()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_position)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_position"><code>POSITION()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-position-code-position-code-a}
 
-Synonym for [`LOCATE()`](#locate).
+[`LOCATE()`](#locate)の同義語。
 
-### [`QUOTE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_quote)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_quote"><code>QUOTE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-quote-code-quote-code-a}
 
-Escape the argument for use in an SQL statement.
+SQL ステートメントで使用するために引数をエスケープします。
 
-If the argument is `NULL`, the function returns `NULL`.
+引数が`NULL`の場合、関数は`NULL`返します。
 
-Example:
+例：
 
-To display the result directly instead of showing a hexadecimal-encoded value, you need to start the MySQL client with the [`--skip-binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex) option.
+16 進数でエンコードされた値を表示する代わりに結果を直接表示するには、MySQL クライアントを[`--skip-binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex)オプションで起動する必要があります。
 
-The following example shows that the ASCII NULL character is escaped as `\0` and the single quote character `'` is escaped as `\'`:
+次の例では、ASCII NULL 文字が`\0`としてエスケープされ、一重引用符文字`'`が`\'`としてエスケープされていることを示しています。
 
 ```sql
 SELECT QUOTE(0x002774657374);
 ```
 
-```
-+-----------------------+
-| QUOTE(0x002774657374) |
-+-----------------------+
-| '\0\'test'            |
-+-----------------------+
-1 row in set (0.00 sec)
-```
+    +-----------------------+
+    | QUOTE(0x002774657374) |
+    +-----------------------+
+    | '\0\'test'            |
+    +-----------------------+
+    1 row in set (0.00 sec)
 
-### [`REGEXP`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp"><code>REGEXP</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-regexp-html-operator-regexp-code-regexp-code-a}
 
-Pattern matching using regular expressions.
+正規表現を使用したパターンマッチング。
 
-Examples:
+例:
 
-In this example a number of strings are matched against two regular expressions.
+この例では、いくつかの文字列が 2 つの正規表現と照合されます。
 
 ```sql
 WITH vals AS (
@@ -1667,19 +1635,17 @@ FROM
     vals;
 ```
 
-```
-+----------+------------------+------------------------+
-| v        | starts with "Ti" | Length is 4 characters |
-+----------+------------------+------------------------+
-| TiDB     |                1 |                      1 |
-| Titanium |                1 |                      0 |
-| Tungsten |                0 |                      0 |
-| Rust     |                0 |                      1 |
-+----------+------------------+------------------------+
-4 rows in set (0.00 sec)
-```
+    +----------+------------------+------------------------+
+    | v        | starts with "Ti" | Length is 4 characters |
+    +----------+------------------+------------------------+
+    | TiDB     |                1 |                      1 |
+    | Titanium |                1 |                      0 |
+    | Tungsten |                0 |                      0 |
+    | Rust     |                0 |                      1 |
+    +----------+------------------+------------------------+
+    4 rows in set (0.00 sec)
 
-The following example demonstrates that `REGEXP` is not limited to the `SELECT` clause. For example, you can also use it in the `WHERE` clause of the query.
+次の例は、 `REGEXP` `SELECT`節に限定されないことを示しています。たとえば、クエリの`WHERE`節でも使用できます。
 
 ```sql
 SELECT
@@ -1691,329 +1657,289 @@ WHERE
     v REGEXP 'DB$';
 ```
 
-```
-+------+
-| v    |
-+------+
-| TiDB |
-+------+
-1 row in set (0.01 sec)
-```
+    +------+
+    | v    |
+    +------+
+    | TiDB |
+    +------+
+    1 row in set (0.01 sec)
 
-### [`REGEXP_INSTR()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-instr)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-instr"><code>REGEXP_INSTR()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-regexp-html-function-regexp-instr-code-regexp-instr-code-a}
 
-Return the starting index of the substring that matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
+正規表現に一致する部分文字列の開始インデックスを返します（MySQLと部分的に互換性があります。詳細については[MySQL との正規表現の互換性](#regular-expression-compatibility-with-mysql)を参照してください）。
 
-The `REGEXP_INSTR(str, regexp, [start, [match, [ret, [match_type]]]])` function returns the position of the match if the regular expression (`regexp`) matches the string (`str`).
+`REGEXP_INSTR(str, regexp, [start, [match, [ret, [match_type]]]])`関数は正規表現（ `regexp` ）が文字列（ `str` ）と一致する場合、一致した位置を返します。
 
-If either the `str` or `regexp` is `NULL`, then the function returns `NULL`.
+`str`または`regexp`いずれかが`NULL`の場合、関数は`NULL`を返します。
 
-Examples:
+例:
 
-In the example below you can see that the `^.b.$` matches `abc`.
+以下の例では、 `^.b.$` `abc`と一致していることがわかります。
 
 ```sql
 SELECT REGEXP_INSTR('abc','^.b.$');
 ```
 
-```
-+-----------------------------+
-| REGEXP_INSTR('abc','^.b.$') |
-+-----------------------------+
-|                           1 |
-+-----------------------------+
-1 row in set (0.00 sec)
-```
+    +-----------------------------+
+    | REGEXP_INSTR('abc','^.b.$') |
+    +-----------------------------+
+    |                           1 |
+    +-----------------------------+
+    1 row in set (0.00 sec)
 
-The following example uses the third argument to look for a match with a different start position in the string.
+次の例では、3 番目の引数を使用して、文字列内の異なる開始位置との一致を検索します。
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','a');
 ```
 
-```
-+----------------------------+
-| REGEXP_INSTR('abcabc','a') |
-+----------------------------+
-|                          1 |
-+----------------------------+
-1 row in set (0.00 sec)
-```
+    +----------------------------+
+    | REGEXP_INSTR('abcabc','a') |
+    +----------------------------+
+    |                          1 |
+    +----------------------------+
+    1 row in set (0.00 sec)
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','a',2);
 ```
 
-```
-+------------------------------+
-| REGEXP_INSTR('abcabc','a',2) |
-+------------------------------+
-|                            4 |
-+------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------+
+    | REGEXP_INSTR('abcabc','a',2) |
+    +------------------------------+
+    |                            4 |
+    +------------------------------+
+    1 row in set (0.00 sec)
 
-The following example uses the 4th argument to look for the second match.
+次の例では、4 番目の引数を使用して 2 番目の一致を検索します。
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','a',1,2);
 ```
 
-```
-+--------------------------------+
-| REGEXP_INSTR('abcabc','a',1,2) |
-+--------------------------------+
-|                              4 |
-+--------------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------------+
+    | REGEXP_INSTR('abcabc','a',1,2) |
+    +--------------------------------+
+    |                              4 |
+    +--------------------------------+
+    1 row in set (0.00 sec)
 
-The following example uses the 5th argument to return the value _after_ the mach, instead of the value of the match.
+次の例では、5 番目の引数を使用して、一致の値ではなく、一致*後の*値を返します。
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','a',1,1,1);
 ```
 
-```
-+----------------------------------+
-| REGEXP_INSTR('abcabc','a',1,1,1) |
-+----------------------------------+
-|                                2 |
-+----------------------------------+
-1 row in set (0.00 sec)
-```
+    +----------------------------------+
+    | REGEXP_INSTR('abcabc','a',1,1,1) |
+    +----------------------------------+
+    |                                2 |
+    +----------------------------------+
+    1 row in set (0.00 sec)
 
-The following example uses the 6th argument to add the `i` flag to get a case insensitive match. For more details about regular expression `match_type`, see [`match_type` compatibility](#match_type-compatibility).
+次の例では、6 番目の引数を使用して`i`フラグを追加し、大文字と小文字を区別しない一致を取得します。正規表現`match_type`の詳細については、 [`match_type`互換性](#match_type-compatibility)を参照してください。
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','A',1,1,0,'');
 ```
 
-```
-+-------------------------------------+
-| REGEXP_INSTR('abcabc','A',1,1,0,'') |
-+-------------------------------------+
-|                                   0 |
-+-------------------------------------+
-1 row in set (0.00 sec)
-```
+    +-------------------------------------+
+    | REGEXP_INSTR('abcabc','A',1,1,0,'') |
+    +-------------------------------------+
+    |                                   0 |
+    +-------------------------------------+
+    1 row in set (0.00 sec)
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','A',1,1,0,'i');
 ```
 
-```
-+--------------------------------------+
-| REGEXP_INSTR('abcabc','A',1,1,0,'i') |
-+--------------------------------------+
-|                                    1 |
-+--------------------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------------------+
+    | REGEXP_INSTR('abcabc','A',1,1,0,'i') |
+    +--------------------------------------+
+    |                                    1 |
+    +--------------------------------------+
+    1 row in set (0.00 sec)
 
-Besides `match_type`, the [collation](/character-set-and-collation.md) also influences the matching. The following example uses a case-sensitive and a case-insensitive collation to demonstrate this.
+`match_type`他に、 [照合順序](/character-set-and-collation.md)もマッチングに影響します。次の例では、大文字と小文字を区別する照合と大文字と小文字を区別しない照合順序を使用してこれを示します。
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_general_ci);
 ```
 
-```
-+-------------------------------------------------------+
-| REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_general_ci) |
-+-------------------------------------------------------+
-|                                                     1 |
-+-------------------------------------------------------+
-1 row in set (0.01 sec)
-```
+    +-------------------------------------------------------+
+    | REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_general_ci) |
+    +-------------------------------------------------------+
+    |                                                     1 |
+    +-------------------------------------------------------+
+    1 row in set (0.01 sec)
 
 ```sql
 SELECT REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_bin);
 ```
 
-```
-+------------------------------------------------+
-| REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_bin) |
-+------------------------------------------------+
-|                                              0 |
-+------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------------------+
+    | REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_bin) |
+    +------------------------------------------------+
+    |                                              0 |
+    +------------------------------------------------+
+    1 row in set (0.00 sec)
 
-### [`REGEXP_LIKE()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-like)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-like"><code>REGEXP_LIKE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-regexp-html-function-regexp-like-code-regexp-like-code-a}
 
-Whether the string matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
+文字列が正規表現に一致するかどうか（MySQLと部分的に互換性があります。詳細については[MySQL との正規表現の互換性](#regular-expression-compatibility-with-mysql)を参照してください）。
 
-The `REGEXP_LIKE(str, regex, [match_type])` function is used to test if a regular expression matches a string. Optionally the `match_type` can be used to change the matching behavior.
+`REGEXP_LIKE(str, regex, [match_type])`関数は、正規表現が文字列と一致するかどうかをテストするために使用されます。オプションで、 `match_type`を使用して一致動作を変更できます。
 
-Examples:
+例:
 
-The following example shows that `^a` matches `abc`.
+次の例は、 `^a` `abc`と一致することを示しています。
 
 ```sql
 SELECT REGEXP_LIKE('abc','^a');
 ```
 
-```
-+-------------------------+
-| REGEXP_LIKE('abc','^a') |
-+-------------------------+
-|                       1 |
-+-------------------------+
-1 row in set (0.00 sec)
-```
+    +-------------------------+
+    | REGEXP_LIKE('abc','^a') |
+    +-------------------------+
+    |                       1 |
+    +-------------------------+
+    1 row in set (0.00 sec)
 
-This following example shows that `^A` does not match `abc`.
+次の例は、 `^A` `abc`と一致しないことを示しています。
 
 ```sql
 SELECT REGEXP_LIKE('abc','^A');
 ```
 
-```
-+-------------------------+
-| REGEXP_LIKE('abc','^A') |
-+-------------------------+
-|                       0 |
-+-------------------------+
-1 row in set (0.00 sec)
-```
+    +-------------------------+
+    | REGEXP_LIKE('abc','^A') |
+    +-------------------------+
+    |                       0 |
+    +-------------------------+
+    1 row in set (0.00 sec)
 
-This example matches `^A` against `abc`, which now matches because of the `i` flag which enabled case insensitive matching. For more details about the regular expression `match_type`, see [`match_type` compatibility](#match_type-compatibility).
+この例では、 `^A` `abc`に一致しますが、これは、大文字と小文字を区別しない一致を有効にする`i`フラグによって一致するようになりました。正規表現`match_type`の詳細については、 [`match_type`互換性](#match_type-compatibility)を参照してください。
 
 ```sql
 SELECT REGEXP_LIKE('abc','^A','i');
 ```
 
-```
-+-----------------------------+
-| REGEXP_LIKE('abc','^A','i') |
-+-----------------------------+
-|                           1 |
-+-----------------------------+
-1 row in set (0.00 sec)
-```
+    +-----------------------------+
+    | REGEXP_LIKE('abc','^A','i') |
+    +-----------------------------+
+    |                           1 |
+    +-----------------------------+
+    1 row in set (0.00 sec)
 
-### [`REGEXP_REPLACE()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-replace)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-replace"><code>REGEXP_REPLACE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-regexp-html-function-regexp-replace-code-regexp-replace-code-a}
 
-Replace substrings that match the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
+正規表現に一致する部分文字列を置き換えます（MySQLと部分的に互換性があります。詳細については[MySQL との正規表現の互換性](#regular-expression-compatibility-with-mysql)を参照してください）。
 
-The `REGEXP_REPLACE(str, regexp, replace, [start, [match, [match_type]]])` function can be used to replace strings based on regular expressions.
+`REGEXP_REPLACE(str, regexp, replace, [start, [match, [match_type]]])`関数は、正規表現に基づいて文字列を置換するために使用できます。
 
-Examples:
+例:
 
-In the following example, two o's are replaced by `i`.
+次の例では、 2 つの o が`i`に置き換えられます。
 
 ```sql
 SELECT REGEXP_REPLACE('TooDB', 'o{2}', 'i');
 ```
 
-```
-+--------------------------------------+
-| REGEXP_REPLACE('TooDB', 'o{2}', 'i') |
-+--------------------------------------+
-| TiDB                                 |
-+--------------------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------------------+
+    | REGEXP_REPLACE('TooDB', 'o{2}', 'i') |
+    +--------------------------------------+
+    | TiDB                                 |
+    +--------------------------------------+
+    1 row in set (0.00 sec)
 
-The following example starts the match at the third character, causing the regular expression not to match and not do any replacement.
+次の例では、3 番目の文字から一致が開始され、正規表現は一致せず、置換も行われません。
 
 ```sql
 SELECT REGEXP_REPLACE('TooDB', 'o{2}', 'i',3);
 ```
 
-```
-+----------------------------------------+
-| REGEXP_REPLACE('TooDB', 'o{2}', 'i',3) |
-+----------------------------------------+
-| TooDB                                  |
-+----------------------------------------+
-1 row in set (0.00 sec)
-```
+    +----------------------------------------+
+    | REGEXP_REPLACE('TooDB', 'o{2}', 'i',3) |
+    +----------------------------------------+
+    | TooDB                                  |
+    +----------------------------------------+
+    1 row in set (0.00 sec)
 
-In the following example, the 5th argument is used to set if the first or the second match is used for the replacement.
+次の例では、5 番目の引数を使用して、置換に最初の一致を使用するか、2 番目の一致を使用するかを設定します。
 
 ```sql
 SELECT REGEXP_REPLACE('TooDB', 'o', 'i',1,1);
 ```
 
-```
-+---------------------------------------+
-| REGEXP_REPLACE('TooDB', 'o', 'i',1,1) |
-+---------------------------------------+
-| TioDB                                 |
-+---------------------------------------+
-1 row in set (0.00 sec)
-```
+    +---------------------------------------+
+    | REGEXP_REPLACE('TooDB', 'o', 'i',1,1) |
+    +---------------------------------------+
+    | TioDB                                 |
+    +---------------------------------------+
+    1 row in set (0.00 sec)
 
 ```sql
 SELECT REGEXP_REPLACE('TooDB', 'o', 'i',1,2);
 ```
 
-```
-+---------------------------------------+
-| REGEXP_REPLACE('TooDB', 'o', 'i',1,2) |
-+---------------------------------------+
-| ToiDB                                 |
-+---------------------------------------+
-1 row in set (0.00 sec)
-```
+    +---------------------------------------+
+    | REGEXP_REPLACE('TooDB', 'o', 'i',1,2) |
+    +---------------------------------------+
+    | ToiDB                                 |
+    +---------------------------------------+
+    1 row in set (0.00 sec)
 
-The following example uses the 6th argument to set the `match_type` for case insensitive matching. For more details about the regular expression `match_type`, see [`match_type` compatibility](#match_type-compatibility).
+次の例では、6 番目の引数を使用して、大文字と小文字を区別しない一致に`match_type`設定します。正規表現`match_type`の詳細については、 [`match_type`互換性](#match_type-compatibility)を参照してください。
 
 ```sql
 SELECT REGEXP_REPLACE('TooDB', 'O{2}','i',1,1);
 ```
 
-```
-+-----------------------------------------+
-| REGEXP_REPLACE('TooDB', 'O{2}','i',1,1) |
-+-----------------------------------------+
-| TooDB                                   |
-+-----------------------------------------+
-1 row in set (0.00 sec)
-```
+    +-----------------------------------------+
+    | REGEXP_REPLACE('TooDB', 'O{2}','i',1,1) |
+    +-----------------------------------------+
+    | TooDB                                   |
+    +-----------------------------------------+
+    1 row in set (0.00 sec)
 
 ```sql
 SELECT REGEXP_REPLACE('TooDB', 'O{2}','i',1,1,'i');
 ```
 
-```
-+---------------------------------------------+
-| REGEXP_REPLACE('TooDB', 'O{2}','i',1,1,'i') |
-+---------------------------------------------+
-| TiDB                                        |
-+---------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +---------------------------------------------+
+    | REGEXP_REPLACE('TooDB', 'O{2}','i',1,1,'i') |
+    +---------------------------------------------+
+    | TiDB                                        |
+    +---------------------------------------------+
+    1 row in set (0.00 sec)
 
-### [`REGEXP_SUBSTR()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-substr)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-substr"><code>REGEXP_SUBSTR()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-regexp-html-function-regexp-substr-code-regexp-substr-code-a}
 
-Return the substring that matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
+正規表現に一致する部分文字列を返します（MySQLと部分的に互換性があります。詳細については[MySQL との正規表現の互換性](#regular-expression-compatibility-with-mysql)を参照してください）。
 
-The `REGEXP_SUBSTR(str, regexp, [start, [match, [match_type]]])` function is used to get a substring based on a regular expression.
+`REGEXP_SUBSTR(str, regexp, [start, [match, [match_type]]])`関数は、正規表現に基づいて部分文字列を取得するために使用されます。
 
-The following example uses the `Ti.{2}` regular expression to get the `TiDB` substring of the `This is TiDB` string.
+次の例では、正規表現`Ti.{2}`を使用して、文字列`This is TiDB`のサブ文字列`TiDB`を取得します。
 
 ```sql
 SELECT REGEXP_SUBSTR('This is TiDB','Ti.{2}');
 ```
 
-```
-+----------------------------------------+
-| REGEXP_SUBSTR('This is TiDB','Ti.{2}') |
-+----------------------------------------+
-| TiDB                                   |
-+----------------------------------------+
-1 row in set (0.00 sec)
-```
+    +----------------------------------------+
+    | REGEXP_SUBSTR('This is TiDB','Ti.{2}') |
+    +----------------------------------------+
+    | TiDB                                   |
+    +----------------------------------------+
+    1 row in set (0.00 sec)
 
-### [`REPEAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_repeat)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_repeat"><code>REPEAT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-repeat-code-repeat-code-a}
 
-Repeat a string the specified number of times.
+文字列を指定された回数繰り返します。
 
-Examples:
+例:
 
-The following example generates a sequence of numbers from 1 to 20 using a [recursive common table expression (CTE)](/develop/dev-guide-use-common-table-expression.md#recursive-cte). For each number in the sequence, the character `x` is repeated the number of times equal to the number itself.
+次の例では、 [再帰共通テーブル式 (CTE)](/develop/dev-guide-use-common-table-expression.md#recursive-cte)を使用して 1 から 20 までの数字のシーケンスを生成します。シーケンス内の各数字に対して、文字`x`その数字と同じ回数繰り返されます。
 
 ```sql
 WITH RECURSIVE nr(n) AS (
@@ -2024,113 +1950,109 @@ WITH RECURSIVE nr(n) AS (
 SELECT n, REPEAT('x',n) FROM nr;
 ```
 
-```
-+------+----------------------+
-| n    | REPEAT('x',n)        |
-+------+----------------------+
-|    1 | x                    |
-|    2 | xx                   |
-|    3 | xxx                  |
-|    4 | xxxx                 |
-|    5 | xxxxx                |
-|    6 | xxxxxx               |
-|    7 | xxxxxxx              |
-|    8 | xxxxxxxx             |
-|    9 | xxxxxxxxx            |
-|   10 | xxxxxxxxxx           |
-|   11 | xxxxxxxxxxx          |
-|   12 | xxxxxxxxxxxx         |
-|   13 | xxxxxxxxxxxxx        |
-|   14 | xxxxxxxxxxxxxx       |
-|   15 | xxxxxxxxxxxxxxx      |
-|   16 | xxxxxxxxxxxxxxxx     |
-|   17 | xxxxxxxxxxxxxxxxx    |
-|   18 | xxxxxxxxxxxxxxxxxx   |
-|   19 | xxxxxxxxxxxxxxxxxxx  |
-|   20 | xxxxxxxxxxxxxxxxxxxx |
-+------+----------------------+
-20 rows in set (0.01 sec)
-```
+    +------+----------------------+
+    | n    | REPEAT('x',n)        |
+    +------+----------------------+
+    |    1 | x                    |
+    |    2 | xx                   |
+    |    3 | xxx                  |
+    |    4 | xxxx                 |
+    |    5 | xxxxx                |
+    |    6 | xxxxxx               |
+    |    7 | xxxxxxx              |
+    |    8 | xxxxxxxx             |
+    |    9 | xxxxxxxxx            |
+    |   10 | xxxxxxxxxx           |
+    |   11 | xxxxxxxxxxx          |
+    |   12 | xxxxxxxxxxxx         |
+    |   13 | xxxxxxxxxxxxx        |
+    |   14 | xxxxxxxxxxxxxx       |
+    |   15 | xxxxxxxxxxxxxxx      |
+    |   16 | xxxxxxxxxxxxxxxx     |
+    |   17 | xxxxxxxxxxxxxxxxx    |
+    |   18 | xxxxxxxxxxxxxxxxxx   |
+    |   19 | xxxxxxxxxxxxxxxxxxx  |
+    |   20 | xxxxxxxxxxxxxxxxxxxx |
+    +------+----------------------+
+    20 rows in set (0.01 sec)
 
-The following example demonstrates that `REPEAT()` can operate on strings consisting of multiple characters.
+次の例は、 `REPEAT()`複数の文字で構成される文字列に対して操作できることを示しています。
 
 ```sql
 SELECT REPEAT('ha',3);
 ```
 
-```
-+----------------+
-| REPEAT('ha',3) |
-+----------------+
-| hahaha         |
-+----------------+
-1 row in set (0.00 sec)
-```
+    +----------------+
+    | REPEAT('ha',3) |
+    +----------------+
+    | hahaha         |
+    +----------------+
+    1 row in set (0.00 sec)
 
-### [`REPLACE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_replace)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_replace"><code>REPLACE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-replace-code-replace-code-a}
 
-Replace occurrences of a specified string.
+指定された文字列の出現箇所を置き換えます。
 
-### [`REVERSE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_reverse)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_reverse"><code>REVERSE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-reverse-code-reverse-code-a}
 
-Reverse the characters in a string.
+文字列内の文字を逆にします。
 
-### [`RIGHT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_right)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_right"><code>RIGHT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-right-code-right-code-a}
 
-Return the specified rightmost number of characters.
+指定された右端の文字数を返します。
 
-### [`RLIKE`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp"><code>RLIKE</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-regexp-html-operator-regexp-code-rlike-code-a}
 
-Synonym for [`REGEXP`](#regexp).
+[`REGEXP`](#regexp)の同義語。
 
-### [`RPAD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_rpad)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_rpad"><code>RPAD()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-rpad-code-rpad-code-a}
 
-Append string the specified number of times.
+文字列を指定された回数だけ追加します。
 
-### [`RTRIM()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_rtrim)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_rtrim"><code>RTRIM()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-rtrim-code-rtrim-code-a}
 
-Remove trailing spaces.
+末尾のスペースを削除します。
 
-### [`SPACE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_space)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_space"><code>SPACE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-space-code-space-code-a}
 
-Return a string of the specified number of spaces.
+指定された数のスペースの文字列を返します。
 
-### [`STRCMP()`](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#function_strcmp)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#function_strcmp"><code>STRCMP()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-comparison-functions-html-function-strcmp-code-strcmp-code-a}
 
-Compare two strings.
+2 つの文字列を比較します。
 
-### [`SUBSTR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substr)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substr"><code>SUBSTR()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-substr-code-substr-code-a}
 
-Return the substring as specified.
+指定された部分文字列を返します。
 
-### [`SUBSTRING()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substring)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substring"><code>SUBSTRING()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-substring-code-substring-code-a}
 
-Return the substring as specified.
+指定された部分文字列を返します。
 
-### [`SUBSTRING_INDEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substring-index)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substring-index"><code>SUBSTRING_INDEX()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-substring-index-code-substring-index-code-a}
 
-The `SUBSTRING_INDEX()` function is used to extract a substring from a string based on a specified delimiter and count. This function is particularly useful when dealing with data separated by a specific delimiter, such as parsing CSV data or processing log files.
+`SUBSTRING_INDEX()`関数は、指定された区切り文字とカウントに基づいて文字列から部分文字列を抽出するために使用されます。この関数は、CSV データの解析やログ ファイルの処理など、特定の区切り文字で区切られたデータを扱う場合に特に便利です。
 
-Syntax:
+構文：
 
 ```sql
 SUBSTRING_INDEX(str, delim, count)
 ```
 
-- `str`: specifies the string to be processed.
-- `delim`: specifies the delimiter in the string, which is case-sensitive.
-- `count`: specifies the number of occurrences of the delimiter.
-    - If `count` is a positive number, the function returns the substring before the `count` occurrences (counting from the left of the string) of the delimiter.
-    - If `count` is a negative number, the function returns the substring after the `count` occurrences (counting from the right of the string) of the delimiter.
-    - If `count` is `0`, the function returns an empty string.
+-   `str` : 処理する文字列を指定します。
+-   `delim` : 文字列内の区切り文字を指定します。大文字と小文字が区別されます。
+-   `count` : 区切り文字の出現回数を指定します。
+    -   `count`が正の数の場合、関数は区切り文字の`count`回目の出現 (文字列の左から数えて) の前の部分文字列を返します。
+    -   `count`が負の数の場合、関数は区切り文字の`count`目の出現後 (文字列の右から数えて) の部分文字列を返します。
+    -   `count`が`0`の場合、関数は空の文字列を返します。
 
-Example 1:
+例1:
 
 ```sql
 SELECT SUBSTRING_INDEX('www.tidbcloud.com', '.', 2);
 ```
 
-Output 1:
+出力1:
 
 ```sql
 +-----------------------------------------+
@@ -2140,13 +2062,13 @@ Output 1:
 +-----------------------------------------+
 ```
 
-Example 2:
+例2:
 
 ```sql
 SELECT SUBSTRING_INDEX('www.tidbcloud.com', '.', -1);
 ```
 
-Output 2:
+出力2:
 
 ```sql
 +------------------------------------------+
@@ -2156,26 +2078,26 @@ Output 2:
 +------------------------------------------+
 ```
 
-### [`TO_BASE64()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_to-base64)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_to-base64"><code>TO_BASE64()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-to-base64-code-to-base64-code-a}
 
-The `TO_BASE64()` function is used to convert the given argument to a string in the base-64 encoded form and return the result according to the character set and collation of the current connection. A base-64 encoded string can be decoded using the [`FROM_BASE64()`](#from_base64) function.
+`TO_BASE64()`関数は、指定された引数を base-64 エンコード形式の文字列に変換し、現在の接続の文字セットと照合順序に従って結果を返すために使用されます。base-64 エンコードされた文字列は、 [`FROM_BASE64()`](#from_base64)関数を使用してデコードできます。
 
-Syntax:
+構文：
 
 ```sql
 TO_BASE64(str)
 ```
 
-- If the argument is not a string, the function converts it to a string before base-64 encoding.
-- If the argument is `NULL`, the function returns `NULL`.
+-   引数が文字列でない場合、関数はそれを base-64 エンコードする前に文字列に変換します。
+-   引数が`NULL`の場合、関数は`NULL`返します。
 
-Example 1:
+例1:
 
 ```sql
 SELECT TO_BASE64('abc');
 ```
 
-Output 1:
+出力1:
 
 ```sql
 +------------------+
@@ -2185,13 +2107,13 @@ Output 1:
 +------------------+
 ```
 
-Example 2:
+例2:
 
 ```sql
 SELECT TO_BASE64(6);
 ```
 
-Output 2:
+出力2:
 
 ```sql
 +--------------+
@@ -2201,29 +2123,29 @@ Output 2:
 +--------------+
 ```
 
-### [`TRANSLATE()`](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/TRANSLATE.html#GUID-80F85ACB-092C-4CC7-91F6-B3A585E3A690)
+### <a href="https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/TRANSLATE.html#GUID-80F85ACB-092C-4CC7-91F6-B3A585E3A690"><code>TRANSLATE()</code></a> {#a-href-https-docs-oracle-com-en-database-oracle-oracle-database-21-sqlrf-translate-html-guid-80f85acb-092c-4cc7-91f6-b3a585e3a690-code-translate-code-a}
 
-Replace all occurrences of characters by other characters in a string. It does not treat empty strings as `NULL` as Oracle does.
+文字列内のすべての文字を他の文字に置き換えます。Oracle のように空の文字列を`NULL`として扱いません。
 
-### [`TRIM()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_trim)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_trim"><code>TRIM()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-trim-code-trim-code-a}
 
-Remove leading and trailing spaces.
+先頭と末尾のスペースを削除します。
 
-### [`UCASE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ucase)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ucase"><code>UCASE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-ucase-code-ucase-code-a}
 
-The `UCASE()` function is used to convert a string to uppercase letters. This function is equivalent to the `UPPER()` function.
+`UCASE()`関数は文字列を大文字に変換するために使用されます。この関数は`UPPER()`関数と同等です。
 
-> **Note:**
+> **注記：**
 >
-> When the string is null, the `UCASE()` function returns `NULL`.
+> 文字列が null の場合、 `UCASE()`関数は`NULL`を返します。
 
-Example:
+例：
 
 ```sql
 SELECT UCASE('bigdata') AS result_upper, UCASE(null) AS result_null;
 ```
 
-Output:
+出力：
 
 ```sql
 +--------------+-------------+
@@ -2233,21 +2155,21 @@ Output:
 +--------------+-------------+
 ```
 
-### [`UNHEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_unhex)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_unhex"><code>UNHEX()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-unhex-code-unhex-code-a}
 
-The `UNHEX()` function performs the reverse operation of the `HEX()` function. It treats each pair of characters in the argument as a hexadecimal number and converts it to the character represented by that number, returning the result as a binary string.
+`UNHEX()`関数は、 `HEX()`関数の逆の操作を実行します。引数内の各文字のペアを 16 進数として扱い、その数値で表される文字に変換して、結果をバイナリ文字列として返します。
 
-> **Note:**
+> **注記：**
 >
-> The argument must be a valid hexadecimal value that contains `0`–`9`, `A`–`F`, or `a`–`f`. If the argument is `NULL` or falls outside this range, the function returns `NULL`.
+> 引数は、 `0` ～ `9` 、 `A` ～ `F` 、または`a` ～ `f`を含む有効な 16 進数値である必要があります。引数が`NULL`またはこの範囲外の場合、関数は`NULL`を返します。
 
-Example:
+例：
 
 ```sql
 SELECT UNHEX('54694442');
 ```
 
-Output:
+出力：
 
 ```sql
 +--------------------------------------+
@@ -2257,21 +2179,21 @@ Output:
 +--------------------------------------+
 ```
 
-### [`UPPER()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_upper)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_upper"><code>UPPER()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-upper-code-upper-code-a}
 
-The `UPPER()` function is used to convert a string to uppercase letters. This function is equivalent to the `UCASE()` function.
+`UPPER()`関数は文字列を大文字に変換するために使用されます。この関数は`UCASE()`関数と同等です。
 
-> **Note:**
+> **注記：**
 >
-> When the string is null, the `UPPER()` function returns `NULL`.
+> 文字列が null の場合、 `UPPER()`関数は`NULL`を返します。
 
-Example:
+例：
 
 ```sql
 SELECT UPPER('bigdata') AS result_upper, UPPER(null) AS result_null;
 ```
 
-Output:
+出力：
 
 ```sql
 +--------------+-------------+
@@ -2281,30 +2203,30 @@ Output:
 +--------------+-------------+
 ```
 
-### [`WEIGHT_STRING()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_weight-string)
+### <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_weight-string"><code>WEIGHT_STRING()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-string-functions-html-function-weight-string-code-weight-string-code-a}
 
-The `WEIGHT_STRING()` function returns the weight string (binary characters) for the input string, primarily used for sorting and comparison operations in multi-character set scenarios. If the argument is `NULL`, it returns `NULL`. The syntax is as follows:
+`WEIGHT_STRING()`関数は、入力文字列の重み文字列 (バイナリ文字) を返します。主に、複数文字セットのシナリオでの並べ替えや比較操作に使用されます。引数が`NULL`の場合は、 `NULL`を返します。構文は次のとおりです。
 
 ```sql
 WEIGHT_STRING(str [AS {CHAR|BINARY}(N)])
 ```
 
-- `str`: the input string expression. If it is a non-binary string, such as a `CHAR`, `VARCHAR`, or `TEXT` value, the return value contains the collation weights for the string. If it is a binary string, such as a `BINARY`, `VARBINARY`, or `BLOB` value, the return value is the same as the input.
+-   `str` : 入力文字列式。 `CHAR` 、 `VARCHAR` 、 `TEXT`などの非バイナリ文字列の場合、戻り値には文字列の照合順序重みが含まれます。 `BINARY` 、 `VARBINARY` 、 `BLOB`などのバイナリ文字列の場合、戻り値は入力と同じになります。
 
-- `AS {CHAR|BINARY}(N)`: optional parameters used to specify the type and length of the output. `CHAR` represents the character data type, and `BINARY` represents the binary data type. `N` specifies the output length, which is an integer greater than or equal to 1.
+-   `AS {CHAR|BINARY}(N)` : 出力のタイプと長さを指定するために使用されるオプションのパラメータ`CHAR`は文字データ型を表し、 `BINARY`バイナリ データ型を表します。6 `N`出力の長さを指定します。これは 1 以上の整数です。
 
-> **Note:**
+> **注記：**
 >
-> If `N` is less than the string length, the string is truncated. If `N` exceeds the string length, `AS CHAR(N)` pads the string with spaces to the specified length, and `AS BINARY(N)` pads the string with `0x00` to the specified length.
+> `N`文字列の長さより短い場合、文字列は切り捨てられます。3 `N`文字列の長さを超える場合、 `AS CHAR(N)`文字列に指定された長さになるまでスペースを埋め込みます。7 `AS BINARY(N)`文字列に指定された長さになるまで`0x00`を埋め込みます。
 
-Example:
+例：
 
 ```sql
 SET NAMES 'utf8mb4';
 SELECT HEX(WEIGHT_STRING('ab' AS CHAR(3))) AS char_result, HEX(WEIGHT_STRING('ab' AS BINARY(3))) AS binary_result;
 ```
 
-Output:
+出力：
 
 ```sql
 +-------------+---------------+
@@ -2314,62 +2236,63 @@ Output:
 +-------------+---------------+
 ```
 
-## Unsupported functions
+## サポートされていない関数 {#unsupported-functions}
 
-* `LOAD_FILE()`
-* `MATCH()`
-* `SOUNDEX()`
+-   `LOAD_FILE()`
+-   `MATCH()`
+-   `SOUNDEX()`
 
-## Regular expression compatibility with MySQL
+## MySQL との正規表現の互換性 {#regular-expression-compatibility-with-mysql}
 
-The following sections describe the regular expression compatibility with MySQL, including `REGEXP_INSTR()`, `REGEXP_LIKE()`, `REGEXP_REPLACE()`, and `REGEXP_SUBSTR()`.
+次のセクションでは、 `REGEXP_INSTR()` 、 `REGEXP_LIKE()` 、 `REGEXP_REPLACE()` 、 `REGEXP_SUBSTR()`を含む、MySQL との正規表現の互換性について説明します。
 
-### Syntax compatibility
+### 構文の互換性 {#syntax-compatibility}
 
-MySQL implements regular expression using International Components for Unicode (ICU), and TiDB uses RE2. To learn the syntax differences between the two libraries, you can refer to the [ICU documentation](https://unicode-org.github.io/icu/userguide/) and [RE2 Syntax](https://github.com/google/re2/wiki/Syntax).
+MySQL は International Components for Unicode (ICU) を使用して正規表現を実装し、TiDB は RE2 を使用します。2 つのライブラリ間の構文の違いについては、 [ICUドキュメント](https://unicode-org.github.io/icu/userguide/)と[RE2 構文](https://github.com/google/re2/wiki/Syntax)を参照してください。
 
-### `match_type` compatibility
+### <code>match_type</code>互換性 {#code-match-type-code-compatibility}
 
-The value options of `match_type` between TiDB and MySQL are:
+TiDB と MySQL 間の`match_type`の値オプションは次のとおりです。
 
-- Value options in TiDB are `"c"`, `"i"`, `"m"`, and `"s"`, and value options in MySQL are `"c"`, `"i"`, `"m"`, `"n"`, and `"u"`.
-- The `"s"` in TiDB corresponds to `"n"` in MySQL. When `"s"` is set in TiDB, the `.` character also matches line terminators (`\n`).
+-   TiDB の値オプションは`"c"` 、 `"i"` 、 `"m"` 、 `"s"`であり、MySQL の値オプションは`"c"` 、 `"i"` 、 `"m"` 、 `"n"` 、 `"u"`です。
 
-    For example, the `SELECT REGEXP_LIKE(a, b, "n") FROM t1` in MySQL is the same as the `SELECT REGEXP_LIKE(a, b, "s") FROM t1` in TiDB.
+-   TiDB の`"s"` MySQL の`"n"`に相当します。TiDB で`"s"`設定されている場合、 `.`文字は行末文字 ( `\n` ) にも一致します。
 
-- TiDB does not support `"u"`, which means Unix-only line endings in MySQL.
+    たとえば、MySQL の`SELECT REGEXP_LIKE(a, b, "n") FROM t1` TiDB の`SELECT REGEXP_LIKE(a, b, "s") FROM t1`と同じです。
 
-| `match_type` | MySQL | TiDB | Description                            |
-|:------------:|-------|------|----------------------------------------|
-| c            | Yes   | Yes  | Case-sensitive matching                |
-| i            | Yes   | Yes  | Case-insensitive matching              |
-| m            | Yes   | Yes  | Multi-line mode                        |
-| s            | No    | Yes  | Matches newlines, same as `n` in MySQL |
-| n            | Yes   | No   | Matches newlines, same as `s` in TiDB  |
-| u            | Yes   | No   | UNIX&trade; line endings               |
+-   TiDB は、MySQL で Unix のみの行末を意味する`"u"`サポートしていません。
 
-### Data type compatibility
+| `match_type` | マイグレーション | ティビ | 説明                        |
+| :----------: | -------- | --- | ------------------------- |
+|       c      | はい       | はい  | 大文字と小文字を区別する一致            |
+|       私      | はい       | はい  | 大文字と小文字を区別しないマッチング        |
+|     メートル     | はい       | はい  | 複数行モード                    |
+|       s      | いいえ      | はい  | 改行に一致します。MySQL の`n`と同じです。 |
+|       ん      | はい       | いいえ | 改行に一致します。TiDB の`s`と同じです。  |
+|      あなた     | はい       | いいえ | UNIX™ の行末                 |
 
-The difference between TiDB and MySQL support for the binary string type:
+### データ型の互換性 {#data-type-compatibility}
 
-- MySQL does not support binary strings in regular expression functions since 8.0.22. For more details, refer to [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/regexp.html). But in practice, regular functions can work in MySQL when all parameters or return types are binary strings. Otherwise, an error will be reported.
-- Currently, TiDB prohibits using binary strings and an error will be reported under any circumstances.
+バイナリ文字列型に対する TiDB と MySQL のサポートの違い:
 
-### Other compatibility
+-   MySQL は 8.0.22 以降、正規表現関数でバイナリ文字列をサポートしていません。詳細については、 [MySQL ドキュメント](https://dev.mysql.com/doc/refman/8.0/en/regexp.html)を参照してください。ただし、実際には、すべてのパラメータまたは戻り値の型がバイナリ文字列である場合、MySQL で正規関数が機能します。それ以外の場合は、エラーが報告されます。
+-   現在、TiDB ではバイナリ文字列の使用が禁止されており、どのような状況でもエラーが報告されます。
 
-- The behavior of replacing empty strings in TiDB is different from MySQL. Taking `REGEXP_REPLACE("", "^$", "123")` as an example:
+### その他の互換性 {#other-compatibility}
 
-    - MySQL does not replace the empty string and returns `""` as the result.
-    - TiDB replaces the empty string and returns `"123"` as the result.
+-   TiDB で空の文字列を置き換える動作は MySQL とは異なります。1 `REGEXP_REPLACE("", "^$", "123")`例に挙げます。
 
-- The keyword used for capturing groups in TiDB is different from MySQL. MySQL uses `$` as the keyword, while TiDB uses `\\` as the keyword. In addition, TiDB only supports capturing groups numbered from `0` to `9`.
+    -   MySQL は空の文字列を置き換えず、結果として`""`を返します。
+    -   TiDB は空の文字列を置き換え、結果として`"123"`を返します。
 
-    For example, the following SQL statement returns `ab` in TiDB:
+-   TiDB でグループをキャプチャするために使用されるキーワードは、MySQL とは異なります。MySQL ではキーワードとして`$`使用されますが、TiDB ではキーワードとして`\\`が使用されます。また、TiDB では`0`から`9`までの番号のグループのみをキャプチャできます。
+
+    たとえば、次の SQL ステートメントは TiDB に`ab`返します。
 
     ```sql
     SELECT REGEXP_REPLACE('abcd','(.*)(.{2})$','\\1') AS s;
     ```
 
-### Known issues
+### 既知の問題点 {#known-issues}
 
-- [GitHub Issue #37981](https://github.com/pingcap/tidb/issues/37981)
+-   [GitHub 問題 #37981](https://github.com/pingcap/tidb/issues/37981)

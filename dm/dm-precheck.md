@@ -1,174 +1,175 @@
 ---
 title: Migration Task Precheck
-summary: Learn the precheck that DM performs before starting a migration task.
+summary: 移行タスクを開始する前に DM が実行する事前チェックについて説明します。
 ---
 
-# Migration Task Precheck
+# 移行タスクの事前チェック {#migration-task-precheck}
 
-Before using DM to migrate data from upstream to downstream, a precheck helps detect errors in the upstream database configurations and ensures that the migration goes smoothly. This document introduces the DM precheck feature, including its usage scenario, check items, and arguments.
+DM を使用してアップストリームからダウンストリームにデータを移行する前に、事前チェックを行うことでアップストリーム データベース構成のエラーを検出し、移行がスムーズに進むようにします。このドキュメントでは、DM 事前チェック機能について、その使用シナリオ、チェック項目、引数などを紹介します。
 
-## Usage scenario
+## 使用シナリオ {#usage-scenario}
 
-To run a data migration task smoothly, DM triggers a precheck automatically at the start of the task and returns the check results. DM starts the migration only after the precheck is passed.
+データ移行タスクをスムーズに実行するために、DM はタスクの開始時に自動的に事前チェックをトリガーし、チェック結果を返します。DM は、事前チェックに合格した後にのみ移行を開始します。
 
-To trigger a precheck manually, run the `check-task` command.
+事前チェックを手動でトリガーするには、 `check-task`コマンドを実行します。
 
-For example:
-
-{{< copyable "" >}}
+例えば：
 
 ```bash
 tiup dmctl check-task ./task.yaml
 ```
 
-## Descriptions of check items
+## チェック項目の説明 {#descriptions-of-check-items}
 
-After a precheck is triggered for a task, DM checks the corresponding items according to your migration mode configuration.
+タスクの事前チェックがトリガーされると、DM は移行モードの構成に従って対応する項目をチェックします。
 
-This section lists all the precheck items.
+このセクションでは、すべての事前チェック項目をリストします。
 
-> **Note:**
+> **注記：**
 >
-> In this document, check items that must be passed are labeled "(Mandatory)".
+> このドキュメントでは、必ず合格しなければならないチェック項目には「(必須)」というラベルが付いています。
 
-> - If a mandatory check item does not pass, DM returns an error after the check and does not proceed with the migration task. In this case, modify the configurations according to the error message and retry the task after meeting the precheck requirements.
+> -   必須チェック項目に合格しなかった場合、DM はチェック後にエラーを返し、移行タスクを続行しません。この場合、エラー メッセージに従って構成を変更し、事前チェックの要件を満たした後にタスクを再試行してください。
 >
-> - If a non-mandatory check item does not pass, DM returns a warning after the check. DM automatically starts a migration task if the check result contains only warnings but no errors.
+> -   必須ではないチェック項目に合格しなかった場合、DM はチェック後に警告を返します。チェック結果に警告のみが含まれ、エラーが含まれていない場合、DM は自動的に移行タスクを開始します。
 
-### Common check items
+### 共通チェック項目 {#common-check-items}
 
-Regardless of the migration mode you choose, the precheck always includes the following common check items:
+選択した移行モードに関係なく、事前チェックには常に次の共通チェック項目が含まれます。
 
-- Database version
+-   データベースバージョン
 
-    - MySQL version > 5.5
-    - MariaDB version >= 10.1.2
+    -   MySQL バージョン &gt; 5.5
 
-    > **Warning:**
+    -   MariaDB バージョン &gt;= 10.1.2
+
+    > **警告：**
     >
-    > - Migrating data from MySQL 8.0 to TiDB using DM is an experimental feature (introduced since DM v2.0). It is NOT recommended that you use it in a production environment.
-    > - Migrating data from MariaDB to TiDB using DM is an experimental feature. It is NOT recommended that you use it in a production environment.
+    > -   DM を使用して MySQL 8.0 から TiDB にデータを移行することは、実験的機能です (DM v2.0 以降で導入)。本番環境での使用は推奨されません。
+    > -   DM を使用して MariaDB から TiDB にデータを移行することは実験的機能です。本番環境での使用はお勧めしません。
 
-- Compatibility of the upstream MySQL table schema
+-   アップストリームMySQLテーブルスキーマの互換性
 
-    - Check whether the upstream tables have foreign keys, which are not supported by TiDB. A warning is returned if a foreign key is found in the precheck.
-    - Check whether the upstream tables use character sets that are incompatible with TiDB. For more information, see [TiDB Supported Character Sets](/character-set-and-collation.md).
-    - Check whether the upstream tables have primary key constraints or unique key constraints (introduced from v1.0.7).
+    -   アップストリーム テーブルに、TiDB でサポートされていない外部キーがあるかどうかを確認します。事前チェックで外部キーが見つかった場合は、警告が返されます。
 
-    > **Warning:**
+    -   アップストリーム テーブルが TiDB と互換性のない文字セットを使用していないかどうかを確認します。詳細については、 [TiDB でサポートされる文字セット](/character-set-and-collation.md)参照してください。
+
+    -   アップストリーム テーブルに主キー制約または一意キー制約 (v1.0.7 から導入) があるかどうかを確認します。
+
+    > **警告：**
     >
-    > - When the upstream uses incompatible character sets, you can still continue the replication by creating tables with the utf8mb4 character set in the downstream. However, this practice is not recommended. You are advised to replace the incompatible character set used by the upstream with another character set that is supported in downstream.
-    > - When the upstream tables have no primary key constraints or unique key constraints, the same row of data might be replicated multiple times to the downstream, which might also affect the performance of replication. In a production environment, it is recommended that you specify primary key constraints or unique key constraints for the upstream table.
+    > -   アップストリームで互換性のない文字セットが使用されている場合でも、ダウンストリームで utf8mb4 文字セットを使用してテーブルを作成することで、レプリケーションを続行できます。ただし、この方法はお勧めしません。アップストリームで使用されている互換性のない文字セットを、ダウンストリームでサポートされている別の文字セットに置き換えることをお勧めします。
+    > -   アップストリーム テーブルに主キー制約または一意キー制約がない場合、同じデータ行がダウンストリームに複数回レプリケートされる可能性があり、これもレプリケーションのパフォーマンスに影響する可能性があります。本番環境では、アップストリーム テーブルに主キー制約または一意キー制約を指定することをお勧めします。
 
-### Check items for full data migration
+### 完全なデータ移行のためのチェック項目 {#check-items-for-full-data-migration}
 
-For the full data migration mode (`task-mode: full`), in addition to the [common check items](#common-check-items), the precheck also includes the following check items:
+完全データ移行モード（ `task-mode: full` ）の場合、 [共通チェック項目](#common-check-items)に加えて、事前チェックには以下のチェック項目も含まれます。
 
-* (Mandatory) dump permission of the upstream database
+-   (必須) アップストリームデータベースのダンプ権限
 
-    - SELECT permission on INFORMATION_SCHEMA and dump tables
-    - RELOAD permission if `consistency=flush`
-    - LOCK TABLES permission on the dump tables if `consistency=flush/lock`
+    -   INFORMATION_SCHEMA およびダンプ テーブルに対する SELECT 権限
+    -   RELOAD権限が`consistency=flush`場合
+    -   ダンプテーブルに対するLOCK TABLES権限`consistency=flush/lock`場合）
 
-* (Mandatory) Consistency of upstream MySQL multi-instance sharding tables
+-   (必須) アップストリーム MySQL マルチインスタンス シャーディング テーブルの一貫性
 
-    - In the pessimistic mode, check whether the table schemas of all sharded tables are consistent in the following items:
+    -   悲観的モードでは、すべてのシャード テーブルのテーブル スキーマが次の項目で一貫しているかどうかを確認します。
 
-        - Number of columns
-        - Column name
-        - Column order
-        - Column type
-        - Primary key
-        - Unique index
+        -   列の数
+        -   カラム名
+        -   カラムの順序
+        -   カラムタイプ
+        -   主キー
+        -   ユニークインデックス
 
-    - In the optimistic mode, check whether the schemas of all sharded tables meet the [optimistic compatibility](https://github.com/pingcap/tiflow/blob/release-8.1/dm/docs/RFCS/20191209_optimistic_ddl.md#modifying-column-types).
+    -   楽観的モードでは、すべてのシャード テーブルのスキーマが[楽観的互換性](https://github.com/pingcap/tiflow/blob/release-8.1/dm/docs/RFCS/20191209_optimistic_ddl.md#modifying-column-types)満たしているかどうかを確認します。
 
-    - If a migration task was started successfully by the `start-task` command, the precheck of this task skips the consistency check.
+    -   移行タスクが`start-task`コマンドによって正常に開始された場合、このタスクの事前チェックでは整合性チェックがスキップされます。
 
-* Auto-increment primary key in sharded tables
+-   シャードテーブル内の主キーの自動増分
 
-    - If sharded tables have auto-increment primary keys, the precheck returns a warning. If there are conflicts in auto-increment primary keys, see [Handle conflicts of auto-increment primary key](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key) for solutions.
+    -   シャード テーブルに自動増分主キーがある場合、事前チェックは警告を返します。自動増分主キーに競合がある場合は、解決策については[自動増分主キーの競合を処理する](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key)を参照してください。
 
-#### Check items for physical import
+#### 物理的な輸入のためのアイテムを確認する {#check-items-for-physical-import}
 
-If you set `import-mode: "physical"` in the task configuration, the following check items are added to ensure that [Physical Import](/tidb-lightning/tidb-lightning-physical-import-mode.md) runs normally. After following the prompts, if you find it difficult to meet the requirements of these check items, you can try to use the [logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode.md) to import data.
+タスク構成で`import-mode: "physical"`設定すると、 [物理的な輸入](/tidb-lightning/tidb-lightning-physical-import-mode.md)正常に実行されることを確認するために、次のチェック項目が追加されます。プロンプトに従った後、これらのチェック項目の要件を満たすのが難しい場合は、 [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)を使用してデータをインポートしてみてください。
 
-* Empty Regions in the downstream database
+-   下流データベースの空の領域
 
-    - If the number of empty Regions is greater than `max(1000, 3 * the number of tables)` (the larger of "1000" and "3 times the number of tables"), the precheck returns a warning. You can adjust related PD parameters to speed up the merging of empty Regions and wait for the number of empty Regions to decrease. See [PD Scheduling Best Practices - Slow Region Merge](/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow).
+    -   空のリージョンの数が`max(1000, 3 * the number of tables)` (「1000」と「テーブル数の 3 倍」のうち大きい方) より大きい場合、事前チェックは警告を返します。関連する PD パラメータを調整して、空のリージョンのマージを高速化し、空のリージョンの数が減少するのを待つことができます。3 [PD スケジューリングのベスト プラクティス - 低速リージョンのマージ](/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow)参照してください。
 
-* Region distribution in the downstream database
+-   下流データベースにおけるリージョン分布
 
-    - Checks the number of Regions on different TiKV nodes. Assuming that the TiKV node with the lowest Region count has `a` Regions and the TiKV node with the highest Region count has `b` Regions, if `a / b` is less than 0.75, the precheck returns a warning. You can adjust related PD parameters to speed up the scheduling of Regions and wait for the number of Regions to change. See [PD Scheduling Best Practices - Leader/Region distribution is not balanced](/best-practices/pd-scheduling-best-practices.md#leadersregions-are-not-evenly-distributed).
+    -   異なる TiKV ノード上のリージョンの数をチェックします。リージョン数が最も少ない TiKV ノードには`a`リージョンがあり、リージョン数が最も多い TiKV ノードには`b`リージョンがあると仮定すると、 `a / b`が 0.75 未満の場合、事前チェックは警告を返します。関連する PD パラメータを調整してリージョンのスケジュールを高速化し、リージョン数が変化するのを待つことができます。7 [PD スケジューリングのベスト プラクティス -Leader/リージョンの配分がバランスが取れていない](/best-practices/pd-scheduling-best-practices.md#leadersregions-are-not-evenly-distributed)参照してください。
 
-* The versions of TiDB, PD, and TiKV in the downstream database
+-   下流データベースのTiDB、PD、およびTiKVのバージョン
 
-    - Physical import must call the interfaces of TiDB, PD, and TiKV. If the versions are not compatible, the precheck returns an error.
+    -   物理インポートでは、TiDB、PD、および TiKV のインターフェースを呼び出す必要があります。バージョンに互換性がない場合、事前チェックでエラーが返されます。
 
-* The free space of the downstream database
+-   下流データベースの空き容量
 
-    - Estimates the total sizes of all tables in the allow list in the upstream database (`source_size`). If the free space of the downstream database is less than `source_size`, the precheck returns an error. If the free space of the downstream database is less than the number of TiKV replicas \* `source_size` \* 2, the precheck returns a warning.
+    -   アップストリーム データベースの許可リストにあるすべてのテーブルの合計サイズを推定します ( `source_size` )。ダウンストリーム データベースの空き容量が`source_size`未満の場合、事前チェックはエラーを返します。ダウンストリーム データベースの空き容量が TiKV レプリカの数 * `source_size` * 2 未満の場合、事前チェックは警告を返します。
 
-* Whether the downstream database is running tasks that are incompatible with physical import
+-   下流データベースが物理インポートと互換性のないタスクを実行しているかどうか
 
-    - Currently, physical import is incompatible with [TiCDC](/ticdc/ticdc-overview.md) and [PITR](/br/br-pitr-guide.md) tasks. If these tasks are running in the downstream database, the precheck returns an error.
+    -   現在、物理インポートはタスク[ティCDC](/ticdc/ticdc-overview.md)および[ピトル](/br/br-pitr-guide.md)と互換性がありません。これらのタスクがダウンストリーム データベースで実行されている場合、事前チェックはエラーを返します。
 
-### Check items for incremental data migration
+### 増分データ移行のチェック項目 {#check-items-for-incremental-data-migration}
 
-For the incremental data migration mode (`task-mode: incremental`), in addition to the [common check items](#common-check-items), the precheck also includes the following check items:
+増分データ移行モード（ `task-mode: incremental` ）の場合、 [共通チェック項目](#common-check-items)に加えて、事前チェックには次のチェック項目も含まれます。
 
-* (Mandatory) Upstream database REPLICATION permission
+-   (必須) 上流データベースのレプリケーション権限
 
-    - REPLICATION CLIENT permission
-    - REPLICATION SLAVE permission
+    -   レプリケーションクライアント権限
+    -   REPLICATION SLAVE 権限
 
-* Database primary-secondary configuration
+-   データベースのプライマリ/セカンダリ構成
 
-    - To avoid primary-secondary replication failures, it is recommended that you specify the database ID `server_id` for the upstream database (GTID is recommended for non-AWS Aurora environments).
+    -   プライマリ - セカンダリ レプリケーションの失敗を回避するには、アップストリーム データベースにデータベース ID `server_id`を指定することをお勧めします (AWS Aurora以外の環境では GTID が推奨されます)。
 
-* (Mandatory) MySQL binlog configuration
+-   (必須) MySQL binlog設定
 
-    - Check whether binlog is enabled (required by DM).
-    - Check whether `binlog_format=ROW` is configured (DM only supports the migration of binlog in the ROW format).
-    - Check whether `binlog_row_image=FULL` is configured (DM only supports `binlog_row_image=FULL`).
-    - If `binlog_do_db` or `binlog_ignore_db` is configured, check whether the database tables to be migrated meet the conditions of `binlog_do_db` and `binlog_ignore_db`.
+    -   binlogが有効になっているかどうかを確認します (DM で必要)。
+    -   `binlog_format=ROW`が構成されているかどうかを確認します (DM は ROW 形式のbinlogの移行のみをサポートします)。
+    -   `binlog_row_image=FULL`設定されているかどうかを確認します (DM は`binlog_row_image=FULL`のみをサポートします)。
+    -   `binlog_do_db`または`binlog_ignore_db`が設定されている場合は、移行するデータベース テーブルが`binlog_do_db`および`binlog_ignore_db`の条件を満たしているかどうかを確認します。
 
-* (Mandatory) Check if the upstream database is in an [Online-DDL](/dm/feature-online-ddl.md) process (in which the `ghost` table is created but the `rename` phase is not executed yet). If the upstream is in the online-DDL process, the precheck returns an error. In this case, wait until the DDL to complete and retry.
+-   (必須) アップストリーム データベースが[オンラインDDL](/dm/feature-online-ddl.md)プロセス ( `ghost`テーブルは作成されているが、 `rename`フェーズはまだ実行されていない) にあるかどうかを確認します。アップストリームがオンライン DDL プロセスにある場合、事前チェックでエラーが返されます。この場合、DDL が完了するまで待ってから再試行してください。
 
-### Check items for full and incremental data migration
+### 完全データ移行と増分データ移行のチェック項目 {#check-items-for-full-and-incremental-data-migration}
 
-For the full and incremental data migration mode (`task-mode: all`), in addition to the [common check items](#common-check-items), the precheck also includes the [full data migration check items](#check-items-for-full-data-migration) and the [incremental data migration check items](#check-items-for-incremental-data-migration).
+完全および増分データ移行モード（ `task-mode: all` ）の場合、事前チェックには[共通チェック項目](#common-check-items)に加えて[完全なデータ移行チェック項目](#check-items-for-full-data-migration)と[増分データ移行チェック項目](#check-items-for-incremental-data-migration)含まれます。
 
-### Ignorable check items
+### 無視できるチェック項目 {#ignorable-check-items}
 
-Prechecks can find potential risks in your environments. It is not recommended to ignore check items. If your data migration task has special needs, you can use the [`ignore-checking-items` configuration item](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) to skip some check items.
+事前チェックにより、環境内の潜在的なリスクを見つけることができます。チェック項目を無視することはお勧めしません。データ移行タスクに特別なニーズがある場合は、 [`ignore-checking-items`設定項目](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)使用して一部のチェック項目をスキップできます。
 
-| Check item  | Description   |
-| :---------- | :------------ |
-| `dump_privilege`         | Checks the dump privilege of the user in the upstream MySQL instance. |
-| `replication_privilege` | Checks the replication privilege of the user in the upstream MySQL instance. |
-| `version`               | Checks the version of the upstream database. |
-| `server_id`             | Checks whether server_id is configured in the upstream database. |
-| `binlog_enable`         | Checks whether binlog is enabled in the upstream database. |
-| `table_schema`          | Checks the compatibility of the table schemas in the upstream MySQL tables. |
-| `schema_of_shard_tables`| Checks the consistency of the table schemas in the upstream MySQL multi-instance shards. |
-| `auto_increment_ID`     | Checks whether the auto-increment primary key conflicts in the upstream MySQL multi-instance shards. |
-|`online_ddl`| Checks whether the upstream is in the process of [online-DDL](/dm/feature-online-ddl.md). |
-| `empty_region` | Checks the number of empty Regions in the downstream database for physical import. |
-| `region_distribution` | Checks the distribution of Regions in the downstream database for physical import. |
-| `downstream_version` | Checks the versions of TiDB, PD, and TiKV in the downstream database. |
-| `free_space` | Checks the free space of the downstream database. |
-| `downstream_mutex_features` | Checks whether the downstream database is running tasks that are incompatible with physical import. |
+| チェック項目                      | 説明                                                            |
+| :-------------------------- | :------------------------------------------------------------ |
+| `dump_privilege`            | アップストリーム MySQL インスタンス内のユーザーのダンプ権限をチェックします。                    |
+| `replication_privilege`     | アップストリーム MySQL インスタンス内のユーザーのレプリケーション権限をチェックします。               |
+| `version`                   | アップストリーム データベースのバージョンを確認します。                                  |
+| `server_id`                 | server_id がアップストリーム データベースで設定されているかどうかを確認します。                 |
+| `binlog_enable`             | アップストリーム データベースでbinlog が有効になっているかどうかを確認します。                   |
+| `table_schema`              | アップストリーム MySQL テーブル内のテーブル スキーマの互換性をチェックします。                   |
+| `schema_of_shard_tables`    | アップストリーム MySQL マルチインスタンス シャード内のテーブル スキーマの一貫性をチェックします。         |
+| `auto_increment_ID`         | アップストリームの MySQL マルチインスタンス シャードで自動インクリメント主キーが競合するかどうかを確認します。   |
+| `online_ddl`                | アップストリームが[オンラインDDL](/dm/feature-online-ddl.md)の処理中かどうかを確認します。 |
+| `empty_region`              | 物理インポートのダウンストリーム データベース内の空の領域の数を確認します。                        |
+| `region_distribution`       | 物理インポートのダウンストリーム データベース内のリージョンの分布を確認します。                      |
+| `downstream_version`        | ダウンストリーム データベース内の TiDB、PD、および TiKV のバージョンを確認します。              |
+| `free_space`                | ダウンストリーム データベースの空き領域を確認します。                                   |
+| `downstream_mutex_features` | ダウンストリーム データベースが物理インポートと互換性のないタスクを実行しているかどうかを確認します。           |
 
-> **Note:**
+> **注記：**
 >
-> More ignorable check items are supported in versions earlier than v6.0. Since v6.0, DM does not allow ignoring some check items related to data safety. For example, if you configure the `binlog_row_image` parameter incorrectly, data might be lost during the replication.
+> 6.0 より前のバージョンでは、より多くの無視可能なチェック項目がサポートされています。6.0 以降、DM では、データの安全性に関連する一部のチェック項目を無視することはできません。たとえば、 `binlog_row_image`パラメータを誤って構成すると、レプリケーション中にデータが失われる可能性があります。
 
-## Configure precheck arguments
+## 事前チェック引数を設定する {#configure-precheck-arguments}
 
-The migration task precheck supports processing in parallel. Even if the number of rows in sharded tables reaches a million level, the precheck can be completed in minutes.
+移行タスクの事前チェックは並列処理をサポートしています。シャード化されたテーブルの行数が 100 万レベルに達した場合でも、事前チェックは数分で完了します。
 
-To specify the number of threads for the precheck, you can configure the `threads` argument of the `mydumpers` field in the migration task configuration file.
+事前チェックのスレッド数を指定するには、移行タスク構成ファイルの`mydumpers`フィールドの`threads`引数を構成できます。
 
 ```yaml
 mydumpers:                           # Configuration arguments of the dump processing unit
@@ -179,6 +180,6 @@ mydumpers:                           # Configuration arguments of the dump proce
 
 ```
 
-> **Note:**
+> **注記：**
 >
-> The value of `threads` determines the number of physical connections between the upstream database and DM. An excessively large `threads` value might increase the load of the upstream. Therefore, you need to set `threads` to a proper value.
+> 値`threads`は、アップストリーム データベースと DM 間の物理接続の数を決定します。値が`threads`に大きすぎると、アップストリームの負荷が増加する可能性があります。したがって、適切な値に`threads`を設定する必要があります。

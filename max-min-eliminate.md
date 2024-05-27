@@ -1,43 +1,39 @@
 ---
 title: Eliminate Max/Min
-summary: Introduce the rules for eliminating Max/Min functions.
+summary: Max/Min関数を排除するためのルールを紹介します。
 ---
 
-# Eliminate Max/Min
+# 最大/最小を排除 {#eliminate-max-min}
 
-When a SQL statement contains `max`/`min` functions, the query optimizer tries to convert the `max`/`min` aggregate functions to the TopN operator by applying the `max`/`min` optimization rule. In this way, TiDB can perform the query more efficiently through indexes.
+SQL 文に`max` `min`関数が含まれている場合、クエリ オプティマイザは`max`最適化ルールを適用して`max` `min`の集計関数を TopN 演算子に変換しようとします。このようにして、TiDB はインデックスを通じてクエリ`min`より効率的に実行できます。
 
-This optimization rule is divided into the following two types according to the number of `max`/`min` functions in the `select` statement:
+この最適化ルールは`min` `select`ステートメント内の`max`関数の数に応じて次の 2 つのタイプに分けられます。
 
-- [The statement with only one `max`/`min` function](#one-maxmin-function)
-- [The statement with multiple `max`/`min` functions](#multiple-maxmin-functions)
+-   [`max` / `min`関数が1つだけのステートメント](#one-maxmin-function)
+-   [複数の`max` / `min`関数を持つステートメント](#multiple-maxmin-functions)
 
-## One `max`/`min` function
+## <code>max</code> / <code>min</code>機能1つ {#one-code-max-code-code-min-code-function}
 
-When a SQL statement meets the following conditions, this rule is applied:
+SQL ステートメントが次の条件を満たす場合、このルールが適用されます。
 
-- The statement contains only one aggregate function, which is `max` or `min`.
-- The aggregate function has no related `group by` clause.
+-   ステートメントには、 `max`または`min`の 1 つの集計関数のみが含まれます。
+-   集計関数には関連する`group by`句がありません。
 
-For example:
-
-{{< copyable "sql" >}}
+例えば：
 
 ```sql
 select max(a) from t
 ```
 
-The optimization rule rewrites the statement as follows:
-
-{{< copyable "sql" >}}
+最適化ルールは、ステートメントを次のように書き換えます。
 
 ```sql
 select max(a) from (select a from t where a is not null order by a desc limit 1) t
 ```
 
-When column `a` has an index, or when column `a` is the prefix of some composite index, with the help of index, the new SQL statement can find the maximum or minimum value by scanning only one row of data. This optimization avoids full table scan.
+列`a`にインデックスがある場合、または列`a`が複合インデックスのプレフィックスである場合、インデックスの助けを借りて、新しい SQL ステートメントは 1 行のデータのみをスキャンして最大値または最小値を見つけることができます。この最適化により、テーブル全体のスキャンが回避されます。
 
-The example statement has the following execution plan:
+例のステートメントには次の実行プランがあります。
 
 ```sql
 mysql> explain select max(a) from t;
@@ -53,25 +49,21 @@ mysql> explain select max(a) from t;
 5 rows in set (0.00 sec)
 ```
 
-## Multiple `max`/`min` functions
+## 複数の<code>max</code> / <code>min</code>関数 {#multiple-code-max-code-code-min-code-functions}
 
-When a SQL statement meets the following conditions, this rule is applied:
+SQL ステートメントが次の条件を満たす場合、このルールが適用されます。
 
-- The statement contains multiple aggregate functions, which are all `max` or `min` functions.
-- None of the aggregate functions has a related `group by` clause.
-- The columns in each `max`/`min` function has indexes to preserve the order.
+-   ステートメントには複数の集計関数が含まれており、それらはすべて`max`または`min`関数です。
+-   集計関数には関連する`group by`句がありません。
+-   各`max` `min`の列には、順序を維持するためのインデックスがあります。
 
-For example:
-
-{{< copyable "sql" >}}
+例えば：
 
 ```sql
 select max(a) - min(a) from t
 ```
 
-The optimization rule first checks whether column `a` has an index to preserve its order. If yes, the SQL statement is rewritten as the Cartesian product of two subqueries:
-
-{{< copyable "sql" >}}
+最適化ルールは、まず列`a`に順序を保持するためのインデックスがあるかどうかを確認します。ある場合、SQL ステートメントは 2 つのサブクエリの直積として書き換えられます。
 
 ```sql
 select max_a - min_a
@@ -80,9 +72,7 @@ from
     (select min(a) as min_a from t) t2
 ```
 
-Through the rewrite, the optimizer can apply the rule for statements with only one `max`/`min` function to the two subqueries respectively. The statement is then rewritten as follows:
-
-{{< copyable "sql" >}}
+書き換えにより、オプティマイザは`max`関数を`min`つだけ持つステートメントのルールを 2 つのサブクエリにそれぞれ適用できます。ステートメントは次のように書き換えられます。
 
 ```sql
 select max_a - min_a
@@ -91,9 +81,9 @@ from
     (select min(a) as min_a from (select a from t where a is not null order by a asc limit 1) t) t2
 ```
 
-Similarly, if column `a` has an index to preserve its order, the optimized execution only scans two rows of data instead of the whole table. However, if column `a` does not have an index to preserve its order, this rule results in two full table scans, but the execution only needs one full table scan if it is not rewritten. Therefore, in such cases, this rule is not applied.
+同様に、列`a`順序を保持するインデックスがある場合、最適化された実行では、テーブル全体ではなく 2 行のデータのみがスキャンされます。ただし、列`a`に順序を保持するインデックスがない場合、このルールにより 2 回のフル テーブル スキャンが発生しますが、書き換えが行われない場合は 1 回のフル テーブル スキャンのみが必要です。したがって、このような場合にはこのルールは適用されません。
 
-The final execution plan is as follows:
+最終的な実行計画は次のようになります。
 
 ```sql
 mysql> explain select max(a)-min(a) from t;

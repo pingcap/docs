@@ -1,61 +1,61 @@
 ---
 title: TiDB Dashboard Cluster Diagnostic Page
-summary: TiDB Dashboard Cluster Diagnostics diagnoses cluster problems and summarizes results into a web page. Access the page through the dashboard or browser. Generate diagnostic and comparison reports for specified time ranges. Historical reports are also available.
+summary: TiDB ダッシュクラスタ診断は、クラスターの問題を診断し、結果を Web ページにまとめます。ダッシュボードまたはブラウザーからページにアクセスします。指定された時間範囲の診断レポートと比較レポートを生成します。履歴レポートも利用できます。
 ---
 
-# TiDB Dashboard Cluster Diagnostics Page
+# TiDB ダッシュボードクラスタ診​​断ページ {#tidb-dashboard-cluster-diagnostics-page}
 
-The cluster diagnostics feature in TiDB Dashboard diagnoses the problems that might exist in a cluster within a specified time range, and summarizes the diagnostic results and the cluster-related load monitoring information into a diagnostic report. This diagnostic report is in the form of a web page. You can browse the page offline and circulate this page link after saving the page from a browser.
+TiDB ダッシュボードのクラスター診断機能は、指定された時間範囲内でクラスターに存在する可能性のある問題を診断し、診断結果とクラスター関連の負荷監視情報を診断レポートにまとめます。この診断レポートは Web ページの形式です。ブラウザーからページを保存した後、オフラインでページを参照したり、このページのリンクを循環させたりすることができます。
 
-> **Note:**
+> **注記：**
 >
-> The cluster diagnostics feature depends on Prometheus deployed in the cluster. For details about how to deploy this monitoring component, see the [TiUP](/tiup/tiup-overview.md) deployment document. If no monitoring component is deployed in the cluster, the generated diagnostic report will indicate a failure.
+> クラスター診断機能は、クラスターにデプロイされた Prometheus に依存します。この監視コンポーネントをデプロイする方法の詳細については、 [TiUP](/tiup/tiup-overview.md)デプロイメント ドキュメントを参照してください。クラスターに監視コンポーネントがデプロイされていない場合、生成された診断レポートには失敗が示されます。
 
-## Access the page
+## ページにアクセスする {#access-the-page}
 
-You can use one of the following methods to access the cluster diagnostics page:
+クラスター診断ページにアクセスするには、次のいずれかの方法を使用できます。
 
-* After logging in to TiDB Dashboard, click **Cluster Diagnostics** in the left navigation menu.
+-   TiDB ダッシュボードにログインしたら、左側のナビゲーション メニューで**「クラスタ診断」**をクリックします。
 
-  ![Access Cluster Diagnostics page](/media/dashboard/dashboard-diagnostics-access-v650.png)
+    ![Access Cluster Diagnostics page](/media/dashboard/dashboard-diagnostics-access-v650.png)
 
-* Visit `http://127.0.0.1:2379/dashboard/#/diagnose` in your browser. Replace `127.0.0.1:2379` with the actual PD address and port number.
+-   ブラウザで`http://127.0.0.1:2379/dashboard/#/diagnose`アクセスします。3 `127.0.0.1:2379`実際の PD アドレスとポート番号に置き換えます。
 
-## Generate diagnostic report
+## 診断レポートを生成する {#generate-diagnostic-report}
 
-To diagnose a cluster within a specified time range and check the cluster load, you can take the following steps to generate a diagnostic report:
+指定された時間範囲内でクラスターを診断し、クラスターの負荷を確認するには、次の手順に従って診断レポートを生成します。
 
-1. Set the **Range Start Time**, such as `2022-05-21 14:40:00`.
-2. Set the **Range Duration**, such as `10 min`.
-3. Click **Start**.
+1.  **範囲開始時刻**を`2022-05-21 14:40:00`などに設定します。
+2.  **範囲期間**を`10 min`などに設定します。
+3.  **[スタート]を**クリックします。
 
 ![Generate diagnostic report](/media/dashboard/dashboard-diagnostics-gen-report-v650.png)
 
-> **Note:**
+> **注記：**
 >
-> It is recommended that the **Range Duration** of the report is between 1 minute and 60 minutes. This **Range Duration** cannot exceed 60 minutes.
+> レポートの**範囲期間は**1 分から 60 分にすることをお勧めします。この**範囲期間は**60 分を超えることはできません。
 
-The preceding steps generate a diagnostic report for the time range from `2022-05-21 14:40:00` to `2022-05-21 14:50:00`. After clicking **Start**, you can see the interface below. **Progress** is the progress bar of the diagnostic report. After the report is generated, click **View Full Report**.
+上記の手順により、 `2022-05-21 14:40:00`から`2022-05-21 14:50:00`までの時間範囲の診断レポートが生成されます。 **[開始]**をクリックすると、以下のインターフェイスが表示されます。 **[進行状況**] は、診断レポートの進行状況バーです。レポートが生成されたら、 **[完全なレポートをビュー] を**クリックします。
 
 ![Report progress](/media/dashboard/dashboard-diagnostics-gen-process-v650.png)
 
-## Generate comparison report
+## 比較レポートを生成する {#generate-comparison-report}
 
-If a system exception occurs at a certain point, for example, QPS jitter or higher latency, a diagnostic report can be generated. Particularly, this report compares the system in the abnormal time range with the system in the normal time range. For example:
+特定の時点でシステム例外が発生した場合、たとえば QPS ジッターやレイテンシーの上昇など、診断レポートを生成できます。特に、このレポートでは、異常な時間範囲のシステムと正常な時間範囲のシステムを比較します。例:
 
-- Abnormal time range: `2022-05-21 14:40:00`-`2022-05-21 14:45:00`. Within this time range, the system is abnormal.
-- Normal time range: `2022-05-21 14:30:00` - `2022-05-21 14:35:00`. Within this time range, the system is normal.
+-   異常時間範囲: `2022-05-21 14:40:00` - `2022-05-21 14:45:00`この時間範囲内では、システムは異常です。
+-   正常な時間範囲: `2022-05-21 14:30:00` - `2022-05-21 14:35:00`この時間範囲内では、システムは正常です。
 
-You can take the following steps to generate a comparison report for the preceding two time ranges:
+前の 2 つの時間範囲の比較レポートを生成するには、次の手順に従います。
 
-1. Set the **Range Start Time**, which is the start time of the range in which the system becomes abnormal, such as `2022-05-21 14:40:00`.
-2. Set the **Range Duration**. Generally, this duration is the duration of system anomalies, such as 5 minutes.
-3. Enable **Compare by Baseline**.
-4. Set the **Baseline Range Start Time**, which is the start time of the range (to be compared with) in which the system is normal, such as `2022-05-21 14:30:00`.
-5. Click **Start**.
+1.  システムが異常になる範囲の**開始時刻である範囲**開始時刻（例： `2022-05-21 14:40:00`を設定します。
+2.  **範囲期間**を設定します。通常、この期間は 5 分などのシステム異常の期間です。
+3.  **ベースラインによる比較を**有効にします。
+4.  **ベースライン範囲開始時刻**を設定します。これは、システムが正常である範囲（比較対象）の開始時刻（ `2022-05-21 14:30:00`など）です。
+5.  **[スタート]を**クリックします。
 
 ![Generate comparison report](/media/dashboard/dashboard-diagnostics-gen-compare-report-v650.png)
 
-Then wait for the report to be generated and click **View Full Report**.
+次に、レポートが生成されるまで待ってから、 **「完全なレポートをビュー」**をクリックします。
 
-In addition, the historical diagnostic report is displayed in the list on the main page of the diagnostic report. You can click to view these historical reports directly.
+また、診断レポートのメインページのリストには、過去の診断レポートが表示されます。クリックすると、これらの過去のレポートを直接表示できます。

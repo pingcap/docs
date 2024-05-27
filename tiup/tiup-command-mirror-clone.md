@@ -1,51 +1,51 @@
 ---
 title: tiup mirror clone
-summary: The `tiup mirror clone` command is used to clone an existing mirror or its components to create a new mirror with a different signature key. The syntax is `tiup mirror clone <target-dir> [global version] [flags]`. Options include cloning the whole mirror, specifying platform and operating system, and matching component versions by prefix.
+summary: `tiup mirror clone` コマンドは、既存のミラーまたはそのコンポーネントを複製して、異なる署名キーを持つ新しいミラーを作成するために使用されます。構文は `tiup mirror clone <target-dir> [global version] [flags]` です。オプションには、ミラー全体の複製、プラットフォームとオペレーティング システムの指定、プレフィックスによるコンポーネントバージョンの一致などがあります。
 ---
 
-# tiup mirror clone
+# tiup mirror clone {#tiup-mirror-clone}
 
-The command `tiup mirror clone` is used to clone an existing mirror or clone some of its components to create a new mirror. The new mirror has the same components as the old one, but uses a different signature key.
+コマンド`tiup mirror clone`は、既存のミラーを複製するか、そのコンポーネントの一部を複製して新しいミラーを作成するために使用されます。新しいミラーは古いミラーと同じコンポーネントを持ちますが、異なる署名キーを使用します。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup mirror clone <target-dir> [global version] [flags]
 ```
 
-- `<target-dir>` is used to set the local path to the cloned mirror. If the path does not exist, TiUP automatically creates one.
-- If `[global version]` is specified, TiUP tries to clone all components of the specified version. If some components do not have the specified version, then TiUP clones its latest version.
+-   `<target-dir>` 、クローンされたミラーへのローカル パスを設定するために使用されます。パスが存在しない場合は、 TiUPによって自動的に作成されます。
+-   `[global version]`が指定された場合、 TiUP は指定されたバージョンのすべてのコンポーネントのクローンを作成しようとします。一部のコンポーネントに指定されたバージョンがない場合、 TiUP はその最新バージョンのクローンを作成します。
 
-## Options
+## オプション {#options}
 
-### -f, --full
+### -f, --full {#f-full}
 
-- Whether to clone the whole mirror. If this option is set, other options becomes ignored and TiUP completely clones all components of all versions from the targeted mirror.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   ミラー全体をクローンするかどうか。このオプションが設定されている場合、他のオプションは無視され、 TiUP は対象のミラーからすべてのバージョンのすべてのコンポーネントを完全にクローンします。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトでは無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないようにします。
 
-### -a, --arch
+### -a, --arch {#a-arch}
 
-- Only clones components that can run on the specified platform.
-- Data type: `STRING`
-- Default: "amd64,arm64"
+-   指定されたプラットフォームで実行できるコンポーネントのみを複製します。
+-   データ型: `STRING`
+-   デフォルト: &quot;amd64,arm64&quot;
 
-### -o, --os
+### -o, --os {#o-os}
 
-- Only clones components that can run on the specified operating system.
-- Data type: `STRING`
-- Default: "linux,darwin"
+-   指定されたオペレーティング システムで実行できるコンポーネントのみを複製します。
+-   データ型: `STRING`
+-   デフォルト: &quot;linux,darwin&quot;
 
-### --prefix
+### --プレフィックス {#prefix}
 
-- Whether to only match the prefix of versions. By default, TiUP downloads a component version when it is strictly matched. If this option is set, TiUP also downloads component versions of which prefixes are matched.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   バージョンのプレフィックスのみを一致させるかどうか。デフォルトでは、 TiUP は厳密に一致するコンポーネントバージョンをダウンロードします。このオプションを設定すると、 TiUP はプレフィックスが一致するコンポーネントバージョンもダウンロードします。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトでは無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないようにします。
 
-### --{component}
+### - {コンポーネント} {#component}
 
-- Specifies the version list of the component to be cloned. Fill component names in `{component}`. You can run [`tiup list --all`](/tiup/tiup-command-list.md) to view available component names.
-- Data type: Strings
-- Default: Null
+-   クローンするコンポーネントのバージョン リストを指定します。 `{component}`にコンポーネント名を入力します。 [`tiup list --all`](/tiup/tiup-command-list.md)を実行すると、使用可能なコンポーネント名が表示されます。
+-   データ型: 文字列
+-   デフォルト: Null
 
-[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPミラーコマンドリスト](/tiup/tiup-command-mirror.md#command-list)

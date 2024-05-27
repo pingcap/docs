@@ -1,78 +1,78 @@
 ---
 title: TiDB Dashboard Instance Profiling - Manual Profiling
-summary: Manual Profiling allows users to collect current performance data on demand for TiDB, TiKV, PD, and TiFlash instances. Experts can analyze resource consumption details like CPU and memory to pinpoint ongoing performance problems. Access the page through TiDB Dashboard or a browser. Start profiling by choosing target instances and modify the duration if needed. View real-time progress and download performance data after profiling is completed. View profiling history for detailed operations.
+summary: 手動プロファイリングを使用すると、ユーザーは TiDB、TiKV、PD、およびTiFlashインスタンスの現在のパフォーマンス データをオンデマンドで収集できます。専門家は、CPU やメモリなどのリソース消費の詳細を分析して、進行中のパフォーマンスの問題を正確に特定できます。TiDB ダッシュボードまたはブラウザからページにアクセスします。ターゲット インスタンスを選択してプロファイリングを開始し、必要に応じて期間を変更します。リアルタイムの進行状況をビュー、プロファイリングが完了したらパフォーマンス データをダウンロードします。詳細な操作については、プロファイリング履歴をビュー。
 ---
 
-# TiDB Dashboard Instance Profiling - Manual Profiling
+# TiDB ダッシュボード インスタンス プロファイリング - 手動プロファイリング {#tidb-dashboard-instance-profiling-manual-profiling}
 
-> **Note:**
+> **注記：**
 >
-> This feature is designed for database experts. For non-expert users, it is recommended to use this feature under the guidance of PingCAP technical supports.
+> この機能はデータベースの専門家向けに設計されています。専門家でないユーザーは、PingCAP テクニカル サポートの指導の下でこの機能を使用することをお勧めします。
 
-Manual Profiling allows users to collect current performance data **on demand** for each TiDB, TiKV, PD and TiFlash instances with a single click. The collected performance data can be visualized as FlameGraph or DAG.
+手動プロファイリングを使用すると、ユーザーは 1 回のクリックで、TiDB、TiKV、PD、およびTiFlashインスタンスごと**に現在のパフォーマンス データをオンデマンドで**収集できます。収集されたパフォーマンス データは、FlameGraph または DAG として視覚化できます。
 
-With these performance data, experts can analyze current resource consumption details like instance's CPU and memory, to help pinpoint sophisticated ongoing performance problems, such as high CPU overhead, high memory usage, and process stalls.
+これらのパフォーマンス データを使用すると、専門家はインスタンスの CPU やメモリなどの現在のリソース消費の詳細を分析し、CPU オーバーヘッドの高さ、メモリ使用量の高さ、プロセスの停止など、進行中の高度なパフォーマンスの問題を正確に特定できます。
 
-After initiates the profiling, TiDB Dashboard collects current performance data for a period of time (30 seconds by default). Therefore this feature can only be used to analyze ongoing problems that the cluster is facing now and has no significant effect on historical problems. If you want to collect and analyze performance data **at any time**, see [Continuous Profiling](/dashboard/continuous-profiling.md).
+プロファイリングを開始すると、TiDB ダッシュボードは一定期間 (デフォルトでは 30 秒) にわたって現在のパフォーマンス データを収集します。したがって、この機能はクラスターが現在直面している進行中の問題を分析するためにのみ使用でき、過去の問題には大きな影響はありません。**いつでも**パフォーマンス データを収集して分析したい場合は、 [継続的なプロファイリング](/dashboard/continuous-profiling.md)を参照してください。
 
-## Supported performance data
+## サポートされているパフォーマンスデータ {#supported-performance-data}
 
-The following performance data are currently supported:
+現在、次のパフォーマンス データがサポートされています。
 
-- CPU: The CPU overhead of each internal function on TiDB, TiKV, PD and TiFlash instances
+-   CPU: TiDB、TiKV、PD、 TiFlashインスタンス上の各内部関数のCPUオーバーヘッド
 
-  > The CPU overhead of TiKV and TiFlash instances is currently not supported in ARM architecture.
+    > TiKV およびTiFlashインスタンスの CPU オーバーヘッドは、現在 ARMアーキテクチャではサポートされていません。
 
-- Heap: The memory consumption of each internal function on TiDB, TiKV, and PD instances
+-   ヒープ: TiDB、TiKV、PDインスタンス上の各内部関数のメモリ消費量
 
-  > Starting from v7.5, TiDB supports the TiKV Heap Profile. The Perl dependency is required in the running environment of TiDB Dashboard. Otherwise an error will occur.
+    > v7.5 以降、TiDB は TiKV ヒープ プロファイルをサポートします。TiDB ダッシュボードの実行環境では Perl 依存関係が必要です。そうでない場合はエラーが発生します。
 
-- Mutex: The mutex contention states on TiDB and PD instances
+-   ミューテックス: TiDBおよびPDインスタンス上のミューテックスの競合状態
 
-- Goroutine: The running state and call stack of all goroutines on TiDB and PD instances
+-   Goroutine: TiDB および PD インスタンス上のすべての Goroutine の実行状態と呼び出しスタック
 
-## Access the page
+## ページにアクセスする {#access-the-page}
 
-You can access the instance profiling page using either of the following methods:
+次のいずれかの方法でインスタンス プロファイリング ページにアクセスできます。
 
-* After logging in to TiDB Dashboard, click **Advanced Debugging** > **Profiling Instances** > **Manual Profiling** in the left navigation menu.
+-   TiDB ダッシュボードにログインした後、左側のナビゲーション メニューで**[高度なデバッグ]** &gt; **[インスタンスのプロファイリング]** &gt; **[手動プロファイリング]**をクリックします。
 
-  ![Access instance profiling page](/media/dashboard/dashboard-profiling-access.png)
+    ![Access instance profiling page](/media/dashboard/dashboard-profiling-access.png)
 
-* Visit <http://127.0.0.1:2379/dashboard/#/instance_profiling> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
+-   ブラウザで[http://127.0.0.1:2379/ダッシュボード/#/インスタンスプロファイリング](http://127.0.0.1:2379/dashboard/#/instance_profiling)アクセスします。3 `127.0.0.1:2379`実際の PD インスタンスのアドレスとポートに置き換えます。
 
-## Start Profiling
+## プロファイリングを開始 {#start-profiling}
 
-In the instance profiling page, choose at least one target instance and click **Start Profiling** to start the instance profiling.
+インスタンス プロファイリング ページで、少なくとも 1 つのターゲット インスタンスを選択し、 **[プロファイリングの開始]**をクリックしてインスタンス プロファイリングを開始します。
 
 ![Start instance profiling](/media/dashboard/dashboard-profiling-start.png)
 
-You can modify the profiling duration before starting the profiling. This duration is determined by the time needed for the profiling, which is 30 seconds by default. The 30-second duration takes 30 seconds to complete.
+プロファイリングを開始する前に、プロファイリング期間を変更できます。この期間は、プロファイリングに必要な時間によって決まります。デフォルトでは 30 秒です。30 秒の期間は、完了するまでに 30 秒かかります。
 
-Manual Profiling cannot be initiated on clusters that have [Continuous Profiling](/dashboard/continuous-profiling.md) enabled. To view the performance data at the current moment, click on the most recent profiling result in the [Continuous Profiling page](/dashboard/continuous-profiling.md#access-the-page).
+[継続的なプロファイリング](/dashboard/continuous-profiling.md)が有効になっているクラスターでは手動プロファイリングを開始できません。現時点でのパフォーマンス データを表示するには、 [継続的プロファイリングページ](/dashboard/continuous-profiling.md#access-the-page)で最新のプロファイリング結果をクリックします。
 
-## View profiling status
+## プロファイリングステータスのビュー {#view-profiling-status}
 
-After a profiling is started, you can view the profiling status and progress in real time.
+プロファイリングが開始されると、プロファイリングのステータスと進行状況をリアルタイムで確認できます。
 
 ![Profiling detail](/media/dashboard/dashboard-profiling-view-progress.png)
 
-The profiling runs in the background. Refreshing or exiting the current page does not stop the profiling task that is running.
+プロファイリングはバックグラウンドで実行されます。現在のページを更新したり終了したりしても、実行中のプロファイリング タスクは停止されません。
 
-## Download performance data
+## パフォーマンスデータをダウンロード {#download-performance-data}
 
-After the profiling of all instances is completed, you can click **Download Profiling Result** in the upper right corner to download all performance data.
+すべてのインスタンスのプロファイリングが完了したら、右上隅の**「プロファイリング結果のダウンロード」を**クリックして、すべてのパフォーマンス データをダウンロードできます。
 
 ![Download profiling result](/media/dashboard/dashboard-profiling-download.png)
 
-You can also click an individual instance in the table to view its profiling result. Alternatively, you can hover on ... to download raw data.
+表内の個々のインスタンスをクリックして、そのプロファイリング結果を表示することもできます。または、... にマウスを移動して生データをダウンロードすることもできます。
 
 ![Single instance result](/media/dashboard/dashboard-profiling-view-single.png)
 
-## View profiling history
+## プロファイリング履歴をビュー {#view-profiling-history}
 
-The on-demand profiling history is listed on the page. Click a row to view details.
+オンデマンド プロファイリング履歴がページにリストされます。行をクリックすると詳細が表示されます。
 
 ![View profiling history](/media/dashboard/dashboard-profiling-history.png)
 
-For detailed operations on the profiling status page, see [View Profiling Status](#view-profiling-status).
+プロファイリングステータスページでの詳細な操作については、 [プロファイリングステータスのビュー](#view-profiling-status)参照してください。

@@ -1,112 +1,112 @@
 ---
 title: Troubleshoot Clusters Using PingCAP Clinic
-summary: PingCAP Clinic Diagnostic Service (PingCAP Clinic) helps troubleshoot TiDB and DM clusters deployed using TiUP. It allows remote troubleshooting and local cluster status checks using Diag client and Clinic Server. Prerequisites include installing Diag, setting an access token, and configuring the region. Troubleshooting remotely involves collecting, viewing, and uploading diagnostic data. Performing a quick check on the cluster status locally involves collecting and diagnosing configuration data. Data upload supports breakpoint upload, and uploaded data is kept on the Clinic Server for a maximum of 180 days.
+summary: PingCAPクリニック診断サービス (PingCAPクリニック) は、 TiUPを使用して展開された TiDB および DM クラスターのトラブルシューティングに役立ちます。Diag クライアントと Clinic Server を使用して、リモート トラブルシューティングとローカル クラスターの状態チェックを実行できます。前提条件には、Diag のインストール、アクセス トークンの設定、およびリージョンの構成が含まれます。リモートでのトラブルシューティングには、診断データの収集、表示、およびアップロードが含まれます。ローカルでのクラスターの状態のクイック チェックには、構成データの収集と診断が含まれます。データ アップロードではブレークポイント アップロードがサポートされ、アップロードされたデータは Clinic Server に最大 180 日間保持されます。
 ---
 
-# Troubleshoot Clusters Using PingCAP Clinic
+# PingCAPクリニックを使用してクラスターをトラブルシューティングする {#troubleshoot-clusters-using-pingcap-clinic}
 
-For TiDB clusters and DM clusters deployed using TiUP, you can use PingCAP Clinic Diagnostic Service (PingCAP Clinic) to troubleshoot cluster problems remotely and perform a quick check on cluster status locally using [Diag client (Diag)](https://github.com/pingcap/diag) and Clinic Server.
+TiUPを使用してデプロイされた TiDB クラスターおよび DM クラスターの場合、 PingCAPクリニック診断サービス (PingCAPクリニック) を使用してクラスターの問題をリモートでトラブルシューティングし、 [診断クライアント (Diag)](https://github.com/pingcap/diag)および Clinic Server を使用してローカルでクラスターの状態をすばやくチェックできます。
 
-> **Note:**
+> **注記：**
 >
-> - This document **only** applies to clusters deployed using TiUP in a self-hosted environment. For clusters deployed using TiDB Operator on Kubernetes, see [PingCAP Clinic for TiDB Operator environments](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide).
+> -   このドキュメントは、セルフホスト環境でTiUPを使用してデプロイされたクラスターに**のみ**適用されます。Kubernetes 上のTiDB Operatorを使用してデプロイされたクラスターについては、 [TiDB Operator環境向けPingCAPクリニック](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)を参照してください。
 >
-> - PingCAP Clinic **does not support** collecting data from clusters deployed using TiDB Ansible.
+> -   PingCAPクリニック は、 TiDB Ansible を使用してデプロイされたクラスターからのデータ収集を**サポートしていません**。
 
-## User scenarios
+## ユーザーシナリオ {#user-scenarios}
 
-- [Troubleshoot cluster problems remotely](#troubleshoot-cluster-problems-remotely)
+-   [クラスターの問題をリモートでトラブルシューティングする](#troubleshoot-cluster-problems-remotely)
 
-    - When your cluster has some problems, if you need to [get support](/support.md) from PingCAP, you can perform the following operations to facilitate the remote troubleshooting: collect diagnostic data with Diag, upload the collected data to the Clinic Server, and provide the data access link to the technical support staff.
-    - When your cluster has some problems, if you cannot analyze the problems immediately, you can use Diag to collect and save the data for later analysis.
+    -   クラスターに問題があり、PingCAP から[支持を得ます](/support.md)を取得する必要がある場合は、Diag を使用して診断データを収集し、収集したデータを Clinic Server にアップロードし、データ アクセス リンクをテクニカル サポート スタッフに提供するという操作を実行して、リモート トラブルシューティングを容易にすることができます。
+    -   クラスターに何らかの問題があり、すぐに問題を分析できない場合は、Diag を使用してデータを収集し、後で分析できるように保存できます。
 
-- [Perform a quick check on the cluster status locally](#perform-a-quick-check-on-the-cluster-status-locally)
+-   [ローカルでクラスターのステータスを素早くチェックする](#perform-a-quick-check-on-the-cluster-status-locally)
 
-    Even if your cluster is running stably for now, it is necessary to periodically check the cluster to detect potential stability risks. You can identify potential health risks of a cluster using the local quick check feature provided by PingCAP Clinic. The local check only checks configuration. To check more items, such as metrics and logs, it is recommended to upload the diagnostic data to the Clinic Server and use the Health Report feature.
+    現時点ではクラスターが安定して動作している場合でも、潜在的な安定性リスクを検出するために、クラスターを定期的にチェックする必要があります。PingCAP PingCAPクリニックが提供するローカル クイック チェック機能を使用して、クラスターの潜在的なヘルス リスクを特定できます。ローカル チェックでは構成のみがチェックされます。メトリックやログなどのより多くの項目をチェックするには、診断データを Clinic Server にアップロードし、ヘルス レポート機能を使用することをお勧めします。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-Before using PingCAP Clinic, you need to install Diag (a component to collect data provided by PingCAP Clinic) and prepare the environment to upload data.
+PingCAPクリニックを使用する前に、 Diag ( PingCAPクリニックが提供するデータ収集コンポーネント) をインストールし、データをアップロードする環境を準備する必要があります。
 
-1. Install Diag.
+1.  Diagをインストールします。
 
-   - If you have installed TiUP on your control machine, run the following command to install Diag:
+    -   制御マシンにTiUP がインストールされている場合は、次のコマンドを実行して Diag をインストールします。
 
         ```bash
         tiup install diag
         ```
 
-    - If you have installed Diag, you can use the following command to upgrade Diag to the latest version:
+    -   Diag をインストールしている場合は、次のコマンドを使用して Diag を最新バージョンにアップグレードできます。
 
         ```bash
         tiup update diag
         ```
 
-    > **Note:**
+    > **注記：**
     >
-    > - For clusters without an internet connection, you need to deploy Diag offline. For details, refer to [Deploy TiUP offline: Method 2](/production-deployment-using-tiup.md#deploy-tiup-offline).
-    > - Diag is **only** provided in the TiDB Server offline mirror package of v5.4.0 or later.
+    > -   インターネットに接続されていないクラスターの場合は、Diag をオフラインで展開する必要があります。詳細については、 [TiUP をオフラインでデプロイ: 方法 2](/production-deployment-using-tiup.md#deploy-tiup-offline)を参照してください。
+    > -   Diag は、TiDB Server オフライン ミラー パッケージ v5.4.0 以降で**のみ**提供されます。
 
-2. Get and set an access token (token) to upload data.
+2.  データをアップロードするためのアクセストークン（トークン）を取得して設定します。
 
-    When uploading collected data through Diag, you need a token for user authentication. If you already set a token Diag, you can reuse the token and skip this step.
+    Diag を通じて収集したデータをアップロードする場合、ユーザー認証用のトークンが必要です。すでにトークン Diag を設定している場合は、そのトークンを再利用してこの手順をスキップできます。
 
-    To get a token, perform the following steps:
+    トークンを取得するには、次の手順を実行します。
 
-    - Log in to the Clinic Server.
+    -   クリニックサーバーにログインします。
 
         <SimpleTab groupId="clinicServer">
-        <div label="Clinic Server for international users" value="clinic-us">
+          <div label="Clinic Server for international users" value="clinic-us">
 
-        [Clinic Server for international users](https://clinic.pingcap.com): Data is stored in AWS in US.
+        [海外ユーザー向けクリニックサーバー](https://clinic.pingcap.com) : データは米国の AWS に保存されます。
 
         </div>
-        <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
+          <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
 
-        [Clinic Server for users in the Chinese mainland](https://clinic.pingcap.com.cn): Data is stored in AWS in China (Beijing) regions.
+        [中国本土のユーザー向けクリニックサーバー](https://clinic.pingcap.com.cn) : データは中国 (北京) リージョンの AWS に保存されます。
 
         </div>
 
         </SimpleTab>
 
-    - Click the icon in the lower-right corner of the Cluster page, select **Get Access Token For Diag Tool**, and click **+** in the pop-up window. Make sure that you have copied and saved the token that is displayed.
+    -   クラスタページの右下隅にあるアイコンをクリックし、**診断ツールのアクセス トークンの取得を**選択して、ポップアップ ウィンドウで**+**をクリックします。表示されるトークンをコピーして保存したことを確認します。
 
         ![Get the Token](/media/clinic-get-token.png)
 
-    > **Note:**
+    > **注記：**
     >
-    > - When accessing Clinic Server for the first time, before getting a token, you need to prepare the environment by referring to [Quick Start with PingCAP Clinic](/clinic/quick-start-with-clinic.md#prerequisites).
-    > - For data security, TiDB only displays the token upon the token creation. If you have lost the token, delete the old token and create a new one.
-    > - A token is only used for uploading data.
+    > -   Clinic Serverに初めてアクセスする場合は、トークンを取得する前に、 [PingCAPクリニックのクイックスタート](/clinic/quick-start-with-clinic.md#prerequisites)を参考に環境を準備する必要があります。
+    > -   データ セキュリティのため、TiDB はトークンの作成時にのみトークンを表示します。トークンを紛失した場合は、古いトークンを削除して新しいトークンを作成してください。
+    > -   トークンはデータのアップロードにのみ使用されます。
 
-    - Then, set the token in Diag. For example:
+    -   次に、Diag でトークンを設定します。例:
 
         ```bash
         tiup diag config clinic.token ${token-value}
         ```
 
-3. Set the `region` in Diag.
+3.  Diag に`region`設定します。
 
-    `region` determines the encryption certificate used for packing data and the target service when uploading the data. For example:
+    `region` 、データをアップロードするときにデータのパック化に使用される暗号化証明書とターゲット サービスを決定します。例:
 
-    > **Note:**
+    > **注記：**
     >
-    > - Diag v0.9.0 and later versions support setting `region`.
-    > - For versions earlier than Diag v0.9.0, data is uploaded to Clinic Server in the Chinese region by default. To set `region` in these versions, run the `tiup update diag` command to upgrade Diag to the latest version and then set `region` in Diag.
+    > -   Diag v0.9.0 以降のバージョンでは設定`region`サポートされます。
+    > -   Diag v0.9.0 より前のバージョンの場合、データはデフォルトで中国地域の Clinic Server にアップロードされます。これらのバージョンで`region`を設定するには、 `tiup update diag`コマンドを実行して Diag を最新バージョンにアップグレードしてから、Diag で`region`を設定します。
 
     <SimpleTab groupId="clinicServer">
-    <div label="Clinic Server for international users" value="clinic-us">
+     <div label="Clinic Server for international users" value="clinic-us">
 
-    When using Clinic Server for international users, set `region` to `US` using the following command:
+    海外ユーザー向けに Clinic Server を使用する場合は、次のコマンドを使用して`region`から`US`に設定します。
 
     ```bash
     tiup diag config clinic.region US
     ```
 
     </div>
-    <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
+     <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
 
-    When using Clinic Server for users in the Chinese mainland, set `region` to `CN` using the following command:
+    中国本土のユーザー向けに Clinic Server を使用する場合は、次のコマンドを使用して`region`から`CN`に設定します。
 
     ```bash
     tiup diag config clinic.region CN
@@ -116,66 +116,66 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
 
     </SimpleTab>
 
-4. (Optional) Enable log redaction.
+4.  (オプション) ログ編集を有効にします。
 
-    When TiDB provides detailed log information, it might print sensitive information (for example, user data) in the log. If you want to avoid leaking sensitive information in the local log and Clinic Server, you can enable log redaction in the TiDB side. For more information, see [log redaction](/log-redaction.md#log-redaction-in-tidb-side).
+    TiDB が詳細なログ情報を提供する場合、ログに機密情報 (ユーザーデータなど) が出力されることがあります。ローカル ログと Clinic Server に機密情報が漏洩するのを防ぐには、TiDB 側でログ編集を有効にします。詳細については、 [ログ編集](/log-redaction.md#log-redaction-in-tidb-side)参照してください。
 
-## Troubleshoot cluster problems remotely
+## クラスターの問題をリモートでトラブルシューティングする {#troubleshoot-cluster-problems-remotely}
 
-You can use Diag to quickly collect diagnostic data from TiDB clusters and DM clusters, including monitoring data and configuration information.
+Diag を使用すると、監視データや構成情報などの診断データを TiDB クラスターおよび DM クラスターから迅速に収集できます。
 
-### Step 1. Check the data to be collected
+### ステップ1. 収集するデータを確認する {#step-1-check-the-data-to-be-collected}
 
-For a full list of data that can be collected by Diag, see [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md).
+Diag で収集できるデータの完全なリストについては、 [PingCAPクリニック診断データ](/clinic/clinic-data-instruction-for-tiup.md)参照してください。
 
-To improve the efficiency of the later diagnosis, you are recommended to collect full diagnostic data including monitoring data and configuration information. For details, see [Collect data from clusters](#step-2-collect-data).
+後の診断の効率を高めるために、監視データや構成情報を含む完全な診断データを収集することをお勧めします。詳細については、 [クラスターからデータを収集する](#step-2-collect-data)を参照してください。
 
-### Step 2. Collect data
+### ステップ2. データを収集する {#step-2-collect-data}
 
-With Diag, you can collect data from the TiDB clusters and the DM clusters deployed using TiUP.
+Diag を使用すると、 TiUPを使用してデプロイされた TiDB クラスターと DM クラスターからデータを収集できます。
 
-1. Run the data collection command of Diag.
+1.  Diag のデータ収集コマンドを実行します。
 
-    For example, to collect the diagnostic data from 4 hours ago to 2 hours ago based on the current time, run the following command:
+    たとえば、現在の時刻に基づいて 4 時間前から 2 時間前までの診断データを収集するには、次のコマンドを実行します。
 
     <SimpleTab>
-    <div label="TiDB Cluster">
+     <div label="TiDB Cluster">
 
     ```bash
     tiup diag collect ${cluster-name} -f="-4h" -t="-2h"
     ```
 
     </div>
-    <div label="DM Cluster">
+     <div label="DM Cluster">
 
     ```bash
     tiup diag collectdm ${dm-cluster-name} -f="-4h" -t="-2h"
     ```
 
     </div>
-    </SimpleTab>
+     </SimpleTab>
 
-    Descriptions of the parameters for data collection:
+    データ収集のパラメータの説明:
 
-    - `-f/--from`: specifies the start time of the data collection. If you do not specify this parameter, the default start time is 2 hours before the current time. To modify the time zone, use the `-f="12:30 +0800"` syntax. If you do not specify the time zone information in this parameter, such as `+0800`, the time zone is UTC by default.
-    - `-t/--to`: specifies the end time of the data collection. If you do not specify this parameter, the default end time is the current moment. To modify the time zone, use the `-f="12:30 +0800"` syntax. If you do not specify the time zone information in this parameter, such as `+0800`, the time zone is UTC by default.
+    -   `-f/--from` : データ収集の開始時刻を指定します。このパラメータを指定しない場合、デフォルトの開始時刻は現在の時刻の 2 時間前になります。タイム ゾーンを変更するには、 `-f="12:30 +0800"`構文を使用します。このパラメータでタイム ゾーン情報を指定しない場合 ( `+0800`など)、タイム ゾーンはデフォルトで UTC になります。
+    -   `-t/--to` : データ収集の終了時刻を指定します。このパラメータを指定しない場合、デフォルトの終了時刻は現在時刻になります。タイムゾーンを変更するには、 `-f="12:30 +0800"`構文を使用します。このパラメータでタイムゾーン情報を指定しない場合 ( `+0800`など)、タイムゾーンはデフォルトで UTC になります。
 
-    Parameter usage tips:
+    パラメータの使用に関するヒント:
 
-    In addition to specifying the data collection time, you can use Diag to specify more parameters. To get all parameters, run the `tiup diag collect -h` or `tiup diag collectdm -h` command.
+    データ収集時間を指定することに加えて、Diag を使用してさらに多くのパラメータを指定できます。すべてのパラメータを取得するには、 `tiup diag collect -h`または`tiup diag collectdm -h`コマンドを実行します。
 
-    > **Note:**
+    > **注記：**
     >
-    > - Diag does not collect system variables data (db_vars) by default. To collect this data, you need to additionally provide a username and password that can access the database. Note that the reading access to system variables should be enabled in this database.
-    > - Diag does not collect performance data (`perf`) and debug data (`debug`) by default.
-    > - To collect full diagnostic data including system variables, use the command `tiup diag collect <cluster-name> --include="system,monitor,log,config,db_vars,perf,debug"`.
+    > -   Diag は、デフォルトではシステム変数データ (db_vars) を収集しません。このデータを収集するには、データベースにアクセスできるユーザー名とパスワードを追加で提供する必要があります。このデータベースでは、システム変数への読み取りアクセスが有効になっている必要があることに注意してください。
+    > -   Diagはデフォルトではパフォーマンスデータ（ `perf` ）とデバッグデータ（ `debug` ）を収集しません。
+    > -   システム変数を含む完全な診断データを収集するには、コマンド`tiup diag collect <cluster-name> --include="system,monitor,log,config,db_vars,perf,debug"`を使用します。
 
-    - `-l`: the bandwidth limit for transferring files, the unit is Kbit/s, and the default value is `100000` (the `-l` parameter of scp).
-    - `-N/--node`: only collects data from a specified node. The format is `ip:port`.
-    - `--include`: only collects specific types of data. The optional values are `system`, `monitor`, `log`, `config`, and `db_vars`. To include two or more types, you can use `,` as a separator between the types.
-    - `--exclude`: does not collect specific types of data. The optional values are `system`, `monitor`, `log`, `config`, and `db_vars`. To exclude two or more types, you can use `,` as a separator between the types.
+    -   `-l` : ファイル転送の帯域幅制限。単位は Kbit/s、デフォルト値は`100000` (scp の`-l`のパラメータ) です。
+    -   `-N/--node` : 指定されたノードからのみデータを収集します。形式は`ip:port`です。
+    -   `--include` : 特定の種類のデータのみを収集します。オプションの値は`system` 、 `monitor` 、 `log` 、 `config` 、および`db_vars`です。2 つ以上の種類を含めるには、種類間の区切りとして`,`を使用できます。
+    -   `--exclude` : 特定の種類のデータは収集しません。オプションの値は`system` 、 `monitor` 、 `log` 、 `config` 、および`db_vars`です。2 つ以上の種類を除外するには、種類間の区切りとして`,`を使用できます。
 
-    After you run the command, Diag does not start collecting data immediately. Instead, Diag provides the estimated data size and the target data storage path in the output for you to confirm whether to continue. For example:
+    コマンドを実行しても、Diag はすぐにデータの収集を開始しません。代わりに、Diag は推定データ サイズとターゲット データstorageパスを出力に表示し、続行するかどうかを確認します。例:
 
     ```bash
     Estimated size of data to collect:
@@ -190,80 +190,78 @@ With Diag, you can collect data from the TiDB clusters and the DM clusters deplo
     Do you want to continue? [y/N]: (default=N)
     ```
 
-2. Enter `Y` to confirm that you want to start collecting data.
+2.  データの収集を開始することを確認するには、 `Y`入力します。
 
-    Collecting data takes a certain amount of time. The time varies according to the volume of data to be collected. For example, in a test environment, collecting 1 GB of data takes about 10 minutes.
+    データの収集には一定の時間がかかります。収集するデータの量に応じて時間は異なります。たとえば、テスト環境では 1 GB のデータの収集に約 10 分かかります。
 
-    After the collection is complete, Diag provides the folder path where the collected data is located. For example:
+    収集が完了すると、Diag は収集されたデータが保存されているフォルダー パスを提供します。例:
 
     ```bash
     Collected data are stored in /home/user/diag-fNTnz5MGhr6
     ```
 
-### Step 3. View data locally (optional)
+### ステップ 3. データをローカルでビュー(オプション) {#step-3-view-data-locally-optional}
 
-The collected data is stored in separate subdirectories based on its data source. These subdirectories are named after machine names and port numbers. The storage locations of the configuration, logs, and other files of each node are the same as their relative storage paths in the real server of your TiDB cluster:
+収集されたデータは、データ ソースに基づいて個別のサブディレクトリに保存されます。これらのサブディレクトリの名前は、マシン名とポート番号に基づいて付けられます。各ノードの構成、ログ、およびその他のファイルのstorage場所は、TiDB クラスターの実サーバー内の相対的なstorageパスと同じです。
 
-- Basic information of the system and hardware: in `insight.json`
-- Contents in the system `/etc/security/limits.conf`: in `limits.conf`
-- List of kernel parameters: in `sysctl.conf`
-- Kernel logs: in `dmesg.log`
-- Network connection during data collection: in `ss.txt`
-- Configuration data: in the `config.json` directory of each node
-- Meta-information for the cluster itself: in `meta.yaml` (this file is located at the top level of the directory that stores collected data)
-- Monitoring data: in the `/monitor` file directory. The monitoring data is compressed by default and cannot be viewed directly. To directly view the JSON files with monitoring data, disable compression with the `--compress-metrics=false` parameter when collecting data.
+-   システムとハードウェアの基本情報： `insight.json`
+-   システム内のコンテンツ`/etc/security/limits.conf` : `limits.conf`
+-   カーネルパラメータのリスト: `sysctl.conf`
+-   カーネルログ: `dmesg.log`
+-   データ収集中のネットワーク接続: `ss.txt`
+-   コンフィグレーションデータ: 各ノードの`config.json`ディレクトリ内
+-   クラスター自体のメタ情報: in `meta.yaml` (このファイルは収集されたデータを保存するディレクトリの最上位にあります)
+-   監視データ: `/monitor`ファイル ディレクトリ内。監視データはデフォルトで圧縮されており、直接表示できません。監視データを含む JSON ファイルを直接表示するには、データ収集時に`--compress-metrics=false`パラメータを使用して圧縮を無効にします。
 
-### Step 4. Upload data
+### ステップ4. データをアップロードする {#step-4-upload-data}
 
-To provide cluster diagnostic data to PingCAP technical support staff, you need to upload the data to the Clinic Server first, and then send the obtained data access link to the staff. The Clinic Server is a cloud service that stores and shares diagnostic data securely.
+PingCAP テクニカル サポート スタッフにクラスター診断データを提供するには、まずデータを Clinic Server にアップロードし、取得したデータ アクセス リンクをスタッフに送信する必要があります。Clinic Server は、診断データを安全に保存して共有するクラウド サービスです。
 
-Depending on the network connection of the cluster, you can choose one of the following methods to upload data:
+クラスターのネットワーク接続に応じて、次のいずれかの方法を選択してデータをアップロードできます。
 
-- Methods 1: if the network where the cluster is located can access the internet, you can [directly upload data using the upload command](#method-1-upload-directly).
-- Methods 2: if the network where the cluster is located cannot access the internet, you need to [pack the data and then upload it](#method-2-pack-and-upload-data).
+-   方法 1: クラスターが配置されているネットワークがインターネットにアクセスできる場合は、 [アップロードコマンドを使用してデータを直接アップロードする](#method-1-upload-directly)実行できます。
+-   方法 2: クラスターが配置されているネットワークがインターネットにアクセスできない場合は、 [データをパックしてアップロードする](#method-2-pack-and-upload-data)実行する必要があります。
 
-> **Note:**
+> **注記：**
 >
-> If you did not set a token or `region` in Diag before uploading data, Diag reports the upload failure and reminds you to set a token or `region`. To set a token, see [the second step in Prerequisites](#prerequisites).
+> データをアップロードする前に Diag でトークンまたは`region`設定していない場合、 Diag はアップロードの失敗を報告し、トークンまたは`region`設定するように通知します。トークンを設定するには、 [前提条件の2番目のステップ](#prerequisites)参照してください。
 
-#### Method 1. Upload directly
+#### 方法1. 直接アップロードする {#method-1-upload-directly}
 
-If the network where the cluster is located can access the internet, you can directly upload the folder with collected data obtained in [Step 2: Collect data](#step-2-collect-data) using the following command:
-
-{{< copyable "shell-regular" >}}
+クラスターが配置されているネットワークがインターネットにアクセスできる場合は、次のコマンドを使用して、 [ステップ2: データを収集する](#step-2-collect-data)で取得した収集データを含むフォルダーを直接アップロードできます。
 
 ```bash
 tiup diag upload
 ```
 
-After the upload is completed, the `Download URL` is displayed in the output. You can open the link of `Download URL` to see the uploaded data or send the link to the PingCAP technical support staff you contacted before.
+アップロードが完了すると、出力に`Download URL`表示されます。3 `Download URL`リンクを開いてアップロードされたデータを確認するか、以前に連絡した PingCAP テクニカル サポート スタッフにリンクを送信することができます。
 
-#### Method 2. Pack and upload data
+#### 方法2. データをパックしてアップロードする {#method-2-pack-and-upload-data}
 
-If the network where your cluster is located cannot access the internet, you need to pack the data on your intranet and upload the data package to the Clinic Server using a device with internet access. The detailed operations are as follows:
+クラスターが配置されているネットワークがインターネットにアクセスできない場合は、イントラネット上でデータをパックし、インターネットにアクセスできるデバイスを使用してデータ パッケージを Clinic Server にアップロードする必要があります。詳細な操作は次のとおりです。
 
-1. Pack the collected data obtained in [Step 2. Collect data](#step-2-collect-data) by running the following command:
+1.  以下のコマンドを実行して、 [ステップ2. データを収集する](#step-2-collect-data)で取得した収集データをパックします。
 
     ```bash
     tiup diag package ${filepath}
     ```
 
-    During packaging, Diag encrypts and compresses the data at the same time. In the test environment, 800 MB of data was compressed to 57 MB. The following is an example output:
+    パッケージ化中に、Diag はデータの暗号化と圧縮を同時に行います。テスト環境では、800 MB のデータが 57 MB に圧縮されました。出力例を次に示します。
 
     ```bash
     Starting component `diag`: /root/.tiup/components/diag/v0.7.0/diag package diag-fNTnz5MGhr6
     packaged data set saved to /home/user/diag-fNTnz5MGhr6.diag
     ```
 
-    After the packaging is complete, the data is packaged to the `.diag` format. The `.diag` file can only be decrypted and viewed after being uploaded to the Clinic Server. If you want to directly forward the collected data instead of uploading it to the Clinic Server, you can compress the data by your own method and forward it.
+    パッケージングが完了すると、データは`.diag`形式にパッケージ化されます。 `.diag`ファイルは、クリニックサーバーにアップロードされた後にのみ復号化して表示できます。 収集したデータをクリニックサーバーにアップロードせずに直接転送する場合は、独自の方法でデータを圧縮して転送できます。
 
-2. From a machine with internet access, upload the compressed data package:
+2.  インターネットにアクセスできるマシンから、圧縮されたデータ パッケージをアップロードします。
 
     ```bash
     tiup diag upload ${filepath}
     ```
 
-    The following is an example output:
+    出力例は次のとおりです。
 
     ```bash
     [root@Copy-of-VM-EE-CentOS76-v1 user]# tiup diag upload /home/user/diag-fNTnz5MGhr6
@@ -273,31 +271,31 @@ If the network where your cluster is located cannot access the internet, you nee
     Download URL: "https://clinic.pingcap.com.cn/portal/#/orgs/4/clusters/XXXX"
     ```
 
-3. After the upload is complete, you can open the link of `Download URL` to see the uploaded data or send the link to the PingCAP technical support staff you contacted before.
+3.  アップロードが完了したら、 `Download URL`のリンクを開いてアップロードされたデータを確認するか、以前に連絡した PingCAP テクニカル サポート スタッフにリンクを送信することができます。
 
-## Perform a quick check on the cluster status locally
+## ローカルでクラスターのステータスを素早くチェックする {#perform-a-quick-check-on-the-cluster-status-locally}
 
-You can have a quick check on the cluster status locally using Diag. Even if your cluster is running stably for now, it is necessary to periodically check the cluster to detect potential stability risks. You can identify potential health risks of a cluster using the local quick check feature provided by PingCAP Clinic. The local check only checks configuration. To check more items, such as metrics and logs, it is recommended to upload the diagnostic data to the Clinic Server and use the Health Report feature.
+Diag を使用すると、ローカルでクラスターの状態をすばやく確認できます。クラスターが今のところ安定して動作している場合でも、潜在的な安定性リスクを検出するために、クラスターを定期的にチェックする必要があります。PingCAP PingCAPクリニックが提供するローカル クイック チェック機能を使用すると、クラスターの潜在的なヘルス リスクを特定できます。ローカル チェックでは構成のみがチェックされます。メトリックやログなどのより多くの項目をチェックするには、診断データを Clinic Server にアップロードし、ヘルス レポート機能を使用することをお勧めします。
 
-1. Collect configuration data:
+1.  構成データを収集します。
 
     ```bash
     tiup diag collect ${cluster-name} --include="config"
     ```
 
-    The data of configuration files are relatively small. After the collection, the collected data is stored in the current path by default. In the test environment, for a cluster with 18 nodes, the data size of configuration files is less than 10 KB.
+    設定ファイルのデータは比較的小さいです。収集後、収集されたデータはデフォルトで現在のパスに保存されます。テスト環境では、18 ノードのクラスターの場合、設定ファイルのデータ サイズは 10 KB 未満です。
 
-2. Diagnose configuration data:
+2.  構成データを診断します:
 
     ```bash
     tiup diag check ${subdir-in-output-data}
     ```
 
-    `${subdir-in-output-data}` in the above command is the path that stores the collected data, and this path has the `meta.yaml` file.
+    上記コマンドの`${subdir-in-output-data}`収集したデータを保存するパスであり、このパスには`meta.yaml`ファイルがあります。
 
-3. View the diagnostic result:
+3.  診断結果をビュー:
 
-    The diagnostic result is returned on the command line. For example:
+    診断結果はコマンド ラインで返されます。例:
 
     ```bash
     Starting component `diag`: /root/.tiup/components/diag/v0.7.0/diag check diag-fNTnz5MGhr6
@@ -343,18 +341,18 @@ You can have a quick check on the cluster status locally using Diag. Even if you
     Result report and record are saved at diag-fNTnz5MGhr6/report-220125153215
     ```
 
-    In the last section of the diagnostic result (under `#### Path to save the diagnostic result file` in the above example output), for each configuration potential risk found, Diag provides a corresponding knowledge base link with detailed configuration suggestions. In the example above, the relevant link is `https://s.tidb.io/msmo6awg`.
+    診断結果の最後のセクション (上記の出力例の`#### Path to save the diagnostic result file`の下) では、検出された構成の潜在的なリスクごとに、詳細な構成の提案を含む対応するナレッジ ベース リンクが Diag によって提供されます。上記の例では、関連するリンクは`https://s.tidb.io/msmo6awg`です。
 
-## FAQ
+## FAQ {#faq}
 
-1. If the data upload fails, can I re-upload it?
+1.  データのアップロードに失敗した場合、再アップロードできますか?
 
-    Yes. Data upload supports breakpoint upload. If the upload fails, you can upload it again directly.
+    はい。データのアップロードはブレークポイントアップロードをサポートしています。アップロードが失敗した場合は、直接再度アップロードできます。
 
-2. After uploading data, I cannot open the returned data access link. What should I do?
+2.  データをアップロードした後、返されたデータ アクセス リンクを開くことができません。どうすればよいでしょうか?
 
-    Log in to Clinic Server first. If you still cannot open the link after login success, check whether you have access to data. If not, contact the data owner for permission. After getting the permission, log in to Clinic Server and open the link again.
+    まずクリニック サーバーにログインしてください。ログインに成功してもリンクを開けない場合は、データにアクセスできるかどうかを確認してください。アクセスできない場合は、データ所有者に連絡して許可を得てください。許可を得たら、クリニック サーバーにログインしてリンクを再度開いてください。
 
-3. How long will the uploaded data be kept on the Clinic Server?
+3.  アップロードされたデータはクリニックサーバーにどのくらいの期間保存されますか?
 
-    The longest time is 180 days. You can delete the data you uploaded on the Clinic Server page at any time.
+    最長180日間です。クリニックサーバーページでアップロードしたデータはいつでも削除できます。

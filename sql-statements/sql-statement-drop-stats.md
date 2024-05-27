@@ -1,13 +1,13 @@
 ---
 title: DROP STATS
-summary: An overview of the usage of DROP STATS for the TiDB database.
+summary: TiDB データベースの DROP STATS の使用法の概要。
 ---
 
-# DROP STATS
+# ドロップ統計 {#drop-stats}
 
-The `DROP STATS` statement is used to delete the statistics of the selected table from the selected database.
+`DROP STATS`ステートメントは、選択したデータベースから選択したテーブルの統計を削除するために使用されます。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 DropStatsStmt ::=
@@ -17,81 +17,67 @@ TableName ::=
     Identifier ('.' Identifier)?
 ```
 
-## Usage
+## 使用法 {#usage}
 
-The following statement deletes all statistics of `TableName`. If a partitioned table is specified, this statement deletes statistics of all partitions in this table as well as [GlobalStats generated in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
+次の文は、 `TableName`のすべての統計情報を削除します。パーティションテーブルが指定されている場合、この文は、このテーブル内のすべてのパーティションの統計情報と[動的プルーニングモードで生成されたGlobalStats](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)統計情報を削除します。
 
 ```sql
 DROP STATS TableName
 ```
 
-```
-Query OK, 0 rows affected (0.00 sec)
-```
+    Query OK, 0 rows affected (0.00 sec)
 
-The following statement only deletes statistics of the specified partitions in `PartitionNameList`.
+次のステートメントは、 `PartitionNameList`内の指定されたパーティションの統計のみを削除します。
 
 ```sql
 DROP STATS TableName PARTITION PartitionNameList;
 ```
 
-```
-Query OK, 0 rows affected (0.00 sec)
-```
+    Query OK, 0 rows affected (0.00 sec)
 
-The following statement only deletes GlobalStats generated in dynamic pruning mode of the specified table.
+次のステートメントは、指定されたテーブルの動的プルーニング モードで生成された GlobalStats のみを削除します。
 
 ```sql
 DROP STATS TableName GLOBAL;
 ```
 
-```
-Query OK, 0 rows affected (0.00 sec)
-```
+    Query OK, 0 rows affected (0.00 sec)
 
-## Examples
+## 例 {#examples}
 
 ```sql
 CREATE TABLE t(a INT);
 ```
 
-```
-Query OK, 0 rows affected (0.01 sec)
-```
+    Query OK, 0 rows affected (0.01 sec)
 
 ```sql
 SHOW STATS_META WHERE db_name='test' and table_name='t';
 ```
 
-```
-+---------+------------+----------------+---------------------+--------------+-----------+
-| Db_name | Table_name | Partition_name | Update_time         | Modify_count | Row_count |
-+---------+------------+----------------+---------------------+--------------+-----------+
-| test    | t          |                | 2020-05-25 20:34:33 |            0 |         0 |
-+---------+------------+----------------+---------------------+--------------+-----------+
-1 row in set (0.00 sec)
-```
+    +---------+------------+----------------+---------------------+--------------+-----------+
+    | Db_name | Table_name | Partition_name | Update_time         | Modify_count | Row_count |
+    +---------+------------+----------------+---------------------+--------------+-----------+
+    | test    | t          |                | 2020-05-25 20:34:33 |            0 |         0 |
+    +---------+------------+----------------+---------------------+--------------+-----------+
+    1 row in set (0.00 sec)
 
 ```sql
 DROP STATS t;
 ```
 
-```
-Query OK, 0 rows affected (0.00 sec)
-```
+    Query OK, 0 rows affected (0.00 sec)
 
 ```sql
 SHOW STATS_META WHERE db_name='test' and table_name='t';
 ```
 
-```
-Empty set (0.00 sec)
-```
+    Empty set (0.00 sec)
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## 参照 {#see-also}
 
-* [Introduction to Statistics](/statistics.md)
+-   [統計入門](/statistics.md)

@@ -1,37 +1,35 @@
 ---
 title: Best Practices for Three-Node Hybrid Deployment
-summary: TiDB cluster can be deployed in a cost-effective way on three machines. Best practices for this hybrid deployment include adjusting parameters for stability and performance. Limiting resource consumption and adjusting thread pool sizes are key to optimizing the cluster. Adjusting parameters for TiKV background tasks and TiDB execution operators is also important.
+summary: TiDB クラスターは、3 台のマシンにコスト効率よく導入できます。このハイブリッド導入のベスト プラクティスには、安定性とパフォーマンスのためのパラメーターの調整が含まれます。リソース消費を制限し、スレッド プールのサイズを調整することが、クラスターを最適化する鍵となります。TiKV バックグラウンド タスクと TiDB 実行演算子のパラメーターを調整することも重要です。
 ---
 
-# Best Practices for Three-Node Hybrid Deployment
+# 3ノードハイブリッド展開のベストプラクティス {#best-practices-for-three-node-hybrid-deployment}
 
-For a TiDB cluster, if you have no requirements on high performance but need to control the cost, you can deploy the TiDB, TiKV, and PD components on three machines in a hybrid way.
+TiDB クラスターの場合、高パフォーマンスは必要ないがコストを抑える必要がある場合は、TiDB、TiKV、PD コンポーネントを 3 台のマシンにハイブリッド方式でデプロイできます。
 
-This document offers an example of three-node hybrid deployment and a TPC-C test against the deployed cluster. Based on this example, this document offers best practices for the deployment scenario and its parameter adjustment.
+このドキュメントでは、3 ノードのハイブリッド展開の例と、展開されたクラスターに対する TPC-C テストを示します。この例に基づいて、このドキュメントでは展開シナリオとそのパラメータ調整のベスト プラクティスを示します。
 
-## Prerequisites for deployment and the test method
+## 展開の前提条件とテスト方法 {#prerequisites-for-deployment-and-the-test-method}
 
-In this example, three physical machines are used for deployment, each with 16 CPU cores and 32 GB of memory. On each machine (node), one TiDB instance, one TiKV instance, and one PD instance are deployed in a hybrid way.
+この例では、それぞれ 16 個の CPU コアと 32 GB のメモリを備えた 3 台の物理マシンがデプロイメントに使用されています。各マシン (ノード) には、1 つの TiDB インスタンス、1 つの TiKV インスタンス、および 1 つの PD インスタンスがハイブリッド方式でデプロイされています。
 
-Because PD and TiKV both store information on the disk, the read and write latency of disk directly affects the latency of the PD and TiKV services. To avoid the situation that PD and TiKV compete for disk resources and affect each other, it is recommended to use different disks for PD and TiKV.
+PD と TiKV はどちらもディスクに情報を保存するため、ディスクの読み取りおよび書き込みのレイテンシーはPD および TiKV サービスのレイテンシーに直接影響します。PD と TiKV がディスク リソースを競合して互いに影響し合う状況を回避するには、PD と TiKV に異なるディスクを使用することをお勧めします。
 
-In this example, the TPC-C 5000 Warehouse data is used in TiUP bench and the test lasts 12 hours with the `terminals` parameter set to `128` (concurrency). Close attention is paid to metrics related to performance stability of the cluster.
+この例では、TPC-C 5000 ウェアハウス データがTiUPベンチで使用され、 `terminals`パラメータを`128` (同時実行) に設定してテストが 12 時間続きます。クラスターのパフォーマンス安定性に関連するメトリックに細心の注意が払われます。
 
-The image below shows the QPS monitor of the cluster within 12 hours with the default parameter configuration. From the image, you can see an obvious performance jitter.
+下の画像は、デフォルトのパラメータ設定で 12 時間以内のクラスターの QPS モニターを示しています。画像から、明らかなパフォーマンスのジッターが確認できます。
 
 ![QPS with default config](/media/best-practices/three-nodes-default-config-qps.png)
 
-After the parameter adjustment, the performance is improved.
+パラメータ調整後、パフォーマンスが向上します。
 
 ![QPS with modified config](/media/best-practices/three-nodes-final-config-qps.png)
 
-## Parameter adjustment
+## パラメータ調整 {#parameter-adjustment}
 
-Performance jitter occurs in the image above, because the default thread pool configuration and the resource allocation to background tasks are for machines with sufficient resources. In the hybrid deployment scenario, the resources are shared among multiple components, so you need to limit the resource consumption via configuration parameters.
+上の画像では、デフォルトのスレッド プール構成とバックグラウンド タスクへのリソース割り当てが十分なリソースを持つマシン向けであるため、パフォーマンスのジッターが発生します。ハイブリッド展開シナリオでは、リソースは複数のコンポーネント間で共有されるため、構成パラメーターを使用してリソースの消費を制限する必要があります。
 
-The final cluster configuration for this test is as follows:
-
-{{< copyable "" >}}
+このテストの最終的なクラスター構成は次のとおりです。
 
 ```yaml
 tikv:
@@ -47,83 +45,81 @@ tikv:
     performance.max-procs: 8
 ```
 
-The following sections introduce the meanings and the adjustment methods of these parameters.
+以下のセクションでは、これらのパラメータの意味と調整方法を紹介します。
 
-### Configuration of TiKV thread pool size
+### TiKV スレッド プール サイズのコンフィグレーション {#configuration-of-tikv-thread-pool-size}
 
-This section offers best practices for adjusting parameters that relate to the resource allocation of thread pools for foreground applications. Reducing these thread pool sizes will compromise performance, but in the hybrid deployment scenario with limited resources, the cluster itself is hard to achieve high performance. In this scenario, the overall stability of the cluster is preferred over performance.
+このセクションでは、フォアグラウンド アプリケーションのスレッド プールのリソース割り当てに関連するパラメータを調整するためのベスト プラクティスを紹介します。これらのスレッド プールのサイズを小さくするとパフォーマンスが低下しますが、リソースが制限されているハイブリッド展開シナリオでは、クラスター自体で高いパフォーマンスを実現するのは困難です。このシナリオでは、パフォーマンスよりもクラスターの全体的な安定性が優先されます。
 
-If you conduct an actual load test, you can first use the default configuration and observe the actual resource usage of each thread pool. Then you can adjust the corresponding configuration items and reduce the sizes of the thread pools that have lower usage.
+実際の負荷テストを実施する場合は、まずデフォルトの構成を使用して、各スレッド プールの実際のリソース使用量を観察します。次に、対応する構成項目を調整し、使用量が少ないスレッド プールのサイズを縮小します。
 
-#### `readpool.unified.max-thread-count`
+#### <code>readpool.unified.max-thread-count</code> {#code-readpool-unified-max-thread-count-code}
 
-The default value of this parameter is 80% of the number of machine threads. In a hybrid deployment scenario, you need to manually calculate and specify this value. You can first set it to 80% of the expected number of CPU threads used by TiKV.
+このパラメータのデフォルト値は、マシン スレッド数の 80% です。ハイブリッド展開シナリオでは、この値を手動で計算して指定する必要があります。まず、TiKV によって使用される CPU スレッドの予想数の 80% に設定できます。
 
-#### `server.grpc-concurrency`
+#### <code>server.grpc-concurrency</code> {#code-server-grpc-concurrency-code}
 
-This parameter defaults to `4`. Because in the existing deployment plan, the CPU resources are limited and the actual requests are few. You can observe the monitoring panel, lower the value of this parameter, and keep the usage rate below 80%.
+このパラメータのデフォルトは`4`です。既存のデプロイメント プランでは、CPU リソースが制限されており、実際のリクエストは少ないためです。監視パネルを監視し、このパラメータの値を下げて、使用率を 80% 未満に保つことができます。
 
-In this test, the value of this parameter is set to `2`. Observe the **gRPC poll CPU** panel and you can see that the usage rate is just around 80%.
+このテストでは、このパラメータの値は`2`に設定されています。gRPC**ポーリング CPU**パネルを観察すると、使用率が約 80% であることがわかります。
 
 ![gRPC Pool CPU](/media/best-practices/three-nodes-grpc-pool-usage.png)
 
-#### `storage.scheduler-worker-pool-size`
+#### <code>storage.scheduler-worker-pool-size</code> {#code-storage-scheduler-worker-pool-size-code}
 
-When TiKV detects that the CPU core number of the machine is greater than or equal to `16`, this parameter value defaults to `8`. When the CPU core number is smaller than `16`, the parameter value defaults to `4`. This parameter is used when TiKV converts complex transaction requests to simple key-value reads or writes, but the scheduler thread pool does not performs any writes.
+TiKV がマシンの CPU コア数が`16`以上であることを検出すると、このパラメータ値はデフォルトで`8`になります。CPU コア数が`16`未満の場合、パラメータ値はデフォルトで`4`になります。このパラメータは、TiKV が複雑なトランザクション要求を単純なキー値の読み取りまたは書き込みに変換するが、スケジューラ スレッド プールが書き込みを実行しない場合に使用されます。
 
-Ideally, the usage rate of the scheduler thread pool is kept between 50% and 75%. Similar to the gRPC thread pool, the `storage.scheduler-worker-pool-size` parameter defaults to a larger value during the hybrid deployment, which makes resource usage insufficient. In this test, the value of this parameter is set to `2`, which is in line with the best practices, a conclusion drawn by observing the corresponding metrics in the **Scheduler worker CPU** panel.
+理想的には、スケジューラ スレッド プールの使用率は 50% ～ 75% に保たれます。gRPC スレッド プールと同様に、ハイブリッド展開中は`storage.scheduler-worker-pool-size`パラメータのデフォルト値が大きくなり、リソースの使用量が不十分になります。このテストでは、このパラメータの値は`2`に設定されています。これは、**スケジューラ ワーカー CPU**パネルの対応するメトリックを観察することによって導き出された結論であり、ベスト プラクティスと一致しています。
 
 ![Scheduler Worker CPU](/media/best-practices/three-nodes-scheduler-pool-usage.png)
 
-### Resource configuration for TiKV background tasks
+### TiKV バックグラウンド タスクのリソース構成 {#resource-configuration-for-tikv-background-tasks}
 
-In addition to foreground tasks, TiKV regularly sorts data and cleans outdated data in background tasks. The default configuration allocates sufficient resources to these tasks for the scenario of high-traffic writes.
+フォアグラウンド タスクに加えて、TiKV はバックグラウンド タスクで定期的にデータを並べ替え、古いデータを消去します。デフォルト構成では、高トラフィックの書き込みシナリオに備えて、これらのタスクに十分なリソースが割り当てられます。
 
-However, in the hybrid deployment scenario, this default configuration is not in line with the best practices. You need to limit the resource usage of background tasks by adjusting the following parameters.
+ただし、ハイブリッド展開シナリオでは、この既定の構成はベスト プラクティスに準拠していません。次のパラメーターを調整して、バックグラウンド タスクのリソース使用量を制限する必要があります。
 
-#### `rocksdb.max-background-jobs` and `rocksdb.max-sub-compactions`
+#### <code>rocksdb.max-background-jobs</code>と<code>rocksdb.max-sub-compactions</code> {#code-rocksdb-max-background-jobs-code-and-code-rocksdb-max-sub-compactions-code}
 
-The RocksDB thread pool is used to perform compaction and flush jobs. The default value of `rocksdb.max-background-jobs` is `8`, which obviously exceeds the resource that is in need. Therefore, the value should be adjusted to limit the resource usage.
+RocksDB スレッド プールは、圧縮ジョブとフラッシュ ジョブを実行するために使用されます。デフォルト値`rocksdb.max-background-jobs`は`8`ですが、これは明らかに必要なリソースを超えています。したがって、リソースの使用を制限するには値を調整する必要があります。
 
-`rocksdb.max-sub-compactions` indicates the number of concurrent sub-tasks allowed for a single compaction job, which defaults to `3`. You can lower this value when the write traffic is not high.
+`rocksdb.max-sub-compactions` 、単一の圧縮ジョブに許可される同時サブタスクの数を示します。デフォルトは`3`です。書き込みトラフィックが高くない場合は、この値を下げることができます。
 
-In the test, the `rocksdb.max-background-jobs` value is set to `3` and the `rocksdb.max-sub-compactions` value is set to `1`. No write stall occurs during the 12-hour test with the TPC-C load. When optimizing the two parameter values according to the actual load, you can lower the values gradually based on monitoring metrics:
+テストでは、 `rocksdb.max-background-jobs`値は`3`に設定され、 `rocksdb.max-sub-compactions`値は`1`に設定されています。TPC-C 負荷での 12 時間のテスト中に書き込み停止は発生しません。実際の負荷に応じて 2 つのパラメータ値を最適化する場合は、監視メトリックに基づいて値を徐々に下げることができます。
 
-* If write stall occurs, increase the value of `rocksdb.max-background-jobs`.
-* If the write stall persists, set the value of `rocksdb.max-sub-compactions` to `2` or `3`.
+-   書き込み停止が発生する場合は、値を`rocksdb.max-background-jobs`増やします。
+-   書き込み停止が続く場合は、 `rocksdb.max-sub-compactions`の値を`2`または`3`設定します。
 
-#### `rocksdb.rate-bytes-per-sec`
+#### <code>rocksdb.rate-bytes-per-sec</code> {#code-rocksdb-rate-bytes-per-sec-code}
 
-This parameter is used to limit the disk traffic for the background compaction jobs. The default configuration has no limit for this parameter. To avoid the situation that compaction jobs occupy the resources of foreground services, you can adjust this parameter value according to the sequential read and write speed of the disk, which reserves enough disk bandwidth for foreground services.
+このパラメータは、バックグラウンド圧縮ジョブのディスク トラフィックを制限するために使用されます。デフォルト構成では、このパラメータに制限はありません。圧縮ジョブがフォアグラウンド サービスのリソースを占有する状況を回避するには、ディスクの順次読み取りおよび書き込み速度に応じてこのパラメータ値を調整し、フォアグラウンド サービスに十分なディスク帯域幅を予約します。
 
-The method of optimizing the RocksDB thread pool is similar to that of optimizing the compaction thread pool. You can determine whether the value you have adjusted is suitable according to whether write stall occurs.
+RocksDB スレッド プールを最適化する方法は、コンパクション スレッド プールを最適化する方法と似ています。書き込みストールが発生するかどうかによって、調整した値が適切かどうかを判断できます。
 
-#### `gc.max_write_bytes_per_sec`
+#### <code>gc.max_write_bytes_per_sec</code> {#code-gc-max-write-bytes-per-sec-code}
 
-Because TiDB uses the multi-version concurrency control (MVCC) model, TiKV periodically cleans old version data in the background. When the available resources are limited, this operation causes periodical performance jitter. You can use the `gc.max_write_bytes_per_sec` parameter to limit the resource usage of such an operation.
+TiDB はマルチバージョン同時実行制御 (MVCC) モデルを使用するため、TiKV は定期的にバックグラウンドで古いバージョンのデータを消去します。使用可能なリソースが制限されている場合、この操作により定期的なパフォーマンスのジッターが発生します。1 パラメータを使用して、このよう`gc.max_write_bytes_per_sec`操作のリソース使用量を制限できます。
 
 ![GC Impact](/media/best-practices/three-nodes-gc-impact.png)
 
-In addition to setting this parameter value in the configuration file, you can also dynamically adjust this value in tikv-ctl.
-
-{{< copyable "shell-regular" >}}
+設定ファイルでこのパラメータ値を設定するだけでなく、tikv-ctl でこの値を動的に調整することもできます。
 
 ```shell
 tiup ctl:v<CLUSTER_VERSION> tikv --host=${ip:port} modify-tikv-config -n gc.max_write_bytes_per_sec -v ${limit}
 ```
 
-> **Note:**
+> **注記：**
 >
-> In application scenarios with frequent updates, limiting GC traffic might cause the MVCC versions to pile up and affect read performance. Currently, to achieve a balance between performance jitter and performance decrease, you might need to try multiple times to adjust the value of this parameter.
+> 頻繁に更新されるアプリケーション シナリオでは、GC トラフィックを制限すると、MVCC バージョンが蓄積され、読み取りパフォーマンスに影響する可能性があります。現在、パフォーマンス ジッターとパフォーマンス低下のバランスをとるには、このパラメーターの値を複数回調整する必要がある場合があります。
 
-### TiDB parameter adjustment
+### TiDBパラメータ調整 {#tidb-parameter-adjustment}
 
-Generally, you can adjust the TiDB parameters of execution operators using system variables such as `tidb_hash_join_concurrency` and `tidb_index_lookup_join_concurrency`.
+通常、 `tidb_hash_join_concurrency`や`tidb_index_lookup_join_concurrency`などのシステム変数を使用して、実行演算子の TiDB パラメータを調整できます。
 
-In this test, these parameters are not adjusted. In the load test of your actual application, if the execution operators consume an excessive amount of CPU resources, you can limit the resource usage of specific operators according to your application scenario. For more details, see [TiDB system variables](/system-variables.md).
+このテストでは、これらのパラメータは調整されません。実際のアプリケーションの負荷テストで、実行オペレータが CPU リソースを過度に消費する場合は、アプリケーションのシナリオに応じて特定のオペレータのリソース使用量を制限することができます。詳細については、 [TiDB システム変数](/system-variables.md)参照してください。
 
-#### `performance.max-procs`
+#### <code>performance.max-procs</code> {#code-performance-max-procs-code}
 
-This parameter is used to control how many CPU cores an entire Go process can use. By default, the value is equal to the number of CPU cores of the current machine or cgroups.
+このパラメータは、Go プロセス全体で使用できる CPU コアの数を制御するために使用されます。デフォルトでは、値は現在のマシンまたは cgroup の CPU コアの数と同じです。
 
-When Go is running, a proportion of threads is used for background tasks such as GC. If you do not limit the value of the `performance.max-procs` parameter, these background tasks will consume too much CPU.
+Go の実行中、一部のスレッドは`performance.max-procs`などのバックグラウンド タスクに使用されます。1 パラメータの値を制限しないと、これらのバックグラウンド タスクが CPU を過剰に消費することになります。

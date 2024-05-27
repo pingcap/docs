@@ -1,31 +1,31 @@
 ---
 title: Migrate from one TiDB cluster to another TiDB cluster
-summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster.
+summary: ある TiDB クラスターから別の TiDB クラスターにデータを移行する方法を学習します。
 ---
 
-# Migrate from One TiDB Cluster to Another TiDB Cluster
+# ある TiDBクラスタから別の TiDBクラスタに移行する {#migrate-from-one-tidb-cluster-to-another-tidb-cluster}
 
-This document describes how to migrate data from one TiDB cluster to another TiDB cluster. This function applies to the following scenarios:
+このドキュメントでは、ある TiDB クラスターから別の TiDB クラスターにデータを移行する方法について説明します。この機能は、次のシナリオに適用されます。
 
-- Split databases: You can split databases when a TiDB cluster is excessively large, or you want to avoid impact between services of a cluster.
-- Relocate databases: Physically relocate databases, such as changing the data center.
-- Migrate data to a TiDB cluster of a newer version: Migrate data to a TiDB cluster of a newer version to satisfy data security and accuracy requirements.
+-   データベースの分割: TiDB クラスターが大きすぎる場合、またはクラスターのサービス間への影響を避けたい場合は、データベースを分割できます。
+-   データベースの再配置: データ センターの変更など、データベースを物理的に再配置します。
+-   新しいバージョンの TiDB クラスターにデータを移行する: データのセキュリティと精度の要件を満たすために、新しいバージョンの TiDB クラスターにデータを移行します。
 
-This document exemplifies the whole migration process and contains the following steps:
+このドキュメントでは、移行プロセス全体を例示しており、次の手順が含まれています。
 
-1. Set up the environment.
+1.  環境を設定します。
 
-2. Migrate full data.
+2.  全データを移行します。
 
-3. Migrate incremental data.
+3.  増分データを移行します。
 
-4. Migrate services to the new TiDB cluster.
+4.  サービスを新しい TiDB クラスターに移行します。
 
-## Step 1. Set up the environment
+## ステップ1. 環境を設定する {#step-1-set-up-the-environment}
 
-1. Deploy TiDB clusters.
+1.  TiDB クラスターをデプロイ。
 
-    Deploy two TiDB clusters, one upstream and the other downstream by using TiUP Playground. For more information, refer to [Deploy and Maintain an Online TiDB Cluster Using TiUP](/tiup/tiup-cluster.md).
+    TiUP Playground を使用して、アップストリームとダウンストリームの 2 つの TiDB クラスターをデプロイ。詳細については、 [TiUPを使用してオンライン TiDBクラスタをデプロイおよび管理](/tiup/tiup-cluster.md)を参照してください。
 
     ```shell
     # Create an upstream cluster
@@ -36,15 +36,15 @@ This document exemplifies the whole migration process and contains the following
     tiup status
     ```
 
-2. Initialize data.
+2.  データを初期化します。
 
-    By default, test databases are created in the newly deployed clusters. Therefore, you can use [sysbench](https://github.com/akopytov/sysbench#linux) to generate test data and simulate data in real scenarios.
+    デフォルトでは、新しくデプロイされたクラスターにテスト データベースが作成されます。したがって、 [システムベンチ](https://github.com/akopytov/sysbench#linux)使用してテスト データを生成し、実際のシナリオでデータをシミュレートできます。
 
     ```shell
     sysbench oltp_write_only --config-file=./tidb-config --tables=10 --table-size=10000 prepare
     ```
 
-    In this document, we use sysbench to run the `oltp_write_only` script. This script generates 10 tables in the test database, each with 10,000 rows. The tidb-config is as follows:
+    このドキュメントでは、sysbench を使用して`oltp_write_only`スクリプトを実行します。このスクリプトは、テスト データベースに 10,000 行のテーブルを 10 個生成します。tidb-config は次のとおりです。
 
     ```shell
     mysql-host=172.16.6.122 # Replace the value with the IP address of your upstream cluster
@@ -59,17 +59,17 @@ This document exemplifies the whole migration process and contains the following
     rate=100                # Set average TPS to 100
     ```
 
-3. Simulate service workload.
+3.  サービスのワークロードをシミュレートします。
 
-    In real scenarios, service data is continuously written to the upstream cluster. In this document, we use sysbench to simulate this workload. Specifically, run the following command to enable 10 workers to continuously write data to three tables, sbtest1, sbtest2, and sbtest3, with a total TPS not exceeding 100.
+    実際のシナリオでは、サービス データはアップストリーム クラスターに継続的に書き込まれます。このドキュメントでは、sysbench を使用してこのワークロードをシミュレートします。具体的には、次のコマンドを実行して、10 人のワーカーが sbtest1、sbtest2、sbtest3 の 3 つのテーブルにデータを継続的に書き込むようにします。TPS の合計は 100 を超えません。
 
     ```shell
     sysbench oltp_write_only --config-file=./tidb-config --tables=3 run
     ```
 
-4. Prepare external storage.
+4.  外部storageを準備します。
 
-    In full data backup, both the upstream and downstream clusters need to access backup files. It is recommended that you use [External storage](/br/backup-and-restore-storages.md) to store backup files. In this document, Minio is used to simulate an S3-compatible storage service.
+    フルデータバックアップでは、上流クラスターと下流クラスターの両方がバックアップファイルにアクセスする必要があります。バックアップファイルの保存には[外部storage](/br/backup-and-restore-storages.md)使用することをお勧めします。このドキュメントでは、Minio を使用して S3 互換のstorageサービスをシミュレートします。
 
     ```shell
     wget https://dl.min.io/server/minio/release/linux-amd64/minio
@@ -84,103 +84,95 @@ This document exemplifies the whole migration process and contains the following
     ./minio server ./data --address :6060 &
     ```
 
-    The preceding command starts a minio server on one node to simulate S3 services. Parameters in the command are configured as follows:
+    上記のコマンドは、1 つのノードで minioサーバーを起動し、S3 サービスをシミュレートします。コマンドのパラメータは次のように設定されます。
 
-    - Endpoint: `http://${HOST_IP}:6060/`
-    - Access-key: `minio`
-    - Secret-access-key: `miniostorage`
-    - Bucket: `backup`
+    -   エンドポイント: `http://${HOST_IP}:6060/`
+    -   アクセスキー: `minio`
+    -   シークレットアクセスキー: `miniostorage`
+    -   バケット: `backup`
 
-    The access link is as follows:
+    アクセスリンクは以下の通りです。
 
     ```shell
     s3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://${HOST_IP}:6060&force-path-style=true
     ```
 
-## Step 2. Migrate full data
+## ステップ2. 全データを移行する {#step-2-migrate-full-data}
 
-After setting up the environment, you can use the backup and restore functions of [BR](https://github.com/pingcap/tidb/tree/release-8.1/br) to migrate full data. BR can be started in [three ways](/br/br-use-overview.md#deploy-and-use-br). In this document, we use the SQL statements, `BACKUP` and `RESTORE`.
+環境設定後、 [BR](https://github.com/pingcap/tidb/tree/release-8.1/br)のバックアップと復元関数を使用して全データを移行できます。 [3つの方法](/br/br-use-overview.md#deploy-and-use-br)でBRを起動できます。 このドキュメントでは、SQL 文`BACKUP`と`RESTORE`を使用します。
 
-> **Note:**
+> **注記：**
 >
-> - `BACKUP` and `RESTORE` SQL statements are experimental. It is not recommended that you use them in the production environment. They might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> - In production clusters, performing a backup with GC disabled might affect cluster performance. It is recommended that you back up data in off-peak hours, and set `RATE_LIMIT` to a proper value to avoid performance degradation.
-> - If the versions of the upstream and downstream clusters are different, you should check [BR compatibility](/br/backup-and-restore-overview.md#before-you-use). In this document, we assume that the upstream and downstream clusters are the same version.
+> -   `BACKUP`と`RESTORE` SQL ステートメントは実験的です。本番環境での使用は推奨されません。予告なしに変更または削除される可能性があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)報告できます。
+> -   本番クラスターでは、GC を無効にしてバックアップを実行すると、クラスターのパフォーマンスに影響する可能性があります。パフォーマンスの低下を避けるために、オフピーク時にデータをバックアップし、 `RATE_LIMIT`適切な値に設定することをお勧めします。
+> -   アップストリーム クラスタとダウンストリーム クラスタのバージョンが異なる場合は、 [BR互換性](/br/backup-and-restore-overview.md#before-you-use)確認する必要があります。このドキュメントでは、アップストリーム クラスタとダウンストリーム クラスタは同じバージョンであると想定しています。
 
-1. Disable GC.
+1.  GC を無効にします。
 
-    To ensure that newly written data is not deleted during incremental migration, you should disable GC for the upstream cluster before backup. In this way, history data is not deleted.
+    増分移行中に新しく書き込まれたデータが削除されないようにするには、バックアップの前にアップストリーム クラスターの GC を無効にする必要があります。この方法では、履歴データは削除されません。
 
-    Run the following command to disable GC:
+    GC を無効にするには、次のコマンドを実行します。
 
     ```sql
     MySQL [test]> SET GLOBAL tidb_gc_enable=FALSE;
     ```
 
-    ```
-    Query OK, 0 rows affected (0.01 sec)
-    ```
+        Query OK, 0 rows affected (0.01 sec)
 
-    To verify that the change takes effect, query the value of `tidb_gc_enable`:
+    変更が有効になっていることを確認するには、 `tidb_gc_enable`の値を照会します。
 
     ```sql
     MySQL [test]> SELECT @@global.tidb_gc_enable;
     ```
 
-    ```
-    +-------------------------+:
-    | @@global.tidb_gc_enable |
-    +-------------------------+
-    |                       0 |
-    +-------------------------+
-    1 row in set (0.00 sec)
-    ```
+        +-------------------------+:
+        | @@global.tidb_gc_enable |
+        +-------------------------+
+        |                       0 |
+        +-------------------------+
+        1 row in set (0.00 sec)
 
-2. Back up data.
+2.  バックアップデータ。
 
-    Run the `BACKUP` statement in the upstream cluster to back up data:
+    データをバックアップするには、アップストリーム クラスターで`BACKUP`ステートメントを実行します。
 
     ```sql
     MySQL [(none)]> BACKUP DATABASE * TO 's3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://${HOST_IP}:6060&force-path-style=true' RATE_LIMIT = 120 MB/SECOND;
     ```
 
-    ```
-    +---------------+----------+--------------------+---------------------+---------------------+
-    | Destination   | Size     | BackupTS           | Queue Time          | Execution Time      |
-    +---------------+----------+--------------------+---------------------+---------------------+
-    | s3://backup   | 10315858 | 431434047157698561 | 2022-02-25 19:57:59 | 2022-02-25 19:57:59 |
-    +---------------+----------+--------------------+---------------------+---------------------+
-    1 row in set (2.11 sec)
-    ```
+        +---------------+----------+--------------------+---------------------+---------------------+
+        | Destination   | Size     | BackupTS           | Queue Time          | Execution Time      |
+        +---------------+----------+--------------------+---------------------+---------------------+
+        | s3://backup   | 10315858 | 431434047157698561 | 2022-02-25 19:57:59 | 2022-02-25 19:57:59 |
+        +---------------+----------+--------------------+---------------------+---------------------+
+        1 row in set (2.11 sec)
 
-    After the `BACKUP` command is executed, TiDB returns metadata about the backup data. Pay attention to `BackupTS`, because data generated before it is backed up. In this document, we use `BackupTS` as **the end of data check** and **the start of incremental migration scanning by TiCDC**.
+    `BACKUP`コマンドが実行されると、 TiDB はバックアップ データに関するメタデータを返します。 `BackupTS`バックアップされる前に生成されたデータなので注意してください。 このドキュメントでは、 `BackupTS`**データ チェックの終了**と**TiCDC による増分移行スキャンの開始**として使用します。
 
-3. Restore data.
+3.  データを復元します。
 
-    Run the `RESTORE` command in the downstream cluster to restore data:
+    ダウンストリーム クラスターで`RESTORE`コマンドを実行してデータを復元します。
 
     ```sql
     mysql> RESTORE DATABASE * FROM 's3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://${HOST_IP}:6060&force-path-style=true';
     ```
 
-    ```
-    +--------------+-----------+--------------------+---------------------+---------------------+
-    | Destination  | Size      | BackupTS           | Queue Time          | Execution Time      |
-    +--------------+-----------+--------------------+---------------------+---------------------+
-    | s3://backup  | 10315858  | 431434141450371074 | 2022-02-25 20:03:59 | 2022-02-25 20:03:59 |
-    +--------------+-----------+--------------------+---------------------+---------------------+
-    1 row in set (41.85 sec)
-    ```
+        +--------------+-----------+--------------------+---------------------+---------------------+
+        | Destination  | Size      | BackupTS           | Queue Time          | Execution Time      |
+        +--------------+-----------+--------------------+---------------------+---------------------+
+        | s3://backup  | 10315858  | 431434141450371074 | 2022-02-25 20:03:59 | 2022-02-25 20:03:59 |
+        +--------------+-----------+--------------------+---------------------+---------------------+
+        1 row in set (41.85 sec)
 
-4. (Optional) Validate data.
+4.  (オプション) データを検証します。
 
-    You can use [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) to check data consistency between upstream and downstream at a certain time. The preceding `BACKUP` output shows that the upstream cluster finishes backup at 431434047157698561. The preceding `RESTORE` output shows that the downstream finishes restoration at 431434141450371074.
+    [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)使用すると、特定の時点でのアップストリームとダウンストリーム間のデータの整合性をチェックできます。前の`BACKUP`出力は、アップストリーム クラスターが 431434047157698561 にバックアップを完了したことを示しています。前の`RESTORE`の出力は、ダウンストリームが 431434141450371074 に復元を完了したことを示しています。
 
     ```shell
     sync_diff_inspector -C ./config.yaml
     ```
 
-    For details about how to configure the sync-diff-inspector, see [Configuration file description](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description). In this document, the configuration is as follows:
+    sync-diff-inspector の設定方法の詳細については、 [コンフィグレーションファイルの説明](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description)参照してください。このドキュメントでは、設定は次のようになります。
 
     ```shell
     # Diff Configuration.
@@ -206,65 +198,59 @@ After setting up the environment, you can use the backup and restore functions o
         target-check-tables = ["*.*"]
     ```
 
-## Step 3. Migrate incremental data
+## ステップ3. 増分データを移行する {#step-3-migrate-incremental-data}
 
-1. Deploy TiCDC.
+1.  TiCDC をデプロイ。
 
-    After finishing full data migration, deploy and configure a TiCDC to replicate incremental data. In production environments, deploy TiCDC as instructed in [Deploy TiCDC](/ticdc/deploy-ticdc.md). In this document, a TiCDC node has been started upon the creation of the test clusters. Therefore, you can skip the step of deploying TiCDC and proceed with changefeed configuration.
+    完全なデータ移行が完了したら、増分データをレプリケートするために TiCDC をデプロイして構成します。本番環境では、 [TiCDC をデプロイ](/ticdc/deploy-ticdc.md)手順に従って TiCDC をデプロイします。このドキュメントでは、テスト クラスターの作成時に TiCDC ノードが起動されています。したがって、TiCDC をデプロイする手順をスキップして、changefeed 構成に進むことができます。
 
-2. Create a changefeed.
+2.  変更フィードを作成します。
 
-    In the upstream cluster, run the following command to create a changefeed from the upstream to the downstream clusters:
-
-    {{< copyable "shell-regular" >}}
+    アップストリーム クラスターで次のコマンドを実行して、アップストリーム クラスターからダウンストリーム クラスターへの変更フィードを作成します。
 
     ```shell
     tiup cdc cli changefeed create --server=http://172.16.6.122:8300 --sink-uri="mysql://root:@172.16.6.125:4000" --changefeed-id="upstream-to-downstream" --start-ts="431434047157698561"
     ```
 
-    In this command, the parameters are as follows:
+    このコマンドのパラメータは次のとおりです。
 
-    - `--server`: IP address of any node in the TiCDC cluster
-    - `--sink-uri`: URI of the downstream cluster
-    - `--changefeed-id`: changefeed ID, must be in the format of a regular expression, ^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$
-    - `--start-ts`: start timestamp of the changefeed, must be the backup time (or BackupTS in the "Back up data" section in [Step 2. Migrate full data](#step-2-migrate-full-data))
+    -   `--server` : TiCDC クラスター内の任意のノードの IP アドレス
+    -   `--sink-uri` : ダウンストリーム クラスターの URI
+    -   `--changefeed-id` : チェンジフィード ID。正規表現の形式である必要があります。^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$
+    -   `--start-ts` : 変更フィードの開始タイムスタンプ。バックアップ時間 (または[ステップ2. 全データを移行する](#step-2-migrate-full-data)の「データのバックアップ」セクションの BackupTS) である必要があります。
 
-    For more information about the changefeed configurations, see [Task configuration file](/ticdc/ticdc-changefeed-config.md).
+    changefeed 構成の詳細については、 [タスク設定ファイル](/ticdc/ticdc-changefeed-config.md)参照してください。
 
-3. Enable GC.
+3.  GC を有効にします。
 
-    In incremental migration using TiCDC, GC only removes history data that is replicated. Therefore, after creating a changefeed, you need to run the following command to enable GC. For details, see [What is the complete behavior of TiCDC garbage collection (GC) safepoint?](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint).
+    TiCDC を使用した増分移行では、GC は複製された履歴データのみを削除します。そのため、チェンジフィードを作成した後、以下のコマンドを実行して GC を有効にする必要があります。詳細については、 [TiCDCガベージコレクション(GC) セーフポイントの完全な動作は何ですか?](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)参照してください。
 
-    To enable GC, run the following command:
+    GC を有効にするには、次のコマンドを実行します。
 
     ```sql
     MySQL [test]> SET GLOBAL tidb_gc_enable=TRUE;
     ```
 
-    ```
-    Query OK, 0 rows affected (0.01 sec)
-    ```
+        Query OK, 0 rows affected (0.01 sec)
 
-    To verify that the change takes effect, query the value of `tidb_gc_enable`:
+    変更が有効になっていることを確認するには、 `tidb_gc_enable`の値を照会します。
 
     ```sql
     MySQL [test]> SELECT @@global.tidb_gc_enable;
     ```
 
-    ```
-    +-------------------------+
-    | @@global.tidb_gc_enable |
-    +-------------------------+
-    |                       1 |
-    +-------------------------+
-    1 row in set (0.00 sec)
-    ```
+        +-------------------------+
+        | @@global.tidb_gc_enable |
+        +-------------------------+
+        |                       1 |
+        +-------------------------+
+        1 row in set (0.00 sec)
 
-## Step 4. Migrate services to the new TiDB cluster
+## ステップ4. 新しいTiDBクラスタにサービスを移行する {#step-4-migrate-services-to-the-new-tidb-cluster}
 
-After creating a changefeed, data written to the upstream cluster is replicated to the downstream cluster with low latency. You can migrate read traffic to the downstream cluster gradually. Observe for a period. If the downstream cluster is stable, you can migrate write traffic to the downstream cluster by performing the following steps:
+変更フィードを作成すると、アップストリーム クラスターに書き込まれたデータは、低レイテンシーでダウンストリーム クラスターに複製されます。読み取りトラフィックをダウンストリーム クラスターに徐々に移行できます。一定期間観察します。ダウンストリーム クラスターが安定している場合は、次の手順を実行して、書き込みトラフィックをダウンストリーム クラスターに移行できます。
 
-1. Stop write services in the upstream cluster. Make sure that all upstream data are replicated to downstream before stopping the changefeed.
+1.  アップストリーム クラスターの書き込みサービスを停止します。変更フィードを停止する前に、すべてのアップストリーム データがダウンストリームに複製されていることを確認してください。
 
     ```shell
     # Stop the changefeed from the upstream cluster to the downstream cluster
@@ -274,24 +260,22 @@ After creating a changefeed, data written to the upstream cluster is replicated 
     tiup cdc cli changefeed list
     ```
 
-    ```
-    [
-      {
-        "id": "upstream-to-downstream",
-        "summary": {
-        "state": "stopped",  # Ensure that the status is stopped
-        "tso": 431747241184329729,
-        "checkpoint": "2022-03-11 15:50:20.387", # This time must be later than the time of stopping writing
-        "error": null
-        }
-      }
-    ]
-    ```
+        [
+          {
+            "id": "upstream-to-downstream",
+            "summary": {
+            "state": "stopped",  # Ensure that the status is stopped
+            "tso": 431747241184329729,
+            "checkpoint": "2022-03-11 15:50:20.387", # This time must be later than the time of stopping writing
+            "error": null
+            }
+          }
+        ]
 
-2. Create a changefeed from downstream to upstream. You can leave `start-ts` unspecified so as to use the default setting, because the upstream and downstream data are consistent and there is no new data written to the cluster.
+2.  ダウンストリームからアップストリームへの変更フィードを作成します。アップストリームとダウンストリームのデータは一貫しており、クラスターに書き込まれる新しいデータはないため、デフォルト設定を使用するために`start-ts`指定しないままにすることができます。
 
     ```shell
     tiup cdc cli changefeed create --server=http://172.16.6.125:8300 --sink-uri="mysql://root:@172.16.6.122:4000" --changefeed-id="downstream -to-upstream"
     ```
 
-3. After migrating writing services to the downstream cluster, observe for a period. If the downstream cluster is stable, you can discard the upstream cluster.
+3.  書き込みサービスをダウンストリーム クラスターに移行した後、しばらく観察します。ダウンストリーム クラスターが安定している場合は、アップストリーム クラスターを破棄できます。

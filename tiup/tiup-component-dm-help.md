@@ -1,28 +1,28 @@
 ---
 title: tiup dm help
-summary: The tiup-dm command-line interface provides a wealth of help information, which can be accessed using the `help` command or the `--help` option. The syntax for accessing help is `tiup dm help [command] [flags]`, where `[command]` specifies the command for which help information is needed. The `-h` or `--help` option prints the help information. The output is the help information for the specified command or `tiup-dm`.
+summary: tiup-dm コマンドライン インターフェイスは、`help` コマンドまたは `--help` オプションを使用してアクセスできる豊富なヘルプ情報を提供します。ヘルプにアクセスするための構文は `tiup dm help [command] [flags]` です。ここで、`[command]` はヘルプ情報が必要なコマンドを指定します。`-h` または `--help` オプションはヘルプ情報を出力。出力は、指定されたコマンドまたは `tiup-dm` のヘルプ情報です。
 ---
 
-# tiup dm help
+# tiup dm help {#tiup-dm-help}
 
-tiup-dm command-line interface provides users with a wealth of help information. You can view it via the `help` command or the `--help` option. Basically, `tiup dm help <command>` is equivalent to `tiup dm <command> --help`.
+tiup-dm コマンドライン インターフェイスは、ユーザーに豊富なヘルプ情報を提供します。 `help`コマンドまたは`--help`オプションで表示できます。基本的に、 `tiup dm help <command>` `tiup dm <command> --help`に相当します。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm help [command] [flags]
 ```
 
-`[command]` is used to specify the help information of which command that users need to view. If it is not specified, the help information of `tiup-dm` is viewed.
+`[command]` 、ユーザーが表示する必要があるコマンドのヘルプ情報を指定するために使用されます。指定されていない場合は、 `tiup-dm`のヘルプ情報が表示されます。
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- Default: false
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   デフォルト: false
 
-## Output
+## 出力 {#output}
 
-The help information of `[command]` or `tiup-dm`.
+`[command]`または`tiup-dm`のヘルプ情報。
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

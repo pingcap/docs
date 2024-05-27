@@ -1,13 +1,13 @@
 ---
 title: PREPARE | TiDB SQL Statement Reference
-summary: An overview of the usage of PREPARE for the TiDB database.
+summary: TiDB データベースの PREPARE の使用法の概要。
 ---
 
-# PREPARE
+# 準備する {#prepare}
 
-The `PREPARE` statement provides an SQL interface to server-side prepared statements.
+`PREPARE`ステートメントは、サーバー側の準備済みステートメントへの SQL インターフェイスを提供します。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 PreparedStmt ::=
@@ -18,13 +18,13 @@ PrepareSQL ::=
 |   UserVariable
 ```
 
-> **Note:**
+> **注記：**
 >
-> For each `PREPARE` statement, the maximum number of placeholders is 65535.
+> `PREPARE`つのステートメントごとに、プレースホルダーの最大数は 65535 です。
 
-To limit the number of `PREPARE` statements in the current TiDB instance, you can use the [`max_prepared_stmt_count`](/system-variables.md#max_prepared_stmt_count) system variable.
+現在の TiDB インスタンス内の`PREPARE`ステートメントの数を制限するには、 [`max_prepared_stmt_count`](/system-variables.md#max_prepared_stmt_count)システム変数を使用できます。
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> PREPARE mystmt FROM 'SELECT ? as num FROM DUAL';
@@ -45,11 +45,11 @@ mysql> DEALLOCATE PREPARE mystmt;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-The `PREPARE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB の`PREPARE`ステートメントは MySQL と完全に互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) 。
 
-## See also
+## 参照 {#see-also}
 
-* [EXECUTE](/sql-statements/sql-statement-execute.md)
-* [DEALLOCATE](/sql-statements/sql-statement-deallocate.md)
+-   [実行する](/sql-statements/sql-statement-execute.md)
+-   [割り当て解除](/sql-statements/sql-statement-deallocate.md)

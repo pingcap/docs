@@ -1,16 +1,16 @@
 ---
 title: TiDB 5.0.5 Release Note
-summary: TiDB 5.0.5 was released on December 3, 2021. The bug fix for TiKV addresses an issue where the `GcKeys` task does not work when called by multiple keys, causing compaction filter GC to not drop MVCC deletion information. Issue #11217 on GitHub provides more details.
+summary: TiDB 5.0.5 は 2021 年 12 月 3 日にリリースされました。TiKV のバグ修正では、複数のキーによって呼び出されたときに `GcKeys` タスクが機能せず、コンパクション フィルター GC が MVCC 削除情報を削除しないという問題が修正されています。詳細については、GitHub の問題 #11217 を参照してください。
 ---
 
-# TiDB 5.0.5 Release Note
+# TiDB 5.0.5 リリースノート {#tidb-5-0-5-release-note}
 
-Release date: December 3, 2021
+発売日: 2021年12月3日
 
-TiDB version: 5.0.5
+TiDB バージョン: 5.0.5
 
-## Bug fix
+## バグ修正 {#bug-fix}
 
-+ TiKV
+-   ティクヴ
 
-    - Fix the issue that the `GcKeys` task does not work when it is called by multiple keys. Caused by this issue, compaction filter GC might not drop the MVCC deletion information. [#11217](https://github.com/tikv/tikv/issues/11217)
+    -   `GcKeys`タスクが複数のキーによって呼び出されたときに動作しない問題を修正しました。この問題により、コンパクション フィルター GC が MVCC 削除情報を削除しない可能性があります[＃11217](https://github.com/tikv/tikv/issues/11217)

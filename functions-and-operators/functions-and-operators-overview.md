@@ -1,12 +1,12 @@
 ---
 title: Function and Operator Reference
-summary: Learn how to use the functions and operators.
+summary: 関数と演算子の使い方を学びます。
 ---
 
-# Function and Operator Reference
+# 関数と演算子のリファレンス {#function-and-operator-reference}
 
-The usage of the functions and operators in TiDB is similar to MySQL. See [Functions and Operators in MySQL](https://dev.mysql.com/doc/refman/8.0/en/functions.html).
+TiDB の関数と演算子の使用方法は MySQL と似ています。1 [MySQL の関数と演算子](https://dev.mysql.com/doc/refman/8.0/en/functions.html)参照してください。
 
-In SQL statements, expressions can be used on the `ORDER BY` and `HAVING` clauses of the `SELECT` statement, the `WHERE` clause of `SELECT`/`DELETE`/`UPDATE` statements, and `SET` statements.
+SQL 文では、 `SELECT`文の`ORDER BY`と`HAVING`節、 `SELECT` / `DELETE` / `UPDATE`文の`WHERE`節、および`SET`文で式を使用できます。
 
-You can write expressions using literals, column names, NULL, built-in functions, operators and so on. For expressions that TiDB supports pushing down to TiKV, see [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md).
+リテラル、列名、NULL、組み込み関数、演算子などを使用して式を記述できます。TiDB が TiKV へのプッシュダウンをサポートする式については、 [プッシュダウンの式のリスト](/functions-and-operators/expressions-pushed-down.md)参照してください。

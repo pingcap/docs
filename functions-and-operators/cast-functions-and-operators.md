@@ -1,53 +1,53 @@
 ---
 title: Cast Functions and Operators
-summary: Learn about the cast functions and operators.
+summary: キャスト関数と演算子について学習します。
 ---
 
-# Cast Functions and Operators
+# キャスト関数と演算子 {#cast-functions-and-operators}
 
-Cast functions and operators enable conversion of values from one data type to another. TiDB supports all of the [cast functions and operators](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html) available in MySQL 8.0.
+キャスト関数と演算子を使用すると、あるデータ型から別のデータ型に値を変換できます。TiDB は、MySQL 8.0 で利用可能な[キャスト関数と演算子](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html)をすべてサポートします。
 
-| Name                                     | Description                      |
-| ---------------------------------------- | -------------------------------- |
-| [`BINARY`](#binary) | Cast a string to a binary string |
-| [`CAST()`](#cast) | Cast a value as a certain type   |
-| [`CONVERT()`](#convert) | Cast a value as a certain type   |
+| 名前                      | 説明               |
+| ----------------------- | ---------------- |
+| [`BINARY`](#binary)     | 文字列をバイナリ文字列に変換する |
+| [`CAST()`](#cast)       | 値を特定の型にキャストする    |
+| [`CONVERT()`](#convert) | 値を特定の型にキャストする    |
 
-> **Note:**
+> **注記：**
 >
-> TiDB and MySQL display inconsistent results for `SELECT CAST(MeN AS CHAR)` (or its equivalent form `SELECT CONVERT(MeM, CHAR)`), where `MeN` represents a double-precision floating-point number in scientific notation. MySQL displays the complete numeric value when `-15 <= N <= 14` and the scientific notation when `N < -15` or `N > 14`. However, TiDB always displays the complete numeric value. For example, MySQL displays the result of `SELECT CAST(3.1415e15 AS CHAR)` as `3.1415e15`, while TiDB displays the result as `3141500000000000`.
+> TiDB と MySQL は、 `SELECT CAST(MeN AS CHAR)` (または同等の形式`SELECT CONVERT(MeM, CHAR)` ) に対して一貫性のない結果を表示します。ここで、 `MeN`科学的記数法の倍精度浮動小数点数を表します。MySQL は、 `-15 <= N <= 14`場合は完全な数値を表示し、 `N < -15`または`N > 14`場合は科学的記数法を表示します。ただし、TiDB は常に完全な数値を表示します。たとえば、MySQL は`SELECT CAST(3.1415e15 AS CHAR)`の結果を`3.1415e15`として表示しますが、TiDB は結果を`3141500000000000`として表示します。
 
-## BINARY
+## バイナリ {#binary}
 
-The [`BINARY`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#operator_binary) operator has been deprecated since MySQL 8.0.27. It is recommended to use `CAST(... AS BINARY)` instead both in TiDB and MySQL.
+[`BINARY`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#operator_binary)演算子は MySQL 8.0.27 以降では非推奨になりました。TiDB と MySQL の両方で、代わりに`CAST(... AS BINARY)`を使用することをお勧めします。
 
-## CAST
+## キャスト {#cast}
 
-The [`CAST(<expression> AS <type> [ARRAY])`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast) function is used to cast an expression to a specific type.
+[`CAST(&#x3C;expression> AS &#x3C;type> [ARRAY])`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast)関数は、式を特定の型にキャストするために使用されます。
 
-This function is also used to create [Multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes).
+この関数は[多値インデックス](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)を作成する場合にも使用されます。
 
-The following types are supported:
+次のタイプがサポートされています:
 
-| Type                 | Description      | Whether it can be used with multi-valued indexes                      |
-|----------------------|------------------|------------------------------------------------------------|
-| `BINARY(n)`          | Binary string    | No                                                         |
-| `CHAR(n)`            | Character string | Yes, but only if a length is specified                     |
-| `DATE`               | Date             | Yes                                                        |
-| `DATETIME(fsp)`      | Date/time, where `fsp` is optional | Yes                                              |
-| `DECIMAL(n, m)`      | Decimal number, where `n` and `m` are optional and are `10` and `0` if not specified | No   |
-| `DOUBLE`             | Double precision floating-point number | No                                   |
-| `FLOAT(n)`           | Floating-point number, where `n` is optional and should be between `0` and `53` | No |
-| `JSON`               | JSON             | No                                                         |
-| `REAL`               | Floating-point number | Yes                                                   |
-| `SIGNED [INTEGER]`   | Signed integer   | Yes                                                        |
-| `TIME(fsp)`          | Time             | Yes                                                        |
-| `UNSIGNED [INTEGER]` | Unsigned integer | Yes                                                        |
-| `YEAR`               | Year             | No                                                         |
+| タイプ                  | 説明                                          | 多値インデックスで使用できるかどうか     |
+| -------------------- | ------------------------------------------- | ---------------------- |
+| `BINARY(n)`          | バイナリ文字列                                     | いいえ                    |
+| `CHAR(n)`            | 文字列                                         | はい、ただし長さが指定されている場合のみです |
+| `DATE`               | 日付                                          | はい                     |
+| `DATETIME(fsp)`      | 日付/時刻（ `fsp`はオプション）                         | はい                     |
+| `DECIMAL(n, m)`      | 10 進数。1 と`m`オプションで、指定しない場合は`10`と`0`になります`n` | いいえ                    |
+| `DOUBLE`             | 倍精度浮動小数点数                                   | いいえ                    |
+| `FLOAT(n)`           | 浮動小数点数。1 `n`オプションで、 `0`から`53`までの範囲で指定します。   | いいえ                    |
+| `JSON`               | 翻訳                                          | いいえ                    |
+| `REAL`               | 浮動小数点数                                      | はい                     |
+| `SIGNED [INTEGER]`   | 符号付き整数                                      | はい                     |
+| `TIME(fsp)`          | 時間                                          | はい                     |
+| `UNSIGNED [INTEGER]` | 符号なし整数                                      | はい                     |
+| `YEAR`               | 年                                           | いいえ                    |
 
-Examples:
+例:
 
-The following statement converts a binary string from a HEX literal to a `CHAR`.
+次のステートメントは、バイナリ文字列を HEX リテラルから`CHAR`に変換します。
 
 ```sql
 SELECT CAST(0x54694442 AS CHAR);
@@ -62,7 +62,7 @@ SELECT CAST(0x54694442 AS CHAR);
 1 row in set (0.0002 sec)
 ```
 
-The following statement casts the values of the `a` attribute extracted from the JSON column to an unsigned array. Note that casting to an array is only supported as part of an index definition for multi-valued indexes.
+次のステートメントは、JSON 列から抽出された`a`の属性の値を符号なし配列にキャストします。配列へのキャストは、複数値インデックスのインデックス定義の一部としてのみサポートされていることに注意してください。
 
 ```sql
 CREATE TABLE t (
@@ -99,11 +99,11 @@ operator info: keep order:false, stats:partial[j:unInitialized]
 3 rows in set (0.00 sec)
 ```
 
-## CONVERT
+## 変換する {#convert}
 
-The [`CONVERT()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_convert) function is used to convert between [character sets](/character-set-and-collation.md).
+[`CONVERT()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_convert)関数は[文字セット](/character-set-and-collation.md)間の変換に使用されます。
 
-Example:
+例：
 
 ```sql
 SELECT CONVERT(0x616263 USING utf8mb4);
@@ -118,8 +118,8 @@ SELECT CONVERT(0x616263 USING utf8mb4);
 1 row in set (0.0004 sec)
 ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-- TiDB does not support cast operations on `SPATIAL` types. For more information, see [#6347](https://github.com/pingcap/tidb/issues/6347).
-- TiDB does not support `AT TIME ZONE` for `CAST()`. For more information, see [#51742](https://github.com/pingcap/tidb/issues/51742).
-- `CAST(24 AS YEAR)` returns 2 digits in TiDB and 4 digits in MySQL. For more information, see [#29629](https://github.com/pingcap/tidb/issues/29629).
+-   TiDB は`SPATIAL`型に対するキャスト操作をサポートしていません。詳細については、 [＃6347](https://github.com/pingcap/tidb/issues/6347)を参照してください。
+-   TiDB は`CAST()`に対して`AT TIME ZONE`サポートしていません。詳細については、 [＃51742](https://github.com/pingcap/tidb/issues/51742)を参照してください。
+-   `CAST(24 AS YEAR)` TiDB では 2 桁、MySQL では 4 桁を返します。詳細については、 [＃29629](https://github.com/pingcap/tidb/issues/29629)参照してください。

@@ -1,53 +1,53 @@
 ---
 title: TiDB 3.0.19 Release Notes
-summary: TiDB 3.0.19 was released on September 25, 2020. Compatibility changes include import path and copyright information updates. Improvements were made to mitigate failure recovery impact, support concurrency adjustment, and set nonadjustable values. Bug fixes were made for query errors, privilege checks, type changes, constraint checks, table lock release, operator handling, and panic parsing. Tools like TiDB Lightning also received fixes for process exit timing.
+summary: TiDB 3.0.19 は 2020 年 9 月 25 日にリリースされました。互換性の変更には、インポート パスと著作権情報の更新が含まれます。障害回復の影響を軽減し、同時実行調整をサポートし、調整不可能な値を設定するように改善されました。クエリ エラー、権限チェック、型変更、制約チェック、テーブル ロックの解放、演算子の処理、panic解析のバグ修正が行われました。TiDB TiDB Lightningなどのツールでも、プロセス終了タイミングの修正が行われました。
 ---
 
-# TiDB 3.0.19 Release Notes
+# TiDB 3.0.19 リリースノート {#tidb-3-0-19-release-notes}
 
-Release date: September 25, 2020
+発売日: 2020年9月25日
 
-TiDB version: 3.0.19
+TiDB バージョン: 3.0.19
 
-## Compatibility Changes
+## 互換性の変更 {#compatibility-changes}
 
-+ PD
+-   PD
 
-    - Change the import path from `pingcap/pd` to `tikv/pd` [#2779](https://github.com/pingcap/pd/pull/2779)
-    - Change the copyright information from `PingCAP, Inc` to `TiKV Project Authors` [#2777](https://github.com/pingcap/pd/pull/2777)
+    -   インポートパスを`pingcap/pd`から`tikv/pd` [＃2779](https://github.com/pingcap/pd/pull/2779)に変更します
+    -   著作権情報を`PingCAP, Inc`から`TiKV Project Authors` [＃2777](https://github.com/pingcap/pd/pull/2777)に変更します
 
-## Improvements
+## 改善点 {#improvements}
 
-+ TiDB
+-   ティビ
 
-    - Mitigate the impact of failure recovery on QPS performance [#19764](https://github.com/pingcap/tidb/pull/19764)
-    - Support adjusting the concurrency of the `union` operator [#19885](https://github.com/pingcap/tidb/pull/19885)
+    -   障害回復によるQPSパフォーマンスへの影響を軽減する[＃19764](https://github.com/pingcap/tidb/pull/19764)
+    -   `union`演算子[＃19885](https://github.com/pingcap/tidb/pull/19885)の同時実行の調整をサポート
 
-+ TiKV
+-   ティクヴ
 
-    - Set `sync-log` to `true` as a nonadjustable value [#8636](https://github.com/tikv/tikv/pull/8636)
+    -   `sync-log` ～ `true`を調整不可の値[＃8636](https://github.com/tikv/tikv/pull/8636)として設定
 
-+ PD
+-   PD
 
-    - Add an alert rule for PD restart [#2789](https://github.com/pingcap/pd/pull/2789)
+    -   PD再起動[＃2789](https://github.com/pingcap/pd/pull/2789)アラートルールを追加する
 
-## Bug Fixes
+## バグの修正 {#bug-fixes}
 
-+ TiDB
+-   ティビ
 
-    - Fix the query error that occurs when the `slow-log` file does not exist [#20050](https://github.com/pingcap/tidb/pull/20050)
-    - Add the privilege check for `SHOW STATS_META` and `SHOW STATS_BUCKET` [#19759](https://github.com/pingcap/tidb/pull/19759)
-    - Forbid changing the decimal type to the integer type [#19681](https://github.com/pingcap/tidb/pull/19681)
-    - Fix the issue that the constraint is not checked when altering the `ENUM`/`SET` type column [#20045](https://github.com/pingcap/tidb/pull/20045)
-    - Fix the bug that tidb-server does not release table locks after a panic [#20021](https://github.com/pingcap/tidb/pull/20021)
-    - Fix the bug that the `OR` operator is not handled correctly in the `WHERE` clause [#19901](https://github.com/pingcap/tidb/pull/19901)
+    -   `slow-log`ファイルが存在しない場合に発生するクエリエラーを修正[＃20050](https://github.com/pingcap/tidb/pull/20050)
+    -   `SHOW STATS_META`と`SHOW STATS_BUCKET`の権限チェックを追加する[＃19759](https://github.com/pingcap/tidb/pull/19759)
+    -   小数型を整数型に変更することを禁止する[＃19681](https://github.com/pingcap/tidb/pull/19681)
+    -   `ENUM`型列[＃20045](https://github.com/pingcap/tidb/pull/20045) `SET`変更する際に制約がチェックされない問題を修正
+    -   panic後にtidb-serverがテーブルロックを解放しないバグを修正[#20021](https://github.com/pingcap/tidb/pull/20021)
+    -   `WHERE`節[＃19901](https://github.com/pingcap/tidb/pull/19901)で`OR`演算子が正しく処理されないバグを修正
 
-+ TiKV
+-   ティクヴ
 
-    - Fix the bug that TiKV panics when parsing responses with missing reason phrases [#8540](https://github.com/tikv/tikv/pull/8540)
+    -   理由フレーズが欠落している応答を解析するときに TiKV がパニックになるバグを修正[＃8540](https://github.com/tikv/tikv/pull/8540)
 
-+ Tools
+-   ツール
 
-    + TiDB Lightning
+    -   TiDB Lightning
 
-        - Fix the issue that the TiDB Lightning process does not exit in time when encountering illegal UTF characters in CSV in the strict mode [#378](https://github.com/pingcap/tidb-lightning/pull/378)
+        -   厳密モード[＃378](https://github.com/pingcap/tidb-lightning/pull/378)で CSV に不正な UTF 文字が見つかった場合にTiDB Lightningプロセスが時間内に終了しない問題を修正しました。

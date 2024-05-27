@@ -1,13 +1,13 @@
 ---
 title: LOCK STATS
-summary: An overview of the usage of LOCK STATS for the TiDB database.
+summary: TiDB データベースの LOCK STATS の使用法の概要。
 ---
 
-# LOCK STATS
+# ロック統計 {#lock-stats}
 
-`LOCK STATS` is used to lock the statistics of tables or partitions. When the statistics is locked, TiDB does not automatically update the statistics of the table or partition. For details on the behavior, see [Behaviors of locking statistics](/statistics.md#behaviors-of-locking-statistics).
+`LOCK STATS` 、テーブルまたはパーティションの統計をロックするために使用されます。統計がロックされると、TiDB はテーブルまたはパーティションの統計を自動的に更新しません。動作の詳細については、 [統計情報のロックの動作](/statistics.md#behaviors-of-locking-statistics)を参照してください。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 LockStatsStmt ::=
@@ -23,9 +23,9 @@ PartitionNameList ::=
     Identifier ( ',' Identifier )*
 ```
 
-## Examples
+## 例 {#examples}
 
-Create table `t`, and insert data into it. When the statistics of table `t` are not locked, the `ANALYZE` statement can be successfully executed.
+テーブル`t`を作成し、そこにデータを挿入します。テーブル`t`の統計がロックされていない場合、 `ANALYZE`ステートメントは正常に実行できます。
 
 ```sql
 mysql> CREATE TABLE t(a INT, b INT);
@@ -47,7 +47,7 @@ mysql> SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-Lock the statistics of table `t` and execute `ANALYZE`. From the output of `SHOW STATS_LOCKED`, you can see that the statistics of table `t` have been locked. The warning message shows that the `ANALYZE` statement has skipped table `t`.
+テーブル`t`の統計をロックし、 `ANALYZE`を実行します。 `SHOW STATS_LOCKED`の出力から、テーブル`t`の統計がロックされていることがわかります。警告メッセージは、 `ANALYZE`ステートメントがテーブル`t`をスキップしたことを示しています。
 
 ```sql
 mysql> LOCK STATS t;
@@ -74,9 +74,9 @@ mysql> SHOW WARNINGS;
 2 rows in set (0.00 sec)
 ```
 
-In addition, you can also lock the statistics of a partition using `LOCK STATS`. For example:
+さらに、 `LOCK STATS`使用してパーティションの統計をロックすることもできます。例:
 
-Create a partition table `t`, and insert data into it. When the statistics of partition `p1` are not locked, the `ANALYZE` statement can be successfully executed.
+パーティション テーブル`t`を作成し、そこにデータを挿入します。パーティション`p1`の統計がロックされていない場合、 `ANALYZE`ステートメントは正常に実行できます。
 
 ```sql
 mysql> CREATE TABLE t(a INT, b INT) PARTITION BY RANGE (a) (PARTITION p0 VALUES LESS THAN (10), PARTITION p1 VALUES LESS THAN (20), PARTITION p2 VALUES LESS THAN (30));
@@ -103,7 +103,7 @@ mysql> SHOW WARNINGS;
 6 rows in set (0.01 sec)
 ```
 
-Lock the statistics of partition `p1` and execute `ANALYZE`. The warning message shows that the `ANALYZE` statement has skipped partition `p1`.
+パーティション`p1`の統計をロックし、 `ANALYZE`を実行します。警告メッセージは、 `ANALYZE`ステートメントがパーティション`p1`をスキップしたことを示します。
 
 ```sql
 mysql> LOCK STATS t PARTITION p1;
@@ -130,14 +130,14 @@ mysql> SHOW WARNINGS;
 2 rows in set (0.00 sec)
 ```
 
-For information on unlock statistics, see [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md).
+ロック解除統計の詳細については、 [統計情報のロックを解除](/sql-statements/sql-statement-unlock-stats.md)参照してください。
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## 参照 {#see-also}
 
-* [Statistics](/statistics.md#lock-statistics)
-* [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
-* [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)
+-   [統計](/statistics.md#lock-statistics)
+-   [統計情報のロックを解除](/sql-statements/sql-statement-unlock-stats.md)
+-   [STATS_LOCKED を表示](/sql-statements/sql-statement-show-stats-locked.md)

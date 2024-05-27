@@ -1,98 +1,98 @@
 ---
 title: Connect to TiDB Serverless with Looker Studio
-summary: Learn how to connect to TiDB Serverless using Looker Studio.
+summary: Looker Studio を使用して TiDB Serverless に接続する方法を学習します。
 ---
 
-# Connect to TiDB Serverless with Looker Studio
+# Looker Studio で TiDB Serverless に接続する {#connect-to-tidb-serverless-with-looker-studio}
 
-TiDB is a MySQL-compatible database, TiDB Serverless is a fully managed TiDB offering, and [Looker Studio](https://lookerstudio.google.com/) is a free web-based BI tool that can visualize data from various sources.
+TiDB は MySQL 互換のデータベース、TiDB Serverless は完全に管理された TiDB サービス、 [ルッカースタジオ](https://lookerstudio.google.com/)さまざまなソースからのデータを視覚化できる無料の Web ベースの BI ツールです。
 
-In this tutorial, you can learn how to connect to your TiDB Serverless cluster with Looker Studio.
+このチュートリアルでは、Looker Studio を使用して TiDB Serverless クラスターに接続する方法を学習します。
 
-> **Note:**
+> **注記：**
 >
-> Most steps in this tutorial work with TiDB Dedicated as well. However, for TiDB Dedicated, you need to note the following:
-> 
-> - Import your dataset following [Import data from files to TiDB Cloud](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud).
-> - Get the connection information for your cluster following [Connect to TiDB Dedicated](/tidb-cloud/connect-via-standard-connection.md). When connecting to TiDB Dedicated, you need to allow access from `142.251.74.0/23`. For more information about connections from Looker Studio, see [Looker Studio documentation](https://support.google.com/looker-studio/answer/7088031#zippy=%2Cin-this-article).
+> このチュートリアルのほとんどの手順は、TiDB Dedicated でも同様に機能します。ただし、TiDB Dedicated の場合は、次の点に注意する必要があります。
+>
+> -   [ファイルからTiDB Cloudにデータをインポートする](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud)に従ってデータセットをインポートします。
+> -   [TiDB専用に接続](/tidb-cloud/connect-via-standard-connection.md)に従ってクラスタの接続情報を取得します。TiDB Dedicated に接続する場合は、 `142.251.74.0/23`からのアクセスを許可する必要があります。Looker Studio からの接続の詳細については、 [Looker Studio ドキュメント](https://support.google.com/looker-studio/answer/7088031#zippy=%2Cin-this-article)を参照してください。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-To complete this tutorial, you need:
+このチュートリアルを完了するには、次のものが必要です。
 
-- A Google account
-- A TiDB Serverless cluster
+-   Googleアカウント
+-   TiDB サーバーレス クラスター
 
-**If you don't have a TiDB Serverless cluster, you can create one as follows:**
+**TiDB Serverless クラスターがない場合は、次のように作成できます。**
 
-- [Create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)
+-   [TiDB サーバーレス クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)
 
-## Step 1. Import a dataset
+## ステップ1.データセットをインポートする {#step-1-import-a-dataset}
 
-You can import the S&P 500 dataset provided in the interactive tutorial of TiDB Serverless.
+TiDB Serverless のインタラクティブ チュートリアルで提供されている S&amp;P 500 データセットをインポートできます。
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and click **?** in the lower-right corner. A **Help** dialog is displayed.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、右下隅の**[?]**をクリックします。**ヘルプ**ダイアログが表示されます。
 
-2. In the dialog, click **Interactive Tutorials**, and then click **S&P 500 Analysis**.
+2.  ダイアログで、 **[インタラクティブ チュートリアル]**をクリックし、 **[S&amp;P 500 分析] を**クリックします。
 
-3. Select your TiDB Serverless cluster, and then click **Import Dataset** to import the S&P 500 dataset to your cluster.
+3.  TiDB Serverless クラスターを選択し、 **「データセットのインポート」**をクリックして S&amp;P 500 データセットをクラスターにインポートします。
 
-4. After the import status changes to **IMPORTED**, click **Exit Tutorial** to close this dialog.
+4.  インポート ステータスが**IMPORTED**に変わったら、 **[チュートリアルを終了]**をクリックしてこのダイアログを閉じます。
 
-If you encounter any issues during import, you can cancel this import task as follows:
+インポート中に問題が発生した場合は、次の手順でこのインポート タスクをキャンセルできます。
 
-1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your TiDB Serverless cluster to go to its overview page.
-2. In the left navigation pane, click **Import**. 
-3. Find the import task named **sp500-insight**, click **...** in the **Action** column, and then click **Cancel**.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページで、TiDB Serverless クラスターの名前をクリックして、概要ページに移動します。
+2.  左側のナビゲーション ペインで、 **[インポート] を**クリックします。
+3.  **sp500-insight**という名前のインポート タスクを見つけて、 **[アクション]**列の**[...]**をクリックし、 **[キャンセル]**をクリックします。
 
-## Step 2. Get the connection information for your cluster
+## ステップ2. クラスターの接続情報を取得する {#step-2-get-the-connection-information-for-your-cluster}
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. In the connection dialog, set **Connect With** to `General`, and then click **Generate Password** to create a random password.
+3.  接続ダイアログで、 **「接続方法」を**`General`に設定し、 **「パスワードの生成」**をクリックしてランダムなパスワードを作成します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you have created a password before, use the original password or click **Reset Password** to generate a new one.
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成します。
 
-4. Download the [CA cert](https://letsencrypt.org/certs/isrgrootx1.pem).
+4.  [CA証明書](https://letsencrypt.org/certs/isrgrootx1.pem)ダウンロードしてください。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > TiDB Serverless requires a secure TLS connection between the client and the cluster, so you need this CA cert for connection settings in Looker Studio.
+    > TiDB Serverless では、クライアントとクラスター間の安全な TLS 接続が必要なので、Looker Studio の接続設定にはこの CA 証明書が必要です。
 
-## Step 3. Connect to your TiDB cluster with Looker Studio
+## ステップ3. Looker Studioを使用してTiDBクラスタに接続する {#step-3-connect-to-your-tidb-cluster-with-looker-studio}
 
-1. Log into [Looker Studio](https://lookerstudio.google.com/), and then click **Create** > **Report** in the left navigation pane.
+1.  [ルッカースタジオ](https://lookerstudio.google.com/)にログインし、左側のナビゲーション ペインで**[作成]** &gt; **[レポート]**をクリックします。
 
-2. On the displayed page, search and select the **MySQL** connector, and then click **AUTHORIZE**.
+2.  表示されたページで、 **MySQL**コネクタを検索して選択し、 **[AUTHORIZE]**をクリックします。
 
-3. In the **BASIC** setting pane, configure the connection parameters.
+3.  **基本**設定ペインで、接続パラメータを構成します。
 
-    - **Host Name or IP**: enter the `HOST` parameter from the TiDB Serverless connection dialog.
-    - **Port(Optional)**: enter the `PORT` parameter from the TiDB Serverless connection dialog.
-    - **Database**: enter the database you want to connect to. For this tutorial, enter `sp500insight`.
-    - **Username**: enter the `USERNAME` parameter from the TiDB Serverless connection dialog.
-    - **Password**: enter the `PASSWORD` parameter from the TiDB Serverless connection dialog.
-    - **Enable SSL**: select this option, and then click the upload icon to the right of **MySQL SSL Client Configuration Files** to upload the CA file downloaded from [Step 2](#step-2-get-the-connection-information-for-your-cluster).
+    -   **ホスト名または IP** : TiDB Serverless 接続ダイアログから`HOST`パラメータを入力します。
+    -   **ポート (オプション)** : TiDB Serverless 接続ダイアログから`PORT`パラメータを入力します。
+    -   **データベース**: 接続するデータベースを入力します。このチュートリアルでは、 `sp500insight`と入力します。
+    -   **ユーザー名**: TiDB Serverless 接続ダイアログから`USERNAME`パラメータを入力します。
+    -   **パスワード**: TiDB Serverless 接続ダイアログから`PASSWORD`パラメータを入力します。
+    -   **SSL を有効にする**: このオプションを選択し、 **MySQL SSL クライアントコンフィグレーションファイル**の右側にあるアップロード アイコンをクリックして、 [ステップ2](#step-2-get-the-connection-information-for-your-cluster)からダウンロードした CA ファイルをアップロードします。
 
     ![Looker Studio: configure connection settings for TiDB Serverless](/media/tidb-cloud/looker-studio-configure-connection.png)
 
-4. Click **AUTHENTICATE**.
+4.  **[認証]**をクリックします。
 
-If the authentication succeeds, you can see tables in the database.
+認証が成功すると、データベース内のテーブルが表示されます。
 
-## Step 4. Create a simple chart
+## ステップ4. シンプルなチャートを作成する {#step-4-create-a-simple-chart}
 
-Now, you can use the TiDB cluster as a data source and create a simple chart with data.
+これで、TiDB クラスターをデータ ソースとして使用し、データを含む簡単なグラフを作成できるようになりました。
 
-1. In the right pane, click **CUSTOM QUERY**.
+1.  右側のペインで、 **[カスタム クエリ]**をクリックします。
 
     ![Looker Studio: custom query](/media/tidb-cloud/looker-studio-custom-query.png)
 
-2. Copy the following code to the **Enter Custom Query** area, and then click **Add** in the lower-right corner.
+2.  次のコードを**「カスタムクエリの入力」**領域にコピーし、右下隅の**「追加」**をクリックします。
 
     ```sql
     SELECT sector,
@@ -108,30 +108,30 @@ Now, you can use the TiDB cluster as a data source and create a simple chart wit
     ORDER BY 5 ASC;
     ```
 
-    If you see the **You are about to add data to this report** dialog, click **ADD TO REPORT**. Then, a table is displayed in the report.
+    「**このレポートにデータを追加しようとしています」という**ダイアログが表示されたら、 **「レポートに追加」**をクリックします。すると、レポートにテーブルが表示されます。
 
-3. In the toolbar of the report, click **Add a chart**, and then select `Combo chart` in the `Line` category.
+3.  レポートのツールバーで、 **「グラフの追加」**をクリックし、 `Line`カテゴリで`Combo chart`を選択します。
 
-4. In the **Chart** settings pane on the right, configure the following parameters:
+4.  右側の**チャート**設定ペインで、次のパラメータを設定します。
 
-    - In the **SETUP** Tab:
-        - **Dimension**: `sector`.
-        - **Metric**: `companies` and `total_market_cap`.
-    - In the **STYLE** Tab:
-      - Series #1: select the `Line` option and the `Right` axis.
-      - Series #2: select the `Bars` option and the `Left` axis.
-    - Leave other fields as defaults.
+    -   **セットアップ**タブで:
+        -   **寸法**: `sector` .
+        -   **メートル法**: `companies`と`total_market_cap` 。
+    -   **スタイル**タブ:
+        -   シリーズ #1: オプション`Line`と軸`Right`を選択します。
+        -   シリーズ #2: オプション`Bars`と軸`Left`を選択します。
+    -   他のフィールドはデフォルトのままにします。
 
-Then, you can see a combo chart similar as follows:
+すると、次のようなコンボ チャートが表示されます。
 
 ![Looker Studio: A simple Combo chart](/media/tidb-cloud/looker-studio-simple-chart.png)
 
-## Next steps
+## 次のステップ {#next-steps}
 
-- Learn more usage of Looker Studio from [Looker Studio Help](https://support.google.com/looker-studio).
-- Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
-- Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
+-   [Looker Studio ヘルプ](https://support.google.com/looker-studio)から Looker Studio の使用方法を詳しく学びます。
+-   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入](/develop/dev-guide-insert-data.md) 、 [データの更新](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブル読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
+-   プロフェッショナル[TiDB 開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
-## Need help?
+## 助けが必要？ {#need-help}
 
-Ask questions on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [create a support ticket](https://support.pingcap.com/).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。

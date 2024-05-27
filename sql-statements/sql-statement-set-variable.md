@@ -1,21 +1,21 @@
 ---
 title: SET [GLOBAL|SESSION] <variable> | TiDB SQL Statement Reference
-summary: An overview of the usage of SET [GLOBAL|SESSION] <variable> for the TiDB database.
+summary: TiDB データベースの SET [GLOBAL|SESSION] <variable> の使用法の概要。
 ---
 
-# `SET [GLOBAL|SESSION] <variable>`
+# <code>SET [GLOBAL|SESSION] &#x3C;variable></code> {#code-set-global-session-x3c-variable-code}
 
-The statement `SET [GLOBAL|SESSION]` modifies one of TiDB's built in variables. These variables can be [system variables](/system-variables.md) of either `SESSION` or `GLOBAL` scope or [user variables](/user-defined-variables.md).
+ステートメント`SET [GLOBAL|SESSION]`は、TiDB の組み込み変数の 1 つを変更します。これらの変数は、 `SESSION`または`GLOBAL`スコープの[システム変数](/system-variables.md)または[ユーザー変数](/user-defined-variables.md)いずれかになります。
 
-> **Warning:**
+> **警告：**
 >
-> User-defined variables are still an experimental feature. It is **NOT** recommended that you use them in the production environment.
+> ユーザー定義変数はまだ実験的機能です。本番環境での使用はお勧めし**ません**。
 
-> **Note:**
+> **注記：**
 >
-> Similar to MySQL, changes to `GLOBAL` variables do not apply to either existing connections, or the local connection. Only new sessions reflect the changes to the value.
+> MySQL と同様に、 `GLOBAL`変数への変更は既存の接続にもローカル接続にも適用されません。値の変更は新しいセッションにのみ反映されます。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 SetVariableStmt ::=
@@ -26,9 +26,9 @@ Variable ::=
 |   UserVariable 
 ```
 
-## Examples
+## 例 {#examples}
 
-Get the value of `sql_mode`.
+`sql_mode`の値を取得します。
 
 ```sql
 mysql> SHOW GLOBAL VARIABLES LIKE 'sql_mode';
@@ -48,7 +48,7 @@ mysql> SHOW SESSION VARIABLES LIKE 'sql_mode';
 1 row in set (0.00 sec)
 ```
 
-Update the value of `sql_mode` globally. If you check the value of `SQL_mode` after the update, you can see that the value of `SESSION` level has not been updated:
+`sql_mode`の値をグローバルに更新します。更新後に`SQL_mode`の値を確認すると、 `SESSION`レベルの値が更新されていないことがわかります。
 
 ```sql
 mysql> SET GLOBAL sql_mode = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER';
@@ -71,7 +71,7 @@ mysql> SHOW SESSION VARIABLES LIKE 'sql_mode';
 1 row in set (0.00 sec)
 ```
 
-Using `SET SESSION` takes effect immediately:
+`SET SESSION`使用するとすぐに有効になります。
 
 ```sql
 mysql> SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER';
@@ -86,7 +86,7 @@ mysql> SHOW SESSION VARIABLES LIKE 'sql_mode';
 1 row in set (0.00 sec)
 ```
 
-User variables start with a `@`.
+ユーザー変数は`@`で始まります。
 
 ```sql
 SET @myvar := 5;
@@ -101,15 +101,15 @@ SELECT @myvar, @myvar + 1;
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-The following behavior differences apply:
+次の動作の違いが適用されます。
 
-* Changes made with `SET GLOBAL` will be propagated to all TiDB instances in the cluster. This differs from MySQL, where changes do not propagate to replicas.
-* TiDB presents several variables as both readable and settable. This is required for MySQL compatibility, because it is common for both applications and connectors to read MySQL variables. For example: JDBC connectors both read and set query cache settings, despite not relying on the behavior.
-* Changes made with `SET GLOBAL` will persist through TiDB server restarts. This means that `SET GLOBAL` in TiDB behaves more similar to `SET PERSIST` as available in MySQL 8.0 and above.
-* TiDB does not support `SET PERSIST` and `SET PERSIST_ONLY`, because TiDB persists global variables.
+-   `SET GLOBAL`で行われた変更は、クラスター内のすべての TiDB インスタンスに伝播されます。これは、変更がレプリカに伝播されない MySQL とは異なります。
+-   TiDB は、いくつかの変数を読み取り可能かつ設定可能なものとして提示します。これは、アプリケーションとコネクタの両方が MySQL 変数を読み取るのが一般的であるため、MySQL との互換性のために必要です。たとえば、JDBC コネクタは、動作に依存していないにもかかわらず、クエリ キャッシュ設定の読み取りと設定の両方を行います。
+-   `SET GLOBAL`で行われた変更は、TiDBサーバーの再起動後も保持されます。つまり、TiDB の`SET GLOBAL` 、MySQL 8.0 以降で利用可能な`SET PERSIST`に似た動作をすることになります。
+-   TiDB はグローバル変数を永続化するため、 `SET PERSIST`と`SET PERSIST_ONLY`サポートしません。
 
-## See also
+## 参照 {#see-also}
 
-* [SHOW \[GLOBAL|SESSION\] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+-   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)

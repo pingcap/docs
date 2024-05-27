@@ -1,269 +1,269 @@
 ---
 title: TiDB 1.0 release notes
-summary: TiDB 1.0 is released with a focus on MySQL compatibility, SQL optimization, stability, and performance. It includes enhancements to the SQL query optimizer, internal data format optimization, and support for various operators. PD now supports read flow based balancing and setting store weight. TiKV has improved coprocessor support and performance, and added a Debug API. Special thanks to enterprises, open source software, and individual contributors for their support.
+summary: TiDB 1.0 は、MySQL との互換性、SQL の最適化、安定性、パフォーマンスに重点を置いてリリースされました。SQL クエリ オプティマイザーの強化、内部データ形式の最適化、さまざまな演算子のサポートが含まれています。PD は、読み取りフロー ベースのバランス調整とストアの重み設定をサポートするようになりました。TiKV では、コプロセッサのサポートとパフォーマンスが向上し、デバッグ API が追加されました。サポートしていただいた企業、オープン ソース ソフトウェア、個人の貢献者の方々に心より感謝いたします。
 ---
 
-# TiDB 1.0 Release Notes
+# TiDB 1.0 リリースノート {#tidb-1-0-release-notes}
 
-On October 16, 2017, TiDB 1.0 is now released! This release is focused on MySQL compatibility, SQL optimization, stability, and performance.
+2017 年 10 月 16 日に、TiDB 1.0 がリリースされました。このリリースでは、MySQL の互換性、SQL の最適化、安定性、パフォーマンスに重点を置いています。
 
-## TiDB
+## ティビ {#tidb}
 
-- The SQL query optimizer:
-    - Adjust the cost model
-    - Analyze pushdown
-    - Function signature pushdown
-- Optimize the internal data format to reduce the interim data size
-- Enhance the MySQL compatibility
-- Support the `NO_SQL_CACHE` syntax and limit the cache usage in the storage engine
-- Refactor the Hash Aggregator operator to reduce the memory usage
-- Support the Stream Aggregator operator
+-   SQL クエリ オプティマイザー:
+    -   コストモデルを調整する
+    -   プッシュダウンを分析する
+    -   関数シグネチャのプッシュダウン
+-   内部データ形式を最適化して中間データのサイズを削減する
+-   MySQLの互換性を強化する
+-   `NO_SQL_CACHE`構文をサポートし、storageエンジンでのキャッシュの使用を制限する
+-   ハッシュアグリゲータ演算子をリファクタリングしてメモリ使用量を削減する
+-   ストリームアグリゲーターオペレーターをサポートする
 
-## PD
+## PD {#pd}
 
-- Support read flow based balancing
-- Support setting the Store weight and weight based balancing
+-   読み取りフローベースのバランス調整をサポート
+-   ストアの重量と重量ベースのバランス設定をサポート
 
-## TiKV
+## ティクヴ {#tikv}
 
-- Coprocessor now supports more pushdown functions
-- Support pushing down the sampling operation
-- Support manually triggering data compact to collect space quickly
-- Improve the performance and stability
-- Add a Debug API for debugging
-- TiSpark Beta Release:
-- Support configuration framework
-- Support ThriftSever/JDBC and Spark SQL
+-   コプロセッサーがより多くのプッシュダウン関数をサポートするようになりました
+-   サンプリング操作のプッシュダウンをサポート
+-   スペースを素早く確保するために手動でデータ圧縮をトリガーする機能をサポート
+-   パフォーマンスと安定性を向上
+-   デバッグ用のデバッグAPIを追加する
+-   TiSpark ベータ版リリース:
+-   サポート構成フレームワーク
+-   ThriftSever/JDBCおよびSpark SQLをサポート
 
-## Acknowledgement
+## 了承 {#acknowledgement}
 
-### Special thanks to the following enterprises and teams
+### 以下の企業およびチームに特別な感謝を申し上げます {#special-thanks-to-the-following-enterprises-and-teams}
 
-- Archon
-- Mobike
-- Samsung Electronics
-- SpeedyCloud
-- Tencent Cloud
-- UCloud
+-   アルコン
+-   モバイク
+-   サムスン電子
+-   スピーディークラウド
+-   テンセントクラウド
+-   ユークラウド
 
-### Thanks to the open source software and services from the following organizations and individuals
+### 以下の組織および個人からのオープンソースソフトウェアおよびサービスに感謝します {#thanks-to-the-open-source-software-and-services-from-the-following-organizations-and-individuals}
 
-- Asta Xie
-- CNCF
-- CoreOS
-- Databricks
-- Docker
-- Github
-- Grafana
-- gRPC
-- Jepsen
-- Kubernetes
-- Namazu
-- Prometheus
-- RedHat
-- RocksDB Team
-- Rust Team
+-   アスタ・シェ
+-   CNCF
+-   コアOS
+-   データブリックス
+-   ドッカー
+-   ギットハブ
+-   グラファナ
+-   GRPC とは
+-   ジェプセン
+-   クベネフィット
+-   ナマズ
+-   プロメテウス
+-   レッドハット
+-   RocksDB チーム
+-   Rustチーム
 
-### Thanks to the individual contributors
+### 個々の貢献者に感謝 {#thanks-to-the-individual-contributors}
 
-- 8cbx
-- Akihiro Suda
-- aliyx
-- alston111111
-- andelf
-- Andy Librian
-- Arthur Yang
-- astaxie
-- Bai, Yang
-- bailaohe
-- Bin Liu
-- Blame cosmos
-- Breezewish
-- Carlos Ferreira
-- Ce Gao
-- Changjian Zhang
-- Cheng Lian
-- Cholerae Hu
-- Chu Chao
-- coldwater
-- Cole R Lawrence
-- cuiqiu
-- cuiyuan
-- Cwen
-- Dagang
-- David Chen
-- David Ding
-- dawxy
-- dcadevil
-- Deshi Xiao
-- Di Tang
-- disksing
-- dongxu
-- dreamquster
-- Drogon
-- Du Chuan
-- Dylan Wen
-- eBoyy
-- Eric Romano
-- Ewan Chou
-- Fiisio
-- follitude
-- Fred Wang
-- fud
-- fudali
-- gaoyangxiaozhu
-- Gogs
-- goroutine
-- Gregory Ian
-- Guanqun Lu
-- Guilherme Hübner Franco
-- Haibin Xie
-- Han Fei
-- hawkingrei
-- Hiroaki Nakamura
-- hiwjd
-- Hongyuan Wang
-- Hu Ming
-- Hu Ziming
-- Huachao Huang
-- HuaiyuXu
-- Huxley Hu
-- iamxy
-- Ian
-- insion
-- iroi44
-- Ivan.Yang
-- Jack Yu
-- jacky liu
-- Jan Mercl
-- Jason W
-- Jay
-- Jay Lee
-- Jianfei Wang
-- Jiaxing Liang
-- Jie Zhou
-- jinhelin
-- Jonathan Boulle
-- Karl Ostendorf
-- knarfeh
-- Kuiba
-- leixuechun
-- li
-- Li Shihai
-- Liao Qiang
-- Light
-- lijian
-- Lilian Lee
-- Liqueur Librazy
-- Liu Cong
-- Liu Shaohui
-- liubo0127
-- liyanan
-- lkk2003rty
-- Louis
-- louishust
-- luckcolors
-- Lynn
-- Mae Huang
-- maiyang
-- maxwell
-- mengshangqi
-- Michael Belenchenko
-- mo2zie
-- morefreeze
-- MQ
-- mxlxm
-- Neil Shen
-- netroby
-- ngaut
-- Nicole Nie
-- nolouch
-- onlymellb
-- overvenus
-- PaladinTyrion
-- paulg
-- Priya Seth
-- qgxiaozhan
-- qhsong
-- Qiannan
-- qiukeren
-- qiuyesuifeng
-- queenypingcap
-- qupeng
-- Rain Li
-- ranxiaolong
-- Ray
-- Rick Yu
-- shady
-- ShawnLi
-- Shen Li
-- Sheng Tang
-- Shirly
-- Shuai Li
-- ShuNing
-- ShuYu Wang
-- siddontang
-- silenceper
-- Simon J Mudd
-- Simon Xia
-- skimmilk6877
-- sllt
-- soup
-- Sphinx
-- Steffen
-- sumBug
-- sunhao2017
-- Tao Meng
-- Tao Zhou
-- tennix
-- tiancaiamao
-- TianGuangyu
-- Tristan Su
-- ueizhou
-- UncP
-- Unknwon
-- v01dstar
-- Van
-- WangXiangUSTC
-- wangyanjun
-- wangyisong1996
-- weekface
-- wegel
-- Wei Fu
-- Wenbin Xiao
-- Wenting Li
-- Wenxuan Shi
-- winkyao
-- woodpenker
-- wuxuelian
-- Xiang Li
-- xiaojian cai
-- Xuanjia Yang
-- Xuanwo
-- XuHuaiyu
-- Yang Zhexuan
-- Yann Autissier
-- Yanzhe Chen
-- Yiding Cui
-- Yim
-- youyouhu
-- Yu Jun
-- Yuwen Shen
-- Zejun Li
-- Zhang Yuning
-- zhangjinpeng1987
-- ZHAO Yijun
-- Zhe-xuan Yang
-- ZhengQian
-- ZhengQianFang
-- zhengwanbo
-- ZhiFeng Hu
-- Zhiyuan Zheng
-- Zhou Tao
-- Zhoubirdblue
-- zhouningnan
-- Ziyi Yan
-- zs634134578
-- zxylvlp
-- zyguan
-- zz-jason
+-   8cbx
+-   須田明弘
+-   アリックス
+-   アルストン111111
+-   アンデルフ
+-   アンディ・リブリアン
+-   アーサー・ヤン
+-   失調症
+-   バイ・ヤン
+-   バイラオヘ
+-   ビン・リウ
+-   宇宙のせいだ
+-   そよ風
+-   カルロス・フェレイラ
+-   セ・ガオ
+-   チャンジャン・チャン
+-   チェン・リアン
+-   コレラ・フー
+-   チュー・チャオ
+-   冷水
+-   コール・R・ローレンス
+-   崔秋
+-   翠園
+-   クウェン
+-   ダガン
+-   デビッド・チェン
+-   デビッド・ディン
+-   ダウシー
+-   dcadevil
+-   デシ・シャオ
+-   ディ・タン
+-   ディスク
+-   ドンシュ
+-   ドリームクスター
+-   ドロゴン
+-   ドゥ・チュアン
+-   ディラン・ウェン
+-   イーボーイ
+-   エリック・ロマーノ
+-   ユアン・チョウ
+-   フィシオ
+-   愚かさ
+-   フレッド・ワン
+-   ファッド
+-   フダリ
+-   ガオヤンシャオジュ
+-   ゴグス
+-   ゴルーチン
+-   グレゴリー・イアン
+-   ルー・グアンチュン
+-   ギリェルメ・ヒューブナー・フランコ
+-   謝海斌
+-   ハン・フェイ
+-   ホーキングレイ
+-   中村 宏明
+-   こんにちは
+-   王宏源
+-   胡明
+-   胡子明
+-   黄華超
+-   フアイユシュ
+-   ハクスリー・フー
+-   iamxy
+-   イアン
+-   インシオン
+-   イロイ44
+-   イヴァン・ヤン
+-   ジャック・ユー
+-   ジャッキー・リュー
+-   ヤン・メルクル
+-   ジェイソン W
+-   ジェイ
+-   ジェイ・リー
+-   王建飛
+-   梁嘉興
+-   周傑
+-   ジンヘリン
+-   ジョナサン・ブール
+-   カール・オステンドルフ
+-   クナルフェ
+-   クイバ
+-   雷雪春
+-   李
+-   李世海
+-   廖強
+-   ライト
+-   麗江
+-   リリアン・リー
+-   リキュール リブラジ
+-   劉 聰
+-   劉少輝
+-   りゅうぼ
+-   リヤナン
+-   lkk2003rty
+-   ルイ
+-   ルイシュスト
+-   幸運の色
+-   リン
+-   メー・ホアン
+-   マイヤン
+-   マクスウェル
+-   メンシャンチー
+-   マイケル・ベレンチェンコ
+-   モ2ジー
+-   もっとフリーズ
+-   ＭＱ
+-   ｍｘｌｘｍ
+-   ニール・シェン
+-   ネットロビー
+-   ナウト
+-   ニコール・ニー
+-   ノルーシュ
+-   のみメル
+-   金星の上
+-   パラディンティリオン
+-   ポール
+-   プリヤ・セス
+-   きゃん
+-   クソン
+-   千南
+-   キウケレン
+-   秋瑩峰
+-   クィニーピンキャップ
+-   クペン
+-   レイン・リー
+-   ランシャオロン
+-   レイ
+-   リック・ユー
+-   怪しい
+-   ショーン・リー
+-   シェン・リー
+-   シェン・タン
+-   シャーリー
+-   李帥
+-   シュニン
+-   王淑宇
+-   シドンタン
+-   サイレンサー
+-   サイモン・J・マッド
+-   サイモン・シア
+-   スキムミルク6877
+-   sllt
+-   スープ
+-   スフィンクス
+-   ステフェン
+-   サムバグ
+-   すんはお
+-   タオ・メン
+-   タオ・ジョウ
+-   テニス
+-   天菜まお
+-   ティアングアンユ
+-   トリスタン・スー
+-   上州
+-   国連
+-   不明
+-   v01dスター
+-   バン
+-   王翔USTC
+-   ワンヤンジュン
+-   翻訳者
+-   ウィークフェイス
+-   ウェゲル
+-   ウェイ・フー
+-   ウェンビン・シャオ
+-   ウェンティン・リー
+-   ウェンシュアン・シー
+-   ウィンキャオ
+-   ウッドペンカー
+-   武則連
+-   翔李
+-   蔡暁建
+-   ヤン・シュアンジア
+-   玄武
+-   徐淮宇
+-   ヤン・ゼシュアン
+-   ヤン・オーティシエ
+-   ヤンツェ・チェン
+-   崔一丁
+-   イム
+-   ユウユウ
+-   ユ・ジュン
+-   シェン・ユーウェン
+-   ゼジュン・リー
+-   張宇寧
+-   張金鵬1987
+-   趙一軍
+-   楊哲玄
+-   鄭千
+-   鄭千芳
+-   正万博
+-   胡志鋒
+-   鄭志遠
+-   周涛
+-   チョウバードブルー
+-   周寧南
+-   ヤン・ツィイー
+-   634134578 さん
+-   翻訳
+-   ジグアン
+-   zzジェイソン

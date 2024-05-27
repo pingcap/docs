@@ -1,114 +1,117 @@
 ---
 title: TiDB Cloud Built-in Alerting
-summary: Learn how to monitor your TiDB cluster by getting alert notification emails from TiDB Cloud.
+summary: TiDB Cloudからアラート通知メールを受信して​​、TiDB クラスターを監視する方法を学習します。
 ---
 
-# TiDB Cloud Built-in Alerting
+# TiDB Cloud組み込みアラート {#tidb-cloud-built-in-alerting}
 
-TiDB Cloud provides you with an easy way to view alerts, edit alert rules, and subscribe to alert notification emails.
+TiDB Cloudと、アラートの表示、アラート ルールの編集、アラート通知メールの購読を簡単に行うことができます。
 
-This document describes how to do these operations and provides the TiDB Cloud built-in alert conditions for your reference.
+このドキュメントでは、これらの操作を実行する方法について説明し、参考としてTiDB Cloudに組み込まれているアラート条件を示します。
 
-> **Note:**
+> **注記：**
 >
-> Currently, the alert feature is only available for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
+> 現在、アラート機能は[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターでのみ使用できます。
 
-## View alerts
+## アラートをビュー {#view-alerts}
 
-In TiDB Cloud, you can view both active and closed alerts on the Alerts page.
+TiDB Cloudでは、アラート ページでアクティブなアラートとクローズされたアラートの両方を表示できます。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
-2. Click the name of the target cluster. The cluster overview page is displayed.
-3. Click **Alerts** in the left navigation pane.
-4. The **Alerts** page displays the active alerts by default. You can view the information of each active alert such as the alert name, trigger time, and duration.
-5. If you also want to view the closed alerts, just click the **Status** drop-down list and select **Closed** or **All**.
+2.  対象クラスターの名前をクリックします。クラスターの概要ページが表示されます。
 
-## Edit alert rules
+3.  左側のナビゲーション ペインで**[アラート]**をクリックします。
 
-In TiDB Cloud, you can edit the alert rules by disabling or enabling the alerts or updating the alert threshold.
+4.  **アラート**ページには、デフォルトでアクティブなアラートが表示されます。アラート名、トリガー時間、期間など、アクティブなアラートごとの情報を表示できます。
 
-1. On the **Alerts** page, click **Edit Rules**.
-2. Disable or enable alert rules as needed.
-3. Click **Edit** to update the threshold of an alert rule.
+5.  クローズされたアラートも表示したい場合は、 **[ステータス]**ドロップダウン リストをクリックし、 **[クローズ済み]**または**[すべて]**を選択します。
 
-    > **Tip:**
+## アラートルールを編集する {#edit-alert-rules}
+
+TiDB Cloudでは、アラートを無効または有効にしたり、アラートしきい値を更新したりすることで、アラート ルールを編集できます。
+
+1.  **[アラート]**ページで、 **[ルールの編集] を**クリックします。
+2.  必要に応じてアラート ルールを無効または有効にします。
+3.  アラート ルールのしきい値を更新するには、 **[編集] を**クリックします。
+
+    > **ヒント：**
     >
-    > Currently, TiDB Cloud provides limited capabilities for alert rule editing. Some alert rules do not support editing. If you would like to configure different trigger conditions or frequency, or have alerts automatically trigger actions in downstream services like [PagerDuty](https://www.pagerduty.com/docs/guides/datadog-integration-guide/), consider using a [third-party monitoring and alerting integration](/tidb-cloud/third-party-monitoring-integrations.md).
+    > 現在、 TiDB Cloudアラート ルールの編集機能が制限されています。一部のアラート ルールは編集をサポートしていません。異なるトリガー条件や頻度を構成したり、アラートによって[ページャーデューティ](https://www.pagerduty.com/docs/guides/datadog-integration-guide/)などのダウンストリーム サービスでアクションが自動的にトリガーされるようにしたい場合は、 [サードパーティの監視とアラートの統合](/tidb-cloud/third-party-monitoring-integrations.md)の使用を検討してください。
 
-## Subscribe to alert notification emails
+## アラート通知メールを購読する {#subscribe-to-alert-notification-emails}
 
-To get alert notification emails of clusters in your project, take the following steps:
+プロジェクト内のクラスターのアラート通知メールを受信するには、次の手順を実行します。
 
-1. On the **Alerts** page , click **Subscribe Alerts**.
-2. Enter your email address, and then click **Subscribe**.
+1.  **[アラート]**ページで、 **[アラートを購読] を**クリックします。
+2.  メールアドレスを入力し、 **「登録」を**クリックします。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > The alert subscription is for all alerts in the current project. If you have multiple clusters in the project, you just need to subscribe once.
+    > アラートのサブスクリプションは、現在のプロジェクト内のすべてのアラートを対象としています。プロジェクト内に複数のクラスターがある場合は、一度だけサブスクライブする必要があります。
 
-Alternatively, you can also add the subscription from the **Alert Subscription** page as follows:
+または、次のようにして**「アラート サブスクリプション」**ページからサブスクリプションを追加することもできます。
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
-3. On the **Project Settings** page of your project, click **Alert Subscription** in the left navigation pane.
-4. Click **Add Subscriber**, enter your email address in the displayed dialog, and then click **Add**.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
+2.  クリック<mdsvgicon name="icon-left-projects">左下隅で、複数のプロジェクトがある場合は対象プロジェクトに切り替えて、 **[プロジェクト設定]**をクリックします。</mdsvgicon>
+3.  プロジェクトの**「プロジェクト設定」**ページで、左側のナビゲーション ペインの**「アラート サブスクリプション」**をクリックします。
+4.  **[購読者を追加] を**クリックし、表示されたダイアログにメール アドレスを入力して、 **[追加] を**クリックします。
 
-If an alert condition remains unchanged, the alert sends email notifications every 3 hours.
+アラート条件が変更されない場合、アラートは 3 時間ごとに電子メール通知を送信します。
 
-## Unsubscribe from alert notification emails
+## アラート通知メールの購読を解除する {#unsubscribe-from-alert-notification-emails}
 
-If you no longer want to receive alert notification emails of clusters in your project, take the following steps:
+プロジェクト内のクラスターのアラート通知メールを受信したくない場合は、次の手順を実行します。
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
-3. On the **Project Settings** page of your project, click **Alert Subscription** in the left navigation pane.
-4. Locate your email address and click **Unsubscribe**.
-5. Click **Delete** to confirm the unsubscription.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
+2.  クリック<mdsvgicon name="icon-left-projects">左下隅で、複数のプロジェクトがある場合は対象プロジェクトに切り替えて、 **[プロジェクト設定]**をクリックします。</mdsvgicon>
+3.  プロジェクトの**「プロジェクト設定」**ページで、左側のナビゲーション ペインの**「アラート サブスクリプション」**をクリックします。
+4.  メールアドレスを見つけて、 **「登録解除」**をクリックします。
+5.  登録解除を確認するには、 **「削除」を**クリックします。
 
-## TiDB Cloud built-in alert conditions
+## TiDB Cloud組み込みアラート条件 {#tidb-cloud-built-in-alert-conditions}
 
-The following table provides the TiDB Cloud built-in alert conditions and the corresponding recommended actions.
+次の表は、 TiDB Cloud に組み込まれているアラート条件とそれに対応する推奨アクションを示しています。
 
-> **Note:**
+> **注記：**
 >
-> - While these alert conditions do not necessarily mean there is a problem, they are often early warning indicators of emerging issues. Therefore, taking the recommended action is advised.
-> - You can edit the thresholds of the alerts on the TiDB Cloud console. 
-> - Some alert rules are disabled by default. You can enable them as needed. 
+> -   これらの警告状態は必ずしも問題があることを意味するわけではありませんが、多くの場合、新たな問題が発生する早期警告の指標となります。したがって、推奨されるアクションを実行することをお勧めします。
+> -   TiDB Cloudコンソールでアラートのしきい値を編集できます。
+> -   一部のアラート ルールはデフォルトで無効になっています。必要に応じて有効にすることができます。
 
-### Resource usage alerts
+### リソース使用状況アラート {#resource-usage-alerts}
 
-| Condition | Recommended Action |
-|:--- |:--- |
-| Total TiDB node memory utilization across cluster exceeded 70% for 10 minutes | Consider increasing the node number or node size for TiDB to reduce the memory usage percentage of the current workload.|
-| Total TiKV node memory utilization across cluster exceeded 70% for 10 minutes | Consider increasing the node number or node size for TiKV to reduce the memory usage percentage of the current workload. |
-| Total TiFlash node memory utilization across cluster exceeded 70% for 10 minutes | Consider increasing the node number or node size for TiFlash to reduce the memory usage percentage of the current workload. |
-| Total TiDB node CPU utilization exceeded 80% for 10 minutes | Consider increasing the node number or node size for TiDB to reduce the CPU usage percentage of the current workload.|
-| Total TiKV node CPU utilization exceeded 80% for 10 minutes | Consider increasing the node number or node size for TiKV to reduce the CPU usage percentage of the current workload. |
-| Total TiFlash node CPU utilization exceeded 80% for 10 minutes | Consider increasing the node number or node size for TiFlash to reduce the CPU usage percentage of the current workload. |
-| TiKV storage utilization exceeds 80% | Consider increasing the node number or node storage size for TiKV to increase your storage capacity. |
-| TiFlash storage utilization exceeds 80% | Consider increasing the node number or node storage size for TiFlash to increase your storage capacity. |
-| Max memory utilization across TiDB nodes exceeded 70% for 10 minutes | Consider checking if there is any [hotspot](/tidb-cloud/tidb-cloud-sql-tuning-overview.md#hotspot-issues) in the cluster or increasing the node number or node size for TiDB to reduce the memory usage percentage of the current workload. |
-| Max memory utilization across TiKV nodes exceeded 70% for 10 minutes | Consider checking if there is any [hotspot](/tidb-cloud/tidb-cloud-sql-tuning-overview.md#hotspot-issues) in the cluster or increasing the node number or node size for TiKV to reduce the memory usage percentage of the current workload. |
-| Max CPU utilization across TiDB nodes exceeded 80% for 10 minutes | Consider checking if there is any [hotspot](/tidb-cloud/tidb-cloud-sql-tuning-overview.md#hotspot-issues) in the cluster or increasing the node number or node size for TiDB to reduce the CPU usage percentage of the current workload. |
-| Max CPU utilization across TiKV nodes exceeded 80% for 10 minutes | Consider checking if there is any [hotspot](/tidb-cloud/tidb-cloud-sql-tuning-overview.md#hotspot-issues) in the cluster or increasing the node number or node size for TiKV to reduce the CPU usage percentage of the current workload. |
+| 状態                                          | 推奨される行動                                                                                                                                                  |
+| :------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| クラスター全体の TiDB ノードメモリ使用率が 10 分間で 70% を超えました  | 現在のワークロードのメモリ使用量の割合を減らすには、TiDB のノード数またはノード サイズを増やすことを検討してください。                                                                                           |
+| クラスター全体の TiKV ノードメモリ使用率が 10 分間で 70% を超えました  | 現在のワークロードのメモリ使用量の割合を減らすには、TiKV のノード数またはノード サイズを増やすことを検討してください。                                                                                           |
+| クラスター全体のTiFlashノードメモリ使用率が 10 分間で 70% を超えました | 現在のワークロードのメモリ使用率を下げるには、 TiFlashのノード数またはノード サイズを増やすことを検討してください。                                                                                           |
+| TiDBノードの合計CPU使用率が10分間80%を超えました              | 現在のワークロードの CPU 使用率を下げるには、TiDB のノード数またはノード サイズを増やすことを検討してください。                                                                                            |
+| TiKVノードのCPU使用率が10分間80%を超えました                | 現在のワークロードの CPU 使用率を下げるには、TiKV のノード数またはノード サイズを増やすことを検討してください。                                                                                            |
+| TiFlashノードの合計 CPU 使用率が 10 分間 80% を超えました     | 現在のワークロードの CPU 使用率を下げるには、 TiFlashのノード数またはノード サイズを増やすことを検討してください。                                                                                         |
+| TiKVstorageの使用率が80%を超える                     | storage容量を増やすには、TiKV のノード数またはノードstorageサイズを増やすことを検討してください。                                                                                               |
+| TiFlashstorageの使用率が80%を超える                  | storage容量を増やすには、 TiFlashのノード数またはノードstorageサイズを増やすことを検討してください。                                                                                            |
+| TiDB ノード全体の最大メモリ使用率が 10 分間 70% を超えました       | 現在のワークロードのメモリ使用率を減らすには、クラスター内に[ホットスポット](/tidb-cloud/tidb-cloud-sql-tuning-overview.md#hotspot-issues)あるかどうかを確認するか、TiDB のノード数またはノード サイズを増やすことを検討してください。   |
+| TiKV ノード全体の最大メモリ使用率が 10 分間 70% を超えました       | 現在のワークロードのメモリ使用率を減らすには、クラスター内に[ホットスポット](/tidb-cloud/tidb-cloud-sql-tuning-overview.md#hotspot-issues)あるかどうかを確認するか、TiKV のノード数またはノード サイズを増やすことを検討してください。   |
+| TiDB ノード全体の最大 CPU 使用率が 10 分間 80% を超えました     | 現在のワークロードの CPU 使用率を減らすには、クラスター内に[ホットスポット](/tidb-cloud/tidb-cloud-sql-tuning-overview.md#hotspot-issues)あるかどうかを確認するか、TiDB のノード数またはノード サイズを増やすことを検討してください。 |
+| TiKV ノード全体の最大 CPU 使用率が 10 分間 80% を超えました     | 現在のワークロードの CPU 使用率を減らすには、クラスター内に[ホットスポット](/tidb-cloud/tidb-cloud-sql-tuning-overview.md#hotspot-issues)あるかどうかを確認するか、TiKV のノード数またはノード サイズを増やすことを検討してください。 |
 
-### Data migration alerts
+### データ移行アラート {#data-migration-alerts}
 
-| Condition | Recommended Action |
-|:--- |:--- |
-| Data migration job met error during data export | Check the error and see [Troubleshoot data migration](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions) for help. |
-| Data migration job met error during data import | Check the error and see [Troubleshoot data migration](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions) for help. |
-| Data migration job met error during incremental migration | Check the error and see [Troubleshoot data migration](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions) for help. |
-| Data migration job has been paused for more than 6 hours during incremental migration | Data migration job has been paused for more than 6 hours during data incremental migration. The binlog in the upstream database might be purged (depending on your database binlog purge strategy) and might cause incremental migration to fail. See [Troubleshoot data migration](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions) for help. |
-| Replication lag is larger than 10 minutes and still increasing for more than 20 minutes | See [Troubleshoot data migration](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions) for help. |
+| 状態                                       | 推奨される行動                                                                                                                                                                                                                                       |
+| :--------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| データ移行ジョブでデータのエクスポート中にエラーが発生しました          | エラーを確認し、ヘルプについては[データ移行のトラブルシューティング](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)参照してください。                                                                                                        |
+| データ移行ジョブでデータのインポート中にエラーが発生しました           | エラーを確認し、ヘルプについては[データ移行のトラブルシューティング](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)参照してください。                                                                                                        |
+| 増分移行中にデータ移行ジョブでエラーが発生しました                | エラーを確認し、ヘルプについては[データ移行のトラブルシューティング](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)参照してください。                                                                                                        |
+| 増分移行中にデータ移行ジョブが 6 時間以上一時停止されました          | データ移行ジョブは、データ増分移行中に 6 時間以上一時停止されています。アップストリーム データベースのbinlogが消去され (データベースbinlog消去戦略によって異なります)、増分移行が失敗する可能性があります。ヘルプについては[データ移行のトラブルシューティング](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)参照してください。 |
+| レプリケーションの遅延が 10 分を超えており、20 分以上も増加し続けています | ヘルプについては[データ移行のトラブルシューティング](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)参照してください。                                                                                                                |
 
-### Changefeed alerts
+### チェンジフィードアラート {#changefeed-alerts}
 
-| Condition | Recommended Action |
-|:--- |:--- |
-| Changefeed processor checkpoint delay more than 600 seconds | Check if the downstream system and network configuration are functioning normally, and rule out the possibility of an indexed table.  |
+| 状態                                     | 推奨される行動                                                         |
+| :------------------------------------- | :-------------------------------------------------------------- |
+| Changefeed プロセッサのチェックポイント遅延が 600 秒を超える | ダウンストリーム システムとネットワーク構成が正常に機能しているかどうかを確認し、インデックス テーブルの可能性を排除します。 |

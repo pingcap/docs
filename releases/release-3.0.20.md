@@ -1,60 +1,60 @@
 ---
 title: TiDB 3.0.20 Release Notes
-summary: TiDB 3.0.20 was released on December 25, 2020. The release includes compatibility changes, improvements, and bug fixes for TiDB, TiKV, and PD. Some notable bug fixes include addressing issues with incorrect cache of transaction status, inaccurate statistics, and stack overflow.
+summary: TiDB 3.0.20 は、2020 年 12 月 25 日にリリースされました。このリリースには、TiDB、TiKV、PD の互換性の変更、改善、バグ修正が含まれています。注目すべきバグ修正には、トランザクション ステータスのキャッシュの誤り、統計の不正確さ、スタック オーバーフローの問題への対処が含まれます。
 ---
 
-# TiDB 3.0.20 Release Notes
+# TiDB 3.0.20 リリースノート {#tidb-3-0-20-release-notes}
 
-Release date: December 25, 2020
+発売日: 2020年12月25日
 
-TiDB version: 3.0.20
+TiDB バージョン: 3.0.20
 
-## Compatibility Change
+## 互換性の変更 {#compatibility-change}
 
-+ TiDB
+-   ティビ
 
-    - Deprecate the `enable-streaming` configuration item [#21054](https://github.com/pingcap/tidb/pull/21054)
+    -   `enable-streaming`構成項目[＃21054](https://github.com/pingcap/tidb/pull/21054)を廃止する
 
-## Improvements
+## 改善点 {#improvements}
 
-+ TiDB
+-   ティビ
 
-    - Raise an error when preparing the `LOAD DATA` statement [#21222](https://github.com/pingcap/tidb/pull/21222)
+    -   `LOAD DATA`文[＃21222](https://github.com/pingcap/tidb/pull/21222)を準備するときにエラーが発生する
 
-+ TiKV
+-   ティクヴ
 
-    - Add the `end_point_slow_log_threshold` configuration item [#9145](https://github.com/tikv/tikv/pull/9145)
+    -   `end_point_slow_log_threshold`構成項目[＃9145](https://github.com/tikv/tikv/pull/9145)を追加する
 
-## Bug Fixes
+## バグの修正 {#bug-fixes}
 
-+ TiDB
+-   ティビ
 
-    - Fix the incorrect cache of the transaction status for pessimistic transactions [#21706](https://github.com/pingcap/tidb/pull/21706)
-    - Fix the issue of inaccurate statistics that occurs when querying `INFORMATION_SCHEMA.TIDB_HOT_REGIONS` [#21319](https://github.com/pingcap/tidb/pull/21319)
-    - Fix the issue that `DELETE` might not delete data correctly when the database name is not in a pure lower representation [#21205](https://github.com/pingcap/tidb/pull/21205)
-    - Fix the issue of stack overflow that occurs when building the recursive view [#21000](https://github.com/pingcap/tidb/pull/21000)
-    - Fix the issue of goroutine leak in TiKV client [#20863](https://github.com/pingcap/tidb/pull/20863)
-    - Fix the wrong default zero value for the `year` type [#20828](https://github.com/pingcap/tidb/pull/20828)
-    - Fix the issue of goroutine leak in index lookup join [#20791](https://github.com/pingcap/tidb/pull/20791)
-    - Fix the issue that executing `INSERT SELECT FOR UPDATE` returns the malformed packet in the pessimistic transaction [#20681](https://github.com/pingcap/tidb/pull/20681)
-    - Fix the unknown time zone `'posixrules'` [#20605](https://github.com/pingcap/tidb/pull/20605)
-    - Fix the issue that occurs when converting the unsigned integer type to the bit type [#20362](https://github.com/pingcap/tidb/pull/20362)
-    - Fix the corrupted default value of the bit type column [#20339](https://github.com/pingcap/tidb/pull/20339)
-    - Fix the potentially incorrect results when one of the equal condition is the `Enum` or `Set` type [#20296](https://github.com/pingcap/tidb/pull/20296)
-    - Fix a wrong behavior of `!= any()` [#20061](https://github.com/pingcap/tidb/pull/20061)
-    - Fix the issue that type conversion in `BETWEEN...AND...` returns invalid results [#21503](https://github.com/pingcap/tidb/pull/21503)
-    - Fix a compatibility issue with the `ADDDATE` function [#21008](https://github.com/pingcap/tidb/pull/21008)
-    - Set the correct default value for newly added `Enum` column [#20999](https://github.com/pingcap/tidb/pull/20999)
-    - Fix the result of SQL statements like `SELECT DATE_ADD('2007-03-28 22:08:28',INTERVAL "-2.-2" SECOND)` to be compatible with MySQL [#20627](https://github.com/pingcap/tidb/pull/20627)
-    - Fix the incorrect default value when modifying the column type [#20532](https://github.com/pingcap/tidb/pull/20532)
-    - Fix the issue that the `timestamp` function gets wrong result when the input argument is the `float` or `decimal` type [#20469](https://github.com/pingcap/tidb/pull/20469)
-    - Fix a potential deadlock issue in statistics [#20424](https://github.com/pingcap/tidb/pull/20424)
-    - Fix the issue that the overflown float type data is inserted [#20251](https://github.com/pingcap/tidb/pull/20251)
+    -   悲観的トランザクションのトランザクションステータスの誤ったキャッシュを修正[＃21706](https://github.com/pingcap/tidb/pull/21706)
+    -   `INFORMATION_SCHEMA.TIDB_HOT_REGIONS` [＃21319](https://github.com/pingcap/tidb/pull/21319)をクエリするときに発生する不正確な統計の問題を修正しました
+    -   データベース名が純粋な下位表現ではない場合にデータを正しく削除でき`DELETE`可能性がある問題を修正しました[＃21205](https://github.com/pingcap/tidb/pull/21205)
+    -   再帰ビュー[＃21000](https://github.com/pingcap/tidb/pull/21000)構築時に発生するスタックオーバーフローの問題を修正
+    -   TiKV クライアント[＃20863](https://github.com/pingcap/tidb/pull/20863)の goroutine リークの問題を修正
+    -   `year`タイプ[＃20828](https://github.com/pingcap/tidb/pull/20828)の誤ったデフォルトのゼロ値を修正
+    -   インデックス検索結合[＃20791](https://github.com/pingcap/tidb/pull/20791)での goroutine リークの問題を修正
+    -   `INSERT SELECT FOR UPDATE`実行すると悲観的トランザクション[＃20681](https://github.com/pingcap/tidb/pull/20681)で不正なパケットが返される問題を修正
+    -   不明なタイムゾーンを修正`'posixrules'` [＃20605](https://github.com/pingcap/tidb/pull/20605)
+    -   符号なし整数型をビット型[＃20362](https://github.com/pingcap/tidb/pull/20362)に変換するときに発生する問題を修正
+    -   ビット型列[＃20339](https://github.com/pingcap/tidb/pull/20339)の破損したデフォルト値を修正
+    -   等価条件の1つが`Enum`または`Set`タイプ[＃20296](https://github.com/pingcap/tidb/pull/20296)である場合に、潜在的に誤った結果を修正
+    -   `!= any()` [＃20061](https://github.com/pingcap/tidb/pull/20061)の誤った動作を修正
+    -   `BETWEEN...AND...`の型変換で無効な結果が返される問題を修正[＃21503](https://github.com/pingcap/tidb/pull/21503)
+    -   `ADDDATE`機能[＃21008](https://github.com/pingcap/tidb/pull/21008)の互換性の問題を修正
+    -   新しく追加された`Enum`列[＃20999](https://github.com/pingcap/tidb/pull/20999)の正しいデフォルト値を設定します
+    -   `SELECT DATE_ADD('2007-03-28 22:08:28',INTERVAL "-2.-2" SECOND)`のようなSQL文の結果をMySQL [＃20627](https://github.com/pingcap/tidb/pull/20627)と互換性があるように修正する
+    -   列タイプ[＃20532](https://github.com/pingcap/tidb/pull/20532)を変更するときに誤ったデフォルト値を修正
+    -   入力引数が`float`または`decimal`型の場合に`timestamp`関数が間違った結果を返す問題を修正しました[＃20469](https://github.com/pingcap/tidb/pull/20469)
+    -   統計[＃20424](https://github.com/pingcap/tidb/pull/20424)の潜在的なデッドロック問題を修正
+    -   オーバーフローしたfloat型データが挿入される問題を修正[＃20251](https://github.com/pingcap/tidb/pull/20251)
 
-+ TiKV
+-   ティクヴ
 
-    - Fix the issue that an error is returned indicating that a key exists when this key is locked and deleted in a committed transaction [#8931](https://github.com/tikv/tikv/pull/8931)
+    -   コミットされたトランザクション[＃8931](https://github.com/tikv/tikv/pull/8931)でキーがロックされ削除されたときに、キーが存在することを示すエラーが返される問題を修正しました。
 
-+ PD
+-   PD
 
-    - Fix the issue that too many logs are printed when starting PD and when there are too many stale Regions [#3064](https://github.com/pingcap/pd/pull/3064)
+    -   PD の起動時や古いリージョンが多すぎる場合にログが大量に出力される問題を修正しました[＃3064](https://github.com/pingcap/pd/pull/3064)

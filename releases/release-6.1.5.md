@@ -1,51 +1,55 @@
 ---
 title: TiDB 6.1.5 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 6.1.5.
+summary: TiDB 6.1.5 の互換性の変更、改善、バグ修正について説明します。
 ---
 
-# TiDB 6.1.5 Release Notes
+# TiDB 6.1.5 リリースノート {#tidb-6-1-5-release-notes}
 
-Release date: February 28, 2023
+発売日: 2023年2月28日
 
-TiDB version: 6.1.5
+TiDB バージョン: 6.1.5
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
+クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [実稼働環境への導入](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
 
-## Compatibility changes
+## 互換性の変更 {#compatibility-changes}
 
-- Starting from February 20, 2023, the [telemetry feature](/telemetry.md) is disabled by default in new versions of TiDB and TiDB Dashboard, including v6.1.5, and usage information is not collected and shared with PingCAP. Before upgrading to these versions, if the cluster uses the default telemetry configuration, the telemetry feature is disabled after the upgrade. See [TiDB Release Timeline](/releases/release-timeline.md) for a specific version.
+-   2023 年 2 月 20 日以降、v6.1.5 を含む TiDB および TiDB Dashboard の新しいバージョンでは[テレメトリ機能](/telemetry.md)デフォルトで無効になっており、使用状況情報は収集されず、PingCAP と共有されません。これらのバージョンにアップグレードする前に、クラスターがデフォルトのテレメトリ構成を使用している場合、アップグレード後にテレメトリ機能が無効になります。特定のバージョンについては[TiDB リリース タイムライン](/releases/release-timeline.md)を参照してください。
 
-    - The default value of the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) system variable is changed from `ON` to `OFF`.
-    - The default value of the TiDB [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) configuration item is changed from `true` to `false`.
-    - The default value of the PD [`enable-telemetry`](/pd-configuration-file.md#enable-telemetry) configuration item is changed from `true` to `false`.
+    -   [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402)システム変数のデフォルト値が`ON`から`OFF`に変更されます。
+    -   TiDB [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402)構成項目のデフォルト値が`true`から`false`に変更されます。
+    -   PD [`enable-telemetry`](/pd-configuration-file.md#enable-telemetry)構成項目のデフォルト値が`true`から`false`に変更されます。
 
-- Starting from v1.11.3, the telemetry feature is disabled by default in newly deployed TiUP, and usage information is not collected. If you upgrade from a TiUP version earlier than v1.11.3 to v1.11.3 or a later version, the telemetry feature keeps the same status as before the upgrade.
+-   v1.11.3 以降、新しく導入されたTiUPではテレメトリ機能がデフォルトで無効になっており、使用状況情報は収集されません。v1.11.3 より前のバージョンのTiUPから v1.11.3 以降のバージョンにアップグレードした場合、テレメトリ機能はアップグレード前と同じ状態を維持します。
 
-## Improvements
+## 改善点 {#improvements}
 
-- TiDB
+-   ティビ
 
-    - Support the `AUTO_RANDOM` column as the first column of the clustered composite index [#38572](https://github.com/pingcap/tidb/issues/38572) @[tangenta](https://github.com/tangenta)
+    -   クラスター化複合インデックス[＃38572](https://github.com/pingcap/tidb/issues/38572) @ [タンジェンタ](https://github.com/tangenta)の最初の列として`AUTO_RANDOM`列をサポートします。
 
-## Bug fixes
+## バグの修正 {#bug-fixes}
 
-+ TiDB
+-   ティビ
 
-    - Fix the issue that data race might cause TiDB to restart [#27725](https://github.com/pingcap/tidb/issues/27725) @[XuHuaiyu](https://github.com/XuHuaiyu)
-    - Fix the issue that the `UPDATE` statement might not read the latest data when the Read Committed isolation level is used [#41581](https://github.com/pingcap/tidb/issues/41581) @[cfzjywxk](https://github.com/cfzjywxk)
+    -   データ競合により TiDB が[＃27725](https://github.com/pingcap/tidb/issues/27725) @ [徐淮宇](https://github.com/XuHuaiyu)で再起動する可能性がある問題を修正しました
+    -   Read Committed分離レベルが使用されている場合、 `UPDATE`ステートメントが最新のデータを読み取らない可能性がある問題を修正しました[＃41581](https://github.com/pingcap/tidb/issues/41581) @ [翻訳](https://github.com/cfzjywxk)
 
-- PD
+<!---->
 
-    - Fix the PD OOM issue that occurs when the calls of `ReportMinResolvedTS` are too frequent [#5965](https://github.com/tikv/pd/issues/5965) @[HundunDM](https://github.com/HunDunDM)
+-   PD
 
-+ Tools
+    -   `ReportMinResolvedTS`の呼び出しが頻繁すぎる場合に発生する PD OOM 問題を修正[＃5965](https://github.com/tikv/pd/issues/5965) @ [フンドゥンDM](https://github.com/HunDunDM)
 
-    + TiCDC
+<!---->
 
-        - Fix the issue that applying redo log might cause OOM when the replication lag is excessively high [#8085](https://github.com/pingcap/tiflow/issues/8085) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - Fix the issue that the performance degrades when redo log is enabled to write meta [#8074](https://github.com/pingcap/tiflow/issues/8074) @[CharlesCheung96](https://github.com/CharlesCheung96)
+-   ツール
 
-    + TiDB Data Migration (DM)
+    -   ティCDC
 
-        - Fix the issue that the `binlog-schema delete` command fails to execute [#7373](https://github.com/pingcap/tiflow/issues/7373) @[liumengya94](https://github.com/liumengya94)
-        - Fix the issue that the checkpoint does not advance when the last binlog is a skipped DDL [#8175](https://github.com/pingcap/tiflow/issues/8175) @[D3Hunter](https://github.com/D3Hunter)
+        -   レプリケーション遅延が過度に大きい場合に、REDO ログを適用すると OOM が発生する可能性がある問題を修正[＃8085](https://github.com/pingcap/tiflow/issues/8085) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
+        -   メタ[＃8074](https://github.com/pingcap/tiflow/issues/8074) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)への書き込みに REDO ログが有効になっている場合にパフォーマンスが低下する問題を修正しました。
+
+    -   TiDB データ移行 (DM)
+
+        -   `binlog-schema delete`コマンドが[＃7373](https://github.com/pingcap/tiflow/issues/7373) @ [りゅうめんぎゃ](https://github.com/liumengya94)の実行に失敗する問題を修正
+        -   最後のbinlogがスキップされた DDL [＃8175](https://github.com/pingcap/tiflow/issues/8175) @ [D3ハンター](https://github.com/D3Hunter)の場合にチェックポイントが進まない問題を修正しました

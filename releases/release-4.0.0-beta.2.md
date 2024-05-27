@@ -1,60 +1,60 @@
 ---
 title: TiDB 4.0.0 Beta.2 Release Notes
-summary: TiDB 4.0.0 Beta.2 was released on March 18, 2020. The new features include support for persisting dynamically updated configurations, bidirectional data replication, TLS configuration, change data capture, and experimental features like incremental backup. Bug fixes address issues with panic, hibernate regions, replication delay, and compatibility. TiDB Ansible now supports injecting node information to etcd and deploying services on the ARM platform.
+summary: TiDB 4.0.0 Beta.2 は、2020 年 3 月 18 日にリリースされました。新機能には、動的に更新された構成の永続化、双方向データ レプリケーション、TLS 構成、変更データ キャプチャ、増分バックアップなどの実験的機能のサポートが含まれます。バグ修正では、panic、休止状態領域、レプリケーションの遅延、互換性に関する問題が対処されています。TiDB Ansible は、etcd へのノード情報の挿入と ARM プラットフォームへのサービスのデプロイをサポートするようになりました。
 ---
 
-# TiDB 4.0.0 Beta.2 Release Notes
+# TiDB 4.0.0 Beta.2 リリースノート {#tidb-4-0-0-beta-2-release-notes}
 
-Release date: March 18, 2020
+発売日: 2020年3月18日
 
-TiDB version: 4.0.0-beta.2
+TiDB バージョン: 4.0.0-beta.2
 
-TiDB Ansible version: 4.0.0-beta.2
+TiDB Ansible バージョン: 4.0.0-beta.2
 
-## Compatibility Changes
+## 互換性の変更 {#compatibility-changes}
 
-+ Tools
-    - TiDB Binlog
-        - Fix the issue that the system returns an error and exits when `disable-dispatch` and `disable-causality` are configured in Drainer [#915](https://github.com/pingcap/tidb-binlog/pull/915)
+-   ツール
+    -   TiDBBinlog
+        -   Drainer [＃915](https://github.com/pingcap/tidb-binlog/pull/915)で`disable-dispatch`と`disable-causality`が設定されている場合、システムがエラーを返して終了する問題を修正しました。
 
-## New Features
+## 新機能 {#new-features}
 
-+ TiKV
-    - Support persisting the dynamically updated configuration into the hardware disk [#6684](https://github.com/tikv/tikv/pull/6684)
+-   ティクヴ
+    -   動的に更新された構成をハードウェアディスク[＃6684](https://github.com/tikv/tikv/pull/6684)に永続化することをサポートします。
 
-+ PD
-    - Support persisting the dynamically updated configuration into the hardware disk [#2153](https://github.com/pingcap/pd/pull/2153)
+-   PD
+    -   動的に更新された構成をハードウェアディスク[＃2153](https://github.com/pingcap/pd/pull/2153)に永続化することをサポートします。
 
-+ Tools
-    - TiDB Binlog
-        - Support the bidirectional data replication between TiDB clusters [#879](https://github.com/pingcap/tidb-binlog/pull/879) [#903](https://github.com/pingcap/tidb-binlog/pull/903)
-    - TiDB Lightning
-        - Support the TLS configuration [#40](https://github.com/tikv/importer/pull/40) [#270](https://github.com/pingcap/tidb-lightning/pull/270)
-    - TiCDC
-        - Initial release of the change data capture (CDC), providing the following features:
-            - Support capturing changed data from TiKV
-            - Support replicating the changed data from TiKV to MySQL compatible databases, and guarantee the eventual data consistency
-            - Support replicating the changed data to Kafka, and guarantee either the eventual data consistency or the row-level orderliness
-            - Provide process-level high availability
-    - Backup & Restore (BR)
-        - Enable experimental features such as incremental backup and backing up files to Amazon S3 [#175](https://github.com/pingcap/br/pull/175)
+-   ツール
+    -   TiDBBinlog
+        -   TiDBクラスタ間の双方向データレプリケーションをサポート[＃879](https://github.com/pingcap/tidb-binlog/pull/879) [＃903](https://github.com/pingcap/tidb-binlog/pull/903)
+    -   TiDB Lightning
+        -   TLS構成をサポートする[＃40](https://github.com/tikv/importer/pull/40) [＃270](https://github.com/pingcap/tidb-lightning/pull/270)
+    -   ティCDC
+        -   変更データ キャプチャ (CDC) の初期リリース。次の機能が提供されます。
+            -   TiKVから変更されたデータのキャプチャをサポート
+            -   TiKVからMySQL互換データベースへの変更データの複製をサポートし、最終的なデータの一貫性を保証します。
+            -   変更されたデータをKafkaに複製し、最終的なデータの一貫性または行レベルの順序性を保証することをサポート
+            -   プロセスレベルの高可用性を提供する
+    -   バックアップと復元 (BR)
+        -   増分バックアップやAmazon S3へのファイルのバックアップなどの実験的機能を有効にする[＃175](https://github.com/pingcap/br/pull/175)
 
-+ TiDB Ansible
-    - Support injecting the node information to etcd [#1196](https://github.com/pingcap/tidb-ansible/pull/1196)
-    - Support deploying TiDB services on the ARM platform [#1204](https://github.com/pingcap/tidb-ansible/pull/1204)
+-   TiDB アンシブル
+    -   etcd [＃1196](https://github.com/pingcap/tidb-ansible/pull/1196)へのノード情報の注入をサポート
+    -   ARM プラットフォーム[＃1204](https://github.com/pingcap/tidb-ansible/pull/1204)での TiDB サービスの展開をサポート
 
-## Bug Fixes
+## バグの修正 {#bug-fixes}
 
-+ TiKV
-    - Fix the panic issue that might occur when meeting empty short values during the backup [#6718](https://github.com/tikv/tikv/pull/6718)
-    - Fix the issue that Hibernate Regions might not be correctly awakened in some cases [#6772](https://github.com/tikv/tikv/pull/6672) [#6648](https://github.com/tikv/tikv/pull/6648) [#6376](https://github.com/tikv/tikv/pull/6736)
+-   ティクヴ
+    -   バックアップ中に空の短い値に遭遇したときに発生する可能性のあるpanic問題を修正しました[＃6718](https://github.com/tikv/tikv/pull/6718)
+    -   休止状態領域が場合によっては正しく起動されない可能性がある問題を修正[＃6772](https://github.com/tikv/tikv/pull/6672) [＃6648](https://github.com/tikv/tikv/pull/6648) [＃6376](https://github.com/tikv/tikv/pull/6736)
 
-+ PD
-    - Fix the panic issue that the rule checker fails to allocate stores to Regions [#2160](https://github.com/pingcap/pd/pull/2160)
-    - Fix the issue that after the dynamic configuration is enabled, the configuration might have replication delay when the Leader is being switched [#2154](https://github.com/pingcap/pd/pull/2154)
+-   PD
+    -   ルールチェッカーがリージョン[＃2160](https://github.com/pingcap/pd/pull/2160)にストアを割り当てられないというpanic問題を修正しました。
+    -   動的構成を有効にした後、Leaderが切り替えられるときに構成のレプリケーション遅延が発生する可能性がある問題を修正しました[＃2154](https://github.com/pingcap/pd/pull/2154)
 
-+ Tools
-    - Backup & Restore (BR)
-        - Fix the issue that BR might fail to restore data of a large size because PD cannot process large-sized data [#167](https://github.com/pingcap/br/pull/167)
-        - Fix the BR failure occurred because the BR version is not compatible with the TiDB version [#186](https://github.com/pingcap/br/pull/186)
-        - Fix the BR failure occurred because the BR version is not compatible with TiFlash [#194](https://github.com/pingcap/br/pull/194)
+-   ツール
+    -   バックアップと復元 (BR)
+        -   PDが大容量データを処理できないため、 BRが大容量データの復元に失敗する可能性がある問題を修正[＃167](https://github.com/pingcap/br/pull/167)
+        -   BRバージョンがTiDBバージョン[＃186](https://github.com/pingcap/br/pull/186)と互換性がないため発生したBR障害を修正
+        -   BRバージョンがTiFlash [＃194](https://github.com/pingcap/br/pull/194)と互換性がないため発生したBR障害を修正

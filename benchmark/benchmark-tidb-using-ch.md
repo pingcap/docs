@@ -1,118 +1,104 @@
 ---
 title: How to Run CH-benCHmark Test on TiDB
-summary: Learn how to run CH-benCHmark test on TiDB.
+summary: TiDB で CH-benCHmark テストを実行する方法を学習します。
 ---
 
-# How to Run CH-benCHmark Test on TiDB
+# TiDB で CH-benCHmark テストを実行する方法 {#how-to-run-ch-benchmark-test-on-tidb}
 
-This document describes how to test TiDB using CH-benCHmark.
+このドキュメントでは、CH-benCHmark を使用して TiDB をテストする方法について説明します。
 
-CH-benCHmark is a mixed workload containing both [TPC-C](http://www.tpc.org/tpcc/) and [TPC-H](http://www.tpc.org/tpch/) tests. It is the most common workload to test HTAP systems. For more information, see [The mixed workload CH-benCHmark](https://research.tableau.com/sites/default/files/a8-cole.pdf).
+CH-benCHmark は、 [TPC-C](http://www.tpc.org/tpcc/)と[TPC-H](http://www.tpc.org/tpch/)の両方のテストを含む混合ワークロードです。これは、HTAP システムをテストするための最も一般的なワークロードです。詳細については、 [混合ワークロードCH-benCHmark](https://research.tableau.com/sites/default/files/a8-cole.pdf)を参照してください。
 
-Before running the CH-benCHmark test, you need to deploy [TiFlash](/tiflash/tiflash-overview.md) first, which is a TiDB's HTAP component. After you deploy TiFlash and [create TiFlash replicas](#create-tiflash-replicas), TiKV will replicate the latest data of TPC-C online transactions to TiFlash in real time, and the TiDB optimizer will automatically push down OLAP queries from TPC-H workload to the MPP engine of TiFlash for efficient execution.
+CH-benCHmark テストを実行する前に、まず TiDB の HTAPコンポーネントである[TiFlash](/tiflash/tiflash-overview.md)展開する必要があります。TiFlash と[TiFlashレプリカを作成する](#create-tiflash-replicas)を展開すると、TiKV は TPC-C オンライン トランザクションの最新データをリアルタイムでTiFlashに複製し、TiDB オプティマイザーは TPC-H ワークロードからの OLAP クエリをTiFlashの MPP エンジンに自動的にプッシュダウンして効率的に実行します。
 
-The CH-benCHmark test in this document is implemented based on [go-tpc](https://github.com/pingcap/go-tpc). You can download the test program using the following [TiUP](/tiup/tiup-overview.md) command:
-
-{{< copyable "shell-regular" >}}
+このドキュメントの CH-benCHmark テストは[ゴーTPC](https://github.com/pingcap/go-tpc)に基づいて実装されています。テスト プログラムは次の[TiUP](/tiup/tiup-overview.md)コマンドを使用してダウンロードできます。
 
 ```shell
 tiup install bench
 ```
 
-For detailed usage of the TiUP Bench component, see [TiUP Bench](/tiup/tiup-bench.md).
+TiUP Benchコンポーネントの詳細な使用方法については、 [TiUPベンチ](/tiup/tiup-bench.md)参照してください。
 
-## Load data
+## データを読み込む {#load-data}
 
-### Load TPC-C data
+### TPC-Cデータをロードする {#load-tpc-c-data}
 
-**Loading data is usually the most time-consuming and problematic stage of the entire TPC-C test.**
+**データのロードは通常、TPC-C テスト全体の中で最も時間がかかり、問題が発生する段階です。**
 
-Taking 1000 warehouses as an example, you can execute the following TiUP command in shell for data load and test. Note that you need to replace `172.16.5.140` and `4000` in this document with your TiDB host and port values.
+1000 のウェアハウスを例にとると、データのロードとテストのためにシェルで次のTiUPコマンドを実行できます。このドキュメントの`172.16.5.140`と`4000` TiDB のホストとポートの値に置き換える必要があることに注意してください。
 
 ```shell
 tiup bench tpcc -H 172.16.5.140 -P 4000 -D tpcc --warehouses 1000 prepare -T 32
 ```
 
-Depending on different machine configurations, this loading process might take a few hours. If the cluster size is small, you can use a smaller warehouse value for the test.
+マシンの構成によっては、この読み込みプロセスに数時間かかる場合があります。クラスターのサイズが小さい場合は、テストに小さいウェアハウス値を使用できます。
 
-After the data is loaded, you can execute the `tiup bench tpcc -H 172.16.5.140 -P 4000 -D tpcc --warehouses 1000 check` command to validate the data correctness.
+データがロードされたら、 `tiup bench tpcc -H 172.16.5.140 -P 4000 -D tpcc --warehouses 1000 check`コマンドを実行してデータの正確性を検証できます。
 
-### Load additional tables and views required for TPC-H
+### TPC-Hに必要な追加のテーブルとビューをロードします {#load-additional-tables-and-views-required-for-tpc-h}
 
-Run the following TiUP command in the shell:
-
-{{< copyable "shell-regular" >}}
+シェルで次のTiUPコマンドを実行します。
 
 ```shell
 tiup bench ch -H 172.16.5.140 -P 4000 -D tpcc prepare
 ```
 
-The following is the log output:
+ログ出力は次のとおりです。
 
-```
-creating nation
-creating region
-creating supplier
-generating nation table
-generate nation table done
-generating region table
-generate region table done
-generating suppliers table
-generate suppliers table done
-creating view revenue1
-```
+    creating nation
+    creating region
+    creating supplier
+    generating nation table
+    generate nation table done
+    generating region table
+    generate region table done
+    generating suppliers table
+    generate suppliers table done
+    creating view revenue1
 
-## Create TiFlash replicas
+## TiFlashレプリカを作成する {#create-tiflash-replicas}
 
-After TiFlash is deployed, TiFlash does not automatically replicate TiKV data. You need to execute the following SQL statement to create TiFlash replicas for the `tpcc` database. Once the specified TiFlash replicas are created, TiKV automatically replicates the latest data to TiFlash in real-time. In the following example, two TiFlash nodes are deployed in the cluster and the replica number is set to 2.
+TiFlashがデプロイされた後、 TiFlash はTiKV データを自動的に複製しません。1 `tpcc`データベースのTiFlashレプリカを作成するには、次の SQL ステートメントを実行する必要があります。指定されたTiFlashレプリカが作成されると、TiKV は最新のデータをリアルタイムでTiFlashに自動的に複製します。次の例では、クラスターに 2 つのTiFlashノードがデプロイされ、レプリカ数が 2 に設定されています。
 
-```
-ALTER DATABASE tpcc SET tiflash replica 2;
-```
+    ALTER DATABASE tpcc SET tiflash replica 2;
 
-To check whether the replication of all tables in the `tpcc` database is complete, execute the following statement, in which the `WHERE` clause is used to specify the databases and tables to be checked. If you want to check the replication status of all databases, remove the `WHERE` clause from the statement.
-
-{{< copyable "sql" >}}
+`tpcc`データベース内のすべてのテーブルのレプリケーションが完了しているかどうかを確認するには、次のステートメントを実行します。このステートメントでは、 `WHERE`句を使用して、チェックするデータベースとテーブルを指定します。すべてのデータベースのレプリケーション ステータスを確認する場合は、ステートメントから`WHERE`句を削除します。
 
 ```sql
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'tpcc';
 ```
 
-In the result of the above statement:
+上記のステートメントの結果:
 
-- `AVAILABLE` indicates whether the TiFlash replica of a specific table is available or not. `1` means available and `0` means unavailable. Once a replica becomes available, this status does not change anymore.
-- `PROGRESS` means the progress of the replication. The value is between `0` and `1`. `1` means that the replication is complete for the TiFlash replica.
+-   `AVAILABLE` 、特定のテーブルのTiFlashレプリカが使用可能かどうかを示します。2 `1`使用可能、 `0`使用不可を意味します。レプリカが使用可能になると、このステータスは変更されなくなります。
+-   `PROGRESS`レプリケーションの進行状況を意味します。値は`0` ～ `1`です。6 `1` TiFlashレプリカのレプリケーションが完了したことを意味します。
 
-## Collect statistics
+## 統計を収集する {#collect-statistics}
 
-To ensure that the TiDB optimizer can generate the optimal execution plan, execute the following SQL statements to collect statistics in advance.
+TiDB オプティマイザーが最適な実行プランを生成できるようにするには、事前に次の SQL ステートメントを実行して統計を収集します。
 
-```
-analyze table customer;
-analyze table district;
-analyze table history;
-analyze table item;
-analyze table new_order;
-analyze table order_line;
-analyze table orders;
-analyze table stock;
-analyze table warehouse;
-analyze table nation;
-analyze table region;
-analyze table supplier;
-```
+    analyze table customer;
+    analyze table district;
+    analyze table history;
+    analyze table item;
+    analyze table new_order;
+    analyze table order_line;
+    analyze table orders;
+    analyze table stock;
+    analyze table warehouse;
+    analyze table nation;
+    analyze table region;
+    analyze table supplier;
 
-## Run the test
+## テストを実行する {#run-the-test}
 
-Taking 50 TP concurrency and 1 AP concurrency as an example, execute the following command to run the test:
-
-{{< copyable "shell-regular" >}}
+50 TP 同時実行と 1 AP 同時実行を例にとると、次のコマンドを実行してテストを実行します。
 
 ```shell
 tiup bench ch --host 172.16.5.140 -P4000 --warehouses 1000 run -D tpcc -T 50 -t 1 --time 1h
 ```
 
-During the test, test results are continuously printed on the console. For example:
+テスト中、テスト結果はコンソールに継続的に表示されます。例:
 
 ```text
 [Current] NEW_ORDER - Takes(s): 10.0, Count: 13524, TPM: 81162.0, Sum(ms): 998317.6, Avg(ms): 73.9, 50th(ms): 71.3, 90th(ms): 100.7, 95th(ms): 113.2, 99th(ms): 159.4, 99.9th(ms): 209.7, Max(ms): 243.3
@@ -130,7 +116,7 @@ During the test, test results are continuously printed on the console. For examp
 ...
 ```
 
-After the test is finished, the test summary results are printed. For example:
+テストが終了すると、テストの概要結果が印刷されます。例:
 
 ```text
 Finished: 50 OLTP workers, 1 OLAP workers
@@ -166,4 +152,4 @@ tpmC: 93826.9, efficiency: 729.6%
 [Summary] Q7     - Count: 11, Sum(ms): 158928.2, Avg(ms): 14446.3
 ```
 
-After the test is finished, you can execute the `tiup bench tpcc -H 172.16.5.140 -P 4000 -D tpcc --warehouses 1000 check` command to validate the data correctness.
+テストが完了したら、 `tiup bench tpcc -H 172.16.5.140 -P 4000 -D tpcc --warehouses 1000 check`コマンドを実行してデータの正確性を検証できます。

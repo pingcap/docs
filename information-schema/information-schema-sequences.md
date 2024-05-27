@@ -1,18 +1,18 @@
 ---
 title: SEQUENCES
-summary: Learn the `SEQUENCES` INFORMATION_SCHEMA table.
+summary: `SEQUENCES` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# SEQUENCES
+# シーケンス {#sequences}
 
-The `SEQUENCES` table provides information about sequences. The [sequences feature](/sql-statements/sql-statement-create-sequence.md) is modeled on a similar feature in MariaDB.
+`SEQUENCES`テーブルはシーケンスに関する情報を提供します。3 [シーケンス機能](/sql-statements/sql-statement-create-sequence.md) MariaDB の同様の機能に基づいてモデル化されています。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC SEQUENCES;
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 +-----------------+--------------+------+------+---------+-------+
@@ -33,7 +33,7 @@ The output is as follows:
 11 rows in set (0.00 sec)
 ```
 
-Create a sequence `test.seq` and query the next value of the sequence:
+シーケンス`test.seq`を作成し、シーケンスの次の値を照会します。
 
 ```sql
 CREATE SEQUENCE test.seq;
@@ -41,7 +41,7 @@ SELECT NEXTVAL(test.seq);
 SELECT * FROM sequences\G
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 +-------------------+
@@ -52,13 +52,13 @@ The output is as follows:
 1 row in set (0.01 sec)
 ```
 
-View all sequences:
+すべてのシーケンスをビュー:
 
 ```sql
 SELECT * FROM SEQUENCES\G
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 *************************** 1. row ***************************
@@ -76,10 +76,10 @@ SEQUENCE_SCHEMA: test
 1 row in set (0.00 sec)
 ```
 
-## See also
+## 参照 {#see-also}
 
-- [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)
-- [`SHOW CREATE SEQUENCE`](/sql-statements/sql-statement-show-create-sequence.md)
-- [`ALTER SEQUENCE`](/sql-statements/sql-statement-alter-sequence.md)
-- [`DROP SEQUENCE`](/sql-statements/sql-statement-drop-sequence.md)
-- [Sequence functions](/functions-and-operators/sequence-functions.md)
+-   [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)
+-   [`SHOW CREATE SEQUENCE`](/sql-statements/sql-statement-show-create-sequence.md)
+-   [`ALTER SEQUENCE`](/sql-statements/sql-statement-alter-sequence.md)
+-   [`DROP SEQUENCE`](/sql-statements/sql-statement-drop-sequence.md)
+-   [シーケンス関数](/functions-and-operators/sequence-functions.md)

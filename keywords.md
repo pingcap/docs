@@ -1,789 +1,773 @@
 ---
 title: Keywords
-summary: Keywords and Reserved Words
+summary: キーワードと予約語
 ---
 
-# Keywords
+# キーワード {#keywords}
 
-This article introduces the keywords in TiDB, the differences between reserved words and non-reserved words and summarizes all keywords for the query.
+この記事では、TiDB のキーワード、予約語と非予約語の違いを紹介し、クエリのすべてのキーワードをまとめます。
 
-Keywords are words that have special meanings in SQL statements, such as `SELECT`, `UPDATE`, and `DELETE`. Some of them can be used as identifiers directly, which are called **non-reserved keywords**. Some of them require special treatment before being used as identifiers, which are called **reserved keywords**. However, there are special non-reserved keywords that might still require special treatment. It is recommended that you treat them as reserved keywords.
+キーワードは、 `SELECT` 、 `UPDATE` 、 `DELETE`など、SQL 文で特別な意味を持つ単語です。キーワードの中には、直接識別子として使用できるものがあり、これらは**非予約キーワード**と呼ばれます。キーワードの中には、識別子として使用する前に特別な処理が必要なものがあり、これらは**予約キーワード**と呼ばれます。ただし、特別な非予約キーワードでも、特別な処理が必要なものがあります。これらは予約キーワードとして扱うことをお勧めします。
 
-To use the reserved keywords as identifiers, you must enclose them in backticks `` ` ``:
-
-{{< copyable "sql" >}}
+予約語を識別子として使用するには、バッククォート`` ` ``で囲む必要があります。
 
 ```sql
 CREATE TABLE select (a INT);
 ```
 
-```
-ERROR 1105 (HY000): line 0 column 19 near " (a INT)" (total length 27)
-```
-
-{{< copyable "sql" >}}
+    ERROR 1105 (HY000): line 0 column 19 near " (a INT)" (total length 27)
 
 ```sql
 CREATE TABLE `select` (a INT);
 ```
 
-```
-Query OK, 0 rows affected (0.09 sec)
-```
+    Query OK, 0 rows affected (0.09 sec)
 
-The non-reserved keywords do not require backticks, such as `BEGIN` and `END`, which can be successfully used as identifiers in the following statement:
-
-{{< copyable "sql" >}}
+予約されていないキーワードにはバックティックは必要ありません`BEGIN`や`END`など)。これらは次のステートメントで識別子として正常に使用できます。
 
 ```sql
 CREATE TABLE `select` (BEGIN int, END int);
 ```
 
-```
-Query OK, 0 rows affected (0.09 sec)
-```
+    Query OK, 0 rows affected (0.09 sec)
 
-In the special case, the reserved keywords do not need backticks if they are used with the `.` delimiter:
-
-{{< copyable "sql" >}}
+特別なケースでは、予約キーワードを`.`区切り文字とともに使用する場合はバッククォートは必要ありません。
 
 ```sql
 CREATE TABLE test.select (BEGIN int, END int);
 ```
 
-```
-Query OK, 0 rows affected (0.08 sec)
-```
+    Query OK, 0 rows affected (0.08 sec)
 
-Starting from v7.6.0, TiDB provides a full list of keywords in the [`INFORMATION_SCHEMA.KEYWORDS`](/information-schema/information-schema-keywords.md) table.
+v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/information-schema/information-schema-keywords.md)テーブルにキーワードの完全なリストを提供します。
 
-## Keyword list
+## キーワードリスト {#keyword-list}
 
-The following list shows the keywords in TiDB. Reserved keywords are marked with `(R)`. Reserved keywords for [Window Functions](/functions-and-operators/window-functions.md) are marked with `(R-Window)`. Special non-reserved keywords that need to be escaped with backticks `` ` `` are marked with `(S)`.
+次のリストは、TiDB のキーワードを示しています。予約済みキーワードは`(R)`でマークされています。 [ウィンドウ関数](/functions-and-operators/window-functions.md)の予約済みキーワードは`(R-Window)`でマークされています。バックティック`` ` ``でエスケープする必要がある特別な非予約キーワードは`(S)`でマークされています。
 
 <TabsPanel letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ" />
 
-<a id="A" class="letter" href="#A">A</a>
+<a id="A" class="letter" href="#A">あ</a>
 
-- ACCOUNT
-- ACTION
-- ADD (R)
-- ADMIN
-- ADVISE
-- AFTER
-- AGAINST
-- AGO
-- ALGORITHM
-- ALL (R)
-- ALTER (R)
-- ALWAYS
-- ANALYZE (R)
-- AND (R)
-- ANY
-- ARRAY (R)
-- AS (R)
-- ASC (R)
-- ASCII
-- ATTRIBUTE
-- ATTRIBUTES
-- AUTO_ID_CACHE
-- AUTO_INCREMENT
-- AUTO_RANDOM
-- AUTO_RANDOM_BASE
-- AVG
-- AVG_ROW_LENGTH
+-   アカウント
+-   アクション
+-   追加（R）
+-   管理者
+-   アドバイス
+-   後
+-   に対して
+-   前
+-   アルゴリズム
+-   すべて (R)
+-   アルター（R）
+-   いつも
+-   分析 (R)
+-   そして（R）
+-   どれでも
+-   配列（R）
+-   AS（R）
+-   ASC（右）
+-   アスキー
+-   属性
+-   属性
+-   自動IDキャッシュ
+-   自動増加
+-   自動ランダム
+-   AUTO_RANDOM_BASE
+-   平均
+-   平均行の長さ
 
 <a id="B" class="letter" href="#B">B</a>
 
-- BACKEND
-- BACKUP
-- BACKUPS
-- BATCH
-- BDR
-- BEGIN
-- BERNOULLI
-- BETWEEN (R)
-- BIGINT (R)
-- BINARY (R)
-- BINDING
-- BINDINGS
-- BINDING_CACHE
-- BINLOG
-- BIT
-- BLOB (R)
-- BLOCK
-- BOOL
-- BOOLEAN
-- BOTH (R)
-- BTREE
-- BUCKETS
-- BUILTINS
-- BY (R)
-- BYTE
+-   バックエンド
+-   バックアップ
+-   バックアップ
+-   バッチ
+-   イギリス
+-   始める
+-   ベルヌーイ
+-   間 (R)
+-   ビギント（R）
+-   バイナリ（R）
+-   バインディング
+-   バインディング
+-   バインドキャッシュ
+-   ビンログ
+-   少し
+-   ブロブ（R）
+-   ブロック
+-   ブール
+-   ブール
+-   両方（R）
+-   BTREE
+-   バケツ
+-   ビルトイン
+-   BY (R)
+-   バイト
 
-<a id="C" class="letter" href="#C">C</a>
+<a id="C" class="letter" href="#C">Ｃ</a>
 
-- CACHE
-- CALIBRATE
-- CALL (R)
-- CANCEL
-- CAPTURE
-- CARDINALITY
-- CASCADE (R)
-- CASCADED
-- CASE (R)
-- CAUSAL
-- CHAIN
-- CHANGE (R)
-- CHAR (R)
-- CHARACTER (R)
-- CHARSET
-- CHECK (R)
-- CHECKPOINT
-- CHECKSUM
-- CIPHER
-- CLEANUP
-- CLIENT
-- CLIENT_ERRORS_SUMMARY
-- CLOSE
-- CLUSTER
-- CLUSTERED
-- CMSKETCH
-- COALESCE
-- COLLATE (R)
-- COLLATION
-- COLUMN (R)
-- COLUMN_FORMAT
-- COLUMN_STATS_USAGE
-- COLUMNS
-- COMMENT
-- COMMIT
-- COMMITTED
-- COMPACT
-- COMPRESSED
-- COMPRESSION
-- CONCURRENCY
-- CONFIG
-- CONNECTION
-- CONSISTENCY
-- CONSISTENT
-- CONSTRAINT (R)
-- CONTEXT
-- CONTINUE (R)
-- CONVERT (R)
-- CORRELATION
-- CPU
-- CREATE (R)
-- CROSS (R)
-- CSV_BACKSLASH_ESCAPE
-- CSV_DELIMITER
-- CSV_HEADER
-- CSV_NOT_NULL
-- CSV_NULL
-- CSV_SEPARATOR
-- CSV_TRIM_LAST_SEPARATORS
-- CUME_DIST (R-Window)
-- CURRENT
-- CURRENT_DATE (R)
-- CURRENT_ROLE (R)
-- CURRENT_TIME (R)
-- CURRENT_TIMESTAMP (R)
-- CURRENT_USER (R)
-- CURSOR (R)
-- CYCLE
+-   キャッシュ
+-   調整
+-   コール（R）
+-   キャンセル
+-   捕獲
+-   カーディナリティ
+-   カスケード（R）
+-   カスケード
+-   ケース（R）
+-   因果関係
+-   鎖
+-   変化（R）
+-   チャー（R）
+-   キャラクター（R）
+-   文字コード
+-   チェック（R）
+-   チェックポイント
+-   チェックサム
+-   暗号
+-   掃除
+-   クライアント
+-   クライアントエラーの概要
+-   近い
+-   集まる
+-   クラスター
+-   CMスケッチ
+-   合体
+-   収集 (R)
+-   照合
+-   コラム（右）
+-   列フォーマット
+-   列統計の使用状況
+-   コラム
+-   コメント
+-   専念
+-   関与する
+-   コンパクト
+-   圧縮
+-   圧縮
+-   同時実行
+-   構成
+-   繋がり
+-   一貫性
+-   一貫性のある
+-   制約 (R)
+-   コンテクスト
+-   続行 (R)
+-   変換 (R)
+-   相関
+-   CPU
+-   作成 (R)
+-   クロス（R）
+-   CSV_バックスラッシュ_エスケープ
+-   CSV_DELIMITER
+-   CSV_ヘッダー
+-   NULLではありません
+-   NULL は無効です
+-   CSV_セパレータ
+-   CSV_TRIM_LAST_SEPARATORS
+-   CUME_DIST (R ウィンドウ)
+-   現在
+-   現在の日付 (R)
+-   現在の役割 (R)
+-   現在の時間 (R)
+-   CURRENT_TIMESTAMP (R)
+-   現在のユーザー (R)
+-   カーソル（R）
+-   サイクル
 
-<a id="D" class="letter" href="#D">D</a>
+<a id="D" class="letter" href="#D">だ</a>
 
-- DATA
-- DATABASE (R)
-- DATABASES (R)
-- DATE
-- DATETIME
-- DAY
-- DAY_HOUR (R)
-- DAY_MICROSECOND (R)
-- DAY_MINUTE (R)
-- DAY_SECOND (R)
-- DDL
-- DEALLOCATE
-- DECIMAL (R)
-- DECLARE
-- DEFAULT (R)
-- DEFINER
-- DELAY_KEY_WRITE
-- DELAYED (R)
-- DELETE (R)
-- DENSE_RANK (R-Window)
-- DEPENDENCY
-- DEPTH
-- DESC (R)
-- DESCRIBE (R)
-- DIGEST
-- DIRECTORY
-- DISABLE
-- DISABLED
-- DISCARD
-- DISK
-- DISTINCT (R)
-- DISTINCTROW (R)
-- DIV (R)
-- DO
-- DOUBLE (R)
-- DRAINER
-- DROP (R)
-- DRY
-- DUAL (R)
-- DUPLICATE
-- DYNAMIC
+-   データ
+-   データベース（R）
+-   データベース (R)
+-   日付
+-   日付時刻
+-   日
+-   曜日_時間 (R)
+-   デイ_マイクロセカンド (R)
+-   曜日_分 (R)
+-   DAY_SECOND (R)
+-   DDL
+-   割り当て解除
+-   小数点 (R)
+-   宣言する
+-   デフォルト (R)
+-   定義者
+-   遅延キー書き込み
+-   遅延（R）
+-   削除 (R)
+-   DENSE_RANK (Rウィンドウ)
+-   依存
+-   深さ
+-   説明 (R)
+-   記述する (R)
+-   ダイジェスト
+-   ディレクトリ
+-   無効にする
+-   無効
+-   破棄
+-   ディスク
+-   明確 (R)
+-   ディスティンクトロウ（R）
+-   部門（R）
+-   する
+-   ダブル（R）
+-   ドレイナー
+-   ドロップ（R）
+-   ドライ
+-   デュアル（R）
+-   重複
+-   動的
 
-<a id="E" class="letter" href="#E">E</a>
+<a id="E" class="letter" href="#E">え</a>
 
-- ELSE (R)
-- ELSEIF (R)
-- ENABLE
-- ENABLED
-- ENCLOSED (R)
-- ENCRYPTION
-- END
-- ENFORCED
-- ENGINE
-- ENGINES
-- ENUM
-- ERROR
-- ERRORS
-- ESCAPE
-- ESCAPED (R)
-- EVENT
-- EVENTS
-- EVOLVE
-- EXCEPT (R)
-- EXCHANGE
-- EXCLUSIVE
-- EXECUTE
-- EXISTS (R)
-- EXIT (R)
-- EXPANSION
-- EXPIRE
-- EXPLAIN (R)
-- EXTENDED
+-   そうでなければ（R）
+-   エルセイフ（R）
+-   有効にする
+-   有効
+-   封入（R）
+-   暗号化
+-   終わり
+-   強制執行
+-   エンジン
+-   エンジン
+-   列挙
+-   エラー
+-   エラー
+-   逃げる
+-   脱出（R）
+-   イベント
+-   イベント
+-   進化
+-   除く (R)
+-   交換
+-   エクスクルーシブ
+-   実行する
+-   存在する（R）
+-   終了（右）
+-   拡大
+-   期限切れ
+-   EXPLAIN(R)
+-   延長
 
-<a id="F" class="letter" href="#F">F</a>
+<a id="F" class="letter" href="#F">ふ</a>
 
-- FAILED_LOGIN_ATTEMPTS
-- FALSE (R)
-- FAULTS
-- FETCH (R)
-- FIELDS
-- FILE
-- FIRST
-- FIRST_VALUE (R-Window)
-- FIXED
-- FLOAT (R)
-- FLOAT4 (R)
-- FLOAT8 (R)
-- FLUSH
-- FOLLOWING
-- FOR (R)
-- FORCE (R)
-- FOREIGN (R)
-- FORMAT
-- FOUND
-- FROM (R)
-- FULL
-- FULLTEXT (R)
-- FUNCTION
+-   ログイン試行失敗
+-   誤り（R）
+-   欠陥
+-   フェッチ（R）
+-   田畑
+-   ファイル
+-   初め
+-   FIRST_VALUE (R ウィンドウ)
+-   修理済み
+-   フロート（R）
+-   フロート4（R）
+-   フロート8（R）
+-   流す
+-   続く
+-   賛成（R）
+-   フォース（R）
+-   外国人（R）
+-   フォーマット
+-   見つかった
+-   （R）より
+-   満杯
+-   全文（R）
+-   関数
 
-<a id="G" class="letter" href="#G">G</a>
+<a id="G" class="letter" href="#G">グ</a>
 
-- GENERAL
-- GENERATED (R)
-- GLOBAL
-- GRANT (R)
-- GRANTS
-- GROUP (R)
-- GROUPS (R-Window)
+-   一般的な
+-   生成 (R)
+-   グローバル
+-   グラント（R）
+-   助成金
+-   グループ（R）
+-   グループ (R ウィンドウ)
 
 <a id="H" class="letter" href="#H">H</a>
 
-- HANDLER
-- HASH
-- HAVING (R)
-- HELP
-- HIGH_PRIORITY (R)
-- HISTOGRAM
-- HISTOGRAMS_IN_FLIGHT
-- HISTORY
-- HOSTS
-- HOUR
-- HOUR_MICROSECOND (R)
-- HOUR_MINUTE (R)
-- HOUR_SECOND (R)
-- HYPO
+-   ハンドラ
+-   ハッシュ
+-   持つこと（R）
+-   ヘルプ
+-   高優先度（R）
+-   ヒストグラム
+-   飛行中のヒストグラム
+-   歴史
+-   ホスト
+-   時間
+-   時間_マイクロ秒 (R)
+-   時間_分 (R)
+-   時間_秒 (R)
+-   ハイポ
 
-<a id="I" class="letter" href="#I">I</a>
+<a id="I" class="letter" href="#I">私</a>
 
-- IDENTIFIED
-- IF (R)
-- IGNORE (R)
-- ILIKE (R)
-- IMPORT
-- IMPORTS
-- IN (R)
-- INCREMENT
-- INCREMENTAL
-- INDEX (R)
-- INDEXES
-- INFILE (R)
-- INNER (R)
-- INOUT (R)
-- INSERT (R)
-- INSERT_METHOD
-- INSTANCE
-- INT (R)
-- INT1 (R)
-- INT2 (R)
-- INT3 (R)
-- INT4 (R)
-- INT8 (R)
-- INTEGER (R)
-- INTERSECT (R)
-- INTERVAL (R)
-- INTO (R)
-- INVISIBLE
-- INVOKER
-- IO
-- IPC
-- IS (R)
-- ISOLATION
-- ISSUER
-- ITERATE (R)
+-   特定された
+-   IF（R）
+-   無視（R）
+-   イライク（R）
+-   輸入
+-   輸入品
+-   （R）
+-   インクリメント
+-   増分
+-   インデックス（R）
+-   インデックス
+-   インファイル（R）
+-   インナー（右）
+-   インアウト（R）
+-   挿入（R）
+-   挿入メソッド
+-   実例
+-   INT（R）
+-   INT1（R）
+-   INT2（R）
+-   INT3 (R)
+-   INT4 (R)
+-   INT8 (R)
+-   整数 (R)
+-   インターセクト（R）
+-   インターバル（R）
+-   に (R)
+-   見えない
+-   インボーカー
+-   IO
+-   国際PC
+-   IS（R）
+-   分離
+-   発行者
+-   繰り返し (R)
 
 <a id="J" class="letter" href="#J">J</a>
 
-- JOB
-- JOBS
-- JOIN (R)
-- JSON
+-   仕事
+-   求人
+-   参加する (R)
+-   翻訳
 
-<a id="K" class="letter" href="#K">K</a>
+<a id="K" class="letter" href="#K">け</a>
 
-- KEY (R)
-- KEYS (R)
-- KEY_BLOCK_SIZE
-- KILL (R)
+-   キー（R）
+-   キーズ（R）
+-   キーブロックサイズ
+-   キル（R）
 
-<a id="L" class="letter" href="#L">L</a>
+<a id="L" class="letter" href="#L">ら</a>
 
-- LABELS
-- LAG (R-Window)
-- LANGUAGE
-- LAST
-- LAST_BACKUP
-- LAST_VALUE (R-Window)
-- LASTVAL
-- LEAD (R-Window)
-- LEADING (R)
-- LEAVE (R)
-- LEFT (R)
-- LESS
-- LEVEL
-- LIKE (R)
-- LIMIT (R)
-- LINEAR (R)
-- LINES (R)
-- LIST
-- LOAD (R)
-- LOCAL
-- LOCALTIME (R)
-- LOCALTIMESTAMP (R)
-- LOCATION
-- LOCK (R)
-- LOCKED
-- LOGS
-- LONG (R)
-- LONGBLOB (R)
-- LONGTEXT (R)
-- LOW_PRIORITY (R)
+-   ラベル
+-   LAG (Rウィンドウ)
+-   言語
+-   最後
+-   最終バックアップ
+-   LAST_VALUE (R ウィンドウ)
+-   ラストバル
+-   LEAD (Rウィンドウ)
+-   リーディング（右）
+-   去る（R）
+-   左（右）
+-   少ない
+-   レベル
+-   いいね（R）
+-   リミット（R）
+-   リニア（R）
+-   ライン（R）
+-   リスト
+-   ロード（R）
+-   地元
+-   現地時間 (R)
+-   ローカルタイムスタンプ (R)
+-   位置
+-   ロック（R）
+-   ロック済み
+-   ログ
+-   ロング（右）
+-   ロングブロブ（R）
+-   ロングテキスト (R)
+-   低優先度（R）
 
-<a id="M" class="letter" href="#M">M</a>
+<a id="M" class="letter" href="#M">ま</a>
 
-- MASTER
-- MATCH (R)
-- MAXVALUE (R)
-- MAX_CONNECTIONS_PER_HOUR
-- MAX_IDXNUM
-- MAX_MINUTES
-- MAX_QUERIES_PER_HOUR
-- MAX_ROWS
-- MAX_UPDATES_PER_HOUR
-- MAX_USER_CONNECTIONS
-- MB
-- MEDIUMBLOB (R)
-- MEDIUMINT (R)
-- MEDIUMTEXT (R)
-- MEMBER
-- MEMORY
-- MERGE
-- MICROSECOND
-- MIDDLEINT (R)
-- MINUTE
-- MINUTE_MICROSECOND (R)
-- MINUTE_SECOND (R)
-- MINVALUE
-- MIN_ROWS
-- MOD (R)
-- MODE
-- MODIFY
-- MONTH
+-   マスター
+-   マッチ（R）
+-   マックスバリュー（R）
+-   1時間あたりの最大接続数
+-   最大ID数
+-   最大分
+-   1時間あたりのクエリの最大数
+-   最大行数
+-   1時間あたりの最大更新回数
+-   最大ユーザー接続数
+-   メガバイト
+-   ミディアムブロブ（R）
+-   ミディアムミント（R）
+-   中テキスト（R）
+-   メンバー
+-   メモリ
+-   マージ
+-   マイクロ秒
+-   ミドルイント（R）
+-   分
+-   分_マイクロ秒 (R)
+-   分_秒 (R)
+-   最小値
+-   最小行数
+-   MOD（R）
+-   モード
+-   修正する
+-   月
 
-<a id="N" class="letter" href="#N">N</a>
+<a id="N" class="letter" href="#N">いいえ</a>
 
-- NAMES
-- NATIONAL
-- NATURAL (R)
-- NCHAR
-- NEVER
-- NEXT
-- NEXTVAL
-- NO
-- NOCACHE
-- NOCYCLE
-- NODEGROUP
-- NODE_ID
-- NODE_STATE
-- NOMAXVALUE
-- NOMINVALUE
-- NONCLUSTERED
-- NONE
-- NOT (R)
-- NOWAIT
-- NO_WRITE_TO_BINLOG (R)
-- NTH_VALUE (R-Window)
-- NTILE (R-Window)
-- NULL (R)
-- NULLS
-- NUMERIC (R)
-- NVARCHAR
+-   名前
+-   全国
+-   ナチュラル（R）
+-   ンチャー
+-   一度もない
+-   次
+-   ネクストバル
+-   いいえ
+-   ノキャッシュ
+-   ノーサイクル
+-   ノードグループ
+-   ノードID
+-   ノード状態
+-   最大値なし
+-   公称値
+-   非クラスター化
+-   なし
+-   いいえ（R）
+-   待って
+-   BINLOG への書き込みなし (R)
+-   NTH_VALUE (R ウィンドウ)
+-   NTILE (R ウィンドウ)
+-   NULL (R)
+-   NULL値
+-   数値 (R)
+-   ネヴァーチャル
 
-<a id="O" class="letter" href="#O">O</a>
+<a id="O" class="letter" href="#O">お</a>
 
-- OF (R)
-- OFF
-- OFFSET
-- OLTP_READ_ONLY
-- OLTP_READ_WRITE
-- OLTP_WRITE_ONLY
-- ON (R)
-- ON_DUPLICATE
-- ONLINE
-- ONLY
-- OPEN
-- OPTIMISTIC
-- OPTIMIZE (R)
-- OPTION (R)
-- OPTIONAL
-- OPTIONALLY (R)
-- OR (R)
-- ORDER (R)
-- OUT (R)
-- OUTER (R)
-- OUTFILE (R)
-- OVER (R-Window)
+-   の（R）
+-   オフ
+-   オフセット
+-   OLTP_読み取り専用
+-   OLTP_読み取り_書き込み
+-   OLTP_書き込みのみ
+-   オン（R）
+-   重複あり
+-   オンライン
+-   のみ
+-   開ける
+-   楽観的
+-   最適化 (R)
+-   オプション（R）
+-   オプション
+-   オプション（R）
+-   または（R）
+-   注文 (R)
+-   アウト（R）
+-   アウター（右）
+-   アウトファイル (R)
+-   OVER (右ウィンドウ)
 
-<a id="P" class="letter" href="#P">P</a>
+<a id="P" class="letter" href="#P">ポ</a>
 
-- PACK_KEYS
-- PAGE
-- PARSER
-- PARTIAL
-- PARTITION (R)
-- PARTITIONING
-- PARTITIONS
-- PASSWORD
-- PASSWORD_LOCK_TIME
-- PAUSE
-- PERCENT
-- PERCENT_RANK (R-Window)
-- PER_DB
-- PER_TABLE
-- PESSIMISTIC
-- PLACEMENT (S)
-- PLUGINS
-- POINT
-- POLICY
-- PRECEDING
-- PRECISION (R)
-- PREPARE
-- PRESERVE
-- PRE_SPLIT_REGIONS
-- PRIMARY (R)
-- PRIVILEGES
-- PROCEDURE (R)
-- PROCESS
-- PROCESSLIST
-- PROFILE
-- PROFILES
-- PROXY
-- PUMP
-- PURGE
+-   パックキー
+-   ページ
+-   パーサー
+-   部分的
+-   パーティション（R）
+-   パーティショニング
+-   パーティション
+-   パスワード
+-   パスワードロック時間
+-   一時停止
+-   パーセント
+-   PERCENT_RANK (Rウィンドウ)
+-   PER_DB
+-   PER_TABLE
+-   悲観的
+-   配置（S）
+-   プラグイン
+-   ポイント
+-   ポリシー
+-   前へ
+-   プレシジョン（R）
+-   準備する
+-   保存する
+-   事前分割領域
+-   プライマリー（R）
+-   特権
+-   手順（R）
+-   プロセス
+-   プロセスリスト
+-   プロフィール
+-   プロフィール
+-   プロキシ
+-   ポンプ
+-   パージ
 
-<a id="Q" class="letter" href="#Q">Q</a>
+<a id="Q" class="letter" href="#Q">質問</a>
 
-- QUARTER
-- QUERIES
-- QUERY
-- QUICK
+-   四半期
+-   クエリ
+-   クエリ
+-   素早い
 
 <a id="R" class="letter" href="#R">R</a>
 
-- RANGE (R)
-- RANK (R-Window)
-- RATE_LIMIT
-- READ (R)
-- REAL (R)
-- REBUILD
-- RECOVER
-- RECURSIVE (R)
-- REDUNDANT
-- REFERENCES (R)
-- REGEXP (R)
-- REGION
-- REGIONS
-- RELEASE (R)
-- RELOAD
-- REMOVE
-- RENAME (R)
-- REORGANIZE
-- REPAIR
-- REPEAT (R)
-- REPEATABLE
-- REPLACE (R)
-- REPLICA
-- REPLICAS
-- REPLICATION
-- REQUIRE (R)
-- REQUIRED
-- RESET
-- RESOURCE
-- RESPECT
-- RESTART
-- RESTORE
-- RESTORES
-- RESTRICT (R)
-- RESUME
-- REUSE
-- REVERSE
-- REVOKE (R)
-- RIGHT (R)
-- RLIKE (R)
-- ROLE
-- ROLLBACK
-- ROLLUP
-- ROUTINE
-- ROW (R)
-- ROW_COUNT
-- ROW_FORMAT
-- ROW_NUMBER (R-Window)
-- ROWS (R-Window)
-- RTREE
-- RUN
+-   部隊）
+-   RANK (Rウィンドウ)
+-   レート制限
+-   読む (R)
+-   リアル（R）
+-   再構築
+-   回復する
+-   再帰的 (R)
+-   冗長
+-   参考文献（R）
+-   正規表現 (R)
+-   地域
+-   地域
+-   リリース（R）
+-   リロード
+-   取り除く
+-   名前を変更 (R)
+-   再編成
+-   修理
+-   繰り返し（R）
+-   繰り返し可能
+-   置換 (R)
+-   レプリカ
+-   レプリカ
+-   複製
+-   必要 (R)
+-   必須
+-   リセット
+-   リソース
+-   尊敬
+-   再起動
+-   復元する
+-   復元
+-   制限する (R)
+-   再開する
+-   再利用
+-   逆行する
+-   取り消し（R）
+-   右（R）
+-   RLIKE (R)
+-   役割
+-   ロールバック
+-   巻き上げる
+-   ルーティーン
+-   ROW（右）
+-   行数
+-   行フォーマット
+-   ROW_NUMBER (R ウィンドウ)
+-   ROWS (R ウィンドウ)
+-   RTREE
+-   走る
 
 <a id="S" class="letter" href="#S">S</a>
 
-- SAMPLERATE
-- SAMPLES
-- SAN
-- SAVEPOINT
-- SECOND
-- SECOND_MICROSECOND (R)
-- SECONDARY
-- SECONDARY_ENGINE
-- SECONDARY_LOAD
-- SECONDARY_UNLOAD
-- SECURITY
-- SELECT (R)
-- SEND_CREDENTIALS_TO_TIKV
-- SEPARATOR
-- SEQUENCE
-- SERIAL
-- SERIALIZABLE
-- SESSION
-- SESSION_STATES
-- SET (R)
-- SETVAL
-- SHARD_ROW_ID_BITS
-- SHARE
-- SHARED
-- SHOW (R)
-- SHUTDOWN
-- SIGNED
-- SIMPLE
-- SKIP
-- SKIP_SCHEMA_FILES
-- SLAVE
-- SLOW
-- SMALLINT (R)
-- SNAPSHOT
-- SOME
-- SOURCE
-- SPATIAL (R)
-- SPLIT
-- SQL (R)
-- SQL_BIG_RESULT (R)
-- SQL_BUFFER_RESULT
-- SQL_CACHE
-- SQL_CALC_FOUND_ROWS (R)
-- SQL_NO_CACHE
-- SQL_SMALL_RESULT (R)
-- SQL_TSI_DAY
-- SQL_TSI_HOUR
-- SQL_TSI_MINUTE
-- SQL_TSI_MONTH
-- SQL_TSI_QUARTER
-- SQL_TSI_SECOND
-- SQL_TSI_WEEK
-- SQL_TSI_YEAR
-- SQLEXCEPTION (R)
-- SQLSTATE (R)
-- SQLWARNING (R)
-- SSL (R)
-- START
-- STARTING (R)
-- STATISTICS
-- STATS
-- STATS_AUTO_RECALC
-- STATS_BUCKETS
-- STATS_COL_CHOICE
-- STATS_COL_LIST
-- STATS_EXTENDED (R)
-- STATS_HEALTHY
-- STATS_HISTOGRAMS
-- STATS_LOCKED
-- STATS_META
-- STATS_OPTIONS
-- STATS_PERSISTENT
-- STATS_SAMPLE_PAGES
-- STATS_SAMPLE_RATE
-- STATS_TOPN
-- STATUS
-- STORAGE
-- STORED (R)
-- STRAIGHT_JOIN (R)
-- STRICT_FORMAT
-- SUBJECT
-- SUBPARTITION
-- SUBPARTITIONS
-- SUPER
-- SWAPS
-- SWITCHES
-- SYSTEM
-- SYSTEM_TIME
+-   サンプルレート
+-   サンプル
+-   さん
+-   セーブポイント
+-   2番
+-   秒_マイクロ秒 (R)
+-   セカンダリー
+-   セカンダリエンジン
+-   セカンダリロード
+-   セカンダリアンロード
+-   安全
+-   選択 (R)
+-   資格情報をTIKVに送信
+-   セパレーター
+-   順序
+-   シリアル
+-   SERIALIZABLE
+-   セッション
+-   セッション状態
+-   セット（R）
+-   SETVAL
+-   シャード行IDビット
+-   共有
+-   共有
+-   表示 (R)
+-   シャットダウン
+-   署名済み
+-   単純
+-   スキップ
+-   SKIP_SCHEMA_FILES
+-   奴隷
+-   遅い
+-   スモールイント（R）
+-   スナップショット
+-   いくつかの
+-   ソース
+-   空間（R）
+-   スプリット
+-   SQL (R)
+-   SQL_BIG_RESULT (R)
+-   SQL_BUFFER_RESULT
+-   SQL_CACHE
+-   SQL_CALC_FOUND_ROWS (R)
+-   SQL_NO_CACHE
+-   SQL_SMALL_RESULT (R)
+-   SQL_TSI_DAY
+-   SQL_TSI_HOUR
+-   SQL_TSI_分
+-   SQL_TSI_MONTH
+-   SQL_TSI_QUARTER
+-   SQL_TSI_SECOND
+-   SQL_TSI_WEEK
+-   SQL_TSI_YEAR
+-   SQL例外 (R)
+-   SQL状態 (R)
+-   SQL警告 (R)
+-   SSL（R）
+-   始める
+-   スターティング（R）
+-   統計
+-   統計
+-   STATS_AUTO_RECALC
+-   統計_バケット
+-   統計値の選択
+-   統計列リスト
+-   統計_拡張 (R)
+-   健康状態
+-   統計ヒストグラム
+-   統計_ロック済み
+-   統計META
+-   統計オプション
+-   統計_永続
+-   統計サンプルページ
+-   統計サンプルレート
+-   統計_TOPN
+-   状態
+-   ストレージ
+-   保存済み (R)
+-   ストレート結合（R）
+-   厳格なフォーマット
+-   主題
+-   サブパーティション
+-   サブパーティション
+-   素晴らしい
+-   スワップ
+-   スイッチ
+-   システム
+-   システム時刻
 
 <a id="T" class="letter" href="#T">T</a>
 
-- TABLE (R)
-- TABLES
-- TABLESAMPLE (R)
-- TABLESPACE
-- TABLE_CHECKSUM
-- TELEMETRY
-- TELEMETRY_ID
-- TEMPORARY
-- TEMPTABLE
-- TERMINATED (R)
-- TEXT
-- THAN
-- THEN (R)
-- TIDB
-- TiDB_CURRENT_TSO (R)
-- TIFLASH
-- TIKV_IMPORTER
-- TIME
-- TIMESTAMP
-- TINYBLOB (R)
-- TINYINT (R)
-- TINYTEXT (R)
-- TO (R)
-- TOKEN_ISSUER
-- TOPN
-- TPCC
-- TPCH_10
-- TRACE
-- TRADITIONAL
-- TRAILING (R)
-- TRANSACTION
-- TRIGGER (R)
-- TRIGGERS
-- TRUE (R)
-- TRUNCATE
-- TSO
-- TTL
-- TTL_ENABLE
-- TTL_JOB_INTERVAL
-- TYPE
+-   表（R）
+-   テーブル
+-   テーブルサンプル（R）
+-   テーブルスペース
+-   テーブルチェックサム
+-   テレメトリー
+-   テレメトリーID
+-   一時的
+-   誘惑的
+-   終了しました (R)
+-   TEXT
+-   よりも
+-   その後（R）
+-   TIDB
+-   TiDB_CURRENT_TSO (R)
+-   ティフラッシュ
+-   TIKV_インポーター
+-   時間
+-   タイムスタンプ
+-   タイニーブロブ（R）
+-   タイニーン（R）
+-   小さなテキスト（R）
+-   へ（右）
+-   トークン発行者
+-   トップ
+-   TPCC
+-   TPCH_10
+-   痕跡
+-   伝統的
+-   トレーリング（R）
+-   取引
+-   トリガー（R）
+-   トリガー
+-   真実（R）
+-   切り捨て
+-   TSO
+-   10 ...
+-   TTL_ENABLE
+-   TTL_ジョブ間隔
+-   タイプ
 
-<a id="U" class="letter" href="#U">U</a>
+<a id="U" class="letter" href="#U">あなた</a>
 
-- UNBOUNDED
-- UNCOMMITTED
-- UNDEFINED
-- UNICODE
-- UNION (R)
-- UNIQUE (R)
-- UNKNOWN
-- UNLOCK (R)
-- UNSET
-- UNSIGNED (R)
-- UNTIL (R)
-- UPDATE (R)
-- USAGE (R)
-- USE (R)
-- USER
-- USING (R)
-- UTC_DATE (R)
-- UTC_TIME (R)
-- UTC_TIMESTAMP (R)
+-   無制限
+-   未確定
+-   未定義
+-   ユニコード
+-   ユニオン（R）
+-   ユニーク（R）
+-   未知
+-   ロック解除（R）
+-   設定解除
+-   未署名（R）
+-   まで（R）
+-   アップデート (R)
+-   使用法 (R)
+-   使用（R）
+-   ユーザー
+-   使用方法 (R)
+-   UTC_DATE (日付)
+-   UTC_TIME (時刻)
+-   UTC_タイムスタンプ (R)
 
-<a id="V" class="letter" href="#V">V</a>
+<a id="V" class="letter" href="#V">五</a>
 
-- VALIDATION
-- VALUE
-- VALUES (R)
-- VARBINARY (R)
-- VARCHAR (R)
-- VARCHARACTER (R)
-- VARIABLES
-- VARYING (R)
-- VIEW
-- VIRTUAL (R)
-- VISIBLE
+-   検証
+-   価値
+-   価値観（R）
+-   ヴァービナリー（R）
+-   ヴァルチャー（R）
+-   ヴァーチャルキャラクター（R）
+-   変数
+-   変化する（R）
+-   ビュー
+-   バーチャル（R）
+-   見える
 
-<a id="W" class="letter" href="#W">W</a>
+<a id="W" class="letter" href="#W">わ</a>
 
-- WAIT
-- WARNINGS
-- WEEK
-- WEIGHT_STRING
-- WHEN (R)
-- WHERE (R)
-- WHILE (R)
-- WIDTH
-- WINDOW (R-Window)
-- WITH (R)
-- WITHOUT
-- WORKLOAD
-- WRITE (R)
+-   待って
+-   警告
+-   週
+-   重量文字列
+-   いつ (R)
+-   どこ (R)
+-   ながら（R）
+-   幅
+-   ウィンドウ (R-ウィンドウ)
+-   ウィズ（R）
+-   それなし
+-   ワークロード
+-   書く (R)
 
-<a id="X" class="letter" href="#X">X</a>
+<a id="X" class="letter" href="#X">バツ</a>
 
-- X509
-- XOR (R)
+-   X509
+-   排他的論理和 (R)
 
 <a id="Y" class="letter" href="#Y">Y</a>
 
-- YEAR
-- YEAR_MONTH (R)
+-   年
+-   年_月 (R)
 
-<a id="Z" class="letter" href="#Z">Z</a>
+<a id="Z" class="letter" href="#Z">ず</a>
 
-- ZEROFILL (R)
+-   ゼロフィル（R）

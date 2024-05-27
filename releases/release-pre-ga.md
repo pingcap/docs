@@ -1,39 +1,39 @@
 ---
 title: Pre-GA release notes
-summary: TiDB Pre-GA release on August 30, 2017, focuses on MySQL compatibility, SQL optimization, stability, and performance. TiDB introduces SQL query optimizer enhancements, MySQL compatibility, JSON type support, and memory consumption reduction. Placement Driver (PD) now supports manual leader change, while TiKV uses dedicated Rocksdb for Raft log storage and improves performance. TiDB Connector for Spark Beta Release implements predicates pushdown, aggregation pushdown, and range pruning, capable of running TPC+H queries.
+summary: 2017 年 8 月 30 日の TiDB プレ GA リリースでは、MySQL の互換性、SQL の最適化、安定性、パフォーマンスに重点が置かれています。TiDB では、SQL クエリ オプティマイザーの強化、MySQL の互換性、JSON 型のサポート、メモリ消費の削減が導入されています。Placement Driver (PD) は手動でのリーダー変更をサポートするようになり、TiKV はRaftログstorageに専用の Rocksdb を使用してパフォーマンスを向上させています。TiDB Connector for Spark ベータ リリースでは、述語プッシュダウン、集計プッシュダウン、範囲プルーニングを実装し、TPC+H クエリを実行できます。
 ---
 
-# Pre-GA Release Notes
+# プレGAリリースノート {#pre-ga-release-notes}
 
-On August 30, 2017, TiDB Pre-GA is released! This release is focused on MySQL compatibility, SQL optimization, stability, and performance.
+2017 年 8 月 30 日に、TiDB Pre-GA がリリースされました。このリリースは、MySQL の互換性、SQL の最適化、安定性、パフォーマンスに重点を置いています。
 
-## TiDB
+## ティビ {#tidb}
 
-+ The SQL query optimizer:
-    - Adjust the cost model
-    - Use index scan to handle the `where` clause with the `compare` expression which has different types on each side
-    - Support the Greedy algorithm based Join Reorder
-+ Many enhancements have been introduced to be more compatible with MySQL
-+ Support `Natural Join`
-+ Support the JSON type (Experimental), including the query, update and index of the JSON fields
-+ Prune the useless data to reduce the consumption of the executor memory
-+ Support configuring prioritization in the SQL statements and automatically set the prioritization for some of the statements according to the query type
-+ Completed the expression refactor and the speed is increased by about 30%
+-   SQL クエリ オプティマイザー:
+    -   コストモデルを調整する
+    -   インデックススキャンを使用して、両側に異なる型を持つ`compare`式を持つ`where`句を処理します。
+    -   貪欲アルゴリズムに基づく結合したテーブルの再配置付けをサポート
+-   MySQLとの互換性を高めるために多くの機能強化が導入されました
+-   サポート`Natural Join`
+-   JSONフィールドのクエリ、更新、インデックスを含むJSONタイプ（Experimental）をサポートします。
+-   無駄なデータを削除して、エグゼキュータのメモリ消費量を削減します。
+-   SQL ステートメントの優先順位の設定をサポートし、クエリの種類に応じて一部のステートメントの優先順位を自動的に設定します。
+-   式のリファクタリングが完了し、速度が約30%向上しました
 
-## Placement Driver (PD)
+## 配置Driver（PD） {#placement-driver-pd}
 
-+ Support manually changing the leader of the PD cluster
+-   PDクラスタのリーダーを手動で変更する機能をサポート
 
-## TiKV
+## ティクヴ {#tikv}
 
-+ Use dedicated Rocksdb instance to store Raft log
-+ Use `DeleteRange` to speed up the deleting of replicas
-+ Coprocessor now supports more pushdown operators
-+ Improve the performance and stability
+-   専用のRocksdbインスタンスを使用してRaftログを保存する
+-   レプリカの削除を高速化するには`DeleteRange`使用します
+-   コプロセッサーはより多くのプッシュダウン演算子をサポートするようになりました
+-   パフォーマンスと安定性を向上
 
-## TiDB Connector for Spark Beta Release
+## Spark 用 TiDB コネクタ ベータ版リリース {#tidb-connector-for-spark-beta-release}
 
-+ Implement the predicates pushdown
-+ Implement the aggregation pushdown
-+ Implement range pruning
-+ Capable of running full set of TPC+H except for one query that needs view support
+-   述語プッシュダウンを実装する
+-   集約プッシュダウンを実装する
+-   範囲プルーニングを実装する
+-   ビューのサポートを必要とする 1 つのクエリを除き、TPC+H のフルセットを実行可能

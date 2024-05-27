@@ -1,194 +1,184 @@
 ---
 title: Troubleshoot TiDB Lightning
-summary: Learn the common problems you might encounter when you use TiDB Lightning and their solutions.
+summary: TiDB Lightning を使用する際に発生する可能性のある一般的な問題とその解決策について説明します。
 ---
 
-# Troubleshoot TiDB Lightning
+# TiDB Lightningシューティング {#troubleshoot-tidb-lightning}
 
-This document summarizes the common problems you might encounter when you use TiDB Lightning and their solutions.
+このドキュメントでは、 TiDB Lightning の使用時に発生する可能性のある一般的な問題とその解決策をまとめています。
 
-## Import speed is too slow
+## インポート速度が遅すぎる {#import-speed-is-too-slow}
 
-Normally it takes 2 minutes per thread for TiDB Lightning to import a 256 MB data file. If the speed is much slower than this, there is an error. You can check the time taken for each data file from the log mentioning `restore chunk … takes`. This can also be observed from metrics on Grafana.
+通常、 TiDB Lightning が256 MB のデータ ファイルをインポートするには、スレッドごとに 2 分かかります。速度がこれより大幅に遅い場合は、エラーがあります`restore chunk … takes`に記載されているログから、各データ ファイルにかかった時間を確認できます。これは、Grafana のメトリックからも確認できます。
 
-There are several reasons why TiDB Lightning becomes slow:
+TiDB Lightning が遅くなる理由はいくつかあります。
 
-**Cause 1**: `region-concurrency` is set too high, which causes thread contention and reduces performance.
+**原因 1** : `region-concurrency`設定が高すぎるため、スレッドの競合が発生し、パフォーマンスが低下します。
 
-1. The setting can be found from the start of the log by searching `region-concurrency`.
-2. If TiDB Lightning shares the same machine with other services (for example, TiKV Importer), `region-concurrency` must be **manually** set to 75% of the total number of CPU cores.
-3. If there is a quota on CPU (for example, limited by Kubernetes settings), TiDB Lightning may not be able to read this out. In this case, `region-concurrency` must also be **manually** reduced.
+1.  設定は、ログの先頭から`region-concurrency`検索すると見つかります。
+2.  TiDB Lightningが他のサービス (TiKV Importer など) と同じマシンを共有する場合は、 `region-concurrency` CPU コアの合計数の 75% に**手動で**設定する必要があります。
+3.  CPU にクォータがある場合 (Kubernetes 設定による制限など)、 TiDB Lightning はこれを読み取れない可能性があります。この場合も`region-concurrency`**手動で**減らす必要があります。
 
-**Cause 2**: The table schema is too complex.
+**原因 2** : テーブル スキーマが複雑すぎます。
 
-Every additional index introduces a new KV pair for each row. If there are N indices, the actual size to be imported would be approximately (N+1) times the size of the Dumpling output. If the indices are negligible, you may first remove them from the schema, and add them back using `CREATE INDEX` after the import is complete.
+インデックスを追加するたびに、各行に新しい KV ペアが導入されます。インデックスが N 個ある場合、インポートされる実際のサイズは、 Dumpling出力のサイズの約 (N+1) 倍になります。インデックスが無視できるほど小さい場合は、最初にスキーマからインデックスを削除し、インポートが完了した後に`CREATE INDEX`を使用して再度追加することができます。
 
-**Cause 3**: Each file is too large.
+**原因 3** : 各ファイルが大きすぎます。
 
-TiDB Lightning works the best when the data source is broken down into multiple files of size around 256 MB so that the data can be processed in parallel. If each file is too large, TiDB Lightning might not respond.
+TiDB Lightning は、データ ソースを 256 MB 程度のサイズの複数のファイルに分割してデータを並列処理する場合に最適に機能します。各ファイルが大きすぎると、 TiDB Lightning が応答しない可能性があります。
 
-If the data source is CSV, and all CSV files have no fields containing newline control characters (U+000A and U+000D), you can turn on "strict format" to let TiDB Lightning automatically split the large files.
+データ ソースが CSV であり、すべての CSV ファイルに改行制御文字 (U+000A および U+000D) を含むフィールドがない場合は、「厳密な形式」をオンにして、 TiDB Lightning で大きなファイルを自動的に分割することができます。
 
 ```toml
 [mydumper]
 strict-format = true
 ```
 
-**Cause 4**: TiDB Lightning is too old.
+**原因 4** : TiDB Lightningが古すぎます。
 
-Try the latest version. Maybe there is new speed improvement.
+最新バージョンをお試しください。速度がさらに向上するかもしれません。
 
-## The `tidb-lightning` process suddenly quits while running in background
+## <code>tidb-lightning</code>プロセスがバックグラウンドで実行中に突然終了する {#the-code-tidb-lightning-code-process-suddenly-quits-while-running-in-background}
 
-It is potentially caused by starting `tidb-lightning` incorrectly, which causes the system to send a SIGHUP signal to stop the `tidb-lightning` process. In this situation, `tidb-lightning.log` usually outputs the following log:
+これは、 `tidb-lightning`誤って起動し、システムが SIGHUP 信号を送信して`tidb-lightning`プロセスを停止することによって発生する可能性があります。この状況では、通常、 `tidb-lightning.log`次のログを出力します。
 
-```
-[2018/08/10 07:29:08.310 +08:00] [INFO] [main.go:41] ["got signal to exit"] [signal=hangup]
-```
+    [2018/08/10 07:29:08.310 +08:00] [INFO] [main.go:41] ["got signal to exit"] [signal=hangup]
 
-It is not recommended to directly use `nohup` in the command line to start `tidb-lightning`. You can [start `tidb-lightning`](/get-started-with-tidb-lightning.md#step-4-start-tidb-lightning) by executing a script.
+`tidb-lightning`を起動するためにコマンドラインで`nohup`直接使用することは推奨されません。 [`tidb-lightning`起動する](/get-started-with-tidb-lightning.md#step-4-start-tidb-lightning)スクリプトを実行することで起動できます。
 
-In addition, if the last log of TiDB Lightning shows that the error is "Context canceled", you need to search for the first "ERROR" level log. This "ERROR" level log is usually followed by "got signal to exit", which indicates that TiDB Lightning received an interrupt signal and then exited.
+また、 TiDB Lightningの最後のログに「コンテキストがキャンセルされました」というエラーが表示されている場合は、最初の「ERROR」レベルのログを検索する必要があります。この「ERROR」レベルのログの後には通常、「終了するための信号を受け取りました」が続きます。これは、 TiDB Lightning が割り込み信号を受信して​​終了したことを示しています。
 
-## The TiDB cluster uses lots of CPU resources and runs very slowly after using TiDB Lightning
+## TiDBクラスターはCPUリソースを大量に消費し、 TiDB Lightningの使用後は非常に遅くなります。 {#the-tidb-cluster-uses-lots-of-cpu-resources-and-runs-very-slowly-after-using-tidb-lightning}
 
-If `tidb-lightning` abnormally exited, the cluster might be stuck in the "import mode", which is not suitable for production. The current mode can be retrieved using the following command:
-
-{{< copyable "shell-regular" >}}
+`tidb-lightning`異常終了した場合、クラスターは「インポート モード」のままになっている可能性がありますが、これは本番に適していません。現在のモードは、次のコマンドを使用して取得できます。
 
 ```sh
 tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 ```
 
-You can force the cluster back to "normal mode" using the following command:
-
-{{< copyable "shell-regular" >}}
+次のコマンドを使用して、クラスターを強制的に「通常モード」に戻すことができます。
 
 ```sh
 tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 ```
 
-## TiDB Lightning reports an error
+## TiDB Lightningがエラーを報告 {#tidb-lightning-reports-an-error}
 
-### `could not find first pair, this shouldn't happen`
+### <code>could not find first pair, this shouldn't happen</code> {#code-could-not-find-first-pair-this-shouldn-t-happen-code}
 
-This error occurs possibly because the number of files opened by TiDB Lightning exceeds the system limit when TiDB Lightning reads the sorted local files. In the Linux system, you can use the `ulimit -n` command to confirm whether the value of this system limit is too small. It is recommended that you adjust this value to `1000000` (`ulimit -n 1000000`) during the import.
+このエラーは、 TiDB Lightning がソートされたローカル ファイルを読み取るときに、 TiDB Lightningによって開かれるファイル数がシステム制限を超えたために発生する可能性があります。Linux システムでは、 `ulimit -n`コマンドを使用して、このシステム制限の値が小さすぎるかどうかを確認できます。インポート中にこの値を`1000000` ( `ulimit -n 1000000` ) に調整することをお勧めします。
 
-### `checksum failed: checksum mismatched remote vs local`
+### <code>checksum failed: checksum mismatched remote vs local</code> {#code-checksum-failed-checksum-mismatched-remote-vs-local-code}
 
-**Cause**: The checksum of a table in the local data source and the remote imported database differ. This error has several deeper reasons. You can further locate the reason by checking the log that contains `checksum mismatched`.
+**原因**: ローカル データ ソースとリモート インポート データベースのテーブルのチェックサムが異なります。このエラーには、いくつかのより深い理由があります。2 `checksum mismatched`含むログを確認することで、さらに理由を突き止めることができます。
 
-The lines that contain `checksum mismatched` provide the information `total_kvs: x vs y`, where `x` indicates the number of key-value pairs (KV pairs) calculated by the target cluster after the import is completed, and `y` indicates the number of key-value pairs generated by the local data source.
+`checksum mismatched`を含む行は情報`total_kvs: x vs y`を提供します。ここで、 `x`インポートの完了後にターゲット クラスターによって計算されたキーと値のペア (KV ペア) の数を示し、 `y`ローカル データ ソースによって生成されたキーと値のペアの数を示します。
 
-- If `x` is greater, it means that there are more KV pairs in the target cluster.
-    - It is possible that this table is not empty before the import and therefore affects the data checksum. It is also possible that TiDB Lightning has previously failed and shut down, but did not restart correctly.
-- If `y` is greater, it means that there are more KV pairs in the local data source.
-    - If the checksum of the target database is all 0, it means that no import has occurred. It is possible that the cluster is too busy to receive any data.
-    - It is possible that the exported data contains duplicate data, such as the UNIQUE and PRIMARY KEYs with duplicate values, or that the downstream table structure is case-insensitive while the data is case-sensitive.
-- Other possible reasons
-    - If the data source is machine-generated and not backed up by Dumpling, make sure the data conforms to the table limits. For example, the AUTO_INCREMENT column needs to be positive and not 0.
+-   `x`が大きい場合は、ターゲット クラスター内に KV ペアがさらに存在することを意味します。
+    -   このテーブルはインポート前に空でなかった可能性があり、そのためデータ チェックサムに影響します。また、 TiDB Lightning が以前に失敗してシャットダウンしたが、正しく再起動されなかった可能性もあります。
+-   `y`が大きい場合は、ローカル データ ソースに KV ペアがさらに存在することを意味します。
+    -   ターゲット データベースのチェックサムがすべて 0 の場合、インポートは行われていないことを意味します。クラスターがビジー状態のため、データを受信できない可能性があります。
+    -   エクスポートされたデータに、重複した値を持つ UNIQUE KEY や PRIMARY KEY などの重複データが含まれている可能性があります。また、下流のテーブル構造では大文字と小文字が区別されるのに、データでは大文字と小文字が区別されない可能性もあります。
+-   その他の考えられる理由
+    -   データ ソースがマシンによって生成され、 Dumplingによってバックアップされていない場合は、データがテーブル制限に準拠していることを確認してください。たとえば、AUTO_INCREMENT 列は 0 ではなく正の値である必要があります。
 
-**Solutions**:
+**ソリューション**:
 
-1. Delete the corrupted data using `tidb-lightning-ctl`, check the table structure and the data, and restart TiDB Lightning to import the affected tables again.
-
-    {{< copyable "shell-regular" >}}
+1.  `tidb-lightning-ctl`を使用して破損したデータを削除し、テーブル構造とデータを確認して、 TiDB Lightningを再起動し、影響を受けるテーブルを再度インポートします。
 
     ```sh
     tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=all
     ```
 
-2. Consider using an external database to store the checkpoints (change `[checkpoint] dsn`) to reduce the target database's load.
+2.  ターゲット データベースの負荷を軽減するために、チェックポイント (変更`[checkpoint] dsn` ) を保存するために外部データベースを使用することを検討してください。
 
-3. If TiDB Lightning was improperly restarted, see also the "[How to properly restart TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning)" section in the FAQ.
+3.  TiDB Lightning が不適切に再起動された場合は、 FAQの「 [TiDB Lightningを適切に再起動する方法](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning) 」セクションも参照してください。
 
-### `Checkpoint for … has invalid status:` (error code)
+### <code>Checkpoint for … has invalid status:</code> (エラー コード) {#code-checkpoint-for-has-invalid-status-code-error-code}
 
-**Cause**: [Checkpoint](/tidb-lightning/tidb-lightning-checkpoints.md) is enabled, and TiDB Lightning or TiKV Importer has previously abnormally exited. To prevent accidental data corruption, TiDB Lightning will not start until the error is addressed.
+**原因**: [チェックポイント](/tidb-lightning/tidb-lightning-checkpoints.md)が有効になっており、 TiDB Lightningまたは TiKV Importer が以前に異常終了しました。偶発的なデータ破損を防ぐため、エラーが解決されるまでTiDB Lightning は起動しません。
 
-The error code is an integer smaller than 25, with possible values of 0, 3, 6, 9, 12, 14, 15, 17, 18, 20, and 21. The integer indicates the step where the unexpected exit occurs in the import process. The larger the integer is, the later step the exit occurs at.
+エラー コードは 25 未満の整数で、0、3、6、9、12、14、15、17、18、20、21 の値を取ります。整数は、インポート プロセスで予期しない終了が発生したステップを示します。整数が大きいほど、終了が発生するステップが遅くなります。
 
-**Solutions**:
+**ソリューション**:
 
-If the error was caused by invalid data source, delete the imported data using `tidb-lightning-ctl` and start Lightning again.
+無効なデータ ソースによってエラーが発生した場合は、 `tidb-lightning-ctl`使用してインポートされたデータを削除し、Lightning を再起動します。
 
 ```sh
 tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=all
 ```
 
-See the [Checkpoints control](/tidb-lightning/tidb-lightning-checkpoints.md#checkpoints-control) section for other options.
+その他のオプションについては、セクション[チェックポイント制御](/tidb-lightning/tidb-lightning-checkpoints.md#checkpoints-control)参照してください。
 
-### `cannot guess encoding for input file, please convert to UTF-8 manually`
+### <code>cannot guess encoding for input file, please convert to UTF-8 manually</code> {#code-cannot-guess-encoding-for-input-file-please-convert-to-utf-8-manually-code}
 
-**Cause**: TiDB Lightning only recognizes the UTF-8 and GB-18030 encodings for the table schemas. This error is emitted if the file isn't in any of these encodings. It is also possible that the file has mixed encoding, such as containing a string in UTF-8 and another string in GB-18030, due to historical `ALTER TABLE` executions.
+**原因**: TiDB Lightning は、テーブル スキーマの UTF-8 および GB-18030 エンコーディングのみを認識します。ファイルがこれらのいずれのエンコーディングでもない場合、このエラーが発生します。また、過去の`ALTER TABLE`の実行により、UTF-8 の文字列と GB-18030 の別の文字列を含むなど、ファイルにエンコーディングが混在している可能性もあります。
 
-**Solutions**:
+**ソリューション**:
 
-1. Fix the schema so that the file is entirely in either UTF-8 or GB-18030.
+1.  ファイル全体が UTF-8 または GB-18030 になるようにスキーマを修正します。
 
-2. Manually `CREATE` the affected tables in the target database.
+2.  ターゲット データベース内の影響を受けるテーブルを手動で`CREATE`します。
 
-3. Set `[mydumper] character-set = "binary"` to skip the check. Note that this might introduce mojibake into the target database.
+3.  チェックをスキップするには`[mydumper] character-set = "binary"`設定します。これにより、ターゲット データベースに mojibake が導入される可能性があることに注意してください。
 
-### `[sql2kv] sql encode error = [types:1292]invalid time format: '{1970 1 1 …}'`
+### <code>[sql2kv] sql encode error = [types:1292]invalid time format: '{1970 1 1 …}'</code> {#code-sql2kv-sql-encode-error-types-1292-invalid-time-format-1970-1-1-code}
 
-**Cause**: A table contains a column with the `timestamp` type, but the time value itself does not exist. This is either because of DST changes or the time value has exceeded the supported range (Jan 1, 1970 to Jan 19, 2038).
+**原因**: テーブルに`timestamp`型の列が含まれていますが、時間値自体が存在しません。これは、DST の変更によるか、時間値がサポートされている範囲 (1970 年 1 月 1 日から 2038 年 1 月 19 日) を超えたことが原因です。
 
-**Solutions**:
+**ソリューション**:
 
-1. Ensure TiDB Lightning and the source database are using the same time zone.
+1.  TiDB Lightningとソース データベースが同じタイム ゾーンを使用していることを確認します。
 
-    When executing TiDB Lightning directly, the time zone can be forced using the `$TZ` environment variable.
+    TiDB Lightning を直接実行する場合、 `$TZ`環境変数を使用してタイムゾーンを強制することができます。
 
     ```sh
     # Manual deployment, and force Asia/Shanghai.
     TZ='Asia/Shanghai' bin/tidb-lightning -config tidb-lightning.toml
     ```
 
-2. Ensure the entire cluster is using the same and latest version of `tzdata` (version 2018i or above).
+2.  クラスター全体で同じ最新バージョン`tzdata` (バージョン 2018i 以上) が使用されていることを確認します。
 
-    On CentOS, run `yum info tzdata` to check the installed version and whether there is an update. Run `yum upgrade tzdata` to upgrade the package.
+    CentOS では、 `yum info tzdata`実行してインストールされているバージョンと更新があるかどうかを確認します。3 `yum upgrade tzdata`実行してパッケージをアップグレードします。
 
-### `[Error 8025: entry too large, the max entry size is 6291456]`
+### <code>[Error 8025: entry too large, the max entry size is 6291456]</code> {#code-error-8025-entry-too-large-the-max-entry-size-is-6291456-code}
 
-**Cause**: A single row of key-value pairs generated by TiDB Lightning exceeds the limit set by TiDB.
+**原因**: TiDB Lightningによって生成されたキーと値のペアの 1 行が、TiDB によって設定された制限を超えています。
 
-**Solution**:
+**解決**：
 
-Currently, the limitation of TiDB cannot be bypassed. You can only ignore this table to ensure the successful import of other tables.
+現在、TiDB の制限を回避することはできません。他のテーブルのインポートを正常に行うには、このテーブルを無視することしかできません。
 
-### Encounter `rpc error: code = Unimplemented ...` when TiDB Lightning switches the mode
+### TiDB Lightningがモードを切り替えると、 <code>rpc error: code = Unimplemented ...</code> {#encounter-code-rpc-error-code-unimplemented-code-when-tidb-lightning-switches-the-mode}
 
-**Cause**: Some node(s) in the cluster does not support `switch-mode`. For example, if the TiFlash version is earlier than `v4.0.0-rc.2`, [`switch-mode` is not supported](https://github.com/pingcap/tidb-lightning/issues/273).
+**原因**: クラスター内の一部のノードは`switch-mode`サポートしていません。たとえば、 TiFlashバージョンが`v4.0.0-rc.2` 、 [`switch-mode`はサポートされていません](https://github.com/pingcap/tidb-lightning/issues/273)より前の場合などです。
 
-**Solutions**:
+**ソリューション**:
 
-- If there are TiFlash nodes in the cluster, you can update the cluster to `v4.0.0-rc.2` or higher versions.
-- Temporarily disable TiFlash if you do not want to upgrade the cluster.
+-   クラスター内にTiFlashノードがある場合は、クラスターを`v4.0.0-rc.2`のバージョンに更新できます。
+-   クラスターをアップグレードしない場合は、 TiFlash を一時的に無効にします。
 
-### `tidb lightning encountered error: TiDB version too old, expected '>=4.0.0', found '3.0.18'`
+### <code>tidb lightning encountered error: TiDB version too old, expected '>=4.0.0', found '3.0.18'</code> {#code-tidb-lightning-encountered-error-tidb-version-too-old-expected-4-0-0-found-3-0-18-code}
 
-TiDB Lightning Local-backend only supports importing data to TiDB clusters of v4.0.0 and later versions. If you try to use Local-backend to import data to a v2.x or v3.x cluster, the above error is reported. At this time, you can modify the configuration to use Importer-backend or TiDB-backend for data import.
+TiDB Lightningローカル バックエンドは、v4.0.0 以降のバージョンの TiDB クラスターへのデータのインポートのみをサポートします。ローカル バックエンドを使用して v2.x または v3.x クラスターにデータをインポートしようとすると、上記のエラーが報告されます。この時点で、データのインポートに Importer バックエンドまたは TiDB バックエンドを使用するように設定を変更できます。
 
-Some `nightly` versions might be similar to v4.0.0-beta.2. These `nightly` versions of TiDB Lightning actually support Local-backend. If you encounter this error when using a `nightly` version, you can skip the version check by setting the configuration `check-requirements = false`. Before setting this parameter, make sure that the configuration of TiDB Lightning supports the corresponding version; otherwise, the import might fail.
+いくつかの`nightly`バージョンは v4.0.0-beta.2 に似ている可能性があります。これらの`nightly`バージョンのTiDB Lightning は、実際には Local-backend をサポートしています。5 バージョンの使用時にこのエラーが発生した場合は、構成`check-requirements = false`を設定することでバージョン チェックをスキップできます。このパラメータを設定する前に、 TiDB Lightningの構成が対応するバージョンをサポートし`nightly`いることを確認してください。そうでない場合、インポートが失敗する可能性があります。
 
-### `restore table test.district failed: unknown columns in header [...]`
+### <code>restore table test.district failed: unknown columns in header [...]</code> {#code-restore-table-test-district-failed-unknown-columns-in-header-code}
 
-This error occurs usually because the CSV data file does not contain a header (the first row is not column names but data). Therefore, you need to add the following configuration to the TiDB Lightning configuration file:
+このエラーは通常、CSV データ ファイルにヘッダーが含まれていないために発生します (最初の行は列名ではなくデータです)。そのため、 TiDB Lightning構成ファイルに次の構成を追加する必要があります。
 
-```
-[mydumper.csv]
-header = false
-```
+    [mydumper.csv]
+    header = false
 
-### `Unknown character set`
+### <code>Unknown character set</code> {#code-unknown-character-set-code}
 
-TiDB does not support all MySQL character sets. Therefore, TiDB Lightning reports this error if an unsupported character set is used when creating the table schema during an import. To bypass this error, you can create the table schema in the downstream in advance using the [character sets supported by TiDB](/character-set-and-collation.md) according to the specific data.
+TiDB はすべての MySQL 文字セットをサポートしていません。そのため、インポート中にテーブル スキーマを作成するときにサポートされていない文字セットが使用されると、 TiDB Lightning はこのエラーを報告します。このエラーを回避するには、特定のデータに応じて[TiDB でサポートされている文字セット](/character-set-and-collation.md)使用してダウンストリームで事前にテーブル スキーマを作成します。
 
-### `invalid compression type ...`
+### <code>invalid compression type ...</code> {#code-invalid-compression-type-code}
 
-- TiDB Lightning v6.4.0 and later versions only support the following compressed data files: `gzip`, `snappy`, and `zstd`. Other types of compressed files cause errors. If an unsupported compressed file exists in the directory where the source data file is stored, this will cause the task to report an error. You can move those unsupported files out of the import data directory to avoid such errors. For more details, see [Compressed files](/tidb-lightning/tidb-lightning-data-source.md#compressed-files).
+-   TiDB Lightning v6.4.0 以降のバージョンでは、次の圧縮データ ファイルのみがサポートされています: `gzip` 、 `snappy` 、および`zstd` 。その他の種類の圧縮ファイルではエラーが発生します。ソース データ ファイルが格納されているディレクトリにサポートされていない圧縮ファイルが存在する場合、タスクによってエラーが報告されます。このようなエラーを回避するには、サポートされていないファイルをインポート データ ディレクトリから移動します。詳細については、 [圧縮ファイル](/tidb-lightning/tidb-lightning-data-source.md#compressed-files)を参照してください。
 
-> **Note:**
+> **注記：**
 >
-> The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
+> Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。Snappy 圧縮の他のバリエーションはサポートされていません。

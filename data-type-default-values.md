@@ -1,52 +1,52 @@
 ---
 title: TiDB Data Type
-summary: Learn about default values for data types in TiDB.
+summary: TiDB のデータ型のデフォルト値について学習します。
 ---
 
-# Default Values
+# デフォルト値 {#default-values}
 
-The `DEFAULT` value clause in a data type specification indicates a default value for a column.
+データ型仕様の`DEFAULT`値句は、列のデフォルト値を示します。
 
-You can set default values for all data types. Typically, default values must be constants and cannot be functions or expressions, but there are some exceptions:
+すべてのデータ型にデフォルト値を設定できます。通常、デフォルト値は定数である必要があり、関数や式にすることはできませんが、例外がいくつかあります。
 
-- For time types, you can use `NOW`, `CURRENT_TIMESTAMP`, `LOCALTIME`, and `LOCALTIMESTAMP` functions as default values for `TIMESTAMP` and `DATETIME` columns.
-- For integer types, you can use the `NEXT VALUE FOR` function to set the next value of a sequence as the default value for a column, and use the [`RAND()`](/functions-and-operators/numeric-functions-and-operators.md) function to generate a random floating-point value as the default value for a column.
-- For string types, you can use the [`UUID()`](/functions-and-operators/miscellaneous-functions.md) function to generate a [universally unique identifier (UUID)](/best-practices/uuid.md) as the default value for a column.
-- For binary types, you can use the [`UUID_TO_BIN()`](/functions-and-operators/miscellaneous-functions.md) function to convert a UUID to the binary format and set the converted value as the default value for a column.
-- Starting from v8.0.0, TiDB additionally supports [specifying the default values](#specify-expressions-as-default-values) for [`BLOB`](/data-type-string.md#blob-type), [`TEXT`](/data-type-string.md#text-type), and [`JSON`](/data-type-json.md#json-type) data types, but you can only use expressions to set the [default values](#default-values) for them.
+-   時間型の場合、 `TIMESTAMP`と`DATETIME`列のデフォルト値として`NOW` 、 `CURRENT_TIMESTAMP` 、 `LOCALTIME` 、および`LOCALTIMESTAMP`関数を使用できます。
+-   整数型の場合、 `NEXT VALUE FOR`関数を使用してシーケンスの次の値を列のデフォルト値として設定し、 [`RAND()`](/functions-and-operators/numeric-functions-and-operators.md)関数を使用してランダムな浮動小数点値を列のデフォルト値として生成できます。
+-   文字列型の場合、 [`UUID()`](/functions-and-operators/miscellaneous-functions.md)関数を使用して、列のデフォルト値として[ユニバーサルユニーク識別子 (UUID)](/best-practices/uuid.md)を生成できます。
+-   バイナリ型の場合、 [`UUID_TO_BIN()`](/functions-and-operators/miscellaneous-functions.md)関数を使用して UUID をバイナリ形式に変換し、変換された値を列のデフォルト値として設定できます。
+-   v8.0.0 以降、TiDB は[`BLOB`](/data-type-string.md#blob-type) 、 [`TEXT`](/data-type-string.md#text-type) 、および[`JSON`](/data-type-json.md#json-type)データ型に対して[デフォルト値を指定する](#specify-expressions-as-default-values)追加でサポートしますが、それらに対して[デフォルト値](#default-values)を設定するには式のみを使用できます。
 
-If a column definition includes no explicit `DEFAULT` value, TiDB determines the default value as follows:
+列定義に明示的な`DEFAULT`値が含まれていない場合、TiDB は次のようにデフォルト値を決定します。
 
-- If the column can take `NULL` as a value, the column is defined with an explicit `DEFAULT NULL` clause.
-- If the column cannot take `NULL` as the value, TiDB defines the column with no explicit `DEFAULT` clause.
+-   列が値として`NULL`を取ることができる場合、列は明示的な`DEFAULT NULL`句で定義されます。
+-   列が値として`NULL`を取ることができない場合、TiDB は明示的な`DEFAULT`句なしで列を定義します。
 
-For data entry into a `NOT NULL` column that has no explicit `DEFAULT` clause, if an `INSERT` or `REPLACE` statement includes no value for the column, TiDB handles the column according to the SQL mode in effect at the time:
+明示的な`DEFAULT`句のない`NOT NULL`列へのデータ入力の場合、 `INSERT`または`REPLACE`ステートメントに列の値が含まれていない場合、TiDB はその時点で有効な SQL モードに従って列を処理します。
 
-- If strict SQL mode is enabled, an error occurs for transactional tables, and the statement is rolled back. For nontransactional tables, an error occurs.
-- If strict mode is not enabled, TiDB sets the column to the implicit default value for the column data type.
+-   厳密な SQL モードが有効になっている場合、トランザクション テーブルではエラーが発生し、ステートメントはロールバックされます。非トランザクション テーブルではエラーが発生します。
+-   厳密モードが有効になっていない場合、TiDB は列を列データ型の暗黙的なデフォルト値に設定します。
 
-Implicit defaults are defined as follows:
+暗黙のデフォルトは次のように定義されます。
 
-- For numeric types, the default is 0. If declared with the `AUTO_INCREMENT` attribute, the default is the next value in the sequence.
-- For date and time types other than `TIMESTAMP`, the default is the appropriate "zero" value for the type. For `TIMESTAMP`, the default value is the current date and time.
-- For string types other than `ENUM`, the default value is the empty string. For `ENUM`, the default is the first enumeration value.
+-   数値型の場合、デフォルトは`AUTO_INCREMENT`です。1 属性で宣言された場合、デフォルトはシーケンス内の次の値になります。
+-   `TIMESTAMP`以外の日付と時刻の型の場合、デフォルトはその型に適切な「ゼロ」値です。 `TIMESTAMP`の場合、デフォルト値は現在の日付と時刻です。
+-   `ENUM`以外の文字列型の場合、デフォルト値は空の文字列です。 `ENUM`の場合、デフォルト値は最初の列挙値です。
 
-## Specify expressions as default values
+## 式をデフォルト値として指定する {#specify-expressions-as-default-values}
 
-Starting from 8.0.13, MySQL supports specifying expressions as default values in the `DEFAULT` clause. For more information, see [Explicit default handling as of MySQL 8.0.13](https://dev.mysql.com/doc/refman/8.0/en/data-type-defaults.html#data-type-defaults-explicit).
+MySQL 8.0.13 以降では、 `DEFAULT`句でデフォルト値として式を指定できるようになりました。詳細については、 [MySQL 8.0.13 以降の明示的なデフォルト処理](https://dev.mysql.com/doc/refman/8.0/en/data-type-defaults.html#data-type-defaults-explicit)を参照してください。
 
-Starting from v8.0.0, TiDB additionally supports specifying the following expressions as default values in the `DEFAULT` clause.
+v8.0.0 以降、TiDB は`DEFAULT`句のデフォルト値として次の式を指定することもサポートします。
 
-* `UPPER(SUBSTRING_INDEX(USER(), '@', 1))`
-* `REPLACE(UPPER(UUID()), '-', '')`
-* `DATE_FORMAT` expressions in the following formats:
-    * `DATE_FORMAT(NOW(), '%Y-%m')`
-    * `DATE_FORMAT(NOW(), '%Y-%m-%d')`
-    * `DATE_FORMAT(NOW(), '%Y-%m-%d %H.%i.%s')`
-    * `DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s')`
-* `STR_TO_DATE('1980-01-01', '%Y-%m-%d')`
+-   `UPPER(SUBSTRING_INDEX(USER(), '@', 1))`
+-   `REPLACE(UPPER(UUID()), '-', '')`
+-   次の形式の`DATE_FORMAT`式:
+    -   `DATE_FORMAT(NOW(), '%Y-%m')`
+    -   `DATE_FORMAT(NOW(), '%Y-%m-%d')`
+    -   `DATE_FORMAT(NOW(), '%Y-%m-%d %H.%i.%s')`
+    -   `DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s')`
+-   `STR_TO_DATE('1980-01-01', '%Y-%m-%d')`
 
-Starting from v8.0.0, TiDB additionally supports assigning default values to `BLOB`, `TEXT`, and `JSON` data types. However, you can only use expressions to set the default values for these data types. The following is an example of `BLOB`:
+v8.0.0 以降、TiDB は`BLOB` 、 `TEXT` 、 `JSON`データ型にデフォルト値を割り当てることもサポートしています。ただし、これらのデータ型のデフォルト値を設定するには、式のみを使用できます。以下は`BLOB`の例です。
 
 ```sql
 CREATE TABLE t2 (b BLOB DEFAULT (RAND()));

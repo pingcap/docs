@@ -1,189 +1,189 @@
 ---
 title: TiDB 5.0 RC Release Notes
-summary: TiDB v5.0.0-rc is the predecessor version of TiDB v5.0. It includes new features like clustered index, async commit, reduced jitters, Raft Joint Consensus algorithm, optimized `EXPLAIN` features, invisible index, and improved reliability for enterprise data. It also supports desensitizing error messages and log files for security. Performance improvements include async commit, optimizer stability, and reduced performance jitter. It also enhances system availability during Region membership change. Additionally, it supports backup and restore to AWS S3 and Google Cloud GCS, data import/export, and optimized `EXPLAIN` features for troubleshooting SQL performance issues. Deployment and maintenance improvements include enhanced `mirror` command and easier installation process.
+summary: TiDB v5.0.0-rc は、TiDB v5.0 の前バージョンです。クラスター化インデックス、非同期コミット、ジッターの削減、 Raft Joint Consensus アルゴリズム、最適化された `EXPLAIN` 機能、非表示インデックス、エンタープライズ データの信頼性の向上などの新機能が含まれています。また、セキュリティのためにエラー メッセージとログ ファイルの感度を下げる機能もサポートしています。パフォーマンスの向上には、非同期コミット、オプティマイザーの安定性、パフォーマンス ジッターの削減などがあります。また、リージョンメンバーシップの変更中のシステム可用性も向上しています。さらに、AWS S3 および Google Cloud GCS へのバックアップと復元、データのインポート/エクスポート、SQL パフォーマンスの問題のトラブルシューティング用に最適化された `EXPLAIN` 機能もサポートしています。展開とメンテナンスの改善には、強化された `mirror` コマンドとより簡単なインストール プロセスが含まれます。
 ---
 
-# TiDB 5.0 RC Release Notes
+# TiDB 5.0 RC リリースノート {#tidb-5-0-rc-release-notes}
 
-Release date: January 12, 2021
+発売日: 2021年1月12日
 
-TiDB version: 5.0.0-rc
+TiDB バージョン: 5.0.0-rc
 
-TiDB v5.0.0-rc is the predecessor version of TiDB v5.0. In v5.0, PingCAP will be dedicated to helping enterprises quickly build applications based on TiDB, freeing them from worries about database performance, performance jitter, security, high availability, disaster recovery, troubleshooting SQL performance, and so on.
+TiDB v5.0.0-rc は、TiDB v5.0 の前バージョンです。v5.0 では、PingCAP は、企業がデータベース パフォーマンス、パフォーマンス ジッター、セキュリティ、高可用性、災害復旧、SQL パフォーマンスのトラブルシューティングなどについて心配することなく、TiDB に基づくアプリケーションを迅速に構築できるようにすることに専念します。
 
-In v5.0, the key new features or improvements are as follows:
+v5.0 の主な新機能または改善点は次のとおりです。
 
-+ Clustered index. When this feature is enabled, database performance is improved. For example, in the TPC-C tpmC test, TiDB's performance, with clustered index enabled, improves by 39%.
-+ Async commit. When this feature is enabled, the write latency is reduced. For example, in the Sysbench olpt-insert test, the write latency of TiDB, with async commit enabled, is reduced by 37.3%.
-+ Reduced jitters. This is achieved by improving the optimizer stability and by limiting system tasks' usages of I/O, network, CPU, and memory resources. For example, in the 72-hour performance test, the standard deviation of Sysbench TPS jitter is reduced from 11.09% to 3.36%.
-+ Raft Joint Consensus algorithm, which ensures the system availability during the Region membership change.
-+ Optimized `EXPLAIN` features and invisible index, which helps Database Administrators (DBAs) debug SQL statements more efficiently.
-+ Guaranteed reliability for enterprise data. You can back up data from TiDB to AWS S3 storage and Google Cloud GCS, or restore data from these cloud storage platforms.
-+ Improved performance of data import from or data export to AWS S3 storage or TiDB/MySQL, which helps enterprises quickly build applications on the cloud. For example, in the TPC-C test, the performance of importing 1 TiB data improves by 40%, from 254 GiB/h to 366 GiB/h.
+-   クラスター化インデックス。この機能を有効にすると、データベースのパフォーマンスが向上します。たとえば、TPC-C tpmC テストでは、クラスター化インデックスを有効にすると TiDB のパフォーマンスが 39% 向上します。
+-   非同期コミット。この機能を有効にすると、書き込みレイテンシーが短縮されます。たとえば、Sysbench olpt-insert テストでは、非同期コミットが有効になっている TiDB の書き込みレイテンシーは37.3% 短縮されます。
+-   ジッターの削減。これは、オプティマイザーの安定性を向上させ、システム タスクによる I/O、ネットワーク、CPU、メモリリソースの使用を制限することで実現されます。たとえば、72 時間のパフォーマンス テストでは、Sysbench TPS ジッターの標準偏差が 11.09% から 3.36% に削減されます。
+-   リージョンメンバーシップの変更中にシステムの可用性を確保するRaftジョイント コンセンサス アルゴリズム。
+-   最適化された`EXPLAIN`機能と非表示のインデックスにより、データベース管理者 (DBA) は SQL ステートメントをより効率的にデバッグできるようになります。
+-   エンタープライズ データの信頼性を保証します。TiDB から AWS S3storageや Google Cloud GCS にデータをバックアップしたり、これらのクラウドstorageプラットフォームからデータを復元したりできます。
+-   AWS S3storageまたは TiDB/MySQL からのデータ インポートまたはデータ エクスポートのパフォーマンスが向上し、企業がクラウド上でアプリケーションを迅速に構築できるようになります。たとえば、TPC-C テストでは、1 TiB データのインポートのパフォーマンスが 254 GiB/h から 366 GiB/h に 40% 向上します。
 
-## SQL
+## 構文 {#sql}
 
-### Support clustered index (experimental)
+### クラスター化インデックスのサポート (実験的) {#support-clustered-index-experimental}
 
-When the clustered index feature is enabled, TiDB performance improves significantly (for example in the TPC-C tpmC test, TiDB's performance, with clustered index enabled, improves by 39%) in the following cases:
+クラスター化インデックス機能を有効にすると、次の場合に TiDB のパフォーマンスが大幅に向上します (たとえば、TPC-C tpmC テストでは、クラスター化インデックスが有効になっている TiDB のパフォーマンスが 39% 向上します)。
 
-+ When data is inserted, the clustered index reduces one write of the index data from the network.
-+ When a query with an equivalent condition only involves the primary key, the clustered index reduces one read of index data from the network.
-+ When a query with a range condition only involves the primary key, the clustered index reduces multiple reads of index data from the network.
-+ When a query with an equivalent or range condition involves the primary key prefix, the clustered index reduces multiple reads of index data from the network.
+-   データが挿入されると、クラスター化インデックスにより、ネットワークからのインデックス データの書き込みが 1 回削減されます。
+-   同等の条件を持つクエリに主キーのみが関係する場合、クラスター化インデックスにより、ネットワークからのインデックス データの読み取りが 1 回削減されます。
+-   範囲条件を持つクエリに主キーのみが関係する場合、クラスター化インデックスにより、ネットワークからのインデックス データの複数回の読み取りが削減されます。
+-   同等条件または範囲条件を持つクエリに主キー プレフィックスが含まれる場合、クラスター化インデックスによって、ネットワークからのインデックス データの複数回の読み取りが削減されます。
 
-Clustered index defines the physical storage order of data in a table. The data in the table is sorted only according to the definition of the clustered index. Each table has only one clustered index.
+クラスター化インデックスは、テーブル内のデータの物理的なstorage順序を定義します。テーブル内のデータは、クラスター化インデックスの定義に従ってのみ並べ替えられます。各テーブルには、クラスター化インデックスが 1 つだけあります。
 
-Users can enable the clustered index feature by modifying the `tidb_enable_clustered_index` variable. When enabled, the feature takes effect only on newly created tables and applies to the primary key that has multiple columns or is non-integer types in a single column. If the primary key is an integer type in a single column, or if the table has no primary key, the data is sorted in the same way as before, without being affected by the clustered index.
+ユーザーは、 `tidb_enable_clustered_index`変数を変更することでクラスター化インデックス機能を有効にできます。この機能を有効にすると、新しく作成されたテーブルにのみ適用され、複数の列があるか、1 つの列に整数以外の型がある主キーに適用されます。主キーが 1 つの列に整数型である場合、またはテーブルに主キーがない場合は、クラスター化インデックスの影響を受けずに、データは以前と同じ方法で並べ替えられます。
 
-For example, to check whether a table (`tbl_name`) has a clustered index, execute `select tidb_pk_type from information_schema.tables where table_name = '{tbl_name}'`.
+たとえば、テーブル（ `tbl_name` ）にクラスター化インデックスがあるかどうかを確認するには、 `select tidb_pk_type from information_schema.tables where table_name = '{tbl_name}'`実行します。
 
-+ [User document](/system-variables.md#tidb_enable_clustered_index-new-in-v50)
-+ Related issue: [#4841](https://github.com/pingcap/tidb/issues/4841)
+-   [ユーザードキュメント](/system-variables.md#tidb_enable_clustered_index-new-in-v50)
+-   関連号: [＃4841](https://github.com/pingcap/tidb/issues/4841)
 
-### Support invisible indexes
+### 非表示のインデックスをサポート {#support-invisible-indexes}
 
-When users tune performance or select optimal indexes, they can set an index to be `Visible` or `Invisible` by using SQL statements. This setting can avoid performing resource-consuming operations, such as `DROP INDEX` and `ADD INDEX`.
+ユーザーがパフォーマンスを調整したり、最適なインデックスを選択したりする場合、SQL ステートメントを使用してインデックスを`Visible`または`Invisible`に設定できます。この設定により、 `DROP INDEX`や`ADD INDEX`などのリソースを消費する操作の実行を回避できます。
 
-To modify the visibility of an index, use the `ALTER INDEX` statement. After the modification, the optimizer decides whether to add this index to the index list based on the index visibility.
+インデックスの可視性を変更するには、 `ALTER INDEX`ステートメントを使用します。変更後、オプティマイザーはインデックスの可視性に基づいて、このインデックスをインデックス リストに追加するかどうかを決定します。
 
-+ [User document](/sql-statements/sql-statement-alter-index.md)
-+ Related issue: [#9246](https://github.com/pingcap/tidb/issues/9246)
+-   [ユーザードキュメント](/sql-statements/sql-statement-alter-index.md)
+-   関連号: [＃9246](https://github.com/pingcap/tidb/issues/9246)
 
-### Support `EXCEPT` and `INTERSECT` operators
+### <code>EXCEPT</code>および<code>INTERSECT</code>演算子をサポート {#support-code-except-code-and-code-intersect-code-operators}
 
-The `INTERSECT` operator is a set operator, which returns the intersection of the result sets of two or more queries. To some extent, it is an alternative to the `InnerJoin` operator.
+`INTERSECT`演算子はセット演算子であり、2 つ以上のクエリの結果セットの積集合を返します。ある程度、これは`InnerJoin`演算子の代替となります。
 
-The `EXCEPT` operator is a set operator, which combines the result sets of two queries and returns elements that are in the first query result but not in the second.
+`EXCEPT`演算子はセット演算子であり、2 つのクエリの結果セットを結合し、最初のクエリ結果にはあるが 2 番目のクエリ結果にはない要素を返します。
 
-+ [User document](/functions-and-operators/set-operators.md)
-+ Related issue: [#18031](https://github.com/pingcap/tidb/issues/18031)
+-   [ユーザードキュメント](/functions-and-operators/set-operators.md)
+-   関連号: [＃18031](https://github.com/pingcap/tidb/issues/18031)
 
-## Transaction
+## トランザクション {#transaction}
 
-### Increase the success rate of executing pessimistic transactions
+### 悲観的トランザクションの実行成功率を高める {#increase-the-success-rate-of-executing-pessimistic-transactions}
 
-In the pessimistic transaction mode, if the tables involved in a transaction contain concurrent DDL operations or `SCHEMA VERSION` changes, the system automatically updates the transaction's `SCHEMA VERSION` to the latest to avoid the transaction being interrupted by DDL operations and to ensure the successful transaction commit. If the transaction is interrupted, the client receives the `Information schema is changed` error message.
+悲観的トランザクション モードでは、トランザクションに関係するテーブルに同時 DDL 操作または`SCHEMA VERSION`変更が含まれている場合、システムはトランザクションの`SCHEMA VERSION`を最新のものに自動的に更新して、トランザクションが DDL 操作によって中断されるのを防ぎ、トランザクションのコミットが成功するようにします。トランザクションが中断された場合、クライアントは`Information schema is changed`エラー メッセージを受け取ります。
 
-+ Related issue: [#18005](https://github.com/pingcap/tidb/issues/18005)
+-   関連号: [＃18005](https://github.com/pingcap/tidb/issues/18005)
 
-## Character set and collation
+## 文字セットと照合順序 {#character-set-and-collation}
 
-Support case-insensitive comparison sort for character sets.
+文字セットの大文字と小文字を区別しない比較ソートをサポートします。
 
-+ [User document](/character-set-and-collation.md#new-framework-for-collations)
-+ Related issue: [#17596](https://github.com/pingcap/tidb/issues/17596)
+-   [ユーザードキュメント](/character-set-and-collation.md#new-framework-for-collations)
+-   関連号: [＃17596](https://github.com/pingcap/tidb/issues/17596)
 
-## Security
+## Security {#security}
 
-### Support desensitizing error messages and log files
+### エラーメッセージとログファイルの感度低下をサポート {#support-desensitizing-error-messages-and-log-files}
 
-TiDB now supports desensitizing error messages and log files to avoid leaking sensitive information such as ID information and credit card number.
+TiDB では、ID 情報やクレジットカード番号などの機密情報の漏洩を防ぐために、エラー メッセージとログ ファイルの非機密化をサポートするようになりました。
 
-Users can enable the desensitization feature for different components:
+ユーザーは、さまざまなコンポーネントに対して感度低下機能を有効にすることができます。
 
-+ For the TiDB side, set the `tidb_redact_log=1` variable using SQL statements in tidb-server.
-+ For the TiKV side, set the `security.redact-info-log = true` configuration in tikv-server.
-+ For the PD side, set the `security.redact-info-log = true` configuration in pd-server. [#2852](https://github.com/tikv/pd/issues/2852) [#3011](https://github.com/tikv/pd/pull/3011)
-+ For the TiFlash side, set the `security.redact_info_log = true` configuration in tiflash-server and set `security.redact-info-log = true` in tiflash-learner.
+-   TiDB 側では、tidb-server で SQL ステートメントを使用して`tidb_redact_log=1`変数を設定します。
+-   TiKV 側では、tikv-server で`security.redact-info-log = true`構成を設定します。
+-   PD側では[＃2852](https://github.com/tikv/pd/issues/2852) -serverで`security.redact-info-log = true`設定をします。3 [＃3011](https://github.com/tikv/pd/pull/3011)
+-   TiFlash側では、tiflash-server に`security.redact_info_log = true`設定を設定し、tiflash-learner に`security.redact-info-log = true`設定します。
 
-[User document](/log-redaction.md)
+[ユーザードキュメント](/log-redaction.md)
 
-Related issue: [#18566](https://github.com/pingcap/tidb/issues/18566)
+関連号: [＃18566](https://github.com/pingcap/tidb/issues/18566)
 
-## Performance improvements
+## パフォーマンスの改善 {#performance-improvements}
 
-### Support async commit (experimental)
+### 非同期コミットをサポート（実験的） {#support-async-commit-experimental}
 
-Enabling the async commit feature can significantly reduce the latency of transactions. For example, with this feature enabled, the latency of transactions in the Sysbench oltp-insert test is 37.3% lower than that when this feature is disabled.
+非同期コミット機能を有効にすると、トランザクションのレイテンシーを大幅に削減できます。たとえば、この機能を有効にすると、Sysbench oltp-insert テストでのトランザクションのレイテンシーは、この機能が無効になっている場合よりも 37.3% 低くなります。
 
-Previously without the async commit feature, the statements being written were only returned to the client after the two-phase transaction commit finished. Now the async commit feature supports returning the result to the client after the first phase of the two-phase commit finishes. The second phase is then performed asynchronously in the background, thus reducing the latency of transaction commit.
+以前は非同期コミット機能がなかったため、書き込まれたステートメントは 2 フェーズ トランザクション コミットが完了した後にのみクライアントに返されました。現在、非同期コミット機能では、2 フェーズ コミットの最初のフェーズが完了した後に結果をクライアントに返すことがサポートされています。その後、2 番目のフェーズはバックグラウンドで非同期に実行されるため、トランザクション コミットのレイテンシーが短縮されます。
 
-However, when async commit is enabled, the external consistency of transactions can be guaranteed **only** when `tidb_guarantee_external_consistency = ON` is set. With async commit enabled, the performance might drop.
+ただし、非同期コミットが有効になっている場合、トランザクションの外部一貫性は`tidb_guarantee_external_consistency = ON`が設定されている場合に**のみ**保証されます。非同期コミットを有効にすると、パフォーマンスが低下する可能性があります。
 
-Users can enable this feature by setting the global variable `tidb_enable_async_commit = ON`.
+ユーザーは、グローバル変数`tidb_enable_async_commit = ON`を設定することでこの機能を有効にできます。
 
-+ [User document](/system-variables.md#tidb_enable_async_commit-new-in-v50)
-+ Related issue: [#8316](https://github.com/tikv/tikv/issues/8316)
+-   [ユーザードキュメント](/system-variables.md#tidb_enable_async_commit-new-in-v50)
+-   関連号: [＃8316](https://github.com/tikv/tikv/issues/8316)
 
-### Improve the optimizer's stability in index selection (experimental)
+### インデックス選択におけるオプティマイザの安定性を向上（実験的） {#improve-the-optimizer-s-stability-in-index-selection-experimental}
 
-The optimizer's ability to always select a relatively suitable index greatly determines whether the latency of queries is stable. We have improved and refactored the statistics module to ensure that, for the same SQL statements, the optimizer does not select a different index from multiple candidate indexes each time due to missing or inaccurate statistics. The main improvements to help the optimizer select a relatively suitable index are as follows:
+オプティマイザが常に比較的適切なインデックスを選択できるかどうかは、クエリのレイテンシーが安定しているかどうかに大きく影響します。統計モジュールを改善およびリファクタリングして、同じ SQL ステートメントに対して、統計が欠落しているか不正確であるためにオプティマイザが複数の候補インデックスから毎回異なるインデックスを選択しないようにしました。オプティマイザが比較的適切なインデックスを選択できるようにするための主な改善点は次のとおりです。
 
-+ Add more information to the statistics module, such as the multi-column NDV, the multi-column order dependency, and the multi-column function dependency.
-+ Refactor the statistics module.
-    + Delete `TopN` values from `CMSKetch`.
-    + Refactor the search logic of `TopN`.
-    + Delete the `TopN` information from the histogram and create an index of the histogram for easy maintenance of Bucket NDV.
+-   複数列 NDV、複数列順序依存関係、複数列関数依存関係などの詳細情報を統計モジュールに追加します。
+-   統計モジュールをリファクタリングします。
+    -   `CMSKetch`から`TopN`値を削除します。
+    -   `TopN`の検索ロジックをリファクタリングします。
+    -   ヒストグラムから`TopN`情報を削除し、バケット NDV のメンテナンスを容易にするためにヒストグラムのインデックスを作成します。
 
-Related issue: [#18065](https://github.com/pingcap/tidb/issues/18065)
+関連号: [＃18065](https://github.com/pingcap/tidb/issues/18065)
 
-### Optimize performance jitter caused by imperfect scheduling or imperfect I/O flow control
+### 不完全なスケジューリングや不完全なI/Oフロー制御によって発生するパフォーマンスジッタを最適化します。 {#optimize-performance-jitter-caused-by-imperfect-scheduling-or-imperfect-i-o-flow-control}
 
-The TiDB scheduling process occupies resources such as I/O, network, CPU, and memory. If TiDB does not control the scheduled tasks, QPS and delay might cause performance jitter due to resource preemption. After the following optimizations, in the 72-hour test, the standard deviation of Sysbench TPS jitter is reduced from 11.09% to 3.36%.
+TiDB のスケジューリング プロセスは、I/O、ネットワーク、CPU、メモリなどのリソースを占有します。TiDB がスケジュールされたタスクを制御しない場合、リソースのプリエンプションにより QPS と遅延によってパフォーマンス ジッターが発生する可能性があります。次の最適化を行った後、72 時間のテストでは、Sysbench TPS ジッターの標準偏差が 11.09% から 3.36% に減少しました。
 
-+ Reduce the redundant scheduling issues caused by fluctuations of node capacity (always near the waterline) and caused by PD's `store-limit` configuration value set too large. This is achieved by introducing a new set of scheduling calculation formulas enabled via the `region-score-formula-version = v2` configuration item. [#3269](https://github.com/tikv/pd/pull/3269)
-+ Enable the cross-Region merge feature by modifying `enable-cross-table-merge = true` to reduce the number of empty Regions. [#3129](https://github.com/tikv/pd/pull/3129)
-+ Data compaction in the TiKV background occupies a lot of I/O resources. The system automatically adjusts the compaction rate to balance the contention for I/O resources between background tasks and foreground reads and writes. After enabling this feature via the `rate-limiter-auto-tuned` configuration item, the delay jitter is greatly reduced. [#18011](https://github.com/pingcap/tidb/issues/18011)
-+ When TiKV performs garbage collection (GC) and data compaction, partitions occupy CPU and I/O resources. Overlapping data exists during the execution of these two tasks. To reduce I/O usage, the GC Compaction Filter feature combines these two tasks into one and executes them in the same task. This feature is still experimental and you can enable it via `gc.enable-compaction-filter = true`. [#18009](https://github.com/pingcap/tidb/issues/18009)
-+ When TiFlash compresses or sorts data, it occupies a lot of I/O resources. The system alleviates contention for resources by limiting the compression and data sorting's use of I/O resources. This feature is still experimental and you can enable it via `bg_task_io_rate_limit`.
+-   ノード容量の変動（常にウォーターライン付近）や PD の`store-limit`構成値が大きすぎるために発生する冗長なスケジューリングの問題を軽減します。これは、 `region-score-formula-version = v2`構成項目を介して有効になる新しいスケジューリング計算式のセットを導入することで実現されます[＃3269](https://github.com/tikv/pd/pull/3269)
+-   `enable-cross-table-merge = true`を変更して空のリージョンの数を減らし、リージョン間のマージ機能を有効にします[＃3129](https://github.com/tikv/pd/pull/3129)
+-   TiKV バックグラウンドでのデータ圧縮は、多くの I/O リソースを占有します。システムは、バックグラウンド タスクとフォアグラウンドの読み取りおよび書き込み間の I/O リソース`rate-limiter-auto-tuned`競合のバランスをとるために、圧縮率を自動的に調整します。1 構成項目でこの機能を有効にすると、遅延ジッターが大幅に削減されます[＃18011](https://github.com/pingcap/tidb/issues/18011)
+-   TiKV がガベージコレクション(GC) とデータ圧縮を実行すると、パーティションが CPU と I/O リソースを占有します。これらの 2 つのタスクの実行中に重複データが存在します。I/O 使用量を削減するために、GC 圧縮フィルター機能はこれらの 2 つのタスクを 1 つに結合し、同じタスクで実行します。この機能はまだ実験的であり、 `gc.enable-compaction-filter = true`で有効にできます[＃18009](https://github.com/pingcap/tidb/issues/18009)
+-   TiFlash がデータを圧縮またはソートすると、大量の I/O リソースが消費されます。システムは、圧縮とデータ ソートによる I/O リソースの使用を制限することで、リソースの競合を軽減します。この機能はまだ実験的であり、 `bg_task_io_rate_limit`で有効にできます。
 
-Related issue: [#18005](https://github.com/pingcap/tidb/issues/18005)
+関連号: [＃18005](https://github.com/pingcap/tidb/issues/18005)
 
-### Improve the stability of TiFlash in Real-time BI / Data Warehousing scenarios
+### リアルタイム BI / データ ウェアハウス シナリオにおけるTiFlashの安定性を向上 {#improve-the-stability-of-tiflash-in-real-time-bi-data-warehousing-scenarios}
 
-+ Limit the memory usage of DeltaIndex to avoid system out of memory (OOM) caused by excessive memory usage in the scenarios of huge data volume.
-+ Limit the I/O write traffic used by the background data sorting task to reduce the impact on the foreground tasks.
-+ Add new thread pools to queue coprocessor tasks, which avoids system OOM caused by excessive memory usage when processing coprocessors in high concurrency.
+-   膨大なデータ量のシナリオで過剰なメモリ使用によって発生するシステムのメモリメモリ(OOM) を回避するために、DeltaIndex のメモリ使用量を制限します。
+-   バックグラウンド データ ソート タスクで使用される I/O 書き込みトラフィックを制限して、フォアグラウンド タスクへの影響を軽減します。
+-   コプロセッサ タスクをキューに入れるための新しいスレッド プールを追加します。これにより、コプロセッサを高同時処理するときに過剰なメモリ使用によって発生するシステム OOM を回避できます。
 
-### Other performance optimizations
+### その他のパフォーマンスの最適化 {#other-performance-optimizations}
 
-+ Improve the execution performance of `delete from table where id <?` statement. Its P99 performance improves by four times. [#18028](https://github.com/pingcap/tidb/issues/18028)
-+ TiFlash supports concurrently reading and writing data in multiple local disks to improve performance.
+-   `delete from table where id <?`文の実行パフォーマンスを向上。P99パフォーマンスが4倍向上[＃18028](https://github.com/pingcap/tidb/issues/18028)
+-   TiFlash は、パフォーマンスを向上させるために、複数のローカル ディスクでのデータの同時読み取りと書き込みをサポートします。
 
-## High availability and disaster recovery
+## 高可用性と災害復旧 {#high-availability-and-disaster-recovery}
 
-### Improve system availability during Region membership change (experimental)
+### リージョンメンバーシップの変更時のシステム可用性の向上 (実験的) {#improve-system-availability-during-region-membership-change-experimental}
 
-In the process of Region membership changes, "adding a member" and "deleting a member" are two operations performed in two steps. If a failure occurs when the membership change finishes, the Regions will become unavailable and an error of foreground application is returned. The introduced Raft Joint Consensus algorithm can improve the system availability during Region membership change. "adding a member" and "deleting a member" operations during the membership change are combined into one operation and sent to all members. During the change process, Regions are in an intermediate state. If any modified member fails, the system is still available. Users can enable this feature by modifying the membership variable by executing `pd-ctl config set enable-joint-consensus true`. [#7587](https://github.com/tikv/tikv/issues/7587) [#2860](https://github.com/tikv/pd/issues/2860)
+リージョンのメンバーシップ変更のプロセスでは、「メンバーの追加」と「メンバーの削除」という 2 つの操作が 2 つのステップで実行されます。メンバーシップの変更が完了したときに障害が発生すると、リージョンは使用できなくなり、フォアグラウンド アプリケーションのエラーが返されます。導入されたRaft Joint Consensus アルゴリズムにより、リージョンのメンバーシップ変更中のシステムの可用性が向上します。メンバーシップ変更中の「メンバーの追加」と「メンバーの削除」の操作は 1 つの操作に結合され、すべてのメンバーに送信されます。変更プロセス中、リージョンは中間状態にあります。変更されたメンバーのいずれかが失敗しても、システムは引き続き使用できます。ユーザーは、 `pd-ctl config set enable-joint-consensus true`実行してメンバーシップ変数を変更することで、この機能を有効にすることができます[＃7587](https://github.com/tikv/tikv/issues/7587) [＃2860](https://github.com/tikv/pd/issues/2860)
 
-+ [User document](/pd-configuration-file.md#enable-joint-consensus-new-in-v50)
-+ Related issue: [#18079](https://github.com/pingcap/tidb/issues/18079)
+-   [ユーザードキュメント](/pd-configuration-file.md#enable-joint-consensus-new-in-v50)
+-   関連号: [＃18079](https://github.com/pingcap/tidb/issues/18079)
 
-### Optimize the memory management module to reduce system OOM risks
+### メモリ管理モジュールを最適化してシステムOOMのリスクを軽減する {#optimize-the-memory-management-module-to-reduce-system-oom-risks}
 
-+ Reduce the memory consumption of caching statistics.
-+ Reduce the memory consumption of exporting data using the Dumpling tool.
-+ Reduced the memory consumption by storing the encrypted intermediate results of data to the disk.
+-   キャッシュ統計のメモリ消費を削減します。
+-   Dumplingツールを使用してデータのエクスポート時のメモリ消費を削減します。
+-   データの暗号化された中間結果をディスクに保存することでメモリ消費を削減しました。
 
-## Backup and restore
+## バックアップと復元 {#backup-and-restore}
 
-+ The Backup & Restore tool (BR) supports backing up data to AWS S3 and Google Cloud GCS. ([User document](/br/backup-and-restore-storages.md))
-+ The Backup & Restore tool (BR) supports restoring data from AWS S3 and Google Cloud GCS to TiDB. ([User document](/br/backup-and-restore-storages.md))
-+ Related issue: [#89](https://github.com/pingcap/br/issues/89)
+-   バックアップ＆復元ツール（BR）は、AWS S3とGoogle Cloud GCSへのデータのバックアップをサポートしています。（ [ユーザードキュメント](/br/backup-and-restore-storages.md) ）
+-   バックアップ＆リストアツール（BR）は、AWS S3およびGoogle Cloud GCSからTiDBへのデータの復元をサポートしています。（ [ユーザードキュメント](/br/backup-and-restore-storages.md) ）
+-   関連号: [＃89](https://github.com/pingcap/br/issues/89)
 
-## Data import and export
+## データのインポートとエクスポート {#data-import-and-export}
 
-+ TiDB Lightning supports importing Aurora snapshot data from AWS S3 storage to TiDB. (Related issue: [#266](https://github.com/pingcap/tidb-lightning/issues/266))
-+ In the TPC-C test of importing 1 TiB of data into DBaaS T1.standard, the performance improves by 40%, from 254 GiB/h to 366 GiB/h.
-+ Dumpling supports exporting data from TiDB/MySQL to AWS S3 storage (experimental) (Related issue: [#8](https://github.com/pingcap/dumpling/issues/8), [User document](/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage))
+-   TiDB Lightning は、 AWS S3storageから TiDB へのAuroraスナップショット データのインポートをサポートしています。(関連する問題: [＃266](https://github.com/pingcap/tidb-lightning/issues/266) )
+-   1 TiB のデータを DBaaS T1.standard にインポートする TPC-C テストでは、パフォーマンスが 254 GiB/h から 366 GiB/h に 40% 向上しました。
+-   Dumpling は、 TiDB/MySQL から AWS S3storageへのデータのエクスポートをサポートしています (実験的) (関連する問題: [＃8](https://github.com/pingcap/dumpling/issues/8) 、 [ユーザードキュメント](/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage) )
 
-## Diagnostics
+## 診断 {#diagnostics}
 
-### Optimized `EXPLAIN` features with more collected information help users troubleshoot performance issues
+### より多くの情報を収集して最適化された<code>EXPLAIN</code>機能により、ユーザーはパフォーマンスの問題をトラブルシューティングできるようになります。 {#optimized-code-explain-code-features-with-more-collected-information-help-users-troubleshoot-performance-issues}
 
-When users troubleshoot SQL performance issues, they need detailed diagnostic information to determine the causes of performance issues. In previous TiDB versions, the information collected by the `EXPLAIN` statements was not detailed enough. DBAs performed troubleshooting only based on log information, monitoring information, or even on guess, which might be inefficient. The following improvements are made in TiDB v5.0 to help users troubleshoot performance issues more efficiently:
+ユーザーが SQL パフォーマンスの問題をトラブルシューティングする場合、パフォーマンスの問題の原因を特定するために詳細な診断情報が必要です。以前のバージョンの TiDB では、 `EXPLAIN`ステートメントによって収集された情報は十分に詳細ではありませんでした。DBA は、ログ情報、監視情報、または推測のみに基づいてトラブルシューティングを実行していましたが、これは非効率的でした。TiDB v5.0 では、ユーザーがパフォーマンスの問題をより効率的にトラブルシューティングできるように、次の改善が行われました。
 
-+ `EXPLAIN ANALYZE` supports analyzing all DML statements and shows the actual performance plans and the execution information of each operator. [#18056](https://github.com/pingcap/tidb/issues/18056)
-+ Users can use `EXPLAIN FOR CONNECTION` to analyze the status information of the SQL statements that are being executed. This information includes the execution duration of each operator and the number of processed rows. [#18233](https://github.com/pingcap/tidb/issues/18233)
-+ More information is available in the output of `EXPLAIN ANALYZE`, including the number of RPC requests sent by operators, the duration of resolving lock conflicts, network latency, the scanned volume of deleted data in RocksDB, and the hit rate of RocksDB caches. [#18663](https://github.com/pingcap/tidb/issues/18663)
-+ The detailed execution information of SQL statements is recorded in the slow log, which is consistent with the output information of `EXPLAIN ANALYZE`. This information includes the time consumed by each operator, the number of processed rows, and the number of sent RPC requests. [#15009](https://github.com/pingcap/tidb/issues/15009)
+-   `EXPLAIN ANALYZE`すべての DML ステートメントの分析をサポートし、実際のパフォーマンス プランと各演算子の実行情報を表示します[＃18056](https://github.com/pingcap/tidb/issues/18056)
+-   ユーザーは`EXPLAIN FOR CONNECTION`使用して、実行中の SQL ステートメントのステータス情報を分析できます。この情報には、各演算子の実行時間や処理された行数などが含まれます[＃18233](https://github.com/pingcap/tidb/issues/18233)
+-   `EXPLAIN ANALYZE`の出力には、オペレータによって送信された RPC 要求の数、ロック競合の解決にかかる時間、ネットワークレイテンシー、RocksDB でスキャンされた削除済みデータの量、RocksDB キャッシュのヒット率など、さらに詳しい情報が含まれています[＃18663](https://github.com/pingcap/tidb/issues/18663)
+-   スローログには、SQL文の詳細な実行情報が記録されます。これは、 `EXPLAIN ANALYZE`の出力情報と一致しています。この情報には、各演算子に費やされた時間、処理された行数、送信されたRPC要求の数が含まれます[＃15009](https://github.com/pingcap/tidb/issues/15009)
 
-[User document](/sql-statements/sql-statement-explain.md)
+[ユーザードキュメント](/sql-statements/sql-statement-explain.md)
 
-## Deployment and maintenance
+## 導入とメンテナンス {#deployment-and-maintenance}
 
-+ Previously, when the configuration information of TiDB Ansible was imported to TiUP, TiUP put the user configuration in the `ansible-imported-configs` directory. When users later needed to edit the configuration using `tiup cluster edit-config`, the imported configuration was not displayed in the editor interface, which could be confusing for users. In TiDB v5.0, when TiDB Ansible configuration is imported, TiUP puts the configuration information both in `ansible-imported-configs` and in the editor interface. With this improvement, users can see the imported configuration when they are editing the cluster configuration.
-+ Enhanced `mirror` command that supports merging multiple mirrors into one, publishing components in the local mirror, and adding component owners in the local mirror. [#814](https://github.com/pingcap/tiup/issues/814)
-    + For a large enterprise, especially for the financial industry, any change in the production environment is given careful consideration. It can be troublesome if each version requires users to use a CD for installation. In TiDB v5.0, the `merge` command of TiUP supports merging multiple installation packages into one, which makes the installation easier.
-    + In v4.0, users had to start tiup-server to publish the self-built mirror, which was not convenient enough. In v5.0, users can publish the self-built mirror simply by using `tiup mirror set` to set the current mirror to the local mirror.
+-   以前は、TiDB Ansible の設定情報がTiUPにインポートされると、 TiUP はユーザー設定を`ansible-imported-configs`ディレクトリに配置していました。後でユーザーが`tiup cluster edit-config`使用して設定を編集する必要がある場合、インポートされた設定はエディター インターフェイスに表示されず、ユーザーを混乱させる可能性がありました。TiDB v5.0 では、TiDB Ansible 設定がインポートされると、 TiUP は設定情報を`ansible-imported-configs`とエディター インターフェイスの両方に配置します。この改善により、ユーザーはクラスター設定を編集するときにインポートされた設定を確認できます。
+-   複数のミラーを 1 つにマージし、ローカル ミラーにコンポーネントを公開し、ローカル ミラーにコンポーネント所有者を追加する機能をサポートする拡張`mirror`コマンド[＃814](https://github.com/pingcap/tiup/issues/814)
+    -   大規模な企業、特に金融業界では、本番環境の変更は慎重に検討されます。バージョンごとに CD を使用してインストールする必要があると、面倒な場合があります。TiDB v5.0 では、 TiUPの`merge`コマンドで複数のインストール パッケージを 1 つにマージできるため、インストールが簡単になります。
+    -   v4.0 では、ユーザーは自分で構築したミラーを公開するために tiup-server を起動する必要があり、これはあまり便利ではありませんでした。v5.0 では、ユーザーは`tiup mirror set`使用して現在のミラーをローカル ミラーに設定するだけで、自分で構築したミラーを公開できます。

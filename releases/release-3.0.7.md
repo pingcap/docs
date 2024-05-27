@@ -1,26 +1,26 @@
 ---
 title: TiDB 3.0.7 Release Notes
-summary: TiDB 3.0.7 was released on December 4, 2019. It includes fixes for issues related to lock TTL, timezone parsing, result accuracy, data precision, and statistics accuracy. TiKV also received updates to improve deadlock detection and fix a memory leak issue.
+summary: TiDB 3.0.7 は 2019 年 12 月 4 日にリリースされました。ロック TTL、タイムゾーン解析、結果の精度、データの精度、統計の精度に関連する問題の修正が含まれています。また、TiKV には、デッドロック検出を改善し、メモリリークの問題を修正するための更新も含まれています。
 ---
 
-# TiDB 3.0.7 Release Notes
+# TiDB 3.0.7 リリースノート {#tidb-3-0-7-release-notes}
 
-Release date: December 4, 2019
+発売日: 2019年12月4日
 
-TiDB version: 3.0.7
+TiDB バージョン: 3.0.7
 
-TiDB Ansible version: 3.0.7
+TiDB Ansible バージョン: 3.0.7
 
-## TiDB
+## ティビ {#tidb}
 
-- Fix the issue that the lock TTL’s value is too large because the TiDB server’s local time is behind PD’s timestamp [#13868](https://github.com/pingcap/tidb/pull/13868)
-- Fix the issue that the timezone is incorrect after parsing the date from strings using `gotime.Local` [#13793](https://github.com/pingcap/tidb/pull/13793)
-- Fix the issue that the result might be incorrect because the `binSearch` function does not return an error in the implementation of `builtinIntervalRealSig` [#13767](https://github.com/pingcap/tidb/pull/13767)
-- Fix the issue that data is incorrect because the precision is lost when an integer is converted to an unsigned floating point or decimal type [#13755](https://github.com/pingcap/tidb/pull/13755)
-- Fix the issue that the result is incorrect because the `not null` flag is not properly reset when the `USING` clause is used in Natural Outer Join and Outer Join [#13739](https://github.com/pingcap/tidb/pull/13739)
-- Fix the issue that the statistics are not accurate because a data race occurs when statistics are updated [#13687](https://github.com/pingcap/tidb/pull/13687)
+-   TiDB サーバーのローカル時間が PD のタイムスタンプ[＃13868](https://github.com/pingcap/tidb/pull/13868)より遅れているためにロック TTL の値が大きすぎる問題を修正しました
+-   `gotime.Local` [＃13793](https://github.com/pingcap/tidb/pull/13793)を使用して文字列から日付を解析した後にタイムゾーンが正しくない問題を修正しました
+-   `builtinIntervalRealSig` [＃13767](https://github.com/pingcap/tidb/pull/13767)の実装で`binSearch`関数がエラーを返さないため、結果が不正確になる可能性がある問題を修正しました。
+-   整数を符号なし浮動小数点型または小数点型に変換すると精度が失われ、データが正しくなくなる問題を修正[＃13755](https://github.com/pingcap/tidb/pull/13755)
+-   Natural Outer Join および Outer Join [＃13739](https://github.com/pingcap/tidb/pull/13739)で`USING`節が使用されている場合に`not null`フラグが適切にリセットされないため、結果が正しくない問題を修正しました。
+-   統計情報の更新時にデータ競合が発生し、統計情報が正確でない問題を修正[＃13687](https://github.com/pingcap/tidb/pull/13687)
 
-## TiKV
+## ティクヴ {#tikv}
 
-- Make the deadlock detector only observe valid Regions to make sure the deadlock manager is in a valid Region [#6110](https://github.com/tikv/tikv/pull/6110)
-- Fix a potential memory leak issue [#6128](https://github.com/tikv/tikv/pull/6128)
+-   デッドロック検出器が有効な領域のみを監視するようにして、デッドロックマネージャが有効なリージョン[＃6110](https://github.com/tikv/tikv/pull/6110)にあることを確認します。
+-   潜在的なメモリリークの問題を修正[＃6128](https://github.com/tikv/tikv/pull/6128)

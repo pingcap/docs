@@ -1,34 +1,34 @@
 ---
 title: TiCDC Server Configurations
-summary: Learn the CLI and configuration parameters used in TiCDC.
+summary: TiCDC で使用される CLI と構成パラメータについて学習します。
 ---
 
-# TiCDC Server Configurations
+# TiCDC サーバー構成 {#ticdc-server-configurations}
 
-This document describes the CLI and configuration file parameters used in TiCDC.
+このドキュメントでは、TiCDC で使用される CLI および構成ファイルのパラメータについて説明します。
 
-## `cdc server` CLI parameters
+## <code>cdc server</code> CLI パラメータ {#code-cdc-server-code-cli-parameters}
 
-The following are descriptions of options available in a `cdc server` command:
+`cdc server`コマンドで使用できるオプションの説明は次のとおりです。
 
-- `addr`: The listening address of TiCDC, the HTTP API address, and the Prometheus address of the TiCDC service. The default value is `127.0.0.1:8300`.
-- `advertise-addr`: The advertised address via which clients access TiCDC. If unspecified, the value is the same as that of `addr`.
-- `pd`: A comma-separated list of PD endpoints.
-- `config`: The address of the configuration file that TiCDC uses (optional). This option is supported since TiCDC v5.0.0. This option can be used in the TiCDC deployment since TiUP v1.4.0. For detailed configuration description, see [TiCDC Changefeed Configurations](/ticdc/ticdc-changefeed-config.md)
-- `data-dir`: Specifies the directory that TiCDC uses when it needs to use disks to store files. The sort engine used by TiCDC and redo logs use this directory to store temporary files. It is recommended to ensure that the free disk space for this directory is greater than or equal to 500 GiB. If you are using TiUP, you can configure `data_dir` in the [`cdc_servers`](/tiup/tiup-cluster-topology-reference.md#cdc_servers) section, or directly use the default `data_dir` path in `global`.
-- `gc-ttl`: The TTL (Time To Live) of the service level `GC safepoint` in PD set by TiCDC, and the duration that the replication task can suspend, in seconds. The default value is `86400`, which means 24 hours. Note: Suspending of the TiCDC replication task affects the progress of TiCDC GC safepoint, which means that it affects the progress of upstream TiDB GC, as detailed in [Complete Behavior of TiCDC GC safepoint](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint).
-- `log-file`: The path to which logs are output when the TiCDC process is running. If this parameter is not specified, logs are written to the standard output (stdout).
-- `log-level`: The log level when the TiCDC process is running. The default value is `"info"`.
-- `ca`: Specifies the path of the CA certificate file in PEM format for TLS connection (optional).
-- `cert`: Specifies the path of the certificate file in PEM format for TLS connection (optional).
-- `cert-allowed-cn`: Specifies the path of the common name in PEM format for TLS connection (optional).
-- `key`: Specifies the path of the private key file in PEM format for TLS connection (optional).
-- `tz`: Time zone used by the TiCDC service. TiCDC uses this time zone when it internally converts time data types such as `TIMESTAMP` or when it replicates data to the downstream. The default is the local time zone in which the process runs. If you specify `time-zone` (in `sink-uri`) and `tz` at the same time, the internal TiCDC processes use the time zone specified by `tz`, and the sink uses the time zone specified by `time-zone` for replicating data to the downstream. Make sure that the time zone specified by `tz` is the same as that specified by `time-zone` (in `sink-uri`).
-- `cluster-id`: (optional) The ID of the TiCDC cluster. The default value is `default`. `cluster-id` is the unique identifier of a TiCDC cluster. TiCDC nodes with the same `cluster-id` belong to the same cluster. The length of a `cluster-id` is 128 characters at most. `cluster-id` must follow the pattern of `^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$` and cannot be one of the following: `owner`, `capture`, `task`, `changefeed`, `job`, and `meta`.
+-   `addr` : TiCDC のリスニング アドレス、HTTP API アドレス、および TiCDC サービスの Prometheus アドレス。デフォルト値は`127.0.0.1:8300`です。
+-   `advertise-addr` : クライアントが TiCDC にアクセスするために使用するアドバタイズされたアドレス。指定されていない場合、値は`addr`と同じになります。
+-   `pd` : PD エンドポイントのコンマ区切りリスト。
+-   `config` : TiCDC が使用する構成ファイルのアドレス (オプション)。このオプションは、TiCDC v5.0.0 以降でサポートされています。このオプションは、 TiUP v1.4.0 以降の TiCDC デプロイメントで使用できます。詳細な構成の説明については、 [TiCDC Changefeed構成](/ticdc/ticdc-changefeed-config.md)を参照してください。
+-   `data-dir` : ディスクを使用してファイルを保存する必要がある場合に TiCDC が使用するディレクトリを指定します。TiCDC で使用されるソート エンジンと redo ログは、このディレクトリを使用して一時ファイルを保存します。このディレクトリの空きディスク領域が 500 GiB 以上であることを確認することをお勧めします。TiUP を使用しTiUPいる場合は、 [`cdc_servers`](/tiup/tiup-cluster-topology-reference.md#cdc_servers)セクションで`data_dir`を構成するか、 `global`でデフォルトの`data_dir`パスを直接使用できます。
+-   `gc-ttl` : TiCDC によって設定された PD のサービス レベル`GC safepoint`の TTL (Time To Live) と、レプリケーション タスクが一時停止できる期間 (秒単位)。デフォルト値は`86400`で、これは 24 時間を意味します。注: TiCDC レプリケーション タスクを一時停止すると、TiCDC GC セーフポイントの進行に影響します。つまり、 [TiCDC GCセーフポイントの完全な動作](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)で詳しく説明されているように、アップストリーム TiDB GC の進行に影響します。
+-   `log-file` : TiCDC プロセスの実行中にログが出力されるパス。このパラメータを指定しない場合、ログは標準出力 (stdout) に書き込まれます。
+-   `log-level` : TiCDC プロセス実行時のログ レベル。デフォルト値は`"info"`です。
+-   `ca` : TLS 接続用の PEM 形式の CA 証明書ファイルのパスを指定します (オプション)。
+-   `cert` : TLS 接続用の PEM 形式の証明書ファイルのパスを指定します (オプション)。
+-   `cert-allowed-cn` : TLS 接続の共通名のパスを PEM 形式で指定します (オプション)。
+-   `key` : TLS 接続用の PEM 形式の秘密鍵ファイルのパスを指定します (オプション)。
+-   `tz` : TiCDC サービスが使用するタイムゾーン。TiCDC は、 `TIMESTAMP`などの時間データ型を内部的に変換するとき、またはデータをダウンストリームに複製するときに、このタイムゾーンを使用します。デフォルトは、プロセスが実行されるローカル タイムゾーンです`time-zone` ( `sink-uri`で) と`tz`同時に指定すると、内部 TiCDC プロセスは`tz`で指定されたタイムゾーンを使用し、シンクは`time-zone`で指定されたタイムゾーンを使用してダウンストリームにデータを複製します。14 で指定`tz`れたタイムゾーンが`time-zone` ( `sink-uri`で) で指定されたタイムゾーンと同じであることを確認してください。
+-   `cluster-id` : (オプション) TiCDC クラスターの ID。デフォルト値は`default`です。 `cluster-id`は TiCDC クラスターの一意の識別子です。同じ`cluster-id`を持つ TiCDC ノードは同じクラスターに属します。 `cluster-id`の長さは最大 128 文字です。 `cluster-id` `^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$`のパターンに従う必要があり、 `owner` 、 `capture` 、 `task` 、 `changefeed` 、 `job` 、および`meta`のいずれかにすることはできません。
 
-## `cdc server` configuration file parameters
+## <code>cdc server</code>構成ファイルのパラメータ {#code-cdc-server-code-configuration-file-parameters}
 
-The following describes the configuration file specified by the `config` option in the `cdc server` command:
+以下は、 `cdc server`コマンドの`config`オプションで指定された構成ファイルについて説明しています。
 
 ```toml
 # The configuration method of the following parameters is the same as that of CLI parameters, but the CLI parameters have higher priorities.

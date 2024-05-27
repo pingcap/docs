@@ -1,44 +1,44 @@
 ---
 title: TiCDC OpenAPI v1
-summary: Learn how to use the OpenAPI interface to manage the cluster status and data replication.
+summary: OpenAPI インターフェースを使用してクラスターのステータスとデータのレプリケーションを管理する方法を学習します。
 ---
 
-# TiCDC OpenAPI v1
+# TiCDC オープン API v1 {#ticdc-openapi-v1}
 
 <!-- markdownlint-disable MD024 -->
 
-> **Note**
+> **注記**
 >
-> TiCDC OpenAPI v1 is deprecated and will be deleted in the future. It is recommended to use [TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md).
+> TiCDC OpenAPI v1 は非推奨であり、将来的に削除される予定です。 [TiCDC オープン API v2](/ticdc/ticdc-open-api-v2.md)使用することをお勧めします。
 
-TiCDC provides the OpenAPI feature for querying and operating the TiCDC cluster, which is similar to the feature of [`cdc cli` tool](/ticdc/ticdc-manage-changefeed.md).
+TiCDC は、 [`cdc cli`ツール](/ticdc/ticdc-manage-changefeed.md)の機能に類似した、TiCDC クラスターのクエリと操作のための OpenAPI 機能を提供します。
 
-You can use the APIs to perform the following maintenance operations on the TiCDC cluster:
+API を使用して、TiCDC クラスターで次のメンテナンス操作を実行できます。
 
-- [Get the status information of a TiCDC node](#get-the-status-information-of-a-ticdc-node)
-- [Check the health status of a TiCDC cluster](#check-the-health-status-of-a-ticdc-cluster)
-- [Create a replication task](#create-a-replication-task)
-- [Remove a replication task](#remove-a-replication-task)
-- [Update the replication configuration](#update-the-replication-configuration)
-- [Query the replication task list](#query-the-replication-task-list)
-- [Query a specific replication task](#query-a-specific-replication-task)
-- [Pause a replication task](#pause-a-replication-task)
-- [Resume a replication task](#resume-a-replication-task)
-- [Query the replication subtask list](#query-the-replication-subtask-list)
-- [Query a specific replication subtask](#query-a-specific-replication-subtask)
-- [Query the TiCDC service process list](#query-the-ticdc-service-process-list)
-- [Evict an owner node](#evict-an-owner-node)
-- [Manually trigger the load balancing of all tables in a replication task](#manually-trigger-the-load-balancing-of-all-tables-in-a-replication-task)
-- [Manually schedule a table to another node](#manually-schedule-a-table-to-another-node)
-- [Dynamically adjust the log level of the TiCDC server](#dynamically-adjust-the-log-level-of-the-ticdc-server)
+-   [TiCDCノードのステータス情報を取得する](#get-the-status-information-of-a-ticdc-node)
+-   [TiCDC クラスターのヘルス ステータスを確認する](#check-the-health-status-of-a-ticdc-cluster)
+-   [レプリケーションタスクを作成する](#create-a-replication-task)
+-   [レプリケーションタスクを削除する](#remove-a-replication-task)
+-   [レプリケーション構成を更新する](#update-the-replication-configuration)
+-   [レプリケーションタスクリストをクエリする](#query-the-replication-task-list)
+-   [特定のレプリケーションタスクをクエリする](#query-a-specific-replication-task)
+-   [レプリケーションタスクを一時停止する](#pause-a-replication-task)
+-   [レプリケーションタスクを再開する](#resume-a-replication-task)
+-   [レプリケーションサブタスクリストをクエリする](#query-the-replication-subtask-list)
+-   [特定のレプリケーションサブタスクをクエリする](#query-a-specific-replication-subtask)
+-   [TiCDC サービス プロセス リストを照会する](#query-the-ticdc-service-process-list)
+-   [所有者ノードの削除](#evict-an-owner-node)
+-   [レプリケーションタスク内のすべてのテーブルの負荷分散を手動でトリガーする](#manually-trigger-the-load-balancing-of-all-tables-in-a-replication-task)
+-   [テーブルを別のノードに手動でスケジュールする](#manually-schedule-a-table-to-another-node)
+-   [TiCDCサーバーのログレベルを動的に調整する](#dynamically-adjust-the-log-level-of-the-ticdc-server)
 
-The request body and returned value of all APIs are in JSON format. The following sections describe the specific usage of the APIs.
+すべての API のリクエスト本文と戻り値は JSON 形式です。次のセクションでは、API の具体的な使用方法について説明します。
 
-In the following examples, the listening IP address of the TiCDC server is `127.0.0.1` and the port is `8300`. You can bind a specified IP and port via `--addr=ip:port` when starting the TiCDC server.
+次の例では、TiCDCサーバーのリスニング IP アドレスは`127.0.0.1` 、ポートは`8300`です。TiCDCサーバーを起動するときに、指定された IP とポートを`--addr=ip:port`経由でバインドできます。
 
-## API error message template
+## API エラー メッセージ テンプレート {#api-error-message-template}
 
-After sending an API request, if an error occurs, the returned error message is in the following format:
+API リクエストを送信した後、エラーが発生した場合、返されるエラー メッセージは次の形式になります。
 
 ```json
 {
@@ -47,21 +47,19 @@ After sending an API request, if an error occurs, the returned error message is 
 }
 ```
 
-From the above JSON output, `error_msg` describes the error message and `error_code` is the corresponding error code.
+上記の JSON 出力では、 `error_msg`エラー メッセージを示し、 `error_code`対応するエラー コードを示します。
 
-## Get the status information of a TiCDC node
+## TiCDCノードのステータス情報を取得する {#get-the-status-information-of-a-ticdc-node}
 
-This API is a synchronous interface. If the request is successful, the status information of the corresponding node is returned.
+この API は同期インターフェースです。リクエストが成功すると、対応するノードのステータス情報が返されます。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `GET /api/v1/status`
 
-### Example
+### 例 {#example}
 
-The following request gets the status information of the TiCDC node whose IP address is `127.0.0.1` and port number is `8300`.
-
-{{< copyable "shell-regular" >}}
+次のリクエストは、IP アドレスが`127.0.0.1`でポート番号が`8300`である TiCDC ノードのステータス情報を取得します。
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v1/status
@@ -77,72 +75,59 @@ curl -X GET http://127.0.0.1:8300/api/v1/status
 }
 ```
 
-The fields of the above output are described as follows:
+上記の出力のフィールドは次のように説明されます。
 
-- version: The current TiCDC version number.
-- git_hash: The Git hash value.
-- id: The capture ID of the node.
-- pid: The capture process PID of the node.
-- is_owner: Indicates whether the node is an owner.
+-   バージョン: 現在の TiCDC バージョン番号。
+-   git_hash: Git ハッシュ値。
+-   id: ノードのキャプチャ ID。
+-   pid: ノードのキャプチャプロセス PID。
+-   is_owner: ノードが所有者であるかどうかを示します。
 
-## Check the health status of a TiCDC cluster
+## TiCDC クラスターのヘルス ステータスを確認する {#check-the-health-status-of-a-ticdc-cluster}
 
-This API is a synchronous interface. If the cluster is healthy, `200 OK` is returned.
+この API は同期インターフェースです。クラスターが正常な場合は`200 OK`返されます。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `GET /api/v1/health`
 
-### Example
-
-{{< copyable "shell-regular" >}}
+### 例 {#example}
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v1/health
 ```
 
-## Create a replication task
+## レプリケーションタスクを作成する {#create-a-replication-task}
 
-This API is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+この API は非同期インターフェイスです。リクエストが成功すると、 `202 Accepted`が返されます。返された結果は、サーバーがコマンドの実行に同意したことを意味するだけで、コマンドが正常に実行されることを保証するものではありません。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `POST /api/v1/changefeeds`
 
-### Parameter description
+### パラメータの説明 {#parameter-description}
 
-Compared to the optional parameters for creating a replication task using the `cli` command, the optional parameters for creating such task using the API are not as complete. This API supports the following parameters.
+`cli`コマンドを使用してレプリケーション タスクを作成するためのオプション パラメータと比較すると、API を使用してこのようなタスクを作成するためのオプション パラメータは完全ではありません。この API は、次のパラメータをサポートしています。
 
-#### Parameters for the request body
+#### リクエスト本文のパラメータ {#parameters-for-the-request-body}
 
-| Parameter name | Description |
-| :------------------------ | :---------------------- ------------------------------- |
-| `changefeed_id` | `STRING` type. The ID of the replication task. (Optional) |
-| `start_ts` | `UINT64` type. Specifies the start TSO of the changefeed. (Optional) |
-| `target_ts` | `UINT64` type. Specifies the target TSO of the changefeed. (Optional) |
-| **`sink_uri`** | `STRING` type. The downstream address of the replication task. (**Required**) |
-| `force_replicate` | `BOOLEAN` type. Determines whether to forcibly replicate the tables without unique indexes. (Optional) |
-| `ignore_ineligible_table` | `BOOLEAN` type. Determines whether to ignore the tables that cannot be replicated. (Optional) |
-| `filter_rules` | `STRING` type array. The rules for table schema filtering. (Optional) |
-| `ignore_txn_start_ts` | `UINT64` type array. Ignores the transaction of a specified start_ts. (Optional) |
-| `mounter_worker_num` | `INT` type. The mounter thread number. (Optional) |
-| `sink_config` | The configuration parameters of sink. (Optional) |
+| パラメータ名 | 説明 | | :------------------------ | :---------------------- ------------------------------- | | `changefeed_id` | `STRING` type。レプリケーション タスクの ID。(オプション) | | `start_ts` | `UINT64` type。changefeed の開始 TSO を指定します。(オプション) | | `target_ts` | `UINT64` type。changefeed のターゲット TSO を指定します。(オプション) | | **`sink_uri`** | `STRING` type。レプリケーション タスクのダウンストリーム アドレス。(**必須**) | | `force_replicate` | `BOOLEAN` type。一意のインデックスのないテーブルを強制的にレプリケートするかどうかを決定します。(オプション) | | `ignore_ineligible_table` | `BOOLEAN` type。レプリケートできないテーブルを無視するかどうかを決定します。(オプション) | | `filter_rules` | `STRING` type 配列。テーブル スキーマ フィルタリングのルール。(オプション) | | `ignore_txn_start_ts` | `UINT64` type 配列。指定された start_ts のトランザクションを無視します。(オプション) | | `mounter_worker_num` | `INT` type。マウント元スレッド番号。 (オプション) | | `sink_config` | シンクの構成パラメータ。(オプション) |
 
-The meaning and format of `changefeed_id`, `start_ts`, `target_ts`, and `sink_uri` are the same as those described in the [Use `cdc cli` to create a replication task](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task) document. For the detailed description of these parameters, see this document. Note that when you specify the certificate path in `sink_uri`, make sure you have uploaded the corresponding certificate to the corresponding TiCDC server.
+`changefeed_id`の意味と形式`sink_uri` `start_ts` [`cdc cli`を使用してレプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)ドキュメントで説明されているもの`sink_uri`同じです。これらのパラメータの詳細な説明`target_ts`は、このドキュメントを参照してください。11 で証明書パスを指定する場合は、対応する証明書を対応する TiCDCサーバーにアップロードしたことを確認してください。
 
-Some other parameters in the above table are described further as follows.
+上記の表のその他のパラメータについては、次のように詳しく説明します。
 
-`force_replicate`: This parameter defaults to `false`. When it is specified as `true`, TiCDC tries to forcibly replicate tables that do not have a unique index.
+`force_replicate` : このパラメータのデフォルトは`false`です。 `true`に指定すると、TiCDC は一意のインデックスを持たないテーブルを強制的に複製しようとします。
 
-`ignore_ineligible_table`: This parameter defaults to `false`. When it is specified as `true`, TiCDC ignores tables that cannot be replicated.
+`ignore_ineligible_table` : このパラメータのデフォルトは`false`です。 `true`に指定すると、TiCDC は複製できないテーブルを無視します。
 
-`filter_rules`: The rules for table schema filtering, such as `filter_rules = ['foo*.*','bar*.*']`. For details, see the [Table Filter](/table-filter.md) document.
+`filter_rules` : テーブル スキーマ フィルタリングのルール (例: `filter_rules = ['foo*.*','bar*.*']` 。詳細については、 [テーブルフィルター](/table-filter.md)ドキュメントを参照してください。
 
-`ignore_txn_start_ts`: When this parameter is specified, the specified start_ts is ignored. For example, `ignore-txn-start-ts = [1, 2]`.
+`ignore_txn_start_ts` : このパラメータを指定すると、指定された start_ts は無視されます。たとえば、 `ignore-txn-start-ts = [1, 2]` 。
 
-`mounter_worker_num`: The thread number of mounter. Mounter is used to decode the data output from TiKV. The default value is `16`.
+`mounter_worker_num` : マウンタのスレッド番号。マウンタは TiKV から出力されたデータをデコードするために使用されます。デフォルト値は`16`です。
 
-The configuration parameters of sink are as follows:
+シンクの構成パラメータは次のとおりです。
 
 ```json
 {
@@ -154,127 +139,110 @@ The configuration parameters of sink are as follows:
 }
 ```
 
-`dispatchers`: For the sink of MQ type, you can use dispatchers to configure the event dispatcher. Four dispatchers are supported: `default`, `ts`, `index-value`, and `table`. The dispatcher rules are as follows:
+`dispatchers` : MQ タイプのシンクの場合、ディスパッチャーを使用してイベント ディスパッチャーを構成できます。 `default` 、 `ts` 、 `index-value` 、および`table` 4 つのディスパッチャーがサポートされています。ディスパッチャーのルールは次のとおりです。
 
-- `default`: dispatches events in the `table` mode.
-- `ts`: uses the commitTs of the row change to create the hash value and dispatch events.
-- `index-value`: uses the name and value of the selected HandleKey column to create the hash value and dispatch events.
-- `table`: uses the schema name of the table and the table name to create the hash value and dispatch events.
+-   `default` : `table`モードでイベントを送信します。
+-   `ts` : 行変更の commitTs を使用してハッシュ値を作成し、イベントをディスパッチします。
+-   `index-value` : 選択した HandleKey 列の名前と値を使用してハッシュ値を作成し、イベントをディスパッチします。
+-   `table` : テーブルのスキーマ名とテーブル名を使用してハッシュ値を作成し、イベントをディスパッチします。
 
-`matcher`: The matching syntax of matcher is the same as the filter rule syntax.
+`matcher` : マッチャーのマッチング構文は、フィルター ルール構文と同じです。
 
-`protocol`: For the sink of MQ type, you can specify the protocol format of the message. Currently the following protocols are supported: `canal-json`, `open-protocol`, `avro`, and `maxwell`.
+`protocol` : MQ タイプのシンクの場合、メッセージのプロトコル形式を指定できます。現在、次のプロトコルがサポートされています: `canal-json` 、 `open-protocol` 、 `avro` 、および`maxwell` 。
 
-### Example
+### 例 {#example}
 
-The following request creates a replication task with an ID of `test5` and a `sink_uri` of `blackhole://`.
-
-{{< copyable "shell-regular" >}}
+次のリクエストは、ID が`test5`で`sink_uri`が`blackhole://`のレプリケーション タスクを作成します。
 
 ```shell
 curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v1/changefeeds -d '{"changefeed_id":"test5","sink_uri":"blackhole://"}'
 ```
 
-If the request is successful, `202 Accepted` is returned. If the request fails, an error message and error code are returned.
+要求が成功した場合は`202 Accepted`が返されます。要求が失敗した場合は、エラー メッセージとエラー コードが返されます。
 
-## Remove a replication task
+## レプリケーションタスクを削除する {#remove-a-replication-task}
 
-This API is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+この API は非同期インターフェイスです。リクエストが成功すると、 `202 Accepted`が返されます。返された結果は、サーバーがコマンドの実行に同意したことを意味するだけで、コマンドが正常に実行されることを保証するものではありません。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `DELETE /api/v1/changefeeds/{changefeed_id}`
 
-### Parameter description
+### パラメータの説明 {#parameter-description}
 
-#### Path parameters
+#### パスパラメータ {#path-parameters}
 
-| Parameter name | Description |
-| :-------------- | :----------------------------------- |
-| `changefeed_id` | The ID of the replication task (changefeed) to be removed. |
+| パラメータ名          | 説明                                  |
+| :-------------- | :---------------------------------- |
+| `changefeed_id` | 削除するレプリケーション タスク (changefeed) の ID。 |
 
-### Example
+### 例 {#example}
 
-The following request removes the replication task with the ID `test1`.
-
-{{< copyable "shell-regular" >}}
+次のリクエストは、ID `test1`のレプリケーション タスクを削除します。
 
 ```shell
 curl -X DELETE http://127.0.0.1:8300/api/v1/changefeeds/test1
 ```
 
-If the request is successful, `202 Accepted` is returned. If the request fails, an error message and error code are returned.
+要求が成功した場合は`202 Accepted`が返されます。要求が失敗した場合は、エラー メッセージとエラー コードが返されます。
 
-## Update the replication configuration
+## レプリケーション構成を更新する {#update-the-replication-configuration}
 
-This API is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+この API は非同期インターフェイスです。リクエストが成功すると、 `202 Accepted`が返されます。返された結果は、サーバーがコマンドの実行に同意したことを意味するだけで、コマンドが正常に実行されることを保証するものではありません。
 
-To modify the changefeed configuration, follow the steps of `pause the replication task -> modify the configuration -> resume the replication task`.
+changefeed 設定を変更するには、 `pause the replication task -> modify the configuration -> resume the replication task`の手順に従います。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `PUT /api/v1/changefeeds/{changefeed_id}`
 
-### Parameter description
+### パラメータの説明 {#parameter-description}
 
-#### Path parameters
+#### パスパラメータ {#path-parameters}
 
-| Parameter name | Description |
-| :-------------- | :----------------------------------- |
-| `changefeed_id` | The ID of the replication task (changefeed) to be updated. |
+| パラメータ名          | 説明                                  |
+| :-------------- | :---------------------------------- |
+| `changefeed_id` | 更新するレプリケーション タスク (changefeed) の ID。 |
 
-#### Parameters for the request body
+#### リクエスト本文のパラメータ {#parameters-for-the-request-body}
 
-Currently, only the following configuration can be modified via the API.
+現在、API 経由で変更できるのは次の構成のみです。
 
-| Parameter name | Description |
-| :-------------------- | :-------------------------- --------------------------- |
-| `target_ts` | `UINT64` type. Specifies the target TSO of the changefeed. (Optional) |
-| `sink_uri` | `STRING` type. The downstream address of the replication task. (Optional) |
-| `filter_rules` | `STRING` type array. The rules for table schema filtering. (Optional) |
-| `ignore_txn_start_ts` | `UINT64` type array. Ignores the transaction of a specified start_ts. (Optional) |
-| `mounter_worker_num` | `INT` type. The mounter thread number. (Optional) |
-| `sink_config` | The configuration parameters of sink. (Optional) |
+| パラメータ名 | 説明 | | :-------------------- | :-------------------------- --------------------------- | | `target_ts` | `UINT64` type。changefeed のターゲット TSO を指定します。(オプション) | | `sink_uri` | `STRING` type。レプリケーション タスクのダウンストリーム アドレス。(オプション) | | `filter_rules` | `STRING` type 配列。テーブル スキーマ フィルタリングのルール。(オプション) | | `ignore_txn_start_ts` | `UINT64` type 配列。指定された start_ts のトランザクションを無視します。(オプション) | | `mounter_worker_num` | `INT` type。マウント スレッド番号。(オプション) | | `sink_config` | シンクの構成パラメータ。(オプション) |
 
-The meanings of the above parameters are the same as those in the [Create a replication task](#create-a-replication-task) section. See that section for details.
+上記のパラメータの意味はセクション[レプリケーションタスクを作成する](#create-a-replication-task)と同じです。詳細については、そのセクションを参照してください。
 
-### Example
+### 例 {#example}
 
-The following request updates the `mounter_worker_num` of the replication task with the ID `test1` to `32`.
-
-{{< copyable "shell-regular" >}}
+次のリクエストは、ID `test1`のレプリケーション タスクの`mounter_worker_num` `32`に更新します。
 
 ```shell
  curl -X PUT -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v1/changefeeds/test1 -d '{"mounter_worker_num":32}'
 ```
 
-If the request is successful, `202 Accepted` is returned. If the request fails, an error message and error code are returned.
+要求が成功した場合は`202 Accepted`が返されます。要求が失敗した場合は、エラー メッセージとエラー コードが返されます。
 
-## Query the replication task list
+## レプリケーションタスクリストをクエリする {#query-the-replication-task-list}
 
-This API is a synchronous interface. If the request is successful, the basic information of all nodes in the TiCDC cluster is returned.
+この API は同期インターフェースです。リクエストが成功すると、TiCDC クラスター内のすべてのノードの基本情報が返されます。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `GET /api/v1/changefeeds`
 
-### Parameter description
+### パラメータの説明 {#parameter-description}
 
-#### Query parameters
+#### クエリパラメータ {#query-parameters}
 
-| Parameter name | Description |
-| :------ | :---------------------------------------- ----- |
-| `state` | When this parameter is specified, the replication status information only of this state is returned.(Optional) |
+| パラメータ名 | 説明 | | :------ | :---------------------------------------- ----- | | `state` | このパラメータを指定すると、この状態のレプリケーション ステータス情報のみが返されます。(オプション) |
 
-The value options for `state` are `all`, `normal`, `stopped`, `error`, `failed`, and `finished`.
+`state`の値のオプションは`all` 、 `normal` 、 `stopped` 、 `error` 、 `failed` 、および`finished`です。
 
-If this parameter is not specified, the basic information of replication tasks whose state is normal, stopped, or failed is returned by default.
+このパラメータを指定しない場合は、状態が正常、停止、または失敗であるレプリケーション タスクの基本情報がデフォルトで返されます。
 
-### Example
+### 例 {#example}
 
-The following request queries the basic information of all replication tasks whose state is `normal`.
-
-{{< copyable "shell-regular" >}}
+次のリクエストは、状態が`normal`であるすべてのレプリケーション タスクの基本情報を照会します。
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v1/changefeeds?state=normal
@@ -299,35 +267,33 @@ curl -X GET http://127.0.0.1:8300/api/v1/changefeeds?state=normal
 ]
 ```
 
-The fields in the returned result above are described as follows:
+上記の返された結果のフィールドは次のように説明されます。
 
-- id: The ID of the replication task.
-- state: The current [state](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer) of the replication task.
-- checkpoint_tso: The TSO representation of the current checkpoint of the replication task.
-- checkpoint_time: The formatted time representation of the current checkpoint of the replication task.
-- error: The error information of the replication task.
+-   id: レプリケーション タスクの ID。
+-   状態: レプリケーション タスクの現在の状態[州](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer) 。
+-   checkpoint_tso: レプリケーション タスクの現在のチェックポイントの TSO 表現。
+-   checkpoint_time: レプリケーション タスクの現在のチェックポイントのフォーマットされた時間表現。
+-   error: レプリケーション タスクのエラー情報。
 
-## Query a specific replication task
+## 特定のレプリケーションタスクをクエリする {#query-a-specific-replication-task}
 
-This API is a synchronous interface. If the request is successful, the detailed information of the specified replication task is returned.
+この API は同期インターフェースです。リクエストが成功すると、指定されたレプリケーション タスクの詳細情報を返します。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `GET /api/v1/changefeeds/{changefeed_id}`
 
-### Parameter description
+### パラメータの説明 {#parameter-description}
 
-#### Path parameters
+#### パスパラメータ {#path-parameters}
 
-| Parameter name | Description |
+| パラメータ名          | 説明                                   |
 | :-------------- | :----------------------------------- |
-| `changefeed_id` | The ID of the replication task (changefeed) to be queried. |
+| `changefeed_id` | クエリするレプリケーション タスク (changefeed) の ID。 |
 
-### Example
+### 例 {#example}
 
-The following request queries the detailed information of the replication task with the ID `test1`.
-
-{{< copyable "shell-regular" >}}
+次のリクエストは、ID `test1`のレプリケーション タスクの詳細情報を照会します。
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v1/changefeeds/test1
@@ -360,73 +326,67 @@ curl -X GET http://127.0.0.1:8300/api/v1/changefeeds/test1
 }
 ```
 
-## Pause a replication task
+## レプリケーションタスクを一時停止する {#pause-a-replication-task}
 
-This API is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+この API は非同期インターフェイスです。リクエストが成功すると、 `202 Accepted`が返されます。返された結果は、サーバーがコマンドの実行に同意したことを意味するだけで、コマンドが正常に実行されることを保証するものではありません。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `POST /api/v1/changefeeds/{changefeed_id}/pause`
 
-### Parameter description
+### パラメータの説明 {#parameter-description}
 
-#### Path parameters
+#### パスパラメータ {#path-parameters}
 
-| Parameter name | Description |
-| :-------------- | :----------------------------------- |
-| `changefeed_id` | The ID of the replication task (changefeed) to be paused. |
+| パラメータ名          | 説明                                    |
+| :-------------- | :------------------------------------ |
+| `changefeed_id` | 一時停止するレプリケーション タスク (changefeed) の ID。 |
 
-### Example
+### 例 {#example}
 
-The following request pauses the replication task with the ID `test1`.
-
-{{< copyable "shell-regular" >}}
+次のリクエストは、ID `test1`レプリケーション タスクを一時停止します。
 
 ```shell
 curl -X POST http://127.0.0.1:8300/api/v1/changefeeds/test1/pause
 ```
 
-If the request is successful, `202 Accepted` is returned. If the request fails, an error message and error code are returned.
+要求が成功した場合は`202 Accepted`が返されます。要求が失敗した場合は、エラー メッセージとエラー コードが返されます。
 
-## Resume a replication task
+## レプリケーションタスクを再開する {#resume-a-replication-task}
 
-This API is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+この API は非同期インターフェイスです。リクエストが成功すると、 `202 Accepted`が返されます。返された結果は、サーバーがコマンドの実行に同意したことを意味するだけで、コマンドが正常に実行されることを保証するものではありません。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `POST /api/v1/changefeeds/{changefeed_id}/resume`
 
-### Parameter description
+### パラメータの説明 {#parameter-description}
 
-#### Path parameters
+#### パスパラメータ {#path-parameters}
 
-| Parameter name | Description |
-| :-------------- | :----------------------------------- |
-| `changefeed_id` | The ID of the replication task (changefeed) to be resumed. |
+| パラメータ名          | 説明                                  |
+| :-------------- | :---------------------------------- |
+| `changefeed_id` | 再開するレプリケーション タスク (changefeed) の ID。 |
 
-### Example
+### 例 {#example}
 
-The following request resumes the replication task with the ID `test1`.
-
-{{< copyable "shell-regular" >}}
+次のリクエストは、ID `test1`のレプリケーション タスクを再開します。
 
 ```shell
 curl -X POST http://127.0.0.1:8300/api/v1/changefeeds/test1/resume
 ```
 
-If the request is successful, `202 Accepted` is returned. If the request fails, an error message and error code are returned.
+要求が成功した場合は`202 Accepted`が返されます。要求が失敗した場合は、エラー メッセージとエラー コードが返されます。
 
-## Query the replication subtask list
+## レプリケーションサブタスクリストをクエリする {#query-the-replication-subtask-list}
 
-This API is a synchronous interface. If the request is successful, the basic information of all replication subtasks (`processor`) is returned.
+このAPIは同期インターフェースです。リクエストが成功すると、すべてのレプリケーションサブタスク( `processor` )の基本情報が返されます。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `GET /api/v1/processors`
 
-### Example
-
-{{< copyable "shell-regular" >}}
+### 例 {#example}
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v1/processors
@@ -441,28 +401,26 @@ curl -X GET http://127.0.0.1:8300/api/v1/processors
 ]
 ```
 
-## Query a specific replication subtask
+## 特定のレプリケーションサブタスクをクエリする {#query-a-specific-replication-subtask}
 
-This API is a synchronous interface. If the request is successful, the detailed information of the specified replication subtask (`processor`) is returned.
+このAPIは同期インターフェースです。リクエストが成功すると、指定されたレプリケーションサブタスク( `processor` )の詳細情報を返します。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `GET /api/v1/processors/{changefeed_id}/{capture_id}`
 
-### Parameter description
+### パラメータの説明 {#parameter-description}
 
-#### Path parameters
+#### パスパラメータ {#path-parameters}
 
-| Parameter name | Description |
-| :-------------- | :----------------------------------- |
-| `changefeed_id` | The changefeed ID of the replication subtask to be queried. |
-| `capture_id` | The capture ID of the replication subtask to be queried. |
+| パラメータ名          | 説明                             |
+| :-------------- | :----------------------------- |
+| `changefeed_id` | クエリするレプリケーション サブタスクの変更フィード ID。 |
+| `capture_id`    | クエリするレプリケーション サブタスクのキャプチャ ID。  |
 
-### Example
+### 例 {#example}
 
-The following request queries the detailed information of a subtask whose `changefeed_id` is `test` and `capture_id` is `561c3784-77f0-4863-ad52-65a3436db6af`. A subtask can be indentifed by `changefeed_id` and `capture_id`.
-
-{{< copyable "shell-regular" >}}
+次のリクエストは、 `changefeed_id`が`test`で`capture_id`が`561c3784-77f0-4863-ad52-65a3436db6af`であるサブタスクの詳細情報を照会します。サブタスクは`changefeed_id`と`capture_id`で識別できます。
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v1/processors/test1/561c3784-77f0-4863-ad52-65a3436db6af
@@ -480,17 +438,15 @@ curl -X GET http://127.0.0.1:8300/api/v1/processors/test1/561c3784-77f0-4863-ad5
 }
 ```
 
-## Query the TiCDC service process list
+## TiCDC サービス プロセス リストを照会する {#query-the-ticdc-service-process-list}
 
-This API is a synchronous interface. If the request is successful, the basic information of all replication processes (`capture`) is returned.
+このAPIは同期インターフェースです。リクエストが成功すると、すべてのレプリケーションプロセスの基本情報（ `capture` ）が返されます。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `GET /api/v1/captures`
 
-### Example
-
-{{< copyable "shell-regular" >}}
+### 例 {#example}
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v1/captures
@@ -506,115 +462,107 @@ curl -X GET http://127.0.0.1:8300/api/v1/captures
 ]
 ```
 
-## Evict an owner node
+## 所有者ノードの削除 {#evict-an-owner-node}
 
-This API is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+この API は非同期インターフェイスです。リクエストが成功すると、 `202 Accepted`が返されます。返された結果は、サーバーがコマンドの実行に同意したことを意味するだけで、コマンドが正常に実行されることを保証するものではありません。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `POST /api/v1/owner/resign`
 
-### Example
+### 例 {#example}
 
-The following request evicts the current owner node of TiCDC and triggers a new round of elections to generate a new owner node.
-
-{{< copyable "shell-regular" >}}
+次のリクエストは、TiCDC の現在の所有者ノードを削除し、新しい所有者ノードを生成するための新しいラウンドの選出をトリガーします。
 
 ```shell
 curl -X POST http://127.0.0.1:8300/api/v1/owner/resign
 ```
 
-If the request is successful, `202 Accepted` is returned. If the request fails, an error message and error code are returned.
+要求が成功した場合は`202 Accepted`が返されます。要求が失敗した場合は、エラー メッセージとエラー コードが返されます。
 
-## Manually trigger the load balancing of all tables in a replication task
+## レプリケーションタスク内のすべてのテーブルの負荷分散を手動でトリガーする {#manually-trigger-the-load-balancing-of-all-tables-in-a-replication-task}
 
-This API is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+この API は非同期インターフェイスです。リクエストが成功すると、 `202 Accepted`が返されます。返された結果は、サーバーがコマンドの実行に同意したことを意味するだけで、コマンドが正常に実行されることを保証するものではありません。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `POST /api/v1/changefeeds/{changefeed_id}/tables/rebalance_table`
 
-### Parameter description
+### パラメータの説明 {#parameter-description}
 
-#### Path parameters
+#### パスパラメータ {#path-parameters}
 
-| Parameter name | Description |
-| :-------------- | :----------------------------------- |
-| `changefeed_id` | The ID of the replication task (changefeed) to be scheduled. |
+| パラメータ名          | 説明                                      |
+| :-------------- | :-------------------------------------- |
+| `changefeed_id` | スケジュールするレプリケーション タスク (changefeed) の ID。 |
 
-### Example
+### 例 {#example}
 
-The following request triggers the load balancing of all tables in the changefeed with the ID `test1`.
-
-{{< copyable "shell-regular" >}}
+次のリクエストは、ID `test1`の変更フィード内のすべてのテーブルの負荷分散をトリガーします。
 
 ```shell
  curl -X POST http://127.0.0.1:8300/api/v1/changefeeds/test1/tables/rebalance_table
 ```
 
-If the request is successful, `202 Accepted` is returned. If the request fails, an error message and error code are returned.
+要求が成功した場合は`202 Accepted`が返されます。要求が失敗した場合は、エラー メッセージとエラー コードが返されます。
 
-## Manually schedule a table to another node
+## テーブルを別のノードに手動でスケジュールする {#manually-schedule-a-table-to-another-node}
 
-This API is an asynchronous interface. If the request is successful, `202 Accepted` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+この API は非同期インターフェイスです。リクエストが成功すると、 `202 Accepted`が返されます。返された結果は、サーバーがコマンドの実行に同意したことを意味するだけで、コマンドが正常に実行されることを保証するものではありません。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `POST /api/v1/changefeeds/{changefeed_id}/tables/move_table`
 
-### Parameter description
+### パラメータの説明 {#parameter-description}
 
-#### Path parameters
+#### パスパラメータ {#path-parameters}
 
-| Parameter name | Description |
-| :-------------- | :----------------------------------- |
-| `changefeed_id` | The ID of the replication task (changefeed) to be scheduled. |
+| パラメータ名          | 説明                                      |
+| :-------------- | :-------------------------------------- |
+| `changefeed_id` | スケジュールするレプリケーション タスク (changefeed) の ID。 |
 
-#### Parameters for the request body
+#### リクエスト本文のパラメータ {#parameters-for-the-request-body}
 
-| Parameter name | Description |
-| :------------------ | :------------------ |
-| `target_capture_id` | The ID of the target capture. |
-| `table_id` | The ID of the table to be scheduled. |
+| パラメータ名              | 説明                |
+| :------------------ | :---------------- |
+| `target_capture_id` | ターゲットキャプチャの ID。   |
+| `table_id`          | スケジュールするテーブルの ID。 |
 
-### Example
+### 例 {#example}
 
-The following request schedules the table with the ID `49` in the changefeed with the ID `test1` to the capture with the ID `6f19a6d9-0f8c-4dc9-b299-3ba7c0f216f5`.
-
-{{< copyable "shell-regular" >}}
+次のリクエストは、ID `test1`の変更フィード内の ID `49`のテーブルを ID `6f19a6d9-0f8c-4dc9-b299-3ba7c0f216f5`のキャプチャにスケジュールします。
 
 ```shell
 curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v1/changefeeds/changefeed-test1/tables/move_table -d '{"capture_id":"6f19a6d9-0f8c-4dc9-b299-3ba7c0f216f5","table_id":49}'
 
 ```
 
-If the request is successful, `202 Accepted` is returned. If the request fails, an error message and error code are returned.
+要求が成功した場合は`202 Accepted`が返されます。要求が失敗した場合は、エラー メッセージとエラー コードが返されます。
 
-## Dynamically adjust the log level of the TiCDC server
+## TiCDCサーバーのログレベルを動的に調整する {#dynamically-adjust-the-log-level-of-the-ticdc-server}
 
-This API is a synchronous interface. If the request is successful, `202 OK` is returned.
+この API は同期インターフェースです。リクエストが成功すると`202 OK`返されます。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `POST /api/v1/log`
 
-### Request parameters
+### リクエストパラメータ {#request-parameters}
 
-#### Parameters for the request body
+#### リクエスト本文のパラメータ {#parameters-for-the-request-body}
 
-| Parameter name | Description |
-| :---------- | :----------------- |
-| `log_level` | The log level you want to set. |
+| パラメータ名      | 説明          |
+| :---------- | :---------- |
+| `log_level` | 設定するログ レベル。 |
 
-`log_level` supports the [log levels provided by zap](https://godoc.org/go.uber.org/zap#UnmarshalText): "debug", "info", "warn", "error", "dpanic" , "panic", and "fatal".
+`log_level` 、「debug」、「info」、「warn」、「error」、「dpanic」、「panic」、および「fatal」の[zap が提供するログレベル](https://godoc.org/go.uber.org/zap#UnmarshalText)をサポートします。
 
-### Example
-
-{{< copyable "shell-regular" >}}
+### 例 {#example}
 
 ```shell
 curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v1/log -d '{"log_level":"debug"}'
 
 ```
 
-If the request is successful, `202 OK` is returned. If the request fails, an error message and error code are returned.
+要求が成功した場合は`202 OK`が返されます。要求が失敗した場合は、エラー メッセージとエラー コードが返されます。

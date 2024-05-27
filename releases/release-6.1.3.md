@@ -1,85 +1,89 @@
 ---
 title: TiDB 6.1.3 Release Notes
-summary: TiDB 6.1.3 was released on December 5, 2022. The release includes compatibility changes, improvements, bug fixes, and updates to various tools such as TiCDC, PD, TiKV, TiFlash, Backup & Restore, TiCDC, and TiDB Data Migration. Some notable changes include default value changes in TiCDC, lock granularity optimization in PD, and bug fixes in TiDB, PD, TiKV, TiFlash, and various tools. The release also includes an upgrade to the Go compiler version of TiDB from go1.18 to go1.19, which improves stability.
+summary: TiDB 6.1.3 は 2022 年 12 月 5 日にリリースされました。このリリースには、互換性の変更、改善、バグ修正、および TiCDC、PD、TiKV、 TiFlash、バックアップと復元、TiCDC、TiDB データ移行などのさまざまなツールの更新が含まれています。注目すべき変更点としては、TiCDC のデフォルト値の変更、PD のロック粒度の最適化、TiDB、PD、TiKV、 TiFlash、およびさまざまなツールのバグ修正などがあります。このリリースには、TiDB の Go コンパイラ バージョンが go1.18 から go1.19 にアップグレードされ、安定性が向上していることも含まれています。
 ---
 
-# TiDB 6.1.3 Release Notes
+# TiDB 6.1.3 リリースノート {#tidb-6-1-3-release-notes}
 
-Release date: December 5, 2022
+発売日: 2022年12月5日
 
-TiDB version: 6.1.3
+TiDB バージョン: 6.1.3
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
+クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [実稼働環境への導入](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
 
-## Compatibility changes
+## 互換性の変更 {#compatibility-changes}
 
-- Tools
+-   ツール
 
-    - TiCDC
+    -   ティCDC
 
-        - Change the default value of [`transaction-atomicity`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb) from `table` to `none`, which helps reduce replication latency and reduce OOM risks, and ensures that only a few transactions (the size of a single transaction exceeds 1024 rows) are split, instead of all transactions [#7505](https://github.com/pingcap/tiflow/issues/7505) [#5231](https://github.com/pingcap/tiflow/issues/5231) @[asddongmen](https://github.com/asddongmen)
+        -   デフォルト値[`transaction-atomicity`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb)を`table`から`none`に変更します。これにより、レプリケーションのレイテンシーが短縮され、OOM のリスクが軽減され、すべてのトランザクションではなく、少数のトランザクション (単一トランザクションのサイズが 1024 行を超える) のみが分割されるようになります[＃7505](https://github.com/pingcap/tiflow/issues/7505) [＃5231](https://github.com/pingcap/tiflow/issues/5231) @ [アズドンメン](https://github.com/asddongmen)
 
-## Improvements
+## 改善点 {#improvements}
 
-- PD
+-   PD
 
-    - Optimize the granularity of locks to reduce lock contention and improve the capability of processing heartbeat in high concurrency [#5586](https://github.com/tikv/pd/issues/5586) @[rleungx](https://github.com/rleungx)
+    -   ロックの粒度を最適化してロック競合を減らし、高同時実行でのハートビート処理能力を向上させる[＃5586](https://github.com/tikv/pd/issues/5586) @ [rleungx](https://github.com/rleungx)
 
-- Tools
+-   ツール
 
-    - TiCDC
+    -   ティCDC
 
-        - Enable transaction split and disable the safe mode of a changefeed in TiCDC by default to improve performance [#7505](https://github.com/pingcap/tiflow/issues/7505) @[asddongmen](https://github.com/asddongmen)
-        - Improve the performance of Kafka protocol encoder [#7540](https://github.com/pingcap/tiflow/issues/7540), [#7532](https://github.com/pingcap/tiflow/issues/7532), [#7543](https://github.com/pingcap/tiflow/issues/7543) @[sdojjy](https://github.com/sdojjy) @[3AceShowHand](https://github.com/3AceShowHand)
+        -   パフォーマンスを向上させるために、TiCDC でトランザクション分割を有効にし、変更フィードのセーフ モードをデフォルトで無効にします[＃7505](https://github.com/pingcap/tiflow/issues/7505) @ [アズドンメン](https://github.com/asddongmen)
+        -   [＃7532](https://github.com/pingcap/tiflow/issues/7532)プロトコル エンコーダー[＃7540](https://github.com/pingcap/tiflow/issues/7540) @ [＃7543](https://github.com/pingcap/tiflow/issues/7543) [スドジ](https://github.com/sdojjy) [3エースショーハンド](https://github.com/3AceShowHand)のパフォーマンスを向上
 
-- Others
+-   その他
 
-    - Upgrade the Go compiler version of TiDB from go1.18 to [go1.19](https://go.dev/doc/go1.19), which improves the TiDB stability. Specifically, a Go environment variable [`GOMEMLIMIT`](https://pkg.go.dev/runtime@go1.19#hdr-Environment_Variables) is introduced to keep the memory usage of TiDB below a certain threshold. This helps mitigate most OOM issues. For more information, see [Mitigate OOM issues by configuring the `GOMEMLIMIT`](/configure-memory-usage.md#mitigate-oom-issues-by-configuring-gomemlimit).
+    -   TiDB の Go コンパイラー バージョンを go1.18 から[1.19 へ](https://go.dev/doc/go1.19)にアップグレードすると、TiDB の安定性が向上します。具体的には、TiDB のメモリ使用量を一定のしきい値未満に保つために、Go 環境変数[`GOMEMLIMIT`](https://pkg.go.dev/runtime@go1.19#hdr-Environment_Variables)が導入されました。これにより、ほとんどの OOM の問題が軽減されます。詳細については、 [`GOMEMLIMIT`を設定してOOMの問題を軽減する](/configure-memory-usage.md#mitigate-oom-issues-by-configuring-gomemlimit)を参照してください。
 
-## Bug fixes
+## バグの修正 {#bug-fixes}
 
-+ TiDB
+-   ティビ
 
-    - Fix the issue that the `grantor` field is missing in the `mysql.tables_priv` table [#38293](https://github.com/pingcap/tidb/issues/38293) @[CbcWestwolf](https://github.com/CbcWestwolf)
-    - Fix the issue of the wrong query result that occurs when the mistakenly pushed-down conditions are discarded by Join Reorder [#38736](https://github.com/pingcap/tidb/issues/38736) @[winoros](https://github.com/winoros)
-    - Fix the issue that the lock acquired by `get_lock()` cannot hold for more than 10 minutes [#38706](https://github.com/pingcap/tidb/issues/38706) @[tangenta](https://github.com/tangenta)
-    - Fix the issue that the auto-increment column cannot be used with check constraint [#38894](https://github.com/pingcap/tidb/issues/38894) @[YangKeao](https://github.com/YangKeao)
-    - Fix the issue that the gPRC log is output to a wrong file [#38941](https://github.com/pingcap/tidb/issues/38941) @[xhebox](https://github.com/xhebox)
-    - Fix the issue that the TiFlash sync status of a table is not deleted from etcd when the table is truncated or dropped [#37168](https://github.com/pingcap/tidb/issues/37168) @[CalvinNeo](https://github.com/CalvinNeo)
-    - Fix the issue that data files can be accessed unrestrainedly via data source name injection (CVE-2022-3023) [#38541](https://github.com/pingcap/tidb/issues/38541) @[lance6716](https://github.com/lance6716)
-    - Fix the issue that the function `str_to_date` returns wrong result in the `NO_ZERO_DATE` SQL mode [#39146](https://github.com/pingcap/tidb/issues/39146) @[mengxin9014](https://github.com/mengxin9014)
-    - Fix the issue that statistics collection tasks in the background might panic [#35421](https://github.com/pingcap/tidb/issues/35421) @[lilinghai](https://github.com/lilinghai)
-    - Fix the issue that in some scenarios the pessimistic lock is incorrectly added to the non-unique secondary index [#36235](https://github.com/pingcap/tidb/issues/36235) @[ekexium](https://github.com/ekexium)
+    -   `mysql.tables_priv`テーブル[＃38293](https://github.com/pingcap/tidb/issues/38293) @ [Cbcウェストウルフ](https://github.com/CbcWestwolf)で`grantor`フィールドが欠落している問題を修正
+    -   結合したテーブルの再配置 [＃38736](https://github.com/pingcap/tidb/issues/38736) @ [ウィノロス](https://github.com/winoros)によって誤ってプッシュダウンされた条件が破棄されたときに発生する間違ったクエリ結果の問題を修正しました。
+    -   `get_lock()`で取得したロックが 10 分以上保持できない問題を修正[＃38706](https://github.com/pingcap/tidb/issues/38706) @ [タンジェンタ](https://github.com/tangenta)
+    -   自動インクリメント列がチェック制約[＃38894](https://github.com/pingcap/tidb/issues/38894) @ [ヤンケオ](https://github.com/YangKeao)で使用できない問題を修正
+    -   gPRCログが間違ったファイルに出力される問題を修正[＃38941](https://github.com/pingcap/tidb/issues/38941) @ [xhebox](https://github.com/xhebox)
+    -   テーブルが切り捨てられたり削除されたりしても、テーブルのTiFlash同期ステータスが etcd から削除されない問題を修正[＃37168](https://github.com/pingcap/tidb/issues/37168) @ [カルビンネオ](https://github.com/CalvinNeo)
+    -   データソース名インジェクションによりデータファイルに無制限にアクセスできる問題を修正 (CVE-2022-3023) [＃38541](https://github.com/pingcap/tidb/issues/38541) @ [ランス6716](https://github.com/lance6716)
+    -   関数`str_to_date` `NO_ZERO_DATE` 3SQLモード[＃39146](https://github.com/pingcap/tidb/issues/39146) @ [メンシン9014](https://github.com/mengxin9014)で間違った結果を返す問題を修正
+    -   バックグラウンドでの統計収集タスクがpanicになる可能性がある問題を修正[＃35421](https://github.com/pingcap/tidb/issues/35421) @ [リリンハイ](https://github.com/lilinghai)
+    -   いくつかのシナリオで、悲観的ロックが非一意のセカンダリインデックス[＃36235](https://github.com/pingcap/tidb/issues/36235) @ [エキシウム](https://github.com/ekexium)に誤って追加される問題を修正しました。
 
-- PD
+<!---->
 
-    - Fix inaccurate Stream timeout and accelerate leader switchover [#5207](https://github.com/tikv/pd/issues/5207) @[CabinfeverB](https://github.com/CabinfeverB)
+-   PD
 
-+ TiKV
+    -   不正確なストリームタイムアウトを修正し、リーダーの切り替えを高速化[＃5207](https://github.com/tikv/pd/issues/5207) @ [キャビンフィーバーB](https://github.com/CabinfeverB)
 
-    - Fix abnormal Region competition caused by expired lease during snapshot acquisition [#13553](https://github.com/tikv/tikv/issues/13553) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
+<!---->
 
-+ TiFlash
+-   ティクヴ
 
-    - Fix the issue that logical operators return wrong results when the argument type is `UInt8` [#6127](https://github.com/pingcap/tiflash/issues/6127) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    - Fix the issue that wrong data input for `CAST(value AS DATETIME)` causing high TiFlash sys CPU [#5097](https://github.com/pingcap/tiflash/issues/5097) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    - Fix the issue that heavy write pressure might generate too many column files in the delta layer [#6361](https://github.com/pingcap/tiflash/issues/6361) @[lidezhu](https://github.com/lidezhu)
-    - Fix the issue that column files in the delta layer cannot be compacted after restarting TiFlash [#6159](https://github.com/pingcap/tiflash/issues/6159) @[lidezhu](https://github.com/lidezhu)
+    -   スナップショット取得中に期限切れのリースが原因で発生する異常なリージョン競合を修正[＃13553](https://github.com/tikv/tikv/issues/13553) @ [スペードA-タン](https://github.com/SpadeA-Tang)
 
-+ Tools
+-   TiFlash
 
-    + Backup & Restore (BR)
+    -   引数の型が`UInt8` [＃6127](https://github.com/pingcap/tiflash/issues/6127) @ [翻訳者](https://github.com/xzhangxian1008)の場合に論理演算子が間違った結果を返す問題を修正しました
+    -   `CAST(value AS DATETIME)`の誤ったデータ入力によりTiFlash sys CPU [＃5097](https://github.com/pingcap/tiflash/issues/5097) @ [翻訳者](https://github.com/xzhangxian1008)の負荷が高くなる問題を修正
+    -   書き込み圧力が高すぎるとデルタレイヤー[＃6361](https://github.com/pingcap/tiflash/issues/6361) @ [リデズ](https://github.com/lidezhu)に列ファイルが大量に生成される問題を修正しました。
+    -   TiFlash [＃6159](https://github.com/pingcap/tiflash/issues/6159) @ [リデズ](https://github.com/lidezhu)を再起動した後、デルタレイヤーの列ファイルを圧縮できない問題を修正しました。
 
-        - Fix the issue that restore tasks fail when using old framework for collations in databases or tables [#39150](https://github.com/pingcap/tidb/issues/39150) @[MoCuishle28](https://github.com/MoCuishle28)
+-   ツール
 
-    + TiCDC
+    -   バックアップと復元 (BR)
 
-        - Fix data loss occurred in the scenario of executing DDL statements first and then pausing and resuming the changefeed [#7682](https://github.com/pingcap/tiflow/issues/7682) @[asddongmen](https://github.com/asddongmen)
-        - Fix the issue that the sink component gets stuck if the downstream network is unavailable [#7706](https://github.com/pingcap/tiflow/issues/7706) @[hicqu](https://github.com/hicqu)
+        -   データベースまたはテーブル[＃39150](https://github.com/pingcap/tidb/issues/39150) @ [モクイシュル28](https://github.com/MoCuishle28)の照合に古いフレームワークを使用すると復元タスクが失敗する問題を修正しました
 
-    + TiDB Data Migration (DM)
+    -   ティCDC
 
-        - Fix the issue that when `collation_compatible` is set to `"strict"`, DM might generate SQL with duplicated collations [#6832](https://github.com/pingcap/tiflow/issues/6832) @[lance6716](https://github.com/lance6716)
-        - Fix the issue that DM tasks might stop with an `Unknown placement policy` error [#7493](https://github.com/pingcap/tiflow/issues/7493) @[lance6716](https://github.com/lance6716)
-        - Fix the issue that relay logs might be pulled from upstream again in some cases [#7525](https://github.com/pingcap/tiflow/issues/7525) @[liumengya94](https://github.com/liumengya94)
-        - Fix the issue that data is replicated for multiple times when a new DM worker is scheduled before the existing worker exits [#7658](https://github.com/pingcap/tiflow/issues/7658) @[GMHDBJD](https://github.com/GMHDBJD)
+        -   最初に DDL ステートメントを実行し、次に変更フィード[＃7682](https://github.com/pingcap/tiflow/issues/7682) @ [アズドンメン](https://github.com/asddongmen)を一時停止して再開するシナリオで発生したデータ損失を修正しました。
+        -   ダウンストリームネットワークが利用できない場合にシンクコンポーネントが停止する問題を修正[＃7706](https://github.com/pingcap/tiflow/issues/7706) @ [ヒック](https://github.com/hicqu)
+
+    -   TiDB データ移行 (DM)
+
+        -   `collation_compatible` `"strict"`に設定すると、DM が重複した照合順序[＃6832](https://github.com/pingcap/tiflow/issues/6832) @ [ランス6716](https://github.com/lance6716)を持つ SQL を生成する可能性がある問題を修正しました。
+        -   DMタスクが`Unknown placement policy`エラー[＃7493](https://github.com/pingcap/tiflow/issues/7493) @ [ランス6716](https://github.com/lance6716)で停止する可能性がある問題を修正
+        -   場合によってはリレーログがアップストリームから再度プルされる可能性がある問題を修正[＃7525](https://github.com/pingcap/tiflow/issues/7525) @ [りゅうめんぎゃ](https://github.com/liumengya94)
+        -   既存のワーカーが終了する前に新しい DM ワーカーがスケジュールされると、データが複数回複製される問題を修正[＃7658](https://github.com/pingcap/tiflow/issues/7658) @ [GMHDBJD](https://github.com/GMHDBJD)

@@ -1,13 +1,13 @@
 ---
 title: ALTER INDEX
-summary: An overview of the usage of ALTER INDEX for the TiDB database.
+summary: TiDB データベースの ALTER INDEX の使用法の概要。
 ---
 
-# ALTER INDEX
+# インデックスの変更 {#alter-index}
 
-The `ALTER INDEX` statement is used to modify the visibility of the index to `Visible` or `Invisible`. Invisible indexes are maintained by DML statements, but will not be used by the query optimizer. This is useful in scenarios where you want to double-check before removing an index permanently. Starting from TiDB v8.0.0, you can make the optimizer select invisible indexes by modifying the system variable [`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800).
+`ALTER INDEX`ステートメントは、インデックスの可視性を`Visible`または`Invisible`に変更するために使用されます。非表示のインデックスは DML ステートメントによって維持されますが、クエリ オプティマイザーでは使用されません。これは、インデックスを永続的に削除する前に再確認したいシナリオで役立ちます。TiDB v8.0.0 以降では、システム変数[`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)を変更することで、オプティマイザーが非表示のインデックスを選択するようにすることができます。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AlterTableStmt
@@ -17,11 +17,9 @@ AlterIndexSpec
          ::= 'ALTER' 'INDEX' Identifier ( 'VISIBLE' | 'INVISIBLE' )
 ```
 
-## Examples
+## 例 {#examples}
 
-You can modify the visibility of an index using the `ALTER TABLE ... ALTER INDEX ...` statement.
-
-{{< copyable "sql" >}}
+`ALTER TABLE ... ALTER INDEX ...`ステートメントを使用してインデックスの可視性を変更できます。
 
 ```sql
 CREATE TABLE t1 (c1 INT, UNIQUE(c1));
@@ -31,8 +29,6 @@ ALTER TABLE t1 ALTER INDEX c1 INVISIBLE;
 ```sql
 Query OK, 0 rows affected (0.02 sec)
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 SHOW CREATE TABLE t1;
@@ -51,9 +47,7 @@ SHOW CREATE TABLE t1;
 1 row in set (0.00 sec)
 ```
 
-The optimizer cannot use the **invisible index** of `c1`.
-
-{{< copyable "sql" >}}
+オプティマイザーは**非表示のインデックス**`c1`を使用できません。
 
 ```sql
 EXPLAIN SELECT c1 FROM t1 ORDER BY c1;
@@ -70,9 +64,7 @@ EXPLAIN SELECT c1 FROM t1 ORDER BY c1;
 3 rows in set (0.00 sec)
 ```
 
-By comparison, `c2` is a **visible index** and can be used by the optimizer.
-
-{{< copyable "sql" >}}
+比較すると、 `c2`**可視インデックス**であり、オプティマイザーで使用できます。
 
 ```sql
 EXPLAIN SELECT c2 FROM t1 ORDER BY c2;
@@ -88,9 +80,7 @@ EXPLAIN SELECT c2 FROM t1 ORDER BY c2;
 2 rows in set (0.00 sec)
 ```
 
-Even if you use the `USE INDEX` SQL hint to forcibly use indexes, the optimizer still cannot use invisible indexes; otherwise, an error is returned.
-
-{{< copyable "sql" >}}
+`USE INDEX` SQL ヒントを使用して強制的にインデックスを使用した場合でも、オプティマイザーは非表示のインデックスを使用できません。そうでない場合は、エラーが返されます。
 
 ```sql
 SELECT * FROM t1 USE INDEX(c1);
@@ -100,11 +90,9 @@ SELECT * FROM t1 USE INDEX(c1);
 ERROR 1176 (42000): Key 'c1' doesn't exist in table 't1'
 ```
 
-> **Note:**
+> **注記：**
 >
-> "Invisible" here means invisible only to the optimizer. You can still modify or delete invisible indexes.
-
-{{< copyable "sql" >}}
+> ここでの「非表示」とは、オプティマイザに対してのみ非表示であることを意味します。非表示のインデックスを変更または削除することは可能です。
 
 ```sql
 ALTER TABLE t1 DROP INDEX c1;
@@ -114,15 +102,15 @@ ALTER TABLE t1 DROP INDEX c1;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-* Invisible indexes in TiDB are modeled on the equivalent feature from MySQL 8.0.
-* Similar to MySQL, TiDB does not permit `PRIMARY KEY` indexes to be made invisible.
+-   TiDB の非表示インデックスは、MySQL 8.0 の同等の機能に基づいてモデル化されています。
+-   MySQL と同様に、TiDB では`PRIMARY KEY`インデックスを非表示にすることはできません。
 
-## See also
+## 参照 {#see-also}
 
-* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
-* [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
-* [ADD INDEX](/sql-statements/sql-statement-add-index.md)
-* [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
-* [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
+-   [インデックスを追加](/sql-statements/sql-statement-add-index.md)
+-   [インデックスを削除](/sql-statements/sql-statement-drop-index.md)
+-   [インデックス名の変更](/sql-statements/sql-statement-rename-index.md)

@@ -1,15 +1,15 @@
 ---
 title: RUNAWAY_WATCHES
-summary: Learn the `RUNAWAY_WATCHES` INFORMATION_SCHEMA table.
+summary: `RUNAWAY_WATCHES` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# RUNAWAY_WATCHES
+# ランナウェイウォッチ {#runaway-watches}
 
-The `RUNAWAY_WATCHES` table shows the watch list of runaway queries that consume more resources than expected. For more information, see [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries).
+`RUNAWAY_WATCHES`表には、予想よりも多くのリソースを消費するランナウェイ クエリの監視リストが表示されます。詳細については、 [ランナウェイクエリ](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries)を参照してください。
 
-> **Note:**
+> **注記：**
 >
-> This table is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> このテーブルは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -32,15 +32,15 @@ DESC RUNAWAY_WATCHES;
 8 rows in set (0.00 sec)
 ```
 
-## Examples
+## 例 {#examples}
 
-Query the watch list of runaway queries:
+ランナウェイクエリのウォッチリストをクエリします。
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES\G
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 *************************** 1. row ***************************
@@ -64,19 +64,19 @@ RESOURCE_GROUP_NAME: rg2
 2 rows in set (0.00 sec)
 ```
 
-Add a watch item into list to the resource group `rg1`:
+リソース グループ`rg1`のリストに監視項目を追加します。
 
 ```sql
 QUERY WATCH ADD RESOURCE GROUP rg1 SQL TEXT EXACT TO 'select * from sbtest.sbtest1';
 ```
 
-Query the watch list of runaway queries again:
+ランナウェイ クエリの監視リストを再度クエリします。
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES\G
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 *************************** 1. row ***************************
@@ -109,15 +109,15 @@ RESOURCE_GROUP_NAME: rg1
 3 row in set (0.00 sec)
 ```
 
-The meaning of each column field in the `RUNAWAY_WATCHES` table is as follows:
+`RUNAWAY_WATCHES`表の各列フィールドの意味は次のとおりです。
 
-- `ID`: the ID of the watch item.
-- `RESOURCE_GROUP_NAME`: the name of the resource group.
-- `START_TIME`: the start time.
-- `END_TIME`: the end time. `UNLIMITED` means that the watch item has an unlimited validity period.
-- `WATCH`: the match type of the quick identification. The values are as follows:
-    - `Plan` indicates that the Plan Digest is matched. In this case, the `WATCH_TEXT` column shows the Plan Digest.
-    - `Similar` indicates that the SQL Digest is matched. In this case, the `WATCH_TEXT` column shows the SQL Digest.
-    - `Exact` indicates that the SQL text is matched. In this case, the `WATCH_TEXT` column shows the SQL text.
-- `SOURCE`: the source of the watch item. If it is identified by the `QUERY_LIMIT` rule, the identified TiDB IP address is displayed. If it is manually added, `manual` is displayed.
-- `ACTION`: the corresponding operation after the identification.
+-   `ID` : 監視項目の ID。
+-   `RESOURCE_GROUP_NAME` : リソース グループの名前。
+-   `START_TIME` : 開始時刻。
+-   `END_TIME` : 終了時刻。2 `UNLIMITED` 、監視項目の有効期間が無制限であることを意味します。
+-   `WATCH` : クイック識別の一致タイプ。値は次のとおりです。
+    -   `Plan` 、プラン ダイジェストが一致していることを示します。この場合、 `WATCH_TEXT`列目にプラン ダイジェストが表示されます。
+    -   `Similar` 、SQL ダイジェストが一致したことを示します。この場合、 `WATCH_TEXT`列目に SQL ダイジェストが表示されます。
+    -   `Exact` SQL テキストが一致したことを示します。この場合、 `WATCH_TEXT`列目に SQL テキストが表示されます。
+-   `SOURCE` : `QUERY_LIMIT`項目のソース。2 ルールで識別された場合は、識別された TiDB IP アドレスが表示されます。手動で追加された場合は、 `manual`が表示されます。
+-   `ACTION` : 識別後の対応する操作。

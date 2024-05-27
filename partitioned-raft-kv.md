@@ -1,47 +1,47 @@
 ---
 title: Partitioned Raft KV
-summary: Learn about the partitioned Raft KV feature of TiKV.
+summary: TiKV のパーティション化されたRaft KV 機能について学習します。
 ---
 
-# Partitioned Raft KV
+# 分割RaftKV {#partitioned-raft-kv}
 
-> **Warning:**
+> **警告：**
 >
-> Partitioned Raft KV is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> Partitioned Raft KV は実験的機能です。本番環境での使用は推奨されません。この機能は予告なしに変更または削除される可能性があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)報告できます。
 
-Before v6.6.0, TiKV's Raft-based storage engine used a single RocksDB instance to store the data of all Regions of the TiKV instance.
+v6.6.0 より前では、TiKV の Raft ベースのstorageエンジンは、単一の RocksDB インスタンスを使用して、TiKV インスタンスのすべてのリージョンのデータを格納していました。
 
-To support larger clusters more stably, starting from TiDB v6.6.0, a new TiKV storage engine is introduced, which uses multiple RocksDB instances to store TiKV Region data, and the data of each Region is independently stored in a separate RocksDB instance.
+より大規模なクラスターをより安定的にサポートするために、TiDB v6.6.0 以降では、複数の RocksDBstorageを使用して TiKVリージョンデータを保存し、各リージョンのデータを個別の RocksDB インスタンスに独立して保存する新しい TiKV ストレージ エンジンが導入されました。
 
-The new engine can better control the number and level of files in each RocksDB instance, achieve physical isolation of data operations between Regions, and support stably managing more data. You can see it as TiKV managing multiple RocksDB instances through partitioning, which is why the feature is named Partitioned Raft KV.
+新しいエンジンは、各 RocksDB インスタンス内のファイルの数とレベルをより適切に制御し、リージョン間のデータ操作の物理的な分離を実現し、より多くのデータを安定して管理することをサポートします。これは、パーティション分割によって複数の RocksDB インスタンスを管理する TiKV と見なすことができます。そのため、この機能は Partitioned Raft KV と名付けられています。
 
-## Application scenarios
+## アプリケーションシナリオ {#application-scenarios}
 
-You can use this feature if your TiKV cluster has the following characteristics:
+TiKV クラスターに次の特性がある場合、この機能を使用できます。
 
-* A single TiKV instance needs to support more data.
-* There are many write requests.
-* Scale-in and scale-out operations are frequent.
-* The workload has a serious read and write amplification.
-* TiKV has sufficient memory.
+-   単一の TiKV インスタンスでより多くのデータをサポートする必要があります。
+-   書き込みリクエストが多数あります。
+-   スケールインおよびスケールアウト操作が頻繁に行われます。
+-   ワークロードには、重大な読み取りおよび書き込み増幅があります。
+-   TiKV には十分なメモリがあります。
 
-Advantages of this feature are better write performance, faster scaling speed, and larger volume of data supported with the same hardware. It can also support larger cluster scale.
+この機能の利点は、書き込みパフォーマンスの向上、スケーリング速度の高速化、同じハードウェアでサポートされるデータの量の増加です。また、より大きなクラスター スケールもサポートできます。
 
-## Usage
+## 使用法 {#usage}
 
-To enable Partitioned Raft KV, set the configuration item [`storage.engine`](/tikv-configuration-file.md#engine-new-in-v660) to `"partitioned-raft-kv"` when creating a cluster. At the same time, you can use the configuration items [`rocksdb.write-buffer-flush-oldest-first`](/tikv-configuration-file.md#write-buffer-flush-oldest-first-new-in-v660) and [`rocksdb.write-buffer-limit`](/tikv-configuration-file.md#write-buffer-limit-new-in-v660) to control the memory usage of RocksDB when using Raft KV.
+Partitioned Raft KV を有効にするには、クラスター作成時に設定項目[`storage.engine`](/tikv-configuration-file.md#engine-new-in-v660) ～ `"partitioned-raft-kv"`を設定します。同時に、設定項目[`rocksdb.write-buffer-flush-oldest-first`](/tikv-configuration-file.md#write-buffer-flush-oldest-first-new-in-v660)と[`rocksdb.write-buffer-limit`](/tikv-configuration-file.md#write-buffer-limit-new-in-v660)を使用して、 Raft KV 使用時の RocksDB のメモリ使用量を制御できます。
 
-## Restrictions
+## 制限 {#restrictions}
 
-Partitioned Raft KV has the following restrictions:
+パーティション化されたRaft KV には次の制限があります。
 
-* It does not support EBS volume snapshot backup yet.
-* It does not support online unsafe recovery or Titan yet.
-* It does not support the following subcommands of the tikv-ctl command-line tool:
-    * `unsafe-recover`
-    * `raw-scan`
-    * `remove-fail-stores`
-    * `recreate-region`
-    * `reset-to-version`
-* It is not compatible with TiFlash yet.
-* You cannot enable or disable this feature after the cluster is initialized.
+-   EBS ボリューム スナップショット バックアップはまだサポートされていません。
+-   オンラインの安全でない復元や Titan はまだサポートされていません。
+-   tikv-ctl コマンドライン ツールの次のサブコマンドはサポートされていません。
+    -   `unsafe-recover`
+    -   `raw-scan`
+    -   `remove-fail-stores`
+    -   `recreate-region`
+    -   `reset-to-version`
+-   まだTiFlashと互換性がありません。
+-   クラスターが初期化された後は、この機能を有効または無効にすることはできません。

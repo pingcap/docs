@@ -1,62 +1,62 @@
 ---
 title: Connect to Your TiDB Serverless Cluster
-summary: Learn how to connect to your TiDB Serverless cluster via different methods.
+summary: さまざまな方法で TiDB Serverless クラスターに接続する方法を学習します。
 ---
 
-# Connect to Your TiDB Serverless Cluster
+# TiDB サーバーレスクラスタに接続する {#connect-to-your-tidb-serverless-cluster}
 
-This document describes how to connect to your TiDB Serverless cluster.
+このドキュメントでは、TiDB Serverless クラスターに接続する方法について説明します。
 
-> **Tip:**
+> **ヒント：**
 >
-> To learn how to connect to a TiDB Dedicated cluster, see [Connect to Your TiDB Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+> TiDB 専用クラスターに接続する方法については、 [TiDB専用クラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)参照してください。
 
-## Connection methods
+## 接続方法 {#connection-methods}
 
-After your TiDB Serverless cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
+TiDB Cloud上に TiDB Serverless クラスターが作成されたら、次のいずれかの方法で接続できます。
 
-- Direct connections
+-   直接接続
 
-  Direct connections mean the MySQL native connection system over TCP. You can connect to your TiDB Serverless cluster using any tool that supports MySQL connection, such as [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html).
+    直接接続とは、TCP 経由の MySQL ネイティブ接続システムを意味します。1 [MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)の MySQL 接続をサポートする任意のツールを使用して、TiDB Serverless クラスターに接続できます。
 
-- [Data Service (beta)](/tidb-cloud/data-service-overview.md)
+-   [データ サービス (ベータ版)](/tidb-cloud/data-service-overview.md)
 
-  TiDB Cloud provides a Data Service feature that enables you to connect to your TiDB Serverless cluster via an HTTPS request using a custom API endpoint. Unlike direct connections, Data Service accesses TiDB Serverless data via a RESTful API rather than raw SQL.
+    TiDB Cloud は、カスタム API エンドポイントを使用して HTTPS リクエスト経由で TiDB Serverless クラスターに接続できるデータ サービス機能を提供します。直接接続とは異なり、データ サービスは生の SQL ではなく RESTful API 経由で TiDB Serverless データにアクセスします。
 
-- [Serverless Driver (beta)](/tidb-cloud/serverless-driver.md)
+-   [サーバーレスDriver(ベータ版)](/tidb-cloud/serverless-driver.md)
 
-  TiDB Cloud provides a serverless driver for JavaScript, which allows you to connect to your TiDB Serverless cluster in edge environments with the same experience as direct connections.
+    TiDB Cloud はJavaScript 用のサーバーレス ドライバーを提供しており、これにより、直接接続と同じエクスペリエンスでエッジ環境の TiDB Serverless クラスターに接続できます。
 
-In the preceding connection methods, you can choose your desired one based on your needs:
+上記の接続方法では、ニーズに応じて希望するものを選択できます。
 
-| Connection method  | User interface     | Scenario                                                                                                                                                       |
-|--------------------|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Direct connections | SQL/ORM            | Long-running environment, such as Java, Node.js, and Python.                                                                                                   |
-| Data Service       | RESTful API        | All browser and application interactions.                                                                                                                      |
-| Serverless Driver  | SQL/ORM            | Serverless and edge environments such as [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/). |
+| 接続方法         | ユーザーインターフェース | シナリオ                                                                                                                                  |
+| ------------ | ------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| 直接接続         | SQL/ORM      | Java、Node.js、Python などの長期実行環境。                                                                                                        |
+| データサービス      | RESTful API  | すべてのブラウザとアプリケーションのインタラクション。                                                                                                           |
+| サーバーレスDriver | SQL/ORM      | [Vercel エッジ機能](https://vercel.com/docs/functions/edge-functions)や[Cloudflare ワーカー](https://workers.cloudflare.com/)などのサーバーレス環境やエッジ環境。 |
 
-## Network
+## 通信網 {#network}
 
-There are two network connection types for TiDB Serverless:
+TiDB Serverless には 2 つのネットワーク接続タイプがあります。
 
-- [Private endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) (recommended)
+-   [プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) (推奨)
 
-    Private endpoint connection provides a private endpoint to allow SQL clients in your VPC to securely access services over AWS PrivateLink, which provides highly secure and one-way access to database services with simplified network management.
+    プライベートエンドポイント接続は、VPC 内の SQL クライアントが AWS PrivateLink 経由で安全にサービスにアクセスできるようにするプライベートエンドポイントを提供します。これにより、簡素化されたネットワーク管理でデータベースサービスへの非常に安全な一方向アクセスが提供されます。
 
-- [Public endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
+-   [パブリックエンドポイント](/tidb-cloud/connect-via-standard-connection-serverless.md)
 
-  The standard connection exposes a public endpoint, so you can connect to your TiDB cluster via a SQL client from your laptop.
+    標準接続ではパブリック エンドポイントが公開されるため、ラップトップから SQL クライアントを介して TiDB クラスターに接続できます。
 
-  TiDB Serverless requires [TLS connections](/tidb-cloud/secure-connections-to-serverless-clusters.md), which ensures the security of data transmission from your applications to TiDB clusters.
+    TiDB Serverless には[TLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)必要であり、これによりアプリケーションから TiDB クラスターへのデータ転送のセキュリティが確保されます。
 
-The following table shows the network you can use in different connection methods:
+次の表は、さまざまな接続方法で使用できるネットワークを示しています。
 
-| Connection method          | Network                      | Description                                                                                                       |
-|----------------------------|------------------------------|-------------------------------------------------------------------------------------------------------------------|
-| Direct connections         | Public or private endpoint   | Direct connections can be made via both public and private endpoints.                                             |
-| Data Service (beta)        | /                            | Accessing TiDB Serverless via Data Service (beta) does not need to specify the network type.                      |
-| Serverless Driver (beta)   | Public endpoint              | Serverless Driver only supports connections via public endpoint.                                                  |
+| 接続方法               | 通信網                   | 説明                                                                     |
+| ------------------ | --------------------- | ---------------------------------------------------------------------- |
+| 直接接続               | パブリックまたはプライベートエンドポイント | 直接接続は、パブリック エンドポイントとプライベート エンドポイントの両方を介して行うことができます。                    |
+| データ サービス (ベータ版)    | /                     | データ サービス (ベータ版) 経由で TiDB Serverless にアクセスする場合、ネットワーク タイプを指定する必要はありません。 |
+| サーバーレスDriver(ベータ版) | パブリックエンドポイント          | Serverless Driver は、パブリック エンドポイント経由の接続のみをサポートします。                      |
 
-## What's next
+## 次は何ですか {#what-s-next}
 
-After you have successfully connected to your TiDB cluster, you can [explore SQL statements with TiDB](/basic-sql-operations.md).
+TiDB クラスターに正常に接続されたら、 [TiDBでSQL文を調べる](/basic-sql-operations.md)実行できます。

@@ -1,68 +1,68 @@
 ---
 title: PD Microservices
-summary: Learn how to enable the microservice mode of PD to improve service quality.
+summary: PD のマイクロサービス モードを有効にしてサービス品質を向上させる方法を学習します。
 ---
 
-# PD Microservices
+# PD マイクロサービス {#pd-microservices}
 
-Starting from v8.0.0, PD supports the microservice mode, which splits the timestamp allocation and cluster scheduling functions of PD into the following two independently deployed microservices. In this way, these two functions are decoupled from the routing function of PD, which allows PD to focus on the routing service for metadata.
+v8.0.0 以降、PD はマイクロサービス モードをサポートしており、PD のタイムスタンプ割り当て機能とクラスター スケジューリング関数を、独立してデプロイされた次の 2 つのマイクロサービスに分割します。これにより、これら 2 つの関数が PD のルーティング機能から分離され、PD はメタデータのルーティング サービスに集中できるようになります。
 
-- `tso` microservice: provides monotonically increasing timestamp allocation for the entire cluster.
-- `scheduling` microservice: provides scheduling functions for the entire cluster, including but not limited to load balancing, hot spot handling, replica repair, and replica placement.
+-   `tso`マイクロサービス: クラスター全体に対して単調に増加するタイムスタンプ割り当てを提供します。
+-   `scheduling`マイクロサービス: 負荷分散、ホットスポット処理、レプリカ修復、レプリカ配置など、クラスター全体のスケジュール関数を提供します。
 
-Each microservice is deployed as an independent process. If you configure more than one replica for a microservice, the microservice automatically implements a primary-secondary fault-tolerant mode to ensure high availability and reliability of the service.
+各マイクロサービスは独立したプロセスとしてデプロイされます。マイクロサービスに複数のレプリカを構成すると、マイクロサービスはプライマリ/セカンダリ フォールト トレラント モードを自動的に実装し、サービスの高可用性と信頼性を確保します。
 
-> **Warning:**
+> **警告：**
 >
-> Currently, the PD microservices feature is experimental. It is not recommended that you use it in production environments. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/tikv/pd/issues) on GitHub.
+> 現在、PD マイクロサービス機能は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを見つけた場合は、GitHub で[問題](https://github.com/tikv/pd/issues)報告できます。
 
-## Usage scenarios
+## 使用シナリオ {#usage-scenarios}
 
-PD microservices are typically used to address performance bottlenecks in PD and improve PD service quality. With this feature, you can avoid the following issues:
+PD マイクロサービスは通常、PD のパフォーマンスのボトルネックを解決し、PD サービスの品質を向上させるために使用されます。この機能を使用すると、次の問題を回避できます。
 
-- Long-tail latency or jitter in TSO allocations due to excessive pressure in PD clusters
-- Service unavailability of the entire cluster due to failures in the scheduling module
-- Bottleneck issues solely caused by PD
+-   PD クラスターの過度の圧力による TSO 割り当てのロングテールレイテンシーまたはジッター
+-   スケジューリングモジュールの障害により、クラスタ全体のサービスが利用不可になる
+-   PDのみに起因するボトルネックの問題
 
-In addition, when the scheduling module is changed, you can update the `scheduling` microservice independently without restarting PD, thus avoiding any impact on the overall service of the cluster.
+さらに、スケジューリング モジュールが変更された場合、PD を再起動せずに`scheduling`マイクロサービスを個別に更新できるため、クラスターの全体的なサービスへの影響を回避できます。
 
-> **Note:**
+> **注記：**
 >
-> If the performance bottleneck of a cluster is not caused by PD, there is no need to enable microservices, because using microservices increases the number of components and raises operational costs.
+> クラスターのパフォーマンスボトルネックの原因が PD でない場合は、マイクロサービスを有効にする必要はありません。マイクロサービスを使用するとコンポーネントの数が増え、運用コストが上昇するためです。
 
-## Restrictions
+## 制限 {#restrictions}
 
-- Currently, the `tso` microservice does not support dynamic start and stop. After enabling or disabling the `tso` microservice, you need to restart the PD cluster for the changes to take effect.
-- Only the TiDB component supports a direct connection to the `tso` microservice through service discovery, while other components need to forward requests to the `tso` microservice through PD to obtain timestamps.
-- Microservices are not compatible with the [Data Replication Auto Synchronous (DR Auto-Sync)](/two-data-centers-in-one-city-deployment.md) feature.
-- Microservices are not compatible with the TiDB system variable [`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530).
-- Because [hibernate Regions](/tikv-configuration-file.md#hibernate-regions) might exist in a cluster, during a primary and secondary switchover of the `scheduling` microservice, the scheduling function of the cluster might be unavailable for a certain period (up to [`peer-stale-state-check-interval`](/tikv-configuration-file.md#peer-stale-state-check-interval), which is five minutes by default) to avoid redundant scheduling.
+-   現在、マイクロサービス`tso`動的な開始と停止をサポートしていません。マイクロサービス`tso`を有効または無効にした後、変更を有効にするには PD クラスターを再起動する必要があります。
+-   TiDBコンポーネントのみがサービス検出を通じて`tso`マイクロサービスへの直接接続をサポートしますが、他のコンポーネントはタイムスタンプを取得するために PD を通じて`tso`マイクロサービスにリクエストを転送する必要があります。
+-   マイクロサービスは[データ レプリケーション自動同期 (DR 自動同期)](/two-data-centers-in-one-city-deployment.md)機能と互換性がありません。
+-   マイクロサービスは TiDB システム変数[`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530)と互換性がありません。
+-   [休止状態領域](/tikv-configuration-file.md#hibernate-regions)クラスター内に存在する可能性があるため、 `scheduling`マイクロサービスのプライマリとセカンダリの切り替え中は、冗長なスケジューリングを回避するために、クラスターのスケジューリング機能が一定期間 (最大[`peer-stale-state-check-interval`](/tikv-configuration-file.md#peer-stale-state-check-interval) 、デフォルトでは 5 分) 使用できなくなる可能性があります。
 
-## Usage
+## 使用法 {#usage}
 
-Currently, PD microservices can be deployed using TiDB Operator.
+現在、PD マイクロサービスはTiDB Operatorを使用してデプロイできます。
 
-For detailed information on using TiDB Operator, see the following documents:
+TiDB Operatorの使用に関する詳細については、次のドキュメントを参照してください。
 
-- [Deploy PD microservices](https://docs.pingcap.com/tidb-in-kubernetes/dev/configure-a-tidb-cluster#enable-pd-microservices)
-- [Configure PD microservices](https://docs.pingcap.com/tidb-in-kubernetes/dev/configure-a-tidb-cluster#configure-pd-microservices)
-- [Modify PD microservices](https://docs.pingcap.com/tidb-in-kubernetes/dev/modify-tidb-configuration#modify-pd-microservice-configuration)
-- [Scale PD microservice components](https://docs.pingcap.com/tidb-in-kubernetes/dev/scale-a-tidb-cluster#scale-pd-microservice-components)
+-   [PDマイクロサービスのデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/dev/configure-a-tidb-cluster#enable-pd-microservices)
+-   [PDマイクロサービスを構成する](https://docs.pingcap.com/tidb-in-kubernetes/dev/configure-a-tidb-cluster#configure-pd-microservices)
+-   [PDマイクロサービスの変更](https://docs.pingcap.com/tidb-in-kubernetes/dev/modify-tidb-configuration#modify-pd-microservice-configuration)
+-   [PDマイクロサービスコンポーネントのスケール](https://docs.pingcap.com/tidb-in-kubernetes/dev/scale-a-tidb-cluster#scale-pd-microservice-components)
 
-When deploying and using PD microservices, pay attention to the following:
+PD マイクロサービスをデプロイして使用するときは、次の点に注意してください。
 
-- After you enable microservices and restart PD for a cluster, PD stops allocating TSO for the cluster. Therefore, you need to deploy the `tso` microservice in the cluster when you enable microservices.
-- If the `scheduling` microservice is deployed in a cluster, the scheduling function of the cluster is provided by the `scheduling` microservice. If the `scheduling` microservice is not deployed, the scheduling function of the cluster is still provided by PD.
-- The `scheduling` microservice supports dynamic switching, which is enabled by default (`enable-scheduling-fallback` defaults to `true`). If the process of the `scheduling` microservice is terminated, PD continues to provide scheduling services for the cluster by default.
+-   マイクロサービスを有効にしてクラスターの PD を再起動すると、PD はクラスターへの TSO の割り当てを停止します。したがって、マイクロサービスを有効にするときは、クラスターに`tso`マイクロサービスをデプロイする必要があります。
+-   `scheduling`マイクロサービスがクラスターにデプロイされている場合、クラスターのスケジューリング機能は`scheduling`のマイクロサービスによって提供されます。5 `scheduling`マイクロサービスがデプロイされていない場合でも、クラスターのスケジューリング機能は PD によって提供されます。
+-   `scheduling`マイクロサービスは動的切り替えをサポートしており、デフォルトで有効になっています ( `enable-scheduling-fallback`デフォルトは`true`です)。 `scheduling`マイクロサービスのプロセスが終了した場合、PD はデフォルトでクラスターのスケジューリング サービスを引き続き提供します。
 
-    If the binary versions of the `scheduling` microservice and PD are different, to prevent changes in the scheduling logic, you can disable the dynamic switching function of the `scheduling` microservice by executing `pd-ctl config set enable-scheduling-fallback false`. After this function is disabled, PD will not take over the scheduling service when the process of the `scheduling` microservice is terminated. This means that the scheduling service of the cluster will be unavailable until the `scheduling` microservice is restarted.
+    `scheduling`マイクロサービスと PD のバイナリ バージョンが異なる場合、スケジューリング ロジックの変更を防ぐために、 `pd-ctl config set enable-scheduling-fallback false`を実行して`scheduling`マイクロサービスの動的切り替え機能を無効にできます。この機能を無効にすると、 `scheduling`マイクロサービスのプロセスが終了しても PD はスケジューリング サービスを引き継ぎません。つまり、 `scheduling`マイクロサービスが再起動されるまで、クラスターのスケジューリング サービスは利用できなくなります。
 
-## Tool compatibility
+## ツールの互換性 {#tool-compatibility}
 
-Microservices do not affect the normal use of data import, export, and other replication tools.
+マイクロサービスは、データのインポート、エクスポート、およびその他のレプリケーション ツールの通常の使用には影響しません。
 
-## FAQs
+## よくある質問 {#faqs}
 
-- How can I determine if PD becomes a performance bottleneck?
+-   PD がパフォーマンスのボトルネックになるかどうかをどのように判断できますか?
 
-  When your cluster is in a normal state, you can check monitoring metrics in the Grafana PD panel. If the `TiDB - PD server TSO handle time` metric shows a notable increase in latency or the `Heartbeat - TiKV side heartbeat statistics` metric shows a significant number of pending items, it indicates that PD becomes a performance bottleneck.
+    クラスターが正常な状態にある場合は、Grafana PD パネルで監視メトリックを確認できます。メトリック`TiDB - PD server TSO handle time`にレイテンシーの顕著な増加が見られる場合、またはメトリック`Heartbeat - TiKV side heartbeat statistics`に保留中の項目が多数見られる場合、PD がパフォーマンスのボトルネックになっていることを示しています。

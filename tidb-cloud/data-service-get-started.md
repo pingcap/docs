@@ -1,202 +1,207 @@
 ---
 title: Get Started with Data Service
-summary: Learn how to use TiDB Cloud Data Service to access your data with HTTPS requests.
+summary: TiDB Cloudデータ サービスを使用して HTTPS リクエストでデータにアクセスする方法を学習します。
 ---
 
-# Get Started with Data Service
+# データサービスを始める {#get-started-with-data-service}
 
-Data Service (beta) enables you to access TiDB Cloud data via an HTTPS request using a custom API endpoint and allows you to seamlessly integrate with any application or service that is compatible with HTTPS.
+データ サービス (ベータ版) を使用すると、カスタム API エンドポイントを使用して HTTPS リクエスト経由でTiDB Cloudデータにアクセスし、HTTPS と互換性のある任意のアプリケーションまたはサービスとシームレスに統合できます。
 
-> **Tip:**
+> **ヒント：**
 >
-> TiDB Cloud provides a Chat2Query API for TiDB clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions.
+> TiDB Cloud は、 TiDB クラスター用の Chat2Query API を提供します。有効にすると、 TiDB Cloud は**Chat2Query**と呼ばれるシステム データ アプリと、データ サービス内の Chat2Data エンドポイントを自動的に作成します。このエンドポイントを呼び出して、指示を与えることで AI が SQL ステートメントを生成して実行できるようにすることができます。
 >
-> For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
+> 詳細については[Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)参照してください。
 
-This document introduces how to quickly get started with TiDB Cloud Data Service (beta) by creating a Data App, developing, testing, deploying, and calling an endpoint. A Data App is a collection of endpoints that you can use to access data for a specific application.
+このドキュメントでは、データ アプリを作成し、エンドポイントを開発、テスト、デプロイ、および呼び出すことで、TiDB Cloud Data Service (ベータ版) をすぐに使い始める方法を紹介します。データ アプリは、特定のアプリケーションのデータにアクセスするために使用できるエンドポイントのコレクションです。
 
-## Before you begin
+## あなたが始める前に {#before-you-begin}
 
-Before creating a Data App, make sure that you have created a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) cluster. If you do not have one, follow the steps in [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create one.
+データ アプリを作成する前に、クラスター[TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)を作成していることを確認してください。クラスターがない場合は、 [TiDB サーバーレス クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)の手順に従って作成してください。
 
-## Get started with a sample Data App
+## サンプルデータアプリを使い始める {#get-started-with-a-sample-data-app}
 
-Creating a sample Data App is the best way to get started with Data Service. If your project does not have any Data App yet, you can follow the on-screen instructions on the **Data Service** page to create a sample Data App and use this App to explore Data Service features.
+サンプル データ アプリを作成することは、データ サービスの使用を開始するのに最適な方法です。プロジェクトにまだデータ アプリがない場合は、**データ サービス**ページの画面上の指示に従ってサンプル データ アプリを作成し、このアプリを使用してデータ サービスの機能を調べることができます。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), click <MDSvgIcon name="icon-left-data-service" /> **Data Service** in the left navigation pane.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、<mdsvgicon name="icon-left-data-service">左側のナビゲーション ペインにある**データ サービス**。</mdsvgicon>
 
-2. On the **Data Service** page, click **Create Sample Data App**. A dialog is displayed.
+2.  **データ サービス**ページで、**サンプル データ アプリの作成を**クリックします。ダイアログが表示されます。
 
-3. In the dialog, update the App name if necessary, select clusters that you want the Data App to access, and then click **Create**.
+3.  ダイアログで、必要に応じてアプリ名を更新し、データ アプリがアクセスするクラスターを選択して、 **[作成] を**クリックします。
 
-    The creation process takes a few seconds.
+    作成プロセスには数秒かかります。
 
-    > **Note:**
+    > **注記：**
     >
-    > If there is no cluster in your current project, you can click **Create New Cluster** in the **Link Data Sources** drop-down list to create one first.
+    > 現在のプロジェクトにクラスターがない場合、 **「データ ソースのリンク」**ドロップダウン リストで**「新しいクラスタの作成」を**クリックして、最初にクラスターを作成できます。
 
-4. After the sample Data App is automatically created, you can find the App name, a list of endpoints in the left pane, the SQL statements of an endpoint in the middle pane, and instructions about using the sample Data App on the right side.
+4.  サンプル データ アプリが自動的に作成されると、左側のペインにアプリ名、エンドポイントのリスト、中央のペインにエンドポイントの SQL ステートメント、右側にサンプル データ アプリの使用方法の説明が表示されます。
 
-5. Follow the instructions on the right side to choose an endpoint and use the curl command to call the endpoint.
+5.  右側の指示に従ってエンドポイントを選択し、curl コマンドを使用してエンドポイントを呼び出します。
 
-## Get started with your own Data App
+## 独自のデータアプリを使い始める {#get-started-with-your-own-data-app}
 
-To get started with Data Service, you can also create your own Data App, and then develop, test, deploy, and call endpoints according to the following steps.
+Data Service の使用を開始するには、独自のデータ アプリを作成し、次の手順に従ってエンドポイントを開発、テスト、デプロイ、および呼び出すこともできます。
 
-### Step 1. Create a Data App
+### ステップ1. データアプリを作成する {#step-1-create-a-data-app}
 
- To create a Data App, perform the following steps:
+データ アプリを作成するには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), click <MDSvgIcon name="icon-left-data-service" /> **Data Service** in the left navigation pane.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、<mdsvgicon name="icon-left-data-service">左側のナビゲーション ペインにある**データ サービス**。</mdsvgicon>
 
-2. On the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project, click <MDSvgIcon name="icon-create-data-app" /> **Create DataApp** in the left pane.
+2.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページで、<mdsvgicon name="icon-create-data-app">左側のペインで**DataApp を作成します**。</mdsvgicon>
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If this is the first Data App in your project, click **Create Data App** in the middle of the page.
+    > これがプロジェクトの最初のデータ アプリである場合は、ページの中央にある**[データ アプリの作成] を**クリックします。
 
-3. In the **Create Data App** dialog, enter a name, a description, and select clusters that you want the Data App to access.
+3.  **[データ アプリの作成]**ダイアログで、名前と説明を入力し、データ アプリがアクセスするクラスターを選択します。
 
-    > **Note:**
+    > **注記：**
     >
-    > By default, the Data App type is **Standard Data App**. If you want to create a **Chat2Query Data App**, refer to [Get Started with Chat2Query API](/tidb-cloud/use-chat2query-api.md) instead of this document.
+    > デフォルトでは、データ アプリの種類は**標準データ アプリ**です。Chat2Query**データ アプリ**を作成する場合は、このドキュメントではなく[Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)を参照してください。
 
-4. (Optional) To automatically deploy endpoints of the Data App to your preferred GitHub repository and branch, enable **Connect to GitHub**, and then do the following:
+4.  (オプション) データ アプリのエンドポイントを優先 GitHub リポジトリとブランチに自動的にデプロイするには、 **GitHub に接続**を有効にして、次の操作を行います。
 
-    1. Click **Install on GitHub**, and then follow the on-screen instructions to install **TiDB Cloud Data Service** as an application on your target repository.
-    2. Click **Authorize** to authorize access to the application on GitHub.
-    3. Specify the target repository, branch, and directory where you want to save the configuration files of your Data App.
+    1.  **「GitHub にインストール」を**クリックし、画面の指示に従って、 **TiDB Cloud Data Service**をアプリケーションとしてターゲット リポジトリにインストールします。
 
-    > **Note:**
+    2.  **「承認」**をクリックして、GitHub 上のアプリケーションへのアクセスを承認します。
+
+    3.  データ アプリの構成ファイルを保存するターゲット リポジトリ、ブランチ、およびディレクトリを指定します。
+
+    > **注記：**
     >
-    > - The directory must start with a slash (`/`). For example, `/mydata`. If the directory you specified does not exist in the target repository and branch, it will be created automatically.
-    > - The combination of repository, branch, and directory identifies the path of the configuration files, which must be unique among Data Apps. If your specified path is already used by another Data App, you need to specify a new path instead. Otherwise, the endpoints configured in the TiDB Cloud console for the current Data App will overwrite the files in your specified path.
+    > -   ディレクトリはスラッシュ ( `/` ) で始まる必要があります。たとえば、 `/mydata` 。指定したディレクトリがターゲット リポジトリとブランチに存在しない場合は、自動的に作成されます。
+    > -   リポジトリ、ブランチ、ディレクトリの組み合わせによって構成ファイルのパスが識別されます。このパスはデータ アプリ間で一意である必要があります。指定したパスが別のデータ アプリで既に使用されている場合は、代わりに新しいパスを指定する必要があります。そうしないと、現在のデータ アプリのTiDB Cloudコンソールで構成されたエンドポイントによって、指定したパスのファイルが上書きされます。
 
-5. Click **Create Data App**. The [**Data Service**](https://tidbcloud.com/console/data-service) details page is displayed.
+5.  **「データアプリの作成」を**クリックします。3 [**データサービス**](https://tidbcloud.com/console/data-service)詳細ページが表示されます。
 
-6. If you have configured to connect your Data App to GitHub, check your specified GitHub directory. You will find that the [Data App configuration files](/tidb-cloud/data-service-app-config-files.md) have been committed to the directory by `tidb-cloud-data-service`, which means that your Data App is connected to GitHub successfully.
+6.  データ アプリを GitHub に接続するように構成している場合は、指定した GitHub ディレクトリを確認してください。 [データアプリ構成ファイル](/tidb-cloud/data-service-app-config-files.md)が`tidb-cloud-data-service`によってディレクトリにコミットされていることがわかります。これは、データ アプリが GitHub に正常に接続されていることを意味します。
 
-    For your new Data App, **Auto Sync & Deployment** and **Review Draft** are enabled by default so you can easily synchronize Data App changes between TiDB Cloud console and GitHub and review changes before the deployment. For more information about the GitHub integration, see [Deploy your Data App changes with GitHub automatically](/tidb-cloud/data-service-manage-github-connection.md).
+    新しいデータ アプリでは、**自動同期とデプロイメント**および**ドラフトの確認が**デフォルトで有効になっているため、 TiDB Cloudコンソールと GitHub 間でデータ アプリの変更を簡単に同期し、デプロイメント前に変更を確認できます。GitHub 統合の詳細については、 [データアプリの変更を GitHub で自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
 
-### Step 2. Develop an endpoint
+### ステップ2. エンドポイントを開発する {#step-2-develop-an-endpoint}
 
-An endpoint is a web API that you can customize to execute SQL statements.
+エンドポイントは、SQL ステートメントを実行するためにカスタマイズできる Web API です。
 
-After creating a Data App, a default `untitled endpoint` is created for you automatically. You can use the default endpoint to access your TiDB Cloud cluster.
+データ アプリを作成すると、デフォルトの`untitled endpoint`自動的に作成されます。デフォルトのエンドポイントを使用して、 TiDB Cloudクラスターにアクセスできます。
 
-If you want to create a new endpoint, locate the newly created Data App and click **+** **Create Endpoint** to the right of the App name.
+新しいエンドポイントを作成する場合は、新しく作成したデータ アプリを見つけて、アプリ名の右側にある [ **+****エンドポイントの作成]**をクリックします。
 
-#### Configure properties
+#### プロパティを構成する {#configure-properties}
 
-On the right pane, click the **Properties** tab and set properties for the endpoint, such as:
+右側のペインで、 **[プロパティ]**タブをクリックし、エンドポイントのプロパティを次のように設定します。
 
-- **Path**: the path that users use to access the endpoint. The combination of the request method and the path must be unique within a Data App.
+-   **パス**: ユーザーがエンドポイントにアクセスするために使用するパス。リクエスト メソッドとパスの組み合わせは、データ アプリ内で一意である必要があります。
 
-- **Endpoint URL**: (read-only) the URL is automatically generated based on the region where the corresponding cluster is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
+-   **エンドポイント URL** : (読み取り専用) URL は、対応するクラスタが配置されているリージョン、データ アプリのサービス URL、およびエンドポイントのパスに基づいて自動的に生成されます。たとえば、エンドポイントのパスが`/my_endpoint/get_id`の場合、エンドポイント URL は`https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`になります。
 
-- **Request Method**: the HTTP method of the endpoint. You can use `GET` to retrieve data, use `POST` to create or insert data, use `PUT` to update or modify data, and use `DELETE` to delete data.
+-   **リクエスト メソッド**: エンドポイントの HTTP メソッド`GET`を使用してデータを取得し、 `POST`を使用してデータを作成または挿入し、 `PUT`を使用してデータを更新または変更し、 `DELETE`を使用してデータを削除します。
 
-For more information about endpoint properties, see [Configure properties](/tidb-cloud/data-service-manage-endpoint.md#configure-properties).
+エンドポイント プロパティの詳細については、 [プロパティを構成する](/tidb-cloud/data-service-manage-endpoint.md#configure-properties)参照してください。
 
-#### Write SQL statements
+#### SQL文を書く {#write-sql-statements}
 
-You can customize SQL statements for the endpoint in the SQL editor, which is the middle pane on the **Data Service** page.
+**データ サービス**ページの中央のペインにある SQL エディターで、エンドポイントの SQL ステートメントをカスタマイズできます。
 
-1. Select a cluster.
+1.  クラスターを選択します。
 
-    > **Note:**
+    > **注記：**
     >
-    > Only clusters that are linked to the Data App are displayed in the drop-down list. To manage the linked clusters, see [Manage linked clusters](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources).
+    > ドロップダウン リストには、データ アプリにリンクされているクラスターのみが表示されます。リンクされたクラスターを管理するには、 [リンクされたクラスターを管理する](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)参照してください。
 
-    On the upper part of the SQL editor, select a cluster on which you want to execute SQL statements from the drop-down list. Then, you can view all databases of this cluster in the **Schema** tab on the right pane.
+    SQL エディターの上部にあるドロップダウン リストから、SQL ステートメントを実行するクラスターを選択します。すると、右側のペインの**[スキーマ]**タブに、このクラスターのすべてのデータベースが表示されます。
 
-2. Write SQL statements.
+2.  SQL ステートメントを記述します。
 
-    Before querying or modifying data, you need to first specify the database in the SQL statements. For example, `USE database_name;`.
+    データをクエリまたは変更する前に、まず SQL ステートメントでデータベースを指定する必要があります。たとえば、 `USE database_name;` 。
 
-    In the SQL editor, you can write statements such as table join queries, complex queries, and aggregate functions. You can also simply type `--` followed by your instructions to let AI generate SQL statements automatically.
+    SQL エディターでは、テーブル結合クエリ、複雑なクエリ、集計関数などのステートメントを記述できます。また、単に`--`と入力して指示を入力するだけで、AI が SQL ステートメントを自動的に生成することもできます。
 
-    To define a parameter, you can insert it as a variable placeholder like `${ID}` in the SQL statement. For example, `SELECT * FROM table_name WHERE id = ${ID}`. Then, you can click the **Params** tab on the right pane to change the parameter definition and test values.
+    パラメータを定義するには、SQL ステートメントに`${ID}`ような変数プレースホルダーとして挿入します。たとえば、 `SELECT * FROM table_name WHERE id = ${ID}` 。次に、右側のペインの**[Params]**タブをクリックして、パラメータ定義を変更し、値をテストします。
 
-    > **Note:**
+    > **注記：**
     >
-    > - The parameter name is case-sensitive.
-    > - The parameter cannot be used as a table name or column name.
+    > -   パラメータ名では大文字と小文字が区別されます。
+    > -   パラメータはテーブル名または列名として使用できません。
 
-    - In the **Definition** section, you can specify whether the parameter is required when a client calls the endpoint, the data type, and the default value of the parameter.
-    - In the **Test Values** section, you can set the test value for a parameter. The test values are used when you run the SQL statements or test the endpoint. If you do not set the test values, the default values are used.
-    - For more information, see [Configure parameters](/tidb-cloud/data-service-manage-endpoint.md#configure-parameters).
+    -   **定義**セクションでは、クライアントがエンドポイントを呼び出すときにパラメーターが必須かどうか、パラメーターのデータ型、およびデフォルト値を指定できます。
+    -   **テスト値**セクションでは、パラメータのテスト値を設定できます。テスト値は、SQL ステートメントを実行するとき、またはエンドポイントをテストするときに使用されます。テスト値を設定しない場合は、デフォルト値が使用されます。
+    -   詳細については[パラメータを設定する](/tidb-cloud/data-service-manage-endpoint.md#configure-parameters)参照してください。
 
-3. Run SQL statements.
+3.  SQL ステートメントを実行します。
 
-    If you have inserted parameters in the SQL statements, make sure that you have set test values or default values for the parameters in the **Params** tab on the right pane. Otherwise, an error is returned.
+    SQL ステートメントにパラメータを挿入した場合は、右側のペインの**[Params]**タブでパラメータのテスト値またはデフォルト値が設定されていることを確認してください。設定されていない場合は、エラーが返されます。
 
-    To run a SQL statement, select the line of the SQL with your cursor and click **Run** > **Run at cursor**.
+    SQL ステートメントを実行するには、カーソルで SQL の行を選択し、 **[実行]** &gt; **[カーソル位置で実行]**をクリックします。
 
-    To run all SQL statements in the SQL editor, click **Run**. In this case, only the last SQL results are returned.
+    SQL エディターですべての SQL ステートメントを実行するには、 **[実行] を**クリックします。この場合、最後の SQL 結果のみが返されます。
 
-    After running the statements, you can see the query results immediately in the **Result** tab at the bottom of the page.
+    ステートメントを実行すると、ページの下部にある**[結果]**タブにクエリ結果がすぐに表示されます。
 
-### Step 3. Test the endpoint (optional)
+### ステップ 3. エンドポイントをテストする (オプション) {#step-3-test-the-endpoint-optional}
 
-After configuring an endpoint, you can test the endpoint to verify whether it works as expected before deploying.
+エンドポイントを構成した後、デプロイする前にエンドポイントをテストして、期待どおりに動作するかどうかを確認できます。
 
-To test the endpoint, click **Test** in the upper-right corner or press **F5**.
+エンドポイントをテストするには、右上隅の**[テスト] を**クリックするか、 **F5**キーを押します。
 
-Then, you can see the response in the **HTTP Response** tab at the bottom of the page. For more information about the response, see [Response of an endpoint](/tidb-cloud/data-service-manage-endpoint.md#response).
+その後、ページ下部の**「HTTP レスポンス」**タブでレスポンスを確認できます。レスポンスの詳細については、 [エンドポイントの応答](/tidb-cloud/data-service-manage-endpoint.md#response)を参照してください。
 
-### Step 4. Deploy the endpoint
+### ステップ4.エンドポイントをデプロイ {#step-4-deploy-the-endpoint}
 
-To deploy the endpoint, perform the following steps:
+エンドポイントをデプロイするには、次の手順を実行します。
 
-1. On the endpoint details page, click **Deploy** in the upper-right corner.
+1.  エンドポイントの詳細ページで、右上隅の**[デプロイ] を**クリックします。
 
-2. Click **Deploy** to confirm the deployment. You will get the **Endpoint has been deployed** prompt if the endpoint is successfully deployed.
+2.  デプロイを確認するには、 **[デプロイ]**をクリックします。エンドポイントが正常にデプロイされると、[エンドポイント**がデプロイされました] という**プロンプトが表示されます。
 
-    On the right pane of the endpoint details page, you can click the **Deployments** tab to view the deployed history.
+    エンドポイントの詳細ページの右側のペインで、 **[デプロイメント]**タブをクリックすると、デプロイされた履歴を表示できます。
 
-### Step 5. Call the endpoint
+### ステップ5.エンドポイントを呼び出す {#step-5-call-the-endpoint}
 
-You can call the endpoint by sending an HTTPS request. Before calling an endpoint, you need to first obtain an API key for the Data App.
+HTTPS リクエストを送信することでエンドポイントを呼び出すことができます。エンドポイントを呼び出す前に、まずデータ アプリの API キーを取得する必要があります。
 
-#### 1. Create an API key
+#### 1. APIキーを作成する {#1-create-an-api-key}
 
-1. In the left pane of the [**Data Service**](https://tidbcloud.com/console/data-service) page, click the name of your Data App to view its details.
-2. In the **Authentication** area, click **Create API Key**.
-3. In the **Create API Key** dialog box, do the following:
+1.  [**データサービス**](https://tidbcloud.com/console/data-service)ページの左側のペインで、データ アプリの名前をクリックして詳細を表示します。
 
-    1. (Optional) Enter a description for your API key.
-    2. Select a role for your API key.
+2.  **認証**領域で、 **「API キーの作成」を**クリックします。
 
-        The role is used to control whether the API key can read or write data to the clusters linked to the Data App. You can select the `ReadOnly` or `ReadAndWrite` role:
+3.  **[API キーの作成]**ダイアログ ボックスで、次の操作を行います。
 
-        - `ReadOnly`: only allows the API key to read data, such as `SELECT`, `SHOW`, `USE`, `DESC`, and `EXPLAIN` statements.
-        - `ReadAndWrite`: allows the API key to read and write data. You can use this API key to execute all SQL statements, such as DML and DDL statements.
+    1.  (オプション) API キーの説明を入力します。
 
-    3. (Optional) Set a desired rate limit for your API key.
+    2.  API キーのロールを選択します。
 
-4. Click **Next**. The public key and private key are displayed.
+        このロールは、API キーがデータ アプリにリンクされたクラスターにデータを読み書きできるかどうかを制御するために使用されます。1 または`ReadOnly` `ReadAndWrite`ロールを選択できます。
 
-    Make sure that you have copied and saved the private key in a secure location. After leaving this page, you will not be able to get the full private key again.
+        -   `ReadOnly` : API キーは`SELECT` 、 `SHOW` 、 `USE` 、 `DESC` 、 `EXPLAIN`ステートメントなどのデータのみを読み取ることができます。
+        -   `ReadAndWrite` : API キーによるデータの読み取りと書き込みを許可します。この API キーを使用して、DML ステートメントや DDL ステートメントなどのすべての SQL ステートメントを実行できます。
 
-5. Click **Done**.
+    3.  (オプション) API キーに必要なレート制限を設定します。
 
-For more information about API keys, see [API Keys in Data Service](/tidb-cloud/data-service-api-key.md).
+4.  **「次へ」**をクリックします。公開鍵と秘密鍵が表示されます。
 
-#### 2. Get the code example
+    秘密鍵をコピーして安全な場所に保存したことを確認してください。このページを離れると、完全な秘密鍵を再度取得できなくなります。
 
-TiDB Cloud generates code examples to help you call an endpoint. To get the code example, perform the following steps:
+5.  **「完了」を**クリックします。
 
-1. In the left pane of the [**Data Service**](https://tidbcloud.com/console/data-service) page, click the name of your endpoint, and then click **...** > **Code Example** in the upper-right corner. The **Code Example** dialog box is displayed.
+API キーの詳細については、 [データサービスの API キー](/tidb-cloud/data-service-api-key.md)参照してください。
 
-2. In the dialog box, select the cluster and database that you want to use to call the endpoint, and then copy the code example.
+#### 2. コード例を取得する {#2-get-the-code-example}
 
-    An example of the curl code example is as follows:
+TiDB Cloud は、エンドポイントの呼び出しに役立つコード例を生成します。コード例を取得するには、次の手順を実行します。
+
+1.  [**データサービス**](https://tidbcloud.com/console/data-service)ページの左側のペインで、エンドポイントの名前をクリックし、右上隅の**[...]** &gt; **[コード例]**をクリックします。 **[コード例]**ダイアログ ボックスが表示されます。
+
+2.  ダイアログ ボックスで、エンドポイントを呼び出すために使用するクラスターとデータベースを選択し、コード例をコピーします。
+
+    curl コードの例は次のとおりです。
 
     <SimpleTab>
-    <div label="Test Environment">
+     <div label="Test Environment">
 
-    To call a draft version of the endpoint, you need to add the `endpoint-type: draft` header:
+    エンドポイントのドラフト バージョンを呼び出すには、 `endpoint-type: draft`ヘッダーを追加する必要があります。
 
     ```bash
     curl --digest --user '<Public Key>:<Private Key>' \
@@ -208,9 +213,9 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
 
     <div label="Online Environment">
 
-    You must deploy your endpoint first before checking the code example in the online environment.
+    オンライン環境でコード例を確認する前に、まずエンドポイントをデプロイする必要があります。
 
-    To call the current online version of the endpoint, use the following command:
+    エンドポイントの現在のオンライン バージョンを呼び出すには、次のコマンドを使用します。
 
     ```bash
     curl --digest --user '<Public Key>:<Private Key>' \
@@ -218,21 +223,21 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
     ```
 
     </div>
-    </SimpleTab>
+     </SimpleTab>
 
-    > **Note:**
+    > **注記：**
     >
-    > - By requesting the regional domain `<region>.data.tidbcloud.com`, you can directly access the endpoint in the region where the TiDB cluster is located.
-    > - Alternatively, you can also request the global domain `data.tidbcloud.com` without specifying a region. In this way, TiDB Cloud will internally redirect the request to the target region, but this might result in additional latency. If you choose this way, make sure to add the `--location-trusted` option to your curl command when calling an endpoint.
+    > -   リージョンドメイン`<region>.data.tidbcloud.com`を要求すると、TiDB クラスターが配置されているリージョンのエンドポイントに直接アクセスできます。
+    > -   あるいは、リージョンを指定せずにグローバル ドメイン`data.tidbcloud.com`を要求することもできます。この方法では、 TiDB Cloud は内部的に要求をターゲット リージョンにリダイレクトしますが、これにより追加のレイテンシーが発生する可能性があります。この方法を選択する場合は、エンドポイントを呼び出すときに、curl コマンドに`--location-trusted`オプションを追加するようにしてください。
 
-#### 3. Use the code example
+#### 3. コード例を使用する {#3-use-the-code-example}
 
-Paste the code example in your application and run it. Then, you can get the response of the endpoint.
+コード例をアプリケーションに貼り付けて実行します。すると、エンドポイントの応答を取得できます。
 
-- You need to replace the `<Public Key>` and `<Private Key>` placeholders with your API key.
-- If the endpoint contains parameters, specify the parameter values when calling the endpoint.
+-   プレースホルダー`<Public Key>`と`<Private Key>`を API キーに置き換える必要があります。
+-   エンドポイントにパラメータが含まれている場合は、エンドポイントを呼び出すときにパラメータ値を指定します。
 
-After calling an endpoint, you can see the response in JSON format. The following is an example:
+エンドポイントを呼び出すと、JSON 形式で応答が表示されます。次に例を示します。
 
 ```json
 {
@@ -270,11 +275,11 @@ After calling an endpoint, you can see the response in JSON format. The followin
 }
 ```
 
-For more information about the response, see [Response of an endpoint](/tidb-cloud/data-service-manage-endpoint.md#response).
+回答の詳細については[エンドポイントの応答](/tidb-cloud/data-service-manage-endpoint.md#response)参照してください。
 
-## Learn more
+## もっと詳しく知る {#learn-more}
 
-- [Data Service Overview](/tidb-cloud/data-service-overview.md)
-- [Get Started with Chat2Query API](/tidb-cloud/use-chat2query-api.md)
-- [Manage a Data App](/tidb-cloud/data-service-manage-data-app.md)
-- [Manage an Endpoint](/tidb-cloud/data-service-manage-endpoint.md)
+-   [データサービスの概要](/tidb-cloud/data-service-overview.md)
+-   [Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)
+-   [データアプリを管理する](/tidb-cloud/data-service-manage-data-app.md)
+-   [エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)

@@ -1,41 +1,41 @@
 ---
 title: TiDB 2.1.7 Release Notes
-summary: TiDB 2.1.7 was released on March 28, 2019. It includes various bug fixes, compatibility improvements, and new features such as support for subqueries in the `DO` statement, plugin framework, and checking binlog and Pump/Drainer status using SQL statements. PD also fixed an issue related to transferring leader step in balance-region. Additionally, the default retention time of Prometheus monitoring data in TiDB Ansible has been changed to 30d.
+summary: TiDB 2.1.7 は、2019 年 3 月 28 日にリリースされました。さまざまなバグ修正、互換性の改善、および `DO` ステートメントでのサブクエリのサポート、プラグイン フレームワーク、SQL ステートメントを使用したbinlogおよびPump/ Drainerステータスの確認などの新機能が含まれています。PD では、バランス リージョンでのリーダー ステップの転送に関連する問題も修正されました。さらに、TiDB Ansible の Prometheus 監視データのデフォルトの保持期間が 30 日に変更されました。
 ---
 
-# TiDB 2.1.7 Release Notes
+# TiDB 2.1.7 リリースノート {#tidb-2-1-7-release-notes}
 
-Release Date: March 28, 2019
+リリース日：2019年3月28日
 
-TiDB version: 2.1.7
+TiDB バージョン: 2.1.7
 
-TiDB Ansible version: 2.1.7
+TiDB Ansible バージョン: 2.1.7
 
-## TiDB
+## ティビ {#tidb}
 
-- Fix the issue of longer startup time when upgrading the program caused by canceling DDL operations [#9768](https://github.com/pingcap/tidb/pull/9768)
-- Fix the issue that the `check-mb4-value-in-utf8` configuration item is in the wrong position in the `config.example.toml` file [#9852](https://github.com/pingcap/tidb/pull/9852)
-- Improve the compatibility of the `str_to_date` built-in function with MySQL [#9817](https://github.com/pingcap/tidb/pull/9817)
-- Fix the compatibility issue of the `last_day` built-in function [#9750](https://github.com/pingcap/tidb/pull/9750)
-- Add the `tidb_table_id` column for `infoschema.tables` to facilitate getting `table_id` by using SQL statements and add the `tidb_indexes` system table to manage the relationship between Table and Index [#9862](https://github.com/pingcap/tidb/pull/9862)
-- Add a check about the null definition of Table Partition [#9663](https://github.com/pingcap/tidb/pull/9663)
-- Change the privileges required by `Truncate Table` from `Delete` to `Drop` to make it consistent with MySQL [#9876](https://github.com/pingcap/tidb/pull/9876)
-- Support using subqueries in the `DO` statement [#9877](https://github.com/pingcap/tidb/pull/9877)
-- Fix the issue that the `default_week_format` variable does not take effect in the `week` function [#9753](https://github.com/pingcap/tidb/pull/9753)
-- Support the plugin framework [#9880](https://github.com/pingcap/tidb/pull/9880), [#9888](https://github.com/pingcap/tidb/pull/9888)
-- Support checking the enabling state of binlog by using the `log_bin` system variable [#9634](https://github.com/pingcap/tidb/pull/9634)
-- Support checking the Pump/Drainer status by using SQL statements [#9896](https://github.com/pingcap/tidb/pull/9896)
-- Fix the compatibility issue about checking mb4 character on utf8 when upgrading TiDB [#9887](https://github.com/pingcap/tidb/pull/9887)
-- Fix the panic issue when the aggregate function calculates JSON data in some cases [#9927](https://github.com/pingcap/tidb/pull/9927)
+-   DDL操作のキャンセルによりプログラムのアップグレード時に起動時間が長くなる問題を修正[＃9768](https://github.com/pingcap/tidb/pull/9768)
+-   `check-mb4-value-in-utf8`構成項目が`config.example.toml`ファイル[＃9852](https://github.com/pingcap/tidb/pull/9852)内の間違った位置にある問題を修正
+-   `str_to_date`の組み込み関数とMySQL [＃9817](https://github.com/pingcap/tidb/pull/9817)の互換性を改善
+-   `last_day`組み込み関数[＃9750](https://github.com/pingcap/tidb/pull/9750)の互換性問題を修正
+-   SQL文を使用して`table_id`を取得しやすくするために`infoschema.tables`の`tidb_table_id`列を追加し、テーブルとインデックス[＃9862](https://github.com/pingcap/tidb/pull/9862)の関係を管理するために`tidb_indexes`システムテーブルを追加します。
+-   テーブルパーティション[＃9663](https://github.com/pingcap/tidb/pull/9663)のNULL定義に関するチェックを追加します
+-   MySQL [＃9876](https://github.com/pingcap/tidb/pull/9876)と一致するように、 `Truncate Table`に必要な権限を`Delete`から`Drop`に変更します。
+-   `DO`文[＃9877](https://github.com/pingcap/tidb/pull/9877)でのサブクエリの使用をサポート
+-   `default_week_format`変数が`week`関数[＃9753](https://github.com/pingcap/tidb/pull/9753)で有効にならない問題を修正
+-   プラグインフレームワーク[＃9880](https://github.com/pingcap/tidb/pull/9880) [＃9888](https://github.com/pingcap/tidb/pull/9888)サポート
+-   `log_bin`システム変数[＃9634](https://github.com/pingcap/tidb/pull/9634)を使用してbinlogの有効化状態の確認をサポートします
+-   SQL文を使用したPump/Drainerの状態確認のサポート[＃9896](https://github.com/pingcap/tidb/pull/9896)
+-   TiDB [＃9887](https://github.com/pingcap/tidb/pull/9887)のアップグレード時に utf8 上の mb4 文字をチェックする際の互換性の問題を修正しました
+-   集計関数が JSON データを計算するときに発生するpanic問題を修正[＃9927](https://github.com/pingcap/tidb/pull/9927)
 
-## PD
+## PD {#pd}
 
-- Fix the issue that the transferring leader step cannot be created in the balance-region when the number of replicas is one [#1462](https://github.com/pingcap/pd/pull/1462)
+-   レプリカ数が[＃1462](https://github.com/pingcap/pd/pull/1462)の場合、バランス領域に転送リーダー ステップを作成できない問題を修正しました。
 
-## Tools
+## ツール {#tools}
 
-- Support replicating generated columns by using binlog
+-   binlogを使用して生成された列の複製をサポートする
 
-## TiDB Ansible
+## TiDB アンシブル {#tidb-ansible}
 
-Change the default retention time of Prometheus monitoring data to 30d
+Prometheus モニタリングデータのデフォルトの保存期間を 30 日に変更します。

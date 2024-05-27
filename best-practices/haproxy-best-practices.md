@@ -1,104 +1,96 @@
 ---
 title: Best Practices for Using HAProxy in TiDB
-summary: HAProxy is a free, open-source load balancer and proxy server for TCP and HTTP-based applications. It provides high availability, load balancing, health checks, sticky sessions, SSL support, and monitoring. To deploy HAProxy, ensure hardware and software requirements are met, then install and configure it. Use the latest stable version for best results.
+summary: HAProxy は、TCP および HTTP ベースのアプリケーション向けの無料のオープンソース ロード バランサーおよびプロキシサーバーです。高可用性、負荷分散、ヘルス チェック、スティッキー セッション、SSL サポート、および監視を提供します。HAProxy をデプロイするには、ハードウェアとソフトウェアの要件が満たされていることを確認してから、インストールして構成します。最良の結果を得るには、最新の安定バージョンを使用してください。
 ---
 
-# Best Practices for Using HAProxy in TiDB
+# TiDB で HAProxy を使用するためのベスト プラクティス {#best-practices-for-using-haproxy-in-tidb}
 
-This document describes best practices for configuration and usage of [HAProxy](https://github.com/haproxy/haproxy) in TiDB. HAProxy provides load balancing for TCP-based applications. From TiDB clients, you can manipulate data just by connecting to the floating virtual IP address provided by HAProxy, which helps to achieve load balance in the TiDB server layer.
+このドキュメントでは、TiDB における[HAプロキシ](https://github.com/haproxy/haproxy)の構成と使用に関するベスト プラクティスについて説明します。HAProxy は、TCP ベースのアプリケーションの負荷分散を提供します。TiDB クライアントからは、HAProxy によって提供されるフローティング仮想 IP アドレスに接続するだけでデータを操作できるため、TiDBサーバーレイヤーでの負荷分散を実現できます。
 
 ![HAProxy Best Practices in TiDB](/media/haproxy.jpg)
 
-> **Note:**
+> **注記：**
 >
-> The minimum version of HAProxy that works with all versions of TiDB is v1.5. Between v1.5 and v2.1, you need to set the `post-41` option in `mysql-check`. It is recommended to use HAProxy v2.2 or newer.
+> すべてのバージョンの TiDB で動作する HAProxy の最小バージョンは v1.5 です。v1.5 と v2.1 の間では、 `mysql-check`の`post-41`オプションを設定する必要があります。HAProxy v2.2 以降を使用することをお勧めします。
 
-## HAProxy overview
+## HAProxy の概要 {#haproxy-overview}
 
-HAProxy is free, open-source software written in C language that provides a high availability load balancer and proxy server for TCP and HTTP-based applications. Because of its fast and efficient use of CPU and memory, HAProxy is now widely used by many well-known websites such as GitHub, Bitbucket, Stack Overflow, Reddit, Tumblr, Twitter, Tuenti, and AWS (Amazon Web Services).
+HAProxy は、C 言語で書かれた無料のオープンソース ソフトウェアで、TCP および HTTP ベースのアプリケーションに高可用性ロード バランサーとプロキシサーバーを提供します。CPU とメモリを高速かつ効率的に使用できるため、HAProxy は現在、GitHub、Bitbucket、Stack Overflow、Reddit、Tumblr、Twitter、Tuenti、AWS (Amazon Web Services) などの多くの有名な Web サイトで広く使用されています。
 
-HAProxy is written in the year 2000 by Willy Tarreau, the core contributor to the Linux kernel, who is still responsible for the maintenance of the project and provides free software updates in the open-source community. In this guide, HAProxy [2.6](https://www.haproxy.com/blog/announcing-haproxy-2-6/) is used. It is recommended to use the latest stable version. See [the released version of HAProxy](http://www.haproxy.org/) for details.
+HAProxy は、Linux カーネルのコア コントリビューターである Willy Tarreau によって 2000 年に作成されました。彼は現在もプロジェクトのメンテナンスを担当し、オープン ソース コミュニティで無料のソフトウェア アップデートを提供しています。このガイドでは、HAProxy [2.6](https://www.haproxy.com/blog/announcing-haproxy-2-6/)を使用します。最新の安定バージョンを使用することをお勧めします。詳細については、 [HAProxyのリリースバージョン](http://www.haproxy.org/)を参照してください。
 
-## Basic features
+## 基本的な機能 {#basic-features}
 
-- [High Availability](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.4): HAProxy provides high availability with support for a graceful shutdown and a seamless switchover;
-- [Load Balancing](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#4.2-balance): Two major proxy modes are supported: TCP, also known as layer 4, and HTTP, also known as layer 7. No less than 9 load balancing algorithms are supported, such as roundrobin, leastconn and random;
-- [Health Check](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#5.2-check): HAProxy periodically checks the status of HTTP or TCP mode of the server;
-- [Sticky Session](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.6): HAProxy can stick a client to a specific server for the duration when the application does not support sticky sessions;
-- [SSL](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.2): HTTPS communication and resolution are supported;
-- [Monitoring and Statistics](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.3): Through the web page, you can monitor the service state and traffic flow in real time.
+-   [高可用性](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.4) : HAProxy は、正常なシャットダウンとシームレスな切り替えをサポートし、高可用性を提供します。
+-   [負荷分散](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#4.2-balance) : 2 つの主要なプロキシ モード (レイヤー4 とも呼ばれる TCP とレイヤー7 とも呼ばれる HTTP) がサポートされています。ラウンドロビン、Leastconn、ランダムなど、9 種類以上の負荷分散アルゴリズムがサポートされています。
+-   [健康診断](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#5.2-check) : HAProxy はサーバーの HTTP または TCP モードのステータスを定期的にチェックします。
+-   [スティッキーセッション](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.6) : アプリケーションがスティッキー セッションをサポートしていない間、HAProxy はクライアントを特定のサーバーに固定できます。
+-   [証明書](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.2) : HTTPS 通信と解決がサポートされます。
+-   [監視と統計](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.3) ：Web ページを通じて、サービスの状態とトラフィック フローをリアルタイムで監視できます。
 
-## Before you begin
+## あなたが始める前に {#before-you-begin}
 
-Before you deploy HAProxy, make sure that you meet the hardware and software requirements.
+HAProxy をデプロイする前に、ハードウェアとソフトウェアの要件を満たしていることを確認してください。
 
-### Hardware requirements
+### ハードウェア要件 {#hardware-requirements}
 
-According to the [HAProxy documentation](https://www.haproxy.com/documentation/haproxy-enterprise/getting-started/installation/linux/), the minimum hardware configuration for HAProxy is shown in the following table. Under the Sysbench `oltp_read_write` workload, the maximum QPS for this configuration is about 50K. You can increase the server configuration according to your load balancing environment.
+[HAProxy ドキュメント](https://www.haproxy.com/documentation/haproxy-enterprise/getting-started/installation/linux/)によると、HAProxy の最小ハードウェア構成は次の表のようになります。Sysbench `oltp_read_write`ワークロードでは、この構成の最大 QPS は約 50K です。負荷分散環境に応じてサーバー構成を増やすことができます。
 
-| Hardware resource      | Minimum specification |
-| :--------------------- | :-------------------- |
-| CPU                    | 2 cores, 3.5 GHz      |
-| Memory                 | 4 GB                 |
-| Storage                | 50 GB (SATA)          |
-| Network Interface Card | 10G Network Card      |
+| ハードウェアリソース        | 最小仕様           |
+| :---------------- | :------------- |
+| CPU               | 2 コア、3.5 GHz   |
+| メモリ               | 4ギガバイト         |
+| ストレージ             | 50 GB (SATA)   |
+| ネットワークインターフェースカード | 10G ネットワーク カード |
 
-### Software requirements
+### ソフトウェア要件 {#software-requirements}
 
-You can use the following operating systems and make sure the required dependencies are installed. If you use yum to install HAProxy, the dependencies are installed along with it and you do not need to separately install them again.
+以下のオペレーティング システムを使用し、必要な依存関係がインストールされていることを確認してください。yum を使用して HAProxy をインストールすると、依存関係も一緒にインストールされるため、再度個別にインストールする必要はありません。
 
-#### Operating systems
+#### オペレーティングシステム {#operating-systems}
 
-| Linux distribution       | Version         |
-| :----------------------- | :----------- |
-| Red Hat Enterprise Linux | 7 or 8   |
-| CentOS                   | 7 or 8   |
-| Oracle Enterprise Linux  | 7 or 8   |
-| Ubuntu LTS               | 18.04 or later versions |
+| Linuxディストリビューション      | バージョン         |
+| :-------------------- | :------------ |
+| レッドハットエンタープライズリナックス   | 7または8         |
+| セントOS                 | 7または8         |
+| Oracle エンタープライズ Linux | 7または8         |
+| Ubuntu 16.04 リリース     | 18.04以降のバージョン |
 
-> **Note:**
+> **注記：**
 >
-> - For more information about other supported operating systems, see [HAProxy documentation](https://github.com/haproxy/haproxy/blob/master/INSTALL).
+> -   サポートされているその他のオペレーティング システムの詳細については、 [HAProxy ドキュメント](https://github.com/haproxy/haproxy/blob/master/INSTALL)参照してください。
 
-#### Dependencies
+#### 依存関係 {#dependencies}
 
-- epel-release
-- gcc
-- systemd-devel
+-   エペルリリース
+-   グーグル
+-   システム開発
 
-To install the dependencies above, run the following command:
-
-{{< copyable "shell-regular" >}}
+上記の依存関係をインストールするには、次のコマンドを実行します。
 
 ```bash
 yum -y install epel-release gcc systemd-devel
 ```
 
-## Deploy HAProxy
+## HAProxyをデプロイ {#deploy-haproxy}
 
-You can easily use HAProxy to configure and set up a load-balanced database environment. This section shows general deployment operations. You can customize the [configuration file](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html) based on your actual scenario.
+HAProxy を使用すると、負荷分散されたデータベース環境を簡単に構成およびセットアップできます。このセクションでは、一般的なデプロイメント操作について説明します。実際のシナリオに基づいて[設定ファイル](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html)をカスタマイズできます。
 
-### Install HAProxy
+### HAProxyをインストールする {#install-haproxy}
 
-1. Download the package of the HAProxy 2.6.2 source code:
-
-    {{< copyable "shell-regular" >}}
+1.  HAProxy 2.6.2 ソースコードのパッケージをダウンロードします。
 
     ```bash
     wget https://www.haproxy.org/download/2.6/src/haproxy-2.6.2.tar.gz
     ```
 
-2. Extract the package:
-
-    {{< copyable "shell-regular" >}}
+2.  パッケージを抽出します:
 
     ```bash
     tar zxf haproxy-2.6.2.tar.gz
     ```
 
-3. Compile the application from the source code:
-
-    {{< copyable "shell-regular" >}}
+3.  ソース コードからアプリケーションをコンパイルします。
 
     ```bash
     cd haproxy-2.6.2
@@ -107,67 +99,61 @@ You can easily use HAProxy to configure and set up a load-balanced database envi
     make PREFIX=${/app/haproxy} SBINDIR=${/app/haproxy/bin} install  # Replace `${/app/haproxy}` and `${/app/haproxy/bin}` with your custom directories.
     ```
 
-4. Reconfigure the profile:
-
-    {{< copyable "shell-regular" >}}
+4.  プロファイルを再構成します。
 
     ```bash
     echo 'export PATH=/app/haproxy/bin:$PATH' >> /etc/profile
     . /etc/profile
     ```
 
-5. Check whether the installation is successful:
-
-    {{< copyable "shell-regular" >}}
+5.  インストールが成功したかどうかを確認します。
 
     ```bash
     which haproxy
     ```
 
-#### HAProxy commands
+#### HAProxyコマンド {#haproxy-commands}
 
-Execute the following command to print a list of keywords and their basic usage:
-
-{{< copyable "shell-regular" >}}
+キーワードとその基本的な使用方法のリストを印刷するには、次のコマンドを実行します。
 
 ```bash
 haproxy --help
 ```
 
-| Option | Description |
-| :-------| :---------|
-| `-v` | Reports the version and build date. |
-| `-vv` | Displays the version, build options, libraries versions and usable pollers. |
-| `-d` | Enables debug mode. |
-| `-db` | Disables background mode and multi-process mode. |
-| `-dM [<byte>]` | Forces memory poisoning, which means that each and every memory region allocated with malloc() or pool_alloc2() will be filled with `<byte>` before being passed to the caller. |
-| `-V` | Enables verbose mode (disables quiet mode). |
-| `-D` | Starts as a daemon.|
-| `-C <dir>` | Changes to directory `<dir>` before loading configuration files. |
-| `-W` | Master-worker mode. |
-| `-q` | Sets "quiet" mode: This disables some messages during the configuration parsing and during startup. |
-| `-c` | Only performs a check of the configuration files and exits before trying to bind. |
-| `-n <limit>` | Limits the per-process connection limit to `<limit>`. |
-| `-m <limit>` | Limits the total allocatable memory to `<limit>` megabytes across all processes. |
-| `-N <limit>` | Sets the default per-proxy maxconn to `<limit>` instead of the builtin default value (usually 2000). |
-| `-L <name>` | Changes the local peer name to `<name>`, which defaults to the local hostname. |
-| `-p <file>` | Writes all processes' PIDs into `<file>` during startup. |
-| `-de` | Disables the use of epoll(7). epoll(7) is available only on Linux 2.6 and some custom Linux 2.4 systems. |
-| `-dp` | Disables the use of poll(2). select(2) might be used instead. |
-| `-dS` | Disables the use of splice(2), which is broken on older kernels. |
-| `-dR` | Disables SO_REUSEPORT usage. |
-| `-dr` | Ignores server address resolution failures. |
-| `-dV` | Disables SSL verify on the server side. |
-| `-sf <pidlist>` | Sends the "finish" signal to the PIDs in pidlist after startup. The processes which receive this signal wait for all sessions to finish before exiting. This option must be specified last, followed by any number of PIDs. Technically speaking, SIGTTOU and SIGUSR1 are sent. |
-| `-st <pidlist>` | Sends the "terminate" signal to the PIDs in pidlist after startup. The processes which receive this signal terminate immediately, closing all active sessions. This option must be specified last, followed by any number of PIDs. Technically speaking, SIGTTOU and SIGTERM are sent. |
-| `-x <unix_socket>` | Connects to the specified socket and retrieves all the listening sockets from the old process. Then, these sockets are used instead of binding new ones. |
-| `-S <bind>[,<bind_options>...]` | In master-worker mode, creates a master CLI. This CLI enables access to the CLI of every worker. Useful for debugging, it's a convenient way of accessing a leaving process. |
+| オプション                           | 説明                                                                                                                                                          |
+| :------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-v`                            | バージョンとビルドの日付を報告します。                                                                                                                                         |
+| `-vv`                           | バージョン、ビルド オプション、ライブラリ バージョン、使用可能なポーラーを表示します。                                                                                                                |
+| `-d`                            | デバッグ モードを有効にします。                                                                                                                                            |
+| `-db`                           | バックグラウンド モードとマルチプロセス モードを無効にします。                                                                                                                            |
+| `-dM [<byte>]`                  | メモリポイズニングを強制します。つまり、malloc() または pool_alloc2() で割り当てられたすべてのメモリ領域は、呼び出し元に渡される前に`<byte>`で埋められます。                                                              |
+| `-V`                            | 詳細モードを有効にします (静音モードを無効にします)。                                                                                                                                |
+| `-D`                            | デーモンとして起動します。                                                                                                                                               |
+| `-C <dir>`                      | 設定ファイルを読み込む前にディレクトリ`<dir>`に変更します。                                                                                                                           |
+| `-W`                            | マスターワーカーモード。                                                                                                                                                |
+| `-q`                            | 「quiet」モードを設定します。これにより、構成の解析中および起動中に一部のメッセージが無効になります。                                                                                                       |
+| `-c`                            | バインドを試みる前に、構成ファイルのチェックのみを実行して終了します。                                                                                                                         |
+| `-n <limit>`                    | プロセスごとの接続制限を`<limit>`に制限します。                                                                                                                                |
+| `-m <limit>`                    | すべてのプロセスにわたって割り当て可能なメモリの合計を`<limit>`メガバイトに制限します。                                                                                                            |
+| `-N <limit>`                    | 組み込みのデフォルト値 (通常は 2000) ではなく、プロキシごとのデフォルトの maxconn を`<limit>`に設定します。                                                                                         |
+| `-L <name>`                     | ローカル ピア名を`<name>`に変更します。デフォルトでは、ローカル ホスト名になります。                                                                                                             |
+| `-p <file>`                     | 起動時にすべてのプロセスの PID を`<file>`に書き込みます。                                                                                                                         |
+| `-de`                           | epoll(7)の使用を無効にします。epoll(7)はLinux 2.6および一部のカスタムLinux 2.4システムでのみ利用可能です。                                                                                      |
+| `-dp`                           | poll(2) の使用を無効にします。代わりに select(2) が使用される場合があります。                                                                                                            |
+| `-dS`                           | 古いカーネルでは壊れているsplice(2)の使用を無効にします。                                                                                                                           |
+| `-dR`                           | SO_REUSEPORT の使用を無効にします。                                                                                                                                    |
+| `-dr`                           | サーバーアドレス解決の失敗を無視します。                                                                                                                                        |
+| `-dV`                           | サーバー側での SSL 検証を無効にします。                                                                                                                                      |
+| `-sf <pidlist>`                 | 起動後に pidlist 内の PID に「終了」シグナルを送信します。このシグナルを受信したプロセスは、すべてのセッションが終了するまで待機してから終了します。このオプションは最後に指定する必要があり、その後に任意の数の PID が続きます。技術的には、SIGTTOU と SIGUSR1 が送信されます。  |
+| `-st <pidlist>`                 | 起動後に pidlist 内の PID に「終了」シグナルを送信します。このシグナルを受信したプロセスは直ちに終了し、すべてのアクティブなセッションが閉じられます。このオプションは最後に指定する必要があり、その後に任意の数の PID が続きます。技術的には、SIGTTOU と SIGTERM が送信されます。 |
+| `-x <unix_socket>`              | 指定されたソケットに接続し、古いプロセスからすべてのリスニング ソケットを取得します。次に、新しいソケットをバインドする代わりに、これらのソケットが使用されます。                                                                           |
+| `-S <bind>[,<bind_options>...]` | マスター ワーカー モードでは、マスター CLI を作成します。この CLI により、すべてのワーカーの CLI にアクセスできます。デバッグに役立ち、終了するプロセスにアクセスする便利な方法です。                                                         |
 
-For more details on HAProxy command line options, refer to [Management Guide of HAProxy](http://cbonte.github.io/haproxy-dconv/2.6/management.html) and [General Commands Manual of HAProxy](https://manpages.debian.org/buster-backports/haproxy/haproxy.1.en.html).
+HAProxy コマンドライン オプションの詳細については、 [HAProxy の管理ガイド](http://cbonte.github.io/haproxy-dconv/2.6/management.html)および[HAProxy の一般コマンドマニュアル](https://manpages.debian.org/buster-backports/haproxy/haproxy.1.en.html)を参照してください。
 
-### Configure HAProxy
+### HAProxy を構成する {#configure-haproxy}
 
-A configuration template is generated when you use yum to install HAProxy. You can also customize the following configuration items according to your scenario.
+yum を使用して HAProxy をインストールすると、構成テンプレートが生成されます。シナリオに応じて、次の構成項目をカスタマイズすることもできます。
 
 ```yaml
 global                                     # Global configuration.
@@ -209,7 +195,7 @@ listen tidb-cluster                        # Database load balancing.
    server tidb-3 10.9.64.166:4000 check inter 2000 rise 2 fall 3
 ```
 
-To check the source IP address using `SHOW PROCESSLIST`, you need to configure the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) to connect to TiDB.
+`SHOW PROCESSLIST`使用して送信元 IP アドレスを確認するには、 [PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) TiDB に接続するように構成する必要があります。
 
 ```yaml
    server tidb-1 10.9.18.229:4000 send-proxy check inter 2000 rise 2 fall 3       
@@ -217,35 +203,29 @@ To check the source IP address using `SHOW PROCESSLIST`, you need to configure t
    server tidb-3 10.9.64.166:4000 send-proxy check inter 2000 rise 2 fall 3
 ```
 
-> **Note:**
+> **注記：**
 >
-> Before using the PROXY protocol, you need to configure [`proxy-protocol.networks`](/tidb-configuration-file.md#networks) in the configuration file of the TiDB server.
+> PROXY プロトコルを使用する前に、TiDBサーバーの構成ファイルで[`proxy-protocol.networks`](/tidb-configuration-file.md#networks)を構成する必要があります。
 
-### Start HAProxy
+### HAProxyを起動する {#start-haproxy}
 
-To start HAProxy, run `haproxy`. `/etc/haproxy/haproxy.cfg` is read by default (recommended).
-
-{{< copyable "shell-regular" >}}
+HAProxy を起動するには、 `haproxy`実行します。デフォルトでは`/etc/haproxy/haproxy.cfg`が読み込まれます (推奨)。
 
 ```bash
 haproxy -f /etc/haproxy/haproxy.cfg
 ```
 
-### Stop HAProxy
+### HAProxyを停止する {#stop-haproxy}
 
-To stop HAProxy, use the `kill -9` command.
+HAProxy を停止するには、 `kill -9`コマンドを使用します。
 
-1. Run the following command:
-
-    {{< copyable "shell-regular" >}}
+1.  次のコマンドを実行します。
 
     ```bash
     ps -ef | grep haproxy
     ```
 
-2. Terminate the process of HAProxy:
-
-    {{< copyable "shell-regular" >}}
+2.  HAProxy のプロセスを終了します。
 
     ```bash
     kill -9 ${haproxy.pid}

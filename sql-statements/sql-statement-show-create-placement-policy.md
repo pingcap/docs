@@ -1,17 +1,17 @@
 ---
 title: SHOW CREATE PLACEMENT POLICY
-summary: The usage of SHOW CREATE PLACEMENT POLICY in TiDB.
+summary: TiDB での SHOW CREATE PLACEMENT POLICY の使用法。
 ---
 
-# SHOW CREATE PLACEMENT POLICY
+# 配置ポリシーの作成を表示 {#show-create-placement-policy}
 
-`SHOW CREATE PLACEMENT POLICY` is used to show the definition of a placement policy. This can be used to see the current definition of a placement policy and recreate it in another TiDB cluster.
+`SHOW CREATE PLACEMENT POLICY`は配置ポリシーの定義を表示するために使用されます。これを使用して、配置ポリシーの現在の定義を確認し、別の TiDB クラスターで再作成することができます。
 
-> **Note:**
+> **注記：**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowCreatePlacementPolicyStmt ::=
@@ -21,9 +21,7 @@ PolicyName ::=
     Identifier
 ```
 
-## Examples
-
-{{< copyable "sql" >}}
+## 例 {#examples}
 
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4;
@@ -31,25 +29,23 @@ CREATE TABLE t1 (a INT) PLACEMENT POLICY=p1;
 SHOW CREATE PLACEMENT POLICY p1\G
 ```
 
-```
-Query OK, 0 rows affected (0.08 sec)
+    Query OK, 0 rows affected (0.08 sec)
 
-Query OK, 0 rows affected (0.10 sec)
+    Query OK, 0 rows affected (0.10 sec)
 
-***************************[ 1. row ]***************************
-Policy        | p1
-Create Policy | CREATE PLACEMENT POLICY `p1` PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4
-1 row in set (0.00 sec)
-```
+    ***************************[ 1. row ]***************************
+    Policy        | p1
+    Create Policy | CREATE PLACEMENT POLICY `p1` PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4
+    1 row in set (0.00 sec)
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## 参照 {#see-also}
 
-* [Placement Rules in SQL](/placement-rules-in-sql.md)
-* [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)
-* [CREATE PLACEMENT POLICY](/sql-statements/sql-statement-create-placement-policy.md)
-* [ALTER PLACEMENT POLICY](/sql-statements/sql-statement-alter-placement-policy.md)
-* [DROP PLACEMENT POLICY](/sql-statements/sql-statement-drop-placement-policy.md)
+-   [SQL の配置ルール](/placement-rules-in-sql.md)
+-   [表示配置](/sql-statements/sql-statement-show-placement.md)
+-   [配置ポリシーの作成](/sql-statements/sql-statement-create-placement-policy.md)
+-   [配置ポリシーの変更](/sql-statements/sql-statement-alter-placement-policy.md)
+-   [ドロップ配置ポリシー](/sql-statements/sql-statement-drop-placement-policy.md)

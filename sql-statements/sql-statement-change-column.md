@@ -1,19 +1,19 @@
 ---
 title: CHANGE COLUMN | TiDB SQL Statement Reference
-summary: An overview of the usage of CHANGE COLUMN for the TiDB database.
+summary: TiDB データベースの CHANGE COLUMN の使用法の概要。
 ---
 
-# CHANGE COLUMN
+# 列の変更 {#change-column}
 
-The `ALTER TABLE.. CHANGE COLUMN` statement changes a column on an existing table. The change can include both renaming the column, and changing the data type to a compatible type.
+`ALTER TABLE.. CHANGE COLUMN`ステートメントは、既存のテーブルの列を変更します。変更には、列の名前の変更と、互換性のある型へのデータ型の変更の両方が含まれます。
 
-Since v5.1.0, TiDB has supported changing the Reorg data type, including but not limited to:
+v5.1.0 以降、TiDB は Reorg データ型の変更をサポートしています。これには以下が含まれますが、これらに限定されません。
 
-- Changing `VARCHAR` to `BIGINT`
-- Modifying the `DECIMAL` precision
-- Compressing the length of `VARCHAR(10)` to `VARCHAR(5)`
+-   `VARCHAR`を`BIGINT`に変更
+-   `DECIMAL`精度の変更
+-   `VARCHAR(10)`の長さを`VARCHAR(5)`に圧縮する
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AlterTableStmt
@@ -49,114 +49,78 @@ ColumnName ::=
     Identifier ( '.' Identifier ( '.' Identifier )? )?
 ```
 
-## Examples
-
-{{< copyable "sql" >}}
+## 例 {#examples}
 
 ```sql
 CREATE TABLE t1 (id int not null primary key AUTO_INCREMENT, col1 INT);
 ```
 
-```
-Query OK, 0 rows affected (0.11 sec)
-```
-
-{{< copyable "sql" >}}
+    Query OK, 0 rows affected (0.11 sec)
 
 ```sql
 INSERT INTO t1 (col1) VALUES (1),(2),(3),(4),(5);
 ```
 
-```
-Query OK, 5 rows affected (0.02 sec)
-Records: 5  Duplicates: 0  Warnings: 0
-```
-
-{{< copyable "sql" >}}
+    Query OK, 5 rows affected (0.02 sec)
+    Records: 5  Duplicates: 0  Warnings: 0
 
 ```sql
 ALTER TABLE t1 CHANGE col1 col2 INT;
 ```
 
-```
-Query OK, 0 rows affected (0.09 sec)
-```
-
-{{< copyable "sql" >}}
+    Query OK, 0 rows affected (0.09 sec)
 
 ```sql
 ALTER TABLE t1 CHANGE col2 col3 BIGINT, ALGORITHM=INSTANT;
 ```
 
-```
-Query OK, 0 rows affected (0.08 sec)
-```
-
-{{< copyable "sql" >}}
+    Query OK, 0 rows affected (0.08 sec)
 
 ```sql
 ALTER TABLE t1 CHANGE col3 col4 BIGINT, CHANGE id id2 INT NOT NULL;
 ```
 
-```
-ERROR 1105 (HY000): can't run multi schema change
-```
-
-{{< copyable "sql" >}}
+    ERROR 1105 (HY000): can't run multi schema change
 
 ```sql
 CREATE TABLE t (a int primary key);
 ALTER TABLE t CHANGE COLUMN a a VARCHAR(10);
 ```
 
-```
-ERROR 8200 (HY000): Unsupported modify column: column has primary key flag
-```
-
-{{< copyable "sql" >}}
+    ERROR 8200 (HY000): Unsupported modify column: column has primary key flag
 
 ```sql
 CREATE TABLE t (c1 INT, c2 INT, c3 INT) partition by range columns(c1) ( partition p0 values less than (10), partition p1 values less than (maxvalue));
 ALTER TABLE t CHANGE COLUMN c1 c1 DATETIME;
 ```
 
-```
-ERROR 8200 (HY000): Unsupported modify column: table is partition table
-```
-
-{{< copyable "sql" >}}
+    ERROR 8200 (HY000): Unsupported modify column: table is partition table
 
 ```sql
 CREATE TABLE t (a INT, b INT as (a+1));
 ALTER TABLE t CHANGE COLUMN b b VARCHAR(10);
 ```
 
-```
-ERROR 8200 (HY000): Unsupported modify column: column is generated
-```
-
-{{< copyable "sql" >}}
+    ERROR 8200 (HY000): Unsupported modify column: column is generated
 
 ```sql
 CREATE TABLE t (a DECIMAL(13, 7));
 ALTER TABLE t CHANGE COLUMN a a DATETIME;
 ```
 
-```
-ERROR 8200 (HY000): Unsupported modify column: change from original type decimal(13,7) to datetime is currently unsupported yet
-```
+    ERROR 8200 (HY000): Unsupported modify column: change from original type decimal(13,7) to datetime is currently unsupported yet
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-* Changes of [Reorg-Data](/sql-statements/sql-statement-modify-column.md#reorg-data-change) types on primary key columns are not supported.
-* Changes of column types on partitioned tables are not supported.
-* Changes of column types on generated columns are not supported.
-* Changes of some data types (for example, some TIME, Bit, Set, Enum, and JSON types) are not supported due to the compatibility issues of the `CAST` function's behavior between TiDB and MySQL.
+-   主キー列の[再編成データ](/sql-statements/sql-statement-modify-column.md#reorg-data-change)種類の変更はサポートされていません。
+-   パーティション化されたテーブル上の列タイプの変更はサポートされていません。
+-   生成された列の列タイプの変更はサポートされていません。
+-   一部のデータ型 (たとえば、一部の TIME、Bit、Set、Enum、JSON 型) の変更は、TiDB と MySQL 間の`CAST`関数の動作の互換性の問題によりサポートされていません。
 
-## See also
+## 参照 {#see-also}
 
-* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
-* [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
-* [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
-* [DROP COLUMN](/sql-statements/sql-statement-drop-column.md)
-* [MODIFY COLUMN](/sql-statements/sql-statement-modify-column.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [表示テーブルの作成](/sql-statements/sql-statement-show-create-table.md)
+-   [列を追加](/sql-statements/sql-statement-add-column.md)
+-   [ドロップコラム](/sql-statements/sql-statement-drop-column.md)
+-   [列の変更](/sql-statements/sql-statement-modify-column.md)

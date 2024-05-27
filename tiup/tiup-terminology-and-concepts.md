@@ -1,34 +1,34 @@
 ---
 title: TiUP Terminology and Concepts
-summary: Explain the terms and concepts of TiUP.
+summary: TiUPの用語と概念を説明します。
 ---
 
-# TiUP Terminology and Concepts
+# TiUP の用語と概念 {#tiup-terminology-and-concepts}
 
-This document explains important terms and concepts of TiUP.
+このドキュメントでは、 TiUPの重要な用語と概念について説明します。
 
-## TiUP components
+## TiUPコンポーネント {#tiup-components}
 
-The TiUP program contains only a few commands for downloading, updating, and uninstalling components. TiUP expands its functions with various components. A **component** is a program or script that can be run. When running a component through `tiup <component>`, TiUP adds a set of environment variables, creates the data directory for the program, and then runs the program.
+TiUPプログラムには、コンポーネントのダウンロード、更新、およびアンインストールを行うコマンドがいくつか含まれています。TiUPは、さまざまなコンポーネントを使用して関数を拡張します。**コンポーネント**とは、実行可能なプログラムまたはスクリプトです。コンポーネントを`tiup <component>`まで実行すると、 TiUP は環境変数のセットを追加し、プログラムのデータ ディレクトリを作成してから、プログラムを実行します。
 
-By running the `tiup <component>` command, you can run a component supported by TiUP. The running logic is:
+`tiup <component>`コマンドを実行すると、 TiUPでサポートされているコンポーネントを実行できます。実行ロジックは次のとおりです。
 
-+ If you specify a version of a component through `tiup <component>[:version]`:
+-   `tiup <component>[:version]`を通じてコンポーネントのバージョンを指定する場合:
 
-    - If the component does not have any version installed locally, TiUP downloads the latest stable version from the mirror server.
-    - If the component has one or more versions installed locally, but there is no version specified by you, TiUP downloads the specified version from the mirror server.
-    - If the specified version of the component is installed locally, TiUP sets the environment variable to run the installed version.
+    -   コンポーネントのバージョンがローカルにインストールされていない場合、 TiUP はミラーサーバーから最新の安定バージョンをダウンロードします。
+    -   コンポーネントに 1 つ以上のバージョンがローカルにインストールされているが、指定されたバージョンがない場合、 TiUP はミラーサーバーから指定されたバージョンをダウンロードします。
+    -   指定されたバージョンのコンポーネントがローカルにインストールされている場合、 TiUP はインストールされているバージョンを実行するように環境変数を設定します。
 
-+ If you run a component through `tiup <component>` and specify no version:
+-   コンポーネントを`tiup <component>`まで実行し、バージョンを指定しない場合:
 
-    - If the component does not have any version installed locally, TiUP downloads the latest stable version from the mirror server.
-    - If one or more versions have been installed locally, TiUP sets the environment variable to run the latest installed version.
+    -   コンポーネントのバージョンがローカルにインストールされていない場合、 TiUP はミラーサーバーから最新の安定バージョンをダウンロードします。
+    -   1 つ以上のバージョンがローカルにインストールされている場合、 TiUP は環境変数を設定して、インストールされている最新バージョンを実行します。
 
-## TiUP mirrors
+## TiUPミラー {#tiup-mirrors}
 
-All components of TiUP are downloaded from the TiUP mirrors. TiUP mirrors contain the TAR package of each component and the corresponding meta information (version, entry startup file, checksum). TiUP uses PingCAP's official mirrors by default. You can customize the mirror source through the `TIUP_MIRRORS` environment variable.
+TiUPのすべてのコンポーネントは、 TiUPミラーからダウンロードされます。TiUP ミラーには、各コンポーネントの TAR パッケージと対応するメタ情報 (バージョン、エントリ スタートアップ ファイル、チェックサム) `TIUP_MIRRORS`含まれています。TiUPは、デフォルトで PingCAP の公式ミラーを使用します。1 環境変数を使用してミラー ソースをカスタマイズできます。
 
-TiUP mirrors can be a local file directory or an online HTTP server:
+TiUPミラーは、ローカル ファイル ディレクトリまたはオンライン HTTPサーバーになります。
 
-+ `TIUP_MIRRORS=/path/to/local tiup list`
-+ `TIUP_MIRRORS=https://private-mirrors.example.com tiup list`
+-   `TIUP_MIRRORS=/path/to/local tiup list`
+-   `TIUP_MIRRORS=https://private-mirrors.example.com tiup list`

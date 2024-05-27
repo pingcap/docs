@@ -1,12 +1,12 @@
 ---
 title: TiDB Operator
-summary: Learn about TiDB Operator, the automatic operation system for TiDB clusters on Kubernetes.
+summary: Kubernetes 上の TiDB クラスターの自動運用システムであるTiDB Operatorについて学習します。
 ---
 
-# TiDB Operator
+# TiDB Operator {#tidb-operator}
 
-[TiDB Operator](https://github.com/pingcap/tidb-operator) is an automatic operation system for TiDB clusters on Kubernetes. It provides full life-cycle management for TiDB including deployment, upgrades, scaling, backup, fail-over, and configuration changes. With TiDB Operator, TiDB can run seamlessly in the Kubernetes clusters deployed on a public or private cloud.
+[TiDB Operator](https://github.com/pingcap/tidb-operator) 、Kubernetes 上の TiDB クラスターの自動運用システムです。デプロイメント、アップグレード、スケーリング、バックアップ、フェイルオーバー、構成変更など、TiDB のライフサイクル全体を管理します。TiDB TiDB Operator を使用すると、パブリック クラウドまたはプライベート クラウドにデプロイされた Kubernetes クラスターで TiDB をシームレスに実行できます。
 
-Currently, the TiDB Operator documentation (also named as TiDB on Kubernetes documentation) is independent of the TiDB documentation. To access the documentation, click the following link:
+現在、 TiDB Operatorドキュメント (Kubernetes 上の TiDB ドキュメントとも呼ばれます) は、TiDB ドキュメントとは独立しています。ドキュメントにアクセスするには、次のリンクをクリックしてください。
 
-- [TiDB on Kubernetes documentation](https://docs.pingcap.com/tidb-in-kubernetes/stable/)
+-   [Kubernetes 上の TiDB ドキュメント](https://docs.pingcap.com/tidb-in-kubernetes/stable/)

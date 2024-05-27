@@ -1,30 +1,30 @@
 ---
 title: SHOW PLACEMENT
-summary: The usage of SHOW PLACEMENT in TiDB.
+summary: TiDB での SHOW PLACEMENT の使用法。
 ---
 
-# SHOW PLACEMENT
+# 表示配置 {#show-placement}
 
-`SHOW PLACEMENT` summarizes all placement options from placement policies, and presents them in canonical form.
+`SHOW PLACEMENT`配置ポリシーからのすべての配置オプションを要約し、標準形式で提示します。
 
-> **Note:**
+> **注記：**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
-The statement returns a result set in which the `Scheduling_State` field indicates the current progress that the Placement Driver (PD) has made in scheduling the placement:
+このステートメントは、配置Driver(PD) が配置のスケジュールで行った現在の進行状況を示す`Scheduling_State`フィールドを含む結果セットを返します。
 
-* `PENDING`: The PD has not yet started scheduling the placement. This might indicate that that the placement rules are semantically correct, but cannot currently be satisfied by the cluster. For example, if `FOLLOWERS=4` but there are only 3 TiKV stores which are candidates for followers.
-* `INPROGRESS`: The PD is currently scheduling the placement.
-* `SCHEDULED`: The PD has successfully scheduled the placement.
+-   `PENDING` : PD はまだ配置のスケジュールを開始していません。これは、配置ルールが意味的には正しいが、現在クラスターによって満たされていないことを示している可能性があります。たとえば、 `FOLLOWERS=4`場合、フォロワーの候補となる TiKV ストアは 3 つしかありません。
+-   `INPROGRESS` : PD が現在配置をスケジュール中です。
+-   `SCHEDULED` : PD は配置を正常にスケジュールしました。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowStmt ::=
     "SHOW" "PLACEMENT" ShowLikeOrWhere?
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4;
@@ -32,27 +32,25 @@ CREATE TABLE t1 (a INT) PLACEMENT POLICY=p1;
 SHOW PLACEMENT;
 ```
 
-```
-Query OK, 0 rows affected (0.01 sec)
+    Query OK, 0 rows affected (0.01 sec)
 
-Query OK, 0 rows affected (0.00 sec)
+    Query OK, 0 rows affected (0.00 sec)
 
-+---------------+----------------------------------------------------------------------+------------------+
-| Target        | Placement                                                            | Scheduling_State |
-+---------------+----------------------------------------------------------------------+------------------+
-| POLICY p1     | PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4 | NULL             |
-| DATABASE test | PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4 | INPROGRESS       |
-| TABLE test.t1 | PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4 | INPROGRESS       |
-+---------------+----------------------------------------------------------------------+------------------+
-4 rows in set (0.00 sec)
-```
+    +---------------+----------------------------------------------------------------------+------------------+
+    | Target        | Placement                                                            | Scheduling_State |
+    +---------------+----------------------------------------------------------------------+------------------+
+    | POLICY p1     | PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4 | NULL             |
+    | DATABASE test | PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4 | INPROGRESS       |
+    | TABLE test.t1 | PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4 | INPROGRESS       |
+    +---------------+----------------------------------------------------------------------+------------------+
+    4 rows in set (0.00 sec)
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## 参照 {#see-also}
 
-* [Placement Rules in SQL](/placement-rules-in-sql.md)
-* [SHOW PLACEMENT FOR](/sql-statements/sql-statement-show-placement-for.md)
-* [CREATE PLACEMENT POLICY](/sql-statements/sql-statement-create-placement-policy.md)
+-   [SQL の配置ルール](/placement-rules-in-sql.md)
+-   [表示配置](/sql-statements/sql-statement-show-placement-for.md)
+-   [配置ポリシーの作成](/sql-statements/sql-statement-create-placement-policy.md)

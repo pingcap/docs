@@ -1,52 +1,52 @@
 ---
 title: ticloud config create
-summary: The reference of `ticloud config create`.
+summary: `ticloud config create` のリファレンス。
 ---
 
-# ticloud config create
+# ticloud 設定作成 {#ticloud-config-create}
 
-Create a [user profile](/tidb-cloud/cli-reference.md#user-profile) to store user profile settings:
+ユーザー プロファイル設定を保存する[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)作成します。
 
 ```shell
 ticloud config create [flags]
 ```
 
-> **Note:**
+> **注記：**
 >
-> Before creating a user profile, you need to [create a TiDB Cloud API Key](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
+> ユーザー プロファイルを作成する前に、 [TiDB CloudAPIキーを作成する](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)を実行する必要があります。
 
-## Examples
+## 例 {#examples}
 
-Create a user profile in interactive mode:
+対話モードでユーザー プロファイルを作成します。
 
 ```shell
 ticloud config create
 ```
 
-Create a user profile in non-interactive mode:
+非対話型モードでユーザー プロファイルを作成します。
 
 ```shell
 ticloud config create --profile-name <profile-name> --public-key <public-key> --private-key <private-key>
 ```
 
-## Flags
+## 旗 {#flags}
 
-In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
+非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLI プロンプトに従ってフラグを入力するだけです。
 
-| Flag                  | Description                                   | Required | Note                             |
-|-----------------------|-----------------------------------------------|----------|-----------------------------------|
-| -h, --help            | Help information for this command                     | No       | Works in both non-interactive and interactive modes. |
-| --private-key string  | The private key of the TiDB Cloud API         | Yes      | Only works in non-interactive mode. |
-| --profile-name string | The name of the profile, which must not contain `.` | Yes      | Only works in non-interactive mode. |
-| --public-key string   | The public key of the TiDB Cloud API          | Yes      | Only works in non-interactive mode. |
+| フラグ                | 説明                | 必須  | 注記                       |
+| ------------------ | ----------------- | --- | ------------------------ |
+| -h, --help         | このコマンドのヘルプ情報      | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
+| --秘密鍵文字列           | TiDB CloudAPIの秘密鍵 | はい  | 非対話型モードでのみ動作します。         |
+| --profile-name 文字列 | プロファイルの名前`.`を含まない | はい  | 非対話型モードでのみ動作します。         |
+| --公開鍵文字列           | TiDB CloudAPIの公開鍵 | はい  | 非対話型モードでのみ動作します。         |
 
-## Inherited flags
+## 継承されたフラグ {#inherited-flags}
 
-| Flag                 | Description                                  | Required | Note                                                                                                                    |
-|----------------------|----------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                     | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                                      |
+| フラグ               | 説明                                                                             | 必須  | 注記                                                           |
+| ----------------- | ------------------------------------------------------------------------------ | --- | ------------------------------------------------------------ |
+| --色なし             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話モードでのみ機能します。対話モードでは、一部の UI コンポーネントで色を無効にしても機能しない可能性があります。 |
+| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                     |
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI に関してご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)作成してください。また、あらゆる貢献を歓迎します。

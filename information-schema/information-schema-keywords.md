@@ -1,48 +1,44 @@
 ---
 title: KEYWORDS
-summary: Learn the `KEYWORDS` INFORMATION_SCHEMA table.
+summary: `KEYWORDS` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# KEYWORDS
+# キーワード {#keywords}
 
-Starting from v7.6.0, TiDB provides the `KEYWORDS` table. You can use this table to get information about [keywords](/keywords.md) in TiDB.
+v7.6.0 以降、TiDB は`KEYWORDS`テーブルを提供します。このテーブルを使用して、TiDB の[キーワード](/keywords.md)に関する情報を取得できます。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC keywords;
 ```
 
-The output is as follows:
+出力は次のようになります。
 
-```
-+----------+--------------+------+------+---------+-------+
-| Field    | Type         | Null | Key  | Default | Extra |
-+----------+--------------+------+------+---------+-------+
-| WORD     | varchar(128) | YES  |      | NULL    |       |
-| RESERVED | int(11)      | YES  |      | NULL    |       |
-+----------+--------------+------+------+---------+-------+
-2 rows in set (0.00 sec)
-```
+    +----------+--------------+------+------+---------+-------+
+    | Field    | Type         | Null | Key  | Default | Extra |
+    +----------+--------------+------+------+---------+-------+
+    | WORD     | varchar(128) | YES  |      | NULL    |       |
+    | RESERVED | int(11)      | YES  |      | NULL    |       |
+    +----------+--------------+------+------+---------+-------+
+    2 rows in set (0.00 sec)
 
-Field description:
+フィールドの説明:
 
-- `WORD`: The keyword.
-- `RESERVED`: Whether the keyword is reserved.
+-   `WORD` : キーワード。
+-   `RESERVED` : キーワードが予約されているかどうか。
 
-The following statement queries the information about `ADD` and `USER` keywords:
+次のステートメントは、キーワード`ADD`と`USER`に関する情報を照会します。
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.KEYWORDS WHERE WORD IN ('ADD','USER');
 ```
 
-From the output, you can see that `ADD` is a reserved keyword and `USER` is a non-reserved keyword.
+出力から、 `ADD`予約済みキーワードであり、 `USER`非予約済みキーワードであることがわかります。
 
-```
-+------+----------+
-| WORD | RESERVED |
-+------+----------+
-| ADD  |        1 |
-| USER |        0 |
-+------+----------+
-2 rows in set (0.00 sec)
-```
+    +------+----------+
+    | WORD | RESERVED |
+    +------+----------+
+    | ADD  |        1 |
+    | USER |        0 |
+    +------+----------+
+    2 rows in set (0.00 sec)

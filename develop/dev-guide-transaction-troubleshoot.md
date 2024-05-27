@@ -1,105 +1,105 @@
 ---
 title: Handle Transaction Errors
-summary: Learn about how to handle transaction errors, such as deadlocks and application retry errors.
+summary: デッドロックやアプリケーション再試行エラーなどのトランザクション エラーを処理する方法について学習します。
 ---
 
-# Handle Transaction Errors
+# トランザクションエラーの処理 {#handle-transaction-errors}
 
-This document introduces how to handle transaction errors, such as deadlocks and application retry errors.
+このドキュメントでは、デッドロックやアプリケーション再試行エラーなどのトランザクション エラーを処理する方法について説明します。
 
-## Deadlocks
+## デッドロック {#deadlocks}
 
-The following error in your application indicates a deadlock issue:
+アプリケーション内の次のエラーは、デッドロックの問題を示しています。
 
 ```sql
 ERROR 1213: Deadlock found when trying to get lock; try restarting transaction
 ```
 
-A deadlock occurs when two or more transactions are waiting for each other to release the lock they already hold, or the inconsistent lock order results in a loop waiting for the lock resources.
+デッドロックは、2 つ以上のトランザクションが、既に保持しているロックを互いに解放するのを待機している場合、またはロックの順序に一貫性がないためにロック リソースを待機するループが発生した場合に発生します。
 
-The following is an example of a deadlock using the table `books` in the [`bookshop`](/develop/dev-guide-bookshop-schema-design.md) database:
+以下は、データベース[`bookshop`](/develop/dev-guide-bookshop-schema-design.md)のテーブル`books`を使用したデッドロックの例です。
 
-First, insert 2 rows into the table `books`:
+まず、表`books`に 2 行挿入します。
 
 ```sql
 INSERT INTO books (id, title, stock, published_at) VALUES (1, 'book-1', 10, now()), (2, 'book-2', 10, now());
 ```
 
-In TiDB pessimistic transaction mode, if two clients execute the following statements respectively, a deadlock will occur:
+TiDB悲観的トランザクション モードでは、2 つのクライアントがそれぞれ次のステートメントを実行すると、デッドロックが発生します。
 
-| Client-A                                                      | Client-B                                                            |
-| --------------------------------------------------------------| --------------------------------------------------------------------|
-| BEGIN;                                                        |                                                                     |
-|                                                               | BEGIN;                                                              |
-| UPDATE books SET stock=stock-1 WHERE id=1;                    |                                                                     |
-|                                                               | UPDATE books SET stock=stock-1 WHERE id=2;                          |
-| UPDATE books SET stock=stock-1 WHERE id=2; -- execution will be blocked |                                                                     |
-|                                                               | UPDATE books SET stock=stock-1 WHERE id=1; -- a deadlock error occurs |
+| クライアントA                                                   | クライアントB                                                       |
+| --------------------------------------------------------- | ------------------------------------------------------------- |
+| 始める;                                                      |                                                               |
+|                                                           | 始める;                                                          |
+| 本を更新します。set stock=stock-1 WHERE id=1;                     |                                                               |
+|                                                           | 本を更新します。set stock=stock-1 WHERE id=2;                         |
+| UPDATE books SET stock=stock-1 WHERE id=2; -- 実行はブロックされます |                                                               |
+|                                                           | UPDATE books SET stock=stock-1 WHERE id=1; -- デッドロックエラーが発生します |
 
-After client-B encounters a deadlock error, TiDB automatically rolls back the transaction in client-B. Updating `id=2` in client-A will be executed successfully. You can then run `COMMIT` to finish the transaction.
+クライアント B でデッドロック エラーが発生すると、TiDB は自動的にクライアント B のトランザクションをロールバックします。クライアント A の`id=2`更新は正常に実行されます。その後、 `COMMIT`を実行してトランザクションを終了できます。
 
-### Solution 1: avoid deadlocks
+### 解決策1: デッドロックを回避する {#solution-1-avoid-deadlocks}
 
-To get better performance, you can avoid deadlocks at the application level by adjusting the business logic or schema design. In the example above, if client-B also uses the same update order as client-A, that is, they update books with `id=1` first, and then update books with `id=2`. The deadlock can then be avoided:
+パフォーマンスを向上させるには、ビジネス ロジックまたはスキーマ設計を調整して、アプリケーション レベルでデッドロックを回避できます。上記の例では、クライアント B もクライアント A と同じ更新順序を使用する場合、つまり、最初に`id=1`で本を更新し、次に`id=2`で本を更新します。これにより、デッドロックを回避できます。
 
-| Client-A                                                    | Client-B                                                         |
-| ---------------------------------------------------------- | ----------------------------------------------------------------|
-| BEGIN;                                                     |                                                                 |
-|                                                            | BEGIN;                                                          |
-| UPDATE books SET stock=stock-1 WHERE id=1;                 |                                                                 |
-|                                                            | UPDATE books SET stock=stock-1 WHERE id=1;  -- will be blocked  |
-| UPDATE books SET stock=stock-1 WHERE id=2;                 |                                                                 |
-| COMMIT;                                                    |                                                                 |
-|                                                            | UPDATE books SET stock=stock-1 WHERE id=2;                      |
-|                                                            | COMMIT;                                                         |
+| クライアントA                               | クライアントB                                                |
+| ------------------------------------- | ------------------------------------------------------ |
+| 始める;                                  |                                                        |
+|                                       | 始める;                                                   |
+| 本を更新します。set stock=stock-1 WHERE id=1; |                                                        |
+|                                       | UPDATE books SET stock=stock-1 WHERE id=1; -- ブロックされます |
+| 本を更新します。set stock=stock-1 WHERE id=2; |                                                        |
+| 専念;                                   |                                                        |
+|                                       | 本を更新します。set stock=stock-1 WHERE id=2;                  |
+|                                       | 専念;                                                    |
 
-Alternatively, you can update 2 books with 1 SQL statement, which can also avoid the deadlock and execute more efficiently:
+あるいは、1 つの SQL ステートメントで 2 冊の本を更新することもできます。これにより、デッドロックを回避し、より効率的に実行できます。
 
 ```sql
 UPDATE books SET stock=stock-1 WHERE id IN (1, 2);
 ```
 
-### Solution 2: reduce transaction granularity
+### 解決策2: トランザクションの粒度を下げる {#solution-2-reduce-transaction-granularity}
 
-If you only update 1 book in each transaction, you can also avoid deadlocks. However, the trade-off is that too small transaction granularity may affect performance.
+各トランザクションで 1 冊のみを更新する場合も、デッドロックを回避できます。ただし、トレードオフとして、トランザクションの粒度が小さすぎるとパフォーマンスに影響する可能性があります。
 
-### Solution 3: use optimistic transactions
+### 解決策3:楽観的トランザクションを使用する {#solution-3-use-optimistic-transactions}
 
-There are no deadlocks in the optimistic transaction model. But in your application, you need to add the optimistic transaction retry logic in case of failure. For details, see [Application retry and error handling](#application-retry-and-error-handling).
+楽観的トランザクション モデルではデッドロックは発生しません。ただし、アプリケーションでは、失敗した場合に備えて楽観的トランザクションの再試行ロジックを追加する必要があります。詳細については、 [アプリケーションの再試行とエラー処理](#application-retry-and-error-handling)を参照してください。
 
-### Solution 4: retry
+### 解決策4: 再試行 {#solution-4-retry}
 
-Add the retry logic in the application as suggested in the error message. For details, see [Application retry and error handling](#application-retry-and-error-handling).
+エラー メッセージに示されているように、アプリケーションに再試行ロジックを追加します。詳細については、 [アプリケーションの再試行とエラー処理](#application-retry-and-error-handling)参照してください。
 
-## Application retry and error handling
+## アプリケーションの再試行とエラー処理 {#application-retry-and-error-handling}
 
-Although TiDB is as compatible as possible with MySQL, the nature of its distributed system leads to certain differences. One of them is the transaction model.
+TiDB は MySQL と可能な限り互換性がありますが、分散システムの性質上、いくつかの違いがあります。その 1 つがトランザクション モデルです。
 
-The Adapters and ORMs that developers use to connect with databases are tailored for traditional databases such as MySQL and Oracle. In these databases, transactions rarely fail to commit at the default isolation level, so retry mechanisms are not required. When a transaction fails to commit, these clients abort due to an error, as it is treated as an exception in these databases.
+開発者がデータベースに接続するために使用するアダプタと ORM は、MySQL や Oracle などの従来のデータベースに合わせて調整されています。これらのデータベースでは、デフォルトの分離レベルでトランザクションがコミットに失敗することはほとんどないため、再試行メカニズムは必要ありません。トランザクションがコミットに失敗すると、これらのデータベースでは例外として扱われるため、クライアントはエラーのために中止します。
 
-Different from traditional databases such as MySQL, in TiDB, if you use the optimistic transaction model and want to avoid commit failure, you need to add a mechanism to handle related exceptions in your applications.
+MySQL などの従来のデータベースとは異なり、TiDB では、楽観的トランザクション モデルを使用してコミットの失敗を回避する場合、アプリケーションで関連する例外を処理するメカニズムを追加する必要があります。
 
-The following Python pseudocode shows how to implement application-level retries. It does not require your driver or ORM to implement advanced retry logic. It can be used in any programming language or environment.
+次の Python 疑似コードは、アプリケーション レベルの再試行を実装する方法を示しています。高度な再試行ロジックを実装するためにドライバーや ORM は必要ありません。任意のプログラミング言語や環境で使用できます。
 
-Your retry logic must follow the following rules:
+再試行ロジックは次のルールに従う必要があります。
 
-- Throws an error if the number of failed retries reaches the `max_retries` limit.
-- Use `try ... catch ...` to catch SQL execution exceptions. Retry when encountering the following errors. Roll back when encountering other errors.
-    - `Error 8002: can not retry select for update statement`: SELECT FOR UPDATE write conflict error
-    - `Error 8022: Error: KV error safe to retry`: transaction commit failed error.
-    - `Error 8028: Information schema is changed during the execution of the statement`: Table schema has been changed by DDL operation, resulting in an error in the transaction commit.
-    - `Error 9007: Write conflict`: Write conflict error, usually caused by multiple transactions modifying the same row of data when the optimistic transaction mode is used.
-- `COMMIT` the transaction at the end of the try block.
+-   失敗した再試行回数が`max_retries`制限に達するとエラーがスローされます。
+-   SQL 実行例外をキャッチするには`try ... catch ...`使用します。次のエラーが発生した場合は再試行します。その他のエラーが発生した場合はロールバックします。
+    -   `Error 8002: can not retry select for update statement` : SELECT FOR UPDATE 書き込み競合エラー
+    -   `Error 8022: Error: KV error safe to retry` : トランザクションのコミットに失敗したエラー。
+    -   `Error 8028: Information schema is changed during the execution of the statement` : DDL 操作によってテーブル スキーマが変更され、トランザクションのコミットでエラーが発生しました。
+    -   `Error 9007: Write conflict` : 書き込み競合エラー。通常、楽観的トランザクション モードが使用されているときに、複数のトランザクションが同じデータ行を変更することによって発生します。
+-   `COMMIT` try ブロックの最後にあるトランザクション。
 
 <CustomContent platform="tidb">
 
-For more information about error codes, see [Error Codes and Troubleshooting](/error-codes.md).
+エラーコードの詳細については、 [エラーコードとトラブルシューティング](/error-codes.md)参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-For more information about error codes, see [Error Codes and Troubleshooting](https://docs.pingcap.com/tidb/stable/error-codes).
+エラーコードの詳細については、 [エラーコードとトラブルシューティング](https://docs.pingcap.com/tidb/stable/error-codes)参照してください。
 
 </CustomContent>
 
@@ -125,32 +125,32 @@ while True:
             sleep(sleep_ms) # make sure your sleep() takes milliseconds
 ```
 
-> **Note:**
+> **注記：**
 >
-> If you frequently encounter `Error 9007: Write conflict`, you may need to check your schema design and the data access patterns of your workload to find the root cause of the conflict and try to avoid conflicts by a better design.
+> `Error 9007: Write conflict`頻繁に発生する場合は、スキーマ設計とワークロードのデータ アクセス パターンを確認して競合の根本原因を特定し、より適切な設計で競合を回避する必要があります。
 
 <CustomContent platform="tidb">
 
-For information about how to troubleshoot and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
+トランザクションの競合のトラブルシューティングと解決方法については、 [ロック競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-For information about how to troubleshoot and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts).
+トランザクションの競合のトラブルシューティングと解決方法については、 [ロック競合のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts)参照してください。
 
 </CustomContent>
 
-## See also
+## 参照 {#see-also}
 
 <CustomContent platform="tidb">
 
-- [Troubleshoot Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)
+-   [楽観的トランザクションにおける書き込み競合のトラブルシューティング](/troubleshoot-write-conflicts.md)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- [Troubleshoot Write Conflicts in Optimistic Transactions](https://docs.pingcap.com/tidb/stable/troubleshoot-write-conflicts)
+-   [楽観的トランザクションにおける書き込み競合のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-write-conflicts)
 
 </CustomContent>

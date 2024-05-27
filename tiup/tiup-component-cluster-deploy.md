@@ -1,70 +1,70 @@
 ---
 title: tiup cluster deploy
-summary: The tiup cluster deploy command is used to deploy a new cluster with specified options such as cluster name, version, and topology file. Additional options include user, identity file, password, ignore config check, skip labels, skip create user, and help. The output is the deployment log.
+summary: tiup cluster deployコマンドは、クラスター名、バージョン、トポロジ ファイルなどの指定されたオプションを使用して新しいクラスターをデプロイするために使用されます。追加のオプションには、ユーザー、ID ファイル、パスワード、構成チェックの無視、ラベルのスキップ、ユーザーの作成のスキップ、ヘルプなどがあります。出力はデプロイメント ログです。
 ---
 
-# tiup cluster deploy
+# tiup cluster deploy {#tiup-cluster-deploy}
 
-The `tiup cluster deploy` command is used to deploy a new cluster.
+`tiup cluster deploy`コマンドは、新しいクラスターをデプロイするために使用されます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 ```
 
-- `<cluster-name>`: the name of the new cluster, which cannot be the same as the existing cluster names.
-- `<version>`: the version number of the TiDB cluster to deploy, such as `v8.1.0`.
-- `<topology.yaml>`: the prepared [topology file](/tiup/tiup-cluster-topology-reference.md).
+-   `<cluster-name>` : 新しいクラスターの名前。既存のクラスター名と同じにすることはできません。
+-   `<version>` : デプロイする TiDB クラスターのバージョン番号 (例: `v8.1.0` 。
+-   `<topology.yaml>` : 準備された[トポロジファイル](/tiup/tiup-cluster-topology-reference.md) 。
 
-## Options
+## オプション {#options}
 
-### -u, --user
+### -u、--ユーザー {#u-user}
 
-- Specifies the user name used to connect to the target machine. This user must have the secret-free sudo root permission on the target machine.
-- Data type: `STRING`
-- Default: the current user who executes the command.
+-   ターゲット マシンへの接続に使用するユーザー名を指定します。このユーザーには、ターゲット マシンに対するシークレットフリーの sudo ルート権限が必要です。
+-   データ型: `STRING`
+-   デフォルト: コマンドを実行する現在のユーザー。
 
-### -i, --identity_file
+### -i, --identity_file {#i-identity-file}
 
-- Specifies the key file used to connect to the target machine.
-- Data type: `STRING`
-- If this option is not specified in the command, the `~/.ssh/id_rsa` file is used to connect to the target machine by default.
+-   ターゲット マシンに接続するために使用されるキー ファイルを指定します。
+-   データ型: `STRING`
+-   コマンドでこのオプションが指定されていない場合、デフォルトで`~/.ssh/id_rsa`ファイルがターゲット マシンへの接続に使用されます。
 
-### -p, --password
+### -p, --パスワード {#p-password}
 
-- Specifies the password used to connect to the target machine. Do not use this option with `-i/--identity_file` at the same time.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   ターゲット マシンに接続するために使用するパスワードを指定します。このオプションは`-i/--identity_file`と同時に使用しないでください。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトでは無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないようにします。
 
-### --ignore-config-check
+### --設定チェックを無視 {#ignore-config-check}
 
-- This option is used to skip the configuration check. After the binary files of components are deployed, the configurations of TiDB, TiKV, and PD components are checked using `<binary> --config-check <config-file>`. `<binary>` is the path of the deployed binary file. `<config-file>` is the configuration file generated based on the user configuration.
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
-- Default: false
+-   このオプションは、構成チェックをスキップするために使用されます。コンポーネントのバイナリ ファイルがデプロイされた後、 `<binary> --config-check <config-file>`を使用して TiDB、TiKV、および PD コンポーネントの構成がチェックされます。3 `<binary>` 、デプロイされたバイナリ ファイルのパスです。5 `<config-file>` 、ユーザー構成に基づいて生成された構成ファイルです。
+-   このオプションはデフォルトでは無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないようにします。
+-   デフォルト: false
 
-### --no-labels
+### --no-labels {#no-labels}
 
-- This option is used to skip the label check.
-- When two or more TiKV nodes are deployed on the same physical machine, a risk exists: PD cannot learn the cluster topology, so PD might schedule multiple replicas of a Region to different TiKV nodes on one physical machine, which makes this physical machine a single point. To avoid this risk, you can use labels to tell PD not to schedule the same Region to the same machine. See [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md) for label configuration.
-- For the test environment, this risk might matter and you can use `--no-labels` to skip the check.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   このオプションはラベルチェックをスキップするために使用されます。
+-   2 つ以上の TiKV ノードが同じ物理マシンにデプロイされている場合、PD はクラスター トポロジを学習できないため、1 つの物理マシン上の異なる TiKV ノードにリージョンの複数のレプリカをスケジュールし、この物理マシンを単一のポイントにしてしまうというリスクがあります。このリスクを回避するには、ラベルを使用して、同じリージョンを同じマシンにスケジュールしないように PD に指示します。ラベルの構成については、 [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md)参照してください。
+-   テスト環境では、このリスクが重要になる可能性があるため、 `--no-labels`使用してチェックをスキップできます。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトでは無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないようにします。
 
-### --skip-create-user
+### --ユーザーの作成をスキップ {#skip-create-user}
 
-- During the cluster deployment, tiup-cluster checks whether the specified user name in the topology file exists or not. If not, it creates one. To skip this check, you can use the `--skip-create-user` option.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   クラスターの展開中に、 tiup-cluster はトポロジ ファイルに指定されたユーザー名が存在するかどうかを確認します。存在しない場合は、ユーザー名を作成します。このチェックをスキップするには、 `--skip-create-user`オプションを使用します。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトでは無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないようにします。
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints help information.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトでは無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないようにします。
 
-## Output
+## 出力 {#output}
 
-The deployment log.
+デプロイメント ログ。
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP クラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

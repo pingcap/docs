@@ -1,18 +1,18 @@
 ---
 title: TABLE_STORAGE_STATS
-summary: Learn the `TABLE_STORAGE_STATS` INFORMATION_SCHEMA table.
+summary: `TABLE_STORAGE_STATS` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# TABLE_STORAGE_STATS
+# テーブルストレージ統計 {#table-storage-stats}
 
-The `TABLE_STORAGE_STATS` table provides information about table sizes as stored by the storage engine (TiKV).
+`TABLE_STORAGE_STATS`テーブルは、storageエンジン (TiKV) によって保存されるテーブル サイズに関する情報を提供します。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC TABLE_STORAGE_STATS;
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 +--------------------+-------------+------+------+---------+-------+
@@ -36,7 +36,7 @@ INSERT INTO test.t1 VALUES (1);
 SELECT * FROM TABLE_STORAGE_STATS WHERE table_schema = 'test' AND table_name = 't1'\G
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 *************************** 1. row ***************************
@@ -51,13 +51,13 @@ EMPTY_REGION_COUNT: 1
 1 row in set (0.00 sec)
 ```
 
-Fields in the `TABLE_STORAGE_STATS` table are described as follows:
+`TABLE_STORAGE_STATS`テーブル内のフィールドは次のように説明されます。
 
-* `TABLE_SCHEMA`: The name of the schema to which the table belongs.
-* `TABLE_NAME`: The name of the table.
-* `TABLE_ID`: The ID of the table.
-* `PEER_COUNT`: The number of replicas of the table.
-* `REGION_COUNT`: The number of Regions.
-* `EMPTY_REGION_COUNT`: The number of Regions that do not contain data in this table.
-* `TABLE_SIZE`: The total size of the table, in the unit of MiB.
-* `TABLE_KEYS`: The total number of records in the table.
+-   `TABLE_SCHEMA` : テーブルが属するスキーマの名前。
+-   `TABLE_NAME` : テーブルの名前。
+-   `TABLE_ID` : テーブルの ID。
+-   `PEER_COUNT` : テーブルのレプリカの数。
+-   `REGION_COUNT` : リージョンの数。
+-   `EMPTY_REGION_COUNT` : このテーブルにデータが含まれていないリージョンの数。
+-   `TABLE_SIZE` : テーブルの合計サイズ (MiB 単位)。
+-   `TABLE_KEYS` : テーブル内のレコードの合計数。

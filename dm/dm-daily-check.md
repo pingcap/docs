@@ -1,17 +1,17 @@
 ---
 title: Daily Check for TiDB Data Migration
-summary: Learn about the daily check of TiDB Data Migration (DM).
+summary: TiDB データ移行 (DM) の毎日のチェックについて説明します。
 ---
 
-# Daily Check for TiDB Data Migration
+# TiDBデータ移行の毎日のチェック {#daily-check-for-tidb-data-migration}
 
-This document summarizes how to perform a daily check on TiDB Data Migration (DM).
+このドキュメントでは、TiDB データ移行 (DM) の毎日のチェックを実行する方法をまとめています。
 
-+ Method 1: Execute the `query-status` command to check the running status of the task and the error output (if any). For details, see [Query Status](/dm/dm-query-status.md).
+-   方法 1: `query-status`コマンドを実行して、タスクの実行ステータスとエラー出力 (ある場合) を確認します。詳細については、 [クエリステータス](/dm/dm-query-status.md)を参照してください。
 
-+ Method 2: If Prometheus and Grafana are correctly deployed when you deploy the DM cluster using TiUP, you can view DM monitoring metrics in Grafana. For example, suppose that the Grafana's address is `172.16.10.71`, go to <http://172.16.10.71:3000>, enter the Grafana dashboard, and select the DM Dashboard to check monitoring metrics of DM. For more information of these metrics, see [DM Monitoring Metrics](/dm/monitor-a-dm-cluster.md).
+-   方法 2: TiUPを使用して DM クラスターをデプロイするときに Prometheus と Grafana が正しくデプロイされていれば、Grafana で DM モニタリング メトリックを表示できます。たとえば、Grafana のアドレスが`172.16.10.71`あるとすると、 [http://172.16.10.71:3000](http://172.16.10.71:3000)に進み、Grafana ダッシュボードに入り、DM ダッシュボードを選択して DM のモニタリング メトリックを確認します。これらのメトリックの詳細については、 [DM モニタリング メトリック](/dm/monitor-a-dm-cluster.md)を参照してください。
 
-+ Method 3: Check the running status of DM and the error (if any) using the log file.
+-   方法 3: ログ ファイルを使用して、DM の実行ステータスとエラー (ある場合) を確認します。
 
-    - DM-master log directory: It is specified by the `--log-file` DM-master process parameter. If DM is deployed using TiUP, the log directory is `{log_dir}` in the DM-master node.
-    - DM-worker log directory: It is specified by the `--log-file` DM-worker process parameter. If DM is deployed using TiUP, the log directory is `{log_dir}` in the DM-worker node.
+    -   DM マスター ログ ディレクトリ: `--log-file` DM マスター プロセス パラメータで指定します。TiUPを使用して DM を展開する場合、ログ ディレクトリは DM マスター ノードの`{log_dir}`なります。
+    -   DM ワーカー ログ ディレクトリ: `--log-file` DM ワーカー プロセス パラメータで指定します。DM がTiUPを使用してデプロイされている場合、ログ ディレクトリは DM ワーカー ノードの`{log_dir}`なります。

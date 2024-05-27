@@ -1,15 +1,15 @@
 ---
 title: Distinct Optimization
-summary: Introduce the `distinct` optimization in the TiDB query optimizer.
+summary: TiDB クエリ オプティマイザーに `distinct` 最適化を導入します。
 ---
 
-# Distinct Optimization
+# クエリの最適化 {#distinct-optimization}
 
-This document introduces the `distinct` optimization in the TiDB query optimizer, including `SELECT DISTINCT` and `DISTINCT` in the aggregate functions.
+このドキュメントでは、集計関数の`SELECT DISTINCT`と`DISTINCT`を含む、TiDB クエリ オプティマイザーの`distinct`最適化について説明します。
 
-## `DISTINCT` modifier in `SELECT` statements
+## <code>SELECT</code>ステートメントの<code>DISTINCT</code>修飾子 {#code-distinct-code-modifier-in-code-select-code-statements}
 
-The `DISTINCT` modifier specifies removal of duplicate rows from the result set. `SELECT DISTINCT` is transformed to `GROUP BY`, for example:
+`DISTINCT`修飾子は、結果セットから重複行を削除することを指定します。 `SELECT DISTINCT`は`GROUP BY`に変換されます。例:
 
 ```sql
 mysql> explain SELECT DISTINCT a from t;
@@ -23,23 +23,23 @@ mysql> explain SELECT DISTINCT a from t;
 3 rows in set (0.00 sec)
 ```
 
-## `DISTINCT` option in aggregate functions
+## 集計関数の<code>DISTINCT</code>オプション {#code-distinct-code-option-in-aggregate-functions}
 
-Usually, aggregate functions with the `DISTINCT` option is executed in the TiDB layer in a single-threaded execution model.
+通常、オプション`DISTINCT`を指定した集計関数は、シングルスレッド実行モデルの TiDBレイヤーで実行されます。
 
 <CustomContent platform="tidb">
 
-The [`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down) system variable or the [`distinct-agg-push-down`](/tidb-configuration-file.md#distinct-agg-push-down) configuration item in TiDB controls whether to rewrite the distinct aggregate queries and push them to the TiKV or TiFlash Coprocessor.
+TiDB の[`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down)システム変数または[`distinct-agg-push-down`](/tidb-configuration-file.md#distinct-agg-push-down)構成項目は、個別の集計クエリを書き換えて TiKV またはTiFlashコプロセッサーにプッシュするかどうかを制御します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-The [`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down) system variable in TiDB controls whether to rewrite the distinct aggregate queries and push them to the TiKV or TiFlash Coprocessor.
+TiDB の[`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down)システム変数は、個別の集計クエリを書き換えて TiKV またはTiFlashコプロセッサーにプッシュするかどうかを制御します。
 
 </CustomContent>
 
-Take the following queries as an example of this optimization. `tidb_opt_distinct_agg_push_down` is disabled by default, which means the aggregate functions are executed in the TiDB layer. After enabling this optimization by setting its value to `1`, the `distinct a` part of `count(distinct a)` is pushed to TiKV or TiFlash Coprocessor: there is a HashAgg_5 to remove the duplicated values on column a in the TiKV Coprocessor. It might reduce the computation overhead of `HashAgg_8` in the TiDB layer.
+この最適化の例として、次のクエリを取り上げます。 `tidb_opt_distinct_agg_push_down`デフォルトで無効になっており、集計関数はTiDBレイヤーで実行されます。値を`1`に設定してこの最適化を有効にすると、 `count(distinct a)`の`distinct a`の部分が TiKV またはTiFlashコプロセッサーにプッシュされます。TiKVコプロセッサーの列 a の重複値を削除する HashAgg_5 があります。これにより、 TiDBレイヤーの`HashAgg_8`の計算オーバーヘッドが削減される可能性があります。
 
 ```sql
 mysql> desc select count(distinct a) from test.t;

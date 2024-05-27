@@ -1,81 +1,81 @@
 ---
 title: TiFlash Command-line Flags
-summary: Learn the command-line startup flags of TiFlash.
+summary: TiFlashのコマンドライン起動フラグについて学習します。
 ---
 
-# TiFlash Command-Line Flags
+# TiFlashコマンドラインフラグ {#tiflash-command-line-flags}
 
-This document introduces the command-line flags that you can use when you launch TiFlash.
+このドキュメントでは、 TiFlash を起動するときに使用できるコマンドライン フラグについて説明します。
 
-## `server --config-file`
+## <code>server --config-file</code> {#code-server-config-file-code}
 
-+ Specifies the path of the TiFlash configuration file
-+ Default: ""
-+ You must specify the configuration file. For detailed configuration items, refer to [TiFlash configuration parameters](/tiflash/tiflash-configuration.md).
+-   TiFlash構成ファイルのパスを指定します
+-   デフォルト： &quot;&quot;
+-   設定ファイルを指定する必要があります。詳細な設定項目については[TiFlash構成パラメータ](/tiflash/tiflash-configuration.md)を参照してください。
 
-## `dttool migrate`
+## <code>dttool migrate</code> {#code-dttool-migrate-code}
 
-- Migrates the file format of DTFile (for testing or downgrading). Data is migrated in the unit of a single DTFile. If you want to migrate the whole table, you need to locate all the paths similar to `<data dir>/t_<table id>/stable/dmf_<file id>` and migrate them one by one. You can use scripts to automate the migration.
+-   DTFile のファイル形式を移行します (テストまたはダウングレード用)。データは 1 つの DTFile 単位で移行されます。テーブル全体を移行する場合は、 `<data dir>/t_<table id>/stable/dmf_<file id>`に類似したすべてのパスを見つけて、1 つずつ移行する必要があります。スクリプトを使用して移行を自動化できます。
 
-- User scenarios:
+-   ユーザーシナリオ:
 
-    - If you need to downgrade TiFlash from a version >= v5.4.0 that has enabled data validation to a version < v5.4.0, you can use this tool to downgrade the data format of the DTFile.
-    - If you upgrade TiFlash to a version >= v5.4.0, and if you hope to enable data validation for existing data, you can use this tool to upgrade the data format of the DTFile.
-    - Test the space usage and read speed of the DTFile in different configurations.
-    - If you need to downgrade TiFlash from a version >= v7.3.0 that has enabled small file merging (that is, `storage.format_version` >= 5) to a version < v7.3.0, you can use this tool to downgrade the data format of the DTFile.
+    -   データ検証が有効になっているバージョン &gt;= v5.4.0 からバージョン &lt; v5.4.0 にTiFlash をダウングレードする必要がある場合は、このツールを使用して DTFile のデータ形式をダウングレードできます。
+    -   TiFlashをバージョン &gt;= v5.4.0 にアップグレードし、既存のデータのデータ検証を有効にする場合は、このツールを使用して DTFile のデータ形式をアップグレードできます。
+    -   さまざまな構成で DTFile のスペース使用量と読み取り速度をテストします。
+    -   小さなファイルのマージが有効になっているバージョン &gt;= v7.3.0 (つまり、 `storage.format_version` &gt;= 5) からバージョン &lt; v7.3.0 にTiFlash をダウングレードする必要がある場合は、このツールを使用して DTFile のデータ形式をダウングレードできます。
 
-- Parameters:
-    - `--imitative`: When you do not use the encryption feature of the DTFile, you can use this flag to avoid using the configuration file and connecting to PD.
-    - `--version`: The target version of DTFile. The value options are `1`, `2` (default), and `3`. `1` is the old version, `2` is the version corresponding to the new checksum, and `3` is the version that supports merging small files.
-    - `--algorithm`: The hash algorithm used for data validation. The value options are `xxh3` (default), `city128`, `crc32`, `crc64`, and `none`. This parameter is effective only when `version` is `2`.
-    - `--frame`: The size of the validation frame. The default value is `1048576`. This parameter is effective only when `version` is `2`.
-    - `--compression`: The target compression algorithm. The value options are `LZ4` (default), `LZ4HC`, `zstd`, and `none`.
-    - `--level`: The target compression level. If not specified, the recommended compression level is used by default according to the compression algorithm. If `compression` is set to `LZ4` or `zstd`, the default level is 1. If `compression` is set to `LZ4HC`, the default level is 9. 
-    - `--config-file`: The configuration file of `dttool migrate` is the same as the [configuration file of `server`](/tiflash/tiflash-command-line-flags.md#server---config-file). For more information, see `--imitative`.
-    - `--file-id`: The ID of the DTFile. For example, the ID of the DTFile `dmf_123` is `123`.
-    - `--workdir`: The parent directory of `dmf_xxx`.
-    - `--dry`: The dry run mode. Only the migration process is output.
-    - `--nokeep`: Does not keep the original data. When this option is not enabled, `dmf_xxx.old` files are created.
+-   パラメーター：
+    -   `--imitative` : DTFile の暗号化機能を使用しない場合は、このフラグを使用して、構成ファイルの使用と PD への接続を回避できます。
+    -   `--version` : DTFile のターゲット バージョン。値のオプションは`1` 、 `2` (既定値)、 `3` 。 `1`は古いバージョン、 `2`は新しいチェックサムに対応するバージョン、 `3`小さなファイルのマージをサポートするバージョンです。
+    -   `--algorithm` : データ検証に使用されるハッシュ アルゴリズム。値のオプションは`xxh3` (デフォルト)、 `city128` 、 `crc32` 、 `crc64` 、および`none`です。このパラメーターは`version`が`2`の場合にのみ有効です。
+    -   `--frame` : 検証フレームのサイズ。デフォルト値は`1048576`です。このパラメータは`version`が`2`の場合にのみ有効です。
+    -   `--compression` : ターゲット圧縮アルゴリズム。値のオプションは`LZ4` (デフォルト)、 `LZ4HC` 、 `zstd` 、および`none`です。
+    -   `--level` : ターゲット圧縮レベル。指定しない場合は、圧縮アルゴリズムに従って、推奨される圧縮レベルがデフォルトで使用されます。2 `compression` `LZ4`または`zstd`に設定されている場合、デフォルトのレベルは 1 です。8 `compression` `LZ4HC`に設定されている場合、デフォルトのレベルは 9 です。
+    -   `--config-file` : `dttool migrate`の設定ファイルは[`server`の設定ファイル](/tiflash/tiflash-command-line-flags.md#server---config-file)と同じです。詳細については`--imitative`を参照してください。
+    -   `--file-id` : DTFile の ID。たとえば、DTFile `dmf_123`の ID は`123`です。
+    -   `--workdir` : `dmf_xxx`の親ディレクトリ。
+    -   `--dry` : ドライランモード。移行プロセスのみが出力されます。
+    -   `--nokeep` : 元のデータを保持しません。このオプションが有効になっていない場合、 `dmf_xxx.old`ファイルが作成されます。
 
-> **Warning:**
+> **警告：**
 >
-> TiFlash can read DTFile that uses custom compression algorithms and compression levels. However, only the `lz4` algorithm with the default compression level is officially supported. Custom compression parameters have not been thoroughly tested and are only experimental.
+> TiFlash は、カスタム圧縮アルゴリズムと圧縮レベルを使用する DTFile を読み取ることができます。ただし、デフォルトの圧縮レベルを持つ`lz4`アルゴリズムのみが正式にサポートされています。カスタム圧縮パラメータは十分にテストされておらず、実験的なものにすぎません。
 
-> **Note:**
+> **注記：**
 >
-> For security reasons, DTTool attempts to add a lock to the working directory in the migration mode. Therefore, in the same directory, only one DTTool can perform the migration task at the same time. If you forcibly stop DTTool where the lock is not released, then when you try to rerun DTTool later, it might refuse to perform the migration task.
+> セキュリティ上の理由から、DTTool は移行モードで作業ディレクトリにロックを追加しようとします。そのため、同じディレクトリでは、同時に 1 つの DTTool のみが移行タスクを実行できます。ロックが解除されていない状態で DTTool を強制的に停止すると、後で DTTool を再実行しようとしたときに、移行タスクの実行が拒否される可能性があります。
 >
-> If you encounter this situation, and if you are aware that removing the LOCK file does not cause any data corruption, you can manually delete the LOCK file in the working directory to release the lock.
+> このような状況が発生した場合、LOCK ファイルを削除してもデータが破損しないことがわかっている場合は、作業ディレクトリ内の LOCK ファイルを手動で削除してロックを解除できます。
 
-## `dttool bench`
+## <code>dttool bench</code> {#code-dttool-bench-code}
 
-- Provides a basic I/O speed test for the DTFile.
-- Parameters:
+-   DTFile の基本的な I/O 速度テストを提供します。
+-   パラメーター：
 
-    - `--version`: The version of DTFile. See [`--version` in `dttool migrate`](#dttool-migrate).
-    - `--algorithm`: The hash algorithm used for data validation. See [`--algorithm` in `dttool migrate`](#dttool-migrate).
-    - `--frame`: The size of the validation frame. See [`--frame` in `dttool migrate`](#dttool-migrate).
-    - `--column`: The columns of the table to be tested. The default value is `100`.
-    - `--size`: The rows of the table to be tested. The default value is `1000`.
-    - `--field`: The field length limit of the table to be tested. The default value is `1024`.
-    - `--random`: The random seed. If you do not specify this parameter, the random seed is drawn from the system entropy pool.
-    - `--encryption`: Enables the encryption feature.
-    - `--repeat`: The number of times to repeat the test. The default value is `5`.
-    - `--workdir`: The temporary data directory, which points to a path in the file system to be tested. The default value is `/tmp/test`.
+    -   `--version` : DTFileのバージョン。2 [`dttool migrate`の`--version`](#dttool-migrate)参照してください。
+    -   `--algorithm` : データ検証に使用されるハッシュアルゴリズム[`dttool migrate`の`--algorithm`](#dttool-migrate)を参照してください。
+    -   `--frame` : 検証フレームのサイズ[`--frame`を`dttool migrate`で使用](#dttool-migrate)を参照してください。
+    -   `--column` : テストするテーブルの列。デフォルト値は`100`です。
+    -   `--size` : テストするテーブルの行。デフォルト値は`1000`です。
+    -   `--field` : テストするテーブルのフィールド長の制限。デフォルト値は`1024`です。
+    -   `--random` : ランダム シード。このパラメータを指定しない場合、ランダム シードはシステム エントロピー プールから取得されます。
+    -   `--encryption` : 暗号化機能を有効にします。
+    -   `--repeat` : テストを繰り返す回数。デフォルト値は`5`です。
+    -   `--workdir` : テスト対象のファイル システム内のパスを指す一時データ ディレクトリ。デフォルト値は`/tmp/test`です。
 
-## `dttool inspect`
+## <code>dttool inspect</code> {#code-dttool-inspect-code}
 
-- Checks the integrity of the DTFile. Data validation is performed in the unit of a single DTFile. If you want to validate the whole table, you need to locate all the paths similar to `<data dir>/t_<table id>/stable/dmf_<file id>` and validate them one by one. You can use scripts to automate the validation.
+-   DTFile の整合性をチェックします。データ検証は、単一の DTFile 単位で実行されます。テーブル全体を検証する場合は、 `<data dir>/t_<table id>/stable/dmf_<file id>`に類似するすべてのパスを見つけて、1 つずつ検証する必要があります。スクリプトを使用して検証を自動化できます。
 
-- User scenarios:
+-   ユーザーシナリオ:
 
-    - After you perform a format upgrade or downgrade, you can validate the data integrity of the DTFile.
-    - After you migrate the DTFile to a new environment, you can validate the data integrity of the DTFile.
+    -   形式のアップグレードまたはダウングレードを実行した後、DTFile のデータ整合性を検証できます。
+    -   DTFile を新しい環境に移行した後、DTFile のデータ整合性を検証できます。
 
-- Parameters:
+-   パラメーター：
 
-    - `--config-file`: The configuration file of `dttool bench`. See [`--config-file` in `dttool migrate`](#dttool-migrate).
-    - `--check`: Performs hash validation.
-    - `--file-id`: The ID of the DTFile. See [`--file-id` in `dttool migrate`](#dttool-migrate).
-    - `--imitative`: Imitates the database context. See [`--imitative` in `dttool migrate`](#dttool-migrate).
-    - `--workdir`: The data directory. See [`--workdir` in `dttool migrate`](#dttool-migrate).
+    -   `--config-file` : `dttool bench`の設定ファイル。4 [`dttool migrate`の`--config-file`](#dttool-migrate)参照してください。
+    -   `--check` : ハッシュ検証を実行します。
+    -   `--file-id` : DTFileの[`dttool migrate`の`--file-id`](#dttool-migrate)を参照してください。
+    -   `--imitative` : データベースのコンテキストを模倣します。 [`dttool migrate`の`--imitative`](#dttool-migrate)を参照してください。
+    -   `--workdir` : データディレクトリ。2 [`dttool migrate`の`--workdir`](#dttool-migrate)参照してください。

@@ -1,58 +1,59 @@
 ---
 title: TiDB Cloud Cluster Events
-summary: Learn how to view the events for TiDB Cloud clusters using the Events page.
+summary: イベント ページを使用してTiDB Cloudクラスターのイベントを表示する方法について説明します。
 ---
 
-# TiDB Cloud Cluster Events
+# TiDB Cloudクラスタイベント {#tidb-cloud-cluster-events}
 
-TiDB Cloud logs the historical events at the cluster level. An *event* indicates a change in your TiDB Cloud cluster. You can view the logged events on the **Events** page, including the event type, status, message, trigger time, and trigger user.
+TiDB Cloud は、クラスター レベルで履歴イベントを記録します。*イベントは*、 TiDB Cloudクラスターの変更を示します。イベント タイプ、ステータス、メッセージ、トリガー時間、トリガー ユーザーなど、ログに記録されたイベントは、 **[イベント]**ページで確認できます。
 
-This document describes how to view the events for TiDB Cloud clusters using the **Events** page and lists the supported event types.
+このドキュメントでは、 **[イベント]**ページを使用してTiDB Cloudクラスターのイベントを表示する方法について説明し、サポートされているイベント タイプを一覧表示します。
 
-## View the Events page
+## イベントページをビュー {#view-the-events-page}
 
-To view the events on the Events page, take the following steps:
+イベント ページでイベントを表示するには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
-2. Click the name of the target cluster. The cluster overview page is displayed.
-3. Click **Events** in the left navigation pane.
+2.  対象クラスターの名前をクリックします。クラスターの概要ページが表示されます。
 
-## Logged events
+3.  左側のナビゲーション ペインで**[イベント]**をクリックします。
 
-TiDB Cloud logs the following types of cluster events:
+## 記録されたイベント {#logged-events}
 
-| Event Type| Description |
-|:--- |:--- |
-| CreateCluster |  Create a cluster |  
-| PauseCluster |   Pause a cluster |  
-| ResumeCluster |   Resume a cluster | 
-| ModifyClusterSize |   Modify cluster size | 
-| BackupCluster |   Back up a cluster |  
-| RestoreFromCluster |   Restore a cluster |  
-| CreateChangefeed |   Create a changefeed |  
-| PauseChangefeed |   Pause a changefeed | 
-| ResumeChangefeed |   Resume a changefeed | 
-| DeleteChangefeed |   Delete a changefeed |  
-| EditChangefeed |  Edit a changefeed |  
-| ScaleChangefeed |   Scale the specification of a changefeed |  
-| FailedChangefeed |   Changefeed failures |  
-| ImportData |   Import data to a cluster |  
-| UpdateSpendingLimit |   Update spending limit of a TiDB Serverless cluster |  
-| ResourceLimitation |   Update resource limitation of a TiDB Serverless cluster |  
+TiDB Cloud は、次の種類のクラスター イベントをログに記録します。
 
-For each event, the following information is logged:
+| イベントタイプ    | 説明                                |
+| :--------- | :-------------------------------- |
+| クラスターの作成   | クラスターを作成する                        |
+| 一時停止クラスター  | クラスターを一時停止する                      |
+| 履歴書クラスター   | クラスターを再開する                        |
+| クラスタサイズの変更 | クラスターサイズを変更する                     |
+| バックアップクラスタ | クラスターをバックアップする                    |
+| クラスタからの復元  | クラスターを復元する                        |
+| 変更フィードを作成  | チェンジフィードを作成する                     |
+| 一時停止変更フィード | チェンジフィードを一時停止する                   |
+| 履歴書変更フィード  | チェンジフィードを再開する                     |
+| 削除変更フィード   | 変更フィードを削除する                       |
+| 編集変更フィード   | 変更フィードを編集する                       |
+| スケール変更フィード | チェンジフィードの仕様をスケールする                |
+| 失敗した変更フィード | チェンジフィードの失敗                       |
+| インポートデータ   | クラスターにデータをインポートする                 |
+| 支出制限の更新    | TiDB サーバーレス クラスターの使用制限を更新する       |
+| リソース制限     | TiDB Serverless クラスターのリソース制限を更新する |
 
-- Event Type
-- Status
-- Message
-- Time
-- Triggered By
+各イベントについて、次の情報が記録されます。
 
-## Event retention policy
+-   イベントタイプ
+-   状態
+-   メッセージ
+-   時間
+-   引き起こされた
 
-Event data is kept for 7 days.
+## イベント保持ポリシー {#event-retention-policy}
+
+イベントデータは 7 日間保存されます。

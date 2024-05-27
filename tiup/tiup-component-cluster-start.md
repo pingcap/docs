@@ -1,59 +1,59 @@
 ---
 title: tiup cluster start
-summary: The tiup cluster start command is used to start all or some services of a specified cluster. It has options like --init for safe start, -N for specifying nodes, -R for specifying roles, and -h for help. The output is the log of starting the service.
+summary: tiup cluster startコマンドは、指定されたクラスターのすべてのサービスまたは一部のサービスを開始するために使用されます。安全な開始のための --init、ノードを指定するための -N、ロールを指定するための -R、ヘルプのための -h などのオプションがあります。出力は、サービスの開始のログです。
 ---
 
-# tiup cluster start
+# tiup cluster start {#tiup-cluster-start}
 
-The `tiup cluster start` command is used to start all services or some services of the specified cluster.
+`tiup cluster start`コマンドは、指定されたクラスターのすべてのサービスまたは一部のサービスを開始するために使用されます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster start <cluster-name> [flags]
 ```
 
-`<cluster-name>` is the name of the cluster to operate on. If you forget the cluster name, you can check it using the [`tiup cluster list`](/tiup/tiup-component-cluster-list.md) command.
+`<cluster-name>`は操作対象となるクラスターの名前です。クラスター名を忘れた場合は、 [`tiup cluster list`](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
 
-## Options
+## オプション {#options}
 
-### --init
+### - 初期化 {#init}
 
-Starts the cluster in a safe way. It is recommended to use this option when the cluster is started for the first time. This method generates the password of the TiDB root user at startup and returns the password in the command line interface.
+クラスターを安全な方法で起動します。クラスターを初めて起動する場合は、このオプションを使用することをお勧めします。この方法では、起動時に TiDB ルート ユーザーのパスワードが生成され、コマンド ライン インターフェイスでパスワードが返されます。
 
-> **Note:**
+> **注記：**
 >
-> - After safe start of a TiDB cluster, you cannot log in to the database using the root user without a password. Therefore, you need to record the password returned by the command line for future logins.
-> - The password is generated only once. If you do not record or forget the password, refer to [Forget the `root` password](/user-account-management.md#forget-the-root-password) to change the password.
+> -   TiDB クラスターを安全に起動した後は、パスワードなしで root ユーザーを使用してデータベースにログインすることはできません。そのため、今後のログインのために、コマンド ラインによって返されるパスワードを記録する必要があります。
+> -   パスワードは一度だけ生成されます。パスワードを記録していない場合や忘れた場合は、 [`root`パスワードを忘れた](/user-account-management.md#forget-the-root-password)を参照してパスワードを変更してください。
 
-### -N, --node
+### -N、--ノード {#n-node}
 
-- Specifies the nodes to be started. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the [cluster status table](/tiup/tiup-component-cluster-display.md) returned by the `tiup cluster display` command.
-- Data type: `STRINGS`
-- If this option is not specified in the command, all nodes are started by default.
+-   起動するノードを指定します。このオプションの値は、ノード ID のコンマ区切りリストです。ノード ID は、 `tiup cluster display`コマンドによって返される[クラスターステータステーブル](/tiup/tiup-component-cluster-display.md)の最初の列から取得できます。
+-   データ型: `STRINGS`
+-   コマンドでこのオプションを指定しない場合は、デフォルトですべてのノードが起動されます。
 
-> **Note:**
+> **注記：**
 >
-> If the `-R, --role` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are started.
+> `-R, --role`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`の両方の指定に一致するサービス ノードのみが起動されます。
 
-### -R, --role
+### -R, --役割 {#r-role}
 
-- Specifies the roles of nodes to be started. The value of this option is a comma-separated list of the roles of the nodes. You can get the roles of the nodes from the second column of the [cluster status table](/tiup/tiup-component-cluster-display.md) returned by the `tiup cluster display` command.
-- Data type: `STRINGS`
-- If this option is not specified in the command, all roles are started by default.
+-   起動するノードの役割を指定します。このオプションの値は、ノードの役割のコンマ区切りリストです。ノードの役割は、 `tiup cluster display`コマンドによって返される[クラスターステータステーブル](/tiup/tiup-component-cluster-display.md)の 2 番目の列から取得できます。
+-   データ型: `STRINGS`
+-   コマンドでこのオプションを指定しない場合は、すべてのロールがデフォルトで開始されます。
 
-> **Note:**
+> **注記：**
 >
-> If the `-N, --node` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are started.
+> `-N, --node`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`の両方の指定に一致するサービス ノードのみが起動されます。
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   このオプションは、デフォルトで値`false`で無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないようにする必要があります。
 
-## Output
+## 出力 {#output}
 
-The log of starting the service.
+サービスを開始したログ。
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

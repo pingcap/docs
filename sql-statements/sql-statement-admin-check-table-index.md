@@ -1,31 +1,31 @@
 ---
 title: ADMIN CHECK [TABLE|INDEX] | TiDB SQL Statement Reference
-summary: An overview of the usage of ADMIN for the TiDB database.
+summary: TiDB データベースの ADMIN の使用法の概要。
 category: reference
 ---
 
-# ADMIN CHECK [TABLE|INDEX]
+# 管理者チェック [テーブル|インデックス] {#admin-check-table-index}
 
-The `ADMIN CHECK [TABLE|INDEX]` statement checks for data consistency of tables and indexes.
+`ADMIN CHECK [TABLE|INDEX]`ステートメントは、テーブルとインデックスのデータの一貫性をチェックします。
 
-It does not support the following:
+以下はサポートされていません:
 
-- Checking [FOREIGN KEY constraints](/foreign-key.md).
-- Checking the PRIMARY KEY index if a [clustered primary key](/clustered-indexes.md) is used.
+-   [FOREIGN KEY制約](/foreign-key.md)チェックしています。
+-   [クラスター化された主キー](/clustered-indexes.md)が使用されている場合は、PRIMARY KEY インデックスをチェックします。
 
-If `ADMIN CHECK [TABLE|INDEX]` finds any issues, you can resolve them by dropping and recreating the index. If the issue is not resolved, you can [report a bug](https://docs.pingcap.com/tidb/stable/support).
+`ADMIN CHECK [TABLE|INDEX]`問題が見つかった場合は、インデックスを削除して再作成することで解決できます。問題が解決しない場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support)実行できます。
 
-## Principles
+## 原則 {#principles}
 
-The `ADMIN CHECK TABLE` statement takes the following steps to check the table:
+`ADMIN CHECK TABLE`ステートメントは、テーブルをチェックするために次の手順を実行します。
 
-1. For each index, it checks if the number of records in the index is the same as that in the table.
+1.  各インデックスについて、インデックス内のレコード数がテーブル内のレコード数と同じかどうかを確認します。
 
-2. For each index, it loops over the values in each row and compares the values with that in the table.
+2.  各インデックスについて、各行の値をループし、その値をテーブル内の値と比較します。
 
-If you use the `ADMIN CHECK INDEX` statement, it only checks the specified index.
+`ADMIN CHECK INDEX`ステートメントを使用すると、指定されたインデックスのみがチェックされます。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AdminStmt ::=
@@ -35,38 +35,32 @@ TableNameList ::=
     TableName ( ',' TableName )*
 ```
 
-## Examples
+## 例 {#examples}
 
-To check the consistency of all the data and corresponding indexes in the `tbl_name` table, use `ADMIN CHECK TABLE`:
-
-{{< copyable "sql" >}}
+`tbl_name`テーブル内のすべてのデータと対応するインデックスの一貫性をチェックするには、 `ADMIN CHECK TABLE`を使用します。
 
 ```sql
 ADMIN CHECK TABLE tbl_name [, tbl_name] ...;
 ```
 
-If the consistency check is passed, an empty result is returned. Otherwise, an error message is returned indicating that the data is inconsistent.
-
-{{< copyable "sql" >}}
+整合性チェックに合格すると、空の結果が返されます。それ以外の場合は、データが不整合であることを示すエラー メッセージが返されます。
 
 ```sql
 ADMIN CHECK INDEX tbl_name idx_name;
 ```
 
-The above statement is used to check the consistency of the column data and index data corresponding to the `idx_name` index in the `tbl_name` table. If the consistency check is passed, an empty result is returned; otherwise, an error message is returned indicating that the data is inconsistent.
-
-{{< copyable "sql" >}}
+上記のステートメントは、 `tbl_name`のテーブル内の`idx_name`番目のインデックスに対応する列データとインデックス データの一貫性をチェックするために使用されます。一貫性チェックに合格すると、空の結果が返されます。それ以外の場合は、データが不一致であることを示すエラー メッセージが返されます。
 
 ```sql
 ADMIN CHECK INDEX tbl_name idx_name (lower_val, upper_val) [, (lower_val, upper_val)] ...;
 ```
 
-The above statement is used to check the consistency of the column data and index data corresponding to the `idx_name` index in the `tbl_name` table, with the data range (to be checked) specified. If the consistency check is passed, an empty result is returned. Otherwise, an error message is returned indicating that the data is inconsistent.
+上記のステートメントは、データ範囲（チェック対象）を指定して、 `tbl_name`のテーブルの`idx_name`のインデックスに対応する列データとインデックス データの整合性をチェックするために使用されます。整合性チェックに合格すると、空の結果が返されます。それ以外の場合は、データが不整合であることを示すエラー メッセージが返されます。
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## 参照 {#see-also}
 
-* [`ADMIN REPAIR`](/sql-statements/sql-statement-admin.md#admin-repair-statement)
+-   [`ADMIN REPAIR`](/sql-statements/sql-statement-admin.md#admin-repair-statement)

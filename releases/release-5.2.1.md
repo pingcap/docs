@@ -1,20 +1,20 @@
 ---
 title: TiDB 5.2.1 Release Notes
-summary: TiDB 5.2.1 was released on September 9, 2021. Bug fixes include resolving an error in TiDB caused by a wrong execution plan and fixing the issue of unavailable TiKV caused by Raftstore deadlock when migrating Regions.
+summary: TiDB 5.2.1 は 2021 年 9 月 9 日にリリースされました。バグ修正には、誤った実行プランによって発生した TiDB のエラーの解決と、リージョンの移行時にRaftstoreデッドロックによって発生する TiKV が利用できなくなる問題の修正が含まれます。
 ---
 
-# TiDB 5.2.1 Release Notes
+# TiDB 5.2.1 リリースノート {#tidb-5-2-1-release-notes}
 
-Release date: September 9, 2021
+発売日: 2021年9月9日
 
-TiDB version: 5.2.1
+TiDB バージョン: 5.2.1
 
-## Bug fixes
+## バグの修正 {#bug-fixes}
 
-+ TiDB
+-   ティビ
 
-    - Fix an error that occurs during execution caused by the wrong execution plan. The wrong execution plan is caused by the shallow copy of schema columns when pushing down the aggregation operators on partitioned tables. [#27797](https://github.com/pingcap/tidb/issues/27797) [#26554](https://github.com/pingcap/tidb/issues/26554)
+    -   実行中に発生するエラーを修正します。実行プランが間違っているため[＃26554](https://github.com/pingcap/tidb/issues/26554)パーティション化されたテーブルで集計演算子をプッシュダウンするときにスキーマ列の浅いコピーによって間違った実行プランが発生します。1 [＃27797](https://github.com/pingcap/tidb/issues/27797)
 
-+ TiKV
+-   ティクヴ
 
-    - Fix the issue of unavailable TiKV caused by Raftstore deadlock when migrating Regions. The workaround is to disable the scheduling and restart the unavailable TiKV. [#10909](https://github.com/tikv/tikv/issues/10909)
+    -   リージョンの移行時にRaftstore のデッドロックによって TiKV が利用できなくなる問題を修正しました。回避策としては、スケジュールを無効にして、利用できない TiKV を再起動します[＃10909](https://github.com/tikv/tikv/issues/10909)

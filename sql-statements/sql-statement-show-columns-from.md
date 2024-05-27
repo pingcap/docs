@@ -1,19 +1,19 @@
 ---
 title: SHOW [FULL] COLUMNS FROM | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW [FULL] COLUMNS FROM for the TiDB database.
+summary: TiDB データベースの SHOW [FULL] COLUMNS FROM の使用法の概要。
 ---
 
-# SHOW [FULL] COLUMNS FROM
+# [全]列を表示 {#show-full-columns-from}
 
-The statement `SHOW [FULL] COLUMNS FROM <table_name>` describes the columns of a table or view in a useful tabular format. The optional keyword `FULL` displays the privileges the current user has to that column, and the `comment` from the table definition.
+ステートメント`SHOW [FULL] COLUMNS FROM <table_name>` 、テーブルまたはビューの列を便利な表形式で記述します。オプションのキーワード`FULL`は、現在のユーザーがその列に対して持つ権限と、テーブル定義からの`comment`表示します。
 
-The statements `SHOW [FULL] FIELDS FROM <table_name>`, `DESC <table_name>`, `DESCRIBE <table_name>`, and `EXPLAIN <table_name>` are aliases of this statement.
+ステートメント`SHOW [FULL] FIELDS FROM <table_name>` 、 `DESC <table_name>` 、 `DESCRIBE <table_name>` 、および`EXPLAIN <table_name>`は、このステートメントのエイリアスです。
 
-> **Note:**
+> **注記：**
 >
-> `DESC TABLE <table_name>`, `DESCRIBE TABLE <table_name>`, and `EXPLAIN TABLE <table_name>` are not equivalent to the above statements. They are aliases of [`DESC SELECT * FROM <table_name>`](/sql-statements/sql-statement-explain.md).
+> `DESC TABLE <table_name>` 、 `DESCRIBE TABLE <table_name>` 、 `EXPLAIN TABLE <table_name>`上記のステートメントと同等ではありません。これらは[`DESC SELECT * FROM &#x3C;table_name>`](/sql-statements/sql-statement-explain.md)の別名です。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowColumnsFromStmt ::=
@@ -27,7 +27,7 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE VIEW v1 AS SELECT 1;
@@ -127,10 +127,10 @@ mysql> SHOW FULL COLUMNS FROM mysql.user;
 38 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-The `SHOW [FULL] COLUMNS FROM` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB の`SHOW [FULL] COLUMNS FROM`ステートメントは MySQL と完全に互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) 。
 
-## See also
+## 参照 {#see-also}
 
-* [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+-   [表示テーブルの作成](/sql-statements/sql-statement-show-create-table.md)

@@ -1,22 +1,22 @@
 ---
 title: schema_unused_indexes
-summary: Learn about the `schema_unused_indexes` table in the `sys` schema.
+summary: `sys` スキーマの `schema_unused_indexes` テーブルについて学習します。
 ---
 
-# `schema_unused_indexes`
+# <code>schema_unused_indexes</code> {#code-schema-unused-indexes-code}
 
-`schema_unused_indexes` records indexes that have not been used since the last start of TiDB. It includes the following columns:
+`schema_unused_indexes` 、TiDB の最後の起動以降に使用されていないインデックスを記録します。次の列が含まれます。
 
-- `OBJECT_SCHEMA`: The name of the database to which the table containing the index belongs.
-- `OBJECT_NAME`: The name of the table containing the index.
-- `INDEX_NAME`: The name of the index.
+-   `OBJECT_SCHEMA` : インデックスを含むテーブルが属するデータベースの名前。
+-   `OBJECT_NAME` : インデックスを含むテーブルの名前。
+-   `INDEX_NAME` : インデックスの名前。
 
 ```sql
 USE SYS;
 DESC SCHEMA_UNUSED_INDEXES;
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 +---------------+-------------+------+------+---------+-------+
@@ -29,9 +29,9 @@ The output is as follows:
 3 rows in set (0.00 sec)
 ```
 
-## Manually create the `schema_unused_indexes` view
+## <code>schema_unused_indexes</code>ビューを手動で作成する {#manually-create-the-code-schema-unused-indexes-code-view}
 
-For clusters upgraded from versions earlier than v8.0.0, the `sys` schema and the views in it are not created automatically. You can manually create them using the following SQL statements:
+v8.0.0 より前のバージョンからアップグレードされたクラスターの場合、 `sys`スキーマとその中のビューは自動的に作成されません。次の SQL ステートメントを使用して手動で作成できます。
 
 ```sql
 CREATE DATABASE IF NOT EXISTS sys;
@@ -49,6 +49,6 @@ CREATE OR REPLACE VIEW sys.schema_unused_indexes AS
     sum(last_access_time) is null;
 ```
 
-## Read more
+## 続きを読む {#read-more}
 
-- [`INFORMATION_SCHEMA.TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)
+-   [`INFORMATION_SCHEMA.TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)

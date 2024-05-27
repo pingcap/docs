@@ -1,55 +1,55 @@
 ---
 title: TiDB 2.1.14 Release Notes
-summary: TiDB 2.1.14 was released on July 04, 2019. It includes various bug fixes and improvements, such as fixing wrong query results, adding new system variables, optimizing memory usage, and adding new configuration items for TiDB Binlog and TiDB Ansible. Additionally, there are optimizations for TiKV and PD.
+summary: TiDB 2.1.14 は 2019 年 7 月 4 日にリリースされました。間違ったクエリ結果の修正、新しいシステム変数の追加、メモリ使用量の最適化、TiDB Binlogおよび TiDB Ansible の新しい構成項目の追加など、さまざまなバグ修正と改善が含まれています。さらに、TiKV と PD の最適化も行われています。
 ---
 
-# TiDB 2.1.14 Release Notes
+# TiDB 2.1.14 リリースノート {#tidb-2-1-14-release-notes}
 
-Release date: July 04, 2019
+発売日: 2019年7月4日
 
-TiDB version: 2.1.14
+TiDB バージョン: 2.1.14
 
-TiDB Ansible version: 2.1.14
+TiDB Ansible バージョン: 2.1.14
 
-## TiDB
+## ティビ {#tidb}
 
-- Fix wrong query results caused by column pruning in some cases [#11019](https://github.com/pingcap/tidb/pull/11019)
-- Fix the wrongly displayed information in `db` and `info` columns of `show processlist` [#11000](https://github.com/pingcap/tidb/pull/11000)
-- Fix the issue that `MAX_EXECUTION_TIME` as a SQL hint and global variable does not work in some cases [#10999](https://github.com/pingcap/tidb/pull/10999)
-- Support automatically adjust the incremental gap allocated by auto-increment ID based on the load [#10997](https://github.com/pingcap/tidb/pull/10997)
-- Fix the issue that the `Distsql` memory information of `MemTracker` is not correctly cleaned when a query ends [#10971](https://github.com/pingcap/tidb/pull/10971)
-- Add the `MEM` column in the `information_schema.processlist` table to describe the memory usage of a query [#10896](https://github.com/pingcap/tidb/pull/10896)
-- Add the `max_execution_time` global system variable to control the maximum execution time of a query [#10940](https://github.com/pingcap/tidb/pull/10940)
-- Fix the panic caused by using unsupported aggregate functions [#10911](https://github.com/pingcap/tidb/pull/10911)
-- Add an automatic rollback feature for the last transaction when the `load data` statement fails [#10862](https://github.com/pingcap/tidb/pull/10862)
-- Fix the issue that TiDB returns a wrong result in some cases when the `OOMAction` configuration item is set to `Cancel` [#11016](https://github.com/pingcap/tidb/pull/11016)
-- Disable the `TRACE` statement to avoid the TiDB panic issue [#11039](https://github.com/pingcap/tidb/pull/11039)
-- Add the `mysql.expr_pushdown_blacklist` system table that dynamically enables/disables pushing down specific functions to Coprocessor [#10998](https://github.com/pingcap/tidb/pull/10998)
-- Fix the issue that the `ANY_VALUE` function does not work in the `ONLY_FULL_GROUP_BY` mode [#10994](https://github.com/pingcap/tidb/pull/10994)
-- Fix the incorrect evaluation caused by not doing a deep copy when evaluating the user variable of the string type [#11043](https://github.com/pingcap/tidb/pull/11043)
+-   一部のケースで列の整理によって発生する誤ったクエリ結果を修正[＃11019](https://github.com/pingcap/tidb/pull/11019)
+-   `show processlist` [＃11000](https://github.com/pingcap/tidb/pull/11000)の`db`列目と`info`列目に誤って表示された情報を修正
+-   `MAX_EXECUTION_TIME` SQLヒントおよびグローバル変数として機能しないケースがある問題を修正[＃10999](https://github.com/pingcap/tidb/pull/10999)
+-   負荷[＃10997](https://github.com/pingcap/tidb/pull/10997)に基づいて自動増分IDによって割り当てられた増分ギャップを自動的に調整する機能をサポート
+-   クエリ終了時にメモリ情報`MemTracker`の`Distsql`が正しく消去されない問題を修正[＃10971](https://github.com/pingcap/tidb/pull/10971)
+-   クエリのメモリ使用量を説明するために、 `information_schema.processlist`表に`MEM`列を追加します[＃10896](https://github.com/pingcap/tidb/pull/10896)
+-   クエリの最大実行時間を制御するグローバルシステム変数`max_execution_time`を追加します[＃10940](https://github.com/pingcap/tidb/pull/10940)
+-   サポートされていない集計関数の使用によって発生するpanicを修正[＃10911](https://github.com/pingcap/tidb/pull/10911)
+-   `load data`文が失敗した場合、最後のトランザクションに自動ロールバック機能を追加する[＃10862](https://github.com/pingcap/tidb/pull/10862)
+-   `OOMAction`構成項目が`Cancel` [＃11016](https://github.com/pingcap/tidb/pull/11016)に設定されている場合に TiDB が誤った結果を返す場合がある問題を修正しました。
+-   TiDBpanic問題[＃11039](https://github.com/pingcap/tidb/pull/11039)を回避するために`TRACE`文を無効にする
+-   特定の関数をコプロセッサー[＃10998](https://github.com/pingcap/tidb/pull/10998)にプッシュダウンすることを動的に有効/無効にする`mysql.expr_pushdown_blacklist`システム テーブルを追加します。
+-   `ANY_VALUE`機能が`ONLY_FULL_GROUP_BY`モード[＃10994](https://github.com/pingcap/tidb/pull/10994)で動作しない問題を修正
+-   文字列型[＃11043](https://github.com/pingcap/tidb/pull/11043)のユーザー変数を評価するときにディープコピーを行わないことによって発生する誤った評価を修正しました。
 
-## TiKV
+## ティクヴ {#tikv}
 
-- Optimize processing the empty callback when processing the Raftstore message to avoid sending unnecessary message [#4682](https://github.com/tikv/tikv/pull/4682)
+-   Raftstoreメッセージを処理するときに空のコールバックの処理を最適化して、不要なメッセージ[＃4682](https://github.com/tikv/tikv/pull/4682)送信を回避します。
 
-## PD
+## PD {#pd}
 
-- Adjust the log output level from `Error` to `Warning` when reading an invalid configuration item [#1577](https://github.com/pingcap/pd/pull/1577)
+-   無効な構成項目[＃1577](https://github.com/pingcap/pd/pull/1577)を読み取るときにログ出力レベルを`Error`から`Warning`に調整します
 
-## Tools
+## ツール {#tools}
 
-TiDB Binlog
+TiDBBinlog
 
-- Reparo
-    - Add the `safe-mode` configuration item, and support importing duplicated data after this item is enabled [#662](https://github.com/pingcap/tidb-binlog/pull/662)
-- Pump
-    - Add the `stop-write-at-available-space` configuration item to limit the available binlog space [#659](https://github.com/pingcap/tidb-binlog/pull/659)
-    - Fix the issue that Garbage Collector does not work sometimes when the number of LevelDB L0 files is 0 [#648](https://github.com/pingcap/tidb-binlog/pull/648)
-    - Optimize the algorithm of deleting log files to speed up releasing the space [#648](https://github.com/pingcap/tidb-binlog/pull/648)
-- Drainer
-    - Fix the failure to update `BIT` columns in the downstream [#655](https://github.com/pingcap/tidb-binlog/pull/655)
+-   Reparo
+    -   `safe-mode`構成項目を追加し、この項目を有効にした後、重複したデータのインポートをサポートします[＃662](https://github.com/pingcap/tidb-binlog/pull/662)
+-   Pump
+    -   利用可能なbinlogスペースを制限するための`stop-write-at-available-space`設定項目を追加する[＃659](https://github.com/pingcap/tidb-binlog/pull/659)
+    -   LevelDB L0ファイルの数が[＃648](https://github.com/pingcap/tidb-binlog/pull/648)場合にガベージコレクターが動作しないことがある問題を修正しました。
+    -   ログファイルを削除するアルゴリズムを最適化して、スペースの解放を高速化します[＃648](https://github.com/pingcap/tidb-binlog/pull/648)
+-   Drainer
+    -   下流[＃655](https://github.com/pingcap/tidb-binlog/pull/655)の`BIT`列の更新失敗を修正
 
-## TiDB Ansible
+## TiDB アンシブル {#tidb-ansible}
 
-- Add the precheck feature for the `ansible` command and its `jmespath` and `jinja2` dependency packages [#807](https://github.com/pingcap/tidb-ansible/pull/807)
-- Add the `stop-write-at-available-space` parameter (10 GiB by default) in Pump, and stop writing binlog files in Pump when the available disk space is less than the parameter value [#807](https://github.com/pingcap/tidb-ansible/pull/807)
+-   `ansible`コマンドとその`jmespath`および`jinja2`依存パッケージ[＃807](https://github.com/pingcap/tidb-ansible/pull/807)の事前チェック機能を追加します。
+-   Pumpに`stop-write-at-available-space`パラメータ (デフォルトでは 10 GiB) を追加し、使用可能なディスク容量がパラメータ値[＃807](https://github.com/pingcap/tidb-ansible/pull/807)より少ない場合にPumpでのbinlogファイルの書き込みを停止します。

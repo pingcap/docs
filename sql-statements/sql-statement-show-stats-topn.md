@@ -1,25 +1,25 @@
 ---
 title: SHOW STATS_TOPN
-summary: An overview of the usage of SHOW STATS_TOPN for TiDB database.
+summary: TiDB データベースの SHOW STATS_TOPN の使用法の概要。
 ---
 
-# SHOW STATS_TOPN
+# STATS_TOPNを表示 {#show-stats-topn}
 
-The `SHOW STATS_TOPN` statement shows the Top-N information in [statistics](/statistics.md).
+`SHOW STATS_TOPN`文は[統計](/statistics.md)の Top-N 情報を表示します。
 
-Currently, the `SHOW STATS_TOPN` statement returns the following columns:
+現在、 `SHOW STATS_TOPN`ステートメントは次の列を返します。
 
-| Column name | Description |
-| ---- | ----|
-| `Db_name` | The database name |
-| `Table_name` | The table name |
-| `Partition_name` | The partition name |
-| `Column_name` | The column name (when `is_index` is `0`) or the index name (when `is_index` is `1`) |
-| `Is_index` | Whether it is an index column or not |
-| `Value` | The value of this column |
-| `Count` | How many times the value appears |
+| カラム名             | 説明                                                   |
+| ---------------- | ---------------------------------------------------- |
+| `Db_name`        | データベース名                                              |
+| `Table_name`     | テーブル名                                                |
+| `Partition_name` | パーティション名                                             |
+| `Column_name`    | 列名（ `is_index`が`0`の場合）またはインデックス名（ `is_index`が`1`の場合） |
+| `Is_index`       | インデックス列であるかどうか                                       |
+| `Value`          | この列の値                                                |
+| `Count`          | 値が何回出現するか                                            |
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowStatsTopnStmt ::=
@@ -30,31 +30,29 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## Example
+## 例 {#example}
 
 ```sql
 SHOW STATS_TOPN WHERE Table_name='t';
 ```
 
-```
-+---------+------------+----------------+-------------+----------+--------------------------+-------+
-| Db_name | Table_name | Partition_name | Column_name | Is_index | Value                    | Count |
-+---------+------------+----------------+-------------+----------+--------------------------+-------+
-| test    | t          |                | a           |        0 | 2023-12-27 00:00:00      |     1 |
-| test    | t          |                | a           |        0 | 2023-12-28 00:00:00      |     1 |
-| test    | t          |                | ia          |        1 | (NULL, 2)                |     1 |
-| test    | t          |                | ia          |        1 | (NULL, 4)                |     1 |
-| test    | t          |                | ia          |        1 | (2023-12-27 00:00:00, 1) |     1 |
-| test    | t          |                | ia          |        1 | (2023-12-28 00:00:00, 3) |     1 |
-+---------+------------+----------------+-------------+----------+--------------------------+-------+
-6 rows in set (0.00 sec)
-```
+    +---------+------------+----------------+-------------+----------+--------------------------+-------+
+    | Db_name | Table_name | Partition_name | Column_name | Is_index | Value                    | Count |
+    +---------+------------+----------------+-------------+----------+--------------------------+-------+
+    | test    | t          |                | a           |        0 | 2023-12-27 00:00:00      |     1 |
+    | test    | t          |                | a           |        0 | 2023-12-28 00:00:00      |     1 |
+    | test    | t          |                | ia          |        1 | (NULL, 2)                |     1 |
+    | test    | t          |                | ia          |        1 | (NULL, 4)                |     1 |
+    | test    | t          |                | ia          |        1 | (2023-12-27 00:00:00, 1) |     1 |
+    | test    | t          |                | ia          |        1 | (2023-12-28 00:00:00, 3) |     1 |
+    +---------+------------+----------------+-------------+----------+--------------------------+-------+
+    6 rows in set (0.00 sec)
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## 参照 {#see-also}
 
-* [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)
-* [Introduction to Statistics](/statistics.md)
+-   [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)
+-   [統計入門](/statistics.md)

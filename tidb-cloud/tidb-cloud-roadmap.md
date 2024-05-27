@@ -1,201 +1,34 @@
 ---
 title: TiDB Cloud Roadmap
-summary: Learn about TiDB Cloud's roadmap for the next few months. See the new features or improvements in advance, follow the progress, learn about the key milestones on the way.
+summary: 今後数か月間の TiDB Cloud のロードマップについて学びます。新機能や改善点を事前に確認し、進捗状況を追跡し、途中の主要なマイルストーンについて学びます。
 ---
 
-# TiDB Cloud Roadmap
+# TiDB Cloudロードマップ {#tidb-cloud-roadmap}
 
-The TiDB Cloud roadmap brings you what's coming in the near future, so you can see the new features or improvements in advance, follow the progress, and learn about the key milestones on the way. In the course of development, this roadmap is subject to change based on user needs, feedback, and our assessment.
+TiDB Cloudロードマップでは、近い将来に予定されている内容が紹介されるため、新機能や改善点を事前に確認したり、進捗状況を追跡したり、途中の主要なマイルストーンを把握したりできます。開発の過程で、このロードマップはユーザーのニーズ、フィードバック、および当社の評価に基づいて変更される可能性があります。
 
-✅: The feature or improvement is already available in TiDB Cloud.
+✅: 機能または改善はすでにTiDB Cloudで利用可能です。
 
-> **Safe harbor statement:**
+> **セーフハーバー声明:**
 >
-> Any unreleased features discussed or referenced in our documents, roadmaps, blogs, websites, press releases, or public statements that are not currently available ("unreleased features") are subject to change at our discretion and may not be delivered as planned or at all. Customers acknowledge that purchase decisions are solely based on features and functions that are currently available, and that PingCAP is not obliged to deliver aforementioned unreleased features as part of the contractual agreement unless otherwise stated.
+> 当社の文書、ロードマップ、ブログ、Web サイト、プレス リリース、または公式声明で説明または参照されている、現在利用できない未リリースの機能 (「未リリースの機能」) は、当社の裁量により変更される場合があり、計画どおりに提供されないか、まったく提供されない可能性があります。お客様は、購入の決定が現在利用可能な関数のみに基づいて行われること、および別途記載がない限り、PingCAP は契約上の合意の一環として前述の未リリースの機能を提供する義務を負わないことを承認します。
 
-## Developer experience and enterprise-grade features
+## 開発者エクスペリエンスとエンタープライズグレードの機能 {#developer-experience-and-enterprise-grade-features}
 
-<table>
-<thead>
-  <tr>
-    <th>Domain</th>
-    <th>Feature</th>
-    <th>Description</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td rowspan="3">Developer experience</td>
-    <td>✅ Load sample datasets manually.</td>
-    <td>Support loading sample datasets into a cluster. You can use this data to quickly get started with testing the features of TiDB Cloud.</td>
-  </tr>
-  <tr>
-    <td>✅ Add Chat2Query (an AI-powered SQL editor).</td>
-    <td>In Chat2Query, you can either let AI generate SQL queries automatically or write SQL queries manually, and run SQL queries against databases without a terminal.</td>
-  </tr>
-  <tr>
-    <td>✅ Support Data Service.</td>
-    <td>With Data Service (beta), you can read or write TiDB Cloud data via an HTTPS request using a custom API endpoint.</td>
-  </tr>
-  <tr>
-    <td>Cloud provider marketplace</td>
-    <td>✅ Improve the user experience from AWS Marketplace and Google Cloud Marketplace.</td>
-    <td>Improve the user journey and experience of users who sign up from AWS Marketplace and Google Cloud Marketplace.</td>
-  </tr>
-  <tr>
-    <td rowspan="2">Enterprise-grade features</td>
-    <td>✅ Manage users in multiple organizations.</td>
-    <td>Allow a user to join multiple organizations by accepting the invitations.</td>
-  </tr>
-  <tr>
-    <td>✅ Support hierarchical user roles and permissions.</td>
-    <td>Support role-based access control (RBAC) for the TiDB Cloud console. You can manage user permissions in a fine-grained manner, such as by cluster, billing, and member.</td>
-  </tr>
-  <tr>
-    <td rowspan="3">UI experience</td>
-    <td>✅ Provide a more convenient feedback channel.</td>
-    <td>Users can quickly get help with and give feedback on the product.</td>
-  </tr>
-  <tr>
-    <td>✅ Add left navigation.</td>
-    <td>Present the TiDB Cloud console in the structure of organizations, projects, and users to simplify the layout logic and improve user experience.</td>
-  </tr>
-  <tr>
-    <td>Optimize Playground.</td>
-    <td>Deliver context-driven tutorials to facilitate a deeper understanding of TiDB and TiDB Cloud for our users.</td>
-  </tr>
-</tbody>
-</table>
+<table><thead><tr><th>ドメイン</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">開発者エクスペリエンス</td><td>✅ サンプル データセットを手動で読み込みます。</td><td>サンプル データセットをクラスターにロードすることをサポートします。このデータを使用して、 TiDB Cloudの機能のテストをすぐに開始できます。</td></tr><tr><td> ✅ Chat2Query（AI 搭載の SQL エディター）を追加します。</td><td> Chat2Query では、AI に SQL クエリを自動的に生成させたり、SQL クエリを手動で記述したり、ターミナルなしでデータベースに対して SQL クエリを実行したりできます。</td></tr><tr><td> ✅ データ サービスをサポートします。</td><td>データ サービス (ベータ版) を使用すると、カスタム API エンドポイントを使用して、HTTPS リクエストを介してTiDB Cloudデータを読み書きできます。</td></tr><tr><td>クラウドプロバイダーマーケットプレイス</td><td>✅ AWS Marketplace と Google Cloud Marketplace のユーザーエクスペリエンスを向上します。</td><td> AWS Marketplace および Google Cloud Marketplace からサインアップするユーザーのユーザージャーニーとエクスペリエンスを向上させます。</td></tr><tr><td rowspan="2">エンタープライズグレードの機能</td><td>✅ 複数の組織のユーザーを管理します。</td><td>ユーザーが招待を承諾することで複数の組織に参加できるようにします。</td></tr><tr><td> ✅ 階層的なユーザー ロールと権限をサポートします。</td><td> TiDB Cloudコンソールのロールベースのアクセス制御 (RBAC) をサポートします。クラスター、課金、メンバーなど、ユーザー権限をきめ細かく管理できます。</td></tr><tr><td rowspan="3"> UIエクスペリエンス</td><td>✅ より便利なフィードバック チャネルを提供します。</td><td>ユーザーは製品に関するサポートをすぐに受けたり、フィードバックを提供したりできます。</td></tr><tr><td> ✅ 左側のナビゲーションを追加します。</td><td>組織、プロジェクト、およびユーザーの構造でTiDB Cloudコンソールを提示し、レイアウト ロジックを簡素化してユーザー エクスペリエンスを向上させます。</td></tr><tr><td>プレイグラウンドを最適化します。</td><td>コンテキスト主導のチュートリアルを提供して、ユーザーが TiDB とTiDB Cloudをより深く理解できるようにします。</td></tr></tbody></table>
 
-## TiDB kernel
+## TiDBカーネル {#tidb-kernel}
 
-For the roadmap of TiDB kernel, refer to [TiDB Roadmap](https://docs.pingcap.com/tidb/dev/tidb-roadmap).
+TiDBカーネルのロードマップについては[TiDB ロードマップ](https://docs.pingcap.com/tidb/dev/tidb-roadmap)を参照してください。
 
-## Diagnosis and maintenance
+## 診断とメンテナンス {#diagnosis-and-maintenance}
 
-<table>
-<thead>
-  <tr>
-    <th>Domain</th>
-    <th>Feature</th>
-    <th>Description</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td rowspan="3">Self-service cluster analysis and diagnosis using reports</td>
-    <td>✅ Cluster health report.</td>
-    <td>Provide diagnosis and analysis reports for several different usage scenarios.</td>
-  </tr>
-  <tr>
-    <td>✅ Cluster status comparison report.</td>
-    <td>Locate cluster failures for some scenarios and provide recommended solutions.</td>
-  </tr>
-  <tr>
-    <td>✅ Cluster system check report.</td>
-    <td>Provide cluster key status summary for some scenarios.</td>
-  </tr>
-  <tr>
-    <td rowspan="2">SQL tuning for HTAP workloads</td>
-    <td>Provide suggestions on optimizing SQL for TiFlash and TiKV in HTAP workloads.</td>
-    <td>Provide a dashboard that displays a SQL execution overview from the perspective of applications in HTAP workloads.</td>
-  </tr>
-  <tr>
-    <td>Provide SQL execution information from the perspective of applications.</td>
-    <td>For one or several HTAP scenarios, provide suggestions on SQL optimization.</td>
-  </tr>
-  <tr>
-    <td rowspan="3">Cluster diagnosis data accessibility </td>
-    <td>✅ Access diagnosis data online in real time.</td>
-    <td>Integrate with various monitoring and diagnosis systems to improve the real-time data access capability.</td>
-  </tr>
-  <tr>
-    <td>✅ Access diagnosis data offline.</td>
-    <td>Provide offline data access for large-scale diagnosis, analysis, and tuning.</td>
-  </tr>
-  <tr>
-    <td>Build logic for data reconstruction.</td>
-    <td>Improve data stability and build logic for data reconstruction.</td>
-  </tr>
-  <tr>
-    <td>TiDB Cloud service tracing</td>
-    <td>Build the monitoring links for each component of TiDB Cloud service.</td>
-    <td>
-      <ul><li>Build the tracing links for each component of TiDB Cloud service in user scenarios.</li>
-      <li>Provide assessment on service availability from the perspective of users.</li></ul>
-    </td>
-  </tr>
-</tbody>
-</table>
+<table><thead><tr><th>ドメイン</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">レポートを使用したセルフサービス型クラスター分析と診断</td><td>✅クラスタの健全性レポート。</td><td>さまざまな使用シナリオの診断および分析レポートを提供します。</td></tr><tr><td> ✅クラスタステータス比較レポート。</td><td>いくつかのシナリオでクラスター障害を特定し、推奨される解決策を提供します。</td></tr><tr><td> ✅クラスタシステム チェック レポート。</td><td>いくつかのシナリオについて、クラスター キーのステータスの概要を提供します。</td></tr><tr><td rowspan="2"> HTAP ワークロードの SQL チューニング</td><td>HTAP ワークロードでTiFlashおよび TiKV 用に SQL を最適化するための提案を提供します。</td><td> HTAP ワークロード内のアプリケーションの観点から SQL 実行の概要を表示するダッシュボードを提供します。</td></tr><tr><td>アプリケーションの観点から SQL 実行情報を提供します。</td><td> 1 つまたは複数の HTAP シナリオについて、SQL の最適化に関する提案を提供します。</td></tr><tr><td rowspan="3">クラスタ診断データのアクセス可能性</td><td>✅ 診断データにオンラインでリアルタイムにアクセスします。</td><td>さまざまな監視および診断システムと統合して、リアルタイムのデータ アクセス機能を向上させます。</td></tr><tr><td> ✅ 診断データにオフラインでアクセスします。</td><td>大規模な診断、分析、チューニングのためのオフライン データ アクセスを提供します。</td></tr><tr><td>データ再構築のためのロジックを構築します。</td><td>データの安定性を向上させ、データ再構築のロジックを構築します。</td></tr><tr><td> TiDB Cloudサービス トレース</td><td>TiDB Cloudサービスの各コンポーネントの監視リンクを構築します。</td><td><ul><li>ユーザー シナリオでTiDB Cloudサービスの各コンポーネントのトレース リンクを構築します。</li><li>ユーザーの視点からサービスの可用性に関する評価を提供します。</li></ul></td></tr></tbody></table>
 
-## Data backup and migration
+## データのバックアップと移行 {#data-backup-and-migration}
 
-<table>
-<thead>
-  <tr>
-    <th>Domain</th>
-    <th>Feature</th>
-    <th>Description</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>Data replication to Kafka/MySQL</td>
-    <td>✅ TiDB Cloud supports replicating data to Kafka/MySQL.</td>
-    <td>TiDB Cloud supports TiCDC-based data replication to Kafka and MySQL compatible databases.</td>
-  </tr>
-  <tr>
-    <td>Backup and Restore</td>
-    <td>✅ Support EBS snapshot-based backup and restore.</td>
-    <td>BR service on TiDB Cloud uses EBS snapshot-based backup and restore.</td>
-  </tr>
-  <tr>
-    <td>Backup and restore</td>
-    <td>Backup and restore service based on AWS EBS or Google Cloud persistent disk snapshots.</td>
-    <td>Provide backup and restore service on the cloud based on AWS EBS or Google Cloud persistent disk snapshots.</td>
-  </tr>
-  <tr>
-    <td rowspan="2">Online data migration</td>
-    <td>✅ Support full data migration from Amazon Relational Database Service (RDS).</td>
-    <td>Full data migration from RDS to TiDB Cloud.</td>
-  </tr>
-  <tr>
-    <td>Support incremental data migration from RDS.</td>
-    <td>Full and incremental data migration from MySQL services such as Amazon RDS and Aurora to TiDB Cloud.</td>
-  </tr>
-</tbody>
-</table>
+<table><thead><tr><th>ドメイン</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td>Kafka/MySQLへのデータレプリケーション</td><td>✅ TiDB Cloud は、 Kafka/MySQL へのデータのレプリケーションをサポートしています。</td><td> TiDB Cloud は、Kafka および MySQL 互換データベースへの TiCDC ベースのデータ レプリケーションをサポートします。</td></tr><tr><td>バックアップと復元</td><td>✅ EBS スナップショットベースのバックアップと復元をサポートします。</td><td> TiDB Cloud上のBRサービスは、EBS スナップショット ベースのバックアップと復元を使用します。</td></tr><tr><td>バックアップと復元</td><td>AWS EBS または Google Cloud 永続ディスクのスナップショットに基づくバックアップおよび復元サービス。</td><td> AWS EBS または Google Cloud 永続ディスクのスナップショットに基づいて、クラウド上でバックアップおよび復元サービスを提供します。</td></tr><tr><td rowspan="2">オンラインデータ移行</td><td>✅ Amazon Relational Database Service (RDS) からの完全なデータ移行をサポートします。</td><td> RDS からTiDB Cloudへの完全なデータ移行。</td></tr><tr><td> RDS からの増分データ移行をサポートします。</td><td> Amazon RDS やAuroraなどの MySQL サービスからTiDB Cloudへの完全および増分データ移行。</td></tr></tbody></table>
 
-## Security
+## Security {#security}
 
-<table>
-<thead>
-  <tr>
-    <th>Domain</th>
-    <th>Feature</th>
-    <th>Description</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>TLS rotation</td>
-    <td>Support TLS rotation for TiDB clusters.</td>
-    <td>Support internal TLS rotation settings and automatic updates in TiDB clusters.</td>
-  </tr>
-  <tr>
-    <td>Data Encryption</td>
-    <td>Enablement of customer-managed encryption keys.</td>
-    <td>Allow customers to use their own KMS encryption keys on TiDB Cloud.</td>
-  </tr>
-  <tr>
-    <td>Database audit logging</td>
-    <td>✅ Enhance the database audit logging.</td>
-    <td>Enhance the ability of database audit logging.</td>
-  </tr>
-  <tr>
-    <td>Console audit logging</td>
-    <td>✅ Support auditing TiDB Cloud console operations.</td>
-    <td>Support reliable auditing capabilities for various operations in the TiDB Cloud console.</td>
-  </tr>
-</tbody>
-</table>
+<table><thead><tr><th>ドメイン</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td>TLSローテーション</td><td>TiDB クラスターの TLS ローテーションをサポートします。</td><td> TiDB クラスターでの内部 TLS ローテーション設定と自動更新をサポートします。</td></tr><tr><td>データ暗号化</td><td>顧客管理の暗号化キーの有効化。</td><td>顧客がTiDB Cloudで独自の KMS 暗号化キーを使用できるようにします。</td></tr><tr><td>データベース監査ログ</td><td>✅ データベース監査ログを強化します。</td><td>データベース監査ログ機能を強化します。</td></tr><tr><td>コンソール監査ログ</td><td>✅ TiDB Cloudコンソール操作の監査をサポートします。</td><td> TiDB Cloudコンソールのさまざまな操作に対して信頼性の高い監査機能をサポートします。</td></tr></tbody></table>

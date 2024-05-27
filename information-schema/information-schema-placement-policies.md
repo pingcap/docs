@@ -1,17 +1,15 @@
 ---
 title: PLACEMENT_POLICIES
-summary: Learn the `PLACEMENT_POLICIES` information_schema table.
+summary: `PLACEMENT_POLICIES` information_schema テーブルについて学習します。
 ---
 
-# PLACEMENT_POLICIES
+# 配置ポリシー {#placement-policies}
 
-The `PLACEMENT_POLICIES` table provides information on all placement policies. For details, refer to [Placement Rules in SQL](/placement-rules-in-sql.md).
+`PLACEMENT_POLICIES`表には、すべての配置ポリシーに関する情報が記載されています。詳細については、 [SQL の配置ルール](/placement-rules-in-sql.md)を参照してください。
 
-> **Note:**
+> **注記：**
 >
-> This table is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
-
-{{< copyable "sql" >}}
+> このテーブルは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
 ```sql
 USE information_schema;
@@ -38,11 +36,9 @@ DESC placement_policies;
 12 rows in set (0.00 sec)
 ```
 
-## Examples
+## 例 {#examples}
 
-The `PLACEMENT_POLICIES` table only shows all placement policies. To view the canonical version of placement rules (including all placement policies and objects assigned placement policies), use the statement `SHOW PLACEMENT` instead:
-
-{{< copyable "sql" >}}
+`PLACEMENT_POLICIES`テーブルには、すべての配置ポリシーのみが表示されます。配置ルールの標準バージョン (すべての配置ポリシーと配置ポリシーが割り当てられたオブジェクトを含む) を表示するには、代わりにステートメント`SHOW PLACEMENT`を使用します。
 
 ```sql
 CREATE TABLE t1 (a INT); 

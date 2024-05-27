@@ -1,267 +1,235 @@
 ---
 title: Read Historical Data Using the `AS OF TIMESTAMP` Clause
-summary: Learn how to read historical data using the `AS OF TIMESTAMP` statement clause.
+summary: `AS OF TIMESTAMP` ステートメント句を使用して履歴データを読み取る方法を学習します。
 ---
 
-# Read Historical Data Using the `AS OF TIMESTAMP` Clause
+# <code>AS OF TIMESTAMP</code>句を使用して履歴データを読み取る {#read-historical-data-using-the-code-as-of-timestamp-code-clause}
 
-This document describes how to perform the [Stale Read](/stale-read.md) feature using the `AS OF TIMESTAMP` clause to read historical data in TiDB, including specific usage examples and strategies for saving historical data.
+このドキュメントでは、 `AS OF TIMESTAMP`句を使用して[ステイル読み取り](/stale-read.md)機能を実行し、TiDB 内の履歴データを読み取る方法について説明します。具体的な使用例や履歴データを保存するための戦略も説明します。
 
-TiDB supports reading historical data through a standard SQL interface, which is the `AS OF TIMESTAMP` SQL clause, without the need for special clients or drivers. After data is updated or deleted, you can read the historical data before the update or deletion using this SQL interface.
+TiDB は、特別なクライアントやドライバーを必要とせず、 `AS OF TIMESTAMP` SQL 句である標準 SQL インターフェイスを介して履歴データの読み取りをサポートします。データが更新または削除された後、この SQL インターフェイスを使用して更新または削除前の履歴データを読み取ることができます。
 
-> **Note:**
+> **注記：**
 >
-> When reading historical data, TiDB returns the data with the old table structure even if the current table structure is different.
+> 履歴データを読み取る場合、TiDB は、現在のテーブル構造が異なっていても、古いテーブル構造でデータを返します。
 
-## Syntax
+## 構文 {#syntax}
 
-You can use the `AS OF TIMESTAMP` clause in the following three ways:
+`AS OF TIMESTAMP`節は次の 3 つの方法で使用できます。
 
-- [`SELECT ... FROM ... AS OF TIMESTAMP`](/sql-statements/sql-statement-select.md)
-- [`START TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-start-transaction.md)
-- [`SET TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-set-transaction.md)
+-   [`SELECT ... FROM ... AS OF TIMESTAMP`](/sql-statements/sql-statement-select.md)
+-   [`START TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-start-transaction.md)
+-   [`SET TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-set-transaction.md)
 
-If you want to specify an exact point of time, you can set a datetime value or use a time function in the `AS OF TIMESTAMP` clause. The format of datetime is like "2016-10-08 16:45:26.999", with millisecond as the minimum time unit, but for most of the time, the time unit of second is enough for specifying a datetime, such as "2016-10-08 16:45:26". You can also get the current time to the millisecond using the `NOW(3)` function. If you want to read the data of several seconds ago, it is **recommended** to use an expression such as `NOW() - INTERVAL 10 SECOND`.
+正確な時点を指定したい場合は、 `AS OF TIMESTAMP`節で datetime 値を設定するか、time 関数を使用します。datetime の形式は「2016-10-08 16:45:26.999」のようで、最小の時間単位はミリ秒ですが、ほとんどの場合、datetime を指定するには「2016-10-08 16:45:26」のように秒単位だけで十分です`NOW(3)`関数を使用して、現在の時間をミリ秒単位で取得することもできます。数秒前のデータを読み取りたい場合は、 `NOW() - INTERVAL 10 SECOND`などの式を使用することを**お勧めします**。
 
-If you want to specify a time range, you can use the `TIDB_BOUNDED_STALENESS()` function in the clause. When this function is used, TiDB selects a suitable timestamp within the specified time range. "Suitable" means there are no transactions that start before this timestamp and have not been committed on the accessed replica, that is, TiDB can perform read operations on the accessed replica and the read operations are not blocked. You need to use `TIDB_BOUNDED_STALENESS(t1, t2)` to call this function. `t1` and `t2` are the two ends of the time range, which can be specified using either datetime values or time functions.
+時間範囲を指定する場合は、句で`TIDB_BOUNDED_STALENESS()`関数を使用できます。この関数を使用すると、TiDB は指定された時間範囲内で適切なタイムスタンプを選択します。「適切」とは、このタイムスタンプより前に開始され、アクセスされたレプリカでコミットされていないトランザクションがないことを意味します。つまり、TiDB はアクセスされたレプリカで読み取り操作を実行でき、読み取り操作はブロックされません。この関数を呼び出すには、 `TIDB_BOUNDED_STALENESS(t1, t2)`使用する必要があります`t1`と`t2`時間範囲の両端であり、datetime 値または時間関数を使用して指定できます。
 
-Here are some examples of the `AS OF TIMESTAMP` clause:
+`AS OF TIMESTAMP`節の例をいくつか示します。
 
-- `AS OF TIMESTAMP '2016-10-08 16:45:26'`: Tells TiDB to read the latest data stored at 16:45:26 on October 8, 2016.
-- `AS OF TIMESTAMP NOW() - INTERVAL 10 SECOND`: Tells TiDB to read the latest data stored 10 seconds ago.
-- `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS('2016-10-08 16:45:26', '2016-10-08 16:45:29')`: Tells TiDB to read the data as new as possible within the time range of 16:45:26 to 16:45:29 on October 8, 2016.
-- `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS(NOW() - INTERVAL 20 SECOND, NOW())`: Tells TiDB to read the data as new as possible within the time range of 20 seconds ago to the present.
+-   `AS OF TIMESTAMP '2016-10-08 16:45:26'` : 2016 年 10 月 8 日 16:45:26 に保存された最新のデータを読み取るように TiDB に指示します。
+-   `AS OF TIMESTAMP NOW() - INTERVAL 10 SECOND` : 10 秒前に保存された最新のデータを読み取るように TiDB に指示します。
+-   `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS('2016-10-08 16:45:26', '2016-10-08 16:45:29')` : 2016 年 10 月 8 日の 16:45:26 から 16:45:29 までの範囲内でできるだけ新しいデータを読み取るように TiDB に指示します。
+-   `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS(NOW() - INTERVAL 20 SECOND, NOW())` : 20 秒前から現在までの時間範囲内で可能な限り新しいデータを読み取るように TiDB に指示します。
 
-> **Note:**
+> **注記：**
 >
-> In addition to specifying a timestamp, the most common use of the `AS OF TIMESTAMP` clause is to read data that is several seconds old. If this approach is used, it is recommended to read historical data older than 5 seconds.
+> タイムスタンプを指定することに加えて、 `AS OF TIMESTAMP`句の最も一般的な用途は、数秒前のデータを読み取ることです。このアプローチを使用する場合は、5 秒より古い履歴データを読み取ることをお勧めします。
 >
-> You need to deploy the NTP service for your TiDB and PD nodes when you use Stale Read. This avoids the situation where the specified timestamp used by TiDB goes ahead of the latest TSO allocating progress (such as a timestamp several seconds ahead), or is later than the GC safe point timestamp. When the specified timestamp goes beyond the service scope, TiDB returns an error.
+> ステイル読み取り を使用する場合は、TiDB ノードと PD ノードに NTP サービスを導入する必要があります。これにより、TiDB で使用される指定のタイムスタンプが最新の TSO 割り当ての進行状況よりも先になる (タイムスタンプが数秒先になるなど) か、GC セーフ ポイント タイムスタンプよりも後になるという状況を回避できます。指定のタイムスタンプがサービス スコープを超えると、TiDB はエラーを返します。
 >
-> To reduce the latency and improve the timeliness of the Stale Read data, you can modify the TiKV `advance-ts-interval` configuration item. See [Reduce Stale Read latency](/stale-read.md#reduce-stale-read-latency) for details.
+> レイテンシーを減らし、ステイル読み取りデータの適時性を向上させるには、TiKV `advance-ts-interval`構成項目を変更します。詳細については[ステイル読み取りのレイテンシーを削減](/stale-read.md#reduce-stale-read-latency)を参照してください。
 
-## Usage examples
+## 使用例 {#usage-examples}
 
-This section describes different ways to use the `AS OF TIMESTAMP` clause with several examples. It first introduces how to prepare the data for recovery, and then shows how to use `AS OF TIMESTAMP` in `SELECT`, `START TRANSACTION READ ONLY AS OF TIMESTAMP`, and `SET TRANSACTION READ ONLY AS OF TIMESTAMP` respectively.
+このセクションでは、いくつかの例を挙げて`AS OF TIMESTAMP`節のさまざまな使用方法について説明します。まず、回復用にデータを準備する方法を紹介し、次に`SELECT` 、 `START TRANSACTION READ ONLY AS OF TIMESTAMP` 、 `SET TRANSACTION READ ONLY AS OF TIMESTAMP`でそれぞれ`AS OF TIMESTAMP`を使用する方法を示します。
 
-### Prepare data sample
+### データサンプルを準備する {#prepare-data-sample}
 
-To prepare data for recovery, create a table first and insert several rows of data:
+リカバリ用のデータを準備するには、まずテーブルを作成し、いくつかのデータ行を挿入します。
 
 ```sql
 create table t (c int);
 ```
 
-```
-Query OK, 0 rows affected (0.01 sec)
-```
+    Query OK, 0 rows affected (0.01 sec)
 
 ```sql
 insert into t values (1), (2), (3);
 ```
 
-```
-Query OK, 3 rows affected (0.00 sec)
-```
+    Query OK, 3 rows affected (0.00 sec)
 
-View the data in the table:
+表内のデータをビュー。
 
 ```sql
 select * from t;
 ```
 
-```
-+------+
-| c    |
-+------+
-|    1 |
-|    2 |
-|    3 |
-+------+
-3 rows in set (0.00 sec)
-```
+    +------+
+    | c    |
+    +------+
+    |    1 |
+    |    2 |
+    |    3 |
+    +------+
+    3 rows in set (0.00 sec)
 
-View the current time:
+現在の時刻をビュー:
 
 ```sql
 select now();
 ```
 
-```
-+---------------------+
-| now()               |
-+---------------------+
-| 2021-05-26 16:45:26 |
-+---------------------+
-1 row in set (0.00 sec)
-```
+    +---------------------+
+    | now()               |
+    +---------------------+
+    | 2021-05-26 16:45:26 |
+    +---------------------+
+    1 row in set (0.00 sec)
 
-Update the data in a row:
+行内のデータを更新します。
 
 ```sql
 update t set c=22 where c=2;
 ```
 
-```
-Query OK, 1 row affected (0.00 sec)
-```
+    Query OK, 1 row affected (0.00 sec)
 
-Confirm that the data of the row is updated:
+行のデータが更新されたことを確認します。
 
 ```sql
 select * from t;
 ```
 
-```
-+------+
-| c    |
-+------+
-|    1 |
-|   22 |
-|    3 |
-+------+
-3 rows in set (0.00 sec)
-```
+    +------+
+    | c    |
+    +------+
+    |    1 |
+    |   22 |
+    |    3 |
+    +------+
+    3 rows in set (0.00 sec)
 
-### Read historical data using the `SELECT` statement
+### <code>SELECT</code>文を使用して履歴データを読み取る {#read-historical-data-using-the-code-select-code-statement}
 
-You can use the [`SELECT ... FROM ... AS OF TIMESTAMP`](/sql-statements/sql-statement-select.md) statement to read data from a time point in the past.
+[`SELECT ... FROM ... AS OF TIMESTAMP`](/sql-statements/sql-statement-select.md)ステートメントを使用すると、過去の時点からデータを読み取ることができます。
 
 ```sql
 select * from t as of timestamp '2021-05-26 16:45:26';
 ```
 
-```
-+------+
-| c    |
-+------+
-|    1 |
-|    2 |
-|    3 |
-+------+
-3 rows in set (0.00 sec)
-```
+    +------+
+    | c    |
+    +------+
+    |    1 |
+    |    2 |
+    |    3 |
+    +------+
+    3 rows in set (0.00 sec)
 
-> **Note:**
+> **注記：**
 >
-> When reading multiple tables using one `SELECT` statement, you need to make sure that the format of TIMESTAMP EXPRESSIONs is consistent. For example, `select * from t as of timestamp NOW() - INTERVAL 2 SECOND, c as of timestamp NOW() - INTERVAL 2 SECOND;`. In addition, you must specify the `AS OF` information for the relevant table in the `SELECT` statement; otherwise, the `SELECT` statement reads the latest data by default.
+> 1 つの`SELECT`ステートメントを使用して複数のテーブルを読み取る場合、TIMESTAMP EXPRESSION の形式が一貫していることを確認する必要があります。たとえば、 `select * from t as of timestamp NOW() - INTERVAL 2 SECOND, c as of timestamp NOW() - INTERVAL 2 SECOND;` 。また、 `SELECT`ステートメントで関連するテーブルの`AS OF`情報を指定する必要があります。そうしないと、 `SELECT`ステートメントはデフォルトで最新のデータを読み取ります。
 
-### Read historical data using the `START TRANSACTION READ ONLY AS OF TIMESTAMP` statement
+### <code>START TRANSACTION READ ONLY AS OF TIMESTAMP</code>ステートメントを使用して履歴データを読み取る {#read-historical-data-using-the-code-start-transaction-read-only-as-of-timestamp-code-statement}
 
-You can use the [`START TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-start-transaction.md) statement to start a read-only transaction based on a time point in the past. The transaction reads historical data of the given time.
+[`START TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-start-transaction.md)ステートメントを使用すると、過去の時点に基づいて読み取り専用トランザクションを開始できます。トランザクションは、指定された時間の履歴データを読み取ります。
 
 ```sql
 start transaction read only as of timestamp '2021-05-26 16:45:26';
 ```
 
-```
-Query OK, 0 rows affected (0.00 sec)
-```
+    Query OK, 0 rows affected (0.00 sec)
 
 ```sql
 select * from t;
 ```
 
-```
-+------+
-| c    |
-+------+
-|    1 |
-|    2 |
-|    3 |
-+------+
-3 rows in set (0.00 sec)
-```
+    +------+
+    | c    |
+    +------+
+    |    1 |
+    |    2 |
+    |    3 |
+    +------+
+    3 rows in set (0.00 sec)
 
 ```sql
 commit;
 ```
 
-```
-Query OK, 0 rows affected (0.00 sec)
-```
+    Query OK, 0 rows affected (0.00 sec)
 
-After the transaction is committed, you can read the latest data.
+トランザクションがコミットされた後、最新のデータを読み取ることができます。
 
 ```sql
 select * from t;
 ```
 
-```
-+------+
-| c    |
-+------+
-|    1 |
-|   22 |
-|    3 |
-+------+
-3 rows in set (0.00 sec)
-```
+    +------+
+    | c    |
+    +------+
+    |    1 |
+    |   22 |
+    |    3 |
+    +------+
+    3 rows in set (0.00 sec)
 
-> **Note:**
+> **注記：**
 >
-> If you start a transaction with the statement `START TRANSACTION READ ONLY AS OF TIMESTAMP`, it is a read-only transaction. Write operations are rejected in this transaction.
+> ステートメント`START TRANSACTION READ ONLY AS OF TIMESTAMP`でトランザクションを開始すると、読み取り専用トランザクションになります。このトランザクションでは書き込み操作は拒否されます。
 
-### Read historical data using the `SET TRANSACTION READ ONLY AS OF TIMESTAMP` statement
+### <code>SET TRANSACTION READ ONLY AS OF TIMESTAMP</code>ステートメントを使用して履歴データを読み取る {#read-historical-data-using-the-code-set-transaction-read-only-as-of-timestamp-code-statement}
 
-You can use the [`SET TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-set-transaction.md) statement to set the next transaction as a read-only transaction based on a specified time point in the past. The transaction reads historical data of the given time.
+[`SET TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-set-transaction.md)ステートメントを使用すると、過去の特定の時点に基づいて、次のトランザクションを読み取り専用トランザクションとして設定できます。トランザクションは、指定された時間の履歴データを読み取ります。
 
 ```sql
 set transaction read only as of timestamp '2021-05-26 16:45:26';
 ```
 
-```
-Query OK, 0 rows affected (0.00 sec)
-```
+    Query OK, 0 rows affected (0.00 sec)
 
 ```sql
 begin;
 ```
 
-```
-Query OK, 0 rows affected (0.00 sec)
-```
+    Query OK, 0 rows affected (0.00 sec)
 
 ```sql
 select * from t;
 ```
 
-```
-+------+
-| c    |
-+------+
-|    1 |
-|    2 |
-|    3 |
-+------+
-3 rows in set (0.00 sec)
-```
+    +------+
+    | c    |
+    +------+
+    |    1 |
+    |    2 |
+    |    3 |
+    +------+
+    3 rows in set (0.00 sec)
 
 ```sql
 commit;
 ```
 
-```
-Query OK, 0 rows affected (0.00 sec)
-```
+    Query OK, 0 rows affected (0.00 sec)
 
-After the transaction is committed, you can read the latest data.
+トランザクションがコミットされた後、最新のデータを読み取ることができます。
 
 ```sql
 select * from t;
 ```
 
-```
-+------+
-| c    |
-+------+
-|    1 |
-|   22 |
-|    3 |
-+------+
-3 rows in set (0.00 sec)
-```
+    +------+
+    | c    |
+    +------+
+    |    1 |
+    |   22 |
+    |    3 |
+    +------+
+    3 rows in set (0.00 sec)
 
-> **Note:**
+> **注記：**
 >
-> If you start a transaction with the statement `SET TRANSACTION READ ONLY AS OF TIMESTAMP`, it is a read-only transaction. Write operations are rejected in this transaction.
+> ステートメント`SET TRANSACTION READ ONLY AS OF TIMESTAMP`でトランザクションを開始すると、読み取り専用トランザクションになります。このトランザクションでは書き込み操作は拒否されます。

@@ -1,31 +1,31 @@
 ---
 title: TiDB Dedicated Limitations and Quotas
-summary: Learn the limitations and quotas in TiDB Cloud.
+summary: TiDB Cloudの制限と割り当てについて説明します。
 ---
 
-# TiDB Dedicated Limitations and Quotas
+# TiDB 専用制限とクォータ {#tidb-dedicated-limitations-and-quotas}
 
-TiDB Cloud limits how many of each kind of component you can create in a [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) cluster, and the common usage limitations of TiDB. In addition, there are some organization-level quotas to limit the amount of resources created by users to prevent from creating more resources than you actually need. These tables outline limits and quotas.
+TiDB Cloud、 [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターで作成できる各種類のコンポーネントの数と、TiDB の一般的な使用上の制限が制限されています。さらに、実際に必要な量を超えるリソースが作成されないように、ユーザーが作成するリソースの量を制限する組織レベルのクォータもいくつかあります。次の表は、制限とクォータの概要を示しています。
 
-> **Note:**
+> **注記：**
 >
-> If any of these limits or quotas present a problem for your organization, please contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> これらの制限または割り当てが組織にとって問題となる場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 
-## Cluster Limits
+## クラスタの制限 {#cluster-limits}
 
-| Component | Limit |
-|:-|:-|
-| Number of data replicas | 3 |
-| Number of Availability Zones for a cross-zone deployment | 3 |
+| 成分                     | 制限 |
+| :--------------------- | :- |
+| データレプリカの数              | 3  |
+| クロスゾーン展開のアベイラビリティゾーンの数 | 3  |
 
-> **Note:**
+> **注記：**
 >
-> If you want to learn more about common usage limitations of TiDB, please refer to [TiDB Limitations](https://docs.pingcap.com/tidb/stable/tidb-limitations).
+> TiDB の一般的な使用上の制限について詳しく知りたい場合は、 [TiDB の制限](https://docs.pingcap.com/tidb/stable/tidb-limitations)を参照してください。
 
-## Cluster Quotas
+## クラスタクォータ {#cluster-quotas}
 
-| Component | Quota (default) |
-|:-|:-|
-| Maximum number of total TiDB nodes for all clusters in your organization | 10 |
-| Maximum number of total TiKV nodes for all clusters in your organization | 15 |
-| Maximum number of total TiFlash nodes for all clusters in your organization | 5 |
+| 成分                            | クォータ（デフォルト） |
+| :---------------------------- | :---------- |
+| 組織内のすべてのクラスタの合計 TiDB ノードの最大数  | 10          |
+| 組織内のすべてのクラスタの合計 TiKV ノードの最大数  | 15          |
+| 組織内のすべてのクラスタの合計TiFlashノードの最大数 | 5           |

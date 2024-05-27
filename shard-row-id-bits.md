@@ -1,35 +1,35 @@
 ---
 title: SHARD_ROW_ID_BITS
-summary: Learn the SHARD_ROW_ID_BITS attribute.
+summary: SHARD_ROW_ID_BITS 属性について学習します。
 ---
 
-# SHARD_ROW_ID_BITS
+# シャード行IDビット {#shard-row-id-bits}
 
-This document introduces the `SHARD_ROW_ID_BITS` table attribute, which is used to set the number of bits of the shards after the implicit `_tidb_rowid` is sharded.
+このドキュメントでは、暗黙の`_tidb_rowid`がシャードされた後のシャードのビット数を設定するために使用される`SHARD_ROW_ID_BITS`テーブル属性について説明します。
 
-## Concept
+## コンセプト {#concept}
 
-For the tables with a non-clustered primary key or no primary key, TiDB uses an implicit auto-increment row ID. When a large number of `INSERT` operations are performed, the data is written into a single Region, causing a write hot spot.
+クラスター化されていない主キーを持つテーブル、または主キーのないテーブルの場合、TiDB は暗黙的な自動増分行 ID を使用します。 `INSERT`操作が大量に実行されると、データは単一のリージョンに書き込まれ、書き込みホットスポットが発生します。
 
-To mitigate the hot spot issue, you can configure `SHARD_ROW_ID_BITS`. The row IDs are scattered and the data are written into multiple different Regions.
+ホットスポットの問題を軽減するには、 `SHARD_ROW_ID_BITS`設定します。行 ID が分散され、データが複数の異なるリージョンに書き込まれます。
 
-- `SHARD_ROW_ID_BITS = 4` indicates 16 shards
-- `SHARD_ROW_ID_BITS = 6` indicates 64 shards
-- `SHARD_ROW_ID_BITS = 0` indicates the default 1 shard
+-   `SHARD_ROW_ID_BITS = 4` 16個の破片を示す
+-   `SHARD_ROW_ID_BITS = 6` 64個の破片を示す
+-   `SHARD_ROW_ID_BITS = 0`デフォルトの1シャードを示します
 
 <CustomContent platform="tidb">
 
-For details on the usage, see [the Troubleshoot Hotspot Issues guide](/troubleshoot-hot-spot-issues.md#use-shard_row_id_bits-to-process-hotspots).
+使用方法の詳細については[ホットスポットの問題のトラブルシューティングガイド](/troubleshoot-hot-spot-issues.md#use-shard_row_id_bits-to-process-hotspots)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-For details on the usage, see [the Troubleshoot Hotspot Issues guide](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#use-shard_row_id_bits-to-process-hotspots).
+使用方法の詳細については[ホットスポットの問題のトラブルシューティングガイド](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#use-shard_row_id_bits-to-process-hotspots)を参照してください。
 
 </CustomContent>
 
-## Examples
+## 例 {#examples}
 
 ```sql
 CREATE TABLE t (

@@ -1,110 +1,114 @@
 ---
 title: Get Started with Chat2Query API
-summary: Learn how to use TiDB Cloud Chat2Query API to generate and execute SQL statements using AI by providing instructions.
+summary: 指示に従って、 TiDB Cloud Chat2Query API を使用して AI で SQL ステートメントを生成および実行する方法を学びます。
 ---
 
-# Get Started with Chat2Query API
+# Chat2Query APIを使い始める {#get-started-with-chat2query-api}
 
-TiDB Cloud provides the Chat2Query API, a RESTful interface that enables you to generate and execute SQL statements using AI by providing instructions. Then, the API returns the query results for you.
+TiDB Cloud は、指示を与えることで AI を使用して SQL ステートメントを生成および実行できる RESTful インターフェースである Chat2Query API を提供します。その後、API がクエリ結果を返します。
 
-Chat2Query API can only be accessed through HTTPS, ensuring that all data transmitted over the network is encrypted using TLS.
+Chat2Query API には HTTPS 経由でのみアクセスでき、ネットワーク経由で送信されるすべてのデータは TLS を使用して暗号化されます。
 
-> **Note:**
+> **注記：**
 >
-> Chat2Query API is available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters. To use the Chat2Query API on [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+> Chat2Query API は[TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターで使用できます。3 [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターで Chat2Query API を使用するには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 
-## Step 1. Create a Chat2Query Data App
+## ステップ1. Chat2Queryデータアプリを作成する {#step-1-create-a-chat2query-data-app}
 
-To create a Data App for your project, perform the following steps:
+プロジェクトのデータ アプリを作成するには、次の手順を実行します。
 
-1. On the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project, click <MDSvgIcon name="icon-create-data-app" /> **Create DataApp** in the left pane. The data app creation dialog is displayed.
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページで、<mdsvgicon name="icon-create-data-app">左ペインで**DataApp を作成します**。データ アプリ作成ダイアログが表示されます。</mdsvgicon>
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you are on the **Chat2Query** page of your cluster, you can also open the data app creation dialog by clicking **...** in the upper-right corner, choosing **Access Chat2Query via API**, and clicking **New Chat2Query Data App**.
+    > クラスターの**Chat2Query**ページにいる場合は、右上隅の**...**をクリックし、 **API 経由で Chat2Query にアクセス**を選択して、**新しい Chat2Query データ アプリ**をクリックすることで、データ アプリ作成ダイアログを開くこともできます。
 
-2. In the dialog, define a name for your Data App, choose the desired clusters as the data sources, and select **Chat2Query Data App** as the **Data App** type. Optionally, you can also write a description for the App.
+2.  ダイアログで、データ アプリの名前を定義し、データ ソースとして目的のクラスターを選択し、**データ アプリの**種類として**Chat2Query データ アプリ**を選択します。オプションで、アプリの説明を記述することもできます。
 
-3. Click **Create**.
+3.  **[作成]を**クリックします。
 
-   The newly created Chat2Query Data App is displayed in the left pane. Under this Data App, you can find a list of Chat2Query endpoints.
+    新しく作成された Chat2Query データ アプリが左側のペインに表示されます。このデータ アプリの下に、Chat2Query エンドポイントのリストが表示されます。
 
-## Step 2. Create an API key
+## ステップ2. APIキーを作成する {#step-2-create-an-api-key}
 
-Before calling an endpoint, you need to create an API key for the Chat2Query Data App, which is used by the endpoint to access data in your TiDB Cloud clusters.
+エンドポイントを呼び出す前に、エンドポイントがTiDB Cloudクラスターのデータにアクセスするために使用する Chat2Query データ アプリの API キーを作成する必要があります。
 
-To create an API key, perform the following steps:
+API キーを作成するには、次の手順を実行します。
 
-1. In the left pane of [**Data Service**](https://tidbcloud.com/console/data-service), click your Chat2Query Data App to view its details on the right side.
-2. In the **Authentication** area, click **Create API Key**.
-3. In the **Create API Key** dialog, enter a description, and then select one of the following roles for your API key:
+1.  [**データサービス**](https://tidbcloud.com/console/data-service)の左側のペインで、Chat2Query データ アプリをクリックすると、右側にその詳細が表示されます。
 
-   - `Chat2Query Admin`: allows the API key to manage data summaries, generate SQL statements based on provided instructions, and execute any SQL statements.
-   - `Chat2Query Data Summary Management Role`: only allows the API key to generate and update data summaries.
+2.  **認証**領域で、 **「API キーの作成」を**クリックします。
 
-        > **Tip:**
+3.  **「API キーの作成」**ダイアログで説明を入力し、API キーの次のいずれかのロールを選択します。
+
+    -   `Chat2Query Admin` : API キーがデータ サマリーを管理し、提供された指示に基づいて SQL ステートメントを生成し、任意の SQL ステートメントを実行できるようにします。
+
+    -   `Chat2Query Data Summary Management Role` : API キーによるデータ サマリーの生成と更新のみを許可します。
+
+        > **ヒント：**
         >
-        > For Chat2Query API, a data summary is an analysis result of your database by AI, including your database descriptions, table descriptions, and column descriptions. By generating a data summary of your database, you can get a more accurate response when generating SQL statements by providing instructions.
+        > Chat2Query API の場合、データ サマリーは、データベースの説明、テーブルの説明、列の説明など、AI によるデータベースの分析結果です。データベースのデータ サマリーを生成することで、指示を与えて SQL 文を生成するときに、より正確な応答を得ることができます。
 
-   - `Chat2Query SQL ReadOnly`: only allows the API key to generate SQL statements based on provided instructions and execute `SELECT` SQL statements.
-   - `Chat2Query SQL ReadWrite`: allows the API key to generate SQL statements based on provided instructions and execute any SQL statements.
+    -   `Chat2Query SQL ReadOnly` : API キーは提供された指示に基づいて SQL ステートメントを生成し、 `SELECT` SQL ステートメントを実行することのみを許可します。
 
-4. Click **Next**. The public key and private key are displayed.
+    -   `Chat2Query SQL ReadWrite` : API キーが提供された指示に基づいて SQL ステートメントを生成し、任意の SQL ステートメントを実行できるようにします。
 
-    Make sure that you have copied and saved the private key in a secure location. After leaving this page, you will not be able to get the full private key again.
+4.  **「次へ」**をクリックします。公開鍵と秘密鍵が表示されます。
 
-5. Click **Done**.
+    秘密鍵をコピーして安全な場所に保存したことを確認してください。このページを離れると、完全な秘密鍵を再度取得できなくなります。
 
-## Step 3. Call Chat2Query endpoints
+5.  **「完了」を**クリックします。
 
-> **Note:**
+## ステップ3. Chat2Queryエンドポイントを呼び出す {#step-3-call-chat2query-endpoints}
+
+> **注記：**
 >
-> Each Chat2Query Data App has a rate limit of 100 requests per day. If you exceed the rate limit, the API returns a `429` error. For more quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
+> 各 Chat2Query データ アプリには、1 日あたり 100 リクエストのレート制限があります。レート制限を超えると、API は`429`エラーを返します。クォータを増やすには、サポート チームに[リクエストを送信する](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519)お問い合わせください。
 
-In each Chat2Query Data App, you can find the following endpoints:
+各 Chat2Query データ アプリには、次のエンドポイントがあります。
 
-- Chat2Query v1 endpoint: `/v1/chat2data`
-- Chat2Query v2 endpoints: the endpoints whose names starting with `/v2`, such as `/v2/dataSummaries` and `/v2/chat2data`
+-   Chat2Query v1 エンドポイント: `/v1/chat2data`
+-   Chat2Query v2エンドポイント: `/v2/dataSummaries`や`/v2/chat2data`など、名前が`/v2`で始まるエンドポイント
 
-> **Tip:**
+> **ヒント：**
 >
-> Compared with `/v1/chat2data`, `/v2/chat2data` requires you to analyze your database first by calling `/v2/dataSummaries`, so the results returned by `/v2/chat2data` are generally more accurate.
+> `/v1/chat2data`と比較すると、 `/v2/chat2data`最初に`/v2/dataSummaries`呼び出してデータベースを分析する必要があるため、 `/v2/chat2data`によって返される結果は通常より正確です。
 
-### Get the code example of an endpoint
+### エンドポイントのコード例を取得する {#get-the-code-example-of-an-endpoint}
 
-TiDB Cloud provides code examples to help you quickly call Chat2Query endpoints. To get the code example of a Chat2Query endpoint, perform the following steps:
+TiDB Cloud は、 Chat2Query エンドポイントをすばやく呼び出すのに役立つコード例を提供します。Chat2Query エンドポイントのコード例を取得するには、次の手順を実行します。
 
-1. In the left pane of the [**Data Service**](https://tidbcloud.com/console/data-service) page, click the name of a Chat2Query endpoint.
+1.  [**データサービス**](https://tidbcloud.com/console/data-service)ページの左側のペインで、Chat2Query エンドポイントの名前をクリックします。
 
-    The information for calling this endpoint is displayed on the right side, such as endpoint URL, code example, and request method.
+    エンドポイント URL、コード例、リクエスト メソッドなど、このエンドポイントを呼び出すための情報が右側に表示されます。
 
-2. Click **Show Code Example**.
+2.  **コード例を表示を**クリックします。
 
-3. In the displayed dialog box, select the cluster, database, and authentication method that you want to use to call the endpoint, and then copy the code example.
+3.  表示されたダイアログ ボックスで、エンドポイントの呼び出しに使用するクラスター、データベース、および認証方法を選択し、コード例をコピーします。
 
-    > **Note:**
+    > **注記：**
     >
-    > For `/v2/chat2data` and `/v2/jobs/{job_id}`, you only need to select the authentication method.
+    > `/v2/chat2data`と`/v2/jobs/{job_id}`については、認証方法を選択するだけです。
 
-4. To call the endpoint, you can paste the example in your application, replace the parameters in the example with your own (such as replacing the `${PUBLIC_KEY}` and `${PRIVATE_KEY}` placeholders with your API key), and then run it.
+4.  エンドポイントを呼び出すには、アプリケーションに例を貼り付け、例のパラメータを独自のものに置き換えて (プレースホルダー`${PUBLIC_KEY}`と`${PRIVATE_KEY}`を API キーに置き換えるなど)、実行します。
 
-### Call Chat2Query v2 endpoints
+### Chat2Query v2エンドポイントを呼び出す {#call-chat2query-v2-endpoints}
 
-TiDB Cloud Data Service provides the following Chat2Query v2 endpoints:
+TiDB Cloudデータ サービスは、次の Chat2Query v2 エンドポイントを提供します。
 
-|  Method | Endpoint| Description |
-|  ----  | ----  |----  |
-|  POST  | `/v2/dataSummaries`  | This endpoint generates a data summary for your database schema, table schema, and column schema by using artificial intelligence for analysis. |
-|  POST  | `/v2/chat2data`  | This endpoint enables you to generate and execute SQL statements using artificial intelligence by providing the data summary ID and instructions. |
-|  GET  | `/v2/jobs/{job_id}` | This endpoint enables you to query the status of the data summary generation job. |
+| 方法 | 終点                  | 説明                                                                         |
+| -- | ------------------- | -------------------------------------------------------------------------- |
+| 役職 | `/v2/dataSummaries` | このエンドポイントは、分析に人工知能を使用して、データベース スキーマ、テーブル スキーマ、列スキーマのデータ サマリーを生成します。        |
+| 役職 | `/v2/chat2data`     | このエンドポイントを使用すると、データ サマリー ID と指示を提供することで、人工知能を使用して SQL ステートメントを生成および実行できます。 |
+| 得る | `/v2/jobs/{job_id}` | このエンドポイントを使用すると、データ サマリー生成ジョブのステータスを照会できます。                                |
 
-In the subsequent sections, you will learn how to call these endpoints.
+以降のセクションでは、これらのエンドポイントを呼び出す方法を学習します。
 
-#### 1. Generate a data summary by calling `/v2/dataSummaries`
+#### 1. <code>/v2/dataSummaries</code>を呼び出してデータサマリーを生成する {#1-generate-a-data-summary-by-calling-code-v2-datasummaries-code}
 
-Before calling `/v2/chat2data`, let AI analyze the database and generate a data summary first by calling `/v2/dataSummaries`, so `/v2/chat2data` can get a better performance in SQL generation later.
+`/v2/chat2data`を呼び出す前に、まず`/v2/dataSummaries`呼び出して AI にデータベースを分析してデータの概要を生成させます。そうすることで、後で`/v2/chat2data` SQL 生成でより良いパフォーマンスを得ることができます。
 
-The following is a code example of calling `/v2/chat2data` to analyze the `sp500insight` database and generate a data summary for the database:
+以下は、 `/v2/chat2data`呼び出して`sp500insight`データベースを分析し、データベースのデータ概要を生成するコード例です。
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.dev.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v2/dataSummaries'\
@@ -115,12 +119,12 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 }'
 ```
 
-In the preceding example, the request body is a JSON object with the following properties:
+上記の例では、リクエスト本体は次のプロパティを持つ JSON オブジェクトです。
 
-- `cluster_id`: _string_. A unique identifier of the TiDB cluster.
-- `database`: _string_. The name of the database.
+-   `cluster_id` :*文字列*。TiDB クラスターの一意の識別子。
+-   `database` :*文字列*。データベースの名前。
 
-An example response is as follows:
+応答の例は次のとおりです。
 
 ```json
 {
@@ -133,18 +137,18 @@ An example response is as follows:
 }
 ```
 
-#### 2. Check the analysis status by calling `/v2/jobs/{job_id}`
+#### 2. <code>/v2/jobs/{job_id}</code>を呼び出して分析ステータスを確認します。 {#2-check-the-analysis-status-by-calling-code-v2-jobs-job-id-code}
 
-The `/v2/dataSummaries` API is asynchronous. For a database with a large dataset, it might take a few minutes to complete the database analysis and return the full data summary.
+`/v2/dataSummaries` API は非同期です。大規模なデータセットを持つデータベースの場合、データベース分析を完了して完全なデータの概要を返すまでに数分かかることがあります。
 
-To check the analysis status of your database, you can call the `/v2/jobs/{job_id}` endpoint as follows:
+データベースの分析ステータスを確認するには、次のように`/v2/jobs/{job_id}`エンドポイントを呼び出します。
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET 'https://<region>.data.dev.tidbcloud.com/api/v1beta/app/chat2query-<ID>`/endpoint/v2/jobs/{job_id}'\
  --header 'content-type: application/json'
 ```
 
-An example response is as follows:
+応答の例は次のとおりです。
 
 ```json
 {
@@ -159,9 +163,9 @@ An example response is as follows:
 }
 ```
 
-If `"status"` is `"done"`, the full data summary is ready and you can now generate and execute SQL statements for this database by calling `/v2/chat2data`. Otherwise, you need to wait and check the analysis status later until it is done.
+`"status"`が`"done"`の場合、完全なデータ サマリーは準備できており、 `/v2/chat2data`を呼び出してこのデータベースの SQL ステートメントを生成して実行できます。それ以外の場合は、分析が完了するまで待って、後で分析ステータスを確認する必要があります。
 
-In the response, `DataSummaryObject` represents AI exploration information of the given database. The structure of `DataSummaryObject` is as follows:
+レスポンスの`DataSummaryObject` 、指定されたデータベースのAI探索情報を表します。3 `DataSummaryObject`構造は次のとおりです。
 
 ```json
 {
@@ -206,11 +210,11 @@ In the response, `DataSummaryObject` represents AI exploration information of th
 }
 ```
 
-#### 3. Generate and execute SQL statements by calling `/v2/chat2data`
+#### 3. <code>/v2/chat2data</code>を呼び出してSQL文を生成し実行する {#3-generate-and-execute-sql-statements-by-calling-code-v2-chat2data-code}
 
-When the data summary of a database is ready, you can call `/v2/chat2data` to generate and execute SQL statements by providing the cluster ID, database name, and your question.
+データベースのデータ概要が準備できたら、クラスター ID、データベース名、質問を指定して`/v2/chat2data`呼び出して SQL ステートメントを生成し、実行できます。
 
-For example:
+例えば：
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.dev.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v2/chat2data'\
@@ -222,13 +226,13 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 }'
 ```
 
-In the preceding code, the request body is a JSON object with the following properties:
+上記のコードでは、リクエスト本文は次のプロパティを持つ JSON オブジェクトです。
 
-- `cluster_id`: _string_. A unique identifier of the TiDB cluster.
-- `database`: _string_. The name of the database.
-- `raw_question`: _string_. A natural language describing the query you want.
+-   `cluster_id` :*文字列*。TiDB クラスターの一意の識別子。
+-   `database` :*文字列*。データベースの名前。
+-   `raw_question` :*文字列*。必要なクエリを記述する自然言語。
 
-An example response is as follows:
+応答の例は次のとおりです。
 
 ```json
 {
@@ -240,7 +244,7 @@ An example response is as follows:
 }
 ```
 
-If you receive a response with the status code `400` as follows, it means that you need to wait a moment for the data summary to be ready.
+次のようにステータス コード`400`の応答を受け取った場合は、データ サマリーが準備されるまでしばらく待つ必要があることを意味します。
 
 ```json
 {
@@ -250,14 +254,14 @@ If you receive a response with the status code `400` as follows, it means that y
 }
 ```
 
-The `/v2/chat2data` API is asynchronous. You can check the job status by calling the `/v2/jobs/{job_id}` endpoint:
+`/v2/chat2data` API は非同期です。3 エンドポイント`/v2/jobs/{job_id}`呼び出すことでジョブのステータスを確認できます。
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET 'https://<region>.data.dev.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v2/jobs/{job_id}'\
  --header 'content-type: application/json'
 ```
 
-An example response is as follows:
+応答の例は次のとおりです。
 
 ```json
 {
@@ -296,30 +300,29 @@ An example response is as follows:
 }
 ```
 
-### Call the Chat2Data v1 endpoint
+### Chat2Data v1エンドポイントを呼び出す {#call-the-chat2data-v1-endpoint}
 
-TiDB Cloud Data Service provides the following Chat2Query v1 endpoint:
+TiDB Cloudデータ サービスは、次の Chat2Query v1 エンドポイントを提供します。
 
-|  Method | Endpoint| Description |
-|  ----  | ----  |----  |
-|  POST | `/v1/chat2data`  | This endpoint allows you to generate and execute SQL statements using artificial intelligence by providing the target database name and instructions.  |
+| 方法 | 終点              | 説明                                                                       |
+| -- | --------------- | ------------------------------------------------------------------------ |
+| 役職 | `/v1/chat2data` | このエンドポイントを使用すると、ターゲット データベース名と指示を指定して、人工知能を使用して SQL ステートメントを生成および実行できます。 |
 
-You can call the `/v1/chat2data` endpoint directly to generate and execute SQL statements. Compared with `/v2/chat2data`, `/v1/chat2data` provides a faster response but lower performance.
+`/v1/chat2data`エンドポイントを直接呼び出して、SQL ステートメントを生成および実行できます。 `/v2/chat2data`と比較すると、 `/v1/chat2data`応答が速くなりますが、パフォーマンスは低くなります。
 
-TiDB Cloud generates code examples to help you call an endpoint. To get the examples and run the code, see [Get the code example of an endpoint](#get-the-code-example-of-an-endpoint).
+TiDB Cloud は、エンドポイントを呼び出すのに役立つコード例を生成します。例を取得してコードを実行するには、 [エンドポイントのコード例を取得する](#get-the-code-example-of-an-endpoint)参照してください。
 
-When calling `/v1/chat2data`, you need to replace the following parameters:
+`/v1/chat2data`呼び出すときは、次のパラメータを置き換える必要があります。
 
-- Replace the `${PUBLIC_KEY}` and `${PRIVATE_KEY}` placeholders with your API key.
-- Replace the `<your table name, optional>` placeholder with the table name you want to query. If you do not specify a table name, AI will query all tables in the database.
-- Replace the `<your instruction>` placeholder with the instruction you want AI to generate and execute SQL statements.
+-   プレースホルダー`${PUBLIC_KEY}`と`${PRIVATE_KEY}`を API キーに置き換えます。
+-   `<your table name, optional>`プレースホルダーを、クエリするテーブル名に置き換えます。テーブル名を指定しないと、AI はデータベース内のすべてのテーブルをクエリします。
+-   `<your instruction>`プレースホルダーを、AI に SQL ステートメントを生成および実行させる命令に置き換えます。
 
-> **Note:**
+> **注記：**
 >
-> Each Chat2Query Data App has a rate limit of 100 requests per day. If you exceed the rate limit, the API returns a `429` error. For more quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
-> An API Key with the role `Chat2Query Data Summary Management Role` cannot call the Chat2Data v1 endpoint.
+> 各 Chat2Query データ アプリには、1 日あたり 100 リクエストのレート制限があります。レート制限を超えると、API は`429`エラーを返します。クォータを増やすには、サポート チームに[リクエストを送信する](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519)リクエストしてください。ロール`Chat2Query Data Summary Management Role`の API キーでは、Chat2Data v1 エンドポイントを呼び出すことはできません。
 
-The following code example is used to count how many users are in the `sp500insight.users` table:
+次のコード例は、 `sp500insight.users`テーブル内のユーザー数をカウントするために使用されます。
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.dev.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/chat2data'\
@@ -332,14 +335,14 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 }'
 ```
 
-In the preceding example, the request body is a JSON object with the following properties:
+上記の例では、リクエスト本体は次のプロパティを持つ JSON オブジェクトです。
 
-- `cluster_id`: _string_. A unique identifier of the TiDB cluster.
-- `database`: _string_. The name of the database.
-- `tables`: _array_. (optional) A list of table names to be queried.
-- `instruction`: _string_. A natural language instruction describing the query you want.
+-   `cluster_id` :*文字列*。TiDB クラスターの一意の識別子。
+-   `database` :*文字列*。データベースの名前。
+-   `tables` :*配列*。(オプション) クエリするテーブル名のリスト。
+-   `instruction` :*文字列*。必要なクエリを説明する自然言語の命令。
 
-The response is as follows:
+応答は次のとおりです。
 
 ```json
 {
@@ -373,7 +376,7 @@ The response is as follows:
 }
 ```
 
-If your API call is not successful, you will receive a status code other than `200`. The following is an example of the `500` status code:
+API 呼び出しが成功しなかった場合は、 `200`以外のステータス コードが返されます。以下は、 `500`ステータス コードの例です。
 
 ```json
 {
@@ -395,7 +398,7 @@ If your API call is not successful, you will receive a status code other than `2
 }
 ```
 
-## Learn more
+## もっと詳しく知る {#learn-more}
 
-- [Manage an API key](/tidb-cloud/data-service-api-key.md)
-- [Response and Status Codes of Data Service](/tidb-cloud/data-service-response-and-status-code.md)
+-   [APIキーを管理する](/tidb-cloud/data-service-api-key.md)
+-   [データサービスの応答コードとステータスコード](/tidb-cloud/data-service-response-and-status-code.md)

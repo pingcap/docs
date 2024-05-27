@@ -1,56 +1,54 @@
 ---
 title: TiUP FAQs
-summary: Provide answers to common questions asked by TiUP users.
+summary: TiUPユーザーからよく寄せられる質問に対する回答を提供します。
 ---
 
-# TiUP FAQs
+# TiUPに関するよくある質問 {#tiup-faqs}
 
-This document collects the frequently asked questions (FAQs) about TiUP.
+このドキュメントには、 TiUPに関するよくある質問 (FAQ) がまとめられています。
 
-## Can TiUP not use the official mirror source?
+## TiUP は公式ミラーソースを使用できないのでしょうか? {#can-tiup-not-use-the-official-mirror-source}
 
-TiUP supports specifying the mirror source through the `TIUP_MIRRORS` environment variable. The address of the mirror source can be a local directory or an HTTP server address. If your environment cannot access the network, you can create your own offline mirror source to use TiUP.
+TiUP は、 `TIUP_MIRRORS`環境変数を通じてミラー ソースを指定することをサポートしています。ミラー ソースのアドレスは、ローカル ディレクトリまたは HTTPサーバーアドレスにすることができます。環境がネットワークにアクセスできない場合は、独自のオフライン ミラー ソースを作成してTiUPを使用することができます。
 
-After using an unofficial mirror, if you want the official mirror back and use it, take one of the following measures:
+非公式ミラーを使用した後、公式ミラーに戻して使用する場合は、次のいずれかの対策を講じてください。
 
-- Set the `TIUP_MIRRORS` variable to the official mirror address: `https://tiup-mirrors.pingcap.com`.
-- Make sure that the `TIUP_MIRRORS` variable is not set, and then execute the `tiup mirror set https://tiup-mirrors.pingcap.com` command.
+-   `TIUP_MIRRORS`変数を公式ミラー アドレス`https://tiup-mirrors.pingcap.com`に設定します。
+-   `TIUP_MIRRORS`変数が設定されていないことを確認してから、 `tiup mirror set https://tiup-mirrors.pingcap.com`コマンドを実行します。
 
-## How do I put my own component into the TiUP mirrors?
+## 独自のコンポーネントをTiUPミラーに組み込むにはどうすればよいでしょうか? {#how-do-i-put-my-own-component-into-the-tiup-mirrors}
 
-TiUP does not support third-party components for the time being, but the TiUP Team has developed the TiUP component development specifications and is developing the tiup-publish component. After everything is ready, a contributor can publish their own components to TiUP's official mirrors by using the `tiup publish <comp> <version>` command.
+TiUP は今のところサードパーティのコンポーネントをサポートしていませんが、 TiUPチームはTiUPコンポーネント開発仕様を策定し、 tiup-publishコンポーネントを開発しています。準備が整ったら、貢献者は`tiup publish <comp> <version>`コマンドを使用して、独自のコンポーネントを TiUP の公式ミラーに公開できます。
 
-## What is the difference between the TiUP playground and TiUP cluster components?
+## TiUPプレイグラウンドとTiUPクラスター コンポーネントの違いは何ですか? {#what-is-the-difference-between-the-tiup-playground-and-tiup-cluster-components}
 
-The TiUP playground component is mainly used to build a stand-alone development environment on Linux or macOS operating systems. It helps you get started quickly and run a specified version of the TiUP cluster easily. The TiUP cluster component is mainly used to deploy and maintain a production environment cluster, which is usually a large-scale cluster. TiDB clusters deployed by TiUP Playground might lack some features and operational capabilities, and it is not recommended for complete functional and stability testing.
+TiUPプレイグラウンドコンポーネントは、主に Linux または macOS オペレーティング システム上にスタンドアロン開発環境を構築するために使用されます。これにより、すぐに開始して、指定されたバージョンのTiUPクラスターを簡単に実行できます。TiUP クラスターコンポーネントは、主に本番環境クラスター (通常は大規模クラスター) の展開と保守に使用されます。TiUP プレイグラウンドによって展開された TiDB クラスターには、一部の機能と運用能力が不足している可能性があるTiUP、完全な機能テストと安定性テストには推奨されません。
 
-## How do I write the topology file for the TiUP cluster component?
+## TiUPクラスターコンポーネントのトポロジ ファイルを作成するにはどうすればよいでしょうか? {#how-do-i-write-the-topology-file-for-the-tiup-cluster-component}
 
-Refer to [these templates](https://github.com/pingcap/tiup/tree/master/embed/examples/cluster) to write the topology file. The templates include:
+トポロジーファイルを書き込むには、 [これらのテンプレート](https://github.com/pingcap/tiup/tree/master/embed/examples/cluster)を参照してください。テンプレートには次のものが含まれます。
 
-- Multi-DC deployment topology
-- Minimal deployment topology
-- Complete topology file
+-   マルチDC展開トポロジ
+-   最小限の展開トポロジ
+-   完全なトポロジファイル
 
-You can edit your topology file based on the templates and your needs.
+テンプレートとニーズに基づいてトポロジ ファイルを編集できます。
 
-## Can multiple instances be deployed on the same host?
+## 同じホストに複数のインスタンスを展開できますか? {#can-multiple-instances-be-deployed-on-the-same-host}
 
-You can use the TiUP cluster component to deploy multiple instances on the same host, but with different ports and directories configured; otherwise, directory and port conflicts might occur.
+TiUPクラスターコンポーネントを使用すると、同じホストに複数のインスタンスをデプロイできますが、異なるポートとディレクトリを構成する必要があります。そうしないと、ディレクトリとポートの競合が発生する可能性があります。
 
-## Are port and directory conflicts detected within the same cluster?
+## 同じクラスター内でポートとディレクトリの競合が検出されますか? {#are-port-and-directory-conflicts-detected-within-the-same-cluster}
 
-Port and directory conflicts in the same cluster are detected during deployment and scaling. If there is any directory or port conflict, the deployment or scaling process is interrupted.
+デプロイメントおよびスケーリング中に、同じクラスター内のポートとディレクトリの競合が検出されます。ディレクトリまたはポートの競合がある場合、デプロイメントまたはスケーリング プロセスは中断されます。
 
-## Are port and directory conflicts detected among different clusters?
+## 異なるクラスター間でポートとディレクトリの競合が検出されますか? {#are-port-and-directory-conflicts-detected-among-different-clusters}
 
-If multiple different clusters are deployed by the same TiUP control machine, the port and directory conflicts among these clusters are detected during deployment and scaling. If the clusters are deployed by different TiUP control machines, conflict detection is not supported currently.
+複数の異なるクラスターが同じTiUP制御マシンによってデプロイされている場合、デプロイおよびスケーリング中にこれらのクラスター間のポートとディレクトリの競合が検出されます。クラスターが異なるTiUP制御マシンによってデプロイされている場合、競合の検出は現在サポートされていません。
 
-## During cluster deployment, TiUP received an `ssh: handshake failed: read tcp 10.10.10.34:38980 -> 10.10.10.34:3600: read: connection reset by peer` error
+## クラスタの展開中に、 TiUP は<code>ssh: handshake failed: read tcp 10.10.10.34:38980 -&gt; 10.10.10.34:3600: read: connection reset by peer</code> {#during-cluster-deployment-tiup-received-an-code-ssh-handshake-failed-read-tcp-10-10-10-34-38980-10-10-10-34-3600-read-connection-reset-by-peer-code-error}
 
-The error might occur because the default number of concurrent threads of TiUP exceeds the default maximum number of SSH connections. To solve the issue, you can increase the default number of SSH connections, and then restart the sshd service:
-
-{{< copyable "shell-regular" >}}
+このエラーは、 TiUPの同時スレッドのデフォルト数が SSH 接続のデフォルトの最大数を超えているために発生する可能性があります。この問題を解決するには、SSH 接続のデフォルト数を増やしてから、sshd サービスを再起動します。
 
 ```shell
 vi /etc/ssh/sshd_config

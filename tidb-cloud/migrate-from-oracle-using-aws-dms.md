@@ -1,157 +1,157 @@
 ---
 title:  Migrate from Amazon RDS for Oracle to TiDB Cloud Using AWS DMS
-summary: Learn how to migrate data from Amazon RDS for Oracle into TiDB Serverless using AWS Database Migration Service (AWS DMS).
+summary: AWS Database Migration Service (AWS DMS) を使用して、Amazon RDS for Oracle から TiDB Serverless にデータを移行する方法を学びます。
 ---
 
-# Migrate from Amazon RDS for Oracle to TiDB Cloud Using AWS DMS
+# AWS DMS を使用して Amazon RDS for Oracle からTiDB Cloudに移行する {#migrate-from-amazon-rds-for-oracle-to-tidb-cloud-using-aws-dms}
 
-This document describes a step-by-step example of how to migrate data from Amazon RDS for Oracle to [TiDB Serverless](https://tidbcloud.com/console/clusters/create-cluster) using AWS Database Migration Service (AWS DMS).
+このドキュメントでは、AWS Database Migration Service (AWS DMS) を使用して Amazon RDS for Oracle から[TiDB サーバーレス](https://tidbcloud.com/console/clusters/create-cluster)にデータを移行する方法の例を段階的に説明します。
 
-If you are interested in learning more about TiDB Cloud and AWS DMS, see the following:
+TiDB Cloudと AWS DMS について詳しく知りたい場合は、以下を参照してください。
 
-- [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)
-- [TiDB Developer Guide](https://docs.pingcap.com/tidbcloud/dev-guide-overview)
-- [AWS DMS Documentation](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.html)
+-   [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)
+-   [TiDB 開発者ガイド](https://docs.pingcap.com/tidbcloud/dev-guide-overview)
+-   [AWS DMS ドキュメント](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.html)
 
-## Why use AWS DMS?
+## AWS DMS を使用する理由 {#why-use-aws-dms}
 
-AWS DMS is a cloud service that makes it possible to migrate relational databases, data warehouses, NoSQL databases, and other types of data stores.
+AWS DMS は、リレーショナル データベース、データ ウェアハウス、NoSQL データベース、その他の種類のデータ ストアの移行を可能にするクラウド サービスです。
 
-If you want to migrate data from heterogeneous databases, such as PostgreSQL, Oracle, and SQL Server to TiDB Cloud, it is recommended to use AWS DMS.
+PostgreSQL、Oracle、SQL Server などの異種データベースからTiDB Cloudにデータを移行する場合は、AWS DMS を使用することをお勧めします。
 
-## Deployment architecture
+## デプロイメントアーキテクチャ {#deployment-architecture}
 
-At a high level, follow the following steps:
+大まかに言うと、次の手順に従います。
 
-1. Set up the source Amazon RDS for Oracle.
-2. Set up the target [TiDB Serverless](https://tidbcloud.com/console/clusters/create-cluster).
-3. Set up data migration (full load) using AWS DMS.
+1.  ソース Amazon RDS for Oracle をセットアップします。
+2.  ターゲット[TiDB サーバーレス](https://tidbcloud.com/console/clusters/create-cluster)を設定します。
+3.  AWS DMS を使用してデータ移行 (フルロード) を設定します。
 
-The following diagram illustrates the high-level architecture.
+次の図は、高レベルのアーキテクチャを示しています。
 
 ![Architecture](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-0.png)
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-Read the following prerequisites before you get started:
+始める前に、次の前提条件をお読みください。
 
-- [AWS DMS Prerequisites](/tidb-cloud/migrate-from-mysql-using-aws-dms.md#prerequisites)
-- [AWS Cloud Account](https://aws.amazon.com)
-- [TiDB Cloud Account](https://tidbcloud.com)
-- [DBeaver](https://dbeaver.io/)
+-   [AWS DMS の前提条件](/tidb-cloud/migrate-from-mysql-using-aws-dms.md#prerequisites)
+-   [AWS クラウドアカウント](https://aws.amazon.com)
+-   [TiDB Cloudアカウント](https://tidbcloud.com)
+-   [DBeaver](https://dbeaver.io/)
 
-Next, you will learn how to use AWS DMS to migrate data from Amazon RDS for Oracle into TiDB Cloud.
+次に、AWS DMS を使用して Amazon RDS for Oracle からTiDB Cloudにデータを移行する方法を学習します。
 
-## Step 1. Create a VPC
+## ステップ1. VPCを作成する {#step-1-create-a-vpc}
 
-Log in to the [AWS console](https://console.aws.amazon.com/vpc/home#vpcs:) and create an AWS VPC. You need to create Oracle RDS and DMS instances in this VPC later.
+[AWS コンソール](https://console.aws.amazon.com/vpc/home#vpcs:)にログインし、AWS VPC を作成します。後でこの VPC に Oracle RDS および DMS インスタンスを作成する必要があります。
 
-For instructions about how to create a VPC, see [Creating a VPC](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-vpcs.html#Create-VPC).
+VPC を作成する方法については、 [VPC の作成](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-vpcs.html#Create-VPC)参照してください。
 
 ![Create VPC](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-1.png)
 
-## Step 2. Create an Oracle DB instance
+## ステップ2. Oracle DBインスタンスを作成する {#step-2-create-an-oracle-db-instance}
 
-Create an Oracle DB instance in the VPC you just created, and remember the password and grant it public access. You must enable public access to use the AWS Schema Conversion Tool. Note that granting public access in the production environment is not recommended.
+作成した VPC に Oracle DB インスタンスを作成し、パスワードを覚えておき、パブリックアクセスを許可します。AWS スキーマ変換ツールを使用するには、パブリックアクセスを有効にする必要があります。本番環境でパブリックアクセスを許可することは推奨されないことに注意してください。
 
-For instructions about how to create an Oracle DB instance, see [Creating an Oracle DB instance and connecting to a database on an Oracle DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.Oracle.html).
+Oracle DB インスタンスを作成する方法については、 [Oracle DBインスタンスを作成し、Oracle DBインスタンス上のデータベースに接続する](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.Oracle.html)参照してください。
 
 ![Create Oracle RDS](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-2.png)
 
-## Step 3. Prepare the table data in Oracle
+## ステップ3. Oracleでテーブルデータを準備する {#step-3-prepare-the-table-data-in-oracle}
 
-Using the following scripts to create and populate 10000 rows of data in the github_events table. You can use the github event dataset and download it from [GH Archive](https://gharchive.org/). It contains 10000 rows of data. Use the following SQL script to execute it in Oracle.
+次のスクリプトを使用して、github_events テーブルに 10000 行のデータを作成し、入力します。github イベント データセットを使用して、 [GHアーカイブ](https://gharchive.org/)からダウンロードできます。これには 10000 行のデータが含まれています。次の SQL スクリプトを使用して、Oracle で実行します。
 
-- [table_schema_oracle.sql](https://github.com/pingcap-inc/tidb-integration-script/blob/main/aws-dms/oracle_table_schema.sql)
-- [oracle_data.sql](https://github.com/pingcap-inc/tidb-integration-script/blob/main/aws-dms/oracle_data.sql)
+-   [テーブルスキーマ_oracle.sql](https://github.com/pingcap-inc/tidb-integration-script/blob/main/aws-dms/oracle_table_schema.sql)
+-   [oracle_data.sql](https://github.com/pingcap-inc/tidb-integration-script/blob/main/aws-dms/oracle_data.sql)
 
-After you finish executing the SQL script, check the data in Oracle. The following example uses [DBeaver](https://dbeaver.io/) to query the data:
+SQL スクリプトの実行が完了したら、Oracle のデータを確認します。次の例では、 [DBeaver](https://dbeaver.io/)使用してデータを照会します。
 
 ![Oracle RDS Data](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-3.png)
 
-## Step 4. Create a TiDB Serverless cluster
+## ステップ4. TiDBサーバーレスクラスターを作成する {#step-4-create-a-tidb-serverless-cluster}
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/console/clusters).
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/console/clusters)にログインします。
 
-2. [Create a TiDB Serverless cluster](/tidb-cloud/tidb-cloud-quickstart.md).
+2.  [TiDB サーバーレス クラスターを作成する](/tidb-cloud/tidb-cloud-quickstart.md) 。
 
-3. In the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the target cluster name to go to its overview page.
+3.  [**クラスター**](https://tidbcloud.com/console/clusters)ページで、ターゲット クラスター名をクリックして概要ページに移動します。
 
-4. In the upper-right corner, click **Connect**.
+4.  右上隅の**「接続」**をクリックします。
 
-5. Click **Generate Password** to generate a password and copy the generated password.
+5.  **「パスワードの生成」**をクリックしてパスワードを生成し、生成されたパスワードをコピーします。
 
-## Step 5. Create an AWS DMS replication instance
+## ステップ5. AWS DMSレプリケーションインスタンスを作成する {#step-5-create-an-aws-dms-replication-instance}
 
-1. Go to the [Replication instances](https://console.aws.amazon.com/dms/v2/home#replicationInstances) page in the AWS DMS console, and switch to the corresponding region.
+1.  AWS DMS コンソールの[レプリケーションインスタンス](https://console.aws.amazon.com/dms/v2/home#replicationInstances)ページに移動し、対応するリージョンに切り替えます。
 
-2. Create an AWS DMS replication instance with `dms.t3.large` in the VPC.
+2.  VPC に`dms.t3.large`の AWS DMS レプリケーションインスタンスを作成します。
 
     ![Create AWS DMS Instance](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-8.png)
 
-> **Note:**
+> **注記：**
 >
-> For detailed steps on creating an AWS DMS replication instance to work with TiDB Serverless, see [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md).
+> TiDB Serverless と連携する AWS DMS レプリケーションインスタンスを作成する詳細な手順については、 [AWS DMS をTiDB Cloudクラスターに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)参照してください。
 
-## Step 6. Create DMS endpoints
+## ステップ6. DMSエンドポイントを作成する {#step-6-create-dms-endpoints}
 
-1. In the [AWS DMS console](https://console.aws.amazon.com/dms/v2/home), click the `Endpoints` menu item on the left pane.
+1.  [AWS DMS コンソール](https://console.aws.amazon.com/dms/v2/home)で、左側のペインの`Endpoints`メニュー項目をクリックします。
 
-2. Create the Oracle source endpoint and the TiDB target endpoint.
+2.  Oracle ソース エンドポイントと TiDB ターゲット エンドポイントを作成します。
 
-    The following screenshot shows the configurations of the source endpoint.
+    次のスクリーンショットは、ソース エンドポイントの構成を示しています。
 
     ![Create AWS DMS Source endpoint](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-9.png)
 
-    The following screenshot shows the configurations of the target endpoint.
+    次のスクリーンショットは、ターゲット エンドポイントの構成を示しています。
 
     ![Create AWS DMS Target endpoint](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-10.png)
 
-> **Note:**
+> **注記：**
 >
-> For detailed steps on creating a TiDB Serverless DMS endpoint, see [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md).
+> TiDB Serverless DMS エンドポイントを作成する詳細な手順については、 [AWS DMS をTiDB Cloudクラスターに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)参照してください。
 
-## Step 7. Migrate the schema
+## ステップ7. スキーマを移行する {#step-7-migrate-the-schema}
 
-In this example, AWS DMS automatically handles the schema, since the schema definition is simple.
+この例では、スキーマ定義が単純なので、AWS DMS が自動的にスキーマを処理します。
 
-If you decide to migrate schema using the AWS Schema Conversion Tool, see [Installing AWS SCT](https://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Installing.html#CHAP_Installing.Procedure).
+AWS スキーマ変換ツールを使用してスキーマを移行する場合は、 [AWS SCT のインストール](https://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Installing.html#CHAP_Installing.Procedure)参照してください。
 
-For more information, see [Migrating your source schema to your target database using AWS SCT](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.SCT.html).
+詳細については[AWS SCT を使用してソース スキーマをターゲット データベースに移行する](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.SCT.html)参照してください。
 
-## Step 8. Create a database migration task
+## ステップ8. データベース移行タスクを作成する {#step-8-create-a-database-migration-task}
 
-1. In the AWS DMS console, go to the [Data migration tasks](https://console.aws.amazon.com/dms/v2/home#tasks) page. Switch to your region. Then click **Create task** in the upper right corner of the window.
+1.  AWS DMS コンソールで、 [データ移行タスク](https://console.aws.amazon.com/dms/v2/home#tasks)ページに移動します。リージョンに切り替えます。次に、ウィンドウの右上隅にある**[タスクの作成] を**クリックします。
 
     ![Create task](/media/tidb-cloud/aws-dms-to-tidb-cloud-create-task.png)
 
-2. Create a database migration task and specify the **Selection rules**:
+2.  データベース移行タスクを作成し、**選択ルール**を指定します。
 
     ![Create AWS DMS migration task](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-11.png)
 
     ![AWS DMS migration task selection rules](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-12.png)
 
-3. Create the task, start it, and then wait for the task to finish.
+3.  タスクを作成して開始し、タスクが完了するまで待機します。
 
-4. Click the **Table statistics** to check the table. The schema name is `ADMIN`.
+4.  **テーブル統計を**クリックしてテーブルを確認します。スキーマ名は`ADMIN`です。
 
     ![Check AWS DMS migration task](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-13.png)
 
-## Step 9. Check data in the downstream TiDB cluster
+## ステップ9. 下流のTiDBクラスタのデータを確認する {#step-9-check-data-in-the-downstream-tidb-cluster}
 
-Connect to the [TiDB Serverless cluster](https://tidbcloud.com/console/clusters/create-cluster) and check the `admin.github_event` table data. As shown in the following screenshot, DMS successfully migrated table `github_events` and 10000 rows of data.
+[TiDB サーバーレス クラスター](https://tidbcloud.com/console/clusters/create-cluster)に接続し、 `admin.github_event`テーブルのデータを確認します。次のスクリーンショットに示すように、DMS はテーブル`github_events`と 10000 行のデータを正常に移行しました。
 
 ![Check Data In TiDB](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-14.png)
 
-## Summary
+## まとめ {#summary}
 
-With AWS DMS, you can successfully migrate data from any upstream AWS RDS database following the example in this document.
+AWS DMS を使用すると、このドキュメントの例に従って、任意のアップストリーム AWS RDS データベースからデータを正常に移行できます。
 
-If you encounter any issues or failures during the migration, you can check the log information in [CloudWatch](https://console.aws.amazon.com/cloudwatch/home) to troubleshoot the issues.
+移行中に問題や障害が発生した場合は、 [クラウドウォッチ](https://console.aws.amazon.com/cloudwatch/home)のログ情報を確認して問題のトラブルシューティングを行うことができます。
 
 ![Troubleshooting](/media/tidb-cloud/aws-dms-to-tidb-cloud-troubleshooting.png)
 
-## See also
+## 参照 {#see-also}
 
-- [Migrate from MySQL-Compatible Databases Using AWS DMS](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
-- [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
+-   [AWS DMS を使用して MySQL 互換データベースから移行する](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
+-   [AWS DMS をTiDB Cloudクラスターに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)

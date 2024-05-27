@@ -1,13 +1,13 @@
 ---
 title: DROP SEQUENCE
-summary: An overview of the usage of DROP SEQUENCE for the TiDB database.
+summary: TiDB データベースの DROP SEQUENCE の使用法の概要。
 ---
 
-# DROP SEQUENCE
+# ドロップシーケンス {#drop-sequence}
 
-The `DROP SEQUENCE` statement drops the sequence object in TiDB.
+`DROP SEQUENCE`ステートメントは、TiDB 内のシーケンス オブジェクトを削除します。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 DropSequenceStmt ::=
@@ -22,34 +22,26 @@ TableName ::=
     Identifier ('.' Identifier)?
 ```
 
-## Examples
-
-{{< copyable "sql" >}}
+## 例 {#examples}
 
 ```sql
 DROP SEQUENCE seq;
 ```
 
-```
-Query OK, 0 rows affected (0.10 sec)
-```
-
-{{< copyable "sql" >}}
+    Query OK, 0 rows affected (0.10 sec)
 
 ```sql
 DROP SEQUENCE seq, seq2;
 ```
 
-```
-Query OK, 0 rows affected (0.03 sec)
-```
+    Query OK, 0 rows affected (0.03 sec)
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension. The implementation is modeled on sequences available in MariaDB.
+このステートメントは TiDB の拡張機能です。実装は MariaDB で利用可能なシーケンスに基づいてモデル化されています。
 
-## See also
+## 参照 {#see-also}
 
-* [CREATE SEQUENCE](/sql-statements/sql-statement-create-sequence.md)
-* [ALTER SEQUENCE](/sql-statements/sql-statement-alter-sequence.md)
-* [SHOW CREATE SEQUENCE](/sql-statements/sql-statement-show-create-sequence.md)
+-   [シーケンスを作成](/sql-statements/sql-statement-create-sequence.md)
+-   [シーケンスの変更](/sql-statements/sql-statement-alter-sequence.md)
+-   [表示シーケンスの作成](/sql-statements/sql-statement-show-create-sequence.md)

@@ -1,139 +1,139 @@
 ---
 title: TiDB 6.5.3 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 6.5.3.
+summary: TiDB 6.5.3 の互換性の変更、改善、バグ修正について説明します。
 ---
 
-# TiDB 6.5.3 Release Notes
+# TiDB 6.5.3 リリースノート {#tidb-6-5-3-release-notes}
 
-Release date: June 14, 2023
+発売日: 2023年6月14日
 
-TiDB version: 6.5.3
+TiDB バージョン: 6.5.3
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.5/production-deployment-using-tiup)
+クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v6.5/quick-start-with-tidb) | [実稼働環境への導入](https://docs.pingcap.com/tidb/v6.5/production-deployment-using-tiup)
 
-## Compatibility changes
+## 互換性の変更 {#compatibility-changes}
 
-### Behavior changes
+### 行動の変化 {#behavior-changes}
 
-- When processing update event, TiCDC splits an event into delete and insert events if the primary key or non-null unique index value is modified in the event. For more information, see [documentation](/ticdc/ticdc-behavior-change.md#transactions-containing-a-single-update-change).
+-   更新イベントを処理する際、イベント内で主キーまたは null 以外の一意のインデックス値が変更されると、TiCDC はイベントを削除イベントと挿入イベントに分割します。詳細については、 [ドキュメンテーション](/ticdc/ticdc-behavior-change.md#transactions-containing-a-single-update-change)参照してください。
 
-## Improvements
+## 改善点 {#improvements}
 
-+ TiDB
+-   ティビ
 
-    - Improve the performance of `TRUNCATE` on partitioned tables with Placement Rules [#43070](https://github.com/pingcap/tidb/issues/43070) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    - Avoid invalid Stale Read retries after resolving locks [#43659](https://github.com/pingcap/tidb/issues/43659) @[you06](https://github.com/you06)
-    - Reduce latency by using leader read when Stale Read encounters the `DataIsNotReady` error [#765](https://github.com/tikv/client-go/pull/765) @[Tema](https://github.com/Tema)
-    - Add `Stale Read OPS` and `Stale Read MBps` metrics to track hit rate and traffic when using Stale Read [#43325](https://github.com/pingcap/tidb/issues/43325) @[you06](https://github.com/you06)
+    -   配置ルール[＃43070](https://github.com/pingcap/tidb/issues/43070) @ [ロイド・ポティガー](https://github.com/Lloyd-Pottiger)でパーティション テーブル上の`TRUNCATE`のパフォーマンスを向上します。
+    -   ロック[＃43659](https://github.com/pingcap/tidb/issues/43659) @ [あなた06](https://github.com/you06)を解決した後の無効なステイル読み取り再試行を回避する
+    -   ステイル読み取りで`DataIsNotReady`エラー[＃765](https://github.com/tikv/client-go/pull/765) @ [テーマ](https://github.com/Tema)が発生したときにリーダー読み取りを使用してレイテンシーを削減します。
+    -   ステイル読み取り [＃43325](https://github.com/pingcap/tidb/issues/43325) @ [あなた06](https://github.com/you06)を使用するときにヒット率とトラフィックを追跡するために`Stale Read OPS`と`Stale Read MBps`メトリックを追加します。
 
-+ TiKV
+-   ティクヴ
 
-    - Reduce traffic by using gzip to compress `check_leader` requests [#14839](https://github.com/tikv/tikv/issues/14839) @[cfzjywxk](https://github.com/cfzjywxk)
+    -   gzip を使用して`check_leader`リクエスト[＃14839](https://github.com/tikv/tikv/issues/14839) @ [翻訳](https://github.com/cfzjywxk)を圧縮してトラフィックを削減します
 
-+ PD
+-   PD
 
-    - Use a separate gRPC connection for PD leader election to prevent the impact of other requests [#6403](https://github.com/tikv/pd/issues/6403) @[rleungx](https://github.com/rleungx)
+    -   他のリクエストの影響を防ぐために、PDリーダー選出には別のgRPC接続を使用する[＃6403](https://github.com/tikv/pd/issues/6403) @ [rleungx](https://github.com/rleungx)
 
-+ Tools
+-   ツール
 
-    + TiCDC
+    -   ティCDC
 
-        - Optimize the way TiCDC handles DDLs so that DDLs do not block the use of other unrelated DML Events, and reduce memory usage [#8106](https://github.com/pingcap/tiflow/issues/8106) @[asddongmen](https://github.com/asddongmen)
-        - Optimize the Decoder interface and add a new method `AddKeyValue` [#8861](https://github.com/pingcap/tiflow/issues/8861) @[3AceShowHand](https://github.com/3AceShowHand)
-        - Optimize the directory structure when DDL events occur in the scenario of replicating data to object storage [#8890](https://github.com/pingcap/tiflow/issues/8890) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - Support replicating data to the Kafka-on-Pulsar downstream [#8892](https://github.com/pingcap/tiflow/issues/8892) @[hi-rustin](https://github.com/hi-rustin)
-        - Support using the OAuth protocol for validation when replicating data to Kafka [#8865](https://github.com/pingcap/tiflow/issues/8865) @[hi-rustin](https://github.com/hi-rustin)
-        - Optimize the way TiCDC handles the `UPDATE` statement during data replication using the Avro or CSV protocol, by splitting `UPDATE` into `DELETE` and `INSERT` statements, so that you can get the old value from the `DELETE` statement [#9086](https://github.com/pingcap/tiflow/issues/9086) @[3AceShowHand](https://github.com/3AceShowHand)
-        - Add a configuration item `insecure-skip-verify` to control whether to set the authentication algorithm in the scenario of enabling TLS [#8867](https://github.com/pingcap/tiflow/issues/8867) @[hi-rustin](https://github.com/hi-rustin)
-        - Optimize DDL replication operations to mitigate the impact of DDL operations on downstream latency [#8686](https://github.com/pingcap/tiflow/issues/8686) @[hi-rustin](https://github.com/hi-rustin)
-        - Optimize the method of setting GC TLS for the upstream when the TiCDC replication task fails [#8403](https://github.com/pingcap/tiflow/issues/8403) @[charleszheng44](https://github.com/charleszheng44)
+        -   TiCDC が DDL を処理する方法を最適化し、DDL が他の無関係な DML イベントの使用をブロックしないようにし、メモリ使用量を削減します[＃8106](https://github.com/pingcap/tiflow/issues/8106) @ [アズドンメン](https://github.com/asddongmen)
+        -   デコーダーインターフェースを最適化し、新しいメソッド`AddKeyValue` [＃8861](https://github.com/pingcap/tiflow/issues/8861) @ [3エースショーハンド](https://github.com/3AceShowHand)を追加します
+        -   オブジェクトstorageにデータを複製するシナリオで DDL イベントが発生した場合にディレクトリ構造を最適化する[＃8890](https://github.com/pingcap/tiflow/issues/8890) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
+        -   Kafka-on-Pulsar ダウンストリームへのデータ複製をサポート[＃8892](https://github.com/pingcap/tiflow/issues/8892) @ [ハイラスティン](https://github.com/hi-rustin)
+        -   Kafka [＃8865](https://github.com/pingcap/tiflow/issues/8865) @ [ハイラスティン](https://github.com/hi-rustin)にデータを複製する際の検証に OAuth プロトコルの使用をサポート
+        -   Avro または CSV プロトコルを使用してデータ複製中に TiCDC が`UPDATE`のステートメントを処理する方法を最適化します。3 `UPDATE`ステートメントを`DELETE`ステートメントと`INSERT`ステートメントに分割して、 `DELETE`のステートメント[＃9086](https://github.com/pingcap/tiflow/issues/9086) @ [3エースショーハンド](https://github.com/3AceShowHand)から古い値を取得できるようにします。
+        -   TLS [＃8867](https://github.com/pingcap/tiflow/issues/8867) @ [ハイラスティン](https://github.com/hi-rustin)を有効にするシナリオで認証アルゴリズムを設定するかどうかを制御する構成項目`insecure-skip-verify`を追加します。
+        -   DDLレプリケーション操作を最適化して、DDL操作によるダウンレイテンシーへの影響を軽減します[＃8686](https://github.com/pingcap/tiflow/issues/8686) @ [ハイラスティン](https://github.com/hi-rustin)
+        -   TiCDC レプリケーションタスクが失敗した場合にアップストリームの GC TLS を設定する方法を最適化する[＃8403](https://github.com/pingcap/tiflow/issues/8403) @ [チャールズ・ジェン44](https://github.com/charleszheng44)
 
-    + TiDB Binlog
+    -   TiDBBinlog
 
-        - Optimize the method of retrieving table information to reduce the initialization time and memory usage of Drainer [#1137](https://github.com/pingcap/tidb-binlog/issues/1137) @[lichunzhu](https://github.com/lichunzhu)
+        -   テーブル情報の取得方法を最適化し、 Drainer [＃1137](https://github.com/pingcap/tidb-binlog/issues/1137) @ [リチュンジュ](https://github.com/lichunzhu)の初期化時間とメモリ使用量を削減します。
 
-## Bug fixes
+## バグの修正 {#bug-fixes}
 
-+ TiDB
+-   ティビ
 
-    - Fix the issue that the `min, max` query result is incorrect [#43805](https://github.com/pingcap/tidb/issues/43805) @[wshwsh12](https://github.com/wshwsh12)
-    - Fix the issue of incorrect execution plans when pushing down window functions to TiFlash [#43922](https://github.com/pingcap/tidb/issues/43922) @[gengliqi](https://github.com/gengliqi)
-    - Fix the issue that the query with CTE causes TiDB to hang [#43749](https://github.com/pingcap/tidb/issues/43749) [#36896](https://github.com/pingcap/tidb/issues/36896) @[guo-shaoge](https://github.com/guo-shaoge)
-    - Fix the issue that the SQL statement reports the `runtime error: index out of range` error when using the `AES_DECRYPT` expression [#43063](https://github.com/pingcap/tidb/issues/43063) @[lcwangchao](https://github.com/lcwangchao)
-    - Fix the issue that the `SHOW PROCESSLIST` statement cannot display the TxnStart of the transaction of the statement with a long subquery time [#40851](https://github.com/pingcap/tidb/issues/40851) @[crazycs520](https://github.com/crazycs520)
-    - Fix the issue that PD isolation might block the running DDL [#44014](https://github.com/pingcap/tidb/issues/44014) [#43755](https://github.com/pingcap/tidb/issues/43755) [#44267](https://github.com/pingcap/tidb/issues/44267) @[wjhuang2016](https://github.com/wjhuang2016)
-    - Fix the TiDB panic issue that occurs when querying union views and temporary tables with `UNION` [#42563](https://github.com/pingcap/tidb/issues/42563) @[lcwangchao](https://github.com/lcwangchao)
-    - Fix the behavior issue of Placement Rules in partitioned tables, so that the Placement Rules in deleted partitions can be correctly set and recycled [#44116](https://github.com/pingcap/tidb/issues/44116) @[lcwangchao](https://github.com/lcwangchao)
-    - Fix the issue that truncating a partition of a partitioned table might cause the Placement Rule of the partition to become invalid [#44031](https://github.com/pingcap/tidb/issues/44031) @[lcwangchao](https://github.com/lcwangchao)
-    - Fix the issue that TiCDC might lose some row changes during table renaming [#43338](https://github.com/pingcap/tidb/issues/43338) @[tangenta](https://github.com/tangenta)
-    - Fix the issue that the DDL job history is lost after importing a table using BR [#43725](https://github.com/pingcap/tidb/issues/43725) @[tangenta](https://github.com/tangenta)
-    - Fix the issue that `JSON_OBJECT` might report an error in some cases [#39806](https://github.com/pingcap/tidb/issues/39806) @[YangKeao](https://github.com/YangKeao)
-    - Fix the issue that the cluster cannot query some system views in IPv6 environment [#43286](https://github.com/pingcap/tidb/issues/43286) @[Defined2014](https://github.com/Defined2014)
-    - Fix the issue that when the PD member address changes, allocating ID for the `AUTO_INCREMENT` column will be blocked for a long time [#42643](https://github.com/pingcap/tidb/issues/42643) @[tiancaiamao](https://github.com/tiancaiamao)
-    - Fix the issue that TiDB sends duplicate requests to PD during placement rules recycling, causing numerous `full config reset` entries in the PD log [#33069](https://github.com/pingcap/tidb/issues/33069) @[tiancaiamao](https://github.com/tiancaiamao)
-    - Fix the issue that the `SHOW PRIVILEGES` statement returns an incomplete privilege list [#40591](https://github.com/pingcap/tidb/issues/40591) @[CbcWestwolf](https://github.com/CbcWestwolf)
-    - Fix the issue that `ADMIN SHOW DDL JOBS LIMIT` returns incorrect results [#42298](https://github.com/pingcap/tidb/issues/42298) @[CbcWestwolf](https://github.com/CbcWestwolf)
-    - Fix the issue that the `tidb_auth_token` user fails to be created when the password complexity check is enabled [#44098](https://github.com/pingcap/tidb/issues/44098) @[CbcWestwolf](https://github.com/CbcWestwolf)
-    - Fix the issue of not finding the partition during inner join in dynamic pruning mode [#43686](https://github.com/pingcap/tidb/issues/43686) @[mjonss](https://github.com/mjonss)
-    - Fix the issue that the `Data Truncated` warning occurs when executing `MODIFY COLUMN` on a partitioned table [#41118](https://github.com/pingcap/tidb/issues/41118) @[mjonss](https://github.com/mjonss)
-    - Fix the issue of displaying the incorrect TiDB address in IPv6 environment [#43260](https://github.com/pingcap/tidb/issues/43260) @[nexustar](https://github.com/nexustar)
-    - Fix the issue that CTE results are incorrect when pushing down predicates [#43645](https://github.com/pingcap/tidb/issues/43645) @[winoros](https://github.com/winoros)
-    - Fix the issue that incorrect results might be returned when using a common table expression (CTE) in statements with non-correlated subqueries [#44051](https://github.com/pingcap/tidb/issues/44051) @[winoros](https://github.com/winoros)
-    - Fix the issue that Join Reorder might cause incorrect outer join results [#44314](https://github.com/pingcap/tidb/issues/44314) @[AilinKid](https://github.com/AilinKid)
-    - Fix the issue that in some extreme cases, when the first statement of a pessimistic transaction is retried, resolving locks on this transaction might affect transaction correctness [#42937](https://github.com/pingcap/tidb/issues/42937) @[MyonKeminta](https://github.com/MyonKeminta)
-    - Fix the issue that in some rare cases, residual pessimistic locks of pessimistic transactions might affect data correctness when GC resolves locks [#43243](https://github.com/pingcap/tidb/issues/43243) @[MyonKeminta](https://github.com/MyonKeminta)
-    - Fix the issue that the scan detail information during the execution of `batch cop` might be inaccurate [#41582](https://github.com/pingcap/tidb/issues/41582) @[you06](https://github.com/you06)
-    - Fix the issue that TiDB cannot read data updates when Stale Read and `PREPARE` statements are used at the same time [#43044](https://github.com/pingcap/tidb/issues/43044) @[you06](https://github.com/you06)
-    - Fix the issue that an `assertion failed` error might be mistakenly reported when executing the `LOAD DATA` statement [#43849](https://github.com/pingcap/tidb/issues/43849) @[you06](https://github.com/you06)
-    - Fix the issue that the coprocessor cannot fall back to the leader when a `region data not ready` error occurs during the use of Stale Read [#43365](https://github.com/pingcap/tidb/issues/43365) @[you06](https://github.com/you06)
+    -   `min, max`クエリ結果が正しくない問題を修正[＃43805](https://github.com/pingcap/tidb/issues/43805) @ [うわー](https://github.com/wshwsh12)
+    -   ウィンドウ関数をTiFlash [＃43922](https://github.com/pingcap/tidb/issues/43922) @ [ゲンリキ](https://github.com/gengliqi)にプッシュダウンする際の実行プランが正しくない問題を修正しました。
+    -   CTE を含むクエリによって TiDB がハングする問題を修正[＃43749](https://github.com/pingcap/tidb/issues/43749) [＃36896](https://github.com/pingcap/tidb/issues/36896) @ [グオシャオゲ](https://github.com/guo-shaoge)
+    -   `AES_DECRYPT`式[＃43063](https://github.com/pingcap/tidb/issues/43063) @ [lcwangchao](https://github.com/lcwangchao)を使用すると SQL 文が`runtime error: index out of range`エラーを報告する問題を修正しました。
+    -   `SHOW PROCESSLIST`ステートメントがサブクエリ時間が長いステートメントのトランザクションの TxnStart を表示できない問題を修正[＃40851](https://github.com/pingcap/tidb/issues/40851) @ [クレイジーcs520](https://github.com/crazycs520)
+    -   PD分離により実行中のDDLがブロックされる可能性がある問題を修正[＃44014](https://github.com/pingcap/tidb/issues/44014) [＃43755](https://github.com/pingcap/tidb/issues/43755) [＃44267](https://github.com/pingcap/tidb/issues/44267) @ [翻訳:](https://github.com/wjhuang2016)
+    -   `UNION` [＃42563](https://github.com/pingcap/tidb/issues/42563) @ [lcwangchao](https://github.com/lcwangchao)でユニオンビューと一時テーブルをクエリするときに発生する TiDBpanic問題を修正しました。
+    -   パーティション化されたテーブル内の配置ルールの動作の問題を修正し、削除されたパーティション内の配置ルールが正しく設定され、リサイクルされるようになりました[＃44116](https://github.com/pingcap/tidb/issues/44116) @ [lcwangchao](https://github.com/lcwangchao)
+    -   パーティションテーブルのパーティションを切り捨てると、パーティションの配置ルールが無効になる可能性がある問題を修正[＃44031](https://github.com/pingcap/tidb/issues/44031) @ [lcwangchao](https://github.com/lcwangchao)
+    -   テーブル名の変更中に TiCDC が行の変更の一部を失う可能性がある問題を修正[＃43338](https://github.com/pingcap/tidb/issues/43338) @ [タンジェンタ](https://github.com/tangenta)
+    -   BR [＃43725](https://github.com/pingcap/tidb/issues/43725) @ [タンジェンタ](https://github.com/tangenta)を使用してテーブルをインポートした後に DDL ジョブ履歴が失われる問題を修正しました
+    -   `JSON_OBJECT`場合によってはエラーを報告する可能性がある問題を修正[＃39806](https://github.com/pingcap/tidb/issues/39806) @ [ヤンケオ](https://github.com/YangKeao)
+    -   IPv6 環境[＃43286](https://github.com/pingcap/tidb/issues/43286) @ [定義2014](https://github.com/Defined2014)でクラスターが一部のシステム ビューを照会できない問題を修正
+    -   PDメンバーアドレスが変更されると、 `AUTO_INCREMENT`列目のIDの割り当てが長時間ブロックされる問題を修正[＃42643](https://github.com/pingcap/tidb/issues/42643) @ [天菜まお](https://github.com/tiancaiamao)
+    -   配置ルールのリサイクル中に TiDB が PD に重複したリクエストを送信し、PD ログ[＃33069](https://github.com/pingcap/tidb/issues/33069) @ [天菜まお](https://github.com/tiancaiamao)に多数の`full config reset`エントリが発生する問題を修正しました。
+    -   `SHOW PRIVILEGES`文が不完全な権限リスト[＃40591](https://github.com/pingcap/tidb/issues/40591) @ [Cbcウェストウルフ](https://github.com/CbcWestwolf)を返す問題を修正
+    -   `ADMIN SHOW DDL JOBS LIMIT`誤った結果を返す問題を修正[＃42298](https://github.com/pingcap/tidb/issues/42298) @ [Cbcウェストウルフ](https://github.com/CbcWestwolf)
+    -   パスワードの複雑さのチェックが有効になっている場合に`tidb_auth_token`ユーザーの作成に失敗する問題を修正[＃44098](https://github.com/pingcap/tidb/issues/44098) @ [Cbcウェストウルフ](https://github.com/CbcWestwolf)
+    -   動的プルーニングモード[＃43686](https://github.com/pingcap/tidb/issues/43686) @ [ミョンス](https://github.com/mjonss)で内部結合中にパーティションが見つからない問題を修正
+    -   パーティションテーブル[＃41118](https://github.com/pingcap/tidb/issues/41118) @ [ミョンス](https://github.com/mjonss)で`MODIFY COLUMN`を実行すると`Data Truncated`警告が発生する問題を修正しました。
+    -   IPv6環境で誤ったTiDBアドレスが表示される問題を修正[＃43260](https://github.com/pingcap/tidb/issues/43260) @ [ネクスター](https://github.com/nexustar)
+    -   述語[＃43645](https://github.com/pingcap/tidb/issues/43645) @ [ウィノロス](https://github.com/winoros)をプッシュダウンするときに CTE 結果が正しくない問題を修正しました
+    -   非相関サブクエリを含むステートメントで共通テーブル式 (CTE) を使用すると、誤った結果が返される可能性がある問題を修正しました[＃44051](https://github.com/pingcap/tidb/issues/44051) @ [ウィノロス](https://github.com/winoros)
+    -   結合したテーブルの再配置により外部結合結果が不正確になる可能性がある問題を修正[＃44314](https://github.com/pingcap/tidb/issues/44314) @ [アイリンキッド](https://github.com/AilinKid)
+    -   極端なケースで、悲観的トランザクションの最初のステートメントが再試行されるときに、このトランザクションのロックを解決するとトランザクションの正確性に影響する可能性がある問題を修正しました[＃42937](https://github.com/pingcap/tidb/issues/42937) @ [ミョンケミンタ](https://github.com/MyonKeminta)
+    -   GC がロック[＃43243](https://github.com/pingcap/tidb/issues/43243) @ [ミョンケミンタ](https://github.com/MyonKeminta)を解決するときに、まれに悲観的トランザクションの残留悲観的ロックがデータの正確性に影響を与える可能性がある問題を修正しました。
+    -   `batch cop`実行中のスキャン詳細情報が不正確になる可能性がある問題を修正[＃41582](https://github.com/pingcap/tidb/issues/41582) @ [あなた06](https://github.com/you06)
+    -   ステイル読み取りと`PREPARE`ステートメントが同時に使用されている場合に TiDB がデータ更新を読み取れない問題を修正[＃43044](https://github.com/pingcap/tidb/issues/43044) @ [あなた06](https://github.com/you06)
+    -   `LOAD DATA`ステートメント[＃43849](https://github.com/pingcap/tidb/issues/43849) @ [あなた06](https://github.com/you06)を実行すると`assertion failed`エラーが誤って報告される可能性がある問題を修正しました。
+    -   ステイル読み取り [＃43365](https://github.com/pingcap/tidb/issues/43365) @ [あなた06](https://github.com/you06)の使用中に`region data not ready`エラーが発生した場合にコプロセッサがリーダーにフォールバックできない問題を修正しました。
 
-+ TiKV
+-   ティクヴ
 
-    - Fix the issue that the peers of the corresponding Region mistakenly hibernate when a TiKV node fails [#14547](https://github.com/tikv/tikv/issues/14547) @[hicqu](https://github.com/hicqu)
-    - Fix the issue of file handle leakage in Continuous Profiling [#14224](https://github.com/tikv/tikv/issues/14224) @[tabokie](https://github.com/tabokie)
-    - Fix the issue that PD crash might cause PITR to fail to proceed [#14184](https://github.com/tikv/tikv/issues/14184) @[YuJuncen](https://github.com/YuJuncen)
-    - Fix the issue that encryption key ID conflict might cause the deletion of the old keys [#14585](https://github.com/tikv/tikv/issues/14585) @[tabokie](https://github.com/tabokie)
-    - Fix the issue that autocommit and point get replica read might break linearizability [#14715](https://github.com/tikv/tikv/issues/14715) @[cfzjywxk](https://github.com/cfzjywxk)
-    - Fix the performance degradation issue caused by accumulated lock records when a cluster is upgraded from a previous version to v6.5 or later versions [#14780](https://github.com/tikv/tikv/issues/14780) @[MyonKeminta](https://github.com/MyonKeminta)
-    - Fix the issue that TiDB Lightning might cause SST file leakage [#14745](https://github.com/tikv/tikv/issues/14745) @[YuJuncen](https://github.com/YuJuncen)
-    - Fix the potential conflict between the encryption key and raft log file deletion that might cause TiKV to fail to start [#14761](https://github.com/tikv/tikv/issues/14761) @[Connor1996](https://github.com/Connor1996)
+    -   TiKV ノードが[＃14547](https://github.com/tikv/tikv/issues/14547) @ [ヒック](https://github.com/hicqu)で障害を起こしたときに、対応するリージョンのピアが誤って休止状態になる問題を修正しました。
+    -   継続的プロファイリング[＃14224](https://github.com/tikv/tikv/issues/14224) @ [タボキ](https://github.com/tabokie)でのファイル ハンドル リークの問題を修正
+    -   PD クラッシュにより PITR が[＃14184](https://github.com/tikv/tikv/issues/14184) @ [ユジュンセン](https://github.com/YuJuncen)に進まなくなる可能性がある問題を修正しました
+    -   暗号化キーIDの競合により古いキー[＃14585](https://github.com/tikv/tikv/issues/14585) @ [タボキ](https://github.com/tabokie)が削除される可能性がある問題を修正
+    -   自動コミットとポイント取得レプリカ読み取りによって線形化可能性が損なわれる可能性がある問題を修正[＃14715](https://github.com/tikv/tikv/issues/14715) @ [翻訳](https://github.com/cfzjywxk)
+    -   クラスターを以前のバージョンから v6.5 以降のバージョンにアップグレードしたときに、蓄積されたロック レコードによって発生するパフォーマンス低下の問題を修正しました[＃14780](https://github.com/tikv/tikv/issues/14780) @ [ミョンケミンタ](https://github.com/MyonKeminta)
+    -   TiDB Lightning がSST ファイルの漏洩を引き起こす可能性がある問題を修正[＃14745](https://github.com/tikv/tikv/issues/14745) @ [ユジュンセン](https://github.com/YuJuncen)
+    -   暗号化キーとラフトログファイルの削除の間に潜在的な競合が発生し、TiKV が起動に失敗する可能性がある問題を修正[＃14761](https://github.com/tikv/tikv/issues/14761) @ [コナー1996](https://github.com/Connor1996)
 
-+ TiFlash
+-   TiFlash
 
-    - Fix the performance degradation issue of the partition TableScan operator during Region transfer [#7519](https://github.com/pingcap/tiflash/issues/7519) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    - Fix the issue that a TiFlash query might report an error if the `GENERATED` type field is present along with the `TIMESTAMP` or `TIME` type [#7468](https://github.com/pingcap/tiflash/issues/7468) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    - Fix the issue that large update transactions might cause TiFlash to repeatedly report errors and restart [#7316](https://github.com/pingcap/tiflash/issues/7316) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - Fix the issue that the error "Truncate error cast decimal as decimal" occurs when reading data from TiFlash with the `INSERT SELECT` statement [#7348](https://github.com/pingcap/tiflash/issues/7348) @[windtalker](https://github.com/windtalker)
-    - Fix the issue that queries might consume more memory than needed when the data on the Join build side is very large and contains many small string type columns [#7416](https://github.com/pingcap/tiflash/issues/7416) @[yibin87](https://github.com/yibin87)
+    -   リージョン転送[＃7519](https://github.com/pingcap/tiflash/issues/7519) @ [ロイド・ポティガー](https://github.com/Lloyd-Pottiger)中のパーティション TableScan 演算子のパフォーマンス低下の問題を修正しました
+    -   `GENERATED`型フィールドが`TIMESTAMP`または`TIME`型[＃7468](https://github.com/pingcap/tiflash/issues/7468) @ [ロイド・ポティガー](https://github.com/Lloyd-Pottiger)と一緒に存在する場合、 TiFlashクエリでエラーが報告される可能性がある問題を修正しました。
+    -   大規模な更新トランザクションにより、 TiFlashが繰り返しエラーを報告し、 [＃7316](https://github.com/pingcap/tiflash/issues/7316) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)を再起動する可能性がある問題を修正しました。
+    -   `INSERT SELECT`文[＃7348](https://github.com/pingcap/tiflash/issues/7348) @ [風の話し手](https://github.com/windtalker)でTiFlashからデータを読み取るときに「Truncate error cast decimal as decimal」というエラーが発生する問題を修正しました。
+    -   結合ビルド側のデータが非常に大きく、小さな文字列型の列が多数含まれている場合、クエリが必要以上にメモリを消費する可能性がある問題を修正しました[＃7416](https://github.com/pingcap/tiflash/issues/7416) @ [いびん87](https://github.com/yibin87)
 
-+ Tools
+-   ツール
 
-    + Backup & Restore (BR)
+    -   バックアップと復元 (BR)
 
-        - Fix the issue that the error message "resolve lock timeout" of BR is misleading when a backup fails, which hides the actual error information [#43236](https://github.com/pingcap/tidb/issues/43236) @[YuJuncen](https://github.com/YuJuncen)
+        -   バックアップが失敗したときにBRのエラー メッセージ「ロック タイムアウトを解決」が誤解を招き、実際のエラー情報が隠れてしまう問題を修正しました[＃43236](https://github.com/pingcap/tidb/issues/43236) @ [ユジュンセン](https://github.com/YuJuncen)
 
-    + TiCDC
+    -   ティCDC
 
-        - Fix an OOM issue that might occur when there are as many as 50,000 tables [#7872](https://github.com/pingcap/tiflow/issues/7872) @[sdojjy](https://github.com/sdojjy)
-        - Fix the issue that TiCDC gets stuck when an OOM occurs in upstream TiDB [#8561](https://github.com/pingcap/tiflow/issues/8561) @[overvenus](https://github.com/overvenus)
-        - Fix the issue that TiCDC gets stuck when PD fails such as network isolation or PD Owner node reboot [#8808](https://github.com/pingcap/tiflow/issues/8808) [#8812](https://github.com/pingcap/tiflow/issues/8812) [#8877](https://github.com/pingcap/tiflow/issues/8877) @[asddongmen](https://github.com/asddongmen)
-        - Fix the issue of TiCDC time zone setting [#8798](https://github.com/pingcap/tiflow/issues/8798) @[hi-rustin](https://github.com/hi-rustin)
-        - Fix the issue that checkpoint lag increases when one of the upstream TiKV nodes crashes [#8858](https://github.com/pingcap/tiflow/issues/8858) @[hicqu](https://github.com/hicqu)
-        - Fix the issue that when replicating data to downstream MySQL, a replication error occurs after the `FLASHBACK CLUSTER TO TIMESTAMP` statement is executed in the upstream TiDB [#8040](https://github.com/pingcap/tiflow/issues/8040) @[asddongmen](https://github.com/asddongmen)
-        - Fix the issue that when replicating data to object storage, the `EXCHANGE PARTITION` operation in the upstream cannot be properly replicated to the downstream [#8914](https://github.com/pingcap/tiflow/issues/8914) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - Fix the OOM issue caused by excessive memory usage of the sorter component in some special scenarios [#8974](https://github.com/pingcap/tiflow/issues/8974) @[hicqu](https://github.com/hicqu)
-        - Fix the issue that when the downstream is Kafka, TiCDC queries the downstream metadata too frequently and causes excessive workload in the downstream [#8957](https://github.com/pingcap/tiflow/issues/8957) [#8959](https://github.com/pingcap/tiflow/issues/8959) @[hi-rustin](https://github.com/hi-rustin)
-        - Fix the issue that when a replication error occurs due to an oversized Kafka message, the message body is recorded in the log [#9031](https://github.com/pingcap/tiflow/issues/9031) @[darraes](https://github.com/darraes)
-        - Fix the TiCDC node panic that occurs when the downstream Kafka sinks are rolling restarted [#9023](https://github.com/pingcap/tiflow/issues/9023) @[asddongmen](https://github.com/asddongmen)
-        - Fix the issue that when replicating data to storage services, the JSON file corresponding to downstream DDL statements does not record the default values of table fields [#9066](https://github.com/pingcap/tiflow/issues/9066) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        -   テーブルが 50,000 個ある場合に発生する可能性のある OOM 問題を修正[＃7872](https://github.com/pingcap/tiflow/issues/7872) @ [スドジ](https://github.com/sdojjy)
+        -   上流の TiDB [＃8561](https://github.com/pingcap/tiflow/issues/8561) @ [金星の上](https://github.com/overvenus)で OOM が発生したときに TiCDC が停止する問題を修正しました
+        -   ネットワーク分離やPDオーナーノードの再起動などのPD障害時にTiCDCが停止する問題を修正[＃8808](https://github.com/pingcap/tiflow/issues/8808) [＃8812](https://github.com/pingcap/tiflow/issues/8812) [＃8877](https://github.com/pingcap/tiflow/issues/8877) @ [アズドンメン](https://github.com/asddongmen)
+        -   TiCDC タイムゾーン設定[＃8798](https://github.com/pingcap/tiflow/issues/8798) @ [ハイラスティン](https://github.com/hi-rustin)の問題を修正
+        -   上流の TiKV ノードの 1 つがクラッシュするとチェックポイントの遅延が増加する問題を修正[＃8858](https://github.com/pingcap/tiflow/issues/8858) @ [ヒック](https://github.com/hicqu)
+        -   下流のMySQLにデータを複製するときに、上流のTiDB [＃8040](https://github.com/pingcap/tiflow/issues/8040) @ [アズドンメン](https://github.com/asddongmen)で`FLASHBACK CLUSTER TO TIMESTAMP`ステートメントが実行された後にレプリケーションエラーが発生する問題を修正しました。
+        -   オブジェクトstorageにデータを複製する際に、上流の`EXCHANGE PARTITION`操作が下流の[＃8914](https://github.com/pingcap/tiflow/issues/8914) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)に正しく複製されない問題を修正しました。
+        -   いくつかの特殊なシナリオでソートコンポーネントのメモリ使用量が過剰になることによって発生する OOM 問題を修正[＃8974](https://github.com/pingcap/tiflow/issues/8974) @ [ヒック](https://github.com/hicqu)
+        -   ダウンストリームが Kafka の場合、TiCDC がダウンストリームのメタデータを頻繁にクエリし、ダウンストリームに過度の負荷がかかる問題を修正しました[＃8957](https://github.com/pingcap/tiflow/issues/8957) [＃8959](https://github.com/pingcap/tiflow/issues/8959) @ [ハイラスティン](https://github.com/hi-rustin)
+        -   Kafka メッセージのサイズが大きすぎるためにレプリケーション エラーが発生した場合に、メッセージ本文がログ[＃9031](https://github.com/pingcap/tiflow/issues/9031) @ [ダラエス](https://github.com/darraes)に記録される問題を修正しました。
+        -   下流の Kafka シンクがローリング再起動されたときに発生する TiCDC ノードpanicを修正[＃9023](https://github.com/pingcap/tiflow/issues/9023) @ [アズドンメン](https://github.com/asddongmen)
+        -   storageサービスにデータを複製するときに、ダウンストリーム DDL ステートメントに対応する JSON ファイルにテーブル フィールド[＃9066](https://github.com/pingcap/tiflow/issues/9066) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)のデフォルト値が記録されない問題を修正しました。
 
-    + TiDB Lightning
+    -   TiDB Lightning
 
-        - Fix the issue that OOM might occur when importing a wide table [#43728](https://github.com/pingcap/tidb/issues/43728) @[D3Hunter](https://github.com/D3Hunter)
-        - Fix the issue of `write to tikv with no leader returned` when importing a large amount of data [#43055](https://github.com/pingcap/tidb/issues/43055) @[lance6716](https://github.com/lance6716)
-        - Fix a possible OOM problem when there is an unclosed delimiter in the data file [#40400](https://github.com/pingcap/tidb/issues/40400) @[buchuitoudegou](https://github.com/buchuitoudegou)
-        - Add a retry mechanism when encountering an `unknown RPC` error during data import [#43291](https://github.com/pingcap/tidb/issues/43291) @[D3Hunter](https://github.com/D3Hunter)
+        -   幅の広いテーブル[＃43728](https://github.com/pingcap/tidb/issues/43728) @ [D3ハンター](https://github.com/D3Hunter)をインポートするときに OOM が発生する可能性がある問題を修正しました
+        -   大量のデータをインポートする際の`write to tikv with no leader returned`の問題を修正[＃43055](https://github.com/pingcap/tidb/issues/43055) @ [ランス6716](https://github.com/lance6716)
+        -   データファイル[#40400](https://github.com/pingcap/tidb/issues/40400) @ [ブチュイトウデゴウ](https://github.com/buchuitoudegou)に閉じられていない区切り文字がある場合に発生する可能性のある OOM 問題を修正しました。
+        -   データのインポート中に`unknown RPC`が発生した場合に再試行メカニズムを追加する[＃43291](https://github.com/pingcap/tidb/issues/43291) @ [D3ハンター](https://github.com/D3Hunter)
 
-    + TiDB Binlog
+    -   TiDBBinlog
 
-        - Fix the issue that TiDB Binlog reports an error when encountering a `CANCELED` DDL statement [#1228](https://github.com/pingcap/tidb-binlog/issues/1228) @[okJiang](https://github.com/okJiang)
+        -   `CANCELED` DDL ステートメント[＃1228](https://github.com/pingcap/tidb-binlog/issues/1228) @ [ok江](https://github.com/okJiang)に遭遇したときに TiDB Binlogがエラーを報告する問題を修正しました。

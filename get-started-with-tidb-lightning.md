@@ -1,68 +1,66 @@
 ---
 title: Quick Start for TiDB Lightning
-summary: TiDB Lightning is a tool for importing MySQL data into a TiDB cluster. It is recommended for test and trial purposes only, not for production or development environments. The process involves preparing full backup data, deploying the TiDB cluster, installing TiDB Lightning, starting TiDB Lightning, and checking data integrity. For detailed features and usage, refer to the TiDB Lightning Overview.
+summary: TiDB Lightning は、 MySQL データを TiDB クラスターにインポートするためのツールです。本番や開発環境ではなく、テストおよび試用目的のみに推奨されます。プロセスには、完全バックアップ データの準備、TiDB クラスターのデプロイ、 TiDB Lightningのインストール、 TiDB Lightningの起動、およびデータ整合性のチェックが含まれます。詳細な機能と使用方法については、 TiDB Lightning の概要を参照してください。
 ---
 
-# Quick Start for TiDB Lightning
+# TiDB Lightningのクイック スタート {#quick-start-for-tidb-lightning}
 
-This document provides a quick guide on getting started with TiDB Lightning by importing MySQL data into a TiDB cluster.
+このドキュメントでは、MySQL データを TiDB クラスターにインポートしてTiDB Lightningを使い始めるためのクイック ガイドを提供します。
 
-> **Warning:**
+> **警告：**
 >
-> The deployment method in this tutorial is only recommended for test and trial. **Do not apply it in the production or development environment.**
+> このチュートリアルのデプロイメント方法は、テストとトライアルにのみ推奨されます。**本番や開発環境には適用しないでください。**
 
-## Step 1: Prepare full backup data
+## ステップ1: 完全バックアップデータを準備する {#step-1-prepare-full-backup-data}
 
-First, you can use [dumpling](/dumpling-overview.md) to export data from MySQL.
+まず、 [団子](/dumpling-overview.md)使用して MySQL からデータをエクスポートできます。
 
-1. Run `tiup --version` to check if TiUP is already installed. If TiUP is installed, skip this step. If TiUP is not installed, run the following command:
+1.  `tiup --version`実行して、 TiUPがすでにインストールされているかどうかを確認します。TiUPがインストールされている場合は、この手順をスキップします。TiUPがインストールされていない場合は、次のコマンドを実行します。
 
-    ```
-    curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
-    ```
+        curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
 
-2. Using TiUP to install Dumpling:
+2.  TiUPを使用してDumpling をインストールする:
 
     ```shell
     tiup install dumpling
     ```
 
-3. To export data from MySQL, you can refer to the detailed steps provided in [Use Dumpling to Export Data](/dumpling-overview.md#export-to-sql-files)：
+3.  MySQLからデータをエクスポートするには、 [Dumpling を使用してデータをエクスポートする](/dumpling-overview.md#export-to-sql-files)に記載されている詳細な手順を参照してください。
 
     ```sh
     tiup dumpling -h 127.0.0.1 -P 3306 -u root -t 16 -F 256MB -B test -f 'test.t[12]' -o /data/my_database/
     ```
 
-    In the above command:
+    上記のコマンドでは:
 
-    - `-t 16`: Export data using 16 threads.
-    - `-F 256MB`: Split each table into multiple files, with each file approximately 256 MB in size.
-    - `-B test`: Export from the `test` database.
-    - `-f 'test.t[12]'`: Export only the two tables `test.t1` and `test.t2`.
+    -   `-t 16` : 16 スレッドを使用してデータをエクスポートします。
+    -   `-F 256MB` : 各テーブルを複数のファイルに分割し、各ファイルのサイズを約 256 MB にします。
+    -   `-B test` : `test`データベースからエクスポートします。
+    -   `-f 'test.t[12]'` : テーブル`test.t1`と`test.t2` 2 つのみをエクスポートします。
 
-    The full backup data exported will be saved in the `/data/my_database` directory.
+    エクスポートされた完全バックアップデータは`/data/my_database`ディレクトリに保存されます。
 
-## Step 2: Deploy the TiDB cluster
+## ステップ2: TiDBクラスターをデプロイ {#step-2-deploy-the-tidb-cluster}
 
-Before starting the data import, you need to deploy a TiDB cluster for the import. If you already have a TiDB cluster, you can skip this step.
+データのインポートを開始する前に、インポート用の TiDB クラスターをデプロイする必要があります。すでに TiDB クラスターがある場合は、この手順をスキップできます。
 
-For the steps on deploying a TiDB cluster, refer to the [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md).
+TiDB クラスターをデプロイする手順については、 [TiDB データベース プラットフォームのクイック スタート ガイド](/quick-start-with-tidb.md)を参照してください。
 
-## Step 3: Install TiDB Lightning
+## ステップ3: TiDB Lightningをインストールする {#step-3-install-tidb-lightning}
 
-Run the following command to install the latest version of TiDB Lightning:
+次のコマンドを実行して、 TiDB Lightningの最新バージョンをインストールします。
 
 ```shell
 tiup install tidb-lightning
 ```
 
-## Step 4: Start TiDB Lightning
+## ステップ4: TiDB Lightningを起動する {#step-4-start-tidb-lightning}
 
-> **Note:**
+> **注記：**
 >
-> The import method in this section is only suitable for testing and functional experience. For production environments, refer to [Migrate Large Datasets from MySQL to TiDB](/migrate-large-mysql-to-tidb.md)
+> このセクションのインポート方法は、テストと機能体験にのみ適しています。本番環境では、 [大規模なデータセットをMySQLからTiDBに移行する](/migrate-large-mysql-to-tidb.md)を参照してください。
 
-1. Create the configuration file `tidb-lightning.toml` and fill in the following settings based on your cluster information:
+1.  構成ファイル`tidb-lightning.toml`を作成し、クラスター情報に基づいて次の設定を入力します。
 
     ```toml
     [lightning]
@@ -95,21 +93,21 @@ tiup install tidb-lightning
     pd-addr = "172.16.31.3:2379,56.78.90.12:3456"
     ```
 
-2. Run `tidb-lightning`. To avoid the program exiting due to the `SIGHUP` signal when starting the program directly in the command line using `nohup`, it is recommended to put the `nohup` command in a script. For example:
+2.  `tidb-lightning`を実行します。 `nohup`を使用してコマンドラインで直接プログラムを起動するときに`SIGHUP`シグナルによってプログラムが終了するのを回避するには、 `nohup`コマンドをスクリプトに配置することをお勧めします。 例:
 
     ```shell
     #!/bin/bash
     nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out &
     ```
 
-## Step 5: Check data integrity
+## ステップ5: データの整合性を確認する {#step-5-check-data-integrity}
 
-After the import is completed, TiDB Lightning exits automatically. If the import is successful, you can find `tidb lightning exit` in the last line of the log file.
+インポートが完了すると、 TiDB Lightning は自動的に終了します。インポートが成功した場合は、ログ ファイルの最後の行に`tidb lightning exit`表示されます。
 
-If any error occurs, refer to [TiDB Lightning FAQs](/tidb-lightning/tidb-lightning-faq.md).
+エラーが発生した場合は、 [TiDB Lightningに関するよくある質問](/tidb-lightning/tidb-lightning-faq.md)を参照してください。
 
-## Summary
+## まとめ {#summary}
 
-This tutorial briefly introduces what TiDB Lightning is and how to quickly deploy a TiDB Lightning cluster to import full backup data to the TiDB cluster.
+このチュートリアルでは、 TiDB Lightningとは何か、またTiDB Lightningクラスターをすばやく展開して完全バックアップ データを TiDB クラスターにインポートする方法について簡単に説明します。
 
-For detailed features and usage about TiDB Lightning, refer to [TiDB Lightning Overview](/tidb-lightning/tidb-lightning-overview.md).
+TiDB Lightningの詳細な機能と使用方法については、 [TiDB Lightning の概要](/tidb-lightning/tidb-lightning-overview.md)を参照してください。

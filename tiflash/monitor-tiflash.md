@@ -1,106 +1,106 @@
 ---
 title: Monitor the TiFlash Cluster
-summary: Learn the monitoring items of TiFlash.
+summary: TiFlashの監視項目について学びます。
 ---
 
-# Monitor the TiFlash Cluster
+# TiFlashクラスタを監視する {#monitor-the-tiflash-cluster}
 
-This document describes the monitoring items of TiFlash.
+このドキュメントでは、 TiFlashの監視項目について説明します。
 
-If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus & Grafana) is deployed at the same time. For more information, see [Overview of the Monitoring Framework](/tidb-monitoring-framework.md).
+TiUPを使用して TiDB クラスターをデプロイすると、監視システム (Prometheus および Grafana) も同時にデプロイされます。詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)参照してください。
 
-The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, and Node\_exporter. A lot of metrics are there to help you diagnose.
+Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter を含む一連のサブダッシュボードに分かれています。診断に役立つメトリックが多数あります。
 
-TiFlash has three dashboard panels: **TiFlash-Summary**, **TiFlash-Proxy-Summary**, and **TiFlash-Proxy-Details**. The metrics on these panels indicate the current status of TiFlash. The **TiFlash-Proxy-Summary** and **TiFlash-Proxy-Details** panels mainly show the information of the Raft layer and the metrics are detailed in [Key Monitoring Metrics of TiKV](/grafana-tikv-dashboard.md).
+TiFlashには、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、および**TiFlash-Proxy-Details の**3 つのダッシュボード パネルがあります。これらのパネルのメトリックは、 TiFlashの現在の状態を示します。 **TiFlash-Proxy-Summary**パネルと**TiFlash-Proxy-Details**パネルには、主にRaftレイヤーの情報が表示され、メトリックの詳細は[TiKVの主要な監視指標](/grafana-tikv-dashboard.md)に記載されています。
 
-> **Note:**
+> **注記：**
 >
-> It is recommended that you use TiDB v4.0.5 or later versions for improved monitor on TiFlash.
+> TiFlashのモニターを改善するには、 TiDB v4.0.5 以降のバージョンを使用することをお勧めします。
 
-The following sections introduce the default monitoring information of **TiFlash-Summary**.
+次のセクションでは、 **TiFlash-Summary**のデフォルトの監視情報を紹介します。
 
-## Server
+## サーバ {#server}
 
-- Store size: The storage size used by each TiFlash instance.
-- Available size: The storage size available for each TiFlash instance.
-- Capacity size: The storage capacity for each TiFlash instance.
-- Uptime: The runtime of TiFlash since last restart.
-- Memory: The memory usage per TiFlash instance.
-- CPU Usage: The CPU utilization per TiFlash instance.
-- FSync OPS: The number of fsync operations per TiFlash instance per second.
-- File Open OPS: The number of `open` operations per TiFlash instance per second.
-- Opened File Count: The number of file descriptors currently opened by each TiFlash instance.
+-   ストア サイズ: 各TiFlashインスタンスで使用されるstorageサイズ。
+-   使用可能なサイズ: 各TiFlashインスタンスで使用可能なstorageサイズ。
+-   容量サイズ: 各TiFlashインスタンスのstorage容量。
+-   稼働時間: 前回の再起動以降のTiFlashの実行時間。
+-   メモリ: TiFlashインスタンスごとのメモリ使用量。
+-   CPU 使用率: TiFlashインスタンスごとの CPU 使用率。
+-   FSync OPS: TiFlashインスタンスあたりの 1 秒あたりの fsync 操作の数。
+-   ファイルオープン OPS: TiFlashインスタンスあたりの`open`秒あたりの操作数。
+-   開かれたファイル数: 各TiFlashインスタンスによって現在開かれているファイル記述子の数。
 
-> **Note:**
+> **注記：**
 >
-> Store size, FSync OPS, File Open OPS, and Opened File Count currently only cover the monitoring information of the TiFlash storage layer and do not cover that in TiFlash-Proxy.
+> ストア サイズ、FSync OPS、ファイル オープン OPS、および開かれたファイル数は、現在、 TiFlashstorageレイヤーの監視情報のみをカバーし、 TiFlash-Proxy の監視情報はカバーしません。
 
-## Coprocessor
+## コプロセッサー {#coprocessor}
 
-- Request QPS: The number of coprocessor requests received by all TiFlash instances. `batch` is the number of batch requests. `batch_cop` is the number of coprocessor requests in the batch requests. `cop` is the number of coprocessor requests that are sent directly via the coprocessor interface. `cop_dag` is the number of dag requests in all coprocessor requests. `super_batch` is the number of requests to enable the Super Batch feature.
-- Executor QPS: The number of each type of dag executors in the requests received by all TiFlash instances. `table_scan` is the table scan executor. `selection` is the selection executor. `aggregation` is the aggregation executor. `top_n` is the `TopN` executor. `limit` is the limit executor.
-- Request Duration: The total duration of all TiFlash instances processing coprocessor requests. The total duration is from the time that the coprocessor request is received to the time that the response to the request is completed.
-- Error QPS: The number of errors of all TiFlash instances processing coprocessor requests. `meet_lock` means that the read data is locked. `region_not_found` means that the Region does not exist. `epoch_not_match` means the read Region epoch is inconsistent with the local epoch. `kv_client_error` means that the communication with TiKV returns an error. `internal_error` is the internal system error of TiFlash. `other` is other types of errors.
-- Request Handle Duration: The duration of all TiFlash instances processing coprocessor requests. The processing time is from starting to execute the coprocessor request to completing the execution.
-- Response Bytes/Seconds: The total bytes of the response from all TiFlash instances.
-- Cop task memory usage: The total memory usage of all TiFlash instances processing coprocessor requests.
-- Handling Request Number: The total number of all TiFlash instances processing coprocessor requests. The classification of the requests is the same as that of Request QPS.
-- Threads of RPC: The real-time number of RPC threads used in each TiFlash instance.
-- Max Threads of RPC: The maximum number of RPC threads recently used in each TiFlash instance.
-- Threads: The real-time number of threads used in each TiFlash instance.
-- Max Threads: The maximum number of threads recently used in each TiFlash instance.
+-   要求 QPS: すべてのTiFlashインスタンスが受信したコプロセッサ要求の数。1 `batch`バッチ要求の数です`batch_cop`はバッチ要求内のコプロセッサ要求の数です`cop`はコプロセッサ インターフェイスを介して直接送信されるコプロセッサ要求の数です`cop_dag`はすべてのコプロセッサ要求内の dag 要求の数です。9 `super_batch`スーパー バッチ機能を有効にする要求の数です。
+-   Executor QPS: すべてのTiFlashインスタンスが受信したリクエスト内の各タイプの DAG Executor の数`table_scan`はテーブル スキャン Executor です`selection`は選択 Executor です`aggregation`は集約 Executor です`top_n`は`TopN` Executor です`limit`は制限 Executor です。
+-   要求期間: コプロセッサ要求を処理するすべてのTiFlashインスタンスの合計期間。合計期間は、コプロセッサ要求が受信された時点から要求への応答が完了するまでの時間です。
+-   エラー QPS: コプロセッサ要求を処理するすべてのTiFlashインスタンスのエラー数。1 `meet_lock`読み取りデータがロックされていることを意味します。3 `region_not_found`リージョンが存在しないことを意味します`epoch_not_match`は読み取りリージョンエポックがローカル エポックと一致していないことを意味します`kv_client_error` TiKV との通信でエラーが返されたことを意味します。9 `internal_error` TiFlashの内部システム エラーです。11 `other`その他のタイプのエラーです。
+-   要求処理期間: すべてのTiFlashインスタンスがコプロセッサ要求を処理する期間。処理時間は、コプロセッサ要求の実行開始から実行完了までです。
+-   応答バイト/秒: すべてのTiFlashインスタンスからの応答の合計バイト数。
+-   Cop タスクのメモリ使用量: コプロセッサ要求を処理するすべてのTiFlashインスタンスの合計メモリ使用量。
+-   処理要求数: コプロセッサ要求を処理するすべてのTiFlashインスタンスの合計数。要求の分類は、要求 QPS の分類と同じです。
+-   RPC スレッド: 各TiFlashインスタンスで使用される RPC スレッドのリアルタイム数。
+-   RPC の最大スレッド数: 各TiFlashインスタンスで最近使用された RPC スレッドの最大数。
+-   スレッド: 各TiFlashインスタンスで使用されるスレッドのリアルタイム数。
+-   最大スレッド数: 各TiFlashインスタンスで最近使用されたスレッドの最大数。
 
-## Task Scheduler
+## タスクスケジューラ {#task-scheduler}
 
-- Min TSO: The minimum TSO among all queries running on each TiFlash instance. This value ensures that queries with the minimum TSO can be scheduled to run. When no queries are running, this value is the maximum unsigned 64-bit integer.
-- Estimated Thread Usage and Limit: The estimated amount of threads used by all queries running on each TiFlash instance, and the soft and hard limits on the amount.
-- Active and Waiting Queries Count: The amount of running queries and that of waiting queries on each TiFlash instance.
-- Active and Waiting Tasks Count: The amount of running tasks and that of waiting tasks on each TiFlash instance.
-- Hard Limit Exceeded Count: Times that the estimated amount of threads used by queries running on each TiFlash instance exceeds the hard limit.
-- Task Waiting Duration: The duration from task initialization to task scheduling on each TiFlash instance.
+-   最小 TSO: 各TiFlashインスタンスで実行されているすべてのクエリの中で最小の TSO。この値により、最小 TSO のクエリの実行をスケジュールできるようになります。クエリが実行されていない場合、この値は最大の符号なし 64 ビット整数になります。
+-   推定スレッド使用量と制限: 各TiFlashインスタンスで実行されているすべてのクエリによって使用されるスレッドの推定量と、その量に対するソフト制限とハード制限。
+-   アクティブおよび待機中のクエリ数: 各TiFlashインスタンスで実行中のクエリの数と待機中のクエリの数。
+-   アクティブおよび待機中のタスク数: 各TiFlashインスタンスで実行中のタスクと待機中のタスクの数。
+-   ハード制限超過回数: 各TiFlashインスタンスで実行されているクエリによって使用されるスレッドの推定量がハード制限を超えた回数。
+-   タスク待機期間: 各TiFlashインスタンスでのタスクの初期化からタスクのスケジュール設定までの期間。
 
-## DDL
+## DDL {#ddl}
 
-- Schema Version: The version of the schema currently cached in each TiFlash instance.
-- Schema Apply OPM: The number of TiDB `schema diff` synchronized in `apply` operations by all TiFlash instances per minute. This item includes the count of three types of `apply`: `diff apply`, `full apply`, and `failed apply`. `diff apply` is the normal process of a single apply. If `diff apply` fails, `failed apply` increases by `1`, and TiFlash rolls back to `full apply` and pulls the latest schema information to update the schema version of TiFlash.
-- Schema Internal DDL OPM: The number of specific DDL operations executed per minute in all TiFlash instances.
-- Schema Apply Duration: The time used for a single `apply schema` operation in all TiFlash instances.
+-   スキーマ バージョン: 各TiFlashインスタンスに現在キャッシュされているスキーマのバージョン。
+-   スキーマ適用 OPM: 1 分あたりにすべてのTiFlashインスタンスによって`apply`操作で同期された TiDB `schema diff`の数。この項目には、 `diff apply` 、 `full apply` 、および`failed apply`の 3 種類の`apply`の数が含まれます。 `diff apply` 、単一の適用の通常のプロセスです。 `diff apply`が失敗すると、 `failed apply`が`1`増加し、 TiFlash は`full apply`にロールバックして最新のスキーマ情報を取得し、 TiFlashのスキーマ バージョンを更新します。
+-   スキーマ内部 DDL OPM: すべてのTiFlashインスタンスで 1 分あたりに実行される特定の DDL 操作の数。
+-   スキーマ適用期間: すべてのTiFlashインスタンスでの単一の`apply schema`操作に使用される時間。
 
-## Storage
+## ストレージ {#storage}
 
-- Write Command OPS: The number of write requests received per second by the storage layer of all TiFlash instances.
-- Write Amplification: Write amplification of each TiFlash instance (the actual bytes of disk writes divided by the written bytes of logical data). `total` is the write amplification since this start, and `5min` is the write amplification in the last 5 minutes.
-- Read Tasks OPS: The number of read tasks in the storage layer per second for each TiFlash instance.
-- Rough Set Filter Rate: The proportion of the number of packets read by each TiFlash instance in the last minute that are filtered by the rough set index of the storage layer.
-- Internal Tasks OPS: The number of times that all TiFlash instances perform internal data sorting tasks per second.
-- Internal Tasks Duration: The time consumed by all TiFlash instances for internal data sorting tasks.
-- Page GC Tasks OPM: The number of times that all TiFlash instances perform Delta data sorting tasks per minute.
-- Page GC Tasks Duration: The distribution of time consumed by all TiFlash instances to perform Delta data sorting tasks.
-- Disk Write OPS: The number of disk writes per second by all TiFlash instances.
-- Disk Read OPS: The number of disk reads per second by all TiFlash instances.
-- Write flow: The traffic of disk writes by all TiFlash instances.
-- Read flow: The traffic of disk reads by all TiFlash instances.
+-   書き込みコマンド OPS: すべてのTiFlashインスタンスのstorageレイヤーで 1 秒あたりに受信される書き込み要求の数。
+-   書き込み増幅: 各TiFlashインスタンスの書き込み増幅 (ディスク書き込みの実際のバイト数を論理データの書き込みバイト数で割った値)。1 `total`この開始以降の書き込み増幅で、 `5min`過去 5 分間の書き込み増幅です。
+-   読み取りタスク OPS: 各TiFlashインスタンスのstorageレイヤーでの 1 秒あたりの読み取りタスクの数。
+-   粗セット フィルター レート: 過去 1 分間に各TiFlashインスタンスによって読み取られたパケット数のうち、storageレイヤーの粗セット インデックスによってフィルター処理されたパケット数の割合。
+-   内部タスク OPS: すべてのTiFlashインスタンスが 1 秒あたりに内部データ ソート タスクを実行する回数。
+-   内部タスクの期間: すべてのTiFlashインスタンスが内部データ ソート タスクに費やした時間。
+-   ページ GC タスク OPM: すべてのTiFlashインスタンスが 1 分間に Delta データ ソート タスクを実行する回数。
+-   ページ GC タスクの期間: すべてのTiFlashインスタンスが Delta データ ソート タスクを実行するために消費する時間の分布。
+-   ディスク書き込み OPS: すべてのTiFlashインスタンスによる 1 秒あたりのディスク書き込み数。
+-   ディスク読み取り OPS: すべてのTiFlashインスタンスによる 1 秒あたりのディスク読み取り数。
+-   書き込みフロー: すべてのTiFlashインスタンスによるディスク書き込みのトラフィック。
+-   読み取りフロー: すべてのTiFlashインスタンスによるディスク読み取りのトラフィック。
 
-> **Note:**
+> **注記：**
 >
-> These metrics only cover the monitoring information of the TiFlash storage layer and do not cover that in TiFlash-Proxy.
+> これらのメトリックは、 TiFlashstorageレイヤーの監視情報のみをカバーし、 TiFlash-Proxy の監視情報はカバーしません。
 
-## Storage Write Stall
+## ストレージ書き込み停止 {#storage-write-stall}
 
-- Write & Delta Management Throughput: The throughput of write and data compaction for all instances.
-    - `throughput_write` means the throughput of data synchronization through Raft.
-    - `throughput_delta-management` means the throughput of data compaction.
-    - `total_write` means the total bytes written since the last start.
-    - `total_delta-management` means the total bytes of data compacted since the last start.
-- Write Stall Duration: The stall duration of write and removing Region data (deleting ranges) by instance.
-- Write Throughput By Instance: The throughput of write by instance. It includes the throughput by applying the Raft write commands and Raft snapshots.
-- Write Command OPS By Instance: The total count of different kinds of commands received by instance.
-    - `write block` means the data logs synchronized through Raft.
-    - `delete_range` means that some Regions are removed from or moved to this instance.
-    - `ingest` means some Region snapshots are applied to this instance.
+-   書き込みとデルタ管理スループット: すべてのインスタンスの書き込みとデータ圧縮のスループット。
+    -   `throughput_write` Raftを介したデータ同期のスループットを意味します。
+    -   `throughput_delta-management`データ圧縮のスループットを意味します。
+    -   `total_write` 、前回の開始以降に書き込まれた合計バイト数を意味します。
+    -   `total_delta-management` 、前回の開始以降に圧縮されたデータの合計バイト数を意味します。
+-   書き込み停止期間: インスタンスごとの書き込みおよびリージョンデータの削除 (範囲の削除) の停止期間。
+-   インスタンスごとの書き込みスループット: インスタンスごとの書き込みのスループット。これには、 Raft書き込みコマンドとRaftスナップショットを適用した場合のスループットが含まれます。
+-   インスタンス別の書き込みコマンド OPS: インスタンスによって受信されたさまざまな種類のコマンドの合計数。
+    -   `write block` 、データ ログがRaftを介して同期されることを意味します。
+    -   `delete_range` 、一部のリージョンがこのインスタンスから削除されるか、このインスタンスに移動されることを意味します。
+    -   `ingest` 、いくつかのリージョンスナップショットがこのインスタンスに適用されていることを意味します。
 
-## Raft
+## Raft {#raft}
 
-- Read Index OPS: The number of times that each TiFlash instance triggers the `read_index` request per second, which equals to the number of Regions triggered.
-- Read Index Duration: The time used by `read_index` for all TiFlash instances. Most time is used for interaction with the Region leader and retry.
-- Wait Index Duration: The time used by `wait_index` for all TiFlash instances, namely the time used to wait until local index >= read_index after the `read_index` request is received.
+-   読み取りインデックス OPS: 各TiFlashインスタンスが 1 秒あたり`read_index`のリクエストをトリガーする回数。これはトリガーされた領域の数に等しくなります。
+-   インデックス読み取り期間: すべてのTiFlashインスタンスに対して`read_index`が使用する時間。ほとんどの時間は、リージョンリーダーとのやり取りと再試行に使用されます。
+-   インデックス待機期間: すべてのTiFlashインスタンスに対して`wait_index`が使用する時間、つまり、 `read_index`要求を受信した後、ローカル インデックス &gt;= read_index になるまで待機するために使用される時間。

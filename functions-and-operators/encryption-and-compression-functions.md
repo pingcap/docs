@@ -1,40 +1,40 @@
 ---
 title: Encryption and Compression Functions
-summary: Learn about the encryption and compression functions.
+summary: 暗号化と圧縮の関数について学びます。
 ---
 
-# Encryption and Compression Functions
+# 暗号化と圧縮機能 {#encryption-and-compression-functions}
 
-TiDB supports most of the [encryption and compression functions](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html) available in MySQL 8.0.
+TiDB は、MySQL 8.0 で利用可能な[暗号化および圧縮関数](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html)のほとんどをサポートしています。
 
-## Supported functions
+## サポートされている関数 {#supported-functions}
 
-| Name                                                                                                                                               | Description                                       |
-|:------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------|
-| [`MD5()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_md5)                                                             | Calculate MD5 checksum                            |
-| [`PASSWORD()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_password)                                | Calculate and return a password string            |
-| [`RANDOM_BYTES()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_random-bytes)                                           | Return a random byte vector                       |
-| [`SHA1(), SHA()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_sha1)                                                    | Calculate an SHA-1 160-bit checksum               |
-| [`SHA2()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_sha2)                                                           | Calculate an SHA-2 checksum                       |
-| [`SM3()`](https://en.wikipedia.org/wiki/SM3_(hash_function))                                                    | Calculate an SM3 checksum (currently MySQL does not support this function)                      |
-| [`AES_DECRYPT()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_aes-decrypt)                                             | Decrypt using AES                                 |
-| [`AES_ENCRYPT()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_aes-encrypt)                                             | Encrypt using AES                                 |
-| [`COMPRESS()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_compress)                                                   | Return result as a binary string                  |
-| [`UNCOMPRESS()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_uncompress)                                               | Uncompress a string compressed                    |
-| [`UNCOMPRESSED_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_uncompressed-length)                             | Return the length of a string before compression  |
-| [`VALIDATE_PASSWORD_STRENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_validate-password-strength) | Validate the password strength |
+| 名前                                                                                                                                      | 説明                                           |
+| :-------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------- |
+| [`MD5()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_md5)                                               | MD5チェックサムを計算する                               |
+| [`PASSWORD()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_password)                                     | パスワード文字列を計算して返す                              |
+| [`RANDOM_BYTES()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_random-bytes)                             | ランダムなバイトベクトルを返す                              |
+| [`SHA1(), SHA()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_sha1)                                      | SHA-1 160ビットチェックサムを計算する                      |
+| [`SHA2()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_sha2)                                             | SHA-2チェックサムを計算する                             |
+| [`SM3()`](https://en.wikipedia.org/wiki/SM3_(hash_function))                                                                            | SM3 チェックサムを計算します (現在、MySQL はこの関数をサポートしていません) |
+| [`AES_DECRYPT()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_aes-decrypt)                               | AESを使用して復号化する                                |
+| [`AES_ENCRYPT()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_aes-encrypt)                               | AESを使用して暗号化する                                |
+| [`COMPRESS()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_compress)                                     | 結果をバイナリ文字列として返す                              |
+| [`UNCOMPRESS()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_uncompress)                                 | 圧縮された文字列を解凍する                                |
+| [`UNCOMPRESSED_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_uncompressed-length)               | 圧縮前の文字列の長さを返す                                |
+| [`VALIDATE_PASSWORD_STRENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_validate-password-strength) | パスワードの強度を検証する                                |
 
-## Related system variables
+## 関連するシステム変数 {#related-system-variables}
 
-The [`block_encryption_mode`](/system-variables.md#block_encryption_mode) variable sets the encryption mode that is used for `AES_ENCRYPT()` and `AES_DECRYPT()`.
+[`block_encryption_mode`](/system-variables.md#block_encryption_mode)変数は、 `AES_ENCRYPT()`および`AES_DECRYPT()`に使用される暗号化モードを設定します。
 
-The [`validate_password.*`](/system-variables.md) variables affect the `VALIDATE_PASSWORD_STRENGTH()` function.
+[`validate_password.*`](/system-variables.md)変数は`VALIDATE_PASSWORD_STRENGTH()`機能に影響します。
 
-## Unsupported functions
+## サポートされていない関数 {#unsupported-functions}
 
-* `DES_DECRYPT()`, `DES_ENCRYPT()`, `OLD_PASSWORD()`, `ENCRYPT()`: these functions were deprecated in MySQL 5.7 and removed in 8.0.
-* Functions only available in MySQL Enterprise [Issue #2632](https://github.com/pingcap/tidb/issues/2632).
+-   `DES_DECRYPT()` `ENCRYPT()`これらの関数は`DES_ENCRYPT()` `OLD_PASSWORD()`で非推奨となり、8.0 で削除されました。
+-   MySQL Enterprise [問題 #2632](https://github.com/pingcap/tidb/issues/2632)でのみ使用可能な関数。
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-* TiDB does not support the `STATEMENT_DIGEST()` and `STATEMENT_DIGEST_TEXT()` functions.
+-   TiDB は`STATEMENT_DIGEST()`および`STATEMENT_DIGEST_TEXT()`関数をサポートしていません。

@@ -1,18 +1,18 @@
 ---
 title: PARTITIONS
-summary: Learn the `PARTITIONS` INFORMATION_SCHEMA table.
+summary: `PARTITIONS` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# PARTITIONS
+# パーティション {#partitions}
 
-The `PARTITIONS` table provides information about [partitioned tables](/partitioned-table.md).
+`PARTITIONS`表には[パーティションテーブル](/partitioned-table.md)に関する情報が記載されています。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC partitions;
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 +-------------------------------+--------------+------+------+---------+-------+
@@ -54,7 +54,7 @@ CREATE TABLE test.t1 (id INT NOT NULL PRIMARY KEY) PARTITION BY HASH (id) PARTIT
 SELECT * FROM PARTITIONS WHERE table_schema='test' AND table_name='t1'\G
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 *************************** 1. row ***************************
@@ -116,6 +116,6 @@ SUBPARTITION_ORDINAL_POSITION: NULL
 2 rows in set (0.00 sec)
 ```
 
-## See also
+## 参照 {#see-also}
 
-- [Explain statements using partitions](/explain-partitions.md)
+-   [パーティションを使用してステートメントを説明する](/explain-partitions.md)

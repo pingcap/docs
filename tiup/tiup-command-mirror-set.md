@@ -1,50 +1,46 @@
 ---
 title: tiup mirror set
-summary: The `tiup mirror set` command switches the current mirror between local file system and remote network address. The official mirror address is `https://tiup-mirrors.pingcap.com`. Use `tiup mirror set <mirror-addr>` to set the mirror address. Use `-r, --root` option to specify the root certificate for network mirrors to prevent man-in-the-middle attacks. No output is generated.
+summary: `tiup mirror set` コマンドは、現在のミラーをローカル ファイル システムとリモート ネットワーク アドレスの間で切り替えます。公式のミラー アドレスは ` <a href="https://tiup-mirrors.pingcap.com`">https://tiup-mirrors.pingcap.com`</a>です。ミラー アドレスを設定するには、`tiup mirror set <mirror-addr>` を使用します。中間者攻撃を防ぐために、ネットワーク ミラーのルート証明書を指定するには、`-r, --root` オプションを使用します。出力は生成されません。
 ---
 
-# tiup mirror set
+# tiup mirror set {#tiup-mirror-set}
 
-The `tiup mirror set` command is used to switch the current mirror and supports two forms of mirrors: local file system and remote network address.
+`tiup mirror set`コマンドは現在のミラーを切り替えるために使用され、ローカル ファイル システムとリモート ネットワーク アドレスの 2 つの形式のミラーをサポートします。
 
-The address of the official mirror is `https://tiup-mirrors.pingcap.com`.
+公式ミラーのアドレスは`https://tiup-mirrors.pingcap.com`です。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup mirror set <mirror-addr> [flags]
 ```
 
-`<mirror-addr>` is the mirror address, which has two forms:
+`<mirror-addr>`はミラー アドレスであり、次の 2 つの形式があります。
 
-- Network address: starts with `http` or `https`. For example, `http://172.16.5.5:8080`, `https://tiup-mirrors.pingcap.com`.
-- Local file path: the absolute path of the mirror directory. For example, `/path/to/local-tiup-mirror`.
+-   ネットワーク アドレス: `http`または`https`で始まります。たとえば、 `http://172.16.5.5:8080` 、 `https://tiup-mirrors.pingcap.com` 。
+-   ローカル ファイル パス: ミラー ディレクトリの絶対パス。たとえば、 `/path/to/local-tiup-mirror` 。
 
-## Option
+## オプション {#option}
 
-### -r, --root
+### -r, --root {#r-root}
 
-This option specifies the root certificate.
+このオプションはルート証明書を指定します。
 
-As the most critical part of mirror security, the root certificate of each mirror is different from one another. When you use the network mirror, it might suffer from man-in-the-middle attacks. To avoid such attacks, it is recommended to manually download the root certificate of the root network mirror to the local:
+ミラー セキュリティの最も重要な部分として、各ミラーのルート証明書は互いに異なります。ネットワーク ミラーを使用すると、中間者攻撃を受ける可能性があります。このような攻撃を回避するには、ルート ネットワーク ミラーのルート証明書をローカルに手動でダウンロードすることをお勧めします。
 
-```
-wget <mirror-addr>/root.json -O /path/to/local/root.json
-```
+    wget <mirror-addr>/root.json -O /path/to/local/root.json
 
-Perform a manual check to ensure that the root certificate is correct, and then switch the mirror by manually specifying the root certificate:
+手動でチェックを実行してルート証明書が正しいことを確認し、ルート証明書を手動で指定してミラーを切り替えます。
 
-```
-tiup mirror set <mirror-addr> -r /path/to/local/root.json
-```
+    tiup mirror set <mirror-addr> -r /path/to/local/root.json
 
-In the steps above, if the mirror is attacked before the `wget` command, you can find that the root certificate is incorrect. If the mirror is attacked after the `wget` command, TiUP will find that the mirror does not match the root certificate.
+上記の手順では、 `wget`コマンドの前にミラーが攻撃された場合、ルート証明書が正しくないことがわかります。3 コマンドの後にミラーが攻撃された場合、 TiUP はミラー`wget`ルート証明書と一致しないことを検出します。
 
-- Data type: `String`
-- Default: `{mirror-dir}/root.json`
+-   データ型: `String`
+-   デフォルト: `{mirror-dir}/root.json`
 
-## Output
+## 出力 {#output}
 
-None
+なし
 
-[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPミラーコマンドリスト](/tiup/tiup-command-mirror.md#command-list)

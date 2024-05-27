@@ -1,174 +1,174 @@
 ---
 title: Glossary
-summary: Glossaries about TiDB.
+summary: TiDB に関する用語集。
 ---
 
-# Glossary
+# 用語集 {#glossary}
 
-## A
+## あ {#a}
 
-### ACID
+### ACID {#acid}
 
-ACID refers to the four key properties of a transaction: atomicity, consistency, isolation, and durability. Each of these properties is described below.
+ACID は、トランザクションの 4 つの主要な特性、つまり原子性、一貫性、独立性、および永続性を指します。これらの各特性については、以下で説明します。
 
-- **Atomicity** means that either all the changes of an operation are performed, or none of them are. TiDB ensures the atomicity of the [Region](#regionpeerraft-group) that stores the Primary Key to achieve the atomicity of transactions.
+-   **アトミック性とは**、操作のすべての変更が実行されるか、まったく実行されないかのいずれかを意味します。TiDB は、トランザクションのアトミック性を実現するために、主キーを格納する[リージョン](#regionpeerraft-group)のアトミック性を保証します。
 
-- **Consistency** means that transactions always bring the database from one consistent state to another. In TiDB, data consistency is ensured before writing data to the memory.
+-   **一貫性とは**、トランザクションが常にデータベースをある一貫性のある状態から別の一貫性のある状態に移行することを意味します。TiDB では、データをメモリに書き込む前にデータの一貫性が確保されます。
 
-- **Isolation** means that a transaction in process is invisible to other transactions until it completes. This allows concurrent transactions to read and write data without sacrificing consistency. TiDB currently supports the isolation level of `REPEATABLE READ`.
+-   **分離とは**、進行中のトランザクションが完了するまで他のトランザクションから見えないことを意味します。これにより、同時トランザクションは一貫性を犠牲にすることなくデータの読み取りと書き込みを行うことができます。TiDB は現在、分離レベル`REPEATABLE READ`をサポートしています。
 
-- **Durability** means that once a transaction is committed, it remains committed even in the event of a system failure. TiKV uses persistent storage to ensure durability.
+-   **耐久性とは**、トランザクションが一度コミットされると、システム障害が発生した場合でもコミットされたままになることを意味します。TiKV は永続的なstorageを使用して耐久性を確保します。
 
-## B
+## B {#b}
 
-### Batch Create Table
+### バッチテーブル作成 {#batch-create-table}
 
-Batch Create Table is a feature introduced in TiDB v6.0.0. This feature is enabled default. When restoring data with a large number of tables (nearly 50000) using BR (Backup & Restore), the feature can greatly speed up the restore process by creating tables in batches. For details, see [Batch Create Table](/br/br-batch-create-table.md).
+バッチテーブル作成は、TiDB v6.0.0 で導入された機能です。この機能はデフォルトで有効になっていますBR (バックアップと復元) を使用して多数のテーブル (約 50000) を含むデータを復元する場合、この機能を使用すると、バッチでテーブルを作成することで復元プロセスを大幅に高速化できます。詳細については、 [バッチテーブル作成](/br/br-batch-create-table.md)参照してください。
 
-### Baseline Capturing
+### ベースラインキャプチャ {#baseline-capturing}
 
-Baseline Capturing captures queries that meet capturing conditions and create bindings for them. It is used for [preventing regression of execution plans during an upgrade](/sql-plan-management.md#prevent-regression-of-execution-plans-during-an-upgrade).
+ベースライン キャプチャは、キャプチャ条件を満たすクエリをキャプチャし、それらのバインディングを作成します。これは[アップグレード中の実行計画の回帰を防ぐ](/sql-plan-management.md#prevent-regression-of-execution-plans-during-an-upgrade)に使用されます。
 
-### Bucket
+### バケツ {#bucket}
 
-A [Region](#regionpeerraft-group) is logically divided into several small ranges called bucket. TiKV collects query statistics by buckets and reports the bucket status to PD. For details, see the [Bucket design doc](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md#bucket).
+[リージョン](#regionpeerraft-group)論理的にバケットと呼ばれるいくつかの小さな範囲に分割されます。TiKV はバケットごとにクエリ統計を収集し、バケットのステータスを PD に報告します。詳細については、 [バケット設計ドキュメント](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md#bucket)を参照してください。
 
-## C
+## Ｃ {#c}
 
-### Cached Table
+### キャッシュされたテーブル {#cached-table}
 
-With the cached table feature, TiDB loads the data of an entire table into the memory of the TiDB server, and TiDB directly gets the table data from the memory without accessing TiKV, which improves the read performance.
+キャッシュテーブル機能を使用すると、TiDB はテーブル全体のデータを TiDBサーバーのメモリにロードし、TiKV にアクセスせずにメモリからテーブルデータを直接取得するため、読み取りパフォーマンスが向上します。
 
-### Coalesce Partition
+### パーティションの結合 {#coalesce-partition}
 
-Coalesce Partition is a way of decreasing the number of partitions in a Hash or Key partitioned table. For more information, see [Manage Hash and Key partitions](/partitioned-table.md#manage-hash-and-key-partitions).
+パーティション結合は、ハッシュまたはキーでパーティションテーブル内のパーティションの数を減らす方法です。詳細については、 [ハッシュとキーのパーティションを管理する](/partitioned-table.md#manage-hash-and-key-partitions)を参照してください。
 
-### Continuous Profiling
+### 継続的なプロファイリング {#continuous-profiling}
 
-Introduced in TiDB 5.3.0, Continuous Profiling is a way to observe resource overhead at the system call level. With the support of Continuous Profiling, TiDB provides performance insight as clear as directly looking into the database source code, and helps R&D and operation and maintenance personnel to locate the root cause of performance problems using a flame graph. For details, see [TiDB Dashboard Instance Profiling - Continuous Profiling](/dashboard/continuous-profiling.md).
+TiDB 5.3.0 で導入された継続的プロファイリングは、システム コール レベルでリソース オーバーヘッドを観察する方法です。継続的プロファイリングのサポートにより、TiDB はデータベース ソース コードを直接調べるのと同じくらい明確なパフォーマンス情報を提供し、R&amp;D および運用保守担当者がフレーム グラフを使用してパフォーマンスの問題の根本原因を特定するのに役立ちます。詳細については、 [TiDB ダッシュボード インスタンス プロファイリング - 継続的なプロファイリング](/dashboard/continuous-profiling.md)参照してください。
 
-## D
+## だ {#d}
 
-### Dynamic Pruning
+### 動的剪定 {#dynamic-pruning}
 
-Dynamic pruning mode is one of the modes that TiDB accesses partitioned tables. In dynamic pruning mode, each operator supports direct access to multiple partitions. Therefore, TiDB no longer uses Union. Omitting the Union operation can improve the execution efficiency and avoid the problem of Union concurrent execution.
+動的プルーニングモードは、TiDB がパーティション テーブルにアクセスするモードの 1 つです。動的プルーニング モードでは、各演算子は複数のパーティションへの直接アクセスをサポートします。そのため、TiDB は Union を使用しなくなりました。Union 操作を省略すると、実行効率が向上し、Union の同時実行の問題を回避できます。
 
-## I
+## 私 {#i}
 
-### Index Merge
+### インデックスの結合 {#index-merge}
 
-Index Merge is a method introduced in TiDB v4.0 to access tables. Using this method, the TiDB optimizer can use multiple indexes per table and merge the results returned by each index. In some scenarios, this method makes the query more efficient by avoiding full table scans. Since v5.4, Index Merge has become a GA feature.
+インデックス マージは、TiDB v4.0 で導入されたテーブルへのアクセス方法です。この方法を使用すると、TiDB オプティマイザーはテーブルごとに複数のインデックスを使用し、各インデックスによって返された結果をマージできます。シナリオによっては、この方法によりテーブル全体のスキャンが回避され、クエリの効率が向上します。v5.4 以降、インデックス マージは GA 機能になりました。
 
-### In-Memory Pessimistic Lock
+### インメモリ悲観的ロック {#in-memory-pessimistic-lock}
 
-The in-memory pessimistic lock is a new feature introduced in TiDB v6.0.0. When this feature is enabled, pessimistic locks are usually stored in the memory of the Region leader only, and are not persisted to disk or replicated through Raft to other replicas. This feature can greatly reduce the overhead of acquiring pessimistic locks and improve the throughput of pessimistic transactions.
+インメモリ悲観的ロックは、TiDB v6.0.0 で導入された新機能です。この機能を有効にすると、悲観的ロックは通常、リージョンリーダーのメモリにのみ保存され、ディスクに永続化されず、 Raftを介して他のレプリカに複製されません。この機能により、悲観的ロックの取得にかかるオーバーヘッドが大幅に削減され、悲観的トランザクションのスループットが向上します。
 
-## L
+## ら {#l}
 
-### leader/follower/learner
+### リーダー/フォロワー/学習者 {#leader-follower-learner}
 
-Leader/Follower/Learner each corresponds to a role in a Raft group of [peers](#regionpeerraft-group). The leader services all client requests and replicates data to the followers. If the group leader fails, one of the followers will be elected as the new leader. Learners are non-voting followers that only serves in the process of replica addition.
+Leader/Follower/Learnerはそれぞれ、 [仲間](#regionpeerraft-group)のRaftグループ内の役割に対応します。リーダーはすべてのクライアント要求に応え、フォロワーにデータを複製します。グループ リーダーが失敗した場合、フォロワーの 1 人が新しいリーダーとして選出されます。学習者は、レプリカの追加プロセスでのみ機能する非投票フォロワーです。
 
-## M
+## ま {#m}
 
-### MPP
+### マルチレベル {#mpp}
 
-Starting from v5.0, TiDB introduces Massively Parallel Processing (MPP) architecture through TiFlash nodes, which shares the execution workloads of large join queries among TiFlash nodes. When the MPP mode is enabled, TiDB, based on cost, determines whether to use the MPP framework to perform the calculation. In the MPP mode, the join keys are redistributed through the Exchange operation while being calculated, which distributes the calculation pressure to each TiFlash node and speeds up the calculation. For more information, see [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md).
+v5.0 以降、TiDB はTiFlashノードを介して大規模並列処理 (MPP)アーキテクチャを導入し、大規模な結合クエリの実行ワークロードをTiFlashノード間で共有します。MPP モードを有効にすると、TiDB はコストに基づいて、MPP フレームワークを使用して計算を実行するかどうかを決定します。MPP モードでは、計算中に結合キーが Exchange 操作を通じて再分配されるため、計算負荷が各TiFlashノードに分散され、計算が高速化されます。詳細については、 [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)参照してください。
 
-## O
+## お {#o}
 
-### Old value
+### 古い値 {#old-value}
 
-The "original value" in the incremental change log output by TiCDC. You can specify whether the incremental change log output by TiCDC contains the "original value".
+TiCDC が出力する増分変更ログ内の「元の値」。TiCDC が出力する増分変更ログに「元の値」を含めるかどうかを指定できます。
 
-### Operator
+### オペレーター {#operator}
 
-An operator is a collection of actions that applies to a Region for scheduling purposes. Operators perform scheduling tasks such as "migrate the leader of Region 2 to Store 5" and "migrate replicas of Region 2 to Store 1, 4, 5".
+オペレーターは、スケジュール設定の目的でリージョンに適用されるアクションの集合です。オペレーターは、「リージョン2 のリーダーをストア 5 に移行する」や「リージョン2 のレプリカをストア 1、4、5 に移行する」などのスケジュール設定タスクを実行します。
 
-An operator can be computed and generated by a [scheduler](#scheduler), or created by an external API.
+演算子は[スケジューラ](#scheduler)によって計算および生成することも、外部 API によって作成することもできます。
 
-### Operator step
+### オペレータステップ {#operator-step}
 
-An operator step is a step in the execution of an operator. An operator normally contains multiple Operator steps.
+オペレータ ステップは、オペレータの実行におけるステップです。オペレータには通常、複数のオペレータ ステップが含まれます。
 
-Currently, available steps generated by PD include:
+現在、PD によって生成される利用可能なステップは次のとおりです。
 
-- `TransferLeader`: Transfers leadership to a specified member
-- `AddPeer`: Adds peers to a specified store
-- `RemovePeer`: Removes a peer of a Region
-- `AddLearner`: Adds learners to a specified store
-- `PromoteLearner`: Promotes a specified learner to a voting member
-- `SplitRegion`: Splits a specified Region into two
+-   `TransferLeader` : 指定されたメンバーにリーダーシップを移譲する
+-   `AddPeer` : 指定されたストアにピアを追加します
+-   `RemovePeer` :リージョンのピアを削除します
+-   `AddLearner` : 指定されたストアに学習者を追加する
+-   `PromoteLearner` : 指定された学習者を投票メンバーに昇格させる
+-   `SplitRegion` : 指定されたリージョンを2つに分割します
 
-## P
+## ポ {#p}
 
-### Partitioning
+### パーティショニング {#partitioning}
 
-[Partitioning](/partitioned-table.md) refers to physically dividing a table into smaller table partitions, which can be done by partition methods such as RANGE, LIST, HASH, and KEY partitioning.
+[パーティショニング](/partitioned-table.md) 、テーブルを物理的に小さなテーブル パーティションに分割することを指します。これは、RANGE、LIST、HASH、KEY パーティション分割などのパーティション メソッドによって実行できます。
 
-### pending/down
+### 保留中/ダウン {#pending-down}
 
-"Pending" and "down" are two special states of a peer. Pending indicates that the Raft log of followers or learners is vastly different from that of leader. Followers in pending cannot be elected as leader. "Down" refers to a state that a peer ceases to respond to leader for a long time, which usually means the corresponding node is down or isolated from the network.
+「保留中」と「ダウン」は、ピアの 2 つの特別な状態です。保留中は、フォロワーまたは学習者のRaftログがリーダーのログと大きく異なることを示します。保留中のフォロワーはリーダーとして選出できません。「ダウン」は、ピアがリーダーに長時間応答しなくなった状態を指し、通常は対応するノードがダウンしているか、ネットワークから分離されていることを意味します。
 
-### Point Get
+### ポイントゲット {#point-get}
 
-Point get means reading a single row of data by a unique index or primary index, the returned resultset is up to one row.
+ポイント取得とは、一意のインデックスまたはプライマリ インデックスによって 1 行のデータを読み取ることを意味し、返される結果セットは最大 1 行になります。
 
-### Predicate columns
+### 述語列 {#predicate-columns}
 
-In most cases, when executing SQL statements, the optimizer only uses statistics of some columns (such as columns in the `WHERE`, `JOIN`, `ORDER BY`, and `GROUP BY` statements). These used columns are called predicate columns. For details, see [Collect statistics on some columns](/statistics.md#collect-statistics-on-some-columns).
+ほとんどの場合、SQL 文を実行するときに、オプティマイザは一部の列 ( `WHERE` 、 `JOIN` 、 `ORDER BY` 、および`GROUP BY`文の列など) の統計情報のみを使用します。これらの使用される列は述語列と呼ばれます。詳細については、 [いくつかの列の統計を収集する](/statistics.md#collect-statistics-on-some-columns)を参照してください。
 
-## Q
+## 質問 {#q}
 
-### Quota Limiter
+### クォータリミッター {#quota-limiter}
 
-Quota Limiter is an experimental feature introduced in TiDB v6.0.0. If the machine on which TiKV is deployed has limited resources, for example, with only 4v CPU and 16 G memory, and the foreground of TiKV processes too many read and write requests, the CPU resources used by the background are occupied to help process such requests, which affects the performance stability of TiKV. To avoid this situation, the [quota-related configuration items](/tikv-configuration-file.md#quota) can be set to limit the CPU resources to be used by the foreground.
+クォータ リミッターは、TiDB v6.0.0 で導入された実験的機能です。TiKV がデプロイされているマシンのリソースが限られている場合 (たとえば、4v CPU と 16 Gメモリのみ)、TiKV のフォアグラウンドが読み取りおよび書き込み要求を過度に処理すると、バックグラウンドで使用される CPU リソースがそのような要求の処理に占有され、TiKV のパフォーマンスの安定性に影響します。この状況を回避するには、 [クォータ関連の設定項目](/tikv-configuration-file.md#quota)設定して、フォアグラウンドで使用される CPU リソースを制限できます。
 
-## R
+## R {#r}
 
-### Raft Engine
+### Raft Engine {#raft-engine}
 
-Raft Engine is an embedded persistent storage engine with a log-structured design. It is built for TiKV to store multi-Raft logs. Since v5.4, TiDB supports using Raft Engine as the log storage engine. For details, see [Raft Engine](/tikv-configuration-file.md#raft-engine).
+Raft Engineは、ログ構造設計の組み込み永続storageエンジンです。TiKV が複数の Raft ログを保存できるように構築されています。v5.4 以降、TiDB はログstorageエンジンとしてRaft Engineの使用をサポートしています。詳細については、 [Raft Engine](/tikv-configuration-file.md#raft-engine)参照してください。
 
-### Region/peer/Raft group
+### リージョン/ ピア /Raftグループ {#region-peer-raft-group}
 
-Region is the minimal piece of data storage in TiKV, each representing a range of data (96 MiB by default). Each Region has three replicas by default. A replica of a Region is called a peer. Multiple peers of the same Region replicate data via the Raft consensus algorithm, so peers are also members of a Raft instance. TiKV uses Multi-Raft to manage data. That is, for each Region, there is a corresponding, isolated Raft group.
+リージョンはTiKV のデータstorageの最小部分であり、それぞれがデータの範囲 (デフォルトでは 96 MiB) を表します。各リージョンには、デフォルトで 3 つのレプリカがあります。リージョンのレプリカはピアと呼ばれます。同じリージョンの複数のピアは、 Raftコンセンサス アルゴリズムを介してデータを複製するため、ピアもRaftインスタンスのメンバーになります。TiKV は、Multi-Raft を使用してデータを管理します。つまり、各リージョンには、対応する分離されたRaftグループが存在します。
 
-### Region split
+### リージョン分割 {#region-split}
 
-Regions are generated as data writes increase. The process of splitting is called Region split.
+データの書き込みが増加すると、領域が生成されます。分割のプロセスは、リージョン分割と呼ばれます。
 
-The mechanism of Region split is to use one initial Region to cover the entire key space, and generate new Regions through splitting existing ones every time the size of the Region or the number of keys has reached a threshold.
+リージョン分割のメカニズムは、1 つの初期リージョンを使用してキー空間全体をカバーし、リージョンのサイズまたはキーの数がしきい値に達するたびに既存の領域を分割して新しい領域を生成することです。
 
-### restore
+### 復元する {#restore}
 
-Restore is the reverse of the backup operation. It is the process of bringing back the system to an earlier state by retrieving data from a prepared backup.
+復元はバックアップ操作の逆です。準備されたバックアップからデータを取得して、システムを以前の状態に戻すプロセスです。
 
-## S
+## S {#s}
 
-### scheduler
+### スケジューラ {#scheduler}
 
-Schedulers are components in PD that generate scheduling tasks. Each scheduler in PD runs independently and serves different purposes. The commonly used schedulers are:
+スケジューラは、PD 内のスケジュール タスクを生成するコンポーネントです。PD 内の各スケジューラは独立して実行され、異なる目的を果たします。よく使用されるスケジューラは次のとおりです。
 
-- `balance-leader-scheduler`: Balances the distribution of leaders
-- `balance-region-scheduler`: Balances the distribution of peers
-- `hot-region-scheduler`: Balances the distribution of hot Regions
-- `evict-leader-{store-id}`: Evicts all leaders of a node (often used for rolling upgrades)
+-   `balance-leader-scheduler` : リーダーの分布を均等にする
+-   `balance-region-scheduler` : ピアの分散をバランスさせる
+-   `hot-region-scheduler` : ホット領域の分布をバランスさせる
+-   `evict-leader-{store-id}` : ノードのすべてのリーダーを排除します (ローリング アップグレードでよく使用されます)
 
-### Store
+### 店 {#store}
 
-A store refers to the storage node in the TiKV cluster (an instance of `tikv-server`). Each store has a corresponding TiKV instance.
+ストアとは、TiKV クラスター内のstorageノード ( `tikv-server`のインスタンス) を指します。各ストアには対応する TiKV インスタンスがあります。
 
-## T
+## T {#t}
 
-### Top SQL
+### Top SQL {#top-sql}
 
-Top SQL helps locate SQL queries that contribute to a high load of a TiDB or TiKV node in a specified time range. For details, see [Top SQL user document](/dashboard/top-sql.md).
+Top SQL は、指定された時間範囲内で TiDB または TiKV ノードの高負荷の原因となっている SQL クエリを見つけるのに役立ちます。詳細については、 [Top SQLユーザードキュメント](/dashboard/top-sql.md)を参照してください。
 
-### TSO
+### TSO {#tso}
 
-Because TiKV is a distributed storage system, it requires a global timing service, Timestamp Oracle (TSO), to assign a monotonically increasing timestamp. In TiKV, such a feature is provided by PD, and in Google [Spanner](http://static.googleusercontent.com/media/research.google.com/en//archive/spanner-osdi2012.pdf), this feature is provided by multiple atomic clocks and GPS.
+TiKV は分散storageシステムであるため、単調に増加するタイムスタンプを割り当てるには、グローバル タイミング サービスである Timestamp Oracle (TSO) が必要です。TiKV では、このような機能は PD によって提供され、Google [スパナ](http://static.googleusercontent.com/media/research.google.com/en//archive/spanner-osdi2012.pdf)では、この機能は複数のアトミック時計と GPS によって提供されます。
 
-### TTL
+### 10 ... {#ttl}
 
-[Time to live (TTL)](/time-to-live.md) is a feature that allows you to manage TiDB data lifetime at the row level. For a table with the TTL attribute, TiDB automatically checks data lifetime and deletes expired data at the row level.
+[存続時間 (TTL)](/time-to-live.md) 、TiDB データの有効期間を行レベルで管理できる機能です。TTL 属性を持つテーブルの場合、TiDB は自動的にデータの有効期間をチェックし、期限切れのデータを行レベルで削除します。

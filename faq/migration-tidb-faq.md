@@ -1,47 +1,43 @@
 ---
 title: Migration FAQs
-summary: Learn about the FAQs related to data migration.
+summary: データ移行に関するよくある質問について説明します。
 ---
 
-# Migration FAQs
+# 移行に関するよくある質問 {#migration-faqs}
 
-This document summarizes the frequently asked questions (FAQs) related to TiDB data migration.
+このドキュメントでは、TiDB データ移行に関するよくある質問 (FAQ) をまとめています。
 
-For the frequently asked questions about migration-related tools, click the corresponding links in the list below:
+移行関連ツールに関するよくある質問については、以下のリストの対応するリンクをクリックしてください。
 
-- [Backup & Restore FAQs](/faq/backup-and-restore-faq.md)
-- [TiDB Binlog FAQ](/tidb-binlog/tidb-binlog-faq.md)
-- [TiDB Lightning FAQs](/tidb-lightning/tidb-lightning-faq.md)
-- [TiDB Data Migration (DM) FAQs](/dm/dm-faq.md)
-- [TiCDC FAQs](/ticdc/ticdc-faq.md)
+-   [バックアップと復元に関するよくある質問](/faq/backup-and-restore-faq.md)
+-   [TiDBBinlogFAQ](/tidb-binlog/tidb-binlog-faq.md)
+-   [TiDB Lightningに関するよくある質問](/tidb-lightning/tidb-lightning-faq.md)
+-   [TiDB データ移行 (DM) に関するよくある質問](/dm/dm-faq.md)
+-   [TiCDC よくある質問](/ticdc/ticdc-faq.md)
 
-## Full data export and import
+## 完全なデータのエクスポートとインポート {#full-data-export-and-import}
 
-### How to migrate an application running on MySQL to TiDB?
+### MySQL で実行されているアプリケーションを TiDB に移行するにはどうすればよいでしょうか? {#how-to-migrate-an-application-running-on-mysql-to-tidb}
 
-Because TiDB supports most MySQL syntax, generally you can migrate your applications to TiDB without changing a single line of code in most cases.
+TiDB はほとんどの MySQL 構文をサポートしているため、ほとんどの場合、コードを 1 行も変更せずにアプリケーションを TiDB に移行できます。
 
-### Data import and export is slow, and many retries and EOF errors appear in the log of each component without other errors
+### データのインポートとエクスポートが遅く、他のエラーがないにもかかわらず、各コンポーネントのログに多くの再試行とEOFエラーが表示されます。 {#data-import-and-export-is-slow-and-many-retries-and-eof-errors-appear-in-the-log-of-each-component-without-other-errors}
 
-If no other logical errors occur, retries and EOF errors might be caused by network issues. It is recommended to first use tools to check the network connectivity. In the following example, [iperf](https://iperf.fr/) is used for troubleshooting:
+他の論理エラーが発生しない場合は、再試行と EOF エラーはネットワークの問題によって発生している可能性があります。まずツールを使用してネットワーク接続を確認することをお勧めします。次の例では、トラブルシューティングに[iperf](https://iperf.fr/)使用されています。
 
-+ Execute the following command on the server-side node where the retries and EOF errors occur:
-
-    {{< copyable "shell-regular" >}}
+-   再試行と EOF エラーが発生したサーバー側ノードで次のコマンドを実行します。
 
     ```shell
     iperf3 -s
     ```
 
-+ Execute the following command on the client-side node where the retries and EOF errors occur:
-
-    {{< copyable "shell-regular" >}}
+-   再試行と EOF エラーが発生したクライアント側ノードで次のコマンドを実行します。
 
     ```shell
     iperf3 -c <server-IP>
     ```
 
-The following example is the output of a client node with a good network connection:
+次の例は、ネットワーク接続が良好なクライアント ノードの出力です。
 
 ```shell
 $ iperf3 -c 192.168.196.58
@@ -66,42 +62,40 @@ Connecting to host 192.168.196.58, port 5201
 iperf Done.
 ```
 
-If the output shows low network bandwidth and high bandwidth fluctuations, a large number of retries and EOF errors might appear in each component log. In this case, you need to consult your network service provider to improve the network quality.
+出力にネットワーク帯域幅が低く、帯域幅の変動が大きいことが示されている場合、各コンポーネントログに多数の再試行と EOF エラーが表示されることがあります。この場合、ネットワーク サービス プロバイダーに相談して、ネットワーク品質を改善する必要があります。
 
-If the output of each metric looks good, try to update each component. If the problem persists after the updating, [get support](/support.md) from PingCAP or the community.
+各メトリックの出力が良好であれば、各コンポーネントを更新してみてください。更新後も問題が解決しない場合は、PingCAP またはコミュニティから[支持を得ます](/support.md)リクエストしてください。
 
-### If I accidentally import the MySQL user table into TiDB, or forget the password and cannot log in, how to deal with it?
+### 誤ってMySQLユーザーテーブルをTiDBにインポートしてしまったり、パスワードを忘れてログインできなくなったりした場合、どのように対処すればよいでしょうか? {#if-i-accidentally-import-the-mysql-user-table-into-tidb-or-forget-the-password-and-cannot-log-in-how-to-deal-with-it}
 
-Restart the TiDB service, add the `-skip-grant-table=true` parameter in the configuration file. Log into the cluster without password and recreate the user, or recreate the `mysql.user` table. For the specific table schema, search the official documentation.
+TiDB サービスを再起動し、構成ファイルに`-skip-grant-table=true`パラメータを追加します。パスワードなしでクラスターにログインしてユーザーを再作成するか、 `mysql.user`テーブルを再作成します。特定のテーブル スキーマについては、公式ドキュメントを検索してください。
 
-### How to export the data in TiDB?
+### TiDB のデータをエクスポートするにはどうすればいいですか? {#how-to-export-the-data-in-tidb}
 
-You can use the following methods to export the data in TiDB:
+TiDB のデータをエクスポートするには、次の方法を使用できます。
 
-- Export data using Dumpling. For more information, see [Dumpling documentation](/dumpling-overview.md).
-- Export data using mysqldump and the `WHERE` clause.
-- Use the MySQL client to export the results of `select` to a file.
+-   Dumplingを使用してデータをエクスポートします。詳細については、 [Dumplingのドキュメント](/dumpling-overview.md)参照してください。
+-   mysqldump と`WHERE`句を使用してデータをエクスポートします。
+-   MySQL クライアントを使用して、 `select`の結果をファイルにエクスポートします。
 
-### How to migrate from DB2 or Oracle to TiDB?
+### DB2 または Oracle から TiDB に移行するにはどうすればよいでしょうか? {#how-to-migrate-from-db2-or-oracle-to-tidb}
 
-To migrate all the data or migrate incrementally from DB2 or Oracle to TiDB, see the following solution:
+DB2 または Oracle から TiDB にすべてのデータを移行するか、段階的に移行する場合は、次のソリューションを参照してください。
 
-- Use the official migration tool of Oracle, such as OGG, Gateway, CDC (Change Data Capture).
-- Develop a program for importing and exporting data.
-- Export Spool as text file, and import data using Load infile.
-- Use a third-party data migration tool.
+-   OGG、Gateway、CDC (Change Data Capture) などの Oracle の公式移行ツールを使用します。
+-   データをインポートおよびエクスポートするためのプログラムを開発します。
+-   スプールをテキスト ファイルとしてエクスポートし、Load infile を使用してデータをインポートします。
+-   サードパーティのデータ移行ツールを使用します。
 
-Currently, it is recommended to use OGG.
+現在はOGGの使用が推奨されています。
 
-### Error: `java.sql.BatchUpdateException:statement count 5001 exceeds the transaction limitation` while using Sqoop to write data into TiDB in `batches`
+### エラー: java.sql.BatchUpdateException: Sqoop を使用して TiDB にデータを<code>batches</code>で書き込むときに、 <code>java.sql.BatchUpdateException:statement count 5001 exceeds the transaction limitation</code> {#error-code-java-sql-batchupdateexception-statement-count-5001-exceeds-the-transaction-limitation-code-while-using-sqoop-to-write-data-into-tidb-in-code-batches-code}
 
-In Sqoop, `--batch` means committing 100 `statement`s in each batch, but by default each `statement` contains 100 SQL statements. So, 100 * 100 = 10000 SQL statements, which exceeds 5000, the maximum number of statements allowed in a single TiDB transaction.
+Sqoop では、 `--batch`各バッチで 100 個`statement`をコミットすることを意味しますが、デフォルトでは各`statement`に 100 個の SQL ステートメントが含まれます。したがって、100 * 100 = 10000 個の SQL ステートメントとなり、単一の TiDB トランザクションで許可されるステートメントの最大数である 5000 を超えます。
 
-Two solutions:
+2つの解決策:
 
-- Add the `-Dsqoop.export.records.per.statement=10` option as follows:
-
-    {{< copyable "shell-regular" >}}
+-   次のように`-Dsqoop.export.records.per.statement=10`オプションを追加します。
 
     ```bash
     sqoop export \
@@ -114,72 +108,72 @@ Two solutions:
         --batch
     ```
 
-- You can also increase the limited number of statements in a single TiDB transaction, but this will consume more memory.
+-   単一の TiDB トランザクション内のステートメントの制限数を増やすこともできますが、これによりメモリの消費量が増えます。
 
-### Why does Dumpling return `The local disk space is insufficient` error or cause the upstream database to run out of memory when exporting a table?
+### テーブルをエクスポートするときに、 Dumpling が<code>The local disk space is insufficient</code>エラーを返したり、アップストリーム データベースのメモリを引き起こしたりするのはなぜですか? {#why-does-dumpling-return-code-the-local-disk-space-is-insufficient-code-error-or-cause-the-upstream-database-to-run-out-of-memory-when-exporting-a-table}
 
-This issue might have the following causes:
+この問題には次の原因が考えられます。
 
-+ The database's primary keys are not evenly distributed (for example, when you enable [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)).
-+ The upstream database is TiDB and the exported table is a partitioned table.
+-   データベースの主キーが均等に分散されていません (たとえば、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)有効にした場合)。
+-   アップストリーム データベースは TiDB であり、エクスポートされたテーブルはパーティションテーブルです。
 
-For the above cases, Dumpling splits excessively large data chunk for the export and sends queries with excessively large results. To address the issue, you can get the latest version of Dumpling.
+上記の場合、 Dumpling はエクスポート用に過度に大きなデータ チャンクを分割し、過度に大きな結果を含むクエリを送信します。この問題を解決するには、最新バージョンのDumplingを入手してください。
 
-### Does TiDB have a function like the Flashback Query in Oracle? Does it support DDL?
+### TiDB には Oracle のフラッシュバック クエリのような機能がありますか? DDL をサポートしていますか? {#does-tidb-have-a-function-like-the-flashback-query-in-oracle-does-it-support-ddl}
 
- Yes, it does. And it supports DDL as well. For details, see [how TiDB reads data from history versions](/read-historical-data.md).
+はい、サポートしています。また、DDL もサポートしています。詳細については、 [TiDBが履歴バージョンからデータを読み取る方法](/read-historical-data.md)参照してください。
 
-## Migrate the data online
+## データをオンラインで移行する {#migrate-the-data-online}
 
-### Is there a current solution to replicating data from TiDB to other databases like HBase and Elasticsearch?
+### TiDB から HBase や Elasticsearch などの他のデータベースにデータを複製する現在のソリューションはありますか? {#is-there-a-current-solution-to-replicating-data-from-tidb-to-other-databases-like-hbase-and-elasticsearch}
 
-No. Currently, the data replication depends on the application itself.
+いいえ。現在、データのレプリケーションはアプリケーション自体に依存しています。
 
-## Migrate the traffic
+## トラフィックを移行する {#migrate-the-traffic}
 
-### How to migrate the traffic quickly?
+### トラフィックを素早く移行するにはどうすればいいですか? {#how-to-migrate-the-traffic-quickly}
 
-It is recommended to migrate application data from MySQL to TiDB using [TiDB Data Migration](/dm/dm-overview.md) tool. You can migrate the read and write traffic in batches by editing the network configuration as needed. Deploy a stable network LB (such as HAproxy, LVS, F5, and DNS) on the upper layer, in order to implement seamless migration by directly editing the network configuration.
+アプリケーションデータをMySQLからTiDBに移行する場合は、 [TiDB データ移行](/dm/dm-overview.md)ツールを使用することをお勧めします。必要に応じてネットワーク構成を編集することで、読み取りトラフィックと書き込みトラフィックを一括で移行できます。上位レイヤーに安定したネットワークLB（HAproxy、LVS、F5、DNSなど）をデプロイ、ネットワーク構成を直接編集してシームレスな移行を実現します。
 
-### Is there a limit for the total write and read capacity in TiDB?
+### TiDB の書き込み容量と読み取り容量の合計に制限はありますか? {#is-there-a-limit-for-the-total-write-and-read-capacity-in-tidb}
 
-The total read capacity has no limit. You can increase the read capacity by adding more TiDB servers. Generally the write capacity has no limit as well. You can increase the write capacity by adding more TiKV nodes.
+合計読み取り容量には制限がありません。読み取り容量は、TiDB サーバーを追加することで増やすことができます。通常、書き込み容量にも制限はありません。書き込み容量は、TiKV ノードを追加することで増やすことができます。
 
-### The error message `transaction too large` is displayed
+### <code>transaction too large</code>エラーメッセージが表示されます {#the-error-message-code-transaction-too-large-code-is-displayed}
 
-Due to the limitation of the underlying storage engine, each key-value entry (one row) in TiDB should be no more than 6MB. You can adjust the [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) configuration value up to 120MB.
+基盤となるstorageエンジンの制限により、TiDB 内の各キー値エントリ (1 行) は 6 MB 以下にする必要があります。1 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)構成値を最大 120 MB まで調整できます。
 
-Distributed transactions need two-phase commit and the bottom layer performs the Raft replication. If a transaction is very large, the commit process would be quite slow and the write conflict is more likely to occur. Moreover, the rollback of a failed transaction leads to an unnecessary performance penalty. To avoid these problems, we limit the total size of key-value entries to no more than 100MB in a transaction by default. If you need larger transactions, modify the value of `txn-total-size-limit` in the TiDB configuration file. The maximum value of this configuration item is up to 10G. The actual limitation is also affected by the physical memory of the machine.
+分散トランザクションには 2 フェーズ コミットが必要で、最レイヤーでRaftレプリケーションが実行されます。トランザクションが非常に大きい場合、コミット プロセスは非常に遅くなり、書き込み競合が発生する可能性が高くなります。さらに、失敗したトランザクションのロールバックにより、不要なパフォーマンスの低下が発生します。これらの問題を回避するために、トランザクション内のキー値エントリの合計サイズをデフォルトで 100 MB 以下に制限しています。より大きなトランザクションが必要な場合は、TiDB 構成ファイルの値`txn-total-size-limit`を変更します。この構成項目の最大値は 10 G までです。実際の制限は、マシンの物理メモリによっても左右されます。
 
-There are [similar limits](https://cloud.google.com/spanner/docs/limits) on Google Cloud Spanner.
+Google Cloud Spanner には[同様の制限](https://cloud.google.com/spanner/docs/limits)あります。
 
-### How to import data in batches?
+### データを一括でインポートするにはどうすればいいですか? {#how-to-import-data-in-batches}
 
-When you import data, insert in batches and keep the number of rows within 10,000 for each batch.
+データをインポートするときは、バッチで挿入し、バッチごとに行数を 10,000 以内に抑えます。
 
-### Does TiDB release space immediately after deleting data?
+### TiDB はデータを削除した後すぐにスペースを解放しますか? {#does-tidb-release-space-immediately-after-deleting-data}
 
-None of the `DELETE`, `TRUNCATE` and `DROP` operations release data immediately. For the `TRUNCATE` and `DROP` operations, after the TiDB GC (Garbage Collection) time (10 minutes by default), the data is deleted and the space is released. For the `DELETE` operation, the data is deleted but the space is not released according to TiDB GC. When subsequent data is written into RocksDB and executes `COMPACT`, the space is reused.
+`DELETE` `DROP`操作は`TRUNCATE`もデータを即時に解放しません。7 と`DROP`操作では、TiDB GC (ガベージ コレクション) 時間 (デフォルトでは 10 分) が`TRUNCATE`すると、データが削除され、領域が解放されます。11 `DELETE`操作では、TiDB GC に従ってデータは削除されますが、領域は解放されません。後続のデータが RocksDB に書き込まれ、 `COMPACT`が実行されると、領域が再利用されます。
 
-### Can I execute DDL operations on the target table when loading data?
+### データをロードするときに、ターゲット テーブルで DDL 操作を実行できますか? {#can-i-execute-ddl-operations-on-the-target-table-when-loading-data}
 
-No. None of the DDL operations can be executed on the target table when you load data, otherwise the data fails to be loaded.
+いいえ。データをロードするときに、ターゲット テーブルで DDL 操作を実行することはできません。そうしないと、データのロードに失敗します。
 
-### Does TiDB support the `replace into` syntax?
+### TiDB は<code>replace into</code>構文をサポートしていますか? {#does-tidb-support-the-code-replace-into-code-syntax}
 
-Yes.
+はい。
 
-### Why does the query speed getting slow after deleting data?
+### データを削除した後、クエリ速度が遅くなるのはなぜですか? {#why-does-the-query-speed-getting-slow-after-deleting-data}
 
-Deleting a large amount of data leaves a lot of useless keys, affecting the query efficiency. The [Region Merge feature](/best-practices/massive-regions-best-practices.md#method-3-enable-region-merge) can solve this problem. For more details, see the [deleting data section in TiDB Best Practices](https://en.pingcap.com/blog/tidb-best-practice/#write).
+大量のデータを削除すると、無駄なキーが大量に残り、クエリの効率に影響します。 [リージョン結合機能](/best-practices/massive-regions-best-practices.md#method-3-enable-region-merge)でこの問題を解決できます。詳細については、 [TiDB ベストプラクティスのデータセクションの削除](https://en.pingcap.com/blog/tidb-best-practice/#write)を参照してください。
 
-### What is the most efficient way of deleting data?
+### データを削除する最も効率的な方法は何ですか? {#what-is-the-most-efficient-way-of-deleting-data}
 
-When deleting a large amount of data, it is recommended to use `Delete from t where xx limit 5000;`. It deletes through the loop and uses `Affected Rows == 0` as a condition to end the loop, so as not to exceed the limit of transaction size. With the prerequisite of meeting business filtering logic, it is recommended to add a strong filter index column or directly use the primary key to select the range, such as `id >= 5000*n+m and id < 5000*(n+1)+m`.
+大量のデータを削除する場合は、 `Delete from t where xx limit 5000;`使用することをお勧めします。ループを介して削除し、 `Affected Rows == 0`ループ終了の条件として使用して、トランザクションサイズの制限を超えないようにします。ビジネスフィルタリングロジックを満たすという前提条件により、強力なフィルターインデックス列を追加するか、 `id >= 5000*n+m and id < 5000*(n+1)+m`など、主キーを直接使用して範囲を選択することをお勧めします。
 
-If the amount of data that needs to be deleted at a time is very large, this loop method will get slower and slower because each deletion traverses backward. After deleting the previous data, lots of deleted flags remain for a short period (then all will be processed by Garbage Collection) and influence the following Delete statement. If possible, it is recommended to refine the Where condition. See [details in TiDB Best Practices](https://en.pingcap.com/blog/tidb-best-practice/#write).
+一度に削除する必要があるデータの量が非常に多い場合、このループ メソッドは、削除ごとに逆方向に移動するため、だんだん遅くなります。前のデータを削除した後、多くの削除済みフラグが短期間残り (その後、すべてガベージ コレクションによって処理されます)、次の Delete ステートメントに影響します。可能であれば、Where 条件を絞り込むことをお勧めします。1 [詳細はTiDBベストプラクティスを参照](https://en.pingcap.com/blog/tidb-best-practice/#write)参照してください。
 
-### How to improve the data loading speed in TiDB?
+### TiDB のデータ読み込み速度を向上させるにはどうすればよいでしょうか? {#how-to-improve-the-data-loading-speed-in-tidb}
 
-- The [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) tool is developed for distributed data import. It should be noted that the data import process does not perform a complete transaction process for performance reasons. Therefore, the ACID constraint of the data being imported during the import process cannot be guaranteed. The ACID constraint of the imported data can only be guaranteed after the entire import process ends. Therefore, the applicable scenarios mainly include importing new data (such as a new table or a new index) or the full backup and restoring (truncate the original table and then import data).
-- Data loading in TiDB is related to the status of disks and the whole cluster. When loading data, pay attention to metrics like the disk usage rate of the host, TiClient Error, Backoff, Thread CPU and so on. You can analyze the bottlenecks using these metrics.
+-   [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)ツールは分散データ インポート用に開発されました。データ インポート プロセスでは、パフォーマンス上の理由から完全なトランザクション プロセスが実行されないことに注意してください。したがって、インポート プロセス中にインポートされるデータのACID制約は保証されません。インポートされたデータのACID制約は、インポート プロセス全体が終了してからのみ保証されます。したがって、適用可能なシナリオには、主に新しいデータ (新しいテーブルや新しいインデックスなど) のインポート、または完全なバックアップと復元 (元のテーブルを切り捨ててからデータをインポート) が含まれます。
+-   TiDB へのデータのロードは、ディスクとクラスター全体の状態に関係しています。データをロードするときは、ホストのディスク使用率、TiClient エラー、バックオフ、スレッド CPU などのメトリックに注意してください。これらのメトリックを使用してボトルネックを分析できます。

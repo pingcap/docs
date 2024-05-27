@@ -1,13 +1,13 @@
 ---
 title: DROP TABLE | TiDB SQL Statement Reference
-summary: An overview of the usage of DROP TABLE for the TiDB database.
+summary: TiDB データベースの DROP TABLE の使用法の概要。
 ---
 
-# DROP TABLE
+# テーブルを削除 {#drop-table}
 
-This statement drops a table from the currently selected database. An error is returned if the table does not exist, unless the `IF EXISTS` modifier is used.
+このステートメントは、現在選択されているデータベースからテーブルを削除し`IF EXISTS` 。1 修飾子が使用されていない限り、テーブルが存在しない場合はエラーが返されます。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 DropTableStmt ::=
@@ -24,15 +24,15 @@ TableNameList ::=
     TableName ( ',' TableName )*
 ```
 
-## Drop temporary tables
+## 一時テーブルを削除する {#drop-temporary-tables}
 
-You can use the following syntax to drop ordinary tables and temporary tables:
+通常のテーブルと一時テーブルを削除するには、次の構文を使用できます。
 
-- Use `DROP TEMPORARY TABLE` to drop local temporary tables.
-- Use `DROP GLOBAL TEMPORARY TABLE` to drop global temporary tables.
-- Use `DROP TABLE` to drop ordinary tables or temporary tables.
+-   ローカル一時テーブルを削除するには`DROP TEMPORARY TABLE`使用します。
+-   グローバル一時テーブルを削除するには`DROP GLOBAL TEMPORARY TABLE`使用します。
+-   通常のテーブルまたは一時テーブルを削除するには`DROP TABLE`使用します。
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (a INT);
@@ -62,12 +62,12 @@ mysql> DROP TABLE v1;
 Query OK, 0 rows affected (0.23 sec)
 ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-Currently, `RESTRICT` and `CASCADE` are only supported syntactically.
+現在、 `RESTRICT`と`CASCADE`構文的にのみサポートされています。
 
-## See also
+## 参照 {#see-also}
 
-* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
-* [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
-* [SHOW TABLES](/sql-statements/sql-statement-show-tables.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [表示テーブルの作成](/sql-statements/sql-statement-show-create-table.md)
+-   [テーブルを表示](/sql-statements/sql-statement-show-tables.md)

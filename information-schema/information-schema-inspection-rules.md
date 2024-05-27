@@ -1,59 +1,51 @@
 ---
 title: INSPECTION_RULES
-summary: Learn the `INSPECTION_RULES` information_schema table.
+summary: `INSPECTION_RULES` information_schema テーブルについて学習します。
 ---
 
-# INSPECTION_RULES
+# 検査ルール {#inspection-rules}
 
-The `INSPECTION_RULES` table provides information about which diagnostic tests are run in an inspection result. See [inspection result](/information-schema/information-schema-inspection-result.md) for example usage.
+`INSPECTION_RULES`表には、検査結果で実行される診断テストに関する情報が示されています。使用例については[検査結果](/information-schema/information-schema-inspection-result.md)を参照してください。
 
-> **Note:**
+> **注記：**
 >
-> This table is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
-
-{{< copyable "sql" >}}
+> この表は TiDB Self-Hosted にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
 ```sql
 USE information_schema;
 DESC inspection_rules;
 ```
 
-```
-+---------+--------------+------+------+---------+-------+
-| Field   | Type         | Null | Key  | Default | Extra |
-+---------+--------------+------+------+---------+-------+
-| NAME    | varchar(64)  | YES  |      | NULL    |       |
-| TYPE    | varchar(64)  | YES  |      | NULL    |       |
-| COMMENT | varchar(256) | YES  |      | NULL    |       |
-+---------+--------------+------+------+---------+-------+
-3 rows in set (0.00 sec)
-```
-
-{{< copyable "sql" >}}
+    +---------+--------------+------+------+---------+-------+
+    | Field   | Type         | Null | Key  | Default | Extra |
+    +---------+--------------+------+------+---------+-------+
+    | NAME    | varchar(64)  | YES  |      | NULL    |       |
+    | TYPE    | varchar(64)  | YES  |      | NULL    |       |
+    | COMMENT | varchar(256) | YES  |      | NULL    |       |
+    +---------+--------------+------+------+---------+-------+
+    3 rows in set (0.00 sec)
 
 ```sql
 SELECT * FROM inspection_rules;
 ```
 
-```
-+-----------------+------------+---------+
-| NAME            | TYPE       | COMMENT |
-+-----------------+------------+---------+
-| config          | inspection |         |
-| version         | inspection |         |
-| node-load       | inspection |         |
-| critical-error  | inspection |         |
-| threshold-check | inspection |         |
-| ddl             | summary    |         |
-| gc              | summary    |         |
-| pd              | summary    |         |
-| query-summary   | summary    |         |
-| raftstore       | summary    |         |
-| read-link       | summary    |         |
-| rocksdb         | summary    |         |
-| stats           | summary    |         |
-| wait-events     | summary    |         |
-| write-link      | summary    |         |
-+-----------------+------------+---------+
-15 rows in set (0.00 sec)
-```
+    +-----------------+------------+---------+
+    | NAME            | TYPE       | COMMENT |
+    +-----------------+------------+---------+
+    | config          | inspection |         |
+    | version         | inspection |         |
+    | node-load       | inspection |         |
+    | critical-error  | inspection |         |
+    | threshold-check | inspection |         |
+    | ddl             | summary    |         |
+    | gc              | summary    |         |
+    | pd              | summary    |         |
+    | query-summary   | summary    |         |
+    | raftstore       | summary    |         |
+    | read-link       | summary    |         |
+    | rocksdb         | summary    |         |
+    | stats           | summary    |         |
+    | wait-events     | summary    |         |
+    | write-link      | summary    |         |
+    +-----------------+------------+---------+
+    15 rows in set (0.00 sec)

@@ -1,18 +1,18 @@
 ---
 title: TIDB_TRX
-summary: Learn the `TIDB_TRX` INFORMATION_SCHEMA table.
+summary: `TIDB_TRX` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# TIDB_TRX
+# 翻訳元 {#tidb-trx}
 
-The `TIDB_TRX` table provides information about the transactions currently being executed on the TiDB node.
+`TIDB_TRX`テーブルには、TiDB ノードで現在実行されているトランザクションに関する情報が提供されます。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC TIDB_TRX;
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 +-------------------------+-----------------------------------------------------------------+------+------+---------+-------+
@@ -34,43 +34,43 @@ The output is as follows:
 +-------------------------+-----------------------------------------------------------------+------+------+---------+-------+
 ```
 
-The meaning of each column field in the `TIDB_TRX` table is as follows:
+`TIDB_TRX`表の各列フィールドの意味は次のとおりです。
 
-* `ID`: The transaction ID, which is the `start_ts` (start timestamp) of the transaction.
-* `START_TIME`: The start time of the transaction, which is the physical time corresponding to the `start_ts` of the transaction.
-* `CURRENT_SQL_DIGEST`: The digest of the SQL statement currently being executed in the transaction.
-* `CURRENT_SQL_DIGEST_TEXT`: The normalized form of the SQL statement currently being executed by the transaction, that is, the SQL statement without arguments and format. It corresponds to `CURRENT_SQL_DIGEST`.
-* `STATE`: The current state of the transaction. The possible values ​​include:
-    * `Idle`: The transaction is in an idle state, that is, it is waiting for the user to input a query.
-    * `Running`: The transaction is executing a query.
-    * `LockWaiting`: The transaction is waiting for the pessimistic lock to be acquired. Note that the transaction enters this state at the beginning of the pessimistic locking operation, no matter whether it is blocked by other transactions or not.
-    * `Committing`: The transaction is in the process of commit.
-    * `RollingBack`: The transaction is being rolled back.
-* `WAITING_START_TIME`: When the value of `STATE` is `LockWaiting`, this column shows the start time of the waiting.
-* `MEM_BUFFER_KEYS`: The number of keys written into the memory buffer by the current transaction.
-* `MEM_BUFFER_BYTES`: The total number of key-value bytes written into the memory buffer by the current transaction.
-* `SESSION_ID`: The ID of the session to which this transaction belongs.
-* `USER`: The name of the user who performs the transaction.
-* `DB`: The current default database name of the session in which the transaction is executed.
-* `ALL_SQL_DIGESTS`: The digest list of statements that have been executed by the transaction. The list is shown as a string array in JSON format. Each transaction records at most the first 50 statements. Using the [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests) function, you can convert the information in this column into a list of corresponding normalized SQL statements.
-* `RELATED_TABLE_IDS`: The IDs of the tables, views, and other objects that the transaction accesses.
+-   `ID` : トランザクション ID。トランザクションの`start_ts` (開始タイムスタンプ) です。
+-   `START_TIME` : トランザクションの開始時刻。これは、トランザクションの`start_ts`に対応する物理的な時間です。
+-   `CURRENT_SQL_DIGEST` : トランザクションで現在実行されている SQL ステートメントのダイジェスト。
+-   `CURRENT_SQL_DIGEST_TEXT` : トランザクションによって現在実行されている SQL 文の正規化された形式、つまり引数と形式のない SQL 文。 `CURRENT_SQL_DIGEST`に相当します。
+-   `STATE` : トランザクションの現在の状態。可能な値は次のとおりです:
+    -   `Idle` : トランザクションはアイドル状態です。つまり、ユーザーがクエリを入力するのを待機しています。
+    -   `Running` : トランザクションはクエリを実行しています。
+    -   `LockWaiting` : トランザクションは悲観的ロックの取得を待機しています。トランザクションは、他のトランザクションによってブロックされているかどうかに関係なく、悲観的ロック操作の開始時にこの状態になることに注意してください。
+    -   `Committing` : トランザクションはコミット処理中です。
+    -   `RollingBack` : トランザクションはロールバック中です。
+-   `WAITING_START_TIME` : `STATE`の値が`LockWaiting`の場合、この列には待機の開始時刻が表示されます。
+-   `MEM_BUFFER_KEYS` : 現在のトランザクションによってメモリバッファーに書き込まれたキーの数。
+-   `MEM_BUFFER_BYTES` : 現在のトランザクションによってメモリバッファーに書き込まれたキー値バイトの合計数。
+-   `SESSION_ID` : このトランザクションが属するセッションの ID。
+-   `USER` : トランザクションを実行するユーザーの名前。
+-   `DB` : トランザクションが実行されるセッションの現在のデフォルトのデータベース名。
+-   `ALL_SQL_DIGESTS` : トランザクションによって実行されたステートメントのダイジェスト リスト。リストは JSON 形式の文字列配列として表示されます。各トランザクションは最大で最初の 50 個のステートメントを記録します。2 関数を使用すると、この列の情報[`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)対応する正規化された SQL ステートメントのリストに変換できます。
+-   `RELATED_TABLE_IDS` : トランザクションがアクセスするテーブル、ビュー、およびその他のオブジェクトの ID。
 
-> **Note:**
+> **注記：**
 >
-> * Only users with the [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process) privilege can obtain the complete information in this table. Users without the PROCESS privilege can only query information of the transactions performed by the current user.
-> * The information (SQL digest) in the `CURRENT_SQL_DIGEST` and `ALL_SQL_DIGESTS` columns is the hash value calculated from the normalized SQL statement. The information in the `CURRENT_SQL_DIGEST_TEXT` column and the result returned from the `TIDB_DECODE_SQL_DIGESTS` function are internally queried from the statements summary tables, so it is possible that the corresponding statement cannot be found internally. For the detailed description of SQL digests and the statements summary tables, see [Statement Summary Tables](/statement-summary-tables.md).
-> * The [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests) function call has a high overhead. If the function is called to query historical SQL statements for a large number of transactions, the query might take a long time. If the cluster is large with many concurrent transactions, avoid directly using this function on the `ALL_SQL_DIGEST` column while querying the full table of `TIDB_TRX`. This means to avoid an SQL statement like ``SELECT *, tidb_decode_sql_digests(all_sql_digests) FROM TIDB_TRX``.
-> * Currently the `TIDB_TRX` table does not support showing information of TiDB internal transactions.
+> -   [プロセス](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)権限を持つユーザーのみがこのテーブルの完全な情報を取得できます。PROCESS 権限を持たないユーザーは、現在のユーザーが実行したトランザクションの情報のみを照会できます。
+> -   `CURRENT_SQL_DIGEST`列目と`ALL_SQL_DIGESTS`列目の情報 (SQL ダイジェスト) は`TIDB_DECODE_SQL_DIGESTS` `CURRENT_SQL_DIGEST_TEXT`から返される結果は、文の要約テーブルから内部的に照会されるため、対応する文が内部的に見つからない可能性があります。SQL ダイジェストと文の要約テーブルの詳細については、 [ステートメント要約表](/statement-summary-tables.md)を参照してください。
+> -   [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)関数呼び出しには大きなオーバーヘッドがあります。この関数を呼び出して多数のトランザクションの履歴 SQL ステートメントを照会すると、照会に長い時間がかかる可能性があります。クラスターが大きく、同時トランザクションが多い場合は、 `TIDB_TRX`のテーブル全体を照会するときに、 `ALL_SQL_DIGEST`列でこの関数を直接使用しないでください。つまり、 `SELECT *, tidb_decode_sql_digests(all_sql_digests) FROM TIDB_TRX`のような SQL ステートメントを回避する必要があります。
+> -   現在、 `TIDB_TRX`テーブルは TiDB 内部トランザクションの情報の表示をサポートしていません。
 
-## Example
+## 例 {#example}
 
-View the `TIDB_TRX` table:
+`TIDB_TRX`テーブルをビュー。
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.TIDB_TRX\G
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 *************************** 1. row ***************************
@@ -102,13 +102,13 @@ CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ?
 2 rows in set (0.01 sec)
 ```
 
-From the query result of this example, you can see that: the current node has two on-going transactions. One transaction is in the idle state (`STATE` is `Idle` and `CURRENT_SQL_DIGEST` is `NULL`), and this transaction has executed 3 statements (there are three records in the `ALL_SQL_DIGESTS` list, which are the digests of the three SQL statements that have been executed). Another transaction is executing a statement and waiting for the lock (`STATE` is `LockWaiting` and `WAITING_START_TIME` shows the start time of the waiting lock). The transaction has executed 2 statements, and the statement currently being executed is in the form of ``"update `t` set `v` = `v` + ? where `id` = ?"``.
+この例のクエリ結果から、現在のノードには 2 つのトランザクションが進行中であることがわかります。 1 つのトランザクションはアイドル状態 ( `STATE`は`Idle` 、 `CURRENT_SQL_DIGEST`は`NULL` ) で、このトランザクションは 3 つのステートメントを実行しました ( `ALL_SQL_DIGESTS`リストには 3 つのレコードがあり、これは実行された 3 つの SQL ステートメントのダイジェストです)。 別のトランザクションはステートメントを実行してロックを待機しています ( `STATE`は`LockWaiting`で、 `WAITING_START_TIME`待機中のロックの開始時間を示しています)。 トランザクションは 2 つのステートメントを実行し、現在実行中のステートメントは``"update `t` set `v` = `v` + ? where `id` = ?"``の形式になっています。
 
 ```sql
 SELECT id, all_sql_digests, tidb_decode_sql_digests(all_sql_digests) AS all_sqls FROM INFORMATION_SCHEMA.TIDB_TRX\G
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 *************************** 1. row ***************************
@@ -121,18 +121,18 @@ all_sql_digests: ["e6f07d43b5c21db0fbb9a31feac2dc599787763393dd5acbfad80e247eb02
        all_sqls: ["begin","update `t` set `v` = `v` + ? where `id` = ?"]
 ```
 
-This query calls the [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests) function on the `ALL_SQL_DIGESTS` column of the `TIDB_TRX` table, and converts the SQL digest array into an array of normalized SQL statement through the system internal query. This helps you visually obtain the information of the statements that have been historically executed by the transaction. However, note that the preceding query scans the entire table of `TIDB_TRX` and calls the `TIDB_DECODE_SQL_DIGESTS` function for each row. Calling the `TIDB_DECODE_SQL_DIGESTS` function has a high overhead. Therefore, if many concurrent transactions exist in the cluster, try to avoid this type of query.
+このクエリは、 `TIDB_TRX`テーブルの`ALL_SQL_DIGESTS`列で[`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)関数を呼び出し、システム内部クエリを通じて SQL ダイジェスト配列を正規化された SQL ステートメントの配列に変換します。これにより、トランザクションによって過去に実行されたステートメントの情報を視覚的に取得できます。ただし、前のクエリは`TIDB_TRX`のテーブル全体をスキャンし、各行に対して`TIDB_DECODE_SQL_DIGESTS`関数を呼び出すことに注意してください。11 関数の呼び出しには大きなオーバーヘッドがあります。したがって、クラスター内に多数の同時トランザクションが`TIDB_DECODE_SQL_DIGESTS`する場合は、このタイプのクエリを避けるようにしてください。
 
-## CLUSTER_TIDB_TRX
+## クラスター_TIDB_TRX {#cluster-tidb-trx}
 
-The `TIDB_TRX` table only provides information about the transactions that are being executed on a single TiDB node. If you want to view the information of the transactions that are being executed on all TiDB nodes in the entire cluster, you need to query the `CLUSTER_TIDB_TRX` table. Compared with the query result of the `TIDB_TRX` table, the query result of the `CLUSTER_TIDB_TRX` table includes an extra `INSTANCE` field. The `INSTANCE` field displays the IP address and port of each node in the cluster, which is used to distinguish the TiDB nodes where the transactions are located.
+`TIDB_TRX`テーブルは、単一の TiDB ノードで実行されているトランザクションに関する情報のみを提供します。クラスター全体のすべての TiDB ノードで実行されているトランザクションの情報を表示するには、 `CLUSTER_TIDB_TRX`テーブルをクエリする必要があります。5 テーブルのクエリ結果と比較すると、 `CLUSTER_TIDB_TRX`テーブルのクエリ結果`INSTANCE`は追加の`INSTANCE`フィールドが含まれます。11 フィールドには、クラスター内の各ノードの IP アドレスとポートが`TIDB_TRX`され、トランザクションが配置されている TiDB ノードを区別するために使用されます。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC CLUSTER_TIDB_TRX;
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 +-------------------------+-----------------------------------------------------------------+------+------+---------+-------+

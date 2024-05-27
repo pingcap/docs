@@ -1,37 +1,37 @@
 ---
 title: TiDB 2.0.3 Release Notes
-summary: TiDB 2.0.3 was released on June 1, 2018, with improvements in system compatibility and stability. It includes various fixes and optimizations for TiDB, PD, and TiKV. Some highlights are support for modifying log level online, fixing issues with unique index and `ON DUPLICATE KEY UPDATE`, and addressing panic issues in specific conditions.
+summary: TiDB 2.0.3 は、システムの互換性と安定性の向上を伴い、2018 年 6 月 1 日にリリースされました。これには、TiDB、PD、および TiKV のさまざまな修正と最適化が含まれています。主なハイライトとしては、オンラインでのログ レベルの変更のサポート、一意のインデックスと `ON DUPLICATE KEY UPDATE` の問題の修正、および特定の状況でのpanicの問題への対処などがあります。
 ---
 
-# TiDB 2.0.3 Release Notes
+# TiDB 2.0.3 リリースノート {#tidb-2-0-3-release-notes}
 
-On June 1, 2018, TiDB 2.0.3 is released. Compared with TiDB 2.0.2, this release has great improvement in system compatibility and stability.
+2018 年 6 月 1 日に、TiDB 2.0.3 がリリースされました。TiDB 2.0.2 と比較して、このリリースではシステムの互換性と安定性が大幅に向上しています。
 
-## TiDB
+## ティビ {#tidb}
 
-- Support modifying the log level online
-- Support the `COM_CHANGE_USER` command
-- Support using the `TIME` type parameters under the binary protocol
-- Optimize the cost estimation of query conditions with the `BETWEEN` expression
-- Do not display the `FOREIGN KEY` information in the result of `SHOW CREATE TABLE`
-- Optimize the cost estimation for queries with the `LIMIT` clause
-- Fix the issue about the `YEAR` type as the unique index
-- Fix the issue about `ON DUPLICATE KEY UPDATE` in conditions without the unique index
-- Fix the compatibility issue of the `CEIL` function
-- Fix the accuracy issue of the `DIV` calculation in the `DECIMAL` type
-- Fix the false alarm of `ADMIN CHECK TABLE`
-- Fix the panic issue of `MAX`/`MIN` under specific expression parameters
-- Fix the issue that the result of `JOIN` is null in special conditions
-- Fix the `IN` expression issue when building and querying Range
-- Fix a Range calculation issue when using `Prepare` to query and `Plan Cache` is enabled
-- Fix the issue that the Schema information is frequently loaded in abnormal conditions
+-   オンラインでのログレベルの変更をサポート
+-   `COM_CHANGE_USER`コマンドをサポートする
+-   バイナリプロトコルでの`TIME`型パラメータの使用をサポート
+-   `BETWEEN`式でクエリ条件のコスト推定を最適化する
+-   `SHOW CREATE TABLE`の結果に`FOREIGN KEY`情報を表示しない
+-   `LIMIT`句のクエリのコスト見積もりを最適化する
+-   `YEAR`型を一意のインデックスとして使用する問題を修正
+-   ユニークインデックスのない条件での`ON DUPLICATE KEY UPDATE`に関する問題を修正
+-   `CEIL`関数の互換性問題を修正
+-   `DECIMAL`型における`DIV`計算の精度の問題を修正
+-   `ADMIN CHECK TABLE`の誤報を修正
+-   特定の式パラメータで`MAX`のpanic問題`MIN`修正
+-   特殊な条件で`JOIN`の結果が null になる問題を修正
+-   範囲の構築とクエリ時の`IN`式の問題を修正
+-   `Prepare`を使用してクエリを実行し、 `Plan Cache`が有効になっている場合の範囲計算の問題を修正しました。
+-   異常な状況でスキーマ情報が頻繁に読み込まれる問題を修正
 
-## PD
+## PD {#pd}
 
-- Fix the panic issue when collecting hot-cache metrics in specific conditions
-- Fix the issue about scheduling of the obsolete Regions
+-   特定の条件下でホットキャッシュメトリックを収集する際のpanic問題を修正
+-   廃止されたリージョンのスケジュールに関する問題を修正
 
-## TiKV
+## ティクヴ {#tikv}
 
-- Fix the bug that the learner flag mistakenly reports to PD
-- Report an error instead of getting a result if `divisor/dividend` is 0 in `do_div_mod`
+-   学習者フラグが誤ってPDに報告されるバグを修正
+-   `do_div_mod`のうち`divisor/dividend`が 0 の場合、結果を取得する代わりにエラーを報告します。

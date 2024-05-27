@@ -1,22 +1,22 @@
 ---
 title: Filter DML Events Using SQL Expressions
-summary: Learn how to filter DML events using SQL expressions.
+summary: SQL 式を使用して DML イベントをフィルター処理する方法を学習します。
 ---
 
-# Filter DML Events Using SQL Expressions
+# SQL 式を使用して DML イベントをフィルタリングする {#filter-dml-events-using-sql-expressions}
 
-This document introduces how to filter binlog events using SQL expressions when you use DM to perform continuous incremental data replication. For the detailed replication instruction, refer to the following documents:
+このドキュメントでは、DM を使用して継続的な増分データ レプリケーションを実行するときに、SQL 式を使用してbinlogイベントをフィルター処理する方法を紹介します。詳細なレプリケーション手順については、次のドキュメントを参照してください。
 
-- [Migrate Small Datasets from MySQL to TiDB](/migrate-small-mysql-to-tidb.md)
-- [Migrate Large Datasets from MySQL to TiDB](/migrate-large-mysql-to-tidb.md)
-- [Migrate and Merge MySQL Shards of Small Datasets to TiDB](/migrate-small-mysql-shards-to-tidb.md)
-- [Migrate and Merge MySQL Shards of Large Datasets to TiDB](/migrate-large-mysql-shards-to-tidb.md)
+-   [小規模データセットを MySQL から TiDB に移行する](/migrate-small-mysql-to-tidb.md)
+-   [大規模なデータセットをMySQLからTiDBに移行する](/migrate-large-mysql-to-tidb.md)
+-   [小さなデータセットの MySQL シャードを TiDB に移行してマージする](/migrate-small-mysql-shards-to-tidb.md)
+-   [大規模データセットの MySQL シャードを TiDB に移行してマージする](/migrate-large-mysql-shards-to-tidb.md)
 
-When performing incremental data replication, you can use the [Binlog Event Filter](/filter-binlog-event.md) to filter certain types of binlog events. For example, you can choose not to replicate `DELETE` events to the downstream for the purposes like archiving and auditing. However, the Binlog Event Filter cannot determine whether to filter the `DELETE` event of a row that requires finer granularity.
+増分データ レプリケーションを実行する場合、 [Binlogイベントフィルター](/filter-binlog-event.md)使用して特定の種類のbinlogイベントをフィルターできます。たとえば、アーカイブや監査などの目的で、 `DELETE`イベントをダウンストリームにレプリケートしないように選択できます。ただし、 Binlogイベント フィルターでは、より細かい粒度が必要な行の`DELETE`のイベントをフィルターするかどうかを判断できません。
 
-To address the issue, since v2.0.5, DM supports using `binlog value filter` in incremental data replication to filter data. Among the DM-supported and `ROW`-formatted binlog, the binlog events carry values of all columns, and you can configure SQL expressions based on these values. If the expression calculates a row change as `TRUE`, DM does not replicate this row change to the downstream.
+この問題に対処するため、バージョン 2.0.5 以降、DM は増分データ レプリケーションで`binlog value filter`使用してデータをフィルター処理することをサポートしています。DM がサポートする`ROW`形式のbinlogのうち、 binlogイベントはすべての列の値を保持し、これらの値に基づいて SQL 式を構成できます。式が行の変更を`TRUE`として計算した場合、DM はこの行の変更をダウンストリームに複製しません。
 
-Similar to [Binlog Event Filter](/filter-binlog-event.md), you need to configure `binlog value filter` in the task configuration file. For details, see the following configuration example. For the advanced task configuration and the description, refer to [DM advanced task configuration file](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced).
+[Binlogイベントフィルター](/filter-binlog-event.md)と同様に、タスク設定ファイルで`binlog value filter`設定する必要があります。詳細については、次の設定例を参照してください。高度なタスク設定と説明については、 [DM 高度なタスク構成ファイル](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)を参照してください。
 
 ```yaml
 name: test
@@ -33,15 +33,15 @@ expression-filter:
     insert-value-expr: "c % 2 = 0"
 ```
 
-In the above configuration example, the `even_c` rule is configured and referenced by the data source `mysql-replica-01`. According to this rule, for the `tb1` table in the `expr_filter` schema, when an even number is inserted into the `c` column (`c % 2 = 0`), this `insert` statement is not replicated to the downstream. The following example shows the effect of this rule.
+上記の設定例では、 `even_c`ルールが設定され、データ ソース`mysql-replica-01`によって参照されています。このルールによれば、 `expr_filter`スキーマの`tb1`テーブルで、 `c`列 ( `c % 2 = 0` ) に偶数が挿入されると、この`insert`ステートメントは下流に複製されません。次の例は、このルールの効果を示しています。
 
-Incrementally insert the following data in the upstream data source:
+次のデータをアップストリーム データ ソースに増分的に挿入します。
 
 ```sql
 INSERT INTO tbl(id, c) VALUES (1, 1), (2, 2), (3, 3), (4, 4);
 ```
 
-Then query the `tb1` table on downstream. You can see that only the rows with odd numbers on `c` are replicated.
+次に、ダウンストリームの`tb1`テーブルをクエリします。3 `c`奇数行のみがレプリケートされていることがわかります。
 
 ```sql
 MySQL [test]> select * from tbl;
@@ -54,27 +54,27 @@ MySQL [test]> select * from tbl;
 2 rows in set (0.001 sec)
 ```
 
-## Configuration parameters and description
+## コンフィグレーションパラメータと説明 {#configuration-parameters-and-description}
 
-- `schema`: The name of the upstream schema to match. Wildcard matching or regular matching is not supported.
-- `table`: The name of the upstream table to match. Wildcard matching or regular matching is not supported.
-- `insert-value-expr`: Configures an expression that takes effect on values carried by the `INSERT` type binlog events (WRITE_ROWS_EVENT). You cannot use this expression together with `update-old-value-expr`, `update-new-value-expr` or `delete-value-expr` in the same configuration item.
-- `update-old-value-expr`: Configures an expression that takes effect on the old values carried by the `UPDATE` type binlog events (UPDATE_ROWS_EVENT). You cannot use this expression together with `insert-value-expr` or `delete-value-expr` in the same configuration item.
-- `update-new-value-expr`: Configures an expression that takes effect on the new values carried by the `UPDATE` type binlog events (UPDATE_ROWS_EVENT). You cannot use this expression together with `insert-value-expr` or `delete-value-expr` in the same configuration item.
-- `delete-value-expr`: Configures an expression that takes effect on values carried by the `DELETE` type binlog events (DELETE_ROWS_EVENT). You cannot use this expression together with `insert-value-expr`, `update-old-value-expr` or `update-new-value-expr`.
+-   `schema` : 一致するアップストリーム スキーマの名前。ワイルドカード一致または通常の一致はサポートされていません。
+-   `table` : 一致させるアップストリーム テーブルの名前。ワイルドカード一致または通常の一致はサポートされていません。
+-   `insert-value-expr` : `INSERT`種類のbinlogイベント (WRITE_ROWS_EVENT) によって運ばれる値に影響を及ぼす式を設定します。この式`update-new-value-expr`同じ設定項目内で`update-old-value-expr` 、または`delete-value-expr`と一緒に使用することはできません。
+-   `update-old-value-expr` : `UPDATE`種類のbinlogイベント (UPDATE_ROWS_EVENT) によって保持される古い値に有効になる式を構成します。この式を同じ構成項目で`insert-value-expr`または`delete-value-expr`と一緒に使用することはできません。
+-   `update-new-value-expr` : `UPDATE`種類のbinlogイベント (UPDATE_ROWS_EVENT) によって伝達される新しい値に有効になる式を構成します。この式を同じ構成項目で`insert-value-expr`または`delete-value-expr`と一緒に使用することはできません。
+-   `delete-value-expr` : `DELETE`種類のbinlogイベント (DELETE_ROWS_EVENT) によって伝達される値に影響を及ぼす式を設定します。この式は`insert-value-expr` 、 `update-old-value-expr` 、または`update-new-value-expr`と一緒に使用することはできません。
 
-> **Note:**
+> **注記：**
 >
-> - You can configure `update-old-value-expr` and `update-new-value-expr` together.
-> - When `update-old-value-expr` and `update-new-value-expr` are configured together, the rows whose "update + old values" meet `update-old-value-expr` **and** whose "update + new values" meet `update-new-value-expr` are filtered.
-> - When one of `update-old-value-expr` and `update-new-value-expr` is configured, the configured expression determines whether to filter the **entire row change**, which means that the deletion of old values and the insertion of new values are filtered as a whole.
+> -   `update-old-value-expr`と`update-new-value-expr`一緒に設定できます。
+> -   `update-old-value-expr`と`update-new-value-expr`が一緒に構成されている場合、「更新 + 古い値」が`update-old-value-expr`に一致し**、** 「更新 + 新しい値」が`update-new-value-expr`に一致する行がフィルタリングされます。
+> -   `update-old-value-expr`と`update-new-value-expr`のいずれかが設定されている場合、設定された式によって**行の変更全体**をフィルタリングするかどうかが決定されます。つまり、古い値の削除と新しい値の挿入が全体としてフィルタリングされます。
 
-You can use the SQL expression on one column or on multiple columns. You can also use the SQL functions supported by TiDB, such as `c % 2 = 0`, `a*a + b*b = c*c`, and `ts > NOW()`.
+SQL 式は 1 つの列または複数の列で使用できます。また、 `c % 2 = 0` 、 `a*a + b*b = c*c` 、 `ts > NOW()`など、TiDB でサポートされている SQL関数を使用することもできます。
 
-The `TIMESTAMP` default time zone is the time zone specified in the task configuration file. The default value is the time zone of the downstream. You can explicitly specify the time zone in a way like `c_timestamp = '2021-01-01 12:34:56.5678+08:00'`.
+`TIMESTAMP`デフォルトのタイムゾーンは、タスク構成ファイルで指定されたタイムゾーンです。デフォルト値はダウンストリームのタイムゾーンです。 `c_timestamp = '2021-01-01 12:34:56.5678+08:00'`のような方法でタイムゾーンを明示的に指定できます。
 
-You can configure multiple filtering rules under the `expression-filter` configuration item. The upstream data source references the required rule in `expression-filters` to make it effective. When multiple rules are used, if **any** one of the rules are matched, the entire row change is filtered.
+`expression-filter`構成項目の下に複数のフィルタリング ルールを設定できます。上流データ ソースは、 `expression-filters`の必要なルールを参照して有効にします。複数のルールを使用する場合、**いずれか**のルールが一致すると、行の変更全体がフィルタリングされます。
 
-> **Note:**
+> **注記：**
 >
-> Configuring too many expression filtering rules increases the calculation overhead of DM and slows down the data replication.
+> 式フィルタリング ルールを多すぎる数に設定すると、DM の計算オーバーヘッドが増加し、データのレプリケーションが遅くなります。

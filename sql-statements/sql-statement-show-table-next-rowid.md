@@ -1,27 +1,27 @@
 ---
 title: SHOW TABLE NEXT_ROW_ID
-summary: Learn the usage of `SHOW TABLE NEXT_ROW_ID` in TiDB.
+summary: TiDB での `SHOW TABLE NEXT_ROW_ID` の使用方法を学びます。
 ---
 
-# SHOW TABLE NEXT_ROW_ID
+# テーブルNEXT_ROW_IDを表示 {#show-table-next-row-id}
 
-`SHOW TABLE NEXT_ROW_ID` is used to show the details of some special columns of a table, including:
+`SHOW TABLE NEXT_ROW_ID`は、次のようなテーブルの特別な列の詳細を表示するために使用されます。
 
-* [`AUTO_INCREMENT`](/auto-increment.md) column automatically created by TiDB, namely, `_tidb_rowid` column.
-* `AUTO_INCREMENT` column created by users.
-* [`AUTO_RANDOM`](/auto-random.md) column created by users.
-* [`SEQUENCE`](/sql-statements/sql-statement-create-sequence.md) created by users.
+-   TiDB によって自動的に作成された[`AUTO_INCREMENT`](/auto-increment.md)列、つまり`_tidb_rowid`列。
+-   ユーザーが作成した列は`AUTO_INCREMENT` 。
+-   ユーザーが作成した列は[`AUTO_RANDOM`](/auto-random.md) 。
+-   ユーザーが作成した[`SEQUENCE`](/sql-statements/sql-statement-create-sequence.md) 。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowTableNextRowIDStmt ::=
     "SHOW" "TABLE" (SchemaName ".")? TableName "NEXT_ROW_ID"
 ```
 
-## Examples
+## 例 {#examples}
 
-For newly created tables, `NEXT_GLOBAL_ROW_ID` is `1` because no Row ID is allocated.
+新しく作成されたテーブルの場合、行 ID が割り当てられていないため、 `NEXT_GLOBAL_ROW_ID` `1`なります。
 
 ```sql
 CREATE TABLE t(a int);
@@ -38,7 +38,7 @@ SHOW TABLE t NEXT_ROW_ID;
 1 row in set (0.00 sec)
 ```
 
-Data have been written to the table. The TiDB server that inserts the data allocates and caches 30000 IDs at once. Thus, NEXT_GLOBAL_ROW_ID is 30001 now. The number of IDs is controlled by [`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache).
+テーブルにデータが書き込まれました。データを挿入する TiDBサーバーは、一度に 30000 個の ID を割り当ててキャッシュします。したがって、現在 NEXT_GLOBAL_ROW_ID は 30001 です。ID の数は[`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache)で制御されます。
 
 ```sql
 INSERT INTO t VALUES (), (), ();
@@ -56,12 +56,12 @@ SHOW TABLE t NEXT_ROW_ID;
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## 参照 {#see-also}
 
-* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
-* [AUTO_RANDOM](/auto-random.md)
-* [CREATE_SEQUENCE](/sql-statements/sql-statement-create-sequence.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [自動ランダム](/auto-random.md)
+-   [シーケンスの作成](/sql-statements/sql-statement-create-sequence.md)

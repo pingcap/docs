@@ -1,19 +1,19 @@
 ---
 title: TIFLASH_SEGMENTS
-summary: Learn the `TIFLASH_SEGMENTS` information_schema table.
+summary: `TIFLASH_SEGMENTS` information_schema テーブルについて学習します。
 ---
 
-# TIFLASH_SEGMENTS
+# TIFLASH_セグメント {#tiflash-segments}
 
-> **Warning:**
+> **警告：**
 >
-> Do not use this table in production environments, as the fields of the table are unstable, and subject to change in new releases of TiDB, without prior notice.
+> このテーブルは不安定であり、TiDB の新しいリリースで予告なしに変更される可能性があるため、本番環境では使用しないでください。
 
-> **Note:**
+> **注記：**
 >
-> This table is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> このテーブルは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
-The `TIFLASH_SEGMENTS` table provides statistical information about data tables in TiFlash.
+`TIFLASH_SEGMENTS`表は、 TiFlashのデータ テーブルに関する統計情報を提供します。
 
 ```sql
 USE information_schema;
@@ -61,38 +61,38 @@ DESC tiflash_segments;
 33 rows in set (0.00 sec)
 ```
 
-Fields in the `TIFLASH_SEGMENTS` table are described as follows:
+`TIFLASH_SEGMENTS`テーブル内のフィールドは次のように説明されます。
 
-- `DATABASE`: Database name in TiFlash. The segment belongs to a table in this database.
-- `TABLE`: Table name in TiFlash. The segment belongs to this table.
-- `TIDB_DATABASE`: Database name in TiDB. The segment belongs to a table in this database.
-- `TIDB_TABLE`: Table name in TiDB. The segment belongs to this table.
-- `TABLE_ID`: The internal ID of the table to which the segment belongs. This ID is unique within a TiDB cluster.
-- `IS_TOMBSTONE`: Indicates whether the table the segment belongs to can be recycled. `1` indicates that the table can be recycled. `0` indicates that the table is in a normal state.
-- `SEGMENT_ID`: Segment ID, which is unique within a table.
-- `RANGE`: The range of data that the segment contains.
-- `EPOCH`: The updated version of the segment. The version number of each segment increases monotonically.
-- `ROWS`: The total number of rows in the segment.
-- `SIZE`: The total size of the segment data (in bytes).
-- `DELTA_RATE`: The ratio of the total number of rows in the Delta layer to that in the segment.
-- `DELTA_MEMTABLE_ROWS`: The total number of cached rows in the Delta layer.
-- `DELTA_MEMTABLE_SIZE`: The total size of the data cached in the Delta layer (in bytes).
-- `DELTA_MEMTABLE_COLUMN_FILES`: The number of Column Files cached in the Delta layer.
-- `DELTA_MEMTABLE_DELETE_RANGES`: The number of Delete Ranges cached in the Delta layer.
-- `DELTA_PERSISTED_PAGE_ID`: The ID of the data stored on a disk in the Delta layer.
-- `DELTA_PERSISTED_ROWS`: The total number of rows of persisted data in the Delta layer.
-- `DELTA_PERSISTED_SIZE`: The total size of the persisted data in the Delta layer (in bytes).
-- `DELTA_PERSISTED_COLUMN_FILES`: The number of persisted Column Files in the Delta layer.
-- `DELTA_PERSISTED_DELETE_RANGES`: The number of persisted Delete Ranges in the Delta layer.
-- `DELTA_CACHE_SIZE`: The size of the cache in the Delta layer (in bytes).
-- `DELTA_INDEX_SIZE`: The size of the indexes in the Delta layer (in bytes).
-- `STABLE_PAGE_ID`: The disk storage ID of the data in the Stable layer.
-- `STABLE_ROWS`: The total number of rows in the Stable layer.
-- `STABLE_SIZE`: The total size of the data in the Stable layer (in bytes).
-- `STABLE_DMFILES`: The number of DMFiles in the Stable layer.
-- `STABLE_DMFILES_ID_0`: The disk storage ID of the first DMFile in the Stable layer.
-- `STABLE_DMFILES_ROWS`: The total number of rows in the DMFile in the Stable layer.
-- `STABLE_DMFILES_SIZE`: The total size of the data in the DMFile in the Stable layer (in bytes).
-- `STABLE_DMFILES_SIZE_ON_DISK`: The disk space occupied by the DMFile in the Stable layer (in bytes).
-- `STABLE_DMFILES_PACKS`: The number of Packs in the DMFile in the Stable layer.
-- `TIFLASH_INSTANCE`: The address of the TiFlash instance.
+-   `DATABASE` : TiFlash内のデータベース名。セグメントはこのデータベース内のテーブルに属します。
+-   `TABLE` : TiFlash内のテーブル名。セグメントはこのテーブルに属します。
+-   `TIDB_DATABASE` : TiDB 内のデータベース名。セグメントはこのデータベース内のテーブルに属します。
+-   `TIDB_TABLE` : TiDB 内のテーブル名。セグメントはこのテーブルに属します。
+-   `TABLE_ID` : セグメントが属するテーブルの内部 ID。この ID は TiDB クラスター内で一意です。
+-   `IS_TOMBSTONE` : セグメントが属するテーブルがリサイクル可能かどうかを示します`1`はテーブルがリサイクル可能であることを示します。4 `0`テーブルが通常の状態であることを示します。
+-   `SEGMENT_ID` : テーブル内で一意のセグメント ID。
+-   `RANGE` : セグメントに含まれるデータの範囲。
+-   `EPOCH` : セグメントの更新されたバージョン。各セグメントのバージョン番号は単調に増加します。
+-   `ROWS` : セグメント内の行の合計数。
+-   `SIZE` : セグメントデータの合計サイズ（バイト単位）。
+-   `DELTA_RATE` : デルタレイヤーの合計行数とセグメントの合計行数の比率。
+-   `DELTA_MEMTABLE_ROWS` : デルタレイヤーにキャッシュされた行の合計数。
+-   `DELTA_MEMTABLE_SIZE` : デルタレイヤーにキャッシュされたデータの合計サイズ (バイト単位)。
+-   `DELTA_MEMTABLE_COLUMN_FILES` : デルタレイヤーにキャッシュされるカラムファイルの数。
+-   `DELTA_MEMTABLE_DELETE_RANGES` : デルタレイヤーにキャッシュされた削除範囲の数。
+-   `DELTA_PERSISTED_PAGE_ID` : デルタレイヤーのディスクに保存されているデータの ID。
+-   `DELTA_PERSISTED_ROWS` : デルタレイヤーに保存されたデータの行の合計数。
+-   `DELTA_PERSISTED_SIZE` : Deltaレイヤーに保持されるデータの合計サイズ (バイト単位)。
+-   `DELTA_PERSISTED_COLUMN_FILES` : デルタレイヤーに保持されるカラムファイルの数。
+-   `DELTA_PERSISTED_DELETE_RANGES` : デルタレイヤーに保持される削除範囲の数。
+-   `DELTA_CACHE_SIZE` : デルタレイヤーのキャッシュのサイズ (バイト単位)。
+-   `DELTA_INDEX_SIZE` : デルタレイヤー内のインデックスのサイズ (バイト単位)。
+-   `STABLE_PAGE_ID` : 安定レイヤー内のデータのディスクstorageID。
+-   `STABLE_ROWS` : 安定レイヤー内の行の合計数。
+-   `STABLE_SIZE` : 安定レイヤーのデータの合計サイズ (バイト単位)。
+-   `STABLE_DMFILES` : 安定レイヤー内の DMFiles の数。
+-   `STABLE_DMFILES_ID_0` : 安定レイヤーの最初の DMFile のディスクstorageID。
+-   `STABLE_DMFILES_ROWS` : 安定レイヤーの DMFile 内の行の合計数。
+-   `STABLE_DMFILES_SIZE` : 安定レイヤーの DMFile 内のデータの合計サイズ (バイト単位)。
+-   `STABLE_DMFILES_SIZE_ON_DISK` : 安定レイヤーで DMFile が占有するディスク領域 (バイト単位)。
+-   `STABLE_DMFILES_PACKS` : 安定レイヤーの DMFile 内のパックの数。
+-   `TIFLASH_INSTANCE` : TiFlashインスタンスのアドレス。

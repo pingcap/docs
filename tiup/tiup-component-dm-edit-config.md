@@ -1,36 +1,36 @@
 ---
 title: tiup dm edit-config
-summary: The `tiup dm edit-config` command allows you to modify the cluster service configuration after deployment. You can use an editor to modify the topology file of the specified cluster. Note that you cannot add or delete machines when modifying the configuration. After executing the command, the configuration is modified only on the control machine, and you need to execute the `tiup dm reload` command to reload the configuration.
+summary: `tiup dm edit-config` コマンドを使用すると、デプロイメント後にクラスター サービスの設定を変更できます。エディターを使用して、指定したクラスターのトポロジ ファイルを変更することができます。構成を変更するときに、マシンを追加または削除することはできないことに注意してください。コマンドを実行した後、構成は制御マシンでのみ変更されるため、`tiup dm reloadコマンドを実行して構成を再読み込みする必要があります。
 ---
 
-# tiup dm edit-config
+# tiup dm 編集設定 {#tiup-dm-edit-config}
 
-If you need to modify the cluster service configuration after the cluster is deployed, you can use the `tiup dm edit-config` command that starts an editor for you to modify the [topology file](/tiup/tiup-dm-topology-reference.md). of the specified cluster. This editor is specified in the `$EDITOR` environment variable by default. If the `$EDITOR` environment variable does not exist, the `vi` editor is used.
+クラスターのデプロイ後にクラスター サービス構成を変更する必要がある場合は、指定したクラスターの[トポロジファイル](/tiup/tiup-dm-topology-reference.md) . を変更するためのエディターを起動する`tiup dm edit-config`コマンドを使用できます。このエディターは、デフォルトで`$EDITOR`環境変数に指定されています。 `$EDITOR`環境変数が存在しない場合は、 `vi`エディターが使用されます。
 
-> **Note:**
+> **注記：**
 >
-> + When you modify the configuration, you cannot add or delete machines. For how to add machines, see [Scale out a cluster](/tiup/tiup-component-dm-scale-out.md). For how to delete machines, see [Scale in a cluster](/tiup/tiup-component-dm-scale-in.md).
-> + After you execute the `tiup dm edit-config` command, the configuration is modified only on the control machine. Then you need to execute the `tiup dm reload` command to reload the configuration.
+> -   構成を変更すると、マシンの追加や削除はできなくなります。マシンの追加方法については[クラスターをスケールアウトする](/tiup/tiup-component-dm-scale-out.md)を参照してください。マシンの削除方法については[クラスターのスケールイン](/tiup/tiup-component-dm-scale-in.md)を参照してください。
+> -   `tiup dm edit-config`コマンドを実行すると、コントロール マシンでのみ構成が変更されます。その後、 `tiup dm reload`コマンドを実行して構成を再読み込みする必要があります。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm edit-config <cluster-name> [flags]
 ```
 
-`<cluster-name>`: the cluster to operate on.
+`<cluster-name>` : 操作するクラスター。
 
-## Option
+## オプション {#option}
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- Default: false
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   デフォルト: false
 
-## Output
+## 出力 {#output}
 
-- Normally, no output.
-- If you have mistakenly modified the fields that cannot be modified, when you save the file, an error is reported, reminding you to edit the file again. For the fields that cannot be modified, see [the topology file](/tiup/tiup-dm-topology-reference.md).
+-   通常は出力されません。
+-   変更できないフィールドを誤って変更した場合、ファイルを保存するときにエラーが報告され、ファイルを再度編集するように通知されます。変更できないフィールドについては、 [トポロジファイル](/tiup/tiup-dm-topology-reference.md)参照してください。
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

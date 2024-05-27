@@ -1,90 +1,90 @@
 ---
 title: TiDB Database Schema Design Overview
-summary: Learn the basics on TiDB database schema design.
+summary: TiDB データベース スキーマ設計の基礎を学びます。
 ---
 
-# TiDB Database Schema Design Overview
+# TiDB データベース スキーマ設計の概要 {#tidb-database-schema-design-overview}
 
-This document provides the basics of TiDB database schema design, including the objects in TiDB, access control, database schema changes, and object limitations.
+このドキュメントでは、TiDB 内のオブジェクト、アクセス制御、データベース スキーマの変更、オブジェクトの制限など、TiDB データベース スキーマ設計の基本について説明します。
 
-In the subsequent documents, [Bookshop](/develop/dev-guide-bookshop-schema-design.md) will be taken as an example to show you how to design a database and perform data read and write operations in a database.
+以降のドキュメントでは、 [書店](/develop/dev-guide-bookshop-schema-design.md)例に、データベースを設計し、データベース内でデータの読み取りおよび書き込み操作を実行する方法を説明します。
 
-## Objects in TiDB
+## TiDB 内のオブジェクト {#objects-in-tidb}
 
-To distinguish some general terms, here is a brief agreement on the terms used in TiDB:
+いくつかの一般的な用語を区別するために、TiDB で使用される用語に関する簡単な合意を次に示します。
 
-- To avoid confusion with the generic term [database](https://en.wikipedia.org/wiki/Database), **database** in this document refers to a logical object, **TiDB** refers to TiDB itself, and **cluster** refers to a deployed instance of TiDB.
+-   一般的な用語[データベース](https://en.wikipedia.org/wiki/Database)との混同を避けるため、このドキュメントでは、**データベース**は論理オブジェクトを指し、 **TiDB**は TiDB 自体を指し、**クラスターは**TiDB のデプロイされたインスタンスを指します。
 
-- TiDB uses MySQL-compatible syntax, in which **schema** means the generic term [schema](https://en.wiktionary.org/wiki/schema) instead of a logical object in a database. For more information, see [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/create-database.html). Make sure that you note this difference if you are migrating from databases that have schemas as logical objects (for example, [PostgreSQL](https://www.postgresql.org/docs/current/ddl-schemas.html), [Oracle](https://docs.oracle.com/en/database/oracle/oracle-database/21/tdddg/creating-managing-schema-objects.html), and [Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/create-a-database-schema?view=sql-server-ver15)).
+-   TiDB は MySQL 互換の構文を使用します。この構文では、**スキーマは**データベース内の論理オブジェクトではなく、一般的な用語[スキーマ](https://en.wiktionary.org/wiki/schema)を意味します。詳細については、 [MySQL ドキュメント](https://dev.mysql.com/doc/refman/8.0/en/create-database.html)を参照してください。論理オブジェクトとしてスキーマを持つデータベース (たとえば、 [PostgreSQL](https://www.postgresql.org/docs/current/ddl-schemas.html) ) から移行する場合は[オラクル](https://docs.oracle.com/en/database/oracle/oracle-database/21/tdddg/creating-managing-schema-objects.html)この違い[マイクロソフトSQLサーバー](https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/create-a-database-schema?view=sql-server-ver15)注意してください。
 
-### Database
+### データベース {#database}
 
-A database in TiDB is a collection of objects such as tables and indexes.
+TiDB のデータベースは、テーブルやインデックスなどのオブジェクトのコレクションです。
 
-TiDB comes with a default database named `test`. However, it is recommended that you create your own database instead of using the `test` database.
+TiDB には、 `test`という名前のデフォルトのデータベースが付属しています。ただし、 `test`データベースを使用するのではなく、独自のデータベースを作成することをお勧めします。
 
-### Table
+### テーブル {#table}
 
-A table is a collection of related data in a [database](#database).
+テーブルは、 [データベース](#database)内の関連データの集合です。
 
-Each table consists of **rows** and **columns**. Each value in a row belongs to a specific **column**. Each column allows only a single data type. To further qualify columns, you can add some [constraints](/constraints.md). To accelerate calculations, you can add [generated columns](/generated-columns.md).
+各テーブルは**行**と**列**で構成されています。行の各値は特定の**列**に属します。各列では 1 つのデータ型のみが許可されます。列をさらに限定するには、 [制約](/constraints.md)追加できます。計算を高速化するには、 [生成された列](/generated-columns.md)追加できます。
 
-### Index
+### 索引 {#index}
 
-An index is a copy of selected columns in a table. You can create an index using one or more columns of a [table](#table). With indexes, TiDB can quickly locate data without having to search every row in a table every time, which greatly improves your query performance.
+インデックスは、テーブル内の選択された列のコピーです。 [テーブル](#table)の 1 つ以上の列を使用してインデックスを作成できます。 インデックスを使用すると、TiDB はテーブル内のすべての行を毎回検索しなくてもデータをすばやく見つけることができるため、クエリのパフォーマンスが大幅に向上します。
 
-There are two common types of indexes:
+一般的なインデックスには次の 2 つの種類があります。
 
-- **Primary Key**: indexes on the primary key column.
-- **Secondary Index**: indexes on non-primary key columns.
+-   **主キー**: 主キー列のインデックス。
+-   **セカンダリ インデックス**: 主キー以外の列のインデックス。
 
-> **Note:**
+> **注記：**
 >
-> In TiDB, the default definition of **Primary Key** is different from that in [InnoDB](https://dev.mysql.com/doc/refman/8.0/en/innodb-storage-engine.html) (a common storage engine of MySQL).
+> TiDB では、**主キー**のデフォルト定義が[インノDB](https://dev.mysql.com/doc/refman/8.0/en/innodb-storage-engine.html) (MySQL の共通storageエンジン) とは異なります。
 >
-> - In InnoDB, the definition of **Primary Key** is unique, not null, and a **clustered index**.
-> - In TiDB, the definition of **Primary Key** is unique and not null. But the primary key is not guaranteed to be a **clustered index**. To specify whether the primary key is a clustered index, you can add non-reserved keywords `CLUSTERED` or `NONCLUSTERED` after `PRIMARY KEY` in a `CREATE TABLE` statement. If a statement does not explicitly specify these keywords, the default behavior is controlled by the system variable `@@global.tidb_enable_clustered_index`. For more information, see [Clustered Indexes](/clustered-indexes.md).
+> -   InnoDB では、**主キー**の定義は一意であり、null ではなく、**クラスター化されたインデックス**です。
+> -   TiDB では、**主キー**の定義は一意であり、null ではありません。ただし、主キーが**クラスター化インデックス**であるとは限りません。主キーがクラスター化インデックスであるかどうかを指定するには、 `CREATE TABLE`ステートメントの`PRIMARY KEY`の後に非予約キーワード`CLUSTERED`または`NONCLUSTERED`を追加できます。ステートメントでこれらのキーワードを明示的に指定しない場合、デフォルトの動作はシステム変数`@@global.tidb_enable_clustered_index`によって制御されます。詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
-#### Specialized indexes
+#### 専門インデックス {#specialized-indexes}
 
 <CustomContent platform="tidb">
 
-To improve query performance of various user scenarios, TiDB provides you with some specialized types of indexes. For details of each type, see [Indexing and constraints](/basic-features.md#indexing-and-constraints).
+さまざまなユーザー シナリオのクエリ パフォーマンスを向上させるために、TiDB ではいくつかの特殊なタイプのインデックスを提供しています。各タイプの詳細については、 [インデックスと制約](/basic-features.md#indexing-and-constraints)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-To improve query performance of various user scenarios, TiDB provides you with some specialized types of indexes. For details of each type, see [Indexing and constraints](https://docs.pingcap.com/tidb/stable/basic-features#indexing-and-constraints).
+さまざまなユーザー シナリオのクエリ パフォーマンスを向上させるために、TiDB ではいくつかの特殊なタイプのインデックスを提供しています。各タイプの詳細については、 [インデックスと制約](https://docs.pingcap.com/tidb/stable/basic-features#indexing-and-constraints)を参照してください。
 
 </CustomContent>
 
-### Other supported logical objects
+### サポートされているその他の論理オブジェクト {#other-supported-logical-objects}
 
-TiDB supports the following logical objects at the same level as **table**:
+TiDB は**、テーブル**と同じレベルで次の論理オブジェクトをサポートします。
 
-- [View](/views.md): a view acts as a virtual table, whose schema is defined by the `SELECT` statement that creates the view.
-- [Sequence](/sql-statements/sql-statement-create-sequence.md): a sequence generates and stores sequential data.
-- [Temporary table](/temporary-tables.md): a table whose data is not persistent.
+-   [ビュー](/views.md) : ビューは仮想テーブルとして機能し、そのスキーマはビューを作成する`SELECT`ステートメントによって定義されます。
+-   [シーケンス](/sql-statements/sql-statement-create-sequence.md) : シーケンスは連続したデータを生成して保存します。
+-   [一時テーブル](/temporary-tables.md) : データが永続化されないテーブル。
 
-## Access Control
+## アクセス制御 {#access-control}
 
 <CustomContent platform="tidb">
 
-TiDB supports both user-based and role-based access control. To allow users to view, modify, or delete data objects and data schemas, you can either grant [privileges](/privilege-management.md) to [users](/user-account-management.md) directly or grant [privileges](/privilege-management.md) to users through [roles](/role-based-access-control.md).
+TiDB は、ユーザーベースとロールベースの両方のアクセス制御をサポートしています。ユーザーがデータ オブジェクトとデータ スキーマを表示、変更、または削除できるようにするには、 [権限](/privilege-management.md)から[ユーザー](/user-account-management.md)を直接付与するか、ユーザーに[権限](/privilege-management.md)から[役割](/role-based-access-control.md)を付与します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-TiDB supports both user-based and role-based access control. To allow users to view, modify, or delete data objects and data schemas, you can either grant [privileges](https://docs.pingcap.com/tidb/stable/privilege-management) to [users](https://docs.pingcap.com/tidb/stable/user-account-management) directly or grant [privileges](https://docs.pingcap.com/tidb/stable/privilege-management) to users through [roles](https://docs.pingcap.com/tidb/stable/role-based-access-control).
+TiDB は、ユーザーベースとロールベースの両方のアクセス制御をサポートしています。ユーザーがデータ オブジェクトとデータ スキーマを表示、変更、または削除できるようにするには、 [権限](https://docs.pingcap.com/tidb/stable/privilege-management)から[ユーザー](https://docs.pingcap.com/tidb/stable/user-account-management)を直接付与するか、ユーザーに[権限](https://docs.pingcap.com/tidb/stable/privilege-management)から[役割](https://docs.pingcap.com/tidb/stable/role-based-access-control)を付与します。
 
 </CustomContent>
 
-## Database schema changes
+## データベーススキーマの変更 {#database-schema-changes}
 
-As a best practice, it is recommended that you use a [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or a GUI client instead of a driver or ORM to execute database schema changes.
+ベスト プラクティスとして、データベース スキーマの変更を実行するには、ドライバーまたは ORM ではなく、 [MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)または GUI クライアントを使用することをお勧めします。
 
-## Object limitations
+## オブジェクトの制限 {#object-limitations}
 
-For more information, see [TiDB Limitations](/tidb-limitations.md).
+詳細については[TiDB の制限](/tidb-limitations.md)参照してください。

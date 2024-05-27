@@ -1,49 +1,49 @@
 ---
 title: TiDB 3.1.1 Release Notes
-summary: TiDB 3.1.1 was released on April 30, 2020. New features include table option for `auto_rand_base` and `Feature ID` comment. Bug fixes include isolation read setting, partition selection syntax, and wrong results from nested queries. TiFlash also received bug fixes and improvements in data reading and storage path modification. Backup & Restore (BR) fixed issues related to table restoration and data insertion.
+summary: TiDB 3.1.1 は 2020 年 4 月 30 日にリリースされました。新機能には、`auto_rand_base` のテーブル オプションと `Feature ID` コメントが含まれます。バグ修正には、分離読み取り設定、パーティション選択構文、ネストされたクエリからの誤った結果が含まれます。TiFlashTiFlash、バグ修正と、データ読み取りおよびstorageパス変更の改善も行われました。バックアップと復元 (BR) では、テーブルの復元とデータ挿入に関連する問題が修正されました。
 ---
 
-# TiDB 3.1.1 Release Notes
+# TiDB 3.1.1 リリースノート {#tidb-3-1-1-release-notes}
 
-Release date: April 30, 2020
+発売日: 2020年4月30日
 
-TiDB version: 3.1.1
+TiDB バージョン: 3.1.1
 
-TiDB Ansible version: 3.1.1
+TiDB Ansible バージョン: 3.1.1
 
-## New Features
+## 新機能 {#new-features}
 
-+ TiDB
+-   ティビ
 
-    - Add the table option for `auto_rand_base` [#16812](https://github.com/pingcap/tidb/pull/16812)
-    - Add the `Feature ID` comment: In the special comments of SQL statements, only the registered statement fragment can be parsed by the parser; otherwise, the statement is ignored [#16155](https://github.com/pingcap/tidb/pull/16155)
+    -   `auto_rand_base` [＃16812](https://github.com/pingcap/tidb/pull/16812)のテーブルオプションを追加
+    -   `Feature ID`コメントを追加します: SQL文の特別なコメントでは、登録された文のフラグメントのみがパーサーによって解析されます。それ以外の場合、文は無視されます[＃16155](https://github.com/pingcap/tidb/pull/16155)
 
-+ TiFlash
+-   TiFlash
 
-    - Cache the `handle` and `version` columns to reduce the disk I/O for a single read request
-    - Add in Grafana the graphics related to the read and write workloads of DeltaTree engine
-    - Optimize the decimal data encoding in the `Chunk` codec
-    - Reduce the number of open file descriptors when TiFlash is in low workload
+    -   `handle`列目と`version`列目をキャッシュして、1回の読み取り要求のディスクI/Oを削減します。
+    -   DeltaTreeエンジンの読み取りおよび書き込みワークロードに関連するグラフィックスをGrafanaに追加します。
+    -   `Chunk`コーデックの10進データエンコーディングを最適化する
+    -   TiFlashの負荷が低いときに開いているファイル記述子の数を減らす
 
-## Bug Fixes
+## バグの修正 {#bug-fixes}
 
-+ TiDB
+-   ティビ
 
-    - Fix the issue that the isolation read setting at the instance level does not take effect, and that the isolation read setting is incorrectly retained after TiDB is upgraded [#16482](https://github.com/pingcap/tidb/pull/16482) [#16802](https://github.com/pingcap/tidb/pull/16802)
-    - Fix the partition selection syntax on the hash partitioned table so that an error is not reported for syntaxes such as `partition (P0)` [#16076](https://github.com/pingcap/tidb/pull/16076)
-    - Fix the issue that when an `UPDATE` SQL statement only queries from a view but does not update the view, the update statement still reports an error [#16789](https://github.com/pingcap/tidb/pull/16789)
-    - Fix the issue of wrong results caused by removing the `not not` from the nested query [#16423](https://github.com/pingcap/tidb/pull/16423)
+    -   インスタンスレベルでの分離読み取り設定が有効にならない問題と、TiDB のアップグレード後に分離読み取り設定が誤って保持される問題を修正[＃16482](https://github.com/pingcap/tidb/pull/16482) [＃16802](https://github.com/pingcap/tidb/pull/16802)
+    -   ハッシュパーティションテーブルのパーティション選択構文を修正し、 `partition (P0)` [＃16076](https://github.com/pingcap/tidb/pull/16076)などの構文でエラーが報告されないようにする。
+    -   `UPDATE` SQL 文がビューからのクエリのみを実行し、ビューを更新しない場合でも、更新文がエラーを報告する問題を修正しました[＃16789](https://github.com/pingcap/tidb/pull/16789)
+    -   ネストされたクエリ[＃16423](https://github.com/pingcap/tidb/pull/16423)から`not not`削除することによって間違った結果が発生する問題を修正しました
 
-+ TiFlash
+-   TiFlash
 
-    - Fix the issue that an error occurs when reading data from a Region that is in the abnormal state
-    - Modify the mapping of table names in TiFlash to correctly support `recover table`/`flashback table`
-    - Modify the storage path to fix the potential data loss issue that occurs when renaming a table
-    - Modify the read mode in the online update scenario to improve the read performance
-    - Fix the issue that TiFlash fails to start normally after upgrade if the database/table name contains special characters
+    -   異常な状態にあるリージョンからデータを読み取るときにエラーが発生する問題を修正
+    -   TiFlashのテーブル名のマッピングを修正して、 `recover table` / `flashback table`を正しくサポートする
+    -   テーブル名を変更するときに発生する可能性のあるデータ損失の問題を修正するためにstorageパスを変更します。
+    -   オンライン更新シナリオの読み取りモードを変更して読み取りパフォーマンスを向上させる
+    -   データベース/テーブル名に特殊文字が含まれている場合、アップグレード後にTiFlash が正常に起動しない問題を修正しました。
 
-+ Tools
+-   ツール
 
-    - Backup & Restore (BR)
+    -   バックアップと復元 (BR)
 
-        * Fix the issue that after BR restores a table with the `auto_random` attribute, inserting data might trigger the duplicate entry error [#241](https://github.com/pingcap/br/issues/241)
+        -   BRが`auto_random`属性のテーブルを復元した後、データを挿入すると重複エントリエラー[＃241](https://github.com/pingcap/br/issues/241)が発生する可能性がある問題を修正しました。

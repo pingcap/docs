@@ -1,66 +1,58 @@
 ---
 title: TiDB Binlog Relay Log
-summary: Learn how to use relay log to maintain data consistency in extreme cases.
+summary: 極端なケースでリレー ログを使用してデータの一貫性を維持する方法を学習します。
 ---
 
-# TiDB Binlog Relay Log
+# TiDBBinlogリレーログ {#tidb-binlog-relay-log}
 
-When replicating binlogs, Drainer splits transactions from the upstream and replicates the split transactions concurrently to the downstream.
+バイナリログを複製する場合、 Drainer はアップストリームからトランザクションを分割し、分割されたトランザクションを同時にダウンストリームに複製します。
 
-In extreme cases where the upstream clusters are not available and Drainer exits abnormally, the downstream clusters (MySQL or TiDB) might be in the intermediate states with inconsistent data. In such cases, Drainer can use the relay log to ensure that the downstream clusters are in a consistent state.
+上流のクラスターが利用できず、 Drainerが異常終了する極端なケースでは、下流のクラスター (MySQL または TiDB) がデータの不整合がある中間状態になる可能性があります。このような場合、 Drainer はリレー ログを使用して下流のクラスターが一貫した状態であることを確認できます。
 
-## Consistent state during Drainer replication
+## Drainerレプリケーション中の一貫した状態 {#consistent-state-during-drainer-replication}
 
-The downstream clusters reaching a consistent state means the data of the downstream clusters are the same as the snapshot of the upstream which sets `tidb_snapshot = ts`.
+下流のクラスターが一貫した状態に達するということは、下流のクラスターのデータが`tidb_snapshot = ts`設定された上流のスナップショットと同じであることを意味します。
 
-The checkpoint consistency means Drainer checkpoint saves the consistent state of replication in `consistent`. When Drainer runs, `consistent` is `false`. After Drainer exits normally, `consistent` is set to `true`.
+チェックポイントの一貫性とは、 Drainerチェックポイントがレプリケーションの一貫性のある状態を`consistent`に保存することを意味します。Drainerが実行されると、 `consistent`は`false`になります。Drainerが正常に終了すると、 `consistent` `true`に設定されます。
 
-You can query the downstream checkpoint table as follows:
-
-{{< copyable "sql" >}}
+次のようにしてダウンストリーム チェックポイント テーブルをクエリできます。
 
 ```sql
 select * from tidb_binlog.checkpoint;
 ```
 
-```
-+---------------------+----------------------------------------------------------------+
-| clusterID           | checkPoint                                                     |
-+---------------------+----------------------------------------------------------------+
-| 6791641053252586769 | {"consistent":false,"commitTS":414529105591271429,"ts-map":{}} |
-+---------------------+----------------------------------------------------------------+
-```
+    +---------------------+----------------------------------------------------------------+
+    | clusterID           | checkPoint                                                     |
+    +---------------------+----------------------------------------------------------------+
+    | 6791641053252586769 | {"consistent":false,"commitTS":414529105591271429,"ts-map":{}} |
+    +---------------------+----------------------------------------------------------------+
 
-## Implementation principles
+## 実施原則 {#implementation-principles}
 
-After Drainer enables the relay log, it first writes the binlog events to the disks and then replicates the events to the downstream clusters.
+Drainer はリレー ログを有効にすると、まずbinlogイベントをディスクに書き込み、次にそのイベントをダウンストリーム クラスターに複製します。
 
-If the upstream clusters are not available, Drainer can restore the downstream clusters to a consistent state by reading the relay log.
+上流のクラスターが利用できない場合、 Drainer はリレー ログを読み取ることで下流のクラスターを一貫した状態に復元できます。
 
-> **Note:**
+> **注記：**
 >
-> If the relay log data is lost at the same time, this method does not work, but its incidence is very low. In addition, you can use the Network File System to ensure data safety of the relay log.
+> リレーログデータが同時に失われる場合、この方法は機能しませんが、その発生率は非常に低いです。また、ネットワークファイルシステムを使用して、リレーログのデータ安全性を確保できます。
 
-### Trigger scenarios where Drainer consumes binlogs from the relay log
+### Drainer がリレーログからバイナリログを消費するシナリオをトリガーする {#trigger-scenarios-where-drainer-consumes-binlogs-from-the-relay-log}
 
-When Drainer is started, if it fails to connect to the Placement Driver (PD) of the upstream clusters, and it detects that `consistent = false` in the checkpoint, Drainer will try to read the relay log, and restore the downstream clusters to a consistent state. After that, the Drainer process sets the checkpoint `consistent` to `true` and then exits.
+Drainerが起動すると、上流クラスターの Placement Driver (PD) への接続に失敗し、チェックポイントで`consistent = false`を検出すると、 Drainer はリレー ログを読み取って、下流クラスターを整合性のある状態に復元しようとします。その後、 Drainerプロセスはチェックポイント`consistent`を`true`に設定して終了します。
 
-### GC mechanism of relay log
+### リレーログのGCメカニズム {#gc-mechanism-of-relay-log}
 
-Before data is replicated to the downstream, Drainer writes data to the relay log file. If the size of a relay log file reaches 10 MB (by default) and the binlog data of the current transaction is completely written, Drainer starts to write data to the next relay log file. After Drainer successfully replicates data to the downstream, it automatically cleans up the relay log files whose data has been replicated. The relay log into which data is currently being written will not be cleaned up.
+データがダウンストリームに複製される前に、 Drainer はリレー ログ ファイルにデータを書き込みます。リレー ログ ファイルのサイズが 10 MB (デフォルト) に達し、現在のトランザクションのbinlogデータが完全に書き込まれると、 Drainer は次のリレー ログ ファイルへのデータの書き込みを開始します。Drainerはダウンストリームへのデータの複製に成功すると、データが複製されたリレー ログ ファイルを自動的にクリーンアップします。現在データが書き込まれているリレー ログはクリーンアップされません。
 
-## Configuration
+## コンフィグレーション {#configuration}
 
-To enable the relay log, add the following configuration in Drainer:
+リレー ログを有効にするには、 Drainerに次の構成を追加します。
 
-{{< copyable "" >}}
-
-```
-[syncer.relay]
-# It saves the directory of the relay log. The relay log is not enabled if the value is empty.
-# The configuration only comes to effect if the downstream is TiDB or MySQL.
-log-dir = "/dir/to/save/log"
-# The size limit of a single relay log file (unit: byte).
-# When the size of a relay log file reaches this limit, data is written to the next relay log file.
-max-file-size = 10485760
-```
+    [syncer.relay]
+    # It saves the directory of the relay log. The relay log is not enabled if the value is empty.
+    # The configuration only comes to effect if the downstream is TiDB or MySQL.
+    log-dir = "/dir/to/save/log"
+    # The size limit of a single relay log file (unit: byte).
+    # When the size of a relay log file reaches this limit, data is written to the next relay log file.
+    max-file-size = 10485760

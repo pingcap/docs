@@ -1,13 +1,13 @@
 ---
 title: FLUSH TABLES | TiDB SQL Statement Reference
-summary: An overview of the usage of FLUSH TABLES for the TiDB database.
+summary: TiDB データベースの FLUSH TABLES の使用法の概要。
 ---
 
-# FLUSH TABLES
+# フラッシュテーブル {#flush-tables}
 
-This statement is included for compatibility with MySQL. It has no effective usage in TiDB.
+このステートメントは、MySQL との互換性のために含まれています。TiDB では有効な使用方法はありません。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 FlushStmt ::=
@@ -38,7 +38,7 @@ WithReadLockOpt ::=
     ( 'WITH' 'READ' 'LOCK' )?
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> FLUSH TABLES;
@@ -48,11 +48,11 @@ mysql> FLUSH TABLES WITH READ LOCK;
 ERROR 1105 (HY000): FLUSH TABLES WITH READ LOCK is not supported.  Please use @@tidb_snapshot
 ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-* TiDB does not have a concept of table cache as in MySQL. Thus, `FLUSH TABLES` is parsed but ignored in TiDB for compatibility.
-* The statement `FLUSH TABLES WITH READ LOCK` produces an error, as TiDB does not currently support locking tables. It is recommended to use [Historical reads](/read-historical-data.md) for this purpose instead.
+-   TiDB には、MySQL のようなテーブル キャッシュの概念はありません。したがって、 `FLUSH TABLES`解析されますが、互換性のために TiDB では無視されます。
+-   TiDB は現在テーブルのロックをサポートしていないため、ステートメント`FLUSH TABLES WITH READ LOCK`エラーが発生します。この目的には代わりに[歴史的な読み物](/read-historical-data.md)を使用することをお勧めします。
 
-## See also
+## 参照 {#see-also}
 
-* [Read historical data](/read-historical-data.md)
+-   [履歴データを読む](/read-historical-data.md)

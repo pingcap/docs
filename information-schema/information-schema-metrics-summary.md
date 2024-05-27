@@ -1,22 +1,20 @@
 ---
 title: METRICS_SUMMARY
-summary: Learn the METRICS_SUMMARY system table.
+summary: METRICS_SUMMARY システム テーブルについて学習します。
 ---
 
-# METRICS_SUMMARY
+# メトリクス_概要 {#metrics-summary}
 
-The TiDB cluster has many monitoring metrics. To make it easy to detect abnormal monitoring metrics, TiDB 4.0 introduces the following two monitoring summary tables:
+TiDB クラスターには多くの監視メトリックがあります。異常な監視メトリックを簡単に検出できるように、TiDB 4.0 では次の 2 つの監視サマリー テーブルが導入されています。
 
-* `information_schema.metrics_summary`
-* `information_schema.metrics_summary_by_label`
+-   `information_schema.metrics_summary`
+-   `information_schema.metrics_summary_by_label`
 
-> **Note:**
+> **注記：**
 >
-> The preceding two monitoring summary tables are only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> 上記の 2 つの監視概要テーブルは、TiDB Self-Hosted にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
-The two tables summarize all monitoring data for you to check each monitoring metric efficiently. Compared with `information_schema.metrics_summary`, the `information_schema.metrics_summary_by_label` table has an additional `label` column and performs differentiated statistics according to different labels.
-
-{{< copyable "sql" >}}
+2 つのテーブルには、すべての監視データがまとめられており、各監視メトリックを効率的に確認できます。 `information_schema.metrics_summary`と比較すると、 `information_schema.metrics_summary_by_label`テーブルには`label`列が追加され、異なるラベルに従って差別化された統計が実行されます。
 
 ```sql
 USE information_schema;
@@ -38,20 +36,18 @@ DESC metrics_summary;
 7 rows in set (0.00 sec)
 ```
 
-Field description:
+フィールドの説明:
 
-* `METRICS_NAME`: The monitoring table name.
-* `QUANTILE`: The percentile. You can specify `QUANTILE` using SQL statements. For example:
-    * `select * from metrics_summary where quantile=0.99` specifies viewing the data of the 0.99 percentile.
-    * `select * from metrics_summary where quantile in (0.80, 0.90, 0.99, 0.999)` specifies viewing the data of the 0.8, 0.90, 0.99, 0.999 percentiles at the same time.
-* `SUM_VALUE`, `AVG_VALUE`, `MIN_VALUE`, and `MAX_VALUE` respectively mean the sum, the average value, the minimum value, and the maximum value.
-* `COMMENT`: The comment for the corresponding monitoring table.
+-   `METRICS_NAME` : 監視テーブル名。
+-   `QUANTILE` : パーセンタイル。SQL ステートメントを使用して`QUANTILE`指定できます。例:
+    -   `select * from metrics_summary where quantile=0.99` 0.99 パーセンタイルのデータを表示することを指定します。
+    -   `select * from metrics_summary where quantile in (0.80, 0.90, 0.99, 0.999)` 、0.8、0.90、0.99、0.999 パーセンタイルのデータを同時に表示することを指定します。
+-   `SUM_VALUE` 、 `AVG_VALUE` 、 `MIN_VALUE` 、 `MAX_VALUE`それぞれ合計、平均値、最小値、最大値を意味します。
+-   `COMMENT` : 対応する監視テーブルのコメント。
 
-For example:
+例えば：
 
-To query the three groups of monitoring items with the highest average time consumption in the TiDB cluster within the time range of `'2020-03-08 13:23:00', '2020-03-08 13: 33: 00'`, you can directly query the `information_schema.metrics_summary` table and use the `/*+ time_range() */` hint to specify the time range. The SQL statement is as follows:
-
-{{< copyable "sql" >}}
+`'2020-03-08 13:23:00', '2020-03-08 13: 33: 00'`の時間範囲内で TiDB クラスター内で平均時間消費が最も長い 3 つの監視項目グループを照会するには、 `information_schema.metrics_summary`テーブルを直接照会し、 `/*+ time_range() */`ヒントを使用して時間範囲を指定します。SQL ステートメントは次のようになります。
 
 ```sql
 SELECT /*+ time_range('2020-03-08 13:23:00','2020-03-08 13:33:00') */ *
@@ -90,9 +86,7 @@ MAX_VALUE    | 0.013
 COMMENT      | The quantile of kv requests durations by store
 ```
 
-Similarly, the following example queries the `metrics_summary_by_label` monitoring summary table:
-
-{{< copyable "sql" >}}
+同様に、次の例では、 `metrics_summary_by_label`監視サマリー テーブルをクエリします。
 
 ```sql
 SELECT /*+ time_range('2020-03-08 13:23:00','2020-03-08 13:33:00') */ *
@@ -137,16 +131,14 @@ MAX_VALUE    | 0.008241
 COMMENT      | The quantile of TiDB query durations(second)
 ```
 
-The second and third rows of the query results above indicate that the `Select` and `Rollback` statements on `tidb_query_duration` have a long average execution time.
+上記のクエリ結果の 2 行目と 3 行目は、 `tidb_query_duration`の`Select`と`Rollback`ステートメントの平均実行時間が長いことを示しています。
 
-In addition to the example above, you can use the monitoring summary table to quickly find the module with the largest change from the monitoring data by comparing the full link monitoring items of the two time periods, and quickly locate the bottleneck. The following example compares all monitoring items in two periods (where t1 is the baseline) and sorts these items according to the greatest difference:
+上記の例に加えて、監視サマリー テーブルを使用して、2 つの期間のフル リンク監視項目を比較することで、監視データから最大の変化があるモジュールをすばやく見つけ、ボトルネックをすばやく特定できます。次の例では、2 つの期間 (t1 がベースライン) のすべての監視項目を比較し、これらの項目を最大の違いに従って並べ替えます。
 
-* Period t1: `("2020-03-03 17:08:00", "2020-03-03 17:11:00")`
-* Period t2: `("2020-03-03 17:18:00", "2020-03-03 17:21:00")`
+-   期間t1: `("2020-03-03 17:08:00", "2020-03-03 17:11:00")`
+-   期間t2: `("2020-03-03 17:18:00", "2020-03-03 17:21:00")`
 
-The monitoring items of the two time periods are joined according to `METRICS_NAME` and sorted according to the difference value. `TIME_RANGE` is the hint that specifies the query time.
-
-{{< copyable "sql" >}}
+2 つの期間の監視項目は`METRICS_NAME`に従って結合され、差分値に従ってソートされます。3 `TIME_RANGE`クエリ時間を指定するヒントです。
 
 ```sql
 SELECT GREATEST(t1.avg_value,t2.avg_value)/LEAST(t1.avg_value,
@@ -182,13 +174,13 @@ ORDER BY ratio DESC LIMIT 10;
 +----------------+------------------------------------------+----------------+------------------+---------------------------------------------------------------------------------------------+
 ```
 
-From the query result above, you can get the following information:
+上記のクエリ結果から、次の情報を取得できます。
 
-* `tib_slow_query_cop_process_total_time` (the time consumption of `cop process` in TiDB slow queries) in the period t2 is 5,865 times higher than that in period t1.
-* `tidb_distsql_partial_scan_key_total_num` (the number of keys to scan requested by TiDB's `distsql`) in period t2 is 3,648 times higher than that in period t1. During period t2, `tidb_slow_query_cop_wait_total_time` (the waiting time of Coprocessor requesting to queue up in the TiDB slow query) is 267 times higher than that in period t1.
-* `tikv_cop_total_response_size` (the size of the TiKV Coprocessor request result) in period t2 is 192 times higher than that in period t1.
-* `tikv_cop_scan_details` in period t2 (the scan requested by the TiKV Coprocessor) is 105 times higher than that in period t1.
+-   期間 t2 の`tib_slow_query_cop_process_total_time` (TiDB の遅いクエリでの時間消費量`cop process` ) は、期間 t1 の 5,865 倍になります。
+-   期間 t2 の`tidb_distsql_partial_scan_key_total_num` (TiDB の`distsql`によって要求されたスキャンするキーの数) は、期間 t1 の 3,648 倍になります。期間 t2 中、 `tidb_slow_query_cop_wait_total_time` (TiDB の低速クエリでキューイングを要求するコプロセッサーの待機時間) は、期間 t1 の 267 倍になります。
+-   期間 t2 の`tikv_cop_total_response_size` (TiKVコプロセッサー要求結果のサイズ) は、期間 t1 の 192 倍になります。
+-   期間 t2 (TiKVコプロセッサーによって要求されたスキャン) の`tikv_cop_scan_details` 、期間 t1 の 0 の 105 倍になります。
 
-From the result above, you can see that the Coprocessor requests in period t2 are much more than those in period t1. This causes TiKV Coprocessor to be overloaded, and the `cop task` has to wait. It might be that some large queries appear in period t2 that bring more load.
+上記の結果から、期間 t2 のコプロセッサー要求が期間 t1 の要求よりもはるかに多いことがわかります。これにより、TiKVコプロセッサーが過負荷になり、 `cop task`する必要があります。期間 t2 にいくつかの大きなクエリが発生し、負荷がさらに増加し​​ている可能性があります。
 
-In fact, during the entire time period from t1 to t2, the `go-ycsb` pressure test is running. Then 20 `tpch` queries are running during period t2. So it is the `tpch` queries that cause many Coprocessor requests.
+実際、t1 から t2 までの全期間を通じて、 `go-ycsb`圧力テストが実行されています。その後、期間 t2 中に 20 個の`tpch`クエリが実行されています。したがって、多くのコプロセッサー要求を引き起こすのは`tpch`クエリです。

@@ -1,202 +1,202 @@
 ---
 title: TiDB 5.2.4 Release Notes
 category: Releases
-summary: Learn about the new features, compatibility changes, improvements, and bug fixes in TiDB 5.2.4.
+summary: TiDB 5.2.4 の新機能、互換性の変更、改善、バグ修正について説明します。
 ---
 
-# TiDB 5.2.4 Release Notes
+# TiDB 5.2.4 リリースノート {#tidb-5-2-4-release-notes}
 
-Release Date: April 26, 2022
+リリース日：2022年4月26日
 
-TiDB version: 5.2.4
+TiDB バージョン: 5.2.4
 
-## Compatibility change(s)
+## 互換性の変更 {#compatibility-change-s}
 
-+ TiDB
+-   ティビ
 
-    - Change the default value of the system variable [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510) from `2` to `1` [#31748](https://github.com/pingcap/tidb/issues/31748)
+    -   システム変数[`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)のデフォルト値を`2`から`1` [＃31748](https://github.com/pingcap/tidb/issues/31748)に変更します
 
-+ TiKV
+-   ティクヴ
 
-    - Add [`raft-log-compact-sync-interval`](https://docs.pingcap.com/tidb/v5.2/tikv-configuration-file#raft-log-compact-sync-interval-new-in-v524) to control the time interval (`"2s"` by default) to compact unnecessary Raft logs [#11404](https://github.com/tikv/tikv/issues/11404)
-    - Change the default value of [`raft-log-gc-tick-interval`](/tikv-configuration-file.md#raft-log-gc-tick-interval) from `"10s"` to `"3s"` [#11404](https://github.com/tikv/tikv/issues/11404)
-    - When [`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is set to `true`, the value of [`storage.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit) overwrites that of [`rocksdb.(defaultcf|writecf|lockcf).hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit-1) [#11424](https://github.com/tikv/tikv/issues/11424)
+    -   不要なRaftログを[＃11404](https://github.com/tikv/tikv/issues/11404)するための時間間隔を制御するには[`raft-log-compact-sync-interval`](https://docs.pingcap.com/tidb/v5.2/tikv-configuration-file#raft-log-compact-sync-interval-new-in-v524)追加します (デフォルトでは`"2s"` )。
+    -   デフォルト値[`raft-log-gc-tick-interval`](/tikv-configuration-file.md#raft-log-gc-tick-interval)を`"10s"`から`"3s"` [＃11404](https://github.com/tikv/tikv/issues/11404)に変更します
+    -   [`storage.flow-control.enable`](/tikv-configuration-file.md#enable) `true`に設定すると、 [`storage.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit)の値が[`rocksdb.(defaultcf|writecf|lockcf).hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit-1)の値を上書きします[＃11424](https://github.com/tikv/tikv/issues/11424)
 
-+ Tools
+-   ツール
 
-    + TiDB Lightning
+    -   TiDB Lightning
 
-        - Change the default value of `regionMaxKeyCount` from 1_440_000 to 1_280_000, to avoid too many empty Regions after data import [#30018](https://github.com/pingcap/tidb/issues/30018)
+        -   データのインポート後に空の領域が多すぎるのを避けるため、デフォルト値`regionMaxKeyCount`を 1_440_000 から 1_280_000 に変更します[＃30018](https://github.com/pingcap/tidb/issues/30018)
 
-## Improvements
+## 改善点 {#improvements}
 
-+ TiKV
+-   ティクヴ
 
-    - Transfer the leadership to CDC observer to reduce latency jitter [#12111](https://github.com/tikv/tikv/issues/12111)
-    - Reduce the TiCDC recovery time by reducing the number of the Regions that require the Resolve Locks step [#11993](https://github.com/tikv/tikv/issues/11993)
-    - Update the proc filesystem (procfs) to v0.12.0 [#11702](https://github.com/tikv/tikv/issues/11702)
-    - Speed up the Garbage Collection (GC) process by increasing the write batch size when performing GC to Raft logs [#11404](https://github.com/tikv/tikv/issues/11404)
-    - Increase the speed of inserting SST files by moving the verification process to the `Import` thread pool from the `Apply` thread pool [#11239](https://github.com/tikv/tikv/issues/11239)
+    -   レイテンシージッターを減らすためにリーダーシップをCDCオブザーバーに移譲する[＃12111](https://github.com/tikv/tikv/issues/12111)
+    -   解決ロックを必要とする領域の数を減らすことで、TiCDC の回復時間を短縮します (ステップ[＃11993](https://github.com/tikv/tikv/issues/11993)
+    -   procファイルシステム（procfs）をv0.12.0 [＃11702](https://github.com/tikv/tikv/issues/11702)に更新する
+    -   Raftログ[＃11404](https://github.com/tikv/tikv/issues/11404)へのガベージ コレクション (GC) を実行するときに書き込みバッチ サイズを増やすことで、GC プロセスを高速化します。
+    -   検証プロセスを`Apply`スレッドプール[＃11239](https://github.com/tikv/tikv/issues/11239)から`Import`スレッドプールに移動することで、SSTファイルの挿入速度が向上します。
 
-+ Tools
+-   ツール
 
-    + TiCDC
+    -   ティCDC
 
-        - Change the default value of Kafka Sink `partition-num` to 3 so that TiCDC distributes messages across Kafka partitions more evenly [#3337](https://github.com/pingcap/tiflow/issues/3337)
-        - Reduce the time for the KV client to recover when a TiKV store is down [#3191](https://github.com/pingcap/tiflow/issues/3191)
-        - Add a `Lag analyze` panel in Grafana [#4891](https://github.com/pingcap/tiflow/issues/4891)
-        - Expose configuration parameters of the Kafka producer to make them configurable in TiCDC [#4385](https://github.com/pingcap/tiflow/issues/4385)
-        - Add the exponential backoff mechanism for restarting a changefeed [#3329](https://github.com/pingcap/tiflow/issues/3329)
-        - Reduce the count of "EventFeed retry rate limited" logs [#4006](https://github.com/pingcap/tiflow/issues/4006)
-        - Set the default value of `max-message-bytes` to 10M [#4041](https://github.com/pingcap/tiflow/issues/4041)
-        - Add more Prometheus and Grafana monitoring metrics and alerts, including `no owner alert`, `mounter row`, `table sink total row`, and `buffer sink total row` [#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)
-        - Support multiple Kubernetes clusters in Grafana dashboards [#4665](https://github.com/pingcap/tiflow/issues/4665)
-        - Add catch-up ETA (Estimated Time of Arrival) to the `changefeed checkpoint` monitoring metric [#5232](https://github.com/pingcap/tiflow/issues/5232)
+        -   TiCDC がメッセージを Kafka パーティション間でより均等に分散するように、Kafka シンクのデフォルト値を`partition-num`から 3 に変更します[＃3337](https://github.com/pingcap/tiflow/issues/3337)
+        -   TiKVストアがダウンしたときにKVクライアントが回復するまでの時間を短縮する[＃3191](https://github.com/pingcap/tiflow/issues/3191)
+        -   Grafana [＃4891](https://github.com/pingcap/tiflow/issues/4891)に`Lag analyze`パネルを追加する
+        -   Kafka プロデューサーの設定パラメータを公開して、TiCDC [＃4385](https://github.com/pingcap/tiflow/issues/4385)で設定できるようにします。
+        -   チェンジフィード[＃3329](https://github.com/pingcap/tiflow/issues/3329)を再開するための指数バックオフ メカニズムを追加します。
+        -   「EventFeed 再試行レート制限」ログの数を減らす[＃4006](https://github.com/pingcap/tiflow/issues/4006)
+        -   デフォルト値`max-message-bytes`を10M [＃4041](https://github.com/pingcap/tiflow/issues/4041)に設定する
+        -   `no owner alert` [＃4054](https://github.com/pingcap/tiflow/issues/4054)含む`buffer sink total row`と`table sink total row`の監視メトリックと[＃1606](https://github.com/pingcap/tiflow/issues/1606)を追加します`mounter row`
+        -   Grafanaダッシュボードで複数のKubernetesクラスターをサポート[＃4665](https://github.com/pingcap/tiflow/issues/4665)
+        -   `changefeed checkpoint`監視指標[＃5232](https://github.com/pingcap/tiflow/issues/5232)にキャッチアップ ETA (到着予定時刻) を追加する
 
-## Bug fixes
+## バグの修正 {#bug-fixes}
 
-+ TiDB
+-   ティビ
 
-    - Fix wrong range calculation results for Nulleq function on Enum values [#32428](https://github.com/pingcap/tidb/issues/32428)
-    - Fix the issue that INDEX HASH JOIN returns the `send on closed channel` error [#31129](https://github.com/pingcap/tidb/issues/31129)
-    - Fix the issue that concurrent column type change causes inconsistency between the schema and the data [#31048](https://github.com/pingcap/tidb/issues/31048)
-    - Fix the issue of potential data index inconsistency in optimistic transaction mode [#30410](https://github.com/pingcap/tidb/issues/30410)
-    - Fix the issue that a SQL operation is canceled when its JSON type column joins its `CHAR` type column [#29401](https://github.com/pingcap/tidb/issues/29401)
-    - Fix the issue that window functions might return different results when using a transaction or not [#29947](https://github.com/pingcap/tidb/issues/29947)
-    - Fix the issue that the `Column 'col_name' in field list is ambiguous` error is reported unexpectedly when a SQL statement contains natural join [#25041](https://github.com/pingcap/tidb/issues/25041)
-    - Fix the issue that the length information is wrong when casting `Decimal` to `String` [#29417](https://github.com/pingcap/tidb/issues/29417)
-    - Fix the issue that the `GREATEST` function returns inconsistent results due to different values of `tidb_enable_vectorized_expression` (set to `on` or `off`) [#29434](https://github.com/pingcap/tidb/issues/29434)
-    - Fix wrong results of deleting data of multiple tables using `left join` [#31321](https://github.com/pingcap/tidb/issues/31321)
-    - Fix a bug that TiDB may dispatch duplicate tasks to TiFlash [#32814](https://github.com/pingcap/tidb/issues/32814)
-    - Fix the MPP task list empty error when executing a query [#31636](https://github.com/pingcap/tidb/issues/31636)
-    - Fix wrong results of index join caused by an innerWorker panic [#31494](https://github.com/pingcap/tidb/issues/31494)
-    - Fix the issue that executing the `INSERT ... SELECT ... ON DUPLICATE KEY UPDATE` statement gets panic [#28078](https://github.com/pingcap/tidb/issues/28078)
-    - Fix wrong query results due to the optimization of `Order By` [#30271](https://github.com/pingcap/tidb/issues/30271)
-    - Fix the wrong result that might occur when performing `JOIN` on `ENUM` type columns [#27831](https://github.com/pingcap/tidb/issues/27831)
-    - Fix the panic when using the `CASE WHEN` function on the `ENUM` data type [#29357](https://github.com/pingcap/tidb/issues/29357)
-    - Fix wrong results of the `microsecond` function in vectorized expressions [#29244](https://github.com/pingcap/tidb/issues/29244)
-    - Fix the issue that the window function causes TiDB to panic instead of reporting an error [#30326](https://github.com/pingcap/tidb/issues/30326)
-    - Fix the issue that the Merge Join operator gets wrong results in certain cases [#33042](https://github.com/pingcap/tidb/issues/33042)
-    - Fix the issue that TiDB gets a wrong result when a correlated subquery returns a constant  [#32089](https://github.com/pingcap/tidb/issues/32089)
-    - Fix the issue that TiDB writes wrong data due to the wrong encoding of the `ENUM` or `SET` column [#32302](https://github.com/pingcap/tidb/issues/32302)
-    - Fix the issue that the `MAX` or `MIN` function on the `ENUM` or `SET` column returns a wrong result when the new collation is enabled in TiDB [#31638](https://github.com/pingcap/tidb/issues/31638)
-    - Fix the issue that the IndexHashJoin operator does not exit successfully [#31062](https://github.com/pingcap/tidb/issues/31062)
-    - Fix the issue that TiDB might read wrong data when a table has a virtual column [#30965](https://github.com/pingcap/tidb/issues/30965)
-    - Fix the issue that the setting of the log level does not take effect on the slow query log [#30309](https://github.com/pingcap/tidb/issues/30309)
-    - Fix the issue that partitioned tables cannot fully use indexes to scan data in some cases [#33966](https://github.com/pingcap/tidb/issues/33966)
-    - Fix the issue that the background HTTP service of TiDB might not exit successfully and makes the cluster in an abnormal state [#30571](https://github.com/pingcap/tidb/issues/30571)
-    - Fix the issue that TiDB might unexpectedly output many logs of failed authentication [#29709](https://github.com/pingcap/tidb/issues/29709)
-    - Fix the issue that the system variable `max_allowed_packet` does not take effect [#31422](https://github.com/pingcap/tidb/issues/31422)
-    - Fix the issue that the `REPLACE` statement incorrectly changes other rows when the auto ID is out of range [#29483](https://github.com/pingcap/tidb/issues/29483)
-    - Fix the issue that the slow query log cannot output log normally and might consume too much memory [#32656](https://github.com/pingcap/tidb/issues/32656)
-    - Fix the issue that the result of NATURAL JOIN might include unexpected columns [#29481](https://github.com/pingcap/tidb/issues/29481)
-    - Fix the issue that using `ORDER BY` and `LIMIT` together in one statement might output wrong results if a prefix-column index is used to query data [#29711](https://github.com/pingcap/tidb/issues/29711)
-    - Fix the issue that the DOUBLE type auto-increment column might be changed when the optimistic transaction retries [#29892](https://github.com/pingcap/tidb/issues/29892)
-    - Fix the issue that the STR_TO_DATE function cannot handle the preceding zero of the microsecond part correctly [#30078](https://github.com/pingcap/tidb/issues/30078)
-    - Fix the issue that TiDB gets the wrong result when using TiFlash to scan tables with empty range although TiFlash does not support reading tables with empty range yet [#33083](https://github.com/pingcap/tidb/issues/33083)
+    -   列挙値[＃32428](https://github.com/pingcap/tidb/issues/32428)の Nulleq 関数の誤った範囲計算結果を修正
+    -   INDEX HASH JOINが`send on closed channel`エラーを返す問題を修正しました[＃31129](https://github.com/pingcap/tidb/issues/31129)
+    -   同時列型変更によりスキーマとデータの間に不整合が発生する問題を修正[＃31048](https://github.com/pingcap/tidb/issues/31048)
+    -   楽観的トランザクションモード[＃30410](https://github.com/pingcap/tidb/issues/30410)でデータインデックスの不整合が発生する可能性がある問題を修正
+    -   JSON 型の列が`CHAR`型の列[＃29401](https://github.com/pingcap/tidb/issues/29401)に結合すると SQL 操作がキャンセルされる問題を修正しました。
+    -   トランザクションを使用する場合と使用しない場合でウィンドウ関数が異なる結果を返す可能性がある問題を修正しました[＃29947](https://github.com/pingcap/tidb/issues/29947)
+    -   SQL文に自然結合[＃25041](https://github.com/pingcap/tidb/issues/25041)が含まれている場合に`Column 'col_name' in field list is ambiguous`エラーが予期せず報告される問題を修正
+    -   `Decimal`から`String` [＃29417](https://github.com/pingcap/tidb/issues/29417)へのキャスト時に長さ情報が間違っている問題を修正
+    -   `GREATEST`関数が`tidb_enable_vectorized_expression`の値が異なるために矛盾した結果を返す問題を修正 ( `on`または`off`に設定) [＃29434](https://github.com/pingcap/tidb/issues/29434)
+    -   `left join` [＃31321](https://github.com/pingcap/tidb/issues/31321)を使用して複数のテーブルのデータを削除した場合の誤った結果を修正
+    -   TiDBが重複したタスクをTiFlash [＃32814](https://github.com/pingcap/tidb/issues/32814)にディスパッチする可能性があるバグを修正
+    -   クエリ[＃31636](https://github.com/pingcap/tidb/issues/31636)を実行するときに MPP タスク リストが空になるエラーを修正
+    -   innerWorkerpanicによって発生するインデックス結合の誤った結果を修正[＃31494](https://github.com/pingcap/tidb/issues/31494)
+    -   `INSERT ... SELECT ... ON DUPLICATE KEY UPDATE`文を実行するとpanic[＃28078](https://github.com/pingcap/tidb/issues/28078)発生する問題を修正
+    -   `Order By` [＃30271](https://github.com/pingcap/tidb/issues/30271)の最適化による誤ったクエリ結果を修正
+    -   `ENUM`種類の列[＃27831](https://github.com/pingcap/tidb/issues/27831)に対して`JOIN`実行したときに発生する可能性のある誤った結果を修正しました。
+    -   `ENUM`データ型[＃29357](https://github.com/pingcap/tidb/issues/29357)で`CASE WHEN`関数を使用するときに発生するpanicを修正
+    -   ベクトル化された式[＃29244](https://github.com/pingcap/tidb/issues/29244)の関数`microsecond`の誤った結果を修正
+    -   ウィンドウ関数がエラーを報告する代わりに TiDB をpanicせる問題を修正[＃30326](https://github.com/pingcap/tidb/issues/30326)
+    -   特定のケースで Merge Join 演算子が間違った結果を返す問題を修正[＃33042](https://github.com/pingcap/tidb/issues/33042)
+    -   相関サブクエリが定数[＃32089](https://github.com/pingcap/tidb/issues/32089)を返すときに TiDB が誤った結果を取得する問題を修正しました。
+    -   `ENUM`または`SET`目のエンコードが間違っているためにTiDBが間違ったデータを書き込む問題を修正しました[＃32302](https://github.com/pingcap/tidb/issues/32302)
+    -   TiDB [＃31638](https://github.com/pingcap/tidb/issues/31638)で新しい照合順序が有効になっているときに、 `ENUM`列または`SET`列の`MAX`または`MIN`関数が間違った結果を返す問題を修正しました。
+    -   IndexHashJoin演算子が正常に終了しない問題を修正[＃31062](https://github.com/pingcap/tidb/issues/31062)
+    -   テーブルに仮想列[＃30965](https://github.com/pingcap/tidb/issues/30965)がある場合に TiDB が誤ったデータを読み取る可能性がある問題を修正しました。
+    -   スロークエリログ[＃30309](https://github.com/pingcap/tidb/issues/30309)にログレベルの設定が反映されない問題を修正
+    -   パーティションテーブルがインデックスを完全に使用してデータをスキャンできない場合がある問題を修正[＃33966](https://github.com/pingcap/tidb/issues/33966)
+    -   TiDB のバックグラウンド HTTP サービスが正常に終了せず、クラスターが異常な状態になる問題を修正しました[＃30571](https://github.com/pingcap/tidb/issues/30571)
+    -   TiDB が予期せず認証失敗のログを多数出力する可能性がある問題を修正[＃29709](https://github.com/pingcap/tidb/issues/29709)
+    -   システム変数`max_allowed_packet`が有効にならない問題を修正[＃31422](https://github.com/pingcap/tidb/issues/31422)
+    -   自動IDが範囲外の場合に`REPLACE`文が他の行を誤って変更する問題を修正[＃29483](https://github.com/pingcap/tidb/issues/29483)
+    -   スロークエリログが正常にログを出力できず、メモリを過剰に消費する可能性がある問題を修正[＃32656](https://github.com/pingcap/tidb/issues/32656)
+    -   NATURAL JOINの結果に予期しない列が含まれる可能性がある問題を修正[＃29481](https://github.com/pingcap/tidb/issues/29481)
+    -   プレフィックス列インデックスを使用してデータ[＃29711](https://github.com/pingcap/tidb/issues/29711)をクエリする場合、 `ORDER BY`と`LIMIT` 1 つのステートメントで一緒に使用すると間違った結果が出力される可能性がある問題を修正しました。
+    -   楽観的トランザクションの再試行時にDOUBLE型の自動インクリメント列が変更される可能性がある問題を修正[＃29892](https://github.com/pingcap/tidb/issues/29892)
+    -   STR_TO_DATE関数がマイクロ秒部分の先頭のゼロを正しく処理できない問題を修正[＃30078](https://github.com/pingcap/tidb/issues/30078)
+    -   TiFlash が空の範囲を持つテーブルの読み取りをまだサポートしていないにもかかわらず、 TiFlashを使用して空の範囲を持つテーブルをスキャンすると、TiDB が間違った結果を取得する問題を修正しました[＃33083](https://github.com/pingcap/tidb/issues/33083)
 
-+ TiKV
+-   ティクヴ
 
-    - Fix a bug that stale messages cause TiKV to panic [#12023](https://github.com/tikv/tikv/issues/12023)
-    - Fix the issue of intermittent packet loss and out of memory (OOM) caused by the overflow of memory metrics [#12160](https://github.com/tikv/tikv/issues/12160)
-    - Fix the potential panic issue that occurs when TiKV performs profiling on Ubuntu 18.04 [#9765](https://github.com/tikv/tikv/issues/9765)
-    - Fix the issue that tikv-ctl returns an incorrect result due to its wrong string match [#12329](https://github.com/tikv/tikv/issues/12329)
-    - Fix a bug that replica reads might violate the linearizability [#12109](https://github.com/tikv/tikv/issues/12109)
-    - Fix a bug that TiKV might panic if it has been running for 2 years or more [#11940](https://github.com/tikv/tikv/issues/11940)
-    - Fix the issue of QPS drop when flow control is enabled and `level0_slowdown_trigger` is set explicitly [#11424](https://github.com/tikv/tikv/issues/11424)
-    - Fix the panic issue that occurs when the cgroup controller is not mounted [#11569](https://github.com/tikv/tikv/issues/11569)
-    - Fix possible metadata corruption caused by Region merge on a lagging Region peer [#11526](https://github.com/tikv/tikv/issues/11526)
-    - Fix the issue that the latency of Resolved TS increases after TiKV stops operating [#11351](https://github.com/tikv/tikv/issues/11351)
-    - Fix a panic issue that occurs when Region merge, ConfChange, and Snapshot happen at the same time in extreme conditions [#11475](https://github.com/tikv/tikv/issues/11475)
-    - Fix a bug that tikv-ctl cannot return the correct Region-related information [#11393](https://github.com/tikv/tikv/issues/11393)
-    - Fix the issue of negative sign when the decimal divide result is zero [#29586](https://github.com/pingcap/tidb/issues/29586)
-    - Fix the issue that retrying prewrite requests in the pessimistic transaction mode might cause the risk of data inconsistency in rare cases [#11187](https://github.com/tikv/tikv/issues/11187)
-    - Fix a memory leak caused by monitoring data of statistics threads [#11195](https://github.com/tikv/tikv/issues/11195)
-    - Fix the issue that the average latency of the by-instance gRPC requests is inaccurate in TiKV metrics [#11299](https://github.com/tikv/tikv/issues/11299)
-    - Fix the panic issue caused by deleting snapshot files when the peer status is `Applying` [#11746](https://github.com/tikv/tikv/issues/11746)
-    - Fix a bug that TiKV cannot delete a range of data (which means the internal command `unsafe_destroy_range` is executed) when the GC worker is busy [#11903](https://github.com/tikv/tikv/issues/11903)
-    - Fix the issue that deleting an uninitialized replica might cause an old replica to be recreated [#10533](https://github.com/tikv/tikv/issues/10533)
-    - Fix the issue that TiKV cannot detect the memory lock when TiKV performs a reverse table scan [#11440](https://github.com/tikv/tikv/issues/11440)
-    - Fix the deadlock issue that happens occasionally when coroutines run too fast [#11549](https://github.com/tikv/tikv/issues/11549)
-    - Fix the issue that destroying a peer might cause high latency [#10210](https://github.com/tikv/tikv/issues/10210)
-    - Fix the issue that TiKV panics and destroys peers unexpectedly because the target Region to be merged is invalid [#12232](https://github.com/tikv/tikv/issues/12232)
-    - Fix the TiKV panic issue that occurs when the target peer is replaced with the peer that is destroyed without being initialized when merging a Region [#12048](https://github.com/tikv/tikv/issues/12048)
-    - Fix the TiKV panic issue that occurs when applying snapshot is aborted [#11618](https://github.com/tikv/tikv/issues/11618)
-    - Fix a bug that TiKV cannot correctly calculate the number of snapshots being sent when the operator execution fails [#11341](https://github.com/tikv/tikv/issues/11341)
+    -   古いメッセージにより TiKV がpanicを起こすバグを修正[＃12023](https://github.com/tikv/tikv/issues/12023)
+    -   メモリメトリックのオーバーフローによって発生する断続的なパケット損失とメモリ不足 (OOM) の問題を修正しました[＃12160](https://github.com/tikv/tikv/issues/12160)
+    -   Ubuntu 18.04 [＃9765](https://github.com/tikv/tikv/issues/9765)でTiKVがプロファイリングを実行するときに発生する潜在的なpanic問題を修正
+    -   tikv-ctl が間違った文字列一致のために誤った結果を返す問題を修正[＃12329](https://github.com/tikv/tikv/issues/12329)
+    -   レプリカ読み取りが線形化可能性[＃12109](https://github.com/tikv/tikv/issues/12109)に違反する可能性があるバグを修正
+    -   TiKV が 2 年以上実行されている場合にpanicが発生する可能性があるバグを修正[＃11940](https://github.com/tikv/tikv/issues/11940)
+    -   フロー制御が有効で、 `level0_slowdown_trigger`明示的に設定されている場合に QPS が低下する問題を修正[＃11424](https://github.com/tikv/tikv/issues/11424)
+    -   cgroup コントローラがマウントされていない場合に発生するpanic問題を修正[＃11569](https://github.com/tikv/tikv/issues/11569)
+    -   遅延リージョンピア[＃11526](https://github.com/tikv/tikv/issues/11526)でのリージョンマージによって発生する可能性のあるメタデータ破損を修正
+    -   TiKVの動作が停止した後にResolved TSのレイテンシーが増加する問題を修正[＃11351](https://github.com/tikv/tikv/issues/11351)
+    -   極端な状況でリージョンのマージ、ConfChange、スナップショットが同時に発生した場合に発生するpanicの問題を修正[＃11475](https://github.com/tikv/tikv/issues/11475)
+    -   tikv-ctl が正しい地域関連情報を返すことができないバグを修正[＃11393](https://github.com/tikv/tikv/issues/11393)
+    -   小数点以下の除算結果がゼロの場合の負の符号の問題を修正[＃29586](https://github.com/pingcap/tidb/issues/29586)
+    -   悲観的トランザクションモードで事前書き込み要求を再試行すると、まれにデータの不整合が発生するリスクがある問題を修正しました[＃11187](https://github.com/tikv/tikv/issues/11187)
+    -   統計スレッド[＃11195](https://github.com/tikv/tikv/issues/11195)のデータの監視によって発生するメモリリークを修正
+    -   TiKV メトリクス[＃11299](https://github.com/tikv/tikv/issues/11299)でインスタンスごとの gRPC リクエストの平均レイテンシーが不正確になる問題を修正
+    -   ピアステータスが`Applying` [＃11746](https://github.com/tikv/tikv/issues/11746)のときにスナップショットファイルを削除すると発生するpanic問題を修正しました。
+    -   GCワーカーがビジー状態のときにTiKVがデータの範囲を削除できない（つまり内部コマンド`unsafe_destroy_range`が実行される）バグを修正[＃11903](https://github.com/tikv/tikv/issues/11903)
+    -   初期化されていないレプリカを削除すると古いレプリカが再作成される可能性がある問題を修正[＃10533](https://github.com/tikv/tikv/issues/10533)
+    -   TiKVが逆テーブルスキャンを実行するときにメモリロックを検出できない問題を修正[＃11440](https://github.com/tikv/tikv/issues/11440)
+    -   コルーチンの実行速度が速すぎる場合に時々発生するデッドロックの問題を修正[＃11549](https://github.com/tikv/tikv/issues/11549)
+    -   ピアを破棄するとレイテンシーが大きくなる可能性がある問題を修正[＃10210](https://github.com/tikv/tikv/issues/10210)
+    -   マージ対象のリージョンが無効であるため、TiKV がパニックを起こしてピアを予期せず破棄する問題を修正[＃12232](https://github.com/tikv/tikv/issues/12232)
+    -   リージョン[＃12048](https://github.com/tikv/tikv/issues/12048)をマージする際に、ターゲットピアが初期化されずに破棄されたピアに置き換えられたときに発生するTiKVpanicの問題を修正しました。
+    -   スナップショットの適用が中止されたときに発生する TiKVpanicの問題を修正[＃11618](https://github.com/tikv/tikv/issues/11618)
+    -   オペレータの実行が失敗したときに、TiKV が送信されるスナップショットの数を正しく計算できないバグを修正[＃11341](https://github.com/tikv/tikv/issues/11341)
 
-+ PD
+-   PD
 
-    - Fix the issue that the Region scatterer scheduling lost some peers [#4565](https://github.com/tikv/pd/issues/4565)
-    - Fix the issue that the cold hotspot data cannot be deleted from the hotspot statistics [#4390](https://github.com/tikv/pd/issues/4390)
+    -   リージョンスキャッタラーのスケジューリングで一部のピアが失われる問題を修正[＃4565](https://github.com/tikv/pd/issues/4565)
+    -   ホットスポット統計からコールドホットスポットデータを削除できない問題を修正[＃4390](https://github.com/tikv/pd/issues/4390)
 
-+ TiFlash
+-   TiFlash
 
-    - Fix a bug that MPP tasks might leak threads forever [#4238](https://github.com/pingcap/tiflash/issues/4238)
-    - Fix the issue that the result of `IN` is incorrect in multi-value expressions [#4016](https://github.com/pingcap/tiflash/issues/4016)
-    - Fix the issue that the date format identifies `'\n'` as an invalid separator [#4036](https://github.com/pingcap/tiflash/issues/4036)
-    - Fix the potential query error after adding columns under heavy read workload [#3967](https://github.com/pingcap/tiflash/issues/3967)
-    - Fix the bug that invalid storage directory configurations lead to unexpected behaviors [#4093](https://github.com/pingcap/tiflash/issues/4093)
-    - Fix the bug that some exceptions are not handled properly [#4101](https://github.com/pingcap/tiflash/issues/4101)
-    - Fix the bug that the `STR_TO_DATE()` function incorrectly handles leading zeros when parsing microseconds [#3557](https://github.com/pingcap/tiflash/issues/3557)
-    - Fix the issue that casting `INT` to `DECIMAL` might cause overflow [#3920](https://github.com/pingcap/tiflash/issues/3920)
-    - Fix the wrong result that occurs when casting `DATETIME` to `DECIMAL` [#4151](https://github.com/pingcap/tiflash/issues/4151)
-    - Fix the overflow that occurs when casting `FLOAT` to `DECIMAL` [#3998](https://github.com/pingcap/tiflash/issues/3998)
-    - Fix the issue that the `CastStringAsReal` behavior is inconsistent in TiFlash and in TiDB or TiKV [#3475](https://github.com/pingcap/tiflash/issues/3475)
-    - Fix the issue that the `CastStringAsDecimal` behavior is inconsistent in TiFlash and in TiDB or TiKV [#3619](https://github.com/pingcap/tiflash/issues/3619)
-    - Fix the issue that TiFlash might return the `EstablishMPPConnection` error after it is restarted [#3615](https://github.com/pingcap/tiflash/issues/3615)
-    - Fix the issue that obsolete data cannot be reclaimed after setting the number of TiFlash replicas to 0 [#3659](https://github.com/pingcap/tiflash/issues/3659)
-    - Fix potential data inconsistency when widening the primary key column with the primary key being `handle` [#3569](https://github.com/pingcap/tiflash/issues/3569)
-    - Fix possible parsing errors when an SQL statement contains extremely long nested expressions [#3354](https://github.com/pingcap/tiflash/issues/3354)
-    - Fix possible wrong results when a query contains the `where <string>` clause [#3447](https://github.com/pingcap/tiflash/issues/3447)
-    - Fix possible wrong results when `new_collations_enabled_on_first_bootstrap` is enabled [#3388](https://github.com/pingcap/tiflash/issues/3388), [#3391](https://github.com/pingcap/tiflash/issues/3391)
-    - Fix the panic issue that occurs when TLS is enabled [#4196](https://github.com/pingcap/tiflash/issues/4196)
-    - Fix the panic issue that occurs when the memory limit is enabled [#3902](https://github.com/pingcap/tiflash/issues/3902)
-    - Fix the issue that TiFlash crashes occasionally when an MPP query is stopped [#3401](https://github.com/pingcap/tiflash/issues/3401)
-    - Fix the unexpected error of `Unexpected type of column: Nullable(Nothing)` [#3351](https://github.com/pingcap/tiflash/issues/3351)
-    - Fix possible metadata corruption caused by Region merge on a lagging Region peer [#4437](https://github.com/pingcap/tiflash/issues/4437)
-    - Fix the issue that a query containing `JOIN` might be hung if an error occurs [#4195](https://github.com/pingcap/tiflash/issues/4195)
-    - Fix possible wrong results returned for MPP queries due to incorrect execution plans [#3389](https://github.com/pingcap/tiflash/issues/3389)
+    -   MPP タスクがスレッドを永久にリークする可能性があるバグを修正[＃4238](https://github.com/pingcap/tiflash/issues/4238)
+    -   複数値式[＃4016](https://github.com/pingcap/tiflash/issues/4016)で`IN`の結果が正しくない問題を修正
+    -   日付の形式で`'\n'`無効な区切り文字として認識される問題を修正[＃4036](https://github.com/pingcap/tiflash/issues/4036)
+    -   読み取り負荷が高い状態で列を追加した後に発生する可能性のあるクエリエラーを修正[＃3967](https://github.com/pingcap/tiflash/issues/3967)
+    -   無効なstorageディレクトリ構成が予期しない動作を引き起こすバグを修正[＃4093](https://github.com/pingcap/tiflash/issues/4093)
+    -   一部の例外が適切に処理されないバグを修正[＃4101](https://github.com/pingcap/tiflash/issues/4101)
+    -   `STR_TO_DATE()`関数がマイクロ秒を解析するときに先頭のゼロを誤って処理するバグを修正[＃3557](https://github.com/pingcap/tiflash/issues/3557)
+    -   `INT`を`DECIMAL`にキャストするとオーバーフロー[＃3920](https://github.com/pingcap/tiflash/issues/3920)が発生する可能性がある問題を修正
+    -   `DATETIME`を`DECIMAL` [＃4151](https://github.com/pingcap/tiflash/issues/4151)にキャストするときに発生する誤った結果を修正
+    -   `FLOAT`を`DECIMAL` [＃3998](https://github.com/pingcap/tiflash/issues/3998)にキャストするときに発生するオーバーフローを修正
+    -   `CastStringAsReal`動作がTiFlashと TiDB または TiKV [＃3475](https://github.com/pingcap/tiflash/issues/3475)で一致しない問題を修正
+    -   `CastStringAsDecimal`動作がTiFlashと TiDB または TiKV [＃3619](https://github.com/pingcap/tiflash/issues/3619)で一致しない問題を修正
+    -   TiFlashが再起動後に`EstablishMPPConnection`エラーを返す可能性がある問題を修正しました[＃3615](https://github.com/pingcap/tiflash/issues/3615)
+    -   TiFlashレプリカの数を0 [＃3659](https://github.com/pingcap/tiflash/issues/3659)に設定した後、古いデータを再利用できない問題を修正
+    -   主キーが`handle` [＃3569](https://github.com/pingcap/tiflash/issues/3569)のときに主キー列を拡張すると、データの不整合が発生する可能性がある問題を修正しました。
+    -   SQL 文に非常に長いネストされた式が含まれている場合に発生する可能性のある解析エラーを修正[＃3354](https://github.com/pingcap/tiflash/issues/3354)
+    -   クエリに`where <string>`句[＃3447](https://github.com/pingcap/tiflash/issues/3447)が含まれている場合に発生する可能性のある誤った結果を修正
+    -   `new_collations_enabled_on_first_bootstrap`が有効になっている場合に誤った結果が発生する可能性を修正[＃3388](https://github.com/pingcap/tiflash/issues/3388) 、 [＃3391](https://github.com/pingcap/tiflash/issues/3391)
+    -   TLS が有効になっているときに発生するpanic問題を修正[＃4196](https://github.com/pingcap/tiflash/issues/4196)
+    -   メモリ制限が有効になっているときに発生するpanic問題を修正[＃3902](https://github.com/pingcap/tiflash/issues/3902)
+    -   MPPクエリが停止したときにTiFlashが時々クラッシュする問題を修正[＃3401](https://github.com/pingcap/tiflash/issues/3401)
+    -   `Unexpected type of column: Nullable(Nothing)` [＃3351](https://github.com/pingcap/tiflash/issues/3351)の予期しないエラーを修正
+    -   遅延リージョンピア[＃4437](https://github.com/pingcap/tiflash/issues/4437)でのリージョンマージによって発生する可能性のあるメタデータ破損を修正
+    -   エラーが発生した場合に`JOIN`含むクエリがハングする可能性がある問題を修正しました[＃4195](https://github.com/pingcap/tiflash/issues/4195)
+    -   実行プランが正しくないために MPP クエリで返される可能性のある誤った結果を修正[＃3389](https://github.com/pingcap/tiflash/issues/3389)
 
-+ Tools
+-   ツール
 
-    + Backup & Restore (BR)
+    -   バックアップと復元 (BR)
 
-        - Fix the issue that BR fails to back up RawKV [#32607](https://github.com/pingcap/tidb/issues/32607)
+        -   BRがRawKV [＃32607](https://github.com/pingcap/tidb/issues/32607)バックアップに失敗する問題を修正
 
-    + TiCDC
+    -   ティCDC
 
-        - Fix the issue that default values cannot be replicated [#3793](https://github.com/pingcap/tiflow/issues/3793)
-        - Fix a bug that sequence is incorrectly replicated in some cases [#4552](https://github.com/pingcap/tiflow/issues/4552)
-        - Fix a bug that a TiCDC node exits abnormally when a PD leader is killed [#4248](https://github.com/pingcap/tiflow/issues/4248)
-        - Fix a bug that MySQL sink generates duplicated `replace` SQL statements when `batch-replace-enable` is disabled [#4501](https://github.com/pingcap/tiflow/issues/4501)
-        - Fix the issue of panic and data inconsistency that occurs when outputting the default column value [#3929](https://github.com/pingcap/tiflow/issues/3929)
-        - Fix the issue that `mq sink write row` does not have monitoring data [#3431](https://github.com/pingcap/tiflow/issues/3431)
-        - Fix the issue that replication cannot be performed when `min.insync.replicas` is smaller than `replication-factor` [#3994](https://github.com/pingcap/tiflow/issues/3994)
-        - Fix the potential panic issue that occurs when a replication task is removed [#3128](https://github.com/pingcap/tiflow/issues/3128)
-        - Fix the bug that HTTP API panics when the required processor information does not exist [#3840](https://github.com/pingcap/tiflow/issues/3840)
-        - Fix the issue of potential data loss caused by inaccurate checkpoint [#3545](https://github.com/pingcap/tiflow/issues/3545)
-        - Fix the potential issue that the deadlock causes a replication task to get stuck [#4055](https://github.com/pingcap/tiflow/issues/4055)
-        - Fix the TiCDC panic issue that occurs when manually cleaning the task status in etcd [#2980](https://github.com/pingcap/tiflow/issues/2980)
-        - Fix the issue that special comments in DDL statements cause the replication task to stop [#3755](https://github.com/pingcap/tiflow/issues/3755)
-        - Fix the issue of replication stop caused by the incorrect configuration of `config.Metadata.Timeout` [#3352](https://github.com/pingcap/tiflow/issues/3352)
-        - Fix the issue that the service cannot be started because of a timezone issue in the RHEL release [#3584](https://github.com/pingcap/tiflow/issues/3584)
-        - Fix the issue that `stopped` changefeeds resume automatically after a cluster upgrade [#3473](https://github.com/pingcap/tiflow/issues/3473)
-        - Fix the issue of overly frequent warnings caused by MySQL sink deadlock [#2706](https://github.com/pingcap/tiflow/issues/2706)
-        - Fix the bug that the `enable-old-value` configuration item is not automatically set to `true` on Canal and Maxwell protocols [#3676](https://github.com/pingcap/tiflow/issues/3676)
-        - Fix the issue that Avro sink does not support parsing JSON type columns [#3624](https://github.com/pingcap/tiflow/issues/3624)
-        - Fix the negative value error in the changefeed checkpoint lag [#3010](https://github.com/pingcap/tiflow/issues/3010)
-        - Fix the OOM issue in the container environment [#1798](https://github.com/pingcap/tiflow/issues/1798)
-        - Fix the memory leak issue after processing DDLs [#3174](https://github.com/pingcap/tiflow/issues/3174)
-        - Fix the issue that changefeed gets stuck when tables are repeatedly scheduled in the same node [#4464](https://github.com/pingcap/tiflow/issues/4464)
-        - Fix a bug that querying status through open API may be blocked when the PD node is abnormal [#4778](https://github.com/pingcap/tiflow/issues/4778)
-        - Fix incorrect metrics caused by owner changes [#4774](https://github.com/pingcap/tiflow/issues/4774)
-        - Fix a stability problem in workerpool used by Unified Sorter [#4447](https://github.com/pingcap/tiflow/issues/4447)
-        - Fix the issue that the `cached region` monitoring metric is negative [#4300](https://github.com/pingcap/tiflow/issues/4300)
+        -   デフォルト値を複製できない問題を修正[＃3793](https://github.com/pingcap/tiflow/issues/3793)
+        -   一部のケースでシーケンスが誤って複製されるバグを修正[＃4552](https://github.com/pingcap/tiflow/issues/4552)
+        -   PDリーダーが強制終了するとTiCDCノードが異常終了するバグを修正[＃4248](https://github.com/pingcap/tiflow/issues/4248)
+        -   `batch-replace-enable`が無効になっている場合に MySQL シンクが重複した`replace` SQL 文を生成するバグを修正[＃4501](https://github.com/pingcap/tiflow/issues/4501)
+        -   デフォルトの列値[＃3929](https://github.com/pingcap/tiflow/issues/3929)を出力するときに発生するpanicとデータの不整合の問題を修正
+        -   `mq sink write row`監視データがない問題を修正[＃3431](https://github.com/pingcap/tiflow/issues/3431)
+        -   `min.insync.replicas` `replication-factor`より小さい場合にレプリケーションを実行できない問題を修正しました[＃3994](https://github.com/pingcap/tiflow/issues/3994)
+        -   レプリケーションタスクが削除されたときに発生する可能性のあるpanic問題を修正[＃3128](https://github.com/pingcap/tiflow/issues/3128)
+        -   必要なプロセッサ情報が存在しない場合にHTTP APIがパニックになるバグを修正[＃3840](https://github.com/pingcap/tiflow/issues/3840)
+        -   不正確なチェックポイント[＃3545](https://github.com/pingcap/tiflow/issues/3545)によって発生する潜在的なデータ損失の問題を修正
+        -   デッドロックによりレプリケーションタスクが停止する可能性がある問題を修正[＃4055](https://github.com/pingcap/tiflow/issues/4055)
+        -   etcd [＃2980](https://github.com/pingcap/tiflow/issues/2980)でタスク ステータスを手動でクリーンアップするときに発生する TiCDCpanicの問題を修正しました。
+        -   DDL ステートメント内の特別なコメントによってレプリケーション タスクが停止する問題を修正[＃3755](https://github.com/pingcap/tiflow/issues/3755)
+        -   `config.Metadata.Timeout` [＃3352](https://github.com/pingcap/tiflow/issues/3352)の誤った構成によって発生するレプリケーション停止の問題を修正
+        -   RHELリリース[＃3584](https://github.com/pingcap/tiflow/issues/3584)のタイムゾーンの問題によりサービスを開始できない問題を修正
+        -   クラスターのアップグレード後に`stopped`チェンジフィードが自動的に再開される問題を修正[＃3473](https://github.com/pingcap/tiflow/issues/3473)
+        -   MySQLシンクデッドロック[＃2706](https://github.com/pingcap/tiflow/issues/2706)による警告が頻繁に発生する問題を修正
+        -   Canal および Maxwell プロトコル[＃3676](https://github.com/pingcap/tiflow/issues/3676)で`enable-old-value`構成項目が自動的に`true`に設定されないバグを修正
+        -   AvroシンクがJSON型列[＃3624](https://github.com/pingcap/tiflow/issues/3624)の解析をサポートしていない問題を修正
+        -   チェンジフィードチェックポイントラグ[＃3010](https://github.com/pingcap/tiflow/issues/3010)負の値エラーを修正
+        -   コンテナ環境のOOM問題を修正[＃1798](https://github.com/pingcap/tiflow/issues/1798)
+        -   DDL [＃3174](https://github.com/pingcap/tiflow/issues/3174)の処理後のメモリリークの問題を修正
+        -   同じノード[＃4464](https://github.com/pingcap/tiflow/issues/4464)でテーブルが繰り返しスケジュールされると、changefeed が停止する問題を修正しました。
+        -   PDノードが異常な場合にオープンAPI経由でステータスを照会するとブロックされることがあるバグを修正[＃4778](https://github.com/pingcap/tiflow/issues/4778)
+        -   所有者の変更によって生じた誤ったメトリックを修正[＃4774](https://github.com/pingcap/tiflow/issues/4774)
+        -   Unified Sorter [＃4447](https://github.com/pingcap/tiflow/issues/4447)で使用されるワーカープールの安定性の問題を修正
+        -   `cached region`監視メトリックが負の[＃4300](https://github.com/pingcap/tiflow/issues/4300)になる問題を修正
 
-    + TiDB Lightning
+    -   TiDB Lightning
 
-        - Fix the issue of wrong import result that occurs when TiDB Lightning does not have the privilege to access the `mysql.tidb` table [#31088](https://github.com/pingcap/tidb/issues/31088)
-        - Fix the checksum error "GC life time is shorter than transaction duration" [#32733](https://github.com/pingcap/tidb/issues/32733)
-        - Fix a bug that TiDB Lightning may not delete the metadata schema when some import tasks do not contain source files [#28144](https://github.com/pingcap/tidb/issues/28144)
-        - Fix the issue that TiDB Lightning does not report errors when the S3 storage path does not exist [#28031](https://github.com/pingcap/tidb/issues/28031) [#30709](https://github.com/pingcap/tidb/issues/30709)
-        - Fix an error that occurs when iterating more than 1000 keys on GCS [#30377](https://github.com/pingcap/tidb/issues/30377)
+        -   TiDB Lightningに`mysql.tidb`テーブル[＃31088](https://github.com/pingcap/tidb/issues/31088)にアクセスする権限がない場合に発生する誤ったインポート結果の問題を修正しました。
+        -   チェックサムエラー「GC の有効期間がトランザクション期間より短い」を修正[＃32733](https://github.com/pingcap/tidb/issues/32733)
+        -   一部のインポートタスクにソースファイルが含まれていない場合に、 TiDB Lightning がメタデータスキーマを削除しない可能性があるバグを修正しました[＃28144](https://github.com/pingcap/tidb/issues/28144)
+        -   S3storageパスが存在しない場合にTiDB Lightning がエラーを報告しない問題を修正[＃28031](https://github.com/pingcap/tidb/issues/28031) [＃30709](https://github.com/pingcap/tidb/issues/30709)
+        -   GCS [＃30377](https://github.com/pingcap/tidb/issues/30377)で 1000 個を超えるキーを反復処理するときに発生するエラーを修正

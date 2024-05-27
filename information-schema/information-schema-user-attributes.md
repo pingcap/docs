@@ -1,11 +1,11 @@
 ---
 title: USER_ATTRIBUTES
-summary: Learn the `USER_ATTRIBUTES` INFORMATION_SCHEMA table.
+summary: `USER_ATTRIBUTES` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# USER_ATTRIBUTES
+# ユーザー属性 {#user-attributes}
 
-The `USER_PRIVILEGES` table provides information about user comments and user attributes. This information comes from the `mysql.user` system table.
+`USER_PRIVILEGES`テーブルは、ユーザー コメントとユーザー属性に関する情報を提供します。この情報は、 `mysql.user`システム テーブルから取得されます。
 
 ```sql
 USE information_schema;
@@ -23,13 +23,13 @@ DESC user_attributes;
 3 rows in set (0.00 sec)
 ```
 
-Fields in the `USER_ATTRIBUTES` table are described as follows:
+`USER_ATTRIBUTES`テーブル内のフィールドは次のように説明されます。
 
-* `USER`: The user name.
-* `HOST`: The host from which the user can connect to TiDB. If the value of this field is `％`, it means that the user can connect to TiDB from any host.
-* `ATTRIBUTE`: The comment and attribute of the user, which are set by the [`CREATE USER`](/sql-statements/sql-statement-create-user.md) or [`ALTER USER`](/sql-statements/sql-statement-alter-user.md) statement.
+-   `USER` : ユーザー名。
+-   `HOST` : ユーザーが TiDB に接続できるホスト。このフィールドの値が`％`の場合、ユーザーはどのホストからでも TiDB に接続できることを意味します。
+-   `ATTRIBUTE` : [`CREATE USER`](/sql-statements/sql-statement-create-user.md)または[`ALTER USER`](/sql-statements/sql-statement-alter-user.md)ステートメントで設定されたユーザーのコメントと属性。
 
-The following is an example:
+次に例を示します。
 
 ```sql
 CREATE USER testuser1 COMMENT 'This user is created only for test';

@@ -1,17 +1,17 @@
 ---
 title: EXPLAIN ANALYZE | TiDB SQL Statement Reference
-summary: An overview of the usage of EXPLAIN ANALYZE for the TiDB database.
+summary: TiDB データベースのEXPLAIN ANALYZE の使用法の概要。
 ---
 
-# EXPLAIN ANALYZE
+# EXPLAIN分析 {#explain-analyze}
 
-The `EXPLAIN ANALYZE` statement works similar to `EXPLAIN`, with the major difference being that it will actually execute the statement. This allows you to compare the estimates used as part of query planning to actual values encountered during execution. If the estimates differ significantly from the actual values, you should consider running `ANALYZE TABLE` on the affected tables.
+`EXPLAIN ANALYZE`ステートメントは`EXPLAIN`と同様に機能しますが、主な違いは、実際にステートメントを実行することです。これにより、クエリ プランニングの一部として使用される推定値と、実行中に発生した実際の値を比較できます。推定値が実際の値と大幅に異なる場合は、影響を受けるテーブルで`ANALYZE TABLE`実行することを検討する必要があります。
 
-> **Note:**
+> **注記：**
 >
-> When you use `EXPLAIN ANALYZE` to execute DML statements, modification to data is normally executed. Currently, the execution plan for DML statements **cannot** be shown yet.
+> `EXPLAIN ANALYZE`を使用して DML 文を実行すると、データの変更が正常に実行されます。現時点では、DML 文の実行プランはまだ表示**できません**。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ExplainSym ::=
@@ -31,20 +31,18 @@ ExplainableStmt ::=
 |   UnionStmt
 ```
 
-## EXPLAIN ANALYZE output format
+## EXPLAIN ANALYZE出力フォーマット {#explain-analyze-output-format}
 
-Different from `EXPLAIN`, `EXPLAIN ANALYZE` executes the corresponding SQL statement, records its runtime information, and returns the information together with the execution plan. Therefore, you can regard `EXPLAIN ANALYZE` as an extension of the `EXPLAIN` statement. Compared to `EXPLAIN` (for debugging query execution), the return results of `EXPLAIN ANALYZE` also include columns of information such as `actRows`, `execution info`, `memory`, and `disk`. The details of these columns are shown as follows:
+`EXPLAIN`とは異なり、 `EXPLAIN ANALYZE`対応する SQL 文を実行し、その実行時情報を記録し、実行プランとともに情報を返します。したがって、 `EXPLAIN ANALYZE` `EXPLAIN`文の拡張と見なすことができます。 `EXPLAIN` (クエリ実行のデバッグ用) と比較すると、 `EXPLAIN ANALYZE`の戻り結果には`actRows` 、 `execution info` 、 `memory` 、 `disk`などの情報の列も含まれます。これらの列の詳細は、次のようになります。
 
-| attribute name          | description |
-|:----------------|:---------------------------------|
-| actRows       | Number of rows output by the operator. |
-| execution info  | Execution information of the operator. `time` represents the total `wall time` from entering the operator to leaving the operator, including the total execution time of all sub-operators. If the operator is called many times by the parent operator (in loops), then the time refers to the accumulated time. `loops` is the number of times the current operator is called by the parent operator. |
-| memory  | Memory space occupied by the operator. |
-| disk  | Disk space occupied by the operator. |
+| 属性名  | 説明                                                                                                                                                                    |
+| :--- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 行為行  | 演算子によって出力される行数。                                                                                                                                                       |
+| 実行情報 | 演算子の実行情報。1 `time` 、演算子に入ってから演算子を出るまでの合計`wall time`表します。これには、すべてのサブ演算子の合計実行時間が含まれます。演算子が親演算子によって何度も呼び出される場合 (ループ内)、時間は累積時間を参照します。5 `loops` 、現在の演算子が親演算子によって呼び出される回数です。 |
+| メモリ  | 演算子によって占有されるメモリ領域。                                                                                                                                                    |
+| ディスク | オペレータが占有するディスク領域。                                                                                                                                                     |
 
-## Examples
-
-{{< copyable "sql" >}}
+## 例 {#examples}
 
 ```sql
 CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -54,8 +52,6 @@ CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
 Query OK, 0 rows affected (0.12 sec)
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 INSERT INTO t1 (c1) VALUES (1), (2), (3);
 ```
@@ -64,8 +60,6 @@ INSERT INTO t1 (c1) VALUES (1), (2), (3);
 Query OK, 3 rows affected (0.02 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN ANALYZE SELECT * FROM t1 WHERE id = 1;
@@ -79,8 +73,6 @@ EXPLAIN ANALYZE SELECT * FROM t1 WHERE id = 1;
 +-------------+---------+---------+------+---------------+----------------------------------------------------------------+---------------+--------+------+
 1 row in set (0.01 sec)
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN ANALYZE SELECT * FROM t1;
@@ -96,138 +88,127 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 2 rows in set (0.00 sec)
 ```
 
-## Execution information of operators
+## オペレータの実行情報 {#execution-information-of-operators}
 
-In addition to the basic `time` and `loop` execution information, `execution info` also contains operator-specific execution information, which mainly includes the time consumed for the operator to send RPC requests and the duration of other steps.
+基本的な`time`と`loop`実行情報に加えて、 `execution info`はオペレータ固有の実行情報も含まれます。これには主に、オペレータが RPC 要求を送信するのに費やされた時間やその他のステップの期間が含まれます。
 
-### Point_Get
+### ポイントゲット {#point-get}
 
-The execution information from a `Point_Get` operator will typically contain the following information:
+`Point_Get`演算子からの実行情報には通常、次の情報が含まれます。
 
-- `Get:{num_rpc:1, total_time:697.051µs}`: The number of the `Get` RPC requests (`num_rpc`) sent to TiKV and the total duration (`total_time`) of all RPC requests.
-- `ResolveLock:{num_rpc:1, total_time:12.117495ms}`: If TiDB encounters a lock when reading data, it has to resolve the lock first, which generally occurs in the scenario of read-write conflict. This information indicates the duration of resolving locks.
-- `regionMiss_backoff:{num:11, total_time:2010 ms},tikvRPC_backoff:{num:11, total_time:10691 ms}`: When an RPC request fails, TiDB will wait the backoff time before retrying the request. Backoff statistics include the type of backoff (such as `regionMiss` and `tikvRPC`), the total waiting time (`total_time`), and the total number of backoffs (`num`).
+-   `Get:{num_rpc:1, total_time:697.051µs}` ：TiKVに送信された`Get`のRPC要求の数（ `num_rpc` ）とすべてのRPC要求の合計期間（ `total_time` ）。
+-   `ResolveLock:{num_rpc:1, total_time:12.117495ms}` : TiDB がデータの読み取り時にロックに遭遇した場合、まずロックを解決する必要があります。これは通常、読み取り/書き込み競合のシナリオで発生します。この情報は、ロックの解決にかかる時間を示します。
+-   `regionMiss_backoff:{num:11, total_time:2010 ms},tikvRPC_backoff:{num:11, total_time:10691 ms}` : RPC 要求が失敗すると、TiDB は要求を再試行する前にバックオフ時間待機します。バックオフ統計には、バックオフのタイプ ( `regionMiss`や`tikvRPC`など)、合計待機時間 ( `total_time` )、およびバックオフの合計数 ( `num` ) が含まれます。
 
-### Batch_Point_Get
+### バッチポイント取得 {#batch-point-get}
 
-The execution information of the `Batch_Point_Get` operator is similar to that of the `Point_Get` operator, but `Batch_Point_Get` generally sends `BatchGet` RPC requests to TiKV to read data.
+`Batch_Point_Get`演算子の実行情報は`Point_Get`演算子と似ていますが、 `Batch_Point_Get`通常、データを読み取りするために`BatchGet` RPC 要求を TiKV に送信します。
 
-`BatchGet:{num_rpc:2, total_time:83.13µs}`: The number of RPC requests (`num_rpc`) of the `BatchGet` type sent to TiKV and the total time consumed (`total_time`) for all RPC requests.
+`BatchGet:{num_rpc:2, total_time:83.13µs}` ：TiKVに送信された`BatchGet`種類のRPC要求の数（ `num_rpc` ）とすべてのRPC要求に費やされた合計時間（ `total_time` ）。
 
-### TableReader
+### テーブルリーダー {#tablereader}
 
-The execution information of a `TableReader` operator is typically as follows:
+`TableReader`演算子の実行情報は通常、次のようになります。
 
-```
-cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.07587ms, max_proc_keys: 16, p95_proc_keys: 16, tot_proc: 1ms, tot_wait: 1ms, rpc_num: 6, rpc_time: 5.313996 ms, copr_cache_hit_ratio: 0.00}
-```
+    cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.07587ms, max_proc_keys: 16, p95_proc_keys: 16, tot_proc: 1ms, tot_wait: 1ms, rpc_num: 6, rpc_time: 5.313996 ms, copr_cache_hit_ratio: 0.00}
 
-- `cop_task`: Contains the execution information of `cop` tasks. For example:
-    - `num`: The number of cop tasks.
-    - `max`, `min`, `avg`, `p95`: The maximum, minimum, average, and P95 values of the execution time consumed for executing cop tasks.
-    - `max_proc_keys` and `p95_proc_keys`: The maximum and P95 key-values scanned by TiKV in all cop tasks. If the difference between the maximum value and the P95 value is large, the data distribution might be imbalanced.
-    - `rpc_num`, `rpc_time`: The total number and total time consumed for `Cop` RPC requests sent to TiKV.
-    - `copr_cache_hit_ratio`: The hit rate of Coprocessor Cache for `cop` task requests.
-- `backoff`: Contains different types of backoff and the total waiting time of backoff.
+-   `cop_task` : `cop`のタスクの実行情報が含まれます。例:
+    -   `num` : copタスクの数。
+    -   `max` `p95` cop タスクの実行に`min`れ`avg`実行時間の最大値、最小値、平均値、および P95 値。
+    -   `max_proc_keys`と`p95_proc_keys` : すべての cop タスクで TiKV によってスキャンされた最大値と P95 キー値。最大値と P95 値の差が大きい場合、データ分布が不均衡になる可能性があります。
+    -   `rpc_num` `rpc_time` TiKV に送信された`Cop` RPC 要求の合計数と合計消費時間。
+    -   `copr_cache_hit_ratio` : `cop`タスク要求に対するコプロセッサーキャッシュのヒット率。
+-   `backoff` : さまざまなタイプのバックオフとバックオフの合計待機時間が含まれます。
 
-### Insert
+### 入れる {#insert}
 
-The execution information of an `Insert` operator is typically as follows:
+`Insert`演算子の実行情報は通常、次のようになります。
 
-```
-prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878µs, prefetch:763.8µs, rpc:{BatchGet:{num_rpc:1, total_time:699.166µs},Get:{num_rpc:1, total_time:378.276µs }}}
-```
+    prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878µs, prefetch:763.8µs, rpc:{BatchGet:{num_rpc:1, total_time:699.166µs},Get:{num_rpc:1, total_time:378.276µs }}}
 
-- `prepare`: The time consumed for preparing to write, including expression, default value and auto-increment value calculations.
-- `check_insert`: This information generally appears in `insert ignore` and `insert on duplicate` statements, including conflict checking and the time consumed for writing data to TiDB transaction cache. Note that this time consumption does not include the time consumed for transaction commit. It contains the following information:
-    - `total_time`: The total time spent on the `check_insert` step.
-    - `mem_insert_time`: The time consumed for writing data to the TiDB transaction cache.
-    - `prefetch`: The duration of retrieving the data that needs to be checked for conflicts from TiKV. This step sends a `Batch_Get` RPC request to TiKV to retrieve data.
-    - `rpc`: The total time consumed for sending RPC requests to TiKV, which generally includes two types of RPC time, `BatchGet` and `Get`, among which:
-        - `BatchGet` RPC request is sent in the `prefetch` step.
-        - `Get` RPC request is sent when the `insert on duplicate` statement executes `duplicate update`.
-- `backoff`: Contains different types of backoff and the total waiting time of backoff.
+-   `prepare` : 式、デフォルト値、自動増分値の計算など、書き込みの準備にかかる時間。
+-   `check_insert` : この情報は通常、 `insert ignore`および`insert on duplicate`ステートメントで表示され、競合チェックや TiDB トランザクション キャッシュへのデータ書き込みに要した時間などが含まれます。この時間消費には、トランザクションのコミットに要した時間は含まれないことに注意してください。次の情報が含まれます。
+    -   `total_time` : ステップ`check_insert`に費やされた合計時間。
+    -   `mem_insert_time` : TiDB トランザクション キャッシュにデータを書き込むのにかかる時間。
+    -   `prefetch` : TiKV から競合をチェックする必要があるデータを取得する期間。このステップでは、データを取得するために`Batch_Get` RPC 要求を TiKV に送信します。
+    -   `rpc` : TiKV への RPC 要求の送信に費やされた合計時間。これには通常、 `BatchGet`と`Get` 2 種類の RPC 時間が含まれます。
+        -   `prefetch`番目のステップで`BatchGet` RPC 要求が送信されます。
+        -   `insert on duplicate`ステートメントが実行されると`duplicate update` 、 `Get` RPC 要求が送信されます。
+-   `backoff` : さまざまなタイプのバックオフとバックオフの合計待機時間が含まれます。
 
-### IndexJoin
+### インデックス参加 {#indexjoin}
 
-The `IndexJoin` operator has 1 outer worker and N inner workers for concurrent execution. The join result preserves the order of the outer table. The detailed execution process is as follows:
+`IndexJoin`演算子には、同時実行用に 1 つの外部ワーカーと N 個の内部ワーカーがあります。結合結果では、外部テーブルの順序が保持されます。詳細な実行プロセスは次のとおりです。
 
-1. The outer worker reads N outer rows, then wraps it into a task, and sends it to the result channel and the inner worker channel.
-2. The inner worker receives the task, build key ranges from the task, and fetches inner rows according to the key ranges. It then builds the inner row hash table.
-3. The main `IndexJoin` thread receives the task from the result channel and waits for the inner worker to finish handling the task.
-4. The main `IndexJoin` thread joins each outer row by looking up to the inner rows' hash table.
+1.  外側のワーカーは N 個の外側の行を読み取り、それをタスクにラップして、結果チャネルと内側のワーカー チャネルに送信します。
+2.  内部ワーカーはタスクを受け取り、タスクからキー範囲を構築し、キー範囲に従って内部行を取得します。次に、内部行ハッシュ テーブルを構築します。
+3.  メイン`IndexJoin`スレッドは結果チャネルからタスクを受信し、内部ワーカーがタスクの処理を完了するまで待機します。
+4.  メイン`IndexJoin`スレッドは、内側の行のハッシュ テーブルを参照して、各外側の行を結合します。
 
-The `IndexJoin` operator contains the following execution information:
+`IndexJoin`演算子には次の実行情報が含まれます。
 
-```
-inner:{total:4.297515932s, concurrency:5, task:17, construct:97.96291ms, fetch:4.164310088s, build:35.219574ms}, probe:53.574945ms
-```
+    inner:{total:4.297515932s, concurrency:5, task:17, construct:97.96291ms, fetch:4.164310088s, build:35.219574ms}, probe:53.574945ms
 
-- `Inner`: The execution information of inner worker:
-    - `total`: The total time consumed by the inner worker.
-    - `concurrency`: The number of concurrent inner workers.
-    - `task`: The total number of tasks processed by the inner worker.
-    - `construct`: The preparation time before the inner worker reads the inner table rows corresponding to the task.
-    - `fetch`: The total time consumed for it takes for the inner worker to read inner table rows.
-    - `Build`: The total time consumed for it takes for the inner worker to construct the hash table of the corresponding inner table rows.
-- `probe`: The total time consumed by the main `IndexJoin` thread to perform join operations with the hash table of the outer table rows and the inner table rows.
+-   `Inner` : 内部ワーカーの実行情報:
+    -   `total` : 内部ワーカーによって消費された合計時間。
+    -   `concurrency` : 同時内部ワーカーの数。
+    -   `task` : 内部ワーカーによって処理されたタスクの合計数。
+    -   `construct` : 内部ワーカーがタスクに対応する内部テーブル行を読み取る前の準備時間。
+    -   `fetch` : 内部ワーカーが内部テーブル行を読み取るのにかかる合計時間。
+    -   `Build` : 内部ワーカーが対応する内部テーブル行のハッシュ テーブルを構築するのにかかる合計時間。
+-   `probe` : メイン`IndexJoin`スレッドが外部テーブル行と内部テーブル行のハッシュ テーブルとの結合操作を実行するために費やした合計時間。
 
-### IndexHashJoin
+### インデックスハッシュ結合 {#indexhashjoin}
 
-The execution process of the `IndexHashJoin` operator is similar to that of the `IndexJoin` operator. `IndexHashJoin` operator also has 1 outer worker and N inner workers to execute in parallel, but the output order is not guaranteed to be consistent with that of the outer table. The detailed execution process is as follows:
+`IndexHashJoin`演算子の実行プロセスは、 `IndexJoin`演算子と似ています。5 演算`IndexHashJoin`にも 1 つの外部ワーカーと N 個の内部ワーカーがあり、並列で実行されますが、出力順序が外部テーブルと一致することは保証されません。詳細な実行プロセスは次のとおりです。
 
-1. The outer worker reads N outer rows, builds a task, and sends it to the inner worker channel.
-2. The inner worker receives the tasks from the inner worker channel and performs the following three operations in order for every task:
-   a. Build a hash table from the outer rows
-   b. Build key ranges from outer rows and fetches inner rows
-   c. Probe the hash table and sends the join result to the result channel. Note: step a and step b are running concurrently.
-3. The main thread of `IndexHashJoin` receives the join results from the result channel.
+1.  外側のワーカーは N 個の外側の行を読み取り、タスクを構築して、それを内側のワーカー チャネルに送信します。
+2.  内部ワーカーは、内部ワーカー チャネルからタスクを受信し、すべてのタスクに対して次の 3 つの操作を順番に実行します。a. 外部行からハッシュ テーブルを構築します。b. 外部行からキー範囲を構築し、内部行を取得します。c. ハッシュ テーブルをプローブし、結合結果を結果チャネルに送信します。注: ステップ a とステップ b は同時に実行されます。
+3.  `IndexHashJoin`のメイン スレッドは、結果チャネルから結合結果を受信します。
 
-The `IndexHashJoin` operator contains the following execution information:
+`IndexHashJoin`演算子には次の実行情報が含まれます。
 
 ```sql
 inner:{total:4.429220003s, concurrency:5, task:17, construct:96.207725ms, fetch:4.239324006s, build:24.567801ms, join:93.607362ms}
 ```
 
-- `Inner`: the execution information of inner worker:
-    - `total`: the total time consumed by the inner worker.
-    - `concurrency`: the number of inner workers.
-    - `task`: The total number of tasks processed by the inner worker.
-    - `construct`: The preparation time before the inner worker reads the inner table rows.
-    - `fetch`: The total time consumed for inner worker to read inner table rows.
-    - `Build`: The total time consumed for inner worker to construct the hash table of the outer table rows.
-    - `join`:  The total time consumed for inner worker to do join with the inner table rows and the hash table of outer table rows.
+-   `Inner` : 内部ワーカーの実行情報:
+    -   `total` : 内部ワーカーによって消費された合計時間。
+    -   `concurrency` : 内部ワーカーの数。
+    -   `task` : 内部ワーカーによって処理されたタスクの合計数。
+    -   `construct` : 内部ワーカーが内部テーブル行を読み取る前の準備時間。
+    -   `fetch` : 内部ワーカーが内部テーブル行を読み取るのに費やされた合計時間。
+    -   `Build` : 内部ワーカーが外部テーブル行のハッシュ テーブルを構築するのに費やされた合計時間。
+    -   `join` : 内部ワーカーが内部テーブル行と外部テーブル行のハッシュ テーブルを結合するのにかかる合計時間。
 
-### HashJoin
+### ハッシュ結合 {#hashjoin}
 
-The `HashJoin` operator has an inner worker, an outer worker, and N join workers. The detailed execution process is as follows:
+`HashJoin`演算子には、内部ワーカー、外部ワーカー、および N 結合ワーカーがあります。詳細な実行プロセスは次のとおりです。
 
-1. The inner worker reads inner table rows and constructs a hash table.
-2. The outer worker reads the outer table rows, then wraps it into a task and sends it to the join worker.
-3. The join worker waits for the hash table construction in step 1 to finish.
-4. The join worker uses the outer table rows and hash table in the task to perform join operations, and then sends the join result to the result channel.
-5. The main thread of `HashJoin` receives the join result from the result channel.
+1.  内部ワーカーは内部テーブルの行を読み取り、ハッシュ テーブルを構築します。
+2.  外部ワーカーは外部テーブルの行を読み取り、それをタスクにラップして結合ワーカーに送信します。
+3.  結合ワーカーは、ステップ 1 のハッシュ テーブルの構築が完了するまで待機します。
+4.  結合ワーカーは、タスク内の外部テーブル行とハッシュ テーブルを使用して結合操作を実行し、結合結果を結果チャネルに送信します。
+5.  `HashJoin`のメイン スレッドは結果チャネルから結合結果を受信します。
 
-The `HashJoin` operator contains the following execution information:
+`HashJoin`演算子には次の実行情報が含まれます。
 
-```
-build_hash_table:{total:146.071334ms, fetch:110.338509ms, build:35.732825ms}, probe:{concurrency:5, total:857.162518ms, max:171.48271ms, probe:125.341665ms, fetch:731.820853ms}
-```
+    build_hash_table:{total:146.071334ms, fetch:110.338509ms, build:35.732825ms}, probe:{concurrency:5, total:857.162518ms, max:171.48271ms, probe:125.341665ms, fetch:731.820853ms}
 
-- `build_hash_table`: Reads the data of the inner table and constructs the execution information of the hash table:
-    - `total`: The total time consumption.
-    - `fetch`: The total time spent reading inner table data.
-    - `build`: The total time spent constructing a hash table.
-- `probe`: The execution information of join workers:
-    - `concurrency`: The number of join workers.
-    - `total`: The total time consumed by all join workers.
-    - `max`: The longest time for a single join worker to execute.
-    - `probe`: The total time consumed for joining with outer table rows and the hash table.
-    - `fetch`: The total time that the join worker waits to read the outer table rows data.
+-   `build_hash_table` : 内部テーブルのデータを読み取り、ハッシュテーブルの実行情報を構築します。
+    -   `total` : 合計消費時間。
+    -   `fetch` : 内部テーブルデータの読み取りに費やされた合計時間。
+    -   `build` : ハッシュ テーブルの構築に費やされた合計時間。
+-   `probe` : 結合ワーカーの実行情報:
+    -   `concurrency` : 結合ワーカーの数。
+    -   `total` : すべての結合ワーカーによって消費された合計時間。
+    -   `max` : 単一の結合ワーカーが実行される最長時間。
+    -   `probe` : 外部テーブル行とハッシュ テーブルとの結合に費やされた合計時間。
+    -   `fetch` : 結合ワーカーが外部テーブル行データを読み取るために待機する合計時間。
 
-### TableFullScan (TiFlash)
+### テーブルフルスキャン (TiFlash) {#tablefullscan-tiflash}
 
-The `TableFullScan` operator executed on a TiFlash node contains the following execution information:
+TiFlashノードで実行される`TableFullScan`演算子には、次の実行情報が含まれます。
 
 ```sql
 tiflash_scan: {
@@ -243,57 +224,51 @@ tiflash_scan: {
 }
 ```
 
-+ `dtfile`: the DTFile (DeltaTree File) related information during the table scan, which reflects the data scan status of the TiFlash Stable layer.
-    - `total_scanned_packs`: the total number of packs that have been scanned in the DTFile. A pack is the minimum unit that can be read in the TiFlash DTFile. By default, every 8192 rows constitute a pack.
-    - `total_skipped_packs`: the total number of packs that have been skipped by the scan in the DTFile. When a `WHERE` clause hits rough set indexes or matches the range filtering of a primary key, the irrelevant packs are skipped.
-    - `total_scanned_rows`: the total number of rows that have been scanned in the DTFile. If there are multiple versions of updates or deletions because of MVCC, each version is counted independently.
-    - `total_skipped_rows`: the total number of rows that are skipped by the scan in the DTFile.
-    - `total_rs_index_load_time`: the total time used to read DTFile rough set indexes.
-    - `total_read_time`:  the total time used to read DTFile data.
-+ `total_create_snapshot_time`: the total time used to create snapshots during the table scan.
+-   `dtfile` : テーブルスキャン中の DTFile (DeltaTree ファイル) 関連情報。TiFlash Stableレイヤーのデータスキャンステータスを反映します。
+    -   `total_scanned_packs` : DTFile でスキャンされたパックの合計数。パックとは、 TiFlash DTFile で読み取ることができる最小単位です。デフォルトでは、8192 行ごとに 1 つのパックが構成されます。
+    -   `total_skipped_packs` : DTFile 内のスキャンによってスキップされたパックの合計数`WHERE`句がラフ セット インデックスにヒットするか、主キーの範囲フィルタリングに一致すると、無関係なパックはスキップされます。
+    -   `total_scanned_rows` : DTFile でスキャンされた行の合計数。MVCC が原因で更新または削除のバージョンが複数ある場合、各バージョンは個別にカウントされます。
+    -   `total_skipped_rows` : DTFile 内のスキャンによってスキップされる行の合計数。
+    -   `total_rs_index_load_time` : DTFile ラフ セット インデックスの読み取りにかかった合計時間。
+    -   `total_read_time` : DTFile データの読み取りに費やされた合計時間。
+-   `total_create_snapshot_time` : テーブルスキャン中にスナップショットを作成するために使用された合計時間。
 
-### lock_keys execution information
+### lock_keys 実行情報 {#lock-keys-execution-information}
 
-When a DML statement is executed in a pessimistic transaction, the execution information of the operator might also include the execution information of `lock_keys`. For example:
+DML ステートメントが悲観的トランザクションで実行されると、演算子の実行情報に`lock_keys`の実行情報も含まれる場合があります。例:
 
-```
-lock_keys: {time:94.096168ms, region:6, keys:8, lock_rpc:274.503214ms, rpc_count:6}
-```
+    lock_keys: {time:94.096168ms, region:6, keys:8, lock_rpc:274.503214ms, rpc_count:6}
 
-- `time`: The total duration of executing the `lock_keys` operation.
-- `region`: The number of Regions involved in executing the `lock_keys` operation.
-- `keys`: The number of `Key`s that need `Lock`.
-- `lock_rpc`: The total time spent sending an RPC request of the `Lock` type to TiKV. Because multiple RPC requests can be sent in parallel, the total RPC time consumption might be greater than the total time consumption of the `lock_keys` operation.
-- `rpc_count`: The total number of RPC requests of the `Lock` type sent to TiKV.
+-   `time` : `lock_keys`操作を実行する合計時間。
+-   `region` : `lock_keys`番目の操作の実行に関係する領域の数。
+-   `keys` : `Lock`必要な`Key`の数。
+-   `lock_rpc` : `Lock`タイプの RPC 要求を TiKV に送信するのに費やされた合計時間。複数の RPC 要求を並行して送信できるため、合計 RPC 時間消費は`lock_keys`操作の合計時間消費よりも長くなる可能性があります。
+-   `rpc_count` : TiKV に送信された`Lock`タイプの RPC 要求の合計数。
 
-### commit_txn execution information
+### commit_txn 実行情報 {#commit-txn-execution-information}
 
-When a write-type DML statement is executed in a transaction with `autocommit=1`, the execution information of the write operator will also include the duration information of the transaction commit. For example:
+`autocommit=1`のトランザクションで書き込み型 DML ステートメントが実行されると、書き込み演算子の実行情報にはトランザクションコミットの期間情報も含まれます。例:
 
-```
-commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts:4.277455ms, commit:50.431774ms, region_num:7, write_keys:16, write_byte:536}
-```
+    commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts:4.277455ms, commit:50.431774ms, region_num:7, write_keys:16, write_byte:536}
 
-- `prewrite`: The time consumed for the `prewrite` phase of the 2PC commit of the transaction.
-- `wait_prewrite_binlog:`: The time consumed for waiting to write the prewrite Binlog.
-- `get_commit_ts`: The time consumed for getting the transaction commit timestamp.
-- `commit`: The time consumed for the `commit` phase during the 2PC commit of the transaction.
-- `write_keys`: The total `keys` written in the transaction.
-- `write_byte`: The total bytes of `key-value` written in the transaction, and the unit is byte.
+-   `prewrite` : トランザクションの 2PC コミットの`prewrite`フェーズに費やされた時間。
+-   `wait_prewrite_binlog:` : 事前書き込みBinlog の書き込みを待機するのにかかる時間。
+-   `get_commit_ts` : トランザクションコミットタイムスタンプを取得するのに費やされた時間。
+-   `commit` : トランザクションの 2PC コミット中に`commit`フェーズで消費された時間。
+-   `write_keys` : トランザクションに書き込まれた合計`keys` 。
+-   `write_byte` : トランザクションで書き込まれた合計バイト数`key-value`単位はバイトです。
 
-### RU (Request Unit) consumption
+### RU（リクエストユニット）消費量 {#ru-request-unit-consumption}
 
-[Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) is a unified abstraction unit of system resources, which is defined in TiDB resource control. The `execution info` of the top-level operator shows the overall RU consumption of this particular SQL statement.
+[リクエストユニット (RU)](/tidb-resource-control.md#what-is-request-unit-ru)は、TiDB リソース制御で定義されているシステム リソースの統一された抽象化単位です。最上位レベルの演算子の`execution info` 、この特定の SQL ステートメントの全体的な RU 消費量を示します。
 
-```
-RU:273.842670
-```
+    RU:273.842670
 
-> **Note:**
+> **注記：**
 >
-> This value shows the actual RUs consumed by this execution. The same SQL statement might consume different amounts of RUs each time it is executed due to the effects of caching (for example, [coprocessor cache](/coprocessor-cache.md)).
+> この値は、この実行で実際に消費された RU を示します。キャッシュの影響により、同じ SQL ステートメントでも、実行されるたびに消費される RU の量が異なる場合があります (たとえば、 [コプロセッサキャッシュ](/coprocessor-cache.md) )。
 
-You can calculate the RU from the other values in `EXPLAIN ANALYZE`, specifically the `execution info` column. For example:
+RU は、 `EXPLAIN ANALYZE`の他の値、具体的には`execution info`列から計算できます。例:
 
 ```json
 'executeInfo':
@@ -323,32 +298,30 @@ You can calculate the RU from the other values in `EXPLAIN ANALYZE`, specificall
   },
 ```
 
-The base costs are defined in the [`tikv/pd` source code](https://github.com/tikv/pd/blob/aeb259335644d65a97285d7e62b38e7e43c6ddca/client/resource_group/controller/config.go#L58C19-L67) and the calculations are performed in the [`model.go`](https://github.com/tikv/pd/blob/54219d649fb4c8834cd94362a63988f3c074d33e/client/resource_group/controller/model.go#L107) file.
+基本コストは[`tikv/pd`ソースコード](https://github.com/tikv/pd/blob/aeb259335644d65a97285d7e62b38e7e43c6ddca/client/resource_group/controller/config.go#L58C19-L67)ファイルで定義され、計算は[`model.go`](https://github.com/tikv/pd/blob/54219d649fb4c8834cd94362a63988f3c074d33e/client/resource_group/controller/model.go#L107)ファイルで実行されます。
 
-If you are using TiDB v7.1, the calculation is the sum of `BeforeKVRequest()` and `AfterKVRequest()` in `pd/pd-client/model.go`, that is:
+TiDB v7.1 を使用している場合、計算は`pd/pd-client/model.go`の`BeforeKVRequest()`と`AfterKVRequest()`の合計になります。つまり、次のようになります。
 
-```
-before key/value request is processed:
-      consumption.RRU += float64(kc.ReadBaseCost) -> kv.ReadBaseCost * rpc_nums
+    before key/value request is processed:
+          consumption.RRU += float64(kc.ReadBaseCost) -> kv.ReadBaseCost * rpc_nums
 
-after key/value request is processed:
-      consumption.RRU += float64(kc.ReadBytesCost) * readBytes -> kc.ReadBytesCost * total_process_keys_size
-      consumption.RRU += float64(kc.CPUMsCost) * kvCPUMs -> kc.CPUMsCost * total_process_time
-```
+    after key/value request is processed:
+          consumption.RRU += float64(kc.ReadBytesCost) * readBytes -> kc.ReadBytesCost * total_process_keys_size
+          consumption.RRU += float64(kc.CPUMsCost) * kvCPUMs -> kc.CPUMsCost * total_process_time
 
-For writes and batch gets, the calculation is similar with different base costs.
+書き込みとバッチ取得の場合、計算は基本コストが異なりますが、同様です。
 
-### Other common execution information
+### その他の一般的な実行情報 {#other-common-execution-information}
 
-The Coprocessor operators usually contain two parts of execution time information: `cop_task` and `tikv_task`. `cop_task` is the time recorded by TiDB, and it is from the moment that the request is sent to the server to the moment that the response is received. `tikv_task` is the time recorded by TiKV Coprocessor itself. If there is much difference between the two, it might indicate that the time spent waiting for the response is too long, or the time spent on gRPC or network is too long.
+コプロセッサーオペレータには通常、 `cop_task`と`tikv_task` 2 つの実行時間情報の部分が含まれます。 `cop_task` TiDB によって記録された時間で、リクエストがサーバーに送信されてから応答が受信されるまでの時間です。 `tikv_task`は TiKVコプロセッサー自体によって記録された時間です。 2 つの間に大きな差がある場合は、応答を待つ時間が長すぎるか、gRPC またはネットワークに費やされた時間が長すぎることを示している可能性があります。
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-`EXPLAIN ANALYZE` is a feature of MySQL 8.0, but both the output format and the potential execution plans in TiDB differ substantially from MySQL.
+`EXPLAIN ANALYZE`は MySQL 8.0 の機能ですが、TiDB の出力形式と潜在的な実行プランはどちらも MySQL とは大幅に異なります。
 
-## See also
+## 参照 {#see-also}
 
-* [Understanding the Query Execution Plan](/explain-overview.md)
-* [EXPLAIN](/sql-statements/sql-statement-explain.md)
-* [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
-* [TRACE](/sql-statements/sql-statement-trace.md)
+-   [クエリ実行プランを理解する](/explain-overview.md)
+-   [EXPLAIN](/sql-statements/sql-statement-explain.md)
+-   [テーブルを分析](/sql-statements/sql-statement-analyze-table.md)
+-   [痕跡](/sql-statements/sql-statement-trace.md)

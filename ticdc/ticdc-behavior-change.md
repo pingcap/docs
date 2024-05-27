@@ -1,22 +1,22 @@
 ---
 title: TiCDC Behavior Changes
-summary: Introduce the behavior changes of TiCDC changefeed, including the reasons and the impact of these changes.
+summary: TiCDC 変更フィードの動作の変更について、その理由と影響を含めて紹介します。
 ---
 
-# TiCDC Behavior Changes
+# TiCDC の動作の変更 {#ticdc-behavior-changes}
 
-## Split update events into delete and insert events
+## 更新イベントを削除イベントと挿入イベントに分割する {#split-update-events-into-delete-and-insert-events}
 
-### Transactions containing a single update change
+### 単一の更新変更を含むトランザクション {#transactions-containing-a-single-update-change}
 
-Starting from v6.5.3, v7.1.1, and v7.2.0, when using a non-MySQL sink, for transactions that only contain a single update change, if the primary key or non-null unique index value is modified in the update event, TiCDC splits this event into delete and insert events. For more information, see GitHub issue [#9086](https://github.com/pingcap/tiflow/issues/9086).
+v6.5.3、v7.1.1、v7.2.0 以降では、MySQL 以外のシンクを使用する場合、単一の更新変更のみを含むトランザクションでは、更新イベントで主キーまたは null 以外の一意のインデックス値が変更されると、TiCDC はこのイベントを削除イベントと挿入イベントに分割します。詳細については、GitHub の問題[＃9086](https://github.com/pingcap/tiflow/issues/9086)を参照してください。
 
-This change primarily addresses the following issues:
+この変更は主に次の問題に対処します。
 
-* When using the CSV and AVRO protocols, only the new value is output without the old value. Therefore, when the primary key or non-null unique index value changes, the consumer can only receive the new value, making it impossible to process the value before the change (for example, delete the old value).
-* When using the index value dispatcher to distribute data across different Kafka partitions based on the key, multiple consumer processes in the downstream consumer group consume Kafka topic partitions independently. Due to different consumption progress, data inconsistency might occur.
+-   CSV および AVRO プロトコルを使用する場合、古い値は出力されずに新しい値のみが出力されます。そのため、主キーまたは null 以外の一意のインデックス値が変更されると、コンシューマーは新しい値しか受信できず、変更前の値を処理する (たとえば、古い値を削除する) ことができなくなります。
+-   インデックス値ディスパッチャーを使用して、キーに基づいて異なる Kafka パーティションにデータを分散する場合、下流のコンシューマー グループ内の複数のコンシューマー プロセスが Kafka トピック パーティションを個別に消費します。消費の進行状況が異なるため、データの不整合が発生する可能性があります。
 
-Take the following SQL as an example:
+次の SQL を例に挙げます。
 
 ```sql
 CREATE TABLE t (a INT PRIMARY KEY, b INT);
@@ -24,18 +24,18 @@ INSERT INTO t VALUES (1, 1);
 UPDATE t SET a = 2 WHERE a = 1;
 ```
 
-In this example, the primary key `a` is updated from `1` to `2`. If the update event is not split:
+この例では、主キー`a`が`1`から`2`に更新されます。更新イベントが分割されていない場合は、次のようになります。
 
-* When using the CSV and AVRO protocols, the consumer only obtains the new value `a = 2` and cannot obtain the old value `a = 1`. This might cause the downstream consumer to only insert the new value `2` without deleting the old value `1`.
-* When using the index value dispatcher, the event for inserting `(1, 1)` might be sent to Partition 0, and the update event `(2, 1)` might be sent to Partition 1. If the consumption progress of Partition 1 is faster than that of Partition 0, an error might occur due to the absence of corresponding data in the downstream. Therefore, TiCDC splits the update event into delete and insert events. The event for deleting `(1, 1)` is sent to Partition 0, and the event for writing `(2, 1)` is sent to Partition 1, ensuring that the events are consumed successfully regardless of the progress of the consumer.
+-   CSV および AVRO プロトコルを使用する場合、コンシューマーは新しい値`a = 2`のみを取得し、古い値`a = 1`を取得できません。これにより、下流のコンシューマーは古い値`1`を削除せずに、新しい値`2`のみを挿入する可能性があります。
+-   インデックス値ディスパッチャーを使用する場合、挿入イベント`(1, 1)`がパーティション 0 に送信され、更新イベント`(2, 1)`がパーティション 1 に送信される場合があります。パーティション 1 の消費の進行がパーティション 0 の消費よりも速い場合、下流に対応するデータがないためエラーが発生する可能性があります。そのため、TiCDC は更新イベントを削除イベントと挿入イベントに分割します。削除イベント`(1, 1)`はパーティション 0 に送信され、書き込みイベント`(2, 1)`はパーティション 1 に送信され、コンシューマーの進行に関係なくイベントが正常に消費されることが保証されます。
 
-### Transactions containing multiple update changes
+### 複数の更新変更を含むトランザクション {#transactions-containing-multiple-update-changes}
 
-Starting from v6.5.4, v7.1.2, and v7.4.0, for transactions containing multiple changes, if the primary key or non-null unique index value is modified in the update event, TiCDC splits the event into delete and insert events and ensures that all events follow the sequence of delete events preceding insert events. For more information, see GitHub issue [#9430](https://github.com/pingcap/tiflow/issues/9430).
+v6.5.4、v7.1.2、v7.4.0 以降では、複数の変更を含むトランザクションの場合、更新イベントで主キーまたは null 以外の一意のインデックス値が変更されると、TiCDC はイベントを削除イベントと挿入イベントに分割し、すべてのイベントが挿入イベントに先行する削除イベントのシーケンスに従うようにします。詳細については、GitHub の問題[＃9430](https://github.com/pingcap/tiflow/issues/9430)を参照してください。
 
-This change primarily addresses the potential issue of primary key or unique key conflicts when using the MySQL sink to directly write these two events to the downstream, leading to changefeed errors. When using the Kafka sink or other sinks, you might encounter the same error if the consumer writes messages to a relational database or performs similar operation.
+この変更は主に、MySQL シンクを使用してこれら 2 つのイベントをダウンストリームに直接書き込むときに主キーまたは一意キーの競合が発生し、変更フィード エラーが発生する可能性がある問題に対処します。Kafka シンクまたはその他のシンクを使用する場合、コンシューマーがリレーショナル データベースにメッセージを書き込むか、同様の操作を実行すると、同じエラーが発生する可能性があります。
 
-Take the following SQL as an example:
+次の SQL を例に挙げます。
 
 ```sql
 CREATE TABLE t (a INT PRIMARY KEY, b INT);
@@ -49,6 +49,6 @@ UPDATE t SET a = 2 WHERE a = 3;
 COMMIT;
 ```
 
-In this example, by executing three SQL statements to swap the primary keys of two rows, TiCDC only receives two update change events, that is, changing the primary key `a` from `1` to `2` and changing the primary key `a` from `2` to `1`. If the MySQL sink directly writes these two update events to the downstream, a primary key conflict might occur, leading to changefeed errors.
+この例では、2 つの行の主キーを交換する 3 つの SQL 文を実行することで、TiCDC は 2 つの更新変更イベント、つまり主キー`a`を`1`から`2`に変更し、主キー`a`を`2`から`1`に変更するイベントのみを受信します。MySQL シンクがこれらの 2 つの更新イベントをダウンストリームに直接書き込むと、主キーの競合が発生し、変更フィード エラーが発生する可能性があります。
 
-Therefore, TiCDC splits these two events into four events, that is, deleting records `(1, 1)` and `(2, 2)` and writing records `(2, 1)` and `(1, 2)`.
+したがって、TiCDC はこれら 2 つのイベントを 4 つのイベントに分割し、レコード`(1, 1)`と`(2, 2)`を削除し、レコード`(2, 1)`と`(1, 2)`を書き込みます。

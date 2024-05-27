@@ -1,78 +1,78 @@
 ---
 title: TiDB Dashboard Resource Manager Page
-summary: TiDB Dashboard Resource Manager Page helps cluster administrators implement resource isolation by creating resource groups and setting quotas. It provides methods to estimate cluster capacity and monitor resource consumption. Access the page through TiDB Dashboard or a browser. The page includes sections for configuration, capacity estimation, and metrics. Capacity estimation methods include hardware deployment and actual workload. Monitoring metrics include total RU consumed, RU consumed by resource groups, TiDB CPU quota and usage, TiKV CPU quota and usage, and TiKV IO MBps.
+summary: TiDB ダッシュボード リソース マネージャー ページは、クラスター管理者がリソース グループを作成し、クォータを設定することでリソース分離を実装するのに役立ちます。クラスター容量を推定し、リソース消費を監視する方法を提供します。このページには、TiDB ダッシュボードまたはブラウザーからアクセスします。このページには、構成、容量推定、およびメトリックのセクションがあります。容量推定方法には、ハードウェアの展開と実際のワークロードが含まれます。監視メトリックには、消費された合計 RU、リソース グループによって消費された RU、TiDB CPU クォータと使用量、TiKV CPU クォータと使用量、および TiKV IO MBps が含まれます。
 ---
 
-# TiDB Dashboard Resource Manager Page
+# TiDB ダッシュボード リソース マネージャー ページ {#tidb-dashboard-resource-manager-page}
 
-To implement resource isolation using the [Resource Control](/tidb-resource-control.md) feature, cluster administrators can create resource groups and set quotas for each group. Before resource planning, you need to know the overall capacity of the cluster. This document helps you view the information about resource control, so you can estimate the cluster capacity before resource planning and allocate resources more effectively.
+[リソース管理](/tidb-resource-control.md)機能を使用してリソース分離を実装するには、クラスター管理者がリソース グループを作成し、各グループにクォータを設定できます。リソースを計画する前に、クラスターの全体的な容量を知っておく必要があります。このドキュメントでは、リソース制御に関する情報を表示して、リソースを計画する前にクラスターの容量を見積もり、リソースをより効果的に割り当てることができます。
 
-## Access the page
+## ページにアクセスする {#access-the-page}
 
-You can use one of the following two methods to access the Resource Manager page:
+リソース マネージャー ページにアクセスするには、次の 2 つの方法のいずれかを使用できます。
 
-* After logging in to TiDB Dashboard, click **Resource Manager** in the left navigation menu.
+-   TiDB ダッシュボードにログインしたら、左側のナビゲーション メニューで**[リソース マネージャー]**をクリックします。
 
-* Visit <http://127.0.0.1:2379/dashboard/#/resource_manager> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
+-   ブラウザで[http://127.0.0.1:2379/ダッシュボード/#/リソースマネージャー](http://127.0.0.1:2379/dashboard/#/resource_manager)アクセスします。3 `127.0.0.1:2379`実際の PD インスタンスのアドレスとポートに置き換えます。
 
-## Resource Manager page
+## リソース マネージャー ページ {#resource-manager-page}
 
-The following figure shows the Resource Manager details page:
+次の図は、リソース マネージャーの詳細ページを示しています。
 
 ![TiDB Dashboard: Resource Manager](/media/dashboard/dashboard-resource-manager-info.png)
 
-The Resource Manager page contains the following three sections:
+リソース マネージャー ページには、次の 3 つのセクションが含まれています。
 
-- Configuration: This section displays the data obtained from the `RESOURCE_GROUPS` table of TiDB. It contains the information about all resource groups. For more information, see [`RESOURCE_GROUPS`](/information-schema/information-schema-resource-groups.md).
+-   コンフィグレーション: このセクションには、TiDB の`RESOURCE_GROUPS`テーブルから取得されたデータが表示されます。すべてのリソース グループに関する情報が含まれています。詳細については、 [`RESOURCE_GROUPS`](/information-schema/information-schema-resource-groups.md)を参照してください。
 
-- Estimate Capacity: Before resource planning, you need to know the overall capacity of the cluster. You can use one of the following methods:
+-   容量の見積もり: リソース計画を立てる前に、クラスターの全体的な容量を把握しておく必要があります。次のいずれかの方法を使用できます。
 
-    - [Estimate capacity based on actual workload](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
-    - [Estimate capacity based on hardware deployment](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
+    -   [実際の作業負荷に基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
+    -   [ハードウェアの展開に基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
 
-- Metrics: By observing the metrics on the panels, you can understand the current overall resource consumption status of the cluster.
+-   メトリクス: パネル上のメトリクスを観察することで、クラスターの現在の全体的なリソース消費状況を把握できます。
 
-## Estimate Capacity
+## 容量の見積り {#estimate-capacity}
 
-Before resource planning, you need to know the overall capacity of the cluster. TiDB provides two methods to estimate the capacity of [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru#what-is-request-unit-ru) in the current cluster:
+リソース計画を立てる前に、クラスターの全体的な容量を把握しておく必要があります。TiDB では[リクエストユニット (RU)](/tidb-resource-control.md#what-is-request-unit-ru#what-is-request-unit-ru)現在のクラスターの容量を見積もる 2 つの方法を提供しています。
 
-- [Estimate capacity based on hardware deployment](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
-    
-    TiDB accepts the following workload types:
-    
-    - `tpcc`: applies to workloads with heavy data write. It is estimated based on a workload model similar to `TPC-C`.
-    - `oltp_write_only`: applies to workloads with heavy data write. It is estimated based on a workload model similar to `sysbench oltp_write_only`.
-    - `oltp_read_write`: applies to workloads with even data read and write. It is estimated based on a workload model similar to `sysbench oltp_read_write`.
-    - `oltp_read_only`: applies to workloads with heavy data read. It is estimated based on a workload model similar to `sysbench oltp_read_only`.
+-   [ハードウェアの展開に基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
 
-  ![Calibrate by Hardware](/media/dashboard/dashboard-resource-manager-calibrate-by-hardware.png)
+    TiDB は次のワークロード タイプを受け入れます。
 
-    The **Total RU of user resource groups** represents the total amount of RU for all user resource groups, excluding the `default` resource group. If this value is less than the estimated capacity, the system triggers an alert. By default, the system allocates unlimited usage to the predefined `default` resource group. When all users belong to the `default` resource group, resources are allocated in the same way as when resource control is disabled.
+    -   `tpcc` : 大量のデータ書き込みを伴うワークロードに適用されます。 `TPC-C`と同様のワークロード モデルに基づいて推定されます。
+    -   `oltp_write_only` : 大量のデータ書き込みを伴うワークロードに適用されます。 `sysbench oltp_write_only`と同様のワークロード モデルに基づいて推定されます。
+    -   `oltp_read_write` : 偶数データの読み取りと書き込みのワークロードに適用されます。 `sysbench oltp_read_write`と同様のワークロード モデルに基づいて推定されます。
+    -   `oltp_read_only` : 大量のデータ読み取りが行われるワークロードに適用されます。 `sysbench oltp_read_only`と同様のワークロード モデルに基づいて推定されます。
 
-- [Estimate capacity based on actual workload](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
+    ![Calibrate by Hardware](/media/dashboard/dashboard-resource-manager-calibrate-by-hardware.png)
+
+    **ユーザー リソース グループの合計 RU は**、 `default`リソース グループを除くすべてのユーザー リソース グループの RU の合計量を表します。この値が推定容量より少ない場合、システムはアラートをトリガーします。デフォルトでは、システムは定義済みの`default`リソース グループに無制限の使用を割り当てます。すべてのユーザーが`default`リソース グループに属している場合、リソースはリソース制御が無効になっている場合と同じ方法で割り当てられます。
+
+-   [実際の作業負荷に基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
 
     ![Calibrate by Workload](/media/dashboard/dashboard-resource-manager-calibrate-by-workload.png)
 
-    You can select a time range for estimation within the range of 10 minutes to 24 hours. The time zone used is the same as that of the front-end user.
+    推定する時間範囲は 10 分から 24 時間まで選択できます。使用されるタイムゾーンはフロントエンド ユーザーのタイムゾーンと同じです。
 
-    - When the time window range does not fall between 10 minutes and 24 hours, the following error is displayed `ERROR 1105 (HY000): the duration of calibration is too short, which could lead to inaccurate output. Please make the duration between 10m0s and 24h0m0s`.
+    -   時間ウィンドウの範囲が 10 分から 24 時間の範囲外の場合、次のエラーが表示されます`ERROR 1105 (HY000): the duration of calibration is too short, which could lead to inaccurate output. Please make the duration between 10m0s and 24h0m0s` 。
 
-    - The monitoring metrics for the [capacity estimation based on the actual workload](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload) feature include `tikv_cpu_quota`, `tidb_server_maxprocs`, `resource_manager_resource_unit`, and `process_cpu_usage`. If the CPU quota monitoring data is empty, there will be an error with the corresponding monitoring metric name, for example, `Error 1105 (HY000): There is no CPU quota metrics, metrics 'tikv_cpu_quota' is empty`.
+    -   [実際の作業負荷に基づく容量推定](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)機能の監視メトリックには、 `tikv_cpu_quota` 、 `tidb_server_maxprocs` 、 `resource_manager_resource_unit` 、および`process_cpu_usage`含まれます。CPU クォータ監視データが空の場合、対応する監視メトリック名 (例: `Error 1105 (HY000): There is no CPU quota metrics, metrics 'tikv_cpu_quota' is empty` ) にエラーが発生します。
 
-    - If the workload in the time window is too low, or the `resource_manager_resource_unit` and `process_cpu_usage` monitoring data is missing, an error will be reported `Error 1105 (HY000): The workload in selected time window is too low, with which TiDB is unable to reach a capacity estimation; please select another time window with higher workload, or calibrate resource by hardware instead`. In addition, because TiKV does not monitor CPU utilization on macOS, it does not support capacity estimation based on the actual workload, and will also report this error.
+    -   時間枠内のワークロードが低すぎる場合、または`resource_manager_resource_unit`と`process_cpu_usage`監視データが欠落している場合は、エラーが報告されます`Error 1105 (HY000): The workload in selected time window is too low, with which TiDB is unable to reach a capacity estimation; please select another time window with higher workload, or calibrate resource by hardware instead` 。また、TiKV は macOS 上の CPU 使用率を監視しないため、実際のワークロードに基づく容量推定をサポートしておらず、このエラーも報告されます。
 
-  You can select an appropriate time range using **CPU Usage** in the [Metrics](#metrics) section.
+    [メトリクス](#metrics)セクションの**CPU 使用率**を使用して適切な時間範囲を選択できます。
 
-## Metrics
+## メトリクス {#metrics}
 
-By observing the metrics on the panels, you can understand the current overall resource consumption status of the cluster. The monitoring metrics and their meanings are as follows:
+パネル上のメトリックを観察することで、クラスターの現在の全体的なリソース消費状況を把握できます。監視メトリックとその意味は次のとおりです。
 
-- Total RU Consumed: The total consumption of Request Units counted in real time.
-- RU Consumed by Resource Groups: The number of Request Units consumed by resource groups in real time.
-- TiDB
-    - CPU Quota: The maximum CPU usage of TiDB.
-    - CPU Usage: The total CPU usage of all TiDB instances.
-- TiKV
-    - CPU Quota: The maximum CPU usage of TiKV.
-    - CPU Usage: The total CPU usage of all TiKV instances.
-    - IO MBps: The total I/O throughput of all TiKV instances.
+-   消費された RU の合計: リアルタイムでカウントされた要求ユニットの合計消費量。
+-   リソース グループによって消費された RU: リソース グループによってリアルタイムで消費された要求ユニットの数。
+-   ティビ
+    -   CPU クォータ: TiDB の最大 CPU 使用量。
+    -   CPU 使用率: すべての TiDB インスタンスの合計 CPU 使用率。
+-   ティクヴ
+    -   CPU クォータ: TiKV の最大 CPU 使用量。
+    -   CPU 使用率: すべての TiKV インスタンスの合計 CPU 使用率。
+    -   IO MBps: すべての TiKV インスタンスの合計 I/O スループット。

@@ -1,236 +1,227 @@
 ---
 title: Troubleshoot Access Denied Errors during Data Import from Amazon S3
-summary: Learn how to troubleshoot access denied errors when importing data from Amazon S3 to TiDB Cloud.
+summary: Amazon S3 からTiDB Cloudにデータをインポートするときにアクセス拒否エラーが発生する場合のトラブルシューティング方法を説明します。
 ---
 
-# Troubleshoot Access Denied Errors during Data Import from Amazon S3
+# Amazon S3 からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング {#troubleshoot-access-denied-errors-during-data-import-from-amazon-s3}
 
-This document describes how to troubleshoot access denied errors that might occur when you import data from Amazon S3 into TiDB Cloud.
+このドキュメントでは、Amazon S3 からTiDB Cloudにデータをインポートするときに発生する可能性のあるアクセス拒否エラーのトラブルシューティング方法について説明します。
 
-After you click **Next** on the **Data Import** page of the TiDB Cloud console and confirm the import process, TiDB Cloud starts validating whether it can access your data in your specified bucket URI. If you see an error message with the keyword `AccessDenied`, an access denied error has occurred.
+TiDB Cloudコンソールの**「データ インポート」**ページで**「次へ」**をクリックし、インポート プロセスを確認すると、 TiDB Cloud は指定されたバケット URI のデータにアクセスできるかどうかの検証を開始します。キーワード`AccessDenied`を含むエラー メッセージが表示される場合は、アクセス拒否エラーが発生しています。
 
-To troubleshoot the access denied errors, perform the following checks in the AWS Management Console.
+アクセス拒否エラーのトラブルシューティングを行うには、AWS マネジメントコンソールで次のチェックを実行します。
 
-## Cannot assume the provided role 
+## 指定された役割を引き受けることができません {#cannot-assume-the-provided-role}
 
-This section describes how to troubleshoot the issue that TiDB Cloud cannot assume the provided role to access the specified bucket. 
+このセクションでは、 TiDB Cloud が指定されたバケットにアクセスするために提供されたロールを引き受けることができない問題のトラブルシューティング方法について説明します。
 
-### Check the trust entity
+### 信頼エンティティを確認する {#check-the-trust-entity}
 
-1. In the AWS Management Console, go to **IAM** > **Access Management** > **Roles**. 
-2. In the list of roles, find and click the role you have created for the target TiDB cluster. The role summary page is displayed. 
-3. On the role summary page, click the **Trust relationships** tab, and you will see the trusted entities.
+1.  AWS マネジメントコンソールで、 **IAM** &gt;**アクセス管理**&gt;**ロール**に移動します。
+2.  ロールのリストで、ターゲット TiDB クラスター用に作成したロールを見つけてクリックします。ロールの概要ページが表示されます。
+3.  ロールの概要ページで、 **「信頼関係」**タブをクリックすると、信頼されたエンティティが表示されます。
 
-The following is a sample trust entity:
+信頼エンティティの例を次に示します。
 
-```
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Principal": {
-                "AWS": "arn:aws:iam::380838443567:root"
-            },
-            "Action": "sts:AssumeRole",
-            "Condition": {
-                "StringEquals": {
-                    "sts:ExternalId": "696e6672612d617069a79c22fa5740944bf8bb32e4a0c4e3fe"
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Principal": {
+                    "AWS": "arn:aws:iam::380838443567:root"
+                },
+                "Action": "sts:AssumeRole",
+                "Condition": {
+                    "StringEquals": {
+                        "sts:ExternalId": "696e6672612d617069a79c22fa5740944bf8bb32e4a0c4e3fe"
+                    }
                 }
             }
-        }
-    ]
-}
-```
+        ]
+    }
 
-In the sample trust entity:
+サンプルの信頼エンティティでは、次のようになります。
 
-- `380838443567` is the TiDB Cloud Account ID. Make sure that this field in your trust entity matches your TiDB Cloud Account ID.
-- `696e6672612d617069a79c22fa5740944bf8bb32e4a0c4e3fe` is the TiDB Cloud External ID. Make sure that this field in your trusted entity matches your TiDB Cloud External ID.
+-   `380838443567`はTiDB Cloudアカウント ID です。信頼エンティティのこのフィールドがTiDB Cloudアカウント ID と一致していることを確認してください。
+-   `696e6672612d617069a79c22fa5740944bf8bb32e4a0c4e3fe`はTiDB Cloud外部 ID です。信頼できるエンティティのこのフィールドがTiDB Cloud外部 ID と一致していることを確認してください。
 
-### Check whether the IAM role exists
+### IAMロールが存在するかどうかを確認する {#check-whether-the-iam-role-exists}
 
-If the IAM role does not exist, create a role following instructions in [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
+IAMロールが存在しない場合は、 [Amazon S3 アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)の手順に従ってロールを作成します。
 
-### Check whether the external ID is set correctly
+### 外部IDが正しく設定されているか確認してください {#check-whether-the-external-id-is-set-correctly}
 
-Cannot assume the provided role `{role_arn}`. Check the trust relationships settings on the role. For example, check whether the trust entity has been set to the `TiDB Cloud account ID` and whether the `TiDB Cloud External ID` is correctly set in the trust condition. See [Check the trust entity](#check-the-trust-entity).
+指定されたロール`{role_arn}`を引き受けることができません。ロールの信頼関係の設定を確認してください。たとえば、信頼エンティティが`TiDB Cloud account ID`に設定されているかどうか、信頼条件で`TiDB Cloud External ID`が正しく設定されているかどうかを確認してください[信頼エンティティを確認する](#check-the-trust-entity)を参照してください。
 
-## Access denied
+## アクセスが拒否されました {#access-denied}
 
-This section describes how to troubleshoot access issues.
+このセクションでは、アクセスの問題をトラブルシューティングする方法について説明します。
 
-### Check the policy of the IAM user
+### IAMユーザーのポリシーを確認する {#check-the-policy-of-the-iam-user}
 
-When you use the AWS access key of an IAM user to access the Amazon S3 bucket, you might encounter the following error:
+IAMユーザーの AWS アクセスキーを使用して Amazon S3 バケットにアクセスすると、次のエラーが発生する場合があります。
 
-- "Access denied to the source '{bucket_uri}' using the access key ID '{access_key_id}' and the secret access key '{secret_access_key}'"
+-   「アクセス キー ID「{access_key_id}」とシークレット アクセス キー「{secret_access_key}」を使用したソース「{bucket_uri}」へのアクセスが拒否されました」
 
-It indicates that TiDB Cloud failed to access the Amazon S3 bucket due to insufficient permissions. You need the following permissions to access the Amazon S3 bucket:
+これは、権限不足のため、 TiDB Cloud がAmazon S3 バケットにアクセスできなかったことを示しています。Amazon S3 バケットにアクセスするには、次の権限が必要です。
 
-- `s3:GetObject`
-- `s3:ListBucket`
-- `s3:GetBucketLocation`
+-   `s3:GetObject`
+-   `s3:ListBucket`
+-   `s3:GetBucketLocation`
 
-To check the policy of the IAM user, perform the following steps:
+IAMユーザーのポリシーを確認するには、次の手順を実行します。
 
-1. In the AWS Management Console, go to **IAM** > **Access Management** > **Users**.
-2. In the list of users, find and click the user you have used for importing data to TiDB Cloud. The user summary page is displayed.
-3. In the **Permission policies** area of the user summary page, a list of policies is displayed. Take the following steps for each policy:
-    1. Click the policy to enter the policy summary page.
-    2. On the policy summary page, click the **{}JSON** tab to check the permission policy. Make sure that the `Resource` fields in the policy are correctly configured.
+1.  AWS マネジメントコンソールで、 **IAM** &gt;**アクセス管理**&gt;**ユーザー**に移動します。
+2.  ユーザーのリストで、 TiDB Cloudへのデータのインポートに使用したユーザーを見つけてクリックします。ユーザーの概要ページが表示されます。
+3.  ユーザー概要ページの**「権限ポリシー」**領域に、ポリシーのリストが表示されます。各ポリシーに対して次の手順を実行します。
+    1.  ポリシーをクリックすると、ポリシーの概要ページが表示されます。
+    2.  ポリシーの概要ページで、 **{}JSON**タブをクリックして権限ポリシーを確認します。ポリシー内の`Resource`フィールドが正しく構成されていることを確認します。
 
-The following is a sample policy:
+サンプルポリシーは次のとおりです。
 
-```
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "VisualEditor0",
-            "Effect": "Allow",
-            "Action": [
-                "s3:GetObject"
-            ],
-            "Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"
-        },
-        {
-            "Sid": "VisualEditor1",
-            "Effect": "Allow",
-            "Action": [
-                "s3:ListBucket",
-                "s3:GetBucketLocation"
-            ],
-            "Resource": "arn:aws:s3:::tidb-cloud-source-data"
-        },
-}
-```
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Sid": "VisualEditor0",
+                "Effect": "Allow",
+                "Action": [
+                    "s3:GetObject"
+                ],
+                "Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"
+            },
+            {
+                "Sid": "VisualEditor1",
+                "Effect": "Allow",
+                "Action": [
+                    "s3:ListBucket",
+                    "s3:GetBucketLocation"
+                ],
+                "Resource": "arn:aws:s3:::tidb-cloud-source-data"
+            },
+    }
 
-For more information about how to grant a user permissions and test them, see [Controlling access to a bucket with user policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html).
+ユーザーに権限を付与してテストする方法の詳細については、 [ユーザーポリシーによるバケットへのアクセスの制御](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html)参照してください。
 
-### Check the policy of the IAM role
+### IAMロールのポリシーを確認する {#check-the-policy-of-the-iam-role}
 
-1. In the AWS Management Console, go to **IAM** > **Access Management** > **Roles**. 
-2. In the list of roles, find and click the role you have created for the target TiDB cluster. The role summary page is displayed.
-3. In the **Permission policies** area of the role summary page, a list of policies is displayed. Take the following steps for each policy:
-    1. Click the policy to enter the policy summary page.
-    2. On the policy summary page, click the **{}JSON** tab to check the permission policy. Make sure that the `Resource` fields in the policy are correctly configured.
+1.  AWS マネジメントコンソールで、 **IAM** &gt;**アクセス管理**&gt;**ロール**に移動します。
+2.  ロールのリストで、ターゲット TiDB クラスター用に作成したロールを見つけてクリックします。ロールの概要ページが表示されます。
+3.  ロールの概要ページの**「権限ポリシー」**領域に、ポリシーのリストが表示されます。各ポリシーに対して次の手順を実行します。
+    1.  ポリシーをクリックすると、ポリシーの概要ページが表示されます。
+    2.  ポリシーの概要ページで、 **{}JSON**タブをクリックして権限ポリシーを確認します。ポリシー内の`Resource`フィールドが正しく構成されていることを確認します。
 
-The following is a sample policy.
+以下はサンプルポリシーです。
 
-```
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "VisualEditor0",
-            "Effect": "Allow",
-            "Action": [
-                "s3:GetObject",
-                "s3:GetObjectVersion"
-            ],
-            "Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"
-        },
-        {
-            "Sid": "VisualEditor1",
-            "Effect": "Allow",
-            "Action": [
-                "s3:ListBucket",
-                "s3:GetBucketLocation"
-            ],
-            "Resource": "arn:aws:s3:::tidb-cloud-source-data"
-        },
-        {
-            "Sid": "AllowKMSkey",
-            "Effect": "Allow",
-            "Action": [
-                "kms:Decrypt"
-            ],
-            "Resource": "arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"
-        }
-    ]
-}
-```
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Sid": "VisualEditor0",
+                "Effect": "Allow",
+                "Action": [
+                    "s3:GetObject",
+                    "s3:GetObjectVersion"
+                ],
+                "Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"
+            },
+            {
+                "Sid": "VisualEditor1",
+                "Effect": "Allow",
+                "Action": [
+                    "s3:ListBucket",
+                    "s3:GetBucketLocation"
+                ],
+                "Resource": "arn:aws:s3:::tidb-cloud-source-data"
+            },
+            {
+                "Sid": "AllowKMSkey",
+                "Effect": "Allow",
+                "Action": [
+                    "kms:Decrypt"
+                ],
+                "Resource": "arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"
+            }
+        ]
+    }
 
-In this sample policy, pay attention to the following:
+このサンプル ポリシーでは、次の点に注意してください。
 
-- In `"arn:aws:s3:::tidb-cloud-source-data/mydata/*"`, `"arn:aws:s3:::tidb-cloud-source-data"` is a sample S3 bucket ARN, and `/mydata/*` is a directory that you can customize in your S3 bucket root level for data storage. The directory needs to end with `/*`, for example, `"<Your S3 bucket ARN>/<Directory of your source data>/*"`. If `/*` is not added, the `AccessDenied` error occurs.
+-   `"arn:aws:s3:::tidb-cloud-source-data/mydata/*"`では、 `"arn:aws:s3:::tidb-cloud-source-data"`サンプルの S3 バケット ARN で、 `/mydata/*`データstorage用に S3 バケットのルート レベルでカスタマイズできるディレクトリです。ディレクトリは`/*`で終わる必要があります (例: `"<Your S3 bucket ARN>/<Directory of your source data>/*"` 。 `/*`が追加されていない場合は、 `AccessDenied`エラーが発生します。
 
-- If you have enabled AWS Key Management Service key (SSE-KMS) with customer-managed key encryption, make sure the following configuration is included in the policy. `"arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"` is a sample KMS key of the bucket.
+-   カスタマー管理のキー暗号化で AWS Key Management Service キー (SSE-KMS) を有効にしている場合は、ポリシーに次の設定が含まれていることを確認してください。1 `"arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"`バケットのサンプル KMS キーです。
 
-    ```
-        {
-            "Sid": "AllowKMSkey",
-            "Effect": "Allow",
-            "Action": [
-                "kms:Decrypt"
-            ],
-            "Resource": "arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"
-        }
-    ```
+            {
+                "Sid": "AllowKMSkey",
+                "Effect": "Allow",
+                "Action": [
+                    "kms:Decrypt"
+                ],
+                "Resource": "arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"
+            }
 
-    If the objects in your bucket have been copied from another encrypted bucket, the KMS key value needs to include the keys of both buckets. For example, `"Resource": ["arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f","arn:aws:kms:ap-northeast-1:495580073302:key/0d7926a7-6ecc-4bf7-a9c1-a38f0faec0cd"]`.
+    バケット内のオブジェクトが別の暗号化されたバケットからコピーされた場合、KMS キー値には両方のバケットのキーを含める必要があります。たとえば、 `"Resource": ["arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f","arn:aws:kms:ap-northeast-1:495580073302:key/0d7926a7-6ecc-4bf7-a9c1-a38f0faec0cd"]` 。
 
-If your policy is not correctly configured as the preceding example shows, correct the `Resource` fields in your policy and try importing data again.
+前の例のようにポリシーが正しく構成されていない場合は、ポリシー内の`Resource`フィールドを修正して、再度データのインポートを試みてください。
 
-> **Tip:**
+> **ヒント：**
 >
-> If you have updated the permission policy multiple times and still get the `AccessDenied` error during data import, you can try to revoke active sessions. Go to **IAM** > **Access Management** > **Roles**, click your target role to enter the role summary page. On the role summary page, find **Revoke active sessions** and click the button to revoke active sessions. Then, retry the data import.
+> 権限ポリシーを複数回更新しても、データのインポート中にエラー`AccessDenied`が発生する場合は、アクティブなセッションを取り消してみてください。IAM &gt;**IAM****管理**&gt;**ロール**に移動し、対象のロールをクリックしてロールの概要ページに入ります。ロールの概要ページで、**アクティブなセッションを取り消す**を見つけて、ボタンをクリックしてアクティブなセッションを取り消します。次に、データのインポートを再試行します。
 >
-> Note that this might affect your other applications.
+> 他のアプリケーションに影響する可能性があることに注意してください。
 
-### Check the bucket policy
+### バケットポリシーを確認する {#check-the-bucket-policy}
 
-1. In the AWS Management Console, open the Amazon S3 console, and then go to the **Buckets** page. A list of buckets is displayed.
-2. In the list, find and click the target bucket. The bucket information page is displayed.
-3. Click the **Permissions** tab, and then scroll down to the **Bucket policy** area. By default, this area has no policy value. If any denied policy is displayed in this area, the `AccessDenied` error might occur during data import.
+1.  AWS マネジメントコンソールで、Amazon S3 コンソールを開き、 **[バケット]**ページに移動します。バケットのリストが表示されます。
+2.  リストで、対象のバケットを見つけてクリックします。バケット情報ページが表示されます。
+3.  **[権限]**タブをクリックし、 **[バケット ポリシー]**領域まで下にスクロールします。デフォルトでは、この領域にはポリシー値がありません。この領域に拒否されたポリシーが表示されている場合は、データのインポート中に`AccessDenied`エラーが発生する可能性があります。
 
-If you see a denied policy, check whether the policy relates to the current data import. If yes, delete it from the area and retry the data import.
+拒否されたポリシーが表示された場合は、そのポリシーが現在のデータ インポートに関連しているかどうかを確認します。関連している場合は、その領域からポリシーを削除し、データ インポートを再試行します。
 
-### Check the Object Ownership
+### オブジェクトの所有権を確認する {#check-the-object-ownership}
 
-1. In the AWS Management Console, open the Amazon S3 console, and then go to the **Buckets** page. A list of buckets is displayed.
-2. In the list of buckets, find and click the target bucket. The bucket information page is displayed.
-3. On the bucket information page, click the **Permissions** tab, and then scroll down to the **Object Ownership** area. Make sure that the "Object Ownership" configuration is "Bucket owner enforced".
+1.  AWS マネジメントコンソールで、Amazon S3 コンソールを開き、 **[バケット]**ページに移動します。バケットのリストが表示されます。
+2.  バケットのリストで、対象のバケットを見つけてクリックします。バケット情報ページが表示されます。
+3.  バケット情報ページで、 **「権限」**タブをクリックし、「**オブジェクトの所有権**」領域まで下にスクロールします。「オブジェクトの所有権」構成が「バケット所有者が強制」になっていることを確認します。
 
-    If the configuration is not "Bucket owner enforced", the `AccessDenied` error occurs, because your account does not have enough permissions for all objects in this bucket.
+    構成が「バケット所有者の強制」ではない場合、アカウントにこのバケット内のすべてのオブジェクトに対する十分な権限がないため、エラー`AccessDenied`発生します。
 
-To handle the error, click **Edit** in the upper-right corner of the Object Ownership area and change the ownership to "Bucket owner enforced". Note that this might affect your other applications that are using this bucket.
+エラーを処理するには、オブジェクト所有権領域の右上隅にある**[編集] を**クリックし、所有権を「バケット所有者の強制」に変更します。これにより、このバケットを使用している他のアプリケーションに影響が及ぶ可能性があることに注意してください。
 
-### Check your bucket encryption type
+### バケットの暗号化タイプを確認する {#check-your-bucket-encryption-type}
 
-There are more than one way to encrypt an S3 bucket. When you try to access the objects in a bucket, the role you have created must have the permission to access the encryption key for data decryption. Otherwise, the `AccessDenied` error occurs.
+S3 バケットを暗号化する方法は複数あります。バケット内のオブジェクトにアクセスしようとする場合、作成したロールに、データ復号化用の暗号化キーにアクセスする権限が必要です。権限がない場合、 `AccessDenied`エラーが発生します。
 
-To check the encryption type of your bucket, take the following steps:
+バケットの暗号化タイプを確認するには、次の手順を実行します。
 
-1. In the AWS Management Console, open the Amazon S3 console, and then go to the **Buckets** page. A list of buckets is displayed.
-2. In the list of buckets, find and click the target bucket. The bucket information page is displayed.
-3. On the bucket information page, click the **Properties** tab, scroll down to the **Default encryption** area, and then check the configurations in this area.
+1.  AWS マネジメントコンソールで、Amazon S3 コンソールを開き、 **[バケット]**ページに移動します。バケットのリストが表示されます。
+2.  バケットのリストで、対象のバケットを見つけてクリックします。バケット情報ページが表示されます。
+3.  バケット情報ページで、 **[プロパティ]**タブをクリックし、 **[デフォルトの暗号化]**領域まで下にスクロールして、この領域の設定を確認します。
 
-There are two types of server-side encryption: Amazon S3-managed key (SSE-S3) and AWS Key Management Service (SSE-KMS). For SSE-S3, further check is not needed because this encryption type does not cause access denied errors. For SSE-KMS, you need to check the following:
+サーバー側の暗号化には、Amazon S3 管理キー (SSE-S3) と AWS Key Management Service (SSE-KMS) の 2 種類があります。SSE-S3 の場合、この暗号化タイプではアクセス拒否エラーが発生しないため、これ以上のチェックは必要ありません。SSE-KMS の場合は、次の点を確認する必要があります。
 
-- If the AWS KMS key ARN in the area is displayed in black without an underline, the AWS KMS key is an AWS-managed key (aws/s3).
-- If the AWS KMS key ARN in the area is displayed in blue with a link, click the key ARN to open the key information page. Check the left navigation bar to see the specific encryption type. It might be an AWS managed key (aws/s3) or a customer managed key.
+-   当該エリア内の AWS KMS キー ARN が下線なしで黒色で表示されている場合、その AWS KMS キーは AWS 管理キー (aws/s3) です。
+-   エリア内の AWS KMS キー ARN がリンク付きで青色で表示されている場合、キー ARN をクリックしてキー情報ページを開きます。左側のナビゲーション バーで、特定の暗号化タイプを確認します。AWS 管理キー (aws/s3) またはカスタマー管理キーである可能性があります。
 
-<details>
-<summary>For the AWS managed key (aws/s3) in SSE-KMS</summary>
+<details><summary>SSE-KMSのAWS管理キー（aws/s3）の場合</summary>
 
-In this situation, if the `AccessDenied` error occurs, the reason might be that the key is read-only and cross-account permission grants are not allowed. See the AWS article [Why are cross-account users getting Access Denied errors when they try to access S3 objects encrypted by a custom AWS KMS key](https://aws.amazon.com/premiumsupport/knowledge-center/cross-account-access-denied-error-s3/) for details.
+この状況で`AccessDenied`エラーが発生した場合、キーが読み取り専用であり、アカウント間の権限付与が許可されていないことが原因である可能性があります。詳細については、AWS の記事[クロスアカウントユーザーがカスタム AWS KMS キーで暗号化された S3 オブジェクトにアクセスしようとすると、アクセス拒否エラーが発生するのはなぜですか?](https://aws.amazon.com/premiumsupport/knowledge-center/cross-account-access-denied-error-s3/)を参照してください。
 
-To solve the access denied error, click **Edit** in the upper-right corner of the **Default encryption** area, and change the AWS KMS key to "Choose from your AWS KMS keys" or "Enter AWS KMS key ARN", or change the server-side encryption type to "AWS S3 Managed Key (SSE-S3). In addition to this method, you can also create a new bucket and use the custom-managed key or the SSE-S3 encryption method.
-</details>
-
-<details>
-<summary>For the customer-managed key in SSE-KMS</summary>
-
-To solve the `AccessDenied` error in this situation, click the key ARN or manually find the key in KMS. A **Key users** page is displayed. Click **Add** in the upper-right corner of the area to add the role you have used to import data to TiDB Cloud. Then, try importing data again.
+アクセス拒否エラーを解決するには、**デフォルトの暗号化**領域の右上隅にある**[編集] を**クリックし、AWS KMS キーを「AWS KMS キーから選択」または「AWS KMS キー ARN を入力」に変更するか、サーバー側の暗号化タイプを「AWS S3 マネージドキー (SSE-S3)」に変更します。この方法に加えて、新しいバケットを作成し、カスタムマネージドキーまたは SSE-S3 暗号化方法を使用することもできます。
 
 </details>
 
-> **Note:**
+<details><summary>SSE-KMSの顧客管理キーの場合</summary>
+
+この状況で`AccessDenied`エラーを解決するには、キー ARN をクリックするか、KMS でキーを手動で検索します。**キー ユーザー**ページが表示されます。領域の右上隅にある**[追加]**をクリックして、 TiDB Cloudにデータをインポートするために使用したロールを追加します。その後、もう一度データのインポートを試みます。
+
+</details>
+
+> **注記：**
 >
-> If the objects in your bucket have been copied from an existing encrypted bucket, you also need to include the key of the source bucket in the AWS KMS key ARN. This is because the objects in the your bucket use the same encryption method as the source object encryption. For more information, see the AWS document [Using default encryption with replication](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html).
+> バケット内のオブジェクトが既存の暗号化バケットからコピーされた場合は、ソースバケットのキーも AWS KMS キー ARN に含める必要があります。これは、バケット内のオブジェクトがソースオブジェクトの暗号化と同じ暗号化方式を使用するためです。詳細については、AWS ドキュメント[レプリケーションでのデフォルトの暗号化の使用](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html)を参照してください。
 
-### Check the AWS article for instruction
+### 手順についてはAWSの記事を確認してください {#check-the-aws-article-for-instruction}
 
-If you have performed all the checks above and still get the `AccessDenied` error, you can check the AWS article [How do I troubleshoot 403 Access Denied errors from Amazon S3](https://aws.amazon.com/premiumsupport/knowledge-center/s3-troubleshoot-403/) for more instruction.
+上記のすべてのチェックを実行してもエラー`AccessDenied`が発生する場合は、AWS の記事[Amazon S3 からの 403 アクセス拒否エラーをトラブルシューティングするにはどうすればいいですか?](https://aws.amazon.com/premiumsupport/knowledge-center/s3-troubleshoot-403/)で詳細な手順を確認してください。

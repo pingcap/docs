@@ -1,62 +1,62 @@
 ---
 title: (The same as L1 heading) Such as "Garbage Collection Configuration" in 59 characters or less. Include the keywords of this document. Test title here https://moz.com/learn/seo/title-tag
-summary: Summarize this doc in 115 to 145 characters. Start with an SEO-friendly verb that tells the users what they can get from this doc. For example, "Learn all the configuration options that you can use in garbage collection". If your intro paragraph describes your article's intent, you can use it here, edited for length.
+summary: このドキュメントを 115 ～ 145 文字で要約します。このドキュメントからユーザーが何を得ることができるかを伝える SEO に適した動詞から始めます。たとえば、「ガベージコレクションで使用できるすべての構成オプションについて学習する」などです。導入段落で記事の意図を説明している場合は、長さを調整してここで使用できます。
 ---
 
-# L1 heading (the same as title in the metadata)
+# L1 見出し (メタデータのタイトルと同じ) {#l1-heading-the-same-as-title-in-the-metadata}
 
-> About this template:
+> このテンプレートについて:
 >
-> - This document is a template for reference topics, including commands, parameters, configuration options. You can directly copy and use this template and delete unnecessary annotations. An example of this type of document: [TiDB Cluster Alert Rules](/alert-rules.md)
-> - For a new document, please add a link to the appropriate location in the `TOC.md` file (consider where users are most likely to look for this document in the table of contents).
-> - The headings within the document cannot skip levels, and try to avoid using level 5 headings.
+> -   このドキュメントは、コマンド、パラメータ、設定オプションを含む参照トピックのテンプレートです。このテンプレートを直接コピーして使用し、不要な注釈を削除できます。このタイプのドキュメントの例: [TiDBクラスタアラートルール](/alert-rules.md)
+> -   新しいドキュメントの場合は、 `TOC.md`ファイル内の適切な場所へのリンクを追加してください (ユーザーが目次内でこのドキュメントを探す可能性が最も高い場所を考慮してください)。
+> -   ドキュメント内の見出しはレベルをスキップできないため、レベル 5 の見出しの使用は避けてください。
 
-**Required** In the first paragraph, summarize the content of this document in a few sentences.
+**必須**最初の段落では、このドキュメントの内容を数文で要約します。
 
-You can use the following sentence:
+次の文を使うことができます。
 
-"This document describes..."
+「この文書では...について説明します。」
 
-## L2 heading (A category or a parameter/configuration item)
+## L2 見出し (カテゴリまたはパラメータ/構成項目) {#l2-heading-a-category-or-a-parameter-configuration-item}
 
-Introduce the category/parameter/configuration item described in this section, using the following sentence:
+次の文章を使用して、このセクションで説明するカテゴリ/パラメータ/構成項目を紹介します。
 
-"This section describes..."
+「このセクションでは...について説明します。」
 
-### L3 Heading (optional, a parameter or a configuration item)
+### L3 見出し (オプション、パラメータまたは構成項目) {#l3-heading-optional-a-parameter-or-a-configuration-item}
 
-If you need to list multiple parameters, use unordered lists (`*`/`+`/`-`).
+複数のパラメータをリストする必要がある場合は、順序なしリスト ( `*` / `+` / `-` ) を使用します。
 
-- xxx: xxx
-- xxx: xxx
-- xxx: xxx
+-   xxx: xxx
+-   xxx: xxx
+-   xxx: xxx
 
-### L3 Heading 2
+### L3 見出し 2 {#l3-heading-2}
 
 xxx
 
-## L2 Heading 2
+## L2 見出し 2 {#l2-heading-2}
 
-If you need to add notes or warnings, strictly follow the following format.
+メモや警告を追加する必要がある場合は、次の形式に厳密に従ってください。
 
-> **Warning**
+> **警告**
 >
-> If the information might bring risks to users, such as system availability, security, data loss, etc., use a warning. For example, the current feature is an experimental feature and is not recommended for production environments.
+> 情報によって、システムの可用性、セキュリティ、データ損失などのリスクがユーザーにもたらされる可能性がある場合は、警告を使用します。たとえば、現在の機能は実験的機能であり、本番環境では推奨されません。
 
-> **Note**
+> **注記**
 >
-> For general tips and notes, use a note. For example, when reading historical data, even if the current table structure is different from the table structure of the historical data, the historical data will be returned in the table structure of the historical data at that time.
+> 一般的なヒントや注意事項については、ノートを使用してください。たとえば、履歴データを読み込む場合、現在のテーブル構造が履歴データのテーブル構造と異なっていても、履歴データはその時の履歴データのテーブル構造で返されます。
 
-If the notes or warnings are nested in a list, indent them with four spaces.
+メモや警告がリスト内にネストされている場合は、4 つのスペースでインデントします。
 
-To prevent incorrect display, all indentation on the PingCAP website must be 4 spaces.
+誤った表示を防ぐため、PingCAP Web サイトのすべてのインデントは 4 スペースにする必要があります。
 
-## L2 heading 3
+## L2見出し3 {#l2-heading-3}
 
-If you need to use a table, note that the table must have headers (namely, the first row).
+テーブルを使用する必要がある場合は、テーブルにヘッダー (つまり、最初の行) が必要であることに注意してください。
 
-The following table lists the description, default value, and example of the specific configuration item/parameter.
+次の表に、特定の構成項目/パラメータの説明、デフォルト値、および例を示します。
 
-| Parameter | Description | Default value | Required | Example |
-| :-- | :-- | :-- | :-- | :-- |
-| xxx | xxx | xxx | xxx | xxx |
+| パラメータ | 説明  | デフォルト値 | 必須  | 例   |
+| :---- | :-- | :----- | :-- | :-- |
+| xxx   | xxx | xxx    | xxx | xxx |

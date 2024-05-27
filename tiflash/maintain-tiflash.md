@@ -1,54 +1,50 @@
 ---
 title: Maintain a TiFlash Cluster
-summary: Learn common operations when you maintain a TiFlash cluster.
+summary: TiFlashクラスターを保守する際の一般的な操作を学習します。
 ---
 
-# Maintain a TiFlash Cluster
+# TiFlashクラスタを管理 {#maintain-a-tiflash-cluster}
 
-This document describes how to perform common operations when you maintain a [TiFlash](/tiflash/tiflash-overview.md) cluster, including checking the TiFlash version. This document also introduces critical logs and a system table of TiFlash.
+このドキュメントでは、 TiFlashバージョンの確認など、 [TiFlash](/tiflash/tiflash-overview.md)クラスターを保守するときに一般的な操作を実行する方法について説明します。また、このドキュメントでは、 TiFlashの重要なログとシステム テーブルについても紹介します。
 
-## Check the TiFlash version
+## TiFlashのバージョンを確認する {#check-the-tiflash-version}
 
-There are two ways to check the TiFlash version:
+TiFlash のバージョンを確認するには、次の 2 つの方法があります。
 
-- If the binary file name of TiFlash is `tiflash`, you can check the version by executing the `./tiflash version` command.
+-   TiFlashのバイナリファイル名が`tiflash`の場合、 `./tiflash version`コマンドを実行することでバージョンを確認できます。
 
-    However, to execute the above command, you need to add the directory path which includes the `libtiflash_proxy.so` dynamic library to the `LD_LIBRARY_PATH` environment variable. This is because the running of TiFlash relies on the `libtiflash_proxy.so` dynamic library.
+    ただし、上記のコマンドを実行するには、 `libtiflash_proxy.so`動的ライブラリを含むディレクトリ パスを`LD_LIBRARY_PATH`環境変数に追加する必要があります。これは、 TiFlashの実行が`libtiflash_proxy.so`動的ライブラリに依存しているためです。
 
-    For example, when `tiflash` and `libtiflash_proxy.so` are in the same directory, you can first switch to this directory, and then use the following command to check the TiFlash version:
-
-    {{< copyable "shell-regular" >}}
+    たとえば、 `tiflash`と`libtiflash_proxy.so`同じディレクトリにある場合は、まずこのディレクトリに切り替えてから、次のコマンドを使用してTiFlash のバージョンを確認できます。
 
     ```shell
     LD_LIBRARY_PATH=./ ./tiflash version
     ```
 
-- Check the TiFlash version by referring to the TiFlash log. For the log path, see the `[logger]` part in [the `tiflash.toml` file](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file). For example:
+-   TiFlashログを参照してTiFlash のバージョンを確認します。ログ パスについては、 [`tiflash.toml`ファイル](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)の`[logger]`部分を参照してください。例:
 
-    ```
-    <information>: TiFlash version: TiFlash 0.2.0 master-375035282451103999f3863c691e2fc2
-    ```
+        <information>: TiFlash version: TiFlash 0.2.0 master-375035282451103999f3863c691e2fc2
 
-## TiFlash critical logs
+## TiFlash重要なログ {#tiflash-critical-logs}
 
-| Log Information | Log Description |
-|---------------|-------------------|
-| `[INFO] [<unknown>] ["KVStore: Start to persist [region 47, applied: term 6 index 10]"] [thread_id=23]` | Data starts to be replicated (the number in the square brackets at the start of the log refers to the thread ID |
-| `[DEBUG] [<unknown>] ["CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute(): Handling DAG request"] [thread_id=30]` | Handling DAG request, that is, TiFlash starts to handle a Coprocessor request |
-| `[DEBUG] [<unknown>] ["CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute(): Handle DAG request done"] [thread_id=30]` | Handling DAG request done, that is, TiFlash finishes handling a Coprocessor request |
+| ログ情報                                                                                                                                 | ログの説明                                             |
+| ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------- |
+| `[INFO] [<unknown>] ["KVStore: Start to persist [region 47, applied: term 6 index 10]"] [thread_id=23]`                              | データの複製が開始されます（ログの先頭の角括弧内の数字はスレッドIDを表します）          |
+| `[DEBUG] [<unknown>] ["CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute(): Handling DAG request"] [thread_id=30]`    | DAG要求の処理、つまりTiFlashがコプロセッサー要求の処理を開始する             |
+| `[DEBUG] [<unknown>] ["CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute(): Handle DAG request done"] [thread_id=30]` | DAG要求の処理が完了しました。つまり、 TiFlashはコプロセッサー要求の処理を完了しました。 |
 
-You can find the beginning or the end of a Coprocessor request, and then locate the related logs of the Coprocessor request through the thread ID printed at the start of the log.
+コプロセッサー要求の開始または終了を見つけ、ログの先頭に印刷されているスレッド ID を通じてコプロセッサー要求の関連ログを見つけることができます。
 
-## TiFlash system table
+## TiFlashシステムテーブル {#tiflash-system-table}
 
-The column names and their descriptions of the `information_schema.tiflash_replica` system table are as follows:
+`information_schema.tiflash_replica`システム テーブルの列名とその説明は次のとおりです。
 
-| Column Name | Description |
-|---------------|-----------|
-| TABLE_SCHEMA | Database name |
-| TABLE_NAME | Table name |
-| TABLE_ID | Table ID |
-| REPLICA_COUNT | Number of TiFlash replicas |
-|LOCATION_LABELS | The hint for PD, based on which multiple replicas in a Region are scattered |
-| AVAILABLE | Available or not (0/1)|
-| PROGRESS | Replication progress [0.0~1.0] |
+| カラム名     | 説明                                    |
+| -------- | ------------------------------------- |
+| テーブルスキーマ | データベース名                               |
+| テーブル名    | テーブル名                                 |
+| テーブルID   | テーブルID                                |
+| レプリカ数    | TiFlashレプリカの数                         |
+| 場所ラベル    | PDのヒント。リージョン内の複数のレプリカが分散される場所に基づいている。 |
+| 利用可能     | 利用可能かどうか (0/1)                        |
+| 進捗       | レプリケーションの進行状況 [0.0~1.0]               |

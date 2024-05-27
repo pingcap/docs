@@ -1,48 +1,48 @@
 ---
 title: TiDB Serverless Branching (Beta) Overview
-summary: Learn the concept of TiDB Serverless branches.
+summary: TiDB サーバーレス ブランチの概念を学びます。
 ---
 
-# TiDB Serverless Branching (Beta) Overview
+# TiDB サーバーレス ブランチング (ベータ版) の概要 {#tidb-serverless-branching-beta-overview}
 
-TiDB Cloud lets you create branches for TiDB Serverless clusters. A branch for a cluster is a separate instance that contains a diverged copy of data from the original cluster. It provides an isolated environment, allowing you to experiment freely without worrying about affecting the original cluster.
+TiDB Cloudと、TiDB Serverless クラスターのブランチを作成できます。クラスターのブランチは、元のクラスターから分岐したデータのコピーを含む別のインスタンスです。分離された環境が提供されるため、元のクラスターへの影響を心配することなく自由に実験できます。
 
-With TiDB Serverless branches, developers can work in parallel, iterate rapidly on new features, troubleshoot issues without affecting the production database, and easily revert changes if needed. This feature streamlines the development and deployment process while ensuring a high level of stability and reliability for the production database.
+TiDB Serverless ブランチを使用すると、開発者は並行して作業し、新機能を迅速に反復し、本番データベースに影響を与えずに問題をトラブルシューティングし、必要に応じて変更を簡単に元に戻すことができます。この機能により、開発と展開のプロセスが合理化され、本番データベースの高度な安定性と信頼性が確保されます。
 
-## Implementations
+## 実装 {#implementations}
 
-When a branch for a cluster is created, the data in the branch diverges from the original cluster. This means that subsequent changes made in either the original cluster or the branch will not be synchronized with each other.
+クラスターのブランチが作成されると、ブランチ内のデータは元のクラスターから分岐します。つまり、元のクラスターまたはブランチで行われた後続の変更は相互に同期されません。
 
-To ensure fast and seamless branch creation, TiDB Serverless uses a copy-on-write technique for sharing data between the original cluster and its branches. This process usually completes within a few minutes and is imperceptible to users, ensuring that it does not affect the performance of your original cluster.
+高速でシームレスなブランチ作成を実現するために、TiDB Serverless はコピーオンライト技術を使用して、元のクラスターとそのブランチ間でデータを共有します。このプロセスは通常数分以内に完了し、ユーザーには認識されないため、元のクラスターのパフォーマンスには影響しません。
 
-## Scenarios
+## シナリオ {#scenarios}
 
-You can create branches easily and quickly to get isolated data environments. Branches are beneficial in the following scenarios where multiple developers or teams need to work independently, test changes, fix bugs, experiment with new features, or roll out updates without disrupting the production database.
+ブランチを簡単かつ迅速に作成して、分離されたデータ環境を実現できます。ブランチは、複数の開発者またはチームが独立して作業し、変更をテストし、バグを修正し、新機能を試し、本番データベースを中断せずに更新を展開する必要がある次のようなシナリオで役立ちます。
 
-- Feature development: Developers can work on new features in isolation without affecting the production database. Each feature can have its own branch, allowing quick iteration and experimentation without affecting other ongoing work.
+-   機能開発: 開発者は、本番データベースに影響を与えることなく、新しい機能を個別に開発できます。各機能には独自のブランチを設定できるため、進行中の他の作業に影響を与えることなく、迅速な反復と実験が可能になります。
 
-- Bug fixing: Developers can create a branch dedicated to fixing a specific bug, test the fix, and then merge it back once verified, without introducing new issues to the production database.
+-   バグ修正: 開発者は、特定のバグを修正するためのブランチを作成し、修正をテストし、検証後にマージし直すことで、本番データベースに新たな問題を持ち込むことなく修正を行うことができます。
 
-- Experimentation: While developing new features or making changes, developers can create branches to experiment with different approaches or configurations. This allows them to compare various options, gather data, and make informed decisions before the changes are merged into the production database.
+-   実験: 新機能の開発や変更を行う際に、開発者はブランチを作成してさまざまなアプローチや構成を試すことができます。これにより、変更が本番データベースにマージされる前に、さまざまなオプションを比較し、データを収集し、情報に基づいた決定を下すことができます。
 
-- Performance optimization: Database changes are sometimes made to enhance performance. With branching, developers can experiment and fine-tune various configurations, indexes, or algorithms in isolated environments to identify the most efficient solution.
+-   パフォーマンスの最適化: パフォーマンスを向上させるために、データベースの変更が行われることがあります。ブランチを使用すると、開発者は分離された環境でさまざまな構成、インデックス、またはアルゴリズムを試して微調整し、最も効率的なソリューションを特定できます。
 
-- Testing and staging: Teams can create branches for testing and staging purposes. It provides a controlled environment for quality assurance, user acceptance testing, or staging customizations before the changes are merged into the production database.
+-   テストとステージング: チームは、テストとステージングの目的でブランチを作成できます。変更が本番データベースにマージされる前に、品質保証、ユーザー受け入れテスト、またはステージングのカスタマイズのための制御された環境が提供されます。
 
-- Parallel development: Different teams or developers can work on separate projects simultaneously. Each project can have its own branch, enabling independent development and experimentation, while still being able to merge changes back into the production database.
+-   並行開発: 異なるチームまたは開発者が別々のプロジェクトに同時に取り組むことができます。各プロジェクトは独自のブランチを持つことができるため、独立した開発と実験が可能になり、変更を本番データベースにマージすることもできます。
 
-## Limitations and quotas
+## 制限と割り当て {#limitations-and-quotas}
 
-Currently, TiDB Serverless branches are in beta and free of charge.
+現在、TiDB Serverless ブランチはベータ版であり、無料です。
 
-- You can only create branches for TiDB Serverless clusters that are created after July 5, 2023.
+-   2023 年 7 月 5 日以降に作成された TiDB Serverless クラスターのブランチのみを作成できます。
 
-- For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless branches by default across all the clusters. The branches of a cluster will be created in the same region as the cluster, and you cannot create branches for a throttled cluster or a cluster larger than 100 GiB.
+-   TiDB Cloudの各組織では、すべてのクラスターにわたってデフォルトで最大 5 つの TiDB Serverless ブランチを作成できます。クラスターのブランチはクラスターと同じリージョンに作成され、スロットルされたクラスターや 100 GiB を超えるクラスターのブランチを作成することはできません。
 
-- For each branch, 5 GiB storage is allowed. Once the storage is reached, the read and write operations on this branch will be throttled until you reduce the storage.
+-   各ブランチには 5 GiB のstorageが許可されます。storageに達すると、storageを削減するまで、このブランチでの読み取りおよび書き込み操作は制限されます。
 
-If you need more quotas, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+より多くの割り当てが必要な場合は、 [TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md) 。
 
-## What's next
+## 次は何ですか {#what-s-next}
 
-- [Learn how to manage branches](/tidb-cloud/branch-manage.md)
+-   [ブランチの管理方法を学ぶ](/tidb-cloud/branch-manage.md)

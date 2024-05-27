@@ -1,170 +1,168 @@
 ---
 title: TiDB Data Migration FAQs
-summary: Learn about frequently asked questions (FAQs) about TiDB Data Migration (DM).
+summary: TiDB データ移行 (DM) に関するよくある質問 (FAQ) について説明します。
 ---
 
-# TiDB Data Migration FAQs
+# TiDB データ移行に関する FAQ {#tidb-data-migration-faqs}
 
-This document collects the frequently asked questions (FAQs) about TiDB Data Migration (DM).
+このドキュメントでは、TiDB データ移行 (DM) に関するよくある質問 (FAQ) をまとめています。
 
-## Does DM support migrating data from Alibaba RDS or other cloud databases?
+## DM は Alibaba RDS またはその他のクラウド データベースからのデータ移行をサポートしていますか? {#does-dm-support-migrating-data-from-alibaba-rds-or-other-cloud-databases}
 
-Currently, DM only supports decoding the standard version of MySQL or MariaDB binlog. It has not been tested for Alibaba Cloud RDS or other cloud databases. If you are confirmed that its binlog is in standard format, then it is supported.
+現在、DM は MySQL または MariaDB binlogの標準バージョンのデコードのみをサポートしています。Alibaba Cloud RDS やその他のクラウド データベースではテストされていません。binlogが標準形式であることが確認されている場合は、サポートされます。
 
-It is a known issue that for an upstream table with no primary key in Alibaba Cloud RDS, its binlog still contains a hidden primary key column, which is inconsistent with the original table structure.
+Alibaba Cloud RDS の主キーのないアップストリーム テーブルの場合、そのbinlogに非表示の主キー列が含まれたままになり、元のテーブル構造と一致しないという既知の問題があります。
 
-Here are some known incompatible issues:
+互換性に関する既知の問題は次のとおりです。
 
-- In **Alibaba Cloud RDS**, for an upstream table with no primary key, its binlog still contains a hidden primary key column, which is inconsistent with the original table structure.
-- In **HUAWEI Cloud RDS**, directly reading binlog files is not supported. For more details, see [Can HUAWEI Cloud RDS Directly Read Binlog Backup Files?](https://support.huaweicloud.com/en-us/rds_faq/rds_faq_0210.html)
+-   **Alibaba Cloud RDS**では、主キーのないアップストリーム テーブルの場合、そのbinlogには非表示の主キー列がまだ含まれており、元のテーブル構造と一致していません。
+-   **HUAWEI Cloud RDS**では、 binlogファイルを直接読み取ることはできません。詳細については、 [HUAWEI Cloud RDS はBinlogバックアップファイルを直接読み取ることができますか?](https://support.huaweicloud.com/en-us/rds_faq/rds_faq_0210.html)を参照してください。
 
-## Does the regular expression of the block and allow list in the task configuration support `non-capturing (?!)`?
+## タスク構成のブロック リストと許可リストの正規表現は<code>non-capturing (?!)</code> ? {#does-the-regular-expression-of-the-block-and-allow-list-in-the-task-configuration-support-code-non-capturing-code}
 
-Currently, DM does not support it and only supports the regular expressions of the Golang standard library. See regular expressions supported by Golang via [re2-syntax](https://github.com/google/re2/wiki/Syntax).
+現在、DM はこれをサポートしておらず、 Golang標準ライブラリの正規表現のみをサポートしています。Golang でサポートされている正規表現については、 Golang [re2構文](https://github.com/google/re2/wiki/Syntax)参照してください。
 
-## If a statement executed upstream contains multiple DDL operations, does DM support such migration?
+## アップストリームで実行されたステートメントに複数の DDL 操作が含まれている場合、DM はそのような移行をサポートしますか? {#if-a-statement-executed-upstream-contains-multiple-ddl-operations-does-dm-support-such-migration}
 
-DM will attempt to split a single statement containing multiple DDL change operations into multiple statements containing only one DDL operation, but might not cover all cases. It is recommended to include only one DDL operation in a statement executed upstream, or verify it in the test environment. If it is not supported, you can file an [issue](https://github.com/pingcap/tiflow/issues) to the `pingcap/tiflow` repository.
+DM は、複数の DDL 変更操作を含む単一のステートメントを、1 つの DDL 操作のみを含む複数のステートメントに分割しようとしますが、すべてのケースをカバーできるとは限りません。アップストリームで実行されるステートメントには 1 つの DDL 操作のみを含めるか、テスト環境で検証することをお勧めします。サポートされていない場合は、 [問題](https://github.com/pingcap/tiflow/issues)対`pingcap/tiflow`リポジトリを提出できます。
 
-## How to handle incompatible DDL statements?
+## 互換性のない DDL ステートメントをどのように処理しますか? {#how-to-handle-incompatible-ddl-statements}
 
-When you encounter a DDL statement unsupported by TiDB, you need to manually handle it using dmctl (skipping the DDL statement or replacing the DDL statement with a specified DDL statement). For details, see [Handle failed DDL statements](/dm/handle-failed-ddl-statements.md).
+TiDB でサポートされていない DDL 文に遭遇した場合は、dmctl を使用して手動で処理する必要があります (DDL 文をスキップするか、DDL 文を指定された DDL 文に置き換えます)。詳細については、 [失敗したDDLステートメントを処理する](/dm/handle-failed-ddl-statements.md)参照してください。
 
-> **Note:**
+> **注記：**
 >
-> Currently, TiDB is not compatible with all the DDL statements that MySQL supports. See [MySQL Compatibility](/mysql-compatibility.md#ddl-operations).
+> 現在、TiDB は MySQL がサポートするすべての DDL ステートメントと互換性がありません。1 [MySQL 互換性](/mysql-compatibility.md#ddl-operations)参照してください。
 
-## Does DM replicate view-related DDL statements and DML statements to TiDB?
+## DM はビュー関連の DDL ステートメントと DML ステートメントを TiDB に複製しますか? {#does-dm-replicate-view-related-ddl-statements-and-dml-statements-to-tidb}
 
-Currently, DM does not replicate view-related DDL statements to the downstream TiDB cluster, nor does it replicate view-related DML statements to the downstream TiDB cluster.
+現在、DM はビュー関連の DDL ステートメントをダウンストリーム TiDB クラスターに複製しません。また、ビュー関連の DML ステートメントをダウンストリーム TiDB クラスターに複製しません。
 
-## How to reset the data migration task?
+## データ移行タスクをリセットするにはどうすればよいですか? {#how-to-reset-the-data-migration-task}
 
-When an exception occurs during data migration and the data migration task cannot be resumed, you need to reset the task and re-migrate the data:
+データ移行中に例外が発生し、データ移行タスクを再開できない場合は、タスクをリセットしてデータを再移行する必要があります。
 
-1. Execute the `stop-task` command to stop the abnormal data migration task.
+1.  異常なデータ移行タスクを停止するには、 `stop-task`コマンドを実行します。
 
-2. Purge the data migrated to the downstream.
+2.  ダウンストリームに移行されたデータを消去します。
 
-3. Use one of the following ways to restart the data migration task.
+3.  次のいずれかの方法でデータ移行タスクを再開します。
 
-   - Specify a new task name in the task configuration file. Then execute `start-task {task-config-file}`.
-   - Execute `start-task --remove-meta {task-config-file}`.
+    -   タスク設定ファイルで新しいタスク名を指定します。次に、 `start-task {task-config-file}`実行します。
+    -   `start-task --remove-meta {task-config-file}`実行します。
 
-## How to handle the error returned by the DDL operation related to the gh-ost table, after `online-ddl: true` is set?
+## <code>online-ddl: true</code>を設定した後、gh-ost テーブルに関連する DDL 操作によって返されたエラーをどのように処理しますか? {#how-to-handle-the-error-returned-by-the-ddl-operation-related-to-the-gh-ost-table-after-code-online-ddl-true-code-is-set}
 
-```
-[unit=Sync] ["error information"="{\"msg\":\"[code=36046:class=sync-unit:scope=internal:level=high] online ddls on ghost table `xxx`.`_xxxx_gho`\\ngithub.com/pingcap/tiflow/pkg/terror.(*Error).Generate ......
-```
+    [unit=Sync] ["error information"="{\"msg\":\"[code=36046:class=sync-unit:scope=internal:level=high] online ddls on ghost table `xxx`.`_xxxx_gho`\\ngithub.com/pingcap/tiflow/pkg/terror.(*Error).Generate ......
 
-The above error can be caused by the following reason:
+上記のエラーは、次の理由により発生する可能性があります。
 
-In the last `rename ghost_table to origin table` step, DM reads the DDL information in memory, and restores it to the DDL of the origin table.
+最後の`rename ghost_table to origin table`ステップでは、DM はメモリ内の DDL 情報を読み取り、元のテーブルの DDL に復元します。
 
-However, the DDL information in memory is obtained in either of the two ways:
+ただし、メモリ内の DDL 情報は、次の 2 つの方法のいずれかで取得されます。
 
-- DM [processes the gh-ost table during the `alter ghost_table` operation](/dm/feature-online-ddl.md#online-schema-change-gh-ost) and records the DDL information of `ghost_table`;
-- When DM-worker is restarted to start the task, DM reads the DDL from `dm_meta.{task_name}_onlineddl`.
+-   DM [`alter ghost_table`操作中に gh-ost テーブルを処理する](/dm/feature-online-ddl.md#online-schema-change-gh-ost)および`ghost_table`の DDL 情報を記録しま す。
+-   DM ワーカーが再起動されてタスクが開始されると、DM は`dm_meta.{task_name}_onlineddl`から DDL を読み取ります。
 
-Therefore, in the process of incremental replication, if the specified Pos has skipped the `alter ghost_table` DDL but the Pos is still in the online-ddl process of gh-ost, the ghost_table is not written into memory or `dm_meta.{task_name}_onlineddl` correctly. In such cases, the above error is returned.
+そのため、増分レプリケーションのプロセスで、指定された Pos が`alter ghost_table` DDL をスキップしたが、その Pos がまだ gh-ost の online-ddl プロセス内にある場合、ghost_table はメモリまたは`dm_meta.{task_name}_onlineddl`に正しく書き込まれません。このような場合、上記のエラーが返されます。
 
-You can avoid this error by the following steps:
+このエラーは次の手順で回避できます。
 
-1. Remove the `online-ddl-scheme` or `online-ddl` configuration of the task.
+1.  タスクの`online-ddl-scheme`または`online-ddl`構成を削除します。
 
-2. Configure `_{table_name}_gho`, `_{table_name}_ghc`, and `_{table_name}_del` in `block-allow-list.ignore-tables`.
+2.  `block-allow-list.ignore-tables`の`_{table_name}_gho` `_{table_name}_ghc`設定し`_{table_name}_del` 。
 
-3. Execute the upstream DDL in the downstream TiDB manually.
+3.  ダウンストリーム TiDB でアップストリーム DDL を手動で実行します。
 
-4. After the Pos is replicated to the position after the gh-ost process, re-enable the `online-ddl-scheme` or `online-ddl` configuration and comment out `block-allow-list.ignore-tables`.
+4.  gh-ost プロセス後に Pos が位置に複製されたら、 `online-ddl-scheme`または`online-ddl`構成を再度有効にして、 `block-allow-list.ignore-tables`をコメント アウトします。
 
-## How to add tables to the existing data migration tasks?
+## 既存のデータ移行タスクにテーブルを追加するにはどうすればよいですか? {#how-to-add-tables-to-the-existing-data-migration-tasks}
 
-If you need to add tables to a data migration task that is running, you can address it in the following ways according to the stage of the task.
+実行中のデータ移行タスクにテーブルを追加する必要がある場合は、タスクの段階に応じて次の方法で対処できます。
 
-> **Note:**
+> **注記：**
 >
-> Because adding tables to an existing data migration task is complex, it is recommended that you perform this operation only when necessary.
+> 既存のデータ移行タスクにテーブルを追加するのは複雑なため、必要な場合にのみこの操作を実行することをお勧めします。
 
-### In the `Dump` stage
+### <code>Dump</code>段階 {#in-the-code-dump-code-stage}
 
-Since MySQL cannot specify a snapshot for export, it does not support updating data migration tasks during the export and then restarting to resume the export through the checkpoint. Therefore, you cannot dynamically add tables that need to be migrated at the `Dump` stage.
+MySQL はエクスポートのスナップショットを指定できないため、エクスポート中にデータ移行タスクを更新し、その後再起動してチェックポイントを介してエクスポートを再開することはサポートされていません。したがって、 `Dump`段階で移行する必要があるテーブルを動的に追加することはできません。
 
-If you really need to add tables for migration, it is recommended to restart the task directly using the new configuration file.
+移行のためにテーブルを追加する必要がある場合は、新しい構成ファイルを使用してタスクを直接再起動することをお勧めします。
 
-### In the `Load` stage
+### <code>Load</code>ステージ {#in-the-code-load-code-stage}
 
-During the export, multiple data migration tasks usually have different binlog positions. If you merge the tasks in the `Load` stage, they might not be able to reach consensus on binlog positions. Therefore, it is not recommended to add tables to a data migration task in the `Load` stage.
+エクスポート中、複数のデータ移行タスクは通常、異なるbinlog位置を持ちます。 `Load`段階でタスクをマージすると、binlog位置について合意に達することができない可能性があります。したがって、 `Load`段階でデータ移行タスクにテーブルを追加することはお勧めしません。
 
-### In the `Sync` stage
+### <code>Sync</code>段階 {#in-the-code-sync-code-stage}
 
-When the data migration task is in the `Sync` stage, if you add additional tables to the configuration file and restart the task, DM does not re-execute full export and import for the newly added tables. Instead, DM continues incremental replication from the previous checkpoint.
+データ移行タスクが`Sync`段階にあるときに、構成ファイルにテーブルを追加してタスクを再開すると、DM は新しく追加されたテーブルに対して完全なエクスポートとインポートを再実行しません。代わりに、DM は前のチェックポイントから増分レプリケーションを続行します。
 
-Therefore, if the full data of the newly added table has not been imported to the downstream, you need to use a separate data migration task to export and import the full data to the downstream.
+したがって、新しく追加されたテーブルの完全なデータがダウンストリームにインポートされていない場合は、別のデータ移行タスクを使用して、完全なデータをエクスポートし、ダウンストリームにインポートする必要があります。
 
-Record the position information in the global checkpoint (`is_global=1`) corresponding to the existing migration task as `checkpoint-T`, such as `(mysql-bin.000100, 1234)`. Record the position information of the full export `metedata` (or the checkpoint of another data migration task in the `Sync` stage) of the table to be added to the migration task as `checkpoint-S`, such as `(mysql-bin.000099, 5678)`. You can add the table to the migration task by the following steps:
+既存の移行タスクに対応するグローバルチェックポイント（ `is_global=1` ）の位置情報を`checkpoint-T` （例： `(mysql-bin.000100, 1234)`として記録します。移行タスクに追加するテーブルのフルエクスポート`metedata` （または`Sync`ステージの別のデータ移行タスクのチェックポイント）の位置情報を`checkpoint-S` （例： `(mysql-bin.000099, 5678)` ）として記録します。次の手順でテーブルを移行タスクに追加できます。
 
-1. Use `stop-task` to stop an existing migration task. If the table to be added belongs to another running migration task, stop that task as well.
+1.  既存の移行タスクを停止するには、 `stop-task`使用します。追加するテーブルが実行中の別の移行タスクに属している場合は、そのタスクも停止します。
 
-2. Use a MySQL client to connect the downstream TiDB database and manually update the information in the checkpoint table corresponding to the existing migration task to the smaller value between `checkpoint-T` and `checkpoint-S`. In this example, it is `(mysql- bin.000099, 5678)`.
+2.  MySQL クライアントを使用してダウンストリーム TiDB データベースに接続し、既存の移行タスクに対応するチェックポイント テーブル内の情報を`checkpoint-T`と`checkpoint-S`の間の小さい方の値に手動で更新します。この例では`(mysql- bin.000099, 5678)`です。
 
-    - The checkpoint table to be updated is `{task-name}_syncer_checkpoint` in the `{dm_meta}` schema.
+    -   更新するチェックポイント テーブルは、スキーマ`{dm_meta}`の`{task-name}_syncer_checkpoint`です。
 
-    - The checkpoint rows to be updated match `id=(source-id)` and `is_global=1`.
+    -   更新するチェックポイント行は`id=(source-id)`と`is_global=1`と一致します。
 
-    - The checkpoint columns to be updated are `binlog_name` and `binlog_pos`.
+    -   更新するチェックポイント列は`binlog_name`と`binlog_pos`です。
 
-3. Set `safe-mode: true` for the `syncers` in the task to ensure reentrant execution.
+3.  再入実行を確実にするために、タスクの`syncers`を`safe-mode: true`に設定します。
 
-4. Start the task using `start-task`.
+4.  `start-task`使用してタスクを開始します。
 
-5. Observe the task status through `query-status`. When `syncerBinlog` exceeds the larger value of `checkpoint-T` and `checkpoint-S`, restore `safe-mode` to the original value and restart the task. In this example, it is `(mysql-bin.000100, 1234)`.
+5.  `query-status`を通してタスクの状態を観察します。 `syncerBinlog` `checkpoint-T`と`checkpoint-S`の大きい方の値を超えたら、 `safe-mode`元の値に戻し、タスクを再開します。この例では`(mysql-bin.000100, 1234)`です。
 
-## How to handle the error `packet for query is too large. Try adjusting the 'max_allowed_packet' variable` that occurs during the full import?
+## <code>packet for query is too large. Try adjusting the &#39;max_allowed_packet&#39; variable</code> ? {#how-to-handle-the-error-code-packet-for-query-is-too-large-try-adjusting-the-max-allowed-packet-variable-code-that-occurs-during-the-full-import}
 
-Set the parameters below to a value larger than the default 67108864 (64M).
+以下のパラメータをデフォルトの 67108864 (64M) より大きい値に設定します。
 
-- The global variable of the TiDB server: `max_allowed_packet`.
-- The configuration item in the task configuration file: `target-database.max-allowed-packet`. For details, refer to [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md).
+-   TiDBサーバーのグローバル変数: `max_allowed_packet` 。
+-   タスク設定ファイル内の設定項目： `target-database.max-allowed-packet` 。詳細については[DM 高度なタスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
 
-## How to handle the error `Error 1054: Unknown column 'binlog_gtid' in 'field list'` that occurs when existing DM migration tasks of an DM 1.0 cluster are running on a DM 2.0 or newer cluster?
+## DM 1.0 クラスターの既存の DM 移行タスクが DM 2.0 以降のクラスターで実行されているときに発生するエラー<code>Error 1054: Unknown column &#39;binlog_gtid&#39; in &#39;field list&#39;</code>を処理する方法を教えてください。 {#how-to-handle-the-error-code-error-1054-unknown-column-binlog-gtid-in-field-list-code-that-occurs-when-existing-dm-migration-tasks-of-an-dm-1-0-cluster-are-running-on-a-dm-2-0-or-newer-cluster}
 
-Since DM v2.0, if you directly run the `start-task` command with the task configuration file of the DM 1.0 cluster to continue the incremental data replication, the error `Error 1054: Unknown column 'binlog_gtid' in 'field list'` occurs.
+DM v2.0 以降、増分データレプリケーションを続行するために DM 1.0 クラスターのタスク構成ファイルで`start-task`コマンドを直接実行すると、エラー`Error 1054: Unknown column 'binlog_gtid' in 'field list'`が発生します。
 
-This error can be handled by [manually importing DM migration tasks of a DM 1.0 cluster to a DM 2.0 cluster](/dm/manually-upgrade-dm-1.0-to-2.0.md).
+このエラーは[DM 1.0 クラスターの DM 移行タスクを DM 2.0 クラスターに手動でインポートする](/dm/manually-upgrade-dm-1.0-to-2.0.md)で処理できます。
 
-## Why does TiUP fail to deploy some versions of DM (for example, v2.0.0-hotfix)?
+## TiUP がDM の一部のバージョン (たとえば、v2.0.0-hotfix) の展開に失敗するのはなぜですか? {#why-does-tiup-fail-to-deploy-some-versions-of-dm-for-example-v2-0-0-hotfix}
 
-You can use the `tiup list dm-master` command to view the DM versions that TiUP supports to deploy. TiUP does not manage DM versions which are not shown by this command.
+`tiup list dm-master`コマンドを使用すると、 TiUPが展開をサポートする DM バージョンを表示できます。TiUPは、このコマンドで表示されない DM バージョンを管理しません。
 
-## How to handle the error `parse mydumper metadata error: EOF` that occurs when DM is replicating data?
+## DM がデータを複製しているときに発生するエラー<code>parse mydumper metadata error: EOF</code> 」をどのように処理すればよいですか? {#how-to-handle-the-error-code-parse-mydumper-metadata-error-eof-code-that-occurs-when-dm-is-replicating-data}
 
-You need to check the error message and log files to further analyze this error. The cause might be that the dump unit does not produce the correct metadata file due to a lack of permissions.
+このエラーをさらに分析するには、エラー メッセージとログ ファイルを確認する必要があります。原因としては、権限不足のためダンプ ユニットが正しいメタデータ ファイルを生成していないことが考えられます。
 
-## Why does DM report no fatal error when replicating sharded schemas and tables, but downstream data is lost?
+## シャードされたスキーマとテーブルを複製するときに DM が致命的なエラーを報告しないのに、ダウンストリーム データが失われるのはなぜですか? {#why-does-dm-report-no-fatal-error-when-replicating-sharded-schemas-and-tables-but-downstream-data-is-lost}
 
-Check the configuration items `block-allow-list` and `table-route`:
+構成項目`block-allow-list`と`table-route`を確認します。
 
-- You need to configure the names of upstream databases and tables under `block-allow-list`. You can add "~" before `do-tables` to use regular expressions to match names.
-- `table-route` uses wildcard characters instead of regular expressions to match table names. For example, `table_parttern_[0-63]` only matches 7 tables, from `table_parttern_0` to `table_pattern_6`.
+-   `block-allow-list`の下にあるアップストリーム データベースとテーブルの名前を設定する必要があります。 `do-tables`の前に「~」を追加すると、正規表現を使用して名前を一致させることができます。
+-   `table-route` 、テーブル名を一致させるために正規表現の代わりにワイルドカード文字を使用します。たとえば、 `table_parttern_[0-63]` `table_parttern_0`から`table_pattern_6`までの 7 つのテーブルにのみ一致します。
 
-## Why does the `replicate lag` monitor metric show no data when DM is not replicating from upstream?
+## DM がアップストリームからレプリケートしていないのに、 <code>replicate lag</code>モニター メトリックにデータが表示されないのはなぜですか? {#why-does-the-code-replicate-lag-code-monitor-metric-show-no-data-when-dm-is-not-replicating-from-upstream}
 
-In DM 1.0, you need to enable `enable-heartbeat` to generate the monitor data. In DM 2.0 and later versions, it is expected to have no data in the monitor metric `replicate lag` because this feature is not supported.
+DM 1.0 では、モニター データを生成するには`enable-heartbeat`有効にする必要があります。DM 2.0 以降のバージョンでは、この機能はサポートされていないため、モニター メトリック`replicate lag`にデータがないと考えられます。
 
-## How to handle the error `fail to initial unit Sync of subtask` when DM is starting a task, with the `RawCause` in the error message showing `context deadline exceeded`?
+## DM がタスクを開始しているときに、 <code>context deadline exceeded</code>を示すエラー メッセージの<code>RawCause</code>で<code>fail to initial unit Sync of subtask</code>エラーをどのように処理しますか? {#how-to-handle-the-error-code-fail-to-initial-unit-sync-of-subtask-code-when-dm-is-starting-a-task-with-the-code-rawcause-code-in-the-error-message-showing-code-context-deadline-exceeded-code}
 
-This is a known issue in DM 2.0.0 version and will be fixed in DM 2.0.1 version. It is likely to be triggered when a replication task has a lot of tables to process. If you use TiUP to deploy DM, you can upgrade DM to the nightly version to fix this issue. Or you can download the 2.0.0-hotfix version from [the release page of DM](https://github.com/pingcap/tiflow/releases) on GitHub and manually replace the executable files.
+これは DM 2.0.0 バージョンの既知の問題であり、DM 2.0.1 バージョンで修正される予定です。レプリケーション タスクで処理するテーブルが多数ある場合に発生する可能性があります。TiUPを使用して DM を展開する場合は、DM をナイトリー バージョンにアップグレードしてこの問題を修正できます。または、GitHub の[DMのリリースページ](https://github.com/pingcap/tiflow/releases)から 2.0.0-hotfix バージョンをダウンロードして、実行可能ファイルを手動で置き換えることもできます。
 
-## How to handle the error `duplicate entry` when DM is replicating data?
+## DM がデータを複製しているときにエラー<code>duplicate entry</code>処理する方法を教えてください。 {#how-to-handle-the-error-code-duplicate-entry-code-when-dm-is-replicating-data}
 
-You need to first check and confirm the following things:
+まず、以下の点を確認して確認する必要があります。
 
-- `disable-detect` is not configured in the replication task ( in v2.0.7 and earlier versions).
-- The data is not inserted manually or by other replication programs.
-- No DML filter associated with this table is configured.
+-   レプリケーション タスクで`disable-detect`が構成されていません (v2.0.7 以前のバージョン)。
+-   データは手動でも他のレプリケーション プログラムによっても挿入されません。
+-   このテーブルに関連付けられた DML フィルターは構成されていません。
 
-To facilitate troubleshooting, you can first collect general log files of the downstream TiDB instance and then ask for technical support at [TiDB Community slack channel](https://tidbcommunity.slack.com/archives/CH7TTLL7P). The following example shows how to collect general log files:
+トラブルシューティングを容易にするために、まずダウンストリーム TiDB インスタンスの一般的なログ ファイルを収集し、次に[TiDB コミュニティ Slack チャンネル](https://tidbcommunity.slack.com/archives/CH7TTLL7P)でテクニカル サポートを依頼することができます。次の例は、一般的なログ ファイルを収集する方法を示しています。
 
 ```bash
 # Enable general log collection
@@ -173,229 +171,221 @@ curl -X POST -d "tidb_general_log=1" http://{TiDBIP}:10080/settings
 curl -X POST -d "tidb_general_log=0" http://{TiDBIP}:10080/settings
 ```
 
-When the `duplicate entry` error occurs, you need to check the log files for the records that contain conflict data.
+`duplicate entry`エラーが発生した場合は、競合データを含むレコードのログ ファイルを確認する必要があります。
 
-## Why do some monitoring panels show `No data point`?
+## 一部の監視パネルに<code>No data point</code> 。なぜですか? {#why-do-some-monitoring-panels-show-code-no-data-point-code}
 
-It is normal for some panels to have no data. For example, when there is no error reported, no DDL lock, or the relay log feature is not enabled, the corresponding panels show `No data point`. For detailed description of each panel, see [DM Monitoring Metrics](/dm/monitor-a-dm-cluster.md).
+一部のパネルにデータがないのは正常です。たとえば、エラーが報告されていない場合、DDL ロックがない場合、またはリレー ログ機能が有効になっていない場合、対応するパネルには`No data point`表示されます。各パネルの詳細な説明については、 [DM モニタリング メトリック](/dm/monitor-a-dm-cluster.md)を参照してください。
 
-## In DM v1.0, why does the command `sql-skip` fail to skip some statements when the task is in error?
+## DM v1.0 では、タスクにエラーがある場合にコマンド<code>sql-skip</code>一部のステートメントをスキップできないのはなぜですか? {#in-dm-v1-0-why-does-the-command-code-sql-skip-code-fail-to-skip-some-statements-when-the-task-is-in-error}
 
-You need to first check whether the binlog position is still advancing after you execute `sql-skip`. If so, it means that `sql-skip` has taken effect. The reason why this error keeps occurring is that the upstream sends multiple unsupported DDL statements. You can use `sql-skip -s <sql-pattern>` to set a pattern to match these statements.
+まず、 `sql-skip`実行した後、binlogの位置がまだ進んでいるかどうかを確認する必要があります。進んでいる場合は、 `sql-skip`が有効になっていることを意味します。このエラーが引き続き発生する理由は、アップストリームが複数のサポートされていない DDL ステートメントを送信するためです。 `sql-skip -s <sql-pattern>`を使用して、これらのステートメントに一致するパターンを設定できます。
 
-Sometimes, the error message contains the `parse statement` information, for example:
+場合によっては、エラー メッセージに`parse statement`情報が含まれることがあります。次に例を示します。
 
-```
-if the DDL is not needed, you can use a filter rule with \"*\" schema-pattern to ignore it.\n\t : parse statement: line 1 column 11 near \"EVENT `event_del_big_table` \r\nDISABLE\" %!!(MISSING)(EXTRA string=ALTER EVENT `event_del_big_table` \r\nDISABLE
-```
+    if the DDL is not needed, you can use a filter rule with \"*\" schema-pattern to ignore it.\n\t : parse statement: line 1 column 11 near \"EVENT `event_del_big_table` \r\nDISABLE\" %!!(MISSING)(EXTRA string=ALTER EVENT `event_del_big_table` \r\nDISABLE
 
-The reason for this type of error is that the TiDB parser cannot parse DDL statements sent by the upstream, such as `ALTER EVENT`, so `sql-skip` does not take effect as expected. You can add [binlog event filters](/dm/dm-binlog-event-filter.md) in the configuration file to filter those statements and set `schema-pattern: "*"`. Starting from DM v2.0.1, DM pre-filters statements related to `EVENT`.
+このタイプのエラーの原因は、TiDB パーサーがアップストリームから送信された`ALTER EVENT`などの DDL ステートメントを解析できないため、 `sql-skip`が期待どおりに機能しないことです。構成ファイルに[binlogイベント フィルター](/dm/dm-binlog-event-filter.md)を追加してこれらのステートメントをフィルタリングし、 `schema-pattern: "*"`設定できます。DM v2.0.1 以降、DM は`EVENT`に関連するステートメントを事前にフィルタリングします。
 
-Since DM v6.0, `binlog` replaces `sql-skip` and `handle-error`. You can use the `binlog` command instead to avoid this issue.
+DM v6.0 以降、 `sql-skip`と`handle-error` `binlog`に置き換えられました。この問題を回避するには、代わりに`binlog`コマンドを使用できます。
 
-## Why do `REPLACE` statements keep appearing in the downstream when DM is replicating?
+## DM がレプリケートされているときに、ダウンストリームに<code>REPLACE</code>ステートメントが表示され続けるのはなぜですか? {#why-do-code-replace-code-statements-keep-appearing-in-the-downstream-when-dm-is-replicating}
 
-You need to check whether the [safe mode](/dm/dm-glossary.md#safe-mode) is automatically enabled for the task. If the task is automatically resumed after an error, or if there is high availability scheduling, then the safe mode is enabled because it is within 1 minutes after the task is started or resumed.
+タスクに対して[セーフモード](/dm/dm-glossary.md#safe-mode)自動的に有効になっているかどうかを確認する必要があります。エラー後にタスクが自動的に再開される場合、または高可用性スケジュールがある場合は、タスクが開始または再開されてから 1 分以内であるため、セーフ モードが有効になっています。
 
-You can check the DM-worker log file and search for a line containing `change count`. If the `new count` in the line is not zero, the safe mode is enabled. To find out why it is enabled, check when it happens and if any errors are reported before.
+DM-worker ログ ファイルをチェックして、 `change count`含む行を検索できます。行の`new count`が 0 でない場合、セーフ モードが有効になっています。セーフ モードが有効になっている理由を確認するには、セーフ モードがいつ発生するか、以前にエラーが報告されているかどうかを確認します。
 
-## In DM v2.0, why does the full import task fail if DM restarts during the task?
+## DM v2.0 では、タスク中に DM が再起動すると、完全インポート タスクが失敗するのはなぜですか? {#in-dm-v2-0-why-does-the-full-import-task-fail-if-dm-restarts-during-the-task}
 
-In DM v2.0.1 and earlier versions, if DM restarts before the full import completes, the bindings between upstream data sources and DM-worker nodes might change. For example, it is possible that the intermediate data of the dump unit is on DM-worker node A but the load unit is run by DM-worker node B, thus causing the operation to fail.
+DM v2.0.1 以前のバージョンでは、完全なインポートが完了する前に DM が再起動すると、上流のデータ ソースと DM ワーカー ノード間のバインディングが変更される場合があります。たとえば、ダンプ ユニットの中間データが DM ワーカー ノード A にあるが、ロード ユニットが DM ワーカー ノード B によって実行されている場合、操作が失敗する可能性があります。
 
-The following are two solutions to this issue:
+この問題に対する解決策は次の 2 つです。
 
-- If the data volume is small (less than 1 TB) or the task merges sharded tables, take these steps:
+-   データ量が少ない (1 TB 未満) 場合、またはタスクがシャード化されたテーブルをマージする場合は、次の手順を実行します。
 
-    1. Clean up the imported data in the downstream database.
-    2. Remove all files in the directory of exported data.
-    3. Delete the task using dmctl and run the command `start-task --remove-meta` to create a new task.
+    1.  ダウンストリーム データベースにインポートされたデータをクリーンアップします。
+    2.  エクスポートされたデータのディレクトリ内のすべてのファイルを削除します。
+    3.  dmctl を使用してタスクを削除し、コマンド`start-task --remove-meta`を実行して新しいタスクを作成します。
 
-    After the new task starts, it is recommended to ensure that there is no redundant DM worker node and avoid restarting or upgrading the DM cluster during the full import.
+    新しいタスクが開始したら、冗長な DM ワーカー ノードが存在しないことを確認し、完全インポート中に DM クラスターを再起動またはアップグレードしないようにすることをお勧めします。
 
-- If the data volume is large (more than 1 TB), take these steps:
+-   データ量が大きい場合（1 TB を超える場合）は、次の手順を実行します。
 
-    1. Clean up the imported data in the downstream database.
-    2. Deploy TiDB-Lightning to the DM worker nodes that process the data.
-    3. Use the Local-backend mode of TiDB-Lightning to import data that DM dump units export.
-    4. After the full import completes, edit the task configuration file in the following ways and restart the task:
-        - Change `task-mode` to `incremental`.
-        - Set the value of `mysql-instance.meta.pos` to the position recorded in the metadata file that the dump unit outputs.
+    1.  ダウンストリーム データベースにインポートされたデータをクリーンアップします。
+    2.  データを処理する DM ワーカーノードに TiDB-Lightningをデプロイ。
+    3.  DM ダンプ ユニットがエクスポートするデータをインポートするには、TiDB-Lightning のローカル バックエンド モードを使用します。
+    4.  完全なインポートが完了したら、次の方法でタスク構成ファイルを編集し、タスクを再起動します。
+        -   `task-mode` `incremental`に変更します。
+        -   ダンプユニットが出力するメタデータファイルに記録されている位置に値`mysql-instance.meta.pos`を設定します。
 
-## Why does DM report the error `ERROR 1236 (HY000): The slave is connecting using CHANGE MASTER TO MASTER_AUTO_POSITION = 1, but the master has purged binary logs containing GTIDs that the slave requires.` if it restarts during an incremental task?
+## 増分タスク中に再起動すると、DM がエラー<code>ERROR 1236 (HY000): The slave is connecting using CHANGE MASTER TO MASTER_AUTO_POSITION = 1, but the master has purged binary logs containing GTIDs that the slave requires.</code>のはなぜですか? {#why-does-dm-report-the-error-code-error-1236-hy000-the-slave-is-connecting-using-change-master-to-master-auto-position-1-but-the-master-has-purged-binary-logs-containing-gtids-that-the-slave-requires-code-if-it-restarts-during-an-incremental-task}
 
-This error indicates that the upstream binlog position recorded in the metadata file output by the dump unit has been purged during the full migration.
+このエラーは、ダンプ ユニットによって出力されたメタデータ ファイルに記録されたアップストリームbinlogの位置が、完全な移行中に消去されたことを示します。
 
-If this issue occurs, you need to pause the task, delete all migrated data in the downstream database, and start a new task with the `--remove-meta` option.
+この問題が発生した場合は、タスクを一時停止し、ダウンストリーム データベースに移行されたすべてのデータを削除し、 `--remove-meta`オプションを使用して新しいタスクを開始する必要があります。
 
-You can avoid this issue in advance by configuring in the following ways:
+次の方法で設定することで、この問題を事前に回避できます。
 
-1. Increase the value of `expire_logs_days` in the upstream MySQL database to avoid wrongly purging needed binlog files before the full migration task completes. If the data volume is large, it is recommended to use dumpling and TiDB-Lightning at the same time to speed up the task.
-2. Enable the relay log feature for this task so that DM can read data from relay logs even though the binlog position is purged.
+1.  完全な移行タスクが完了する前に、必要なbinlogファイルが誤って消去されるのを防ぐため、アップストリーム MySQL データベースの値を`expire_logs_days`増やします。データ量が多い場合は、タスクを高速化するために dumpling と TiDB-Lightning を同時に使用することをお勧めします。
+2.  このタスクのリレー ログ機能を有効にすると、binlogの位置が消去されても DM がリレー ログからデータを読み取ることができます。
 
-## Why does the Grafana dashboard of a DM cluster display `failed to fetch dashboard` if the cluster is deployed using TiUP v1.3.0 or v1.3.1?
+## クラスターがTiUP v1.3.0 または v1.3.1 を使用してデプロイされている場合、DM クラスターの Grafana ダッシュボード<code>failed to fetch dashboard</code>表示されるのはなぜですか? {#why-does-the-grafana-dashboard-of-a-dm-cluster-display-code-failed-to-fetch-dashboard-code-if-the-cluster-is-deployed-using-tiup-v1-3-0-or-v1-3-1}
 
-This is a known bug of TiUP, which is fixed in TiUP v1.3.2. The following are two solutions to this issue:
+これはTiUPの既知のバグであり、 TiUP v1.3.2 で修正されています。この問題の解決策は次の 2 つです。
 
-- Solution one:
-    1. Upgrade TiUP to a later version using the command `tiup update --self && tiup update dm`.
-    2. Scale in and then scale out Grafana nodes in the cluster to restart the Grafana service.
-- Solution two:
-    1. Back up the `deploy/grafana-$port/bin/public` folder.
-    2. Download the [TiUP DM offline package](https://download.pingcap.org/tidb-dm-v2.0.1-linux-amd64.tar.gz) and unpack it.
-    3. Unpack the `grafana-v4.0.3-**.tar.gz` in the offline package.
-    4. Replace the folder `deploy/grafana-$port/bin/public` with the `public` folder in `grafana-v4.0.3-**.tar.gz`.
-    5. Execute `tiup dm restart $cluster_name -R grafana` to restart the Grafana service.
+-   解決策1:
+    1.  コマンド`tiup update --self && tiup update dm`を使用して、 TiUP を新しいバージョンにアップグレードします。
+    2.  クラスター内の Grafana ノードをスケールインてからスケールアウトして、Grafana サービスを再起動します。
+-   解決策2:
+    1.  `deploy/grafana-$port/bin/public`フォルダをバックアップします。
+    2.  [TiUP DMオフラインパッケージ](https://download.pingcap.org/tidb-dm-v2.0.1-linux-amd64.tar.gz)ダウンロードして解凍します。
+    3.  オフライン パッケージの`grafana-v4.0.3-**.tar.gz`を解凍します。
+    4.  フォルダー`deploy/grafana-$port/bin/public`を`grafana-v4.0.3-**.tar.gz`のフォルダー`public`に置き換えます。
+    5.  `tiup dm restart $cluster_name -R grafana`実行して Grafana サービスを再起動します。
 
-## In DM v2.0, why does the query result of the command `query-status` show that the Syncer checkpoint GTIDs are inconsecutive if the task has `enable-relay` and `enable-gtid` enabled at the same time?
+## DM v2.0 では、タスクで<code>enable-relay</code>と<code>enable-gtid</code>が同時に有効になっている場合、コマンド<code>query-status</code>のクエリ結果に、Syncer チェックポイント GTID が連続していないと表示されるのはなぜですか? {#in-dm-v2-0-why-does-the-query-result-of-the-command-code-query-status-code-show-that-the-syncer-checkpoint-gtids-are-inconsecutive-if-the-task-has-code-enable-relay-code-and-code-enable-gtid-code-enabled-at-the-same-time}
 
-This is a known bug in DM, which is fixed in DM v2.0.2. The bug is triggered when the following two conditions are fully met at the same time:
+これは DM の既知のバグであり、DM v2.0.2 で修正されています。このバグは、次の 2 つの条件が同時に完全に満たされたときに発生します。
 
-1. Parameters `enable-relay` and `enable-gtid` are set to `true` in the source configuration file.
-2. The upstream database is a **MySQL secondary database**. If you execute the command `show binlog events in '<newest-binlog>' limit 2` to query the `previous_gtids` of the database, the result is inconsecutive, such as the following example:
+1.  ソース構成ファイルでは、パラメータ`enable-relay`と`enable-gtid`は`true`に設定されています。
+2.  アップストリーム データベースは**MySQL セカンダリ データベース**です。コマンド`show binlog events in '<newest-binlog>' limit 2`を実行してデータベースの`previous_gtids`クエリすると、次の例のように結果が連続しなくなります。
 
-```
-mysql> show binlog events in 'mysql-bin.000005' limit 2;
-+------------------+------+----------------+-----------+-------------+--------------------------------------------------------------------+
-| Log_name         | Pos  | Event_type     | Server_id | End_log_pos | Info                                                               |
-+------------------+------+----------------+-----------+-------------+--------------------------------------------------------------------+
-| mysql-bin.000005 |    4 | Format_desc    |    123452 |         123 | Server ver: 5.7.32-35-log, Binlog ver: 4                           |
-| mysql-bin.000005 |  123 | Previous_gtids |    123452 |         194 | d3618e68-6052-11eb-a68b-0242ac110002:6-7                           |
-+------------------+------+----------------+-----------+-------------+--------------------------------------------------------------------+
-```
+<!---->
 
-The bug occurs if you run `query-status <task>` in dmctl to query task information and find that `subTaskStatus.sync.syncerBinlogGtid` is inconsecutive but `subTaskStatus.sync.masterBinlogGtid` is consecutive. See the following example:
+    mysql> show binlog events in 'mysql-bin.000005' limit 2;
+    +------------------+------+----------------+-----------+-------------+--------------------------------------------------------------------+
+    | Log_name         | Pos  | Event_type     | Server_id | End_log_pos | Info                                                               |
+    +------------------+------+----------------+-----------+-------------+--------------------------------------------------------------------+
+    | mysql-bin.000005 |    4 | Format_desc    |    123452 |         123 | Server ver: 5.7.32-35-log, Binlog ver: 4                           |
+    | mysql-bin.000005 |  123 | Previous_gtids |    123452 |         194 | d3618e68-6052-11eb-a68b-0242ac110002:6-7                           |
+    +------------------+------+----------------+-----------+-------------+--------------------------------------------------------------------+
 
-```
-query-status test
-{
-    ...
-    "sources": [
-        {
-            ...
-            "sourceStatus": {
-                "source": "mysql1",
+このバグは、dmctl で`query-status <task>`実行してタスク情報を照会し、 `subTaskStatus.sync.syncerBinlogGtid`は連続していないが`subTaskStatus.sync.masterBinlogGtid`連続していることがわかった場合に発生します。次の例を参照してください。
+
+    query-status test
+    {
+        ...
+        "sources": [
+            {
                 ...
-                "relayStatus": {
-                    "masterBinlog": "(mysql-bin.000006, 744)",
-                    "masterBinlogGtid": "f8004e25-6067-11eb-9fa3-0242ac110003:1-50",
+                "sourceStatus": {
+                    "source": "mysql1",
                     ...
-                }
-            },
-            "subTaskStatus": [
-                {
-                    ...
-                    "sync": {
-                        ...
+                    "relayStatus": {
                         "masterBinlog": "(mysql-bin.000006, 744)",
                         "masterBinlogGtid": "f8004e25-6067-11eb-9fa3-0242ac110003:1-50",
-                        "syncerBinlog": "(mysql-bin|000001.000006, 738)",
-                        "syncerBinlogGtid": "f8004e25-6067-11eb-9fa3-0242ac110003:1-20:40-49",
                         ...
-                        "synced": false,
-                        "binlogType": "local"
                     }
-                }
-            ]
-        },
-        {
-            ...
-            "sourceStatus": {
-                "source": "mysql2",
-                ...
-                "relayStatus": {
-                    "masterBinlog": "(mysql-bin.000007, 1979)",
-                    "masterBinlogGtid": "ddb8974e-6064-11eb-8357-0242ac110002:1-25",
-                    ...
-                }
+                },
+                "subTaskStatus": [
+                    {
+                        ...
+                        "sync": {
+                            ...
+                            "masterBinlog": "(mysql-bin.000006, 744)",
+                            "masterBinlogGtid": "f8004e25-6067-11eb-9fa3-0242ac110003:1-50",
+                            "syncerBinlog": "(mysql-bin|000001.000006, 738)",
+                            "syncerBinlogGtid": "f8004e25-6067-11eb-9fa3-0242ac110003:1-20:40-49",
+                            ...
+                            "synced": false,
+                            "binlogType": "local"
+                        }
+                    }
+                ]
             },
-            "subTaskStatus": [
-                {
+            {
+                ...
+                "sourceStatus": {
+                    "source": "mysql2",
                     ...
-                    "sync": {
+                    "relayStatus": {
                         "masterBinlog": "(mysql-bin.000007, 1979)",
                         "masterBinlogGtid": "ddb8974e-6064-11eb-8357-0242ac110002:1-25",
-                        "syncerBinlog": "(mysql-bin|000001.000008, 1979)",
-                        "syncerBinlogGtid": "ddb8974e-6064-11eb-8357-0242ac110002:1-25",
                         ...
-                        "synced": true,
-                        "binlogType": "local"
                     }
-                }
-            ]
-        }
-    ]
-}
-```
+                },
+                "subTaskStatus": [
+                    {
+                        ...
+                        "sync": {
+                            "masterBinlog": "(mysql-bin.000007, 1979)",
+                            "masterBinlogGtid": "ddb8974e-6064-11eb-8357-0242ac110002:1-25",
+                            "syncerBinlog": "(mysql-bin|000001.000008, 1979)",
+                            "syncerBinlogGtid": "ddb8974e-6064-11eb-8357-0242ac110002:1-25",
+                            ...
+                            "synced": true,
+                            "binlogType": "local"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
 
-In the example, the `syncerBinlogGtid` of the data source `mysql1` is inconsecutive. In this case, you can do one of the following to handle the data loss:
+この例では、データ ソース`mysql1`の`syncerBinlogGtid`連続していません。この場合、データ損失を処理するには、次のいずれかを実行します。
 
-- If upstream binlogs from the current time to the position recorded in the metadata of the full export task have not been purged, you can take these steps:
-    1. Stop the current task and delete all data sources with inconsecutive GTIDs.
-    2. Set `enable-relay` to `false` in all source configuration files.
-    3. For data sources with inconsecutive GTIDs (such as `mysql1` in the above example), change the task to an incremental task and configure related `mysql-instances.meta` with metadata information of each full export task, including the `binlog-name`, `binlog-pos`, and `binlog-gtid` information.
-    4. Set `syncers.safe-mode` to `true` in `task.yaml` of the incremental task and restart the task.
-    5. After the incremental task replicates all missing data to the downstream, stop the task and change `safe-mode` to `false` in the `task.yaml`.
-    6. Restart the task again.
-- If upstream binlogs have been purged but local relay logs remain, you can take these steps:
-    1. Stop the current task.
-    2. For data sources with inconsecutive GTIDs (such as `mysql1` in the above example), change the task to an incremental task and configure related `mysql-instances.meta` with metadata information of each full export task, including the `binlog-name`, `binlog-pos`, and `binlog-gtid` information.
-    3. In the `task.yaml` of the incremental task, change the previous value of `binlog-gtid` to the previous value of `previous_gtids`. For the above example, change `1-y` to `6-y`.
-    4. Set `syncers.safe-mode` to `true` in the `task.yaml` and restart the task.
-    5. After the incremental task replicates all missing data to the downstream, stop the task and change `safe-mode` to `false` in the `task.yaml`.
-    6. Restart the task again.
-    7. Restart the data source and set either `enable-relay` or `enable-gtid` to `false` in the source configuration file.
-- If none of the above conditions is met or if the data volume of the task is small, you can take these steps:
-    1. Clean up imported data in the downstream database.
-    2. Restart the data source and set either `enable-relay` or `enable-gtid` to `false` in the source configuration file.
-    3. Create a new task and run the command `start-task task.yaml --remove-meta` to migrate data from the beginning again.
+-   現在の時刻から完全エクスポート タスクのメタデータに記録された位置までのアップストリーム バイナリログが消去されていない場合は、次の手順を実行できます。
+    1.  現在のタスクを停止し、連続していない GTID を持つすべてのデータ ソースを削除します。
+    2.  すべてのソース構成ファイルで`enable-relay` ～ `false`を設定します。
+    3.  連続していない GTID を持つデータ ソース (上記の例の`mysql1`など) の場合は、タスクを増分タスクに変更し、 `binlog-name` 、 `binlog-pos` 、および`binlog-gtid`情報を含む各完全エクスポート タスクのメタデータ情報を使用して関連する`mysql-instances.meta`を構成します。
+    4.  増分タスクの`task.yaml`に`syncers.safe-mode` `true`設定し、タスクを再起動します。
+    5.  増分タスクがすべての欠落データをダウンストリームに複製した後、タスクを停止し、 `task.yaml`の`safe-mode`を`false`に変更します。
+    6.  タスクをもう一度再開します。
+-   アップストリームのバイナリログが消去されたが、ローカルリレーログが残っている場合は、次の手順を実行できます。
+    1.  現在のタスクを停止します。
+    2.  連続していない GTID を持つデータ ソース (上記の例の`mysql1`など) の場合は、タスクを増分タスクに変更し、 `binlog-name` 、 `binlog-pos` 、および`binlog-gtid`情報を含む各完全エクスポート タスクのメタデータ情報を使用して関連する`mysql-instances.meta`を構成します。
+    3.  増分タスクの`task.yaml`で、前の値`binlog-gtid`を前の値`previous_gtids`に変更します。上記の例では、 `1-y`を`6-y`に変更します。
+    4.  `task.yaml`の`syncers.safe-mode` ～ `true`を設定してタスクを再開します。
+    5.  増分タスクがすべての欠落データをダウンストリームに複製した後、タスクを停止し、 `task.yaml`の`safe-mode`を`false`に変更します。
+    6.  タスクをもう一度やり直してください。
+    7.  データ ソースを再起動し、ソース構成ファイルで`enable-relay`または`enable-gtid`を`false`に設定します。
+-   上記の条件がいずれも満たされていない場合、またはタスクのデータ量が少ない場合は、次の手順を実行できます。
+    1.  ダウンストリーム データベースにインポートされたデータをクリーンアップします。
+    2.  データ ソースを再起動し、ソース構成ファイルで`enable-relay`または`enable-gtid`を`false`に設定します。
+    3.  新しいタスクを作成し、コマンド`start-task task.yaml --remove-meta`を実行して、データを最初から再度移行します。
 
-For data sources that can be replicated normally (such as `mysql2` in the above example) in the first and second solutions above, configure related `mysql-instances.meta` with `syncerBinlog` and `syncerBinlogGtid` information from `subTaskStatus.sync` when setting the incremental task.
+上記の 1 番目と 2 番目のソリューションで正常にレプリケートできるデータ ソース (上記の例の`mysql2`など) の場合は、増分タスクを設定するときに、 `subTaskStatus.sync`の`syncerBinlog`と`syncerBinlogGtid`情報を使用して関連する`mysql-instances.meta`構成します。
 
-## In DM v2.0, how do I handle the error "heartbeat config is different from previous used: serverID not equal" when switching the connection between DM-workers and MySQL instances in a virtual IP environment with the `heartbeat` feature enabled?
+## DM v2.0 では、 <code>heartbeat</code>機能が有効になっている仮想 IP 環境で DM ワーカーと MySQL インスタンス間の接続を切り替えるときに、「ハートビート設定が以前に使用されたものと異なります: serverID が等しくありません」というエラーをどのように処理すればよいですか? {#in-dm-v2-0-how-do-i-handle-the-error-heartbeat-config-is-different-from-previous-used-serverid-not-equal-when-switching-the-connection-between-dm-workers-and-mysql-instances-in-a-virtual-ip-environment-with-the-code-heartbeat-code-feature-enabled}
 
-The `heartbeat` feature is disabled by default in DM v2.0 and later versions. If you enable the feature in the task configuration file, it interferes with the high availability feature. To solve this issue, you can disable the `heartbeat` feature by setting `enable-heartbeat` to `false` in the task configuration file, and then reload the task configuration file. DM will forcibly disable the `heartbeat` feature in subsequent releases.
+DM v2.0 以降のバージョンでは、 `heartbeat`機能はデフォルトで無効になっています。タスク構成ファイルでこの機能を有効にすると、高可用性機能に干渉します。この問題を解決するには、タスク構成ファイルで`enable-heartbeat`を`false`に設定して`heartbeat`機能を無効にし、タスク構成ファイルを再ロードします。DM は、以降のリリースで`heartbeat`機能を強制的に無効にします。
 
-## Why does a DM-master fail to join the cluster after it restarts and DM reports the error "fail to start embed etcd, RawCause: member xxx has already been bootstrapped"?
+## DM マスターが再起動後にクラスターに参加できず、DM が「埋め込み etcd の開始に失敗しました。RawCause: メンバー xxx はすでにブートストラップされています」というエラーを報告するのはなぜですか? {#why-does-a-dm-master-fail-to-join-the-cluster-after-it-restarts-and-dm-reports-the-error-fail-to-start-embed-etcd-rawcause-member-xxx-has-already-been-bootstrapped}
 
-When a DM-master starts, DM records the etcd information in the current directory. If the directory changes after the DM-master restarts, DM cannot get access to the etcd information, and thus the restart fails.
+DM マスターが起動すると、DM は現在のディレクトリに etcd 情報を記録します。DM マスターの再起動後にディレクトリが変更されると、DM は etcd 情報にアクセスできず、再起動が失敗します。
 
-To solve this issue, you are recommended to maintain DM clusters using TiUP. In the case that you need to deploy using binary files, you need to configure `data-dir` with absolute paths in the configuration file of the DM-master, or pay attention to the current directory where you run the command.
+この問題を解決するには、 TiUPを使用して DM クラスターを保守することをお勧めします。バイナリ ファイルを使用してデプロイする必要がある場合は、DM マスターの構成ファイルで絶対パスを使用して`data-dir`構成するか、コマンドを実行する現在のディレクトリに注意する必要があります。
 
-## Why DM-master cannot be connected when I use dmctl to execute commands?
+## dmctl を使用してコマンドを実行すると、DM マスターに接続できないのはなぜですか? {#why-dm-master-cannot-be-connected-when-i-use-dmctl-to-execute-commands}
 
-When using dmctl execute commands, you might find the connection to DM master fails (even if you have specified the parameter value of `--master-addr` in the command), and the error message is like `RawCause: context deadline exceeded, Workaround: please check your network connection.`. But after checking the network connection using commands like `telnet <master-addr>`, no exception is found.
+dmctl 実行コマンドを使用すると、DM マスターへの接続が失敗し (コマンドでパラメータ値`--master-addr`を指定した場合でも)、エラー メッセージが`RawCause: context deadline exceeded, Workaround: please check your network connection.`ようになる場合があります。ただし、 `telnet <master-addr>`などのコマンドを使用してネットワーク接続をチェックした後、例外は見つかりません。
 
-In this case, you can check the environment variable `https_proxy` (note that it is **https**). If this variable is configured, dmctl automatically connects the host and port specified by `https_proxy`. If the host does not have a corresponding `proxy` forwarding service, the connection fails.
+この場合、環境変数`https_proxy`を確認できます ( **https**であることに注意してください)。この変数が設定されている場合、dmctl は`https_proxy`で指定されたホストとポートに自動的に接続します。ホストに対応する`proxy`転送サービスがない場合、接続は失敗します。
 
-To solve this issue, check whether `https_proxy` is mandatory. If not, cancel the setting. Otherwise, add the environment variable setting `https_proxy="" ./dmctl --master-addr "x.x.x.x:8261"` before the oringial dmctl commands.
+この問題を解決するには、 `https_proxy`必須かどうかを確認します。必須でない場合は、設定をキャンセルします。必須でない場合は、元の dmctl コマンドの前に環境変数設定`https_proxy="" ./dmctl --master-addr "x.x.x.x:8261"`を追加します。
 
-> **Note:**
+> **注記：**
 >
-> The environment variables related to `proxy` include `http_proxy`, `https_proxy`, and `no_proxy`. If the connection error persists after you perform the above steps, check whether the configuration parameters of `http_proxy` and `no_proxy` are correct.
+> `proxy`に関連する環境変数には`http_proxy` 、 `https_proxy` 、 `no_proxy`あります。上記の手順を実行しても接続エラーが解決しない場合は、 `http_proxy`と`no_proxy`の設定パラメータが正しいかどうかを確認してください。
 
-## How to handle the returned error when executing start-relay command for DM versions from 2.0.2 to 2.0.6?
+## DM バージョン 2.0.2 から 2.0.6 で start-relay コマンドを実行したときに返されるエラーをどのように処理しますか? {#how-to-handle-the-returned-error-when-executing-start-relay-command-for-dm-versions-from-2-0-2-to-2-0-6}
 
-```
-flush local meta, Rawcause: open relay-dir/xxx.000001/relay.metayyyy: no such file or directory
-```
+    flush local meta, Rawcause: open relay-dir/xxx.000001/relay.metayyyy: no such file or directory
 
-The above error might be made in the following cases:
+上記のエラーは、次の場合に発生する可能性があります。
 
-- DM has been upgraded from v2.0.1 and earlier to v2.0.2 - v2.0.6, and relay log is started before the upgrade and restarted after the upgrade.
-- Execute the stop-relay command to pause the relay log and then restart it.
+-   DM は v2.0.1 以前から v2.0.2 - v2.0.6 にアップグレードされており、アップグレード前にリレー ログが開始され、アップグレード後に再起動されます。
+-   stop-relay コマンドを実行してリレー ログを一時停止し、再起動します。
 
-You can avoid this error by the following options:
+次のオプションによりこのエラーを回避できます。
 
-- Restart relay log:
+-   リレーログを再起動します:
 
-    ```
-    » stop-relay -s sourceID workerName
-    » start-relay -s sourceID workerName
-    ```
+        » stop-relay -s sourceID workerName
+        » start-relay -s sourceID workerName
 
-- Upgrade DM to v2.0.7 or later versions.
+-   DM を v2.0.7 以降のバージョンにアップグレードします。
 
-## Why does the load unit report the `Unknown character set` error?
+## ロード ユニットが<code>Unknown character set</code>エラーを報告するのはなぜですか? {#why-does-the-load-unit-report-the-code-unknown-character-set-code-error}
 
-TiDB does not support all MySQL character sets. Therefore, DM reports this error if an unsupported character set is used when creating the table schema during a full import. To bypass this error, you can create the table schema in the downstream in advance using the [character sets supported by TiDB](/character-set-and-collation.md) according to the specific data.
+TiDB はすべての MySQL 文字セットをサポートしていません。そのため、フルインポート中にテーブル スキーマを作成するときにサポートされていない文字セットが使用されると、DM はこのエラーを報告します。このエラーを回避するには、特定のデータに応じて[TiDB でサポートされている文字セット](/character-set-and-collation.md)使用してダウンストリームで事前にテーブル スキーマを作成します。

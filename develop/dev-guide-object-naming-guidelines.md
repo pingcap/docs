@@ -1,46 +1,46 @@
 ---
 title: Object Naming Convention
-summary: Learn the object naming convention in TiDB.
+summary: TiDB のオブジェクト命名規則について学習します。
 ---
 
-# Object Naming Convention
+# オブジェクトの命名規則 {#object-naming-convention}
 
-This document introduces the rules to name database objects, such as database, table, index, and user.
+このドキュメントでは、データベース、テーブル、インデックス、ユーザーなどのデータベース オブジェクトの命名規則について説明します。
 
-## General rules
+## 一般的なルール {#general-rules}
 
-- It is recommended to use meaningful English words separated by underscores.
-- Use only letters, numbers, and underscores in a name.
-- Avoid using TiDB reserved words, such as `group` and `order`, as column names.
-- It is recommended to use lowercase letters for all database objects.
+-   意味のある英語の単語をアンダースコアで区切って使用することをお勧めします。
+-   名前には文字、数字、アンダースコアのみを使用してください。
+-   `group`や`order`などの TiDB 予約語を列名として使用しないでください。
+-   すべてのデータベース オブジェクトには小文字を使用することをお勧めします。
 
-## Database naming convention
+## データベースの命名規則 {#database-naming-convention}
 
-It is recommended to differentiate database names by business, product, or other metrics and use no more than 20 characters in a database name. For example, you can name a temporary library as `tmp_crm` or a test library as `test_crm`.
+データベース名はビジネス、製品、その他の基準ごとに区別し、データベース名には 20 文字以内を使用することをお勧めします。たとえば、一時ライブラリには`tmp_crm` 、テスト ライブラリには`test_crm`という名前を付けることができます。
 
-## Table naming convention
+## テーブル命名規則 {#table-naming-convention}
 
-- Use the same prefix for tables of the same business or module, and make sure that the table name is self-explanatory as much as possible.
-- Separate words in a name by underscores. It is recommended to use no more than 32 characters in a table name.
-- It is recommended to annotate the purpose of the table for a better understanding. For example:
-    - Temporary table: `tmp_t_crm_relation_0425`
-    - Backup table: `bak_t_crm_relation_20170425`
-    - Temporary table of business operations: `tmp_st_{business code}_{creator abbreviation}_{date}`
-    - Record table of accounts period: `t_crm_ec_record_YYYY{MM}{dd}`
-- Create separate databases for tables of different business modules and add annotations accordingly.
+-   同じビジネスまたはモジュールのテーブルには同じプレフィックスを使用し、テーブル名が可能な限りわかりやすいようにします。
+-   名前内の単語はアンダースコアで区切ります。テーブル名には 32 文字以下を使用することをお勧めします。
+-   理解を深めるために、表の目的を注釈で示すことをお勧めします。例:
+    -   一時テーブル: `tmp_t_crm_relation_0425`
+    -   バックアップテーブル: `bak_t_crm_relation_20170425`
+    -   事業運営の暫定表： `tmp_st_{business code}_{creator abbreviation}_{date}`
+    -   会計期間の記録表: `t_crm_ec_record_YYYY{MM}{dd}`
+-   異なるビジネス モジュールのテーブルごとに個別のデータベースを作成し、それに応じて注釈を追加します。
 
-## Column naming convention
+## カラムの命名規則 {#column-naming-convention}
 
-- The column naming is the actual meaning or abbreviation of the column.
-- It is recommended to use the same column name between tables with the same meaning.
-- It is recommended to add annotations to columns and specify named values for enumerated types, such as "0: offline, 1: online".
-- It is recommended to name the boolean column as `is_{description}`. For example, the column of a `member` table that indicates whether the member is enabled, can be named as `is_enabled`.
-- It is not recommended to name a column with more than 30 characters, and the number of columns should be less than 60.
-- Avoid using TiDB reserved words as column names, such as `order`, `from`, and `desc`. To check whether a keyword is reserved, see [TiDB keywords](/keywords.md).
+-   列の名前は、列の実際の意味または略語です。
+-   同じ意味を持つテーブル間では同じ列名を使用することをお勧めします。
+-   列に注釈を追加し、列挙型に「0: オフライン、1: オンライン」などの名前付きの値を指定することをお勧めします。
+-   ブール列の名前は`is_{description}`にすることをお勧めします。たとえば、メンバーが有効かどうかを示す`member`テーブルの列の名前は`is_enabled`にすることができます。
+-   列の名前を 30 文字以上にすることは推奨されません。また、列の数は 60 未満にする必要があります。
+-   `order` 、 `from` 、 `desc`などの TiDB 予約語を列名として使用しないでください。キーワードが予約されているかどうかを確認するには、 [TiDBキーワード](/keywords.md)を参照してください。
 
-## Index naming convention
+## インデックスの命名規則 {#index-naming-convention}
 
-- Primary key index: `pk_{table_name_abbreviation}_{field_name_abbreviation}`
-- Unique index: `uk_{table_name_abbreviation}_{field_name_abbreviation}`
-- Common index: `idx_{table_name_abbreviation}_{field_name_abbreviation}`
-- Column name with multiple words: use meaningful abbreviations
+-   主キーインデックス: `pk_{table_name_abbreviation}_{field_name_abbreviation}`
+-   ユニークインデックス: `uk_{table_name_abbreviation}_{field_name_abbreviation}`
+-   共通インデックス: `idx_{table_name_abbreviation}_{field_name_abbreviation}`
+-   複数の単語を含むカラム名: 意味のある略語を使用してください

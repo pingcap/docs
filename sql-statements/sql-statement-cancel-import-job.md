@@ -1,46 +1,44 @@
 ---
 title: CANCEL IMPORT
-summary: An overview of the usage of CANCEL IMPORT in TiDB.
+summary: TiDB での CANCEL IMPORT の使用法の概要。
 ---
 
-# CANCEL IMPORT
+# インポートをキャンセル {#cancel-import}
 
-The `CANCEL IMPORT` statement is used to cancel a data import job created in TiDB.
+`CANCEL IMPORT`ステートメントは、TiDB で作成されたデータ インポート ジョブをキャンセルするために使用されます。
 
-> **Note:**
+> **注記：**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
-## Required privileges
+## 必要な権限 {#required-privileges}
 
-To cancel a data import job, you need to be the creator of the import job or have the `SUPER` privilege.
+データ インポート ジョブをキャンセルするには、インポート ジョブの作成者であるか、 `SUPER`権限を持っている必要があります。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 CancelImportJobsStmt ::=
     'CANCEL' 'IMPORT' 'JOB' JobID
 ```
 
-## Example
+## 例 {#example}
 
-To cancel an import job with the ID as `1`, execute the following statement:
+ID が`1`のインポート ジョブをキャンセルするには、次のステートメントを実行します。
 
 ```sql
 CANCEL IMPORT JOB 1;
 ```
 
-The output is as follows:
+出力は次のようになります。
 
-```
-Query OK, 0 rows affected (0.01 sec)
-```
+    Query OK, 0 rows affected (0.01 sec)
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## 参照 {#see-also}
 
-* [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)
-* [`SHOW IMPORT JOB`](/sql-statements/sql-statement-show-import-job.md)
+-   [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)
+-   [`SHOW IMPORT JOB`](/sql-statements/sql-statement-show-import-job.md)

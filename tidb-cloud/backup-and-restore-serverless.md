@@ -1,88 +1,88 @@
 ---
 title: Back Up and Restore TiDB Serverless Data
-summary: Learn how to back up and restore your TiDB Serverless cluster.
+summary: TiDB Serverless クラスターをバックアップおよび復元する方法を学びます。
 ---
 
-# Back Up and Restore TiDB Serverless Data
+# TiDB サーバーレス データのバックアップと復元 {#back-up-and-restore-tidb-serverless-data}
 
-This document describes how to back up and restore your TiDB Serverless cluster data on TiDB Cloud.
+このドキュメントでは、TiDB Cloudで TiDB Serverless クラスター データをバックアップおよび復元する方法について説明します。
 
-> **Tip:**
+> **ヒント：**
 >
-> To learn how to back up and restore TiDB Dedicated cluster data, see [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md).
+> TiDB 専用クラスター データをバックアップおよび復元する方法については、 [TiDB専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md)参照してください。
 
-## Limitations
+## 制限事項 {#limitations}
 
-- It is important to note that TiDB Serverless clusters only support in-place restoring from backups. When a restore is performed, tables in the `mysql` schema are also impacted. Hence, any changes made to user credentials and permissions or system variables will be rolled back to the state when the backup was taken.
-- Manual backup is not yet supported.
-- The cluster will be unavailable during the restore process, and existing connections will be terminated. You can establish new connections once the restore is complete.
-- If any TiFlash replica is enabled, the replica will be unavailable for a while after the restore because data needs to be rebuilt in TiFlash.
+-   TiDB Serverless クラスターは、バックアップからのインプレース復元のみをサポートしていることに注意してください。復元を実行すると、 `mysql`スキーマ内のテーブルも影響を受けます。したがって、ユーザーの資格情報や権限、システム変数に加えられた変更は、バックアップが作成された時点の状態にロールバックされます。
+-   手動バックアップはまだサポートされていません。
+-   復元プロセス中はクラスターは使用できなくなり、既存の接続は終了します。復元が完了すると、新しい接続を確立できます。
+-   TiFlashレプリカが有効になっている場合、データをTiFlashで再構築する必要があるため、復元後しばらくの間レプリカは使用できなくなります。
 
-## Backup
+## バックアップ {#backup}
 
-Automatic backups are scheduled for your TiDB Serverless clusters according to the backup setting, which can reduce your loss in extreme disaster situations.
+バックアップ設定に従って、TiDB Serverless クラスターの自動バックアップがスケジュールされるため、極端な災害状況での損失を軽減できます。
 
-### Automatic backup
+### 自動バックアップ {#automatic-backup}
 
-By the automatic backup, you can back up the TiDB Serverless cluster data every day at the backup time you have set. To set the backup time, perform the following steps:
+自動バックアップにより、設定したバックアップ時間に毎日 TiDB Serverless クラスターのデータをバックアップできます。バックアップ時間を設定するには、次の手順を実行します。
 
-1. Navigate to the **Backup** page of a TiDB Serverless cluster.
+1.  TiDB Serverless クラスターの**バックアップ**ページに移動します。
 
-2. Click **Backup Settings**. This will open the **Backup Settings** window, where you can configure the automatic backup settings according to your requirements.
+2.  **「バックアップ設定」**をクリックします。これにより、 **「バックアップ設定」**ウィンドウが開き、要件に応じて自動バックアップ設定を構成できます。
 
-    - In **Backup Time**, schedule a start time for the daily cluster backup.
+    -   **[バックアップ時間]**で、毎日のクラスター バックアップの開始時刻をスケジュールします。
 
-        If you do not specify a preferred backup time, TiDB Cloud assigns a default backup time, which is 2:00 AM in the time zone of the region where the cluster is located.
+        優先バックアップ時間を指定しない場合、 TiDB Cloud はデフォルトのバックアップ時間 (クラスターが配置されているリージョンのタイムゾーンの午前 2 時) を割り当てます。
 
-    - In **Backup Retention**, configure the minimum backup data retention period.
+    -   **「バックアップ保持」**で、最小バックアップ データの保持期間を構成します。
 
-        The backup retention period must be set within a range of 7 to 90 days.
+        バックアップの保持期間は 7 日から 90 日の範囲で設定する必要があります。
 
-3. Click **Confirm**.
+3.  **[確認]を**クリックします。
 
-### Delete backup files
+### バックアップファイルを削除する {#delete-backup-files}
 
-To delete an existing backup file, perform the following steps:
+既存のバックアップ ファイルを削除するには、次の手順を実行します。
 
-1. Navigate to the **Backup** tab of a cluster.
+1.  クラスターの**「バックアップ」**タブに移動します。
 
-2. Click **Delete** for the backup file that you want to delete.
+2.  削除するバックアップ ファイルの**[削除] を**クリックします。
 
-## Restore
+## 復元する {#restore}
 
-TiDB Serverless only supports in-place restoration. To restore your TiDB Serverless cluster from a backup, follow these steps:
+TiDB Serverless はインプレース復元のみをサポートします。バックアップから TiDB Serverless クラスターを復元するには、次の手順に従います。
 
-1. Navigate to the **Backup** page of a cluster.
+1.  クラスターの**バックアップ**ページに移動します。
 
-2. Click **Restore**. The setting window displays.
+2.  **「復元」**をクリックします。設定ウィンドウが表示されます。
 
-3. In **Restore Mode**, you can choose to restore from a specific backup or any point in time.
+3.  **復元モード**では、特定のバックアップまたは任意の時点から復元することを選択できます。
 
     <SimpleTab>
-    <div label="Basic Snapshot Restore">
+     <div label="Basic Snapshot Restore">
 
-    To restore from a selected backup snapshot, take the following steps:
+    選択したバックアップ スナップショットから復元するには、次の手順を実行します。
 
-    1. Click **Basic Snapshot Restore**.
-    2. Select the backup snapshot you want to restore to.
+    1.  **[基本スナップショットの復元]**をクリックします。
+    2.  復元するバックアップ スナップショットを選択します。
 
     </div>
-    <div label="Point-in-Time Restore">
+     <div label="Point-in-Time Restore">
 
-    This feature lets you restore a cluster to a specific state from any time within the last 90 days.
+    この機能を使用すると、過去 90 日以内の任意の時点からクラスターを特定の状態へ復元できます。
 
-    > **Note:**
+    > **注記：**
     >
-    > The **Point-in-Time Restore** feature is currently in beta.
+    > **ポイントインタイム リストア**機能は現在ベータ版です。
 
-    To restore from a specific point in time, take the following steps:
+    特定の時点から復元するには、次の手順を実行します。
 
-    1. Click **Point-in-Time Restore**.
-    2. Select the date and time you want to restore to.
+    1.  **ポイントインタイム復元を**クリックします。
+    2.  復元したい日付と時刻を選択します。
 
     </div>
-    </SimpleTab>
+     </SimpleTab>
 
-4. Click **Restore** to begin the restoration process.
+4.  復元プロセスを開始するには、 **「復元」**をクリックします。
 
-   After initiating the restore process, the cluster status changes to **Restoring**. The cluster will be unavailable during the restore process and existing connections will be terminated. Once the restore process completes successfully, you can access the cluster as usual.
+    復元プロセスを開始すると、クラスターのステータスが**「復元**中」に変わります。復元プロセス中はクラスターは使用できなくなり、既存の接続は終了します。復元プロセスが正常に完了すると、通常どおりクラスターにアクセスできるようになります。

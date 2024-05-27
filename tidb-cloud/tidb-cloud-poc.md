@@ -1,231 +1,231 @@
 ---
 title: Perform a Proof of Concept (PoC) with TiDB Cloud
-summary: Learn about how to perform a Proof of Concept (PoC) with TiDB Cloud.
+summary: TiDB Cloudを使用して概念実証 (PoC) を実行する方法について説明します。
 ---
 
-# Perform a Proof of Concept (PoC) with TiDB Cloud
+# TiDB Cloudで概念実証（PoC）を実行する {#perform-a-proof-of-concept-poc-with-tidb-cloud}
 
-TiDB Cloud is a Database-as-a-Service (DBaaS) product that delivers everything great about TiDB in a fully managed cloud database. It helps you focus on your applications, instead of the complexities of your database. TiDB Cloud is currently available on both Amazon Web Services (AWS) and Google Cloud.
+TiDB Cloud は、TiDB の優れた機能をすべて完全に管理されたクラウド データベースで提供する Database-as-a-Service (DBaaS) 製品です。データベースの複雑さに煩わされることなく、アプリケーションに集中できます。TiDB TiDB Cloudは現在、Amazon Web Services (AWS) と Google Cloud の両方で利用できます。
 
-Initiating a proof of concept (PoC) is the best way to determine whether TiDB Cloud is the best fit for your business needs. It will also get you familiar with the key features of TiDB Cloud in a short time. By running performance tests, you can see whether your workload can run efficiently on TiDB Cloud. You can also evaluate the efforts required to migrate your data and adapt configurations.
+概念実証 (PoC) を開始することは、 TiDB Cloud がビジネス ニーズに最適かどうかを判断するための最良の方法です。また、短時間でTiDB Cloudの主要な機能に慣れることができます。パフォーマンス テストを実行することで、ワークロードがTiDB Cloudで効率的に実行できるかどうかを確認できます。また、データの移行や構成の調整に必要な労力を評価することもできます。
 
-This document describes the typical PoC procedures and aims to help you quickly complete a TiDB Cloud PoC. It is a best practice that has been validated by TiDB experts and a large customer base.
+このドキュメントでは、一般的な PoC 手順について説明し、 TiDB Cloud PoC を迅速に完了できるように支援することを目的としています。これは、TiDB の専門家と大規模な顧客ベースによって検証されたベスト プラクティスです。
 
-If you are interested in doing a PoC, feel free to contact <a href="mailto:tidbcloud-support@pingcap.com">PingCAP</a> before you get started. The support team can help you create a test plan and walk you through the PoC procedures smoothly.
+PoC に興味がある場合は、開始する前に<a href="mailto:tidbcloud-support@pingcap.com">PingCAP に</a>お気軽にお問い合わせください。サポート チームがテスト プランの作成をお手伝いし、PoC 手順をスムーズに進めていきます。
 
-Alternatively, you can [create a TiDB Serverless](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) to get familiar with TiDB Cloud for a quick evaluation. Note that the TiDB Serverless has some [special terms and conditions](/tidb-cloud/select-cluster-tier.md#tidb-serverless-special-terms-and-conditions).
+あるいは、 [TiDBサーバーレスを作成する](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)実行してTiDB Cloudに慣れ、簡単に評価することもできます。TiDB Serverless には[特別利用規約](/tidb-cloud/select-cluster-tier.md#tidb-serverless-special-terms-and-conditions)という制限があることに注意してください。
 
-## Overview of the PoC procedures
+## PoC手順の概要 {#overview-of-the-poc-procedures}
 
-The purpose of a PoC is to test whether TiDB Cloud meets your business requirements. A typical PoC usually lasts 14 days, during which you are expected to focus on completing the PoC.
+PoC の目的は、 TiDB Cloud がビジネス要件を満たしているかどうかをテストすることです。一般的な PoC は通常 14 日間続き、その間に PoC の完了に集中することが求められます。
 
-A typical TiDB Cloud PoC consists of the following steps:
+典型的なTiDB Cloud PoC は次の手順で構成されます。
 
-1. Define success criteria and create a test plan
-2. Identify characteristics of your workload
-3. Sign up and create a TiDB Dedicated cluster for the PoC
-4. Adapt your schemas and SQL
-5. Import data
-6. Run your workload and evaluate results
-7. Explore more features
-8. Clean up the environment and finish the PoC
+1.  成功基準を定義し、テスト計画を作成する
+2.  作業負荷の特性を特定する
+3.  PoC 用にサインアップして TiDB 専用クラスターを作成する
+4.  スキーマとSQLを適応させる
+5.  データをインポートする
+6.  ワークロードを実行して結果を評価する
+7.  その他の機能を見る
+8.  環境をクリーンアップしてPoCを完了する
 
-## Step 1. Define success criteria and create a test plan
+## ステップ1. 成功基準を定義し、テスト計画を作成する {#step-1-define-success-criteria-and-create-a-test-plan}
 
-When evaluating TiDB Cloud through a PoC, it is recommended to decide your points of interest and the corresponding technical evaluation criteria based on your business needs, and then clarify your expectations and goals for the PoC. Clear and measurable technical criteria with a detailed test plan can help you focus on the key aspects, cover the business level requirements, and ultimately get answers through the PoC procedures.
+PoC を通じてTiDB Cloudを評価する場合は、ビジネス ニーズに基づいて関心のあるポイントと対応する技術評価基準を決定し、PoC に対する期待と目標を明確にすることをお勧めします。詳細なテスト プランを備えた明確で測定可能な技術基準により、重要な側面に焦点を当て、ビジネス レベルの要件をカバーし、最終的に PoC 手順を通じて回答を得ることができます。
 
-Use the following questions to help identify the goals of your PoC:
+PoC の目標を特定するには、次の質問を参考にしてください。
 
-- What is the scenario of your workload?
-- What is the dataset size or workload of your business? What is the growth rate?
-- What are the performance requirements, including the business-critical throughput or latency requirements?
-- What are the availability and stability requirements, including the minimum acceptable planned or unplanned downtime?
-- What are the necessary metrics for operational efficiency? How do you measure them?
-- What are the security and compliance requirements for your workload?
+-   ワークロードのシナリオは何ですか?
+-   あなたのビジネスのデータセットのサイズやワークロードはどれくらいですか? 成長率はどれくらいですか?
+-   ビジネスクリティカルなスループットやレイテンシーの要件を含むパフォーマンス要件は何ですか?
+-   許容可能な最小限の計画的または計画外のダウンタイムを含む、可用性と安定性の要件は何ですか?
+-   運用効率に必要な指標は何ですか? それをどうやって測定しますか?
+-   ワークロードのセキュリティとコンプライアンスの要件は何ですか?
 
-For more information about the success criteria and how to create a test plan, feel free to contact <a href="mailto:tidbcloud-support@pingcap.com">PingCAP</a>.
+成功基準とテスト計画の作成方法の詳細については、お気軽に<a href="mailto:tidbcloud-support@pingcap.com">PingCAP まで</a>お問い合わせください。
 
-## Step 2. Identify characteristics of your workload
+## ステップ2. ワークロードの特性を特定する {#step-2-identify-characteristics-of-your-workload}
 
-TiDB Cloud is suitable for various use cases that require high availability and strong consistency with a large volume of data. [TiDB Introduction](https://docs.pingcap.com/tidb/stable/overview) lists the key features and scenarios. You can check whether they apply to your business scenarios:
+TiDB Cloud は、大量のデータで高可用性と強力な一貫性を必要とするさまざまなユースケースに適しています。 [TiDB の紹介](https://docs.pingcap.com/tidb/stable/overview)に主要な機能とシナリオを示します。これらがビジネス シナリオに当てはまるかどうかを確認できます。
 
-- Horizontally scaling out or scaling in
-- Financial-grade high availability
-- Real-time HTAP
-- Compatible with the MySQL protocol and MySQL ecosystem
+-   水平方向のスケールアウトまたはスケールイン
+-   金融グレードの高可用性
+-   リアルタイムHTAP
+-   MySQLプロトコルおよびMySQLエコシステムと互換性があります
 
-You might also be interested in using [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview), a columnar storage engine that helps speed up analytical processing. During the PoC, you can use the TiFlash feature at any time.
+分析処理の高速化に役立つ列指向storageエンジンである[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)使用にも興味があるかもしれません。PoC 中は、いつでもTiFlash機能を使用できます。
 
-## Step 3. Sign up and create a TiDB Dedicated cluster for the PoC
+## ステップ3. PoC用のTiDB専用クラスターにサインアップして作成する {#step-3-sign-up-and-create-a-tidb-dedicated-cluster-for-the-poc}
 
-To create a [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) cluster for the PoC, take the following steps:
+PoC 用の[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターを作成するには、次の手順を実行します。
 
-1. Fill in the PoC application form by doing one of the following:
+1.  次のいずれかの方法で PoC 申請フォームに記入します。
 
-    - On the PingCAP website, go to the [Apply for PoC](https://pingcap.com/apply-for-poc/) page to fill in the application form.
-    - In the [TiDB Cloud console](https://tidbcloud.com/), click **?** in the lower-right corner, click **Contact Sales**, and then select **Apply for PoC** to fill in the application form.
+    -   PingCAPウェブサイトの[PoCを申請する](https://pingcap.com/apply-for-poc/)ページ目に進み、申し込みフォームに記入してください。
+    -   [TiDB Cloudコンソール](https://tidbcloud.com/)で、右下隅の**[?]**をクリックし、 **[営業担当者に問い合わせ]**をクリックして、 **[PoC を申請]**を選択し、申請フォームに入力します。
 
-    Once you submit the form, the TiDB Cloud Support team will review your application, contact you, and transfer credits to your account once the application is approved. You can also contact a PingCAP support engineer to assist with your PoC procedures to ensure the PoC runs as smoothly as possible.
+    フォームを送信すると、 TiDB Cloudサポート チームが申請を確認し、お客様に連絡し、申請が承認されるとクレジットをお客様のアカウントに振り込みます。また、PingCAP サポート エンジニアに連絡して PoC 手順を支援してもらい、PoC が可能な限りスムーズに実行されるようにすることもできます。
 
-2. Refer to [Create a TiDB Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md) to create a TiDB Dedicated cluster for the PoC.
+2.  PoC 用の TiDB 専用クラスターを作成するには、 [TiDB専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してください。
 
-Capacity planning is recommended for cluster sizing before you create a cluster. You can start with estimated numbers of TiDB, TiKV, or TiFlash nodes, and scale out the cluster later to meet performance requirements. You can find more details in the following documents or consult our support team.
+クラスターを作成する前に、クラスターのサイズを決定するための容量計画を行うことをお勧めします。TiDB、TiKV、またはTiFlashノードの推定数から始めて、後でパフォーマンス要件を満たすようにクラスターをスケールアウトすることができます。詳細については、次のドキュメントを参照するか、サポート チームにお問い合わせください。
 
-- For more information about estimation practice, see [Size Your TiDB](/tidb-cloud/size-your-cluster.md).
-- For configurations of the TiDB Dedicated cluster, see [Create a TiDB Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md). Configure the cluster size for TiDB, TiKV, and TiFlash (optional) respectively.
-- For how to plan and optimize your PoC credits consumption effectively, see [FAQ](#faq) in this document.
-- For more information about scaling, see [Scale Your TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md).
+-   推定方法の詳細については、 [TiDB のサイズ](/tidb-cloud/size-your-cluster.md)参照してください。
+-   TiDB 専用クラスターの構成については、 [TiDB専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)参照してください。TiDB、TiKV、 TiFlash (オプション) のクラスター サイズをそれぞれ構成します。
+-   PoC クレジットの消費を効果的に計画し、最適化する方法については、このドキュメントの[FAQ](#faq)参照してください。
+-   スケーリングの詳細については、 [TiDBクラスタを拡張する](/tidb-cloud/scale-tidb-cluster.md)参照してください。
 
-Once a dedicated PoC cluster is created, you are ready to load data and perform a series of tests. For how to connect to a TiDB cluster, see [Connect to Your TiDB Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+専用の PoC クラスターが作成されると、データを読み込んで一連のテストを実行する準備が整います。TiDB クラスターに接続する方法については、 [TiDB専用クラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)参照してください。
 
-For a newly created cluster, note the following configurations:
+新しく作成されたクラスターの場合は、次の構成に注意してください。
 
-- The default time zone (the **Create Time** column on the Dashboard) is UTC. You can change it to your local time zone by following [Set the Local Time Zone](/tidb-cloud/manage-user-access.md#set-the-time-zone-for-your-organization).
-- The default backup setting on a new cluster is full database backup on a daily basis. You can specify a preferred backup time or back up data manually. For the default backup time and more details, see [Back up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup).
+-   デフォルトのタイムゾーン（ダッシュボードの**「作成時間」**列）は UTC です。 [ローカルタイムゾーンを設定する](/tidb-cloud/manage-user-access.md#set-the-time-zone-for-your-organization)手順に従って、ローカルタイムゾーンに変更できます。
+-   新しいクラスターのデフォルトのバックアップ設定は、毎日データベース全体をバックアップすることです。希望するバックアップ時間を指定するか、データを手動でバックアップすることができます。デフォルトのバックアップ時間と詳細については、 [TiDBクラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)参照してください。
 
-## Step 4. Adapt your schemas and SQL
+## ステップ4. スキーマとSQLを適応させる {#step-4-adapt-your-schemas-and-sql}
 
-Next, you can load your database schemas to the TiDB cluster, including tables and indexes.
+次に、テーブルやインデックスを含むデータベース スキーマを TiDB クラスターにロードできます。
 
-Because the amount of PoC credits is limited, to maximize the value of credits, it is recommended that you create a [TiDB Serverless cluster](/tidb-cloud/select-cluster-tier.md#tidb-serverless) for compatibility tests and preliminary analysis on TiDB Cloud.
+PoC クレジットの数量には限りがあるため、クレジットの価値を最大化するために、 TiDB Cloud上で互換性テストや予備分析用の[TiDB サーバーレス クラスター](/tidb-cloud/select-cluster-tier.md#tidb-serverless)を作成することをお勧めします。
 
-TiDB Cloud is highly compatible with MySQL 8.0. You can directly import your data into TiDB if it is MySQL-compatible or can be adapted to be compatible with MySQL.
+TiDB Cloud はMySQL 8.0 と高い互換性があります。データが MySQL と互換性があるか、MySQL と互換性を持つように調整できる場合は、データを TiDB に直接インポートできます。
 
-For more information about compatibilities, see the following documents:
+互換性の詳細については、次のドキュメントを参照してください。
 
-- [TiDB compatibility with MySQL](https://docs.pingcap.com/tidb/stable/mysql-compatibility).
-- [TiDB features that are different from MySQL](https://docs.pingcap.com/tidb/stable/mysql-compatibility#features-that-are-different-from-mysql).
-- [TiDB's Keywords and Reserved Words](https://docs.pingcap.com/tidb/stable/keywords).
-- [TiDB Limitations](https://docs.pingcap.com/tidb/stable/tidb-limitations).
+-   [TiDB と MySQL の互換性](https://docs.pingcap.com/tidb/stable/mysql-compatibility) 。
+-   [MySQLとは異なるTiDBの機能](https://docs.pingcap.com/tidb/stable/mysql-compatibility#features-that-are-different-from-mysql) 。
+-   [TiDB のキーワードと予約語](https://docs.pingcap.com/tidb/stable/keywords) 。
+-   [TiDB の制限](https://docs.pingcap.com/tidb/stable/tidb-limitations) 。
 
-Here are some best practices:
+以下にベストプラクティスをいくつか示します。
 
-- Check whether there are inefficiencies in schema setup.
-- Remove unnecessary indexes.
-- Plan the partitioning policy for effective partitioning.
-- Avoid [hotspot issues](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#identify-hotspot-issues) caused by Right-Hand-Side Index Growth, for example, indexes on the timestamp.
-- Avoid [hotspot issues](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#identify-hotspot-issues) by using [SHARD_ROW_ID_BITS](https://docs.pingcap.com/tidb/stable/shard-row-id-bits) and [AUTO_RANDOM](https://docs.pingcap.com/tidb/stable/auto-random).
+-   スキーマ設定に非効率性がないか確認します。
+-   不要なインデックスを削除します。
+-   効果的なパーティショニングのためにパーティショニング ポリシーを計画します。
+-   タイムスタンプ上のインデックスなど、右側のインデックスの増加によって発生する[ホットスポットの問題](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#identify-hotspot-issues)回避します。
+-   [シャード行IDビット](https://docs.pingcap.com/tidb/stable/shard-row-id-bits)と[自動ランダム](https://docs.pingcap.com/tidb/stable/auto-random)を使って[ホットスポットの問題](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#identify-hotspot-issues)回避します。
 
-For SQL statements, you might need to adapt them depending on the level of your data source's compatibility with TiDB.
+SQL ステートメントの場合、データ ソースと TiDB の互換性のレベルに応じて調整する必要がある場合があります。
 
-If you have any questions, contact [PingCAP](/tidb-cloud/tidb-cloud-support.md) for consultation.
+ご不明な点がございましたら[ピンキャップ](/tidb-cloud/tidb-cloud-support.md)ご相談ください。
 
-## Step 5. Import data
+## ステップ5. データのインポート {#step-5-import-data}
 
-You can import a small dataset to quickly test feasibility, or a large dataset to test the throughput of TiDB data migration tools. Although TiDB provides sample data, it is strongly recommended to perform a test with real workloads from your business.
+小さなデータセットをインポートして実現可能性をすばやくテストすることも、大きなデータセットをインポートして TiDB データ移行ツールのスループットをテストすることもできます。TiDB はサンプル データを提供していますが、実際のビジネス ワークロードでテストを実行することを強くお勧めします。
 
-You can import data in various formats to TiDB Cloud:
+さまざまな形式のデータをTiDB Cloudにインポートできます。
 
-- [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
-- [Import Local Files to TiDB Cloud](/tidb-cloud/tidb-cloud-import-local-files.md)
-- [Import sample data in the SQL file format](/tidb-cloud/import-sample-data.md)
-- [Import CSV Files from Amazon S3 or GCS](/tidb-cloud/import-csv-files.md)
-- [Import Apache Parquet Files](/tidb-cloud/import-parquet-files.md)
+-   [データ移行を使用してMySQL互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
+-   [ローカルファイルをTiDB Cloudにインポートする](/tidb-cloud/tidb-cloud-import-local-files.md)
+-   [SQLファイル形式でサンプルデータをインポートする](/tidb-cloud/import-sample-data.md)
+-   [Amazon S3 または GCS から CSV ファイルをインポートする](/tidb-cloud/import-csv-files.md)
+-   [Apache Parquet ファイルのインポート](/tidb-cloud/import-parquet-files.md)
 
-> **Note:**
+> **注記：**
 >
-> Data import on the **Import** page does not generate additional billing fees.
+> **インポート**ページでのデータのインポートでは追加の請求料金は発生しません。
 
-## Step 6. Run your workload and evaluate results
+## ステップ6. ワークロードを実行して結果を評価する {#step-6-run-your-workload-and-evaluate-results}
 
-Now you have created the environment, adapted the schemas, and imported data. It is time to test your workload.
+これで、環境の作成、スキーマの調整、データのインポートが完了しました。次はワークロードをテストします。
 
-Before testing the workload, consider performing a manual backup, so that you can restore the database to its original state if needed. For more information, see [Back up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup).
+ワークロードをテストする前に、必要に応じてデータベースを元の状態に復元できるように、手動バックアップを実行することを検討してください。詳細については、 [TiDBクラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)参照してください。
 
-After kicking off the workload, you can observe the system using the following methods:
+ワークロードを開始した後、次の方法を使用してシステムを観察できます。
 
-- The commonly used metrics of the cluster can be found on the cluster overview page, including Total QPS, Latency, Connections, TiFlash Request QPS, TiFlash Request Duration, TiFlash Storage Size, TiKV Storage Size, TiDB CPU, TiKV CPU, TiKV IO Read, and TiKV IO Write. See [Monitor a TiDB Cluster](/tidb-cloud/monitor-tidb-cluster.md).
-- Go to **Diagnosis > Statements**, where you can observe SQL execution and easily locate performance problems without querying the system tables. See [Statement Analysis](/tidb-cloud/tune-performance.md).
-- Go to **Diagnosis > Key Visualizer**, where you can view TiDB data access patterns and data hotspots. See [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer).
-- You can also integrate these metrics to your own Datadog and Prometheus. See [Third-Party Monitoring Integrations](/tidb-cloud/third-party-monitoring-integrations.md).
+-   クラスターのよく使用されるメトリクスは、クラスターの概要ページにあります。これには、合計 QPS、レイテンシ、接続、 TiFlash要求 QPS、 TiFlash要求期間、 TiFlashストレージ サイズ、TiKV ストレージ サイズ、TiDB CPU、TiKV CPU、TiKV IO 読み取り、および TiKV IO 書き込みが含まれます。 [TiDBクラスタを監視する](/tidb-cloud/monitor-tidb-cluster.md)参照してください。
+-   **「診断」 &gt; 「ステートメント」**に移動すると、SQL 実行を観察し、システム テーブルをクエリせずにパフォーマンスの問題を簡単に見つけることができます。3 [ステートメント分析](/tidb-cloud/tune-performance.md)参照してください。
+-   **「診断」 &gt; 「キー ビジュアライザー」**に移動すると、TiDB データ アクセス パターンとデータ ホットスポットを表示できます。3 [キービジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)参照してください。
+-   これらのメトリクスを独自の Datadog および Prometheus に統合することもできます。 [サードパーティの監視統合](/tidb-cloud/third-party-monitoring-integrations.md)参照してください。
 
-Now it is time for evaluating the test results.
+次はテスト結果を評価する時です。
 
-To get a more accurate evaluation, determine the metrics baseline before the test, and record the test results properly for each run. By analyzing the results, you can decide whether TiDB Cloud is a good fit for your application. Meanwhile, these results indicate the running status of the system, and you can adjust the system according to the metrics. For example:
+より正確な評価を得るには、テスト前にメトリクスのベースラインを決定し、実行ごとにテスト結果を適切に記録します。結果を分析することで、 TiDB Cloud がアプリケーションに適しているかどうかを判断できます。また、これらの結果はシステムの実行状態を示しており、メトリクスに応じてシステムを調整できます。例:
 
-- Evaluate whether the system performance meets your requirements. Check the total QPS and latency. If the system performance is not satisfactory, you can tune performance as follows:
+-   システム パフォーマンスが要件を満たしているかどうかを評価します。合計 QPS とレイテンシーを確認します。システム パフォーマンスが満足できるものでない場合は、次のようにパフォーマンスを調整できます。
 
-    - Monitor and optimize the network latency.
-    - Investigate and tune the SQL performance.
-    - Monitor and [resolve hotspot issues](https://docs.pingcap.com/tidb/dev/troubleshoot-hot-spot-issues#troubleshoot-hotspot-issues).
+    -   ネットワークレイテンシーを監視および最適化します。
+    -   SQL パフォーマンスを調査して調整します。
+    -   モニターと[ホットスポットの問題を解決する](https://docs.pingcap.com/tidb/dev/troubleshoot-hot-spot-issues#troubleshoot-hotspot-issues) 。
 
-- Evaluate the storage size and CPU usage rate, and scale out or scale in the TiDB cluster accordingly. Refer to the [FAQ](#faq) section for scaling details.
+-   storageサイズと CPU 使用率を評価し、それに応じて TiDB クラスターをスケール アウトまたはスケール インします。スケーリングの詳細については、セクション[FAQ](#faq)を参照してください。
 
-The following are tips for performance tuning:
+パフォーマンス チューニングのヒントを次に示します。
 
-- Improve write performance
+-   書き込みパフォーマンスの向上
 
-    - Increase the write throughput by scaling out the TiDB clusters (see [Scale a TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md)).
-    - Reduce lock conflicts by using the [optimistic transaction model](https://docs.pingcap.com/tidb/stable/optimistic-transaction#tidb-optimistic-transaction-model).
+    -   TiDB クラスターをスケールアウトして書き込みスループットを向上させます ( [TiDBクラスタのスケール](/tidb-cloud/scale-tidb-cluster.md)を参照)。
+    -   [楽観的取引モデル](https://docs.pingcap.com/tidb/stable/optimistic-transaction#tidb-optimistic-transaction-model)を使用してロックの競合を減らします。
 
-- Improve query performance
+-   クエリパフォーマンスの向上
 
-    - Check the SQL execution plan on the **Diagnostic > Statements** page.
-    - Check hotspot issues on the **Dashboard > Key Visualizer** page.
-    - Monitor if the TiDB cluster is running out of capacity on the **Overview > Capacity Metrics** page.
-    - Use the TiFlash feature to optimize analytical processing. See [Use an HTAP Cluster](/tiflash/tiflash-overview.md).
+    -   **「診断 &gt; ステートメント」**ページで SQL 実行プランを確認します。
+    -   **ダッシュボード &gt; キー ビジュアライザー**ページでホットスポットの問題を確認します。
+    -   **「概要 &gt; 容量メトリック」**ページで、TiDB クラスターの容量が不足していないかどうかを監視します。
+    -   TiFlash機能を使用して分析処理を最適化します。 [HTAPクラスタを使用する](/tiflash/tiflash-overview.md)参照してください。
 
-## Step 7. Explore more features
+## ステップ7. その他の機能を調べる {#step-7-explore-more-features}
 
-Now the workload testing is finished, you can explore more features, for example, upgrade and backup.
+ワークロードのテストが完了したら、アップグレードやバックアップなどのその他の機能を調べることができます。
 
-- Upgrade
+-   アップグレード
 
-    TiDB Cloud regularly upgrades the TiDB clusters, while you can also submit a support ticket to request an upgrade to your clusters. See [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md).
+    TiDB Cloud は定期的に TiDB クラスターをアップグレードしますが、サポート チケットを送信してクラスターのアップグレードをリクエストすることもできます。 [TiDBクラスタのアップグレード](/tidb-cloud/upgrade-tidb-cluster.md)参照してください。
 
-- Backup
+-   バックアップ
 
-    To avoid vendor lock-in, you can use daily full backup to migrate data to a new cluster and use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data. For more information, see [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) and [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore-serverless.md#backup).
+    ベンダー ロックインを回避するには、毎日のフル バックアップを使用してデータを新しいクラスターに移行し、 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)使用してデータをエクスポートします。詳細については、 [TiDB専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)および[TiDB専用データのバックアップと復元](/tidb-cloud/backup-and-restore-serverless.md#backup)を参照してください。
 
-## Step 8. Clean up the environment and finish the PoC
+## ステップ8. 環境をクリーンアップしてPoCを完了する {#step-8-clean-up-the-environment-and-finish-the-poc}
 
-You have completed the full cycle of a PoC after you test TiDB Cloud using real workloads and get the testing results. These results help you determine if TiDB Cloud meets your expectations. Meanwhile, you have accumulated best practices for using TiDB Cloud.
+実際のワークロードを使用してTiDB Cloudをテストし、テスト結果を取得したら、PoC の完全なサイクルが完了します。これらの結果は、TiDB Cloudが期待どおりであるかどうかを判断するのに役立ちます。その間に、 TiDB Cloudの使用に関するベスト プラクティスが蓄積されました。
 
-If you want to try TiDB Cloud on a larger scale, for a new round of deployments and tests, such as deploying with other node storage sizes offered by TiDB Cloud, get full access to TiDB Cloud by creating a [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) cluster.
+TiDB Cloud をより大規模に試してみたい場合、つまりTiDB Cloudが提供する他のノードstorageサイズを使用してデプロイするなど、新しい一連のデプロイとテストを行う場合は、 [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターを作成してTiDB Cloudへのフル アクセスを取得してください。
 
-If your credits are running out and you want to continue with the PoC, contact the [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for consultation.
+クレジットがなくなり、PoC を継続したい場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)に連絡してご相談ください。
 
-You can end the PoC and remove the test environment anytime. For more information, see [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md).
+PoC を終了し、テスト環境を削除することはいつでも可能です。詳細については、 [TiDBクラスタを削除する](/tidb-cloud/delete-tidb-cluster.md)参照してください。
 
-Any feedback to our support team is highly appreciated by filling in the [TiDB Cloud Feedback form](https://www.surveymonkey.com/r/L3VVW8R), such as the PoC process, the feature requests, and how we can improve the products.
+PoC プロセス、機能リクエスト、製品の改善方法など、サポート チームへのフィードバックは、 [TiDB Cloudフィードバック フォーム](https://www.surveymonkey.com/r/L3VVW8R)にご記入いただくと大変助かります。
 
-## FAQ
+## FAQ {#faq}
 
-### 1. How long does it take to back up and restore my data?
+### 1. データのバックアップと復元にはどのくらいの時間がかかりますか? {#1-how-long-does-it-take-to-back-up-and-restore-my-data}
 
-TiDB Cloud provides two types of database backup: automatic backup and manual backup. Both methods back up the full database.
+TiDB Cloud、自動バックアップと手動バックアップの 2 種類のデータベース バックアップが提供されています。どちらの方法でも、データベース全体がバックアップされます。
 
-The time it takes to back up and restore data might vary, depending on the number of tables, the number of mirror copies, and the CPU-intensive level. The backup and restoring rate in one single TiKV node is approximately 50 MB/s.
+データのバックアップと復元にかか​​る時間は、テーブルの数、ミラー コピーの数、CPU 使用率のレベルによって異なります。1 つの TiKV ノードでのバックアップと復元の速度は、約 50 MB/秒です。
 
-Database backup and restore operations are typically CPU-intensive, and always require additional CPU resources. They might have an impact (10% to 50%) on QPS and transaction latency, depending on how CPU-intensive this environment is.
+データベースのバックアップと復元操作は通常、CPU を集中的に使用するため、常に追加の CPU リソースが必要になります。この環境の CPU 集中度に応じて、QPS とトランザクションのレイテンシーに影響 (10% ～ 50%) が及ぶ可能性があります。
 
-### 2. When do I need to scale out and scale in?
+### 2. スケールアウトとスケールインはいつ行う必要がありますか? {#2-when-do-i-need-to-scale-out-and-scale-in}
 
-The following are some considerations about scaling:
+スケーリングに関する考慮事項は次のとおりです。
 
-- During peak hours or data import, if you observe that the capacity metrics on the dashboard have reached the upper limits (see [Monitor a TiDB Cluster](/tidb-cloud/monitor-tidb-cluster.md)), you might need to scale out the cluster.
-- If you observe that the resource usage is persistently low, for example, only 10%-20% of CPU usage, you can scale in the cluster to save resources.
+-   ピーク時間中またはデータのインポート中に、ダッシュボードの容量メトリックが上限に達したことが確認された場合 ( [TiDBクラスタを監視する](/tidb-cloud/monitor-tidb-cluster.md)を参照)、クラスターをスケールアウトする必要がある可能性があります。
+-   リソースの使用量が持続的に低い場合 (たとえば、CPU 使用率が 10% ～ 20% のみ)、クラスターをスケールインしてリソースを節約できます。
 
-You can scale out clusters on the console by yourself. If you need to scale in a cluster, you need to contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for help. For more information about scaling, see [Scale Your TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md). You can keep in touch with the support team to track the exact progress. You must wait for the scaling operation to finish before starting your test because it can impact the performance due to data rebalancing.
+コンソールでクラスターを自分でスケールアウトできます。クラスターをスケールインする必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)連絡してサポートを受ける必要があります。スケーリングの詳細については、 [TiDBクラスタを拡張する](/tidb-cloud/scale-tidb-cluster.md)を参照してください。サポート チームと連絡を取り合って、正確な進行状況を追跡することができます。データの再バランス調整によりパフォーマンスに影響する可能性があるため、テストを開始する前にスケーリング操作が完了するまで待つ必要があります。
 
-### 3. How to make the best use of my PoC credits?
+### 3. PoC クレジットを最大限に活用するにはどうすればよいですか? {#3-how-to-make-the-best-use-of-my-poc-credits}
 
-Once your application for the PoC is approved, you will receive credits in your account. Generally, the credits are sufficient for a 14-day PoC. The credits are charged by the type of nodes and the number of nodes, on an hourly basis. For more information, see [TiDB Cloud Billing](/tidb-cloud/tidb-cloud-billing.md#credits).
+PoC の申請が承認されると、アカウントにクレジットが付与されます。通常、クレジットは 14 日間の PoC に十分な量です。クレジットは、ノードの種類とノードの数に応じて、時間単位で課金されます。詳細については、 [TiDB Cloud課金](/tidb-cloud/tidb-cloud-billing.md#credits)参照してください。
 
-To check the credits left for your PoC, go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your target project, as shown in the following screenshot.
+PoC に残っているクレジットを確認するには、次のスクリーンショットに示すように、対象プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
 ![TiDB Cloud PoC Credits](/media/tidb-cloud/poc-points.png)
 
-Alternatively, you can also click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console, click **Billing**, and click **Credits** to see the credit details page.
+または、<mdsvgicon name="icon-top-organization"> TiDB Cloudコンソールの左下隅で、 **[請求] を**クリックし、 **[クレジット]**をクリックしてクレジットの詳細ページを表示します。</mdsvgicon>
 
-To save credits, remove the cluster that you are not using. Currently, you cannot stop a cluster. You need to ensure that your backups are up to date before removing a cluster, so you can restore the cluster later when you want to resume your PoC.
+クレジットを節約するには、使用していないクラスターを削除します。現在、クラスターを停止することはできません。クラスターを削除する前に、バックアップが最新であることを確認する必要があります。そうすれば、後で PoC を再開するときにクラスターを復元できます。
 
-If you still have unused credits after your PoC process is completed, you can continue using the credits to pay TiDB cluster fees as long as these credits are not expired.
+PoC プロセスが完了した後も未使用のクレジットが残っている場合は、そのクレジットの有効期限が切れていない限り、引き続きそのクレジットを使用して TiDB クラスターの料金を支払うことができます。
 
-### 4. Can I take more than 2 weeks to complete a PoC?
+### 4. PoC を完了するのに 2 週間以上かかることはありますか? {#4-can-i-take-more-than-2-weeks-to-complete-a-poc}
 
-If you want to extend the PoC trial period or are running out of credits, [contact PingCAP](https://www.pingcap.com/contact-us/) for help.
+PoC の試用期間を延長したい場合、またはクレジットが不足している場合は、 [PingCAPに連絡する](https://www.pingcap.com/contact-us/)にお問い合わせください。
 
-### 5. I'm stuck with a technical problem. How do I get help for my PoC?
+### 5. 技術的な問題で行き詰まっています。PoC のサポートを受けるにはどうすればよいですか? {#5-i-m-stuck-with-a-technical-problem-how-do-i-get-help-for-my-poc}
 
-You can always [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for help.
+いつでも[TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md)を求めることができます。

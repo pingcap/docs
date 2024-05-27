@@ -1,34 +1,34 @@
 ---
 title: Integrate TiDB Cloud with dbt
-summary: Learn the use cases of dbt in TiDB Cloud.
+summary: TiDB Cloudでの dbt の使用例を学びます。
 ---
 
-# Integrate TiDB Cloud with dbt
+# TiDB Cloudをdbtと統合する {#integrate-tidb-cloud-with-dbt}
 
-[Data build tool (dbt)](https://www.getdbt.com/) is a popular open-source data transformation tool that helps analytics engineers transform data in their warehouses through SQL statements. Through the [dbt-tidb](https://github.com/pingcap/dbt-tidb) plugin, analytics engineers working with TiDB Cloud can directly create forms and match data through SQL without having to think about the process of creating tables or views.
+[データ構築ツール (dbt)](https://www.getdbt.com/)は、分析エンジニアが SQL ステートメントを使用してウェアハウス内のデータを変換するのに役立つ、人気の高いオープンソースのデータ変換ツールです。2 プラグ[dbt-tidb](https://github.com/pingcap/dbt-tidb)を使用すると、 TiDB Cloudで作業する分析エンジニアは、テーブルやビューの作成プロセスを考えることなく、SQL を介してフォームを直接作成し、データを照合できます。
 
-This document introduces how to use dbt with TiDB Cloud, taking a dbt project as an example.
+このドキュメントでは、dbt プロジェクトを例に、 TiDB Cloudで dbt を使用する方法を紹介します。
 
-## Step 1: Install dbt and dbt-tidb
+## ステップ1: dbtとdbt-tidbをインストールする {#step-1-install-dbt-and-dbt-tidb}
 
-You can install dbt and dbt-tidb using only one command. In the following command, dbt is installed as a dependency when you install dbt-tidb.
+dbt と dbt-tidb は 1 つのコマンドだけでインストールできます。次のコマンドでは、dbt-tidb をインストールするときに dbt が依存関係としてインストールされます。
 
 ```shell
 pip install dbt-tidb
 ```
 
-You can also install dbt separately. See [How to install dbt](https://docs.getdbt.com/docs/get-started/installation) in the dbt documentation.
+dbt を別途インストールすることもできます。dbt ドキュメントの[dbtのインストール方法](https://docs.getdbt.com/docs/get-started/installation)参照してください。
 
-## Step 2: Create a demo project
+## ステップ2: デモプロジェクトを作成する {#step-2-create-a-demo-project}
 
-To try out the dbt function, you can use [jaffle_shop](https://github.com/dbt-labs/jaffle_shop), a demo project provided by dbt-lab. You can clone the project directly from GitHub:
+dbt 機能を試すには、dbt-lab が提供するデモ プロジェクト[ジャッフルショップ](https://github.com/dbt-labs/jaffle_shop)使用できます。プロジェクトは GitHub から直接クローンできます。
 
 ```shell
 git clone https://github.com/dbt-labs/jaffle_shop && \
 cd jaffle_shop
 ```
 
-All files in the `jaffle_shop` directory are structured as follows:
+`jaffle_shop`ディレクトリ内のすべてのファイルは次のように構造化されています。
 
 ```shell
 .
@@ -55,52 +55,52 @@ All files in the `jaffle_shop` directory are structured as follows:
     └── raw_payments.csv
 ```
 
-In this directory:
+このディレクトリ内:
 
-- `dbt_project.yml` is the dbt project configuration file, which holds the project name and database configuration file information.
+-   `dbt_project.yml`は dbt プロジェクト構成ファイルであり、プロジェクト名とデータベース構成ファイル情報を保持します。
 
-- The `models` directory contains the project’s SQL models and table schemas. Note that the data analyst writes this section. For more information about models, see [SQL models](https://docs.getdbt.com/docs/build/sql-models).
+-   `models`ディレクトリには、プロジェクトの SQL モデルとテーブル スキーマが含まれています。このセクションはデータ アナリストが記述することに注意してください。モデルの詳細については、 [SQL モデル](https://docs.getdbt.com/docs/build/sql-models)を参照してください。
 
-- The `seeds` directory stores the CSV files that are dumped by the database export tools. For example, you can [export the TiDB Cloud data](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud) into CSV files through Dumpling. In the `jaffle_shop` project, these CSV files are used as raw data to be processed.
+-   `seeds`ディレクトリには、データベース エクスポート ツールによってダンプされた CSV ファイル`jaffle_shop`格納されます。たとえば、 Dumplingを使用して[TiDB Cloudデータをエクスポートする](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud) CSV ファイルにすることができます。5 プロジェクトでは、これらの CSV ファイルが処理される生データとして使用されます。
 
-## Step 3: Configure the project
+## ステップ3: プロジェクトを構成する {#step-3-configure-the-project}
 
-To configure the project, take the following steps:
+プロジェクトを構成するには、次の手順を実行します。
 
-1. Complete the global configuration.
+1.  グローバル構成を完了します。
 
-    You can refer to [Description of profile fields](#description-of-profile-fields) and edit the default global profile, `~/.dbt/profiles.yml`, to configure the connection with TiDB Cloud:
+    [プロフィールフィールドの説明](#description-of-profile-fields)を参照してデフォルトのグローバル プロファイル`~/.dbt/profiles.yml`を編集し、 TiDB Cloudとの接続を構成できます。
 
     ```shell
     sudo vi ~/.dbt/profiles.yml
     ```
 
-    In the editor, add the following configuration:
+    エディターで次の構成を追加します。
 
-   ```yaml
-    jaffle_shop_tidb:                                                 # Project name
-      target: dev                                                     # Target
-      outputs:
-        dev:
-          type: tidb                                                  # The specific adapter to use
-          server: gateway01.ap-southeast-1.prod.aws.tidbcloud.com     # The TiDB Cloud clusters' endpoint to connect to
-          port: 4000                                                  # The port to use
-          schema: analytics                                           # Specify the schema (database) to normalize data into
-          username: xxxxxxxxxxx.root                                  # The username to use to connect to the TiDB Cloud clusters
-          password: "your_password"                                   # The password to use for authenticating to the TiDB Cloud clusters
+    ```yaml
+     jaffle_shop_tidb:                                                 # Project name
+       target: dev                                                     # Target
+       outputs:
+         dev:
+           type: tidb                                                  # The specific adapter to use
+           server: gateway01.ap-southeast-1.prod.aws.tidbcloud.com     # The TiDB Cloud clusters' endpoint to connect to
+           port: 4000                                                  # The port to use
+           schema: analytics                                           # Specify the schema (database) to normalize data into
+           username: xxxxxxxxxxx.root                                  # The username to use to connect to the TiDB Cloud clusters
+           password: "your_password"                                   # The password to use for authenticating to the TiDB Cloud clusters
     ```
 
-    You can get the values of `server`, `port`, and `username` from the connection dialog of your cluster. To open this dialog, go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner.
+    `server`の値`username` `port`の接続ダイアログから取得できます。このダイアログを開くには、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動し、右上隅の**[接続]**をクリックします。
 
-2. Complete the project configuration.
+2.  プロジェクトの構成を完了します。
 
-    In the jaffle_shop project directory, edit the project configuration file `dbt_project.yml` and change the `profile` field to `jaffle_shop_tidb`. This configuration allows the project to query from the database as specified in the `~/.dbt/profiles.yml` file.
+    jaffle_shop プロジェクト ディレクトリで、プロジェクト構成ファイル`dbt_project.yml`を編集し、 `profile`フィールドを`jaffle_shop_tidb`に変更します。この構成により、プロジェクトは`~/.dbt/profiles.yml`ファイルで指定されたとおりにデータベースからクエリを実行できるようになります。
 
     ```shell
     vi dbt_project.yml
     ```
 
-    In the editor, update the configuration as follows:
+    エディターで、次のように構成を更新します。
 
     ```yaml
     name: 'jaffle_shop'
@@ -131,29 +131,29 @@ To configure the project, take the following steps:
             materialized: view           # *.sql which in models/staging/ would bt materialized to view
     ```
 
-3. Verify the configuration.
+3.  構成を確認します。
 
-    Run the following command to check whether the database and project configuration is correct.
+    次のコマンドを実行して、データベースとプロジェクトの構成が正しいかどうかを確認します。
 
     ```shell
     dbt debug
     ```
 
-## Step 4: (optional) Load CSV files
+## ステップ4: (オプション) CSVファイルを読み込む {#step-4-optional-load-csv-files}
 
-> **Note:**
+> **注記：**
 >
-> This step is optional. If the data for processing is already in the target database, you can skip this step.
+> この手順はオプションです。処理対象のデータがすでにターゲット データベースにある場合は、この手順をスキップできます。
 
-Now that you have successfully created and configured the project, it’s time to load the CSV data and materialize the CSV as a table in the target database.
+プロジェクトの作成と構成が正常に完了したので、CSV データをロードし、CSV をターゲット データベースのテーブルとして実現します。
 
-1. Load the CSV data and materialize the CSV as a table in the target database.
+1.  CSV データをロードし、CSV をターゲット データベース内のテーブルとして実現します。
 
     ```shell
     dbt seed
     ```
 
-    The following is an example output:
+    出力例は次のとおりです。
 
     ```shell
     Running with dbt=1.0.1
@@ -170,11 +170,11 @@ Now that you have successfully created and configured the project, it’s time t
     3 of 3 OK loaded seed file analytics.raw_payments............................... [INSERT 113 in 0.24s]
     ```
 
-    As you can see in the results, the seed file was started and loaded into three tables: `analytics.raw_customers`, `analytics.raw_orders`, and `analytics.raw_payments`.
+    結果からわかるように、シード ファイルが開始され、 `analytics.raw_customers` 、 `analytics.raw_orders` 、 `analytics.raw_payments` 3 つのテーブルにロードされました。
 
-2. Verify the results in TiDB Cloud.
+2.  TiDB Cloudで結果を確認します。
 
-    The `show databases` command lists the new `analytics` database that dbt has created. The `show tables` command indicates that there are three tables in the `analytics` database, corresponding to the ones you have created.
+    `show databases`コマンドは、dbt `show tables`作成した新しい`analytics`データベースを一覧表示します。5 コマンドは、 `analytics`データベースに、作成したテーブルに対応する 3 つのテーブルがあることを示します。
 
     ```sql
     mysql> SHOW DATABASES;
@@ -220,17 +220,17 @@ Now that you have successfully created and configured the project, it’s time t
     10 rows in set (0.10 sec)
     ```
 
-## Step 5: Transform data
+## ステップ5: データの変換 {#step-5-transform-data}
 
-Now you are ready to run the configured project and finish the data transformation.
+これで、構成されたプロジェクトを実行し、データ変換を完了する準備が整いました。
 
-1. Run the dbt project to finish the data transformation:
+1.  dbt プロジェクトを実行してデータ変換を完了します。
 
     ```shell
     dbt run
     ```
 
-    The following is an example output:
+    出力例は次のとおりです。
 
     ```shell
     Running with dbt=1.0.1
@@ -256,9 +256,9 @@ Now you are ready to run the configured project and finish the data transformati
     Done. PASS=5 WARN=0 ERROR=0 SKIP=0 TOTAL=5
     ```
 
-    The result shows that two tables (`analytics.customers` and `analytics.orders`), and three views (`analytics.stg_customers`, `analytics.stg_orders`, and `analytics.stg_payments`) are created successfully.
+    結果は、2 つのテーブル ( `analytics.customers`と`analytics.orders` ) と 3 つのビュー ( `analytics.stg_customers` 、 `analytics.stg_orders` 、および`analytics.stg_payments` ) が正常に作成されたことを示しています。
 
-2. Go to TiDB Cloud to verify that the transformation is successful.
+2.  TiDB Cloudにアクセスして、変換が成功したことを確認します。
 
     ```sql
     mysql> USE ANALYTICS;
@@ -295,61 +295,61 @@ Now you are ready to run the configured project and finish the data transformati
     10 rows in set (0.00 sec)
     ```
 
-    The output shows that five more tables or views have been added, and the data in the tables or views has been transformed. Only part of the data from the customer table is shown in this example.
+    出力には、さらに 5 つのテーブルまたはビューが追加され、テーブルまたはビュー内のデータが変換されたことが示されています。この例では、顧客テーブルのデータの一部のみが表示されています。
 
-## Step 6: Generate the document
+## ステップ6: ドキュメントを生成する {#step-6-generate-the-document}
 
-dbt lets you generate visual documents that display the overall structure of the project and describe all the tables and views.
+dbt を使用すると、プロジェクトの全体的な構造を表示し、すべてのテーブルとビューを説明するビジュアル ドキュメントを生成できます。
 
-To generate visual documents, take the following steps:
+ビジュアルドキュメントを生成するには、次の手順を実行します。
 
-1. Generate the document:
+1.  ドキュメントを生成します:
 
     ```shell
     dbt docs generate
     ```
 
-2. Start the server:
+2.  サーバーを起動します:
 
     ```shell
     dbt docs serve
     ```
 
-3. To access the document from your browser, go to [http://localhost:8080](http://localhost:8080).
+3.  ブラウザからドキュメントにアクセスするには、 [http://localhost:8080](http://localhost:8080)に進みます。
 
-## Description of profile fields
+## プロフィールフィールドの説明 {#description-of-profile-fields}
 
-| Option           | Description                                                             | Required? | Example                                           |
-|------------------|-------------------------------------------------------------------------|-----------|---------------------------------------------------|
-| `type`             | The specific adapter to use                                             | Required  | `tidb`                                            |
-| `server`           | The TiDB Cloud clusters' endpoint to connect to                         | Required  | `gateway01.ap-southeast-1.prod.aws.tidbcloud.com` |
-| `port`             | The port to use                                                         | Required  | `4000`                                            |
-| `schema`           | The schema (database) to normalize data into                      | Required  | `analytics`                                       |
-| `username`         | The username to use to connect to the TiDB Cloud clusters               | Required  | `xxxxxxxxxxx.root`                                |
-| `password`         | The password to use for authenticating to the TiDB Cloud clusters       | Required  | `"your_password"`                                 |
-| `retries`          | The retry times for connection to TiDB Cloud clusters (1 by default)    | Optional  | `2`                                               |
+| オプション      | 説明                                   | 必須？   | 例                                                 |
+| ---------- | ------------------------------------ | ----- | ------------------------------------------------- |
+| `type`     | 使用する特定のアダプタ                          | 必須    | `tidb`                                            |
+| `server`   | TiDB Cloudクラスターの接続エンドポイント            | 必須    | `gateway01.ap-southeast-1.prod.aws.tidbcloud.com` |
+| `port`     | 使用するポート                              | 必須    | `4000`                                            |
+| `schema`   | データを正規化するスキーマ（データベース）                | 必須    | `analytics`                                       |
+| `username` | TiDB Cloudクラスターに接続するために使用するユーザー名     | 必須    | `xxxxxxxxxxx.root`                                |
+| `password` | TiDB Cloudクラスターへの認証に使用するパスワード        | 必須    | `"your_password"`                                 |
+| `retries`  | TiDB Cloudクラスターへの接続の再試行回数 (デフォルトは 1) | オプション | `2`                                               |
 
-## Supported functions
+## サポートされている関数 {#supported-functions}
 
-You can use the following functions directly in dbt-tidb. For information about how to use them, see [dbt-util](https://github.com/dbt-labs/dbt-utils).
+dbt-tidb では以下の関数を直接使用できます。使用方法については[dbt-util](https://github.com/dbt-labs/dbt-utils)を参照してください。
 
-The following functions are supported:
+以下の関数がサポートされています:
 
-- `bool_or`
-- `cast_bool_to_text`
-- `dateadd`
-- `datediff`. Note that `datediff` is a little different from dbt-util. It rounds down rather than rounds up.
-- `date_trunc`
-- `hash`
-- `safe_cast`
-- `split_part`
-- `last_day`
-- `cast_bool_to_text`
-- `concat`
-- `escape_single_quotes`
-- `except`
-- `intersect`
-- `length`
-- `position`
-- `replace`
-- `right`
+-   `bool_or`
+-   `cast_bool_to_text`
+-   `dateadd`
+-   `datediff` dbt-util とは少し異なることに注意して`datediff` 。切り上げではなく切り捨てになります。
+-   `date_trunc`
+-   `hash`
+-   `safe_cast`
+-   `split_part`
+-   `last_day`
+-   `cast_bool_to_text`
+-   `concat`
+-   `escape_single_quotes`
+-   `except`
+-   `intersect`
+-   `length`
+-   `position`
+-   `replace`
+-   `right`

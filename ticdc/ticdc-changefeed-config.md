@@ -1,13 +1,13 @@
 ---
 title: CLI and Configuration Parameters of TiCDC Changefeeds
-summary: Learn the definitions of CLI and configuration parameters of TiCDC changefeeds.
+summary: TiCDC 変更フィードの CLI と構成パラメータの定義について学習します。
 ---
 
-# CLI and Configuration Parameters of TiCDC Changefeeds
+# TiCDC 変更フィードの CLI とコンフィグレーションパラメータ {#cli-and-configuration-parameters-of-ticdc-changefeeds}
 
-## Changefeed CLI parameters
+## Changefeed CLI パラメータ {#changefeed-cli-parameters}
 
-This section introduces the command-line parameters of TiCDC changefeeds by illustrating how to create a replication (changefeed) task:
+このセクションでは、レプリケーション (changefeed) タスクを作成する方法を示しながら、TiCDC changefeed のコマンドライン パラメータを紹介します。
 
 ```shell
 cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task"
@@ -19,22 +19,23 @@ ID: simple-replication-task
 Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2024-05-24T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":false,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v8.1.0"}
 ```
 
-- `--changefeed-id`: The ID of the replication task. The format must match the `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
-- `--sink-uri`: The downstream address of the replication task. Configure `--sink-uri` according to the following format. Currently, the scheme supports `mysql`, `tidb`, and `kafka`.
+-   `--changefeed-id` : レプリケーション タスクの ID。形式は`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`正規表現と一致する必要があります。この ID が指定されていない場合、TiCDC は ID として UUID (バージョン 4 形式) を自動的に生成します。
 
-    ```
-    [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
-    ```
+-   `--sink-uri` : レプリケーション タスクのダウンストリーム アドレス。次の形式に従って`--sink-uri`設定します。現在、このスキームは`mysql` 、 `tidb` 、および`kafka`をサポートしています。
 
-    When the sink URI contains special characters such as `! * ' ( ) ; : @ & = + $ , / ? % # [ ]`, you need to escape the special characters, for example, in [URI Encoder](https://www.urlencoder.org/).
+        [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
 
-- `--start-ts`: Specifies the starting TSO of the changefeed. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
-- `--target-ts`: Specifies the ending TSO of the changefeed. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
-- `--config`: Specifies the configuration file of the changefeed.
+    シンク URI に`! * ' ( ) ; : @ & = + $ , / ? % # [ ]`などの特殊文字が含まれている場合は、 [URI エンコーダ](https://www.urlencoder.org/)のように特殊文字をエスケープする必要があります。
 
-## Changefeed configuration parameters
+-   `--start-ts` : 変更フィードの開始 TSO を指定します。この TSO から、TiCDC クラスターはデータのプルを開始します。デフォルト値は現在の時刻です。
 
-This section introduces the configuration of a replication task.
+-   `--target-ts` : 変更フィード終了 TSO を指定します。この TSO まで、TiCDC クラスターはデータのプルを停止します。デフォルト値は空です。つまり、TiCDC はデータのプルを自動的に停止しません。
+
+-   `--config` : 変更フィードの構成ファイルを指定します。
+
+## Changefeed 構成パラメータ {#changefeed-configuration-parameters}
+
+このセクションでは、レプリケーション タスクの構成について説明します。
 
 ```toml
 # Specifies the memory quota (in bytes) that can be used in the capture server by the sink manager.

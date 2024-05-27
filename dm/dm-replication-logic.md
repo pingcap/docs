@@ -1,51 +1,51 @@
 ---
 title: DML Replication Mechanism in Data Migration
-summary: Learn how the core processing unit Sync in DM replicates DML statements.
+summary: DM のコア処理ユニット Sync が DML ステートメントを複製する方法について説明します。
 ---
 
-# DML Replication Mechanism in Data Migration
+# データ移行におけるDMLレプリケーションメカニズム {#dml-replication-mechanism-in-data-migration}
 
-This document introduces how the core processing unit Sync in DM processes DML statements read from the data source or relay log. This document introduces the complete processing flow of DML events in DM, including the logic of binlog reading, filtering, routing, transformation, optimization, and execution. This document also explains the DML optimization logic and DML execution logic in detail.
+このドキュメントでは、DM のコア処理ユニット Sync が、データ ソースまたはリレー ログから読み取られた DML ステートメントを処理する方法を紹介します。このドキュメントでは、binlogの読み取り、フィルタリング、ルーティング、変換、最適化、実行のロジックを含む、DM の DML イベントの完全な処理フローを紹介します。また、このドキュメントでは、DML 最適化ロジックと DML 実行ロジックについても詳しく説明します。
 
-## DML processing flow
+## DML処理フロー {#dml-processing-flow}
 
-The Sync unit processes DML statements as follows:
+Sync ユニットは、DML ステートメントを次のように処理します。
 
-1. Read the binlog event from the MySQL, MariaDB, or relay log.
-2. Transform the binlog event read from the data source:
+1.  MySQL、MariaDB、またはリレー ログからbinlogイベントを読み取ります。
 
-    1. [Binlog filter](/dm/dm-binlog-event-filter.md): filter binlog events according to binlog expressions, configured by `filters`.
-    2. [Table routing](/dm/dm-table-routing.md): transform the "database/table" name according to the "database/table" routing rule, configured by `routes`.
-    3. [Expression filter](/filter-dml-event.md): filter binlog events according to SQL expressions, configured by `expression-filter`.
+2.  データ ソースから読み取ったbinlogイベントを変換します。
 
-3. Optimize the DML execution plan:
+    1.  [Binlogフィルター](/dm/dm-binlog-event-filter.md) : `filters`で設定されたbinlog式に従ってbinlogイベントをフィルタリングします。
+    2.  [テーブルルーティング](/dm/dm-table-routing.md) : `routes`で設定された「データベース/テーブル」ルーティング ルールに従って「データベース/テーブル」名を変換します。
+    3.  [表現フィルター](/filter-dml-event.md) : `expression-filter`で設定された SQL 式に従ってbinlogイベントをフィルタリングします。
 
-    1. [Compactor](#compactor): merge multiple operations on the same record (with the same primary key) into one operation. This feature is enabled by `syncer.compact`.
-    2. [Causality](#causality): perform conflict detection on different records (with different primary keys) to improve the concurrency of replication.
-    3. [Merger](#merger): merge multiple binlog events into one DML statement, enabled by `syncer.multiple-rows`.
+3.  DML 実行プランを最適化します。
 
-4. Execute the DML to the downstream.
-5. Periodically save the binlog position or GTID to the checkpoint.
+    1.  [圧縮機](#compactor) : 同じレコード (同じ主キーを持つ) に対する複数の操作を 1 つの操作にマージします。この機能は`syncer.compact`によって有効になります。
+    2.  [因果関係](#causality) : レプリケーションの同時実行性を向上させるために、異なるレコード (異なる主キーを持つ) に対して競合検出を実行します。
+    3.  [合併](#merger) : 複数のbinlogイベントを 1 つの DML ステートメントにマージします`syncer.multiple-rows`によって有効になります。
+
+4.  DML をダウンストリームに実行します。
+
+5.  定期的に、binlogの位置または GTID をチェックポイントに保存します。
 
 ![DML processing logic](/media/dm/dm-dml-replication-logic.png)
 
-## DML optimization logic
+## DML最適化ロジック {#dml-optimization-logic}
 
-The Sync unit implements the DML optimization logic through three steps: Compactor, Causality, and Merger.
+同期ユニットは、Compactor、Causality、Merger の 3 つのステップを通じて DML 最適化ロジックを実装します。
 
-### Compactor
+### 圧縮機 {#compactor}
 
-According to the binlog records of the upstream, DM captures the changes of the records and replicates them to the downstream. When the upstream makes multiple changes to the same record (`INSERT`/`UPDATE`/`DELETE`) in a short period of time, DM can compress multiple changes into one change through Compactor to reduce the pressure on the downstream and improve the throughput. For example:
+アップストリームのbinlogレコードに従って、DM はレコードの変更をキャプチャし、ダウンストリームに複製します。アップストリームが短期間に同じレコードに複数の変更 ( `INSERT` / `UPDATE` / `DELETE` ) を加えた場合、DM は Compactor を通じて複数の変更を 1 つの変更に圧縮し、ダウンストリームへの負荷を軽減してスループットを向上させることができます。例:
 
-```
-INSERT + UPDATE => INSERT
-INSERT + DELETE => DELETE
-UPDATE + UPDATE => UPDATE
-UPDATE + DELETE => DELETE
-DELETE + INSERT => UPDATE
-```
+    INSERT + UPDATE => INSERT
+    INSERT + DELETE => DELETE
+    UPDATE + UPDATE => UPDATE
+    UPDATE + DELETE => DELETE
+    DELETE + INSERT => UPDATE
 
-The Compactor feature is disabled by default. To enable it, you can set `syncer.compact` to `true` in the `sync` configuration module of the replication task, as shown below:
+デフォルトでは、Compactor 機能は無効になっています。有効にするには、以下に示すように、レプリケーション タスクの`sync`構成モジュールで`syncer.compact`から`true`を設定します。
 
 ```yaml
 syncers:                            # The configuration parameters of the sync processing unit
@@ -54,31 +54,29 @@ syncers:                            # The configuration parameters of the sync p
     compact: true
 ```
 
-### Causality
+### 因果関係 {#causality}
 
-The sequential replication model of MySQL binlog requires that binlog events be replicated in the order of binlog. This replication model cannot meet the requirements of high QPS and low replication latency. In addition, because not all operations involved in binlog have conflicts, sequential replication is not necessary in those cases.
+MySQL binlogのシーケンシャル レプリケーション モデルでは、 binlogイベントをbinlogの順序でレプリケートする必要があります。このレプリケーション モデルでは、高い QPS と低いレプリケーションレイテンシーの要件を満たすことができません。また、 binlogに関係するすべての操作に競合が発生するわけではないため、そのような場合にはシーケンシャル レプリケーションは必要ありません。
 
-DM recognizes the binlog that needs to be executed sequentially through conflict detection, and ensures that these binlog are executed sequentially while maximizing the concurrency of other binlog. This helps improve the performance of binlog replication.
+DM は、競合検出を通じて順次実行する必要があるbinlogを認識し、他のbinlogの同時実行性を最大限に高めながら、これらのbinlogが順次実行されるようにします。これにより、binlogログのレプリケーションのパフォーマンスが向上します。
 
-Causality adopts an algorithm similar to the union-find algorithm to classify each DML and group DMLs that are related to each other.
+Causality は、union-find アルゴリズムに似たアルゴリズムを採用して、各 DML を分類し、相互に関連する DML をグループ化します。
 
-### Merger
+### 合併 {#merger}
 
-According to the MySQL binlog protocol, each binlog corresponds to a change operation of one row of data. Through Merger, DM can merge multiple binlogs into one DML and execute it to the downstream, reducing the network interaction. For example:
+MySQL のbinlogプロトコルによれば、各binlogは1 行のデータの変更操作に対応します。Merger を使用すると、DM は複数のバイナリログを 1 つの DML にマージして下流に実行し、ネットワークの相互作用を減らすことができます。例:
 
-```
-  INSERT tb(a,b) VALUES(1,1);
-+ INSERT tb(a,b) VALUES(2,2);
-= INSERT tb(a,b) VALUES(1,1),(2,2);
-  UPDATE tb SET a=1, b=1 WHERE a=1;
-+ UPDATE tb SET a=2, b=2 WHERE a=2;
-= INSERT tb(a,b) VALUES(1,1),(2,2) ON DUPLICATE UPDATE a=VALUES(a), b=VALUES(b)
-  DELETE tb WHERE a=1
-+ DELETE tb WHERE a=2
-= DELETE tb WHERE (a) IN (1),(2);
-```
+      INSERT tb(a,b) VALUES(1,1);
+    + INSERT tb(a,b) VALUES(2,2);
+    = INSERT tb(a,b) VALUES(1,1),(2,2);
+      UPDATE tb SET a=1, b=1 WHERE a=1;
+    + UPDATE tb SET a=2, b=2 WHERE a=2;
+    = INSERT tb(a,b) VALUES(1,1),(2,2) ON DUPLICATE UPDATE a=VALUES(a), b=VALUES(b)
+      DELETE tb WHERE a=1
+    + DELETE tb WHERE a=2
+    = DELETE tb WHERE (a) IN (1),(2);
 
-The Merger feature is disabled by default. To enable it, you can set `syncer.multiple-rows` to `true` in the `sync` configuration module of the replication task, as shown below:
+マージャー機能はデフォルトで無効になっています。有効にするには、以下に示すように、レプリケーション タスクの`sync`構成モジュールで`syncer.multiple-rows`から`true`を設定します。
 
 ```yaml
 syncers:                            # The configuration parameters of the sync processing unit
@@ -87,67 +85,67 @@ syncers:                            # The configuration parameters of the sync p
     multiple-rows: true
 ```
 
-## DML execution logic
+## DML実行ロジック {#dml-execution-logic}
 
-After the Sync unit optimizes the DML, it performs the execution logic.
+同期ユニットは DML を最適化した後、実行ロジックを実行します。
 
-### DML generation
+### DML生成 {#dml-generation}
 
-DM has an embedded schema tracker that records the schema information of the upstream and downstream:
+DM には、上流と下流のスキーマ情報を記録するスキーマ トラッカーが組み込まれています。
 
-* When DM receives a DDL statement, DM updates the table schema of the internal schema tracker.
-* When DM receives a DML statement, DM generates the corresponding DML according to the table schema of the schema tracker.
+-   DM は DDL ステートメントを受信すると、内部スキーマ トラッカーのテーブル スキーマを更新します。
+-   DM は DML ステートメントを受信すると、スキーマ トラッカーのテーブル スキーマに従って対応する DML を生成します。
 
-The logic of generating DML is as follows:
+DML を生成するロジックは次のとおりです。
 
-1. The Sync unit records the initial table structure of the upstream:
-    * When starting a full and incremental task, Sync uses the **table structure exported during the upstream full data migration** as the initial table structure of the upstream.
-    * When starting an incremental task, because MySQL binlog does not record the table structure information, Sync uses the **table structure of the corresponding table in the downstream** as the initial table structure of the upstream.
-2. The user's upstream and downstream table structures might be inconsistent, for example, the downstream might have additional columns than the upstream, or the upstream and downstream primary keys are inconsistent. Therefore, to ensure the correctness of data replication, DM records the **primary key and unique key information of the corresponding table in the downstream**.
-3. DM generates DML:
-    * Use the **the upstream table structure recorded in the schema tracker** to generate the column names of the DML statement.
-    * Use the **column values recorded in the binlog** to generate the column values of the DML statement.
-    * Use the **downstream primary key or unique key recorded in the schema tracker** to generate the `WHERE` condition of the DML statement. When the table structure has no unique key, DM uses all the column values recorded in the binlog as the `WHERE` condition.
+1.  Sync ユニットは、アップストリームの初期テーブル構造を記録します。
+    -   完全タスクと増分タスクを開始すると、Sync は**アップストリームの完全データ移行中にエクスポートされたテーブル構造を**アップストリームの初期テーブル構造として使用します。
+    -   増分タスクを開始すると、MySQL binlog にテーブル構造情報が記録されないため、Sync は**下流の対応するテーブルのテーブル構造を**上流の初期テーブル構造として使用します。
+2.  ユーザーの上流と下流のテーブル構造が不一致である可能性があります。たとえば、下流に上流よりも多くの列がある場合や、上流と下流の主キーが不一致である場合があります。そのため、データ複製の正確性を確保するために、DM は**下流の対応するテーブルの主キーと一意のキー情報を**記録します。
+3.  DM は DML を生成します:
+    -   **スキーマ トラッカーに記録されたアップストリーム テーブル構造を**使用して、DML ステートメントの列名を生成します。
+    -   **binlogに記録された列の値を**使用して、DML ステートメントの列の値を生成します。
+    -   **スキーマ トラッカーに記録されたダウンストリーム プライマリ キーまたは一意のキー**を使用して、DML ステートメントの`WHERE`の条件を生成します。テーブル構造に一意のキーがない場合、DM はbinlogに記録されたすべての列値を`WHERE`の条件として使用します。
 
-### Worker count
+### 労働者数 {#worker-count}
 
-Causality can divide binlog into multiple groups through conflict detection and execute them concurrently to the downstream. DM controls the concurrency by setting `worker-count`. When the CPU usage of the downstream TiDB is not high, increasing the concurrency can effectively improve the throughput of data replication.
+Causality は、競合検出を通じてbinlogを複数のグループに分割し、下流に同時に実行することができます。DM は`worker-count`設定することで同時実行を制御します。下流 TiDB の CPU 使用率が高くない場合は、同時実行を増やすことでデータ複製のスループットを効果的に向上させることができます。
 
-You can modify the number of threads that concurrently migrate DML by modifying the [`syncer.worker-count` configuration item](/dm/dm-tune-configuration.md#worker-count).
+[`syncer.worker-count`設定項目](/dm/dm-tune-configuration.md#worker-count)を変更することで、DML を同時に移行するスレッドの数を変更できます。
 
-### Batch
+### バッチ {#batch}
 
-DM batches multiple DMLs into a single transaction and executes it to the downstream. When a DML worker receives a DML, it adds the DML to the cache. When the number of DMLs in the cache reaches the preset threshold, or the DML worker does not receive DML for a long time, the DML worker executes the DMLs in the cache to the downstream.
+DM は、複数の DML を 1 つのトランザクションにまとめて、ダウンストリームに実行します。DML ワーカーが DML を受信すると、DML をキャッシュに追加します。キャッシュ内の DML の数が事前に設定されたしきい値に達するか、DML ワーカーが長時間 DML を受信しない場合、DML ワーカーはキャッシュ内の DML をダウンストリームに実行します。
 
-You can modify the number of DMLs contained in a transaction by modifying the [`syncer.batch` configuration item](/dm/dm-tune-configuration.md#batch).
+[`syncer.batch`設定項目](/dm/dm-tune-configuration.md#batch)変更することで、トランザクションに含まれる DML の数を変更できます。
 
-### checkpoint
+### チェックポイント {#checkpoint}
 
-The operation of executing DML and updating checkpoint is not atomic.
+DML を実行してチェックポイントを更新する操作はアトミックではありません。
 
-In DM, checkpoint is updated every 30 seconds by default. Because there are multiple DML worker processes, the checkpoint process calculates the binlog position of the earliest replication progress of all DML workers, and uses this position as the current replication checkpoint. All binlogs earlier than this position are guaranteed to be successfully executed to the downstream.
+DM では、チェックポイントはデフォルトで 30 秒ごとに更新されます。複数の DML ワーカー プロセスがあるため、チェックポイント プロセスはすべての DML ワーカーの最も早いレプリケーション進行のbinlog位置を計算し、この位置を現在のレプリケーション チェックポイントとして使用します。この位置より前のすべてのバイナリ ログは、ダウンストリームに正常に実行されることが保証されます。
 
 <!-- For details on checkpoint mechanism, refer to Checkpoint /dm/dm-checkpoint.md -->
 
-## Notes
+## ノート {#notes}
 
-### Transaction consistency
+### トランザクションの一貫性 {#transaction-consistency}
 
-DM replicates data at the row level and does not guarantee transaction consistency. In DM, an upstream transaction is split into multiple rows and distributed to different DML workers for concurrent execution. Therefore, when the DM replication task reports an error and pauses, or when the user manually pauses the task, the downstream might be in an intermediate state. That is, the DML statements in an upstream transaction might be partially replicated to the downstream, which might cause the downstream to be in an inconsistent state.
+DM は行レベルでデータを複製し、トランザクションの一貫性を保証しません。DM では、上流トランザクションは複数の行に分割され、同時実行のために異なる DML ワーカーに分散されます。そのため、DM レプリケーション タスクがエラーを報告して一時停止した場合、またはユーザーが手動でタスクを一時停止した場合、下流は中間状態になる可能性があります。つまり、上流トランザクションの DML ステートメントが下流に部分的に複製され、下流が不整合な状態になる可能性があります。
 
-To ensure that the downstream is in a consistent state when the task is paused as much as possible, starting from DM v5.3.0, DM waits for 10 seconds before pausing the task to ensure that all transactions from the upstream are replicated to the downstream. However, if a transaction is not replicated to the downstream within 10 seconds, the downstream might still be in an inconsistent state.
+タスクが一時停止されているときにダウンストリームが可能な限り一貫した状態になるように、DM v5.3.0 以降では、DM はタスクを一時停止する前に 10 秒間待機し、アップストリームからのすべてのトランザクションがダウンストリームに複製されるようにします。ただし、トランザクションが 10 秒以内にダウンストリームに複製されない場合、ダウンストリームは依然として不整合な状態のままになる可能性があります。
 
-### Safe mode
+### セーフモード {#safe-mode}
 
-The operation of DML execution and checkpoint update is not atomic, and the operation of checkpoint update and writing data to the downstream is also not atomic. When DM exits abnormally, the checkpoint might only record a recovery point before the exit time. Therefore, when the task is restarted, DM might write the same data multiple times, which means that DM actually provides the "at least once processing" logic, and the same data might be processed more than once.
+DML 実行とチェックポイント更新の操作はアトミックではなく、チェックポイント更新と下流へのデータ書き込みの操作もアトミックではありません。DM が異常終了すると、チェックポイントは終了時刻前の回復ポイントのみを記録する可能性があります。そのため、タスクが再開されると、DM は同じデータを複数回書き込む可能性があります。これは、DM が実際には「少なくとも 1 回の処理」ロジックを提供し、同じデータが複数回処理される可能性があることを意味します。
 
-To make sure the data is reentrant, DM enters the safe mode when it restarts from an abnormal exit. <!--For the specific logic, refer to [DM Safe Mode](/dm/dm-safe-mode.md).-->
+データが再入可能であることを確認するために、DM は異常終了から再起動するときにセーフ モードに入ります。<!--For the specific logic, refer to [DM Safe Mode](/dm/dm-safe-mode.md).-->
 
-When the safe mode is enabled, to make sure that data can be processed multiple times, DM performs the following conversions:
+セーフ モードが有効になっている場合、データが複数回処理されるように、DM は次の変換を実行します。
 
-* Rewrite the `INSERT` statement of the upstream to the `REPLACE` statement.
-* Rewrite the `UPDATE` statement of the upstream to the `DELETE` + `REPLACE` statement.
+-   アップストリームの`INSERT`番目のステートメントを`REPLACE`ステートメントに書き換えます。
+-   アップストリームの`UPDATE`ステートメントを`DELETE` + `REPLACE`ステートメントに書き換えます。
 
-### Exactly-once processing
+### 正確に1回だけ処理 {#exactly-once-processing}
 
-Currently, DM only guarantees eventual consistency and does not support "exactly-once processing" and "keeping the original order of transactions".
+現在、DM は最終的な一貫性のみを保証しており、「正確に 1 回の処理」や「トランザクションの元の順序の維持」はサポートしていません。

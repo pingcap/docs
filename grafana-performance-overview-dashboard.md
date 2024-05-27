@@ -1,213 +1,215 @@
 ---
 title: Key Metrics on Performance Overview
-summary: Learn key metrics displayed on the Performance Overview dashboard.
+summary: パフォーマンス概要ダッシュボードに表示される主要な指標を確認します。
 ---
 
-# Key Metrics on Performance Overview
+# パフォーマンス概要の主要指標 {#key-metrics-on-performance-overview}
 
-If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus & Grafana) is deployed at the same time. For more information, see [TiDB Monitoring Framework Overview](/tidb-monitoring-framework.md).
+TiUPを使用して TiDB クラスターをデプロイすると、監視システム (Prometheus および Grafana) も同時にデプロイされます。詳細については、 [TiDB 監視フレームワークの概要](/tidb-monitoring-framework.md)参照してください。
 
-The Grafana dashboard is divided into a series of sub dashboards which include PD, TiDB, TiKV, Node_exporter, Overview, and Performance Overview. A lot of metrics are there to help you diagnose.
+Grafana ダッシュボードは、PD、TiDB、TiKV、Node_exporter、概要、パフォーマンス概要を含む一連のサブダッシュボードに分かれています。診断に役立つ多くのメトリックがあります。
 
-The Performance Overview dashboard orchestrates the metrics of TiDB, PD, and TiKV, and presents each of them in the following sections:
+パフォーマンス概要ダッシュボードは、TiDB、PD、および TiKV のメトリックを調整し、それぞれを次のセクションで表示します。
 
-- Overview: Database time and SQL execution time summary. By checking different colors in the overview, you can quickly identify the database workload profile and the performance bottleneck.
+-   概要: データベース時間と SQL 実行時間の概要。概要でさまざまな色を確認することで、データベースのワークロード プロファイルとパフォーマンスのボトルネックをすばやく特定できます。
 
-- Load profile: Key metrics and resource usage, including database QPS, connection information, the MySQL command types the application interacts with TiDB, database internal TSO and KV request OPS, and resource usage of the TiKV and TiDB.
+-   負荷プロファイル: データベース QPS、接続情報、アプリケーションが TiDB と対話する MySQL コマンド タイプ、データベース内部 TSO および KV 要求 OPS、TiKV および TiDB のリソース使用量などの主要なメトリックとリソース使用量。
 
-- Top-down latency breakdown: Query latency versus connection idle time ratio, query latency breakdown, TSO/KV request latency during execution, breakdown of write latency within TiKV.
+-   トップダウンのレイテンシーの内訳: クエリレイテンシーと接続アイドル時間の比率、クエリレイテンシーの内訳、実行中の TSO/KV 要求レイテンシー、TiKV 内の書き込みレイテンシーの内訳。
 
-With the Performance Overview Dashboard, you can analyze performance efficiently, and confirm whether the bottleneck of user response time is in the database. If the bottleneck is in the database, you can identify the bottleneck inside the database, with database time overview, workload profile and SQL latency breakdown. For details, see [Performance Analysis and Tuning](/performance-tuning-methods.md).
+パフォーマンス概要ダッシュボードを使用すると、パフォーマンスを効率的に分析し、ユーザー応答時間のボトルネックがデータベースにあるかどうかを確認できます。ボトルネックがデータベースにある場合は、データベース時間の概要、ワークロード プロファイル、SQLレイテンシーの内訳を使用して、データベース内のボトルネックを特定できます。詳細については、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md)を参照してください。
 
-The following sections illustrate the metrics on the Performance Overview dashboard.
+次のセクションでは、パフォーマンス概要ダッシュボードのメトリックについて説明します。
 
-## Performance Overview
+## パフォーマンスの概要 {#performance-overview}
 
-### Database Time by SQL Type
+### SQL タイプ別のデータベース時間 {#database-time-by-sql-type}
 
-- database time: Total database time per second
-- sql_type: Database time consumed by each type of SQL statements per second
+-   データベース時間: 1秒あたりの合計データベース時間
+-   sql_type: 1 秒あたりに各タイプの SQL ステートメントによって消費されるデータベース時間
 
-### Database Time by SQL Phase
+### SQL フェーズ別のデータベース時間 {#database-time-by-sql-phase}
 
-- database time: Total database time per second
-- get token/parse/compile/execute: Database time consumed in four SQL processing phases
+-   データベース時間: 1秒あたりの合計データベース時間
+-   トークンの取得/解析/コンパイル/実行: 4 つの SQL 処理フェーズで消費されるデータベース時間
 
-The SQL execution phase is in green and other phases are in red on general. If non-green areas are large, it means much database time is consumed in other phases than the execution phase and further cause analysis is required.
+全体的に、SQL 実行フェーズは緑色で、他のフェーズは赤色で表示されます。緑色以外の領域が大きい場合は、実行フェーズ以外のフェーズで多くのデータベース時間が消費されていることを意味し、さらに原因分析が必要です。
 
-### SQL Execute Time Overview
+### SQL 実行時間の概要 {#sql-execute-time-overview}
 
-- execute time: Database time consumed during SQL execution per second
-- tso_wait: Concurrent TSO waiting time per second during SQL execution
-- kv request type: Time waiting for each KV request type per second during SQL execution. The total KV request wait time might exceed SQL execution time, because KV requests are concurrent.
-- tiflash_mpp: Time of processing TiFlash requests per second during SQL execution.
+-   実行時間: SQL 実行中に 1 秒あたりに消費されるデータベース時間
+-   tso_wait: SQL 実行中の 1 秒あたりの同時 TSO 待機時間
+-   kv 要求タイプ: SQL 実行中に 1 秒あたりに各 KV 要求タイプを待機する時間。KV 要求は同時であるため、合計 KV 要求待機時間は SQL 実行時間を超える場合があります。
+-   tiflash_mpp: SQL 実行中に 1 秒あたりにTiFlash要求を処理する時間。
 
-Green metrics stand for common KV write requests (such as prewrite and commit), blue metrics stand for common read requests, purple metrics stand for TiFlash MPP requests, and metrics in other colors stand for unexpected situations which you need to pay attention to. For example, pessimistic lock KV requests are marked red and TSO waiting is marked dark brown.
+緑のメトリックは一般的な KV 書き込み要求 (事前書き込みやコミットなど) を表し、青のメトリックは一般的な読み取り要求を表し、紫のメトリックはTiFlash MPP 要求を表し、他の色のメトリックは注意を払う必要がある予期しない状況を表します。たとえば、悲観的ロック KV 要求は赤でマークされ、TSO 待機は濃い茶色でマークされます。
 
-If non-blue or non-green areas are large, it means there is a bottleneck during SQL execution. For example:
+青以外の領域や緑以外の領域が大きい場合は、SQL 実行中にボトルネックが発生していることを意味します。例:
 
-- If serious lock conflicts occur, the red area will take a large proportion.
-- If excessive time is consumed in waiting TSO, the dark brown area will take a large proportion.
+-   重大なロック競合が発生した場合、赤い領域が大きな割合を占めることになります。
+-   TSO の待機に過剰な時間が費やされると、濃い茶色の領域が大きな割合を占めることになります。
 
-### QPS
+### 品質保証 {#qps}
 
-Number of SQL statements executed per second in all TiDB instances, collected by type: such as `SELECT`, `INSERT`, and `UPDATE`
+すべての TiDB インスタンスで 1 秒あたりに実行された SQL ステートメントの数 (タイプ別に収集`INSERT` : `SELECT` `UPDATE`
 
-### CPS By Type
+### タイプ別CPS {#cps-by-type}
 
-Number of commands processed by all TiDB instances per second based on type
+タイプに基づいて、すべての TiDB インスタンスによって 1 秒あたりに処理されるコマンドの数
 
-### Queries Using Plan Cache OPS
+### プランキャッシュ OPS を使用したクエリ {#queries-using-plan-cache-ops}
 
-- avg-hit: The number of queries using the execution plan cache per second for all TiDB instances
-- avg-miss: The number of queries not using the execution plan cache per second for all TiDB instances
+-   avg-hit: すべての TiDB インスタンスで 1 秒あたりに実行プラン キャッシュを使用するクエリの数
+-   avg-miss: すべての TiDB インスタンスで実行プラン キャッシュを使用していないクエリの数 (1 秒あたり)
 
-`avg-hit + avg-miss` is equal to `StmtExecute`, which is the number of all queries executed per second.
+`avg-hit + avg-miss`は`StmtExecute`に等しく、これは 1 秒あたりに実行されるすべてのクエリの数です。
 
-### KV/TSO Request OPS
+### KV/TSO リクエスト OPS {#kv-tso-request-ops}
 
-- kv request total: Total number of KV requests per second in all TiDB instances
-- kv request by type: Number of KV requests per second in all TiDB instances based on such types as `Get`, `Prewrite`, and `Commit`.
-- tso - cmd: Number of `tso cmd` requests per second in all TiDB instances
-- tso - request: Number of `tso request` requests per second in all TiDB instances
+-   kv リクエスト合計: すべての TiDB インスタンスにおける 1 秒あたりの KV リクエストの合計数
+-   タイプ別の KV 要求: `Get` 、 `Prewrite` 、 `Commit`などのタイプに基づく、すべての TiDB インスタンスでの 1 秒あたりの KV 要求の数。
+-   tso - cmd: すべての TiDB インスタンスにおける`tso cmd`秒あたりのリクエスト数
+-   tso - リクエスト: すべての TiDB インスタンスにおける`tso request`秒あたりのリクエスト数
 
-Generally, dividing `tso - cmd` by `tso - request` yields the average batch size of requests per second.
+通常、 `tso - cmd` `tso - request`で割ると、1 秒あたりのリクエストの平均バッチ サイズが得られます。
 
-### KV Request Time By Source
+### ソース別の KV 要求時間 {#kv-request-time-by-source}
 
-- kv request total time: Total time of processing KV and TiFlash requests per second in all TiDB instances
-- Each KV request and the corresponding request source form a stacked bar chart, in which `external` identifies normal business requests and `internal` identifies internal activity requests (such as DDL and auto analyze requests)
+-   kv リクエスト合計時間: すべての TiDB インスタンスで 1 秒あたりに KV およびTiFlashリクエストを処理する合計時間
+-   各 KV リクエストと対応するリクエスト ソースは積み上げ棒グラフを形成し、 `external`通常のビジネス リクエストを識別し、 `internal`内部アクティビティ リクエスト (DDL やauto analyzeリクエストなど) を識別します。
 
-### TiDB CPU
+### TiDB CPU {#tidb-cpu}
 
-- avg: Average CPU utilization across all TiDB instances
-- delta: Maximum CPU utilization of all TiDB instances minus minimum CPU utilization of all TiDB instances
-- max: Maximum CPU utilization across all TiDB instances
+-   avg: すべての TiDB インスタンスの平均 CPU 使用率
+-   デルタ: すべての TiDB インスタンスの最大 CPU 使用率からすべての TiDB インスタンスの最小 CPU 使用率を引いた値
+-   max: すべての TiDB インスタンスの最大 CPU 使用率
 
-### TiKV CPU/IO MBps
+### TiKV CPU/IO MBps {#tikv-cpu-io-mbps}
 
-- CPU-Avg: Average CPU utilization of all TiKV instances
-- CPU-Delta: Maximum CPU utilization of all TiKV instances minus minimum CPU utilization of all TiKV instances
-- CPU-MAX: Maximum CPU utilization among all TiKV instances
-- IO-Avg: Average MBps of all TiKV instances
-- IO-Delt: Maximum MBps of all TiKV instances minus minimum MBps of all TiKV instances
-- IO-MAX: Maximum MBps of all TiKV instances
+-   CPU-Avg: すべての TiKV インスタンスの平均 CPU 使用率
+-   CPU デルタ: すべての TiKV インスタンスの最大 CPU 使用率からすべての TiKV インスタンスの最小 CPU 使用率を引いた値
+-   CPU-MAX: すべての TiKV インスタンス間の最大 CPU 使用率
+-   IO-Avg: すべての TiKV インスタンスの平均 MBps
+-   IO-Delt: すべての TiKV インスタンスの最大 MBps からすべての TiKV インスタンスの最小 MBps を引いた値
+-   IO-MAX: すべての TiKV インスタンスの最大 MBps
 
-### Duration
+### 間隔 {#duration}
 
-- Duration: Execution time
+-   所要時間: 実行時間
 
-    - The duration from receiving a request from the client to TiDB till TiDB executing the request and returning the result to the client. In general, client requests are sent in the form of SQL statements; however, this duration can include the execution time of commands such as `COM_PING`, `COM_SLEEP`, `COM_STMT_FETCH`, and `COM_SEND_LONG_DATA`.
-    - TiDB supports Multi-Query, which means the client can send multiple SQL statements at one time, such as `select 1; select 1; select 1;`. In this case, the total execution time of this query includes the execution time of all SQL statements.
+    -   クライアントから TiDB へのリクエストを受信して​​から、TiDB がリクエストを実行し、結果をクライアントに返すまでの期間。通常、クライアント リクエストは SQL ステートメントの形式で送信されますが、この期間には`COM_PING` 、 `COM_SLEEP` 、 `COM_STMT_FETCH` 、 `COM_SEND_LONG_DATA`などのコマンドの実行時間が含まれる場合があります。
+    -   TiDB はマルチクエリをサポートしています。つまり、クライアントは一度に複数の SQL ステートメント (例: `select 1; select 1; select 1;`を送信できます。この場合、このクエリの合計実行時間には、すべての SQL ステートメントの実行時間が含まれます。
 
-- avg: Average time to execute all requests
-- 99: P99 duration to execute all requests
-- avg by type: Average time to execute all requests in all TiDB instances, collected by type: `SELECT`, `INSERT`, and `UPDATE`
+-   平均: すべてのリクエストを実行する平均時間
 
-### Connection Idle Duration
+-   99: すべてのリクエストを実行するための P99 期間
 
-Connection Idle Duration indicates the duration of a connection being idle.
+-   タイプ別の平均: すべての TiDB インスタンスですべてのリクエストを実行する平均時間 (タイプ`SELECT` `UPDATE`収集`INSERT`
 
-- avg-in-txn: Average connection idle duration when the connection is within a transaction
-- avg-not-in-txn: Average connection idle duration when the connection is not within a transaction
-- 99-in-txn: P99 connection idle duration when the connection is within a transaction
+### 接続アイドル時間 {#connection-idle-duration}
 
-### Connection Count
+接続アイドル期間は、接続がアイドル状態になっている期間を示します。
 
-- total: Number of connections to all TiDB instances
-- active connections: Number of active connections to all TiDB instances
-- tidb-{node-number}-peer: Number of connections to each TiDB instance
-- disconnection/s: Number of disconnections in a TiDB cluster
-- 99-not-in-txn: P99 connection idle duration when the connection is not within a transaction
+-   avg-in-txn: トランザクション内の接続の平均アイドル時間
+-   avg-not-in-txn: 接続がトランザクション内にない場合の平均接続アイドル時間
+-   99-in-txn: 接続がトランザクション内にある場合の P99 接続アイドル期間
 
-### Parse Duration, Compile Duration, and Execute Duration
+### 接続数 {#connection-count}
 
-- Parse Duration: Time consumed in parsing SQL statements
-- Compile Duration: Time consumed in compiling the parsed SQL AST to execution plans
-- Execution Duration: Time consumed in executing execution plans of SQL statements
+-   合計: すべての TiDB インスタンスへの接続数
+-   アクティブな接続: すべての TiDB インスタンスへのアクティブな接続の数
+-   tidb-{node-number}-peer: 各 TiDB インスタンスへの接続数
+-   切断/秒: TiDB クラスター内の切断回数
+-   99-not-in-txn: 接続がトランザクション内にない場合の P99 接続アイドル期間
 
-All these three metrics include the average duration and the 99th percentile duration in all TiDB instances.
+### 解析期間、コンパイル期間、実行期間 {#parse-duration-compile-duration-and-execute-duration}
 
-### Avg TiDB KV Request Duration
+-   解析時間: SQL 文の解析に要した時間
+-   コンパイル時間: 解析された SQL AST を実行プランにコンパイルするのにかかる時間
+-   実行時間: SQL文の実行計画の実行に費やされた時間
 
-Average time consumed in executing KV requests in all TiDB instances based on the type, including `Get`, `Prewrite`, and `Commit`.
+これら 3 つのメトリックにはすべて、すべての TiDB インスタンスの平均期間と 99 パーセンタイル期間が含まれます。
 
-### Avg TiKV GRPC Duration
+### 平均 TiDB KV リクエスト期間 {#avg-tidb-kv-request-duration}
 
-Average time consumed in executing gRPC requests in all TiKV instances based on the type, including `kv_get`, `kv_prewrite`, and `kv_commit`.
+`Get` 、 `Prewrite` 、 `Commit`などのタイプに基づいて、すべての TiDB インスタンスで KV 要求を実行するのに費やされた平均時間。
 
-### PD TSO Wait/RPC Duration
+### 平均 TiKV GRPC 期間 {#avg-tikv-grpc-duration}
 
-- wait - avg: Average time in waiting for PD to return TSO in all TiDB instances
-- rpc - avg: Average time from sending TSO requests to PD to receiving TSO in all TiDB instances
-- wait - 99: P99 time in waiting for PD to return TSO in all TiDB instances
-- rpc - 99: P99 time from sending TSO requests to PD to receiving TSO in all TiDB instances
+`kv_get` 、 `kv_prewrite` 、 `kv_commit`などのタイプに基づいて、すべての TiKV インスタンスで gRPC リクエストを実行するのに費やされた平均時間。
 
-### Storage Async Write Duration, Store Duration, and Apply Duration
+### PD TSO 待機/RPC 期間 {#pd-tso-wait-rpc-duration}
 
-- Storage Async Write Duration: Time consumed in asynchronous write
-- Store Duration: Time consumed in store loop during asynchronously write
-- Apply Duration: Time consumed in apply loop during asynchronously write
+-   wait - avg: すべての TiDB インスタンスで PD が TSO を返すのを待つ平均時間
+-   rpc - 平均: PD に TSO 要求を送信してからすべての TiDB インスタンスで TSO を受信するまでの平均時間
+-   wait - 99: すべての TiDB インスタンスで PD が TSO を返すのを待つ P99 時間
+-   rpc - 99: PD に TSO 要求を送信してからすべての TiDB インスタンスで TSO を受信するまでの P99 時間
 
-All these three metrics include the average duration and P99 duration in all TiKV instances.
+### ストレージ非同期書き込み期間、保存期間、適用期間 {#storage-async-write-duration-store-duration-and-apply-duration}
 
-Average storage async write duration = Average store duration + Average apply duration
+-   ストレージ非同期書き込み時間: 非同期書き込みにかかる時間
+-   ストア期間: 非同期書き込み中にストアループで消費される時間
+-   適用期間: 非同期書き込み中の適用ループで消費される時間
 
-### Append Log Duration, Commit Log Duration, and Apply Log Duration
+これら 3 つのメトリックには、すべての TiKV インスタンスの平均期間と P99 期間が含まれます。
 
-- Append Log Duration: Time consumed by Raft to append logs
-- Commit Log Duration: Time consumed by Raft to commit logs
-- Apply Log Duration: Time consumed by Raft to apply logs
+平均storage非同期書き込み時間 = 平均保存時間 + 平均適用時間
 
-All these three metrics include the average duration and P99 duration in all TiKV instances.
+### 追加ログ期間、コミットログ期間、適用ログ期間 {#append-log-duration-commit-log-duration-and-apply-log-duration}
 
-### Interface of the Performance Overview panels
+-   ログ追加時間: Raftがログを追加するのにかかる時間
+-   コミットログ期間: Raftがログをコミットするのにかかる時間
+-   ログ適用期間: Raftがログを適用するのにかかる時間
+
+これら 3 つのメトリックには、すべての TiKV インスタンスの平均期間と P99 期間が含まれます。
+
+### パフォーマンス概要パネルのインターフェース {#interface-of-the-performance-overview-panels}
 
 ![performance overview](/media/performance/grafana_performance_overview.png)
 
-## TiFlash
+## TiFlash {#tiflash}
 
-- CPU: The CPU utilization per TiFlash instance.
-- Memory: The memory usage per TiFlash instance.
-- IO utilization: The IO utilization per TiFlash instance.
-- MPP Query count: The number of TiFlash MPP queries per second per TiFlash instance.
-- Request QPS: The number of coprocessor requests received by all TiFlash instances.
+-   CPU: TiFlashインスタンスごとの CPU 使用率。
+-   メモリ: TiFlashインスタンスごとのメモリ使用量。
+-   IO 使用率: TiFlashインスタンスごとの IO 使用率。
+-   MPP クエリ数: TiFlashインスタンスごとの 1 秒あたりのTiFlash MPP クエリ数。
+-   リクエスト QPS: すべてのTiFlashインスタンスによって受信されたコプロセッサ要求の数。
 
-    - `batch`: Number of batch requests.
-    - `batch_cop`: Number of coprocessor requests in the batch requests.
-    - `cop`: Number of coprocessor requests that are sent directly via the coprocessor interface.
-    - `cop_dag`: Number of dag requests in all coprocessor requests.
-    - `super_batch`: Number of requests that enable the Super Batch feature.
-- Executor QPS: The number of each type of dag executors in the requests received by all TiFlash instances. `table_scan` is the table scan executor. `selection` is the selection executor. `aggregation` is the aggregation executor. `top_n` is the `TopN` executor. `limit` is the limit executor.
-- Request Duration Overview: Provides a stacked chart of total processing time per second for all request types in all TiFlash instances.
-- Request Duration: The total processing duration for each MPP and coprocessor request type in all TiFlash instances. It is from the time that the coprocessor request is received to the time that the response of the request is completed, which includes the average latency and p99 latency.
-- Request Handle Duration: The actual processing duration for each MPP and coprocessor request type in all TiFlash instances. It is from the start of executing the coprocessor request to the completion of the execution, which includes the average latency and p99 latency.
-- Raft Wait Index Duration: The time used by `wait_index` for all TiFlash instances, namely the time used to wait until Region index >= `read_index` after the `read_index` request is received.
-- Raft Batch Read Index Duration: The time used by `read_index` for all TiFlash instances. Most time is used for interaction with the Region leader and retry.
-- Write Throughput By Instance: The throughput of write by instance. It includes the throughput by applying the Raft write commands and Raft snapshots.
-- Write flow: The traffic of disk writes by all TiFlash instances.
-- Read flow: The traffic of disk reads by all TiFlash instances.
+    -   `batch` : バッチリクエストの数。
+    -   `batch_cop` : バッチ要求内のコプロセッサ要求の数。
+    -   `cop` : コプロセッサ インターフェイスを介して直接送信されるコプロセッサ要求の数。
+    -   `cop_dag` : すべてのコプロセッサ要求内の DAG 要求の数。
+    -   `super_batch` : スーパーバッチ機能を有効にするリクエストの数。
+-   Executor QPS: すべてのTiFlashインスタンスが受信したリクエスト内の各タイプの DAG Executor の数`table_scan`はテーブル スキャン Executor です`selection`は選択 Executor です`aggregation`は集約 Executor です`top_n`は`TopN` Executor です`limit`は制限 Executor です。
+-   リクエスト期間の概要: すべてのTiFlashインスタンスのすべてのリクエスト タイプについて、1 秒あたりの合計処理時間の積み上げグラフを提供します。
+-   要求期間: すべてのTiFlashインスタンスにおける各 MPP およびコプロセッサ要求タイプの合計処理期間。これは、コプロセッサ要求が受信された時間から要求の応答が完了するまでの時間であり、平均レイテンシーと p99レイテンシーが含まれます。
+-   リクエスト処理期間: すべてのTiFlashインスタンスにおける各 MPP およびコプロセッサ リクエスト タイプの実際の処理期間。これは、コプロセッサ リクエストの実行開始から実行完了までの期間で、平均レイテンシーと p99レイテンシーが含まれます。
+-   Raft待機インデックス期間: すべてのTiFlashインスタンスに対して`wait_index`が使用する時間、つまり、 `read_index`要求を受信して​​からリージョンインデックス &gt;= `read_index`になるまで待機するために使用される時間。
+-   Raftバッチ読み取りインデックス期間: すべてのTiFlashインスタンスに対して`read_index`が使用する時間。ほとんどの時間は、リージョンリーダーとのやり取りと再試行に使用されます。
+-   インスタンスごとの書き込みスループット: インスタンスごとの書き込みのスループット。これには、 Raft書き込みコマンドとRaftスナップショットを適用した場合のスループットが含まれます。
+-   書き込みフロー: すべてのTiFlashインスタンスによるディスク書き込みのトラフィック。
+-   読み取りフロー: すべてのTiFlashインスタンスによるディスク読み取りのトラフィック。
 
-## CDC
+## CDC {#cdc}
 
-- CPU usage: The CPU usage per TiCDC node.
-- Memory usage: The memory usage per TiCDC node.
-- Goroutine count: The number of goroutines per TiCDC node.
-- Changefeed checkpoint lag: The progress lag of data replication (the unit is second) between the upstream and the downstream.
-- Changefeed resolved ts lag: The progress lag of data replication (the unit is second) between the upstream and TiCDC nodes.
-- The status of changefeeds:
+-   CPU 使用率: TiCDC ノードごとの CPU 使用率。
+-   メモリ使用量: TiCDC ノードごとのメモリ使用量。
+-   Goroutine 数: TiCDC ノードあたりの Goroutine の数。
+-   Changefeed チェックポイント ラグ: アップストリームとダウンストリーム間のデータ レプリケーションの進行ラグ (単位は秒)。
+-   Changefeed 解決 ts ラグ: アップストリーム ノードと TiCDC ノード間のデータ複製の進行ラグ (単位は秒)。
+-   チェンジフィードのステータス:
 
-    - 0: Normal
-    - 1: Error
-    - 2: Failed
-    - 3: Stopped
-    - 4: Finished
-    - -1: Unknown
-- Puller output events/s: The number of rows that the Puller module of TiCDC nodes sends to the Sorter module per second.
-- Sorter output events/s: The number of rows that the Sorter module of TiCDC nodes sends to the Mounter module per second.
-- Mounter output events/s: The number of rows that the Mounter module of TiCDC nodes sends to the Sink module per second.
-- Table sink output events/s: The number of rows that the Table Sorter module of the TiCDC nodes sends to the Sink module per second.
-- SinkV2 - Sink flush rows/s: The number of rows that the Sink module in the TiCDC node sends to the downstream per second.
-- Transaction Sink Full Flush Duration: The average latency and p999 latency of writing downstream transactions by the MySQL Sink of TiCDC nodes.
-- MQ Worker Send Message Duration Percentile: The latency of sending messages by MQ worker when the downstream is Kafka.
-- Kafka Outgoing Bytes: The traffic of writing downstream transactions in MQ Workload.
+    -   0: 正常
+    -   1: エラー
+    -   2: 失敗
+    -   3: 停止
+    -   4: 完了
+    -   -1: 不明
+-   Puller 出力イベント/秒: TiCDC ノードの Puller モジュールが Sorter モジュールに 1 秒あたりに送信する行数。
+-   ソーター出力イベント/秒: TiCDC ノードのソーター モジュールがマウント モジュールに 1 秒あたりに送信する行数。
+-   マウンター出力イベント/秒: TiCDC ノードのマウンター モジュールがシンク モジュールに 1 秒あたりに送信する行数。
+-   テーブル シンク出力イベント/秒: TiCDC ノードのテーブル ソーター モジュールがシンク モジュールに 1 秒あたりに送信する行数。
+-   SinkV2 - シンク フラッシュ行数/秒: TiCDC ノードのシンク モジュールがダウンストリームに 1 秒あたりに送信する行数。
+-   トランザクションシンクの完全フラッシュ期間: TiCDC ノードの MySQL シンクによるダウンストリーム トランザクションの書き込みの平均レイテンシーと p999レイテンシー。
+-   MQ ワーカーのメッセージ送信期間パーセンタイル: ダウンストリームが Kafka の場合の MQ ワーカーによるメッセージ送信のレイテンシー。
+-   Kafka 送信バイト: MQ ワークロードでのダウンストリーム トランザクションの書き込みトラフィック。

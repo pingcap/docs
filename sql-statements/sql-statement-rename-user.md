@@ -1,13 +1,13 @@
 ---
 title: RENAME USER
-summary: An overview of the usage of RENAME USER for the TiDB database.
+summary: TiDB データベースの RENAME USER の使用法の概要。
 ---
 
-# RENAME USER
+# ユーザー名の変更 {#rename-user}
 
-`RENAME USER` is used to rename an existing user.
+`RENAME USER`は既存のユーザーの名前を変更するために使用されます。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 RenameUserStmt ::=
@@ -18,7 +18,7 @@ Username ::=
     StringName ('@' StringName | singleAtIdentifier)? | 'CURRENT_USER' OptionalBraces
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 CREATE USER 'newuser' IDENTIFIED BY 'mypassword';
@@ -70,12 +70,12 @@ SHOW GRANTS FOR 'newuser';
 ERROR 1141 (42000): There is no such grant defined for user 'newuser' on host '%'
 ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-`RENAME USER` is expected to be fully compatible with MySQL. If you find any compatibility difference, you can [report a bug](https://docs.pingcap.com/tidb/stable/support).
+`RENAME USER` MySQL と完全に互換性があると予想されます。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support)実行できます。
 
-## See also
+## 参照 {#see-also}
 
-* [CREATE USER](/sql-statements/sql-statement-create-user.md)
-* [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
-* [DROP USER](/sql-statements/sql-statement-drop-user.md)
+-   [ユーザーを作成](/sql-statements/sql-statement-create-user.md)
+-   [ショーグラント](/sql-statements/sql-statement-show-grants.md)
+-   [ユーザーを削除](/sql-statements/sql-statement-drop-user.md)

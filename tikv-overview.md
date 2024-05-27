@@ -1,36 +1,36 @@
 ---
 title: TiKV Overview
-summary: An overview of the TiKV storage engine.
+summary: TiKVstorageエンジンの概要。
 ---
 
-# TiKV Overview
+# TiKVの概要 {#tikv-overview}
 
-TiKV is a distributed and transactional key-value database, which provides transactional APIs with ACID compliance. With the implementation of the [Raft consensus algorithm](https://raft.github.io/raft.pdf) and consensus state stored in RocksDB, TiKV guarantees data consistency between multiple replicas and high availability. As the storage layer of the TiDB distributed database, TiKV provides the read and write service, and persist the written data from applications. It also stores the statistics data of the TiDB cluster.
+TiKV は分散型トランザクション キー値データベースであり、 ACID準拠のトランザクション API を提供します。RocksDB に保存される[Raftコンセンサスアルゴリズム](https://raft.github.io/raft.pdf)およびコンセンサス状態の実装により、TiKV は複数のレプリカ間のデータの一貫性と高可用性を保証します。TiDB 分散データベースのstorageレイヤーとして、TiKV は読み取りおよび書き込みサービスを提供し、アプリケーションから書き込まれたデータを永続化します。また、TiDB クラスターの統計データも保存します。
 
-## Architecture Overview
+## アーキテクチャの概要 {#architecture-overview}
 
-TiKV implements the multi-raft-group replica mechanism based on the design of Google Spanner. A Region is a basic unit of the key-value data movement and refers to a data range in a Store. Each Region is replicated to multiple nodes. These multiple replicas form a Raft group. A replica of a Region is called a Peer. Typically there are 3 peers in a Region. One of them is the leader, which provides the read and write services. The PD component balances all the Regions automatically to guarantee that the read and write throughput is balanced among all the nodes in the TiKV cluster. With PD and carefully designed Raft groups, TiKV excels in horizontal scalability and can easily scale to store more than 100 TBs of data.
+TiKV は、Google Spanner の設計に基づいて、マルチ ラフト グループ レプリカ メカニズムを実装します。リージョンは、キーと値のデータの移動の基本単位で、ストア内のデータ範囲を指します。各リージョンは複数のノードに複製されます。これらの複数のレプリカがRaftグループを形成します。リージョンのレプリカはピアと呼ばれます。通常、リージョンには 3 つのピアがあります。そのうちの 1 つがリーダーで、読み取りおよび書き込みサービスを提供します。PDコンポーネントは、すべてのリージョンのバランスを自動的に調整して、TiKV クラスター内のすべてのノード間で読み取りおよび書き込みスループットのバランスが保たれるようにします。PD と慎重に設計されたRaftグループにより、TiKV は水平方向のスケーラビリティに優れ、100 TB を超えるデータを簡単に保存できます。
 
 ![TiKV Architecture](/media/tikv-arch.png)
 
-### Region and RocksDB
+### リージョンとRocksDB {#region-and-rocksdb}
 
-There is a RocksDB database within each Store and it stores data into the local disk. All the Region data are stored in the same RocksDB instance in each Store. All the logs used for the Raft consensus algorithm is stored in another RocksDB instance in each Store. This is because the performance of sequential I/O is better than random I/O. With different RocksDB instances storing raft logs and Region data, TiKV combines all the data write operations of raft logs and TiKV Regions into one I/O operation to improve the performance.
+各ストア内には RocksDB データベースがあり、ローカル ディスクにデータを保存します。すべてのリージョンデータは、各ストアの同じ RocksDB インスタンスに保存されます。Raft コンセンサス アルゴリズムに使用されるすべてのログは、各ストアの別の RocksDB インスタンスに保存されます。これは、シーケンシャル I/O のパフォーマンスがランダム I/O よりも優れているためです。異なる RocksDB インスタンスに Raffed ログとリージョンデータを保存すると、TiKV は Raffed ログと TiKV リージョンのすべてのデータ書き込み操作を 1 つの I/O 操作に統合して、パフォーマンスを向上させます。
 
-### Region and Raft Consensus Algorithm
+### リージョンとRaft合意アルゴリズム {#region-and-raft-consensus-algorithm}
 
-Data consistency between replicas of a Region is guaranteed by the Raft Consensus Algorithm. Only the leader of the Region can provide the writing service, and only when the data is written to the majority of replicas of a Region, the write operation succeeds.
+リージョンのレプリカ間のデータの一貫性は、 Raftコンセンサス アルゴリズムによって保証されます。リージョンのリーダーのみが書き込みサービスを提供でき、リージョンのレプリカの過半数にデータが書き込まれた場合にのみ、書き込み操作が成功します。
 
-TiKV tries to keep an appropriate size for each Region in the cluster. The Region size is currently 96 MiB by default. This mechanism helps the PD component to balance Regions among nodes in a TiKV cluster. When the size of a Region exceeds a threshold (144 MiB by default), TiKV splits it into two or more Regions. When the size of a Region is smaller than the threshold (20 MiB by default), TiKV merges the two smaller adjacent Regions into one Region.
+TiKV は、クラスター内の各リージョンに適切なサイズを維持しようとします。リージョンサイズは現在、デフォルトで 96 MiB です。このメカニズムは、PDコンポーネントがTiKV クラスター内のノード間でリージョンのバランスをとるのに役立ちます。リージョンのサイズがしきい値 (デフォルトでは 144 MiB) を超えると、TiKV はそれを 2 つ以上のリージョンに分割します。リージョンのサイズがしきい値 (デフォルトでは 20 MiB) より小さい場合、TiKV は 2 つの小さい隣接するリージョンを 1 つのリージョンに結合します。
 
-When PD moves a replica from one TiKV node to another, it firstly adds a Learner replica on the target node, after the data in the Learner replica is nearly the same as that in the Leader replica, PD changes it to a Follower replica and removes the Follower replica on the source node.
+PD がレプリカをある TiKV ノードから別の TiKV ノードに移動する場合、まずターゲット ノードにLearnerレプリカを追加します。LearnerレプリカのデータがLeaderレプリカのデータとほぼ同じになったら、PD はそれをFollowerレプリカに変更し、ソース ノードのFollowerレプリカを削除します。
 
-Moving Leader replica from one node to another has a similar mechanism. The difference is that after the Learner replica becomes the Follower replica, there is a "Leader Transfer" operation in which the Follower replica actively proposes an election to elect itself as the Leader. Finally, the new Leader removes the old Leader replica in the source node.
+Leaderレプリカをあるノードから別のノードに移動する場合も、同様のメカニズムが採用されています。違いは、LearnerレプリカがFollowerレプリカになった後、FollowerレプリカがLeaderとして自らを選出するための選挙を積極的に提案する「Leader転送」操作が行われることです。最後に、新しいLeaderがソース ノードの古いLeaderレプリカを削除します。
 
-## Distributed Transaction
+## 分散トランザクション {#distributed-transaction}
 
-TiKV supports distributed transactions. Users (or TiDB) can write multiple key-value pairs without worrying about whether they belong to the same Region. TiKV uses two-phase commit to achieve ACID constraints. See [TiDB Optimistic Transaction Model](/optimistic-transaction.md) for details.
+TiKV は分散トランザクションをサポートします。ユーザー (または TiDB) は、同じリージョンに属しているかどうかを気にせずに、複数のキーと値のペアを書き込むことができます。TiKV は 2 フェーズ コミットを使用してACID制約を実現します。詳細については[TiDB 楽観的トランザクションモデル](/optimistic-transaction.md)参照してください。
 
-## TiKV Coprocessor
+## TiKVコプロセッサー {#tikv-coprocessor}
 
-TiDB pushes some data computation logic to TiKV Coprocessor. TiKV Coprocessor processes the computation for each Region. Each request sent to TiKV Coprocessor only involves the data of one Region.
+TiDB は、一部のデータ計算ロジックを TiKVコプロセッサーにプッシュします。TiKVコプロセッサーは、各リージョンの計算を処理します。TiKVコプロセッサーに送信される各リクエストには、1 つのリージョンのデータのみが含まれます。
