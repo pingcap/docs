@@ -33,6 +33,8 @@ AdminCheckStmt ::=
 
 TableNameList ::=
     TableName ( ',' TableName )*
+
+HandleRange ::= '(' Int64Num ',' Int64Num ')'
 ```
 
 ## Examples
