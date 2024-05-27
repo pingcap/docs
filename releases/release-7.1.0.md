@@ -5,6 +5,8 @@ summary: Learn about the new features, compatibility changes, improvements, and 
 
 # TiDB 7.1.0 Release Notes
 
+<EmailSubscriptionWrapper />
+
 Release date: May 31, 2023
 
 TiDB version: 7.1.0

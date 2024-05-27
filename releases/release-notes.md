@@ -4,6 +4,8 @@ title: Release Notes
 
 # TiDB Release Notes
 
+<EmailSubscriptionWrapper />
+
 ## 7.1
 
 - [7.1.5](/releases/release-7.1.5.md): 2024-04-26
