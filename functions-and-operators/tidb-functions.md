@@ -333,6 +333,8 @@ To enable the checksum feature of single-row data in TiDB (controlled by the sys
 SET GLOBAL tidb_enable_row_level_checksum = ON;
 ```
 
+Now you need to re-connect to activate this for your session.
+
 Create table `t` and insert data:
 
 ```sql
