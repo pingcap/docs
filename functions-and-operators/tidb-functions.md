@@ -337,8 +337,8 @@ Create table `t` and insert data:
 
 ```sql
 USE test;
-CREATE TABLE t (id INT PRIMARY KEY, k INT, c int);
-INSERT INTO TABLE t values (1, 10, a);
+CREATE TABLE t (id INT PRIMARY KEY, k INT, c CHAR(1));
+INSERT INTO t values (1, 10, 'a');
 ```
 
 The following statement shows how to query the checksum value of the row where `id = 1` in table `t`:
