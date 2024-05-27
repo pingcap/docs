@@ -94,7 +94,7 @@ The supported vCPU and RAM sizes include the following:
 | 4 vCPU, 16 GiB  |          |
 | 8 vCPU, 32 GiB    | 8 vCPU, 64 GiB        |
 | 16 vCPU, 64 GiB  | Coming soon       |
-| 32 vCPU, 128 GiB   | Coming soon    |
+| 32 vCPU, 128 GiB   |    |
 
 > **Note:**
 >
