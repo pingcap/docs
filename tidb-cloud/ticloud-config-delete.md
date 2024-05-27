@@ -1,6 +1,6 @@
 ---
 title: ticloud config delete
-summary: `ticloud config delete` のリファレンス。
+summary: ticloud config delete のリファレンス。
 ---
 
 # ticloud 設定削除 {#ticloud-config-delete}

@@ -1,6 +1,6 @@
 ---
 title: ticloud import list
-summary: `ticloud import list` のリファレンス。
+summary: ticloud import list のリファレンス。
 ---
 
 # ticloud インポート リスト {#ticloud-import-list}

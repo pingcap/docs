@@ -1,6 +1,6 @@
 ---
 title: ticloud import start mysql
-summary: `ticloud import start mysql` のリファレンス。
+summary: ticloud import start mysql のリファレンス。
 ---
 
 # ticloud インポート開始 mysql {#ticloud-import-start-mysql}

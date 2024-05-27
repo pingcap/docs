@@ -1,6 +1,6 @@
 ---
 title: ticloud branch connect-info
-summary: `ticloud branch connect-info` のリファレンス。
+summary: ticloud branch connect-info のリファレンス。
 ---
 
 # ticloud ブランチ接続情報 {#ticloud-branch-connect-info}

@@ -1,6 +1,6 @@
 ---
 title: tiup cluster restart
-summary: `tiup cluster restart` コマンドは、指定されたクラスター内のサービスを再起動するために使用されます。再起動中は、サービスは使用できません。`-N、--node` および `-R、--role` オプションを使用して、再起動するノードまたはロールを指定できます。出力は、サービス再起動プロセスのログです。
+summary: tiup cluster restart コマンドは、指定されたクラスター内のサービスを再起動するために使用されます。再起動中は、サービスは使用できません。`-N、--node` および `-R、--role` オプションを使用して、再起動するノードまたはロールを指定できます。出力は、サービス再起動プロセスのログです。
 ---
 
 # tiup cluster restart {#tiup-cluster-restart}

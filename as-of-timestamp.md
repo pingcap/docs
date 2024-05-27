@@ -1,6 +1,6 @@
 ---
 title: Read Historical Data Using the `AS OF TIMESTAMP` Clause
-summary: `AS OF TIMESTAMP` ステートメント句を使用して履歴データを読み取る方法を学習します。
+summary: AS OF TIMESTAMP ステートメント句を使用して履歴データを読み取る方法を学習します。
 ---
 
 # <code>AS OF TIMESTAMP</code>句を使用して履歴データを読み取る {#read-historical-data-using-the-code-as-of-timestamp-code-clause}
