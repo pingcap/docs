@@ -17,4 +17,4 @@ summary: リンクと紹介を使用してTiUPドキュメントをガイドし�
 ## TiUPリソース {#tiup-resources}
 
 -   [TiUPリリースノート](https://github.com/pingcap/tiup/releases)
--   [TiUPの問題](https://github.com/pingcap/tiup/issues) : TiUP GitHub の問題を一覧表示します
+-   [TiUPの問題](https://github.com/pingcap/tiup/issues): TiUP GitHub の問題を一覧表示します
