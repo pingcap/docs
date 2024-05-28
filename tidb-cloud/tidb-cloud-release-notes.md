@@ -8,6 +8,27 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
+## May 28, 2024
+
+**General changes**
+
+- Support Data Service Open API
+
+    We are excited to announce the release of the TiDB Cloud Data Service Open API. This new RESTful API is designed to enhance your administrative capabilities within the TiDB Cloud environment. Key features include:
+        - DataApp: A collection of endpoints.
+        - Datasource: Data sources connectable to DataApps for data manipulation and retrieval.
+        - Endpoint: Various endpoints associated with your DataApps for performing data interaction and management operations.
+        - Deployment: Functionalities for deploying DataApps.
+        - APIKey: Operations related to the creation, deletion, and management of API keys for secure access for endpoint request.
+        - API Specification: Get the Data App's api specification.
+    Leverage these capabilities for a more automated and efficient management of your TiDB Cloud resources.
+
+- Google Cloud Taiwan (asia-east1) region supports Data Migration (DM)
+
+    The [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters hosted in the Google Cloud Taiwan (asia-east1) region now support the Data Migration (DM) service. You can use this feature to migrate MySQL-compatible databases to a TiDB Dedicated cluster in this region, making the data migration service more efficient and streamlined.
+
+- Provide a new [TiDB node size](/tidb-cloud/size-your-cluster.md#tidb-vcpu-and-ram) for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters hosted on AWS and Google Cloud: `16 vCPU, 64 GiB`
+
 ## May 21, 2024
 
 **General changes**
