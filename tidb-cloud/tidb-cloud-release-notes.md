@@ -8,6 +8,30 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
+## May 28, 2024
+
+**General changes**
+
+- Google Cloud `Taiwan (asia-east1)` region supports the [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) feature.
+
+    The [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters hosted in the Google Cloud `Taiwan (asia-east1)` region now support the Data Migration (DM) feature. If your upstream data is stored in or near this region, you can now take advantage of faster and more reliable data migration from Google Cloud to TiDB Cloud.
+
+- Provide a new [TiDB node size](/tidb-cloud/size-your-cluster.md#tidb-vcpu-and-ram) for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters hosted on AWS and Google Cloud: `16 vCPU, 64 GiB`
+
+**API changes**
+
+- Introduce TiDB Cloud Data Service API for managing the following resources automatically and efficiently:
+
+    * **Data App**: a collection of endpoints that you can use to access data for a specific application.
+    * **Data Source**: clusters linked to Data Apps for data manipulation and retrieval.
+    * **Endpoint**: a web API that you can customize to execute SQL statements.
+    * **Data API Key**: used for secure endpoint access.
+    * **OpenAPI Specification**: Data Service supports generating the OpenAPI Specification 3.0 for each Data App, which enables you to interact with your endpoints in a standardized format.
+
+  These TiDB Cloud Data Service API endpoints are released in TiDB Cloud API v1beta1, which is the latest API version of TiDB Cloud.
+
+    For more information, see [API documentation (v1beta1)](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice).
+
 ## May 21, 2024
 
 **General changes**
