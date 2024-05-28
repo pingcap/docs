@@ -111,7 +111,7 @@ Based on the data change information, TiCDC generates data in the appropriate fo
 
 Currently, when TiCDC adapts data change information for the corresponding protocol, for specific `UPDATE` events, it might split them into one `DELETE` event and one `INSERT` event. For more information, see [Split update events into delete and insert events](/ticdc/ticdc-behavior-change.md#split-update-events-into-delete-and-insert-events).
 
-When the downstream is MySQL or TiDB, TiCDC cannot guarantee that the SQL statements written to the downstream are exactly the same as the SQL statements executed in the upstream. This is because TiCDC does not directly obtain the original DML statements executed in the upstream, but generates SQL statements based on the data change information. However, it ensures the consistency of the final results.
+When the downstream is MySQL or TiDB, TiCDC cannot guarantee that the SQL statements written to the downstream are exactly the same as the SQL statements executed in the upstream. This is because TiCDC does not directly obtain the original DML statements executed in the upstream, but generates SQL statements based on the data change information. However, TiCDC ensures the consistency of the final results.
 
 For example, the following SQL statement is executed in the upstream:
 
