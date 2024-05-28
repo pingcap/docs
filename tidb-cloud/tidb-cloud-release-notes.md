@@ -30,7 +30,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
   These TiDB Cloud Data Service API endpoints are released in TiDB Cloud API v1beta1, which is the latest API version of TiDB Cloud.
 
-    For more information, refer to the [API documentation (v1beta1)](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice).
+    For more information, see [API documentation (v1beta1)](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice).
 
 ## May 21, 2024
 
