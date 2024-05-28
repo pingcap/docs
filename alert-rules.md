@@ -120,7 +120,7 @@ This section gives the alert rules for the TiDB component.
 
 * Description:
 
-    The latency of handling a request in TiDB. The response time for 99% of requests should be within 1 second; otherwise, an alarm is triggered.
+    The latency of handling a request in TiDB. The response time for 99% of requests should be within 1 second; otherwise, an alert is triggered.
 
 * Solution:
 
