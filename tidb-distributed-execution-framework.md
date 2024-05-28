@@ -44,7 +44,6 @@ The DXF can only schedule up to 16 tasks (including [`ADD INDEX`](/sql-statement
 
 ## `ADD INDEX` limitation
 
-- For each cluster, only one [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) task is allowed for distributed execution at a time. If a new [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) task is submitted before the current [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) distributed task has finished, the new [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) task is executed through a transaction instead of being scheduled by DXF.
 - Adding indexes on columns with the `TIMESTAMP` data type through the DXF is not supported, because it might lead to inconsistency between the index and the data.
 
 ## Prerequisites
