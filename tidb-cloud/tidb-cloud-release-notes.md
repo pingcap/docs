@@ -12,9 +12,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Google Cloud Taiwan (asia-east1) region supports Data Migration (DM)
+- Google Cloud `Taiwan (asia-east1)` region supports the [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) feature.
 
-    The [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters hosted in the Google Cloud Taiwan (asia-east1) region now support the Data Migration (DM) service. You can use this feature to migrate MySQL-compatible databases to a TiDB Dedicated cluster in this region, making the data migration service more efficient and streamlined.
+    The [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters hosted in the Google Cloud `Taiwan (asia-east1)` region now support the Data Migration (DM) feature. If your upstream data is stored in or near this region, you can now take advantage of faster and more reliable data migration from Google Cloud to TiDB Cloud.
 
 - Provide a new [TiDB node size](/tidb-cloud/size-your-cluster.md#tidb-vcpu-and-ram) for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters hosted on AWS and Google Cloud: `16 vCPU, 64 GiB`
 
