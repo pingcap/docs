@@ -53,7 +53,7 @@ In this example, by executing three SQL statements to swap the primary keys of t
 
 Therefore, TiCDC splits these two events into four events, that is, deleting records `(1, 1)` and `(2, 2)` and writing records `(2, 1)` and `(1, 2)`.
 
-#### MySQL sink
+### MySQL sink
 
 Starting from v8.1.0, when using the MySQL sink, TiCDC fetches a current timestamp `thresholdTs` from PD at startup and decides whether to split `UPDATE` events based on the value of the timestamp:
 
