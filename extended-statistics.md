@@ -40,7 +40,7 @@ The default value of this variable is `OFF`. The setting of this system variable
 
 ### Create extended statistics objects
 
-The registration for extended statistics is not a one-time task, and you need repeat the registration for each extended statistics object.
+The creation of extended statistics objects is not a one-time task. You need to repeat the creation for each extended statistics object.
 
 To create extended statistics objects, use the SQL statement `ALTER TABLE ADD STATS_EXTENDED`. The syntax is as follows:
 
@@ -144,7 +144,7 @@ Set `tidb_enable_extended_stats` to `ON`, and create the extended statistics obj
 ALTER TABLE t ADD STATS_EXTENDED s1 correlation(col1, col2);
 ```
 
-When you execute `ANALYZE` after the registration, TiDB calculates the [Pearson correlation coefficient](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient) of `col1` and `col2` of table `t`, and writes the object into the `mysql.stats_extended` table.
+When you execute `ANALYZE` after the object creation, TiDB calculates the [Pearson correlation coefficient](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient) of `col1` and `col2` of table `t`, and writes the object into the `mysql.stats_extended` table.
 
 ### Step 4. See how extended statistics make a difference
 
