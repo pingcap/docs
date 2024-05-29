@@ -19,7 +19,7 @@ The properties that can be configured include `public-key`, `private-key`, and `
 | private-key | Specifies the private key of the TiDB Cloud API.                              | Yes      |
 | api-url     | Specifies the base API URL of TiDB Cloud (`https://api.tidbcloud.com` by default). | No       |
 
-> **Notes:**
+> **Note:**
 >
 > If you want to configure properties for a specific user profile, you can add the `-P` flag and specify the target user profile name in the command.
 
