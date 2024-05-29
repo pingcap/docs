@@ -57,7 +57,7 @@ Therefore, TiCDC splits these two events into four events, that is, deleting rec
 
 Starting from v8.1.0, when using the MySQL sink, TiCDC fetches a current timestamp `thresholdTs` from PD at startup and decides whether to split `UPDATE` events based on the value of the timestamp:
 
-- For transactions containing multiple changes, if the primary key or non-null unique index value is modified in `UPDATE` events and the transaction `commitTS` is less than `thresholdTs`, TiCDC splits each `UPDATE` event into a `DELETE` event and an `INSERT` event before writing them to the Sorter module.
+- If the primary key or non-null unique index value is modified in `UPDATE` events and the transaction `commitTS` is less than `thresholdTs`, TiCDC splits each `UPDATE` event into a `DELETE` event and an `INSERT` event before writing them to the Sorter module.
 - For `UPDATE` events with the transaction `commitTS` greater than or equal to `thresholdTs`, TiCDC does not split them. For more information, see GitHub issue [#10918](https://github.com/pingcap/tiflow/issues/10918).
 
 This behavior change addresses the issue of downstream data inconsistencies caused by the potentially incorrect order of `UPDATE` events received by TiCDC, which can lead to an incorrect order of split `DELETE` and `INSERT` events.
