@@ -245,7 +245,7 @@ The current sampling rate is calculated based on an adaptive algorithm. When you
 
 > **Note:**
 >
-> Normally, `STATS_META` is more credible than `APPROXIMATE_KEYS`. However, after importing data through the methods like [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview), the result of `STATS_META` is `0`. To handle this situation, you can use `APPROXIMATE_KEYS` to calculate the sampling rate when the result of `STATS_META` is much smaller than the result of `APPROXIMATE_KEYS`.
+> Normally, `STATS_META` is more credible than `APPROXIMATE_KEYS`. However, after importing data through the methods like [TiDB Lightning Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md), the result of `STATS_META` is `0`. To handle this situation, you can use `APPROXIMATE_KEYS` to calculate the sampling rate when the result of `STATS_META` is much smaller than the result of `APPROXIMATE_KEYS`.
 
 </CustomContent>
 
