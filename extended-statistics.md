@@ -12,7 +12,7 @@ TiDB can collect the following two types of statistics. This documents describes
 
 When the `ANALYZE` statement is executed manually or automatically, TiDB by default only collects the basic statistics and does not collect the extended statistics. This is because the extended statistics are only used for optimizer estimates in specific scenarios, and collecting them requires additional overhead.
 
-Extended statistics are disabled by default. To collect extended statistics, you need to first enable the extended statistics, and then create every single extended statistics object. After the objects have been created, the next time the `ANALYZE` statement is executed, TiDB collects both the basic statistics and the corresponding extended statistics.
+Extended statistics are disabled by default. To collect extended statistics, you need to first enable the extended statistics, and then create every single extended statistics object. After the objects have been created, the next time the `ANALYZE` statement is executed, TiDB collects both the basic statistics and the corresponding extended statistics of the created objects.
 
 > **Warning:**
 >
