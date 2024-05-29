@@ -33,7 +33,7 @@ In this example, the primary key `a` is updated from `1` to `2`. If the `UPDATE`
 
 Starting from v6.5.4, v7.1.2, and v7.4.0, for transactions containing multiple changes, if the primary key or non-null unique index value is modified in the `UPDATE` event, TiCDC splits the event into `DELETE` and `INSERT` events and ensures that all events follow the sequence of `DELETE` events preceding `INSERT` events. For more information, see GitHub issue [#9430](https://github.com/pingcap/tiflow/issues/9430).
 
-This change primarily addresses the potential issue of primary key conflicts when using the MySQL sink to directly write these two events to the downstream, leading to changefeed errors.
+This change primarily addresses the potential issue of primary key or unique key conflicts when using the MySQL sink to directly write these two events to the downstream, leading to changefeed errors. When using the Kafka sink or other sinks, you might encounter the same error if the consumer writes messages to a relational database or performs similar operation.
 
 Take the following SQL as an example:
 
@@ -43,9 +43,9 @@ INSERT INTO t VALUES (1, 1);
 INSERT INTO t VALUES (2, 2);
 
 BEGIN;
-UPDATE t SET a = 1 WHERE a = 3;
-UPDATE t SET a = 2 WHERE a = 1;
-UPDATE t SET a = 3 WHERE a = 2;
+UPDATE t SET a = 3 WHERE a = 1;
+UPDATE t SET a = 1 WHERE a = 2;
+UPDATE t SET a = 2 WHERE a = 3;
 COMMIT;
 ```
 

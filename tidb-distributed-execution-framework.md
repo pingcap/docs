@@ -9,13 +9,13 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 >
 > This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 
-TiDB adopts a computing-storage separation architecture with excellent scalability and elasticity. Starting from v7.1.0, TiDB introduces a Distributed eXecution Framework (DXF) to further leverage the resource advantages of the distributed architecture. The goal of the DXF is to implement unified scheduling and distributed execution of tasks, and to provide unified resource management capabilities for both overall and individual tasks, which better meets users' expectations for resource usage.
+TiDB adopts a computing-storage separation architecture with excellent scalability and elasticity. Starting from v7.1.0, TiDB introduces a **Distributed eXecution Framework (DXF)** to further leverage the resource advantages of the distributed architecture. The goal of the DXF is to implement unified scheduling and distributed execution of tasks, and to provide unified resource management capabilities for both overall and individual tasks, which better meets users' expectations for resource usage.
 
 This document describes the use cases, limitations, usage, and implementation principles of the DXF.
 
 ## Use cases
 
-In a database management system, in addition to the core transactional processing (TP) and analytical processing (AP) workloads, there are other important tasks, such as DDL operations, IMPORT INTO, TTL, Analyze, and Backup/Restore. These tasks need to process a large amount of data in database objects (tables), so they typically have the following characteristics:
+In a database management system, in addition to the core transactional processing (TP) and analytical processing (AP) workloads, there are other important tasks, such as DDL operations, [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md), [TTL](/time-to-live.md), [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md), and Backup/Restore. These tasks need to process a large amount of data in database objects (tables), so they typically have the following characteristics:
 
 - Need to process all data in a schema or a database object (table).
 - Might need to be executed periodically, but at a low frequency.
@@ -27,29 +27,28 @@ Enabling the DXF can solve the above problems and has the following three advant
 - The DXF supports distributed execution of tasks, which can flexibly schedule the available computing resources of the entire TiDB cluster, thereby better utilizing the computing resources in a TiDB cluster.
 - The DXF provides unified resource usage and management capabilities for both overall and individual tasks.
 
-Currently, the DXF supports the distributed execution of the `ADD INDEX` and `IMPORT INTO` statements.
+Currently, the DXF supports the distributed execution of the [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) statements.
 
-- `ADD INDEX` is a DDL statement used to create indexes. For example:
+- [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) is a DDL statement used to create indexes. For example:
 
     ```sql
     ALTER TABLE t1 ADD INDEX idx1(c1);
     CREATE INDEX idx1 ON table t1(c1);
     ```
 
-- `IMPORT INTO` is used to import data in formats such as `CSV`, `SQL`, and `PARQUET` into an empty table. For more information, see [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md).
+- [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) is used to import data in formats such as CSV, SQL, and Parquet into an empty table.
 
 ## Limitation
 
-The DXF can only schedule up to 16 tasks (including `ADD INDEX` tasks and `IMPORT INTO` tasks) simultaneously. 
+The DXF can only schedule up to 16 tasks (including [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) tasks and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) tasks) simultaneously. 
 
 ## `ADD INDEX` limitation
 
-- For each cluster, only one `ADD INDEX` task is allowed for distributed execution at a time. If a new `ADD INDEX` task is submitted before the current `ADD INDEX` distributed task has finished, the new `ADD INDEX` task is executed through a transaction instead of being scheduled by DXF.
 - Adding indexes on columns with the `TIMESTAMP` data type through the DXF is not supported, because it might lead to inconsistency between the index and the data.
 
 ## Prerequisites
 
-Before using the DXF to execute `ADD INDEX` tasks, you need to enable the [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) mode.
+Before using the DXF to execute [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) tasks, you need to enable the [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) mode.
 
 <CustomContent platform="tidb">
 
@@ -100,14 +99,14 @@ By default, the DXF schedules all TiDB nodes to execute distributed tasks. Start
 
 - For versions from v7.4.0 to v8.0.0, the optional values of [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) are `''` or `background`. If the current cluster has TiDB nodes with `tidb_service_scope = 'background'`, the DXF schedules tasks to these nodes for execution. If the current cluster does not have TiDB nodes with `tidb_service_scope = 'background'`, whether due to faults or normal scaling in, the DXF schedules tasks to nodes with `tidb_service_scope = ''` for execution.
 
-- Starting from v8.1.0, you can set [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) to any valid value. When a distributed task is submitted, the task binds to the `tidb_service_scope` value of the currently connected TiDB node, and the DXF only schedules the task to the TiDB nodes with the same `tidb_service_scope` value for execution. However, for configuration compatibility with earlier versions, if a distributed task is submitted on a node with `tidb_service_scope = ''` and the current cluster has TiDB nodes with `tidb_service_scope = 'background'`, the DXF schedules the task to TiDB nodes with `tidb_service_scope = 'background'` for execution.
+- Starting from v8.1.0, you can set [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) to any valid value. When a distributed task is submitted, the task binds to the [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) value of the currently connected TiDB node, and the DXF only schedules the task to the TiDB nodes with the same [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) value for execution. However, for configuration compatibility with earlier versions, if a distributed task is submitted on a node with `tidb_service_scope = ''` and the current cluster has TiDB nodes with `tidb_service_scope = 'background'`, the DXF schedules the task to TiDB nodes with `tidb_service_scope = 'background'` for execution.
 
-If new nodes are added during task execution, the DXF determines whether to schedule tasks to the new nodes for execution based on the preceding rules. If you do not want newly added nodes to execute tasks, it is recommended to set `tidb_service_scope` for these nodes in advance.
+Starting from v8.1.0, if new nodes are added during task execution, the DXF determines whether to schedule tasks to the new nodes for execution based on the preceding rules. If you do not want newly added nodes to execute tasks, it is recommended to set a different [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) for those newly added nodes in advance.
 
 > **Note:**
 >
-> - For versions from v7.4.0 to v8.0.0, in clusters with multiple TiDB nodes, it is strongly recommended to set `tidb_service_scope` to `background` on two or more TiDB nodes. If this variable is set only on a single TiDB node, when that node restarts or fails, tasks will be rescheduled to TiDB nodes with `tidb_service_scope = ''`, which affects applications running on these TiDB nodes.
-> - During the execution of a distributed task, changes to the `tidb_service_scope` configuration do not take effect for the current task, but take effect from the next task.
+> - For versions from v7.4.0 to v8.0.0, in clusters with multiple TiDB nodes, it is strongly recommended to set [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) to `background` on two or more TiDB nodes. If this variable is set only on a single TiDB node, when that node restarts or fails, tasks will be rescheduled to TiDB nodes with `tidb_service_scope = ''`, which affects applications running on these TiDB nodes.
+> - During the execution of a distributed task, changes to the [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) configuration do not take effect for the current task, but take effect from the next task.
 
 ## Implementation principles
 
