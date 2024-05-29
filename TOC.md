@@ -632,6 +632,7 @@
     - [Configuration](/tiproxy/tiproxy-configuration.md)
     - [Command Line Parameters](/tiproxy/tiproxy-command-line-flags.md)
     - [Monitoring Metrics](/tiproxy/tiproxy-grafana.md)
+    - [API](/tiproxy/tiproxy-api.md)
     - [Troubleshooting](/tiproxy/troubleshoot-tiproxy.md)
     - [Performance Test](/tiproxy/tiproxy-performance-test.md)
 - Reference
