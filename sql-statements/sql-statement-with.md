@@ -84,6 +84,7 @@ WITH RECURSIVE cte(a) AS (SELECT 1 UNION SELECT a+1 FROM cte WHERE a < 5) SELECT
 
 ## See also
 
+* [Developer Guide: Common Table Expression](/develop/dev-guide-use-common-table-expression.md)
 * [SELECT](/sql-statements/sql-statement-select.md)
 * [INSERT](/sql-statements/sql-statement-insert.md)
 * [DELETE](/sql-statements/sql-statement-delete.md)

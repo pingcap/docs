@@ -287,7 +287,7 @@ The encryption algorithm currently supported by TiFlash is consistent with that 
 
 The same master key can be shared by multiple instances of TiFlash, and can also be shared among TiFlash and TiKV. The recommended way to provide a master key in production is via AWS KMS. Alternatively, if using custom key is desired, supplying the master key via file is also supported. The specific method to generate master key and the format of the master key are the same as TiKV.
 
-TiFlash uses the current data key to encrypt all data placed on the disk, including data files, Schmea files, and temporary data files generated during calculations. Data keys are automatically rotated by TiFlash every week by default, and the period is configurable. On key rotation, TiFlash does not rewrite all existing files to replace the key, but background compaction tasks are expected to rewrite old data into new data files, with the most recent data key, if the cluster gets constant write workload. TiFlash keeps track of the key and encryption method used to encrypt each of the files and use the information to decrypt the content on reads.
+TiFlash uses the current data key to encrypt all data placed on the disk, including data files, Schema files, and temporary data files generated during calculations. Data keys are automatically rotated by TiFlash every week by default, and the period is configurable. On key rotation, TiFlash does not rewrite all existing files to replace the key, but background compaction tasks are expected to rewrite old data into new data files, with the most recent data key, if the cluster gets constant write workload. TiFlash keeps track of the key and encryption method used to encrypt each of the files and use the information to decrypt the content on reads.
 
 ### Key creation
 
@@ -402,19 +402,19 @@ TiFlash also optimizes encrypted metadata operations in v4.0.9, and its compatib
 To enable S3 server-side encryption when backup to S3 using BR, pass `--s3.sse` argument and set value to "aws:kms". S3 will use its own KMS key for encryption. Example:
 
 ```
-./br backup full --pd <pd-address> --storage "s3://<bucket>/<prefix>" --s3.sse aws:kms
+tiup br backup full --pd <pd-address> --storage "s3://<bucket>/<prefix>" --s3.sse aws:kms
 ```
 
 To use a custom AWS KMS CMK that you created and owned, pass `--s3.sse-kms-key-id` in addition. In this case, both the BR process and all the TiKV nodes in the cluster would need access to the KMS CMK (for example, via AWS IAM), and the KMS CMK needs to be in the same AWS region as the S3 bucket used to store the backup. It is advised to grant access to the KMS CMK to BR process and TiKV nodes via AWS IAM. Refer to AWS documentation for usage of [IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html). For example:
 
 ```
-./br backup full --pd <pd-address> --storage "s3://<bucket>/<prefix>" --s3.sse aws:kms --s3.sse-kms-key-id 0987dcba-09fe-87dc-65ba-ab0987654321
+tiup br backup full --pd <pd-address> --storage "s3://<bucket>/<prefix>" --s3.sse aws:kms --s3.sse-kms-key-id 0987dcba-09fe-87dc-65ba-ab0987654321
 ```
 
 When restoring the backup, both `--s3.sse` and `--s3.sse-kms-key-id` should NOT be used. S3 will figure out encryption settings by itself. The BR process and TiKV nodes in the cluster to restore the backup to would also need access to the KMS CMK, or the restore will fail. Example:
 
 ```
-./br restore full --pd <pd-address> --storage "s3://<bucket>/<prefix>"
+tiup br restore full --pd <pd-address> --storage "s3://<bucket>/<prefix>"
 ```
 
 ## BR Azure Blob Storage server-side encryption
@@ -428,13 +428,13 @@ To specify an encryption scope for the backup data, you can use one of the follo
 - Include the `--azblob.encryption-scope` option in the `backup` command and set it to the scope name:
 
     ```shell
-    ./br backup full --pd <pd-address> --storage "azure://<bucket>/<prefix>" --azblob.encryption-scope scope1
+    tiup br backup full --pd <pd-address> --storage "azure://<bucket>/<prefix>" --azblob.encryption-scope scope1
     ```
 
 - Include `encryption-scope` in the URI and set it to the scope name:
 
     ```shell
-    ./br backup full --pd <pd-address> --storage "azure://<bucket>/<prefix>?encryption-scope=scope1"
+    tiup br backup full --pd <pd-address> --storage "azure://<bucket>/<prefix>?encryption-scope=scope1"
     ```
 
 For more information, see the Azure documentation: [Upload a blob with an encryption scope](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-scope-manage?tabs=powershell#upload-a-blob-with-an-encryption-scope).
@@ -442,7 +442,7 @@ For more information, see the Azure documentation: [Upload a blob with an encryp
 When restoring the backup, you do not need to specify the encryption scope. Azure Blob Storage automatically decrypts the data. For example:
 
 ```shell
-./br restore full --pd <pd-address> --storage "azure://<bucket>/<prefix>"
+tiup br restore full --pd <pd-address> --storage "azure://<bucket>/<prefix>"
 ```
 
 ### Method 2: use an encryption key
@@ -452,20 +452,20 @@ To specify an encryption key for the backup data, you can use one of the followi
 - Include the `--azblob.encryption-key` option in the `backup` command and set it to an AES256 encryption key:
 
     ```shell
-    ./br backup full --pd <pd-address> --storage "azure://<bucket>/<prefix>" --azblob.encryption-key <aes256-key>
+    tiup br backup full --pd <pd-address> --storage "azure://<bucket>/<prefix>" --azblob.encryption-key <aes256-key>
     ```
 
 - Include `encryption-key` in the URI and set it to an AES256 encryption key. If the key contains URI reserved characters such as `&` and `%`, you need to percent-encode it first:
 
     ```shell
-    ./br backup full --pd <pd-address> --storage "azure://<bucket>/<prefix>?encryption-key=<aes256-key>"
+    tiup br backup full --pd <pd-address> --storage "azure://<bucket>/<prefix>?encryption-key=<aes256-key>"
     ```
 
 - Set the `AZURE_ENCRYPTION_KEY` environment variable to an AES256 encryption key. Before running, make sure that you remember the encryption key in the environment variable to avoid forgetting it.
 
     ```shell
     export AZURE_ENCRYPTION_KEY=<aes256-key>
-    ./br backup full --pd <pd-address> --storage "azure://<bucket>/<prefix>"
+    tiup br backup full --pd <pd-address> --storage "azure://<bucket>/<prefix>"
     ```
 
 For more information, see the Azure documentation: [Provide an encryption key on a request to Blob storage](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-customer-provided-keys).
@@ -475,18 +475,18 @@ When restoring the backup, you need to specify the encryption key. For example:
 - Include the `--azblob.encryption-key` option in the `restore` command:
 
     ```shell
-    ./br restore full --pd <pd-address> --storage "azure://<bucket>/<prefix>" --azblob.encryption-key <aes256-key>
+    tiup br restore full --pd <pd-address> --storage "azure://<bucket>/<prefix>" --azblob.encryption-key <aes256-key>
     ```
 
 - Include `encryption-key` in the URI:
 
     ```shell
-    ./br restore full --pd <pd-address> --storage "azure://<bucket>/<prefix>?encryption-key=<aes256-key>"
+    tiup br restore full --pd <pd-address> --storage "azure://<bucket>/<prefix>?encryption-key=<aes256-key>"
     ```
 
 - Set the `AZURE_ENCRYPTION_KEY` environment variable:
 
     ```shell
     export AZURE_ENCRYPTION_KEY=<aes256-key>
-    ./br restore full --pd <pd-address> --storage "azure://<bucket>/<prefix>"
+    tiup br restore full --pd <pd-address> --storage "azure://<bucket>/<prefix>"
     ```

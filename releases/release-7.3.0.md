@@ -9,7 +9,7 @@ Release date: August 14, 2023
 
 TiDB version: 7.3.0
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-tidb) | [Installation packages](https://www.pingcap.com/download/?version=v7.3.0#version-list)
+Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-tidb)
 
 7.3.0 introduces the following major features. In addition to that, 7.3.0 also includes a series of enhancements (described in the [Feature details](#feature-details) section) to query stability in TiDB server and TiFlash. These enhancements are more miscellaneous in nature and not user-facing so they are not included in the following table.
 
@@ -154,6 +154,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-
 > This section provides compatibility changes you need to know when you upgrade from v7.2.0 to the current version (v7.3.0). If you are upgrading from v7.1.0 or earlier versions to the current version, you might also need to check the compatibility changes introduced in intermediate versions.
 
 ### Behavior changes
+
+* TiDB
+
+    - MPP is a distributed computing framework provided by the TiFlash engine, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms. Compared with other protocols, the MPP protocol is more mature and can provide better task and resource management. Starting from v7.3.0, when TiDB pushes computation tasks to TiFlash, the optimizer only generates execution plans using the MPP protocol by default. If [`tidb_allow_mpp`](/system-variables.md#tidb_allow_mpp-new-in-v50) is set to `OFF`, queries might return errors after you upgrade TiDB. It is recommended that you check the value of `tidb_allow_mpp` and set it to `ON` before the upgrade. If you still need the optimizer to choose one of the Cop, BatchCop, and MPP protocols for generating execution plans based on cost estimates, you can set the [`tidb_allow_tiflash_cop`](/system-variables.md#tidb_allow_tiflash_cop-new-in-v730) variable to `ON`.
 
 * Backup & Restore (BR)
 
