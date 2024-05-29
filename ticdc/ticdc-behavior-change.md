@@ -53,9 +53,9 @@ In this example, by executing three SQL statements to swap the primary keys of t
 
 Therefore, TiCDC splits these two events into four events, that is, deleting records `(1, 1)` and `(2, 2)` and writing records `(2, 1)` and `(1, 2)`.
 
-#### MySQL Sink
+#### MySQL sink
 
-Starting from v8.1.0, when using the MySQL Sink, TiCDC fetches a current timestamp `thresholdTs` from PD at startup and decides whether to split `UPDATE` events based on the value of the timestamp:
+Starting from v8.1.0, when using the MySQL sink, TiCDC fetches a current timestamp `thresholdTs` from PD at startup and decides whether to split `UPDATE` events based on the value of the timestamp:
 
 - For transactions containing multiple changes, if the primary key or non-null unique index value is modified in `UPDATE` events and the transaction `commitTS` is less than `thresholdTs`, TiCDC splits each `UPDATE` event into a `DELETE` event and an `INSERT` event before writing them to the Sorter module.
 - For `UPDATE` events with the transaction `commitTS` greater than or equal to `thresholdTs`, TiCDC does not split them. For more information, see GitHub issue [#10918](https://github.com/pingcap/tiflow/issues/10918).
@@ -114,4 +114,4 @@ As you can see from the preceding example, splitting the `UPDATE` event into `DE
 
 > **Notes:**
 >
-> After this behavior change, when using MySQL Sink, TiCDC does not split the `UPDATE` event in most cases. Consequently, there might be primary key or unique key conflicts during changefeed runtime, causing the changefeed to restart automatically. After the restart, TiCDC will split the conflicting `UPDATE` events into `DELETE` and `INSERT` events before writing them to the Sorter module. This ensures that all events within the same transaction are correctly ordered, with all `DELETE` events preceding `INSERT` events, thus correctly completing data replication.
+> After this behavior change, when using MySQL sink, TiCDC does not split the `UPDATE` event in most cases. Consequently, there might be primary key or unique key conflicts during changefeed runtime, causing the changefeed to restart automatically. After the restart, TiCDC will split the conflicting `UPDATE` events into `DELETE` and `INSERT` events before writing them to the Sorter module. This ensures that all events within the same transaction are correctly ordered, with all `DELETE` events preceding `INSERT` events, thus correctly completing data replication.
