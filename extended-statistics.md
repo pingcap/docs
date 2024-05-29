@@ -12,7 +12,7 @@ TiDB can collect the following two types of statistics. This documents describes
 
 When the `ANALYZE` statement is executed manually or automatically, TiDB by default only collects the basic statistics and does not collect the extended statistics. This is because the extended statistics are only used for optimizer estimates in specific scenarios, and collecting them requires additional overhead.
 
-Extended statistics are disabled by default. To collect extended statistics, you need to first enable the extended statistics, and then create every single extended statistics object. After the objects have been created, the next time the `ANALYZE` statement is executed, TiDB collects both the basic statistics and the corresponding extended statistics of the created objects.
+Extended statistics are disabled by default. To collect extended statistics, you need to first enable extended statistics, and then create your desired extended statistics objects one by one. After the object creation, the next time the `ANALYZE` statement is executed, TiDB collects both the basic statistics and the corresponding extended statistics of the created objects.
 
 > **Warning:**
 >
@@ -42,7 +42,7 @@ The default value of this variable is `OFF`. The setting of this system variable
 
 The creation of extended statistics objects is not a one-time task. You need to repeat the creation for each extended statistics object.
 
-To create extended statistics objects, use the SQL statement `ALTER TABLE ADD STATS_EXTENDED`. The syntax is as follows:
+To create an extended statistics object, use the SQL statement `ALTER TABLE ADD STATS_EXTENDED`. The syntax is as follows:
 
 ```sql
 ALTER TABLE table_name ADD STATS_EXTENDED IF NOT EXISTS stats_name stats_type(column_name, column_name...);
