@@ -1,6 +1,6 @@
 ---
 title: Compatibility and Scenarios of IMPORT INTO and TiDB Lightning
-summary: Learn about Compatibility and Scenarios of IMPORT INTO and TiDB Lightning, Log Backup, and TiCDC.
+summary: Learn about compatibility and scenarios of IMPORT INTO and TiDB Lightning, log backup, and TiCDC.
 ---
 
 # Compatibility and Scenarios of IMPORT INTO and TiDB Lightning
