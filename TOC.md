@@ -522,7 +522,7 @@
   - TiDB Lightning
     - [Overview](/tidb-lightning/tidb-lightning-overview.md)
     - [`IMPORT INTO` vs. TiDB Lightning](/tidb-lightning/import-into-vs-tidb-lightning.md)
-    - [Compatibility and Scenarios of `IMPORT INTO` and TiDB Lightning](/tidb-lightning/tidb-lightning-compatibility-and-scenarios.md)
+    - [Compatibility of TiDB Lightning and `IMPORT INTO` with TiCDC and Log Backup](/tidb-lightning/tidb-lightning-compatibility-and-scenarios.md)
     - [Get Started](/get-started-with-tidb-lightning.md)
     - [Deploy TiDB Lightning](/tidb-lightning/deploy-tidb-lightning.md)
     - [Target Database Requirements](/tidb-lightning/tidb-lightning-requirements.md)
