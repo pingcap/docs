@@ -1,9 +1,9 @@
 ---
-title: Compatibility and Scenarios of IMPORT INTO and TiDB Lightning
-summary: Learn about compatibility and scenarios of IMPORT INTO and TiDB Lightning, log backup, and TiCDC.
+title: Compatibility of TiDB Lightning and IMPORT INTO with TiCDC and Log Backup
+summary: Learn about compatibility of IMPORT INTO and TiDB Lightning with log backup and TiCDC.
 ---
 
-# Compatibility and Scenarios of IMPORT INTO and TiDB Lightning
+# Compatibility of TiDB Lightning and IMPORT INTO with TiCDC and Log Backup
 
 This document describes TiDB Lightning and `IMPORT INTO` compatibility with [log backup](/br/br-pitr-guide.md), [TiCDC](/ticdc/ticdc-overview.md), as well as some special usage scenarios.
 
