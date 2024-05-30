@@ -36,13 +36,13 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-v
 Sink URI is used to specify the connection information of the TiCDC target system. The format is as follows:
 
 ```shell
-[scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
+[scheme]://[userinfo@][host]:[port],[userinfo@][host]:[port],[userinfo@][host]:[port][/path]?[query_parameters]
 ```
 
 Sample configuration:
 
 ```shell
---sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1"
+--sink-uri="kafka://127.0.0.1:9092,127.0.0.2:9093,127.0.0.3:9094/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1"
 ```
 
 The following are descriptions of sink URI parameters and values that can be configured for Kafka:
