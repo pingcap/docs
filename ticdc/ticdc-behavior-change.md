@@ -9,11 +9,7 @@ summary: Introduce the behavior changes of TiCDC changefeed, including the reaso
 
 ### Transactions containing a single `UPDATE` change
 
-<<<<<<< HEAD
-Starting from v6.5.3, when using a non-MySQL sink, for transactions that only contain a single update change, if the primary key or non-null unique index value is modified in the update event, TiCDC splits this event into delete and insert events. For more information, see GitHub issue [#9086](https://github.com/pingcap/tiflow/issues/9086).
-=======
-Starting from v6.5.3, v7.1.1, and v7.2.0, when using a non-MySQL sink, for transactions that only contain a single update change, if the primary key or non-null unique index value is modified in an `UPDATE` event, TiCDC splits this event into `DELETE` and `INSERT` events. For more information, see GitHub issue [#9086](https://github.com/pingcap/tiflow/issues/9086).
->>>>>>> b480789ed7 (ticdc: add description for cdc behaviour change (#17530))
+Starting from v6.5.3, when using a non-MySQL sink, for transactions that only contain a single update change, if the primary key or non-null unique index value is modified in an `UPDATE` event, TiCDC splits this event into `DELETE` and `INSERT` events. For more information, see GitHub issue [#9086](https://github.com/pingcap/tiflow/issues/9086).
 
 This change primarily addresses the following issues:
 
@@ -35,11 +31,7 @@ In this example, the primary key `a` is updated from `1` to `2`. If the `UPDATE`
 
 ### Transactions containing multiple `UPDATE` changes
 
-<<<<<<< HEAD
-Starting from v6.5.4, for transactions containing multiple changes, if the primary key or non-null unique index value is modified in the update event, TiCDC splits the event into delete and insert events and ensures that all events follow the sequence of delete events preceding insert events. For more information, see GitHub issue [#9430](https://github.com/pingcap/tiflow/issues/9430).
-=======
-Starting from v6.5.4, v7.1.2, and v7.4.0, for transactions containing multiple changes, if the primary key or non-null unique index value is modified in the `UPDATE` event, TiCDC splits the event into `DELETE` and `INSERT` events and ensures that all events follow the sequence of `DELETE` events preceding `INSERT` events. For more information, see GitHub issue [#9430](https://github.com/pingcap/tiflow/issues/9430).
->>>>>>> b480789ed7 (ticdc: add description for cdc behaviour change (#17530))
+Starting from v6.5.4, for transactions containing multiple changes, if the primary key or non-null unique index value is modified in the `UPDATE` event, TiCDC splits the event into `DELETE` and `INSERT` events and ensures that all events follow the sequence of `DELETE` events preceding `INSERT` events. For more information, see GitHub issue [#9430](https://github.com/pingcap/tiflow/issues/9430).
 
 This change primarily addresses the potential issue of primary key or unique key conflicts when using the MySQL sink to directly write these two events to the downstream, leading to changefeed errors. When using the Kafka sink or other sinks, you might encounter the same error if the consumer writes messages to a relational database or performs similar operation.
 
