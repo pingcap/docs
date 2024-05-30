@@ -7,7 +7,7 @@ summary: Learn about compatibility and scenarios of IMPORT INTO and TiDB Lightni
 
 This document describes TiDB Lightning and `IMPORT INTO` compatibility with [log backup](/br/br-pitr-guide.md), [TiCDC](/ticdc/ticdc-overview.md), as well as some special usage scenarios.
 
-## IMPORT INTO vs. TiDB Lightning
+## `IMPORT INTO` vs. TiDB Lightning
 
 [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) currently integrates with the physical import mode of TiDB Lightning, but there are some differences. See [`IMPORT INTO` vs. TiDB Lightning](/tidb-lightning/import-into-vs-tidb-lightning.md) for details.
 
