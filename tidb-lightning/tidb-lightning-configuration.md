@@ -421,6 +421,7 @@ log-progress = "5m"
 # The default value is 60 seconds.
 # check-disk-quota = "60s"
 ```
+<<<<<<< HEAD
 
 ## Command line parameters
 
@@ -473,3 +474,5 @@ This tool can execute various actions given one of the following parameters:
 The *tablename* must either be a qualified table name in the form `` `db`.`tbl` `` (including the backquotes), or the keyword "all".
 
 Additionally, all parameters of `tidb-lightning` described in the section above are valid in `tidb-lightning-ctl`.
+=======
+>>>>>>> de3ea0741a (remove redundant lightning command line flags doc (#17678))
