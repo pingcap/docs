@@ -44,7 +44,7 @@ The DXF can only schedule up to 16 tasks (including [`ADD INDEX`](/sql-statement
 
 ## `ADD INDEX` limitation
 
-- Adding indexes on columns with the `TIMESTAMP` data type through the DXF is not supported, because it might lead to inconsistency between the index and the data.
+- Adding indexes on columns with the [`TIMESTAMP`](/data-type-date-and-time.md#timestamp-type) data type through the DXF is not supported, because it might lead to inconsistency between the index and the data.
 
 ## Prerequisites
 
