@@ -64,7 +64,18 @@ Currently, the `help_topic` is NULL.
 
 ## System tables related to cached tables
 
-- `table_cache_meta` stores the metadata of cached tables.
+- `table_cache_meta`: stores the metadata of cached tables.
+
+## System tables related to metadata locks
+
+* `tidb_mdl_view`: a view of metadata locks. You can use it to view information about the currently blocked DDL statements
+* `tidb_mdl_info`: used internally by TiDB to synchronize metadata locks across nodes
+
+## System tables related to DDL statements
+
+* `tidb_ddl_history`: the history records of DDL statements
+* `tidb_ddl_jobs`: the metadata of DDL statements that are currently being executed by TiDB
+* `tidb_ddl_reorg`: the metadata of physical DDL statements (such as adding indexes) that are currently being executed by TiDB
 
 ## TTL related system tables
 
