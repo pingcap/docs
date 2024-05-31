@@ -2413,7 +2413,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
-- This variable specifies whether to use the pipeline execution algorithm for window functions.
+- This variable specifies whether to use the pipeline execution algorithm for [window functions](/functions-and-operators/window-functions.md).
 
 ### tidb_enable_plan_cache_for_param_limit <span class="version-mark">New in v6.6.0</span>
 
@@ -2749,7 +2749,7 @@ Query OK, 0 rows affected (0.09 sec)
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
-- This variable is used to control whether to enable the support for window functions. Note that window functions may use reserved keywords. This might cause SQL statements that could be executed normally cannot be parsed after upgrading TiDB. In this case, you can set `tidb_enable_window_function` to `OFF`.
+- This variable is used to control whether to enable the support for [window functions](/functions-and-operators/window-functions.md). Note that window functions may use reserved keywords. This might cause SQL statements that could be executed normally cannot be parsed after upgrading TiDB. In this case, you can set `tidb_enable_window_function` to `OFF`.
 
 ### `tidb_enable_row_level_checksum` <span class="version-mark">New in v7.1.0</span>
 
@@ -6297,4 +6297,4 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
-- This variable controls whether to use the high precision mode when computing the window functions.
+- This variable controls whether to use the high precision mode when computing the [window functions](/functions-and-operators/window-functions.md).
