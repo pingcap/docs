@@ -12,6 +12,7 @@ import re
 import openpyxl
 import os
 import shutil
+import requests
 
 version = '6.5.3' # Specifies the target TiDB version
 release_note_excel = r'/Users/userid/Downloads/download_tirelease_tmp_patch_6.5.3_release_note_2023-06-06.xlsx' # Specifies the path of release note table with PR links and issue links
@@ -131,7 +132,8 @@ def update_pr_author_and_release_notes(excel_path):
         # If pr_author is ti-chi-bot or ti-srebot
         current_pr_author = row[pr_author_index]
         current_formated_rn= row[pr_formated_rn_index]
-        if current_pr_author in ['ti-chi-bot', 'ti-srebot']:
+        pr_response = requests.get(row[pr_link_index])
+        if (current_pr_author in ['ti-chi-bot', 'ti-srebot']) and (pr_response.status_code == 200):
            print ("Replacing the author info for row " + str(row_index) + ".")
            actual_pr_author = get_pr_info_from_github(row[pr_link_index], row[pr_title_index], current_pr_author) # Get the PR author according to the cherry-pick PR
            pr_author_cell = sheet.cell(row=row_index, column=pr_author_index+1, value = actual_pr_author)#Fill in the pr_author_cell
