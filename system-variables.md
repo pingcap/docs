@@ -2770,7 +2770,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 </CustomContent>
 
-- The [`TIDB_ROW_CHECKSUM()`](/functions-and-operators/tidb-functions.md#tidb_row_checksum) function can be used to get the checksum of a row.
+- You can use the [`TIDB_ROW_CHECKSUM()`](/functions-and-operators/tidb-functions.md#tidb_row_checksum) function to get the checksum of a row.
 
 ### tidb_enforce_mpp <span class="version-mark">New in v5.1</span>
 
