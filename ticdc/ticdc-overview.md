@@ -130,7 +130,7 @@ Update t1 set b = 4 where b = 2;
 TiCDC generates the following two SQL statements based on the data change information, and writes them to the downstream:
 
 ```sql
-INSERT INTO `test.t1` (`A`,`B`) VALUES (1,1),(2,2),(3,3);
+INSERT INTO `test.t1` (`A`,`B`) VALUES (1,2),(2,2),(3,3);
 UPDATE `test`.`t1`
 SET `A` = CASE
         WHEN `A` = 1 THEN 1
