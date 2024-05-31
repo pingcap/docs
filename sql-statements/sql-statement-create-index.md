@@ -138,11 +138,37 @@ You can drop an expression index in the same way as dropping an ordinary index:
 DROP INDEX idx1 ON t1;
 ```
 
-Expression index involves various kinds of expressions. To ensure correctness, only some fully tested functions are allowed for creating an expression index. This means that only these functions are allowed in expressions in a production environment. You can get these functions by querying the `tidb_allow_function_for_expression_index` variable. Currently, the allowed functions are as follows:
+Expression index involves various kinds of expressions. To ensure correctness, only some fully tested functions are allowed for creating an expression index. This means that only these functions are allowed in expressions in a production environment. You can get these functions by querying the [`tidb_allow_function_for_expression_index`](/system-variables.md#tidb_allow_function_for_expression_index-new-in-v520) variable. Currently, the allowed functions are as follows:
 
-```
-JSON_ARRAY, JSON_ARRAY_APPEND, JSON_ARRAY_INSERT, JSON_CONTAINS, JSON_CONTAINS_PATH, JSON_DEPTH, JSON_EXTRACT, JSON_INSERT, JSON_KEYS, JSON_LENGTH, JSON_MERGE_PATCH, JSON_MERGE_PRESERVE, JSON_OBJECT, JSON_PRETTY, JSON_QUOTE, JSON_REMOVE, JSON_REPLACE, JSON_SEARCH, JSON_SET, JSON_STORAGE_SIZE, JSON_TYPE, JSON_UNQUOTE, JSON_VALID, LOWER, MD5, REVERSE, TIDB_SHARD, UPPER, VITESS_HASH
-```
+- [`JSON_ARRAY_APPEND()`](/functions-and-operators/json-functions.md)
+- [`JSON_ARRAY_INSERT()`](/functions-and-operators/json-functions.md)
+- [`JSON_ARRAY()`](/functions-and-operators/json-functions.md)
+- [`JSON_CONTAINS_PATH()`](/functions-and-operators/json-functions.md)
+- [`JSON_CONTAINS()`](/functions-and-operators/json-functions.md)
+- [`JSON_DEPTH()`](/functions-and-operators/json-functions.md)
+- [`JSON_EXTRACT()`](/functions-and-operators/json-functions.md)
+- [`JSON_INSERT()`](/functions-and-operators/json-functions.md)
+- [`JSON_KEYS()`](/functions-and-operators/json-functions.md)
+- [`JSON_LENGTH()`](/functions-and-operators/json-functions.md)
+- [`JSON_MERGE_PATCH()`](/functions-and-operators/json-functions.md)
+- [`JSON_MERGE_PRESERVE()`](/functions-and-operators/json-functions.md)
+- [`JSON_OBJECT()`](/functions-and-operators/json-functions.md)
+- [`JSON_PRETTY()`](/functions-and-operators/json-functions.md)
+- [`JSON_QUOTE()`](/functions-and-operators/json-functions.md)
+- [`JSON_REMOVE()`](/functions-and-operators/json-functions.md)
+- [`JSON_REPLACE()`](/functions-and-operators/json-functions.md)
+- [`JSON_SEARCH()`](/functions-and-operators/json-functions.md)
+- [`JSON_SET()`](/functions-and-operators/json-functions.md)
+- [`JSON_STORAGE_SIZE()`](/functions-and-operators/json-functions.md)
+- [`JSON_TYPE()`](/functions-and-operators/json-functions.md)
+- [`JSON_UNQUOTE()`](/functions-and-operators/json-functions.md)
+- [`JSON_VALID()`](/functions-and-operators/json-functions.md)
+- [`LOWER()`](/functions-and-operators/string-functions.md#lower)
+- [`MD5()`](/functions-and-operators/encryption-and-compression-functions.md)
+- [`REVERSE()`](/functions-and-operators/string-functions.md#reverse)
+- [`TIDB_SHARD()`](/functions-and-operators/tidb-functions.md#tidb_shard)
+- [`UPPER()`](/functions-and-operators/string-functions.md#upper)
+- [`VITESS_HASH()`](/functions-and-operators/tidb-functions.md)
 
 For the functions that are not included in the above list, those functions are not fully tested and not recommended for a production environment, which can be seen as experimental. Other expressions such as operators, `CAST`, and `CASE WHEN` are also seen as experimental and not recommended for production.
 
