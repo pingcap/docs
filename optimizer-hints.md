@@ -973,7 +973,7 @@ mysql> show warnings;
 
 The root cause is that the optimizer has a limitation that it can't use `Projection` or `Selection` as probe side of `IndexJoin`. 
 
-In TiDB v7.0.0 or later versions, you can set `tidb_enable_inl_join_inner_multi_pattern` to `ON` to solve this problem:
+In TiDB v8.0.0 or later versions, you can set `tidb_enable_inl_join_inner_multi_pattern` to `ON` to solve this problem:
 
 ```sql
 mysql> set @@tidb_enable_inl_join_inner_multi_pattern=1;
