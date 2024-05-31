@@ -33,7 +33,7 @@ The [`validate_password.*`](/system-variables.md) variables affect the `VALIDATE
 
 ## Unsupported functions
 
-* `DES_DECRYPT()`, `DES_ENCRYPT()`, `OLD_PASSWORD()`, `ENCRYPT()`: these functions were deprecated in MySQL 5.7 and removed in 8.0.
+* `DES_DECRYPT()`, `DES_ENCRYPT()`, `OLD_PASSWORD()`, `PASSWORD()`, `ENCRYPT()`: these functions were deprecated in MySQL 5.7 and removed in 8.0.
 * Functions only available in MySQL Enterprise [Issue #2632](https://github.com/pingcap/tidb/issues/2632).
 
 ## MySQL compatibility
