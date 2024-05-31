@@ -13,7 +13,7 @@ TiDB supports most of the [encryption and compression functions](https://dev.mys
 | Name                                                                                                                                               | Description                                       |
 |:------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------|
 | [`MD5()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_md5)                                                             | Calculate MD5 checksum                            |
-| [`PASSWORD()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_password)                                | Calculate and return a password string            |
+| [`PASSWORD()`](https://dev.mysql.com/doc/refman/5.7/en/encryption-functions.html#function_password)                                | Calculate and return a password string            |
 | [`RANDOM_BYTES()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_random-bytes)                                           | Return a random byte vector                       |
 | [`SHA1(), SHA()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_sha1)                                                    | Calculate an SHA-1 160-bit checksum               |
 | [`SHA2()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_sha2)                                                           | Calculate an SHA-2 checksum                       |
