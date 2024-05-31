@@ -34,7 +34,7 @@ Except for `GROUP_CONCAT()` and `APPROX_PERCENTILE()`, TiDB supports all [`GROUP
 
 ## [`CUME_DIST()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_cume-dist)
 
-`CUME_DIST(num)` calculates the cumulative distance. Note that he window definition should use an `ORDER BY`, otherwise this will not return the expected values.
+`CUME_DIST()` calculates the cumulative distance. Note that he window definition should use an `ORDER BY`, otherwise this will not return the expected values.
 
 ```sql
 WITH RECURSIVE cte(n) AS (
@@ -225,7 +225,7 @@ ORDER BY
 
 ## [`LEAD()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_lead)
 
-The `LEAD([num [,default]])` function returns the value leading (preceding) in the window.
+The `LEAD(expr [, num [,default]])` function returns the value leading (preceding) in the window. It is leading by `num` values, by default `1`. And `default` is returned if there is no leading value, this is `NULL` by default.
 
 ```sql
 WITH RECURSIVE cte(n) AS (
