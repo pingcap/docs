@@ -108,7 +108,7 @@ SELECT /*+ NO_MERGE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 > **Note:**
 >
-> There are multiple reasons that might cause INL_JOIN not to take effect, please see [INL_JOIN does not take effect](#inl_join-hint-does-not-take-effect).
+> There are multiple reasons that might cause INL_JOIN not to take effect, please see [INL_JOIN does not take effect](#inl_join-hint-does-not-take-effect) for more details.
 
 The `INL_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the index nested loop join algorithm for the given table(s). This algorithm might consume less system resources and take shorter processing time in some scenarios and might produce an opposite result in other scenarios. If the result set is less than 10,000 rows after the outer table is filtered by the `WHERE` condition, it is recommended to use this hint. For example:
 
