@@ -138,13 +138,18 @@ The JSON to demonstrate this:
 
 More details can be found in [the IETF draft for JSONPath](https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html).
 
+## Validation functions
+
+| Function Name                     | Description |
+| --------------------------------- | ----------- |
+| [JSON_SCHEMA_VALID(schema,json_doc)](https://dev.mysql.com/doc/refman/8.0/en/json-validation-functions.html#function_json-schema-valid) | Validate a JSON document against a schema. |
+
 ## See also
 
 * [JSON Data Type](/data-type-json.md)
 
 ## Unsupported functions
 
-- `JSON_SCHEMA_VALID()`
 - `JSON_SCHEMA_VALIDATION_REPORT()`
 - `JSON_TABLE()`
 - `JSON_VALUE()`
