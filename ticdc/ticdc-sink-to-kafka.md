@@ -38,17 +38,17 @@ Sink URI is used to specify the connection information of the TiCDC target syste
 ```shell
 [scheme]://[host]:[port][/path]?[query_parameters]
 ```
+> **Tip:**
+>If there are multiple hosts or ports for the downstream Kafka, you can add multiple `[host]:[port]` in sink URI too. For example:
+>```bash
+>[scheme]://[host]:[port],[host]:[port],[host]:[port][/path]?[query_parameters]
+>```
 
-If there are multiple hosts or ports for the downstream Kafka, you can add multiple `[host]:[port]` in sink URI too. For example:
-
-```shell
-[scheme]://[host]:[port],[host]:[port],[host]:[port][/path]?[query_parameters]
-```
 
 Sample configuration:
 
 ```shell
---sink-uri="kafka://127.0.0.1:9092,127.0.0.2:9093,127.0.0.3:9094/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1"
+--sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1"
 ```
 
 The following are descriptions of sink URI parameters and values that can be configured for Kafka:
