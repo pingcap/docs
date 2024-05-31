@@ -64,7 +64,7 @@ Currently, the `help_topic` is NULL.
 
 ## System tables related to cached tables
 
-- `table_cache_meta`: stores the metadata of cached tables.
+- `table_cache_meta`: stores the metadata of cached tables
 
 ## System tables related to metadata locks
 
