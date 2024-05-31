@@ -39,11 +39,12 @@ Sink URI is used to specify the connection information of the TiCDC target syste
 [scheme]://[host]:[port][/path]?[query_parameters]
 ```
 > **Tip:**
->If there are multiple hosts or ports for the downstream Kafka, you can add multiple `[host]:[port]` in sink URI too. For example:
->```bash
->[scheme]://[host]:[port],[host]:[port],[host]:[port][/path]?[query_parameters]
->```
-
+> 
+> If there are multiple hosts or ports for the downstream Kafka, you can add multiple `[host]:[port]` in the sink URI. For example:
+>
+> ```bash
+> [scheme]://[host]:[port],[host]:[port],[host]:[port][/path]?[query_parameters]
+> ```
 
 Sample configuration:
 
