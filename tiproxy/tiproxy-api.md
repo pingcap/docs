@@ -11,7 +11,7 @@ summary: Learn how to use the TiProxy API to access its configuration, health st
 >
 > TiProxy API is specifically designed for debugging purposes and might not be fully compatible with future capabilities introduced in TiProxy. It's not recommended to include this tool in application or utility development to get information.
 
-The address for accessing the TiProxy API is `http://${host}:${port}`, where `host` and `port` are specified by the TiProxy configuration item [`api.addr`](/tiproxy/tiproxy-configuration.md#addr-1). For example:
+The address for accessing the TiProxy API is `http://${host}:${port}${path}`, where `${host}:${port}` is specified by the TiProxy configuration item [`api.addr`](/tiproxy/tiproxy-configuration.md#addr-1), and `${path}` is the specific API endpoint you want to access. For example:
 
 ```bash
 curl http://127.0.0.1:3080/api/admin/config/
@@ -39,7 +39,7 @@ curl "http://127.0.0.1:3080/api/admin/config/?format=json"
 
 ## Set TiProxy configuration
 
-This endpoint is used to modify the TiProxy configuration using the TOML format. Unspecified configuration items will remain unchanged, so you only need to specify the items that you want to modify.
+Currently, you can only use the TOML format to modify TiProxy configuration. Unspecified configuration items will remain unchanged, so you only need to specify the items that you want to modify.
 
 ### Request URI
 
