@@ -32,7 +32,7 @@ Except for `GROUP_CONCAT()` and `APPROX_PERCENTILE()`, TiDB supports all [`GROUP
 | [`RANK()`](#rank)| Returns the rank of the current row within the partition. The rank may be with gaps. |
 | [`ROW_NUMBER()`](#row_number)| Returns the number of the current row in the partition. |
 
-## CUME_DIST
+## [`CUME_DIST()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_cume-dist)
 
 `CUME_DIST(num)` calculates the cumulative distance. Note that he window definition should use an `ORDER BY`, otherwise this will not return the expected values.
 
@@ -66,7 +66,7 @@ FROM
 4 rows in set (0.00 sec)
 ```
 
-## DENSE_RANK
+## [`DENSE_RANK()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_dense-rank)
 
 The `DENSE_RANK()` function is similar to [`RANK()`](#rank) but won't leave any gaps in case of ties.
 
@@ -102,7 +102,7 @@ FROM (
 6 rows in set (0.00 sec)
 ```
 
-## FIRST_VALUE
+## [`FIRST_VALUE()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_first-value)
 
 The `FIRST_VALUE(expr)` returns the first value of a group.
 
@@ -140,7 +140,7 @@ ORDER BY
 4 rows in set (0.00 sec)
 ```
 
-## LAG
+## [`LAG()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_lag)
 
 The `LAG(expr [, num [, default]])` function returns the value that is lagging behind `num` values behind the the current value. If there is no current value then `default` is returned, which defaults to `NULL`.
 
@@ -180,7 +180,7 @@ FROM
 10 rows in set (0.01 sec)
 ```
 
-## LAST_VALUE
+## [`LAST_VALUE()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_last-value)
 
 The `LAST_VALUE()` function returns the last value in the window.
 
@@ -223,7 +223,7 @@ ORDER BY
 10 rows in set (0.00 sec)
 ```
 
-## LEAD
+## [`LEAD()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_lead)
 
 The `LEAD([num [,default]])` function returns the value leading (preceding) in the window.
 
@@ -264,7 +264,7 @@ FROM
 10 rows in set (0.00 sec)
 ```
 
-## NTH_VALUE
+## [`NTH_VALUE()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_nth-value)
 
 The `NTH_VALUE(expr, n)` function returns the `n`-th value of the window.
 
@@ -294,7 +294,7 @@ ORDER BY
     n;
 ```
 
-## NTILE
+## [`NTILE()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_ntile)
 
 The `NTILE(n)` function divides the window in `n` groups and returns the number of the group.
 
@@ -336,7 +336,7 @@ FROM
 10 rows in set (0.00 sec)
 ```
 
-## PERCENT_RANK
+## [`PERCENT_RANK()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_percent-rank)
 
 The `PERCENT_RANK()` function returns a number between 0 and 1 indicating the percentage of rows with a value less than the current window.
 
@@ -373,7 +373,7 @@ FROM (
 6 rows in set (0.00 sec)
 ```
 
-## RANK
+## [`RANK()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_rank)
 
 The `RANK()` function is similar to [`DENSE_RANK()`](#dense_rank) but will leave any gaps in case of ties.
 
@@ -410,7 +410,7 @@ FROM (
 6 rows in set (0.00 sec)
 ```
 
-## ROW_NUMBER
+## [`ROW_NUMBER()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_row-number)
 
 The `ROW_NUMBER()` returns the row number of the resultset.
 
