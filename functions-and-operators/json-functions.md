@@ -70,6 +70,12 @@ TiDB supports most of the [JSON functions](https://dev.mysql.com/doc/refman/8.0/
 | [JSON_ARRAYAGG(key)](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_json-arrayagg) | Provides an aggregation of keys. |
 | [JSON_OBJECTAGG(key, value)](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_json-objectagg) | Provides an aggregation of values for a given key. |
 
+## Validation functions
+
+| Function Name                     | Description |
+| --------------------------------- | ----------- |
+| [JSON_SCHEMA_VALID(schema,json_doc)](https://dev.mysql.com/doc/refman/8.0/en/json-validation-functions.html#function_json-schema-valid) | Validate a JSON document against a schema. |
+
 ## See also
 
 * [JSON Function Reference](https://dev.mysql.com/doc/refman/8.0/en/json-function-reference.html)
@@ -77,7 +83,6 @@ TiDB supports most of the [JSON functions](https://dev.mysql.com/doc/refman/8.0/
 
 ## Unsupported functions
 
-- `JSON_SCHEMA_VALID()`
 - `JSON_SCHEMA_VALIDATION_REPORT()`
 - `JSON_TABLE()`
 - `JSON_VALUE()`
