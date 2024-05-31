@@ -45,7 +45,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 
 + TiKV
 
-    - Enhance the slow store detection algorithm by improving its sensitivity and reducing the False-Positive Rate, especially in heavy read and write load scenarios [#15909](https://github.com/tikv/tikv/issues/15909) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Enhance the slow store detection algorithm by improving its sensitivity and reducing the false-positive rate, especially in intensive read and write load scenarios [#15909](https://github.com/tikv/tikv/issues/15909) @[LykxSassinator](https://github.com/LykxSassinator)
 
 + TiFlash
 
