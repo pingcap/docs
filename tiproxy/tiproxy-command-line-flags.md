@@ -24,7 +24,7 @@ This section introduces the syntax, options, and commands of the client program 
 
 > **Note:**
 >
-> TiProxy Control is specifically designed for debugging purposes and might not be fully compatible with future capabilities introduced in TiProxy. It's not recommended to include this tool in applications or utilities development to get information.
+> TiProxy Control is specifically designed for debugging purposes and might not be fully compatible with future capabilities introduced in TiProxy. It's not recommended to include this tool in application or utility development to get information.
 
 ### Syntax
 
@@ -87,9 +87,9 @@ tiproxyctl --curls 127.0.0.1:3080 config get
 
 #### `config set`
 
-The `tiproxyctl config set` command reads a TOML-formatted configuration from standard input and sets these configuration items to TiProxy. Unspecified configuration items will remain unchanged, so you only need to specify the items that you want to modify.
+The `tiproxyctl config set` command reads a TOML-formatted configuration file from standard input and sets these configuration items to TiProxy. Unspecified configuration items will remain unchanged, so you only need to specify the items that you want to modify.
 
-The following example sets `log.level` as `"warning"`, while leaving other configuration items unchanged.
+The following example sets `log.level` as `'warning'`, while leaving other configuration items unchanged.
 
 ```bash
 $ cat test.toml
@@ -107,9 +107,9 @@ The `tiproxyctl config get` command is used to get the current TiProxy configura
 
 #### `health`
 
-The `tiproxyctl health` command is used to get the health status of TiProxy and the checksum of the configuration. When TiProxy is running normally, it returns the checksum of the configuration. When TiProxy is shutting down, it returns an error.
+The `tiproxyctl health` command is used to get the health status of TiProxy and the checksum of the configuration. When TiProxy is running normally, it returns the checksum of the configuration. When TiProxy is shutting down or offline, it returns an error.
 
-The output is as follows:
+Example output:
 
 ```json
 {"config_checksum":3006078629}

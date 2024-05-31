@@ -9,7 +9,7 @@ summary: Learn how to use the TiProxy API to access its configuration, health st
 
 > **Note:**
 >
-> TiProxy API is specifically designed for debugging purposes and might not be fully compatible with future capabilities introduced in TiProxy. It's not recommended to include this tool in applications or utilities development to get information.
+> TiProxy API is specifically designed for debugging purposes and might not be fully compatible with future capabilities introduced in TiProxy. It's not recommended to include this tool in application or utility development to get information.
 
 The address for accessing the TiProxy API is `http://${host}:${port}`, where `host` and `port` are specified by the TiProxy configuration item [`api.addr`](/tiproxy/tiproxy-configuration.md#addr-1). For example:
 
@@ -47,7 +47,7 @@ This endpoint is used to modify the TiProxy configuration using the TOML format.
 
 ### Request body
 
-The TiProxy configuration should be provided in TOML format. For example:
+You need to provide the TiProxy configuration in TOML format. For example:
 
 ```toml
 [log]
@@ -56,7 +56,7 @@ level='warning'
 
 ### Example
 
-The following example sets `log.level` as `"warning"`, while leaving other configuration items unchanged.
+The following example sets `log.level` as `'warning'`, while leaving other configuration items unchanged.
 
 1. Get the current TiProxy configuration:
 
@@ -72,7 +72,7 @@ The following example sets `log.level` as `"warning"`, while leaving other confi
     level = 'info'
     ```
 
-2. Specify the value of `log.level` in the `test.toml` file and send a `PUT /api/admin/config/` request to update the value of `log.level`:
+2. Specify the value of `log.level` in the `test.toml` file, and then send a `PUT /api/admin/config/` request to update the value of `log.level`:
 
     ```shell
     $ cat test.toml
@@ -97,7 +97,7 @@ The following example sets `log.level` as `"warning"`, while leaving other confi
 
 ## Get TiProxy health status
 
-This endpoint is used to get the health status of TiProxy and the checksum of the configuration. When TiProxy is running normally, this endpoint returns the checksum of the configuration. When TiProxy is shutting down, it returns an error.
+This endpoint is used to get the health status of TiProxy and the checksum of the configuration. When TiProxy is running normally, this endpoint returns the checksum of the configuration. When TiProxy is shutting down or offline, it returns an error.
 
 ### Request URI
 
