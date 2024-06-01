@@ -206,7 +206,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `tidb_ttl_delete_batch_size` | No limitation | Read-only [^10] |
 | `tidb_ttl_delete_rate_limit` | No limitation | Read-only [^10] |
 | `tidb_ttl_delete_worker_count` | No limitation | Read-only [^10] |
-| `tidb_ttl_job_enable` | No limitation | Always enabled |
+| `tidb_ttl_job_enable` | No limitation | No limitation |
 | `tidb_ttl_job_schedule_window_end_time` | No limitation | Read-only [^10] |
 | `tidb_ttl_job_schedule_window_start_time` | No limitation | Read-only [^10] |
 | `tidb_ttl_running_tasks` | No limitation | Read-only [^10] |
