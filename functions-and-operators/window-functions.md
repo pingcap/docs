@@ -107,6 +107,7 @@ FROM (
 The `FIRST_VALUE(expr)` returns the first value of a group.
 
 In the following example we use two different window definitions:
+
 1. `PARTITION BY n MOD 2 ORDER BY n` resulting in two groups: `1, 3` and `2, 4`. So this returns either 1 or 2 as those are the first values of those groups.
 2. `PARTITION BY n <= 2 ORDER BY n` resulting in two groups: `1, 2` and `3, 4` So this returns either 1 or 3 depending on which group it is group.
 
