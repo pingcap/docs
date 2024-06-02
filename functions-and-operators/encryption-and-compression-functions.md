@@ -283,15 +283,137 @@ SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
 
 ### [`VALIDATE_PASSWORD_STRENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_validate-password-strength)
 
-## Related system variables
+The ``VALIDATE_PASSWORD_STRENGTH(str)` function is used as part of [password management](/password-management.md) to calculate the strength of a password. The strength that is returned is a number between 0 and 100.
 
-The [`block_encryption_mode`](/system-variables.md#block_encryption_mode) variable sets the encryption mode that is used for [`AES_ENCRYPT()`](#aes_encrypt) and [`AES_DECRYPT()`](#aes_decrypt).
+The [`validate_password.*`](/system-variables.md) variables affect the [`VALIDATE_PASSWORD_STRENGTH()`](#validate_password_strength) function
 
-The [`validate_password.*`](/system-variables.md) variables affect the [`VALIDATE_PASSWORD_STRENGTH()`](#validate_password_strength) function.
+Examples:
+
+We first set the [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650) variable to `ON`.
+
+```sql
+SET GLOBAL validate_password.enable=ON;
+```
+
+```
+Query OK, 0 rows affected (0.01 sec)
+```
+
+Then we inspect the other system variables that are related to password validation.
+
+```sql
+SHOW VARIABLES LIKE 'validate_password.%';
+```
+
+```
++--------------------------------------+--------+
+| Variable_name                        | Value  |
++--------------------------------------+--------+
+| validate_password.check_user_name    | ON     |
+| validate_password.dictionary         |        |
+| validate_password.enable             | ON     |
+| validate_password.length             | 8      |
+| validate_password.mixed_case_count   | 1      |
+| validate_password.number_count       | 1      |
+| validate_password.policy             | MEDIUM |
+| validate_password.special_char_count | 1      |
++--------------------------------------+--------+
+8 rows in set (0.01 sec)
+```
+
+We first check the password strength of an empty string, which returns 0.
+
+```sql
+SELECT VALIDATE_PASSWORD_STRENGTH('');
+```
+
+```
++--------------------------------+
+| VALIDATE_PASSWORD_STRENGTH('') |
++--------------------------------+
+|                              0 |
++--------------------------------+
+1 row in set (0.00 sec)
+```
+
+Then we check the password strength of an short string, which returns 25.
+
+```sql
+SELECT VALIDATE_PASSWORD_STRENGTH('abcdef');
+```
+
+```
++--------------------------------------+
+| VALIDATE_PASSWORD_STRENGTH('abcdef') |
++--------------------------------------+
+|                                   25 |
++--------------------------------------+
+1 row in set (0.00 sec)
+```
+
+Then we check the password strength of an longer string, which returns 50. This is now more characters than we have configured with [`validate_password.length`](/system-variables.md#validate_passwordlength-new-in-v650).
+
+```sql
+SELECT VALIDATE_PASSWORD_STRENGTH('abcdefghi');
+```
+
+```
++-----------------------------------------+
+| VALIDATE_PASSWORD_STRENGTH('abcdefghi') |
++-----------------------------------------+
+|                                      50 |
++-----------------------------------------+
+1 row in set (0.00 sec)
+```
+
+Now we add an upper-case character. This still returns 50.
+
+```sql
+SELECT VALIDATE_PASSWORD_STRENGTH('Abcdefghi');
+```
+
+```
++-----------------------------------------+
+| VALIDATE_PASSWORD_STRENGTH('Abcdefghi') |
++-----------------------------------------+
+|                                      50 |
++-----------------------------------------+
+1 row in set (0.01 sec)
+```
+
+Now we add numbers. This still returns 50.
+
+```sql
+SELECT VALIDATE_PASSWORD_STRENGTH('Abcdefghi123');
+```
+
+```
++--------------------------------------------+
+| VALIDATE_PASSWORD_STRENGTH('Abcdefghi123') |
++--------------------------------------------+
+|                                         50 |
++--------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+Now we add special characters and we finally get to 100, which means this is a strong password.
+
+```sql
+SELECT VALIDATE_PASSWORD_STRENGTH('Abcdefghi123%$#');
+```
+
+```
++-----------------------------------------------+
+| VALIDATE_PASSWORD_STRENGTH('Abcdefghi123%$#') |
++-----------------------------------------------+
+|                                           100 |
++-----------------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ## Unsupported functions
 
-* Functions only available in MySQL Enterprise [Issue #2632](https://github.com/pingcap/tidb/issues/2632).
+* TiDB does not support the functions only available in MySQL Enterprise [Issue #2632](https://github.com/pingcap/tidb/issues/2632).
 
 ## MySQL compatibility
 
