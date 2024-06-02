@@ -44,6 +44,7 @@ SELECT NEXTVAL(s1);
 +-------------+
 1 row in set (0.00 sec)
 ```
+
 ## `NEXT VALUE FOR`
 
 An alias for [`NEXTVAL()`](#nextval)
@@ -147,7 +148,6 @@ SELECT LASTVAL(s1);
 +-------------+
 1 row in set (0.00 sec)
 ```
-
 
 ## MySQL compatibility
 
