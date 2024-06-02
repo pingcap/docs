@@ -201,6 +201,7 @@ If the argument is set to `NULL` then `COMPRESS()` returns `NULL`.
 If the argument has a length of 0 then `COMPRESS()` returns a length of 0.
 
 The returned value of any argument of a non-zero length argument consists of:
+
 - bytes 0 to 4: the uncompressed length
 - bytes 4 to end: the zlib compressed data
 
@@ -283,7 +284,17 @@ SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
 
 ### [`VALIDATE_PASSWORD_STRENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_validate-password-strength)
 
+<CustomContent platform="tidb">
+
 The ``VALIDATE_PASSWORD_STRENGTH(str)` function is used as part of [password management](/password-management.md) to calculate the strength of a password. The strength that is returned is a number between 0 and 100.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+The ``VALIDATE_PASSWORD_STRENGTH(str)` function is used as part of password management to calculate the strength of a password. The strength that is returned is a number between 0 and 100.
+
+</CustomContent>
 
 The [`validate_password.*`](/system-variables.md) variables affect the [`VALIDATE_PASSWORD_STRENGTH()`](#validate_password_strength) function
 
@@ -420,4 +431,3 @@ SELECT VALIDATE_PASSWORD_STRENGTH('Abcdefghi123%$#');
 * TiDB does not support the `STATEMENT_DIGEST()` and `STATEMENT_DIGEST_TEXT()` functions.
 * TiDB does not support the KDF, salt and iterations arguments for [`AES_ENCRYPT()`](#aes_encrypt) and [`AES_DECRYPT`](#aes_decrypt) that MySQL added in MySQL 8.0.30.
 * MySQL does not implement the [`SM3()`](#sm3) function.
-
