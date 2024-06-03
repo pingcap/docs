@@ -339,7 +339,6 @@ The `sink` parameters are described as follows:
 | `only_output_updated_columns` | `BOOLEAN` type. For MQ sinks using the `canal-json` or `open-protocol` protocol, you can specify whether only output the modified columns. The default value is `false`. (Optional) |
 | `cloud_storage_config` | The storage sink configuration. (Optional) |
 | `open`                        | The Open Protocol configuration. (Optional, introduced in v7.5.2)                                                                             |
-| `debezium`                    | The Debezium Protocol configuration. (Optional, introduced in v7.5.2)                                                                             |
 
 `sink.column_selectors` is an array. The parameters are described as follows:
 
@@ -389,12 +388,6 @@ The `sink.csv` parameters are described as follows:
 | Parameter name     | Description                                                                                                                                                                |
 |:-------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `output_old_value` | `BOOLEAN` type. It controls whether to output the value before the row data changes. The default value is `true`. When it is disabled, the UPDATE event does not output the "p" field. |
-
-`sink.debezium` parameters are described as follows:
-
-| Parameter name     | Description                                                                                                                                                                   |
-|:-------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `output_old_value` | `BOOLEAN` type. It controls whether to output the value before the row data changes. The default value is true. When it is disabled, the UPDATE event does not output the "before" field. |
 
 ### Example
 
