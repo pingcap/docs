@@ -977,7 +977,7 @@ mysql> show warnings;
 1 row in set (0.00 sec)
 ```
 
-The root cause is that the optimizer has a limitation that it can't use `Projection` or `Selection` as probe side of `IndexJoin`. 
+As you can see from the preceding example, the `INL_JOIN` hint does not take effect. This is due to a limitation of the optimizer that prevents using the `Projection` or `Selection` operator as the probe side of `IndexJoin`.
 
 In TiDB v8.0.0 or later versions, you can set `tidb_enable_inl_join_inner_multi_pattern` to `ON` to solve this problem:
 
