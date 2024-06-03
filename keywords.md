@@ -8,11 +8,9 @@ aliases: ['/docs/dev/keywords-and-reserved-words/','/docs/dev/reference/sql/lang
 
 This article introduces the keywords in TiDB, the differences between reserved words and non-reserved words and summarizes all keywords for the query.
 
-Keywords are words that have special meanings in SQL statements, such as `SELECT`, `UPDATE`, and `DELETE`. Some of them can be used as identifiers directly, which are called **non-reserved keywords**. Some of them require special treatment before being used as identifiers, which are called **reserved keywords**. However, there are special non-reserved keywords that might still require special treatment. It is recommended that you treat them as reserved keywords.
+Keywords are words that have special meanings in SQL statements, such as [`SELECT`](/sql-statements/sql-statement-select.md), [`UPDATE`](/sql-statements/sql-statement-update.md), and [`DELETE`](/sql-statements/sql-statement-delete.md). Some of them can be used as identifiers directly, which are called **non-reserved keywords**. Some of them require special treatment before being used as identifiers, which are called **reserved keywords**. However, there are special non-reserved keywords that might still require special treatment. It is recommended that you treat them as reserved keywords.
 
 To use the reserved keywords as identifiers, you must enclose them in backticks `` ` ``:
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE select (a INT);
@@ -21,8 +19,6 @@ CREATE TABLE select (a INT);
 ```
 ERROR 1105 (HY000): line 0 column 19 near " (a INT)" (total length 27)
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE `select` (a INT);
@@ -34,8 +30,6 @@ Query OK, 0 rows affected (0.09 sec)
 
 The non-reserved keywords do not require backticks, such as `BEGIN` and `END`, which can be successfully used as identifiers in the following statement:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE TABLE `select` (BEGIN int, END int);
 ```
@@ -45,8 +39,6 @@ Query OK, 0 rows affected (0.09 sec)
 ```
 
 In the special case, the reserved keywords do not need backticks if they are used with the `.` delimiter:
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE test.select (BEGIN int, END int);

@@ -8,7 +8,7 @@ aliases: ['/docs/dev/functions-and-operators/window-functions/','/docs/dev/refer
 
 The usage of window functions in TiDB is similar to that in MySQL 8.0. For details, see [MySQL Window Functions](https://dev.mysql.com/doc/refman/8.0/en/window-functions.html).
 
-Because window functions reserve additional words in the parser, TiDB provides an option to disable window functions. If you receive errors parsing SQL statements after upgrading, try setting [`tidb_enable_window_function=0`](/system-variables.md#tidb_enable_window_function).
+Because window functions reserve additional [keywords](/keywords.md) in the parser, TiDB provides an option to disable window functions. If you receive errors parsing SQL statements after upgrading, try setting [`tidb_enable_window_function=0`](/system-variables.md#tidb_enable_window_function).
 
 The pipeline execution algorithm for window functions can be disabled with the [`tidb_enable_pipelined_window_function`](/system-variables.md#tidb_enable_pipelined_window_function) system variable.
 
