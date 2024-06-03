@@ -295,6 +295,24 @@ ORDER BY
     n;
 ```
 
+```
++------+-------+--------+-------+------+
+| n    | First | Second | Third | Last |
++------+-------+--------+-------+------+
+|    1 |     1 |      2 |     3 |    5 |
+|    2 |     1 |      2 |     3 |    5 |
+|    3 |     1 |      2 |     3 |    5 |
+|    4 |     1 |      2 |     3 |    5 |
+|    5 |     1 |      2 |     3 |    5 |
+|    6 |     6 |      7 |     8 |   10 |
+|    7 |     6 |      7 |     8 |   10 |
+|    8 |     6 |      7 |     8 |   10 |
+|    9 |     6 |      7 |     8 |   10 |
+|   10 |     6 |      7 |     8 |   10 |
++------+-------+--------+-------+------+
+10 rows in set (0.00 sec)
+```
+
 ## [`NTILE()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_ntile)
 
 The `NTILE(n)` function divides the window in `n` groups and returns the number of the group.
@@ -313,28 +331,29 @@ WITH RECURSIVE cte(n) AS (
 )
 SELECT
     n,
-    NTILE(5) OVER (ORDER BY n),
-    NTILE(2) OVER (ORDER BY n)
+    NTILE(5) OVER (),
+    NTILE(2) OVER ()
 FROM
     cte;
 ```
 
 ```
-+------+----------------------------+----------------------------+
-| n    | NTILE(5) OVER (ORDER BY n) | NTILE(2) OVER (ORDER BY n) |
-+------+----------------------------+----------------------------+
-|    1 |                          1 |                          1 |
-|    2 |                          1 |                          1 |
-|    3 |                          2 |                          1 |
-|    4 |                          2 |                          1 |
-|    5 |                          3 |                          1 |
-|    6 |                          3 |                          2 |
-|    7 |                          4 |                          2 |
-|    8 |                          4 |                          2 |
-|    9 |                          5 |                          2 |
-|   10 |                          5 |                          2 |
-+------+----------------------------+----------------------------+
++------+------------------+------------------+
+| n    | NTILE(5) OVER () | NTILE(2) OVER () |
++------+------------------+------------------+
+|    1 |                1 |                1 |
+|    2 |                1 |                1 |
+|    3 |                2 |                1 |
+|    4 |                2 |                1 |
+|    5 |                3 |                1 |
+|    6 |                3 |                2 |
+|    7 |                4 |                2 |
+|    8 |                4 |                2 |
+|    9 |                5 |                2 |
+|   10 |                5 |                2 |
++------+------------------+------------------+
 10 rows in set (0.00 sec)
+
 ```
 
 ## [`PERCENT_RANK()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_percent-rank)
