@@ -938,7 +938,9 @@ In this case, you need to place the hint directly after the `SELECT` keyword. Fo
 
 #### `INL_JOIN` hint does not take effect when built-in functions are used on columns for joining tables
 
-In some cases, if you use functions on columns of join tables, the optimizer might not be able to choose `IndexJoin` and the `INL_JOIN` can't take effect:
+In some cases, if you use a built-in function on a column that joins tables, the optimizer might fail to choose the `IndexJoin` plan, resulting in the `INL_JOIN` hint not taking effect either.
+
+For example, the following query uses the built-in function `substr` on the column `tname` that joins tables:
 
 ```sql
 CREATE TABLE t1 (id varchar(10) primary key, tname varchar(10));
