@@ -121,9 +121,6 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `mysql` | `gc_delete_range_done` | Not supported [^4] | Not supported [^4] |
 | `mysql` | `opt_rule_blacklist` | Not supported [^4] | Not supported [^4] |
 | `mysql` | `tidb` | Not supported [^4] | Not supported [^4] |
-| `mysql` | `tidb_ttl_job_history` | Supported | Supported |
-| `mysql` | `tidb_ttl_table_status` | Supported | Supported |
-| `mysql` | `tidb_ttl_task` | Supported | Supported |
 
 ## System variables
 
@@ -206,7 +203,6 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `tidb_ttl_delete_batch_size` | No limitation | Read-only [^10] |
 | `tidb_ttl_delete_rate_limit` | No limitation | Read-only [^10] |
 | `tidb_ttl_delete_worker_count` | No limitation | Read-only [^10] |
-| `tidb_ttl_job_enable` | No limitation | No limitation |
 | `tidb_ttl_job_schedule_window_end_time` | No limitation | Read-only [^10] |
 | `tidb_ttl_job_schedule_window_start_time` | No limitation | Read-only [^10] |
 | `tidb_ttl_running_tasks` | No limitation | Read-only [^10] |
