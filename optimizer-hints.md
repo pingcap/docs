@@ -857,7 +857,6 @@ EXPLAIN SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id=t2.id and SUBST
 The execution plan is as follows:
 
 ```sql
-mysql> explain SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id=t2.id and substr(t1.tname,1,2)=substr(t2.tname,1,2);
 +------------------------------+----------+-----------+---------------+-----------------------------------------------------------------------+
 | id                           | estRows  | task      | access object | operator info                                                         |
 +------------------------------+----------+-----------+---------------+-----------------------------------------------------------------------+
