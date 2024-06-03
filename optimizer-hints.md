@@ -936,7 +936,7 @@ In this case, you need to place the hint directly after the `SELECT` keyword. Fo
 
 ### `INL_JOIN` hint does not take effect
 
-#### INL_JOIN hint does not take effect due to using functions on join tables
+#### `INL_JOIN` hint does not take effect when built-in functions are used on columns for joining tables
 
 In some cases, if you use functions on columns of join tables, the optimizer might not be able to choose `IndexJoin` and the `INL_JOIN` can't take effect:
 
