@@ -934,7 +934,7 @@ The warning is as follows:
 
 In this case, you need to place the hint directly after the `SELECT` keyword. For more details, see the [Syntax](#syntax) section.
 
-### INL_JOIN hint does not take effect
+### `INL_JOIN` hint does not take effect
 
 #### INL_JOIN hint does not take effect due to using functions on join tables
 
