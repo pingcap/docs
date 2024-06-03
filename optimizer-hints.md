@@ -849,7 +849,7 @@ In some cases, if you use functions on columns of join tables, the optimizer mig
 ```sql
 CREATE TABLE t1 (id varchar(10) primary key, tname varchar(10));
 CREATE TABLE t2 (id varchar(10) primary key, tname varchar(10));
-EXPLAIN SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id=t2.id and substr(t1.tname,1,2)=substr(t2.tname,1,2);
+EXPLAIN SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id=t2.id and SUBSTR(t1.tname,1,2)=SUBSTR(t2.tname,1,2);
 ```
 
 The above case uses function `substr` on the column `tname` of join tables, and its execution plan is as follows:
