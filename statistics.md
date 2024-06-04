@@ -123,7 +123,7 @@ Before v5.3.0, TiDB uses the reservoir sampling method to collect statistics. Si
 >
 > The current sampling rate is calculated based on an adaptive algorithm. When you can observe the number of rows in a table using [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md), you can use this number of rows to calculate the sampling rate corresponding to 100,000 rows. If you cannot observe this number, you can use the `TABLE_KEYS` column in the [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md) table as another reference to calculate the sampling rate.
 >
-> Normally, `STATS_META` is more credible than `TABLE_KEYS`. However, after importing data through the methods like [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md), the result of `STATS_META` is `0`. To handle this situation, you can use `TABLE_KEYS` to calculate the sampling rate when the result of `STATS_META` is much smaller than the result of `TABLE_KEYS`.
+> Normally, `STATS_META` is more credible than `TABLE_KEYS`. However, after importing data through the methods like TiDB Lightning physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md), the result of `STATS_META` is `0`. To handle this situation, you can use `TABLE_KEYS` to calculate the sampling rate when the result of `STATS_META` is much smaller than the result of `TABLE_KEYS`.
 
 The following syntax collects statistics for some columns in the `TableName` table:
 
@@ -137,13 +137,9 @@ This syntax collects statistics on the specified columns and indexes, as well as
 
 > **Note:**
 >
-<<<<<<< HEAD
 > + The syntax above takes effect only when `tidb_analyze_version = 2`.
 > + In the syntax above, `ColumnNameList` cannot be empty.
 > + The syntax above collects the full statistics of a table. For example, after collecting the statistics of column a and column b, to further collect the statistics of column c, you need to specify all three columns in the statement `ANALYZE table t columns a, b, c` rather than specifying only the additional column c like `ANALYZE TABLE t COLUMNS c`.
-=======
-> Normally, `STATS_META` is more credible than `APPROXIMATE_KEYS`. However, after importing data through the methods like [TiDB Lightning physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md), the result of `STATS_META` is `0`. To handle this situation, you can use `APPROXIMATE_KEYS` to calculate the sampling rate when the result of `STATS_META` is much smaller than the result of `APPROXIMATE_KEYS`.
->>>>>>> 56d4bf4033 (statistics: update the note for sampling rate (#17744))
 
 + To collect statistics of the index columns on all `IndexNameList`s in `TableName`:
 
