@@ -9,7 +9,8 @@ This document describes how to create a recovery group to protect your databases
 
 ## Prerequisites
 
-A recovery group replicates your databases to another cluster to protect your databases from regional disasters. To create a recovery group, you need to have two TiDB Cloud Dedicated clusters. One cluster hosts the primary databases, and a second cluster hosts the replicas of the primary databases. If you have not done so already, follow the steps in [Create a TiDB Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md) to create the necessary clusters.
+- A recovery group replicates your databases to another cluster to protect your databases from regional disasters. Before creating a recovery group, you need to have two TiDB Cloud Dedicated clusters. One cluster hosts the primary databases, and a second cluster hosts the replicas of the primary databases. If you have not done so already, follow the steps in [Create a TiDB Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md) to create the necessary clusters.
+- To create a recovery group, you must be in the `Organization Owner` role of your organization or the `Project Owner` role of the target project.
 
 > **Note**
 >
