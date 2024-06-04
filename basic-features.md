@@ -169,7 +169,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 ## Statistics
 
 | Statistics | 8.0 | 7.6 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [CMSketch](/statistics.md) | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Y | Y | Y |Y |
 | [Histograms](/statistics.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Extended statistics](/extended-statistics.md) | E | E | E | E | E | E | E | E | E | E | E | N |
