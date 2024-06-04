@@ -432,7 +432,7 @@ FROM (
 
 ## [`ROW_NUMBER()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_row-number)
 
-The `ROW_NUMBER()` returns the row number of the resultset.
+The `ROW_NUMBER()` returns the row number of the result set.
 
 ```sql
 WITH RECURSIVE cte(n) AS (
