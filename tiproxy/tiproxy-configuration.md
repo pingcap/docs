@@ -90,7 +90,7 @@ Configurations for HTTP gateway.
 
 #### `addr`
 
-+ Default value: `0.0.0.0:3090`
++ Default value: `0.0.0.0:3080`
 + Support hot-reload: no
 + API gateway address. You can specify `ip:port`.
 
