@@ -16,7 +16,11 @@ For critical alerts, you need to pay close attention to abnormal monitoring metr
 
 - Alert rule:
 
+<<<<<<< HEAD
     `(time() - ticdc_processor_checkpoint_ts / 1000) > 600`
+=======
+    `ticdc_owner_checkpoint_ts_lag > 600`
+>>>>>>> 88108551c4 (Fix ticdc alert rules (#17691))
 
 - Description:
 
@@ -30,7 +34,11 @@ For critical alerts, you need to pay close attention to abnormal monitoring metr
 
 - Alert rule:
 
+<<<<<<< HEAD
     `(time() - ticdc_processor_resolved_ts / 1000) > 300`
+=======
+    `ticdc_owner_resolved_ts_lag > 300`
+>>>>>>> 88108551c4 (Fix ticdc alert rules (#17691))
 
 - Description:
 
