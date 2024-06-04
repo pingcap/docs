@@ -10,8 +10,11 @@ TiDB supports most of the [encryption and compression functions](https://dev.mys
 
 ## Supported functions
 
-| Name                                                                                                                                               | Description                                       |
-|:------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------|
+| Name                                                          | Description                                       |
+|:--------------------------------------------------------------|:--------------------------------------------------|
+| [`AES_DECRYPT()`](#aes_decrypt)                               | Decrypt using AES                                 |
+| [`AES_ENCRYPT()`](#aes_encrypt)                               | Encrypt using AES                                 |
+| [`COMPRESS()`](#compress)                                     | Compress and return result as a binary string     |
 | [`MD5()`](#md5)                                               | Calculate MD5 checksum                            |
 | [`PASSWORD()`](#password)                                     | Calculate and return a password string            |
 | [`RANDOM_BYTES()`](#random_bytes)                             | Return a random byte vector                       |
@@ -19,12 +22,9 @@ TiDB supports most of the [encryption and compression functions](https://dev.mys
 | [`SHA1()`](#sha1)                                             | Calculate an SHA-1 160-bit checksum               |
 | [`SHA2()`](#sha2)                                             | Calculate an SHA-2 checksum                       |
 | [`SM3()`](#sm3)                                               | Calculate an SM3 checksum                         |
-| [`AES_DECRYPT()`](#aes_decrypt)                               | Decrypt using AES                                 |
-| [`AES_ENCRYPT()`](#aes_encrypt)                               | Encrypt using AES                                 |
-| [`COMPRESS()`](#compress)                                     | Compress and return result as a binary string      |
 | [`UNCOMPRESS()`](#uncompress)                                 | Uncompress a compressed string                    |
 | [`UNCOMPRESSED_LENGTH()`](#uncompressed_length)               | Return the length of a string before compression  |
-| [`VALIDATE_PASSWORD_STRENGTH()`](#validate_password_strength) | Validate the password strength |
+| [`VALIDATE_PASSWORD_STRENGTH()`](#validate_password_strength) | Validate the password strength                    |
 
 ### [`MD5()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_md5)
 
