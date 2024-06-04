@@ -29,7 +29,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 
 + TiKV <!--tw@qiancai 2 条-->
 
-    - Adjust the log level of coprocessors to reduce unnecessary logs of the cluster [#15881](https://github.com/tikv/tikv/issues/15881) @[cfzjywxk](https://github.com/cfzjywxk)
+    - Adjust the log level of coprocessor errors from `warn` to `debug` to reduce unnecessary logs of the cluster [#15881](https://github.com/tikv/tikv/issues/15881) @[cfzjywxk](https://github.com/cfzjywxk)
     - Add monitoring metrics for the queue time for processing CDC events to facilitate troubleshooting downstream CDC event latency issues [#16282](https://github.com/tikv/tikv/issues/16282) @[hicqu](https://github.com/hicqu)
     - (dup): release-6.5.9.md > 改进提升> TiKV - 在 raftstore 线程中避免进行快照文件的 IO 操作，提高 TiKV 稳定性 [#16564](https://github.com/tikv/tikv/issues/16564) @[Connor1996](https://github.com/Connor1996)
     - (dup): release-6.5.9.md > 改进提升> TiKV - 增加 peer 和 store 消息的 slow log [#16600](https://github.com/tikv/tikv/issues/16600) @[Connor1996](https://github.com/Connor1996)
