@@ -226,7 +226,7 @@ ORDER BY
 
 ## [`LEAD()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_lead)
 
-The `LEAD(expr [, num [,default]])` function returns the value leading (preceding) in the window. It is leading by `num` values, by default `1`. And `default` is returned if there is no leading value, this is `NULL` by default.
+The `LEAD(expr [, num [,default]])` function returns the value leading (preceding) in the window. It is leading by `num` values, by default `1`. And `default` is returned if there is no leading value. It is `NULL` by default.
 
 ```sql
 WITH RECURSIVE cte(n) AS (
