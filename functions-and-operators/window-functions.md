@@ -18,19 +18,19 @@ The window functions [listed here](/tiflash/tiflash-supported-pushdown-calculati
 
 Except for `GROUP_CONCAT()` and `APPROX_PERCENTILE()`, TiDB supports all [`GROUP BY` aggregate functions](/functions-and-operators/aggregate-group-by-functions.md). In addition, TiDB supports the following window functions:
 
-| Function name | Feature description |
-| :-------------- | :------------------------------------- |
-| [`CUME_DIST()`](#cume_dist) | Returns the cumulative distribution of a value within a group of values. |
-| [`DENSE_RANK()`](#dense_rank) | Returns the rank of the current row within the partition, and the rank is without gaps. |
-| [`FIRST_VALUE()`](#first_value) | Returns the expression value of the first row in the current window. |
-| [`LAG()`](#lag) | Returns the expression value from the row that precedes the current row by N rows within the partition. |
-| [`LAST_VALUE()`](#last_value) | Returns the expression value of the last row in the current window. |
-| [`LEAD()`](#lead) | Returns the expression value from the row that follows the current row by N rows within the partition. |
-| [`NTH_VALUE()`](#nth_value) | Returns the expression value from the N-th row of the current window. |
-| [`NTILE()`](#ntile)| Divides a partition into N buckets, assigns the bucket number to each row in the partition, and returns the bucket number of the current row within the partition. |
-| [`PERCENT_RANK()`](#percent_rank)| Returns the percentage of partition values that are less than the value in the current row. |
-| [`RANK()`](#rank)| Returns the rank of the current row within the partition. The rank may be with gaps. |
-| [`ROW_NUMBER()`](#row_number)| Returns the number of the current row in the partition. |
+| Function name                     | Feature description |
+| :-------------------------------- | :------------------------------------- |
+| [`CUME_DIST()`](#cume_dist)       | Returns the cumulative distribution of a value within a group of values. |
+| [`DENSE_RANK()`](#dense_rank)     | Returns the rank of the current row within the partition, and the rank is without gaps. |
+| [`FIRST_VALUE()`](#first_value)   | Returns the expression value of the first row in the current window. |
+| [`LAG()`](#lag)                   | Returns the expression value from the row that precedes the current row by N rows within the partition. |
+| [`LAST_VALUE()`](#last_value)     | Returns the expression value of the last row in the current window. |
+| [`LEAD()`](#lead)                 | Returns the expression value from the row that follows the current row by N rows within the partition. |
+| [`NTH_VALUE()`](#nth_value)       | Returns the expression value from the N-th row of the current window. |
+| [`NTILE()`](#ntile)               | Divides a partition into N buckets, assigns the bucket number to each row in the partition, and returns the bucket number of the current row within the partition. |
+| [`PERCENT_RANK()`](#percent_rank) | Returns the percentage of partition values that are less than the value in the current row. |
+| [`RANK()`](#rank)                 | Returns the rank of the current row within the partition. The rank may be with gaps. |
+| [`ROW_NUMBER()`](#row_number)     | Returns the number of the current row in the partition. |
 
 ## [`CUME_DIST()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_cume-dist)
 
@@ -143,7 +143,7 @@ ORDER BY
 
 ## [`LAG()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_lag)
 
-The `LAG(expr [, num [, default]])` function returns the value that is lagging behind `num` values behind the the current value. If there is no current value then `default` is returned, which defaults to `NULL`.
+The `LAG(expr [, num [, default]])` function returns the value that is lagging `num` values behind the the current value. If there is no current value then `default` is returned, which defaults to `NULL`.
 
 ```sql
 WITH RECURSIVE cte(n) AS (
