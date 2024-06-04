@@ -137,9 +137,13 @@ This syntax collects statistics on the specified columns and indexes, as well as
 
 > **Note:**
 >
+<<<<<<< HEAD
 > + The syntax above takes effect only when `tidb_analyze_version = 2`.
 > + In the syntax above, `ColumnNameList` cannot be empty.
 > + The syntax above collects the full statistics of a table. For example, after collecting the statistics of column a and column b, to further collect the statistics of column c, you need to specify all three columns in the statement `ANALYZE table t columns a, b, c` rather than specifying only the additional column c like `ANALYZE TABLE t COLUMNS c`.
+=======
+> Normally, `STATS_META` is more credible than `APPROXIMATE_KEYS`. However, after importing data through the methods like [TiDB Lightning physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md), the result of `STATS_META` is `0`. To handle this situation, you can use `APPROXIMATE_KEYS` to calculate the sampling rate when the result of `STATS_META` is much smaller than the result of `APPROXIMATE_KEYS`.
+>>>>>>> 56d4bf4033 (statistics: update the note for sampling rate (#17744))
 
 + To collect statistics of the index columns on all `IndexNameList`s in `TableName`:
 
