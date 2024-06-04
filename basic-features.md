@@ -121,7 +121,6 @@ This document lists the features supported in each TiDB version. Note that suppo
 
 ## Statistics
 
-<<<<<<< HEAD
 | Statistics                                               | 6.1 | 6.0 | 5.4          |   5.3    |   5.2    |   5.1   |   5.0    |   4.0    |
 | ------------------------------------------------------------ | :--: | :--: | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
 | [CMSketch](/statistics.md)                                   | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Y | Y | Y |      Y       |
@@ -129,24 +128,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Extended statistics](/extended-statistics.md)     | Experimental | Experimental| Experimental | Experimental | Experimental | Experimental | Experimental |      N       |
 | [Statistics feedback](/statistics.md#automatic-update)       | Deprecated | Deprecated | Deprecated   | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Automatically update statistics](/statistics.md#automatic-update) | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Fast Analyze](/system-variables.md#tidb_enable_fast_analyze) | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Dynamic pruning](/partitioned-table.md#dynamic-pruning-mode) | Y | Experimental | Experimental | Experimental | Experimental | Experimental | N | N |
-=======
-| Statistics | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 |
-|---|---|---|---|---|---|---|---|---|---|
-| [CMSketch](/statistics.md) | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Y | Y |
-| [Histograms](/statistics.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Extended statistics](/extended-statistics.md) | E | E | E | E | E | E | E | E | E |
-| Statistics feedback | N | N | N | N | Deprecated | Deprecated | E | E | E |
-| [Automatically update statistics](/statistics.md#automatic-update) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Dynamic pruning](/partitioned-table.md#dynamic-pruning-mode) | Y | Y | Y | Y | Y | E | E | E | E |
-| [Collect statistics for `PREDICATE COLUMNS`](/statistics.md#collect-statistics-on-some-columns) | E | E | E | E | E | E | N | N | N |
-| [Control the memory quota for collecting statistics](/statistics.md#the-memory-quota-for-collecting-statistics) | E | E | E | E | N | N | N | N | N |
-| [Randomly sample about 10000 rows of data to quickly build statistics](/system-variables.md#tidb_enable_fast_analyze) | Deprecated | Deprecated | E | E | E | E | E | E | E |
-| [Lock statistics](/statistics.md#lock-statistics) | Y | Y | E | E | N | N | N | N | N |
-| [Lightweight statistics initialization](/statistics.md#load-statistics) | Y | Y | E | N | N | N | N | N | N |
-| [Show the progress of collecting statistics](/sql-statements/sql-statement-show-analyze-status.md) | Y | Y | N | N | N | N | N | N | N |
->>>>>>> 98b2cf9b62 (Remove fast analyze from the list of basic features (#17727))
 
 ## Security
 
