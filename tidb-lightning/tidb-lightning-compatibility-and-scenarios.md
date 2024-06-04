@@ -31,7 +31,7 @@ If the application requires import performance and can only use TiDB Lightning p
 
 #### Scenario 1: tables in physical import mode do not need to be backed up
 
-In this scenario, the compatibility check will report an error after starting TiDB Lightning because [PITR](/br/br-log-architecture.md#pitr) is enabled. If you are sure that these tables do not need to be backed up or backed up by [log backup](/br/br-pitr-guide.md), you can change the [TiDB Lightning configuration file](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) in the `Lightning.check-requirements` parameter to `false` and restart the task.
+In this scenario, the compatibility check will report an error after starting TiDB Lightning because [PITR](/br/br-log-architecture.md#process-of-pitr) is enabled. If you are sure that these tables do not need to be backed up or backed up by [log backup](/br/br-pitr-guide.md), you can change the [TiDB Lightning configuration file](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) in the `Lightning.check-requirements` parameter to `false` and restart the task.
 
 #### Scenario 2: after the physical import is finished, there will be no DML operations on the table
 
@@ -59,7 +59,7 @@ This section describes how to use `IMPORT INTO` together with [log backup](/br/b
 
 ### Used with log backup
 
-In this scenario, the compatibility check will report an error after you submit the `IMPORT INTO` SQL because [PITR](/br/br-log-architecture.md#pitr) is enabled. If you are sure that these tables do not need to be backed up or backed up by [log backups](/br/br-pitr-guide.md), you can include `DISABLE_PRECHECK` (introduced in v8.0.0) in [`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions) of that SQL, and then resubmit it, so that the data import task ignores the compatibility check, and imports the data directly.
+In this scenario, the compatibility check will report an error after you submit the `IMPORT INTO` SQL because [PITR](/br/br-log-architecture.md#process-of-pitr) is enabled. If you are sure that these tables do not need to be backed up or backed up by [log backups](/br/br-pitr-guide.md), you can include `DISABLE_PRECHECK` (introduced in v8.0.0) in [`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions) of that SQL, and then resubmit it, so that the data import task ignores the compatibility check, and imports the data directly.
 
 ### Used with TiCDC
 
