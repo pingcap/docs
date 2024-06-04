@@ -5,29 +5,29 @@ summary: Learn about JSON functions.
 
 # JSON Functions
 
-TiDB supports most of the [JSON functions](https://dev.mysql.com/doc/refman/8.0/en/json-functions.html) available in MySQL 8.0.
+JSON functions can be used to work with data in the [JSON data type](/data-type-json.md).
 
 ## Functions that create JSON values
 
 | Function Name                     | Description |
 | --------------------------------- | ----------- |
-| [JSON_ARRAY([val[, val] ...])](https://dev.mysql.com/doc/refman/8.0/en/json-creation-functions.html#function_json-array)  | Evaluates a (possibly empty) list of values and returns a JSON array containing those values |
-| [JSON_OBJECT(key, val[, key, val] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-creation-functions.html#function_json-object)   | Evaluates a (possibly empty) list of key-value pairs and returns a JSON object containing those pairs  |
-| [JSON_QUOTE(string)](https://dev.mysql.com/doc/refman/8.0/en/json-creation-functions.html#function_json-quote) | Returns a string as a JSON value with quotes |
+| [JSON_ARRAY()](/functions-and-operators/json-functions/json-functions-create.md#json_array)   | Evaluates a (possibly empty) list of values and returns a JSON array containing those values |
+| [JSON_OBJECT()](/functions-and-operators/json-functions/json-functions-create.md#json_object) | Evaluates a (possibly empty) list of key-value pairs and returns a JSON object containing those pairs  |
+| [JSON_QUOTE()](/functions-and-operators/json-functions/json-functions-create.md#json_quote)   | Returns a string as a JSON value with quotes |
 
 ## Functions that search JSON values
 
 | Function Name                     | Description |
 | --------------------------------- | ----------- |
-| [JSON_CONTAINS(target, candidate[, path])](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-contains) | Indicates by returning 1 or 0 whether a given candidate JSON document is contained within a target JSON document |
-| [JSON_CONTAINS_PATH(json_doc, one_or_all, path[, path] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-contains-path) | Returns 0 or 1 to indicate whether a JSON document contains data at a given path or paths |
-| [JSON_EXTRACT(json_doc, path[, path] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-extract)| Returns data from a JSON document, selected from the parts of the document matched by the `path` arguments |
-| [->](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#operator_json-column-path)  | Returns the value from a JSON column after the evaluating path; an alias for `JSON_EXTRACT(doc, path_literal)`   |
-| [->>](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#operator_json-inline-path)  | Returns the value from a JSON column after the evaluating path and unquoting the result; an alias for `JSON_UNQUOTE(JSON_EXTRACT(doc, path_literal))` |
-| [JSON_KEYS(json_doc[, path])](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-keys) | Returns the keys from the top-level value of a JSON object as a JSON array, or, if a path argument is given, the top-level keys from the selected path |
-| [JSON_SEARCH(json_doc, one_or_all, search_str[, escape_char[, path] ...])](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-search) | Search a JSON document for one or all matches of a string |
-| [value MEMBER OF(json_array)](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#operator_member-of) | If the passed value is an element of the JSON array, returns 1. Otherwise, returns 0. |
-| [JSON_OVERLAPS(json_doc1, json_doc2)](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-overlaps) | Indicates whether two JSON documents have overlapping part. If yes, returns 1. If not, returns 0. |
+| [JSON_CONTAINS()](/functions-and-operators/json-functions/json-functions-search.md#json_contains) | Indicates by returning 1 or 0 whether a given candidate JSON document is contained within a target JSON document |
+| [JSON_CONTAINS_PATH()](/functions-and-operators/json-functions/json-functions-search.md#json_contains_path) | Returns 0 or 1 to indicate whether a JSON document contains data at a given path or paths |
+| [JSON_EXTRACT()](/functions-and-operators/json-functions/json-functions-search.md#json_extract)| Returns data from a JSON document, selected from the parts of the document matched by the `path` arguments |
+| [->](/functions-and-operators/json-functions/json-functions-search.md#-)  | Returns the value from a JSON column after the evaluating path; an alias for `JSON_EXTRACT(doc, path_literal)`   |
+| [->>](/functions-and-operators/json-functions/json-functions-search.md#--1)  | Returns the value from a JSON column after the evaluating path and unquoting the result; an alias for `JSON_UNQUOTE(JSON_EXTRACT(doc, path_literal))` |
+| [JSON_KEYS()](/functions-and-operators/json-functions/json-functions-search.md#json_keys) | Returns the keys from the top-level value of a JSON object as a JSON array, or, if a path argument is given, the top-level keys from the selected path |
+| [JSON_SEARCH()](/functions-and-operators/json-functions/json-functions-search.md#json_search) | Search a JSON document for one or all matches of a string |
+| [MEMBER OF()](/functions-and-operators/json-functions/json-functions-search.md#member-of) | If the passed value is an element of the JSON array, returns 1. Otherwise, returns 0. |
+| [JSON_OVERLAPS()](/functions-and-operators/json-functions/json-functions-search.md#json_overlaps) | Indicates whether two JSON documents have overlapping part. If yes, returns 1. If not, returns 0. |
 
 ## Functions that modify JSON values
 
@@ -82,3 +82,7 @@ TiDB supports most of the [JSON functions](https://dev.mysql.com/doc/refman/8.0/
 - `JSON_VALUE()`
 
 For more information, see [#14486](https://github.com/pingcap/tidb/issues/14486).
+
+## MySQL Compatibility
+
+- TiDB supports most of the [JSON functions](https://dev.mysql.com/doc/refman/8.0/en/json-functions.html) available in MySQL 8.0.
