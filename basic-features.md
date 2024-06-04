@@ -128,7 +128,6 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Extended statistics](/extended-statistics.md)     | Experimental | Experimental| Experimental | Experimental | Experimental | Experimental | Experimental |      N       |
 | [Statistics feedback](/statistics.md#automatic-update)       | Deprecated | Deprecated | Deprecated   | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Automatically update statistics](/statistics.md#automatic-update) | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Fast Analyze](/system-variables.md#tidb_enable_fast_analyze) | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Dynamic pruning](/partitioned-table.md#dynamic-pruning-mode) | Y | Experimental | Experimental | Experimental | Experimental | Experimental | N | N |
 
 ## Security
