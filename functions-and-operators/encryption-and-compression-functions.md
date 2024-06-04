@@ -21,8 +21,8 @@ TiDB supports most of the [encryption and compression functions](https://dev.mys
 | [`SM3()`](#sm3)                                               | Calculate an SM3 checksum                         |
 | [`AES_DECRYPT()`](#aes_decrypt)                               | Decrypt using AES                                 |
 | [`AES_ENCRYPT()`](#aes_encrypt)                               | Encrypt using AES                                 |
-| [`COMPRESS()`](#compress)                                     | Return result as a binary string                  |
-| [`UNCOMPRESS()`](#uncompress)                                 | Uncompress a string compressed                    |
+| [`COMPRESS()`](#compress)                                     | Compress and return result as a binary string      |
+| [`UNCOMPRESS()`](#uncompress)                                 | Uncompress a compressed string                    |
 | [`UNCOMPRESSED_LENGTH()`](#uncompressed_length)               | Return the length of a string before compression  |
 | [`VALIDATE_PASSWORD_STRENGTH()`](#validate_password_strength) | Validate the password strength |
 
