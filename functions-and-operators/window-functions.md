@@ -12,7 +12,7 @@ Because window functions reserve additional [keywords](/keywords.md) in the pars
 
 The pipeline execution algorithm for window functions can be disabled with the [`tidb_enable_pipelined_window_function`](/system-variables.md#tidb_enable_pipelined_window_function) system variable.
 
-Another system variable that influences window functions is [`windowing_use_high_precision`](/system-variables.md#windowing_use_high_precision). This variable can be used to turn off high precision mode.
+Another system variable that influences window functions is [`windowing_use_high_precision`](/system-variables.md#windowing_use_high_precision). You can use this variable to turn off high precision mode.
 
 The window functions [listed here](/tiflash/tiflash-supported-pushdown-calculations.md) can be pushed down to TiFlash.
 
