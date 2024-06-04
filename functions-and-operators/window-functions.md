@@ -68,7 +68,7 @@ FROM
 
 ## [`DENSE_RANK()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_dense-rank)
 
-The `DENSE_RANK()` function is similar to [`RANK()`](#rank) but won't leave any gaps in case of ties.
+The `DENSE_RANK()` function is similar to [`RANK()`](#rank) but does not leave any gaps in case of ties.
 
 ```sql
 SELECT 
