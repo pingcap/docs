@@ -8,6 +8,18 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
+## June 4, 2024
+
+**General changes**
+
+- Introduce the Recovery Group feature (beta) for disaster recovery of [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters deployed on AWS.
+
+    You can now use the new Recovery Group feature for enhanced disaster recovery on TiDB Dedicated clusters deployed on AWS. This feature allows databases to be replicated from one cluster to another, ensuring rapid recovery in the event of a regional disaster. If you are in the `Project Owner` role, you can enable this feature by creating a new Recovery Group and assigning databases to it. By replicating databases with Recovery Groups, you can improve disaster readiness, meet stricter availability SLAs, and achieve more aggressive Recovery Point Objectives (RPO) and Recovery Time Objectives (RTO).
+
+    For more information, see [Get started with recovery groups](/tidb-cloud/recovery-group-get-started.md).
+
+- [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) supports [Time to live (TTL)](/time-to-live.md).
+
 ## May 28, 2024
 
 **General changes**
