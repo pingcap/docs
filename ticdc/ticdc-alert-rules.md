@@ -15,6 +15,7 @@ This section introduces critical alerts and solutions.
 For critical alerts, you need to pay close attention to abnormal monitoring metrics.
 
 - Alert rule:
+
     `ticdc_owner_checkpoint_ts_lag > 600`
 
 - Description:
