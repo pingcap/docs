@@ -123,7 +123,6 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Histograms](/statistics.md)                                                                             | Y            | Y            | Y            | Y            |
 | Extended statistics (multiple columns)                                                 | Experimental | Experimental | Experimental | N            |
 | [Statistics Feedback](/statistics.md#automatic-update)                                                   | Experimental | Experimental | Experimental | Experimental |
-| [Fast Analyze](/system-variables.md#tidb_enable_fast_analyze)                                            | Experimental | Experimental | Experimental | Experimental |
 
 ## Security
 
