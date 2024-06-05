@@ -61,7 +61,7 @@ Using columnar storage in TiDB Serverless is similar to using it in TiFlash. You
 - Table level: Assign a TiFlash replica to a table to enable columnar storage for that specific table.
 - Database level: Configure TiFlash replicas for all tables in a database to use columnar storage across the entire database.
 
-Once a TiFlash replica is set up for a table, TiDB automatically synchronizes the columnar storage with the row-based storage for that table. This ensures data consistency and optimizes performance for analytical queries.
+Once a TiFlash replica is set up for a table, TiDB automatically replicates data from the row-based storage to the columnar storage for that table. This ensures data consistency and optimizes performance for analytical queries.
 
 For more information about how to set up TiFlash replicas, see [Create TiFlash replicas](/tiflash/create-tiflash-replicas.md).
 
@@ -123,13 +123,13 @@ During the data import process of a TiDB Serverless cluster, RU consumption occu
 
 ### What costs are involved when using columnar storage in TiDB Serverless?
 
-The pricing for columnar storage in TiDB Serverless is similar to that for row-based storage. When you use columnar storage, an additional replica is created to store your data (without indexes). The synchronization of data from row-based to columnar storage does not incur extra charges.
+The pricing for columnar storage in TiDB Serverless is similar to that for row-based storage. When you use columnar storage, an additional replica is created to store your data (without indexes). The replication of data from row-based to columnar storage does not incur extra charges.
 
 For detailed pricing information, see [TiDB Serverless pricing details](https://www.pingcap.com/tidb-serverless-pricing-details/).
 
 ### Is using columnar storage more expensive?
 
-Columnar storage in TiDB Serverless incurs additional costs due to the extra replica, which requires more storage and resources for data synchronization. However, columnar storage becomes more cost-effective when running analytical queries.
+Columnar storage in TiDB Serverless incurs additional costs due to the extra replica, which requires more storage and resources for data replication. However, columnar storage becomes more cost-effective when running analytical queries.
 
 According to the TPC-H benchmark test, the cost of running analytic queries on columnar storage is about one-third of the cost when using row-based storage.
 
