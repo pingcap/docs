@@ -103,7 +103,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - Fix the issue of inconsistent data indexes caused by adding indexes with multi-schema changes on partitioned tables [#52080](https://github.com/pingcap/tidb/issues/52080) @[tangenta](https://github.com/tangenta)
     - Fix the issue of inconsistent data indexes caused by adding multi-valued indexes [#51162](https://github.com/pingcap/tidb/issues/51162) @[ywqzzy](https://github.com/ywqzzy)
     - Fix the issue that DDL operations get stuck due to network problems [#47060](https://github.com/pingcap/tidb/issues/47060) @[wjhuang2016](https://github.com/wjhuang2016)
-    - Fix the connection blocking issue by upgrading `go-mysql` [#11041](https://github.com/pingcap/tiflow/issues/11041) @[D3Hunter](https://github.com/D3Hunter)
     - Fix the issue that TiDB might report an error due to GC when loading statistics at startup [#53592](https://github.com/pingcap/tidb/issues/53592) @[you06](https://github.com/you06)
     - Fix the issue that TiDB might send requests to unready TiKV nodes [#50758](https://github.com/pingcap/tidb/issues/50758) @[zyguan](https://github.com/zyguan)
     - Fix the issue that Stale Read might miss after a TiKV rolling restart [#52193](https://github.com/pingcap/tidb/issues/52193) @[zyguan](https://github.com/zyguan)
@@ -267,7 +266,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     + TiDB Data Migration (DM)
 
         - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+    - Fix the connection blocking issue by upgrading `go-mysql` [#11041](https://github.com/pingcap/tiflow/issues/11041) @[D3Hunter](https://github.com/D3Hunter)
         - (dup): release-6.5.9.md > 错误修复> Tools> TiDB Data Migration (DM) - 修复上游为 binary 类型主键时丢失数据的问题 [#10672](https://github.com/pingcap/tiflow/issues/10672) @[GMHDBJD](https://github.com/GMHDBJD)
 
     + TiDB Lightning
