@@ -257,6 +257,11 @@
   - [To Kafka Sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
   - [To TiDB Cloud Sink](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
   - [To Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
+- Disaster Recovery
+  - [Recovery Group Overview](/tidb-cloud/recovery-group-overview.md)
+  - [Get Started](/tidb-cloud/recovery-group-get-started.md)
+  - [Failover and Reprotect Databases](/tidb-cloud/recovery-group-failover.md)
+  - [Delete a Recovery Group](/tidb-cloud/recovery-group-delete.md)
 - Security
   - Identity Access Control
     - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
@@ -291,6 +296,7 @@
   - [Billing from AWS or GCP Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace)
   - [Billing for Changefeed](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
   - [Billing for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md)
+  - [Billing for Recovery Groups](/tidb-cloud/tidb-cloud-billing-recovery-group.md)
 - Managed Service Provider Program
   - [Managed Service Provider](/tidb-cloud/managed-service-provider.md)
   - [MSP Customer](/tidb-cloud/managed-service-provider-customer.md)
