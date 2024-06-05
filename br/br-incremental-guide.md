@@ -15,7 +15,7 @@ Incremental data of a TiDB cluster is differentiated data between the starting s
 
 Because restoring the incremental backup relies on the snapshot of the database table at the backup time point to filter incremental DDL statements, the tables deleted during the incremental backup process might still exist after the data restore and need to be manually deleted.
 
-The incremental backup does not support batch renaming of incremental DDL statements. If batch renaming of tables occurs within the selected incremental backup range, the data restore might fail. It is recommended to perform a full backup after batch renaming the incremental DDL statements, and use the latest full backup to replace the incremental data during restore.
+The incremental backup does not support batch renaming of tables. If batch renaming of tables occurs during the range of the incremental backup, the data restore might fail. It is recommended to perform a full backup after batch renaming tables, and use the latest full backup to replace the incremental data during restore.
 
 ## Back up incremental data
 
