@@ -56,7 +56,7 @@ In these scenarios, columnar storage can significantly improve query performance
 
 ### How to use columnar storage in TiDB Serverless?
 
-Columnar storage usage in TiDB Serverless is similar to that in TiFlash. You can enable columnar storage at both the table and database levels:
+Using columnar storage in TiDB Serverless is similar to using it in TiFlash. You can enable columnar storage at both the table and database levels:
 
 - Table level: Assign a TiFlash replica to a table to enable columnar storage for that specific table.
 - Database level: Configure TiFlash replicas for all tables in a database to use columnar storage across the entire database.
