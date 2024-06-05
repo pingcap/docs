@@ -1004,6 +1004,10 @@ Configuration items related to RocksDB
 
 ### `info-log-max-size`
 
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.file.max-size`](#max-size-new-in-v540).
+
 + The maximum size of Info log
 + Default value: `"1GB"`
 + Minimum value: `0`
@@ -1011,10 +1015,18 @@ Configuration items related to RocksDB
 
 ### `info-log-roll-time`
 
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated. TiKV no longer supports automatic log splitting based on time. Instead, you can use the configuration item [`log.file.max-size`](#max-size-new-in-v540) to set the threshold for automatic log splitting based on file size.
+
 + The time interval at which Info logs are truncated. If the value is `0s`, logs are not truncated.
 + Default value: `"0s"`
 
 ### `info-log-keep-log-file-num`
+
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.file.max-backups`](#max-backups-new-in-v540).
 
 + The maximum number of kept log files
 + Default value: `10`
@@ -1025,6 +1037,53 @@ Configuration items related to RocksDB
 + The directory in which logs are stored
 + Default value: `""`
 
+<<<<<<< HEAD
+=======
+### `info-log-level`
+
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.level`](#level-new-in-v540).
+
++ Log levels of RocksDB
++ Default value: `"info"`
+
+### `write-buffer-flush-oldest-first` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ Specifies the flush strategy used when the memory usage of `memtable` of the current RocksDB reaches the threshold.
++ Default value: `false`
++ Value options:
+
+    + `false`: `memtable` with the largest data volume is flushed to SST files.
+    + `true`: The earliest `memtable` is flushed to SST files. This strategy can clear the `memtable` of cold data, which is suitable for scenarios with obvious cold and hot data.
+
+### `write-buffer-limit` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ Specifies the total memory limit of `memtable` for all RocksDB instances in a single TiKV. `0` means no limit.
++ Default value:
+
+    + When `storage.engine="raft-kv"`, the default value is `0`, which means no limit.
+    + When `storage.engine="partitioned-raft-kv"`, the default value is 20% of the size of total system memory.
+
++ Unit: KiB|MiB|GiB
+
+### `track-and-verify-wals-in-manifest` <span class="version-mark">New in v6.5.9, v7.1.5, and v8.0.0</span>
+
++ Controls whether to record information about Write Ahead Log (WAL) files in the RocksDB MANIFEST file and whether to verify the integrity of WAL files during startup. For more information, see RocksDB [Track WAL in MANIFEST](https://github.com/facebook/rocksdb/wiki/Track-WAL-in-MANIFEST).
++ Default value: `true`
++ Value options:
+    + `true`: records information about WAL files in the MANIFEST file and verifies the integrity of WAL files during startup.
+    + `false`: does not record information about WAL files in the MANIFEST file and does not verify the integrity of WAL files during startup.
+
+>>>>>>> 218a5ab97b (tikv: deprecate rocksdb's log configs (#17603))
 ## rocksdb.titan
 
 Configuration items related to Titan.
@@ -1359,8 +1418,124 @@ Configuration items related to `raftdb`
 
 ### `wal-dir`
 
+<<<<<<< HEAD
 + The directory in which WAL files are stored
 + Default value: `"/tmp/tikv/store"`
+=======
++ The directory in which Raft RocksDB WAL files are stored, which is the absolute directory path for WAL. **Do not** set this configuration item to the same value as [`rocksdb.wal-dir`](#wal-dir).
++ If this configuration item is not set, the log files are stored in the same directory as data.
++ If there are two disks on the machine, storing RocksDB data and WAL logs on different disks can improve performance.
++ Default value: `""`
+
+### `wal-ttl-seconds`
+
++ Specifies how long the archived WAL files are retained. When the value is exceeded, the system deletes these files.
++ Default value: `0`
++ Minimum value: `0`
++ Unit: second
+
+### `wal-size-limit`
+
++ The size limit of the archived WAL files. When the value is exceeded, the system deletes these files.
++ Default value: `0`
++ Minimum value: `0`
++ Unit: B|KiB|MiB|GiB
+
+### `max-total-wal-size`
+
++ The maximum RocksDB WAL size in total
++ Default value:
+    + When `storage.engine="raft-kv"`, the default value is `"4GiB"`.
+    + When `storage.engine="partitioned-raft-kv"`, the default value is `1`.
+
+### `compaction-readahead-size`
+
++ Controls whether to enable the readahead feature during RocksDB compaction and specify the size of readahead data.
++ If you use mechanical disks, it is recommended to set the value to `2MiB` at least.
++ Default value: `0`
++ Minimum value: `0`
++ Unit: B|KiB|MiB|GiB
+
+### `writable-file-max-buffer-size`
+
++ The maximum buffer size used in WritableFileWrite
++ Default value: `"1MiB"`
++ Minimum value: `0`
++ Unit: B|KiB|MiB|GiB
+
+### `use-direct-io-for-flush-and-compaction`
+
++ Determines whether to use `O_DIRECT` for both reads and writes in the background flush and compactions. The performance impact of this option: enabling `O_DIRECT` bypasses and prevents contamination of the OS buffer cache, but the subsequent file reads require re-reading the contents to the buffer cache.
++ Default value: `false`
+
+### `enable-pipelined-write`
+
++ Controls whether to enable Pipelined Write. When this configuration is enabled, the previous Pipelined Write is used. When this configuration is disabled, the new Pipelined Commit mechanism is used.
++ Default value: `true`
+
+### `allow-concurrent-memtable-write`
+
++ Controls whether to enable concurrent memtable write.
++ Default value: `true`
+
+### `bytes-per-sync`
+
++ The rate at which OS incrementally synchronizes files to disk while these files are being written asynchronously
++ Default value: `"1MiB"`
++ Minimum value: `0`
++ Unit: B|KiB|MiB|GiB
+
+### `wal-bytes-per-sync`
+
++ The rate at which OS incrementally synchronizes WAL files to disk when the WAL files are being written
++ Default value: `"512KiB"`
++ Minimum value: `0`
++ Unit: B|KiB|MiB|GiB
+
+### `info-log-max-size`
+
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.file.max-size`](#max-size-new-in-v540).
+
++ The maximum size of Info logs
++ Default value: `"1GiB"`
++ Minimum value: `0`
++ Unit: B|KiB|MiB|GiB
+
+### `info-log-roll-time`
+
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated. TiKV no longer supports automatic log splitting based on time. Instead, you can use the configuration item [`log.file.max-size`](#max-size-new-in-v540) to set the threshold for automatic log splitting based on file size.
+
++ The interval at which Info logs are truncated. If the value is `0s`, logs are not truncated.
++ Default value: `"0s"` (which means logs are not truncated)
+
+### `info-log-keep-log-file-num`
+
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.file.max-backups`](#max-backups-new-in-v540).
+
++ The maximum number of Info log files kept in RaftDB
++ Default value: `10`
++ Minimum value: `0`
+
+### `info-log-dir`
+
++ The directory in which Info logs are stored
++ Default value: `""`
+
+### `info-log-level`
+
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.level`](#level-new-in-v540).
+
++ Log levels of RaftDB
++ Default value: `"info"`
+>>>>>>> 218a5ab97b (tikv: deprecate rocksdb's log configs (#17603))
 
 ## raft-engine
 
