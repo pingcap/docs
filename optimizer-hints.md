@@ -139,6 +139,10 @@ SELECT /*+ NO_MERGE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 ### INL_JOIN(t1_name [, tl_name ...])
 
+> **Note:**
+>
+> In some cases, the `INL_JOIN` hint might not take effect. For more information, see [`INL_JOIN` hint does not take effect](#inl_join-hint-does-not-take-effect).
+
 The `INL_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the index nested loop join algorithm for the given table(s). This algorithm might consume less system resources and take shorter processing time in some scenarios and might produce an opposite result in other scenarios. If the result set is less than 10,000 rows after the outer table is filtered by the `WHERE` condition, it is recommended to use this hint. For example:
 
 {{< copyable "sql" >}}
@@ -930,7 +934,74 @@ The warning is as follows:
 
 In this case, you need to place the hint directly after the `SELECT` keyword. For more details, see the [Syntax](#syntax) section.
 
-### INL_JOIN hint does not take effect due to collation incompatibility
+### `INL_JOIN` hint does not take effect
+
+#### `INL_JOIN` hint does not take effect when built-in functions are used on columns for joining tables
+
+In some cases, if you use a built-in function on a column that joins tables, the optimizer might fail to choose the `IndexJoin` plan, resulting in the `INL_JOIN` hint not taking effect either.
+
+For example, the following query uses the built-in function `substr` on the column `tname` that joins tables:
+
+```sql
+CREATE TABLE t1 (id varchar(10) primary key, tname varchar(10));
+CREATE TABLE t2 (id varchar(10) primary key, tname varchar(10));
+EXPLAIN SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id=t2.id and SUBSTR(t1.tname,1,2)=SUBSTR(t2.tname,1,2);
+```
+
+The execution plan is as follows:
+
+```sql
++------------------------------+----------+-----------+---------------+-----------------------------------------------------------------------+
+| id                           | estRows  | task      | access object | operator info                                                         |
++------------------------------+----------+-----------+---------------+-----------------------------------------------------------------------+
+| HashJoin_12                  | 12500.00 | root      |               | inner join, equal:[eq(test.t1.id, test.t2.id) eq(Column#5, Column#6)] |
+| ├─Projection_17(Build)       | 10000.00 | root      |               | test.t2.id, test.t2.tname, substr(test.t2.tname, 1, 2)->Column#6      |
+| │ └─TableReader_19           | 10000.00 | root      |               | data:TableFullScan_18                                                 |
+| │   └─TableFullScan_18       | 10000.00 | cop[tikv] | table:t2      | keep order:false, stats:pseudo                                        |
+| └─Projection_14(Probe)       | 10000.00 | root      |               | test.t1.id, test.t1.tname, substr(test.t1.tname, 1, 2)->Column#5      |
+|   └─TableReader_16           | 10000.00 | root      |               | data:TableFullScan_15                                                 |
+|     └─TableFullScan_15       | 10000.00 | cop[tikv] | table:t1      | keep order:false, stats:pseudo                                        |
++------------------------------+----------+-----------+---------------+-----------------------------------------------------------------------+
+7 rows in set, 1 warning (0.01 sec)
+```
+
+```sql
+SHOW WARNINGS;
+```
+
+```
++---------+------+------------------------------------------------------------------------------------+
+| Level   | Code | Message                                                                            |
++---------+------+------------------------------------------------------------------------------------+
+| Warning | 1815 | Optimizer Hint /*+ INL_JOIN(t1, t2) */ or /*+ TIDB_INLJ(t1, t2) */ is inapplicable |
++---------+------+------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+As you can see from the preceding example, the `INL_JOIN` hint does not take effect. This is due to a limitation of the optimizer that prevents using the `Projection` or `Selection` operator as the probe side of `IndexJoin`.
+
+Starting from TiDB v8.0.0, you can avoid this issue by setting [`tidb_enable_inl_join_inner_multi_pattern`](/system-variables.md#tidb_enable_inl_join_inner_multi_pattern-new-in-v700) to `ON`.
+
+```sql
+SET @@tidb_enable_inl_join_inner_multi_pattern=ON;
+Query OK, 0 rows affected (0.00 sec)
+
+EXPLAIN SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id=t2.id AND SUBSTR(t1.tname,1,2)=SUBSTR(t2.tname,1,2);
++------------------------------+--------------+-----------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| id                           | estRows      | task      | access object | operator info                                                                                                                              |
++------------------------------+--------------+-----------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| IndexJoin_18                 | 12500.00     | root      |               | inner join, inner:Projection_14, outer key:test.t1.id, inner key:test.t2.id, equal cond:eq(Column#5, Column#6), eq(test.t1.id, test.t2.id) |
+| ├─Projection_32(Build)       | 10000.00     | root      |               | test.t1.id, test.t1.tname, substr(test.t1.tname, 1, 2)->Column#5                                                                           |
+| │ └─TableReader_34           | 10000.00     | root      |               | data:TableFullScan_33                                                                                                                      |
+| │   └─TableFullScan_33       | 10000.00     | cop[tikv] | table:t1      | keep order:false, stats:pseudo                                                                                                             |
+| └─Projection_14(Probe)       | 100000000.00 | root      |               | test.t2.id, test.t2.tname, substr(test.t2.tname, 1, 2)->Column#6                                                                           |
+|   └─TableReader_13           | 10000.00     | root      |               | data:TableRangeScan_12                                                                                                                     |
+|     └─TableRangeScan_12      | 10000.00     | cop[tikv] | table:t2      | range: decided by [eq(test.t2.id, test.t1.id)], keep order:false, stats:pseudo                                                             |
++------------------------------+--------------+-----------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+7 rows in set (0.00 sec)
+```
+
+#### `INL_JOIN` hint does not take effect due to collation incompatibility
 
 When the collation of the join key is incompatible between two tables, the `IndexJoin` operator cannot be utilized to execute the query. In this case, the [`INL_JOIN` hint](#inl_joint1_name--tl_name-) does not take effect. For example:
 
@@ -967,7 +1038,7 @@ SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-### `INL_JOIN` hint does not take effect because of join order
+#### `INL_JOIN` hint does not take effect due to join order
 
 The [`INL_JOIN(t1, t2)`](#inl_joint1_name--tl_name-) or `TIDB_INLJ(t1, t2)` hint semantically instructs `t1` and `t2` to act as inner tables in an `IndexJoin` operator to join with other tables, rather than directly joining them using an `IndexJoin` operator. For example:
 
