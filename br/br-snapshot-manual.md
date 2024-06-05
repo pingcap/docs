@@ -149,12 +149,7 @@ br restore full \
 
 In the preceding command:
 
-<<<<<<< HEAD
-- `--ratelimit`: The maximum speed **per TiKV** performing backup tasks. The unit is in MiB/s.
-=======
-- `--with-sys-table`: BR restores **data in some system tables**, including account permission data and SQL bindings, and statistics (see [Back up statistics](/br/br-snapshot-manual.md#back-up-statistics)). However, it does not restore statistics tables (`mysql.stat_*`) and system variable tables (`mysql.tidb` and `mysql.global_variables`). For more information, see [Restore tables in the `mysql` schema](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema).
 - `--ratelimit`: The maximum speed **per TiKV** performing restore tasks. The unit is in MiB/s.
->>>>>>> 9c1828ef77 (br: fix one word typo (#17775))
 - `--log-file`: The target file where the `br` log is written.
 
 During restore, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the restore task is completed. Then `br` will verify the restored data to ensure data security.
