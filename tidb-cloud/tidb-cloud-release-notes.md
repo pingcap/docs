@@ -18,6 +18,12 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see [Get started with recovery groups](/tidb-cloud/recovery-group-get-started.md).
 
+- [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) billing and metering (beta) for the columnar storage [TiFlash](/tiflash/tiflash-overview.md).
+
+    Until June 30, 2024, columnar storage in TiDB Serverless clusters remains free with a 100% discount. After this date, each TiDB Serverless cluster will include a free quota of 5 GiB for columnar storage. Usage beyond the free quota will be charged.
+
+    For more information, see [TiDB Serverless pricing details](https://www.pingcap.com/tidb-serverless-pricing-details/#storage).
+
 - [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) supports [Time to live (TTL)](/time-to-live.md).
 
 ## May 28, 2024
