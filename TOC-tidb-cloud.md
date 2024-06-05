@@ -296,14 +296,10 @@
   - [Billing from AWS or GCP Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace)
   - [Billing for Changefeed](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
   - [Billing for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md)
-<<<<<<< HEAD
+  - [Billing for Recovery Groups](/tidb-cloud/tidb-cloud-billing-recovery-group.md)
 - Managed Service Provider Program
   - [Managed Service Provider](/tidb-cloud/managed-service-provider.md)
   - [MSP Customer](/tidb-cloud/managed-service-provider-customer.md)
-=======
-  - [Billing for Recovery Groups](/tidb-cloud/tidb-cloud-billing-recovery-group.md)
-- API
->>>>>>> 00dac2beb1 (TiDB Cloud Docs: Add documentation for new Recovery Group feature (#17425))
 - API
   - [API Overview](/tidb-cloud/api-overview.md)
   - API Reference
