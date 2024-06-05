@@ -71,6 +71,17 @@ After creating a recovery group, you can view its status information on the **Re
     >
     > During the setup of a recovery group, an account named following the pattern `cloud-rg-*` will be created on the secondary cluster for the replication process. Deleting or modifying this account will interrupt the replication.
 
+## About resiliency levels
+
+A resiliency level defines the consistency characteristics of data reading in different scenarios of Recovery Group. Currently, TiDB Cloud only provides the following resiliency level:
+
+- No consistency guaranteed. During the replication of a recovery group, the downstream cluster does not guarantee transaction consistency read. When the upstream cluster becomes unavailable, you can not restore the data in the downstream cluster to a transaction consistency state.
+
+TiDB Cloud will provide the other two levels in near future:
+
+- Eventual consistency. During the replication of a recovery group, the downstream cluster does not guarantee transaction consistency read. When the upstream cluster becomes unavailable, you can restore the data in the downstream cluster to a transaction consistency state.
+- Near real-time consistency. During the replication of a recovery group, the downstream cluster provides approximate real-time transaction consistency read. When the upstream cluster becomes unavailable, you can restore the data in the downstream cluster to a transaction consistency state.
+
 ## What's next
 
 After creating the recovery group, you might want to familiarize yourself with the failover and reprotect operations. These operations are used to **Failover** the primary cluster for the replicated databases from one cluster to the other, and then to later re-establish replication in the opposite direction to **Reprotect** the failed over databases.
