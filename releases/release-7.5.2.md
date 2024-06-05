@@ -198,9 +198,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - Fix the issue of connection panic after fault recovery in the TiDB network partition [#7926](https://github.com/tikv/pd/issues/7926) @[CabinfeverB](https://github.com/CabinfeverB)
     - Fix the issue that scheduling might be incorrectly paused after online data recovery [#8095](https://github.com/tikv/pd/issues/8095) @[JmPotato](https://github.com/JmPotato)
     - Fix the issue that the CPS By Type monitoring types display incorrectly after enabling resource groups [#52605](https://github.com/pingcap/tidb/issues/52605) @[nolouch](https://github.com/nolouch)
-    - Fix the issue that the log level cannot be changed via the configuration file [#8117](https://github.com/tikv/pd/issues/8117) @[rleungx](https://github.com/rleungx)
+    - Fix the issue that changing the log level via the configuration file does not take effect [#8117](https://github.com/tikv/pd/issues/8117) @[rleungx](https://github.com/rleungx)
     - Fix the issue that a large number of retries occur when canceling resource groups queries [#8217](https://github.com/tikv/pd/issues/8217) @[nolouch](https://github.com/nolouch)
-    - Fix the issue that `ALTER PLACEMENT POLICY` cannot modify the placement policy [#52257](https://github.com/pingcap/tidb/issues/52257) @[jiyfhust](https://github.com/jiyfhust)
+    - Fix the issue that `ALTER PLACEMENT POLICY` cannot modify the placement policy [#52257](https://github.com/pingcap/tidb/issues/52257) [#51712](https://github.com/pingcap/tidb/issues/51712) @[jiyfhust](https://github.com/jiyfhust)
     - Fix the issue that down peers might not recover when using the placement policy [#7808](https://github.com/tikv/pd/issues/7808) @[rleungx](https://github.com/rleungx)
     - Fix the issue that manually transferring the PD leader might fail [#8225](https://github.com/tikv/pd/issues/8225) @[HuSharp](https://github.com/HuSharp)
     - (dup): release-7.1.5.md > 错误修复> PD - 修复写热点调度可能会违反放置策略 (placement policy) 约束的问题 [#7848](https://github.com/tikv/pd/issues/7848) @[lhy1024](https://github.com/lhy1024)
@@ -212,7 +212,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 
 + TiFlash <!--tw@lilin90 2 条-->
 
-    - Fix the issue that in the storage-compute separation architecture, null values might be incorrectly returned in queries after adding not null columns in DDL operations [#9084](https://github.com/pingcap/tiflash/issues/9084) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    - Fix the issue that in the disaggregated storage and compute architecture, null values might be incorrectly returned in queries after adding non-null columns in DDL operations [#9084](https://github.com/pingcap/tiflash/issues/9084) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - Fix the issue of query timeout when executing queries on partitioned tables that contains the empty partition [#9024](https://github.com/pingcap/tiflash/issues/9024) @[JinheLin](https://github.com/JinheLin)
     - note [#issue](https://github.com/pingcap/tiflash/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
     - (dup): release-8.1.0.md > 错误修复> TiFlash - 修复存算分离架构下，TiFlash 计算节点进程停止时可能出现 panic 的问题 [#8860](https://github.com/pingcap/tiflash/issues/8860) @[guo-shaoge](https://github.com/guo-shaoge)
