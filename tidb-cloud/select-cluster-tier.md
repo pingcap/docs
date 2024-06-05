@@ -27,7 +27,7 @@ TiDB Serverless offers two service plans to meet different user requirements. Wh
 The free cluster plan is ideal for those who are getting started with TiDB Serverless. It provides developers and small teams with the following essential features:
 
 - **No cost**: This plan is completely free, with no credit card required to get started.
-- **Storage**: Provides an initial row-based storage capacity of 5 GiB and an initial columnar storage capacity of 5 GiB.
+- **Storage**: Provides an initial 5 GiB of row-based storage and 5 GiB of columnar storage.
 - **Request Units**: Includes 50 million [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) for database operations.
 - **Easy upgrade**: Offers a smooth transition to the [scalable cluster plan](#scalable-cluster-plan) as your needs grow.
 
