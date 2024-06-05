@@ -27,7 +27,7 @@ TiDB Serverless offers two service plans to meet different user requirements. Wh
 The free cluster plan is ideal for those who are getting started with TiDB Serverless. It provides developers and small teams with the following essential features:
 
 - **No cost**: This plan is completely free, with no credit card required to get started.
-- **Storage**: Provides an initial storage capacity of 5 GiB.
+- **Storage**: Provides an initial row-based storage capacity of 5 GiB and an initial columnar storage capacity of 5 GiB.
 - **Request Units**: Includes 50 million [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) for database operations.
 - **Easy upgrade**: Offers a smooth transition to the [scalable cluster plan](#scalable-cluster-plan) as your needs grow.
 
@@ -46,6 +46,7 @@ For each organization in TiDB Cloud, you can create a maximum of five [free clus
 For the first five TiDB Serverless clusters in your organization, whether they are free or scalable, TiDB Cloud provides a free usage quota for each of them as follows:
 
 - Row-based storage: 5 GiB
+- Columnar storage: 5 GiB
 - Request Units (RUs): 50 million RUs per month
 
 A Request Unit (RU) is a unit of measure used to represent the amount of resources consumed by a single request to the database. The amount of RUs consumed by a request depends on various factors, such as the operation type or the amount of data being retrieved or modified.
