@@ -50,7 +50,6 @@ We are constantly filling in the feature gaps between TiDB Serverless and TiDB D
 
 ### Others
 
-- [Time to live (TTL)](/time-to-live.md) is currently unavailable.
 - Transaction can not last longer than 30 minutes.
 - For more details about SQL limitations, refer to [Limited SQL Features](/tidb-cloud/limited-sql-features.md).
 
