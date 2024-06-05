@@ -149,7 +149,7 @@ br restore full \
 
 In the preceding command:
 
-- `--ratelimit`: The maximum speed **per TiKV** performing backup tasks. The unit is in MiB/s.
+- `--ratelimit`: The maximum speed **per TiKV** performing restore tasks. The unit is in MiB/s.
 - `--log-file`: The target file where the `br` log is written.
 
 During restore, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the restore task is completed. Then `br` will verify the restored data to ensure data security.
