@@ -30,7 +30,7 @@ To create a recovery group, perform the following steps:
 
     > **Note**
     >
-    > Currently only one resiliency level is supported.
+    > Currently only one resiliency level is supported. For more information, see [About resiliency levels](#about-resiliency-levels).
 
 5. Select the TiDB Dedicated cluster that will be the primary cluster for this group.
 
@@ -73,14 +73,14 @@ After creating a recovery group, you can view its status information on the **Re
 
 ## About resiliency levels
 
-A resiliency level defines the consistency characteristics of data reading in different scenarios of Recovery Group. Currently, TiDB Cloud only provides the following resiliency level:
+A resiliency level defines the consistency characteristics of data reading in different scenarios of a recovery group. Currently, TiDB Cloud only provides the following resiliency level:
 
 - No consistency guaranteed. During the replication of a recovery group, the downstream cluster does not guarantee transaction consistency read. When the upstream cluster becomes unavailable, you can not restore the data in the downstream cluster to a transaction consistency state.
 
-TiDB Cloud will provide the other two levels in near future:
+TiDB Cloud will provide two additional resiliency levels in the near future:
 
-- Eventual consistency. During the replication of a recovery group, the downstream cluster does not guarantee transaction consistency read. When the upstream cluster becomes unavailable, you can restore the data in the downstream cluster to a transaction consistency state.
-- Near real-time consistency. During the replication of a recovery group, the downstream cluster provides approximate real-time transaction consistency read. When the upstream cluster becomes unavailable, you can restore the data in the downstream cluster to a transaction consistency state.
+- Eventual consistency. During the replication of a recovery group, the downstream cluster does not guarantee transaction consistency read. However, when the upstream cluster becomes unavailable, you can restore the data in the downstream cluster to a transaction consistency state.
+- Near real-time consistency. During the replication of a recovery group, the downstream cluster provides approximately real-time transaction consistency read. When the upstream cluster becomes unavailable, you can restore the data in the downstream cluster to a transaction consistency state.
 
 ## What's next
 
