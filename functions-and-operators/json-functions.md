@@ -11,9 +11,9 @@ JSON functions can be used to work with data in the [JSON data type](/data-type-
 
 | Function Name                     | Description |
 | --------------------------------- | ----------- |
-| [JSON_ARRAY()](/functions-and-operators/json-functions/json-functions-create.md#json_array)   | Evaluates a (possibly empty) list of values and returns a JSON array containing those values |
+| [JSON_ARRAY()](/functions-and-operators/json-functions/json-functions-create.md#json_array) | Evaluates a (possibly empty) list of values and returns a JSON array containing those values |
 | [JSON_OBJECT()](/functions-and-operators/json-functions/json-functions-create.md#json_object) | Evaluates a (possibly empty) list of key-value pairs and returns a JSON object containing those pairs  |
-| [JSON_QUOTE()](/functions-and-operators/json-functions/json-functions-create.md#json_quote)   | Returns a string as a JSON value with quotes |
+| [JSON_QUOTE()](/functions-and-operators/json-functions/json-functions-create.md#json_quote) | Returns a string as a JSON value with quotes |
 
 ## Functions that search JSON values
 
@@ -21,7 +21,7 @@ JSON functions can be used to work with data in the [JSON data type](/data-type-
 | --------------------------------- | ----------- |
 | [JSON_CONTAINS()](/functions-and-operators/json-functions/json-functions-search.md#json_contains) | Indicates by returning 1 or 0 whether a given candidate JSON document is contained within a target JSON document |
 | [JSON_CONTAINS_PATH()](/functions-and-operators/json-functions/json-functions-search.md#json_contains_path) | Returns 0 or 1 to indicate whether a JSON document contains data at a given path or paths |
-| [JSON_EXTRACT()](/functions-and-operators/json-functions/json-functions-search.md#json_extract)| Returns data from a JSON document, selected from the parts of the document matched by the `path` arguments |
+| [JSON_EXTRACT()](/functions-and-operators/json-functions/json-functions-search.md#json_extract) | Returns data from a JSON document, selected from the parts of the document matched by the `path` arguments |
 | [->](/functions-and-operators/json-functions/json-functions-search.md#-)  | Returns the value from a JSON column after the evaluating path; an alias for `JSON_EXTRACT(doc, path_literal)`   |
 | [->>](/functions-and-operators/json-functions/json-functions-search.md#--1)  | Returns the value from a JSON column after the evaluating path and unquoting the result; an alias for `JSON_UNQUOTE(JSON_EXTRACT(doc, path_literal))` |
 | [JSON_KEYS()](/functions-and-operators/json-functions/json-functions-search.md#json_keys) | Returns the keys from the top-level value of a JSON object as a JSON array, or, if a path argument is given, the top-level keys from the selected path |
@@ -33,17 +33,17 @@ JSON functions can be used to work with data in the [JSON data type](/data-type-
 
 | Function Name                     | Description |
 | --------------------------------- | ----------- |
-| [JSON_APPEND(json_doc, path, value)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-append) | An alias to `JSON_ARRAY_APPEND` |
-| [JSON_ARRAY_APPEND(json_doc, path, val[, path, val] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-append) | Appends values to the end of the indicated arrays within a JSON document and returns the result |
-| [JSON_ARRAY_INSERT(json_doc, path, val[, path, val] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-insert) | Insert values into the specified locations of a JSON document and returns the result |
-| [JSON_INSERT(json_doc, path, val[, path, val] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-insert) | Inserts data into a JSON document and returns the result |
-| [JSON_MERGE_PATCH(json_doc, json_doc[, json_doc] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge-patch)  | Merge JSON documents |
-| [JSON_MERGE_PRESERVE(json_doc, json_doc[, json_doc] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge-preserve)  | Merges two or more JSON documents and returns the merged result |
-| [JSON_MERGE(json_doc, json_doc[, json_doc] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge)  | A deprecated alias for `JSON_MERGE_PRESERVE` |
-| [JSON_REMOVE(json_doc, path[, path] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-remove)    | Removes data from a JSON document and returns the result |
-| [JSON_REPLACE(json_doc, path, val[, path, val] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-replace) | Replaces existing values in a JSON document and returns the result |
-| [JSON_SET(json_doc, path, val[, path, val] ...)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-set)  | Inserts or updates data in a JSON document and returns the result |
-| [JSON_UNQUOTE(json_val)](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-unquote) |  Unquotes a JSON value and returns the result as a string |
+| [JSON_APPEND()](/functions-and-operators/json-functions/json-functions-modify.md#json_append) | An alias to `JSON_ARRAY_APPEND()` |
+| [JSON_ARRAY_APPEND()](/functions-and-operators/json-functions/json-functions-modify.md#json_array_append) | Appends values to the end of the indicated arrays within a JSON document and returns the result |
+| [JSON_ARRAY_INSERT()](/functions-and-operators/json-functions/json-functions-modify.md#json_array_insert) | Insert values into the specified locations of a JSON document and returns the result |
+| [JSON_INSERT()](/functions-and-operators/json-functions/json-functions-modify.md#json_insert) | Inserts data into a JSON document and returns the result |
+| [JSON_MERGE_PATCH()](/functions-and-operators/json-functions/json-functions-modify.md#json_merge_patch)  | Merge JSON documents |
+| [JSON_MERGE_PRESERVE()](/functions-and-operators/json-functions/json-functions-modify.md#json_merge_preserve)  | Merges two or more JSON documents and returns the merged result |
+| [JSON_MERGE()](/functions-and-operators/json-functions/json-functions-modify.md#json_merge)  | A deprecated alias for `JSON_MERGE_PRESERVE()` |
+| [JSON_REMOVE()](/functions-and-operators/json-functions/json-functions-modify.md#json_remove)    | Removes data from a JSON document and returns the result |
+| [JSON_REPLACE()](/functions-and-operators/json-functions/json-functions-modify.md#json_replace) | Replaces existing values in a JSON document and returns the result |
+| [JSON_SET()](/functions-and-operators/json-functions/json-functions-modify.md#json_set)  | Inserts or updates data in a JSON document and returns the result |
+| [JSON_UNQUOTE()](/functions-and-operators/json-functions/json-functions-modify.md#json_unquote) |  Unquotes a JSON value and returns the result as a string |
 
 ## Functions that return JSON value attributes
 
