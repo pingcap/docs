@@ -31,6 +31,8 @@ If the performance of TiDB Lightning logical imports does not meet the performan
 
 ### Used with log backup
 
+You can perform in different scenarios as follows.
+
 #### Scenario 1: tables in physical import mode do not need to be backed up
 
 In this scenario, if [PITR](/br/br-log-architecture.md#process-of-pitr) is enabled, the compatibility check will report an error after starting TiDB Lightning. If you are sure that these tables do not need to be backed up or backed up by [log backup](/br/br-pitr-guide.md), you can change the [TiDB Lightning configuration file](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) in the `Lightning.check-requirements` parameter to `false` and restart the import task.
@@ -51,9 +53,15 @@ This scenario is not compatible in the short term, because TiCDC can hardly keep
 
 You can perform in different scenarios as follows:
 
-- Scenario 1: the table does not need to be replicated downstream by TiCDC. In this scenario, if TiCDC changefeed is enabled, the compatibility check will report an error after starting TiDB Lightning. If you are sure that these tables do not need to be replicated by TiCDC, you can change the `Lightning.check-requirements` parameter in the [TiDB Lightning configuration file](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) to `false` and then restart the import task.
+- Scenario 1: the table does not need to be replicated downstream by TiCDC.
 
-- Scenario 2: The table needs to be replicated downstream by TiCDC. In this scenario, if TiCDC changefeed is enabled, the compatibility check will report an error after starting TiDB Lightning. You need to change the `Lightning.check-requirements` parameter in the [TiDB Lightning configuration file](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) in the upstream TiDB cluster to `false` and then restart the import task. After the import task for the upstream TiDB cluster is finished, use TiDB Lightning to import a copy of the same data in the downstream TiDB cluster. If you have databases such as Redshift and Snowflake in the downstream, you can have these databases read CSV or Parquet files from a cloud storage service and write them to the database.
+    In this scenario, if TiCDC changefeed is enabled, the compatibility check will report an error after starting TiDB Lightning. If you are sure that these tables do not need to be replicated by TiCDC, you can change the `Lightning.check-requirements` parameter in the [TiDB Lightning configuration file](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) to `false` and then restart the import task.
+
+- Scenario 2: the table needs to be replicated downstream by TiCDC.
+
+    In this scenario, if TiCDC changefeed is enabled, the compatibility check will report an error after starting TiDB Lightning. You need to change the `Lightning.check-requirements` parameter in the [TiDB Lightning configuration file](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) in the upstream TiDB cluster to `false` and then restart the import task.
+
+    After the import task for the upstream TiDB cluster is finished, use TiDB Lightning to import a copy of the same data in the downstream TiDB cluster. If you have databases such as Redshift and Snowflake in the downstream, you can have these databases read CSV or Parquet files from a cloud storage service and write them to the database.
 
 ## Scenarios for `IMPORT INTO`
 
@@ -61,8 +69,32 @@ This section describes how to use `IMPORT INTO` together with [log backup](/br/b
 
 ### Used with log backup
 
+You can perform in different scenarios as follows.
+
+#### Scenario 1: tables do not need to be backed up
+
 In this scenario, if [PITR](/br/br-log-architecture.md#process-of-pitr) is enabled, the compatibility check will report an error after you submit the `IMPORT INTO` SQL. If you are sure that these tables do not need to be backed up or backed up by [log backups](/br/br-pitr-guide.md), you can include `DISABLE_PRECHECK` (introduced in v8.0.0) in [`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions) of that SQL, and then resubmit it, so that the data import task ignores the compatibility check, and imports the data directly.
+
+#### Scenario 2: after the import is finished, there will be no new DML operations on the table
+
+This scenario does not involve incremental data writes, so it is sufficient to perform a table-level snapshot backup of the table after completing the data import, as described in [Back up a table](/br/br-snapshot-manual.md#back-up-a-table).
+
+During data recovery, the snapshot data of the table is restored. See [Restore a table](/br/br-snapshot-manual.md#restore-a-table) for the procedure.
+
+#### #### Scenario 3: after the import is finished, perform new DML operations to the table (not supported)
+
+In this scenario, you can only choose either [full snapshot backup](/br/br-snapshot-guide.md) or [log backup](/br/br-pitr-guide.md) for the backup operation of this table. You cannot back up and restore the full snapshot data and log backup data of this table.
 
 ### Used with TiCDC
 
-In this scenario, the compatibility check will report an error after you submit the `IMPORT INTO` SQL because TiCDC changefeed is enabled. If you are sure that these tables do not need to be replicated by TiCDC, you can include `DISABLE_PRECHECK` (introduced in v8.0.0) in [`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions) of that SQL, and then resubmit it, so that the data import task ignores the compatibility check, and imports the data directly.
+You can perform in different scenarios as follows:
+
+- Scenario 1: the table does not need to be replicated downstream by TiCDC.
+
+    In this scenario, the compatibility check will report an error after you submit the `IMPORT INTO` SQL because TiCDC changefeed is enabled. If you are sure that these tables do not need to be replicated by TiCDC, you can include `DISABLE_PRECHECK` (introduced in v8.0.0) in [`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions) of that SQL, and then resubmit it, so that the data import task ignores the compatibility check, and imports the data directly.
+
+- Scenario 2: the table needs to be replicated downstream by TiCDC.
+
+    In this scenario, if TiCDC changefeed is enabled, the compatibility check will report an error after starting TiDB Lightning. you can include `DISABLE_PRECHECK` (introduced in v8.0.0) in [`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions) of that SQL, and then resubmit it, so that the data import task ignores the compatibility check, and imports the data directly.
+
+    After the import task for the upstream TiDB cluster is finished, use TiDB Lightning to import a copy of the same data in the downstream TiDB cluster. If you have databases such as Redshift and Snowflake in the downstream, you can have these databases read CSV or Parquet files from a cloud storage service and write them to the database.
