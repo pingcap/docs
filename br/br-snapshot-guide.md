@@ -77,12 +77,6 @@ tiup br restore full --pd "${PD_IP}:2379" \
 --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```
 
-> **Warning:**
-> 
-> The coarse-grained Region scatter algorithm (enabled by setting `--granularity="coarse-grained"`) is experimental. It is recommended that you use this feature to accelerate data recovery in clusters with up to 1,000 tables. Note that this feature does not support checkpoint restore.
-
-To further improve the restore speed of large clusters, starting from v7.6.0, BR supports a coarse-grained Region scatter algorithm (experimental) for faster parallel recovery. You can enable this algorithm by specifying `--granularity="coarse-grained"`. After it is enabled, BR can quickly split the restore task into a large number of small tasks and scatter them to all TiKV nodes in batches, thus fully utilizing the resources of each TiKV node for fast recovery in parallel.
-
 During restore, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the restore task is completed and statistics such as total restore time, average restore speed, and total data size are displayed.
 
 ```shell
@@ -181,14 +175,11 @@ tiup br restore full \
 +-----------------------------------------------------+
 ```
 
-When you restore data related to system privilege, note the following:
+When you restore data related to system privilege, note that before restoring data, BR checks whether the system tables in the target cluster are compatible with those in the backup data. "Compatible" means that all the following conditions are met:
 
-- Before v7.6.0, BR does not restore user data with `user` as `cloud_admin` and `host` as `'%'`. This user is reserved for TiDB Cloud. Starting from v7.6.0, BR supports restoring all user data (including `cloud_admin`) by default.
-- Before restoring data, BR checks whether the system tables in the target cluster are compatible with those in the backup data. "Compatible" means that all the following conditions are met:
-
-    - The target cluster has the same system tables as the backup data.
-    - The **number of columns** in the system privilege table of the target cluster is the same as that in the backup data. The column order is not important.
-    - The columns in the system privilege table of the target cluster are compatible with that in the backup data. If the data type of the column is a type with a length (such as integer and string), the length in the target cluster must be >= the length in the backup data. If the data type of the column is an `ENUM` type, the number of `ENUM` values in the target cluster must be a superset of that in the backup data.
+- The target cluster has the same system tables as the backup data.
+- The **number of columns** in the system privilege table of the target cluster is the same as that in the backup data. The column order is not important.
+- The columns in the system privilege table of the target cluster are compatible with that in the backup data. If the data type of the column is a type with a length (such as integer and string), the length in the target cluster must be >= the length in the backup data. If the data type of the column is an `ENUM` type, the number of `ENUM` values in the target cluster must be a superset of that in the backup data.
 
 ## Performance and impact
 
