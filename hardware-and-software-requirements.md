@@ -42,6 +42,10 @@ In v8.1 LTS, TiDB ensures multi-level quality standards for various combinations
         <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
       </tr>
       <tr>
+        <td>Amazon Linux 2023</td>
+        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+      </tr>
+      <tr>
         <td>Rocky Linux 9.1 or later</td>
         <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
       </tr>
