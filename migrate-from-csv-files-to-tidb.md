@@ -62,7 +62,7 @@ data-source-dir = "${data-path}" # A local path or S3 path. For example, 's3://m
 separator = ','
 # Delimiter. Can be zero or multiple characters.
 delimiter = '"'
-# Line terminator. By default, \r, \n, and \r\n are all used as line terminators.
+# Line terminator. By default, \r, \n, and \r\n are all treated as line terminators.
 # terminator = "\r\n"
 # Configures whether the CSV file has a table header.
 # If this item is set to true, TiDB Lightning uses the first line of the CSV file to parse the corresponding relationship of fields.
