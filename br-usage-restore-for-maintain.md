@@ -185,14 +185,11 @@ BR can restore data in **the following system tables**:
 - System variable tables (`mysql.tidb`, `mysql.global_variables`)
 - [Other system tables](https://github.com/pingcap/tidb/blob/master/br/pkg/restore/systable_restore.go#L31)
 
-When you restore data related to system privileges, note the following:
+When you restore data related to system privileges, note that before BR restores data, it checks whether the system tables in the target cluster are compatible with those in the backup data. "Compatible" means that all the following conditions are met:
 
-- BR does not restore user data with `user` as `cloud_admin` and `host` as `'%'`. This user is reserved for TiDB Cloud. Do not create a user or role named `cloud_admin` in your environment, because the user privileges related to `cloud_admin` cannot be restored correctly.
-- Before BR restores data, it checks whether the system tables in the target cluster are compatible with those in the backup data. "Compatible" means that all the following conditions are met:
-
-    - The target cluster has the same system tables as the backup data.
-    - The **number of columns** in the system privilege table of the target cluster is consistent with that of the backup data. The order of the columns can be different.
-    - The columns in the system privilege table of the target cluster are compatible with those in the backup data. If the data type of the column is a type with length (for example, int or char), the length in the target cluster must be >= the length in the backup data. If the data type of the column is an enum type, the enum values in the target cluster must be a superset of the enum values in the backup data.
+- The target cluster has the same system tables as the backup data.
+- The **number of columns** in the system privilege table of the target cluster is consistent with that of the backup data. The order of the columns can be different.
+- The columns in the system privilege table of the target cluster are compatible with those in the backup data. If the data type of the column is a type with length (for example, int or char), the length in the target cluster must be >= the length in the backup data. If the data type of the column is an enum type, the enum values in the target cluster must be a superset of the enum values in the backup data.
 
 If the target cluster is not empty or the target cluster is not compatible with the backup data, BR returns the following information. You can remove `--with-sys-table` to skip restoring system tables.
 
