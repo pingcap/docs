@@ -166,14 +166,11 @@ Starting from BR v5.1.0, when you back up snapshots, BR backs up the **system ta
 +-----------------------------------------------------+
 ```
 
-When you restore data related to system privilege, note the following:
+When you restore data related to system privilege, note that before restoring data, BR checks whether the system tables in the target cluster are compatible with those in the backup data. "Compatible" means that all the following conditions are met:
 
-- BR does not restore user data with `user` as `cloud_admin` and `host` as `'%'`. This user is reserved for TiDB Cloud. Do not create a user or role named `cloud_admin` in your cluster, because the user privileges related to `cloud_admin` cannot be restored correctly.
-- Before restoring data, BR checks whether the system tables in the target cluster are compatible with those in the backup data. "Compatible" means that all the following conditions are met:
-
-    - The target cluster has the same system tables as the backup data.
-    - The **number of columns** in the system privilege table of the target cluster is the same as that in the backup data. The column order is not important.
-    - The columns in the system privilege table of the target cluster are compatible with that in the backup data. If the data type of the column is a type with a length (such as integer and string), the length in the target cluster must be >= the length in the backup data. If the data type of the column is an `ENUM` type, the number of `ENUM` values in the target cluster must be a superset of that in the backup data.
+- The target cluster has the same system tables as the backup data.
+- The **number of columns** in the system privilege table of the target cluster is the same as that in the backup data. The column order is not important.
+- The columns in the system privilege table of the target cluster are compatible with that in the backup data. If the data type of the column is a type with a length (such as integer and string), the length in the target cluster must be >= the length in the backup data. If the data type of the column is an `ENUM` type, the number of `ENUM` values in the target cluster must be a superset of that in the backup data.
 
 ## Performance and impact
 
