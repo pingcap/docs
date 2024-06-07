@@ -123,7 +123,7 @@ provider "tidbcloud" {
 }
 ```
 
-We encourage the use of sync, But note that `sync` currently only works on the cluster resource. Please contact us if you need this feature on other resources.
+We encourage the use of sync, but note that `sync` currently only works on the cluster resource. Please contact us if you need this feature on other resources.
 
 ## Next step
 
