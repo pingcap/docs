@@ -198,15 +198,128 @@ SELECT JSON_REMOVE('{"a": 61, "b": 62, "c": 63}','$.b','$.c');
 
 ## [JSON_REPLACE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-replace)
 
-Replaces existing values in a JSON document and returns the result.
+The `JSON_REPLACE(json_doc, path, value [, path, value] ...)` function replaces existing values in a JSON document and returns the result. If the specified path doesn't exist it isn't added to the result.
+
+This function takes arguments in pairs, where each pair is a `path` and a `value`.
+
+Examples:
+
+In the example below we change the value at `$.b` from 62 to 42.
+
+```sql
+SELECT JSON_REPLACE('{"a": 41, "b": 62}','$.b',42);
+```
+
+```
++---------------------------------------------+
+| JSON_REPLACE('{"a": 41, "b": 62}','$.b',42) |
++---------------------------------------------+
+| {"a": 41, "b": 42}                          |
++---------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the example below we change the value at `$.b` from 62 to 42. In addition to this we replace the value at `$.c` with 43, but as that doesn't exits in `json_doc` the result isn't changed.
+
+```sql
+SELECT JSON_REPLACE('{"a": 41, "b": 62}','$.b',42,'$.c',43);
+```
+
+```
++------------------------------------------------------+
+| JSON_REPLACE('{"a": 41, "b": 62}','$.b',42,'$.c',43) |
++------------------------------------------------------+
+| {"a": 41, "b": 42}                                   |
++------------------------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ## [JSON_SET()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-set)
 
-Inserts or updates data in a JSON document and returns the result.
+The `JSON_SET(json_doc, path, value [,path, value] ...)` function inserts or updates data in a JSON document and returns the result.
+
+This function takes arguments in pairs, where each pair is a `path` and a `value`.
+
+Examples:
+
+In the example below we update the `$.version` from `1.1` to `1.2`.
+
+```sql
+SELECT JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2);
+```
+
+```
++-----------------------------------------------------------------+
+| JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2) |
++-----------------------------------------------------------------+
+| {"name": "example", "version": 1.2}                             |
++-----------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the example below we update the `$.version` from `1.1` to `1.2` and `$.branch`, which wasn't present before, is set to `main`.
+
+```sql
+SELECT JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2,'$.branch', "main");
+```
+
+```
++------------------------------------------------------------------------------------+
+| JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2,'$.branch', "main") |
++------------------------------------------------------------------------------------+
+| {"branch": "main", "name": "example", "version": 1.2}                              |
++------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ## [JSON_UNQUOTE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-unquote)
 
-Unquotes a JSON value and returns the result as a string.
+The `JSON_UNQUOTE(json)` function unquotes a JSON value and returns the result as a string. This is the opposite of the [`JSON_QUOTE()`](/functions-and-operators/json-functions/json-functions-create.md#json_quote) function.
+
+Examples:
+
+In the example `"foo"` is unquoted to `foo`.
+
+```sql
+SELECT JSON_UNQUOTE('"foo"');
+```
+
+```
++-----------------------+
+| JSON_UNQUOTE('"foo"') |
++-----------------------+
+| foo                   |
++-----------------------+
+1 row in set (0.00 sec)
+```
+
+This function is often used together with [`JSON_EXTRACT()`](/functions-and-operators/json-functions/json-functions-search.md#json_extract). In the example below you can see that we first extract a value, which is quoted and in the second example we combine this to unquote the value.
+
+```sql
+SELECT JSON_EXTRACT('{"database": "TiDB"}', '$.database');
+```
+
+```
++----------------------------------------------------+
+| JSON_EXTRACT('{"database": "TiDB"}', '$.database') |
++----------------------------------------------------+
+| "TiDB"                                             |
++----------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+```sql
+SELECT JSON_UNQUOTE(JSON_EXTRACT('{"database": "TiDB"}', '$.database'));
+```
+
+```
++------------------------------------------------------------------+
+| JSON_UNQUOTE(JSON_EXTRACT('{"database": "TiDB"}', '$.database')) |
++------------------------------------------------------------------+
+| TiDB                                                             |
++------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ## See also
 
