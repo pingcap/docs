@@ -109,6 +109,22 @@ export TIDBCLOUD_PRIVATE_KEY = ${private_key}
 
 Now, you can use the TiDB Cloud Terraform Provider.
 
+## Step 5. Configure TiDB Cloud Terraform Provider with sync configuration
+
+Terraform provider >= 0.3.0 support an optional configuration `sync`.
+
+You can create, update or delete resources synchronously by setting `sync` to `true`. Here is an example:
+
+```
+provider "tidbcloud" {
+  public_key  = "your_public_key"
+  private_key = "your_private_key"
+  sync        = true
+}
+```
+
+We encourage the use of sync, But note that `sync` currently only works on the cluster resource. Please contact us if you need this feature on other resources.
+
 ## Next step
 
 Get started by managing a cluster with the [cluster resource](/tidb-cloud/terraform-use-cluster-resource.md).
