@@ -521,6 +521,11 @@
       - [Release Notes](/dm/dm-release-notes.md)
   - TiDB Lightning
     - [Overview](/tidb-lightning/tidb-lightning-overview.md)
+<<<<<<< HEAD
+=======
+    - [`IMPORT INTO` vs. TiDB Lightning](/tidb-lightning/import-into-vs-tidb-lightning.md)
+    - [Compatibility of TiDB Lightning and `IMPORT INTO` with TiCDC and Log Backup](/tidb-lightning/tidb-lightning-compatibility-and-scenarios.md)
+>>>>>>> 833dbab17d (tidb-lightning: add a new doc about compatibility and scenarios (#17677))
     - [Get Started](/get-started-with-tidb-lightning.md)
     - [Deploy TiDB Lightning](/tidb-lightning/deploy-tidb-lightning.md)
     - [Target Database Requirements](/tidb-lightning/tidb-lightning-requirements.md)
