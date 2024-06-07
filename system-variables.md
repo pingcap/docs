@@ -899,6 +899,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Type: Integer
 - Default value: `4096`
 - Range: `[0, 9223372036854775807]`
 - Unit: Bytes
