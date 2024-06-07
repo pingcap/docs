@@ -31,6 +31,19 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-v
 - `--target-ts`: Specifies the ending TSO of the changefeed. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
 - `--config`: Specifies the changefeed configuration file. For details, see [TiCDC Changefeed Configuration Parameters](/ticdc/ticdc-changefeed-config.md).
 
+## Supported Kafka versions
+
+The following table shows the minimum supported Kafka versions for each TiCDC version:
+
+| TiCDC version            | Minimum supported Kafka version |
+|:-------------------------|:--------------------------------|
+| TiCDC >= v8.1.0          | 2.1.0                           |
+| v7.6.0 <= TiCDC < v8.1.0 | 2.4.0                           |
+| v7.5.2 <= TiCDC < v8.0.0 | 2.1.0                           |
+| v7.5.0 <= TiCDC < v7.5.2 | 2.4.0                           |
+| v6.5.0 <= TiCDC < v7.5.0 | 2.1.0                           |
+| v6.1.0 <= TiCDC < v6.5.0 | 2.0.0                           |
+
 ## Configure sink URI for Kafka
 
 Sink URI is used to specify the connection information of the TiCDC target system. The format is as follows:
