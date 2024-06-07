@@ -415,7 +415,12 @@ The memory usage of TiKV mainly comes from the block-cache of RocksDB, which is 
 
 ### Can both TiDB data and RawKV data be stored in the same TiKV cluster?
 
-No. TiDB (or data created from the transactional API) relies on a specific key format. It is not compatible with data created from RawKV API (or data from other RawKV-based services).
+Yes, but only when:
+
+- TiDB version >= `v6.1.0`, and
+- TiKV API V2 is enabled ([`storage.api-version = 2`](/tikv-configuration-file.md#api-version-new-in-v610)).
+
+Otherwise, no, as key format of TiDB (or data created from the transactional API) is not compatible with data created from RawKV API (or data from other RawKV-based services).
 
 ## TiDB testing
 
