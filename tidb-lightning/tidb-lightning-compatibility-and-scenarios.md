@@ -61,7 +61,7 @@ You can perform in different scenarios as follows:
 
     In this scenario, if TiCDC changefeed is enabled, the compatibility check will report an error after starting TiDB Lightning. You need to change the `Lightning.check-requirements` parameter in the [TiDB Lightning configuration file](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) in the upstream TiDB cluster to `false` and then restart the import task.
 
-    After the import task for the upstream TiDB cluster is finished, use TiDB Lightning to import a copy of the same data in the downstream TiDB cluster. If you have databases such as Redshift and Snowflake in the downstream, you can have these databases read CSV or Parquet files from a cloud storage service and write them to the database.
+    After the import task for the upstream TiDB cluster is finished, use TiDB Lightning to import a copy of the same data in the downstream TiDB cluster. If you have databases such as Redshift and Snowflake in the downstream, you can have these databases read CSV, SQL, or Parquet files from a cloud storage service and write them to the database.
 
 ## Scenarios for `IMPORT INTO`
 
@@ -97,4 +97,4 @@ You can perform in different scenarios as follows:
 
     In this scenario, if TiCDC changefeed is enabled, the compatibility check will report an error after starting TiDB Lightning. you can include `DISABLE_PRECHECK` (introduced in v8.0.0) in [`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions) of that SQL, and then resubmit it, so that the data import task ignores the compatibility check, and imports the data directly.
 
-    After the import task for the upstream TiDB cluster is finished, use TiDB Lightning to import a copy of the same data in the downstream TiDB cluster. If you have databases such as Redshift and Snowflake in the downstream, you can have these databases read CSV or Parquet files from a cloud storage service and write them to the database.
+    After the import task for the upstream TiDB cluster is finished, use `IMPORT INTO` to import a copy of the same data in the downstream TiDB cluster. If you have databases such as Redshift and Snowflake in the downstream, you can have these databases read CSV, SQL, or Parquet files from a cloud storage service and write them to the database.
