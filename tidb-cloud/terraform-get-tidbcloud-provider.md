@@ -103,8 +103,8 @@ provider "tidbcloud" {
 `public_key` and `private_key` are the API key's public key and private key. You can also pass them through the environment variables:
 
 ```
-export TIDBCLOUD_PUBLIC_KEY = ${public_key}
-export TIDBCLOUD_PRIVATE_KEY = ${private_key}
+export TIDBCLOUD_PUBLIC_KEY=${public_key}
+export TIDBCLOUD_PRIVATE_KEY=${private_key}
 ```
 
 Now, you can use the TiDB Cloud Terraform Provider.
