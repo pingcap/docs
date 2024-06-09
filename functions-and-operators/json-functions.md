@@ -49,18 +49,18 @@ JSON functions can be used to work with data in the [JSON data type](/data-type-
 
 | Function Name                     | Description |
 | --------------------------------- | ----------- |
-| [JSON_DEPTH(json_doc)](https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-depth) | Returns the maximum depth of a JSON document |
-| [JSON_LENGTH(json_doc[, path])](https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-length) | Returns the length of a JSON document, or, if a path argument is given, the length of the value within the path |
-| [JSON_TYPE(json_val)](https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-type) | Returns a string indicating the type of a JSON value |
-| [JSON_VALID(json_doc)](https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-valid) | Checks if a json\_doc is valid JSON. Useful for checking a column before converting it to the json type. |
+| [JSON_DEPTH()](/functions-and-operators/json-functions/json-functions-return.md#json_depth) | Returns the maximum depth of a JSON document |
+| [JSON_LENGTH()](/functions-and-operators/json-functions/json-functions-return.md#json_length) | Returns the length of a JSON document, or, if a path argument is given, the length of the value within the path |
+| [JSON_TYPE()](/functions-and-operators/json-functions/json-functions-return.md#json_type) | Returns a string indicating the type of a JSON value |
+| [JSON_VALID()](/functions-and-operators/json-functions/json-functions-return.md#json_valid) | Checks if a json\_doc is valid JSON. |
 
 ## Utility functions
 
 | Function Name                     | Description |
 | --------------------------------- | ----------- |
-| [JSON_PRETTY(json_doc)](https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html#function_json-pretty) | Pretty formatting of a JSON document |
-| [JSON_STORAGE_FREE(json_doc)](https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html#function_json-storage-free) | Returns how much storage space was freed in the binary representation of the JSON value after it was updated in place. As TiDB has different storage architecture from MySQL, this function always returns 0 for a valid JSON value, and it is implemented for compatibility with MySQL 8.0. |
-| [JSON_STORAGE_SIZE(json_doc)](https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html#function_json-storage-size) | Returns an approximate size of bytes required to store the json value. As the size does not account for TiKV using compression, the output of this function is not strictly compatible with MySQL. |
+| [JSON_PRETTY()](/functions-and-operators/json-functions/json-functions-utility.md#json_pretty) | Pretty formatting of a JSON document |
+| [JSON_STORAGE_FREE()](/functions-and-operators/json-functions/json-functions-utility.md#json_storage_free) | Returns how much storage space was freed in the binary representation of the JSON value after it was updated in place. As TiDB has different storage architecture from MySQL, this function always returns 0 for a valid JSON value, and it is implemented for compatibility with MySQL 8.0. |
+| [JSON_STORAGE_SIZE()](/functions-and-operators/json-functions/json-functions-utility.md#json_storage_size) | Returns an approximate size of bytes required to store the json value. As the size does not account for TiKV using compression, the output of this function is not strictly compatible with MySQL. |
 
 ## Aggregate functions
 
