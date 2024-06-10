@@ -179,7 +179,6 @@ FROM (
 
 Returns the value from a JSON column after the evaluating path and unquoting the result; an alias for `JSON_UNQUOTE(JSON_EXTRACT(doc, path_literal))`.
 
-
 ```sql
 SELECT 
     j->'$.foo',
