@@ -62,6 +62,7 @@ SELECT JSON_STORAGE_SIZE('{}');
 +-------------------------+
 1 row in set (0.00 sec)
 ```
+
 ## See also
 
 - [JSON Functions Overview](/functions-and-operators/json-functions.md)
