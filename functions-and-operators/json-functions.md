@@ -67,12 +67,11 @@ JSON functions can be used to work with data in the [JSON data type](/data-type-
 
 | Function Name                     | Description |
 | --------------------------------- | ----------- |
-| [JSON_ARRAYAGG(key)](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_json-arrayagg) | Provides an aggregation of keys. |
-| [JSON_OBJECTAGG(key, value)](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_json-objectagg) | Provides an aggregation of values for a given key. |
+| [JSON_ARRAYAGG()](/functions-and-operators/json-functions/json-functions-aggregate.md#json_arrayagg) | Provides an aggregation of keys. |
+| [JSON_OBJECTAGG()](/functions-and-operators/json-functions/json-functions-aggregate.md#json_objectagg) | Provides an aggregation of values for a given key. |
 
 ## See also
 
-* [JSON Function Reference](https://dev.mysql.com/doc/refman/8.0/en/json-function-reference.html)
 * [JSON Data Type](/data-type-json.md)
 
 ## Unsupported functions
