@@ -860,6 +860,16 @@ Configuration items related to Raftstore.
 + Default value: `4096`
 + Minimum value: `0`
 
+### `max-apply-unpersisted-log-limit` <span class="version-mark">New in v8.2.0</span>
+
++ The maximum number of committed but not persisted Raft logs that are allowed to be applied.
+
+    + Setting this configuration item to a value greater than `0` enables the TiKV node to apply committed but not persisted Raft logs in advance, effectively reducing long-tail latency caused by IO jitter on that node. However, it might also increase the memory usage of TiKV and the disk space occupied by Raft logs.
+    + Setting this configuration item to `0` disables this feature, meaning TiKV must wait for the Raft logs to be both committed and persisted before applying them. This is consistent with the behavior before v8.2.0.
+
++ Default value: `1024`
++ Minimum value: `0`
+
 ### `max-peer-down-duration`
 
 + The longest inactive duration allowed for a peer. A peer with timeout is marked as `down`, and PD tries to delete it later.
