@@ -39,6 +39,7 @@ To view the information of all available projects, you can use the `tidbcloud_pr
    provider "tidbcloud" {
      public_key = "your_public_key"
      private_key = "your_private_key"
+     sync = true
    }
 
    data "tidbcloud_projects" "example_project" {
@@ -137,6 +138,7 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
     provider "tidbcloud" {
       public_key = "your_public_key"
       private_key = "your_private_key"
+      sync = true
     }
     data "tidbcloud_cluster_specs" "example_cluster_spec" {
     }
@@ -289,6 +291,7 @@ The following example shows how to create a TiDB Dedicated cluster.
    provider "tidbcloud" {
      public_key = "your_public_key"
      private_key = "your_private_key"
+     sync = true
    }
 
     resource "tidbcloud_cluster" "example_cluster" {
