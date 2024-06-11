@@ -20,7 +20,7 @@ TiUP supports deploying DM v2.0 or later DM versions. This document introduces h
 
 - You need to meet the [hardware and software requirements](/dm/dm-hardware-and-software-requirements.md) when deploying a DM cluster.
 
-- Starting from v8.0.0, if you need to [encrypt the database password](/dm/dm-manage-source.md#encrypt-the-database-password), you must configure [`secret-key-path`](/dm/dm-master-configuration-file.md) for DM-master before using the `dmctl encrypt` command.
+- Starting from v8.0.0, if you need to [encrypt the database password](/dm/dm-manage-source.md#encrypt-the-database-password), you must store the key file used for encrypting and decrypting the database password in the DM-master in advance, and configure [`secret-key-path`](/dm/dm-master-configuration-file.md) for DM-master before using the `dmctl encrypt` command.
 
 ## Step 1: Install TiUP on the control machine
 
