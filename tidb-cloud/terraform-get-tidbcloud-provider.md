@@ -113,17 +113,17 @@ Now, you can use the TiDB Cloud Terraform Provider.
 
 Terraform provider (>= 0.3.0) supports an optional parameter `sync`.
 
-You can create, update or delete resources synchronously by setting `sync` to `true`. Here is an example:
+By setting `sync` to `true`, you can create, update, or delete resources synchronously. Here is an example:
 
 ```
 provider "tidbcloud" {
-  public_key  = "your_public_key"
+  public_key = "your_public_key"
   private_key = "your_private_key"
   sync        = true
 }
 ```
 
-We encourage the use of sync, but note that `sync` currently only works on the cluster resource. Please contact us if you need this feature on other resources.
+Setting `sync` to `true` is recommended, but note that `sync` currently only works with the cluster resource. If you need synchronous operations for other resources, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Next step
 
