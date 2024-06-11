@@ -866,7 +866,7 @@ Configuration items related to Raftstore.
 + The maximum number of committed but not persisted Raft logs that are allowed to be applied.
 
     + Setting this configuration item to a value greater than `0` enables the TiKV node to apply committed but not persisted Raft logs in advance, effectively reducing long-tail latency caused by IO jitter on that node. However, it might also increase the memory usage of TiKV and the disk space occupied by Raft logs.
-    + Setting this configuration item to `0` disables this feature, meaning TiKV must wait for the Raft logs to be both committed and persisted before applying them. This is consistent with the behavior before v8.2.0.
+    + Setting this configuration item to `0` disables this feature, meaning that TiKV must wait until Raft logs are both committed and persisted before applying them. This behavior is consistent with the behavior before v8.2.0.
 
 + Default value: `1024`
 + Minimum value: `0`
