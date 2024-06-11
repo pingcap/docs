@@ -233,6 +233,6 @@ dmctl is a command-line tool used to control DM clusters. You are recommended to
 
 dmctl supports both the command mode and the interactive mode. For details, see [Maintain DM Clusters Using dmctl](/dm/dmctl-introduction.md#maintain-dm-clusters-using-dmctl).
 
-## Step 8: Encrypt the database password
+## Step 9: Encrypt the database password
 
 After deployment, you can configure DM tasks to encrypt the database password. For more information, see [Encrypt the database password](/dm/dm-manage-source.md#encrypt-the-database-password).
