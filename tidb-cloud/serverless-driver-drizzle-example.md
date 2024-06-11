@@ -100,7 +100,7 @@ To complete this tutorial, you need the following:
    ```ts
    import { connect } from '@tidbcloud/serverless';
    import { drizzle } from 'drizzle-orm/tidb-serverless';
-   import {mysqlTable, serial, text, varchar } from 'drizzle-orm/mysql-core';
+   import { mysqlTable, serial, text, varchar } from 'drizzle-orm/mysql-core';
    
    // initialize
    const client = connect({ url: process.env.DATABASE_URL });
