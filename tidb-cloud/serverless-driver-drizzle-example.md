@@ -9,7 +9,7 @@ summary: Learn how to use TiDB Cloud serverless driver with Drizzle.
 
 This tutorial describes how to use TiDB Cloud serverless driver with Drizzle in Node.js environments and edge environments.
 
-## Use in Node.js environments
+## Use Drizzle and TiDB Cloud Serverless Driver in Node.js environments
 
 This section describes how to use TiDB Cloud serverless driver with Drizzle in Node.js environments.
 
@@ -69,7 +69,7 @@ To complete this tutorial, you need the following:
 
 ### Step 2. Set the environment
 
-1. On the overview page of your TiDB Serverless cluster, click **Connect** in the upper-right corner, and then select `Serverless Driver` in the `Connect with` dropdown. The connection string looks like this:
+1. On the overview page of your TiDB Serverless cluster, click **Connect** in the upper-right corner, and then select `Serverless Driver` in the **Connect With** drop-down box. The connection string looks like this:
 
     ```
     mysql://[username]:[password]@[host]/[database]
@@ -137,7 +137,7 @@ To complete this tutorial, you need the following:
    ts-node --esm hello-world.ts
    ```
 
-## Use in edge environments
+## Use Drizzle and TiDB Cloud Serverless Driver in edge environments
 
 This section takes the Vercel Edge Function as an example.
 
@@ -172,11 +172,11 @@ To complete this tutorial, you need the following:
 
 ### Step 2. Set the environment
 
-On the overview page of your TiDB Serverless cluster, click **Connect** in the upper-right corner, and then select `Serverless Driver` in the `Connect with` dropdown. The connection string looks like this:
+On the overview page of your TiDB Serverless cluster, click **Connect** in the upper-right corner, and then select `Serverless Driver` in the **Connect With** drop-down box. The connection string looks like this:
 
-```
-mysql://[username]:[password]@[host]/[database]
-```
+   ```
+   mysql://[username]:[password]@[host]/[database]
+   ```
 
 ### Step 3. Create an edge function
 
