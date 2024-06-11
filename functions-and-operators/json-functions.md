@@ -143,7 +143,7 @@ More details can be found in [the IETF draft for JSONPath](https://www.ietf.org/
 
 | Function Name                     | Description |
 | --------------------------------- | ----------- |
-| [JSON_SCHEMA_VALID(schema,json_doc)](https://dev.mysql.com/doc/refman/8.0/en/json-validation-functions.html#function_json-schema-valid) | Validate a JSON document against a schema. |
+| [JSON_SCHEMA_VALID(schema,json_doc)](https://dev.mysql.com/doc/refman/8.0/en/json-validation-functions.html#function_json-schema-valid) | Validate a JSON document against a schema to ensure data integrity and consistency. |
 
 ## See also
 
