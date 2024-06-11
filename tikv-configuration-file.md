@@ -737,6 +737,16 @@ Configuration items related to Raftstore.
 + Default value: `"30s"`
 + Minimum value: `0`
 
+### `max-apply-unpersisted-log-limit` <span class="version-mark">New in v8.2.0</span>
+
++ The maximum number of committed but not persisted Raft logs that are allowed to be applied.
+
+    + Setting this configuration item to a value greater than `0` enables the TiKV node to apply committed but not persisted Raft logs in advance, effectively reducing long-tail latency caused by IO jitter on that node. However, it might also increase the memory usage of TiKV and the disk space occupied by Raft logs.
+    + Setting this configuration item to `0` disables this feature, meaning that TiKV must wait until Raft logs are both committed and persisted before applying them. This behavior is consistent with the behavior before v8.2.0.
+
++ Default value: `1024`
++ Minimum value: `0`
+
 ### `hibernate-regions`
 
 + Enables or disables Hibernate Region. When this option is enabled, a Region idle for a long time is automatically set as hibernated. This reduces the extra overhead caused by heartbeat messages between the Raft leader and the followers for idle Regions. You can use `peer-stale-state-check-interval` to modify the heartbeat interval between the leader and the followers of hibernated Regions.
@@ -858,16 +868,6 @@ Configuration items related to Raftstore.
 
 + The maximum number of messages processed per batch
 + Default value: `4096`
-+ Minimum value: `0`
-
-### `max-apply-unpersisted-log-limit` <span class="version-mark">New in v8.2.0</span>
-
-+ The maximum number of committed but not persisted Raft logs that are allowed to be applied.
-
-    + Setting this configuration item to a value greater than `0` enables the TiKV node to apply committed but not persisted Raft logs in advance, effectively reducing long-tail latency caused by IO jitter on that node. However, it might also increase the memory usage of TiKV and the disk space occupied by Raft logs.
-    + Setting this configuration item to `0` disables this feature, meaning that TiKV must wait until Raft logs are both committed and persisted before applying them. This behavior is consistent with the behavior before v8.2.0.
-
-+ Default value: `1024`
 + Minimum value: `0`
 
 ### `max-peer-down-duration`
