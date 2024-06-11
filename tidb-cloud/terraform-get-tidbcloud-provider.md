@@ -111,7 +111,7 @@ Now, you can use the TiDB Cloud Terraform Provider.
 
 ## Step 5. Configure TiDB Cloud Terraform Provider with sync configuration
 
-Terraform provider >= 0.3.0 support an optional configuration `sync`.
+Terraform provider (>= 0.3.0) supports an optional parameter `sync`.
 
 You can create, update or delete resources synchronously by setting `sync` to `true`. Here is an example:
 
