@@ -162,9 +162,9 @@ strategy = ""
 # The following resolution algorithms are supported:
 # - none: does not detect duplicate records.
 #         If there are duplicate records in the data source, it might lead to inconsistent data in the target TiDB.
-#         If you set `tikv-importer.duplicate-resolution = "none"` and do not set `conflict.strategy`, TiDB Lightning will automatically assign `""` to `conflict.strategy`.
+#         If you set `duplicate-resolution = "none"` and do not set `conflict.strategy`, TiDB Lightning will automatically assign `""` to `conflict.strategy`.
 # - remove:
-#         If you set `tikv-importer.duplicate-resolution = "remove"` and do not set `conflict.strategy`, TiDB Lightning will automatically assign `"replace"` to `conflict.strategy` and enable the new version of conflict detection. 
+#         If you set `duplicate-resolution = "remove"` and do not set `conflict.strategy`, TiDB Lightning will automatically assign `"replace"` to `conflict.strategy` and enable the new version of conflict detection. 
 # The default value is 'none'.
 # duplicate-resolution = 'none'
 # The maximum number of KV pairs in one request when sending data to TiKV in physical import mode.
