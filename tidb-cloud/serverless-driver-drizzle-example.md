@@ -199,7 +199,7 @@ On the overview page of your TiDB Serverless cluster, click **Connect** in the u
    import type { NextRequest } from 'next/server';
    import { connect } from '@tidbcloud/serverless';
    import { drizzle } from 'drizzle-orm/tidb-serverless';
-   import {mysqlTable, serial, text, varchar } from 'drizzle-orm/mysql-core';
+   import { mysqlTable, serial, text, varchar } from 'drizzle-orm/mysql-core';
    export const runtime = 'edge';
    
    // initialize
