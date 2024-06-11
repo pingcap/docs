@@ -37,7 +37,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `slow-log-threshold`
 
-+ The threshold for outputing slow logs. If the processing time is longer than this threshold, slow logs are output.
++ The threshold for outputting slow logs. If the processing time is longer than this threshold, slow logs are output.
 + Default value: `"1s"`
 
 ### `memory-usage-limit`
@@ -1008,7 +1008,7 @@ Configuration items related to Raftstore.
 
 + At a certain interval, TiKV inspects the latency of the Raftstore component. This parameter specifies the interval of the inspection. If the latency exceeds this value, this inspection is marked as timeout.
 + Judges whether the TiKV node is slow based on the ratio of timeout inspection.
-+ Default value: `"500ms"`
++ Default value: `"100ms"`
 + Minimum value: `"1ms"`
 
 ### `raft-write-size-limit` <span class="version-mark">New in v5.3.0</span>
@@ -1039,7 +1039,8 @@ Configuration items related to Raftstore.
 
 + Set the specific times that TiKV initiates periodic full compaction. You can specify multiple time schedules in an array. For example:
     + `periodic-full-compact-start-times = ["03:00", "23:00"]` indicates that TiKV performs full compaction daily at 03:00 AM and 11:00 PM, based on the local time zone of the TiKV node.
-    + `periodic-full-compact-start-times = ["03:00 +0000", "23:00 +0000"]` indicates that TiKV performs full compaction daily at 03:00 AM and 11:00 PM in UTC time.
+    + `periodic-full-compact-start-times = ["03:00 +0000", "23:00 +0000"]` indicates that TiKV performs full compaction daily at 03:00 AM and 11:00 PM in UTC timezone.
+    + `periodic-full-compact-start-times = ["03:00 +0800", "23:00 +0800"]` indicates that TiKV performs full compaction daily at 03:00 AM and 11:00 PM in UTC+08:00 timezone.
 + Default value: `[]`, which means periodic full compaction is disabled by default.
 
 ### `periodic-full-compact-start-max-cpu` <span class="version-mark">New in v7.6.0</span>
@@ -1272,6 +1273,10 @@ Configuration items related to RocksDB
 
 ### `info-log-max-size`
 
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.file.max-size`](#max-size-new-in-v540).
+
 + The maximum size of Info log
 + Default value: `"1GiB"`
 + Minimum value: `0`
@@ -1279,10 +1284,18 @@ Configuration items related to RocksDB
 
 ### `info-log-roll-time`
 
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated. TiKV no longer supports automatic log splitting based on time. Instead, you can use the configuration item [`log.file.max-size`](#max-size-new-in-v540) to set the threshold for automatic log splitting based on file size.
+
 + The time interval at which Info logs are truncated. If the value is `0s`, logs are not truncated.
 + Default value: `"0s"`
 
 ### `info-log-keep-log-file-num`
+
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.file.max-backups`](#max-backups-new-in-v540).
 
 + The maximum number of kept log files
 + Default value: `10`
@@ -1294,6 +1307,10 @@ Configuration items related to RocksDB
 + Default value: `""`
 
 ### `info-log-level`
+
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.level`](#level-new-in-v540).
 
 + Log levels of RocksDB
 + Default value: `"info"`
@@ -1324,6 +1341,14 @@ Configuration items related to RocksDB
     + When `storage.engine="partitioned-raft-kv"`, the default value is 20% of the size of total system memory.
 
 + Unit: KiB|MiB|GiB
+
+### `track-and-verify-wals-in-manifest` <span class="version-mark">New in v6.5.9, v7.1.5, v7.5.2, and v8.0.0</span>
+
++ Controls whether to record information about Write Ahead Log (WAL) files in the RocksDB MANIFEST file and whether to verify the integrity of WAL files during startup. For more information, see RocksDB [Track WAL in MANIFEST](https://github.com/facebook/rocksdb/wiki/Track-WAL-in-MANIFEST).
++ Default value: `true`
++ Value options:
+    + `true`: records information about WAL files in the MANIFEST file and verifies the integrity of WAL files during startup.
+    + `false`: does not record information about WAL files in the MANIFEST file and does not verify the integrity of WAL files during startup.
 
 ## rocksdb.titan
 
@@ -1835,6 +1860,10 @@ Configuration items related to `raftdb`
 
 ### `info-log-max-size`
 
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.file.max-size`](#max-size-new-in-v540).
+
 + The maximum size of Info logs
 + Default value: `"1GiB"`
 + Minimum value: `0`
@@ -1842,10 +1871,18 @@ Configuration items related to `raftdb`
 
 ### `info-log-roll-time`
 
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated. TiKV no longer supports automatic log splitting based on time. Instead, you can use the configuration item [`log.file.max-size`](#max-size-new-in-v540) to set the threshold for automatic log splitting based on file size.
+
 + The interval at which Info logs are truncated. If the value is `0s`, logs are not truncated.
 + Default value: `"0s"` (which means logs are not truncated)
 
 ### `info-log-keep-log-file-num`
+
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.file.max-backups`](#max-backups-new-in-v540).
 
 + The maximum number of Info log files kept in RaftDB
 + Default value: `10`
@@ -1857,6 +1894,10 @@ Configuration items related to `raftdb`
 + Default value: `""`
 
 ### `info-log-level`
+
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.level`](#level-new-in-v540).
 
 + Log levels of RaftDB
 + Default value: `"info"`

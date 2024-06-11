@@ -123,15 +123,15 @@ According to these factors and the cost model, the optimizer selects an index wi
 
 1. The estimated number of rows is not accurate?
 
-    This is usually due to stale or inaccurate statistics. You can re-execute the `analyze table` statement or modify the parameters of the `analyze table` statement.
+    This is usually due to stale or inaccurate statistics. You can re-execute the `ANALYZE TABLE` statement or modify the parameters of the `ANALYZE TABLE` statement.
 
 2. Statistics are accurate, and reading from TiFlash is faster, but why does the optimizer choose to read from TiKV?
 
-    At present, the cost model of distinguishing TiFlash from TiKV is still rough. You can decrease the value of `tidb_opt_seek_factor` parameter, then the optimizer prefers to choose TiFlash.
+    At present, the cost model of distinguishing TiFlash from TiKV is still rough. You can decrease the value of [`tidb_opt_seek_factor`](/system-variables.md#tidb_opt_seek_factor) parameter, then the optimizer prefers to choose TiFlash.
 
 3. The statistics are accurate. Index A needs to retrieve rows from tables, but it actually executes faster than Index B that does not retrieve rows from tables. Why does the optimizer choose Index B?
 
-    In this case, the cost estimation may be too large for retrieving rows from tables. You can decrease the value of `tidb_opt_network_factor` parameter to reduce the cost of retrieving rows from tables.
+    In this case, the cost estimation may be too large for retrieving rows from tables. You can decrease the value of [`tidb_opt_network_factor`](/system-variables.md#tidb_opt_network_factor) parameter to reduce the cost of retrieving rows from tables.
 
 ## Control index selection
 
@@ -143,7 +143,7 @@ The index selection can be controlled by a single query through [Optimizer Hints
 
 ## Use multi-valued indexes
 
-[Multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes) are different from normal indexes. TiDB currently only uses [IndexMerge](/explain-index-merge.md) to access multi-valued indexes. Therefore, to use multi-valued indexes for data access, make sure that the value of the system variable `tidb_enable_index_merge` is set to `ON`.
+[Multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes) are different from normal indexes. TiDB currently only uses [IndexMerge](/explain-index-merge.md) to access multi-valued indexes. Therefore, to use multi-valued indexes for data access, make sure that the value of the system variable [`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40) is set to `ON`.
 
 For the limitations of multi-valued indexes, refer to [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md#limitations).
 

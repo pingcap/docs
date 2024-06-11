@@ -31,7 +31,7 @@ Based on `sql-statement`, TiDB sorts out and exports the following on-site infor
 - The table schema in `sql-statement`
 - The statistics of the table in `sql-statement`
 - The result of `EXPLAIN [ANALYZE] sql-statement`
-- Some internal procudures of query optimization
+- Some internal procedures of query optimization
 
 If historical statistics are [enabled](/system-variables.md#tidb_enable_historical_stats), you can specify a time in the `PLAN REPLAYER` statement to get the historical statistics for the corresponding time. You can directly specify a time and date or specify a timestamp. TiDB looks for the historical statistics before the specified time and exports the latest one among them.
 
@@ -268,6 +268,29 @@ The method of downloading the file of `PLAN REPLAYER CAPTURE` is the same as tha
 > **Note:**
 >
 > The result file of `PLAN REPLAYER CAPTURE` is kept in the TiDB cluster for up to one week. After one week, TiDB deletes the file.
+
+### Remove the capture tasks
+
+If a capture task is no longer needed, you can remove it using the `PLAN REPLAYER CAPTURE REMOVE` statement. For example:
+
+```sql
+mysql> PLAN REPLAYER CAPTURE '077a87a576e42360c95530ccdac7a1771c4efba17619e26be50a4cfd967204a0' '4838af52c1e07fc8694761ad193d16a689b2128bc5ced9d13beb31ae27b370ce';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SELECT * FROM mysql.plan_replayer_task;
++------------------------------------------------------------------+------------------------------------------------------------------+---------------------+
+| sql_digest                                                       | plan_digest                                                      | update_time         |
++------------------------------------------------------------------+------------------------------------------------------------------+---------------------+
+| 077a87a576e42360c95530ccdac7a1771c4efba17619e26be50a4cfd967204a0 | 4838af52c1e07fc8694761ad193d16a689b2128bc5ced9d13beb31ae27b370ce | 2024-05-21 11:26:10 |
++------------------------------------------------------------------+------------------------------------------------------------------+---------------------+
+1 row in set (0.01 sec)
+
+mysql> PLAN REPLAYER CAPTURE REMOVE '077a87a576e42360c95530ccdac7a1771c4efba17619e26be50a4cfd967204a0' '4838af52c1e07fc8694761ad193d16a689b2128bc5ced9d13beb31ae27b370ce';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SELECT * FROM mysql.plan_replayer_task;
+Empty set (0.01 sec)
+```
 
 ## Use `PLAN REPLAYER CONTINUOUS CAPTURE`
 

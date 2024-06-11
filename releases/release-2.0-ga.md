@@ -68,7 +68,7 @@ On April 27, 2018, TiDB 2.0 GA is released! Compared with TiDB 1.0, this release
     - Optimize the scheduling policies to prevent the disks from becoming full when the space of TiKV nodes is insufficient
     - Improve the scheduling efficiency of the balance-leader scheduler
     - Reduce the scheduling overhead of the balance-region scheduler
-    - Optimize the execution efficiency of the the hot-region scheduler
+    - Optimize the execution efficiency of the hot-region scheduler
 - Operations interface and configuration
     - Support TLS
     - Support prioritizing the PD leaders

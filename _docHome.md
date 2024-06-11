@@ -76,7 +76,7 @@ Learn how to deploy TiDB locally in a production environment.
 
 The open-source TiDB platform is released under the Apache 2.0 license and is supported by the community.
 
-<a href="https://en.pingcap.com/download/" class="button" target="_blank" referrerpolicy="no-referrer-when-downgrade">Download</a>
+<a href="https://github.com/pingcap/tidb" class="button" target="_blank" referrerpolicy="no-referrer-when-downgrade">View on GitHub</a>
 
 </DocHomeSection>
 

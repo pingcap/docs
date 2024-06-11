@@ -39,6 +39,10 @@ As an open-source distributed SQL database with high performance, TiDB can be de
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
+    <td>Amazon Linux 2023</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
     <td>Rocky Linux 9.1 or later</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
@@ -51,7 +55,7 @@ As an open-source distributed SQL database with high performance, TiDB can be de
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
-    <td>openEuler 22.03 LTS SP1</td>
+    <td>openEuler 22.03 LTS SP1/SP3</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
@@ -102,7 +106,7 @@ As an open-source distributed SQL database with high performance, TiDB can be de
 |  Libraries required for compiling and running TiDB |  Version   |
 |   :---   |   :---   |
 |   Golang  |  1.21 or later |
-|   Rust    |   nightly-2022-07-31 or later  |
+|   Rust    |   nightly-2023-12-28 or later  |
 |  GCC      |   7.x      |
 |  LLVM     |  13.0 or later  |
 

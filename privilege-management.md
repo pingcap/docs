@@ -299,7 +299,7 @@ Requires the `CREATE VIEW` privilege.
 
 ### DROP DATABASE
 
-Requires the `DROP` privilege for the table.
+Requires the `DROP` privilege for the database.
 
 ### DROP INDEX
 

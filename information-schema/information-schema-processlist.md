@@ -5,7 +5,7 @@ summary: Learn the `PROCESSLIST` information_schema table.
 
 # PROCESSLIST
 
-`PROCESSLIST`, just like `SHOW PROCESSLIST`, is used to view the requests that are being handled.
+`PROCESSLIST`, just like [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md), is used to view the requests that are being handled.
 
 The `PROCESSLIST` table has additional columns not present in `SHOW PROCESSLIST`:
 
@@ -14,8 +14,6 @@ The `PROCESSLIST` table has additional columns not present in `SHOW PROCESSLIST`
 * A `DISK` column to show the disk usage in bytes.
 * A `TxnStart` column to show the start time of the transaction.
 * A `RESOURCE_GROUP` column to show the resource group name.
-
-{{< copyable "sql" >}}
 
 ```sql
 USE information_schema;
@@ -42,8 +40,6 @@ DESC processlist;
 +---------------------+---------------------+------+------+---------+-------+
 13 rows in set (0.00 sec)
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT * FROM processlist\G
@@ -86,8 +82,6 @@ Fields in the `PROCESSLIST` table are described as follows:
 ## CLUSTER_PROCESSLIST
 
 `CLUSTER_PROCESSLIST` is the cluster system table corresponding to `PROCESSLIST`. It is used to query the `PROCESSLIST` information of all TiDB nodes in the cluster. The table schema of `CLUSTER_PROCESSLIST` has one more column than `PROCESSLIST`, the `INSTANCE` column, which stores the address of the TiDB node this row of data is from.
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT * FROM information_schema.cluster_processlist;

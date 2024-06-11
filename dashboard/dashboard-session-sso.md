@@ -104,7 +104,7 @@ First, create an Okta Application Integration to integrate SSO.
 
     ![Sample Step](/media/dashboard/dashboard-session-sso-okta-1.png)
 
-4. In the poped up dialog, choose **OIDC - OpenID Connect** in **Sign-in method**.
+4. In the popped up dialog, choose **OIDC - OpenID Connect** in **Sign-in method**.
 
 5. Choose **Single-Page Application** in **Application Type**.
 

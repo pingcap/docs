@@ -19,7 +19,7 @@ Before you back up or restore data using the br command-line tool (hereinafter r
 > - The following examples assume that Amazon S3 access keys and secret keys are used to authorize permissions. If IAM roles are used to authorize permissions, you need to set `--send-credentials-to-tikv` to `false`.
 > - If other storage systems or authorization methods are used to authorize permissions, adjust the parameter settings according to [Backup Storages](/br/backup-and-restore-storages.md).
 
-To start a log backup, run `br log start`. A cluster can only run one log backup task each time.
+To start a log backup, run `tiup br log start`. A cluster can only run one log backup task each time.
 
 ```shell
 tiup br log start --task-name=pitr --pd "${PD_IP}:2379" \
@@ -48,7 +48,7 @@ checkpoint[global]: 2022-05-13 11:31:47.2 +0800; gap=4m53s
 
 ### Run full backup regularly
 
-The snapshot backup can be used as a method of full backup. You can run `br backup full` to back up the cluster snapshot to the backup storage according to a fixed schedule (for example, every 2 days).
+The snapshot backup can be used as a method of full backup. You can run `tiup br backup full` to back up the cluster snapshot to the backup storage according to a fixed schedule (for example, every 2 days).
 
 ```shell
 tiup br backup full --pd "${PD_IP}:2379" \
@@ -57,10 +57,10 @@ tiup br backup full --pd "${PD_IP}:2379" \
 
 ## Run PITR
 
-To restore the cluster to any point in time within the backup retention period, you can use `br restore point`. When you run this command, you need to specify the **time point you want to restore**, **the latest snapshot backup data before the time point**, and the **log backup data**. BR will automatically determine and read data needed for the restore, and then restore these data to the specified cluster in order.
+To restore the cluster to any point in time within the backup retention period, you can use `tiup br restore point`. When you run this command, you need to specify the **time point you want to restore**, **the latest snapshot backup data before the time point**, and the **log backup data**. BR will automatically determine and read data needed for the restore, and then restore these data to the specified cluster in order.
 
 ```shell
-br restore point --pd "${PD_IP}:2379" \
+tiup br restore point --pd "${PD_IP}:2379" \
 --storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}' \
 --full-backup-storage='s3://backup-101/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}' \
 --restored-ts '2022-05-15 18:00:00+0800'
@@ -80,7 +80,7 @@ Restore KV Files <--------------------------------------------------------------
 
 As described in the [Usage Overview of TiDB Backup and Restore](/br/br-use-overview.md):
 
-To perform PITR, you need to restore the full backup before the restore point, and the log backup between the full backup point and the restore point. Therefore, for log backups that exceed the backup retention period, you can use `br log truncate` to delete the backup before the specified time point. **It is recommended to only delete the log backup before the full snapshot**.
+To perform PITR, you need to restore the full backup before the restore point, and the log backup between the full backup point and the restore point. Therefore, for log backups that exceed the backup retention period, you can use `tiup br log truncate` to delete the backup before the specified time point. **It is recommended to only delete the log backup before the full snapshot**.
 
 The following steps describe how to clean up backup data that exceeds the backup retention period:
 
@@ -100,7 +100,7 @@ The following steps describe how to clean up backup data that exceeds the backup
 4. Delete snapshot data earlier than the snapshot backup `FULL_BACKUP_TS`:
 
     ```shell
-    rm -rf s3://backup-101/snapshot-${date}
+    aws s3 rm --recursive s3://backup-101/snapshot-${date}
     ```
 
 ## Performance capabilities of PITR

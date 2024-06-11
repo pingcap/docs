@@ -182,7 +182,7 @@ You can use the generated client code to develop your Next.js application.
 
     > **Note:**
     >
-    > If the linked clusters of your Data App are hosted in different regions, you wil see multiple items in the `servers` section of the downloaded OpenAPI Specification file. In this case, you also need to configure the endpoint path in the `config` object as follows:
+    > If the linked clusters of your Data App are hosted in different regions, you will see multiple items in the `servers` section of the downloaded OpenAPI Specification file. In this case, you also need to configure the endpoint path in the `config` object as follows:
     >
     >  ```js
     >  const config = new Configuration({

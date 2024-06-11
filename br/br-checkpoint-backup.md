@@ -35,7 +35,7 @@ To avoid this situation, `br` keeps the `gc-safepoint` for about one hour by def
 The following example sets `gcttl` to 15 hours (54000 seconds) to extend the retention period of `gc-safepoint`:
 
 ```shell
-br backup full \
+tiup br backup full \
 --storage local:///br_data/ --pd "${PD_IP}:2379" \
 --gcttl 54000
 ```

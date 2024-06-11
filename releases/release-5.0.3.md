@@ -1,5 +1,6 @@
 ---
 title: TiDB 5.0.3 Release Notes
+summary: TiDB 5.0.3 was released on July 2, 2021. The release includes compatibility changes, feature enhancements, improvements, bug fixes, and updates for TiDB, TiKV, PD, TiFlash, and Tools like TiCDC, Backup & Restore (BR), and TiDB Lightning. Some notable changes include support for pushing down operators and functions to TiFlash, memory consumption limits for TiCDC, and bug fixes for various issues in TiDB, TiKV, PD, and TiFlash.
 ---
 
 # TiDB 5.0.3 Release Notes

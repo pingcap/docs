@@ -6,7 +6,7 @@ aliases: ['/docs/dev/functions-and-operators/string-functions/','/docs/dev/refer
 
 # String Functions
 
-TiDB supports most of the [string functions](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html) available in MySQL 5.7, some of the [string functions](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html) available in MySQL 8.0, and some of the [functions](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlqr/SQL-Functions.html#GUID-93EC62F8-415D-4A7E-B050-5D5B2C127009) available in Oracle 21.
+TiDB supports most of the [string functions](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html) available in MySQL 8.0, and some of the [functions](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlqr/SQL-Functions.html#GUID-93EC62F8-415D-4A7E-B050-5D5B2C127009) available in Oracle 21.
 
 <CustomContent platform="tidb">
 
@@ -134,7 +134,7 @@ SELECT CustomerName, BIT_LENGTH(CustomerName) AS BitLengthOfName FROM Customers;
 
 ### [`CHAR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char)
 
-The `CHAR()` function is used to get the corresponding character of a specific ASCII value. It performs the opposite operation of `ASCII()`, which returns the ASCII value of a specific character.
+The `CHAR()` function is used to get the corresponding character of a specific ASCII value. It performs the opposite operation of `ASCII()`, which returns the ASCII value of a specific character. If multiple arguments are supplied, the function works on all arguments and are then concaternated together.
 
 Examples:
 
@@ -188,6 +188,19 @@ SELECT CHAR(50089);
 +--------------+
 ```
 
+```sql
+SELECT CHAR(65,66,67);
+```
+
+```
++----------------+
+| CHAR(65,66,67) |
++----------------+
+| ABC            |
++----------------+
+1 row in set (0.00 sec)
+```
+
 ### [`CHAR_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char-length)
 
 The `CHAR_LENGTH()` function is used to get the total number of characters in a given argument as an integer.
@@ -205,10 +218,10 @@ SELECT CHAR_LENGTH("TiDB") AS LengthOfString;
 ```
 
 ```sql
-SELECT CustomerName, CHAR_LENGTH(CustomerName) AS LenghtOfName FROM Customers;
+SELECT CustomerName, CHAR_LENGTH(CustomerName) AS LengthOfName FROM Customers;
 
 +--------------------+--------------+
-| CustomerName       | LenghtOfName |
+| CustomerName       | LengthOfName |
 +--------------------+--------------+
 | Albert Einstein    |           15 |
 | Robert Oppenheimer |           18 |
@@ -223,7 +236,7 @@ SELECT CustomerName, CHAR_LENGTH(CustomerName) AS LenghtOfName FROM Customers;
 
 The `CHARACTER_LENGTH()` function is the same as the `CHAR_LENGTH()` function. Both functions can be used synonymously because they generate the same output.
 
-## [`CONCAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat)
+### [`CONCAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat)
 
 The `CONCAT()` function concatenates one or more arguments into a single string.
 
@@ -406,11 +419,85 @@ Output:
 
 ### [`ELT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_elt)
 
-Return string at index number.
+The `ELT()` function returns the element at the index number.
+
+```sql
+SELECT ELT(3, 'This', 'is', 'TiDB');
+```
+
+```sql
++------------------------------+
+| ELT(3, 'This', 'is', 'TiDB') |
++------------------------------+
+| TiDB                         |
++------------------------------+
+1 row in set (0.00 sec)
+```
+
+The preceding example returns the third element, which is `'TiDB'`.
 
 ### [`EXPORT_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_export-set)
 
-Return a string such that for every bit set in the value bits, you get an on string and for every unset bit, you get an off string.
+The `EXPORT_SET()` function returns a string that consists of a specified number (`number_of_bits`) of `on`/`off` values, optionally separated by `separator`. These values are based on whether the corresponding bit in the `bits` argument is `1`, where the first value corresponds to the rightmost (lowest) bit of `bits`.
+
+Syntax:
+
+```sql
+EXPORT_SET(bits, on, off, [separator[, number_of_bits]])
+```
+
+- `bits`: an integer representing the bit value.
+- `on`: the string to be returned if the corresponding bit is `1`.
+- `off`: the string to be returned if the corresponding bit is `0`.
+- `separator` (optional): the separator character in the result string.
+- `number_of_bits` (optional): the number of bits to be processed. If it is not set, `64` (the max size of bits) is used by default, which means that `bits` is treated as an unsigned 64-bit integer.
+
+Examples:
+
+In the following example, `number_of_bits` is set to `5`, resulting in 5 values, separated by `|`. Because only 3 bits are given, the other bits are considered unset. Therefore, setting `number_of_bits` to either `101` or `00101` results in the same output.
+
+```sql
+SELECT EXPORT_SET(b'101',"ON",'off','|',5);
+```
+
+```sql
++-------------------------------------+
+| EXPORT_SET(b'101',"ON",'off','|',5) |
++-------------------------------------+
+| ON|off|ON|off|off                   |
++-------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the following example, `bits` is set to `00001111`, `on` is set to `x`, and `off` is set to `_`. This causes the function to return `____` for the `0` bits and `xxxx` for the `1` bits. Therefore, when processing with the bits in `00001111` from right to left, the function returns `xxxx____`.
+
+```sql
+SELECT EXPORT_SET(b'00001111', 'x', '_', '', 8);
+```
+
+```sql
++------------------------------------------+
+| EXPORT_SET(b'00001111', 'x', '_', '', 8) |
++------------------------------------------+
+| xxxx____                                 |
++------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the following example, `bits` is set to `00001111`, `on` is set to `x`, and `off` is set to `_`. This causes the function to return `x` for each `1` bit and `_` for each `0` bit. Therefore, when processing with the bits in `01010101` from right to left, the function returns `x_x_x_x_`.
+
+```sql
+SELECT EXPORT_SET(b'01010101', 'x', '_', '', 8);
+```
+
+```sql
++------------------------------------------+
+| EXPORT_SET(b'01010101', 'x', '_', '', 8) |
++------------------------------------------+
+| x_x_x_x_                                 |
++------------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ### [`FIELD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_field)
 
@@ -1226,19 +1313,198 @@ SELECT LPAD('TiDB',-2,'>');
 
 ### [`LTRIM()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ltrim)
 
-Remove leading spaces.
+The `LTRIM()` function removes leading spaces from a given string.
+
+If the argument is `NULL`, this function returns `NULL`.
+
+> **Note:**
+>
+> This function only removes the space character (U+0020) and does not remove other space-like characters such as tab (U+0009) or non-breaking space (U+00A0).
+
+Examples:
+
+In the following example, the `LTRIM()` function removes the leading spaces from `'    hello'` and returns `hello`.
+
+```sql
+SELECT LTRIM('    hello');
+```
+
+```
++--------------------+
+| LTRIM('    hello') |
++--------------------+
+| hello              |
++--------------------+
+1 row in set (0.00 sec)
+```
+
+In the following example, [`CONCAT()`](#concat) is used to enclose the result of `LTRIM('    hello')` with `«` and `»`. This formatting makes it a bit easier to see that all leading spaces are removed.
+
+```sql
+SELECT CONCAT('«',LTRIM('    hello'),'»');
+```
+
+```
++------------------------------------+
+| CONCAT('«',LTRIM('    hello'),'»') |
++------------------------------------+
+| «hello»                            |
++------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ### [`MAKE_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_make-set)
 
-Return a set of comma-separated strings that have the corresponding bit in bits set.
+The `MAKE_SET()` function returns a set of comma-separated strings based on whether a corresponding bit in the `bits` argument is set to `1`.
+
+Syntax:
+
+```sql
+MAKE_SET(bits, str1, str2, ...)
+```
+
+- `bits`: controls which subsequent string arguments to include in the result set. If `bits` is set to `NULL`, the function returns `NULL`.
+- `str1, str2, ...`: a list of strings. Each string corresponds to a bit in the `bits` argument from right to left. `str1` corresponds to the first bit from the right, `str2` corresponds to the second bit from the right, and so on. If the corresponding bit is `1`, the string is included in the result; otherwise, it is not included.
+
+Examples:
+
+In the following example, because all bits are set to `0` in the `bits` argument, the function does not include any subsequent strings in the result and returns an empty string.
+
+```sql
+SELECT MAKE_SET(b'000','foo','bar','baz');
+```
+
+```
++------------------------------------+
+| MAKE_SET(b'000','foo','bar','baz') |
++------------------------------------+
+|                                    |
++------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the following example, because only the first bit from the right is `1`, the function only returns the first string `foo`.
+
+```sql
+SELECT MAKE_SET(b'001','foo','bar','baz');
+```
+
+```
++------------------------------------+
+| MAKE_SET(b'001','foo','bar','baz') |
++------------------------------------+
+| foo                                |
++------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the following example, because only the second bit from the right is `1`, the function only returns the second string `bar`.
+
+```sql
+SELECT MAKE_SET(b'010','foo','bar','baz');
+```
+
+```
++------------------------------------+
+| MAKE_SET(b'010','foo','bar','baz') |
++------------------------------------+
+| bar                                |
++------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the following example, because only the third bit from the right is `1`, the function only returns the third string `baz`.
+
+```sql
+SELECT MAKE_SET(b'100','foo','bar','baz');
+```
+
+```
++------------------------------------+
+| MAKE_SET(b'100','foo','bar','baz') |
++------------------------------------+
+| baz                                |
++------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the following example, because all bits are `1`, the function returns all three strings in a comma-separated result set.
+
+```sql
+SELECT MAKE_SET(b'111','foo','bar','baz');
+```
+
+```
++------------------------------------+
+| MAKE_SET(b'111','foo','bar','baz') |
++------------------------------------+
+| foo,bar,baz                        |
++------------------------------------+
+1 row in set (0.0002 sec)
+```
 
 ### [`MID()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_mid)
 
-Return a substring starting from the specified position.
+The `MID(str, pos, len)` function returns a substring starting from the specified `pos` position with the `len` length.
+
+If any of the arguments are `NULL`, the function returns `NULL`.
+
+TiDB does not support the two-argument variant of this function. For more information, see [#52420](https://github.com/pingcap/tidb/issues/52420).
+
+Examples:
+
+In the following example, `MID()` returns the substring of the input string starting from the second character (`b`) with a length of `3` characters.
+
+```sql
+SELECT MID('abcdef',2,3);
+```
+
+```
++-------------------+
+| MID('abcdef',2,3) |
++-------------------+
+| bcd               |
++-------------------+
+1 row in set (0.00 sec)
+```
 
 ### [`NOT LIKE`](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_not-like)
 
 Negation of simple pattern matching.
+
+This function performs the inverse operation of [`LIKE`](#like).
+
+Examples:
+
+In the following example, `NOT LIKE` returns `0` (False) because `aaa` matches the `a%` pattern.
+
+```sql
+SELECT 'aaa' LIKE 'a%', 'aaa' NOT LIKE 'a%';
+```
+
+```
++-----------------+---------------------+
+| 'aaa' LIKE 'a%' | 'aaa' NOT LIKE 'a%' |
++-----------------+---------------------+
+|               1 |                   0 |
++-----------------+---------------------+
+1 row in set (0.00 sec)
+```
+
+In the following example, `NOT LIKE` returns `1` (True) because `aaa` does not match the `b%` pattern.
+
+```sql
+SELECT 'aaa' LIKE 'b%', 'aaa' NOT LIKE 'b%';
+```
+
+```
++-----------------+---------------------+
+| 'aaa' LIKE 'b%' | 'aaa' NOT LIKE 'b%' |
++-----------------+---------------------+
+|               0 |                   1 |
++-----------------+---------------------+
+1 row in set (0.00 sec)
+```
 
 ### [`NOT REGEXP`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_not-regexp)
 
@@ -1292,39 +1558,455 @@ SELECT n, OCT(n) FROM nr;
 
 ### [`OCTET_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_octet-length)
 
-Synonym for `LENGTH()`.
+Synonym for [`LENGTH()`](#length).
 
 ### [`ORD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ord)
 
-Return character code for leftmost character of the argument.
+Return the character code for the leftmost character of the given argument.
+
+This function is similar to [`CHAR()`](#char) but works the other way around.
+
+Examples:
+
+Taking `a` and `A` as an example, `ORD()` returns `97` for `a` and `65` for `A`.
+
+```sql
+SELECT ORD('a'), ORD('A');
+```
+
+```
++----------+----------+
+| ORD('a') | ORD('A') |
++----------+----------+
+|       97 |       65 |
++----------+----------+
+1 row in set (0.00 sec)
+```
+
+If you take the character code obtained from `ORD()` as input, you can get the original characters back using the `CHAR()` function. Note that the output format might vary depending on whether the `binary-as-hex` option is enabled in your MySQL client.
+
+```sql
+SELECT CHAR(97), CHAR(65);
+```
+
+```
++----------+----------+
+| CHAR(97) | CHAR(65) |
++----------+----------+
+| a        | A        |
++----------+----------+
+1 row in set (0.01 sec)
+```
+
+The following example shows how `ORD()` handles multibyte characters. Here, both `101` and `0x65` are the UTF-8 encoded values for the `e` character, but in different formats. And both `50091` and `0xC3AB` represent the same values, but for the `ë` character. 
+
+```sql
+SELECT ORD('e'), ORD('ë'), HEX('e'), HEX('ë');
+```
+
+```
++----------+-----------+----------+-----------+
+| ORD('e') | ORD('ë')  | HEX('e') | HEX('ë')  |
++----------+-----------+----------+-----------+
+|      101 |     50091 | 65       | C3AB      |
++----------+-----------+----------+-----------+
+1 row in set (0.00 sec)
+```
 
 ### [`POSITION()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_position)
 
-Synonym for `LOCATE()`.
+Synonym for [`LOCATE()`](#locate).
 
 ### [`QUOTE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_quote)
 
 Escape the argument for use in an SQL statement.
 
+If the argument is `NULL`, the function returns `NULL`.
+
+Example:
+
+To display the result directly instead of showing a hexadecimal-encoded value, you need to start the MySQL client with the [`--skip-binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex) option.
+
+The following example shows that the ASCII NULL character is escaped as `\0` and the single quote character `'` is escaped as `\'`:
+
+```sql
+SELECT QUOTE(0x002774657374);
+```
+
+```
++-----------------------+
+| QUOTE(0x002774657374) |
++-----------------------+
+| '\0\'test'            |
++-----------------------+
+1 row in set (0.00 sec)
+```
+
 ### [`REGEXP`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp)
 
 Pattern matching using regular expressions.
+
+Examples:
+
+In this example a number of strings are matched against two regular expressions.
+
+```sql
+WITH vals AS (
+    SELECT 'TiDB' AS v 
+    UNION ALL
+    SELECT 'Titanium'
+    UNION ALL
+    SELECT 'Tungsten'
+    UNION ALL
+    SELECT 'Rust'
+)
+SELECT 
+    v,
+    v REGEXP '^Ti' AS 'starts with "Ti"',
+    v REGEXP '^.{4}$' AS 'Length is 4 characters'
+FROM
+    vals;
+```
+
+```
++----------+------------------+------------------------+
+| v        | starts with "Ti" | Length is 4 characters |
++----------+------------------+------------------------+
+| TiDB     |                1 |                      1 |
+| Titanium |                1 |                      0 |
+| Tungsten |                0 |                      0 |
+| Rust     |                0 |                      1 |
++----------+------------------+------------------------+
+4 rows in set (0.00 sec)
+```
+
+The following example demonstrates that `REGEXP` is not limited to the `SELECT` clause. For example, you can also use it in the `WHERE` clause of the query.
+
+```sql
+SELECT
+    v
+FROM (
+        SELECT 'TiDB' AS v
+    ) AS vals
+WHERE
+    v REGEXP 'DB$';
+```
+
+```
++------+
+| v    |
++------+
+| TiDB |
++------+
+1 row in set (0.01 sec)
+```
 
 ### [`REGEXP_INSTR()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-instr)
 
 Return the starting index of the substring that matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
 
+The `REGEXP_INSTR(str, regexp, [start, [match, [ret, [match_type]]]])` function returns the position of the match if the regular expression (`regexp`) matches the string (`str`).
+
+If either the `str` or `regexp` is `NULL`, then the function returns `NULL`.
+
+Examples:
+
+In the example below you can see that the `^.b.$` matches `abc`.
+
+```sql
+SELECT REGEXP_INSTR('abc','^.b.$');
+```
+
+```
++-----------------------------+
+| REGEXP_INSTR('abc','^.b.$') |
++-----------------------------+
+|                           1 |
++-----------------------------+
+1 row in set (0.00 sec)
+```
+
+The following example uses the third argument to look for a match with a different start position in the string.
+
+```sql
+SELECT REGEXP_INSTR('abcabc','a');
+```
+
+```
++----------------------------+
+| REGEXP_INSTR('abcabc','a') |
++----------------------------+
+|                          1 |
++----------------------------+
+1 row in set (0.00 sec)
+```
+
+```sql
+SELECT REGEXP_INSTR('abcabc','a',2);
+```
+
+```
++------------------------------+
+| REGEXP_INSTR('abcabc','a',2) |
++------------------------------+
+|                            4 |
++------------------------------+
+1 row in set (0.00 sec)
+```
+
+The following example uses the 4th argument to look for the second match.
+
+```sql
+SELECT REGEXP_INSTR('abcabc','a',1,2);
+```
+
+```
++--------------------------------+
+| REGEXP_INSTR('abcabc','a',1,2) |
++--------------------------------+
+|                              4 |
++--------------------------------+
+1 row in set (0.00 sec)
+```
+
+The following example uses the 5th argument to return the value _after_ the mach, instead of the value of the match.
+
+```sql
+SELECT REGEXP_INSTR('abcabc','a',1,1,1);
+```
+
+```
++----------------------------------+
+| REGEXP_INSTR('abcabc','a',1,1,1) |
++----------------------------------+
+|                                2 |
++----------------------------------+
+1 row in set (0.00 sec)
+```
+
+The following example uses the 6th argument to add the `i` flag to get a case insensitive match. For more details about regular expression `match_type`, see [`match_type` compatibility](#match_type-compatibility).
+
+```sql
+SELECT REGEXP_INSTR('abcabc','A',1,1,0,'');
+```
+
+```
++-------------------------------------+
+| REGEXP_INSTR('abcabc','A',1,1,0,'') |
++-------------------------------------+
+|                                   0 |
++-------------------------------------+
+1 row in set (0.00 sec)
+```
+
+```sql
+SELECT REGEXP_INSTR('abcabc','A',1,1,0,'i');
+```
+
+```
++--------------------------------------+
+| REGEXP_INSTR('abcabc','A',1,1,0,'i') |
++--------------------------------------+
+|                                    1 |
++--------------------------------------+
+1 row in set (0.00 sec)
+```
+
+Besides `match_type`, the [collation](/character-set-and-collation.md) also influences the matching. The following example uses a case-sensitive and a case-insensitive collation to demonstrate this.
+
+```sql
+SELECT REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_general_ci);
+```
+
+```
++-------------------------------------------------------+
+| REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_general_ci) |
++-------------------------------------------------------+
+|                                                     1 |
++-------------------------------------------------------+
+1 row in set (0.01 sec)
+```
+
+```sql
+SELECT REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_bin);
+```
+
+```
++------------------------------------------------+
+| REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_bin) |
++------------------------------------------------+
+|                                              0 |
++------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
 ### [`REGEXP_LIKE()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-like)
 
 Whether the string matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
+
+The `REGEXP_LIKE(str, regex, [match_type])` function is used to test if a regular expression matches a string. Optionally the `match_type` can be used to change the matching behavior.
+
+Examples:
+
+The following example shows that `^a` matches `abc`.
+
+```sql
+SELECT REGEXP_LIKE('abc','^a');
+```
+
+```
++-------------------------+
+| REGEXP_LIKE('abc','^a') |
++-------------------------+
+|                       1 |
++-------------------------+
+1 row in set (0.00 sec)
+```
+
+This following example shows that `^A` does not match `abc`.
+
+```sql
+SELECT REGEXP_LIKE('abc','^A');
+```
+
+```
++-------------------------+
+| REGEXP_LIKE('abc','^A') |
++-------------------------+
+|                       0 |
++-------------------------+
+1 row in set (0.00 sec)
+```
+
+This example matches `^A` against `abc`, which now matches because of the `i` flag which enabled case insensitive matching. For more details about the regular expression `match_type`, see [`match_type` compatibility](#match_type-compatibility).
+
+```sql
+SELECT REGEXP_LIKE('abc','^A','i');
+```
+
+```
++-----------------------------+
+| REGEXP_LIKE('abc','^A','i') |
++-----------------------------+
+|                           1 |
++-----------------------------+
+1 row in set (0.00 sec)
+```
 
 ### [`REGEXP_REPLACE()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-replace)
 
 Replace substrings that match the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
 
+The `REGEXP_REPLACE(str, regexp, replace, [start, [match, [match_type]]])` function can be used to replace strings based on regular expressions.
+
+Examples:
+
+In the following example, two o's are replaced by `i`.
+
+```sql
+SELECT REGEXP_REPLACE('TooDB', 'o{2}', 'i');
+```
+
+```
++--------------------------------------+
+| REGEXP_REPLACE('TooDB', 'o{2}', 'i') |
++--------------------------------------+
+| TiDB                                 |
++--------------------------------------+
+1 row in set (0.00 sec)
+```
+
+The following example starts the match at the third character, causing the regular expression not to match and not do any replacement.
+
+```sql
+SELECT REGEXP_REPLACE('TooDB', 'o{2}', 'i',3);
+```
+
+```
++----------------------------------------+
+| REGEXP_REPLACE('TooDB', 'o{2}', 'i',3) |
++----------------------------------------+
+| TooDB                                  |
++----------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the following example, the 5th argument is used to set if the first or the second match is used for the replacement.
+
+```sql
+SELECT REGEXP_REPLACE('TooDB', 'o', 'i',1,1);
+```
+
+```
++---------------------------------------+
+| REGEXP_REPLACE('TooDB', 'o', 'i',1,1) |
++---------------------------------------+
+| TioDB                                 |
++---------------------------------------+
+1 row in set (0.00 sec)
+```
+
+```sql
+SELECT REGEXP_REPLACE('TooDB', 'o', 'i',1,2);
+```
+
+```
++---------------------------------------+
+| REGEXP_REPLACE('TooDB', 'o', 'i',1,2) |
++---------------------------------------+
+| ToiDB                                 |
++---------------------------------------+
+1 row in set (0.00 sec)
+```
+
+The following example uses the 6th argument to set the `match_type` for case insensitive matching. For more details about the regular expression `match_type`, see [`match_type` compatibility](#match_type-compatibility).
+
+```sql
+SELECT REGEXP_REPLACE('TooDB', 'O{2}','i',1,1);
+```
+
+```
++-----------------------------------------+
+| REGEXP_REPLACE('TooDB', 'O{2}','i',1,1) |
++-----------------------------------------+
+| TooDB                                   |
++-----------------------------------------+
+1 row in set (0.00 sec)
+```
+
+```sql
+SELECT REGEXP_REPLACE('TooDB', 'O{2}','i',1,1,'i');
+```
+
+```
++---------------------------------------------+
+| REGEXP_REPLACE('TooDB', 'O{2}','i',1,1,'i') |
++---------------------------------------------+
+| TiDB                                        |
++---------------------------------------------+
+1 row in set (0.00 sec)
+```
+
 ### [`REGEXP_SUBSTR()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-substr)
 
 Return the substring that matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)).
+
+The `REGEXP_SUBSTR(str, regexp, [start, [match, [match_type]]])` function is used to get a substring based on a regular expression.
+
+The following example uses the `Ti.{2}` regular expression to get the `TiDB` substring of the `This is TiDB` string.
+
+```sql
+SELECT REGEXP_SUBSTR('This is TiDB','Ti.{2}');
+```
+
+```
++----------------------------------------+
+| REGEXP_SUBSTR('This is TiDB','Ti.{2}') |
++----------------------------------------+
+| TiDB                                   |
++----------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ### [`REPEAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_repeat)
 
@@ -1400,7 +2082,7 @@ Return the specified rightmost number of characters.
 
 ### [`RLIKE`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp)
 
-Synonym for `REGEXP`.
+Synonym for [`REGEXP`](#regexp).
 
 ### [`RPAD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_rpad)
 
@@ -1641,7 +2323,7 @@ Output:
 
 ## Regular expression compatibility with MySQL
 
-The following sections describe the regular expression compatibility with MySQL.
+The following sections describe the regular expression compatibility with MySQL, including `REGEXP_INSTR()`, `REGEXP_LIKE()`, `REGEXP_REPLACE()`, and `REGEXP_SUBSTR()`.
 
 ### Syntax compatibility
 
@@ -1657,6 +2339,15 @@ The value options of `match_type` between TiDB and MySQL are:
     For example, the `SELECT REGEXP_LIKE(a, b, "n") FROM t1` in MySQL is the same as the `SELECT REGEXP_LIKE(a, b, "s") FROM t1` in TiDB.
 
 - TiDB does not support `"u"`, which means Unix-only line endings in MySQL.
+
+| `match_type` | MySQL | TiDB | Description                            |
+|:------------:|-------|------|----------------------------------------|
+| c            | Yes   | Yes  | Case-sensitive matching                |
+| i            | Yes   | Yes  | Case-insensitive matching              |
+| m            | Yes   | Yes  | Multi-line mode                        |
+| s            | No    | Yes  | Matches newlines, same as `n` in MySQL |
+| n            | Yes   | No   | Matches newlines, same as `s` in TiDB  |
+| u            | Yes   | No   | UNIX&trade; line endings               |
 
 ### Data type compatibility
 
@@ -1679,3 +2370,7 @@ The difference between TiDB and MySQL support for the binary string type:
     ```sql
     SELECT REGEXP_REPLACE('abcd','(.*)(.{2})$','\\1') AS s;
     ```
+
+### Known issues
+
+- [GitHub Issue #37981](https://github.com/pingcap/tidb/issues/37981)

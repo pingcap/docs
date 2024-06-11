@@ -193,6 +193,11 @@ When you start the TiDB cluster, you can use command-line options or environment
 - The temporary directory of TiDB
 - Default: `"/tmp/tidb"`
 
+## `--tidb-service-scope`
+
++ Specifies the initial value of [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) for the current TiDB instance.
++ Default: `""`
+
 ## `--token-limit`
 
 - The number of sessions allowed to run concurrently in TiDB. It is used for traffic control.
@@ -218,6 +223,12 @@ When you start the TiDB cluster, you can use command-line options or environment
 
 + Sets the CPU affinity of TiDB servers, which is separated by commas. For example, "1,2,3".
 + Default: `""`
+
+## `--redact`
+
++ Determines whether the TiDB server desensitizes log files when using the subcommand `collect-log`.
++ Default: false
++ When the value is `true`, it is a masking operation, and all fields wrapped in `‹ ›` mark symbols are replaced with `?`. When the value is `false`, it is a restore operation, and all mark symbols are removed. To use this feature, execute `./tidb-server --redact=xxx collect-log <input> <output>` to desensitize or restore the TiDB server log file specified by `<input>` and output it to `<output>`. For more information, see the system variable [`tidb_redact_log`](/system-variables.md#tidb_redact_log).
 
 ## `--repair-mode`
 

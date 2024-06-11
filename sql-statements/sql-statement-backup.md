@@ -138,9 +138,11 @@ BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/'
 
 Use `RATE_LIMIT` to limit the average upload speed per TiKV node to reduce network bandwidth.
 
-By default, every TiKV node would run 4 backup threads. This value can be adjusted with the `CONCURRENCY` option.
+Before the backup is completed, `BACKUP` would perform a checksum against the data on the cluster to verify correctness. If you are confident that this verification is unnecessary, you can disable the check by setting the `CHECKSUM` parameter to `FALSE`.
 
-Before backup is completed, `BACKUP` would perform a checksum against the data on the cluster to verify correctness. This step can be disabled with the `CHECKSUM` option if you are confident that this is unnecessary.
+To specify the number of concurrent tasks that BR can execute for backing up tables and indices, use the `CONCURRENCY` parameter. This parameter controls the thread pool size within BR, optimizing the performance and efficiency of backup operations.
+
+One task represents one table range or one index range, according to the backup schemas. For one table with one index, two tasks are used to back up this table. The default value of `CONCURRENCY` is `4`. If you need to back up lots of tables or indices, increase its value.
 
 {{< copyable "sql" >}}
 

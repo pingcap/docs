@@ -84,7 +84,7 @@ The returned results are as follows:
 
 After creating a data source, you can use the following command to query the data source:
 
-- If you konw the `source-id` of the data source, you can use the `dmctl config source <source-id>` command to directly check the configuration of the data source:
+- If you know the `source-id` of the data source, you can use the `dmctl config source <source-id>` command to directly check the configuration of the data source:
 
     {{< copyable "shell-regular" >}}
 

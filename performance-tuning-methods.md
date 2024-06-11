@@ -187,7 +187,7 @@ The number of `StmtPrepare` commands per second is much greater than that of `St
 
 ![OLTP-Query](/media/performance/prepared_statement_leaking.png)
 
-- In the QPS panel, the red bold line indicates the number of failed queries, and the Y axis on the right indicates the coordinate value of the number. In this example, the number of failed quries per second is 74.6.
+- In the QPS panel, the red bold line indicates the number of failed queries, and the Y axis on the right indicates the coordinate value of the number. In this example, the number of failed queries per second is 74.6.
 - In the CPS By Type panel, the number of `StmtPrepare` commands per second is much greater than that of `StmtClose` per second, which indicates that an object leak occurs in the application for prepared statements.
 - In the Queries Using Plan Cache OPS panel, `avg-miss` is almost equal to `StmtExecute` in the CPS By Type panel, which indicates that almost all SQL executions miss the execution plan cache.
 
@@ -256,7 +256,7 @@ The Duration panel contains the average and P99 latency of all statements, and t
 - in-txn: The interval between processing the previous SQL and receiving the next SQL statement when the connection is within a transaction.
 - not-in-txn: The interval between processing the previous SQL and receiving the next SQL statement when the connection is not within a transaction.
 
-An applications perform transactions with the same database connction. By comparing the average query latency with the connection idle duration, you can determine if TiDB is the bottleneck for overall system, or if user response time jitter is caused by TiDB.
+An applications perform transactions with the same database connection. By comparing the average query latency with the connection idle duration, you can determine if TiDB is the bottleneck for overall system, or if user response time jitter is caused by TiDB.
 
 - If the application workload is not read-only and contains transactions, by comparing the average query latency with `avg-in-txn`, you can determine the proportion in processing transactions inside and outside the database, and identify the bottleneck in user response time.
 - If the application workload is read-only or autocommit mode is on, you can compare the average query latency with `avg-not-in-txn`.

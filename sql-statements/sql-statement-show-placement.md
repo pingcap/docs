@@ -21,12 +21,10 @@ The statement returns a result set in which the `Scheduling_State` field indicat
 
 ```ebnf+diagram
 ShowStmt ::=
-    "PLACEMENT"
+    "SHOW" "PLACEMENT" ShowLikeOrWhere?
 ```
 
 ## Examples
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4;

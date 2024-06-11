@@ -19,7 +19,7 @@ By default, BR sends a credential to each TiKV node when using Amazon S3, GCS, o
 Note that this operation is not applicable to cloud environments. If you use IAM Role authorization, each node has its own role and permissions. In this case, you need to configure `--send-credentials-to-tikv=false` (or `-c=0` in short) to disable sending credentials:
 
 ```bash
-./br backup full -c=0 -u pd-service:2379 --storage 's3://bucket-name/prefix'
+tiup br backup full -c=0 -u pd-service:2379 --storage 's3://bucket-name/prefix'
 ```
 
 If you back up or restore data using the [`BACKUP`](/sql-statements/sql-statement-backup.md) and [`RESTORE`](/sql-statements/sql-statement-restore.md) statements, you can add the `SEND_CREDENTIALS_TO_TIKV = FALSE` option:
@@ -50,14 +50,14 @@ This section provides some URI examples by using `external` as the `host` parame
 **Back up snapshot data to Amazon S3**
 
 ```shell
-./br backup full -u "${PD_IP}:2379" \
+tiup br backup full -u "${PD_IP}:2379" \
 --storage "s3://external/backup-20220915?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```
 
 **Restore snapshot data from Amazon S3**
 
 ```shell
-./br restore full -u "${PD_IP}:2379" \
+tiup br restore full -u "${PD_IP}:2379" \
 --storage "s3://external/backup-20220915?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```
 
@@ -67,14 +67,14 @@ This section provides some URI examples by using `external` as the `host` parame
 **Back up snapshot data to GCS**
 
 ```shell
-./br backup full --pd "${PD_IP}:2379" \
+tiup br backup full --pd "${PD_IP}:2379" \
 --storage "gcs://external/backup-20220915?credentials-file=${credentials-file-path}"
 ```
 
 **Restore snapshot data from GCS**
 
 ```shell
-./br restore full --pd "${PD_IP}:2379" \
+tiup br restore full --pd "${PD_IP}:2379" \
 --storage "gcs://external/backup-20220915?credentials-file=${credentials-file-path}"
 ```
 
@@ -84,14 +84,14 @@ This section provides some URI examples by using `external` as the `host` parame
 **Back up snapshot data to Azure Blob Storage**
 
 ```shell
-./br backup full -u "${PD_IP}:2379" \
+tiup br backup full -u "${PD_IP}:2379" \
 --storage "azure://external/backup-20220915?account-name=${account-name}&account-key=${account-key}"
 ```
 
 **Restore the `test` database from snapshot backup data in Azure Blob Storage**
 
 ```shell
-./br restore db --db test -u "${PD_IP}:2379" \
+tiup br restore db --db test -u "${PD_IP}:2379" \
 --storage "azure://external/backup-20220915account-name=${account-name}&account-key=${account-key}"
 ```
 
@@ -107,8 +107,8 @@ When storing backup data in a cloud storage system, you need to configure authen
 
 Before backup, configure the following privileges to access the backup directory on S3.
 
-- Minimum privileges for TiKV and Backup & Restore (BR) to access the backup directories during backup: `s3:ListBucket`, `s3:PutObject`, and `s3:AbortMultipartUpload`
-- Minimum privileges for TiKV and BR to access the backup directories during restore: `s3:ListBucket`, `s3:GetObject`, and `s3:PutObject`. BR writes checkpoint information to the `./checkpoints` subdirectory under the backup directory. When restoring log backup data, BR writes the table ID mapping relationship of the restored cluster to the `./pitr_id_maps` subdirectory under the backup directory.
+- Minimum privileges for TiKV and Backup & Restore (BR) to access the backup directories during backup: `s3:ListBucket`, `s3:GetObject`, `s3:DeleteObject`, `s3:PutObject`, and `s3:AbortMultipartUpload`
+- Minimum privileges for TiKV and BR to access the backup directories during restore: `s3:ListBucket`, `s3:GetObject`, `s3:DeleteObject`, and `s3:PutObject`. BR writes checkpoint information to the `./checkpoints` subdirectory under the backup directory. When restoring log backup data, BR writes the table ID mapping relationship of the restored cluster to the `./pitr_id_maps` subdirectory under the backup directory.
 
 If you have not yet created a backup directory, refer to [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) to create an S3 bucket in the specified region. If necessary, you can also create a folder in the bucket by referring to [Create a folder](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
 
@@ -128,7 +128,7 @@ It is recommended that you configure access to S3 using either of the following 
     Associate an IAM role that can access S3 with EC2 instances where the TiKV and BR nodes run. After the association, BR can directly access the backup directories in S3 without additional settings.
 
     ```shell
-    br backup full --pd "${PD_IP}:2379" \
+    tiup br backup full --pd "${PD_IP}:2379" \
     --storage "s3://${host}/${path}"
     ```
 
@@ -195,7 +195,7 @@ You can configure the account used to access GCS by specifying the access key. I
     - Use BR to back up data to Azure Blob Storage:
 
         ```shell
-        ./br backup full -u "${PD_IP}:2379" \
+        tiup br backup full -u "${PD_IP}:2379" \
         --storage "azure://external/backup-20220915?account-name=${account-name}"
         ```
 

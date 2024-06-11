@@ -31,7 +31,7 @@ The preceding steps are performed in a lab environment. You can also deploy a cl
 
 2. Create a Kafka cluster.
 
-    - Lab environment: refer to [Apache Kakfa Quickstart](https://kafka.apache.org/quickstart) to start a Kafka cluster.
+    - Lab environment: refer to [Apache Kafka Quickstart](https://kafka.apache.org/quickstart) to start a Kafka cluster.
     - Production environment: refer to [Running Kafka in Production](https://docs.confluent.io/platform/current/kafka/deployment.html) to deploy a Kafka production cluster.
 
 3. (Optional) Create a Flink cluster.

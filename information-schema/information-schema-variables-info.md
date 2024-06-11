@@ -5,7 +5,7 @@ summary: Learn the `VARIABLES_INFO` information_schema table.
 
 # VARIABLES_INFO
 
-The `VARIABLES_INFO` table provides information about the default value, current value, and scope of system variables in the current TiDB instance or TiDB cluster.
+The `VARIABLES_INFO` table provides information about the default value, current value, and scope of [system variables](/system-variables.md) in the current TiDB instance or TiDB cluster.
 
 ```sql
 USE information_schema;

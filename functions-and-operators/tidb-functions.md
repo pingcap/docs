@@ -149,7 +149,7 @@ ORDER BY
 4 rows in set (0.031 sec)
 ```
 
-`TIDB_DECODE_KEY` returns valid JSON on success and retuns the argument value if it fails to decode.
+`TIDB_DECODE_KEY` returns valid JSON on success and returns the argument value if it fails to decode.
 
 ### TIDB_DECODE_PLAN
 
@@ -333,12 +333,14 @@ To enable the checksum feature of single-row data in TiDB (controlled by the sys
 SET GLOBAL tidb_enable_row_level_checksum = ON;
 ```
 
+This configuration only takes effect for newly created sessions, so you need to reconnect to TiDB.
+
 Create table `t` and insert data:
 
 ```sql
 USE test;
-CREATE TABLE t (id INT PRIMARY KEY, k INT, c int);
-INSERT INTO TABLE t values (1, 10, a);
+CREATE TABLE t (id INT PRIMARY KEY, k INT, c CHAR(1));
+INSERT INTO t values (1, 10, 'a');
 ```
 
 The following statement shows how to query the checksum value of the row where `id = 1` in table `t`:

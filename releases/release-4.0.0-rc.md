@@ -38,7 +38,7 @@ TiUP version: 0.0.3
 + TiDB
 
     - Fix the issue that replication between the upstream and downstream might go wrong when the DDL job is executed using the `PREPARE` statement because of the incorrect job query in the internal records [#15435](https://github.com/pingcap/tidb/pull/15435)
-    - Fix the issue of incorrect subquery result in the `Read Commited` isolation level [#15471](https://github.com/pingcap/tidb/pull/15471)
+    - Fix the issue of incorrect subquery result in the `Read Committed` isolation level [#15471](https://github.com/pingcap/tidb/pull/15471)
     - Fix the issue of incorrect results caused by the Inline Projection optimization [#15411](https://github.com/pingcap/tidb/pull/15411)
     - Fix the issue that the SQL Hint `INL_MERGE_JOIN` is executed incorrectly in some cases [#15515](https://github.com/pingcap/tidb/pull/15515)
     - Fix the issue that columns with the `AutoRandom` attribute are rebased when the negative number is explicitly written to these columns [#15397](https://github.com/pingcap/tidb/pull/15397)
@@ -49,7 +49,7 @@ TiUP version: 0.0.3
 
     - Add the case-insensitive collation so that users can enable `utf8mb4_general_ci` and `utf8_general_ci` in a new cluster [#33](https://github.com/pingcap/tidb/projects/33)
     - Enhance the `RECOVER TABLE` syntax to support recovering truncated tables [#15398](https://github.com/pingcap/tidb/pull/15398)
-    - Refuse to get started instead of returning an alert log when the the tidb-server status port is occupied [#15177](https://github.com/pingcap/tidb/pull/15177)
+    - Refuse to get started instead of returning an alert log when the tidb-server status port is occupied [#15177](https://github.com/pingcap/tidb/pull/15177)
     - Optimize the write performance of using a sequence as the default column values [#15216](https://github.com/pingcap/tidb/pull/15216)
     - Add the `DDLJobs` system table to query the details of DDL jobs [#14837](https://github.com/pingcap/tidb/pull/14837)
     - Optimize the `aggFuncSum` performance [#14887](https://github.com/pingcap/tidb/pull/14887)
@@ -80,7 +80,7 @@ TiUP version: 0.0.3
 + TiDB
 
     - Fix the issue that replication between the upstream and downstream might go wrong when the DDL job is executed using the `PREPARE` statement because of the incorrect job query in the internal records [#15435](https://github.com/pingcap/tidb/pull/15435)
-    - Fix the issue of incorrect subquery result in the `Read Commited` isolation level [#15471](https://github.com/pingcap/tidb/pull/15471)
+    - Fix the issue of incorrect subquery result in the `Read Committed` isolation level [#15471](https://github.com/pingcap/tidb/pull/15471)
     - Fix the issue of possible wrong behavior when using `INSERT ... VALUES` to specify the `BIT(N)` data type [#15350](https://github.com/pingcap/tidb/pull/15350)
     - Fix the issue that the DDL Job internal retry does not fully achieve the expected outcomes because the values of `ErrorCount` fail to be summed correctly [#15373](https://github.com/pingcap/tidb/pull/15373)
     - Fix the issue that Garbage Collection might work abnormally when TiDB connects to TiFlash [#15505](https://github.com/pingcap/tidb/pull/15505)

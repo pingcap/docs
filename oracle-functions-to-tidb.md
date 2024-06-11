@@ -65,13 +65,13 @@ TiDB distinguishes between `NULL` and an empty string `''`.
 Oracle supports reading and writing to the same table in an `INSERT` statement. For example:
 
 ```sql
-INSERT INTO table1 VALUES (feild1,(SELECT feild2 FROM table1 WHERE...))
+INSERT INTO table1 VALUES (field1,(SELECT field2 FROM table1 WHERE...))
 ```
 
 TiDB does not support reading and writing to the same table in a `INSERT` statement. For example:
 
 ```sql
-INSERT INTO table1 VALUES (feild1,(SELECT T.fields2 FROM table1 T WHERE...))
+INSERT INTO table1 VALUES (field1,(SELECT T.fields2 FROM table1 T WHERE...))
 ```
 
 ### Get the first n rows from a query

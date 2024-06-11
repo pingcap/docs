@@ -22,7 +22,7 @@ Besides basic backup and restore, snapshot backup and restore also provides the 
 > - The following examples assume that Amazon S3 access keys and secret keys are used to authorize permissions. If IAM roles are used to authorize permissions, you need to set `--send-credentials-to-tikv` to `false`.
 > - If other storage systems or authorization methods are used to authorize permissions, adjust the parameter settings according to [Backup Storages](/br/backup-and-restore-storages.md).
 
-You can back up a TiDB cluster snapshot by running the `br backup full` command. Run `br backup full --help` to see the help information:
+You can back up a TiDB cluster snapshot by running the `tiup br backup full` command. Run `tiup br backup full --help` to see the help information:
 
 ```shell
 tiup br backup full --pd "${PD_IP}:2379" \
@@ -33,7 +33,7 @@ tiup br backup full --pd "${PD_IP}:2379" \
 
 In the preceding command:
 
-- `--backupts`: The time point of the snapshot. The format can be [TSO](/glossary.md#tso) or timestamp, such as `400036290571534337` or `2018-05-11 01:42:23`. If the data of this snapshot is garbage collected, the `br backup` command returns an error and `br` exits. If you leave this parameter unspecified, `br` picks the snapshot corresponding to the backup start time.
+- `--backupts`: The time point of the snapshot. The format can be [TSO](/glossary.md#tso) or timestamp, such as `400036290571534337` or `2018-05-11 01:42:23`. If the data of this snapshot is garbage collected, the `tiup br backup` command returns an error and `br` exits. If you leave this parameter unspecified, `br` picks the snapshot corresponding to the backup start time.
 - `--storage`: The storage address of the backup data. Snapshot backup supports Amazon S3, Google Cloud Storage, and Azure Blob Storage as backup storage. The preceding command uses Amazon S3 as an example. For more details, see [URI Formats of External Storage Services](/external-storage-uri.md).
 - `--ratelimit`: The maximum speed **per TiKV** performing backup tasks. The unit is in MiB/s.
 
@@ -68,7 +68,7 @@ The output is as follows, corresponding to the physical time `2022-09-08 13:30:0
 > - Starting from BR v7.6.0, to address potential restore bottlenecks in scenarios with large-scale Regions, BR supports accelerating restore through the coarse-grained Region scattering algorithm (experimental). You can enable this feature by specifying the command-line parameter `--granularity="coarse-grained"`.
 > - Starting from BR v8.0.0, the snapshot restore through the coarse-grained Region scattering algorithm is generally available (GA) and enabled by default. BR improves the snapshot restore speed significantly by implementing various optimizations such as adopting the coarse-grained Region scattering algorithm, creating databases and tables in batches, reducing the mutual impact between SST file downloads and ingest operations, and accelerating the restore of table statistics. According to test results from real-world cases, the SST file download speed for snapshot restore is improved by approximately up to 10 times, the data restore speed per TiKV node stabilizes at 1.2 GiB/s, the end-to-end restore speed is improved by approximately 1.5 to 3 times, and 100 TiB of data can be restored within one hour.
 
-You can restore a snapshot backup by running the `br restore full` command. Run `br restore full --help` to see the help information:
+You can restore a snapshot backup by running the `tiup br restore full` command. Run `tiup br restore full --help` to see the help information:
 
 The following example restores the [preceding backup snapshot](#back-up-cluster-snapshots) to a target cluster:
 
@@ -76,12 +76,6 @@ The following example restores the [preceding backup snapshot](#back-up-cluster-
 tiup br restore full --pd "${PD_IP}:2379" \
 --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```
-
-> **Warning:**
-> 
-> The coarse-grained Region scatter algorithm (enabled by setting `--granularity="coarse-grained"`) is experimental. It is recommended that you use this feature to accelerate data recovery in clusters with up to 1,000 tables. Note that this feature does not support checkpoint restore.
-
-To further improve the restore speed of large clusters, starting from v7.6.0, BR supports a coarse-grained Region scatter algorithm (experimental) for faster parallel recovery. You can enable this algorithm by specifying `--granularity="coarse-grained"`. After it is enabled, BR can quickly split the restore task into a large number of small tasks and scatter them to all TiKV nodes in batches, thus fully utilizing the resources of each TiKV node for fast recovery in parallel.
 
 During restore, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the restore task is completed and statistics such as total restore time, average restore speed, and total data size are displayed.
 
@@ -96,7 +90,7 @@ BR supports restoring partial data of a specified database or table from backup 
 
 **Restore a database**
 
-To restore a database to a cluster, run the `br restore db` command. The following example restores the `test` database from the backup data to the target cluster:
+To restore a database to a cluster, run the `tiup br restore db` command. The following example restores the `test` database from the backup data to the target cluster:
 
 ```shell
 tiup br restore db \
@@ -109,7 +103,7 @@ In the preceding command, `--db` specifies the name of the database to be restor
 
 **Restore a table**
 
-To restore a single table to a cluster, run the `br restore table` command. The following example restores the `test.usertable` table from the backup data to the target cluster:
+To restore a single table to a cluster, run the `tiup br restore table` command. The following example restores the `test.usertable` table from the backup data to the target cluster:
 
 ```shell
 tiup br restore table --pd "${PD_IP}:2379" \
@@ -122,7 +116,7 @@ In the preceding command, `--db` specifies the name of the database to be restor
 
 **Restore multiple tables with table filter**
 
-To restore multiple tables with more complex filter rules, run the `br restore full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`. The following example restores tables that match the `db*.tbl*` filter rule from the backup data to the target cluster:
+To restore multiple tables with more complex filter rules, run the `tiup br restore full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`. The following example restores tables that match the `db*.tbl*` filter rule from the backup data to the target cluster:
 
 ```shell
 tiup br restore full \
@@ -157,7 +151,7 @@ tiup br restore full \
 
 - Statistics tables (`mysql.stat_*`). But statistics can be restored. See [Back up statistics](/br/br-snapshot-manual.md#back-up-statistics).
 - System variable tables (`mysql.tidb` and `mysql.global_variables`)
-- [Other system tables](https://github.com/pingcap/tidb/blob/master/br/pkg/restore/systable_restore.go#L31)
+- [Other system tables](https://github.com/pingcap/tidb/blob/master/br/pkg/restore/snap_client/systable_restore.go#L31)
 
 ```
 +-----------------------------------------------------+
@@ -181,14 +175,11 @@ tiup br restore full \
 +-----------------------------------------------------+
 ```
 
-When you restore data related to system privilege, note the following:
+When you restore data related to system privilege, note that before restoring data, BR checks whether the system tables in the target cluster are compatible with those in the backup data. "Compatible" means that all the following conditions are met:
 
-- Before v7.6.0, BR does not restore user data with `user` as `cloud_admin` and `host` as `'%'`. This user is reserved for TiDB Cloud. Starting from v7.6.0, BR supports restoring all user data (including `cloud_admin`) by default.
-- Before restoring data, BR checks whether the system tables in the target cluster are compatible with those in the backup data. "Compatible" means that all the following conditions are met:
-
-    - The target cluster has the same system tables as the backup data.
-    - The **number of columns** in the system privilege table of the target cluster is the same as that in the backup data. The column order is not important.
-    - The columns in the system privilege table of the target cluster are compatible with that in the backup data. If the data type of the column is a type with a length (such as integer and string), the length in the target cluster must be >= the length in the backup data. If the data type of the column is an `ENUM` type, the number of `ENUM` values in the target cluster must be a superset of that in the backup data.
+- The target cluster has the same system tables as the backup data.
+- The **number of columns** in the system privilege table of the target cluster is the same as that in the backup data. The column order is not important.
+- The columns in the system privilege table of the target cluster are compatible with that in the backup data. If the data type of the column is a type with a length (such as integer and string), the length in the target cluster must be >= the length in the backup data. If the data type of the column is an `ENUM` type, the number of `ENUM` values in the target cluster must be a superset of that in the backup data.
 
 ## Performance and impact
 
@@ -205,7 +196,7 @@ To illustrate the impact of backup, this document lists the test conclusions of 
 
 You can use the following methods to manually control the impact of backup tasks on cluster performance. However, these two methods also reduce the speed of backup tasks while reducing the impact of backup tasks on the cluster.
 
-- Use the `--ratelimit` parameter to limit the speed of backup tasks. Note that this parameter limits the speed of **saving backup files to external storage**. When calculating the total size of backup files, use the `backup data size(after compressed)` as a benchmark.
+- Use the `--ratelimit` parameter to limit the speed of backup tasks. Note that this parameter limits the speed of **saving backup files to external storage**. When calculating the total size of backup files, use the `backup data size(after compressed)` as a benchmark. When `--ratelimit` is set, to avoid too many tasks causing the speed limit to fail, the `concurrency` parameter of br is automatically adjusted to `1`.
 - Adjust the TiKV configuration item [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) to limit the number of threads used by backup tasks. According to internal tests, when BR uses no more than `8` threads for backup tasks, and the total CPU utilization of the cluster does not exceed 60%, the backup tasks have little impact on the cluster, regardless of the read and write workload.
 
 The impact of backup on cluster performance can be reduced by limiting the backup threads number, but this affects the backup performance. The preceding tests show that the backup speed is proportional to the number of backup threads. When the number of threads is small, the backup speed is about 20 MiB/thread. For example, 5 backup threads on a single TiKV node can reach a backup speed of 100 MiB/s.
@@ -217,7 +208,7 @@ The impact of backup on cluster performance can be reduced by limiting the backu
 - BR provides a coarse-grained Region scattering algorithm to accelerate Region restore in large-scale Region scenarios. The algorithm is controlled by the command-line parameter `--granularity="coarse-grained"` and is enabled by default. This algorithm ensures that each TiKV node receives stable and evenly distributed download tasks, thus fully utilizing the resources of each TiKV node and achieving a rapid parallel recovery. In several real-world cases, the snapshot restore speed of the cluster is improved by about 3 times in large-scale Region scenarios. The following is an example:
 
     ```bash
-    br restore full \
+    tiup br restore full \
     --pd "${PDIP}:2379" \
     --storage "s3://${Bucket}/${Folder}" \
     --s3.region "${region}" \

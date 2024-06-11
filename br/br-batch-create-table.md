@@ -27,7 +27,7 @@ BR enables the Batch Create Table feature by default, with the default configura
 To disable this feature, you can set `--ddl-batch-size` to `1`. See the following example command:
 
 ```shell
-br restore full \
+tiup br restore full \
 --storage local:///br_data/ --pd "${PD_IP}:2379" --log-file restore.log \
 --ddl-batch-size=1
 ```

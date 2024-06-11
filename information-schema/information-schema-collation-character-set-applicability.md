@@ -47,3 +47,10 @@ The description of columns in the `COLLATION_CHARACTER_SET_APPLICABILITY` table 
 
 * `COLLATION_NAME`: The name of the collation.
 * `CHARACTER_SET_NAME`: The name of the character set which the collation belongs to.
+
+## See also
+
+- [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
+- [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)
+- [`INFORMATION_SCHEMA.CHARACTER_SETS`](/information-schema/information-schema-character-sets.md)
+- [`INFORMATION_SCHEMA.COLLATIONS`](/information-schema/information-schema-collations.md)
