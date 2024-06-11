@@ -41,8 +41,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 + Type: Integer
 + Default value: `1000`
 + Minimum value: `1`
-+ Maximum Value (64-bit platforms): `18446744073709551615`
-+ Maximum Value (32-bit platforms): `4294967295`
++ Maximum Value: `1048576`
 
 ### `temp-dir` <span class="version-mark">New in v6.3.0</span>
 
