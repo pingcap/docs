@@ -85,7 +85,8 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 ## MySQL compatibility
 
-* `FULLTEXT`, `HASH` and `SPATIAL` indexes are not supported.
+* `HASH` and `SPATIAL` indexes are not supported.
+* `FULLTEXT` is only for syntax compatibility with MySQL and is not supported.
 * Descending indexes are not supported (similar to MySQL 5.7).
 * Adding the primary key of the `CLUSTERED` type to a table is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 
