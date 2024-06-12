@@ -79,7 +79,7 @@ To complete this tutorial, you need the following:
 
     The connection string looks like this:
 
-    ```shell
+    ```
     mysql://[username]:[password]@[host]/[database]
     ```
 
