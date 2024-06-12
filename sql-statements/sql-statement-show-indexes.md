@@ -52,6 +52,8 @@ mysql> SHOW KEYS FROM t1;
 2 rows in set (0.00 sec)
 ```
 
+Note that TiDB accepts index types such as `HASH`, `BTREE` and `RTREE` in syntax but ignores them for compatibility reasons.
+
 ## MySQL compatibility
 
 The `SHOW INDEXES [FROM|IN]` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
