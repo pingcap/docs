@@ -400,6 +400,10 @@ distsql-scan-concurrency = 15
 index-serial-scan-concurrency = 20
 checksum-table-concurrency = 2
 
+# Sets other TiDB session variables
+# [tidb.session-vars]
+# tidb_enable_clustered_index = "OFF"
+
 # The default SQL mode used to parse and execute the SQL statements.
 sql-mode = "ONLY_FULL_GROUP_BY,NO_AUTO_CREATE_USER"
 # Sets maximum packet size allowed for SQL connections.
