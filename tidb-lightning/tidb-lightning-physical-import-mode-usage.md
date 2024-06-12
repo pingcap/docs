@@ -48,7 +48,10 @@ strategy = ""
 # Import mode. "local" means using the physical import mode.
 backend = "local"
 
-# The `duplicate-resolution` parameter is deprecated starting from v8.0.0 and will be removed in a future release. If you set `duplicate-resolution = 'remove'` and do not set `conflict.strategy`, TiDB Lightning will automatically assign "replace" to `conflict.strategy` and enable the new version of conflict detection. For more information, see <https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode-usage#the-old-version-of-conflict-detection-deprecated-in-v800>.
+# The `duplicate-resolution` parameter is deprecated starting from v8.0.0 and will be removed in a future release. 
+# If you set `duplicate-resolution = 'none'` and do not set `conflict.strategy`, TiDB Lightning will automatically assign `""` to `conflict.strategy`. 
+# If you set `duplicate-resolution = 'remove'` and do not set `conflict.strategy`, TiDB Lightning will automatically assign "replace" to `conflict.strategy` and enable the new version of conflict detection. 
+# For more information, see <https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode-usage#the-old-version-of-conflict-detection-deprecated-in-v800>.
 # The method to resolve the conflicting data.
 duplicate-resolution = 'none'
 
