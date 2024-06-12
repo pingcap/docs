@@ -39,7 +39,7 @@ To complete this tutorial, you need the following:
    npm install kysely @tidbcloud/kysely @tidbcloud/serverless
    ```
 
-3. In the root directory of your project, locate the `package.json` file, and then specify the ES module by adding `type: "module"` to the file:
+3. In the root directory of your project, locate the `package.json` file, and then specify the ES module by adding `"type": "module"` to the file:
 
    ```json
    {

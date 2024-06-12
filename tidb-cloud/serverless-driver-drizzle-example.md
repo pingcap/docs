@@ -5,11 +5,11 @@ summary: Learn how to use TiDB Cloud serverless driver with Drizzle.
 
 # TiDB Cloud Serverless Driver Drizzle Tutorial
 
-[Drizzle ORM](https://orm.drizzle.team/) is a lightweight and performant TypeScript ORM with developer experience in mind. It supports [drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless) since drizzle-orm@0.31.2, enabling you to use Drizzle over HTTPS with [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md)
+[Drizzle ORM](https://orm.drizzle.team/) is a lightweight and performant TypeScript ORM with developer experience in mind. Starting from `drizzle-orm@0.31.2`, it supports [drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless), enabling you to use Drizzle over HTTPS with [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md).
 
 This tutorial describes how to use TiDB Cloud serverless driver with Drizzle in Node.js environments and edge environments.
 
-## Use Drizzle and TiDB Cloud Serverless Driver in Node.js environments
+## Use Drizzle and TiDB Cloud serverless driver in Node.js environments
 
 This section describes how to use TiDB Cloud serverless driver with Drizzle in Node.js environments.
 
@@ -25,7 +25,7 @@ To complete this tutorial, you need the following:
 
 1. Create a project named `drizzle-node-example`:
 
-    ```
+    ```shell
     mkdir drizzle-node-example
     cd drizzle-node-example
     ```
@@ -36,7 +36,7 @@ To complete this tutorial, you need the following:
    npm install drizzle-orm @tidbcloud/serverless
    ```
 
-3. In the root directory of your project, locate the `package.json` file, and then specify the ES module by adding `type: "module"` to the file:
+3. In the root directory of your project, locate the `package.json` file, and then specify the ES module by adding `"type": "module"` to the file:
 
    ```json
    {
@@ -69,13 +69,21 @@ To complete this tutorial, you need the following:
 
 ### Step 2. Set the environment
 
-1. On the overview page of your TiDB Serverless cluster, click **Connect** in the upper-right corner, and then select `Serverless Driver` in the **Connect With** drop-down box. The connection string looks like this:
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Serverless cluster to go to its overview page.
+
+2. On the overview page, click **Connect** in the upper-right corner, select `Serverless Driver` in the **Connect With** drop-down box, and then click **Generate Password** to create a random password.
+
+    > **Tip:**
+    >
+    > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
+
+    The connection string looks like this:
 
     ```
     mysql://[username]:[password]@[host]/[database]
     ```
 
-2. Set the environment variable `DATABASE_URL` in your local environment. For example, in Linux or macOS, you can run the following command:
+3. Set the environment variable `DATABASE_URL` in your local environment. For example, in Linux or macOS, you can run the following command:
 
     ```bash
     export DATABASE_URL='mysql://[username]:[password]@[host]/[database]'
@@ -101,12 +109,12 @@ To complete this tutorial, you need the following:
    import { connect } from '@tidbcloud/serverless';
    import { drizzle } from 'drizzle-orm/tidb-serverless';
    import { mysqlTable, serial, text, varchar } from 'drizzle-orm/mysql-core';
-   
-   // initialize
+
+   // Initialize
    const client = connect({ url: process.env.DATABASE_URL });
    const db = drizzle(client);
-   
-   // define schema
+
+   // Define schema
    export const users = mysqlTable('users', {
      id: serial("id").primaryKey(),
      fullName: text('full_name'),
@@ -114,8 +122,8 @@ To complete this tutorial, you need the following:
    });
    export type User = typeof users.$inferSelect; // return type when queried
    export type NewUser = typeof users.$inferInsert; // insert type
-   
-   // insert and select
+
+   // Insert and select data
    const user: NewUser = { fullName: 'John Doe', phone: '123-456-7890' };
    await db.insert(users).values(user)
    const result: User[] = await db.select().from(users);
@@ -137,7 +145,7 @@ To complete this tutorial, you need the following:
    ts-node --esm hello-world.ts
    ```
 
-## Use Drizzle and TiDB Cloud Serverless Driver in edge environments
+## Use Drizzle and TiDB Cloud serverless driver in edge environments
 
 This section takes the Vercel Edge Function as an example.
 
@@ -153,30 +161,43 @@ To complete this tutorial, you need the following:
 
 1. Install the Vercel CLI:
 
-    ```
+    ```shell
     npm i -g vercel@latest
     ```
 
-2. Create a [Next.js](https://nextjs.org/) project called `drizzle-example` using the following terminal commands:
+2. Create a [Next.js](https://nextjs.org/) project called `drizzle-example` using the following terminal command:
 
-   ```
+   ```shell
    npx create-next-app@latest drizzle-example --ts --no-eslint --tailwind --no-src-dir --app --import-alias "@/*"
+   ```
+
+3. Navigate to the `drizzle-example` directory:
+
+   ```shell
    cd drizzle-example
    ```
 
-3. Install the `drizzle-orm` and `@tidbcloud/serverless` packages:
+4. Install the `drizzle-orm` and `@tidbcloud/serverless` packages:
 
-   ```
+   ```shell
    npm install drizzle-orm @tidbcloud/serverless --force
    ```
 
 ### Step 2. Set the environment
 
-On the overview page of your TiDB Serverless cluster, click **Connect** in the upper-right corner, and then select `Serverless Driver` in the **Connect With** drop-down box. The connection string looks like this:
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Serverless cluster to go to its overview page.
 
-   ```
-   mysql://[username]:[password]@[host]/[database]
-   ```
+2. On the overview page, click **Connect** in the upper-right corner, select `Serverless Driver` in the **Connect With** drop-down box, and then click **Generate Password** to create a random password.
+
+    > **Tip:**
+    >
+    > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
+
+    The connection string looks like this:
+
+    ```
+    mysql://[username]:[password]@[host]/[database]
+    ```
 
 ### Step 3. Create an edge function
 
@@ -201,12 +222,12 @@ On the overview page of your TiDB Serverless cluster, click **Connect** in the u
    import { drizzle } from 'drizzle-orm/tidb-serverless';
    import { mysqlTable, serial, text, varchar } from 'drizzle-orm/mysql-core';
    export const runtime = 'edge';
-   
-   // initialize
+
+   // Initialize
    const client = connect({ url: process.env.DATABASE_URL });
    const db = drizzle(client);
-   
-   // define schema
+
+   // Define schema
    export const users = mysqlTable('users', {
      id: serial("id").primaryKey(),
      fullName: text('full_name'),
@@ -214,9 +235,9 @@ On the overview page of your TiDB Serverless cluster, click **Connect** in the u
    });
    export type User = typeof users.$inferSelect; // return type when queried
    export type NewUser = typeof users.$inferInsert; // insert type
-   
+
    export async function GET(request: NextRequest) {
-     // insert and select
+     // Insert and select data
      const user: NewUser = { fullName: 'John Doe', phone: '123-456-7890' };
      await db.insert(users).values(user)
      const result: User[] = await db.select().from(users);
@@ -247,5 +268,5 @@ On the overview page of your TiDB Serverless cluster, click **Connect** in the u
 
 ## What's next
 
-- Learn more about [Drizzle](https://orm.drizzle.team/docs/overview) and [drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless)
-- Learn how to [integrate TiDB Cloud with Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
+- Learn more about [Drizzle](https://orm.drizzle.team/docs/overview) and [drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless).
+- Learn how to [integrate TiDB Cloud with Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md).
