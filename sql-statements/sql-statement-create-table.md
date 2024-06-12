@@ -238,8 +238,10 @@ mysql> DESC t1;
 
 ## MySQL compatibility
 
-* All of the data types except spatial types are supported.
-* `FULLTEXT`, `HASH` and `SPATIAL` indexes are not supported.
+* All of the data types except `SPATIAL` types are supported.
+* TiDB accepts index types such as `HASH`, `BTREE` and `RTREE` in syntax but ignores them for compatibility reasons.
+* `FULLTEXT` is only for syntax compatibility with MySQL and is not supported.
+* TiDB supports parsing the `FULLTEXT` syntax but does not support using the `FULLTEXT` indexes.
 
 <CustomContent platform="tidb">
 
