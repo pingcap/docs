@@ -70,6 +70,75 @@ JSON functions can be used to work with data in the [JSON data type](/data-type-
 | [JSON_ARRAYAGG()](/functions-and-operators/json-functions/json-functions-aggregate.md#json_arrayagg) | Provides an aggregation of keys. |
 | [JSON_OBJECTAGG()](/functions-and-operators/json-functions/json-functions-aggregate.md#json_objectagg) | Provides an aggregation of values for a given key. |
 
+
+## JSON Path
+
+Many of JSON functions use JSON Path to select parts of a JSON document.
+
+| Symbol         | Description                  |
+| -------------- | ---------------------------- |
+| `$`            | Document Root                |
+| `.`            | Member selection             |
+| `[]`           | Array selection              |
+| `*`            | Wildcard                     |
+| `**`           | Path wildcard                |
+| `[<n> to <n>]` | Array range selection        |
+
+Examples:
+
+The JSON to demonstrate this:
+
+```json
+{
+    "database": {
+        "name": "TiDB",
+        "features": [
+            "distributed",
+            "scalable",
+            "relational",
+            "cloud native"
+        ],
+        "license": "Apache-2.0 license",
+        "versions": [
+            {
+                "version": "v8.1.0",
+                "type": "lts",
+                "release_date": "2024-05-24" 
+            },
+            {
+                "version": "v8.0.0",
+                "type": "dmr",
+                "release_date": "2024-03-29"
+            }
+        ]
+    },
+    "migration_tool": {
+        "name": "TiDB Data Migration",
+        "features": [
+            "MySQL compatible",
+            "Shard merging"
+        ],
+        "license": "Apache-2.0 license"
+    }
+}
+```
+
+| JSONPath                              | Description                             | Example with [`JSON_EXTRACT()`](/functions-and-operators/json-functions/json-functions-search.md#json_extract) | 
+|-------------------------------------- |-----------------------------------------|-------------------------------|
+| `$`                                   | The root of the document                |                               |
+| `$.database`                          | The database attribute                  |                               |
+| `$.database.name`                     | The name of the database.               | `"TiDB"`                      |
+| `$.database.features`                 | All database features                   |                               |
+| `$.database.features[0]`              | The first database feature.             | `"distributed"`               |
+| `$.database.features[2]`              | The third database feature.             | `"relational"`                |
+| `$.database.versions[0].type`         | The type of the first database version. | `"lts"`                       |
+| `$.database.versions[*].release_date` | The release date for all versions.      | `["2024-05-24","2024-03-29"]` |
+| `$.*.features`                        | Two array's of features                 |                               |
+| `$**.version`                         | All versions, with path wildcard        | `["v8.1.0","v8.0.0"]`         |
+| `$.database.features[0 to 2]`         | Range of database features.             | `["scalable","relational"]`   |
+
+More details can be found in [the IETF draft for JSONPath](https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html).
+
 ## See also
 
 * [JSON Data Type](/data-type-json.md)
