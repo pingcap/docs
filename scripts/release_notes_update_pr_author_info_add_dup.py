@@ -10,6 +10,7 @@
 from github import Github
 import re
 import openpyxl
+from openpyxl.styles import PatternFill
 import os
 import shutil
 import requests
@@ -26,7 +27,7 @@ with open("/Users/userid/Documents/PingCAP/Python_scripts/GitHub/gh_token2.txt",
 def store_exst_rn(ext_path, version):
 
     exst_notes = []
-    exst_issue_nums = []
+    exst_issue_nums_and_authors = []
     exst_note_levels = []
     release_file = os.path.join(ext_path, f'release-{version}.md')
 
@@ -43,10 +44,11 @@ def store_exst_rn(ext_path, version):
                         exst_issue_num = re.search(r'https://github.com/(pingcap|tikv)/[\w-]+/(issues|pull)/\d+', line)
                         authors = re.findall(r'@\[([^\]]+)\]', line) # Get the list of authors in this line
                         if exst_issue_num:
-                            if exst_issue_num.group() not in exst_issue_nums:
+                            exst_issue_num_and_author = [exst_issue_num.group(), authors]
+                            if exst_issue_num_and_author not in exst_issue_nums_and_authors:
                                 note_level = level1 + level2 + level3
                                 note_pair = [exst_issue_num.group(),line.strip(),afile, note_level, authors]
-                                exst_issue_nums.append(exst_issue_num.group())
+                                exst_issue_nums_and_authors.append(exst_issue_num_and_author)
                                 exst_notes.append(note_pair)
                             else:
                                 continue
@@ -63,7 +65,7 @@ def store_exst_rn(ext_path, version):
             else:
                 pass
 
-    if len(exst_issue_nums) != 0:
+    if len(exst_issue_nums_and_authors) != 0:
         return exst_notes
     else:
         return 0
@@ -128,6 +130,7 @@ def update_pr_author_and_release_notes(excel_path):
     # Go through each row
     dup_notes = []
     dup_notes_levels = []
+    grey_fill = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="solid")
     for row_index, row in enumerate(sheet.iter_rows(min_row=2, values_only=True), start=2):
         # If pr_author is ti-chi-bot or ti-srebot
         current_pr_author = row[pr_author_index]
@@ -144,7 +147,7 @@ def update_pr_author_and_release_notes(excel_path):
             pass
 
         ## Add the dup release note info
-        issue_link = re.search('https://github.com/(pingcap|tikv)/[\w-]+/issues/\d+', current_formated_rn)
+        issue_link = re.search(r'https://github.com/(pingcap|tikv)/[\w-]+/issues/\d+', current_formated_rn)
         if issue_link:
             for note_pair in note_pairs:
                 if (issue_link.group() == note_pair[0]) and ((current_pr_author in note_pair[4]) or len(note_pair[4]) == 0): # Add the dup release notes only if the issues link is the same as the existing one and the current author is in the existing author list
@@ -152,6 +155,9 @@ def update_pr_author_and_release_notes(excel_path):
                     dup_formated_rn = '- (dup): {} {} {}'.format(note_pair[2], note_pair[3], note_pair[1])
                     #print (note_pair)
                     sheet.cell(row=row_index, column=pr_last_col_index+1, value=dup_formated_rn)
+                    # Apply the grey color to the row with dup note
+                    for column in range(1, pr_last_col_index + 2):
+                        sheet.cell(row=row_index, column=column).fill = grey_fill
                     if dup_formated_rn not in dup_notes: # Collect the dup release note if it is not collected before
                         dup_notes.append(dup_formated_rn)
                         print ("-----")
