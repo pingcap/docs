@@ -71,8 +71,7 @@ TiProxy determines the locations of itself and TiDB servers based on the `zone` 
 - In the [`labels`](/tidb-configuration-file.md#labels) configuration item of the TiDB server, set `zone` to the current availability zone. For configuration details, see [Configure labels for TiDB](/schedule-replicas-by-topology-labels.md#optional-configure-labels-for-tidb).
 - In the [`labels`](/tiproxy/tiproxy-configuration.md#labels) configuration item of TiProxy, set `zone` to the current availability zone.
 
-For clusters deployed using TiDB Operator, see [High availability of data
-](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#high-availability-of-data).
+For clusters deployed using TiDB Operator, see [High availability of data](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#high-availability-of-data).
 
 The following is an example of a cluster configuration:
 
