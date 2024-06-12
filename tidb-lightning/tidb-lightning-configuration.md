@@ -160,11 +160,10 @@ strategy = ""
 # The `duplicate-resolution` parameter is deprecated starting from v8.0.0 and will be removed in a future release. For more information, see <https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode-usage#the-old-version-of-conflict-detection-deprecated-in-v800>.
 # Whether to detect and resolve duplicate records (unique key conflict) in the physical import mode.
 # The following resolution algorithms are supported:
-# - none: does not detect duplicate records.
+# - 'none': does not detect duplicate records.
 #         If there are duplicate records in the data source, it might lead to inconsistent data in the target TiDB.
-#         If you set `duplicate-resolution = "none"` and do not set `conflict.strategy`, TiDB Lightning will automatically assign `""` to `conflict.strategy`.
-# - remove:
-#         If you set `duplicate-resolution = "remove"` and do not set `conflict.strategy`, TiDB Lightning will automatically assign `"replace"` to `conflict.strategy` and enable the new version of conflict detection. 
+#         If you set `duplicate-resolution = 'none'` and do not set `conflict.strategy`, TiDB Lightning will automatically assign `""` to `conflict.strategy`.
+# - 'remove': If you set `duplicate-resolution = 'remove'` and do not set `conflict.strategy`, TiDB Lightning will automatically assign `"replace"` to `conflict.strategy` and enable the new version of conflict detection. 
 # The default value is 'none'.
 # duplicate-resolution = 'none'
 # The maximum number of KV pairs in one request when sending data to TiKV in physical import mode.
