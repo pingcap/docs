@@ -27,6 +27,10 @@ Create two replicas for the table:
 ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 2;
 ```
 
+> **Note:**
+>
+> In the [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters, any non zero `count` will be ignored and it will be set to 2.
+
 Delete the replica:
 
 ```sql
