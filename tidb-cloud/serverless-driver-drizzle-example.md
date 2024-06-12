@@ -32,7 +32,7 @@ To complete this tutorial, you need the following:
 
 2. Install the `drizzle-orm` and `@tidbcloud/serverless` packages:
 
-   ```
+   ```shell
    npm install drizzle-orm @tidbcloud/serverless
    ```
 
@@ -79,13 +79,13 @@ To complete this tutorial, you need the following:
 
     The connection string looks like this:
 
-    ```
+    ```shell
     mysql://[username]:[password]@[host]/[database]
     ```
 
 3. Set the environment variable `DATABASE_URL` in your local environment. For example, in Linux or macOS, you can run the following command:
 
-    ```bash
+    ```shell
     export DATABASE_URL='mysql://[username]:[password]@[host]/[database]'
     ```
 
@@ -97,9 +97,9 @@ To complete this tutorial, you need the following:
 
    ```sql
    CREATE TABLE `test`.`users` (
-    `id` bigint primary key auto_increment,
-    `full_name` text,
-    `phone` varchar(256)
+    `id` BIGINT PRIMARY KEY auto_increment,
+    `full_name` TEXT,
+    `phone` VARCHAR(256)
    );
    ```
 
@@ -134,14 +134,14 @@ To complete this tutorial, you need the following:
 
 1. Install `ts-node` to transform TypeScript into JavaScript, and then install `@types/node` to provide TypeScript type definitions for Node.js.
 
-   ```
+   ```shell
    npm install -g ts-node
    npm i --save-dev @types/node
    ```
 
 2. Run the Typescript code with the following command:
 
-   ```
+   ```shell
    ts-node --esm hello-world.ts
    ```
 
@@ -207,9 +207,9 @@ To complete this tutorial, you need the following:
 
    ```sql
    CREATE TABLE `test`.`users` (
-    `id` bigint primary key auto_increment,
-    `full_name` text,
-    `phone` varchar(256)
+    `id` BIGINT PRIMARY KEY auto_increment,
+    `full_name` TEXT,
+    `phone` VARCHAR(256)
    );
    ```
 
@@ -247,7 +247,7 @@ To complete this tutorial, you need the following:
 
 3. Test your code locally:
 
-   ```
+   ```shell
    export DATABASE_URL='mysql://[username]:[password]@[host]/[database]'
    next dev
    ```
@@ -258,7 +258,7 @@ To complete this tutorial, you need the following:
 
 1. Deploy your code to Vercel with the `DATABASE_URL` environment variable:
 
-   ```
+   ```shell
    vercel -e DATABASE_URL='mysql://[username]:[password]@[host]/[database]' --prod
    ```
 
