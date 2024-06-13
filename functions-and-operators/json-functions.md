@@ -71,6 +71,12 @@ JSON functions can be used to work with data in the [JSON data type](/data-type-
 | [JSON_OBJECTAGG()](/functions-and-operators/json-functions/json-functions-aggregate.md#json_objectagg) | Provides an aggregation of values for a given key. |
 
 
+## Validation functions
+    
+| Function Name                     | Description |
+| --------------------------------- | ----------- |
+| [JSON_SCHEMA_VALID()](/functions-and-operators/json-functions/json-functions-validate.md#json_schema_valid) | Validate a JSON document against a schema to ensure data integrity and consistency. |
+
 ## JSON Path
 
 Many of JSON functions use JSON Path to select parts of a JSON document.
@@ -106,7 +112,7 @@ The JSON to demonstrate this:
                 "release_date": "2024-05-24" 
             },
             {
-                "version": "v8.0.0",
+                "version": "v8.0.0",        
                 "type": "dmr",
                 "release_date": "2024-03-29"
             }
@@ -115,7 +121,7 @@ The JSON to demonstrate this:
     "migration_tool": {
         "name": "TiDB Data Migration",
         "features": [
-            "MySQL compatible",
+            "MySQL compatible",            
             "Shard merging"
         ],
         "license": "Apache-2.0 license"
@@ -138,12 +144,6 @@ The JSON to demonstrate this:
 | `$.database.features[0 to 2]`         | Range of database features.             | `["scalable","relational"]`   |
 
 More details can be found in [the IETF draft for JSONPath](https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html).
-
-## Validation functions
-
-| Function Name                     | Description |
-| --------------------------------- | ----------- |
-| [JSON_SCHEMA_VALID(schema,json_doc)](https://dev.mysql.com/doc/refman/8.0/en/json-validation-functions.html#function_json-schema-valid) | Validate a JSON document against a schema to ensure data integrity and consistency. |
 
 ## See also
 
