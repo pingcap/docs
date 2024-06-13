@@ -76,7 +76,7 @@ To get the cluster ID from the PD log, run the following command:
 {{< copyable "shell-regular" >}}
 
 ```bash
-cat {{/path/to}}/pd.log | grep "init cluster id"
+grep "init cluster id" {{/path/to}}/pd.log
 ```
 
 ```bash
@@ -91,7 +91,7 @@ To get the cluster ID from the TiDB log, run the following command:
 {{< copyable "shell-regular" >}}
 
 ```bash
-cat {{/path/to}}/tidb.log | grep "init cluster id"
+grep "init cluster id" {{/path/to}}/tidb.log
 ```
 
 ```bash
@@ -106,7 +106,7 @@ To get the cluster ID from the TiKV log, run the following command:
 {{< copyable "shell-regular" >}}
 
 ```bash
-cat {{/path/to}}/tikv.log | grep "connect to PD cluster"
+grep "connect to PD cluster" {{/path/to}}/tikv.log
 ```
 
 ```bash
@@ -129,7 +129,7 @@ To get the allocated ID from the PD log, you need to make sure that the log you 
 {{< copyable "shell-regular" >}}
 
 ```bash
-cat {{/path/to}}/pd*.log | grep "idAllocator allocates a new id" |  awk -F'=' '{print $2}' | awk -F']' '{print $1}' | sort -r -n | head -n 1
+grep "idAllocator allocates a new id" {{/path/to}}/pd*.log |  awk -F'=' '{print $2}' | awk -F']' '{print $1}' | sort -r -n | head -n 1
 ```
 
 ```bash
