@@ -103,7 +103,7 @@ To complete this tutorial, you need the following:
    );
    ```
 
-2. In the root directory of your project, create a file named `hello-word.ts` and add the following code:
+2. In the root directory of your project, create a file named `hello-world.ts` and add the following code:
 
    ```ts
    import { connect } from '@tidbcloud/serverless';
