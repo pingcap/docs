@@ -27,10 +27,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - Enhance the handling of DNF items that are always `false` by directly ignoring such filter conditions, thus avoiding unnecessary full table scans [#40997](https://github.com/pingcap/tidb/issues/40997) @[hi-rustin](https://github.com/hi-rustin)
     - Optimize the statistics for the execution process of the TiFlash `TableScan` operator in `EXPLAIN ANALYZE` [#51727](https://github.com/pingcap/tidb/issues/51727) @[JinheLin](https://github.com/JinheLin)
     - Remove stores without Regions during MPP load balancing [#52313](https://github.com/pingcap/tidb/issues/52313) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    - (dup): release-7.1.5.md > 改进提升> TiDB - Support loading Regions in batch from PD to speed up the conversion process from the KV range to Regions when querying large tables [#51326](https://github.com/pingcap/tidb/issues/51326) @[SeaRise](https://github.com/SeaRise)
+    - Support loading Regions in batch from PD to speed up the conversion process from the KV range to Regions when querying large tables [#51326](https://github.com/pingcap/tidb/issues/51326) @[SeaRise](https://github.com/SeaRise)
     - On the `Resource Control` monitoring page, add a new panel `RU(Max)` to show the maximum RU consumption rate for each resource group [#49318] (https://github.com/pingcap/tidb/issues/49318) @[nolouch](https://github.com/nolouch)
     - Improve sync load performance to reduce latency in loading statistics [#52994](https://github.com/pingcap/tidb/issues/52294) [hawkingrei](https://github.com/hawkingrei)
-    - Increase concurrency of init-stats to speed up startup [#52466] (https://github.com/pingcap/tidb/issues/52466) [#52102](https://github.com/pingcap/tidb/issues/52102) [#52553](https://github.com/pingcap/tidb/issues/52553) [hawkingrei](https://github.com/hawkingrei)
+    - Increase concurrency of statistics initialization to speed up startup [#52466] (https://github.com/pingcap/tidb/issues/52466) [#52102](https://github.com/pingcap/tidb/issues/52102) [#52553](https://github.com/pingcap/tidb/issues/52553) [hawkingrei](https://github.com/hawkingrei)
 
 + TiKV
 
@@ -40,7 +40,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - Add slow logs for peer and store messages [#16600](https://github.com/tikv/tikv/issues/16600) @[Connor1996](https://github.com/Connor1996)
     - When TiKV detects the existence of corrupted SST files, it logs the specific reasons for the corruption [#16308](https://github.com/tikv/tikv/issues/16308) @[overvenus](https://github.com/overvenus)
     - Remove unnecessary async blocks to reduce memory usage [#16540](https://github.com/tikv/tikv/issues/16540) @[overvenus](https://github.com/overvenus)
-    - (dup): release-8.1.0.md > 改进提升> TiKV - Accelerate the shutdown speed of TiKV [#16680](https://github.com/tikv/tikv/issues/16680) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Accelerate the shutdown speed of TiKV [#16680](https://github.com/tikv/tikv/issues/16680) @[LykxSassinator](https://github.com/LykxSassinator)
 
 + PD
 
@@ -72,7 +72,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
         - Improve the initialization speed of replication tasks [#11124](https://github.com/pingcap/tiflow/issues/11124) @[asddongmen](https://github.com/asddongmen)
         - Initialize replication tasks asynchronously to reduce initialization time for the processor and owner [#10845](https://github.com/pingcap/tiflow/issues/10845) @[sdojjy](https://github.com/sdojjy)
         - Detect the Kafka cluster version automatically to improve compatibility with Kafka [#10852](https://github.com/pingcap/tiflow/issues/10852) @[wk989898](https://github.com/wk989898)
-        - (dup): release-6.5.8.md > 改进提升> Tools> TiCDC - Support [querying the downstream synchronization status of a changefeed](https://docs.pingcap.com/tidb/v7.5/ticdc-open-api-v2#query-whether-a-specific-replication-task-is-completed), which helps you determine whether the upstream data changes received by TiCDC have been synchronized to the downstream system completely [#10289](https://github.com/pingcap/tiflow/issues/10289) @[hongyunyan](https://github.com/hongyunyan)
 
 ## Bug fixes
 
@@ -154,9 +153,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - Fix the issue that data conversion from the `FLOAT` type to the `UNSIGNED` type returns incorrect results [#41736](https://github.com/pingcap/tidb/issues/41736) @[guo-shaoge](https://github.com/guo-shaoge)
     - Fix the issue that the `TRUNCATE()` function returns incorrect results when its second argument is a large negative number [#52978](https://github.com/pingcap/tidb/issues/52978) @[yibin87](https://github.com/yibin87)
     - Fix the issue that duplicated panel IDs in Grafana might cause abnormal display [#51556](https://github.com/pingcap/tidb/issues/51556) @[D3Hunter](https://github.com/D3Hunter)
-    - (dup): release-8.1.0.md > 错误修复> TiDB - Fix the issue that TiDB unexpectedly restarts when logging gRPC errors [#51301](https://github.com/pingcap/tidb/issues/51301) @[guo-shaoge](https://github.com/guo-shaoge)
+    - Fix the issue that TiDB unexpectedly restarts when logging gRPC errors [#51301](https://github.com/pingcap/tidb/issues/51301) @[guo-shaoge](https://github.com/guo-shaoge)
     - Fix the issue that TiDB loading statistics during startup might cause OOM [#52219](https://github.com/pingcap/tidb/issues/52219) @[hawkingrei](https://github.com/hawkingrei)
     - Fix the issue that the TTL job for a table does not stop after the table is deleted [#51540](https://github.com/pingcap/tidb/issues/51540) @[YangKeao](https://github.com/YangKeao)
+
 + TiKV
 
     - Fix the issue that `thread_id` values are incorrectly displayed as `0x5` in TiKV logs [#16398](https://github.com/tikv/tikv/issues/16398) @[overvenus](https://github.com/overvenus)
