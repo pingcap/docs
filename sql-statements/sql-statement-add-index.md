@@ -85,7 +85,9 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 ## MySQL compatibility
 
-* `FULLTEXT`, `HASH` and `SPATIAL` indexes are not supported.
+* TiDB accepts index types such as `HASH`, `BTREE` and `RTREE` in syntax for compatibility with MySQL, but ignores them.
+* `SPATIAL` indexes are not supported.
+* TiDB supports parsing the `FULLTEXT` syntax but does not support using the `FULLTEXT` indexes.
 * Descending indexes are not supported (similar to MySQL 5.7).
 * Adding the primary key of the `CLUSTERED` type to a table is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 
