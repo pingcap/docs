@@ -61,6 +61,7 @@
       - [Node.js Example](/tidb-cloud/serverless-driver-node-example.md)
       - [Prisma Example](/tidb-cloud/serverless-driver-prisma-example.md)
       - [Kysely Example](/tidb-cloud/serverless-driver-kysely-example.md)
+      - [Drizzle Example](/tidb-cloud/serverless-driver-drizzle-example.md)
   - Third-Party Support
     - [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)
     - [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)
