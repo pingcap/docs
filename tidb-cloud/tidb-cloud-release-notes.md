@@ -8,6 +8,24 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
+## June 4, 2024
+
+**General changes**
+
+- Introduce the Recovery Group feature (beta) for disaster recovery of [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters deployed on AWS.
+
+    This feature enables you to replicate your databases between TiDB Dedicated clusters, ensuring rapid recovery in the event of a regional disaster. If you are in the `Project Owner` role, you can enable this feature by creating a new recovery group and assigning databases to the group. By replicating databases with recovery groups, you can improve disaster readiness, meet stricter availability SLAs, and achieve more aggressive Recovery Point Objectives (RPO) and Recovery Time Objectives (RTO).
+
+    For more information, see [Get started with recovery groups](/tidb-cloud/recovery-group-get-started.md).
+
+- Introduce billing and metering (beta) for the [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) columnar storage [TiFlash](/tiflash/tiflash-overview.md).
+
+    Until June 30, 2024, columnar storage in TiDB Serverless clusters remains free with a 100% discount. After this date, each TiDB Serverless cluster will include a free quota of 5 GiB for columnar storage. Usage beyond the free quota will be charged.
+
+    For more information, see [TiDB Serverless pricing details](https://www.pingcap.com/tidb-serverless-pricing-details/#storage).
+
+- [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) supports [Time to live (TTL)](/time-to-live.md).
+
 ## May 28, 2024
 
 **General changes**
@@ -106,6 +124,12 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     To access these metric limits, navigate to the **Monitoring** page of your cluster, and then check the **Server** category under the **Metrics** tab.
 
     For more information, see [Metrics for TiDB Dedicated clusters](/tidb-cloud/built-in-monitoring.md#server).
+
+## February 21, 2024
+
+**General changes**
+
+- Upgrade the default TiDB version of new [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters from [v6.6.0](https://docs.pingcap.com/tidb/v6.6/release-6.6.0) to [v7.1.3](https://docs.pingcap.com/tidb/v7.1/release-7.1.3).
 
 ## February 20, 2024
 
