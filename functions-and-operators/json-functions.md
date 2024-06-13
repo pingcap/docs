@@ -69,7 +69,6 @@ JSON functions can be used to work with data in the [JSON data type](/data-type-
 | [JSON_ARRAYAGG()](/functions-and-operators/json-functions/json-functions-aggregate.md#json_arrayagg) | Provides an aggregation of keys. |
 | [JSON_OBJECTAGG()](/functions-and-operators/json-functions/json-functions-aggregate.md#json_objectagg) | Provides an aggregation of values for a given key. |
 
-
 ## Validation functions
     
 | Function Name                     | Description |
