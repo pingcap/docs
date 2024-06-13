@@ -53,7 +53,7 @@ mysql> SHOW KEYS FROM t1;
 2 rows in set (0.00 sec)
 ```
 
-Note that TiDB accepts index types such as `HASH`, `BTREE` and `RTREE` in syntax but ignores them for compatibility reasons.
+Note that TiDB accepts index types such as `HASH`, `BTREE` and `RTREE` in syntax for compatibility with MySQL, but ignores them.
 
 ## MySQL compatibility
 
