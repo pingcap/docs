@@ -28,6 +28,8 @@ For more information, see [JSON Functions](/functions-and-operators/json-functio
 
 ## JSON Value Types
 
+The values inside a JSON document have types. This is visible in the output of [`JSON_TYPE`()](/functions-and-operators/json-functions/json-functions-return.md#json_type).
+
 | Type             | Example                 |
 |------------------|-------------------------|
 | ARRAY            | `[]`                    |

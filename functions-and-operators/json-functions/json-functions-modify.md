@@ -47,7 +47,7 @@ SELECT JSON_ARRAY_APPEND('{"transport_options": ["Car", "Boat", "Train"]}', '$.t
 
 ## [JSON_ARRAY_INSERT()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-insert)
 
-The `JSON_ARRAY_INSERT(json_array, path, str)` function inserts a value into the specified locations of a JSON array and returns the result.
+The `JSON_ARRAY_INSERT(json_array, path, value [,path, value] ...)` function inserts a `value` into the specified position of the `json_array` in the `path` and returns the result.
 
 This function takes arguments in pairs, where each pair is a `path` and a `value`.
 
@@ -103,6 +103,21 @@ SELECT JSON_INSERT(
 +------------------------------------------------------------------------------------------+
 | {"architecture": "riscv", "language": ["Go", "Rust", "C++"], "os": ["linux", "freebsd"]} |
 +------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+Note that this function won't overwrite existing attributes as can be seen in the example below where we try to overwrite the `"a"` attribute.
+
+```sql
+SELECT JSON_INSERT('{"a": 61, "b": 62}', '$.a', 41, '$.c', 63);
+```
+
+```
++---------------------------------------------------------+
+| JSON_INSERT('{"a": 61, "b": 62}', '$.a', 41, '$.c', 63) |
++---------------------------------------------------------+
+| {"a": 61, "b": 62, "c": 63}                             |
++---------------------------------------------------------+
 1 row in set (0.00 sec)
 ```
 
@@ -293,7 +308,7 @@ SELECT JSON_UNQUOTE('"foo"');
 1 row in set (0.00 sec)
 ```
 
-This function is often used together with [`JSON_EXTRACT()`](/functions-and-operators/json-functions/json-functions-search.md#json_extract). In the example below you can see that we first extract a value, which is quoted and in the second example we combine this to unquote the value.
+This function is often used together with [`JSON_EXTRACT()`](/functions-and-operators/json-functions/json-functions-search.md#json_extract). In the example below you can see that we first extract a value, which is quoted and in the second example we combine this to unquote the value. Note that instead of `JSON_UNQUOTE(JSON_EXTRACT(...))` the [`->>`](/functions-and-operators/json-functions/json-functions-search.md#--1) shorthand can be used.
 
 ```sql
 SELECT JSON_EXTRACT('{"database": "TiDB"}', '$.database');

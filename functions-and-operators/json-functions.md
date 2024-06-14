@@ -38,8 +38,8 @@ JSON functions can be used to work with data in the [JSON data type](/data-type-
 | [JSON_ARRAY_APPEND()](/functions-and-operators/json-functions/json-functions-modify.md#json_array_append) | Appends values to the end of the indicated arrays within a JSON document and returns the result |
 | [JSON_ARRAY_INSERT()](/functions-and-operators/json-functions/json-functions-modify.md#json_array_insert) | Insert values into the specified locations of a JSON document and returns the result |
 | [JSON_INSERT()](/functions-and-operators/json-functions/json-functions-modify.md#json_insert) | Inserts data into a JSON document and returns the result |
-| [JSON_MERGE_PATCH()](/functions-and-operators/json-functions/json-functions-modify.md#json_merge_patch)  | Merge JSON documents |
-| [JSON_MERGE_PRESERVE()](/functions-and-operators/json-functions/json-functions-modify.md#json_merge_preserve)  | Merges two or more JSON documents and returns the merged result |
+| [JSON_MERGE_PATCH()](/functions-and-operators/json-functions/json-functions-modify.md#json_merge_patch)  | Merge two or more JSON documents by patching/overwriting old values |
+| [JSON_MERGE_PRESERVE()](/functions-and-operators/json-functions/json-functions-modify.md#json_merge_preserve)  | Merges two or more JSON documents by preserving all values |
 | [JSON_MERGE()](/functions-and-operators/json-functions/json-functions-modify.md#json_merge)  | A deprecated alias for `JSON_MERGE_PRESERVE()` |
 | [JSON_REMOVE()](/functions-and-operators/json-functions/json-functions-modify.md#json_remove)    | Removes data from a JSON document and returns the result |
 | [JSON_REPLACE()](/functions-and-operators/json-functions/json-functions-modify.md#json_replace) | Replaces existing values in a JSON document and returns the result |
@@ -60,7 +60,7 @@ JSON functions can be used to work with data in the [JSON data type](/data-type-
 | Function Name                     | Description |
 | --------------------------------- | ----------- |
 | [JSON_PRETTY()](/functions-and-operators/json-functions/json-functions-utility.md#json_pretty) | Pretty formatting of a JSON document |
-| [JSON_STORAGE_FREE()](/functions-and-operators/json-functions/json-functions-utility.md#json_storage_free) | Returns how much storage space was freed in the binary representation of the JSON value after it was updated in place. As TiDB has different storage architecture from MySQL, this function always returns 0 for a valid JSON value, and it is implemented for compatibility with MySQL 8.0. |
+| [JSON_STORAGE_FREE()](/functions-and-operators/json-functions/json-functions-utility.md#json_storage_free) | Returns how much storage space was freed in the binary representation of the JSON value after it was updated in place. |
 | [JSON_STORAGE_SIZE()](/functions-and-operators/json-functions/json-functions-utility.md#json_storage_size) | Returns an approximate size of bytes required to store the json value. As the size does not account for TiKV using compression, the output of this function is not strictly compatible with MySQL. |
 
 ## Aggregate functions
@@ -130,15 +130,15 @@ The JSON to demonstrate this:
 
 | JSONPath                              | Description                             | Example with [`JSON_EXTRACT()`](/functions-and-operators/json-functions/json-functions-search.md#json_extract) | 
 |-------------------------------------- |-----------------------------------------|-------------------------------|
-| `$`                                   | The root of the document                |                               |
-| `$.database`                          | The database attribute                  |                               |
+| `$`                                   | The root of the document                | This would return the full document                              |
+| `$.database`                          | The database attribute                  |  This would return the full structure starting with `"database"`. It would not include `"migration_tool" and the stucture below that.                             |
 | `$.database.name`                     | The name of the database.               | `"TiDB"`                      |
-| `$.database.features`                 | All database features                   |                               |
+| `$.database.features`                 | All database features                   | `["distributed", "scalable", "relational", "cloud native"]`                              |
 | `$.database.features[0]`              | The first database feature.             | `"distributed"`               |
 | `$.database.features[2]`              | The third database feature.             | `"relational"`                |
 | `$.database.versions[0].type`         | The type of the first database version. | `"lts"`                       |
 | `$.database.versions[*].release_date` | The release date for all versions.      | `["2024-05-24","2024-03-29"]` |
-| `$.*.features`                        | Two array's of features                 |                               |
+| `$.*.features`                        | Two array's of features                 | `[["distributed", "scalable", "relational", "cloud native"], ["MySQL compatible", "Shard merging"]]`                              |
 | `$**.version`                         | All versions, with path wildcard        | `["v8.1.0","v8.0.0"]`         |
 | `$.database.features[0 to 2]`         | Range of database features.             | `["scalable","relational"]`   |
 
