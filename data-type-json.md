@@ -30,19 +30,22 @@ For more information, see [JSON Functions](/functions-and-operators/json-functio
 
 The values inside a JSON document have types. This is visible in the output of [`JSON_TYPE`()](/functions-and-operators/json-functions/json-functions-return.md#json_type).
 
-| Type             | Example                 |
-|------------------|-------------------------|
-| ARRAY            | `[]`                    |
-| BIT              |                         |
-| BLOB             |                         |
-| BOOLEAN          | `true`                  |
-| DOUBLE           | `1.14`                  |
-| INTEGER          | `5`                     |
-| NULL             | `null`                  |
-| OBJECT           | `{}`                    |
-| OPAQUE           |                         |
-| STRING           | `"foobar"`              |
-| UNSIGNED INTEGER | `9223372036854776000`   |
+| Type             | Example                        |
+|------------------|--------------------------------|
+| ARRAY            | `[]`                           |
+| BIT              |                                |
+| BLOB             |                                |
+| BOOLEAN          | `true`                         |
+| DATE             | `"2025-06-14"`                 |
+| DATETIME         | `"2025-06-14 09:05:10.000000"` |
+| DOUBLE           | `1.14`                         |
+| INTEGER          | `5`                            |
+| NULL             | `null`                         |
+| OBJECT           | `{}`                           |
+| OPAQUE           |                                |
+| STRING           | `"foobar"`                     |
+| TIME             | `"09:10:00.000000"`            |
+| UNSIGNED INTEGER | `9223372036854776000`          |
 
 ## Restrictions
 
