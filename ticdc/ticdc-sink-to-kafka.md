@@ -384,7 +384,7 @@ When `large-message-handle-compression` is enabled, the message received by the 
 This feature is different from the compression feature of the Kafka producer:
 
 * The compression algorithm specified in `large-message-handle-compression` compresses a single Kafka message. The compression is performed before comparing with the message size limit.
-* At the same time, you can also configure the compression algorithm by using the `compression` parameter in [`sink-uri`](#configure-sink-uri-for-kafka). This compression algorithm is applied to the entire data sending request, which contains multiple Kafka messages. The compression is performed after comparing with the message size limit.
+* At the same time, you can also configure the compression algorithm by using the `compression` parameter in [`sink-uri`](#configure-sink-uri-for-kafka). This compression algorithm is applied to the entire data sending request, which contains multiple Kafka messages.
 
 If you set `large-message-handle-compression`, when TiCDC receives a message, it first compares it to the message size limit, and messages larger than the size limit are compressed. If you also set `compression` in [`sink-uri`](#configure-sink-uri-for-kafka), TiCDC compresses the entire sending data request again at the sink level based on the `sink-uri` setting.
 
