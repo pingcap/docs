@@ -12,7 +12,7 @@ This tutorial guides you through an easy way to experience the Hybrid Transactio
 
 ## Before you begin
 
-Before experiencing the HTAP feature, follow [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md) to create a cluster with TiFlash nodes, connect to the TiDB cluster, and import the Steam Game Stats sample data to the cluster.
+Before experiencing the HTAP feature, follow [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md) to create a TiDB Serverless cluster and import the **Steam Game Stats** sample dataset to the cluster.
 
 ## Steps
 
@@ -20,7 +20,7 @@ Before experiencing the HTAP feature, follow [TiDB Cloud Quick Start](/tidb-clou
 
 After a cluster with TiFlash nodes is created, TiKV does not replicate data to TiFlash by default. You need to execute DDL statements in a MySQL client of TiDB to specify the tables to be replicated. After that, TiDB will create the specified table replicas in TiFlash accordingly.
 
-For example, to replicate the `games` table (in the Steam Game Stats sample data) to TiFlash, execute the following statements:
+For example, to replicate the `games` table (in the **Steam Game Stats** sample dataset) to TiFlash, execute the following statements:
 
 ```sql
 USE game;
@@ -54,7 +54,7 @@ In the result of the preceding statement:
 
 When the process of replication is completed, you can start to run some queries.
 
-For example, you can check the number of game released every year, as well as the average price and average playtime:
+For example, you can check the number of games released every year, as well as the average price and average playtime:
 
 ```sql
 SELECT
@@ -90,7 +90,7 @@ In this step, you can compare the execution statistics between TiKV (row-based s
       `release_year` DESC;
     ```
 
-    For tables with TiFlash replicas, the TiDB optimizer automatically determines whether to use either TiKV or TiFlash replicas based on the cost estimation. In the preceding `EXPLAIN ANALYZE` statement, `HINT /*+ READ_FROM_STORAGE(TIKV[games]) */` is used to force the optimizer to choose TiKV so you can check the execution statistics of TiKV.
+    For tables with TiFlash replicas, the TiDB optimizer automatically determines whether to use either TiKV or TiFlash replicas based on the cost estimation. In the preceding `EXPLAIN ANALYZE` statement, the `/*+ READ_FROM_STORAGE(TIKV[games]) */` hint is used to force the optimizer to choose TiKV so you can check the execution statistics of TiKV.
 
     > **Note:**
     >
