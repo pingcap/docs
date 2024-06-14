@@ -130,7 +130,7 @@ The JSON to demonstrate this:
 | JSONPath                              | Description                             | Example with [`JSON_EXTRACT()`](/functions-and-operators/json-functions/json-functions-search.md#json_extract) | 
 |-------------------------------------- |-----------------------------------------|-------------------------------|
 | `$`                                   | The root of the document                | This would return the full document                              |
-| `$.database`                          | The database attribute                  |  This would return the full structure starting with `"database"`. It would not include `"migration_tool" and the stucture below that.                             |
+| `$.database`                          | The database attribute                  |  This would return the full structure starting with `"database"`. It would not include `"migration_tool"` and the structure below that.                             |
 | `$.database.name`                     | The name of the database.               | `"TiDB"`                      |
 | `$.database.features`                 | All database features                   | `["distributed", "scalable", "relational", "cloud native"]`                              |
 | `$.database.features[0]`              | The first database feature.             | `"distributed"`               |
