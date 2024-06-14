@@ -56,9 +56,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- When you restore data from TiDB Dedicated clusters, the default behavior is now modified from restoring without user accounts to restoring with all user accounts, including the `cloud_admin@'%'` account.
+- When you restore data from TiDB Dedicated clusters, the default behavior is now modified from restoring without user accounts to restoring with all user accounts.
 
-    For more information, see [BackUp and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md).
+    For more information, see [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md).
 
 - Introduce event filters for changefeeds.
 

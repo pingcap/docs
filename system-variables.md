@@ -1037,6 +1037,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
 - Default value: `4096`
 - Range: `[0, 9223372036854775807]`
 - Unit: Bytes

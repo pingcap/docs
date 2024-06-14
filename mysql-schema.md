@@ -69,10 +69,6 @@ Currently, the `help_topic` is NULL.
 
 ## TTL related system tables
 
-> **Note:**
-
-> The TTL related system tables are not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
-
 * `tidb_ttl_table_status`: the previously executed TTL job and ongoing TTL job for all TTL tables
 * `tidb_ttl_task`: the current ongoing TTL subtasks
 * `tidb_ttl_job_history`: the execution history of TTL tasks in the last 90 days
