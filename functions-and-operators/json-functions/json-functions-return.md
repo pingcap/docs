@@ -100,6 +100,34 @@ SELECT v, JSON_TYPE(v) FROM demo ORDER BY 2;
 8 rows in set (0.00 sec)
 ```
 
+Note that values that look the same, may not have the same type as is demonstrated in the example below.
+
+```sql
+SELECT '"2025-06-14"',CAST(CAST('2025-06-14' AS date) AS json);
+```
+
+```
++--------------+------------------------------------------+
+| "2025-06-14" | CAST(CAST('2025-06-14' AS date) AS json) |
++--------------+------------------------------------------+
+| "2025-06-14" | "2025-06-14"                             |
++--------------+------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+```sql
+SELECT JSON_TYPE('"2025-06-14"'),JSON_TYPE(CAST(CAST('2025-06-14' AS date) AS json));
+```
+
+```
++---------------------------+-----------------------------------------------------+
+| JSON_TYPE('"2025-06-14"') | JSON_TYPE(CAST(CAST('2025-06-14' AS date) AS json)) |
++---------------------------+-----------------------------------------------------+
+| STRING                    | DATE                                                |
++---------------------------+-----------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
 ## [JSON_VALID()](https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-valid)
 
 The `JSON_VALID(str)` function checks if the first argument is valid JSON. This can be useful for checking a column before converting it to the `json` type.
