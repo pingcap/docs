@@ -78,7 +78,7 @@ You can change the database name by configuring `lightning.task-info-schema-name
 task-info-schema-name = 'lightning_task_info'
 ```
 
-TiDB Lightning creates 3 tables and 1 view in this database:
+TiDB Lightning creates three tables and one view in this database:
 
 ```sql
 CREATE TABLE type_error_v1 (
