@@ -379,12 +379,16 @@ An example configuration is as follows:
 large-message-handle-compression = "none"
 ```
 
+When `large-message-handle-compression` is enabled, the message received by the consumer is encoded using a specific compression protocol, and the consumer application needs to use the specified compression protocol to decode the data.
+
 This feature is different from the compression feature of the Kafka producer:
 
 * The compression algorithm specified in `large-message-handle-compression` compresses a single Kafka message. The compression is performed before comparing with the message size limit.
-* You can configure the compression algorithm in `sink-uri`. The compression is applied to the entire data sending request, which contains multiple Kafka messages. The compression is performed after comparing with the message size limit.
+* At the same time, you can also configure the compression algorithm by using the `compression` parameter in [`sink-uri`](#configure-sink-uri-for-kafka). This compression algorithm is applied to the entire data sending request, which contains multiple Kafka messages.
 
-When `large-message-handle-compression` is enabled, the message received by the consumer is encoded using a specific compression protocol, and the consumer application needs to use the specified compression protocol to decode the data.
+If you set `large-message-handle-compression`, when TiCDC receives a message, it first compares it to the value of the message size limit parameter, and messages larger than the size limit are compressed. If you also set `compression` in [`sink-uri`](#configure-sink-uri-for-kafka), TiCDC compresses the entire sending data request again at the sink level based on the `sink-uri` setting.
+
+The compression ratio for the two preceding compression methods is calculated as follows: `compression ratio = size before compression / size after compression * 100`.
 
 ### Send handle keys only
 
