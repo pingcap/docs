@@ -19,7 +19,6 @@ The parameter of the above command is described as follows:
 
 - `count` indicates the number of replicas. When the value is `0`, the replica is deleted.
 
-
 > **Note:**
 >
 > For a [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) cluster, the `count` of TiFlash replicas can only be `2`. If you set it to `1`, it will be automatically adjusted to `2` for execution. If you set it to a number larger than 2, you will get an error about the replica count.
