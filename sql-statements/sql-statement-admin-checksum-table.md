@@ -12,7 +12,7 @@ The [checksum](/tidb-lightning/tidb-lightning-glossary.md#checksum) is calculate
 
 <CustomContent platform="tidb">
 
-This statement is used to calculate a checksum that can be compared with the checksum that [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) has calculated locally. This statement is usually executed by [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md).
+This statement is used to calculate a checksum that can be compared with the checksum that [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) has calculated locally. This statement is usually executed by [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md). The same method is also used by the [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) statement.
 
 </CustomContent>
 
