@@ -161,7 +161,7 @@ SELECT JSON_EXTRACT('{"foo": "bar", "aaa": 5}', '$.foo');
 Returns the value from a JSON column after the evaluating path. It is an alias for [`JSON_EXTRACT()`](#json_extract).
 
 ```sql
-SELECT 
+SELECT
     j->'$.foo',
     JSON_EXTRACT(j, '$.foo')
 FROM (
@@ -184,7 +184,7 @@ FROM (
 Returns the value from a JSON column after the evaluating path and unquoting the result. It is an alias for `JSON_UNQUOTE(JSON_EXTRACT(doc, path_literal))`.
 
 ```sql
-SELECT 
+SELECT
     j->'$.foo',
     JSON_EXTRACT(j, '$.foo')
     j->>'$.foo',
@@ -261,7 +261,7 @@ SELECT JSON_SEARCH('{"a": ["aa", "bb", "cc"], "b": ["cc", "dd"]}','one','cc');
 1 row in set (0.00 sec)
 ```
 
-Now the we do the same, but we set `sub_or_all` to `all` to get not just the first result, but to get all results.
+Now you do the same, but set `sub_or_all` to `all` to get not just the first result, but all results.
 
 ```json
 SELECT JSON_SEARCH('{"a": ["aa", "bb", "cc"], "b": ["cc", "dd"]}','all','cc');

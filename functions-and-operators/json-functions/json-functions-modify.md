@@ -136,7 +136,7 @@ In the following example you can see that the value of `a` gets overwritten by a
 ```sql
 SELECT JSON_MERGE_PATCH(
     '{"a": 1, "b": 2}',
-    '{"a": 100}', 
+    '{"a": 100}',
     '{"c": 300}'
 );
 ```
@@ -276,7 +276,7 @@ SELECT JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2);
 1 row in set (0.00 sec)
 ```
 
-In the example below we update the `$.version` from `1.1` to `1.2` and `$.branch`, which wasn't present before, is set to `main`.
+In the following example, you update the `$.version` from `1.1` to `1.2`. And you update `$.branch`, which is was not present before, to `main`.
 
 ```sql
 SELECT JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2,'$.branch', "main");
