@@ -3,6 +3,10 @@ title: JSON Functions that validate JSON documents
 summary: Learn about JSON functions that validate JSON documents.
 ---
 
+# JSON Functions That Validate JSON Documents
+
+This document describes JSON functions that validate JSON documents.
+
 ## [JSON_SCHEMA_VALID()](https://dev.mysql.com/doc/refman/8.0/en/json-validation-functions.html#function_json-schema-valid)
 
 The `JSON_SCHEMA_VALID(schema, json_doc)` function validate a JSON document against a schema to ensure data integrity and consistency. 
@@ -39,14 +43,14 @@ Validation keywords:
 | `minContains`          | `array` | Used together with `contains` to set how many times something can be present |
 | `properties`           | `object` | Schema to apply to the properties of an object |
 | `patternProperties`    | `object` | Schema to apply to certain properties based on pattern matching of the property name |
-| `additionalProperties` | `object` | If additional properties are allowed or not, `true`/`false` |
+| `additionalProperties` | `object` | Whether additional properties are allowed or not, `true`/`false` |
 | `minProperties`        | `object` | Test the number of properties that the object has |
 | `maxProperties`        | `object` | Test the number of properties that the object has|
 | `required`             | `object` | The property names that are required |
 
 Examples:
 
-For some of the examples we will use this JSON document:
+For some of the examples, use this JSON document:
 
 ```json
 {
@@ -62,13 +66,13 @@ For some of the examples we will use this JSON document:
 }
 ```
 
-We will use a [user defined variable](/user-defined-variables.md) to hold the JSON document.
+Use a [user defined variable](/user-defined-variables.md) to hold the JSON document.
 
 ```sql
 SET @j := '{"fruits": ["orange", "apple", "pear"], "vegetables": ["carrot", "pepper", "kale"]}';
 ```
 
-Let's start by testing the type::
+Start by testing the type::
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"type": "object"}',@j);
@@ -109,9 +113,9 @@ mysql> SELECT JSON_TYPE(@j);
 1 row in set (0.00 sec)
 ```
 
-As you can see in the output above, the type is `object`. This matches with the output of [`JSON_TYPE()`](/functions-and-operators/json-functions/json-functions-return.md#json_type).
+As you can see in the preceding output, the type is `object`. This matches with the output of [`JSON_TYPE()`](/functions-and-operators/json-functions/json-functions-return.md#json_type).
 
-Now let's validate the presence of certain attributes.
+Now validate the presence of certain attributes.
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"required": ["fruits","vegetables"]}',@j);
@@ -126,7 +130,7 @@ SELECT JSON_SCHEMA_VALID('{"required": ["fruits","vegetables"]}',@j);
 1 row in set (0.00 sec)
 ```
 
-In the output above you can see that see that validation of the presence of the `fruits` and `vegetables` attributes succeeded.
+In the preceding output, you can see that see that validation of the presence of the `fruits` and `vegetables` attributes succeeds.
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"required": ["fruits","vegetables","grains"]}',@j);
@@ -141,9 +145,9 @@ SELECT JSON_SCHEMA_VALID('{"required": ["fruits","vegetables","grains"]}',@j);
 1 row in set (0.00 sec)
 ```
 
-In the output above you can see that see that validation of the presence of the `fruits`, `vegetables` and `grains` attributes failed as the latter isn't present.
+In the preceding output, you can see that see that validation of the presence of the `fruits`, `vegetables` and `grains` attributes fails because the latter is not present.
 
-Now let's validate that `fruits` is an array.
+Now validate that `fruits` is an array.
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array"}}}',@j);
@@ -158,7 +162,7 @@ SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array"}}}',@j);
 1 row in set (0.01 sec)
 ```
 
-The output above confirms that `fruits` is an array.
+The preceding output confirms that `fruits` is an array.
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "string"}}}',@j);
@@ -173,9 +177,9 @@ SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "string"}}}',@j);
 1 row in set (0.00 sec)
 ```
 
-The output above tells us that `fruits` is **not** a string.
+The preceding output shows that `fruits` is **not** a string.
 
-Now let's also verify the number of items in the array
+Now verify the number of items in the array
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array", "minItems": 3}}}',@j);
@@ -190,7 +194,7 @@ SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array", "minItems"
 1 row in set (0.00 sec)
 ```
 
-The output above tells us that `fruits` is an array with at least 3 items.
+The preceding output shows that `fruits` is an array with at least 3 items.
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array", "minItems": 4}}}',@j);
@@ -205,9 +209,9 @@ SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array", "minItems"
 1 row in set (0.00 sec)
 ```
 
-The output above tells us that `fruits` is **not** an array with at least 4 items. This is because it doesn't meet the minimum number of items.
+The preceding output shows that `fruits` is **not** an array with at least 4 items. This is because it does not meet the minimum number of items.
 
-For integers values we can check if they are in a certain range.
+For integers values, you can check if they are in a certain range.
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"type": "integer", "minimum": 40, "maximum": 45}', '42');
@@ -232,7 +236,7 @@ SELECT JSON_SCHEMA_VALID('{"type": "integer", "minimum": 40, "maximum": 45}', '1
 1 row in set (0.00 sec)
 ```
 
-For strings we can do pattern matching.
+For strings, you can do pattern matching.
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"type": "string", "pattern": "^Ti"}', '"TiDB"');
@@ -288,7 +292,7 @@ SELECT JSON_SCHEMA_VALID('{"format": "ipv4"}', '"327.0.0.1"');
 1 row in set (0.00 sec)
 ```
 
-Another thing we can do is to use `enum` to check a string is in an array of values. 
+You can also use `enum` to check if a string is in an array of values. 
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"enum": ["TiDB", "MySQL"]}', '"TiDB"');

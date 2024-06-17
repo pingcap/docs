@@ -25,7 +25,7 @@ SELECT id FROM city WHERE population >= 100;
 
 For more information, see [JSON Functions](/functions-and-operators/json-functions.md) and [Generated Columns](/generated-columns.md).
 
-## JSON Value Types
+## JSON value types
 
 The values inside a JSON document have types. This is visible in the output of [`JSON_TYPE`()](/functions-and-operators/json-functions/json-functions-return.md#json_type).
 
