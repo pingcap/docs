@@ -93,8 +93,8 @@ CREATE TABLE daily_data (
     customer_id VARCHAR(20),    -- Customer ID
     daily_fee DECIMAL(20,2));   -- Amount of fee for per day
 
-ALTER TABLE detail_data SET TIFLASH REPLICA 1;
-ALTER TABLE daily_data SET TIFLASH REPLICA 1;
+ALTER TABLE detail_data SET TIFLASH REPLICA 2;
+ALTER TABLE daily_data SET TIFLASH REPLICA 2;
 
 -- ... (detail_data table continues updating)
 INSERT INTO detail_data(ts,customer_id,detail_fee) VALUES
