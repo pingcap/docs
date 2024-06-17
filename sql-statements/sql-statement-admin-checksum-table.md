@@ -18,7 +18,7 @@ This statement is used to calculate a checksum that can be compared with the che
 
 <CustomContent platform="tidb-cloud">
 
-This statement is used to calculate a checksum that can be compared with the checksum that TiDB Lightning has calculated locally. This statement is usually executed by TiDB Lightning.
+This statement is used to calculate a checksum that can be compared with the checksum that TiDB Lightning has calculated locally. This statement is usually executed by TiDB Lightning. The same method is also used by the [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) statement.
 
 </CustomContent>
 
