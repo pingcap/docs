@@ -58,7 +58,7 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
         <SimpleTab groupId="clinicServer">
         <div label="Clinic Server for international users" value="clinic-us">
 
-        [Clinic Server for international users](https://clinic.pingcap.com): Data is stored in AWS in the US.
+        [Clinic Server for international users](https://clinic.pingcap.com): Data is stored in AWS in the United States.
 
         </div>
         <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
