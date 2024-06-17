@@ -1,7 +1,9 @@
 ---
-title: JSON Functions that aggregate JSON values
+title: JSON Functions That Aggregate JSON Values
 summary: Learn about JSON functions that aggregate JSON values.
 ---
+
+# JSON Functions That Aggregate JSON Values
 
 The functions listed on this page are part of the [aggregate functions](/functions-and-operators/aggregate-group-by-functions.md) that TiDB supports, but are specific to working with JSON.
 
@@ -32,7 +34,7 @@ The `JSON_OBJECTAGG(key,value)` function provides an aggregation of values for a
 
 Example:
 
-First we create two tables and add a few rows to them.
+First create two tables and add a few rows to them.
 
 ```sql
 CREATE TABLE plants (
@@ -64,7 +66,7 @@ VALUES
 (3, "thorns","no");
 ```
 
-Now we can check what the created tables look like.
+Now you can check what the created tables look like.
 
 ```sql
 TABLE plants;
@@ -100,7 +102,7 @@ TABLE plant_attributes;
 7 rows in set (0.00 sec)
 ```
 
-And now we can use the `JSON_OBJECTAGG()` function with this data. Here you can see that for every group multiple key/value pairs are combined into a JSON object.
+You can use the `JSON_OBJECTAGG()` function with this data. Here you can see that for every group multiple key/value pairs are combined into a JSON object.
 
 ```sql
 SELECT

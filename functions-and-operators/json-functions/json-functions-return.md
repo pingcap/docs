@@ -1,7 +1,11 @@
 ---
-title: JSON Functions that return JSON values
+title: JSON Functions That Return JSON Values
 summary: Learn about JSON functions that return JSON values.
 ---
+
+# JSON Functions that return JSON values
+
+This document describes JSON functions that return JSON values.
 
 ## [JSON_DEPTH()](https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-depth)
 
@@ -9,7 +13,7 @@ The `JSON_DEPTH(json_doc)` function returns the maximum depth of a JSON document
 
 Examples:
 
-In the example below `JSON_DEPTH()` returns 3 because there are these three levels:
+In the following example, `JSON_DEPTH()` returns `3` because there are three levels:
 
 - root (`$`)
 - weather (`$.weather`)
@@ -30,11 +34,11 @@ SELECT JSON_DEPTH('{"weather": {"current": "sunny"}}');
 
 ## [JSON_LENGTH()](https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-length)
 
-The `JSON_LENGTH(json_doc [,path])` function returns the length of a JSON document, or, if a `path` argument is given, the length of the value within the path.
+The `JSON_LENGTH(json_doc [,path])` function returns the length of a JSON document. If a `path` argument is given, it returns the length of the value within the path.
 
 Examples:
 
-Here the return value is `1` as the only item at the root of the document is `weather`.
+In the following example, the returned value is `1` because the only item at the root of the document is `weather`.
 
 ```sql
 SELECT JSON_LENGTH('{"weather": {"current": "sunny", "tomorrow": "cloudy"}}','$');
@@ -49,7 +53,7 @@ SELECT JSON_LENGTH('{"weather": {"current": "sunny", "tomorrow": "cloudy"}}','$'
 1 row in set (0.00 sec)
 ```
 
-Here the return value is 2 as there are two values at `$.weather`: `current` and `tomorrow`.
+In the following example, the returned value is `2` because there are two values at `$.weather`: `current` and `tomorrow`.
 
 ```sql
 SELECT JSON_LENGTH('{"weather": {"current": "sunny", "tomorrow": "cloudy"}}','$.weather');
@@ -100,7 +104,7 @@ SELECT v, JSON_TYPE(v) FROM demo ORDER BY 2;
 8 rows in set (0.00 sec)
 ```
 
-Note that values that look the same, may not have the same type as is demonstrated in the example below.
+Note that values that look the same might not have the same type, as demonstrated in the following example.
 
 ```sql
 SELECT '"2025-06-14"',CAST(CAST('2025-06-14' AS date) AS json);

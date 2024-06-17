@@ -1,7 +1,11 @@
 ---
-title: JSON Functions that create JSON values
+title: JSON Functions That Create JSON Values
 summary: Learn about JSON functions that create JSON values.
 ---
+
+# JSON Functions That Create JSON Values
+
+This document describes JSON functions that create JSON values.
 
 ## [JSON_ARRAY()](https://dev.mysql.com/doc/refman/8.0/en/json-creation-functions.html#function_json-array)
 

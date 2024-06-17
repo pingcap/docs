@@ -1,11 +1,15 @@
 ---
-title: JSON Functions that search JSON values
+title: JSON Functions That Search JSON Values
 summary: Learn about JSON functions that search JSON values.
 ---
 
+# JSON Functions That Search JSON Values
+
+This document describes JSON functions that search JSON values.
+
 ## [JSON_CONTAINS()](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-contains)
 
-The `JSON_CONTAINS(json_doc, search [,path])` function indicates by returning 1 or 0 whether a given candidate JSON document is contained within a target JSON document.
+By returning `1` or `0`, the `JSON_CONTAINS(json_doc, search [,path])` function indicates whether a given candidate JSON document is contained within a target JSON document.
 
 Examples:
 
@@ -24,7 +28,7 @@ SELECT JSON_CONTAINS('["a","b","c"]','"a"');
 1 row in set (0.00 sec)
 ```
 
-Here `e` isn't contained in the document.
+Here `e` is not contained in the document.
 
 ```sql
 SELECT JSON_CONTAINS('["a","b","c"]','"e"');
@@ -54,7 +58,7 @@ SELECT JSON_CONTAINS('{"foo": "bar", "aaa": 5}','{"foo": "bar"}');
 1 row in set (0.00 sec)
 ```
 
-Here `"bar"` isn't contained in the root of the document.
+Here `"bar"` is not contained in the root of the document.
 
 ```sql
 SELECT JSON_CONTAINS('{"foo": "bar", "aaa": 5}','"bar"');
@@ -69,7 +73,7 @@ SELECT JSON_CONTAINS('{"foo": "bar", "aaa": 5}','"bar"');
 1 row in set (0.00 sec)
 ```
 
-Here `"bar"` isn't contained in the `$.foo` attribute of the document.
+Here `"bar"` is not contained in the `$.foo` attribute of the document.
 
 ```sql
 SELECT JSON_CONTAINS('{"foo": "bar", "aaa": 5}','"bar"', '$.foo');
@@ -86,7 +90,7 @@ SELECT JSON_CONTAINS('{"foo": "bar", "aaa": 5}','"bar"', '$.foo');
 
 ## [JSON_CONTAINS_PATH()](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-contains-path)
 
-The `JSON_CONTAINS_PATH(json_doc, all_or_one, path [,path, ...])` function returns 0 or 1 to indicate whether a JSON document contains data at a given path or paths.
+The `JSON_CONTAINS_PATH(json_doc, all_or_one, path [,path, ...])` function returns `0` or `1` to indicate whether a JSON document contains data at a given path or paths.
 
 Examples:
 
@@ -105,7 +109,7 @@ SELECT JSON_CONTAINS_PATH('{"foo": "bar", "aaa": 5}','all','$.foo');
 1 row in set (0.00 sec)
 ```
 
-Here the document doesn't contain `$.bar`.
+Here the document does not contain `$.bar`.
 
 ```sql
 SELECT JSON_CONTAINS_PATH('{"foo": "bar", "aaa": 5}','all','$.bar');
@@ -154,7 +158,7 @@ SELECT JSON_EXTRACT('{"foo": "bar", "aaa": 5}', '$.foo');
 
 ## [->](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#operator_json-column-path)
 
-Returns the value from a JSON column after the evaluating path; an alias for [`JSON_EXTRACT()`](#json_extract).
+Returns the value from a JSON column after the evaluating path. It is an alias for [`JSON_EXTRACT()`](#json_extract).
 
 ```sql
 SELECT 
@@ -177,7 +181,7 @@ FROM (
 
 ## [->>](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#operator_json-inline-path)
 
-Returns the value from a JSON column after the evaluating path and unquoting the result; an alias for `JSON_UNQUOTE(JSON_EXTRACT(doc, path_literal))`.
+Returns the value from a JSON column after the evaluating path and unquoting the result. It is an alias for `JSON_UNQUOTE(JSON_EXTRACT(doc, path_literal))`.
 
 ```sql
 SELECT 
@@ -202,7 +206,7 @@ FROM (
 
 ## [JSON_KEYS()](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-keys)
 
-The `JSON_KEYS(json_doc [,path])` function returns the keys from the top-level value of a JSON object as a JSON array, or, if a `path` argument is given, the top-level keys from the selected path.
+The `JSON_KEYS(json_doc [,path])` function returns the keys from the top-level value of a JSON object as a JSON array. If a `path` argument is given, it returns the top-level keys from the selected path.
 
 Examples:
 
@@ -242,7 +246,7 @@ The `JSON_SEARCH(json_doc, one_or_all, str)` function searches a JSON document f
 
 Examples:
 
-Here we search for the first result for `cc`, which is in position 2 of the `a` array.
+In the following example, you can search for the first result for `cc`, which is in position 2 of the `a` array.
 
 ```sql
 SELECT JSON_SEARCH('{"a": ["aa", "bb", "cc"], "b": ["cc", "dd"]}','one','cc');
@@ -274,7 +278,7 @@ SELECT JSON_SEARCH('{"a": ["aa", "bb", "cc"], "b": ["cc", "dd"]}','all','cc');
 
 ## [MEMBER OF()](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#operator_member-of)
 
-The `str MEMBER OF (json_array)` functions tests if the passed value is an element of the `json_array`, returns 1. Otherwise, returns 0. Returns `NULL` if any of the arguments is `NULL`.
+The `str MEMBER OF (json_array)` functions tests if the passed value is an element of the `json_array`, it returns `1`. Otherwise, it returns `0`. It returns `NULL` if any of the arguments is `NULL`.
 
 ```
 SELECT '🍍' MEMBER OF ('["🍍","🥥","🥭"]') AS 'Contains pineapple';
@@ -292,11 +296,11 @@ SELECT '🍍' MEMBER OF ('["🍍","🥥","🥭"]') AS 'Contains pineapple';
 
 ## [JSON_OVERLAPS()](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-overlaps)
 
-The `JSON_OVERLAPS(json_doc, json_doc)` function indicates whether two JSON documents have overlapping part. If yes, returns 1. If not, returns 0. Returns `NULL` if any of the arguments is `NULL`.
+The `JSON_OVERLAPS(json_doc, json_doc)` function indicates whether two JSON documents have overlapping part. If yes, it returns `1`. If not, it returns `0`. It returns `NULL` if any of the arguments is `NULL`.
 
 Examples:
 
-The example below shows that there is no overlap because the array value is not having the same number of elements.
+The following example shows that there is no overlap because the array value does not have the same number of elements.
 
 ```sql
 SELECT JSON_OVERLAPS(
@@ -314,7 +318,7 @@ SELECT JSON_OVERLAPS(
 1 row in set (0.00 sec)
 ```
 
-The example below shows that both JSON documents overlap as they are identical.
+The following example shows that both JSON documents overlap as they are identical.
 
 ```sql
 SELECT JSON_OVERLAPS(
@@ -332,7 +336,7 @@ SELECT JSON_OVERLAPS(
 1 row in set (0.00 sec)
 ```
 
-The example below shows that there is an overlap, while the second document has an extra attribute.
+The following example shows that there is an overlap, while the second document has an extra attribute.
 
 ```sql
 SELECT JSON_OVERLAPS(
