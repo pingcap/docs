@@ -27,7 +27,7 @@ TiProxy periodically checks whether a TiDB server is offline or shutting down us
 
 ## Health-based load balancing
 
-TiProxy determines the health of a TiDB server by querying its error count from Prometheus. When the health of a TiDB server is abnormal while others are normal, TiProxy migrates connections from that server to others, achieving automatic failover.
+TiProxy determines the health of a TiDB server by querying its error count from Prometheus. When the health of a TiDB server is abnormal while others are normal, TiProxy migrates connections from that server to a healthy TiDB server, achieving automatic failover.
 
 This policy is suitable for the following scenarios:
 
@@ -36,9 +36,9 @@ This policy is suitable for the following scenarios:
 
 ## Memory-based load balancing
 
-TiProxy queries the memory usage of TiDB servers from Prometheus. When the memory usage of a TiDB server is rapidly increasing or reaching a high level, TiProxy migrates connections from that server to others, preventing unnecessary connection termination due to OOM. TiProxy does not guarantee identical memory usage across TiDB servers. This policy only takes effect when a TiDB server is at risk of OOM.
+TiProxy queries the memory usage of TiDB servers from Prometheus. When the memory usage of a TiDB server is rapidly increasing or reaching a high level, TiProxy migrates connections from that server to a TiDB server with lower memory usage, preventing unnecessary connection termination due to OOM. TiProxy does not guarantee identical memory usage across TiDB servers. This policy only takes effect when a TiDB server is at risk of OOM.
 
-When a TiDB server is at risk of OOM, TiProxy attempts to migrate all connections from it. Usually, if OOM is caused by runaway queries, ongoing runaway queries will not be migrated to other TiDB servers for re-execution, because these connections can only be migrated after the transaction is complete.
+When a TiDB server is at risk of OOM, TiProxy attempts to migrate all connections from it. Usually, if OOM is caused by runaway queries, ongoing runaway queries will not be migrated to another TiDB server for re-execution, because these connections can only be migrated after the transaction is complete.
 
 This policy has the following limitations:
 
@@ -48,7 +48,7 @@ This policy has the following limitations:
 
 ## CPU-based load balancing
 
-TiProxy queries the CPU usage of TiDB servers from Prometheus and migrates connections from TiDB servers with high CPU usage to those with lower usage, reducing overall query latency. TiProxy does not guarantee identical CPU usage across TiDB servers but ensures that the CPU usage differences are minimized.
+TiProxy queries the CPU usage of TiDB servers from Prometheus and migrates connections from a TiDB server with high CPU usage to a server with lower usage, reducing overall query latency. TiProxy does not guarantee identical CPU usage across TiDB servers but ensures that the CPU usage differences are minimized.
 
 This policy is suitable for the following scenarios:
 
@@ -113,7 +113,7 @@ In the preceding configuration, the TiProxy instance on `tiproxy-host-1` priorit
 
 ## Connection count-based load balancing
 
-TiProxy migrates connections from a TiDB server with more connections to those with fewer connections. This policy is not configurable and has the lowest priority.
+TiProxy migrates connections from a TiDB server with more connections to a server with fewer connections. This policy is not configurable and has the lowest priority.
 
 Typically, TiProxy identifies the load on TiDB servers based on CPU usage. This policy usually takes effect in the following scenarios:
 
