@@ -139,7 +139,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
         - (dup): release-8.1.0.md > Bug fixes> Tools> TiDB Lightning - Fix the issue that killing the PD Leader causes TiDB Lightning to report the `invalid store ID 0` error during data import [#50501](https://github.com/pingcap/tidb/issues/50501) @[Leavrth](https://github.com/Leavrth)
         - (dup): release-7.1.0.md > Bug fixes> Tools> TiDB Lightning - Fix the issue of missing data in the TiDB Lightning Grafana dashboard [#43357](https://github.com/pingcap/tidb/issues/43357) @[lichunzhu](https://github.com/lichunzhu)
         - (dup): release-8.1.0.md > 错误修复> Tools> TiDB Lightning - Fix the issue that TiDB Lightning might print sensitive information to logs in server mode [#36374](https://github.com/pingcap/tidb/issues/36374) @[kennytm](https://github.com/kennytm)
-        - 在 SHARD_ROW_ID_BITS 与 AUTO_ID_CACHE=1 功能时正确设置 AUTO ID [#52654](https://github.com/pingcap/tidb/issues/52654) @[D3Hunter](https://github.com/D3Hunter)
+        - Fix the issue that TiDB fails to generate auto-increment IDs and reports an error `Failed to read auto-increment value from storage engine` after importing a table with both `SHARD_ROW_ID_BITS` and `AUTO_ID_CACHE=1` set using TiDB Lightning [#52654](https://github.com/pingcap/tidb/issues/52654) @[D3Hunter](https://github.com/D3Hunter)
 
     + Dumpling
       <!-- tw:@Oreoxmt 1-->
