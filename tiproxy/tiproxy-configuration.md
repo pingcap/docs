@@ -116,13 +116,13 @@ Configurations for the load balancing policy of TiProxy.
 + Default value: `resource`
 + Support hot-reload: yes
 + Possible values: `resource`, `location`, `connection`
-+ Specify the load balancing policy. For more information, see [TiProxy load balancing policies](/tiproxy/tiproxy-load-balance.md#configure-load-balancing-policies).
++ Specifies the load balancing policy. For the meaning of each possible value, see [TiProxy load balancing policies](/tiproxy/tiproxy-load-balance.md#configure-load-balancing-policies).
 
-### labels
+### `labels`
 
 + Default value: `{}`
 + Support hot-reload: yes
-+ Specify server labels. For example, `{ zone = "us-west-1", dc = "dc1" }`.
++ Specifies server labels. For example, `{ zone = "us-west-1", dc = "dc1" }`.
 
 ### log
 

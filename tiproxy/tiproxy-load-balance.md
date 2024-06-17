@@ -5,7 +5,7 @@ summary: Introduce the load balancing policies in TiProxy and their applicable s
 
 # TiProxy Load Balancing Policies
 
-TiProxy v1.0.0 only migrates connections based on the status of TiDB and the connection count. Starting from v1.1.0, TiProxy introduces four independent load balancing policies: based on health, memory, CPU, and location.
+TiProxy v1.0.0 only supports status-based and connection count-based load balancing policies for TiDB servers. Starting from v1.1.0, TiProxy introduces four additional load balancing policies that can be configured independently: health-based, memory-based, CPU-based, and location-based.
 
 By default, TiProxy enables all policies with the following priorities:
 
@@ -18,7 +18,8 @@ By default, TiProxy enables all policies with the following priorities:
 
 > **Note:**
 >
-> Health-based, memory-based, and CPU-based load balancing policies depend on [Prometheus](https://prometheus.io). Ensure that Prometheus is available. Otherwise, these policies do not take effect.
+> - Health-based, memory-based, and CPU-based load balancing policies depend on [Prometheus](https://prometheus.io). Ensure that Prometheus is available. Otherwise, these policies do not take effect.
+> - To adjust the priorities of load balancing policies, see [Configure load balancing policies](#configure-load-balancing-policies).
 
 ## Status-based load balancing
 
@@ -37,13 +38,13 @@ This policy is suitable for the following scenarios:
 
 TiProxy queries the memory usage of TiDB servers from Prometheus. When the memory usage of a TiDB server is rapidly increasing or reaching a high level, TiProxy migrates connections from that server to others, preventing unnecessary connection termination due to OOM. TiProxy does not guarantee identical memory usage across TiDB servers. This policy only takes effect when a TiDB server is at risk of OOM.
 
-When a TiDB server is at risk of OOM, TiProxy attempts to migrate all connections. Usually, OOM is caused by runaway queries, and since connections can only be migrated after the transaction completes, ongoing runaway queries will not be migrated to other TiDB servers for re-execution.
+When a TiDB server is at risk of OOM, TiProxy attempts to migrate all connections from it. Usually, if OOM is caused by runaway queries, ongoing runaway queries will not be migrated to other TiDB servers for re-execution, because these connections can only be migrated after the transaction is complete.
 
 This policy has the following limitations:
 
-- If a TiDB server's memory grows too quickly and reaches OOM within 30 seconds, TiProxy might not be able to detect the OOM risk in time, potentially leading to connection termination.
+- If the memory usage of a TiDB server grows too quickly and reaches OOM within 30 seconds, TiProxy might not be able to detect the OOM risk in time, potentially leading to connection termination.
 - TiProxy aims to maintain client connections without termination, not to reduce the memory usage of TiDB servers to avoid OOM. Therefore, TiDB servers might still encounter OOM.
-- Only supports TiDB server v8.0.0 and later versions. This policy does not take effect when using earlier versions of the TiDB server.
+- This policy applies only to TiDB server v8.0.0 and later versions. For earlier versions of TiDB servers, this policy does not take effect.
 
 ## CPU-based load balancing
 
@@ -57,12 +58,12 @@ This policy is suitable for the following scenarios:
 
 ## Location-based load balancing
 
-TiProxy prioritizes routing connections to local TiDB servers according to the locations of TiProxy and TiDB servers.
+TiProxy prioritizes routing connections to geographically closer TiDB servers based on the locations of TiProxy and TiDB servers.
 
 This policy is suitable for the following scenarios:
 
-- When the TiDB cluster is deployed across availability zones in the cloud, to reduce cross-availability zone traffic costs between TiProxy and TiDB servers, TiProxy prioritizes routing requests to TiDB servers in the same availability zone.
-- When the TiDB cluster is deployed across data centers, to reduce network latency between TiProxy and TiDB servers, TiProxy prioritizes routing requests to TiDB servers in the same data center.
+- When a TiDB cluster is deployed across availability zones in the cloud, to reduce cross-availability zone traffic costs between TiProxy and TiDB servers, TiProxy prioritizes routing requests to TiDB servers in the same availability zone.
+- When a TiDB cluster is deployed across data centers, to reduce network latency between TiProxy and TiDB servers, TiProxy prioritizes routing requests to TiDB servers in the same data center.
 
 By default, this policy has a lower priority than health-based, memory-based, and CPU-based load balancing policies. You can increase its priority by setting [`policy`](/tiproxy/tiproxy-configuration.md#policy) to `location`. To maintain availability and performance, it is recommended to ensure that at least three TiDB servers are in the same location.
 
@@ -108,7 +109,7 @@ tikv_servers:
     port: 20160
 ```
 
-In the preceding configuration, the TiProxy instance on `tiproxy-host-1` prioritizes routing requests to the TiDB server on `tidb-host-1`, and the TiProxy instance on `tiproxy-host-2` prioritizes routing requests to the TiDB server on `tidb-host-2`.
+In the preceding configuration, the TiProxy instance on `tiproxy-host-1` prioritizes routing requests to the TiDB server on `tidb-host-1` because `tiproxy-host-1` has the same `zone` configuration as `tidb-host-1`. Similarly, the TiProxy instance on `tiproxy-host-2` prioritizes routing requests to the TiDB server on `tidb-host-2`.
 
 ## Connection count-based load balancing
 
@@ -121,11 +122,11 @@ Typically, TiProxy identifies the load on TiDB servers based on CPU usage. This 
 
 ## Configure load balancing policies
 
-TiProxy supports configuring the combination and priority of the preceding load balancing policies through the configuration item [`policy`](/tiproxy/tiproxy-configuration.md#policy).
+TiProxy lets you configure the combination and priority of load balancing policies through the [`policy`](/tiproxy/tiproxy-configuration.md#policy) configuration item.
 
 - `resource`: the resource priority policy performs load balancing based on the following priority order: status, health, memory, CPU, location, and connection count.
 - `location`: the location priority policy performs load balancing based on the following priority order: status, location, health, memory, CPU, and connection count.
-- `connection`: the minimum connection count policy performs load balancing based on the following priority order: status and connection count.
+- `connection`: the minimum connection count priority policy performs load balancing based on the following priority order: status and connection count.
 
 ## More resources
 

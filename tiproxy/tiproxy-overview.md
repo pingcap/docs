@@ -32,7 +32,7 @@ Connection migration usually occurs in the following scenarios:
 
 ### Failover
 
-When a TiDB server is at risk of running out of memory (OOM) or fails to connect to PD or TiKV, TiProxy detects the issue and migrates the connections to other TiDB servers, thus ensuring continuous client connectivity.
+When a TiDB server is at risk of running out of memory (OOM) or fails to connect to PD or TiKV, TiProxy detects the issue automatically and migrates the connections to other TiDB servers, thus ensuring continuous client connectivity.
 
 ### Service discovery
 
@@ -55,7 +55,7 @@ TiProxy is not suitable for the following scenarios:
 
 - Sensitive to performance: The performance of TiProxy is lower than that of HAProxy and other load balancers, so using TiProxy will reduce the QPS. For details, refer to [TiProxy Performance Test Report](/tiproxy/tiproxy-performance-test.md).
 - Sensitive to cost: If the TiDB cluster uses hardware load balancers, virtual IP, or the load balancer provided by Kubernetes, adding TiProxy will increase the cost. In addition, if you deploy the TiDB cluster across availability zones on the cloud, adding TiProxy will also increase the traffic cost across availability zones.
-- Unexpected TiDB server downtime failover: TiProxy can keep the client connection only when the TiDB server is offline or restarted as planned. If the TiDB server is offline unexpectedly, the connection is still broken.
+- Failover for unexpected TiDB server downtime: TiProxy can keep the client connection only when the TiDB server is offline or restarted as planned. If the TiDB server is offline unexpectedly, the connection is still broken.
 
 It is recommended that you use TiProxy for the scenarios that TiProxy is suitable for and use HAProxy or other proxies when your application is sensitive to performance.
 
