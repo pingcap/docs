@@ -6,7 +6,7 @@ aliases: ['/docs/dev/functions-and-operators/json-functions/','/docs/dev/referen
 
 # JSON Functions
 
-JSON functions can be used to work with data in the [JSON data type](/data-type-json.md).
+You can use JSON functions to work with data in the [JSON data type](/data-type-json.md).
 
 ## Functions that create JSON values
 
@@ -74,7 +74,7 @@ JSON functions can be used to work with data in the [JSON data type](/data-type-
     
 | Function Name                     | Description |
 | --------------------------------- | ----------- |
-| [JSON_SCHEMA_VALID()](/functions-and-operators/json-functions/json-functions-validate.md#json_schema_valid) | Validate a JSON document against a schema to ensure data integrity and consistency. |
+| [JSON_SCHEMA_VALID()](/functions-and-operators/json-functions/json-functions-validate.md#json_schema_valid) | Validates a JSON document against a schema to ensure data integrity and consistency. |
 
 ## JSON Path
 
@@ -130,8 +130,8 @@ The JSON to demonstrate this:
 
 | JSONPath                              | Description                             | Example with [`JSON_EXTRACT()`](/functions-and-operators/json-functions/json-functions-search.md#json_extract) | 
 |-------------------------------------- |-----------------------------------------|-------------------------------|
-| `$`                                   | The root of the document                | This would return the full document                              |
-| `$.database`                          | The database attribute                  |  This would return the full structure starting with `"database"`. It would not include `"migration_tool"` and the structure below that.                             |
+| `$`                                   | The root of the document                | Returns the full document                              |
+| `$.database`                          | The database attribute                  |  Returns the full structure starting with `"database"`. It does not include `"migration_tool"` and the structure below that.                             |
 | `$.database.name`                     | The name of the database.               | `"TiDB"`                      |
 | `$.database.features`                 | All database features                   | `["distributed", "scalable", "relational", "cloud native"]`                              |
 | `$.database.features[0]`              | The first database feature.             | `"distributed"`               |
@@ -142,7 +142,7 @@ The JSON to demonstrate this:
 | `$**.version`                         | All versions, with path wildcard        | `["v8.1.0","v8.0.0"]`         |
 | `$.database.features[0 to 2]`         | Range of database features.             | `["scalable","relational"]`   |
 
-More details can be found in [the IETF draft for JSONPath](https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html).
+For more information, see [the IETF draft for JSONPath](https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html).
 
 ## See also
 
