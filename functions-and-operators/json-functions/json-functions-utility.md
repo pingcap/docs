@@ -7,6 +7,10 @@ summary: Learn about JSON utility functions.
 
 This document describes JSON utility functions.
 
+# JSON Utility Functions
+
+This document describes JSON utility functions.
+
 ## [JSON_PRETTY()](https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html#function_json-pretty)
 
 The `JSON_PRETTY(json_doc)` function does pretty formatting of a JSON document.
