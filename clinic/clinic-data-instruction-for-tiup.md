@@ -112,7 +112,7 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 
 | Data type | Exported file | Parameter for data collection by PingCAP Clinic |
 | :------ | :------ |:-------- |
-| Log | `m-master.log` | `--include=log` |
+| Log | `dm-master.log` | `--include=log` |
 | Error log | `dm-master_stderr.log` | `--include=log` |
 | Configuration file | `dm-master.toml` | `--include=config` |
 
