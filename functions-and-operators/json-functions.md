@@ -74,7 +74,7 @@ TiDB supports most of the [JSON functions](https://dev.mysql.com/doc/refman/8.0/
 
 | Function Name                     | Description |
 | --------------------------------- | ----------- |
-| [JSON_SCHEMA_VALID(schema,json_doc)](https://dev.mysql.com/doc/refman/8.0/en/json-validation-functions.html#function_json-schema-valid) | Validate a JSON document against a schema to ensure data integrity and consistency. |
+| [JSON_SCHEMA_VALID(schema,json_doc)](https://dev.mysql.com/doc/refman/8.0/en/json-validation-functions.html#function_json-schema-valid) | Validates a JSON document against a schema to ensure data integrity and consistency. |
 
 ## See also
 
