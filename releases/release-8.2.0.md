@@ -75,9 +75,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 
 * TiDB 支持 JSON Schema Validation 函数 [#52780](https://github.com/pingcap/tidb/pull/52780) @[dveeden](https://github.com/dveeden) **tw@hfxsd** <!--1840-->
 
-    在 v8.2.0 版本之前，用户需要依赖外部工具或自定义验证逻辑进行 JSON 数据验证，增加了开发和维护的复杂度，降低了开发效率。 引入该功能后，允许用户在 TiDB 中直接验证 JSON 数据的有效性，提高数据的完整性和一致性，提升了用户的开发效率。
+    Before v8.2.0, you need to rely on external tools or customized validation logic for JSON data validation, which increases the complexity of development and maintenance, and reduces development efficiency. Starting from v8.2.0, the `JSON_SCHEMA_VALID()` function is introduced, which allows you to verify the validity of JSON data directly in TiDB, improving the integrity and consistency of the data, and increasing the development efficiency.
 
-    更多信息，请参考[用户文档](链接)。
+    For more information, see [documentation](/functions-and-operators/json-functions.md#validation-functions).
 
 ### DB operations
 
@@ -169,7 +169,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
     - 优化客户端读取数据超时无法终止查询的问题 [#44009](https://github.com/pingcap/tidb/issues/44009) @[wshwsh12](https://github.com/wshwsh12)  **tw@Oreoxmt** <!--1636-->
     - 优化对大数据量的表进行简单查询的性能 [#53850](https://github.com/pingcap/tidb/issues/53850) @[you06](https://github.com/you06)  **tw@Oreoxmt** <!--1561-->
-    - 聚合的结果集能够作为 Index Join 的内表 [#37068](https://github.com/pingcap/tidb/issues/37068) @[elsa0520](https://github.com/elsa0520) **tw@hfxsdt** <!--1510-->
+    - The aggregated result set can be used as an inner table for IndexJoin, allowing more complex queries to be matched to IndexJoin, thus improving query efficiency through the indices [#37068](https://github.com/pingcap/tidb/issues/37068) @[elsa0520](https://github.com/elsa0520) **tw@hfxsd** <!--1510-->
 
 + TiKV
 
