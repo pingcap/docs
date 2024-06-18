@@ -97,6 +97,10 @@ In Chat2Query, you can write and run SQL queries using your own dataset.
 
 After running the queries, you can see the query logs and results immediately at the bottom of the page.
 
+> **Note:**
+>
+> The returned result has a size limit of 8MB.
+
 ## Manage SQL files
 
 In Chat2Query, you can save your SQL queries in different SQL files and manage SQL files as follows:

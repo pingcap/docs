@@ -209,6 +209,10 @@ On the SQL editor of the endpoint details page, you can write and run the SQL st
     </SimpleTab>
 
     After running the statements, you can see the query results immediately in the **Result** tab at the bottom of the page.
+    
+    > **Note:**
+    >
+    > The returned result has a size limit of 8MB.
 
 ### Configure parameters
 
