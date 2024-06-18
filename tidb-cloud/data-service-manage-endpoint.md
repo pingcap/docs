@@ -212,7 +212,7 @@ On the SQL editor of the endpoint details page, you can write and run the SQL st
     
     > **Note:**
     >
-    > The returned result has a size limit of 8MB.
+    > The returned result has a size limit of 8 MiB.
 
 ### Configure parameters
 
