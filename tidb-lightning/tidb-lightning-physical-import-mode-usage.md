@@ -165,10 +165,10 @@ CREATE TABLE IF NOT EXISTS `order_line` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 ```
 
-If Lightning detects conflicting data during the import, you can query the `lightning_task_info.conflict_error_v1` table as follows:
+If Lightning detects conflicting data during the import, you can query the `lightning_task_info.conflict_error_v3` table as follows:
 
 ```sql
-mysql> select table_name,index_name,key_data,row_data from conflict_error_v1 limit 10;
+mysql> select table_name,index_name,key_data,row_data from conflict_error_v3 limit 10;
 +---------------------+------------+----------+-----------------------------------------------------------------------------+
 |  table_name         | index_name | key_data | row_data                                                                    |
 +---------------------+------------+----------+-----------------------------------------------------------------------------+

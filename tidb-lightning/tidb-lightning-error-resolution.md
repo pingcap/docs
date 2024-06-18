@@ -286,10 +286,10 @@ In this example, a data source is prepared with some known errors.
        row_data: (600,'six hundred')
     ```
 
-7. Check whether the `conflict_error_v1` table has caught the four rows that have unique/primary key conflicts:
+7. Check whether the `conflict_error_v3` table has caught the four rows that have unique/primary key conflicts:
 
     ```sql
-    $ mysql -u root -h 127.0.0.1 -P 4000 -e 'select * from lightning_task_info.conflict_error_v1;' --binary-as-hex -E
+    $ mysql -u root -h 127.0.0.1 -P 4000 -e 'select * from lightning_task_info.conflict_error_v3;' --binary-as-hex -E
 
     *************************** 1. row ***************************
         task_id: 1635888701843303564
