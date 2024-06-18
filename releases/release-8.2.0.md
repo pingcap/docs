@@ -49,13 +49,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 
 ### Reliability
 
-* 统计信息加载效率提升 10 倍 [#52831](https://github.com/pingcap/tidb/issues/52831) @[hawkingrei](https://github.com/hawkingrei) **tw@hfxsdt** <!--1754-->
+* Improve statistics loading efficiency by up to 10 times [#52831](https://github.com/pingcap/tidb/issues/52831) @[hawkingrei](https://github.com/hawkingrei) **tw@hfxsd** <!--1754-->
 
-    SaaS 或 PaaS 类业务应用中可能存在大量的数据表，这会拖慢了初始统计信息加载的速度，也会降低运行时加载的成功率。TiDB 的启动时间，以及执行计划的准确性都相应会受到影响。在 v8.2.0 中，我们从并发模型，内存分配方式等多个角度了优化统计信息的加载过程，降低延迟，提升吞吐，避免由于统计信息加载问题造成的大规模性能回退，进一步提升了数据库的稳定性。
+    SaaS or PaaS applications can have a large number of data tables, which not only slow down the loading speed of the initial statistics, but also increase the failure rate of synchronizing loads under high loads. The startup time of TiDB and the accuracy of the execution plan can be affected. In v8.2.0, TiDB optimizes the process of loading statistics from multiple perspectives, such as concurrency model and memory allocation, to reduce latency, improve throughput, and avoid slow loading of statistics that affects business scaling.
 
-    新增支持自适应的并行加载。默认情况下，配置项[`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-从-v540-版本开始引入)的值为 `0`，统计信息加载的并行度会根据硬件规格自动选择。 
+    Adaptive concurrent loading is now supported. By default, the configuration item [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540) is set to a `0`, and the concurrency of statistics loading is automatically selected based on the hardware specification. 
 
-    更多信息，请参考[用户文档](/tidb-configuration-file.md#stats-load-concurrency-从-v540-版本开始引入)。
+   For more information, see [documentation](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540).
 
 ### Availability
 
