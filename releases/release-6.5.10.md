@@ -46,12 +46,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
 + TiDB
   <!-- tw:@qiancai 6-->
-    - 修复一些情况下对元数据查询会导致内存使用过大的问题 [#52219](https://github.com/pingcap/tidb/issues/52219) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复表结构中设置 AUTO_ID_CACHE=1 时，使用非默认的 @@auto_increment_increment 和 @@auto_increment_offset 会导致错误 ID 分配的问题 [#52622](https://github.com/pingcap/tidb/issues/52622) @[tiancaiamao](https://github.com/tiancaiamao)
-    - 修复表结构中设置 AUTO_ID_CACHE=1 时，使用 RESTORE 命令恢复表数据后 ID 分配可能错误的问题 [#52680](https://github.com/pingcap/tidb/issues/52680) @[tiancaiamao](https://github.com/tiancaiamao)
-    - 修复 infoschema `tidb_trx` 表 txn size 字段未定义的问题 [#53026](https://github.com/pingcap/tidb/issues/53026) @[cfzjywxk](https://github.com/cfzjywxk)
-    - 修复创建带有外键的表时，TiDB 不会创建对应的统计信息元信息（stats_meta）的问题 [#53652](https://github.com/pingcap/tidb/issues/53652) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复在查询并发较高时，统计信息同步加载机制可能在没有发生错误时意外加载失败的问题。 [#52294](https://github.com/pingcap/tidb/issues/52294) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that querying metadata during statistics initialization might cause OOM [#52219](https://github.com/pingcap/tidb/issues/52219) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that for tables containing auto-increment columns with `AUTO_ID_CACHE=1`, setting `auto_increment_increment` and `auto_increment_offset` system variables to non-default values might cause incorrect auto-increment ID allocation [#52622](https://github.com/pingcap/tidb/issues/52622) @[tiancaiamao](https://github.com/tiancaiamao)
+    - Fix the issue that restoring a table with `AUTO_ID_CACHE=1` using the `RESTORE` statement might cause a `Duplicate entry` error [#52680](https://github.com/pingcap/tidb/issues/52680) @[tiancaiamao](https://github.com/tiancaiamao)
+    - Fix the issue that the `STATE` field in the `INFORMATION_SCHEMA.TIDB_TRX` table is empty due to the `size` of the `STATE` field not being defined [#53026](https://github.com/pingcap/tidb/issues/53026) @[cfzjywxk](https://github.com/cfzjywxk)
+    - Fix the issue that TiDB does not create corresponding statistics metadata (`stats_meta`) when creating a table with foreign keys [#53652](https://github.com/pingcap/tidb/issues/53652) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that the statistics synchronous loading mechanism might fail unexpectedly under high query concurrency [#52294](https://github.com/pingcap/tidb/issues/52294) @[hawkingrei](https://github.com/hawkingrei)
   <!-- tw:@lilin90 6-->
     - Fix the issue that the `ndv` information in GlobalStats might be incorrect when `tidb_enable_async_merge_global_stats` is disabled [#53752](https://github.com/pingcap/tidb/issues/53752) @[hawkingrei](https://github.com/hawkingrei)
     - Fix the issue that the histogram and TopN in the primary key column statistics are not loaded after restarting TiDB [#37548](https://github.com/pingcap/tidb/issues/37548) @[hawkingrei](https://github.com/hawkingrei)
