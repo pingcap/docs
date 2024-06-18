@@ -99,7 +99,7 @@ After running the queries, you can see the query logs and results immediately at
 
 > **Note:**
 >
-> The returned result has a size limit of 8MB.
+> The returned result has a size limit of 8 MiB.
 
 ## Manage SQL files
 
