@@ -8,6 +8,18 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
+## June 18, 2024
+
+**General changes**
+
+- Increase the maximum node storage of 16 vCPU TiFlash and 32 vCPU TiFlash for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters from 2048 GiB to 4096 GiB.
+
+    This enhancement increases the analytics data storage capacity of your TiDB Dedicated cluster, improves workload scaling efficiency, and accommodates growing data requirements.
+
+    For more information, see [Size your cluster](/tidb-cloud/size-your-cluster.md#tiflash-node-storage).
+
+- Upgrade the default TiDB version of new [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters from [v7.5.1](https://docs.pingcap.com/tidb/v7.5/release-7.5.1) to [v7.5.2](https://docs.pingcap.com/tidb/v7.5/release-7.5.2).
+
 ## June 4, 2024
 
 **General changes**
