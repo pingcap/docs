@@ -582,8 +582,8 @@ Configuration items related to performance.
 ### `stats-load-concurrency` <span class="version-mark">New in v5.4.0</span>
 
 + The maximum number of columns that the TiDB synchronously loading statistics feature can process concurrently.
-+ Default value: `5`
-+ Currently, the valid value range is `[1, 128]`.
++ Default value: `0`, prior to v8.2, the default value was 5.
++ Currently, the valid value range is `[0, 128]`, with 0 being the automatic mode, which adjusts concurrency based on the machine's configuration. Before v8.2, the minimum value was 1.
 
 ### `stats-load-queue-size` <span class="version-mark">New in v5.4.0</span>
 
