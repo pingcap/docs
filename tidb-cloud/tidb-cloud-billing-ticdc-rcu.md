@@ -24,7 +24,7 @@ The following table lists the specifications and corresponding replication perfo
 
 > **Note:**
 >
-> The preceding performance data is for reference only and might vary in different scenarios.
+> The preceding performance data is for reference only and might vary in different scenarios. Please do a real workload test before going to production. If you need further help, please contact [Customer Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support#get-support-for-a-cluster).
 
 ## Price
 
