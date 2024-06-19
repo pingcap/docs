@@ -65,12 +65,13 @@ To create an API key, perform the following steps:
 
 In each Chat2Query Data App, you can find the following endpoints:
 
-- Chat2Query v1 endpoint: `/v1/chat2data`
+- Chat2Query v3 endpoints: the endpoints whose names starting with `/v3`, such as `/v3/dataSummaries` and `/v3/chat2data`(recommended)
 - Chat2Query v2 endpoints: the endpoints whose names starting with `/v2`, such as `/v2/dataSummaries` and `/v2/chat2data`
+- Chat2Query v1 endpoint: `/v1/chat2data`(deprecated)
 
 > **Tip:**
 >
-> Compared with `/v1/chat2data`, `/v2/chat2data` requires you to analyze your database first by calling `/v2/dataSummaries`, so the results returned by `/v2/chat2data` are generally more accurate.
+> Compared with `/v1/chat2data`, `/v3/chat2data` requires you to analyze your database first by calling `/v3/dataSummaries`, as the results returned by `/v3/chat2data` are generally more accurate.
 
 ### Get the code example of an endpoint
 
@@ -86,7 +87,7 @@ TiDB Cloud provides code examples to help you quickly call Chat2Query endpoints.
 
     > **Note:**
     >
-    > For `/v2/chat2data` and `/v2/jobs/{job_id}`, you only need to select the authentication method.
+    > For `/v3/chat2data` and `/v2/jobs/{job_id}`, you only need to select the authentication method.
 
 4. To call the endpoint, you can paste the example in your application, replace the parameters in the example with your own (such as replacing the `${PUBLIC_KEY}` and `${PRIVATE_KEY}` placeholders with your API key), and then run it.
 
@@ -96,24 +97,26 @@ TiDB Cloud Data Service provides the following Chat2Query v2 endpoints:
 
 |  Method | Endpoint| Description |
 |  ----  | ----  |----  |
-|  POST  | `/v2/dataSummaries`  | This endpoint generates a data summary for your database schema, table schema, and column schema by using artificial intelligence for analysis. |
-|  POST  | `/v2/chat2data`  | This endpoint enables you to generate and execute SQL statements using artificial intelligence by providing the data summary ID and instructions. |
+|  POST  | `/v3/dataSummaries`  | This endpoint generates a data summary for your database schema, table schema, and column schema by using artificial intelligence for analysis. |
+|  POST  | `/v3/chat2data`  | This endpoint enables you to generate and execute SQL statements using artificial intelligence by providing the data summary ID and instructions. |
 |  GET  | `/v2/jobs/{job_id}` | This endpoint enables you to query the status of the data summary generation job. |
 
 In the subsequent sections, you will learn how to call these endpoints.
 
-#### 1. Generate a data summary by calling `/v2/dataSummaries`
+#### 1. Generate a data summary by calling `/v3/dataSummaries`
 
-Before calling `/v2/chat2data`, let AI analyze the database and generate a data summary first by calling `/v2/dataSummaries`, so `/v2/chat2data` can get a better performance in SQL generation later.
+Before calling `/v3/chat2data`, let AI analyze the database and generate a data summary first by calling `/v3/dataSummaries`, so `/v3/chat2data` can get a better performance in SQL generation later.
 
-The following is a code example of calling `/v2/chat2data` to analyze the `sp500insight` database and generate a data summary for the database:
+The following is a code example of calling `/v3/chat2data` to analyze the `sp500insight` database and generate a data summary for the database:
 
 ```bash
-curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.dev.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v2/dataSummaries'\
+curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/dataSummaries'\
  --header 'content-type: application/json'\
  --data-raw '{
-    "cluster_id": "10939961583884005252",
-    "database": "sp500insight"
+    "cluster_id": "10140100115280519574",
+    "database": "sp500insight",
+    "description": "Data summary for SP500 Insight",
+    "reuse": false
 }'
 ```
 
@@ -121,6 +124,8 @@ In the preceding example, the request body is a JSON object with the following p
 
 - `cluster_id`: _string_. A unique identifier of the TiDB cluster.
 - `database`: _string_. The name of the database.
+- `description`: _string_. Description of the data summary.
+- `reuse`: _boolean_. Whether to reuse the existing data summary. If set to `true`, the API will reuse the existing data summary. If set to `false`, the API will generate a new data summary.
 
 An example response is as follows:
 
@@ -129,15 +134,15 @@ An example response is as follows:
   "code": 200,
   "msg": "",
   "result": {
-    "data_summary_id": 481235,
-    "job_id": "79c2b3d36c074943ab06a29e45dd5887"
+    "data_summary_id": 304823,
+    "job_id": "fb99ef785da640ab87bf69afed60903d"
   }
 }
 ```
 
 #### 2. Check the analysis status by calling `/v2/jobs/{job_id}`
 
-The `/v2/dataSummaries` API is asynchronous. For a database with a large dataset, it might take a few minutes to complete the database analysis and return the full data summary.
+The `/v3/dataSummaries` API is asynchronous. For a database with a large dataset, it might take a few minutes to complete the database analysis and return the full data summary.
 
 To check the analysis status of your database, you can call the `/v2/jobs/{job_id}` endpoint as follows:
 
@@ -154,73 +159,67 @@ An example response is as follows:
   "msg": "",
   "result": {
     "ended_at": 1699518950, // A UNIX timestamp indicating when the job is finished
-    "job_id": "79c2b3d36c074943ab06a29e45dd5887",  // ID of current job
+    "job_id": "fb99ef785da640ab87bf69afed60903d", // ID of current job
     "result": DataSummaryObject, // AI exploration information of the given database
     "status": "done" // Status of the current job
   }
 }
 ```
 
-If `"status"` is `"done"`, the full data summary is ready and you can now generate and execute SQL statements for this database by calling `/v2/chat2data`. Otherwise, you need to wait and check the analysis status later until it is done.
+If `"status"` is `"done"`, the full data summary is ready and you can now generate and execute SQL statements for this database by calling `/v3/chat2data`. Otherwise, you need to wait and check the analysis status later until it is done.
 
 In the response, `DataSummaryObject` represents AI exploration information of the given database. The structure of `DataSummaryObject` is as follows:
 
 ```json
 {
-    "cluster_id": 10939961583884005252, // Your cluster id
-    "db_name": "sp500insight", // Database name
-    "db_schema": { // Database schema information
-        "users": { // A table named "users"
-            "columns": { // Columns in table "users"
-                "user_id": {
-                    "default": null,
-                    "description": "The unique identifier for each user.",
-                    "name": "user_id",
-                    "nullable": true,
-                    "type": "int(11)"
-                }
-            },
-            "description": "This table represents the user data and includes the date and time when each user was created.",
-            "key_attributes": [ // Key attributes of table "user"
-                "user_id",
-            ],
-            "primary_key": "id",
-            "table_name": "users", // Table name in the database
-        }
+    "cluster_id": "10140100115280519574", // The cluster ID
+    "data_summary_id": 304823, // The data summary ID
+    "database": "sp500insight", // The database name
+    "default": false, // Whether this data summary is the default one
+    "status": "done", // The status of the data summary
+    "description": {
+        "system": "Data source for financial analysis and decision-making in stock market", // The description of the data summary generated by AI
+        "user": "Data summary for SP500 Insight" // The description of the data summary provided by the user
     },
-    "entity": { // Entities abstracted by AI
-        "users": {
-            "attributes": ["user_id"],
-            "involved_tables": ["users"],
-            "name": "users",
-            "summary": "This table represents the user data and includes the date and time when each user was created."
+    "keywords": ["User_Stock_Selection", "Index_Composition"], // Keywords of the data summary
+    "relationships": {
+        "companies": {
+            "referencing_table": "...", // The table that references the companies table
+            "referencing_table_column": "..." // The column that references the companies table
+            "referenced_table": "...", // The table that the companies table references
+            "referenced_table_column": "..." // The column that the companies table references
         }
-    },
-    "org_id": 30061,
-    "project_id": 3198952,
-    "short_summary": "Comprehensive finance data for analysis and decision-making.",
-    "status": "done",
-    "summary": "This data source contains information about companies, indexes, and historical stock price data. It is used for financial analysis, investment decision-making, and market research in the finance domain.",
-    "summary_keywords": [
-        "users"
-    ],
-    "table_relationship": {}
+    }, // Relationships between tables
+    "summary": "Financial data source for stock market analysis", // The summary of the data summary
+    "tables": { // Tables in the database
+      "companies": {
+        "name": "companies" // The table name
+        "description": "This table provides comprehensive...", // The description of the table
+        "columns": {
+          "city": { // Columns in the table
+            "name": "city" // The column name
+            "description": "The city where the company is headquartered.", // The description of the column
+          }
+        },
+      },
+    }
 }
 ```
 
-#### 3. Generate and execute SQL statements by calling `/v2/chat2data`
+#### 3. Generate and execute SQL statements by calling `/v3/chat2data`
 
-When the data summary of a database is ready, you can call `/v2/chat2data` to generate and execute SQL statements by providing the cluster ID, database name, and your question.
+When the data summary of a database is ready, you can call `/v3/chat2data` to generate and execute SQL statements by providing the cluster ID, database name, and your question.
 
 For example:
 
 ```bash
-curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.dev.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v2/chat2data'\
+curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/chat2data'\
  --header 'content-type: application/json'\
  --data-raw '{
-  "cluster_id": "10939961583884005252",
-  "database": "sp500insight",
-  "raw_question": "<Your question to generate data>"
+    "cluster_id": "10140100115280519574",
+    "database": "sp500insight",
+    "question": "<Your question to generate data>",
+    "sql_generate_mode": "direct"
 }'
 ```
 
@@ -228,7 +227,8 @@ In the preceding code, the request body is a JSON object with the following prop
 
 - `cluster_id`: _string_. A unique identifier of the TiDB cluster.
 - `database`: _string_. The name of the database.
-- `raw_question`: _string_. A natural language describing the query you want.
+- `question`: _string_. A natural language describing the query you want.
+- `sql_generate_mode`: _string_. The mode to generate SQL statements. The value can be `direct` or `auto_breakdown`. If set to `direct`, the API will generate SQL statements directly based on the provided question. If set to `auto_breakdown`, the API will break down the question into multiple tasks and generate SQL statements for each task.
 
 An example response is as follows:
 
@@ -237,7 +237,10 @@ An example response is as follows:
   "code": 200,
   "msg": "",
   "result": {
-    "job_id": "3966d5bd95324a6283445e3a02ccd97c"
+    "cluster_id": "10140100115280519574",
+    "database": "sp500insight",
+    "job_id": "20f7577088154d7889964f1a5b12cb26",
+    "session_id": 304832
   }
 }
 ```
@@ -252,7 +255,7 @@ If you receive a response with the status code `400` as follows, it means that y
 }
 ```
 
-The `/v2/chat2data` API is asynchronous. You can check the job status by calling the `/v2/jobs/{job_id}` endpoint:
+The `/v3/chat2data` API is asynchronous. You can check the job status by calling the `/v2/jobs/{job_id}` endpoint:
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET 'https://<region>.data.dev.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v2/jobs/{job_id}'\
@@ -266,133 +269,41 @@ An example response is as follows:
   "code": 200,
   "msg": "",
   "result": {
-    "ended_at": 1699581661,
-    "job_id": "3966d5bd95324a6283445e3a02ccd97c",
+    "ended_at": 1718785006, // A UNIX timestamp indicating when the job is finished
+    "job_id": "20f7577088154d7889964f1a5b12cb26",
+    "reason": "", // The reason for the job failure
     "result": {
-      "question_id": "8c4c15cf-a808-45b8-bff7-2ca819a1b6d5",
-      "raw_question": "count the users", // The original question you provide
-      "task_tree": {
-        "0": {
-          "clarified_task": "count the users", // Task that AI understands
-          "description": "",
-          "columns": [ // Columns that are queried in the generated SQL statement
-            {
-              "col": "user_count"
-            }
-          ],
-          "rows": [ // Query result of generated SQL statement
-            [
-              "1"
-            ]
-          ],
-          "sequence_no": 0,
-          "sql": "SELECT COUNT(`user_id`) AS `user_count` FROM `users`;",
-          "task": "count the users",
-          "task_id": "0"
-        }
+      "assumptions": [],
+      "chart_options": { // The generated chart options
+        "chart_name": "Table",
+        "option": {
+          "columns": [
+            "total_users"
+          ]
+        },
+        "title": "Total Number of Users in the Database"
       },
-      "time_elapsed": 3.854671001434326
+      "clarified_task": "Count the total number of users in the database.", // The clarified task
+      "data": { // The data returned by the SQL statement
+        "columns": [
+          {
+            "col": "total_users"
+          }
+        ],
+        "rows": [
+          [
+            "1"
+          ]
+        ]
+      },
+      "description": "",
+      "sql": "SELECT COUNT(`user_id`) AS total_users FROM `users`;", // The generated SQL statement
+      "sql_error": null, // The error message of the SQL statement
+      "status": "done", // The status of the job
+      "task_id": "0",
+      "type": "data_retrieval" // The type of the job
     },
     "status": "done"
-  }
-}
-```
-
-### Call the Chat2Data v1 endpoint
-
-TiDB Cloud Data Service provides the following Chat2Query v1 endpoint:
-
-|  Method | Endpoint| Description |
-|  ----  | ----  |----  |
-|  POST | `/v1/chat2data`  | This endpoint allows you to generate and execute SQL statements using artificial intelligence by providing the target database name and instructions.  |
-
-You can call the `/v1/chat2data` endpoint directly to generate and execute SQL statements. Compared with `/v2/chat2data`, `/v1/chat2data` provides a faster response but lower performance.
-
-TiDB Cloud generates code examples to help you call an endpoint. To get the examples and run the code, see [Get the code example of an endpoint](#get-the-code-example-of-an-endpoint).
-
-When calling `/v1/chat2data`, you need to replace the following parameters:
-
-- Replace the `${PUBLIC_KEY}` and `${PRIVATE_KEY}` placeholders with your API key.
-- Replace the `<your table name, optional>` placeholder with the table name you want to query. If you do not specify a table name, AI will query all tables in the database.
-- Replace the `<your instruction>` placeholder with the instruction you want AI to generate and execute SQL statements.
-
-> **Note:**
->
-> Each Chat2Query Data App has a rate limit of 100 requests per day. If you exceed the rate limit, the API returns a `429` error. For more quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
-> An API Key with the role `Chat2Query Data Summary Management Role` cannot call the Chat2Data v1 endpoint.
-
-The following code example is used to count how many users are in the `sp500insight.users` table:
-
-```bash
-curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.dev.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/chat2data'\
- --header 'content-type: application/json'\
- --data-raw '{
-    "cluster_id": "10939961583884005252",
-    "database": "sp500insight",
-    "tables": ["users"],
-    "instruction": "count the users"
-}'
-```
-
-In the preceding example, the request body is a JSON object with the following properties:
-
-- `cluster_id`: _string_. A unique identifier of the TiDB cluster.
-- `database`: _string_. The name of the database.
-- `tables`: _array_. (optional) A list of table names to be queried.
-- `instruction`: _string_. A natural language instruction describing the query you want.
-
-The response is as follows:
-
-```json
-{
-  "type": "chat2data_endpoint",
-  "data": {
-    "columns": [
-      {
-        "col": "COUNT(`user_id`)",
-        "data_type": "BIGINT",
-        "nullable": false
-      }
-    ],
-    "rows": [
-      {
-        "COUNT(`user_id`)": "1"
-      }
-    ],
-    "result": {
-      "code": 200,
-      "message": "Query OK!",
-      "start_ms": 1699529488292,
-      "end_ms": 1699529491901,
-      "latency": "3.609656403s",
-      "row_count": 1,
-      "row_affect": 0,
-      "limit": 1000,
-      "sql": "SELECT COUNT(`user_id`) FROM `users`;",
-      "ai_latency": "3.054822491s"
-    }
-  }
-}
-```
-
-If your API call is not successful, you will receive a status code other than `200`. The following is an example of the `500` status code:
-
-```json
-{
-  "type": "chat2data_endpoint",
-  "data": {
-    "columns": [],
-    "rows": [],
-    "result": {
-      "code": 500,
-      "message": "internal error! defaultPermissionHelper: rpc error: code = DeadlineExceeded desc = context deadline exceeded",
-      "start_ms": "",
-      "end_ms": "",
-      "latency": "",
-      "row_count": 0,
-      "row_affect": 0,
-      "limit": 0
-    }
   }
 }
 ```
