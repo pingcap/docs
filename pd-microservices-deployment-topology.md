@@ -1,11 +1,11 @@
 ---
 title: PD Microservice Deployment Topology
-summary: Learn the deployment topology of PD microservices based on the minimal cluster topology.
+summary: Learn the deployment topology of PD microservices based on the minimal TiDB topology.
 ---
 
 # PD Microservice Deployment Topology
 
-This document describes the deployment topology of [PD microservices](/pd-microservices.md) based on the minimal cluster topology.
+This document describes the deployment topology of [PD microservices](/pd-microservices.md) based on the minimal TiDB topology.
 
 ## Topology information
 
@@ -18,10 +18,10 @@ This document describes the deployment topology of [PD microservices](/pd-micros
 | TiKV                  | 3     | 16 VCore 32GB 2TB (nvme ssd) * 1     | 10.0.1.10 <br/> 10.0.1.11 <br/> 10.0.1.12 | Default port <br/> Global directory configuration |
 | Monitoring & Grafana  | 1     | 4 VCore 8GB * 1 500GB (ssd)          | 10.0.1.13                               | Default port <br/> Global directory configuration |
 
-### Topology templates
+### Topology template
 
 <details>
-<summary>Simple PD Microservice Configuration Template</summary>
+<summary>Simple template for the PD microservice topology</summary>
 
 ```yaml
 # # Global variables are applied to all deployments and used as the default value of
@@ -77,14 +77,14 @@ grafana_servers:
 
 </details>
 
-For detailed descriptions of the configuration items in the preceding TiDB cluster topology file, see [Topology Configuration File for Deploying TiDB Using TiUP](/tiup/tiup-cluster-topology-reference.md).
+For detailed descriptions of the configuration items in the preceding TiDB cluster topology file, see [Topology configuration file for deploying TiDB using TiUP](/tiup/tiup-cluster-topology-reference.md).
 
 ### Key parameters
 
-- The instance-level `"-host"` configuration in `tso_servers` only supports IP, not domain name.
-- For detailed TSO parameter description, see [TSO Configuration](/tso-configuration-file.md).
-- The instance-level `"-host"` configuration in `scheduling_servers` only supports IP, not domain name.
-- For detailed Scheduling parameter description, see [Scheduling Configuration](/scheduling-configuration-file.md).
+- The instance-level `"-host"` configuration in `tso_servers` only supports IP address, not domain name.
+- For detailed descriptions of TSO configuration items, see [TSO configuration](/tso-configuration-file.md).
+- The instance-level `"-host"` configuration in `scheduling_servers` only supports IP address, not domain name.
+- For detailed descriptions of Scheduling configuration items, see [Scheduling configuration](/scheduling-configuration-file.md).
 
 > **Note:**
 >
