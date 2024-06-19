@@ -1,22 +1,22 @@
 ---
-title: Scheduling Configuration Flags
-summary: The scheduling configuration flags can be configured via command line flags or environment variables.
+title: TSO Configuration Flags
+summary: The TSO configuration flags can be configured via command line flags or environment variables.
 ---
 
-# Scheduling Configuration Flags
+# TSO Configuration Flags
 
-The Scheduling node is used for providing the `scheduling` microservice for PD. You can configure it using command-line flags or environment variables.
+The TSO node is used for providing the `tso` microservice for PD. You can configure it using command-line flags or environment variables.
 
 ## `--advertise-listen-addr`
 
-- The URL for the client to access the Scheduling node.
+- The URL for the client to access the TSO node.
 - Default: `${listen-addr}`
-- In some situations such as in Docker or NAT network environments, if a client cannot access the Scheduling node through the default client URLs listened to by `scheduling`, you must manually set `--advertise-listen-addr` for client access.
+- In some situations such as in Docker or NAT network environments, if a client cannot access the TSO node through the default client URLs listened to by `tso`, you must manually set `--advertise-listen-addr` for client access.
 - For example, the internal IP address of Docker is `172.17.0.1`, while the IP address of the host is `192.168.100.113` and the port mapping is set to `-p 3379:3379`. In this case, you can set `--advertise-listen-addr="http://192.168.100.113:3379"`. Then, the client can find this service through `"http://192.168.100.113:3379"`.
 
 ## `--backend-endpoints`
 
-- The list of backend endpoints of other Scheduling nodes that the current Scheduling node listens to.
+- The list of backend endpoints of other TSO nodes that the current TSO node listens to.
 - Default: `http://127.0.0.1:2379`
 
 ## `--cacert`
@@ -33,11 +33,11 @@ The Scheduling node is used for providing the `scheduling` microservice for PD. 
 
 - The configuration file.
 - Default: `""`
-- If you specify a configuration file, the Scheduling node first reads configurations from that file. If the same configurations are also specified via command line flags, the Scheduling node uses the command line flag configurations to overwrite those in the configuration file.
+- If you specify a configuration file, the TSO node first reads configurations from that file. If the same configurations are also specified via command line flags, the TSO node uses the command line flag configurations to overwrite those in the configuration file.
 
 ## `--data-dir`
 
-- The path to the data directory on the Scheduling node.
+- The path to the data directory on the TSO node.
 - Default: `"default.${name}"`
 
 ## `--key`
@@ -47,7 +47,7 @@ The Scheduling node is used for providing the `scheduling` microservice for PD. 
 
 ## `--listen-addr`
 
-- The client URL that the current Scheduling node listens to.
+- The client URL that the current TSO node listens to.
 - Default: `"http://127.0.0.1:3379"`
 - When deploying a cluster, you must specify the IP address of the current host as `--listen-addr` (for example, `"http://192.168.100.113:3379"`). If the node runs on Docker, specify the Docker IP address as `"http://0.0.0.0:3379"`.
 

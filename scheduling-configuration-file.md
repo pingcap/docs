@@ -15,31 +15,31 @@ The Scheduling node is used for providing the `scheduling` microservice for PD. 
 
 ### `name`
 
-- The name of the Scheduling node.
+- The name of the Scheduling node
 - Default value: `"Scheduling"`
 - To start multiple Scheduling nodes, use a unique name for each node.
 
 ### `data-dir`
 
-- The directory in which the Scheduling node stores data.
+- The directory in which the Scheduling node stores data
 - Default value: `"default.${name}"`
 
 ### `listen-addr`
 
-- The client URL that the current Scheduling node listens to.
+- The client URL that the current Scheduling node listens to
 - Default value: `"http://127.0.0.1:3379"`
 - When deploying a cluster, you must specify the IP address of the current host as `listen-addr` (for example, `"http://192.168.100.113:3379"`). If the node runs on Docker, specify the Docker IP address as `"http://0.0.0.0:3379"`.
 
 ### `advertise-listen-addr`
 
-- The URL for external access to the Scheduling node.
+- The URL for the client to access the Scheduling node
 - Default value: `"${listen-addr}"`
-- In some situations such as in Docker or NAT network environments, if a client cannot access the Scheduling node through the default client URLs listened to by `scheduling`, you must manually set `advertise-listen-addr` for client access.
+- In some situations such as in Docker or NAT network environments, if a client cannot access the Scheduling node through the default client URLs listened to by the Scheduling node, you must manually set `advertise-listen-addr` for client access.
 - For example, the internal IP address of Docker is `172.17.0.1`, while the IP address of the host is `192.168.100.113` and the port mapping is set to `-p 3379:3379`. In this case, you can set `advertise-listen-addr="http://192.168.100.113:2379"`. Then, the client can find this service through `http://192.168.100.113:2379`.
 
 ### `backend-endpoints`
 
-- The list of backend endpoints of other Scheduling nodes that the current Scheduling node listens to.
+- The list of backend endpoints of other Scheduling nodes that the current Scheduling node listens to
 - Default value: `"http://127.0.0.1:2379"`
 
 ### `lease`
@@ -50,7 +50,7 @@ The Scheduling node is used for providing the `scheduling` microservice for PD. 
 
 ## security
 
-Configuration items related to security.
+Configuration items related to security
 
 ### `cacert-path`
 
@@ -91,12 +91,12 @@ Configuration items related to logs.
 
 ### `disable-timestamp`
 
-- Controls whether to disable the automatically generated timestamp in the logs.
+- Controls whether to disable the automatically generated timestamp in  logs.
 - Default value: `false`
 
 ## log.file
 
-Configuration items related to the log file.
+Configuration items related to the log file
 
 ### `max-size`
 
@@ -119,7 +119,7 @@ Configuration items related to the log file.
 
 ## metric
 
-Configuration items related to monitoring.
+Configuration items related to monitoring
 
 ### `interval`
 
