@@ -5001,6 +5001,16 @@ SHOW WARNINGS;
 - Possible values: `"ddl"`, `"stats"`, `"br"`, `"lightning"`, `"background"`
 - This variable is used to explicitly specify the task type for the current session, which is identified and controlled by [Resource Control](/tidb-resource-control.md). For example: `SET @@tidb_request_source_type = "background"`.
 
+### tidb_resource_control_strict_mode <span class="version-mark">New in v8.2.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boole
+- Default value: `ON`
+- This variable controls whether privilege contorl is applied to statement [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md) and optimizer hint [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name). When set to `ON`, you need to have `SUPER` or `RESOURCE_GROUP_ADMIN` or `RESOURCE_GROUP_USER` privilege to change the bind resource group of the current session or current statement via these two ways. When set to `OFF`, none of these privileges are needed, this behavior is the same as older versions without this variable.
+- If your cluster is upgraded from an earlier version, the default value of `tidb_resource_control_strict_mode` is set to `OFF`.
+
 ### tidb_retry_limit
 
 - Scope: SESSION | GLOBAL

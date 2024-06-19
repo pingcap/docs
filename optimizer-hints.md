@@ -858,6 +858,10 @@ Example:
 SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 ```
 
+> **Note:**
+>
+> From version v8.2.0, TiDB added privilege control for this hint. When system variable [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode--new-in-v820) is set to `ON`, you need to have `SUPER` or `RESOURCE_GROUP_ADMIN` or `RESOURCE_GROUP_USER` privilege to use this hint. If you don't have these privileges, this hint will be ignored and a warning is returned, you can execute `SHOW WARNINGS;` to see the details.
+
 ## Troubleshoot common issues that hints do not take effect
 
 ### Hints do not take effect because your MySQL command-line client strips hints
