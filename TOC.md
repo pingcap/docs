@@ -328,7 +328,13 @@
   - [Use Load Base Split](/configure-load-base-split.md)
   - [Use Store Limit](/configure-store-limit.md)
   - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
-  - [Use PD Microservices](/pd-microservices.md)
+  - Use PD Microservices
+    - [PD Microservices Overview](/pd-microservices.md)
+    - [Scale a cluster with PD microservices enabled using TiUP](/scale-microservices-using-tiup.md)
+    - [TSO configuration file](/tso-configuration-file.md)
+    - [TSO configuration flags](/command-line-flags-for-tso-configuration.md)
+    - [Scheduling configuration file](/scheduling-configuration-file.md)
+    - [Scheduling configuration flags](/command-line-flags-for-scheduling-configuration.md)
 - TiDB Tools
   - [Overview](/ecosystem-tool-user-guide.md)
   - [Use Cases](/ecosystem-tool-user-case.md)
