@@ -22,12 +22,12 @@ For TiDB 2.1.3 or later versions, TiDB monitoring supports the pull method. It i
 
 ## Source and display of monitoring data
 
-The three core components of TiDB (TiDB server, TiKV server and PD server) obtain metrics through the HTTP interface. These metrics are collected from the program code, and the ports are as follows:
+The three core components of TiDB (TiDB server, TiKV server and PD server) obtain metrics through the HTTP interface. These metrics are collected from the program code, and the default ports are as follows:
 
 | Component   | Port  |
 | :---------- |:----- |
 | TiDB server | 10080 |
-| TiKV server | 20181 |
+| TiKV server | 20180 |
 | PD server   | 2379  |
 
 Execute the following command to check the QPS of a SQL statement through the HTTP interface. Take the TiDB server as an example:
@@ -160,7 +160,7 @@ The API of Prometheus is shown as follows:
 {{< copyable "shell-regular" >}}
 
 ```bash
-curl -u user:pass 'http://__grafana_ip__:3000/api/datasources/proxy/1/api/v1/query_range?query=sum(tikv_engine_size_bytes%7Binstancexxxxxxxxx20181%22%7D)%20by%20(instance)&start=1565879269&end=1565882869&step=30' |python -m json.tool
+curl -u user:pass 'http://__grafana_ip__:3000/api/datasources/proxy/1/api/v1/query_range?query=sum(tikv_engine_size_bytes%7Binstancexxxxxxxxx20180%22%7D)%20by%20(instance)&start=1565879269&end=1565882869&step=30' |python -m json.tool
 ```
 
 ```
@@ -169,7 +169,7 @@ curl -u user:pass 'http://__grafana_ip__:3000/api/datasources/proxy/1/api/v1/que
         "result": [
             {
                 "metric": {
-                    "instance": "xxxxxxxxxx:20181"
+                    "instance": "xxxxxxxxxx:20180"
                 },
                 "values": [
                     [
