@@ -47,10 +47,10 @@ PD microservices can be deployed using [TiDB Operator](https://docs.pingcap.com/
 
 To deploy and configure PD microservices using TiDB Operator, see the following documents:
 
-- [Deploy PD microservices](https://docs.pingcap.com/tidb-in-kubernetes/dev/configure-a-tidb-cluster#enable-pd-microservices)
-- [Configure PD microservices](https://docs.pingcap.com/tidb-in-kubernetes/dev/configure-a-tidb-cluster#configure-pd-microservices)
-- [Modify PD microservices](https://docs.pingcap.com/tidb-in-kubernetes/dev/modify-tidb-configuration#modify-pd-microservice-configuration)
-- [Scale PD microservice components](https://docs.pingcap.com/tidb-in-kubernetes/dev/scale-a-tidb-cluster#scale-pd-microservice-components)
+- [Deploy PD microservices](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#enable-pd-microservices)
+- [Configure PD microservices](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#configure-pd-microservices)
+- [Modify PD microservices](https://docs.pingcap.com/tidb-in-kubernetes/stable/modify-tidb-configuration#modify-pd-microservice-configuration)
+- [Scale PD microservice components](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster#scale-pd-microservice-components)
 
 </div>
 <div label="TiUP">
@@ -67,7 +67,7 @@ To deploy and configure PD microservices using TiUP, see the following documents
 </div>
 <div label="TiUP Playground">
 
-To deploy and configure PD microservices in a TiDB local cluster using TiUP Playground, see the following documents:
+To deploy and configure PD microservices in a TiDB local cluster using TiUP Playground, see the following document:
 
 - [Deploy PD microservices](/tiup/tiup-playground.md#deploy-pd-microservices)
 
