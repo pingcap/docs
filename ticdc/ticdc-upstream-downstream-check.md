@@ -103,4 +103,4 @@ Here is a configuration example of the `Datasource config` section:
     - Whenever TiCDC generates a new `primary_ts`, its value must be an integer multiple of `sync-point-interval`.
     - For each new changefeed, TiCDC calculates an initial `primary_ts`. This initial value is greater than or equal to the changefeed start time (`startTs`), and is the smallest integer multiple of `sync-point-interval`.
 
-  This setting is used to align the Syncpoints of different changefeeds during data synchronization. For example, multiple downstream clusters can restore to the `secondary_ts` of a Syncpoint with the same `primary_ts` by executing the [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md) statement, achieving data consistency across downstream clusters.
+  This setting is used to align the Syncpoints of different changefeeds during data replication. For example, multiple downstream clusters can restore to the `secondary_ts` of a Syncpoint with the same `primary_ts` by executing the [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md) statement, achieving data consistency across downstream clusters.
