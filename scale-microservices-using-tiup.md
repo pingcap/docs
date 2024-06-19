@@ -1,11 +1,11 @@
 ---
-title: Scale PD Microservice Nodes Using TiUP
-summary: Learn how to scale PD microservice nodes using TiUP.
+title: Scale a PD Microservice cluster Using TiUP
+summary: Learn how to scale a PD microservice cluster using TiUP.
 ---
 
-# Scale PD Microservice Nodes Using TiUP
+# Scale a PD Microservice cluster Using TiUP
 
-This document describes how to scale PD microservice nodes, including TSO nodes and Scheduling nodes, using TiUP.
+This document describes how to scale a PD Microservice cluster, including how to add or remove TSO/Scheduling nodes, using TiUP.
 
 To view the current cluster name list, run `tiup cluster list`.
 
@@ -20,7 +20,7 @@ For example, assume that the original topology of the cluster is as follows:
 | 10.0.1.6   | TSO   |
 | 10.0.1.7   | Scheduling   |
 
-## Scale out TSO/Scheduling nodes
+## Add TSO/Scheduling nodes
 
 This section exemplifies how to add a TSO node with the IP address `10.0.1.8` and a Scheduling node with the IP address `10.0.1.9`.
 
@@ -37,7 +37,7 @@ Add the scale-out topology configuration in the `scale-out.yml` file:
 vi scale-out.yml
 ```
 
-Example configuration for TSO:
+The following is the configuration example for the TSO node:
 
 ```ini
 tso_servers:
@@ -45,7 +45,7 @@ tso_servers:
     port: 3379
 ```
 
-Example configuration for Scheduling:
+The following is the configuration example for the Scheduling node:
 
 ```ini
 scheduling_servers:
@@ -106,9 +106,9 @@ After the scale-out, the cluster topology is as follows:
 | 10.0.1.8   | TSO   |
 | 10.0.1.9   | Scheduling   |
 
-## Scale in TSO/Scheduling
+## Remove TSO/Scheduling nodes
 
-This section exemplifies how to remove a TSO node with the IP address `10.0.1.8` and a Scheduling node with the IP address `10.0.1.9`
+This section exemplifies how to remove a TSO node with the IP address `10.0.1.8` and a Scheduling node with the IP address `10.0.1.9`.
 
 ### 1. View the node ID information
 
