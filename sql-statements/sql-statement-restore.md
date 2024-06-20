@@ -139,7 +139,7 @@ If statistics have been backed up, they are restored by default during the resto
 
 System [privilege tables](/privilege-management.md#privilege-table) are restored by default. If you do not need to restore system privilege tables, you can set the `WITH_SYS_TABLE` parameter to `FALSE`.
 
-By default, the restore task does not need to wait for TiFlash replicas to be fully created before completing. If you need the restore task to wait, you can set the `WAIT_TIFLASH_READY` parameter to `TRUE`.
+By default, the restore task does not wait for TiFlash replicas to be fully created before completing. If you need the restore task to wait, you can set the `WAIT_TIFLASH_READY` parameter to `TRUE`.
 
 {{< copyable "sql" >}}
 
