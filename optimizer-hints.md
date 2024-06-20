@@ -1121,7 +1121,7 @@ mysql> SELECT @@MAX_EXECUTION_TIME, a FROM (SELECT /*+ SET_VAR(MAX_EXECUTION_TIM
 1 row in set (0.00 sec)
 ```
 
-In the following example, SET_VAR is not written in a subquery, so it can take effect.
+In the following example, `SET_VAR` is not written in a subquery, so it can take effect.
 
 ```sql
 mysql> SELECT /*+ SET_VAR(MAX_EXECUTION_TIME=123) */ @@MAX_EXECUTION_TIME, a FROM (SELECT 1 as a) t;
