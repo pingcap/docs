@@ -788,7 +788,7 @@ You can temporarily modify the value of system variables during statement execut
 > **Warning:**
 >
 > - It is strongly recommended not to modify variables that are not explicitly supported, as this might cause unpredictable behavior.
-> - Do not write `SET_VAR` in subquery. Otherwise it might not work. For more information, see [`SET_VAR` does not work in subqueries](#set_var-does-not-work-in-subqueries).
+> - Do not write `SET_VAR` in subqueries. Otherwise it might not work. For more information, see [`SET_VAR` does not work in subqueries](#set_var-does-not-work-in-subqueries).
 
 The following is an example:
 
