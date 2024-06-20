@@ -767,6 +767,8 @@ Usage:
 >> scheduler add grant-leader-scheduler 1         // Schedule all the leaders of the Regions on store 1 to store 1
 >> scheduler add evict-leader-scheduler 1         // Move all the Region leaders on store 1 out
 >> scheduler config evict-leader-scheduler        // Display the stores in which the scheduler is located since v4.0.0
+>> scheduler config evict-leader-scheduler add-store 2    // Add leader eviction scheduling for store 2
+>> scheduler config evict-leader-scheduler delete-store 2 // Remove leader eviction scheduling for store 2
 >> scheduler add shuffle-leader-scheduler         // Randomly exchange the leader on different stores
 >> scheduler add shuffle-region-scheduler         // Randomly scheduling the Regions on different stores
 >> scheduler add evict-slow-store-scheduler       // When there is one and only one slow store, evict all Region leaders of that store
@@ -921,6 +923,24 @@ Usage:
     ```bash
     scheduler config balance-hot-region-scheduler set enable-for-tiflash true
     ```
+
+### `scheduler config evict-leader-scheduler`
+
+Use this command to view and manage the configuration of the `evict-leader-scheduler`.
+
+- When an `evict-leader-scheduler` already exists, use the `add-store` subcommand to add leader eviction scheduling for the specified store:
+
+    ```bash
+    scheduler config evict-leader-scheduler add-store 2       // Add leader eviction scheduling for store 2
+    ```
+
+- When an `evict-leader-scheduler` already exists, use the `delete-store` subcommand to remove leader eviction scheduling for the specified store:
+
+    ```bash
+    scheduler config evict-leader-scheduler delete-store 2    // Remove leader eviction scheduling for store 2
+    ```
+
+    If all store configurations of an `evict-leader-scheduler` are removed, the scheduler itself is automatically removed.
 
 ### `service-gc-safepoint`
 
