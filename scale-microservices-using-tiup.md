@@ -1,11 +1,11 @@
 ---
-title: Scale a PD Microservice cluster Using TiUP
-summary: Learn how to scale a PD microservice cluster using TiUP.
+title: Scale a Cluster with PD Microservices Using TiUP
+summary: Learn how to scale a cluster with PD microservices using TiUP.
 ---
 
-# Scale a PD Microservice cluster Using TiUP
+# Scale a Cluster with PD Microservices Using TiUP
 
-This document describes how to scale a PD Microservice cluster, including how to add or remove TSO/Scheduling nodes, using TiUP.
+This document describes how to scale a cluster with PD microservices enabled using TiUP, including how to add or remove TSO/Scheduling nodes using TiUP.
 
 To view the current cluster name list, run `tiup cluster list`.
 
@@ -91,7 +91,7 @@ If you see `Scaled cluster <cluster-name> out successfully`, the scale-out opera
 tiup cluster display <cluster-name>
 ```
 
-Access the monitoring platform at <http://10.0.1.5:3000> using your browser to monitor the status of the cluster and the new node.
+Access the monitoring platform at <http://10.0.1.5:3000> using your browser to monitor the status of the cluster and the new nodes.
 
 After the scale-out, the cluster topology is as follows:
 

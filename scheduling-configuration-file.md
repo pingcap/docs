@@ -91,7 +91,7 @@ Configuration items related to logs.
 
 ### `disable-timestamp`
 
-- Controls whether to disable the automatically generated timestamp in  logs.
+- Controls whether to disable the automatically generated timestamp in logs.
 - Default value: `false`
 
 ## log.file

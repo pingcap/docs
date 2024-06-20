@@ -150,9 +150,9 @@ The above configuration specifies that `node_exporter` uses the `9100` port and 
 
 - `cdc`: TiCDC service-related configuration. For the complete configuration, see [Deploy TiCDC](/ticdc/deploy-ticdc.md).
 
-- `tso`: `tso` microservice-related configuration. For the complete configuration, see [TSO node configuration file](/tso-configuration-file.md).
+- `tso`: `tso` microservice-related configuration. For the complete configuration, see [TSO configuration file](/tso-configuration-file.md).
 
-- `scheduling`: `scheduling` microservice-related configuration. For the complete configuration, see [Scheduling node configuration file](/scheduling-configuration-file.md).
+- `scheduling`: `scheduling` microservice-related configuration. For the complete configuration, see [Scheduling configuration file](/scheduling-configuration-file.md).
 
 A `server_configs` configuration example is as follows:
 
@@ -730,18 +730,18 @@ tispark_workers:
 
 ### `tso_servers`
 
-`tso_servers` specifies the machines to which the TSO microservices are deployed. It also specifies the service configuration on each machine. `tso_servers` is an array, and each element of the array contains the following fields:
+`tso_servers` specifies the machines to which the `tso` microservices are deployed. It also specifies the service configuration on each machine. `tso_servers` is an array, and each element of the array contains the following fields:
 
-- `host`: Specifies the IP address of the machine to which the TSO microservices are deployed. The field value is mandatory.
+- `host`: Specifies the IP address of the machine to which the `tso` microservices are deployed. The field value is mandatory.
 - `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
-- `port`: Specifies the listening port of the TSO microservices. The default value is `3379`.
+- `port`: Specifies the listening port of the `tso` microservices. The default value is `3379`.
 - `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
 - `data_dir`: Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated according to the `data_dir` directory configured in `global`.
 - `config`: The configuration rule of this field is the same as the `tso` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `tso` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Subsequently, a configuration file is generated and sent to the machine specified in `host`.
 - `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
 - `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
 
-Among the above fields, you cannot modify these configured fields after the deployment:
+Among the preceding fields, you cannot modify these fields after the deployment:
 
 - `host`
 - `port`
@@ -760,19 +760,18 @@ tso_servers:
 
 ### `scheduling_servers`
 
-`scheduling_servers` specifies the machines to which Scheduling microservices are deployed. It also specifies the service configuration on each machine. `scheduling_servers` is an array, and each element of the array contains the following fields:
+`scheduling_servers` specifies the machines to which `scheduling` microservices are deployed. It also specifies the service configuration on each machine. `scheduling_servers` is an array, and each element of the array contains the following fields:
 
-- `host`: Specifies the IP address of the machine to which the Scheduling microservices are deployed. The field is mandatory.
+- `host`: Specifies the IP address of the machine to which the `scheduling` microservices are deployed. The field is mandatory.
 - `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
-- `port`: Specifies the listening port of the Scheduling microservices. The default value is `3379`.
+- `port`: Specifies the listening port of the `scheduling` microservices. The default value is `3379`.
 - `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
 - `data_dir`: Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated according to the `data_dir` directory configured in `global`.
 - `config`: The configuration rule of this field is the same as the `scheduling` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `scheduling` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Subsequently, a configuration file is generated and sent to the machine specified in `host`.
 - `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
 - `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
 
-Among the above fields, you cannot modify these configured fields after the deployment:
-
+Among the preceding fields, you cannot modify these fields after the deployment:
 
 - `host`
 - `port`

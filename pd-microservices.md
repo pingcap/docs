@@ -45,7 +45,7 @@ PD microservices can be deployed using [TiDB Operator](https://docs.pingcap.com/
 <SimpleTab>
 <div label="TiDB Operator">
 
-To deploy and configure PD microservices using TiDB Operator, see the following documents:
+For TiDB clusters deployed using TiDB Operator, you can deploy and configure PD microservices according to the following documents:
 
 - [Deploy PD microservices](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#enable-pd-microservices)
 - [Configure PD microservices](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#configure-pd-microservices)
@@ -55,14 +55,16 @@ To deploy and configure PD microservices using TiDB Operator, see the following 
 </div>
 <div label="TiUP">
 
-To deploy and configure PD microservices using TiUP, see the following documents:
+For TiDB clusters deployed using TiUP, you can deploy and configure PD microservices according to the following documents:
 
 - [Deploy PD microservices](/pd-microservices-deployment-topology.md)
-- [Scale a cluster with PD microservices enabled using TiUP](/scale-microservices-using-tiup.md)
-- [TSO configuration file](/tso-configuration-file.md)
-- [TSO configuration flags](/command-line-flags-for-tso-configuration.md)
-- [Scheduling configuration file](/scheduling-configuration-file.md)
-- [Scheduling configuration flags](/command-line-flags-for-scheduling-configuration.md)
+- [Scale a cluster with PD microservices using TiUP](/scale-microservices-using-tiup.md)
+- Configure the `tso` microservice
+    - [Configure via the configuration file](/tso-configuration-file.md)
+    - [Configure via command line flags](/command-line-flags-for-tso-configuration.md)
+- Configure the `scheduling` microservice
+    - [Configure via the configuration file](/scheduling-configuration-file.md)
+    - [Configure via command line flags](/command-line-flags-for-scheduling-configuration.md)
 
 </div>
 <div label="TiUP Playground">

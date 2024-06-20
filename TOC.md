@@ -116,6 +116,7 @@
   - Plan Cluster Topology
     - [Minimal Topology](/minimal-deployment-topology.md)
     - [TiFlash Topology](/tiflash-deployment-topology.md)
+    - [PD Microservices Topology](/pd-microservices-deployment-topology.md)
     - [TiProxy Topology](/tiproxy/tiproxy-deployment-topology.md)
     - [TiCDC Topology](/ticdc-deployment-topology.md)
     - [TiDB Binlog Topology](/tidb-binlog-deployment-topology.md)
@@ -330,7 +331,7 @@
   - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
   - Use PD Microservices
     - [PD Microservices Overview](/pd-microservices.md)
-    - [Scale a cluster with PD microservices enabled using TiUP](/scale-microservices-using-tiup.md)
+    - [Scale a Cluster with PD Microservices Using TiUP](/scale-microservices-using-tiup.md)
     - [TSO configuration file](/tso-configuration-file.md)
     - [TSO configuration flags](/command-line-flags-for-tso-configuration.md)
     - [Scheduling configuration file](/scheduling-configuration-file.md)

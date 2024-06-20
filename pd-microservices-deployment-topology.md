@@ -33,7 +33,7 @@ global:
   data_dir: "/tidb-data"
   listen_host: 0.0.0.0
   arch: "amd64"
-  pd_mode: "ms"
+  pd_mode: "ms" # To enable PD microservices, you must specify this field as "ms".
 
 monitored:
   node_exporter_port: 9200
@@ -82,9 +82,9 @@ For detailed descriptions of the configuration items in the preceding TiDB clust
 ### Key parameters
 
 - The instance-level `"-host"` configuration in `tso_servers` only supports IP address, not domain name.
-- For detailed descriptions of TSO configuration items, see [TSO configuration](/tso-configuration-file.md).
+- For detailed descriptions of TSO configuration items, see [TSO configuration file](/tso-configuration-file.md).
 - The instance-level `"-host"` configuration in `scheduling_servers` only supports IP address, not domain name.
-- For detailed descriptions of Scheduling configuration items, see [Scheduling configuration](/scheduling-configuration-file.md).
+- For detailed descriptions of Scheduling configuration items, see [Scheduling configuration file](/scheduling-configuration-file.md).
 
 > **Note:**
 >
