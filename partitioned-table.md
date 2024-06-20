@@ -1662,6 +1662,64 @@ CREATE TABLE t (a varchar(20), b blob,
 ERROR 1503 (HY000): A UNIQUE INDEX must include all columns in the table's partitioning function
 ```
 
+#### Global Index
+
+If you need to create unique indexes that **don't include all the columns used in the partition expressions**, you can achieve this by enabling the [tidb_enable_global_index](/system-variables.md#tidb_enable_global_index-new-in-v760) variable.
+
+After enabling this variable, any unique index created by the user that does not meet the above constraint will automatically be converted into a global index.
+
+{{< copyable "sql" >}}
+
+```sql
+set tidb_enable_global_index = true;
+
+CREATE TABLE t1 (
+    col1 INT NOT NULL,
+    col2 DATE NOT NULL,
+    col3 INT NOT NULL,
+    col4 INT NOT NULL,
+    UNIQUE KEY uidx12(col1, col2),
+    UNIQUE KEY uidx3(col3)
+)
+
+PARTITION BY HASH(col3)
+PARTITIONS 4;
+```
+
+In the example above, the unique index `uidx12` will be implicitly converted to a global index, but `uidx3` remains a regular unique index.
+
+It should be noted that a **clustered index** cannot be a global index:
+
+{{< copyable "sql" >}}
+
+```sql
+set tidb_enable_global_index = true;
+
+CREATE TABLE t1 (
+    col1 INT NOT NULL,
+    col2 DATE NOT NULL,
+    PRIMARY KEY (col2) clustered
+) PARTITION BY HASH(col1) PARTITIONS 5;
+```
+
+```sql
+ERROR 1503 (HY000): A CLUSTERED INDEX must include all columns in the table's partitioning function
+```
+
+Users can identify a global index by querying the `information_schema`.`tidb_indexes` table, aside from checking the table structure.
+
+```sql
+mysql> select * from information_schema.tidb_indexes where table_name='t1';
++--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
+| TABLE_SCHEMA | TABLE_NAME | NON_UNIQUE | KEY_NAME | SEQ_IN_INDEX | COLUMN_NAME | SUB_PART | INDEX_COMMENT | Expression | INDEX_ID | IS_VISIBLE | CLUSTERED | IS_GLOBAL |
++--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
+| test         | t1         |          0 | uidx12   |            1 | col1        |     NULL |               | NULL       |        1 | YES        | NO        |         1 |
+| test         | t1         |          0 | uidx12   |            2 | col2        |     NULL |               | NULL       |        1 | YES        | NO        |         1 |
+| test         | t1         |          0 | uidx3    |            1 | col3        |     NULL |               | NULL       |        2 | YES        | NO        |         0 |
++--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
+3 rows in set (0.00 sec)
+```
+
 ### Partitioning limitations relating to functions
 
 Only the functions shown in the following list are allowed in partitioning expressions:
