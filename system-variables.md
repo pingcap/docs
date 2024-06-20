@@ -5006,10 +5006,10 @@ SHOW WARNINGS;
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boole
+- Type: Boolean
 - Default value: `ON`
-- This variable controls whether privilege contorl is applied to statement [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md) and optimizer hint [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name). When set to `ON`, you need to have `SUPER` or `RESOURCE_GROUP_ADMIN` or `RESOURCE_GROUP_USER` privilege to change the bind resource group of the current session or current statement via these two ways. When set to `OFF`, none of these privileges are needed, this behavior is the same as older versions without this variable.
-- If your cluster is upgraded from an earlier version, the default value of `tidb_resource_control_strict_mode` is set to `OFF`.
+- This variable controls whether privilege control is applied to the [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md) statement and the [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name) optimizer hint. When this system variable is set to `ON`, you need to have the `SUPER` or `RESOURCE_GROUP_ADMIN` or `RESOURCE_GROUP_USER` privilege to change the bound resource group of the current session or current statement via these two ways. When it is set to `OFF`, none of these privileges are required, and the behavior is the same as earlier TiDB versions without this variable.
+- When you upgrade your TiDB cluster from an earlier version to v8.2.0 or later, the default value of this variable is set to `OFF`, which means this feature is disabled by default.
 
 ### tidb_retry_limit
 

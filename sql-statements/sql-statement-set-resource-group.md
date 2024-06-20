@@ -26,10 +26,10 @@ ResourceGroupName ::=
 
 ## Privilege
 
-This statement requires following configuration and privilege:
+Executing this statement requires the following configuration and privilege:
 
-1. System variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control--new-in-v660) is set to `ON`.
-2. When system variable [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode--new-in-v820) is set to `ON`, privilege `SUPER` or `RESOURCE_GROUP_ADMIN` or `RESOURCE_GROUP_USER` is needed; when set to `OFF`, none of these privileges are needed.
+1. The system variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) is set to `ON`.
+2. When the system variable [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) is set to `ON`, you need to have the `SUPER` or `RESOURCE_GROUP_ADMIN` or `RESOURCE_GROUP_USER` privilege; when it is set to `OFF`, none of these privileges are required.
 
 ## Examples
 

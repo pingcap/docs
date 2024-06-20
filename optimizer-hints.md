@@ -860,7 +860,7 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 
 > **Note:**
 >
-> From version v8.2.0, TiDB added privilege control for this hint. When system variable [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode--new-in-v820) is set to `ON`, you need to have `SUPER` or `RESOURCE_GROUP_ADMIN` or `RESOURCE_GROUP_USER` privilege to use this hint. If you don't have these privileges, this hint will be ignored and a warning is returned, you can execute `SHOW WARNINGS;` to see the details.
+> Starting from v8.2.0, TiDB introduces privilege control for this hint. When the system variable [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) is set to `ON`, you need to have the `SUPER` or `RESOURCE_GROUP_ADMIN` or `RESOURCE_GROUP_USER` privilege to use this hint. If you do not have the required privilege, this hint is ignored, and TiDB returns a warning. You can view the details by executing `SHOW WARNINGS;` after the query.
 
 ## Troubleshoot common issues that hints do not take effect
 
