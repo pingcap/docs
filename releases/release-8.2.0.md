@@ -32,8 +32,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
     <td>HashAgg 是 TiDB 上最常见的聚合算子，用来快速聚合部分相同字段的行数据，并行 HashAgg 能够进一步提升处理速度。从 v8.0.0 开始，当内存资源不足时，并行的 HashAgg 能够将临时排序数据落盘，避免由于过渡内存使用造成潜在 OOM 风险。在提升性能的同时，也保护了节点的稳定性。这个能力在 v8.2.0 成为正式功能，用户可以安全地设置其并发度。</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/zh/tidb/v8.2/tidb-configuration-file#stats-load-concurrency-从-v540-版本开始引入">统计信息加载效率提升 10 倍)<!--tw@hfxsd--></td>
-    <td>对于拥有大量表和分区的集群（比如 SaaS 或 PaaS 服务），统计信息加载效率的提升能够解决 TiDB 实例启动缓慢，减少由于统计信息加载失败造成的性能回退，提升集群的稳定性。</td>
+    <td><a href="https://docs.pingcap.com/zh/tidb/v8.2/tidb-configuration-file#stats-load-concurrency-new-in-v540">Improve statistics loading efficiency by up to 10 times<!--tw@hfxsd--></td>
+    <td>For clusters with a large number of tables and partitions, such as SaaS or PaaS services, improvement in statistics loading efficiency can solve the problem of slow startup of TiDB instances. This improvement reduces performance rollbacks caused by statistics loading failures and improves cluster stability.</td>
   </tr>
   <tr>
     <td rowspan="1">DB Operations and Observability</td>
