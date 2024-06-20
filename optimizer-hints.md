@@ -83,38 +83,6 @@ This hint specifies the outer `SELECT` query block's name to `QB1`, which makes 
 >
 > In the above example, if the hint specifies the `QB_NAME` to `sel_2` and does not specify a new `QB_NAME` for the original second `SELECT` query block, then `sel_2` becomes an invalid name for the second `SELECT` query block.
 
-### SET_VAR(VAR_NAME=VAR_VALUE)
-
-You can temporarily modify the value of system variables during statement execution by using the `SET_VAR(VAR_NAME=VAR_VALUE)` hint. After the statement is executed, the value of the system variable in the current session is automatically restored to the original value. This hint can be used to modify some system variables related to the optimizer and executor. For a list of system variables that can be modified using this hint, refer to [System variables](/system-variables.md).
-
-> **Warning:**
->
-> It is strongly recommended not to modify variables that are not explicitly supported, as this might cause unpredictable behavior.
-
-The following is an example:
-
-```sql
-SELECT /*+ SET_VAR(MAX_EXECUTION_TIME=1234) */ @@MAX_EXECUTION_TIME;
-SELECT @@MAX_EXECUTION_TIME;
-```
-
-After executing the preceding SQL statements, the first query returns the value `1234` set in the hint, instead of the default value of `MAX_EXECUTION_TIME`. The second query returns the default value of the variable.
-
-```sql
-+----------------------+
-| @@MAX_EXECUTION_TIME |
-+----------------------+
-|                 1234 |
-+----------------------+
-1 row in set (0.00 sec)
-+----------------------+
-| @@MAX_EXECUTION_TIME |
-+----------------------+
-|                    0 |
-+----------------------+
-1 row in set (0.00 sec)
-```
-
 ### MERGE_JOIN(t1_name [, tl_name ...])
 
 The `MERGE_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the sort-merge join algorithm for the given table(s). Generally, this algorithm consumes less memory but takes longer processing time. If there is a very large data volume or insufficient system memory, it is recommended to use this hint. For example:
@@ -813,6 +781,39 @@ In the following example, the Plan Cache is forcibly disabled when executing the
 prepare stmt from 'select  /*+ IGNORE_PLAN_CACHE() */ * from t where t.id = ?';
 ```
 
+### SET_VAR(VAR_NAME=VAR_VALUE)
+
+You can temporarily modify the value of system variables during statement execution by using the `SET_VAR(VAR_NAME=VAR_VALUE)` hint. After the statement is executed, the value of the system variable in the current session is automatically restored to the original value. This hint can be used to modify some system variables related to the optimizer and executor. For a list of system variables that can be modified using this hint, refer to [System variables](/system-variables.md).
+
+> **Warning:**
+>
+> - It is strongly recommended not to modify variables that are not explicitly supported, as this might cause unpredictable behavior.
+> - Do not write `SET_VAR` in subquery. Otherwise it might not work. For more information, see [`SET_VAR` does not work in subqueries](#set_var-does-not-work-in-subqueries).
+
+The following is an example:
+
+```sql
+SELECT /*+ SET_VAR(MAX_EXECUTION_TIME=1234) */ @@MAX_EXECUTION_TIME;
+SELECT @@MAX_EXECUTION_TIME;
+```
+
+After executing the preceding SQL statements, the first query returns the value `1234` set in the hint, instead of the default value of `MAX_EXECUTION_TIME`. The second query returns the default value of the variable.
+
+```sql
++----------------------+
+| @@MAX_EXECUTION_TIME |
++----------------------+
+|                 1234 |
++----------------------+
+1 row in set (0.00 sec)
++----------------------+
+| @@MAX_EXECUTION_TIME |
++----------------------+
+|                    0 |
++----------------------+
+1 row in set (0.00 sec)
+```
+
 ### STRAIGHT_JOIN()
 
 The `STRAIGHT_JOIN()` hint reminds the optimizer to join tables in the order of table names in the `FROM` clause when generating the join plan.
@@ -1102,4 +1103,32 @@ CREATE TABLE t2 (a INT);
 set tidb_opt_enable_hash_join=off;
 EXPLAIN SELECT /*+ NO_MERGE_JOIN(t1) */ * FROM t1, t2 WHERE t1.a=t2.a;
 ERROR 1815 (HY000): Internal : Can't find a proper physical plan for this query
+```
+
+### `SET_VAR` does not work in subqueries
+
+`SET_VAR` is used to set a system variable for the current statement and should not be written in a subquery. If you write it in a subquery, `SET_VAR` might not take effect due to the special handling of subqueries.
+
+In the following example, `SET_VAR` is written in the subquery, so it does not take effect.
+
+```sql
+mysql> SELECT @@MAX_EXECUTION_TIME, a FROM (SELECT /*+ SET_VAR(MAX_EXECUTION_TIME=123) */ 1 as a) t;
++----------------------+---+
+| @@MAX_EXECUTION_TIME | a |
++----------------------+---+
+|                    0 | 1 |
++----------------------+---+
+1 row in set (0.00 sec)
+```
+
+In the following example, SET_VAR is not written in a subquery, so it can take effect.
+
+```sql
+mysql> SELECT /*+ SET_VAR(MAX_EXECUTION_TIME=123) */ @@MAX_EXECUTION_TIME, a FROM (SELECT 1 as a) t;
++----------------------+---+
+| @@MAX_EXECUTION_TIME | a |
++----------------------+---+
+|                  123 | 1 |
++----------------------+---+
+1 row in set (0.00 sec)
 ```
