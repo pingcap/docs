@@ -25,9 +25,7 @@ ACID refers to the four key properties of a transaction: atomicity, consistency,
 
 ### Chat2Query
 
-TiDB Cloud is powered by AI. You can use Chat2Query (beta), an AI-powered SQL editor in the [TiDB Cloud console](https://tidbcloud.com/), to maximize your data value.
-
-In Chat2Query, you can either simply type `--` followed by your instructions to let AI generate SQL queries automatically or write SQL queries manually, and then run SQL queries against databases without a terminal. You can find the query results in tables intuitively and check the query logs easily. For more information, see [Chat2Query (beta)](/tidb-cloud/explore-data-with-chat2query.md).
+Chat2Query is an AI-powered feature integrated into SQL Editor that assists users in generating, debugging, or rewriting SQL queries based on natural language instructions. For more information, see [Chat2Query (beta)](/tidb-cloud/explore-data-with-chat2query.md).
 
 In addition, TiDB Cloud provides a Chat2Query API for TiDB Serverless clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
 

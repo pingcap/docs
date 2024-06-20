@@ -89,7 +89,7 @@ To complete this tutorial, you need the following:
 
 1. Create a table in your TiDB Serverless cluster and insert some data. 
 
-    You can use [Chat2Query in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
+    You can use [SQL Editor in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
 
    ```sql
    CREATE TABLE `test`.`person`  (
@@ -201,7 +201,7 @@ mysql://[username]:[password]@[host]/[database]
 
 1. Create a table in your TiDB Serverless cluster and insert some data.
 
-    You can use [Chat2Query in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
+    You can use [SQL Editor in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
 
    ```sql
    CREATE TABLE `test`.`person`  (
