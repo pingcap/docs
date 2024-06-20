@@ -1,5 +1,5 @@
 ---
-title: JSON Functions that validate JSON documents
+title: JSON Functions That Validate JSON Documents
 summary: Learn about JSON functions that validate JSON documents.
 ---
 
