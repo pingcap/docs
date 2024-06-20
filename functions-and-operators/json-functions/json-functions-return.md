@@ -3,7 +3,7 @@ title: JSON Functions That Return JSON Values
 summary: Learn about JSON functions that return JSON values.
 ---
 
-# JSON Functions that return JSON values
+# JSON Functions That Return JSON Values
 
 This document describes JSON functions that return JSON values.
 
