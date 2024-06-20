@@ -191,6 +191,6 @@ tiup playground v8.2.0 --pd.mode ms --pd 3 --tso 2 --scheduling 2
 ```
 
 - `--pd.mode`: setting it to `ms` means enabling the microservice mode for PD.
-- `--pd num`: specifies the number of APIs for PD microservices. It must be at least `1`.
-- `--tso num`: specifies the number of instances to be deployed for the `tso` microservice.
-- `--scheduling num`: specifies the number of instances to be deployed for the `scheduling` microservice.
+- `--pd <num>`: specifies the number of APIs for PD microservices. It must be at least `1`.
+- `--tso <num>`: specifies the number of instances to be deployed for the `tso` microservice.
+- `--scheduling <num>`: specifies the number of instances to be deployed for the `scheduling` microservice.
