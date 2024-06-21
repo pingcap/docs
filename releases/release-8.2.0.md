@@ -24,12 +24,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 <tbody>
   <tr>
     <td rowspan="3">Scalability and Performance</td>
-    <td><a href="https://docs.pingcap.com/zh/tidb/v8.2/tiproxy-load-balance">TiProxy 支持多种负载均衡策略<!--tw@Oreoxmt--></td>
-    <td>在新版本中，TiProxy 能够从多个维度（状态，连接数，健康度、内存、CPU、地理位置）对 TiDB 节点进行评估和排序，根据用户设置的目标策略动态选择合适的 TiDB 节点，发送相应的数据库操作。从而优化 TiDB 节点的整体资源使用率，提升集群性能和吞吐。</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.2/tiproxy-load-balance">TiProxy supports multiple load balancing policies<!--tw@Oreoxmt--></td>
+    <td>In TiDB v8.2.0, TiProxy evaluates and ranks TiDB nodes based on various dimensions, such as status, connection counts, health, memory, CPU, and location. According to the load balancing policy specified in the <code>policy</code> configuration item, TiProxy dynamically selects the optimal TiDB node to execute database operations. This optimizes overall resource usage, improves cluster performance, and increases throughput.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/zh/tidb/v8.2/system-variables#tidb_enable_parallel_hashagg_spill-从-v800-版本开始引入">并行 HashAgg 算法支持数据落盘成为正式功能 (GA)<!--tw@Oreoxmt--></td>
-    <td>HashAgg 是 TiDB 上最常见的聚合算子，用来快速聚合部分相同字段的行数据，并行 HashAgg 能够进一步提升处理速度。从 v8.0.0 开始，当内存资源不足时，并行的 HashAgg 能够将临时排序数据落盘，避免由于过渡内存使用造成潜在 OOM 风险。在提升性能的同时，也保护了节点的稳定性。这个能力在 v8.2.0 成为正式功能，用户可以安全地设置其并发度。</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.2/system-variables#tidb_enable_parallel_hashagg_spill-new-in-v800">The parallel HashAgg algorithm of TiDB supports disk spill (GA)<!--tw@Oreoxmt--></td>
+    <td>HashAgg is a widely used aggregation operator in TiDB for efficiently aggregating rows with the same field values. TiDB v8.0.0 introduces parallel HashAgg as an experimental feature to further enhance processing speed. When memory resources are insufficient, parallel HashAgg spills temporary sorted data to disk, avoiding potential OOM risks caused by excessive memory usage. This improves performance while maintaining node stability. In v8.2.0, this feature becomes generally available (GA), enabling you to safely configure the concurrency of parallel HashAgg.</td>
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/zh/tidb/v8.2/tidb-configuration-file#stats-load-concurrency-new-in-v540">Improve statistics loading efficiency by up to 10 times<!--tw@hfxsd--></td>
