@@ -26,25 +26,25 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
 
 3. For new sign-up users, TiDB Cloud automatically creates a default TiDB Serverless cluster named `Cluster0` for you.
 
-    - To instantly try out TiDB Cloud features with this default cluster, proceed to [Step 2: Try AI-Assisted SQL Editor](#step-2-try-ai-powered-chat2query-beta).
+    - To instantly try out TiDB Cloud features with this default cluster, proceed to [Step 2: Try AI-assisted SQL Editor](#step-2-try-ai-assisted-sql-editor).
     - To create a new TiDB Serverless cluster on your own, follow these steps:
 
         1. Click **Create Cluster**.
         2. On the **Create Cluster** page, **Serverless** is selected by default. Select the target region for your cluster, update the default cluster name if necessary, select your [cluster plan](/tidb-cloud/select-cluster-tier.md#cluster-plans), and then click **Create**. Your TiDB Serverless cluster will be created in approximately 30 seconds.
 
-## Step 2: Try AI-Assisted SQL Editor
+## Step 2: Try AI-assisted SQL Editor
 
-You can use built-in AI-assisted SQL Editor in the TiDB Cloud console to maximize your data value. This allows you to run SQL queries against databases without needing a local SQL client. You can intuitively view the query results in tables or charts and easily check the query logs.
+You can use the built-in AI-assisted SQL Editor in the TiDB Cloud console to maximize your data value. This enables you to run SQL queries against databases without a local SQL client. You can intuitively view the query results in tables or charts and easily check the query logs.
 
 1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click on a cluster name to go to its overview page, and then click **SQL Editor** in the left navigation pane.
 
 2. To try the AI capacity of TiDB Cloud, follow the on-screen instructions to allow PingCAP and OpenAI to use your code snippets for research and service improvement, and then click **Save and Get Started**.
 
-3. In SQL Editor, press `⌘ + I` on macOS (or `Ctrl + I` on Windows/Linux) to instruct the Chat2Query to generate SQL queries. 
+3. In SQL Editor, press **⌘ + I** on macOS (or **Control + I** on Windows or Linux) to instruct [Chat2Query (beta)](tidb-cloud/tidb-cloud-glossary.md#chat2query) to generate SQL queries automatically.
 
-    For example, to create a new table `test.t` with two columns (column `id` and column `name`), you can type `use test;` to specify the database, type `-- create a new table t with id and name` as the instruction, and then press **Enter** to let AI generate a SQL statement accordingly. 
+    For example, to create a new table `test.t` with two columns (column `id` and column `name`), you can type `use test;` to specify the database, type `create a new table t with id and name` as the instruction, and then press **Enter** to let AI generate a SQL statement accordingly. 
     
-    For the generated statement, you can accept it by pressing **Tab** and then further edit it if needed, or reject it by pressing **Esc**.
+    For the generated statement, you can accept it by clicking **Accept** and then further edit it if needed, or reject it by clicking **Discard**.
 
     > **Note:**
     >
@@ -117,6 +117,6 @@ TiDB Cloud offers interactive tutorials with carefully crafted sample datasets t
 ## What's next
 
 - To learn how to connect to your cluster using different methods, see [Connect to a TiDB Serverless cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
-- For more information about how to use SQL Editor and Chat2Query to explore your data, see [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
+- For more information about how to use SQL Editor and Chat2Query to explore your data, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
 - For TiDB SQL usage, see [Explore SQL with TiDB](/basic-sql-operations.md).
 - For production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), see [Create a TiDB Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).

@@ -78,7 +78,7 @@ Here you can find additional resources to connect, manage and develop with TiDB 
 **To explore your data**
 
 - [Quick Start](/develop/dev-guide-build-cluster-in-cloud.md)
-- [Use AI-powered SQL Editor](/tidb-cloud/explore-data-with-chat2query.md)
+- [Use AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md)
 - Connect with client tools such as [VSCode](/develop/dev-guide-gui-vscode-sqltools.md), [DBeaver](/develop/dev-guide-gui-dbeaver.md) or [DataGrip](/develop/dev-guide-gui-datagrip.md)
 
 **To build your application**

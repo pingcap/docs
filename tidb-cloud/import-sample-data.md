@@ -37,7 +37,7 @@ This document describes how to import the sample data into TiDB Cloud via the UI
 
 3. You can choose to import into pre-created tables, or import schema and data from the source. When you import sample data, choose **Import schema and data from S3**.
 
-    - **Import into pre-created tables** allows you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. You can click **SQL Editor** in the left navigation pane to create tables. For more information about how to use SQL Editor, see [Explore Your Data with AI-Assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md). 
+    - **Import into pre-created tables** allows you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. You can click **SQL Editor** in the left navigation pane to create tables. For more information about how to use SQL Editor, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md). 
     - **Import schema and data from S3** allows you to import SQL scripts for creating a table and import corresponding table data stored in S3 into TiDB.
 
 4. Click **Start Import**.

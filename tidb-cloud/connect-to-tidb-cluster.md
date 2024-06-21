@@ -29,15 +29,15 @@ After your TiDB Dedicated cluster is created on TiDB Cloud, you can connect to i
 
     If you want lower latency and more security, set up VPC peering and connect via a private endpoint using a VM instance on the corresponding cloud provider in your cloud account.
 
-- [Connect using built-in SQL Editor](/tidb-cloud/explore-data-with-chat2query.md)
+- [Connect via built-in SQL Editor](/tidb-cloud/explore-data-with-chat2query.md)
 
     > **Note:**
     >
     > To use SQL Editor on [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
 
-    If your cluster is hosted on AWS and the TiDB version of the cluster is v6.5.0 or later, you can use AI-assisted SQL Editor in the [TiDB Cloud console](https://tidbcloud.com/) to maximize your data value.
+    If your cluster is hosted on AWS and the TiDB version of the cluster is v6.5.0 or later, you can use the AI-assisted SQL Editor in the [TiDB Cloud console](https://tidbcloud.com/) to maximize your data value.
 
-    In SQL Editor, you can either write SQL queries manually or simply press  press `⌘ + I` on macOS (or `Ctrl + I` on Windows/Linux) to instruct the Chat2Query (Beta) to generate SQL queries automatically. This allows you to run SQL queries against databases without needing a local SQL client. You can intuitively view the query results in tables or charts and easily check the query logs.
+    In SQL Editor, you can either write SQL queries manually or simply press **⌘ + I** on macOS (or **Control + I** on Windows or Linux) to instruct [Chat2Query (beta)](tidb-cloud/tidb-cloud-glossary.md#chat2query) to generate SQL queries automatically. This enables you to run SQL queries against databases without a local SQL client. You can intuitively view the query results in tables or charts and easily check the query logs.
 
 - [Connect via SQL Shell](/tidb-cloud/connect-via-sql-shell.md): to try TiDB SQL and test out TiDB's compatibility with MySQL quickly, or administer user privileges.
 
