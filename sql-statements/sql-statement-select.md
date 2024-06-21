@@ -68,10 +68,10 @@ WhereClause ::=
     "WHERE" Expression
 
 GroupByClause ::=
-    "GROUP BY" Expression
+    "GROUP" "BY" Expression
 
 OrderBy ::=
-    "ORDER BY" Expression
+    "ORDER" "BY" Expression
 
 WindowClause ::=
     "WINDOW" WindowDefinition ("," WindowDefinition)*
