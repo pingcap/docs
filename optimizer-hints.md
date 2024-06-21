@@ -783,7 +783,7 @@ prepare stmt from 'select  /*+ IGNORE_PLAN_CACHE() */ * from t where t.id = ?';
 
 ### SET_VAR(VAR_NAME=VAR_VALUE)
 
-You can temporarily modify the value of system variables during statement execution by using the `SET_VAR(VAR_NAME=VAR_VALUE)` hint. After the statement is executed, the value of the system variable in the current session is automatically restored to the original value. This hint can be used to modify some system variables related to the optimizer and executor. For a list of system variables that can be modified using this hint, refer to [System variables](/system-variables.md).
+You can temporarily modify the value of system variables during statement execution by using the `SET_VAR(VAR_NAME=VAR_VALUE)` hint. After the statement is executed, the value of the system variable in the current session is automatically restored to the original value. This hint can be used to modify some system variables related to the optimizer and executor. For a list of system variables that can be modified using this hint, refer to [System Variables](/system-variables.md).
 
 > **Warning:**
 >
