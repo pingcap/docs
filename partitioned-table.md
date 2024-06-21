@@ -1707,6 +1707,8 @@ CREATE TABLE t1 (
 ERROR 1503 (HY000): A CLUSTERED INDEX must include all columns in the table's partitioning function
 ```
 
+The reason is that if the clustered index is a global index, the table will no longer be partitioned. This is because the key of the clustered index is also the record key which means it should be partition level, but the global index is on table level, which creates a conflict.
+
 Users can identify a global index by querying the `information_schema`.`tidb_indexes` table, aside from checking the table structure.
 
 ```sql
