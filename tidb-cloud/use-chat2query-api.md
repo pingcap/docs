@@ -13,7 +13,9 @@ Chat2Query API can only be accessed through HTTPS, ensuring that all data transm
 >
 > Chat2Query API is available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters. To use the Chat2Query API on [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
 
-## Step 1. Create a Chat2Query Data App
+## Explore Chat2Query API
+
+### Step 1. Create a Chat2Query Data App
 
 To create a Data App for your project, perform the following steps:
 
@@ -29,7 +31,7 @@ To create a Data App for your project, perform the following steps:
 
    The newly created Chat2Query Data App is displayed in the left pane. Under this Data App, you can find a list of Chat2Query endpoints.
 
-## Step 2. Create an API key
+### Step 2. Create an API key
 
 Before calling an endpoint, you need to create an API key for the Chat2Query Data App, which is used by the endpoint to access data in your TiDB Cloud clusters.
 
@@ -57,7 +59,7 @@ To create an API key, perform the following steps:
 
 6. Click **Done**.
 
-## Step 3. Call Chat2Query endpoints
+### Step 3. Call Chat2Query endpoints
 
 > **Note:**
 >
@@ -73,7 +75,7 @@ In each Chat2Query Data App, you can find the following endpoints:
 >
 > Compared with `/v1/chat2data`, `/v3/chat2data` requires you to analyze your database first by calling `/v3/dataSummaries`, as the results returned by `/v3/chat2data` are generally more accurate.
 
-### Get the code example of an endpoint
+#### Get the code example of an endpoint
 
 TiDB Cloud provides code examples to help you quickly call Chat2Query endpoints. To get the code example of a Chat2Query endpoint, perform the following steps:
 
@@ -91,7 +93,7 @@ TiDB Cloud provides code examples to help you quickly call Chat2Query endpoints.
 
 4. To call the endpoint, you can paste the example in your application, replace the parameters in the example with your own (such as replacing the `${PUBLIC_KEY}` and `${PRIVATE_KEY}` placeholders with your API key), and then run it.
 
-### Call Chat2Query v2 endpoints
+#### Call Chat2Query v3 endpoints
 
 TiDB Cloud Data Service provides the following Chat2Query v2 endpoints:
 
@@ -103,7 +105,7 @@ TiDB Cloud Data Service provides the following Chat2Query v2 endpoints:
 
 In the subsequent sections, you will learn how to call these endpoints.
 
-#### 1. Generate a data summary by calling `/v3/dataSummaries`
+##### 1. Generate a data summary by calling `/v3/dataSummaries`
 
 Before calling `/v3/chat2data`, let AI analyze the database and generate a data summary first by calling `/v3/dataSummaries`, so `/v3/chat2data` can get a better performance in SQL generation later.
 
@@ -140,7 +142,7 @@ An example response is as follows:
 }
 ```
 
-#### 2. Check the analysis status by calling `/v2/jobs/{job_id}`
+##### 2. Check the analysis status by calling `/v2/jobs/{job_id}`
 
 The `/v3/dataSummaries` API is asynchronous. For a database with a large dataset, it might take a few minutes to complete the database analysis and return the full data summary.
 
@@ -206,7 +208,7 @@ In the response, `DataSummaryObject` represents AI exploration information of th
 }
 ```
 
-#### 3. Generate and execute SQL statements by calling `/v3/chat2data`
+##### 3. Generate and execute SQL statements by calling `/v3/chat2data`
 
 When the data summary of a database is ready, you can call `/v3/chat2data` to generate and execute SQL statements by providing the cluster ID, database name, and your question.
 
@@ -307,6 +309,93 @@ An example response is as follows:
   }
 }
 ```
+
+### Multiround Chat2Query by using session
+
+Since v3 API, Chat2Query supports multiround chat by using session. You can use the `session_id` returned by the `/v3/chat2data` API to continue the conversation in the next round.
+
+#### Step 1. Start a data summary
+
+First, you need to start a data summary by calling `/v3/dataSummaries` as described in the previous section.
+
+#### Step 2. Start a session
+
+To start a session, you can call the `/v3/sessions` API to create a new session. The following is a code example:
+
+```bash
+curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/sessions'\
+ --header 'content-type: application/json'\
+ --data-raw '{
+    "cluster_id": "10140100115280519574",
+    "database": "sp500insight",
+    "name": "<Your session name>"
+}'
+```
+
+In the preceding code, the request body is a JSON object with the following properties:
+
+- `cluster_id`: _string_. A unique identifier of the TiDB cluster.
+- `database`: _string_. The name of the database.
+- `name`: _string_. The name of the session.
+
+An example response is as follows:
+
+```js
+{
+  "code": 200,
+  "msg": "",
+  "result": {
+    "messages": [],
+    "meta": {
+      "created_at": 1718948875, // A UNIX timestamp indicating when the session is created
+      "creator": "<Your email>", // The creator of the session
+      "name": "<Your session name>", // The name of the session
+      "org_id": "1", // The organization ID
+      "updated_at": 1718948875 // A UNIX timestamp indicating when the session is updated
+    },
+    "session_id": 305685 // The session ID
+  }
+}
+```
+
+#### Step 3. Using chat2query with session
+
+After starting a session, you can use the `session_id` to continue the conversation in the next round. The following is a code example:
+
+```bash
+curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://eu-central-1.data.tidbcloud.com/api/v1beta/app/chat2query-YqAvnlRj/endpoint/v3/sessions/305685/chat2data'\
+ --header 'content-type: application/json'\
+ --data-raw '{
+    "question": "<Your question to generate data>",
+    "feedback_answer_id": "",
+    "feedback_task_id": "",
+    "sql_generate_mode": "direct"
+}'
+```
+
+In the preceding code, the request body is a JSON object with the following properties:
+
+- `question`: _string_. A natural language describing the query you want.
+- `feedback_answer_id`: _string_. The feedback answer ID. This field is optional and only used for feedback.
+- `feedback_task_id`: _string_. The feedback task ID. This field is optional and only used for feedback.
+- `sql_generate_mode`: _string_. The mode to generate SQL statements. The value can be `direct` or `auto_breakdown`. If set to `direct`, the API will generate SQL statements directly based on the provided question. If set to `auto_breakdown`, the API will break down the question into multiple tasks and generate SQL statements for each task.
+
+An example response is as follows:
+
+```js
+{
+  "code": 200,
+  "msg": "",
+  "result": {
+    "job_id": "d96b6fd23c5f445787eb5fd067c14c0b",
+    "session_id": 305685
+  }
+}
+```
+
+The response is similar to the response of the `/v3/chat2data` API. You can check the job status by calling the `/v2/jobs/{job_id}` endpoint.
+
+## Improve the accuracy of Chat2Query by providing knowledge base
 
 ## Learn more
 
