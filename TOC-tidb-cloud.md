@@ -243,10 +243,10 @@
 - Vector Search (Beta)
   - [Overview](/tidb-cloud/vector-search-overview.md)
   - Get Started
-    - [Get Started with SQL](/tidb-cloud/vector-search-get-started-via-sql)
-    - [Get Started with Python Client](/tidb-cloud/vector-search-get-started-via-python-client)
-  - [Vector Column](/tidb-cloud/vector-search-vector-column)
-  - [Vector Index](/tidb-cloud/vector-search-vector-index)
+    - [Get Started with SQL](/tidb-cloud/vector-search-get-started-via-sql.md)
+    - [Get Started with Python Client](/tidb-cloud/vector-search-get-started-via-python-client.md)
+  - [Vector Column](/tidb-cloud/vector-search-vector-column.md)
+  - [Vector Index](/tidb-cloud/vector-search-vector-index.md)
   - Integrations
     - AI Frameworks
       - [LlamaIndex](/tidb-cloud/vector-search-integrate-with-llamaindex.md)

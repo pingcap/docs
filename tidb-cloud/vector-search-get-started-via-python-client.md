@@ -211,4 +211,4 @@ As the results show, we found the most relevant documents through vector search,
 ## See also
 
 - [Vector Column](/tidb-cloud/vector-search-vector-column.md)
-- [Vector HNSW Index](/tidb-cloud/vector-search-vector-hnsw-index.md)
+- [Vector Index](/tidb-cloud/vector-search-vector-index.md)
