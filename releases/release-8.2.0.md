@@ -107,7 +107,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 
 ### SQL
 
-* TiDB 支持 JSON Schema Validation 函数 [#52780](https://github.com/pingcap/tidb/pull/52780) @[dveeden](https://github.com/dveeden) **tw@hfxsd** <!--1840-->
+* TiDB supports the JSON schema validation function [#52779](https://github.com/pingcap/tidb/issues/52779) @[dveeden](https://github.com/dveeden) **tw@hfxsd** <!--1840-->
 
     Before v8.2.0, you need to rely on external tools or customized validation logic for JSON data validation, which increases the complexity of development and maintenance, and reduces development efficiency. Starting from v8.2.0, the `JSON_SCHEMA_VALID()` function is introduced, which allows you to verify the validity of JSON data directly in TiDB, improving the integrity and consistency of the data, and increasing the development efficiency.
 
