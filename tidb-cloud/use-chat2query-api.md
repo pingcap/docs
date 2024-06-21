@@ -95,7 +95,7 @@ TiDB Cloud provides code examples to help you quickly call Chat2Query endpoints.
 
 #### Call Chat2Query v3 endpoints
 
-TiDB Cloud Data Service provides the following Chat2Query v2 endpoints:
+TiDB Cloud Data Service provides the following Chat2Query endpoints:
 
 |  Method | Endpoint| Description |
 |  ----  | ----  |----  |
@@ -131,7 +131,7 @@ In the preceding example, the request body is a JSON object with the following p
 
 An example response is as follows:
 
-```json
+```js
 {
   "code": 200,
   "msg": "",
@@ -155,7 +155,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET 'https://<region
 
 An example response is as follows:
 
-```json
+```js
 {
   "code": 200,
   "msg": "",
@@ -172,7 +172,7 @@ If `"status"` is `"done"`, the full data summary is ready and you can now genera
 
 In the response, `DataSummaryObject` represents AI exploration information of the given database. The structure of `DataSummaryObject` is as follows:
 
-```json
+```js
 {
     "cluster_id": "10140100115280519574", // The cluster ID
     "data_summary_id": 304823, // The data summary ID
@@ -234,7 +234,7 @@ In the preceding code, the request body is a JSON object with the following prop
 
 An example response is as follows:
 
-```json
+```js
 {
   "code": 200,
   "msg": "",
@@ -249,7 +249,7 @@ An example response is as follows:
 
 If you receive a response with the status code `400` as follows, it means that you need to wait a moment for the data summary to be ready.
 
-```json
+```js
 {
     "code": 400,
     "msg": "Data summary is not ready, please wait for a while and retry",
@@ -266,7 +266,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET 'https://<region
 
 An example response is as follows:
 
-```json
+```js
 {
   "code": 200,
   "msg": "",
