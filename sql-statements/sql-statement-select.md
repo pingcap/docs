@@ -38,12 +38,13 @@ TableRef ::=
 |   JoinTable
 
 TableFactor ::=
-    TableName ( "PARTITION" "(" PartitionName ")" )? ("AS" TableAlias)? AsOfClause? TableSample?
+    TableName ( "PARTITION" "(" Identifier ("," Identifier)* ")" )? ("AS" TableAlias)? AsOfClause? TableSample?
 
 JoinTable ::=
-    ( TableRef ( ("INNER" | "CROSS")? "JOIN" | "STRAIGHT_JOIN" ) TableFactor JoinClause?
+    ( TableRef ("INNER" | "CROSS")? "JOIN" ) TableRef JoinClause?
+    ( TableRef "STRAIGHT_JOIN" TableRef "ON" Expression
     | TableRef ( ("LEFT" | "RIGHT") "OUTER"? "JOIN" ) TableRef JoinClause
-    | TableRef "NATURAL" "INNER"? ("LEFT" | "RIGHT") "OUTER"? "JOIN" ) TableFactor
+    | TableRef "NATURAL" ("LEFT" | "RIGHT") "OUTER"? "JOIN" )
 
 JoinClause ::=
     ("ON" Expression
@@ -64,7 +65,7 @@ TableList ::=
     TableName ( ',' TableName )*
 
 WhereClause ::=
-    "WHERE" Expression ( ("AND" | "OR") Expression)*
+    "WHERE" Expression
 
 GroupByClause ::=
     "GROUP BY" Expression
