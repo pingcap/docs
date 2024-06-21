@@ -10,6 +10,7 @@
   - [Roadmap](/tidb-cloud/tidb-cloud-roadmap.md)
 - Get Started
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
+  - [Try Out TiDB + AI](/tidb-cloud/vector-search-quick-start.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
   - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
@@ -210,33 +211,33 @@
     - [TiKV Follower Read](/follower-read.md)
     - [Coprocessor Cache](/coprocessor-cache.md)
     - Garbage Collection (GC)
-       - [Overview](/garbage-collection-overview.md)
-       - [Configuration](/garbage-collection-configuration.md)
+      - [Overview](/garbage-collection-overview.md)
+      - [Configuration](/garbage-collection-configuration.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
   - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
 - Migrate or Import Data
   - [Overview](/tidb-cloud/tidb-cloud-migration-overview.md)
   - Migrate Data into TiDB Cloud
-      - [Migrate Existing and Incremental Data Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
-      - [Migrate Incremental Data Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)
-      - [Migrate and Merge MySQL Shards of Large Datasets](/tidb-cloud/migrate-sql-shards.md)
-      - [Migrate from On-Premises TiDB to TiDB Cloud](/tidb-cloud/migrate-from-op-tidb.md)
-      - [Migrate from MySQL-Compatible Databases Using AWS DMS](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
-      - [Migrate from Amazon RDS for Oracle Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
+    - [Migrate Existing and Incremental Data Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
+    - [Migrate Incremental Data Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)
+    - [Migrate and Merge MySQL Shards of Large Datasets](/tidb-cloud/migrate-sql-shards.md)
+    - [Migrate from On-Premises TiDB to TiDB Cloud](/tidb-cloud/migrate-from-op-tidb.md)
+    - [Migrate from MySQL-Compatible Databases Using AWS DMS](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
+    - [Migrate from Amazon RDS for Oracle Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
   - Import Data into TiDB Cloud
-      - [Import Local Files](/tidb-cloud/tidb-cloud-import-local-files.md)
-      - [Import Sample Data (SQL File)](/tidb-cloud/import-sample-data.md)
-      - [Import CSV Files from Amazon S3 or GCS](/tidb-cloud/import-csv-files.md)
-      - [Import Apache Parquet Files from Amazon S3 or GCS](/tidb-cloud/import-parquet-files.md)
-      - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli.md)
+    - [Import Local Files](/tidb-cloud/tidb-cloud-import-local-files.md)
+    - [Import Sample Data (SQL File)](/tidb-cloud/import-sample-data.md)
+    - [Import CSV Files from Amazon S3 or GCS](/tidb-cloud/import-csv-files.md)
+    - [Import Apache Parquet Files from Amazon S3 or GCS](/tidb-cloud/import-parquet-files.md)
+    - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli.md)
   - Reference
-      - [Configure Amazon S3 Access and GCS Access](/tidb-cloud/config-s3-and-gcs-access.md)
-      - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
-      - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
-      - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
-      - [Precheck Errors, Migration Errors, and Alerts for Data Migration](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md)
-      - [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
+    - [Configure Amazon S3 Access and GCS Access](/tidb-cloud/config-s3-and-gcs-access.md)
+    - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
+    - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
+    - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
+    - [Precheck Errors, Migration Errors, and Alerts for Data Migration](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md)
+    - [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Explore Data
   - [Chat2Query (Beta)](/tidb-cloud/explore-data-with-chat2query.md)
 - Data Service (Beta)
@@ -252,6 +253,28 @@
   - [Use OpenAPI Specification with Next.js](/tidb-cloud/data-service-oas-with-nextjs.md)
   - [Data App Configuration Files](/tidb-cloud/data-service-app-config-files.md)
   - [Response and Status Code](/tidb-cloud/data-service-response-and-status-code.md)
+- Vector Search
+  - [Overview](/tidb-cloud/vector-search-overview.md)
+  - [Quick Start](/tidb-cloud/vector-search-quick-start.md)
+  - Tutorials
+    - [Build Semantic Search for Texts](/tidb-cloud/vector-search-tutorial-semantic-search.md)
+    - [Build AI Chatbot for Knowledge Base](/tidb-cloud/vector-search-tutorial-chatbot.md)
+  - AI Integrations
+    - [LangChain](/tidb-cloud/vector-search-integration-langchain.md)
+    - [LlamaIndex](/tidb-cloud/vector-search-integration-llamaindex.md)
+    - [Dify](/tidb-cloud/vector-search-integration-dify.md)
+  - Programming Languages Integrations
+    - [Python](/tidb-cloud/vector-search-integration-python.md)
+    - [Go](/tidb-cloud/vector-search-integration-golang.md)
+    - [Node.js](/tidb-cloud/vector-search-integration-nodejs.md)
+    - [Java](/tidb-cloud/vector-search-integration-java.md)
+  - Reference
+    - [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
+    - [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md)
+    - [Vector Index](/tidb-cloud/vector-search-index.md)
+  - [Limitations](/tidb-cloud/vector-search-limitations.md)
+  - [FAQs](/tidb-cloud/vector-search-faqs.md)
+  - [Changelogs](/tidb-cloud/vector-search-changelogs.md)
 - Stream Data
   - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
   - [To MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
@@ -281,7 +304,7 @@
       - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
       - [TLS Connections to TiDB Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
   - Data Access Control
-      - [Encryption at Rest Using Customer-Managed Encryption Keys](/tidb-cloud/tidb-cloud-encrypt-cmek.md)
+    - [Encryption at Rest Using Customer-Managed Encryption Keys](/tidb-cloud/tidb-cloud-encrypt-cmek.md)
   - Database Access Control
     - [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md)
   - Audit Management
@@ -525,6 +548,7 @@
       - [Date and Time Types](/data-type-date-and-time.md)
       - [String Types](/data-type-string.md)
       - [JSON Type](/data-type-json.md)
+      - [Vector Types](/tidb-cloud/vector-search-data-types.md)
     - Functions and Operators
       - [Overview](/functions-and-operators/functions-and-operators-overview.md)
       - [Type Conversion in Expression Evaluation](/functions-and-operators/type-conversion-in-expression-evaluation.md)
@@ -539,6 +563,7 @@
       - [Locking Functions](/functions-and-operators/locking-functions.md)
       - [Information Functions](/functions-and-operators/information-functions.md)
       - [JSON Functions](/functions-and-operators/json-functions.md)
+      - [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md)
       - [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md)
       - [GROUP BY Modifiers](/functions-and-operators/group-by-modifier.md)
       - [Window Functions](/functions-and-operators/window-functions.md)
@@ -633,8 +658,8 @@
   - [Server Status Variables](/status-variables.md)
   - Storage Engines
     - TiKV
-        - [TiKV Overview](/tikv-overview.md)
-        - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
+      - [TiKV Overview](/tikv-overview.md)
+      - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
     - TiFlash
       - [TiFlash Overview](/tiflash/tiflash-overview.md)
       - [Spill to Disk](/tiflash/tiflash-spill-disk.md)
