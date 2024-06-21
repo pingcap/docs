@@ -1666,6 +1666,8 @@ ERROR 1503 (HY000): A UNIQUE INDEX must include all columns in the table's parti
 
 If you need to create unique indexes that **don't include all the columns used in the partition expressions**, you can achieve this by enabling the [tidb_enable_global_index](/system-variables.md#tidb_enable_global_index-new-in-v760) variable.
 
+Previously an index on partitioned tables are created for each partition, which is the reason for the limitation that all unique keys needs to include all partitioning columns. Since the uniqueness can only be enforced within each partition. A global index will be created on table level, so it can enforce uniqueness regardless of partitioning. Note that this has implications on partitioning management, DROP, TRUNCATE, REORGANIZE PARTITION will need to also manage the table level global index.
+
 After enabling this variable, any unique index created by the user that does not meet the above constraint will automatically be converted into a global index.
 
 {{< copyable "sql" >}}
