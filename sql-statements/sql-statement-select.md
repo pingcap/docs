@@ -45,7 +45,6 @@ JoinTable ::=
     | TableRef ( ("LEFT" | "RIGHT") "OUTER"? "JOIN" ) TableRef JoinClause
     | TableRef "NATURAL" "INNER"? ("LEFT" | "RIGHT") "OUTER"? "JOIN" ) TableFactor
 
-
 JoinClause ::=
     ("ON" Expression
     | "USING" "(" ColumnNameList ")" )
@@ -63,6 +62,15 @@ SelectLockOpt ::=
 
 TableList ::=
     TableName ( ',' TableName )*
+
+WhereClause ::=
+    "WHERE" Expression ( ("AND" | "OR") Expression)*
+
+GroupByClause ::=
+    "GROUP BY" Expression
+
+OrderBy ::=
+    "ORDER BY" Expression
 
 WindowClause ::=
     "WINDOW" WindowDefinition ("," WindowDefinition)*
