@@ -788,7 +788,7 @@ You can temporarily modify the value of system variables during statement execut
 > **Warning:**
 >
 > - It is strongly recommended not to modify variables that are not explicitly supported, as this might cause unpredictable behavior.
-> - Do not write `SET_VAR` in subqueries. Otherwise it might not work. For more information, see [`SET_VAR` does not work in subqueries](#set_var-does-not-work-in-subqueries).
+> - Do not write `SET_VAR` in subqueries. Otherwise it might not take effect. For more information, see [`SET_VAR` does not take effect when written in subqueries](#set_var-does-not-take-effect-when-written-in-subqueries).
 
 The following is an example:
 
@@ -1105,9 +1105,9 @@ EXPLAIN SELECT /*+ NO_MERGE_JOIN(t1) */ * FROM t1, t2 WHERE t1.a=t2.a;
 ERROR 1815 (HY000): Internal : Can't find a proper physical plan for this query
 ```
 
-### `SET_VAR` does not work in subqueries
+### `SET_VAR` does not take effect when written in subqueries
 
-`SET_VAR` is used to set a system variable for the current statement and should not be written in a subquery. If you write it in a subquery, `SET_VAR` might not take effect due to the special handling of subqueries.
+`SET_VAR` is used to modify the value of system variables for the current statement. Do not write it in subqueries. If you write it in a subquery, `SET_VAR` might not take effect due to the special handling of subqueries.
 
 In the following example, `SET_VAR` is written in the subquery, so it does not take effect.
 
@@ -1121,7 +1121,7 @@ mysql> SELECT @@MAX_EXECUTION_TIME, a FROM (SELECT /*+ SET_VAR(MAX_EXECUTION_TIM
 1 row in set (0.00 sec)
 ```
 
-In the following example, `SET_VAR` is not written in a subquery, so it can take effect.
+In the following example, `SET_VAR` is not written in a subquery, so it takes effect.
 
 ```sql
 mysql> SELECT /*+ SET_VAR(MAX_EXECUTION_TIME=123) */ @@MAX_EXECUTION_TIME, a FROM (SELECT 1 as a) t;
