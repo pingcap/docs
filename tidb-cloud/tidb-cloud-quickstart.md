@@ -40,7 +40,7 @@ You can use the built-in AI-assisted SQL Editor in the TiDB Cloud console to max
 
 2. To try the AI capacity of TiDB Cloud, follow the on-screen instructions to allow PingCAP and OpenAI to use your code snippets for research and service improvement, and then click **Save and Get Started**.
 
-3. In SQL Editor, press **⌘ + I** on macOS (or **Control + I** on Windows or Linux) to instruct [Chat2Query (beta)](/tidb-cloud/tidb-cloud-glossary.md#chat2query) to generate SQL queries automatically.
+3. In SQL Editor, press <kbd>⌘</kbd> + <kbd>I</kbd> on macOS (or <kbd>Control</kbd> + <kbd>I</kbd> on Windows or Linux) to instruct [Chat2Query (beta)](/tidb-cloud/tidb-cloud-glossary.md#chat2query) to generate SQL queries automatically.
 
     For example, to create a new table `test.t` with two columns (column `id` and column `name`), you can type `use test;` to specify the database, type `create a new table t with id and name` as the instruction, and then press **Enter** to let AI generate a SQL statement accordingly. 
     
