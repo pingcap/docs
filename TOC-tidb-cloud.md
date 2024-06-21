@@ -245,23 +245,29 @@
   - Get Started
     - [Get Started with SQL](/tidb-cloud/vector-search-get-started-via-sql)
     - [Get Started with Python Client](/tidb-cloud/vector-search-get-started-via-python-client)
-  - [Vector Column](/tidb-cloud/vector-search-vector-column) 
+  - [Vector Column](/tidb-cloud/vector-search-vector-column)
   - [Vector Index](/tidb-cloud/vector-search-vector-index)
   - Integrations
     - AI Frameworks
       - [LlamaIndex](/tidb-cloud/vector-search-integrate-with-llamaindex.md)
       - [Langchain](/tidb-cloud/vector-search-integrate-with-langchain.md)
+      - [Dify](/tidb-cloud/vector-search-integate-with-dify.md)
     - Embedding Services
       - [OpenAI](/tidb-cloud/vector-search-integrate-with-openai-embedding.md)
       - [JinaAI](/tidb-cloud/vector-search-integrate-with-jinaai-embedding.md)
-    - ORMs
-      - [Django](/tidb-cloud/vector-search-integrate-with-django-orm.md)
-      - [SQLAlchemy](/tidb-cloud/vector-search-integrate-with-sqlalchemy-orm.md)
-      - [Peewee](/tidb-cloud/vector-search-integrate-with-peewee-orm.md)
+    - Programming Languages
+      - [Python](/tidb-cloud/vector-search-integrate-with-python.md)
   - Examples
     - [Build a generative Q&A chatbot](/tidb-cloud/vector-search-build-generative-qa-chatbot.md)
     - [Similar Image Search with OpenAI CLIP](/tidb-cloud/vector-search-similar-image-search-with-openai-clip.md)
     - [Develop Knowledge-Graph-Based RAG](/tidb-cloud/vector-search-develop-images.md)
+  - Reference
+    - [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
+    - [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md)
+    - [Vector Index](/tidb-cloud/vector-search-index.md)
+  - [Limitations](/tidb-cloud/vector-search-limitations.md)
+  - [FAQs](/tidb-cloud/vector-search-faqs.md)
+  - [Changelogs](/tidb-cloud/vector-search-changelogs.md)
 - Data Service (Beta)
   - [Overview](/tidb-cloud/data-service-overview.md)
   - [Get Started](/tidb-cloud/data-service-get-started.md)
@@ -275,28 +281,6 @@
   - [Use OpenAPI Specification with Next.js](/tidb-cloud/data-service-oas-with-nextjs.md)
   - [Data App Configuration Files](/tidb-cloud/data-service-app-config-files.md)
   - [Response and Status Code](/tidb-cloud/data-service-response-and-status-code.md)
-- Vector Search
-  - [Overview](/tidb-cloud/vector-search-overview.md)
-  - [Quick Start](/tidb-cloud/vector-search-quick-start.md)
-  - Tutorials
-    - [Build Semantic Search for Texts](/tidb-cloud/vector-search-tutorial-semantic-search.md)
-    - [Build AI Chatbot for Knowledge Base](/tidb-cloud/vector-search-tutorial-chatbot.md)
-  - AI Integrations
-    - [LangChain](/tidb-cloud/vector-search-integration-langchain.md)
-    - [LlamaIndex](/tidb-cloud/vector-search-integration-llamaindex.md)
-    - [Dify](/tidb-cloud/vector-search-integration-dify.md)
-  - Programming Languages Integrations
-    - [Python](/tidb-cloud/vector-search-integration-python.md)
-    - [Go](/tidb-cloud/vector-search-integration-golang.md)
-    - [Node.js](/tidb-cloud/vector-search-integration-nodejs.md)
-    - [Java](/tidb-cloud/vector-search-integration-java.md)
-  - Reference
-    - [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
-    - [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md)
-    - [Vector Index](/tidb-cloud/vector-search-index.md)
-  - [Limitations](/tidb-cloud/vector-search-limitations.md)
-  - [FAQs](/tidb-cloud/vector-search-faqs.md)
-  - [Changelogs](/tidb-cloud/vector-search-changelogs.md)
 - Stream Data
   - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
   - [To MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
