@@ -1668,7 +1668,7 @@ If you need to create unique indexes that **don't include all the columns used i
 
 Previously an index on partitioned tables are created for each partition, which is the reason for the limitation that all unique keys needs to include all partitioning columns. Since the uniqueness can only be enforced within each partition. A global index will be created on table level, so it can enforce uniqueness regardless of partitioning. Note that this has implications on partitioning management, DROP, TRUNCATE, REORGANIZE PARTITION will need to also manage the table level global index.
 
-After enabling this variable, any unique index created by the user that does not meet the above constraint will automatically be converted into a global index.
+After enabling this variable, any unique index created by the user that does not meet the above constraint will automatically be a global index.
 
 {{< copyable "sql" >}}
 
