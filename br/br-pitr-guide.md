@@ -143,3 +143,4 @@ Testing scenario 2 (on TiDB Self-Hosted):
 * [TiDB Backup and Restore Use Cases](/br/backup-and-restore-use-cases.md)
 * [br Command-line Manual](/br/use-br-command-line-tool.md)
 * [Log Backup and PITR Architecture](/br/br-log-architecture.md)
+* [Monitoring and Alert for Backup and Restore](/br/br-monitoring-and-alert.md)
