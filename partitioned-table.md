@@ -1683,12 +1683,11 @@ CREATE TABLE t1 (
     UNIQUE KEY uidx12(col1, col2),
     UNIQUE KEY uidx3(col3)
 )
-
 PARTITION BY HASH(col3)
 PARTITIONS 4;
 ```
 
-In the example above, the unique index `uidx12` will be implicitly converted to a global index, but `uidx3` remains a regular unique index.
+In the example above, the unique index `uidx12` will be implicitly a global index, but `uidx3` remains a regular unique index.
 
 It should be noted that a **clustered index** cannot be a global index:
 
