@@ -37,8 +37,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
   </tr>
   <tr>
     <td rowspan="1">DB Operations and Observability</td>
-    <td><a href="">切换资源组受权限控制<!--tw@lilin90--></td>
-    <td>随着资源管控功能被广泛应用，对资源组切换操作的权限控制能够避免数据库用户对资源的滥用，强化管理员对整体资源使用的保护，从而提升集群的稳定性。</td>
+    <td><a href="">Introduce privilege control of switching resource groups<!--tw@lilin90--></td>
+    <td>As resource control is widely used, the privilege control of switching resource groups can prevent database users from abusing resources, strengthen administrators' protection of overall resource usage, and improve cluster stability.</td>
   </tr>
 </tbody>
 </table>
@@ -119,15 +119,15 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 
     Starting from v8.2.0, PD microservices can also be deployed using TiUP. You can deploy the `tso` microservice and the `scheduling` microservice separately in a cluster to enhance PD performance scalability and address PD performance bottlenecks in large-scale clusters. It is recommended to use this mode when PD becomes a significant performance bottleneck that cannot be resolved by scaling up.
 
-    For more information,see [user documentation](/pd-microservices.md).
+    For more information, see [user documentation](/pd-microservices.md).
 
-* 为切换资源组的操作增加权限控制 [#issue号](链接) @[glorv](https://github.com/glorv) **tw@lilin90** <!--1740-->
+* Add privilege control of switching resource groups [#53440](https://github.com/pingcap/tidb/issues/53440) @[glorv](https://github.com/glorv) **tw@lilin90** <!--1740-->
 
-    TiDB 允许用户利用命令 [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md) 或 Hint [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name) 切换到其他资源组，这可能会造成部分数据库用户对资源组的滥用。TiDB v8.2.0 增加了对资源组切换行为的管控，只有被授予动态权限 `RESOURCE_GROUP_ADMIN` 或者 `RESOURCE_GROUP_USER` 的数据库用户，才能切换到其他资源组，加强对系统资源的保护。
+    TiDB lets users switch to other resource groups using the [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md) command or the [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name) hint, which might lead to resource group abuse by some database users. TiDB v8.2.0 introduces privilege control of switching resource groups. Only database users granted the `RESOURCE_GROUP_ADMIN` or `RESOURCE_GROUP_USER` dynamic privilege can switch to other resource groups, enhancing the protection of system resources.
 
-    为了维持兼容性，从旧版本升级的集群维持原行为不变。通过设置新增变量 [`tidb_resource_control_strict_mode`](/system-variables.md) 为 `ON` ，开启上述的增强权限控制。
+    To maintain compatibility, the original behavior is retained when upgrading from earlier versions to v8.2.0 or later versions. To enable the enhanced privilege control, set the new variable [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) to `ON`.
 
-    更多信息，请参考[用户文档](/tidb-resource-control.md#绑定资源组)。
+    For more information, see [user documentation](/tidb-resource-control.md#bind-resource-groups).
 
 ### Observability
 
@@ -147,9 +147,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 
 ### Data migration
 
-* TiCDC Syncpoints align by sync point interval [#11212](https://github.com/pingcap/tiflow/issues/11212) @[hongyunyan](https://github.com/hongyunyan) **tw@lilin90** <!--1869-->
+* Align TiCDC Syncpoints  sync point interval [#11212](https://github.com/pingcap/tiflow/issues/11212) @[hongyunyan](https://github.com/hongyunyan) **tw@lilin90** <!--1869-->
 
-    Before v8.2.0, aligning TiCDC syncpoints across multiple changefeeds was challenging as the `startTs` of the changefeed had to be carefully selected when the changefeed was created so it would align with the syncpoints of other changefeeds. Starting from v8.2.0, syncpoints for a changefeed are created as a multiple of the changefeed's `sync-point-interval` configuration. This change allows you to align syncpoints across multiple changefeeds (when configured with the same interval), simplifying and improving the ability to align multiple downstream clusters.
+    Before v8.2.0, aligning TiCDC Syncpoints across multiple changefeeds was challenging. The `startTs` of the changefeed had to be carefully selected when the changefeed was created, so it would align with the Syncpoints of other changefeeds. Starting from v8.2.0, Syncpoints for a changefeed are created as a multiple of the changefeed's `sync-point-interval` configuration. This change lets you align Syncpoints across multiple changefeeds that have the same interval configured, simplifying and improving the ability to align multiple downstream clusters.
 
     For more information, see [documentation](/ticdc/ticdc-upstream-downstream-check.md#notes).
 
