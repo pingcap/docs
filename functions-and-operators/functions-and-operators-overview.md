@@ -10,4 +10,7 @@ The usage of the functions and operators in TiDB is similar to MySQL. See [Funct
 
 In SQL statements, expressions can be used on the `ORDER BY` and `HAVING` clauses of the [`SELECT`](/sql-statements/sql-statement-select.md) statement, the `WHERE` clause of [`SELECT`](/sql-statements/sql-statement-select.md)/[`DELETE`](/sql-statements/sql-statement-delete.md)/[`UPDATE`](/sql-statements/sql-statement-update.md) statements, and [`SET`](/sql-statements/sql-statement-set-variable.md) statements.
 
-You can write expressions using literals, column names, `NULL`, built-in functions, operators and so on. For expressions that TiDB supports pushing down to TiKV, see [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md). And see [Push-down Calculations Supported by TiFlash](/tiflash/tiflash-supported-pushdown-calculations.md) to see which functions can be pushed down to [TiFlash](/tiflash/tiflash-overview.md).
+You can write expressions using literals, column names, `NULL`, built-in functions, operators and so on. 
+
+- For expressions that TiDB supports pushing down to TiKV, see [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md). 
+- For expressions that TiDB supports pushing down to [TiFlash](/tiflash/tiflash-overview.md), see [Push-down expressions](/tiflash/tiflash-supported-pushdown-calculations.md#push-down-expressions).
