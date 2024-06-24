@@ -9,7 +9,7 @@ This tutorial will walk you through how to integrate the TiDB vector search feat
 
 > **Note**
 >
-> TiDB Vector Search is only available for TiDB Serverless at this moment.
+> The vector search feature is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
 
 > **Tips**
 >

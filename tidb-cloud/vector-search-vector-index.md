@@ -8,7 +8,7 @@ In TiDB, you can create and utilize Vector Search Indexes for such approximate n
 
 > **Note**
 >
-> The Vector Search feature is only available for TiDB Serverless at this moment.
+> The vector search feature is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
 
 ## HNSW Index
 

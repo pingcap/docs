@@ -1,15 +1,21 @@
 ---
-title: Get Started with Vector Search via Python Client
-summary: Learn how to quickly get started with the TiDB Vector Search feature via Python Client and perform semantic searches.
+title: Get Started with Vector Search Using the Python Client
+summary: Learn how to quickly get started with the TiDB vector search feature in TiDB Cloud using a Python client and perform semantic searches.
 ---
 
-# Get Started with Vector Search via Python Client
+# Get Started with Vector Search Using the Python Client
 
-This tutorial will walk you through how to connect to a TiDB cluster via the Python Client, store the vectors from embedding, and perform semantic searches using the vector search feature.
+This tutorial demonstrates how to get started with the [vector search](/tidb-cloud/vector-search-overview.md) feature in TiDB Cloud using a Python client. You will learn how to use the Python client [`tidb-vector`](https://github.com/pingcap/tidb-vector-python) to:
+
+- Set up your environment.
+- Connect to your TiDB cluster.
+- Create a vector table.
+- Store vector embeddings.
+- Perform vector search queries.
 
 > **Note**
 >
-> The Vector Search feature is only available for TiDB Serverless at this moment.
+> The vector search feature is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
 
 ## Prerequisites
 
@@ -17,25 +23,17 @@ To complete this tutorial, you need:
 
 - [Python 3.8 or higher](https://www.python.org/downloads/) installed.
 - [Git](https://git-scm.com/downloads) installed.
-- A TiDB cluster running.
+- A TiDB Serverless cluster. Follow [creating a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
 
-<CustomContent platform="tidb-cloud">
+## Get started
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+This section demonstrates how to get started with the vector search feature using the Python client [`tidb-vector`](https://github.com/pingcap/tidb-vector-python).
 
-- Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-
-</CustomContent>
-
-## Get Started
-
-You can quickly learn about the Vector Search feature by following the steps below to use the TiDB Vector Python Client.
-
-If you want to run the quick start demo directly, you can check sample code in the [pingcap/tidb-vector-python](https://github.com/pingcap/tidb-vector-python/blob/main/examples/python-client-quickstart ) repository.
+To run the demo directly, check out the sample code in the [pingcap/tidb-vector-python](https://github.com/pingcap/tidb-vector-python/blob/main/examples/python-client-quickstart) repository.
 
 ### Step 1. Create a new Python project
 
-Create a new Python project in your preferred directory and new a Python file named `example.py`.
+In your preferred directory, create a new Python project and a file named `example.py`.
 
 ```shell
 mkdir python-client-quickstart
@@ -45,19 +43,16 @@ touch example.py
 
 ### Step 2. Install required dependencies
 
-Run the following command on your project directory to install the required packages:
+In your project directory, run the following command to install the necessary packages:
 
 ```shell
 pip install sqlalchemy pymysql sentence-transformers tidb-vector
 ```
 
-- `tidb-vector` is a python client for TiDB Vector feature, which is based on SQLAlchemy.
-- `sentence-transformers` is a Python library that provides pre-trained models for generating vector embeddings from text data.
+- `tidb-vector`: the Python client for interacting with the vector search feature in TiDB Cloud, which is based on [SQLAlchemy](https://www.sqlalchemy.org).
+- [`sentence-transformers`](https://sbert.net): a Python library that provides pre-trained models for generating [vector embeddings](/tidb-cloud/vector-search-overview.md#vector-embedding) from text.
 
 ### Step 3. Configure the connection string to the TiDB cluster
-
-<SimpleTab>
-<div label="TiDB Serverless">
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -65,40 +60,34 @@ pip install sqlalchemy pymysql sentence-transformers tidb-vector
 
 3. Ensure the configurations in the connection dialog match your operating environment.
 
-    - **Endpoint Type** is set to `Public`
-    - **Branch** is set to `main`
-    - **Connect With** is set to `SQLAlchemy`
+    - **Endpoint Type** is set to `Public`.
+    - **Branch** is set to `main`.
+    - **Connect With** is set to `SQLAlchemy`.
     - **Operating System** matches your environment.
 
-   > **Tip:**
-   >
-   > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
+    > **Tip:**
+    >
+    > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
 
-4. Switch to the **PyMySQL** tab and click the **Copy** icon to copy the connection string.
+4. Click the **PyMySQL** tab and copy the connection string.
 
-   > **Tip:**
-   > 
-   > If you have not set a password yet, click **Create password** to generate a random password. 
+    > **Tip:**
+    > 
+    > If you have not set a password yet, click **Generate Password** to generate a random password.
 
-5. Create a `.env` file in your project and paste the connection string into it.
+5. In the root directory of your Python project, create a `.env` file and paste the connection string into it.
 
-    For example, the connection string on macOS looks like:
+     The following is an example for macOS:
 
     ```dotenv
     TIDB_DATABASE_URL="mysql+pymysql://<prefix>.root:<password>@gateway01.<region>.prod.aws.tidbcloud.com:4000/test?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
     ```
 
-</div>
+### Step 4. Initialize the embedding model
 
-</SimpleTab>
+An [embedding model](/tidb-cloud/vector-search-overview.md#embedding-model) transforms data into [vector embeddings](/tidb-cloud/vector-search-overview.md#vector-embedding). This example uses the pre-trained model [**msmarco-MiniLM-L12-cos-v5**](https://huggingface.co/sentence-transformers/msmarco-MiniLM-L12-cos-v5) for text embedding. This lightweight model, provided by the `sentence-transformers` library, transforms text data into 384-dimensional vector embeddings.
 
-### Step 4. Choose and initialize the embedding model
-
-The [embedding model](/tidb-cloud/vector-search-overview.md#embedding-model) is an algorithm that transforms data into vector embeddings.
-
-In this example, we will download and deploy a pre-trained model **[msmarco-MiniLM-L12-cos-v5](https://huggingface.co/sentence-transformers/msmarco-MiniLM-L12-cos-v5)** for text embedding. **msmarco-MiniLM-L12-cos-v5** is a lightweight model provided by the `sentence-transformers` library, capable of converting text data into 384-dimensional vector embeddings.
-
-Copy the following code to the `example.py` file, it initializes a `SentenceTransformer` instance and define a `text_to_embedding` function for later usage.
+To set up the model, copy the following code into the `example.py` file. This code initializes a `SentenceTransformer` instance and defines a `text_to_embedding()` function for later use.
 
 ```python
 from sentence_transformers import SentenceTransformer
@@ -115,11 +104,11 @@ def text_to_embedding(text):
 
 ### Step 5. Connect to the TiDB cluster
 
-Use `TiDBVectorClient` to connect to the TiDB cluster and create a data table with a vector column as vector store.
+Use the `TiDBVectorClient` class to connect to your TiDB cluster and create a table `embedded_documents` with a vector column to serve as the vector store.
 
 > **Note**
 > 
-> The dimension of the vector column created should be consistent with the dimension of the vector generated by the embedding model, for example, the vector dimension generated by the **msmarco-MiniLM-L12-cos-v5** model is 384.
+> Ensure the dimension of your vector column matches the dimension of the vectors produced by your embedding model. For example, the **msmarco-MiniLM-L12-cos-v5** model generates vectors with 384 dimensions.
 
 ```python
 import os
@@ -143,9 +132,7 @@ vector_store = TiDBVectorClient(
 
 ### Step 6. Embed text data and store the vectors
 
-In this example, we prepare several documents with a single word like "dog", "fish", and "tree".
-
-Use the `text_to_embedding` function to transform the texts into vector embeddings and insert them into the vector store.
+In this step, you will prepare sample documents containing single words, such as "dog", "fish", and "tree". The following code uses the `text_to_embedding()` function to transform these text documents into vector embeddings, and then inserts them into the vector store.
 
 ```python
 documents = [
@@ -179,9 +166,9 @@ vector_store.insert(
 
 ### Step 7. Perform a vector search query
 
-In this example, we try to search query "an swimming animal", which doesn't include any keywords present in the documents. 
+In this step, you will search for "a swimming animal", which doesn't directly match any words in existing documents. 
 
-Use the `text_to_embedding` function again to convert the query text into a vector embedding, and then query with the embedding to find the top 3 nearest neighbors.
+The following code uses the `text_to_embedding()` function again to convert the query text into a vector embedding, and then queries with the embedding to find the top three closest matches.
 
 ```python
 def print_result(query, result):
@@ -189,24 +176,24 @@ def print_result(query, result):
    for r in result:
       print(f"- text: \"{r.document}\", distance: {r.distance}")
 
-query = "an swimming animal"
+query = "a swimming animal"
 query_embedding = text_to_embedding(query)
 search_result = vector_store.query(query_embedding, k=3)
 print_result(query, search_result)
 ```
 
-Run the `example.py` file and you will see the output as follows:
+Run the `example.py` file and the output is as follows:
 
 ```plain
-Search result ("an swimming animal"):
+Search result ("a swimming animal"):
 - text: "fish", distance: 0.4586619425596351
 - text: "dog", distance: 0.6521646263795423
 - text: "tree", distance: 0.7980725077476978
 ```
 
-Great! The swimming animal is most likely a fish, or a dog with a gift for swimming.
+From the output, the swimming animal is most likely a fish, or a dog with a gift for swimming.
 
-As the results show, we found the most relevant documents through vector search, and the search results are sorted by the distance between the vectors; the closer the distance, the more relevant the document.
+This demonstration shows how vector search can efficiently locate the most relevant documents, with search results organized by the proximity of the vectors: the smaller the distance, the more relevant the document.
 
 ## See also
 

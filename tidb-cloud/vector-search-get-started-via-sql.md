@@ -1,70 +1,57 @@
 ---
-title: Get Started with Vector Search via SQL
-summary: Learn how to quickly get started with the TiDB Vector Search feature and power the generative AI application.
+title: Get Started with Vector Search Using SQL Statements
+summary: Learn how to quickly get started with the vector search feature in TiDB Cloud using SQL statements and power the generative AI application.
 ---
 
-# Get Started with Vector Search via SQL
+# Get Started with Vector Search Using SQL Statements
 
-TiDB extends the MySQL SQL syntax to support vector search feature, introducing the new VECTOR data type and a series of vector functions.
+TiDB extends MySQL syntax to support the [vector search](/tidb-cloud/vector-search-overview.md) feature, introducing the new `VECTOR` data type and several vector functions.
 
-This tutorial will guide you to get started with the vector search feature, using SQL to create vector table, store embedding data, and perform vector search queries.
+This tutorial demonstrates how to get started with the vector search feature in TiDB Cloud using SQL statements. You will learn how to use the [MySQL command-line client](https://dev.mysql.com/doc/refman/8.4/en/mysql.html) to:
+
+- Connect to your TiDB cluster.
+- Create a vector table.
+- Store vector embeddings.
+- Perform vector search queries.
 
 > **Note**
-> 
-> The Vector Search feature is only available for TiDB Serverless at this moment.
+>
+> The vector search feature is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
 
 ## Prerequisites
 
 To complete this tutorial, you need:
 
-- [MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.4/en/mysql.html) (MySQL CLI) installed on your machine.
-- A TiDB Serverless cluster running. 
+- [MySQL command-line client](https://dev.mysql.com/doc/refman/8.4/en/mysql.html) (MySQL CLI) installed on your machine.
+- A TiDB Serverless cluster. Follow [creating a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
 
-<CustomContent platform="tidb-cloud">
-
-**If you don't have a TiDB cluster, you can create one as follows:**
-
-- (Recommended) Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-
-</CustomContent>
-
-## Get Started
+## Get started
 
 ### Step 1. Connect to the TiDB cluster
 
-<SimpleTab>
-
-<div label="TiDB Serverless">
-
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
-2. Click **Connect** in the upper-right corner.
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. In the connection dialog, select **MySQL CLI** from the **Connect With** dropdown and keep the default setting of the **Endpoint Type** as **Public**.
+3. In the connection dialog, select **MySQL CLI** from the **Connect With** drop-down list and keep the default setting of the **Endpoint Type** as **Public**.
 
-4. If you have not set a password yet, click **Create password** to generate a random password.
+4. If you have not set a password yet, click **Generate Password** to generate a random password.
 
-5. Click **Copy** icon to copy the connection command and paste it into your terminal to run.
-
-    For example, the command on macOS looks like:
+5. Copy the connection command and paste it into your terminal. The following is an example for macOS:
 
     ```bash
     mysql -u '<prefix>.root' -h '<host>' -P 4000 -D 'test' --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p'<password>'
     ```
 
-</div>
-
-</SimpleTab>
-
 ### Step 2. Create a vector table
 
-With vector search supported, you can use the `VECTOR` type column to store [vector embeddings](/tidb-cloud/vector-search-overview.md#vector-embedding) in TiDB. 
+With vector search support, you can use the `VECTOR` type column to store [vector embeddings](/tidb-cloud/vector-search-overview.md#vector-embedding) in TiDB.
 
-Execute the following SQL statement via your MySQL CLI to create a table containing a column of type `VECTOR` with dimension 3.
+To create a table with a three-dimensional `VECTOR` column, execute the following SQL statements using your MySQL CLI:
 
 ```sql
 USE test;
-CREATE TABLE embeded_documents (
+CREATE TABLE embedded_documents (
     id        INT       PRIMARY KEY,
     -- Column to store the original content of the document.
     document  TEXT,
@@ -73,25 +60,25 @@ CREATE TABLE embeded_documents (
 );
 ```
 
-Expected output:
+The expected output is as follows:
 
 ```text
 Query OK, 0 rows affected (0.27 sec)
 ```
 
-### Step 3. Store the vector embedding
+### Step 3. Store the vector embeddings
 
-Insert three documents with their vector embeddings into the `embeded_documents` table.
+Insert three documents with their [vector embeddings](/tidb-cloud/vector-search-overview.md#vector-embedding) into the `embedded_documents` table:
 
 ```sql
-INSERT INTO embeded_documents
+INSERT INTO embedded_documents
 VALUES
     (1, 'dog', '[1,2,1]'),
     (2, 'fish', '[1,2,4]'),
     (3, 'tree', '[1,0,0]');
 ```
 
-Expected output:
+The expected output is as follows:
 
 ```
 Query OK, 3 rows affected (0.15 sec)
@@ -100,19 +87,19 @@ Records: 3  Duplicates: 0  Warnings: 0
 
 > **Note**
 > 
-> In this example, we simplify the dimensions of the embeddings and use only 3-dimensional vectors.
+> This example simplifies the dimensions of the vector embeddings and uses only 3-dimensional vectors for demonstration purposes.
 > 
-> However, in real-world applications, the [vector_embeddings](/tidb-cloud/vector-search-overview.md#vector-embedding) are generated by the [embedding model](/tidb-cloud/vector-search-overview.md#embedding-model) may have hundreds or even thousands of dimensions.
+> In real-world applications, [embedding models](/tidb-cloud/vector-search-overview.md#embedding-model) often produce vector embeddings with hundreds or thousands of dimensions.
 
 ### Step 4. Query the vector table
 
-Query the `embeded_documents` table to check the documents you have inserted.
+To verify that the documents have been inserted correctly, query the `embedded_documents` table:
 
 ```sql
-SELECT * FROM embeded_documents;
+SELECT * FROM embedded_documents;
 ```
 
-Expected output:
+The expected output is as follows:
 
 ```sql
 +----+----------+-----------+
@@ -125,22 +112,22 @@ Expected output:
 3 rows in set (0.15 sec)
 ```
 
-### Step 5. Perform vector search queries
+### Step 5. Perform a vector search query
 
-Similar to full-text search, the user provides the application with a search term when searching.
+Similar to full-text search, users provide search terms to the application when using vector search.
 
-In this example, we will search for "a swimming animal", and its corresponding vector embedding is `[1,2,3]`. In practical applications, you need to use an embedding model to convert a user's search terms into a vector embedding.
+In this example, the search term is "a swimming animal", and its corresponding vector embedding is `[1,2,3]`. In practical applications, you need to use an embedding model to convert the user's search term into a vector embedding.
 
-Run the following SQL statement, TiDB will find the top-3 nearest neighbor documents of the search term by calculating and sorting the cosine distances (`vec_cosine_distance`) between vector embedding.
+Execute the following SQL statement and TiDB will identify the top three documents closest to the search term by calculating and sorting the cosine distances (`vec_cosine_distance`) between the vector embeddings.
 
 ```sql
 SELECT id, document, vec_cosine_distance(embedding, '[1,2,3]') AS distance
-FROM embeded_documents
+FROM embedded_documents
 ORDER BY distance
 LIMIT 3;
 ```
 
-Expected output:
+The expected output is as follows:
 
 ```plain
 +----+----------+---------------------+
@@ -153,7 +140,7 @@ Expected output:
 3 rows in set (0.15 sec)
 ```
 
-Great! The swimming animal is most likely a fish, or a dog with a gift for swimming.
+From the output, the swimming animal is most likely a fish, or a dog with a gift for swimming.
 
 ## See also
 
