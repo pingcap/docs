@@ -19,17 +19,17 @@ For example, if you search for the term "a swimming animal", full-text search re
 
 ### Key Concepts
 
-#### Embedding vector
+#### Vector Embedding
 
-Embedding vector, also known as embedding, is an array of numbers that represent the real-world objects in a high-dimensional space, it captures the semantics and context of the unstructured data, such as documents, images, audio, or videos.
+Vector embedding, often just called an embedding, is an array of numbers that represent the real-world objects in a high-dimensional space, it captures the semantics and context of the unstructured data, such as documents, images, audio, or videos.
 
-Embedding vectors play an essential role in machine learning and are foundational to semantic and similarity searches.
+Vector embeddings play an essential role in machine learning and are foundational to semantic and similarity searches.
 
-To store the embedding vectors, TiDB introduced a new `VECTOR` data type, see [Vector Column](/tidb-cloud/vector-search-vector-column.md) for more details.
+To store the vector embeddings, TiDB introduced a new `VECTOR` data type, see [Vector Column](/tidb-cloud/vector-search-vector-column.md) for more details.
 
 #### Embedding Model
 
-Embedding models are algorithms used to transform data into embedding vector. 
+Embedding models are algorithms used to transform data into vector embedding. 
 
 Choosing the right embedding model is important for the accuracy and relevance of semantic search results. For unstructured text data, you can find the best-performance text embedding models on the [Massive Text Embedding Benchmark (MTEB) Leaderboard](https://huggingface.co/spaces/mteb/leaderboard).
 
@@ -49,7 +49,7 @@ As a relational database with built-in vector search feature, TiDB enables you t
 
 ### RAG (Retrieval-Augmented Generation)
 
-Retrieval-Augmented Generation (RAG) is an architecture designed to optimize the output of Large Language Models (LLMs). Vector search enables the RAG applications to store embedding vectors into the database and retrieve relevant documents as contextual content when LLM generates answers to improve the quality and relevance of the answer.
+Retrieval-Augmented Generation (RAG) is an architecture designed to optimize the output of Large Language Models (LLMs). Vector search enables the RAG applications to store vector embeddings into the database and retrieve relevant documents as contextual content when LLM generates answers to improve the quality and relevance of the answer.
 
 ## See also
 

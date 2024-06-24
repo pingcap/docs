@@ -74,7 +74,7 @@ pip install sqlalchemy pymysql sentence-transformers tidb-vector
    >
    > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
 
-4. Switch the **PyMySQL** tab and click the **Copy** icon to copy the connection string.
+4. Switch to the **PyMySQL** tab and click the **Copy** icon to copy the connection string.
 
    > **Tip:**
    > 
@@ -96,7 +96,7 @@ pip install sqlalchemy pymysql sentence-transformers tidb-vector
 
 The [embedding model](/tidb-cloud/vector-search-overview.md#embedding-model) is an algorithm that transforms data into vector embeddings.
 
-In this example, we will download and deploy a pre-trained model **[msmarco-MiniLM-L12-cos-v5](https://huggingface.co/sentence-transformers/msmarco-MiniLM-L12-cos-v5)** for text embedding. **msmarco-MiniLM-L12-cos-v5** is a lightweight model provided by the `sentence-transformers` library, capable of converting text data into 384-dimensional embedding vectors.
+In this example, we will download and deploy a pre-trained model **[msmarco-MiniLM-L12-cos-v5](https://huggingface.co/sentence-transformers/msmarco-MiniLM-L12-cos-v5)** for text embedding. **msmarco-MiniLM-L12-cos-v5** is a lightweight model provided by the `sentence-transformers` library, capable of converting text data into 384-dimensional vector embeddings.
 
 Copy the following code to the `example.py` file, it initializes a `SentenceTransformer` instance and define a `text_to_embedding` function for later usage.
 
@@ -145,7 +145,7 @@ vector_store = TiDBVectorClient(
 
 In this example, we prepare several documents with a single word like "dog", "fish", and "tree".
 
-Use the `text_to_embedding` function to transform the texts into embedding vectors and insert them into the vector store.
+Use the `text_to_embedding` function to transform the texts into vector embeddings and insert them into the vector store.
 
 ```python
 documents = [
@@ -181,7 +181,7 @@ vector_store.insert(
 
 In this example, we try to search query "an swimming animal", which doesn't include any keywords present in the documents. 
 
-Use the `text_to_embedding` function again to convert the query text into an embedding vector, and then query with the embedding to find the top 3 nearest neighbors.
+Use the `text_to_embedding` function again to convert the query text into a vector embedding, and then query with the embedding to find the top 3 nearest neighbors.
 
 ```python
 def print_result(query, result):
