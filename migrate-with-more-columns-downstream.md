@@ -104,5 +104,5 @@ In such cases, you can use the `operate-schema` command to set a table schema fo
     {{< copyable "shell-regular" >}}
 
     ```
-    tiup dmctl --master-addr ${advertise-addr} query-status resume-task ${task-name}
+    tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
     ```
