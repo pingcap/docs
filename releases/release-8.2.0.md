@@ -147,7 +147,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 
 ### Data migration
 
-* TiCDC Syncpoints align by sync point interval [#11212](https://github.com/pingcap/tiflow/issues/11212) @[hongyunyan](https://github.com/hongyunyan) <!--1234-->
+* TiCDC Syncpoints align by sync point interval [#11212](https://github.com/pingcap/tiflow/issues/11212) @[hongyunyan](https://github.com/hongyunyan) **tw@lilin90** <!--1869-->
 
     Before v8.2.0, aligning TiCDC syncpoints across multiple changefeeds was challenging as the `startTs` of the changefeed had to be carefully selected when the changefeed was created so it would align with the syncpoints of other changefeeds. Starting from v8.2.0, syncpoints for a changefeed are created as a multiple of the changefeed's `sync-point-interval` configuration. This change allows you to align syncpoints across multiple changefeeds (when configured with the same interval), simplifying and improving the ability to align multiple downstream clusters.
 
