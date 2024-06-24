@@ -12,5 +12,5 @@ In SQL statements, expressions can be used on the `ORDER BY` and `HAVING` clause
 
 You can write expressions using literals, column names, `NULL`, built-in functions, operators, and so on. 
 
-- For expressions that TiDB supports pushing down to TiKV, see [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md). 
+- For expressions that TiDB supports pushing down to TiKV, see [List of expressions for pushdown](/functions-and-operators/expressions-pushed-down.md). 
 - For expressions that TiDB supports pushing down to [TiFlash](/tiflash/tiflash-overview.md), see [Push-down expressions](/tiflash/tiflash-supported-pushdown-calculations.md#push-down-expressions).
