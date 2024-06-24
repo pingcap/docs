@@ -73,7 +73,7 @@ To create an endpoint manually, perform the following steps:
 3. Update the default name if necessary. The newly created endpoint is added to the top of the endpoint list.
 4. Configure the new endpoint according to the instructions in [Develop an endpoint](#develop-an-endpoint).
 
-### Manage endpoint library
+### Manage system-provided endpoint library
 
 In TiDB Cloud Data Service, You can effortlessly manage the endpoint library, comprising a catalog of predefined system-provided endpoints. Add or remove endpoints without the need to create them from the ground up.
 
