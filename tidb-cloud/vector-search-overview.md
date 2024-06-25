@@ -23,7 +23,7 @@ A vector embedding, also known as an embedding, is an array of numbers that repr
 
 Vector embeddings are essential in machine learning and serve as the foundation for semantic similarity searches.
 
-To store vector embeddings, TiDB introduces a new `VECTOR` data type. For more information, see [Vector Data Type](/tidb-cloud/vector-search-data-types.md).
+To store vector embeddings, TiDB introduces a new `VECTOR` data type. For more information, see [Vector Data Types](/tidb-cloud/vector-search-data-types.md).
 
 ### Embedding model
 

@@ -193,5 +193,5 @@ with Session(engine) as session:
 
 ## See also
 
-- [Vector Data Type](/tidb-cloud/vector-search-data-types.md)
+- [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
 - [Vector Search Index](/tidb-cloud/vector-search-index.md)
