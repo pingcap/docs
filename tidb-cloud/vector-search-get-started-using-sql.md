@@ -1,13 +1,13 @@
 ---
-title: Get Started with Vector Search Using SQL Statements
+title: Get Started with Vector Search via SQL
 summary: Learn how to quickly get started with the vector search feature in TiDB Cloud using SQL statements and power the generative AI application.
 ---
 
-# Get Started with Vector Search Using SQL Statements
+# Get Started with Vector Search via SQL
 
-TiDB extends MySQL syntax to support the [vector search](/tidb-cloud/vector-search-overview.md) feature, introducing the new `VECTOR` data type and several vector functions.
+TiDB extends MySQL syntax to support [Vector Search](/tidb-cloud/vector-search-overview.md) and introduce new [Vector data types](/tidb-cloud/vector-search-data-types.md) and several [vector functions](/tidb-cloud/vector-search-functions-and-operators.md).
 
-This tutorial demonstrates how to get started with the vector search feature in TiDB Cloud using SQL statements. You will learn how to use the [MySQL command-line client](https://dev.mysql.com/doc/refman/8.4/en/mysql.html) to:
+This tutorial demonstrates how to get started with TiDB Vector Search just using SQL statements. You will learn how to use the [MySQL command-line client](https://dev.mysql.com/doc/refman/8.4/en/mysql.html) to:
 
 - Connect to your TiDB cluster.
 - Create a vector table.
@@ -39,9 +39,9 @@ To complete this tutorial, you need:
 
 5. Copy the connection command and paste it into your terminal. The following is an example for macOS:
 
-    ```bash
-    mysql -u '<prefix>.root' -h '<host>' -P 4000 -D 'test' --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p'<password>'
-    ```
+   ```bash
+   mysql -u '<prefix>.root' -h '<host>' -P 4000 -D 'test' --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p'<password>'
+   ```
 
 ### Step 2. Create a vector table
 
@@ -86,9 +86,9 @@ Records: 3  Duplicates: 0  Warnings: 0
 ```
 
 > **Note**
-> 
+>
 > This example simplifies the dimensions of the vector embeddings and uses only 3-dimensional vectors for demonstration purposes.
-> 
+>
 > In real-world applications, [embedding models](/tidb-cloud/vector-search-overview.md#embedding-model) often produce vector embeddings with hundreds or thousands of dimensions.
 
 ### Step 4. Query the vector table

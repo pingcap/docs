@@ -1,11 +1,13 @@
 ---
-title: Get Started with Vector Search Using the Python Client
-summary: Learn how to quickly get started with the TiDB vector search feature in TiDB Cloud using a Python client and perform semantic searches.
+title: Get Started with TiDB + AI via Python
+summary: Learn how to quickly develop an AI application that performs semantic search using Python and TiDB Vector Search.
 ---
 
-# Get Started with Vector Search Using the Python Client
+# Get Started with TiDB + AI via Python
 
-This tutorial demonstrates how to develop an application providing semantic search features, which is capable of searching for similar documents in an intelligent way powered by [TiDB Vector Search](/tidb-cloud/vector-search-overview.md) and AI models.
+This tutorial demonstrates how to develop a simple AI application providing **semantic search** features, which is searching for documents not only by keyword, but in an intelligent way that understands the meaning of the search. For example, giving documents titled with "dog", "fish" and "tree", when querying for "a swimming animal", the application would could recall "fish" as the most relevant document.
+
+Through out this tutorial, we will develop this AI application using Python, AI models and [TiDB Vector Search](/tidb-cloud/vector-search-overview.md).
 
 > **Note**
 >

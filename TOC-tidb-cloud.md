@@ -10,7 +10,7 @@
   - [Roadmap](/tidb-cloud/tidb-cloud-roadmap.md)
 - Get Started
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
-  - [Try Out TiDB + AI](/tidb-cloud/vector-search-get-started-using-python-client.md)
+  - [Try Out TiDB + AI](/tidb-cloud/vector-search-get-started-using-python.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
   - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
@@ -244,7 +244,7 @@
   - [Overview](/tidb-cloud/vector-search-overview.md)
   - Get Started
     - [Get Started with SQL](/tidb-cloud/vector-search-get-started-using-sql.md)
-    - [Get Started with Python Client](/tidb-cloud/vector-search-get-started-using-python-client.md)
+    - [Get Started with Python](/tidb-cloud/vector-search-get-started-using-python.md)
   - Integrations
     - [Overview](/tidb-cloud/vector-search-integration-overview.md)
     - AI Frameworks
