@@ -127,7 +127,7 @@ TiDB Cloud Data Service provides the following Chat2Query v3 endpoints and v2 en
 | POST   | `/v2/dataSummaries` | This endpoint generates a data summary for your database schema, table schema, and column schema using artificial intelligence. |
 | GET    | `/v2/dataSummaries` | This endpoint retrieves all data summaries. |
 | POST   | `/v2/chat2data` | This endpoint enables you to generate and execute SQL statements using artificial intelligence by providing the data summary ID and instructions. |
-| GET    | `/v2/jobs/{job_id}` | This endpoint enables you to query the status of the data summary generation job. |
+| GET    | `/v2/jobs/{job_id}` | This endpoint enables you to query the status of a specific data summary generation job. |
 
 The steps to call `/v3/chat2data` and `/v2/chat2data` are the same. The following sections take `/v3/chat2data` as an example to show how to call it.
 
