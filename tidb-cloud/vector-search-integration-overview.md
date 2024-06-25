@@ -1,6 +1,6 @@
 ---
 title: Vector Search Integration Overview
-summary: 
+summary: A summary of TiDB vector search integration, including AI frameworks, embedded models, ORM libraries, etc.
 ---
 
 # Vector Search Integration Overview

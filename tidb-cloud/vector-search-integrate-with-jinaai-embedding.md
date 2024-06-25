@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Vector Search with JinaAI Embeddings API
-summary: 
+summary: Learn how to integrate TiDB Vector Search with JinaAI Embeddings API to store embeddings and perform semantic search.
 ---
 
 # Integrate TiDB Vector Search with JinaAI Embeddings API

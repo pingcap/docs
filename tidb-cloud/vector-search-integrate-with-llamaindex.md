@@ -1,6 +1,6 @@
 ---
 title: Integrate Vector Search with LlamaIndex
-summary: 
+summary: Learn how to integrate the TiDB vector search feature with LlamaIndex.
 ---
 
 # Integrate Vector Search with LlamaIndex

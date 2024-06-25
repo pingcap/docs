@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Vector Search with Django ORM
-summary: 
+summary: Learn how to integrate TiDB Vector Search with Django ORM to store embeddings and perform semantic search.
 ---
 
 # Integrate TiDB Vector Search with Django ORM
@@ -99,7 +99,7 @@ For more information, refer to [django-tidb repository](https://github.com/pingc
    - `TIDB_USERNAME`: The username to connect to the TiDB cluster.
    - `TIDB_PASSWORD`: The password to connect to the TiDB cluster.
    - `TIDB_DATABASE`: The database name to connect to.
-   - `TIDB_CA`: The path to the root certificate file.
+   - `TIDB_CA_PATH`: The path to the root certificate file.
 
    The following is an example for macOS:
 
@@ -109,7 +109,7 @@ For more information, refer to [django-tidb repository](https://github.com/pingc
     TIDB_USERNAME=********.root
     TIDB_PASSWORD=********
     TIDB_DATABASE=test
-    TIDB_CA=/etc/ssl/cert.pem
+    TIDB_CA_PATH=/etc/ssl/cert.pem
     ```
 
 </div>
@@ -164,7 +164,7 @@ DATABASES = {
     }
 }
 
-TIDB_CA_PATH = os.environ.get("CA_PATH", "")
+TIDB_CA_PATH = os.environ.get("TIDB_CA_PATH", "")
 if TIDB_CA_PATH:
     DATABASES["default"]["OPTIONS"]["ssl_mode"] = "VERIFY_IDENTITY"
     DATABASES["default"]["OPTIONS"]["ssl"] = {
@@ -172,7 +172,7 @@ if TIDB_CA_PATH:
     }
 ```
 
-You can create a `.env` file in the root directory of your project and set up the environment variables `TIDB_HOST`, `TIDB_PORT`, `TIDB_USER`, `TIDB_PASSWORD`, `TIDB_DB_NAME`, and `CA_PATH` with the actual values of your TiDB cluster.
+You can create a `.env` file in the root directory of your project and set up the environment variables `TIDB_HOST`, `TIDB_PORT`, `TIDB_USERNAME`, `TIDB_PASSWORD`, `TIDB_DATABASE`, and `TIDB_CA_PATH` with the actual values of your TiDB cluster.
 
 ### Create vector tables
 
@@ -190,7 +190,7 @@ class Document(models.Model):
 
 #### Define a vector column optimized with index
 
-Define a 3-dimensional vector column and optimize it with a [vector search index](vector-search-overview.md) (HNSW index).
+Define a 3-dimensional vector column and optimize it with a [vector search index](/tidb-cloud/vector-search-index.md) (HNSW index).
 
 ```python
 class DocumentWithIndex(models.Model):
@@ -202,7 +202,7 @@ class DocumentWithIndex(models.Model):
    embedding = VectorField(dimensions=3, db_comment="hnsw(distance=cosine)")
 ```
 
-With vector searchTiDB will use this index to speed up vector search queries based on the cosine distance function.
+TiDB will use this index to speed up vector search queries based on the cosine distance function.
 
 ### Store documents with embeddings
 

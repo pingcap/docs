@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Vector Search with SQLAlchemy
-summary: 
+summary: Learn how to integrate TiDB Vector Search with SQLAlchemy to store embeddings and perform semantic search.
 ---
 
 # Integrate TiDB Vector Search with SQLAlchemy
@@ -151,9 +151,9 @@ class Document(Base):
     embedding = Column(VectorType(3))
 ```
 
-#### Define a vector column optimized with HNSW index
+#### Define a vector column optimized with index
 
-Define a 3-dimensional vector column and optimize it with an HNSW index.
+Define a 3-dimensional vector column and optimize it with a [vector search index](/tidb-cloud/vector-search-index.md) (HNSW index).
 
 ```python
 class DocumentWithIndex(Base):

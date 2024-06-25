@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Vector Search with Peewee
-summary: 
+summary: Learn how to integrate TiDB Vector Search with Peewee to store embeddings and perform semantic search.
 ---
 
 # Integrate TiDB Vector Search with Peewee
@@ -88,7 +88,7 @@ pip install peewee pymysql tidb-vector
     - `TIDB_USERNAME`: The username to connect to the TiDB cluster.
     - `TIDB_PASSWORD`: The password to connect to the TiDB cluster.
     - `TIDB_DATABASE`: The database name to connect to.
-    - `TIDB_CA`: The path to the root certificate file.
+    - `TIDB_CA_PATH`: The path to the root certificate file.
 
    The following is an example for macOS:
 
@@ -98,7 +98,7 @@ pip install peewee pymysql tidb-vector
     TIDB_USERNAME=********.root
     TIDB_PASSWORD=********
     TIDB_DATABASE=test
-    TIDB_CA=/etc/ssl/cert.pem
+    TIDB_CA_PATH=/etc/ssl/cert.pem
     ```
 
 </div>
@@ -157,7 +157,7 @@ connect_kwargs = {
 #     'ssl': {
 #         # Root certificate default path
 #         # https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters/#root-certificate-default-path
-#         'ca': os.environ.get('TIDB_CA', '/path/to/ca.pem'),
+#         'ca': os.environ.get('TIDB_CA_PATH', '/path/to/ca.pem'),
 #     },
 # }
 
@@ -185,9 +185,9 @@ class Document(Model):
     embedding = VectorField(3)
 ```
 
-#### Define a vector column optimized with HNSW index
+#### Define a vector column optimized with index
 
-Define a 3-dimensional vector column and optimize it with an HNSW index.
+Define a 3-dimensional vector column and optimize it with a [vector search index](/tidb-cloud/vector-search-index.md) (HNSW index).
 
 ```python
 class DocumentWithIndex(Model):
