@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Vector Search with Django ORM
-summary: 
+summary: Learn how to integrate TiDB Vector Search with Django ORM to store embeddings and perform semantic search.
 ---
 
 # Integrate TiDB Vector Search with Django ORM
@@ -18,7 +18,6 @@ To complete this tutorial, you need:
 - [Python 3.8 or higher](https://www.python.org/downloads/) installed.
 - [Git](https://git-scm.com/downloads) installed.
 - A TiDB Serverless cluster. Follow [creating a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
-
 
 ## Run the sample app
 
@@ -68,9 +67,6 @@ For more information, refer to [django-tidb repository](https://github.com/pingc
 
 ### Step 4. Configure the environment variables
 
-<SimpleTab>
-<div label="TiDB Serverless">
-
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
@@ -96,25 +92,21 @@ For more information, refer to [django-tidb repository](https://github.com/pingc
 
    - `TIDB_HOST`: The host of the TiDB cluster.
    - `TIDB_PORT`: The port of the TiDB cluster.
-   - `TIDB_USER`: The username to connect to the TiDB cluster.
+   - `TIDB_USERNAME`: The username to connect to the TiDB cluster.
    - `TIDB_PASSWORD`: The password to connect to the TiDB cluster.
    - `TIDB_DATABASE`: The database name to connect to.
-   - `CA_PATH`: The path to the root certificate file.
+   - `TIDB_CA_PATH`: The path to the root certificate file.
 
    The following is an example for macOS:
 
     ```dotenv
     TIDB_HOST=gateway01.****.prod.aws.tidbcloud.com
     TIDB_PORT=4000
-    TIDB_USER=********.root
+    TIDB_USERNAME=********.root
     TIDB_PASSWORD=********
     TIDB_DATABASE=test
-    CA_PATH=/etc/ssl/cert.pem
+    TIDB_CA_PATH=/etc/ssl/cert.pem
     ```
-
-</div>
-
-</SimpleTab>
 
 ### Step 5. Run the demo
 
@@ -130,7 +122,7 @@ Run the Django development server:
 python manage.py runserver
 ```
 
-Open your browser and visit `http://localhost:8000` to try the demo application. Here are the available API paths:
+Open your browser and visit `http://127.0.0.1:8000` to try the demo application. Here are the available API paths:
 
 | API Path                                | Description                              |
 |-----------------------------------------|------------------------------------------|
@@ -155,16 +147,16 @@ DATABASES = {
         "ENGINE": "django_tidb",
         "HOST": os.environ.get("TIDB_HOST", "127.0.0.1"),
         "PORT": int(os.environ.get("TIDB_PORT", 4000)),
-        "USER": os.environ.get("TIDB_USER", "root"),
+        "USER": os.environ.get("TIDB_USERNAME", "root"),
         "PASSWORD": os.environ.get("TIDB_PASSWORD", ""),
-        "NAME": os.environ.get("TIDB_DB_NAME", "test"),
+        "NAME": os.environ.get("TIDB_DATABASE", "test"),
         "OPTIONS": {
             "charset": "utf8mb4",
         },
     }
 }
 
-TIDB_CA_PATH = os.environ.get("CA_PATH", "")
+TIDB_CA_PATH = os.environ.get("TIDB_CA_PATH", "")
 if TIDB_CA_PATH:
     DATABASES["default"]["OPTIONS"]["ssl_mode"] = "VERIFY_IDENTITY"
     DATABASES["default"]["OPTIONS"]["ssl"] = {
@@ -172,7 +164,7 @@ if TIDB_CA_PATH:
     }
 ```
 
-You can create a `.env` file in the root directory of your project and set up the environment variables `TIDB_HOST`, `TIDB_PORT`, `TIDB_USER`, `TIDB_PASSWORD`, `TIDB_DB_NAME`, and `CA_PATH` with the actual values of your TiDB cluster.
+You can create a `.env` file in the root directory of your project and set up the environment variables `TIDB_HOST`, `TIDB_PORT`, `TIDB_USERNAME`, `TIDB_PASSWORD`, `TIDB_DATABASE`, and `TIDB_CA_PATH` with the actual values of your TiDB cluster.
 
 ### Create vector tables
 
@@ -190,7 +182,7 @@ class Document(models.Model):
 
 #### Define a vector column optimized with index
 
-Define a 3-dimensional vector column and optimize it with a [vector search index](vector-search-overview.md) (HNSW index).
+Define a 3-dimensional vector column and optimize it with a [vector search index](/tidb-cloud/vector-search-index.md) (HNSW index).
 
 ```python
 class DocumentWithIndex(models.Model):
@@ -202,7 +194,7 @@ class DocumentWithIndex(models.Model):
    embedding = VectorField(dimensions=3, db_comment="hnsw(distance=cosine)")
 ```
 
-With vector searchTiDB will use this index to speed up vector search queries based on the cosine distance function.
+TiDB will use this index to speed up vector search queries based on the cosine distance function.
 
 ### Store documents with embeddings
 

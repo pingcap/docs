@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Vector Search with Peewee
-summary: 
+summary: Learn how to integrate TiDB Vector Search with Peewee to store embeddings and perform semantic search.
 ---
 
 # Integrate TiDB Vector Search with Peewee
@@ -57,9 +57,6 @@ pip install peewee pymysql tidb-vector
 
 ### Step 4. Configure the environment variables
 
-<SimpleTab>
-<div label="TiDB Serverless">
-
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
@@ -85,25 +82,21 @@ pip install peewee pymysql tidb-vector
 
     - `TIDB_HOST`: The host of the TiDB cluster.
     - `TIDB_PORT`: The port of the TiDB cluster.
-    - `TIDB_USER`: The username to connect to the TiDB cluster.
+    - `TIDB_USERNAME`: The username to connect to the TiDB cluster.
     - `TIDB_PASSWORD`: The password to connect to the TiDB cluster.
     - `TIDB_DATABASE`: The database name to connect to.
-    - `TIDB_CA`: The path to the root certificate file.
+    - `TIDB_CA_PATH`: The path to the root certificate file.
 
    The following is an example for macOS:
 
     ```dotenv
     TIDB_HOST=gateway01.****.prod.aws.tidbcloud.com
     TIDB_PORT=4000
-    TIDB_USER=********.root
+    TIDB_USERNAME=********.root
     TIDB_PASSWORD=********
     TIDB_DATABASE=test
-    TIDB_CA=/etc/ssl/cert.pem
+    TIDB_CA_PATH=/etc/ssl/cert.pem
     ```
-
-</div>
-
-</SimpleTab>
 
 ### Step 5. Run the demo
 
@@ -157,13 +150,13 @@ connect_kwargs = {
 #     'ssl': {
 #         # Root certificate default path
 #         # https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters/#root-certificate-default-path
-#         'ca': os.environ.get('TIDB_CA', '/path/to/ca.pem'),
+#         'ca': os.environ.get('TIDB_CA_PATH', '/path/to/ca.pem'),
 #     },
 # }
 
 db = MySQLDatabase(
     database=os.environ.get('TIDB_DATABASE', 'test'),
-    user=os.environ.get('TIDB_USER', 'root'),
+    user=os.environ.get('TIDB_USERNAME', 'root'),
     password=os.environ.get('TIDB_PASSWORD', ''),
     host=os.environ.get('TIDB_HOST', 'localhost'),
     port=int(os.environ.get('TIDB_PORT', '4000')),
@@ -185,9 +178,9 @@ class Document(Model):
     embedding = VectorField(3)
 ```
 
-#### Define a vector column optimized with HNSW index
+#### Define a vector column optimized with index
 
-Define a 3-dimensional vector column and optimize it with an HNSW index.
+Define a 3-dimensional vector column and optimize it with a [vector search index](/tidb-cloud/vector-search-index.md) (HNSW index).
 
 ```python
 class DocumentWithIndex(Model):

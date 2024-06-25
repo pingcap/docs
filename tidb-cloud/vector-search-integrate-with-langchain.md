@@ -1,19 +1,16 @@
 ---
 title: Integrate Vector Search with LangChain
-summary: 
+summary: Learn how to integrate the vector search feature in TiDB Cloud with LangChain.
 ---
 
 # Integrate Vector Search with LangChain
 
-This tutorial will walk you through how to integrate the TiDB vector search feature with [LangChain](https://python.langchain.com/).
+This tutorial demonstrates how to integrate the [vector search](/tidb-cloud/vector-search-overview.md) feature in TiDB Cloud with [LangChain](https://python.langchain.com/).
 
 > **Note**
 >
-> The vector search feature is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
-
-> **Tips**
->
-> You can check the complete [sample code](https://github.com/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) on Jupyter Notebook, or run the sample code directly in the [colab](https://colab.research.google.com/github/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) online environment.
+> - The vector search feature is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+> - You can view the complete [sample code](https://github.com/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) on Jupyter Notebook, or run the sample code directly in the [Colab](https://colab.research.google.com/github/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) online environment.
 
 ## Prerequisites
 
@@ -22,23 +19,15 @@ To complete this tutorial, you need:
 - [Python 3.8 or higher](https://www.python.org/downloads/) installed.
 - [Jupyter Notebook](https://jupyter.org/install) installed.
 - [Git](https://git-scm.com/downloads) installed.
-- A TiDB Serverless cluster running.
+- A TiDB Serverless cluster. Follow [creating a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
 
-<CustomContent platform="tidb-cloud">
+## Get started
 
-**If you don't have a TiDB cluster, you can create one as follows:**
-
-- Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-
-</CustomContent>
-
-## Get Started
-
-In this section, you can learn step-by-step how to use LangChain to integrate with TiDB vector search and perform semantic search.
+This section provides step-by-step instructions for integrating the vector search feature with LangChain to perform semantic searches.
 
 ### Step 1. Create a new Jupyter Notebook file
 
-Create a new Jupyter Notebook file in your preferred directory.
+In your preferred directory, create a new Jupyter Notebook file named `integrate_with_langchain.ipynb`:
 
 ```shell
 touch integrate_with_langchain.ipynb
@@ -46,7 +35,7 @@ touch integrate_with_langchain.ipynb
 
 ### Step 2. Install required dependencies
 
-Run the following command on your project directory to install the required packages:
+In your project directory, run the following command to install the required packages:
 
 ```shell
 !pip install langchain langchain-community
@@ -55,7 +44,7 @@ Run the following command on your project directory to install the required pack
 !pip install tidb-vector
 ```
 
-Import the required packages in your code:
+Open the `integrate_with_langchain.ipynb` file in Jupyter Notebook and add the following code to import the required packages:
 
 ```python
 from langchain_community.document_loaders import TextLoader
@@ -64,12 +53,9 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import CharacterTextSplitter
 ```
 
-### Step 3. Set up environments
+### Step 3. Set up your environment
 
-#### Step 3.1 Obtains the connection string to the TiDB cluster
-
-<SimpleTab>
-<div label="TiDB Serverless">
+#### Step 3.1 Obtain the connection string to the TiDB cluster
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -77,48 +63,50 @@ from langchain_text_splitters import CharacterTextSplitter
 
 3. Ensure the configurations in the connection dialog match your operating environment.
 
-    - **Endpoint Type** is set to `Public`
-    - **Branch** is set to `main`
-    - **Connect With** is set to `SQLAlchemy`
+    - **Endpoint Type** is set to `Public`.
+    - **Branch** is set to `main`.
+    - **Connect With** is set to `SQLAlchemy`.
     - **Operating System** matches your environment.
 
-4. Switch to the **PyMySQL** tab and click the **Copy** icon to copy the connection string.
+4. Click the **PyMySQL** tab and copy the connection string.
 
-</div>
+    > **Tip:**
+    > 
+    > If you have not set a password yet, click **Generate Password** to generate a random password.
 
-</SimpleTab>
+#### Step 3.2 Configure environment variables
 
-#### Step 3.2 Configure the environment variables
+To establish a secure and efficient database connection, use the standard connection method provided by TiDB Cloud.
 
-Configure both the OpenAI and TiDB connection string settings that you will need.
+This document uses [OpenAI](https://platform.openai.com/docs/introduction) as the embedding model provider. In this step, you need to provide the connection string obtained from step 3.1 and your [OpenAI API key](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key).
 
-In this notebook, we will follow the standard connection method provided by TiDB Cloud to establish a secure and efficient database connection.
+To configure the environment variables, run the following code. You will be prompted to enter your connection string and OpenAI API key:
 
 ```python
-# Here we useimport getpass
+# Use getpass to securely prompt for environment variables in your terminal.
 import getpass
 import os
 
-os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
-# Copy from TiDB Cloud Console
-# The format of connection string: "mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
+# Copy your connection string from the TiDB Cloud console.
+# Connection string format: "mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
 tidb_connection_string = getpass.getpass("TiDB Connection String:")
+os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
 ```
 
 ### Step 4. Load the sample document
 
 #### Step 4.1 Download the sample document
 
-Download the sample document `state_of_the_union.txt` from the GitHub repository.
+In your project directory, create a directory named `data/how_to/` and download the sample document [`state_of_the_union.txt`](https://github.com/langchain-ai/langchain/blob/master/docs/docs/how_to/state_of_the_union.txt) from the [langchain-ai/langchain](https://github.com/langchain-ai/langchain) GitHub repository.
 
 ```shell
 !mkdir -p 'data/how_to/'
 !wget 'https://raw.githubusercontent.com/langchain-ai/langchain/master/docs/docs/how_to/state_of_the_union.txt' -O 'data/how_to/state_of_the_union.txt'
 ```
 
-#### Step 4.2 Load documents
+#### Step 4.2 Load and split the document
 
-Load the sample document from the directory with the `SimpleDirectoryReader` class.
+Load the sample document from `data/how_to/state_of_the_union.txt` and split it into chunks of approximately 1,000 characters each using a `CharacterTextSplitter`.
 
 ```python
 loader = TextLoader("data/how_to/state_of_the_union.txt")
@@ -127,11 +115,11 @@ text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
 docs = text_splitter.split_documents(documents)
 ```
 
-### Step 5. Build index
+### Step 5. Embed and store document vectors
 
-TiDB Vector Store supports both cosine distance (`consine`) and Euclidean distance (`l2`), and the default distance strategy is cosine distance.
+TiDB vector store supports both cosine distance (`consine`) and Euclidean distance (`l2`) for measuring similarity between vectors. The default strategy is cosine distance.
 
-The code snippet below creates a table named `embedded_documents` in TiDB, which is optimized for vector searching.
+The following code creates a table named `embedded_documents` in TiDB, which is optimized for vector search.
 
 ```python
 embeddings = OpenAIEmbeddings()
@@ -144,19 +132,19 @@ vector_store = TiDBVectorStore.from_documents(
 )
 ```
 
-Upon successful execution of this code, you will be able to view and access the `embedded_documents` table directly within your TiDB database.
+Upon successful execution, you can directly view and access the `embedded_documents` table in your TiDB database.
 
-### Step 6. Semantic similarity search
+### Step 6. Perform a vector search
 
-For example, we will query "What did the president say about Ketanji Brown Jackson" from the document `state_of_the_union.txt`.
+This step demonstrates how to query "What did the president say about Ketanji Brown Jackson" from the document `state_of_the_union.txt`.
 
 ```python
 query = "What did the president say about Ketanji Brown Jackson"
 ```
 
-#### Step 6.1 Execute `similarity_search_with_score` method
+#### Option 1: Use `similarity_search_with_score()`
 
-The `similarity_search_with_score` method calculates the vector space distance between the documents and the query as the `score` based on the `distance_strategy` strategy, and then returns the top `k` documents with the lowest score. The lower the score, the higher the similarity.
+The `similarity_search_with_score()` method calculates the vector space distance between the documents and the query. This distance serves as a similarity score, determined by the chosen `distance_strategy`. The method returns the top `k` documents with the lowest scores. A lower score indicates a higher similarity between a document and your query.
 
 ```python
 docs_with_score = vector_store.similarity_search_with_score(query, k=3)
@@ -168,7 +156,7 @@ for doc, score in docs_with_score:
 ```
 
 <details>
-   <summary><b>Excepted output</b></summary>
+   <summary><b>Expected output</b></summary>
 
    ```plain
    --------------------------------------------------------------------------------
@@ -213,10 +201,9 @@ for doc, score in docs_with_score:
 
 </details>
 
+#### Option 2: Use `similarity_search_with_relevance_scores()`
 
-#### Step 6.2 Execute `similarity_search_with_relevance_scores` method
-
-Additionally, the `similarity_search_with_relevance_scores` method returns the top `k` documents with the highest relevance score. The higher the score, the higher the similarity between the documents and the query.
+The `similarity_search_with_relevance_scores()` method returns the top `k` documents with the highest relevance scores. A higher score indicates a higher degree of similarity between a document and your query.
 
 ```python
 docs_with_relevance_score = vector_store.similarity_search_with_relevance_scores(query, k=2)
@@ -228,7 +215,7 @@ for doc, score in docs_with_relevance_score:
 ```
 
 <details>
-   <summary><b>Excepted output</b></summary>
+   <summary><b>Expected output</b></summary>
 
    ```plain
    --------------------------------------------------------------------------------
@@ -259,10 +246,9 @@ for doc, score in docs_with_relevance_score:
 
 </details>
 
+### Use as a retriever
 
-### Using as a Retriever
-
-In Langchain, a retriever is an interface that retrieves documents in response to an unstructured query, offering a broader functionality than a vector store. The code below demonstrates how to utilize TiDB Vector as a retriever.
+In Langchain, a [retriever](https://python.langchain.com/v0.2/docs/concepts/#retrievers) is an interface that retrieves documents in response to an unstructured query, providing more functionality than a vector store. The following code demonstrates how to use TiDB vector store as a retriever.
 
 ```python
 retriever = vector_store.as_retriever(
@@ -276,7 +262,7 @@ for doc in docs_retrieved:
    print("-" * 80)
 ```
 
-Excepted output:
+The expected output is as follows:
 
 ```
 --------------------------------------------------------------------------------
@@ -290,29 +276,27 @@ And I did that 4 days ago, when I nominated Circuit Court of Appeals Judge Ketan
 --------------------------------------------------------------------------------
 ```
 
-### Drop the vector store
+### Remove the vector store
 
-You can remove the TiDB Vector Store by using the `.drop_vectorstore()` method.
+To remove an existing TiDB vector store, use the `drop_vectorstore()` method:
 
 ```python
 vector_store.drop_vectorstore()
 ```
 
-## Metadata Filter 
+## Search with metadata filters
 
-Perform searches using metadata filters to retrieve a specific number of nearest-neighbor results that align with the applied filters.
+To refine your searches, you can use metadata filters to retrieve specific nearest-neighbor results that match the applied filters.
 
 ### Supported metadata types
 
-Each document in the TiDB Vector Store can be paired with metadata, structured as key-value pairs within a JSON object.
-
-The keys are strings, and the values can be of the following types:
+Each document in the TiDB vector store can be paired with metadata, structured as key-value pairs within a JSON object. Keys are always strings, while values can be any of the following types:
 
 - String
-- Number (integer or floating point)
-- Booleans (true, false)
+- Number: integer or floating point
+- Boolean: `true` or `false`
 
-For instance, consider the following valid metadata payloads:
+For example, the following is a valid metadata payload:
 
 ```json
 {
@@ -323,20 +307,20 @@ For instance, consider the following valid metadata payloads:
 
 ### Metadata filter syntax
 
-The available filters include:
+Available filters include the following:
 
-- `$or` - Selects vectors that meet any one of the given conditions.
-- `$and` - Selects vectors that meet all the given conditions.
-- `$eq` - Equal to
-- `$ne` - Not equal to
-- `$gt` - Greater than
-- `$gte` - Greater than or equal to
-- `$lt` - Less than
-- `$lte` - Less than or equal to
-- `$in` - In array
-- `$nin` - Not in array
+- `$or`: Selects vectors that match any one of the specified conditions.
+- `$and`: Selects vectors that match all the specified conditions.
+- `$eq`: Equal to the specified value.
+- `$ne`: Not equal to the specified value.
+- `$gt`: Greater than the specified value.
+- `$gte`: Greater than or equal to the specified value.
+- `$lt`: Less than the specified value.
+- `$lte`: Less than or equal to the specified value.
+- `$in`: In the specified array of values.
+- `$nin`: Not in the specified array of values.
 
-For example, assuming there is a document with the following metadata:
+If the metadata of a document is as follows:
 
 ```json
 {
@@ -345,7 +329,7 @@ For example, assuming there is a document with the following metadata:
 }
 ```
 
-The following metadata filters are able to match the above document:
+The following metadata filters can match this document:
 
 ```json
 { "page": 12 }
@@ -378,11 +362,11 @@ The following metadata filters are able to match the above document:
 }
 ```
 
-Please note that each key-value pair in the metadata filters is treated as a separate filter clause, and these clauses are combined using the AND logical operator.
+Each key-value pair in the metadata filters is treated as a separate filter clause, and these clauses are combined using the `AND` logical operator.
 
-### Metadata filter Example
+### Example
 
-For example, we add two documents to `TiDBVectorStore`, and add a `title` field to each document as the metadata.
+The following example adds two documents to `TiDBVectorStore` and adds a `title` field to each document as the metadata:
 
 ```python
 vector_store.add_texts(
@@ -397,14 +381,14 @@ vector_store.add_texts(
 )
 ```
 
-Excepted output:
+The expected output is as follows:
 
 ```plain
 [UUID('c782cb02-8eec-45be-a31f-fdb78914f0a7'),
  UUID('08dcd2ba-9f16-4f29-a9b7-18141f8edae3')]
 ```
 
-Perform similarity search with metadata filters:
+Perform a similarity search with metadata filters:
 
 ```python
 docs_with_score = vector_store.similarity_search_with_score(
@@ -417,7 +401,7 @@ for doc, score in docs_with_score:
     print("-" * 80)
 ```
 
-Excepted output:
+The expected output is as follows:
 
 ```plain
 --------------------------------------------------------------------------------
@@ -426,19 +410,18 @@ TiDB Vector offers advanced, high-speed vector processing capabilities, enhancin
 --------------------------------------------------------------------------------
 ```
 
-## Advanced Examples
+## Advanced usage example: travel agent
 
-### Travel Agent
+This section demonstrates an advanced use case of integrating vector search with Langchain for a travel agent. The goal is to create personalized travel reports for clients seeking airports with specific amenities, such as clean lounges and vegetarian options.
 
-Let's look at an advanced use case — a travel agent is crafting a custom travel report for clients who desire airports with specific amenities such as clean lounges and vegetarian options.
+The process involves two main steps:
 
-The process involves:
+1. Perform a semantic search across airport reviews to identify airport codes that match the desired amenities.
+2. Execute an SQL query to merge these codes with route information, highlighting airlines and destinations that align with user's preferences.
 
-- A semantic search within airport reviews to extract airport codes meeting these amenities.
+### Prepare data
 
-- A later SQL query that joins these codes with route information, detailing airlines and destinations aligned with the clients' preferences.
-
-First, let's prepare some airport related data.
+First, create a table to store airport route data:
 
 ```python
 # Create table to store airplan data.
@@ -489,7 +472,7 @@ vector_store.add_texts(
 )
 ```
 
-Excepted output:
+The expected output is as follows:
 
 ```plain
 [UUID('6dab390f-acd9-4c7d-b252-616606fbc89b'),
@@ -497,7 +480,9 @@ Excepted output:
  UUID('f426747c-0f7b-4c62-97ed-3eeb7c8dd76e')]
 ```
 
-Finding Airports with Clean Facilities and Vegetarian Options via Vector Search.
+### Perform a semantic search
+
+The following code searches for airports with clean facilities and vegetarian options:
 
 ```python
 retriever = vector_store.as_retriever(
@@ -513,7 +498,7 @@ for r in reviews:
     print("-" * 80)
 ```
 
-Excepted output:
+The expected output is as follows:
 
 ```plain
 --------------------------------------------------------------------------------
@@ -525,6 +510,10 @@ Comfortable seating in lounge areas and diverse food selections, including veget
 {'airport_code': 'LAX'}
 --------------------------------------------------------------------------------
 ```
+
+### Retrieve detailed airport information
+
+Extract airport codes from the search results and query the database for detailed route information:
 
 ```python
 # Extracting airport codes from the metadata
@@ -538,14 +527,16 @@ airport_details = vector_store.tidb_vector_client.execute(search_query, params)
 airport_details.get("result")
 ```
 
-Excepted output:
+The expected output is as follows:
 
 ```plain
 [(1, 'JFK', 'DL', 'LAX', 'Non-stop from JFK to LAX.', datetime.timedelta(seconds=21600), 5, 'Boeing 777', Decimal('299.99'), 'None'),
  (2, 'LAX', 'AA', 'ORD', 'Direct LAX to ORD route.', datetime.timedelta(seconds=14400), 3, 'Airbus A320', Decimal('149.99'), 'None')]
 ```
 
-Alternatively, we can streamline the process by using a single SQL query to achieve the search in one step.
+### Streamline the process
+
+Alternatively, you can streamline the entire process using a single SQL query:
 
 ```python
 search_query = f"""
@@ -566,7 +557,7 @@ airport_details = vector_store.tidb_vector_client.execute(search_query, params)
 airport_details.get("result")
 ```
 
-Excepted output:
+The expected output is as follows:
 
 ```plain
 [(0.1219207353407008, 1, 'JFK', 'DL', 'LAX', 'Non-stop from JFK to LAX.', datetime.timedelta(seconds=21600), 5, 'Boeing 777', Decimal('299.99'), 'None', 'Clean lounges and excellent vegetarian dining options. Highly recommended.'),
@@ -574,13 +565,15 @@ Excepted output:
  (0.19840519342700513, 3, 'EFGH', 'UA', 'SEA', 'Daily flights from SFO to SEA.', datetime.timedelta(seconds=9000), 7, 'Boeing 737', Decimal('129.99'), 'None', 'Small airport with basic facilities.')]
 ```
 
-Clean up the table.
+### Clean up
+
+Finally, clean up the resources by dropping the created table:
 
 ```python
 vector_store.tidb_vector_client.execute("DROP TABLE airplan_routes")
 ```
 
-Excepted output:
+The expected output is as follows:
 
 ```plain
 {'success': True, 'result': 0, 'error': None}

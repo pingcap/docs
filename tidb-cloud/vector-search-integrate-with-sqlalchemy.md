@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Vector Search with SQLAlchemy
-summary: 
+summary: Learn how to integrate TiDB Vector Search with SQLAlchemy to store embeddings and perform semantic search.
 ---
 
 # Integrate TiDB Vector Search with SQLAlchemy
@@ -18,7 +18,6 @@ To complete this tutorial, you need:
 - [Python 3.8 or higher](https://www.python.org/downloads/) installed.
 - [Git](https://git-scm.com/downloads) installed.
 - A TiDB Serverless cluster. Follow [creating a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
-
 
 ## Run the sample app
 
@@ -58,9 +57,6 @@ pip install sqlalchemy pymysql tidb-vector
 
 ### Step 4. Configure the environment variables
 
-<SimpleTab>
-<div label="TiDB Serverless">
-
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
@@ -89,10 +85,6 @@ pip install sqlalchemy pymysql tidb-vector
     ```dotenv
     TIDB_DATABASE_URL="mysql+pymysql://<prefix>.root:<password>@gateway01.<region>.prod.aws.tidbcloud.com:4000/test?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
     ```
-   
-</div>
-
-</SimpleTab>
 
 ### Step 5. Run the demo
 
@@ -151,9 +143,9 @@ class Document(Base):
     embedding = Column(VectorType(3))
 ```
 
-#### Define a vector column optimized with HNSW index
+#### Define a vector column optimized with index
 
-Define a 3-dimensional vector column and optimize it with an HNSW index.
+Define a 3-dimensional vector column and optimize it with a [vector search index](/tidb-cloud/vector-search-index.md) (HNSW index).
 
 ```python
 class DocumentWithIndex(Base):

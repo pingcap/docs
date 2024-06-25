@@ -29,7 +29,7 @@ To run the demo directly, check out the sample code in the [pingcap/tidb-vector-
 
 ### Step 1. Create a new Python project
 
-In your preferred directory, create a new Python project and a file named `example.py`.
+In your preferred directory, create a new Python project and a file named `example.py`:
 
 ```shell
 mkdir python-client-quickstart
@@ -39,7 +39,7 @@ touch example.py
 
 ### Step 2. Install required dependencies
 
-In your project directory, run the following command to install the necessary packages:
+In your project directory, run the following command to install the required packages:
 
 ```shell
 pip install sqlalchemy pymysql sentence-transformers tidb-vector

@@ -20,7 +20,7 @@ The Vector data type provides these advantages over storing in a `JSON` column:
 
 > **Note:**
 >
-> Vector data type is only available in TiDB Cloud Serverless. It is currently not available in TiDB Cloud Dedicated or TiDB on-premise.
+> The vector search feature is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
 
 ## Value Syntax
 
