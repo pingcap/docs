@@ -260,6 +260,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [PD microservices](/pd-microservices.md) | E | E | N | N | N | N | N | N | N | N |
 | [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md) | Y | Y | Y | E | N | N | N | N | N | N |
 | [Global Sort](/tidb-global-sort.md) | Y | Y | E | N | N | N | N | N | N | N |
+| [TiProxy](/tiproxy/tiproxy-overview.md) | Y | Y | N | N | N | N | N | N | N | N |
 
 [^1]: TiDB incorrectly treats latin1 as a subset of utf8. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
 
