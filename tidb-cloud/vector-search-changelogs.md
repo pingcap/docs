@@ -1,9 +1,9 @@
 ---
-title: TiDB Vector Search Changelogs
+title: Vector Search Changelogs
 summary: Learn about the new features, compatibility changes, improvements, and bug fixes for the TiDB Vector Search.
 ---
 
-# TiDB Vector Search Changelogs
+# Vector Search Changelogs
 
 ## 2024 Releases
 

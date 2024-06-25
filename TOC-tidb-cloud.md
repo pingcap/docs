@@ -260,6 +260,7 @@
     - [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
     - [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md)
     - [Vector Index](/tidb-cloud/vector-search-index.md)
+  - [Improve Performance](/tidb-cloud/vector-search-improve-performance.md)
   - [Limitations](/tidb-cloud/vector-search-limitations.md)
   - [Changelogs](/tidb-cloud/vector-search-changelogs.md)
 - Data Service (Beta)

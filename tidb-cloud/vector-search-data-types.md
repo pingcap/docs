@@ -163,6 +163,8 @@ It is currently not possible to cast between Vector and other data types (like `
 - You cannot store `NaN`, `Infinity`, `-Infinity` values in the vector data type.
 - Currently Vector data types cannot store double-precision floating numbers. This will be supported in future release.
 
+For other limitations, see [Vector Search Limitations].
+
 ## MySQL Compatibility
 
 - Vector data types are TiDB specific, and are not supported in MySQL.
@@ -171,6 +173,9 @@ It is currently not possible to cast between Vector and other data types (like `
 
 - [Vector Functions and Operators]
 - [Vector Search Index]
+- [Improve Vector Search Performance]
 
 [Vector Functions and Operators]: /tidb-cloud/vector-search-functions-and-operators.md
 [Vector Search Index]: /tidb-cloud/vector-search-index.md
+[Improve Vector Search Performance]: /tidb-cloud/vector-search-improve-performance.md
+[Vector Search Limitations]: /tidb-cloud/vector-search-limitations.md

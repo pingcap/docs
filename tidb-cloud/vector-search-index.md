@@ -238,15 +238,11 @@ Explanation of some important fields:
 
 ## See Also
 
-- [Vector Functions and Operators]
+- [Improve Vector Search Performance]
 - [Vector Data Types]
-- [`EXPLAIN` Statement][`EXPLAIN`]
-- [`EXPLAIN ANALYZE` Statement][`EXPLAIN ANALYZE`]
-- [Table Partitioning]
-- [Wikipedia: HNSW Algorithm][Wikipedia HNSW]
 
-[Vector Functions and Operators]: /tidb-cloud/vector-search-functions-and-operators.md
 [Vector Data Types]: /tidb-cloud/vector-search-data-types.md
+[Improve Vector Search Performance]: /tidb-cloud/vector-search-improve-performance.md
 [`EXPLAIN`]: /sql-statements/sql-statement-explain.md
 [`EXPLAIN ANALYZE`]: /sql-statements/sql-statement-explain-analyze.md
 [Table Partitioning]: /partitioned-table.md
