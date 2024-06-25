@@ -336,6 +336,108 @@ An example response is as follows:
 }
 ```
 
+### Call the Chat2Data v1 endpoint (deprecated)
+
+> **Note:**
+>
+> The Chat2Data v1 endpoint is deprecated. It is recommend that you call Chat2Data v3 endpoints instead.
+
+TiDB Cloud Data Service provides the following Chat2Query v1 endpoint:
+
+|  Method | Endpoint| Description |
+|  ----  | ----  |----  |
+|  POST | `/v1/chat2data`  | This endpoint allows you to generate and execute SQL statements using artificial intelligence by providing the target database name and instructions.  |
+
+You can call the `/v1/chat2data` endpoint directly to generate and execute SQL statements. Compared with `/v2/chat2data`, `/v1/chat2data` provides a faster response but lower performance.
+
+TiDB Cloud generates code examples to help you call an endpoint. To get the examples and run the code, see [Get the code example of an endpoint](#get-the-code-example-of-an-endpoint).
+
+When calling `/v1/chat2data`, you need to replace the following parameters:
+
+- Replace the `${PUBLIC_KEY}` and `${PRIVATE_KEY}` placeholders with your API key.
+- Replace the `<your table name, optional>` placeholder with the table name you want to query. If you do not specify a table name, AI will query all tables in the database.
+- Replace the `<your instruction>` placeholder with the instruction you want AI to generate and execute SQL statements.
+
+> **Note:**
+>
+> Each Chat2Query Data App has a rate limit of 100 requests per day. If you exceed the rate limit, the API returns a `429` error. For more quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
+> An API Key with the role `Chat2Query Data Summary Management Role` cannot call the Chat2Data v1 endpoint.
+The following code example is used to count how many users are in the `sp500insight.users` table:
+
+```bash
+curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.dev.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/chat2data'\
+ --header 'content-type: application/json'\
+ --data-raw '{
+    "cluster_id": "10939961583884005252",
+    "database": "sp500insight",
+    "tables": ["users"],
+    "instruction": "count the users"
+}'
+```
+
+In the preceding example, the request body is a JSON object with the following properties:
+
+- `cluster_id`: _string_. A unique identifier of the TiDB cluster.
+- `database`: _string_. The name of the database.
+- `tables`: _array_. (optional) A list of table names to be queried.
+- `instruction`: _string_. A instruction in natural language describing the query you want.
+
+The response is as follows:
+
+```json
+{
+  "type": "chat2data_endpoint",
+  "data": {
+    "columns": [
+      {
+        "col": "COUNT(`user_id`)",
+        "data_type": "BIGINT",
+        "nullable": false
+      }
+    ],
+    "rows": [
+      {
+        "COUNT(`user_id`)": "1"
+      }
+    ],
+    "result": {
+      "code": 200,
+      "message": "Query OK!",
+      "start_ms": 1699529488292,
+      "end_ms": 1699529491901,
+      "latency": "3.609656403s",
+      "row_count": 1,
+      "row_affect": 0,
+      "limit": 1000,
+      "sql": "SELECT COUNT(`user_id`) FROM `users`;",
+      "ai_latency": "3.054822491s"
+    }
+  }
+}
+```
+
+If your API call is not successful, you will receive a status code other than `200`. The following is an example of the `500` status code:
+
+```json
+{
+  "type": "chat2data_endpoint",
+  "data": {
+    "columns": [],
+    "rows": [],
+    "result": {
+      "code": 500,
+      "message": "internal error! defaultPermissionHelper: rpc error: code = DeadlineExceeded desc = context deadline exceeded",
+      "start_ms": "",
+      "end_ms": "",
+      "latency": "",
+      "row_count": 0,
+      "row_affect": 0,
+      "limit": 0
+    }
+  }
+}
+```
+
 ## Start multi-round Chat2Query by using sessions
 
 Starting from v3, the Chat2Query API enables you to start multi-round chat by using sessions. You can use the `session_id` returned by the `/v3/chat2data` endpoint to continue your conversation in the next round.
