@@ -130,7 +130,13 @@ Run the Django development server:
 python manage.py runserver
 ```
 
-Open your browser and visit `http://localhost:8000` to see the demo application.
+Open your browser and visit `http://localhost:8000` to try the demo application. Here are the available API paths:
+
+| API Path                                | Description                              |
+|-----------------------------------------|------------------------------------------|
+| `POST: /insert_documents`               | Insert documents with embeddings.        |
+| `GET: /get_nearest_neighbors_documents` | Get the 3-nearest neighbor documents.    |
+| `GET: /get_documents_within_distance`   | Get documents within a certain distance. |
 
 ## Sample code snippets
 
