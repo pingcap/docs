@@ -236,6 +236,8 @@ Explanation of some important fields:
 - `vector_index.search.total`: The total duration of searching in the index. Large latency usually means the index is cold (never accessed before, or accessed long ago) so that there is heavy IO when searching through the index. This field could be larger than actual query time because multiple vector indexes may be searched in parallel.
 - `vector_index.search.discarded_nodes`: Number of vector rows visited but discarded during the search. These discarded vectors are not considered in the search result. Large values usually indicate that there are many stale rows caused by UPDATE or DELETE statements.
 
+See documentations of [`EXPLAIN`], [`EXPLAIN ANALYZE`] and [EXPLAIN Walkthrough](/explain-walkthrough.md) for interpreting the output.
+
 ## See Also
 
 - [Improve Vector Search Performance]

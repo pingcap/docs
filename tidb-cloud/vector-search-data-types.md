@@ -167,7 +167,7 @@ For other limitations, see [Vector Search Limitations].
 
 ## MySQL Compatibility
 
-- Vector data types are TiDB specific, and are not supported in MySQL.
+Vector data types are TiDB specific, and are not supported in MySQL.
 
 ## See Also
 
