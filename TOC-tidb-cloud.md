@@ -261,7 +261,6 @@
     - [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md)
     - [Vector Index](/tidb-cloud/vector-search-index.md)
   - [Limitations](/tidb-cloud/vector-search-limitations.md)
-  - [FAQs](/tidb-cloud/vector-search-faqs.md)
   - [Changelogs](/tidb-cloud/vector-search-changelogs.md)
 - Data Service (Beta)
   - [Overview](/tidb-cloud/data-service-overview.md)
