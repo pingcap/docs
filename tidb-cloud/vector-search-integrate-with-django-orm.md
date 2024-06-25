@@ -164,6 +164,13 @@ Document.objects.create(content="tree", embedding=[1, 0, 0])
 
 ### Search the nearest neighbor documents
 
+TiDB Vector support below distance functions:
+
+- `L1Distance`
+- `L2Distance`
+- `CosineDistance`
+- `NegativeInnerProduct`
+
 Search for the top-3 documents that are semantically closest to the query vector `[1, 2, 3]` based on the cosine distance function.
 
 ```python
