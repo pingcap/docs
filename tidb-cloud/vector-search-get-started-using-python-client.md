@@ -5,13 +5,7 @@ summary: Learn how to quickly get started with the TiDB vector search feature in
 
 # Get Started with Vector Search Using the Python Client
 
-This tutorial demonstrates how to get started with the [vector search](/tidb-cloud/vector-search-overview.md) feature in TiDB Cloud using a Python client. You will learn how to use the Python client [`tidb-vector`](https://github.com/pingcap/tidb-vector-python) to:
-
-- Set up your environment.
-- Connect to your TiDB cluster.
-- Create a vector table.
-- Store vector embeddings.
-- Perform vector search queries.
+This tutorial demonstrates how to develop an application providing semantic search features, which is capable of searching for similar documents in an intelligent way powered by [TiDB Vector Search](/tidb-cloud/vector-search-overview.md) and AI models.
 
 > **Note**
 >
@@ -60,28 +54,28 @@ pip install sqlalchemy pymysql sentence-transformers tidb-vector
 
 3. Ensure the configurations in the connection dialog match your operating environment.
 
-    - **Endpoint Type** is set to `Public`.
-    - **Branch** is set to `main`.
-    - **Connect With** is set to `SQLAlchemy`.
-    - **Operating System** matches your environment.
+   - **Endpoint Type** is set to `Public`.
+   - **Branch** is set to `main`.
+   - **Connect With** is set to `SQLAlchemy`.
+   - **Operating System** matches your environment.
 
-    > **Tip:**
-    >
-    > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
+   > **Tip:**
+   >
+   > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
 
 4. Click the **PyMySQL** tab and copy the connection string.
 
-    > **Tip:**
-    > 
-    > If you have not set a password yet, click **Generate Password** to generate a random password.
+   > **Tip:**
+   >
+   > If you have not set a password yet, click **Generate Password** to generate a random password.
 
 5. In the root directory of your Python project, create a `.env` file and paste the connection string into it.
 
-     The following is an example for macOS:
+   The following is an example for macOS:
 
-    ```dotenv
-    TIDB_DATABASE_URL="mysql+pymysql://<prefix>.root:<password>@gateway01.<region>.prod.aws.tidbcloud.com:4000/test?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
-    ```
+   ```dotenv
+   TIDB_DATABASE_URL="mysql+pymysql://<prefix>.root:<password>@gateway01.<region>.prod.aws.tidbcloud.com:4000/test?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
+   ```
 
 ### Step 4. Initialize the embedding model
 
@@ -107,7 +101,7 @@ def text_to_embedding(text):
 Use the `TiDBVectorClient` class to connect to your TiDB cluster and create a table `embedded_documents` with a vector column to serve as the vector store.
 
 > **Note**
-> 
+>
 > Ensure the dimension of your vector column matches the dimension of the vectors produced by your embedding model. For example, the **msmarco-MiniLM-L12-cos-v5** model generates vectors with 384 dimensions.
 
 ```python
@@ -164,9 +158,9 @@ vector_store.insert(
 )
 ```
 
-### Step 7. Perform a vector search query
+### Step 7. Perform a semantic search
 
-In this step, you will search for "a swimming animal", which doesn't directly match any words in existing documents. 
+In this step, you will search for "a swimming animal", which doesn't directly match any words in existing documents.
 
 The following code uses the `text_to_embedding()` function again to convert the query text into a vector embedding, and then queries with the embedding to find the top three closest matches.
 
