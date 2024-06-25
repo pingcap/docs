@@ -278,7 +278,7 @@ SELECT JSON_SEARCH('{"a": ["aa", "bb", "cc"], "b": ["cc", "dd"]}','all','cc');
 
 ## [MEMBER OF()](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#operator_member-of)
 
-The `str MEMBER OF (json_array)` functions tests if the passed value is an element of the `json_array`, it returns `1`. Otherwise, it returns `0`. It returns `NULL` if any of the arguments is `NULL`.
+The `str MEMBER OF (json_array)` function tests if the passed value is an element of the `json_array`, it returns `1`. Otherwise, it returns `0`. It returns `NULL` if any of the arguments is `NULL`.
 
 ```
 SELECT '🍍' MEMBER OF ('["🍍","🥥","🥭"]') AS 'Contains pineapple';
