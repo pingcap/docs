@@ -232,3 +232,8 @@ results = Document.objects.annotate(
    distance=CosineDistance('embedding', [1, 2, 3])
 ).filter(distance__lt=0.2).order_by('distance')[:3]
 ```
+
+## See also
+
+- [Vector Data Type](/tidb-cloud/vector-search-data-types.md)
+- [Vector Search Index](/tidb-cloud/vector-search-index.md)

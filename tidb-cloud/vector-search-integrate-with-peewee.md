@@ -227,3 +227,8 @@ distance_expression = Document.embedding.cosine_distance([1, 2, 3])
 distance = distance_expression.alias('distance')
 results = Document.select(Document, distance).where(distance_expression < 0.2).order_by(distance).limit(3)
 ```
+
+## See also
+
+- [Vector Data Type](/tidb-cloud/vector-search-data-types.md)
+- [Vector Search Index](/tidb-cloud/vector-search-index.md)

@@ -585,3 +585,8 @@ Excepted output:
 ```plain
 {'success': True, 'result': 0, 'error': None}
 ```
+
+## See also
+
+- [Vector Data Type](/tidb-cloud/vector-search-data-types.md)
+- [Vector Search Index](/tidb-cloud/vector-search-index.md)

@@ -267,5 +267,5 @@ Empty Response
 
 ## See also
 
-- [Vector Column](/tidb-cloud/vector-search-vector-column.md)
-- [Vector Index](/tidb-cloud/vector-search-vector-index.md)
+- [Vector Data Type](/tidb-cloud/vector-search-data-types.md)
+- [Vector Search Index](/tidb-cloud/vector-search-index.md)

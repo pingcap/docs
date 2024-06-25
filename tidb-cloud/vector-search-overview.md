@@ -23,7 +23,7 @@ A vector embedding, also known as an embedding, is an array of numbers that repr
 
 Vector embeddings are essential in machine learning and serve as the foundation for semantic similarity searches.
 
-To store vector embeddings, TiDB introduces a new `VECTOR` data type. For more information, see [Vector Column](/tidb-cloud/vector-search-vector-column.md).
+To store vector embeddings, TiDB introduces a new `VECTOR` data type. For more information, see [Vector Data Type](/tidb-cloud/vector-search-data-types.md).
 
 ### Embedding model
 
@@ -37,7 +37,7 @@ To learn how to generate vector embeddings for your specific data types, refer t
 
 After converting raw data into vector embeddings and storing them in TiDB, your application can execute vector search queries to find the data most semantically or contextually relevant to a user's query.
 
-The vector search feature in TiDB Cloud identifies the top-k nearest neighbor (KNN) vectors by using a [distance function](#) to calculate the distance between a given vectorized query and the data vectors in the embedding space. The vectors closest to the query represent the most similar data in meaning.
+The vector search feature in TiDB Cloud identifies the top-k nearest neighbor (KNN) vectors by using a [distance function](/tidb-cloud/vector-search-functions-and-operators.md) to calculate the distance between a given vectorized query and the data vectors in the embedding space. The vectors closest to the query represent the most similar data in meaning.
 
 ![The Schematic TiDB Vector Search](/media/vector-search/embedding-search.png)
 

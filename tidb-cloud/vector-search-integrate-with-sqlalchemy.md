@@ -198,3 +198,8 @@ with Session(engine) as session:
         Document, distance
     ).filter(distance < 0.2).order_by(distance).limit(3).all()
 ```
+
+## See also
+
+- [Vector Data Type](/tidb-cloud/vector-search-data-types.md)
+- [Vector Search Index](/tidb-cloud/vector-search-index.md)

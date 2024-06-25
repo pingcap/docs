@@ -144,5 +144,5 @@ From the output, the swimming animal is most likely a fish, or a dog with a gift
 
 ## See also
 
-- [Vector Column](/tidb-cloud/vector-search-vector-column.md)
-- [Vector HNSW Index](/tidb-cloud/vector-search-vector-index.md)
+- [Vector Data Type](/tidb-cloud/vector-search-data-types.md)
+- [Vector Search Index](/tidb-cloud/vector-search-index.md)
