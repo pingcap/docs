@@ -53,5 +53,5 @@ Retrieval-Augmented Generation (RAG) is an architecture designed to optimize the
 
 To get started with the vector search feature, see the following documents:
 
-- [Get started with vector search via SQL](/tidb-cloud/vector-search-get-started-via-sql.md)
-- [Get started with vector search via Python client](/tidb-cloud/vector-search-get-started-via-python-client.md)
+- [Get started with vector search using SQL](/tidb-cloud/vector-search-get-started-using-sql.md)
+- [Get started with vector search using Python client](/tidb-cloud/vector-search-get-started-using-python-client.md)

@@ -52,7 +52,7 @@ The following table lists the supported ORM libraries:
     <td rowspan="4">Python</td>
     <td>TiDB Vector Client</td>
     <td><code>pip install tidb-vector[client]</code></td>
-    <td><a href="/tidb-cloud/vector-search-get-started-via-python-client.md">Get Started with Vector Search Using the Python Client</a></td>
+    <td><a href="/tidb-cloud/vector-search-get-started-using-python-client.md">Get Started with Vector Search Using the Python Client</a></td>
   </tr>
   <tr>
     <td>SQLAlchemy</td>
