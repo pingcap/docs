@@ -19,7 +19,6 @@ To complete this tutorial, you need:
 - [Git](https://git-scm.com/downloads) installed.
 - A TiDB Serverless cluster. Follow [creating a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
 
-
 ## Run the sample app
 
 You can quickly learn about how to integrate TiDB Vector Search with Django ORM by following the steps below.
@@ -68,9 +67,6 @@ For more information, refer to [django-tidb repository](https://github.com/pingc
 
 ### Step 4. Configure the environment variables
 
-<SimpleTab>
-<div label="TiDB Serverless">
-
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
@@ -111,10 +107,6 @@ For more information, refer to [django-tidb repository](https://github.com/pingc
     TIDB_DATABASE=test
     TIDB_CA_PATH=/etc/ssl/cert.pem
     ```
-
-</div>
-
-</SimpleTab>
 
 ### Step 5. Run the demo
 

@@ -57,9 +57,6 @@ Get the Jina AI API key from the [Jina AI Embeddings API](https://jina.ai/embedd
 
 #### 4.2 Get the TiDB connection parameters
 
-<SimpleTab>
-<div label="TiDB Serverless">
-
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
@@ -80,11 +77,6 @@ Get the Jina AI API key from the [Jina AI Embeddings API](https://jina.ai/embedd
    > **Tip:**
    >
    > If you have not set a password yet, click **Create password** to generate a random password.
-
-
-</div>
-
-</SimpleTab>
 
 #### 4.3 Set the environment variables
 

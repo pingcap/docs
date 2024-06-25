@@ -57,9 +57,6 @@ pip install peewee pymysql tidb-vector
 
 ### Step 4. Configure the environment variables
 
-<SimpleTab>
-<div label="TiDB Serverless">
-
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
@@ -100,10 +97,6 @@ pip install peewee pymysql tidb-vector
     TIDB_DATABASE=test
     TIDB_CA_PATH=/etc/ssl/cert.pem
     ```
-
-</div>
-
-</SimpleTab>
 
 ### Step 5. Run the demo
 
