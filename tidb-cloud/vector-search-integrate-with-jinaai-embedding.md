@@ -17,17 +17,9 @@ To complete this tutorial, you need:
 
 - [Python 3.8 or higher](https://www.python.org/downloads/) installed.
 - [Git](https://git-scm.com/downloads) installed.
-- A running TiDB Serverless cluster with vector search enabled.
+- A TiDB Serverless cluster. Follow [creating a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
 
-<CustomContent platform="tidb-cloud">
-
-**If you don't have a TiDB cluster, you can create one as follows:**
-
-- Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-
-</CustomContent>
-
-## Get Started
+## Run the sample app
 
 You can quickly learn about how to integrate TiDB Vector Search with JinaAI Embedding by following the steps below.
 
@@ -131,7 +123,7 @@ Example output:
     content: TiDB is an open-source MySQL-compatible database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads.
 ```
 
-## Key code snippets
+## Sample code snippets
 
 ### Get Embeddings from Jina AI
 

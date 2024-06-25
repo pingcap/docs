@@ -246,13 +246,16 @@
     - [Get Started with SQL](/tidb-cloud/vector-search-get-started-via-sql.md)
     - [Get Started with Python Client](/tidb-cloud/vector-search-get-started-via-python-client.md)
   - Integrations
+    - [Overview](/tidb-cloud/vector-search-integration-overview.md)
     - AI Frameworks
       - [LlamaIndex](/tidb-cloud/vector-search-integrate-with-llamaindex.md)
       - [Langchain](/tidb-cloud/vector-search-integrate-with-langchain.md)
-    - Embedding Services
+    - Embedding Models / Services
       - [JinaAI](/tidb-cloud/vector-search-integrate-with-jinaai-embedding.md)
-    - Programming Languages
-      - [Python](/tidb-cloud/vector-search-integrate-with-python.md)
+    - ORM Libraries
+      - [SQLAlchemy](/tidb-cloud/vector-search-integrate-with-sqlalchemy.md)
+      - [Peewee](/tidb-cloud/vector-search-integrate-with-peewee.md)
+      - [Django ORM](/tidb-cloud/vector-search-integrate-with-django-orm.md)
   - Reference
     - [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
     - [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md)
