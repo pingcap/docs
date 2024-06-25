@@ -7,7 +7,7 @@ summary: Learn how to build and use the vector search index to accelerate K-Near
 
 K-Nearest neighborhood (KNN) search is the problem of finding the K closest points for a given point in a vector space. The most straightforward approach to solve this problem is a brute force search where the distance between all points in the vector space and the reference point is computed. This method guarantees perfect accuracy, but it is usually too slow for practical applications. Thus, nearest neighborhood search problems are often solved with approximative algorithms.
 
-In TiDB, you can create and utilize Vector Search Indexes for such approximate nearest neighbor (ANN) searches over columns with [Vector Data Types]. By using Vector Search Indexes, vector search queries could be finished in milliseconds.
+In TiDB, you can create and utilize Vector Search Indexes for such approximate nearest neighbor (ANN) searches over columns with [Vector Data Types](/tidb-cloud/vector-search-data-types.md). By using Vector Search Indexes, vector search queries could be finished in milliseconds.
 
 TiDB currently supports the following Vector Search Index algorithms:
 
@@ -19,9 +19,9 @@ TiDB currently supports the following Vector Search Index algorithms:
 
 ## Create HNSW Vector Index
 
-HNSW ([wikipedia][Wikipedia HNSW]) is one of the most popular vector indexing algorithms. HNSW index provides a good performance with a relatively high accuracy (> 98% in typical cases).
+HNSW ([wikipedia](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world)) is one of the most popular vector indexing algorithms. HNSW index provides a good performance with a relatively high accuracy (> 98% in typical cases).
 
-To create a HNSW vector index, specify the index definition in the comment of a column with [vector data type][Vector Data Types] when creating the table:
+To create a HNSW vector index, specify the index definition in the comment of a column with [vector data type](/tidb-cloud/vector-search-data-types.md) when creating the table:
 
 ```sql
 CREATE TABLE vector_table_with_index (
@@ -98,7 +98,7 @@ WHERE category = "document";
 -- Note that this query may return less than 5 results if some are filtered out.
 ```
 
-**Use Table Partitioning**: Query within the [table partition][Table Partitioning] can fully utilize vector index. This can be useful if you want to perform eqality filters, as equality filters can be turned into accessing specified partitions.
+**Use Table Partitioning**: Query within the [table partition](/partitioned-table.md) can fully utilize vector index. This can be useful if you want to perform eqality filters, as equality filters can be turned into accessing specified partitions.
 
 Example: Suppose you want to find closest documentations for a specific product version.
 
@@ -131,11 +131,11 @@ ORDER BY Vec_Cosine_distance(embedding, '[1, 2, 3]')
 LIMIT 5;
 ```
 
-See [Table Partitioning] for more information.
+See [Table Partitioning](/partitioned-table.md) for more information.
 
 ## Check Whether Vector Index is Used
 
-Use the [`EXPLAIN`] or [`EXPLAIN ANALYZE`] statement to check whether this query is using the Vector Index. When `annIndex:` is presented in the `operator info` column for the `TableFullScan` executor, it means this Table Scan is utilizing the Vector Index.
+Use the [`EXPLAIN`](/sql-statements/sql-statement-explain.md) or [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) statement to check whether this query is using the Vector Index. When `annIndex:` is presented in the `operator info` column for the `TableFullScan` executor, it means this Table Scan is utilizing the Vector Index.
 
 **Example: Vector Index is used:**
 
@@ -199,7 +199,7 @@ ANN index not used: index can be used only when ordering by vec_cosine_distance(
 
 ## Analyze Vector Search Performance
 
-[`EXPLAIN ANALYZE`] statement contains detailed information about how Vector Index is used in the `execution info` column:
+[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) statement contains detailed information about how Vector Index is used in the `execution info` column:
 
 ```sql
 [tidb]> EXPLAIN ANALYZE SELECT * FROM vector_table_with_index
@@ -236,16 +236,9 @@ Explanation of some important fields:
 - `vector_index.search.total`: The total duration of searching in the index. Large latency usually means the index is cold (never accessed before, or accessed long ago) so that there is heavy IO when searching through the index. This field could be larger than actual query time because multiple vector indexes may be searched in parallel.
 - `vector_index.search.discarded_nodes`: Number of vector rows visited but discarded during the search. These discarded vectors are not considered in the search result. Large values usually indicate that there are many stale rows caused by UPDATE or DELETE statements.
 
-See documentations of [`EXPLAIN`], [`EXPLAIN ANALYZE`] and [EXPLAIN Walkthrough](/explain-walkthrough.md) for interpreting the output.
+See documentations of [`EXPLAIN`](/sql-statements/sql-statement-explain.md), [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) and [EXPLAIN Walkthrough](/explain-walkthrough.md) for interpreting the output.
 
 ## See Also
 
-- [Improve Vector Search Performance]
-- [Vector Data Types]
-
-[Vector Data Types]: /tidb-cloud/vector-search-data-types.md
-[Improve Vector Search Performance]: /tidb-cloud/vector-search-improve-performance.md
-[`EXPLAIN`]: /sql-statements/sql-statement-explain.md
-[`EXPLAIN ANALYZE`]: /sql-statements/sql-statement-explain-analyze.md
-[Table Partitioning]: /partitioned-table.md
-[Wikipedia HNSW]: https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world
+- [Improve Vector Search Performance](/tidb-cloud/vector-search-improve-performance.md)
+- [Vector Data Types](/tidb-cloud/vector-search-data-types.md)

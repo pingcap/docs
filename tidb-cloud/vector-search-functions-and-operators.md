@@ -11,7 +11,7 @@ summary: Learn about functions and operators available for Vector Data Types.
 
 ## Vector Functions
 
-The following functions are designed specifically for [Vector Data Types].
+The following functions are designed specifically for [Vector Data Types](/tidb-cloud/vector-search-data-types.md).
 
 **Vector Distance Functions:**
 
@@ -33,7 +33,7 @@ The following functions are designed specifically for [Vector Data Types].
 
 ## Extended Built-in Functions and Operators
 
-The following built-in functions and operators are extended, supporting operating on [Vector Data Types].
+The following built-in functions and operators are extended, supporting operating on [Vector Data Types](/tidb-cloud/vector-search-data-types.md).
 
 **Arithmetic operators:**
 
@@ -276,6 +276,4 @@ The vector functions and the extended usage of built-in functions and operators 
 
 ## See Also
 
-- [Vector Data Types]
-
-[Vector Data Types]: /tidb-cloud/vector-search-data-types.md
+- [Vector Data Types](/tidb-cloud/vector-search-data-types.md)

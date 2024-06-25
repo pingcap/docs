@@ -14,7 +14,7 @@ The following Vector data type is currently available:
 
 The Vector data type provides these advantages over storing in a `JSON` column:
 
-- Vector Index support. A [Vector Search Index] can be built to speed up vector searching.
+- Vector Index support. A [Vector Search Index](/tidb-cloud/vector-search-index.md) can be built to speed up vector searching.
 - Dimension enforcement. A dimension can be specified to forbid inserting vectors with different dimensions.
 - Optimized storage format. Vector data types is stored even more space-efficient than `JSON` data type.
 
@@ -57,9 +57,9 @@ As dimension 3 is enforced for the `embedding` column in the example above, inse
 ERROR 1105 (HY000): vector has 2 dimensions, does not fit VECTOR(3)
 ```
 
-See [Vector Functions and Operators] for available functions and operators over the Vector data type.
+See [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md) for available functions and operators over the Vector data type.
 
-See [Vector Search Index] for building and using a vector search index.
+See [Vector Search Index](/tidb-cloud/vector-search-index.md) for building and using a vector search index.
 
 ## Vectors with Different Dimensions
 
@@ -75,7 +75,7 @@ INSERT INTO vector_table VALUES (1, '[0.3, 0.5, -0.1]'); -- 3 dimensions vector,
 INSERT INTO vector_table VALUES (2, '[0.3, 0.5]');       -- 2 dimensions vector, OK
 ```
 
-However you cannot build a [Vector Search Index] for this column, as vector distances can be only calculated between vectors with the same dimensions.
+However you cannot build a [Vector Search Index](/tidb-cloud/vector-search-index.md) for this column, as vector distances can be only calculated between vectors with the same dimensions.
 
 ## Cast
 
@@ -151,7 +151,7 @@ To cast vector into its string representation explicitly, use `VEC_AS_TEXT` func
 1 row in set (0.01 sec)
 ```
 
-See [Vector Functions and Operators] for more information.
+See [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md) for more information.
 
 ### Cast between Vector ⇔ Other Data Types
 
@@ -163,7 +163,7 @@ It is currently not possible to cast between Vector and other data types (like `
 - You cannot store `NaN`, `Infinity`, `-Infinity` values in the vector data type.
 - Currently Vector data types cannot store double-precision floating numbers. This will be supported in future release.
 
-For other limitations, see [Vector Search Limitations].
+For other limitations, see [Vector Search Limitations](/tidb-cloud/vector-search-limitations.md).
 
 ## MySQL Compatibility
 
@@ -171,11 +171,6 @@ Vector data types are TiDB specific, and are not supported in MySQL.
 
 ## See Also
 
-- [Vector Functions and Operators]
-- [Vector Search Index]
-- [Improve Vector Search Performance]
-
-[Vector Functions and Operators]: /tidb-cloud/vector-search-functions-and-operators.md
-[Vector Search Index]: /tidb-cloud/vector-search-index.md
-[Improve Vector Search Performance]: /tidb-cloud/vector-search-improve-performance.md
-[Vector Search Limitations]: /tidb-cloud/vector-search-limitations.md
+- [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md)
+- [Vector Search Index](/tidb-cloud/vector-search-index.md)
+- [Improve Vector Search Performance](/tidb-cloud/vector-search-improve-performance.md)

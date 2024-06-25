@@ -9,7 +9,7 @@ TiDB Vector Search allows you to perform ANN queries that search for results sim
 
 ## Add Vector Search Index for Vector Columns
 
-[Vector Search Index] dramatically improves the performance of vector search queries, usually by 10x or more, with a trade-off of only a small decrease of recall rate.
+[Vector Search Index](/tidb-cloud/vector-search-index.md) dramatically improves the performance of vector search queries, usually by 10x or more, with a trade-off of only a small decrease of recall rate.
 
 ## Reduce Vector Dimensions or Shorten Embeddings
 
@@ -30,5 +30,3 @@ To exclude vector columns, explicitly list the columns you want to retrieve in t
 When an index is cold accessed, it takes time to load the whole index from S3, or load from disk (instead of from memory). Such processes usually result in high tail latency. Additionally, if there are no SQL queries on a cluster for a long time (e.g. hours), the compute resource is reclaimed and will result in cold access next time.
 
 To avoid such tail latencies, warm up your index before actual workload by using similar vector search queries that will hit the vector index.
-
-[Vector Search Index]: /tidb-cloud/vector-search-index.md
