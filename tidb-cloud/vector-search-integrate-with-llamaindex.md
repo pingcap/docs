@@ -23,15 +23,7 @@ To complete this tutorial, you need:
 - [Python 3.8 or higher](https://www.python.org/downloads/) installed.
 - [Jupyter Notebook](https://jupyter.org/install) installed.
 - [Git](https://git-scm.com/downloads) installed.
-- A TiDB Serverless cluster running.
-
-<CustomContent platform="tidb-cloud">
-
-**If you don't have a TiDB cluster, you can create one as follows:**
-
-- Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-
-</CustomContent>
+- A TiDB Serverless cluster. Follow [creating a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
 
 ## Get Started
 

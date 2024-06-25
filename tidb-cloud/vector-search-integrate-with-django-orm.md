@@ -96,20 +96,20 @@ For more information, refer to [django-tidb repository](https://github.com/pingc
 
    - `TIDB_HOST`: The host of the TiDB cluster.
    - `TIDB_PORT`: The port of the TiDB cluster.
-   - `TIDB_USER`: The username to connect to the TiDB cluster.
+   - `TIDB_USERNAME`: The username to connect to the TiDB cluster.
    - `TIDB_PASSWORD`: The password to connect to the TiDB cluster.
    - `TIDB_DATABASE`: The database name to connect to.
-   - `CA_PATH`: The path to the root certificate file.
+   - `TIDB_CA`: The path to the root certificate file.
 
    The following is an example for macOS:
 
     ```dotenv
     TIDB_HOST=gateway01.****.prod.aws.tidbcloud.com
     TIDB_PORT=4000
-    TIDB_USER=********.root
+    TIDB_USERNAME=********.root
     TIDB_PASSWORD=********
     TIDB_DATABASE=test
-    CA_PATH=/etc/ssl/cert.pem
+    TIDB_CA=/etc/ssl/cert.pem
     ```
 
 </div>
@@ -130,7 +130,7 @@ Run the Django development server:
 python manage.py runserver
 ```
 
-Open your browser and visit `http://localhost:8000` to try the demo application. Here are the available API paths:
+Open your browser and visit `http://127.0.0.1:8000` to try the demo application. Here are the available API paths:
 
 | API Path                                | Description                              |
 |-----------------------------------------|------------------------------------------|
@@ -155,9 +155,9 @@ DATABASES = {
         "ENGINE": "django_tidb",
         "HOST": os.environ.get("TIDB_HOST", "127.0.0.1"),
         "PORT": int(os.environ.get("TIDB_PORT", 4000)),
-        "USER": os.environ.get("TIDB_USER", "root"),
+        "USER": os.environ.get("TIDB_USERNAME", "root"),
         "PASSWORD": os.environ.get("TIDB_PASSWORD", ""),
-        "NAME": os.environ.get("TIDB_DB_NAME", "test"),
+        "NAME": os.environ.get("TIDB_DATABASE", "test"),
         "OPTIONS": {
             "charset": "utf8mb4",
         },

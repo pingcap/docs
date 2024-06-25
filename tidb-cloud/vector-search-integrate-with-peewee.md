@@ -85,7 +85,7 @@ pip install peewee pymysql tidb-vector
 
     - `TIDB_HOST`: The host of the TiDB cluster.
     - `TIDB_PORT`: The port of the TiDB cluster.
-    - `TIDB_USER`: The username to connect to the TiDB cluster.
+    - `TIDB_USERNAME`: The username to connect to the TiDB cluster.
     - `TIDB_PASSWORD`: The password to connect to the TiDB cluster.
     - `TIDB_DATABASE`: The database name to connect to.
     - `TIDB_CA`: The path to the root certificate file.
@@ -95,7 +95,7 @@ pip install peewee pymysql tidb-vector
     ```dotenv
     TIDB_HOST=gateway01.****.prod.aws.tidbcloud.com
     TIDB_PORT=4000
-    TIDB_USER=********.root
+    TIDB_USERNAME=********.root
     TIDB_PASSWORD=********
     TIDB_DATABASE=test
     TIDB_CA=/etc/ssl/cert.pem
@@ -163,7 +163,7 @@ connect_kwargs = {
 
 db = MySQLDatabase(
     database=os.environ.get('TIDB_DATABASE', 'test'),
-    user=os.environ.get('TIDB_USER', 'root'),
+    user=os.environ.get('TIDB_USERNAME', 'root'),
     password=os.environ.get('TIDB_PASSWORD', ''),
     host=os.environ.get('TIDB_HOST', 'localhost'),
     port=int(os.environ.get('TIDB_PORT', '4000')),
