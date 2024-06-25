@@ -5,9 +5,13 @@ summary: Learn about functions and operators available for Vector Data Types.
 
 # Vector Functions and Operators
 
+> **Note:**
+>
+> Vector data types and these vector functions are only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+
 ## Vector Functions
 
-The following functions perform operations on values of [Vector Data Types].
+The following functions are designed specifically for [Vector Data Types].
 
 **Vector Distance Functions:**
 
@@ -27,9 +31,9 @@ The following functions perform operations on values of [Vector Data Types].
 | [VEC_FROM_TEXT](#vec_from_text) | Converts a string into a vector                     |
 | [VEC_AS_TEXT](#vec_as_text)     | Converts a vector into a string                     |
 
-## Built-in Functions and Operators
+## Extended Built-in Functions and Operators
 
-The following built-in functions and operators are extended, supporting operating on vector data types.
+The following built-in functions and operators are extended, supporting operating on [Vector Data Types].
 
 **Arithmetic operators:**
 
