@@ -15,7 +15,7 @@ TiDB currently supports the following Vector Search Index algorithms:
 
 > **Note:**
 >
-> TiDB Vector Search is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+> Vector Search index is only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
 
 ## Create HNSW Vector Index
 
