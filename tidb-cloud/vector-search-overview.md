@@ -5,7 +5,7 @@ summary: Learn about Vector Search in TiDB Cloud. This feature provides an advan
 
 # Vector Search (Beta) Overview
 
-The vector search (beta) feature in TiDB Cloud provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video. This feature enables developers to easily build scalable applications with generative artificial intelligence (AI) capabilities using familiar MySQL skills.
+TiDB Vector Search (Beta) in provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video. This feature enables developers to easily build scalable applications with generative artificial intelligence (AI) capabilities using familiar MySQL skills.
 
 > **Note**
 >
@@ -19,11 +19,11 @@ For example, a full-text search for "a swimming animal" only returns results wit
 
 ### Vector embedding
 
-A vector embedding, also known as an embedding, is an array of numbers that represents real-world objects in a high-dimensional space. It captures the meaning and context of unstructured data, such as documents, images, audio, and videos.
+A vector embedding, also known as an embedding, is a sequence of numbers that represents real-world objects in a high-dimensional space. It captures the meaning and context of unstructured data, such as documents, images, audio, and videos.
 
 Vector embeddings are essential in machine learning and serve as the foundation for semantic similarity searches.
 
-To store vector embeddings, TiDB introduces a new `VECTOR` data type. For more information, see [Vector Data Types](/tidb-cloud/vector-search-data-types.md).
+TiDB introduces [Vector Data types](/tidb-cloud/vector-search-data-types.md) specifically optimized for AI Vector Embedding use cases. You can store vector embeddings in TiDB and perform vector search queries to find the most similar data using vector Data types.
 
 ### Embedding model
 
@@ -37,7 +37,7 @@ To learn how to generate vector embeddings for your specific data types, refer t
 
 After converting raw data into vector embeddings and storing them in TiDB, your application can execute vector search queries to find the data most semantically or contextually relevant to a user's query.
 
-Vector Search in TiDB Cloud identifies the top-k nearest neighbor (KNN) vectors by using a [distance function](/tidb-cloud/vector-search-functions-and-operators.md) to calculate the distance between a given vectorized query and the data vectors in the embedding space. The vectors closest to the query represent the most similar data in meaning.
+Vector Search in TiDB Cloud identifies the top-k nearest neighbor (KNN) vectors by using a [distance function](/tidb-cloud/vector-search-functions-and-operators.md) to calculate the distance between the given vector and vectors stored in the database. The vectors closest to the query represent the most similar data in meaning.
 
 ![The Schematic TiDB Vector Search](/media/vector-search/embedding-search.png)
 
