@@ -28,7 +28,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     These reports provide insights into the performance and activity of your clusters. By receiving automatic weekly updates, you can stay informed about your clusters and make data-driven decisions to optimize your clusters.
 
 - Release Chat2Query API v3 endpoints and deprecate the Chat2Query API v1 endpoint `/v1/chat2data`.
+
     With Chat2Query API v3 endpoints, you can start multi-round Chat2Query by using sessions.
+
     For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
 
 **Console changes**
