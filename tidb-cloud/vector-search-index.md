@@ -1,0 +1,253 @@
+---
+title: Vector Search Index
+summary: Learn how to build and use the vector search index to accelerate K-Nearest neighborhood (KNN) queries in TiDB.
+---
+
+# Vector Search Index
+
+K-Nearest neighborhood (KNN) search is the problem of finding the K closest points for a given point in a vector space. The most straightforward approach to solve this problem is a brute force search where the distance between all points in the vector space and the reference point is computed. This method guarantees perfect accuracy, but it is usually too slow for practical applications. Thus, nearest neighborhood search problems are often solved with approximative algorithms.
+
+In TiDB, you can create and utilize Vector Search Indexes for such approximate nearest neighbor (ANN) searches over columns with [Vector Data Types]. By using Vector Search Indexes, vector search queries could be finished in milliseconds.
+
+TiDB currently supports the following Vector Search Index algorithms:
+
+- HNSW
+
+> **Note:**
+>
+> Vector search index is only available in TiDB Cloud Serverless. It is currently not available in TiDB Cloud Dedicated or TiDB on-premise.
+
+## Create HNSW Vector Index
+
+HNSW ([wikipedia][Wikipedia HNSW]) is one of the most popular vector indexing algorithms. HNSW index provides a good performance with a relatively high accuracy (> 98% in typical cases).
+
+To create a HNSW vector index, specify the index definition in the comment of a column with [vector data type][Vector Data Types] when creating the table:
+
+```sql
+CREATE TABLE vector_table_with_index (
+    id INT PRIMARY KEY, doc TEXT,
+    embedding VECTOR(3) COMMENT "hnsw(distance=cosine)"
+);
+```
+
+> **Note:**
+>
+> The syntax to create Vector Index may be changed in future releases.
+
+You must specify the distance metric via `distance=<metric>` config when creating the vector index:
+
+- Cosine Distance: `COMMENT "hnsw(distance=cosine)"`
+- L2 Distance: `COMMENT "hnsw(distance=l2)"`
+
+Vector index can be only created for fixed-dimensional vector columns like `VECTOR(3)`. It cannot be created for mixed-dimensional vector columns like `VECTOR`, because vector distances can be only calculated between vectors with the same dimensions.
+
+If you are using ORMs, please refer to the following documentations for creating vector indexes:
+
+- Python: [TiDB Vector Client](https://github.com/pingcap/tidb-vector-python?tab=readme-ov-file#tidb-vector-client)
+- Python: [SQLAlchemy](https://github.com/pingcap/tidb-vector-python?tab=readme-ov-file#sqlalchemy)
+- Python: [Peewee](https://github.com/pingcap/tidb-vector-python?tab=readme-ov-file#peewee)
+- Python: [Django](https://github.com/pingcap/django-tidb?tab=readme-ov-file#vector-beta)
+
+Please be aware of the following limitations when creating the vector index. We are working to remove these limitations in future releases:
+
+- L1 distance and inner product are not supported for Vector Index yet.
+
+- You can only define and create a vector index when the table is created. Vector index cannot be created on-demand using DDLs after the table is created. Vector indexes cannot be dropped using DDLs as well.
+
+## Use Vector Index
+
+The vector search index can be used in K-nearest neighbor search queries by using the `ORDER BY ... LIMIT` form like below:
+
+```sql
+SELECT *
+FROM vector_table_with_index
+ORDER BY Vec_Cosine_Distance(embedding, '[1, 2, 3]')
+LIMIT 10
+```
+
+You must use the same distance metric as you defined when creating the Vector Index if you want to utilize the index in vector search.
+
+## Use Vector Index with Filters
+
+Queries that contain a pre-filter (using the `WHERE` clause) cannot utilize Vector Index, because they are not querying for K-Nearest neighborhoods according to the SQL semantics, for example:
+
+```sql
+-- Filter is performed before kNN, so Vector Index cannot be used:
+
+SELECT * FROM vec_table
+WHERE category = "document"
+ORDER BY Vec_Cosine_distance(embedding, '[1, 2, 3]')
+LIMIT 5;
+```
+
+There are several workarounds as follows.
+
+**Post-Filter after Vector Search:** Query for K-Nearest neighborhood first, then filter out unwanted results:
+
+```sql
+-- The filter is performed after kNN for these queries, so Vector Index can be used:
+
+SELECT * FROM
+(
+  SELECT * FROM vec_table
+  ORDER BY Vec_Cosine_distance(embedding, '[1, 2, 3]')
+  LIMIT 5
+) t
+WHERE category = "document";
+
+-- Note that this query may return less than 5 results if some are filtered out.
+```
+
+**Use Table Partitioning**: Query within the [table partition][Table Partitioning] can fully utilize vector index. This can be useful if you want to perform eqality filters, as equality filters can be turned into accessing specified partitions.
+
+Example: Suppose you want to find closest documentations for a specific product version.
+
+```sql
+-- Filter is performed before kNN, so Vector Index cannot be used:
+SELECT * FROM docs
+WHERE ver = "v2.0"
+ORDER BY Vec_Cosine_distance(embedding, '[1, 2, 3]')
+LIMIT 5;
+```
+
+Instead of writing a query using `WHERE` clause, you can partition the table and then query within the partition using [PARTITION keyword](/partitioned-table.md#partition-selection):
+
+```sql
+CREATE TABLE docs (
+    id INT,
+    ver VARCHAR(10),
+    doc TEXT,
+    embedding VECTOR(3) COMMENT "hnsw(distance=cosine)"
+) PARTITION BY LIST COLUMNS (ver) (
+    PARTITION p_v1_0 VALUES IN ('v1.0'),
+    PARTITION p_v1_1 VALUES IN ('v1.1'),
+    PARTITION p_v1_2 VALUES IN ('v1.2'),
+    PARTITION p_v2_0 VALUES IN ('v2.0')
+);
+
+SELECT * FROM docs
+PARTITION (p_v2_0)
+ORDER BY Vec_Cosine_distance(embedding, '[1, 2, 3]')
+LIMIT 5;
+```
+
+See [Table Partitioning] for more information.
+
+## Check Whether Vector Index is Used
+
+Use the [`EXPLAIN`] or [`EXPLAIN ANALYZE`] statement to check whether this query is using the Vector Index. When `annIndex:` is presented in the `operator info` column for the `TableFullScan` executor, it means this Table Scan is utilizing the Vector Index.
+
+**Example: Vector Index is used:**
+
+```
+[tidb]> EXPLAIN SELECT * FROM vector_table_with_index
+ORDER BY Vec_Cosine_Distance(embedding, '[1, 2, 3]')
+LIMIT 10;
++-----+-------------------------------------------------------------------------------------+
+| ... | operator info                                                                       |
++-----+-------------------------------------------------------------------------------------+
+| ... | ...                                                                                 |
+| ... | Column#5, offset:0, count:10                                                        |
+| ... | ..., vec_cosine_distance(test.vector_table_with_index.embedding, [1,2,3])->Column#5 |
+| ... | MppVersion: 1, data:ExchangeSender_16                                               |
+| ... | ExchangeType: PassThrough                                                           |
+| ... | ...                                                                                 |
+| ... | Column#4, offset:0, count:10                                                        |
+| ... | ..., vec_cosine_distance(test.vector_table_with_index.embedding, [1,2,3])->Column#4 |
+| ... | annIndex:COSINE(test.vector_table_with_index.embedding..[1,2,3], limit:10), ...     |
++-----+-------------------------------------------------------------------------------------+
+9 rows in set (0.01 sec)
+```
+
+**Example: Vector Index is not used because of not specifying a Top K:**
+
+```
+[tidb]> EXPLAIN SELECT * FROM vector_table_with_index
+     -> ORDER BY Vec_Cosine_Distance(embedding, '[1, 2, 3]');
++--------------------------------+-----+--------------------------------------------------+
+| id                             | ... | operator info                                    |
++--------------------------------+-----+--------------------------------------------------+
+| Projection_15                  | ... | ...                                              |
+| └─Sort_4                       | ... | Column#4                                         |
+|   └─Projection_16              | ... | ..., vec_cosine_distance(..., [1,2,3])->Column#4 |
+|     └─TableReader_14           | ... | MppVersion: 1, data:ExchangeSender_13            |
+|       └─ExchangeSender_13      | ... | ExchangeType: PassThrough                        |
+|         └─TableFullScan_12     | ... | keep order:false, stats:pseudo                   |
++--------------------------------+-----+--------------------------------------------------+
+6 rows in set, 1 warning (0.01 sec)
+```
+
+When Vector Index cannot be used, a warning will be produced in some cases to help you learn the cause:
+
+```sql
+-- Using a wrong distance metric:
+[tidb]> EXPLAIN SELECT * FROM vector_table_with_index
+ORDER BY Vec_l2_Distance(embedding, '[1, 2, 3]')
+LIMIT 10;
+
+[tidb]> SHOW WARNINGS;
+ANN index not used: not ordering by COSINE distance
+
+-- Using a wrong order:
+[tidb]> EXPLAIN SELECT * FROM vector_table_with_index
+ORDER BY Vec_Cosine_Distance(embedding, '[1, 2, 3]') DESC
+LIMIT 10;
+
+[tidb]> SHOW WARNINGS;
+ANN index not used: index can be used only when ordering by vec_cosine_distance() in ASC order
+```
+
+## Analyze Vector Search Performance
+
+[`EXPLAIN ANALYZE`] statement contains detailed information about how Vector Index is used in the `execution info` column:
+
+```sql
+[tidb]> EXPLAIN ANALYZE SELECT * FROM vector_table_with_index
+ORDER BY Vec_Cosine_Distance(embedding, '[1, 2, 3]')
+LIMIT 10;
++-----+--------------------------------------------------------+-----+
+|     | execution info                                         |     |
++-----+--------------------------------------------------------+-----+
+| ... | time:339.1ms, loops:2, RU:0.000000, Concurrency:OFF    | ... |
+| ... | time:339ms, loops:2                                    | ... |
+| ... | time:339ms, loops:3, Concurrency:OFF                   | ... |
+| ... | time:339ms, loops:3, cop_task: {...}                   | ... |
+| ... | tiflash_task:{time:327.5ms, loops:1, threads:4}        | ... |
+| ... | tiflash_task:{time:327.5ms, loops:1, threads:4}        | ... |
+| ... | tiflash_task:{time:327.5ms, loops:1, threads:4}        | ... |
+| ... | tiflash_task:{time:327.5ms, loops:1, threads:4}        | ... |
+| ... | tiflash_task:{...}, vector_idx:{                       | ... |
+|     |   load:{total:68ms,from_s3:1,from_disk:0,from_cache:0},|     |
+|     |   search:{total:0ms,visited_nodes:2,discarded_nodes:0},|     |
+|     |   read:{vec_total:0ms,others_total:0ms}},...}          |     |
++-----+--------------------------------------------------------+-----+
+```
+
+> **Note:**
+>
+> The execution information is internal. Fields and formats are subject to change without any notification. Do not rely on them.
+
+Explanation of some important fields:
+
+- `vector_index.load.total`: The total duration of loading index. This field could be larger than actual query time because multiple vector indexes may be loaded in parallel.
+- `vector_index.load.from_s3`: Number of indexes loaded from S3.
+- `vector_index.load.from_disk`: Number of indexes loaded from disk. The index was already downloaded from S3 previously.
+- `vector_index.load.from_cache`: Number of indexes loaded from cache. The index was already downloaded from S3 previously.
+- `vector_index.search.total`: The total duration of searching in the index. Large latency usually means the index is cold (never accessed before, or accessed long ago) so that there is heavy IO when searching through the index. This field could be larger than actual query time because multiple vector indexes may be searched in parallel.
+- `vector_index.search.discarded_nodes`: Number of vector rows visited but discarded during the search. These discarded vectors are not considered in the search result. Large values usually indicate that there are many stale rows caused by UPDATE or DELETE statements.
+
+## See Also
+
+- [Vector Functions and Operators]
+- [Vector Data Types]
+- [`EXPLAIN` Statement][`EXPLAIN`]
+- [`EXPLAIN ANALYZE` Statement][`EXPLAIN ANALYZE`]
+- [Table Partitioning]
+- [Wikipedia: HNSW Algorithm][Wikipedia HNSW]
+
+[Vector Functions and Operators]: /tidb-cloud/vector-search-functions-and-operators.md
+[Vector Data Types]: /tidb-cloud/vector-search-data-types.md
+[`EXPLAIN`]: /sql-statements/sql-statement-explain.md
+[`EXPLAIN ANALYZE`]: /sql-statements/sql-statement-explain-analyze.md
+[Table Partitioning]: /partitioned-table.md
+[Wikipedia HNSW]: https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world
