@@ -1,44 +1,44 @@
 ---
 title: Vector Search Integration Overview
-summary: A summary of TiDB vector search integration, including AI frameworks, embedded models, ORM libraries, etc.
+summary: An overview of TiDB vector search integration, including supported AI frameworks, embedding models, and ORM libraries.
 ---
 
 # Vector Search Integration Overview
 
-This document is an overview of TiDB vector search integration, including AI frameworks, embedded models, Object Relational Mapping (ORM) libraries, etc.
+This document provides an overview of TiDB vector search integration, including supported AI frameworks, embedding models, and Object Relational Mapping (ORM) libraries.
 
 > **Note**
 >
-> TiDB Vector Search is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+> TiDB Vector Search is currently in beta and is only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
 
-## AI Frameworks
+## AI frameworks
 
-TiDB provides official support for the following AI frameworks, making it easier to integrate AI applications developed based on these frameworks with TiDB Vector Search.
+TiDB provides official support for the following AI frameworks, enabling you to easily integrate AI applications developed based on these frameworks with TiDB Vector Search.
 
-Moreover, you can also use TiDB for various purposes such as document storage and knowledge graph storage for AI applications.
-
-| AI Frameworks | Documentation                                                                                     |
+| AI frameworks | Documentation                                                                                     |
 | ------------- | ------------------------------------------------------------------------------------------------- |
 | Langchain     | [Integrate Vector Search with LangChain](/tidb-cloud/vector-search-integrate-with-langchain.md)   |
 | LlamaIndex    | [Integrate Vector Search with LlamaIndex](/tidb-cloud/vector-search-integrate-with-llamaindex.md) |
 
-## Embedding Models / Services
+Moreover, you can also use TiDB for various purposes, such as document storage and knowledge graph storage for AI applications.
 
-The TiDB Vector Search supports storing vectors of up to 16,000 dimensions, which covers most embedding models.
+## Embedding models and services
 
-You can use self-deployed open-source embedding models, or you can use the embeddings API provided by third-party Embedding providers to generate vectors.
+TiDB Vector Search supports storing vectors of up to 16,000 dimensions, which accommodates most embedding models.
 
-The following lists some mainstream embedding service providers and how to integrate their Embedding API.
+You can either use self-deployed open-source embedding models or third-party embedding APIs provided by third-party embedding providers to generate vectors.
 
-| AI Frameworks | Tutorial                                                                                                           |
+The following table lists some mainstream embedding service providers and the corresponding integration tutorials.
+
+| Embedding service providers | Tutorial                                                                                                           |
 | ------------- | ------------------------------------------------------------------------------------------------------------------ |
 | JinaAI        | [Integrate Vector Search with JinaAI Embeddings API](/tidb-cloud/vector-search-integrate-with-jinaai-embedding.md) |
 
-## Object Relational Mapping (ORM) Libraries
+## Object Relational Mapping (ORM) libraries
 
-TiDB Vector Search can be integrated with ORM libraries to interact with the TiDB database.
+You can integrate TiDB Vector Search with your ORM library to interact with the TiDB database.
 
-The following table lists the supported ORM libraries:
+The following table lists the supported ORM libraries and the corresponding integration tutorials:
 
 <table>
   <tr>

@@ -1,16 +1,14 @@
 ---
 title: Vector Search Changelogs
-summary: Learn about the new features, compatibility changes, improvements, and bug fixes for the TiDB Vector Search.
+summary: Learn about the new features, compatibility changes, improvements, and bug fixes for the TiDB vector search feature.
 ---
 
 # Vector Search Changelogs
 
-## 2024 Releases
+## June 24, 2024
 
-### 24 June 2024
+- TiDB Vector Search (beta) is now available for TiDB Serverless clusters in all regions for all users.
 
-- TiDB Vector Search is now available for all clusters in all regions for TiDB Cloud Serverless.
+## April 1, 2024
 
-### 1 April 2024
-
-- TiDB Vector Search is now available for invited customers in EU regions for TiDB Cloud Serverless.
+- TiDB Vector Search (beta) is now available for TiDB Serverless clusters in EU regions for invited users.
