@@ -9,7 +9,7 @@ This tutorial will walk you through how to use Peewee to interact with the TiDB 
 
 > **Note**
 >
-> The vector search feature is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+> TiDB Vector Search is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
 
 ## Prerequisites
 
@@ -63,10 +63,10 @@ pip install peewee pymysql tidb-vector
 
 3. Ensure the configurations in the connection dialog match your operating environment.
 
-    - **Endpoint Type** is set to `Public`
-    - **Branch** is set to `main`
-    - **Connect With** is set to `General`
-    - **Operating System** matches your environment.
+   - **Endpoint Type** is set to `Public`
+   - **Branch** is set to `main`
+   - **Connect With** is set to `General`
+   - **Operating System** matches your environment.
 
    > **Tip:**
    >
@@ -80,23 +80,23 @@ pip install peewee pymysql tidb-vector
 
 5. In the root directory of your Python project, create a `.env` file and paste the connection parameters to the corresponding environment variables.
 
-    - `TIDB_HOST`: The host of the TiDB cluster.
-    - `TIDB_PORT`: The port of the TiDB cluster.
-    - `TIDB_USERNAME`: The username to connect to the TiDB cluster.
-    - `TIDB_PASSWORD`: The password to connect to the TiDB cluster.
-    - `TIDB_DATABASE`: The database name to connect to.
-    - `TIDB_CA_PATH`: The path to the root certificate file.
+   - `TIDB_HOST`: The host of the TiDB cluster.
+   - `TIDB_PORT`: The port of the TiDB cluster.
+   - `TIDB_USERNAME`: The username to connect to the TiDB cluster.
+   - `TIDB_PASSWORD`: The password to connect to the TiDB cluster.
+   - `TIDB_DATABASE`: The database name to connect to.
+   - `TIDB_CA_PATH`: The path to the root certificate file.
 
    The following is an example for macOS:
 
-    ```dotenv
-    TIDB_HOST=gateway01.****.prod.aws.tidbcloud.com
-    TIDB_PORT=4000
-    TIDB_USERNAME=********.root
-    TIDB_PASSWORD=********
-    TIDB_DATABASE=test
-    TIDB_CA_PATH=/etc/ssl/cert.pem
-    ```
+   ```dotenv
+   TIDB_HOST=gateway01.****.prod.aws.tidbcloud.com
+   TIDB_PORT=4000
+   TIDB_USERNAME=********.root
+   TIDB_PASSWORD=********
+   TIDB_DATABASE=test
+   TIDB_CA_PATH=/etc/ssl/cert.pem
+   ```
 
 ### Step 5. Run the demo
 

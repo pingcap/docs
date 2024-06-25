@@ -1,6 +1,6 @@
 ---
 title: Integrate Vector Search with LangChain
-summary: Learn how to integrate the vector search feature in TiDB Cloud with LangChain.
+summary: Learn how to integrate Vector Search in TiDB Cloud with LangChain.
 ---
 
 # Integrate Vector Search with LangChain
@@ -9,7 +9,7 @@ This tutorial demonstrates how to integrate the [vector search](/tidb-cloud/vect
 
 > **Note**
 >
-> - The vector search feature is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+> - TiDB Vector Search is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
 > - You can view the complete [sample code](https://github.com/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) on Jupyter Notebook, or run the sample code directly in the [Colab](https://colab.research.google.com/github/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) online environment.
 
 ## Prerequisites
@@ -23,7 +23,7 @@ To complete this tutorial, you need:
 
 ## Get started
 
-This section provides step-by-step instructions for integrating the vector search feature with LangChain to perform semantic searches.
+This section provides step-by-step instructions for integrating TiDB Vector Search with LangChain to perform semantic searches.
 
 ### Step 1. Create a new Jupyter Notebook file
 
@@ -63,16 +63,16 @@ from langchain_text_splitters import CharacterTextSplitter
 
 3. Ensure the configurations in the connection dialog match your operating environment.
 
-    - **Endpoint Type** is set to `Public`.
-    - **Branch** is set to `main`.
-    - **Connect With** is set to `SQLAlchemy`.
-    - **Operating System** matches your environment.
+   - **Endpoint Type** is set to `Public`.
+   - **Branch** is set to `main`.
+   - **Connect With** is set to `SQLAlchemy`.
+   - **Operating System** matches your environment.
 
 4. Click the **PyMySQL** tab and copy the connection string.
 
-    > **Tip:**
-    > 
-    > If you have not set a password yet, click **Generate Password** to generate a random password.
+   > **Tip:**
+   >
+   > If you have not set a password yet, click **Generate Password** to generate a random password.
 
 #### Step 3.2 Configure environment variables
 
@@ -158,46 +158,46 @@ for doc, score in docs_with_score:
 <details>
    <summary><b>Expected output</b></summary>
 
-   ```plain
-   --------------------------------------------------------------------------------
-   Score:  0.18472413652518527
-   Tonight. I call on the Senate to: Pass the Freedom to Vote Act. Pass the John Lewis Voting Rights Act. And while you’re at it, pass the Disclose Act so Americans can know who is funding our elections. 
-   
-   Tonight, I’d like to honor someone who has dedicated his life to serve this country: Justice Stephen Breyer—an Army veteran, Constitutional scholar, and retiring Justice of the United States Supreme Court. Justice Breyer, thank you for your service. 
-   
-   One of the most serious constitutional responsibilities a President has is nominating someone to serve on the United States Supreme Court. 
-   
-   And I did that 4 days ago, when I nominated Circuit Court of Appeals Judge Ketanji Brown Jackson. One of our nation’s top legal minds, who will continue Justice Breyer’s legacy of excellence.
-   --------------------------------------------------------------------------------
-   --------------------------------------------------------------------------------
-   Score:  0.21757513022785557
-   A former top litigator in private practice. A former federal public defender. And from a family of public school educators and police officers. A consensus builder. Since she’s been nominated, she’s received a broad range of support—from the Fraternal Order of Police to former judges appointed by Democrats and Republicans. 
-   
-   And if we are to advance liberty and justice, we need to secure the Border and fix the immigration system. 
-   
-   We can do both. At our border, we’ve installed new technology like cutting-edge scanners to better detect drug smuggling.  
-   
-   We’ve set up joint patrols with Mexico and Guatemala to catch more human traffickers.  
-   
-   We’re putting in place dedicated immigration judges so families fleeing persecution and violence can have their cases heard faster. 
-   
-   We’re securing commitments and supporting partners in South and Central America to host more refugees and secure their own borders.
-   --------------------------------------------------------------------------------
-   --------------------------------------------------------------------------------
-   Score:  0.22676987253721725
-   And for our LGBTQ+ Americans, let’s finally get the bipartisan Equality Act to my desk. The onslaught of state laws targeting transgender Americans and their families is wrong. 
-   
-   As I said last year, especially to our younger transgender Americans, I will always have your back as your President, so you can be yourself and reach your God-given potential. 
-   
-   While it often appears that we never agree, that isn’t true. I signed 80 bipartisan bills into law last year. From preventing government shutdowns to protecting Asian-Americans from still-too-common hate crimes to reforming military justice. 
-   
-   And soon, we’ll strengthen the Violence Against Women Act that I first wrote three decades ago. It is important for us to show the nation that we can come together and do big things. 
-   
-   So tonight I’m offering a Unity Agenda for the Nation. Four big things we can do together.  
-   
-   First, beat the opioid epidemic.
-   --------------------------------------------------------------------------------
-   ```
+```plain
+--------------------------------------------------------------------------------
+Score:  0.18472413652518527
+Tonight. I call on the Senate to: Pass the Freedom to Vote Act. Pass the John Lewis Voting Rights Act. And while you’re at it, pass the Disclose Act so Americans can know who is funding our elections.
+
+Tonight, I’d like to honor someone who has dedicated his life to serve this country: Justice Stephen Breyer—an Army veteran, Constitutional scholar, and retiring Justice of the United States Supreme Court. Justice Breyer, thank you for your service.
+
+One of the most serious constitutional responsibilities a President has is nominating someone to serve on the United States Supreme Court.
+
+And I did that 4 days ago, when I nominated Circuit Court of Appeals Judge Ketanji Brown Jackson. One of our nation’s top legal minds, who will continue Justice Breyer’s legacy of excellence.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Score:  0.21757513022785557
+A former top litigator in private practice. A former federal public defender. And from a family of public school educators and police officers. A consensus builder. Since she’s been nominated, she’s received a broad range of support—from the Fraternal Order of Police to former judges appointed by Democrats and Republicans.
+
+And if we are to advance liberty and justice, we need to secure the Border and fix the immigration system.
+
+We can do both. At our border, we’ve installed new technology like cutting-edge scanners to better detect drug smuggling.
+
+We’ve set up joint patrols with Mexico and Guatemala to catch more human traffickers.
+
+We’re putting in place dedicated immigration judges so families fleeing persecution and violence can have their cases heard faster.
+
+We’re securing commitments and supporting partners in South and Central America to host more refugees and secure their own borders.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Score:  0.22676987253721725
+And for our LGBTQ+ Americans, let’s finally get the bipartisan Equality Act to my desk. The onslaught of state laws targeting transgender Americans and their families is wrong.
+
+As I said last year, especially to our younger transgender Americans, I will always have your back as your President, so you can be yourself and reach your God-given potential.
+
+While it often appears that we never agree, that isn’t true. I signed 80 bipartisan bills into law last year. From preventing government shutdowns to protecting Asian-Americans from still-too-common hate crimes to reforming military justice.
+
+And soon, we’ll strengthen the Violence Against Women Act that I first wrote three decades ago. It is important for us to show the nation that we can come together and do big things.
+
+So tonight I’m offering a Unity Agenda for the Nation. Four big things we can do together.
+
+First, beat the opioid epidemic.
+--------------------------------------------------------------------------------
+```
 
 </details>
 
@@ -217,32 +217,32 @@ for doc, score in docs_with_relevance_score:
 <details>
    <summary><b>Expected output</b></summary>
 
-   ```plain
-   --------------------------------------------------------------------------------
-   Score:  0.8152758634748147
-   Tonight. I call on the Senate to: Pass the Freedom to Vote Act. Pass the John Lewis Voting Rights Act. And while you’re at it, pass the Disclose Act so Americans can know who is funding our elections. 
-   
-   Tonight, I’d like to honor someone who has dedicated his life to serve this country: Justice Stephen Breyer—an Army veteran, Constitutional scholar, and retiring Justice of the United States Supreme Court. Justice Breyer, thank you for your service. 
-   
-   One of the most serious constitutional responsibilities a President has is nominating someone to serve on the United States Supreme Court. 
-   
-   And I did that 4 days ago, when I nominated Circuit Court of Appeals Judge Ketanji Brown Jackson. One of our nation’s top legal minds, who will continue Justice Breyer’s legacy of excellence.
-   --------------------------------------------------------------------------------
-   --------------------------------------------------------------------------------
-   Score:  0.7824248697721444
-   A former top litigator in private practice. A former federal public defender. And from a family of public school educators and police officers. A consensus builder. Since she’s been nominated, she’s received a broad range of support—from the Fraternal Order of Police to former judges appointed by Democrats and Republicans. 
-   
-   And if we are to advance liberty and justice, we need to secure the Border and fix the immigration system. 
-   
-   We can do both. At our border, we’ve installed new technology like cutting-edge scanners to better detect drug smuggling.  
-   
-   We’ve set up joint patrols with Mexico and Guatemala to catch more human traffickers.  
-   
-   We’re putting in place dedicated immigration judges so families fleeing persecution and violence can have their cases heard faster. 
-   
-   We’re securing commitments and supporting partners in South and Central America to host more refugees and secure their own borders.
-   --------------------------------------------------------------------------------
-   ```
+```plain
+--------------------------------------------------------------------------------
+Score:  0.8152758634748147
+Tonight. I call on the Senate to: Pass the Freedom to Vote Act. Pass the John Lewis Voting Rights Act. And while you’re at it, pass the Disclose Act so Americans can know who is funding our elections.
+
+Tonight, I’d like to honor someone who has dedicated his life to serve this country: Justice Stephen Breyer—an Army veteran, Constitutional scholar, and retiring Justice of the United States Supreme Court. Justice Breyer, thank you for your service.
+
+One of the most serious constitutional responsibilities a President has is nominating someone to serve on the United States Supreme Court.
+
+And I did that 4 days ago, when I nominated Circuit Court of Appeals Judge Ketanji Brown Jackson. One of our nation’s top legal minds, who will continue Justice Breyer’s legacy of excellence.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Score:  0.7824248697721444
+A former top litigator in private practice. A former federal public defender. And from a family of public school educators and police officers. A consensus builder. Since she’s been nominated, she’s received a broad range of support—from the Fraternal Order of Police to former judges appointed by Democrats and Republicans.
+
+And if we are to advance liberty and justice, we need to secure the Border and fix the immigration system.
+
+We can do both. At our border, we’ve installed new technology like cutting-edge scanners to better detect drug smuggling.
+
+We’ve set up joint patrols with Mexico and Guatemala to catch more human traffickers.
+
+We’re putting in place dedicated immigration judges so families fleeing persecution and violence can have their cases heard faster.
+
+We’re securing commitments and supporting partners in South and Central America to host more refugees and secure their own borders.
+--------------------------------------------------------------------------------
+```
 
 </details>
 
@@ -266,11 +266,11 @@ The expected output is as follows:
 
 ```
 --------------------------------------------------------------------------------
-Tonight. I call on the Senate to: Pass the Freedom to Vote Act. Pass the John Lewis Voting Rights Act. And while you’re at it, pass the Disclose Act so Americans can know who is funding our elections. 
+Tonight. I call on the Senate to: Pass the Freedom to Vote Act. Pass the John Lewis Voting Rights Act. And while you’re at it, pass the Disclose Act so Americans can know who is funding our elections.
 
-Tonight, I’d like to honor someone who has dedicated his life to serve this country: Justice Stephen Breyer—an Army veteran, Constitutional scholar, and retiring Justice of the United States Supreme Court. Justice Breyer, thank you for your service. 
+Tonight, I’d like to honor someone who has dedicated his life to serve this country: Justice Stephen Breyer—an Army veteran, Constitutional scholar, and retiring Justice of the United States Supreme Court. Justice Breyer, thank you for your service.
 
-One of the most serious constitutional responsibilities a President has is nominating someone to serve on the United States Supreme Court. 
+One of the most serious constitutional responsibilities a President has is nominating someone to serve on the United States Supreme Court.
 
 And I did that 4 days ago, when I nominated Circuit Court of Appeals Judge Ketanji Brown Jackson. One of our nation’s top legal minds, who will continue Justice Breyer’s legacy of excellence.
 --------------------------------------------------------------------------------
@@ -300,8 +300,8 @@ For example, the following is a valid metadata payload:
 
 ```json
 {
-    "page": 12,
-    "book_title": "Siddhartha"
+  "page": 12,
+  "book_title": "Siddhartha"
 }
 ```
 
@@ -324,8 +324,8 @@ If the metadata of a document is as follows:
 
 ```json
 {
-   "page": 12,
-   "book_title": "Siddhartha"
+  "page": 12,
+  "book_title": "Siddhartha"
 }
 ```
 
@@ -341,9 +341,9 @@ The following metadata filters can match this document:
 
 ```json
 {
-   "page": {
-      "$in": [11, 12, 13]
-   }
+  "page": {
+    "$in": [11, 12, 13]
+  }
 }
 ```
 
@@ -357,8 +357,8 @@ The following metadata filters can match this document:
 
 ```json
 {
-    "$or": [{ "page": 11 }, { "page": 12 }],
-    "$and": [{ "page": 12 }, { "page": 13 }]
+  "$or": [{ "page": 11 }, { "page": 12 }],
+  "$and": [{ "page": 12 }, { "page": 13 }]
 }
 ```
 
@@ -452,7 +452,7 @@ vector_store.tidb_vector_client.execute(
         airplane_type,
         price,
         layover
-    ) VALUES 
+    ) VALUES
     ('JFK', 'DL', 'LAX', 'Non-stop from JFK to LAX.', '06:00:00', 5, 'Boeing 777', 299.99, 'None'),
     ('LAX', 'AA', 'ORD', 'Direct LAX to ORD route.', '04:00:00', 3, 'Airbus A320', 149.99, 'None'),
     ('EFGH', 'UA', 'SEA', 'Daily flights from SFO to SEA.', '02:30:00', 7, 'Boeing 737', 129.99, 'None');
@@ -540,15 +540,15 @@ Alternatively, you can streamline the entire process using a single SQL query:
 
 ```python
 search_query = f"""
-    SELECT 
-        VEC_Cosine_Distance(se.embedding, :query_vector) as distance, 
+    SELECT
+        VEC_Cosine_Distance(se.embedding, :query_vector) as distance,
         ar.*,
         se.document as airport_review
-    FROM 
+    FROM
         airplan_routes ar
-    JOIN 
+    JOIN
         {TABLE_NAME} se ON ar.airport_code = JSON_UNQUOTE(JSON_EXTRACT(se.meta, '$.airport_code'))
-    ORDER BY distance ASC 
+    ORDER BY distance ASC
     LIMIT 5;
 """
 query_vector = embeddings.embed_query(semantic_query)

@@ -1,6 +1,6 @@
 ---
 title: Get Started with Vector Search via SQL
-summary: Learn how to quickly get started with the vector search feature in TiDB Cloud using SQL statements and power the generative AI application.
+summary: Learn how to quickly get started with Vector Search in TiDB Cloud using SQL statements and power the generative AI application.
 ---
 
 # Get Started with Vector Search via SQL
@@ -16,7 +16,7 @@ This tutorial demonstrates how to get started with TiDB Vector Search just using
 
 > **Note**
 >
-> The vector search feature is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+> TiDB Vector Search is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
 
 ## Prerequisites
 

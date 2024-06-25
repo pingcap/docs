@@ -9,7 +9,7 @@ This document is an overview of TiDB vector search integration, including AI fra
 
 > **Note**
 >
-> The vector search feature is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+> TiDB Vector Search is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
 
 ## AI Frameworks
 
@@ -24,7 +24,7 @@ Moreover, you can also use TiDB for various purposes such as document storage an
 
 ## Embedding Models / Services
 
-The TiDB vector search feature supports storing vectors of up to 16,000 dimensions, which covers most embedding models.
+The TiDB Vector Search supports storing vectors of up to 16,000 dimensions, which covers most embedding models.
 
 You can use self-deployed open-source embedding models, or you can use the embeddings API provided by third-party Embedding providers to generate vectors.
 
@@ -36,7 +36,7 @@ The following lists some mainstream embedding service providers and how to integ
 
 ## Object Relational Mapping (ORM) Libraries
 
-TiDB Vector Search feature can be integrated with ORM libraries to interact with the TiDB database.
+TiDB Vector Search can be integrated with ORM libraries to interact with the TiDB database.
 
 The following table lists the supported ORM libraries:
 

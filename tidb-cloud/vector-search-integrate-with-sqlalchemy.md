@@ -5,11 +5,11 @@ summary: Learn how to integrate TiDB Vector Search with SQLAlchemy to store embe
 
 # Integrate TiDB Vector Search with SQLAlchemy
 
-This tutorial will walk you through how to use SQLAlchemy to interact with the TiDB Vector Search feature, store embeddings, and perform vector search queries.
+This tutorial will walk you through how to use SQLAlchemy to interact with the TiDB Vector Search, store embeddings, and perform vector search queries.
 
 > **Note**
 >
-> The vector search feature is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+> TiDB Vector Search is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
 
 ## Prerequisites
 
@@ -71,7 +71,7 @@ pip install sqlalchemy pymysql tidb-vector
    > **Tip:**
    >
    > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
-   
+
 4. Click the **PyMySQL** tab and copy the connection string.
 
    > **Tip:**
@@ -82,9 +82,9 @@ pip install sqlalchemy pymysql tidb-vector
 
    The following is an example for macOS:
 
-    ```dotenv
-    TIDB_DATABASE_URL="mysql+pymysql://<prefix>.root:<password>@gateway01.<region>.prod.aws.tidbcloud.com:4000/test?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
-    ```
+   ```dotenv
+   TIDB_DATABASE_URL="mysql+pymysql://<prefix>.root:<password>@gateway01.<region>.prod.aws.tidbcloud.com:4000/test?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
+   ```
 
 ### Step 5. Run the demo
 

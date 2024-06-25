@@ -5,11 +5,11 @@ summary: Learn how to integrate TiDB Vector Search with Django ORM to store embe
 
 # Integrate TiDB Vector Search with Django ORM
 
-This tutorial will walk you through how to use [Django](https://www.djangoproject.com/) ORM to interact with the TiDB Vector Search feature, store embeddings, and perform vector search queries.
+This tutorial will walk you through how to use [Django](https://www.djangoproject.com/) ORM to interact with the TiDB Vector Search, store embeddings, and perform vector search queries.
 
 > **Note**
 >
-> The vector search feature is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+> TiDB Vector Search is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
 
 ## Prerequisites
 
@@ -99,14 +99,14 @@ For more information, refer to [django-tidb repository](https://github.com/pingc
 
    The following is an example for macOS:
 
-    ```dotenv
-    TIDB_HOST=gateway01.****.prod.aws.tidbcloud.com
-    TIDB_PORT=4000
-    TIDB_USERNAME=********.root
-    TIDB_PASSWORD=********
-    TIDB_DATABASE=test
-    TIDB_CA_PATH=/etc/ssl/cert.pem
-    ```
+   ```dotenv
+   TIDB_HOST=gateway01.****.prod.aws.tidbcloud.com
+   TIDB_PORT=4000
+   TIDB_USERNAME=********.root
+   TIDB_PASSWORD=********
+   TIDB_DATABASE=test
+   TIDB_CA_PATH=/etc/ssl/cert.pem
+   ```
 
 ### Step 5. Run the demo
 
@@ -125,7 +125,7 @@ python manage.py runserver
 Open your browser and visit `http://127.0.0.1:8000` to try the demo application. Here are the available API paths:
 
 | API Path                                | Description                              |
-|-----------------------------------------|------------------------------------------|
+| --------------------------------------- | ---------------------------------------- |
 | `POST: /insert_documents`               | Insert documents with embeddings.        |
 | `GET: /get_nearest_neighbors_documents` | Get the 3-nearest neighbor documents.    |
 | `GET: /get_documents_within_distance`   | Get documents within a certain distance. |
@@ -170,7 +170,7 @@ You can create a `.env` file in the root directory of your project and set up th
 
 #### Define a vector column
 
-`tidb-django` provides a `VectorField` to store vector embeddings in a table. 
+`tidb-django` provides a `VectorField` to store vector embeddings in a table.
 
 Create a table with a column named `embedding` that stores a 3-dimensional vector.
 

@@ -11,7 +11,7 @@ Through out this tutorial, we will develop this AI application using Python, AI 
 
 > **Note**
 >
-> The vector search feature is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+> TiDB Vector Search is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
 
 ## Prerequisites
 
@@ -22,8 +22,6 @@ To complete this tutorial, you need:
 - A TiDB Serverless cluster. Follow [creating a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
 
 ## Get started
-
-This section demonstrates how to get started with the vector search feature using the Python client [`tidb-vector`](https://github.com/pingcap/tidb-vector-python).
 
 To run the demo directly, check out the sample code in the [pingcap/tidb-vector-python](https://github.com/pingcap/tidb-vector-python/blob/main/examples/python-client-quickstart) repository.
 
@@ -45,7 +43,7 @@ In your project directory, run the following command to install the required pac
 pip install sqlalchemy pymysql sentence-transformers tidb-vector
 ```
 
-- `tidb-vector`: the Python client for interacting with the vector search feature in TiDB Cloud, which is based on [SQLAlchemy](https://www.sqlalchemy.org).
+- `tidb-vector`: the Python client for interacting with Vector Search in TiDB Cloud, which is based on [SQLAlchemy](https://www.sqlalchemy.org).
 - [`sentence-transformers`](https://sbert.net): a Python library that provides pre-trained models for generating [vector embeddings](/tidb-cloud/vector-search-overview.md#vector-embedding) from text.
 
 ### Step 3. Configure the connection string to the TiDB cluster
@@ -160,7 +158,7 @@ vector_store.insert(
 )
 ```
 
-### Step 7. Perform a semantic search
+### Step 7. Perform semantic search
 
 In this step, you will search for "a swimming animal", which doesn't directly match any words in existing documents.
 

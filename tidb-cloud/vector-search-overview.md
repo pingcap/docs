@@ -1,6 +1,6 @@
 ---
 title: Vector Search (Beta) Overview
-summary: Learn about the vector search feature in TiDB Cloud. This feature provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video.
+summary: Learn about Vector Search in TiDB Cloud. This feature provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video.
 ---
 
 # Vector Search (Beta) Overview
@@ -9,7 +9,7 @@ The vector search (beta) feature in TiDB Cloud provides an advanced search solut
 
 > **Note**
 >
-> The vector search feature is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+> TiDB Vector Search is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
 
 ## Concepts
 
@@ -37,7 +37,7 @@ To learn how to generate vector embeddings for your specific data types, refer t
 
 After converting raw data into vector embeddings and storing them in TiDB, your application can execute vector search queries to find the data most semantically or contextually relevant to a user's query.
 
-The vector search feature in TiDB Cloud identifies the top-k nearest neighbor (KNN) vectors by using a [distance function](/tidb-cloud/vector-search-functions-and-operators.md) to calculate the distance between a given vectorized query and the data vectors in the embedding space. The vectors closest to the query represent the most similar data in meaning.
+Vector Search in TiDB Cloud identifies the top-k nearest neighbor (KNN) vectors by using a [distance function](/tidb-cloud/vector-search-functions-and-operators.md) to calculate the distance between a given vectorized query and the data vectors in the embedding space. The vectors closest to the query represent the most similar data in meaning.
 
 ![The Schematic TiDB Vector Search](/media/vector-search/embedding-search.png)
 
@@ -51,7 +51,7 @@ Retrieval-Augmented Generation (RAG) is an architecture designed to optimize the
 
 ## See also
 
-To get started with the vector search feature, see the following documents:
+To get started with TiDB Vector Search, see the following documents:
 
 - [Get started with vector search using Python](/tidb-cloud/vector-search-get-started-using-python.md)
 - [Get started with vector search using SQL](/tidb-cloud/vector-search-get-started-using-sql.md)

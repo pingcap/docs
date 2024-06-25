@@ -1,6 +1,6 @@
 ---
 title: Integrate Vector Search with LlamaIndex
-summary: Learn how to integrate the vector search feature in TiDB Cloud with LlamaIndex.
+summary: Learn how to integrate Vector Search in TiDB Cloud with LlamaIndex.
 ---
 
 # Integrate Vector Search with LlamaIndex
@@ -9,7 +9,7 @@ This tutorial demonstrates how to integrate the [vector search](/tidb-cloud/vect
 
 > **Note**
 >
-> - The vector search feature is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+> - TiDB Vector Search is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
 > - You can view the complete [sample code](https://github.com/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb) on Jupyter Notebook, or run the sample code directly in the [Colab](https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb) online environment.
 
 ## Prerequisites
@@ -23,7 +23,7 @@ To complete this tutorial, you need:
 
 ## Get started
 
-This section provides step-by-step instructions for integrating the vector search feature with LlamaIndex to perform semantic searches.
+This section provides step-by-step instructions for integrating TiDB Vector Search with LlamaIndex to perform semantic searches.
 
 ### Step 1. Create a new Jupyter Notebook file
 
@@ -62,16 +62,16 @@ from llama_index.vector_stores.tidbvector import TiDBVectorStore
 
 3. Ensure the configurations in the connection dialog match your operating environment.
 
-    - **Endpoint Type** is set to `Public`.
-    - **Branch** is set to `main`.
-    - **Connect With** is set to `SQLAlchemy`.
-    - **Operating System** matches your environment.
+   - **Endpoint Type** is set to `Public`.
+   - **Branch** is set to `main`.
+   - **Connect With** is set to `SQLAlchemy`.
+   - **Operating System** matches your environment.
 
 4. Click the **PyMySQL** tab and copy the connection string.
 
-    > **Tip:**
-    > 
-    > If you have not set a password yet, click **Generate Password** to generate a random password.
+   > **Tip:**
+   >
+   > If you have not set a password yet, click **Generate Password** to generate a random password.
 
 #### Step 3.2 Configure environment variables
 
