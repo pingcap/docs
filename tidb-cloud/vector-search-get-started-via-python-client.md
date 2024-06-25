@@ -186,9 +186,9 @@ Run the `example.py` file and the output is as follows:
 
 ```plain
 Search result ("a swimming animal"):
-- text: "fish", distance: 0.4586619425596351
-- text: "dog", distance: 0.6521646263795423
-- text: "tree", distance: 0.7980725077476978
+- text: "fish", distance: 0.4562914811223072
+- text: "dog", distance: 0.6469335836410557
+- text: "tree", distance: 0.798545178640937
 ```
 
 From the output, the swimming animal is most likely a fish, or a dog with a gift for swimming.
@@ -197,5 +197,5 @@ This demonstration shows how vector search can efficiently locate the most relev
 
 ## See also
 
-- [Vector Column](/tidb-cloud/vector-search-vector-column.md)
-- [Vector Index](/tidb-cloud/vector-search-vector-index.md)
+- [Vector Data Type](/tidb-cloud/vector-search-data-types.md)
+- [Vector Search Index](/tidb-cloud/vector-search-index.md)
