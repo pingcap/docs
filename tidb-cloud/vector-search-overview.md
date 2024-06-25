@@ -5,7 +5,7 @@ summary: Learn about Vector Search in TiDB Cloud. This feature provides an advan
 
 # Vector Search (Beta) Overview
 
-TiDB Vector Search (Beta) in provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video. This feature enables developers to easily build scalable applications with generative artificial intelligence (AI) capabilities using familiar MySQL skills.
+TiDB Vector Search (Beta) provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video. This feature enables developers to easily build scalable applications with generative artificial intelligence (AI) capabilities using familiar MySQL skills.
 
 > **Note**
 >

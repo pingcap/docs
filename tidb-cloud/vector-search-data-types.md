@@ -3,7 +3,7 @@ title: Vector Data Types
 summary: Learn about the Vector data types in TiDB.
 ---
 
-# Vector Type
+# Vector Data Types
 
 TiDB provides Vector data type specifically optimized for AI Vector Embedding use cases. By using the Vector data type, you can store and query a sequence of floating numbers efficiently, such as `[0.3, 0.5, -0.1, ...]`.
 
