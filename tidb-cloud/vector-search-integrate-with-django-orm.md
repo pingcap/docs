@@ -53,8 +53,18 @@ pip install -r requirements.txt
 For your existing project, you can install the following packages:
 
 ```bash
-pip install Django django-tidb mysqlclient tidb-vector
+pip install Django django-tidb mysqlclient
 ```
+
+If you encounter installation issues with mysqlclient, refer to the mysqlclient official documentation.
+
+#### What is `django-tidb`?
+
+`django-tidb` is a TiDB dialect for Django that enhances the Django ORM to support TiDB-specific features (For example, Vector Search) and resolves compatibility issues between TiDB and Django.
+
+To install `django-tidb`, choose a version that matches your Django version. For example, if you are using `django==4.2.*`, install `django-tidb==4.2.*`. The minor version does not need to be the same. It is recommended to use the latest minor version.
+
+For more information, refer to [django-tidb repository](https://github.com/pingcap/django-tidb).
 
 ### Step 4. Configure the environment variables
 
@@ -126,9 +136,43 @@ Open your browser and visit `http://localhost:8000` to see the demo application.
 
 You can refer to the following sample code snippets to complete your own application development.
 
+### Connect to the TiDB cluster
+
+In the file `sample_project/settings.py`, add the following configurations:
+
+```python
+dotenv.load_dotenv()
+
+DATABASES = {
+    "default": {
+        # https://github.com/pingcap/django-tidb
+        "ENGINE": "django_tidb",
+        "HOST": os.environ.get("TIDB_HOST", "127.0.0.1"),
+        "PORT": int(os.environ.get("TIDB_PORT", 4000)),
+        "USER": os.environ.get("TIDB_USER", "root"),
+        "PASSWORD": os.environ.get("TIDB_PASSWORD", ""),
+        "NAME": os.environ.get("TIDB_DB_NAME", "test"),
+        "OPTIONS": {
+            "charset": "utf8mb4",
+        },
+    }
+}
+
+TIDB_CA_PATH = os.environ.get("CA_PATH", "")
+if TIDB_CA_PATH:
+    DATABASES["default"]["OPTIONS"]["ssl_mode"] = "VERIFY_IDENTITY"
+    DATABASES["default"]["OPTIONS"]["ssl"] = {
+        "ca": TIDB_CA_PATH,
+    }
+```
+
+You can create a `.env` file in the root directory of your project and set up the environment variables `TIDB_HOST`, `TIDB_PORT`, `TIDB_USER`, `TIDB_PASSWORD`, `TIDB_DB_NAME`, and `CA_PATH` with the actual values of your TiDB cluster.
+
 ### Create vector tables
 
 #### Define a vector column
+
+`tidb-django` provides a `VectorField` to store vector embeddings in a table. 
 
 Create a table with a column named `embedding` that stores a 3-dimensional vector.
 
@@ -138,9 +182,9 @@ class Document(models.Model):
    embedding = VectorField(dimensions=3)
 ```
 
-#### Define a vector column optimized with HNSW index
+#### Define a vector column optimized with index
 
-Define a 3-dimensional vector column and optimize it with an HNSW index.
+Define a 3-dimensional vector column and optimize it with a [vector search index](vector-search-overview.md) (HNSW index).
 
 ```python
 class DocumentWithIndex(models.Model):
@@ -152,7 +196,7 @@ class DocumentWithIndex(models.Model):
    embedding = VectorField(dimensions=3, db_comment="hnsw(distance=cosine)")
 ```
 
-TiDB will use this index to speed up vector search queries based on the cosine distance function.
+With vector searchTiDB will use this index to speed up vector search queries based on the cosine distance function.
 
 ### Store documents with embeddings
 
@@ -184,7 +228,7 @@ results = Document.objects.annotate(
 Search for the documents whose cosine distance from the query vector `[1, 2, 3]` is less than 0.2.
 
 ```python
-    results = Document.objects.annotate(
+results = Document.objects.annotate(
    distance=CosineDistance('embedding', [1, 2, 3])
 ).filter(distance__lt=0.2).order_by('distance')[:3]
 ```
