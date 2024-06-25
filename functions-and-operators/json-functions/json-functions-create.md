@@ -43,7 +43,7 @@ SELECT JSON_OBJECT("database", "TiDB", "distributed", TRUE);
 
 ## [JSON_QUOTE()](https://dev.mysql.com/doc/refman/8.0/en/json-creation-functions.html#function_json-quote)
 
-Th `JSON_QUOTE(str)` function returns a string as a JSON value with quotes.
+The `JSON_QUOTE(str)` function returns a string as a JSON value with quotes.
 
 ```sql
 SELECT JSON_QUOTE('The name is "O\'Neil"');

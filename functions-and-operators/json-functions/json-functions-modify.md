@@ -238,7 +238,7 @@ SELECT JSON_REPLACE('{"a": 41, "b": 62}','$.b',42);
 1 row in set (0.00 sec)
 ```
 
-In the following example, you can change the value at `$.b` from `62` to `42`. In addition to this, you can replace the value at `$.c` with `43`. Because it does not exits in `json_doc`, the result is not changed.
+In the following example, you can change the value at `$.b` from `62` to `42`. In addition to this, you can replace the value at `$.c` with `43`. Because it does not exist in `json_doc`, the result is not changed.
 
 ```sql
 SELECT JSON_REPLACE('{"a": 41, "b": 62}','$.b',42,'$.c',43);
@@ -276,7 +276,7 @@ SELECT JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2);
 1 row in set (0.00 sec)
 ```
 
-In the following example, you update the `$.version` from `1.1` to `1.2`. And you update `$.branch`, which is was not present before, to `main`.
+In the following example, you update the `$.version` from `1.1` to `1.2`. And you update `$.branch`, which is not present before, to `main`.
 
 ```sql
 SELECT JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2,'$.branch', "main");
