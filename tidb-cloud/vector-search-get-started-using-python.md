@@ -7,7 +7,7 @@ summary: Learn how to quickly develop an AI application that performs semantic s
 
 This tutorial demonstrates how to develop a simple AI application providing **semantic search** features, which is searching for documents not only by keyword, but in an intelligent way that understands the meaning of the search. For example, giving documents titled with "dog", "fish" and "tree", when querying for "a swimming animal", the application would could recall "fish" as the most relevant document.
 
-Through out this tutorial, we will develop this AI application using Python, AI models and [TiDB Vector Search](/tidb-cloud/vector-search-overview.md).
+Through out this tutorial, we will develop this AI application using [TiDB Vector Search](/tidb-cloud/vector-search-overview.md), Python, [TiDB Vector SDK for Python](https://github.com/pingcap/tidb-vector-python) and AI models.
 
 > **Note**
 >

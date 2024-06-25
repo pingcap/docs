@@ -41,12 +41,12 @@ You must specify the distance metric via `distance=<metric>` config when creatin
 
 Vector index can be only created for fixed-dimensional vector columns like `VECTOR(3)`. It cannot be created for mixed-dimensional vector columns like `VECTOR`, because vector distances can be only calculated between vectors with the same dimensions.
 
-If you are using ORMs, please refer to the following documentations for creating vector indexes:
+If you are using programming language SDKs or ORMs, please refer to the following documentations for creating vector indexes:
 
-- Python: [TiDB Vector Client](https://github.com/pingcap/tidb-vector-python?tab=readme-ov-file#tidb-vector-client)
-- Python: [SQLAlchemy](https://github.com/pingcap/tidb-vector-python?tab=readme-ov-file#sqlalchemy)
-- Python: [Peewee](https://github.com/pingcap/tidb-vector-python?tab=readme-ov-file#peewee)
-- Python: [Django](https://github.com/pingcap/django-tidb?tab=readme-ov-file#vector-beta)
+- Python: [TiDB Vector SDK for Python](https://github.com/pingcap/tidb-vector-python)
+- Python: [SQLAlchemy](/tidb-cloud/vector-search-integrate-with-sqlalchemy.md)
+- Python: [Peewee](/tidb-cloud/vector-search-integrate-with-peewee.md)
+- Python: [Django](/tidb-cloud/vector-search-integrate-with-django-orm.md)
 
 Please be aware of the following limitations when creating the vector index. We are working to remove these limitations in future releases:
 
