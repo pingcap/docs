@@ -1,20 +1,16 @@
 ---
 title: Integrate Vector Search with LlamaIndex
-summary: Learn how to integrate the TiDB vector search feature with LlamaIndex.
+summary: Learn how to integrate the vector search feature in TiDB Cloud with LlamaIndex.
 ---
 
 # Integrate Vector Search with LlamaIndex
 
-This tutorial will walk you through how to integrate the TiDB vector search feature with LlamaIndex.
+This tutorial demonstrates how to integrate the [vector search](/tidb-cloud/vector-search-overview.md) feature in TiDB Cloud with [LlamaIndex](https://www.llamaindex.ai).
 
 > **Note**
 >
-> The vector search feature is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
-
-> **Tips**
-> 
-> You can check the complete [sample code](https://github.com/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb) on Jupyter Notebook, or run the sample code directly in the [colab](https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb) online environment.
-
+> - The vector search feature is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+> - You can view the complete [sample code](https://github.com/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb) on Jupyter Notebook, or run the sample code directly in the [Colab](https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb) online environment.
 
 ## Prerequisites
 
@@ -25,13 +21,13 @@ To complete this tutorial, you need:
 - [Git](https://git-scm.com/downloads) installed.
 - A TiDB Serverless cluster. Follow [creating a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
 
-## Get Started
+## Get started
 
-In this section, you can learn step-by-step how to use LlamaIndex to integrate with TiDB vector search and perform semantic search.
+This section provides step-by-step instructions for integrating the vector search feature with LlamaIndex to perform semantic searches.
 
 ### Step 1. Create a new Jupyter Notebook file
 
-Create a new Jupyter Notebook file in your preferred directory.
+In your preferred directory, create a new Jupyter Notebook file named `integrate_with_llamaindex.ipynb`:
 
 ```shell
 touch integrate_with_llamaindex.ipynb
@@ -39,14 +35,14 @@ touch integrate_with_llamaindex.ipynb
 
 ### Step 2. Install required dependencies
 
-Run the following command on your project directory to install the required packages:
+In your project directory, run the following command to install the required packages:
 
 ```shell
 pip install llama-index-vector-stores-tidbvector
 pip install llama-index
 ```
 
-Import the required packages in your code:
+Open the `integrate_with_llamaindex.ipynb` file in Jupyter Notebook and add the following code to import the required packages:
 
 ```python
 import textwrap
@@ -56,12 +52,9 @@ from llama_index.core import VectorStoreIndex
 from llama_index.vector_stores.tidbvector import TiDBVectorStore
 ```
 
-### Step 3. Set up environments
+### Step 3. Set up your environment
 
-#### Step 3.1 Obtains the connection string to the TiDB cluster
-
-<SimpleTab>
-<div label="TiDB Serverless">
+#### Step 3.1 Obtain the connection string to the TiDB cluster
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -69,45 +62,49 @@ from llama_index.vector_stores.tidbvector import TiDBVectorStore
 
 3. Ensure the configurations in the connection dialog match your operating environment.
 
-   - **Endpoint Type** is set to `Public`
-   - **Branch** is set to `main`
-   - **Connect With** is set to `SQLAlchemy`
-   - **Operating System** matches your environment.
+    - **Endpoint Type** is set to `Public`.
+    - **Branch** is set to `main`.
+    - **Connect With** is set to `SQLAlchemy`.
+    - **Operating System** matches your environment.
 
-4. Switch to the **PyMySQL** tab and click the **Copy** icon to copy the connection string.
+4. Click the **PyMySQL** tab and copy the connection string.
 
-</div>
+    > **Tip:**
+    > 
+    > If you have not set a password yet, click **Generate Password** to generate a random password.
 
-</SimpleTab>
+#### Step 3.2 Configure environment variables
 
-#### Step 3.2 Configure the environment variables
+To establish a secure and efficient database connection, use the standard connection method provided by TiDB Cloud.
 
-Configure the TiDB connection string and [OpenAI API key](https://platform.openai.com/api-keys) in the Jupyter Notebook. 
+This document uses [OpenAI](https://platform.openai.com/docs/introduction) as the embedding model provider. In this step, you need to provide the connection string obtained from step 3.1 and your [OpenAI API key](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key).
+
+To configure the environment variables, run the following code. You will be prompted to enter your connection string and OpenAI API key:
 
 ```python
 import getpass
 import os
 
-os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
 tidb_connection_url = getpass.getpass(
    "TiDB connection URL (format - mysql+pymysql://root@127.0.0.1:4000/test): "
 )
+os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
 ```
 
 ### Step 4. Load the sample document
 
 #### Step 4.1 Download the sample document
 
-Download the sample document `paul_graham_essay.txt` from the GitHub repository.
+In your project directory, create a directory named `data/paul_graham/` and download the sample document [`paul_graham_essay.txt`](https://github.com/run-llama/llama_index/blob/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt) from the [run-llama/llama_index](https://github.com/run-llama/llama_index) GitHub repository.
 
 ```shell
 !mkdir -p 'data/paul_graham/'
 !wget 'https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt' -O 'data/paul_graham/paul_graham_essay.txt'
 ```
 
-#### Step 4.2 Load documents
+#### Step 4.2 Load the document
 
-Load the sample document from the directory with the `SimpleDirectoryReader` class.
+Load the sample document from `data/paul_graham/paul_graham_essay.txt` using the `SimpleDirectoryReader` class.
 
 ```python
 documents = SimpleDirectoryReader("./data/paul_graham").load_data()
@@ -117,11 +114,11 @@ for index, document in enumerate(documents):
    document.metadata = {"book": "paul_graham"}
 ```
 
-### Step 5. Build index
+### Step 5. Embed and store document vectors
 
-#### Step 5.1 Initializes the TiDB vector store
+#### Step 5.1 Initialize the TiDB vector store
 
-The code snippet below creates a table named `paul_graham_test` in TiDB, optimized for vector searching. 
+The following code creates a table named `paul_graham_test` in TiDB, which is optimized for vector search.
 
 ```python
 tidbvec = TiDBVectorStore(
@@ -133,11 +130,11 @@ tidbvec = TiDBVectorStore(
 )
 ```
 
-Upon successful execution of this code, you will be able to view and access the `paul_graham_test` table directly within your TiDB database.
+Upon successful execution, you can directly view and access the `paul_graham_test` table in your TiDB database.
 
-#### Step 5.2 Builds vector indexes from the documents
+#### Step 5.2 Generate and store embeddings
 
-The code snippet below will parse the documents, generate embeddings, and store them in the TiDB vector store.
+The following code parses the documents, generates embeddings, and stores them in the TiDB vector store.
 
 ```python
 storage_context = StorageContext.from_defaults(vector_store=tidbvec)
@@ -146,16 +143,16 @@ index = VectorStoreIndex.from_documents(
 )
 ```
 
-Excepted output:
+The expected output is as follows:
 
 ```plain
 Parsing nodes: 100%|██████████| 1/1 [00:00<00:00,  8.76it/s]
 Generating embeddings: 100%|██████████| 21/21 [00:02<00:00,  8.22it/s]
 ```
 
-### Step 6. Semantic similarity search
+### Step 6. Perform a vector search
 
-Creates a query engine based on the TiDB vector store and performs a semantic similarity search.
+The following creates a query engine based on the TiDB vector store and performs a semantic similarity search.
 
 ```python
 query_engine = index.as_query_engine()
@@ -165,9 +162,9 @@ print(textwrap.fill(str(response), 100))
 
 > **Note**
 >
-> `TiDBVectorStore` only supports [`default`](https://docs.llamaindex.ai/en/stable/api_reference/storage/vector_store/?h=vectorstorequerymode#llama_index.core.vector_stores.types.VectorStoreQueryMode) query mode for now.
+> `TiDBVectorStore` only supports the [`default`](https://docs.llamaindex.ai/en/stable/api_reference/storage/vector_store/?h=vectorstorequerymode#llama_index.core.vector_stores.types.VectorStoreQueryMode) query mode.
 
-Expected output:
+The expected output is as follows:
 
 ```plain
 The author worked on writing, programming, building microcomputers, giving talks at conferences,
@@ -177,9 +174,11 @@ a building for office use.
 
 ### Step 7. Search with metadata filters
 
-Perform searches with metadata filters to retrieve the top-k nearest-neighbor documents that align with the applied filters.
+To refine your searches, you can use metadata filters to retrieve specific nearest-neighbor results that match the applied filters.
 
-#### Step 7.1 Query with `book != "paul_graham"` filter
+#### Query with `book != "paul_graham"` filter
+
+The following example excludes results where the `book` metadata field is `"paul_graham"`:
 
 ```python
 from llama_index.core.vector_stores.types import (
@@ -199,13 +198,15 @@ response = query_engine.query("What did the author learn?")
 print(textwrap.fill(str(response), 100))
 ```
 
-Expected output:
+The expected output is as follows:
 
 ```plain
 Empty Response
 ```
 
-#### Step 7.2 Query with `book == "paul_graham"` filter
+#### Query with `book == "paul_graham"` filter
+
+The following example filters results to include only documents where the `book` metadata field is `"paul_graham"`:
 
 ```python
 from llama_index.core.vector_stores.types import (
@@ -225,7 +226,7 @@ response = query_engine.query("What did the author learn?")
 print(textwrap.fill(str(response), 100))
 ```
 
-Expected output:
+The expected output is as follows:
 
 ```plain
 The author learned programming on an IBM 1401 using an early version of Fortran in 9th grade, then
@@ -251,7 +252,7 @@ response = query_engine.query("What did the author learn?")
 print(textwrap.fill(str(response), 100))
 ```
 
-Expected output:
+The expected output is as follows:
 
 ```plain
 Empty Response
