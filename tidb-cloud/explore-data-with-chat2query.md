@@ -129,8 +129,8 @@ In SQL Editor, you can use Chat2Query to rewrite existing SQL queries to optimiz
 
 2. Invoke Chat2Query for rewriting by using the keyboard shortcut for your operating system:
 
-    - **⌘ + I** on macOS
-    - **Ctrl + I** on Windows or Linux
+    - <kbd>⌘</kbd> + <kbd>I</kbd> on macOS
+    - <kbd>Control</kbd> + <kbd>I</kbd> on Windows or Linux
 
   Press **Enter** after providing your instructions to let AI handle the rewrite.
 
