@@ -91,9 +91,7 @@ VEC_L2_DISTANCE(vector1, vector2)
 
 Calculates the L2 distance (Euclidean distance) between two vectors using the following formula:
 
-$
-DISTANCE(p,q)=\sqrt {\sum \limits _{i=1}^{n}{(p_{i}-q_{i})^{2}}}
-$
+$DISTANCE(p,q)=\sqrt {\sum \limits _{i=1}^{n}{(p_{i}-q_{i})^{2}}}$
 
 The two vectors must have the same dimension. Otherwise an error is returned.
 
@@ -116,9 +114,7 @@ VEC_COSINE_DISTANCE(vector1, vector2)
 
 Calculates the cosine distance between two vectors using the following formula:
 
-$
-DISTANCE(p,q)=1.0 - {\frac {\sum \limits _{i=1}^{n}{p_{i}q_{i}}}{{\sqrt {\sum \limits _{i=1}^{n}{p_{i}^{2}}}}\cdot {\sqrt {\sum \limits _{i=1}^{n}{q_{i}^{2}}}}}}
-$
+$DISTANCE(p,q)=1.0 - {\frac {\sum \limits _{i=1}^{n}{p_{i}q_{i}}}{{\sqrt {\sum \limits _{i=1}^{n}{p_{i}^{2}}}}\cdot {\sqrt {\sum \limits _{i=1}^{n}{q_{i}^{2}}}}}}$
 
 The two vectors must have the same dimension. Otherwise an error is returned.
 
@@ -141,9 +137,7 @@ VEC_NEGATIVE_INNER_PRODUCT(vector1, vector2)
 
 Calculates the distance by using the negative of the inner product between two vectors, using the following formula:
 
-$
-DISTANCE(p,q)=- INNER\_PROD(p,q)=-\sum \limits _{i=1}^{n}{p_{i}q_{i}}
-$
+$DISTANCE(p,q)=- INNER\_PROD(p,q)=-\sum \limits _{i=1}^{n}{p_{i}q_{i}}$
 
 The two vectors must have the same dimension. Otherwise an error is returned.
 
@@ -166,9 +160,7 @@ VEC_L1_DISTANCE(vector1, vector2)
 
 Calculates the L1 distance (Manhattan distance) between two vectors using the following formula:
 
-$
-DISTANCE(p,q)=\sum \limits _{i=1}^{n}{|p_{i}-q_{i}|}
-$
+$DISTANCE(p,q)=\sum \limits _{i=1}^{n}{|p_{i}-q_{i}|}$
 
 The two vectors must have the same dimension. Otherwise an error is returned.
 
@@ -217,9 +209,7 @@ VEC_L2_NORM(vector)
 
 Calculates the L2 norm (Euclidean norm) of a vector using the following formula:
 
-$
-NORM(p)=\sqrt {\sum \limits _{i=1}^{n}{p_{i}^{2}}}
-$
+$NORM(p)=\sqrt {\sum \limits _{i=1}^{n}{p_{i}^{2}}}$
 
 Examples:
 
