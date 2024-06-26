@@ -106,21 +106,21 @@ If you are using Maven, add the following to your `<dependencies></dependencies>
 <dependency>
     <groupId>org.hibernate.orm</groupId>
     <artifactId>hibernate-core</artifactId>
-    <version>6.0.0.CR2</version>
+    <version>6.2.3.Final</version>
 </dependency>
 
 <dependency>
     <groupId>mysql</groupId>
     <artifactId>mysql-connector-java</artifactId>
-    <version>5.1.49</version>
+    <version>8.0.33</version>
 </dependency>
 ```
 
 If you are using Gradle, add the following to your `dependencies`:
 
 ```gradle
-implementation 'org.hibernate:hibernate-core:6.0.0.CR2'
-implementation 'mysql:mysql-connector-java:5.1.49'
+implementation 'org.hibernate:hibernate-core:6.2.3.Final'
+implementation 'mysql:mysql-connector-java:8.0.33'
 ```
 
 - For an example of using Hibernate to build a TiDB application by native Java, see [Build a simple CRUD app with TiDB and Hibernate](/develop/dev-guide-sample-application-java-hibernate.md).
@@ -146,21 +146,21 @@ If you are using Maven, add the following to your `<dependencies></dependencies>
 <dependency>
     <groupId>org.mybatis</groupId>
     <artifactId>mybatis</artifactId>
-    <version>3.5.9</version>
+    <version>3.5.13</version>
 </dependency>
 
 <dependency>
     <groupId>mysql</groupId>
     <artifactId>mysql-connector-java</artifactId>
-    <version>5.1.49</version>
+    <version>8.0.33</version>
 </dependency>
 ```
 
 If you are using Gradle, add the following to your `dependencies`:
 
 ```gradle
-implementation 'org.mybatis:mybatis:3.5.9'
-implementation 'mysql:mysql-connector-java:5.1.49'
+implementation 'org.mybatis:mybatis:3.5.13'
+implementation 'mysql:mysql-connector-java:8.0.33'
 ```
 
 For an example of using MyBatis to build a TiDB application, see [Build a simple CRUD app with TiDB and MyBatis](/develop/dev-guide-sample-application-java-mybatis.md).
