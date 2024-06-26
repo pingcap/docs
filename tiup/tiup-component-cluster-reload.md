@@ -85,9 +85,9 @@ After you specify the `--skip-restart` option, it only refreshes the configurati
 >
 > This option is experimental and is not recommended for production deployments.
 
-- Run a script before the reload.
+- Runs a script before the reload.
 - Data type: `STRINGS`
-- This option specifies the path of the command that will be ran on the host that is to be reloaded. 
+- This option specifies the path of a script to be run on the host that is to be reloaded.
 
 ### --post-restart-script
 
@@ -95,9 +95,9 @@ After you specify the `--skip-restart` option, it only refreshes the configurati
 >
 > This option is experimental and is not recommended for production deployments.
 
-- Run a script after the reload.
+- Runs a script after the reload.
 - Data type: `STRINGS`
-- This option specifies the path of the command that will be ran on the host that was reloaded. 
+- This option specifies the path of a script to be run after the reload of a host.
 
 ## Output
 
