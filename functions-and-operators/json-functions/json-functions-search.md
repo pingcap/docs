@@ -73,7 +73,7 @@ SELECT JSON_CONTAINS('{"foo": "bar", "aaa": 5}','"bar"');
 1 row in set (0.00 sec)
 ```
 
-Here `"bar"` is not contained in the `$.foo` attribute of the document.
+Here `"bar"` is contained in the `$.foo` attribute of the document.
 
 ```sql
 SELECT JSON_CONTAINS('{"foo": "bar", "aaa": 5}','"bar"', '$.foo');
