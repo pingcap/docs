@@ -21,4 +21,3 @@ We value your feedback and are always here to help:
 
 - [Join our Discord](https://discord.gg/zcqexutz2R)
 - [Visit our Support Portal](https://tidb.support.pingcap.com/)
-
