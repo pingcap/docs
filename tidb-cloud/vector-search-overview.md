@@ -5,7 +5,7 @@ summary: Learn about Vector Search in TiDB Cloud. This feature provides an advan
 
 # Vector Search (Beta) Overview
 
-TiDB Vector Search (Beta) provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video. This feature enables developers to easily build scalable applications with generative artificial intelligence (AI) capabilities using familiar MySQL skills.
+TiDB Vector Search (beta) provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video. This feature enables developers to easily build scalable applications with generative artificial intelligence (AI) capabilities using familiar MySQL skills.
 
 > **Note**
 >
@@ -23,7 +23,7 @@ A vector embedding, also known as an embedding, is a sequence of numbers that re
 
 Vector embeddings are essential in machine learning and serve as the foundation for semantic similarity searches.
 
-TiDB introduces [Vector Data types](/tidb-cloud/vector-search-data-types.md) specifically optimized for AI Vector Embedding use cases. You can store vector embeddings in TiDB and perform vector search queries to find the most similar data using vector Data types.
+TiDB introduces [Vector data types](/tidb-cloud/vector-search-data-types.md) designed to optimize the storage and retrieval of vector embeddings, enhancing their use in AI applications. You can store vector embeddings in TiDB and perform vector search queries to find the most relevant data using these data types.
 
 ### Embedding model
 
@@ -48,6 +48,14 @@ As a relational database with integrated vector search capabilities, TiDB enable
 ### Retrieval-Augmented Generation (RAG)
 
 Retrieval-Augmented Generation (RAG) is an architecture designed to optimize the output of Large Language Models (LLMs). By using vector search, RAG applications can store vector embeddings in the database and retrieve relevant documents as additional context when the LLM generates responses, thereby improving the quality and relevance of the answers.
+
+### Semantic search
+
+Semantic search is a search technology that returns results based on the query's meaning, not exact keywords. It captures the meaning across different languages and different types of data (such as text, images, audio, or other forms of content) in embeddings and uses vector search to find the most relevant data that satisfies the user's query.
+
+### Recommendation engine
+
+Recommendation engine is a system that proactively suggests relevant and personalized contents, products, or services to users. It vectorized user historical behavior and content preferences through embeddings, and then recommends similar content or products that others like and you may also like.
 
 ## See also
 

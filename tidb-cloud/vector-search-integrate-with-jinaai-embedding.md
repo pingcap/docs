@@ -138,7 +138,7 @@ def generate_embeddings(text: str):
     }
     JINAAI_REQUEST_DATA = {
         'input': [text],
-        'model': 'jina-embeddings-v2-base-en'  # with dimisions 768.
+        'model': 'jina-embeddings-v2-base-en'  # with dimension 768.
     }
     response = requests.post(JINAAI_API_URL, headers=JINAAI_HEADERS, json=JINAAI_REQUEST_DATA)
     return response.json()['data'][0]['embedding']
