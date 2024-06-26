@@ -49,6 +49,14 @@ As a relational database with integrated vector search capabilities, TiDB enable
 
 Retrieval-Augmented Generation (RAG) is an architecture designed to optimize the output of Large Language Models (LLMs). By using vector search, RAG applications can store vector embeddings in the database and retrieve relevant documents as additional context when the LLM generates responses, thereby improving the quality and relevance of the answers.
 
+### Semantic search
+
+Semantic search is a search technology that returns results based on the query's meaning, not exact keywords. It captures the meaning across different languages and different types of data (such as text, images, audio, or other forms of content) in embeddings and uses vector search to find the most relevant data that satisfies the user's query.
+
+### Recommendation engine
+
+Recommendation engine is a system that proactively suggests relevant and personalized contents, products, or services to users. It vectorized user historical behavior and content preferences through embeddings, and then recommends similar content or products that others like and you may also like.
+
 ## See also
 
 To get started with TiDB Vector Search, see the following documents:
