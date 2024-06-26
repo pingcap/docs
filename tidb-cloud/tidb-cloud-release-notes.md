@@ -23,7 +23,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
   For more information, see [Vector search (beta) overview](/tidb-cloud/vector-search-overview.md).
 
--  [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) now offers weekly email reports for organization owners.
+- [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) now offers weekly email reports for organization owners.
 
     These reports provide insights into the performance and activity of your clusters. By receiving automatic weekly updates, you can stay informed about your clusters and make data-driven decisions to optimize your clusters.
 
