@@ -155,6 +155,6 @@ For more information, see [the IETF draft for JSONPath](https://www.ietf.org/arc
 
 For more information, see [#14486](https://github.com/pingcap/tidb/issues/14486).
 
-## MySQL Compatibility
+## MySQL compatibility
 
 - TiDB supports most of the [JSON functions](https://dev.mysql.com/doc/refman/8.0/en/json-functions.html) available in MySQL 8.0.
