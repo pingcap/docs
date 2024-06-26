@@ -52,7 +52,7 @@ SELECT JSON_STORAGE_FREE('{}');
 
 ## [JSON_STORAGE_SIZE()](https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html#function_json-storage-size)
 
-The `JSON_STORAGE_SIZE(json_doc)` function returns an approximate size of bytes required to store the json value. Because the size does not account for TiKV using compression, the output of this function is not strictly compatible with MySQL.
+The `JSON_STORAGE_SIZE(json_doc)` function returns an approximate size of bytes required to store the JSON value. Because the size does not account for TiKV using compression, the output of this function is not strictly compatible with MySQL.
 
 ```sql
 SELECT JSON_STORAGE_SIZE('{}');
