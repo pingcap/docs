@@ -1,11 +1,11 @@
 ---
 title: Vector Search Index
-summary: Learn how to build and use the vector search index to accelerate K-Nearest neighborhood (KNN) queries in TiDB.
+summary: Learn how to build and use the vector search index to accelerate K-Nearest neighbors (KNN) queries in TiDB.
 ---
 
 # Vector Search Index
 
-K-Nearest neighborhood (KNN) search is the problem of finding the K closest points for a given point in a vector space. The most straightforward approach to solving this problem is a brute force search, where the distance between all points in the vector space and the reference point is computed. This method guarantees perfect accuracy, but it is usually too slow for practical applications. Thus, nearest neighborhood search problems are often solved with approximative algorithms.
+K-nearest neighbors (KNN) search is the problem of finding the K closest points for a given point in a vector space. The most straightforward approach to solving this problem is a brute force search, where the distance between all points in the vector space and the reference point is computed. This method guarantees perfect accuracy, but it is usually too slow for practical applications. Thus, nearest neighbors search problems are often solved with approximate algorithms.
 
 In TiDB, you can create and utilize vector search indexes for such approximate nearest neighbor (ANN) searches over columns with [vector data types](/tidb-cloud/vector-search-data-types.md). By using vector search indexes, vector search queries could be finished in milliseconds.
 
@@ -65,11 +65,11 @@ ORDER BY Vec_Cosine_Distance(embedding, '[1, 2, 3]')
 LIMIT 10
 ```
 
-You must use the same distance metric as you defined when creating the Vector Index if you want to utilize the index in vector search.
+You must use the same distance metric as you have defined when creating the vector index if you want to utilize the index in vector search.
 
-## Use Vector Index with Filters
+## Use the vector index with filters
 
-Queries that contain a pre-filter (using the `WHERE` clause) cannot utilize Vector Index, because they are not querying for K-Nearest neighborhoods according to the SQL semantics, for example:
+Queries that contain a pre-filter (using the `WHERE` clause) cannot utilize the vector index because they are not querying for K-Nearest neighborss according to the SQL semantics. For example:
 
 ```sql
 -- Filter is performed before kNN, so Vector Index cannot be used:
@@ -80,9 +80,9 @@ ORDER BY Vec_Cosine_distance(embedding, '[1, 2, 3]')
 LIMIT 5;
 ```
 
-There are several workarounds as follows.
+Several workarounds are as follows:
 
-**Post-Filter after Vector Search:** Query for K-Nearest neighborhood first, then filter out unwanted results:
+**Post-Filter after Vector Search:** Query for the K-Nearest neighbors first, then filter out unwanted results:
 
 ```sql
 -- The filter is performed after kNN for these queries, so Vector Index can be used:
@@ -98,9 +98,9 @@ WHERE category = "document";
 -- Note that this query may return less than 5 results if some are filtered out.
 ```
 
-**Use Table Partitioning**: Query within the [table partition](/partitioned-table.md) can fully utilize vector index. This can be useful if you want to perform eqality filters, as equality filters can be turned into accessing specified partitions.
+**Use Table Partitioning**: Queries within the [table partition](/partitioned-table.md) can fully utilize the vector index. This can be useful if you want to perform equality filters, as equality filters can be turned into accessing specified partitions.
 
-Example: Suppose you want to find closest documentations for a specific product version.
+Example: Suppose you want to find the closest documentation for a specific product version.
 
 ```sql
 -- Filter is performed before kNN, so Vector Index cannot be used:
@@ -110,7 +110,7 @@ ORDER BY Vec_Cosine_distance(embedding, '[1, 2, 3]')
 LIMIT 5;
 ```
 
-Instead of writing a query using `WHERE` clause, you can partition the table and then query within the partition using [PARTITION keyword](/partitioned-table.md#partition-selection):
+Instead of writing a query using the `WHERE` clause, you can partition the table and then query within the partition using the [`PARTITION` keyword](/partitioned-table.md#partition-selection):
 
 ```sql
 CREATE TABLE docs (
@@ -133,13 +133,13 @@ LIMIT 5;
 
 See [Table Partitioning](/partitioned-table.md) for more information.
 
-## Check Whether Vector Index is Used
+## Check whether the vector index is used
 
-Use the [`EXPLAIN`](/sql-statements/sql-statement-explain.md) or [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) statement to check whether this query is using the Vector Index. When `annIndex:` is presented in the `operator info` column for the `TableFullScan` executor, it means this Table Scan is utilizing the Vector Index.
+Use the [`EXPLAIN`](/sql-statements/sql-statement-explain.md) or [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) statement to check whether this query is using the vector index. When `annIndex:` is presented in the `operator info` column for the `TableFullScan` executor, it means this table scan is utilizing the vector index.
 
-**Example: Vector Index is used:**
+**Example: the vector index is used**
 
-```
+```sql
 [tidb]> EXPLAIN SELECT * FROM vector_table_with_index
 ORDER BY Vec_Cosine_Distance(embedding, '[1, 2, 3]')
 LIMIT 10;
@@ -159,9 +159,9 @@ LIMIT 10;
 9 rows in set (0.01 sec)
 ```
 
-**Example: Vector Index is not used because of not specifying a Top K:**
+**Example: The vector index is not used because of not specifying a Top K**
 
-```
+```sql
 [tidb]> EXPLAIN SELECT * FROM vector_table_with_index
      -> ORDER BY Vec_Cosine_Distance(embedding, '[1, 2, 3]');
 +--------------------------------+-----+--------------------------------------------------+
@@ -177,7 +177,7 @@ LIMIT 10;
 6 rows in set, 1 warning (0.01 sec)
 ```
 
-When Vector Index cannot be used, a warning will be produced in some cases to help you learn the cause:
+When the vector index cannot be used, a warning occurs in some cases to help you learn the cause:
 
 ```sql
 -- Using a wrong distance metric:
@@ -197,9 +197,9 @@ LIMIT 10;
 ANN index not used: index can be used only when ordering by vec_cosine_distance() in ASC order
 ```
 
-## Analyze Vector Search Performance
+## Analyze vector search performance
 
-[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) statement contains detailed information about how Vector Index is used in the `execution info` column:
+The [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) statement contains detailed information about how the vector index is used in the `execution info` column:
 
 ```sql
 [tidb]> EXPLAIN ANALYZE SELECT * FROM vector_table_with_index
@@ -236,9 +236,9 @@ Explanation of some important fields:
 - `vector_index.search.total`: The total duration of searching in the index. Large latency usually means the index is cold (never accessed before, or accessed long ago) so that there is heavy IO when searching through the index. This field could be larger than actual query time because multiple vector indexes may be searched in parallel.
 - `vector_index.search.discarded_nodes`: Number of vector rows visited but discarded during the search. These discarded vectors are not considered in the search result. Large values usually indicate that there are many stale rows caused by UPDATE or DELETE statements.
 
-See documentations of [`EXPLAIN`](/sql-statements/sql-statement-explain.md), [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) and [EXPLAIN Walkthrough](/explain-walkthrough.md) for interpreting the output.
+See [`EXPLAIN`](/sql-statements/sql-statement-explain.md), [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md), and [EXPLAIN Walkthrough](/explain-walkthrough.md) for interpreting the output.
 
-## See Also
+## See also
 
 - [Improve Vector Search Performance](/tidb-cloud/vector-search-improve-performance.md)
 - [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
