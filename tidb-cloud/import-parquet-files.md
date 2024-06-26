@@ -137,7 +137,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
 4. You can choose to import into pre-created tables, or import schema and data from the source.
 
-    - **Import into pre-created tables** allows you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. You can click **Chat2Query** in the left navigation pane to create tables. For more information about how to use Chat2Query, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md).
+    - **Import into pre-created tables** allows you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. You can click **SQL Editor** in the left navigation pane to create tables. For more information about how to use SQL Editor, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
     - **Import schema and data from S3** (This field is visible only for AWS S3) allows you to import SQL scripts for creating a table and import corresponding table data stored in S3 into TiDB.
     - **Import schema and data from GCS** (This field is visible only for GCS) allows you to import SQL scripts that create a table along with its corresponding data stored in GCS directly into TiDB.
 

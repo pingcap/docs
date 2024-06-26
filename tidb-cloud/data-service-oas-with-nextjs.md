@@ -22,7 +22,7 @@ This document uses a TiDB Serverless cluster as an example.
 
 To begin with, create a table `test.repository` in your TiDB cluster and insert some sample data into it. The following example inserts some open source projects developed by PingCAP as data for demonstration purposes.
 
-To execute the SQL statements, you can use [Chat2Query](/tidb-cloud/explore-data-with-chat2query.md) in the [TiDB Cloud console](https://tidbcloud.com).
+To execute the SQL statements, you can use [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) in the [TiDB Cloud console](https://tidbcloud.com).
 
 ```sql
 -- Select the database
