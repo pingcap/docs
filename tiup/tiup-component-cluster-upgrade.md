@@ -128,9 +128,9 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 >
 > This option is experimental and is not recommended for production deployments.
 
-- Run a script before the upgrade.
+- Runs a script before the upgrade.
 - Data type: `STRINGS`
-- This option specifies the path of the command that will be ran on the host that is to be upgraded. 
+- This option specifies the path of a script to be run on the host that is to be upgraded.
 
 ### ---post-upgrade-script
 
@@ -138,9 +138,9 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 >
 > This option is experimental and is not recommended for production deployments.
 
-- Run a script after the upgrade.
+- Runs a script after the upgrade.
 - Data type: `STRINGS`
-- This option specifies the path of the command that will be ran after the upgrade of a host. This command will be executed on the upgraded host itself.
+- This option specifies the path of a script to be run after the upgrade of a host. This command will be executed on the upgraded host itself.
 
 ## Output
 
