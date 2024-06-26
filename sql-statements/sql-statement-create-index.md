@@ -140,11 +140,11 @@ DROP INDEX idx1 ON t1;
 
 Expression index involves various kinds of expressions. To ensure correctness, only some fully tested functions are allowed for creating an expression index. This means that only these functions are allowed in expressions in a production environment. You can get these functions by querying the [`tidb_allow_function_for_expression_index`](/system-variables.md#tidb_allow_function_for_expression_index-new-in-v520) variable. Currently, the allowed functions are as follows:
 
+- [`JSON_ARRAY()`](/functions-and-operators/json-functions.md)
 - [`JSON_ARRAY_APPEND()`](/functions-and-operators/json-functions.md)
 - [`JSON_ARRAY_INSERT()`](/functions-and-operators/json-functions.md)
-- [`JSON_ARRAY()`](/functions-and-operators/json-functions.md)
-- [`JSON_CONTAINS_PATH()`](/functions-and-operators/json-functions.md)
 - [`JSON_CONTAINS()`](/functions-and-operators/json-functions.md)
+- [`JSON_CONTAINS_PATH()`](/functions-and-operators/json-functions.md)
 - [`JSON_DEPTH()`](/functions-and-operators/json-functions.md)
 - [`JSON_EXTRACT()`](/functions-and-operators/json-functions.md)
 - [`JSON_INSERT()`](/functions-and-operators/json-functions.md)
