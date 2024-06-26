@@ -5,7 +5,7 @@ summary: Learn how to integrate TiDB Vector Search with SQLAlchemy to store embe
 
 # Integrate TiDB Vector Search with SQLAlchemy
 
-This tutorial will walk you through how to use [SQLAlchemy](https://www.sqlalchemy.org/) to interact with the TiDB Vector Search, store embeddings, and perform vector search queries.
+This tutorial walks you through how to use [SQLAlchemy](https://www.sqlalchemy.org/) to interact with [TiDB Vector Search](/tidb-cloud/vector-search-overview.md), store embeddings, and perform vector search queries.
 
 > **Note**
 >

@@ -5,7 +5,7 @@ summary: Learn how to integrate TiDB Vector Search with Jina AI Embeddings API t
 
 # Integrate TiDB Vector Search with Jina AI Embeddings API
 
-This tutorial will walk you through how to use [Jina AI](https://jina.ai/) to generate embeddings for text data, and then store the embeddings in TiDB Vector Storage and search similar texts based on embeddings.
+This tutorial walks you through how to use [Jina AI](https://jina.ai/) to generate embeddings for text data, and then store the embeddings in TiDB Vector Storage and search similar texts based on embeddings.
 
 > **Note**
 >
