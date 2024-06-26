@@ -239,7 +239,7 @@
     - [Precheck Errors, Migration Errors, and Alerts for Data Migration](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md)
     - [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Explore Data
-  - [Chat2Query (Beta)](/tidb-cloud/explore-data-with-chat2query.md)
+  - [Chat2Query (Beta) in SQL Editor](/tidb-cloud/explore-data-with-chat2query.md)
 - Vector Search (Beta)
   - [Overview](/tidb-cloud/vector-search-overview.md)
   - Get Started

@@ -24,7 +24,7 @@ In Data Service, you can either generate an endpoint automatically or create an 
 
 > **Tip:**
 >
-> You can also create an endpoint from a SQL file in Chat2Query (beta). For more information, see [Generate an endpoint from a SQL file](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file).
+> You can also create an endpoint from a SQL file in SQL Editor. For more information, see [Generate an endpoint from a SQL file](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file).
 
 ### Generate an endpoint automatically
 
@@ -209,6 +209,10 @@ On the SQL editor of the endpoint details page, you can write and run the SQL st
     </SimpleTab>
 
     After running the statements, you can see the query results immediately in the **Result** tab at the bottom of the page.
+    
+    > **Note:**
+    >
+    > The returned result has a size limit of 8 MiB.
 
 ### Configure parameters
 

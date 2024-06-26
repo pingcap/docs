@@ -16,7 +16,7 @@ ticloud ai [flags]
 Chat with TiDB Bot in interactive mode:
 
 ```shell
-ticloud serverless delete
+ticloud ai
 ```
 
 Chat with TiDB Bot in non-interactive mode:
