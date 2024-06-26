@@ -5,7 +5,7 @@ summary: Learn about the new features, compatibility changes, improvements, and 
 
 # Vector Search Changelogs
 
-## June 24, 2024
+## June 25, 2024
 
 - TiDB Vector Search (beta) is now available for TiDB Serverless clusters in all regions for all users.
 
