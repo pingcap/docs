@@ -8,6 +8,42 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
+## June 25, 2024
+
+**General changes**
+
+- [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) supports vector search (beta).
+
+    The vector search (beta) feature provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video. This feature enables developers to easily build scalable applications with generative artificial intelligence (AI) capabilities using familiar MySQL skills. Key features include:
+
+    - [Vector data types](/tidb-cloud/vector-search-data-types.md), [vector index](/tidb-cloud/vector-search-index.md), and [vector functions and operators](/tidb-cloud/vector-search-functions-and-operators.md).
+    - Ecosystem integrations with [LangChain](/tidb-cloud/vector-search-integrate-with-langchain.md), [LlamaIndex](/tidb-cloud/vector-search-integrate-with-llamaindex.md), and [JinaAI](/tidb-cloud/vector-search-integrate-with-jinaai-embedding.md).
+    - Programming language support for Python: [SQLAlchemy](/tidb-cloud/vector-search-integrate-with-sqlalchemy.md), [Peewee](/tidb-cloud/vector-search-integrate-with-peewee.md), and [Django ORM](/tidb-cloud/vector-search-integrate-with-django-orm.md).
+    - Sample applications and tutorials: perform semantic searches for documents using [Python](/tidb-cloud/vector-search-get-started-using-python.md) or [SQL](/tidb-cloud/vector-search-get-started-using-sql.md).
+
+  For more information, see [Vector search (beta) overview](/tidb-cloud/vector-search-overview.md).
+
+- [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) now offers weekly email reports for organization owners.
+
+    These reports provide insights into the performance and activity of your clusters. By receiving automatic weekly updates, you can stay informed about your clusters and make data-driven decisions to optimize your clusters.
+
+- Release Chat2Query API v3 endpoints and deprecate the Chat2Query API v1 endpoint `/v1/chat2data`.
+
+    With Chat2Query API v3 endpoints, you can start multi-round Chat2Query by using sessions.
+
+    For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
+
+**Console changes**
+
+- Rename Chat2Query (beta) to SQL Editor (beta).
+
+    The interface previously known as Chat2Query is renamed to SQL Editor. This change clarifies the distinction between manual SQL editing and AI-assisted query generation, enhancing usability and your overall experience.
+
+    - **SQL Editor**: the default interface for manually writing and executing SQL queries in the TiDB Cloud console.
+    - **Chat2Query**: the AI-assisted text-to-query feature, which enables you to interact with your databases using natural language to generate, rewrite, and optimize SQL queries.
+
+  For more information, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
+
 ## June 18, 2024
 
 **General changes**
