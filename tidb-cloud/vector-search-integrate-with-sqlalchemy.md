@@ -21,7 +21,7 @@ To complete this tutorial, you need:
 
 ## Run the sample app
 
-You can quickly learn about how to integrate TiDB Vector Search with Peewee by following the steps below.
+You can quickly learn about how to integrate TiDB Vector Search with SQLAlchemy by following the steps below.
 
 ### Step 1. Clone the repository
 
