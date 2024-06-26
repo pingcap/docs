@@ -89,7 +89,7 @@ Here you can find additional resources to connect, manage and develop with TiDB 
 **To manage your cluster**
 
 - [TiDB Cloud Command Line Tools](/tidb-cloud/get-started-with-cli.md)
-- [TiDB Cloud Administration API](https://docs.pingcap.com/tidbcloud/api/v1beta1)
+- [TiDB Cloud Administration API](/tidb-cloud/api-overview.md)
 
 **To learn more about TiDB**
 
