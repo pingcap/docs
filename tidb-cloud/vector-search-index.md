@@ -17,7 +17,7 @@ TiDB currently supports the following vector search index algorithms:
 >
 > Vector search index is only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
 
-## Create HNSW Vector Index
+## Create the HNSW vector index
 
 [HNSW](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world) is one of the most popular vector indexing algorithms. The HNSW index provides good performance with relatively high accuracy (> 98% in typical cases).
 
