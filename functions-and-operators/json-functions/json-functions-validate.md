@@ -39,8 +39,8 @@ Validation keywords:
 | `minItems`             | `array` | Test if the number of items in the array is at least the specified value |
 | `uniqueItems`          | `array` | Test if the items in the array are unique, `true`/`false`|
 | `contains`             | `array` | Set schema for items contained in the array |
-| `maxContains`          | `array` | Used together with `contains` to set how many times something can be present |
-| `minContains`          | `array` | Used together with `contains` to set how many times something can be present |
+| `maxContains`          | `array` | Used together with `contains` to set the maximum times something can be present |
+| `minContains`          | `array` | Used together with `contains` to set the minimum times something can be present |
 | `properties`           | `object` | Schema to apply to the properties of an object |
 | `patternProperties`    | `object` | Schema to apply to certain properties based on pattern matching of the property name |
 | `additionalProperties` | `object` | Whether additional properties are allowed or not, `true`/`false` |
