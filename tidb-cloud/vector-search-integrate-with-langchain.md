@@ -63,16 +63,16 @@ from langchain_text_splitters import CharacterTextSplitter
 
 3. Ensure the configurations in the connection dialog match your operating environment.
 
-   - **Endpoint Type** is set to `Public`.
-   - **Branch** is set to `main`.
-   - **Connect With** is set to `SQLAlchemy`.
-   - **Operating System** matches your environment.
+    - **Endpoint Type** is set to `Public`.
+    - **Branch** is set to `main`.
+    - **Connect With** is set to `SQLAlchemy`.
+    - **Operating System** matches your environment.
 
 4. Click the **PyMySQL** tab and copy the connection string.
 
-   > **Tip:**
-   >
-   > If you have not set a password yet, click **Generate Password** to generate a random password.
+    > **Tip:**
+    >
+    > If you have not set a password yet, click **Generate Password** to generate a random password.
 
 #### Step 3.2 Configure environment variables
 

@@ -39,9 +39,9 @@ To complete this tutorial, you need:
 
 5. Copy the connection command and paste it into your terminal. The following is an example for macOS:
 
-   ```bash
-   mysql -u '<prefix>.root' -h '<host>' -P 4000 -D 'test' --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p'<password>'
-   ```
+    ```bash
+    mysql -u '<prefix>.root' -h '<host>' -P 4000 -D 'test' --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p'<password>'
+    ```
 
 ### Step 2. Create a vector table
 

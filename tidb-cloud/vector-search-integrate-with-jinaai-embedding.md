@@ -63,20 +63,20 @@ Get the Jina AI API key from the [Jina AI Embeddings API](https://jina.ai/embedd
 
 3. Ensure the configurations in the connection dialog match your operating environment.
 
-   - **Endpoint Type** is set to `Public`
-   - **Branch** is set to `main`
-   - **Connect With** is set to `SQLAlchemy`
-   - **Operating System** matches your environment.
+    - **Endpoint Type** is set to `Public`
+    - **Branch** is set to `main`
+    - **Connect With** is set to `SQLAlchemy`
+    - **Operating System** matches your environment.
 
-   > **Tip:**
-   >
-   > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
+    > **Tip:**
+    >
+    > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
 
 4. Switch to the **PyMySQL** tab and click the **Copy** icon to copy the connection string.
 
-   > **Tip:**
-   >
-   > If you have not set a password yet, click **Create password** to generate a random password.
+    > **Tip:**
+    >
+    > If you have not set a password yet, click **Create password** to generate a random password.
 
 #### 4.3 Set the environment variables
 
