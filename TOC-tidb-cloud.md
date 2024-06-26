@@ -549,7 +549,6 @@
       - [Date and Time Types](/data-type-date-and-time.md)
       - [String Types](/data-type-string.md)
       - [JSON Type](/data-type-json.md)
-      - [Vector Types](/tidb-cloud/vector-search-data-types.md)
     - Functions and Operators
       - [Overview](/functions-and-operators/functions-and-operators-overview.md)
       - [Type Conversion in Expression Evaluation](/functions-and-operators/type-conversion-in-expression-evaluation.md)
@@ -564,7 +563,6 @@
       - [Locking Functions](/functions-and-operators/locking-functions.md)
       - [Information Functions](/functions-and-operators/information-functions.md)
       - [JSON Functions](/functions-and-operators/json-functions.md)
-      - [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md)
       - [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md)
       - [GROUP BY Modifiers](/functions-and-operators/group-by-modifier.md)
       - [Window Functions](/functions-and-operators/window-functions.md)
