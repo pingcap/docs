@@ -5,7 +5,7 @@ summary: Learn how to integrate TiDB Vector Search with Django ORM to store embe
 
 # Integrate TiDB Vector Search with Django ORM
 
-This tutorial will walk you through how to use [Django](https://www.djangoproject.com/) ORM to interact with the TiDB Vector Search, store embeddings, and perform vector search queries.
+This tutorial walks you through how to use [Django](https://www.djangoproject.com/) ORM to interact with the TiDB Vector Search, store embeddings, and perform vector search queries.
 
 > **Note**
 >
@@ -57,7 +57,7 @@ pip install Django django-tidb mysqlclient
 
 If you encounter installation issues with mysqlclient, refer to the mysqlclient official documentation.
 
-#### What is `django-tidb`?
+#### What is `django-tidb`
 
 `django-tidb` is a TiDB dialect for Django that enhances the Django ORM to support TiDB-specific features (For example, Vector Search) and resolves compatibility issues between TiDB and Django.
 
