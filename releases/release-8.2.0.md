@@ -131,11 +131,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 
 ### Observability
 
-* 记录执行计划没有被缓存的原因 [#issue号](链接) @[qw4990](https://github.com/qw4990) **tw@hfxsd** <!--1819-->
+* Record the reason why an execution plan is not cached [#50618](https://github.com/pingcap/tidb/issues/50618) @[qw4990](https://github.com/qw4990) **tw@hfxsd** <!--1819-->
 
-    在一些场景下，用户希望多数执行计划能够被缓存，以节省执行开销，并降低延迟。目前执行计划缓存对 SQL 有一定限制，部分形态 SQL 的执行计划无法被缓存，但是用户很难识别出无法被缓存的 SQL 以及对应的原因。因此，在新版本中，我们向系统表 [`STATEMENTS_SUMMARY`](/statement-summary-tables.md) 中增加了新的列，解释计划无法被缓存的原因，协助用户做性能调优。
+    In some scenarios, you might want to cache most execution plans to save execution overhead and reduce latency. Currently, execution plan caching has some limitations on SQL. Execution plans of some SQL statements cannot be cached. It is difficult to identify the SQL statements that cannot be cached and the corresponding reasons. 
 
-    更多信息，请参考[用户文档](/statement-summary-tables.md#表的字段介绍)。
+    Therefore, starting from v8.2.0, a new column is added to the system table [`STATEMENTS_SUMMARY`](/statement-summary-tables.md) to explain the reason why an execution plan cannot be cached, which can help you tune performance.
+
+    For more information, see [documentation](/statement-summary-tables.md#fields-description).
 
 ### Security
 
