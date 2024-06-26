@@ -759,7 +759,7 @@ Configuration items related to opentracing.reporter.
 
 > **Warning:**
 >
-> Since v8.2.0, this configuration item is deprecated. New version of the Region replica selector will be used by default when sending RPC requests to TiKV.
+> Starting from v8.2.0, this configuration item is deprecated. The new version of the Region replica selector is used by default when sending RPC requests to TiKV.
 
 + Whether to use the new version of the Region replica selector when sending RPC requests to TiKV.
 + Default value: `true`
