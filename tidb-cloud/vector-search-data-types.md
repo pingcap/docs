@@ -16,15 +16,15 @@ The Vector data type provides these advantages over storing in a `JSON` column:
 
 - Vector Index support. A [Vector Search Index](/tidb-cloud/vector-search-index.md) can be built to speed up vector searching.
 - Dimension enforcement. A dimension can be specified to forbid inserting vectors with different dimensions.
-- Optimized storage format. Vector data types is stored even more space-efficient than `JSON` data type.
+- Optimized storage format. Vector data types are stored even more space-efficient than `JSON` data type.
 
 > **Note:**
 >
 > Vector data types are only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
 
-## Value Syntax
+## Value syntax
 
-A Vector value contains arbitrary number of floating numbers. You can use a string in the following syntax to represent a Vector value:
+A Vector value contains an arbitrary number of floating numbers. You can use a string in the following syntax to represent a Vector value:
 
 ```sql
 '[<float>, <float>, ...]'
@@ -50,7 +50,7 @@ Inserting vector values with invalid syntax will result in an error:
 ERROR 1105 (HY000): Invalid vector text: [5, ]
 ```
 
-As dimension 3 is enforced for the `embedding` column in the example above, inserting a vector with a different dimension will result in an error:
+As dimension 3 is enforced for the `embedding` column in the preceding example, inserting a vector with a different dimension will result in an error:
 
 ```sql
 [tidb]> INSERT INTO vector_table VALUES (4, '[0.3, 0.5]');
@@ -61,7 +61,7 @@ See [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-ope
 
 See [Vector Search Index](/tidb-cloud/vector-search-index.md) for building and using a vector search index.
 
-## Vectors with Different Dimensions
+## Vectors with different dimensions
 
 You can store vectors with different dimensions in the same column by omitting the dimension parameter in the `VECTOR` type:
 
@@ -139,7 +139,7 @@ However in arithmetic operations, you need to cast explicitly because the operat
 
 ```
 
-To cast vector into its string representation explicitly, use `VEC_AS_TEXT` function:
+To cast vector into its string representation explicitly, use the `VEC_AS_TEXT()` function:
 
 ```sql
 [tidb]> SELECT VEC_AS_TEXT('[0.3,     0.5,  -0.1]');
@@ -153,23 +153,23 @@ To cast vector into its string representation explicitly, use `VEC_AS_TEXT` func
 
 See [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md) for more information.
 
-### Cast between Vector ⇔ Other Data Types
+### Cast between Vector ⇔ other data types
 
 It is currently not possible to cast between Vector and other data types (like `JSON`) directly. You need to use String as an intermediate type.
 
 ## Restrictions
 
 - The maximum supported Vector dimension is 16000.
-- You cannot store `NaN`, `Infinity`, `-Infinity` values in the vector data type.
+- You cannot store `NaN`, `Infinity`, or `-Infinity` values in the vector data type.
 - Currently Vector data types cannot store double-precision floating numbers. This will be supported in future release.
 
 For other limitations, see [Vector Search Limitations](/tidb-cloud/vector-search-limitations.md).
 
-## MySQL Compatibility
+## MySQL compatibility
 
 Vector data types are TiDB specific, and are not supported in MySQL.
 
-## See Also
+## See also
 
 - [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md)
 - [Vector Search Index](/tidb-cloud/vector-search-index.md)

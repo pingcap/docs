@@ -251,7 +251,7 @@
       - [LlamaIndex](/tidb-cloud/vector-search-integrate-with-llamaindex.md)
       - [Langchain](/tidb-cloud/vector-search-integrate-with-langchain.md)
     - Embedding Models / Services
-      - [JinaAI](/tidb-cloud/vector-search-integrate-with-jinaai-embedding.md)
+      - [Jina AI](/tidb-cloud/vector-search-integrate-with-jinaai-embedding.md)
     - ORM Libraries
       - [SQLAlchemy](/tidb-cloud/vector-search-integrate-with-sqlalchemy.md)
       - [Peewee](/tidb-cloud/vector-search-integrate-with-peewee.md)

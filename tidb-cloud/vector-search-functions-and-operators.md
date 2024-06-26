@@ -9,7 +9,7 @@ summary: Learn about functions and operators available for Vector Data Types.
 >
 > Vector data types and these vector functions are only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
 
-## Vector Functions
+## Vector functions
 
 The following functions are designed specifically for [Vector Data Types](/tidb-cloud/vector-search-data-types.md).
 
@@ -31,7 +31,7 @@ The following functions are designed specifically for [Vector Data Types](/tidb-
 | [VEC_FROM_TEXT](#vec_from_text) | Converts a string into a vector                     |
 | [VEC_AS_TEXT](#vec_as_text)     | Converts a vector into a string                     |
 
-## Extended Built-in Functions and Operators
+## Extended built-in functions and operators
 
 The following built-in functions and operators are extended, supporting operating on [Vector Data Types](/tidb-cloud/vector-search-data-types.md).
 
@@ -81,7 +81,7 @@ The following built-in functions and operators are extended, supporting operatin
 | [`IFNULL()`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_ifnull) | Null if/else construct       |
 | [`NULLIF()`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_nullif) | Return NULL if expr1 = expr2 |
 
-## Full References
+## Full references
 
 ### VEC_L2_DISTANCE
 
@@ -270,10 +270,10 @@ Examples:
 +-------------------------------+
 ```
 
-## MySQL Compatibility
+## MySQL compatibility
 
 The vector functions and the extended usage of built-in functions and operators over vector data types are TiDB specific, and are not supported in MySQL.
 
-## See Also
+## See also
 
 - [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
