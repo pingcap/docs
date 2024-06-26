@@ -1,11 +1,11 @@
 ---
 title: Integrate TiDB Vector Search with SQLAlchemy
-summary: Learn how to integrate TiDB Vector Search with SQLAlchemy to store embeddings and perform semantic search.
+summary: Learn how to integrate TiDB Vector Search with SQLAlchemy to store embeddings and perform semantic searches.
 ---
 
 # Integrate TiDB Vector Search with SQLAlchemy
 
-This tutorial will walk you through how to use SQLAlchemy to interact with the TiDB Vector Search, store embeddings, and perform vector search queries.
+This tutorial will walk you through how to use [SQLAlchemy](https://www.sqlalchemy.org/) to interact with the TiDB Vector Search, store embeddings, and perform vector search queries.
 
 > **Note**
 >
@@ -41,7 +41,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-### Step 3. Install required dependencies
+### Step 3. Install the required dependencies
 
 Install the required dependencies for the demo project:
 
@@ -61,11 +61,11 @@ pip install sqlalchemy pymysql tidb-vector
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. Ensure the configurations in the connection dialog match your operating environment.
+3. Ensure the configurations in the connection dialog match your environment.
 
-    - **Endpoint Type** is set to `Public`
-    - **Branch** is set to `main`
-    - **Connect With** is set to `SQLAlchemy`
+    - **Endpoint Type** is set to `Public`.
+    - **Branch** is set to `main`.
+    - **Connect With** is set to `SQLAlchemy`.
     - **Operating System** matches your environment.
 
     > **Tip:**
@@ -111,7 +111,7 @@ Get documents within a certain distance:
 
 ## Sample code snippets
 
-You can refer to the following sample code snippets to complete your own application development.
+You can refer to the following sample code snippets to develop your application.
 
 ### Create vector tables
 
@@ -181,7 +181,7 @@ with Session(engine) as session:
 
 ### Search documents within a certain distance
 
-Search for the documents whose cosine distance from the query vector `[1, 2, 3]` is less than 0.2.
+Search for documents whose cosine distance from the query vector `[1, 2, 3]` is less than 0.2.
 
 ```python
 with Session(engine) as session:
