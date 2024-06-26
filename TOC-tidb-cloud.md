@@ -10,6 +10,7 @@
   - [Roadmap](/tidb-cloud/tidb-cloud-roadmap.md)
 - Get Started
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
+  - [Try Out TiDB + AI](/tidb-cloud/vector-search-get-started-using-python.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
   - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
@@ -239,6 +240,29 @@
       - [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Explore Data
   - [Chat2Query (Beta) in SQL Editor](/tidb-cloud/explore-data-with-chat2query.md)
+- Vector Search (Beta)
+  - [Overview](/tidb-cloud/vector-search-overview.md)
+  - Get Started
+    - [Get Started with SQL](/tidb-cloud/vector-search-get-started-using-sql.md)
+    - [Get Started with Python](/tidb-cloud/vector-search-get-started-using-python.md)
+  - Integrations
+    - [Overview](/tidb-cloud/vector-search-integration-overview.md)
+    - AI Frameworks
+      - [LlamaIndex](/tidb-cloud/vector-search-integrate-with-llamaindex.md)
+      - [Langchain](/tidb-cloud/vector-search-integrate-with-langchain.md)
+    - Embedding Models/Services
+      - [Jina AI](/tidb-cloud/vector-search-integrate-with-jinaai-embedding.md)
+    - ORM Libraries
+      - [SQLAlchemy](/tidb-cloud/vector-search-integrate-with-sqlalchemy.md)
+      - [Peewee](/tidb-cloud/vector-search-integrate-with-peewee.md)
+      - [Django ORM](/tidb-cloud/vector-search-integrate-with-django-orm.md)
+  - Reference
+    - [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
+    - [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md)
+    - [Vector Index](/tidb-cloud/vector-search-index.md)
+  - [Improve Performance](/tidb-cloud/vector-search-improve-performance.md)
+  - [Limitations](/tidb-cloud/vector-search-limitations.md)
+  - [Changelogs](/tidb-cloud/vector-search-changelogs.md)
 - Data Service (Beta)
   - [Overview](/tidb-cloud/data-service-overview.md)
   - [Get Started](/tidb-cloud/data-service-get-started.md)
