@@ -1,11 +1,11 @@
 ---
-title: Integrate TiDB Vector Search with Peewee
-summary: Learn how to integrate TiDB Vector Search with Peewee to store embeddings and perform semantic search.
+title: Integrate TiDB Vector Search with peewee
+summary: Learn how to integrate TiDB Vector Search with peewee to store embeddings and perform semantic searches.
 ---
 
-# Integrate TiDB Vector Search with Peewee
+# Integrate TiDB Vector Search with peewee
 
-This tutorial will walk you through how to use Peewee to interact with the TiDB vector storage and vector search, store embeddings, and perform vector search queries.
+This tutorial walks you through how to use [peewee](https://docs.peewee-orm.com/) to interact with the [TiDB Vector Search](/tidb-cloud/vector-search-overview.md), store embeddings, and perform vector search queries.
 
 > **Note**
 >
@@ -21,11 +21,11 @@ To complete this tutorial, you need:
 
 ## Run the sample app
 
-You can quickly learn about how to integrate TiDB Vector Search with Peewee by following the steps below.
+You can quickly learn about how to integrate TiDB Vector Search with peewee by following the steps below.
 
 ### Step 1. Clone the repository
 
-Clone the `tidb-vector-python` repository to your local machine:
+Clone the [`tidb-vector-python`](https://github.com/pingcap/tidb-vector-python) repository to your local machine:
 
 ```shell
 git clone https://github.com/pingcap/tidb-vector-python.git
@@ -63,9 +63,9 @@ pip install peewee pymysql tidb-vector
 
 3. Ensure the configurations in the connection dialog match your operating environment.
 
-    - **Endpoint Type** is set to `Public`
-    - **Branch** is set to `main`
-    - **Connect With** is set to `General`
+    - **Endpoint Type** is set to `Public`.
+    - **Branch** is set to `main`.
+    - **Connect With** is set to `General`.
     - **Operating System** matches your environment.
 
     > **Tip:**
@@ -123,7 +123,7 @@ Get documents within a certain distance:
 
 ## Sample code snippets
 
-You can refer to the following sample code snippets to complete your own application development.
+You can refer to the following sample code snippets to develop your application.
 
 ### Create vector tables
 
@@ -166,7 +166,7 @@ db = MySQLDatabase(
 
 #### Define a vector column
 
-Create a table with a column named `embedding` that stores a 3-dimensional vector.
+Create a table with a column named `peewee_demo_documents` that stores a 3-dimensional vector.
 
 ```python
 class Document(Model):

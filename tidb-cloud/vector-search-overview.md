@@ -51,11 +51,11 @@ Retrieval-Augmented Generation (RAG) is an architecture designed to optimize the
 
 ### Semantic search
 
-Semantic search is a search technology that returns results based on the query's meaning, not exact keywords. It captures the meaning across different languages and different types of data (such as text, images, audio, or other forms of content) in embeddings and uses vector search to find the most relevant data that satisfies the user's query.
+Semantic search is a search technology that returns results based on the meaning of a query, rather than simply matching keywords. It interprets the meaning across different languages and various types of data (such as text, images, and audio) using embeddings. ector search algorithms then use these embeddings to find the most relevant data that satisfies the user's query.
 
 ### Recommendation engine
 
-Recommendation engine is a system that proactively suggests relevant and personalized contents, products, or services to users. It vectorized user historical behavior and content preferences through embeddings, and then recommends similar content or products that others like and you may also like.
+A recommendation engine is a system that proactively suggests content, products, or services that are relevant and personalized to users. It accomplishes this by creating embeddings that represent user behavior and preferences. These embeddings help the system identify similar items that other users have interacted with or shown interest in. This increases the likelihood that the recommendations will be both relevant and appealing to the user.
 
 ## See also
 
