@@ -22,7 +22,7 @@ The following functions are designed specifically for [Vector Data Types](/tidb-
 | [VEC_NEGATIVE_INNER_PRODUCT](#vec_negative_inner_product) | Calculates the negative of the inner product between two vectors |
 | [VEC_L1_DISTANCE](#vec_l1_distance)                       | Calculates L1 distance (Manhattan distance) between two vectors  |
 
-**Othe Vector Functions:**
+**Other Vector Functions:**
 
 | Function Name                   | Description                                         |
 | ------------------------------- | --------------------------------------------------- |

@@ -5,7 +5,7 @@ summary: Learn about Vector Search in TiDB Cloud. This feature provides an advan
 
 # Vector Search (Beta) Overview
 
-TiDB Vector Search (Beta) provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video. This feature enables developers to easily build scalable applications with generative artificial intelligence (AI) capabilities using familiar MySQL skills.
+TiDB Vector Search (beta) provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video. This feature enables developers to easily build scalable applications with generative artificial intelligence (AI) capabilities using familiar MySQL skills.
 
 > **Note**
 >
@@ -23,7 +23,7 @@ A vector embedding, also known as an embedding, is a sequence of numbers that re
 
 Vector embeddings are essential in machine learning and serve as the foundation for semantic similarity searches.
 
-TiDB introduces [Vector Data types](/tidb-cloud/vector-search-data-types.md) specifically optimized for AI Vector Embedding use cases. You can store vector embeddings in TiDB and perform vector search queries to find the most similar data using vector Data types.
+TiDB introduces [Vector data types](/tidb-cloud/vector-search-data-types.md) designed to optimize the storage and retrieval of vector embeddings, enhancing their use in AI applications. You can store vector embeddings in TiDB and perform vector search queries to find the most relevant data using these data types.
 
 ### Embedding model
 
