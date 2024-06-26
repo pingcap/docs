@@ -183,7 +183,7 @@ To locate the root cause of an OOM issue, you need to collect the following info
 - Run the following command to collect the TiDB Profile information when memory usage is high:
 
     ```shell
-    curl -G http://{TiDBIP}:10080/debug/zip?seconds=10" > profile.zip
+    curl -G "http://{TiDBIP}:10080/debug/zip?seconds=10" > profile.zip
     ```
 
 - Run `grep "tidb-server has the risk of OOM" tidb.log` to check the path of the alert file collected by TiDB Server. The following is an example output:
