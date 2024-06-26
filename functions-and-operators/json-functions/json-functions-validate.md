@@ -29,23 +29,23 @@ Validation keywords:
 | `exclusiveMaximum`     | `number`/`integer` | Tests if the value is below the maximum (exclusive) |
 | `minimum`              | `number`/`integer` | Tests if the value is above the minimum (inclusive) |
 | `exclusiveMinimum`     | `number`/`integer` | Tests if the value is above the minimum (exclusive) |
-| `maxlength`            | `string` | Test if the length of the value is not exceeding the specified value |
-| `minLength`            | `string` | Test if the length of the value is at least the specified value |
-| `format`               | `string` | Test if a string matches a named format |
-| `pattern`              | `string` | Test if a string matches a pattern |
+| `maxlength`            | `string` | Tests if the length of the value is not exceeding the specified value |
+| `minLength`            | `string` | Tests if the length of the value is at least the specified value |
+| `format`               | `string` | Tests if a string matches a named format |
+| `pattern`              | `string` | Tests if a string matches a pattern |
 | `items`                | `array` | Schema to apply to the items of an array |
 | `prefixItems`          | `array` | Schema to apply to positional items of an array |
-| `maxItems`             | `array` | Test if the number of items in the array is not exceeding the specified value |
-| `minItems`             | `array` | Test if the number of items in the array is at least the specified value |
-| `uniqueItems`          | `array` | Test if the items in the array are unique, `true`/`false`|
-| `contains`             | `array` | Set schema for items contained in the array |
+| `maxItems`             | `array` | Tests if the number of items in the array is not exceeding the specified value |
+| `minItems`             | `array` | Tests if the number of items in the array is at least the specified value |
+| `uniqueItems`          | `array` | Tests if the items in the array are unique, `true`/`false`|
+| `contains`             | `array` | Sets schema for items contained in the array |
 | `maxContains`          | `array` | Used together with `contains` to set the maximum times something can be present |
 | `minContains`          | `array` | Used together with `contains` to set the minimum times something can be present |
 | `properties`           | `object` | Schema to apply to the properties of an object |
 | `patternProperties`    | `object` | Schema to apply to certain properties based on pattern matching of the property name |
 | `additionalProperties` | `object` | Whether additional properties are allowed or not, `true`/`false` |
-| `minProperties`        | `object` | Test the number of properties that the object has |
-| `maxProperties`        | `object` | Test the number of properties that the object has|
+| `minProperties`        | `object` | Test the minimum number of properties that the object has |
+| `maxProperties`        | `object` | Test the maximum number of properties that the object has |
 | `required`             | `object` | The property names that are required |
 
 Examples:
@@ -72,7 +72,7 @@ Use a [user defined variable](/user-defined-variables.md) to hold the JSON docum
 SET @j := '{"fruits": ["orange", "apple", "pear"], "vegetables": ["carrot", "pepper", "kale"]}';
 ```
 
-Start by testing the type::
+Start by testing the type:
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"type": "object"}',@j);
