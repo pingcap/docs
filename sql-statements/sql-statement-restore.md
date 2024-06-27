@@ -137,7 +137,17 @@ Before the restore is completed, `RESTORE` would perform a checksum against the 
 
 If statistics have been backed up, they are restored by default during the restore. If you do not need to restore the statistics, you can set the `LOAD_STATS` parameter to `FALSE`.
 
+<CustomContent platform="tidb">
+
 System [privilege tables](/privilege-management.md#privilege-table) are restored by default. If you do not need to restore system privilege tables, you can set the `WITH_SYS_TABLE` parameter to `FALSE`.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+System [privilege tables](https://docs.pingcap.com/tidb/dev/privilege-management#privilege-table) are restored by default. If you do not need to restore system privilege tables, you can set the `WITH_SYS_TABLE` parameter to `FALSE`.
+
+</CustomContent>
 
 By default, the restore task does not wait for TiFlash replicas to be fully created before completing. If you need the restore task to wait, you can set the `WAIT_TIFLASH_READY` parameter to `TRUE`.
 
