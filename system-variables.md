@@ -2852,6 +2852,7 @@ This variable is used to set the concurrency of the following SQL operators (to 
 - `hash aggregation` (the `partial` and `final` phases)
 - `window`
 - `projection`
+- `sort`
 
 `tidb_executor_concurrency` incorporates the following existing system variables as a whole for easier management:
 
