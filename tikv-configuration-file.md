@@ -385,7 +385,7 @@ Configuration items related to storage.
 > **Warning:**
 >
 > - Set `enable-ttl` to `true` or `false` **ONLY WHEN** deploying a new TiKV cluster. **DO NOT** modify the value of this configuration item in an existing TiKV cluster. TiKV clusters with different `enable-ttl` values use different data formats. Therefore, if you modify the value of this item in an existing TiKV cluster, the cluster will store data in different formats, which causes the "can't enable TTL on a non-ttl" error when you restart the TiKV cluster.
-> - Use `enable-ttl` **ONLY IN** a TiKV cluster. **DO NOT** use this configuration item in a cluster that has TiDB nodes (which means setting `enable-ttl` to `true` in such clusters). Otherwise, critical issues such as data corruption and the upgrade failure of TiDB clusters will occur.
+> - Use `enable-ttl` **ONLY IN** a TiKV cluster. **DO NOT** use this configuration item in a cluster that has TiDB nodes (which means setting `enable-ttl` to `true` in such clusters) unless `storage.api-version = 2` is configured. Otherwise, critical issues such as data corruption and the upgrade failure of TiDB clusters will occur.
 
 + TTL is short for "Time to live". If this item is enabled, TiKV automatically deletes data that reaches its TTL. To set the value of TTL, you need to specify it in the requests when writing data via the client. If the TTL is not specified, it means that TiKV does not automatically delete the corresponding data.
 + Default value: `false`
@@ -409,8 +409,8 @@ Configuration items related to storage.
 + Value options:
     + `1`: Uses API V1, does not encode the data passed from the client, and stores data as it is. In versions earlier than v6.1.0, TiKV uses API V1 by default.
     + `2`: Uses API V2:
-        + The data is stored in the MVCC (Multi-Version Concurrency Control) format, where the timestamp is obtained from PD (which is TSO) by tikv-server.
-        + When API V2 is used, you are expected to set `storage.enable-ttl = true` at the same time. Because API V2 supports the TTL feature, you must turn on `enable-ttl` explicitly. Otherwise, it will be in conflict because `storage.enable-ttl` defaults to `false`.
+        + The data is stored in the [Multi-Version Concurrency Control (MVCC)](/glossary.md#multi-version-concurrency-control-mvcc) format, where the timestamp is obtained from PD (which is TSO) by tikv-server.
+        + When API V2 is used, you are expected to set `storage.enable-ttl = true` at the same time. Because API V2 supports the TTL feature, you must turn on [`enable-ttl`](#enable-ttl) explicitly. Otherwise, it will be in conflict because `storage.enable-ttl` defaults to `false`.
         + When API V2 is enabled, you need to deploy at least one tidb-server instance to reclaim expired data. Note that this tidb-server instance cannot provide read or write services. To ensure high availability, you can deploy multiple tidb-server instances.
         + Client support is required for API V2. For details, see the corresponding instruction of the client for the API V2.
 + Default value: `1`
