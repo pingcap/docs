@@ -126,7 +126,7 @@ TiProxy lets you configure the combination and priority of load balancing polici
 
 - `resource`: the resource priority policy performs load balancing based on the following priority order: status, health, memory, CPU, location, and connection count.
 - `location`: the location priority policy performs load balancing based on the following priority order: status, location, health, memory, CPU, and connection count.
-- `connection`: the minimum connection count priority policy performs load balancing based on the following priority order: status and connection count.
+- `connection`: the minimum connection count policy performs load balancing based on the following priority order: status and connection count.
 
 ## More resources
 
