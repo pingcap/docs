@@ -5,7 +5,7 @@ summary: Learn how to use extended statistics to guide the optimizer.
 
 # Introduction to Extended Statistics
 
-TiDB can collect the following two types of statistics. This documents describes how to use extended statistics to guide the optimizer. Before reading this document, it is recommended that you read [Introduction to Statistics](/statistics.md) first.
+TiDB can collect the following two types of statistics. This document describes how to use extended statistics to guide the optimizer. Before reading this document, it is recommended that you read [Introduction to Statistics](/statistics.md) first.
 
 - Basic statistics: statistics such as histograms and Count-Min Sketch, which primarily focus on individual columns. They are essential for the optimizer to estimate the query cost. See [Introduction to Statistics](/statistics.md) for details.
 - Extended statistics: statistics that focus on data correlations between specified columns, which guide the optimizer to estimate the query cost more precisely when the queried columns are correlated. 
