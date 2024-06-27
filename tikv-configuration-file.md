@@ -741,7 +741,7 @@ Configuration items related to Raftstore.
 
 > **Warning:**
 >
-> This feature is experimental. It is not recommended that you use it in the production environment.
+> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
 
 + The maximum number of committed but not persisted Raft logs that can be applied.
 
