@@ -43,7 +43,7 @@ In your project directory, run the following command to install the required pac
 pip install sqlalchemy pymysql sentence-transformers tidb-vector
 ```
 
-- `tidb-vector`: the Python client for interacting with Vector Search in TiDB Cloud, which is based on [SQLAlchemy](https://www.sqlalchemy.org).
+- `tidb-vector`: the Python client for interacting with Vector Search in TiDB Cloud.
 - [`sentence-transformers`](https://sbert.net): a Python library that provides pre-trained models for generating [vector embeddings](/tidb-cloud/vector-search-overview.md#vector-embedding) from text.
 
 ### Step 3. Configure the connection string to the TiDB cluster
