@@ -631,6 +631,7 @@
     - [Data Check in the DM Replication Scenario](/sync-diff-inspector/dm-diff.md)
   - TiProxy
     - [Overview](/tiproxy/tiproxy-overview.md)
+    - [Load Balancing Policies](/tiproxy/tiproxy-load-balance.md)
     - [Configuration](/tiproxy/tiproxy-configuration.md)
     - [Command Line Parameters](/tiproxy/tiproxy-command-line-flags.md)
     - [Monitoring Metrics](/tiproxy/tiproxy-grafana.md)
