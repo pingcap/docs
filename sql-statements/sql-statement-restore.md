@@ -145,7 +145,7 @@ System [privilege tables](/privilege-management.md#privilege-table) are restored
 
 <CustomContent platform="tidb-cloud">
 
-System [privilege tables](https://docs.pingcap.com/tidb/dev/privilege-management#privilege-table) are restored by default. If you do not need to restore system privilege tables, you can set the `WITH_SYS_TABLE` parameter to `FALSE`.
+System [privilege tables](https://docs.pingcap.com/tidb/stable/privilege-management#privilege-table) are restored by default. If you do not need to restore system privilege tables, you can set the `WITH_SYS_TABLE` parameter to `FALSE`.
 
 </CustomContent>
 
