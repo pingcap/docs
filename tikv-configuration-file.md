@@ -737,7 +737,7 @@ Configuration items related to Raftstore.
 + Default value: `"30s"`
 + Minimum value: `0`
 
-### `max-apply-unpersisted-log-limit` <span class="version-mark">New in v8.2.0</span>
+### `max-apply-unpersisted-log-limit` <span class="version-mark">New in v8.1.0</span>
 
 + The maximum number of committed but not persisted Raft logs that can be applied.
 
