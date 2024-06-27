@@ -238,7 +238,9 @@ For more details, see [`ALTER USER ... RESOURCE GROUP`](/sql-statements/sql-stat
 
 #### Bind the current session to a resource group
 
-By binding a session to a resource group, the resource usage of the corresponding session is limited by the specified usage (RU).
+You can use the [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md) statement to change the bound resource group of the current session. By binding a session to a resource group, the resource usage of the corresponding session is limited by the specified usage (RU).
+
+When the system variable [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) is set to `ON`, you need to have the `SUPER` or `RESOURCE_GROUP_ADMIN` or `RESOURCE_GROUP_USER` privilege to execute this statement.
 
 The following example binds the current session to the resource group `rg1`.
 
@@ -249,6 +251,8 @@ SET RESOURCE GROUP rg1;
 #### Bind the current statement to a resource group
 
 By adding the [`RESOURCE_GROUP(resource_group_name)`](/optimizer-hints.md#resource_groupresource_group_name) hint to a SQL statement, you can specify the resource group to which the statement is bound. This hint supports `SELECT`, `INSERT`, `UPDATE`, and `DELETE` statements.
+
+When the system variable [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) is set to `ON`, you need to have the `SUPER` or `RESOURCE_GROUP_ADMIN` or `RESOURCE_GROUP_USER` privilege to use this hint.
 
 The following example binds the current statement to the resource group `rg1`.
 

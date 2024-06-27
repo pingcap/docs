@@ -413,6 +413,10 @@ Requires `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
 
 Requires `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
 
+### SET RESOURCE GROUP
+
+When the system variable [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) is set to `ON`, you need to have the `SUPER` or `RESOURCE_GROUP_ADMIN` or `RESOURCE_GROUP_USER` privilege to execute this statement.
+
 ## Implementation of the privilege system
 
 ### Privilege table
