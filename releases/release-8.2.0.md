@@ -173,7 +173,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 
 * When using `IMPORT INTO` to import a CSV file, if you specify the `SPLIT_FILE` parameter to split a large CSV file into multiple small CSV files to improve concurrency and import performance, you need to explicitly specify the line terminator `LINES_TERMINATED_BY`. The values can be `\r`, `\n` or `\r\n`. Failure to specify a line terminator might result in an exception when parsing the CSV file data. [#37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
 
-* 行为变更 2
+* Before BR v8.2.0, performing [BR data restore](/br/backup-and-restore-overview.md) on a cluster with TiCDC replication tasks is not supported. Starting from v8.2.0, BR relaxes the restrictions on data restoration for TiCDC: if the BackupTS (the backup time) of the data to be restored is earlier than the changefeed [`CheckpointTS`](/ticdc/ticdc-architecture.md#checkpointts) (the timestamp that indicates the current replication progress), BR can proceed with the data restore normally. Considering that `BackupTS` is usually much earlier, it can be assumed that in most scenarios, BR supports restoring data for a cluster with TiCDC replication tasks.
 
 ### MySQL compatibility
 
@@ -207,8 +207,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 ### System tables
 
 ### Other changes
-
-- Before BR v8.2.0, performing [BR data restore](/br/backup-and-restore-overview.md) on a cluster with TiCDC replication tasks is not supported. Starting from v8.2.0, BR relaxes the restrictions on data restoration for TiCDC: if the BackupTS (the backup time) of the data to be restored is earlier than the changefeed [`CheckpointTS`](/ticdc/ticdc-architecture.md#checkpointts) (the timestamp that indicates the current replication progress), BR can proceed with the data restore normally. Considering that `BackupTS` is usually much earlier, it can be assumed that in most scenarios, BR supports restoring data for a cluster with TiCDC replication tasks.
 
 ## Offline package changes
 
@@ -339,4 +337,18 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 
 We would like to thank the following contributors from the TiDB community:
 
-- [贡献者 GitHub ID](链接)
+- [CabinfeverB](https://github.com/CabinfeverB)
+- [DanRoscigno](https://github.com/DanRoscigno) (First-time contributor)
+- [ei-sugimoto](https://github.com/ei-sugimoto) (First-time contributor)
+- [eltociear](https://github.com/eltociear)
+- [jiyfhust](https://github.com/jiyfhust)
+- [michaelmdeng](https://github.com/michaelmdeng) (First-time contributor)
+- [mittalrishabh](https://github.com/mittalrishabh)
+- [onlyacat](https://github.com/onlyacat)
+- [qichengzx](https://github.com/qichengzx) (First-time contributor)
+- [SeaRise](https://github.com/SeaRise)
+- [shawn0915](https://github.com/shawn0915)
+- [shunki-fujita](https://github.com/shunki-fujita) (First-time contributor)
+- [tonyxuqqi](https://github.com/tonyxuqqi)
+- [wwu](https://github.com/wwu) (First-time contributor)
+- [yzhan1](https://github.com/yzhan1)
