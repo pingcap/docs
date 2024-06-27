@@ -2396,16 +2396,12 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_parallel_hashagg_spill <span class="version-mark">New in v8.0.0</span>
 
-> **Warning:**
->
-> Currently, the feature controlled by this variable is experimental. It is not recommended that you use it in production environments. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
-- This variable controls whether TiDB supports disk spill for the parallel HashAgg algorithm. When it is `ON`, disk spill can be triggered for the parallel HashAgg algorithm. This variable will be deprecated after this feature is generally available in a future release.
+- This variable controls whether TiDB supports disk spill for the parallel HashAgg algorithm. When it is `ON`, the HashAgg operator can automatically trigger data spill based on memory usage under any parallel conditions, thus balancing performance and data throughput. It is not recommended to set this variable to `OFF`. Starting from v8.2.0, setting it to `OFF` will report an error. This variable will be deprecated in a future release.
 
 ### tidb_enable_pipelined_window_function
 
