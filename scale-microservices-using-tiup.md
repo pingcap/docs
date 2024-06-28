@@ -196,7 +196,7 @@ After the scale-in, the current topology is as follows:
 
 You can switch PD services between the following two working modes:
 
-- Regular mode: provides routing service, timestamp allocation, and cluster scheduling functions all by PD nodes.
+- Regular mode: provides routing service, timestamp allocation, and cluster scheduling functions solely by PD nodes.
 - Microservice mode: enables you to deploy the PD timestamp allocation function to TSO nodes (providing `tso` microservices) and the cluster scheduling function to Scheduling nodes (providing `scheduling` microservices) separately. In this way, these two functions are decoupled from the routing function of PD, which allows PD nodes to focus on the routing service for metadata.
 
 > **Note:**
