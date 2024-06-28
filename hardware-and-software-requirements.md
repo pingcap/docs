@@ -34,7 +34,7 @@ In v7.1 LTS, TiDB provides multi-level support for different quality standards o
         <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
       </tr>
       <tr>
-        <td><ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version</li><li>CentOS 7.3 or a later 7.x version (TiDB ends support in 8.5 LTS)</li></ul></td>
+        <td><ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version</li><li>CentOS 7.3 or a later 7.x version (TiDB will end support in 8.5 LTS)</li></ul></td>
         <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
       </tr>
       <tr>
