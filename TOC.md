@@ -331,7 +331,7 @@
   - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
   - Use PD Microservices
     - [PD Microservices Overview](/pd-microservices.md)
-    - [Scale a Cluster with PD Microservices Using TiUP](/scale-microservices-using-tiup.md)
+    - [Scale PD Microservice Nodes Using TiUP](/scale-microservices-using-tiup.md)
     - [TSO configuration file](/tso-configuration-file.md)
     - [TSO configuration flags](/command-line-flags-for-tso-configuration.md)
     - [Scheduling configuration file](/scheduling-configuration-file.md)

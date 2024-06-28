@@ -58,7 +58,7 @@ For TiDB clusters deployed using TiDB Operator, you can deploy and configure PD 
 For TiDB clusters deployed using TiUP, you can deploy and configure PD microservices according to the following documents:
 
 - [Deploy PD microservices](/pd-microservices-deployment-topology.md)
-- [Scale a cluster with PD microservices using TiUP](/scale-microservices-using-tiup.md)
+- [Scale PD microservice nodes](/scale-microservices-using-tiup.md)
 - Configure the `tso` microservice
     - [Configure via the configuration file](/tso-configuration-file.md)
     - [Configure via command line flags](/command-line-flags-for-tso-configuration.md)

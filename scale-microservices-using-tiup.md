@@ -1,15 +1,15 @@
 ---
-title: Scale a Cluster with PD Microservices Using TiUP
-summary: Learn how to scale a cluster with PD microservices using TiUP and how to switch the PD operating mode.
+title: Scale PD Microservice Nodes Using TiUP
+summary: Learn how to scale PD microservice nodes in a cluster using TiUP and how to switch the PD working mode.
 ---
 
-# Scale a Cluster with PD Microservices Using TiUP
+# Scale PD Microservices Nodes Using TiUP
 
-This document describes how to scale a cluster with PD microservices enabled using TiUP, including how to add or remove TSO/Scheduling nodes using TiUP. In addition, this document describes how to switch the PD operating mode.
+This document describes how to scale [PD microservice](/pd-microservices.md) nodes (including TSO and Scheduling nodes) in a cluster and how to switch the PD working mode using TiUP.
 
 To view the current cluster name list, run `tiup cluster list`.
 
-For example, assume that the original topology of the cluster is as follows:
+For example, the original topology of the cluster is as follows:
 
 | Host IP   | Service   |
 |:----|:----|
@@ -24,9 +24,9 @@ For example, assume that the original topology of the cluster is as follows:
 
 > **Note:**
 >
-> To add TSO/Scheduling nodes to a TiDB cluster that have not configured PD microservices yet, follow the instructions in [Switch from regular mode to microservices mode](#Switching-from-Regular-Mode-to-Microservices-Mode) instead.
+> To add TSO/Scheduling nodes to a TiDB cluster that have not enabled PD microservices yet, follow the instructions in [Switch from regular mode to microservices mode](#Switching-from-Regular-Mode-to-Microservices-Mode) instead.
 
-This section exemplifies how to add a TSO node (at IP address `10.0.1.8`) and a Scheduling node (at IP address `10.0.1.9`) to a TiDB cluster with PD microservices configured.
+This section exemplifies how to add a TSO node (at IP address `10.0.1.8`) and a Scheduling node (at IP address `10.0.1.9`) to a TiDB cluster with PD microservices enabled.
 
 ### 1. Configure the scale-out topology
 
@@ -114,7 +114,7 @@ After the scale-out, the cluster topology is as follows:
 
 > **Note:**
 >
-> To switch a TiDB cluster from PD microservices mode to non-microservice mode, follow the instructions in [Switch from microservices mode to regular mode](#Switching-from-Microservices-Mode-to-Regular-Mode) instead.
+> For a cluster with PD microservices enabled, if you need to switch it to non-microservice mode, follow the instructions in [Switch from microservices mode to regular mode](#Switching-from-Microservices-Mode-to-Regular-Mode) instead.
 
 This section exemplifies how to remove a TSO node (at IP address `10.0.1.8`) and a Scheduling node (at IP address `10.0.1.9`) from a TiDB cluster with multiple TSO or Scheduling nodes.
 
@@ -192,12 +192,12 @@ After the scale-in, the current topology is as follows:
 | 10.0.1.6   | TSO   |
 | 10.0.1.7   | Scheduling   |
 
-## Switching the PD operating mode
+## Switch the PD working mode
 
-PD supports switching between the following two operating modes:
+You can switch PD services between the following two working modes:
 
-- Regular mode: each PD node needs to provide routing, timestamp allocation, and cluster scheduling functions.
-- Microservice mode: enables you to deploy PD timestamp allocation function to TSO nodes (providing `tso` microservices) and cluster scheduling functions to Scheduling nodes (providing `scheduling` microservices) separately. In this mode, these two functions are decoupled from the routing function of PD, which allows PD to focus on the routing service for metadata.
+- Regular mode: provides routing service, timestamp allocation, and cluster scheduling functions all by PD nodes.
+- Microservice mode: enables you to deploy the PD timestamp allocation function to TSO nodes (providing `tso` microservices) and the cluster scheduling function to Scheduling nodes (providing `scheduling` microservices) separately. In this way, these two functions are decoupled from the routing function of PD, which allows PD nodes to focus on the routing service for metadata.
 
 > **Note:**
 >
@@ -205,7 +205,7 @@ PD supports switching between the following two operating modes:
 
 ### Switch from regular mode to microservices mode
 
-For a cluster that has not configured PD microservices, you can switch it to microservice mode and add a TSO node (at IP address 10.0.1.8) and a Scheduling node (at IP address 10.0.1.9) to the cluster as follows:
+For a cluster that has not enabled PD microservices, you can switch it to PD microservice mode and add a TSO node (at IP address `10.0.1.8`) and a Scheduling node (at IP address `10.0.1.9`) to it as follows:
 
 1. Add the scale-out topology configuration in the `scale-out.yml` file:
 
@@ -263,7 +263,7 @@ For a cluster that has not configured PD microservices, you can switch it to mic
 
 ### Switch from microservices mode to regular mode
 
-For a cluster with PD microservices enabled (assume that it has a TSO node at IP address 10.0.1.8 and a Scheduling node at IP address 10.0.1.9), you can switch back to non-microservice mode as follows:
+For a cluster with PD microservices enabled (assume that it has a TSO node at IP address `10.0.1.8` and a Scheduling node at IP address `10.0.1.9`), you can switch it to non-microservice mode as follows:
 
 1. Modify the cluster configuration and switch the cluster to non-microservice mode:
 
@@ -285,7 +285,7 @@ For a cluster with PD microservices enabled (assume that it has a TSO node at IP
     systemd_mode: system
     ```
 
-2. Run the `scale-out` command to remove all PD microservice nodes:
+2. Run the `scale-in` command to remove all PD microservice nodes:
 
     ```shell
     tiup cluster scale-in <cluster-name> --node 10.0.1.8:3379,10.0.1.9:3379
@@ -293,7 +293,7 @@ For a cluster with PD microservices enabled (assume that it has a TSO node at IP
 
     > **Note:**
     >
-    > The PD timestamp allocation service will be unavailable after you run the preceding `scale-out` command and will be available again once the `reload` command in the next step completes execution.
+    > The PD timestamp allocation service will be unavailable after you run the preceding `scale-in` command and will be available again once the `reload` command in the next step completes execution.
 
 3. Perform a rolling update of the PD node configuration:
 
