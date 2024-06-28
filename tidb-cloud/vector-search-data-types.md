@@ -198,6 +198,7 @@ Sometimes explicit cast is needed when operators or functions accepts multiple d
 For example, in comparison operators or functions, you may want explicit cast to compare by Vector numeric values instead of comparing by string values:
 
 ```sql
+-- Because string is given, TiDB is comparing strings:
 [tidb]> SELECT '[12.0]' < '[4.0]';
 +--------------------+
 | '[12.0]' < '[4.0]' |
@@ -206,6 +207,7 @@ For example, in comparison operators or functions, you may want explicit cast to
 +--------------------+
 1 row in set (0.01 sec)
 
+-- Cast to vector explicitly to compare by vectors:
 [tidb]> SELECT VEC_FROM_TEXT('[12.0]') < VEC_FROM_TEXT('[4.0]');
 +--------------------------------------------------+
 | VEC_FROM_TEXT('[12.0]') < VEC_FROM_TEXT('[4.0]') |
