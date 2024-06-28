@@ -42,6 +42,8 @@ The following built-in functions and operators are extended, supporting operatin
 | [`+`](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_plus)  | Vector element-wise addition operator    |
 | [`-`](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_minus) | Vector element-wise subtraction operator |
 
+For details about how vectors arithmetics are performed, see [Vector Data Type | Arithmetic](/tidb-cloud/vector-search-data-types.md#arithmetic).
+
 **Aggregate (GROUP BY) functions:**
 
 | Name                                                                                                          | Description                                      |
@@ -72,6 +74,8 @@ The following built-in functions and operators are extended, supporting operatin
 | [`!=`, `<>`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-equal)                  | Not equal operator                                    |
 | [`NOT IN()`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-in)                     | Check whether a value is not within a set of values   |
 
+For details about how vectors are compared, see [Vector Data Type | Comparison](/tidb-cloud/vector-search-data-types.md#comparison).
+
 **Control flow functions:**
 
 | Name                                                                                              | Description                  |
@@ -80,6 +84,15 @@ The following built-in functions and operators are extended, supporting operatin
 | [`IF()`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_if)         | If/else construct            |
 | [`IFNULL()`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_ifnull) | Null if/else construct       |
 | [`NULLIF()`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_nullif) | Return NULL if expr1 = expr2 |
+
+**Cast functions:**
+
+| Name                                                                                        | Description                    |
+| :------------------------------------------------------------------------------------------ | :----------------------------- |
+| [`CAST()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast)       | Cast a value as a certain type |
+| [`CONVERT()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_convert) | Cast a value as a certain type |
+
+For details about using `CAST()` for Vector data types, see [Vector Data Type | Cast](/tidb-cloud/vector-search-data-types.md#cast).
 
 ## Full references
 
