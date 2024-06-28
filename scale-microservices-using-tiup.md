@@ -1,11 +1,11 @@
 ---
 title: Scale a Cluster with PD Microservices Using TiUP
-summary: Learn how to scale a cluster with PD microservices using TiUP.
+summary: Learn how to scale a cluster with PD microservices using TiUP and how to switch the PD operating mode.
 ---
 
 # Scale a Cluster with PD Microservices Using TiUP
 
-This document describes how to scale a cluster with PD microservices enabled using TiUP, including how to add or remove TSO/Scheduling nodes using TiUP.
+This document describes how to scale a cluster with PD microservices enabled using TiUP, including how to add or remove TSO/Scheduling nodes using TiUP. In addition, this document describes how to switch the PD operating mode.
 
 To view the current cluster name list, run `tiup cluster list`.
 
@@ -22,7 +22,11 @@ For example, assume that the original topology of the cluster is as follows:
 
 ## Add TSO/Scheduling nodes
 
-This section exemplifies how to add a TSO node with the IP address `10.0.1.8` and a Scheduling node with the IP address `10.0.1.9`.
+> **Note:**
+>
+> To add TSO/Scheduling nodes to a TiDB cluster that have not configured PD microservices yet, follow the instructions in [Switch from regular mode to microservices mode](#Switching-from-Regular-Mode-to-Microservices-Mode) instead.
+
+This section exemplifies how to add a TSO node (at IP address `10.0.1.8`) and a Scheduling node (at IP address `10.0.1.9`) to a TiDB cluster with PD microservices configured.
 
 ### 1. Configure the scale-out topology
 
@@ -108,7 +112,11 @@ After the scale-out, the cluster topology is as follows:
 
 ## Remove TSO/Scheduling nodes
 
-This section exemplifies how to remove a TSO node with the IP address `10.0.1.8` and a Scheduling node with the IP address `10.0.1.9`.
+> **Note:**
+>
+> To switch a TiDB cluster from PD microservices mode to non-microservice mode, follow the instructions in [Switch from microservices mode to regular mode](#Switching-from-Microservices-Mode-to-Regular-Mode) instead.
+
+This section exemplifies how to remove a TSO node (at IP address `10.0.1.8`) and a Scheduling node (at IP address `10.0.1.9`) from a TiDB cluster with multiple TSO or Scheduling nodes.
 
 ### 1. View the node ID information
 
@@ -183,3 +191,112 @@ After the scale-in, the current topology is as follows:
 | 10.0.1.2   | TiKV   |
 | 10.0.1.6   | TSO   |
 | 10.0.1.7   | Scheduling   |
+
+## Switching the PD operating mode
+
+PD supports switching between the following two operating modes:
+
+- Regular mode: each PD node needs to provide routing, timestamp allocation, and cluster scheduling functions.
+- Microservice mode: enables you to deploy PD timestamp allocation function to TSO nodes (providing `tso` microservices) and cluster scheduling functions to Scheduling nodes (providing `scheduling` microservices) separately. In this mode, these two functions are decoupled from the routing function of PD, which allows PD to focus on the routing service for metadata.
+
+> **Note:**
+>
+> During the mode switching, PD services will be unavailable for a few minutes.
+
+### Switch from regular mode to microservices mode
+
+For a cluster that has not configured PD microservices, you can switch it to microservice mode and add a TSO node (at IP address 10.0.1.8) and a Scheduling node (at IP address 10.0.1.9) to the cluster as follows:
+
+1. Add the scale-out topology configuration in the `scale-out.yml` file:
+
+    ```shell
+    vi scale-out.yml
+    ```
+
+    The following is an configuration example:
+
+    ```ini
+    tso_servers:
+      - host: 10.0.1.8
+        port: 3379
+    scheduling_servers:
+      - host: 10.0.1.9
+        port: 3379
+    ```
+
+2. Modify the cluster configuration and switch the cluster to PD microservice mode:
+
+    ```shell
+    tiup cluster edit-config <cluster-name>
+    ```
+
+   Add `pd_mode: ms` to `global`:
+
+    ```ini
+    global:
+    user: tidb
+    ssh_port: 22
+    listen_host: 0.0.0.0
+    deploy_dir: /tidb-deploy
+    data_dir: /tidb-data
+    os: linux
+    arch: amd64
+    systemd_mode: system
+    pd_mode: ms
+    ```
+
+3. Perform a rolling update of the PD node configuration:
+
+    ```shell
+    tiup cluster reload <cluster-name> -R pd
+    ```
+
+    > **Note:**
+    >
+    > The PD timestamp allocation service will be unavailable after you run the preceding `reload` command and will be available again once the `scale-out` command in the next step completes execution.
+
+4. Run the `scale-out` command to add PD microservice nodes:
+
+    ```shell
+    tiup cluster scale-out <cluster-name> scale-out.yml
+    ```
+
+### Switch from microservices mode to regular mode
+
+For a cluster with PD microservices enabled (assume that it has a TSO node at IP address 10.0.1.8 and a Scheduling node at IP address 10.0.1.9), you can switch back to non-microservice mode as follows:
+
+1. Modify the cluster configuration and switch the cluster to non-microservice mode:
+
+    ```shell
+    tiup cluster edit-config <cluster-name>
+    ```
+
+    Remove `pd_mode: ms` from `global`:
+
+    ```ini
+    global:
+    user: tidb
+    ssh_port: 22
+    listen_host: 0.0.0.0
+    deploy_dir: /tidb-deploy
+    data_dir: /tidb-data
+    os: linux
+    arch: amd64
+    systemd_mode: system
+    ```
+
+2. Run the `scale-out` command to remove all PD microservice nodes:
+
+    ```shell
+    tiup cluster scale-in <cluster-name> --node 10.0.1.8:3379,10.0.1.9:3379
+    ```
+
+    > **Note:**
+    >
+    > The PD timestamp allocation service will be unavailable after you run the preceding `scale-out` command and will be available again once the `reload` command in the next step completes execution.
+
+3. Perform a rolling update of the PD node configuration:
+
+    ```shell
+    tiup cluster reload <cluster-name> -R pd
+    ```
