@@ -49,7 +49,7 @@ Flags:
       --pd.host host                 Specify the listening address of PD
       --pd.binpath string            Specify the PD instance binary path (optional, for debugging)
       --pd.config string             Specify the PD instance configuration file (optional, for debugging)
-      --pd.mode string               Specify the PD startup mode. The optional value is 'ms'. Specifying this flag means enabling PD microservice mode.
+      --pd.mode string               Specify the PD working mode. The optional value is 'ms'. Specifying this flag means enabling PD microservice mode.
       --pump int                     Specify the number of Pump instances. If the value is not `0`, TiDB Binlog is enabled.
       --pump.binpath string          Specify the location of the Pump binary files (optional, for debugging)
       --pump.config string           Specify the Pump configuration file (optional, for debugging)

@@ -79,7 +79,7 @@ The `global` section corresponds to the cluster's global configuration and has t
 
 - `arch`: The CPU architecture of the target machine. The field controls which platform to adapt to for the binary packages pushed to the target machine. The supported values are "amd64" and "arm64". The default value is "amd64".
 
-- `pd_mode`: The PD startup mode. The field controls whether to enable [PD microservices](/pd-microservices.md). The supported value is "ms". Specifying this field means enabling PD microservices.
+- `pd_mode`: The PD working mode. The field controls whether to enable [PD microservices](/pd-microservices.md). The supported value is "ms". Specifying this field means enabling PD microservices.
 
 - `resource_control`: Runtime resource control. All configurations in this field are written into the service file of systemd. There is no limit by default. The resources that can be controlled are as follows:
 
