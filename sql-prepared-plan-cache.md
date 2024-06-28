@@ -176,7 +176,7 @@ mysql> SHOW WARNINGS;
 The `Statements Summary` table contains two fields, `plan_cache_unqualified` and `last_plan_cache_unqualified_reason`, which respectively indicate the number of times and the reason why the corresponding query is unable to use the plan cache. You can use these two fields for diagnostic purposes:
 
 ```sql
-mysql> SELECT digest_text, plan_cache_unqualified, last_plan_cache_unqualified_reason FROM information_schema.statements_summary WHERE plan_cache_unqualified > 0 ORDER BY plan_cache_unqualified DESC
+mysql> SELECT digest_text, plan_cache_unqualified, plan_cache_unqualified_last_reason FROM information_schema.statements_summary WHERE plan_cache_unqualified > 0 ORDER BY plan_cache_unqualified DESC
 LIMIT 10;
 
 +---------------------------------+------------------------+----------------------------------------+
