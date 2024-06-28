@@ -180,7 +180,7 @@ mysql> SELECT digest_text, plan_cache_unqualified, plan_cache_unqualified_last_r
 LIMIT 10;
 
 +---------------------------------+------------------------+----------------------------------------+
-| digest_text                     | plan_cache_unqualified | last_plan_cache_unqualified_reason     |
+| digest_text                     | plan_cache_unqualified | plan_cache_unqualified_last_reason     |
 +---------------------------------+------------------------+----------------------------------------+
 | select * from `t` where `a` < ? |                     10 | '1' may be converted to INT            |
 | select * from `t` order by ?    |                      4 | query has 'order by ?' is un-cacheable |
