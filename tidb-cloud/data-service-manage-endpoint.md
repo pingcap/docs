@@ -297,7 +297,7 @@ To rename an endpoint, perform the following steps:
 
 > **Note:**
 >
-> Sstem-provided endpoints do not support renaming.
+> System-provided endpoints do not support renaming.
 
 ## Test an endpoint
 
