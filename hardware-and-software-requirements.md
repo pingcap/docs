@@ -21,6 +21,7 @@ In v6.5 LTS, TiDB provides multi-level support for different quality standards o
 
 + For the following combinations of operating systems and CPU architectures, TiDB **provides enterprise-level production quality**, and the product features have been comprehensively and systematically verified:
 
+<<<<<<< HEAD
     |  Operating systems   |   Supported CPU architectures   |
     |   :---   |   :---   |
     | Red Hat Enterprise Linux 8.4 or a later 8.x version  |  <ul><li>x86_64</li><li>ARM 64</li></ul>  |
@@ -28,10 +29,55 @@ In v6.5 LTS, TiDB provides multi-level support for different quality standards o
     | Amazon Linux 2 | <ul><li>x86_64</li><li>ARM 64</li></ul> |
     | Kylin Euler V10 SP1/SP2   |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
     | UnionTech OS (UOS) V20                 |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
+=======
+    <table>
+    <thead>
+      <tr>
+        <th>Operating systems</th>
+        <th>Supported CPU architectures</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Red Hat Enterprise Linux 8.4 or a later 8.x version</td>
+        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+      </tr>
+      <tr>
+        <td><ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version</li><li>CentOS 7.3 or a later 7.x version (TiDB will end support for it in 8.5 LTS)</li></ul></td>
+        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+      </tr>
+      <tr>
+        <td>Amazon Linux 2</td>
+        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+      </tr>
+      <tr>
+        <td>Amazon Linux 2023</td>
+        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+      </tr>
+      <tr>
+        <td>Rocky Linux 9.1 or later</td>
+        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+      </tr>
+      <tr>
+        <td>Kylin Euler V10 SP1/SP2</td>
+        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+      </tr>
+      <tr>
+        <td>UnionTech OS (UOS) V20</td>
+        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+      </tr>
+      <tr>
+        <td>openEuler 22.03 LTS SP1/SP3</td>
+        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+      </tr>
+    </tbody>
+    </table>
+>>>>>>> 3d5d628509 (Add CentOS 7 EOL to OS descriptions (#18002))
 
     > **Note:**
     >
-    > According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS Linux 8 ended on December 31, 2021. CentOS Stream 8 continues to be supported by the CentOS organization.
+    > - According to [CentOS Linux EOL](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/), the upstream support for CentOS Linux 7 ends on June 30, 2024. TiDB will end the support for CentOS 7 in the 8.5 LTS version. It is recommended to use Rocky Linux 9.1 or a later version.
+    > - According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS Linux 8 ended on December 31, 2021. The upstream [support for CentOS Stream 8](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/) ended on May 31, 2024. CentOS Stream 9 continues to be supported by the CentOS organization.
 
 + For the following combinations of operating systems and CPU architectures, you can compile, build, and deploy TiDB. In addition, you can also use the basic features of OLTP, OLAP, and the data tools. However, TiDB **does not guarantee enterprise-level production quality**:
 
