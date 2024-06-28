@@ -24,7 +24,7 @@ For example, the original topology of the cluster is as follows:
 
 > **Note:**
 >
-> To add TSO/Scheduling nodes to a TiDB cluster that have not enabled PD microservices yet, follow the instructions in [Switch from regular mode to microservices mode](#Switching-from-Regular-Mode-to-Microservices-Mode) instead.
+> To add TSO/Scheduling nodes to a TiDB cluster that have not enabled PD microservices yet, follow the instructions in [Switch from regular mode to microservices mode](#switch-from-regular-mode-to-microservices-mode) instead.
 
 This section exemplifies how to add a TSO node (at IP address `10.0.1.8`) and a Scheduling node (at IP address `10.0.1.9`) to a TiDB cluster with PD microservices enabled.
 
@@ -114,7 +114,7 @@ After the scale-out, the cluster topology is as follows:
 
 > **Note:**
 >
-> For a cluster with PD microservices enabled, if you need to switch it to non-microservice mode, follow the instructions in [Switch from microservices mode to regular mode](#Switching-from-Microservices-Mode-to-Regular-Mode) instead.
+> For a cluster with PD microservices enabled, if you need to switch it to non-microservice mode, follow the instructions in [Switch from microservices mode to regular mode](#switch-from-microservices-mode-to-regular-mode) instead.
 
 This section exemplifies how to remove a TSO node (at IP address `10.0.1.8`) and a Scheduling node (at IP address `10.0.1.9`) from a TiDB cluster with multiple TSO or Scheduling nodes.
 
