@@ -79,7 +79,7 @@ However you cannot build a [Vector Search Index](/tidb-cloud/vector-search-index
 
 ## Comparison
 
-Vector data types can be compared using the [compare operators](/functions-and-operators/operators.md) you are already familiar with, like `=`, `!=`, `<`, `>`, `<=`, `>=`. For a full list of compare operators and functions available for Vector data types, see [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md).
+You can compare vector data types using [comparison operators](/functions-and-operators/operators.md) such as `=`, `!=`, `<`, `>`, `<=`, and `>=`. For a complete list of comparison operators and functions for vector data types, see [Vector functions and operators](/tidb-cloud/vector-search-functions-and-operators.md).
 
 Vector data types are compared element-wise numerically. Examples:
 
@@ -88,21 +88,21 @@ Vector data types are compared element-wise numerically. Examples:
 - `[1,2,3] = [1,2,3]`
 - `[2,2,3] > [1,2,3]`
 
-Vectors with different dimensions are compared using Lexicographical comparison, with the following properties:
+Vectors with different dimensions are compared using lexicographical comparison, with the following properties:
 
-- Two Vectors are compared element by element, each element is compared numerically.
-- The first mismatching element defines which sequence is lexicographically _less_ or _greater_ than the other.
-- If one sequence is a prefix of another, the shorter sequence is lexicographically _less_ than the other.
-- If two sequences have equivalent elements and are of the same length, then the sequences are lexicographically _equal_.
-- An empty sequence is lexicographically _less_ than any non-empty sequence.
-- Two empty sequences are lexicographically _equal_.
+- Two vectors are compared element by element, and each element is compared numerically.
+- The first mismatching element determines which vector is lexicographically _less_ or _greater_ than the other.
+- If one vector is a prefix of another, the shorter vector is lexicographically _less_ than the other.
+- Vectors of the same length with identical elements are lexicographically _equal_.
+- An empty vector is lexicographically _less_ than any non-empty vector.
+- Two empty vectors are lexicographically _equal_.
 
 Examples:
 
 - `[] < [1]`
 - `[1,2,3] < [1,2,3,0]`
 
-Note that you may want [explicit cast](#cast) from string to vector when comparing vector constants, otherwise the comparison will be done by string values:
+When comparing vector constants, consider performing an [explicit cast](#cast) from string to vector to avoid comparisons based on string values:
 
 ```sql
 -- Because string is given, TiDB is comparing strings:
@@ -126,7 +126,7 @@ Note that you may want [explicit cast](#cast) from string to vector when compari
 
 ## Arithmetic
 
-Vector data types support element-wise arithmetic operations `+` (plus) and `-` (minus). Perform arithmetic operations between vectors with different dimensions will result in an error.
+Vector data types support element-wise arithmetic operations `+` (addition) and `-` (subtraction). However, performing arithmetic operations between vectors with different dimensions results in an error.
 
 Examples:
 
@@ -165,7 +165,7 @@ To cast between Vector and String, use the following functions:
 There are implicit casts when calling functions receiving vector data types:
 
 ```sql
--- There is implicit cast here, since VEC_DIMS only accepts VECTOR arguments:
+-- There is an implicit cast here, since VEC_DIMS only accepts VECTOR arguments:
 [tidb]> SELECT VEC_DIMS('[0.3, 0.5, -0.1]');
 +------------------------------+
 | VEC_DIMS('[0.3, 0.5, -0.1]') |
@@ -193,9 +193,7 @@ There are implicit casts when calling functions receiving vector data types:
 1 row in set (0.01 sec)
 ```
 
-Sometimes explicit cast is needed when operators or functions accepts multiple data types.
-
-For example, in comparison operators or functions, you may want explicit cast to compare by Vector numeric values instead of comparing by string values:
+Use explicit casts when operators or functions accept multiple data types. For example, in comparisons, use explicit casts to compare vector numeric values instead of string values:
 
 ```sql
 -- Because string is given, TiDB is comparing strings:
@@ -230,7 +228,7 @@ To cast vector into its string representation explicitly, use the `VEC_AS_TEXT()
 1 row in set (0.01 sec)
 ```
 
-See [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md) for other cast functions.
+For additional cast functions, see [Vector functions and operators](/tidb-cloud/vector-search-functions-and-operators.md).
 
 ### Cast between Vector ⇔ other data types
 

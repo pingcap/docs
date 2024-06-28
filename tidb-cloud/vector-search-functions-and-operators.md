@@ -42,7 +42,7 @@ The following built-in functions and operators are extended, supporting operatin
 | [`+`](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_plus)  | Vector element-wise addition operator    |
 | [`-`](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_minus) | Vector element-wise subtraction operator |
 
-For details about how vectors arithmetics are performed, see [Vector Data Type | Arithmetic](/tidb-cloud/vector-search-data-types.md#arithmetic).
+For more information about how vector arithmetic works, see [Vector Data Type | Arithmetic](/tidb-cloud/vector-search-data-types.md#arithmetic).
 
 **Aggregate (GROUP BY) functions:**
 
@@ -74,7 +74,7 @@ For details about how vectors arithmetics are performed, see [Vector Data Type |
 | [`!=`, `<>`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-equal)                  | Not equal operator                                    |
 | [`NOT IN()`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-in)                     | Check whether a value is not within a set of values   |
 
-For details about how vectors are compared, see [Vector Data Type | Comparison](/tidb-cloud/vector-search-data-types.md#comparison).
+For more information about how vectors are compared, see [Vector Data Type | Comparison](/tidb-cloud/vector-search-data-types.md#comparison).
 
 **Control flow functions:**
 
@@ -92,7 +92,7 @@ For details about how vectors are compared, see [Vector Data Type | Comparison](
 | [`CAST()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast)       | Cast a value as a certain type |
 | [`CONVERT()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_convert) | Cast a value as a certain type |
 
-For details about using `CAST()` for Vector data types, see [Vector Data Type | Cast](/tidb-cloud/vector-search-data-types.md#cast).
+For more information about how to use `CAST()`, see [Vector Data Type | Cast](/tidb-cloud/vector-search-data-types.md#cast).
 
 ## Full references
 
