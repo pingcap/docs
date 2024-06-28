@@ -333,7 +333,7 @@ Basic fields:
 - `PLAN_CACHE_HITS`: The total number of times that SQL statements of this category hit the plan cache.
 - `PLAN_IN_CACHE`: Indicates whether the previous execution of SQL statements of this category hit the plan cache.
 - `PLAN_CACHE_UNQUALIFIED`: The number of times that the SQL statements of this category fail to hit the plan cache.
-- `LAST_PLAN_CACHE_UNQUALIFIED_REASON`: The reason why the SQL statements of this category fail to hit the plan cache last time.
+- `PLAN_CACHE_UNQUALIFIED_LAST_REASON`: The reason why the SQL statements of this category fail to hit the plan cache last time.
 
 Fields related to execution time:
 
