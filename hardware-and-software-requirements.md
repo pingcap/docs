@@ -21,58 +21,13 @@ In v6.5 LTS, TiDB provides multi-level support for different quality standards o
 
 + For the following combinations of operating systems and CPU architectures, TiDB **provides enterprise-level production quality**, and the product features have been comprehensively and systematically verified:
 
-<<<<<<< HEAD
     |  Operating systems   |   Supported CPU architectures   |
     |   :---   |   :---   |
     | Red Hat Enterprise Linux 8.4 or a later 8.x version  |  <ul><li>x86_64</li><li>ARM 64</li></ul>  |
-    | <ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version</li><li>CentOS 7.3 or a later 7.x version</li></ul>  |  <ul><li>x86_64</li><li>ARM 64</li></ul>   |
+    | <ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version</li><li>CentOS 7.3 or a later 7.x version</li></ul> (TiDB will end support for it in 8.5 LTS) |  <ul><li>x86_64</li><li>ARM 64</li></ul>   |
     | Amazon Linux 2 | <ul><li>x86_64</li><li>ARM 64</li></ul> |
     | Kylin Euler V10 SP1/SP2   |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
     | UnionTech OS (UOS) V20                 |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
-=======
-    <table>
-    <thead>
-      <tr>
-        <th>Operating systems</th>
-        <th>Supported CPU architectures</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Red Hat Enterprise Linux 8.4 or a later 8.x version</td>
-        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-      </tr>
-      <tr>
-        <td><ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version</li><li>CentOS 7.3 or a later 7.x version (TiDB will end support for it in 8.5 LTS)</li></ul></td>
-        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-      </tr>
-      <tr>
-        <td>Amazon Linux 2</td>
-        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-      </tr>
-      <tr>
-        <td>Amazon Linux 2023</td>
-        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-      </tr>
-      <tr>
-        <td>Rocky Linux 9.1 or later</td>
-        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-      </tr>
-      <tr>
-        <td>Kylin Euler V10 SP1/SP2</td>
-        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-      </tr>
-      <tr>
-        <td>UnionTech OS (UOS) V20</td>
-        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-      </tr>
-      <tr>
-        <td>openEuler 22.03 LTS SP1/SP3</td>
-        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-      </tr>
-    </tbody>
-    </table>
->>>>>>> 3d5d628509 (Add CentOS 7 EOL to OS descriptions (#18002))
 
     > **Note:**
     >
