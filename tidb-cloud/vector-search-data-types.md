@@ -79,7 +79,7 @@ However you cannot build a [Vector Search Index](/tidb-cloud/vector-search-index
 
 ## Comparison
 
-You can compare vector data types using [comparison operators](/functions-and-operators/operators.md) such as `=`, `!=`, `<`, `>`, `<=`, and `>=`. For a complete list of comparison operators and functions for vector data types, see [Vector functions and operators](/tidb-cloud/vector-search-functions-and-operators.md).
+You can compare vector data types using [comparison operators](/functions-and-operators/operators.md) such as `=`, `!=`, `<`, `>`, `<=`, and `>=`. For a complete list of comparison operators and functions for vector data types, see [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md).
 
 Vector data types are compared element-wise numerically. Examples:
 
@@ -228,7 +228,7 @@ To cast vector into its string representation explicitly, use the `VEC_AS_TEXT()
 1 row in set (0.01 sec)
 ```
 
-For additional cast functions, see [Vector functions and operators](/tidb-cloud/vector-search-functions-and-operators.md).
+For additional cast functions, see [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md).
 
 ### Cast between Vector ⇔ other data types
 
