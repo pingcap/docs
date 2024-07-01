@@ -9,7 +9,7 @@ This document describes JSON functions that validate JSON documents.
 
 ## [JSON_SCHEMA_VALID()](https://dev.mysql.com/doc/refman/8.0/en/json-validation-functions.html#function_json-schema-valid)
 
-The `JSON_SCHEMA_VALID(schema, json_doc)` function validate a JSON document against a schema to ensure data integrity and consistency. 
+The `JSON_SCHEMA_VALID(schema, json_doc)` function validate a JSON document against a schema to ensure data integrity and consistency.
 
 This can be used together with a [CHECK](/constraints.md#check) constraint to do automatic schema validation when a table is modified.
 
@@ -292,7 +292,7 @@ SELECT JSON_SCHEMA_VALID('{"format": "ipv4"}', '"327.0.0.1"');
 1 row in set (0.00 sec)
 ```
 
-You can also use `enum` to check if a string is in an array of values. 
+You can also use `enum` to check if a string is in an array of values.
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"enum": ["TiDB", "MySQL"]}', '"TiDB"');
@@ -373,6 +373,11 @@ SELECT JSON_SCHEMA_VALID('{"anyOf": [{"type": "string"},{"type": "integer"}]}', 
 +-------------------------------------------------------------------------------+
 1 row in set (0.00 sec)
 ```
+
+## MySQL compatibility
+
+- TiDB will return an error where MySQL might accept a invalid schema like `{"type": "sting"}` for `JSON_SCHEMA_VALID()`. Note the "sting" typo instead of "string" here.
+- MySQL uses an older draft version of the JSON Schema standard.
 
 ## See also
 
