@@ -63,6 +63,10 @@ Before resource planning, you need to know the overall capacity of the cluster. 
 
   You can select an appropriate time range using **CPU Usage** in the [Metrics](#metrics) section.
 
+> **NOTE:**
+>
+> To use the [Estimate Capacity] feature, the current login user must have `SUPER` or `RESOURCE_GROUP_ADMIN` privilege and `SELECT` privilege of some system tables. Before using this feature, please ensure the current user has these privileges, otherwise, some of the function may not work properly. For more details, please refer to [CALIBRATE RESOURCE PRIVILEGES](/sql-statements/sql-statement-calibrate-resource.md#Privileges).
+
 ## Metrics
 
 By observing the metrics on the panels, you can understand the current overall resource consumption status of the cluster. The monitoring metrics and their meanings are as follows:
