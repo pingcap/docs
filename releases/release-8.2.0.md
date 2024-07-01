@@ -321,24 +321,24 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
     - (dup): release-6.5.10.md > 错误修复> TiDB - 修复 `INFORMATION_SCHEMA.TIDB_TRX` 表中 `STATE` 字段的 `size` 未定义导致 `STATE` 显示为空的问题 [#53026](https://github.com/pingcap/tidb/issues/53026) @[cfzjywxk](https://github.com/cfzjywxk)
     - (dup): release-6.5.10.md > 错误修复> TiDB - 修复关闭 `tidb_enable_async_merge_global_stats` 时，GlobalStats 中的 `Distinct_count` 信息可能错误的问题 [#53752](https://github.com/pingcap/tidb/issues/53752) @[hawkingrei](https://github.com/hawkingrei)
     - (dup): release-6.5.10.md > 错误修复> TiDB - 修复使用 Optimizer Hints 时，可能输出错误的 WARNINGS 信息的问题 [#53767](https://github.com/pingcap/tidb/issues/53767) @[hawkingrei](https://github.com/hawkingrei) <!--tw@Oreoxmt: 以下 18 条-->
-    - 修复对时间类型取负操作结果不正确的问题 [#52262](https://github.com/pingcap/tidb/issues/52262) @[solotzg](https://github.com/solotzg)
-    - Regexp 系列函数对于空的模式参数显式报错 [#53221](https://github.com/pingcap/tidb/issues/53221) @[yibin87](https://github.com/yibin87)
-    - 修复某些情况下把 JSON 转换成时间格式会丢失精度的问题 [#53352](https://github.com/pingcap/tidb/issues/53352) @[YangKeao](https://github.com/YangKeao)
-    - 修复函数 `JSON_QUOTE` 在某些情况下返回的结果不正确的问题 [#37294](https://github.com/pingcap/tidb/issues/37294) @[https://github.com/dveeden](dveeden)
-    - 修复执行 ALTER TABLE REMOVE PARTITIONING 后有可能会丢失数据的问题 [#53385](https://github.com/pingcap/tidb/issues/53385) @[mjonss](https://github.com/mjonss)
-    - 修复了 `AUTH_SOCKET` 认证插件在某些情况下 [#54031](https://github.com/pingcap/tidb/issues/54031) @[lcwangchao](https://github.com/lcwangchao)
-    - 修复了 JSON 相关的函数在某些情况下报错信息与 MySQL 不同的问题 [#53799](https://github.com/pingcap/tidb/issues/53799) @[dveeden](https://github.com/dveeden)
-    - 修复了分区表在 `INFORMATION_SCHEMA.PARTITIONS` 中的 `INDEX_LENGTH` 列显示不正确的问题 [#54173](https://github.com/pingcap/tidb/issues/54173) @[Defined2014](https://github.com/Defined2014)
-    - 修复了 `infomation_schema.tables` 中 `TIDB_ROW_ID_SHARDING_INFO` 输出错误的问题 [#52330](https://github.com/pingcap/tidb/issues/52330) @[tangenta](https://github.com/tangenta)
-    - 修复了生成列输出非法时间戳的问题 [#52509](https://github.com/pingcap/tidb/issues/52509) @[lcwangchao](https://github.com/lcwangchao)
-    - 修复了分布式加索引时设置 `max-index-length` 时 TiDB panic 问题 [#53281](https://github.com/pingcap/tidb/issues/53281) @[zimulala](https://github.com/zimulala)
-    - 修复了意外创建非法的 `Decimal(0,0)` 列类型的问题 [#53779](https://github.com/pingcap/tidb/issues/53779) @[tangenta](https://github.com/tangenta)
-    - 修复了使用 `current_date` 作为列默认值时，查询结果错误的问题 [#53746](https://github.com/pingcap/tidb/issues/53746) @[tangenta](https://github.com/tangenta)
-    - 修复 `ALTER DATABASE ... SET TIFLASH REPLICA` 语句会给 `SEQUENCE` 表添加 TiFlash 副本的问题 [#51990](https://github.com/pingcap/tidb/issues/51990) @[jiyfhust](https://github.com/jiyfhust)
-    - 修复 `information_schema.key_column_usage` 表中 `referenced_table_schema` 字段显示错误的问题 [#52350](https://github.com/pingcap/tidb/issues/52350) @[wd0517](https://github.com/wd0517)
-    - 修复 `AUTO_ID_CACHE` = 1 时，单条语句插入多行会产生空洞的问题 [#52465](https://github.com/pingcap/tidb/issues/52465) @[tiancaiamao](https://github.com/tiancaiamao)
-    - 修复弃用警告的格式 [#52515](https://github.com/pingcap/tidb/issues/52515) @[dveeden](https://github.com/dveeden)
-    - 修复 `trace` 命令在 `copr.buildCopTasks` 中丢失的问题 [#53085](https://github.com/pingcap/tidb/issues/53085) @[time-and-fate](https://github.com/time-and-fate)
+    - Fix the issue that negating a time type results in an incorrect value [#52262](https://github.com/pingcap/tidb/issues/52262) @[solotzg](https://github.com/solotzg)
+    - Fix the issue that `REGEXP()` does not explicitly report an error for empty pattern arguments [#53221](https://github.com/pingcap/tidb/issues/53221) @[yibin87](https://github.com/yibin87)
+    - Fix the issue that converting JSON to datetime might lose precision in some cases [#53352](https://github.com/pingcap/tidb/issues/53352) @[YangKeao](https://github.com/YangKeao)
+    - Fix the issue that `JSON_QUOTE()` returns incorrect results in some cases [#37294](https://github.com/pingcap/tidb/issues/37294) @[dveeden](https://github.com/dveeden)
+    - Fix the issue that `ALTER TABLE ... REMOVE PARTITIONING` might cause data loss [#53385](https://github.com/pingcap/tidb/issues/53385) @[mjonss](https://github.com/mjonss)
+    - Fix the issue that TiDB fails to reject unauthenticated user connections in some cases when using the `auth_socket` authentication plugin [#54031](https://github.com/pingcap/tidb/issues/54031) @[lcwangchao](https://github.com/lcwangchao)
+    - Fix the issue that JSON-related functions return errors inconsistent with MySQL in some cases [#53799](https://github.com/pingcap/tidb/issues/53799) @[dveeden](https://github.com/dveeden)
+    - Fix the issue that the `INDEX_LENGTH` field of partitioned tables in `INFORMATION_SCHEMA.PARTITIONS` is displayed incorrectly [#54173](https://github.com/pingcap/tidb/issues/54173) @[Defined2014](https://github.com/Defined2014)
+    - Fix the issue that the `TIDB_ROW_ID_SHARDING_INFO` field in the `INFOMATION_SCHEMA.TABLES` table is displayed incorrectly [#52330](https://github.com/pingcap/tidb/issues/52330) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that a generated columns returns illegal timestamps [#52509](https://github.com/pingcap/tidb/issues/52509) @[lcwangchao](https://github.com/lcwangchao)
+    - Fix the issue that setting `max-index-length` causes TiDB to panic when adding indexes using the Distributed eXecution Framework (DXF) [#53281](https://github.com/pingcap/tidb/issues/53281) @[zimulala](https://github.com/zimulala)
+    - Fix the issue that the illegal column type `DECIMAL(0,0)` can can be created in some cases [#53779](https://github.com/pingcap/tidb/issues/53779) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that using `CURRENT_DATE()` as the default value for a column results in incorrect query results [#53746](https://github.com/pingcap/tidb/issues/53746) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that the `ALTER DATABASE ... SET TIFLASH REPLICA` statement incorrectly adds TiFlash replicas to the `SEQUENCE` table [#51990](https://github.com/pingcap/tidb/issues/51990) @[jiyfhust](https://github.com/jiyfhust)
+    - Fix the issue that the `REFERENCED_TABLE_SCHEMA` field in the `INFORMATION_SCHEMA.KEY_COLUMN_USAGE` table is displayed incorrectly [#52350](https://github.com/pingcap/tidb/issues/52350) @[wd0517](https://github.com/wd0517)
+    - Fix the issue that inserting multiple rows in a single statement causes the `AUTO_INCREMENT` column to be discontinuous when `AUTO_ID_CACHE=1` [#52465](https://github.com/pingcap/tidb/issues/52465) @[tiancaiamao](https://github.com/tiancaiamao)
+    - Fix the format of deprecation warnings [#52515](https://github.com/pingcap/tidb/issues/52515) @[dveeden](https://github.com/dveeden)
+    - Fix the issue that the `TRACE` command is missing in `copr.buildCopTasks` [#53085](https://github.com/pingcap/tidb/issues/53085) @[time-and-fate](https://github.com/time-and-fate)
 
 + TiKV <!--tw@lilin90: 以下 10 条-->
 
@@ -391,13 +391,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
     + TiDB Data Migration (DM) <!--tw@Oreoxmt: 1 条-->
 
         - (dup): release-7.5.2.md > 错误修复> Tools> TiDB Data Migration (DM) - 升级 `go-mysql` 以修复连接阻塞的问题 [#11041](https://github.com/pingcap/tiflow/issues/11041) @[D3Hunter](https://github.com/D3Hunter)
-        - 修复了在同步 MariaDB 数据时，`SET`语句导致的 panic 问题
- [#10207](https://github.com/pingcap/tiflow/issues/10207) @[dveeden](https://github.com/dveeden)
+        - Fix the issue that `SET` statements cause DM to panic when migrating MariaDB data [#10206](https://github.com/pingcap/tiflow/issues/10206) @[dveeden](https://github.com/dveeden)
 
     + TiDB Lightning <!--tw@Oreoxmt: 1 条-->
 
-        - 修复了 lightning 导入 zstd 压缩文件时遇到的并发问题
- [#53587](https://github.com/pingcap/tidb/issues/53587) @[lance6716](https://github.com/lance6716)
+        - Fix the issue that TiDB Lightning might report an error when importing zstd compressed files [#53587](https://github.com/pingcap/tidb/issues/53587) @[lance6716](https://github.com/lance6716)
 
     + Dumpling
 
