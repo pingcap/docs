@@ -8,6 +8,20 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
+## July 2, 2024
+
+**General changes**
+
+- [Data Service (beta)](https://tidbcloud.com/console/data-service) provides an endpoint library with predefined system endpoints that you can directly add to your Data App, reducing the effort in your endpoint development.
+
+    Currently, the library only includes the `/system/query` endpoint, which enables you to execute any SQL statement by simply passing the statement in the predefined `sql` parameter. This endpoint facilitates the immediate execution of SQL queries, enhancing flexibility and efficiency.
+
+    For more information, see [Add a predefined system endpoint](/tidb-cloud/data-service-manage-endpoint.md#add-a-predefined-system-endpoint).
+
+- Enhance slow query data storage.
+
+    The slow query access on TiDB Cloud console is now more stable and does not impact database performance.
+
 ## June 25, 2024
 
 **General changes**
