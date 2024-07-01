@@ -51,7 +51,7 @@ Retrieval-Augmented Generation (RAG) is an architecture designed to optimize the
 
 ### Semantic search
 
-Semantic search is a search technology that returns results based on the meaning of a query, rather than simply matching keywords. It interprets the meaning across different languages and various types of data (such as text, images, and audio) using embeddings. ector search algorithms then use these embeddings to find the most relevant data that satisfies the user's query.
+Semantic search is a search technology that returns results based on the meaning of a query, rather than simply matching keywords. It interprets the meaning across different languages and various types of data (such as text, images, and audio) using embeddings. Vector search algorithms then use these embeddings to find the most relevant data that satisfies the user's query.
 
 ### Recommendation engine
 
