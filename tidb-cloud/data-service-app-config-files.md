@@ -187,7 +187,7 @@ The description of each field is as follows:
 | `tag`    | String | The tag for the endpoint. The default value is `"Default"`. |
 | `batch_operation`    | Integer | Controls whether to enable the endpoint to operate in batch mode. Supported values are `0` (disabled) and `1` (enabled). When it is set to `1`, you can operate on multiple rows in a single request. To enable this option, make sure that the request method is `POST` or `PUT`. |
 | `sql_file`    | String | The SQL file directory for the endpoint. For example, `"sql/GET-v1.sql"`. |
-| `type`        | String | The type of the endpoint. The value is `"system-data"` for predefined system endpoints and  `"sql_endpoint"` for other endpoints. |
+| `type`        | String | The type of the endpoint. The value is `"system-data"` for predefined system endpoints and `"sql_endpoint"` for other endpoints. |
 | `return_type` | String | The response format of the endpoint, which can only be `"json"`.             |
 
 ### SQL file configuration
