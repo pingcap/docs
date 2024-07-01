@@ -63,9 +63,9 @@ Before resource planning, you need to know the overall capacity of the cluster. 
 
   You can select an appropriate time range using **CPU Usage** in the [Metrics](#metrics) section.
 
-> **NOTE:**
+> **Note:**
 >
-> To use the [Estimate Capacity] feature, the current login user must have `SUPER` or `RESOURCE_GROUP_ADMIN` privilege and `SELECT` privilege of some system tables. Before using this feature, please ensure the current user has these privileges, otherwise, some of the function may not work properly. For more details, please refer to [CALIBRATE RESOURCE PRIVILEGES](/sql-statements/sql-statement-calibrate-resource.md#Privileges).
+> To use the capacity estimation feature, the current login user must have `SUPER` or `RESOURCE_GROUP_ADMIN` privilege and the `SELECT` privilege for some system tables. Before using this feature, ensure the current user has these privileges. Otherwise, some features might not work properly. For more information, see [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md#Privileges).
 
 ## Metrics
 
