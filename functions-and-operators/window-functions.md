@@ -44,7 +44,7 @@ WITH RECURSIVE cte(n) AS (
         n+2
     FROM
         cte
-    WHERE 
+    WHERE
         n<6
 )
 SELECT
@@ -71,9 +71,9 @@ FROM
 The `DENSE_RANK()` function is similar to [`RANK()`](#rank) but does not leave any gaps in case of ties.
 
 ```sql
-SELECT 
+SELECT
     *,
-    DENSE_RANK() OVER (ORDER BY n) 
+    DENSE_RANK() OVER (ORDER BY n)
 FROM (
     SELECT 5 AS 'n'
     UNION ALL
@@ -112,7 +112,7 @@ The following example uses two different window definitions:
 2. `PARTITION BY n <= 2 ORDER BY n` resulting in two groups: `1, 2` and `3, 4` So this returns either 1 or 3 depending on which group it belongs to.
 
 ```sql
-SELECT 
+SELECT
     n,
     FIRST_VALUE(n) OVER (PARTITION BY n MOD 2 ORDER BY n),
     FIRST_VALUE(n) OVER (PARTITION BY n <= 2 ORDER BY n)
@@ -125,7 +125,7 @@ FROM (
     UNION
     SELECT 4
 ) a
-ORDER BY 
+ORDER BY
     n;
 ```
 
@@ -156,7 +156,7 @@ WITH RECURSIVE cte(n) AS (
     WHERE
         n<10
 )
-SELECT 
+SELECT
     n,
     LAG(n) OVER ()
 FROM
@@ -188,7 +188,7 @@ The `LAST_VALUE()` function returns the last value in the window.
 ```sql
 WITH RECURSIVE cte(n) AS (
     SELECT
-        1 
+        1
     UNION
     SELECT
         n+1
@@ -272,7 +272,7 @@ The `NTH_VALUE(expr, n)` function returns the `n`-th value of the window.
 ```sql
 WITH RECURSIVE cte(n) AS (
     SELECT
-        1 
+        1
     UNION
     SELECT
         n+1
@@ -361,7 +361,7 @@ FROM
 The `PERCENT_RANK()` function returns a number between 0 and 1 indicating the percentage of rows with a value less than the current window.
 
 ```sql
-SELECT 
+SELECT
     *,
     PERCENT_RANK() OVER (ORDER BY n),
     PERCENT_RANK() OVER (ORDER BY n DESC)
@@ -395,13 +395,13 @@ FROM (
 
 ## [`RANK()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_rank)
 
-The `RANK()` function is similar to [`DENSE_RANK()`](#dense_rank) but will leave any gaps in case of ties.
+The `RANK()` function is similar to [`DENSE_RANK()`](#dense_rank) but will leave any gaps in case of ties. This means it provides an absolute ranking. For example a rank of 7 means that there are 6 with a lower rank.
 
 ```sql
-SELECT 
+SELECT
     *,
     RANK() OVER (ORDER BY n),
-    DENSE_RANK() OVER (ORDER BY n) 
+    DENSE_RANK() OVER (ORDER BY n)
 FROM (
     SELECT 5 AS 'n'
     UNION ALL
