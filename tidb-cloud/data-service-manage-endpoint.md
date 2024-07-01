@@ -75,7 +75,7 @@ To create an endpoint manually, perform the following steps:
 
 ### Add a predefined system endpoint
 
-Data Service provides an endpoint library with a list of predefined system endpoints to reduce your effort of endpoint creation. Currently, the library only includes the `/system/query` endpoint, which offers the capability to execute any SQL statements.
+Data Service provides an endpoint library with predefined system endpoints that you can directly add to your Data App, reducing the effort in your endpoint development. Currently, the library only includes the `/system/query` endpoint, which offers the capability to execute any SQL statements.
 
 To add a predefined system endpoint to your Data App, perform the following steps:
 
