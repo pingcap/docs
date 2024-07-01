@@ -80,6 +80,7 @@ Data Service provides an endpoint library with predefined system endpoints that 
 To add a predefined system endpoint to your Data App, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+
 2. In the left pane, locate your target Data App, click **+** to the right of the App name, and then click **Manage Endpoint Library**.
 
     A dialog for endpoint library management is displayed. Currently, only **Execute Query** (that is, the `/system/query` endpoint) is provided in the dialog.
@@ -95,7 +96,7 @@ To add a predefined system endpoint to your Data App, perform the following step
     > **Note:**
     >
     > - After you click **Save**, the added or removed endpoint is deployed to production immediately, which makes the added endpoint accessible and the removed endpoint inaccessible immediately.
-    > - If a non-predefined endpoint with the same path and method already exists in the current app, the creation of the system endpoint will fail.
+    > - If a non-predefined endpoint with the same path and method already exists in the current App, the creation of the system endpoint will fail.
 
     The added system-provided endpoint is displayed at the top of the endpoint list.
 
@@ -107,8 +108,8 @@ To add a predefined system endpoint to your Data App, perform the following step
 
     - Endpoint name: the endpoint name and path is `/system/query`, and the request method `POST`.
     - SQL statements: the `/system/query` endpoint does not come with any SQL statement. You can find the SQL editor in the middle section of the page and write your desired SQL statements in the SQL editor. Note that the SQL statements written in the SQL editor for the `/system/query` endpoint will be saved in the SQL editor so you can further develop and test them next time but they will not be saved in the endpoint configuration.
-    - Endpoint properties: unlike other custom endpoints, only the `timeout` and `max rows` properties can be customized for system endpoints.
-    - Endpoint parameters: the endpoint parameters are configured automatically and cannot be modified.
+    - Endpoint properties: in the right pane of the page, you can find the endpoint properties on the **Properties** tab. Unlike other custom endpoints, only the `timeout` and `max rows` properties can be customized for system endpoints.
+    - Endpoint parameters: in the right pane of the page, you can find the endpoint parameters on the **Params** tab. The parameters of the `/system/query` endpoint are configured automatically and cannot be modified.
 
 ## Develop an endpoint
 
