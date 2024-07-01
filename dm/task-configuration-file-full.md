@@ -140,7 +140,7 @@ loaders:
     #   (https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode-usage#conflict-detection).
     #   Conflicting data is not resolved in this method. "none" has the best performance, but
     #   might lead to inconsistent data in the downstream database.
-    # - "manual". Corresponds to the "remove" strategy of conflict detection in TiDB Lightning's physical import.
+    # - "manual". Corresponds to the "replace" strategy of conflict detection in TiDB Lightning's physical import.
     #   (https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode-usage#conflict-detection).
     #   When the import encounter conflicting data, DM removes all conflicting records from
     #   the target table and records the data in the `${meta-schema}_${name}.conflict_error_v3`
