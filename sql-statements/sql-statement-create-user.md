@@ -166,8 +166,10 @@ SELECT USER, HOST, USER_ATTRIBUTES FROM MYSQL.USER WHERE USER='newuser7';
 
 The following `CREATE USER` options are not yet supported by TiDB, and will be parsed but ignored:
 
-* TiDB does not support `WITH MAX_QUERIES_PER_HOUR`, `WITH MAX_UPDATES_PER_HOUR`, and `WITH MAX_USER_CONNECTIONS` options.
-* TiDB does not support `PASSWORD REQUIRE CURRENT DEFAULT`.
+* `PASSWORD REQUIRE CURRENT DEFAULT`
+* `WITH MAX_QUERIES_PER_HOUR`
+* `WITH MAX_UPDATES_PER_HOUR`
+* `WITH MAX_USER_CONNECTIONS`
 
 The following `CREATE USER` options are also not supported by TiDB, and are *not* accepted by the parser:
 
