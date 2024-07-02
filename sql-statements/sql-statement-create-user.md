@@ -169,10 +169,10 @@ The following `CREATE USER` options are not yet supported by TiDB, and will be p
 * TiDB does not support `WITH MAX_QUERIES_PER_HOUR`, `WITH MAX_UPDATES_PER_HOUR`, and `WITH MAX_USER_CONNECTIONS` options.
 * TiDB does not support `PASSWORD REQUIRE CURRENT DEFAULT`.
 
-In addition to that these options are also not supported by TiDB, and are *not* accepted by the parser:
+The following `CREATE USER` options are also not supported by TiDB, and are *not* accepted by the parser:
 
-* TiDB does not support the `DEFAULT ROLE` option.
-* TiDB does not support `PASSWORD REQUIRE CURRENT OPTIONAL`.
+* `DEFAULT ROLE`
+* `PASSWORD REQUIRE CURRENT OPTIONAL`
 
 ## See also
 
