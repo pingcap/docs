@@ -20,7 +20,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Enhance slow query data storage.
 
-    The slow query access on [TiDB Cloud console](https://tidbcloud.com) is now more stable and does not impact database performance.
+    The slow query access on the [TiDB Cloud console](https://tidbcloud.com) is now more stable and does not affect database performance.
 
 ## June 25, 2024
 
