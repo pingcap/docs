@@ -31,7 +31,24 @@ SelectStmtOpts ::=
     SelectStmtStraightJoin
 
 TableRefsClause ::=
-    TableRef AsOfClause? ( ',' TableRef AsOfClause? )*
+    TableRef ( ',' TableRef )*
+
+TableRef ::=
+    TableFactor
+|   JoinTable
+
+TableFactor ::=
+    TableName ( "PARTITION" "(" Identifier ("," Identifier)* ")" )? ("AS" TableAlias)? AsOfClause? TableSample?
+
+JoinTable ::=
+    ( TableRef ("INNER" | "CROSS")? "JOIN" ) TableRef JoinClause?
+    ( TableRef "STRAIGHT_JOIN" TableRef "ON" Expression
+    | TableRef ( ("LEFT" | "RIGHT") "OUTER"? "JOIN" ) TableRef JoinClause
+    | TableRef "NATURAL" ("LEFT" | "RIGHT") "OUTER"? "JOIN" )
+
+JoinClause ::=
+    ("ON" Expression
+    | "USING" "(" ColumnNameList ")" )
 
 AsOfClause ::=
     'AS' 'OF' 'TIMESTAMP' Expression
@@ -47,10 +64,19 @@ SelectLockOpt ::=
 TableList ::=
     TableName ( ',' TableName )*
 
+WhereClause ::=
+    "WHERE" Expression
+
+GroupByClause ::=
+    "GROUP" "BY" Expression
+
+OrderBy ::=
+    "ORDER" "BY" Expression
+
 WindowClause ::=
     "WINDOW" WindowDefinition ("," WindowDefinition)*
 
-TableSampleOpt ::=
+TableSample ::=
     'TABLESAMPLE' 'REGIONS' '(' ')'
 ```
 
