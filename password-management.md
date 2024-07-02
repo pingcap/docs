@@ -33,7 +33,7 @@ Password complexity check is disabled by default in TiDB. By configuring system 
 The password complexity policy has the following features:
 
 - For SQL statements that set user passwords in plaintext (including `CREATE USER`, `ALTER USER`, and `SET PASSWORD`), TiDB checks the passwords against the password complexity policy. If a password does not meet the requirements, the password is rejected.
-- You can use the SQL function [`VALIDATE_PASSWORD_STRENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_validate-password-strength) to validate the password strength.
+- You can use the SQL function [`VALIDATE_PASSWORD_STRENGTH()`](/functions-and-operators/encryption-and-compression-functions.md#validate_password_strength) to validate the password strength.
 
 > **Note:**
 >
@@ -136,13 +136,13 @@ ERROR 1819 (HY000): Require Password Length: 8
 
 ### Password strength validation function
 
-To check the password strength, you can use the `VALIDATE_PASSWORD_STRENGTH()` function. This function accepts a password argument and returns an integer from 0 (weak) to 100 (strong).
+To check the password strength, you can use the [`VALIDATE_PASSWORD_STRENGTH()`](/functions-and-operators/encryption-and-compression-functions.md#validate_password_strength) function. This function accepts a password argument and returns an integer from 0 (weak) to 100 (strong).
 
 > **Note:**
 >
 > This function evaluates the password strength based on the current password complexity policy. If the password complexity policy is changed, the same password might get different evaluation results.
 
-The following example shows how to use the `VALIDATE_PASSWORD_STRENGTH()` function:
+The following example shows how to use the `[`VALIDATE_PASSWORD_STRENGTH()`](/functions-and-operators/encryption-and-compression-functions.md#validate_password_strength) function:
 
 ```sql
 mysql> SELECT VALIDATE_PASSWORD_STRENGTH('weak');
