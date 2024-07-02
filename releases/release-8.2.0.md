@@ -45,14 +45,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 
 ## Feature details
 
-### Scalability
-
-* 功能标题 [#issue号](链接) @[贡献者 GitHub ID](链接) **tw@xxx** <!--1234-->
-
-    功能描述（需要包含这个功能是什么、在什么场景下对用户有什么价值、怎么用）
-
-    更多信息，请参考[用户文档](链接)。
-
 ### Performance
 
 * Support pushing down the following string functions to TiKV [#50601](https://github.com/pingcap/tidb/issues/50601) @[dbsid](https://github.com/dbsid) **tw@Oreoxmt** <!--1663-->
@@ -83,7 +75,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 
     SaaS or PaaS applications can have a large number of data tables, which not only slow down the loading speed of the initial statistics, but also increase the failure rate of load synchronization under high loads. The startup time of TiDB and the accuracy of the execution plan can be affected. In v8.2.0, TiDB optimizes the process of loading statistics from multiple perspectives, such as the concurrency model and memory allocation, to reduce latency, improve throughput, and avoid slow loading of statistics that affects business scaling.
 
-    Adaptive concurrent loading is now supported. By default, the configuration item [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540) is set to a `0`, and the concurrency of statistics loading is automatically selected based on the hardware specification. 
+    Adaptive concurrent loading is now supported. By default, the configuration item [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540) is set to a `0`, and the concurrency of statistics loading is automatically selected based on the hardware specification.
 
    For more information, see [documentation](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540).
 
@@ -133,7 +125,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 
 * Record the reason why an execution plan is not cached [#50618](https://github.com/pingcap/tidb/issues/50618) @[qw4990](https://github.com/qw4990) **tw@hfxsd** <!--1819-->
 
-    In some scenarios, you might want to cache most execution plans to save execution overhead and reduce latency. Currently, execution plan caching has some limitations on SQL. Execution plans of some SQL statements cannot be cached. It is difficult to identify the SQL statements that cannot be cached and the corresponding reasons. 
+    In some scenarios, you might want to cache most execution plans to save execution overhead and reduce latency. Currently, execution plan caching has some limitations on SQL. Execution plans of some SQL statements cannot be cached. It is difficult to identify the SQL statements that cannot be cached and the corresponding reasons.
 
     Therefore, starting from v8.2.0, new columns `PLAN_CACHE_UNQUALIFIED` and `PLAN_CACHE_UNQUALIFIED_LAST_REASON` are added to the system table [`STATEMENTS_SUMMARY`](/statement-summary-tables.md) to explain the reason why an execution plan cannot be cached, which can help you tune performance.
 
@@ -167,11 +159,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 
 * When using `IMPORT INTO` to import a CSV file, if you specify the `SPLIT_FILE` parameter to split a large CSV file into multiple small CSV files to improve concurrency and import performance, you need to explicitly specify the line terminator `LINES_TERMINATED_BY`. The values can be `\r`, `\n` or `\r\n`. Failure to specify a line terminator might result in an exception when parsing the CSV file data. [#37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
 
-* Before BR v8.2.0, performing [BR data restore](/br/backup-and-restore-overview.md) on a cluster with TiCDC replication tasks is not supported. Starting from v8.2.0, BR relaxes the restrictions on data restoration for TiCDC: if the BackupTS (the backup time) of the data to be restored is earlier than the changefeed [`CheckpointTS`](/ticdc/ticdc-architecture.md#checkpointts) (the timestamp that indicates the current replication progress), BR can proceed with the data restore normally. Considering that `BackupTS` is usually much earlier, it can be assumed that in most scenarios, BR supports restoring data for a cluster with TiCDC replication tasks.
+* Before BR v8.2.0, performing [BR data restore](/br/backup-and-restore-overview.md) on a cluster with TiCDC replication tasks is not supported. Starting from v8.2.0, BR relaxes the restrictions on data restoration for TiCDC: if the BackupTS (the backup time) of the data to be restored is earlier than the changefeed [`CheckpointTS`](/ticdc/ticdc-architecture.md#checkpointts) (the timestamp that indicates the current replication progress), BR can proceed with the data restore normally. Considering that `BackupTS` is usually much earlier, it can be assumed that in most scenarios, BR supports restoring data for a cluster with TiCDC replication tasks. [#53131](https://github.com/pingcap/tidb/issues/53131) @[YuJuncen](https://github.com/YuJuncen) **tw@qiancai** <!--1843-->
 
 ### MySQL compatibility
 
-* Before v8.1.0, executing the [`CREATE USER`](/sql-statements/sql-statement-create-user.md) statement with the `PASSWORD REQUIRE CURRENT DEFAULT` option returns an error because this option is not supported and cannot be parsed. Starting from v8.1.0, TiDB supports parsing and ignoring this option for compatibility with MySQL. [#53305](https://github.com/pingcap/tidb/issues/53305) @[https://github.com/dveeden](dveeden)
+* Before v8.1.0, executing the [`CREATE USER`](/sql-statements/sql-statement-create-user.md) statement with the `PASSWORD REQUIRE CURRENT DEFAULT` option returns an error because this option is not supported and cannot be parsed. Starting from v8.1.0, TiDB supports parsing and ignoring this option for compatibility with MySQL. [#53305](https://github.com/pingcap/tidb/issues/53305) @[dveeden](https://github.com/dveeden)
 
 ### System variables
 
@@ -180,11 +172,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 | [`tidb_analyze_distsql_scan_concurrency`](/system-variables.md#tidb_analyze_distsql_scan_concurrency-new-in-v760) | Modified  |  Changes the minimum value from `1` to `0`. When you set it to `0`, TiDB adaptively adjusts the concurrency based on the cluster size.**tw@hfxsd** <!--xxx--> |
 | [`tidb_analyze_skip_column_types`](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720) | Modified  | Starting from v8.2.0, TiDB does not collect columns of `mediumtext` and `longtext` types by default to avoid potential OOM risks. **tw@hfxsd** <!--1759--> |
 | [`tidb_enable_historical_stats`](/system-variables.md#tidb_enable_historical_stats) | Modified   |  Changes the default value from `ON` to `OFF`, which turns off historical statistics to avoid potential stability issues. **tw@hfxsd** <!--1759--> |
-| [`tidb_executor_concurrency`](/system-variables.md#tidb_executor_concurrency-new-in-v50) | Modified | Add support for setting the concurrency of the `sort` operator. |
+| [`tidb_executor_concurrency`](/system-variables.md#tidb_executor_concurrency-new-in-v50) | Modified | Adds support for setting the concurrency of the `sort` operator. |
 | [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) | Newly added | Controls whether privilege control is applied to the [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md) statement and the [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name) optimizer hint. **tw@lilin90** <!--1740--> |
 | [`tidb_sysproc_scan_concurrency`](/system-variables.md#tidb_sysproc_scan_concurrency-new-in-v650) | Modified    | Changes the minimum value from `1` to `0`. When you set it to `0`, TiDB adaptively adjusts the concurrency based on the cluster size.**tw@hfxsd** <!--xxx--> |
-|        |                              |      |
-|        |                              |      |
 
 ### Configuration file parameters
 
@@ -192,17 +182,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 | -------- | -------- | -------- | -------- |
 | TiDB | [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540) | Modified | Changes the default value from `5` to `0`, and the minimum value from `1` to `0`. The value `0` means the automatic mode, which adjusts concurrency based on the configuration of the server. |
 | TiDB | [`token-limit`](/tidb-configuration-file.md#token-limit) | Modified | Changes the maximum value from `18446744073709551615` (64-bit platform) and `4294967295` (32-bit platform) to `1048576` to avoid causing TiDB Server OOM when setting it too large. It means that the number of sessions that can execute requests concurrently can be configured to a maximum of `1048576`. |
+| TiKV | [`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type) | Modified | This configuration item now also controls the compression algorithm of response messages sent from TiKV to TiDB. Enabling compression might consume more CPU resources. |
 | TiKV | [`max-apply-unpersisted-log-limit`](/tikv-configuration-file.md#max-apply-unpersisted-log-limit-new-in-v820) | Newly added | Controls the maximum number of committed but not persisted Raft logs that can be applied。 The default value is `1024`. |
-| TiKV | [`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type) | Modified | This configuration item now also controls the compression algorithm of response messages sent from TiKV to TiDB. Enabling compression might consume more CPU resources. | 
 | TiFlash | [`security.redact_info_log`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | Modified | Introduces a new value option `marker`. When this option is enabled, all user data in the log is wrapped in `‹ ›`. |
 
-### System tables
-
-### Other changes
+### Compiler versions
 
 To improve the TiFlash development experience, the minimum version of LLVM required to compile and build TiDB has been upgraded from 13.0 to 17.0. If you are a TiDB developer, you need to upgrade the version of your LLVM compiler to ensure a smooth build. [#7193](https://github.com/pingcap/tiflash/issues/7193) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-
-## Offline package changes
 
 ## Deprecated features
 
