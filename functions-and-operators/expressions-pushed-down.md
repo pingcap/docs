@@ -10,6 +10,10 @@ When TiDB reads data from TiKV, TiDB tries to push down some expressions (includ
 
 TiFlash also supports pushdown for the functions and operators [listed on this page](/tiflash/tiflash-supported-pushdown-calculations.md).
 
+> **Note**:
+>
+> The Aggregate functions don't support pushdown when used as [`window function`](/functions-and-operators/window-functions.md).
+
 ## Supported expressions for pushdown to TiKV
 
 | Expression Type | Operations |
@@ -26,6 +30,7 @@ TiFlash also supports pushdown for the functions and operators [listed on this p
 | [Encryption and compression functions](/functions-and-operators/encryption-and-compression-functions.md#encryption-and-compression-functions) | [MD5()](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_md5), [SHA1(), SHA()](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_sha1), [UNCOMPRESSED_LENGTH()](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_uncompressed-length) |
 | [Cast functions and operators](/functions-and-operators/cast-functions-and-operators.md#cast-functions-and-operators) | [CAST()](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast), [CONVERT()](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_convert) |
 | [Miscellaneous functions](/functions-and-operators/miscellaneous-functions.md#supported-functions) | [UUID()](https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html#function_uuid) |
+| [Window Functions](/functions-and-operators/window-functions.md) | None |
 
 ## Blocklist specific expressions
 
