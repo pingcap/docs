@@ -110,7 +110,7 @@ Experience the capabilities of TiDB WITHOUT registration.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/education/" icon="cloud1" label="PingCAP Education">
+<DocHomeCard href="https://www.pingcap.com/education/" icon="cloud1" label="PingCAP Education">
 
 Learn TiDB and TiDB Cloud through well-designed online courses and instructor-led training.
 
@@ -128,19 +128,19 @@ Read great articles about TiDB and TiDB Cloud.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/videos/" icon="doc11" label="Videos">
+<DocHomeCard href="https://www.pingcap.com/videos/" icon="doc11" label="Videos">
 
 Watch a compilation of short videos describing TiDB and various use cases.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/event/" icon="events" label="Events">
+<DocHomeCard href="https://www.pingcap.com/event/" icon="events" label="Events">
 
 Learn about events hosted by PingCAP and the community.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/ebook-whitepaper/" icon="papers" label="eBooks & Papers">
+<DocHomeCard href="https://www.pingcap.com/ebook-whitepaper/" icon="papers" label="eBooks & Papers">
 
 Download eBooks and papers.
 
