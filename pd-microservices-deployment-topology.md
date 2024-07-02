@@ -81,9 +81,9 @@ For detailed descriptions of the configuration items in the preceding TiDB clust
 
 ### Key parameters
 
-- The instance-level `"-host"` configuration in `tso_servers` only supports IP address, not domain name.
+- The instance-level `host` configuration in `tso_servers` only supports IP address, not domain name.
 - For detailed descriptions of TSO configuration items, see [TSO configuration file](/tso-configuration-file.md).
-- The instance-level `"-host"` configuration in `scheduling_servers` only supports IP address, not domain name.
+- The instance-level `host` configuration in `scheduling_servers` only supports IP address, not domain name.
 - For detailed descriptions of Scheduling configuration items, see [Scheduling configuration file](/scheduling-configuration-file.md).
 
 > **Note:**

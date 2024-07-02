@@ -40,7 +40,7 @@ In addition, when the scheduling module is changed, you can update the `scheduli
 
 ## Usage
 
-PD microservices can be deployed using [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/) or [TiUP overview](/tiup/tiup-overview.md).
+PD microservices can be deployed using [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/) or [TiUP](/tiup/tiup-overview.md).
 
 <SimpleTab>
 <div label="TiDB Operator">
@@ -75,6 +75,8 @@ To deploy and configure PD microservices in a TiDB local cluster using TiUP Play
 
 </div>
 </SimpleTab>
+
+## Notes
 
 When deploying and using PD microservices, pay attention to the following:
 

@@ -213,7 +213,7 @@ For a cluster that has not enabled PD microservices, you can switch it to PD mic
     vi scale-out.yml
     ```
 
-    The following is an configuration example:
+    The following is a configuration example:
 
     ```ini
     tso_servers:
@@ -230,19 +230,19 @@ For a cluster that has not enabled PD microservices, you can switch it to PD mic
     tiup cluster edit-config <cluster-name>
     ```
 
-   Add `pd_mode: ms` to `global`:
+    Add `pd_mode: ms` to `global`:
 
     ```ini
     global:
-    user: tidb
-    ssh_port: 22
-    listen_host: 0.0.0.0
-    deploy_dir: /tidb-deploy
-    data_dir: /tidb-data
-    os: linux
-    arch: amd64
-    systemd_mode: system
-    pd_mode: ms
+      user: tidb
+       ssh_port: 22
+       listen_host: 0.0.0.0
+       deploy_dir: /tidb-deploy
+       data_dir: /tidb-data
+       os: linux
+       arch: amd64
+       systemd_mode: system
+       pd_mode: ms
     ```
 
 3. Perform a rolling update of the PD node configuration:
@@ -275,14 +275,14 @@ For a cluster with PD microservices enabled (assume that it has a TSO node at IP
 
     ```ini
     global:
-    user: tidb
-    ssh_port: 22
-    listen_host: 0.0.0.0
-    deploy_dir: /tidb-deploy
-    data_dir: /tidb-data
-    os: linux
-    arch: amd64
-    systemd_mode: system
+      user: tidb
+       ssh_port: 22
+       listen_host: 0.0.0.0
+       deploy_dir: /tidb-deploy
+       data_dir: /tidb-data
+       os: linux
+       arch: amd64
+       systemd_mode: system
     ```
 
 2. Run the `scale-in` command to remove all PD microservice nodes:
