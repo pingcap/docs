@@ -249,20 +249,19 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 
 + TiKV <!--tw@lilin90: 9 条-->
 
-    - Support pushing down the `json_merge_patch` function to TiKV [#16770](https://github.com/tikv/tikv/issues/16770) @[dbsid](https://github.com/dbsid)
     - Add a metric to show the number of SST files involved in a single compaction job [#16837](https://github.com/tikv/tikv/issues/16837) @[zhangjinpeng87](https://github.com/zhangjinpeng87)
-    - Enable the early apply feature by default. With this feature enabled, the Raft leader can apply logs after quorum peers have persisted the logs, without waiting for the leader itself to persist the log, reducing the impact of jitter in a few TiKV nodes on write request latency [#16717](https://github.com/tikv/tikv/issues/16717) @[glorv](https://github.com/glorv)
+    - Enable the [early apply](/tikv-configuration-file.md#max-apply-unpersisted-log-limit-new-in-v810) feature by default. With this feature enabled, the Raft leader can apply logs after quorum peers have persisted the logs, without waiting for the leader itself to persist the log, reducing the impact of jitter in a few TiKV nodes on write request latency [#16717](https://github.com/tikv/tikv/issues/16717) @[glorv](https://github.com/glorv)
     - Introduce a precheck mechanism before generating a snapshot to ensure that the snapshot is sent only when the follower is ready, improving the effectiveness of snapshot generation [#15972](https://github.com/tikv/tikv/issues/15972) @[hbisheng](https://github.com/hbisheng)
-    - 在 Raft 日志持久化之前，将 Raft 日志保留在缓存中，以提升 follower 对日志的读取性能 [#16717](https://github.com/tikv/tikv/issues/16717) @[glorv](https://github.com/glorv)
-    - 增加 Raft dropped messages 事件的可观测性，以便定位写入慢的根本原因 [#17093](https://github.com/tikv/tikv/issues/17093) @[Connor1996](https://github.com/Connor1996)
-    - 增加对 ingest file 的延迟可观测性，以便排查集群的延迟问题 [#17078](https://github.com/tikv/tikv/issues/17078) @[LykxSassinator](https://github.com/LykxSassinator)
-    - 利用单独的线程来进行副本清理工作，保证 Raft 读写关键路径的延迟稳定 [#16001](https://github.com/tikv/tikv/issues/16001) @[hbisheng](https://github.com/hbisheng)
-    - 提升正在进行 apply 的副本数的可观测性 [#17078](https://github.com/tikv/tikv/issues/17078) @[hbisheng](https://github.com/hbisheng)
+    - Keep Raft logs in cache before Raft log persistence to improve the read performance of logs by followers [#16717](https://github.com/tikv/tikv/issues/16717) @[glorv](https://github.com/glorv)
+    - Improve the observability of "Raft dropped messages" to locate the root cause of slow writes [#17093](https://github.com/tikv/tikv/issues/17093) @[Connor1996](https://github.com/Connor1996)
+    - Improve the observability of ingest files to troubleshoot cluster latency issues [#17078](https://github.com/tikv/tikv/issues/17078) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Use a separate thread to clean up Region replicas to ensure stable latency on critical Raft reads and writes [#16001](https://github.com/tikv/tikv/issues/16001) @[hbisheng](https://github.com/hbisheng)
+    - Improve the observability of the number of replicas being applied [#17078](https://github.com/tikv/tikv/issues/17078) @[hbisheng](https://github.com/hbisheng)
 
 + PD <!--tw@lilin90: 2 条-->
 
-    - 优化提升 Region 心跳处理的性能 [#7897](https://github.com/tikv/pd/issues/7897) @[nolouch](https://github.com/nolouch) @[rleungx](https://github.com/rleungx) @[JmPotato](https://github.com/JmPotato)
-    - pd-ctl 支持使用 byte 或 query 维度来进行热点 Region 查询 [#7369](https://github.com/tikv/pd/issues/7369) @[lhy1024](https://github.com/lhy1024)
+    - Improve the performance of Region heartbeat processing [#7897](https://github.com/tikv/pd/issues/7897) @[nolouch](https://github.com/nolouch) @[rleungx](https://github.com/rleungx) @[JmPotato](https://github.com/JmPotato)
+    - pd-ctl supports querying hot Regions by the byte or query dimension [#7369](https://github.com/tikv/pd/issues/7369) @[lhy1024](https://github.com/lhy1024)
 
 + TiFlash <!--tw@hfxsd: 5 条-->
 
@@ -339,19 +338,18 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
     - Fix the issue that the `TRACE` command is missing in `copr.buildCopTasks` [#53085](https://github.com/pingcap/tidb/issues/53085) @[time-and-fate](https://github.com/time-and-fate)
     - Fix the issue that bindings containing `memory_quota` might not work in subqueries [#53834](https://github.com/pingcap/tidb/issues/53834) @[qw4990](https://github.com/qw4990)
     - Fix the issue that improper use of metadata locks might lead to writing anomalous data when using the plan cache under certain circumstances [#53634](https://github.com/pingcap/tidb/issues/53634) @[zimulala](https://github.com/zimulala)
-+ TiKV <!--tw@lilin90: 以下 10 条-->
 
-    - 修复不稳定测试用例 test_raw_put_key_guard [#16825](https://github.com/tikv/tikv/issues/16825) @[pingyu](https://github.com/pingyu)
-    - 修复不稳定测试用例 test_rawkv::test_leader_transfer [#16789](https://github.com/tikv/tikv/issues/16789) @[pingyu](https://github.com/pingyu)
-    - 修复 json_array_append panic 问题 [#16930](https://github.com/tikv/tikv/issues/16930) @[dbsid](https://github.com/dbsid)
-    - 修复 leader 不及时清理失败的 snapshot 文件的问题 [#16976](https://github.com/tikv/tikv/issues/16976) @[hbisheng](https://github.com/hbisheng)
-    - 修复高并发 coprocessor 请求可能导致 TiKV OOM 的问题 [#16653](https://github.com/tikv/tikv/issues/16653) @[overvenus](https://github.com/overvenus)
-    - 修复在线变更 raftstore.periodic-full-compact-start-time 参数可能会 panic 的问题 [#17066](https://github.com/tikv/tikv/issues/17066) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
-    - 修复 `make docker` 和 `make docker_test` 失败的问题 [#17075](https://github.com/tikv/tikv/issues/17075) @[shunki-fujita](https://github.com/shunki-fujita)
-    - 修复 gRPC source duration 在监控中显示错误的问题 [#17133](https://github.com/tikv/tikv/issues/17133) @[King-Dylan](https://github.com/King-Dylan)
-    - 修复 gRPC 设置压缩方式对 TiKV 发送到 TiDB 的消息不起作用的问题 [#17176](https://github.com/tikv/tikv/issues/17176) @[ekexium](https://github.com/ekexium)
++ TiKV <!--tw@lilin90: 以下 8 条-->
+
+    - Fix the issue that pushing down the `json_array_append panic` function to TiKV causes TiKV to panic [#16930](https://github.com/tikv/tikv/issues/16930) @[dbsid](https://github.com/dbsid)
+    - Fix the issue that the leader does not clean up failed snapshot files in time [#16976](https://github.com/tikv/tikv/issues/16976) @[hbisheng](https://github.com/hbisheng)
+    - Fix the issue that high-concurrency Coprocessor requests might cause TiKV OOM [#16653](https://github.com/tikv/tikv/issues/16653) @[overvenus](https://github.com/overvenus)
+    - Fix the issue that changing the `raftstore.periodic-full-compact-start-time` configuration parameter online might cause TiKV to panic [#17066](https://github.com/tikv/tikv/issues/17066) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
+    - Fix the failure of `make docker` and `make docker_test` [#17075](https://github.com/tikv/tikv/issues/17075) @[shunki-fujita](https://github.com/shunki-fujita)
+    - Fix the issue that the "gRPC request sources duration" metric is displayed incorrectly in the monitoring dashboard [#17133](https://github.com/tikv/tikv/issues/17133) @[King-Dylan](https://github.com/King-Dylan)
+    - Fix the issue that setting the gRPC compression method does not take effect on messages sent from TiKV to TiDB [#17176](https://github.com/tikv/tikv/issues/17176) @[ekexium](https://github.com/ekexium)
     - (dup): release-7.5.2.md > 错误修复> TiKV - 修复 tikv-ctl 的 `raft region` 命令的输出中未包含 Region 状态信息的问题 [#17037](https://github.com/tikv/tikv/issues/17037) @[glorv](https://github.com/glorv)
-    - 修复 CDC 和 log-backup 没有用 `advance-ts-interval` 配置限制 `check_leader` 的 timeout 的问题，这在一些情况下可能导致 TiKV 正常重启时 resolved ts lag 过大 [#17107](https://github.com/tikv/tikv/issues/17107) @[MyonKeminta](https://github.com/MyonKeminta)
+    - Fix the issue that CDC and log-backup do not limit the timeout of `check_leader` using the `advance-ts-interval` configuration, causing the `resolved_ts` lag to be too large when TiKV restarts normally in some cases [#17107](https://github.com/tikv/tikv/issues/17107) @[MyonKeminta](https://github.com/MyonKeminta)
 
 + PD
 
