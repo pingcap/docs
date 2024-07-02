@@ -249,7 +249,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 
 + TiKV <!--tw@lilin90: 9 条-->
 
-    - Add a metric to show the number of SST files involved in a single compaction job [#16837](https://github.com/tikv/tikv/issues/16837) @[zhangjinpeng87](https://github.com/zhangjinpeng87)
+    - Add the **Compaction Job Size(files)** metric to show the number of SST files involved in a single compaction job [#16837](https://github.com/tikv/tikv/issues/16837) @[zhangjinpeng87](https://github.com/zhangjinpeng87)
     - Enable the [early apply](/tikv-configuration-file.md#max-apply-unpersisted-log-limit-new-in-v810) feature by default. With this feature enabled, the Raft leader can apply logs after quorum peers have persisted the logs, without waiting for the leader itself to persist the log, reducing the impact of jitter in a few TiKV nodes on write request latency [#16717](https://github.com/tikv/tikv/issues/16717) @[glorv](https://github.com/glorv)
     - Keep Raft logs in cache before Raft log persistence to improve the read performance of logs by followers [#16717](https://github.com/tikv/tikv/issues/16717) @[glorv](https://github.com/glorv)
     - Improve the observability of "Raft dropped messages" to locate the root cause of slow writes [#17093](https://github.com/tikv/tikv/issues/17093) @[Connor1996](https://github.com/Connor1996)
