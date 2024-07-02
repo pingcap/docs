@@ -137,8 +137,15 @@ Testing scenario 2 (on TiDB Self-Hosted) is as follows:
 - New log data created in the cluster: 10 GB/h
 - Write (INSERT/UPDATE/DELETE) QPS: 10,000
 
+## Monitoring and alert
+
+After log backup tasks are distributed, each TiKV node continuously writes data to external storage. You can view the monitoring data for this process in the **TiKV-Details > Backup Log** dashboard.
+
+To receive notifications metrics deviate from normal ranges, see [Log backup alerts](/br/br-monitoring-and-alert.md#log-backup-alerts) to configure alert rules.
+
 ## See also
 
 * [TiDB Backup and Restore Use Cases](/br/backup-and-restore-use-cases.md)
 * [br Command-line Manual](/br/use-br-command-line-tool.md)
 * [Log Backup and PITR Architecture](/br/br-log-architecture.md)
+* [Monitoring and Alert for Backup and Restore](/br/br-monitoring-and-alert.md)
