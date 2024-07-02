@@ -40,7 +40,7 @@ touch example.py
 In your project directory, run the following command to install the required packages:
 
 ```shell
-pip install sqlalchemy pymysql sentence-transformers tidb-vector
+pip install sqlalchemy pymysql sentence-transformers tidb-vector python-dotenv
 ```
 
 - `tidb-vector`: the Python client for interacting with Vector Search in TiDB Cloud.
