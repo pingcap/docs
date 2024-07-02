@@ -393,7 +393,7 @@ TiKV processes a write request in the following procedure:
     Raftstore consists of a `Store` thread and an `Apply` thread:
 
     - The `Store` thread processes Raft messages and new `proposals`. When a new `proposals` is received, the `Store` thread of the leader node writes to the local Raft DB and copies the message to multiple follower nodes. When this `proposals` is successfully persisted in most instances, the `proposals` is successfully committed.
-    - The `Apply` thread writes the committed `proposals` to the KV DB. When the content is successfully written to the KV DB, the `Apply` thread notifies externally that the write request has completed.
+    - The `Apply` thread writes the committed `proposals` to the KV DB. When the data is successfully written to the KV DB, the `Apply` thread notifies externally that the write request has completed.
 
 ![TiKV Write](/media/performance/store_apply.png)
 
