@@ -1,7 +1,6 @@
 ---
 title: FLASHBACK CLUSTER
 summary: Learn the usage of FLASHBACK CLUSTER in TiDB databases.
-aliases: ['/tidb/dev/sql-statement-flashback-to-timestamp']
 ---
 
 # FLASHBACK CLUSTER

@@ -1,7 +1,6 @@
 ---
 title: System Variables
 summary: Use system variables to optimize performance or alter running behavior.
-aliases: ['/tidb/dev/tidb-specific-system-variables','/docs/dev/system-variables/','/docs/dev/reference/configuration/tidb-server/mysql-variables/', '/docs/dev/tidb-specific-system-variables/','/docs/dev/reference/configuration/tidb-server/tidb-specific-variables/']
 ---
 
 # System Variables

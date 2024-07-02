@@ -1,6 +1,5 @@
 ---
 title: TiDB 2.0.1 Release Notes
-aliases: ['/docs/dev/releases/release-2.0.1/','/docs/dev/releases/201/']
 summary: TiDB 2.0.1 was released on May 16, 2018, with improvements in MySQL compatibility and system stability. Updates include real-time progress for 'Add Index', a new session variable for automatic statistics update, bug fixes, compatibility improvements, and behavior changes. PD added a new scheduler, optimized region balancing, and fixed various issues. TiKV fixed issues related to reading, thread calls, raftstore blocking, and split causing dirty read. Overall, the release focuses on enhancing performance, stability, and compatibility.
 ---
 

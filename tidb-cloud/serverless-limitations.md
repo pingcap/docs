@@ -1,7 +1,6 @@
 ---
 title: TiDB Serverless Limitations and Quotas
 summary: Learn about the limitations of TiDB Serverless.
-aliases: ['/tidbcloud/serverless-tier-limitations']
 ---
 
 # TiDB Serverless Limitations and Quotas

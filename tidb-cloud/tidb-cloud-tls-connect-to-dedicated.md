@@ -1,7 +1,6 @@
 ---
 title: TLS Connections to TiDB Dedicated
 summary: Introduce TLS connections in TiDB Dedicated.
-aliases: ['/tidbcloud/tidb-cloud-tls-connect-to-dedicated-tier']
 ---
 
 # TLS Connections to TiDB Dedicated

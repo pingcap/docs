@@ -1,7 +1,6 @@
 ---
 title: Software and Hardware Requirements for TiDB Data Migration
 summary: Learn the software and hardware requirements for DM cluster.
-aliases: ['/docs/tidb-data-migration/dev/hardware-and-software-requirements/']
 ---
 
 # Software and Hardware Requirements for TiDB Data Migration
