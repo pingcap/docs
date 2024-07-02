@@ -1,0 +1,346 @@
+---
+title: JSON Functions That Modify JSON Values
+summary: Learn about JSON functions that modify JSON values.
+---
+
+# JSON Functions That Modify JSON Values
+
+This document describes JSON functions that modify JSON values.
+
+## [JSON_APPEND()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-append)
+
+An alias to [`JSON_ARRAY_APPEND()`](#json_array_append).
+
+## [JSON_ARRAY_APPEND()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-append)
+
+The `JSON_ARRAY_APPEND(json_array, path, val)` function appends values to the end of the indicated arrays within a JSON document at the specified `path` and returns the result.
+
+This function takes arguments in pairs, where each pair is a `path` and a `value`.
+
+Examples:
+
+The following example adds an item to an array, which is the root of the JSON document.
+
+```sql
+SELECT JSON_ARRAY_APPEND('["Car", "Boat", "Train"]', '$', "Airplane") AS "Transport options";
+```
+
+```
++--------------------------------------+
+| Transport options                    |
++--------------------------------------+
+| ["Car", "Boat", "Train", "Airplane"] |
++--------------------------------------+
+1 row in set (0.00 sec)
+```
+
+The following example adds an item to an array at the specified path.
+
+```sql
+SELECT JSON_ARRAY_APPEND('{"transport_options": ["Car", "Boat", "Train"]}', '$.transport_options', "Airplane") AS "Transport options";
+```
+
+```
++-------------------------------------------------------------+
+| Transport options                                           |
++-------------------------------------------------------------+
+| {"transport_options": ["Car", "Boat", "Train", "Airplane"]} |
++-------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+## [JSON_ARRAY_INSERT()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-insert)
+
+The `JSON_ARRAY_INSERT(json_array, path, value [,path, value] ...)` function inserts a `value` into the specified position of the `json_array` in the `path` and returns the result.
+
+This function takes arguments in pairs, where each pair is a `path` and a `value`.
+
+Examples:
+
+In the following example, add a value at position 0 of the array.
+
+```sql
+SELECT JSON_ARRAY_INSERT('["Car", "Boat", "Train"]', '$[0]', "Airplane") AS "Transport options";
+```
+
+```
++--------------------------------------+
+| Transport options                    |
++--------------------------------------+
+| ["Airplane", "Car", "Boat", "Train"] |
++--------------------------------------+
+1 row in set (0.01 sec)
+```
+
+In the following example, add a value at position 1 of the array.
+
+```sql
+SELECT JSON_ARRAY_INSERT('["Car", "Boat", "Train"]', '$[1]', "Airplane") AS "Transport options";
+```
+
+```
++--------------------------------------+
+| Transport options                    |
++--------------------------------------+
+| ["Car", "Airplane", "Boat", "Train"] |
++--------------------------------------+
+1 row in set (0.00 sec)
+```
+
+## [JSON_INSERT()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-insert)
+
+The `JSON_INSERT(json_doc, path, value [,path, value] ...)` function inserts one or more values into a JSON document and returns the result.
+
+This function takes arguments in pairs, where each pair is a `path` and a `value`.
+
+```sql
+SELECT JSON_INSERT(
+    '{"language": ["Go", "Rust", "C++"]}',
+    '$.architecture', 'riscv',
+    '$.os', JSON_ARRAY("linux","freebsd")
+) AS "Demo";
+```
+
+```
++------------------------------------------------------------------------------------------+
+| Demo                                                                                     |
++------------------------------------------------------------------------------------------+
+| {"architecture": "riscv", "language": ["Go", "Rust", "C++"], "os": ["linux", "freebsd"]} |
++------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+Note that this function does not overwrite existing attributes as can be seen in the following example that tries to overwrite the `"a"` attribute.
+
+```sql
+SELECT JSON_INSERT('{"a": 61, "b": 62}', '$.a', 41, '$.c', 63);
+```
+
+```
++---------------------------------------------------------+
+| JSON_INSERT('{"a": 61, "b": 62}', '$.a', 41, '$.c', 63) |
++---------------------------------------------------------+
+| {"a": 61, "b": 62, "c": 63}                             |
++---------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+## [JSON_MERGE_PATCH()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge-patch)
+
+The `JSON_MERGE_PATCH(json_doc, json_doc [,json_doc] ...)` function merges two or more JSON documents by patching existing attributes and returns the merged result.
+
+Examples:
+
+In the following example you can see that the value of `a` gets overwritten by argument 2 and that `c` is added as a new attribute.
+
+```sql
+SELECT JSON_MERGE_PATCH(
+    '{"a": 1, "b": 2}',
+    '{"a": 100}',
+    '{"c": 300}'
+);
+```
+
+```
++-----------------------------------------------------------------+
+| JSON_MERGE_PATCH('{"a": 1, "b": 2}','{"a": 100}', '{"c": 300}') |
++-----------------------------------------------------------------+
+| {"a": 100, "b": 2, "c": 300}                                    |
++-----------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+## [JSON_MERGE_PRESERVE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge-preserve)
+
+The `JSON_MERGE_PRESERVE(json_doc, json_doc [,json_doc] ...)` function merges two or more JSON documents by appending to existing attributes and returns the merged result.
+
+Examples:
+
+In the following example you can see that the value of argument 2 is appended to `a` and that `c` is added as a new attribute.
+
+```sql
+SELECT JSON_MERGE_PRESERVE('{"a": 1, "b": 2}','{"a": 100}', '{"c": 300}');
+```
+
+```
++--------------------------------------------------------------------+
+| JSON_MERGE_PRESERVE('{"a": 1, "b": 2}','{"a": 100}', '{"c": 300}') |
++--------------------------------------------------------------------+
+| {"a": [1, 100], "b": 2, "c": 300}                                  |
++--------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+## [JSON_MERGE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge)
+
+> **Warning:**
+>
+> This function is deprecated.
+
+A deprecated alias for [`JSON_MERGE_PRESERVE()`](#json_merge_preserve).
+
+## [JSON_REMOVE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-remove)
+
+The `JSON_REMOVE(json_doc, path [,path] ...)` function removes `path` from a JSON document and returns the result.
+
+Examples:
+
+This example removes the `b` attribute from the JSON document.
+
+```sql
+SELECT JSON_REMOVE('{"a": 61, "b": 62, "c": 63}','$.b');
+```
+
+```
++--------------------------------------------------+
+| JSON_REMOVE('{"a": 61, "b": 62, "c": 63}','$.b') |
++--------------------------------------------------+
+| {"a": 61, "c": 63}                               |
++--------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+This example removes the `b` and `c` attributes from the JSON document.
+
+```sql
+SELECT JSON_REMOVE('{"a": 61, "b": 62, "c": 63}','$.b','$.c');
+```
+
+```
++--------------------------------------------------------+
+| JSON_REMOVE('{"a": 61, "b": 62, "c": 63}','$.b','$.c') |
++--------------------------------------------------------+
+| {"a": 61}                                              |
++--------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+## [JSON_REPLACE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-replace)
+
+The `JSON_REPLACE(json_doc, path, value [, path, value] ...)` function replaces existing values in a JSON document and returns the result. If the specified path does not exist, it is not added to the result.
+
+This function takes arguments in pairs, where each pair is a `path` and a `value`.
+
+Examples:
+
+In the following example, you change the value at `$.b` from `62` to `42`.
+
+```sql
+SELECT JSON_REPLACE('{"a": 41, "b": 62}','$.b',42);
+```
+
+```
++---------------------------------------------+
+| JSON_REPLACE('{"a": 41, "b": 62}','$.b',42) |
++---------------------------------------------+
+| {"a": 41, "b": 42}                          |
++---------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the following example, you can change the value at `$.b` from `62` to `42`. In addition to this, you can replace the value at `$.c` with `43`. Because it does not exist in `json_doc`, the result is not changed.
+
+```sql
+SELECT JSON_REPLACE('{"a": 41, "b": 62}','$.b',42,'$.c',43);
+```
+
+```
++------------------------------------------------------+
+| JSON_REPLACE('{"a": 41, "b": 62}','$.b',42,'$.c',43) |
++------------------------------------------------------+
+| {"a": 41, "b": 42}                                   |
++------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+## [JSON_SET()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-set)
+
+The `JSON_SET(json_doc, path, value [,path, value] ...)` function inserts or updates data in a JSON document and returns the result.
+
+This function takes arguments in pairs, where each pair is a `path` and a `value`.
+
+Examples:
+
+In the following example, you can update the `$.version` from `1.1` to `1.2`.
+
+```sql
+SELECT JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2);
+```
+
+```
++-----------------------------------------------------------------+
+| JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2) |
++-----------------------------------------------------------------+
+| {"name": "example", "version": 1.2}                             |
++-----------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In the following example, you update the `$.version` from `1.1` to `1.2`. And you update `$.branch`, which is not present before, to `main`.
+
+```sql
+SELECT JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2,'$.branch', "main");
+```
+
+```
++------------------------------------------------------------------------------------+
+| JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2,'$.branch', "main") |
++------------------------------------------------------------------------------------+
+| {"branch": "main", "name": "example", "version": 1.2}                              |
++------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+## [JSON_UNQUOTE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-unquote)
+
+The `JSON_UNQUOTE(json)` function unquotes a JSON value and returns the result as a string. This is the opposite of the [`JSON_QUOTE()`](/functions-and-operators/json-functions/json-functions-create.md#json_quote) function.
+
+Examples:
+
+In the example `"foo"` is unquoted to `foo`.
+
+```sql
+SELECT JSON_UNQUOTE('"foo"');
+```
+
+```
++-----------------------+
+| JSON_UNQUOTE('"foo"') |
++-----------------------+
+| foo                   |
++-----------------------+
+1 row in set (0.00 sec)
+```
+
+This function is often used together with [`JSON_EXTRACT()`](/functions-and-operators/json-functions/json-functions-search.md#json_extract). In the following example, you first extract a value, which is quoted, and in the second example you combine this to unquote the value. Note that instead of `JSON_UNQUOTE(JSON_EXTRACT(...))`, you can use the [`->>`](/functions-and-operators/json-functions/json-functions-search.md#--1) shorthand.
+
+```sql
+SELECT JSON_EXTRACT('{"database": "TiDB"}', '$.database');
+```
+
+```
++----------------------------------------------------+
+| JSON_EXTRACT('{"database": "TiDB"}', '$.database') |
++----------------------------------------------------+
+| "TiDB"                                             |
++----------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+```sql
+SELECT JSON_UNQUOTE(JSON_EXTRACT('{"database": "TiDB"}', '$.database'));
+```
+
+```
++------------------------------------------------------------------+
+| JSON_UNQUOTE(JSON_EXTRACT('{"database": "TiDB"}', '$.database')) |
++------------------------------------------------------------------+
+| TiDB                                                             |
++------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+## See also
+
+- [JSON Functions Overview](/functions-and-operators/json-functions.md)
+- [JSON Data Type](/data-type-json.md)
