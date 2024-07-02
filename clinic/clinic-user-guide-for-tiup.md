@@ -323,7 +323,7 @@ You can have a quick check on the cluster status locally using Diag. Even if you
     The following is the details of the abnormalities.
 
     ### Diagnostic result summary
-    The configuration rules are all derived from PingCAP’s OnCall Service.
+    The configuration rules are all derived from PingCAP's OnCall Service.
 
     If the results of the configuration rules are found to be abnormal, they may cause the cluster to fail.
 

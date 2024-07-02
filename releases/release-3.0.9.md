@@ -38,7 +38,7 @@ TiDB Ansible version: 3.0.9
 + Raftstore
     - Speed up the configuration change to speed up the Region scattering [#6421](https://github.com/tikv/tikv/pull/6421)
 + Transaction
-    - Add the `tikv_lock_manager_waiter_lifetime_duration`, `tikv_lock_manager_detect_duration`, and `tikv_lock_manager_detect_duration` monitoring metrics to monitor `waiter`s’ lifetime, the time cost of detecting deadlocks, and the status of `Wait` table [#6392](https://github.com/tikv/tikv/pull/6392)
+    - Add the `tikv_lock_manager_waiter_lifetime_duration`, `tikv_lock_manager_detect_duration`, and `tikv_lock_manager_detect_duration` monitoring metrics to monitor `waiter`s' lifetime, the time cost of detecting deadlocks, and the status of `Wait` table [#6392](https://github.com/tikv/tikv/pull/6392)
     - Optimize the following configuration items to reduce transaction execution latency caused by changing Region leader or the leader of deadlock detector in extreme situations [#6429](https://github.com/tikv/tikv/pull/6429)
         - Change the default value of `wait-for-lock-time` from `3s` to `1s`
         - Change the default value of `wake-up-delay-duration` from `100ms` to `20ms`

@@ -23,7 +23,7 @@ On September 14, 2018, TiDB 2.1 RC2 is released. Compared with TiDB 2.1 RC1, thi
     * Optimize the performance of Hash aggregate operators [#7541](https://github.com/pingcap/tidb/pull/7541)
     * Optimize the performance of Join operators [#7493](https://github.com/pingcap/tidb/pull/7493), [#7433](https://github.com/pingcap/tidb/pull/7433)
     * Fix the issue that the result of `UPDATE JOIN` is incorrect when the Join order is changed [#7571](https://github.com/pingcap/tidb/pull/7571)
-    * Improve the performance of Chunk’s iterator [#7585](https://github.com/pingcap/tidb/pull/7585)
+    * Improve the performance of Chunk's iterator [#7585](https://github.com/pingcap/tidb/pull/7585)
 * Statistics
     * Fix the issue that the auto Analyze work repeatedly analyzes the statistics [#7550](https://github.com/pingcap/tidb/pull/7550)
     * Fix the statistics update error that occurs when there is no statistics change [#7530](https://github.com/pingcap/tidb/pull/7530)
@@ -46,7 +46,7 @@ On September 14, 2018, TiDB 2.1 RC2 is released. Compared with TiDB 2.1 RC1, thi
     * Use different labels to filter internal SQL and user SQL in monitoring metrics [#7631](https://github.com/pingcap/tidb/pull/7631)
     * Store the top 30 slow queries in the last week to the TiDB server [#7646](https://github.com/pingcap/tidb/pull/7646)
     * Put forward a proposal of setting the global system time zone for the TiDB cluster [#7656](https://github.com/pingcap/tidb/pull/7656)
-    * Enrich the error message of “GC life time is shorter than transaction duration” [#7658](https://github.com/pingcap/tidb/pull/7658)
+    * Enrich the error message of "GC life time is shorter than transaction duration" [#7658](https://github.com/pingcap/tidb/pull/7658)
     * Set the global system time zone when starting the TiDB cluster [#7638](https://github.com/pingcap/tidb/pull/7638)
 * Compatibility
     * Add the unsigned flag for the `Year` type [#7542](https://github.com/pingcap/tidb/pull/7542)
