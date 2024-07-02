@@ -30,6 +30,12 @@ Batch Create Table is a feature introduced in TiDB v6.0.0. This feature is enabl
 
 Baseline Capturing captures queries that meet capturing conditions and create bindings for them. It is used for [preventing regression of execution plans during an upgrade](/sql-plan-management.md#prevent-regression-of-execution-plans-during-an-upgrade).
 
+### Binlog
+
+Binlog is short for binary logging. In MySQL and MariaDB, it is used to record changes in table structure (such as `CREATE` and `ALTER TABLE` statements) and table data (such as `INSERT`, `DELETE`, and `UPDATE` statements). The binlogs can be used to replace data or as part of a point-in-time recovery procedure. The binary log is what [Data Migration](/dm/dm-overview.md) uses to fetch changes from MySQL or MariaDB.
+
+In TiDB, there is [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) that performed similar functions in TiDB; however, it has been deprecated and replaced by [PITR](/br/br-pitr-guide.md) and [TiCDC](/ticdc/ticdc-overview.md).
+
 ### Bucket
 
 A [Region](#regionpeerraft-group) is logically divided into several small ranges called bucket. TiKV collects query statistics by buckets and reports the bucket status to PD. For details, see the [Bucket design doc](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md#bucket).
@@ -40,19 +46,69 @@ A [Region](#regionpeerraft-group) is logically divided into several small ranges
 
 With the cached table feature, TiDB loads the data of an entire table into the memory of the TiDB server, and TiDB directly gets the table data from the memory without accessing TiKV, which improves the read performance.
 
+### Cluster
+
+A set of nodes that form a group that fulfills a common task of providing a platform that provides services. A cluster typically includes different type of nodes, for example, a TiDB cluster usually consists of TiDB nodes, TiKV nodes, and PD nodes, and a DM cluster usually consists of DM Master nodes and DM Worker nodes.
+
 ### Coalesce Partition
 
 Coalesce Partition is a way of decreasing the number of partitions in a Hash or Key partitioned table. For more information, see [Manage Hash and Key partitions](/partitioned-table.md#manage-hash-and-key-partitions).
+
+### Common table expression (CTE)
+
+A Common Table Expression (CTE) is a temporary result set that can be referred to multiple times within a SQL statement to improve the statement readability and execution efficiency. You can use the [`WITH` statement](/sql-statements/sql-statement-with.md) to use CTEs.
+
+Common Table Expressions can be classified into two types: non-recursive CTE and recursive CTE.
+
+For details, see [Common Table Expression (CTE)](/develop/dev-guide-use-common-table-expression.md).
 
 ### Continuous Profiling
 
 Introduced in TiDB 5.3.0, Continuous Profiling is a way to observe resource overhead at the system call level. With the support of Continuous Profiling, TiDB provides performance insight as clear as directly looking into the database source code, and helps R&D and operation and maintenance personnel to locate the root cause of performance problems using a flame graph. For details, see [TiDB Dashboard Instance Profiling - Continuous Profiling](/dashboard/continuous-profiling.md).
 
+### Coprocessor
+
+A coprocessing mechanism that shares the computation workload with TiDB. It is located in the storage layer (TiKV or TiFlash) and collaboratively processes computations [pushed down](/functions-and-operators/expressions-pushed-down.md) from TiDB on a per-region basis.
+
 ## D
+
+### Dumpling
+
+Dumpling is a data export tool for exporting data stored in TiDB, MySQL or MariaDB as SQL or CSV data files and can be used to make a logical full backup or export. Dumpling also supports exporting data to Amazon S3.
+
+For details, see [Use Dumpling to Export Data](/dumpling-overview.md).
 
 ### Dynamic Pruning
 
 Dynamic pruning mode is one of the modes that TiDB accesses partitioned tables. In dynamic pruning mode, each operator supports direct access to multiple partitions. Therefore, TiDB no longer uses Union. Omitting the Union operation can improve the execution efficiency and avoid the problem of Union concurrent execution.
+
+## E
+
+### Expression index
+
+The expression index is a type of special index that can be created on an expression. Once an expression index is created, TiDB can use the index for the expression-based query, which significantly improves the query performance.
+
+For details, see [CREATE INDEX - Expression index](/sql-statements/sql-statement-create-index.md#expression-index).
+
+## G
+
+### GC (Garbage Collection)
+
+Garbage collection (GC) is the memory resource management mechanism in TiDB. When old data in dynamic memory is no longer needed, it is cleaned up to free up memory.
+
+For details, see [GC Overview](/garbage-collection-overview.md) and [GC Configuration](/garbage-collection-configuration.md).
+
+## H
+
+### Hotspot
+
+Hotspot refers to the phenomenon where the read and/or write workload of TiKV is concentrated on one or several regions or nodes, which might cause performance bottlenecks and prevent optimal performance. To solve hotspot issues, refer to [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
+
+### HTAP
+
+HTAP stands for "Hybrid Transactional and Analytical Processing". This combines online transaction processing (OLTP) workloads with online analytical processing (OLAP) on the same platform. One of the features that this brings is real-time analytics. This is done by combining row-based data in TiKV and columnar data in TiFlash that is kept in sync by replicating data between the two storage engines in a way that can maintain strong consistency.
+
+For details, refer to [Quick Start Guide for TiDB HTAP](/quick-start-with-htap.md) and [Explore HTAP](/explore-htap.md).
 
 ## I
 
@@ -70,6 +126,11 @@ The in-memory pessimistic lock is a new feature introduced in TiDB v6.0.0. When 
 
 Leader/Follower/Learner each corresponds to a role in a Raft group of [peers](#regionpeerraft-group). The leader services all client requests and replicates data to the followers. If the group leader fails, one of the followers will be elected as the new leader. Learners are non-voting followers that only serves in the process of replica addition.
 
+### Lock View
+
+The Lock View feature is used to provide more information about lock conflicts and lock waits in pessimistic locking, making it convenient for DBAs to observe transaction locking situations and troubleshoot deadlock issues.
+
+For details, see system table documentation: [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md), [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md), and [`DEADLOCKS`](/information-schema/information-schema-deadlocks.md).
 ## M
 
 ### MPP
@@ -85,6 +146,14 @@ Starting from v5.0, TiDB introduces Massively Parallel Processing (MPP) architec
 ### Old value
 
 The "original value" in the incremental change log output by TiCDC. You can specify whether the incremental change log output by TiCDC contains the "original value".
+
+### Online analytical processing (OLAP)
+
+Online Analytical Processing (OLAP) refers to the use of database systems to perform analysis of data for business intelligence and decision-making purposes.
+
+### Online transactional processing (OLTP)
+
+Online transactional processing (OLTP) refers to the use of computer systems to process transactional data.
 
 ### Operator
 
@@ -105,15 +174,30 @@ Currently, available steps generated by PD include:
 - `PromoteLearner`: Promotes a specified learner to a voting member
 - `SplitRegion`: Splits a specified Region into two
 
+### Optimistic transaction
+
+Optimistic transactions are transactions that use optimistic concurrency control and generally do not cause conflicts in concurrent environments. After enabling optimistic transactions, TiDB only checks for conflicts when the transaction is finally committed. The optimistic transaction mode is suitable for concurrent scenarios with more reads and fewer writes, which can improve the performance of TiDB.
+
+
 ## P
 
 ### Partitioning
 
 [Partitioning](/partitioned-table.md) refers to physically dividing a table into smaller table partitions, which can be done by partition methods such as RANGE, LIST, HASH, and KEY partitioning.
 
+### PD Control (pd-ctl)
+
+PD Control (pd-ctl) is a command-line tool to interface with the placement driver (PD) of the cluster. This can be used to obtain cluster status information and configuration and modify the cluster. For details, see [PD Control User Guide](/pd-control.md).
+
 ### pending/down
 
 "Pending" and "down" are two special states of a peer. Pending indicates that the Raft log of followers or learners is vastly different from that of leader. Followers in pending cannot be elected as leader. "Down" refers to a state that a peer ceases to respond to leader for a long time, which usually means the corresponding node is down or isolated from the network.
+
+### Placement Rules
+
+Placement rules are used to configure the placement of data in a TiKV cluster through the SQL interface. With this feature, you can specify the deployment of tables and partitions to different regions, data centers, cabinets, and hosts. Use cases include optimizing data availability strategies at low cost, ensuring that local data replicas are available for local stale reads, and complying with local data compliance requirements.
+
+For details, see [Placement Rules in SQL](/placement-rules-in-sql.md).
 
 ### Point Get
 
@@ -149,6 +233,10 @@ The mechanism of Region split is to use one initial Region to cover the entire k
 
 Restore is the reverse of the backup operation. It is the process of bringing back the system to an earlier state by retrieving data from a prepared backup.
 
+### RocksDB
+
+[RocksDB](https://rocksdb.org/) is an LSM-tree structured engine that provides key-value storage and read-write functionality. It was developed by Facebook and is based on LevelDB. RocksDB is the core storage engine of TiKV.
+
 ## S
 
 ### scheduler
@@ -160,11 +248,53 @@ Schedulers are components in PD that generate scheduling tasks. Each scheduler i
 - `hot-region-scheduler`: Balances the distribution of hot Regions
 - `evict-leader-{store-id}`: Evicts all leaders of a node (often used for rolling upgrades)
 
+### Security Enhanced Mode (SEM)
+
+The Security Enhanced Mode (SEM) is used for finer-grained permission control of TiDB administrators. SEM is inspired by the design of systems such as [Security-Enhanced Linux](https://en.wikipedia.org/wiki/Security-Enhanced_Linux). It reduces the abilities of users with the `SUPER` privilege and instead requires `RESTRICTED` fine-grained privileges to be granted as a replacement.
+
+For details, see [System Variables documentation - `tidb_enable_enhanced_security`](/system-variables.md#tidb_enable_enhanced_security).
+
+### Stale Read
+
+Stale Read is a mechanism that TiDB applies to read historical versions of data stored in TiDB. Using this mechanism, you can read the corresponding historical data of a specific point in time or within a specified time range, and thus save the latency brought by data replication between storage nodes. When you are using Stale Read, TiDB will randomly select a replica for data reading, which means that all replicas are available for data reading.
+
+For details, see [Stale Read](/stale-read.md).
+
 ### Store
 
 A store refers to the storage node in the TiKV cluster (an instance of `tikv-server`). Each store has a corresponding TiKV instance.
 
 ## T
+
+### Temporary table
+
+Temporary tables solve the issue of temporarily storing the intermediate results of an application, which frees you from frequently creating and dropping tables. You can store the intermediate calculation data in temporary tables. When the intermediate data is no longer needed, TiDB automatically cleans up and recycles the temporary tables. This avoids user applications being too complicated, reduces table management overhead, and improves performance.
+
+For details, see [Temporary Tables](/temporary-tables.md).
+
+### TiCDC
+
+[TiCDC](/ticdc/ticdc-overview.md) is a tool for incrementally replicating data in TiDB. It pulls the data change logs from the upstream TiKV and parses them into ordered row-level change data, which it then outputs to the downstream. For more information about the concepts and terms of TiCDC, see [TiCDC Glossary](/ticdc/ticdc-glossary.md).
+
+### TiDB Data Migration (DM)
+
+[TiDB Data Migration](https://github.com/pingcap/tiflow/tree/master/dm) (DM) is a data migration tool that supports full data migration and incremental data replication from databases compatible with the MySQL protocol (MySQL, MariaDB, Aurora MySQL) to TiDB.
+
+For more information about the concepts and terms of DM, see [TiDB Data Migration Glossary](/dm/dm-glossary.md).
+
+### TiDB Lightning
+
+[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) is a tool for importing Terabyte-level data from static files into TiDB clusters. It is commonly used for the initial data import into TiDB clusters.
+
+For more information on the concepts and terminology of TiDB Lightning, see [TiDB Lightning Glossary](/tidb-lightning/tidb-lightning-glossary.md).
+
+### TiFlash
+
+[TiFlash](/tiflash/tiflash-overview.md) is a key component of TiDB's HTAP architecture. It is a columnar extension of TiKV that provides both strong consistency and good isolation. Columnar replicas are asynchronously replicated through the Raft Learner protocol. When reading, the replicas use the Raft consensus index along with MVCC to achieve Snapshot Isolation consistency level. This architecture effectively solves the isolation and synchronization issues in HTAP scenarios.
+
+### TiUP
+
+[TiUP](/tiup/tiup-overview.md) is a management tool used for deploying, upgrading, and managing TiDB clusters, as well as managing various components within the TiDB ecosystem including TiDB, PD, and TiKV. With TiUP, you can easily run any component within TiDB by executing just one command, greatly simplifying the management process.
 
 ### Top SQL
 
