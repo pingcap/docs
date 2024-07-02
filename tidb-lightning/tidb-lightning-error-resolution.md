@@ -132,7 +132,7 @@ The `conflict_error_v3` table records conflicts detected during postprocess conf
 
 The `conflict_records` table records conflicts detected during pre-import conflict detection, managed by the `conflict` configuration group in both logical and physical import modes. Each error corresponds to one row.
 
-The `conflict_view` view records conflicts that are detected by both preprocess and postprocess conflict detection, managed by the `conflict` configuration group in both logical and physical import modes. This view is created by performing a `UNION` operation on the `conflict_error_v3` and `conflict_records` tables.
+The `conflict_view` view records conflicts that are detected by both pre-import and postprocess conflict detection, managed by the `conflict` configuration group in both logical and physical import modes. This view is created by performing a `UNION` operation on the `conflict_error_v3` and `conflict_records` tables.
 
 | Column       | Syntax | Type | Conflict | Description                                                                                                                         |
 | ------------ | ------ | ---- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
