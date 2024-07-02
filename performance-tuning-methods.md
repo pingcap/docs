@@ -90,7 +90,7 @@ The diagrams of database time breakdown and execution time overview present both
 
     > **Note:**
     >
-    > It is normal that the total KV request time is greater than the execute time. Because the TiDB executor may send KV requests to multiple TiKVs concurrently, causing the total KV request wait time to be greater than the execute time. In the preceding TPC-C workload, TiDB sends `Prewrite` and `Commit` requests concurrently to multiple TiKVs when a transaction is committed. Therefore, the total time for `Prewrite`, `Commit`, and `PessimisticsLock` requests in this example is obviously longer than the execute time.
+    > It is normal that the total KV request time is greater than the execute time. Because the TiDB executor may send KV requests to multiple TiKVs concurrently, causing the total KV request wait time to be greater than the execute time. In the preceding TPC-C workload, TiDB sends `Prewrite` and `Commit` requests concurrently to multiple TiKVs when a transaction is committed. Therefore, the total time for `Prewrite`, `Commit`, and `PessimisticLock` requests in this example is obviously longer than the execute time.
     >
     > - The `execute` time may also be significantly greater than the total time of the KV request plus the `tso_wait` time. This means that the SQL execution time is spent mostly inside the TiDB executor. Here are two common examples:
     >
@@ -170,10 +170,10 @@ In this workload, `Commit QPS` = `Rollback QPS` = `Select QPS`. The application 
 
 **Example 3: Prepared plan cache unavailable with prepared statement enabled for OLTP workload**
 
-`StmtPreare` times = `StmtExecute` times = `StmtClose` times ~= `StmtFetch` times. The application uses the prepare > execute > fetch > close loop. To prevent prepared statement object leak, many application frameworks call `close` after the `execute` phase. This creates two problems.
+`StmtPrepare` times = `StmtExecute` times = `StmtClose` times ~= `StmtFetch` times. The application uses the prepare > execute > fetch > close loop. To prevent prepared statement object leak, many application frameworks call `close` after the `execute` phase. This creates two problems.
 
 - A SQL execution requires four commands and four network round trips.
-- Queries Using Plan Cache OPS is 0, indicating zero hit of prepared plan cache. The `StmtClose` command clears cached execution plans by default and the next `StmtPreare` command needs to generate the execution plan again.
+- Queries Using Plan Cache OPS is 0, indicating zero hit of prepared plan cache. The `StmtClose` command clears cached execution plans by default and the next `StmtPrepare` command needs to generate the execution plan again.
 
 > **Note:**
 >
@@ -204,7 +204,7 @@ The number of `StmtPrepare` commands per second is much greater than that of `St
 
 In this TPC-C workload:
 
-- The total number of KV requests per second is 79,700. The top request types are `Prewrite`, `Commit`, `PessimisticsLock`, and `BatchGet` in order of number of requests.
+- The total number of KV requests per second is 79,700. The top request types are `Prewrite`, `Commit`, `PessimisticLock`, and `BatchGet` in order of number of requests.
 - Most of the KV processing time is spent on `Commit-external_Commit` and `Prewrite-external_Commit`, which indicates that the most time-consuming KV requests are `Commit` and `Prewrite` from external commit statements.
 
 **Example 2: Analyze workload**
@@ -279,7 +279,7 @@ In this workload:
 
 - The average latency and P99 latency of all SQL statements are 10.8 ms and 84.1 ms, respectively.
 - The average connection idle time in transactions `avg-in-txn` is 9.4 ms.
-- The total number of connections to the cluster is 3,700, and the number of connections to each TiDB node is 1,800. The average number of active connections is 40.3, which indicates that most of the connections are idle. The average number of `disonnnection/s` is 55.8, which indicates that the application is connecting and disconnecting frequently. The behavior of short connections will have a certain impact on TiDB resources and response time.
+- The total number of connections to the cluster is 3,700, and the number of connections to each TiDB node is 1,800. The average number of active connections is 40.3, which indicates that most of the connections are idle. The average number of `disconnection/s` is 55.8, which indicates that the application is connecting and disconnecting frequently. The behavior of short connections will have a certain impact on TiDB resources and response time.
 
 **Example 2: TiDB is the bottleneck of user response time**
 
@@ -393,7 +393,7 @@ TiKV processes a write request in the following procedure:
     Raftstore consists of a `Store` thread and an `Apply` thread:
 
     - The `Store` thread processes Raft messages and new `proposals`. When a new `proposals` is received, the `Store` thread of the leader node writes to the local Raft DB and copies the message to multiple follower nodes. When this `proposals` is successfully persisted in most instances, the `proposals` is successfully committed.
-    - The `Apply` thread writes the committed `proposals` to the KV DB. When the content is successfully written to the KV DB, the `Apply` thread notifies externally that the write request has completed.
+    - The `Apply` thread writes the committed `proposals` to the KV DB. When the data is successfully written to the KV DB, the `Apply` thread notifies externally that the write request has completed.
 
 ![TiKV Write](/media/performance/store_apply.png)
 
