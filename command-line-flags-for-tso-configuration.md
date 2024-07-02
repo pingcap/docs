@@ -26,7 +26,7 @@ The TSO node is used for providing the `tso` microservice for PD. You can config
 
 ## `--cert`
 
-- The path of the PEM file including the X509 certificate, used to enable TLS.
+- The path of the PEM file including the X.509 certificate, used to enable TLS.
 - Default: `""`
 
 ## `--config`
@@ -42,7 +42,7 @@ The TSO node is used for providing the `tso` microservice for PD. You can config
 
 ## `--key`
 
-- The path of the PEM file including the X509 key, used to enable TLS.
+- The path of the PEM file including the X.509 key, used to enable TLS.
 - Default: `""`
 
 ## `--listen-addr`

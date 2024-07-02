@@ -59,12 +59,12 @@ Configuration items related to security
 
 ### `cert-path`
 
-- The path of the Privacy Enhanced Mail (PEM) file that contains the X509 certificate
+- The path of the Privacy Enhanced Mail (PEM) file that contains the X.509 certificate
 - Default value: ""
 
 ### `key-path`
 
-- The path of the PEM file that contains the X509 key
+- The path of the PEM file that contains the X.509 key
 - Default value: ""
 
 ### `redact-info-log`

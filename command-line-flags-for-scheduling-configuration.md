@@ -26,7 +26,7 @@ The Scheduling node is used for providing the `scheduling` microservice for PD. 
 
 ## `--cert`
 
-- The path of the PEM file including the X509 certificate, used to enable TLS.
+- The path of the PEM file including the X.509 certificate, used to enable TLS.
 - Default: `""`
 
 ## `--config`
@@ -42,7 +42,7 @@ The Scheduling node is used for providing the `scheduling` microservice for PD. 
 
 ## `--key`
 
-- The path of the PEM file including the X509 key, used to enable TLS.
+- The path of the PEM file including the X.509 key, used to enable TLS.
 - Default: `""`
 
 ## `--listen-addr`
