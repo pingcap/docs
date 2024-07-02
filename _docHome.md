@@ -122,7 +122,7 @@ Join us on Discord or become a contributor.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/blog/" icon="doc10" label="Blog Posts">
+<DocHomeCard href="https://www.pingcap.com/blog/" icon="doc10" label="Blog Posts">
 
 Read great articles about TiDB and TiDB Cloud.
 
