@@ -171,9 +171,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 
 ### MySQL compatibility
 
-* 兼容性 1
-
-* 兼容性 2
+* Before v8.1.0, executing the [`CREATE USER`](/sql-statements/sql-statement-create-user.md) statement with the `PASSWORD REQUIRE CURRENT DEFAULT` option returns an error because this option is not supported and cannot be parsed. Starting from v8.1.0, TiDB supports parsing and ignoring this option for compatibility with MySQL. [#53305](https://github.com/pingcap/tidb/issues/53305) @[https://github.com/dveeden](dveeden)
 
 ### System variables
 
@@ -235,7 +233,6 @@ To improve the TiFlash development experience, the minimum version of LLVM requi
     - Optimize the performance of obtaining data distribution information when performing simple queries on tables with large data volumes [#53850](https://github.com/pingcap/tidb/issues/53850) @[you06](https://github.com/you06)
     - The aggregated result set can be used as an inner table for IndexJoin, allowing more complex queries to be matched to IndexJoin, thus improving query efficiency through indexing [#37068](https://github.com/pingcap/tidb/issues/37068) @[elsa0520](https://github.com/elsa0520)
     - By batch deleting TiFlash placement rules, improve the processing speed of data GC after performing the `TRUNCATE` or `DROP` operation on partitioned tables [#54068](https://github.com/pingcap/tidb/issues/54068) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    - The `CREATE USER` SQL statement supports the `PASSWORD REQUIRE CURRENT DEFAULT` option for compatibility with MySQL [#53305](https://github.com/pingcap/tidb/issues/53305) @[https://github.com/dveeden](dveeden)
     - Upgrade the version of Azure Identity Libraries and Microsoft Authentication Library to enhance security [#53990](https://github.com/pingcap/tidb/issues/53990) @[hawkingrei](https://github.com/hawkingrei)
     - Set the maximum value of `token-limit` to `1048576` to avoid setting it too large and causing TiDB Server OOM [#53312](https://github.com/pingcap/tidb/issues/53312) @[djshow832](https://github.com/djshow832)
     - Improve column pruning for MPP execution plans to improve TiFlash MPP execution performance [#52133](https://github.com/pingcap/tidb/issues/52133) @[yibin87](https://github.com/yibin87)
