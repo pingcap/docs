@@ -358,6 +358,7 @@ This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 
-* [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md)
+* [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
 * [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
+* [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md)
 * [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md)
