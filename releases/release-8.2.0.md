@@ -163,7 +163,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 
 ### MySQL compatibility
 
-* Before v8.1.0, executing the [`CREATE USER`](/sql-statements/sql-statement-create-user.md) statement with the `PASSWORD REQUIRE CURRENT DEFAULT` option returns an error because this option is not supported and cannot be parsed. Starting from v8.1.0, TiDB supports parsing and ignoring this option for compatibility with MySQL. [#53305](https://github.com/pingcap/tidb/issues/53305) @[dveeden](https://github.com/dveeden)
+* Before v8.2.0, executing the [`CREATE USER`](/sql-statements/sql-statement-create-user.md) statement with the `PASSWORD REQUIRE CURRENT DEFAULT` option returns an error because this option is not supported and cannot be parsed. Starting from v8.2.0, TiDB supports parsing and ignoring this option for compatibility with MySQL. [#53305](https://github.com/pingcap/tidb/issues/53305) @[dveeden](https://github.com/dveeden)
 
 ### System variables
 
