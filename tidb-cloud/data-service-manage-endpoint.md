@@ -20,7 +20,7 @@ This document describes how to manage your endpoints in a Data App in the TiDB C
 
 ## Create an endpoint
 
-In Data Service, you can either generate an endpoint automatically or create an endpoint manually.
+In Data Service, you can automatically generate endpoints, manually create endpoints, or add predefined system endpoints.
 
 > **Tip:**
 >
@@ -72,6 +72,44 @@ To create an endpoint manually, perform the following steps:
 2. In the left pane, locate your target Data App, click **+** to the right of the App name, and then click **Create Endpoint**.
 3. Update the default name if necessary. The newly created endpoint is added to the top of the endpoint list.
 4. Configure the new endpoint according to the instructions in [Develop an endpoint](#develop-an-endpoint).
+
+### Add a predefined system endpoint
+
+Data Service provides an endpoint library with predefined system endpoints that you can directly add to your Data App, reducing the effort in your endpoint development. Currently, the library only includes the `/system/query` endpoint, which enables you to execute any SQL statement by simply passing the statement in the predefined `sql` parameter.
+
+To add a predefined system endpoint to your Data App, perform the following steps:
+
+1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+
+2. In the left pane, locate your target Data App, click **+** to the right of the App name, and then click **Manage Endpoint Library**.
+
+    A dialog for endpoint library management is displayed. Currently, only **Execute Query** (that is, the `/system/query` endpoint) is provided in the dialog.
+
+3. To add the `/system/query` endpoint to your Data App, toggle the **Execute Query** switch to **Added**.
+
+    > **Tip:**
+    >
+    > To remove an added predefined endpoint from your Data App, toggle the **Execute Query** switch to **Removed**.
+
+4. Click **Save**.
+
+    > **Note:**
+    >
+    > - After you click **Save**, the added or removed endpoint is deployed to production immediately, which makes the added endpoint accessible and the removed endpoint inaccessible immediately.
+    > - If a non-predefined endpoint with the same path and method already exists in the current App, the creation of the system endpoint will fail.
+
+    The added system-provided endpoint is displayed at the top of the endpoint list.
+
+5. Check the endpoint name, SQL statements, properties, and parameters of the new endpoint.
+
+    > **Note:**
+    >
+    > The `/system/query` endpoint is powerful and versatile but can be potentially destructive. Use it with discretion and ensure the queries are secure and well-considered to prevent unintended consequences.
+
+    - Endpoint name: the endpoint name and path is `/system/query`, and the request method `POST`.
+    - SQL statements: the `/system/query` endpoint does not come with any SQL statement. You can find the SQL editor in the middle section of the page and write your desired SQL statements in the SQL editor. Note that the SQL statements written in the SQL editor for the `/system/query` endpoint will be saved in the SQL editor so you can further develop and test them next time but they will not be saved in the endpoint configuration.
+    - Endpoint properties: in the right pane of the page, you can find the endpoint properties on the **Properties** tab. Unlike other custom endpoints, only the `timeout` and `max rows` properties can be customized for system endpoints.
+    - Endpoint parameters: in the right pane of the page, you can find the endpoint parameters on the **Params** tab. The parameters of the `/system/query` endpoint are configured automatically and cannot be modified.
 
 ## Develop an endpoint
 
@@ -163,9 +201,12 @@ On the SQL editor of the endpoint details page, you can write and run the SQL st
 
     On the upper part of the SQL editor, select a cluster on which you want to execute SQL statements from the drop-down list. Then, you can view all databases of this cluster in the **Schema** tab on the right pane.
 
-2. Write SQL statements.
+2. Depending on your endpoint type, do one of the following to select a database:
 
-    Before querying or modifying data, you need to first specify the database in the SQL statements. For example, `USE database_name;`.
+    - Predefined system endpoints: on the upper part of the SQL editor, select the target database from the drop-down list.
+    - Other endpoints: write a SQL statement to specify the target database in the SQL editor. For example, `USE database_name;`.
+
+3. Write SQL statements.
 
     In the SQL editor, you can write statements such as table join queries, complex queries, and aggregate functions. You can also simply type `--` followed by your instructions to let AI generate SQL statements automatically.
 
@@ -178,7 +219,7 @@ On the SQL editor of the endpoint details page, you can write and run the SQL st
     > - The parameter name is case-sensitive.
     > - The parameter cannot be used as a table name or column name.
 
-3. Run SQL statements.
+4. Run SQL statements.
 
     If you have inserted parameters in the SQL statements, make sure that you have set test values or default values for the parameters in the **Params** tab on the right pane. Otherwise, an error is returned.
 
@@ -209,7 +250,7 @@ On the SQL editor of the endpoint details page, you can write and run the SQL st
     </SimpleTab>
 
     After running the statements, you can see the query results immediately in the **Result** tab at the bottom of the page.
-    
+
     > **Note:**
     >
     > The returned result has a size limit of 8 MiB.
@@ -243,12 +284,6 @@ In the **Definition** section, you can view and manage the following properties 
 
 In the **Test Values** section, you can view and set test parameters. These values are used as the parameter values when you test the endpoint. Make sure that the value can be converted to the type of parameter. Otherwise, the endpoint returns an error.
 
-### Manage versions
-
-On the right pane of the endpoint details page, you can click the **Deployments** tab to view and manage the deployed versions of the endpoint.
-
-In the **Deployments** tab, you can deploy a draft version and undeploy the online version.
-
 ### Rename
 
 To rename an endpoint, perform the following steps:
@@ -256,6 +291,10 @@ To rename an endpoint, perform the following steps:
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its endpoints.
 3. Locate the endpoint you want to rename, click **...** > **Rename**., and enter a new name for the endpoint.
+
+> **Note:**
+>
+> Predefined system endpoints do not support renaming.
 
 ## Test an endpoint
 
