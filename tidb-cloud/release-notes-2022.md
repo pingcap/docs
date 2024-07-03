@@ -401,7 +401,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 * Introduce [Credits](/tidb-cloud/tidb-cloud-billing.md#credits) (previously named as trail points) for PoC users.
 
-    You can now view information about your organization's credits on the **Credits** tab of the **Billing** page, the credits can be used to pay for TiDB Cloud fees. You can [contact us](https://www.pingcap.com/apply-for-poc/) to get credits.
+    You can now view information about your organization's credits on the **Credits** tab of the **Billing** page, the credits can be used to pay for TiDB Cloud fees. You can <a href="mailto:tidbcloud-support@pingcap.com">contact us</a> to get credits.
 
 ## August 9, 2022
 
