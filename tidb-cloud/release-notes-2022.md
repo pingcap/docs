@@ -572,7 +572,7 @@ General changes:
 * Introduce a new public region: `eu-central-1`.
 * Deprecate 8 vCPU TiFlash and provide 16 vCPU TiFlash.
 * Separate the price of CPU and storage (both have 30% public preview discount).
-* Update the [billing information](/tidb-cloud/tidb-cloud-billing.md) and the [price table](https://www.pingcap.com/tidb-cloud/#pricing).
+* Update the [billing information](/tidb-cloud/tidb-cloud-billing.md) and the [price table](https://www.pingcap.com/pricing/).
 
 New features:
 
