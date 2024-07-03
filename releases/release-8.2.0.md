@@ -37,7 +37,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
   </tr>
   <tr>
     <td rowspan="1">DB Operations and Observability</td>
-    <td><a href=""https://docs.pingcap.com/tidb/v8.2/tidb-resource-control#bind-resource-groups">Introduce privilege control of switching resource groups</a></td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.2/tidb-resource-control#bind-resource-groups">Introduce privilege control of switching resource groups</a></td>
     <td>As resource control is widely used, the privilege control of switching resource groups can prevent database users from abusing resources, strengthen administrators' protection of overall resource usage, and improve cluster stability.</td>
   </tr>
 </tbody>
