@@ -233,7 +233,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
     - Improve the observability of **Raft dropped messages** to locate the root cause of slow writes [#17093](https://github.com/tikv/tikv/issues/17093) @[Connor1996](https://github.com/Connor1996)
     - Improve the observability of ingest files latency to troubleshoot cluster latency issues [#17078](https://github.com/tikv/tikv/issues/17078) @[LykxSassinator](https://github.com/LykxSassinator)
     - Use a separate thread to clean up Region replicas to ensure stable latency on critical Raft reads and writes [#16001](https://github.com/tikv/tikv/issues/16001) @[hbisheng](https://github.com/hbisheng)
-    - Improve the observability of the number of replicas being applied [#17078](https://github.com/tikv/tikv/issues/17078) @[hbisheng](https://github.com/hbisheng)
+    - Improve the observability of the number of snapshots being applied [#17078](https://github.com/tikv/tikv/issues/17078) @[hbisheng](https://github.com/hbisheng)
 
 + PD <!--tw@lilin90: 2 条-->
 
