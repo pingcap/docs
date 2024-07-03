@@ -171,7 +171,7 @@ The following `CREATE USER` options are not yet supported by TiDB, and will be p
 * `WITH MAX_UPDATES_PER_HOUR`
 * `WITH MAX_USER_CONNECTIONS`
 
-The following `CREATE USER` options are also not supported by TiDB, and are *not* accepted by the parser:
+The following `CREATE USER` options are not supported by TiDB either, and are *not* accepted by the parser:
 
 * `DEFAULT ROLE`
 * `PASSWORD REQUIRE CURRENT OPTIONAL`
