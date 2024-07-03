@@ -102,7 +102,7 @@ To add a predefined system endpoint to your Data App, perform the following step
 
 5. Check the endpoint name, SQL statements, properties, and parameters of the new endpoint.
 
-    > **Caution:**
+    > **Note:**
     >
     > The `/system/query` endpoint is powerful and versatile but can be potentially destructive. Use it with discretion and ensure the queries are secure and well-considered to prevent unintended consequences.
 
