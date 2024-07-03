@@ -1727,7 +1727,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - For OLAP scenarios, the maximum value should not exceed the number of CPU cores of all the TiKV nodes.
 - If a table has a lot of partitions, you can reduce the variable value appropriately (determined by the size of the data to be scanned and the frequency of the scan) to avoid TiKV becoming out of memory (OOM).
 - For a simple query with only a `LIMIT` clause, if the `LIMIT` value is less than 100000, the scan operation pushed down to TiKV will treat the value of this variable as `1` to enhance execution efficiency.
-- For the `SELECT MAX/MIN(col) FROM ...` query, if the `col` column has an index and the order meets the requirements, TiDB will rewrite it to `SELECT col FROM ... LIMIT 1`, and the value of this variable will be processed as `1`.
+- For the `SELECT MAX/MIN(col) FROM ...` query, if the `col` column has an index sorted in the same order required by the `MAX(col)` or `MIN(col)` function, TiDB will rewrite the query to `SELECT col FROM ... LIMIT 1` for processing, and the value of this variable will also be processed as `1`. For example, for `SELECT MIN(col) FROM ...`, if the `col` column has an ascending index, TiDB can quickly obtain the `MIN(col)` value by rewriting the query to `SELECT col FROM ... LIMIT 1` and directly reading the first row of the index.
 
 ### tidb_dml_batch_size
 
