@@ -1,7 +1,6 @@
 ---
 title: Back Up and Restore TiDB Serverless Data
 summary: Learn how to back up and restore your TiDB Serverless cluster.
-aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
 # Back Up and Restore TiDB Serverless Data
