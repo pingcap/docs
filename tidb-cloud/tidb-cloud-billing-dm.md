@@ -51,7 +51,7 @@ Note that if you are using AWS PrivateLink or VPC peering connections, and if th
 
     ![Cross-region and cross-AZ traffic charges](/media/tidb-cloud/dm-billing-cross-region-and-az-fees.png)
 
-The cross-region and cross-AZ traffic prices are the same as those for TiDB Cloud. For more information, see [TiDB Cloud Pricing Details](https://en.pingcap.com/tidb-cloud-pricing-details/).
+The cross-region and cross-AZ traffic prices are the same as those for TiDB Cloud. For more information, see [TiDB Cloud Pricing Details](https://www.pingcap.com/tidb-dedicated-pricing-details/).
 
 ## See also
 
