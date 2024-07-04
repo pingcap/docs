@@ -550,15 +550,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 TiDB Cloud is now in General Availability. You can [sign up](https://tidbcloud.com/signup) and select one of the following options:
 
-<<<<<<< HEAD
 * Get started with [Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) for free.
-* Apply for [a 14-day PoC trial for free](https://en.pingcap.com/apply-for-poc/).
-* Get full access with [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
-=======
-* Get started with [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless) for free.
 * <a href="mailto:tidbcloud-support@pingcap.com">Contact us</a> to apply for a 14-day PoC trial for free.
-* Get full access with [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated).
->>>>>>> b0a6ea5948 (Update outdated https://en.pingcap.com/ links (#18096))
+* Get full access with [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
 
 ## March 25, 2022
 
