@@ -11,6 +11,7 @@ summary: Learn about TiDB Cloud billing.
 
 TiDB Cloud charges according to the resources that you consume, which include:
 
+<<<<<<< HEAD
 - Cluster node compute
 - Primary data storage
 - Data backup storage
@@ -67,6 +68,10 @@ To make these charges easier to view, your TiDB Cloud bills and invoices aggrega
 - Data transfer – Same Region
 - Data transfer – Cross Region
 - Data transfer – Internet
+=======
+- [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-serverless-pricing-details/)
+- [TiDB Dedicated Pricing Details](https://www.pingcap.com/tidb-dedicated-pricing-details/)
+>>>>>>> b0a6ea5948 (Update outdated https://en.pingcap.com/ links (#18096))
 
 ## Invoices
 
