@@ -32,7 +32,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 * Provide a new option for TiKV node size: `8 vCPU, 32 GiB`. You can choose either `8 vCPU, 32 GiB` or `8 vCPU, 64 GiB` for an 8 vCPU TiKV node.
 * Support syntax highlighting in sample code provided in the **Connect to TiDB** dialog to improve code readability. You can easily identify the parameters that you need to replace in the sample code.
 * Support automatically validating whether TiDB Cloud can access your source data after you confirm the import task on the **Data Import Task** page.
-* Change the theme color of the TiDB Cloud console to make it consistent with that of [PingCAP website](https://en.pingcap.com/).
+* Change the theme color of the TiDB Cloud console to make it consistent with that of [PingCAP website](https://www.pingcap.com/).
 
 ## July 12, 2022
 
@@ -86,7 +86,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 ## June 7, 2022
 
 * Add the [Try Free](https://tidbcloud.com/free-trial) registration page to quickly sign up for TiDB Cloud.
-* Remove the **Proof of Concept plan** option from the plan selection page. If you want to apply for a 14-day PoC trial for free, go to the [Apply for PoC](https://en.pingcap.com/apply-for-poc/) page. For more information, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
+* Remove the **Proof of Concept plan** option from the plan selection page. If you want to apply for a 14-day PoC trial for free, <a href="mailto:tidbcloud-support@pingcap.com">contact us</a>. For more information, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
 * Improve the system security by prompting users who sign up for TiDB Cloud with emails and passwords to reset their passwords every 90 days.
 
 ## May 24, 2022
@@ -141,7 +141,7 @@ General changes:
 * Introduce a new public region: `eu-central-1`.
 * Deprecate 8 vCPU TiFlash and provide 16 vCPU TiFlash.
 * Separate the price of CPU and storage (both have 30% public preview discount).
-* Update the [billing information](/tidb-cloud/tidb-cloud-billing.md) and the [price table](https://en.pingcap.com/tidb-cloud/#pricing).
+* Update the [billing information](/tidb-cloud/tidb-cloud-billing.md) and the [price table](https://www.pingcap.com/pricing/).
 
 New features:
 

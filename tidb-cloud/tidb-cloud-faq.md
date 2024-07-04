@@ -83,7 +83,7 @@ Traditionally, there are two types of databases: Online Transactional Processing
 
 As a Hybrid Transactional Analytical Processing (HTAP) database, TiDB Cloud helps you simplify your system architecture, reduce maintenance complexity, and support real-time analytics on transactional data by automatically replicating data reliably between the OLTP (TiKV) store and OLAP (TiFlash) store. Typical HTAP use cases are user personalization, AI recommendation, fraud detection, business intelligence, and real-time reporting.
 
-For further HTAP scenarios, refer to [How We Build an HTAP Database That Simplifies Your Data Platform](https://pingcap.com/blog/how-we-build-an-htap-database-that-simplifies-your-data-platform).
+For further HTAP scenarios, refer to [How We Build an HTAP Database That Simplifies Your Data Platform](https://www.pingcap.com/blog/how-we-build-an-htap-database-that-simplifies-your-data-platform/).
 
 ## Is there an easy migration path from another RDBMS to TiDB Cloud?
 
