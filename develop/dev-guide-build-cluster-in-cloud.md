@@ -9,7 +9,7 @@ summary: Learn how to build a TiDB Serverless cluster in TiDB Cloud and connect 
 
 <CustomContent platform="tidb">
 
-This document walks you through the quickest way to get started with TiDB. You will use [TiDB Cloud](https://en.pingcap.com/tidb-cloud) to create a TiDB Serverless cluster, connect to it, and run a sample application on it.
+This document walks you through the quickest way to get started with TiDB. You will use [TiDB Cloud](https://www.pingcap.com/tidb-cloud) to create a TiDB Serverless cluster, connect to it, and run a sample application on it.
 
 If you need to run TiDB on your local machine, see [Starting TiDB Locally](/quick-start-with-tidb.md).
 
