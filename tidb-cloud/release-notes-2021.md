@@ -91,7 +91,7 @@ Bug fixes:
 
 ## June 25, 2021
 
-* Fix the **Select Region** not working issue on the [TiDB Cloud Pricing](https://en.pingcap.com/products/tidbcloud/pricing/) page
+* Fix the **Select Region** not working issue on the [TiDB Cloud Pricing](https://www.pingcap.com/pricing/) page
 
 ## June 24, 2021
 
