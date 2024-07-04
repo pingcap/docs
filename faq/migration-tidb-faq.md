@@ -170,11 +170,7 @@ Yes. But the `load data` does not support the `replace into` syntax.
 
 ### Why does the query speed getting slow after deleting data?
 
-<<<<<<< HEAD
-Deleting a large amount of data leaves a lot of useless keys, affecting the query efficiency. Currently the Region Merge feature is in development, which is expected to solve this problem. For details, see the [deleting data section in TiDB Best Practices](https://en.pingcap.com/blog/tidb-best-practice/#write).
-=======
-Deleting a large amount of data leaves a lot of useless keys, affecting the query efficiency. The [Region Merge feature](/best-practices/massive-regions-best-practices.md#method-3-enable-region-merge) can solve this problem. For more details, see the [deleting data section in TiDB Best Practices](https://www.pingcap.com/blog/tidb-best-practice/#write).
->>>>>>> b0a6ea5948 (Update outdated https://en.pingcap.com/ links (#18096))
+Deleting a large amount of data leaves a lot of useless keys, affecting the query efficiency. Currently the Region Merge feature is in development, which is expected to solve this problem. For details, see the [deleting data section in TiDB Best Practices](https://www.pingcap.com/blog/tidb-best-practice/#write).
 
 ### What is the most efficient way of deleting data?
 
