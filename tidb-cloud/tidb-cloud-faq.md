@@ -37,26 +37,7 @@ TiDB Cloud is currently available on Amazon Web Services and Google Cloud.
 
 For the currently supported TiDB version, see [TiDB Cloud Release Notes](/tidb-cloud/release-notes-2022.md).
 
-<<<<<<< HEAD
 ## How can I learn more about TiDB Cloud?
-=======
-### What versions of TiDB are supported on TiDB Cloud?
-
-- Starting from October 31, 2023, the default TiDB version for new TiDB Dedicated clusters is v7.1.2.
-- Starting from March 7, 2023, the default TiDB version for new TiDB Serverless clusters is v6.6.0.
-
-For more information, see [TiDB Cloud Release Notes](/tidb-cloud/tidb-cloud-release-notes.md).
-
-### What companies are using TiDB or TiDB Cloud in production?
-
-TiDB is trusted by over 1500 global enterprises across a variety of industries, such as financial services, gaming, and e-commerce. Our users include Square (US), Shopee (Singapore), and China UnionPay (China). See our [case studies](https://www.pingcap.com/customers/) for specific details.
-
-### What does the SLA look like?
-
-TiDB Cloud provides 99.99% SLA. For details, see [Service Level Agreement for TiDB Cloud Services](https://www.pingcap.com/legal/service-level-agreement-for-tidb-cloud-services/).
-
-### How can I learn more about TiDB Cloud?
->>>>>>> b0a6ea5948 (Update outdated https://en.pingcap.com/ links (#18096))
 
 The best way to learn about TiDB Cloud is to follow our step-by-step tutorial. Check out the following topics to get started:
 
@@ -96,39 +77,13 @@ TiDB uses the Raft consensus algorithm to replicate data by Regions. Multiple re
 
 Each data change is recorded as a Raft log. Through Raft log replication, data is safely and reliably replicated to multiple nodes of the Raft Group.
 
-<<<<<<< HEAD
 ## How do I make use of TiDB Cloud’s HTAP capabilities?
-=======
-## High availability FAQ
-
-### How does TiDB Cloud ensure high availability?
-
-TiDB uses the Raft consensus algorithm to ensure that data is highly available and safely replicated throughout storage in Raft Groups. Data is redundantly copied between TiKV nodes and placed in different Availability Zones to protect against machine or data center failure. With automatic failover, TiDB ensures that your service is always on.
-
-As a Software as a Service (SaaS) provider, we take data security seriously. We have established strict information security policies and procedures required by the [Service Organization Control (SOC) 2 Type 1 compliance](https://www.pingcap.com/press-release/pingcap-successfully-completes-soc-2-type-1-examination-for-tidb-cloud/). This ensures that your data is secure, available, and confidential.
-
-## Migration FAQ
-
-### Is there an easy migration path from another RDBMS to TiDB Cloud?
-
-TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compatible databases to TiDB smoothly, whether the data is from a self-hosted MySQL instance or RDS service provided by the public cloud. For more information, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
-
-## Backup and restore FAQ
-
-### Does TiDB Cloud support incremental backups?
-
-No. If you need to restore data to any point in time within the cluster's backup retention, you can use PITR (Point-in-time Recovery). For more information, see [Use PITR in a TiDB Dedicated cluster](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) or [Use PITR in a TiDB Serverless cluster](/tidb-cloud/backup-and-restore-serverless.md#restore).
-
-## HTAP FAQs
-
-### How do I make use of TiDB Cloud's HTAP capabilities?
->>>>>>> b0a6ea5948 (Update outdated https://en.pingcap.com/ links (#18096))
 
 Traditionally, there are two types of databases: Online Transactional Processing (OLTP) databases and Online Analytical Processing (OLAP) databases. OLTP and OLAP requests are often processed in different and isolated databases. With this traditional architecture, migrating data from an OLTP database to a data warehouse or data lake for OLAP is a long and error-prone process.
 
 As a Hybrid Transactional Analytical Processing (HTAP) database, TiDB Cloud helps you simplify your system architecture, reduce maintenance complexity, and support real-time analytics on transactional data by automatically replicating data reliably between the OLTP (TiKV) store and OLAP (TiFlash) store. Typical HTAP use cases are user personalization, AI recommendation, fraud detection, business intelligence, and real-time reporting.
 
-For further HTAP scenarios, refer to [How We Build an HTAP Database That Simplifies Your Data Platform](https://pingcap.com/blog/how-we-build-an-htap-database-that-simplifies-your-data-platform).
+For further HTAP scenarios, refer to [How We Build an HTAP Database That Simplifies Your Data Platform](https://www.pingcap.com/blog/how-we-build-an-htap-database-that-simplifies-your-data-platform/).
 
 ## Is there an easy migration path from another RDBMS to TiDB Cloud?
 
