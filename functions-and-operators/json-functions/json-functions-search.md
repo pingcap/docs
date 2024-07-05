@@ -261,9 +261,9 @@ SELECT JSON_SEARCH('{"a": ["aa", "bb", "cc"], "b": ["cc", "dd"]}','one','cc');
 1 row in set (0.00 sec)
 ```
 
-Now you do the same, but set `sub_or_all` to `all` to get not just the first result, but all results.
+Now you do the same, but set `one_or_all` to `all` to get not just the first result, but all results.
 
-```json
+```sql
 SELECT JSON_SEARCH('{"a": ["aa", "bb", "cc"], "b": ["cc", "dd"]}','all','cc');
 ```
 
