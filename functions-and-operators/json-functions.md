@@ -88,9 +88,7 @@ Many of JSON functions use JSON Path to select parts of a JSON document.
 | `**`           | Path wildcard                |
 | `[<n> to <n>]` | Array range selection        |
 
-Examples:
-
-The JSON to demonstrate this:
+The subsequent content takes the following JSON document as an example to demonstrate how to use JSONPath:
 
 ```json
 {
@@ -130,7 +128,7 @@ The JSON to demonstrate this:
 | JSONPath                              | Description                             | Example with [`JSON_EXTRACT()`](/functions-and-operators/json-functions/json-functions-search.md#json_extract) | 
 |-------------------------------------- |-----------------------------------------|-------------------------------|
 | `$`                                   | The root of the document                | Returns the full document                              |
-| `$.database`                          | The database attribute                  |  Returns the full structure starting with `"database"`. It does not include `"migration_tool"` and the structure below that.                             |
+| `$.database`                          | The `database` object                  |  Returns the full structure starting with `"database"`. It does not include `"migration_tool"` and the structure below that.                             |
 | `$.database.name`                     | The name of the database.               | `"TiDB"`                      |
 | `$.database.features`                 | All database features                   | `["distributed", "scalable", "relational", "cloud native"]`                              |
 | `$.database.features[0]`              | The first database feature.             | `"distributed"`               |
@@ -139,7 +137,7 @@ The JSON to demonstrate this:
 | `$.database.versions[*].release_date` | The release date for all versions.      | `["2024-05-24","2024-03-29"]` |
 | `$.*.features`                        | Two array's of features                 | `[["distributed", "scalable", "relational", "cloud native"], ["MySQL compatible", "Shard merging"]]`                              |
 | `$**.version`                         | All versions, with path wildcard        | `["v8.1.0","v8.0.0"]`         |
-| `$.database.features[0 to 2]`         | Range of database features.             | `["scalable","relational"]`   |
+| `$.database.features[0 to 2]`         | Range of database features from the first to the third.             | `["scalable","relational"]`   |
 
 For more information, see [the IETF draft for JSONPath](https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html).
 
