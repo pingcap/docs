@@ -76,7 +76,7 @@ You can use JSON functions to work with data in the [JSON data type](/data-type-
 | --------------------------------- | ----------- |
 | [JSON_SCHEMA_VALID()](/functions-and-operators/json-functions/json-functions-validate.md#json_schema_valid) | Validates a JSON document against a schema to ensure data integrity and consistency. |
 
-## JSON Path
+## JSONPath
 
 Many of JSON functions use JSON Path to select parts of a JSON document.
 
