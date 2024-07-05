@@ -1670,7 +1670,6 @@ Previously an index on partitioned tables are created for each partition, which 
 
 After enabling this variable, any unique index created by the user that does not meet the above constraint will automatically be a global index.
 
-
 ```sql
 SET tidb_enable_global_index = ON;
 
@@ -1690,7 +1689,6 @@ In the example above, the unique index `uidx12` will be implicitly a global inde
 
 It should be noted that a **clustered index** cannot be a global index:
 
-
 ```sql
 SET tidb_enable_global_index = ON;
 
@@ -1709,6 +1707,9 @@ Users can identify a global index by querying the [`information_schema`.`tidb_in
 
 ```sql
 SELECT * FROM information_schema.tidb_indexes WHERE table_name='t1';
+```
+
+```
 +--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
 | TABLE_SCHEMA | TABLE_NAME | NON_UNIQUE | KEY_NAME | SEQ_IN_INDEX | COLUMN_NAME | SUB_PART | INDEX_COMMENT | Expression | INDEX_ID | IS_VISIBLE | CLUSTERED | IS_GLOBAL |
 +--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
