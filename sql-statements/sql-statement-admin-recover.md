@@ -10,7 +10,7 @@ When the row data and index data are inconsistent, you can use the `ADMIN RECOVE
 ## Synopsis
 
 ```ebnf+diagram
-AdminCleanupStmt ::=
+AdminRecoverStmt ::=
     'ADMIN' 'RECOVER' 'INDEX' TableName IndexName
 ```
 
