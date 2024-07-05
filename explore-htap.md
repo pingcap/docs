@@ -29,7 +29,7 @@ The following are the typical use cases of HTAP:
 
     When using TiDB as a data hub, TiDB can meet specific business needs by seamlessly connecting the data for the application and the data warehouse.
 
-For more information about use cases of TiDB HTAP, see [blogs about HTAP on the PingCAP website](https://en.pingcap.com/blog/?tag=htap).
+For more information about use cases of TiDB HTAP, see [blogs about HTAP on the PingCAP website](https://www.pingcap.com/blog/?tag=htap).
 
 To enhance the overall performance of TiDB, it is recommended to use HTAP in the following technical scenarios:
 

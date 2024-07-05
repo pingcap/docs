@@ -78,7 +78,7 @@ You can change the database name by configuring `lightning.task-info-schema-name
 task-info-schema-name = 'lightning_task_info'
 ```
 
-TiDB Lightning creates 3 tables in this database:
+TiDB Lightning creates three tables and one view in this database:
 
 ```sql
 CREATE TABLE type_error_v1 (
@@ -90,8 +90,7 @@ CREATE TABLE type_error_v1 (
     error       text NOT NULL,
     row_data    text NOT NULL
 );
-
-CREATE TABLE conflict_error_v1 (
+CREATE TABLE conflict_error_v3 (
     task_id     bigint NOT NULL,
     create_time datetime(6) NOT NULL DEFAULT now(6),
     table_name  varchar(261) NOT NULL,
@@ -102,7 +101,11 @@ CREATE TABLE conflict_error_v1 (
     raw_value   mediumblob NOT NULL,
     raw_handle  mediumblob NOT NULL,
     raw_row     mediumblob NOT NULL,
-    KEY (task_id, table_name)
+    kv_type     tinyint(1) NOT NULL,
+    INDEX (task_id, table_name),
+    INDEX (index_name),
+    INDEX (table_name, index_name),
+    INDEX (kv_type)
 );
 CREATE TABLE conflict_records (
     task_id     bigint NOT NULL,
@@ -110,18 +113,26 @@ CREATE TABLE conflict_records (
     table_name  varchar(261) NOT NULL,
     path        varchar(2048) NOT NULL,
     offset      bigint NOT NULL,
-    error           text NOT NULL,
-    row_id        bigint NOT NULL COMMENT 'the row id of the conflicting row',
-    row_data    text NOT NULL COMMENT 'the row data of the conflicting row',
+    error       text NOT NULL,
+    row_id      bigint NOT NULL COMMENT 'the row id of the conflicted row',
+    row_data    text NOT NULL COMMENT 'the row data of the conflicted row',
     KEY (task_id, table_name)
 );
+CREATE VIEW conflict_view AS
+    SELECT 0 AS is_precheck_conflict, task_id, create_time, table_name, index_name, key_data, row_data, raw_key, raw_value, raw_handle, raw_row, kv_type, NULL AS path, NULL AS offset, NULL AS error, NULL AS row_id
+    FROM conflict_error_v3
+    UNION ALL
+    SELECT 1 AS is_precheck_conflict, task_id, create_time, table_name, NULL AS index_name, NULL AS key_data, row_data, NULL AS raw_key, NULL AS raw_value, NULL AS raw_handle, NULL AS raw_row, NULL AS kv_type, path, offset, error, row_id
+    FROM conflict_records;
 ```
 
-`type_error_v1` records all [type errors](#type-error) managed by `lightning.max-error`. Each error corresponds to one row.
+The `type_error_v1` table records all [type errors](#type-error) managed by `lightning.max-error`. Each error corresponds to one row.
 
-`conflict_error_v2` records conflicts managed by the `conflict` configuration group in the physical import mode. Each pair of conflicts corresponds to two rows.
+The `conflict_error_v3` table records conflicts detected during postprocess conflict detection, managed by the `conflict` configuration group in the physical import mode. Each pair of conflicts corresponds to two rows.
 
-`conflict_records` records conflicts managed by the `conflict` configuration group in both the logical import mode and physical import mode. Each error corresponds to one row.
+The `conflict_records` table records conflicts detected during pre-import conflict detection, managed by the `conflict` configuration group in both logical and physical import modes. Each error corresponds to one row.
+
+The `conflict_view` view records conflicts that are detected by both pre-import and postprocess conflict detection, managed by the `conflict` configuration group in both logical and physical import modes. This view is created by performing a `UNION` operation on the `conflict_error_v3` and `conflict_records` tables.
 
 | Column       | Syntax | Type | Conflict | Description                                                                                                                         |
 | ------------ | ------ | ---- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
@@ -275,10 +286,10 @@ In this example, a data source is prepared with some known errors.
        row_data: (600,'six hundred')
     ```
 
-7. Check whether the `conflict_error_v1` table has caught the four rows that have unique/primary key conflicts:
+7. Check whether the `conflict_error_v3` table has caught the four rows that have unique/primary key conflicts:
 
     ```sql
-    $ mysql -u root -h 127.0.0.1 -P 4000 -e 'select * from lightning_task_info.conflict_error_v1;' --binary-as-hex -E
+    $ mysql -u root -h 127.0.0.1 -P 4000 -e 'select * from lightning_task_info.conflict_error_v3;' --binary-as-hex -E
 
     *************************** 1. row ***************************
         task_id: 1635888701843303564
