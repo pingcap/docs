@@ -131,6 +131,8 @@ MySQL [test]> select @@last_plan_from_cache;
 
 ## Diagnostics of Prepared Plan Cache
 
+### Use `SHOW WARNINGS` to diagnose
+
 Some queries or plans cannot be cached. You can use the `SHOW WARNINGS` statement to check whether the query or plan is cached. If it is not cached, you can check the reason for the failure in the result. For example:
 
 ```sql
@@ -138,7 +140,7 @@ mysql> PREPARE st FROM 'SELECT * FROM t WHERE a > (SELECT MAX(a) FROM t)';  -- T
 
 Query OK, 0 rows affected, 1 warning (0.01 sec)
 
-mysql> show warnings;  -- Checks the reason why the query plan cannot be cached.
+mysql> SHOW WARNINGS;  -- Checks the reason why the query plan cannot be cached.
 
 +---------+------+-----------------------------------------------+
 | Level   | Code | Message                                       |
@@ -159,7 +161,7 @@ mysql> execute st using @a;  -- The optimization converts a non-INT type to an I
 
 Empty set, 1 warning (0.01 sec)
 
-mysql> show warnings;
+mysql> SHOW WARNINGS;
 
 +---------+------+----------------------------------------------+
 | Level   | Code | Message                                      |
@@ -167,6 +169,25 @@ mysql> show warnings;
 | Warning | 1105 | skip plan-cache: '1' may be converted to INT |
 +---------+------+----------------------------------------------+
 1 row in set (0.00 sec)
+```
+
+### Use `Statements Summary` to diagnose
+
+The `Statements Summary` table contains two fields, `plan_cache_unqualified` and `plan_cache_unqualified_last_reason`, which respectively indicate the number of times and the reason why the corresponding query is unable to use the plan cache. You can use these two fields for diagnostic purposes:
+
+```sql
+mysql> SELECT digest_text, plan_cache_unqualified, plan_cache_unqualified_last_reason FROM information_schema.statements_summary WHERE plan_cache_unqualified > 0 ORDER BY plan_cache_unqualified DESC
+LIMIT 10;
+
++---------------------------------+------------------------+----------------------------------------+
+| digest_text                     | plan_cache_unqualified | plan_cache_unqualified_last_reason     |
++---------------------------------+------------------------+----------------------------------------+
+| select * from `t` where `a` < ? |                     10 | '1' may be converted to INT            |
+| select * from `t` order by ?    |                      4 | query has 'order by ?' is un-cacheable |
+| select database ( ) from `t`    |                      2 | query has 'database()' is un-cacheable |
+...
++---------------------------------+------------------------+----------------------------------------+
+10 row in set (0.01 sec)
 ```
 
 ## Memory management of Prepared Plan Cache

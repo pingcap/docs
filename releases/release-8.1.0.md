@@ -45,12 +45,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
   </tr>
   <tr>
     <td>Enhance the stability of caching the schema information when there is a massive number of tables (experimental, introduced in v8.0.0)</td>
-    <td>SaaS companies using TiDB as the system of record for their multi-tenant applications often need to store a substantial number of tables. In previous versions, handling table counts in the order of a million or more was feasible, but it had the potential to degrade the overall user experience. TiDB v8.0.0 improves the situation with the following enhancements:
-      <ul>
-      <li>Introduce a new <a href="https://docs.pingcap.com/tidb/v8.1/system-variables#tidb_schema_cache_size-new-in-v800">schema information caching system</a>, which provides a cache strategy based on the Least Recently Used (LRU) algorithm for table metadata. It prioritizes storing the metadata of frequently accessed tables in the cache, thereby reducing memory usage in scenarios with a large number of tables.</li>
-      <li>Implement a <a href="https://docs.pingcap.com/tidb/v8.1/system-variables#tidb_enable_auto_analyze_priority_queue-new-in-v800">priority queue</a> for <code>auto analyze</code>, making the process less rigid and enhancing stability across a wider array of tables.</li>
-      </ul>
-    </td>
+    <td>SaaS companies using TiDB as the system of record for their multi-tenant applications often need to store a substantial number of tables. In previous versions, handling table counts in the order of a million or more was feasible, but it had the potential to degrade the overall user experience. TiDB v8.0.0 improves the situation by implementing a <a href="https://docs.pingcap.com/tidb/v8.1/system-variables#tidb_enable_auto_analyze_priority_queue-new-in-v800">priority queue</a> for <code>auto analyze</code>, making the process less rigid and enhancing stability across a wider array of tables.</td>
   </tr>
   <tr>
     <td rowspan="5">Reliability and availability</td>
