@@ -1365,7 +1365,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Unit: Threads
-- Default value：`2`
+- Default value: `2`
 - Range: `[1, 256]`
 - This variable is used to set the sampling concurrency in the `ANALYZE` process.
 - When the variable is set to a larger value, the execution performance of other queries is affected.
@@ -3472,12 +3472,12 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### `tidb_low_resolution_tso_update_interval` <span class="version-mark">New in v8.0.0</span>
 
-- Scope：GLOBAL
+- Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type：Integer
-- Default value：`2000`
-- Range：`[10, 60000]`
+- Type: Integer
+- Default value: `2000`
+- Range: `[10, 60000]`
 - Unit: Milliseconds
 - This variable is used to set the update interval of the cached timestamp used in the low-precision TSO feature, in milliseconds.
 - This variable is only available when [`tidb_low_resolution_tso`](#tidb_low_resolution_tso) is enabled.
