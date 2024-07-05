@@ -6,7 +6,7 @@ aliases: ['/tidb/dev/ddl-v2/']
 
 # TiDB Accelerated Table Creation
 
-TiDB v7.6.0 introduces the system variable [`tidb_ddl_version`](https://docs.pingcap.com/tidb/v7.6/system-variables#tidb_enable_fast_create_table-new-in-v800) to support accelerating table creation, which improves the efficiency of bulk table creation. Starting from v8.0.0, this system variable is renamed to [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800).
+TiDB v7.6.0 introduces the system variable [`tidb_ddl_version`](https://docs.pingcap.com/tidb/v7.6/system-variables#tidb_enable_fast_create_table-new-in-v800) to support accelerating table creation, which improves the efficiency of bulk table creation. Starting from v8.0.0, this system variable is renamed to [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800)：
 
 TiDB uses the online asynchronous schema change algorithm to change the metadata. All DDL jobs are submitted to the `mysql.tidb_ddl_job` table, and the owner node pulls the DDL job to execute. After executing each phase of the online DDL algorithm, the DDL job is marked as completed and moved to the `mysql.tidb_ddl_history` table. Therefore, DDL statements can only be executed on the owner node and cannot be linearly extended.
 
