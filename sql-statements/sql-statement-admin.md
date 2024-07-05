@@ -184,7 +184,7 @@ AdminStmt ::=
         | 'REPAIR' 'TABLE' TableName CreateTableStmt 
         | ( 'FLUSH' | 'CAPTURE' | 'EVOLVE' ) 'BINDINGS'
         | 'FLUSH' ('SESSION' | 'INSTANCE') 'PLAN_CACHE'
-        | 'SET' 'BDR' 'ROLE' BDRRole |
+        | 'SET' 'BDR' 'ROLE' BDRRole
         | 'UNSET' 'BDR' 'ROLE'
     )
 
