@@ -144,6 +144,12 @@ The JSON to demonstrate this:
 
 For more information, see [the IETF draft for JSONPath](https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html).
 
+## Validation functions
+
+| Function Name                     | Description |
+| --------------------------------- | ----------- |
+| [JSON_SCHEMA_VALID(schema,json_doc)](https://dev.mysql.com/doc/refman/8.0/en/json-validation-functions.html#function_json-schema-valid) | Validates a JSON document against a schema to ensure data integrity and consistency. |
+
 ## See also
 
 * [JSON Data Type](/data-type-json.md)

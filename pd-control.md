@@ -800,20 +800,22 @@ Use this command to view and control the scheduling policy.
 Usage:
 
 ```bash
->> scheduler show                                 // Display all created schedulers
->> scheduler add grant-leader-scheduler 1         // Schedule all the leaders of the Regions on store 1 to store 1
->> scheduler add evict-leader-scheduler 1         // Move all the Region leaders on store 1 out
->> scheduler config evict-leader-scheduler        // Display the stores in which the scheduler is located since v4.0.0
->> scheduler add shuffle-leader-scheduler         // Randomly exchange the leader on different stores
->> scheduler add shuffle-region-scheduler         // Randomly scheduling the Regions on different stores
->> scheduler add evict-slow-store-scheduler       // When there is one and only one slow store, evict all Region leaders of that store
->> scheduler remove grant-leader-scheduler-1      // Remove the corresponding scheduler, and `-1` corresponds to the store ID
->> scheduler pause balance-region-scheduler 10    // Pause the balance-region scheduler for 10 seconds
->> scheduler pause all 10                         // Pause all schedulers for 10 seconds
->> scheduler resume balance-region-scheduler      // Continue to run the balance-region scheduler
->> scheduler resume all                           // Continue to run all schedulers
->> scheduler config balance-hot-region-scheduler  // Display the configuration of the balance-hot-region scheduler
->> scheduler describe balance-region-scheduler    // Display the running state and related diagnostic information of the balance-region scheduler
+>> scheduler show                                          // Display all created schedulers
+>> scheduler add grant-leader-scheduler 1                  // Schedule all the leaders of the Regions on store 1 to store 1
+>> scheduler add evict-leader-scheduler 1                  // Move all the Region leaders on store 1 out
+>> scheduler config evict-leader-scheduler                 // Display the stores in which the scheduler is located since v4.0.0
+>> scheduler config evict-leader-scheduler add-store 2     // Add leader eviction scheduling for store 2
+>> scheduler config evict-leader-scheduler delete-store 2  // Remove leader eviction scheduling for store 2
+>> scheduler add shuffle-leader-scheduler                  // Randomly exchange the leader on different stores
+>> scheduler add shuffle-region-scheduler                  // Randomly schedule the Regions on different stores
+>> scheduler add evict-slow-store-scheduler                // When there is one and only one slow store, evict all Region leaders of that store
+>> scheduler remove grant-leader-scheduler-1               // Remove the corresponding scheduler, and `-1` corresponds to the store ID
+>> scheduler pause balance-region-scheduler 10             // Pause the balance-region scheduler for 10 seconds
+>> scheduler pause all 10                                  // Pause all schedulers for 10 seconds
+>> scheduler resume balance-region-scheduler               // Continue to run the balance-region scheduler
+>> scheduler resume all                                    // Continue to run all schedulers
+>> scheduler config balance-hot-region-scheduler           // Display the configuration of the balance-hot-region scheduler
+>> scheduler describe balance-region-scheduler             // Display the running state and related diagnostic information of the balance-region scheduler
 ```
 
 ### `scheduler describe balance-region-scheduler`
@@ -958,6 +960,24 @@ Usage:
     ```bash
     scheduler config balance-hot-region-scheduler set enable-for-tiflash true
     ```
+
+### `scheduler config evict-leader-scheduler`
+
+Use this command to view and manage the configuration of the `evict-leader-scheduler`.
+
+- When an `evict-leader-scheduler` already exists, use the `add-store` subcommand to add leader eviction scheduling for the specified store:
+
+    ```bash
+    scheduler config evict-leader-scheduler add-store 2       // Add leader eviction scheduling for store 2
+    ```
+
+- When an `evict-leader-scheduler` already exists, use the `delete-store` subcommand to remove leader eviction scheduling for the specified store:
+
+    ```bash
+    scheduler config evict-leader-scheduler delete-store 2    // Remove leader eviction scheduling for store 2
+    ```
+
+    If all store configurations of an `evict-leader-scheduler` are removed, the scheduler itself is automatically removed.
 
 ### `service-gc-safepoint`
 

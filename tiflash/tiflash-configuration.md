@@ -253,8 +253,10 @@ delta_index_cache_size = 0
 
 ## Security settings take effect starting from v4.0.5.
 [security]
-    ## New in v5.0. This configuration item enables or disables log redaction. If the configuration value
-    ## is set to true, all user data in the log will be replaced by ?.
+    ## New in v5.0. This configuration item enables or disables log redaction. Value options: true, false, marker. The marker option is introduced in v8.2.0.
+    ## The default value is false, which means that log redaction is disabled.
+    ## If the configuration item is set to true, all user data in the log is replaced by `?`.
+    ## If the configuration item is set to marker, all user data in the log is wrapped in `‹ ›`. If user data contains `‹` or `›`, `‹` is escaped as `‹‹`, and `›` is escaped as `››`. Based on the marked logs, you can decide whether to desensitize the marked information when the logs are displayed.
     ## Note that you also need to set security.redact-info-log for tiflash-learner's logging in tiflash-learner.toml.
     # redact_info_log = false
 
@@ -290,9 +292,9 @@ delta_index_cache_size = 0
     ## If you set it to 0ms, the optimization is disabled.
     store-batch-retry-recv-timeout = "4ms"
 [security]
-    ## New in v5.0. This configuration item enables or disables log redaction.
-    ## If the configuration value is set to true,
-    ## all user data in the log will be replaced by ?. The default value is false.
+    ## New in v5.0. This configuration item enables or disables log redaction. Value options: true, false.
+    ## The default value is false, which means that log redaction is disabled.
+    ## If the configuration item is set to true, all user data in the log is replaced by `?`.
     redact-info-log = false
 
 [security.encryption]

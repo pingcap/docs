@@ -44,6 +44,12 @@ Configuration for SQL port.
 + Support hot-reload: no
 + SQL gateway address. The format is `<ip>:<port>`.
 
+#### `advertise-addr`
+
++ Default value: `""`
++ Support hot-reload: no
++ Specifies the address that clients use to connect to this TiProxy instance. This configuration item is automatically set when you deploy TiProxy using TiUP or TiDB Operator. If not set, the external IP address of the TiProxy instance is used.
+
 #### `graceful-wait-before-shutdown`
 
 + Default value: `0`
@@ -100,6 +106,23 @@ Configurations for HTTP gateway.
 + Support hot-reload: no
 + Possible values: ``, `v2`
 + Enable the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) on the port. `v2` indicates using the PROXY protocol version 2, and `` indicates disabling the PROXY protocol.
+
+### balance
+
+Configurations for the load balancing policy of TiProxy.
+
+#### `policy`
+
++ Default value: `resource`
++ Support hot-reload: yes
++ Possible values: `resource`, `location`, `connection`
++ Specifies the load balancing policy. For the meaning of each possible value, see [TiProxy load balancing policies](/tiproxy/tiproxy-load-balance.md#configure-load-balancing-policies).
+
+### `labels`
+
++ Default value: `{}`
++ Support hot-reload: yes
++ Specifies server labels. For example, `{ zone = "us-west-1", dc = "dc1" }`.
 
 ### log
 

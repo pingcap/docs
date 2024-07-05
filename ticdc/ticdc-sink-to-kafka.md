@@ -31,6 +31,19 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-v
 - `--target-ts`: Specifies the ending TSO of the changefeed. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
 - `--config`: Specifies the changefeed configuration file. For details, see [TiCDC Changefeed Configuration Parameters](/ticdc/ticdc-changefeed-config.md).
 
+## Supported Kafka versions
+
+The following table shows the minimum supported Kafka versions for each TiCDC version:
+
+| TiCDC version            | Minimum supported Kafka version |
+|:-------------------------|:--------------------------------|
+| TiCDC >= v8.1.0          | 2.1.0                           |
+| v7.6.0 <= TiCDC < v8.1.0 | 2.4.0                           |
+| v7.5.2 <= TiCDC < v8.0.0 | 2.1.0                           |
+| v7.5.0 <= TiCDC < v7.5.2 | 2.4.0                           |
+| v6.5.0 <= TiCDC < v7.5.0 | 2.1.0                           |
+| v6.1.0 <= TiCDC < v6.5.0 | 2.0.0                           |
+
 ## Configure sink URI for Kafka
 
 Sink URI is used to specify the connection information of the TiCDC target system. The format is as follows:
@@ -60,7 +73,7 @@ The following are descriptions of sink URI parameters and values that can be con
 | `127.0.0.1`          | The IP address of the downstream Kafka services.                                 |
 | `9092`               | The port for the downstream Kafka.                                          |
 | `topic-name` | Variable. The name of the Kafka topic. |
-| `kafka-version`      | The version of the downstream Kafka (optional, `2.4.0` by default. Currently, the earliest supported Kafka version is `0.11.0.2` and the latest one is `3.2.0`. This value needs to be consistent with the actual version of the downstream Kafka).                      |
+| `kafka-version`      | The version of the downstream Kafka. This value needs to be consistent with the actual version of the downstream Kafka.                      |
 | `kafka-client-id`    | Specifies the Kafka client ID of the replication task (optional. `TiCDC_sarama_producer_replication ID` by default). |
 | `partition-num`      | The number of the downstream Kafka partitions (optional. The value must be **no greater than** the actual number of partitions; otherwise, the replication task cannot be created successfully. `3` by default). |
 | `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `10MB` by default). From v5.0.6 and v4.0.6, the default value has changed from `64MB` and `256MB` to `10MB`. |
@@ -379,12 +392,16 @@ An example configuration is as follows:
 large-message-handle-compression = "none"
 ```
 
+When `large-message-handle-compression` is enabled, the message received by the consumer is encoded using a specific compression protocol, and the consumer application needs to use the specified compression protocol to decode the data.
+
 This feature is different from the compression feature of the Kafka producer:
 
 * The compression algorithm specified in `large-message-handle-compression` compresses a single Kafka message. The compression is performed before comparing with the message size limit.
-* You can configure the compression algorithm in `sink-uri`. The compression is applied to the entire data sending request, which contains multiple Kafka messages. The compression is performed after comparing with the message size limit.
+* At the same time, you can also configure the compression algorithm by using the `compression` parameter in [`sink-uri`](#configure-sink-uri-for-kafka). This compression algorithm is applied to the entire data sending request, which contains multiple Kafka messages.
 
-When `large-message-handle-compression` is enabled, the message received by the consumer is encoded using a specific compression protocol, and the consumer application needs to use the specified compression protocol to decode the data.
+If you set `large-message-handle-compression`, when TiCDC receives a message, it first compares it to the value of the message size limit parameter, and messages larger than the size limit are compressed. If you also set `compression` in [`sink-uri`](#configure-sink-uri-for-kafka), TiCDC compresses the entire sending data request again at the sink level based on the `sink-uri` setting.
+
+The compression ratio for the two preceding compression methods is calculated as follows: `compression ratio = size before compression / size after compression * 100`.
 
 ### Send handle keys only
 

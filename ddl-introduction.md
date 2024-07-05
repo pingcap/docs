@@ -118,7 +118,7 @@ To improve the user experience of DDL execution, starting from v6.2.0, TiDB enab
 + A logical DDL statement must wait for the previous logical DDL statement to be executed before it can be executed.
 + In other cases, DDL can be executed based on the level of availability for concurrent DDL execution.
 
-In specific, TiDB has upgraded the DDL execution framework in v6.2.0 in the following aspects:
+Specifically, TiDB 6.2.0 has enhanced the DDL execution framework in the following aspects:
 
 + The DDL Owner can execute DDL tasks in parallel based on the preceding logic.
 + The first-in-first-out issue in the DDL Job queue has been addressed. The DDL Owner no longer selects the first job in the queue, but instead selects the job that can be executed at the current time.

@@ -80,7 +80,7 @@ When the telemetry collection feature is enabled for TiSpark, the Spark module w
 You can view TiSpark usage information that is collected in Spark logs. You can set the Spark log level to INFO or lower, for example:
 
 ```shell
-cat {spark.log} | grep Telemetry report | tail -n 1
+grep "Telemetry report" {spark.log} | tail -n 1
 ```
 
 ## Disable telemetry
@@ -286,4 +286,4 @@ To meet compliance requirements in different countries or regions, the usage inf
 - For IP addresses from the Chinese mainland, usage information is sent to and stored on cloud servers in the Chinese mainland.
 - For IP addresses from outside of the Chinese mainland, usage information is sent to and stored on cloud servers in the US.
 
-See [PingCAP Privacy Policy](https://en.pingcap.com/privacy-policy/) for details.
+See [PingCAP Privacy Policy](https://www.pingcap.com/privacy-policy/) for details.
