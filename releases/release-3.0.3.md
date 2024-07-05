@@ -1,6 +1,7 @@
 ---
 title: TiDB 3.0.3 Release Notes
 aliases: ['/docs/dev/releases/release-3.0.3/','/docs/dev/releases/3.0.3/']
+summary: TiDB 3.0.3 was released on August 29, 2019. It includes various fixes and updates for SQL optimizer, SQL execution engine, server, DDL, monitor, TiKV, PD, TiDB Binlog, TiDB Lightning, and TiDB Ansible. Notable fixes include issues with incorrect results, type errors, panic occurrences, and permission check errors. The release also optimizes PD operations, removes unsupported Grafana Collector components, and updates TiKV alerting rules. Additionally, TiDB Ansible now supports Spark V2.4.3 and TiSpark V2.1.4.
 ---
 
 # TiDB 3.0.3 Release Notes
@@ -16,7 +17,7 @@ TiDB Ansible version: 3.0.3
 + SQL Optimizer
     - Add the `opt_rule_blacklist` table to disable logic optimization rules such as `aggregation_eliminate` and `column_prune` [#11658](https://github.com/pingcap/tidb/pull/11658)
     - Fix the issue that incorrect results might be returned for `Index Join` when the join key uses a prefix index or an unsigned index column that is equal to a negative value [#11759](https://github.com/pingcap/tidb/pull/11759)
-    - Fix the issue that `”` or `\` in the `SELECT` statements of `create … binding ...` might result in parsing errors [#11726](https://github.com/pingcap/tidb/pull/11726)
+    - Fix the issue that `"` or `\` in the `SELECT` statements of `create … binding ...` might result in parsing errors [#11726](https://github.com/pingcap/tidb/pull/11726)
 + SQL Execution Engine
     - Fix the issue that type errors in the return value might occur when the Quote function handles a null value [#11619](https://github.com/pingcap/tidb/pull/11619)
     - Fix the issue that incorrect results for `ifnull` might be returned when Max/Min is used for type inferring with `NotNullFlag` retained [#11641](https://github.com/pingcap/tidb/pull/11641)

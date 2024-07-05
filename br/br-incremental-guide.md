@@ -1,6 +1,6 @@
 ---
 title: TiDB Incremental Backup and Restore Guide
-summary: Learns about how to perform incremental backup and restore in TiDB.
+summary: Incremental data is the differentiated data between starting and end snapshots, along with DDLs. It reduces backup volume and requires setting `tidb_gc_life_time` for incremental backup. Use `tiup br backup` with `--lastbackupts` for incremental backup and ensure all previous data is restored before restoring incremental data.
 ---
 
 # TiDB Incremental Backup and Restore Guide
@@ -11,9 +11,15 @@ Incremental data of a TiDB cluster is differentiated data between the starting s
 >
 > Development for this feature has stopped. It is recommended that you use [log backup and PITR](/br/br-pitr-guide.md) as an alternative.
 
+## Limitations
+
+Because restoring the incremental backup relies on the snapshot of the database table at the backup time point to filter incremental DDL statements, the tables deleted during the incremental backup process might still exist after the data restore and need to be manually deleted.
+
+The incremental backup does not support batch renaming of tables. If batch renaming of tables occurs during the incremental backup process, the data restore might fail. It is recommended to perform a full backup after batch renaming tables, and use the latest full backup to replace the incremental data during restore.
+
 ## Back up incremental data
 
-To back up incremental data, run the `br backup` command with **the last backup timestamp** `--lastbackupts` specified. In this way, br command-line tool automatically backs up incremental data generated between `lastbackupts` and the current time. To get `--lastbackupts`, run the `validate` command. The following is an example:
+To back up incremental data, run the `tiup br backup` command with **the last backup timestamp** `--lastbackupts` specified. In this way, br command-line tool automatically backs up incremental data generated between `lastbackupts` and the current time. To get `--lastbackupts`, run the `validate` command. The following is an example:
 
 ```shell
 LAST_BACKUP_TS=`tiup br validate decode --field="end-version" --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}"| tail -n1`

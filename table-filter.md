@@ -21,11 +21,11 @@ Table filters can be applied to the tools using multiple `-f` or `--filter` comm
 * [BR](/br/backup-and-restore-overview.md):
 
     ```shell
-    ./br backup full -f 'foo*.*' -f 'bar*.*' -s 'local:///tmp/backup'
+    tiup br backup full -f 'foo*.*' -f 'bar*.*' -s 'local:///tmp/backup'
     ```
 
     ```shell
-    ./br restore full -f 'foo*.*' -f 'bar*.*' -s 'local:///tmp/backup'
+    tiup br restore full -f 'foo*.*' -f 'bar*.*' -s 'local:///tmp/backup'
     ```
 
 </CustomContent>
@@ -33,7 +33,7 @@ Table filters can be applied to the tools using multiple `-f` or `--filter` comm
 * [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview):
 
     ```shell
-    ./dumpling -f 'foo*.*' -f 'bar*.*' -P 3306 -o /tmp/data/
+    tiup dumpling -f 'foo*.*' -f 'bar*.*' -P 3306 -o /tmp/data/
     ```
 
 <CustomContent platform="tidb">
@@ -41,7 +41,7 @@ Table filters can be applied to the tools using multiple `-f` or `--filter` comm
 * [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md):
 
     ```shell
-    ./tidb-lightning -f 'foo*.*' -f 'bar*.*' -d /tmp/data/ --backend tidb
+    tiup tidb-lightning -f 'foo*.*' -f 'bar*.*' -d /tmp/data/ --backend tidb
     ```
 
 </CustomContent>
@@ -51,7 +51,7 @@ Table filters can be applied to the tools using multiple `-f` or `--filter` comm
 * [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview):
 
     ```shell
-    ./tidb-lightning -f 'foo*.*' -f 'bar*.*' -d /tmp/data/ --backend tidb
+    tiup tidb-lightning -f 'foo*.*' -f 'bar*.*' -d /tmp/data/ --backend tidb
     ```
 
 </CustomContent>
@@ -139,8 +139,8 @@ employees.*
 the following two invocations are equivalent:
 
 ```bash
-./dumpling -f '@config/filter.txt'
-./dumpling -f 'employees.*' -f '*.WorkOrder'
+tiup dumpling -f '@config/filter.txt'
+tiup dumpling -f 'employees.*' -f '*.WorkOrder'
 ```
 
 A filter file cannot further import another file.
@@ -235,10 +235,10 @@ To build a block list, an explicit `*.*` must be used as the first rule, otherwi
 
 ```bash
 # every table will be filtered out
-./dumpling -f '!*.Password'
+tiup dumpling -f '!*.Password'
 
 # only the "Password" table is filtered out, the rest are included.
-./dumpling -f '*.*' -f '!*.Password'
+tiup dumpling -f '*.*' -f '!*.Password'
 ```
 
 In a filter list, if a table name matches multiple patterns, the last match decides the outcome. For instance:

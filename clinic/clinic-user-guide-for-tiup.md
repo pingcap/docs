@@ -1,6 +1,6 @@
 ---
 title: Troubleshoot Clusters Using PingCAP Clinic
-summary: Learn how to use the PingCAP Clinic Diagnostic Service to troubleshoot cluster problems remotely and perform a quick check of the cluster status on a TiDB cluster or DM cluster deployed using TiUP.
+summary: PingCAP Clinic Diagnostic Service (PingCAP Clinic) helps troubleshoot TiDB and DM clusters deployed using TiUP. It allows remote troubleshooting and local cluster status checks using Diag client and Clinic Server. Prerequisites include installing Diag, setting an access token, and configuring the region. Troubleshooting remotely involves collecting, viewing, and uploading diagnostic data. Performing a quick check on the cluster status locally involves collecting and diagnosing configuration data. Data upload supports breakpoint upload, and uploaded data is kept on the Clinic Server for a maximum of 180 days.
 ---
 
 # Troubleshoot Clusters Using PingCAP Clinic
@@ -30,7 +30,7 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
 
 1. Install Diag.
 
-   - If you have installed TiUP on your control machine, run the following command to install Diag:
+    - If you have installed TiUP on your control machine, run the following command to install Diag:
 
         ```bash
         tiup install diag
@@ -58,7 +58,7 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
         <SimpleTab groupId="clinicServer">
         <div label="Clinic Server for international users" value="clinic-us">
 
-        [Clinic Server for international users](https://clinic.pingcap.com): Data is stored in AWS in US.
+        [Clinic Server for international users](https://clinic.pingcap.com): Data is stored in AWS in US regions.
 
         </div>
         <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
@@ -323,7 +323,7 @@ You can have a quick check on the cluster status locally using Diag. Even if you
     The following is the details of the abnormalities.
 
     ### Diagnostic result summary
-    The configuration rules are all derived from PingCAP’s OnCall Service.
+    The configuration rules are all derived from PingCAP's OnCall Service.
 
     If the results of the configuration rules are found to be abnormal, they may cause the cluster to fail.
 

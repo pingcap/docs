@@ -230,7 +230,7 @@ ALTER TABLE employees COMPACT PARTITION pNorth, pEast TIFLASH REPLICA;
 
 ### Replace Shuffled Hash Join with Broadcast Hash Join
 
-For `Join` operations with small tables, the Broadcast Hash Join algorithm can avoid transfering large tables, thereby improving the computing performance.
+For `Join` operations with small tables, the Broadcast Hash Join algorithm can avoid transferring large tables, thereby improving the computing performance.
 
 - The [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50) variable controls whether to use the Broadcast Hash Join algorithm. If the table size (unit: byte) is smaller than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
 
@@ -244,7 +244,7 @@ For `Join` operations with small tables, the Broadcast Hash Join algorithm can a
     set @@tidb_broadcast_join_threshold_count = 100000;
     ```
 
-The following example shows the query result before and after `tidb_broadcast_join_threshold_size` is re-configured. Before the re-configuration, the `ExchangeType` of `ExchangeSender_29` is `HashPartition`. After the value of this variable chages to `10000000`, the `ExchangeType` of `ExchangeSender_29` changes to `Broadcast`.
+The following example shows the query result before and after `tidb_broadcast_join_threshold_size` is re-configured. Before the re-configuration, the `ExchangeType` of `ExchangeSender_29` is `HashPartition`. After the value of this variable changes to `10000000`, the `ExchangeType` of `ExchangeSender_29` changes to `Broadcast`.
 
 Before `tidb_broadcast_join_threshold_size` is re-configured:
 
@@ -305,7 +305,7 @@ The [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-n
 set @@tidb_max_tiflash_threads = 20;
 ```
 
-The following example shows the query result before and after `tidb_max_tiflash_threads` is re-configured. Before the re-configuration, the execution concurrency of all TiFlash operators is 24. After the value of this variable changes to `20`, the concurrency becomes 60.
+The following example shows the query result before and after `tidb_max_tiflash_threads` is re-configured. Before `tidb_max_tiflash_threads` is set, the concurrency of request execution for a single TiFlash instance is 8 threads. Since the cluster has a total of 3 TiFlash instances, the total number of threads for request execution on all TiFlash instances is 24 (8 × 3). After `tidb_max_tiflash_threads` is set to `20`, the total number of threads for request execution on all TiFlash instances is 60 (20 × 3).
 
 Before `tidb_max_tiflash_threads` is re-configured:
 

@@ -1,5 +1,6 @@
 ---
 title: TiDB 6.2.0 Release Notes
+summary: TiDB 6.2.0-DMR introduces new features like visual execution plans, monitoring page, and lock view. It also supports concurrent DDL operations and enhances the performance of aggregation operations. TiKV now supports automatic CPU usage tuning and detailed configuration information listing. TiFlash adds FastScan for data scanning and improves error handling. BR now supports continuous data validation and automatically identifies the region of Amazon S3 buckets. TiCDC supports filtering DDL and DML events. There are also compatibility changes, bug fixes, and improvements across various tools.
 ---
 
 # TiDB 6.2.0 Release Notes
@@ -221,7 +222,7 @@ In v6.2.0-DMR, the key new features and improvements are as follows:
 
     This feature does not need manual configuration. If your TiDB cluster is v6.1.0 or later versions and TiDB Lightning is v6.2.0 or later versions, the new physical import mode takes effect automatically.
 
-    [User document](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import) [#35148](https://github.com/pingcap/tidb/issues/35148) @[gozssky](https://github.com/gozssky)
+    [User document](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import) [#35148](https://github.com/pingcap/tidb/issues/35148) @[sleepymole](https://github.com/sleepymole)
 
 * Refactor the [user documentation of TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to make its structure more reasonable and clear. The terms for "backend" is also modified to lower the understanding barrier for new users:
 
@@ -328,7 +329,7 @@ Since TiDB v6.2.0, backing up and restoring RawKV using BR is deprecated.
 
     - Support the `SHOW COUNT(*) WARNINGS` and `SHOW COUNT(*) ERRORS` statements [#25068](https://github.com/pingcap/tidb/issues/25068) @[likzn](https://github.com/likzn)
     - Add validation check for some system variables [#35048](https://github.com/pingcap/tidb/issues/35048) @[morgo](https://github.com/morgo)
-    - Optimize the error messages for some type conversions [#32447](https://github.com/pingcap/tidb/issues/32744) @[fanrenhoo](https://github.com/fanrenhoo)
+    - Optimize the error messages for some type conversions [#32744](https://github.com/pingcap/tidb/issues/32744) @[fanrenhoo](https://github.com/fanrenhoo)
     - The `KILL` command now supports DDL operations [#24144](https://github.com/pingcap/tidb/issues/24144) @[morgo](https://github.com/morgo)
     - Make the output of `SHOW TABLES/DATABASES LIKE …` more MySQL-compatible. The column names in the output contain the `LIKE` value [#35116](https://github.com/pingcap/tidb/issues/35116) @[likzn](https://github.com/likzn)
     - Improve the performance of JSON-related functions [#35859](https://github.com/pingcap/tidb/issues/35859) @[wjhuang2016](https://github.com/wjhuang2016)

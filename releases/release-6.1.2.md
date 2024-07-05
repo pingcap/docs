@@ -1,5 +1,6 @@
 ---
 title: TiDB 6.1.2 Release Notes
+summary: TiDB 6.1.2 was released on October 24, 2022. The release includes improvements to TiDB, TiKV, Tools, PD, TiFlash, and bug fixes for various issues in each component. The improvements include setting placement rules and TiFlash replicas simultaneously, support for configuring various settings, and enhancing performance. Bug fixes address issues such as incorrect cleanup of privileges, incorrect output, query failures, and performance issues.
 ---
 
 # TiDB 6.1.2 Release Notes
@@ -8,7 +9,7 @@ Release date: October 24, 2022
 
 TiDB version: 6.1.2
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup) | [Installation packages](https://www.pingcap.com/download/?version=v6.1.2#version-list)
+Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
 
 ## Improvements
 

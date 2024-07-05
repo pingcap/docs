@@ -163,13 +163,6 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
               "min" = 1
               "step" = 1
             }
-            "node_size" = "2C8G"
-          },
-          {
-            "node_quantity_range" = {
-              "min" = 1
-              "step" = 1
-            }
             "node_size" = "4C16G"
           },
           {
@@ -212,17 +205,6 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
           },
         ])
         "tikv" = tolist([
-          {
-            "node_quantity_range" = {
-              "min" = 3
-              "step" = 3
-            }
-            "node_size" = "2C8G"
-            "storage_size_gib_range" = {
-              "max" = 500
-              "min" = 200
-            }
-          },
           {
             "node_quantity_range" = {
               "min" = 3
@@ -622,7 +604,7 @@ You can scale a TiDB cluster when its status is `AVAILABLE`.
 
 1. In the `cluster.tf` file that is used when you [create the cluster](#create-a-cluster-using-the-cluster-resource), edit the `components` configurations.
 
-    For example, to add one more node for TiDB, 3 more nodes for TiKV (The number of TiKV nodes needs to be a multiple of 3 for its step is 3. You can [get this information from the cluster specifcation](#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source)), and one more node for TiFlash, you can edit the configurations as follows:
+    For example, to add one more node for TiDB, 3 more nodes for TiKV (The number of TiKV nodes needs to be a multiple of 3 for its step is 3. You can [get this information from the cluster specification](#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source)), and one more node for TiFlash, you can edit the configurations as follows:
 
    ```
        components = {

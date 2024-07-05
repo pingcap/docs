@@ -78,6 +78,7 @@ Restart the TiDB service, add the `-skip-grant-table=true` parameter in the conf
 
 You can use the following methods to export the data in TiDB:
 
+- Export data using Dumpling. For more information, see [Dumpling documentation](/dumpling-overview.md).
 - Export data using mysqldump and the `WHERE` clause.
 - Use the MySQL client to export the results of `select` to a file.
 
@@ -92,7 +93,7 @@ To migrate all the data or migrate incrementally from DB2 or Oracle to TiDB, see
 
 Currently, it is recommended to use OGG.
 
-### Error: `java.sql.BatchUpdateExecption:statement count 5001 exceeds the transaction limitation` while using Sqoop to write data into TiDB in `batches`
+### Error: `java.sql.BatchUpdateException:statement count 5001 exceeds the transaction limitation` while using Sqoop to write data into TiDB in `batches`
 
 In Sqoop, `--batch` means committing 100 `statement`s in each batch, but by default each `statement` contains 100 SQL statements. So, 100 * 100 = 10000 SQL statements, which exceeds 5000, the maximum number of statements allowed in a single TiDB transaction.
 
@@ -170,13 +171,13 @@ Yes.
 
 ### Why does the query speed getting slow after deleting data?
 
-Deleting a large amount of data leaves a lot of useless keys, affecting the query efficiency. Currently the Region Merge feature is in development, which is expected to solve this problem. For details, see the [deleting data section in TiDB Best Practices](https://en.pingcap.com/blog/tidb-best-practice/#write).
+Deleting a large amount of data leaves a lot of useless keys, affecting the query efficiency. The [Region Merge feature](/best-practices/massive-regions-best-practices.md#method-3-enable-region-merge) can solve this problem. For more details, see the [deleting data section in TiDB Best Practices](https://www.pingcap.com/blog/tidb-best-practice/#write).
 
 ### What is the most efficient way of deleting data?
 
 When deleting a large amount of data, it is recommended to use `Delete from t where xx limit 5000;`. It deletes through the loop and uses `Affected Rows == 0` as a condition to end the loop, so as not to exceed the limit of transaction size. With the prerequisite of meeting business filtering logic, it is recommended to add a strong filter index column or directly use the primary key to select the range, such as `id >= 5000*n+m and id < 5000*(n+1)+m`.
 
-If the amount of data that needs to be deleted at a time is very large, this loop method will get slower and slower because each deletion traverses backward. After deleting the previous data, lots of deleted flags remain for a short period (then all will be processed by Garbage Collection) and influence the following Delete statement. If possible, it is recommended to refine the Where condition. See [details in TiDB Best Practices](https://en.pingcap.com/blog/tidb-best-practice/#write).
+If the amount of data that needs to be deleted at a time is very large, this loop method will get slower and slower because each deletion traverses backward. After deleting the previous data, lots of deleted flags remain for a short period (then all will be processed by Garbage Collection) and influence the following Delete statement. If possible, it is recommended to refine the Where condition. See [details in TiDB Best Practices](https://www.pingcap.com/blog/tidb-best-practice/#write).
 
 ### How to improve the data loading speed in TiDB?
 

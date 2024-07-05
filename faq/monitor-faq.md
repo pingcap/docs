@@ -18,7 +18,7 @@ The monitoring system of TiDB consists of Prometheus and Grafana. From the dashb
 
 Yes. Find the startup script on the machine where Prometheus is started, edit the startup parameter and restart Prometheus.
 
-```config
+```
 --storage.tsdb.retention="60d"
 ```
 

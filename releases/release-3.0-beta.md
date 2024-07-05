@@ -1,6 +1,7 @@
 ---
 title: TiDB 3.0 Beta Release Notes
 aliases: ['/docs/dev/releases/release-3.0-beta/','/docs/dev/releases/3.0beta/']
+summary: TiDB 3.0 Beta, released on January 19, 2019, focuses on stability, SQL optimizer, statistics, and execution engine. New features include support for views, window functions, range partitioning, and hash partitioning. The SQL optimizer has been enhanced with various optimizations, including support for index join in transactions, constant propagation optimization, and support for subqueries in the DO statement. The SQL executor has also been optimized for better performance. Privilege management, server, compatibility, and DDL have all been improved. TiDB Lightning now supports batch import for a single table, while PD and TiKV have also received various enhancements and new features.
 ---
 
 # TiDB 3.0 Beta Release Notes
@@ -69,7 +70,7 @@ On January 19, 2019, TiDB 3.0 Beta is released. The corresponding TiDB Ansible 3
     - Support the MySQL 320 handshake protocol [#8812](https://github.com/pingcap/tidb/pull/8812)
     - Support using the unsigned `bigint` column as the auto-increment column [#8181](https://github.com/pingcap/tidb/pull/8181)
     - Support the `SHOW CREATE DATABASE IF NOT EXISTS` syntax [#8926](https://github.com/pingcap/tidb/pull/8926)
-    - Abandon the predicate pushdown operation when the filtering condition contains a user variable to improve the compatibility with MySQL’s behavior of using user variables to mock the Window Function behavior [#8412](https://github.com/pingcap/tidb/pull/8412)
+    - Abandon the predicate pushdown operation when the filtering condition contains a user variable to improve the compatibility with MySQL's behavior of using user variables to mock the Window Function behavior [#8412](https://github.com/pingcap/tidb/pull/8412)
 + DDL
     - Support fast recovery of mistakenly deleted tables [#7937](https://github.com/pingcap/tidb/pull/7937)
     - Support adjusting the number of concurrencies of `ADD INDEX` dynamically [#8295](https://github.com/pingcap/tidb/pull/8295)

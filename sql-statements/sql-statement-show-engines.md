@@ -10,12 +10,13 @@ This statement is used to list all supported storage engines. The syntax is incl
 
 ## Synopsis
 
-**ShowEnginesStmt:**
+```ebnf+diagram
+ShowEnginesStmt ::=
+    "SHOW" "ENGINES" ShowLikeOrWhere?
 
-![ShowEnginesStmt](/media/sqlgram/ShowEnginesStmt.png)
-
-```sql
-SHOW ENGINES;
+ShowLikeOrWhere ::=
+    "LIKE" SimpleExpr
+|   "WHERE" Expression
 ```
 
 ## Examples
@@ -32,4 +33,4 @@ mysql> SHOW ENGINES;
 
 ## MySQL compatibility
 
-* This statement will always only return InnoDB as the supported engine. Internally, TiDB will typically use TiKV as the storage engine.
+* This statement will always only return InnoDB as the supported engine. Internally, TiDB will typically use [TiKV](/tikv-overview.md) as the storage engine.

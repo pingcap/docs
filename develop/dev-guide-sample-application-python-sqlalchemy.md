@@ -77,6 +77,10 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 <SimpleTab>
 <div label="TiDB Serverless">
 
+> **Note:**
+>
+> Currently, TiDB Serverless clusters have a limitation: if there are no active connections for 5 minutes, they will shut down, which closes all connections. Therefore, when using SQLAlchemy with TiDB Serverless clusters, pooled connections might encounter `OperationalError` such as `Lost connection to MySQL server during query` or `MySQL Connection not available`. To avoid this error, you can set the `pool_recycle` parameter to `300`. For more information, see [Dealing with Disconnects](https://docs.sqlalchemy.org/en/20/core/pooling.html#dealing-with-disconnects) in SQLAlchemy documentation.
+
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
@@ -84,6 +88,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 3. Ensure the configurations in the connection dialog match your operating environment.
 
     - **Endpoint Type** is set to `Public`
+    - **Branch** is set to `main`
     - **Connect With** is set to `General`
     - **Operating System** matches your environment.
 
@@ -91,11 +96,11 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     >
     > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
 
-4. Click **Create password** to create a random password.
+4. Click **Generate Password** to create a random password.
 
     > **Tip:**
-    >
-    > If you have created a password before, you can either use the original password or click **Reset password** to generate a new one.
+    > 
+    > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
 
 5. Run the following command to copy `.env.example` and rename it to `.env`:
 
@@ -125,7 +130,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. Click **Allow Access from Anywhere** and then click **Download TiDB cluster CA** to download the CA certificate.
+3. Click **Allow Access from Anywhere** and then click **Download CA cert** to download the CA certificate.
 
     For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
 

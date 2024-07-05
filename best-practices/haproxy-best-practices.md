@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Using HAProxy in TiDB
-summary: This document describes best practices for configuration and usage of HAProxy in TiDB.
+summary: HAProxy is a free, open-source load balancer and proxy server for TCP and HTTP-based applications. It provides high availability, load balancing, health checks, sticky sessions, SSL support, and monitoring. To deploy HAProxy, ensure hardware and software requirements are met, then install and configure it. Use the latest stable version for best results.
 aliases: ['/docs/dev/best-practices/haproxy-best-practices/','/docs/dev/reference/best-practices/haproxy/']
 ---
 
@@ -35,12 +35,12 @@ Before you deploy HAProxy, make sure that you meet the hardware and software req
 
 ### Hardware requirements
 
-For your server, it is recommended to meet the following hardware requirements. You can also improve server specifications according to the load balancing environment.
+According to the [HAProxy documentation](https://www.haproxy.com/documentation/haproxy-enterprise/getting-started/installation/linux/), the minimum hardware configuration for HAProxy is shown in the following table. Under the Sysbench `oltp_read_write` workload, the maximum QPS for this configuration is about 50K. You can increase the server configuration according to your load balancing environment.
 
 | Hardware resource      | Minimum specification |
 | :--------------------- | :-------------------- |
 | CPU                    | 2 cores, 3.5 GHz      |
-| Memory                 | 16 GB                 |
+| Memory                 | 4 GB                 |
 | Storage                | 50 GB (SATA)          |
 | Network Interface Card | 10G Network Card      |
 

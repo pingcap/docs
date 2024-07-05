@@ -9,7 +9,7 @@ summary: Learn how to build a TiDB Serverless cluster in TiDB Cloud and connect 
 
 <CustomContent platform="tidb">
 
-This document walks you through the quickest way to get started with TiDB. You will use [TiDB Cloud](https://en.pingcap.com/tidb-cloud) to create a TiDB Serverless cluster, connect to it, and run a sample application on it.
+This document walks you through the quickest way to get started with TiDB. You will use [TiDB Cloud](https://www.pingcap.com/tidb-cloud) to create a TiDB Serverless cluster, connect to it, and run a sample application on it.
 
 If you need to run TiDB on your local machine, see [Starting TiDB Locally](/quick-start-with-tidb.md).
 
@@ -39,7 +39,7 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 7. In the dialog, select your preferred connection method and operating system to get the corresponding connection string. This document uses MySQL client as an example.
 
-8. Click **Create password** to generate a random password. The generated password will not show again, so save your password in a secure location. If you do not set a root password, you cannot connect to the cluster.
+8. Click **Generate Password** to generate a random password. The generated password will not show again, so save your password in a secure location. If you do not set a root password, you cannot connect to the cluster.
 
 <CustomContent platform="tidb">
 

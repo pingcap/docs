@@ -299,7 +299,7 @@ Requires the `CREATE VIEW` privilege.
 
 ### DROP DATABASE
 
-Requires the `DROP` privilege for the table.
+Requires the `DROP` privilege for the database.
 
 ### DROP INDEX
 
@@ -412,6 +412,10 @@ Requires `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
 ### CALIBRATE RESOURCE
 
 Requires `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
+
+### SET RESOURCE GROUP
+
+When the system variable [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) is set to `ON`, you need to have the `SUPER` or `RESOURCE_GROUP_ADMIN` or `RESOURCE_GROUP_USER` privilege to execute this statement.
 
 ## Implementation of the privilege system
 

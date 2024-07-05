@@ -52,4 +52,5 @@ This statement is a TiDB extension. The implementation is modeled on sequences a
 ## See also
 
 * [CREATE SEQUENCE](/sql-statements/sql-statement-create-sequence.md)
+* [ALTER SEQUENCE](/sql-statements/sql-statement-alter-sequence.md)
 * [SHOW CREATE SEQUENCE](/sql-statements/sql-statement-show-create-sequence.md)

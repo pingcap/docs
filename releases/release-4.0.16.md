@@ -1,5 +1,6 @@
 ---
 title: TiDB 4.0.16 Release Notes
+summary: TiDB 4.0.16 was released on December 17, 2021. The release includes compatibility changes for TiKV and Tools, improvements for TiDB, TiKV, and Tools, bug fixes for TiDB, TiKV, PD, TiFlash, TiDB Binlog, and TiCDC. The bug fixes address various issues such as query panics, wrong results, panics, and memory leaks. The release also includes fixes for TiCDC replication interruption, OOM in container environments, and memory leak issues.
 ---
 
 # TiDB 4.0.16 Release Notes
@@ -80,7 +81,7 @@ TiDB version: 4.0.16
 + PD
 
     - Fix a panic issue that occurs after the TiKV node is removed [#4344](https://github.com/tikv/pd/issues/4344)
-    - Fix slow leader election caused by stucked region syncer [#3936](https://github.com/tikv/pd/issues/3936)
+    - Fix slow leader election caused by stuck region syncer [#3936](https://github.com/tikv/pd/issues/3936)
     - Support that the evict leader scheduler can schedule regions with unhealthy peers [#4093](https://github.com/tikv/pd/issues/4093)
 
 + TiFlash

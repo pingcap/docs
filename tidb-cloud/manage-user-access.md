@@ -7,7 +7,7 @@ summary: Learn how to manage identity access in TiDB Cloud.
 
 This document describes how to manage access to organizations, projects, roles, and user profiles in TiDB Cloud.
 
-Before accessing TiDB Cloud, [create a TiDB cloud account](https://tidbcloud.com/free-trial). You can either sign up with email and password so that you can [manage your password using TiDB Cloud](/tidb-cloud/tidb-cloud-password-authentication.md), or choose your Google, GitHub, or Microsoft account for single sign-on (SSO) to TiDB Cloud.
+Before accessing TiDB Cloud, [create a TiDB Cloud account](https://tidbcloud.com/free-trial). You can either sign up with email and password so that you can [manage your password using TiDB Cloud](/tidb-cloud/tidb-cloud-password-authentication.md), or choose your Google, GitHub, or Microsoft account for single sign-on (SSO) to TiDB Cloud.
 
 ## Organizations and projects
 
@@ -84,7 +84,7 @@ At the organization level, TiDB Cloud defines four roles, in which `Organization
 
 > **Note:**
 >
-> The `Organization Console Audit Admin` role is only visible upon request. It is recommended that you use the `Organization Owner` role for [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md). If you need to use the `Organization Console Audit Admin` role, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for the Organization Console Audit Admin role" in the **Description** field and click **Send**.
+> The `Organization Console Audit Admin` role is used to manage audit logging in the TiDB Cloud console, instead of database audit logging. To manage database auditing, use the `Project Owner` role at the project level.
 
 ### Project roles
 
@@ -104,6 +104,7 @@ At the project level, TiDB Cloud defines three roles, in which `Project Owner` c
 | Manage [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for all TiDB Serverless clusters in the project. | ✅ | ❌ | ❌ |
 | Manage cluster operations in the project, such as cluster creation, modification, and deletion. | ✅ | ❌ | ❌ |
 | Manage branches for TiDB Serverless clusters in the project, such as branch creation, connection, and deletion. | ✅ | ❌ | ❌ |
+| Manage [recovery groups](/tidb-cloud/recovery-group-overview.md) for TiDB Dedicated clusters in the project, such as recovery group creation and deletion. | ✅ | ❌ | ❌ |
 | Manage cluster data such as data import, data backup and restore, and data migration. | ✅ | ✅ | ❌ |
 | Manage [Data Service](/tidb-cloud/data-service-overview.md) for data read-only operations such as using or creating endpoints to read data. | ✅ | ✅ | ✅ |
 | Manage [Data Service](/tidb-cloud/data-service-overview.md) for data read and write operations. | ✅ | ✅ | ❌ |

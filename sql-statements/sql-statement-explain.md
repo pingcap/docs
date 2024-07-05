@@ -6,7 +6,7 @@ aliases: ['/docs/dev/sql-statements/sql-statement-explain/','/docs/dev/reference
 
 # `EXPLAIN`
 
-The `EXPLAIN` statement shows the execution plan for a query without executing it. It is complimented by `EXPLAIN ANALYZE` which will execute the query. If the output of `EXPLAIN` does not match the expected result, consider executing `ANALYZE TABLE` on each table in the query.
+The `EXPLAIN` statement shows the execution plan for a query without executing it. It complements the `EXPLAIN ANALYZE` statement, which executes the query. If the output of `EXPLAIN` does not match the expected result, consider executing `ANALYZE TABLE` on each table in the query to make sure the table statistics are up to date.
 
 The statements `DESC` and `DESCRIBE` are aliases of this statement. The alternative usage of `EXPLAIN <tableName>` is documented under [`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md).
 
@@ -192,10 +192,12 @@ To specify the format of the `EXPLAIN` output, you can use the `FORMAT = xxx` sy
 | FORMAT | Description |
 | ------ | ------ |
 | Not specified  | If the format is not specified, `EXPLAIN` uses the default format `row`. |
-| `row`  | The `EXPLAIN` statement outputs results in a tabular format. See [Understand the Query Execution Plan](/explain-overview.md) for more information. |
-| `brief`  | The operator IDs in the output of the `EXPLAIN` statement are simplified, compared with those when `FORMAT` is left unspecified. |
-| `dot`    | The `EXPLAIN` statement outputs DOT execution plans, which can be used to generate PNG files through a `dot` program (in the `graphviz` package). |
-| `tidb_json` | The `EXPLAIN` statement outputs execution plans in JSON and stores the operator information in a JSON array. |
+| `brief`        | The operator IDs in the output of the `EXPLAIN` statement are simplified, compared with those when `FORMAT` is left unspecified. |
+| `dot`          | The `EXPLAIN` statement outputs DOT execution plans, which can be used to generate PNG files through a `dot` program (in the `graphviz` package). |
+| `row`          | The `EXPLAIN` statement outputs results in a tabular format. See [Understand the Query Execution Plan](/explain-overview.md) for more information. |
+| `tidb_json`    | The `EXPLAIN` statement outputs execution plans in JSON and stores the operator information in a JSON array. |
+| `verbose`      | The `EXPLAIN` statement outputs results in the `row` format, with an additional `estCost` column for the estimated cost of the query in the results. For more information about how to use this format, see [SQL Plan Management](/sql-plan-management.md). |
+| `plan_cache`   | The `EXPLAIN` statement outputs results in the `row` format, with the [Plan Cache](/sql-non-prepared-plan-cache.md#diagnostics) information as a warning. |
 
 <SimpleTab>
 
@@ -334,7 +336,7 @@ In the output, `id`, `estRows`, `taskType`, `accessObject`, and `operatorInfo` h
 
 ## MySQL compatibility
 
-* Both the format of `EXPLAIN` and the potential execution plans in TiDB differ substaintially from MySQL.
+* Both the format of `EXPLAIN` and the potential execution plans in TiDB differ substantially from MySQL.
 * TiDB does not support the `FORMAT=JSON` or `FORMAT=TREE` options.
 * `FORMAT=tidb_json` in TiDB is the JSON format output of the default `EXPLAIN` result. The format and fields are different from the `FORMAT=JSON` output in MySQL.
 

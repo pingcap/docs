@@ -10,17 +10,12 @@ The `SHOW CREATE SEQUENCE` shows the detailed information of a sequence, which i
 
 ## Synopsis
 
-**ShowCreateSequenceStmt:**
-
-![ShowCreateSequenceStmt](/media/sqlgram/ShowCreateSequenceStmt.png)
-
-**TableName:**
-
-![TableName](/media/sqlgram/TableName.png)
+```ebnf+diagram
+ShowCreateSequenceStmt ::=
+    "SHOW" "CREATE" "SEQUENCE" ( SchemaName "." )? TableName
+```
 
 ## Examples
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE SEQUENCE seq;
@@ -29,8 +24,6 @@ CREATE SEQUENCE seq;
 ```
 Query OK, 0 rows affected (0.03 sec)
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 SHOW CREATE SEQUENCE seq;
@@ -52,4 +45,5 @@ This statement is a TiDB extension. The implementation is modeled on sequences a
 ## See also
 
 * [CREATE SEQUENCE](/sql-statements/sql-statement-create-sequence.md)
+* [ALTER SEQUENCE](/sql-statements/sql-statement-alter-sequence.md)
 * [DROP SEQUENCE](/sql-statements/sql-statement-drop-sequence.md)

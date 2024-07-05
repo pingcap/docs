@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Developing Java Applications with TiDB
-summary: Learn the best practices for developing Java applications with TiDB.
+summary: This document introduces best practices for developing Java applications with TiDB, covering database-related components, JDBC usage, connection pool configuration, data access framework, Spring Transaction, and troubleshooting tools. TiDB is highly compatible with MySQL, so most MySQL-based Java application best practices also apply to TiDB.
 aliases: ['/docs/dev/best-practices/java-app-best-practices/','/docs/dev/reference/best-practices/java-app/']
 ---
 
@@ -223,7 +223,12 @@ The application needs to return the connection after finishing using it. It is a
 
 ### Probe configuration
 
-The connection pool maintains persistent connections to TiDB. TiDB does not proactively close client connections by default (unless an error is reported), but generally there will be network proxies such as LVS or HAProxy between the client and TiDB. Usually, these proxies will proactively clean up connections that are idle for a certain period of time (controlled by the proxy's idle configuration). In addition to paying attention to the idle configuration of the proxies, the connection pool also needs to keep alive or probe connections.
+The connection pool maintains persistent connections from clients to TiDB as follows:
+
+- Before v5.4, TiDB does not proactively close client connections by default (unless an error is reported).
+- Starting from v5.4, TiDB automatically closes client connections after `28800` seconds (this is, `8` hours) of inactivity by default. You can control this timeout setting using the TiDB and MySQL compatible `wait_timeout` variable. For more information, see [JDBC Query Timeout](/develop/dev-guide-timeouts-in-tidb.md#jdbc-query-timeout).
+
+Moreover, there might be network proxies such as [LVS](https://en.wikipedia.org/wiki/Linux_Virtual_Server) or [HAProxy](https://en.wikipedia.org/wiki/HAProxy) between clients and TiDB. These proxies typically proactively clean up connections after a specific idle period (determined by the proxy's idle configuration). In addition to monitoring the proxy's idle configuration, connection pools also need to maintain or probe connections for keep-alive.
 
 If you often see the following error in your Java application:
 

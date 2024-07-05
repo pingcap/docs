@@ -41,8 +41,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 + Type: Integer
 + Default value: `1000`
 + Minimum value: `1`
-+ Maximum Value (64-bit platforms): `18446744073709551615`
-+ Maximum Value (32-bit platforms): `4294967295`
++ Maximum value: `1048576`
 
 ### `temp-dir` <span class="version-mark">New in v6.3.0</span>
 
@@ -122,7 +121,7 @@ The TiDB configuration file supports more options than command-line parameters. 
     - When the built-in `VERSION()` function is used.
     - When TiDB establishes the initial connection to the client and returns the initial handshake packet with version string of the server. For details, see [MySQL Initial Handshake Packet](https://dev.mysql.com/doc/dev/mysql-server/latest/page_protocol_connection_phase.html#sect_protocol_connection_phase_initial_handshake).
 + Default value: ""
-+ By default, the format of the TiDB version string is `5.7.${mysql_latest_minor_version}-TiDB-${tidb_version}`.
++ By default, the format of the TiDB version string is `8.0.11-TiDB-${tidb_version}`.
 
 > **Note:**
 >
@@ -201,6 +200,16 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Specifies the number of seconds that TiDB waits when you shut down the server, which allows the clients to disconnect.
 - Default value: `0`
 - When TiDB is waiting for shutdown (in the grace period), the HTTP status will indicate a failure, which allows the load balancers to reroute traffic.
+
+> **Note:**
+>
+> The duration that TiDB waits before shutting down the server is also affected by the following parameters:
+>
+> - When you use a platform that employs SystemD, the default stop timeout is 90 seconds. If you need a longer timeout, you can set [`TimeoutStopSec=`](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html#TimeoutStopSec=).
+>
+> - When you use the TiUP Cluster component, the default [`--wait-timeout`](/tiup/tiup-component-cluster.md#--wait-timeout) is 120 seconds.
+>
+> - When you use Kubernetes, the default [`terminationGracePeriodSeconds`](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#lifecycle) is 30 seconds.
 
 ### `enable-global-kill` <span class="version-mark">New in v6.1.0</span>
 
@@ -319,6 +328,12 @@ Configuration items related to log.
 - Default value: `10000`
 - When the number of query rows (including the intermediate results based on statistics) is larger than this value, it is an `expensive` operation and outputs log with the `[EXPENSIVE_QUERY]` prefix.
 
+### `general-log-file` <span class="version-mark">New in v8.0.0</span>
+
++ The filename of the [general log](/system-variables.md#tidb_general_log).
++ Default value: `""`
++ If you specify a filename, the general log is written to this specified file. If the value is blank, the general log is written to the server log of the TiDB instance. You can specify the name of the server log using [`filename`](#filename).
+
 ### `timeout` <span class="version-mark">New in v7.1.0</span>
 
 - Sets the timeout for log-writing operations in TiDB. In case of a disk failure that prevents logs from being written, this configuration item can trigger the TiDB process to panic instead of hang.
@@ -354,6 +369,13 @@ Configuration items related to log files.
 - The maximum number of retained logs.
 - Default value: `0`
 - All the log files are retained by default. If you set it to `7`, seven log files are retained at maximum.
+
+#### `compression` <span class="version-mark">New in v8.0.0</span>
+
++ The compression method for the log.
++ Default value: `""`
++ Value options: `""`, `"gzip"`
++ The default value is `""`, which means no compression. To enable the gzip compression, set this value to `"gzip"`. After compression is enabled, all log files are affected, such as [`slow-query-file`](#slow-query-file) and [`general-log-file`](#general-log-file-new-in-v800).
 
 ## Security
 
@@ -413,26 +435,22 @@ Configuration items related to security.
 
 ### `tls-version`
 
+> **Warning:**
+>
+> `"TLSv1.0"` and `"TLSv1.1"` protocols are deprecated in TiDB v7.6.0, and will be removed in v8.0.0.
+
 - Set the minimum TLS version for MySQL Protocol connections.
-- Default value: "", which allows TLSv1.1 or higher.
-- Optional values: `"TLSv1.0"`, `"TLSv1.1"`, `"TLSv1.2"` and `"TLSv1.3"`
+- Default value: "", which allows TLSv1.2 or later versions. Before TiDB v7.6.0, the default value allows TLSv1.1 or later versions.
+- Optional values: `"TLSv1.2"` and `"TLSv1.3"`. Before TiDB v8.0.0, `"TLSv1.0"` and `"TLSv1.1"` are also allowed.
 
 ### `auth-token-jwks` <span class="version-mark">New in v6.4.0</span>
 
-> **Warning:**
->
-> The `tidb_auth_token` authentication method is used only for the internal operation of TiDB Cloud. **DO NOT** change the value of this configuration.
-
-- Set the local file path of the JSON Web Key Sets (JWKS) for the `tidb_auth_token` authentication method.
+- Set the local file path of the JSON Web Key Sets (JWKS) for the [`tidb_auth_token`](/security-compatibility-with-mysql.md#tidb_auth_token) authentication method.
 - Default value: `""`
 
 ### `auth-token-refresh-interval` <span class="version-mark">New in v6.4.0</span>
 
-> **Warning:**
->
-> The `tidb_auth_token` authentication method is used only for the internal operation of TiDB Cloud. **DO NOT** change the value of this configuration.
-
-- Set the JWKS refresh interval for the `tidb_auth_token` authentication method.
+- Set the JWKS refresh interval for the [`tidb_auth_token`](/security-compatibility-with-mysql.md#tidb_auth_token) authentication method.
 - Default value: `1h`
 
 ### `disconnect-on-expired-password` <span class="version-mark">New in v6.5.0</span>
@@ -444,19 +462,15 @@ Configuration items related to security.
 
 ### `session-token-signing-cert` <span class="version-mark">New in v6.4.0</span>
 
-> **Warning:**
->
-> The feature controlled by this parameter is under development. **Do not modify the default value**.
-
++ The certificate file path, which is used by [TiProxy](/tiproxy/tiproxy-overview.md) for session migration.
 + Default value: ""
++ Empty value will cause TiProxy session migration to fail. To enable session migration, all TiDB nodes must set this to the same certificate and key. This means that you should store the same certificate and key on every TiDB node.
 
 ### `session-token-signing-key` <span class="version-mark">New in v6.4.0</span>
 
-> **Warning:**
->
-> The feature controlled by this parameter is under development. **Do not modify the default value**.
-
++ The key file path used by [TiProxy](/tiproxy/tiproxy-overview.md) for session migration.
 + Default value: ""
++ Refer to the descriptions of [`session-token-signing-cert`](#session-token-signing-cert-new-in-v640).
 
 ## Performance
 
@@ -483,6 +497,7 @@ Configuration items related to performance.
 - Default value: `3600000`
 - Unit: Millisecond
 - The transaction that holds locks longer than this time can only be committed or rolled back. The commit might not be successful.
+- For transactions executed using the [`"bulk"` DML mode](/system-variables.md#tidb_dml_type-new-in-v800), the maximum TTL can exceed the limit of this configuration item. The maximum value is the greater value between this configuration item and 24 hours.
 
 ### `stmt-count-limit`
 
@@ -495,6 +510,7 @@ Configuration items related to performance.
 - The size limit of a single row of data in TiDB.
 - Default value: `6291456` (in bytes)
 - The size limit of a single key-value record in a transaction. If the size limit is exceeded, TiDB returns the `entry too large` error. The maximum value of this configuration item does not exceed `125829120` (120 MB).
+- Starting from v7.6.0, you can use the system variable [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760) to dynamically modify the value of this configuration item.
 - Note that TiKV has a similar limit. If the data size of a single write request exceeds [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size), which is 8 MB by default, TiKV refuses to process this request. When a table has a row of large size, you need to modify both configurations at the same time.
 - The default value of [`max_allowed_packet`](/system-variables.md#max_allowed_packet-new-in-v610) (the maximum size of a packet for the MySQL protocol) is 67108864 (64 MiB). If a row is larger than `max_allowed_packet`, the row gets truncated.
 - The default value of [`txn-total-size-limit`](#txn-total-size-limit) (the size limit of a single transaction in TiDB) is 100 MiB. If you increase the `txn-entry-size-limit` value to be over 100 MiB, you need to increase the `txn-total-size-limit` value accordingly.
@@ -506,7 +522,7 @@ Configuration items related to performance.
 - In a single transaction, the total size of key-value records cannot exceed this value. The maximum value of this parameter is `1099511627776` (1 TB). Note that if you have used the binlog to serve the downstream consumer Kafka (such as the `arbiter` cluster), the value of this parameter must be no more than `1073741824` (1 GB). This is because 1 GB is the upper limit of a single message size that Kafka can process. Otherwise, an error is returned if this limit is exceeded.
 - In TiDB v6.5.0 and later versions, this configuration is no longer recommended. The memory size of a transaction will be accumulated into the memory usage of the session, and the [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) variable will take effect when the session memory threshold is exceeded. To be compatible with previous versions, this configuration works as follows when you upgrade from an earlier version to TiDB v6.5.0 or later:
     - If this configuration is not set or is set to the default value (`104857600`), after an upgrade, the memory size of a transaction will be accumulated into the memory usage of the session, and the `tidb_mem_quota_query` variable will take effect.
-    - If this configuration is not defaulted (`104857600`), it still takes effect and its behavior on controling the size of a single transaction remains unchanged before and after the upgrade. This means that the memory size of the transaction is not controlled by the `tidb_mem_quota_query` variable.
+    - If this configuration is not defaulted (`104857600`), it still takes effect and its behavior on controlling the size of a single transaction remains unchanged before and after the upgrade. This means that the memory size of the transaction is not controlled by the `tidb_mem_quota_query` variable.
 
 ### `tcp-keep-alive`
 
@@ -551,6 +567,10 @@ Configuration items related to performance.
 - Value options: The default value `NO_PRIORITY` means that the priority for statements is not forced to change. Other options are `LOW_PRIORITY`, `DELAYED`, and `HIGH_PRIORITY` in ascending order.
 - Since v6.1.0, the priority for all statements is determined by the TiDB configuration item [`instance.tidb_force_priority`](/tidb-configuration-file.md#tidb_force_priority) or the system variable [`tidb_force_priority`](/system-variables.md#tidb_force_priority). `force-priority` still takes effect. But if `force-priority` and `instance.tidb_force_priority` are set at the same time, the latter takes effect.
 
+> **Note:**
+>
+> Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control.md) to manage resource usage for different SQL statements.
+
 ### `distinct-agg-push-down`
 
 - Determines whether the optimizer executes the operation that pushes down the aggregation function with `Distinct` (such as `select count(distinct a) from t`) to Coprocessors.
@@ -571,14 +591,19 @@ Configuration items related to performance.
 ### `stats-load-concurrency` <span class="version-mark">New in v5.4.0</span>
 
 + The maximum number of columns that the TiDB synchronously loading statistics feature can process concurrently.
-+ Default value: `5`
-+ Currently, the valid value range is `[1, 128]`.
++ Default value: `0`. Before v8.2.0, the default value is `5`.
++ Currently, the valid value range is `[0, 128]`. The value `0` means the automatic mode, which automatically adjusts concurrency based on the configuration of the server. Before v8.2.0, the minimum value is `1`.
 
 ### `stats-load-queue-size` <span class="version-mark">New in v5.4.0</span>
 
 + The maximum number of column requests that the TiDB synchronously loading statistics feature can cache.
 + Default value: `1000`
 + Currently, the valid value range is `[1, 100000]`.
+
+### `concurrently-init-stats` <span class="version-mark">New in v8.1.0 and v7.5.2</span>
+
++ Controls whether to initialize statistics concurrently during TiDB startup.
++ Default value: `false`
 
 ### `lite-init-stats` <span class="version-mark">New in v7.1.0</span>
 
@@ -587,7 +612,7 @@ Configuration items related to performance.
 + When the value of `lite-init-stats` is `true`, statistics initialization does not load any histogram, TopN, or Count-Min Sketch of indexes or columns into memory. When the value of `lite-init-stats` is `false`, statistics initialization loads histograms, TopN, and Count-Min Sketch of indexes and primary keys into memory but does not load any histogram, TopN, or Count-Min Sketch of non-primary key columns into memory. When the optimizer needs the histogram, TopN, and Count-Min Sketch of a specific index or column, the necessary statistics are loaded into memory synchronously or asynchronously (controlled by [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)).
 + Setting `lite-init-stats` to `true` speeds up statistics initialization and reduces TiDB memory usage by avoiding unnecessary statistics loading. For details, see [Load statistics](/statistics.md#load-statistics).
 
-### `force-init-stats` <span class="version-mark">New in v7.1.0</span>
+### `force-init-stats` <span class="version-mark">New in v6.5.7 and v7.1.0</span>
 
 + Controls whether to wait for statistics initialization to finish before providing services during TiDB startup.
 + Default value: `false` for versions earlier than v7.2.0, `true` for v7.2.0 and later versions.
@@ -719,6 +744,25 @@ Configuration items related to opentracing.reporter.
 - The threshold of the TiKV load. If the TiKV load exceeds this threshold, more `batch` packets are collected to relieve the pressure of TiKV. It is valid only when the value of `tikv-client.max-batch-size` is greater than `0`. It is recommended not to modify this value.
 - Default value: `200`
 
+### `copr-req-timeout` <span class="version-mark">New in v7.5.0</span>
+
+> **Warning:**
+>
+> This configuration parameter might be deprecated in future versions. **DO NOT** change the value of it.
+
++ The timeout of a single Coprocessor request.
++ Default value: `60`
++ Unit: second
+
+### `enable-replica-selector-v2` <span class="version-mark">New in v8.0.0</span>
+
+> **Warning:**
+>
+> Starting from v8.2.0, this configuration item is deprecated. The new version of the Region replica selector is used by default when sending RPC requests to TiKV.
+
++ Whether to use the new version of the Region replica selector when sending RPC requests to TiKV.
++ Default value: `true`
+
 ## tikv-client.copr-cache <span class="version-mark">New in v4.0.0</span>
 
 This section introduces configuration items related to the Coprocessor Cache feature.
@@ -732,7 +776,7 @@ This section introduces configuration items related to the Coprocessor Cache fea
 
 ## txn-local-latches
 
-Configuration related to the transaction latch. It is recommended to enable it when many local transaction conflicts occur.
+Configuration items related to the transaction latch. These configuration items might be deprecated in the future. It is not recommended to use them.
 
 ### `enabled`
 
@@ -789,6 +833,12 @@ Configuration related to the status of TiDB service.
 - Determines whether to transmit the database-related QPS metrics to Prometheus.
 - Default value: `false`
 
+### `record-db-label`
+
+- Determines whether to transmit the database-related QPS metrics to Prometheus.
+- Supports more metircs types than `record-db-qps`, for example, duration and statements.
+- Default value: `false`
+
 ## pessimistic-txn
 
 For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md).
@@ -815,6 +865,7 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 + Determines the transaction mode that the auto-commit transaction uses when the pessimistic transaction mode is globally enabled (`tidb_txn_mode='pessimistic'`). By default, even if the pessimistic transaction mode is globally enabled, the auto-commit transaction still uses the optimistic transaction mode. After enabling `pessimistic-auto-commit` (set to `true`), the auto-commit transaction also uses pessimistic mode, which is consistent with the other explicitly committed pessimistic transactions.
 + For scenarios with conflicts, after enabling this configuration, TiDB includes auto-commit transactions into the global lock-waiting management, which avoids deadlocks and mitigates the latency spike brought by deadlock-causing conflicts.
 + For scenarios with no conflicts, if there are many auto-commit transactions (the specific number is determined by the real scenarios. For example, the number of auto-commit transactions accounts for more than half of the total number of applications), and a single transaction operates a large data volume, enabling this configuration causes performance regression. For example, the auto-commit `INSERT INTO SELECT` statement.
++ When the session-level system variable [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) is set to `"bulk"`, the effect of this configuration in the session is equivalent to setting it to `false`.
 + Default value: `false`
 
 ### constraint-check-in-place-pessimistic <span class="version-mark">New in v6.4.0</span>
@@ -836,7 +887,7 @@ Configuration items related to read isolation.
 
 ### `tidb_enable_collect_execution_info`
 
-- This configuration controls whether to record the execution information of each operator in the slow query log.
+- This configuration controls whether to record the execution information of each operator in the slow query log and whether to record the [usage statistics of indexes](/information-schema/information-schema-tidb-index-usage.md).
 - Default value: `true`
 - Before v6.1.0, this configuration is set by `enable-collect-execution-info`.
 
@@ -889,6 +940,10 @@ Configuration items related to read isolation.
 - Default value: `NO_PRIORITY`
 - The default value `NO_PRIORITY` means that the priority for statements is not forced to change. Other options are `LOW_PRIORITY`, `DELAYED`, and `HIGH_PRIORITY` in ascending order.
 - Before v6.1.0, this configuration is set by `force-priority`.
+
+> **Note:**
+>
+> Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control.md) to manage resource usage for different SQL statements.
 
 ### `max_connections`
 

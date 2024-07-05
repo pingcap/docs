@@ -289,7 +289,7 @@ The following are hard restrictions on non-transactional DML statements. If thes
 - The shard column must be indexed. The index can be a single-column index, or the first column of a joint index.
 - Must be used in the [`autocommit`](/system-variables.md#autocommit) mode.
 - Cannot be used when batch-dml is enabled.
-- Cannot be used when [`tidb_snapshot`](/read-historical-data.md#operation flow) is set.
+- Cannot be used when [`tidb_snapshot`](/read-historical-data.md) is set.
 - Cannot be used with the `prepare` statement.
 - `ENUM`, `BIT`, `SET`, `JSON` types are not supported as the shard columns.
 - Not supported for [temporary tables](/temporary-tables.md).
@@ -327,6 +327,44 @@ Non-transactional DML statements are not yet a replacement for all batch-dml usa
 - Stability: batch-dml is prone to data index inconsistencies due to improper use. Non-transactional DML statements do not cause data index inconsistencies. However, when used improperly, non-transactional DML statements are not equivalent to the original statements, and the applications might observe unexpected behavior. See the [common issues section](#non-transactional-delete-has-exceptional-behavior-that-is-not-equivalent-to-ordinary-delete) for details.
 
 ## Common issues
+
+### Executing a multiple table joins statement results in the `Unknown column xxx in 'where clause'` error
+
+This error occurs when the `WHERE` clause concatenated in a query involves tables other than the table in which the [shard column](#parameter-description) is defined. For example, in the following SQL statement, the shard column is `t2.id` and it is defined in table `t2`, but the `WHERE` clause involves table `t2` and `t3`.
+
+```sql
+BATCH ON test.t2.id LIMIT 1 
+INSERT INTO t 
+SELECT t2.id, t2.v, t3. FROM t2, t3 WHERE t2.id = t3.id
+```
+
+```sql
+(1054, "Unknown column 't3.id' in 'where clause'")
+```
+
+If the error occurs, you can print the query statement for confirmation by using `DRY RUN QUERY`. For example:
+
+```sql
+BATCH ON test.t2.id LIMIT 1 
+DRY RUN QUERY INSERT INTO t 
+SELECT t2.id, t2.v, t3. FROM t2, t3 WHERE t2.id = t3.id
+```
+
+To avoid the error, you can move the condition related to other tables in the `WHERE` clause to the `ON` condition in the `JOIN` clause. For example:
+
+```sql
+BATCH ON test.t2.id LIMIT 1 
+INSERT INTO t 
+SELECT t2.id, t2.v, t3. FROM t2 JOIN t3 ON t2.id=t3.id
+```
+
+```
++----------------+---------------+
+| number of jobs | job status    |
++----------------+---------------+
+| 0              | all succeeded |
++----------------+---------------+
+```
 
 ### The actual batch size is not the same as the specified batch size
 

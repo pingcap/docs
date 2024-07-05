@@ -88,6 +88,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 3. Ensure the configurations in the connection dialog match your operating environment.
 
     - **Endpoint Type** is set to `Public`
+    - **Branch** is set to `main`
     - **Connect With** is set to `General`
     - **Operating System** matches your environment.
 
@@ -95,11 +96,11 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     >
     > In Node.js applications, you don't have to provide an SSL CA certificate, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default when establishing the TLS (SSL) connection.
 
-4. Click **Create password** to create a random password.
+4. Click **Generate Password** to create a random password.
 
     > **Tip**
     >
-    > If you have generated a password before, you can either use the original password or click **Reset password** to generate a new one.
+    > If you have generated a password before, you can either use the original password or click **Reset Password** to generate a new one.
 
 5. Copy and paste the corresponding connection string into `env.json`. The following is an example:
 
@@ -359,7 +360,7 @@ For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 ## Next steps
 
 - For more details on how to use TiDB in AWS Lambda Function, see our [TiDB-Lambda-integration/aws-lambda-bookstore Demo](https://github.com/pingcap/TiDB-Lambda-integration/blob/main/aws-lambda-bookstore/README.md). You can also use AWS API Gateway to build a RESTful API for your application.
-- Learn more usage of `mysql2` from [the documentation of `mysql2`](https://github.com/sidorares/node-mysql2/tree/master/documentation/en).
+- Learn more usage of `mysql2` from [the documentation of `mysql2`](https://sidorares.github.io/node-mysql2/docs/documentation).
 - Learn more usage of AWS Lambda from [the AWS developer guide of `Lambda`](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html).
 - Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
 - Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.

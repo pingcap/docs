@@ -31,13 +31,34 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-v
 - `--target-ts`: Specifies the ending TSO of the changefeed. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
 - `--config`: Specifies the changefeed configuration file. For details, see [TiCDC Changefeed Configuration Parameters](/ticdc/ticdc-changefeed-config.md).
 
+## Supported Kafka versions
+
+The following table shows the minimum supported Kafka versions for each TiCDC version:
+
+| TiCDC version            | Minimum supported Kafka version |
+|:-------------------------|:--------------------------------|
+| TiCDC >= v8.1.0          | 2.1.0                           |
+| v7.6.0 <= TiCDC < v8.1.0 | 2.4.0                           |
+| v7.5.2 <= TiCDC < v8.0.0 | 2.1.0                           |
+| v7.5.0 <= TiCDC < v7.5.2 | 2.4.0                           |
+| v6.5.0 <= TiCDC < v7.5.0 | 2.1.0                           |
+| v6.1.0 <= TiCDC < v6.5.0 | 2.0.0                           |
+
 ## Configure sink URI for Kafka
 
 Sink URI is used to specify the connection information of the TiCDC target system. The format is as follows:
 
 ```shell
-[scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
+[scheme]://[host]:[port][/path]?[query_parameters]
 ```
+
+> **Tip:**
+> 
+> If there are multiple hosts or ports for the downstream Kafka, you can configure multiple `[host]:[port]` in the sink URI. For example:
+>
+> ```shell
+> [scheme]://[host]:[port],[host]:[port],[host]:[port][/path]?[query_parameters]
+> ```
 
 Sample configuration:
 
@@ -52,14 +73,14 @@ The following are descriptions of sink URI parameters and values that can be con
 | `127.0.0.1`          | The IP address of the downstream Kafka services.                                 |
 | `9092`               | The port for the downstream Kafka.                                          |
 | `topic-name` | Variable. The name of the Kafka topic. |
-| `kafka-version`      | The version of the downstream Kafka (optional, `2.4.0` by default. Currently, the earliest supported Kafka version is `0.11.0.2` and the latest one is `3.2.0`. This value needs to be consistent with the actual version of the downstream Kafka).                      |
+| `kafka-version`      | The version of the downstream Kafka. This value needs to be consistent with the actual version of the downstream Kafka.                      |
 | `kafka-client-id`    | Specifies the Kafka client ID of the replication task (optional. `TiCDC_sarama_producer_replication ID` by default). |
 | `partition-num`      | The number of the downstream Kafka partitions (optional. The value must be **no greater than** the actual number of partitions; otherwise, the replication task cannot be created successfully. `3` by default). |
 | `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `10MB` by default). From v5.0.6 and v4.0.6, the default value has changed from `64MB` and `256MB` to `10MB`. |
 | `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default). This value must be greater than or equal to the value of [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) in Kafka. |
 | `required-acks` | A parameter used in the `Produce` request, which notifies the broker of the number of replica acknowledgements it needs to receive before responding. Value options are `0` (`NoResponse`: no response, only `TCP ACK` is provided), `1` (`WaitForLocal`: responds only after local commits are submitted successfully), and `-1` (`WaitForAll`: responds after all replicated replicas are committed successfully. You can configure the minimum number of replicated replicas using the [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) configuration item of the broker). (Optional, the default value is `-1`).    |
 | `compression` | The compression algorithm used when sending messages (value options are `none`, `lz4`, `gzip`, `snappy`, and `zstd`; `none` by default). Note that the Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.|
-| `protocol` | The protocol with which messages are output to Kafka. The value options are `canal-json`, `open-protocol`, `canal`, `avro` and `maxwell`.   |
+| `protocol` | The protocol with which messages are output to Kafka. The value options are `canal-json`, `open-protocol`, `avro` and `maxwell`.   |
 | `auto-create-topic` | Determines whether TiCDC creates the topic automatically when the `topic-name` passed in does not exist in the Kafka cluster (optional, `true` by default). |
 | `enable-tidb-extension` | Optional. `false` by default. When the output protocol is `canal-json`, if the value is `true`, TiCDC sends [WATERMARK events](/ticdc/ticdc-canal-json.md#watermark-event) and adds the [TiDB extension field](/ticdc/ticdc-canal-json.md#tidb-extension-field) to Kafka messages. From v6.1.0, this parameter is also applicable to the `avro` protocol. If the value is `true`, TiCDC adds [three TiDB extension fields](/ticdc/ticdc-avro-protocol.md#tidb-extension-fields) to the Kafka message. |
 | `max-batch-size` | New in v4.0.9. If the message protocol supports outputting multiple data changes to one Kafka message, this parameter specifies the maximum number of data changes in one Kafka message. It currently takes effect only when Kafka's `protocol` is `open-protocol` (optional, `16` by default). |
@@ -157,6 +178,28 @@ dispatchers = [
 
 For detailed integration guide, see [Quick Start Guide on Integrating TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md).
 
+### Integrate TiCDC with AWS Glue Schema Registry
+
+Starting from v7.4.0, TiCDC supports using the [AWS Glue Schema Registry](https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html) as the Schema Registry when users choose the Avro protocol for data replication. The configuration example is as follows:
+
+```shell
+./cdc cli changefeed create --server=127.0.0.1:8300 --changefeed-id="kafka-glue-test" --sink-uri="kafka://127.0.0.1:9092/topic-name?&protocol=avro&replication-factor=3" --config changefeed_glue.toml
+```
+
+```toml
+[sink]
+[sink.kafka-config.glue-schema-registry-config]
+region="us-west-1"  
+registry-name="ticdc-test"
+access-key="xxxx"
+secret-access-key="xxxx"
+token="xxxx"
+```
+
+In the above configuration, `region` and `registry-name` are required fields, while `access-key`, `secret-access-key`, and `token` are optional fields. The best practice is to set the AWS credentials as environment variables or store them in the `~/.aws/credentials` file instead of setting them in the changefeed configuration file.
+
+For more information, refer to the [official AWS SDK for Go V2 documentation](https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/#specifying-credentials).
+
 ## Customize the rules for Topic and Partition dispatchers of Kafka Sink
 
 ### Matcher rules
@@ -225,7 +268,7 @@ For example, for a dispatcher like `matcher = ['test.*'], topic = {schema}_{tabl
 You can use `partition = "xxx"` to specify a partition dispatcher. It supports five dispatchers: `default`, `index-value`, `columns`, `table`, and `ts`. The dispatcher rules are as follows:
 
 - `default`: uses the `table` dispatcher rule by default. It calculates the partition number using the schema name and table name, ensuring data from a table is sent to the same partition. As a result, the data from a single table only exists in one partition and is guaranteed to be ordered. However, this dispatcher rule limits the send throughput, and the consumption speed cannot be improved by adding consumers.
-- `index-value`: calculates the partition number using either the primary key, a unique index, or an explicitly specified index, distributing table data across multiple partitions. The data from a single table is sent to multiple partitions, and the data in each partition is ordered. You can improve the consumption speed by adding consumers.
+- `index-value`: calculates the partition number using either the primary key, a unique index, or an index explicitly specified by `index`, distributing table data across multiple partitions. The data from a single table is sent to multiple partitions, and the data in each partition is ordered. You can improve the consumption speed by adding consumers.
 - `columns`: calculates the partition number using the values of explicitly specified columns, distributing table data across multiple partitions. The data from a single table is sent to multiple partitions, and the data in each partition is ordered. You can improve the consumption speed by adding consumers.
 - `table`: calculates the partition number using the schema name and table name.
 - `ts`: calculates the partition number using the commitTs of the row change, distributing table data across multiple partitions. The data from a single table is sent to multiple partitions, and the data in each partition is ordered. You can improve the consumption speed by adding consumers. However, multiple changes of a data item might be sent to different partitions and the consumer progress of different consumers might be different, which might cause data inconsistency. Therefore, the consumer needs to sort the data from multiple partitions by commitTs before consuming.
@@ -236,14 +279,14 @@ Take the following configuration of `dispatchers` as an example:
 [sink]
 dispatchers = [
     {matcher = ['test.*'], partition = "index-value"},
-    {matcher = ['test1.*'], partition = "index-value", index-name = "index1"},
+    {matcher = ['test1.*'], partition = "index-value", index = "index1"},
     {matcher = ['test2.*'], partition = "columns", columns = ["id", "a"]},
     {matcher = ['test3.*'], partition = "table"},
 ]
 ```
 
 - Tables in the `test` database use the `index-value` dispatcher, which calculates the partition number using the value of the primary key or unique index. If a primary key exists, the primary key is used; otherwise, the shortest unique index is used.
-- Tables in the `test1` table use the `index-value` dispatcher and calculate the partition number using values of all columns in the index named `index1`. If the specified index does not exist, an error is reported. Note that the index specified by `index-name` must be a unique index.
+- Tables in the `test1` table use the `index-value` dispatcher and calculate the partition number using values of all columns in the index named `index1`. If the specified index does not exist, an error is reported. Note that the index specified by `index` must be a unique index.
 - Tables in the `test2` database use the `columns` dispatcher and calculate the partition number using the values of columns `id` and `a`. If any of the columns does not exist, an error is reported.
 - Tables in the `test3` database use the `table` dispatcher.
 - Tables in the `test4` database use the `default` dispatcher, that is the `table` dispatcher, as they do not match any of the preceding rules.
@@ -349,12 +392,16 @@ An example configuration is as follows:
 large-message-handle-compression = "none"
 ```
 
+When `large-message-handle-compression` is enabled, the message received by the consumer is encoded using a specific compression protocol, and the consumer application needs to use the specified compression protocol to decode the data.
+
 This feature is different from the compression feature of the Kafka producer:
 
 * The compression algorithm specified in `large-message-handle-compression` compresses a single Kafka message. The compression is performed before comparing with the message size limit.
-* You can configure the compression algorithm in `sink-uri`. The compression is applied to the entire data sending request, which contains multiple Kafka messages. The compression is performed after comparing with the message size limit.
+* At the same time, you can also configure the compression algorithm by using the `compression` parameter in [`sink-uri`](#configure-sink-uri-for-kafka). This compression algorithm is applied to the entire data sending request, which contains multiple Kafka messages.
 
-When `large-message-handle-compression` is enabled, the message received by the consumer is encoded using a specific compression protocol, and the consumer application needs to use the specified compression protocol to decode the data.
+If you set `large-message-handle-compression`, when TiCDC receives a message, it first compares it to the value of the message size limit parameter, and messages larger than the size limit are compressed. If you also set `compression` in [`sink-uri`](#configure-sink-uri-for-kafka), TiCDC compresses the entire sending data request again at the sink level based on the `sink-uri` setting.
+
+The compression ratio for the two preceding compression methods is calculated as follows: `compression ratio = size before compression / size after compression * 100`.
 
 ### Send handle keys only
 

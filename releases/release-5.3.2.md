@@ -1,5 +1,6 @@
 ---
 title: TiDB 5.3.2 Release Notes
+summary: TiDB 5.3.2 was released on June 29, 2022. It is not recommended to use this version due to a known bug, which has been fixed in v5.3.3. The release includes compatibility changes, improvements, and bug fixes for TiDB, PD, TiKV, TiFlash, and various tools like TiDB Data Migration, TiDB Lightning, Backup & Restore, TiCDC, and TiDB Data Migration.
 ---
 
 # TiDB 5.3.2 Release Notes
@@ -144,7 +145,7 @@ TiDB version: 5.3.2
         - Fix the issue that TiCDC fails to start when the first PD set in `--pd` is not available after TLS is enabled [#4777](https://github.com/pingcap/tiflow/issues/4777)
         - Fix a bug that querying status through open API may be blocked when the PD node is abnormal [#4778](https://github.com/pingcap/tiflow/issues/4778)
         - Fix a stability problem in workerpool used by Unified Sorter [#4447](https://github.com/pingcap/tiflow/issues/4447)
-        - Fix a bug that sequence is incorrectly replicated in some cases [#4563](https://github.com/pingcap/tiflow/issues/4552)
+        - Fix a bug that sequence is incorrectly replicated in some cases [#4552](https://github.com/pingcap/tiflow/issues/4552)
 
     + TiDB Data Migration (DM)
 

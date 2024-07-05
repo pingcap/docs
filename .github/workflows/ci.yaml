@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out
-        uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: "18"
       - name: Verify duplicated file names
@@ -32,8 +32,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out
-        uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: "18"
       - name: Check TOC-tidb-cloud.md existence
@@ -57,16 +57,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Vale Linter
-        uses: errata-ai/vale-action@v2.0.1
+        uses: errata-ai/vale-action@reviewdog
         with:
           # Optional
           # Specify file path to lint
           #files: .
 
           # Optional
-          onlyAnnotateModifiedLines: true
+          filter_mode: added
         env:
           # Required, set by GitHub actions automatically:
           # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret

@@ -1,6 +1,7 @@
 ---
 title: Connect to TiDB with JDBC
 summary: Learn how to connect to TiDB using JDBC. This tutorial gives Java sample code snippets that work with TiDB using JDBC.
+aliases: ['/tidb/dev/sample-application-java','/tidb/dev/dev-guide-sample-application-java']
 ---
 
 # Connect to TiDB with JDBC
@@ -36,6 +37,10 @@ To complete this tutorial, you need:
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
+> **Note:**
+>
+> For security considerations, it is recommended that you use `VERIFY_IDENTITY` to establish TLS connections to TiDB clusters when connecting over the internet. Both TiDB Serverless and TiDB Dedicated use Subject Alternative Name (SAN) certificates, which require MySQL Connector/J version to be greater than or equal to [8.0.22](https://dev.mysql.com/doc/relnotes/connector-j/8.0/en/news-8-0-22.html).
+
 **If you don't have a TiDB cluster, you can create one as follows:**
 
 - (Recommended) Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
@@ -70,6 +75,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 3. Ensure the configurations in the connection dialog match your operating environment.
 
     - **Endpoint Type** is set to `Public`
+    - **Branch** is set to `main`
     - **Connect With** is set to `General`
     - **Operating System** matches your environment.
 
@@ -77,11 +83,11 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     >
     > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
 
-4. Click **Create password** to create a random password.
+4. Click **Generate Password** to create a random password.
 
     > **Tip:**
     >
-    > If you have created a password before, you can either use the original password or click **Reset password** to generate a new one.
+    > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
 
 5. Run the following command to copy `env.sh.example` and rename it to `env.sh`:
 
@@ -113,7 +119,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. Click **Allow Access from Anywhere** and then click **Download TiDB cluster CA** to download the CA certificate.
+3. Click **Allow Access from Anywhere** and then click **Download CA cert** to download the CA certificate.
 
     For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
 

@@ -107,8 +107,8 @@ tikv_servers:
        host: host1
      readpool.storage.use-unified-pool: true
      readpool.storage.low-concurrency: 10
-     raftstore.raft-min-election-timeout-ticks: 1000
-     raftstore.raft-max-election-timeout-ticks: 1020
+     raftstore.raft-min-election-timeout-ticks: 50
+     raftstore.raft-max-election-timeout-ticks: 60
 monitoring_servers:
  - host: 10.0.1.16
 grafana_servers:

@@ -40,11 +40,19 @@ data-dir = ""
 gc-ttl = 86400 # 24 h
 tz = "System"
 cluster-id = "default"
+# This parameter specifies the maximum memory threshold (in bytes) for tuning GOGC: Setting a smaller threshold increases the GC frequency. Setting a larger threshold reduces GC frequency and consumes more memory resources for the TiCDC process. Once the memory usage exceeds this threshold, GOGC Tuner stops working. The default value is 0, indicating that GOGC Tuner is disabled.
+gc-tuner-memory-threshold = 0
 
 [security]
   ca-path = ""
   cert-path = ""
   key-path = ""
+  # This parameter controls whether to enable the TLS client authentication. The default value is false.
+  mtls = false
+  # This parameter controls whether to use username and password for client authentication. The default value is false.
+  client-user-required = false
+  # This parameter lists the usernames that are allowed for client authentication. Authentication requests with usernames not in this list will be rejected. The default value is null.
+  client-allowed-user = ["username_1", "username_2"]
 
 # The session duration between TiCDC and etcd services, measured in seconds. This parameter is optional and its default value is 10.
 capture-session-ttl = 10 # 10s

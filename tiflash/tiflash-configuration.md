@@ -141,8 +141,8 @@ delta_index_cache_size = 0
     # capacity: 858993459200           # 800 GiB
 
 [flash]
-    tidb_status_addr = TiDB status port and address. # Multiple addresses are separated with commas.
-    service_addr = The listening address of TiFlash Raft services and coprocessor services.
+    ## The listening address of TiFlash coprocessor services.
+    service_addr = "0.0.0.0:3930"
 
     ## Introduced in v7.4.0. When the gap between the `applied_index` advanced by the current Raft state machine and the `applied_index` at the last disk spilling exceeds `compact_log_min_gap`, TiFlash executes the `CompactLog` command from TiKV and spills data to disk. Increasing this gap might reduce the disk spilling frequency of TiFlash, thus reducing read latency in random write scenarios, but it might also increase memory overhead. Decreasing this gap might increase the disk spilling frequency of TiFlash, thus alleviating memory pressure in TiFlash. However, at this stage, the disk spilling frequency of TiFlash will not be higher than that of TiKV, even if this gap is set to 0.
     ## It is recommended to keep the default value.
@@ -155,30 +155,31 @@ delta_index_cache_size = 0
     ## The following configuration item only takes effect for the TiFlash disaggregated storage and compute architecture mode. For details, see documentation at https://docs.pingcap.com/tidb/dev/tiflash-disaggregated-and-s3.
     # disaggregated_mode = tiflash_write # The supported mode is `tiflash_write` or `tiflash_compute.
 
-## Multiple TiFlash nodes elect a master to add or delete placement rules to PD,
-## and the configurations in flash.flash_cluster control this process.
-[flash.flash_cluster]
-    refresh_interval = Master regularly refreshes the valid period.
-    update_rule_interval = Master regularly gets the status of TiFlash replicas and interacts with PD.
-    master_ttl = The valid period of the elected master.
-    cluster_manager_path = The absolute path of the pd buddy directory.
-    log = The pd buddy log path.
-
 [flash.proxy]
-    addr = The listening address of proxy. If it is left empty, 127.0.0.1:20170 is used by default.
-    advertise-addr = The external access address of addr. If it is left empty, "addr" is used by default.
-    data-dir = The data storage path of proxy.
-    config = The configuration file path of proxy.
-    log-file = The log path of proxy.
-    log-level = The log level of proxy. "info" is used by default.
-    status-addr = The listening address from which the proxy pulls metrics | status information. If it is left empty, 127.0.0.1:20292 is used by default.
-    advertise-status-addr = The external access address of status-addr. If it is left empty, "status-addr" is used by default.
+    ## The listening address of proxy. If it is left empty, 127.0.0.1:20170 is used by default.
+    addr = "127.0.0.1:20170"
+    ## The external access address of addr. If it is left empty, "addr" is used by default.
+    ## Should guarantee that other nodes can access through `advertise-addr` when you deploy the cluster on multiple nodes.
+    advertise-addr = ""
+    ## The listening address from which the proxy pulls metrics or status information. If it is left empty, 127.0.0.1:20292 is used by default.
+    status-addr = "127.0.0.1:20292"
+    ## The external access address of status-addr. If it is left empty, the value of "status-addr" is used by default.
+    ## Should guarantee that other nodes can access through `advertise-status-addr` when you deploy the cluster on multiple nodes.
+    advertise-status-addr = ""
+    ## The data storage path of proxy.
+    data-dir = "/tidb-data/tiflash-9000/flash"
+    ## The configuration file path of proxy.
+    config = "/tidb-deploy/tiflash-9000/conf/tiflash-learner.toml"
+    ## The log path of proxy.
+    log-file = "/tidb-deploy/tiflash-9000/log/tiflash_tikv.log"
+    ## The log level of proxy (available options: "trace", "debug", "info", "warn", "error"). The default value is "info"
+    # log-level = "info" 
 
 [logger]
-    ## log level (available options: "trace", "debug", "info", "warn", "error"). The default value is "debug".
-    level = "debug"
-    log = TiFlash log path
-    errorlog = TiFlash error log path
+    ## log level (available options: "trace", "debug", "info", "warn", "error"). The default value is "info".
+    level = "info"
+    log = "/tidb-deploy/tiflash-9000/log/tiflash.log"
+    errorlog = "/tidb-deploy/tiflash-9000/log/tiflash_error.log"
     ## Size of a single log file. The default value is "100M".
     size = "100M"
     ## Maximum number of log files to save. The default value is 10.
@@ -252,8 +253,10 @@ delta_index_cache_size = 0
 
 ## Security settings take effect starting from v4.0.5.
 [security]
-    ## New in v5.0. This configuration item enables or disables log redaction. If the configuration value
-    ## is set to true, all user data in the log will be replaced by ?.
+    ## New in v5.0. This configuration item enables or disables log redaction. Value options: true, false, marker. The marker option is introduced in v8.2.0.
+    ## The default value is false, which means that log redaction is disabled.
+    ## If the configuration item is set to true, all user data in the log is replaced by `?`.
+    ## If the configuration item is set to marker, all user data in the log is wrapped in `‹ ›`. If user data contains `‹` or `›`, `‹` is escaped as `‹‹`, and `›` is escaped as `››`. Based on the marked logs, you can decide whether to desensitize the marked information when the logs are displayed.
     ## Note that you also need to set security.redact-info-log for tiflash-learner's logging in tiflash-learner.toml.
     # redact_info_log = false
 
@@ -289,9 +292,9 @@ delta_index_cache_size = 0
     ## If you set it to 0ms, the optimization is disabled.
     store-batch-retry-recv-timeout = "4ms"
 [security]
-    ## New in v5.0. This configuration item enables or disables log redaction.
-    ## If the configuration value is set to true,
-    ## all user data in the log will be replaced by ?. The default value is false.
+    ## New in v5.0. This configuration item enables or disables log redaction. Value options: true, false.
+    ## The default value is false, which means that log redaction is disabled.
+    ## If the configuration item is set to true, all user data in the log is replaced by `?`.
     redact-info-log = false
 
 [security.encryption]

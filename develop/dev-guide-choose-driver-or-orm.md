@@ -44,7 +44,7 @@ Support level: **Full**
 
 The authentication based on SM3 is only supported in TiDB's TiDB-JDBC.
 
-If you use Maven, add the following content to the `<dependencies></dependencies>` section in the `pom.xml` file:
+If you are using Maven, add the following content to the `<dependencies></dependencies>` section in the `pom.xml` file:
 
 ```xml
 <dependency>
@@ -87,40 +87,40 @@ implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67
 
 ### Java ORM frameworks
 
+<SimpleTab>
+<div label="Hibernate">
+
 > **Note:**
 >
 > - Currently, Hibernate does [not support nested transactions](https://stackoverflow.com/questions/37927208/nested-transaction-in-spring-app-with-jpa-postgres).
 >
 > - Since v6.2.0, TiDB supports [savepoint](/sql-statements/sql-statement-savepoint.md). To use the `Propagation.NESTED` transaction propagation option in `@Transactional`, that is, to set `@Transactional(propagation = Propagation.NESTED)`, make sure that your TiDB is v6.2.0 or later.
 
-<SimpleTab>
-<div label="Hibernate">
-
 Support level: **Full**
 
 To avoid manually managing complex relationships between different dependencies of an application, you can use [Gradle](https://gradle.org/install) or [Maven](https://maven.apache.org/install.html) to get all dependencies of your application, including those indirect ones. Note that only Hibernate `6.0.0.Beta2` or above supports the TiDB dialect.
 
-If you are using **Maven**, add the following to your `<dependencies></dependencies>`:
+If you are using Maven, add the following to your `<dependencies></dependencies>`:
 
 ```xml
 <dependency>
     <groupId>org.hibernate.orm</groupId>
     <artifactId>hibernate-core</artifactId>
-    <version>6.0.0.CR2</version>
+    <version>6.2.3.Final</version>
 </dependency>
 
 <dependency>
     <groupId>mysql</groupId>
     <artifactId>mysql-connector-java</artifactId>
-    <version>5.1.49</version>
+    <version>8.0.33</version>
 </dependency>
 ```
 
-If you are using **Gradle**, add the following to your `dependencies`:
+If you are using Gradle, add the following to your `dependencies`:
 
 ```gradle
-implementation 'org.hibernate:hibernate-core:6.0.0.CR2'
-implementation 'mysql:mysql-connector-java:5.1.49'
+implementation 'org.hibernate:hibernate-core:6.2.3.Final'
+implementation 'mysql:mysql-connector-java:8.0.33'
 ```
 
 - For an example of using Hibernate to build a TiDB application by native Java, see [Build a simple CRUD app with TiDB and Hibernate](/develop/dev-guide-sample-application-java-hibernate.md).
@@ -146,21 +146,21 @@ If you are using Maven, add the following to your `<dependencies></dependencies>
 <dependency>
     <groupId>org.mybatis</groupId>
     <artifactId>mybatis</artifactId>
-    <version>3.5.9</version>
+    <version>3.5.13</version>
 </dependency>
 
 <dependency>
     <groupId>mysql</groupId>
     <artifactId>mysql-connector-java</artifactId>
-    <version>5.1.49</version>
+    <version>8.0.33</version>
 </dependency>
 ```
 
 If you are using Gradle, add the following to your `dependencies`:
 
 ```gradle
-implementation 'org.mybatis:mybatis:3.5.9'
-implementation 'mysql:mysql-connector-java:5.1.49'
+implementation 'org.mybatis:mybatis:3.5.13'
+implementation 'mysql:mysql-connector-java:8.0.33'
 ```
 
 For an example of using MyBatis to build a TiDB application, see [Build a simple CRUD app with TiDB and MyBatis](/develop/dev-guide-sample-application-java-mybatis.md).
@@ -183,7 +183,7 @@ Currently, tidb-loadbalance supports the following policies: roundrobin, random,
 >
 > tidb-loadbalance must be used with [mysql-connector-j](https://github.com/pingcap/mysql-connector-j).
 
-If you use Maven, add the following content to the element body of `<dependencies></dependencies>` in the `pom.xml` file:
+If you are using Maven, add the following content to the element body of `<dependencies></dependencies>` in the `pom.xml` file:
 
 ```xml
 <dependency>
@@ -198,7 +198,7 @@ If you use Maven, add the following content to the element body of `<dependencie
 </dependency>
 ```
 
-If you use Gradle, add the following content to `dependencies`:
+If you are using Gradle, add the following content to `dependencies`:
 
 ```gradle
 implementation group: 'io.github.lastincisor', name: 'mysql-connector-java', version: '8.0.29-tidb-1.0.0'

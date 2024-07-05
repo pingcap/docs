@@ -10,13 +10,12 @@ aliases: ['/docs/dev/sql-statements/sql-statement-show-builtins/']
 
 ## Synopsis
 
-**ShowBuiltinsStmt:**
-
-![ShowBuiltinsStmt](/media/sqlgram/ShowBuiltinsStmt.png)
+```ebnf+diagram
+ShowBuiltinsStmt ::=
+    "SHOW" "BUILTINS"
+```
 
 ## Examples
-
-{{< copyable "sql" >}}
 
 ```sql
 SHOW BUILTINS;
@@ -154,6 +153,7 @@ SHOW BUILTINS;
 | json_quote                  |
 | json_remove                 |
 | json_replace                |
+| json_schema_valid           |
 | json_search                 |
 | json_set                    |
 | json_storage_size           |

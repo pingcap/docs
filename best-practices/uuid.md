@@ -1,23 +1,23 @@
 ---
 title: UUID Best Practices
-summary: Learn best practice and strategy for using UUIDs with TiDB.
+summary: UUIDs, when used as primary keys, offer benefits such as reduced network trips, support in most programming languages and databases, and protection against enumeration attacks. Storing UUIDs as binary in a `BINARY(16)` column is recommended. It's also advised to avoid setting the `swap_flag` with TiDB to prevent hotspots. MySQL compatibility is available for UUIDs.
 ---
 
 # UUID Best Practices
 
 ## Overview of UUIDs
 
-When used as a primary key, instead of an `AUTO_INCREMENT` integer value, a universally unique identifier (UUID) delivers the following benefits:
+When used as a primary key, instead of an [`AUTO_INCREMENT`](/auto-increment.md) integer value, a universally unique identifier (UUID) delivers the following benefits:
 
 - UUIDs can be generated on multiple systems without risking conflicts. In some cases, this means that the number of network trips to TiDB can be reduced, leading to improved performance.
 - UUIDs are supported by most programming languages and database systems.
-- When used as a part of a URL, a UUID is not vulnerable to enumeration attacks. In comparison, with an `auto_increment` number, it is possible to guess the invoice IDs or user IDs.
+- When used as a part of a URL, a UUID is not vulnerable to enumeration attacks. In comparison, with an `AUTO_INCREMENT` number, it is possible to guess the invoice IDs or user IDs.
 
 ## Best practices
 
 ### Store as binary
 
-The textual UUID format looks like this: `ab06f63e-8fe7-11ec-a514-5405db7aad56`, which is a string of 36 characters. By using `UUID_TO_BIN()`, the textual format can be converted into a binary format of 16 bytes. This allows you to store the text in a `BINARY(16)` column. When retrieving the UUID, you can use the `BIN_TO_UUID()` function to get back to the textual format.
+The textual UUID format looks like this: `ab06f63e-8fe7-11ec-a514-5405db7aad56`, which is a string of 36 characters. By using [`UUID_TO_BIN()`](/functions-and-operators/miscellaneous-functions.md#uuid_to_bin), the textual format can be converted into a binary format of 16 bytes. This allows you to store the text in a [`BINARY(16)`](/data-type-string.md#binary-type) column. When retrieving the UUID, you can use the [`BIN_TO_UUID()`](/functions-and-operators/miscellaneous-functions.md#bin_to_uuid) function to get back to the textual format.
 
 ### UUID format binary order and a clustered PK
 

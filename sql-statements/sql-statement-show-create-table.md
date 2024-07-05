@@ -10,13 +10,10 @@ This statement shows the exact statement to recreate an existing table using SQL
 
 ## Synopsis
 
-**ShowCreateTableStmt:**
-
-![ShowCreateTableStmt](/media/sqlgram/ShowCreateTableStmt.png)
-
-**TableName:**
-
-![TableName](/media/sqlgram/TableName.png)
+```ebnf+diagram
+ShowCreateTableStmt ::=
+    "SHOW" "CREATE" "TABLE" (SchemaName ".")? TableName
+```
 
 ## Examples
 
@@ -24,14 +21,12 @@ This statement shows the exact statement to recreate an existing table using SQL
 mysql> CREATE TABLE t1 (a INT);
 Query OK, 0 rows affected (0.12 sec)
 
-mysql> SHOW CREATE TABLE t1;
-+-------+------------------------------------------------------------------------------------------------------------+
-| Table | Create Table                                                                                               |
-+-------+------------------------------------------------------------------------------------------------------------+
-| t1    | CREATE TABLE `t1` (
+mysql> SHOW CREATE TABLE t1\G
+*************************** 1. row ***************************
+       Table: t1
+Create Table: CREATE TABLE `t1` (
   `a` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin |
-+-------+------------------------------------------------------------------------------------------------------------+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 1 row in set (0.00 sec)
 ```
 

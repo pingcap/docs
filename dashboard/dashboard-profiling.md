@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Instance Profiling - Manual Profiling
-summary: Learn how to collect performance data to analyze sophisticated problems.
+summary: Manual Profiling allows users to collect current performance data on demand for TiDB, TiKV, PD, and TiFlash instances. Experts can analyze resource consumption details like CPU and memory to pinpoint ongoing performance problems. Access the page through TiDB Dashboard or a browser. Start profiling by choosing target instances and modify the duration if needed. View real-time progress and download performance data after profiling is completed. View profiling history for detailed operations.
 aliases: ['/docs/dev/dashboard/dashboard-profiling/']
 ---
 
@@ -25,6 +25,8 @@ The following performance data are currently supported:
   > The CPU overhead of TiKV and TiFlash instances is currently not supported in ARM architecture.
 
 - Heap: The memory consumption of each internal function on TiDB, TiKV, and PD instances
+
+  > Starting from v7.5, TiDB supports the TiKV Heap Profile. The Perl dependency is required in the running environment of TiDB Dashboard. Otherwise an error will occur.
 
 - Mutex: The mutex contention states on TiDB and PD instances
 

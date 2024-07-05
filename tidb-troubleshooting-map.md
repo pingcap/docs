@@ -59,11 +59,13 @@ Refer to [5 PD issues](#5-pd-issues).
 
 - 3.1.2 TiDB DDL job hangs or executes slowly (use `admin show ddl jobs` to check DDL progress)
 
-    - Cause 1: Network issue with other components (PD/TiKV).
+    - Cause 1: TiDB introduces the [metadata lock](/metadata-lock.md) in v6.3.0, and enables it by default in v6.5.0 and later versions. If the table involved in the DDL operation has intersections with the table involved in the uncommitted transaction, the DDL operation is blocked until the transaction is committed or rolled back.
 
-    - Cause 2: Early versions of TiDB (earlier than v3.0.8) have heavy internal load because of a lot of goroutine at high concurrency.
+    - Cause 2: Network issue with other components (PD/TiKV).
 
-    - Cause 3: In early versions (v2.1.15 & versions < v3.0.0-rc1), PD instances fail to delete TiDB keys, which causes every DDL change to wait for two leases.
+    - Cause 3: Early versions of TiDB (earlier than v3.0.8) have heavy internal load because of a lot of goroutine at high concurrency.
+
+    - Cause 4: In early versions (v2.1.15 & versions < v3.0.0-rc1), PD instances fail to delete TiDB keys, which causes every DDL change to wait for two leases.
 
     - For other unknown causes, [report a bug](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&template=bug-report.md).
 
@@ -241,15 +243,13 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 - 4.3.1 TiKV RocksDB encounters `write stall`.
 
-    A TiKV instance has two RocksDB instances, one in `data/raft` to save the Raft log, another in `data/db` to save the real data. You can check the specific cause for stall by running `grep "Stalling" RocksDB` in the log. The RocksDB log is a file starting with `LOG`, and `LOG` is the current log.
+    A TiKV instance has two RocksDB instances, one in `data/raft` to store the Raft log, and the other in `data/db` to store the real data. You can check the specific cause for the stall by running `grep "Stalling" RocksDB` in the log. The RocksDB log is a file starting with `LOG`, and `LOG` is the current log. `write stall` is a performance degradation mechanism natively built in RocksDB. When `write stall` occurs in RocksDB, the system performance drops significantly. In versions before v5.2.0, TiDB tries to block all write requests by returning a `ServerIsBusy` error directly to the client when encountering `write stall`, but this could lead to a sharp decrease in QPS performance. Starting from v5.2.0, TiKV introduces a new flow control mechanism that suppresses writes by delaying write requests dynamically in the scheduling layer, which replaces the previous mechanism of returning `server is busy` to clients when `write stall` occurs. The new flow control mechanism is enabled by default, and TiKV automatically disables the `write stall` mechanism for `KvDB` and `RaftDB` (except for memtables). However, when the number of pending requests exceeds a certain threshold, the flow control mechanism still takes effect, beginning to reject some or all write requests and returning a `server is busy` error to clients. For detailed explanations and thresholds, see [Flow control configuration](/tikv-configuration-file.md#storageflow-control).
 
-    - Too many `level0 sst` causes stall. You can add the `[rocksdb] max-sub-compactions = 2` (or 3) parameter to speed up `level0 sst` compaction. The compaction task from level0 to level1 is divided into several subtasks (the max number of subtasks is the value of `max-sub-compactions`) to be executed concurrently. See [case-815](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case815.md) in Chinese.
+    - If the `server is busy` error is triggered by too many pending compaction bytes, you can alleviate this issue by increasing the values of the  [`soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) and [`hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit) parameters.
 
-    - Too many `pending compaction bytes` causes stall. The disk I/O fails to keep up with the write operations in business peaks. You can mitigate this problem by increasing the `soft-pending-compaction-bytes-limit` and `hard-pending-compaction-bytes-limit` of the corresponding CF.
+        - When pending compaction bytes reach the value of the `soft-pending-compaction-bytes-limit` parameter (`192GiB` by default), the flow control mechanism begins to reject some write requests (by returning `ServerIsBusy` to clients). In this case, you can increase the value of this parameter, for example, `[storage.flow-control] soft-pending-compaction-bytes-limit = "384GiB"`.
 
-        - The default value of `[rocksdb.defaultcf] soft-pending-compaction-bytes-limit` is `64GB`. If the pending compaction bytes reaches the threshold, RocksDB slows down the write speed. You can set `[rocksdb.defaultcf] soft-pending-compaction-bytes-limit` to `128GB`.
-
-        - The default value of `hard-pending-compaction-bytes-limit` is `256GB`. If the pending compaction bytes reaches the threshold (this is not likely to happen, because RocksDB slows down the write after the pending compaction bytes reaches `soft-pending-compaction-bytes-limit`), RocksDB stops the write operation. You can set `hard-pending-compaction-bytes-limit` to `512GB`.<!-- See [case-275](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case275.md) in Chinese.-->
+        - When pending compaction bytes reach the value of the `hard-pending-compaction-bytes-limit` parameter (`1024GiB` by default), the flow control mechanism begins to reject all write requests (by returning `ServerIsBusy` to clients). This scenario is less likely to occur because the flow control mechanism intervenes to slow down write speed after reaching the threshold of `soft-pending-compaction-bytes-limit`. If it occurs, you can increase the value of this parameter, for example, `[storage.flow-control] hard-pending-compaction-bytes-limit = "2048GiB"`.
 
         - If the disk I/O capacity fails to keep up with the write for a long time, it is recommended to scale up your disk. If the disk throughput reaches the upper limit and causes write stall (for example, the SATA SSD is much lower than NVME SSD), while the CPU resources is sufficient, you may apply a compression algorithm of higher compression ratio. This way, the CPU resources is traded for disk resources, and the pressure on the disk is eased.
 
@@ -414,7 +414,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
     - The binlog data is too large, so the single message written to Kafka is too large. You need to modify the following configuration of Kafka:
 
-        ```conf
+        ```properties
         message.max.bytes=1073741824
         replica.fetch.max.bytes=1073741824
         fetch.message.max.bytes=1073741824
@@ -470,7 +470,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 ### 6.2 Data Migration
 
-- 6.2.1 TiDB Data Migration (DM) is a migration tool that supports data migration from MySQL/MariaDB into TiDB. For details, see [DM on GitHub](https://github.com/pingcap/dm/).
+- 6.2.1 TiDB Data Migration (DM) is a migration tool that supports data migration from MySQL/MariaDB into TiDB. For details, see [DM overview](/dm/dm-overview.md).
 
 - 6.2.2 `Access denied for user 'root'@'172.31.43.27' (using password: YES)` shows when you run `query status` or check the log.
 
@@ -518,7 +518,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 ### 6.3 TiDB Lightning
 
-- 6.3.1 TiDB Lightning is a tool for fast full import of large amounts of data into a TiDB cluster. See [TiDB Lightning on GitHub](https://github.com/pingcap/tidb/tree/master/br/pkg/lightning).
+- 6.3.1 TiDB Lightning is a tool for fast full import of large amounts of data into a TiDB cluster. See [TiDB Lightning on GitHub](https://github.com/pingcap/tidb/tree/master/lightning).
 
 - 6.3.2 Import speed is too slow.
 

@@ -56,7 +56,6 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 + `FULLTEXT` syntax and indexes [#1793](https://github.com/pingcap/tidb/issues/1793)
 + `SPATIAL` (also known as `GIS`/`GEOMETRY`) functions, data types and indexes [#6347](https://github.com/pingcap/tidb/issues/6347)
 + Character sets other than `ascii`, `latin1`, `binary`, `utf8`, `utf8mb4`, and `gbk`.
-+ SYS schema
 + Optimizer trace
 + XML Functions
 + X-Protocol [#1109](https://github.com/pingcap/tidb/issues/1109)
@@ -158,9 +157,7 @@ For more information, refer to [Understand the Query Execution Plan](/explain-ov
 
 ### Built-in functions
 
-TiDB supports most of the built-in functions in MySQL, but not all. You can use the statement `SHOW BUILTINS` to get a list of the available functions.
-
-For more information, refer to the [TiDB SQL Grammar](https://pingcap.github.io/sqlgram/#functioncallkeyword).
+TiDB supports most of the built-in functions in MySQL, but not all. You can use the statement [`SHOW BUILTINS`](/sql-statements/sql-statement-show-builtins.md) to get a list of the available functions.
 
 ### DDL operations
 
@@ -172,7 +169,7 @@ In TiDB, all supported DDL changes can be performed online. However, there are s
 * The `ALGORITHM={INSTANT,INPLACE,COPY}` syntax functions only as an assertion in TiDB, and does not modify the `ALTER` algorithm. See [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md) for further details.
 * Adding/Dropping the primary key of the `CLUSTERED` type is unsupported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 * Different types of indexes (`HASH|BTREE|RTREE|FULLTEXT`) are not supported, and will be parsed and ignored when specified.
-* TiDB supports `HASH`, `RANGE`, `LIST`, and `KEY` partitioning types. Currently, the `KEY` partition type does not support partition statements with an empty partition column list. For an unsupported partition type, TiDB returns `Warning: Unsupported partition type %s, treat as normal table`, where `%s` is the specific unsupported partition type.
+* TiDB supports `HASH`, `RANGE`, `LIST`, and `KEY` partitioning types. For an unsupported partition type, TiDB returns `Warning: Unsupported partition type %s, treat as normal table`, where `%s` is the specific unsupported partition type.
 * Range, Range COLUMNS, List, and List COLUMNS partitioned tables support `ADD`, `DROP`, `TRUNCATE`, and `REORGANIZE` operations. Other partition operations are ignored.
 * Hash and Key partitioned tables support `ADD`, `COALESCE`, and `TRUNCATE` operations. Other partition operations are ignored.
 * The following syntaxes are not supported for partitioned tables:
@@ -240,16 +237,16 @@ TiDB supports most [SQL modes](/sql-mode.md):
 TiDB has default differences when compared with MySQL 5.7 and MySQL 8.0:
 
 - Default character set:
-    - TiDB’s default value is `utf8mb4`.
-    - MySQL 5.7’s default value is `latin1`.
-    - MySQL 8.0’s default value is `utf8mb4`.
+    - TiDB's default value is `utf8mb4`.
+    - MySQL 5.7's default value is `latin1`.
+    - MySQL 8.0's default value is `utf8mb4`.
 - Default collation:
-    - TiDB’s default collation is `utf8mb4_bin`.
-    - MySQL 5.7’s default collation is `utf8mb4_general_ci`.
-    - MySQL 8.0’s default collation is `utf8mb4_0900_ai_ci`.
+    - TiDB's default collation is `utf8mb4_bin`.
+    - MySQL 5.7's default collation is `utf8mb4_general_ci`.
+    - MySQL 8.0's default collation is `utf8mb4_0900_ai_ci`.
 - Default SQL mode:
-    - TiDB’s default SQL mode includes these modes: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION`.
-    - MySQL’s default SQL mode:
+    - TiDB's default SQL mode includes these modes: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION`.
+    - MySQL's default SQL mode:
         - The default SQL mode in MySQL 5.7 is the same as TiDB.
         - The default SQL mode in MySQL 8.0 includes these modes: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION`.
 - Default value of `lower_case_table_names`:
@@ -276,6 +273,10 @@ TiDB supports named timezones with the following considerations:
 The following column types are supported by MySQL but **not** by TiDB:
 
 - `SQL_TSI_*` (includes SQL_TSI_MONTH, SQL_TSI_WEEK, SQL_TSI_DAY, SQL_TSI_HOUR, SQL_TSI_MINUTE, and SQL_TSI_SECOND, but excludes SQL_TSI_YEAR)
+
+### Regular expressions
+
+For information about TiDB regular expression compatibility with MySQL, including `REGEXP_INSTR()`, `REGEXP_LIKE()`, `REGEXP_REPLACE()`, and `REGEXP_SUBSTR()`, see [Regular expression compatibility with MySQL](/functions-and-operators/string-functions.md#regular-expression-compatibility-with-mysql).
 
 ### Incompatibility due to deprecated features
 

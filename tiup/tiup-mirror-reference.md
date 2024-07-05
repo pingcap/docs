@@ -154,7 +154,7 @@ The index file's format is as follows:
                     }
                 },
                 "name": "{owner-name}",                         # The name of the owner.
-                "threshod": {N}                                 # Indicates that the components owned by the owner must have at least N valid signatures.
+                "threshold": {N}                                 # Indicates that the components owned by the owner must have at least N valid signatures.
             },
             ...
             "{ownerN}": {                                       # The ID of the Nth owner.

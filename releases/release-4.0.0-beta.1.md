@@ -1,6 +1,7 @@
 ---
 title: TiDB 4.0.0 Beta.1 Release Notes
 aliases: ['/docs/dev/releases/release-4.0.0-beta.1/','/docs/dev/releases/4.0.0-beta.1/']
+summary: TiDB 4.0.0 Beta.1 was released on February 28, 2020. It includes compatibility changes, new features, and bug fixes. Some highlights include support for SQL performance diagnosis, the `Sequence` function, and TLS support between components. Additionally, TiDB Lightning now has a bug fix for the web interface.
 ---
 
 # TiDB 4.0.0 Beta.1 Release Notes
@@ -83,7 +84,7 @@ TiDB Ansible version: 4.0.0-beta.1
     + Fix the incorrect results of `BatchPointGet` when `plan cache` is enabled [#14855](https://github.com/pingcap/tidb/pull/14855)
     + Fix the issue that data is inserted into the wrong partitioned table after the timezone is modified [#14370](https://github.com/pingcap/tidb/pull/14370)
     + Fix the panic occurred when rebuilding expression using the invalid name of the `IsTrue` function during the outer join simplification [#14515](https://github.com/pingcap/tidb/pull/14515)
-    + Fix the the incorrect privilege check for the`show binding` statement [#14443](https://github.com/pingcap/tidb/pull/14443)
+    + Fix the incorrect privilege check for the`show binding` statement [#14443](https://github.com/pingcap/tidb/pull/14443)
 
 * TiKV
     + Fix the inconsistent behaviors of the `CAST` function in TiDB and TiKV [#6463](https://github.com/tikv/tikv/pull/6463) [#6461](https://github.com/tikv/tikv/pull/6461) [#6459](https://github.com/tikv/tikv/pull/6459) [#6474](https://github.com/tikv/tikv/pull/6474) [#6492](https://github.com/tikv/tikv/pull/6492) [#6569](https://github.com/tikv/tikv/pull/6569)

@@ -39,6 +39,14 @@ As an open-source distributed SQL database with high performance, TiDB can be de
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
+    <td>Amazon Linux 2023</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>Rocky Linux 9.1 or later</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
     <td>Kylin Euler V10 SP1/SP2</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
@@ -47,7 +55,7 @@ As an open-source distributed SQL database with high performance, TiDB can be de
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
-    <td>openEuler 22.03 LTS SP1</td>
+    <td>openEuler 22.03 LTS SP1/SP3</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
@@ -55,11 +63,11 @@ As an open-source distributed SQL database with high performance, TiDB can be de
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
-    <td>Oracle Enterprise Linux 7.3 or a later 7.x version</td>
+    <td>Oracle Enterprise Linux 8 or a later</td>
     <td>x86_64</td>
   </tr>
   <tr>
-    <td>Ubuntu LTS 18.04 or later</td>
+    <td>Ubuntu LTS 20.04 or later</td>
     <td>x86_64</td>
   </tr>
   <tr>
@@ -67,20 +75,16 @@ As an open-source distributed SQL database with high performance, TiDB can be de
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
-    <td>Debian 9 (Stretch) or later</td>
+    <td>Debian 10 (Buster) or later</td>
     <td>x86_64</td>
   </tr>
   <tr>
-    <td>Fedora 35 or later</td>
+    <td>Fedora 38 or later</td>
     <td>x86_64</td>
   </tr>
   <tr>
-    <td>openSUSE Leap later than v15.3 (not including Tumbleweed)</td>
+    <td>openSUSE Leap later than v15.5 (not including Tumbleweed)</td>
     <td>x86_64</td>
-  </tr>
-  <tr>
-    <td>Rocky Linux 9.1 or later</td>
-    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
     <td>SUSE Linux Enterprise Server 15</td>
@@ -102,9 +106,9 @@ As an open-source distributed SQL database with high performance, TiDB can be de
 |  Libraries required for compiling and running TiDB |  Version   |
 |   :---   |   :---   |
 |   Golang  |  1.21 or later |
-|   Rust    |   nightly-2022-07-31 or later  |
+|   Rust    |   nightly-2023-12-28 or later  |
 |  GCC      |   7.x      |
-|  LLVM     |  13.0 or later  |
+|  LLVM     |  17.0 or later  |
 
 Library required for running TiDB: glibc (2.28-151.el8 version)
 
@@ -112,7 +116,7 @@ Library required for running TiDB: glibc (2.28-151.el8 version)
 
 The following CPU architectures are supported:
 
-- x86_64. Starting from TiDB v6.6.0, the [x84-64-v2 instruction set](https://developers.redhat.com/blog/2021/01/05/building-red-hat-enterprise-linux-9-for-the-x86-64-v2-microarchitecture-level) is required.
+- x86_64. Starting from TiDB v6.6.0, the [x86-64-v2 instruction set](https://developers.redhat.com/blog/2021/01/05/building-red-hat-enterprise-linux-9-for-the-x86-64-v2-microarchitecture-level) is required.
 - ARM 64
 
 ## Software recommendations
@@ -156,7 +160,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 > - For performance-related test, do not use low-performance storage and network hardware configuration, in order to guarantee the correctness of the test result.
 > - For the TiKV server, it is recommended to use NVMe SSDs to ensure faster reads and writes.
 > - If you only want to test and verify the features, follow [Quick Start Guide for TiDB](/quick-start-with-tidb.md) to deploy TiDB on a single machine.
-> - Starting from v6.3.0, to deploy TiFlash under the Linux AMD64 architecture, the CPU must support the AVX2 instruction set. Ensure that `cat /proc/cpuinfo | grep avx2` has output. To deploy TiFlash under the Linux ARM64 architecture, the CPU must support the ARMv8 instruction set architecture. Ensure that `cat /proc/cpuinfo | grep 'crc32' | grep 'asimd'` has output. By using the instruction set extensions, TiFlash's vectorization engine can deliver better performance.
+> - Starting from v6.3.0, to deploy TiFlash under the Linux AMD64 architecture, the CPU must support the AVX2 instruction set. Ensure that `grep avx2 /proc/cpuinfo` has output. To deploy TiFlash under the Linux ARM64 architecture, the CPU must support the ARMv8 instruction set architecture. Ensure that `grep 'crc32' /proc/cpuinfo | grep 'asimd'` has output. By using the instruction set extensions, TiFlash's vectorization engine can deliver better performance.
 
 ### Production environment
 
@@ -266,4 +270,33 @@ As an open-source distributed SQL database, TiDB requires the following network 
 
 ## Web browser requirements
 
-TiDB relies on [Grafana](https://grafana.com/) to provide visualization of database metrics. A recent version of Internet Explorer, Chrome or Firefox with Javascript enabled is sufficient.
+TiDB relies on [Grafana](https://grafana.com/) to provide visualization of database metrics. A recent version of Microsoft Edge, Safari, Chrome or Firefox with Javascript enabled is sufficient.
+
+## Hardware and software requirements for TiFlash disaggregated storage and compute architecture
+
+The preceding TiFlash software and hardware requirements are for the coupled storage and compute architecture. Starting from v7.0.0, TiFlash supports the [disaggregated storage and compute architecture](/tiflash/tiflash-disaggregated-and-s3.md). In this architecture, TiFlash is divided into two types of nodes: the Write Node and the Compute Node. The requirements for these nodes are as follows:
+
+- Software: remain the same as the coupled storage and compute architecture, see [OS and platform requirements](#os-and-platform-requirements).
+- Network port: remain the same as the coupled storage and compute architecture, see [Network](#network-requirements).
+- Disk space:
+    - TiFlash Write Node: it is recommended to configure at least 200 GB of disk space, which is used as a local buffer when adding TiFlash replicas and migrating Region replicas before uploading data to Amazon S3. In addition, an object storage compatible with Amazon S3 is required.
+    - TiFlash Compute Node: it is recommended to configure at least 100 GB of disk space, which is mainly used to cache the data read from the Write Node to improve performance. The cache of the Compute Node might be fully used, which is normal.
+- CPU and memory requirements are described in the following sections.
+
+### Development and test environments
+
+| Component | CPU | Memory | Local Storage | Network | Number of Instances (Minimum Requirement) |
+| --- | --- | --- | --- | --- | --- |
+| TiFlash Write Node | 16 cores+ | 32 GB+ | SSD, 200 GB+ | Gigabit Ethernet | 1 |
+| TiFlash Compute Node | 16 cores+ | 32 GB+ | SSD, 100 GB+ | Gigabit Ethernet | 0 (see the following note) |
+
+### Production environment
+
+| Component | CPU | Memory | Disk Type | Network | Number of Instances (Minimum Requirement) |
+| --- | --- | --- | --- | --- | --- |
+| TiFlash Write Node | 32 cores+ | 64 GB+ | 1 or more SSDs | 10 Gigabit Ethernet (2 recommended) | 1 |
+| TiFlash Compute Node | 32 cores+ | 64 GB+ | 1 or more SSDs | 10 Gigabit Ethernet (2 recommended) | 0 (see the following note) |
+
+> **Note:**
+>
+> You can use deployment tools such as TiUP to quickly scale in or out the TiFlash Compute Node, within the range of `[0, +inf]`.
