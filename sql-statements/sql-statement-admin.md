@@ -184,7 +184,7 @@ AdminStmt ::=
         | 'REPAIR' 'TABLE' TableName CreateTableStmt 
         | ( 'FLUSH' | 'CAPTURE' | 'EVOLVE' ) 'BINDINGS'
         | 'FLUSH' ('SESSION' | 'INSTANCE') 'PLAN_CACHE'
-        | 'SET' 'BDR' 'ROLE' BDRRole
+        | 'SET' 'BDR' 'ROLE' ( 'PRIMARY' | 'SECONDARY' )
         | 'UNSET' 'BDR' 'ROLE'
     )
 
@@ -199,9 +199,6 @@ AdminStmtLimitOpt ::=
 TableNameList ::=
     TableName ( ',' TableName )*
     
-BDRRole ::=
-    "PRIMARY"
-|    "SECONDARY"
 ```
 
 ## Examples
