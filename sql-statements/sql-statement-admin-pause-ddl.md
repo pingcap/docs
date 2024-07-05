@@ -13,7 +13,7 @@ You can use this statement to pause a DDL job that is issued but not yet complet
 
 ```ebnf+diagram
 AdminStmt ::=
-    'PAUSE' 'DDL' 'JOBS' NumList
+    'ADMIN' 'PAUSE' 'DDL' 'JOBS' NumList
 
 NumList ::=
     Int64Num ( ',' Int64Num )*
