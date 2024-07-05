@@ -1670,10 +1670,9 @@ Previously an index on partitioned tables are created for each partition, which 
 
 After enabling this variable, any unique index created by the user that does not meet the above constraint will automatically be a global index.
 
-{{< copyable "sql" >}}
 
 ```sql
-set tidb_enable_global_index = true;
+SET tidb_enable_global_index = ON;
 
 CREATE TABLE t1 (
     col1 INT NOT NULL,
@@ -1691,28 +1690,25 @@ In the example above, the unique index `uidx12` will be implicitly a global inde
 
 It should be noted that a **clustered index** cannot be a global index:
 
-{{< copyable "sql" >}}
 
 ```sql
-set tidb_enable_global_index = true;
+SET tidb_enable_global_index = ON;
 
 CREATE TABLE t1 (
     col1 INT NOT NULL,
     col2 DATE NOT NULL,
     PRIMARY KEY (col2) clustered
 ) PARTITION BY HASH(col1) PARTITIONS 5;
-```
 
-```sql
 ERROR 1503 (HY000): A CLUSTERED INDEX must include all columns in the table's partitioning function
 ```
 
 The reason is that if the clustered index is a global index, the table will no longer be partitioned. This is because the key of the clustered index is also the record key which means it should be partition level, but the global index is on table level, which creates a conflict.
 
-Users can identify a global index by querying the `information_schema`.`tidb_indexes` table, aside from checking the table structure.
+Users can identify a global index by querying the [`information_schema`.`tidb_indexes`](/information-schema/information-schema-tidb-indexes.md) table, aside from checking the table structure.
 
 ```sql
-mysql> select * from information_schema.tidb_indexes where table_name='t1';
+SELECT * FROM information_schema.tidb_indexes WHERE table_name='t1';
 +--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
 | TABLE_SCHEMA | TABLE_NAME | NON_UNIQUE | KEY_NAME | SEQ_IN_INDEX | COLUMN_NAME | SUB_PART | INDEX_COMMENT | Expression | INDEX_ID | IS_VISIBLE | CLUSTERED | IS_GLOBAL |
 +--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
