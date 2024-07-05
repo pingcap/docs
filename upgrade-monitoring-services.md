@@ -36,7 +36,7 @@ Download a new installation package from the [Prometheus download page](https://
 
     > **Tip:**
     >
-    > `{version}` in the link indicates the version number of TiDB and `{arch}` indicates the architecture of the system, which can be `amd64` or `arm64`. For example, the download link for `v8.0.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-toolkit-v8.0.0-linux-amd64.tar.gz`.
+    > `{version}` in the link indicates the version number of TiDB and `{arch}` indicates the architecture of the system, which can be `amd64` or `arm64`. For example, the download link for `v8.1.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-toolkit-v8.1.0-linux-amd64.tar.gz`.
 
 2. In the extracted files, locate `prometheus-v{version}-linux-amd64.tar.gz` and extract it.
 
@@ -59,7 +59,7 @@ Download a new installation package from the [Prometheus download page](https://
 Execute the following command to upgrade Prometheus:
 
 ```bash
-tiup cluster patch <cluster-name> prometheus-v{new-version}.tar.gz -R prometheus
+tiup cluster patch <cluster-name> prometheus-v{new-version}.tar.gz -R prometheus --overwrite
 ```
 
 After the upgrade, you can go to the home page of the Prometheus server (usually at `http://<Prometheus-server-host-name>:9090`), click **Status** in the top navigation menu, and then open the **Runtime & Build Information** page to check the Prometheus version and confirm whether the upgrade is successful.
@@ -85,7 +85,7 @@ In the following upgrade steps, you need to download the Grafana installation pa
 
     > **Tip:**
     >
-    > `{version}` in the link indicates the version number of TiDB and `{arch}` indicates the architecture of the system, which can be `amd64` or `arm64`. For example, the download link for `v8.0.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-toolkit-v8.0.0-linux-amd64.tar.gz`.
+    > `{version}` in the link indicates the version number of TiDB and `{arch}` indicates the architecture of the system, which can be `amd64` or `arm64`. For example, the download link for `v8.1.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-toolkit-v8.1.0-linux-amd64.tar.gz`.
 
 2. In the extracted files, locate `grafana-v{version}-linux-amd64.tar.gz` and extract it.
 
@@ -108,7 +108,7 @@ In the following upgrade steps, you need to download the Grafana installation pa
 Execute the following command to upgrade Grafana:
 
 ```bash
-tiup cluster patch <cluster-name> grafana-v{new-version}.tar.gz -R grafana
+tiup cluster patch <cluster-name> grafana-v{new-version}.tar.gz -R grafana --overwrite
 
 ```
 
@@ -127,7 +127,7 @@ Download the `alertmanager` installation package from the [Prometheus download p
 Execute the following command to upgrade Alertmanager:
 
 ```bash
-tiup cluster patch <cluster-name> alertmanager-v{new-version}-linux-amd64.tar.gz -R alertmanager
+tiup cluster patch <cluster-name> alertmanager-v{new-version}-linux-amd64.tar.gz -R alertmanager --overwrite
 ```
 
 After the upgrade, you can go to the home page of the Alertmanager server (usually at `http://<Alertmanager-server-host-name>:9093`), click **Status** in the top navigation menu, and then check the Alertmanager version to confirm whether the upgrade is successful.

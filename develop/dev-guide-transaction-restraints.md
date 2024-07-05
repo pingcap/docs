@@ -681,6 +681,10 @@ mysql> SELECT * FROM doctors;
 
 ## Support for `savepoint` and nested transactions
 
+> **Note:**
+>
+> Starting from v6.2.0, TiDB supports the [`savepoint`](/sql-statements/sql-statement-savepoint.md) feature. If your TiDB cluster is earlier than v6.2.0, your TiDB cluster does not support the `PROPAGATION_NESTED` behavior. It is recommended to upgrade to v6.2.0 or a later version. If upgrading TiDB is not possible, and your applications are based on the **Java Spring** framework that uses the `PROPAGATION_NESTED` propagation behavior, you need to adapt it on the application side to remove the logic for nested transactions.
+
 The `PROPAGATION_NESTED` propagation behavior supported by **Spring** triggers a nested transaction, which is a child transaction that is started independently of the current transaction. A `savepoint` is recorded when the nested transaction starts. If the nested transaction fails, the transaction will roll back to the `savepoint` state. The nested transaction is part of the outer transaction and will be committed together with the outer transaction.
 
 The following example demonstrates the `savepoint` mechanism:
@@ -700,10 +704,6 @@ mysql> SELECT * FROM T2;
 |  100 |
 +------+
 ```
-
-> **Note:**
->
-> Since v6.2.0, TiDB supports the `savepoint` feature. If your TiDB cluster is earlier than v6.2.0, your TiDB cluster does not support the `PROPAGATION_NESTED` behavior. If your applications are based on the **Java Spring** framework that use the `PROPAGATION_NESTED` propagation behavior, you need to adapt it on the application side to remove the logic for nested transactions.
 
 ## Large transaction restrictions
 

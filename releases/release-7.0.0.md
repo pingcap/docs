@@ -268,7 +268,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
   For more information, see [documentation](/sql-statements/sql-statement-load-data.md).
 
-* TiDB Lightning supports enabling compressed transfers when sending key-value pairs to TiKV (GA) [#41163](https://github.com/pingcap/tidb/issues/41163) @[gozssky](https://github.com/gozssky)
+* TiDB Lightning supports enabling compressed transfers when sending key-value pairs to TiKV (GA) [#41163](https://github.com/pingcap/tidb/issues/41163) @[sleepymole](https://github.com/sleepymole)
 
     Starting from v6.6.0, TiDB Lightning supports compressing locally encoded and sorted key-value pairs for network transfer when sending them to TiKV, thus reducing the amount of data transferred over the network and lowering the network bandwidth overhead. In the earlier TiDB versions before this feature is supported, TiDB Lightning requires relatively high network bandwidth and incurs high traffic charges in case of large data volumes.
 
@@ -419,7 +419,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     + TiDB Lightning
 
-        - TiDB Lightning Physical Import Mode supports separating data import and index import to improve import speed and stability [#42132](https://github.com/pingcap/tidb/issues/42132) @[gozssky](https://github.com/gozssky)
+        - TiDB Lightning Physical Import Mode supports separating data import and index import to improve import speed and stability [#42132](https://github.com/pingcap/tidb/issues/42132) @[sleepymole](https://github.com/sleepymole)
 
            Add the `add-index-by-sql` parameter. The default value is `false`, which means that TiDB Lightning encodes both row data and index data into KV pairs and import them into TiKV together. If you set it to `true`, it means that TiDB Lightning adds indexes via the `ADD INDEX` SQL statement after importing the row data to improve import speed and stability.
 
@@ -504,7 +504,7 @@ We would like to thank the following contributors from the TiDB community:
 - [BornChanger](https://github.com/BornChanger)
 - [Dousir9](https://github.com/Dousir9)
 - [erwadba](https://github.com/erwadba)
-- [HappyUncle](https://github.com/HappyUncle)
+- [happy-v587](https://github.com/happy-v587)
 - [jiyfhust](https://github.com/jiyfhust)
 - [L-maple](https://github.com/L-maple)
 - [liumengya94](https://github.com/liumengya94)

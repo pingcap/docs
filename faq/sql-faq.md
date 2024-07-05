@@ -184,7 +184,7 @@ None of the `DELETE`, `TRUNCATE` and `DROP` operations release data immediately.
 
 ## Why does the query speed get slow after data is deleted?
 
-Deleting a large amount of data leaves a lot of useless keys, affecting the query efficiency. To solve the problem, you can use the [Region Merge](/best-practices/massive-regions-best-practices.md#method-3-enable-region-merge) feature. For details, see the [deleting data section in TiDB Best Practices](https://en.pingcap.com/blog/tidb-best-practice/#write).
+Deleting a large amount of data leaves a lot of useless keys, affecting the query efficiency. To solve the problem, you can use the [Region Merge](/best-practices/massive-regions-best-practices.md#method-3-enable-region-merge) feature. For details, see the [deleting data section in TiDB Best Practices](https://www.pingcap.com/blog/tidb-best-practice/#write).
 
 ## What should I do if it is slow to reclaim storage space after deleting data?
 

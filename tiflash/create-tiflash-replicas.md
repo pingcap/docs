@@ -19,6 +19,10 @@ The parameter of the above command is described as follows:
 
 - `count` indicates the number of replicas. When the value is `0`, the replica is deleted.
 
+> **Note:**
+>
+> For a [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) cluster, the `count` of TiFlash replicas can only be `2`. If you set it to `1`, it will be automatically adjusted to `2` for execution. If you set it to a number larger than 2, you will get an error about the replica count.
+
 If you execute multiple DDL statements on the same table, only the last statement is ensured to take effect. In the following example, two DDL statements are executed on the table `tpch50`, but only the second statement (to delete the replica) takes effect.
 
 Create two replicas for the table:
@@ -143,10 +147,10 @@ Before TiFlash replicas are added, each TiKV instance performs a full table scan
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 add-peer
     ```
 
-    > In the preceding command, you need to replace `v<CLUSTER_VERSION>` with the actual cluster version, such as `v8.0.0` and `<PD_ADDRESS>:2379` with the address of any PD node. For example:
+    > In the preceding command, you need to replace `v<CLUSTER_VERSION>` with the actual cluster version, such as `v8.1.0` and `<PD_ADDRESS>:2379` with the address of any PD node. For example:
     >
     > ```shell
-    > tiup ctl:v8.0.0 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
+    > tiup ctl:v8.1.0 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
     > ```
 
     Within a few minutes, you will observe a significant increase in CPU and disk IO resource usage of the TiFlash nodes, and TiFlash should create replicas faster. At the same time, the TiKV nodes' CPU and disk IO resource usage increases as well.

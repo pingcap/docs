@@ -5,10 +5,15 @@ summary: Learn about the TiDB release timeline.
 
 # TiDB Release Timeline
 
+<EmailSubscriptionWrapper />
+
 This document shows all the released TiDB versions in reverse chronological order.
 
 | Version | Release Date |
 | :--- | :--- |
+| [6.5.10](/releases/release-6.5.10.md) | 2024-06-20 |
+| [7.5.2](/releases/release-7.5.2.md) | 2024-06-13 |
+| [8.1.0](/releases/release-8.1.0.md) | 2024-05-24 |
 | [7.1.5](/releases/release-7.1.5.md) | 2024-04-26 |
 | [6.5.9](/releases/release-6.5.9.md) | 2024-04-12 |
 | [8.0.0-DMR](/releases/release-8.0.0.md) | 2024-03-29 |

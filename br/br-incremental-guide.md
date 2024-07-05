@@ -11,6 +11,12 @@ Incremental data of a TiDB cluster is differentiated data between the starting s
 >
 > Development for this feature has stopped. It is recommended that you use [log backup and PITR](/br/br-pitr-guide.md) as an alternative.
 
+## Limitations
+
+Because restoring the incremental backup relies on the snapshot of the database table at the backup time point to filter incremental DDL statements, the tables deleted during the incremental backup process might still exist after the data restore and need to be manually deleted.
+
+The incremental backup does not support batch renaming of tables. If batch renaming of tables occurs during the incremental backup process, the data restore might fail. It is recommended to perform a full backup after batch renaming tables, and use the latest full backup to replace the incremental data during restore.
+
 ## Back up incremental data
 
 To back up incremental data, run the `tiup br backup` command with **the last backup timestamp** `--lastbackupts` specified. In this way, br command-line tool automatically backs up incremental data generated between `lastbackupts` and the current time. To get `--lastbackupts`, run the `validate` command. The following is an example:
