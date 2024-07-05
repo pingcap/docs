@@ -149,7 +149,7 @@ TiDB supports disk spill for execution operators. When the memory usage of a SQL
 
 - The disk spill behavior is jointly controlled by the following parameters: [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom), [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path), and [`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota).
 - When the disk spill is triggered, TiDB outputs a log containing the keywords `memory exceeds quota, spill to disk now` or `memory exceeds quota, set aggregate mode to spill-mode`.
-- Disk spill for the Sort, MergeJoin, and HashJoin operators is introduced in v4.0.0; disk spill for the non-parallel algorithm of the HashAgg operator is introduced in v5.2.0; disk spill for the parallel algorithm of the HashAgg operator is introduced in v8.0.0.
+- Disk spill for the Sort, MergeJoin, and HashJoin operators is introduced in v4.0.0; disk spill for the non-parallel algorithm of the HashAgg operator is introduced in v5.2.0; disk spill for the parallel algorithm of the HashAgg operator is introduced in v8.0.0 as an experimental feature and becomes generally available (GA) in v8.2.0. You can control whether to enable the parallel HashAgg algorithm that supports disk spill using the [`tidb_enable_parallel_hashagg_spill`](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800) system variable. This variable will be deprecated in a future release.
 - When the SQL executions containing Sort, MergeJoin, HashJoin, or HashAgg cause OOM, TiDB triggers disk spill by default. 
 
 > **Note:**

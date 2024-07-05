@@ -122,7 +122,7 @@ The following are two snapshot backup examples:
     ```shell
     tiup br backup full --pd="${PD_IP}:2379" \
     --storage='s3://tidb-pitr-bucket/backup-data/snapshot-20220514000000' \
-    --backupts='2022/05/14 00:00:00'
+    --backupts='2022/05/14 00:00:00 +08:00'
     ```
 
 - Run a snapshot backup at 2022/05/16 00:00:00
@@ -130,7 +130,7 @@ The following are two snapshot backup examples:
     ```shell
     tiup br backup full --pd="${PD_IP}:2379" \
     --storage='s3://tidb-pitr-bucket/backup-data/snapshot-20220516000000' \
-    --backupts='2022/05/16 00:00:00'
+    --backupts='2022/05/16 00:00:00 +08:00'
     ```
 
 ## Run PITR

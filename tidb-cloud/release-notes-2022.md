@@ -401,7 +401,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 * Introduce [Credits](/tidb-cloud/tidb-cloud-billing.md#credits) (previously named as trail points) for PoC users.
 
-    You can now view information about your organization's credits on the **Credits** tab of the **Billing** page, the credits can be used to pay for TiDB Cloud fees. You can [contact us](https://en.pingcap.com/apply-for-poc/) to get credits.
+    You can now view information about your organization's credits on the **Credits** tab of the **Billing** page, the credits can be used to pay for TiDB Cloud fees. You can <a href="mailto:tidbcloud-support@pingcap.com">contact us</a> to get credits.
 
 ## August 9, 2022
 
@@ -463,7 +463,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 * Provide a new option for [TiKV node size](/tidb-cloud/size-your-cluster.md#tikv-vcpu-and-ram): `8 vCPU, 32 GiB`. You can choose either `8 vCPU, 32 GiB` or `8 vCPU, 64 GiB` for an 8 vCPU TiKV node.
 * Support syntax highlighting in sample code provided in the [**Connect to TiDB**](/tidb-cloud/connect-via-standard-connection.md) dialog to improve code readability. You can easily identify the parameters that you need to replace in the sample code.
 * Support automatically validating whether TiDB Cloud can access your source data after you confirm the import task on the [**Data Import Task**](/tidb-cloud/import-sample-data.md) page.
-* Change the theme color of the TiDB Cloud console to make it consistent with that of [PingCAP website](https://en.pingcap.com/).
+* Change the theme color of the TiDB Cloud console to make it consistent with that of [PingCAP website](https://www.pingcap.com/).
 
 ## July 12, 2022
 
@@ -517,7 +517,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 ## June 7, 2022
 
 * Add the [Try Free](https://tidbcloud.com/free-trial) registration page to quickly sign up for TiDB Cloud.
-* Remove the **Proof of Concept plan** option from the plan selection page. If you want to apply for a 14-day PoC trial for free, go to the [Apply for PoC](https://en.pingcap.com/apply-for-poc/) page. For more information, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
+* Remove the **Proof of Concept plan** option from the plan selection page. If you want to apply for a 14-day PoC trial for free, <a href="mailto:tidbcloud-support@pingcap.com">contact us</a>. For more information, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
 * Improve the system security by prompting users who sign up for TiDB Cloud with emails and passwords to reset their passwords every 90 days. For more information, see [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md).
 
 ## May 24, 2022
@@ -551,7 +551,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 TiDB Cloud is now in General Availability. You can [sign up](https://tidbcloud.com/signup) and select one of the following options:
 
 * Get started with [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless) for free.
-* Apply for [a 14-day PoC trial for free](https://en.pingcap.com/apply-for-poc/).
+* <a href="mailto:tidbcloud-support@pingcap.com">Contact us</a> to apply for a 14-day PoC trial for free.
 * Get full access with [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated).
 
 ## March 25, 2022
@@ -572,7 +572,7 @@ General changes:
 * Introduce a new public region: `eu-central-1`.
 * Deprecate 8 vCPU TiFlash and provide 16 vCPU TiFlash.
 * Separate the price of CPU and storage (both have 30% public preview discount).
-* Update the [billing information](/tidb-cloud/tidb-cloud-billing.md) and the [price table](https://en.pingcap.com/tidb-cloud/#pricing).
+* Update the [billing information](/tidb-cloud/tidb-cloud-billing.md) and the [price table](https://www.pingcap.com/pricing/).
 
 New features:
 
