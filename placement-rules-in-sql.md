@@ -56,7 +56,7 @@ For detailed configuration methods, see the following examples:
 | --- | --- |
 | Manual deployment | [Schedule replicas by topology labels](/schedule-replicas-by-topology-labels.md) |
 | Deployment with TiUP | [Geo-distributed deployment topology](/geo-distributed-deployment-topology.md) |
-| Deployment with TiDB Operator | [Configure a TiDB cluster in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#high-data-high-availability) |
+| Deployment with TiDB Operator | [Configure a TiDB cluster in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#high-availability-of-data) |
 
 > **Note:**
 >

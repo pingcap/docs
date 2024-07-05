@@ -34,11 +34,11 @@ data-source-dir = "/data/my_database"
 # - "": TiDB Lightning does not detect or handle conflicting data. If the source file contains conflicting primary or unique key records, the subsequent step reports an error.
 # - "error": when detecting conflicting primary or unique key records in the imported data, TiDB Lightning terminates the import and reports an error.
 # - "replace": when encountering conflicting primary or unique key records, TiDB Lightning retains the latest data and overwrites the old data.
-#              The conflicting data are recorded in the `lightning_task_info.conflict_error_v2` table (recording conflicting data detected by post-import conflict detection) and the `conflict_records` table (recording conflicting data detected by preprocess conflict detection) of the target TiDB cluster.
-#              If you set `conflict.strategy = "replace"` in physical import mode, the conflicting data can be checked in the `lightning_task_info.conflict_view` view.
+#              The conflicting data are recorded in the `lightning_task_info.conflict_view` view of the target TiDB cluster.
+#              In the `lightning_task_info.conflict_view` view, if the `is_precheck_conflict` field for a row is `0`, it means that the conflicting data recorded in that row is detected by postprocess conflict detection; if the `is_precheck_conflict` field for a row is `1`, it means that conflicting data recorded in that row is detected by pre-import conflict detection.
 #              You can manually insert the correct records into the target table based on your application requirements. Note that the target TiKV must be v5.2.0 or later versions.
 strategy = ""
-# Controls whether to enable preprocess conflict detection, which checks conflicts in data before importing it to TiDB. The default value is false, indicating that TiDB Lightning only checks conflicts after the import. If you set it to true, TiDB Lightning checks conflicts both before and after the import. This parameter can be used only in the physical import mode. In scenarios where the number of conflict records is greater than 1,000,000, it is recommended to set `precheck-conflict-before-import = true` for better performance in conflict detection. In other scenarios, it is recommended to disable it.
+# Controls whether to enable pre-import conflict detection, which checks conflicts in data before importing it to TiDB. The default value is false, indicating that TiDB Lightning only checks conflicts after the import. If you set it to true, TiDB Lightning checks conflicts both before and after the import. This parameter can be used only in the physical import mode. In scenarios where the number of conflict records is greater than 1,000,000, it is recommended to set `precheck-conflict-before-import = true` for better performance in conflict detection. In other scenarios, it is recommended to disable it.
 # precheck-conflict-before-import = false
 # threshold = 10000
 # Starting from v8.1.0, there is no need to configure `max-record-rows` manually, because TiDB Lightning automatically assigns the value of `max-record-rows` with the value of `threshold`, regardless of the user input. `max-record-rows` will be deprecated in a future release.
@@ -48,9 +48,11 @@ strategy = ""
 # Import mode. "local" means using the physical import mode.
 backend = "local"
 
-# The `duplicate-resolution` parameter is deprecated starting from v8.0.0 and will be removed in a future release. For more information, see <https://docs.pingcap.com/tidb/dev/tidb-lightning-physical-import-mode-usage#the-old-version-of-conflict-detection-deprecated-in-v800>.
+# The `duplicate-resolution` parameter is deprecated starting from v8.0.0 and will be removed in a future release. For more information, see <https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode-usage#the-old-version-of-conflict-detection-deprecated-in-v800>.
+# If you set `duplicate-resolution = 'none'` and do not set `conflict.strategy`, TiDB Lightning will automatically assign `""` to `conflict.strategy`. 
+# If you set `duplicate-resolution = 'remove'` and do not set `conflict.strategy`, TiDB Lightning will automatically assign "replace" to `conflict.strategy` and enable the new version of conflict detection. 
 # The method to resolve the conflicting data.
-duplicate-resolution = 'remove'
+duplicate-resolution = 'none'
 
 # The directory of local KV sorting.
 sorted-kv-dir = "./some-dir"
@@ -129,7 +131,7 @@ The new version of conflict detection has the following limitations:
 - Before importing, TiDB Lightning prechecks potential conflicting data by reading all data and encoding it. During the detection process, TiDB Lightning uses `tikv-importer.sorted-kv-dir` to store temporary files. After the detection is complete, TiDB Lightning retains the results for import phase. This introduces additional overhead for time consumption, disk space usage, and API requests to read the data.
 - The new version of conflict detection only works in a single node, and does not apply to parallel imports and scenarios where the `disk-quota` parameter is enabled.
 
-The new version of conflict detection controls whether to enable preprocess conflict detection via the `precheck-conflict-before-import` parameter. In cases where the original data contains a lot of conflicting data, the total time consumed by conflict detection before and after the import is less than that of the old version. Therefore, it is recommended to enable preprocess conflict detection in scenarios where the ratio of conflict records is greater than or equal to 1% and the local disk space is sufficient.
+The new version of conflict detection controls whether to enable pre-import conflict detection via the `precheck-conflict-before-import` parameter. In cases where the original data contains a lot of conflicting data, the total time consumed by conflict detection before and after the import is less than that of the old version. Therefore, it is recommended to enable pre-import conflict detection in scenarios where the ratio of conflict records is greater than or equal to 1% and the local disk space is sufficient.
 
 ### The old version of conflict detection (deprecated in v8.0.0)
 
@@ -163,10 +165,10 @@ CREATE TABLE IF NOT EXISTS `order_line` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 ```
 
-If Lightning detects conflicting data during the import, you can query the `lightning_task_info.conflict_error_v1` table as follows:
+If Lightning detects conflicting data during the import, you can query the `lightning_task_info.conflict_error_v3` table as follows:
 
 ```sql
-mysql> select table_name,index_name,key_data,row_data from conflict_error_v1 limit 10;
+mysql> select table_name,index_name,key_data,row_data from conflict_error_v3 limit 10;
 +---------------------+------------+----------+-----------------------------------------------------------------------------+
 |  table_name         | index_name | key_data | row_data                                                                    |
 +---------------------+------------+----------+-----------------------------------------------------------------------------+

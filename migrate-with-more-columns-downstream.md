@@ -107,5 +107,5 @@ In such cases, you can use the `binlog-schema` command to set a table schema for
     {{< copyable "shell-regular" >}}
 
     ```
-    tiup dmctl --master-addr ${advertise-addr} query-status resume-task ${task-name}
+    tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
     ```

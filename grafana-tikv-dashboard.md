@@ -348,6 +348,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Bytes / Write: The bytes per write operation
 - Compaction flow: The flow rate of compaction operations per type
 - Compaction pending bytes: The pending bytes to be compacted
+- Compaction Job Size(files): The number of SST files involved in a single compaction job
 - Read amplification: The read amplification per TiKV instance
 - Compression ratio: The compression ratio of each level
 - Number of snapshots: The number of snapshots per TiKV instance
