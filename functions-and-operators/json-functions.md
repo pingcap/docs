@@ -82,7 +82,7 @@ Many of JSON functions use JSON Path to select parts of a JSON document.
 
 | Symbol         | Description                  |
 | -------------- | ---------------------------- |
-| `$`            | Document Root                |
+| `$`            | Document root                |
 | `.`            | Member selection             |
 | `[]`           | Array selection              |
 | `*`            | Wildcard                     |
