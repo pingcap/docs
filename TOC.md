@@ -116,6 +116,7 @@
   - Plan Cluster Topology
     - [Minimal Topology](/minimal-deployment-topology.md)
     - [TiFlash Topology](/tiflash-deployment-topology.md)
+    - [PD Microservices Topology](/pd-microservices-deployment-topology.md)
     - [TiProxy Topology](/tiproxy/tiproxy-deployment-topology.md)
     - [TiCDC Topology](/ticdc-deployment-topology.md)
     - [TiDB Binlog Topology](/tidb-binlog-deployment-topology.md)
@@ -328,7 +329,13 @@
   - [Use Load Base Split](/configure-load-base-split.md)
   - [Use Store Limit](/configure-store-limit.md)
   - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
-  - [Use PD Microservices](/pd-microservices.md)
+  - Use PD Microservices
+    - [PD Microservices Overview](/pd-microservices.md)
+    - [Scale PD Microservice Nodes Using TiUP](/scale-microservices-using-tiup.md)
+    - [TSO Configuration File](/tso-configuration-file.md)
+    - [TSO Configuration Flags](/command-line-flags-for-tso-configuration.md)
+    - [Scheduling Configuration File](/scheduling-configuration-file.md)
+    - [Scheduling Configuration Flags](/command-line-flags-for-scheduling-configuration.md)
 - TiDB Tools
   - [Overview](/ecosystem-tool-user-guide.md)
   - [Use Cases](/ecosystem-tool-user-case.md)
@@ -631,6 +638,7 @@
     - [Data Check in the DM Replication Scenario](/sync-diff-inspector/dm-diff.md)
   - TiProxy
     - [Overview](/tiproxy/tiproxy-overview.md)
+    - [Load Balancing Policies](/tiproxy/tiproxy-load-balance.md)
     - [Configuration](/tiproxy/tiproxy-configuration.md)
     - [Command Line Parameters](/tiproxy/tiproxy-command-line-flags.md)
     - [Monitoring Metrics](/tiproxy/tiproxy-grafana.md)
