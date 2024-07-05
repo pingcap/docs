@@ -75,7 +75,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
     ```
 
     ```
-    +-------------------------+：
+    +-------------------------+
     | @@global.tidb_gc_enable |
     +-------------------------+
     |                       0 |

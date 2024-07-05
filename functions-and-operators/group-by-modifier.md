@@ -18,7 +18,7 @@ In the `GROUP BY` clause, you can specify one or more columns as a group list an
 
 With this grouping method, if there are `N` columns in the group list, TiDB aggregates the query results on `N+1` groups.
 
-For example:：
+For example:
 
 ```sql
 SELECT count(1) FROM t GROUP BY a,b,c WITH ROLLUP;

@@ -171,7 +171,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     JSON is a popular data format adopted by a large number of programs. TiDB has introduced the [JSON support](/data-type-json.md) as an experimental feature since an earlier version, compatible with MySQL's JSON data type and some JSON functions.
 
-    In TiDB v6.3.0, the JSON data type and functions become GA, which enriches TiDB’s data types, supports using JSON functions in [expression indexes](/sql-statements/sql-statement-create-index.md#expression-index) and [generated-columns](/generated-columns.md), and further improves TiDB’s compatibility with MySQL.
+    In TiDB v6.3.0, the JSON data type and functions become GA, which enriches TiDB's data types, supports using JSON functions in [expression indexes](/sql-statements/sql-statement-create-index.md#expression-index) and [generated-columns](/generated-columns.md), and further improves TiDB's compatibility with MySQL.
 
 ### Backup and restore
 
