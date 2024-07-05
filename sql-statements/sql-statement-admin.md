@@ -157,10 +157,11 @@ AdminStmt ::=
         'SHOW' ( 
             'DDL' ( 
                 'JOBS' Int64Num? WhereClauseOptional 
-                | 'JOB' 'QUERIES' NumList 
+                | 'JOB' 'QUERIES' (NumList | AdminStmtLimitOpt)
             )? 
             | TableName 'NEXT_ROW_ID' 
             | 'SLOW' AdminShowSlow 
+            | 'BDR' 'ROLE'
         ) 
         | 'CHECK' ( 
             'TABLE' TableNameList 
@@ -171,15 +172,36 @@ AdminStmt ::=
             'INDEX' TableName Identifier 
             | 'TABLE' 'LOCK' TableNameList ) 
         | 'CHECKSUM' 'TABLE' TableNameList | 'CANCEL' 'DDL' 'JOBS' NumList 
+        | ( 'CANCEL' | 'PAUSE' | 'RESUME' ) 'DDL' 'JOBS' NumList
         | 'RELOAD' (
             'EXPR_PUSHDOWN_BLACKLIST' 
             | 'OPT_RULE_BLACKLIST' 
             | 'BINDINGS'
+            | 'STATS_EXTENDED'
+            | 'STATISTICS'
         ) 
         | 'PLUGINS' ( 'ENABLE' | 'DISABLE' ) PluginNameList 
         | 'REPAIR' 'TABLE' TableName CreateTableStmt 
         | ( 'FLUSH' | 'CAPTURE' | 'EVOLVE' ) 'BINDINGS'
+        | 'FLUSH' ('SESSION' | 'INSTANCE') 'PLAN_CACHE'
+        | 'SET' 'BDR' 'ROLE' BDRRole |
+        | 'UNSET' 'BDR' 'ROLE'
     )
+
+NumList ::=
+    Int64Num ( ',' Int64Num )*
+
+AdminStmtLimitOpt ::=
+    "LIMIT" LengthNum
+|    "LIMIT" LengthNum ',' LengthNum
+|    "LIMIT" LengthNum "OFFSET" LengthNum
+
+TableNameList ::=
+    TableName ( ',' TableName )*
+    
+BDRRole ::=
+    "PRIMARY"
+|    "SECONDARY"
 ```
 
 ## Examples
