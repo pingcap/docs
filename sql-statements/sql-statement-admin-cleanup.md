@@ -10,7 +10,7 @@ The `ADMIN CLEANUP INDEX` statement is used to delete redundant indexes from a t
 ## Synopsis
 
 ```ebnf+diagram
-AdminCleanupStmt ::=
+AdminStmt ::=
     'ADMIN' 'CLEANUP' ( 'INDEX' TableName IndexName | 'TABLE' 'LOCK' TableNameList )
 
 TableNameList ::=
