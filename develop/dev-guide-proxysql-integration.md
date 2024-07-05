@@ -679,7 +679,7 @@ To use ProxySQL as a proxy for TiDB, you need to configure ProxySQL. To do so, y
 
 ##### Option 1: Configure ProxySQL using the Admin Interface
 
-1. Reconfigure ProxySQL’s internals using the standard ProxySQL Admin interface, accessible via any MySQL command line client (available by default on port `6032`):
+1. Reconfigure ProxySQL's internals using the standard ProxySQL Admin interface, accessible via any MySQL command line client (available by default on port `6032`):
 
     ```bash
     mysql -u admin -padmin -h 127.0.0.1 -P6032 --prompt 'ProxySQL Admin> '
