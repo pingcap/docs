@@ -15,7 +15,7 @@ The following figure shows the architecture of TiProxy:
 
 ## Main features
 
-TiProxy provides connection migration, service discovery, and quick deployment.
+TiProxy provides connection migration, failover, service discovery, and quick deployment.
 
 ### Connection migration
 
@@ -29,6 +29,10 @@ Connection migration usually occurs in the following scenarios:
 
 - When a TiDB server performs scaling in, rolling upgrade, or rolling restart, TiProxy can migrate connections from the TiDB server that is about to be offline to other TiDB servers to keep the client connection alive.
 - When a TiDB server performs scaling out, TiProxy can migrate existing connections to the new TiDB server to achieve real-time load balancing without resetting the client connection pool.
+
+### Failover
+
+When a TiDB server is at risk of running out of memory (OOM) or fails to connect to PD or TiKV, TiProxy detects the issue automatically and migrates the connections to another TiDB server, thus ensuring continuous client connectivity.
 
 ### Service discovery
 
@@ -44,12 +48,14 @@ TiProxy is suitable for the following scenarios:
 
 - Connection persistence: When a TiDB server performs scaling in, rolling upgrade, or rolling restart, the client connection is broken, resulting in an error. If the client does not have an idempotent error retry mechanism, you need to manually check and fix the error, which greatly increases the labor cost. TiProxy can keep the client connection, so that the client does not report an error.
 - Frequent scaling in and scaling out: The workload of an application might change periodically. To save costs, you can deploy TiDB on the cloud and automatically scale in and scale out TiDB servers according to the workload. However, scaling in might cause the client to disconnect, and scaling out might result in unbalanced load. TiProxy can keep the client connection and achieve load balancing.
+- CPU load imbalance: When background tasks consume a significant amount of CPU resources or workloads across connections vary significantly, leading to an imbalanced CPU load, TiProxy can migrate connections based on CPU usage to achieve load balancing. For more details, see [CPU-based load balancing](/tiproxy/tiproxy-load-balance.md#cpu-based-load-balancing).
+- TiDB server OOM: When a runaway query causes a TiDB server to run out of memory, TiProxy can proactively detect the OOM risk and migrate other healthy connections to a different TiDB server, thus ensuring continuous client connectivity. For more details, see [Memory-based load balancing](/tiproxy/tiproxy-load-balance.md#memory-based-load-balancing).
 
 TiProxy is not suitable for the following scenarios:
 
 - Sensitive to performance: The performance of TiProxy is lower than that of HAProxy and other load balancers, so using TiProxy will reduce the QPS. For details, refer to [TiProxy Performance Test Report](/tiproxy/tiproxy-performance-test.md).
 - Sensitive to cost: If the TiDB cluster uses hardware load balancers, virtual IP, or the load balancer provided by Kubernetes, adding TiProxy will increase the cost. In addition, if you deploy the TiDB cluster across availability zones on the cloud, adding TiProxy will also increase the traffic cost across availability zones.
-- TiDB server failover: TiProxy can keep the client connection only when the TiDB server is offline or restarted as planned. If the TiDB server is offline unexpectedly, the connection is still broken.
+- Failover for unexpected TiDB server downtime: TiProxy can keep the client connection only when the TiDB server is offline or restarted as planned. If the TiDB server is offline unexpectedly, the connection is still broken.
 
 It is recommended that you use TiProxy for the scenarios that TiProxy is suitable for and use HAProxy or other proxies when your application is sensitive to performance.
 

@@ -11,6 +11,13 @@ This document introduces the command-line flags that you can use when you launch
 
 This section lists the flags of the server program `tiproxy`.
 
+### `--advertise-addr`
+
++ Specifies the address that clients use to connect to this TiProxy instance.
++ Type: `string`
++ Default: `""`
++ This flag is automatically set when you deploy TiProxy using TiUP or TiDB Operator. If not set, the external IP address of the TiProxy instance is used.
+
 ### `--config`
 
 + Specifies the path of the TiProxy configuration file.

@@ -181,7 +181,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - Fix the issue that changing the log level via the configuration file does not take effect [#8117](https://github.com/tikv/pd/issues/8117) @[rleungx](https://github.com/rleungx)
     - Fix the issue that a large number of retries occur when canceling resource groups queries [#8217](https://github.com/tikv/pd/issues/8217) @[nolouch](https://github.com/nolouch)
     - Fix the issue that `ALTER PLACEMENT POLICY` cannot modify the placement policy [#52257](https://github.com/pingcap/tidb/issues/52257) [#51712](https://github.com/pingcap/tidb/issues/51712) @[jiyfhust](https://github.com/jiyfhust)
-    - Fix the issue that down peers might not recover when using the placement policy [#7808](https://github.com/tikv/pd/issues/7808) @[rleungx](https://github.com/rleungx)
+    - Fix the issue that down peers might not recover when using Placement Rules [#7808](https://github.com/tikv/pd/issues/7808) @[rleungx](https://github.com/rleungx)
     - Fix the issue that manually transferring the PD leader might fail [#8225](https://github.com/tikv/pd/issues/8225) @[HuSharp](https://github.com/HuSharp)
     - Fix the issue that the scheduling of write hotspots might break placement policy constraints [#7848](https://github.com/tikv/pd/issues/7848) @[lhy1024](https://github.com/lhy1024)
     - Fix the issue that slots are not fully deleted in a resource group client, which causes the number of the allocated tokens to be less than the specified value [#7346](https://github.com/tikv/pd/issues/7346) @[guo-shaoge](https://github.com/guo-shaoge)

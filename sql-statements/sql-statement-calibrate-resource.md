@@ -28,7 +28,7 @@ To execute this command, make sure that the following requirements are met:
 
 - You have enabled [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660).
 - The user has `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
-- The user has the `SELECT` privilege for all tables in the `METRICS_SCHEMA` schema.
+- To [estimate capacity based on actual workload](#estimate-capacity-based-on-actual-workload), the user must have the `SELECT` privilege for all tables in the `METRICS_SCHEMA` schema.
 
 ## Methods for estimating capacity
 
