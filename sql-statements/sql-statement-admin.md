@@ -168,7 +168,46 @@ For details, refer to [`ADMIN SHOW SLOW` command](/identify-slow-queries.md#admi
 
 ```ebnf+diagram
 AdminStmt ::=
-    'ADMIN' ( 'SHOW' ( 'DDL' ( 'JOBS' Int64Num? WhereClauseOptional | 'JOB' 'QUERIES' NumList )? | TableName 'NEXT_ROW_ID' | 'SLOW' AdminShowSlow ) | 'CHECK' ( 'TABLE' TableNameList | 'INDEX' TableName Identifier ( HandleRange ( ',' HandleRange )* )? ) | 'RECOVER' 'INDEX' TableName Identifier | 'CLEANUP' ( 'INDEX' TableName Identifier | 'TABLE' 'LOCK' TableNameList ) | 'CHECKSUM' 'TABLE' TableNameList | 'CANCEL' 'DDL' 'JOBS' NumList | 'RELOAD' ( 'EXPR_PUSHDOWN_BLACKLIST' | 'OPT_RULE_BLACKLIST' | 'BINDINGS' ) | 'PLUGINS' ( 'ENABLE' | 'DISABLE' ) PluginNameList | 'REPAIR' 'TABLE' TableName CreateTableStmt | ( 'FLUSH' | 'CAPTURE' | 'EVOLVE' ) 'BINDINGS' )
+    'ADMIN' (
+        'SHOW' (
+            'DDL' (
+                'JOBS' Int64Num? WhereClauseOptional |
+                'JOB' 'QUERIES' (NumList | AdminStmtLimitOpt)
+            )
+            TableName 'NEXT_ROW_ID' |
+            'SLOW' AdminShowSlow |
+            'BDR' 'ROLE'
+        ) |
+        'CHECK' (
+            'TABLE' TableNameList |
+            'INDEX' TableName Identifier ( HandleRange ( ',' HandleRange )* )?
+        ) |
+        'RECOVER' 'INDEX' TableName Identifier |
+        'CLEANUP' (
+            'INDEX' TableName Identifier |
+            'TABLE' 'LOCK' TableNameList
+        ) |
+        'CHECKSUM' 'TABLE' TableNameList |
+        'CANCEL' 'DDL' 'JOBS' NumList |
+        'PAUSE' 'DDL' 'JOBS' NumList |
+        'RESUME' 'DDL' 'JOBS' NumList |
+        'RELOAD' (
+            'EXPR_PUSHDOWN_BLACKLIST' |
+            'OPT_RULE_BLACKLIST' |
+            'BINDINGS' |
+            'STATS_EXTENDED' |
+            'STATISTICS'
+        ) |
+        'PLUGINS' (
+            'ENABLE' PluginNameList |
+            'DISABLE' PluginNameList
+        ) |
+        'REPAIR' 'TABLE' TableName CreateTableStmt |
+        ('FLUSH' | 'CAPTURE' | 'EVOLVE') 'BINDINGS' |
+        'FLUSH' StatementScope 'PLAN_CACHE' |
+        'SET' 'BDR' 'ROLE' BDRRole |
+        'UNSET' 'BDR' 'ROLE'
+    )
 
 NumList ::=
     Int64Num ( ',' Int64Num )*
