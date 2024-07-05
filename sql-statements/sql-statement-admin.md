@@ -192,9 +192,9 @@ NumList ::=
     Int64Num ( ',' Int64Num )*
 
 AdminStmtLimitOpt ::=
-    "LIMIT" LengthNum
-|    "LIMIT" LengthNum ',' LengthNum
-|    "LIMIT" LengthNum "OFFSET" LengthNum
+    'LIMIT' LengthNum
+|    'LIMIT' LengthNum ',' LengthNum
+|    'LIMIT' LengthNum 'OFFSET' LengthNum
 
 TableNameList ::=
     TableName ( ',' TableName )*
