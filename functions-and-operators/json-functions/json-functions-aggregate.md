@@ -30,7 +30,7 @@ SELECT JSON_ARRAYAGG(v) FROM (SELECT 1 'v' UNION SELECT 2);
 
 ## [JSON_OBJECTAGG()](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_json-objectagg)
 
-The `JSON_OBJECTAGG(key,value)` function provides an aggregation of values for a given key.
+The `JSON_OBJECTAGG(key,value)` function aggregates keys and values of keys into a JSON object according to the given `key` and `value`. Both `key` or `value` are typically an expression or a column name.
 
 Example:
 
