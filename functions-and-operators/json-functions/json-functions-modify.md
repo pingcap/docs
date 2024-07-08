@@ -131,7 +131,7 @@ The `JSON_MERGE_PATCH(json_doc, json_doc [,json_doc] ...)` function merges two o
 
 Examples:
 
-In the following example you can see that the value of `a` gets overwritten by argument 2 and that `c` is added as a new attribute.
+In the following example, you can see that the value of `a` gets overwritten by argument 2 and that `c` is added as a new attribute in the merged result.
 
 ```sql
 SELECT JSON_MERGE_PATCH(
