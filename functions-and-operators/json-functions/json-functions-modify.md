@@ -110,7 +110,7 @@ SELECT JSON_INSERT(
 1 row in set (0.00 sec)
 ```
 
-Note that this function does not overwrite existing attributes as can be seen in the following example that tries to overwrite the `"a"` attribute.
+Note that this function does not overwrite values of existing attributes. For example, the following statement appears to overwrite the `"a"` attribute, but it does not actually do so.
 
 ```sql
 SELECT JSON_INSERT('{"a": 61, "b": 62}', '$.a', 41, '$.c', 63);
