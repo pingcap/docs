@@ -9,7 +9,7 @@ The functions listed on this page are part of the [aggregate functions](/functio
 
 ## [JSON_ARRAYAGG()](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_json-arrayagg)
 
-The `JSON_ARRAYAGG(key)` function provides an aggregation of keys.
+The `JSON_ARRAYAGG(key)` function aggregates values of keys into a JSON array according to the given `key`. `key` is typically an expression or a column name.
 
 Example:
 
