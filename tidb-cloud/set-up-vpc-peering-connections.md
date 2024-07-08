@@ -74,13 +74,13 @@ This section describes how to set up VPC peering connections on AWS. For Google 
     - VPC ID
     - VPC CIDR
 
-    You can get these information from your VPC details page on the AWS console. TiDB Cloud supports creating VPC peerings between VPCs in the same region or from two different regions.
+    You can get such information from your VPC details page of the [AWS Management Console](https://console.aws.amazon.com/). TiDB Cloud supports creating VPC peerings between VPCs in the same region or from two different regions.
 
     ![VPC peering](/media/tidb-cloud/vpc-peering/vpc-peering-creating-infos.png)
 
-5. Click **create**. The VPC peering request is sent and you can see the VPC Peering info in **VPC Peering** tab and the status is "System Checking".
+5. Click **Create** to send the VPC peering request, and then view the VPC peering information on the **VPC Peering** tab. The status of the newly created VPC peering is **System Checking**.
 
-6. Check **...** of the VPC Peering record, and click **View** , you can view the connection information of your TiDB VPC peerings from **VPC Peering Details** page.
+6. To view detailed information about your newly created VPC peering, click **...** > **View**  in the **Action** column. The **VPC Peering Details** page is displayed.
 
     ![VPC-Peering](/media/tidb-cloud/VPC-Peering4.png)
 
@@ -179,7 +179,7 @@ You can also use the AWS dashboard to configure the VPC peering connection.
 
     2. From the left navigation bar, open the **Peering Connections** page. On the **Create Peering Connection** tab, a peering connection is in the **Pending Acceptance** status.
 
-    3. Confirm the requester owner is TiDB Cloud (You can view the "TiDB Cloud AWS Account ID" and "TiDB Cloud VPC ID" from **VPC Peering Details** page on [TiDB Cloud console](https://tidbcloud.com)). Right-click the peering connection and select **Accept Request** to accept the request in the **Accept VPC peering connection request** dialog.
+    3. Confirm that the requester owner and the requester VPC match **TiDB Cloud AWS Account ID** and **TiDB Cloud VPC ID** on the **VPC Peering Details** page of the [TiDB Cloud console](https://tidbcloud.com). Right-click the peering connection and select **Accept Request** to accept the request in the **Accept VPC peering connection request** dialog.
 
         ![AWS VPC peering requests](/media/tidb-cloud/vpc-peering/aws-vpc-guide-3.png)
 
@@ -227,9 +227,9 @@ Now you have successfully set up the VPC peering connection. Next, [connect to t
     - VPC Network Name
     - VPC CIDR
 
-5.  Click **create**. The VPC peering request is sent and you can see the VPC Peering info in **VPC Peering** tab and the status is "System Checking".
+5. Click **Create** to send the VPC peering request, and then view the VPC peering information on the **VPC Peering** tab. The status of the newly created VPC peering is **System Checking**.
 
-6. Check **...** of the VPC Peering record, and click **View** , you can view the connection information of your TiDB VPC peerings from **VPC Peering Details** page.
+6. To view detailed information about your newly created VPC peering, click **...** > **View**  in the **Action** column. The **VPC Peering Details** page is displayed.
 
     ![VPC-Peering](/media/tidb-cloud/VPC-Peering3.png)
 
