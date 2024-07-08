@@ -34,7 +34,7 @@ The `JSON_OBJECTAGG(key,value)` function aggregates keys and values of keys into
 
 Example:
 
-First create two tables and add a few rows to them.
+First, create two tables and add a few rows to them.
 
 ```sql
 CREATE TABLE plants (
