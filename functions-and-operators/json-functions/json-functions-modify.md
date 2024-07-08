@@ -152,11 +152,11 @@ SELECT JSON_MERGE_PATCH(
 
 ## [JSON_MERGE_PRESERVE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge-preserve)
 
-The `JSON_MERGE_PRESERVE(json_doc, json_doc [,json_doc] ...)` function merges two or more JSON documents by appending to existing attributes and returns the merged result.
+The `JSON_MERGE_PRESERVE(json_doc, json_doc [,json_doc] ...)` function merges two or more JSON documents while preserving all values associated with each key and returns the merged result.
 
 Examples:
 
-In the following example you can see that the value of argument 2 is appended to `a` and that `c` is added as a new attribute.
+In the following example, you can see that the value of argument 2 is appended to `a` and that `c` is added as a new attribute.
 
 ```sql
 SELECT JSON_MERGE_PRESERVE('{"a": 1, "b": 2}','{"a": 100}', '{"c": 300}');
@@ -181,7 +181,7 @@ A deprecated alias for [`JSON_MERGE_PRESERVE()`](#json_merge_preserve).
 
 ## [JSON_REMOVE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-remove)
 
-The `JSON_REMOVE(json_doc, path [,path] ...)` function removes `path` from a JSON document and returns the result.
+The `JSON_REMOVE(json_doc, path [,path] ...)` function removes data of the specified `path` from a JSON document and returns the result.
 
 Examples:
 
@@ -217,7 +217,7 @@ SELECT JSON_REMOVE('{"a": 61, "b": 62, "c": 63}','$.b','$.c');
 
 ## [JSON_REPLACE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-replace)
 
-The `JSON_REPLACE(json_doc, path, value [, path, value] ...)` function replaces existing values in a JSON document and returns the result. If the specified path does not exist, it is not added to the result.
+The `JSON_REPLACE(json_doc, path, value [, path, value] ...)` function replaces values in specified paths of a JSON document and returns the result. If a specified path does not exist, the value corresponding to the path is not added to the result.
 
 This function takes arguments in pairs, where each pair is a `path` and a `value`.
 
@@ -238,7 +238,7 @@ SELECT JSON_REPLACE('{"a": 41, "b": 62}','$.b',42);
 1 row in set (0.00 sec)
 ```
 
-In the following example, you can change the value at `$.b` from `62` to `42`. In addition to this, you can replace the value at `$.c` with `43`. Because it does not exist in `json_doc`, the result is not changed.
+In the following example, you can change the value at `$.b` from `62` to `42`.  In addition, this statement tries to replace the value at `$.c` with `43`, but it does not work because the `$.c` path does not exist in `{"a": 41, "b": 62}`.
 
 ```sql
 SELECT JSON_REPLACE('{"a": 41, "b": 62}','$.b',42,'$.c',43);
@@ -276,7 +276,7 @@ SELECT JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2);
 1 row in set (0.00 sec)
 ```
 
-In the following example, you update the `$.version` from `1.1` to `1.2`. And you update `$.branch`, which is not present before, to `main`.
+In the following example, you can update the `$.version` from `1.1` to `1.2`. And you can update `$.branch`, which does not exist before, to `main`.
 
 ```sql
 SELECT JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2,'$.branch', "main");
@@ -297,7 +297,7 @@ The `JSON_UNQUOTE(json)` function unquotes a JSON value and returns the result a
 
 Examples:
 
-In the example `"foo"` is unquoted to `foo`.
+In the example, `"foo"` is unquoted to `foo`.
 
 ```sql
 SELECT JSON_UNQUOTE('"foo"');
@@ -312,7 +312,7 @@ SELECT JSON_UNQUOTE('"foo"');
 1 row in set (0.00 sec)
 ```
 
-This function is often used together with [`JSON_EXTRACT()`](/functions-and-operators/json-functions/json-functions-search.md#json_extract). In the following example, you first extract a value, which is quoted, and in the second example you combine this to unquote the value. Note that instead of `JSON_UNQUOTE(JSON_EXTRACT(...))`, you can use the [`->>`](/functions-and-operators/json-functions/json-functions-search.md#--1) shorthand.
+This function is often used together with [`JSON_EXTRACT()`](/functions-and-operators/json-functions/json-functions-search.md#json_extract). For the following examples, you can extract a JSON value with quotes in the first example and then use the two functions together to unquote the value in the second example. Note that instead of `JSON_UNQUOTE(JSON_EXTRACT(...))`, you can use the [`->>`](/functions-and-operators/json-functions/json-functions-search.md#--1) operator.
 
 ```sql
 SELECT JSON_EXTRACT('{"database": "TiDB"}', '$.database');
