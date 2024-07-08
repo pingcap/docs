@@ -13,13 +13,13 @@ The `JSON_SCHEMA_VALID(schema, json_doc)` function validate a JSON document agai
 
 This can be used together with a [CHECK](/constraints.md#check) constraint to do automatic schema validation when a table is modified.
 
-This is following the [JSON Schema specification](https://json-schema.org/specification).
+This function follows the [JSON Schema specification](https://json-schema.org/specification).
 
-Validation keywords:
+The supported validation keywords are as follows:
 
-| Validation Keyword | Applies to | Description |
+| Validation keyword | Applied type | Description |
 |---|---|---|
-| `type`                 | Any | Tests the type (e.g. `array`,`string`, etc) |
+| `type`                 | Any | Tests the type (such as `array` and `string`) |
 | `enum`                 | Any | Tests if a value is in the specified array of values |
 | `const`                | Any | Similar to `enum`, but for a single value |
 | `allOf`                | Any | Matches all of the specified schemas |
@@ -39,14 +39,14 @@ Validation keywords:
 | `minItems`             | `array` | Tests if the number of items in the array is at least the specified value |
 | `uniqueItems`          | `array` | Tests if the items in the array are unique, `true`/`false`|
 | `contains`             | `array` | Sets schema for items contained in the array |
-| `maxContains`          | `array` | Used together with `contains` to set the maximum times something can be present |
-| `minContains`          | `array` | Used together with `contains` to set the minimum times something can be present |
+| `maxContains`          | `array` | Used together with `contains` to test the maximum times an item can be present |
+| `minContains`          | `array` | Used together with `contains` to test the minimum times an item can be present |
 | `properties`           | `object` | Schema to apply to the properties of an object |
 | `patternProperties`    | `object` | Schema to apply to certain properties based on pattern matching of the property name |
 | `additionalProperties` | `object` | Whether additional properties are allowed or not, `true`/`false` |
-| `minProperties`        | `object` | Test the minimum number of properties that the object has |
-| `maxProperties`        | `object` | Test the maximum number of properties that the object has |
-| `required`             | `object` | The property names that are required |
+| `minProperties`        | `object` | Tests the minimum number of properties that an object can have |
+| `maxProperties`        | `object` | Tests the maximum number of properties that an object can have |
+| `required`             | `object` | Tests if the specified property names exist in an object |
 
 Examples:
 
@@ -113,7 +113,7 @@ mysql> SELECT JSON_TYPE(@j);
 1 row in set (0.00 sec)
 ```
 
-As you can see in the preceding output, the type is `object`. This matches with the output of [`JSON_TYPE()`](/functions-and-operators/json-functions/json-functions-return.md#json_type).
+As you can see in the preceding output, the type of `@j` is `object`. This matches with the output of [`JSON_TYPE()`](/functions-and-operators/json-functions/json-functions-return.md#json_type).
 
 Now validate the presence of certain attributes.
 
@@ -145,7 +145,7 @@ SELECT JSON_SCHEMA_VALID('{"required": ["fruits","vegetables","grains"]}',@j);
 1 row in set (0.00 sec)
 ```
 
-In the preceding output, you can see that see that validation of the presence of the `fruits`, `vegetables` and `grains` attributes fails because the latter is not present.
+In the preceding output, you can see that see that validation of the presence of the `fruits`, `vegetables` and `grains` attributes fails because `grains` is not present.
 
 Now validate that `fruits` is an array.
 
@@ -179,7 +179,7 @@ SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "string"}}}',@j);
 
 The preceding output shows that `fruits` is **not** a string.
 
-Now verify the number of items in the array
+Now verify the number of items in the array.
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array", "minItems": 3}}}',@j);
@@ -236,7 +236,7 @@ SELECT JSON_SCHEMA_VALID('{"type": "integer", "minimum": 40, "maximum": 45}', '1
 1 row in set (0.00 sec)
 ```
 
-For strings, you can do pattern matching.
+For a string, you can validate whether it matches a certain pattern.
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"type": "string", "pattern": "^Ti"}', '"TiDB"');
@@ -264,7 +264,7 @@ SELECT JSON_SCHEMA_VALID('{"type": "string", "pattern": "^Ti"}', '"PingCAP"');
 1 row in set (0.00 sec)
 ```
 
-There are also a few named formats available that can be used to check a value. Other available formats include `ipv6`, `time`, `date`, `duration`, `email`, `hostname`, `uuid` and `uri`.
+You can check whether a value matches a certain named format. The formats that can be validated include `ipv4`, `ipv6`, `time`, `date`, `duration`, `email`, `hostname`, `uuid`, and `uri`.
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"format": "ipv4"}', '"127.0.0.1"');
@@ -292,7 +292,7 @@ SELECT JSON_SCHEMA_VALID('{"format": "ipv4"}', '"327.0.0.1"');
 1 row in set (0.00 sec)
 ```
 
-You can also use `enum` to check if a string is in an array of values.
+You can also use `enum` to check if a string is in an array.
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"enum": ["TiDB", "MySQL"]}', '"TiDB"');
@@ -333,7 +333,7 @@ SELECT JSON_SCHEMA_VALID('{"enum": ["TiDB", "MySQL"]}', '"SQLite"');
 1 row in set (0.00 sec)
 ```
 
-With `anyOf` it is possible to combine certain requirements.
+With `anyOf`, you can combine certain requirements and validate whether any of the requirements is met.
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"anyOf": [{"type": "string"},{"type": "integer"}]}', '"TiDB"');
@@ -376,7 +376,7 @@ SELECT JSON_SCHEMA_VALID('{"anyOf": [{"type": "string"},{"type": "integer"}]}', 
 
 ## MySQL compatibility
 
-- TiDB will return an error where MySQL might accept a invalid schema like `{"type": "sting"}` for `JSON_SCHEMA_VALID()`. Note the "sting" typo instead of "string" here.
+- If the schema to be validated in `JSON_SCHEMA_VALID()` is invalid (such as `{"type": "sting"}`), MySQL might accept it, but TiDB returns an error. Note that there is a spelling mistake in `"sting"`, which should be `"string"`.
 - MySQL uses an older draft version of the JSON Schema standard.
 
 ## See also

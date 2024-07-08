@@ -134,7 +134,7 @@ SELECT JSON_TYPE('"2025-06-14"'),JSON_TYPE(CAST(CAST('2025-06-14' AS date) AS js
 
 ## [JSON_VALID()](https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-valid)
 
-The `JSON_VALID(str)` function checks if the first argument is valid JSON. This can be useful for checking a column before converting it to the `json` type.
+The `JSON_VALID(str)` function checks if the argument is valid JSON. This can be useful for checking a column before converting it to the `JSON` type.
 
 ```sql
 SELECT JSON_VALID('{"foo"="bar"}');
