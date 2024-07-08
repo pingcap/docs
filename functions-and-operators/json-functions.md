@@ -77,7 +77,7 @@ You can use JSON functions to work with data in the [JSON data type](/data-type-
 
 ## JSONPath
 
-Many of JSON functions use JSON Path to select parts of a JSON document.
+Many of JSON functions use [JSONPath](https://www.rfc-editor.org/rfc/rfc9535.html) to select parts of a JSON document.
 
 | Symbol         | Description                  |
 | -------------- | ---------------------------- |
