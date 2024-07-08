@@ -77,7 +77,7 @@ Because CSV files do not contain schema information, before importing data from 
 
         > **Note:**
         >
-        > Each `${db_name}.${table_name}-schema.sql` file must only contain a single DDL statement for creating the table. If the file contains multiple DDL statements, only the first one takes effect.
+        > Each `${db_name}.${table_name}-schema.sql` file must only contain a single DDL statement for creating the table. Otherwise it might fail to create the table.
 
 ## Step 3. Configure cross-account access
 
