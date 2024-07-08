@@ -69,7 +69,7 @@ This section describes how to set up VPC peering connections on AWS. For Google 
 
 4. Click **Create VPC Peering**, choose **AWS VPC Peering**, choose the **TiDB Cloud VPC Region**, and then fill in the required information of your existing AWS VPC:
 
-    - Your existing VPC Region
+    - Your VPC Region
     - AWS Account ID
     - VPC ID
     - VPC CIDR
