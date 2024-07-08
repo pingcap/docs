@@ -13,7 +13,7 @@ An alias to [`JSON_ARRAY_APPEND()`](#json_array_append).
 
 ## [JSON_ARRAY_APPEND()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-append)
 
-The `JSON_ARRAY_APPEND(json_array, path, val)` function appends values to the end of the indicated arrays within a JSON document at the specified `path` and returns the result.
+The `JSON_ARRAY_APPEND(json_array, path, value [,path, value] ...)` function appends values to the end of the indicated arrays within a JSON document at the specified `path` and returns the result.
 
 This function takes arguments in pairs, where each pair is a `path` and a `value`.
 
