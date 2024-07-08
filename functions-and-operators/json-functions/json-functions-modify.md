@@ -57,7 +57,7 @@ This function takes arguments in pairs, where each pair is a `path` and a `value
 
 Examples:
 
-In the following example, add a value at position 0 of the array.
+The following example inserts a value at the position of index 0 in the array.
 
 ```sql
 SELECT JSON_ARRAY_INSERT('["Car", "Boat", "Train"]', '$[0]', "Airplane") AS "Transport options";
