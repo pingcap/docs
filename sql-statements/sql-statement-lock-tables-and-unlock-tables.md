@@ -17,7 +17,7 @@ TiDB enables client sessions to acquire table locks for the purpose of cooperati
 
 A table lock protects against reads or writes by other sessions. A session that holds a `WRITE` lock can perform table-level operations such as `DROP TABLE` or `TRUNCATE TABLE`.
 
-> **Note：**
+> **Note:**
 >
 > The table locks feature is disabled by default.
 >

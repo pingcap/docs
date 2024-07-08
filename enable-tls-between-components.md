@@ -111,7 +111,7 @@ Currently, it is not supported to only enable encrypted transmission of some spe
 
     - TiCDC
 
-        Configure in the configuration file：
+        Configure in the configuration file:
 
         ```toml
         [security]

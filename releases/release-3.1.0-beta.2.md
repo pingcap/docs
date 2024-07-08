@@ -38,7 +38,7 @@ TiDB Ansible version: 3.1.0-beta.2
 + PD Client
     - Support reporting statistics of local threads to PD [#6605](https://github.com/tikv/tikv/pull/6605)
 + Backup
-    - Replace the `RocksIOLimiter` flow control library with Rust’s `async-speed-limit` flow control library to eliminate extra memory copies when backing up a file [#6462](https://github.com/tikv/tikv/pull/6462)
+    - Replace the `RocksIOLimiter` flow control library with Rust's `async-speed-limit` flow control library to eliminate extra memory copies when backing up a file [#6462](https://github.com/tikv/tikv/pull/6462)
 + PD
     - Tolerate backslash in the location label name [#2084](https://github.com/pingcap/pd/pull/2084)
 + TiFlash
