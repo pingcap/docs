@@ -22,8 +22,8 @@ Validation keywords:
 | `type`                 | Any | Tests the type (e.g. `array`,`string`, etc) |
 | `enum`                 | Any | Tests if a value is in the specified array of values |
 | `const`                | Any | Similar to `enum`, but for a single value |
-| `allOf`                | Any | Match all of the specified schemas |
-| `anyOf`                | Any | Match any of the specified schemas |
+| `allOf`                | Any | Matches all of the specified schemas |
+| `anyOf`                | Any | Matches any of the specified schemas |
 | `multipleOf`           | `number`/`integer` | Tests if the value is a multiple of the specified value |
 | `maximum`              | `number`/`integer` | Tests if the value is below the maximum (inclusive) |
 | `exclusiveMaximum`     | `number`/`integer` | Tests if the value is below the maximum (exclusive) |
