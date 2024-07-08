@@ -53,7 +53,7 @@ SELECT JSON_LENGTH('{"weather": {"current": "sunny", "tomorrow": "cloudy"}}','$'
 1 row in set (0.00 sec)
 ```
 
-In the following example, the returned value is `2` because there are two values at `$.weather`: `current` and `tomorrow`.
+In the following example, the returned value is `2` because there are two items at `$.weather`: `current` and `tomorrow`.
 
 ```sql
 SELECT JSON_LENGTH('{"weather": {"current": "sunny", "tomorrow": "cloudy"}}','$.weather');
