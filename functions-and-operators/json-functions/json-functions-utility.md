@@ -35,7 +35,7 @@ The `JSON_STORAGE_FREE(json_doc)` function returns how much storage space is fre
 
 > **Note:**
 >
-> Because TiDB has different storage architecture from MySQL, this function always returns `0` for a valid JSON value, and it is implemented for [compatibility with MySQL 8.0](/mysql-compatibility.md). Note that TiDB does not do update in place updates. For more information, see [RocksDB space usage](/storage-engine/rocksdb-overview.md#rocksdb-space-usage).
+> Because TiDB has a different storage architecture from MySQL, this function always returns `0` for a valid JSON value, and it is implemented for [compatibility with MySQL 8.0](/mysql-compatibility.md). Note that TiDB does not do in-place updates. For more information, see [RocksDB space usage](/storage-engine/rocksdb-overview.md#rocksdb-space-usage).
 
 ```sql
 SELECT JSON_STORAGE_FREE('{}');
