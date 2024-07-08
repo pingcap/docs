@@ -171,9 +171,9 @@ After finishing the configuration, the VPC peering has been created. You can [co
 
 You can also use the AWS dashboard to configure the VPC peering connection.
 
-1. Confirm to accept the peer connection request in your AWS console.
+1. Confirm to accept the peer connection request in your [AWS Management Console](https://console.aws.amazon.com/).
 
-    1. Sign in to the AWS console and click **Services** on the top menu bar. Enter `VPC` in the search box and go to the VPC service page.
+    1. Sign in to the [AWS Management Console](https://console.aws.amazon.com/) and click **Services** on the top menu bar. Enter `VPC` in the search box and go to the VPC service page.
 
         ![AWS dashboard](/media/tidb-cloud/vpc-peering/aws-vpc-guide-1.jpg)
 
