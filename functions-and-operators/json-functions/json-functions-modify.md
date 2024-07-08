@@ -72,7 +72,7 @@ SELECT JSON_ARRAY_INSERT('["Car", "Boat", "Train"]', '$[0]', "Airplane") AS "Tra
 1 row in set (0.01 sec)
 ```
 
-In the following example, add a value at position 1 of the array.
+The following example inserts a value at the position of index 1 in the array.
 
 ```sql
 SELECT JSON_ARRAY_INSERT('["Car", "Boat", "Train"]', '$[1]', "Airplane") AS "Transport options";
