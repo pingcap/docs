@@ -102,7 +102,7 @@ TABLE plant_attributes;
 7 rows in set (0.00 sec)
 ```
 
-You can use the `JSON_OBJECTAGG()` function with this data. Here you can see that for every group multiple key/value pairs are combined into a JSON object.
+You can use the `JSON_OBJECTAGG()` function with this data. Here you can see that for every group multiple key/value pairs are aggregated into a JSON object.
 
 ```sql
 SELECT
