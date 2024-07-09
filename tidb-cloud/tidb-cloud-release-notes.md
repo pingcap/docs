@@ -10,6 +10,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## July 9, 2024
 
+**General changes**
+
 - Revamp the [System Status](https://status.tidbcloud.com/) page for better insights into TiDB Cloud system health.
 
     To access it, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **System Status**.
