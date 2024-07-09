@@ -12,7 +12,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Refine the **VPC Peering** page layout to improve user experience of [VPC Peering creation](/tidbcloud/set-up-vpc-peering-connections.md) for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
+- Refine the **VPC Peering** page layout to improve user experience of [VPC Peering creation](/tidb-cloud/set-up-vpc-peering-connections.md) for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
 
 ## July 2, 2024
 
