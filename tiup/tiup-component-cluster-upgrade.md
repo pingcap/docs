@@ -130,7 +130,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 - Runs a script before the upgrade.
 - Data type: `STRINGS`
-- This option specifies the path of a script to be run on the host that is to be upgraded.
+- This option specifies the path of a script to be run on the node that is to be upgraded.
 
 ### ---post-upgrade-script
 
@@ -140,7 +140,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 - Runs a script after the upgrade.
 - Data type: `STRINGS`
-- This option specifies the path of a script to be run after the upgrade of a host. This command will be executed on the upgraded host itself.
+- This option specifies the path of a script to be run after the upgrade of a node. This command will be executed on the upgraded host itself.
 
 ## Output
 
