@@ -10,6 +10,10 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## July 9, 2024
 
+- Revamp the [System Status](https://status.tidbcloud.com/) page for better insights into TiDB Cloud system health.
+
+    To access it, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **System Status**.
+
 **Console changes**
 
 - Refine the **VPC Peering** page layout to improve user experience of [VPC Peering creation](/tidb-cloud/set-up-vpc-peering-connections.md) for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
