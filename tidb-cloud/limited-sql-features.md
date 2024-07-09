@@ -60,7 +60,6 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `SHOW PLUGINS` | Supported | Not supported [^8] |
 | `SHOW PUMP STATUS` | Not supported [^7] | Not supported [^7] |
 | `SHUTDOWN` | Not supported [^4] | Not supported [^4] |
-| `CREATE TABLE ... AUTO_ID_CACHE` | Supported | Not supported [^11] |
 
 ## Functions and operators
 
