@@ -1697,7 +1697,9 @@ CREATE TABLE t1 (
     col2 DATE NOT NULL,
     PRIMARY KEY (col2) clustered
 ) PARTITION BY HASH(col1) PARTITIONS 5;
+```
 
+```
 ERROR 1503 (HY000): A CLUSTERED INDEX must include all columns in the table's partitioning function
 ```
 
