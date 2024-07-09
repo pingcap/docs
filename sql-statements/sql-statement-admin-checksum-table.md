@@ -20,7 +20,7 @@ After importing a table using [TiDB Lightning](/tidb-lightning/tidb-lightning-ov
 
 The [checksum](https://docs.pingcap.com/tidb/stable/tidb-lightning-glossary#checksum) is calculated over the table data and properties like the `table_id`. This means that two tables with the same data but a different `table_id` will get different checksums.
 
-This statement is used to calculate a checksum that can be compared with the checksum that TiDB Lightning has calculated locally. This statement is usually executed by TiDB Lightning. The same method is also used by the [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) statement.
+After importing a table using [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md), `ADMIN CHECKSUM TABLE <table>` is executed by default to validate data integrity.
 
 </CustomContent>
 
