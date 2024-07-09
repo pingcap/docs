@@ -8,6 +8,12 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
+## July 9, 2024
+
+**Console changes**
+
+- Refine the **VPC Peering** page layout to improve user experience of [VPC Peering creation](/tidbcloud/set-up-vpc-peering-connections.md) for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
+
 ## July 2, 2024
 
 **General changes**
