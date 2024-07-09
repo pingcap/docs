@@ -198,7 +198,6 @@ AdminStmtLimitOpt ::=
 
 TableNameList ::=
     TableName ( ',' TableName )*
-    
 ```
 
 ## Examples
