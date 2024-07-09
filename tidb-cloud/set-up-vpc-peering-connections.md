@@ -82,7 +82,7 @@ This section describes how to set up VPC peering connections on AWS. For Google 
 
 6. To view detailed information about your newly created VPC peering, click **...** > **View** in the **Action** column. The **VPC Peering Details** page is displayed.
 
-    ![VPC-Peering](/media/tidb-cloud/VPC-Peering4.png)
+    ![VPC-Peering](/media/tidb-cloud/VPC-Peering4.jpeg)
 
 ### Step 2. Approve and configure the VPC peering
 
