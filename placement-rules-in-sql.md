@@ -301,7 +301,7 @@ CREATE PLACEMENT POLICY storageforhisotrydata CONSTRAINTS="[+node=history]";
 CREATE PLACEMENT POLICY storagefornewdata CONSTRAINTS="[+node=new]";
 CREATE PLACEMENT POLICY companystandardpolicy CONSTRAINTS="";
 
-SET tidb_enable_global_index = true;
+SET tidb_enable_global_index = ON;
 
 CREATE TABLE t1 (id INT, name VARCHAR(50), purchased DATE, UNIQUE INDEX idx(id))
 PLACEMENT POLICY=companystandardpolicy
