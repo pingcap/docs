@@ -87,7 +87,7 @@ After you specify the `--skip-restart` option, it only refreshes the configurati
 
 - Runs a script before the reload.
 - Data type: `STRINGS`
-- This option specifies the path of a script to be run on the host that is to be reloaded.
+- This option specifies the path of a script to be run on the node that is to be reloaded. It does not take effect when `--skip-restart` is set to `true`.
 
 ### --post-restart-script
 
@@ -97,7 +97,7 @@ After you specify the `--skip-restart` option, it only refreshes the configurati
 
 - Runs a script after the reload.
 - Data type: `STRINGS`
-- This option specifies the path of a script to be run after the reload of a host.
+- This option specifies the path of a script to be run after the reload of a node. It does not take effect when `--skip-restart` is set to `true`.
 
 ## Output
 
