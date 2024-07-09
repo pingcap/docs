@@ -238,6 +238,6 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 [^10]: The variable is read-only on TiDB Serverless.
 
-[^11]: TiDB Serverless does not support downloading the file through tidbstatus port as in the [example](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#examples-of-exporting-cluster-information), but TiDB Serverless will generate a [presigned URL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) for users to download the file. It should be noted that the validity period of this URL is 10 hours.
+[^11]: TiDB Serverless does not support downloading the file exported by `PLAN REPLAYER` through `${tidb-server-status-port}` as in the [example](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#examples-of-exporting-cluster-information). Instead, TiDB Serverless generates a [presigned URL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) for you to download the file. Note that this URL remains valid for 10 hours after generation.
 
 [^12]: Not supported. Enabling `require_secure_transport` for TiDB Dedicated clusters will result in SQL client connection failures.
