@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Revamp the [System Status](https://status.tidbcloud.com/) page for better insights into TiDB Cloud system health.
 
-    To access it, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **System Status**.
+    To access it, visit <https://status.tidbcloud.com/> directly, or navigate via the [TiDB Cloud console](https://tidbcloud.com) by clicking **?** in the lower-right corner and selecting **System Status**.
 
 **Console changes**
 
