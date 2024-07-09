@@ -301,7 +301,9 @@ CREATE PLACEMENT POLICY storageforhisotrydata CONSTRAINTS="[+node=history]";
 CREATE PLACEMENT POLICY storagefornewdata CONSTRAINTS="[+node=new]";
 CREATE PLACEMENT POLICY companystandardpolicy CONSTRAINTS="";
 
-CREATE TABLE t1 (id INT, name VARCHAR(50), purchased DATE)
+SET tidb_enable_global_index = true;
+
+CREATE TABLE t1 (id INT, name VARCHAR(50), purchased DATE, UNIQUE INDEX idx(id))
 PLACEMENT POLICY=companystandardpolicy
 PARTITION BY RANGE( YEAR(purchased) ) (
   PARTITION p0 VALUES LESS THAN (2000) PLACEMENT POLICY=storageforhisotrydata,
@@ -312,12 +314,13 @@ PARTITION BY RANGE( YEAR(purchased) ) (
 );
 ```
 
-If no placement policy is specified for a partition in a table, the partition attempts to inherit the policy (if any) from the table. In the preceding example:
+If no placement policy is specified for a partition in a table, the partition attempts to inherit the policy (if any) from the table. If the table has a [global index](/partitioned-table.md#global-index), the index will apply the same placement policy as the table. In the preceding example:
 
 - The `p0` partition will apply the `storageforhisotrydata` policy.
 - The `p4` partition will apply the `storagefornewdata` policy.
 - The `p1`, `p2`, and `p3` partitions will apply the `companystandardpolicy` placement policy inherited from the table `t1`.
-- If no placement policy is specified for the table `t1`, the `p1`, `p2`, and `p3` partitions will inherit the database default policy or the global default policy.
+- The global index `idx` will apply the `companystandardpolicy` placement policy same as the table `t1`.
+- If no placement policy is specified for the table `t1`, the `p1`, `p2`, and `p3` partitions and global index `idx` will inherit the database default policy or the global default policy.
 
 After placement policies are attached to these partitions, you can change the placement policy for a specific partition as in the following example:
 
