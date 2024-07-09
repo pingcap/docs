@@ -80,7 +80,7 @@ This section describes how to set up VPC peering connections on AWS. For Google 
 
 5. Click **Create** to send the VPC peering request, and then view the VPC peering information on the **VPC Peering** tab. The status of the newly created VPC peering is **System Checking**.
 
-6. To view detailed information about your newly created VPC peering, click **...** > **View**  in the **Action** column. The **VPC Peering Details** page is displayed.
+6. To view detailed information about your newly created VPC peering, click **...** > **View** in the **Action** column. The **VPC Peering Details** page is displayed.
 
     ![VPC-Peering](/media/tidb-cloud/VPC-Peering4.png)
 
@@ -229,7 +229,7 @@ Now you have successfully set up the VPC peering connection. Next, [connect to t
 
 5. Click **Create** to send the VPC peering request, and then view the VPC peering information on the **VPC Peering** tab. The status of the newly created VPC peering is **System Checking**.
 
-6. To view detailed information about your newly created VPC peering, click **...** > **View**  in the **Action** column. The **VPC Peering Details** page is displayed.
+6. To view detailed information about your newly created VPC peering, click **...** > **View** in the **Action** column. The **VPC Peering Details** page is displayed.
 
     ![VPC-Peering](/media/tidb-cloud/VPC-Peering3.png)
 
