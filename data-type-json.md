@@ -33,7 +33,7 @@ The values inside a JSON document have types. This is visible in the output of [
 |------------------|--------------------------------|
 | ARRAY            | `[]`                           |
 | BIT              |                                |
-| BLOB             |                                |
+| BLOB             | `0x616263`                     |
 | BOOLEAN          | `true`                         |
 | DATE             | `"2025-06-14"`                 |
 | DATETIME         | `"2025-06-14 09:05:10.000000"` |
