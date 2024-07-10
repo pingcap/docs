@@ -3,7 +3,7 @@ title: TiDB Data Type
 summary: Learn about the JSON data type in TiDB.
 ---
 
-# JSON Type
+# JSON Data Type
 
 TiDB supports the `JSON` (JavaScript Object Notation) data type, which is useful for storing semi-structured data. The `JSON` data type provides the following advantages over storing `JSON`-format strings in a string column:
 
@@ -24,6 +24,27 @@ SELECT id FROM city WHERE population >= 100;
 ```
 
 For more information, see [JSON Functions](/functions-and-operators/json-functions.md) and [Generated Columns](/generated-columns.md).
+
+## JSON value types
+
+The values inside a JSON document have types. This is visible in the output of [`JSON_TYPE`()](/functions-and-operators/json-functions/json-functions-return.md#json_type).
+
+| Type             | Example                        |
+|------------------|--------------------------------|
+| ARRAY            | `[]`                           |
+| BIT              |                                |
+| BLOB             | `0x616263`                     |
+| BOOLEAN          | `true`                         |
+| DATE             | `"2025-06-14"`                 |
+| DATETIME         | `"2025-06-14 09:05:10.000000"` |
+| DOUBLE           | `1.14`                         |
+| INTEGER          | `5`                            |
+| NULL             | `null`                         |
+| OBJECT           | `{}`                           |
+| OPAQUE           |                                |
+| STRING           | `"foobar"`                     |
+| TIME             | `"09:10:00.000000"`            |
+| UNSIGNED INTEGER | `9223372036854776000`          |
 
 ## Restrictions
 
