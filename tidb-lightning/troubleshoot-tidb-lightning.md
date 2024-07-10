@@ -155,8 +155,8 @@ See the [Checkpoints control](/tidb-lightning/tidb-lightning-checkpoints.md#chec
 
 **Solution**:
 
-- Use the system variable [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760) to dynamically increase the limit.
-- Note that TiKV has a similar limit. If the data size of a single write request exceeds [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size) (`8MiB` by default), TiKV refuses to process this request. When a table has a row of a large size, you need to modify both configurations at the same time.
+- Use the [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760) system variable to dynamically increase the limit.
+- Note that TiKV has a similar limit. If the data size of a single write request exceeds [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size) (`8MiB` by default), TiKV refuses to process this request. When a table has a row of a large size, you need to modify both configurations.
 
 ### Encounter `rpc error: code = Unimplemented ...` when TiDB Lightning switches the mode
 
