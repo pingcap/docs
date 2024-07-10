@@ -158,7 +158,7 @@ SELECT JSON_EXTRACT('{"foo": "bar", "aaa": 5}', '$.foo');
 
 ## [->](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#operator_json-column-path)
 
-The `column->path` function returns the data in `column` that matches the `path` argument.  It is an alias for [`JSON_EXTRACT()`](#json_extract).
+The `column->path` function returns the data in `column` that matches the `path` argument. It is an alias for [`JSON_EXTRACT()`](#json_extract).
 
 ```sql
 SELECT
