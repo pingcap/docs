@@ -37,7 +37,7 @@ You can use JSON functions to work with data in the [JSON data type](/data-type-
 | [JSON_ARRAY_APPEND()](/functions-and-operators/json-functions/json-functions-modify.md#json_array_append) | Appends values to the end of the indicated arrays within a JSON document and returns the result |
 | [JSON_ARRAY_INSERT()](/functions-and-operators/json-functions/json-functions-modify.md#json_array_insert) | Insert values into the specified locations of a JSON document and returns the result |
 | [JSON_INSERT()](/functions-and-operators/json-functions/json-functions-modify.md#json_insert) | Inserts data into a JSON document and returns the result |
-| [JSON_MERGE_PATCH()](/functions-and-operators/json-functions/json-functions-modify.md#json_merge_patch)  | Merge two or more JSON documents by patching/overwriting old values |
+| [JSON_MERGE_PATCH()](/functions-and-operators/json-functions/json-functions-modify.md#json_merge_patch)  | Merges two or more JSON documents, without preserving values of duplicate keys |
 | [JSON_MERGE_PRESERVE()](/functions-and-operators/json-functions/json-functions-modify.md#json_merge_preserve)  | Merges two or more JSON documents by preserving all values |
 | [JSON_MERGE()](/functions-and-operators/json-functions/json-functions-modify.md#json_merge)  | A deprecated alias for `JSON_MERGE_PRESERVE()` |
 | [JSON_REMOVE()](/functions-and-operators/json-functions/json-functions-modify.md#json_remove)    | Removes data from a JSON document and returns the result |
