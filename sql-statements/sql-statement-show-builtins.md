@@ -152,7 +152,6 @@ SHOW BUILTINS;
 | json_quote                  |
 | json_remove                 |
 | json_replace                |
-| json_schema_valid           |
 | json_search                 |
 | json_set                    |
 | json_storage_size           |

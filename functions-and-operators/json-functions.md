@@ -69,12 +69,6 @@ You can use JSON functions to work with data in the [JSON data type](/data-type-
 | [JSON_ARRAYAGG()](/functions-and-operators/json-functions/json-functions-aggregate.md#json_arrayagg) | Provides an aggregation of keys. |
 | [JSON_OBJECTAGG()](/functions-and-operators/json-functions/json-functions-aggregate.md#json_objectagg) | Provides an aggregation of values for a given key. |
 
-## Validation functions
-    
-| Function Name                     | Description |
-| --------------------------------- | ----------- |
-| [JSON_SCHEMA_VALID()](/functions-and-operators/json-functions/json-functions-validate.md#json_schema_valid) | Validates a JSON document against a schema to ensure data integrity and consistency. |
-
 ## JSONPath
 
 Many of JSON functions use [JSONPath](https://www.rfc-editor.org/rfc/rfc9535.html) to select parts of a JSON document.
@@ -147,6 +141,7 @@ For more information, see [the IETF draft for JSONPath](https://www.ietf.org/arc
 
 ## Unsupported functions
 
+- `JSON_SCHEMA_VALID()`
 - `JSON_SCHEMA_VALIDATION_REPORT()`
 - `JSON_TABLE()`
 - `JSON_VALUE()`
