@@ -127,7 +127,7 @@ SELECT JSON_INSERT('{"a": 61, "b": 62}', '$.a', 41, '$.c', 63);
 
 ## [JSON_MERGE_PATCH()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge-patch)
 
-The `JSON_MERGE_PATCH(json_doc, json_doc [,json_doc] ...)` function merges two or more JSON documents by patching existing attributes and returns the merged result.
+The `JSON_MERGE_PATCH(json_doc, json_doc [,json_doc] ...)` function merges two or more JSON documents into a single JSON document, without preserving values of duplicate keys. For `json_doc` arguments with duplicated keys, only the values from the later specified `json_doc` argument are preserved in the merged result.
 
 Examples:
 
