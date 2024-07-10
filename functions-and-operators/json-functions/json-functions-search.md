@@ -141,7 +141,7 @@ SELECT JSON_CONTAINS_PATH('{"foo": "bar", "aaa": 5}','all','$.foo', '$.aaa');
 
 ## [JSON_EXTRACT()](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-extract)
 
-The `JSON_EXTRACT(json_doc, path)` function extracts data from a JSON document, selected from the parts of the document matched by the `path` arguments.
+The `JSON_EXTRACT(json_doc, path[, path] ...)` function extracts data from a JSON document, selected from the parts of the document matched by the `path` arguments.
 
 ```sql
 SELECT JSON_EXTRACT('{"foo": "bar", "aaa": 5}', '$.foo');
