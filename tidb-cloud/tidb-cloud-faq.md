@@ -197,3 +197,7 @@ For more information, see [Connect to Your TiDB Serverless Cluster](/tidb-cloud/
 ### What support is available for customers?
 
 TiDB Cloud is supported by the same team behind TiDB, which has run mission-critical use cases for over 1500 global enterprises across industries including financial services, e-commerce, enterprise applications, and gaming. TiDB Cloud offers a free basic support plan for each user and you can upgrade to a paid plan for extended services. For more information, see [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+### How do I check if TiDB Cloud is down?
+
+You can check the current uptime status of TiDB Cloud on the [System Status](https://status.tidbcloud.com/) page.
