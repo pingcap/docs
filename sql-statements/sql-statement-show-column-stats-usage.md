@@ -14,7 +14,7 @@ Currently, the `SHOW COLUMN_STATS_USAGE` statement returns the following columns
 | `Db_name`  |  The database name    |
 | `Table_name` | The table name |
 | `Partition_name` | The partition name |
-| `Column_name` | The column name (when `is_index` is `0`) or the index name (when `is_index` is `1`) |
+| `Column_name` | The column name |
 | `Last_used_at` | The last time when the column statistics were used in the query optimization |
 | `Last_analyzed_at` | The last time when the column statistics were collected |
 
