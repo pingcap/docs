@@ -112,7 +112,7 @@ Reserved bits | Shard bits | Auto-increment bits |
 > Selection of range (`R`):
 >
 > - Typically, the `R` parameter needs to be set when the numeric type of the application cannot represent a full 64-bit integer.
-> - For example, the range of JSON number is `[-(2^53)+1, (2^53)-1]`. TiDB can easily assign an integer beyond this range to a column defined as `AUTO_RANDOM(5)`, causing unexpected behaviors when the application reads the column. In such cases, you can replace `AUTO_RANDOM(5)` with `AUTO_RANDOM(5, 54)` for signed columns and replace `AUTO_RANDOM(5)` with `AUTO_RANDOM(5)` for unsigned columns, ensuring that TiDB does not assign integers greater than `9007199254740991` (2^53-1) to the column.
+> - For example, the range of JSON number is `[-(2^53)+1, (2^53)-1]`. TiDB can easily assign an integer beyond this range to a column defined as `AUTO_RANDOM(5)`, causing unexpected behaviors when the application reads the column. In such cases, you can replace `AUTO_RANDOM(5)` with `AUTO_RANDOM(5, 54)` for signed columns and replace `AUTO_RANDOM(5)` with ``AUTO_RANDOM(5, 53)` for unsigned columns, ensuring that TiDB does not assign integers greater than `9007199254740991` (2^53-1) to the column.
 
 Values allocated implicitly to the `AUTO_RANDOM` column affect `last_insert_id()`. To get the ID that TiDB last implicitly allocates, you can use the `SELECT last_insert_id ()` statement.
 
