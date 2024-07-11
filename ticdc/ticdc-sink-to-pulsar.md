@@ -63,7 +63,7 @@ The configurable parameters in a URI are as follows:
 
 | Parameter           | Description                                                   |
 | :------------------ | :------------------------------------------------------------ |
-| `pulsar`             | The scheme for the downstream Pulsar. Supported schemas are `pulsar`, `pulsar+ssl`, `pulsar+http`, and `pulsar+https`. Starting from v8.2.0, TiCDC supports `pulsar+http` and `pulsar+https`.                            |
+| `pulsar`             | The scheme for the downstream Pulsar. The value can be `pulsar`, `pulsar+ssl`, `pulsar+http`, or `pulsar+https`, in which `pulsar+http` and `pulsar+https` are supported starting from v8.2.0.                        |
 | `127.0.0.1`          | The IP address by which the downstream Pulsar provides service.             |
 | `6650`               | The connection port for the downstream Pulsar.                              |
 | `persistent://abc/def/yktest`   |  As shown in the preceding configuration example 1, this parameter is used to specify the tenant, namespace, and topic of Pulsar.   |
