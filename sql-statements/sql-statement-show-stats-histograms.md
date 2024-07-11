@@ -12,7 +12,7 @@ Currently, the `SHOW STATS_HISTOGRAMS` statement returns the following columns:
 
 | Column name | Description            |
 | -------- | ------------- |
-| Db_name | Database name |
+| `Db_name` | Database name |
 | `Table_name` | The table name |
 | `Partition_name` | The partition name |
 | `Column_name` | The column name |

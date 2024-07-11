@@ -30,8 +30,8 @@ Based upon the number of changes to a table, TiDB will automatically schedule [`
 
 |  System Variable | Default Value | Description |
 |---|---|---|
-| [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) | true | Controls whether TiDB automatically executes ANALYZE. |
-| [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio) | 0.5 | The threshold value of automatic update |
+| [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) | `ON` | Controls whether TiDB automatically executes ANALYZE. |
+| [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio) | `0.5` | The threshold value of automatic update |
 | [`tidb_auto_analyze_start_time`](/system-variables.md#tidb_auto_analyze_start_time) | `00:00 +0000` | The start time in a day when TiDB can perform automatic update |
 | [`tidb_auto_analyze_end_time`](/system-variables.md#tidb_auto_analyze_end_time)   | `23:59 +0000` | The end time in a day when TiDB can perform automatic update |
 | [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640) | `128` | The number of partitions that TiDB automatically analyzes when analyzing a partitioned table (that is, when automatically updating statistics on a partitioned table) |
@@ -68,7 +68,7 @@ You can perform full collection using the following syntax.
 
 See [Histograms](#histogram), [Top-N](#top-n-values) and [CMSketch](#count-min-sketch) (Count-Min Sketch) for detailed explanations. For `SAMPLES`/`SAMPLERATE`, see [Improve collection performance](#improve-collection-performance).
 
-For information on persisting the options for easier reuse, see [Persist ANALYZE configurations](#persist-analyze-configurations).
+For information on persisting the options for easier reuse, see [Persist `ANALYZE` configurations](#persist-analyze-configurations).
 
 ## Types of statistics
 
@@ -148,13 +148,13 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
         <CustomContent platform="tidb">
 
-        After the setting, TiDB writes the `PREDICATE COLUMNS` information to the `mysql.column_stats_usage` system table every 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease).
+        After the setting, TiDB writes the `PREDICATE COLUMNS` information to the [`mysql.column_stats_usage`](/mysql-schema.md#statistics-system-tables) system table every 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease).
 
         </CustomContent>
 
         <CustomContent platform="tidb-cloud">
 
-        After the setting, TiDB writes the `PREDICATE COLUMNS` information to the `mysql.column_stats_usage` system table every 300 seconds.
+        After the setting, TiDB writes the `PREDICATE COLUMNS` information to the [`mysql.column_stats_usage`](/mysql-schema.md#statistics-system-tables) system table every 300 seconds.
 
         </CustomContent>
 
@@ -168,7 +168,7 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
         > **Note:**
         >
-        > - If the [`mysql.column_stats_usage`](/mysql-schema.md) system table does not contain any `PREDICATE COLUMNS` recorded for that table, the preceding syntax collects statistics on all columns and all indexes in that table.
+        > - If the [`mysql.column_stats_usage`](/mysql-schema.md#statistics-system-tables) system table does not contain any `PREDICATE COLUMNS` recorded for that table, the preceding syntax collects statistics on all columns and all indexes in that table.
         > - Any columns excluded from collection (either by manually listing columns or using `PREDICATE COLUMNS`) will not have their statistics overwritten. When executing a new type of SQL query, the optimizer will use the old statistics for such columns if it exists or pseudo column statistics if columns never had statistics collected. The next ANALYZE using `PREDICATE COLUMNS` will collect the statistics on those columns.
 
 - To collect statistics on all columns and indexes, use the following syntax:
@@ -217,7 +217,7 @@ If partitions are empty, or columns for some partitions are missing, then the co
 
     - If statistics of all or some columns are missing for some partitions, TiDB skips these missing partition statistics when generating GlobalStats so the generation of GlobalStats is not affected.
 
-In dynamic pruning mode, the Analyze configurations of partitions and tables should be the same. Therefore, if you specify the `COLUMNS` configuration following the `ANALYZE TABLE TableName PARTITION PartitionNameList` statement or the `OPTIONS` configuration following `WITH`, TiDB will ignore them and return a warning.
+In dynamic pruning mode, the `ANALYZE` configurations of partitions and tables should be the same. Therefore, if you specify the `COLUMNS` configuration following the `ANALYZE TABLE TableName PARTITION PartitionNameList` statement or the `OPTIONS` configuration following `WITH`, TiDB will ignore them and return a warning.
 
 ## Improve collection performance
 
@@ -258,9 +258,9 @@ To set a proper value of `tidb_mem_quota_analyze`, consider the data size of the
 > **Note:**
 >
 > The following suggestions are for reference only. You need to configure the values based on the real scenario.
->
-> - Minimum value: should be greater than the maximum memory usage when TiDB collects statistics from the table with the most columns. An approximate reference: when TiDB collects statistics from a table with 20 columns using the default configuration, the maximum memory usage is about 800 MiB; when TiDB collects statistics from a table with 160 columns using the default configuration, the maximum memory usage is about 5 GiB.
-> - Maximum value: should be less than the available memory when TiDB is not collecting statistics.
+
+- Minimum value: should be greater than the maximum memory usage when TiDB collects statistics from the table with the most columns. An approximate reference: when TiDB collects statistics from a table with 20 columns using the default configuration, the maximum memory usage is about 800 MiB; when TiDB collects statistics from a table with 160 columns using the default configuration, the maximum memory usage is about 5 GiB.
+- Maximum value: should be less than the available memory when TiDB is not collecting statistics.
 
 ## Persist ANALYZE configurations
 
@@ -270,10 +270,10 @@ The following are the `ANALYZE` configurations that support persistence:
 
 | Configurations | Corresponding ANALYZE syntax |
 | --- | --- |
-| The number of histogram buckets | WITH NUM BUCKETS |
-| The number of Top-N  | WITH NUM TOPN |
-| The number of samples | WITH NUM SAMPLES |
-| The sampling rate | WITH FLOATNUM SAMPLERATE |
+| The number of histogram buckets | `WITH NUM BUCKETS` |
+| The number of Top-N  | `WITH NUM TOPN` |
+| The number of samples | `WITH NUM SAMPLES` |
+| The sampling rate | `WITH FLOATNUM SAMPLERATE` |
 | The `ANALYZE` column type | AnalyzeColumnOption ::= ( 'ALL COLUMNS' \| 'PREDICATE COLUMNS' \| 'COLUMNS' ColumnNameList ) |
 | The `ANALYZE` column | ColumnNameList ::= Identifier ( ',' Identifier )* |
 
@@ -374,18 +374,18 @@ The following table lists the information collected by each version for usage in
 
 | Information | Version 1 | Version 2|
 | --- | --- | ---|
-| The total number of rows in the table | √ | √ |
-| Equal/IN predicate estimation | √ (Column/Index Top-N & Count-Min Sketch) | √ (Column/Index Top-N & Histogram) |
-| Range predicate estimation | √ (Column/Index Top-N & Histogram) | √ (Column/Index Top-N & Histogram) |
-| `NULL` predicate estimation | √ | √ |
-| The average length of columns | √ | √ |
-| The average length of indexes | √ | √ |
+| The total number of rows in the table | ⎷ | ⎷ |
+| Equal/IN predicate estimation | ⎷ (Column/Index Top-N & Count-Min Sketch) | ⎷ (Column/Index Top-N & Histogram) |
+| Range predicate estimation | ⎷ (Column/Index Top-N & Histogram) | ⎷ (Column/Index Top-N & Histogram) |
+| `NULL` predicate estimation | ⎷ | ⎷ |
+| The average length of columns | ⎷ | ⎷ |
+| The average length of indexes | ⎷ | ⎷ |
 
 ### Switch between statistics versions
 
 It is recommended to ensure that all tables/indexes (and partitions) utilize statistics collection from the same version. Version 2 is recommended, however, it is not recommended to switch from one version to another without a justifiable reason such as an issue experienced with the version in use. A switch between versions might take a period of time when no statistics are available until all tables have been analyzed with the new version, which might negatively affect the optimizer plan choices if statistics are not available.
 
-Examples of justifications to switch might include - with Version 1, there could be inaccuracies in equal/IN predicate estimation due to hash collisions when collecting Count-Min sketch statistics. Solutions are listed in the [Count-Min Sketch](#count-min-sketch) section. Alternatively, setting `tidb_analyze_version = 2` and rerunning `ANALYZE` on all objects is also a solution. In the early release of Version 2, there was a risk of memory overflow after `ANALYZE`. This issue is resolved, but initially, one solution was to `set tidb_analyze_version = 1` and rerun `ANALYZE` on all objects.
+Examples of justifications to switch might include - with Version 1, there could be inaccuracies in equal/IN predicate estimation due to hash collisions when collecting Count-Min sketch statistics. Solutions are listed in the [Count-Min Sketch](#count-min-sketch) section. Alternatively, setting `tidb_analyze_version = 2` and rerunning `ANALYZE` on all objects is also a solution. In the early release of Version 2, there was a risk of memory overflow after `ANALYZE`. This issue is resolved, but initially, one solution was to set `tidb_analyze_version = 1` and rerun `ANALYZE` on all objects.
 
 To prepare `ANALYZE` for switching between versions:
 
@@ -453,7 +453,7 @@ You can use the [`SHOW STATS_HISTOGRAMS`](/sql-statements/sql-statement-show-sta
 
 ### Buckets of histogram
 
-You can use the [`SHOW STATS_BUCKETS`](/sql-statements/sql-statement-show-stats-buckets.md statement to view each bucket of the histogram.
+You can use the [`SHOW STATS_BUCKETS`](/sql-statements/sql-statement-show-stats-buckets.md) statement to view each bucket of the histogram.
 
 ### Top-N information
 
@@ -503,7 +503,7 @@ After enabling the synchronously loading statistics feature, you can control how
 
 </CustomContent>
 
-## Import and export statistics
+## Export and import statistics
 
 <CustomContent platform="tidb-cloud">
 
@@ -548,7 +548,7 @@ Loading statistics can be done with the [`LOAD STATS`](/sql-statements/sql-state
 For example:
 
 ```sql
-LOAD STATS 'file_name'
+LOAD STATS 'file_name';
 ```
 
 `file_name` is the file name of the statistics to be imported.
