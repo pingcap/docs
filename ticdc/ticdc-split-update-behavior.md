@@ -112,7 +112,7 @@ UPDATE t SET a = 2 WHERE a = 3;
 COMMIT;
 ```
 
-In this example, by executing three SQL statements to swap the primary keys of two rows, TiCDC only receives two update change events, that is, changing the primary key `a` from `1` to `2` and changing the primary key `a` from `2` to `1`. If the MySQL sink directly writes these two `UPDATE` events to the downstream, a primary key conflict might occur, leading to changefeed errors.
+In this example, by executing three SQL statements to swap the primary keys of two rows, TiCDC only receives two update change events, that is, changing the primary key `a` from `1` to `2` and changing the primary key `a` from `2` to `1`. If the MySQL sink directly writes these two `UPDATE` events to the downstream, a primary key conflict will occur, leading to changefeed errors.
 
 Therefore, TiCDC splits these two events into four events, that is, deleting records `(1, 1)` and `(2, 2)` and writing records `(2, 1)` and `(1, 2)`.
 
