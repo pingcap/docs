@@ -83,7 +83,7 @@ Get the Jina AI API key from the [Jina AI Embeddings API](https://jina.ai/embedd
 Set the environment variables in your terminal, or create a `.env` file with the above environment variables.
 
 ```dotenv
-JINA_API_KEY="****"
+JINAAI_API_KEY="****"
 TIDB_DATABASE_URL="{tidb_connection_string}"
 ```
 
