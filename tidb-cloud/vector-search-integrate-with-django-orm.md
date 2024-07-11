@@ -52,7 +52,7 @@ pip install -r requirements.txt
 For your existing project, you can install the following packages:
 
 ```bash
-pip install Django django-tidb mysqlclient
+pip install Django django-tidb mysqlclient numpy python-dotenv
 ```
 
 If you encounter installation issues with mysqlclient, refer to the mysqlclient official documentation.

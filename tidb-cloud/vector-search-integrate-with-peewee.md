@@ -52,7 +52,7 @@ pip install -r requirements.txt
 For your existing project, you can install the following packages:
 
 ```bash
-pip install peewee pymysql tidb-vector
+pip install peewee pymysql python-dotenv tidb-vector
 ```
 
 ### Step 4. Configure the environment variables

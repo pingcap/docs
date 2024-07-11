@@ -52,7 +52,7 @@ pip install -r requirements.txt
 For your existing project, you can install the following packages:
 
 ```bash
-pip install sqlalchemy pymysql tidb-vector
+pip install pymysql python-dotenv sqlalchemy tidb-vector
 ```
 
 ### Step 4. Configure the environment variables
@@ -136,6 +136,8 @@ engine = create_engine(tidb_connection_string)
 Create a table with a column named `embedding` that stores a 3-dimensional vector.
 
 ```python
+Base = declarative_base()
+
 class Document(Base):
     __tablename__ = 'sqlalchemy_demo_documents'
     id = Column(Integer, primary_key=True)
