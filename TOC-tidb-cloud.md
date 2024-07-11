@@ -254,7 +254,7 @@
       - [Jina AI](/tidb-cloud/vector-search-integrate-with-jinaai-embedding.md)
     - ORM Libraries
       - [SQLAlchemy](/tidb-cloud/vector-search-integrate-with-sqlalchemy.md)
-      - [Peewee](/tidb-cloud/vector-search-integrate-with-peewee.md)
+      - [peewee](/tidb-cloud/vector-search-integrate-with-peewee.md)
       - [Django ORM](/tidb-cloud/vector-search-integrate-with-django-orm.md)
   - Reference
     - [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
