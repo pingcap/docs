@@ -150,7 +150,7 @@ By default, the number of connections used for Raft communication between TiKV n
 
 > **Note:**
 >
-> To reduce unnecessary thread switching overhead and prevent negative impacts from batch processing, it is recommended to set the number within the range of `[1, 4]`.
+> To reduce unnecessary thread switching overhead and mitigate potential negative impacts from batch processing, it is recommended to set the number within the range of `[1, 4]`.
 
 ## Other problems and solutions
 
