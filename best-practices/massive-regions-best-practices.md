@@ -59,7 +59,7 @@ You can check the following monitoring metrics in Grafana's **TiKV Dashboard**:
      - The append log operation is slow.
      - Raft logs cannot be committed timely due to network congestion.
 
-    Reference value: lower than 200-500 ms.
+  Reference value: lower than 200-500 ms.
 
     ![Check Commit log duration](/media/best-practices/commit-log-duration.png)
 
