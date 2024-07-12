@@ -83,3 +83,17 @@ Since TiDB is compatible with the MySQL protocol and MySQL syntax, most of the O
 - [Example Applications](/develop/dev-guide-sample-application-java-spring-boot.md)
 
 </CustomContent>
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+
+</CustomContent>

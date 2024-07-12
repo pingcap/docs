@@ -396,3 +396,17 @@ The result is as follows:
 ```
 
 In addition to the `COUNT` function, TiDB also supports other aggregate functions. For more information, see [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md).
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+
+</CustomContent>
