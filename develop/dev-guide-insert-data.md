@@ -302,3 +302,17 @@ There are two solutions to handle this error:
 ## Use HTAP
 
 In TiDB, HTAP capabilities save you from performing additional operations when inserting data. There is no additional insertion logic. TiDB automatically guarantees data consistency. All you need to do is [turn on column-oriented replica synchronization](/develop/dev-guide-create-table.md#use-htap-capabilities) after creating the table, and use the column-oriented replica to speed up your queries directly.
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+
+</CustomContent>
