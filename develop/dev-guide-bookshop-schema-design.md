@@ -290,3 +290,7 @@ CREATE TABLE `bookshop`.`orders` (
   KEY `orders_book_id_idx` (`book_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 ```
+
+## Need help?
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/).
