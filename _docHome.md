@@ -115,15 +115,9 @@ Learn TiDB and TiDB Cloud through well-designed online courses and instructor-le
 
 </DocHomeCard>
 
-<<<<<<< HEAD
-<DocHomeCard href="https://en.pingcap.com/community/" icon="doc9" label="Community">
-
-Join us on Slack or become a contributor
-=======
 <DocHomeCard href="https://ask.pingcap.com?utm_source=doc" icon="doc9" label="Community">
 
 Connect with other TiDB users on TiDB Community for sharing and learning.
->>>>>>> 6e3c74f6e0 (feat: add global community link (#18166))
 
 </DocHomeCard>
 
