@@ -67,7 +67,7 @@ Log in to the control machine using a regular user account (take the `tidb` user
     tiup update --self && tiup update cluster
     ```
 
-    If `Update successfully!` is displayed, the TiUP cluster is updated successfully.
+    If `Updated successfully!` is displayed, the TiUP cluster is updated successfully.
 
 5. Verify the current version of your TiUP cluster:
 
