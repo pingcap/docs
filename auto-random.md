@@ -88,7 +88,7 @@ The structure of an `AUTO_RANDOM` value with a signed bit is as follows:
 
 The structure of an `AUTO_RANDOM` value without a signed bit is as follows:
 
-Reserved bits | Shard bits | Auto-increment bits |
+| Reserved bits | Shard bits | Auto-increment bits |
 |-------------|--------|--------------|
 | `64-R` bits | `S` bits | `R-S` bits |
 
