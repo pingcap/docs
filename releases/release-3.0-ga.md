@@ -115,7 +115,7 @@ On June 28, 2019, TiDB 3.0 GA is released. The corresponding TiDB Ansible versio
     - Support manifesting unsigned BIGINT columns as auto-increment columns
     - Support the `SHOW CREATE DATABASE IF NOT EXISTS` syntax
     - Optimize the fault tolerance of `load data` for CSV files
-    - Abandon the predicate pushdown operation when the filtering condition contains a user variable to improve the compatibility with MySQL’s behavior of using user variables to simulate Window Functions
+    - Abandon the predicate pushdown operation when the filtering condition contains a user variable to improve the compatibility with MySQL's behavior of using user variables to simulate Window Functions
 
 ## PD
 
@@ -190,7 +190,7 @@ On June 28, 2019, TiDB 3.0 GA is released. The corresponding TiDB Ansible versio
     - Add the `GetMvccByEncodeKey` function in Pump to speed up querying the transaction status
     - Support compressing communication data among components to reduce network resource consumption
     - Add the Arbiter tool that supports reading binlog from Kafka and replicate the data into MySQL
-    - Support filtering out files that don’t require replication via Reparo
+    - Support filtering out files that don't require replication via Reparo
     - Support replicating generated columns
     - Add the `syncer.sql-mode` configuration item to support using different sql-modes to parse DDL queries
     - Add the `syncer.ignore-table` configuration item to support filtering tables not to be replicated

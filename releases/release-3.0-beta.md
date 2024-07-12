@@ -70,7 +70,7 @@ On January 19, 2019, TiDB 3.0 Beta is released. The corresponding TiDB Ansible 3
     - Support the MySQL 320 handshake protocol [#8812](https://github.com/pingcap/tidb/pull/8812)
     - Support using the unsigned `bigint` column as the auto-increment column [#8181](https://github.com/pingcap/tidb/pull/8181)
     - Support the `SHOW CREATE DATABASE IF NOT EXISTS` syntax [#8926](https://github.com/pingcap/tidb/pull/8926)
-    - Abandon the predicate pushdown operation when the filtering condition contains a user variable to improve the compatibility with MySQL’s behavior of using user variables to mock the Window Function behavior [#8412](https://github.com/pingcap/tidb/pull/8412)
+    - Abandon the predicate pushdown operation when the filtering condition contains a user variable to improve the compatibility with MySQL's behavior of using user variables to mock the Window Function behavior [#8412](https://github.com/pingcap/tidb/pull/8412)
 + DDL
     - Support fast recovery of mistakenly deleted tables [#7937](https://github.com/pingcap/tidb/pull/7937)
     - Support adjusting the number of concurrencies of `ADD INDEX` dynamically [#8295](https://github.com/pingcap/tidb/pull/8295)

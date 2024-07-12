@@ -97,8 +97,6 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `information_schema` | `TIDB_HOT_REGIONS` | Not supported [^4] | Not supported [^4] |
 | `information_schema` | `TIDB_HOT_REGIONS_HISTORY` | Supported | Not supported [^1] |
 | `information_schema` | `TIDB_SERVERS_INFO` | Supported | Not supported [^1] |
-| `information_schema` | `TIFLASH_SEGMENTS` | Supported | Not supported [^1] |
-| `information_schema` | `TIFLASH_TABLES` | Supported | Not supported [^1] |
 | `information_schema` | `TIKV_REGION_PEERS` | Supported | Not supported [^1] |
 | `information_schema` | `TIKV_REGION_STATUS` | Supported | Not supported [^1] |
 | `information_schema` | `TIKV_STORE_STATUS` | Supported | Not supported [^1] |

@@ -38,10 +38,14 @@ BRIETables ::=
 |   "TABLE" TableNameList
 
 RestoreOption ::=
-    "RATE_LIMIT" '='? LengthNum "MB" '/' "SECOND"
+    "CHECKSUM_CONCURRENCY" '='? LengthNum
 |   "CONCURRENCY" '='? LengthNum
 |   "CHECKSUM" '='? Boolean
+|   "LOAD_STATS" '='? Boolean
+|   "RATE_LIMIT" '='? LengthNum "MB" '/' "SECOND"
 |   "SEND_CREDENTIALS_TO_TIKV" '='? Boolean
+|   "WAIT_TIFLASH_READY" '='? Boolean
+|   "WITH_SYS_TABLE" '='? Boolean
 
 Boolean ::=
     NUM | "TRUE" | "FALSE"
@@ -129,7 +133,23 @@ RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/'
 
 Use `RATE_LIMIT` to limit the average download speed per TiKV node to reduce network bandwidth.
 
-Before the restore is completed, `RESTORE` would perform a checksum against the data in the backup files to verify correctness. If you are confident that this verification is unnecessary, you can disable the check by setting the `CHECKSUM` parameter to `FALSE`.
+Before the restore is completed, `RESTORE` would perform a checksum against the data in the backup files to verify correctness by default. The default concurrency for checksum tasks on a single table is 4, which you can adjust using the `CHECKSUM_CONCURRENCY` parameter. If you are confident that the data verification is unnecessary, you can disable the check by setting the `CHECKSUM` parameter to `FALSE`.
+
+If statistics have been backed up, they are restored by default during the restore. If you do not need to restore the statistics, you can set the `LOAD_STATS` parameter to `FALSE`.
+
+<CustomContent platform="tidb">
+
+System [privilege tables](/privilege-management.md#privilege-table) are restored by default. If you do not need to restore system privilege tables, you can set the `WITH_SYS_TABLE` parameter to `FALSE`.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+System [privilege tables](https://docs.pingcap.com/tidb/stable/privilege-management#privilege-table) are restored by default. If you do not need to restore system privilege tables, you can set the `WITH_SYS_TABLE` parameter to `FALSE`.
+
+</CustomContent>
+
+By default, the restore task does not wait for TiFlash replicas to be fully created before completing. If you need the restore task to wait, you can set the `WAIT_TIFLASH_READY` parameter to `TRUE`.
 
 {{< copyable "sql" >}}
 

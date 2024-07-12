@@ -30,7 +30,7 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
 
 1. Install Diag.
 
-   - If you have installed TiUP on your control machine, run the following command to install Diag:
+    - If you have installed TiUP on your control machine, run the following command to install Diag:
 
         ```bash
         tiup install diag
@@ -58,7 +58,7 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
         <SimpleTab groupId="clinicServer">
         <div label="Clinic Server for international users" value="clinic-us">
 
-        [Clinic Server for international users](https://clinic.pingcap.com): Data is stored in AWS in US.
+        [Clinic Server for international users](https://clinic.pingcap.com): Data is stored in AWS in US regions.
 
         </div>
         <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
@@ -323,7 +323,7 @@ You can have a quick check on the cluster status locally using Diag. Even if you
     The following is the details of the abnormalities.
 
     ### Diagnostic result summary
-    The configuration rules are all derived from PingCAP’s OnCall Service.
+    The configuration rules are all derived from PingCAP's OnCall Service.
 
     If the results of the configuration rules are found to be abnormal, they may cause the cluster to fail.
 

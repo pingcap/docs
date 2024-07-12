@@ -17,7 +17,7 @@ With PITR, you can satisfy the preceding requirements.
 
 ## Deploy the TiDB cluster and BR
 
-To use PITR, you need to deploy a TiDB cluster >= v6.2.0 and update BR to the same version as the TiDB cluster. This document uses v8.1.0 as an example.
+To use PITR, you need to deploy a TiDB cluster >= v6.2.0 and update BR to the same version as the TiDB cluster. This document uses v8.2.0 as an example.
 
 The following table shows the recommended hardware resources for using PITR in a TiDB cluster.
 
@@ -44,13 +44,13 @@ Install or upgrade BR using TiUP:
 - Install:
 
     ```shell
-    tiup install br:v8.1.0
+    tiup install br:v8.2.0
     ```
 
 - Upgrade:
 
     ```shell
-    tiup update br:v8.1.0
+    tiup update br:v8.2.0
     ```
 
 ## Configure backup storage (Amazon S3)
@@ -122,7 +122,7 @@ The following are two snapshot backup examples:
     ```shell
     tiup br backup full --pd="${PD_IP}:2379" \
     --storage='s3://tidb-pitr-bucket/backup-data/snapshot-20220514000000' \
-    --backupts='2022/05/14 00:00:00'
+    --backupts='2022/05/14 00:00:00 +08:00'
     ```
 
 - Run a snapshot backup at 2022/05/16 00:00:00
@@ -130,7 +130,7 @@ The following are two snapshot backup examples:
     ```shell
     tiup br backup full --pd="${PD_IP}:2379" \
     --storage='s3://tidb-pitr-bucket/backup-data/snapshot-20220516000000' \
-    --backupts='2022/05/16 00:00:00'
+    --backupts='2022/05/16 00:00:00 +08:00'
     ```
 
 ## Run PITR

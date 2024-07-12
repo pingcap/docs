@@ -24,6 +24,13 @@ ResourceGroupName ::=
 |   "DEFAULT"
 ```
 
+## Privilege
+
+Executing this statement requires the following configuration and privilege:
+
+1. The system variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) is set to `ON`.
+2. When the system variable [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) is set to `ON`, you need to have the `SUPER` or `RESOURCE_GROUP_ADMIN` or `RESOURCE_GROUP_USER` privilege; when it is set to `OFF`, none of these privileges are required.
+
 ## Examples
 
 Create a user `user1`, create two resource groups `rg1` and `rg2`, and bind the user `user1` to the resource group `rg1`.
