@@ -193,9 +193,6 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
 ## Need help?
 
-<<<<<<< HEAD
-Ask questions on the [Discord](https://discord.gg/vYU9h56kAX), or [create a support ticket](https://support.pingcap.com/).
-=======
 <CustomContent platform="tidb">
 
 Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
@@ -207,4 +204,3 @@ Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a suppor
 Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
 
 </CustomContent>
->>>>>>> 6e3c74f6e0 (feat: add global community link (#18166))
