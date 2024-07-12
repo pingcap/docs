@@ -172,12 +172,12 @@ For more information, see [MySQL Workbench frequently asked questions](https://d
 
 <CustomContent platform="tidb">
 
-Ask questions on the [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc), or [create a support ticket](/support.md).
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask questions on the [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc), or [create a support ticket](/tidb-cloud/tidb-cloud-support.md).
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
 
 </CustomContent>
