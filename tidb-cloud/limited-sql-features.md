@@ -60,6 +60,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `SHOW PLUGINS` | Supported | Not supported [^8] |
 | `SHOW PUMP STATUS` | Not supported [^7] | Not supported [^7] |
 | `SHUTDOWN` | Not supported [^4] | Not supported [^4] |
+| `PLAN REPLAYER` | Supported | Supported in a different way[^11] |
 
 ## Functions and operators
 
@@ -237,6 +238,6 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 [^10]: The variable is read-only on TiDB Serverless.
 
-[^11]: Customizing cache size using [`AUTO_ID_CACHE`](/auto-increment.md#cache-size-control) is temporarily unavailable on TiDB Serverless.
+[^11]: TiDB Serverless does not support downloading the file exported by `PLAN REPLAYER` through `${tidb-server-status-port}` as in the [example](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#examples-of-exporting-cluster-information). Instead, TiDB Serverless generates a [presigned URL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) for you to download the file. Note that this URL remains valid for 10 hours after generation.
 
 [^12]: Not supported. Enabling `require_secure_transport` for TiDB Dedicated clusters will result in SQL client connection failures.
