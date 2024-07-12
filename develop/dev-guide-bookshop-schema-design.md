@@ -293,4 +293,4 @@ CREATE TABLE `bookshop`.`orders` (
 
 ## Need help?
 
-Ask questions on the [TiDB Community](https://ask.pingcap.com/).
+Ask questions on [TiDB Community](https://ask.pingcap.com/).

@@ -502,12 +502,12 @@ public static class StaleReadHelper{
 
 <CustomContent platform="tidb">
 
-Ask questions on the [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask questions on the [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
 
 </CustomContent>
