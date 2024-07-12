@@ -38,7 +38,7 @@ If your app needs to access TiDB Cloud using OAuth, submit a request to [become 
 
 ## View and revoke authorized OAuth apps
 
-You can view the records for authorized OAuth applications on TiDB Cloud console as follows:
+You can view the records for authorized OAuth applications in the TiDB Cloud console as follows:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner.
 2. Click **Account Settings**.
