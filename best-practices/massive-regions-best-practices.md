@@ -54,9 +54,10 @@ You can check the following monitoring metrics in Grafana's **TiKV Dashboard**:
 + `Commit log duration` in the **Raft IO** panel
 
     `Commit log duration` is the time Raftstore takes to commit Raft logs to the majority of members in the respective Region. The possible reasons for a high value of this metric with significant fluctuations include the following:
-     - The workload on Raftstore is heavy.
-     - The append log operation is slow.
-     - Raft logs cannot be committed timely due to network congestion.
+
+    - The workload on Raftstore is heavy.
+    - The append log operation is slow.
+    - Raft logs cannot be committed timely due to network congestion.
 
   Reference value: lower than 200-500 ms.
 
