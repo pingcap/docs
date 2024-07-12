@@ -98,14 +98,4 @@ Configure the WordPress database connection to TiDB Serverless.
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask questions on the [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask questions on the [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
-
-</CustomContent>
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
