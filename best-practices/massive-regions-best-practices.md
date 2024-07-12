@@ -52,11 +52,11 @@ You can check the following monitoring metrics in Grafana's **TiKV Dashboard**:
 
 + `Commit log duration`  in the **Raft IO** panel
 
-    `Commit log duration` is the time Raftstore takes to commit Raft logs to the majority of members of the respective Region. If this metric value is high and shows significant fluctuations, it indicates that the workload of Raftstore is heavy, the append log operation is slow, or Raft logs cannot be committed timely due to network congestion.
+    `Commit log duration` is the time Raftstore takes to commit Raft logs to the majority of members in the respective Region. If this metric value is high and shows significant fluctuations, it indicates that the workload of Raftstore is heavy, the append log operation is slow, or Raft logs cannot be committed timely due to network congestion.
 
     Reference value: lower than 200-500 ms.
 
-    ![Figure 4 View Commit log duration](/media/best-practices/commit-log-duration.png)
+    ![Check Commit log duration](/media/best-practices/commit-log-duration.png)
 
 ## Performance tuning methods
 
@@ -145,7 +145,7 @@ The default size of a Region is 96 MiB, and you can reduce the number of Regions
 
 ### Method 7: Increase the number of connections for Raft communication
 
-By default, the number of connections used for Raft communication between TiKV nodes is 1. Increasing this number can help alleviate blockage issues caused by heavy communication workloads from a large number of Regions. For detailed instructions, see [`grpc-raft-conn-num`](/tikv-configuration-file.md#grpc-raft-conn-num).
+By default, the number of connections used for Raft communication between TiKV nodes is 1. Increasing this number can help alleviate blockage issues caused by heavy communication workloads of a large number of Regions. For detailed instructions, see [`grpc-raft-conn-num`](/tikv-configuration-file.md#grpc-raft-conn-num).
 
 > **Note:**
 >
