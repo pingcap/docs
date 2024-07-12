@@ -367,4 +367,18 @@ Relation mode is the emulation of referential integrity in Prisma Client side. H
 
 ## Need help?
 
+<<<<<<< HEAD
 Ask questions on the [Discord](https://discord.gg/vYU9h56kAX), or [create a support ticket](https://support.pingcap.com/).
+=======
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+
+</CustomContent>
+>>>>>>> 6e3c74f6e0 (feat: add global community link (#18166))
