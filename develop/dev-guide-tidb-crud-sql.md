@@ -101,3 +101,17 @@ Use the `WHERE` clause to filter all records that match the conditions and then 
 ```sql
 SELECT * FROM person WHERE id < 5;
 ```
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+
+</CustomContent>

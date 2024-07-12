@@ -128,3 +128,17 @@ As a best practice, in actual development, it is recommended to avoid querying t
 - [Subquery Related Optimizations](/subquery-optimization.md)
 - [Decorrelation of Correlated Subquery](/correlated-subquery-optimization.md)
 - [Subquery Optimization in TiDB](https://www.pingcap.com/blog/subquery-optimization-in-tidb/)
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+
+</CustomContent>

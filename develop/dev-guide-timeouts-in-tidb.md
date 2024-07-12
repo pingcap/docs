@@ -88,3 +88,17 @@ However, in a real production environment, idle connections and indefinitely exe
 
 - `sessionVariables=wait_timeout=3600` (1 hour)
 - `sessionVariables=max_execution_time=300000` (5 minutes)
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+
+</CustomContent>
