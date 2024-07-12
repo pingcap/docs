@@ -105,7 +105,7 @@ Other TiDB nodes will read this change and delete the object in their memory cac
 
 ### Export and import extended statistics
 
-The way of exporting or importing extended statistics is the same as exporting or importing basic statistics. See [Introduction to Statistics - Import and export statistics](/statistics.md#import-and-export-statistics) for details.
+The way of exporting or importing extended statistics is the same as exporting or importing basic statistics. See [Introduction to Statistics - Import and export statistics](/statistics.md#export-and-import-statistics) for details.
 
 ## Usage examples for correlation-type extended statistics
 
