@@ -83,16 +83,24 @@ The `AUTO_RANDOM(S, R)` column value automatically assigned by TiDB has a total 
 - `S` is the number of shard bits. The value ranges from `1` to `15`. The default value is `5`.
 - `R` is the total length of the automatic allocation range. The value ranges from `32` to `64`. The default value is `64`.
 
-The structure of an `AUTO_RANDOM` value is as follows:
+The structure of an `AUTO_RANDOM` value with a signed bit is as follows:
 
-| Total number of bits | Sign bit | Reserved bits | Shard bits | Auto-increment bits |
-|---------|---------|-------------|--------|--------------|
-| 64 bits | 0/1 bit | (64-R) bits | S bits | (R-1-S) bits |
+| Signed bit | Reserved bits | Shard bits | Auto-increment bits |
+|---------|-------------|--------|--------------|
+| 1 bit | `64-R` bits | `S` bits | `R-1-S` bits |
 
+The structure of an `AUTO_RANDOM` value without a signed bit is as follows:
+
+| Reserved bits | Shard bits | Auto-increment bits |
+|-------------|--------|--------------|
+| `64-R` bits | `S` bits | `R-S` bits |
+
+- Whether a value has a signed bit depends on whether the corresponding column has the `UNSIGNED` attribute.
 - The length of the sign bit is determined by the existence of an `UNSIGNED` attribute. If there is an `UNSIGNED` attribute, the length is `0`. Otherwise, the length is `1`.
 - The length of the reserved bits is `64-R`. The reserved bits are always `0`.
 - The content of the shard bits is obtained by calculating the hash value of the starting time of the current transaction. To use a different length of shard bits (such as 10), you can specify `AUTO_RANDOM(10)` when creating the table.
 - The value of the auto-increment bits is stored in the storage engine and allocated sequentially. Each time a new value is allocated, the value is incremented by 1. The auto-increment bits ensure that the values of `AUTO_RANDOM` are unique globally. When the auto-increment bits are exhausted, an error `Failed to read auto-increment value from storage engine` is reported when the value is allocated again.
+- Value range: the maximum number of bits for the final generated value = shard bits + auto-increment bits. The range of a signed column is `[-(2^(R-1))+1, (2^(R-1))-1]`, and the range of an unsigned column is `[0, (2^R)-1]`.
 
 > **Note:**
 >
@@ -104,7 +112,7 @@ The structure of an `AUTO_RANDOM` value is as follows:
 > Selection of range (`R`):
 >
 > - Typically, the `R` parameter needs to be set when the numeric type of the application cannot represent a full 64-bit integer.
-> - For example, the range of JSON number is `[-2^53+1, 2^53-1]`. TiDB can easily assign an integer outside this range to a column of `AUTO_RANDOM(5)`, causing unexpected behaviors when the application reads the column. In this case, you can replace `AUTO_RANDOM(5)` with `AUTO_RANDOM(5, 54)` and TiDB does not assign an integer greater than `9007199254740991` (2^53-1) to the column.
+> - For example, the range of JSON number is `[-(2^53)+1, (2^53)-1]`. TiDB can easily assign an integer beyond this range to a column defined as `AUTO_RANDOM(5)`, causing unexpected behaviors when the application reads the column. In such cases, you can replace `AUTO_RANDOM(5)` with `AUTO_RANDOM(5, 54)` for signed columns, and replace `AUTO_RANDOM(5)` with `AUTO_RANDOM(5, 53)` for unsigned columns, ensuring that TiDB does not assign integers greater than `9007199254740991` (2^53-1) to the column.
 
 Values allocated implicitly to the `AUTO_RANDOM` column affect `last_insert_id()`. To get the ID that TiDB last implicitly allocates, you can use the `SELECT last_insert_id ()` statement.
 
