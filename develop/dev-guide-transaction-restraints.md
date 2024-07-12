@@ -721,3 +721,17 @@ Currently locks are not added to auto-committed `SELECT FOR UPDATE` statements. 
 ![The situation in TiDB](/media/develop/autocommit_selectforupdate_nowaitlock.png)
 
 This is a known incompatibility issue with MySQL. You can solve this issue by using the explicit `BEGIN;COMMIT;` statements.
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+
+</CustomContent>
