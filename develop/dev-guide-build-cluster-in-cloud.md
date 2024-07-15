@@ -177,3 +177,17 @@ Expected output:
 ```
 
 If your actual output is similar to the expected output, congratulations, you have successfully execute a SQL statement on TiDB Cloud.
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+
+</CustomContent>

@@ -134,4 +134,4 @@ Then, you can see a combo chart similar as follows:
 
 ## Need help?
 
-Ask questions on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [create a support ticket](https://support.pingcap.com/).
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).

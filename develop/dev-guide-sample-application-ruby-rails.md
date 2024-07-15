@@ -284,4 +284,14 @@ While it is possible to specify the CA certificate path manually, this approach 
 
 ## Need help?
 
-Ask questions on the [Discord](https://discord.gg/vYU9h56kAX) channel.
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+
+</CustomContent>
