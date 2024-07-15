@@ -35,3 +35,13 @@ You can access TiDB Cloud CLI using the OAuth 2.0 Device Code grant type:
 - [ticloud auth logout](/tidb-cloud/ticloud-auth-logout.md): Log out of TiDB Cloud
 
 If your app needs to access TiDB Cloud using OAuth, submit a request to [become a Cloud & Technology Partner](https://www.pingcap.com/partners/become-a-partner/) (select **Cloud & Technology Partner** in **Partner Program**). We will reach out to you.
+
+## View and revoke authorized OAuth apps
+
+You can view the records for authorized OAuth applications in the TiDB Cloud console as follows:
+
+1. In the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner.
+2. Click **Account Settings**.
+3. In the left navigation pane, click **Authorized OAuth Apps**. You can view authorized OAuth applications.
+
+You can click **Revoke** to revoke your authorization at any time.
