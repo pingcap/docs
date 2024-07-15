@@ -42,11 +42,11 @@ To avoid the situation that modifying data on a small table frequently triggers 
 
 > **Note:**
 >
-> Currently, the automatic update does not record the configuration items input at manual `ANALYZE`. Therefore, when you use the `WITH` syntax to control the collecting behavior of `ANALYZE`, you need to manually set scheduled tasks to collect statistics.
+> Currently, the automatic update does not record the configuration items input at manual `ANALYZE`. Therefore, when you use the [`WITH`](/sql-statements/sql-statement-analyze-table.md) syntax to control the collecting behavior of `ANALYZE`, you need to manually set scheduled tasks to collect statistics.
 
 ### Manual collection
 
-Currently, TiDB collects statistical information as a full collection. You can execute the `ANALYZE TABLE` statement to collect statistics.
+Currently, TiDB collects statistics as a full collection. You can execute the `ANALYZE TABLE` statement to collect statistics.
 
 You can perform full collection using the following syntax.
 
@@ -89,7 +89,7 @@ For details about the parameter that determines the upper limit to the number of
 >
 > Count-Min Sketch is used in statistics Version 1 only for equal/IN predicate selectivity estimation. In Version 2, other statistics are used due to challenges in managing Count-Min sketch to avoid collisions as discussed below.
 
-Count-Min Sketch is a hash structure. When an equivalence query contains `a = 1` or `IN` query (for example, `a IN (1, 2, 3)`), TiDB uses this data structure for estimation.
+Count-Min Sketch is a hash structure. When processing an equivalence query such as `a = 1` or an `IN` query (for example, `a IN (1, 2, 3)`), TiDB uses this data structure for estimation.
 
 A hash collision might occur since Count-Min Sketch is a hash structure. In the [`EXPLAIN`](/sql-statements/sql-statement-explain.md) statement, if the estimate of the equivalent query deviates greatly from the actual value, it can be considered that a larger value and a smaller value have been hashed together. In this case, you can take one of the following ways to avoid the hash collision:
 
@@ -100,7 +100,7 @@ A hash collision might occur since Count-Min Sketch is a hash structure. In the 
 
 Top-N values are values with the top N occurrences in a column or index. Top-N statistics are often referred to as frequency statistics or data skew.
 
-TiDB records the values and occurrences of Top-N values. The default value is 20, meaning the top 20 most frequent values are collected. The maximum value is 1024. For details about the parameter that determines the number of values collected, see [Manual collection](#manual-collection).
+TiDB records the values and occurrences of Top-N values. Here `N` is controlled by the `WITH NUM TOPN` parameter. The default value is 20, meaning the top 20 most frequent values are collected. The maximum value is 1024. For details about the parameter, see [Manual collection](#manual-collection).
 
 ## Selective statistics collection
 
