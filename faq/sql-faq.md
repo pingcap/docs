@@ -132,7 +132,7 @@ For details, see [description of the `SELECT` syntax elements](/sql-statements/s
 
 ## Can the codec of TiDB guarantee that the UTF-8 string is memcomparable? Is there any coding suggestion if our key needs to support UTF-8?
 
-TiDB uses the UTF-8 character set by default and currently only supports UTF-8. The string of TiDB uses the memcomparable format.
+The default character set in TiDB is `utf8mb4`. The strings are in memcomparable format. For more information about the character set in TiDB, see [Character Set and Collation](/character-set-and-collation.md).
 
 ## What is the maximum number of statements in a transaction?
 
