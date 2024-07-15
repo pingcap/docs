@@ -11,9 +11,9 @@ The following functions are TiDB extensions, and are not present in MySQL:
 
 | Function name | Function description |
 | :-------------- | :------------------------------------- |
-| [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | The `TIDB_BOUNDED_STALENESS` function instructs TiDB to read the data as new as possible within the time range. See also: [Read Historical Data Using the `AS OF TIMESTAMP` Clause](/as-of-timestamp.md) |
-| [`TIDB_CURRENT_TSO()`](#tidb_current_tso) | The `TIDB_CURRENT_TSO()` function returns the current [TSO](/tso.md) |
-| [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | Used for decoding binary plans |
+| [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | The `TIDB_BOUNDED_STALENESS` function instructs TiDB to read the data as new as possible within the time range. See also: [Read Historical Data Using the `AS OF TIMESTAMP` Clause](/as-of-timestamp.md). |
+| [`TIDB_CURRENT_TSO()`](#tidb_current_tso) | The `TIDB_CURRENT_TSO()` function returns the current [TSO](/tso.md). |
+| [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | Used for decoding binary plans. |
 | [`TIDB_DECODE_KEY()`](#tidb_decode_key) | The `TIDB_DECODE_KEY` function can be used to decode a TiDB-encoded key entry into a JSON structure containing `_tidb_rowid` and `table_id`. These encoded keys can be found in some system tables and in logging outputs. |
 | [`TIDB_DECODE_PLAN()`](#tidb_decode_plan) | The `TIDB_DECODE_PLAN` function can be used to decode a TiDB execution plan. |
 | [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | The `TIDB_DECODE_SQL_DIGESTS()` function is used to query the normalized SQL statements (a form without formats and arguments) corresponding to the set of SQL digests in the cluster. |
@@ -33,9 +33,9 @@ The following functions are TiDB extensions, and are not present in MySQL:
 
 | Function name | Function description |
 | :-------------- | :------------------------------------- |
-| [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | The `TIDB_BOUNDED_STALENESS` function instructs TiDB to read the data as new as possible within the time range. See also: [Read Historical Data Using the `AS OF TIMESTAMP` Clause](/as-of-timestamp.md) |
-| [`TIDB_CURRENT_TSO()`](#tidb_current_tso) | The `TIDB_CURRENT_TSO()` function returns the current [TSO](/tso.md) |
-| [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | Used for decoding binary plans |
+| [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | The `TIDB_BOUNDED_STALENESS` function instructs TiDB to read the data as new as possible within the time range. See also: [Read Historical Data Using the `AS OF TIMESTAMP` Clause](/as-of-timestamp.md). |
+| [`TIDB_CURRENT_TSO()`](#tidb_current_tso) | The `TIDB_CURRENT_TSO()` function returns the current [TSO](/tso.md). |
+| [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | Used for decoding binary plans. |
 | [`TIDB_DECODE_KEY()`](#tidb_decode_key) | The `TIDB_DECODE_KEY` function can be used to decode a TiDB-encoded key entry into a JSON structure containing `_tidb_rowid` and `table_id`. These encoded keys can be found in some system tables and in logging outputs. |
 | [`TIDB_DECODE_PLAN()`](#tidb_decode_plan) | The `TIDB_DECODE_PLAN` function can be used to decode a TiDB execution plan. |
 | [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | The `TIDB_DECODE_SQL_DIGESTS()` function is used to query the normalized SQL statements (a form without formats and arguments) corresponding to the set of SQL digests in the cluster. |
@@ -108,7 +108,7 @@ SELECT BINARY_PLAN,TIDB_DECODE_BINARY_PLAN(BINARY_PLAN) FROM information_schema.
 ```
 *************************** 1. row ***************************
                          BINARY_PLAN: lQLwPgqQAgoMUHJvamVjdGlvbl8zEngKDk1lbVRhYmxlU2Nhbl80KQAAAAAAiMNAMAM4AUABSioKKAoSaW5mb3JtYQU00HNjaGVtYRISU1RBVEVNRU5UU19TVU1NQVJZWhV0aW1lOjI5LjPCtXMsIGxvb3BzOjJw////CQIEAXgJCBD///8BIQFnDOCb+EA6cQCQUjlDb2x1bW4jOTIsIHRpZGJfZGVjb2RlX2JpbmFyeV9wbGFuKBUjCCktPg0MEDEwM1oWBYAIMTA4NoEAeGINQ29uY3VycmVuY3k6NXDIZXj///////////8BGAE=
-TIDB_DECODE_BINARY_PLAN(BINARY_PLAN): 
+TIDB_DECODE_BINARY_PLAN(BINARY_PLAN):
 | id               | estRows  | estCost   | actRows | task | access object            | execution info                       | operator info                                             | memory  | disk  |
 | Projection_3     | 10000.00 | 100798.00 | 3       | root |                          | time:108.3µs, loops:2, Concurrency:5 | Column#92, tidb_decode_binary_plan(Column#92)->Column#103 | 12.7 KB | N/A   |
 | └─MemTableScan_4 | 10000.00 | 0.00      | 3       | root | table:STATEMENTS_SUMMARY | time:29.3µs, loops:2                 |                                                           | N/A     | N/A   |
