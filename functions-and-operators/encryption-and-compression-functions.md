@@ -26,6 +26,104 @@ TiDB supports most of the [encryption and compression functions](https://dev.mys
 | [`UNCOMPRESSED_LENGTH()`](#uncompressed_length)               | Return the length of a string before compression  |
 | [`VALIDATE_PASSWORD_STRENGTH()`](#validate_password_strength) | Validate the password strength                    |
 
+### [`AES_DECRYPT()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_aes-decrypt)
+
+The `AES_DECRYPT(data, key [,iv])` function decrypts `data` that has previously been encrypted by the [`AES_ENCRYPT()`](#aes_encrypt) function with the same `key`.
+
+The [`block_encryption_mode`](/system-variables.md#block_encryption_mode) can be used to select the AES encryption mode.
+
+The initialization vector can be set with the `iv` argument for encryption modes that require it. The default is `NULL`.
+
+```sql
+SELECT AES_DECRYPT(0x28409970815CD536428876175F1A4923, 'secret');
+```
+
+```
++----------------------------------------------------------------------------------------------------------------------+
+| AES_DECRYPT(0x28409970815CD536428876175F1A4923, 'secret')                                                            |
++----------------------------------------------------------------------------------------------------------------------+
+| 0x616263                                                                                                             |
++----------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+### [`AES_ENCRYPT()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_aes-encrypt)
+
+The `AES_ENCRYPT(data, key [,iv])` function encrypts `data` with the `key` using the Advanced Encryption Standard ([AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)).
+
+The [`block_encryption_mode`](/system-variables.md#block_encryption_mode) can be used to select the AES encryption mode.
+
+The initialization vector can be set with the `iv` argument for encryption modes that require it. The default is `NULL`.
+
+```sql
+SELECT AES_ENCRYPT(0x616263,'secret');
+```
+
+```
++----------------------------------------------------------------+
+| AES_ENCRYPT(0x616263,'secret')                                 |
++----------------------------------------------------------------+
+| 0x28409970815CD536428876175F1A4923                             |
++----------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+### [`COMPRESS()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_compress)
+
+The `COMPRESS(expr)` returns a compressed version of the data supplied in the argument.
+
+If the argument is set to `NULL` then `COMPRESS()` returns `NULL`.
+
+If the argument has a length of 0 then `COMPRESS()` returns a length of 0.
+
+The returned value of any argument of a non-zero length argument consists of:
+
+- bytes 0 to 4: the uncompressed length
+- bytes 4 to end: the zlib compressed data
+
+```sql
+SELECT COMPRESS(0x414243);
+```
+
+```
++------------------------------------------+
+| COMPRESS(0x414243)                       |
++------------------------------------------+
+| 0x03000000789C72747206040000FFFF018D00C7 |
++------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+Here the `0x03000000` is the length (3) of the uncompressed version and `0x789C72747206040000FFFF018D00C7` is the zlib compressed data.
+
+An example to decode this outside of TiDB:
+
+```python
+>>> import codecs
+>>> import zlib
+>>> data = codecs.decode('03000000789C72747206040000FFFF018D00C7','hex')
+>>> print(int.from_bytes(data[:4], byteorder='little'))
+3
+>>> print(zlib.decompress(data[4:]))
+b'ABC'
+```
+
+```sql
+WITH x AS (SELECT REPEAT('a',100) 'a')
+SELECT LENGTH(a),LENGTH(COMPRESS(a)) FROM x;
+```
+
+The example below shows that a string of 100 `a`s compresses to 19 bytes. For short strings the `COMPRESS()` will return more bytes than the input.
+
+```
++-----------+---------------------+
+| LENGTH(a) | LENGTH(COMPRESS(a)) |
++-----------+---------------------+
+|       100 |                  19 |
++-----------+---------------------+
+1 row in set (0.00 sec)
+```
+
 ### [`MD5()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_md5)
 
 The `MD5(expr)` function can be used to calculate a 128-bit [MD5](https://en.wikipedia.org/wiki/MD5) hash.
@@ -147,104 +245,6 @@ SELECT SM3('abc');
 +------------------------------------------------------------------+
 | 66c7f0f462eeedd9d1f2d46bdc10e4e24167c4875cf2f7a2297da02b8f4ba8e0 |
 +------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
-
-### [`AES_DECRYPT()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_aes-decrypt)
-
-The `AES_DECRYPT(data, key [,iv])` function decrypts `data` that has previously been encrypted by the [`AES_ENCRYPT()`](#aes_encrypt) function with the same `key`.
-
-The [`block_encryption_mode`](/system-variables.md#block_encryption_mode) can be used to select the AES encryption mode.
-
-The initialization vector can be set with the `iv` argument for encryption modes that require it. The default is `NULL`.
-
-```sql
-SELECT AES_DECRYPT(0x28409970815CD536428876175F1A4923, 'secret');
-```
-
-```
-+----------------------------------------------------------------------------------------------------------------------+
-| AES_DECRYPT(0x28409970815CD536428876175F1A4923, 'secret')                                                            |
-+----------------------------------------------------------------------------------------------------------------------+
-| 0x616263                                                                                                             |
-+----------------------------------------------------------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
-
-### [`AES_ENCRYPT()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_aes-encrypt)
-
-The `AES_ENCRYPT(data, key [,iv])` function encrypts `data` with the `key` using the Advanced Encryption Standard ([AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)).
-
-The [`block_encryption_mode`](/system-variables.md#block_encryption_mode) can be used to select the AES encryption mode.
-
-The initialization vector can be set with the `iv` argument for encryption modes that require it. The default is `NULL`.
-
-```sql
-SELECT AES_ENCRYPT(0x616263,'secret');
-```
-
-```
-+----------------------------------------------------------------+
-| AES_ENCRYPT(0x616263,'secret')                                 |
-+----------------------------------------------------------------+
-| 0x28409970815CD536428876175F1A4923                             |
-+----------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
-
-### [`COMPRESS()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_compress)
-
-The `COMPRESS(expr)` returns a compressed version of the data supplied in the argument.
-
-If the argument is set to `NULL` then `COMPRESS()` returns `NULL`.
-
-If the argument has a length of 0 then `COMPRESS()` returns a length of 0.
-
-The returned value of any argument of a non-zero length argument consists of:
-
-- bytes 0 to 4: the uncompressed length
-- bytes 4 to end: the zlib compressed data
-
-```sql
-SELECT COMPRESS(0x414243);
-```
-
-```
-+------------------------------------------+
-| COMPRESS(0x414243)                       |
-+------------------------------------------+
-| 0x03000000789C72747206040000FFFF018D00C7 |
-+------------------------------------------+
-1 row in set (0.00 sec)
-```
-
-Here the `0x03000000` is the length (3) of the uncompressed version and `0x789C72747206040000FFFF018D00C7` is the zlib compressed data.
-
-An example to decode this outside of TiDB:
-
-```python
->>> import codecs
->>> import zlib
->>> data = codecs.decode('03000000789C72747206040000FFFF018D00C7','hex')
->>> print(int.from_bytes(data[:4], byteorder='little'))
-3
->>> print(zlib.decompress(data[4:]))
-b'ABC'
-```
-
-```sql
-WITH x AS (SELECT REPEAT('a',100) 'a')
-SELECT LENGTH(a),LENGTH(COMPRESS(a)) FROM x;
-```
-
-The example below shows that a string of 100 `a`s compresses to 19 bytes. For short strings the `COMPRESS()` will return more bytes than the input.
-
-```
-+-----------+---------------------+
-| LENGTH(a) | LENGTH(COMPRESS(a)) |
-+-----------+---------------------+
-|       100 |                  19 |
-+-----------+---------------------+
 1 row in set (0.00 sec)
 ```
 
