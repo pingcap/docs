@@ -293,6 +293,8 @@ SELECT n,1024>>n,LPAD(CONV(1024>>n,10,2),11,0) FROM cte;
 11 rows in set (0.01 sec)
 ```
 
+Another example of the right shift operator can be found in how a UNIX timestamp can be extracted from a TiDB [`TSO`](/tso.md) timestamp.
+
 ## MySQL compatibility
 
 There are some differences between MySQL 8.0 and earlier versions of MySQL in handling bit functions and operators. TiDB aims to follow the behavior of MySQL 8.0.
