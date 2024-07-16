@@ -128,13 +128,8 @@ driver = "file"
 # - "": in the physical import mode, TiDB Lightning does not detect or handle conflicting data. If the source file contains conflicting primary or unique key records, the subsequent step reports an error. In the logical import mode, TiDB Lightning converts the "" strategy to the "error" strategy for processing.
 # - "error": when detecting conflicting primary or unique key records in the imported data, TiDB Lightning terminates the import and reports an error.
 # - "replace": when encountering conflicting primary or unique key records, TiDB Lightning retains the latest data and overwrites the old data.
-<<<<<<< HEAD
-#              The conflicting data are recorded in the `lightning_task_info.conflict_error_v2` table (recording conflicting data detected by post-import conflict detection in the physical import mode) and the `conflict_records` table (recording conflicting data detected by preprocess conflict detection in both logical and physical import modes) of the target TiDB cluster.
+#              When you use the physical import mode,  the conflicting data are recorded in the `lightning_task_info.conflict_error_v2` table (recording conflicting data detected by post-import conflict detection in the physical import mode) and the `conflict_records` table (recording conflicting data detected by preprocess conflict detection in both logical and physical import modes) of the target TiDB cluster.
 #              If you set `conflict.strategy = "replace"` in physical import mode, the conflicting data can be checked in the `lightning_task_info.conflict_view` view.
-=======
-#              When you use the physical import mode, the conflicting data are recorded in the `lightning_task_info.conflict_view` view of the target TiDB cluster.
-#              In the `lightning_task_info.conflict_view` view, if the `is_precheck_conflict` field for a row is `0`, it means that the conflicting data recorded in that row is detected by postprocess conflict detection; if the `is_precheck_conflict` field for a row is `1`, it means that conflicting data recorded in that row is detected by pre-import conflict detection.
->>>>>>> cd72593b7c (Update tidb-lightning-configuration.md (#18248))
 #              You can manually insert the correct records into the target table based on your application requirements. Note that the target TiKV must be v5.2.0 or later versions.
 # - "ignore": when encountering conflicting primary or unique key records, TiDB Lightning retains the old data and ignores the new data. This option can only be used in the logical import mode.
 strategy = ""
