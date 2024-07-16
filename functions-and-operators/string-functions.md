@@ -1518,10 +1518,3 @@ The difference between TiDB and MySQL support for the binary string type:
     ```sql
     SELECT REGEXP_REPLACE('abcd','(.*)(.{2})$','\\1') AS s;
     ```
-<<<<<<< HEAD
-=======
-
-### Known issues
-
-- [GitHub Issue #37981](https://github.com/pingcap/tidb/issues/37981)
->>>>>>> b72761c891 (string-functions: Use MySQL 8.0 url instead of 8.3 (#18243))
