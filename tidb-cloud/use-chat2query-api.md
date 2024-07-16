@@ -135,7 +135,7 @@ The steps to call `/v3/chat2data` and `/v2/chat2data` are the same. The followin
 
 Before calling `/v3/chat2data`, let AI analyze the database and generate a data summary first by calling `/v3/dataSummaries`, so `/v3/chat2data` can get a better performance in SQL generation later.
 
-The following is a code example of calling `/v3/chat2data` to analyze the `sp500insight` database and generate a data summary for the database:
+The following is a code example of calling `/v3/dataSummaries` to analyze the `sp500insight` database and generate a data summary for the database:
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/dataSummaries'\
