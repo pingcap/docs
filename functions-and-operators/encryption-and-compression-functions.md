@@ -425,5 +425,5 @@ Examples:
 ## MySQL compatibility
 
 * TiDB does not support the `STATEMENT_DIGEST()` and `STATEMENT_DIGEST_TEXT()` functions.
-* TiDB does not support the KDF, salt and iterations arguments for [`AES_ENCRYPT()`](#aes_encrypt) and [`AES_DECRYPT`](#aes_decrypt) that MySQL added in MySQL 8.0.30.
+* TiDB does not support the `kdf_name`, `salt`, and `iterations` arguments for [`AES_ENCRYPT()`](#aes_encrypt) and [`AES_DECRYPT`](#aes_decrypt) that MySQL added in MySQL 8.0.30.
 * MySQL does not implement the [`SM3()`](#sm3) function.
