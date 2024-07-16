@@ -133,3 +133,7 @@ For more information about TiDB SQL users, see [TiDB User Account Management](/u
 For more information about TiDB SQL users, see [TiDB User Account Management](https://docs.pingcap.com/tidb/stable/user-account-management).
 
 </CustomContent>
+
+## Need help?
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).

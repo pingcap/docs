@@ -183,7 +183,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 If the connection is successful, the console will output the version of the TiDB cluster as follows:
 
 ```
-🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.1.0)
+🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.2.0)
 ⏳ Loading sample game data...
 ✅ Loaded sample game data.
 
@@ -284,4 +284,14 @@ While it is possible to specify the CA certificate path manually, this approach 
 
 ## Need help?
 
-Ask questions on the [Discord](https://discord.gg/vYU9h56kAX) channel.
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+
+</CustomContent>
