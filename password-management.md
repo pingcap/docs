@@ -142,7 +142,7 @@ To check the password strength, you can use the [`VALIDATE_PASSWORD_STRENGTH()`]
 >
 > This function evaluates the password strength based on the current password complexity policy. If the password complexity policy is changed, the same password might get different evaluation results.
 
-The following example shows how to use the `[`VALIDATE_PASSWORD_STRENGTH()`](/functions-and-operators/encryption-and-compression-functions.md#validate_password_strength) function:
+The following example shows how to use the [`VALIDATE_PASSWORD_STRENGTH()`](/functions-and-operators/encryption-and-compression-functions.md#validate_password_strength) function:
 
 ```sql
 mysql> SELECT VALIDATE_PASSWORD_STRENGTH('weak');
