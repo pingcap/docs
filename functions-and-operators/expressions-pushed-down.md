@@ -10,9 +10,9 @@ When TiDB reads data from TiKV, TiDB tries to push down some expressions (includ
 
 TiFlash also supports pushdown for the functions and operators [listed on this page](/tiflash/tiflash-supported-pushdown-calculations.md).
 
-> **Note**:
+> **Note:**
 >
-> The Aggregate functions don't support pushdown when used as [`window function`](/functions-and-operators/window-functions.md).
+> The Aggregate functions do not support pushdown when used as [window functions](/functions-and-operators/window-functions.md).
 
 ## Supported expressions for pushdown to TiKV
 
