@@ -979,7 +979,7 @@ SHOW WARNINGS;
 
 As you can see from the preceding example, the `INL_JOIN` hint does not take effect. This is due to a limitation of the optimizer that prevents using the `Projection` or `Selection` operator as the probe side of `IndexJoin`.
 
-### `INL_JOIN`, `INL_HASH_JOIN`, and `INL_MERGE_JOIN` hints do not take effect due to collation incompatibility
+#### `INL_JOIN`, `INL_HASH_JOIN`, and `INL_MERGE_JOIN` hints do not take effect due to collation incompatibility
 
 When the collation of the join key is incompatible between two tables, the `IndexJoin` operator cannot be utilized to execute the query. In this case, the [`INL_JOIN`](#inl_joint1_name--tl_name-), [`INL_HASH_JOIN`](#inl_hash_join), and [`INL_MERGE_JOIN`](#inl_merge_join) hints do not take effect. For example:
 
