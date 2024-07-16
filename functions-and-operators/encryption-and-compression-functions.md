@@ -28,11 +28,11 @@ TiDB supports most of the [encryption and compression functions](https://dev.mys
 
 ### [`AES_DECRYPT()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_aes-decrypt)
 
-The `AES_DECRYPT(data, key [,iv])` function decrypts `data` that has previously been encrypted by the [`AES_ENCRYPT()`](#aes_encrypt) function with the same `key`.
+The `AES_DECRYPT(data, key [,iv])` function decrypts `data` that was previously encrypted using the [`AES_ENCRYPT()`](#aes_encrypt) function with the same `key`.
 
-The [`block_encryption_mode`](/system-variables.md#block_encryption_mode) can be used to select the AES encryption mode.
+You can use the [`block_encryption_mode`](/system-variables.md#block_encryption_mode) system variable to select the [Advanced Encryption Standard (AES)](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) encryption mode.
 
-The initialization vector can be set with the `iv` argument for encryption modes that require it. The default is `NULL`.
+For encryption modes that require an initialization vector, set it with the `iv` argument. The default value is `NULL`.
 
 ```sql
 SELECT AES_DECRYPT(0x28409970815CD536428876175F1A4923, 'secret');
@@ -49,11 +49,11 @@ SELECT AES_DECRYPT(0x28409970815CD536428876175F1A4923, 'secret');
 
 ### [`AES_ENCRYPT()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_aes-encrypt)
 
-The `AES_ENCRYPT(data, key [,iv])` function encrypts `data` with the `key` using the Advanced Encryption Standard ([AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)).
+The `AES_ENCRYPT(data, key [,iv])` function encrypts `data` with `key` using the [Advanced Encryption Standard (AES)](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) algorithm.
 
-The [`block_encryption_mode`](/system-variables.md#block_encryption_mode) can be used to select the AES encryption mode.
+You can use the [`block_encryption_mode`](/system-variables.md#block_encryption_mode) system variable to select the AES encryption mode.
 
-The initialization vector can be set with the `iv` argument for encryption modes that require it. The default is `NULL`.
+For encryption modes that require an initialization vector, set it with the `iv` argument. The default value is `NULL`.
 
 ```sql
 SELECT AES_ENCRYPT(0x616263,'secret');
@@ -70,16 +70,15 @@ SELECT AES_ENCRYPT(0x616263,'secret');
 
 ### [`COMPRESS()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_compress)
 
-The `COMPRESS(expr)` returns a compressed version of the data supplied in the argument.
+The `COMPRESS(expr)` function returns a compressed version of the input data `expr`.
 
-If the argument is set to `NULL` then `COMPRESS()` returns `NULL`.
+- If the argument is `NULL`, the function returns `NULL`.
+- If the argument is an empty string, the function returns a zero-length value.
 
-If the argument has a length of 0 then `COMPRESS()` returns a length of 0.
+For non-zero length argument, the function returns a binary string with the following structure:
 
-The returned value of any argument of a non-zero length argument consists of:
-
-- bytes 0 to 4: the uncompressed length
-- bytes 4 to end: the zlib compressed data
+- Bytes 0 to 3: the uncompressed length
+- Bytes 4 to the end: the zlib compressed data
 
 ```sql
 SELECT COMPRESS(0x414243);
@@ -94,26 +93,25 @@ SELECT COMPRESS(0x414243);
 1 row in set (0.00 sec)
 ```
 
-Here the `0x03000000` is the length (3) of the uncompressed version and `0x789C72747206040000FFFF018D00C7` is the zlib compressed data.
+In this output, `0x03000000` represents the uncompressed length (3) and `0x789C72747206040000FFFF018D00C7` is the zlib compressed data.
 
-An example to decode this outside of TiDB:
+An example of using Python to decode this outside of TiDB:
 
 ```python
->>> import codecs
->>> import zlib
->>> data = codecs.decode('03000000789C72747206040000FFFF018D00C7','hex')
->>> print(int.from_bytes(data[:4], byteorder='little'))
-3
->>> print(zlib.decompress(data[4:]))
-b'ABC'
+import codecs
+import zlib
+
+data = codecs.decode('03000000789C72747206040000FFFF018D00C7','hex')
+print(int.from_bytes(data[:4], byteorder='little'))  # 3
+print(zlib.decompress(data[4:]))  # b'ABC'
 ```
+
+For short strings, `COMPRESS()` might return more bytes than the input. The following example shows that a string of 100 `a` characters compresses to 19 bytes.
 
 ```sql
 WITH x AS (SELECT REPEAT('a',100) 'a')
 SELECT LENGTH(a),LENGTH(COMPRESS(a)) FROM x;
 ```
-
-The example below shows that a string of 100 `a`s compresses to 19 bytes. For short strings the `COMPRESS()` will return more bytes than the input.
 
 ```
 +-----------+---------------------+
@@ -126,7 +124,7 @@ The example below shows that a string of 100 `a`s compresses to 19 bytes. For sh
 
 ### [`MD5()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_md5)
 
-The `MD5(expr)` function can be used to calculate a 128-bit [MD5](https://en.wikipedia.org/wiki/MD5) hash.
+The `MD5(expr)` function calculates a 128-bit [MD5](https://en.wikipedia.org/wiki/MD5) hash for the given argument `expr`.
 
 ```sql
 SELECT MD5('abc');
@@ -143,9 +141,9 @@ SELECT MD5('abc');
 
 ### [`PASSWORD()`](https://dev.mysql.com/doc/refman/5.7/en/encryption-functions.html#function_password)
 
-> **Note:**
+> **Warning:**
 >
-> This functions was deprecated in MySQL 5.7 and removed in MySQL 8.0. This function is deprecated in TiDB. Using this function is not recommended.
+> This function is deprecated in MySQL 5.7 and removed in MySQL 8.0. It is deprecated in TiDB. It is not recommended to use this function.
 
 The `PASSWORD(str)` function calculates a password hash that can be used with the `mysql_native_password` authentication method.
 
@@ -187,7 +185,7 @@ The `SHA()` function is an alias for [`SHA1`](#sha1)
 
 ### [`SHA1()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_sha1)
 
-The `SHA1(expr)` function calculates a 160 bit [SHA-1](https://en.wikipedia.org/wiki/SHA-1) hash.
+The `SHA1(expr)` function calculates a 160-bit [SHA-1](https://en.wikipedia.org/wiki/SHA-1) hash for the given argument `expr`.
 
 ```sql
 SELECT SHA1('abc');
@@ -195,7 +193,7 @@ SELECT SHA1('abc');
 
 ```
 +------------------------------------------+
-| SHA1('abc')                               |
+| SHA1('abc')                              |
 +------------------------------------------+
 | a9993e364706816aba3e25717850c26c9cd0d89d |
 +------------------------------------------+
@@ -204,7 +202,9 @@ SELECT SHA1('abc');
 
 ### [`SHA2()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_sha2)
 
-The `SHA2(str, n)` function calculates a hash from the [SHA-2] family. The `n` argument is used to select the algorithm. `SHA2()` returns `NULL` if any of the arguments are `NULL` or if the algorithm selected by `n` isn't known or supported.
+The `SHA2(str, n)` function calculates a hash using an algorithm from the [SHA-2](https://en.wikipedia.org/wiki/SHA-2) family. The `n` argument is used to select the algorithm. `SHA2()` returns `NULL` if any of the arguments are `NULL` or if the algorithm selected by `n` is unknown or unsupported.
+
+The following lists supported algorithms:
 
 | n   | Algorithm |
 |-----|-----------|
@@ -231,9 +231,9 @@ SELECT SHA2('abc',224);
 
 > **Note:**
 >
-> MySQL doesn't implement the `SM3()` function, this is a TiDB extension.
+> The `SM3()` function is a TiDB extension and is not implemented in MySQL.
 
-The `SM3(str)` function calculates a 256-bit ShangMi 3 ([SM3](https://en.wikipedia.org/wiki/SM3_(hash_function))) hash.
+The `SM3(str)` function calculates a 256-bit [ShangMi 3 (SM3)](https://en.wikipedia.org/wiki/SM3_(hash_function)) hash for the given argument `str`.
 
 ```sql
 SELECT SM3('abc');
@@ -250,7 +250,7 @@ SELECT SM3('abc');
 
 ### [`UNCOMPRESS()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_uncompress)
 
-The `UNCOMPRESS(data)` function uncompressed data that was compressed with the [`COMPRESS()`](#compress) function.
+The `UNCOMPRESS(data)` function decompresses the data that was compressed with the [`COMPRESS()`](#compress) function.
 
 ```sql
 SELECT UNCOMPRESS(0x03000000789C72747206040000FFFF018D00C7);
@@ -267,7 +267,7 @@ SELECT UNCOMPRESS(0x03000000789C72747206040000FFFF018D00C7);
 
 ### [`UNCOMPRESSED_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_uncompressed-length)
 
-The `UNCOMPRESSED_LENGTH(data)` returns the length that is stored in the first 4 bytes of a value that was compressed with the [`COMPRESS()`](#compress) function. 
+The `UNCOMPRESSED_LENGTH(data)` function returns the first 4 bytes of the compressed data, which store the length that the compressed string had before being compressed with the [`COMPRESS()`](#compress) function.
 
 ```sql
 SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
@@ -286,141 +286,137 @@ SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
 
 <CustomContent platform="tidb">
 
-The ``VALIDATE_PASSWORD_STRENGTH(str)` function is used as part of [password management](/password-management.md) to calculate the strength of a password. The strength that is returned is a number between 0 and 100.
+The `VALIDATE_PASSWORD_STRENGTH(str)` function is used as part of [password management](/password-management.md). It calculates the strength of a password and returns a value between 0 and 100.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-The ``VALIDATE_PASSWORD_STRENGTH(str)` function is used as part of password management to calculate the strength of a password. The strength that is returned is a number between 0 and 100.
+The `VALIDATE_PASSWORD_STRENGTH(str)` function is used as part of password management. It calculates the strength of a password and returns a value between 0 and 100.
 
 </CustomContent>
 
-The [`validate_password.*`](/system-variables.md) variables affect the [`VALIDATE_PASSWORD_STRENGTH()`](#validate_password_strength) function
+The [`validate_password.*`](/system-variables.md) system variables affect the behavior of the `VALIDATE_PASSWORD_STRENGTH()` function.
 
 Examples:
 
-We first set the [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650) variable to `ON`.
+- To enable the password complexity check, set the [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650) system variable to `ON`:
 
-```sql
-SET GLOBAL validate_password.enable=ON;
-```
+    ```sql
+    SET GLOBAL validate_password.enable=ON;
+    ```
 
-```
-Query OK, 0 rows affected (0.01 sec)
-```
+- View password validation-related system variables:
 
-Then we inspect the other system variables that are related to password validation.
+    ```sql
+    SHOW VARIABLES LIKE 'validate_password.%';
+    ```
 
-```sql
-SHOW VARIABLES LIKE 'validate_password.%';
-```
+    ```
+    +--------------------------------------+--------+
+    | Variable_name                        | Value  |
+    +--------------------------------------+--------+
+    | validate_password.check_user_name    | ON     |
+    | validate_password.dictionary         |        |
+    | validate_password.enable             | ON     |
+    | validate_password.length             | 8      |
+    | validate_password.mixed_case_count   | 1      |
+    | validate_password.number_count       | 1      |
+    | validate_password.policy             | MEDIUM |
+    | validate_password.special_char_count | 1      |
+    +--------------------------------------+--------+
+    8 rows in set (0.01 sec)
+    ```
 
-```
-+--------------------------------------+--------+
-| Variable_name                        | Value  |
-+--------------------------------------+--------+
-| validate_password.check_user_name    | ON     |
-| validate_password.dictionary         |        |
-| validate_password.enable             | ON     |
-| validate_password.length             | 8      |
-| validate_password.mixed_case_count   | 1      |
-| validate_password.number_count       | 1      |
-| validate_password.policy             | MEDIUM |
-| validate_password.special_char_count | 1      |
-+--------------------------------------+--------+
-8 rows in set (0.01 sec)
-```
+- Check the password strength of an empty string, which returns `0`:
 
-We first check the password strength of an empty string, which returns 0.
+    ```sql
+    SELECT VALIDATE_PASSWORD_STRENGTH('');
+    ```
 
-```sql
-SELECT VALIDATE_PASSWORD_STRENGTH('');
-```
+    ```
+    +--------------------------------+
+    | VALIDATE_PASSWORD_STRENGTH('') |
+    +--------------------------------+
+    |                              0 |
+    +--------------------------------+
+    1 row in set (0.00 sec)
+    ```
 
-```
-+--------------------------------+
-| VALIDATE_PASSWORD_STRENGTH('') |
-+--------------------------------+
-|                              0 |
-+--------------------------------+
-1 row in set (0.00 sec)
-```
+- Check the password strength of a short string `abcdef`, which returns `25`:
 
-Then we check the password strength of an short string, which returns 25.
+    ```sql
+    SELECT VALIDATE_PASSWORD_STRENGTH('abcdef');
+    ```
 
-```sql
-SELECT VALIDATE_PASSWORD_STRENGTH('abcdef');
-```
+    ```
+    +--------------------------------------+
+    | VALIDATE_PASSWORD_STRENGTH('abcdef') |
+    +--------------------------------------+
+    |                                   25 |
+    +--------------------------------------+
+    1 row in set (0.00 sec)
+    ```
 
-```
-+--------------------------------------+
-| VALIDATE_PASSWORD_STRENGTH('abcdef') |
-+--------------------------------------+
-|                                   25 |
-+--------------------------------------+
-1 row in set (0.00 sec)
-```
+- Check the password strength of a longer string `abcdefghi`, which returns `50`. This string is longer than the default value of [`validate_password.length`](/system-variables.md#validate_passwordlength-new-in-v650):
 
-Then we check the password strength of an longer string, which returns 50. This is now more characters than we have configured with [`validate_password.length`](/system-variables.md#validate_passwordlength-new-in-v650).
+    ```sql
+    SELECT VALIDATE_PASSWORD_STRENGTH('abcdefghi');
+    ```
 
-```sql
-SELECT VALIDATE_PASSWORD_STRENGTH('abcdefghi');
-```
+    ```
+    +-----------------------------------------+
+    | VALIDATE_PASSWORD_STRENGTH('abcdefghi') |
+    +-----------------------------------------+
+    |                                      50 |
+    +-----------------------------------------+
+    1 row in set (0.00 sec)
+    ```
 
-```
-+-----------------------------------------+
-| VALIDATE_PASSWORD_STRENGTH('abcdefghi') |
-+-----------------------------------------+
-|                                      50 |
-+-----------------------------------------+
-1 row in set (0.00 sec)
-```
+- Add an upper-case character to the string does not improve the password strength:
 
-Now we add an upper-case character. This still returns 50.
+    ```sql
+    SELECT VALIDATE_PASSWORD_STRENGTH('Abcdefghi');
+    ```
 
-```sql
-SELECT VALIDATE_PASSWORD_STRENGTH('Abcdefghi');
-```
+    ```
+    +-----------------------------------------+
+    | VALIDATE_PASSWORD_STRENGTH('Abcdefghi') |
+    +-----------------------------------------+
+    |                                      50 |
+    +-----------------------------------------+
+    1 row in set (0.01 sec)
+    ```
 
-```
-+-----------------------------------------+
-| VALIDATE_PASSWORD_STRENGTH('Abcdefghi') |
-+-----------------------------------------+
-|                                      50 |
-+-----------------------------------------+
-1 row in set (0.01 sec)
-```
+- Adding numbers to the string also does not improve the password strength:
 
-Now we add numbers. This still returns 50.
+    ```sql
+    SELECT VALIDATE_PASSWORD_STRENGTH('Abcdefghi123');
+    ```
 
-```sql
-SELECT VALIDATE_PASSWORD_STRENGTH('Abcdefghi123');
-```
+    ```
+    +--------------------------------------------+
+    | VALIDATE_PASSWORD_STRENGTH('Abcdefghi123') |
+    +--------------------------------------------+
+    |                                         50 |
+    +--------------------------------------------+
+    1 row in set (0.00 sec)
+    ```
 
-```
-+--------------------------------------------+
-| VALIDATE_PASSWORD_STRENGTH('Abcdefghi123') |
-+--------------------------------------------+
-|                                         50 |
-+--------------------------------------------+
-1 row in set (0.00 sec)
-```
+- Finally, adding special characters to the string brings the password strength to `100`, indicating a strong password:
 
-Now we add special characters and we finally get to 100, which means this is a strong password.
+    ```sql
+    SELECT VALIDATE_PASSWORD_STRENGTH('Abcdefghi123%$#');
+    ```
 
-```sql
-SELECT VALIDATE_PASSWORD_STRENGTH('Abcdefghi123%$#');
-```
-
-```
-+-----------------------------------------------+
-| VALIDATE_PASSWORD_STRENGTH('Abcdefghi123%$#') |
-+-----------------------------------------------+
-|                                           100 |
-+-----------------------------------------------+
-1 row in set (0.00 sec)
-```
+    ```
+    +-----------------------------------------------+
+    | VALIDATE_PASSWORD_STRENGTH('Abcdefghi123%$#') |
+    +-----------------------------------------------+
+    |                                           100 |
+    +-----------------------------------------------+
+    1 row in set (0.00 sec)
+    ```
 
 ## Unsupported functions
 
