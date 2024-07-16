@@ -16,7 +16,7 @@ AdminShowDDLStmt ::=
         'JOBS' Int64Num? WhereClauseOptional 
     |   'JOB' 'QUERIES' NumList 
     |   'JOB' 'QUERIES' 'LIMIT' m ( ('OFFSET' | ',') n )?
-    )
+    )?
 
 NumList ::=
     Int64Num ( ',' Int64Num )*
@@ -36,7 +36,7 @@ To view the status of the currently running DDL jobs, use `ADMIN SHOW DDL`. The 
 - `OWNER_ADDRESS`: the IP address of the DDL owner.
 - `RUNNING_JOBS`: details about the running DDL job.
 - `SELF_ID`: the UUID of the TiDB node to which you are currently connected. If `SELF_ID` is the same as the `OWNER_ID`, it means that you are connected to the DDL owner.
-- `QUERY`: the statement of the query.
+- `QUERY`: the statements of the queries.
 
 ```sql
 ADMIN SHOW DDL\G;
