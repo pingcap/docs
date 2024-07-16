@@ -373,7 +373,7 @@ Examples:
     1 row in set (0.00 sec)
     ```
 
-- Add an upper-case character to the string does not improve the password strength:
+- Adding an upper-case character to the string does not improve the password strength:
 
     ```sql
     SELECT VALIDATE_PASSWORD_STRENGTH('Abcdefghi');
