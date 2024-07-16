@@ -340,7 +340,7 @@ An example response is as follows:
 
 > **Note:**
 >
-> The Chat2Data v1 endpoint is deprecated. It is recommend that you call Chat2Data v3 endpoints instead.
+> The Chat2Data v1 endpoint is deprecated. It is recommended that you call Chat2Data v3 endpoints instead.
 
 TiDB Cloud Data Service provides the following Chat2Query v1 endpoint:
 
@@ -380,7 +380,7 @@ In the preceding example, the request body is a JSON object with the following p
 - `cluster_id`: _string_. A unique identifier of the TiDB cluster.
 - `database`: _string_. The name of the database.
 - `tables`: _array_. (optional) A list of table names to be queried.
-- `instruction`: _string_. A instruction in natural language describing the query you want.
+- `instruction`: _string_. An instruction in natural language describing the query you want.
 
 The response is as follows:
 
