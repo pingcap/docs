@@ -10,10 +10,6 @@ The `ADMIN SHOW DDL [JOBS|JOB QUERIES]` statement shows information about runnin
 ## Synopsis
 
 ```ebnf+diagram
-<<<<<<< HEAD
-AdminStmt ::=
-    'ADMIN' ( 'SHOW' ( 'DDL' ( 'JOBS' Int64Num? WhereClauseOptional | 'JOB' 'QUERIES' NumList | 'JOB' 'QUERIES' 'LIMIT' m 'OFFSET' n )? | TableName 'NEXT_ROW_ID' | 'SLOW' AdminShowSlow ) | 'CHECK' ( 'TABLE' TableNameList | 'INDEX' TableName Identifier ( HandleRange ( ',' HandleRange )* )? ) | 'RECOVER' 'INDEX' TableName Identifier | 'CLEANUP' ( 'INDEX' TableName Identifier | 'TABLE' 'LOCK' TableNameList ) | 'CHECKSUM' 'TABLE' TableNameList | 'CANCEL' 'DDL' 'JOBS' NumList | 'RELOAD' ( 'EXPR_PUSHDOWN_BLACKLIST' | 'OPT_RULE_BLACKLIST' | 'BINDINGS' ) | 'PLUGINS' ( 'ENABLE' | 'DISABLE' ) PluginNameList | 'REPAIR' 'TABLE' TableName CreateTableStmt | ( 'FLUSH' | 'CAPTURE' | 'EVOLVE' ) 'BINDINGS' )
-=======
 AdminShowDDLStmt ::=
     'ADMIN' 'SHOW' 'DDL'
     ( 
@@ -21,7 +17,6 @@ AdminShowDDLStmt ::=
     |   'JOB' 'QUERIES' NumList 
     |   'JOB' 'QUERIES' 'LIMIT' m ( ('OFFSET' | ',') n )?
     )?
->>>>>>> ec266be3fd (admin show ddl: Fix EBNF (#18153))
 
 NumList ::=
     Int64Num ( ',' Int64Num )*
@@ -36,16 +31,12 @@ WhereClauseOptional ::=
 
 To view the status of the currently running DDL jobs, use `ADMIN SHOW DDL`. The output includes the current schema version, the DDL ID and address of the owner, the running DDL jobs and SQL statements, and the DDL ID of the current TiDB instance.
 
-<<<<<<< HEAD
-{{< copyable "sql" >}}
-=======
 - `SCHEMA_VER`: a number indicating the version of the schema.
 - `OWNER_ID`: the UUID of the DDL owner. See also [`TIDB_IS_DDL_OWNER()`](/functions-and-operators/tidb-functions.md).
 - `OWNER_ADDRESS`: the IP address of the DDL owner.
 - `RUNNING_JOBS`: details about the running DDL job.
 - `SELF_ID`: the UUID of the TiDB node to which you are currently connected. If `SELF_ID` is the same as the `OWNER_ID`, it means that you are connected to the DDL owner.
 - `QUERY`: the statements of the queries.
->>>>>>> ec266be3fd (admin show ddl: Fix EBNF (#18153))
 
 ```sql
 ADMIN SHOW DDL;
