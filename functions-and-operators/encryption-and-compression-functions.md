@@ -181,7 +181,7 @@ SELECT RANDOM_BYTES(3);
 
 ### [`SHA()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_sha1)
 
-The `SHA()` function is an alias for [`SHA1`](#sha1)
+The `SHA()` function is an alias for [`SHA1`](#sha1).
 
 ### [`SHA1()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_sha1)
 
