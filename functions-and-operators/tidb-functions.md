@@ -11,21 +11,21 @@ The following functions are TiDB extensions, and are not present in MySQL:
 
 | Function name | Function description |
 | :-------------- | :------------------------------------- |
-| [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | The `TIDB_BOUNDED_STALENESS` function instructs TiDB to read the data as new as possible within the time range. See also: [Read Historical Data Using the `AS OF TIMESTAMP` Clause](/as-of-timestamp.md). |
-| [`TIDB_CURRENT_TSO()`](#tidb_current_tso) | The `TIDB_CURRENT_TSO()` function returns the current [TSO](/tso.md). |
-| [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | Used for decoding binary plans. |
-| [`TIDB_DECODE_KEY()`](#tidb_decode_key) | The `TIDB_DECODE_KEY` function can be used to decode a TiDB-encoded key entry into a JSON structure containing `_tidb_rowid` and `table_id`. These encoded keys can be found in some system tables and in logging outputs. |
-| [`TIDB_DECODE_PLAN()`](#tidb_decode_plan) | The `TIDB_DECODE_PLAN` function can be used to decode a TiDB execution plan. |
-| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | The `TIDB_DECODE_SQL_DIGESTS()` function is used to query the normalized SQL statements (a form without formats and arguments) corresponding to the set of SQL digests in the cluster. |
-| [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest) |The `TIDB_ENCODE_SQL_DIGEST` function can be used to get a digest for a query string. |
-| [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner) | The `TIDB_IS_DDL_OWNER` function can be used to check whether or not the TiDB instance you are connected to is the one that is the DDL Owner. The DDL Owner is the TiDB instance that is tasked with executing DDL statements on behalf of all other nodes in the cluster. |
-| [`TIDB_PARSE_TSO()`](#tidb_parse_tso) | The `TIDB_PARSE_TSO` function can be used to extract the physical timestamp from a TiDB TSO timestamp. See also: [`tidb_current_ts`](/system-variables.md#tidb_current_ts). |
-| [`TIDB_PARSE_TSO_LOGICAL()`](#tidb_parse_tso_logical) | The `TIDB_PARSE_TSO_LOGICAL` function can be used to extract the logical timestamp from a TiDB TSO timestamp. |
-| [`TIDB_ROW_CHECKSUM()`](#tidb_row_checksum) | The `TIDB_ROW_CHECKSUM` function is used to query the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`. See also: [Data integrity validation for single-row data](/ticdc/ticdc-integrity-check.md). |
-| [`TIDB_SHARD()`](#tidb_shard) | The `TIDB_SHARD` function can be used to create a shard index to scatter the index hotspot. A shard index is an expression index with a `TIDB_SHARD` function as the prefix.|
-| [`TIDB_VERSION()`](#tidb_version) | The `TIDB_VERSION` function returns the TiDB version with additional build information. |
-| [`VITESS_HASH()`](#vitess_hash) | The `VITESS_HASH` function returns the hash of a string that is compatible with Vitess' `HASH` function. This is intended to help the data migration from Vitess. |
-| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | The `CURRENT_RESOURCE_GROUP` function is used to return the resource group name that the current session is bound to. See also: [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md). |
+| [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | Instructs TiDB to read the data as new as possible within the time range. See also: [Read Historical Data Using the `AS OF TIMESTAMP` Clause](/as-of-timestamp.md). |
+| [`TIDB_CURRENT_TSO()`](#tidb_current_tso) | Returns the current [TSO](/tso.md). |
+| [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | Decodes binary plans. |
+| [`TIDB_DECODE_KEY()`](#tidb_decode_key) | Decodes a TiDB-encoded key entry into a JSON structure containing `_tidb_rowid` and `table_id`. These encoded keys can be found in some system tables and in logging outputs. |
+| [`TIDB_DECODE_PLAN()`](#tidb_decode_plan) | Decodes a TiDB execution plan. |
+| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | Queries the normalized SQL statements (a form without formats and arguments) corresponding to the set of SQL digests in the cluster. |
+| [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest) | Gets a digest for a query string. |
+| [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner) | Checks whether or not the TiDB instance you are connected to is the one that is the DDL Owner. The DDL Owner is the TiDB instance that is tasked with executing DDL statements on behalf of all other nodes in the cluster. |
+| [`TIDB_PARSE_TSO()`](#tidb_parse_tso) | Extracts the physical timestamp from a TiDB TSO timestamp. See also: [`tidb_current_ts`](/system-variables.md#tidb_current_ts). |
+| [`TIDB_PARSE_TSO_LOGICAL()`](#tidb_parse_tso_logical) | Extracts the logical timestamp from a TiDB TSO timestamp. |
+| [`TIDB_ROW_CHECKSUM()`](#tidb_row_checksum) | Queries the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`. See also: [Data integrity validation for single-row data](/ticdc/ticdc-integrity-check.md). |
+| [`TIDB_SHARD()`](#tidb_shard) | Creates a shard index to scatter the index hotspot. A shard index is an expression index with a `TIDB_SHARD` function as the prefix.|
+| [`TIDB_VERSION()`](#tidb_version) | Returns the TiDB version with additional build information. |
+| [`VITESS_HASH()`](#vitess_hash) | Returns the hash of a string that is compatible with Vitess' `HASH` function. This is intended to help the data migration from Vitess. |
+| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | Returns the resource group name that the current session is bound to. See also: [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md). |
 
 </CustomContent>
 
@@ -33,21 +33,21 @@ The following functions are TiDB extensions, and are not present in MySQL:
 
 | Function name | Function description |
 | :-------------- | :------------------------------------- |
-| [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | The `TIDB_BOUNDED_STALENESS` function instructs TiDB to read the data as new as possible within the time range. See also: [Read Historical Data Using the `AS OF TIMESTAMP` Clause](/as-of-timestamp.md). |
-| [`TIDB_CURRENT_TSO()`](#tidb_current_tso) | The `TIDB_CURRENT_TSO()` function returns the current [TSO](/tso.md). |
-| [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | Used for decoding binary plans. |
-| [`TIDB_DECODE_KEY()`](#tidb_decode_key) | The `TIDB_DECODE_KEY` function can be used to decode a TiDB-encoded key entry into a JSON structure containing `_tidb_rowid` and `table_id`. These encoded keys can be found in some system tables and in logging outputs. |
-| [`TIDB_DECODE_PLAN()`](#tidb_decode_plan) | The `TIDB_DECODE_PLAN` function can be used to decode a TiDB execution plan. |
-| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | The `TIDB_DECODE_SQL_DIGESTS()` function is used to query the normalized SQL statements (a form without formats and arguments) corresponding to the set of SQL digests in the cluster. |
-| [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest) |The `TIDB_ENCODE_SQL_DIGEST` function can be used to get a digest for a query string. |
-| [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner) | The `TIDB_IS_DDL_OWNER` function can be used to check whether or not the TiDB instance you are connected to is the one that is the DDL Owner. The DDL Owner is the TiDB instance that is tasked with executing DDL statements on behalf of all other nodes in the cluster. |
-| [`TIDB_PARSE_TSO()`](#tidb_parse_tso) | The `TIDB_PARSE_TSO` function can be used to extract the physical timestamp from a TiDB TSO timestamp. See also: [`tidb_current_ts`](/system-variables.md#tidb_current_ts). |
-| [`TIDB_PARSE_TSO_LOGICAL()`](#tidb_parse_tso_logical) | The `TIDB_PARSE_TSO_LOGICAL` function can be used to extract the logical timestamp from a TiDB TSO timestamp. |
-| [`TIDB_ROW_CHECKSUM()`](#tidb_row_checksum) | The `TIDB_ROW_CHECKSUM` function is used to query the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`. See also: [Data integrity validation for single-row data](https://docs.pingcap.com/tidb/stable/ticdc-integrity-check). |
-| [`TIDB_SHARD()`](#tidb_shard) | The `TIDB_SHARD` function can be used to create a shard index to scatter the index hotspot. A shard index is an expression index with a `TIDB_SHARD` function as the prefix.|
-| [`TIDB_VERSION()`](#tidb_version) | The `TIDB_VERSION` function returns the TiDB version with additional build information. |
-| [`VITESS_HASH()`](#vitess_hash) | The `VITESS_HASH` function returns the hash of a string that is compatible with Vitess' `HASH` function. This is intended to help the data migration from Vitess. |
-| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | The `CURRENT_RESOURCE_GROUP` function is used to return the resource group name that the current session is bound to. See also: [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md). |
+| [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | Instructs TiDB to read the data as new as possible within the time range. See also: [Read Historical Data Using the `AS OF TIMESTAMP` Clause](/as-of-timestamp.md). |
+| [`TIDB_CURRENT_TSO()`](#tidb_current_tso) | Returns the current [TSO](/tso.md). |
+| [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | Decodes binary plans. |
+| [`TIDB_DECODE_KEY()`](#tidb_decode_key) | Decodes a TiDB-encoded key entry into a JSON structure containing `_tidb_rowid` and `table_id`. These encoded keys can be found in some system tables and in logging outputs. |
+| [`TIDB_DECODE_PLAN()`](#tidb_decode_plan) | Decodes a TiDB execution plan. |
+| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | Queries the normalized SQL statements (a form without formats and arguments) corresponding to the set of SQL digests in the cluster. |
+| [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest) | Gets a digest for a query string. |
+| [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner) | Checks whether or not the TiDB instance you are connected to is the one that is the DDL Owner. The DDL Owner is the TiDB instance that is tasked with executing DDL statements on behalf of all other nodes in the cluster. |
+| [`TIDB_PARSE_TSO()`](#tidb_parse_tso) | Extracts the physical timestamp from a TiDB TSO timestamp. See also: [`tidb_current_ts`](/system-variables.md#tidb_current_ts). |
+| [`TIDB_PARSE_TSO_LOGICAL()`](#tidb_parse_tso_logical) | Extracts the logical timestamp from a TiDB TSO timestamp. |
+| [`TIDB_ROW_CHECKSUM()`](#tidb_row_checksum) | Queries the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`. See also: [Data integrity validation for single-row data](https://docs.pingcap.com/tidb/stable/ticdc-integrity-check). |
+| [`TIDB_SHARD()`](#tidb_shard) | Creates a shard index to scatter the index hotspot. A shard index is an expression index with a `TIDB_SHARD` function as the prefix.|
+| [`TIDB_VERSION()`](#tidb_version) | Returns the TiDB version with additional build information. |
+| [`VITESS_HASH()`](#vitess_hash) | Returns the hash of a string that is compatible with Vitess' `HASH` function. This is intended to help the data migration from Vitess. |
+| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | Returns the resource group name that the current session is bound to. See also: [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md). |
 
 </CustomContent>
 
