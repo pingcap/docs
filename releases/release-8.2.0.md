@@ -47,7 +47,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 
 ### Performance
 
-* Support pushing down the following string functions to TiKV [#50601](https://github.com/pingcap/tidb/issues/50601) @[dbsid](https://github.com/dbsid)
+* Support pushing down the following JSON functions to TiKV [#50601](https://github.com/pingcap/tidb/issues/50601) @[dbsid](https://github.com/dbsid)
 
     * `JSON_ARRAY_APPEND()`
     * `JSON_MERGE_PATCH()`
@@ -73,9 +73,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 
 * Improve statistics loading efficiency by up to 10 times [#52831](https://github.com/pingcap/tidb/issues/52831) @[hawkingrei](https://github.com/hawkingrei)
 
-    SaaS or PaaS applications can have a large number of data tables, which not only slow down the loading speed of the initial statistics, but also increase the failure rate of load synchronization under high loads. The startup time of TiDB and the accuracy of the execution plan can be affected. In v8.2.0, TiDB optimizes the process of loading statistics from multiple perspectives, such as the concurrency model and memory allocation, to reduce latency, improve throughput, and avoid slow loading of statistics that affects business scaling.
+    SaaS or PaaS applications can have a large number of data tables, which not only slow down the loading speed of the initial statistics, but also increase the failure rate of load synchronization under high loads. The startup time of TiDB and the accuracy of the execution plan can be affected. In v8.2.0, TiDB optimizes the process of loading statistics from multiple perspectives, such as the concurrency model and memory allocation, to reduce latency, improve throughput, and avoid slow loading of statistics that affect business scaling.
 
-    Adaptive concurrent loading is now supported. By default, the configuration item [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540) is set to a `0`, and the concurrency of statistics loading is automatically selected based on the hardware specification.
+    Adaptive concurrent loading is now supported. By default, the configuration item [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540) is set to `0`, and the concurrency of statistics loading is automatically selected based on the hardware specification.
 
    For more information, see [documentation](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540).
 
@@ -222,7 +222,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
     - Upgrade the version of Azure Identity Libraries and Microsoft Authentication Library to enhance security [#53990](https://github.com/pingcap/tidb/issues/53990) @[hawkingrei](https://github.com/hawkingrei)
     - Set the maximum value of `token-limit` to `1048576` to avoid causing TiDB Server OOM when setting it too large [#53312](https://github.com/pingcap/tidb/issues/53312) @[djshow832](https://github.com/djshow832)
     - Improve column pruning for MPP execution plans to improve TiFlash MPP execution performance [#52133](https://github.com/pingcap/tidb/issues/52133) @[yibin87](https://github.com/yibin87)
-    - Optimize the performance overhead of the `IndexLookUp` operator when looking up a table with a large amount of data (>1024 rows) 优化 `IndexLookUp` [#53871](https://github.com/pingcap/tidb/issues/53871) @[crazycs520](https://github.com/crazycs520)
+    - Optimize the performance overhead of the `IndexLookUp` operator when looking up a table with a large amount of data (>1024 rows) [#53871](https://github.com/pingcap/tidb/issues/53871) @[crazycs520](https://github.com/crazycs520)
     - Remove stores without Regions during MPP load balancing [#52313](https://github.com/pingcap/tidb/issues/52313) @[xzhangxian1008](https://github.com/xzhangxian1008)
 
 + TiKV
@@ -251,7 +251,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
     + Backup & Restore (BR)
 
         - Optimize the backup feature, improving backup performance and stability during node restarts, cluster scaling-out, and network jitter when backing up large numbers of tables [#52534](https://github.com/pingcap/tidb/issues/52534) @[3pointer](https://github.com/3pointer)
-        - Implement fine-grained checks of TiCDC changefeed during data restore. If the changefeed [`CheckpointTS`](/ticdc/ticdc-architecture.md#checkpointts) is later than the data backup time, the restore operation are not affected, thereby reducing unnecessary wait times and improving user experience [#53131](https://github.com/pingcap/tidb/issues/53131) @[YuJuncen](https://github.com/YuJuncen)
+        - Implement fine-grained checks of TiCDC changefeed during data restore. If the changefeed [`CheckpointTS`](/ticdc/ticdc-architecture.md#checkpointts) is later than the data backup time, the restore operations are not affected, thereby reducing unnecessary wait times and improving user experience [#53131](https://github.com/pingcap/tidb/issues/53131) @[YuJuncen](https://github.com/YuJuncen)
         - Add several commonly used parameters to the [`BACKUP`](/sql-statements/sql-statement-backup.md) statement and the [`RESTORE`](/sql-statements/sql-statement-restore.md) statement, such as `CHECKSUM_CONCURRENCY` [#53040](https://github.com/pingcap/tidb/issues/53040) @[RidRisR](https://github.com/RidRisR)
         - Except for the `br log restore` subcommand, all other `br log` subcommands support skipping the loading of the TiDB `domain` data structure to reduce memory consumption [#52088](https://github.com/pingcap/tidb/issues/52088) @[Leavrth](https://github.com/Leavrth)
         - Support encryption of temporary files generated during log backup [#15083](https://github.com/tikv/tikv/issues/15083) @[YuJuncen](https://github.com/YuJuncen)
@@ -337,7 +337,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 
 + TiFlash
 
-    - Fix the issue of query timeout when executing queries on partitioned tables that contains the empty partition [#9024](https://github.com/pingcap/tiflash/issues/9024) @[JinheLin](https://github.com/JinheLin)
+    - Fix the issue of query timeout when executing queries on partitioned tables that contain empty partitions [#9024](https://github.com/pingcap/tiflash/issues/9024) @[JinheLin](https://github.com/JinheLin)
     - Fix the issue that in the disaggregated storage and compute architecture, null values might be incorrectly returned in queries after adding non-null columns in DDL operations [#9084](https://github.com/pingcap/tiflash/issues/9084) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - Fix the issue that the `SUBSTRING_INDEX()` function might cause TiFlash to crash in some corner cases [#9116](https://github.com/pingcap/tiflash/issues/9116) @[wshwsh12](https://github.com/wshwsh12)
     - Fix the issue that a large number of duplicate rows might be read in FastScan mode after importing data via BR or TiDB Lightning [#9118](https://github.com/pingcap/tiflash/issues/9118) @[JinheLin](https://github.com/JinheLin)

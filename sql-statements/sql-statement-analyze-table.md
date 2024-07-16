@@ -16,7 +16,7 @@ Currently, TiDB collects statistical information as a full collection by using t
 
 ```ebnf+diagram
 AnalyzeTableStmt ::=
-    'ANALYZE' ( 'TABLE' ( TableNameList ( 'ALL COLUMNS' | 'PREDICATE COLUMNS' ) | TableName ( 'INDEX' IndexNameList? | AnalyzeColumnOption | 'PARTITION' PartitionNameList ( 'INDEX' IndexNameList? | AnalyzeColumnOption )? )? ) 'INDEX' IndexNameList? ) AnalyzeOptionListOpt
+    'ANALYZE' ( 'TABLE' ( TableNameList ( 'ALL COLUMNS' | 'PREDICATE COLUMNS' ) | TableName ( 'INDEX' IndexNameList? | AnalyzeColumnOption | 'PARTITION' PartitionNameList ( 'INDEX' IndexNameList? | AnalyzeColumnOption )? )? ) ) AnalyzeOptionListOpt
 
 AnalyzeOptionListOpt ::=
 ( WITH AnalyzeOptionList )?
