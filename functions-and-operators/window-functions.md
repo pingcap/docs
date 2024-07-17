@@ -68,7 +68,7 @@ FROM
 
 ## [`DENSE_RANK()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_dense-rank)
 
-The `DENSE_RANK()` function is similar to [`RANK()`](#rank) but does not leave any gaps in case of ties.
+The `DENSE_RANK()` function returns the rank of the current row. It is similar to [`RANK()`](#rank) but does not leave any gaps in case of ties (rows that share the same values and order conditions).
 
 ```sql
 SELECT
@@ -104,7 +104,7 @@ FROM (
 
 ## [`FIRST_VALUE()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_first-value)
 
-The `FIRST_VALUE(expr)` returns the first value of a group.
+The `FIRST_VALUE(expr)` returns the first value in a window.
 
 The following example uses two different window definitions:
 
@@ -228,7 +228,9 @@ ORDER BY
 
 ## [`LEAD()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_lead)
 
-The `LEAD(expr [, num [,default]])` function returns the value leading (preceding) in the window. It is leading by `num` values, by default `1`. And `default` is returned if there is no leading value. It is `NULL` by default.
+The `LEAD(expr [, num [,default]])` function returns the value of `expr` from the row that is `num` rows following the current row. If such row does not exist, `default` is returned. By default, `num` is `1` and `default` is `NULL` when they are not specified.
+
+In the following example, because `num` is not specified, `LEAD(n)` returns the value of `n` in the next row following the current row. When `n` is 10, because the next row does not exist and `default` is not specified, `LEAD(10)` returns `NULL`.
 
 ```sql
 WITH RECURSIVE cte(n) AS (
@@ -317,7 +319,7 @@ ORDER BY
 
 ## [`NTILE()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_ntile)
 
-The `NTILE(n)` function divides the window in `n` groups and returns the number of the group.
+The `NTILE(n)` function divides the window into `n` groups and returns the number of the group.
 
 ```sql
 WITH RECURSIVE cte(n) AS (
@@ -360,7 +362,7 @@ FROM
 
 ## [`PERCENT_RANK()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_percent-rank)
 
-The `PERCENT_RANK()` function returns a number between 0 and 1 indicating the percentage of rows with a value less than the current window.
+The `PERCENT_RANK()` function returns a number between 0 and 1 indicating the percentage of rows with a value less than the value of the current row.
 
 ```sql
 SELECT
@@ -397,7 +399,7 @@ FROM (
 
 ## [`RANK()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_rank)
 
-The `RANK()` function is similar to [`DENSE_RANK()`](#dense_rank) but will leave any gaps in case of ties. This means it provides an absolute ranking. For example a rank of 7 means that there are 6 with a lower rank.
+The `RANK()` function is similar to [`DENSE_RANK()`](#dense_rank) but will leave gaps in case of ties (rows that share the same values and order conditions). This means it provides an absolute ranking. For example, a rank of 7 means that there are 6 rows with lower ranks.
 
 ```sql
 SELECT
@@ -434,7 +436,7 @@ FROM (
 
 ## [`ROW_NUMBER()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_row-number)
 
-The `ROW_NUMBER()` returns the row number of the result set.
+The `ROW_NUMBER()` returns the row number of the current row in the result set.
 
 ```sql
 WITH RECURSIVE cte(n) AS (
