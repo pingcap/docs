@@ -143,7 +143,9 @@ ORDER BY
 
 ## [`LAG()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_lag)
 
-The `LAG(expr [, num [, default]])` function returns the value that is lagging `num` values behind the the current value. If there is no current value then `default` is returned, which defaults to `NULL`.
+The `LAG(expr [, num [, default]])` function returns the value of `expr` from the row that is `num` rows preceding the current row. If such row does not exist, `default` is returned. By default, `num` is `1` and `default` is `NULL` when they are not specified.
+
+In the following example, because `num` is not specified, `LAG(n)` returns the value of `n` in the previous row. When `n` is 1, because the previous row does not exist and `default` is not specified, `LAG(1)` returns `NULL`.
 
 ```sql
 WITH RECURSIVE cte(n) AS (
