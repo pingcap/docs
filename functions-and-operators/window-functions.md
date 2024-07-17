@@ -34,7 +34,7 @@ Except for `GROUP_CONCAT()` and `APPROX_PERCENTILE()`, TiDB supports using all [
 
 ## [`CUME_DIST()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_cume-dist)
 
-`CUME_DIST()` calculates the cumulative distance. Note that the window definition should use `ORDER BY`. Otherwise this will not return the expected values.
+`CUME_DIST()` calculates the cumulative distribution of a value within a group of values. Note that you need to use the `ORDER BY` clause with `CUME_DIST()` to sort the group of values. Otherwise, this function will not return the expected values.
 
 ```sql
 WITH RECURSIVE cte(n) AS (
