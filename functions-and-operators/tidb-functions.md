@@ -47,7 +47,7 @@ The following functions are TiDB extensions, and are not present in MySQL:
 | [`TIDB_ROW_CHECKSUM()`](#tidb_row_checksum) | Queries the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`. See also: [Data integrity validation for single-row data](https://docs.pingcap.com/tidb/stable/ticdc-integrity-check). |
 | [`TIDB_SHARD()`](#tidb_shard) | Creates a shard index to scatter the index hotspot. A shard index is an expression index with a `TIDB_SHARD` function as the prefix.|
 | [`TIDB_VERSION()`](#tidb_version) | Returns the TiDB version with additional build information. |
-| [`VITESS_HASH()`](#vitess_hash) | Returns the hash of a string that is compatible with Vitess' `HASH` function. This is intended to help the data migration from Vitess. |
+| [`VITESS_HASH()`](#vitess_hash) | Returns the hash of a number that is compatible with Vitess' `HASH` function. This is intended to help the data migration from Vitess. |
 
 </CustomContent>
 
