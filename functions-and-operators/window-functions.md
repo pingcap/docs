@@ -16,7 +16,7 @@ In TiDB, you can control window functions using the following system variables:
 
 The window functions [listed here](/tiflash/tiflash-supported-pushdown-calculations.md) can be pushed down to TiFlash.
 
-Except for `GROUP_CONCAT()` and `APPROX_PERCENTILE()`, TiDB supports all [`GROUP BY` aggregate functions](/functions-and-operators/aggregate-group-by-functions.md). In addition, TiDB supports the following window functions:
+Except for `GROUP_CONCAT()` and `APPROX_PERCENTILE()`, TiDB supports using all [`GROUP BY` aggregate functions](/functions-and-operators/aggregate-group-by-functions.md) as window functions. In addition, TiDB supports the following window functions:
 
 | Function name                     | Feature description |
 | :-------------------------------- | :------------------------------------- |
