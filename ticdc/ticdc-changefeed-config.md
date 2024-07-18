@@ -227,6 +227,65 @@ sasl-oauth-scopes = ["producer.kafka", "consumer.kafka"]
 sasl-oauth-grant-type = "client_credentials"
 # The audience in the Kafka SASL OAUTHBEARER authentication. The default value is empty. This parameter is optional when the OAUTHBEARER authentication is used.
 sasl-oauth-audience = "kafka"
+<<<<<<< HEAD
+=======
+
+# The following configuration item controls whether to output the original data change event. The default value is false, which means that for a non-MySQL sink when the primary key or the non-null unique key is changed in an `UPDATE` event, TiCDC splits the event into two events, `DELETE` and `INSERT`, and ensures that all events are sorted in the order in which the `DELETE` event precedes the `INSERT` event. Setting it to true means that the original event is output directly without splitting.
+# output-raw-change-event = false
+
+# The following configuration is only required when using Avro as the protocol and AWS Glue Schema Registry:
+# Please refer to the section "Integrate TiCDC with AWS Glue Schema Registry" in the document "Sync Data to Kafka": https://docs.pingcap.com/tidb/dev/ticdc-sink-to-kafka#integrate-ticdc-with-aws-glue-schema-registry
+# [sink.kafka-config.glue-schema-registry-config]
+# region="us-west-1"  
+# registry-name="ticdc-test"
+# access-key="xxxx"
+# secret-access-key="xxxx"
+# token="xxxx"
+
+# The following parameters take effect only when the downstream is Pulsar.
+[sink.pulsar-config]
+# Authentication on the Pulsar server is done using a token. Specify the value of the token.
+authentication-token = "xxxxxxxxxxxxx"
+# When you use a token for Pulsar server authentication, specify the path to the file where the token is located.
+token-from-file="/data/pulsar/token-file.txt"
+# Pulsar uses the basic account and password to authenticate the identity. Specify the account.
+basic-user-name="root"
+# Pulsar uses the basic account and password to authenticate the identity. Specify the password.
+basic-password="password"
+# The certificate path for Pulsar TLS encrypted authentication.
+auth-tls-certificate-path="/data/pulsar/certificate"
+# The private key path for Pulsar TLS encrypted authentication.
+auth-tls-private-key-path="/data/pulsar/certificate.key"
+# Path to trusted certificate file of the Pulsar TLS encrypted authentication.
+tls-trust-certs-file-path="/data/pulsar/tls-trust-certs-file"
+# Pulsar oauth2 issuer-url. For more information, see the Pulsar website: https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication
+oauth2.oauth2-issuer-url="https://xxxx.auth0.com"
+# Pulsar oauth2 audience
+oauth2.oauth2-audience="https://xxxx.auth0.com/api/v2/"
+# Pulsar oauth2 private-key
+oauth2.oauth2-private-key="/data/pulsar/privateKey"
+# Pulsar oauth2 client-id
+oauth2.oauth2-client-id="0Xx...Yyxeny"
+# Pulsar oauth2 oauth2-scope
+oauth2.oauth2-scope="xxxx"
+# The number of cached Pulsar producers in TiCDC. The value is 10240 by default. Each Pulsar producer corresponds to one topic. If the number of topics you need to replicate is larger than the default value, you need to increase the number.
+pulsar-producer-cache-size=10240
+# Pulsar data compression method. No compression is used by default. Optional values are "lz4", "zlib", and "zstd".
+compression-type=""
+# The timeout for the Pulsar client to establish a TCP connection with the server. The value is 5 seconds by default.
+connection-timeout=5
+# The timeout for Pulsar clients to initiate operations such as creating and subscribing to a topic. The value is 30 seconds by default.
+operation-timeout=30
+# The maximum number of messages in a single batch for a Pulsar producer to send. The value is 1000 by default.
+batching-max-messages=1000
+# The interval at which Pulsar producer messages are saved for batching. The value is 10 milliseconds by default.
+batching-max-publish-delay=10
+# The timeout for a Pulsar producer to send a message. The value is 30 seconds by default.
+send-timeout=30
+>>>>>>> 32888ff9aa (ticdc: add output-raw-change-event parameter and update ticdc-behavior-change (#18170))
+
+# The following configuration item controls whether to output the original data change event. The default value is false, which means that for a non-MySQL sink when the primary key or the non-null unique key is changed in an `UPDATE` event, TiCDC splits the event into two events, `DELETE` and `INSERT`, and ensures that all events are sorted in the order in which the `DELETE` event precedes the `INSERT` event. Setting it to true means that the original event is output directly without splitting.
+# output-raw-change-event = false
 
 [sink.cloud-storage-config]
 # The concurrency for saving data changes to the downstream cloud storage. 
@@ -247,4 +306,6 @@ file-cleanup-cron-spec = "0 0 2 * * *"
 # The concurrency for uploading a single file.
 # The default value is 1, which means concurrency is disabled.
 flush-concurrency = 1
+# The following configuration item controls whether to output the original data change event. The default value is false, which means that for a non-MySQL sink when the primary key or the non-null unique key is changed in an `UPDATE` event, TiCDC splits the event into two events, `DELETE` and `INSERT`, and ensures that all events are sorted in the order in which the `DELETE` event precedes the `INSERT` event. Setting it to true means that the original event is output directly without splitting.
+output-raw-change-event = false
 ```
