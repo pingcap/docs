@@ -209,9 +209,9 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
 #### Collect statistics of partitioned tables in dynamic pruning mode
 
-When accessing partitioned tables in [dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode) (which is the default since v6.3.0), TiDB collects table-level statistics, which is called GlobalStats. Currently, GlobalStats is aggregated from statistics of all partitions. In dynamic pruning mode, a statistics update of any partitioned table can trigger the GlobalStats to be updated.
+When accessing partitioned tables in [dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode) (which is the default since v6.3.0), TiDB collects table-level statistics, which is called GlobalStats. Currently, GlobalStats is aggregated from statistics of all partitions. In dynamic pruning mode, a statistics update in any partition of the table can trigger the GlobalStats to be updated.
 
-If partitions are empty, or columns for some partitions are missing, then the collection behavior is controlled by the [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730) variable:
+If statistics of some partitions are empty, or statistics of some columns are missing in some partitions, then the collection behavior is controlled by the [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730) variable:
 
 - When GlobalStats update is triggered and [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730) is `OFF`:
 
