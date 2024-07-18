@@ -109,7 +109,7 @@ Data change information includes the data change types and the data values befor
 
 Based on the data change information, TiCDC generates data in the appropriate formats for different downstream types, and sends the data to the downstream. For example, it generates data in formats such as Canal-JSON and Avro, and writes the data to Kafka, or converts the data back into SQL statements and sends them to the downstream MySQL or TiDB.
 
-Currently, when TiCDC adapts data change information for the corresponding protocol, for specific `UPDATE` events, it might split them into one `DELETE` event and one `INSERT` event. For more information, see [Split update events into delete and insert events](/ticdc/ticdc-behavior-change.md#split-update-events-into-delete-and-insert-events).
+Currently, when TiCDC adapts data change information for the corresponding protocol, for specific `UPDATE` events, it might split them into one `DELETE` event and one `INSERT` event. For more information, see [Split `UPDATE` events for MySQL sinks](/ticdc/ticdc-split-update-behavior.md#split-update-events-for-mysql-sinks) and [Split primary or unique key `UPDATE` events for non-MySQL sinks](/ticdc/ticdc-split-update-behavior.md#split-primary-or-unique-key-update-events-for-non-mysql-sinks).
 
 When the downstream is MySQL or TiDB, TiCDC cannot guarantee that the SQL statements written to the downstream are exactly the same as the SQL statements executed in the upstream. This is because TiCDC does not directly obtain the original DML statements executed in the upstream, but generates SQL statements based on the data change information. However, TiCDC ensures the consistency of the final results.
 
