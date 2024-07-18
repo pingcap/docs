@@ -40,11 +40,7 @@ Currently, the DXF supports the distributed execution of the [`ADD INDEX`](/sql-
 
 ## Limitation
 
-The DXF can only schedule up to 16 tasks (including [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) tasks and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) tasks) simultaneously. 
-
-## `ADD INDEX` limitation
-
-- Adding indexes on columns with the [`TIMESTAMP`](/data-type-date-and-time.md#timestamp-type) data type through the DXF is not supported, because it might lead to inconsistency between the index and the data.
+The DXF can only schedule up to 16 tasks (including [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) tasks and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) tasks) simultaneously.
 
 ## Prerequisites
 
