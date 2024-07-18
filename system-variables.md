@@ -1998,18 +1998,23 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `ON`
 - This variable controls whether to record the execution information of each operator in the slow query log and whether to record the [usage statistics of indexes](/information-schema/information-schema-tidb-index-usage.md).
 
-### tidb_enable_column_tracking <span class="version-mark">New in v5.4.0</span>
+### tidb_analyze_column_options <span class="version-mark">New in v8.3.0</span>
 
-> **Warning:**
+> **Note:**
 >
-> Currently, collecting statistics on `PREDICATE COLUMNS` is an experimental feature. It is not recommended that you use it in production environments.
+> This variable only works when [`tidb_analyze_version`](#tidb_analyze_version-new-in-v510) is set to `2`.
+>
+> After upgrading a TiDB cluster from a version earlier than v8.3.0, this variable be set to `ALL` to keep the original behavior.
+>
+> Since v8.3.0, for a newly deployed TiDB cluster, this variable is set to `PREDICATE` by default.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
-- Default value: `OFF`
-- This variable controls whether to enable TiDB to collect `PREDICATE COLUMNS`. After enabling the collection, if you disable it, the information of previously collected `PREDICATE COLUMNS` is cleared. For details, see [Collect statistics on some columns](/statistics.md#collect-statistics-on-some-columns).
+- Type: Enumeration
+- Default value: `PREDICATE`
+- Value options:`ALL`, `PREDICATE`
+- This variable controls the behavior of the ANALYZE TABLE statement. Setting it to PREDICATE means only collecting statistics for predicate columns, while setting it to ALL means collecting statistics for all columns. In scenarios where `OLAP` queries are used, it is recommended to set it to `ALL`, otherwise query performance will significantly degrade.
 
 ### tidb_enable_enhanced_security
 
@@ -4274,7 +4279,7 @@ mysql> desc select count(distinct a) from test.t;
     +-----------------------------------+---------+-----------+-----------------------+---------------------------------+
     ```
 
-- The second example uses `0`, which assumes that 0% of rows will be scanned before the qualified rows are found. 
+- The second example uses `0`, which assumes that 0% of rows will be scanned before the qualified rows are found.
 
     ```sql
     > SET SESSION tidb_opt_ordering_index_selectivity_ratio = 0;
