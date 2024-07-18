@@ -104,7 +104,7 @@ TiSpark 2.4.4, 2.5.2, 3.0.2, 3.1.1, and 3.2.3 are the latest stable versions and
 
 > **Note:**
 >
-> TiSpark does not guarantee the compatibility with TiDB v7.0.0 and later versions.
+> TiSpark does not guarantee compatibility with TiDB v7.0.0 and later versions.
 
 ### Get TiSpark jar
 
