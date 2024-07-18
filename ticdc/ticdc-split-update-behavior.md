@@ -68,7 +68,7 @@ As you can see from the preceding example, splitting the `UPDATE` event into `DE
 >
 > After this behavior change, when using the MySQL sink, TiCDC does not split the `UPDATE` event in most cases. Consequently, there might be primary key or unique key conflicts during changefeed runtime, causing the changefeed to restart automatically. After the restart, TiCDC will split the conflicting `UPDATE` events into `DELETE` and `INSERT` events before writing them to the Sorter module. This ensures that all events within the same transaction are correctly ordered, with all `DELETE` events preceding `INSERT` events, thus correctly completing data replication.
 
-## Split `UPDATE` primary or unique key events for non-MySQL sinks
+## Split primary or unique key `UPDATE` events for non-MySQL sinks
 
 ### Transactions containing a single `UPDATE` change
 
@@ -116,16 +116,16 @@ In this example, by executing three SQL statements to swap the primary keys of t
 
 Therefore, TiCDC splits these two events into four events, that is, deleting records `(1, 1)` and `(2, 2)` and writing records `(2, 1)` and `(1, 2)`.
 
-### Control whether to split `UPDATE` primary or unique key events
+### Control whether to split primary or unique key `UPDATE` events
 
-Starting from v6.5.10, v7.1.6, v7.5.2, and v8.1.1, when using a non-MySQL sink, TiCDC supports controlling whether to split `UPDATE` primary or unique key events via the `output-raw-change-event` parameter, as described in the GitHub issue [#11211]( https://github.com/pingcap/tiflow/issues/11211). The specific behavior of this parameter is as follows:
+Starting from v6.5.10, v7.1.6, v7.5.3, and v8.1.1, when using a non-MySQL sink, TiCDC supports controlling whether to split primary or unique key `UPDATE` events via the `output-raw-change-event` parameter, as described in the GitHub issue [#11211]( https://github.com/pingcap/tiflow/issues/11211). The specific behavior of this parameter is as follows:
 
 - When you set `output-raw-change-event = false`, if the primary key of an `UPDATE` event or the value of a column of a non-null unique index is changed, TiCDC splits the event into two events, `DELETE` and `INSERT`, and ensures that all events are sorted in the order in which the `DELETE` event precedes the `INSERT` event.
 - When you set `output-raw-change-event = true`, TiCDC does not split the `UPDATE` event. Note that when the primary key of a table is a clustered index, updates to the primary key are split into `DELETE` and `INSERT` events in TiDB, and such behavior is not affected by the `output-raw-change-event` parameter.
 
 #### Release 6.5 compatibility
 
-| Version | Protocol | Split ALL UPDATE UK/PK | Not Split UPDATE UK/PK | Comments |
+| Version | Protocol | Split All UK/PK `UPDATE` | Not Split UK/PK `UPDATE`  | Comments |
 | -- | -- | -- | -- | -- |
 | <= v6.5.2 | ALL | ✗ | ✓ |  |
 | v6.5.3 / v6.5.4 | Canal/Open | ✗ | ✓ |  |
@@ -136,7 +136,7 @@ Starting from v6.5.10, v7.1.6, v7.5.2, and v8.1.1, when using a non-MySQL sink, 
 
 #### Release 7.1 compatibility
 
-| Version | Protocol | Split ALL UPDATE UK/PK | Not Split UPDATE UK/PK | Comments |
+| Version | Protocol | Split All UK/PK `UPDATE` | Not Split UK/PK `UPDATE`  | Comments |
 | -- | -- | -- | -- | -- |
 | v7.1.0 | ALL | ✗ | ✓ |  |
 | v7.1.1 | Canal/Open | ✗ | ✓ |  |
@@ -146,14 +146,14 @@ Starting from v6.5.10, v7.1.6, v7.5.2, and v8.1.1, when using a non-MySQL sink, 
 
 #### Release 7.5 compatibility
 
-| Version | Protocol | Split ALL UPDATE UK/PK | Not Split UPDATE UK/PK | Comments |
+| Version | Protocol | Split All UK/PK `UPDATE` | Not Split UK/PK `UPDATE`   | Comments |
 | -- | -- | -- | -- |
 | <= v7.5.2 | ALL | ✓ | ✗ |
 | \>= v7.5.3 (not released yet) | ALL | ✓ (Default value:`output-raw-change-event = false`) | ✓  (Optional: `output-raw-change-event = true`) | |
 
 #### Release 8.1 compatibility
 
-| Version | Protocol | Split ALL UPDATE UK/PK | Not Split UPDATE UK/PK | Comments |
+| Version | Protocol | Split All UK/PK `UPDATE` | Not Split UK/PK `UPDATE`  | Comments |
 | -- | -- | -- | -- |
 | v8.1.0 | ALL | ✓ | ✗ |
 | \>= v8.1.1 (not released yet) | ALL | ✓ (Default value:`output-raw-change-event = false`) | ✓  (Optional: `output-raw-change-event = true`) | |
