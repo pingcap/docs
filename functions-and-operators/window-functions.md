@@ -319,7 +319,7 @@ ORDER BY
 
 ## [`NTILE()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_ntile)
 
-The `NTILE(n)` function divides the window into `n` groups and returns the number of the group.
+The `NTILE(n)` function divides the window into `n` groups and returns the group number of each row.
 
 ```sql
 WITH RECURSIVE cte(n) AS (

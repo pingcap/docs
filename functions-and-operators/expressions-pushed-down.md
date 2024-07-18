@@ -12,7 +12,7 @@ TiFlash also supports pushdown for the functions and operators [listed on this p
 
 > **Note:**
 >
-> The Aggregate functions do not support pushdown when used as [window functions](/functions-and-operators/window-functions.md).
+> The Aggregate functions do not support pushdown to TiKV when used as [window functions](/functions-and-operators/window-functions.md).
 
 ## Supported expressions for pushdown to TiKV
 
