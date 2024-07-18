@@ -21,7 +21,6 @@ The column name (when `is_index` is `0`) or the index name (when `is_index` is `
 | `Distinct_count` | The distinct count |
 | `Null_count` | NULL count |
 | `Avg_col_size` | The average col size |
-| `Correlation` | Correlation |
 | `Correlation` | Pearson correlation coefficient between this column and the integer primary key column, indicating the degree of association between the two columns |
 | `Load_status` | Load status, such as `allEvicted` and `allLoaded` |
 | `Total_mem_usage` | The total memory usage |
