@@ -206,7 +206,7 @@ customerDF.write
 
 See [Data Source API User Guide](https://github.com/pingcap/tispark/blob/master/docs/features/datasource_api_userguide.md) for more details.
 
-You can also write with Spark SQL since TiSpark 3.1. See [insert SQL](https://github.com/pingcap/tispark/blob/master/docs/features/insert_sql_userguide.md) for more details.
+Starting from TiSpark 3.1, you can write data to TiKV using Spark SQL. For more information, see [insert SQL](https://github.com/pingcap/tispark/blob/master/docs/features/insert_sql_userguide.md).
 
 ### Write data using JDBC DataSource
 
