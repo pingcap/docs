@@ -10,6 +10,10 @@ When TiDB reads data from TiKV, TiDB tries to push down some expressions (includ
 
 TiFlash also supports pushdown for the functions and operators [listed on this page](/tiflash/tiflash-supported-pushdown-calculations.md).
 
+> **Note:**
+>
+> The Aggregate functions do not support pushdown to TiKV when used as [window functions](/functions-and-operators/window-functions.md).
+
 ## Supported expressions for pushdown to TiKV
 
 | Expression Type | Operations |
@@ -26,6 +30,7 @@ TiFlash also supports pushdown for the functions and operators [listed on this p
 | [Encryption and compression functions](/functions-and-operators/encryption-and-compression-functions.md#encryption-and-compression-functions) | [MD5()](/functions-and-operators/encryption-and-compression-functions.md#md5) <br/>[SHA1(), SHA()](/functions-and-operators/encryption-and-compression-functions.md#sha1) <br/>[UNCOMPRESSED_LENGTH()](/functions-and-operators/encryption-and-compression-functions.md#uncompressed_length) |
 | [Cast functions and operators](/functions-and-operators/cast-functions-and-operators.md#cast-functions-and-operators) | [CAST()](/functions-and-operators/cast-functions-and-operators.md#cast) <br/>[CONVERT()](/functions-and-operators/cast-functions-and-operators.md#convert) |
 | [Miscellaneous functions](/functions-and-operators/miscellaneous-functions.md#supported-functions) | [UUID()](/functions-and-operators/miscellaneous-functions.md#uuid) |
+| [Window Functions](/functions-and-operators/window-functions.md) | None |
 
 ## Blocklist specific expressions
 
