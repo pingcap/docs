@@ -40,10 +40,19 @@ In TiDB Cloud Data Service, you can generate one or multiple endpoints automatic
         >
         > The **Table** drop-down list includes only user-defined tables with at least one column, excluding system tables and any tables without a column definition.
 
-    2. Select at least one HTTP operation (such as `GET (Retrieve)`, `POST (Create)`, and `PUT (Update)`) for the endpoint to be generated.
+    2. Select at least one HTTP operation (such as GET (Retrieve), POST (Create), and PUT (Update)) for the endpoint to be generated.
 
-        For each operation you selected, TiDB Cloud Data Service will generate a corresponding endpoint. If you have selected a batch operation (such as `POST (Batch Create)`), the generated endpoint lets you operate on multiple rows in a single request.
+        For each operation you select, TiDB Cloud Data Service will generate a corresponding endpoint. If you select a batch operation (such as POST (Batch Create)), the generated endpoint allows you to operate on multiple rows in a single request.
 
+        There is an advanced operation: Vector Search Operations. Enable the "Vector Search Operations" feature to generate a POST (Vector Similarity Search) endpoint, which automatically generates an API to calculate vector distances based on the selected distance function. This option is available only if there are vector-type fields in your table.
+
+        You can select from the following vector distance calculation methods:
+
+        - VEC_L2_DISTANCE (default)
+        - VEC_COSINE_DISTANCE
+        - VEC_NEGATIVE_INNER_PRODUCT
+        - VEC_L1_DISTANCE
+       
     3. (Optional) Configure a timeout and tag for the operations. All the generated endpoints will automatically inherit the configured properties, which can be modified later as needed.
     4. (Optional) The **Auto-Deploy Endpoint** option (disabled by default) controls whether to enable the direct deployment of the generated endpoints. When it is enabled, the draft review process is skipped, and the generated endpoints are deployed immediately without further manual review or approval.
 
@@ -56,6 +65,7 @@ In TiDB Cloud Data Service, you can generate one or multiple endpoints automatic
     - Endpoint name: the generated endpoint name is in the `/<name of the selected table>` format, and the request method (such as `GET`, `POST`, and `PUT`) is displayed before the endpoint name. For example, if the selected table name is `sample_table` and the selected operation is `POST (Create)`, the generated endpoint is displayed as `POST /sample_table`.
 
         - If a batch operation is selected, TiDB Cloud Data Service appends `/bulk` to the name of the generated endpoint. For example, if the selected table name is `/sample_table` and the selected operation is `POST (Batch Create)`, the generated endpoint is displayed as `POST /sample_table/bulk`.
+        - If `POST (Vector Similarity Search)` is selected,  TiDB Cloud Data Service appends `/vector_search` to the name  of the generated endpoint. For example, if the selected table name is `/sample_table` and the selected operation is `POST (Vector Similarity Search)`, the generated endpoint is displayed as `POST /sample_table/vector_search`.
         - If there has been already an endpoint with the same request method and endpoint name, TiDB Cloud Data Service appends `_dump_<random letters>` to the name of the generated endpoint. For example, `/sample_table_dump_EUKRfl`.
 
     - SQL statements: TiDB Cloud Data Service automatically writes SQL statements for the generated endpoints according to the table column specifications and the selected endpoint operations. You can click the endpoint name to view its SQL statements in the middle section of the page.
