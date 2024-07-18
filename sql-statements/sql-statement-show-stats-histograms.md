@@ -22,6 +22,7 @@ Currently, the `SHOW STATS_HISTOGRAMS` statement returns the following columns:
 | `Null_count` | NULL count |
 | `Avg_col_size` | The average col size |
 | `Correlation` | Correlation |
+| `Correlation` | Pearson correlation coefficient between this column and the integer primary key column, indicating the degree of association between the two columns |
 | `Load_status` | Load status, such as `allEvicted` and `allLoaded` |
 | `Total_mem_usage` | The total memory usage |
 | `Hist_mem_usage` | The historical memory usage |
