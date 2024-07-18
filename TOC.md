@@ -579,7 +579,7 @@
       - [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
       - [Data Integrity Validation for Single-Row Data](/ticdc/ticdc-integrity-check.md)
       - [Data Consistency Validation for TiDB Upstream/Downstream Clusters](/ticdc/ticdc-upstream-downstream-check.md)
-      - [TiCDC Behavior Changes](/ticdc/ticdc-behavior-change.md)
+      - [TiCDC Behavior in Splitting UPDATE Events](/ticdc/ticdc-split-update-behavior.md)
     - Monitor and Alert
       - [Monitoring Metrics Summary](/ticdc/ticdc-summary-monitor.md)
       - [Monitoring Metrics Details](/ticdc/monitor-ticdc.md)

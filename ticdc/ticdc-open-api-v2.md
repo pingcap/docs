@@ -361,6 +361,7 @@ The `sink.csv` parameters are described as follows:
 | `file_expiration_days`   | `INT` type. The duration to retain files, which takes effect only when `date-separator` is configured as `day`. |
 | `file_cleanup_cron_spec`   | `STRING` type. The running cycle of the scheduled cleanup task, compatible with the crontab configuration, with a format of `<Second> <Minute> <Hour> <Day of the month> <Month> <Day of the week (Optional)>`. |
 | `flush_concurrency`   | `INT` type. The concurrency for uploading a single file. |
+| `output_raw_change_event`   | `BOOLEAN` type. Controls whether to output the original data change event for a non-MySQL sink. |
 
 `sink.open` parameters are described as follows:
 
