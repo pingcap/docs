@@ -15,7 +15,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
 ### Behavior changes
 
-- When processing update event, TiCDC splits an event into delete and insert events if the primary key or non-null unique index value is modified in the event. For more information, see [documentation](/ticdc/ticdc-behavior-change.md#transactions-containing-a-single-update-change).
+- When processing update event, TiCDC splits an event into delete and insert events if the primary key or non-null unique index value is modified in the event. For more information, see [documentation](/ticdc/ticdc-split-update-behavior.md#transactions-containing-a-single-update-change).
 
 ## Improvements
 

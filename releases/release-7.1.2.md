@@ -22,7 +22,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
 ### Behavior changes
 
-- For transactions containing multiple changes, if the primary key or non-null unique index value is modified in the update event, TiCDC splits an event into delete and insert events and ensures that all events follow the sequence of delete events preceding insert events. For more information, see [documentation](/ticdc/ticdc-behavior-change.md#transactions-containing-multiple-update-changes).
+- For transactions containing multiple changes, if the primary key or non-null unique index value is modified in the update event, TiCDC splits an event into delete and insert events and ensures that all events follow the sequence of delete events preceding insert events. For more information, see [documentation](/ticdc/ticdc-split-update-behavior.md#transactions-containing-multiple-update-changes).
 
 ## Improvements
 
