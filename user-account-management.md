@@ -158,7 +158,7 @@ TiDB stores passwords in the [`mysql.user`](/mysql-schema.md) system table. Oper
     CREATE USER 'test'@'localhost' IDENTIFIED BY 'mypass';
     ```
 
-- To assign or change a password for an existing account, use `SET PASSWORD FOR` or `ALTER USER`:
+- To assign or change a password for an existing account, use [`SET PASSWORD FOR`](/sql-statements/sql-statement-set-password.md) or [`ALTER USER`](/sql-statements/sql-statement-alter-user.md):
 
     ```sql
     SET PASSWORD FOR 'root'@'%' = 'xxx';
