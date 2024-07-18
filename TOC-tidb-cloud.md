@@ -267,6 +267,7 @@
   - [Overview](/tidb-cloud/data-service-overview.md)
   - [Get Started](/tidb-cloud/data-service-get-started.md)
   - [Try Out Chat2Query API](/tidb-cloud/use-chat2query-api.md)
+  - [Try Out Domain Knowledge API](/tidb-cloud/use-chat2query-knowledge.md)
   - [Manage Data App](/tidb-cloud/data-service-manage-data-app.md)
   - [Manage Endpoint](/tidb-cloud/data-service-manage-endpoint.md)
   - [API Key](/tidb-cloud/data-service-api-key.md)
