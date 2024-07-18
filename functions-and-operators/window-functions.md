@@ -29,7 +29,7 @@ Except for `GROUP_CONCAT()` and `APPROX_PERCENTILE()`, TiDB supports using all [
 | [`NTH_VALUE()`](#nth_value)       | Returns the expression value from the N-th row of the current window. |
 | [`NTILE()`](#ntile)               | Divides a partition into N buckets, assigns the bucket number to each row in the partition, and returns the bucket number of the current row within the partition. |
 | [`PERCENT_RANK()`](#percent_rank) | Returns the percentage of partition values that are less than the value in the current row. |
-| [`RANK()`](#rank)                 | Returns the rank of the current row within the partition. The rank may be with gaps. |
+| [`RANK()`](#rank)                 | Returns the rank of the current row within the partition. The rank might have gaps. |
 | [`ROW_NUMBER()`](#row_number)     | Returns the number of the current row in the partition. |
 
 ## [`CUME_DIST()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_cume-dist)
