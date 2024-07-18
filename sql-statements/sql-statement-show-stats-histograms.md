@@ -14,7 +14,7 @@ Currently, the `SHOW STATS_HISTOGRAMS` statement returns the following columns:
 | `Db_name` | Database name |
 | `Table_name` | The table name |
 | `Partition_name` | The partition name |
-| `Column_name` | The column name |
+The column name (when `is_index` is `0`) or the index name (when `is_index` is `1`)
 | `Is_index` | Whether it is an index column or not |
 | `Update_time` | The update time |
 | `Distinct_count` | The distinct count |
