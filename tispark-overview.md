@@ -72,7 +72,44 @@ To co-deploy TiKV and TiSpark, add TiSpark required resources to the TiKV reserv
 
 ## Deploy the TiSpark cluster
 
+<<<<<<< HEAD
 Download TiSpark's jar package [here](https://github.com/pingcap/tispark/releases) and place it in the `$SPARKPATH/jars` folder.
+=======
+- Put `mysql-connector-java` into spark jars file.
+
+- Import `mysql-connector-java` when you submit a spark job. See the following example:
+
+```
+spark-submit --jars tispark-assembly-3.0_2.12-3.1.0-SNAPSHOT.jar,mysql-connector-java-8.0.29.jar
+```
+
+### Choose TiSpark version
+
+You can choose TiSpark version according to your TiDB and Spark version.
+
+| TiSpark version | TiDB, TiKV, PD version | Spark version | Scala version |
+| ---------------  |------------------------| ------------- | ------------- |
+| 2.4.x-scala_2.11 | 5.x, 4.x               | 2.3.x, 2.4.x   | 2.11          |
+| 2.4.x-scala_2.12 | 5.x, 4.x               | 2.4.x         | 2.12          |
+| 2.5.x            | 5.x, 4.x               | 3.0.x, 3.1.x   | 2.12          |
+| 3.0.x            | 5.x, 4.x               | 3.0.x, 3.1.x, 3.2.x|2.12|
+| 3.1.x            | 6.x, 5.x, 4.x          | 3.0.x, 3.1.x, 3.2.x, 3.3.x|2.12|
+| 3.2.x            | 6.x, 5.x, 4.x          | 3.0.x, 3.1.x, 3.2.x, 3.3.x|2.12|
+
+TiSpark 2.4.4, 2.5.2, 3.0.2, 3.1.1, and 3.2.3 are the latest stable versions and are highly recommended.
+
+> **Note:**
+>
+> TiSpark does not guarantee compatibility with TiDB v7.0.0 and later versions.
+
+### Get TiSpark jar
+
+You can get the TiSpark jar using one of the following methods:
+
+- Get from [maven central](https://search.maven.org/) and search for [`pingcap`](http://search.maven.org/#search%7Cga%7C1%7Cpingcap)
+- Get from [TiSpark releases](https://github.com/pingcap/tispark/releases)
+- Build from source with the steps below
+>>>>>>> 1ff27f0118 (Update tispark-overview.md version matrix (#18251))
 
 > **Note:**
 >
@@ -95,7 +132,29 @@ Copy the `spark-defaults.conf` from the `spark-defaults.conf.template` file:
 cp conf/spark-defaults.conf.template conf/spark-defaults.conf
 ```
 
+<<<<<<< HEAD
 In the `spark-defaults.conf` file, add the following lines:
+=======
+### TiSpark jar's artifact ID
+
+The Artifact ID of TiSpark varies with TiSpark versions.
+
+| TiSpark version                | Artifact ID                                        |
+|--------------------------------| -------------------------------------------------- |
+| 2.4.x-\${scala_version}, 2.5.0 | tispark-assembly                                   |
+| 2.5.1                          | tispark-assembly-\${spark_version}                  |
+| 3.0.x, 3.1.x, 3.2.x            | tispark-assembly-\${spark_version}-\${scala_version} |
+
+## Getting started
+
+This document describes how to use TiSpark in spark-shell.
+
+### Start spark-shell
+
+To use TiSpark in spark-shell:
+
+Add the following configuration in `spark-defaults.conf`:
+>>>>>>> 1ff27f0118 (Update tispark-overview.md version matrix (#18251))
 
 ```
 spark.tispark.pd.addresses $pd_host:$pd_port
@@ -251,7 +310,11 @@ spark.sql("select * from hive_table a, tispark_table b where a.col1 = b.col1").s
 
 ## Batch write DataFrames into TiDB using TiSpark
 
+<<<<<<< HEAD
 Starting from v2.3, TiSpark natively supports batch writing DataFrames into TiDB clusters. This writing mode is implemented through the two-phase commit protocol of TiKV.
+=======
+Starting from TiSpark 3.1, you can write data to TiKV using Spark SQL. For more information, see [insert SQL](https://github.com/pingcap/tispark/blob/master/docs/features/insert_sql_userguide.md).
+>>>>>>> 1ff27f0118 (Update tispark-overview.md version matrix (#18251))
 
 Compared with the writing through Spark + JDBC, the TiSpark batch writing has the following advantages:
 
