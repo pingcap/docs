@@ -9,6 +9,8 @@ TiDB uses statistics as input to the optimizer to estimate the number of rows pr
 
 ## Collect statistics
 
+This section describes two ways of collecting statistics: automatic update and manual collection.
+
 ### Automatic update
 
 For the [`INSERT`](/sql-statements/sql-statement-insert.md), [`DELETE`](/sql-statements/sql-statement-delete.md), or [`UPDATE`](/sql-statements/sql-statement-update.md) statements, TiDB automatically updates the number of rows and modified rows in statistics.
@@ -71,6 +73,8 @@ For information on persisting the options for easier reuse, see [Persist `ANALYZ
 
 ## Types of statistics
 
+This section describes three types of statistics: histogram, Count-Min Sketch, and Top-N.
+
 ### Histogram
 
 Histogram statistics are used by the optimizer to estimate selectivity of an interval or range predicate, and might also be used to determine the number of distinct values within a column for estimation of equal/IN predicates in Version 2 of statistics (refer to [Versions of Statistics](#versions-of-statistics)).
@@ -96,13 +100,15 @@ A hash collision might occur since Count-Min Sketch is a hash structure. In the 
 - Modify the `WITH NUM TOPN` parameter. TiDB stores the high-frequency (top x) data separately, with the other data stored in Count-Min Sketch. Therefore, to prevent a larger value and a smaller value from being hashed together, you can increase the value of `WITH NUM TOPN`. In TiDB, its default value is 20. The maximum value is 1024. For more information about this parameter, see [Manual collection](#manual-collection).
 - Modify two parameters `WITH NUM CMSKETCH DEPTH` and `WITH NUM CMSKETCH WIDTH`. Both affect the number of hash buckets and the collision probability. You can increase the values of the two parameters appropriately according to the actual scenario to reduce the probability of hash collision, but at the cost of higher memory usage of statistics. In TiDB, the default value of `WITH NUM CMSKETCH DEPTH` is 5, and the default value of `WITH NUM CMSKETCH WIDTH` is 2048. For more information about the two parameters, see [Manual collection](#manual-collection).
 
-### Top-N values
+### Top-N
 
 Top-N values are values with the top N occurrences in a column or index. Top-N statistics are often referred to as frequency statistics or data skew.
 
 TiDB records the values and occurrences of Top-N values. Here `N` is controlled by the `WITH NUM TOPN` parameter. The default value is 20, meaning the top 20 most frequent values are collected. The maximum value is 1024. For details about the parameter, see [Manual collection](#manual-collection).
 
 ## Selective statistics collection
+
+This section describes how to collect statistics selectively.
 
 ### Collect statistics on indexes
 
@@ -504,6 +510,8 @@ After enabling the synchronously loading statistics feature, you can control how
 
 ## Export and import statistics
 
+This section describes how to export and import statistics.
+
 <CustomContent platform="tidb-cloud">
 
 > **Note:**
@@ -711,6 +719,8 @@ The following table describes the behaviors of locking statistics:
 | A partitioned table and only some partitions are locked | The lock is invalid | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | / | The deleted partition lock information is cleared | The deleted partition lock information is cleared | The lock information is transferred to the exchanged table |
 
 ## Manage `ANALYZE` tasks and concurrency
+
+This section describes how to terminate background `ANALYZE` tasks and control the `ANALYZE` concurrency.
 
 ### Terminate background `ANALYZE` tasks
 
