@@ -44,7 +44,7 @@ In TiDB Cloud Data Service, you can generate one or multiple endpoints automatic
 
         For each operation you select, TiDB Cloud Data Service will generate a corresponding endpoint. If you select a batch operation (such as `POST (Batch Create)`), the generated endpoint lets you operate on multiple rows in a single request.
 
-        If your table contains [vector data types](/tidb-cloud/vector-search-data-types.md), you can click the **Vector Search Operations** toggle to generate a `POST (Vector Similarity Search)` endpoint, which automatically calculates vector distances based on the selected distance function. You can select from the following [vector distance functions](/tidb-cloud/vector-search-functions-and-operators.md):
+        If the table you selected contains [vector data types](/tidb-cloud/vector-search-data-types.md), you can click the **Vector Search Operations** toggle to generate a `POST (Vector Similarity Search)` endpoint, which automatically calculates vector distances based on the selected distance function. You can select from the following [vector distance functions](/tidb-cloud/vector-search-functions-and-operators.md):
 
         - `VEC_L2_DISTANCE` (default): calculates the L2 distance (Euclidean distance) between two vectors.
         - `VEC_COSINE_DISTANCE`: calculates the cosine distance between two vectors.
@@ -63,7 +63,7 @@ In TiDB Cloud Data Service, you can generate one or multiple endpoints automatic
     - Endpoint name: the generated endpoint name is in the `/<name of the selected table>` format, and the request method (such as `GET`, `POST`, and `PUT`) is displayed before the endpoint name. For example, if the selected table name is `sample_table` and the selected operation is `POST (Create)`, the generated endpoint is displayed as `POST /sample_table`.
 
         - If a batch operation is selected, TiDB Cloud Data Service appends `/bulk` to the name of the generated endpoint. For example, if the selected table name is `/sample_table` and the selected operation is `POST (Batch Create)`, the generated endpoint is displayed as `POST /sample_table/bulk`.
-        - If `POST (Vector Similarity Search)` is selected, TiDB Cloud Data Service appends `/vector_search` to the name  of the generated endpoint. For example, if the selected table name is `/sample_table` and the selected operation is `POST (Vector Similarity Search)`, the generated endpoint is displayed as `POST /sample_table/vector_search`.
+        - If `POST (Vector Similarity Search)` is selected, TiDB Cloud Data Service appends `/vector_search` to the name of the generated endpoint. For example, if the selected table name is `/sample_table` and the selected operation is `POST (Vector Similarity Search)`, the generated endpoint is displayed as `POST /sample_table/vector_search`.
         - If there has been already an endpoint with the same request method and endpoint name, TiDB Cloud Data Service appends `_dump_<random letters>` to the name of the generated endpoint. For example, `/sample_table_dump_EUKRfl`.
 
     - SQL statements: TiDB Cloud Data Service automatically writes SQL statements for the generated endpoints according to the table column specifications and the selected endpoint operations. You can click the endpoint name to view its SQL statements in the middle section of the page.
