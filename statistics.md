@@ -67,7 +67,7 @@ You can perform full collection using the following syntax.
 
 `WITH NUM SAMPLES` and `WITH FLOAT_NUM SAMPLERATE` correspond to two different algorithms of collecting samples.
 
-See [Histograms](#histogram), [Top-N](#top-n-values) and [CMSketch](#count-min-sketch) (Count-Min Sketch) for detailed explanations. For `SAMPLES`/`SAMPLERATE`, see [Improve collection performance](#improve-collection-performance).
+See [Histograms](#histogram), [Top-N](#top-n) and [CMSketch](#count-min-sketch) (Count-Min Sketch) for detailed explanations. For `SAMPLES`/`SAMPLERATE`, see [Improve collection performance](#improve-collection-performance).
 
 For information on persisting the options for easier reuse, see [Persist `ANALYZE` configurations](#persist-analyze-configurations).
 
