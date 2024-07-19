@@ -12,16 +12,16 @@ Currently, the `SHOW STATS_HISTOGRAMS` statement returns the following columns:
 
 | Column name | Description            |
 | -------- | ------------- |
-| Db_name | Database name |
+| `Db_name` | Database name |
 | `Table_name` | The table name |
 | `Partition_name` | The partition name |
-| `Column_name` | The column name |
+| `Column_name` | The column name (when `is_index` is `0`) or the index name (when `is_index` is `1`) |
 | `Is_index` | Whether it is an index column or not |
 | `Update_time` | The update time |
 | `Distinct_count` | The distinct count |
 | `Null_count` | NULL count |
 | `Avg_col_size` | The average col size |
-| `Correlation` | Correlation |
+| `Correlation` | Pearson correlation coefficient between this column and the integer primary key column, indicating the degree of association between the two columns |
 | `Load_status` | Load status, such as `allEvicted` and `allLoaded` |
 | `Total_mem_usage` | The total memory usage |
 | `Hist_mem_usage` | The historical memory usage |
