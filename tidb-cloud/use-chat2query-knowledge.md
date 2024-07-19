@@ -1,111 +1,45 @@
 ---
-title: Get Started with Domain Knowledge API
-summary: Learn how to use TiDB Cloud Domain Knowledge API to optimize the SQL generation performance of the Chat2Query.
+title: Use Knowledge Bases
+summary: Learn how to improve your Chat2Query results by using Chat2Query knowledge base APIs.
 ---
 
-# Get Started with Domain Knowledge API
+# Use Knowledge Bases
 
-TiDB Cloud provides the Domain Knowledge API to support users in adding or modifying domain-specific knowledge to improve the SQL generation capabilities of Chat2Query. Its usage aligns with the [Chat2Query API](/tidb-cloud/use-chat2query-api.md). 
+ A knowledge base is a collection of structured data that can be used to enhance the SQL generation capabilities of Chat2Query.
 
-
-> **Note:**
->
-> Domain Knowledge API is available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters. To use the Domain Knowledge API on [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
-
-
-## Introduction to Knowledge Utilized in Chat2Query
-Currently, Chat2Query supports the use of three types of Knowledge: `Few-Shot Example`, `Term-Sheet Explanation` and `Instruction`. Each type is specifically designed for different scenarios and has a unique knowledge structure.
-
-### Few-Shot Example
-`Few-Shot Example` refers to the Q&A learning samples provided to Chat2Query, which include sample questions and their corresponding answers. By learning from these few samples, Chat2Query can improve its ability to handle new tasks more effectively.
+Starting from v3, the Chat2Query API enables you to add or modify knowledge bases by calling knowledge base related endpoints of your Chat2Query Data App.
 
 > **Note:**
 >
-> It's important to remember that the quality of the examples affects how well Chat2Query learns. If the examples are bad, like if the answers don't match the questions, it could make Chat2Query perform worse, not better, on new tasks.
+> Knowledge base related endpoints are available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters by default. To use knowledge base related endpoints on [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
 
-#### The Knowledge Sturcture
-Each example consists of a sample question along with its corresponding answer. Here is an example:
+## Before you begin
 
-```json
-{
-    "question": "How many records in the 'test' table", 
-    "answer": "SELECT COUNT(*) FROM `test`;"
-}
-```
+Before creating a knowledge base for your database, make sure that you have the following:
 
+- A [Chat2Query Data App](/tidb-cloud/use-chat2query-api.md#1-create-a-chat2query-data-app)
+- An [API key for the Chat2Query Data App](/tidb-cloud/use-chat2query-api.md#create-an-api-key)
 
-#### When to Use
-Few-Shot examples can significantly improve the performance of Chat2Query in various scenarios, including but not limited to, the following two circumstances:
-
-1. **When dealing with rare or complex question**: If Chat2Query encounters questions that are infrequent or complex, leading to inadequate responses, Adding few-shot examples can assist in enhancing its understanding.
-
-2. **When struggling with a certain type of question**: If Chat2Query frequently errs or has difficulty with specific questions, Adding few-shot examples can help improve its performance on these questions.
-
-
-
-### Term-Sheet Explanation
-`Term-Sheet Explanation` refers to the detailed explanation of a specific term or a group of similar terms. It includes a list of terms along with their corresponding comprehensive descriptions.
+## Step 1. Create a knowledge base for the linked database
 
 > **Note:**
 >
-> Similarly, it is essential to ensure the accuracy of each newly added term explanation. Incorrect interpretations could not only fail to improve the generation results of Chat2Query but also potentially lead to adverse effects.
+> The knowledge used by Chat2Query is **structured according to the database dimension**. You can connect multiple Chat2Query Data Apps to the same database, but each Chat2Query Data App can only use knowledge from a specific database it is linked to.
 
-#### The Knowledge Sturcture
-Each explanation comprises either a single term or a list of similar terms, accompanied by their detailed descriptions. Here is an example:
-```json
-{
-    "term": ["AR"],
-    "description": "refers to the outstanding invoices a company has or the money clients owe the company"
-}
-```
+In your Chat2Query Data App, you can create a knowledge base for a specific database by calling the `/v3/knowledgeBases` endpoint. After creation, you will get a `knowledge_base_id` for future knowledge management.
 
+The following is a general code example for calling this endpoint.
 
-#### When to Use
-The primary function of the `Term-Sheet Explanation` is to improve Chat2Query's comprehension of user queries. It is typically utilized in the following situations:
-
-1. When handling industry-specific terminology or acronyms that may not be universally recognized.
-2. When ambiguities in the user's query can be clarified using a Term-Sheet Explanation.
-3. When users employ terms that carry different meanings in various contexts, a Term-Sheet Explanation can assist Chat2Query in discerning the correct interpretation.
-
-
-### Instruction
-`Instruction` is a piece of textual command. It is used to guide or control the behavior of Chat2Query, specifically instructing it on how to generate SQL according to specific requirements or conditions.
-
-> **Note:**
+> **Tip**
 >
-> The `Instruction` has a length requirement and it should not exceed 512 characters.
+> To get a specific code example for your endpoint, click the endpoint name in the left pane of your Data App, and then click **Show Code Example**. For more information, see [Get the example code of an endpoint](/tidb-cloud/use-chat2query-api.md#get-the-example-code-of-an-endpoint).
 
-#### The Knowledge Sturcture
-As mentioned above, `Instruction` is a piece of textual command. Here is an example:
-```json
-{
-    "instruction": "If the task requires calculating the sequential growth rate: Using LAG function with OVER clause in SQL"
-}
-```
-
-#### When to Use
-There are many scenarios where `Instruction` can be used. What you need to remember is that the purpose of using `Instruction` is to guide Chat2Query to output according to your requirements. What you need to do is to provide as clear and specific `Instruction` as possible. Here are two use case scenarios:
-
-1. When you want to limit the scope of the query: If you only want the SQL to consider certain tables or fields, you can use an `Instruction` to specify this.
-
-2. When you want to guide the structure of the SQL: If you have specific requirements for how the SQL should be structured, you can use an `Instruction` to guide Chat2Query.
-
-
-## How to Use Domain Knowledge API
-It's important to note that the knowledge used by Chat2Query is **structured according to the database dimension**. Each database can incorporate the various types of knowledge mentioned above. Chat2Query can only use knowledge from the specific database it's connected to. And, you can connect multiple Chat2Query apps to the same database.
-
-Thus, to utilize the Domain Knowledge API to enhance the SQL generation capabilities of Chat2Query from scratch, the process can be divided into two steps:
-
-#### 1. Create a knowledge base for the connected database in the Chat2Query App.
-You can create a knowledge base for a specific database by calling `/v3/knowledgeBases`. After creation, you'll receive a `knowledge_base_id`, which you'll use for future knowledge management.
-
-For example:
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/knowledgeBases'\
  --header 'content-type: application/json'\
  --data-raw '{
     "cluster_id": "<The ID of the cluster to which the database belongs>",
-    "database": "<The name of database>",
+    "database": "<The name of the target database>",
     "description": "<Your knowledge base description>"
 }'
 ```
@@ -125,12 +59,149 @@ An example response is as follows:
 }
 ```
 
+After getting the response, record the `knowledge_base_id` value in your response for later use.
 
-#### 2. Add your chosen knowledge to the newly created knowledge base.
+## Step 2. Choose a knowledge type
 
-For example, if you want Chat2Query to consistently use the `LAG` function with the `OVER` clause in SQL queries when addressing questions about calculating sequential growth rates, you can opt to add an `Instruction` type of knowledge.
+The knowledge base of each database can contain multiple types of knowledge. Before adding knowledge to your knowledge base, you need to choose a knowledge type that best suits your use case.
 
-To add new knowledge, you can call `/v3/knowledgeBases/{knowledge_base_id}/data`, this is demonstrated as follows:
+Currently, Chat2Query knowledge bases support the following knowledge types. Each type is specifically designed for different scenarios and has a unique knowledge structure.
+
+- Few-shot example
+- Term-sheet explanation
+- Instruction
+
+### Few-shot example
+
+Few-shot example refers to the Q&A learning samples provided to Chat2Query, which include sample questions and their corresponding answers. These examples help Chat2Query handle new tasks more effectively.
+
+> **Note:**
+>
+> Make sure the accuracy of newly added examples, because the quality of examples affects how well Chat2Query learns. Poor examples, such as mismatched questions and answers, can degrade Chat2Query performance on new tasks.
+
+#### Knowledge structure
+
+Each example consists of a sample question and its corresponding answer.
+
+For example:
+
+```json
+{
+    "question": "How many records are in the 'test' table?",
+    "answer": "SELECT COUNT(*) FROM `test`;"
+}
+```
+
+#### When to use
+
+Few-Shot examples can significantly improve the performance of Chat2Query in various scenarios, including but not limited to the following:
+
+1. **When dealing with rare or complex question**: if Chat2Query encounters infrequent or complex questions, adding few-shot examples can enhance its understanding and make the results more accurate.
+
+2. **When struggling with a certain type of question**: if Chat2Query frequently makes mistakes or has difficulty with specific questions, adding few-shot examples can help improve its performance on these questions.
+
+### Term-sheet explanation
+
+Term-sheet explanation refers to a comprehensive explanation of a specific term or a group of similar terms, helping Chat2Query understand the meaning and usage of these terms.
+
+> **Note:**
+>
+> Make sure the accuracy of newly added term explanations, because the quality of explanations affects how well Chat2Query learns. Incorrect interpretations do not improve Chat2Query results but also potentially lead to adverse effects.
+
+#### Knowledge structure
+
+Each explanation includes either a single term or a list of similar terms and their detailed descriptions.
+
+For example:
+
+```json
+{
+    "term": ["OSS"],
+    "description": "OSS Insight is a powerful tool that provides online data analysis for users based on nearly 6 billion rows of GitHub event data."
+}
+```
+
+#### When to use
+
+Term-sheet explanation is primarily used to improve Chat2Query's comprehension of user queries, especially in these situations:
+
+- **Dealing with industry-specific terminology or acronyms**: when your query contains industry-specific terminology or acronyms that might not be universally recognized, using a term-sheet explanation can help Chat2Query understand the meaning and usage of these terms.
+- **Dealing with ambiguities in user queries**: when your query contains ambiguous concepts that is confusing, using a term-sheet explanation can help Chat2Query clarify these ambiguities.
+- **Dealing with terms with various meanings**: when your query contains terms that carry different meanings in various contexts, using a term-sheet explanation can assist Chat2Query in discerning the correct interpretation.
+
+### Instruction
+
+Instruction is a piece of textual command. It is used to guide or control the behavior of Chat2Query, specifically instructing it on how to generate SQL according to specific requirements or conditions.
+
+> **Note:**
+>
+> - The instruction has a length limit of 512 characters.
+> - Make sure to provide as clear and specific instructions as possible to ensure that Chat2Query can understand and execute the instructions effectively.
+
+#### Knowledge structure
+
+Instruction only includes a piece of textual command.
+
+For example:
+
+```json
+{
+    "instruction": "If the task requires calculating the sequential growth rate, use the LAG function with the OVER clause in SQL"
+}
+```
+
+#### When to use
+
+Instruction can be used in many scenarios to guide Chat2Query to output according to your requirements, including but not limited to the following:
+
+1. **Limiting query scope**: if you want the SQL to consider only certain tables or fields, use an instruction to specify this.
+2. **Guiding SQL structure**: if you have specific requirements for the SQL structure, use an instruction to guide Chat2Query.
+
+## Step 3. Add knowledge to the newly created knowledge base
+
+To add new knowledge, you can call the `/v3/knowledgeBases/{knowledge_base_id}/data` endpoint.
+
+### Add a few-shot example type of knowledge
+
+For example, if you want Chat2Query to generate SQL statements of the count of rows in a table in a specific structure, you can add a few-shot example type of knowledge by calling `/v3/knowledgeBases/{knowledge_base_id}/data` as follows:
+
+```bash
+curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/knowledgeBases/<knowledge_base_id>/data'\
+ --header 'content-type: application/json'\
+ --data-raw '{
+    "type": "few-shot",
+    "meta_data": {},
+    "raw_data": {
+         "question": "How many records are in the 'test' table?",
+         "answer": "SELECT COUNT(*) FROM `test`;"
+    }
+}'
+```
+
+In the preceding example code, `"type": "few-shot"` represents the few-shot example knowledge type.
+
+### Add a term-sheet explanation type of knowledge
+
+For example, if you want Chat2Query to comprehend the meaning of the term `OSS` using your provided explanation, you can add a term-sheet explanation type of knowledge by calling `/v3/knowledgeBases/{knowledge_base_id}/data` as follows:
+
+```bash
+curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/knowledgeBases/<knowledge_base_id>/data'\
+ --header 'content-type: application/json'\
+ --data-raw '{
+    "type": "term-sheet",
+    "meta_data": {},
+    "raw_data": {
+        "term": ["OSS"],
+        "description": "OSS Insight is a powerful tool that provides online data analysis for users based on nearly 6 billion rows of GitHub event data."
+    }
+}'
+```
+
+In the preceding example code, `"type": "term-sheet"` represents the term-sheet explanation knowledge type.
+
+### Add an instruction type of knowledge
+
+For example, if you want Chat2Query to consistently use the `LAG` function with the `OVER` clause in SQL queries when dealing with questions about sequential growth rate calculation, you can add an instruction type of knowledge by calling `/v3/knowledgeBases/{knowledge_base_id}/data` as follows:
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/knowledgeBases/<knowledge_base_id>/data'\
@@ -139,13 +210,9 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
     "type": "instruction",
     "meta_data": {},
     "raw_data": {
-        "instruction": "If the task requires calculating the sequential growth rate: Using LAG function with OVER clause in SQL"
+        "instruction": "If the task requires calculating the sequential growth rate, use the LAG function with the OVER clause in SQL"
     }
 }'
 ```
 
-In the preceding code, The `type` parameter represents the type of the knowledge, defined as follows:
-
-- `type` = 'few-shot': stand for `Few-Shot Example`.
-- `type` = 'term-sheet': stand for `Term-Sheet Explanation`.
-- `type` = 'instruction': stand for `Few-Shot Example`.
+In the preceding example code, `"type": "instruction"` represents the instruction knowledge type.
