@@ -7,17 +7,17 @@ summary: Learn about how to use the TiDB Cloud budget feature to monitor your co
 
 In TiDB Cloud, you can use the billing budget feature to monitor your costs and keep your spending under control.
 
-TiDB Cloud provides two types of budgets:
+When your monthly actual costs exceed the percentage thresholds of your specified budget, alert emails are sent to your organization owners and billing administrators. These notifications help you stay informed and take proactive measures to manage your spending, aligning your expenses with your budget.
 
-- **Serverless Spending Limit** budget: for each TiDB Serverless scalable cluster, TiDB Cloud automatically creates a **Serverless Spending Limit** budget to help you track its actual cost against the [spending limit](https://docs.pingcap.com/tidbcloud/manage-serverless-spend-limit) configured on that cluster. It includes three threshold rules: 75%, 90%, and 100% of the budget.
+TiDB Cloud provides two types of budgets to help you track your spending:
 
-- **Custom** budget: you can create custom budgets to track actual costs for an entire organization or specific projects, as instructed in the subsequent sections of this document. For each budget, you can configure its scope, target spending amount, and alert thresholds. After a custom budget is created, you can compare your monthly actual costs with your planned costs to ensure that you are not over budget.
+- **Serverless Spending Limit** budget: for each TiDB Serverless scalable cluster, TiDB Cloud automatically creates a **Serverless Spending Limit** budget. This budget helps you track the actual cost against the [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) configured on that cluster. It includes three threshold rules: 75%, 90%, and 100% of the budget, which are not editable.
 
- When your monthly actual costs exceed the percentage thresholds of your budget amount or [spending limit](https://docs.pingcap.com/tidbcloud/manage-serverless-spend-limit), alert emails are sent to your organization owners and billing admins, which keep you updated on how your spending aligns with your budget.
+- **Custom** budget: you can create custom budgets to track actual costs for an entire organization or specific projects. For each budget, you can specify a budget scope, set a target spending amount, and configure alert thresholds. After creating a custom budget, you can compare your monthly actual costs with your planned costs to ensure you stay within budget.
 
 ## Prerequisites
 
-If you are in the `Organization Owner` or `Organization Billing Admin` role of your organization, you can view, create, edit, and delete budgets of your organization. Otherwise, skip this document.
+To view, create, and edit budgets of your organization, you must be in the `Organization Owner` or `Organization Billing Admin` role of your organization.
 
 ## View the budget information
 
@@ -31,9 +31,11 @@ To view the budget page of your organization, take the following steps:
 
 2. On the **Billing** page, click the **Budgets** tab.
 
-## Create a budget
+For each budget, you can view its name, type, status, amount used, budget amount, period, and scope.
 
-To create a budget to monitor the spending of your organization or specific projects, take the following steps:
+## Create a custom budget
+
+To create a custom budget to monitor the spending of your organization or specific projects, take the following steps:
 
 1. In the lower-left corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-organization" />, and then click **Billing**.
 
@@ -47,29 +49,28 @@ To create a budget to monitor the spending of your organization or specific proj
 
 4. Provide the budget basic settings.
 
-    - **Name**: fill in a name for the budget.
-    - **Period**: select a time range for tracking costs. Currently, you can select **Monthly** as recurring calendar period, which starts on the first day of each month, and resets at the beginning of each month. TiDB Cloud tracks your actual spending during the time range against your budget amount (your planned spending).
-    - **Scope**: either apply the scope to all projects (which means the entire TiDB Cloud organization) or a specific project according to your actual need.
+    - **Name**: enter a name for the budget.
+    - **Period**: select a time range for tracking costs. Currently, you can only select **Monthly**, which starts on the first day of each month and resets at the beginning of each month. TiDB Cloud tracks your actual spending during the time range against your budget amount (your planned spending).
+    - **Scope**: apply the scope to all projects (which means the entire TiDB Cloud organization) or a specific project as needed.
 
 5. Set the budget amount.
 
-    - **Budget Amount**: set a planned spending for the period you selected.
-    - **Apply credits and discounts**: choose whether to apply credits and discounts to the running total cost. Credits are used to reduce the cost of your TiDB Cloud usage, and discounts are reduction in the regular price of TiDB Cloud service. When this option is enabled, the budget tracks the running total cost minus credits and discounts.
+    - **Budget Amount**: enter a planned spending amount for the selected period.
+    - **Apply credits and discounts**: choose whether to apply credits and discounts to the running total cost. Credits are used to reduce the cost of your TiDB Cloud usage, and discounts are reductions in the regular price of TiDB Cloud service. When this option is enabled, the budget tracks the running total cost minus credits and discounts.
 
-6. Set the alert thresholds for the budget. If your actual spending exceeds specified thresholds during the the period you selected, TiDB Cloud sends a budget notification email to your `Organization Owner` and `Organization Billing Admin`.
+6. Configure alert thresholds for the budget. If your actual spending exceeds specified thresholds during the selected period, TiDB Cloud sends a budget notification email to your organization owners and billing administrators.
 
-     By default, TiDB Cloud provides three alert thresholds: 75%, 90%, and 100% of the budget amount. You can modify the percentages of budget thresholds.
-
-    - To add a new alert threshold, click add **Add alert threshold.**
+    - By default, TiDB Cloud provides three alert thresholds: 75%, 90%, and 100% of the budget amount. You can modify these percentages as needed.
+    - To add a new alert threshold, click **Add alert threshold.**
     - To remove a threshold, click the delete icon next to the threshold.
 
 7. Click **Create**.
 
-## Edit a budget
+## Edit a custom budget
 
 > **Note:**
 >
-> The budget in the **Serverless Spending Limit** type cannot be edited because it is automatically created by TiDB Cloud according to the [spending limit](https://docs.pingcap.com/tidbcloud/manage-serverless-spend-limit) configured for your TiDB Serverless scalable cluster.
+> The **Serverless Spending Limit** budget cannot be edited because it is automatically created by TiDB Cloud to help you track the cost of a TiDB Serverless scalable cluster against its [spending limit](/tidb-cloud/manage-serverless-spend-limit.md).
 
 To edit a custom budget, take the following steps:
 
@@ -83,11 +84,11 @@ To edit a custom budget, take the following steps:
 
 3. On the **Budgets** page, locate the row of your budget, click **...** in that row, and then click **Edit**.
 
-## Remove a budget
+## Remove a custom budget
 
 > **Note:**
 >
-> The budget in the **Serverless Spending Limit** type cannot be deleted because it is automatically created by TiDB Cloud according to the [spending limit](https://docs.pingcap.com/tidbcloud/manage-serverless-spend-limit) configured for your TiDB Serverless scalable cluster.
+> The **Serverless Spending Limit** budget cannot be removed because it is automatically created by TiDB Cloud to help you track the cost of a TiDB Serverless scalable cluster against its [spending limit](/tidb-cloud/manage-serverless-spend-limit.md).
 
 To delete a custom budget, take the following steps:
 
