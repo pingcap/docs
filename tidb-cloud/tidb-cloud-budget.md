@@ -1,9 +1,9 @@
 ---
-title: Manage TiDB Cloud Billing Budget
+title: Manage TiDB Cloud Budgets
 summary: Learn about how to use the TiDB Cloud budget feature to monitor your costs.
 ---
 
-# Manage TiDB Cloud Billing Budget
+# Manage TiDB Cloud Budgets
 
 In TiDB Cloud, you can use the billing budget feature to monitor your costs and keep your spending under control.
 
@@ -11,13 +11,25 @@ TiDB Cloud provides two types of budgets:
 
 - **Serverless Spending Limit** budget: for each TiDB Serverless scalable cluster, TiDB Cloud automatically creates a **Serverless Spending Limit** budget to help you track its actual cost against the [spending limit](https://docs.pingcap.com/tidbcloud/manage-serverless-spend-limit) configured on that cluster. It includes three threshold rules: 75%, 90%, and 100% of the budget.
 
-- **Custom** budget: you can create the custom budget to track actual costs for an entire organization or a specific project, as instructed in the subsequent sections of this document. For each budget, you can configure its time period, scope, target amount, and alert thresholds.
+- **Custom** budget: you can create custom budgets to track actual costs for an entire organization or specific projects, as instructed in the subsequent sections of this document. For each budget, you can configure its scope, target spending amount, and alert thresholds. After a custom budget is created, you can compare your monthly actual costs with your planned costs to ensure that you are not over budget.
 
-After a custom budget is created, you can compare your monthly actual costs with your planned costs. When your actual costs in the specified scope exceed a percentage of your budget amount (based on the thresholds you set), alert emails are sent to organization owners and billing admins, which keep you updated on how your spending aligns with your budget.
+ When your monthly actual costs exceed the percentage thresholds of your budget amount or [spending limit](https://docs.pingcap.com/tidbcloud/manage-serverless-spend-limit), alert emails are sent to your organization owners and billing admins, which keep you updated on how your spending aligns with your budget.
 
 ## Prerequisites
 
-If you are in the `Organization Owner` or `Organization Billing Admin` role of your organization, you can create, view, and edit the custom budget of your organization. Otherwise, skip this document.
+If you are in the `Organization Owner` or `Organization Billing Admin` role of your organization, you can view, create, edit, and delete budgets of your organization. Otherwise, skip this document.
+
+## View the budget information
+
+To view the budget page of your organization, take the following steps:
+
+1. In the lower-left corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-organization" />, and then click **Billing**.
+
+    > **Note:**
+    >
+    > If you are in multiple organizations, switch to your target organization by clicking its name.
+
+2. On the **Billing** page, click the **Budgets** tab.
 
 ## Create a budget
 
