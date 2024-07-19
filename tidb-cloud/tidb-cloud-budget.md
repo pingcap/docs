@@ -1,11 +1,11 @@
 ---
-title: Manage TiDB Cloud Budgets
-summary: Learn about how to use the TiDB Cloud budget feature to monitor your costs.
+title: Manage Budgets for TiDB Cloud
+summary: Learn about how to use the budget feature of TiDB Cloud to monitor your costs.
 ---
 
-# Manage TiDB Cloud Budgets
+# Manage Budgets for TiDB Cloud
 
-In TiDB Cloud, you can use the billing budget feature to monitor your costs and keep your spending under control.
+In TiDB Cloud, you can use the budget feature to monitor your costs and keep your spending under control.
 
 When your monthly actual costs exceed the percentage thresholds of your specified budget, alert emails are sent to your organization owners and billing administrators. These notifications help you stay informed and take proactive measures to manage your spending, aligning your expenses with your budget.
 
