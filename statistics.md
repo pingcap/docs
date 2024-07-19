@@ -31,7 +31,7 @@ Based upon the number of changes to a table, TiDB will automatically schedule [`
 
 |  System Variable | Default Value | Description |
 |---|---|---|
-| [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) | `ON` | Controls whether TiDB automatically executes ANALYZE. |
+| [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) | `ON` | Controls whether TiDB automatically executes `ANALYZE`. |
 | [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio) | `0.5` | The threshold value of automatic update. |
 | [`tidb_auto_analyze_start_time`](/system-variables.md#tidb_auto_analyze_start_time) | `00:00 +0000` | The start time in a day when TiDB can perform automatic update. |
 | [`tidb_auto_analyze_end_time`](/system-variables.md#tidb_auto_analyze_end_time)   | `23:59 +0000` | The end time in a day when TiDB can perform automatic update. |
