@@ -109,7 +109,7 @@ You can use the following command to see the available components:
 tiup list
 ```
 
-The command output lists all the available components:
+The command outputs the available components:
 
 ```bash
 Available components:
