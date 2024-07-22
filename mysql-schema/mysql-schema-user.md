@@ -65,6 +65,8 @@ DESC mysql.user;
 
 There are several types of columns in `mysql.user`:
 
+<CustomContent platform="tidb">
+
 * Scope:
     * `Host` and `User` are used to specify a TiDB account
 * Privilege:
@@ -76,5 +78,23 @@ There are several types of columns in `mysql.user`:
     * `User_attributes` provides information about user comments and user attributes
     * `Token_issuer` is used for [`tidb_auth_token`](/security-compatibility-with-mysql.md#tidb_auth_token)
     * `Password_expired`, `Password_last_changed` and `Password_lifetime` are used for [password expiration policy](/password-management.md#password-expiration-policy)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+* Scope:
+    * `Host` and `User` are used to specify a TiDB account
+* Privilege:
+    * From `Select_priv` to `Drop_role_priv`, and from `Shutdown_priv` to `Create_Tablespace_Priv`: see [privileges required for TiDB operations](https://docs.pingcap.com/tidb/stable/privilege-management#privileges-required-for-tidb-operations)
+* Security
+    * `authentication_string` and `plugin`: `authentication_string` records credentials for the accounts. Credentials are interpreted using the authentication plugin named in the `plugin` column.
+    * `Account_locked` records the account locking state.
+    * `Password_reuse_history` and `Password_reuse_time` are used for [password reuse policy](https://docs.pingcap.com/tidb/stable/password-management#password-reuse-policy)
+    * `User_attributes` provides information about user comments and user attributes
+    * `Token_issuer` is used for [`tidb_auth_token`](https://docs.pingcap.com/tidb/stable/security-compatibility-with-mysql#tidb_auth_token)
+    * `Password_expired`, `Password_last_changed` and `Password_lifetime` are used for [password expiration policy](https://docs.pingcap.com/tidb/stable/password-management#password-expiration-policy)
+
+</CustomContent>
 
 Most of the columns above exist in MySQL's `mysql.user`, except `Token_issuer`.
