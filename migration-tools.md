@@ -103,38 +103,49 @@ source ~/.bash_profile
 
 ### Step 2. Install components
 
-You can use the following command to see all the available components:
+You can use the following command to see the available components:
 
 ```shell
 tiup list
 ```
 
-The command output lists all the available components:
+The command outputs the available components:
 
 ```bash
 Available components:
-Name            Owner    Description
-----            -----    -----------
-bench           pingcap  Benchmark database with different workloads
-br              pingcap  TiDB/TiKV cluster backup restore tool
-cdc             pingcap  CDC is a change data capture tool for TiDB
-client          pingcap  Client to connect playground
-cluster         pingcap  Deploy a TiDB cluster for production
-ctl             pingcap  TiDB controller suite
-dm              pingcap  Data Migration Platform manager
-dmctl           pingcap  dmctl component of Data Migration Platform
-errdoc          pingcap  Document about TiDB errors
-pd-recover      pingcap  PD Recover is a disaster recovery tool of PD, used to recover the PD cluster which cannot start or provide services normally
-playground      pingcap  Bootstrap a local TiDB cluster for fun
-tidb            pingcap  TiDB is an open source distributed HTAP database compatible with the MySQL protocol
-tidb-lightning  pingcap  TiDB Lightning is a tool used for fast full import of large amounts of data into a TiDB cluster
-tiup            pingcap  TiUP is a command-line component management tool that can help to download and install TiDB platform components to the local system
+Name            Owner      Description
+----            -----      -----------
+PCC             community  A tool used to capture plan changes among different versions of TiDB
+bench           pingcap    Benchmark database with different workloads
+br              pingcap    TiDB/TiKV cluster backup restore tool.
+cdc             pingcap    CDC is a change data capture tool for TiDB
+chaosd          community  An easy-to-use Chaos Engineering tool used to inject failures to a physical node
+client          pingcap    Client to connect playground
+cloud           pingcap    CLI tool to manage TiDB Cloud
+cluster         pingcap    Deploy a TiDB cluster for production
+ctl             pingcap    TiDB controller suite
+dm              pingcap    Data Migration Platform manager
+dmctl           pingcap    dmctl component of Data Migration Platform.
+errdoc          pingcap    Document about TiDB errors
+pd-recover      pingcap    PD Recover is a disaster recovery tool of PD, used to recover the PD cluster which cannot start or provide services normally.
+playground      pingcap    Bootstrap a local TiDB cluster for fun
+tidb            pingcap    TiDB is an open source distributed HTAP database compatible with the MySQL protocol.
+tidb-dashboard  pingcap    TiDB Dashboard is a Web UI for monitoring, diagnosing, and managing the TiDB cluster
+tidb-lightning  pingcap    TiDB Lightning is a tool used for fast full import of large amounts of data into a TiDB cluster
+tikv-br         pingcap    TiKV cluster backup restore tool
+tikv-cdc        pingcap    TiKV-CDC is a change data capture tool for TiKV
+tiproxy         pingcap    TiProxy is a database proxy that is based on TiDB.
+tiup            pingcap    TiUP is a command-line component management tool that can help to download and install TiDB platform components to the local system
 ```
 
-Choose the components to install:
+Install one or more components that you need. For example:
 
 ```shell
-tiup install dumpling tidb-lightning
+tiup install dm
+```
+
+```shell
+tiup install dm tidb-lightning
 ```
 
 > **Note:**
