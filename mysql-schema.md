@@ -27,7 +27,7 @@ These system tables contain grant information about user accounts and their priv
 `mysql.user` is a frequently used system table. You can display the columns of `mysql.user` by:
 
 ```sql
-desc mysql.user;
+DESC mysql.user;
 ```
 
 ```
