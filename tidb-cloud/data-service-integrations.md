@@ -1,11 +1,11 @@
 ---
 title: Integrate a Data App with Third-Party Tools
-summary: Learn how to integrate a Data App with third-party tools, such as GPTs and Dify, in the TiDB Cloud console.
+summary: Learn how to integrate a TiDB Cloud Data App with third-party tools, such as GPTs and Dify, in the TiDB Cloud console.
 ---
 
 # Integrate a Data App with Third-Party Tools
 
-Integrating third-party tools with your Data App enhances your applications with intelligent capabilities. This integration enables your applications to leverage advanced natural language processing and artificial intelligence (AI) features provided by third-party tools, enabling them to perform more complex tasks and deliver more intelligent solutions.
+Integrating third-party tools with your Data App enhances your applications with advanced natural language processing and artificial intelligence (AI) capabilities provided by third-party tools. This integration enables your applications to perform more complex tasks and deliver intelligent solutions.
 
 This document describes how to integrate a Data App with third-party tools, such as GPTs and Dify, in the TiDB Cloud console.
 
@@ -35,8 +35,6 @@ To integrate your Data App with GPTs, perform the following steps:
 
 ## Integrate your Data App with Dify
 
-You can integrate your Data App with [Dify](https://docs.dify.ai/guides/tools) to enhance your applications with intelligent capabilities.
+You can integrate your Data App with [Dify](https://docs.dify.ai/guides/tools) to enhance your applications with intelligent capabilities, such as vector distance calculations, advanced similarity searches, and vector analysis.
 
-Integrating your Data App with Dify enhances your applications with intelligent capabilities, including vector distance calculations. This integration enables advanced similarity searches and vector analysis.
-
-To integrate your Data App with Dify, follow the same steps as for [GPTs integration](#integrate-your-data-app-with-gpts).
+To integrate your Data App with Dify, follow the same steps as for [GPTs integration](#integrate-your-data-app-with-gpts). The only difference is that on the **Integrations** tab, you need to click **Get Configuration** in the **Integrate with Dify** area.
