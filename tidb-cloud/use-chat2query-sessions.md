@@ -11,7 +11,7 @@ Starting from v3, the Chat2Query API enables you to start multi-round chats by c
 
 Before starting multi-round Chat2Query, make sure that you have the following:
 
-- A [Chat2Query Data App](/tidb-cloud/use-chat2query-api.md#1-create-a-chat2query-data-app)
+- A [Chat2Query Data App](/tidb-cloud/use-chat2query-api.md#1-create-a-chat2query-data-app).
 - An [API key for the Chat2Query Data App](/tidb-cloud/use-chat2query-api.md#create-an-api-key).
 - A [data summary for your target database](/tidb-cloud/use-chat2query-api.md#1-generate-a-data-summary-by-calling-v3datasummaries).
 
@@ -21,7 +21,7 @@ To start a session, you can call the `/v3/sessions` endpoint of your Chat2Query 
 
 The following is a general code example for calling this endpoint.
 
-> **Tip**
+> **Tip:**
 >
 > To get a specific code example for your endpoint, click the endpoint name in the left pane of your Data App, and then click **Show Code Example**. For more information, see [Get the example code of an endpoint](/tidb-cloud/use-chat2query-api.md#get-the-example-code-of-an-endpoint).
 
@@ -43,7 +43,7 @@ In the preceding code, the request body is a JSON object with the following prop
 
 An example response is as follows:
 
-```js
+```json
 {
     "code": 200,
     "msg": "",
@@ -87,7 +87,7 @@ In the preceding code, the request body is a JSON object with the following prop
 
 An example response is as follows:
 
-```js
+```json
 {
   "code": 200,
   "msg": "",

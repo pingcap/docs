@@ -5,7 +5,7 @@ summary: Learn how to improve your Chat2Query results by using Chat2Query knowle
 
 # Use Knowledge Bases
 
- A knowledge base is a collection of structured data that can be used to enhance the SQL generation capabilities of Chat2Query.
+A knowledge base is a collection of structured data that can be used to enhance the SQL generation capabilities of Chat2Query.
 
 Starting from v3, the Chat2Query API enables you to add or modify knowledge bases by calling knowledge base related endpoints of your Chat2Query Data App.
 
@@ -30,7 +30,7 @@ In your Chat2Query Data App, you can create a knowledge base for a specific data
 
 The following is a general code example for calling this endpoint.
 
-> **Tip**
+> **Tip:**
 >
 > To get a specific code example for your endpoint, click the endpoint name in the left pane of your Data App, and then click **Show Code Example**. For more information, see [Get the example code of an endpoint](/tidb-cloud/use-chat2query-api.md#get-the-example-code-of-an-endpoint).
 
@@ -67,9 +67,9 @@ The knowledge base of each database can contain multiple types of knowledge. Bef
 
 Currently, Chat2Query knowledge bases support the following knowledge types. Each type is specifically designed for different scenarios and has a unique knowledge structure.
 
-- Few-shot example
-- Term-sheet explanation
-- Instruction
+- [Few-shot example](#few-shot-example)
+- [Term-sheet explanation](#term-sheet-explanation)
+- [Instruction](#instruction)
 
 ### Few-shot example
 
@@ -77,7 +77,7 @@ Few-shot example refers to the Q&A learning samples provided to Chat2Query, whic
 
 > **Note:**
 >
-> Make sure the accuracy of newly added examples, because the quality of examples affects how well Chat2Query learns. Poor examples, such as mismatched questions and answers, can degrade Chat2Query performance on new tasks.
+> Make sure the accuracy of newly added examples, because the quality of examples affects how well Chat2Query learns. Poor examples, such as mismatched questions and answers, can degrade the performance of Chat2Query on new tasks.
 
 #### Knowledge structure
 
@@ -92,11 +92,11 @@ For example:
 }
 ```
 
-#### When to use
+#### Use cases
 
 Few-Shot examples can significantly improve the performance of Chat2Query in various scenarios, including but not limited to the following:
 
-1. **When dealing with rare or complex question**: if Chat2Query encounters infrequent or complex questions, adding few-shot examples can enhance its understanding and make the results more accurate.
+1. **When dealing with rare or complex questions**: if Chat2Query encounters infrequent or complex questions, adding few-shot examples can enhance its understanding and improve the accuracy of the results.
 
 2. **When struggling with a certain type of question**: if Chat2Query frequently makes mistakes or has difficulty with specific questions, adding few-shot examples can help improve its performance on these questions.
 
@@ -121,7 +121,7 @@ For example:
 }
 ```
 
-#### When to use
+#### Use cases
 
 Term-sheet explanation is primarily used to improve Chat2Query's comprehension of user queries, especially in these situations:
 
@@ -150,12 +150,12 @@ For example:
 }
 ```
 
-#### When to use
+#### Use cases
 
 Instruction can be used in many scenarios to guide Chat2Query to output according to your requirements, including but not limited to the following:
 
-1. **Limiting query scope**: if you want the SQL to consider only certain tables or fields, use an instruction to specify this.
-2. **Guiding SQL structure**: if you have specific requirements for the SQL structure, use an instruction to guide Chat2Query.
+- **Limiting query scope**: if you want the SQL to consider only certain tables or columns, use an instruction to specify this.
+- **Guiding SQL structure**: if you have specific requirements for the SQL structure, use an instruction to guide Chat2Query.
 
 ## Step 3. Add knowledge to the newly created knowledge base
 
