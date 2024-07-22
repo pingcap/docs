@@ -45,7 +45,7 @@ To create a custom budget to monitor the spending of your organization or specif
 
 2. On the **Billing** page, click the **Budgets** tab.
 
-3. On the **Budgets** page, click **Create Custom Budget**. You can create up to 5 custom budgets.
+3. On the **Budgets** page, click **Create Custom Budget**. You can create up to five  custom budgets.
 
 4. Provide the budget basic settings.
 
@@ -84,7 +84,7 @@ To edit a custom budget, take the following steps:
 
 3. On the **Budgets** page, locate the row of your budget, click **...** in that row, and then click **Edit**.
 
-## Remove a custom budget
+## Delete a custom budget
 
 > **Note:**
 >
@@ -100,4 +100,4 @@ To delete a custom budget, take the following steps:
 
 2. On the **Billing** page, click the **Budgets** tab.
 
-3. On the **Budgets** page, locate the row of your budget, click **...** in that row, and then click **Remove**.
+3. On the **Budgets** page, locate the row of your budget, click **...** in that row, and then click **Delete**.
