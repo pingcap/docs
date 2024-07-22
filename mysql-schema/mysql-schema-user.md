@@ -66,15 +66,15 @@ DESC mysql.user;
 There are several types of columns in `mysql.user`:
 
 * Scope:
-  * `Host` and `User` are used to specify a TiDB account
+    * `Host` and `User` are used to specify a TiDB account
 * Privilege:
-  * From `Select_priv` to `Drop_role_priv`, and from `Shutdown_priv` to `Create_Tablespace_Priv`: see [privileges required for TiDB operations](/privilege-management.md#privileges-required-for-tidb-operations)
+    * From `Select_priv` to `Drop_role_priv`, and from `Shutdown_priv` to `Create_Tablespace_Priv`: see [privileges required for TiDB operations](/privilege-management.md#privileges-required-for-tidb-operations)
 * Security
-  * `authentication_string` and `plugin`: `authentication_string` records credentials for the accounts. Credentials are interpreted using the authentication plugin named in the `plugin` column.
-  * `Account_locked` records the account locking state.
-  * `Password_reuse_history` and `Password_reuse_time` are used for [password reuse policy](/password-management.md#password-reuse-policy)
-  * `User_attributes` provides information about user comments and user attributes
-  * `Token_issuer` is used for [`tidb_auth_token`](/security-compatibility-with-mysql.md#tidb_auth_token)
-  * `Password_expired`, `Password_last_changed` and `Password_lifetime` are used for [password expiration policy](/password-management.md#password-expiration-policy)
+    * `authentication_string` and `plugin`: `authentication_string` records credentials for the accounts. Credentials are interpreted using the authentication plugin named in the `plugin` column.
+    * `Account_locked` records the account locking state.
+    * `Password_reuse_history` and `Password_reuse_time` are used for [password reuse policy](/password-management.md#password-reuse-policy)
+    * `User_attributes` provides information about user comments and user attributes
+    * `Token_issuer` is used for [`tidb_auth_token`](/security-compatibility-with-mysql.md#tidb_auth_token)
+    * `Password_expired`, `Password_last_changed` and `Password_lifetime` are used for [password expiration policy](/password-management.md#password-expiration-policy)
 
 Most of the columns above exist in MySQL's `mysql.user`, except `Token_issuer`.
