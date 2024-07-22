@@ -947,7 +947,8 @@
       - [GBK](/character-set-gbk.md)
     - [Placement Rules in SQL](/placement-rules-in-sql.md)
     - System Tables
-      - [Overview](/mysql-schema/mysql-schema.md)
+      - MYSQL
+        - [Overview](/mysql-schema/mysql-schema.md)
         - [`user`](/mysql-schema/mysql-schema-user.md)
       - INFORMATION_SCHEMA
         - [Overview](/information-schema/information-schema.md)
