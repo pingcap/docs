@@ -286,7 +286,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
 - The [`information_schema.CHECK_CONSTRAINTS`](/information-schema/information-schema-check-constraints.md) table is added for improved compatibility with MySQL 8.0.
 
-- For transactions containing multiple changes, if the primary key or non-null unique index value is modified in the update event, TiCDC splits an event into delete and insert events and ensures that all events follow the sequence of delete events preceding insert events. For more information, see [documentation](/ticdc/ticdc-behavior-change.md#transactions-containing-multiple-update-changes).
+- For transactions containing multiple changes, if the primary key or non-null unique index value is modified in the update event, TiCDC splits an event into delete and insert events and ensures that all events follow the sequence of delete events preceding insert events. For more information, see [documentation](/ticdc/ticdc-split-update-behavior.md#transactions-containing-multiple-update-changes).
 
 ### System variables
 
@@ -496,4 +496,4 @@ We would like to thank the following contributors from the TiDB community:
 - [shawn0915](https://github.com/shawn0915)
 - [tedyu](https://github.com/tedyu)
 - [yumchina](https://github.com/yumchina)
-- [ZhuohaoHe](https://github.com/ZhuohaoHe)
+- [ZzzhHe](https://github.com/ZzzhHe)
