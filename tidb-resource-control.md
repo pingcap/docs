@@ -589,7 +589,7 @@ The system table [`INFORMATION_SCHEMA.statements_summary`](/statement-summary-ta
 
 ### View the RU consumption of resource groups
 
-Starting from v7.6.0, TiDB provides the system table [`mysql.request_unit_by_group`](/mysql-schema.md#system-tables-related-to-resource-control) to store the historical records of the RU consumption of each resource group.
+Starting from v7.6.0, TiDB provides the system table [`mysql.request_unit_by_group`](/mysql-schema/mysql-schema.md#system-tables-related-to-resource-control) to store the historical records of the RU consumption of each resource group.
 
 Example:
 
