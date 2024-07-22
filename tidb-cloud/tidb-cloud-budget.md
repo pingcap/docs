@@ -87,6 +87,8 @@ To edit a custom budget, take the following steps:
 
 4. Edit the custom budget information as needed. 
 
+5. Click **Update**.
+
 ## Delete a custom budget
 
 > **Note:**
