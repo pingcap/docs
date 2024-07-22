@@ -17,7 +17,7 @@ TiDB Cloud provides two types of budgets to help you track your spending:
 
 ## Prerequisites
 
-To view, create, and edit budgets of your organization, you must be in the `Organization Owner` or `Organization Billing Admin` role of your organization.
+To view, create, edit, or delete budgets of your organization or projects, you must be in the `Organization Owner` or `Organization Billing Admin` role of your organization.
 
 ## View the budget information
 
@@ -84,11 +84,13 @@ To edit a custom budget, take the following steps:
 
 3. On the **Budgets** page, locate the row of your budget, click **...** in that row, and then click **Edit**.
 
+4. Edit the custom budget information as needed. 
+
 ## Delete a custom budget
 
 > **Note:**
 >
-> The **Serverless Spending Limit** budget cannot be removed because it is automatically created by TiDB Cloud to help you track the cost of a TiDB Serverless scalable cluster against its [spending limit](/tidb-cloud/manage-serverless-spend-limit.md).
+> The **Serverless Spending Limit** budget cannot be deleted because it is automatically created by TiDB Cloud to help you track the cost of a TiDB Serverless scalable cluster against its [spending limit](/tidb-cloud/manage-serverless-spend-limit.md).
 
 To delete a custom budget, take the following steps:
 
