@@ -10,7 +10,7 @@ The `mysql` schema contains TiDB system tables. The design is similar to the `my
 
 > **Note:**
 >
-> In most scenarios, it is not recommended to change system tables directly by `ALTER TABLE`. Instead, the recommended way is to use [`CREATE USER`](/sql-statements/sql-statement-create-user.md)/[`ALTER USER`](/sql-statements/sql-statement-alter-user.md)/ [`DROP USER`](/sql-statements/sql-statement-drop-user.md)/[`GRANT`](/sql-statements/sql-statement-grant-privileges.md)/[`REVOKE`](/sql-statements/sql-statement-revoke-privileges.md) etc. If you still want to alter the system tables directly, [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md) is needed to make the change take effect.
+> In most scenarios, it is not recommended to change the content of system tables directly by using `INSERT`/`UPDATE`/or `DELETE`. Instead, the recommended way is to use [`CREATE USER`](/sql-statements/sql-statement-create-user.md)/[`ALTER USER`](/sql-statements/sql-statement-alter-user.md)/ [`DROP USER`](/sql-statements/sql-statement-drop-user.md)/[`GRANT`](/sql-statements/sql-statement-grant-privileges.md)/[`REVOKE`](/sql-statements/sql-statement-revoke-privileges.md)/[`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md) etc. If you still want to alter the system tables directly, [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md) is needed to make the change take effect.
 
 ## Grant system tables
 
