@@ -76,3 +76,5 @@ There are several types of columns in `mysql.user`:
   * `User_attributes` provides information about user comments and user attributes
   * `Token_issuer` is used for [`tidb_auth_token`](/security-compatibility-with-mysql.md#tidb_auth_token)
   * `Password_expired`, `Password_last_changed` and `Password_lifetime` are used for [password expiration policy](/password-management.md#password-expiration-policy)
+
+Most of the columns above exist in MySQL's `mysql.user`, except `Token_issuer`.
