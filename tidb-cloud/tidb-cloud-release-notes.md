@@ -10,6 +10,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## July 23, 2024
 
+**General changes**
+
 - [Data Service (beta)](https://tidbcloud.com/console/data-service) supports automatically generating vector search endpoints.
 
     If your table contains [vector data types](/tidb-cloud/vector-search-data-types.md), you can automatically generate a vector search endpoint that calculates vector distances based on your selected distance function.
