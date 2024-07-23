@@ -152,13 +152,13 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
     <CustomContent platform="tidb">
 
-        After the setting, TiDB always writes the `PREDICATE COLUMNS` information to the [`mysql.column_stats_usage`](/mysql-schema.md#statistics-system-tables) system table every 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease).
+    After the setting, TiDB always writes the `PREDICATE COLUMNS` information to the [`mysql.column_stats_usage`](/mysql-schema.md#statistics-system-tables) system table every 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease).
 
     </CustomContent>
 
     <CustomContent platform="tidb-cloud">
 
-        After the setting, TiDB writes the `PREDICATE COLUMNS` information to the [`mysql.column_stats_usage`](/mysql-schema.md#statistics-system-tables) system table every 300 seconds.
+    After the setting, TiDB writes the `PREDICATE COLUMNS` information to the [`mysql.column_stats_usage`](/mysql-schema.md#statistics-system-tables) system table every 300 seconds.
 
     </CustomContent>
 
