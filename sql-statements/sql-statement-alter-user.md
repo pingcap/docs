@@ -200,10 +200,9 @@ SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user W
 
 ## See also
 
-* [TiDB User Account Management](/user-account-management.md)
-
 <CustomContent platform="tidb">
 
+* [TiDB User Account Management](/user-account-management.md)
 * [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
 
 </CustomContent>

@@ -31,7 +31,7 @@ Use the following statement to grant the `xxx` user all privileges on all databa
 GRANT ALL PRIVILEGES ON *.* TO 'xxx'@'%';
 ```
 
-By default, [`GRANT`](/sql-statements/sql-statement-grant-privileges.md) statements will return an error if the user specified does not exist. This behavior depends on if the [SQL Mode](/system-variables.md#sql_mode) `NO_AUTO_CREATE_USER` is specified:
+By default, [`GRANT`](/sql-statements/sql-statement-grant-privileges.md) statements will return an error if the user specified does not exist. This behavior depends on if the [SQL mode](/system-variables.md#sql_mode) `NO_AUTO_CREATE_USER` is specified:
 
 ```sql
 SET sql_mode=DEFAULT;
@@ -159,7 +159,7 @@ In this example, because of the `%` in `te%`, all the databases starting with `t
 
 The [`REVOKE`](/sql-statements/sql-statement-revoke-privileges.md) statement enables system administrators to revoke privileges from the user accounts.
 
-The [`REVOKE`](/sql-statements/sql-statement-revoke-privileges.md) statement corresponds with the [`REVOKE`](/sql-statements/sql-statement-revoke-privileges.md) statement:
+The `REVOKE` statement corresponds with the `REVOKE` statement:
 
 ```sql
 REVOKE ALL PRIVILEGES ON `test`.* FROM 'genius'@'localhost';
@@ -499,7 +499,7 @@ When the system variable [`tidb_resource_control_strict_mode`](/system-variables
 
 ### Privilege table
 
-The following [mysql system tables](/mysql-schema.md) are special because all the privilege-related data is stored in them:
+The following [`mysql` system tables](/mysql-schema.md) are special because all the privilege-related data is stored in them:
 
 - `mysql.user` (user account, global privilege)
 - `mysql.db` (database-level privilege)

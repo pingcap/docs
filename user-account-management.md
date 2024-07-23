@@ -69,7 +69,7 @@ Equivalent to:
 CREATE USER 'test'@'%' IDENTIFIED BY '';
 ```
 
-If the specified user does not exist, the behavior of automatically creating users depends on [`sql_mode`](/system-variables.md#sql_mode). If the [`sql_mode`](/system-variables.md#sql_mode) includes `NO_AUTO_CREATE_USER`, the `GRANT` statement will not create users with an error returned.
+If the specified user does not exist, the behavior of automatically creating users depends on [`sql_mode`](/system-variables.md#sql_mode). If the `sql_mode` includes `NO_AUTO_CREATE_USER`, the `GRANT` statement will not create users with an error returned.
 
 For example, assume that the `sql_mode` does not include `NO_AUTO_CREATE_USER`, and you use the following `CREATE USER` and `GRANT` statements to create four accounts:
 
