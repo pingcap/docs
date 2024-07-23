@@ -233,6 +233,9 @@ SHOW GRANTS; -- show grants for the current user
 +-------------------------------------------------------------+
 | GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION |
 +-------------------------------------------------------------+
+```
+
+```sql
 SHOW GRANTS FOR 'root'@'%'; -- show grants for a specific user
 ```
 
