@@ -120,7 +120,7 @@ TiDB Cloud Data Service provides the following Chat2Query v3 endpoints and v2 en
 | GET    | `/v3/sessions/{session_id}` | This endpoint retrieves the details of a specific session. |
 | PUT    | `/v3/sessions/{session_id}` | This endpoint updates a specific session. |
 | PUT    | `/v3/sessions/{session_id}/reset` | This endpoint resets a specific session. |
-| POST   | `/v3/sessions/{session_id}/chat2data` | This endpoint generates and executes SQL statements within a specific session using artificial intelligence. For more information, see [Start multi-round Chat2Query by using sessions](#start-multi-round-chat2query-by-using-sessions). |
+| POST   | `/v3/sessions/{session_id}/chat2data` | This endpoint generates and executes SQL statements within a specific session using artificial intelligence. For more information, see [Start multi-round Chat2Query by using sessions](/tidb-cloud/use-chat2query-sessions.md). |
 | POST   | `/v3/chat2data` | This endpoint enables you to generate and execute SQL statements using artificial intelligence by providing the data summary ID and instructions. |
 | POST   | `/v3/refineSql` | This endpoint refines existing SQL queries using artificial intelligence. |
 | POST   | `/v3/suggestQuestions` | This endpoint suggests questions based on the provided data summary. |

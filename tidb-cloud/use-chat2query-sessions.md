@@ -11,7 +11,7 @@ Starting from v3, the Chat2Query API enables you to start multi-round chats by c
 
 Before starting multi-round Chat2Query, make sure that you have the following:
 
-- A [Chat2Query Data App](/tidb-cloud/use-chat2query-api.md#1-create-a-chat2query-data-app).
+- A [Chat2Query Data App](/tidb-cloud/use-chat2query-api.md#create-a-chat2query-data-app).
 - An [API key for the Chat2Query Data App](/tidb-cloud/use-chat2query-api.md#create-an-api-key).
 - A [data summary for your target database](/tidb-cloud/use-chat2query-api.md#1-generate-a-data-summary-by-calling-v3datasummaries).
 
@@ -23,7 +23,7 @@ The following is a general code example for calling this endpoint.
 
 > **Tip:**
 >
-> To get a specific code example for your endpoint, click the endpoint name in the left pane of your Data App, and then click **Show Code Example**. For more information, see [Get the example code of an endpoint](/tidb-cloud/use-chat2query-api.md#get-the-example-code-of-an-endpoint).
+> To get a specific code example for your endpoint, click the endpoint name in the left pane of your Data App, and then click **Show Code Example**. For more information, see [Get the example code of an endpoint](/tidb-cloud/use-chat2query-api.md#get-the-code-example-of-an-endpoint).
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/sessions'\
