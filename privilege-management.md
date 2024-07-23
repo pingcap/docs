@@ -159,7 +159,7 @@ In this example, because of the `%` in `te%`, all the databases starting with `t
 
 The [`REVOKE`](/sql-statements/sql-statement-revoke-privileges.md) statement enables system administrators to revoke privileges from the user accounts.
 
-The `REVOKE` statement corresponds with the `REVOKE` statement:
+The `REVOKE` statement corresponds with the `GRANT` statement:
 
 ```sql
 REVOKE ALL PRIVILEGES ON `test`.* FROM 'genius'@'localhost';
