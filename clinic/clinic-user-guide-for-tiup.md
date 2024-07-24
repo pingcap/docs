@@ -181,7 +181,7 @@ With Diag, you can collect data from the TiDB clusters and the DM clusters deplo
         > To get available metric prefixes, you can query the TiDB monitoring API using the following command:
         >
         > ```bash
-        > `$ curl -s 'http://${prometheus-host}:${prometheus-port}/api/v1/label/__name__/values' | jq -r '.data[]' | cut -d\_ -f1 | uniq -c | sort -rn`
+        > $ curl -s 'http://${prometheus-host}:${prometheus-port}/api/v1/label/__name__/values' | jq -r '.data[]' | cut -d\_ -f1 | uniq -c | sort -rn
         > ```
 
     After you run the command, Diag does not start collecting data immediately. Instead, Diag provides the estimated data size and the target data storage path in the output for you to confirm whether to continue. For example:
