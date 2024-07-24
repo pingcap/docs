@@ -1128,7 +1128,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Type: Enumeration
 - Default value: `PREDICATE`
 - Value options:`ALL`, `PREDICATE`
-- This variable controls the behavior of the ANALYZE TABLE statement. Setting it to PREDICATE means only collecting statistics for [predicate columns](/statistics.md#collect-statistics-on-some-columns) while setting it to ALL means collecting statistics for all columns. In scenarios where `OLAP` queries are used, it is recommended to set it to `ALL`, otherwise query performance will significantly degrade.
+- This variable controls the behavior of the `ANALYZE TABLE` statement. Setting it to `PREDICATE` means only collecting statistics for [predicate columns](/statistics.md#collect-statistics-on-some-columns); setting it to `ALL` means collecting statistics for all columns. In scenarios where OLAP queries are used, it is recommended to set it to `ALL`, otherwise query performance can significantly degrade.
 
 ### tidb_analyze_distsql_scan_concurrency <span class="version-mark">New in v7.6.0</span>
 
