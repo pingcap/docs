@@ -178,7 +178,7 @@ With Diag, you can collect data from the TiDB clusters and the DM clusters deplo
     
         > **Tip:**
         >
-        > To get available metric prefixes, you can query the TiDB monitoring API using the following command.
+        > To get available metric prefixes, you can query the TiDB monitoring API using the following command:
         >
         > ```bash
         > `$ curl -s 'http://${prometheus-host}:${prometheus-port}/api/v1/label/__name__/values' | jq -r '.data[]' | cut -d\_ -f1 | uniq -c | sort -rn`
