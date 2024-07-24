@@ -45,7 +45,7 @@ To create a custom budget to monitor the spending of your organization or specif
 
 2. On the **Billing** page, click the **Budgets** tab.
 
-3. On the **Budgets** page, click **Create Custom Budget**. You can create up to five  custom budgets.
+3. On the **Budgets** page, click **Create Custom Budget**. You can create up to five custom budgets.
 
 4. Provide the budget basic settings.
 
