@@ -4490,8 +4490,14 @@ EXPLAIN FORMAT='brief' SELECT COUNT(1) FROM t WHERE a = 1 AND b IS NOT NULL;
 - Scope: SESSION
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
-- Default value: `OFF`
-- Specifies whether to allow the optimizer to push `Projection` down to the TiKV or TiFlash coprocessor.
+- Default value: `ON`
+- Specifies whether to allow the optimizer to push `Projection` down to the TiKV coprocessor. Currently only three types of `Projection` operators are allowed to be pushed down:
+    - The top-level expressions of the operator are all JSON query class or JSON value attribute class functions, such as `JSON_EXTRACT`, `JSON_DEPTH`, etc.
+    - The top-level expressions of the operator are partly JSON query class or JSON value attribute class functions, and partly direct column reads.
+    - The top-level expressions of the operator are all direct column reads, and the number of columns output is less than the number of columns input.
+- Whether the `Projection` operator is finally pushed down or not depends on the optimizer's comprehensive evaluation of performance.
+- This variable is disabled by default for TiDB clusters that are upgraded from a version earlier than v8.3.0 to v8.3.0 or later.
+
 
 ### tidb_opt_range_max_size <span class="version-mark">New in v6.4.0</span>
 
