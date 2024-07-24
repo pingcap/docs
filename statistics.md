@@ -321,9 +321,6 @@ To locate `PREDICATE COLUMNS` and columns on which statistics have been collecte
 In the following example, after executing `ANALYZE TABLE t PREDICATE COLUMNS;`, TiDB collects statistics on columns `b`, `c`, and `d`, where column `b` is a `PREDICATE COLUMN` and columns `c` and `d` are index columns.
 
 ```sql
-SET GLOBAL tidb_enable_column_tracking = ON;
-Query OK, 0 rows affected (0.00 sec)
-
 CREATE TABLE t (a INT, b INT, c INT, d INT, INDEX idx_c_d(c, d));
 Query OK, 0 rows affected (0.00 sec)
 
