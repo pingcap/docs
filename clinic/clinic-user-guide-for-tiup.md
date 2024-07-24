@@ -174,7 +174,7 @@ With Diag, you can collect data from the TiDB clusters and the DM clusters deplo
     - `-N/--node`: only collects data from a specified node. The format is `ip:port`.
     - `--include`: only collects specific types of data. The optional values are `system`, `monitor`, `log`, `config`, and `db_vars`. To include two or more types, you can use `,` as a separator between the types.
     - `--exclude`: does not collect specific types of data. The optional values are `system`, `monitor`, `log`, `config`, and `db_vars`. To exclude two or more types, you can use `,` as a separator between the types.
-    - `--metricsfilter`: only collects specified Prometheus metrics. You can specify metrics using a comma-separated list of metric prefixes. For example: `--metricsfilter=tidb,pd` collects metrics that start with `tidb` and metrics that start with `pd`.
+    - `--metricsfilter`: only collects specified Prometheus metrics. You can specify metrics using a comma-separated list of metric prefixes. For example, `--metricsfilter=tidb,pd` collects metrics that start with `tidb` and metrics that start with `pd`.
     
     > **Tip:**
     >
