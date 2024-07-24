@@ -2002,7 +2002,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Warning:**
 >
-> Starting from v8.3.0, this variable is deprecated. TiDB tracks predicate columns by default.
+> Starting from v8.3.0, this variable is deprecated. TiDB tracks predicate columns by default. For more information, see [`tidb_analyze_column_options`](#tidb_analyze_column_options-new-in-v830).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes

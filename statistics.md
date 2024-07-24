@@ -144,7 +144,7 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
     In the syntax, `ColumnNameList` specifies the name list of the target columns. If you need to specify more than one column, use comma `,` to separate the column names. For example, `ANALYZE table t columns a, b`. Besides collecting statistics on the specific columns in a specific table, this syntax collects statistics on the indexed columns and all indexes in that table at the same time.
 
-- To collect statistics on `PREDICATE COLUMNS` by using the following syntax:
+- To collect statistics on `PREDICATE COLUMNS`, use the following syntax:
 
     ```sql
     ANALYZE TABLE TableName PREDICATE COLUMNS [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
