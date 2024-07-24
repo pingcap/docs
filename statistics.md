@@ -162,7 +162,7 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
     </CustomContent>
 
-    Besides collecting statistics on `PREDICATE COLUMNS` in a specific table, this syntax collects statistics on indexed columns and all indexes in that table at the same time.
+    In addition to collecting statistics on `PREDICATE COLUMNS` in a specific table, this syntax collects statistics on indexed columns and all indexes in that table at the same time.
 
     > **Note:**
     >
