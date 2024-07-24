@@ -1998,6 +1998,19 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `ON`
 - This variable controls whether to record the execution information of each operator in the slow query log and whether to record the [usage statistics of indexes](/information-schema/information-schema-tidb-index-usage.md).
 
+### tidb_enable_column_tracking <span class="version-mark">New in v5.4.0</span>
+
+> **Warning:**
+>
+> Starting from v8.3.0, this variable is deprecated. TiDB tracks predicate columns by default.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to enable TiDB to collect `PREDICATE COLUMNS`. After enabling the collection, if you disable it, the information of previously collected `PREDICATE COLUMNS` is cleared. For details, see [Collect statistics on some columns](/statistics.md#collect-statistics-on-some-columns).
+
 ### tidb_analyze_column_options <span class="version-mark">New in v8.3.0</span>
 
 > **Note:**
