@@ -1112,6 +1112,24 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `OFF`
 - This variable is used to set whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
 
+### tidb_analyze_column_options <span class="version-mark">New in v8.3.0</span>
+
+> **Note:**
+>
+> This variable only works when [`tidb_analyze_version`](#tidb_analyze_version-new-in-v510) is set to `2`.
+>
+> After upgrading a TiDB cluster from a version earlier than v8.3.0, this variable be set to `ALL` to keep the original behavior.
+>
+> Since v8.3.0, for a newly deployed TiDB cluster, this variable is set to `PREDICATE` by default.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Enumeration
+- Default value: `PREDICATE`
+- Value options:`ALL`, `PREDICATE`
+- This variable controls the behavior of the ANALYZE TABLE statement. Setting it to PREDICATE means only collecting statistics for [predicate columns](/statistics.md#collect-statistics-on-some-columns) while setting it to ALL means collecting statistics for all columns. In scenarios where `OLAP` queries are used, it is recommended to set it to `ALL`, otherwise query performance will significantly degrade.
+
 ### tidb_analyze_distsql_scan_concurrency <span class="version-mark">New in v7.6.0</span>
 
 - Scope: GLOBAL
@@ -2010,24 +2028,6 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether to enable TiDB to collect `PREDICATE COLUMNS`. After enabling the collection, if you disable it, the information of previously collected `PREDICATE COLUMNS` is cleared. For details, see [Collect statistics on some columns](/statistics.md#collect-statistics-on-some-columns).
-
-### tidb_analyze_column_options <span class="version-mark">New in v8.3.0</span>
-
-> **Note:**
->
-> This variable only works when [`tidb_analyze_version`](#tidb_analyze_version-new-in-v510) is set to `2`.
->
-> After upgrading a TiDB cluster from a version earlier than v8.3.0, this variable be set to `ALL` to keep the original behavior.
->
-> Since v8.3.0, for a newly deployed TiDB cluster, this variable is set to `PREDICATE` by default.
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Enumeration
-- Default value: `PREDICATE`
-- Value options:`ALL`, `PREDICATE`
-- This variable controls the behavior of the ANALYZE TABLE statement. Setting it to PREDICATE means only collecting statistics for [predicate columns](/statistics.md#collect-statistics-on-some-columns) while setting it to ALL means collecting statistics for all columns. In scenarios where `OLAP` queries are used, it is recommended to set it to `ALL`, otherwise query performance will significantly degrade.
 
 ### tidb_enable_enhanced_security
 
