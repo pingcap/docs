@@ -29,7 +29,7 @@ mysql -P 4000 -u xxx -p
 You can create TiDB accounts in two ways:
 
 - By using the standard account-management SQL statements intended for creating accounts and establishing their privileges, such as [`CREATE USER`](/sql-statements/sql-statement-create-user.md) and [`GRANT`](/sql-statements/sql-statement-grant-privileges.md).
-- By manipulating the privilege tables directly with statements such as [`INSERT`](/sql-statements/sql-statement-insert.md), [`UPDATE`](/sql-statements/sql-statement-update.md), or [`DELETE`](/sql-statements/sql-statement-delete.md) and running [FLUSH PRIVILEGES](/sql-statements/sql-statement-flush-privileges.md). It is not recommended to use this method to create or modify accounts, because it might lead to incomplete updates.
+- By manipulating the privilege tables directly with statements such as [`INSERT`](/sql-statements/sql-statement-insert.md), [`UPDATE`](/sql-statements/sql-statement-update.md), or [`DELETE`](/sql-statements/sql-statement-delete.md) and running [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md). It is not recommended to use this method to create or modify accounts, because it might lead to incomplete updates.
 
 You can also create accounts by using [third party GUI tools](/develop/dev-guide-third-party-support.md#gui).
 
