@@ -2027,7 +2027,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Enumeration
 - Default value: `PREDICATE`
 - Value options:`ALL`, `PREDICATE`
-- This variable controls the behavior of the ANALYZE TABLE statement. Setting it to PREDICATE means only collecting statistics for predicate columns, while setting it to ALL means collecting statistics for all columns. In scenarios where `OLAP` queries are used, it is recommended to set it to `ALL`, otherwise query performance will significantly degrade.
+- This variable controls the behavior of the ANALYZE TABLE statement. Setting it to PREDICATE means only collecting statistics for [predicate columns](/statistics.md#collect-statistics-on-some-columns) while setting it to ALL means collecting statistics for all columns. In scenarios where `OLAP` queries are used, it is recommended to set it to `ALL`, otherwise query performance will significantly degrade.
 
 ### tidb_enable_enhanced_security
 
