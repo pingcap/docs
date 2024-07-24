@@ -4487,7 +4487,7 @@ EXPLAIN FORMAT='brief' SELECT COUNT(1) FROM t WHERE a = 1 AND b IS NOT NULL;
 
 ### tidb_opt_projection_push_down <span class="version-mark">New in v6.1.0</span>
 
-- Scope: SESSION
+- Scope: SESSION | GLOBAL
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `ON`
