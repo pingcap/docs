@@ -291,6 +291,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 >
 > This section provides compatibility changes you need to know when you upgrade from v7.6.0 to the current version (v8.0.0). If you are upgrading from v7.5.0 or earlier versions to the current version, you might also need to check the compatibility changes introduced in intermediate versions.
 
+- Upgrade the default Prometheus version deployed by TiUP from 2.27.1 to 2.49.1.
+- Upgrade the default Grafana version deployed by TiUP from 7.5.11 to 7.5.17.
 - Remove witness-related schedulers that are not GA but are enabled by default [#7765](https://github.com/tikv/pd/pull/7765) @[rleungx](https://github.com/rleungx)
 
 ### Behavior changes
