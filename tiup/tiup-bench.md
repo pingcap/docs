@@ -154,7 +154,7 @@ Flags:
 
 2. Collect statistics:
 
-    For the OLAP scenarios, to ensure that the TiDB optimizer can generate the optimal execution plan, execute the following SQL statements to collect statistics in advance. **We need to set [tidb_analyze_column_options](/system-variables.md#tidb_analyze_column_options-new-in-v830) to `ALL`, otherwise it will result in a significant drop in query performance.**
+    For the OLAP scenarios, to ensure that the TiDB optimizer can generate the optimal execution plan, execute the following SQL statements to collect statistics in advance. **Be sure to set [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830) to `ALL`, otherwise collecting statistics can result in a significant drop in query performance.**
 
     {{< copyable "shell-regular" >}}
 
