@@ -8,6 +8,24 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
+## July 23, 2024
+
+**General changes**
+
+- [Data Service (beta)](https://tidbcloud.com/console/data-service) supports automatically generating vector search endpoints.
+
+    If your table contains [vector data types](/tidb-cloud/vector-search-data-types.md), you can automatically generate a vector search endpoint that calculates vector distances based on your selected distance function.
+
+    This feature enables seamless integration with AI platforms such as [Dify](https://docs.dify.ai/guides/tools) and [GPTs](https://openai.com/blog/introducing-gpts), enhancing your applications with advanced natural language processing and AI capabilities for more complex tasks and intelligent solutions.
+
+    For more information, see [Generate an endpoint automatically](/tidb-cloud/data-service-manage-endpoint.md#generate-an-endpoint-automatically) and [Integrate a Data App with Third-Party Tools](/tidb-cloud/data-service-integrations.md).
+
+- Introduce the budget feature to help you track actual TiDB Cloud costs against planned expenses, preventing unexpected costs.
+
+    To access this feature, you must be in the `Organization Owner` or `Organization Billing Admin` role of your organization.
+
+    For more information, see [Manage budgets for TiDB Cloud](/tidb-cloud/tidb-cloud-budget.md).
+
 ## July 9, 2024
 
 **General changes**
