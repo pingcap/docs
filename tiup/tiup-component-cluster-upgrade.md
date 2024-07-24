@@ -122,6 +122,26 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 - Data type: `BOOLEAN`
 - This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
+### ---pre-upgrade-script
+
+> **Warning:**
+>
+> This option is experimental and is not recommended for production deployments.
+
+- Runs a script before the upgrade.
+- Data type: `STRINGS`
+- This option specifies the path of a script to be run on the node that is to be upgraded.
+
+### ---post-upgrade-script
+
+> **Warning:**
+>
+> This option is experimental and is not recommended for production deployments.
+
+- Runs a script after the upgrade.
+- Data type: `STRINGS`
+- This option specifies the path of a script to be run after the upgrade of a node. This script will be executed on the upgraded node itself.
+
 ## Output
 
 The log of the upgrading progress.
