@@ -2938,7 +2938,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Function: This variable controls the number of concurrent threads during the GC (Garbage Collection) process.
 - Affected GC steps:
   - [Resolve Locks](/garbage-collection-overview.md#resolve-locks): Directly uses the specified number of threads.
-  - [Delete Range](/garbage-collection-overview.md#Delete-Ranges): Uses 1/4 of the specified value (rounded up) as the number of threads.
+  - [Delete Range](/garbage-collection-overview.md#Delete-Ranges): Uses 1/4 of the specified value as the number of threads.
 - Default value explanation: When set to `-1`, TiDB automatically determines the appropriate number of threads.
 
 ### tidb_gc_enable <span class="version-mark">New in v5.0</span>
