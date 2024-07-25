@@ -17,8 +17,8 @@ This document is targeted for the following upgrade paths:
 > 1. You cannot upgrade TiFlash online from versions earlier than 5.3 to 5.3 or later. Instead, you must first stop all the TiFlash instances of the early version, and then upgrade the cluster offline. If other components (such as TiDB and TiKV) do not support an online upgrade, follow the instructions in warnings in [Online upgrade](#online-upgrade).
 > 2. **DO NOT** run DDL statements during the upgrade process. Otherwise, the issue of undefined behavior might occur.
 > 3. **DO NOT** upgrade a TiDB cluster when a DDL statement is being executed in the cluster (usually for the time-consuming DDL statements such as `ADD INDEX` and the column type changes). Before the upgrade, it is recommended to use the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) command to check whether the TiDB cluster has an ongoing DDL job. If the cluster has a DDL job, to upgrade the cluster, wait until the DDL execution is finished or use the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) command to cancel the DDL job before you upgrade the cluster.
->
-> If the TiDB version before upgrade is v7.1.0 or later, you can ignore the preceding warnings 2 and 3. For more information, see [TiDB Smooth Upgrade](/smooth-upgrade-tidb.md).
+> 4. If the TiDB version before upgrade is 7.1.0 or later, you can ignore the preceding warnings 2 and 3. For more information, see [limitations on using TiDB smooth upgrade](/smooth-upgrade-tidb.md#limitations).
+> 5. Be sure to read [limitations on user operations](/smooth-upgrade-tidb.md#limitations-on-user-operations) before upgrading your TiDB cluster using TiUP.
 
 > **Note:**
 >
