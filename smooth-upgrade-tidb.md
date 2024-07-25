@@ -73,6 +73,10 @@ You can take the following steps to upgrade TiDB manually or by using a script:
 
 When using the smooth upgrade feature, note the following limitations.
 
+> **Note:**
+>
+> The limitations in this section apply not only to scenarios using the smooth upgrade feature, but also to [upgrading TiDB using TiUP](/upgrade-tidb-using-tiup.md#upgrade-tidb-using-tiup).
+
 ### Limitations on user operations
 
 * Before the upgrade, consider the following restrictions:
