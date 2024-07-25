@@ -78,7 +78,7 @@ The `mysql.user` table contains several fields that can be categorized into thre
 
     The fields ending with `_priv` or `_Priv` define the permissions granted to a user account. For example, `Select_priv` means that the user has global `Select` privilege. For more information, see [Privileges required for TiDB operations](/privilege-management.md#privileges-required-for-tidb-operations).
 
-* Security
+* Security:
     * `authentication_string` and `plugin`: `authentication_string` stores the credentials for the user account. The credentials are interpreted based on the authentication plugin specified in the `plugin` field.
     * `Account_locked`: indicates whether the user account is locked.
     * `Password_reuse_history` and `Password_reuse_time`: used for [Password reuse policy](/password-management.md#password-reuse-policy).
@@ -97,7 +97,7 @@ The `mysql.user` table contains several fields that can be categorized into thre
 
     The fields ending with `_priv` or `_Priv` define the permissions granted to a user account. For example, `Select_priv` means that the user has global `Select` privilege. For more information, see [Privileges required for TiDB operations](https://docs.pingcap.com/tidb/stable/privilege-management#privileges-required-for-tidb-operations).
 
-* Security
+* Security:
     * `authentication_string` and `plugin`: `authentication_string` stores the credentials for the user account. The credentials are interpreted based on the authentication plugin specified in the `plugin` field.
     * `Account_locked`: indicates whether the user account is locked.
     * `Password_reuse_history` and `Password_reuse_time`: used for [Password reuse policy](https://docs.pingcap.com/tidb/stable/password-management#password-reuse-policy).
