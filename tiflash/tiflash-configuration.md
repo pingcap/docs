@@ -280,6 +280,7 @@ The parameters in `tiflash-learner.toml` are basically the same as those in TiKV
 [log]
     ## The log level of TiFlash proxy (available options: "trace", "debug", "info", "warn", "error"). The default value is "info". Introduced in v5.4.0.
     level = "info"
+
 [log.file]
     ## The maximum number of log files to save. Introduced in v5.4.0.
     ## If this parameter is not set or set to the default value `0`, TiFlash Proxy saves all log files.
@@ -289,8 +290,10 @@ The parameters in `tiflash-learner.toml` are basically the same as those in TiKV
     ## If this parameter is not set or set to the default value `0`, TiFlash Proxy retains all log files.
     ## If this parameter is set to a non-zero value, TiKV cleans up outdated log files after the number of days specified by `max-days`.
     max-days = 0
+
 [server]
     engine-addr = The external access address of the TiFlash coprocessor service.
+
 [raftstore]
     ## The allowable number of threads in the pool that flushes Raft data to storage.
     apply-pool-size = 4
