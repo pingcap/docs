@@ -185,7 +185,7 @@ delta_index_cache_size = 0
     errorlog = "/tidb-deploy/tiflash-9000/log/tiflash_error.log"
     ## Size of a single log file. The default value is "100M".
     size = "100M"
-    ## Maximum number of log files to save. The default value is 10. For the TiFlash log and TiFlash error log, the maximum number of log files to save is `count` respectively.
+    ## Maximum number of log files to save. The default value is 10. For TiFlash logs and TiFlash error logs, the maximum number of log files to save is `count` respectively.
     count = 10
 
 [raft]
