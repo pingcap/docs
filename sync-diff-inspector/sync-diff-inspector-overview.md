@@ -255,6 +255,8 @@ Average Speed: 113.277149MB/s
 - STRUCTURE EQUALITY: Checks whether the table structure is the same
 
 - DATA DIFF ROWS: `rowAdd` / `rowDelete`. Indicates the number of rows that need to be added/deleted to fix the table
+- `UPCOUNT`: The number of rows in this table in the upstream data source
+- `DOWNCOUNT`: The number of rows in this table in the downstream data source
 
 ### SQL statements to fix inconsistent data
 
