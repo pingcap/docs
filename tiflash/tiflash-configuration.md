@@ -276,8 +276,8 @@ delta_index_cache_size = 0
 
 The parameters in `tiflash-learner.toml` are basically the same as those in TiKV. You can refer to [TiKV configuration](/tikv-configuration-file.md) for TiFlash Proxy configuration. The following are only commonly used parameters. Note that:
 
-1. Compared with TiKV, TiFlash Proxy has an extra `raftstore.snap-handle-pool-size` parameter.
-2. The `label` whose key is `engine` is reserved and cannot be configured manually.
+- Compared with TiKV, TiFlash Proxy has an extra `raftstore.snap-handle-pool-size` parameter.
+- The `label` whose key is `engine` is reserved and cannot be configured manually.
 
 ```toml
 [log]
