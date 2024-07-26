@@ -274,7 +274,7 @@ delta_index_cache_size = 0
 
 ### Configure the `tiflash-learner.toml` file
 
-The parameters in `tiflash-learner.toml` are basically the same as those in TiKV. You can refer to [TiKV configuration](/tikv-configuration-file.md) for TiFlash configuration. The following are only commonly used parameters. Note that:
+The parameters in `tiflash-learner.toml` are basically the same as those in TiKV. You can refer to [TiKV configuration](/tikv-configuration-file.md) for TiFlash Proxy configuration. The following are only commonly used parameters. Note that:
 
 1. Compared with TiKV, TiFlash Proxy has an extra `raftstore.snap-handle-pool-size` parameter.
 2. The `label` whose key is `engine` is reserved and cannot be configured manually.
@@ -287,11 +287,11 @@ The parameters in `tiflash-learner.toml` are basically the same as those in TiKV
 [log.file]
     ## The maximum number of log files to save. Introduced in v5.4.0.
     ## If this parameter is not set or set to the default value `0`, TiFlash Proxy saves all log files.
-    ## If this parameter is set to a non-zero value, TiFlash Proxy retains at most the number of old log files specified by `max-backups`. For example, if you set it to `7`, TiKV retains at most 7 old log files.
+    ## If this parameter is set to a non-zero value, TiFlash Proxy retains at most the number of old log files specified by `max-backups`. For example, if you set it to `7`, TiFlash Proxy retains at most 7 old log files.
     max-backups = 0
     ## The maximum number of days that the log files are retained. Introduced in v5.4.0.
     ## If this parameter is not set or set to the default value `0`, TiFlash Proxy retains all log files.
-    ## If this parameter is set to a non-zero value, TiKV cleans up outdated log files after the number of days specified by `max-days`.
+    ## If this parameter is set to a non-zero value, TiFlash Proxy cleans up outdated log files after the number of days specified by `max-days`.
     max-days = 0
 
 [server]
