@@ -291,9 +291,6 @@ The parameters in `tiflash-learner.toml` are basically the same as those in TiKV
     ## If this parameter is set to a non-zero value, TiFlash Proxy cleans up outdated log files after the number of days specified by `max-days`.
     max-days = 0
 
-[server]
-    engine-addr = The external access address of the TiFlash coprocessor service.
-
 [raftstore]
     ## The allowable number of threads in the pool that flushes Raft data to storage.
     apply-pool-size = 4
