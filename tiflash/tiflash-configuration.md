@@ -281,7 +281,7 @@ The parameters in `tiflash-learner.toml` are basically the same as those in TiKV
 
 ```toml
 [log]
-    ## The log level of TiFlash proxy (available options: "trace", "debug", "info", "warn", "error"). The default value is "info". Introduced in v5.4.0.
+    ## The log level of TiFlash Proxy (available options: "trace", "debug", "info", "warn", "error"). The default value is "info". Introduced in v5.4.0.
     level = "info"
 
 [log.file]
