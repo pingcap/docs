@@ -250,22 +250,6 @@ TiCDC guarantees that all data is replicated at least once. When there is duplic
 
 In versions earlier than v6.1.3, `safe-mode` defaults to `true`, which means all `INSERT` and `UPDATE` statements are converted into `REPLACE INTO` statements. In v6.1.3 and later versions, TiCDC can automatically determine whether the downstream has duplicate data, and the default value of `safe-mode` changes to `false`. If no duplicate data is detected, TiCDC replicates `INSERT` and `UPDATE` statements without conversion.
 
-## When the sink of the replication downstream is TiDB or MySQL, what permissions do users of the downstream database need?
-
-When the sink is TiDB or MySQL, the users of the downstream database need the following permissions:
-
-- `Select`
-- `Index`
-- `Insert`
-- `Update`
-- `Delete`
-- `Create`
-- `Drop`
-- `Alter`
-- `Create View`
-
-If you need to replicate `recover table` to the downstream TiDB, you should have the `Super` permission.
-
 ## Why does TiCDC use disks? When does TiCDC write to disks? Does TiCDC use memory buffer to improve replication performance?
 
 When upstream write traffic is at peak hours, the downstream may fail to consume all data in a timely manner, resulting in data pile-up. TiCDC uses disks to process the data that is piled up. TiCDC needs to write data to disks during normal operation. However, this is not usually the bottleneck for replication throughput and replication latency, given that writing to disks only results in latency within a hundred milliseconds. TiCDC also uses memory to accelerate reading data from disks to improve replication performance.
