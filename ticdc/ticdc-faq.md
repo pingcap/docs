@@ -295,9 +295,9 @@ For TiCDC versions earlier than v6.5.2, it is recommended that you deploy TiCDC 
 
 Currently, TiCDC adopts the following order:
 
-1. TiCDC blocks the replication progress of the tables affected by DDL statements until the DDL `CommiTs`. This ensures that DML statements executed before DDL `CommiTs` can be successfully replicated to the downstream first.
+1. TiCDC blocks the replication progress of the tables affected by DDL statements until the DDL `commitTS`. This ensures that DML statements executed before DDL `commitTS` can be successfully replicated to the downstream first.
 2. TiCDC continues with the replication of DDL statements. If there are multiple DDL statements, TiCDC replicates them in a serial manner.
-3. After the DDL statements are executed in the downstream, TiCDC will continue with the replication of DML statements executed after DDL `CommiTs`.
+3. After the DDL statements are executed in the downstream, TiCDC will continue with the replication of DML statements executed after DDL `commitTS`.
 
 ## How should I check whether the upstream and downstream data is consistent?
 
