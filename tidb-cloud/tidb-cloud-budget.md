@@ -85,11 +85,11 @@ To edit a custom budget, take the following steps:
 
 3. On the **Budgets** page, locate the row of your budget, click **...** in that row, and then click **Edit**.
 
-4. Edit the budget name, budget amount, and alert thresholds as needed.
+4. Edit the budget name, budget scope, budget amount, and alert thresholds as needed.
 
     > **Note:**
     >
-    > Editing the budget period, budget scope, and whether to apply credits and discounts is not supported.
+    > Editing the budget period and whether to apply credits and discounts is not supported.
 
 5. Click **Update**.
 
