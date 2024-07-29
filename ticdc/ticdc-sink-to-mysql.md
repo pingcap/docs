@@ -96,7 +96,7 @@ To replicate data to TiDB or other MySQL-compatible databases, the downstream da
 - `Alter`
 - `Create View`
 
-To replicate `recover table` to the downstream TiDB, the downstream database user also needs the `Super` permission.
+To replicate [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md) to the downstream TiDB, the downstream database user also needs the `Super` permission.
 
 If the downstream TiDB cluster has [read-only mode](/system-variables.md#tidb_restricted_read_only-new-in-v520) enabled, the downstream database user also needs the `RESTRICTED_REPLICA_WRITER_ADMIN` permission.
 
