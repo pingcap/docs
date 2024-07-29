@@ -2138,6 +2138,24 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Possible values: `OFF`, `ON`
 - This variable controls whether to support creating `Global indexes` for partitioned tables. `Global index` is currently in the development stage. **It is not recommended to modify the value of this system variable**.
 
+### `tidb_enable_lazy_cursor_fetch` <span class="version-mark">New in v8.3.0</span>
+
+> **Warning:**
+>
+> The feature controlled by this variable is experimental. It is not recommended that you use it in the production environment.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls the behavior of the [Cursor Fetch](/develop/dev-guide-connection-parameters.md#use-streamingresult-to-get-the-execution-result) feature. When the variable is `OFF`, and Cursor Fetch is enabled, TiDB will read all the data at the start of statement execution and store it in TiDB's memory. Subsequently, the data is returned to the client based on the client's specified `FetchSize`. If the result set is too large, it may temporarily write the result to disk. When the variable is `ON`, and Cursor Fetch is enabled, TiDB will not read all the data into the TiDB node at once but will read data into the TiDB node incrementally as the client fetches it.
+- The feature has the following limitations:
+    1. It does not support statements within explicit transactions.
+    2. It only supports execution plans that only consist of `TableReader`, `IndexReader`, `IndexLookUp`, `Projection`, and `Selection` operators.
+    3. For statements using Lazy Cursor Fetch, execution information will not appear in the [Statements Summary](/statement-summary-tables.md) and [Slow Log](/identify-slow-queries.md).
+- For unsupported scenarios, the behavior will remain consistent with the variable being `OFF`.
+
 ### tidb_enable_non_prepared_plan_cache
 
 - Scope: SESSION | GLOBAL
@@ -2771,24 +2789,6 @@ Query OK, 0 rows affected (0.09 sec)
 </CustomContent>
 
 - You can use the [`TIDB_ROW_CHECKSUM()`](/functions-and-operators/tidb-functions.md#tidb_row_checksum) function to get the checksum value of a row.
-
-### `tidb_enable_lazy_cursor_fetch` <span class="version-mark">New in v8.3.0</span>
-
-> **Warning:**
->
-> The feature controlled by this variable is experimental. It is not recommended that you use it in the production environment.
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
-- Default value: `OFF`
-- This variable controls the behavior of the [Cursor Fetch](/develop/dev-guide-connection-parameters.md#use-streamingresult-to-get-the-execution-result) feature. When the variable is `OFF`, and Cursor Fetch is enabled, TiDB will read all the data at the start of statement execution and store it in TiDB's memory. Subsequently, the data is returned to the client based on the client's specified `FetchSize`. If the result set is too large, it may temporarily write the result to disk. When the variable is `ON`, and Cursor Fetch is enabled, TiDB will not read all the data into the TiDB node at once but will read data into the TiDB node incrementally as the client fetches it.
-- The feature has the following limitations:
-    1. It does not support statements within explicit transactions.
-    2. It only supports execution plans that only consist of `TableReader`, `IndexReader`, `IndexLookUp`, `Projection`, and `Selection` operators.
-    3. For statements using Lazy Cursor Fetch, execution information will not appear in the [Statements Summary](/statement-summary-tables.md) and [Slow Log](/identify-slow-queries.md).
-- For unsupported scenarios, the behavior will remain consistent with the variable being `OFF`.
 
 ### tidb_enforce_mpp <span class="version-mark">New in v5.1</span>
 
