@@ -128,7 +128,7 @@ CREATE TABLE orders (
 
 ## TTL job
 
-For each table with a TTL attribute, TiDB internally schedules a background job to clean up expired data. You can customize the execution period of these jobs by setting the `TTL_JOB_INTERVAL` attribute for the table. The following example sets the background cleanup jobs for the table `orders` to run once every 24 hours:
+For each table with a TTL attribute, TiDB internally schedules a background job to clean up expired data. If your cluster is a TiDB Serverless cluster, the `TTL_JOB_INTERVAL` is set to `15m` and cannot be changed. If your cluster is not a TiDB Serverless cluster, you can customize the execution period of these jobs by setting the `TTL_JOB_INTERVAL` attribute for the table. The following example sets the background cleanup jobs for the table `orders` to run once every 24 hours:
 
 ```sql
 ALTER TABLE orders TTL_JOB_INTERVAL = '24h';
