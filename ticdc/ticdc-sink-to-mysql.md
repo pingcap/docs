@@ -53,7 +53,7 @@ The following are descriptions of sink URI parameters and parameter values that 
 
 | Parameter/Parameter value    | Description                                             |
 | :------------ | :------------------------------------------------ |
-| `root`        | The username of the downstream database. To replicate data to TiDB or other MySQL-compatible databases, make sure that the downstream database user configured here has [certain permissions](#permissions-required-for-downstream-database-users).                             |
+| `root`        | The username of the downstream database. To replicate data to TiDB or other MySQL-compatible databases, make sure that the downstream database user has [certain permissions](#permissions-required-for-the-downstream-database-user).                             |
 | `123456`       | The password of the downstream database (can be encoded using Base64).                                      |
 | `127.0.0.1`    | The IP address of the downstream database.                               |
 | `3306`         | The port for the downstream data.                                 |
