@@ -1,5 +1,5 @@
 ---
-title: `mysql.user`
+title: mysql.user
 summary: Learn about the `user` table in the `mysql` schema.
 ---
 
