@@ -49,6 +49,7 @@ We are constantly filling in the feature gaps between TiDB Serverless and TiDB D
 - [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) is not supported for TiDB Serverless currently.
 
 ### TTL
+
 - Modifying table's `TTL_JOB_INTERVAL` is not supported for TiDB Serverless currently, it is fixed at `15m` currently.
 
 ### Others
