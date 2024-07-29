@@ -12,12 +12,12 @@ TiDB supports all of the [bit functions and operators](https://dev.mysql.com/doc
 | Name | Description |
 | :------| :------------- |
 | [`BIT_COUNT()`](#bit_count) | Return the number of bits that are set as 1 |
-| [&](#) | Bitwise AND |
-| [~](#-1) | Bitwise inversion |
-| [\|](#-2) | Bitwise OR |
-| [^](#-3) | Bitwise XOR |
-| [<<](#-4) | Left shift |
-| [>>](#-5) | Right shift |
+| [&](#bitwise-and-) | Bitwise AND |
+| [~](#bitwise-inversion-) | Bitwise inversion |
+| [\|](#bitwise-or-) | Bitwise OR |
+| [^](#bitwise-xor- | Bitwise XOR |
+| [<<](#left-shift-) | Left shift |
+| [>>](#right-shift-) | Right shift |
 
 ## [`BIT_COUNT()`](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#function_bit-count)
 
@@ -70,7 +70,7 @@ SELECT BIT_COUNT(INET_ATON('255.255.255.0'));
 1 row in set (0.00 sec)
 ```
 
-## [&](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-and)
+## [Bitwise AND: &](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-and)
 
 The `&` operator does a bitwise-and operation.
 
@@ -126,7 +126,7 @@ SELECT INET_NTOA(INET_ATON('192.168.1.2') & INET_ATON('255.255.255.0'));
 1 row in set (0.00 sec)
 ```
 
-## [~](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-invert)
+## [Bitwise inversion: ~](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-invert)
 
 The `~` operator does a bitwise inversion of the given value.
 
@@ -166,7 +166,7 @@ SELECT CONV(~ b'1111111111111111111111111111111111111111111111110000111100001111
 1 row in set (0.00 sec)
 ```
 
-## [\|](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-or)
+## [Bitwise OR: \|](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-or)
 
 The `|` operator does a bitwise-or.
 
@@ -194,7 +194,7 @@ SELECT CONV(b'1010' | b'1100',10,2);
 1 row in set (0.00 sec)
 ```
 
-## [^](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-xor)
+## [Bitwise XOR: ^](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-xor)
 
 The `^` operator does an bitwise-xor (exclusive or).
 
@@ -224,7 +224,7 @@ SELECT CONV(b'1010' ^ b'1100',10,2);
 
 Here the value is shown as `110` instead of `0110` as leading zero's are removed.
 
-## [<<](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_left-shift)
+## [Left shift: <<](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_left-shift)
 
 The `<<` operator does a left shift operation.
 
@@ -258,7 +258,7 @@ SELECT n,1<<n,LPAD(CONV(1<<n,10,2),11,0) FROM cte;
 11 rows in set (0.00 sec)
 ```
 
-## [>>](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_right-shift)
+## [Right shift: >>](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_right-shift)
 
 The `>>` operator does a right shift operation.
 
