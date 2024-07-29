@@ -10,7 +10,7 @@ This document describes how to manage a TiDB user account.
 
 ## User names and passwords
 
-TiDB stores the user accounts in the table of the [`mysql.user`](/mysql-schema.md) system table. Each account is identified by a user name and the client host. Each account may have a password.
+TiDB stores the user accounts in the table of the [`mysql.user`](/mysql-schema/mysql-schema-user.md) system table. Each account is identified by a user name and the client host. Each account may have a password.
 
 You can connect to the TiDB server using the MySQL client, and use the specified account and password to login. For each user name, make sure that it contains no more than 32 characters.
 
@@ -37,7 +37,7 @@ You can also create accounts by using [third party GUI tools](/develop/dev-guide
 CREATE USER [IF NOT EXISTS] user [IDENTIFIED BY 'auth_string'];
 ```
 
-After you assign the password, TiDB hashes and stores the `auth_string` in the [`mysql.user`](/mysql-schema.md) table.
+After you assign the password, TiDB hashes and stores the `auth_string` in the [`mysql.user`](/mysql-schema/mysql-schema-user.md) table.
 
 ```sql
 CREATE USER 'test'@'127.0.0.1' IDENTIFIED BY 'xxx';
@@ -138,7 +138,7 @@ To remove a user account, use the [`DROP USER`](/sql-statements/sql-statement-dr
 DROP USER 'test'@'localhost';
 ```
 
-This operation clears the user's records in the [`mysql.user`](/mysql-schema.md) table and the related records in the privilege table.
+This operation clears the user's records in the [`mysql.user`](/mysql-schema/mysql-schema-user.md) table and the related records in the privilege table.
 
 ## Reserved user accounts
 
@@ -150,7 +150,7 @@ TiDB can limit the resources consumed by users using resource groups. For more i
 
 ## Assign account passwords
 
-TiDB stores passwords in the [`mysql.user`](/mysql-schema.md) system table. Operations that assign or update passwords are permitted only to users with the `CREATE USER` privilege, or, alternatively, privileges for the `mysql` database (`INSERT` privilege to create new accounts, `UPDATE` privilege to update existing accounts).
+TiDB stores passwords in the [`mysql.user`](/mysql-schema/mysql-schema-user.md) system table. Operations that assign or update passwords are permitted only to users with the `CREATE USER` privilege, or, alternatively, privileges for the `mysql` database (`INSERT` privilege to create new accounts, `UPDATE` privilege to update existing accounts).
 
 - To assign a password when you create a new account, use [`CREATE USER`](/sql-statements/sql-statement-create-user.md) and include an `IDENTIFIED BY` clause:
 
