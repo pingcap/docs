@@ -416,7 +416,7 @@ Requires `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
 
 ### Privilege table
 
-The following system tables are special because all the privilege-related data is stored in them:
+The following [`mysql` system tables](/mysql-schema/mysql-schema.md) are special because all the privilege-related data is stored in them:
 
 - `mysql.user` (user account, global privilege)
 - `mysql.db` (database-level privilege)
