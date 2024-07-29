@@ -107,4 +107,4 @@ The `mysql.user` table contains several fields that can be categorized into thre
 
 </CustomContent>
 
-While most of the fields in the TiDB `mysql.user` table are also present in the MySQL `mysql.user` table, the `Token_issuer` field is specific to TiDB.
+Although most of the fields in the TiDB `mysql.user` table also exist in the MySQL `mysql.user` table, the `Token_issuer` field is specific to TiDB.
