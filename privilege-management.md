@@ -17,7 +17,7 @@ This document introduces privilege-related TiDB operations, privileges required 
 
 ### Grant privileges
 
-The `GRANT` statement grants privileges to the user accounts.
+The [`GRANT`](/sql-statements/sql-statement-grant-privileges.md) statement grants privileges to the user accounts.
 
 For example, use the following statement to grant the `xxx` user the privilege to read the `test` database.
 
@@ -31,51 +31,97 @@ Use the following statement to grant the `xxx` user all privileges on all databa
 GRANT ALL PRIVILEGES ON *.* TO 'xxx'@'%';
 ```
 
-By default, `GRANT` statements will return an error if the user specified does not exist. This behavior depends on if the SQL Mode `NO_AUTO_CREATE_USER` is specified:
+By default, [`GRANT`](/sql-statements/sql-statement-grant-privileges.md) statements will return an error if the user specified does not exist. This behavior depends on if the [SQL mode](/system-variables.md#sql_mode) `NO_AUTO_CREATE_USER` is specified:
 
 ```sql
-mysql> SET sql_mode=DEFAULT;
-Query OK, 0 rows affected (0.00 sec)
+SET sql_mode=DEFAULT;
+```
 
-mysql> SELECT @@sql_mode;
+```
+Query OK, 0 rows affected (0.00 sec)
+```
+
+```sql
+SELECT @@sql_mode;
+```
+
+```
 +-------------------------------------------------------------------------------------------------------------------------------------------+
 | @@sql_mode                                                                                                                                |
 +-------------------------------------------------------------------------------------------------------------------------------------------+
 | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION |
 +-------------------------------------------------------------------------------------------------------------------------------------------+
 1 row in set (0.00 sec)
+```
 
-mysql> SELECT * FROM mysql.user WHERE user='idontexist';
+```sql
+SELECT * FROM mysql.user WHERE user='idontexist';
+```
+
+```
 Empty set (0.00 sec)
+```
 
-mysql> GRANT ALL PRIVILEGES ON test.* TO 'idontexist';
+```sql
+GRANT ALL PRIVILEGES ON test.* TO 'idontexist';
+```
+
+```
 ERROR 1105 (HY000): You are not allowed to create a user with GRANT
+```
 
-mysql> SELECT user,host,authentication_string FROM mysql.user WHERE user='idontexist';
+```sql
+SELECT user,host,authentication_string FROM mysql.user WHERE user='idontexist';
+```
+
+```
 Empty set (0.00 sec)
 ```
 
 In the following example, the user `idontexist` is automatically created with an empty password because the SQL Mode `NO_AUTO_CREATE_USER` was not set. This is **not recommended** since it presents a security risk: miss-spelling a username will result in a new user created with an empty password:
 
 ```sql
-mysql> SET @@sql_mode='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-Query OK, 0 rows affected (0.00 sec)
+SET @@sql_mode='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+```
 
-mysql> SELECT @@sql_mode;
+```
+Query OK, 0 rows affected (0.00 sec)
+```
+
+```sql
+SELECT @@sql_mode;
+```
+
+```
 +-----------------------------------------------------------------------------------------------------------------------+
 | @@sql_mode                                                                                                            |
 +-----------------------------------------------------------------------------------------------------------------------+
 | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION |
 +-----------------------------------------------------------------------------------------------------------------------+
 1 row in set (0.00 sec)
+```
 
-mysql> SELECT * FROM mysql.user WHERE user='idontexist';
+```sql
+SELECT * FROM mysql.user WHERE user='idontexist';
+```
+
+```
 Empty set (0.00 sec)
+```
 
-mysql> GRANT ALL PRIVILEGES ON test.* TO 'idontexist';
+```sql
+GRANT ALL PRIVILEGES ON test.* TO 'idontexist';
+```
+
+```
 Query OK, 1 row affected (0.05 sec)
+```
 
-mysql> SELECT user,host,authentication_string FROM mysql.user WHERE user='idontexist';
+```sql
+SELECT user,host,authentication_string FROM mysql.user WHERE user='idontexist';
+```
+
+```
 +------------+------+-----------------------+
 | user       | host | authentication_string |
 +------------+------+-----------------------+
@@ -84,13 +130,21 @@ mysql> SELECT user,host,authentication_string FROM mysql.user WHERE user='idonte
 1 row in set (0.01 sec)
 ```
 
-You can use fuzzy matching in `GRANT` to grant privileges to databases.
+You can use fuzzy matching in [`GRANT`](/sql-statements/sql-statement-grant-privileges.md) to grant privileges to databases.
 
 ```sql
-mysql> GRANT ALL PRIVILEGES ON `te%`.* TO genius;
-Query OK, 0 rows affected (0.00 sec)
+GRANT ALL PRIVILEGES ON `te%`.* TO genius;
+```
 
-mysql> SELECT user,host,db FROM mysql.db WHERE user='genius';
+```
+Query OK, 0 rows affected (0.00 sec)
+```
+
+```sql
+SELECT user,host,db FROM mysql.db WHERE user='genius';
+```
+
+```
 +--------|------|-----+
 | user   | host | db  |
 +--------|------|-----+
@@ -103,9 +157,9 @@ In this example, because of the `%` in `te%`, all the databases starting with `t
 
 ### Revoke privileges
 
-The `REVOKE` statement enables system administrators to revoke privileges from the user accounts.
+The [`REVOKE`](/sql-statements/sql-statement-revoke-privileges.md) statement enables system administrators to revoke privileges from the user accounts.
 
-The `REVOKE` statement corresponds with the `REVOKE` statement:
+The `REVOKE` statement corresponds with the `GRANT` statement:
 
 ```sql
 REVOKE ALL PRIVILEGES ON `test`.* FROM 'genius'@'localhost';
@@ -116,14 +170,20 @@ REVOKE ALL PRIVILEGES ON `test`.* FROM 'genius'@'localhost';
 > To revoke privileges, you need the exact match. If the matching result cannot be found, an error will be displayed:
 
 ```sql
-mysql> REVOKE ALL PRIVILEGES ON `te%`.* FROM 'genius'@'%';
+REVOKE ALL PRIVILEGES ON `te%`.* FROM 'genius'@'%';
+```
+
+```
 ERROR 1141 (42000): There is no such grant defined for user 'genius' on host '%'
 ```
 
 About fuzzy matching, escape, string and identifier:
 
 ```sql
-mysql> GRANT ALL PRIVILEGES ON `te\%`.* TO 'genius'@'localhost';
+GRANT ALL PRIVILEGES ON `te\%`.* TO 'genius'@'localhost';
+```
+
+```
 Query OK, 0 rows affected (0.00 sec)
 ```
 
@@ -132,19 +192,30 @@ This example uses exact match to find the database named `te%`. Note that the `%
 A string is enclosed in single quotation marks(''), while an identifier is enclosed in backticks (``). See the differences below:
 
 ```sql
-mysql> GRANT ALL PRIVILEGES ON 'test'.* TO 'genius'@'localhost';
+GRANT ALL PRIVILEGES ON 'test'.* TO 'genius'@'localhost';
+```
+
+```
 ERROR 1064 (42000): You have an error in your SQL syntax; check the
 manual that corresponds to your MySQL server version for the right
 syntax to use near ''test'.* to 'genius'@'localhost'' at line 1
+```
 
-mysql> GRANT ALL PRIVILEGES ON `test`.* TO 'genius'@'localhost';
+```sql
+GRANT ALL PRIVILEGES ON `test`.* TO 'genius'@'localhost';
+```
+
+```
 Query OK, 0 rows affected (0.00 sec)
 ```
 
 If you want to use special keywords as table names, enclose them in backticks (``). For example:
 
 ```sql
-mysql> CREATE TABLE `select` (id int);
+CREATE TABLE `select` (id int);
+```
+
+```
 Query OK, 0 rows affected (0.27 sec)
 ```
 
@@ -154,12 +225,17 @@ You can use the `SHOW GRANTS` statement to see what privileges are granted to a 
 
 ```sql
 SHOW GRANTS; -- show grants for the current user
+```
 
+```
 +-------------------------------------------------------------+
 | Grants for User                                             |
 +-------------------------------------------------------------+
 | GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION |
 +-------------------------------------------------------------+
+```
+
+```sql
 SHOW GRANTS FOR 'root'@'%'; -- show grants for a specific user
 ```
 
@@ -175,7 +251,9 @@ Show granted privileges of the `rw_user@192.168.%` user:
 
 ```sql
 SHOW GRANTS FOR `rw_user`@`192.168.%`;
+```
 
+```
 +------------------------------------------------------------------+
 | Grants for rw_user@192.168.%                                     |
 +------------------------------------------------------------------+
@@ -217,7 +295,10 @@ To see the full set of dynamic privileges, execute the `SHOW PRIVILEGES` stateme
 You can check privileges of TiDB users in the `INFORMATION_SCHEMA.USER_PRIVILEGES` table. For example:
 
 ```sql
-mysql> SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
+SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
+```
+
+```
 +------------+---------------+-------------------------+--------------+
 | GRANTEE    | TABLE_CATALOG | PRIVILEGE_TYPE          | IS_GRANTABLE |
 +------------+---------------+-------------------------+--------------+
@@ -421,7 +502,7 @@ When the system variable [`tidb_resource_control_strict_mode`](/system-variables
 
 ### Privilege table
 
-The following system tables are special because all the privilege-related data is stored in them:
+The following [`mysql` system tables](/mysql-schema.md) are special because all the privilege-related data is stored in them:
 
 - `mysql.user` (user account, global privilege)
 - `mysql.db` (database-level privilege)
@@ -431,7 +512,10 @@ The following system tables are special because all the privilege-related data i
 These tables contain the effective range and privilege information of the data. For example, in the `mysql.user` table:
 
 ```sql
-mysql> SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
+SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
+```
+
+```
 +------|------|-------------|-------------+
 | User | Host | Select_priv | Insert_priv |
 +------|------|-------------|-------------+
@@ -474,8 +558,4 @@ The use of `%` in `tables_priv` and `columns_priv` is similar, but column value 
 
 When TiDB starts, some privilege-check tables are loaded into memory, and then the cached data is used to verify the privileges. Executing privilege management statements such as `GRANT`, `REVOKE`, `CREATE USER`, `DROP USER` will take effect immediately.
 
-Manually editing tables such as `mysql.user` with statements such as `INSERT`, `DELETE`, `UPDATE` will not take effect immediately. This behavior is compatible with MySQL, and privilege cache can be updated with the following statement:
-
-```sql
-FLUSH PRIVILEGES;
-```
+Manually editing tables such as `mysql.user` with statements such as `INSERT`, `DELETE`, `UPDATE` will not take effect immediately. This behavior is compatible with MySQL, and privilege cache can be updated with the [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md) statement.

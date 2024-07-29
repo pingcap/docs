@@ -312,7 +312,7 @@ mysql> SELECT * FROM t1;
 - Type: Enumeration
 - Default value: `aes-128-ecb`
 - Value options: `aes-128-ecb`, `aes-192-ecb`, `aes-256-ecb`, `aes-128-cbc`, `aes-192-cbc`, `aes-256-cbc`, `aes-128-ofb`, `aes-192-ofb`, `aes-256-ofb`, `aes-128-cfb`, `aes-192-cfb`, `aes-256-cfb`
-- This variable sets the encryption mode for the built-in functions `AES_ENCRYPT()` and `AES_DECRYPT()`.
+- This variable sets the encryption mode for the built-in functions [`AES_ENCRYPT()`](/functions-and-operators/encryption-and-compression-functions.md#aes_encrypt) and [`AES_DECRYPT()`](/functions-and-operators/encryption-and-compression-functions.md#aes_decrypt).
 
 ### character_set_client
 
@@ -1830,6 +1830,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
         - `"bulk"` mode cannot be used on tables containing foreign keys and tables referenced by foreign keys when the foreign key constraint check is enabled (`foreign_key_checks = ON`).
         - In situations that the environment does not support or is incompatible with the `"bulk"` mode, TiDB falls back to the `"standard"` mode and returns a warning message. To verify if the `"bulk"` mode is used, you can check the `pipelined` field using [`tidb_last_txn_info`](#tidb_last_txn_info-new-in-v409). A `true` value indicates that the `"bulk"` mode is used.
         - When executing large transactions in the `"bulk"` mode, the transaction duration might be long. For transactions in this mode, the maximum TTL of the transaction lock is the greater value between [`max-txn-ttl`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#max-txn-ttl) and 24 hours. Additionally, if the transaction execution time exceeds the value set by [`tidb_gc_max_wait_time`](#tidb_gc_max_wait_time-new-in-v610), the GC might force a rollback of the transaction, leading to its failure.
+        - When TiDB executes transactions in the `"bulk"` mode, transaction size is not limited by the TiDB configuration item [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit).
         - This mode is implemented by the Pipelined DML feature. For detailed design and GitHub issues, see [Pipelined DML](https://github.com/pingcap/tidb/blob/master/docs/design/2024-01-09-pipelined-DML.md) and [#50215](https://github.com/pingcap/tidb/issues/50215).
 
 ### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
@@ -2412,7 +2413,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
-- This variable specifies whether to use the pipeline execution algorithm for window functions.
+- This variable specifies whether to use the pipeline execution algorithm for [window functions](/functions-and-operators/window-functions.md).
 
 ### tidb_enable_plan_cache_for_param_limit <span class="version-mark">New in v6.6.0</span>
 
@@ -2748,7 +2749,7 @@ Query OK, 0 rows affected (0.09 sec)
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
-- This variable is used to control whether to enable the support for window functions. Note that window functions may use reserved keywords. This might cause SQL statements that could be executed normally cannot be parsed after upgrading TiDB. In this case, you can set `tidb_enable_window_function` to `OFF`.
+- This variable is used to control whether to enable the support for [window functions](/functions-and-operators/window-functions.md). Note that window functions might use reserved keywords. This might cause SQL statements that can be executed normally to fail to be parsed after TiDB is upgraded. In this case, you can set `tidb_enable_window_function` to `OFF`.
 
 ### `tidb_enable_row_level_checksum` <span class="version-mark">New in v7.1.0</span>
 
@@ -3092,7 +3093,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `ON`
 - This variable controls whether to generate binary-encoded execution plans in slow logs and statement summaries.
 - When this variable is set to `ON`, you can view visual execution plans in TiDB Dashboard. Note that TiDB Dashboard only provides visual display for execution plans generated after this variable is enabled.
-- You can execute the `SELECT tidb_decode_binary_plan('xxx...')` statement to parse the specific plan from a binary plan.
+- You can execute the [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan) statement to parse the specific plan from a binary plan.
 
 ### tidb_gogc_tuner_max_value <span class="version-mark">New in v7.5.0</span>
 
@@ -6309,4 +6310,4 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
-- This variable controls whether to use the high precision mode when computing the window functions.
+- This variable controls whether to use the high precision mode when computing the [window functions](/functions-and-operators/window-functions.md).

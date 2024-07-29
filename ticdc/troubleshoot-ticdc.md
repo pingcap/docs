@@ -121,7 +121,7 @@ fetch.message.max.bytes=2147483648
 
 ## How can I find out whether a DDL statement fails to execute in downstream during TiCDC replication? How to resume the replication?
 
-If a DDL statement fails to execute, the replication task (changefeed) automatically stops. The checkpoint-ts is the DDL statement's finish-ts minus one. If you want TiCDC to retry executing this statement in the downstream, use `cdc cli changefeed resume` to resume the replication task. For example:
+If a DDL statement fails to execute, the replication task (changefeed) automatically stops. The checkpoint-ts is the DDL statement's finish-ts. If you want TiCDC to retry executing this statement in the downstream, use `cdc cli changefeed resume` to resume the replication task. For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -131,7 +131,15 @@ cdc cli changefeed resume -c test-cf --server=http://127.0.0.1:8300
 
 If you want to skip this DDL statement that goes wrong, set the start-ts of the changefeed to the checkpoint-ts (the timestamp at which the DDL statement goes wrong) plus one, and then run the `cdc cli changefeed create` command to create a new changefeed task. For example, if the checkpoint-ts at which the DDL statement goes wrong is `415241823337054209`, run the following commands to skip this DDL statement:
 
-{{< copyable "shell-regular" >}}
+To skip this DDL statement that goes wrong, you can configure the `ignore-txn-start-ts` parameter to skip the transactions corresponding to the specified `start-ts`. For example:
+
+1. Search the TiCDC log for the `apply job` field, and identify the `start-ts` of the DDLs that are taking a long time.
+2. Modify the changefeed configuration. Add the above `start-ts` to the `ignore-txn-start-ts` configuration item.
+3. Resume the suspended changefeed.
+
+> **Note:**
+>
+> Although setting the changefeed `start-ts` to the value of `checkpoint-ts` (at the time of the error) plus one and then recreating the task can skip the DDL statement, it can also cause TiCDC to lose the DML data change at the time of `checkpointTs+1`. Therefore, this operation is strictly prohibited in production environments.
 
 ```shell
 cdc cli changefeed remove --server=http://127.0.0.1:8300 --changefeed-id simple-replication-task
