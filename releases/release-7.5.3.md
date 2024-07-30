@@ -135,8 +135,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - (dup): release-8.2.0.md > Bug fixes> TiFlash - Fix the issue that a large number of duplicate rows might be read in FastScan mode after importing data via BR or TiDB Lightning [#9118](https://github.com/pingcap/tiflash/issues/9118) @[JinheLin](https://github.com/JinheLin)
     - (dup): release-6.5.10.md > Bug fixes> TiFlash - Fix the issue that the `SUBSTRING_INDEX()` function might cause TiFlash to crash in some corner cases [#9116](https://github.com/pingcap/tiflash/issues/9116) @[wshwsh12](https://github.com/wshwsh12)
     - Fix the issue that setting the SSL certificate configuration to an empty string in TiFlash incorrectly enables TLS and causes TiFlash to fail to start [#9235](https://github.com/pingcap/tiflash/issues/9235) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - Fix the issue that some queries might report a type mismatch error after enabling late materialization [#9175](https://github.com/pingcap/tiflash/issues/9175) @[JinheLin](https://github.com/JinheLin)
-    - Fix the issue that queries with virtual generated columns might return incorrect results after enabling late materialization [#9188](https://github.com/pingcap/tiflash/issues/9188) @[JinheLin](https://github.com/JinheLin)
+    - Fix the issue that some queries might report a column type mismatch error after late materialization is enabled [#9175](https://github.com/pingcap/tiflash/issues/9175) @[JinheLin](https://github.com/JinheLin)
+    - Fix the issue that queries with virtual generated columns might return incorrect results after late materialization is enabled [#9188](https://github.com/pingcap/tiflash/issues/9188) @[JinheLin](https://github.com/JinheLin)
     - Fix the issue that TiFlash might panic after executing `RENAME TABLE ... TO ...` on a partitioned table with empty partitions across databases [#9132](https://github.com/pingcap/tiflash/issues/9132) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
 + Tools
@@ -152,7 +152,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 
     + TiCDC
       <!-- tw: @Oreoxmt (2)-->
-        - Fix the issue that the checksum is not correctly set to `0` after splitting Update events [#11402](https://github.com/pingcap/tiflow/issues/11402) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix the issue that the checksum is not correctly set to `0` after splitting `UPDATE` events [#11402](https://github.com/pingcap/tiflow/issues/11402) @[3AceShowHand](https://github.com/3AceShowHand)
         - Fix the issue that the Processor module might get stuck when the downstream Kafka is inaccessible [#11340](https://github.com/pingcap/tiflow/issues/11340) @[asddongmen](https://github.com/asddongmen)
 
     + TiDB Data Migration (DM)
