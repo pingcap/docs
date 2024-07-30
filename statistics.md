@@ -154,13 +154,13 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
         <CustomContent platform="tidb">
 
-        After the setting, TiDB writes the `PREDICATE COLUMNS` information to the [`mysql.column_stats_usage`](/mysql-schema.md#statistics-system-tables) system table every 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease).
+        After the setting, TiDB writes the `PREDICATE COLUMNS` information to the [`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables) system table every 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease).
 
         </CustomContent>
 
         <CustomContent platform="tidb-cloud">
 
-        After the setting, TiDB writes the `PREDICATE COLUMNS` information to the [`mysql.column_stats_usage`](/mysql-schema.md#statistics-system-tables) system table every 300 seconds.
+        After the setting, TiDB writes the `PREDICATE COLUMNS` information to the [`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables) system table every 300 seconds.
 
         </CustomContent>
 
@@ -174,7 +174,7 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
         > **Note:**
         >
-        > - If the [`mysql.column_stats_usage`](/mysql-schema.md#statistics-system-tables) system table does not contain any `PREDICATE COLUMNS` recorded for that table, the preceding syntax collects statistics on all columns and all indexes in that table.
+        > - If the [`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables) system table does not contain any `PREDICATE COLUMNS` recorded for that table, the preceding syntax collects statistics on all columns and all indexes in that table.
         > - Any columns excluded from collection (either by manually listing columns or using `PREDICATE COLUMNS`) will not have their statistics overwritten. When executing a new type of SQL query, the optimizer will use the old statistics for such columns if it exists or pseudo column statistics if columns never had statistics collected. The next ANALYZE using `PREDICATE COLUMNS` will collect the statistics on those columns.
 
 - To collect statistics on all columns and indexes, use the following syntax:

@@ -502,7 +502,7 @@ When the system variable [`tidb_resource_control_strict_mode`](/system-variables
 
 ### Privilege table
 
-The following [`mysql` system tables](/mysql-schema.md) are special because all the privilege-related data is stored in them:
+The following [`mysql` system tables](/mysql-schema/mysql-schema.md) are special because all the privilege-related data is stored in them:
 
 - `mysql.user` (user account, global privilege)
 - `mysql.db` (database-level privilege)

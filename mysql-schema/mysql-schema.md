@@ -8,11 +8,15 @@ aliases: ['/docs/dev/system-tables/system-table-overview/','/docs/dev/reference/
 
 The `mysql` schema contains TiDB system tables. The design is similar to the `mysql` schema in MySQL, where tables such as `mysql.user` can be edited directly. It also contains a number of tables which are extensions to MySQL.
 
+> **Note:**
+>
+> In most scenarios, it is not recommended to change the content of system tables directly using `INSERT`, `UPDATE`, or `DELETE`. Instead, use statements such as [`CREATE USER`](/sql-statements/sql-statement-create-user.md), [`ALTER USER`](/sql-statements/sql-statement-alter-user.md), [`DROP USER`](/sql-statements/sql-statement-drop-user.md), [`GRANT`](/sql-statements/sql-statement-grant-privileges.md), [`REVOKE`](/sql-statements/sql-statement-revoke-privileges.md), and [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md) to manage users and privileges. If direct modification of system tables is unavoidable, use [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md) to make the changes take effect.
+
 ## Grant system tables
 
 These system tables contain grant information about user accounts and their privileges:
 
-- `user`: user accounts, global privileges, and other non-privilege columns
+- [`user`](/mysql-schema/mysql-schema-user.md): user accounts, global privileges, and other non-privilege columns
 - `db`: database-level privileges
 - `tables_priv`: table-level privileges
 - `columns_priv`: column-level privileges

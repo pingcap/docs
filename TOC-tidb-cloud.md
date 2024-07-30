@@ -572,7 +572,9 @@
       - [Use the `tidb_snapshot` System Variable](/read-historical-data.md)
     - [Placement Rules in SQL](/placement-rules-in-sql.md)
     - System Tables
-      - [`mysql`](/mysql-schema.md)
+      - `mysql` Schema
+        - [Overview](/mysql-schema/mysql-schema.md)
+        - [`user`](/mysql-schema/mysql-schema-user.md)
       - INFORMATION_SCHEMA
         - [Overview](/information-schema/information-schema.md)
         - [`ANALYZE_STATUS`](/information-schema/information-schema-analyze-status.md)
