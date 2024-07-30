@@ -85,7 +85,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - Fix the issue that recursive CTE queries might result in invalid pointers [#54449](https://github.com/pingcap/tidb/issues/54449) @[hawkingrei](https://github.com/hawkingrei)
     - Fix the issue that statistics do not update the `stats_history` table when encountering primary key duplicates [#47539](https://github.com/pingcap/tidb/issues/47539) @[Defined2014](https://github.com/Defined2014)
     - Fix the issue that when queries contain non-correlated subqueries and `LIMIT` clauses, column pruning might be incomplete and result in a less optimal plan [#54213](https://github.com/pingcap/tidb/issues/54213) @[qw4990](https://github.com/qw4990)
-  <!-- tw: @lilin90 (9)-->
+  <!-- tw: @lilin90 (8)-->
     - Fix the issue of abnormally high memory usage caused by `memTracker` not being detached when the `HashJoin` or `IndexLookUp` operator is the driven side sub-node of the `Apply` operator [#54005](https://github.com/pingcap/tidb/issues/54005) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - Fix the issue that the recursive CTE operator incorrectly tracks memory usage [#54181](https://github.com/pingcap/tidb/issues/54181) @[guo-shaoge](https://github.com/guo-shaoge)
     - Fix the issue that the memory used by transactions might be repeatedly tracked multiple times [#53984](https://github.com/pingcap/tidb/issues/53984) @[ekexium](https://github.com/ekexium)
