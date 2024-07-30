@@ -48,9 +48,9 @@ We are constantly filling in the feature gaps between TiDB Serverless and TiDB D
 - [Changefeed](/tidb-cloud/changefeed-overview.md) is not supported for TiDB Serverless currently.
 - [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) is not supported for TiDB Serverless currently.
 
-### TTL
+### Time to live (TTL)
 
-- Modifying table's `TTL_JOB_INTERVAL` is not supported for TiDB Serverless currently, `TTL_JOB_INTERVAL` is fixed at `15m` currently.
+- In TiDB Serverless, the [`TTL_JOB_INTERVAL`](/time-to-live.md#ttl-job) attribute for a table is fixed at `15m` and cannot be modified. This means that TiDB Serverless schedules a background job every 15 minutes to clean up expired data.
 
 ### Others
 
