@@ -11,8 +11,8 @@ The following functions are TiDB extensions, and are not present in MySQL:
 
 | Function name | Function description |
 | :-------------- | :------------------------------------- |
-| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | Returns the resource group name that the current session is bound to. See also: [Use resource control to achieve resource isolation](/tidb-resource-control.md). |
-| [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | Instructs TiDB to read most recent data within a specified time range. See also: [Read historical data using the `AS OF TIMESTAMP` clause](/as-of-timestamp.md). |
+| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | Returns the name of the resource group that the current session is bound to. See [using resource control to achieve resource isolation](/tidb-resource-control.md). |
+| [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | Instructs TiDB to read the most recent data within a specified time range. See [reading historical data using the `AS OF TIMESTAMP` clause](/as-of-timestamp.md). |
 | [`TIDB_CURRENT_TSO()`](#tidb_current_tso) | Returns the current [TimeStamp Oracle (TSO) in TiDB](/tso.md). |
 | [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | Decodes binary plans. |
 | [`TIDB_DECODE_KEY()`](#tidb_decode_key) | Decodes a TiDB-encoded key entry into a JSON structure containing `_tidb_rowid` and `table_id`. These encoded keys can be found in some system tables and logging outputs. |
@@ -25,7 +25,7 @@ The following functions are TiDB extensions, and are not present in MySQL:
 | [`TIDB_ROW_CHECKSUM()`](#tidb_row_checksum) | Queries the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`. See also: [Data integrity validation for single-row data](/ticdc/ticdc-integrity-check.md). |
 | [`TIDB_SHARD()`](#tidb_shard) | Creates a shard index to scatter the index hotspot. A shard index is an expression index with a `TIDB_SHARD` function as the prefix.|
 | [`TIDB_VERSION()`](#tidb_version) | Returns the TiDB version with additional build information. |
-| [`VITESS_HASH()`](#vitess_hash) | Returns the hash of a number. This function is compatible with Vitess' `HASH` function and is intended to help the data migration from Vitess. |
+| [`VITESS_HASH()`](#vitess_hash) | Returns the hash of a number. This function is compatible with the `HASH` function of Vitess, and is intended to help the data migration from Vitess. |
 
 </CustomContent>
 
@@ -33,8 +33,8 @@ The following functions are TiDB extensions, and are not present in MySQL:
 
 | Function name | Function description |
 | :-------------- | :------------------------------------- |
-| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | Returns the resource group name that the current session is bound to. See also: [Use resource control to achieve resource isolation](/tidb-resource-control.md). |
-| [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | Instructs TiDB to read most recent data within a specified time range. See also: [Read historical data using the `AS OF TIMESTAMP` clause](/as-of-timestamp.md). |
+| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | Returns the resource group name that the current session is bound to. See [using resource control to achieve resource isolation](/tidb-resource-control.md). |
+| [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | Instructs TiDB to read most recent data within a specified time range. See [reading historical data using the `AS OF TIMESTAMP` clause](/as-of-timestamp.md). |
 | [`TIDB_CURRENT_TSO()`](#tidb_current_tso) | Returns the current [TimeStamp Oracle (TSO) in TiDB](/tso.md). |
 | [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | Decodes binary plans. |
 | [`TIDB_DECODE_KEY()`](#tidb_decode_key) | Decodes a TiDB-encoded key entry into a JSON structure containing `_tidb_rowid` and `table_id`. These encoded keys can be found in some system tables and logging outputs. |
@@ -47,7 +47,7 @@ The following functions are TiDB extensions, and are not present in MySQL:
 | [`TIDB_ROW_CHECKSUM()`](#tidb_row_checksum) | Queries the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`. See also: [Data integrity validation for single-row data](https://docs.pingcap.com/tidb/stable/ticdc-integrity-check). |
 | [`TIDB_SHARD()`](#tidb_shard) | Creates a shard index to scatter the index hotspot. A shard index is an expression index with a `TIDB_SHARD` function as the prefix.|
 | [`TIDB_VERSION()`](#tidb_version) | Returns the TiDB version with additional build information. |
-| [`VITESS_HASH()`](#vitess_hash) | Returns the hash of a number. This function is compatible with Vitess' `HASH` function and is intended to help the data migration from Vitess. |
+| [`VITESS_HASH()`](#vitess_hash) | Returns the hash of a number. This function is compatible with the `HASH` function of Vitess, and is intended to help the data migration from Vitess. |
 
 </CustomContent>
 
