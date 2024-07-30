@@ -121,13 +121,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 + PD
   <!-- tw: @qiancai (8)-->
     - (dup): release-7.1.4.md > Bug fixes> PD - Fix the issue that slots are not fully deleted in a resource group client, which causes the number of the allocated tokens to be less than the specified value [#7346](https://github.com/tikv/pd/issues/7346) @[guo-shaoge](https://github.com/guo-shaoge)
-    - Fix the issue that a resource group encounters quota limits when requesting tokens for more than 500ms [#8349](https://github.com/tikv/pd/issues/8349) @[nolouch](https://github.com/nolouch)
+    - Fix the issue that a resource group encounters quota limits when requesting tokens for more than 500 ms [#8349](https://github.com/tikv/pd/issues/8349) @[nolouch](https://github.com/nolouch)
     - Fix the data race issue of resource groups [#8267](https://github.com/tikv/pd/issues/8267) @[HuSharp](https://github.com/HuSharp)
-    - Fix the data race issue that PD encounters during operator checks [#8263](https://github.com/tikv/pd/issues/8263)](https://github.com/tikv/pd/issues/8263) @[lhy1024](https://github.com/lhy1024)
+    - Fix the data race issue that PD encounters during operator checks [#8263](https://github.com/tikv/pd/issues/8263) @[lhy1024](https://github.com/lhy1024)
     - Fix the issue that deleted nodes still appear in the candidate connection list in etcd client [#8286](https://github.com/tikv/pd/issues/8286) @[JmPotato](https://github.com/JmPotato)
     - Fix the issue that setting the TiKV configuration item [`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size) to a value less than 1 MiB causes PD panic [#8323](https://github.com/tikv/pd/issues/8323) @[JmPotato](https://github.com/JmPotato)
     - Fix the issue that the encryption manager is not initialized before use [#8384](https://github.com/tikv/pd/issues/8384) @[releungx](https://github.com/releungx)
-    - Fix the issue that PD logs are not fully redacted when the PD configuration item [`redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50) is enabled [#8419](https://github.com/tikv/pd/issues/8419) @[releungx](https://github.com/releungx)
+    - Fix the issue that PD logs are not fully redacted when the PD configuration item [`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50) is enabled [#8419](https://github.com/tikv/pd/issues/8419) @[releungx](https://github.com/releungx)
     - Fix the issue that no error is reported when binding a role to a resource group [#54417](https://github.com/pingcap/tidb/issues/54417) @[JmPotato](https://github.com/JmPotato)
 
 + TiFlash
