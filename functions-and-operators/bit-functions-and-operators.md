@@ -12,16 +12,16 @@ TiDB supports all of the [bit functions and operators](https://dev.mysql.com/doc
 | Name | Description |
 | :------| :------------- |
 | [`BIT_COUNT()`](#bit_count) | Return the number of bits that are set as 1 |
-| [&](#bitwise-and-) | Bitwise AND |
-| [~](#bitwise-inversion-) | Bitwise inversion |
-| [\|](#bitwise-or-) | Bitwise OR |
-| [^](#bitwise-xor- | Bitwise XOR |
-| [<<](#left-shift-) | Left shift |
-| [>>](#right-shift-) | Right shift |
+| [`&`](#bitwise-and) | Bitwise AND |
+| [`~`](#bitwise-inversion) | Bitwise inversion |
+| [`\|`](#bitwise-or) | Bitwise OR |
+| [`^`](#bitwise-xor) | Bitwise XOR |
+| [`<<`](#left-shift) | Left shift |
+| [`>>`](#right-shift) | Right shift |
 
 ## [`BIT_COUNT()`](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#function_bit-count)
 
-The `BIT_COUNT(expr)` function returns the number of bits of `expr` that are set to 1.
+The `BIT_COUNT(expr)` function returns the number of bits that are set as 1 in `expr`.
 
 ```sql
 SELECT BIT_COUNT(b'00101001');
@@ -38,24 +38,24 @@ SELECT BIT_COUNT(b'00101001');
 
 > **Note:**
 >
-> In the example above a bit-literal is used. Using a regular string with `0`'s' and `1`'s will give a different result.
+> If the argument `expr` is a binary number, you need to specify `b` explicitly before the number, such as `b'00101001'`. Otherwise, this function treats it as a string and returns a different result. For example, `BIT_COUNT('00101001')` returns `7` because it converts the string `'00101001'` as the decimal number `101001` and counts the number of `1` bits in its binary format `11000100001010001`.
 
-The following example is similar to the example above, but it uses a hex-literal instead of a bit-literal. The `CONV()` function shows that `0x29` (hex, base 16) is the same as `00101001` (binary, base 2).
+The following example is similar to the preceding one, but it uses a hex-literal instead of a bit-literal as the argument. The `CONV()` function converts `0x29` from hexadecimal (base 16) to binary (base 2), showing that it equals `00101001` in binary.
 
 ```sql
-SELECT BIT_COUNT(0x29), CONV(0x29,16, 2);
+SELECT BIT_COUNT(0x29), CONV(0x29,16,2);
 ```
 
 ```
-+-----------------+------------------+
-| BIT_COUNT(0x29) | CONV(0x29,16, 2) |
-+-----------------+------------------+
-|               3 | 101001           |
-+-----------------+------------------+
-1 row in set (0.00 sec)
++-----------------+-----------------+
+| BIT_COUNT(0x29) | CONV(0x29,16,2) |
++-----------------+-----------------+
+|               3 | 101001          |
++-----------------+-----------------+
+1 row in set (0.01 sec)
 ```
 
-A practical use of this function is to convert a netmask to a [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) notation. In this example the `255.255.255.0` netmask is converted to `/24`.
+A practical use of the `BIT_COUNT(expr)` function is to convert a netmask to a [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) notation. In the following example, the netmask `255.255.255.0` is converted to its CIDR representation `24`.
 
 ```sql
 SELECT BIT_COUNT(INET_ATON('255.255.255.0'));
@@ -70,20 +70,20 @@ SELECT BIT_COUNT(INET_ATON('255.255.255.0'));
 1 row in set (0.00 sec)
 ```
 
-## [Bitwise AND: &](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-and)
+## [Bitwise AND: `&`](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-and)
 
-The `&` operator does a bitwise-and operation.
+The `&` operator performs a bitwise AND operation, which compares the corresponding bits of two numbers and returns a new number based on whether both corresponding bits are set as 1.
 
-For example, if we do a bitwise-and between `1010` and `1100` the result is `1000` because the only bit that is set by both is the left-most bit.
+For example, a bitwise AND operation between `1010` and `1100` returns `1000`, because only the leftmost bit is set as 1 in both numbers.
 
 ```
-1010
-1100
-----
-1000
+  1010
+& 1100
+  ----
+  1000
 ```
 
-And now the same example, but with using SQL:
+In SQL, you can use the `&` operator as follows:
 
 ```sql
 SELECT CONV(b'1010' & b'1000',10,2);
@@ -98,7 +98,9 @@ SELECT CONV(b'1010' & b'1000',10,2);
 1 row in set (0.00 sec)
 ```
 
-With the `&` operator and the `INET_NTOA()` and `INET_ATON()` functions one can do a bitwise and of an IP-address and a network mask to get the network address. This can be used to tell if multiple IP-addresses are in the same network or not.
+You can use the `&` operator with `INET_NTOA()` and `INET_ATON()` functions to perform a bitwise AND operation on an IP address and a network mask to get the network address. This is useful to determine whether multiple IP addresses belong to the same network or not.
+
+In the following two examples, the IP addresses `192.168.1.1` and `192.168.1.2` are in the same network `192.168.1.0/24` when masked with `255.255.255.0`.
 
 ```sql
 SELECT INET_NTOA(INET_ATON('192.168.1.1') & INET_ATON('255.255.255.0'));
@@ -126,22 +128,22 @@ SELECT INET_NTOA(INET_ATON('192.168.1.2') & INET_ATON('255.255.255.0'));
 1 row in set (0.00 sec)
 ```
 
-## [Bitwise inversion: ~](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-invert)
+## [Bitwise inversion: `~`](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-invert)
 
-The `~` operator does a bitwise inversion of the given value.
+The `~` operator performs a bitwise inversion (or bitwise NOT) operation on a given value. This means it inverts each bit of the number: bits that are 0 become 1, and bits that are 1 become 0.
 
-The value is expanded to 64 bits before the operation.
+Before the operation, the value is expanded to 64 bits.
 
-In this example you can see the expansion to 64-bits and the inversion:
-
-```
-value:                                                    1111000011110000
-inverted: 1111111111111111111111111111111111111111111111110000111100001111
-```
-
-The same inversion and expansion, but in SQL:
+Take the binary number `1111000011110000` as an example. When expanded to 64 bits and inverted, it looks like this:
 
 ```
+Original (16 bits):                 1111000011110000
+Expanded and inverted (64 bits):    1111111111111111111111111111111111111111111111110000111100001111
+```
+
+In SQL, you can use the `~` operator as follows:
+
+```sql
 SELECT CONV(~ b'1111000011110000',10,2);
 +------------------------------------------------------------------+
 | CONV(~ b'1111000011110000',10,2)                                 |
@@ -151,7 +153,7 @@ SELECT CONV(~ b'1111000011110000',10,2);
 1 row in set (0.00 sec)
 ```
 
-Note that this operation can be reversed by inverting the result again:
+You can reverse the inversion by applying the `~` operator again to the result:
 
 ```sql
 SELECT CONV(~ b'1111111111111111111111111111111111111111111111110000111100001111',10,2);
@@ -166,20 +168,20 @@ SELECT CONV(~ b'1111111111111111111111111111111111111111111111110000111100001111
 1 row in set (0.00 sec)
 ```
 
-## [Bitwise OR: \|](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-or)
+## [Bitwise OR: `|`](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-or)
 
-The `|` operator does a bitwise-or.
+The `|` operator performs a bitwise OR operation, which compares the corresponding bits of two numbers and returns a new number based on whether at least one of the corresponding bits is set as 1.
 
-For example a bitwise-or of `1010` and `1100` returns `1110` as the first 3 bits are set in either the first or second value but neither value sets the last bit.
+For example, a bitwise OR operation between `1010` and `1100` returns `1110`, because among the first three bits of the two numbers, at least one of the corresponding bits is set as 1.
 
 ```
-1010
-1100
-----
-1110
+  1010
+| 1100
+  ----
+  1110
 ```
 
-An the same in SQL:
+In SQL, you can use the `|` operator as follows:
 
 ```sql
 SELECT CONV(b'1010' | b'1100',10,2);
@@ -194,20 +196,20 @@ SELECT CONV(b'1010' | b'1100',10,2);
 1 row in set (0.00 sec)
 ```
 
-## [Bitwise XOR: ^](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-xor)
+## [Bitwise XOR: `^`](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-xor)
 
-The `^` operator does an bitwise-xor (exclusive or).
+The `^` operator performs a bitwise XOR (exclusive OR) operation, which compares each bit of two numbers and returns a new number based on whether the corresponding bits are different.
 
-For example:
+For example, a bitwise XOR operation between `1010` and `1100` returns `0110`, because the first bits of the two numbers are different and the third bits of the two numbers are different.
 
 ```
-1010
-1100
-----
-0110
+  1010
+^ 1100
+  ----
+  0110
 ```
 
-The same in SQL:
+In SQL, you can use the `^` operator as follows:
 
 ```sql
 SELECT CONV(b'1010' ^ b'1100',10,2);
@@ -222,13 +224,13 @@ SELECT CONV(b'1010' ^ b'1100',10,2);
 1 row in set (0.00 sec)
 ```
 
-Here the value is shown as `110` instead of `0110` as leading zero's are removed.
+Note that the result is shown as `110` instead of `0110` because leading zeros are removed.
 
-## [Left shift: <<](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_left-shift)
+## [Left shift: `<<`](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_left-shift)
 
-The `<<` operator does a left shift operation.
+The `<<` operator performs a left shift operation, which shifts the bits of a number to the left by a specified number of positions, filling the vacated bits with zeros.
 
-In the following example we use `1<<n` to move a value of `1` `n` places to the left.
+For example, the following statement uses `1<<n` to shift the binary value `1` to the left by `n` positions:
 
 ```sql
 WITH RECURSIVE cte(n) AS (
@@ -258,11 +260,11 @@ SELECT n,1<<n,LPAD(CONV(1<<n,10,2),11,0) FROM cte;
 11 rows in set (0.00 sec)
 ```
 
-## [Right shift: >>](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_right-shift)
+## [Right shift: `>>`](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_right-shift)
 
-The `>>` operator does a right shift operation.
+The `>>` operator performs a right shift operation, which shifts the bits of a number to the right by a specified number of positions, filling the vacated bits with zeros on the left.
 
-In the following example we use `1024>>n` to move a value of `1024` (`10000000000` in binary) `n` places to the right.
+For example, the following statement uses `1024>>n` to shift a value of `1024` (`10000000000` in binary) to the right by `n` positions:
 
 ```sql
 WITH RECURSIVE cte(n) AS (
@@ -293,7 +295,7 @@ SELECT n,1024>>n,LPAD(CONV(1024>>n,10,2),11,0) FROM cte;
 12 rows in set (0.00 sec)
 ```
 
-Another example of the right shift operator can be found in how a UNIX timestamp can be extracted from a TiDB [`TSO`](/tso.md) timestamp.
+The `>>` operator can also be useful for extracting specific parts of a larger number, such as extracting a UNIX timestamp from a TiDB [TSO](tso.md) timestamp.
 
 ## MySQL compatibility
 
