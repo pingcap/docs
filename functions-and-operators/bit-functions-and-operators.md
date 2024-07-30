@@ -295,7 +295,7 @@ SELECT n,1024>>n,LPAD(CONV(1024>>n,10,2),11,0) FROM cte;
 12 rows in set (0.00 sec)
 ```
 
-The `>>` operator can also be useful for extracting specific parts of a larger number, such as extracting a UNIX timestamp from a TiDB [TSO](tso.md) timestamp.
+The `>>` operator can also be useful for extracting specific parts of a larger number, such as extracting a UNIX timestamp from a TiDB [TSO](/tso.md) timestamp.
 
 ## MySQL compatibility
 
