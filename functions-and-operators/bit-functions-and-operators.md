@@ -137,7 +137,7 @@ Before the operation, the value is expanded to 64 bits.
 Take the binary number `1111000011110000` as an example. When expanded to 64 bits and inverted, it looks like this:
 
 ```
-Original (16 bits):                 1111000011110000
+Original (16 bits):                                                                 1111000011110000
 Expanded and inverted (64 bits):    1111111111111111111111111111111111111111111111110000111100001111
 ```
 
