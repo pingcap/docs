@@ -271,7 +271,7 @@ For example, the following statement uses `1024>>n` to shift a value of `1024` (
 WITH RECURSIVE cte(n) AS (
     SELECT 0 AS n
     UNION ALL
-    SELECT n+1 FROM cte WHERE n<10
+    SELECT n+1 FROM cte WHERE n<11
 )
 SELECT n,1024>>n,LPAD(CONV(1024>>n,10,2),11,0) FROM cte;
 ```
@@ -291,8 +291,9 @@ SELECT n,1024>>n,LPAD(CONV(1024>>n,10,2),11,0) FROM cte;
 |    8 |       4 | 00000000100                   |
 |    9 |       2 | 00000000010                   |
 |   10 |       1 | 00000000001                   |
+|   11 |       0 | 00000000000                   |
 +------+---------+-------------------------------+
-11 rows in set (0.01 sec)
+12 rows in set (0.00 sec)
 ```
 
 The `>>` operator can also be useful for extracting specific parts of a larger number, such as extracting a UNIX timestamp from a TiDB [TSO](tso.md) timestamp.
