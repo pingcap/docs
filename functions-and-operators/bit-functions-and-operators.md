@@ -13,12 +13,12 @@ TiDB supports all of the [bit functions and operators](https://dev.mysql.com/doc
 | Name | Description |
 | :------| :------------- |
 | [`BIT_COUNT()`](#bit_count) | Return the number of bits that are set as 1 |
-| [`&`](#bitwise-and) | Bitwise AND |
-| [`~`](#bitwise-inversion) | Bitwise inversion |
-| [`\|`](#bitwise-or) | Bitwise OR |
-| [`^`](#bitwise-xor) | Bitwise XOR |
-| [`<<`](#left-shift) | Left shift |
-| [`>>`](#right-shift) | Right shift |
+| [`&`](#bitwise-and-) | Bitwise AND |
+| [`~`](#bitwise-inversion-) | Bitwise inversion |
+| [`\|`](#bitwise-or-) | Bitwise OR |
+| [`^`](#bitwise-xor-) | Bitwise XOR |
+| [`<<`](#left-shift-) | Left shift |
+| [`>>`](#right-shift-) | Right shift |
 
 ## [`BIT_COUNT()`](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#function_bit-count)
 
