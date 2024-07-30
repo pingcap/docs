@@ -50,7 +50,7 @@ We are constantly filling in the feature gaps between TiDB Serverless and TiDB D
 
 ### TTL
 
-- Modifying table's `TTL_JOB_INTERVAL` is not supported for TiDB Serverless currently, it is fixed at `15m` currently.
+- Modifying table's `TTL_JOB_INTERVAL` is not supported for TiDB Serverless currently, `TTL_JOB_INTERVAL` is fixed at `15m` currently.
 
 ### Others
 
