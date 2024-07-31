@@ -9,6 +9,33 @@ Public cloud infrastructure has become an increasingly popular choice for deploy
 
 This document covers various essential best practices for deploying TiDB on public cloud, such as using a dedicated disk for Raft Engine, reducing compaction I/O flow in KV RocksDB, optimizing costs for cross-AZ traffic, mitigating Google Cloud live migration events, and fine-tuning the PD server in large clusters. By following these best practices, you can maximize the performance, cost efficiency, reliability, and scalability of your TiDB deployment on public cloud.
 
+## Reduce compaction I/O flow in KV RocksDB
+
+As the storage engine of TiKV, [RocksDB](https://rocksdb.org/) is used to store user data. Because the provisioned IO throughput on cloud EBS is usually limited due to cost considerations, RocksDB might exhibit high write amplification, and the disk throughput might become the bottleneck for the workload. As a result, the total number of pending compaction bytes grows over time and triggers flow control, which indicates that TiKV lacks sufficient disk bandwidth to keep up with the foreground write flow.
+
+To alleviate the bottleneck caused by limited disk throughput, you can improve performance by enabling Titan or increasing the compression level for RocksDB and reducing the disk throughput.
+
+### Enable Titan
+If the average row size is larger than 512 bytes, you can enable [Titan](https://docs.pingcap.com/tidb/stable/titan-overview) to reduce the compaction IO flow as below, the `min-blob-size` can be set to 512B or 1KB.
+If the average row size is larger than 512 bytes, you can enable [Titan](https://docs.pingcap.com/tidb/stable/titan-overview) to reduce the compaction I/O flow. Set the `min-blob-size` to 512B or 1KB, `blob-file-compression` to "zstd"
+
+```
+[rocksdb.titan]
+enabled = true
+[rocksdb.defaultcf.titan]
+min-blob-size = "1KB"
+blob-file-compression = "zstd"
+```
+
+### Increase all the compression levels
+
+If the average row size is smaller than 512 bytes and Titan is not applicable, you can increase all the compression levels of the default column family to `zstd`. Use the following configuration:
+
+```
+[rocksdb.defaultcf]
+compression-per-level = ["zstd", "zstd", "zstd", "zstd", "zstd", "zstd", "zstd"]
+```
+
 ## Use a dedicated disk for Raft Engine
 
 The [Raft Engine](/glossary.md#raft-engine) in TiKV plays a critical role similar to that of a write-ahead log (WAL) in traditional databases. To achieve optimal performance and stability, it is crucial to allocate a dedicated disk for the Raft Engine when you deploy TiDB on public cloud. The following `iostat` shows the I/O characteristics on a TiKV node with a write-heavy workload.
@@ -96,18 +123,6 @@ tikv:
       name: raft-pv-ssd
       storageSize: 512Gi
 ```
-
-## Reduce compaction I/O flow in KV RocksDB
-
-As the storage engine of TiKV, [RocksDB](https://rocksdb.org/) is used to store user data. Because the provisioned IO throughput on cloud EBS is usually limited due to cost considerations, RocksDB might exhibit high write amplification, and the disk throughput might become the bottleneck for the workload. As a result, the total number of pending compaction bytes grows over time and triggers flow control, which indicates that TiKV lacks sufficient disk bandwidth to keep up with the foreground write flow.
-
-To alleviate the bottleneck caused by limited disk throughput, you can improve performance by increasing the compression level for RocksDB and reducing the disk throughput. For example, you can refer to the following example to increase all the compression levels of the default column family to `zstd`.
-
-```
-[rocksdb.defaultcf]
-compression-per-level = ["zstd", "zstd", "zstd", "zstd", "zstd", "zstd", "zstd"]
-```
-
 ## Optimize cost for cross-AZ network traffic
 
 Deploying TiDB across multiple availability zones (AZs) can lead to increased costs due to cross-AZ data transfer fees. To optimize costs, it is important to reduce cross-AZ network traffic.
