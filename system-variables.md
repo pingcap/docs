@@ -2144,7 +2144,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 >
 > The feature controlled by this variable is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
-<CustomContent platform="tidb-cloud">
+<CustomContent platform="tidb">
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -2162,7 +2162,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 </CustomContent>
 
-<CustomContent platform="tidb">
+<CustomContent platform="tidb-cloud">
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -2175,7 +2175,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - The feature controlled by this variable has the following limitations:
     - It does not support statements within explicit transactions.
     - It only supports execution plans that contain and only contain `TableReader`, `IndexReader`, `IndexLookUp`, `Projection`, and `Selection` operators.
-    - For statements using Lazy Cursor Fetch, execution information does not appear in the [statements summary](/statement-summary-tables.md).
+    - For statements using Lazy Cursor Fetch, execution information does not appear in the [statements summary](/statement-summary-tables.md) and [slow query log](https://docs.pingcap.com/tidb/stable/identify-slow-queries).
 - For unsupported scenarios, its behavior is the same as when setting this variable to `OFF`.
 
 </CustomContent>
