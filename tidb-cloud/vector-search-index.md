@@ -135,7 +135,7 @@ See [Table Partitioning](/partitioned-table.md) for more information.
 
 ## View index build progress
 
-Unlike other indexes, vector indexer is asynchronous. As a result, after inserted bulk data, vector index may be not available yet. This will not affect correctness or consistency -- you can always perform vector search at any time and get complete results. However, performance will be suboptimal until the index is built. In this case, you can view the index build progress by querying the `INFORMATION_SCHEMA`.`TIFLASH_INDEXES` table:
+Unlike other indexes, vector indexer is asynchronous. As a result, after inserted bulk data, vector index may be not available yet. This will not affect correctness or consistency -- you can always perform vector search at any time and get complete results. However, performance will be suboptimal until vector index is built. In this case, you can view index build progress by querying the `INFORMATION_SCHEMA`.`TIFLASH_INDEXES` table:
 
 ```sql
 [tidb]> SELECT * FROM INFORMATION_SCHEMA.TIFLASH_INDEXES;
@@ -147,13 +147,13 @@ Unlike other indexes, vector indexer is asynchronous. As a result, after inserte
 +---------------+------------+----------------+----------+--------------------+-------------+-----------+------------+---------------------+-------------------------+--------------------+------------------------+------------------+
 ```
 
-- `ROWS_STABLE_INDEXED` and `ROWS_STABLE_NOT_INDEXED` columns show the index build progress in Stable layer. When `ROWS_STABLE_NOT_INDEXED` becomes 0, the index build is complete.
+- `ROWS_STABLE_INDEXED` and `ROWS_STABLE_NOT_INDEXED` columns show index build progress. When `ROWS_STABLE_NOT_INDEXED` becomes 0, index build is complete.
 
-  As a reference, indexing 500 MiB vector dataset may take up to 20 minutes. Currently it is not possible to adjust the indexer priority or speed. The indexer may run in parallel for multiple tables.
+  As a reference, indexing 500 MiB vector dataset may take up to 20 minutes. Currently it is not possible to adjust indexer priority or speed. The indexer may run in parallel for multiple tables.
 
-- `ROWS_DELTA_NOT_INDEXED` column shows how many rows are in the Delta layer. The Delta layer is used to store the rows that are inserted or updated _recently_. The Delta layer is periodically merged into the Stable layer according to the write workload (which is called Compaction).
+- `ROWS_DELTA_NOT_INDEXED` column shows how many rows are in Delta layer. Delta layer stores _recently_ inserted or updated rows. Delta layer is periodically merged into Stable layer according to the write workload (which is called Compaction).
 
-  The delta layer is always not indexed. Sometimes you may want to achieve best performance by forcing the merge of Delta layer into Stable layer, so that all data can be indexed:
+  Delta layer is always not indexed. Sometimes you may want to achieve best performance by forcing the merge of Delta layer into Stable layer, so that all data can be indexed:
 
   ```sql
   ALTER TABLE <TABLE_NAME> COMPACT;
