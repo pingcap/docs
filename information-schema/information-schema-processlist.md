@@ -81,7 +81,7 @@ Fields in the `PROCESSLIST` table are described as follows:
 * DISK: The disk usage in bytes.
 * TxnStart: The start time of the transaction.
 * RESOURCE_GROUP: The resource group name.
-* SESSION_ALIAS: The alias of the session.
+* SESSION_ALIAS: The alias of the current session.
 
 ## CLUSTER_PROCESSLIST
 
