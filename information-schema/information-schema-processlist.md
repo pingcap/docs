@@ -14,6 +14,7 @@ The `PROCESSLIST` table has additional columns not present in `SHOW PROCESSLIST`
 * A `DISK` column to show the disk usage in bytes.
 * A `TxnStart` column to show the start time of the transaction.
 * A `RESOURCE_GROUP` column to show the resource group name.
+* A `SESSION_ALIAS` column to show the alias of the current session.
 
 ```sql
 USE information_schema;
@@ -37,6 +38,7 @@ DESC processlist;
 | DISK                | bigint(21) unsigned | YES  |      | NULL    |       |
 | TxnStart            | varchar(64)         | NO   |      |         |       |
 | RESOURCE_GROUP      | varchar(32)         | NO   |      |         |       |
+| SESSION_ALIAS       | varchar(64)         | NO   |      |         |       |
 +---------------------+---------------------+------+------+---------+-------+
 13 rows in set (0.00 sec)
 ```
@@ -60,6 +62,7 @@ SELECT * FROM processlist\G
                DISK: 0
            TxnStart:
      RESOURCE_GROUP: rg1
+      SESSION_ALIAS:
 1 row in set (0.00 sec)
 ```
 
@@ -78,6 +81,7 @@ Fields in the `PROCESSLIST` table are described as follows:
 * DISK: The disk usage in bytes.
 * TxnStart: The start time of the transaction.
 * RESOURCE_GROUP: The resource group name.
+* SESSION_ALIAS: The alias of the current session.
 
 ## CLUSTER_PROCESSLIST
 
@@ -88,14 +92,14 @@ SELECT * FROM information_schema.cluster_processlist;
 ```
 
 ```sql
-+-----------------+-----+------+----------+------+---------+------+------------+------------------------------------------------------+-----+----------------------------------------+----------------+
-| INSTANCE        | ID  | USER | HOST     | DB   | COMMAND | TIME | STATE      | INFO                                                 | MEM | TxnStart                               | RESOURCE_GROUP | 
-+-----------------+-----+------+----------+------+---------+------+------------+------------------------------------------------------+-----+----------------------------------------+----------------+
++-----------------+-----+------+----------+------+---------+------+------------+------------------------------------------------------+-----+----------------------------------------+----------------+---------------+
+| INSTANCE        | ID  | USER | HOST     | DB   | COMMAND | TIME | STATE      | INFO                                                 | MEM | TxnStart                               | RESOURCE_GROUP | SESSION_ALIAS |
++-----------------+-----+------+----------+------+---------+------+------------+------------------------------------------------------+-----+----------------------------------------+----------------+---------------+
 
-| 10.0.1.22:10080 | 150 | u1   | 10.0.1.1 | test | Query   | 0    | autocommit | select count(*) from usertable                       | 372 | 05-28 03:54:21.230(416976223923077223) | default        |
-| 10.0.1.22:10080 | 138 | root | 10.0.1.1 | test | Query   | 0    | autocommit | SELECT * FROM information_schema.cluster_processlist | 0   | 05-28 03:54:21.230(416976223923077220) | rg1            |
-| 10.0.1.22:10080 | 151 | u1   | 10.0.1.1 | test | Query   | 0    | autocommit | select count(*) from usertable                       | 372 | 05-28 03:54:21.230(416976223923077224) | rg2            |
-| 10.0.1.21:10080 | 15  | u2   | 10.0.1.1 | test | Query   | 0    | autocommit | select max(field0) from usertable                    | 496 | 05-28 03:54:21.230(416976223923077222) | default        |
-| 10.0.1.21:10080 | 14  | u2   | 10.0.1.1 | test | Query   | 0    | autocommit | select max(field0) from usertable                    | 496 | 05-28 03:54:21.230(416976223923077225) | default        |
-+-----------------+-----+------+----------+------+---------+------+------------+------------------------------------------------------+-----+----------------------------------------+----------------+
+| 10.0.1.22:10080 | 150 | u1   | 10.0.1.1 | test | Query   | 0    | autocommit | select count(*) from usertable                       | 372 | 05-28 03:54:21.230(416976223923077223) | default        |               |
+| 10.0.1.22:10080 | 138 | root | 10.0.1.1 | test | Query   | 0    | autocommit | SELECT * FROM information_schema.cluster_processlist | 0   | 05-28 03:54:21.230(416976223923077220) | rg1            |               |
+| 10.0.1.22:10080 | 151 | u1   | 10.0.1.1 | test | Query   | 0    | autocommit | select count(*) from usertable                       | 372 | 05-28 03:54:21.230(416976223923077224) | rg2            |               |
+| 10.0.1.21:10080 | 15  | u2   | 10.0.1.1 | test | Query   | 0    | autocommit | select max(field0) from usertable                    | 496 | 05-28 03:54:21.230(416976223923077222) | default        |               |
+| 10.0.1.21:10080 | 14  | u2   | 10.0.1.1 | test | Query   | 0    | autocommit | select max(field0) from usertable                    | 496 | 05-28 03:54:21.230(416976223923077225) | default        |               |
++-----------------+-----+------+----------+------+---------+------+------------+------------------------------------------------------+-----+----------------------------------------+----------------+---------------+
 ```
