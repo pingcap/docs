@@ -201,7 +201,7 @@ SELECT CONV(b'1010' | b'1100',10,2);
 
 The `^` operator performs a bitwise XOR (exclusive OR) operation, which compares each bit of two numbers and returns a new number based on whether the corresponding bits are different.
 
-For example, a bitwise XOR operation between `1010` and `1100` returns `0110`, because the first bits of the two numbers are different and the third bits of the two numbers are different.
+For example, a bitwise XOR operation between `1010` and `1100` returns `0110`, because the second and the third bits of the two numbers are different.
 
 ```
   1010
@@ -225,11 +225,11 @@ SELECT CONV(b'1010' ^ b'1100',10,2);
 1 row in set (0.00 sec)
 ```
 
-Note that the result is shown as `110` instead of `0110` because leading zeros are removed.
+Note that the result is shown as `110` instead of `0110` because the leading zero is removed.
 
 ## [Left shift: `<<`](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_left-shift)
 
-The `<<` operator performs a left shift operation, which shifts the bits of a number to the left by a specified number of positions, filling the vacated bits with zeros.
+The `<<` operator performs a left shift operation, which shifts the bits of a number to the left by a specified number of positions, filling the vacated bits with zeros on the right.
 
 For example, the following statement uses `1<<n` to shift the binary value `1` to the left by `n` positions:
 
