@@ -14,7 +14,7 @@ The `PROCESSLIST` table has additional columns not present in `SHOW PROCESSLIST`
 * A `DISK` column to show the disk usage in bytes.
 * A `TxnStart` column to show the start time of the transaction.
 * A `RESOURCE_GROUP` column to show the resource group name.
-* A `SESSION_ALIAS` column to show the alias of the session.
+* A `SESSION_ALIAS` column to show the alias of the current session.
 
 ```sql
 USE information_schema;
