@@ -2142,19 +2142,43 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Warning:**
 >
-> The feature controlled by this variable is experimental. It is not recommended that you use it in the production environment.
+> The feature controlled by this variable is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+<CustomContent platform="tidb-cloud">
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
-- This variable controls the behavior of the [Cursor Fetch](/develop/dev-guide-connection-parameters.md#use-streamingresult-to-get-the-execution-result) feature. When the variable is `OFF`, and Cursor Fetch is enabled, TiDB will read all the data at the start of statement execution and store it in TiDB's memory. Subsequently, the data is returned to the client based on the client's specified `FetchSize`. If the result set is too large, it may temporarily write the result to disk. When the variable is `ON`, and Cursor Fetch is enabled, TiDB will not read all the data into the TiDB node at once but will read data into the TiDB node incrementally as the client fetches it.
-- The feature has the following limitations:
-    1. It does not support statements within explicit transactions.
-    2. It only supports execution plans that only consist of `TableReader`, `IndexReader`, `IndexLookUp`, `Projection`, and `Selection` operators.
-    3. For statements using Lazy Cursor Fetch, execution information will not appear in the [Statements Summary](/statement-summary-tables.md) and [Slow Log](/identify-slow-queries.md).
-- For unsupported scenarios, the behavior will remain consistent with the variable being `OFF`.
+- This variable controls the behavior of the [Cursor Fetch](/develop/dev-guide-connection-parameters.md#use-streamingresult-to-get-the-execution-result) feature.
+    - When Cursor Fetch is enabled and this variable is set to `OFF`, TiDB reads all the data at the start of statement execution, stores the data into TiDB's memory, and returns it to the client based on the client's specified `FetchSize` for subsequent client reads. If the result set is too large, TiDB might temporarily write the result to the hard disk.
+    - When Cursor Fetch is enabled and this variable is set to `ON`, TiDB does not read all the data into the TiDB node at once, but reads data into the TiDB node incrementally as the client fetches it.
+- The feature controlled by this variable has the following limitations:
+    - It does not support statements within explicit transactions.
+    - It only supports execution plans that contain and only contain `TableReader`, `IndexReader`, `IndexLookUp`, `Projection`, and `Selection` operators.
+    - For statements using Lazy Cursor Fetch, execution information does not appear in the [statements summary](/statement-summary-tables.md) and [slow query log](/identify-slow-queries.md).
+- For unsupported scenarios, its behavior is the same as when setting this variable to `OFF`.
+
+</CustomContent>
+
+<CustomContent platform="tidb">
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls the behavior of the [Cursor Fetch](/develop/dev-guide-connection-parameters.md#use-streamingresult-to-get-the-execution-result) feature.
+    - When Cursor Fetch is enabled and this variable is set to `OFF`, TiDB reads all the data at the start of statement execution, stores the data into TiDB's memory, and returns it to the client based on the client's specified `FetchSize` for subsequent client reads. If the result set is too large, TiDB might temporarily write the result to the hard disk.
+    - When Cursor Fetch is enabled and this variable is set to `ON`, TiDB does not read all the data into the TiDB node at once, but reads data into the TiDB node incrementally as the client fetches it.
+- The feature controlled by this variable has the following limitations:
+    - It does not support statements within explicit transactions.
+    - It only supports execution plans that contain and only contain `TableReader`, `IndexReader`, `IndexLookUp`, `Projection`, and `Selection` operators.
+    - For statements using Lazy Cursor Fetch, execution information does not appear in the [statements summary](/statement-summary-tables.md).
+- For unsupported scenarios, its behavior is the same as when setting this variable to `OFF`.
+
+</CustomContent>
 
 ### tidb_enable_non_prepared_plan_cache
 
