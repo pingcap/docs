@@ -149,7 +149,7 @@ Unlike other indexes, vector indexer is asynchronous. As a result, after inserte
 
 - `ROWS_STABLE_INDEXED` and `ROWS_STABLE_NOT_INDEXED` columns show the index build progress in Stable layer. When `ROWS_STABLE_NOT_INDEXED` becomes 0, the index build is complete.
 
-  As a reference, indexing 500MiB vector dataset may take up to 20 minutes. Currently it is not possible to adjust the indexer priority or speed. The indexer may run in parallel for multiple tables.
+  As a reference, indexing 500 MiB vector dataset may take up to 20 minutes. Currently it is not possible to adjust the indexer priority or speed. The indexer may run in parallel for multiple tables.
 
 - `ROWS_DELTA_NOT_INDEXED` column shows how many rows are in the Delta layer. The Delta layer is used to store the rows that are inserted or updated _recently_. The Delta layer is periodically merged into the Stable layer according to the write workload (which is called Compaction).
 
