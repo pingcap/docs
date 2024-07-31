@@ -1662,13 +1662,13 @@ CREATE TABLE t (a varchar(20), b blob,
 ERROR 1503 (HY000): A UNIQUE INDEX must include all columns in the table's partitioning function
 ```
 
-#### Global Index
+#### Global indexes
 
-If you need to create unique indexes that **don't include all the columns used in the partition expressions**, you can achieve this by enabling the [tidb_enable_global_index](/system-variables.md#tidb_enable_global_index-new-in-v760) variable.
+If you need to create unique indexes that **do not include all the columns used in the partition expressions**, you can achieve this by enabling the [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) system variable.
 
-Previously an index on partitioned tables are created for each partition, which is the reason for the limitation that all unique keys needs to include all partitioning columns. Since the uniqueness can only be enforced within each partition. A global index will be created on table level, so it can enforce uniqueness regardless of partitioning. Note that this has implications on partitioning management, DROP, TRUNCATE, REORGANIZE PARTITION will need to also manage the table level global index.
+Previously an index on partitioned tables are created for each partition, which is the reason for the limitation that all unique keys need to include all partitioning columns. The uniqueness can only be enforced within each partition. A global index will be created on table level, so it can enforce uniqueness regardless of partitioning. Note that this has implications on partitioning management, `DROP`, `TRUNCATE`, and `REORGANIZE PARTITION` will also need to manage the table level global index.
 
-After enabling this variable, any unique index created by the user that does not meet the above constraint will automatically be a global index.
+After enabling this variable, any unique index that does not meet the preceding constraint will automatically become a global index.
 
 ```sql
 SET tidb_enable_global_index = ON;
@@ -1685,9 +1685,9 @@ PARTITION BY HASH(col3)
 PARTITIONS 4;
 ```
 
-In the example above, the unique index `uidx12` will be implicitly a global index, but `uidx3` remains a regular unique index.
+In this example, the unique index `uidx12` will be implicitly a global index, but `uidx3` remains a regular unique index.
 
-It should be noted that a **clustered index** cannot be a global index:
+Note that a **clustered index** cannot be a global index, as shown in the following example:
 
 ```sql
 SET tidb_enable_global_index = ON;
@@ -1703,9 +1703,9 @@ CREATE TABLE t1 (
 ERROR 1503 (HY000): A CLUSTERED INDEX must include all columns in the table's partitioning function
 ```
 
-The reason is that if the clustered index is a global index, the table will no longer be partitioned. This is because the key of the clustered index is also the record key which means it should be partition level, but the global index is on table level, which creates a conflict.
+The reason is that if the clustered index is a global index, the table will no longer be partitioned. This is because the key of the clustered index is also the record key, which means it should be on partition level. But the global index is on table level, which causes a conflict.
 
-Users can identify a global index by querying the [`information_schema`.`tidb_indexes`](/information-schema/information-schema-tidb-indexes.md) table, aside from checking the table structure.
+You can identify a global index by querying the [`information_schema.tidb_indexes`](/information-schema/information-schema-tidb-indexes.md) table and checking the table structure.
 
 ```sql
 SELECT * FROM information_schema.tidb_indexes WHERE table_name='t1';
