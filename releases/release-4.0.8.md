@@ -149,7 +149,6 @@ TiDB version: 4.0.8
 
         - Fix the unexpected exit caused by the failure to update the GC safepoint [#979](https://github.com/pingcap/tiflow/pull/979)
         - Fix the issue that the task status is unexpectedly flushed because of the incorrect mod revision cache [#1017](https://github.com/pingcap/tiflow/pull/1017)
-        - Fix the unexpected empty Maxwell messages [#978](https://github.com/pingcap/tiflow/pull/978)
 
     + TiDB Lightning
 

@@ -139,7 +139,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `grpc-compression-type`
 
-+ The compression algorithm for gRPC messages
++ The compression algorithm for gRPC messages, which affects gRPC messages between TiKV nodes and gRPC response messages sent from TiKV to TiDB
 + Optional values: `"none"`, `"deflate"`, `"gzip"`
 + Default value: `"none"`
 
