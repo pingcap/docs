@@ -206,4 +206,4 @@ Note that some connectors call the common library to connect to the database, an
 ## TiProxy resources
 
 - [TiProxy Release Notes](https://github.com/pingcap/tiproxy/releases)
-- [TiProxy Issues](https://github.com/pingcap/tiup/issues): Lists TiProxy GitHub issues
+- [TiProxy Issues](https://github.com/pingcap/tiproxy/issues): Lists TiProxy GitHub issues
