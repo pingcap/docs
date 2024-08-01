@@ -135,7 +135,9 @@ See [Table Partitioning](/partitioned-table.md) for more information.
 
 ## View index build progress
 
-Unlike other indexes, vector indexes are built asynchronously. Therefore, vector indexes might not be immediately available after bulk data insertion. This does not affect data correctness or consistency, and you can perform vector searches at any time and get complete results. However, performance will be suboptimal until vector indexes are fully built. To view the index build progress, you can query the `INFORMATION_SCHEMA.TIFLASH_INDEXES` table as follows:
+Unlike other indexes, vector indexes are built asynchronously. Therefore, vector indexes might not be immediately available after bulk data insertion. This does not affect data correctness or consistency, and you can perform vector searches at any time and get complete results. However, performance will be suboptimal until vector indexes are fully built. 
+
+To view the index build progress, you can query the `INFORMATION_SCHEMA.TIFLASH_INDEXES` table as follows:
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.TIFLASH_INDEXES;
