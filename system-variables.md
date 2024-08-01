@@ -5866,6 +5866,24 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 </CustomContent>
 
+### tiflash_hashagg_preaggregation_mode <span class="version-mark">New in v8.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: String
+- Default value: `auto`
+- Value options: `auto`, `force_streaming`, `force_preagg`
+- This variable is used to control the pre-aggregation policy for the first stage of two-staged or three-staged HashAgg pushed down to TiFlash:
+    - `force_preagg`: TiFlash will enforce pre-aggregation in the first stage of HashAgg.
+    - `force_streaming`: TiFlash will directly pass the data to the next stage of HashAgg without pre-aggregation.
+    - `auto`: TiFlash will automatically decide whether to perform pre-aggregation based on the observed workload's reduction rate.
+
+> **Note:**
+>
+> - This variable only takes effect when [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740) is greater than `0`. In other words, if [tiflash_mem_quota_query_per_node](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740) is `0` or `-1`, query-level spilling will not be enabled even if `tiflash_query_spill_ratio` is greater than `0`.
+> - When TiFlash query-level spilling is enabled, the spilling thresholds for individual TiFlash operators automatically become invalidated. In other words, if both [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740) and `tiflash_query_spill_ratio` are greater than 0, the three variables [tidb_max_bytes_before_tiflash_external_sort](/system-variables.md#tidb_max_bytes_before_tiflash_external_sort-new-in-v700), [tidb_max_bytes_before_tiflash_external_group_by](/system-variables.md#tidb_max_bytes_before_tiflash_external_group_by-new-in-v700), and [tidb_max_bytes_before_tiflash_external_join](/system-variables.md#tidb_max_bytes_before_tiflash_external_join-new-in-v700) become invalidated automatically, equivalent to setting them to `0`.
+
 ### tikv_client_read_timeout <span class="version-mark">New in v7.4.0</span>
 
 - Scope: SESSION | GLOBAL
