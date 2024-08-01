@@ -149,17 +149,17 @@ SELECT * FROM INFORMATION_SCHEMA.TIFLASH_INDEXES;
 
 - The `ROWS_STABLE_INDEXED` and `ROWS_STABLE_NOT_INDEXED` columns show the index build progress. When `ROWS_STABLE_NOT_INDEXED` becomes 0, the index build is complete.
 
-  As a reference, indexing a 500 MiB vector dataset might take up to 20 minutes. The indexer can run in parallel for multiple tables. Currently, adjusting the indexer priority or speed is not supported.
+    As a reference, indexing a 500 MiB vector dataset might take up to 20 minutes. The indexer can run in parallel for multiple tables. Currently, adjusting the indexer priority or speed is not supported.
 
 - The `ROWS_DELTA_NOT_INDEXED` column shows the number of rows in the Delta layer. The Delta layer stores _recently_ inserted or updated rows and is periodically merged into the Stable layer according to the write workload. This merge process is called Compaction.
 
-  The Delta layer is always not indexed. To achieve optimal performance, you can force the merge of the Delta layer into the Stable layer so that all data can be indexed:
+    The Delta layer is always not indexed. To achieve optimal performance, you can force the merge of the Delta layer into the Stable layer so that all data can be indexed:
 
-  ```sql
-  ALTER TABLE <TABLE_NAME> COMPACT;
-  ```
+    ```sql
+    ALTER TABLE <TABLE_NAME> COMPACT;
+    ```
 
-  For more information, see [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md).
+    For more information, see [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md).
 
 ## Check whether the vector index is used
 
