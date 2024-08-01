@@ -320,7 +320,7 @@ If no placement policy is specified for a partition in a table, the partition at
 - The `p4` partition will apply the `storagefornewdata` policy.
 - The `p1`, `p2`, and `p3` partitions will apply the `companystandardpolicy` placement policy inherited from the table `t1`.
 - The global index `idx` will apply the same `companystandardpolicy` placement policy as the table `t1`.
-- If no placement policy is specified for the table `t1`, the `p1`, `p2`, and `p3` partitions, the global index `idx` will inherit the database default policy or the global default policy.
+- If no placement policy is specified for the table `t1`, then the `p1`, `p2`, and `p3` partitions and the global index `idx` will inherit the database default policy or the global default policy.
 
 After placement policies are attached to these partitions, you can change the placement policy for a specific partition as in the following example:
 
