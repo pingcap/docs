@@ -155,6 +155,10 @@ Usually, there are two kinds of processing methods in JDBC:
 
 TiDB supports both methods, but it is preferred that you use the first method, because it is a simpler implementation and has a better execution efficiency.
 
+For the second method, TiDB will load all data to the TiDB node at first and then return them to the client according to the `FetchSize`. Therefore, it'll usually use more memory than the first choice and may spill the data to the temporary storage if [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom) is `ON`.
+
+If the system variable [`tidb_enable_lazy_cursor_fetch`](/system-variables.md#tidb_enable_lazy_cursor_fetch) is `ON`, TiDB will try to only load the data when the client fetches it, and use less memory. For detail and limitations, read the description of the variable [`tidb_enable_lazy_cursor_fetch`](/system-variables.md#tidb_enable_lazy_cursor_fetch).
+
 ### MySQL JDBC parameters
 
 JDBC usually provides implementation-related configurations in the form of JDBC URL parameters. This section introduces [MySQL Connector/J's parameter configurations](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html) (If you use MariaDB, see [MariaDB's parameter configurations](https://mariadb.com/kb/en/library/about-mariadb-connector-j/#optional-url-parameters)). Because this document cannot cover all configuration items, it mainly focuses on several parameters that might affect performance.
