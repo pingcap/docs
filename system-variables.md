@@ -2574,7 +2574,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
-- This variable controls whether to enable the function of upgrading shared locks to exclusive locks. When the variable value is `ON`, TiDB will try to upgrade shared locks to exclusive locks to reduce the probability of deadlock. The default value of this variable is `OFF`, which means that the function of upgrading shared locks to exclusive locks is disabled.
+- This variable controls whether to enable the function of upgrading shared locks to exclusive locks. TiDB does not support `SELECT LOCK IN SHARE MODE` by default. When the variable value is `ON`, TiDB will try to upgrade the `SELECT LOCK IN SHARE MODE` statement to `SELECT FOR UPDATE` and add a pessimistic lock. The default value of this variable is `OFF`, which means that the function of upgrading shared locks to exclusive locks is disabled.
 - If this variable and [`tidb_enable_noop_functions`](#tidb_enable_noop_functions-new-in-v40) are enabled at the same time, the setting of `tidb_enable_noop_functions` will be overwritten.
 
 ### tidb_enable_slow_log
