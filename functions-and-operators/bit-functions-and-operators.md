@@ -71,7 +71,7 @@ SELECT BIT_COUNT(INET_ATON('255.255.255.0'));
 1 row in set (0.00 sec)
 ```
 
-## [<code>&</code> (bitwise AND)](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-and)
+## [`&` (bitwise AND)](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-and)
 
 The `&` operator performs a bitwise AND operation. It compares the corresponding bits of two numbers: if both corresponding bits are 1, the corresponding bit of the result is 1; otherwise, it is 0.
 
