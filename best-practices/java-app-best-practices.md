@@ -72,7 +72,7 @@ The following two processing methods are usually used in JDBC:
 
 - The second method: Use Cursor Fetch by first [setting `FetchSize`](http://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html) as a positive integer and then configuring `useCursorFetch=true` in the JDBC URL.
 
-TiDB supports both methods, but it is recommended that you use the first method that setting `FetchSize` to `Integer.MIN_VALUE`, because it is a simpler implementation and has a better execution efficiency.
+TiDB supports both methods, but it is recommended that you use the first method that setting `FetchSize` to `Integer.MIN_VALUE`, because it is a simpler implementation and has better execution efficiency.
 
 For the second method, TiDB first loads all data to the TiDB node, and then return data to the client according to the `FetchSize`. Therefore, it usually uses more memory than the first method. If [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom) is set to `ON`, TiDB might write data to the temporary disk.
 
