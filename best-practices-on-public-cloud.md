@@ -26,7 +26,7 @@ To alleviate the bottleneck caused by limited disk throughput, you can improve p
     enabled = true
     [rocksdb.defaultcf.titan]
     min-blob-size = "1KB"
-  ```
+    ```
 
 - If your average row size is larger than 512 bytes, you can enable Titan to reduce the compaction I/O flow as follows, with `min-blob-size` set to `"512B"` or `"1KB"` and `blob-file-compression` set to `"zstd"`:
 
