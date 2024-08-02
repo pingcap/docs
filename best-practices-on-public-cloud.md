@@ -7,31 +7,42 @@ summary: Learn about the best practices for deploying TiDB on public cloud.
 
 Public cloud infrastructure has become an increasingly popular choice for deploying and managing TiDB. However, deploying TiDB on public cloud requires careful consideration of several critical factors, including performance tuning, cost optimization, reliability, and scalability.
 
-This document covers various essential best practices for deploying TiDB on public cloud, such as using a dedicated disk for Raft Engine, reducing compaction I/O flow in KV RocksDB, optimizing costs for cross-AZ traffic, mitigating Google Cloud live migration events, and fine-tuning the PD server in large clusters. By following these best practices, you can maximize the performance, cost efficiency, reliability, and scalability of your TiDB deployment on public cloud.
+This document covers various essential best practices for deploying TiDB on public cloud, such as reducing compaction I/O flow in KV RocksDB, using a dedicated disk for Raft Engine, optimizing costs for cross-AZ traffic, mitigating Google Cloud live migration events, and fine-tuning the PD server in large clusters. By following these best practices, you can maximize the performance, cost efficiency, reliability, and scalability of your TiDB deployment on public cloud.
 
 ## Reduce compaction I/O flow in KV RocksDB
 
 As the storage engine of TiKV, [RocksDB](https://rocksdb.org/) is used to store user data. Because the provisioned IO throughput on cloud EBS is usually limited due to cost considerations, RocksDB might exhibit high write amplification, and the disk throughput might become the bottleneck for the workload. As a result, the total number of pending compaction bytes grows over time and triggers flow control, which indicates that TiKV lacks sufficient disk bandwidth to keep up with the foreground write flow.
 
-To alleviate the bottleneck caused by limited disk throughput, you can improve performance by enabling Titan or increasing the compression level for RocksDB and reducing the disk throughput.
+To alleviate the bottleneck caused by limited disk throughput, you can improve performance by [enabling Titan](#enable-titan). If Titan is not applicable and your average row size is smaller than 512 bytes, you can improve performance by [increasing all the compression levels](#increase-all-the-compression-levels).
 
 ### Enable Titan
-If the average row size is larger than 512 bytes, you can enable [Titan](https://docs.pingcap.com/tidb/stable/titan-overview) to reduce the compaction IO flow as below, the `min-blob-size` can be set to 512B or 1KB.
-If the average row size is larger than 512 bytes, you can enable [Titan](https://docs.pingcap.com/tidb/stable/titan-overview) to reduce the compaction I/O flow. Set the `min-blob-size` to 512B or 1KB, `blob-file-compression` to "zstd"
 
-```
-[rocksdb.titan]
-enabled = true
-[rocksdb.defaultcf.titan]
-min-blob-size = "1KB"
-blob-file-compression = "zstd"
-```
+[Titan](/storage-engine/titan-overview.md) is a high-performance [RocksDB](https://github.com/facebook/rocksdb) plugin for key-value separation, which can reduce write amplification in RocksDB when large values are used.
+
+- If your average row size is larger than 512 bytes, you can enable Titan to reduce the compaction IO flow as follows, with `min-blob-size` set to `"512B"` or `"1KB"`:
+
+    ```toml
+    [rocksdb.titan]
+    enabled = true
+    [rocksdb.defaultcf.titan]
+    min-blob-size = "1KB"
+  ```
+
+- If your average row size is larger than 512 bytes, you can enable Titan to reduce the compaction I/O flow as follows, with `min-blob-size` set to `"512B"` or `"1KB"` and `blob-file-compression` set to `"zstd"`:
+
+    ```toml
+    [rocksdb.titan]
+    enabled = true
+    [rocksdb.defaultcf.titan]
+    min-blob-size = "1KB"
+    blob-file-compression = "zstd"
+    ```
 
 ### Increase all the compression levels
 
-If the average row size is smaller than 512 bytes and Titan is not applicable, you can increase all the compression levels of the default column family to `zstd`. Use the following configuration:
+If Titan is not applicable and your average row size is smaller than 512 bytes, you can increase all the compression levels of the default column family to `"zstd"` as follows:
 
-```
+```toml
 [rocksdb.defaultcf]
 compression-per-level = ["zstd", "zstd", "zstd", "zstd", "zstd", "zstd", "zstd"]
 ```
