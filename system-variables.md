@@ -2567,6 +2567,16 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Value options: `OFF`, `ON`
 - This variable controls whether TiDB enables chunk objects cache. If the value is `ON`, TiDB prefers to use the cached chunk object and only requests from the system if the requested object is not in the cache. If the value is `OFF`, TiDB requests chunk objects from the system directly.
 
+### `tidb_enable_shared_lock_upgrade` <span class="version-mark">New in v8.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to enable the function of upgrading shared locks to exclusive locks. When the variable value is `ON`, TiDB will try to upgrade shared locks to exclusive locks to reduce the probability of deadlock. The default value of this variable is `OFF`, which means that the function of upgrading shared locks to exclusive locks is disabled.
+- If this variable and [`tidb_enable_noop_functions`](#tidb_enable_noop_functions-new-in-v40) are enabled at the same time, the setting of `tidb_enable_noop_functions` will be overwritten.
+
 ### tidb_enable_slow_log
 
 > **Note:**
