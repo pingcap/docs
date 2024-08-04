@@ -1309,6 +1309,7 @@ Currently, partition pruning does not work with `LIKE` conditions.
 
     * [`UNIX_TIMESTAMP()`](/functions-and-operators/date-and-time-functions.md)
     * [`TO_DAYS()`](/functions-and-operators/date-and-time-functions.md)
+    * [`EXTRACT(<time unit> FROM <DATETIME/DATE/TIME column>)`](/functions-and-operators/date-and-time-functions.md); For DATE and DATETIME columns YEAR, and YEAR_MONTH time units are considered monotonous functions, and for TIME columns HOUR, HOUR_MINUTE, HOUR_SECOND and HOUR_MICROSECOND are considered monotonous. Also note that WEEK is not supported as time unit in EXTRACT for partition pruning.
 
     For example, the partition expression is a simple column:
 
