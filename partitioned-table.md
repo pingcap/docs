@@ -1457,7 +1457,7 @@ This section introduces some restrictions and limitations on partitioned tables 
 - Using the [`ALTER TABLE ... CACHE`](/cached-tables.md) statement to set partitioned tables to cached tables is not supported.
 - [Temporary tables](/temporary-tables.md) in TiDB are **NOT** compatible with partitioned tables.
 - Creating a [foreign key](/foreign-key.md) on a partitioned table is not supported.
-- The [ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])](/optimizer-hints.md#order_indext1_name-idx1_name--idx2_name-) hint does not work for partitioned tables and their related indexes, because indexes on partitioned tables cannot be read in order.
+- The [`ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])`](/optimizer-hints.md#order_indext1_name-idx1_name--idx2_name-) hint does not work for partitioned tables and their related indexes, because indexes on partitioned tables cannot be read in order.
 
 ### Partitioning keys, primary keys and unique keys
 
