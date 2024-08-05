@@ -145,4 +145,4 @@ Starting from v6.5.10, v7.1.6, and v7.5.3, when using a non-MySQL sink, TiCDC su
 | Version | Protocol | Split UK/PK `UPDATE` events | Not split UK/PK `UPDATE` events  | Comments |
 | -- | -- | -- | -- | -- |
 | <= v7.5.2 | ALL | ✓ | ✗ |
-| \>= v7.5.3 (not released yet) | ALL | ✓ (Default value:`output-raw-change-event = false`) | ✓  (Optional: `output-raw-change-event = true`) | |
+| \>= v7.5.3 | ALL | ✓ (Default value:`output-raw-change-event = false`) | ✓  (Optional: `output-raw-change-event = true`) | |
