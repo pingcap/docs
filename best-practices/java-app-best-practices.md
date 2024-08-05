@@ -70,11 +70,11 @@ The following two processing methods are usually used in JDBC:
 
     To avoid such an error in queries before the client finishes reading or closes `resultset`, you can add the `clobberStreamingResults=true` parameter in the URL. Then, `resultset` is automatically closed but the result set to be read in the previous streaming query is lost.
 
-- The second method: Use Cursor Fetch by first [setting `FetchSize`](http://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html) as a positive integer and then configuring `useCursorFetch=true` in the JDBC URL.
+- The second method: Use Cursor Fetch by first [setting `FetchSize`](http://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html) as a positive integer and then configuring `useCursorFetch = true` in the JDBC URL.
 
-TiDB supports both methods, but it is recommended that you use the first method that setting `FetchSize` to `Integer.MIN_VALUE`, because it is a simpler implementation and has better execution efficiency.
+TiDB supports both methods, but it is recommended that you use the first method that sets `FetchSize` to `Integer.MIN_VALUE`, because it is a simpler implementation and has better execution efficiency.
 
-For the second method, TiDB first loads all data to the TiDB node, and then return data to the client according to the `FetchSize`. Therefore, it usually uses more memory than the first method. If [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom) is set to `ON`, TiDB might write data to the temporary disk.
+For the second method, TiDB first loads all data to the TiDB node, and then returns data to the client according to the `FetchSize`. Therefore, it usually consumes more memory than the first method. If [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom) is set to `ON`, TiDB might write data to the temporary disk.
 
 If the [`tidb_enable_lazy_cursor_fetch`](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830) system variable is set to `ON`, TiDB tries to read part of the data only when the client fetches it, which uses less memory. For more details and limitations, read the [complete descriptions for the `tidb_enable_lazy_cursor_fetch` system variable](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830).
 
