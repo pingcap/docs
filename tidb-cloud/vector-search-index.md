@@ -133,6 +133,36 @@ LIMIT 5;
 
 See [Table Partitioning](/partitioned-table.md) for more information.
 
+## View index build progress
+
+Unlike other indexes, vector indexes are built asynchronously. Therefore, vector indexes might not be immediately available after bulk data insertion. This does not affect data correctness or consistency, and you can perform vector searches at any time and get complete results. However, performance will be suboptimal until vector indexes are fully built. 
+
+To view the index build progress, you can query the `INFORMATION_SCHEMA.TIFLASH_INDEXES` table as follows:
+
+```sql
+SELECT * FROM INFORMATION_SCHEMA.TIFLASH_INDEXES;
++---------------+------------+----------------+----------+--------------------+-------------+-----------+------------+---------------------+-------------------------+--------------------+------------------------+------------------+
+| TIDB_DATABASE | TIDB_TABLE | TIDB_PARTITION | TABLE_ID | BELONGING_TABLE_ID | COLUMN_NAME | COLUMN_ID | INDEX_KIND | ROWS_STABLE_INDEXED | ROWS_STABLE_NOT_INDEXED | ROWS_DELTA_INDEXED | ROWS_DELTA_NOT_INDEXED | TIFLASH_INSTANCE |
++---------------+------------+----------------+----------+--------------------+-------------+-----------+------------+---------------------+-------------------------+--------------------+------------------------+------------------+
+| test          | sample     | NULL           |      106 |                 -1 | vec         |         2 | HNSW       |                   0 |                   13000 |                  0 |                   2000 | store-6ba728d2   |
+| test          | sample     | NULL           |      106 |                 -1 | vec         |         2 | HNSW       |               10500 |                       0 |                  0 |                   4500 | store-7000164f   |
++---------------+------------+----------------+----------+--------------------+-------------+-----------+------------+---------------------+-------------------------+--------------------+------------------------+------------------+
+```
+
+- The `ROWS_STABLE_INDEXED` and `ROWS_STABLE_NOT_INDEXED` columns show the index build progress. When `ROWS_STABLE_NOT_INDEXED` becomes 0, the index build is complete.
+
+    As a reference, indexing a 500 MiB vector dataset might take up to 20 minutes. The indexer can run in parallel for multiple tables. Currently, adjusting the indexer priority or speed is not supported.
+
+- The `ROWS_DELTA_NOT_INDEXED` column shows the number of rows in the Delta layer. The Delta layer stores _recently_ inserted or updated rows and is periodically merged into the Stable layer according to the write workload. This merge process is called Compaction.
+
+    The Delta layer is always not indexed. To achieve optimal performance, you can force the merge of the Delta layer into the Stable layer so that all data can be indexed:
+
+    ```sql
+    ALTER TABLE <TABLE_NAME> COMPACT;
+    ```
+
+    For more information, see [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md).
+
 ## Check whether the vector index is used
 
 Use the [`EXPLAIN`](/sql-statements/sql-statement-explain.md) or [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) statement to check whether this query is using the vector index. When `annIndex:` is presented in the `operator info` column for the `TableFullScan` executor, it means this table scan is utilizing the vector index.

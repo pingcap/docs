@@ -128,6 +128,14 @@ CREATE TABLE orders (
 
 ## TTL job
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> In TiDB Serverless, the `TTL_JOB_INTERVAL` attribute for a table is fixed at `15m` and cannot be modified. This means that TiDB Serverless schedules a background job every 15 minutes to clean up expired data.
+
+</CustomContent>
+
 For each table with a TTL attribute, TiDB internally schedules a background job to clean up expired data. You can customize the execution period of these jobs by setting the `TTL_JOB_INTERVAL` attribute for the table. The following example sets the background cleanup jobs for the table `orders` to run once every 24 hours:
 
 ```sql
