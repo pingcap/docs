@@ -172,8 +172,8 @@ To avoid undefined behaviors or other unexpected problems during the upgrade, it
 
 - Cluster DDLs:
 
-    - If you use [smooth upgrade](/smooth-upgrade-tidb.md), you do not need to check the DDL operations of your TiDB cluster. You do not need to wait for the completion of the DDL job or cancel the ongoing DDL job.
-    - If you do not use [smooth upgrade](/smooth-upgrade-tidb.md), it is recommended to use the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) command to check whether an ongoing DDL job exists. If an ongoing DDL job exists, wait for the completion of its execution or cancel it using the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) command before performing an upgrade.
+    - If you use [smooth upgrade](/smooth-upgrade-tidb.md), you do not need to check the DDL operations of your TiDB cluster. You do not need to wait for the completion of DDL jobs or cancel ongoing DDL jobs.
+    - If you do not use [smooth upgrade](/smooth-upgrade-tidb.md), it is recommended to use the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) statement to check whether ongoing DDL jobs exist. If an ongoing DDL job exists, wait for the completion of its execution or cancel it using the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) statement before performing an upgrade.
 
 - Cluster backup: It is recommended to execute the [`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md) statement to check whether there is an ongoing backup or restore task in the cluster. If yes, wait for its completion before performing an upgrade.
 
