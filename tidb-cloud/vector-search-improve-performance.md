@@ -11,6 +11,10 @@ TiDB Vector Search allows you to perform ANN queries that search for results sim
 
 The [vector search index](/tidb-cloud/vector-search-index.md) dramatically improves the performance of vector search queries, usually by 10x or more, with a trade-off of only a small decrease of recall rate.
 
+## Ensure vector indexes are fully built
+
+Vector indexes are built asynchronously. Until all vector data is indexed, vector search performance is suboptimal. To check the index build progress, see [View index build progress](/tidb-cloud/vector-search-index.md#view-index-build-progress).
+
 ## Reduce vector dimensions or shorten embeddings
 
 The computational complexity of vector search indexing and queries increases significantly as the size of vectors grows, necessitating more floating point comparisons.
