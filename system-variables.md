@@ -2935,11 +2935,11 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `-1`
 - Range: `{-1} ∪ [1, 256]`
 - Unit: Threads
-- Function: This variable controls the number of concurrent threads during the GC (Garbage Collection) process.
-- Affected GC steps:
-  - [Resolve Locks](/garbage-collection-overview.md#resolve-locks): Directly uses the specified number of threads.
-  - [Delete Range](/garbage-collection-overview.md#Delete-Ranges): Uses 1/4 of the specified value as the number of threads.
-- Default value explanation: When set to `-1`, TiDB automatically determines the appropriate number of threads.
+- This variable controls the number of concurrent threads during the [Resolve Locks](/garbage-collection-overview.md#resolve-locks) and [Delete Range](/garbage-collection-overview.md#Delete-Ranges) steps of the GC (Garbage Collection) process.
+- By default, this variable is `-1`, allowing TiDB to automatically determine the appropriate number of threads based on workloads.
+- When this variable is set to a number in the range of `[1, 256]`:
+    - Resolve Locks directly uses the value set for this variable as the number of threads.
+    - Delete Range uses 1/4 of the value set for this variable as the number of threads.
 
 ### tidb_gc_enable <span class="version-mark">New in v5.0</span>
 
