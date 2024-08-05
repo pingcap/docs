@@ -170,7 +170,11 @@ Now, the offline mirror has been upgraded successfully. If an error occurs durin
 
 To avoid undefined behaviors or other unexpected problems during the upgrade, it is recommended to check the following items before the upgrade.
 
-- Cluster DDLs: It is recommended to execute the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) statement to check whether there is an ongoing DDL job. If yes, wait for its execution or cancel it by executing the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) statement before performing an upgrade.
+- Cluster DDLs:
+
+    - If you use [smooth upgrade](/smooth-upgrade-tidb.md), you do not need to check the DDL operations of your TiDB cluster. You do not need to wait for the completion of DDL jobs or cancel ongoing DDL jobs.
+    - If you do not use [smooth upgrade](/smooth-upgrade-tidb.md), it is recommended to use the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) statement to check whether ongoing DDL jobs exist. If an ongoing DDL job exists, wait for the completion of its execution or cancel it using the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) statement before performing an upgrade.
+
 - Cluster backup: It is recommended to execute the [`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md) statement to check whether there is an ongoing backup or restore task in the cluster. If yes, wait for its completion before performing an upgrade.
 
 ### Step 5: Check the health status of the current cluster
