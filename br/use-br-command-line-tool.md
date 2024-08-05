@@ -32,12 +32,22 @@ A `tiup br` command consists of multiple layers of sub-commands. Currently, br c
 * `tiup br backup`: used to back up the data of the TiDB cluster.
 * `tiup br log`: used to start and manage log backup tasks.
 * `tiup br restore`: used to restore backup data of the TiDB cluster.
+* `tiup br debug`: used to parse backup metadata, check backup data, and so on.
 
 `tiup br backup` and `tiup br restore` include the following sub-commands:
 
 * `full`: used to back up or restore all the cluster data.
 * `db`: used to back up or restore a specified database of the cluster.
 * `table`: used to back up or restore a single table in the specified database of the cluster.
+
+`tiup br debug` incudes the following sub-commands:
+
+* `checksum`: (hidden parameter) used to offline check the integrity of backup data to ensure that all backup files match the CRC64 checksum results calculated by [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md).
+* `backupmeta`: used to check whether an intersection exists among backup data files. In normal cases, backup data files do not intersect.
+* `decode`: used to parse the `backupmeta` metadata file of a full backup into JSON format. In addition, you can parse specific fields using the `--field` parameter.
+* `encode`: used to encode the `backupmeta.json` metadata file of a full backup into the protobuf format that is used during data restore.
+* `reset-pd-config-as-default`: (deprecated) used to restore the PD configurations that were changed during the data recovery process to default configurations.
+* `search-log-backup`: used to search for specific key information in log backup data.
 
 ### Common options
 
