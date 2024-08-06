@@ -49,7 +49,7 @@ insert into t values (1),(1);
 ERROR 1062 (23000): Duplicate entry '‹1›' for key 't.a'
 ```
 
-The error log is printed out as follows:
+The error log is as follows:
 
 ```
 [2024/07/02 11:35:01.426 +08:00] [INFO] [conn.go:1146] ["command dispatched failed"] [conn=1482686470] [session_alias=] [connInfo="id:1482686470, addr:127.0.0.1:52258 status:10, collation:utf8mb4_0900_ai_ci, user:root"] [command=Query] [status="inTxn:0, autocommit:1"] [sql="insert into `t` values ( ‹1› ) , ( ‹1› )"] [txn_mode=PESSIMISTIC] [timestamp=450859185309483010] [err="[kv:1062]Duplicate entry '‹1›' for key 't.a'"]
