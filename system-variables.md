@@ -2138,7 +2138,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Boolean
 - Default value: `OFF`
 - Possible values: `OFF`, `ON`
-- This variable controls whether to support creating [`global indexes`](/partitioned-table.md#global-indexes) for partitioned tables. When this variable is enabled, TiDB creates unique indexes that do not contain all columns in the partition expressions.
+- This variable controls whether to support creating [global indexes](/partitioned-table.md#global-indexes) for partitioned tables. When this variable is enabled, TiDB creates unique indexes that do not contain all columns in the partition expressions.
 
 ### tidb_enable_non_prepared_plan_cache
 
