@@ -59,11 +59,11 @@ As you can see from the above error log, when the value of `tidb_redact_log` is 
 
 ## Log redaction in TiKV side
 
-To enable log redaction in the TiKV side, set the value of [`security.redact-info-log`](/tikv-configuration-file.md#redact-info-log-new-in-v408) to `true` or `marker`. This configuration value defaults to `false`, which means that log redaction is disabled.
+To enable log redaction in the TiKV side, set the value of [`security.redact-info-log`](/tikv-configuration-file.md#redact-info-log-new-in-v408) to `true` or `"marker"`. This configuration value defaults to `false`, which means that log redaction is disabled.
 
 ## Log redaction in PD side
 
-To enable log redaction in the PD side, set the value of [`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50) to `true` or `marker`. This configuration value defaults to `false`, which means that log redaction is disabled.
+To enable log redaction in the PD side, set the value of [`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50) to `true` or `"marker"`. This configuration value defaults to `false`, which means that log redaction is disabled.
 
 ## Log redaction in TiFlash side
 
