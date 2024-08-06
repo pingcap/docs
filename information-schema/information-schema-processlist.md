@@ -42,7 +42,6 @@ DESC processlist;
 | SESSION_ALIAS  | varchar(64)         | NO   |      |         |       |
 | ROWS_AFFECTED  | bigint(21) unsigned | YES  |      | NULL    |       |
 +----------------+---------------------+------+------+---------+-------+
-13 rows in set (0.00 sec)
 ```
 
 ```sql
