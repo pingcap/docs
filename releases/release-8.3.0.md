@@ -28,8 +28,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
     <td>全局索引能够有效提升对非分区键的检索效率，同时也解除了分区键一定要包含唯一键 (Unique Key) 的限制，扩展了 TiDB 分区表的使用场景，也能够避免数据迁移可能遇到的部分应用改造工作。</td>
   </tr>
   <tr>
-    <td>Projection 下推成为正式功能</td>**tw@Oreoxmt** <!--1872-->
-    <td> Projection 下推能够尽可能将负载分散到存储节点，也可以减少节点间的数据传输，这能够降低一部分 SQL 的执行时间，提升数据库整体性能。</td>
+    <td>Default pushdown of the <code>Projection</code> operator to the storage engine</td>**tw@Oreoxmt** <!--1872-->
+    <td>Pushing the <code>Projection</code> operator down to the storage engine can distribute the load across storage nodes while reducing data transfer between nodes. This optimization helps to reduce the execution time for certain SQL queries and improves the overall database performance.</td>
   </tr>
   <tr>
     <td>统计信息收集忽略不必要的列</td>**tw@lilin90** <!--1753-->
@@ -40,9 +40,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
     <td>通过优化 KV 请求的策略，增加获取 TSO 的模式等多重手段，进一步提升 TiDB 的读写性能，降低业务的执行时间，改善延迟。</td>
   </tr>
   <tr>
-    <td rowspan="1">稳定性与高可用</td>
-    <td>TiProxy 管理虚拟 IP</td>**tw@Oreoxmt** <!--1887-->
-    <td>在 TiProxy 内实现了对虚拟 IP 的管理，支持自动的虚拟 IP 切换，而不依赖外部平台或工具。这能够简化 TiProxy 的部署形式，降低了数据库接入层的复杂度。</td>
+    <td rowspan="1">Reliability and Availability</td>
+    <td>Built-in virtual IP management in TiProxy</td>**tw@Oreoxmt** <!--1887-->
+    <td>In TiDB v8.3.0, TiProxy introduces built-in virtual IP management, which enables automatic virtual IP switching without relying on external platforms or tools. This feature simplifies TiProxy deployment and reduces the complexity of the database access layer.</td>
   </tr>
 </tbody>
 </table>
@@ -54,31 +54,29 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
 ### Performance
 
-* Projection 下推功能正式发布 [#51876](https://github.com/pingcap/tidb/issues/51876) @[yibin87](https://github.com/yibin87) **tw@Oreoxmt** <!--1872-->
+* The optimizer pushes the `Projection` operator down to the storage engine by default [#51876](https://github.com/pingcap/tidb/issues/51876) @[yibin87](https://github.com/yibin87) **tw@Oreoxmt** <!--1872-->
 
-    将 `Projection` 算子下推到存储引擎可以减少计算引擎和存储引擎之间的传输的数据量，特别是对 [JSON 查询类函数](/functions-and-operators/json-functions/json-functions-search.md)或 [JSON 值属性类函数](/functions-and-operators/json-functions/json-functions-return.md)，效果更加显著。在 v8.3.0 版本中，TiDB 正式发布 Projection 下推功能。在该功能启用时，优化器会自动将符合条件的 JSON 查询类函数、JSON 值属性类函数等下推至存储引擎。
-    
-    变量 [tidb_opt_projection_push_down](/system-variables.md#tidb_opt_projection_push_down-从-v610-版本开始引入) 控制是否启用 Projection 下推功能。该变量的默认值将调整为 `ON`，表示默认启用该功能。
+    Pushing the `Projection` operator down to the storage engine reduces data transfer between the compute engine and the storage engine. This is particularly effective when handling [JSON query functions](/functions-and-operators/json-functions/json-functions-search.md) or [JSON value attribute functions](/functions-and-operators/json-functions/json-functions-return.md). Starting from v8.3.0, TiDB enables the `Projection` operator pushdown feature by default, and changes the default value of the system variable controlling this feature, [`tidb_opt_projection_push_down`](/system-variables.md#tidb_opt_projection_push_down-new-in-v610), from `OFF` to `ON`. When this feature is enabled, the optimizer automatically pushes eligible JSON query functions and JSON value attribute functions down to the storage engine.
 
-    更多信息，请参考[用户文档](/system-variables.md#tidb_opt_projection_push_down-从-v610-版本开始引入)。
-    
-* 优化 KV 请求的批处理策略 [#xxx](https://github.com/pingcap/tidb/issues/xxx) @[zyguan](https://github.com/zyguan) **tw@Oreoxmt** <!--1897-->
+    For more information, see [documentation](/system-variables.md#tidb_opt_projection_push_down-new-in-v610).
 
-    TiDB 读取数据需要通过 KV 请求进行。通过将 KV 请求攒批并进行批处理，可以有效提高执行效率。在 v8.3.0 版本之前，TiDB 批处理策略的效率不高。在 v8.3.0 版本，TiDB 在现有的基础 KV 请求批处理策略基础上，引入更加高效的策略。通过新增的配置项 [`tikv-client.batch-policy·](/tidb-configuration-file.md#batch-policy-从-v830-版本开始引入) 设定不同的批处理策略。
-    
-    更多信息，请参考[用户文档](/tidb-configuration-file.md#batch-policy-从-v830-版本开始引入)。
+* Optimize batch processing strategy for KV requests [#55206](https://github.com/pingcap/tidb/issues/55206) @[zyguan](https://github.com/zyguan) **tw@Oreoxmt** <!--1897-->
+
+    TiDB fetches data by sending KV requests. Batching and processing KV requests in bulk can significantly improve execution performance. Before v8.3.0, the batch processing strategy in TiDB is less efficient. Starting from v8.3.0, TiDB introduces a more efficient batch strategy on top of the existing one. You can configure different batch processing strategies using the [`tikv-client.batch-policy`](/tidb-configuration-file.md#batch-policy-new-in-v830) configuration item to accommodate various workloads.
+
+    For more information, see [documentation](/tidb-configuration-file.md#batch-policy-new-in-v830).
     
 * 增加获取 TSO 的 RPC 模式，降低获取 TSO 的延迟 [#54960](https://github.com/pingcap/tidb/issues/54960) @[MyonKeminta](https://github.com/MyonKeminta) **tw@qiancai** <!--1893-->
 
     TiDB 在向 PD 请求 TSO 时，会汇总一定时间段的请求并以同步的方式进行批处理以减少 RPC 请求数量、降低 PD 负载。对于延迟敏感的场景，这种模式的性能并不理想。在 v8.3.0 版本中，TiDB 新增 TSO 请求的异步批处理模式，并提供不同的并发能力，以增加相应的 PD 负载为代价，降低获取 TSO 的延迟。通过新增的变量 [tidb_tso_client_rpc_mode](/system-variables.md#tidb_tso_client_rpc_mode-从-v830-版本开始引入) 设定获取 TSO 的 RPC 模式。
     
     更多信息，请参考[用户文档](/system-variables.md#tidb_tso_client_rpc_mode-从-v830-版本开始引入)。
-    
-* TiFlash 新增 Hashagg 聚合计算模式，提升高 NDV 数据的聚集计算性能 [#9196](https://github.com/pingcap/tiflash/issues/9196) @[guo-shaoge](https://github.com/guo-shaoge) **tw@Oreoxmt** <!--1855-->
 
-    TiFlash 的 Hashagg 聚合计算中，第一阶段也会进行聚集计算。对于高 NDV 数据，这种模式效率较低。在 v8.3.0 版本中，TiFlash 引入多种 Hashagg 聚合计算模式，提升不同特征数据的聚集计算性能。通过新增的变量 [tiflash_hashagg_preaggregation_mode](/system-variables.md#tiflash_hashagg_preaggregation_mode-从-v830-版本开始引入) 设定 Hashagg 聚合计算模式。
-    
-    更多信息，请参考[用户文档](/system-variables.md#tiflash_hashagg_preaggregation_mode-从-v830-版本开始引入)。
+* TiFlash introduces HashAgg aggregation calculation modes to improve the performance for high NDV data [#9196](https://github.com/pingcap/tiflash/issues/9196) @[guo-shaoge](https://github.com/guo-shaoge) **tw@Oreoxmt** <!--1855-->
+
+    Before v8.3.0, TiFlash has low aggregation calculation efficiency during the first stage of HashAgg aggregation when handling data with high NDV (number of distinct rows). Starting from v8.3.0, TiFlash introduces multiple HashAgg aggregation calculation modes to improve the performance of data with different characteristics. You can configure the HashAgg aggregation calculation mode using the system variable [`tiflash_hashagg_preaggregation_mode`](/system-variables.md#tiflash_hashagg_preaggregation_mode-new-in-v830).
+
+    For more information, see [documentation](/system-variables.md#tiflash_hashagg_preaggregation_mode-new-in-v830).
 
 * 统计信息收集忽略不必要的列 [#53567](https://github.com/pingcap/tidb/issues/53567) @[hi-rustin](https://github.com/hi-rustin) **tw@lilin90** <!--1753-->
 
@@ -132,14 +130,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
 ### Reliability
 
-* TiProxy 支持虚拟 IP 管理功能 [#583](https://github.com/pingcap/tiproxy/issues/583) @[djshow832](https://github.com/djshow832) **tw@Oreoxmt** <!--1887-->
-
-    在 v8.3.0 版本之前，使用主从模式保证高可用时，TiProxy 还需要额外的组件管理虚拟 IP 功能。在 v8.3.0 版本，TiProxy 支持虚拟 IP 管理功能。在主从模式下，当出现主从节点切换时，新的主节点自动绑定指定的虚拟 IP，保证客户端的正常访问。 
-    
-    通过设定 TiProxy 配置项 [`ha.virtual-ip`](/tiproxy/tiproxy-configuration.md#virtual-ip) 指定虚拟 IP，[`ha.interface`](/tiproxy/tiproxy-configuration.md#interface) 指定绑定虚拟 IP 的网络接口。如果未指定，则表示不启用该功能。
-    
-    更多信息，请参考[用户文档](/tiproxy/tiproxy-overview.md)。
-
 * 新增以流式获取游标的结果集 （实验特性） [#54526](https://github.com/pingcap/tidb/issues/54526) @[YangKeao](https://github.com/YangKeao) **tw@lilin90** <!--1891-->
 
     当应用代码通过 [Cursor Fetch](/develop/dev-guide-connection-parameters.md#使用-streamingresult-流式获取执行结果) 获取结果集时，TiDB 通常会将完整结果保存至 TiDB ，再分批返回给客户端。如果结果集过大，可能会触发临时落盘。自 v8.3.0 开始，通过设置系统变量[`tidb_enable_lazy_cursor_fetch`](/system-variables.md#tidb_enable_lazy_cursor_fetch-从-v830-版本开始引入) 为 `ON`，TiDB 不再把所有数据读取到 TiDB 节点，而是会随着客户端的读取逐步将数据传送至 TiDB 节点。在处理较大结果集时，这将会减少 TiDB 节点的内存使用，提升集群的稳定性。
@@ -157,6 +147,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
     更多信息，请参考[用户文档](/sql-plan-management.md)。
 
 ### Availability
+
+* TiProxy supports built-in virtual IP management [#583](https://github.com/pingcap/tiproxy/issues/583) @[djshow832](https://github.com/djshow832) **tw@Oreoxmt** <!--1887-->
+
+    Before v8.3.0, when using primary-secondary mode for high availability, TiProxy requires an additional component to manage the virtual IP. Starting from v8.3.0, TiProxy supports built-in virtual IP management. In primary-secondary mode, when a primary node fails over, the new primary node will automatically bind to the specified virtual IP, ensuring that clients can always connect to an available TiProxy through the virtual IP.
+
+    To enable virtual IP management, specify the virtual IP address using the TiProxy configuration item [`ha.virtual-ip`](/tiproxy/tiproxy-configuration.md#virtual-ip) and specify the network interface to bind the virtual IP to using [`ha.interface`](/tiproxy/tiproxy-configuration.md#interface). If neither of these configuration items is set, this feature is disabled.
+    
+    For more information, see [documentation](/tiproxy/tiproxy-overview.md).
 
 ### SQL
 
@@ -248,6 +246,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 ## Improvements
 
 + TiDB
+
+    - The TopN operator supports disk spill [#47733](https://github.com/pingcap/tidb/issues/47733) @[xzhangxian1008](https://github.com/xzhangxian1008) **tw@Oreoxmt** <!--1715-->
+    - TiDB supports using the `WITH ROLLUP` modifier and the `GROUPING` function [#42631](https://github.com/pingcap/tidb/issues/42631) @[Arenatlx](https://github.com/Arenatlx) **tw@Oreoxmt** <!--1714-->
 
 + TiKV
 
