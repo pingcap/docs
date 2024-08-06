@@ -19,15 +19,6 @@ To alleviate the bottleneck caused by limited disk throughput, you can improve p
 
 [Titan](/storage-engine/titan-overview.md) is a high-performance [RocksDB](https://github.com/facebook/rocksdb) plugin for key-value separation, which can reduce write amplification in RocksDB when large values are used.
 
-- If your average row size is larger than 512 bytes, you can enable Titan to reduce the compaction I/O flow as follows, with `min-blob-size` set to `"512B"` or `"1KB"`:
-
-    ```toml
-    [rocksdb.titan]
-    enabled = true
-    [rocksdb.defaultcf.titan]
-    min-blob-size = "1KB"
-    ```
-
 - If your average row size is larger than 512 bytes, you can enable Titan to reduce the compaction I/O flow as follows, with `min-blob-size` set to `"512B"` or `"1KB"` and `blob-file-compression` set to `"zstd"`:
 
     ```toml
@@ -37,6 +28,8 @@ To alleviate the bottleneck caused by limited disk throughput, you can improve p
     min-blob-size = "1KB"
     blob-file-compression = "zstd"
     ```
+    
+When enabling Titan, please note that there may be a slight performance degradation for range scans on the primary key. For more information, check the [details](https://docs.pingcap.com/tidb/stable/titan-overview#impact-of-min-blob-size-on-performance)
 
 ### Increase all the compression levels
 
