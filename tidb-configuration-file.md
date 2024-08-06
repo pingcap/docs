@@ -726,11 +726,14 @@ Configuration items related to opentracing.reporter.
 - Default value: `41s`
 - It is required to set this value larger than twice of the Raft election timeout.
 
-### `batch-policy`
+### `batch-policy` <span class="version-mark">New in v8.3.0</span>
 
-- It controls the batching strategy for sending requests from TiDB to TiKV. Currently, it supports three strategies: `"basic"`, `"standard"`, and `"positive"`. When set to `"basic"`, the behavior is consistent with previous versions, and additional batching occurs only if `max-batch-wait-time` is greater than 0 and TiKV's load exceeds the `overload-threshold`. When set to `"standard"`, TiDB dynamically batches requests based on recent arrival intervals, benefiting high throughput scenarios. When set to `"positive"`, TiDB always performs additional batching, typically used to achieve peak performance in high-throughput benchmarks. However, in low-load scenarios, `"positive"` strategy may introduce unnecessary batching wait time and lead to performance regression.
+- Controls the batching strategy for requests from TiDB to TiKV.
 - Default value: `"standard"`
-- Value options: `"basic"`, `"standard"`, `"positive"`
+- Value options:
+    - `"basic"`: the behavior is consistent with versions before v8.3.0, where TiDB performs additional batching only if [`tikv-client.max-batch-wait-time`](#max-batch-wait-time) is greater than 0 and the load of TiKV exceeds the value of [`tikv-client.overload-threshold`](#overload-threshold).
+    - `"standard"`: TiDB dynamically batches requests based the arrival time intervals of recent requests, suitable for high-throughput scenarios.
+    - `"positive"`: TiDB always performs additional batching, suitable for high-throughput testing scenarios to achieve optimal performance. However, in low-load scenarios, this strategy might introduce unnecessary batching wait time, potentially reducing performance.
 
 ### `max-batch-size`
 
