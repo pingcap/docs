@@ -1468,6 +1468,12 @@ Partition selection is supported for all types of table partitioning, including 
 
 This section introduces some restrictions and limitations on partitioned tables in TiDB.
 
+- Using the [`ALTER TABLE ... CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md) statement to change column types of partitioned tables is not supported.
+- Using the [`ALTER TABLE ... CACHE`](/cached-tables.md) statement to set partitioned tables to cached tables is not supported.
+- [Temporary tables](/temporary-tables.md) in TiDB are **NOT** compatible with partitioned tables.
+- Creating a [foreign key](/foreign-key.md) on a partitioned table is not supported.
+- The [`ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])`](/optimizer-hints.md#order_indext1_name-idx1_name--idx2_name-) hint does not work for partitioned tables and their related indexes, because indexes on partitioned tables cannot be read in order.
+
 ### Partitioning keys, primary keys and unique keys
 
 This section discusses the relationship of partitioning keys with primary keys and unique keys. The rule governing this relationship can be expressed as follows: **Every unique key on the table must use every column in the table's partitioning expression**. This also includes the table's primary key, because it is by definition a unique key.
