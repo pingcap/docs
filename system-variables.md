@@ -5871,11 +5871,11 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
-- Type: String
+- Type: Enumeration
 - Default value: `force_preagg`
-- Value options: `auto`, `force_streaming`, `force_preagg`
+- Value options: `force_preagg`, `force_streaming`, `auto`
 - This variable is used to control the pre-aggregation policy for the first stage of two-staged or three-staged HashAgg pushed down to TiFlash:
-    - `force_preagg`: TiFlash will enforce pre-aggregation in the first stage of HashAgg.
+    - `force_preagg`: TiFlash will enforce pre-aggregation in the first stage of HashAgg. This was the equivalent behavior of TiFlash before this variable was introduced.
     - `force_streaming`: TiFlash will directly pass the data to the next stage of HashAgg without pre-aggregation.
     - `auto`: TiFlash will automatically decide whether to perform pre-aggregation based on the observed workload's reduction rate.
 
