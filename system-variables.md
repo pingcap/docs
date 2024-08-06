@@ -1114,7 +1114,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 ### tidb_analyze_distsql_scan_concurrency <span class="version-mark">New in v7.6.0</span>
 
-- Scope: GLOBAL
+- Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
@@ -1360,7 +1360,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_build_sampling_stats_concurrency <span class="version-mark">New in v7.5.0</span>
 
-- Scope: GLOBAL
+- Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
@@ -4275,7 +4275,7 @@ mysql> desc select count(distinct a) from test.t;
     +-----------------------------------+---------+-----------+-----------------------+---------------------------------+
     ```
 
-- The second example uses `0`, which assumes that 0% of rows will be scanned before the qualified rows are found. 
+- The second example uses `0`, which assumes that 0% of rows will be scanned before the qualified rows are found.
 
     ```sql
     > SET SESSION tidb_opt_ordering_index_selectivity_ratio = 0;
