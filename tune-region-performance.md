@@ -25,9 +25,7 @@ To reduce the performance overhead of many Regions, you can also enable [Hiberna
 > + Decreased query performance, especially for queries that deal with a large range of data
 > + Slower Region scheduling
 
-To adjust the Region size, you can use the [`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size) configuration item. When TiFlash is used, the Region size should not exceed 256 MiB.
-
-When the Dumpling tool is used, the Region size should not exceed 1 GiB. In this case, you need to reduce the concurrency after increasing the Region size; otherwise, TiDB might run out of memory.
+To adjust the Region size, you can use the [`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size) configuration item. When TiFlash or the Dumpling tool is used, the Region size should not exceed 1 GiB. After increasing the Region size, you need to reduce the concurrency if the Dumpling tool is used; otherwise, TiDB might run out of memory.
 
 ## Use bucket to increase concurrency
 
