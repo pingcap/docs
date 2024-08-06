@@ -499,7 +499,6 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - PER_DB
 - PER_TABLE
 - PESSIMISTIC
-- PLACEMENT (S)
 - PLUGINS
 - POINT
 - POLICY
