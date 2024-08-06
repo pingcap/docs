@@ -5872,7 +5872,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: String
-- Default value: `auto`
+- Default value: `force_preagg`
 - Value options: `auto`, `force_streaming`, `force_preagg`
 - This variable is used to control the pre-aggregation policy for the first stage of two-staged or three-staged HashAgg pushed down to TiFlash:
     - `force_preagg`: TiFlash will enforce pre-aggregation in the first stage of HashAgg.
