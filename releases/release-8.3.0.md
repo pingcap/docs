@@ -198,6 +198,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
 ### Data migration
 
+* TiCDC supports replicating DDL statements in bi-directional replication (BDR) mode (GA) #10301 #48519 @okJiang @asddongmen
+
+    TiCDC v7.6.0 introduced the replication of DDL statements with bi-directional replication configured. In v8.3.0, this feature becomes generally available (GA). Previously, replicating DDL statements was not supported by TiCDC, so users of TiCDC's bi-directional replication had to apply DDL statements to both TiDB clusters separately. With this feature, TiCDC allows for a cluster to be assigned the PRIMARY BDR role, and enables the replication of DDL statements from that cluster to the downstream cluster.
+
+    For more information, see [documentation](/ticdc-bidirectional-replication.md).
+
 ## Compatibility changes
 
 > **Note:**
