@@ -47,7 +47,7 @@ CREATE TABLE test.select (BEGIN int, END int);
 Query OK, 0 rows affected (0.08 sec)
 ```
 
-Starting from v7.6.0, TiDB provides a full list of keywords in the [`INFORMATION_SCHEMA.KEYWORDS`](/information-schema/information-schema-keywords.md) table.
+Starting from v7.5.3 and v7.6.0, TiDB provides a full list of keywords in the [`INFORMATION_SCHEMA.KEYWORDS`](/information-schema/information-schema-keywords.md) table.
 
 ## Keyword list
 
