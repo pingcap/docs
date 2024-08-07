@@ -494,12 +494,10 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Import Wait Duration: time spent on downloading task waiting in queue for execution.
 - Import Read SST Duration: time spent on reading from external storage of a file and download it to TiKV.
 - Import Rewrite SST Duration: time spent on rewriting SST based on rewrite rules. 
-- Import Ingest RPC Duration: time spent on sending ingest response in RPC call.
+- Import Ingest RPC Duration: time spent on handling ingest RPC request on TiKV.
 - Import Ingest SST Duration: time spent on ingesting SST into RocksDB.
 - Import Ingest SST Bytes: number of bytes ingested.
 - Import Download SST Throughput: SST download throughput in bytes per second.
-- Import Local Write keys: ???
-- Import Local Write bytes: ???
 - TTL Expired: number of expired items after TTL in backup files.
 - cloud request: number of request to cloud providers. 
 
@@ -515,13 +513,13 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Queuing Time: time spent on waiting to get scheduled on a thread.
 - Apply Request Throughput: Apply request rate in bytes.
 - Downloaded File Size: downloaded file size in bytes.
-- Apply Batch Size: number of bytes for applying to raft engine in one batch. 
+- Apply Batch Size: number of bytes for applying to Raft store in one batch. 
 - Blocked by Concurrency Time: time spent on waiting to get executed due to concurrency constraint.  
-- Apply Request Speed: speed of applying request to raft engine. 
+- Apply Request Speed: speed of applying request to Raft store. 
 - Cached File in Memory: files cached by the applying requests of importer.
-- Engine Requests Unfinished: number of pending requests to raft engine.
-- Apply Time: time spent on writing data to the Raft engine.
-- Raft Store Memory Usage: memory usage for raft store.
+- Engine Requests Unfinished: number of pending requests to Raft store.
+- Apply Time: time spent on writing data to the Raft store.
+- Raft Store Memory Usage: memory usage for Raft store.
 
 > **Note:**
 >
