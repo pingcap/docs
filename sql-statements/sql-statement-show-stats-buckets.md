@@ -21,7 +21,7 @@ Currently, the `SHOW STATS_BUCKETS` statement returns the following columns:
 | `Repeats` | The occurrence number of the maximum value |
 | `Lower_bound` | The minimum value |
 | `Upper_bound` | The maximum value |
-| `Ndv` | The number of distinct values in the bucket. This field is deprecated and always is 0 due to its inaccurate value. |
+| `Ndv` | The number of distinct values in the bucket. This field is deprecated and always shows `0` due to its inaccurate value. |
 
 ## Synopsis
 
