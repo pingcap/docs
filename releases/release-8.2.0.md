@@ -147,6 +147,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 
     For more information, see [documentation](/ticdc/ticdc-upstream-downstream-check.md#notes).
 
+* TiCDC Pulsar Sink supports using the `pulsar+http` and `pulsar+https` connection protocols [#11336](https://github.com/pingcap/tiflow/issues/11336) @[SandeepPadhi](https://github.com/SandeepPadhi)
+
+    Before v8.2.0, TiCDC Pulsar Sink only supports `pulsar` and `pulsar+ssl` connection protocols. Starting from v8.2.0, TiCDC Pulsar Sink also supports `pulsar+http` and `pulsar+https` protocols for connections. This enhancement improves the flexibility of connecting to Pulsar.
+
+    For more information, see [documentation](/ticdc/ticdc-sink-to-pulsar.md#sink-uri).
+
 ## Compatibility changes
 
 > **Note:**
@@ -302,7 +308,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
     - Fix the issue that TiDB fails to reject unauthenticated user connections in some cases when using the `auth_socket` authentication plugin [#54031](https://github.com/pingcap/tidb/issues/54031) @[lcwangchao](https://github.com/lcwangchao)
     - Fix the issue that JSON-related functions return errors inconsistent with MySQL in some cases [#53799](https://github.com/pingcap/tidb/issues/53799) @[dveeden](https://github.com/dveeden)
     - Fix the issue that the `INDEX_LENGTH` field of partitioned tables in `INFORMATION_SCHEMA.PARTITIONS` is incorrect [#54173](https://github.com/pingcap/tidb/issues/54173) @[Defined2014](https://github.com/Defined2014)
-    - Fix the issue that the `TIDB_ROW_ID_SHARDING_INFO` field in the `INFOMATION_SCHEMA.TABLES` table is incorrect [#52330](https://github.com/pingcap/tidb/issues/52330) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that the `TIDB_ROW_ID_SHARDING_INFO` field in the `INFORMATION_SCHEMA.TABLES` table is incorrect [#52330](https://github.com/pingcap/tidb/issues/52330) @[tangenta](https://github.com/tangenta)
     - Fix the issue that a generated column returns illegal timestamps [#52509](https://github.com/pingcap/tidb/issues/52509) @[lcwangchao](https://github.com/lcwangchao)
     - Fix the issue that setting `max-index-length` causes TiDB to panic when adding indexes using the Distributed eXecution Framework (DXF) [#53281](https://github.com/pingcap/tidb/issues/53281) @[zimulala](https://github.com/zimulala)
     - Fix the issue that the illegal column type `DECIMAL(0,0)` can be created in some cases [#53779](https://github.com/pingcap/tidb/issues/53779) @[tangenta](https://github.com/tangenta)
