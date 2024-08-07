@@ -13,27 +13,29 @@ This document covers various essential best practices for deploying TiDB on publ
 
 As the storage engine of TiKV, [RocksDB](https://rocksdb.org/) is used to store user data. Because the provisioned IO throughput on cloud EBS is usually limited due to cost considerations, RocksDB might exhibit high write amplification, and the disk throughput might become the bottleneck for the workload. As a result, the total number of pending compaction bytes grows over time and triggers flow control, which indicates that TiKV lacks sufficient disk bandwidth to keep up with the foreground write flow.
 
-To alleviate the bottleneck caused by limited disk throughput, you can improve performance by [enabling Titan](#enable-titan). If your average row size is smaller than 512 bytes, Titan wouldn't applicable. You can otherwise improve performance by [increasing all the compression levels](#increase-all-the-compression-levels).
+To alleviate the bottleneck caused by limited disk throughput, you can improve performance by [enabling Titan](#enable-titan). If your average row size is smaller than 512 bytes, Titan is not applicable. In this case, you can improve performance by [increasing all the compression levels](#increase-all-the-compression-levels).
 
 ### Enable Titan
 
 [Titan](/storage-engine/titan-overview.md) is a high-performance [RocksDB](https://github.com/facebook/rocksdb) plugin for key-value separation, which can reduce write amplification in RocksDB when large values are used.
 
-- If your average row size is larger than 512 bytes, you can enable Titan to reduce the compaction I/O flow as follows, with `min-blob-size` set to `"512B"` or `"1KB"` and `blob-file-compression` set to `"zstd"`:
+If your average row size is larger than 512 bytes, you can enable Titan to reduce the compaction I/O flow as follows, with `min-blob-size` set to `"512B"` or `"1KB"` and `blob-file-compression` set to `"zstd"`:
 
-    ```toml
-    [rocksdb.titan]
-    enabled = true
-    [rocksdb.defaultcf.titan]
-    min-blob-size = "1KB"
-    blob-file-compression = "zstd"
-    ```
-    
-When enabling Titan, please note that there may be a slight performance degradation for range scans on the primary key. For more information, check the [details](https://docs.pingcap.com/tidb/stable/titan-overview#impact-of-min-blob-size-on-performance)
+```toml
+[rocksdb.titan]
+enabled = true
+[rocksdb.defaultcf.titan]
+min-blob-size = "1KB"
+blob-file-compression = "zstd"
+```
+
+> **Note:**
+>
+> When Titan is enabled, there might be a slight performance degradation for range scans on the primary key. For more information, see [impact of `min-blob-size` on performance](/storage-engine/titan-overview.md#impact-of-min-blob-size-on-performance).
 
 ### Increase all the compression levels
 
-If Titan is not applicable and your average row size is smaller than 512 bytes, you can increase all the compression levels of the default column family to `"zstd"` as follows:
+If your average row size is smaller than 512 bytes, you can increase all the compression levels of the default column family to `"zstd"` as follows:
 
 ```toml
 [rocksdb.defaultcf]
