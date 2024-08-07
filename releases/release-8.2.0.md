@@ -147,11 +147,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 
     For more information, see [documentation](/ticdc/ticdc-upstream-downstream-check.md#notes).
 
-* Pulsar Sink supports using the `pulsar+http` and `pulsar+https` protocols to connect to Pulsar [#11336](https://github.com/pingcap/tiflow/issues/11336) @[SandeepPadhi](https://github.com/SandeepPadhi) 
+* TiCDC Pulsar Sink supports using the `pulsar+http` and `pulsar+https` connection protocols [#11336](https://github.com/pingcap/tiflow/issues/11336) @[SandeepPadhi](https://github.com/SandeepPadhi)
 
-    Before v8.2.0, TiCDC Pulsar Sink only supported the `pulsar` and `pulsar+ssl` protocol to connect to Pulsar. Starting from v8.2.0, TiCDC Pulsar Sink supports using the `pulsar+http` and `pulsar+https` protocols to connect to Pulsar, which improves the flexibility of connecting to Pulsar.
+    Before v8.2.0, TiCDC Pulsar Sink only supports `pulsar` and `pulsar+ssl` connection protocols. Starting from v8.2.0, TiCDC Pulsar Sink supports `pulsar+http` and `pulsar+https` protocols for connections. This enhancement improves the flexibility of connecting to Pulsar.
 
-    For more information, see [documentation](/ticdc/ticdc-sink-to-pulsar.md#configuration).
+    For more information, see [documentation](/ticdc/ticdc-sink-to-pulsar.md#sink-uri).
 
 ## Compatibility changes
 
