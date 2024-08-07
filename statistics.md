@@ -643,7 +643,7 @@ Currently, the `SHOW STATS_BUCKETS` statement returns the following 11 columns:
 | `repeats` | The occurrence number of the maximum value |
 | `lower_bound` | The minimum value |
 | `upper_bound` | The maximum value |
-| `ndv` | The number of different values in the bucket. When `tidb_analyze_version` = `1`, `ndv` is always `0`, which has no actual meaning. |
+| `Ndv` | The number of distinct values in the bucket. This field is deprecated and always shows `0` due to its inaccurate value. |
 
 ### Top-N information
 
