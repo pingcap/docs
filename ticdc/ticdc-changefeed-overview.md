@@ -1,6 +1,6 @@
 ---
 title: Changefeed Overview
-summary: Learn basic concepts, state definitions, and state transfer of changefeeds.
+summary: チェンジフィードの基本的な概念、状態の定義、および状態転送について学習します。
 ---
 
 # チェンジフィードの概要 {#changefeed-overview}
@@ -44,4 +44,4 @@ summary: Learn basic concepts, state definitions, and state transfer of changefe
 
 HTTP インターフェイス (TiCDC OpenAPI 機能) を使用して、TiCDC クラスターとそのレプリケーション タスクを管理することもできます。詳細については、 [TiCDC オープンAPI](/ticdc/ticdc-open-api.md)参照してください。
 
-TiCDC がTiUPを使用してデプロイされている場合は、 `tiup cdc:v<CLUSTER_VERSION> cli`コマンドを実行して`cdc cli`起動できます。 `v<CLUSTER_VERSION>` `v7.5.1`などの TiCDC クラスター バージョンに置き換えます。 `cdc cli`直接実行することもできます。
+TiCDC がTiUPを使用してデプロイされている場合は、 `tiup cdc:v<CLUSTER_VERSION> cli`コマンドを実行して`cdc cli`起動できます。 `v<CLUSTER_VERSION>` `v7.5.3`などの TiCDC クラスター バージョンに置き換えます。 `cdc cli`直接実行することもできます。

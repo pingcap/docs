@@ -1,6 +1,6 @@
 ---
 title: Insert Data
-summary: Learn about how to insert data.
+summary: データを挿入する方法について学習します。
 ---
 
 <!-- markdownlint-disable MD029 -->
@@ -232,7 +232,7 @@ Python の完全な例については、以下を参照してください。
 
 <CustomContent platform="tidb">
 
--   データのインポート: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) **Dumpling**でエクスポートしたデータ、 **CSV**ファイル、または[Amazon Auroraから TiDB へのデータ移行](/migrate-aurora-to-tidb.md)インポートできます。また、ローカル ディスクまたは Amazon S3 クラウド ディスクからのデータの読み取りもサポートされています。
+-   データのインポート: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) **Dumpling**でエクスポートしたデータ、 **CSV**ファイル、または[Amazon Auroraから TiDB へのデータ移行](/migrate-aurora-to-tidb.md)インポートできます。ローカル ディスクまたは Amazon S3 クラウド ディスクからのデータの読み取りもサポートされています。
 -   データレプリケーション: [TiDB データ移行](/dm/dm-overview.md) MySQL、MariaDB、Amazon Auroraデータベースを TiDB にレプリケートできます。また、ソースデータベースからシャードされたインスタンスとテーブルをマージおよび移行することもサポートしています。
 -   データのバックアップと復元: [バックアップと復元 (BR)](/br/backup-and-restore-overview.md) **Dumpling**と比較して、 **BR は*****ビッグデータの***シナリオに適しています。
 
@@ -290,3 +290,17 @@ INSERT INTO `bookshop`.`users` (`id`, `balance`, `nickname`) VALUES (1, 0.00, 'n
 ## HTAPを使用する {#use-htap}
 
 TiDB では、HTAP 機能により、データを挿入するときに追加の操作を実行する必要がなくなります。追加の挿入ロジックはありません。TiDB はデータの一貫性を自動的に保証します。テーブルを作成した後、列指向のレプリカを使用してクエリを直接高速化する[列指向レプリカ同期をオンにする](/develop/dev-guide-create-table.md#use-htap-capabilities)で済みます。
+
+## 助けが必要？ {#need-help}
+
+<CustomContent platform="tidb">
+
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+
+</CustomContent>

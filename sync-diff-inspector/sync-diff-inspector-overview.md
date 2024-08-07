@@ -1,6 +1,6 @@
 ---
 title: sync-diff-inspector User Guide
-summary: Use sync-diff-inspector to compare data and repair inconsistent data.
+summary: sync-diff-inspector を使用してデータを比較し、不一致なデータを修復します。
 ---
 
 # sync-diff-inspector ユーザーガイド {#sync-diff-inspector-user-guide}
@@ -9,7 +9,7 @@ summary: Use sync-diff-inspector to compare data and repair inconsistent data.
 
 このガイドでは、sync-diff-inspector の主な機能を紹介し、このツールの設定方法と使用方法について説明します。sync-diff-inspector をダウンロードするには、次のいずれかの方法を使用します。
 
--   バイナリ パッケージ。sync-diff-inspector バイナリ パッケージは、 TiDB Toolkitに含まれています。TiDB TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロード](/download-ecosystem-tools.md)参照してください。
+-   バイナリ パッケージ。sync-diff-inspector バイナリ パッケージはTiDB Toolkitに含まれています。TiDB TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロード](/download-ecosystem-tools.md)参照してください。
 -   Docker イメージ。ダウンロードするには、次のコマンドを実行します。
 
     ```shell
@@ -27,7 +27,7 @@ summary: Use sync-diff-inspector to compare data and repair inconsistent data.
 
 ## sync-diff-inspector の制限 {#restrictions-of-sync-diff-inspector}
 
--   MySQL と TiDB 間のデータ移行では、オンライン チェックはサポートされていません。アップストリーム - ダウンストリーム チェックリストにデータが書き込まれていないこと、および特定の範囲のデータが変更されていないことを確認してください。 `range`設定すると、この範囲のデータをチェックできます。
+-   MySQL と TiDB 間のデータ移行ではオンライン チェックはサポートされていません。アップストリーム - ダウンストリーム チェックリストにデータが書き込まれていないこと、および特定の範囲のデータが変更されていないことを確認してください。 `range`設定すると、この範囲のデータをチェックできます。
 
 -   TiDB と MySQL では、 `FLOAT` 、 `DOUBLE` 、およびその他の浮動小数点型の実装が異なります。 `FLOAT`と`DOUBLE` 、チェックサムの計算にそれぞれ 6 桁と 15 桁の有効桁数を使用します。 この機能を使用しない場合は、 `ignore-columns`を設定してこれらの列のチェックをスキップします。
 
@@ -249,6 +249,8 @@ sync-diff-inspector のログは`${output}/sync_diff.log`に保存され、そ�
 -   `RESULT` : チェックが完了したかどうか。2 `skip-non-existing-table = true`設定した場合、上流または下流に存在しないテーブルの場合、この列の値は`skipped`なります。
 -   `STRUCTURE EQUALITY` : テーブル構造が同じかどうかをチェックする
 -   `DATA DIFF ROWS` : `rowAdd` / `rowDelete` 。テーブルを修正するために追加/削除する必要がある行の数を示します。
+-   `UPCOUNT` : 上流データソース内のこのテーブルの行数
+-   `DOWNCOUNT` : 下流データソース内のこのテーブルの行数
 
 ### 不整合なデータを修正するためのSQL文 {#sql-statements-to-fix-inconsistent-data}
 

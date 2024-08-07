@@ -1,6 +1,6 @@
 ---
 title: mysql Schema
-summary: Learn about the TiDB system tables.
+summary: TiDB システム テーブルについて学習します。
 ---
 
 # <code>mysql</code>スキーマ {#code-mysql-code-schema}
@@ -26,7 +26,7 @@ summary: Learn about the TiDB system tables.
 -   `tidb`テーブルには、TiDB に関するいくつかのグローバル情報が含まれています。
 
     -   `bootstrapped` : TiDB クラスターが初期化されているかどうか。この値は読み取り専用であり、変更できないことに注意してください。
-    -   `tidb_server_version` : 初期化時の TiDB のバージョン情報。この値は読み取り専用であり、変更できないことに注意してください。
+    -   `tidb_server_version` : TiDB が初期化されたときのバージョン情報。この値は読み取り専用であり、変更できないことに注意してください。
     -   `system_tz` : TiDB のシステムタイムゾーン。
     -   `new_collation_enabled` : TiDB が[照合のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)有効にしているかどうか。この値は読み取り専用であり、変更できないことに注意してください。
 
@@ -67,10 +67,6 @@ summary: Learn about the TiDB system tables.
 -   `table_cache_meta`キャッシュされたテーブルのメタデータを格納します。
 
 ## TTL関連のシステムテーブル {#ttl-related-system-tables}
-
-> **注記：**
-
-> TTL 関連のシステム テーブルは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
 -   `tidb_ttl_table_status` : 以前に実行されたTTLジョブと、すべてのTTLテーブルに対して実行中のTTLジョブ
 -   `tidb_ttl_task` : 現在進行中のTTLサブタスク

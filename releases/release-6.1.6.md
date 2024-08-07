@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.1.6 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 6.1.6.
+summary: TiDB 6.1.6 の互換性の変更、改善、バグ修正について説明します。
 ---
 
 # TiDB 6.1.6 リリースノート {#tidb-6-1-6-release-notes}
@@ -21,7 +21,7 @@ TiDB バージョン: 6.1.6
 
 -   ティビ
 
-    -   プリペアドプランキャッシュ[＃42125](https://github.com/pingcap/tidb/issues/42125) @ [qw4990](https://github.com/qw4990)で`BatchPointGet`の実行プランのキャッシュをサポートします
+    -   プリペアドプランキャッシュ[＃42125](https://github.com/pingcap/tidb/issues/42125) @ [qw4990](https://github.com/qw4990)で`BatchPointGet`の実行プランのキャッシュをサポートします。
     -   インデックス結合[#40505](https://github.com/pingcap/tidb/issues/40505) @ [イサール](https://github.com/Yisaer)のより多くの SQL 形式をサポート
 
 -   ティクヴ
@@ -39,12 +39,12 @@ TiDB バージョン: 6.1.6
     -   `int_col in (decimal...)`条件[#40224](https://github.com/pingcap/tidb/issues/40224) @ [qw4990](https://github.com/qw4990)を処理するときにプラン キャッシュが FullScan プランをキャッシュする可能性がある問題を修正しました
     -   IndexMerge プランが SET 型列[＃41273](https://github.com/pingcap/tidb/issues/41273) [＃41293](https://github.com/pingcap/tidb/issues/41293) @ [時間と運命](https://github.com/time-and-fate)に誤った範囲を生成する可能性がある問題を修正しました
     -   符号なし`TINYINT` / `SMALLINT` / `INT`値を`0` [＃41736](https://github.com/pingcap/tidb/issues/41736) @ [リトルフォール](https://github.com/LittleFall)より小さい`DECIMAL` / `FLOAT` / `DOUBLE`の値と比較するときに誤った結果になる可能性がある問題を修正しました。
-    -   `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`テーブルをクエリすると TiDBサーバーのメモリが不足する問題を修正しました。この問題は、Grafana ダッシュボード[＃33893](https://github.com/pingcap/tidb/issues/33893) @ [クレイジーcs520](https://github.com/crazycs520)で遅いクエリをチェックすると発生する可能性があります。
+    -   `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`テーブルをクエリしたときに TiDBサーバーのメモリが不足する問題を修正しました。この問題は、Grafana ダッシュボード[＃33893](https://github.com/pingcap/tidb/issues/33893) @ [クレイジーcs520](https://github.com/crazycs520)で遅いクエリをチェックしたときに発生する可能性があります。
     -   範囲パーティションで複数の`MAXVALUE`パーティション[＃36329](https://github.com/pingcap/tidb/issues/36329) @ [ユー5サーフ](https://github.com/u5surf)が許可される問題を修正
     -   プラン キャッシュがシャッフル演算子をキャッシュし、誤った結果を返す可能性がある問題を修正[＃38335](https://github.com/pingcap/tidb/issues/38335) @ [qw4990](https://github.com/qw4990)
     -   タイムゾーンでのデータ競合によりデータインデックスの不整合が発生する可能性がある問題を修正[＃40710](https://github.com/pingcap/tidb/issues/40710) @ [翻訳:](https://github.com/wjhuang2016)
     -   `indexMerge` [＃41545](https://github.com/pingcap/tidb/issues/41545) [＃41605](https://github.com/pingcap/tidb/issues/41605) @ [グオシャオゲ](https://github.com/guo-shaoge) @ [グオシャオゲ](https://github.com/guo-shaoge)で goroutine リークが発生する可能性がある問題を修正しました
-    -   カーソルフェッチを使用し、実行、フェッチ、クローズの間で他のステートメントを実行すると、フェッチコマンドとクローズコマンドが誤った結果を返したり、TiDB がpanicを起こしたりする可能性がある問題を修正しました[＃40094](https://github.com/pingcap/tidb/issues/40094) @ [ヤンケオ](https://github.com/YangKeao)
+    -   カーソルフェッチを使用し、実行、フェッチ、クローズ間で他のステートメントを実行すると、フェッチコマンドとクローズコマンドが誤った結果を返したり、TiDB がpanicを起こしたりする可能性がある問題を修正しました[＃40094](https://github.com/pingcap/tidb/issues/40094) @ [ヤンケオ](https://github.com/YangKeao)
     -   DDL を使用して浮動小数点型を変更し、長さを変更せずに小数点以下の桁数を減らしても、古いデータは同じままになる問題を修正しました[＃41281](https://github.com/pingcap/tidb/issues/41281) @ [ジムララ](https://github.com/zimulala)
     -   `information_schema.columns`テーブルを結合すると TiDB がpanicになる問題を修正[＃32459](https://github.com/pingcap/tidb/issues/32459) @ [タンジェンタ](https://github.com/tangenta)
     -   実行プラン[＃41622](https://github.com/pingcap/tidb/issues/41622) @ [天菜まお](https://github.com/tiancaiamao)を生成する際に不整合な InfoSchema が取得され、TiDBpanicが発生する問題を修正しました。
@@ -55,7 +55,7 @@ TiDB バージョン: 6.1.6
     -   準備済みプランキャッシュが有効になっている場合にフルインデックススキャンでエラーが発生する可能性がある問題を修正[＃42150](https://github.com/pingcap/tidb/issues/42150) @ [ふーふー](https://github.com/fzzf678)
     -   DDL 文の実行中に`PointGet`使用してテーブルを読み込む SQL 文がpanic[＃41622](https://github.com/pingcap/tidb/issues/41622) @ [天菜まお](https://github.com/tiancaiamao)をスローする可能性がある問題を修正しました。
     -   トランザクション内で`PointUpdate`実行した後、TiDB が`SELECT`ステートメント[＃28011](https://github.com/pingcap/tidb/issues/28011) @ [ジグアン](https://github.com/zyguan)に対して誤った結果を返す問題を修正しました。
-    -   メモリリークとパフォーマンスの低下を防ぐために、期限切れの領域キャッシュを定期的にクリアします[＃40461](https://github.com/pingcap/tidb/issues/40461) @ [スティクナーフ](https://github.com/sticnarf) @ [ジグアン](https://github.com/zyguan)
+    -   メモリリークやパフォーマンスの低下を防ぐために、期限切れの領域キャッシュを定期的にクリアします[＃40461](https://github.com/pingcap/tidb/issues/40461) @ [スティクナーフ](https://github.com/sticnarf) @ [ジグアン](https://github.com/zyguan)
     -   `INSERT IGNORE`と`REPLACE`ステートメントが値[＃42121](https://github.com/pingcap/tidb/issues/42121) @ [ジグアン](https://github.com/zyguan)を変更しないキーをロックしない問題を修正しました
 
 -   ティクヴ
@@ -84,7 +84,7 @@ TiDB バージョン: 6.1.6
 
         -   データ複製中に`UPDATE`と`INSERT`のステートメントが混在すると`Duplicate entry`エラー[＃8597](https://github.com/pingcap/tiflow/issues/8597) @ [スドジ](https://github.com/sdojjy)が発生する可能性がある問題を修正しました。
         -   PD と TiCDC [＃8562](https://github.com/pingcap/tiflow/issues/8562) @ [金星の上](https://github.com/overvenus)間のネットワーク分離によって発生する TiCDC サービスの異常終了問題を修正
-        -   TiDB または MySQL シンクにデータを複製するとき、および主キー[＃8420](https://github.com/pingcap/tiflow/issues/8420) @ [趙新宇](https://github.com/zhaoxinyu)のない非 NULL ユニーク インデックスを持つ列に`CHARACTER SET`指定されたときに発生するデータの不整合を修正します。
+        -   TiDB または MySQL シンクにデータを複製するときに、主キー[＃8420](https://github.com/pingcap/tiflow/issues/8420) @ [趙新宇](https://github.com/zhaoxinyu)のない非 NULL ユニーク インデックスを持つ列に`CHARACTER SET`指定されている場合に発生するデータの不整合を修正します。
         -   `db sorter`のメモリ使用量が`cgroup memory limit` [＃8588](https://github.com/pingcap/tiflow/issues/8588) @ [アミヤンフェイ](https://github.com/amyangfei)で制御されない問題を修正
         -   無効な入力[＃7903](https://github.com/pingcap/tiflow/issues/7903) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)に対する`cdc cli`のエラーメッセージを最適化します
         -   S3storage障害[＃8089](https://github.com/pingcap/tiflow/issues/8089) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)に対して REDO ログが許容できる期間が不十分である問題を修正
@@ -92,7 +92,7 @@ TiDB バージョン: 6.1.6
 
     -   TiDB Lightning
 
-        -   競合解決ロジック（ `duplicate-resolution` ）によりチェックサム[＃40657](https://github.com/pingcap/tidb/issues/40657) @ [ゴズスキー](https://github.com/gozssky)の不一致が発生する可能性がある問題を修正
+        -   競合解決ロジック（ `duplicate-resolution` ）によりチェックサム[＃40657](https://github.com/pingcap/tidb/issues/40657) @ [眠いモグラ](https://github.com/sleepymole)の不一致が発生する可能性がある問題を修正
         -   TiDB Lightningが分割領域フェーズ[＃40934](https://github.com/pingcap/tidb/issues/40934) @ [ランス6716](https://github.com/lance6716)でパニックになる問題を修正
         -   ローカル バックエンド モードでデータをインポートするときに、インポートされたターゲット テーブルの複合プライマリ キーに`auto_random`列があり、ソース データ[＃41454](https://github.com/pingcap/tidb/issues/41454) @ [D3ハンター](https://github.com/D3Hunter)でその列の値が指定されていない場合、ターゲット列でデータが自動的に生成されない問題を修正しました。
         -   並列インポート中に最後のTiDB Lightningインスタンスを除くすべてのインスタンスでローカル重複レコードが検出された場合、 TiDB Lightning が競合解決を誤ってスキップする可能性がある問題を修正[＃40923](https://github.com/pingcap/tidb/issues/40923) @ [リチュンジュ](https://github.com/lichunzhu)

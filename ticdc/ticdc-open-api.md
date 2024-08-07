@@ -1,6 +1,6 @@
 ---
 title: TiCDC OpenAPI v1
-summary: Learn how to use the OpenAPI interface to manage the cluster status and data replication.
+summary: OpenAPI インターフェースを使用してクラスターのステータスとデータのレプリケーションを管理する方法を学習します。
 ---
 
 # TiCDC オープン API v1 {#ticdc-openapi-v1}
@@ -77,7 +77,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/status
 
 上記の出力のフィールドは次のように説明されます。
 
--   version: 現在の TiCDC バージョン番号。
+-   バージョン: 現在の TiCDC バージョン番号。
 -   git_hash: Git ハッシュ値。
 -   id: ノードのキャプチャ ID。
 -   pid: ノードのキャプチャプロセス PID。
@@ -111,7 +111,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/health
 
 #### リクエスト本文のパラメータ {#parameters-for-the-request-body}
 
-| パラメータ名 | 説明 | | :------------------------ | :---------------------- ------------------------------- | | `changefeed_id` | `STRING` type。レプリケーション タスクの ID。(オプション) | | `start_ts` | `UINT64` type。changefeed の開始 TSO を指定します。(オプション) | | `target_ts` | `UINT64` type。changefeed のターゲット TSO を指定します。(オプション) | | **`sink_uri`** | `STRING` type。レプリケーション タスクのダウンストリーム アドレス。(**必須**) | | `force_replicate` | `BOOLEAN` type。一意のインデックスのないテーブルを強制的にレプリケートするかどうかを決定します。(オプション) | | `ignore_ineligible_table` | `BOOLEAN` type。レプリケートできないテーブルを無視するかどうかを決定します。(オプション) | | `filter_rules` | `STRING` type 配列。テーブル スキーマ フィルタリングのルール。(オプション) | | `ignore_txn_start_ts` | `UINT64` type 配列。指定された start_ts のトランザクションを無視します。(オプション) | | `mounter_worker_num` | `INT` type。マウント元スレッド番号。 (オプション) | | `sink_config` | シンクの構成パラメータ。(オプション) |
+| パラメータ名 | 説明 | | :------------------------ | :---------------------- ------------------------------- | | `changefeed_id` | `STRING` type。レプリケーション タスクの ID。(オプション) | | `start_ts` | `UINT64` type。changefeed の開始 TSO を指定します。(オプション) | | `target_ts` | `UINT64` type。changefeed のターゲット TSO を指定します。(オプション) | | **`sink_uri`** | `STRING` type。レプリケーション タスクのダウンストリーム アドレス。(**必須**) | | `force_replicate` | `BOOLEAN` type。一意のインデックスのないテーブルを強制的にレプリケートするかどうかを決定します。(オプション) | | `ignore_ineligible_table` | `BOOLEAN` type。レプリケートできないテーブルを無視するかどうかを決定します。(オプション) | | `filter_rules` | `STRING` type 配列。テーブル スキーマ フィルタリングのルール。(オプション) | | `ignore_txn_start_ts` | `UINT64` type 配列。指定された start_ts のトランザクションを無視します。(オプション) | | `mounter_worker_num` | `INT` type。マウンタのスレッド番号。(オプション) | | `sink_config` | シンクの構成パラメータ。(オプション) |
 
 `changefeed_id`の意味と形式`sink_uri` `start_ts` [`cdc cli`を使用してレプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)ドキュメントで説明されているもの`sink_uri`同じです。これらのパラメータの詳細な説明`target_ts`は、このドキュメントを参照してください。11 で証明書パスを指定する場合は、対応する証明書を対応する TiCDCサーバーにアップロードしたことを確認してください。
 
@@ -148,7 +148,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/health
 
 `matcher` : マッチャーのマッチング構文は、フィルター ルール構文と同じです。
 
-`protocol` : MQ タイプのシンクの場合、メッセージのプロトコル形式を指定できます。現在、次のプロトコルがサポートされています: `canal-json` 、 `open-protocol` 、 `avro` 、および`maxwell` 。
+`protocol` : MQ タイプのシンクの場合、メッセージのプロトコル形式を指定できます。現在、次のプロトコルがサポートされています: `canal-json` 、 `open-protocol` 、および`avro` 。
 
 ### 例 {#example}
 

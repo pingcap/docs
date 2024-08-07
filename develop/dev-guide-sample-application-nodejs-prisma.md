@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with Prisma
-summary: Learn how to connect to TiDB using Prisma. This tutorial gives Node.js sample code snippets that work with TiDB using Prisma.
+summary: Prisma を使用して TiDB に接続する方法を学びます。このチュートリアルでは、Prisma を使用して TiDB を操作する Node.js サンプル コード スニペットを紹介します。
 ---
 
 # PrismaでTiDBに接続する {#connect-to-tidb-with-prisma}
@@ -127,7 +127,7 @@ npm install prisma typescript ts-node @types/node --save-dev
 
 3.  **「どこからでもアクセスを許可」**をクリックし、 **「CA 証明書のダウンロード」**をクリックして CA 証明書をダウンロードします。
 
-    接続文字列を取得する方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
+    接続文字列の取得方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
 
 4.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -143,7 +143,7 @@ npm install prisma typescript ts-node @types/node --save-dev
 
     > **注記**
     >
-    > TiDB Serverless の場合、パブリックエンドポイントを使用する場合は、 `sslaccept=strict`設定して TLS 接続を有効にすることを**お勧めします**。 `sslaccept=strict`を設定して TLS 接続を有効にする場合は、 `sslcert=/path/to/ca.pem`を介して接続ダイアログからダウンロードした CA 証明書のファイル パスを指定する**必要があります**。
+    > TiDB Serverless の場合、パブリックエンドポイントを使用する場合は、 `sslaccept=strict`設定して TLS 接続を有効にすることを**お勧めします**。 `sslaccept=strict`を設定して TLS 接続を有効にする場合は、 `sslcert=/path/to/ca.pem`を介して接続ダイアログからダウンロードした CA 証明書のファイルパスを指定する**必要があります**。
 
 6.  `.env`ファイルを保存します。
 
@@ -195,7 +195,7 @@ npm install prisma typescript ts-node @types/node --save-dev
 npx prisma migrate dev
 ```
 
-**`prisma.schema`で定義されたデータ モデル:**
+**`prisma.schema`で定義されたデータモデル:**
 
 ```prisma
 // Define a Player model, which represents the `players` table.
@@ -222,7 +222,7 @@ model Profile {
 }
 ```
 
-Prisma でデータ モデルを定義する方法については、 [データ・モデル](https://www.prisma.io/docs/concepts/components/prisma-schema/data-model)ドキュメントを確認してください。
+Prisma でデータ モデルを定義する方法については、 [データ・モデル](https://www.prisma.io/docs/concepts/components/prisma-schema/data-model)ドキュメントを参照してください。
 
 **予想される実行出力:**
 
@@ -234,7 +234,7 @@ Prisma でデータ モデルを定義する方法については、 [データ�
 
 ### ステップ5: コードを実行する {#step-5-run-the-code}
 
-サンプルコードを実行するには、次のコマンドを実行します。
+サンプル コードを実行するには、次のコマンドを実行します。
 
 ```shell
 npm start
@@ -355,7 +355,7 @@ await prisma.player.delete({
 
     > **警告：**
     >
-    > **外部キーは、小規模および中規模のデータ シナリオに適しています。**大規模なデータ ボリュームで外部キーを使用すると、重大なパフォーマンスの問題が発生し、システムに予期しない影響が生じる可能性があります。外部キーを使用する場合は、まず徹底的な検証を実施し、慎重に使用してください。
+    > **外部キーは、小規模および中規模のデータ シナリオに適しています。**大規模なデータ ボリュームで外部キーを使用すると、重大なパフォーマンスの問題が発生し、システムに予期しない影響が生じる可能性があります。外部キーを使用する予定の場合は、まず徹底的な検証を実施し、慎重に使用してください。
 
 -   [プリズマ関係モード](https://www.prisma.io/docs/concepts/components/prisma-schema/relations/relation-mode) 、Prisma クライアント側での参照整合性のエミュレーションです。ただし、参照整合性を維持するために追加のデータベース クエリが必要になるため、パフォーマンスに影響があることに注意してください。
 
@@ -369,12 +369,12 @@ await prisma.player.delete({
 
 <CustomContent platform="tidb">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](/support.md)について質問します。
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
 
 </CustomContent>

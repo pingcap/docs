@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with Rails framework and ActiveRecord ORM
-summary: Learn how to connect to TiDB using the Rails framework. This tutorial gives Ruby sample code snippets that work with TiDB using the Rails framework and ActiveRecord ORM.
+summary: Rails フレームワークを使用して TiDB に接続する方法を学びます。このチュートリアルでは、Rails フレームワークと ActiveRecord ORM を使用して TiDB で動作する Ruby サンプル コード スニペットを紹介します。
 ---
 
 # Rails フレームワークと ActiveRecord ORM を使用して TiDB に接続する {#connect-to-tidb-with-rails-framework-and-activerecord-orm}
@@ -114,7 +114,7 @@ bundle add mysql2 dotenv
 
 3.  **「どこからでもアクセスを許可」**をクリックし、 **「CA 証明書のダウンロード」**をクリックして CA 証明書をダウンロードします。
 
-    接続文字列を取得する方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
+    接続文字列の取得方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
 
 4.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -173,7 +173,7 @@ bundle add mysql2 dotenv
     bundle exec rails db:seed
     ```
 
-3.  サンプルコードを実行するには、次のコマンドを実行します。
+3.  サンプル コードを実行するには、次のコマンドを実行します。
 
     ```shell
     bundle exec rails runner ./quickstart.rb
@@ -181,7 +181,7 @@ bundle add mysql2 dotenv
 
 接続が成功すると、コンソールに次のように TiDB クラスターのバージョンが出力されます。
 
-    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v7.5.1)
+    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v7.5.3)
     ⏳ Loading sample game data...
     ✅ Loaded sample game data.
 
@@ -281,4 +281,14 @@ CA 証明書のパスを手動で指定することも可能ですが、この�
 
 ## 助けが必要？ {#need-help}
 
-[不和](https://discord.gg/vYU9h56kAX)チャンネルで質問してください。
+<CustomContent platform="tidb">
+
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+
+</CustomContent>

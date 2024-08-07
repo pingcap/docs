@@ -1,6 +1,6 @@
 ---
 title: Determine Your TiDB Size
-summary: Learn how to determine the size of your TiDB Cloud cluster.
+summary: TiDB Cloudクラスターのサイズを決定する方法について説明します。
 ---
 
 # TiDBのサイズを決定する {#determine-your-tidb-size}
@@ -23,12 +23,12 @@ TiDB のノード番号、vCPU、RAM を構成できます。
 
 サポートされている vCPU と RAM のサイズは次のとおりです。
 
--   4 vCPU、16 GiB
--   8 vCPU、16 GiB
--   8 vCPU、32 GiB
--   16 vCPU、32 GiB
--   32 vCPU、64 GiB
--   32 vCPU、128 GiB
+|      標準サイズ     |      大容量メモリ     |
+| :------------: | :-------------: |
+|  4 vCPU、16 GiB |       該当なし      |
+|  8 vCPU、16 GiB |  8 vCPU、32 GiB  |
+| 16 vCPU、32 GiB |  16 vCPU、64 GiB |
+| 32 vCPU、64 GiB | 32 vCPU、128 GiB |
 
 > **注記：**
 >
@@ -89,11 +89,12 @@ TiKV のノード数、vCPU と RAM、storageを構成できます。
 
 サポートされている vCPU と RAM のサイズは次のとおりです。
 
--   4 vCPU、16 GiB
--   8 vCPU、32 GiB
--   8 vCPU、64 GiB
--   16 vCPU、64 GiB
--   32 vCPU、128 GiB
+|      標準サイズ      |     大容量メモリ    |
+| :-------------: | :-----------: |
+|  4 vCPU、16 GiB  |      該当なし     |
+|  8 vCPU、32 GiB  | 8 vCPU、64 GiB |
+|  16 vCPU、64 GiB |      近日公開     |
+| 32 vCPU、128 GiB |      該当なし     |
 
 > **注記：**
 >
@@ -111,11 +112,11 @@ TiDB Cloud は、耐久性と高可用性を実現するために、選択した
 
 > **注記：**
 >
-> TiDB クラスターをスケールすると、3 つのアベイラビリティーゾーンのノードが同時に増加または減少します。ニーズに応じて TiDB クラスターをスケールインまたはスケールアウトする方法については、 [TiDBクラスタを拡張する](/tidb-cloud/scale-tidb-cluster.md)参照してください。
+> TiDB クラスターをスケールすると、3 つのアベイラビリティーゾーンのノードが同時に増加または減少します。ニーズに応じて TiDB クラスターをスケールインまたはスケールアウトする方法については、 [TiDBクラスタのスケール](/tidb-cloud/scale-tidb-cluster.md)参照してください。
 
-TiKV は主にデータstorageに使用されますが、TiKV ノードのパフォーマンスはワークロードによっても異なります。したがって、TiKV ノードの数を計画するときは、 [**データ量**](#estimate-tikv-node-number-according-to-data-volume)と[期待されるパフォーマンス](#estimate-tikv-node-number-according-to-expected-performance)の両方に応じて見積もり、2 つの見積もりの​​うち大きい方を推奨ノード数とする必要があります。
+TiKV は主にデータstorageに使用されますが、TiKV ノードのパフォーマンスはワークロードによって異なります。したがって、TiKV ノードの数を計画するときは、 [**データ量**](#estimate-tikv-node-number-according-to-data-volume)と[期待されるパフォーマンス](#estimate-tikv-node-number-according-to-expected-performance)の両方に応じて見積もり、2 つの見積もりの​​うち大きい方を推奨ノード数とする必要があります。
 
-#### データ量に応じてTiKVノード数を見積もる {#estimate-tikv-node-number-according-to-data-volume}
+#### データ量に応じてTiKVノード数を推定する {#estimate-tikv-node-number-according-to-data-volume}
 
 次のように、データ量に応じて TiKV ノードの推奨数を計算できます。
 
@@ -162,7 +163,7 @@ TiKV ノードの数が 8 未満の場合、パフォーマンス偏差係数は
 
 7 は 8 未満なので、7 ノードのパフォーマンス偏差係数は 0 です。推定 TiKV パフォーマンスは`7 * 17,800 * (1 - 0) = 124,600`であり、期待されるパフォーマンス 110,000 QPS を満たすことができます。
 
-したがって、期待されるパフォーマンスに応じて、7 つの TiKV ノード (8 vCPU、32 GiB) が推奨されます。
+したがって、予想されるパフォーマンスに応じて、7 つの TiKV ノード (8 vCPU、32 GiB) が推奨されます。
 
 次に、データ量に応じて計算された TiKV ノード数と、予想されるパフォーマンスに応じて計算された数を比較し、大きい方を TiKV ノードの推奨数とします。
 
@@ -216,8 +217,8 @@ TiFlashノードの最小数: `min((800 GiB * 2 + 100 GiB * 1) / 1024 GiB, max(2
 | TiFlash vCPU | 最小ノードstorage | 最大ノードstorage | デフォルトのノードstorage |
 | :----------: | :----------: | :----------: | :--------------: |
 |    8 仮想CPU   |   200ギガバイト   |   2048ギガバイト  |     500ギガバイト     |
-|   16 仮想CPU   |   200ギガバイト   |   2048ギガバイト  |     500ギガバイト     |
-|   32 仮想CPU   |   200ギガバイト   |   2048ギガバイト  |     500ギガバイト     |
+|   16 仮想CPU   |   200ギガバイト   |    4096ギバ    |     500ギガバイト     |
+|   32 仮想CPU   |   200ギガバイト   |    4096ギバ    |     500ギガバイト     |
 
 > **注記：**
 >

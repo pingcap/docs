@@ -1,39 +1,39 @@
 ---
 title: Subquery
-summary: TiDBのサブクエリについての概要を紹介します。サブクエリは別のSQLクエリ内のクエリであり、5種類のサブクエリがあります。また、相関サブクエリと自己完結型サブクエリに分類されます。自己完結型サブクエリでは、TiDBは実行計画フェーズ中にそれを定数として書き換えます。相関サブクエリの場合、TiDBは実行プランレベルでのクエリ効率の相関解除を試みます。
+summary: TiDB でサブクエリを使用する方法を学習します。
 ---
 
 # サブクエリ {#subquery}
 
-このドキュメントでは、TiDB のサブクエリ ステートメントとカテゴリを紹介します。
+このドキュメントでは、TiDB のサブクエリ ステートメントとカテゴリについて説明します。
 
 ## 概要 {#overview}
 
 サブクエリは、別の SQL クエリ内のクエリです。サブクエリを使用すると、クエリ結果を別のクエリで使用できます。
 
-以下では、 [書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションを例として、サブクエリを紹介します。
+以下では、サブクエリを紹介するために、アプリケーション[書店](/develop/dev-guide-bookshop-schema-design.md)を例に説明します。
 
-## サブクエリ文 {#subquery-statement}
+## サブクエリステートメント {#subquery-statement}
 
-ほとんどの場合、サブクエリには次の 5 種類があります。
+ほとんどの場合、サブクエリには次の 5 つの種類があります。
 
--   スカラー サブクエリ ( `SELECT (SELECT s1 FROM t2) FROM t1`など)。
--   派生テーブル ( `SELECT t1.s1 FROM (SELECT s1 FROM t2) t1`など)。
--   存在テスト ( `WHERE NOT EXISTS(SELECT ... FROM t2)` 、 `WHERE t1.a IN (SELECT ... FROM t2)`など)。
--   `WHERE t1.a = ANY(SELECT ... FROM t2)` 、 `WHERE t1.a = ANY(SELECT ... FROM t2)`などの定量化された比較。
--   比較演算子のオペランドとしてのサブクエリ ( `WHERE t1.a > (SELECT ... FROM t2)`など)。
+-   スカラー サブクエリ (例: `SELECT (SELECT s1 FROM t2) FROM t1` 。
+-   派生テーブル (例: `SELECT t1.s1 FROM (SELECT s1 FROM t2) t1` 。
+-   存在テスト、例`WHERE t1.a IN (SELECT ... FROM t2)` `WHERE NOT EXISTS(SELECT ... FROM t2)` 。
+-   `WHERE t1.a = ANY(SELECT ... FROM t2)` `WHERE t1.a = ANY(SELECT ... FROM t2)`の定量化された比較。
+-   比較演算子のオペランドとしてのサブクエリ (例: `WHERE t1.a > (SELECT ... FROM t2)` 。
 
 ## サブクエリのカテゴリ {#category-of-subquery}
 
-サブクエリは[相関サブクエリ](https://en.wikipedia.org/wiki/Correlated_subquery)と自己完結型サブクエリに分類できます。 TiDB は、これら 2 つのタイプを別々に扱います。
+サブクエリは、 [相関サブクエリ](https://en.wikipedia.org/wiki/Correlated_subquery)と自己完結型サブクエリに分類できます。TiDB では、これら 2 つのタイプを別々に扱います。
 
-サブクエリが相関しているかどうかは、サブクエリがその外側のクエリで使用されている列を参照しているかどうかによって決まります。
+サブクエリが相関しているかどうかは、サブクエリが外部クエリで使用される列を参照しているかどうかによって決まります。
 
 ### 自己完結型サブクエリ {#self-contained-subquery}
 
-subquery を比較演算子のオペランド ( `>` 、 `>=` 、 `<` 、 `<=` 、 `=` 、または`! =` ) として使用する自己完結型サブクエリの場合、内部サブクエリは 1 回だけクエリを実行し、TiDB は実行計画フェーズ中にそれを定数として書き換えます。
+サブクエリを比較演算子 ( `>` 、 `>=` 、 `<` 、 `<=` 、 `=` 、または`! =` ) のオペランドとして使用する自己完結型サブクエリの場合、内部サブクエリは 1 回だけクエリを実行し、TiDB は実行プラン フェーズ中にそれを定数として書き換えます。
 
-たとえば、平均年齢よりも年齢が高い`authors`テーブルの著者をクエリするには、サブクエリを比較演算子のオペランドとして使用できます。
+たとえば、年齢が平均年齢より大きい`authors`テーブル内の著者を照会するには、サブクエリを比較演算子のオペランドとして使用できます。
 
 ```sql
 SELECT * FROM authors a1 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > (
@@ -44,20 +44,20 @@ SELECT * FROM authors a1 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_ye
 )
 ```
 
-内部サブクエリは、TiDB が上記のクエリを実行する前に実行されます。
+TiDB が上記のクエリを実行する前に、内部サブクエリが実行されます。
 
 ```sql
 SELECT AVG(IFNULL(a2.death_year, YEAR(NOW())) - a2.birth_year) AS average_age FROM authors a2;
 ```
 
-クエリの結果が 34、つまり平均年齢が 34 歳であるとします。34 は元のサブクエリを置き換える定数として使用されます。
+クエリの結果が 34 であるとします。つまり、平均年齢は 34 であり、34 は元のサブクエリを置き換える定数として使用されます。
 
 ```sql
 SELECT * FROM authors a1
 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > 34;
 ```
 
-結果は次のとおりです。
+結果は以下のようになります。
 
     +--------+-------------------+--------+------------+------------+
     | id     | name              | gender | birth_year | death_year |
@@ -77,15 +77,15 @@ WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > 34;
     | 421294 | Karelle VonRueden | 0      | 1977       | NULL       |
     ...
 
-Existential Test や Quantified Comparison などの自己完結型サブクエリの場合、TiDB はパフォーマンスを向上させるためにそれらを書き換えて同等のクエリに置き換えます。詳細については、 [サブクエリ関連の最適化](/subquery-optimization.md)を参照してください。
+存在テストや定量比較などの自己完結型サブクエリの場合、TiDB はパフォーマンスを向上させるためにそれらを書き換えて同等のクエリに置き換えます。詳細については、 [サブクエリ関連の最適化](/subquery-optimization.md)参照してください。
 
 ### 相関サブクエリ {#correlated-subquery}
 
-相関サブクエリの場合、内部サブクエリは外部クエリの列を参照するため、各サブクエリは外部クエリの行ごとに 1 回実行されます。つまり、外側のクエリが 1,000 万件の結果を取得すると仮定すると、サブクエリも 1,000 万回実行され、より多くの時間とリソースが消費されます。
+相関サブクエリの場合、内部サブクエリは外部クエリの列を参照するため、各サブクエリは外部クエリの各行に対して 1 回実行されます。つまり、外部クエリが 1,000 万件の結果を取得すると仮定すると、サブクエリも 1,000 万回実行され、より多くの時間とリソースが消費されます。
 
-したがって、処理の過程で、TiDB は実行プラン レベルでのクエリ効率の[相関サブクエリの相関解除](/correlated-subquery-optimization.md)を試みます。
+したがって、処理の過程で、TiDB は実行プラン レベルでクエリ効率を向上させるよう[相関サブクエリの非相関](/correlated-subquery-optimization.md)努めます。
 
-次のステートメントは、同性の他の著者の平均年齢よりも年上の著者を照会するものです。
+次の文は、同じ性別の他の著者の平均年齢よりも年上の著者を照会するためのものです。
 
 ```sql
 SELECT * FROM authors a1 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > (
@@ -119,10 +119,24 @@ WHERE
     AND (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > a2.average_age;
 ```
 
-ベスト プラクティスとして、実際の開発では、パフォーマンスが向上する別の同等のクエリを作成できる場合は、相関サブクエリを介したクエリを回避することをお勧めします。
+ベスト プラクティスとして、実際の開発では、パフォーマンスが向上した別の同等のクエリを記述できる場合は、相関サブクエリを介したクエリを避けることをお勧めします。
 
 ## 続きを読む {#read-more}
 
 -   [サブクエリ関連の最適化](/subquery-optimization.md)
--   [相関サブクエリの相関解除](/correlated-subquery-optimization.md)
--   [TiDB でのサブクエリの最適化](https://en.pingcap.com/blog/subquery-optimization-in-tidb/)
+-   [相関サブクエリの非相関](/correlated-subquery-optimization.md)
+-   [TiDB におけるサブクエリの最適化](https://www.pingcap.com/blog/subquery-optimization-in-tidb/)
+
+## 助けが必要？ {#need-help}
+
+<CustomContent platform="tidb">
+
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+
+</CustomContent>

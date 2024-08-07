@@ -1,6 +1,6 @@
 ---
 title: Build a TiDB Serverless Cluster
-summary: Learn how to build a TiDB Serverless cluster in TiDB Cloud and connect to it.
+summary: TiDB Cloudで TiDB Serverless クラスターを構築し、それに接続する方法を学習します。
 ---
 
 <!-- markdownlint-disable MD029 -->
@@ -9,7 +9,7 @@ summary: Learn how to build a TiDB Serverless cluster in TiDB Cloud and connect 
 
 <CustomContent platform="tidb">
 
-このドキュメントでは、TiDB を使い始めるための最も簡単な方法を説明します。1 [TiDB Cloud](https://en.pingcap.com/tidb-cloud)使用して TiDB Serverless クラスターを作成し、それに接続し、その上でサンプル アプリケーションを実行します。
+このドキュメントでは、TiDB を使い始めるための最も簡単な方法を説明します。TiDB Serverless クラスターを作成し、それに接続して、サンプル アプリケーションを実行します。
 
 ローカルマシンで TiDB を実行する必要がある場合は、 [ローカルで TiDB を起動する](/quick-start-with-tidb.md)参照してください。
 
@@ -37,7 +37,7 @@ summary: Learn how to build a TiDB Serverless cluster in TiDB Cloud and connect 
 
 6.  TiDB Cloudクラスターが作成されたら、クラスター名をクリックしてクラスターの概要ページに移動し、右上隅の**[接続]**をクリックします。接続ダイアログ ボックスが表示されます。
 
-7.  ダイアログで、希望する接続方法とオペレーティング システムを選択して、対応する接続​​文字列を取得します。このドキュメントでは、例として MySQL クライアントを使用します。
+7.  ダイアログで、希望する接続方法とオペレーティング システムを選択して、対応する接続文字列を取得します。このドキュメントでは、例として MySQL クライアントを使用します。
 
 8.  **「パスワードの生成**」をクリックすると、ランダムなパスワードが生成されます。生成されたパスワードは再度表示されないため、パスワードは安全な場所に保存してください。ルート パスワードを設定しないと、クラスターに接続できません。
 
@@ -169,3 +169,17 @@ SELECT 'Hello TiDB Cloud!';
 ```
 
 実際の出力が期待された出力と似ている場合は、おめでとうございます。TiDB TiDB Cloudで SQL ステートメントが正常に実行されました。
+
+## 助けが必要？ {#need-help}
+
+<CustomContent platform="tidb">
+
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+
+</CustomContent>

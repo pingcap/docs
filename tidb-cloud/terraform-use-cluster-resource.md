@@ -1,6 +1,6 @@
 ---
 title: Use Cluster Resource
-summary: Learn how to use the cluster resource to create and modify a TiDB Cloud cluster.
+summary: クラスター リソースを使用してTiDB Cloudクラスターを作成および変更する方法を学習します。
 ---
 
 # クラスタリソースの使用 {#use-cluster-resource}
@@ -13,7 +13,7 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
 -   TiDB Serverless クラスターと TiDB Dedicated クラスターを作成します。
 -   TiDB 専用クラスターを変更します。
--   TiDB Serverless クラスターと TiDB Dedicated クラスターを削除します。
+-   TiDB Serverless および TiDB Dedicated クラスターを削除します。
 
 ## 前提条件 {#prerequisites}
 
@@ -38,6 +38,7 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
         provider "tidbcloud" {
           public_key = "your_public_key"
           private_key = "your_private_key"
+          sync = true
         }
 
         data "tidbcloud_projects" "example_project" {
@@ -132,6 +133,7 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
         provider "tidbcloud" {
           public_key = "your_public_key"
           private_key = "your_private_key"
+          sync = true
         }
         data "tidbcloud_cluster_specs" "example_cluster_spec" {
         }
@@ -279,6 +281,7 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
         provider "tidbcloud" {
          public_key = "your_public_key"
          private_key = "your_private_key"
+         sync = true
         }
 
         resource "tidbcloud_cluster" "example_cluster" {
@@ -360,7 +363,7 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
     上記の結果のように、Terraform は実行プランを生成します。このプランには、Terraform が実行するアクションが記述されています。
 
-    -   構成と状態の違いを確認できます。
+    -   設定と状態の違いを確認できます。
     -   この`apply`の結果も確認できます。新しいリソースが追加され、リソースは変更または破棄されません。
     -   `known after apply`は、 `apply`後の値が取得されることを示します。
 
@@ -380,7 +383,7 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
     ```
 
-5.  `terraform show`または`terraform state show tidbcloud_cluster.${resource-name}`コマンドを使用して、リソースの状態を調べます。前者は、すべてのリソースとデータ ソースの状態を表示します。
+5.  リソースの状態を検査するには、 `terraform show`または`terraform state show tidbcloud_cluster.${resource-name}`コマンドを使用します。前者は、すべてのリソースとデータ ソースの状態を表示します。
 
     ```shell
     $ terraform state show tidbcloud_cluster.example_cluster
@@ -829,7 +832,7 @@ Terraform で管理されていない TiDB クラスターの場合は、イン�
         The resources that were imported are shown above. These resources are now in
         your Terraform state and will henceforth be managed by Terraform.
 
-3.  クラスターのステータスを確認するには、コマンド`terraform state show tidbcloud_cluster.import_cluster`を実行します。
+3.  クラスターのステータスを確認するには、 `terraform state show tidbcloud_cluster.import_cluster`コマンドを実行します。
 
         $ terraform state show tidbcloud_cluster.import_cluster
 

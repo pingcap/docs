@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.5.3 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 6.5.3.
+summary: TiDB 6.5.3 の互換性の変更、改善、バグ修正について説明します。
 ---
 
 # TiDB 6.5.3 リリースノート {#tidb-6-5-3-release-notes}
@@ -15,7 +15,7 @@ TiDB バージョン: 6.5.3
 
 ### 行動の変化 {#behavior-changes}
 
--   更新イベントを処理する際、イベント内で主キーまたは null 以外の一意のインデックス値が変更されると、TiCDC はイベントを削除イベントと挿入イベントに分割します。詳細については、 [ドキュメンテーション](/ticdc/ticdc-behavior-change.md#transactions-containing-a-single-update-change)参照してください。
+-   更新イベントを処理する際、イベント内で主キーまたは null 以外の一意のインデックス値が変更されると、TiCDC はイベントを削除イベントと挿入イベントに分割します。詳細については、 [ドキュメンテーション](/ticdc/ticdc-split-update-behavior.md#transactions-containing-a-single-update-change)参照してください。
 
 ## 改善点 {#improvements}
 
@@ -28,7 +28,7 @@ TiDB バージョン: 6.5.3
 
 -   ティクヴ
 
-    -   gzip を使用して`check_leader`リクエスト[＃14839](https://github.com/tikv/tikv/issues/14839) @ [翻訳](https://github.com/cfzjywxk)を圧縮することでトラフィックを削減します
+    -   gzip を使用して`check_leader`リクエスト[＃14839](https://github.com/tikv/tikv/issues/14839) @ [翻訳](https://github.com/cfzjywxk)を圧縮してトラフィックを削減します
 
 -   PD
 
@@ -61,7 +61,7 @@ TiDB バージョン: 6.5.3
     -   CTE を含むクエリによって TiDB がハングする問題を修正[＃43749](https://github.com/pingcap/tidb/issues/43749) [＃36896](https://github.com/pingcap/tidb/issues/36896) @ [グオシャオゲ](https://github.com/guo-shaoge)
     -   `AES_DECRYPT`式[＃43063](https://github.com/pingcap/tidb/issues/43063) @ [lcwangchao](https://github.com/lcwangchao)を使用すると SQL 文が`runtime error: index out of range`エラーを報告する問題を修正しました。
     -   `SHOW PROCESSLIST`ステートメントがサブクエリ時間が長いステートメントのトランザクションの TxnStart を表示できない問題を修正[＃40851](https://github.com/pingcap/tidb/issues/40851) @ [クレイジーcs520](https://github.com/crazycs520)
-    -   PD分離により実行中のDDLがブロックされる可能性がある問題を修正[＃44014](https://github.com/pingcap/tidb/issues/44014) [＃43755](https://github.com/pingcap/tidb/issues/43755) [＃44267](https://github.com/pingcap/tidb/issues/44267) @ [翻訳:](https://github.com/wjhuang2016)
+    -   PD分離により実行中のDDL [＃44014](https://github.com/pingcap/tidb/issues/44014) [＃43755](https://github.com/pingcap/tidb/issues/43755) [＃44267](https://github.com/pingcap/tidb/issues/44267) @ [翻訳:](https://github.com/wjhuang2016)がブロックされる可能性がある問題を修正
     -   `UNION` [＃42563](https://github.com/pingcap/tidb/issues/42563) @ [lcwangchao](https://github.com/lcwangchao)でユニオンビューと一時テーブルをクエリするときに発生する TiDBpanic問題を修正しました。
     -   パーティション化されたテーブル内の配置ルールの動作の問題を修正し、削除されたパーティション内の配置ルールが正しく設定され、リサイクルされるようになりました[＃44116](https://github.com/pingcap/tidb/issues/44116) @ [lcwangchao](https://github.com/lcwangchao)
     -   パーティションテーブルのパーティションを切り捨てると、パーティションの配置ルールが無効になる可能性がある問題を修正[＃44031](https://github.com/pingcap/tidb/issues/44031) @ [lcwangchao](https://github.com/lcwangchao)
@@ -115,14 +115,14 @@ TiDB バージョン: 6.5.3
     -   ティCDC
 
         -   テーブルが 50,000 個ある場合に発生する可能性のある OOM 問題を修正[＃7872](https://github.com/pingcap/tiflow/issues/7872) @ [スドジ](https://github.com/sdojjy)
-        -   上流の TiDB [＃8561](https://github.com/pingcap/tiflow/issues/8561) @ [金星の上](https://github.com/overvenus)で OOM が発生したときに TiCDC が停止する問題を修正しました
+        -   上流 TiDB [＃8561](https://github.com/pingcap/tiflow/issues/8561) @ [金星の上](https://github.com/overvenus)で OOM が発生したときに TiCDC が停止する問題を修正
         -   ネットワーク分離やPDオーナーノードの再起動などのPD障害時にTiCDCが停止する問題を修正[＃8808](https://github.com/pingcap/tiflow/issues/8808) [＃8812](https://github.com/pingcap/tiflow/issues/8812) [＃8877](https://github.com/pingcap/tiflow/issues/8877) @ [アズドンメン](https://github.com/asddongmen)
         -   TiCDC タイムゾーン設定[＃8798](https://github.com/pingcap/tiflow/issues/8798) @ [ハイラスティン](https://github.com/hi-rustin)の問題を修正
         -   上流の TiKV ノードの 1 つがクラッシュするとチェックポイントの遅延が増加する問題を修正[＃8858](https://github.com/pingcap/tiflow/issues/8858) @ [ヒック](https://github.com/hicqu)
         -   下流のMySQLにデータを複製するときに、上流のTiDB [＃8040](https://github.com/pingcap/tiflow/issues/8040) @ [アズドンメン](https://github.com/asddongmen)で`FLASHBACK CLUSTER TO TIMESTAMP`ステートメントが実行された後にレプリケーションエラーが発生する問題を修正しました。
         -   オブジェクトstorageにデータを複製する際に、上流の`EXCHANGE PARTITION`操作が下流の[＃8914](https://github.com/pingcap/tiflow/issues/8914) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)に正しく複製されない問題を修正しました。
         -   いくつかの特殊なシナリオでソートコンポーネントのメモリ使用量が過剰になることによって発生する OOM 問題を修正[＃8974](https://github.com/pingcap/tiflow/issues/8974) @ [ヒック](https://github.com/hicqu)
-        -   ダウンストリームが Kafka の場合、TiCDC がダウンストリームのメタデータを頻繁にクエリし、ダウンストリームに過度の負荷がかかる問題を修正しました[＃8957](https://github.com/pingcap/tiflow/issues/8957) [＃8959](https://github.com/pingcap/tiflow/issues/8959) @ [ハイラスティン](https://github.com/hi-rustin)
+        -   ダウンストリームが Kafka の場合、TiCDC がダウンストリームのメタデータを頻繁にクエリしすぎて、ダウンストリームに過度の負荷がかかる問題を修正しました[＃8957](https://github.com/pingcap/tiflow/issues/8957) [＃8959](https://github.com/pingcap/tiflow/issues/8959) @ [ハイラスティン](https://github.com/hi-rustin)
         -   Kafka メッセージのサイズが大きすぎるためにレプリケーション エラーが発生した場合に、メッセージ本文がログ[＃9031](https://github.com/pingcap/tiflow/issues/9031) @ [ダラエス](https://github.com/darraes)に記録される問題を修正しました。
         -   下流の Kafka シンクがローリング再起動されたときに発生する TiCDC ノードpanicを修正[＃9023](https://github.com/pingcap/tiflow/issues/9023) @ [アズドンメン](https://github.com/asddongmen)
         -   storageサービスにデータを複製するときに、ダウンストリーム DDL ステートメントに対応する JSON ファイルにテーブル フィールド[＃9066](https://github.com/pingcap/tiflow/issues/9066) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)のデフォルト値が記録されない問題を修正しました。

@@ -1,6 +1,6 @@
 ---
 title: Data App Configuration Files
-summary: This document describes the configuration files of Data App in TiDB Cloud.
+summary: このドキュメントでは、TiDB Cloudのデータ アプリの構成ファイルについて説明します。
 ---
 
 # データ アプリコンフィグレーションファイル {#data-app-configuration-files}
@@ -80,7 +80,7 @@ summary: This document describes the configuration files of Data App in TiDB Clo
 
 ## HTTPエンドポイント構成 {#http-endpoint-configuration}
 
-データ アプリ ディレクトリでは、エンドポイント構成は`http_endpoints/config.json`に、SQL ファイルは`http_endpoints/sql/<method>-<endpoint-name>.sql`にあります。
+データ アプリ ディレクトリでは、 `http_endpoints/config.json`にエンドポイント構成、 `http_endpoints/sql/<method>-<endpoint-name>.sql`に SQL ファイルがあります。
 
     ├── <Your Data App directory>
     │   ├── http_endpoints
@@ -177,9 +177,9 @@ summary: This document describes the configuration files of Data App in TiDB Clo
 | `settings.cache_enabled`     | 整数  | 指定された有効期間 (TTL) 内に`GET`のリクエストによって返された応答をキャッシュするかどうかを制御します。サポートされている値は`0` (無効) と`1` (有効) です。デフォルト値は`0`です。                                                                                                                                       |
 | `settings.cache_ttl`         | 整数  | `settings.cache_enabled`を`1`に設定した場合の、キャッシュされた応答の有効期間 (TTL) の秒数。30 から 600 までの整数に設定できます。TTL 期間中に同じ`GET`つの要求を再度行うと、Data Service はターゲット データベースからデータを再度取得するのではなく、キャッシュされた応答を直接返すため、クエリのパフォーマンスが向上します。                                               |
 | `tag`                        | 弦   | エンドポイントのタグ。デフォルト値は`"Default"`です。                                                                                                                                                                                                               |
-| `batch_operation`            | 整数  | エンドポイントがバッチ モードで動作できるようにするかどうかを制御します。サポートされている値は`0` (無効) と`1` (有効) です。 `1`に設定すると、1 回のリクエストで複数の行を操作できます。このオプションを有効にするには、リクエスト メソッドが`POST`または`PUT`であることを確認してください。                                                                                |
+| `batch_operation`            | 整数  | エンドポイントがバッチ モードで動作できるようにするかどうかを制御します。サポートされている値は`0` (無効) と`1` (有効) です。 `1`に設定すると、1 つのリクエストで複数の行を操作できます。このオプションを有効にするには、リクエスト メソッドが`POST`または`PUT`であることを確認してください。                                                                                |
 | `sql_file`                   | 弦   | エンドポイントの SQL ファイル ディレクトリ。たとえば、 `"sql/GET-v1.sql"` 。                                                                                                                                                                                            |
-| `type`                       | 弦   | エンドポイントのタイプ`"sql_endpoint"`のみが可能です。                                                                                                                                                                                                            |
+| `type`                       | 弦   | エンドポイントのタイプ。定義済みシステム エンドポイントの場合は値は`"system-data"` 、その他のエンドポイントの場合は`"sql_endpoint"`です。                                                                                                                                                          |
 | `return_type`                | 弦   | エンドポイントの応答形式。1 `"json"`が可能です。                                                                                                                                                                                                                  |
 
 ### SQLファイルの構成 {#sql-file-configuration}
@@ -208,7 +208,7 @@ WHERE
 
 SQL ファイルを書き込むときは、次の点に注意してください。
 
--   SQL ファイルの先頭で、SQL ステートメントにデータベースを指定する必要があります。たとえば、 `USE database_name;` 。
+-   SQL ファイルの先頭で、SQL ステートメントでデータベースを指定する必要があります。たとえば、 `USE database_name;` 。
 
 -   エンドポイントのパラメータを定義するには、SQL ステートメントに`${variable-name}`ような変数プレースホルダとして挿入します。
 

@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with JDBC
-summary: Learn how to connect to TiDB using JDBC. This tutorial gives Java sample code snippets that work with TiDB using JDBC.
+summary: JDBC を使用して TiDB に接続する方法を学習します。このチュートリアルでは、JDBC を使用して TiDB を操作するJavaサンプル コード スニペットを示します。
 aliases: ['/tidb/v7.5/dev-guide-sample-application-java']
 ---
 
@@ -22,7 +22,7 @@ TiDB は MySQL 互換のデータベースであり、JDBC (Java Database Connec
 
 このチュートリアルを完了するには、次のものが必要です。
 
--   **Java Development Kit (JDK) 17**以上。ビジネスおよび個人の要件に応じて[オープンJDK](https://openjdk.org/)または[オラクル](https://www.oracle.com/hk/java/technologies/downloads/)を選択できます。
+-   **Java Development Kit (JDK) 17**以上。ビジネスおよび個人の要件に基づいて[オープンJDK](https://openjdk.org/)または[オラクル](https://www.oracle.com/hk/java/technologies/downloads/)を選択できます。
 -   [メイヴン](https://maven.apache.org/install.html) **3.8**以上。
 -   [ギット](https://git-scm.com/downloads) 。
 -   TiDB クラスター。
@@ -98,7 +98,7 @@ cd tidb-java-jdbc-quickstart
     cp env.sh.example env.sh
     ```
 
-6.  対応する接続​​文字列をコピーして`env.sh`ファイルに貼り付けます。例の結果は次のようになります。
+6.  対応する接続文字列をコピーして`env.sh`ファイルに貼り付けます。例の結果は次のようになります。
 
     ```shell
     export TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
@@ -124,7 +124,7 @@ cd tidb-java-jdbc-quickstart
 
 3.  **「どこからでもアクセスを許可」**をクリックし、 **「CA 証明書のダウンロード」**をクリックして CA 証明書をダウンロードします。
 
-    接続文字列を取得する方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
+    接続文字列の取得方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
 
 4.  次のコマンドを実行して`env.sh.example`コピーし、名前を`env.sh`に変更します。
 
@@ -132,7 +132,7 @@ cd tidb-java-jdbc-quickstart
     cp env.sh.example env.sh
     ```
 
-5.  対応する接続​​文字列をコピーして`env.sh`ファイルに貼り付けます。例の結果は次のようになります。
+5.  対応する接続文字列をコピーして`env.sh`ファイルに貼り付けます。例の結果は次のようになります。
 
     ```shell
     export TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
@@ -156,7 +156,7 @@ cd tidb-java-jdbc-quickstart
     cp env.sh.example env.sh
     ```
 
-2.  対応する接続​​文字列をコピーして`env.sh`ファイルに貼り付けます。例の結果は次のようになります。
+2.  対応する接続文字列をコピーして`env.sh`ファイルに貼り付けます。例の結果は次のようになります。
 
     ```shell
     export TIDB_HOST='{host}'
@@ -176,7 +176,7 @@ cd tidb-java-jdbc-quickstart
 
 ### ステップ3: コードを実行して結果を確認する {#step-3-run-the-code-and-check-the-result}
 
-1.  サンプルコードを実行するには、次のコマンドを実行します。
+1.  サンプル コードを実行するには、次のコマンドを実行します。
 
     ```shell
     make
@@ -309,12 +309,12 @@ Javaドライバーはデータベースへの低レベルのアクセスを提�
 
 <CustomContent platform="tidb">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](/support.md)について質問します。
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
 
 </CustomContent>

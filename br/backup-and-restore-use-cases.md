@@ -1,6 +1,6 @@
 ---
 title: TiDB Backup and Restore Use Cases
-summary: TiDB provides snapshot and log backup solutions for specific use cases, such as timely data recovery and business audits. To use point-in-time recovery (PITR), deploy a TiDB cluster >= v6.2.0 and update BR to v7.6.0. Configure backup storage on Amazon S3 and set a backup policy to meet data loss and recovery requirements. Run log and snapshot backups, and use PITR to restore data to a specific time point. Clean up outdated data regularly. For detailed steps, refer to TiDB documentation.
+summary: TiDB は、タイムリーなデータ復旧やビジネス監査などの特定のユースケース向けに、スナップショットおよびログ バックアップ ソリューションを提供します。ポイントインタイム リカバリ (PITR) を使用するには、TiDB クラスター >= v6.2.0 をデプロイし、 BRを v7.6.0 に更新します。Amazon S3 でバックアップstorageを構成し、データ損失と復旧の要件を満たすバックアップ ポリシーを設定します。ログとスナップショットのバックアップを実行し、PITR を使用して特定の時点にデータを復元します。古くなったデータを定期的にクリーンアップします。詳細な手順については、TiDB のドキュメントを参照してください。
 ---
 
 # TiDB バックアップと復元のユースケース {#tidb-backup-and-restore-use-cases}
@@ -16,7 +16,7 @@ PITR を使用すると、前述の要件を満たすことができます。
 
 ## TiDBクラスタとBRをデプロイ {#deploy-the-tidb-cluster-and-br}
 
-PITR を使用するには、TiDB クラスター &gt;= v6.2.0 をデプロイし、 BR をTiDB クラスターと同じバージョンに更新する必要があります。このドキュメントでは、例として v7.5.1 を使用します。
+PITR を使用するには、TiDB クラスター &gt;= v6.2.0 をデプロイし、 BR をTiDB クラスターと同じバージョンに更新する必要があります。このドキュメントでは、例として v7.5.3 を使用します。
 
 次の表は、TiDB クラスターで PITR を使用するために推奨されるハードウェア リソースを示しています。
 
@@ -43,18 +43,18 @@ TiUPを使用してBR をインストールまたはアップグレードしま�
 -   インストール：
 
     ```shell
-    tiup install br:v7.5.1
+    tiup install br:v7.5.3
     ```
 
 -   アップグレード:
 
     ```shell
-    tiup update br:v7.5.1
+    tiup update br:v7.5.3
     ```
 
 ## バックアップstorageを構成する (Amazon S3) {#configure-backup-storage-amazon-s3}
 
-バックアップ タスクを開始する前に、次の点を含めてバックアップstorageを準備します。
+バックアップ タスクを開始する前に、次の点を考慮してバックアップstorageを準備します。
 
 1.  バックアップデータを保存する S3 バケットとディレクトリを準備します。
 2.  S3 バケットにアクセスするための権限を設定します。
@@ -74,7 +74,7 @@ TiUPを使用してBR をインストールまたはアップグレードしま�
 
 3.  スナップショット (完全) バックアップやログ バックアップなどのバックアップ データを保存するディレクトリ構造を計画します。
 
-    -   すべてのスナップショットバックアップデータは`s3://tidb-pitr-bucket/backup-data/snapshot-${date}`ディレクトリに保存されます。 `${date}`スナップショットバックアップの開始時刻です。たとえば、2022/05/12 00:01:30 に開始するスナップショットバックアップは`s3://tidb-pitr-bucket/backup-data/snapshot-20220512000130`に保存されます。
+    -   すべてのスナップショット バックアップ データは`s3://tidb-pitr-bucket/backup-data/snapshot-${date}`ディレクトリに保存されます。 `${date}`スナップショット バックアップの開始時刻です。たとえば、2022/05/12 00:01:30 に開始するスナップショット バックアップは`s3://tidb-pitr-bucket/backup-data/snapshot-20220512000130`に保存されます。
     -   ログバックアップデータは`s3://tidb-pitr-bucket/backup-data/log-backup/`ディレクトリに保存されます。
 
 ## バックアップポリシーを決定する {#determine-the-backup-policy}
@@ -121,7 +121,7 @@ crontab などの自動ツールを使用して、スナップショット バ�
     ```shell
     tiup br backup full --pd="${PD_IP}:2379" \
     --storage='s3://tidb-pitr-bucket/backup-data/snapshot-20220514000000' \
-    --backupts='2022/05/14 00:00:00'
+    --backupts='2022/05/14 00:00:00 +08:00'
     ```
 
 -   2022/05/16 00:00:00にスナップショットバックアップを実行します
@@ -129,7 +129,7 @@ crontab などの自動ツールを使用して、スナップショット バ�
     ```shell
     tiup br backup full --pd="${PD_IP}:2379" \
     --storage='s3://tidb-pitr-bucket/backup-data/snapshot-20220516000000' \
-    --backupts='2022/05/16 00:00:00'
+    --backupts='2022/05/16 00:00:00 +08:00'
     ```
 
 ## PITRを実行する {#run-pitr}
@@ -172,5 +172,5 @@ crontab などの自動ツールを使用して、2 日ごとに古いデータ�
 ## 参照 {#see-also}
 
 -   [バックアップストレージ](/br/backup-and-restore-storages.md)
--   [スナップショットのバックアップと復元のコマンドマニュアル](/br/br-snapshot-manual.md)
+-   [スナップショットのバックアップと復元コマンドマニュアル](/br/br-snapshot-manual.md)
 -   [ログバックアップとPITRコマンドマニュアル](/br/br-pitr-manual.md)

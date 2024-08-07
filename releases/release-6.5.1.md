@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.5.1 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 6.5.1.
+summary: TiDB 6.5.1 の互換性の変更、改善、バグ修正について説明します。
 ---
 
 # TiDB 6.5.1 リリースノート {#tidb-6-5-1-release-notes}
@@ -70,14 +70,14 @@ TiDB バージョン: 6.5.1
 
         -   プルベースのシンクを有効にしてシステムスループットを最適化[＃8232](https://github.com/pingcap/tiflow/issues/8232) @ [ハイラスティン](https://github.com/hi-rustin)
         -   GCS 互換または Azure 互換のオブジェクトstorageへの REDO ログの保存をサポート[＃7987](https://github.com/pingcap/tiflow/issues/7987) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
-        -   シンクのスループットを向上させるために、非同期モードで MQ シンクと MySQL シンクを実装します[＃5928](https://github.com/pingcap/tiflow/issues/5928) @ [アミヤンフェイ](https://github.com/amyangfei) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
+        -   シンクのスループットを向上させるために、非同期モードでMQシンクとMySQLシンクを実装する[＃5928](https://github.com/pingcap/tiflow/issues/5928) @ [アミヤンフェイ](https://github.com/amyangfei) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
 
 ## バグの修正 {#bug-fixes}
 
 -   ティビ
 
     -   [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600)構成項目がポイント取得クエリ[＃39928](https://github.com/pingcap/tidb/issues/39928) @ [ジグアン](https://github.com/zyguan)で有効にならない問題を修正しました
-    -   長いセッション接続で`INSERT`または`REPLACE`ステートメントがpanicになる可能性がある問題を修正[＃40351](https://github.com/pingcap/tidb/issues/40351) @ [ウィノロス](https://github.com/winoros)
+    -   長いセッション接続[＃40351](https://github.com/pingcap/tidb/issues/40351) @ [ウィノロス](https://github.com/winoros)で`INSERT`または`REPLACE`ステートメントがpanicになる可能性がある問題を修正しました
     -   `auto analyze`により正常なシャットダウンに長い時間がかかる問題を修正[＃40038](https://github.com/pingcap/tidb/issues/40038) @ [翻訳者](https://github.com/xuyifangreeneyes)
     -   DDL取り込み[＃40970](https://github.com/pingcap/tidb/issues/40970) @ [タンジェンタ](https://github.com/tangenta)中にデータ競合が発生する可能性がある問題を修正
     -   インデックスを[＃40879](https://github.com/pingcap/tidb/issues/40879) @ [タンジェンタ](https://github.com/tangenta)で追加するとデータ競合が発生する可能性がある問題を修正しました
@@ -88,7 +88,7 @@ TiDB バージョン: 6.5.1
     -   テーブルの主キーに`ENUM`列[＃40456](https://github.com/pingcap/tidb/issues/40456) @ [lcwangchao](https://github.com/lcwangchao)が含まれている場合にTTLタスクが失敗する問題を修正
     -   ユニークインデックス[＃40592](https://github.com/pingcap/tidb/issues/40592) @ [タンジェンタ](https://github.com/tangenta)を追加するときに TiDB がパニックになる問題を修正
     -   同じテーブルを同時に切り捨てるときに、一部の切り捨て操作が MDL によってブロックされない問題を修正[＃40484](https://github.com/pingcap/tidb/issues/40484) @ [翻訳:](https://github.com/wjhuang2016)
-    -   動的トリミングモード[＃40368](https://github.com/pingcap/tidb/issues/40368) @ [イサール](https://github.com/Yisaer)でパーティションテーブルにグローバルバインディングが作成された後に TiDB が再起動できない問題を修正しました
+    -   動的トリミングモード[＃40368](https://github.com/pingcap/tidb/issues/40368) @ [イサール](https://github.com/Yisaer)でパーティションテーブルにグローバルバインディングが作成された後に TiDB が再起動できない問題を修正しました。
     -   「カーソル読み取り」メソッドを使用してデータを読み取ると、GC [＃39447](https://github.com/pingcap/tidb/issues/39447) @ [ジグアン](https://github.com/zyguan)が原因でエラーが返される可能性がある問題を修正しました。
     -   `SHOW PROCESSLIST` [＃41156](https://github.com/pingcap/tidb/issues/41156) @ [ヤンケオ](https://github.com/YangKeao)の結果で`EXECUTE`情報が null になる問題を修正しました
     -   `globalMemoryControl`クエリを強制終了しているときに、 `KILL`操作が[＃41057](https://github.com/pingcap/tidb/issues/41057) @ [うわー](https://github.com/wshwsh12)で終了しない可能性がある問題を修正しました。
@@ -127,7 +127,7 @@ TiDB バージョン: 6.5.1
     -   `const Enum`型を他の型[＃14156](https://github.com/tikv/tikv/issues/14156) @ [うわー](https://github.com/wshwsh12)にキャストするときに発生するエラーを修正
     -   警官タスクのページングが不正確になる問題を修正[＃14254](https://github.com/tikv/tikv/issues/14254) @ [あなた06](https://github.com/you06)
     -   `batch_cop`モード[＃14109](https://github.com/tikv/tikv/issues/14109) @ [あなた06](https://github.com/you06)で`scan_detail`フィールドが不正確になる問題を修正
-    -   TiKV がRaftデータの破損を検出し、 [＃14338](https://github.com/tikv/tikv/issues/14338) @ [トニー](https://github.com/tonyxuqqi)の再起動に失敗する可能性があるRaft Engineの潜在的なエラーを修正しました。
+    -   Raft Engineの潜在的なエラーを修正しました。このエラーにより、TiKV がRaftデータの破損を検出し、 [＃14338](https://github.com/tikv/tikv/issues/14338) @ [トニー](https://github.com/tonyxuqqi)の再起動に失敗する可能性があります。
 
 -   PD
 
@@ -157,7 +157,7 @@ TiDB バージョン: 6.5.1
         -   BRが`backupmeta`ファイル[＃40878](https://github.com/pingcap/tidb/issues/40878) @ [モクイシュル28](https://github.com/MoCuishle28)を解析するときにpanicを引き起こす問題を修正
         -   リージョンサイズ[＃36053](https://github.com/pingcap/tidb/issues/36053) @ [ユジュンセン](https://github.com/YuJuncen)の取得に失敗したために復元が中断される問題を修正しました
         -   TiDB クラスター[＃40759](https://github.com/pingcap/tidb/issues/40759) @ [ジョッカウ](https://github.com/joccau)に PITR バックアップ タスクがない場合に`resolve lock`の頻度が高すぎる問題を修正
-        -   ログバックアップが実行されているクラスターにデータを復元すると、ログバックアップファイルが復元できなくなる問題を修正[＃40797](https://github.com/pingcap/tidb/issues/40797) @ [リーヴルス](https://github.com/Leavrth)
+        -   ログバックアップが実行されているクラスターにデータを復元すると、ログバックアップファイルを復元できなくなる問題を修正[＃40797](https://github.com/pingcap/tidb/issues/40797) @ [リーヴルス](https://github.com/Leavrth)
         -   完全バックアップの失敗後にチェックポイントからバックアップを再開しようとしたときに発生するpanic問題を修正[＃40704](https://github.com/pingcap/tidb/issues/40704) @ [リーヴルス](https://github.com/Leavrth)
         -   PITRエラーが[＃40576](https://github.com/pingcap/tidb/issues/40576) @ [リーヴルス](https://github.com/Leavrth)で上書きされる問題を修正
         -   PITR バックアップ タスクで、先行所有者と gc 所有者が異なる場合にチェックポイントが進まない問題を修正[＃41806](https://github.com/pingcap/tidb/issues/41806) @ [ジョッカウ](https://github.com/joccau)
@@ -169,11 +169,11 @@ TiDB バージョン: 6.5.1
         -   S3storage障害[＃8089](https://github.com/pingcap/tiflow/issues/8089) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)に対して REDO ログが許容できる期間が不十分である問題を修正
         -   `transaction_atomicity`と`protocol`構成ファイル[＃7935](https://github.com/pingcap/tiflow/issues/7935) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)経由で更新できない問題を修正
         -   TiCDC が過度に多くのテーブル[＃8004](https://github.com/pingcap/tiflow/issues/8004) @ [金星の上](https://github.com/overvenus)を複製するとチェックポイントが進まない問題を修正しました。
-        -   レプリケーションラグが過度に高い場合にREDOログを適用するとOOMが発生する可能性がある問題を修正[＃8085](https://github.com/pingcap/tiflow/issues/8085) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
+        -   レプリケーション遅延が過度に大きい場合に、REDO ログを適用すると OOM が発生する可能性がある問題を修正[＃8085](https://github.com/pingcap/tiflow/issues/8085) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
         -   メタ[＃8074](https://github.com/pingcap/tiflow/issues/8074) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)への書き込みに REDO ログが有効になっている場合にパフォーマンスが低下する問題を修正しました。
         -   TiCDC が大規模なトランザクションを分割せずにデータを複製するとコンテキスト期限が超過するバグを修正[＃7982](https://github.com/pingcap/tiflow/issues/7982) @ [ハイラスティン](https://github.com/hi-rustin)
         -   PD が異常なときにチェンジフィードを一時停止すると、誤ったステータス[＃8330](https://github.com/pingcap/tiflow/issues/8330) @ [スドジ](https://github.com/sdojjy)になる問題を修正しました。
-        -   TiDB または MySQL シンクにデータを複製するとき、および主キー[＃8420](https://github.com/pingcap/tiflow/issues/8420) @ [アズドンメン](https://github.com/asddongmen)のない非 NULL ユニーク インデックスを持つ列に`CHARACTER SET`指定されたときに発生するデータの不整合を修正します。
+        -   TiDB または MySQL シンクにデータを複製するときに、主キー[＃8420](https://github.com/pingcap/tiflow/issues/8420) @ [アズドンメン](https://github.com/asddongmen)のない非 NULL ユニーク インデックスを持つ列に`CHARACTER SET`指定されている場合に発生するデータの不整合を修正します。
         -   テーブル スケジューリングとブラックホール シンクのpanic問題を修正[＃8024](https://github.com/pingcap/tiflow/issues/8024) [＃8142](https://github.com/pingcap/tiflow/issues/8142) @ [ヒック](https://github.com/hicqu)
 
     -   TiDB データ移行 (DM)
@@ -186,6 +186,6 @@ TiDB バージョン: 6.5.1
 
         -   TiDB Lightning の事前チェックで、以前に失敗したインポートによって残されたダーティ データを見つけられない問題を修正[＃39477](https://github.com/pingcap/tidb/issues/39477) @ [ダシュン](https://github.com/dsdashun)
         -   TiDB Lightningが分割領域フェーズ[＃40934](https://github.com/pingcap/tidb/issues/40934) @ [ランス6716](https://github.com/lance6716)でパニックになる問題を修正
-        -   競合解決ロジック（ `duplicate-resolution` ）によりチェックサム[＃40657](https://github.com/pingcap/tidb/issues/40657) @ [ゴズスキー](https://github.com/gozssky)の不一致が発生する可能性がある問題を修正
+        -   競合解決ロジック（ `duplicate-resolution` ）によりチェックサム[＃40657](https://github.com/pingcap/tidb/issues/40657) @ [眠いモグラ](https://github.com/sleepymole)の不一致が発生する可能性がある問題を修正
         -   並列インポート中に最後のTiDB Lightningインスタンスを除くすべてのインスタンスでローカル重複レコードが検出された場合、 TiDB Lightning が競合解決を誤ってスキップする可能性がある問題を修正[＃40923](https://github.com/pingcap/tidb/issues/40923) @ [リチュンジュ](https://github.com/lichunzhu)
-        -   ローカル バックエンド モードでデータをインポートするときに、インポートされたターゲット テーブルの複合プライマリ キーに`auto_random`列があり、ソース データ[＃41454](https://github.com/pingcap/tidb/issues/41454) @ [D3ハンター](https://github.com/D3Hunter)でその列の値が指定されていない場合、ターゲット列でデータが自動的に生成されない問題を修正しました。
+        -   ローカル バックエンド モードでデータをインポートするときに、インポートされたターゲット テーブルの複合プライマリ キーに`auto_random`列があり、ソース データ[＃41454](https://github.com/pingcap/tidb/issues/41454) @ [D3ハンター](https://github.com/D3Hunter)でその列の値が指定されていない場合、ターゲット列が自動的にデータを生成しない問題を修正しました。

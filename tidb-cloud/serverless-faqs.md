@@ -1,6 +1,6 @@
 ---
 title: TiDB Serverless FAQs
-summary: Learn about the most frequently asked questions (FAQs) relating to TiDB Serverless.
+summary: TiDB Serverless に関するよくある質問 (FAQ) について説明します。
 aliases: ['/tidbcloud/serverless-tier-faqs']
 ---
 
@@ -26,7 +26,7 @@ TiDB Cloudの各組織では、デフォルトで最大 5 [フリークラスタ
 
 ### すべてのTiDB Cloud機能は TiDB Serverless で完全にサポートされていますか? {#are-all-tidb-cloud-features-fully-supported-on-tidb-serverless}
 
-TiDB Cloud の機能の一部は、TiDB Serverless では部分的にサポートされているか、サポートされていません。詳細については、 [TiDB サーバーレスの制限とクォータ](/tidb-cloud/serverless-limitations.md)参照してください。
+TiDB Cloud機能の一部は、TiDB Serverless では部分的にサポートされているか、サポートされていません。詳細については、 [TiDB サーバーレスの制限とクォータ](/tidb-cloud/serverless-limitations.md)参照してください。
 
 ### TiDB サーバーレスは、Google Cloud や Azure など、AWS 以外のクラウド プラットフォームでいつ利用できるようになりますか? {#when-will-tidb-serverless-be-available-on-cloud-platforms-other-than-aws-such-as-google-cloud-or-azure}
 
@@ -35,6 +35,35 @@ TiDB Cloud の機能の一部は、TiDB Serverless では部分的にサポー�
 ### TiDB Serverless が利用可能になる前にDeveloper Tierクラスターを作成しました。そのクラスターをまだ使用できますか? {#i-created-a-developer-tier-cluster-before-tidb-serverless-was-available-can-i-still-use-my-cluster}
 
 はい、 Developer Tierクラスターは TiDB Serverless クラスターに自動的に移行されており、以前の使用状況に支障をきたすことなく、ユーザー エクスペリエンスが向上します。
+
+### TiDB Serverless の列指向storageとは何ですか? {#what-is-columnar-storage-in-tidb-serverless}
+
+TiDB Serverless の列指向storageは、行ベースstorageの追加レプリカとして機能し、強力な一貫性を保証します。データを行に格納する従来の行ベースstorageとは異なり、列指向storageはデータを列に整理し、データ分析タスクに最適化します。
+
+列指向storageは、トランザクション ワークロードと分析ワークロードをシームレスに融合することで、TiDB のハイブリッド トランザクションおよび分析処理 (HTAP) 機能を有効にする重要な機能です。
+
+列指向storageデータを効率的に管理するために、TiDB Serverless は別個の柔軟なTiFlashエンジンを使用します。クエリ実行中、オプティマイザーはクラスターをガイドして、行ベース ストレージからデータを取得するか、列指向storageからデータを取得するかを自動的に決定します。
+
+### TiDB Serverless で列指向storageを使用するのはいつですか? {#when-should-i-use-columnar-storage-in-tidb-serverless}
+
+次のシナリオでは、TiDB Serverless の列指向storageの使用を検討してください。
+
+-   ワークロードには、効率的なデータスキャンと集約を必要とする分析タスクが含まれます。
+-   特に分析ワークロードのパフォーマンス向上を優先します。
+-   トランザクション処理 (TP) ワークロードのパフォーマンスへの影響を防ぐために、分析処理をトランザクション処理から分離する必要があります。個別の列型storageは、これらの異なるワークロード パターンを最適化するのに役立ちます。
+
+このようなシナリオでは、列指向storageクエリのパフォーマンスが大幅に向上し、システム内の混合ワークロードに対してシームレスなエクスペリエンスを提供できます。
+
+### TiDB Serverless で列指向storageを使用する方法は? {#how-to-use-columnar-storage-in-tidb-serverless}
+
+TiDB Serverless での列指向storageの使用は、 TiFlashでの使用に似ています。テーブル レベルとデータベース レベルの両方で列指向storageを有効にできます。
+
+-   テーブル レベル: テーブルにTiFlashレプリカを割り当てて、特定のテーブルの列指向storageを有効にします。
+-   データベース レベル: データベース全体で列型storageを使用するように、データベース内のすべてのテーブルのTiFlashレプリカを構成します。
+
+テーブルにTiFlashレプリカが設定されると、TiDB は行ベースのstorageからそのテーブルの列ベースのstorageにデータを自動的に複製します。これにより、データの一貫性が確保され、分析クエリのパフォーマンスが最適化されます。
+
+TiFlashレプリカの設定方法の詳細については、 [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)参照してください。
 
 ## 課金と計測に関するよくある質問 {#billing-and-metering-faqs}
 
@@ -47,6 +76,7 @@ TiDB Serverless は従量課金モデルを採用しており、storageスペー
 組織内の最初の 5 つの TiDB Serverless クラスターに対して、 TiDB Cloud はそれぞれに次の無料使用量割り当てを提供します。
 
 -   行ベースのstorage: 5 GiB
+-   列型storage: 5 GiB
 -   [リクエストユニット (RU)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 毎月5000万RU
 
 スケーラブル クラスターを使用している場合、無料割り当て量を超えた使用量には料金が発生します。無料クラスターの場合、無料割り当て量に達すると、スケーラブル クラスターにアップグレードするか、新しい月の開始時に使用量がリセットされるまで、このクラスターの読み取りおよび書き込み操作は制限されます。
@@ -65,7 +95,7 @@ TiDB Serverless は従量課金モデルを採用しており、storageスペー
 
 ### 消費される RU の数を最小限に抑えるためにワークロードを最適化するにはどうすればよいでしょうか? {#how-can-i-optimize-my-workload-to-minimize-the-number-of-rus-consumed}
 
-[SQL パフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)のガイドラインに従って、クエリが最適なパフォーマンスを得るために慎重に最適化されていることを確認してください。また、RU の消費量を削減するには、送信トラフィックの量を最小限に抑えることも重要です。これを実現するには、クエリで必要な列と行のみを返すことをお勧めします。これにより、ネットワーク送信トラフィックが削減されます。これは、返される列と行を慎重に選択してフィルター処理することで実現でき、ネットワーク使用率が最適化されます。
+[SQL パフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)のガイドラインに従って、クエリが最適なパフォーマンスを得るために慎重に最適化されていることを確認します。最も多くの RU を消費する SQL ステートメントを特定するには、クラスターの概要ページで**[診断] &gt; [SQL ステートメント]**に移動します。ここで、SQL 実行を観察し、**合計 RU**または**平均 RU**で並べ替えられた上位のステートメントを表示できます。詳細については、 [ステートメント分析](/tidb-cloud/tune-performance.md#statement-analysis)を参照してください。また、出力トラフィックの量を最小限に抑えることも、RU の消費量を削減するために重要です。これを実現するには、クエリで必要な列と行のみを返すことをお勧めします。これにより、ネットワークの出力トラフィックが削減されます。これは、返される列と行を慎重に選択してフィルター処理することで実現でき、それによってネットワーク使用率が最適化されます。
 
 ### TiDB Serverless のstorageはどのように計測されますか? {#how-storage-is-metered-for-tidb-serverless}
 
@@ -90,6 +120,20 @@ TiDB の必要なバックグラウンド ジョブが原因で、RU 使用量�
 ### データのインポート中に RU 使用量が急増するのはなぜですか? {#why-do-i-observe-spikes-in-ru-usage-while-importing-data}
 
 TiDB Serverless クラスターのデータ インポート プロセス中、RU の消費はデータが正常にインポートされた場合にのみ発生するため、RU 使用量が急増します。
+
+### TiDB Serverless で列指向storageを使用する場合、どのようなコストがかかりますか? {#what-costs-are-involved-when-using-columnar-storage-in-tidb-serverless}
+
+TiDB Serverless の列指向storageの料金は、行指向storageの料金と同様です。列指向storageを使用すると、データ (インデックスなし) を保存するための追加のレプリカが作成されます。行指向ストレージから列指向storageへのデータのレプリケーションには追加料金はかかりません。
+
+詳細な価格情報については[TiDB Serverless の価格詳細](https://www.pingcap.com/tidb-serverless-pricing-details/)参照してください。
+
+### 列指向storageを使用するとコストは高くなりますか? {#is-using-columnar-storage-more-expensive}
+
+TiDB Serverless の列指向storageでは、追加のレプリカにより追加のコストが発生し、データ複製にさらに多くのstorageとリソースが必要になります。ただし、分析クエリを実行する場合、列指向storageはよりコスト効率が高くなります。
+
+TPC-H ベンチマーク テストによると、列ベースのstorageで分析クエリを実行するコストは、行ベースのstorageを使用する場合のコストの約 3 分の 1 です。
+
+したがって、追加のレプリカによる初期コストは発生する可能性がありますが、分析中の計算コストが削減されるため、特定のユースケースではコスト効率が向上します。特に分析ニーズのあるユーザーにとって、列指向storageはコストを大幅に削減し、かなりのコスト節約の機会を提供します。
 
 ## Securityに関するよくある質問 {#security-faqs}
 

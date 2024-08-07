@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with mysql2 in AWS Lambda Function
-summary: This article describes how to build a CRUD application using TiDB and mysql2 in AWS Lambda Function and provides a simple example code snippet.
+summary: この記事では、AWS Lambda 関数で TiDB と mysql2 を使用して CRUD アプリケーションを構築する方法について説明し、簡単なサンプル コード スニペットを示します。
 ---
 
 # AWS Lambda 関数で mysql2 を使用して TiDB に接続する {#connect-to-tidb-with-mysql2-in-aws-lambda-function}
@@ -54,7 +54,7 @@ AWS アカウントまたはユーザーがない場合は、ガイド[Lambda �
 
 > **注記**
 >
-> 完全なコード スニペットと実行手順については、 [tidb サンプル/tidb-aws-lambda-クイックスタート](https://github.com/tidb-samples/tidb-aws-lambda-quickstart) GitHub リポジトリを参照してください。
+> 完全なコード スニペットと実行手順については、 [tidb サンプル/tidb-aws-lambda クイックスタート](https://github.com/tidb-samples/tidb-aws-lambda-quickstart) GitHub リポジトリを参照してください。
 
 ### ステップ1: サンプルアプリのリポジトリをクローンする {#step-1-clone-the-sample-app-repository}
 
@@ -105,7 +105,7 @@ npm install
     >
     > 以前にパスワードを生成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成することができます。
 
-5.  対応する接続​​文字列をコピーして`env.json`に貼り付けます。次に例を示します。
+5.  対応する接続文字列をコピーして`env.json`に貼り付けます。次に例を示します。
 
     ```json
     {
@@ -124,7 +124,7 @@ npm install
 
 <div label="TiDB Self-Hosted">
 
-対応する接続​​文字列をコピーして`env.json`に貼り付けます。次に例を示します。
+対応する接続文字列をコピーして`env.json`に貼り付けます。次に例を示します。
 
 ```json
 {
@@ -169,7 +169,7 @@ npm install
 
 ## AWS Lambda関数をデプロイ {#deploy-the-aws-lambda-function}
 
-[SAM CLI](#sam-cli-deployment-recommended)または[AWS Lambda コンソール](#web-console-deployment)いずれかを使用して AWS Lambda 関数をデプロイできます。
+AWS Lambda 関数は、 [SAM CLI](#sam-cli-deployment-recommended)または[AWS Lambda コンソール](#web-console-deployment)いずれかを使用してデプロイできます。
 
 ### SAM CLI の展開 (推奨) {#sam-cli-deployment-recommended}
 
@@ -253,7 +253,7 @@ npm install
 
 4.  [Lambda デプロイメント パッケージ](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip)の手順に従って`dist/index.zip`ファイルをアップロードします。
 
-5.  Lambda 関数では[対応する接続​​文字列をコピーして設定します](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html) 。
+5.  Lambda 関数では[対応する接続文字列をコピーして設定します](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html) 。
 
     1.  Lambda コンソールの[機能](https://console.aws.amazon.com/lambda/home#/functions)ページで、 **[コンフィグレーション]**タブを選択し、 **[環境変数]**を選択します。
     2.  **編集を**選択します。
@@ -268,7 +268,7 @@ npm install
 
 次のサンプル コード スニペットを参照して、独自のアプリケーション開発を完了することができます。
 
-完全なサンプル コードとその実行方法については、 [tidb サンプル/tidb-aws-lambda-クイックスタート](https://github.com/tidb-samples/tidb-aws-lambda-quickstart)リポジトリを参照してください。
+完全なサンプル コードとその実行方法については、 [tidb サンプル/tidb-aws-lambda クイックスタート](https://github.com/tidb-samples/tidb-aws-lambda-quickstart)リポジトリを参照してください。
 
 ### TiDBに接続する {#connect-to-tidb}
 
@@ -364,7 +364,7 @@ console.log(rsh.affectedRows);
 
 -   AWS Lambda 関数で TiDB を使用する方法の詳細については、 [TiDB-Lambda-integration/aws-lambda-bookstore デモ](https://github.com/pingcap/TiDB-Lambda-integration/blob/main/aws-lambda-bookstore/README.md)を参照してください。また、AWS API Gateway を使用して、アプリケーション用の RESTful API を構築することもできます。
 -   [`mysql2`のドキュメント](https://sidorares.github.io/node-mysql2/docs/documentation)から`mysql2`の使用法について詳しく学びます。
--   [`Lambda`のAWS開発者ガイド](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)から AWS Lambda の使用方法について詳しく学びます。
+-   [`Lambda`のAWS開発者ガイド](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)から AWS Lambda の使用方法を詳しく学びます。
 -   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入](/develop/dev-guide-insert-data.md) 、 [データの更新](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブル読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
 -   プロフェッショナル[TiDB 開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
@@ -372,12 +372,12 @@ console.log(rsh.affectedRows);
 
 <CustomContent platform="tidb">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](/support.md)について質問します。
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
 
 </CustomContent>

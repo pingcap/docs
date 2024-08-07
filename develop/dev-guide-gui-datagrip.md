@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with JetBrains DataGrip
-summary: Learn how to connect to TiDB using JetBrains DataGrip. This tutorial also applies to the Database Tools and SQL plugin available in other JetBrains IDEs, such as IntelliJ, PhpStorm, and PyCharm.
+summary: JetBrains DataGrip を使用して TiDB に接続する方法を学びます。このチュートリアルは、IntelliJ、PhpStorm、PyCharm などの他の JetBrains IDE で利用可能なデータベース ツールと SQL プラグインにも適用されます。
 ---
 
 # JetBrains DataGrip で TiDB に接続する {#connect-to-tidb-with-jetbrains-datagrip}
@@ -13,7 +13,7 @@ TiDB は MySQL 互換のデータベースであり、 [ジェットブレイン
 
 DataGrip は次の 2 つの方法で使用できます。
 
--   [データグリップIDE](https://www.jetbrains.com/datagrip/download)スタンドアロン ツールとして。
+-   [データグリップ IDE](https://www.jetbrains.com/datagrip/download)スタンドアロン ツールとして。
 -   IntelliJ、PhpStorm、PyCharm などの JetBrains IDE の[データベースツールとSQLプラグイン](https://www.jetbrains.com/help/idea/relational-databases.html)として。
 
 このチュートリアルでは、主にスタンドアロンの DataGrip IDE に焦点を当てています。JetBrains IDE の JetBrains データベース ツールと SQL プラグインを使用して TiDB に接続する手順は同様です。また、任意の JetBrains IDE から TiDB に接続する場合は、このドキュメントの手順を参考にすることもできます。
@@ -95,7 +95,7 @@ DataGrip は次の 2 つの方法で使用できます。
 
 3.  **「どこからでもアクセスを許可」**をクリックし、 **「CA 証明書のダウンロード」**をクリックして CA 証明書をダウンロードします。
 
-    接続文字列を取得する方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
+    接続文字列の取得方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
 
 4.  DataGrip を起動し、接続を管理するためのプロジェクトを作成します。
 
@@ -122,7 +122,7 @@ DataGrip は次の 2 つの方法で使用できます。
 
     ![Configure the CA for TiDB Dedicated](/media/develop/datagrip-dedicated-ssl.jpg)
 
-    **「不足しているドライバー ファイルをダウンロードしてください」**という警告が表示された場合は、 **「ダウンロード」**をクリックしてドライバー ファイルを取得します。
+    **不足しているドライバー ファイルをダウンロードする**警告が表示された場合は、 **[ダウンロード] を**クリックしてドライバー ファイルを取得します。
 
 8.  **[詳細設定]**タブをクリックし、スクロールして**enabledTLSProtocols**パラメータを見つけ、その値を`TLSv1.2,TLSv1.3`に設定します。
 
@@ -177,12 +177,12 @@ DataGrip は次の 2 つの方法で使用できます。
 
 <CustomContent platform="tidb">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](/support.md)について質問します。
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
 
 </CustomContent>

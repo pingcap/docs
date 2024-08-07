@@ -1,6 +1,6 @@
 ---
 title: TiDB Cluster Management FAQs
-summary: Learn about the FAQs related to TiDB cluster management.
+summary: TiDB クラスター管理に関連する FAQ について説明します。
 ---
 
 # TiDBクラスタ管理に関する FAQ {#tidb-cluster-management-faqs}
@@ -39,7 +39,7 @@ TiDB/PD/TiKV は、デフォルトではログに標準エラーを出力しま�
 
 -   ロード バランサが実行中の場合 (推奨): ロード バランサを停止し、SQL ステートメント`SHUTDOWN`を実行します。その後、TiDB は[`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50)で指定された期間、すべてのセッションが終了するまで待機します。その後、TiDB は実行を停止します。
 
--   ロード バランサが実行されていない場合: `SHUTDOWN`ステートメントを実行します。その後、TiDB コンポーネントは正常に停止されます。
+-   ロード バランサーが実行されていない場合: `SHUTDOWN`ステートメントを実行します。その後、TiDB コンポーネントは正常に停止されます。
 
 ### TiDB で<code>kill</code>を実行できますか? {#can-code-kill-code-be-executed-in-tidb}
 
@@ -73,7 +73,7 @@ TiDB は、低コストで簡単にクラスターを管理できるいくつか
 
 TiDB コミュニティは非常に活発です。エンジニアは機能の最適化とバグの修正を続けています。そのため、TiDB バージョンは非常に速く更新されます。最新バージョンの情報を常に把握したい場合は、 [TiDB リリース タイムライン](/releases/release-timeline.md)を参照してください。
 
-TiDB [TiUPを使用する](/production-deployment-using-tiup.md)または[TiDB Operatorの使用](https://docs.pingcap.com/tidb-in-kubernetes/stable)導入することをお勧めします。TiDB ではバージョン番号が一元管理されています。次のいずれかの方法でバージョン番号を確認できます。
+TiDB [TiUPを使用する](/production-deployment-using-tiup.md)または[TiDB Operatorの使用](https://docs.pingcap.com/tidb-in-kubernetes/stable)を導入することをお勧めします。TiDB ではバージョン番号が一元管理されています。次のいずれかの方法でバージョン番号を表示できます。
 
 -   `select tidb_version()`
 -   `tidb-server -V`
@@ -203,7 +203,7 @@ pd-ctl ツールを使用して、クラスターの一般的なステータス�
 
 DDL 要求を受信する TiDBサーバーインスタンスが、DDL 所有者が存在する TiDBサーバーインスタンスと同じである場合、上記の最初のシナリオと 3 番目のシナリオにかかる時間は、数十から数百ミリ秒に過ぎない可能性があります。
 
-### DDL ステートメントの実行が非常に遅くなることが時々あるのはなぜですか? {#why-it-is-very-slow-to-run-ddl-statements-sometimes}
+### DDL ステートメントの実行が非常に遅くなるのはなぜですか? {#why-it-is-very-slow-to-run-ddl-statements-sometimes}
 
 考えられる理由:
 
@@ -386,15 +386,15 @@ WAL は順序付き書き込みに属しており、現在、固有の構成は�
 
 ### TiKVアーキテクチャのRaft + 複数のレプリカは絶対的なデータ安全性を実現できますか? スタンドアロンstorageに最も厳格なモード ( <code>sync-log = true</code> ) を適用する必要がありますか? {#can-raft-multiple-replicas-in-the-tikv-architecture-achieve-absolute-data-safety-is-it-necessary-to-apply-the-most-strict-mode-code-sync-log-true-code-to-a-standalone-storage}
 
-データは、ノード障害が発生した場合の回復可能性を確保するために、 [Raftコンセンサスアルゴリズム](https://raft.github.io/)使用して TiKV ノード間で冗長的に複製されます。データがレプリカの 50% 以上に書き込まれた場合にのみ、アプリケーションは ACK を返します (3 つのノードのうち 2 つ)。ただし、理論上は 2 つのノードがクラッシュする可能性があります。したがって、データの安全性に対する要件がそれほど厳しくなく、パフォーマンスに対する要件が厳しいシナリオを除き、 `sync-log`モードを有効にすることを強くお勧めします。
+データは、ノード障害が発生した場合の回復可能性を確保するために、 [Raftコンセンサスアルゴリズム](https://raft.github.io/)使用して TiKV ノード間で冗長的に複製されます。データがレプリカの 50% 以上に書き込まれた場合にのみ、アプリケーションは ACK を返します (3 つのノードのうち 2 つ)。ただし、理論的には 2 つのノードがクラッシュする可能性があります。したがって、データの安全性に対する要件がそれほど厳しくなく、パフォーマンスに対する要件が厳しいシナリオを除き、 `sync-log`モードを有効にすることを強くお勧めします。
 
 `sync-log`を使用する代わりに、 Raftグループに 3 つのレプリカではなく 5 つのレプリカを持つことも検討できます。これにより、2 つのレプリカに障害が発生してもデータの安全性が確保されます。
 
-スタンドアロンの TiKV ノードの場合でも、 `sync-log`モードを有効にすることをお勧めします。そうしないと、ノード障害が発生した場合に最後の書き込みが失われる可能性があります。
+スタンドアロンの TiKV ノードの場合、 `sync-log`モードを有効にすることをお勧めします。そうしないと、ノード障害が発生した場合に最後の書き込みが失われる可能性があります。
 
 ### TiKV はRaftプロトコルを使用するため、データの書き込み中に複数のネットワーク ラウンドトリップが発生します。実際の書き込み遅延はどのくらいですか? {#since-tikv-uses-the-raft-protocol-multiple-network-roundtrips-occur-during-data-writing-what-is-the-actual-write-delay}
 
-理論上、TiDB の書き込み遅延は、スタンドアロン データベースよりもネットワーク ラウンドトリップで 4 回多くなります。
+理論上、TiDB の書き込み遅延は、スタンドアロン データベースよりもネットワーク ラウンドトリップが 4 回多くなります。
 
 ### TiDB には、MySQL のように、KV インターフェイスを直接使用でき、独立したキャッシュを必要としない InnoDB memcached プラグインがありますか? {#does-tidb-have-an-innodb-memcached-plugin-like-mysql-which-can-directly-use-the-kv-interface-and-does-not-need-the-independent-cache}
 
@@ -405,7 +405,7 @@ TiKV は、インターフェイスを個別に呼び出すことをサポート
 -   TiDBとTiKV間のデータ転送を削減
 -   TiKV の分散コンピューティング リソースを最大限に活用して、コンピューティング プッシュダウンを実行します。
 
-### エラーメッセージ<code>IO error: No space left on device While appending to file</code>が表示される {#the-error-message-code-io-error-no-space-left-on-device-while-appending-to-file-code-is-displayed}
+### エラーメッセージ<code>IO error: No space left on device While appending to file</code>が表示されます {#the-error-message-code-io-error-no-space-left-on-device-while-appending-to-file-code-is-displayed}
 
 これはディスク容量が不足しているためです。ノードを追加するか、ディスク容量を拡大する必要があります。
 
@@ -415,7 +415,10 @@ TiKV のメモリ使用量は主に RocksDB のブロック キャッシュか�
 
 ### TiDB データと RawKV データの両方を同じ TiKV クラスターに保存できますか? {#can-both-tidb-data-and-rawkv-data-be-stored-in-the-same-tikv-cluster}
 
-いいえ。TiDB (またはトランザクション API から作成されたデータ) は特定のキー形式に依存します。RawKV API から作成されたデータ (または他の RawKV ベースのサービスから作成されたデータ) とは互換性がありません。
+これは、TiDBのバージョンとTiKV API V2が有効になっているかどうかによって異なります（ [`storage.api-version = 2`](/tikv-configuration-file.md#api-version-new-in-v610) ）。
+
+-   TiDB バージョンが v6.1.0 以降で、TiKV API V2 が有効になっている場合は、TiDB データと RawKV データを同じ TiKV クラスターに保存できます。
+-   それ以外の場合、TiDB データ (またはトランザクション API を使用して作成されたデータ) のキー形式は RawKV API を使用して作成されたデータ (または他の RawKV ベースのサービスからのデータ) と互換性がないため、答えは「いいえ」です。
 
 ## TiDB テスト {#tidb-testing}
 
@@ -428,13 +431,13 @@ TiKV のメモリ使用量は主に RocksDB のブロック キャッシュか�
 -   ベンチマーク テストに時間をかけすぎないでください。TiDB を使用するシナリオの違いにもっと注意を払ってください。
 -   [Sysbench を使用した TiDB のパフォーマンス テスト結果](/benchmark/v3.0-performance-benchmarking-with-sysbench.md)参照。
 
-### TiDB クラスターの容量 (QPS) とノード数の関係は何ですか? TiDB と MySQL を比較するとどうなりますか? {#what-s-the-relationship-between-the-tidb-cluster-capacity-qps-and-the-number-of-nodes-how-does-tidb-compare-to-mysql}
+### TiDB クラスター容量 (QPS) とノード数の関係は何ですか? TiDB と MySQL を比較するとどうなりますか? {#what-s-the-relationship-between-the-tidb-cluster-capacity-qps-and-the-number-of-nodes-how-does-tidb-compare-to-mysql}
 
 -   10 ノード内では、TiDB 書き込み容量 (挿入 TPS) とノード数の関係は、およそ 40% の線形増加です。MySQL は単一ノード書き込みを使用するため、書き込み容量を拡張することはできません。
 -   MySQL では、セカンダリ データベースを追加することで読み取り容量を増やすことができますが、書き込み容量はシャーディングを使用する以外では増やすことができず、多くの問題があります。
 -   TiDB では、ノードを追加することで読み取り容量と書き込み容量の両方を簡単に増やすことができます。
 
-### 当社のDBAによるMySQLとTiDBのパフォーマンステストでは、スタンドアロンのTiDBのパフォーマンスはMySQLほど良くないことがわかりました。 {#the-performance-test-of-mysql-and-tidb-by-our-dba-shows-that-the-performance-of-a-standalone-tidb-is-not-as-good-as-mysql}
+### DBAによるMySQLとTiDBのパフォーマンステストでは、スタンドアロンのTiDBのパフォーマンスはMySQLほど良くないことがわかりました。 {#the-performance-test-of-mysql-and-tidb-by-our-dba-shows-that-the-performance-of-a-standalone-tidb-is-not-as-good-as-mysql}
 
 TiDB は、MySQL スタンドアロンの容量が限られているためにシャーディングが使用され、強力な一貫性と完全な分散トランザクションが求められるシナリオ向けに設計されています。TiDB の利点の 1 つは、コンピューティングをstorageノードにプッシュダウンして同時コンピューティングを実行することです。
 

@@ -1,13 +1,13 @@
 ---
 title: CREATE TABLE | TiDB SQL Statement Reference
-summary: テーブルの作成ステートメントは、現在のデータベースで新しいテーブルを作成します。MySQLのCREATE TABLEステートメントと同様に動作します。さまざまなオプションがサポートされており、例としてAUTO_INCREMENT、SHARD_ROW_ID_BITS、PRE_SPLIT_REGIONSなどがあります。テーブルの作成時に条件を付けて作成することも可能です。MySQLとの互換性や他の関連情報も確認できます。
+summary: TiDB データベースの CREATE TABLE の使用法の概要。
 ---
 
 # テーブルの作成 {#create-table}
 
 このステートメントは、現在選択されているデータベースに新しいテーブルを作成します。これは、MySQL の`CREATE TABLE`ステートメントと同様に動作します。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 CreateTableStmt ::=
@@ -125,23 +125,23 @@ PlacementPolicyOption ::=
 |   "PLACEMENT" "POLICY" (EqOpt | "SET") "DEFAULT"
 ```
 
-次の*table_options が*サポートされています。 `AVG_ROW_LENGTH` 、 `CHECKSUM` 、 `COMPRESSION` 、 `CONNECTION` 、 `DELAY_KEY_WRITE` 、 `ENGINE` 、 `KEY_BLOCK_SIZE` 、 `MAX_ROWS` 、 `MIN_ROWS` 、 `ROW_FORMAT` 、 `STATS_PERSISTENT`などの他のオプションは解析されますが、無視されます。
+次の*table_options*がサポートされています。 `AVG_ROW_LENGTH` 、 `CHECKSUM` 、 `COMPRESSION` 、 `CONNECTION` 、 `DELAY_KEY_WRITE` 、 `ENGINE` 、 `KEY_BLOCK_SIZE` 、 `MAX_ROWS` 、 `MIN_ROWS` 、 `ROW_FORMAT` 、 `STATS_PERSISTENT`などの他のオプションは解析されますが無視されます。
 
-| オプション                                        | 説明                                                                                 | 例                                                                                                                                            |
-| -------------------------------------------- | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AUTO_INCREMENT`                             | インクリメントフィールドの初期値                                                                   | `AUTO_INCREMENT` = 5                                                                                                                         |
-| [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) | 暗黙的な`_tidb_rowid`シャードのビット数を設定するには                                                  | `SHARD_ROW_ID_BITS` = 4                                                                                                                      |
-| `PRE_SPLIT_REGIONS`                          | テーブルの作成時に`2^(PRE_SPLIT_REGIONS)`リージョンを事前に分割するには                                    | `PRE_SPLIT_REGIONS` = 4                                                                                                                      |
-| `AUTO_ID_CACHE`                              | TiDB インスタンスで自動 ID キャッシュ サイズを設定するには。デフォルトでは、TiDB は自動 ID の割り当て速度に応じてこのサイズを自動的に変更します。 | `AUTO_ID_CACHE` = 200。このオプションは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できないことに注意してください。 |
-| `AUTO_RANDOM_BASE`                           | auto_random の初期増分部分値を設定します。このオプションは、内部インターフェイスの一部として考えることができます。ユーザーはこのパラメータを無視できます | `AUTO_RANDOM_BASE` = 0                                                                                                                       |
-| `CHARACTER SET`                              | テーブルに[キャラクターセット](/character-set-and-collation.md)指定するには                            | `CHARACTER SET` = &#39;utf8mb4&#39;                                                                                                          |
-| `COMMENT`                                    | コメント情報は                                                                            | `COMMENT` = &#39;コメント情報&#39;                                                                                                                 |
+| オプション                                        | 説明                                                                            | 例                                   |
+| -------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------- |
+| `AUTO_INCREMENT`                             | 増分フィールドの初期値                                                                   | `AUTO_INCREMENT` = 5                |
+| [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) | 暗黙の`_tidb_rowid`シャードのビット数を設定するには                                              | `SHARD_ROW_ID_BITS` = 4             |
+| `PRE_SPLIT_REGIONS`                          | テーブルを作成するときに`2^(PRE_SPLIT_REGIONS)`リージョンを事前に分割するには                            | `PRE_SPLIT_REGIONS` = 4             |
+| `AUTO_ID_CACHE`                              | TiDBインスタンスの自動IDキャッシュサイズを設定します。デフォルトでは、TiDBは自動IDの割り当て速度に応じてこのサイズを自動的に変更します。    | `AUTO_ID_CACHE` = 200               |
+| `AUTO_RANDOM_BASE`                           | auto_randomの初期増分値を設定します。このオプションは内部インターフェースの一部とみなすことができます。ユーザーはこのパラメータを無視できます。 | `AUTO_RANDOM_BASE` = 0              |
+| `CHARACTER SET`                              | テーブルの[キャラクターセット](/character-set-and-collation.md)指定するには                       | `CHARACTER SET` = &#39;utf8mb4&#39; |
+| `COMMENT`                                    | コメント情報                                                                        | `COMMENT` = &#39;コメント情報&#39;        |
 
 <CustomContent platform="tidb">
 
 > **注記：**
 >
-> `split-table`構成オプションはデフォルトで有効になっています。これを有効にすると、新しく作成されたテーブルごとに個別のリージョンが作成されます。詳細は[TiDB 設定ファイル](/tidb-configuration-file.md)を参照してください。
+> `split-table`構成オプションはデフォルトで有効になっています。有効にすると、新しく作成されたテーブルごとに個別のリージョンが作成されます。詳細については、 [TiDB 構成ファイル](/tidb-configuration-file.md)を参照してください。
 
 </CustomContent>
 
@@ -155,7 +155,7 @@ PlacementPolicyOption ::=
 
 ## 例 {#examples}
 
-単純なテーブルを作成し、1 行を挿入します。
+簡単なテーブルを作成し、1 行を挿入します。
 
 ```sql
 CREATE TABLE t1 (a int);
@@ -198,7 +198,7 @@ SELECT * FROM t1;
     +------+
     1 row in set (0.00 sec)
 
-テーブルが存在する場合は削除し、存在しない場合は条件付きでテーブルを作成します。
+テーブルが存在する場合はそれを削除し、存在しない場合は条件付きでテーブルを作成します。
 
 ```sql
 DROP TABLE IF EXISTS t1;
@@ -229,31 +229,31 @@ mysql> DESC t1;
 2 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
 -   空間型を除くすべてのデータ型がサポートされています。
--   `FULLTEXT` `HASH`および`SPATIAL`インデックスはサポートされていません。
+-   `FULLTEXT` `HASH` `SPATIAL`はサポートされていません。
 
 <CustomContent platform="tidb">
 
--   互換性を確保するために、 `index_col_name`属性は、デフォルトで最大長が 3072 バイトに制限された長さオプションをサポートします。長さ制限は、 `max-index-length`構成オプションを通じて変更できます。詳細は[TiDB 設定ファイル](/tidb-configuration-file.md#max-index-length)を参照してください。
+-   互換性のため、 `index_col_name`属性は、デフォルトで最大 3072 バイトの長さ制限を持つ長さオプションをサポートします。長さ制限は、 `max-index-length`構成オプションを通じて変更できます。詳細については、 [TiDB 構成ファイル](/tidb-configuration-file.md#max-index-length)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   互換性を確保するために、 `index_col_name`属性は、最大長が 3072 バイトに制限された長さオプションをサポートします。
+-   互換性のために、 `index_col_name`属性は最大長が 3072 バイトに制限された長さオプションをサポートします。
 
 </CustomContent>
 
--   `index_col_name`の`[ASC | DESC]`現在解析されていますが、無視されます (MySQL 5.7 と互換性のある動作)。
--   `COMMENT`属性は`WITH PARSER`オプションをサポートしません。
--   TiDB は、単一テーブル内でデフォルトで 1017 列、最大 4096 列をサポートします。 InnoDB の対応する数制限は 1017 列で、MySQL のハード制限は 4096 列です。詳細は[TiDB の制限事項](/tidb-limitations.md)を参照してください。
--   パーティション化されたテーブルの場合、範囲、ハッシュ、および範囲列 (単一列) のみがサポートされます。詳細は[パーティションテーブル](/partitioned-table.md)を参照してください。
+-   `index_col_name`のうち`[ASC | DESC]`現在解析されていますが無視されます (MySQL 5.7互換の動作)。
+-   `COMMENT`属性は`WITH PARSER`オプションをサポートしていません。
+-   TiDB は、デフォルトで 1 つのテーブルに 1017 列をサポートし、最大 4096 列をサポートします。InnoDB での対応する列数制限は 1017 列で、MySQL でのハード制限は 4096 列です。詳細については、 [TiDB の制限](/tidb-limitations.md)を参照してください。
+-   TiDB は`HASH` 、 `RANGE` 、 `LIST` 、および`KEY` [パーティションタイプ](/partitioned-table.md#partitioning-types)をサポートします。サポートされていないパーティション タイプの場合、TiDB は`Warning: Unsupported partition type %s, treat as normal table`を返します。ここで、 `%s`サポートされていない特定のパーティション タイプです。
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
 -   [データ型](/data-type-overview.md)
--   [ドロップテーブル](/sql-statements/sql-statement-drop-table.md)
--   [次のようなテーブルを作成します](/sql-statements/sql-statement-create-table-like.md)
--   [テーブルの作成を表示](/sql-statements/sql-statement-show-create-table.md)
+-   [テーブルを削除](/sql-statements/sql-statement-drop-table.md)
+-   [次のようなテーブルを作成する](/sql-statements/sql-statement-create-table-like.md)
+-   [表示テーブルの作成](/sql-statements/sql-statement-show-create-table.md)

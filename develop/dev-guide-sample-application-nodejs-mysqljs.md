@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with mysql.js
-summary: Learn how to connect to TiDB using mysql.js. This tutorial gives Node.js sample code snippets that work with TiDB using mysql.js.
+summary: mysql.js を使用して TiDB に接続する方法を学びます。このチュートリアルでは、mysql.js を使用して TiDB で動作する Node.js サンプル コード スニペットを紹介します。
 ---
 
 # mysql.js で TiDB に接続する {#connect-to-tidb-with-mysql-js}
@@ -123,7 +123,7 @@ npm install mysql dotenv --save
 
 3.  **「どこからでもアクセスを許可」**をクリックし、 **「CA 証明書のダウンロード」**をクリックして CA 証明書をダウンロードします。
 
-    接続文字列を取得する方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
+    接続文字列の取得方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
 
 4.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -187,7 +187,7 @@ npm start
 
 接続が成功すると、コンソールに次のように TiDB クラスターのバージョンが出力されます。
 
-    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v7.5.1)
+    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v7.5.3)
     ⏳ Loading sample game data...
     ✅ Loaded sample game data.
 
@@ -333,12 +333,12 @@ conn.query('DELETE FROM players WHERE id = ?;', [1], (err, ok) => {
 
 <CustomContent platform="tidb">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](/support.md)について質問します。
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
 
 </CustomContent>

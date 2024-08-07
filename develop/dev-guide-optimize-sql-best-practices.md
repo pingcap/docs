@@ -1,19 +1,19 @@
 ---
 title: Performance Tuning Best Practices
-summary: このドキュメントは、TiDBデータベースの性能チューニングのベストプラクティスについて紹介しています。DMLのベストプラクティスでは、複数行のステートメントを使用し、PREPAREステートメントを繰り返し実行しないようにします。また、必要な列のみをクエリし、一括削除や一括更新を使用することをお勧めします。DDLのベストプラクティスでは、主キーの選択ルールやインデックスの追加方法について説明しています。さらに、トランザクションの競合やJavaアプリケーション開発のベストプラクティスについても言及しています。
+summary: TiDB パフォーマンスをチューニングするためのベスト プラクティスを紹介します。
 ---
 
 # 性能チューニングのベストプラクティス {#performance-tuning-best-practices}
 
-このドキュメントでは、TiDB データベースを使用するためのベスト プラクティスをいくつか紹介します。
+このドキュメントでは、TiDB データベースの使用に関するベスト プラクティスをいくつか紹介します。
 
-## DML のベスト プラクティス {#dml-best-practices}
+## DMLのベストプラクティス {#dml-best-practices}
 
 このセクションでは、TiDB で DML を使用する場合のベスト プラクティスについて説明します。
 
 ### 複数行のステートメントを使用する {#use-multi-row-statements}
 
-テーブルの複数の行を変更する必要がある場合は、複数行のステートメントを使用することをお勧めします。
+テーブルの複数の行を変更する必要がある場合は、複数行ステートメントを使用することをお勧めします。
 
 ```sql
 INSERT INTO t VALUES (1, 'a'), (2, 'b'), (3, 'c');
@@ -21,7 +21,7 @@ INSERT INTO t VALUES (1, 'a'), (2, 'b'), (3, 'c');
 DELETE FROM t WHERE id IN (1, 2, 3);
 ```
 
-複数の単一行ステートメントを使用することはお勧めできません。
+複数の単一行ステートメントを使用することはお勧めしません。
 
 ```sql
 INSERT INTO t VALUES (1, 'a');
@@ -33,9 +33,9 @@ DELETE FROM t WHERE id = 2;
 DELETE FROM t WHERE id = 3;
 ```
 
-### <code>PREPARE</code>を使用する {#use-code-prepare-code}
+### <code>PREPARE</code>使用する {#use-code-prepare-code}
 
-SQL ステートメントを複数回実行する必要がある場合は、SQL 構文を繰り返し解析するオーバーヘッドを避けるために`PREPARE`ステートメントを使用することをお勧めします。
+SQL ステートメントを複数回実行する必要がある場合は、SQL 構文を繰り返し解析するオーバーヘッドを回避するために、 `PREPARE`ステートメントを使用することをお勧めします。
 
 <SimpleTab>
 <div label="Golang">
@@ -78,17 +78,17 @@ public void batchInsert(Connection connection) throws SQLException {
 </div>
 </SimpleTab>
 
-`PREPARE`ステートメントを繰り返し実行しないでください。そうしないと実行効率が向上しません。
+`PREPARE`文を繰り返し実行しないでください。繰り返し実行すると、実行効率が向上しません。
 
-### 必要な列のみをクエリします {#only-query-the-columns-you-need}
+### 必要な列のみをクエリする {#only-query-the-columns-you-need}
 
-すべての列のデータが必要ない場合は、すべての列のデータを返すために`SELECT *`を使用しないでください。次のクエリは非効率的です。
+すべての列のデータが必要ない場合は、 `SELECT *`使用してすべての列のデータを返さないでください。次のクエリは非効率的です。
 
 ```sql
 SELECT * FROM books WHERE title = 'Marian Yost';
 ```
 
-必要な列のみをクエリする必要があります。例えば：
+必要な列のみをクエリする必要があります。例:
 
 ```sql
 SELECT title, price FROM books WHERE title = 'Marian Yost';
@@ -96,13 +96,13 @@ SELECT title, price FROM books WHERE title = 'Marian Yost';
 
 ### 一括削除を使用する {#use-bulk-delete}
 
-大量のデータを削除する場合は、 [一括削除](/develop/dev-guide-delete-data.md#bulk-delete)を使用することをお勧めします。
+大量のデータを削除する場合は[一括削除](/develop/dev-guide-delete-data.md#bulk-delete)使用することをお勧めします。
 
 ### 一括更新を使用する {#use-bulk-update}
 
-大量のデータを更新する場合は、 [一括更新](/develop/dev-guide-update-data.md#bulk-update)を使用することをお勧めします。
+大量のデータを更新する場合は[一括更新](/develop/dev-guide-update-data.md#bulk-update)使用することをお勧めします。
 
-### テーブル全体のデータには<code>DELETE</code>ではなく<code>TRUNCATE</code>使用してください {#use-code-truncate-code-instead-of-code-delete-code-for-full-table-data}
+### テーブルデータ全体に対しては、 <code>DELETE</code>ではなく<code>TRUNCATE</code>を使用します。 {#use-code-truncate-code-instead-of-code-delete-code-for-full-table-data}
 
 テーブルからすべてのデータを削除する必要がある場合は、 `TRUNCATE`ステートメントを使用することをお勧めします。
 
@@ -110,39 +110,39 @@ SELECT title, price FROM books WHERE title = 'Marian Yost';
 TRUNCATE TABLE t;
 ```
 
-完全なテーブル データに`DELETE`を使用することはお勧めできません。
+完全なテーブルデータに`DELETE`使用することはお勧めしません。
 
 ```sql
 DELETE FROM t;
 ```
 
-## DDL のベスト プラクティス {#ddl-best-practices}
+## DDLのベストプラクティス {#ddl-best-practices}
 
 このセクションでは、TiDB の DDL を使用する際のベスト プラクティスについて説明します。
 
-### 主キーのベスト プラクティス {#primary-key-best-practices}
+### 主キーのベストプラクティス {#primary-key-best-practices}
 
-[主キーを選択するときに従うべきルール](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key)参照してください。
+[主キーを選択する際に従うべきルール](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key)参照してください。
 
 ## インデックスのベストプラクティス {#index-best-practices}
 
-[インデックスのベストプラクティス](/develop/dev-guide-index-best-practice.md)を参照してください。
+[インデックスのベストプラクティス](/develop/dev-guide-index-best-practice.md)参照。
 
-### インデックスのベスト プラクティスを追加する {#add-index-best-practices}
+### インデックスのベストプラクティスを追加する {#add-index-best-practices}
 
-TiDB は、オンラインのインデックス追加操作をサポートしています。 [インデックスの追加](/sql-statements/sql-statement-add-index.md)または[インデックスの作成](/sql-statements/sql-statement-create-index.md)ステートメントを使用してインデックスを追加できます。テーブル内のデータの読み取りと書き込みはブロックされません。次のシステム変数を変更することで、インデックス追加操作の`re-organize`フェーズ中に同時実行性とバッチ サイズを調整できます。
+TiDB は、オンライン インデックス追加操作をサポートしています。1 または[インデックスを追加](/sql-statements/sql-statement-add-index.md) [インデックスの作成](/sql-statements/sql-statement-create-index.md)ステートメントを使用してインデックスを追加できます。テーブル内のデータの読み取りと書き込みはブロックされません。次のシステム変数を変更することで、インデックス追加操作の`re-organize`フェーズ中に同時実行性とバッチ サイズを調整できます。
 
 -   [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)
 -   [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)
 
-オンライン アプリケーションへの影響を軽減するために、インデックス追加操作のデフォルトの速度は遅くなります。インデックス追加操作のターゲット列が読み取り負荷のみを伴う場合、またはオンライン ワークロードに直接関係しない場合は、上記の変数の値を適切に増やしてインデックス追加操作を高速化できます。
+オンライン アプリケーションへの影響を減らすために、インデックス追加操作のデフォルトの速度は遅くなっています。インデックス追加操作の対象列に読み取り負荷のみが含まれる場合、またはオンライン ワークロードに直接関連していない場合は、上記の変数の値を適切に増やして、インデックス追加操作を高速化できます。
 
 ```sql
 SET @@global.tidb_ddl_reorg_worker_cnt = 16;
 SET @@global.tidb_ddl_reorg_batch_size = 4096;
 ```
 
-インデックス追加操作のターゲット列が頻繁に更新される場合 ( `UPDATE` 、 `INSERT` 、 `DELETE`を含む)、上記の変数を増やすと書き込み競合が増加し、オンライン ワークロードに影響します。したがって、再試行が繰り返されるため、インデックスの追加操作が完了するまでに時間がかかる可能性があります。この場合、オンライン アプリケーションとの書き込み競合を避けるために、上記の変数の値を減らすことをお勧めします。
+インデックス追加操作のターゲット列が頻繁に更新される場合 ( `UPDATE` 、 `INSERT` 、 `DELETE`を含む)、上記の変数を増やすと書き込み競合が増加し、オンライン ワークロードに影響します。したがって、再試行が頻繁に行われるため、インデックス追加操作の完了に時間がかかる場合があります。この場合、オンライン アプリケーションとの書き込み競合を回避するために、上記の変数の値を減らすことをお勧めします。
 
 ```sql
 SET @@global.tidb_ddl_reorg_worker_cnt = 4;
@@ -153,13 +153,13 @@ SET @@global.tidb_ddl_reorg_batch_size = 128;
 
 <CustomContent platform="tidb">
 
-トランザクションの競合を特定して解決する方法については、 [ロックの競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)を参照してください。
+トランザクションの競合を特定して解決する方法については、 [ロック競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-トランザクションの競合を特定して解決する方法については、 [ロックの競合のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts)を参照してください。
+トランザクションの競合を特定して解決する方法については、 [ロック競合のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts)参照してください。
 
 </CustomContent>
 
@@ -167,26 +167,40 @@ SET @@global.tidb_ddl_reorg_batch_size = 128;
 
 <CustomContent platform="tidb">
 
-[TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/best-practices/java-app-best-practices.md)を参照してください。
+[TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/best-practices/java-app-best-practices.md)参照。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[TiDB を使用したJavaアプリケーション開発のベスト プラクティス](https://docs.pingcap.com/tidb/stable/java-app-best-practices)を参照してください。
+[TiDB を使用したJavaアプリケーション開発のベスト プラクティス](https://docs.pingcap.com/tidb/stable/java-app-best-practices)参照。
 
 </CustomContent>
 
-### こちらも参照 {#see-also}
+### 参照 {#see-also}
 
 <CustomContent platform="tidb">
 
--   [高度な同時書き込みのベスト プラクティス](/best-practices/high-concurrency-best-practices.md)
+-   [高度な同時書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   [高度な同時書き込みのベスト プラクティス](https://docs.pingcap.com/tidb/stable/high-concurrency-best-practices)
+-   [高度な同時書き込みのベストプラクティス](https://docs.pingcap.com/tidb/stable/high-concurrency-best-practices)
+
+</CustomContent>
+
+## 助けが必要？ {#need-help}
+
+<CustomContent platform="tidb">
+
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
 
 </CustomContent>

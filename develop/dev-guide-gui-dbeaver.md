@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with DBeaver
-summary: Learn how to connect to TiDB using DBeaver Community.
+summary: DBeaver コミュニティを使用して TiDB に接続する方法を学習します。
 ---
 
 # DBeaverでTiDBに接続する {#connect-to-tidb-with-dbeaver}
@@ -92,7 +92,7 @@ TiDB は MySQL 互換のデータベースであり、開発者、データベ�
 
 3.  **[どこからでもアクセスを許可] を**クリックし、 **[CA 証明書のダウンロード]**をクリックして CA 証明書をダウンロードします。
 
-    接続文字列を取得する方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
+    接続文字列の取得方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
 
 4.  DBeaver を起動し、左上隅にある**[新しいデータベース接続]**をクリックします。 **[データベースへの接続**] ダイアログで、リストから**[TiDB]**を選択し、 **[次へ]**をクリックします。
 
@@ -126,7 +126,7 @@ TiDB は MySQL 互換のデータベースであり、開発者、データベ�
 </div>
 <div label="TiDB Self-Hosted">
 
-1.  DBeaver を起動し、左上隅にある**[新しいデータベース接続]**をクリックします。 **[データベースへの接続**] ダイアログで、リストから**TiDB**を選択し、 **[次へ]**をクリックします。
+1.  DBeaver を起動し、左上隅にある**[新しいデータベース接続]**をクリックします。 **[データベースへの接続**] ダイアログで、リストから**[TiDB]**を選択し、 **[次へ]**をクリックします。
 
     ![Select TiDB as the database in DBeaver](/media/develop/dbeaver-select-database.jpg)
 
@@ -166,12 +166,12 @@ TiDB は MySQL 互換のデータベースであり、開発者、データベ�
 
 <CustomContent platform="tidb">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](/support.md)について質問します。
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
 
 </CustomContent>

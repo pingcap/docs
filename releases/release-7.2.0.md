@@ -1,6 +1,6 @@
 ---
 title: TiDB 7.2.0 Release Notes
-summary: Learn about the new features, compatibility changes, improvements, and bug fixes in TiDB 7.2.0.
+summary: TiDB 7.2.0 の新機能、互換性の変更、改善、バグ修正について説明します。
 ---
 
 # TiDB 7.2.0 リリースノート {#tidb-7-2-0-release-notes}
@@ -13,7 +13,7 @@ TiDB バージョン: 7.2.0
 
 7.2.0 では、次の主要な機能と改善が導入されています。
 
-<table><thead><tr><th>カテゴリー</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td rowspan="2">スケーラビリティとパフォーマンス</td><td>リソース グループは<a href="https://docs.pingcap.com/tidb/v7.2/tidb-resource-control#manage-queries-that-consume-more-resources-than-expected-runaway-queries">、ランナウェイ クエリの管理を</a>サポートします (実験的)</td><td>クエリのタイムアウトをより細かく管理できるようになり、クエリの分類に基づいてさまざまな動作が可能になります。指定したしきい値を満たすクエリは、優先順位を下げたり終了したりできます。</td></tr><tr><td> TiFlash は<a href="https://docs.pingcap.com/tidb/v7.2/tiflash-pipeline-model">パイプライン実行モデルを</a>サポートします (実験的)</td><td> TiFlash は、スレッド リソース制御を最適化するためにパイプライン実行モデルをサポートしています。</td></tr><tr><td rowspan="1">構文</td><td>データインポート用の新しい SQL ステートメント<a href="https://docs.pingcap.com/tidb/v7.2/sql-statement-import-into">IMPORT INTO</a>をサポートします (実験的)</td><td> TiDB Lightningの導入とメンテナンスを簡素化するために、TiDB では新しい SQL ステートメント<code>IMPORT INTO</code>が導入されました。このステートメントは、Amazon S3 または Google Cloud Storage (GCS) から TiDB への直接リモートインポートを含む、 TiDB Lightningの物理インポートモードを統合します。</td></tr><tr><td rowspan="2"> DB 操作と可観測性</td><td>DDL は<a href="https://docs.pingcap.com/tidb/v7.2/ddl-introduction#ddl-related-commands">一時停止と再開の操作を</a>サポートします (実験的)</td><td>この新しい機能により、インデックス作成などのリソースを大量に消費する DDL 操作を一時的に停止して、リソースを節約し、オンライン トラフィックへの影響を最小限に抑えることができます。準備ができたら、キャンセルして再起動する必要なく、これらの操作をシームレスに再開できます。この機能により、リソースの使用率が向上し、ユーザー エクスペリエンスが向上し、スキーマの変更が効率化されます。</td></tr></tbody></table>
+<table><thead><tr><th>カテゴリー</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td rowspan="2">スケーラビリティとパフォーマンス</td><td>リソース グループは<a href="https://docs.pingcap.com/tidb/v7.2/tidb-resource-control#manage-queries-that-consume-more-resources-than-expected-runaway-queries">、ランナウェイ クエリの管理を</a>サポートします (実験的)</td><td>クエリのタイムアウトをより細かく管理できるようになり、クエリの分類に基づいてさまざまな動作が可能になります。指定したしきい値を満たすクエリは、優先順位を下げたり終了したりできます。</td></tr><tr><td> TiFlash は<a href="https://docs.pingcap.com/tidb/v7.2/tiflash-pipeline-model">パイプライン実行モデルを</a>サポートしています (実験的)</td><td> TiFlash は、スレッド リソース制御を最適化するためにパイプライン実行モデルをサポートしています。</td></tr><tr><td rowspan="1">構文</td><td>データインポート用の新しい SQL ステートメント<a href="https://docs.pingcap.com/tidb/v7.2/sql-statement-import-into">IMPORT INTO</a>をサポートします (実験的)</td><td> TiDB Lightningの導入とメンテナンスを簡素化するために、TiDB では新しい SQL ステートメント<code>IMPORT INTO</code>が導入されました。このステートメントは、Amazon S3 または Google Cloud Storage (GCS) から TiDB への直接リモートインポートを含む、 TiDB Lightningの物理インポートモードを統合します。</td></tr><tr><td rowspan="2"> DB 操作と可観測性</td><td>DDL は<a href="https://docs.pingcap.com/tidb/v7.2/ddl-introduction#ddl-related-commands">一時停止と再開の操作を</a>サポートします (実験的)</td><td>この新しい機能により、インデックス作成などのリソースを大量に消費する DDL 操作を一時的に停止して、リソースを節約し、オンライン トラフィックへの影響を最小限に抑えることができます。準備ができたら、キャンセルして再起動する必要なく、これらの操作をシームレスに再開できます。この機能により、リソースの使用率が向上し、ユーザー エクスペリエンスが向上し、スキーマの変更が効率化されます。</td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
@@ -124,7 +124,7 @@ TiDB バージョン: 7.2.0
 
     `IMPORT INTO`ステートメントは、 TiDB Lightningの[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)機能を統合します。このステートメントを使用すると、CSV、SQL、PARQUET などの形式のデータを TiDB の空のテーブルにすばやくインポートできます。このインポート方法により、 TiDB Lightningを個別に展開および管理する必要がなくなり、データ インポートの複雑さが軽減され、インポート効率が大幅に向上します。
 
-    Amazon S3 または GCS に保存されているデータ ファイルの場合、 [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)が有効になっていると、 `IMPORT INTO`データ インポート ジョブを複数のサブジョブに分割し、それらを複数の TiDB ノードにスケジュールして並列インポートすることもサポートしており、これによりインポートのパフォーマンスがさらに向上します。
+    Amazon S3 または GCS に保存されているデータ ファイルの場合、 [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)が有効になっていると、 `IMPORT INTO`データ インポート ジョブを複数のサブジョブに分割し、それらを複数の TiDB ノードにスケジュールして並列インポートすることもサポートするため、インポートのパフォーマンスがさらに向上します。
 
     詳細については[ドキュメンテーション](/sql-statements/sql-statement-import-into.md)参照してください。
 
@@ -142,7 +142,7 @@ TiDB バージョン: 7.2.0
 
 ### 行動の変化 {#behavior-changes}
 
--   更新イベントを処理する際、イベント内で主キーまたは null 以外の一意のインデックス値が変更されると、TiCDC はイベントを削除イベントと挿入イベントに分割します。詳細については、 [ドキュメンテーション](/ticdc/ticdc-behavior-change.md#transactions-containing-a-single-update-change)参照してください。
+-   更新イベントを処理する際、イベント内で主キーまたは null 以外の一意のインデックス値が変更されると、TiCDC はイベントを削除イベントと挿入イベントに分割します。詳細については、 [ドキュメンテーション](/ticdc/ticdc-split-update-behavior.md#transactions-containing-a-single-update-change)参照してください。
 
 ### システム変数 {#system-variables}
 
@@ -191,8 +191,8 @@ TiDB バージョン: 7.2.0
 -   ティクヴ
 
     -   `pd.retry-interval` [＃14964](https://github.com/tikv/tikv/issues/14964) @ [rleungx](https://github.com/rleungx)を使用した接続要求の失敗などのシナリオでの PD 接続の再試行間隔の構成をサポートします。
-    -   グローバルリソース使用量[＃14604](https://github.com/tikv/tikv/issues/14604) @ [コナー1996](https://github.com/Connor1996)を組み込むことでリソース制御スケジューリングアルゴリズムを最適化します
-    -   `check_leader`リクエストに gzip 圧縮を使用してトラフィック[＃14553](https://github.com/tikv/tikv/issues/14553) @ [あなた06](https://github.com/you06)を削減します
+    -   グローバルリソース使用量[＃14604](https://github.com/tikv/tikv/issues/14604) @ [コナー1996](https://github.com/Connor1996)を組み込むことでリソース制御スケジューリングアルゴリズムを最適化する
+    -   `check_leader`リクエストに gzip 圧縮を使用してトラフィックを削減[＃14553](https://github.com/tikv/tikv/issues/14553) @ [あなた06](https://github.com/you06)
     -   `check_leader`リクエスト[＃14658](https://github.com/tikv/tikv/issues/14658) @ [あなた06](https://github.com/you06)の関連メトリックを追加
     -   TiKV が書き込みコマンド[＃12362](https://github.com/tikv/tikv/issues/12362) @ [翻訳](https://github.com/cfzjywxk)を処理する際の詳細な時間情報を提供する
 
@@ -232,13 +232,13 @@ TiDB バージョン: 7.2.0
     -   `SHOW PROCESSLIST`ステートメントがサブクエリ時間が長いステートメントのトランザクションの TxnStart を表示できない問題を修正[＃40851](https://github.com/pingcap/tidb/issues/40851) @ [クレイジーcs520](https://github.com/crazycs520)
     -   コプロセッサータスク[＃43365](https://github.com/pingcap/tidb/issues/43365) @ [あなた06](https://github.com/you06)に`TxnScope`がないため、古い読み取りグローバル最適化が有効にならない問題を修正しました。
     -   フォロワー読み取りが再試行前にフラッシュバック エラーを処理せず、クエリ エラー[＃43673](https://github.com/pingcap/tidb/issues/43673) @ [あなた06](https://github.com/you06)が発生する問題を修正しました。
-    -   `ON UPDATE`ステートメントが主キー[＃44565](https://github.com/pingcap/tidb/issues/44565) @ [ジグアン](https://github.com/zyguan)を正しく更新しない場合にデータとインデックスが不整合になる問題を修正しました
+    -   `ON UPDATE`文が主キー[＃44565](https://github.com/pingcap/tidb/issues/44565) @ [ジグアン](https://github.com/zyguan)を正しく更新しない場合にデータとインデックスが不整合になる問題を修正
     -   MySQL 8.0.28以降のバージョン[＃43987](https://github.com/pingcap/tidb/issues/43987) @ [ヤンケオ](https://github.com/YangKeao)と一致するように、 `UNIX_TIMESTAMP()`関数の上限を`3001-01-19 03:14:07.999999 UTC`に変更します。
     -   取り込みモード[＃44137](https://github.com/pingcap/tidb/issues/44137) @ [タンジェンタ](https://github.com/tangenta)でインデックスの追加が失敗する問題を修正
     -   ロールバック状態で DDL タスクをキャンセルすると、関連するメタデータ[＃44143](https://github.com/pingcap/tidb/issues/44143) @ [翻訳:](https://github.com/wjhuang2016)にエラーが発生する問題を修正しました
     -   カーソルフェッチで`memTracker`使用するとメモリリークが発生する問題を修正[＃44254](https://github.com/pingcap/tidb/issues/44254) @ [ヤンケオ](https://github.com/YangKeao)
     -   データベースを削除すると GC の進行が遅くなる問題を修正[＃33069](https://github.com/pingcap/tidb/issues/33069) @ [天菜まお](https://github.com/tiancaiamao)
-    -   インデックス結合[＃43686](https://github.com/pingcap/tidb/issues/43686) @ [アイリンキッド](https://github.com/AilinKid) @ [ミョンス](https://github.com/mjonss)のプローブ フェーズでパーティション テーブル内の対応する行が見つからない場合に TiDB がエラーを返す問題を修正しました。
+    -   インデックス結合[＃43686](https://github.com/pingcap/tidb/issues/43686) @ [アイリンキッド](https://github.com/AilinKid) @ [ミョンス](https://github.com/mjonss)のプローブフェーズでパーティションテーブル内の対応する行が見つからない場合に TiDB がエラーを返す問題を修正しました。
     -   `SUBPARTITION`使用してパーティション テーブル[＃41198](https://github.com/pingcap/tidb/issues/41198) [＃41200](https://github.com/pingcap/tidb/issues/41200) @ [ミョンス](https://github.com/mjonss)を作成するときに警告が表示されない問題を修正しました
     -   クエリが`MAX_EXECUTION_TIME`超えたために強制終了された場合に返されるエラーメッセージが MySQL [＃43031](https://github.com/pingcap/tidb/issues/43031) @ [ドヴェーデン](https://github.com/dveeden)のものと一致しない問題を修正しました。
     -   `LEADING`ヒントがブロック エイリアス[＃44645](https://github.com/pingcap/tidb/issues/44645) @ [qw4990](https://github.com/qw4990)のクエリをサポートしない問題を修正しました
@@ -294,7 +294,7 @@ TiDB コミュニティの以下の貢献者に感謝いたします。
 -   [ダラエス](https://github.com/darraes)
 -   [デモマニト](https://github.com/demoManito)
 -   [ディサム](https://github.com/dhysum)
--   [ハッピーおじさん](https://github.com/HappyUncle)
+-   [ハッピーv587](https://github.com/happy-v587)
 -   [ジフハウス](https://github.com/jiyfhust)
 -   [L-メープル](https://github.com/L-maple)
 -   [ニュリク](https://github.com/nyurik)

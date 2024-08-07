@@ -1,6 +1,6 @@
 ---
 title: TiCDC FAQs
-summary: Learn the FAQs you might encounter when you use TiCDC.
+summary: TiCDC を使用する際に遭遇する可能性のある FAQ について説明します。
 ---
 
 # TiCDC よくある質問 {#ticdc-faqs}
@@ -62,7 +62,7 @@ v4.0.0-rc.1 以降、PD はサービス レベルの GC セーフポイントの
 TiCDCサーバーを起動するときに、 `gc-ttl`を設定して GC セーフポイントの Time To Live (TTL) 期間を指定できます。 [TiUPを使用して変更する](/ticdc/deploy-ticdc.md#modify-ticdc-cluster-configurations-using-tiup) `gc-ttl`も指定できます。デフォルト値は 24 時間です。TiCDC では、この値は次の意味を持ちます。
 
 -   TiCDC サービスが停止された後、GC セーフポイントが PD に保持される最大時間。
--   TiKV の GC が TiCDC の GC セーフポイントによってブロックされている場合、 `gc-ttl`​​ TiCDC レプリケーション タスクの最大レプリケ​​ーション遅延を示します。レプリケーション タスクの遅延が`gc-ttl`で設定された値を超えると、レプリケーション タスクは`failed`状態になり、 `ErrGCTTLExceeded`エラーが報告されます。回復できず、GC セーフポイントの進行をブロックしなくなります。
+-   TiKV の GC が TiCDC の GC セーフポイントによってブロックされている場合、 `gc-ttl` TiCDC レプリケーション タスクの最大レプリケーション遅延を示します。レプリケーション タスクの遅延が`gc-ttl`で設定された値を超えると、レプリケーション タスクは`failed`状態になり、 `ErrGCTTLExceeded`エラーが報告されます。回復できず、GC セーフポイントの進行をブロックしなくなります。
 
 上記の 2 番目の動作は、TiCDC v4.0.13 以降のバージョンで導入されています。その目的は、TiCDC のレプリケーション タスクが長時間中断され、上流 TiKV クラスターの GC セーフポイントが長時間継続せず、古いデータ バージョンが多すぎるままになり、上流クラスターのパフォーマンスに影響が出るのを防ぐことです。
 
@@ -72,7 +72,7 @@ TiCDCサーバーを起動するときに、 `gc-ttl`を設定して GC セー�
 
 ## TiCDCガベージコレクション(GC) セーフポイントの完全な動作は何ですか? {#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint}
 
-TiCDC サービスの開始後にレプリケーション タスクが開始されると、TiCDC 所有者は、すべてのレプリケーション タスクの中で最小値`checkpoint-ts`で PD サービス GC セーフポイントを更新します。サービス GC セーフポイントにより、TiCDC はその時点およびその時点以降に生成されたデータを削除しません。レプリケーション タスクが中断された場合、または手動で停止された場合、このタスクの`checkpoint-ts`は変更されません。一方、PD の対応するサービス GC セーフポイントも更新されません。
+TiCDC サービスの開始後にレプリケーション タスクが開始されると、TiCDC 所有者は、すべてのレプリケーション タスクの中で最小値の`checkpoint-ts`で PD サービス GC セーフポイントを更新します。サービス GC セーフポイントにより、TiCDC はその時点およびその時点以降に生成されたデータを削除しません。レプリケーション タスクが中断された場合、または手動で停止された場合、このタスクの`checkpoint-ts`は変更されません。一方、PD の対応するサービス GC セーフポイントも更新されません。
 
 レプリケーションタスクが`gc-ttl`で指定した時間より長く中断された場合、レプリケーションタスクは`failed`状態になり、再開できません。PD 対応サービス GC セーフポイントは継続されます。
 
@@ -86,10 +86,10 @@ TiCDC がサービス GC セーフポイントに設定するデフォルトの 
 
 ## TiCDC タイム ゾーンと上流/下流データベースのタイム ゾーンの関係を理解するにはどうすればよいでしょうか? {#how-to-understand-the-relationship-between-the-ticdc-time-zone-and-the-time-zones-of-the-upstream-downstream-databases}
 
-|              |                                   上流タイムゾーン                                  |                                   TiCDC タイムゾーン                                  |                               下流タイムゾーン                               |
-| :----------: | :-------------------------------------------------------------------------: | :-----------------------------------------------------------------------------: | :------------------------------------------------------------------: |
-| コンフィグレーション方法 |                   [タイムゾーンのサポート](/configure-time-zone.md)参照                  |                     TiCDCサーバーを起動するときに`--tz`パラメータを使用して設定されます                     |                  `sink-uri`の`time-zone`パラメータを使用して構成                  |
-|      説明      | アップストリーム TiDB のタイムゾーン。タイムスタンプ タイプの DML 操作と、タイムスタンプ タイプの列に関連する DDL 操作に影響します。 | TiCDC は、上流の TiDB のタイム ゾーンが TiCDC のタイム ゾーン構成と同じであると想定し、タイムスタンプ列に対して関連する操作を実行します。 | ダウンストリーム MySQL は、ダウンストリームのタイムゾーン設定に従って、DML および DDL 操作のタイムスタンプを処理します。 |
+|              |                                   上流タイムゾーン                                   |                                   TiCDC タイムゾーン                                  |                               下流タイムゾーン                               |
+| :----------: | :--------------------------------------------------------------------------: | :-----------------------------------------------------------------------------: | :------------------------------------------------------------------: |
+| コンフィグレーション方法 |                   [タイムゾーンのサポート](/configure-time-zone.md)参照                   |                     TiCDCサーバーを起動するときに`--tz`パラメータを使用して設定されます                     |                  `sink-uri`の`time-zone`パラメータを使用して構成                  |
+|      説明      | アップストリーム TiDB のタイム ゾーン。タイムスタンプ タイプの DML 操作と、タイムスタンプ タイプの列に関連する DDL 操作に影響します。 | TiCDC は、上流の TiDB のタイム ゾーンが TiCDC のタイム ゾーン構成と同じであると想定し、タイムスタンプ列に対して関連する操作を実行します。 | ダウンストリーム MySQL は、ダウンストリームのタイムゾーン設定に従って、DML および DDL 操作のタイムスタンプを処理します。 |
 
 > **注記：**
 >
@@ -117,7 +117,7 @@ cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="kafka://127
 > **注記：**
 >
 > -   この機能は TiCDC 4.0.2 で導入されました。
-> -   TiCDC は現在、Kafka などの MQ シンクにのみ、Canal-JSON 形式でデータ変更を出力することをサポートしています。
+> -   TiCDC は現在、Kafka などの MQ シンクにのみ、Canal-JSON 形式でのデータ変更の出力をサポートしています。
 
 詳細については[TiCDC チェンジフィード構成](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
@@ -146,7 +146,7 @@ cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="kafka://127
 
 ## TiCDC がデータを Kafka に複製する場合、TiCDC Open Protocol の出力でタイムスタンプ、テーブル名、スキーマ名をどのように表示すればよいですか? {#when-ticdc-replicates-data-to-kafka-how-do-i-view-the-timestamp-table-name-and-schema-name-in-the-output-of-ticdc-open-protocol}
 
-情報は Kafka メッセージのキーに含まれています。例:
+情報は Kafka メッセージのキーに含まれます。例:
 
 ```json
 {
@@ -173,7 +173,7 @@ TiCDC オープン プロトコルでは、タイプ コード`6` `null`表し�
 
 詳細については[TiCDC オープンプロトコル列タイプコード](/ticdc/ticdc-open-protocol.md#column-type-code)を参照してください。
 
-## TiCDC オープン プロトコルの行変更イベントが<code>INSERT</code>イベントか<code>UPDATE</code>イベントかをどのように判断すればよいですか? {#how-can-i-tell-if-a-row-changed-event-of-ticdc-open-protocol-is-an-code-insert-code-event-or-an-code-update-code-event}
+## TiCDC オープン プロトコルの行変更イベントが<code>INSERT</code>イベントなのか<code>UPDATE</code>イベントなのかをどのように判断すればよいですか? {#how-can-i-tell-if-a-row-changed-event-of-ticdc-open-protocol-is-an-code-insert-code-event-or-an-code-update-code-event}
 
 -   `UPDATE`イベントには`"p"`フィールドと`"u"`フィールドの両方が含まれます
 -   `INSERT`イベントには`"u"`フィールドのみが含まれます
@@ -242,7 +242,7 @@ v5.0.1 または v4.0.13 以降では、MySQL へのレプリケーションご�
 
 TiCDC は、すべてのデータが少なくとも 1 回は複製されることを保証します。ダウンストリームに重複データがあると、書き込み競合が発生します。この問題を回避するために、TiCDC は`INSERT`および`UPDATE`ステートメントを`REPLACE INTO`ステートメントに変換します。この動作は`safe-mode`パラメータによって制御されます。
 
-v6.1.3 より前のバージョンでは、 `safe-mode`​​デフォルトで`true`に設定され、 `INSERT`と`UPDATE`ステートメントはすべて`REPLACE INTO`ステートメントに変換されます。v6.1.3 以降のバージョンでは、TiCDC はダウンストリームに重複データがあるかどうかを自動的に判断し、デフォルト値の`safe-mode`は`false`に変更されます。重複データが検出されない場合、TiCDC は`INSERT`と`UPDATE`ステートメントを変換せずに複製します。
+v6.1.3 より前のバージョンでは、 `safe-mode`デフォルトで`true`に設定され、 `INSERT`と`UPDATE`ステートメントはすべて`REPLACE INTO`ステートメントに変換されます。v6.1.3 以降のバージョンでは、TiCDC はダウンストリームに重複データがあるかどうかを自動的に判断し、デフォルト値の`safe-mode`は`false`に変更されます。重複データが検出されない場合、TiCDC は`INSERT`と`UPDATE`ステートメントを変換せずに複製します。
 
 ## レプリケーション ダウンストリームのシンクが TiDB または MySQL の場合、ダウンストリーム データベースのユーザーにはどのような権限が必要ですか? {#when-the-sink-of-the-replication-downstream-is-tidb-or-mysql-what-permissions-do-users-of-the-downstream-database-need}
 
@@ -292,11 +292,11 @@ v6.5.2 より前のバージョンの TiCDC の場合、ダウンストリーム
 
 現在、TiCDC は次の順序を採用しています。
 
-1.  TiCDC は、DDL `CommiTs`まで、DDL ステートメントの影響を受けるテーブルのレプリケーションの進行をブロックします。これにより、DDL `CommiTs`より前に実行された DML ステートメントがダウンストリームに正常にレプリケートされることが保証されます。
+1.  TiCDC は、DDL `commitTS`まで、DDL ステートメントの影響を受けるテーブルのレプリケーションの進行をブロックします。これにより、DDL `commitTS`より前に実行された DML ステートメントがダウンストリームに正常にレプリケートされることが保証されます。
 2.  TiCDC は DDL ステートメントのレプリケーションを続行します。複数の DDL ステートメントがある場合、TiCDC はそれらを順番にレプリケートします。
-3.  DDL ステートメントがダウンストリームで実行された後、TiCDC は DDL `CommiTs`の後に実行された DML ステートメントのレプリケーションを続行します。
+3.  DDL ステートメントがダウンストリームで実行された後、TiCDC は DDL `commitTS`の後に実行された DML ステートメントのレプリケーションを続行します。
 
-## アップストリームデータとダウンストリームデータが一貫しているかどうかをどのように確認すればよいですか? {#how-should-i-check-whether-the-upstream-and-downstream-data-is-consistent}
+## アップストリーム データとダウンストリーム データが一貫しているかどうかをどのように確認すればよいですか? {#how-should-i-check-whether-the-upstream-and-downstream-data-is-consistent}
 
 ダウンストリームが TiDB クラスターまたは MySQL インスタンスの場合は、 [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用してデータを比較することをお勧めします。
 
@@ -311,7 +311,7 @@ enable-table-across-nodes = true
 
 ## アップストリームに長時間実行されているコミットされていないトランザクションがある場合、TiCDC レプリケーションは停止しますか? {#does-ticdc-replication-get-stuck-if-the-upstream-has-long-running-uncommitted-transactions}
 
-TiDB にはトランザクション タイムアウト メカニズムがあります。トランザクションが[`max-txn-ttl`](/tidb-configuration-file.md#max-txn-ttl)より長い期間実行されると、TiDB はそれを強制的にロールバックします。TiCDC は、レプリケーションを続行する前にトランザクションがコミットされるのを待つため、レプリケーションの遅延が発生します。
+TiDB にはトランザクション タイムアウト メカニズムがあります。トランザクションが[`max-txn-ttl`](/tidb-configuration-file.md#max-txn-ttl)より長い期間実行されると、TiDB はそれを強制的にロールバックします。TiCDC は、レプリケーションを続行する前にトランザクションがコミットされるのを待機するため、レプリケーションの遅延が発生します。
 
 ## TiDB Operatorによってデプロイされた TiCDC クラスターを<code>cdc cli</code>コマンドを使用して操作できないのはなぜですか? {#why-can-t-i-use-the-code-cdc-cli-code-command-to-operate-a-ticdc-cluster-deployed-by-tidb-operator}
 

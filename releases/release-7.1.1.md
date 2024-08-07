@@ -1,6 +1,6 @@
 ---
 title: TiDB 7.1.1 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 7.1.1.
+summary: TiDB 7.1.1 の互換性の変更、改善、バグ修正について説明します。
 ---
 
 # TiDB 7.1.1 リリースノート {#tidb-7-1-1-release-notes}
@@ -17,14 +17,14 @@ TiDB バージョン: 7.1.1
 
 ### 行動の変化 {#behavior-changes}
 
--   更新イベントを処理する際、イベント内で主キーまたは null 以外の一意のインデックス値が変更されると、TiCDC はイベントを削除イベントと挿入イベントに分割します。詳細については、 [ドキュメンテーション](/ticdc/ticdc-behavior-change.md#transactions-containing-a-single-update-change)参照してください。
+-   更新イベントを処理する際、イベント内で主キーまたは null 以外の一意のインデックス値が変更されると、TiCDC はイベントを削除イベントと挿入イベントに分割します。詳細については、 [ドキュメンテーション](/ticdc/ticdc-split-update-behavior.md#transactions-containing-a-single-update-change)参照してください。
 
 ## 改善点 {#improvements}
 
 -   ティビ
 
     -   プランキャッシュは200以上のパラメータを持つクエリをサポートします[＃44823](https://github.com/pingcap/tidb/issues/44823) @ [qw4990](https://github.com/qw4990)
-    -   ディスク[＃45125](https://github.com/pingcap/tidb/issues/45125) @ [ヤンケオ](https://github.com/YangKeao)からダンプされたチャンクの読み取りパフォーマンスを最適化します。
+    -   ディスク[＃45125](https://github.com/pingcap/tidb/issues/45125) @ [ヤンケオ](https://github.com/YangKeao)からダンプされたチャンクの読み取りパフォーマンスを最適化します
     -   インデックススキャン範囲を構築するロジックを最適化し、複雑な条件をインデックススキャン範囲[＃41572](https://github.com/pingcap/tidb/issues/41572) [＃44389](https://github.com/pingcap/tidb/issues/44389) @ [翻訳者](https://github.com/xuyifangreeneyes)に変換できるようにします。
     -   古い読み取りの再試行リーダーがロックに遭遇すると、TiDBはロックを解決した後、リーダーで強制的に再試行し、不要なオーバーヘッドを回避します[＃43659](https://github.com/pingcap/tidb/issues/43659) @ [あなた06](https://github.com/you06)
 
@@ -46,7 +46,7 @@ TiDB バージョン: 7.1.1
 
     -   Dumpling
 
-        -   Dumplingは、 `--sql`パラメータが使用されている場合にテーブルクエリの実行を回避し、エクスポートのオーバーヘッドを削減します[＃45239](https://github.com/pingcap/tidb/issues/45239) @ [ランス6716](https://github.com/lance6716)
+        -   Dumplingは、 `--sql`パラメータが使用されている場合にテーブルクエリの実行を回避し、エクスポートのオーバーヘッド[＃45239](https://github.com/pingcap/tidb/issues/45239) @ [ランス6716](https://github.com/lance6716)を削減します。
 
     -   TiDBBinlog
 
@@ -67,7 +67,7 @@ TiDB バージョン: 7.1.1
     -   `FormatSQL()`メソッドが入力[＃44542](https://github.com/pingcap/tidb/issues/44542) @ [ホーキングレイ](https://github.com/hawkingrei)の非常に長い SQL 文を適切に切り捨てることができない問題を修正しました。
     -   クラスターのアップグレード中に DDL 操作が停止し、アップグレードが失敗する問題を修正しました[＃44158](https://github.com/pingcap/tidb/issues/44158) @ [ジムララ](https://github.com/zimulala)
     -   1 つの TiDB ノード[＃45022](https://github.com/pingcap/tidb/issues/45022) @ [lcwangchao](https://github.com/lcwangchao)で障害が発生した後、他の TiDB ノードが TTL タスクを引き継がない問題を修正しました。
-    -   MySQL カーソルフェッチプロトコルを使用すると、結果セットのメモリ消費が`tidb_mem_quota_query`制限を超え、TiDB OOM が発生する可能性がある問題を修正しました。修正後、TiDB は結果セットを自動的にディスクに書き込み、メモリを解放します[＃43233](https://github.com/pingcap/tidb/issues/43233) @ [ヤンケオ](https://github.com/YangKeao)
+    -   MySQL カーソルフェッチプロトコルを使用すると、結果セットのメモリ消費が`tidb_mem_quota_query`制限を超え、TiDB OOM が発生する可能性がある問題を修正しました。修正後、TiDB は結果セットを自動的にディスクに書き込み、メモリ[＃43233](https://github.com/pingcap/tidb/issues/43233) @ [ヤンケオ](https://github.com/YangKeao)を解放します。
     -   権限がなくてもユーザーが`INFORMATION_SCHEMA.TIFLASH_REPLICA`テーブルの情報を表示できる問題を修正[＃45320](https://github.com/pingcap/tidb/issues/45320) @ [ロイド・ポティガー](https://github.com/Lloyd-Pottiger)
     -   `ADMIN SHOW DDL JOBS`ステートメントによって返される`ROW_COUNT`不正確である問題を修正[＃44044](https://github.com/pingcap/tidb/issues/44044) @ [タンジェンタ](https://github.com/tangenta)
     -   範囲列パーティションテーブルをクエリするとエラー[＃43459](https://github.com/pingcap/tidb/issues/43459) @ [ミョンス](https://github.com/mjonss)が発生する可能性がある問題を修正しました
@@ -93,7 +93,7 @@ TiDB バージョン: 7.1.1
     -   `LEADING`ヒントがブロック エイリアス[＃44645](https://github.com/pingcap/tidb/issues/44645) @ [qw4990](https://github.com/qw4990)のクエリをサポートしない問題を修正しました
     -   `PREPARE stmt FROM "ANALYZE TABLE xxx"` `tidb_mem_quota_query` [＃44320](https://github.com/pingcap/tidb/issues/44320) @ [クリサン](https://github.com/chrysan)によって殺される可能性がある問題を修正
     -   空の`processInfo` [＃43829](https://github.com/pingcap/tidb/issues/43829) @ [ジムララ](https://github.com/zimulala)によって発生するpanic問題を修正
-    -   `ON UPDATE`ステートメントが主キー[＃44565](https://github.com/pingcap/tidb/issues/44565) @ [ジグアン](https://github.com/zyguan)を正しく更新しない場合にデータとインデックスが不整合になる問題を修正しました
+    -   `ON UPDATE`文が主キー[＃44565](https://github.com/pingcap/tidb/issues/44565) @ [ジグアン](https://github.com/zyguan)を正しく更新しない場合にデータとインデックスが不整合になる問題を修正
     -   `tidb_opt_agg_push_down`が有効になっている場合にクエリが誤った結果を返す可能性がある問題を修正[＃44795](https://github.com/pingcap/tidb/issues/44795) @ [アイリンキッド](https://github.com/AilinKid)
     -   CTEと相関サブクエリを同時に使用すると、クエリ結果が不正確になったりpanicが発生する可能性がある問題を修正[＃44649](https://github.com/pingcap/tidb/issues/44649) [＃38170](https://github.com/pingcap/tidb/issues/38170) [＃44774](https://github.com/pingcap/tidb/issues/44774) @ [ウィノロス](https://github.com/winoros) @ [グオシャオゲ](https://github.com/guo-shaoge)
     -   ロールバック状態で DDL タスクをキャンセルすると、関連するメタデータ[＃44143](https://github.com/pingcap/tidb/issues/44143) @ [翻訳:](https://github.com/wjhuang2016)にエラーが発生する問題を修正しました
@@ -121,10 +121,10 @@ TiDB バージョン: 7.1.1
 
         -   PD例外によりレプリケーションタスクが停止する可能性がある問題を修正[＃8808](https://github.com/pingcap/tiflow/issues/8808) [＃9054](https://github.com/pingcap/tiflow/issues/9054) @ [アズドンメン](https://github.com/asddongmen) @ [ふびんず](https://github.com/fubinzh)
         -   オブジェクトstorageサービス[＃8894](https://github.com/pingcap/tiflow/issues/8894) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)へのレプリケーション時にメモリが過剰に消費される問題を修正
-        -   REDOログが有効で、下流に例外[＃9172](https://github.com/pingcap/tiflow/issues/9172) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)がある場合にレプリケーションタスクが停止する可能性がある問題を修正しました
-        -   下流で障害が発生した場合に TiCDC が再試行を続行し、再試行時間が長くなりすぎる問題を修正[＃9272](https://github.com/pingcap/tiflow/issues/9272) @ [アズドンメン](https://github.com/asddongmen)
+        -   REDOログが有効で、下流に例外がある場合にレプリケーションタスクが停止する可能性がある問題を修正[＃9172](https://github.com/pingcap/tiflow/issues/9172) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
+        -   ダウンストリーム障害が発生したときに TiCDC が再試行を続け、再試行時間が長くなりすぎる問題を修正しました[＃9272](https://github.com/pingcap/tiflow/issues/9272) @ [アズドンメン](https://github.com/asddongmen)
         -   Kafka [＃8959](https://github.com/pingcap/tiflow/issues/8959) @ [ハイラスティン](https://github.com/hi-rustin)にデータを複製するときに、ダウンストリーム メタデータを頻繁に読み取ることによって発生するダウンストリームの過度の負荷の問題を修正しました。
-        -   ダウンストリームが Kafka の場合、TiCDC がダウンストリームのメタデータを頻繁にクエリし、ダウンストリームに過度の負荷がかかる問題を修正しました[＃8957](https://github.com/pingcap/tiflow/issues/8957) [＃8959](https://github.com/pingcap/tiflow/issues/8959) @ [ハイラスティン](https://github.com/hi-rustin)
+        -   ダウンストリームが Kafka の場合、TiCDC がダウンストリームのメタデータを頻繁にクエリしすぎて、ダウンストリームに過度の負荷がかかる問題を修正しました[＃8957](https://github.com/pingcap/tiflow/issues/8957) [＃8959](https://github.com/pingcap/tiflow/issues/8959) @ [ハイラスティン](https://github.com/hi-rustin)
         -   いくつかの特殊なシナリオでソートコンポーネントのメモリ使用量が過剰になることによって発生する OOM 問題を修正[＃8974](https://github.com/pingcap/tiflow/issues/8974) @ [ヒック](https://github.com/hicqu)
         -   Avro または CSV プロトコルが使用されている場合に`UPDATE`操作で古い値を出力できない問題を修正[＃9086](https://github.com/pingcap/tiflow/issues/9086) @ [3エースショーハンド](https://github.com/3AceShowHand)
         -   storageサービスにデータを複製するときに、ダウンストリーム DDL ステートメントに対応する JSON ファイルにテーブル フィールド[＃9066](https://github.com/pingcap/tiflow/issues/9066) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)のデフォルト値が記録されない問題を修正しました。
@@ -143,12 +143,12 @@ TiDB バージョン: 7.1.1
         -   TiKV にデータを書き込むときにスペース不足エラーが返されるときに、 TiDB Lightning がエラー メッセージを正しく表示しない問題を修正しました[＃44733](https://github.com/pingcap/tidb/issues/44733) @ [ランス6716](https://github.com/lance6716)
         -   チェックサム操作[＃45462](https://github.com/pingcap/tidb/issues/45462) @ [D3ハンター](https://github.com/D3Hunter)中に`Region is unavailable`エラーが報告される問題を修正
         -   `experimental.allow-expression-index`が有効でデフォルト値が UUID [＃44497](https://github.com/pingcap/tidb/issues/44497) @ [リチュンジュ](https://github.com/lichunzhu)の場合のTiDB Lightningpanic問題を修正しました
-        -   競合条件によりディスククォータが不正確になる可能性がある問題を修正[＃44867](https://github.com/pingcap/tidb/issues/44867) @ [D3ハンター](https://github.com/D3Hunter)
+        -   競合条件[＃44867](https://github.com/pingcap/tidb/issues/44867) @ [D3ハンター](https://github.com/D3Hunter)によりディスク クォータが不正確になる可能性がある問題を修正
         -   論理インポート モードで、インポート中に下流のテーブルを削除すると、 TiDB Lightningメタデータが時間[＃44614](https://github.com/pingcap/tidb/issues/44614) @ [ダシュン](https://github.com/dsdashun)で更新されない可能性がある問題を修正しました。
 
     -   Dumpling
 
-        -   クエリ結果セット`--sql`が空の場合にDumpling が異常終了する問題を修正[#45200](https://github.com/pingcap/tidb/issues/45200) @ [D3ハンター](https://github.com/D3Hunter)
+        -   クエリ結果セット`--sql`が空の場合にDumpling が異常終了する問題を修正[＃45200](https://github.com/pingcap/tidb/issues/45200) @ [D3ハンター](https://github.com/D3Hunter)
 
     -   TiDBBinlog
 

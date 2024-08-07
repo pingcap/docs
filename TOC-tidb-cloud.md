@@ -11,6 +11,7 @@
     -   [ロードマップ](/tidb-cloud/tidb-cloud-roadmap.md)
 -   始める
     -   [TiDB Cloud を試してみる](/tidb-cloud/tidb-cloud-quickstart.md)
+    -   [TiDB + AI を試してみる](/tidb-cloud/vector-search-get-started-using-python.md)
     -   [HTAPを試してみる](/tidb-cloud/tidb-cloud-htap-quickstart.md)
     -   [TiDB Cloud CLI を試してみる](/tidb-cloud/get-started-with-cli.md)
     -   [PoCを実行する](/tidb-cloud/tidb-cloud-poc.md)
@@ -62,6 +63,7 @@
             -   [Node.jsの例](/tidb-cloud/serverless-driver-node-example.md)
             -   [プリズマの例](/tidb-cloud/serverless-driver-prisma-example.md)
             -   [Kyselyの例](/tidb-cloud/serverless-driver-kysely-example.md)
+            -   [霧雨の例](/tidb-cloud/serverless-driver-drizzle-example.md)
     -   サードパーティのサポート
         -   [TiDB がサポートするサードパーティ ツール](/develop/dev-guide-third-party-support.md)
         -   [サードパーティツールとの既知の非互換性の問題](/develop/dev-guide-third-party-tools-compatibility.md)
@@ -203,7 +205,7 @@
                 -   [準備されていない実行プランのキャッシュ](/sql-non-prepared-plan-cache.md)
             -   制御実行計画
                 -   [概要](/control-execution-plan.md)
-                -   [オプティマイザのヒント](/optimizer-hints.md)
+                -   [オプティマイザーのヒント](/optimizer-hints.md)
                 -   [SQL プラン管理](/sql-plan-management.md)
                 -   [最適化ルールのブロックリストと式のプッシュダウン](/blocklist-control-plan.md)
                 -   [オプティマイザー修正コントロール](/optimizer-fix-controls.md)
@@ -238,15 +240,42 @@
         -   [データ移行の事前チェックエラー、移行エラー、アラート](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md)
         -   [AWS DMS をTiDB Cloudクラスターに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 -   データを探索する
-    -   [Chat2Query (ベータ版)](/tidb-cloud/explore-data-with-chat2query.md)
+    -   [SQL エディターの Chat2Query (ベータ版)](/tidb-cloud/explore-data-with-chat2query.md)
+-   ベクトル検索（ベータ版）
+    -   [概要](/tidb-cloud/vector-search-overview.md)
+    -   始める
+        -   [SQL を使い始める](/tidb-cloud/vector-search-get-started-using-sql.md)
+        -   [Pythonを始めよう](/tidb-cloud/vector-search-get-started-using-python.md)
+    -   統合
+        -   [概要](/tidb-cloud/vector-search-integration-overview.md)
+        -   AIフレームワーク
+            -   [ラマインデックス](/tidb-cloud/vector-search-integrate-with-llamaindex.md)
+            -   [ランチェイン](/tidb-cloud/vector-search-integrate-with-langchain.md)
+        -   モデル/サービスの埋め込み
+            -   [ジナ・アイ](/tidb-cloud/vector-search-integrate-with-jinaai-embedding.md)
+        -   ORM ライブラリ
+            -   [SQLアルケミー](/tidb-cloud/vector-search-integrate-with-sqlalchemy.md)
+            -   [ピーウィー](/tidb-cloud/vector-search-integrate-with-peewee.md)
+            -   [Django ORM](/tidb-cloud/vector-search-integrate-with-django-orm.md)
+    -   参照
+        -   [ベクトルデータ型](/tidb-cloud/vector-search-data-types.md)
+        -   [ベクトル関数と演算子](/tidb-cloud/vector-search-functions-and-operators.md)
+        -   [ベクトルインデックス](/tidb-cloud/vector-search-index.md)
+    -   [性能を上げる](/tidb-cloud/vector-search-improve-performance.md)
+    -   [制限事項](/tidb-cloud/vector-search-limitations.md)
+    -   [変更履歴](/tidb-cloud/vector-search-changelogs.md)
 -   データ サービス (ベータ版)
     -   [概要](/tidb-cloud/data-service-overview.md)
     -   [始める](/tidb-cloud/data-service-get-started.md)
-    -   [Chat2Query API を試してみる](/tidb-cloud/use-chat2query-api.md)
+    -   チャット2クエリAPI
+        -   [始める](/tidb-cloud/use-chat2query-api.md)
+        -   [マルチラウンドChat2Queryを開始する](/tidb-cloud/use-chat2query-sessions.md)
+        -   [ナレッジベースを使用する](/tidb-cloud/use-chat2query-knowledge.md)
     -   [データ管理アプリ](/tidb-cloud/data-service-manage-data-app.md)
     -   [エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)
     -   [APIキー](/tidb-cloud/data-service-api-key.md)
     -   [カスタムドメイン](/tidb-cloud/data-service-custom-domain.md)
+    -   [統合](/tidb-cloud/data-service-integrations.md)
     -   [Postmanで実行](/tidb-cloud/data-service-postman-integration.md)
     -   [GitHub で自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)
     -   [Next.js で OpenAPI 仕様を使用する](/tidb-cloud/data-service-oas-with-nextjs.md)
@@ -258,12 +287,18 @@
     -   [カフカシンクへ](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
     -   [TiDB Cloudシンクへ](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
     -   [クラウドストレージへ](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
+-   災害からの回復
+    -   [リカバリーグループの概要](/tidb-cloud/recovery-group-overview.md)
+    -   [始める](/tidb-cloud/recovery-group-get-started.md)
+    -   [データベースのフェイルオーバーと再保護](/tidb-cloud/recovery-group-failover.md)
+    -   [リカバリグループを削除する](/tidb-cloud/recovery-group-delete.md)
 -   Security
     -   アイデンティティアクセス制御
         -   [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)
         -   [基本的なSSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)
         -   [組織のSSO認証](/tidb-cloud/tidb-cloud-org-sso-authentication.md)
         -   [アイデンティティアクセス管理](/tidb-cloud/manage-user-access.md)
+        -   [OAuth2.0 とは](/tidb-cloud/oauth2.md)
     -   ネットワークアクセス制御
         -   TiDB サーバーレス
             -   [プライベートエンドポイント経由で接続](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
@@ -271,7 +306,7 @@
         -   TiDB専用
             -   [IPアクセスリストを構成する](/tidb-cloud/configure-ip-access-list.md)
             -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections.md)
-            -   [プライベート エンドポイント (プライベート サービス接続) 経由で Google Cloud に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
+            -   [プライベートエンドポイント（プライベートサービス接続）経由で Google Cloud に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
             -   [VPCピアリング経由で接続](/tidb-cloud/set-up-vpc-peering-connections.md)
             -   [TiDB専用へのTLS接続](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
     -   データアクセス制御
@@ -291,14 +326,17 @@
     -   [AWS または GCP Marketplace からの請求](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace)
     -   [Changefeed の請求](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
     -   [データ移行の請求](/tidb-cloud/tidb-cloud-billing-dm.md)
+    -   [リカバリグループの請求](/tidb-cloud/tidb-cloud-billing-recovery-group.md)
+    -   [予算を管理する](/tidb-cloud/tidb-cloud-budget.md)
 -   マネージド サービス プロバイダー プログラム
     -   [マネージドサービスプロバイダー](/tidb-cloud/managed-service-provider.md)
     -   [MSP 顧客](/tidb-cloud/managed-service-provider-customer.md)
--   API
+-   翻訳
     -   [APIの概要](/tidb-cloud/api-overview.md)
     -   APIリファレンス
         -   v1ベータ1
             -   [請求する](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
+            -   [データサービス](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)
             -   [IAMは](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam)
             -   [MSP](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
         -   [v1ベータ](https://docs.pingcap.com/tidbcloud/api/v1beta)
@@ -338,6 +376,9 @@
         -   [導入](/tidb-distributed-execution-framework.md)
         -   [TiDB グローバルソート](/tidb-global-sort.md)
     -   ベンチマーク
+        -   TiDB v8.1
+            -   [TPC-C パフォーマンス テスト レポート](/tidb-cloud/v8.1-performance-benchmarking-with-tpcc.md)
+            -   [Sysbench パフォーマンス テスト レポート](/tidb-cloud/v8.1-performance-benchmarking-with-sysbench.md)
         -   TiDB v7.5
             -   [TPC-C パフォーマンス テスト レポート](/tidb-cloud/v7.5-performance-benchmarking-with-tpcc.md)
             -   [Sysbench パフォーマンス テスト レポート](/tidb-cloud/v7.5-performance-benchmarking-with-sysbench.md)
@@ -361,8 +402,6 @@
             -   [式の構文](/expression-syntax.md)
             -   [コメント構文](/comment-syntax.md)
         -   SQL ステートメント
-            -   [`ADD COLUMN`](/sql-statements/sql-statement-add-column.md)
-            -   [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
             -   [`ADMIN`](/sql-statements/sql-statement-admin.md)
             -   [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
             -   [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
@@ -373,21 +412,28 @@
             -   [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)
             -   [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
             -   [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
-            -   [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
             -   [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
             -   [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)
             -   [`ALTER RANGE`](/sql-statements/sql-statement-alter-range.md)
             -   [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md)
             -   [`ALTER SEQUENCE`](/sql-statements/sql-statement-alter-sequence.md)
-            -   [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
-            -   [`ALTER TABLE COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)
+            -   `ALTER TABLE`
+                -   [概要](/sql-statements/sql-statement-alter-table.md)
+                -   [`ADD COLUMN`](/sql-statements/sql-statement-add-column.md)
+                -   [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
+                -   [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
+                -   [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
+                -   [`COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)
+                -   [`DROP COLUMN`](/sql-statements/sql-statement-drop-column.md)
+                -   [`DROP INDEX`](/sql-statements/sql-statement-drop-index.md)
+                -   [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)
+                -   [`RENAME INDEX`](/sql-statements/sql-statement-rename-index.md)
             -   [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
             -   [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
             -   [`BACKUP`](/sql-statements/sql-statement-backup.md)
             -   [`BATCH`](/sql-statements/sql-statement-batch.md)
             -   [`BEGIN`](/sql-statements/sql-statement-begin.md)
             -   [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
-            -   [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
             -   [`COMMIT`](/sql-statements/sql-statement-commit.md)
             -   [`CREATE [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md)
             -   [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)
@@ -406,7 +452,6 @@
             -   [`DESCRIBE`](/sql-statements/sql-statement-describe.md)
             -   [`DO`](/sql-statements/sql-statement-do.md)
             -   [`DROP [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-drop-binding.md)
-            -   [`DROP COLUMN`](/sql-statements/sql-statement-drop-column.md)
             -   [`DROP DATABASE`](/sql-statements/sql-statement-drop-database.md)
             -   [`DROP INDEX`](/sql-statements/sql-statement-drop-index.md)
             -   [`DROP PLACEMENT POLICY`](/sql-statements/sql-statement-drop-placement-policy.md)
@@ -435,11 +480,9 @@
             -   [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md)
             -   [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md)
             -   [`LOCK TABLES`と`UNLOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)
-            -   [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)
             -   [`PREPARE`](/sql-statements/sql-statement-prepare.md)
             -   [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)
             -   [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md)
-            -   [`RENAME INDEX`](/sql-statements/sql-statement-rename-index.md)
             -   [`RENAME TABLE`](/sql-statements/sql-statement-rename-table.md)
             -   [`RENAME USER`](/sql-statements/sql-statement-rename-user.md)
             -   [`REPLACE`](/sql-statements/sql-statement-replace.md)
@@ -482,7 +525,7 @@
             -   [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)
             -   [`SHOW PLUGINS`](/sql-statements/sql-statement-show-plugins.md)
             -   [`SHOW PRIVILEGES`](/sql-statements/sql-statement-show-privileges.md)
-            -   [`SHOW [FULL] PROCESSSLIST`](/sql-statements/sql-statement-show-processlist.md)
+            -   [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md)
             -   [`SHOW PROFILES`](/sql-statements/sql-statement-show-profiles.md)
             -   [`SHOW SCHEMAS`](/sql-statements/sql-statement-show-schemas.md)
             -   [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md)
@@ -580,6 +623,7 @@
                 -   [`DDL_JOBS`](/information-schema/information-schema-ddl-jobs.md)
                 -   [`DEADLOCKS`](/information-schema/information-schema-deadlocks.md)
                 -   [`ENGINES`](/information-schema/information-schema-engines.md)
+                -   [`KEYWORDS`](/information-schema/information-schema-keywords.md)
                 -   [`KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md)
                 -   [`MEMORY_USAGE`](/information-schema/information-schema-memory-usage.md)
                 -   [`MEMORY_USAGE_OPS_HISTORY`](/information-schema/information-schema-memory-usage-ops-history.md)

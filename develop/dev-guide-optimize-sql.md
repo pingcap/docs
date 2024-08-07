@@ -1,27 +1,27 @@
 ---
 title: SQL Performance Tuning
-summary: このドキュメントは、SQL ステートメントの遅延の一般的な理由と、SQL パフォーマンスのチューニングテクニックについて紹介します。遅いクエリの理由は、テーブル全体のスキャンや誤ったインデックスの使用です。解決策として、セカンダリ インデックスやカバリングインデックスの使用、またはプライマリ インデックスの使用があります。JOIN タイプの適切な選択も重要です。
+summary: TiDB の SQL パフォーマンス チューニング スキームと分析アプローチを紹介します。
 ---
 
 # SQL性能チューニング {#sql-performance-tuning}
 
-このドキュメントでは、SQL ステートメントが遅い一般的な理由と、SQL パフォーマンスをチューニングするためのテクニックを紹介します。
+このドキュメントでは、SQL ステートメントが遅くなる一般的な理由と、SQL パフォーマンスをチューニングする手法について説明します。
 
 ## あなたが始める前に {#before-you-begin}
 
-[`tiup demo`のインポート](/develop/dev-guide-bookshop-schema-design.md#method-1-via-tiup-demo)を使用してデータを準備できます。
+[`tiup demo`インポート](/develop/dev-guide-bookshop-schema-design.md#method-1-via-tiup-demo)使用してデータを準備できます。
 
 ```shell
 tiup demo bookshop prepare --host 127.0.0.1 --port 4000 --books 1000000
 ```
 
-または、 [TiDB Cloudのインポート機能を使用する](/develop/dev-guide-bookshop-schema-design.md#method-2-via-tidb-cloud-import)を使用して、事前に準備されたサンプル データをインポートします。
+または、事前に準備されたサンプル データをインポートする場合は[TiDB Cloudのインポート機能を使用する](/develop/dev-guide-bookshop-schema-design.md#method-2-via-tidb-cloud-import) 。
 
-## 問題: フルテーブルスキャン {#issue-full-table-scan}
+## 問題: テーブル全体のスキャン {#issue-full-table-scan}
 
-SQL クエリが遅くなる最も一般的な理由は、 `SELECT`ステートメントがテーブル全体のスキャンを実行するか、間違ったインデックスを使用することです。
+SQL クエリが遅くなる最も一般的な理由は、 `SELECT`ステートメントが完全なテーブル スキャンを実行するか、間違ったインデックスを使用することです。
 
-TiDB が主キーではない列またはセカンダリ インデックスにある列に基づいて大きなテーブルから少数の行を取得する場合、通常はパフォーマンスが低下します。
+TiDB が主キーではない列またはセカンダリ インデックス内の列に基づいて大規模なテーブルから少数の行を取得する場合、通常はパフォーマンスが低下します。
 
 ```sql
 SELECT * FROM books WHERE title = 'Marian Yost';
@@ -41,7 +41,7 @@ SELECT * FROM books WHERE title = 'Marian Yost';
 Time: 0.582s
 ```
 
-このクエリが遅い理由を理解するには、 `EXPLAIN`使用して実行計画を確認します。
+このクエリが遅い理由を理解するには、 `EXPLAIN`使用して実行プランを確認します。
 
 ```sql
 EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
@@ -57,11 +57,11 @@ EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
 +---------------------+------------+-----------+---------------+-----------------------------------------+
 ```
 
-実行計画の`TableFullScan_5`からわかるように、TiDB は`books`テーブルに対してフル テーブル スキャンを実行し、 `title`各行の条件を満たすかどうかをチェックします。 `TableFullScan_5`の`estRows`値は`1000000.00`です。これは、オプティマイザがこのテーブル全体のスキャンには`1000000.00`行のデータが必要であると推定することを意味します。
+実行プランの`TableFullScan_5`からわかるように、TiDB は`books`テーブルの全テーブル スキャンを実行し、各行の`title`条件を満たしているかどうかを確認します。 `TableFullScan_5`の`estRows`値は`1000000.00`であり、これはオプティマイザがこの全テーブル スキャンで`1000000.00`行のデータが必要になると見積もっていることを意味します。
 
-`EXPLAIN`の使用法の詳細については、 [`EXPLAIN`ウォークスルー](/explain-walkthrough.md)を参照してください。
+`EXPLAIN`の使用方法の詳細については、 [`EXPLAIN`ウォークスルー](/explain-walkthrough.md)を参照してください。
 
-### 解決策: セカンダリ インデックスを使用する {#solution-use-secondary-index}
+### 解決策: セカンダリインデックスを使用する {#solution-use-secondary-index}
 
 上記のクエリを高速化するには、 `books.title`列にセカンダリ インデックスを追加します。
 
@@ -69,7 +69,7 @@ EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
 CREATE INDEX title_idx ON books (title);
 ```
 
-クエリの実行がはるかに高速になります。
+クエリの実行ははるかに高速です。
 
 ```sql
 SELECT * FROM books WHERE title = 'Marian Yost';
@@ -89,7 +89,7 @@ SELECT * FROM books WHERE title = 'Marian Yost';
 Time: 0.007s
 ```
 
-パフォーマンスが向上する理由を理解するには、 `EXPLAIN`使用して新しい実行計画を確認します。
+パフォーマンスが向上した理由を理解するには、 `EXPLAIN`使用して新しい実行プランを確認します。
 
 ```sql
 EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
@@ -105,17 +105,17 @@ EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
 +---------------------------+---------+-----------+-------------------------------------+-------------------------------------------------------+
 ```
 
-実行計画の`IndexLookup_10`からわかるように、TiDB は`title_idx`インデックスによってデータをクエリします。その`estRows`値は`1.27`です。これは、オプティマイザが`1.27`行のみがスキャンされると推定することを意味します。スキャンされる推定行数は、テーブル全体のスキャンの`1000000.00`行のデータよりもはるかに少なくなります。
+実行プランの`IndexLookup_10`からわかるように、TiDB は`title_idx`インデックスでデータをクエリします。その`estRows`値は`1.27`で、これはオプティマイザが`1.27`行のみがスキャンされると見積もっていることを意味します。推定されるスキャン行数は、フル テーブル スキャンの`1000000.00`行のデータよりはるかに少なくなります。
 
-`IndexLookup_10`実行プランでは、まず`IndexRangeScan_8`演算子を使用して、 `title_idx`インデックスを通じて条件を満たすインデックス データを読み取り、次に`TableLookup_9`演算子を使用して、インデックス データに格納されている行 ID に従って対応する行をクエリします。
+`IndexLookup_10`実行プランは、まず`IndexRangeScan_8`演算子を使用して`title_idx`インデックスを通じて条件を満たすインデックス データを読み取り、次に`TableLookup_9`演算子を使用して、インデックス データに格納されている行 ID に従って対応する行をクエリすることです。
 
-TiDB 実行計画の詳細については、 [TiDB クエリ実行計画の概要](/explain-overview.md)を参照してください。
+TiDB 実行プランの詳細については、 [TiDB クエリ実行プランの概要](/explain-overview.md)参照してください。
 
-### 解決策: カバリングインデックスを使用する {#solution-use-covering-index}
+### 解決策: カバーインデックスを使用する {#solution-use-covering-index}
 
-インデックスが SQL ステートメントによってクエリされるすべての列を含むカバーインデックスである場合、クエリにはインデックス データをスキャンするだけで十分です。
+インデックスが、SQL ステートメントによってクエリされるすべての列を含むカバーリング インデックスである場合、インデックス データをスキャンするだけでクエリに十分です。
 
-たとえば、次のクエリでは、 `title`に基づいて対応する`price`をクエリするだけで済みます。
+たとえば、次のクエリでは、 `title`に基づいて対応する`price`クエリするだけで済みます。
 
 ```sql
 SELECT title, price FROM books WHERE title = 'Marian Yost';
@@ -135,7 +135,7 @@ SELECT title, price FROM books WHERE title = 'Marian Yost';
 Time: 0.007s
 ```
 
-`title_idx`インデックスには`title`列のデータのみが含まれるため、TiDB は引き続き最初にインデックス データをスキャンしてから、テーブルの`price`列をクエリする必要があります。
+`title_idx`インデックスには`title`列目のデータのみが含まれているため、TiDB は最初にインデックス データをスキャンし、次にテーブルから`price`列目をクエリする必要があります。
 
 ```sql
 EXPLAIN SELECT title, price FROM books WHERE title = 'Marian Yost';
@@ -151,7 +151,7 @@ EXPLAIN SELECT title, price FROM books WHERE title = 'Marian Yost';
 +---------------------------+---------+-----------+-------------------------------------+-------------------------------------------------------+
 ```
 
-パフォーマンスを最適化するには、インデックス`title_idx`を削除し、新しいカバーインデックス`title_price_idx`を作成します。
+パフォーマンスを最適化するには、インデックス`title_idx`を削除し、新しいカバー インデックス`title_price_idx`を作成します。
 
 ```sql
 ALTER TABLE books DROP INDEX title_idx;
@@ -161,7 +161,7 @@ ALTER TABLE books DROP INDEX title_idx;
 CREATE INDEX title_price_idx ON books (title, price);
 ```
 
-`price`データは`title_price_idx`インデックスに格納されているため、次のクエリはインデックス データをスキャンするだけで済みます。
+`price`データは`title_price_idx`インデックスに格納されているため、次のクエリではインデックス データをスキャンするだけで済みます。
 
 ```sql
 EXPLAIN SELECT title, price FROM books WHERE title = 'Marian Yost';
@@ -176,7 +176,7 @@ EXPLAIN SELECT title, price FROM books WHERE title = 'Marian Yost';
 +--------------------+---------+-----------+--------------------------------------------------+-------------------------------------------------------+
 ```
 
-このクエリはより高速に実行されるようになりました。
+このクエリはより高速に実行されます:
 
 ```sql
 SELECT title, price FROM books WHERE title = 'Marian Yost';
@@ -202,9 +202,9 @@ Time: 0.004s
 ALTER TABLE books DROP INDEX title_price_idx;
 ```
 
-### 解決策: プライマリ インデックスを使用する {#solution-use-primary-index}
+### 解決策: プライマリインデックスを使用する {#solution-use-primary-index}
 
-クエリで主キーを使用してデータをフィルタリングすると、クエリは高速に実行されます。たとえば、 `books`テーブルの主キーは`id`列であるため、 `id`列を使用してデータをクエリできます。
+クエリが主キーを使用してデータをフィルター処理する場合、クエリは高速に実行されます。たとえば、 `books`テーブルの主キーは`id`列目なので、 `id`列目を使用してデータをクエリできます。
 
 ```sql
 SELECT * FROM books WHERE id = 896;
@@ -220,7 +220,7 @@ SELECT * FROM books WHERE id = 896;
 Time: 0.004s
 ```
 
-実行計画を表示するには`EXPLAIN`を使用します。
+実行プランを表示するには`EXPLAIN`使用します。
 
 ```sql
 EXPLAIN SELECT * FROM books WHERE id = 896;
@@ -234,13 +234,27 @@ EXPLAIN SELECT * FROM books WHERE id = 896;
 +-------------+---------+------+---------------+---------------+
 ```
 
-`Point_Get`非常に高速に実行されるプランです。
+`Point_Get`非常に高速な実行プランです。
 
 ## 適切な結合タイプを使用する {#use-the-right-join-type}
 
-[JOIN実行計画](/explain-joins.md)を参照してください。
+[JOIN 実行プラン](/explain-joins.md)参照。
 
-### こちらも参照 {#see-also}
+### 参照 {#see-also}
 
 -   [EXPLAIN コマンド](/explain-walkthrough.md)
--   [インデックスを使用する Explain ステートメント](/explain-indexes.md)
+-   [インデックスを使用するステートメントを説明する](/explain-indexes.md)
+
+## 助けが必要？ {#need-help}
+
+<CustomContent platform="tidb">
+
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+
+</CustomContent>

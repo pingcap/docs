@@ -1,6 +1,6 @@
 ---
 title: TiCDC OpenAPI v2
-summary: Learn how to use the OpenAPI v2 interface to manage the cluster status and data replication.
+summary: OpenAPI v2 インターフェースを使用してクラスターのステータスとデータ レプリケーションを管理する方法を学習します。
 ---
 
 # TiCDC オープン API v2 {#ticdc-openapi-v2}
@@ -92,7 +92,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/status
 
 ```json
 {
-  "version": "v7.5.1",
+  "version": "v7.5.3",
   "git_hash": "10413bded1bdb2850aa6d7b94eb375102e9c44dc",
   "id": "d2912e63-3349-447c-90ba-72a4e04b5e9e",
   "pid": 1447,
@@ -134,7 +134,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 
 ## レプリケーションタスクを作成する {#create-a-replication-task}
 
-このインターフェイスは、TiCDC にレプリケーション タスクを送信するために使用されます。要求が成功すると、 `200 OK`返されます。返される結果は、サーバーがコマンドの実行に同意したことを意味するだけで、コマンドが正常に実行されることを保証するものではありません。
+このインターフェイスは、レプリケーション タスクを TiCDC に送信するために使用されます。要求が成功すると、 `200 OK`返されます。返される結果は、サーバーがコマンドの実行に同意したことを意味するだけで、コマンドが正常に実行されることを保証するものではありません。
 
 ### リクエストURI {#request-uri}
 
@@ -332,12 +332,13 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `date_separator`              | `STRING`タイプ。ファイル ディレクトリの日付区切り文字のタイプを示します。値のオプションは`none` 、 `year` 、 `month` 、および`day`です。 `none`デフォルト値で、日付が区切られないことを意味します。(オプション) |
 | `dispatchers`                 | イベントディスパッチ用の構成配列。(オプション)                                                                                                        |
 | `encoder_concurrency`         | `INT`タイプ。MQ シンク内のエンコーダー スレッドの数。デフォルト値は`16`です。(オプション)                                                                            |
-| `protocol`                    | `STRING`タイプ。MQ シンクの場合、メッセージのプロトコル形式を指定できます。現在サポートされているプロトコルは`canal-json` 、 `open-protocol` 、 `avro` 、および`maxwell`です。            |
+| `protocol`                    | `STRING`タイプ。MQ シンクの場合、メッセージのプロトコル形式を指定できます。現在サポートされているプロトコルは`canal-json` 、 `open-protocol` 、および`avro`です。                        |
 | `schema_registry`             | `STRING`タイプ。スキーマ レジストリ アドレス。(オプション)                                                                                             |
 | `terminator`                  | `STRING`型。ターミネータは 2 つのデータ変更イベントを区切るために使用されます。デフォルト値は null で、 `"\r\n"`ターミネータとして使用されることを意味します。(オプション)                             |
 | `transaction_atomicity`       | `STRING`タイプ。トランザクションのアトミック性レベル。(オプション)                                                                                          |
 | `only_output_updated_columns` | `BOOLEAN`タイプ。2 または`open-protocol`プロトコルを使用する MQ シンクの場合、変更さ`canal-json`た列のみを出力するかどうかを指定できます。デフォルト値は`false`です。(オプション)              |
 | `cloud_storage_config`        | storageシンクの構成。(オプション)                                                                                                           |
+| `open`                        | オープン プロトコル構成。(オプション、v7.5.2 で導入)                                                                                                 |
 
 `sink.column_selectors`は配列です。パラメータは次のように記述されます。
 
@@ -351,7 +352,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | パラメータ名                   | 説明                                                                           |
 | :----------------------- | :--------------------------------------------------------------------------- |
 | `delimiter`              | `STRING`タイプ。CSV ファイル内のフィールドを区切るために使用される文字。値は ASCII 文字である必要があり、デフォルトは`,`です。   |
-| `include_commit_ts`      | `BOOLEAN`タイプ。CSV 行にコミット ts を含めるかどうか。デフォルト値は`false`です。                        |
+| `include_commit_ts`      | `BOOLEAN`タイプ。CSV 行に commit-ts を含めるかどうか。デフォルト値は`false`です。                     |
 | `null`                   | `STRING`型。CSV 列が null の場合に表示される文字。デフォルト値は`\N`です。                             |
 | `quote`                  | `STRING`タイプ。CSV ファイル内のフィールドを囲むために使用される引用符文字。値が空の場合、引用符は使用されません。デフォルト値は`"`です。 |
 | `binary_encoding_method` | `STRING`型。バイナリデータのエンコード方式。 `"base64"`または`"hex"`を指定できます。デフォルト値は`"base64"`です。  |
@@ -373,14 +374,21 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 
 `sink.cloud_storage_config`パラメータは次のように記述されます。
 
-| パラメータ名                   | 説明                                                                                                                                                 |
-| :----------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `worker_count`           | `INT`タイプ。下流のクラウドstorageへのデータ保存の同時実行性が変更されます。                                                                                                       |
-| `flush_interval`         | `STRING`タイプ。下流のクラウドstorageにデータを保存する間隔が変更されます。                                                                                                      |
-| `file_size`              | `INT`タイプ。このファイル内のバイト数がこのパラメータの値を超えると、データ変更ファイルがクラウドstorageに保存されます。                                                                                 |
-| `file_expiration_days`   | `INT`タイプ。ファイルを保持する期間。2 が`date-separator`に設定されている場合にのみ有効になります`day`                                                                                  |
-| `file_cleanup_cron_spec` | `STRING`タイプ。スケジュールされたクリーンアップ タスクの実行サイクル。crontab 構成と互換性があり、形式は`<Second> <Minute> <Hour> <Day of the month> <Month> <Day of the week (Optional)>`です。 |
-| `flush_concurrency`      | `INT`タイプ。単一ファイルのアップロードの同時実行性。                                                                                                                      |
+| パラメータ名                    | 説明                                                                                                                                                 |
+| :------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `worker_count`            | `INT`タイプ。下流のクラウドstorageへのデータ保存の同時実行性が変更されます。                                                                                                       |
+| `flush_interval`          | `STRING`タイプ。下流のクラウドstorageにデータを保存する間隔が変更されます。                                                                                                      |
+| `file_size`               | `INT`タイプ。このファイル内のバイト数がこのパラメータの値を超えると、データ変更ファイルがクラウドstorageに保存されます。                                                                                 |
+| `file_expiration_days`    | `INT`タイプ。ファイルを保持する期間。2 が`date-separator`に設定されている場合にのみ有効になります`day`                                                                                  |
+| `file_cleanup_cron_spec`  | `STRING`タイプ。スケジュールされたクリーンアップ タスクの実行サイクル。crontab 構成と互換性があり、形式は`<Second> <Minute> <Hour> <Day of the month> <Month> <Day of the week (Optional)>`です。 |
+| `flush_concurrency`       | `INT`タイプ。単一ファイルのアップロードの同時実行性。                                                                                                                      |
+| `output_raw_change_event` | `BOOLEAN`タイプ。MySQL 以外のシンクの元のデータ変更イベントを出力するかどうかを制御します。                                                                                              |
+
+`sink.open`パラメータは次のように記述されます。
+
+| パラメータ名             | 説明                                                                                                      |
+| :----------------- | :------------------------------------------------------------------------------------------------------ |
+| `output_old_value` | `BOOLEAN`型。行データが変更される前に値を出力するかどうかを制御します。デフォルト値は`true`です。無効にすると、UPDATE イベントは &quot;p&quot; フィールドを出力しません。 |
 
 ### 例 {#example}
 
@@ -525,10 +533,10 @@ curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v2
 
 | パラメータ名            | 説明                                                                                             |
 | :---------------- | :--------------------------------------------------------------------------------------------- |
-| `admin_job_type`  | `INTEGER`タイプ。管理ジョブのタイプ。                                                                        |
+| `admin_job_type`  | `INTEGER`タイプ。管理ジョブ タイプ。                                                                        |
 | `checkpoint_time` | `STRING`タイプ。レプリケーション タスクの現在のチェックポイントのフォーマットされた時刻。                                              |
 | `checkpoint_ts`   | `STRING`タイプ。レプリケーション タスクの現在のチェックポイントの TSO。                                                     |
-| `config`          | レプリケーション タスクの構成。構造と意味は、レプリケーション タスクを作成する場合の構成`replica_config`と同じです。                            |
+| `config`          | レプリケーション タスクの構成。構造と意味は、レプリケーション タスクを作成する場合の`replica_config`番目の構成と同じです。                         |
 | `create_time`     | `STRING`タイプ。レプリケーション タスクが作成された時刻。                                                              |
 | `creator_version` | `STRING`タイプ。レプリケーション タスクが作成された時点の TiCDC バージョン。                                                 |
 | `error`           | レプリケーション タスク エラー。                                                                              |
@@ -849,7 +857,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeed/test1/synced
 
 応答には次のフィールドが含まれます。
 
--   `synced` : このレプリケーション タスクが完了しているかどうか。 `true`タスクが完了したことを意味し、 `false`潜在的な不完全性を意味します。 `false`の場合は、特定のステータスについては`info`フィールドとその他のフィールドの両方を確認する必要があります。
+-   `synced` : このレプリケーション タスクが完了しているかどうか。 `true`タスクが完了したことを意味し、 `false`潜在的な不完全性を意味します。 `false`の場合は、特定のステータスについて`info`フィールドとその他のフィールドの両方を確認する必要があります。
 -   `sink_checkpoint_ts` : シンク モジュールのチェックポイント ts 値 (PD 時間単位)。
 -   `puller_resolved_ts` : PD 時間での、プラー モジュールのresolved-ts値。
 -   `last_synced_ts` : TiCDC によって処理された最新のデータの commit-ts 値 (PD 時間単位)。

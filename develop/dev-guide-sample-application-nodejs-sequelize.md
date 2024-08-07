@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with Sequelize
-summary: Learn how to connect to TiDB using Sequelize. This tutorial gives Node.js sample code snippets that work with TiDB using Sequelize.
+summary: Sequelize を使用して TiDB に接続する方法を学びます。このチュートリアルでは、Sequelize を使用して TiDB で動作する Node.js サンプル コード スニペットを紹介します。
 ---
 
 # Sequelize で TiDB に接続する {#connect-to-tidb-with-sequelize}
@@ -128,7 +128,7 @@ npm install
 
 3.  **「どこからでもアクセスを許可」**をクリックし、 **「CA 証明書のダウンロード」**をクリックして CA 証明書をダウンロードします。
 
-    接続文字列を取得する方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
+    接続文字列の取得方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
 
 4.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -180,7 +180,7 @@ npm install
 
 ### ステップ4: サンプルアプリを実行する {#step-4-run-the-sample-app}
 
-サンプルコードを実行するには、次のコマンドを実行します。
+サンプル コードを実行するには、次のコマンドを実行します。
 
 ```shell
 npm start
@@ -327,12 +327,12 @@ logger.info(deletedNewPlayer?.toJSON());
 
 <CustomContent platform="tidb">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](/support.md)について質問します。
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
 
 </CustomContent>

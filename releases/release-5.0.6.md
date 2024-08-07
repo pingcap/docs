@@ -1,7 +1,7 @@
 ---
 title: TiDB 5.0.6 Release Notes
 category: Releases
-summary: TiDB 5.0.6 was released on December 31, 2021. The release includes compatibility changes, improvements, bug fixes, and updates to various tools such as TiCDC, TiKV, PD, TiDB Lightning, TiFlash, Backup & Restore (BR), and Dumpling. The changes include enhancements to error handling, performance improvements, bug fixes related to SQL statements, and various optimizations for different tools.
+summary: TiDB 5.0.6 は 2021 年 12 月 31 日にリリースされました。このリリースには、TiCDC、TiKV、PD、 TiDB Lightning、 TiFlash、Backup & Restore (BR)、 Dumplingなどのさまざまなツールに対する互換性の変更、改善、バグ修正、更新が含まれています。変更には、エラー処理の強化、パフォーマンスの改善、SQL ステートメントに関連するバグ修正、さまざまなツールのさまざまな最適化が含まれます。
 ---
 
 # TiDB 5.0.6 リリースノート {#tidb-5-0-6-release-notes}
@@ -65,10 +65,10 @@ TiDB バージョン: 5.0.6
     -   MPPクエリ[＃1791](https://github.com/pingcap/tics/issues/1791)の誤検知エラーログ`invalid cop task execution summaries length`の問題を修正
     -   DML 文と DDL 文が同時に実行されるときに発生する可能性のあるpanicを修正[＃30940](https://github.com/pingcap/tidb/issues/30940)
     -   グローバルレベルの権限を付与および取り消す操作`grant`および`revoke`を実行するときに発生する`privilege check fail`エラーを修正します[＃29675](https://github.com/pingcap/tidb/issues/29675)
-    -   `ALTER TABLE.. ADD INDEX`文を実行するときに TiDBpanicが発生する問題を修正[＃27687](https://github.com/pingcap/tidb/issues/27687)
+    -   場合によっては`ALTER TABLE.. ADD INDEX`文を実行するときに TiDBpanicが発生する問題を修正[＃27687](https://github.com/pingcap/tidb/issues/27687)
     -   v5.0.4 [＃29252](https://github.com/pingcap/tidb/issues/29252)で`enforce-mpp`設定が有効にならない問題を修正
     -   `ENUM`データ型[＃29357](https://github.com/pingcap/tidb/issues/29357)で`CASE WHEN`関数を使用するときに発生するpanicを修正
-    -   ベクトル化された式[＃29244](https://github.com/pingcap/tidb/issues/29244)の関数`microsecond`の誤った結果を修正
+    -   ベクトル化された式[＃29244](https://github.com/pingcap/tidb/issues/29244)の`microsecond`関数の誤った結果を修正
     -   `auto analyze`の結果[＃29188](https://github.com/pingcap/tidb/issues/29188)からの不完全なログ情報の問題を修正
     -   ベクトル化された式[＃28643](https://github.com/pingcap/tidb/issues/28643)の関数`hour`の誤った結果を修正
     -   サポートされていない`cast`がTiFlash [＃23907](https://github.com/pingcap/tidb/issues/23907)にプッシュダウンされたときに発生する`tidb_cast to Int32 is not supported`ような予期しないエラーを修正
@@ -100,7 +100,7 @@ TiDB バージョン: 5.0.6
     -   TiKVが逆テーブルスキャンを実行するときにメモリロックを検出できない問題を修正[＃11440](https://github.com/tikv/tikv/issues/11440)
     -   小数点以下の除算結果がゼロの場合の負の符号の問題を修正[＃29586](https://github.com/pingcap/tidb/issues/29586)
     -   GCタスクの蓄積によりTiKVがOOM（メモリ不足）になる可能性がある問題を修正[＃11410](https://github.com/tikv/tikv/issues/11410)
-    -   TiKV メトリクス[＃11299](https://github.com/tikv/tikv/issues/11299)でインスタンスごとの gRPC リクエストの平均レイテンシーが不正確になる問題を修正
+    -   TiKV メトリック[＃11299](https://github.com/tikv/tikv/issues/11299)でインスタンスごとの gRPC リクエストの平均レイテンシーが不正確になる問題を修正
     -   統計スレッド[＃11195](https://github.com/tikv/tikv/issues/11195)のデータの監視によって発生するメモリリークを修正
     -   ダウンストリームデータベースが見つからない場合に発生する TiCDCpanicの問題を修正[＃11123](https://github.com/tikv/tikv/issues/11123)
     -   TiCDC が輻輳エラー[＃11082](https://github.com/tikv/tikv/issues/11082)によりスキャン再試行を頻繁に追加する問題を修正
@@ -149,10 +149,10 @@ TiDB バージョン: 5.0.6
         -   チェンジフィードチェックポイントラグ[＃3010](https://github.com/pingcap/ticdc/issues/3010)負の値エラーを修正
         -   MySQLシンクデッドロック[＃2706](https://github.com/pingcap/tiflow/issues/2706)による警告が頻繁に発生する問題を修正
         -   AvroシンクがJSON型列[＃3624](https://github.com/pingcap/tiflow/issues/3624)の解析をサポートしていない問題を修正
-        -   TiKV 所有者が再起動したときに TiCDC が TiKV から誤ったスキーマ スナップショットを読み取るバグを修正[＃2603](https://github.com/pingcap/tiflow/issues/2603)
+        -   TiKV所有者が再起動したときにTiCDCがTiKVから誤ったスキーマスナップショットを読み取るバグを修正[＃2603](https://github.com/pingcap/tiflow/issues/2603)
         -   DDL [＃3174](https://github.com/pingcap/ticdc/issues/3174)の処理後のメモリリークの問題を修正
-        -   Canal および Maxwell プロトコル[＃3676](https://github.com/pingcap/tiflow/issues/3676)で`enable-old-value`構成項目が自動的に`true`に設定されないバグを修正
-        -   一部の Red Hat Enterprise Linux リリース (6.8 や 6.9 など) で`cdc server`コマンドを実行すると発生するタイムゾーン エラーを修正しました[＃3584](https://github.com/pingcap/tiflow/issues/3584)
+        -   Canalプロトコル[＃3676](https://github.com/pingcap/tiflow/issues/3676)で設定項目`enable-old-value`が`true`に自動的に設定されないバグを修正
+        -   一部のRed Hat Enterprise Linuxリリース（6.8や6.9など）で`cdc server`コマンドを実行すると発生するタイムゾーンエラーを修正しました[＃3584](https://github.com/pingcap/tiflow/issues/3584)
         -   Kafka シンク[＃3431](https://github.com/pingcap/tiflow/issues/3431)の不正確な`txn_batch_size`監視メトリックの問題を修正しました
         -   `tikv_cdc_min_resolved_ts_no_change_for_1m`チェンジフィードがない場合に警告が継続する問題を修正[＃11017](https://github.com/tikv/tikv/issues/11017)
         -   etcd [＃2980](https://github.com/pingcap/tiflow/issues/2980)でタスク ステータスを手動でクリーンアップするときに発生する TiCDCpanicの問題を修正しました。

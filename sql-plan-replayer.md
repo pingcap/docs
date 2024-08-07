@@ -1,6 +1,6 @@
 ---
 title: Use PLAN REPLAYER to Save and Restore the On-Site Information of a Cluster
-summary: Learn how to use PLAN REPLAYER to save and restore the on-site information of a cluster.
+summary: PLAN REPLAYER を使用してクラスターのオンサイト情報を保存および復元する方法を学びます。
 ---
 
 # PLAN REPLAYERを使用してクラスタのオンサイト情報を保存および復元する {#use-plan-replayer-to-save-and-restore-the-on-site-information-of-a-cluster}
@@ -219,7 +219,7 @@ PLAN REPLAYER CAPTURE 'sql_digest' '*';
 次のステートメントを使用して、TiDB クラスター内の`PLAN REPLAYER CAPTURE`の進行中のキャプチャ タスクを表示できます。
 
 ```sql
-mysql> PLAN PLAYER CAPTURE 'example_sql' 'example_plan';
+mysql> PLAN REPLAYER CAPTURE 'example_sql' 'example_plan';
 Query OK, 1 row affected (0.01 sec)
 
 mysql> SELECT * FROM mysql.plan_replayer_task;

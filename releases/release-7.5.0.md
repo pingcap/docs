@@ -1,9 +1,11 @@
 ---
 title: TiDB 7.5.0 Release Notes
-summary: Learn about the new features, compatibility changes, improvements, and bug fixes in TiDB 7.5.0.
+summary: TiDB 7.5.0 の新機能、互換性の変更、改善、バグ修正について説明します。
 ---
 
 # TiDB 7.5.0 リリースノート {#tidb-7-5-0-release-notes}
+
+<EmailSubscriptionWrapper />
 
 発売日: 2023年12月1日
 
@@ -47,7 +49,7 @@ TiDB 7.5.0 は長期サポートリリース (LTS) です。
 
 ### DB操作 {#db-operations}
 
--   DDL ジョブは一時停止と再開操作をサポートします (GA) [＃18015](https://github.com/pingcap/tidb/issues/18015) @ [ゴドゥム](https://github.com/godouxm)
+-   DDL ジョブは一時停止および再開操作をサポートします (GA) [＃18015](https://github.com/pingcap/tidb/issues/18015) @ [ゴドゥム](https://github.com/godouxm)
 
     v7.2.0 で導入された DDL ジョブの一時停止および再開操作が一般提供 (GA) されます。これらの操作により、リソースを大量に消費する DDL ジョブ (インデックスの作成など) を一時停止して、リソースを節約し、オンライン トラフィックへの影響を最小限に抑えることができます。リソースが許せば、DDL ジョブをキャンセルして再開することなく、シームレスに再開できます。この機能により、リソースの使用率が向上し、ユーザー エクスペリエンスが強化され、スキーマ変更プロセスが簡素化されます。
 
@@ -70,7 +72,7 @@ TiDB 7.5.0 は長期サポートリリース (LTS) です。
 
 -   TiDBダッシュボードはTiKV [＃15927](https://github.com/tikv/tikv/issues/15927) @ [コナー1996](https://github.com/Connor1996)のヒーププロファイリングをサポートします
 
-    以前は、TiKV OOM またはメモリ使用量が多い問題に対処するには、通常、インスタンス環境でヒープ プロファイルを生成するために`jeprof`を手動で実行する必要がありました。v7.5.0 以降、TiKV ではヒープ プロファイルのリモート処理が可能になります。ヒープ プロファイルのフレーム グラフとコール グラフに直接アクセスできるようになりました。この機能は、Go ヒープ プロファイリングと同じシンプルで使いやすいエクスペリエンスを提供します。
+    以前は、TiKV OOM または高メモリ使用量の問題に対処するには、通常、インスタンス環境でヒープ プロファイルを生成するために`jeprof`を手動で実行する必要がありました。v7.5.0 以降、TiKV ではヒープ プロファイルのリモート処理が可能になります。ヒープ プロファイルのフレーム グラフとコール グラフに直接アクセスできるようになりました。この機能は、Go ヒープ プロファイリングと同じシンプルで使いやすいエクスペリエンスを提供します。
 
     詳細については[ドキュメンテーション](/dashboard/dashboard-profiling.md)参照してください。
 
@@ -180,7 +182,7 @@ v7.5.0 以降では、 `TiDB-community-toolkit` [バイナリパッケージ](/b
 
     -   バックアップと復元 (BR)
 
-        -   スナップショットバックアップ用の新しいテーブル間バックアップパラメータ`table-concurrency`を追加します。このパラメータは、統計バックアップやデータ検証などのメタ情報のテーブル間同時実行を制御するために使用されます[＃48571](https://github.com/pingcap/tidb/issues/48571) @ [3ポインター](https://github.com/3pointer)
+        -   スナップショット バックアップ用の新しいテーブル間バックアップ パラメータ`table-concurrency`を追加します。このパラメータは、統計バックアップやデータ検証などのメタ情報のテーブル間同時実行を制御するために使用されます[＃48571](https://github.com/pingcap/tidb/issues/48571) @ [3ポインター](https://github.com/3pointer)
         -   スナップショットバックアップの復元中に、 BR は特定のネットワークエラーが発生すると再試行します[＃48528](https://github.com/pingcap/tidb/issues/48528) @ [リーヴルス](https://github.com/Leavrth)
 
 ## バグの修正 {#bug-fixes}
@@ -193,7 +195,7 @@ v7.5.0 以降では、 `TiDB-community-toolkit` [バイナリパッケージ](/b
     -   TiDBが`GROUP_CONCAT` [＃41957](https://github.com/pingcap/tidb/issues/41957) @ [アイリンキッド](https://github.com/AilinKid)のクエリに対して`Can't find column`返す問題を修正
     -   `batch-client` in `client-go` [＃47691](https://github.com/pingcap/tidb/issues/47691) @ [クレイジーcs520](https://github.com/crazycs520)のpanic問題を修正
     -   `INDEX_LOOKUP_HASH_JOIN` [＃47788](https://github.com/pingcap/tidb/issues/47788) @ [シーライズ](https://github.com/SeaRise)でのメモリ使用量の推定が不正確になる問題を修正
-    -   長期間オフラインだったTiFlashノードの再参加によって発生する不均一なワークロードの問題を修正[＃35418](https://github.com/pingcap/tidb/issues/35418) @ [風の話し手](https://github.com/windtalker)
+    -   長期間オフラインだったTiFlashノードの再参加によって生じるワークロードの不均一性の問題を修正[＃35418](https://github.com/pingcap/tidb/issues/35418) @ [風の話し手](https://github.com/windtalker)
     -   HashJoin 演算子がプローブ[＃48082](https://github.com/pingcap/tidb/issues/48082) @ [うわー](https://github.com/wshwsh12)を実行するときにチャンクを再利用できない問題を修正しました。
     -   `COALESCE()`関数が`DATE`型パラメータ[＃46475](https://github.com/pingcap/tidb/issues/46475) @ [翻訳者](https://github.com/xzhangxian1008)に対して誤った結果型を返す問題を修正しました
     -   サブクエリを含む`UPDATE`のステートメントが誤って PointGet [＃48171](https://github.com/pingcap/tidb/issues/48171) @ [ハイラスティン](https://github.com/hi-rustin)に変換される問題を修正しました
@@ -213,18 +215,18 @@ v7.5.0 以降では、 `TiDB-community-toolkit` [バイナリパッケージ](/b
     -   `evict-leader-scheduler`構成[＃6897](https://github.com/tikv/pd/issues/6897) @ [ヒューシャープ](https://github.com/HuSharp)を失う可能性がある問題を修正
     -   ストアがオフラインになった後、その統計の監視メトリックが削除されない問題を修正[＃7180](https://github.com/tikv/pd/issues/7180) @ [rleungx](https://github.com/rleungx)
     -   配置ルールの構成が複雑な場合に、データレプリケーション自動同期 (DR 自動同期) モードを採用しているクラスターで`canSync`と`hasMajority`が誤って計算される可能性がある問題を修正しました[＃7201](https://github.com/tikv/pd/issues/7201) @ [ディスク](https://github.com/disksing)
-    -   ルールチェッカーが配置ルール[＃7185](https://github.com/tikv/pd/issues/7185) @ [ノルーシュ](https://github.com/nolouch)の設定に従って学習者を追加しない問題を修正しました。
+    -   ルールチェッカーが配置ルール[＃7185](https://github.com/tikv/pd/issues/7185) @ [ノルーシュ](https://github.com/nolouch)の設定に従って学習者を追加しない問題を修正しました
     -   TiDBダッシュボードがPD `trace`データを正しく読み取れない問題を修正[＃7253](https://github.com/tikv/pd/issues/7253) @ [ノルーシュ](https://github.com/nolouch)
     -   内部的に取得された空の領域が原因でPDがpanic可能性がある問題を修正[＃7261](https://github.com/tikv/pd/issues/7261) @ [翻訳者](https://github.com/lhy1024)
     -   データレプリケーション自動同期（DR自動同期）モード[＃7221](https://github.com/tikv/pd/issues/7221) @ [ディスク](https://github.com/disksing)を採用しているクラスターで`available_stores`誤って計算される問題を修正
     -   TiKV ノードが利用できない場合に PD が通常のピアを削除する可能性がある問題を修正[＃7249](https://github.com/tikv/pd/issues/7249) @ [翻訳者](https://github.com/lhy1024)
-    -   大規模クラスターに複数の TiKV ノードを追加すると、TiKVハートビートレポートが遅くなったり停止したりする可能性がある問題を修正しました[＃7248](https://github.com/tikv/pd/issues/7248) @ [rleungx](https://github.com/rleungx)
+    -   大規模クラスターに複数の TiKV ノードを追加すると、TiKVハートビートレポートが遅くなったり停止したりする可能性がある問題を修正[＃7248](https://github.com/tikv/pd/issues/7248) @ [rleungx](https://github.com/rleungx)
 
 -   TiFlash
 
-    -   `UPPER()`と`LOWER()`関数がTiDB とTiFlash [＃7695](https://github.com/pingcap/tiflash/issues/7695) @ [風の話し手](https://github.com/windtalker)の間で矛盾した結果を返す問題を修正しました
+    -   `UPPER()`と`LOWER()`関数がTiDB とTiFlash [＃7695](https://github.com/pingcap/tiflash/issues/7695) @ [風の話し手](https://github.com/windtalker)の間で矛盾した結果を返す問題を修正しました。
     -   空のパーティションでクエリを実行するとクエリが失敗する問題を修正[＃8220](https://github.com/pingcap/tiflash/issues/8220) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)
-    -   TiFlashレプリカ[＃8217](https://github.com/pingcap/tiflash/issues/8217) @ [ホンユンヤン](https://github.com/hongyunyan)を複製するときにテーブル作成の失敗によって発生するpanic問題を修正しました。
+    -   TiFlashレプリカ[＃8217](https://github.com/pingcap/tiflash/issues/8217) @ [ホンユンヤン](https://github.com/hongyunyan)を複製するときにテーブル作成の失敗によって発生するpanic問題を修正しました
 
 -   ツール
 

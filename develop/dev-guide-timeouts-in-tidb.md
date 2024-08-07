@@ -1,6 +1,6 @@
 ---
 title: Timeouts in TiDB
-summary: Learn about timeouts in TiDB, and solutions for troubleshooting errors.
+summary: TiDB のタイムアウトとエラーのトラブルシューティングの解決策について学習します。
 ---
 
 # TiDB のタイムアウト {#timeouts-in-tidb}
@@ -19,7 +19,7 @@ TiDB のトランザクション実装では、MVCC (Multiple Version Concurrenc
 
     実行時間が 24 時間を超えないトランザクションの場合、トランザクションの実行中はガベージコレクション(GC) がブロックされます。エラー`GC life time is shorter than transaction duration`は発生しません。
 
-一時的に読み取り時間を長くする必要がある場合は、MVCC バージョンの保持時間を長くすることができます。
+場合によっては一時的に読み取り時間を長くする必要がある場合は、MVCC バージョンの保持時間を長くすることができます。
 
 -   v5.0 より前の TiDB バージョンの場合: TiDB の`mysql.tidb`テーブルの`tikv_gc_life_time`を調整します。
 -   TiDB v5.0 以降のバージョンの場合: システム変数[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)を調整します。
@@ -30,7 +30,7 @@ TiDB のトランザクション実装では、MVCC (Multiple Version Concurrenc
 
 > **ヒント：**
 >
-> 具体的には、 Dumpling がTiDB (1 TB 未満) からデータをエクスポートしているときに、TiDB のバージョンが v4.0.0 以上であり、 Dumpling がTiDB クラスターの PD アドレスにアクセスできる場合、 Dumpling は元のクラスターに影響を与えずに GC 時間を自動的に延長します。
+> 具体的には、 Dumpling がTiDB (1 TB 未満) からデータをエクスポートしているときに、TiDB のバージョンが v4.0.0 以降であり、 Dumpling がTiDB クラスターの PD アドレスと[`INFORMATION_SCHEMA.CLUSTER_INFO`](/information-schema/information-schema-cluster-info.md)テーブルにアクセスできる場合、 Dumpling はGC セーフ ポイントを自動的に調整して、元のクラスターに影響を与えずに GC をブロックします。
 >
 > ただし、次のいずれかのシナリオでは、 Dumpling はGC 時間を自動的に調整できません。
 >
@@ -86,3 +86,17 @@ TiDB は、次の MySQL 互換のタイムアウト制御パラメータを提�
 
 -   `sessionVariables=wait_timeout=3600` (1時間)
 -   `sessionVariables=max_execution_time=300000` (5分)
+
+## 助けが必要？ {#need-help}
+
+<CustomContent platform="tidb">
+
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+
+</CustomContent>

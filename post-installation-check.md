@@ -1,19 +1,19 @@
 ---
 title: Check Cluster Status
-summary: TiDBクラスターのステータスを確認するためには、TiUPコマンド、TiDBダッシュボード、およびGrafanaを使用します。また、データベースにログインして簡単なSQL操作を行うこともできます。TiUPコマンドを使用してクラスターのステータスを確認し、TiDBダッシュボードとGrafanaを使用してモニタリング情報を表示します。データベースにログインしてバージョンを確認したり、新しいデータベースやテーブルを作成したり、データを挿入したりすることができます。
+summary: TiDB クラスターの実行ステータスを確認する方法を学習します。
 ---
 
-# クラスタのステータスを確認する {#check-cluster-status}
+# クラスタステータスの確認 {#check-cluster-status}
 
-TiDB クラスターをデプロイした後、クラスターが正常に実行されるかどうかを確認する必要があります。このドキュメントでは、 TiUPコマンド[TiDB ダッシュボード](/dashboard/dashboard-intro.md)および Grafana を使用してクラスターのステータスを確認する方法と、TiDB データベースにログインして簡単な SQL 操作を実行する方法を紹介します。
+TiDB クラスターをデプロイした後は、クラスターが正常に動作しているか確認する必要があります。このドキュメントでは、 TiUPコマンド[TiDBダッシュボード](/dashboard/dashboard-intro.md)と Grafana を使用してクラスターの状態を確認する方法と、TiDB データベースにログインして簡単な SQL 操作を実行する方法を紹介します。
 
-## TiDB クラスターのステータスを確認する {#check-the-tidb-cluster-status}
+## TiDBクラスタのステータスを確認する {#check-the-tidb-cluster-status}
 
-このセクションでは、 TiUPコマンド、 [TiDB ダッシュボード](/dashboard/dashboard-intro.md) 、および Grafana を使用して TiDB クラスターのステータスを確認する方法について説明します。
+このセクションでは、 TiUPコマンド[TiDBダッシュボード](/dashboard/dashboard-intro.md)および Grafana を使用して TiDB クラスターのステータスを確認する方法について説明します。
 
 ### TiUPを使用する {#use-tiup}
 
-`tiup cluster display <cluster-name>`コマンドを使用してクラスターのステータスを確認します。例えば：
+クラスターのステータスを確認するには、 `tiup cluster display <cluster-name>`コマンドを使用します。例:
 
 ```shell
 tiup cluster display tidb-test
@@ -21,9 +21,9 @@ tiup cluster display tidb-test
 
 期待される出力: 各ノードの`Status`情報が`Up`の場合、クラスターは正常に実行されます。
 
-### TiDB ダッシュボードを使用する {#use-tidb-dashboard}
+### TiDBダッシュボードを使用する {#use-tidb-dashboard}
 
-1.  `${pd-ip}:${pd-port}/dashboard`で TiDB ダッシュボードにログインします。ユーザー名とパスワードは TiDB `root`ユーザーのものと同じです。 `root`パスワードを変更した場合は、変更したパスワードを入力します。デフォルトではパスワードは空です。
+1.  `${pd-ip}:${pd-port}/dashboard`で TiDB ダッシュボードにログインします。ユーザー名とパスワードは TiDB `root`ユーザーと同じです。5 パスワードを変更した場合は、変更し`root`パスワードを入力します。デフォルトではパスワードは空です。
 
     ![TiDB-Dashboard](/media/tiup/tidb-dashboard.png)
 
@@ -31,19 +31,19 @@ tiup cluster display tidb-test
 
     ![TiDB-Dashboard-status](/media/tiup/tidb-dashboard-status.png)
 
-### グラファナを使用する {#use-grafana}
+### Grafanaを使用する {#use-grafana}
 
-1.  `${Grafana-ip}:3000`で Grafana モニタリングにログインします。デフォルトのユーザー名とパスワードは両方とも`admin`です。
+1.  `${Grafana-ip}:3000`で Grafana モニタリングにログインします。デフォルトのユーザー名とパスワードはどちらも`admin`です。
 
-2.  TiDB ポートのステータスと負荷監視情報を確認するには、 **「概要」**をクリックします。
+2.  TiDB ポートのステータスと負荷監視情報を確認するには、 **[概要]**をクリックします。
 
     ![Grafana-overview](/media/tiup/grafana-overview.png)
 
-## データベースにログインして簡単な操作を行う {#log-in-to-the-database-and-perform-simple-operations}
+## データベースにログインして簡単な操作を実行する {#log-in-to-the-database-and-perform-simple-operations}
 
 > **注記：**
 >
-> データベースにログインする前に、MySQL クライアントをインストールします。
+> データベースにログインする前に、MySQL クライアントをインストールしてください。
 
 次のコマンドを実行してデータベースにログインします。
 
@@ -51,14 +51,14 @@ tiup cluster display tidb-test
 mysql -u root -h ${tidb_server_host_IP_address} -P 4000
 ```
 
-`${tidb_server_host_IP_address}` [クラスタトポロジファイルを初期化します](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file)のときに`tidb_servers`に設定される IP アドレスの 1 つです ( `10.0.1.7`など)。
+`${tidb_server_host_IP_address}`は、 [クラスタトポロジファイルを初期化する](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file)の場合に`tidb_servers`に設定される IP アドレスの 1 つ ( `10.0.1.7`など) です。
 
-次の情報は、ログインが成功したことを示します。
+次の情報はログインが成功したことを示します。
 
 ```sql
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 3
-Server version: 8.0.11-TiDB-v7.5.1 TiDB Server (Apache License 2.0) Community Edition, MySQL 8.0 compatible
+Server version: 8.0.11-TiDB-v7.5.3 TiDB Server (Apache License 2.0) Community Edition, MySQL 8.0 compatible
 Copyright (c) 2000, 2023, Oracle and/or its affiliates. All rights reserved.
 Oracle is a registered trademark of Oracle Corporation and/or its
 affiliates. Other names may be trademarks of their respective
@@ -103,7 +103,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
     Query OK, 0 rows affected (0.10 sec)
     ```
 
-    `pingcap`データベースに切り替えます。
+    `pingcap`データベースに切り替えます:
 
     ```sql
     use pingcap;
@@ -133,7 +133,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
     Query OK, 0 rows affected (0.11 sec)
     ```
 
--   データを挿入します:
+-   データを挿入:
 
     ```sql
     insert into `tab_tidb` values (1,'TiDB',5,'TiDB-v5.0.0');
@@ -145,7 +145,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
     Query OK, 1 row affected (0.03 sec)
     ```
 
--   `tab_tidb`のエントリをビュー。
+-   `tab_tidb`のエントリをビュー:
 
     ```sql
     select * from tab_tidb;
@@ -162,7 +162,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
     1 row in set (0.00 sec)
     ```
 
--   TiKV のストアの状態、 `store_id` 、容量、稼働時間をビュー。
+-   TiKV のストア状態、 `store_id` 、容量、および稼働時間をビュー。
 
     ```sql
     select STORE_ID,ADDRESS,STORE_STATE,STORE_STATE_NAME,CAPACITY,AVAILABLE,UPTIME from INFORMATION_SCHEMA.TIKV_STORE_STATUS;
@@ -181,7 +181,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
     3 rows in set (0.00 sec)
     ```
 
--   TiDB を終了します。
+-   TiDB を終了:
 
     ```sql
     exit

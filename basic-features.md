@@ -1,6 +1,6 @@
 ---
 title: TiDB Features
-summary: Learn about the feature overview of TiDB.
+summary: TiDB の機能の概要について説明します。
 ---
 
 # TiDB の機能 {#tidb-features}
@@ -171,7 +171,6 @@ summary: Learn about the feature overview of TiDB.
 | [拡張統計](/extended-statistics.md)                                                       |     え     |     え     |     え     |     え     |     え     |     え     |     え     |  え  |  え  |  え  |
 | 統計フィードバック                                                                             |    いいえ    |    いいえ    |    いいえ    |    非推奨    |    非推奨    |    非推奨    |     え     |  え  |  え  |  え  |
 | [統計を自動的に更新する](/statistics.md#automatic-update)                                        |     Y     |     Y     |     Y     |     Y     |     Y     |     Y     |     Y     |  Y  |  Y  |  Y  |
-| [高速分析](/system-variables.md#tidb_enable_fast_analyze)                                 |    非推奨    |     え     |     え     |     え     |     え     |     え     |     え     |  え  |  え  |  え  |
 | [動的剪定](/partitioned-table.md#dynamic-pruning-mode)                                    |     Y     |     Y     |     Y     |     Y     |     え     |     え     |     え     |  え  |  え  | いいえ |
 | [`PREDICATE COLUMNS`の統計情報を収集する](/statistics.md#collect-statistics-on-some-columns)    |     え     |     え     |     え     |     え     |     え     |     え     |    いいえ    | いいえ | いいえ | いいえ |
 | [統計情報を収集するためのメモリクォータを制御する](/statistics.md#the-memory-quota-for-collecting-statistics) |     え     |     え     |     え     |     え     |    いいえ    |    いいえ    |    いいえ    | いいえ | いいえ | いいえ |
@@ -215,9 +214,9 @@ summary: Learn about the feature overview of TiDB.
 | [TiCDCは2つのTiDBクラスタ間の双方向レプリケーションをサポートします](/ticdc/ticdc-bidirectional-replication.md)                     |  Y  |  Y  |  Y  | いいえ | いいえ | いいえ | いいえ | いいえ | いいえ |   いいえ  |
 | [TiCDC オープン API v2](/ticdc/ticdc-open-api-v2.md)                                                        |  Y  |  Y  | いいえ | いいえ | いいえ | いいえ | いいえ | いいえ | いいえ |   いいえ  |
 
-## 管理、可観測性、ツール {#management-observability-and-tools}
+## 管理、監視、ツール {#management-observability-and-tools}
 
-| 管理、可観測性、ツール                                                                                                       | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+| 管理、監視、ツール                                                                                                         | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 | ----------------------------------------------------------------------------------------------------------------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | [TiDBダッシュボードUI](/dashboard/dashboard-intro.md)                                                                    |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [TiDBダッシュボード継続的プロファイリング](/dashboard/continuous-profiling.md)                                                      |  Y  |  Y  |  Y  |  Y  |  え  |  え  | いいえ | いいえ | いいえ | いいえ |
@@ -251,7 +250,7 @@ summary: Learn about the feature overview of TiDB.
 | [TiFlash分散ストレージおよびコンピューティングアーキテクチャと S3 サポート](/tiflash/tiflash-disaggregated-and-s3.md)                            |  Y  |  え  | いいえ | いいえ | いいえ | いいえ | いいえ | いいえ | いいえ | いいえ |
 | [分散実行フレームワーク (DXF) タスク用の TiDB ノードの選択](/system-variables.md#tidb_service_scope-new-in-v740)                        |  Y  | いいえ | いいえ | いいえ | いいえ | いいえ | いいえ | いいえ | いいえ | いいえ |
 
-[^1]: TiDB は latin1 を誤って utf8 のサブセットとして扱います。詳細については[TiDB #18955](https://github.com/pingcap/tidb/issues/18955)を参照してください。
+[^1]: TiDB は latin1 を utf8 のサブセットとして誤って扱います。詳細については[TiDB #18955](https://github.com/pingcap/tidb/issues/18955)参照してください。
 
 [^2]: v6.5.0 以降、 [`tidb_allow_function_for_expression_index`](/system-variables.md#tidb_allow_function_for_expression_index-new-in-v520)システム変数でリストされている関数で作成された式インデックスはテスト済みで、本番環境で使用できます。将来のリリースでは、さらに多くの関数がサポートされる予定です。この変数でリストされていない関数については、対応する式インデックスを本番環境で使用することは推奨されません。詳細については、 [表現インデックス](/sql-statements/sql-statement-create-index.md#expression-index)を参照してください。
 

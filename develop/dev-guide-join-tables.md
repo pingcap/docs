@@ -1,11 +1,11 @@
 ---
 title: Multi-table Join Queries
-summary: 複数のテーブルを結合するためにJOINステートメントを使用します。結合タイプには、内部結合、左外部結合、右外部結合、クロスジョイン、左セミ結合があります。結合アルゴリズムにはインデックス結合、ハッシュ結合、マージ結合があります。結合順序を制御するためにSTRAIGHT_JOINを使用できます。TiDBはこれらの結合方法をサポートしています。
+summary: このドキュメントでは、複数テーブル結合クエリの使用方法について説明します。
 ---
 
 # 複数テーブル結合クエリ {#multi-table-join-queries}
 
-多くのシナリオでは、1 つのクエリを使用して複数のテーブルからデータを取得する必要があります。 `JOIN`ステートメントを使用して、2 つ以上のテーブルのデータを結合できます。
+多くのシナリオでは、1 つのクエリを使用して複数のテーブルからデータを取得する必要があります。1 `JOIN`ステートメントを使用して、2 つ以上のテーブルからのデータを結合できます。
 
 ## 結合タイプ {#join-types}
 
@@ -17,12 +17,12 @@ summary: 複数のテーブルを結合するためにJOINステートメント�
 
 ![Inner Join](/media/develop/inner-join.png)
 
-たとえば、最も多作な著者を知りたい場合は、 `authors`という名前の著者テーブルと`book_authors`名前の本の著者テーブルを結合する必要があります。
+たとえば、最も多作な著者を知りたい場合は、 `authors`という名前の著者テーブルと`book_authors`という名前の書籍著者テーブルを結合する必要があります。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-次の SQL ステートメントでは、キーワード`JOIN`を使用して、左側のテーブル`authors`と右側のテーブル`book_authors`の行を、結合条件`a.id = ba.author_id`を使用した内部結合として結合することを宣言します。結果セットには、結合条件を満たす行のみが含まれます。著者が本を書いていない場合、 `authors`テーブル内のその著者のレコードは結合条件を満たさないため、結果セットには表示されません。
+次の SQL 文では、キーワード`JOIN`を使用して、左側のテーブル`authors`と右側のテーブル`book_authors`の行を結合条件`a.id = ba.author_id`で内部結合として結合することを宣言します。結果セットには、結合条件を満たす行のみが含まれます。著者が本を 1 冊も書いていない場合、テーブル`authors`の著者のレコードは結合条件を満たさないため、結果セットには表示されません。
 
 ```sql
 SELECT ANY_VALUE(a.id) AS author_id, ANY_VALUE(a.name) AS author_name, COUNT(ba.book_id) AS books
@@ -84,18 +84,18 @@ public List<Author> getTop10AuthorsOrderByBooks() throws SQLException {
 
 ### 左外部結合 {#left-outer-join}
 
-左外部結合は、結合条件に一致する左側のテーブルのすべての行と右側のテーブルの値を返します。右側のテーブルに一致する行がない場合は、 `NULL`が入力されます。
+左外部結合は、左テーブルのすべての行と、結合条件に一致する右テーブルの値を返します。右テーブルに一致する行がない場合は、 `NULL`で埋められます。
 
 ![Left Outer Join](/media/develop/left-outer-join.png)
 
-場合によっては、複数のテーブルを使用してデータ クエリを完了したいが、結合条件が満たされないためにデータ セットが小さくなりすぎないようにする必要があります。
+場合によっては、データ クエリを完了するために複数のテーブルを使用したいが、結合条件が満たされないためにデータ セットが小さくなりすぎないようにしたいことがあります。
 
-たとえば、Bookshop アプリのホームページに、平均評価の新しい書籍のリストを表示するとします。この場合、新しい本はまだ誰も評価されていない可能性があります。内部結合を使用すると、これらの評価されていない書籍の情報がフィルターで除外されますが、これは期待どおりではありません。
+たとえば、Bookshop アプリのホームページで、平均評価の新しい本のリストを表示したいとします。この場合、新しい本はまだ誰にも評価されていない可能性があります。内部結合を使用すると、これらの評価されていない本の情報がフィルター処理されてしまいますが、これは期待どおりではありません。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-次の SQL ステートメントでは、 `LEFT JOIN`キーワードを使用して、左のテーブル`books`左外部結合で右のテーブル`ratings`に結合されることを宣言します。これにより、テーブル`books`のすべての行が返されるようになります。
+次の SQL ステートメントでは、キーワード`LEFT JOIN`を使用して、左側のテーブル`books`が右側のテーブル`ratings`に左外部結合で結合されることを宣言し、テーブル`books`のすべての行が返されるようにします。
 
 ```sql
 SELECT b.id AS book_id, ANY_VALUE(b.title) AS book_title, AVG(r.score) AS average_score
@@ -124,13 +124,13 @@ LIMIT 10;
     +------------+---------------------------------+---------------+
     10 rows in set (0.30 sec)
 
-最新刊はすでにかなりの評価を得ているようです。上記の方法を検証するために、SQL ステートメントを使用して書籍*「The Documentary of lion* 」のすべての評価を削除してみましょう。
+最近出版された本にはすでに多くの評価が付けられているようです。上記の方法を検証するために、SQL ステートメントを使用して、本*「The Documentary of lion」*のすべての評価を削除してみましょう。
 
 ```sql
 DELETE FROM ratings WHERE book_id = 3438991610;
 ```
 
-もう一度問い合わせてください。 *「The Documentary of lion」*という本は引き続き結果セットに表示されますが、右側のテーブル`ratings`の`score`から計算された`average_score`列には`NULL`が入力されます。
+再度クエリを実行します。結果セットには依然として*「The Documentary of lion」という*本が表示されますが、右側の表`ratings`の`score`から計算された`average_score`列目には`NULL`が入力されます。
 
     +------------+---------------------------------+---------------+
     | book_id    | book_title                      | average_score |
@@ -148,7 +148,7 @@ DELETE FROM ratings WHERE book_id = 3438991610;
     +------------+---------------------------------+---------------+
     10 rows in set (0.30 sec)
 
-`INNER JOIN`を使用するとどうなりますか?試してみるかどうかはあなた次第です。
+`INNER JOIN`使用するとどうなるでしょうか? 試してみるのはあなた次第です。
 
 </div>
 <div label="Java" value="java">
@@ -183,23 +183,23 @@ public List<Book> getLatestBooksWithAverageScore() throws SQLException {
 
 ### 右外部結合 {#right-outer-join}
 
-右外部結合は、右側のテーブルのすべてのレコードと、結合条件に一致する左側のテーブルの値を返します。一致する値がない場合は、 `NULL`が埋められます。
+右外部結合は、右テーブルのすべてのレコードと、結合条件に一致する左テーブルの値を返します。一致する値がない場合は、 `NULL`で埋められます。
 
 ![Right Outer Join](/media/develop/right-outer-join.png)
 
-### クロスジョイン {#cross-join}
+### クロス結合 {#cross-join}
 
 結合条件が定数の場合、2 つのテーブル間の内部結合は[クロス結合](https://en.wikipedia.org/wiki/Join_(SQL)#Cross_join)と呼ばれます。クロス結合は、左側のテーブルのすべてのレコードを右側のテーブルのすべてのレコードに結合します。左側のテーブルのレコード数が`m`で、右側のテーブルのレコード数が`n`の場合、結果セットには`m \* n`レコードが生成されます。
 
 ### 左セミ結合 {#left-semi-join}
 
-TiDB は SQL 構文レベルで`LEFT SEMI JOIN table_name`をサポートしません。ただし、実行計画レベルでは、 [サブクエリ関連の最適化](/subquery-optimization.md)書き換えられた同等の JOIN クエリのデフォルトの結合方法として`semi join`を使用します。
+TiDB は、SQL 構文レベルでは`LEFT SEMI JOIN table_name`サポートしていません。ただし、実行プラン レベルでは、 [サブクエリ関連の最適化](/subquery-optimization.md)書き換えられた同等の JOIN クエリのデフォルトの結合方法として`semi join`を使用します。
 
 ## 暗黙的な結合 {#implicit-join}
 
-結合を明示的に宣言する`JOIN`ステートメントが SQL 標準に追加される前は、 `FROM t1, t2`句を使用して SQL ステートメント内で 2 つ以上のテーブルを結合し、 `WHERE t1.id = t2.id`句を使用して結合の条件を指定することができました。これは、内部結合を使用してテーブルを結合する暗黙的な結合として理解できます。
+明示的に結合を宣言する`JOIN`文が SQL 標準に追加される前は、 `FROM t1, t2`句を使用して SQL 文で 2 つ以上のテーブルを結合し、 `WHERE t1.id = t2.id`句を使用して結合の条件を指定することができました。これは、内部結合を使用してテーブルを結合する暗黙的な結合として理解できます。
 
-## 関連するアルゴリズムに参加する {#join-related-algorithms}
+## 結合関連アルゴリズム {#join-related-algorithms}
 
 TiDB は、次の一般的なテーブル結合アルゴリズムをサポートしています。
 
@@ -207,11 +207,11 @@ TiDB は、次の一般的なテーブル結合アルゴリズムをサポート
 -   [ハッシュ結合](/explain-joins.md#hash-join)
 -   [マージ結合](/explain-joins.md#merge-join)
 
-オプティマイザは、結合テーブル内のデータ量などの要因に基づいて、実行する適切な結合アルゴリズムを選択します。 `EXPLAIN`ステートメントを使用すると、クエリが結合にどのアルゴリズムを使用しているかを確認できます。
+オプティマイザーは、結合されたテーブルのデータ量などの要素に基づいて、実行する適切な結合アルゴリズムを選択します。 `EXPLAIN`ステートメントを使用すると、クエリが結合に使用するアルゴリズムを確認できます。
 
-TiDB のオプティマイザが最適な結合アルゴリズムに従って実行されない場合は、 [オプティマイザーのヒント](/optimizer-hints.md)を使用して TiDB により適切な結合アルゴリズムを使用させることができます。
+TiDB のオプティマイザーが最適な結合アルゴリズムに従って実行されない場合は、 [オプティマイザーのヒント](/optimizer-hints.md)使用して、TiDB により適切な結合アルゴリズムを使用するように強制できます。
 
-たとえば、オプティマイザによって選択されていないハッシュ結合アルゴリズムを使用すると、上記の左結合クエリの例がより高速に実行されると仮定すると、キーワード`SELECT`の後にヒント`/*+ HASH_JOIN(b, r) */`追加できます。テーブルに別名がある場合は、ヒントでその別名を使用することに注意してください。
+たとえば、上記の左結合クエリの例が、オプティマイザによって選択されていないハッシュ結合アルゴリズムを使用してより速く実行されると仮定すると、 `SELECT`キーワードの後にヒント`/*+ HASH_JOIN(b, r) */`を追加できます。テーブルに別名がある場合は、ヒントで別名を使用することに注意してください。
 
 ```sql
 EXPLAIN SELECT /*+ HASH_JOIN(b, r) */ b.id AS book_id, ANY_VALUE(b.title) AS book_title, AVG(r.score) AS average_score
@@ -222,18 +222,18 @@ ORDER BY b.published_at DESC
 LIMIT 10;
 ```
 
-結合アルゴリズムに関するヒント:
+結合アルゴリズムに関連するヒント:
 
 -   [MERGE_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#merge_joint1_name--tl_name-)
 -   [INL_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#inl_joint1_name--tl_name-)
 -   [INL_HASH_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#inl_hash_join)
 -   [HASH_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#hash_joint1_name--tl_name-)
 
-## 注文に参加する {#join-orders}
+## 注文を結合する {#join-orders}
 
-実際のビジネス シナリオでは、複数のテーブルの結合ステートメントが非常に一般的です。結合の実行効率は、結合における各テーブルの順序に関係します。 TiDB は、 結合したテーブルの再配置アルゴリズムを使用して、複数のテーブルが結合される順序を決定します。
+実際のビジネス シナリオでは、複数のテーブルの結合ステートメントが非常に一般的です。結合の実行効率は、結合内の各テーブルの順序に関係します。TiDB は、結合したテーブルの再配置アルゴリズムを使用して、複数のテーブルを結合する順序を決定します。
 
-オプティマイザーによって選択された結合順序が期待どおりに最適でない場合は、 `STRAIGHT_JOIN`を使用して、TiDB が`FROM`句で使用されるテーブルの順序でクエリを結合するように強制できます。
+オプティマイザによって選択された結合順序が予想どおりに最適でない場合は、 `STRAIGHT_JOIN`使用して、TiDB が`FROM`句で使用されるテーブルの順序でクエリを結合するように強制できます。
 
 ```sql
 EXPLAIN SELECT *
@@ -241,9 +241,23 @@ FROM authors a STRAIGHT_JOIN book_authors ba STRAIGHT_JOIN books b
 WHERE b.id = ba.book_id AND ba.author_id = a.id;
 ```
 
-この結合したテーブルの再配置アルゴリズムの実装の詳細と制限の詳細については、 [結合したテーブルの再配置アルゴリズムの概要](/join-reorder.md)を参照してください。
+この結合したテーブルの再配置アルゴリズムの実装の詳細と制限の詳細については、 [結合したテーブルの再配置アルゴリズムの紹介](/join-reorder.md)を参照してください。
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
--   [テーブル結合を使用する Explain ステートメント](/explain-joins.md)
--   [結合したテーブルの再配置の概要](/join-reorder.md)
+-   [テーブル結合を使用するステートメントを説明する](/explain-joins.md)
+-   [結合したテーブルの再配置の変更の概要](/join-reorder.md)
+
+## 助けが必要？ {#need-help}
+
+<CustomContent platform="tidb">
+
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+
+</CustomContent>

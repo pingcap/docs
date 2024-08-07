@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with MySQL Connector/Python
-summary: Learn how to connect to TiDB using MySQL Connector/Python. This tutorial gives Python sample code snippets that work with TiDB using MySQL Connector/Python.
+summary: MySQL Connector/Python を使用して TiDB に接続する方法を学習します。このチュートリアルでは、MySQL Connector/Python を使用して TiDB で動作する Python サンプル コード スニペットを示します。
 ---
 
 # MySQL Connector/Python で TiDB に接続する {#connect-to-tidb-with-mysql-connector-python}
@@ -100,7 +100,7 @@ pip install -r requirements.txt
     cp .env.example .env
     ```
 
-6.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
+6.  対応する接続文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
 
     ```dotenv
     TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
@@ -132,7 +132,7 @@ pip install -r requirements.txt
     cp .env.example .env
     ```
 
-5.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
+5.  対応する接続文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
 
     ```dotenv
     TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
@@ -156,7 +156,7 @@ pip install -r requirements.txt
     cp .env.example .env
     ```
 
-2.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
+2.  対応する接続文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
 
     ```dotenv
     TIDB_HOST='{tidb_server_host}'
@@ -175,7 +175,7 @@ pip install -r requirements.txt
 
 ### ステップ4: コードを実行して結果を確認する {#step-4-run-the-code-and-check-the-result}
 
-1.  サンプルコードを実行するには、次のコマンドを実行します。
+1.  サンプル コードを実行するには、次のコマンドを実行します。
 
     ```shell
     python mysql_connector_example.py
@@ -187,7 +187,7 @@ pip install -r requirements.txt
 
 次のサンプル コード スニペットを参照して、独自のアプリケーション開発を完了することができます。
 
-完全なサンプル コードとその実行方法については、 [tidb サンプル/tidb-python-mysqlconnector-クイックスタート](https://github.com/tidb-samples/tidb-python-mysqlconnector-quickstart)リポジトリを参照してください。
+完全なサンプル コードとその実行方法については、 [tidb-samples/tidb-python-mysqlconnector-クイックスタート](https://github.com/tidb-samples/tidb-python-mysqlconnector-quickstart)リポジトリを参照してください。
 
 ### TiDBに接続する {#connect-to-tidb}
 
@@ -264,7 +264,7 @@ with get_connection(autocommit=True) as conn:
 
 ### ドライバーまたは ORM フレームワークを使用していますか? {#using-driver-or-orm-framework}
 
-Python ドライバーはデータベースへの低レベル アクセスを提供しますが、開発者は次の作業を行う必要があります。
+Python ドライバーはデータベースへの低レベルのアクセスを提供しますが、開発者は次の作業を行う必要があります。
 
 -   データベース接続を手動で確立および解放します。
 -   データベース トランザクションを手動で管理します。
@@ -285,12 +285,12 @@ Python ドライバーはデータベースへの低レベル アクセスを提
 
 <CustomContent platform="tidb">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](/support.md)について質問します。
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
 
 </CustomContent>

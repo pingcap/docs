@@ -1,6 +1,6 @@
 ---
 title: Third-Party Tools Supported by TiDB
-summary: Learn about third-party tools supported by TiDB.
+summary: TiDB でサポートされているサードパーティ ツールについて学習します。
 ---
 
 # TiDB がサポートするサードパーティ ツール {#third-party-tools-supported-by-tidb}
@@ -40,3 +40,17 @@ PingCAP はコミュニティと連携し、サードパーティ ツールに�
 | [ジェットブレインズ データグリップ](https://www.jetbrains.com/datagrip/) | 2023.2.1      | 満杯      | [JetBrains DataGrip で TiDB に接続する](/develop/dev-guide-gui-datagrip.md)        |
 | [DBeaver](https://dbeaver.io/)                           | 23.0.3        | 満杯      | [DBeaverでTiDBに接続する](/develop/dev-guide-gui-dbeaver.md)                       |
 | [ビジュアルスタジオコード](https://code.visualstudio.com/)           | 1.72.0        | 満杯      | [Visual Studio Code で TiDB に接続する](/develop/dev-guide-gui-vscode-sqltools.md) |
+
+## 助けが必要？ {#need-help}
+
+<CustomContent platform="tidb">
+
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+
+</CustomContent>

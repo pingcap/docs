@@ -1,11 +1,11 @@
 ---
 title: Migration FAQs
-summary: Learn about the FAQs related to data migration.
+summary: データ移行に関するよくある質問について説明します。
 ---
 
 # 移行に関するよくある質問 {#migration-faqs}
 
-このドキュメントでは、TiDB データ移行に関するよくある質問 (FAQ) をまとめています。
+このドキュメントでは、TiDB データ移行に関連するよくある質問 (FAQ) をまとめています。
 
 移行関連ツールに関するよくある質問については、以下のリストの対応するリンクをクリックしてください。
 
@@ -90,7 +90,7 @@ DB2 または Oracle から TiDB にすべてのデータを移行するか、�
 
 ### エラー: java.sql.BatchUpdateException: Sqoop を使用して TiDB にデータを<code>batches</code>で書き込むときに、 <code>java.sql.BatchUpdateException:statement count 5001 exceeds the transaction limitation</code> {#error-code-java-sql-batchupdateexception-statement-count-5001-exceeds-the-transaction-limitation-code-while-using-sqoop-to-write-data-into-tidb-in-code-batches-code}
 
-Sqoop では、 `--batch`各バッチで 100 個`statement`をコミットすることを意味しますが、デフォルトでは各`statement`に 100 個の SQL ステートメントが含まれます。したがって、100 * 100 = 10000 個の SQL ステートメントとなり、単一の TiDB トランザクションで許可されるステートメントの最大数である 5000 を超えます。
+Sqoop では、 `--batch`各バッチで 100 個`statement`をコミットすることを意味しますが、デフォルトでは各`statement` 100 個の SQL ステートメントが含まれます。したがって、100 * 100 = 10000 個の SQL ステートメントとなり、単一の TiDB トランザクションで許可されるステートメントの最大数である 5000 を超えます。
 
 2つの解決策:
 
@@ -164,15 +164,15 @@ Google Cloud Spanner には[同様の制限](https://cloud.google.com/spanner/do
 
 ### データを削除した後、クエリ速度が遅くなるのはなぜですか? {#why-does-the-query-speed-getting-slow-after-deleting-data}
 
-大量のデータを削除すると、無駄なキーが大量に残り、クエリの効率に影響します。現在、この問題を解決すると期待されるリージョンマージ機能が開発中です。詳細については、 [TiDB ベストプラクティスのデータセクションの削除](https://en.pingcap.com/blog/tidb-best-practice/#write)を参照してください。
+大量のデータを削除すると、無駄なキーが大量に残り、クエリの効率に影響します。現在、この問題を解決すると期待されるリージョンマージ機能が開発中です。詳細については、 [TiDB ベストプラクティスのデータセクションの削除](https://www.pingcap.com/blog/tidb-best-practice/#write)を参照してください。
 
 ### データを削除する最も効率的な方法は何ですか? {#what-is-the-most-efficient-way-of-deleting-data}
 
 大量のデータを削除する場合は、 `Delete from t where xx limit 5000;`使用することをお勧めします。ループを介して削除し、 `Affected Rows == 0`ループ終了の条件として使用して、トランザクションサイズの制限を超えないようにします。ビジネスフィルタリングロジックを満たすという前提条件により、強力なフィルターインデックス列を追加するか、 `id >= 5000*n+m and id < 5000*(n+1)+m`など、主キーを直接使用して範囲を選択することをお勧めします。
 
-一度に削除する必要があるデータの量が非常に多い場合、このループ メソッドは、削除ごとに逆方向に移動するため、どんどん遅くなります。前のデータを削除した後、多くの削除済みフラグが短期間残り (その後、すべてガベージ コレクションによって処理されます)、次の Delete ステートメントに影響します。可能であれば、Where 条件を調整することをお勧めします。1 [詳細はTiDBベストプラクティスを参照](https://en.pingcap.com/blog/tidb-best-practice/#write)参照してください。
+一度に削除する必要があるデータの量が非常に多い場合、このループ メソッドは、削除ごとに逆方向に移動するため、どんどん遅くなります。前のデータを削除した後、多くの削除済みフラグが短期間残り (その後、すべてガベージ コレクションによって処理されます)、次の Delete ステートメントに影響します。可能であれば、Where 条件を調整することをお勧めします。1 [詳細はTiDBベストプラクティスを参照](https://www.pingcap.com/blog/tidb-best-practice/#write)参照してください。
 
-### TiDB のデータ読み込み速度を向上させるにはどうすればよいでしょうか? {#how-to-improve-the-data-loading-speed-in-tidb}
+### TiDB でのデータ読み込み速度を向上させるにはどうすればよいでしょうか? {#how-to-improve-the-data-loading-speed-in-tidb}
 
 -   [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)ツールは分散データ インポート用に開発されました。データ インポート プロセスは、パフォーマンス上の理由から完全なトランザクション プロセスを実行しないことに注意してください。したがって、インポート プロセス中にインポートされるデータのACID制約は保証されません。インポートされたデータのACID制約は、インポート プロセス全体が終了してからのみ保証されます。したがって、適用可能なシナリオには、主に新しいデータ (新しいテーブルや新しいインデックスなど) のインポート、または完全なバックアップと復元 (元のテーブルを切り捨ててからデータをインポート) が含まれます。
--   TiDB のデータのロードは、ディスクとクラスター全体の状態に関係しています。データをロードするときは、ホストのディスク使用率、TiClient エラー、バックオフ、スレッド CPU などのメトリックに注意してください。これらのメトリックを使用してボトルネックを分析できます。
+-   TiDB へのデータのロードは、ディスクとクラスター全体の状態に関係しています。データをロードするときは、ホストのディスク使用率、TiClient エラー、バックオフ、スレッド CPU などのメトリックに注意してください。これらのメトリックを使用してボトルネックを分析できます。

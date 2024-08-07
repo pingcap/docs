@@ -1,6 +1,6 @@
 ---
 title: TiDB Serverless Limitations and Quotas
-summary: Learn about the limitations of TiDB Serverless.
+summary: TiDB Serverless の制限について学習します。
 aliases: ['/tidbcloud/serverless-tier-limitations']
 ---
 
@@ -30,14 +30,14 @@ TiDB Serverless は、TiDB がサポートするほぼすべてのワークロ�
 
 ### メンテナンス期間 {#maintenance-window}
 
--   [メンテナンス期間](/tidb-cloud/configure-maintenance-window.md)は現在利用できません。
+-   [メンテナンス期間](/tidb-cloud/configure-maintenance-window.md)現在利用できません。
 
 ### 監視と診断 {#monitoring-and-diagnosis}
 
 -   現在[サードパーティのモニタリング統合](/tidb-cloud/third-party-monitoring-integrations.md)はご利用いただけません。
 -   [組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md)現在利用できません。
 -   [キービジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)現在利用できません。
--   [インデックスインサイト](/tidb-cloud/tune-performance.md#index-insight-beta)は現在利用できません。
+-   [インデックスインサイト](/tidb-cloud/tune-performance.md#index-insight-beta)現在利用できません。
 
 ### セルフサービスアップグレード {#self-service-upgrades}
 
@@ -48,9 +48,12 @@ TiDB Serverless は、TiDB がサポートするほぼすべてのワークロ�
 -   現在、 [チェンジフィード](/tidb-cloud/changefeed-overview.md) TiDB Serverless ではサポートされていません。
 -   現在、 [データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md) TiDB Serverless ではサポートされていません。
 
+### 存続時間 (TTL) {#time-to-live-ttl}
+
+-   TiDB Serverless では、テーブルの[`TTL_JOB_INTERVAL`](/time-to-live.md#ttl-job)属性は`15m`に固定されており、変更できません。つまり、TiDB Serverless は、期限切れのデータをクリーンアップするために 15 分ごとにバックグラウンド ジョブをスケジュールします。
+
 ### その他 {#others}
 
--   [存続時間 (TTL)](/time-to-live.md)現在利用できません。
 -   トランザクションは30分以上継続することはできません。
 -   SQL の制限の詳細については、 [制限されたSQL機能](/tidb-cloud/limited-sql-features.md)を参照してください。
 
@@ -61,6 +64,7 @@ TiDB Cloudの各組織では、デフォルトで最大 5 [フリークラスタ
 組織内の最初の 5 つの TiDB Serverless クラスターについては、無料かスケーラブルかに関係なく、 TiDB Cloud はそれぞれに対して次のように無料使用量割り当てを提供します。
 
 -   行ベースのstorage: 5 GiB
+-   列指向storage: 5 GiB
 -   [リクエストユニット (RU)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 毎月5000万RU
 
 リクエスト ユニット (RU) は、クエリまたはトランザクションのリソース消費を追跡するために使用される測定単位です。これは、データベース内の特定のリクエストを処理するために必要な計算リソースを見積もることができるメトリックです。リクエスト ユニットは、 TiDB Cloud Serverless サービスの課金単位でもあります。

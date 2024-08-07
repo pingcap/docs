@@ -1,6 +1,6 @@
 ---
 title: Replicate Data to Storage Services
-summary: Learn how to replicate data to storage services using TiCDC, and learn about the storage path of the replicated data.
+summary: TiCDC を使用してデータをstorageサービスに複製する方法と、複製されたデータのstorageパスについて学習します。
 ---
 
 # ストレージサービスにデータを複製する {#replicate-data-to-storage-services}
@@ -24,7 +24,7 @@ cdc cli changefeed create \
 出力は次のようになります。
 
 ```shell
-Info: {"upstream_id":7171388873935111376,"namespace":"default","id":"simple-replication-task","sink_uri":"s3://logbucket/storage_test?protocol=canal-json","create_time":"2024-02-29T18:52:05.566016967+08:00","start_ts":437706850431664129,"engine":"unified","config":{"case_sensitive":false,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":false,"sync_point_interval":600000000000,"sync_point_retention":86400000000000,"filter":{"rules":["*.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"canal-json","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v7.5.1"}
+Info: {"upstream_id":7171388873935111376,"namespace":"default","id":"simple-replication-task","sink_uri":"s3://logbucket/storage_test?protocol=canal-json","create_time":"2024-08-05T18:52:05.566016967+08:00","start_ts":437706850431664129,"engine":"unified","config":{"case_sensitive":false,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":false,"sync_point_interval":600000000000,"sync_point_retention":86400000000000,"filter":{"rules":["*.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"canal-json","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v7.5.3"}
 ```
 
 -   `--server` : TiCDC クラスター内の任意の TiCDCサーバーのアドレス。
@@ -105,7 +105,7 @@ URI の`[query_parameters]`には、次のパラメータを設定できます�
 
 アクセス キーを指定して、GCS へのアクセスに使用するアカウントを設定できます。認証は指定された`credentials-file`に従って実行されます。URI でキーを指定することに加えて、次の方法がサポートされています。
 
--   TiCDC は、 `$GOOGLE_APPLICATION_CREDENTIALS`環境変数で指定されたパスにあるファイルを読み取ります。
+-   TiCDC は、 `$GOOGLE_APPLICATION_CREDENTIALS`環境変数で指定されたパス内のファイルを読み取ります。
 -   TiCDC はファイル`~/.config/gcloud/application_default_credentials.json`を読み取ります。
 -   TiCDC は、クラスターが GCE または GAE で実行されているときにメタデータサーバーから資格情報を取得します。
 
@@ -272,7 +272,7 @@ URI の`[query_parameters]`には、次のパラメータを設定できます�
 -   `TableColumns` : 1 つ以上のマップの配列。各マップはソース テーブル内の列を表します。
     -   `ColumnName` :カラム名。
     -   `ColumnType` :カラムタイプ。詳細は[データ・タイプ](#data-type)を参照してください。
-    -   `ColumnLength` :カラムの長さ。詳細は[データ・タイプ](#data-type)を参照。
+    -   `ColumnLength` :カラムの長さ。詳細は[データ・タイプ](#data-type)を参照してください。
     -   `ColumnPrecision` :カラムの精度。詳細については[データ・タイプ](#data-type)を参照してください。
     -   `ColumnScale` : 小数点以下の桁数（スケール）。詳細は[データ・タイプ](#data-type)を参照。
     -   `ColumnNullable` : このオプションの値が`true`場合、列は NULL になることができます。

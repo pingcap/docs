@@ -1,6 +1,6 @@
 ---
 title: SQL FAQs
-summary: Learn about the FAQs related to TiDB SQL.
+summary: TiDB SQLに関連する FAQ について説明します。
 ---
 
 # SQLに関するよくある質問 {#sql-faqs}
@@ -146,7 +146,7 @@ TiDB の自動増分 ID 機能は、自動的に増分され一意であるこ�
 
 ## TiDB の<code>sql_mode</code>を変更するにはどうすればよいですか? {#how-do-i-modify-the-code-sql-mode-code-in-tidb}
 
-TiDB は、SESSION または GLOBAL ベースで[`sql_mode`](/system-variables.md#sql_mode)システム変数を変更することをサポートします。
+TiDB は、SESSION または GLOBAL ベースで[`sql_mode`](/system-variables.md#sql_mode)システム変数を変更することをサポートしています。
 
 -   [`GLOBAL`](/sql-statements/sql-statement-set-variable.md)スコープ変数への変更は、クラスターの残りのサーバーに伝播し、再起動後も保持されます。つまり、各 TiDBサーバーで`sql_mode`値を変更する必要はありません。
 -   `SESSION`スコープ変数への変更は、現在のクライアント セッションにのみ影響します。サーバーを再起動すると、変更は失われます。
@@ -182,11 +182,11 @@ Sqoop では、 `--batch`各バッチで 100 個のステートメントをコ�
 
 ## データを削除するとクエリ速度が遅くなるのはなぜですか? {#why-does-the-query-speed-get-slow-after-data-is-deleted}
 
-大量のデータを削除すると、無駄なキーが大量に残り、クエリの効率に影響します。この問題を解決するには、 [リージョン結合](/best-practices/massive-regions-best-practices.md#method-3-enable-region-merge)機能を使用できます。詳細については、 [TiDB ベストプラクティスのデータセクションの削除](https://en.pingcap.com/blog/tidb-best-practice/#write)を参照してください。
+大量のデータを削除すると、無駄なキーが大量に残り、クエリの効率に影響します。この問題を解決するには、 [リージョン結合](/best-practices/massive-regions-best-practices.md#method-3-enable-region-merge)機能を使用できます。詳細については、 [TiDB ベストプラクティスのデータセクションの削除](https://www.pingcap.com/blog/tidb-best-practice/#write)を参照してください。
 
 ## データを削除した後、storageスペースの回復に時間がかかる場合はどうすればいいですか? {#what-should-i-do-if-it-is-slow-to-reclaim-storage-space-after-deleting-data}
 
-TiDB はマルチバージョン同時実行制御 (MVCC) を使用するため、古いデータが新しいデータで上書きされても、古いデータは置き換えられず、新しいデータとともに保持されます。データのバージョンを識別するためにタイムスタンプが使用されます。データを削除しても、すぐにスペースが再利用されるわけではありません。同時トランザクションが行の以前のバージョンを参照できるように、ガベージ コレクションは遅延されます。これは、 [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) (デフォルト: `10m0s` ) システム変数を使用して構成できます。
+TiDB はマルチバージョン同時実行制御 (MVCC) を使用するため、古いデータが新しいデータで上書きされると、古いデータは置き換えられず、新しいデータとともに保持されます。タイムスタンプは、データのバージョンを識別するために使用されます。データを削除しても、すぐにスペースが再利用されるわけではありません。同時トランザクションが行の以前のバージョンを参照できるように、ガベージ コレクションは遅延されます。これは、 [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) (デフォルト: `10m0s` ) システム変数を使用して構成できます。
 
 ## <code>SHOW PROCESSLIST</code>システム プロセス ID を表示しますか? {#does-code-show-processlist-code-display-the-system-process-id}
 
@@ -197,7 +197,7 @@ TiDB `SHOW PROCESSLIST`の表示内容は MySQL `SHOW PROCESSLIST`とほぼ同�
 
 ## SQL コミットの実行優先度を制御または変更するにはどうすればよいですか? {#how-to-control-or-change-the-execution-priority-of-sql-commits}
 
-TiDB は、 [グローバル](/system-variables.md#tidb_force_priority)ステートメントまたは個々のステートメント ベースで優先度を変更することをサポートしています。優先度には次の意味があります。
+TiDB は、 [グローバル](/system-variables.md#tidb_force_priority)または個々のステートメント ベースでの優先度の変更をサポートしています。優先度には次の意味があります。
 
 -   `HIGH_PRIORITY` : このステートメントの優先度は高いです。つまり、TiDB はこのステートメントを優先し、最初に実行します。
 
@@ -209,7 +209,7 @@ TiDB は、 [グローバル](/system-variables.md#tidb_force_priority)ステー
 >
 > v6.6.0 以降、TiDB は[リソース管理](/tidb-resource-control.md)サポートします。この機能を使用すると、異なるリソース グループで異なる優先度の SQL ステートメントを実行できます。これらのリソース グループに適切なクォータと優先度を構成することで、異なる優先度の SQL ステートメントのスケジュール制御を向上させることができます。リソース制御を有効にすると、ステートメントの優先度は無効になります。異なる SQL ステートメントのリソース使用を管理するには、 [リソース管理](/tidb-resource-control.md)使用することをお勧めします。
 
-上記の 2 つのパラメータを TiDB の DML と組み合わせて使用​​することができます。例:
+上記の 2 つのパラメータを TiDB の DML と組み合わせて使用することができます。例:
 
 1.  データベースに SQL ステートメントを記述して優先順位を調整します。
 
@@ -262,7 +262,7 @@ DDL 操作がブロックされておらず、各 TiDBサーバーがスキー�
 
 -   複数の DDL ステートメントが同時に実行される場合、キューで待機する必要がある可能性があるため、後の DDL ステートメントの実行が遅くなる可能性があります。キューイングのシナリオには次のものがあります。
 
-    -   同じタイプの DDL ステートメントをキューに入れる必要があります。たとえば、 `CREATE TABLE`と`CREATE DATABASE`どちらも一般的な DDL ステートメントであるため、両方の操作を同時に実行する場合はキューに入れる必要があります。TiDB v6.2.0 以降では、並列 DDL ステートメントがサポートされていますが、DDL 実行で TiDB コンピューティング リソースが過度に使用されるのを避けるために、同時実行の制限もあります。DDL が同時実行の制限を超えると、キューに入れられます。
+    -   同じタイプの DDL ステートメントをキューに入れる必要があります。たとえば、 `CREATE TABLE`と`CREATE DATABASE`どちらも一般的な DDL ステートメントであるため、両方の操作を同時に実行する場合はキューに入れる必要があります。TiDB v6.2.0 以降では、並列 DDL ステートメントがサポートされていますが、DDL 実行に多くの TiDB コンピューティング リソースが使用されるのを避けるために、同時実行の制限もあります。DDL が同時実行の制限を超えると、キューに入れられます。
     -   同じテーブルに対して実行される DDL 操作には依存関係があります。後の DDL ステートメントは、前の DDL 操作が完了するまで待機する必要があります。
 
 -   クラスターが正常に起動された後、DDL モジュールが DDL 所有者を選出するため、最初の DDL 操作の実行時間が比較的長くなる可能性があります。
@@ -328,7 +328,7 @@ TiDB v6.2.0 以降、TiDB DDL モジュールは並行フレームワークを�
     -   現在のクラスターの所有者を取得するには`curl http://{TiDBIP}:10080/info/all`使用します。
     -   監視ダッシュボード**DDL** &gt; **DDL META OPM**から特定の期間の所有者をビュー。
 
--   所有者が存在しない場合は、次を使用して所有者の選択を手動でトリガーしてみてください: `curl -X POST http://{TiDBIP}:10080/ddl/owner/resign` 。
+-   所有者が存在しない場合は、次のコマンドを使用して所有者の選択を手動でトリガーしてみてください: `curl -X POST http://{TiDBIP}:10080/ddl/owner/resign` 。
 -   所有者が存在する場合は、Goroutine スタックをエクスポートし、スタックしている可能性のある場所を確認します。
 
 ## SQL最適化 {#sql-optimization}
@@ -341,14 +341,14 @@ TiDB v6.2.0 以降、TiDB DDL モジュールは並行フレームワークを�
 
 [統計入門](/statistics.md)参照。
 
-### <code>select count(1)</code>を最適化するにはどうすればいいですか? {#how-to-optimize-code-select-count-1-code}
+### <code>select count(1)</code>最適化するには？ {#how-to-optimize-code-select-count-1-code}
 
 `count(1)`文はテーブル内の行の総数をカウントします。同時実行度を向上させると、速度が大幅に向上します。同時実行性を変更するには、 [`tidb_distsql_scan_concurrency`ドキュメント](/system-variables.md#tidb_distsql_scan_concurrency)を参照してください。ただし、CPU と I/O リソースにも依存します。TiDB はすべてのクエリで TiKV にアクセスします。データ量が少ない場合、MySQL はすべてメモリ内にあり、TiDB はネットワーク アクセスを実行する必要があります。
 
 推奨事項:
 
 -   ハードウェア構成を改善します。1 [ソフトウェアおよびハードウェアの要件](/hardware-and-software-requirements.md)参照してください。
--   同時実行性を向上させます。デフォルト値は 10 です。これを 50 に向上させて試すことができます。ただし、通常はデフォルト値の 2 ～ 4 倍の向上が得られます。
+-   同時実行性を向上させます。デフォルト値は 10 です。これを 50 に向上させて試すことができます。ただし、通常はデフォルト値の 2 ～ 4 倍の向上になります。
 -   大量のデータの場合は`count`テストします。
 -   TiKV 構成を最適化します。1 と[TiKV メモリのパフォーマンスを調整する](/tune-tikv-memory-performance.md) [TiKV スレッドのパフォーマンスを調整する](/tune-tikv-thread-performance.md)参照してください。
 -   [コプロセッサーキャッシュ](/coprocessor-cache.md)有効にします。
@@ -393,7 +393,7 @@ ADMIN SHOW DDL;
 
 `cop task`分散実行のために KV エンドにプッシュダウンされるコンピューティング タスクです。2 `root task` TiDB エンドでの単一ポイント実行のためのコンピューティング タスクです。
 
-通常、 `root task`の入力データは`cop task`から来ます。 `root task`データを処理しているとき、 TiKV の`cop task`同時にデータを処理し、 TiDB の`root task`のプルを待機します。 したがって、 `cop`タスクは`root task`と同時に実行されていると見なすことができますが、それらのデータには上流と下流の関係があります。 実行プロセス中、それらはある時間内に同時に実行されます。 たとえば、最初の`cop task` [100, 200] のデータを処理し、2 番目の`cop task` [1, 100] のデータを処理します。 詳細については、 [TiDBクエリプランを理解する](/explain-overview.md)を参照してください。
+通常、 `root task`の入力データは`cop task`から来ます。 `root task`データを処理しているとき、 TiKV の`cop task`同時にデータを処理し、 TiDB の`root task`のプルを待機できます。 したがって、 `cop`タスクは`root task`と同時に実行されていると見なすことができますが、それらのデータには上流と下流の関係があります。 実行プロセス中、それらはある時間内に同時に実行されます。 たとえば、最初の`cop task` [100, 200] のデータを処理し、2 番目の`cop task` [1, 100] のデータを処理します。 詳細については、 [TiDBクエリプランを理解する](/explain-overview.md)を参照してください。
 
 ## データベースの最適化 {#database-optimization}
 

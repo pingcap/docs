@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.0.0 Release Notes
-summary: Learn about the new features, compatibility changes, improvements, and bug fixes in TiDB 6.0.0.
+summary: TiDB 6.0.0 の新機能、互換性の変更、改善、バグ修正について説明します。
 ---
 
 # TiDB 6.0.0 リリースノート {#tidb-6-0-0-release-notes}
@@ -22,13 +22,13 @@ TiDB バージョン: 6.0.0-DMR
 -   ホットスポットの小さなテーブルをメモリにキャッシュすることで、アクセス パフォーマンスが大幅に向上し、スループットが向上し、アクセスレイテンシーが短縮されます。
 -   メモリ内の悲観的ロックを最適化します。悲観的ロックによって発生するパフォーマンスのボトルネックに対して、悲観的ロックのメモリ最適化により、レイテンシーを10% 削減し、QPS を 10% 向上させることができます。
 -   実行プランを共有するように準備済みステートメントを強化することで、CPU リソースの消費が削減され、SQL 実行の効率が向上します。
--   より多くの式のプッシュダウンとエラスティック スレッド プールの一般提供 (GA) をサポートすることで、MPP エンジンの計算パフォーマンスが向上します。
+-   より多くの式のプッシュダウンとエラスティック スレッド プールの一般提供 (GA) をサポートすることで、MPP エンジンのコンピューティング パフォーマンスが向上します。
 -   多数の移行タスクの管理を容易にするためにDM WebUIを追加します。
 -   大規模クラスターでデータを複製する際の TiCDC の安定性と効率性が向上しました。TiCDC は現在、100,000 個のテーブルを同時に複製することをサポートしています。
 -   TiKV ノードの再起動後のリーダー バランシングを高速化し、再起動後のビジネス回復の速度を向上させます。
 -   統計の自動更新のキャンセルをサポートし、リソースの競合を減らし、SQL パフォーマンスへの影響を制限します。
 -   TiDB クラスターの自動診断サービスであるPingCAPクリニックを提供します (テクニカル プレビュー版)。
--   エンタープライズレベルのデータベース管理プラットフォームである TiDB Enterprise Manager を提供します。
+-   エンタープライズ レベルのデータベース管理プラットフォームである TiDB Enterprise Manager を提供します。
 
 また、TiDB の HTAP ソリューションのコアコンポーネントとして、 TiFlash <sup>TM が</sup>今回のリリースで正式にオープンソース化されました。詳細については、 [TiFlashリポジトリ](https://github.com/pingcap/tiflash)を参照してください。
 
@@ -52,7 +52,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
 -   SQLベースのデータ配置ルール
 
-    TiDB は、優れたスケーラビリティを備えた分散データベースです。通常、データは複数のサーバー、さらには複数のデータセンターにまたがって展開されます。そのため、データ スケジューリング管理は、TiDB の最も重要な基本機能の 1 つです。ほとんどの場合、ユーザーはデータのスケジュールと管理方法を気にする必要はありません。ただし、アプリケーションの複雑さが増すにつれて、分離とアクセスレイテンシーによって発生する展開の変更が TiDB の新たな課題になっています。v6.0.0 以降、TiDB は SQL インターフェイスに基づくデータ スケジューリングおよび管理機能を正式に提供しています。レプリカ数、ロール タイプ、データの配置場所などのディメンションで柔軟なスケジューリングと管理をサポートします。また、TiDB は、マルチサービス共有クラスターとクロス AZ 展開でのデータ配置のより柔軟な管理もサポートします。
+    TiDB は、優れたスケーラビリティを備えた分散データベースです。通常、データは複数のサーバー、さらには複数のデータセンターにまたがって展開されます。そのため、データ スケジューリング管理は、TiDB の最も重要な基本機能の 1 つです。ほとんどの場合、ユーザーはデータのスケジュールと管理方法を気にする必要はありません。ただし、アプリケーションの複雑さが増すにつれて、分離とアクセスレイテンシーによって発生する展開の変更が TiDB の新たな課題になっています。v6.0.0 以降、TiDB は SQL インターフェイスに基づくデータ スケジューリングおよび管理機能を正式に提供しています。レプリカ数、ロール タイプ、データの配置場所などのディメンションで柔軟なスケジューリングと管理をサポートします。TiDB は、マルチサービス共有クラスターとクロス AZ 展開でのデータ配置のより柔軟な管理もサポートします。
 
     [ユーザードキュメント](/placement-rules-in-sql.md)
 
@@ -88,13 +88,13 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
 -   キャッシュホットスポットの小さなテーブル
 
-    ホットスポットの小さなテーブルにアクセスするシナリオのユーザー アプリケーションの場合、TiDB はホットスポット テーブルをメモリに明示的にキャッシュすることをサポートしています。これにより、アクセス パフォーマンスが大幅に向上し、スループットが向上し、アクセスレイテンシーが短縮されます。このソリューションは、サードパーティのキャッシュ ミドルウェアの導入を効果的に回避し、アーキテクチャの複雑さを軽減し、運用と保守のコストを削減できます。このソリューションは、構成テーブルや為替レート テーブルなど、小さなテーブルに頻繁にアクセスされるが、めったに更新されないシナリオに適しています。
+    ホットスポットの小さなテーブルにアクセスするシナリオのユーザー アプリケーションの場合、TiDB はホットスポット テーブルをメモリに明示的にキャッシュすることをサポートしています。これにより、アクセス パフォーマンスが大幅に向上し、スループットが向上し、アクセスレイテンシーが短縮されます。このソリューションにより、サードパーティのキャッシュ ミドルウェアの導入を効果的に回避し、アーキテクチャの複雑さを軽減し、運用と保守のコストを削減できます。このソリューションは、構成テーブルや為替レート テーブルなど、小さなテーブルに頻繁にアクセスされるが、めったに更新されないシナリオに適しています。
 
     [ユーザードキュメント](/cached-tables.md) , [＃25293](https://github.com/pingcap/tidb/issues/25293)
 
 -   インメモリ悲観的ロック
 
-    TiDB v6.0.0 以降、メモリ内悲観的ロックがデフォルトで有効になっています。この機能を有効にすると、悲観的トランザクション ロックはメモリ内で管理されます。これにより、悲観的的ロックの永続化とロック情報のRaftレプリケーションが回避され、悲観的トランザクション ロックの管理のオーバーヘッドが大幅に削減されます。悲観的ロックによって生じるパフォーマンスのボトルネックでは、悲観的ロックのメモリ最適化により、レイテンシーを10% 削減し、QPS を 10% 向上させることができます。
+    TiDB v6.0.0 以降、メモリ内悲観的ロックがデフォルトで有効になっています。この機能を有効にすると、悲観的トランザクション ロックはメモリ内で管理されます。これにより、悲観的的ロックの永続化とロック情報のRaftレプリケーションが回避され、悲観的トランザクション ロックの管理のオーバーヘッドが大幅に削減されます。悲観的ロックによって生じるパフォーマンスのボトルネックでは、悲観的ロックのメモリ最適化により、レイテンシーが10% 削減され、QPS が 10% 向上します。
 
     [ユーザードキュメント](/pessimistic-transaction.md#in-memory-pessimistic-lock) , [＃11452](https://github.com/tikv/tikv/issues/11452)
 
@@ -130,7 +130,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
 -   MPPエンジンの計算パフォーマンスを向上させる
 
-    -   より多くの関数と演算子をMPPエンジンにプッシュダウンするサポート
+    -   より多くの関数と演算子を MPP エンジンにプッシュダウンするサポート
 
         -   論理関数`IS NOT` `IS`
         -   文字列関数: `REGEXP()` , `NOT REGEXP()`
@@ -201,7 +201,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     移行タスクを中断する問題に対処するために、さらに多くのコマンドが導入されています。例:
 
     -   スキーマ エラーが発生した場合は、スキーマ ファイルを個別に編集するのではなく、 `binlog-schema update`コマンドの`--from-source/--from-target`パラメータを使用してスキーマ ファイルを更新できます。
-    -   binlog の位置を指定して、DDL ステートメントを挿入、置換、スキップ、または元に戻すことができます。
+    -   binlogの位置を指定して、DDL ステートメントを挿入、置換、スキップ、または元に戻すことができます。
 
     [ユーザードキュメント](/dm/dm-manage-schema.md)
 
@@ -271,7 +271,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
     TiEM は、TiDB クラスターのライフサイクル全体の視覚的な管理を提供するだけでなく、パラメーター管理、バージョン アップグレード、クラスター クローン、アクティブ/スタンバイ クラスターの切り替え、データのインポートとエクスポート、データのレプリケーション、データのバックアップと復元サービスなど、ワンストップ サービスも提供します。TiEM は、TiDB での DevOps の効率を向上させ、企業の DevOps コストを削減します。
 
-    現在、TiEM は[TiDBエンタープライズ](https://en.pingcap.com/tidb-enterprise/)エディションのみで提供されています。TiEM を入手するには、 [TiDBエンタープライズ](https://en.pingcap.com/tidb-enterprise/)ページからお問い合わせください。
+    現在、TiEM は[TiDBエンタープライズ](https://www.pingcap.com/tidb-enterprise/)エディションのみで提供されています。TiEM を入手するには、 [TiDBエンタープライズ](https://www.pingcap.com/tidb-enterprise/)ページからお問い合わせください。
 
 -   監視コンポーネントの構成のカスタマイズをサポート
 
@@ -309,7 +309,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     -   `disabled`追加します (利用不可)。
 -   DMはOpenAPIインターフェースを変更する
     -   内部機構の変更により、タスク管理に関するインターフェースは以前の実験的バージョンとの互換性がありません。適応するには新しいバージョン[DM OpenAPI ドキュメント](/dm/dm-open-api.md)を参照する必要があります。
--   DMは、完​​全なインポートフェーズ中に競合を解決する方法を変更します。
+-   DMは、完全なインポートフェーズ中に競合を解決する方法を変更します。
     -   `loader.<name>.on-duplicate`パラメータが追加されました。デフォルト値は`replace`で、これは新しいデータを使用して既存のデータを置き換えることを意味します。以前の動作を維持する場合は、値を`error`に設定できます。このパラメータは、完全なインポート フェーズでの動作のみを制御します。
 -   DMを使用するには、 `dmctl`の対応するバージョンを使用する必要があります。
     -   内部メカニズムの変更により、DM を v6.0.0 にアップグレードした後、 `dmctl` v6.0.0 にアップグレードする必要があります。
@@ -321,20 +321,20 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
     -   `FLASHBACK`または`RECOVER`ステートメントを使用してテーブルを復元した後、テーブルの配置ルール設定を自動的にクリアします[＃31668](https://github.com/pingcap/tidb/issues/31668)
     -   パフォーマンス概要ダッシュボードを追加して、一般的なクリティカルパスのコアパフォーマンスメトリックを表示し、TiDB でのメトリック分析を容易にします[＃31676](https://github.com/pingcap/tidb/issues/31676)
-    -   `LOAD DATA LOCAL INFILE`ステートメント[＃24515](https://github.com/pingcap/tidb/issues/24515)で`REPLACE`キーワードの使用をサポート
+    -   `LOAD DATA LOCAL INFILE`ステートメント[＃24515](https://github.com/pingcap/tidb/issues/24515)で`REPLACE`キーワードの使用をサポートします
     -   範囲パーティションテーブル[＃26739](https://github.com/pingcap/tidb/issues/26739)の組み込み`IN`式のパーティションプルーニングをサポート
     -   MPP 集計クエリで冗長な Exchange 操作を排除することでクエリの効率を向上[＃31762](https://github.com/pingcap/tidb/issues/31762)
     -   `TRUNCATE PARTITION`と`DROP PARTITION`ステートメントで重複するパーティション名を許可することでMySQLとの互換性を向上させる[＃31681](https://github.com/pingcap/tidb/issues/31681)
     -   `ADMIN SHOW DDL JOBS`ステートメント[＃23494](https://github.com/pingcap/tidb/issues/23494)の結果に`CREATE_TIME`情報を表示することをサポートします
     -   新しい組み込み関数`CHARSET()` [＃3931](https://github.com/pingcap/tidb/issues/3931)をサポート
-    -   ユーザー名によるベースラインキャプチャブロックリストのフィルタリングをサポート[＃32558](https://github.com/pingcap/tidb/issues/32558)
+    -   ベースラインキャプチャブロックリストをユーザー名でフィルタリングする機能をサポート[＃32558](https://github.com/pingcap/tidb/issues/32558)
     -   ベースラインキャプチャブロックリスト[＃32714](https://github.com/pingcap/tidb/issues/32714)でのワイルドカードの使用をサポート
     -   `ADMIN SHOW DDL JOBS`と`SHOW TABLE STATUS`ステートメントの結果を、現在の`time_zone` [＃26642](https://github.com/pingcap/tidb/issues/26642)に従って時間を表示することで最適化します。
     -   `DAYNAME()`と`MONTHNAME()`関数をTiFlash [＃32594](https://github.com/pingcap/tidb/issues/32594)にプッシュダウンするサポート
     -   `REGEXP`機能をTiFlash [＃32637](https://github.com/pingcap/tidb/issues/32637)にプッシュダウンするサポート
     -   `DAYOFMONTH()`と`LAST_DAY()`関数をTiFlash [＃33012](https://github.com/pingcap/tidb/issues/33012)にプッシュダウンするサポート
     -   `DAYOFWEEK()`と`DAYOFYEAR()`関数をTiFlash [＃33130](https://github.com/pingcap/tidb/issues/33130)にプッシュダウンするサポート
-    -   `IS_TRUE` `IS_FALSE`関数を`IS_TRUE_WITH_NULL` TiFlash [＃33047](https://github.com/pingcap/tidb/issues/33047)プッシュダウンするサポート
+    -   `IS_TRUE` `IS_FALSE`関数をTiFlash [＃33047](https://github.com/pingcap/tidb/issues/33047)にプッシュダウンする機能`IS_TRUE_WITH_NULL`サポート
     -   `GREATEST`と`LEAST`関数をTiFlash [＃32787](https://github.com/pingcap/tidb/issues/32787)にプッシュダウンするサポート
     -   `UnionScan`オペレータ[＃32631](https://github.com/pingcap/tidb/issues/32631)の実行の追跡をサポート
     -   `_tidb_rowid`列[＃31543](https://github.com/pingcap/tidb/issues/31543)列を読み取るクエリにPointGetプランの使用をサポート
@@ -357,7 +357,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     -   ベクトル計算[＃5751](https://github.com/tikv/tikv/issues/5751) `QUARTER`関数をサポート
     -   `BIT`データ型を TiKV [＃30738](https://github.com/pingcap/tidb/issues/30738)にプッシュダウンするサポート
     -   `MOD`関数と`SYSDATE`関数をTiKV [＃11916](https://github.com/tikv/tikv/issues/11916)にプッシュダウンするサポート
-    -   解決ロックを必要とする領域の数を減らすことで、TiCDC の回復時間を短縮します (ステップ[＃11993](https://github.com/tikv/tikv/issues/11993)
+    -   解決ロックを必要とする領域の数を減らすことで、TiCDC の回復時間を短縮します (手順[＃11993](https://github.com/tikv/tikv/issues/11993)
     -   `raftstore.raft-max-inflight-msgs` [＃11865](https://github.com/tikv/tikv/issues/11865)動的変更をサポート
     -   動的プルーニングモード[＃11888](https://github.com/tikv/tikv/issues/11888)を有効にするには`EXTRA_PHYSICAL_TABLE_ID_COL_ID`サポート
     -   バケット[＃11759](https://github.com/tikv/tikv/issues/11759)での計算をサポート
@@ -369,7 +369,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     -   `raftstore.apply_max_batch_size`と`raftstore.store_max_batch_size`動的変更をサポート[＃11982](https://github.com/tikv/tikv/issues/11982)
     -   RawKV V2は`raw_get`または`raw_scan`リクエストを受信すると最新バージョンを返します[＃11965](https://github.com/tikv/tikv/issues/11965)
     -   RCCheckTS 一貫性読み取り[＃12097](https://github.com/tikv/tikv/issues/12097)サポート
-    -   `storage.scheduler-worker-pool-size` (スケジューラプールのスレッド数) [＃12067](https://github.com/tikv/tikv/issues/12067)の動的変更をサポート
+    -   `storage.scheduler-worker-pool-size` (スケジューラプールのスレッド数) [＃12067](https://github.com/tikv/tikv/issues/12067)の動的な変更をサポート
     -   グローバルフォアグラウンドフローコントローラを使用してCPUと帯域幅の使用を制御し、TiKV [＃11855](https://github.com/tikv/tikv/issues/11855)のパフォーマンス安定性を向上させます。
     -   `readpool.unified.max-thread-count` (UnifyReadPool のスレッド数) [＃11781](https://github.com/tikv/tikv/issues/11781)の動的変更をサポート
     -   TiKV内部パイプラインを使用してRocksDBパイプラインを置き換え、 `rocksdb.enable-multibatch-write`パラメータ[＃12059](https://github.com/tikv/tikv/issues/12059)を廃止します。
@@ -407,7 +407,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
         -   上流のテーブルスキーマが不整合で楽観的モードの場合のタスクの開始をサポート[＃3629](https://github.com/pingcap/tiflow/issues/3629) [＃3708](https://github.com/pingcap/tiflow/issues/3708) [＃3786](https://github.com/pingcap/tiflow/issues/3786)
         -   `stopped`状態[＃4484](https://github.com/pingcap/tiflow/issues/4484)でのタスク作成をサポート
-        -   Syncer が`/tmp`ではなく DM ワーカーの作業ディレクトリを使用して内部ファイルを書き込み、タスクが停止した後にディレクトリを消去するのをサポートします[＃4107](https://github.com/pingcap/tiflow/issues/4107)
+        -   Syncer が`/tmp`ではなく DM ワーカーの作業ディレクトリを使用して内部ファイルを書き込み、タスクが停止した後にディレクトリを消去する[＃4107](https://github.com/pingcap/tiflow/issues/4107)をサポートします。
         -   事前チェックが改善されました。重要なチェックがスキップされなくなりました[＃3608](https://github.com/pingcap/tiflow/issues/3608)
 
     -   TiDB Lightning
@@ -452,12 +452,12 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     -   `timdiff`関数の入力にミリ秒が含まれている場合に返される誤った結果を修正[＃31680](https://github.com/pingcap/tidb/issues/31680)
     -   パーティションを明示的に読み取り、IndexJoin プラン[＃32007](https://github.com/pingcap/tidb/issues/32007)を使用した場合に誤った結果が発生する問題を修正しました。
     -   列タイプを同時に変更すると列名の変更が失敗するバグを修正[＃31075](https://github.com/pingcap/tidb/issues/31075)
-    -   TiFlashプランの純コストを計算する式が TiKV プランと一致しないバグを修正[#30103](https://github.com/pingcap/tidb/issues/30103)
+    -   TiFlashプランの純コストの計算式が TiKV プランと一致しないバグを修正[#30103](https://github.com/pingcap/tidb/issues/30103)
     -   `KILL TIDB`アイドル接続時にすぐに効果を発揮できないバグを修正[＃24031](https://github.com/pingcap/tidb/issues/24031)
     -   生成された列を持つテーブルをクエリするときに間違った結果が発生する可能性がある問題を修正[＃33038](https://github.com/pingcap/tidb/issues/33038)
     -   `left join` [＃31321](https://github.com/pingcap/tidb/issues/31321)を使用して複数のテーブルのデータを削除した場合の誤った結果を修正
     -   オーバーフロー[＃31868](https://github.com/pingcap/tidb/issues/31868)の場合に`SUBTIME`関数が誤った結果を返すバグを修正
-    -   集計クエリに条件`having` [＃33166](https://github.com/pingcap/tidb/issues/33166)含まれている場合に演算子`selection`をプッシュダウンできないバグを修正しました。
+    -   集計クエリに条件`having` [＃33166](https://github.com/pingcap/tidb/issues/33166)れている場合に演算子`selection`をプッシュダウンできないバグを修正しました。
     -   クエリがエラーを報告したときに CTE がブロックされる可能性があるバグを修正[＃31302](https://github.com/pingcap/tidb/issues/31302)
     -   非厳密モードでテーブルを作成するときに、varbinary または varchar 列の長さが長すぎるとエラーが発生する可能性があるバグを修正しました[＃30328](https://github.com/pingcap/tidb/issues/30328)
     -   フォロワーが指定されていない場合の`information_schema.placement_policies`のフォロワー数の誤りを修正[＃31702](https://github.com/pingcap/tidb/issues/31702)
@@ -471,7 +471,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     -   フロー制御が有効で、 `level0_slowdown_trigger`明示的に設定されている場合に QPS が低下する問題を修正[＃11424](https://github.com/tikv/tikv/issues/11424)
     -   ピアを破棄するとレイテンシーが大きくなる可能性がある問題を修正[＃10210](https://github.com/tikv/tikv/issues/10210)
     -   GCワーカーがビジー状態のときにTiKVがデータの範囲を削除できない（つまり内部コマンド`unsafe_destroy_range`が実行される）バグを修正[＃11903](https://github.com/tikv/tikv/issues/11903)
-    -   `StoreMeta`のデータが誤って削除されたときに TiKV がパニックを起こすバグを修正[＃11852](https://github.com/tikv/tikv/issues/11852)
+    -   `StoreMeta`のデータが誤って削除されたときに TiKV がパニックになるバグを修正[＃11852](https://github.com/tikv/tikv/issues/11852)
     -   ARM プラットフォームでプロファイリングを実行するときに TiKV がパニックになるバグを修正[＃10658](https://github.com/tikv/tikv/issues/10658)
     -   TiKV が 2 年以上実行されている場合にpanicが発生する可能性があるバグを修正[＃11940](https://github.com/tikv/tikv/issues/11940)
     -   SSE命令セット[＃12034](https://github.com/tikv/tikv/issues/12034)欠落により発生するARM64アーキテクチャでのコンパイル問題を修正
@@ -530,8 +530,8 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
     -   TiDB データ移行 (DM)
 
-        -   ステータス[＃4281](https://github.com/pingcap/tiflow/issues/4281)を照会するときにのみ同期メトリックが更新される問題を修正しました
-        -   セーフモードでの更新ステートメントの実行エラーにより、DM ワーカーがpanicになる可能性がある問題を修正しました[＃4317](https://github.com/pingcap/tiflow/issues/4317)
+        -   ステータス[＃4281](https://github.com/pingcap/tiflow/issues/4281)を照会するときにのみ同期メトリックが更新される問題を修正しました。
+        -   セーフモードでの更新ステートメントの実行エラーにより DM ワーカーがpanicになる可能性がある問題を修正しました[＃4317](https://github.com/pingcap/tiflow/issues/4317)
         -   長いvarcharがエラーを報告するバグを修正`Column length too big` [＃4637](https://github.com/pingcap/tiflow/issues/4637)
         -   複数の DM ワーカーが同じアップストリーム[＃3737](https://github.com/pingcap/tiflow/issues/3737)からデータを書き込むことで発生する競合の問題を修正しました。
         -   ログに「チェックポイントに変更はありません。同期フラッシュチェックポイントをスキップしてください」というメッセージが何百も出力され、レプリケーションが非常に遅くなる問題を修正しました[＃4619](https://github.com/pingcap/tiflow/issues/4619)
@@ -539,9 +539,9 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
     -   TiDB Lightning
 
-        -   一部のインポートタスクにソースファイルが含まれていない場合に、 TiDB Lightning がメタデータスキーマを削除しない可能性があるバグを修正しました[＃28144](https://github.com/pingcap/tidb/issues/28144)
-        -   ソースファイルとターゲットクラスタ内のテーブル名が異なる場合に発生するpanicを修正[＃31771](https://github.com/pingcap/tidb/issues/31771)
-        -   チェックサムエラー「GC の有効期間がトランザクション期間より短い」を修正[＃32733](https://github.com/pingcap/tidb/issues/32733)
+        -   一部のインポートタスクにソースファイルが含まれていない場合に、 TiDB Lightning がメタデータスキーマを削除しない可能性があるバグを修正[＃28144](https://github.com/pingcap/tidb/issues/28144)
+        -   ソースファイルとターゲットクラスタのテーブル名が異なる場合に発生するpanicを修正[＃31771](https://github.com/pingcap/tidb/issues/31771)
+        -   チェックサムエラー「GC の存続期間がトランザクション期間より短い」を修正[＃32733](https://github.com/pingcap/tidb/issues/32733)
         -   空のテーブル[＃31797](https://github.com/pingcap/tidb/issues/31797)チェックに失敗したときにTiDB Lightning が停止する問題を修正しました
 
     -   Dumpling

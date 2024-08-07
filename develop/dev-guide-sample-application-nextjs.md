@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with mysql2 in Next.js
-summary: This article describes how to build a CRUD application using TiDB and mysql2 in Next.js and provides a simple example code snippet.
+summary: この記事では、Next.js で TiDB と mysql2 を使用して CRUD アプリケーションを構築する方法について説明し、簡単なサンプル コード スニペットを示します。
 ---
 
 # Next.js で mysql2 を使用して TiDB に接続する {#connect-to-tidb-with-mysql2-in-next-js}
@@ -111,7 +111,7 @@ npm install
     Copy-Item ".env.example" -Destination ".env"
     ```
 
-6.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
+6.  対応する接続文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
 
     ```bash
     TIDB_HOST='{gateway-region}.aws.tidbcloud.com'
@@ -141,7 +141,7 @@ npm install
     Copy-Item ".env.example" -Destination ".env"
     ```
 
-2.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
+2.  対応する接続文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
 
     ```bash
     TIDB_HOST='{tidb_server_host}'
@@ -288,12 +288,12 @@ console.log(rsh.affectedRows);
 
 <CustomContent platform="tidb">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](/support.md)について質問します。
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
 
 </CustomContent>

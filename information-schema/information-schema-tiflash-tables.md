@@ -1,17 +1,13 @@
 ---
 title: TIFLASH_TABLES
-summary: TIFLASH_TABLES表は、TiFlashのデータテーブルに関する統計情報を提供します。このテーブルのフィールドには、データベース名、テーブル名、セグメント数、行数、サイズなどが含まれます。また、テーブルの安定層やデルタレイヤーに関する情報も提供されます。ただし、このテーブルはTiDBサーバーレスクラスターでは使用できません。また、フィールドは不安定であり、予告なく変更される可能性があるため、本番環境では使用しないでください。
+summary: TIFLASH_TABLES` information_schema テーブルについて学習します。
 ---
 
-# TIFLASH_TABLES {#tiflash-tables}
+# TIFLASH_テーブル {#tiflash-tables}
 
 > **警告：**
 >
-> このテーブルのフィールドは不安定であり、TiDB の新しいリリースでは予告なく変更される可能性があるため、このテーブルを本番環境では使用しないでください。
-
-> **注記：**
->
-> このテーブルは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+> このテーブルは不安定であり、TiDB の新しいリリースで予告なしに変更される可能性があるため、本番環境では使用しないでください。
 
 `TIFLASH_TABLES`表は、 TiFlashのデータ テーブルに関する統計情報を提供します。
 
@@ -82,59 +78,59 @@ DESC tiflash_tables;
 54 rows in set (0.00 sec)
 ```
 
-`TIFLASH_TABLES`テーブルのフィールドは次のように説明されています。
+`TIFLASH_TABLES`テーブル内のフィールドは次のように説明されます。
 
--   `DATABASE` : TiFlashでテーブルが属するデータベースの名前。
+-   `DATABASE` : TiFlash内のテーブルが属するデータベースの名前。
 -   `TABLE` : TiFlash内のテーブルの名前。
 -   `TIDB_DATABASE` : TiDB 内でテーブルが属するデータベースの名前。
 -   `TIDB_TABLE` : TiDB 内のテーブルの名前。
 -   `TABLE_ID` : テーブルの内部 ID。TiDB クラスター内で一意です。
--   `IS_TOMBSTONE` : テーブルをリサイクルできるかどうかを示します。 `1`はテーブルが再利用できることを示し、 `0`はテーブルが正常な状態であることを示します。
--   `SEGMENT_COUNT` : テーブル内のセグメントの数。セグメントは、 TiFlashにおけるデータ管理単位です。
--   `TOTAL_ROWS` : テーブル内の行の総数。
+-   `IS_TOMBSTONE` : テーブルがリサイクル可能かどうかを示します。2 `1`テーブルがリサイクル可能であることを示し、 `0`テーブルが正常な状態であることを示します。
+-   `SEGMENT_COUNT` : テーブル内のセグメント数。セグメントはTiFlashのデータ管理単位です。
+-   `TOTAL_ROWS` : テーブル内の行の合計数。
 -   `TOTAL_SIZE` : テーブルの合計サイズ (バイト単位)。
--   `TOTAL_DELETE_RANGES` : テーブル内の削除範囲の総数。
+-   `TOTAL_DELETE_RANGES` : テーブル内の削除範囲の合計数。
 -   `DELTA_RATE_ROWS` : デルタレイヤー内のテーブルの合計行数とそのテーブルの合計行数の比率。
--   `DELTA_RATE_SEGMENTS` : テーブル内に空ではないデルタレイヤーを含むセグメントの割合。
+-   `DELTA_RATE_SEGMENTS` : テーブル内の空でないデルタレイヤーを含むセグメントの割合。
 -   `DELTA_PLACED_RATE` : デルタレイヤー内のテーブルのインデックス構築が完了した行の割合。
--   `DELTA_CACHE_SIZE` : デルタレイヤーのテーブルのキャッシュのサイズ (バイト単位)。
--   `DELTA_CACHE_RATE` : デルタレイヤー内のテーブルのキャッシュ データの割合。
+-   `DELTA_CACHE_SIZE` : デルタレイヤー内のテーブルのキャッシュのサイズ (バイト単位)。
+-   `DELTA_CACHE_RATE` : デルタレイヤーにおけるテーブルのキャッシュデータの割合。
 -   `DELTA_CACHE_WASTED_RATE` : デルタレイヤー内のテーブルの無効なキャッシュ データの割合。
--   `DELTA_INDEX_SIZE` : デルタレイヤーのインデックスが占有するメモリのサイズ (バイト単位)。
--   `AVG_SEGMENT_ROWS` : テーブルのすべてのセグメントの平均行数。
+-   `DELTA_INDEX_SIZE` : Deltaレイヤー内のインデックスによって占有されるメモリのサイズ (バイト単位)。
+-   `AVG_SEGMENT_ROWS` : テーブルのすべてのセグメント内の行の平均数。
 -   `AVG_SEGMENT_SIZE` : テーブルのすべてのセグメントの平均サイズ (バイト単位)。
--   `DELTA_COUNT` : テーブル内に空ではないデルタレイヤーを含むセグメントの数。
--   `TOTAL_DELTA_ROWS` : デルタレイヤーの総行数。
+-   `DELTA_COUNT` : テーブル内の空でないデルタレイヤーを含むセグメントの数。
+-   `TOTAL_DELTA_ROWS` : デルタレイヤー内の行の合計数。
 -   `TOTAL_DELTA_SIZE` : デルタレイヤーのデータの合計サイズ (バイト単位)。
--   `AVG_DELTA_ROWS` : すべてのデルタ レイヤー内のデータの平均行数。
--   `AVG_DELTA_SIZE` : すべてのデルタ レイヤーのデータの平均サイズ (バイト単位)。
--   `AVG_DELTA_DELETE_RANGES` : すべてのデルタ レイヤーにおける範囲削除操作の平均数。
--   `STABLE_COUNT` : テーブル内に空ではない安定レイヤーを含むセグメントの数。
--   `TOTAL_STABLE_ROWS` : すべての安定層の行の合計数。
--   `TOTAL_STABLE_SIZE` : すべての安定層のデータの合計サイズ (バイト単位)。
--   `TOTAL_STABLE_SIZE_ON_DISK` : すべての安定層のデータが占めるディスク容量 (バイト単位)。
--   `AVG_STABLE_ROWS` : すべての安定層のデータ行の平均数。
--   `AVG_STABLE_SIZE` : すべての安定層のデータの平均サイズ (バイト単位)。
+-   `AVG_DELTA_ROWS` : すべての Delta レイヤー内のデータの平均行数。
+-   `AVG_DELTA_SIZE` : すべての Delta レイヤーのデータの平均サイズ (バイト単位)。
+-   `AVG_DELTA_DELETE_RANGES` : すべての Delta レイヤーでの範囲削除操作の平均数。
+-   `STABLE_COUNT` : テーブル内の空でない安定レイヤーを含むセグメントの数。
+-   `TOTAL_STABLE_ROWS` : すべての安定レイヤーの行の合計数。
+-   `TOTAL_STABLE_SIZE` : すべての安定レイヤーのデータの合計サイズ (バイト単位)。
+-   `TOTAL_STABLE_SIZE_ON_DISK` : すべての安定レイヤーのデータが占めるディスク容量 (バイト単位)。
+-   `AVG_STABLE_ROWS` : すべての安定レイヤーのデータの平均行数。
+-   `AVG_STABLE_SIZE` : すべての安定レイヤーのデータの平均サイズ (バイト単位)。
 -   `TOTAL_PACK_COUNT_IN_DELTA` : すべてのデルタ レイヤー内のカラムファイルの合計数。
--   `MAX_PACK_COUNT_IN_DELTA` : 単一デルタレイヤー内のカラムファイルの最大数。
+-   `MAX_PACK_COUNT_IN_DELTA` : 単一の Deltaレイヤー内のカラムファイルの最大数。
 -   `AVG_PACK_COUNT_IN_DELTA` : すべてのデルタ レイヤー内のカラムファイルの平均数。
--   `AVG_PACK_ROWS_IN_DELTA` : すべてのカラムレイヤーのすべての列ファイルの平均行数。
--   `AVG_PACK_SIZE_IN_DELTA` : すべてのカラムレイヤーのすべての列ファイルのデータの平均サイズ (バイト単位)。
--   `TOTAL_PACK_COUNT_IN_STABLE` : すべての安定層のパックの合計数。
--   `AVG_PACK_COUNT_IN_STABLE` : すべての安定層のパックの平均数。
--   `AVG_PACK_ROWS_IN_STABLE` : すべての安定層のすべてのパックの平均行数。
--   `AVG_PACK_SIZE_IN_STABLE` : 安定レイヤーのすべてのパックのデータの平均サイズ (バイト単位)。
--   `STORAGE_STABLE_NUM_SNAPSHOTS` : 安定レイヤーのスナップショットの数。
--   `STORAGE_STABLE_OLDEST_SNAPSHOT_LIFETIME` : 安定レイヤー内の最も古いスナップショットの継続時間 (秒単位)。
+-   `AVG_PACK_ROWS_IN_DELTA` : すべてのデルタ レイヤー内のすべてのカラムファイル内の行の平均数。
+-   `AVG_PACK_SIZE_IN_DELTA` : すべてのデルタ レイヤー内のすべてのカラムファイルのデータの平均サイズ (バイト単位)。
+-   `TOTAL_PACK_COUNT_IN_STABLE` : すべての安定レイヤー内のパックの合計数。
+-   `AVG_PACK_COUNT_IN_STABLE` : すべての安定レイヤー内のパックの平均数。
+-   `AVG_PACK_ROWS_IN_STABLE` : すべての安定レイヤー内のすべてのパックの行の平均数。
+-   `AVG_PACK_SIZE_IN_STABLE` : 安定レイヤー内のすべてのパックのデータの平均サイズ (バイト単位)。
+-   `STORAGE_STABLE_NUM_SNAPSHOTS` : 安定レイヤー内のスナップショットの数。
+-   `STORAGE_STABLE_OLDEST_SNAPSHOT_LIFETIME` : 安定レイヤー内の最も古いスナップショットの期間 (秒単位)。
 -   `STORAGE_STABLE_OLDEST_SNAPSHOT_THREAD_ID` : 安定レイヤー内の最も古いスナップショットのスレッド ID。
 -   `STORAGE_STABLE_OLDEST_SNAPSHOT_TRACING_ID` : 安定レイヤー内の最も古いスナップショットのトレース ID。
--   `STORAGE_DELTA_NUM_SNAPSHOTS` : デルタレイヤーのスナップショットの数。
--   `STORAGE_DELTA_OLDEST_SNAPSHOT_LIFETIME` : デルタレイヤーの最も古いスナップショットの継続時間 (秒単位)。
--   `STORAGE_DELTA_OLDEST_SNAPSHOT_THREAD_ID` : デルタレイヤーの最も古いスナップショットのスレッド ID。
--   `STORAGE_DELTA_OLDEST_SNAPSHOT_TRACING_ID` : デルタレイヤーの最も古いスナップショットのトレース ID。
--   `STORAGE_META_NUM_SNAPSHOTS` : メタ情報のスナップショット数。
--   `STORAGE_META_OLDEST_SNAPSHOT_LIFETIME` : メタ情報内の最も古いスナップショットの継続時間 (秒単位)。
+-   `STORAGE_DELTA_NUM_SNAPSHOTS` : デルタレイヤー内のスナップショットの数。
+-   `STORAGE_DELTA_OLDEST_SNAPSHOT_LIFETIME` : デルタレイヤー内の最も古いスナップショットの期間 (秒単位)。
+-   `STORAGE_DELTA_OLDEST_SNAPSHOT_THREAD_ID` : デルタレイヤー内の最も古いスナップショットのスレッド ID。
+-   `STORAGE_DELTA_OLDEST_SNAPSHOT_TRACING_ID` : デルタレイヤー内の最も古いスナップショットのトレース ID。
+-   `STORAGE_META_NUM_SNAPSHOTS` : メタ情報内のスナップショットの数。
+-   `STORAGE_META_OLDEST_SNAPSHOT_LIFETIME` : メタ情報内の最も古いスナップショットの期間 (秒単位)。
 -   `STORAGE_META_OLDEST_SNAPSHOT_THREAD_ID` : メタ情報内の最も古いスナップショットのスレッド ID。
 -   `STORAGE_META_OLDEST_SNAPSHOT_TRACING_ID` : メタ情報内の最も古いスナップショットのトレース ID。
--   `BACKGROUND_TASKS_LENGTH` : バックグラウンドのタスクキューの長さ。
+-   `BACKGROUND_TASKS_LENGTH` : バックグラウンドのタスク キューの長さ。
 -   `TIFLASH_INSTANCE` : TiFlashインスタンスのアドレス。

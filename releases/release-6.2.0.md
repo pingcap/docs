@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.2.0 Release Notes
-summary: TiDB 6.2.0-DMR introduces new features like visual execution plans, monitoring page, and lock view. It also supports concurrent DDL operations and enhances the performance of aggregation operations. TiKV now supports automatic CPU usage tuning and detailed configuration information listing. TiFlash adds FastScan for data scanning and improves error handling. BR now supports continuous data validation and automatically identifies the region of Amazon S3 buckets. TiCDC supports filtering DDL and DML events. There are also compatibility changes, bug fixes, and improvements across various tools.
+summary: TiDB 6.2.0-DMR では、ビジュアル実行プラン、監視ページ、ロック ビューなどの新機能が導入されています。また、同時 DDL 操作もサポートされ、集計操作のパフォーマンスが向上しています。TiKV では、CPU 使用率の自動調整と詳細な構成情報のリストがサポートされるようになりました。TiFlashTiFlash、データ スキャン用の FastScan が追加され、エラー処理が改善されています。BRBR、継続的なデータ検証がサポートされ、Amazon S3 バケットのリージョンが自動的に識別されます。TiCDC では、DDL および DML イベントのフィルタリングがサポートされています。また、さまざまなツールで互換性の変更、バグ修正、改善が行われています。
 ---
 
 # TiDB 6.2.0 リリースノート {#tidb-6-2-0-release-notes}
@@ -11,7 +11,7 @@ TiDB バージョン: 6.2.0-DMR
 
 > **注記：**
 >
-> TiDB 6.2.0-DMR のドキュメントは[アーカイブ済み](https://docs-archive.pingcap.com/tidb/v6.2/)です。PingCAP では、TiDB データベースの[最新のLTSバージョン](https://docs.pingcap.com/tidb/stable)を使用することを推奨しています。
+> TiDB 6.2.0-DMR のドキュメントは[アーカイブ済み](https://docs-archive.pingcap.com/tidb/v6.2/)になりました。PingCAP では、TiDB データベースの[最新のLTSバージョン](https://docs.pingcap.com/tidb/stable)を使用することを推奨しています。
 
 v6.2.0-DMR の主な新機能と改善点は次のとおりです。
 
@@ -94,7 +94,7 @@ v6.2.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   いくつかの分析シナリオにおける集計操作のパフォーマンスを最適化します
 
-    OLAP シナリオでTiFlashを使用して列の集計操作を実行する場合、集計列の不均一な分布により深刻なデータ スキューが存在し、集計列に多くの異なる値が含まれていると、列に対する`COUNT(DISTINCT)`クエリの実行効率は低くなります。v6.2.0 では、新しい書き換えルールが導入され、1 つの列に対する`COUNT(DISTINCT)`のクエリのパフォーマンスが向上しました。
+    OLAP シナリオでTiFlashを使用して列の集計操作を実行する場合、集計列の不均一な分布により深刻なデータ スキューが存在し、集計列に多くの異なる値がある場合、列に対する`COUNT(DISTINCT)`のクエリの実行効率は低くなります。v6.2.0 では、新しい書き換えルールが導入され、1 つの列に対する`COUNT(DISTINCT)`のクエリのパフォーマンスが向上しました。
 
     [ユーザードキュメント](/system-variables.md#tidb_opt_skew_distinct_agg-new-in-v620) [＃36169](https://github.com/pingcap/tidb/issues/36169) @ [修正DB](https://github.com/fixdb)
 
@@ -134,7 +134,7 @@ v6.2.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   TiFlash は、データの一貫性を犠牲にして読み取りと書き込みの速度を向上させるために、データスキャン用の FastScan を追加しました (実験的)
 
-    TiDB は、v6.2.0 で FastScan を導入しました。これは、一貫性チェックのスキップをサポートし、速度を大幅に向上させます。FastScan は、オフライン分析タスクなど、データの高精度と一貫性を必要としないシナリオに適しています。以前は、データの一貫性を確保するために、 TiFlash はデータ スキャン プロセス中にデータ一貫性チェックを実行し、複数の異なるバージョンから必要なデータを検索する必要がありました。
+    TiDB は、v6.2.0 で FastScan を導入しました。これは、一貫性チェックのスキップをサポートし、速度を大幅に向上させます。FastScan は、オフライン分析タスクなど、データの高精度と一貫性を必要としないシナリオに適しています。以前は、データの一貫性を確保するために、 TiFlash はデータ スキャン プロセス中にデータ一貫性チェックを実行し、複数の異なるバージョンから必要なデータを見つける必要がありました。
 
     以前のバージョンから TiDB v6.2.0 にアップグレードすると、データの一貫性を確保するために、すべてのテーブルで FastScan がデフォルトで有効になりません。各テーブルに対して個別に FastScan を有効にすることができます。TiDB v6.2.0 でテーブルが FastScan に設定されている場合、下位バージョンにダウングレードすると無効になりますが、通常のデータ読み取りには影響しません。この場合、強力な一貫性読み取りに相当します。
 
@@ -170,7 +170,7 @@ v6.2.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   トランザクションでのセーブポイントの設定をサポート
 
-    トランザクションとは、データベースがACIDプロパティを保証する一連の連続した操作の論理的な集合です。複雑なアプリケーション シナリオでは、トランザクションで多くの操作を管理する必要があり、場合によってはトランザクションで一部の操作をロールバックする必要があることもあります。「セーブポイント」は、トランザクションの内部実装のための名前を付けられるメカニズムです。このメカニズムを使用すると、トランザクション内のロールバック ポイントを柔軟に制御できるため、より複雑なトランザクションを管理し、さまざまなアプリケーションをより自由に設計できます。
+    トランザクションとは、データベースがACIDプロパティを保証する一連の連続した操作の論理的な集合です。複雑なアプリケーション シナリオでは、トランザクション内で多くの操作を管理する必要があり、場合によってはトランザクション内で一部の操作をロールバックする必要があることもあります。「セーブポイント」は、トランザクションの内部実装のための名前を付けられるメカニズムです。このメカニズムを使用すると、トランザクション内のロールバック ポイントを柔軟に制御できるため、より複雑なトランザクションを管理し、さまざまなアプリケーションをより自由に設計できます。
 
     [ユーザードキュメント](/sql-statements/sql-statement-savepoint.md) [＃6840](https://github.com/pingcap/tidb/issues/6840) @ [クレイジーcs520](https://github.com/crazycs520)
 
@@ -222,7 +222,7 @@ v6.2.0-DMR の主な新機能と改善点は次のとおりです。
 
     この機能は手動で構成する必要はありません。TiDB クラスターが v6.1.0 以降で、 TiDB Lightningが v6.2.0 以降の場合、新しい物理インポート モードが自動的に有効になります。
 
-    [ユーザードキュメント](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import) [＃35148](https://github.com/pingcap/tidb/issues/35148) @ [ゴズスキー](https://github.com/gozssky)
+    [ユーザードキュメント](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import) [＃35148](https://github.com/pingcap/tidb/issues/35148) @ [眠いモグラ](https://github.com/sleepymole)
 
 -   [TiDB Lightningのユーザードキュメント](/tidb-lightning/tidb-lightning-overview.md)をリファクタリングして、構造をより合理的かつ明確にします。また、「バックエンド」の用語も変更され、新しいユーザーの理解の障壁が低くなります。
 
@@ -250,7 +250,7 @@ v6.2.0-DMR の主な新機能と改善点は次のとおりです。
 | 変数名                                                                                                                     | タイプを変更   | 説明                                                                                                                                                                                                    |
 | ----------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [tidb_enable_new_cost_interface](/system-variables.md#tidb_enable_new_cost_interface-new-in-v620)                       | 新しく追加された | この変数は、 [コストモデルの実装をリファクタリング](/cost-model.md#cost-model-version-2)有効にするかどうかを制御します。                                                                                                                      |
-| [tidb_コストモデルバージョン](/system-variables.md#tidb_cost_model_version-new-in-v620)                                            | 新しく追加された | TiDB は、物理的な最適化中にコスト モデルを使用してインデックスと演算子を選択します。この変数は、コスト モデル バージョンを選択するために使用されます。TiDB v6.2.0 では、内部テストで以前のバージョンよりも精度の高いコスト モデル バージョン 2 が導入されています。                                                        |
+| [tidb_コスト_モデル_バージョン](/system-variables.md#tidb_cost_model_version-new-in-v620)                                          | 新しく追加された | TiDB は、物理的な最適化中にコスト モデルを使用してインデックスと演算子を選択します。この変数は、コスト モデル バージョンを選択するために使用されます。TiDB v6.2.0 では、内部テストで以前のバージョンよりも精度の高いコスト モデル バージョン 2 が導入されています。                                                        |
 | tidb_enable_concurrent_ddl                                                                                              | 新しく追加された | この変数は、TiDB が同時 DDL ステートメントを使用できるようにするかどうかを制御します。この変数を変更しないでください。この変数を無効にするリスクは不明であり、クラスターのメタデータが破損する可能性があります。                                                                                         |
 | [tiflash_fine_grained_shuffle_stream_count](/system-variables.md#tiflash_fine_grained_shuffle_stream_count-new-in-v620) | 新しく追加された | この変数は、ウィンドウ関数が実行のためにTiFlashにプッシュダウンされるときのウィンドウ関数実行の同時実行レベルを制御します。                                                                                                                                     |
 | [tiflash_fine_grained_shuffle_batch_size](/system-variables.md#tiflash_fine_grained_shuffle_batch_size-new-in-v620)     | 新しく追加された | Fine Grained Shuffle を有効にすると、 TiFlashにプッシュダウンされたウィンドウ関数を並列で実行できます。この変数は、送信者が送信するデータのバッチ サイズを制御します。送信者は、累積行数がこの値を超えるとデータを送信します。                                                                        |
@@ -279,7 +279,7 @@ v6.2.0-DMR の主な新機能と改善点は次のとおりです。
 | ティクヴ           | gc-マージ-書き換え                                                                                                             | 削除されました  | この構成はもう有効ではありません。                                                                                  |
 | ティクヴ           | [ログバックアップを有効にする](/tikv-configuration-file.md#enable-new-in-v620)                                                        | 新しく追加された | この構成は、TiKV でログ バックアップを有効にするかどうかを制御します。                                                             |
 | ティクヴ           | [ログバックアップのファイルサイズ制限](/tikv-configuration-file.md#file-size-limit-new-in-v620)                                           | 新しく追加された | この構成は、ログ バックアップ データのサイズ制限を指定します。この制限に達すると、データは自動的に外部storageにフラッシュされます。                             |
-| ティクヴ           | [ログバックアップ初期スキャン保留中のメモリ割り当て](/tikv-configuration-file.md#initial-scan-pending-memory-quota-new-in-v620)                  | 新しく追加された | この構成は、増分スキャン データを格納するために使用されるキャッシュの割り当てを指定します。                                                     |
+| ティクヴ           | [ログバックアップ.初期スキャン保留中のメモリクォータ](/tikv-configuration-file.md#initial-scan-pending-memory-quota-new-in-v620)                 | 新しく追加された | この構成は、増分スキャン データを格納するために使用されるキャッシュの割り当てを指定します。                                                     |
 | ティクヴ           | [ログバックアップの最大フラッシュ間隔](/tikv-configuration-file.md#max-flush-interval-new-in-v620)                                        | 新しく追加された | この構成は、ログ バックアップでバックアップ データを外部storageに書き込む最大間隔を指定します。                                               |
 | ティクヴ           | [ログバックアップ初期スキャンレート制限](/tikv-configuration-file.md#initial-scan-rate-limit-new-in-v620)                                  | 新しく追加された | この構成は、ログ バックアップの増分データ スキャンにおけるスループットのレート制限を指定します。                                                  |
 | ティクヴ           | [ログバックアップ.スレッド数](/tikv-configuration-file.md#num-threads-new-in-v620)                                                   | 新しく追加された | この構成は、ログ バックアップで使用されるスレッドの数を指定します。                                                                 |
@@ -297,7 +297,7 @@ v6.2.0-DMR の主な新機能と改善点は次のとおりです。
 | DM             | [モード](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                                    | 新しく追加された | この設定は検証パラメータです。オプションの値は`full` 、 `fast` 、 `none`です。デフォルト値は`none`で、データは検証されません。                      |
 | DM             | [労働者数](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                                   | 新しく追加された | この設定はバリデータパラメータであり、バックグラウンドでの検証ワーカーの数を指定します。デフォルト値は`4`です。                                          |
 | DM             | [行エラー遅延](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                                 | 新しく追加された | この設定は検証パラメータです。指定された時間内に行が検証されない場合、エラー行としてマークされます。デフォルト値は 30m で、これは 30 分を意味します。                    |
-| TiDB Lightning | [tikv-importer.store 書き込み帯域幅制限](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)                    | 新しく追加された | この設定は、TiDB Lightning が各 TiKV ストアにデータを書き込むときの書き込み帯域幅を決定します。デフォルト値は`0`で、帯域幅が制限されていないことを示します。         |
+| TiDB Lightning | [tikv-importer.store-write-bwlimit](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)                | 新しく追加された | この設定は、TiDB Lightning が各 TiKV ストアにデータを書き込むときの書き込み帯域幅を決定します。デフォルト値は`0`で、帯域幅が制限されていないことを示します。         |
 | TiDB Lightning | [tikv-importer.ディスククォータ](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620) | 新しく追加された | この構成により、 TiDB Lightningが使用するstorageスペースが制限されます。                                                    |
 
 ### その他 {#others}
@@ -353,7 +353,7 @@ TiDB v6.2.0 以降、 BRを使用した RawKV のバックアップと復元は�
 
 -   ティクヴ
 
-    -   HTTP ボディのサイズを縮小するために、gzip を使用してメトリック応答を圧縮することをサポートします[＃12355](https://github.com/tikv/tikv/issues/12355) @ [栄光](https://github.com/glorv)
+    -   HTTP 本体のサイズを縮小するために、gzip を使用してメトリック応答を圧縮することをサポートします[＃12355](https://github.com/tikv/tikv/issues/12355) @ [栄光](https://github.com/glorv)
     -   Grafana ダッシュボード[＃12007](https://github.com/tikv/tikv/issues/12007) @ [ケビン・シアンリウ](https://github.com/kevin-xianliu)の TiKV パネルの読みやすさを向上
     -   Apply演算子[＃12898](https://github.com/tikv/tikv/issues/12898) @ [イーサフロー](https://github.com/ethercflow)のコミットパイプラインのパフォーマンスを最適化する
     -   RocksDBで同時に実行されるサブコンパクション操作の数を動的に変更する機能をサポート ( `rocksdb.max-sub-compactions` ) [＃13145](https://github.com/tikv/tikv/issues/13145) @ [イーサフロー](https://github.com/ethercflow)
@@ -372,7 +372,7 @@ TiDB v6.2.0 以降、 BRを使用した RawKV のバックアップと復元は�
 
     -   バックアップと復元 (BR)
 
-        -   大規模クラスターバックアップ[＃30087](https://github.com/pingcap/tidb/issues/30087) @ [モクイシュル28](https://github.com/MoCuishle28)での S3 レート制限によって発生するバックアップ障害を修正するために、バックアップデータディレクトリ構造を調整します。
+        -   大規模クラスタ バックアップ[＃30087](https://github.com/pingcap/tidb/issues/30087) @ [モクイシュル28](https://github.com/MoCuishle28)での S3 レート制限によって発生するバックアップ障害を修正するために、バックアップ データ ディレクトリ構造を調整します。
 
     -   ティCDC
 
@@ -386,7 +386,7 @@ TiDB v6.2.0 以降、 BRを使用した RawKV のバックアップと復元は�
 
     -   TiUP
 
-        -   TiUPを使用して新しいクラスタがデプロイされると、node-exporterはバージョン[1.3.1](https://github.com/prometheus/node_exporter/releases/tag/v1.3.1)を使用し、blackbox-exporterはバージョン[0.21.1](https://github.com/prometheus/blackbox_exporter/releases/tag/v0.21.1)を使用します。これにより、さまざまなシステムや環境でのデプロイが成功します。
+        -   TiUPを使用して新しいクラスタがデプロイされると、node-exporterはバージョン[1.3.1](https://github.com/prometheus/node_exporter/releases/tag/v1.3.1)を使用し、blackbox-exporterはバージョン[0.21.1](https://github.com/prometheus/blackbox_exporter/releases/tag/v0.21.1)を使用します。これにより、さまざまなシステムや環境でのデプロイが確実に成功します。
 
 ## バグの修正 {#bug-fixes}
 
@@ -434,7 +434,7 @@ TiDB v6.2.0 以降、 BRを使用した RawKV のバックアップと復元は�
     -   `max_sample_size`が`0` [＃11192](https://github.com/tikv/tikv/issues/11192) @ [リクササシネーター](https://github.com/LykxSassinator)に設定されている場合に統計を分析すると発生するpanicの問題を修正しました
     -   Raft Engineが有効になっているときに暗号化キーがクリーンアップされない問題を修正[＃12890](https://github.com/tikv/tikv/issues/12890) @ [タボキ](https://github.com/tabokie)
     -   `get_valid_int_prefix`関数が TiDB と互換性がない問題を修正しました。たとえば、 `FLOAT`型が誤って`INT` [＃13045](https://github.com/tikv/tikv/issues/13045) @ [グオシャオゲ](https://github.com/guo-shaoge)に変換されていました。
-    -   新しいリージョンのコミット ログ期間が長すぎるため、QPS が[＃13077](https://github.com/tikv/tikv/issues/13077) @ [コナー1996](https://github.com/Connor1996)低下する問題を修正しました。
+    -   新しいリージョンのコミットログ期間が長すぎるため、QPS が[＃13077](https://github.com/tikv/tikv/issues/13077) @ [コナー1996](https://github.com/Connor1996)低下する問題を修正しました。
     -   リージョンハートビートが中断された後にPDがTiKVに再接続しない問題を修正[＃12934](https://github.com/tikv/tikv/issues/12934) @ [バッファフライ](https://github.com/bufferflies)
 
 -   ツール

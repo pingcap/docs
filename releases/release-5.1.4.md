@@ -1,6 +1,6 @@
 ---
 title: TiDB 5.1.4 Release Notes
-summary: "TiDB 5.1.4 Release Notes: Compatibility changes include default value changes for system variables. Improvements in partition pruning, memory usage tracking, and speed of inserting SST files. Bug fixes address memory leaks, configuration issues, and incorrect query results. Tools like TiCDC and TiFlash also receive various fixes and improvements."
+summary: 「TiDB 5.1.4 リリース ノート: 互換性の変更には、システム変数のデフォルト値の変更が含まれます。パーティション プルーニング、メモリ使用量の追跡、および SST ファイルの挿入速度が改善されました。バグ修正により、メモリリーク、構成の問題、および不正なクエリ結果が修正されました。TiCDC やTiFlashなどのツールにも、さまざまな修正と改善が加えられました。」
 ---
 
 # TiDB 5.1.4 リリースノート {#tidb-5-1-4-release-notes}
@@ -13,7 +13,7 @@ TiDB バージョン: 5.1.4
 
 -   ティビ
 
-    -   システム変数[`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)のデフォルト値を`2`から`1` [＃31748](https://github.com/pingcap/tidb/issues/31748)に変更します
+    -   システム変数[`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)のデフォルト値を`2`から`1`に変更する[＃31748](https://github.com/pingcap/tidb/issues/31748)
     -   v5.1.4以降、TiKVが`storage.enable-ttl = true`に設定されている場合、TiKVのTTL機能は[RawKVモード](https://tikv.org/docs/5.1/concepts/explore-tikv-features/ttl/) [＃27303](https://github.com/pingcap/tidb/issues/27303)のみをサポートしているため、TiDBからの要求は拒否されます。
 
 -   ツール
@@ -67,20 +67,20 @@ TiDB バージョン: 5.1.4
     -   `INSERT ... SELECT ... ON DUPLICATE KEY UPDATE`文を実行するとpanic[＃28078](https://github.com/pingcap/tidb/issues/28078)発生する問題を修正
     -   `ENUM`種類の列[＃27831](https://github.com/pingcap/tidb/issues/27831)に対して`JOIN`実行したときに発生する可能性のある誤った結果を修正しました。
     -   INDEX HASH JOINが`send on closed channel`エラーを返す問題を修正しました[＃31129](https://github.com/pingcap/tidb/issues/31129)
-    -   [`BatchCommands`](/tidb-configuration-file.md#max-batch-size) API を使用すると、まれに TiKV への TiDB リクエストの送信がブロックされる可能性がある問題を修正しました[#32500](https://github.com/pingcap/tidb/issues/32500)
+    -   [`BatchCommands`](/tidb-configuration-file.md#max-batch-size) API を使用すると、まれに TiKV への TiDB リクエストの送信がブロックされる可能性がある問題を修正しました[＃32500](https://github.com/pingcap/tidb/issues/32500)
     -   楽観的トランザクションモード[＃30410](https://github.com/pingcap/tidb/issues/30410)でデータインデックスの不整合が発生する可能性がある問題を修正
     -   トランザクションを使用する場合と使用しない場合でウィンドウ関数が異なる結果を返す可能性がある問題を修正しました[＃29947](https://github.com/pingcap/tidb/issues/29947)
     -   `Decimal`から`String` [＃29417](https://github.com/pingcap/tidb/issues/29417)へのキャスト時に長さ情報が間違っている問題を修正
     -   `tidb_enable_vectorized_expression`ベクトル化式を`off` [＃29434](https://github.com/pingcap/tidb/issues/29434)に設定すると`GREATEST`関数が誤った結果を返す問題を修正しました。
     -   オプティマイザが`join`無効なプランをキャッシュする場合がある問題を修正[＃28087](https://github.com/pingcap/tidb/issues/28087)
     -   ベクトル化された式[＃29244](https://github.com/pingcap/tidb/issues/29244) [＃28643](https://github.com/pingcap/tidb/issues/28643)の`microsecond`および`hour`関数の誤った結果を修正
-    -   `ALTER TABLE.. ADD INDEX`文を実行するときに TiDBpanicが発生する問題を修正[＃27687](https://github.com/pingcap/tidb/issues/27687)
+    -   場合によっては`ALTER TABLE.. ADD INDEX`文を実行するときに TiDBpanicが発生する問題を修正[＃27687](https://github.com/pingcap/tidb/issues/27687)
     -   MPPノードの可用性検出が一部のコーナーケースで機能しないバグを修正[＃3118](https://github.com/pingcap/tics/issues/3118)
     -   `MPP task ID` [＃27952](https://github.com/pingcap/tidb/issues/27952)を割り当てる際の`DATA RACE`問題を修正
     -   空の`dual table` [＃28250](https://github.com/pingcap/tidb/issues/28250)を削除した後のMPPクエリの`INDEX OUT OF RANGE`エラーを修正
     -   MPPクエリ[＃1791](https://github.com/pingcap/tics/issues/1791)の誤検知エラーログ`invalid cop task execution summaries length`の問題を修正
     -   SET GLOBAL tidb_skip_isolation_level_check=1 が新しいセッション設定に影響しない問題を修正[＃27897](https://github.com/pingcap/tidb/issues/27897)
-    -   `tiup bench`長時間実行されると発生する`index out of range`問題を修正[＃26832](https://github.com/pingcap/tidb/issues/26832)
+    -   `tiup bench`を長時間実行した場合に発生する`index out of range`問題を修正[＃26832](https://github.com/pingcap/tidb/issues/26832)
 
 -   ティクヴ
 
@@ -91,10 +91,10 @@ TiDB バージョン: 5.1.4
     -   新しい選出が終了した後に`Prepare Merge`トリガーされたが、分離されたピアに通知されない場合のメタデータ破損の問題を修正[＃11526](https://github.com/tikv/tikv/issues/11526)
     -   コルーチンの実行速度が速すぎる場合に時々発生するデッドロックの問題を修正[＃11549](https://github.com/tikv/tikv/issues/11549)
     -   フレームグラフのプロファイリング時に発生する可能性のあるデッドロックとメモリリークの問題を修正[＃11108](https://github.com/tikv/tikv/issues/11108)
-    -   悲観的トランザクション[＃11187](https://github.com/tikv/tikv/issues/11187)で事前書き込み要求を再試行するときにまれに発生するデータの不整合の問題を修正
+    -   悲観的トランザクション[＃11187](https://github.com/tikv/tikv/issues/11187)で事前書き込み要求を再試行するときにまれに発生するデータの不整合の問題を修正しました。
     -   設定`resource-metering.enabled`機能しないバグを修正[＃11235](https://github.com/tikv/tikv/issues/11235)
     -   `resolved_ts` [＃10965](https://github.com/tikv/tikv/issues/10965)で一部のコルーチンがリークする問題を修正
-    -   書き込みフローが低い場合に「GC が動作できません」という誤った警告が報告される問題を修正[＃9910](https://github.com/tikv/tikv/issues/9910)
+    -   書き込みフローが低い場合に誤った「GC が動作できません」という警告が報告される問題を修正[＃9910](https://github.com/tikv/tikv/issues/9910)
     -   tikv-ctl が正しい地域関連情報を返すことができないバグを修正[＃11393](https://github.com/tikv/tikv/issues/11393)
     -   TiKVノードがダウンすると解決されたタイムスタンプが[＃11351](https://github.com/tikv/tikv/issues/11351)遅れる問題を修正
     -   極端な状況でリージョンのマージ、ConfChange、スナップショットが同時に発生した場合に発生するpanicの問題を修正[＃11475](https://github.com/tikv/tikv/issues/11475)
@@ -120,19 +120,19 @@ TiDB バージョン: 5.1.4
 
     -   `str_to_date()`関数がマイクロ秒を解析するときに先頭のゼロを誤って処理する問題を修正しました。
     -   メモリ制限が有効になっているときにTiFlash がクラッシュする問題を修正
-    -   入力時間が1970-01-01 00:00:01 UTCより前の場合、 `unix_timestamp`の動作がTiDBまたはMySQLの動作と一致しない問題を修正しました。
+    -   入力時間が 1970-01-01 00:00:01 UTC より前の場合、 `unix_timestamp`の動作が TiDB または MySQL の動作と一致しない問題を修正しました。
     -   主キーがハンドルされているときに主キー列を拡張することによって発生する可能性のあるデータの不整合を修正しました。
     -   オーバーフローバグと、 `DECIMAL`データ型のデータを比較するときに`Can't compare`エラーが報告される問題を修正しました。
-    -   `3rd arguments of function substringUTF8 must be constants.`の予期​​しないエラーを修正
+    -   `3rd arguments of function substringUTF8 must be constants.`の予期しないエラーを修正
     -   `nsl`ライブラリのないプラットフォームでTiFlash が起動しない問題を修正
-    -   データを`DECIMAL`データ型にキャストする際のオーバーフローのバグを修正
-    -   `castStringAsReal`動作がTiFlashと TiDB/TiKV で一貫していない問題を修正
+    -   データを`DECIMAL`データ型にキャストする際のオーバーフローバグを修正
+    -   `castStringAsReal`動作がTiFlashと TiDB/TiKV で一致しない問題を修正
     -   TiFlashが再起動後に`EstablishMPPConnection`エラーを返す可能性がある問題を修正しました
     -   TiFlashレプリカの数を0に設定した後に古いデータを再利用できない問題を修正
     -   `CastStringAsDecimal`動作がTiFlashと TiDB/TiKV で一致しない問題を修正
     -   `where <string>`句のクエリが間違った結果を返す問題を修正しました
     -   MPPクエリが停止したときにTiFlashがpanicになる可能性がある問題を修正
-    -   `Unexpected type of column: Nullable(Nothing)`の予期​​しないエラーを修正
+    -   `Unexpected type of column: Nullable(Nothing)`の予期しないエラーを修正
 
 -   ツール
 
@@ -148,12 +148,12 @@ TiDB バージョン: 5.1.4
         -   EtcdWorker がオーナーとプロセッサ[＃3750](https://github.com/pingcap/tiflow/issues/3750)をハングさせる可能性があるバグを修正
         -   クラスターのアップグレード後に`stopped`チェンジフィードが自動的に再開される問題を修正[＃3473](https://github.com/pingcap/tiflow/issues/3473)
         -   デフォルト値を複製できない問題を修正[＃3793](https://github.com/pingcap/tiflow/issues/3793)
-        -   TiCDC デフォルト値パディング例外によるデータの不整合を修正[＃3918](https://github.com/pingcap/tiflow/issues/3918) [＃3929](https://github.com/pingcap/tiflow/issues/3929)
+        -   TiCDC のデフォルト値パディング例外によって発生するデータの不整合を修正[＃3918](https://github.com/pingcap/tiflow/issues/3918) [＃3929](https://github.com/pingcap/tiflow/issues/3929)
         -   PDリーダーがシャットダウンして新しいノードに転送するときにオーナーがスタックするバグを修正[＃3615](https://github.com/pingcap/tiflow/issues/3615)
         -   etcd [＃2980](https://github.com/pingcap/tiflow/issues/2980)でタスク ステータスを手動でクリーンアップするときに発生する TiCDCpanicの問題を修正しました。
         -   RHELリリース[＃3584](https://github.com/pingcap/tiflow/issues/3584)のタイムゾーンの問題によりサービスを開始できない問題を修正
         -   MySQLシンクデッドロック[＃2706](https://github.com/pingcap/tiflow/issues/2706)による警告が頻繁に発生する問題を修正
-        -   Canal および Maxwell プロトコル[＃3676](https://github.com/pingcap/tiflow/issues/3676)で`enable-old-value`構成項目が自動的に`true`に設定されないバグを修正
+        -   Canalプロトコル[＃3676](https://github.com/pingcap/tiflow/issues/3676)で設定項目`enable-old-value`が`true`に自動的に設定されないバグを修正
         -   AvroシンクがJSON型列[＃3624](https://github.com/pingcap/tiflow/issues/3624)の解析をサポートしていない問題を修正
         -   チェンジフィードチェックポイントラグ[＃3010](https://github.com/pingcap/ticdc/issues/3010)負の値エラーを修正
         -   コンテナ環境のOOM問題を修正[＃1798](https://github.com/pingcap/tiflow/issues/1798)

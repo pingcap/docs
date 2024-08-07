@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with Django
-summary: Learn how to connect to TiDB using Django. This tutorial gives Python sample code snippets that work with TiDB using Django.
+summary: Django を使用して TiDB に接続する方法を学びます。このチュートリアルでは、Django を使用して TiDB を操作する Python サンプル コード スニペットを紹介します。
 ---
 
 # Django で TiDB に接続する {#connect-to-tidb-with-django}
@@ -110,7 +110,7 @@ mysqlclient のインストールで問題が発生した場合は、 [mysqlclie
     cp .env.example .env
     ```
 
-6.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
+6.  対応する接続文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
 
     ```dotenv
     TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
@@ -136,7 +136,7 @@ mysqlclient のインストールで問題が発生した場合は、 [mysqlclie
 
 3.  **「どこからでもアクセスを許可」**をクリックし、 **「CA 証明書のダウンロード」**をクリックして CA 証明書をダウンロードします。
 
-    接続文字列を取得する方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
+    接続文字列の取得方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
 
 4.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -144,7 +144,7 @@ mysqlclient のインストールで問題が発生した場合は、 [mysqlclie
     cp .env.example .env
     ```
 
-5.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
+5.  対応する接続文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
 
     ```dotenv
     TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
@@ -168,7 +168,7 @@ mysqlclient のインストールで問題が発生した場合は、 [mysqlclie
     cp .env.example .env
     ```
 
-2.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
+2.  対応する接続文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
 
     ```dotenv
     TIDB_HOST='{tidb_server_host}'
@@ -326,7 +326,7 @@ Player.objects.filter(coins=100).delete()
 
 ## 次のステップ {#next-steps}
 
--   [Djangoのドキュメント](https://www.djangoproject.com/)から Django の使い方を詳しく学びます。
+-   Django の使い方を[Djangoのドキュメント](https://www.djangoproject.com/)から詳しく学びます。
 -   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入](/develop/dev-guide-insert-data.md) 、 [データの更新](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブル読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
 -   プロフェッショナル[TiDB 開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
@@ -334,12 +334,12 @@ Player.objects.filter(coins=100).delete()
 
 <CustomContent platform="tidb">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](/support.md)について質問します。
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
 
 </CustomContent>

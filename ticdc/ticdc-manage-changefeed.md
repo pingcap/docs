@@ -1,6 +1,6 @@
 ---
 title: Manage Changefeeds
-summary: Learn how to manage TiCDC changefeeds.
+summary: TiCDC 変更フィードの管理方法を学習します。
 ---
 
 # チェンジフィードを管理する {#manage-changefeeds}
@@ -18,7 +18,7 @@ cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://ro
 ```shell
 Create changefeed successfully!
 ID: simple-replication-task
-Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2024-02-29T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":false,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v7.5.1"}
+Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2024-08-05T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":false,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v7.5.3"}
 ```
 
 ## レプリケーションタスクリストをクエリする {#query-the-replication-task-list}
@@ -68,7 +68,7 @@ cdc cli changefeed query -s --server=http://10.0.10.25:8300 --changefeed-id=simp
 
 上記のコマンドと結果:
 
--   `state`は、現在の変更フィードのレプリケーション状態です。各状態は`changefeed list`の状態と一致している必要があります。
+-   `state`は、現在の変更フィードのレプリケーション状態です。各状態は、 `changefeed list`の状態と一致している必要があります。
 -   `tso` 、ダウンストリームに正常に複製された現在の変更フィード内の最大のトランザクション TSO を表します。
 -   `checkpoint` 、ダウンストリームに正常に複製された現在の変更フィード内の最大トランザクション TSO に対応する時間を表します。
 -   `error` 、現在の変更フィードでエラーが発生したかどうかを記録します。
@@ -281,7 +281,7 @@ force-replicate = true
 -   TiCDC のデータ複製タスクは長時間一時停止され、その間に大量の増分データが蓄積され、複製が必要になります。
 -   データ複製タスクは早いタイムスタンプから開始されるため、大量の増分データを複製する必要が生じます。
 
-v4.0.13 以降に`cdc cli`使用して作成された changefeed では、Unified Sorter がデフォルトで有効になります。v4.0.13 より前に存在していた changefeed では、以前の構成が使用されます。
+v4.0.13 以降に`cdc cli`使用して作成された changefeed では、Unified Sorter がデフォルトで有効になっています。v4.0.13 より前に存在していた changefeed では、以前の構成が使用されます。
 
 変更フィードで Unified Sorter 機能が有効になっているかどうかを確認するには、次のサンプル コマンドを実行します (PD インスタンスの IP アドレスが`http://10.0.10.25:2379`であると想定)。
 

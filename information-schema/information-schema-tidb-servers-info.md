@@ -1,11 +1,11 @@
 ---
 title: TIDB_SERVERS_INFO
-summary: 表TIDB_SERVERS_INFOは、TiDBクラスタ内のTiDBサーバーに関する情報を提供します。このテーブルはTiDBサーバーレスクラスターでは使用できません。フィールドにはDDL_ID、IP、PORT、STATUS_PORT、LEASE、VERSION、GIT_HASH、BINLOG_STATUS、LABELSが含まれます。ビューを作成すると、サーバーの情報が表示されます。
+summary: TIDB_SERVERS_INFO` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# TIDB_SERVERS_INFO {#tidb-servers-info}
+# TIDB_サーバー情報 {#tidb-servers-info}
 
-表`TIDB_SERVERS_INFO`は、TiDBクラスタ内の TiDB サーバー (つまり、tidb-server プロセス) に関する情報を提供します。
+`TIDB_SERVERS_INFO`テーブルには、TiDBクラスタ内の TiDB サーバー (つまり、tidb-server プロセス) に関する情報が提供されます。
 
 > **注記：**
 >
@@ -16,7 +16,7 @@ USE INFORMATION_SCHEMA;
 DESC tidb_servers_info;
 ```
 
-出力は次のとおりです。
+出力は次のようになります。
 
 ```sql
 +---------------+--------------+------+------+---------+-------+
@@ -41,7 +41,7 @@ DESC tidb_servers_info;
 SELECT * FROM TIDB_SERVERS_INFO\G
 ```
 
-出力は次のとおりです。
+出力は次のようになります。
 
 ```sql
 *************************** 1. row ***************************
@@ -50,7 +50,7 @@ SELECT * FROM TIDB_SERVERS_INFO\G
          PORT: 4000
   STATUS_PORT: 10080
         LEASE: 45s
-      VERSION: 8.0.11-TiDB-v7.5.1
+      VERSION: 8.0.11-TiDB-v7.5.3
      GIT_HASH: 827d8ff2d22ac4c93ae1b841b79d468211e1d393
 BINLOG_STATUS: Off
        LABELS:

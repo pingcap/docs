@@ -1,6 +1,6 @@
 ---
 title: Use the OpenAPI Specification of a Data App with Next.js
-summary: Learn how to use the OpenAPI Specification of a Data App to generate client code and develop a Next.js application.
+summary: データ アプリの OpenAPI 仕様を使用してクライアント コードを生成し、Next.js アプリケーションを開発する方法を学習します。
 ---
 
 # Next.js でデータ アプリの OpenAPI 仕様を使用する {#use-the-openapi-specification-of-a-data-app-with-next-js}
@@ -22,7 +22,7 @@ Next.js で OpenAPI 仕様を使用する前に、次のものを用意してく
 
 まず、TiDB クラスターにテーブル`test.repository`を作成し、そこにサンプル データを挿入します。次の例では、デモ用のデータとして、PingCAP によって開発されたオープン ソース プロジェクトをいくつか挿入します。
 
-SQL ステートメントを実行するには、 [TiDB Cloudコンソール](https://tidbcloud.com)の[チャット2クエリ](/tidb-cloud/explore-data-with-chat2query.md)使用できます。
+SQL ステートメントを実行するには、 [TiDB Cloudコンソール](https://tidbcloud.com)の[SQL エディター](/tidb-cloud/explore-data-with-chat2query.md)使用できます。
 
 ```sql
 -- Select the database
@@ -65,7 +65,7 @@ SELECT * FROM test.repository;
     yarn create next-app hello-repos
     ```
 
-    次のコマンドを使用して、新しく作成したプロジェクトにディレクトリを変更します。
+    次のコマンドを使用して、新しく作成されたプロジェクトにディレクトリを変更します。
 
     ```shell
     cd hello-repos

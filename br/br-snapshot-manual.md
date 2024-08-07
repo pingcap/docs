@@ -1,6 +1,6 @@
 ---
 title: TiDB Snapshot Backup and Restore Command Manual
-summary: TiDB Snapshot Backup and Restore Command Manual describes commands for backing up and restoring cluster snapshots, databases, and tables. It also covers encrypting backup data and restoring encrypted snapshots. The BR tool supports self-adapting to GC and introduces the --ignore-stats parameter for backing up and restoring statistics. It also supports encrypting backup data and restoring partial data of specified databases or tables.
+summary: TiDB スナップショット バックアップおよび復元コマンド マニュアルでは、クラスター スナップショット、データベース、およびテーブルをバックアップおよび復元するためのコマンドについて説明しています。また、バックアップ データの暗号化と暗号化されたスナップショットの復元についても説明しています。BR ツールは GC への自己適応をサポートし、統計のバックアップと復元のための --ignore-stats パラメータを導入しています。また、バックアップ データの暗号化と、指定されたデータベースまたはテーブルの部分的なデータの復元もサポートしています。
 ---
 
 # TiDB スナップショットのバックアップと復元コマンド マニュアル {#tidb-snapshot-backup-and-restore-command-manual}
@@ -34,7 +34,7 @@ summary: TiDB Snapshot Backup and Restore Command Manual describes commands for 
 ```shell
 br backup full \
     --pd "${PD_IP}:2379" \
-    --backupts '2022-09-08 13:30:00' \
+    --backupts '2024-06-28 13:30:00 +08:00' \
     --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
     --ratelimit 128 \
     --log-file backupfull.log
@@ -42,7 +42,7 @@ br backup full \
 
 上記のコマンドでは、
 
--   `--backupts` : スナップショットの時点。形式は[TSO](/glossary.md#tso)または`400036290571534337`や`2018-05-11 01:42:23`などのタイムスタンプです。このスナップショットのデータがガベージ コレクションされた場合、 `br backup`コマンドはエラーを返し、&#39;br&#39; は終了します。このパラメータを指定しない場合、 `br`バックアップ開始時刻に対応するスナップショットを選択します。
+-   `--backupts` : スナップショットの時点。形式は[TSO](/glossary.md#tso)または`400036290571534337`や`2018-05-11 01:42:23 +08:00`などのタイムスタンプです。このスナップショットのデータがガベージ コレクションされている場合、 `br backup`コマンドはエラーを返し、&#39;br&#39; は終了します。このパラメータを指定しない場合、 `br`バックアップ開始時刻に対応するスナップショットを選択します。
 -   `--ratelimit` : バックアップ タスクを実行する**TiKV あたりの**最大速度。単位は MiB/s です。
 -   `--log-file` : `br`ログが書き込まれる対象ファイル。
 
@@ -75,7 +75,7 @@ br backup db \
     --log-file backuptable.log
 ```
 
-上記のコマンドでは、 `--db`​​データベース名を指定し、その他のパラメータは[TiDB クラスターのスナップショットをバックアップする](#back-up-cluster-snapshots)と同じです。
+上記のコマンドでは、 `--db`データベース名を指定し、その他のパラメータは[TiDB クラスターのスナップショットをバックアップする](#back-up-cluster-snapshots)と同じです。
 
 ### テーブルをバックアップする {#back-up-a-table}
 
@@ -135,7 +135,7 @@ br restore full \
 --storage local:///br_data/ --pd "${PD_IP}:2379" --log-file restore.log
 ```
 
-バックアップと復元機能では、データをバックアップするときに、統計情報を JSON 形式で`backupmeta`​​ファイル内に保存します。データを復元するときに、統計情報を JSON 形式でクラスターに読み込みます。詳細については、 [ロード統計](/sql-statements/sql-statement-load-stats.md)を参照してください。
+バックアップと復元機能では、データをバックアップするときに、統計情報を JSON 形式で`backupmeta`ファイル内に保存します。データを復元するときに、統計情報を JSON 形式でクラスターに読み込みます。詳細については、 [ロード統計](/sql-statements/sql-statement-load-stats.md)を参照してください。
 
 ## バックアップデータを暗号化する {#encrypt-the-backup-data}
 
@@ -182,7 +182,7 @@ br restore full \
 上記のコマンドでは、
 
 -   `--with-sys-table` : BR は、アカウント権限データ、SQL バインディング、統計情報など、**一部のシステム テーブルのデータ**を復元します ( [統計のバックアップ](/br/br-snapshot-manual.md#back-up-statistics)を参照)。ただし、統計テーブル ( `mysql.stat_*` ) とシステム変数テーブル ( `mysql.tidb`と`mysql.global_variables` ) は復元されません。詳細については、 [`mysql`スキーマ内のテーブルを復元する](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)を参照してください。
--   `--ratelimit` : バックアップ タスクを実行する**TiKV あたりの**最大速度。単位は MiB/s です。
+-   `--ratelimit` : 復元タスクを実行する**TiKV あたりの**最大速度。単位は MiB/s です。
 -   `--log-file` : `br`のログが書き込まれる対象ファイル。
 
 復元中は、以下のようにターミナルに進行状況バーが表示されます。進行状況バーが 100% に進むと、復元タスクは完了です。 `br` 、復元されたデータを検証して、データのセキュリティを確保します。
@@ -210,7 +210,7 @@ br restore db \
     --log-file restore_db.log
 ```
 
-上記のコマンドでは、 `--db`​​復元するデータベースの名前を指定し、その他のパラメータは[TiDB クラスターのスナップショットを復元する](#restore-cluster-snapshots)と同じです。
+上記のコマンドでは、 `--db`復元するデータベースの名前を指定し、その他のパラメータは[TiDB クラスターのスナップショットを復元する](#restore-cluster-snapshots)と同じです。
 
 > **注記：**
 >
@@ -232,13 +232,13 @@ br restore table \
     --log-file restore_table.log
 ```
 
-上記のコマンドでは、 `--table`​​復元するテーブルの名前を指定し、その他のパラメータは[データベースを復元する](#restore-a-database)と同じです。
+上記のコマンドでは、 `--table`復元するテーブルの名前を指定し、その他のパラメータは[データベースを復元する](#restore-a-database)と同じです。
 
 ### テーブルフィルターを使用して複数のテーブルを復元する {#restore-multiple-tables-with-table-filter}
 
 より複雑なフィルター ルールを使用して複数のテーブルを復元するには、 `br restore full`コマンドを実行し、 [テーブルフィルター](/table-filter.md)を`--filter`または`-f`で指定します。
 
-次の例では、 `db*.tbl*`フィルター ルールに一致するテーブルを Amazon S3 からターゲット クラスターに復元します。
+次の例では、 `db*.tbl*`フィルタールールに一致するテーブルを Amazon S3 からターゲットクラスターに復元します。
 
 ```shell
 br restore full \

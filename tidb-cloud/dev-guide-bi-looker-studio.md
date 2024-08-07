@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB Serverless with Looker Studio
-summary: Learn how to connect to TiDB Serverless using Looker Studio.
+summary: Looker Studio を使用して TiDB Serverless に接続する方法を学習します。
 ---
 
 # Looker Studio で TiDB Serverless に接続する {#connect-to-tidb-serverless-with-looker-studio}
@@ -134,4 +134,4 @@ TiDB Serverless のインタラクティブ チュートリアルで提供され
 
 ## 助けが必要？ {#need-help}
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。

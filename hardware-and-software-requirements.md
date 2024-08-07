@@ -1,9 +1,9 @@
 ---
 title: Software and Hardware Recommendations
-summary: Learn the software and hardware recommendations for deploying and running TiDB.
+summary: TiDB を導入および実行するためのソフトウェアとハードウェアの推奨事項について説明します。
 ---
 
-# ソフトウェアとハ​​ードウェアの推奨事項 {#software-and-hardware-recommendations}
+# ソフトウェアとハードウェアの推奨事項 {#software-and-hardware-recommendations}
 
 <!-- Localization note for TiDB:
 
@@ -21,11 +21,12 @@ v7.5 LTS では、TiDB はオペレーティング システムと CPU アーキ
 
 -   TiDB は、次のオペレーティング システムと CPU アーキテクチャの組み合わせに対して**エンタープライズ レベルの本番品質を提供し**、製品機能は包括的かつ体系的に検証されています。
 
-    <table><thead><tr><th>オペレーティングシステム</th><th>サポートされているCPUアーキテクチャ</th></tr></thead><tbody><tr><td>Red Hat Enterprise Linux 8.4 以降の 8.x バージョン</td><td><ul><li>64ビット</li><li>アーム64</li></ul></td></tr><tr><td><ul><li> Red Hat Enterprise Linux 7.3 以降の 7.x バージョン</li><li>CentOS 7.3 以降の 7.x バージョン</li></ul></td><td><ul><li>64ビット</li><li>アーム64</li></ul></td></tr><tr><td>アマゾン リナックス 2</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td> Rocky Linux 9.1 以降</td><td><ul><li>64ビット</li><li>アーム64</li></ul></td></tr><tr><td>キリン オイラー V10 SP1/SP2</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td>ユニオンテック OS (UOS) V20</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td>オープンオイラー 22.03 LTS SP1</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr></tbody></table>
+    <table><thead><tr><th>オペレーティングシステム</th><th>サポートされているCPUアーキテクチャ</th></tr></thead><tbody><tr><td>Red Hat Enterprise Linux 8.4 以降の 8.x バージョン</td><td><ul><li>64ビット</li><li>アーム64</li></ul></td></tr><tr><td><ul><li> Red Hat Enterprise Linux 7.3 以降の 7.x バージョン</li><li>CentOS 7.3 またはそれ以降の 7.x バージョン (TiDB は 8.5 LTS でサポートを終了します)</li></ul></td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td>アマゾン リナックス 2</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td> Rocky Linux 9.1 以降</td><td><ul><li>64ビット</li><li>アーム64</li></ul></td></tr><tr><td>キリン オイラー V10 SP1/SP2</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td>ユニオンテック OS (UOS) V20</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td> openEuler 22.03 LTS SP1/SP3</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr></tbody></table>
 
     > **注記：**
     >
-    > [CentOS Linux のサポート終了](https://www.centos.org/centos-linux-eol/)によると、CentOS Linux 8 のアップストリームサポートは 2021 年 12 月 31 日で終了しました。CentOS Stream 8 は CentOS 組織によって引き続きサポートされます。
+    > -   [CentOS Linux のサポート終了](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/)によると、CentOS Linux 7 のアップストリームサポートは 2024 年 6 月 30 日に終了します。TiDB は 8.5 LTS バージョンで CentOS 7 のサポートを終了します。Rocky Linux 9.1 以降のバージョンを使用することをお勧めします。
+    > -   [CentOS Linux のサポート終了](https://www.centos.org/centos-linux-eol/)によると、CentOS Linux 8 のアップストリームサポートは 2021 年 12 月 31 日に終了しました。アップストリーム[CentOS Stream 8のサポート](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/)は 2024 年 5 月 31 日に終了しました。CentOS Stream 9 は CentOS 組織によって引き続きサポートされます。
 
 -   次のオペレーティング システムと CPU アーキテクチャの組み合わせでは、TiDB をコンパイル、ビルド、およびデプロイできます。また、OLTP、OLAP、およびデータ ツールの基本機能も使用できます。ただし、TiDB は**エンタープライズ レベルの本番品質を保証するものではありません**。
 

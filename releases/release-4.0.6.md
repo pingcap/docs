@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.6 Release Notes
-summary: TiDB 4.0.6 was released on September 15, 2020. New features include TiFlash support for outer join and TiDB Dashboard improvements. Tools like TiCDC and TiKV have also been updated. Bug fixes for TiDB, TiKV, PD, TiFlash, and various tools are included in this release.
+summary: TiDB 4.0.6 は 2020 年 9 月 15 日にリリースされました。新機能には、外部結合のTiFlashサポートと TiDB ダッシュボードの改善が含まれます。TiCDC や TiKV などのツールも更新されました。このリリースには、TiDB、TiKV、PD、 TiFlash、およびさまざまなツールのバグ修正が含まれています。
 ---
 
 # TiDB 4.0.6 リリースノート {#tidb-4-0-6-release-notes}
@@ -26,8 +26,6 @@ TiDB バージョン: 4.0.6
 -   ツール
 
     -   TiCDC (v4.0.6 以降 GA)
-
-        -   `maxwell`形式[＃869](https://github.com/pingcap/tiflow/pull/869)でのデータ出力をサポート
 
 ## 改善点 {#improvements}
 
@@ -69,7 +67,7 @@ TiDB バージョン: 4.0.6
     -   データ複製用の Grafana パネルを追加する ( `apply Region snapshots`と`ingest SST files` )
     -   Grafanaパネルを`write stall`追加
     -   `dt_segment_force_merge_delta_rows`と`dt_segment_force_merge_delta_deletes`を足して`write stall`のしきい値を調整する
-    -   TiFlash-Proxy で設定`raftstore.snap-handle-pool-size` ～ `0`をサポートし、マルチスレッドによるリージョンスナップショットの適用を無効にして、データ複製中のメモリ消費を削減します。
+    -   TiFlash-Proxy で設定`raftstore.snap-handle-pool-size` ～ `0`をサポートし、マルチスレッドによるリージョンスナップショットの適用を無効にして、データ複製時のメモリ消費を削減します。
     -   `https_port`と`metrics_port`のCNチェックをサポート
 
 -   ツール
@@ -135,7 +133,7 @@ TiDB バージョン: 4.0.6
     -   [＃19891](https://github.com/pingcap/tidb/pull/19891)の予期せぬ成功を修正
     -   プッシュダウン式[＃19876](https://github.com/pingcap/tidb/pull/19876)に許可されるデフォルトの最大パケット長の誤った値を修正しました。
     -   `ENUM` `SET`の`Max`関数の誤っ`Min`動作を修正[＃19869](https://github.com/pingcap/tidb/pull/19869)
-    -   一部のTiFlashノードがオフラインの場合に`tiflash_segments`および`tiflash_tables`システム テーブルからの読み取りエラーを修正[＃19748](https://github.com/pingcap/tidb/pull/19748)
+    -   一部のTiFlashノードがオフラインの場合の`tiflash_segments`および`tiflash_tables`システム テーブルからの読み取りエラーを修正[＃19748](https://github.com/pingcap/tidb/pull/19748)
     -   `Count(col)`集計関数[＃19628](https://github.com/pingcap/tidb/pull/19628)の誤った結果を修正
     -   `TRUNCATE`操作[＃19445](https://github.com/pingcap/tidb/pull/19445)のランタイムエラーを修正
     -   `Var`大文字が含まれている場合、 `PREPARE statement FROM @Var`失敗する問題を修正[＃19378](https://github.com/pingcap/tidb/pull/19378)
@@ -159,7 +157,7 @@ TiDB バージョン: 4.0.6
 
 -   PD
 
-    -   ブートストラップ[＃2922](https://github.com/pingcap/pd/pull/2922)中に異なるクラスターが相互に通信するのを防ぐために、 `initial-cluster-token`構成を追加します。
+    -   ブートストラップ[＃2922](https://github.com/pingcap/pd/pull/2922)中に異なるクラスタが相互に通信するのを防ぐために`initial-cluster-token`構成を追加します。
     -   モードが`auto` [＃2826](https://github.com/pingcap/pd/pull/2826)のときの店舗制限率の単位を修正
     -   一部のスケジューラがエラーを解決せずに構成を保持する問題を修正[＃2818](https://github.com/tikv/pd/pull/2818)
     -   スケジューラ[＃2871](https://github.com/tikv/pd/pull/2871) [＃2874](https://github.com/tikv/pd/pull/2874)の空の HTTP 応答を修正

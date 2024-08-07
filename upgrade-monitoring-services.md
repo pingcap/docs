@@ -1,115 +1,129 @@
 ---
 title: Upgrade Cluster Monitoring Services
-summary: TiDBクラスタ監視サービスのアップグレードについて、TiUPを使用して自動的に展開される監視サービスは最新バージョンではないため、手動でアップグレードする必要があります。Prometheus、Grafana、Alertmanagerをアップグレードする手順があります。アップグレード後は、各サーバーのホームページでバージョンを確認して成功を確認してください。
+summary: TiDB クラスターの Prometheus、Grafana、および Alertmanager 監視サービスをアップグレードする方法を学びます。
 ---
 
 # TiDBクラスタ監視サービスのアップグレード {#upgrade-tidb-cluster-monitoring-services}
 
-TiDB クラスターをデプロイする場合、 TiUP はクラスターの監視サービス (Prometheus、Grafana、Alertmanager など) を自動的にデプロイします。このクラスターをスケールアウトすると、 TiUP はスケーリング中に新しく追加されたノードの監視構成も自動的に追加します。 TiUPによって自動的に展開される監視サービスは、通常、これらのサードパーティ監視サービスの最新バージョンではありません。最新バージョンを使用するには、このドキュメントに従って監視サービスをアップグレードします。
+TiDB クラスターをデプロイすると、 TiUP はクラスターの監視サービス (Prometheus、Grafana、Alertmanager など) を自動的にデプロイします。このクラスターをスケールアウトすると、 TiUP はスケーリング中に新しく追加されたノードの監視構成も自動的に追加します。TiUP によって自動的にデプロイされる監視サービスは、通常、これらのサードパーティ監視サービスの最新バージョンではありません。最新バージョンを使用するには、このドキュメントに従って監視サービスをアップグレードしてください。
 
-クラスターを管理する場合、 TiUP は独自の構成を使用して監視サービスの構成をオーバーライドします。構成ファイルを置き換えることによってモニタリング サービスを直接アップグレードすると、クラスター上での後続のTiUP操作 ( `deploy` 、 `scale-out` 、 `scale-in` 、 `reload`など) によってアップグレードが上書きされ、エラーが発生する可能性があります。 Prometheus、Grafana、および Alertmanager をアップグレードするには、構成ファイルを直接置き換えるのではなく、このドキュメントの手順に従ってください。
+クラスターを管理する際、 TiUP は独自の構成を使用して監視サービスの構成を上書きします。構成ファイルを置き換えて監視サービスを直接アップグレードすると、クラスターでの後続のTiUP操作`scale-out` `deploy` `reload` ) によってアップグレードが上書き`scale-in`れ、エラーが発生する可能性があります。Prometheus、Grafana、および Alertmanager をアップグレードするには、構成ファイルを直接置き換えるのではなく、このドキュメントの手順に従ってください。
 
 > **注記：**
 >
-> -   TiUPを使用せずに監視サービスが[手動でデプロイされる](/deploy-monitoring-services.md)の場合は、このドキュメントを参照せずに直接アップグレードできます。
-> -   TiDB と監視サービスの新しいバージョンとの互換性はテストされていないため、アップグレード後に一部の機能が期待どおりに動作しない可能性があります。問題がある場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を作成してください。
+> -   監視サービスが[手動で展開](/deploy-monitoring-services.md)場合は、 TiUPを使用する代わりに、このドキュメントを参照せずに直接アップグレードできます。
+> -   新しいバージョンの監視サービスとの TiDB の互換性はテストされていないため、アップグレード後に一部の機能が期待どおりに動作しない可能性があります。問題がある場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)作成してください。
 > -   このドキュメントのアップグレード手順は、 TiUPバージョン 1.9.0 以降に適用されます。したがって、アップグレードする前にTiUP のバージョンを確認してください。
-> -   TiUPを使用して TiDB クラスターをアップグレードすると、 TiUP はモニタリング サービスをデフォルト バージョンに再デプロイします。 TiDB のアップグレード後に、モニタリング サービスのアップグレードをやり直す必要があります。
+> -   TiUPを使用して TiDB クラスターをアップグレードすると、 TiUP は監視サービスをデフォルト バージョンに再デプロイします。TiDB のアップグレード後に、監視サービスのアップグレードを再度実行する必要があります。
 
-## プロメテウスをアップグレードする {#upgrade-prometheus}
+## プロメテウスのアップグレード {#upgrade-prometheus}
 
-TiDB との互換性を高めるために、TiDB インストール パッケージで提供される Prometheus インストール パッケージを使用することをお勧めします。 TiDB インストール パッケージ内の Prometheus のバージョンは修正されました。新しい Prometheus バージョンを使用する場合は、各バージョンの新機能について[プロメテウス リリースノート](https://github.com/prometheus/prometheus/releases)を参照し、本番環境に適したバージョンを選択してください。推奨バージョンについては、PingCAP 技術スタッフに問い合わせることもできます。
+TiDB との互換性を高めるために、TiDB インストール パッケージで提供される Prometheus インストール パッケージを使用することをお勧めします。TiDB インストール パッケージ内の Prometheus のバージョンは固定されています。新しいバージョンの Prometheus を使用する場合は、各バージョンの新機能については[プロメテウス リリースノート](https://github.com/prometheus/prometheus/releases)を参照し、本番環境に適したバージョンを選択してください。推奨バージョンについては、PingCAP の技術スタッフに問い合わせることもできます。
 
-次のアップグレード手順では、Prometheus Web サイトから目的のバージョンの Prometheus インストール パッケージをダウンロードし、それを使用してTiUPが使用できる Prometheus パッケージを作成する必要があります。
+次のアップグレード手順では、Prometheus Web サイトから必要なバージョンの Prometheus インストール パッケージをダウンロードし、それを使用してTiUPが使用できる Prometheus パッケージを作成する必要があります。
 
-### ステップ 1. Prometheus Web サイトから新しい Prometheus インストール パッケージをダウンロードします。 {#step-1-download-a-new-prometheus-installation-package-from-the-prometheus-website}
+### ステップ1. PrometheusのWebサイトから新しいPrometheusインストールパッケージをダウンロードします。 {#step-1-download-a-new-prometheus-installation-package-from-the-prometheus-website}
 
-[プロメテウスのダウンロードページ](https://prometheus.io/download/)から新しいインストールパッケージをダウンロードして解凍します。
+[Prometheus ダウンロードページ](https://prometheus.io/download/)から新しいインストール パッケージをダウンロードして解凍します。
 
-### ステップ 2. TiDB が提供する Prometheus インストール パッケージをダウンロードする {#step-2-download-the-prometheus-installation-package-provided-by-tidb}
+### ステップ2. TiDBが提供するPrometheusインストールパッケージをダウンロードする {#step-2-download-the-prometheus-installation-package-provided-by-tidb}
 
-1.  [TiDBダウンロードページ](https://www.pingcap.com/download/)から TiDB**サーバー パッケージ**をダウンロードして解凍します。
-2.  抽出されたファイルで`prometheus-v{version}-linux-amd64.tar.gz`見つけて抽出します。
+1.  TiDBサーバーパッケージをダウンロードして解凍します。ダウンロードすると、 [プライバシーポリシー](https://www.pingcap.com/privacy-policy/)に同意したことになります。
+
+        https://download.pingcap.org/tidb-community-server-{version}-linux-{arch}.tar.gz
+
+    > **ヒント：**
+    >
+    > リンク内の`{version}` TiDB のバージョン番号を示し、 `{arch}`システムのアーキテクチャ( `amd64`または`arm64`を示します。たとえば、 `amd64`アーキテクチャの`v7.5.3`のダウンロード リンクは`https://download.pingcap.org/tidb-community-toolkit-v7.5.3-linux-amd64.tar.gz`です。
+
+2.  抽出したファイルで、 `prometheus-v{version}-linux-amd64.tar.gz`見つけて抽出します。
 
     ```bash
     tar -xzf prometheus-v{version}-linux-amd64.tar.gz
     ```
 
-### ステップ 3. TiUPが使用できる新しい Prometheus パッケージを作成する {#step-3-create-a-new-prometheus-package-that-tiup-can-use}
+### ステップ3. TiUPが使用できる新しいPrometheusパッケージを作成する {#step-3-create-a-new-prometheus-package-that-tiup-can-use}
 
-1.  [ステップ1](#step-1-download-a-new-prometheus-installation-package-from-the-prometheus-website)で解凍したファイルをコピーし、 [ステップ2](#step-2-download-the-prometheus-installation-package-provided-by-tidb)で解凍した`./prometheus-v{version}-linux-amd64/prometheus`ディレクトリ内のファイルをコピーしたファイルで置き換えます。
-2.  `./prometheus-v{version}-linux-amd64`ディレクトリを再圧縮し、新しい圧縮パッケージに`prometheus-v{new-version}.tar.gz`という名前を付けます。必要に応じて`{new-version}`を指定できます。
+1.  [ステップ1](#step-1-download-a-new-prometheus-installation-package-from-the-prometheus-website)で抽出したファイルをコピーし、コピーしたファイルを使用して[ステップ2](#step-2-download-the-prometheus-installation-package-provided-by-tidb)で抽出した`./prometheus-v{version}-linux-amd64/prometheus`ディレクトリ内のファイルを置き換えます。
+2.  `./prometheus-v{version}-linux-amd64`ディレクトリを再圧縮し、新しい圧縮パッケージに`prometheus-v{new-version}.tar.gz`という名前を付けます。5 `{new-version}`必要に応じて指定できます。
 
     ```bash
-    cd prometheus-v{version}-linux-amd64.tar.gz
+    cd prometheus-v{version}-linux-amd64
     tar -zcvf ../prometheus-v{new-version}.tar.gz ./
     ```
 
-### ステップ 4. 新しく作成した Prometheus パッケージを使用して Prometheus をアップグレードする {#step-4-upgrade-prometheus-using-the-newly-created-prometheus-package}
+### ステップ4. 新しく作成したPrometheusパッケージを使用してPrometheusをアップグレードする {#step-4-upgrade-prometheus-using-the-newly-created-prometheus-package}
 
-次のコマンドを実行して Prometheus をアップグレードします。
+Prometheus をアップグレードするには、次のコマンドを実行します。
 
 ```bash
-tiup cluster patch <cluster-name> prometheus-v{new-version}.tar.gz -R prometheus
+tiup cluster patch <cluster-name> prometheus-v{new-version}.tar.gz -R prometheus --overwrite
 ```
 
-アップグレード後、Prometheusサーバーのホームページ (通常は`http://<Prometheus-server-host-name>:9090` ) に移動し、上部のナビゲーション メニューで**[ステータス]**をクリックし、[**ランタイムとビルド情報]**ページを開いて Prometheus のバージョンを確認し、アップグレードが成功したかどうかを確認できます。 。
+アップグレード後、Prometheusサーバーのホームページ (通常は`http://<Prometheus-server-host-name>:9090` ) に移動し、上部のナビゲーション メニューで**[ステータス]**をクリックして、 **[ランタイムとビルド情報]**ページを開き、Prometheus のバージョンを確認し、アップグレードが成功したかどうかを確認できます。
 
-## グラファナをアップグレードする {#upgrade-grafana}
+## Grafana のアップグレード {#upgrade-grafana}
 
-TiDB との互換性を高めるために、TiDB インストール パッケージで提供される Grafana インストール パッケージを使用することをお勧めします。 TiDB インストール パッケージ内の Grafana のバージョンは修正されました。新しい Grafana バージョンを使用する場合は、各バージョンの新機能について[Grafana リリースノート](https://grafana.com/docs/grafana/latest/whatsnew/)を参照し、本番環境に適したバージョンを選択してください。推奨バージョンについては、PingCAP 技術スタッフに問い合わせることもできます。
+TiDB との互換性を高めるために、TiDB インストール パッケージで提供される Grafana インストール パッケージを使用することをお勧めします。TiDB インストール パッケージ内の Grafana のバージョンは固定されています。より新しいバージョンの Grafana を使用する場合は、各バージョンの新機能については[Grafana リリースノート](https://grafana.com/docs/grafana/latest/whatsnew/)を参照し、本番環境に適したバージョンを選択してください。推奨バージョンについては、PingCAP の技術スタッフに問い合わせることもできます。
 
-次のアップグレード手順では、目的のバージョンの Grafana インストール パッケージを Grafana Web サイトからダウンロードし、それを使用してTiUPが使用できる Grafana パッケージを作成する必要があります。
+次のアップグレード手順では、Grafana Web サイトから必要なバージョンの Grafana インストール パッケージをダウンロードし、それを使用してTiUPが使用できる Grafana パッケージを作成する必要があります。
 
-### ステップ 1. Grafana Web サイトから新しい Grafana インストール パッケージをダウンロードします。 {#step-1-download-a-new-grafana-installation-package-from-the-grafana-website}
+### ステップ1. GrafanaのWebサイトから新しいGrafanaインストールパッケージをダウンロードします。 {#step-1-download-a-new-grafana-installation-package-from-the-grafana-website}
 
-1.  [グラファナのダウンロードページ](https://grafana.com/grafana/download?pg=get&#x26;plcmt=selfmanaged-box1-cta1)から新しいインストール パッケージをダウンロードします。ニーズに応じて`OSS`または`Enterprise`エディションのいずれかを選択できます。
+1.  [Grafana ダウンロードページ](https://grafana.com/grafana/download?pg=get&#x26;plcmt=selfmanaged-box1-cta1)から新しいインストール パッケージをダウンロードします。 必要に応じて、 `OSS`または`Enterprise`エディションを選択できます。
 2.  ダウンロードしたパッケージを解凍します。
 
-### ステップ 2. TiDB が提供する Grafana インストール パッケージをダウンロードする {#step-2-download-the-grafana-installation-package-provided-by-tidb}
+### ステップ2. TiDBが提供するGrafanaインストールパッケージをダウンロードする {#step-2-download-the-grafana-installation-package-provided-by-tidb}
 
-1.  [TiDBダウンロードページ](https://www.pingcap.com/download)から TiDB **Server Package**パッケージをダウンロードして解凍します。
-2.  抽出されたファイルで`grafana-v{version}-linux-amd64.tar.gz`見つけて抽出します。
+1.  TiDBサーバーパッケージをダウンロードして解凍します。ダウンロードすると、 [プライバシーポリシー](https://www.pingcap.com/privacy-policy/)に同意したことになります。
+
+        https://download.pingcap.org/tidb-community-server-{version}-linux-{arch}.tar.gz
+
+    > **ヒント：**
+    >
+    > リンク内の`{version}` TiDB のバージョン番号を示し、 `{arch}`システムのアーキテクチャ( `amd64`または`arm64`を示します。たとえば、 `amd64`アーキテクチャの`v7.5.3`のダウンロード リンクは`https://download.pingcap.org/tidb-community-toolkit-v7.5.3-linux-amd64.tar.gz`です。
+
+2.  抽出したファイルで、 `grafana-v{version}-linux-amd64.tar.gz`見つけて抽出します。
 
     ```bash
     tar -xzf grafana-v{version}-linux-amd64.tar.gz
     ```
 
-### ステップ 3. TiUPが使用できる新しい Grafana パッケージを作成する {#step-3-create-a-new-grafana-package-that-tiup-can-use}
+### ステップ3. TiUPが使用できる新しいGrafanaパッケージを作成する {#step-3-create-a-new-grafana-package-that-tiup-can-use}
 
-1.  [ステップ1](#step-1-download-a-new-grafana-installation-package-from-the-grafana-website)で解凍したファイルをコピーし、 [ステップ2](#step-2-download-the-grafana-installation-package-provided-by-tidb)で解凍した`./grafana-v{version}-linux-amd64/`ディレクトリ内のファイルをコピーしたファイルで置き換えます。
-2.  `./grafana-v{version}-linux-amd64`ディレクトリを再圧縮し、新しい圧縮パッケージに`grafana-v{new-version}.tar.gz`という名前を付けます。必要に応じて`{new-version}`を指定できます。
+1.  [ステップ1](#step-1-download-a-new-grafana-installation-package-from-the-grafana-website)で抽出したファイルをコピーし、コピーしたファイルを使用して[ステップ2](#step-2-download-the-grafana-installation-package-provided-by-tidb)で抽出した`./grafana-v{version}-linux-amd64/`ディレクトリ内のファイルを置き換えます。
+2.  `./grafana-v{version}-linux-amd64`ディレクトリを再圧縮し、新しい圧縮パッケージに`grafana-v{new-version}.tar.gz`という名前を付けます。5 `{new-version}`必要に応じて指定できます。
 
     ```bash
-    cd grafana-v{version}-linux-amd64.tar.gz
+    cd grafana-v{version}-linux-amd64
     tar -zcvf ../grafana-v{new-version}.tar.gz ./
     ```
 
-### ステップ 4. 新しく作成した Grafana パッケージを使用して Grafana をアップグレードする {#step-4-upgrade-grafana-using-the-newly-created-grafana-package}
+### ステップ4. 新しく作成したGrafanaパッケージを使用してGrafanaをアップグレードする {#step-4-upgrade-grafana-using-the-newly-created-grafana-package}
 
-次のコマンドを実行して Grafana をアップグレードします。
+Grafana をアップグレードするには、次のコマンドを実行します。
 
 ```bash
-tiup cluster patch <cluster-name> grafana-v{new-version}.tar.gz -R grafana
+tiup cluster patch <cluster-name> grafana-v{new-version}.tar.gz -R grafana --overwrite
 
 ```
 
-アップグレード後、Grafanaサーバーのホームページ (通常は`http://<Grafana-server-host-name>:3000` ) に移動し、ページ上の Grafana バージョンをチェックしてアップグレードが成功したかどうかを確認できます。
+アップグレード後、Grafanaサーバーのホームページ (通常は`http://<Grafana-server-host-name>:3000` ) に移動し、ページで Grafana のバージョンを確認して、アップグレードが成功したかどうかを確認できます。
 
-## アラートマネージャーのアップグレード {#upgrade-alertmanager}
+## Alertmanager のアップグレード {#upgrade-alertmanager}
 
-TiDB インストール パッケージ内の Alertmanager パッケージは、Prometheus Web サイトから直接取得されます。したがって、Alertmanager をアップグレードする場合は、Prometheus Web サイトから新しいバージョンの Alertmanager をダウンロードしてインストールするだけで済みます。
+TiDB インストール パッケージ内の Alertmanager パッケージは、Prometheus Web サイトから直接提供されます。したがって、Alertmanager をアップグレードする場合は、Prometheus Web サイトから新しいバージョンの Alertmanager をダウンロードしてインストールするだけで済みます。
 
-### ステップ 1. Prometheus Web サイトから新しい Alertmanager インストール パッケージをダウンロードします。 {#step-1-download-a-new-alertmanager-installation-package-from-the-prometheus-website}
+### ステップ1. PrometheusのWebサイトから新しいAlertmanagerインストールパッケージをダウンロードします。 {#step-1-download-a-new-alertmanager-installation-package-from-the-prometheus-website}
 
-[プロメテウスのダウンロードページ](https://prometheus.io/download/#alertmanager)から`alertmanager`インストール パッケージをダウンロードします。
+[Prometheus ダウンロードページ](https://prometheus.io/download/#alertmanager)から`alertmanager`インストール パッケージをダウンロードします。
 
-### ステップ 2. ダウンロードしたインストール パッケージを使用して Alertmanager をアップグレードする {#step-2-upgrade-alertmanager-using-the-downloaded-installation-package}
+### ステップ2. ダウンロードしたインストールパッケージを使用してAlertmanagerをアップグレードする {#step-2-upgrade-alertmanager-using-the-downloaded-installation-package}
 
-次のコマンドを実行して、Alertmanager をアップグレードします。
+Alertmanager をアップグレードするには、次のコマンドを実行します。
 
 ```bash
-tiup cluster patch <cluster-name> alertmanager-v{new-version}-linux-amd64.tar.gz -R alertmanager
+tiup cluster patch <cluster-name> alertmanager-v{new-version}-linux-amd64.tar.gz -R alertmanager --overwrite
 ```
 
-アップグレード後、Alertmanagerサーバーのホームページ (通常は`http://<Alertmanager-server-host-name>:9093` ) に移動し、上部のナビゲーション メニューで**[ステータス]**をクリックし、Alertmanager のバージョンをチェックしてアップグレードが成功したかどうかを確認できます。
+アップグレード後、Alertmanagerサーバーのホームページ (通常は`http://<Alertmanager-server-host-name>:9093` ) に移動し、上部のナビゲーション メニューで**[ステータス]**をクリックして、Alertmanager のバージョンを確認し、アップグレードが成功したかどうかを確認できます。

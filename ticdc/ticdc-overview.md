@@ -1,6 +1,6 @@
 ---
 title: TiCDC Overview
-summary: Learn what TiCDC is, what features TiCDC provides, and how to install and deploy TiCDC.
+summary: TiCDC とは何か、TiCDC が提供する機能、TiCDC をインストールして展開する方法について学習します。
 ---
 
 # TiCDC の概要 {#ticdc-overview}
@@ -20,7 +20,7 @@ TiCDC には、次のような複数の使用シナリオがあります。
 
 TiCDC には次の主要な機能があります。
 
--   2 番目レベルの RPO と 1 分レベルの RTO を使用して、TiDB クラスター間で増分データを複製します。
+-   2 番目レベルの RPO と 1 分レベルの RTO を使用して、TiDB クラスター間で増分データをレプリケートします。
 -   TiDB クラスター間の双方向レプリケーションにより、TiCDC を使用したマルチアクティブ TiDB ソリューションの作成が可能になります。
 -   TiDB クラスターから MySQL データベースまたはその他の MySQL 互換データベースに低レイテンシーで増分データを複製します。
 -   TiDB クラスターから Kafka クラスターに増分データを複製します。推奨されるデータ形式には[運河-JSON](/ticdc/ticdc-canal-json.md)と[アブロ](/ticdc/ticdc-avro-protocol.md)が含まれます。
@@ -87,6 +87,61 @@ TiCDC のアーキテクチャは次の図に示されています。
     -   ユニークインデックス（ `UNIQUE INDEX` ）は、インデックスのすべての列が明示的に非NULL値として定義され（ `NOT NULL` ）、インデックスに仮想生成列（ `VIRTUAL GENERATED COLUMNS` ）がない場合に有効です。
 
 -   TiCDC を災害復旧に使用する場合、最終的な一貫性を確保するには、 [再実行ログ](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)設定し、上流で災害が発生したときに、REDO ログが書き込まれるstorageシステムが正常に読み取れるようにする必要があります。
+
+## 処理データの変更の実装 {#implementation-of-processing-data-changes}
+
+このセクションでは主に、TiCDC が上流の DML 操作によって生成されたデータ変更を処理する方法について説明します。
+
+アップストリーム DDL 操作によって生成されたデータ変更については、TiCDC は完全な DDL SQL ステートメントを取得し、ダウンストリームのシンクの種類に基づいて対応する形式に変換し、ダウンストリームに送信します。このセクションではこれについては詳しく説明しません。
+
+> **注記：**
+>
+> TiCDC がデータ変更を処理するロジックは、後続のバージョンで調整される可能性があります。
+
+MySQL binlog は、上流で実行されたすべての DML SQL ステートメントを直接記録します。MySQL とは異なり、TiCDC は上流 TiKV 内の各リージョンRaftログのリアルタイム情報をリッスンし、各トランザクションの前後のデータの差分に基づいて、複数の SQL ステートメントに対応するデータ変更情報を生成します。TiCDC は、出力変更イベントが上流 TiDB の変更と同等であることを保証するだけで、上流 TiDB のデータ変更の原因となった SQL ステートメントを正確に復元できることは保証しません。
+
+データ変更情報には、データ変更の種類と変更前後のデータ値が含まれます。トランザクション前後のデータの違いにより、次の 3 種類のイベントが発生する可能性があります。
+
+1.  `DELETE`イベント: 変更前のデータを含む`DELETE`種類のデータ変更メッセージに対応します。
+
+2.  `INSERT`イベント: 変更後のデータが含まれる`PUT`種類のデータ変更メッセージに対応します。
+
+3.  `UPDATE`イベント: 変更前と変更後の両方のデータが含まれる`PUT`種類のデータ変更メッセージに対応します。
+
+TiCDC は、データ変更情報に基づいて、さまざまなダウンストリーム タイプに適した形式でデータを生成し、ダウンストリームに送信します。たとえば、Canal-JSON や Avro などの形式でデータを生成し、Kafka に書き込んだり、データを SQL 文に変換してダウンストリームの MySQL や TiDB に送信したりします。
+
+現在、TiCDC が対応するプロトコルのデータ変更情報を適応させる場合、特定の`UPDATE`イベントについては、それらを 1 つの`DELETE`イベントと 1 つの`INSERT`イベントに分割することがあります。詳細については、 [MySQLシンクの`UPDATE`イベントを分割する](/ticdc/ticdc-split-update-behavior.md#split-update-events-for-mysql-sinks)および[非MySQLシンクの主キーまたは一意キーの`UPDATE`イベントを分割する](/ticdc/ticdc-split-update-behavior.md#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
+
+ダウンストリームが MySQL または TiDB の場合、TiCDC はダウンストリームに書き込まれる SQL 文がアップストリームで実行された SQL 文とまったく同じであることを保証できません。これは、TiCDC がアップストリームで実行された元の DML 文を直接取得するのではなく、データの変更情報に基づいて SQL 文を生成するためです。ただし、TiCDC は最終結果の一貫性を保証します。
+
+たとえば、アップストリームでは次の SQL ステートメントが実行されます。
+
+```sql
+Create Table t1 (A int Primary Key, B int);
+
+BEGIN;
+Insert Into t1 values(1,2);
+Insert Into t1 values(2,2);
+Insert Into t1 values(3,3);
+Commit;
+
+Update t1 set b = 4 where b = 2;
+```
+
+TiCDC は、データ変更情報に基づいて次の 2 つの SQL ステートメントを生成し、ダウンストリームに書き込みます。
+
+```sql
+INSERT INTO `test.t1` (`A`,`B`) VALUES (1,2),(2,2),(3,3);
+UPDATE `test`.`t1`
+SET `A` = CASE
+        WHEN `A` = 1 THEN 1
+        WHEN `A` = 2 THEN 2
+END, `B` = CASE
+        WHEN `A` = 1 THEN 4
+        WHEN `A` = 2 THEN 4
+END
+WHERE `A` = 1 OR `A` = 2;
+```
 
 ## サポートされていないシナリオ {#unsupported-scenarios}
 

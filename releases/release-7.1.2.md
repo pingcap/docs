@@ -1,6 +1,6 @@
 ---
 title: TiDB 7.1.2 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 7.1.2.
+summary: TiDB 7.1.2 の互換性の変更、改善、バグ修正について説明します。
 ---
 
 # TiDB 7.1.2 リリースノート {#tidb-7-1-2-release-notes}
@@ -14,7 +14,7 @@ TiDB バージョン: 7.1.2
 ## 互換性の変更 {#compatibility-changes}
 
 -   Security強化モード (SEM) で[`require_secure_transport`](https://docs.pingcap.com/tidb/v7.1/system-variables#require_secure_transport-new-in-v610) ～ `ON`設定を禁止して、ユーザー[＃47665](https://github.com/pingcap/tidb/issues/47665) @ [天菜まお](https://github.com/tiancaiamao)の潜在的な接続問題を防ぎます。
--   [スムーズなアップグレード](/smooth-upgrade-tidb.md)機能はデフォルトで無効になっています。3と`/upgrade/start` `upgrade/finish` HTTPリクエスト[＃47172](https://github.com/pingcap/tidb/issues/47172) @ [ジムララ](https://github.com/zimulala)を送信することで有効にできます。
+-   [スムーズなアップグレード](/smooth-upgrade-tidb.md)機能はデフォルトで無効になっています。3と`/upgrade/start` `upgrade/finish` HTTPリクエスト[＃47172](https://github.com/pingcap/tidb/issues/47172) @ [ジムララ](https://github.com/zimulala)を送信することで有効にすることができます。
 -   オプティマイザがテーブル[＃46695](https://github.com/pingcap/tidb/issues/46695) @ [コーダープレイ](https://github.com/coderplay)に対してハッシュ結合を選択するかどうかを制御する[`tidb_opt_enable_hash_join`](https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_opt_enable_hash_join-new-in-v712)システム変数を導入します。
 -   RocksDB の定期的な圧縮をデフォルトで無効にし、TiKV RocksDB のデフォルトの動作がバージョン 6.5.0 より前のバージョンと一致するようにしました。この変更により、アップグレード後に大量の圧縮によって発生するパフォーマンスへの影響を回避できます。さらに、TiKV では 2 つの新しい構成項目[`rocksdb.[defaultcf|writecf|lockcf].periodic-compaction-seconds`](https://docs.pingcap.com/tidb/v7.1/tikv-configuration-file#periodic-compaction-seconds-new-in-v712)と[`rocksdb.[defaultcf|writecf|lockcf].ttl`](https://docs.pingcap.com/tidb/v7.1/tikv-configuration-file#ttl-new-in-v712)が導入され、RocksDB [＃15355](https://github.com/tikv/tikv/issues/15355) @ [リクササシネーター](https://github.com/LykxSassinator)の定期的な圧縮を手動で構成できるようになりました。
 -   TiCDCは、CSVプロトコルにおけるバイナリデータのエンコード方法を制御するための[`sink.csv.binary-encoding-method`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)設定項目を導入しています。デフォルト値は`'base64'` [＃9373](https://github.com/pingcap/tiflow/issues/9373) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)です。
@@ -22,7 +22,7 @@ TiDB バージョン: 7.1.2
 
 ### 行動の変化 {#behavior-changes}
 
--   複数の変更を含むトランザクションの場合、更新イベントで主キーまたは null 以外の一意のインデックス値が変更されると、TiCDC はイベントを削除イベントと挿入イベントに分割し、すべてのイベントが挿入イベントに先行する削除イベントのシーケンスに従うようにします。詳細については、 [ドキュメンテーション](/ticdc/ticdc-behavior-change.md#transactions-containing-multiple-update-changes)参照してください。
+-   複数の変更を含むトランザクションの場合、更新イベントで主キーまたは null 以外の一意のインデックス値が変更されると、TiCDC はイベントを削除イベントと挿入イベントに分割し、すべてのイベントが挿入イベントに先行する削除イベントのシーケンスに従うようにします。詳細については、 [ドキュメンテーション](/ticdc/ticdc-split-update-behavior.md#transactions-containing-multiple-update-changes)参照してください。
 
 ## 改善点 {#improvements}
 
@@ -35,7 +35,7 @@ TiDB バージョン: 7.1.2
 -   ティクヴ
 
     -   圧縮メカニズムを最適化します。リージョンが分割されるときに、分割するキーがない場合、圧縮がトリガーされ、過剰な MVCC バージョン[＃15282](https://github.com/tikv/tikv/issues/15282) @ [スペードA-タン](https://github.com/SpadeA-Tang)が排除されます。
-    -   ルーターオブジェクトのLRUCacheを排除してメモリ使用量を減らし、OOM [＃15430](https://github.com/tikv/tikv/issues/15430) @ [コナー1996](https://github.com/Connor1996)を防止します。
+    -   ルータオブジェクトのLRUCacheを排除してメモリ使用量を減らし、OOM [＃15430](https://github.com/tikv/tikv/issues/15430) @ [コナー1996](https://github.com/Connor1996)を防止します。
     -   `Max gap of safe-ts`と`Min safe ts region`メトリックを追加し、 `tikv-ctl get-region-read-progress`コマンドを導入して、resolved-tsと安全な ts の状態をより適切に観察および診断します[＃15082](https://github.com/tikv/tikv/issues/15082) @ [エキシウム](https://github.com/ekexium)
     -   TiKV で RocksDB の設定を公開し、ユーザーが TTL や定期的な圧縮などの機能を無効にできるようにします[＃14873](https://github.com/tikv/tikv/issues/14873) @ [リクササシネーター](https://github.com/LykxSassinator)
     -   接続再試行のプロセスで PD クライアントのバックオフ メカニズムを追加します。これにより、エラー再試行中に再試行間隔が徐々に長くなり、PD の負荷が軽減されます[＃15428](https://github.com/tikv/tikv/issues/15428) @ [ノルーシュ](https://github.com/nolouch)
@@ -73,7 +73,7 @@ TiDB バージョン: 7.1.2
     -   TiDB Lightning
 
         -   インポートタスクのパフォーマンスを向上させるために、デフォルト値の`checksum-via-sql`を`false`に変更します[＃45368](https://github.com/pingcap/tidb/issues/45368) [＃45094](https://github.com/pingcap/tidb/issues/45094) @ [GMHDBJD](https://github.com/GMHDBJD)
-        -   データインポートフェーズ[＃46253](https://github.com/pingcap/tidb/issues/46253) @ [ランス6716](https://github.com/lance6716)中の`no leader`エラーに対するTiDB Lightningの再試行ロジックを最適化します。
+        -   データインポートフェーズ[＃46253](https://github.com/pingcap/tidb/issues/46253) @ [ランス6716](https://github.com/lance6716)中の`no leader`エラーに対するTiDB Lightningの再試行ロジックを最適化します
 
 ## バグの修正 {#bug-fixes}
 
@@ -94,7 +94,7 @@ TiDB バージョン: 7.1.2
     -   `EXCHANGE PARTITION`失敗またはキャンセルされた場合に、パーティション化されたテーブルの制限が元のテーブルに残る問題を修正[＃45920](https://github.com/pingcap/tidb/issues/45920) [＃45791](https://github.com/pingcap/tidb/issues/45791) @ [ミョンス](https://github.com/mjonss)
     -   2つのサブクエリ[＃46160](https://github.com/pingcap/tidb/issues/46160) @ [qw4990](https://github.com/qw4990)を結合するときに`TIDB_INLJ`ヒントが有効にならない問題を修正
     -   `DATETIME`または`TIMESTAMP`列を数値定数[＃38361](https://github.com/pingcap/tidb/issues/38361) @ [いいえ](https://github.com/yibin87)と比較するときに動作が MySQL と一致しない問題を修正しました。
-    -   深くネストされた式に対して HashCode が繰り返し計算され、メモリ使用量が増加し、OOM [＃42788](https://github.com/pingcap/tidb/issues/42788) @ [アイリンキッド](https://github.com/AilinKid)が発生する問題を修正しました。
+    -   深くネストされた式に対してハッシュコードが繰り返し計算され、メモリ使用量が増加し、OOM [＃42788](https://github.com/pingcap/tidb/issues/42788) @ [アイリンキッド](https://github.com/AilinKid)が発生する問題を修正しました。
     -   アクセス パス プルーニング ロジックが`READ_FROM_STORAGE(TIFLASH[...])`ヒントを無視し、 `Can't find a proper physical plan`エラー[＃40146](https://github.com/pingcap/tidb/issues/40146) @ [アイリンキッド](https://github.com/AilinKid)が発生する問題を修正しました。
     -   CAST に精度損失がない場合に`cast(col)=range`条件で FullScan が発生する問題を修正[＃45199](https://github.com/pingcap/tidb/issues/45199) @ [アイリンキッド](https://github.com/AilinKid)
     -   `plan replayer dump explain`エラー[＃46197](https://github.com/pingcap/tidb/issues/46197) @ [時間と運命](https://github.com/time-and-fate)を報告する問題を修正
@@ -107,7 +107,7 @@ TiDB バージョン: 7.1.2
     -   静的プルーニングモードでパーティションテーブルをクエリし、実行プランに`IndexLookUp` [＃45757](https://github.com/pingcap/tidb/issues/45757) @ [定義2014](https://github.com/Defined2014)が含まれている場合にクエリがエラーを報告する可能性がある問題を修正しました。
     -   パーティション テーブルと配置ポリシー[＃45791](https://github.com/pingcap/tidb/issues/45791) @ [ミョンス](https://github.com/mjonss)テーブル間でパーティションを交換した後に、パーティションテーブルへのデータの挿入が失敗する可能性がある問題を修正しました。
     -   タイムゾーン情報が正しくない時間フィールドをエンコードする問題を修正[＃46033](https://github.com/pingcap/tidb/issues/46033) @ [タンジェンタ](https://github.com/tangenta)
-    -   `tmp`ディレクトリが存在しない場合に、インデックスを高速に追加する DDL ステートメントが停止する問題を修正しました[＃45456](https://github.com/pingcap/tidb/issues/45456) @ [タンジェンタ](https://github.com/tangenta)
+    -   `tmp`ディレクトリが存在しない場合にインデックスを高速に追加する DDL ステートメントが停止する問題を修正[＃45456](https://github.com/pingcap/tidb/issues/45456) @ [タンジェンタ](https://github.com/tangenta)
     -   複数の TiDB インスタンスを同時にアップグレードするとアップグレード プロセスがブロックされる可能性がある問題を修正[＃46228](https://github.com/pingcap/tidb/issues/46228) @ [ジムララ](https://github.com/zimulala)
     -   領域[＃46135](https://github.com/pingcap/tidb/issues/46135) @ [ジムララ](https://github.com/zimulala)を分割する際に誤ったパラメータが使用されることで発生する、リージョンが不均一に分散される問題を修正しました。
     -   TiDB の再起動後に DDL 操作が停止する可能性がある問題を修正[＃46751](https://github.com/pingcap/tidb/issues/46751) @ [翻訳:](https://github.com/wjhuang2016)
@@ -144,7 +144,7 @@ TiDB バージョン: 7.1.2
     -   フラッシュバック[＃6912](https://github.com/tikv/pd/issues/6912) @ [金星の上](https://github.com/overvenus)後にリージョン情報が更新されない問題を修正
     -   [＃7053](https://github.com/tikv/pd/issues/7053) @ [ヒューシャープ](https://github.com/HuSharp)終了時に PD がpanicになる可能性がある問題を修正しました
     -   コンテキストタイムアウトにより`lease timeout`エラー[＃6926](https://github.com/tikv/pd/issues/6926) @ [rleungx](https://github.com/rleungx)が発生する可能性がある問題を修正
-    -   ピアがグループごとに適切に分散されず、リーダー[＃6962](https://github.com/tikv/pd/issues/6962) @ [rleungx](https://github.com/rleungx)の分布が不均等になる可能性がある問題を修正しました。
+    -   ピアがグループごとに適切に分散されていないため、リーダー[＃6962](https://github.com/tikv/pd/issues/6962) @ [rleungx](https://github.com/rleungx)の分布が不均等になる可能性がある問題を修正しました。
     -   pd-ctl [＃7121](https://github.com/tikv/pd/issues/7121) @ [rleungx](https://github.com/rleungx)を使用して更新するときに分離レベル ラベルが同期されない問題を修正しました。
     -   `evict-leader-scheduler`構成[＃6897](https://github.com/tikv/pd/issues/6897) @ [ヒューシャープ](https://github.com/HuSharp)を失う可能性がある問題を修正
     -   プラグインディレクトリとファイルの潜在的なセキュリティリスクを修正[＃7094](https://github.com/tikv/pd/issues/7094) @ [ヒューシャープ](https://github.com/HuSharp)
@@ -152,7 +152,7 @@ TiDB バージョン: 7.1.2
     -   ルール チェッカーがピア[＃6559](https://github.com/tikv/pd/issues/6559) @ [ノルーシュ](https://github.com/nolouch)を選択した場合に、不健全なピアを削除できない問題を修正しました。
     -   etcd がすでに起動しているがクライアントがまだ接続していない場合、クライアントを呼び出すと PD がpanicになる可能性がある問題を修正しました[＃6860](https://github.com/tikv/pd/issues/6860) @ [ヒューシャープ](https://github.com/HuSharp)
     -   RU消費量が0未満の場合にPDがクラッシュする問題を修正[＃6973](https://github.com/tikv/pd/issues/6973) @ [キャビンフィーバーB](https://github.com/CabinfeverB)
-    -   クラスターが大きい場合、クライアントが定期的に更新される`min-resolved-ts`によって PD OOM が発生する可能性がある問題を修正[＃46664](https://github.com/pingcap/tidb/issues/46664) @ [ヒューシャープ](https://github.com/HuSharp)
+    -   クラスターが大きい場合、クライアントが定期的に更新すると`min-resolved-ts` PD OOM が発生する可能性がある問題を修正[＃46664](https://github.com/pingcap/tidb/issues/46664) @ [ヒューシャープ](https://github.com/HuSharp)
 
 -   TiFlash
 
@@ -167,7 +167,7 @@ TiDB バージョン: 7.1.2
 
         -   PITR を使用して暗黙の主キーを回復すると競合が発生する可能性がある問題を修正[＃46520](https://github.com/pingcap/tidb/issues/46520) @ [3ポインター](https://github.com/3pointer)
         -   PITRがGCS [＃47022](https://github.com/pingcap/tidb/issues/47022) @ [リーヴルス](https://github.com/Leavrth)からデータを回復できない問題を修正
-        -   RawKV モード[＃37085](https://github.com/pingcap/tidb/issues/37085) @ [ピンギュ](https://github.com/pingyu)のきめ細かいバックアップ フェーズで発生する可能性のあるエラーを修正
+        -   RawKV モード[＃37085](https://github.com/pingcap/tidb/issues/37085) @ [ピンギュ](https://github.com/pingyu)のきめ細かいバックアップ フェーズで発生する可能性のあるエラーを修正しました。
         -   PITR を使用してメタ kv を回復するとエラーが発生する可能性がある問題を修正[＃46578](https://github.com/pingcap/tidb/issues/46578) @ [リーヴルス](https://github.com/Leavrth)
         -   BR統合テストケース[＃46561](https://github.com/pingcap/tidb/issues/46561) @ [ピュアリンド](https://github.com/purelind)のエラーを修正
         -   BRが使用するグローバル パラメータ`TableColumnCountLimit`と`IndexLimit`のデフォルト値を最大値[＃45793](https://github.com/pingcap/tidb/issues/45793) @ [リーヴルス](https://github.com/Leavrth)に増やすことで、復元失敗の問題を修正しました。
@@ -188,8 +188,8 @@ TiDB バージョン: 7.1.2
         -   一部の特殊なケースで TiCDC レプリケーション タスクが失敗する可能性がある問題を修正[＃9685](https://github.com/pingcap/tiflow/issues/9685) [＃9697](https://github.com/pingcap/tiflow/issues/9697) [＃9695](https://github.com/pingcap/tiflow/issues/9695) [＃9736](https://github.com/pingcap/tiflow/issues/9736) @ [ヒック](https://github.com/hicqu) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
         -   PDノード[＃9565](https://github.com/pingcap/tiflow/issues/9565) @ [アズドンメン](https://github.com/asddongmen)のネットワーク分離によって発生するTiCDCレプリケーションレイテンシーの問題を修正
         -   PD のスケールアップおよびスケールダウン中に TiCDC が無効な古いアドレスにアクセスする問題を修正[＃9584](https://github.com/pingcap/tiflow/issues/9584) @ [ふびんず](https://github.com/fubinzh) @ [アズドンメン](https://github.com/asddongmen)
-        -   上流に多数のリージョン[＃9741](https://github.com/pingcap/tiflow/issues/9741) @ [スドジ](https://github.com/sdojjy)がある場合に TiCDC が TiKV ノード障害から迅速に回復できない問題を修正しました。
-        -   CSV形式[＃9658](https://github.com/pingcap/tiflow/issues/9658) @ [3エースショーハンド](https://github.com/3AceShowHand)を使用するとTiCDCが`UPDATE`演算を誤って`INSERT`に変更する問題を修正
+        -   上流にリージョン[＃9741](https://github.com/pingcap/tiflow/issues/9741) @ [スドジ](https://github.com/sdojjy)が多数ある場合に TiCDC が TiKV ノード障害から迅速に回復できない問題を修正しました。
+        -   CSV形式[＃9658](https://github.com/pingcap/tiflow/issues/9658) @ [3エースショーハンド](https://github.com/3AceShowHand)を使用するとTiCDCが`UPDATE`演算を`INSERT`に誤って変更する問題を修正
         -   アップストリームの同じDDL文で複数のテーブルの名前を変更するとレプリケーションエラーが発生する問題を修正[＃9476](https://github.com/pingcap/tiflow/issues/9476) [＃9488](https://github.com/pingcap/tiflow/issues/9488) @ [チャールズ・チュン96](https://github.com/CharlesCheung96) @ [アズドンメン](https://github.com/asddongmen)
         -   Kafka [＃9504](https://github.com/pingcap/tiflow/issues/9504) @ [3エースショーハンド](https://github.com/3AceShowHand)に同期するときに再試行間隔が短いためにレプリケーション タスクが失敗する問題を修正しました。
         -   アップストリーム[＃9430](https://github.com/pingcap/tiflow/issues/9430) @ [スドジ](https://github.com/sdojjy)で 1 つのトランザクションで複数の行の一意のキーが変更されると、レプリケーション書き込み競合が発生する可能性がある問題を修正しました。
@@ -199,7 +199,7 @@ TiDB バージョン: 7.1.2
     -   TiDB データ移行 (DM)
 
         -   失敗した DDL がスキップされ、後続の DDL が実行されない場合に、DM によって返されるレプリケーション ラグが増大し続ける問題を修正[＃9605](https://github.com/pingcap/tiflow/issues/9605) @ [D3ハンター](https://github.com/D3Hunter)
-        -   DM が大文字と小文字を区別しない照合[＃9489](https://github.com/pingcap/tiflow/issues/9489) @ [ヒヒフフ](https://github.com/hihihuhu)で競合を正しく処理できない問題を修正
+        -   DM が大文字と小文字を区別しない照合順序[＃9489](https://github.com/pingcap/tiflow/issues/9489) @ [ヒヒフフ](https://github.com/hihihuhu)で競合を正しく処理できない問題を修正
         -   DM バリデーターのデッドロック問題を修正し、再試行を[＃9257](https://github.com/pingcap/tiflow/issues/9257) @ [D3ハンター](https://github.com/D3Hunter)に強化しました。
         -   楽観的モード[＃9588](https://github.com/pingcap/tiflow/issues/9588) @ [GMHDBJD](https://github.com/GMHDBJD)でタスクを再開するときに DM がすべての DML をスキップする問題を修正
         -   オンライン DDL [＃9587](https://github.com/pingcap/tiflow/issues/9587) @ [GMHDBJD](https://github.com/GMHDBJD)をスキップするときに DM が上流のテーブル スキーマを適切に追跡できない問題を修正しました。
@@ -207,7 +207,7 @@ TiDB バージョン: 7.1.2
 
     -   TiDB Lightning
 
-        -   `AUTO_ID_CACHE=1`を含むテーブルをインポートすると、間違った`row_id`が[＃46100](https://github.com/pingcap/tidb/issues/46100) @ [D3ハンター](https://github.com/D3Hunter)に割り当てられる問題を修正しました。
+        -   `AUTO_ID_CACHE=1`を含むテーブルをインポートするときに、間違った`row_id`が[＃46100](https://github.com/pingcap/tidb/issues/46100) @ [D3ハンター](https://github.com/D3Hunter)に割り当てられる問題を修正しました。
         -   `NEXT_GLOBAL_ROW_ID` [＃45427](https://github.com/pingcap/tidb/issues/45427) @ [翻訳者](https://github.com/lyzx2001)を保存するときにデータ型が間違っている問題を修正
         -   `checksum = "optional"` [＃45382](https://github.com/pingcap/tidb/issues/45382) @ [翻訳者](https://github.com/lyzx2001)のときにチェックサムがエラーを報告する問題を修正しました
         -   PD クラスタ アドレスが[＃43436](https://github.com/pingcap/tidb/issues/43436) @ [リチュンジュ](https://github.com/lichunzhu)に変更されるとデータのインポートが失敗する問題を修正しました

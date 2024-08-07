@@ -1,14 +1,19 @@
 ---
 title: TiDB Release Timeline
-summary: Learn about the TiDB release timeline.
+summary: TiDB リリースのタイムラインについて学びます。
 ---
 
 # TiDB リリース タイムライン {#tidb-release-timeline}
+
+<EmailSubscriptionWrapper />
 
 このドキュメントでは、リリースされたすべての TiDB バージョンを時系列の逆順で示します。
 
 | バージョン                                            | リリース日      |
 | :----------------------------------------------- | :--------- |
+| [7.5.3](/releases/release-7.5.3.md)              | 2024-08-05 |
+| [6.5.10](/releases/release-6.5.10.md)            | 2024-06-20 |
+| [7.5.2](/releases/release-7.5.2.md)              | 2024-06-13 |
 | [7.1.5](/releases/release-7.1.5.md)              | 2024-04-26 |
 | [6.5.9](/releases/release-6.5.9.md)              | 2024-04-12 |
 | [7.1.4](/releases/release-7.1.4.md)              | 2024-03-11 |

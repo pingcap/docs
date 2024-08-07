@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with TypeORM
-summary: Learn how to connect to TiDB using TypeORM. This tutorial gives Node.js sample code snippets that work with TiDB using TypeORM.
+summary: TypeORM を使用して TiDB に接続する方法を学びます。このチュートリアルでは、TypeORM を使用して TiDB で動作する Node.js サンプル コード スニペットを紹介します。
 ---
 
 # TypeORM で TiDB に接続する {#connect-to-tidb-with-typeorm}
@@ -131,7 +131,7 @@ npm install @types/node ts-node typescript --save-dev
 
 3.  **「どこからでもアクセスを許可」**をクリックし、 **「CA 証明書のダウンロード」**をクリックして CA 証明書をダウンロードします。
 
-    接続文字列を取得する方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
+    接続文字列の取得方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
 
 4.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -218,7 +218,7 @@ query: COMMIT
 
 ### ステップ5: コードを実行して結果を確認する {#step-5-run-the-code-and-check-the-result}
 
-サンプルコードを実行するには、次のコマンドを実行します。
+サンプル コードを実行するには、次のコマンドを実行します。
 
 ```shell
 npm start
@@ -228,7 +228,7 @@ npm start
 
 接続が成功すると、ターミナルは次のように TiDB クラスターのバージョンを出力します。
 
-    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v7.5.1)
+    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v7.5.3)
     🆕 Created a new player with ID 2.
     ℹ️ Got Player 2: Player { id: 2, coins: 100, goods: 100 }
     🔢 Added 50 coins and 50 goods to player 2, now player 2 has 100 coins and 150 goods.
@@ -287,7 +287,7 @@ await this.dataSource.manager.save(player);
 
 ### クエリデータ {#query-data}
 
-次のクエリは、ID 101 の単一の`Player`つのオブジェクトを返します。レコードが見つからない場合は`null`返します。
+次のクエリは、ID 101 の単一の`Player`オブジェクトを返します。レコードが見つからない場合は`null`返します。
 
 ```typescript
 const player: Player | null = await this.dataSource.manager.findOneBy(Player, {
@@ -299,7 +299,7 @@ const player: Player | null = await this.dataSource.manager.findOneBy(Player, {
 
 ### データの更新 {#update-data}
 
-次のクエリは、ID `101`の商品`Player`に商品`50`追加します。
+次のクエリは、ID `101`の商品`Player`に`50`商品を追加します。
 
 ```typescript
 const player = await this.dataSource.manager.findOneBy(Player, {
@@ -367,12 +367,12 @@ export class ActionLog {
 
 <CustomContent platform="tidb">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](/support.md)について質問します。
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
 
 </CustomContent>

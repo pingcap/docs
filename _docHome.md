@@ -3,14 +3,14 @@ title: PingCAP Documentation
 hide_sidebar: true
 hide_commit: true
 hide_leftNav: true
-summary: PingCAP ドキュメントは、TiDB CloudとTiDBの使用方法やデータの移行、アプリケーションの構築に必要なガイドや参照を提供しています。TiDB CloudはフルマネージドのDatabase-as-a-Serviceであり、クラウドネイティブの分散SQLデータベースを活用し、リアルタイム分析用に構築されています。一方、TiDBはオープンソースの分散SQLデータベースであり、MySQLと互換性があり、水平スケーラビリティや高可用性を備えています。また、開発者向けのドキュメントやさまざまなリソースも提供されています。
+summary: PingCAP ドキュメントには、データ移行やアプリケーション構築など、 TiDB Cloudと TiDB の使用方法ガイドとリファレンスが用意されています。TiDB TiDB Cloud は、クラウドネイティブの分散 SQL データベースのパワーに簡単にアクセスできる、完全に管理された Database-as-a-Service です。TiDB は、MySQL 互換性、水平スケーラビリティ、高可用性を備えたオープンソースの分散 SQL データベースです。開発者は、アプリケーション開発に関するドキュメントにアクセスし、TiDB Playground、PingCAP Education、コミュニティ参加の機会などの追加リソースを調べることができます。
 ---
 
 <DocHomeContainer title="PingCAP ドキュメント" subTitle="Explore the how-to guides and references you need to use TiDB Cloud and TiDB, migrate data, and build your applications on the database.">
 
 <DocHomeSection label="TiDB Cloud" anchor="tidb-cloud" id="tidb-cloud">
 
-TiDB Cloud は、 TiDB の優れた機能をすべてクラウドに提供するフルマネージドの Database-as-a-Service (DBaaS) であり、データベースの複雑さではなくアプリケーションに集中できるようになります。
+TiDB Cloud は、TiDB の優れた機能すべてをクラウドに提供する、完全に管理された Database-as-a-Service (DBaaS) であり、データベースの複雑さではなくアプリケーションに集中できます。
 
 <DocHomeCardContainer>
 
@@ -22,21 +22,21 @@ TiDB Cloudのドキュメントをビュー。
 
 <DocHomeCard href="https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart" icon="cloud5" label="Get Started with TiDB Cloud">
 
-TiDB Cloudを簡単に始めるためのガイド。
+TiDB Cloudを簡単に使い始めるためのガイド。
 
 </DocHomeCard>
 
 <DocHomeCard href="https://docs.pingcap.com/tidbcloud/tidb-cloud-poc" icon="cloud3" label="Perform a PoC with TiDB Cloud">
 
-TiDB Cloudを使用して概念実証 (PoC) を迅速に完了するのに役立ちます。
+TiDB Cloudを使用した概念実証 (PoC) を迅速に完了するのに役立ちます。
 
 </DocHomeCard>
 
 </DocHomeCardContainer>
 
-フルマネージド サービスでのリアルタイム分析用に構築されたクラウドネイティブの分散 SQL データベースの機能を活用します。
+完全に管理されたサービスでリアルタイム分析用に構築されたクラウドネイティブの分散 SQL データベースのパワーを活用します。
 
-<a href="https://tidbcloud.com/free-trial" class="button" target="_blank" referrerpolicy="no-referrer-when-downgrade">無料でお試しください</a>
+<a href="https://tidbcloud.com/free-trial" class="button" target="_blank" referrerpolicy="no-referrer-when-downgrade">無料でお試し</a>
 
 </DocHomeSection>
 
@@ -50,7 +50,7 @@ TiDB Cloudを使用して概念実証 (PoC) を迅速に完了するのに役立
 
 -->
 
-TiDB は、ハイブリッド トランザクションおよび分析処理 (HTAP) ワークロードをサポートするオープンソースの分散 SQL データベースです。 MySQL と互換性があり、水平スケーラビリティ、強力な一貫性、高可用性を備えています。 TiDB はセルフホスト環境またはクラウドにデプロイできます。
+TiDB は、ハイブリッド トランザクションおよび分析処理 (HTAP) ワークロードをサポートするオープン ソースの分散 SQL データベースです。MySQL と互換性があり、水平スケーラビリティ、強力な一貫性、高可用性を備えています。TiDB は、セルフホスト環境またはクラウドにデプロイできます。
 
 <DocHomeCardContainer>
 
@@ -62,19 +62,19 @@ TiDB のドキュメントをビュー。
 
 <DocHomeCard href="https://docs.pingcap.com/tidb/stable/quick-start-with-tidb" icon="doc5" label="Get Started with TiDB">
 
-TiDB を始める最も簡単な方法を説明します。
+TiDB を使い始めるための最も簡単な方法を説明します。
 
 </DocHomeCard>
 
 <DocHomeCard href="https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup" icon="cloud7" label="Deploy a Local TiDB Cluster">
 
-TiDB を本番環境にローカルにデプロイする方法を学びます。
+本番環境で TiDB をローカルにデプロイする方法を学習します。
 
 </DocHomeCard>
 
 </DocHomeCardContainer>
 
-オープンソースの TiDB プラットフォームは、Apache 2.0 ライセンスに基づいてリリースされ、コミュニティによってサポートされています。
+オープンソースの TiDB プラットフォームは Apache 2.0 ライセンスの下でリリースされ、コミュニティによってサポートされています。
 
 <a href="https://en.pingcap.com/download/" class="button" target="_blank" referrerpolicy="no-referrer-when-downgrade">ダウンロード</a>
 
@@ -110,51 +110,51 @@ TiDB Cloudアプリケーション開発者向けのドキュメント。
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/education/" icon="cloud1" label="PingCAP Education">
+<DocHomeCard href="https://www.pingcap.com/education/" icon="cloud1" label="PingCAP Education">
 
-よく設計されたオンライン コースとインストラクター主導のトレーニングを通じて、TiDB とTiDB Cloudについて学びます。
-
-</DocHomeCard>
-
-<DocHomeCard href="https://discord.gg/DQZ2dy3cuc?utm_source=doc" icon="doc9" label="Community">
-
-Discord に参加するか、貢献者になりましょう。
+適切に設計されたオンライン コースとインストラクター主導のトレーニングを通じて、TiDB とTiDB Cloud を学習します。
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/blog/" icon="doc10" label="Blog Posts">
+<DocHomeCard href="https://ask.pingcap.com?utm_source=doc" icon="doc9" label="Community">
 
-TiDB とTiDB Cloudに関する優れた記事をお読みください。
-
-</DocHomeCard>
-
-<DocHomeCard href="https://en.pingcap.com/videos/" icon="doc11" label="Videos">
-
-TiDB とさまざまな使用例を説明する短いビデオをまとめたものをご覧ください。
+TiDB コミュニティで他の TiDB ユーザーとつながり、共有や学習をしましょう。
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/event/" icon="events" label="Events">
+<DocHomeCard href="https://www.pingcap.com/blog/" icon="doc10" label="Blog Posts">
+
+TiDB とTiDB Cloudに関する優れた記事を読んでください。
+
+</DocHomeCard>
+
+<DocHomeCard href="https://www.pingcap.com/videos/" icon="doc11" label="Videos">
+
+TiDB とさまざまな使用例を説明する短いビデオのコンピレーションをご覧ください。
+
+</DocHomeCard>
+
+<DocHomeCard href="https://www.pingcap.com/event/" icon="events" label="Events">
 
 PingCAP とコミュニティが主催するイベントについて学びます。
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/ebook-whitepaper/" icon="papers" label="eBooks & Papers">
+<DocHomeCard href="https://www.pingcap.com/ebook-whitepaper/" icon="papers" label="eBooks & Papers">
 
-電子書籍と論文をダウンロードします。
+電子書籍と論文をダウンロードしてください。
 
 </DocHomeCard>
 
 <DocHomeCard href="https://ossinsight.io/" icon="ossinsight" label="OSS Insight">
 
-TiDB Cloudを利用して、あらゆる GitHub リポジトリを詳細に分析する強力な洞察ツール。
+TiDB Cloudを活用した、あらゆる GitHub リポジトリを詳細に分析する強力なインサイト ツールです。
 
 </DocHomeCard>
 
 <DocHomeCard href="https://github.com/pingcap/docs/blob/master/CONTRIBUTING.md" icon="contributor" label="Contribute">
 
-ドキュメントを改善するために一緒に働きましょう!
+一緒にドキュメントの改善に取り組みましょう!
 
 </DocHomeCard>
 

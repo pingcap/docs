@@ -1,6 +1,6 @@
 ---
 title: Known Incompatibility Issues with Third-Party Tools
-summary: Describes TiDB compatibility issues with third-party tools found during testing.
+summary: テスト中に見つかったサードパーティ ツールとの TiDB 互換性の問題について説明します。
 ---
 
 # サードパーティツールとの既知の非互換性の問題 {#known-incompatibility-issues-with-third-party-tools}
@@ -194,7 +194,7 @@ TiDB では、次の方法でもこれを修正します。
 -   `FULLTEXT` `HASH` `SPATIAL`はサポートされていません。
 -   `sequelize.queryInterface.showIndex(Model.tableName);`はサポートされていません。
 -   `sequelize.options.databaseVersion`はサポートされていません。
--   [`queryInterface.addColumn`](https://sequelize.org/api/v6/class/src/dialects/abstract/query-interface.js~queryinterface#instance-method-addColumn)を使用した外部キ​​ー参照の追加はサポートされていません。
+-   [`queryInterface.addColumn`](https://sequelize.org/api/v6/class/src/dialects/abstract/query-interface.js~queryinterface#instance-method-addColumn)を使用した外部キー参照の追加はサポートされていません。
 
 ### 整数主キーの変更はサポートされていません {#modification-of-integer-primary-key-is-not-supported}
 
@@ -218,7 +218,7 @@ TiDB がサポートする分離レベル`REPEATABLE-READ`または`READ-COMMITT
 
 **説明**
 
-デフォルトでは、 `ALTER TABLE MODIFY`または`ALTER TABLE CHANGE`コマンドを使用して列の`AUTO_INCREMENT`属性を追加または削除することはできません。
+デフォルトでは、 `ALTER TABLE MODIFY`または`ALTER TABLE CHANGE`コマンドを使用して列の`AUTO_INCREMENT`の属性を追加または削除することはできません。
 
 **回避方法**
 
@@ -231,3 +231,17 @@ TiDB がサポートする分離レベル`REPEATABLE-READ`または`READ-COMMITT
 **説明**
 
 `FULLTEXT` `HASH` `SPATIAL`はサポートされていません。
+
+## 助けが必要？ {#need-help}
+
+<CustomContent platform="tidb">
+
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+
+</CustomContent>

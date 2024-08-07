@@ -1,6 +1,6 @@
 ---
 title: TiDB 7.0.0 Release Notes
-summary: Learn about the new features, compatibility changes, improvements, and bug fixes in TiDB 7.0.0.
+summary: TiDB 7.0.0 の新機能、互換性の変更、改善、バグ修正について説明します。
 ---
 
 # TiDB 7.0.0 リリースノート {#tidb-7-0-0-release-notes}
@@ -13,7 +13,7 @@ TiDB バージョン: 7.0.0- [DMMR の](/releases/versioning.md#development-mile
 
 v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
-<table><thead><tr><th>カテゴリー</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td rowspan="2">スケーラビリティとパフォーマンス<br/></td><td>セッション レベル<a href="https://docs.pingcap.com/tidb/v7.0/sql-non-prepared-plan-cache" target="_blank">の非準備 SQL プラン キャッシュ</a>(実験的)</td><td>セッション レベルでプラン キャッシュを自動的に再利用することをサポートします。これにより、事前に準備ステートメントを手動で設定しなくても、コンパイルが削減され、同じ SQL パターンのクエリ時間が短縮されます。</td></tr><tr><td> TiFlash は<a href="https://docs.pingcap.com/tidb/v7.0/tiflash-disaggregated-and-s3" target="_blank">、分散storageとコンピューティングアーキテクチャ、および S3 共有storage</a>(実験的) をサポートします。</td><td> TiFlash は、オプションとしてクラウドネイティブアーキテクチャを導入します。<ul><li> TiFlash のコンピューティングとstorageを分離します。これは、弾力性のある HTAP リソース利用のマイルストーンです。</li><li>低コストで共有storageを提供できる S3 ベースのstorageエンジンを導入します。</li></ul></td></tr><tr><td rowspan="2">信頼性と可用性<br/></td><td><a href="https://docs.pingcap.com/tidb/v7.0/tidb-resource-control" target="_blank">リソース制御の強化</a>（実験的）</td><td>リソース グループを使用して、1 つのクラスター内のさまざまなアプリケーションまたはワークロードのリソースを割り当て、分離することをサポートします。このリリースでは、TiDB はさまざまなリソース バインディング モード (ユーザー、セッション、ステートメント レベル) とユーザー定義の優先順位のサポートを追加します。さらに、コマンドを使用してリソース調整 (全体のリソース量の推定) を実行することもできます。</td></tr><tr><td> TiFlashは<a href="https://docs.pingcap.com/tidb/v7.0/tiflash-spill-disk" target="_blank">ディスクへの書き込みを</a>サポート</td><td>TiFlash は、集約、ソート、ハッシュ結合などのデータ集約型操作における OOM を軽減するために、ディスクへの中間結果のスピルをサポートします。</td></tr><tr><td rowspan="2">構文</td><td><a href="https://docs.pingcap.com/tidb/v7.0/time-to-live" target="_blank">行レベルの TTL</a> (GA)</td><td>一定の期間が経過したデータを自動的に期限切れにすることで、データベース サイズの管理をサポートし、パフォーマンスを向上します。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/v7.0/partitioned-table#reorganize-partitions" target="_blank"><code>LIST</code> / <code>RANGE</code>パーティションの再編成</a></td><td><code>REORGANIZE PARTITION</code>ステートメントは、隣接するパーティションをマージしたり、1 つのパーティションを複数のパーティションに分割したりするために使用でき、パーティション化されたテーブルの使いやすさが向上します。</td></tr><tr><td rowspan="2"> DB 操作と可観測性<br/></td><td>TiDB は<a href="https://docs.pingcap.com/tidb/v7.0/sql-statement-load-data" target="_blank"><code>LOAD DATA</code>ステートメント</a>の機能を強化します (実験的)</td><td> TiDB は、S3/GCS からのデータ インポートのサポートなど、 <code>LOAD DATA</code> SQL ステートメントの機能を強化します。<br/></td></tr><tr><td> TiCDC は<a href="https://docs.pingcap.com/tidb/v7.0/ticdc-sink-to-cloud-storage" target="_blank">オブジェクトstorageシンク</a>(GA) をサポートします</td><td>TiCDC は、Amazon S3、GCS、Azure Blob Storage、NFS などのオブジェクトstorageサービスへの行変更イベントの複製をサポートしています。<br/></td></tr></tbody></table>
+<table><thead><tr><th>カテゴリー</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td rowspan="2">スケーラビリティとパフォーマンス<br/></td><td>セッション レベル<a href="https://docs.pingcap.com/tidb/v7.0/sql-non-prepared-plan-cache" target="_blank">の非準備 SQL プラン キャッシュ</a>(実験的)</td><td>セッション レベルでプラン キャッシュを自動的に再利用することをサポートします。これにより、事前に準備ステートメントを手動で設定しなくても、コンパイルが削減され、同じ SQL パターンのクエリ時間が短縮されます。</td></tr><tr><td> TiFlash は<a href="https://docs.pingcap.com/tidb/v7.0/tiflash-disaggregated-and-s3" target="_blank">、分散storageとコンピューティングアーキテクチャ、および S3 共有storage</a>(実験的) をサポートします。</td><td> TiFlash は、オプションとしてクラウドネイティブアーキテクチャを導入します。<ul><li> TiFlash のコンピューティングとstorageを分離します。これは、弾力的な HTAP リソース利用のマイルストーンです。</li><li>低コストで共有storageを提供できる S3 ベースのstorageエンジンを導入します。</li></ul></td></tr><tr><td rowspan="2">信頼性と可用性<br/></td><td><a href="https://docs.pingcap.com/tidb/v7.0/tidb-resource-control" target="_blank">リソース制御の強化</a>（実験的）</td><td>リソース グループを使用して、1 つのクラスター内のさまざまなアプリケーションまたはワークロードのリソースを割り当て、分離することをサポートします。このリリースでは、TiDB はさまざまなリソース バインディング モード (ユーザー、セッション、ステートメント レベル) とユーザー定義の優先順位のサポートを追加します。さらに、コマンドを使用してリソース調整 (全体のリソース量の推定) を実行することもできます。</td></tr><tr><td> TiFlashは<a href="https://docs.pingcap.com/tidb/v7.0/tiflash-spill-disk" target="_blank">ディスクへの書き込みを</a>サポート</td><td>TiFlash は、集約、ソート、ハッシュ結合などのデータ集約型操作における OOM を軽減するために、ディスクへの中間結果のスピルをサポートします。</td></tr><tr><td rowspan="2">構文</td><td><a href="https://docs.pingcap.com/tidb/v7.0/time-to-live" target="_blank">行レベルの TTL</a> (GA)</td><td>一定の期間が経過したデータを自動的に期限切れにすることで、データベース サイズの管理をサポートし、パフォーマンスを向上します。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/v7.0/partitioned-table#reorganize-partitions" target="_blank"><code>LIST</code> / <code>RANGE</code>パーティションの再編成</a></td><td><code>REORGANIZE PARTITION</code>ステートメントは、隣接するパーティションをマージしたり、1 つのパーティションを複数のパーティションに分割したりするために使用でき、パーティション化されたテーブルの使いやすさが向上します。</td></tr><tr><td rowspan="2"> DB 操作と可観測性<br/></td><td>TiDB は<a href="https://docs.pingcap.com/tidb/v7.0/sql-statement-load-data" target="_blank"><code>LOAD DATA</code>ステートメント</a>の機能を強化します (実験的)</td><td> TiDB は、S3/GCS からのデータ インポートのサポートなど、 <code>LOAD DATA</code> SQL ステートメントの機能を強化します。<br/></td></tr><tr><td> TiCDC は<a href="https://docs.pingcap.com/tidb/v7.0/ticdc-sink-to-cloud-storage" target="_blank">オブジェクトstorageシンク</a>(GA) をサポートします</td><td>TiCDC は、Amazon S3、GCS、Azure Blob Storage、NFS などのオブジェクトstorageサービスへの行変更イベントの複製をサポートしています。<br/></td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
@@ -103,7 +103,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
     この機能は、Grafana のリソースの実際の使用状況を表示する組み込みのリソース コントロール ダッシュボードを提供し、リソースをより合理的に割り当てるのに役立ちます。また、セッション レベルとステートメント レベルの両方に基づく動的なリソース管理機能もサポートしています (ヒント)。この機能の導入により、TiDB クラスターのリソース使用状況をより正確に制御し、実際のニーズに基づいてクォータを動的に調整できるようになります。
 
-    TiDB v7.0.0 では、リソース グループに絶対的なスケジュール優先度 ( `PRIORITY` ) を設定して、重要なサービスがリソースを取得できることを保証できます。また、リソース グループの設定方法も拡張されます。
+    TiDB v7.0.0 では、重要なサービスがリソースを取得できることを保証するために、リソース グループに絶対的なスケジュール優先度 ( `PRIORITY` ) を設定できます。また、リソース グループの設定方法も拡張されます。
 
     リソース グループは次の方法で使用できます。
 
@@ -115,13 +115,13 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   高速オンラインDDLのチェックポイントメカニズムをサポートし、フォールトトレランスと自動リカバリ機能を向上させます[＃42164](https://github.com/pingcap/tidb/issues/42164) @ [タンジェンタ](https://github.com/tangenta)
 
-    TiDB v7.0.0 では、 [高速オンラインDDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)のチェックポイント メカニズムが導入され、フォールト トレランスと自動リカバリ機能が大幅に向上しました。DDL の進行状況を定期的に記録して同期することで、TiDB DDL 所有者に障害が発生したり、切り替えがあったりしても、進行中の DDL 操作を高速オンライン DDL モードで引き続き実行できます。これにより、DDL の実行がより安定して効率的になります。
+    TiDB v7.0.0 では、 [高速オンラインDDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)のチェックポイント メカニズムが導入され、フォールト トレランスと自動リカバリ機能が大幅に向上しました。DDL の進行状況を定期的に記録して同期することで、TiDB DDL 所有者の障害や切り替えが発生した場合でも、進行中の DDL 操作を高速オンライン DDL モードで引き続き実行できます。これにより、DDL の実行がより安定して効率的になります。
 
     詳細については[ドキュメンテーション](/ddl-introduction.md)参照してください。
 
 -   TiFlashはディスク[＃6528](https://github.com/pingcap/tiflash/issues/6528) @ [風の話し手](https://github.com/windtalker)へのスピルをサポート
 
-    実行パフォーマンスを向上させるために、 TiFlash は可能な限りデータ全体をメモリ内で実行します。データ量がメモリの合計サイズを超えると、メモリ不足によるシステムクラッシュを回避するために、 TiFlash はクエリを終了します。したがって、 TiFlashが処理できるデータ量は、使用可能なメモリによって制限されます。
+    実行パフォーマンスを向上させるために、 TiFlash は可能な限りデータ全体をメモリ内で実行します。データ量がメモリの合計サイズを超えると、 TiFlash はクエリを終了して、メモリ不足によるシステムクラッシュを回避します。したがって、 TiFlashが処理できるデータ量は、使用可能なメモリによって制限されます。
 
     v7.0.0 以降、 TiFlash はディスクへの書き込みをサポートします。演算子のメモリ使用量のしきい値 ( [`tidb_max_bytes_before_tiflash_external_group_by`](/system-variables.md#tidb_max_bytes_before_tiflash_external_group_by-new-in-v700) 、 [`tidb_max_bytes_before_tiflash_external_sort`](/system-variables.md#tidb_max_bytes_before_tiflash_external_sort-new-in-v700) 、および[`tidb_max_bytes_before_tiflash_external_join`](/system-variables.md#tidb_max_bytes_before_tiflash_external_join-new-in-v700) ) を調整することで、演算子が使用できるメモリの最大量を制御できます。演算子によって使用されるメモリがしきい値を超えると、自動的にデータがディスクに書き込まれます。これにより、パフォーマンスが多少犠牲になりますが、より多くのデータを処理できるようになります。
 
@@ -133,10 +133,10 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   MPP 最適化[＃39710](https://github.com/pingcap/tidb/issues/39710) @ [思い出させる](https://github.com/Reminiscent)の新しいオプティマイザーヒントを追加します
 
-    v7.0.0 では、TiDB は MPP 実行プランの生成に影響を与える一連のオプティマイザー ヒントを追加します。
+    v7.0.0 では、TiDB は MPP 実行プランの生成に影響を与える一連のオプティマイザーヒントを追加します。
 
-    -   [`SHUFFLE_JOIN()`](/optimizer-hints.md#shuffle_joint1_name--tl_name-) : MPP に有効になります。指定されたテーブルに対して Shuffle Join アルゴリズムを使用するようにオプティマイザに指示します。
-    -   [`BROADCAST_JOIN()`](/optimizer-hints.md#broadcast_joint1_name--tl_name-) : MPP に有効です。指定されたテーブルに対してブロードキャスト結合アルゴリズムを使用するようにオプティマイザに指示します。
+    -   [`SHUFFLE_JOIN()`](/optimizer-hints.md#shuffle_joint1_name--tl_name-) : MPP に有効です。指定されたテーブルに対して Shuffle Join アルゴリズムを使用するようにオプティマイザに指示します。
+    -   [`BROADCAST_JOIN()`](/optimizer-hints.md#broadcast_joint1_name--tl_name-) : MPP に有効になります。指定されたテーブルに対してブロードキャスト結合アルゴリズムを使用するようにオプティマイザに指示します。
     -   [`MPP_1PHASE_AGG()`](/optimizer-hints.md#mpp_1phase_agg) : MPP に有効です。指定されたクエリ ブロック内のすべての集計関数に対して 1 フェーズ集計アルゴリズムを使用するようにオプティマイザに指示します。
     -   [`MPP_2PHASE_AGG()`](/optimizer-hints.md#mpp_2phase_agg) : MPP に有効です。指定されたクエリ ブロック内のすべての集計関数に対して 2 フェーズ集計アルゴリズムを使用するようにオプティマイザに指示します。
 
@@ -146,7 +146,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   オプティマイザヒントは結合方法と結合順序の指定をサポートします[＃36600](https://github.com/pingcap/tidb/issues/36600) @ [思い出させる](https://github.com/Reminiscent)
 
-    v7.0.0 では、オプティマイザ ヒント[`LEADING()`](/optimizer-hints.md#leadingt1_name--tl_name-)は結合方法に影響を与えるヒントと組み合わせて使用​​でき、それらの動作は互換性があります。複数テーブルの結合の場合、最適な結合方法と結合順序を効果的に指定できるため、実行プランに対するオプティマイザ ヒントの制御が強化されます。
+    v7.0.0 では、オプティマイザ ヒント[`LEADING()`](/optimizer-hints.md#leadingt1_name--tl_name-)は結合方法に影響を与えるヒントと組み合わせて使用でき、それらの動作は互換性があります。複数テーブルの結合の場合、最適な結合方法と結合順序を効果的に指定できるため、実行プランに対するオプティマイザ ヒントの制御が強化されます。
 
     新しいヒントの動作には、若干の変更があります。前方互換性を確保するために、TiDB ではシステム変数[`tidb_opt_advanced_join_hint`](/system-variables.md#tidb_opt_advanced_join_hint-new-in-v700)が導入されています。この変数を`OFF`に設定すると、オプティマイザーのヒント動作は以前のバージョンと互換性があります。クラスターを以前のバージョンから v7.0.0 以降のバージョンにアップグレードすると、この変数は`OFF`に設定されます。より柔軟なヒント動作を得るには、動作によってパフォーマンスの低下が発生しないことを確認した後、この変数を`ON`に設定することを強くお勧めします。
 
@@ -184,7 +184,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   TiCDC は変更データをstorageサービスに複製することをサポートします (GA) [＃6797](https://github.com/pingcap/tiflow/issues/6797) @ [趙新宇](https://github.com/zhaoxinyu)
 
-    TiCDC は、Amazon S3、GCS、Azure Blob Storage、NFS、およびその他の S3 互換storageサービスへの変更データのレプリケーションをサポートしています。ストレージ サービスは手頃な価格で使いやすいです。Kafka を使用していない場合は、storageサービスを使用できます。TiCDC は変更されたログをファイルに保存し、代わりにstorageサービスに送信します。storageサービスから、独自のコンシューマー プログラムは、新しく生成された変更されたログ ファイルを定期的に読み取ることができます。現在、TiCDC は、canal-json および CSV 形式で変更されたログをstorageサービスにレプリケーションすることをサポートしています。
+    TiCDC は、Amazon S3、GCS、Azure Blob Storage、NFS、およびその他の S3 互換storageサービスへの変更データのレプリケーションをサポートしています。ストレージ サービスは価格が手頃で使いやすいです。Kafka を使用していない場合は、storageサービスを使用できます。TiCDC は変更されたログをファイルに保存し、代わりにstorageサービスに送信します。storageサービスから、独自のコンシューマー プログラムは、新しく生成された変更されたログ ファイルを定期的に読み取ることができます。現在、TiCDC は、canal-json および CSV 形式で変更されたログをstorageサービスにレプリケーションすることをサポートしています。
 
     詳細については[ドキュメンテーション](/ticdc/ticdc-sink-to-cloud-storage.md)参照してください。
 
@@ -198,10 +198,10 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
     -   独立した TiDB モジュール、アイコン、ロゴを提供します。
     -   デフォルト構成では[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)サポートされているため、TiDB Serverless への接続が容易になります。
-    -   外部キー タブを表示または非表示にするために TiDB のバージョンを識別できます。
+    -   外部キー タブを表示または非表示にするために TiDB のバージョンを識別することをサポートします。
     -   `EXPLAIN`の結果で SQL 実行プランの視覚化をサポートします。
-    -   `PESSIMISTIC` `PLACEMENT` `OPTIMISTIC` `AUTO_RANDOM` `CLUSTERED` `POLICY`強調`CACHE` `NONCLUSTERED`サポート`REORGANIZE` `EXCHANGE` 。
-    -   `TIDB_BOUNDED_STALENESS` `TIDB_DECODE_PLAN` `TIDB_IS_DDL_OWNER` TiDB関数`TIDB_DECODE_KEY`強調`TIDB_SHARD` `TIDB_DECODE_SQL_DIGESTS`サポート`TIDB_PARSE_TSO` `TIDB_VERSION` 。
+    -   `PESSIMISTIC` `PLACEMENT` `OPTIMISTIC` `AUTO_RANDOM`キーワード`NONCLUSTERED`強調`CACHE` `CLUSTERED`サポート`REORGANIZE` `EXCHANGE` `POLICY`
+    -   `TIDB_BOUNDED_STALENESS` `TIDB_DECODE_PLAN` `TIDB_IS_DDL_OWNER` TiDB関数`TIDB_DECODE_KEY`強調表示`TIDB_SHARD`サポート`TIDB_PARSE_TSO` `TIDB_VERSION` `TIDB_DECODE_SQL_DIGESTS`
 
     詳細については[DBeaver ドキュメント](https://github.com/dbeaver/dbeaver/wiki)参照してください。
 
@@ -217,7 +217,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
     詳細については[ドキュメンテーション](/sql-statements/sql-statement-load-data.md)参照してください。
 
--   TiDB Lightning は、 TiKV (GA) [＃41163](https://github.com/pingcap/tidb/issues/41163) @ [ゴズスキー](https://github.com/gozssky)にキーと値のペアを送信するときに圧縮転送を有効にすることをサポートします。
+-   TiDB Lightning は、 TiKV (GA) [＃41163](https://github.com/pingcap/tidb/issues/41163) @ [眠いモグラ](https://github.com/sleepymole)にキーと値のペアを送信するときに圧縮転送を有効にすることをサポートします。
 
     v6.6.0 以降、 TiDB Lightning は、ローカルでエンコードされ、ソートされたキーと値のペアを TiKV に送信する際にネットワーク転送用に圧縮することをサポートしています。これにより、ネットワーク経由で転送されるデータの量が削減され、ネットワーク帯域幅のオーバーヘッドが低減されます。この機能がサポートされる前の TiDB バージョンでは、 TiDB Lightning は比較的高いネットワーク帯域幅を必要とし、大量のデータを扱う場合には高いトラフィック料金が発生します。
 
@@ -235,7 +235,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   TiDBは、自動インクリメント列がインデックス[＃40580](https://github.com/pingcap/tidb/issues/40580) @ [天菜まお](https://github.com/tiancaiamao)でなければならないという制約を削除します。
 
-    v7.0.0 より前の TiDB の動作は MySQL と一致しており、自動インクリメント列はインデックスまたはインデックス プレフィックスである必要があります。v7.0.0 以降、TiDB は自動インクリメント列がインデックスまたはインデックス プレフィックスでなければならないという制約を削除します。これで、テーブルの主キーをより柔軟に定義し、自動インクリメント列を使用して並べ替えとページネーションをより便利に実装できます。これにより、自動インクリメント列によって発生する書き込みホットスポットの問題も回避され、クラスター化インデックスを持つテーブルを使用することでクエリ パフォーマンスが向上します。新しいリリースでは、次の構文を使用してテーブルを作成できます。
+    v7.0.0 より前の TiDB の動作は MySQL と一致しており、自動インクリメント列はインデックスまたはインデックス プレフィックスである必要があります。v7.0.0 以降、TiDB は自動インクリメント列がインデックスまたはインデックス プレフィックスである必要があるという制約を削除します。これで、テーブルの主キーをより柔軟に定義し、自動インクリメント列を使用して並べ替えとページネーションをより便利に実装できます。これにより、自動インクリメント列によって発生する書き込みホットスポットの問題も回避され、クラスター化インデックスを持つテーブルを使用することでクエリ パフォーマンスが向上します。新しいリリースでは、次の構文を使用してテーブルを作成できます。
 
     ```sql
     CREATE TABLE test1 (
@@ -325,8 +325,8 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 | ティCDC          | [`enable-table-across-nodes`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | 新しく追加された | リージョンの数に応じて、テーブルを複数の同期範囲に分割するかどうかを決定します。これらの範囲は、複数の TiCDC ノードによって複製できます。                                                                                                                                                                                          |
 | ティCDC          | [`region-threshold`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)          | 新しく追加された | `enable-table-across-nodes`が有効になっている場合、この機能は`region-threshold`以上のリージョンを持つテーブルにのみ適用されます。                                                                                                                                                                           |
 | DM             | [`analyze`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)           | 新しく追加された | CHECKSUM が完了した後、各テーブルで`ANALYZE TABLE <table>`操作を実行するかどうかを制御します。 `"required"` / `"optional"` / `"off"`に設定できます。デフォルト値は`"optional"`です。                                                                                                                               |
-| DM             | [`range-concurrency`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) | 新しく追加された | dm-worker が KV データを TiKV に書き込む同時実行を制御します。                                                                                                                                                                                                                         |
-| DM             | [`compress-kv-pairs`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) | 新しく追加された | dm-worker が KV データを TiKV に送信するときに圧縮を有効にするかどうかを制御します。現在、gzip のみがサポートされています。デフォルト値は空で、圧縮がないことを意味します。                                                                                                                                                                |
+| DM             | [`range-concurrency`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) | 新しく追加された | KV データを TiKV に書き込む dm-worker の同時実行を制御します。                                                                                                                                                                                                                         |
+| DM             | [`compress-kv-pairs`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) | 新しく追加された | dm-worker が KV データを TiKV に送信するときに圧縮を有効にするかどうかを制御します。現在、gzip のみがサポートされています。デフォルト値は空で、圧縮されないことを意味します。                                                                                                                                                               |
 | DM             | [`pd-addr`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)           | 新しく追加された | 物理インポート モードでのダウンストリーム PDサーバーのアドレスを制御します。1 つまたは複数の PD サーバーを入力できます。この構成項目が空の場合、デフォルトで TiDB クエリからの PD アドレス情報が使用されます。                                                                                                                                                 |
 
 ## 改善点 {#improvements}
@@ -358,7 +358,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
             この機能を有効にするには、TiCDC 構成項目`enable_table_across_nodes`を`true`に設定します。5 `region_threshold`使用すると、テーブルのリージョン数がこのしきい値を超えると、TiCDC が対応するテーブルのデータ変更を複数の TiCDC ノードに配布し始めるように指定できます。
 
-        -   災害復旧シナリオでのスループットの向上とRTOの短縮のために、REDOアプライヤでのトランザクション分割をサポートする[＃8318](https://github.com/pingcap/tiflow/issues/8318)​​ @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
+        -   災害復旧シナリオでのスループットの向上とRTOの短縮のために、REDOアプライヤでのトランザクション分割をサポートする[＃8318](https://github.com/pingcap/tiflow/issues/8318) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
 
         -   テーブル スケジューリングを改善して、1 つのテーブルをさまざまな TiCDC ノード[＃8247](https://github.com/pingcap/tiflow/issues/8247) @ [金星の上](https://github.com/overvenus)に均等に分割します。
 
@@ -374,7 +374,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
     -   TiDB Lightning
 
-        -   TiDB Lightning物理インポート モードは、データのインポートとインデックスのインポートを分離して、インポート速度と安定性を向上させます[＃42132](https://github.com/pingcap/tidb/issues/42132) @ [ゴズスキー](https://github.com/gozssky)
+        -   TiDB Lightning物理インポート モードは、データのインポートとインデックスのインポートを分離して、インポートの速度と安定性を向上させます[＃42132](https://github.com/pingcap/tidb/issues/42132) @ [眠いモグラ](https://github.com/sleepymole)
 
             `add-index-by-sql`パラメータを追加します。デフォルト値は`false`で、これはTiDB Lightning が行データとインデックス データの両方を KV ペアにエンコードし、一緒に TiKV にインポートすることを意味します。 `true`に設定すると、 TiDB Lightningは行データをインポートした後、 `ADD INDEX` SQL ステートメントを介してインデックスを追加し、インポート速度と安定性を向上させます。
 
@@ -384,7 +384,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   ティビ
 
-    -   TiDBをv6.5.1からそれ以降のバージョン[＃41502](https://github.com/pingcap/tidb/issues/41502) @ [クリサン](https://github.com/chrysan)にアップグレードするときに更新が失われる問題を修正
+    -   TiDB を v6.5.1 からそれ以降のバージョン[＃41502](https://github.com/pingcap/tidb/issues/41502) @ [クリサン](https://github.com/chrysan)にアップグレードするときに更新が失われる問題を修正しました
     -   [＃41423](https://github.com/pingcap/tidb/issues/41423) @ [クレイジーcs520](https://github.com/crazycs520)にアップグレードした後、一部のシステム変数のデフォルト値が変更されない問題を修正しました
     -   インデックスの追加に関連するコプロセッサー要求タイプが不明[＃41400](https://github.com/pingcap/tidb/issues/41400) @ [タンジェンタ](https://github.com/tangenta)として表示される問題を修正
     -   インデックス[＃41515](https://github.com/pingcap/tidb/issues/41515) @ [タンジェンタ](https://github.com/tangenta)を追加するときに「PessimisticLockNotFound」が返される問題を修正しました
@@ -401,7 +401,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
     -   準備プランキャッシュが有効になっている場合に IndexMerge が誤った結果を生成する可能性がある問題を修正[＃41828](https://github.com/pingcap/tidb/issues/41828) @ [qw4990](https://github.com/qw4990)
     -   IndexMerge で goroutine リークが発生する可能性がある問題を修正[＃41605](https://github.com/pingcap/tidb/issues/41605) @ [グオシャオゲ](https://github.com/guo-shaoge)
     -   BIGINT 以外の符号なし整数を文字列/小数と比較すると誤った結果が生成される可能性がある問題を修正[＃41736](https://github.com/pingcap/tidb/issues/41736) @ [リトルフォール](https://github.com/LittleFall)
-    -   メモリ制限超過により前の`ANALYZE`ステートメントを強制終了すると、同じセッション内の現在の`ANALYZE`ステートメントが強制終了される可能性がある問題を修正しました[＃41825](https://github.com/pingcap/tidb/issues/41825) @ [徐淮宇](https://github.com/XuHuaiyu)
+    -   メモリ制限超過により前の`ANALYZE`ステートメントを強制終了すると、同じセッション内の現在の`ANALYZE`ステートメントが[＃41825](https://github.com/pingcap/tidb/issues/41825) @ [徐懐玉](https://github.com/XuHuaiyu)で強制終了される可能性がある問題を修正しました。
     -   バッチコプロセッサ[＃41412](https://github.com/pingcap/tidb/issues/41412) @ [あなた06](https://github.com/you06)の情報収集処理中にデータ競合が発生する可能性がある問題を修正
     -   アサーションエラーによりパーティションテーブル[＃40629](https://github.com/pingcap/tidb/issues/40629) @ [エキシウム](https://github.com/ekexium)の MVCC 情報が印刷されない問題を修正しました。
     -   フェアロックモードで存在しないキー[＃41527](https://github.com/pingcap/tidb/issues/41527) @ [エキシウム](https://github.com/ekexium)にロックが追加される問題を修正
@@ -411,7 +411,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
     -   リージョン散布操作によってリーダー[＃6017](https://github.com/tikv/pd/issues/6017) @ [ハンダンDM](https://github.com/HunDunDM)の分布が不均一になる可能性がある問題を修正しました。
     -   起動時にPDメンバーを取得する際にデータ競合が発生する可能性がある問題を修正[＃6069](https://github.com/tikv/pd/issues/6069) @ [rleungx](https://github.com/rleungx)
-    -   ホットスポット統計[＃6069](https://github.com/tikv/pd/issues/6069) @ [翻訳:](https://github.com/lhy1024)を収集するときにデータ競合が発生する可能性がある問題を修正
+    -   ホットスポット統計[＃6069](https://github.com/tikv/pd/issues/6069) @ [翻訳者](https://github.com/lhy1024)を収集するときにデータ競合が発生する可能性がある問題を修正
     -   配置ルールを切り替えるとリーダー[＃6195](https://github.com/tikv/pd/issues/6195) @ [バッファフライ](https://github.com/bufferflies)の分布が不均等になる可能性がある問題を修正しました。
 
 -   TiFlash
@@ -459,7 +459,7 @@ TiDB コミュニティの以下の貢献者に感謝いたします。
 -   [ボーンチェンジャー](https://github.com/BornChanger)
 -   [ドゥージール9](https://github.com/Dousir9)
 -   [エルワドバ](https://github.com/erwadba)
--   [ハッピーおじさん](https://github.com/HappyUncle)
+-   [ハッピーv587](https://github.com/happy-v587)
 -   [ジフハウス](https://github.com/jiyfhust)
 -   [L-メープル](https://github.com/L-maple)
 -   [りゅうめんぎゃ](https://github.com/liumengya94)

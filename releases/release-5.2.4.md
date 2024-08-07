@@ -1,7 +1,7 @@
 ---
 title: TiDB 5.2.4 Release Notes
 category: Releases
-summary: Learn about the new features, compatibility changes, improvements, and bug fixes in TiDB 5.2.4.
+summary: TiDB 5.2.4 の新機能、互換性の変更、改善、バグ修正について説明します。
 ---
 
 # TiDB 5.2.4 リリースノート {#tidb-5-2-4-release-notes}
@@ -14,7 +14,7 @@ TiDB バージョン: 5.2.4
 
 -   ティビ
 
-    -   システム変数[`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)のデフォルト値を`2`から`1` [＃31748](https://github.com/pingcap/tidb/issues/31748)に変更します
+    -   システム変数[`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)のデフォルト値を`2`から`1`に変更する[＃31748](https://github.com/pingcap/tidb/issues/31748)
 
 -   ティクヴ
 
@@ -33,7 +33,7 @@ TiDB バージョン: 5.2.4
 -   ティクヴ
 
     -   レイテンシージッターを減らすためにリーダーシップをCDCオブザーバーに移譲する[＃12111](https://github.com/tikv/tikv/issues/12111)
-    -   解決ロックを必要とする領域の数を減らすことで、TiCDC の回復時間を短縮します (ステップ[＃11993](https://github.com/tikv/tikv/issues/11993)
+    -   解決ロックを必要とする領域の数を減らすことで、TiCDC の回復時間を短縮します (手順[＃11993](https://github.com/tikv/tikv/issues/11993)
     -   procファイルシステム（procfs）をv0.12.0 [＃11702](https://github.com/tikv/tikv/issues/11702)に更新する
     -   Raftログ[＃11404](https://github.com/tikv/tikv/issues/11404)へのガベージ コレクション (GC) を実行するときに書き込みバッチ サイズを増やすことで、GC プロセスを高速化します。
     -   検証プロセスを`Apply`スレッドプール[＃11239](https://github.com/tikv/tikv/issues/11239)から`Import`スレッドプールに移動することで、SSTファイルの挿入速度が向上します。
@@ -74,7 +74,7 @@ TiDB バージョン: 5.2.4
     -   `Order By` [＃30271](https://github.com/pingcap/tidb/issues/30271)の最適化による誤ったクエリ結果を修正
     -   `ENUM`種類の列[＃27831](https://github.com/pingcap/tidb/issues/27831)に対して`JOIN`実行したときに発生する可能性のある誤った結果を修正しました。
     -   `ENUM`データ型[＃29357](https://github.com/pingcap/tidb/issues/29357)で`CASE WHEN`関数を使用するときに発生するpanicを修正
-    -   ベクトル化された式[＃29244](https://github.com/pingcap/tidb/issues/29244)の関数`microsecond`の誤った結果を修正
+    -   ベクトル化された式[＃29244](https://github.com/pingcap/tidb/issues/29244)の`microsecond`関数の誤った結果を修正
     -   ウィンドウ関数がエラーを報告する代わりに TiDB をpanicせる問題を修正[＃30326](https://github.com/pingcap/tidb/issues/30326)
     -   特定のケースで Merge Join 演算子が間違った結果を返す問題を修正[＃33042](https://github.com/pingcap/tidb/issues/33042)
     -   相関サブクエリが定数[＃32089](https://github.com/pingcap/tidb/issues/32089)を返すときに TiDB が誤った結果を取得する問題を修正しました。
@@ -112,11 +112,11 @@ TiDB バージョン: 5.2.4
     -   小数点以下の除算結果がゼロの場合の負の符号の問題を修正[＃29586](https://github.com/pingcap/tidb/issues/29586)
     -   悲観的トランザクションモードで事前書き込み要求を再試行すると、まれにデータの不整合が発生するリスクがある問題を修正しました[＃11187](https://github.com/tikv/tikv/issues/11187)
     -   統計スレッド[＃11195](https://github.com/tikv/tikv/issues/11195)のデータの監視によって発生するメモリリークを修正
-    -   TiKV メトリクス[＃11299](https://github.com/tikv/tikv/issues/11299)でインスタンスごとの gRPC リクエストの平均レイテンシーが不正確になる問題を修正
+    -   TiKV メトリック[＃11299](https://github.com/tikv/tikv/issues/11299)でインスタンスごとの gRPC リクエストの平均レイテンシーが不正確になる問題を修正
     -   ピアステータスが`Applying` [＃11746](https://github.com/tikv/tikv/issues/11746)のときにスナップショットファイルを削除すると発生するpanic問題を修正しました。
     -   GCワーカーがビジー状態のときにTiKVがデータの範囲を削除できない（つまり内部コマンド`unsafe_destroy_range`が実行される）バグを修正[＃11903](https://github.com/tikv/tikv/issues/11903)
     -   初期化されていないレプリカを削除すると古いレプリカが再作成される可能性がある問題を修正[＃10533](https://github.com/tikv/tikv/issues/10533)
-    -   TiKVが逆テーブルスキャンを実行するときにTiKVがメモリロックを検出できない問題を修正[＃11440](https://github.com/tikv/tikv/issues/11440)
+    -   TiKVが逆テーブルスキャンを実行するときにメモリロックを検出できない問題を修正[＃11440](https://github.com/tikv/tikv/issues/11440)
     -   コルーチンの実行速度が速すぎる場合に時々発生するデッドロックの問題を修正[＃11549](https://github.com/tikv/tikv/issues/11549)
     -   ピアを破棄するとレイテンシーが大きくなる可能性がある問題を修正[＃10210](https://github.com/tikv/tikv/issues/10210)
     -   マージ対象のリージョンが無効であるため、TiKV がパニックを起こしてピアを予期せず破棄する問題を修正[＃12232](https://github.com/tikv/tikv/issues/12232)
@@ -177,12 +177,12 @@ TiDB バージョン: 5.2.4
         -   不正確なチェックポイント[＃3545](https://github.com/pingcap/tiflow/issues/3545)によって発生する潜在的なデータ損失の問題を修正
         -   デッドロックによりレプリケーションタスクが停止する可能性がある問題を修正[＃4055](https://github.com/pingcap/tiflow/issues/4055)
         -   etcd [＃2980](https://github.com/pingcap/tiflow/issues/2980)でタスク ステータスを手動でクリーンアップするときに発生する TiCDCpanicの問題を修正しました。
-        -   DDL ステートメント内の特別なコメントによってレプリケーション タスクが停止する問題を修正[＃3755](https://github.com/pingcap/tiflow/issues/3755)
+        -   DDL ステートメント内の特別なコメントによってレプリケーション タスクが停止する問題を修正しました[＃3755](https://github.com/pingcap/tiflow/issues/3755)
         -   `config.Metadata.Timeout` [＃3352](https://github.com/pingcap/tiflow/issues/3352)の誤った構成によって発生するレプリケーション停止の問題を修正
         -   RHELリリース[＃3584](https://github.com/pingcap/tiflow/issues/3584)のタイムゾーンの問題によりサービスを開始できない問題を修正
         -   クラスターのアップグレード後に`stopped`チェンジフィードが自動的に再開される問題を修正[＃3473](https://github.com/pingcap/tiflow/issues/3473)
         -   MySQLシンクデッドロック[＃2706](https://github.com/pingcap/tiflow/issues/2706)による警告が頻繁に発生する問題を修正
-        -   Canal および Maxwell プロトコル[＃3676](https://github.com/pingcap/tiflow/issues/3676)で`enable-old-value`構成項目が自動的に`true`に設定されないバグを修正
+        -   Canalプロトコル[＃3676](https://github.com/pingcap/tiflow/issues/3676)で設定項目`enable-old-value`が`true`に自動的に設定されないバグを修正
         -   AvroシンクがJSON型列[＃3624](https://github.com/pingcap/tiflow/issues/3624)の解析をサポートしていない問題を修正
         -   チェンジフィードチェックポイントラグ[＃3010](https://github.com/pingcap/tiflow/issues/3010)負の値エラーを修正
         -   コンテナ環境のOOM問題を修正[＃1798](https://github.com/pingcap/tiflow/issues/1798)
@@ -196,7 +196,7 @@ TiDB バージョン: 5.2.4
     -   TiDB Lightning
 
         -   TiDB Lightningに`mysql.tidb`テーブル[＃31088](https://github.com/pingcap/tidb/issues/31088)にアクセスする権限がない場合に発生する誤ったインポート結果の問題を修正しました。
-        -   チェックサムエラー「GC の有効期間がトランザクション期間より短い」を修正[＃32733](https://github.com/pingcap/tidb/issues/32733)
-        -   一部のインポートタスクにソースファイルが含まれていない場合に、 TiDB Lightning がメタデータスキーマを削除しない可能性があるバグを修正しました[＃28144](https://github.com/pingcap/tidb/issues/28144)
+        -   チェックサムエラー「GC の存続期間がトランザクション期間より短い」を修正[＃32733](https://github.com/pingcap/tidb/issues/32733)
+        -   一部のインポートタスクにソースファイルが含まれていない場合に、 TiDB Lightning がメタデータスキーマを削除しない可能性があるバグを修正[＃28144](https://github.com/pingcap/tidb/issues/28144)
         -   S3storageパスが存在しない場合にTiDB Lightning がエラーを報告しない問題を修正[＃28031](https://github.com/pingcap/tidb/issues/28031) [＃30709](https://github.com/pingcap/tidb/issues/30709)
         -   GCS [＃30377](https://github.com/pingcap/tidb/issues/30377)で 1000 個を超えるキーを反復処理するときに発生するエラーを修正

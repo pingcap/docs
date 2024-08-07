@@ -1,6 +1,6 @@
 ---
 title: TiDB 5.3.1 Release Notes
-summary: TiDB 5.3.1 was released on March 3, 2022. The release includes compatibility changes, improvements, and bug fixes for TiDB, TiKV, PD, TiCDC, TiFlash, Backup & Restore (BR), and TiDB Data Migration (DM). Some notable changes include optimizing user login mode mapping, reducing TiCDC recovery time, and fixing various bugs in TiDB, TiKV, PD, TiFlash, and tools like TiCDC and TiDB Lightning. These fixes address issues related to data import, user login, garbage collection, configuration parameters, and more.
+summary: TiDB 5.3.1 は 2022 年 3 月 3 日にリリースされました。このリリースには、TiDB、TiKV、PD、TiCDC、 TiFlash、バックアップと復元 (BR)、および TiDB データ移行 (DM) の互換性の変更、改善、バグ修正が含まれています。注目すべき変更点としては、ユーザー ログイン モード マッピングの最適化、TiCDC リカバリ時間の短縮、TiDB、TiKV、PD、 TiFlash、および TiCDC やTiDB Lightningなどのツールのさまざまなバグの修正などがあります。これらの修正により、データのインポート、ユーザー ログイン、ガベージコレクション、構成パラメータなどに関連する問題が解決されます。
 ---
 
 # TiDB 5.3.1 リリースノート {#tidb-5-3-1-release-notes}
@@ -25,7 +25,7 @@ TiDB バージョン: 5.3.1
 
 -   ティクヴ
 
-    -   解決ロックを必要とする領域の数を減らすことで、TiCDC の回復時間を短縮します (ステップ[＃11993](https://github.com/tikv/tikv/issues/11993)
+    -   解決ロックを必要とする領域の数を減らすことで、TiCDC の回復時間を短縮します (手順[＃11993](https://github.com/tikv/tikv/issues/11993)
     -   Raftログ[＃11404](https://github.com/tikv/tikv/issues/11404)へのガベージ コレクション (GC) を実行するときに書き込みバッチ サイズを増やすことで、GC プロセスを高速化します。
     -   procファイルシステム（procfs）をv0.12.0 [＃11702](https://github.com/tikv/tikv/issues/11702)に更新する
 
@@ -80,13 +80,13 @@ TiDB バージョン: 5.3.1
     -   初期化されていないレプリカを削除すると古いレプリカが再作成される可能性がある問題を修正[＃10533](https://github.com/tikv/tikv/issues/10533)
     -   新しい選出が終了した後に`Prepare Merge`トリガーされたが、分離されたピアに通知されない場合のメタデータ破損の問題を修正[＃11526](https://github.com/tikv/tikv/issues/11526)
     -   コルーチンの実行速度が速すぎる場合に時々発生するデッドロックの問題を修正[＃11549](https://github.com/tikv/tikv/issues/11549)
-    -   TiKVノードがダウンすると解決されたタイムスタンプが遅れる問題を修正[＃11351](https://github.com/tikv/tikv/issues/11351)
+    -   TiKVノードがダウンすると解決されたタイムスタンプが[＃11351](https://github.com/tikv/tikv/issues/11351)遅れる問題を修正
     -   Raftクライアント実装[＃9714](https://github.com/tikv/tikv/issues/9714)でバッチメッセージが大きすぎる問題を修正
     -   極端な状況でリージョンのマージ、ConfChange、スナップショットが同時に発生した場合に発生するpanicの問題を修正[＃11475](https://github.com/tikv/tikv/issues/11475)
     -   TiKVが逆テーブルスキャンを実行するときにメモリロックを検出できない問題を修正[＃11440](https://github.com/tikv/tikv/issues/11440)
     -   ディスク容量がいっぱいのときにRocksDBのフラッシュまたは圧縮によってpanicが発生する問題を修正[＃11224](https://github.com/tikv/tikv/issues/11224)
     -   tikv-ctl が正しい地域関連情報を返すことができないバグを修正[＃11393](https://github.com/tikv/tikv/issues/11393)
-    -   TiKV メトリクス[＃11299](https://github.com/tikv/tikv/issues/11299)でインスタンスごとの gRPC リクエストの平均レイテンシーが不正確になる問題を修正
+    -   TiKV メトリック[＃11299](https://github.com/tikv/tikv/issues/11299)でインスタンスごとの gRPC リクエストの平均レイテンシーが不正確になる問題を修正
 
 -   PD
 
@@ -103,7 +103,7 @@ TiDB バージョン: 5.3.1
     -   `cast(string as real)`間違った結果を返す問題を修正
     -   `cast(string as decimal)`間違った結果を返す問題を修正
     -   主キー列をより大きな int データ型に変更した後に発生する可能性のあるデータの不整合を修正します。
-    -   `in`に`select (arg0, arg1) in (x,y)` 、 `in`などの複数の引数がある場合に間違った結果が返されるバグを修正しました。
+    -   `in` `select (arg0, arg1) in (x,y)` 、 `in`ように複数の引数を持つ場合に間違った結果が返されるバグを修正しました。
     -   MPPクエリが停止したときにTiFlashがpanicになる可能性がある問題を修正
     -   入力引数の先頭にゼロがある場合に`str_to_date`間違った結果を返す問題を修正しました
     -   フィルターが`where <string>`形式の場合にクエリが間違った結果を返す問題を修正しました
@@ -119,18 +119,18 @@ TiDB バージョン: 5.3.1
 
         -   長いvarcharがエラーを報告するバグを修正`Column length too big` [＃4637](https://github.com/pingcap/tiflow/issues/4637)
         -   PDリーダーが強制終了するとTiCDCノードが異常終了するバグを修正[＃4248](https://github.com/pingcap/tiflow/issues/4248)
-        -   セーフモードでの更新ステートメントの実行エラーにより、DM ワーカーがpanicになる可能性がある問題を修正しました[＃4317](https://github.com/pingcap/tiflow/issues/4317)
+        -   セーフモードでの更新ステートメントの実行エラーにより DM ワーカーがpanicになる可能性がある問題を修正しました[＃4317](https://github.com/pingcap/tiflow/issues/4317)
         -   TiKVクライアントのキャッシュされたリージョンメトリックが負になる可能性がある問題を修正[＃4300](https://github.com/pingcap/tiflow/issues/4300)
         -   必要なプロセッサ情報が存在しない場合にHTTP APIがパニックになるバグを修正[＃3840](https://github.com/pingcap/tiflow/issues/3840)
         -   一時停止された変更フィード[＃4740](https://github.com/pingcap/tiflow/issues/4740)を削除するときに、REDO ログがクリーンアップされないバグを修正しました。
         -   コンテナ環境の OOM を修正[＃1798](https://github.com/pingcap/tiflow/issues/1798)
         -   読み込みタスクを停止するとタスク[＃3771](https://github.com/pingcap/tiflow/issues/3771)が予期せず転送されるバグを修正
-        -   ローダー[＃3252](https://github.com/pingcap/tiflow/issues/3252)の`query-status`コマンドで間違った進行状況が返される問題を修正しました
+        -   ローダー[＃3252](https://github.com/pingcap/tiflow/issues/3252)の`query-status`コマンドで間違った進行状況が返される問題を修正
         -   クラスター内に異なるバージョンの TiCDC ノードがある場合に HTTP API が動作しない問題を修正[＃3483](https://github.com/pingcap/tiflow/issues/3483)
         -   S3storageが TiCDC Redo Log [＃3523](https://github.com/pingcap/tiflow/issues/3523)で構成されている場合に TiCDC が異常終了する問題を修正しました。
         -   デフォルト値を複製できない問題を修正[＃3793](https://github.com/pingcap/tiflow/issues/3793)
         -   `batch-replace-enable`が無効になっている場合、MySQL シンクが重複した`replace` SQL ステートメントを生成するバグを修正[＃4501](https://github.com/pingcap/tiflow/issues/4501)
-        -   ステータス[＃4281](https://github.com/pingcap/tiflow/issues/4281)を照会するときにのみ同期メトリックが更新される問題を修正しました
+        -   ステータス[＃4281](https://github.com/pingcap/tiflow/issues/4281)を照会するときにのみ同期メトリックが更新される問題を修正しました。
         -   `mq sink write row`監視データがない問題を修正[＃3431](https://github.com/pingcap/tiflow/issues/3431)
         -   `min.insync.replicas` `replication-factor`より小さい場合にレプリケーションを実行できない問題を修正しました[＃3994](https://github.com/pingcap/tiflow/issues/3994)
         -   `mq sink write row`監視データがない問題を修正[＃3431](https://github.com/pingcap/tiflow/issues/3431)
@@ -143,7 +143,7 @@ TiDB バージョン: 5.3.1
         -   クラスターのアップグレード後に`stopped`チェンジフィードが自動的に再開される問題を修正[＃3473](https://github.com/pingcap/tiflow/issues/3473)
         -   デフォルト値を複製できない問題を修正[＃3793](https://github.com/pingcap/tiflow/issues/3793)
         -   MySQLシンクデッドロック[＃2706](https://github.com/pingcap/tiflow/issues/2706)による警告が頻繁に発生する問題を修正
-        -   Canal および Maxwell プロトコル[＃3676](https://github.com/pingcap/tiflow/issues/3676)で`enable-old-value`構成項目が自動的に`true`に設定されないバグを修正
+        -   Canalプロトコル[＃3676](https://github.com/pingcap/tiflow/issues/3676)で設定項目`enable-old-value`が`true`に自動的に設定されないバグを修正
         -   AvroシンクがJSON型列[＃3624](https://github.com/pingcap/tiflow/issues/3624)の解析をサポートしていない問題を修正
         -   チェンジフィードチェックポイントラグ[＃3010](https://github.com/pingcap/tiflow/issues/3010)負の値エラーを修正
 

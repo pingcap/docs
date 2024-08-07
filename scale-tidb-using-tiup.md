@@ -1,6 +1,6 @@
 ---
 title: Scale a TiDB Cluster Using TiUP
-summary: Learn how to scale the TiDB cluster using TiUP.
+summary: TiUPを使用して TiDB クラスターをスケーリングする方法を学習します。
 ---
 
 # TiUPを使用して TiDBクラスタをスケールする {#scale-a-tidb-cluster-using-tiup}
@@ -266,7 +266,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
         Starting /root/.tiup/components/cluster/v1.12.3/cluster display <cluster-name>
         TiDB Cluster: <cluster-name>
-        TiDB Version: v7.5.1
+        TiDB Version: v7.5.3
         ID              Role         Host        Ports                            Status  Data Dir                Deploy Dir
         --              ----         ----        -----                            ------  --------                ----------
         10.0.1.3:8300   cdc          10.0.1.3    8300                             Up      data/cdc-8300           deploy/cdc-8300
@@ -370,7 +370,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
     tiup cluster display <cluster-name>
     ```
 
-2.  TiFlashノードを削除します (手順 1 のノード名が`10.0.1.4:9000`であると想定します)。
+2.  TiFlashノードを削除します (ノード名は手順 1 の`10.0.1.4:9000`であると想定します)。
 
     ```shell
     tiup cluster scale-in <cluster-name> --node 10.0.1.4:9000

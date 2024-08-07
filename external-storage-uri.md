@@ -1,6 +1,6 @@
 ---
 title: URI Formats of External Storage Services
-summary: Learn about the storage URI formats of external storage services, including Amazon S3, GCS, and Azure Blob Storage.
+summary: Amazon S3、GCS、Azure Blob Storage などの外部storageサービスのstorageURI 形式について説明します。
 ---
 
 ## 外部ストレージサービスの URI 形式 {#uri-formats-of-external-storage-services}
@@ -26,11 +26,11 @@ URI の基本的な形式は次のとおりです。
     -   `endpoint` : S3 互換サービスのカスタムエンドポイントの URL を指定します (例: `<https://s3.example.com/>` )。
     -   `force-path-style` : 仮想ホスト形式のアクセスではなく、パス形式のアクセスを使用します (デフォルトは`true` )。
     -   `storage-class` : アップロードされたオブジェクトのstorageクラスを指定します (たとえば、 `STANDARD`または`STANDARD_IA` )。
-    -   `sse` : アップロードされたオブジェクトの暗号化に使用されるサーバー側暗号化アルゴリズムを指定します (値のオプション: ``、 `AES256` 、または`aws:kms` )。
+    -   `sse` : アップロードされたオブジェクトの暗号化に使用されるサーバー側暗号化アルゴリズムを指定します (値のオプション: 空、 `AES256` 、または`aws:kms` )。
     -   `sse-kms-key-id` : `sse`が`aws:kms`に設定されている場合は KMS ID を指定します。
     -   `acl` : アップロードされたオブジェクトの既定 ACL を指定します (たとえば、 `private`または`authenticated-read` )。
     -   `role-arn` : 指定された[IAMロール](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)を使用してサードパーティから Amazon S3 データにアクセスする必要がある場合は、 `arn:aws:iam::888888888888:role/my-role`などの`role-arn` URL クエリパラメータを使用して、 IAMロールの対応する[Amazon リソース名 (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)指定できます。IAM ロールを使用してIAMパーティから Amazon S3 データにアクセスする方法の詳細については、 [AWS ドキュメント](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html)を参照してください。BRはまだこのパラメータをサポートしていません。
-    -   `external-id` : サードパーティから Amazon S3 データにアクセスする場合、正しい[外部ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)を指定して[IAMロール](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)引き受けなければならない場合があります。この場合、この`external-id` URL クエリパラメータを使用して外部 ID を指定し、 IAMロールを引き受けることができることを確認できます。外部 ID は、Amazon S3 データにアクセスするためにIAMロール ARN とともにサードパーティによって提供される任意の文字列です。IAM ロールを引き受ける場合、外部 ID の提供はオプションです。つまり、サードパーティがIAMロールの外部 ID を必要としない場合は、IAMIAMを引き受け、対応する Amazon S3 データにアクセスできます。
+    -   `external-id` : サードパーティから Amazon S3 データにアクセスする場合、正しい[外部ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)を指定して[IAMロール](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)引き受ける必要がある場合があります。この場合、この`external-id` URL クエリパラメータを使用して外部 ID を指定し、 IAMロールを引き受けることができることを確認できます。外部 ID は、Amazon S3 データにアクセスするためにIAMロール ARN とともにIAMパーティによって提供される任意の文字列です。IAM ロールを引き受ける場合、外部 ID の提供はオプションです。つまり、サードパーティがIAMロールの外部 ID を必要としない場合は、このパラメータを指定せずにIAMロールを引き受け、対応する Amazon S3 データにアクセスできます。
 
 以下は、 TiDB LightningおよびBRの Amazon S3 URI の例です。この例では、特定のファイルパス`testfolder`を指定する必要があります。
 
@@ -41,7 +41,7 @@ s3://external/testfolder?access-key=${access-key}&secret-access-key=${secret-acc
 以下は、TiCDC `sink-uri`の Amazon S3 URI の例です。
 
 ```shell
-tiup cdc:v7.5.1 cli changefeed create \
+tiup cdc:v7.5.3 cli changefeed create \
     --server=http://172.16.201.18:8300 \
     --sink-uri="s3://cdc?endpoint=http://10.240.0.38:9000&access-key=${access-key}&secret-access-key=${secret-access-key}" \
     --changefeed-id="cdcTest" \
