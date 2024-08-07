@@ -112,21 +112,25 @@ Take the `/dev/nvme0n1` data disk as an example:
 
 ## Check and disable system swap
 
-TiDB needs sufficient memory space for operation. When memory is insufficient, using swap as a buffer might degrade performance. Therefore, it is recommended to disable the system swap permanently by executing the following commands:
+TiDB needs sufficient memory space for operation. If you want to maintain stable performance, it is recommended that you permanently disable the system swap, but it might trigger OOM issues when there is insufficient memory. If you want to avoid such OOM issues, you can just decrease the swap priority, instead of permanently disabling it.
 
-{{< copyable "shell-regular" >}}
+- Enabling and using swap might introduce performance jitter issues. It is recommended that you permanently disable the operating system tier swap for low-latency and stability-critical database services. To permanently disable swap, you can use the following method:
 
-```bash
-echo "vm.swappiness = 0">> /etc/sysctl.conf
-swapoff -a && swapon -a
-sysctl -p
-```
+    - During the initialization phase of the operating system, do not partition the swap partition disk separately.
+    - If you have already partitioned a separate swap partition disk during the initialization phase of the operating system and enabled swap, run the following command to disable it:
 
-> **Note:**
->
-> - Executing `swapoff -a` and then `swapon -a` is to refresh swap by dumping data to memory and cleaning up swap. If you drop the swappiness change and execute only `swapoff -a`, swap will be enabled again after you restart the system.
->
-> - `sysctl -p` is to make the configuration effective without restarting the system.
+        ```bash
+        echo "vm.swappiness = 0">> /etc/sysctl.conf
+        swapoff -a
+        sysctl -p
+        ```
+
+- If the host memory is insufficient, disabling the system swap might be more likely to trigger OOM issues. You can run the following command to decrease the swap priority instead of disabling it permanently:
+
+    ```bash
+    echo "vm.swappiness = 0">> /etc/sysctl.conf
+    sysctl -p
+    ```
 
 ## Set temporary spaces for TiDB instances (Recommended)
 
