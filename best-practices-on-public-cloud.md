@@ -129,6 +129,7 @@ tikv:
       name: raft-pv-ssd
       storageSize: 512Gi
 ```
+
 ## Optimize cost for cross-AZ network traffic
 
 Deploying TiDB across multiple availability zones (AZs) can lead to increased costs due to cross-AZ data transfer fees. To optimize costs, it is important to reduce cross-AZ network traffic.
