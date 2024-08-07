@@ -8,7 +8,7 @@ aliases: ['/tidb/dev/ddl-v2/']
 
 TiDB v7.6.0 introduces the system variable [`tidb_ddl_version`](https://docs.pingcap.com/tidb/v7.6/system-variables#tidb_enable_fast_create_table-new-in-v800) to support accelerating table creation, which improves the efficiency of bulk table creation. Starting from v8.0.0, this system variable is renamed to [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800).
 
-When accelerated table creation is enabled, table creation statements for the same schema submitted to the same TiDB node at the same time will be merged into a batch table creation statement to improve table creation performance. Therefore, to improve the table creation performance, you need to connect to the same TiDB node to create tables under the same schema concurrently and increase the concurrency appropriately.
+When [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800) is enabled, table creation statements for the same schema submitted to the same TiDB node at the same time will be merged into a batch table creation statement to improve table creation performance. Therefore, to improve the table creation performance, you need several sessions to connect to the same TiDB node to create tables under the same schema concurrently and increase the concurrency appropriately.
 
 The merged bulk table creation statements are executed within the same transaction, so if one of them fails, all of them will fail.
 
