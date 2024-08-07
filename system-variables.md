@@ -5874,10 +5874,10 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Enumeration
 - Default value: `force_preagg`
 - Value options: `force_preagg`, `force_streaming`, `auto`
-- This variable is used to control the pre-aggregation policy for the first stage of two-staged or three-staged HashAgg pushed down to TiFlash:
-    - `force_preagg`: TiFlash will enforce pre-aggregation in the first stage of HashAgg. This was the equivalent behavior of TiFlash before this variable was introduced.
-    - `force_streaming`: TiFlash will directly pass the data to the next stage of HashAgg without pre-aggregation.
-    - `auto`: TiFlash will automatically decide whether to perform pre-aggregation based on the observed workload's reduction rate.
+- This variable controls which pre-aggregation strategy is used in the first stage of a two-stage or three-stage HashAgg pushed down to TiFlash:
+    - `force_preagg`: TiFlash forces pre-aggregation in the first stage of HashAgg, same with behavior prior to version v8.3.0.
+    - `force_streaming`: TiFlash directly sends data to the next stage of HashAgg without pre-aggregation.
+    - `auto`: TiFlash automatically selects whether to perform pre-aggregation based on the current workload's aggregation degree.
 
 ### tikv_client_read_timeout <span class="version-mark">New in v7.4.0</span>
 
