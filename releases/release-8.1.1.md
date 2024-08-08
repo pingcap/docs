@@ -129,7 +129,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.1/quick-start-with-
     - Fix the issue that some logs are not redacted [#8419](https://github.com/tikv/pd/issues/8419) @[rleungx](https://github.com/rleungx)
     - Fix the issue of missing data in the `Filter` monitoring item [#8098](https://github.com/tikv/pd/issues/8098) @[nolouch](https://github.com/nolouch)
     - Fix the issue that the HTTP client might panic when TLS is enabled [#8237](https://github.com/tikv/pd/issues/8237) @[okJiang](https://github.com/okJiang)
-    - Fix the issue that `encryption key manager` is not initialized properly [#8384](https://github.com/tikv/pd/issues/8384) @[rleungx](https://github.com/rleungx)
+    - Fix the issue that the encryption manager is not initialized before use [#8384](https://github.com/tikv/pd/issues/8384) @[rleungx](https://github.com/rleungx)
     - Fix the issue that Resource Group could not effectively limit resource usage under high concurrency [#8435](https://github.com/tikv/pd/issues/8435) @[nolouch](https://github.com/nolouch)
     - Fix the data race issue related to `store limit` [#8253](https://github.com/tikv/pd/issues/8253) @[lhy1024](https://github.com/lhy1024)
     - Fix the issue that the scaling progress is displayed incorrectly after the `scheduling` microservice is enabled [#8331](https://github.com/tikv/pd/issues/8331) @[rleungx](https://github.com/rleungx)
