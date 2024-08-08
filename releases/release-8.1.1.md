@@ -122,7 +122,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.1/quick-start-with-
     - (dup): release-7.5.3.md > Bug fixes> TiKV - Fix the issue that TiKV might repeatedly panic when applying a corrupted Raft data snapshot [#15292](https://github.com/tikv/tikv/issues/15292) @[LykxSassinator](https://github.com/LykxSassinator)
     - 修复 evict 未被持久化 entries 的问题 [#17040](https://github.com/tikv/tikv/issues/17040) @[glorv](https://github.com/glorv)
 
-+ PD <!--tw:Oreoxmt 10 条-->
++ PD <!--tw:Oreoxmt 9 条-->
 
     - Fix the issue that an incorrect PD API is called when you retrieve table attributes [#55188](https://github.com/pingcap/tidb/issues/55188) @[JmPotato](https://github.com/JmPotato)
     - Fix the issue that the time data type in the `INFORMATION_SCHEMA.RUNAWAY_WATCHES` table is incorrect [#54770](https://github.com/pingcap/tidb/issues/54770) @[HuSharp](https://github.com/HuSharp)
