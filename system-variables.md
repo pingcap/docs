@@ -2567,7 +2567,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Value options: `OFF`, `ON`
 - This variable controls whether TiDB enables chunk objects cache. If the value is `ON`, TiDB prefers to use the cached chunk object and only requests from the system if the requested object is not in the cache. If the value is `OFF`, TiDB requests chunk objects from the system directly.
 
-### tidb_enable_shared_lock_upgrade <span class="version-mark">New in v8.3.0</span>
+### tidb_enable_shared_lock_promotion <span class="version-mark">New in v8.3.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
