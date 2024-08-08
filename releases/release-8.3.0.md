@@ -16,16 +16,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 <table>
 <thead>
   <tr>
-    <th>分类</th>
-    <th>功能/增强</th>
-    <th>描述</th>
+    <th>Category</th>
+    <th>Feature/Enhancement</th>
+    <th>Description</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td rowspan="4">可扩展性和性能</td>
-    <td> <a href="https://docs.pingcap.com/zh/tidb/v8.3/partitioned-table#全局索引">分区表全局索引（实验特性）</a></td> **tw@hfxsd** <!--1531-->
-    <td>全局索引能够有效提升对非分区键的检索效率，同时也解除了分区键一定要包含唯一键 (Unique Key) 的限制，扩展了 TiDB 分区表的使用场景，也能够避免数据迁移可能遇到的部分应用改造工作。</td>
+    <td rowspan="4">Scalability and Performance</td>
+    <td> <a href="https://docs.pingcap.com/zh/tidb/v8.3/partitioned-table#global-indexes">Global indexes for partitioned tables (experimental)</a></td> **tw@hfxsd** <!--1531-->
+    <td>Global indexes can effectively improve the efficiency of retrieving non-partitioned keys, and remove the restriction that partitioned keys must contain a unique key. This feature extends the usage scenarios of TiDB partitioned tables and avoids some of the application modification work that might be required for data migration.</td>
   </tr>
   <tr>
     <td>Default pushdown of the <code>Projection</code> operator to the storage engine</td>**tw@Oreoxmt** <!--1872-->
@@ -88,18 +88,18 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
     更多信息，请参考[用户文档](/statistics.md#收集部分列的统计信息)。
 
-* 提升了一些系统表的查询性能 [#]() @[tangenta](https://github.com/tangenta) **tw@hfxsd** <!--1865-->
+* Improve the query performance of some system tables  [#50305](https://github.com/pingcap/tidb/issues/50305) @[tangenta](https://github.com/tangenta) **tw@hfxsd** <!--1865-->
 
-    在之前的版本，当集群规模变大，表数量较多时，查询系统表性能较慢。
+    In previous versions, querying system tables has slow performance when the cluster size becomes large and the number of tables is high.
 
-    在 v8.0.0 优化了以下 4 个系统表的查询性能:
+    In v8.0.0, query performance is optimized for the following four system tables.
     
     - INFORMATION_SCHEMA.TABLES
     - INFORMATION_SCHEMA.STATISTICS
     - INFORMATION_SCHEMA.KEY_COLUMN_USAGE
     - INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS
 
-    在 v8.3.0 版本优化了以下系统表的查询性能，相比 v8.2.0 性能有数倍的提升:
+    The following query performance of system tables has been optimized in v8.3.0, resulting in a multi-fold performance improvement compared to v8.2.0.
 
     - INFORMATION_SCHEMA.CHECK_CONSTRAINTS
     - INFORMATION_SCHEMA.COLUMNS
@@ -112,21 +112,19 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
     - INFORMATION_SCHEMA.TIDB_INDEX_USAGE
     - INFORMATION_SCHEMA.VIEWS
 
-    更多信息，请参考[用户文档](/system-variables.md#tiflash_hashagg_preaggregation_mode-从-v830-版本开始引入)。
+* Support for partition pruning when partition expressions use the `EXTRACT(YEAR_MONTH...)` function to support partition pruning and improve query performance [#54209](https://github.com/pingcap/tidb/pull/54209) @[mjonss](https://github.com/mjonss) **tw@hfxsd** <!--1885-->
 
-* 分区表达式使用 `EXTRACT(YEAR_MONTH...)` 函数时，支持分区裁剪，提升查询性能 [#54209](https://github.com/pingcap/tidb/pull/54209) @[mjonss](https://github.com/mjonss) **tw@hfxsd** <!--1885-->
+    In previous versions, when partition expressions used the `EXTRACT(YEAR_MONTH...)` function, partition pruning is not supported, resulting in poor query performance. Starting from v8.3.0, partition pruning is supported when partition expressions use the `EXTRACT(YEAR_MONTH...)` function, which improves query performance.
 
-    之前的版本，当分区表达式使用 `EXTRACT(YEAR_MONTH...)` 函数时，不支持分区裁剪，导致查询性能较差。从 v8.3.0 开始，当分区表达式使用该函数时，支持分区裁剪，提升了查询性能。
-
-    更多信息，请参考[用户文档](/partition-pruning.md#场景三)。
+    For more information, see [documentation](/partition-pruning.md#scenario-three).
     
-* 批量建表 (`CREATE TABLE`) 的性能提升了 2.75 倍，批量建库 (`CREATE DATABASE`) 的性能提升了 2.1 倍 [#54436](https://github.com/pingcap/tidb/issues/54436) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd** <!--1863-->
+* The performance of `CREATE TABLE` is improved by 1.4 times, and `CREATE DATABASE` is improved by 2.1 times [#54436](https://github.com/pingcap/tidb/issues/54436) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd** <!--1863-->
 
-    v8.0.0 引入了系统变量 [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-从-v800-版本开始引入)，用于在批量建表的场景中提升建表的性能。在 v8.3.0 中，通过 10 个 session 在单个库内并发提交建表的 DDL，相比 v8.2.0 性能有 2.75 倍的提升。
+    TiDB v8.0.0 introduces the system variable [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800) to improve table creation performance in batch table creation scenarios. In v8.3.0, when submitting the DDL statements for table creation concurrently through 10 sessions in a single database, the performance is improved by 1.4 times compared with v8.2.0.
     
-    从 v8.3.0 开始，该变量也优化了批量建库的性能，相比 v8.2.0，通过 10 个 session 并发提交建库的 DDL ，性能有 2.1 倍的提升。 
+    Starting from v8.3.0, this variable also optimizes the performance of batch database creation. Compared with v8.2.0, the performance is improved by 2.1 times when submitting database creation DDL statements concurrently through 10 sessions.
 
-    更多信息，请参考[用户文档](/system-variables.md#tidb_enable_fast_create_table-从-v800-版本开始引入)。    
+    For more information, see [documentation](/system-variables.md#tidb_enable_fast_create_table-new-in-v800).    
 
 ### Reliability
 
@@ -158,17 +156,19 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
 ### SQL
 
-* 支持 `Shared Lock` 升级为 `Exclusive Lock` [#54999](https://github.com/pingcap/tidb/issues/54999) @[cfzjywxk](https://github.com/cfzjywxk) **tw@hfxsd** <!--1857-->
+* Support upgrading `SELECT LOCK IN SHARE MODE` to exclusive locks [#54999](https://github.com/pingcap/tidb/issues/54999) @[cfzjywxk](https://github.com/cfzjywxk) **tw@hfxsd** <!--1871-->
 
-    TiDB 暂不支持 `Shared Lock`. 在 v8.3.0 版本中，TiDB 支持将 `Shared Lock` 升级为 `Exclusive Lock`，实现对 `Shared Lock` 语法的支持。通过新增的变量 [tidb_enable_shared_lock_upgrade](/system-variables.md#tidb_enable_shared_lock_upgrade-从-v830-版本开始引入) 控制是否启用该功能。
-
-* 分区表支持全局索引 (Global Index)（实验特性） [#45133](https://github.com/pingcap/tidb/issues/45133) @[mjonss](https://github.com/mjonss) **tw@hfxsd** <!--1531-->
-
-    之前版本的分区表，因为不支持全局索引有较多的限制，比如唯一键必须包含分区建，如果查询条件不带分区建，查询时会扫描所有分区，导致性能较差。从 v7.6.0 开始，引入了参数 [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-从-v760-版本开始引入) 用于开启全局索引特性，但该功能当时处于开发中，不够完善，不建议开启。
+    TiDB does not support `SELECT LOCK IN SHARE MODE` yet. Starting from v8.3.0, TiDB supports upgrading `SELECT LOCK IN SHARE MODE` to exclusive locks to enable support for `SELECT LOCK IN SHARE MODE`. You can control whether to enable this feature by the new variable [`tidb_enable_shared_lock_upgrade`](/system-variables.md#tidb_enable_shared_lock_upgrade-new-in-v830).
     
-    从 v8.3.0 开始，全局索引作为实验特性正式发布了。你在创建不包含全部分区建的唯一键时，TiDB 会隐式的创建全局索引，去除了唯一建必须包含全部分区键的限制，满足灵活的业务需求。同时基于全局索引也提升了不带分区建的索引的查询性能。
+    For more information, see [documentation](/system-variables.md#tidb_enable_shared_lock_upgrade-new-in-v830).
 
-    更多信息，请参考[用户文档](/partitioned-table.md#全局索引)。
+* Partitioned tables support global indexes (experimental) [#45133](https://github.com/pingcap/tidb/issues/45133) @[mjonss](https://github.com/mjonss) **tw@hfxsd** <!--1531-->
+
+    In previous versions of partitioned tables, there are more limitations because global indexes are not supported, for example, the unique key must contain a partition key, and if the query condition does not have a partition key, the query will scan all partitions, resulting in poor performance. Starting from v7.6.0, the system variable [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) is introduced to enable the global index feature. But this feature is under development at that time and it is not recommended to enable it.
+    
+    Starting with v8.3.0, the global indexes feature has been released as an experimental feature. When you create a unique key that does not contain all partition keys, TiDB implicitly creates a global index, removing the restriction that the unique key must contain all partition keys, to meet flexible business needs. Global indexes also improve the query performance of indexes without partitioned keys.
+
+    For more information, see [documentation](/partitioned-table.md#global-indexes).
 
 ### DB operations
 
@@ -180,21 +180,20 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
 ### Security
 
-* 增强 PD 日志脱敏 [#51306](https://github.com/pingcap/tidb/issues/51306) @[xhe](https://github.com/xhebox) **tw@hfxsd** <!--1861-->
+* Enhance PD log redaction [#51306](https://github.com/pingcap/tidb/issues/51306) @[xhe]l(https://github.com/xhebox) **tw@hfxsd** <!--1861-->
 
-    TiDB v8.0.0 增强了日志脱敏功能，支持控制是否使用标记符号 `‹ ›` 包裹 TiDB 日志中的用户数据。基于标记后的日志，你可以在展示日志时决定是否对被标记信息进行脱敏处理，从而提升日志脱敏功能的灵活性。在 v8.2.0 中，TiFlash 实现了类似的日志脱敏功能增强。
+    TiDB v8.0.0 enhances log redaction and supports marking user data in TiDB logs with single-angle quotation marks `‹›`. Based on the marked logs, you can decide whether to redact the marked information when displaying the logs, thus increasing the flexibility of log redaction. In v8.2.0, TiFlash implements a similar log redaction enhancement.
     
-    在 v8.3.0 中，PD 实现了类似的日志脱敏功能增强，要使用该功能，可以将 PD 配置项 `security.redact-info-log` 的值设置为 `marker`。
+    In v8.3.0, PD implements a similar log redaction enhancement. To use this feature, you can set the value of the PD configuration item `security.redact-info-log` to `marker`.
 
-    更多信息，请参考[用户文档](/log-redaction.md#pd-组件日志脱敏)。
+    For more information, see [documentation](/log-redaction.md#log-redaction-in-pd-side).
 
-* 增强 TiKV 日志脱敏 [#17206](https://github.com/tikv/tikv/issues/17206) @[lucasliang](https://github.com/LykxSassinator) **tw@hfxsd** <!--1862-->
+* Enhance TiKV log redaction  [#17206](https://github.com/tikv/tikv/issues/17206) @[lucasliang](https://github.com/LykxSassinator) **tw@hfxsd** <!--1862-->
 
-    TiDB v8.0.0 增强了日志脱敏功能，支持控制是否使用标记符号 `‹ ›` 包裹 TiDB 日志中的用户数据。基于标记后的日志，你可以在展示日志时决定是否对被标记信息进行脱敏处理，从而提升日志脱敏功能的灵活性。在 v8.2.0 中，TiFlash 实现了类似的日志脱敏功能增强。
+    TiDB v8.0.0 enhances log redaction and supports marking user data in TiDB logs with single-angle quotation marks `‹›`. Based on the marked logs, you can decide whether to redact the marked information when displaying the logs, thus increasing the flexibility of log redaction. In v8.2.0, TiFlash implements a similar log redaction enhancement.
     
-    在 v8.3.0 中，TiKV 实现了类似的日志脱敏功能增强，要使用该功能，可以将 TiKV 配置项 `security.redact-info-log` 的值设置为 `marker`。
-
-    更多信息，请参考[用户文档](/log-redaction.md#tikv-组件日志脱敏)。
+    In v8.3.0, TiKV implements a similar log redaction enhancement. To use this feature, you can set the value of the PD configuration item `security.redact-info-log` to `marker`.
+    For more information, see [documentation](/log-redaction.md#log-redaction-in-tikv-side).
 
 ### Data migration
 
