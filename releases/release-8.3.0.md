@@ -120,9 +120,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
     
 * The performance of `CREATE TABLE` is improved by 1.4 times, `CREATE DATABASE` is improved by 2.1 times, and `ADD COLUMN` is improved by 2 times [#54436](https://github.com/pingcap/tidb/issues/54436) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd** <!--1863-->
 
-   In v8.3.0, besides `CREATE TABLE`, the performance of general DDLs  in batch execution has improved compared to v8.2.0. The performance of `CREATE DATABASE` for 10 sessions concurrently improves by 19 times compared to v8.1.0 and 2.1 times compared to v8.2.0. The performance of using10 sessions for adding columns (`ADD COLUMN`) to multiple tables in the same database in batch has improved by 10 times compared to v8.1.0, and 2.1 times compared to v8.2.0. The performance of `ADD COLUMN` with 10 sessions on multiple tables in the same database is 10 times better than v8.1.0 and 2 times better than v8.2.0.
-     
     TiDB v8.0.0 introduces the system variable [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800) to improve table creation performance in batch table creation scenarios. In v8.3.0, when submitting the DDL statements for table creation concurrently through 10 sessions in a single database, the performance is improved by 1.4 times compared with v8.2.0.
+   
+    In v8.3.0, besides `CREATE TABLE`, the performance of general DDLs  in batch execution has improved compared to v8.2.0. The performance of `CREATE DATABASE` for 10 sessions concurrently improves by 19 times compared to v8.1.0 and 2.1 times compared to v8.2.0. The performance of using10 sessions for adding columns (`ADD COLUMN`) to multiple tables in the same database in batch has improved by 10 times compared to v8.1.0, and 2.1 times compared to v8.2.0. The performance of `ADD COLUMN` with 10 sessions on multiple tables in the same database is 10 times better than v8.1.0 and 2 times better than v8.2.0.
 
     For more information, see [documentation](/system-variables.md#tidb_enable_fast_create_table-new-in-v800).    
 
