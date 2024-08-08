@@ -122,7 +122,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
     TiDB v8.0.0 introduces the system variable [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800) to improve table creation performance in batch table creation scenarios. In v8.3.0, when submitting the DDL statements for table creation concurrently through 10 sessions in a single database, the performance is improved by 1.4 times compared with v8.2.0.
    
-    In v8.3.0, besides `CREATE TABLE`, the performance of general DDLs  in batch execution has improved compared to v8.2.0. The performance of `CREATE DATABASE` for 10 sessions concurrently improves by 19 times compared to v8.1.0 and 2.1 times compared to v8.2.0. The performance of using10 sessions for adding columns (`ADD COLUMN`) to multiple tables in the same database in batch has improved by 10 times compared to v8.1.0, and 2.1 times compared to v8.2.0. The performance of `ADD COLUMN` with 10 sessions on multiple tables in the same database is 10 times better than v8.1.0 and 2 times better than v8.2.0.
+    In v8.3.0, the performance of general DDLs in batch execution has improved compared to v8.2.0. The performance of `CREATE DATABASE` for 10 sessions concurrently improves by 19 times compared to v8.1.0 and 2.1 times compared to v8.2.0. The performance of using10 sessions for adding columns (`ADD COLUMN`) to multiple tables in the same database in batch has improved by 10 times compared to v8.1.0, and 2.1 times compared to v8.2.0. The performance of `ADD COLUMN` with 10 sessions on multiple tables in the same database is 10 times better than v8.1.0 and 2 times better than v8.2.0.
 
     For more information, see [documentation](/system-variables.md#tidb_enable_fast_create_table-new-in-v800).    
 
@@ -258,7 +258,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
     - The TopN operator supports disk spill [#47733](https://github.com/pingcap/tidb/issues/47733) @[xzhangxian1008](https://github.com/xzhangxian1008) **tw@Oreoxmt** <!--1715-->
     - TiDB supports using the `WITH ROLLUP` modifier and the `GROUPING` function [#42631](https://github.com/pingcap/tidb/issues/42631) @[Arenatlx](https://github.com/Arenatlx) **tw@Oreoxmt** <!--1714-->
     - The system variable [`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso-new-in-v830) supports `GLOBAL` scope [#55022](https://github.com/pingcap/tidb/issues/55022) @[cfzjywxk](https://github.com/cfzjywxk) **tw@hfxsd** <!--1857-->
-    - Optimize MemDB implementation to reduce write transaction latency [#xxx](https://github.com/pingcap/tidb/issues/xxx) @[you06](https://github.com/you06) **tw@hfxsd** <!--1892-->
+    - Optimize MemDB implementation to reduce write transaction latency [#55287](https://github.com/pingcap/tidb/issues/55287) @[you06](https://github.com/you06) **tw@hfxsd** <!--1892-->
     - GC（垃圾回收）支持并发 Delete Range（删除区间）以提升处理效率，可以通过 [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-从-v50-版本开始引入) 控制并发线程数 [#54570](https://github.com/pingcap/tidb/issues/54570) @[ekexium](https://github.com/ekexium) **tw@qiancai** <!--1890-->
     
 + TiKV
