@@ -1668,7 +1668,7 @@ If you need to create unique indexes that **do not include all the columns used 
 
 Previously an index on partitioned tables are created for each partition, which is the reason for the limitation that all unique keys need to include all partitioning columns. The uniqueness can only be enforced within each partition. A global index will be created on table level, so it can enforce uniqueness regardless of partitioning. Note that this has implications on partitioning management, `DROP`, `TRUNCATE`, and `REORGANIZE PARTITION` will also need to manage the table level global index.
 
-After enabling this variable, any unique index that does not meet the preceding constraint will automatically become a global index.
+After enabling this variable, any unique index that does not meet the preceding constraint will need the GLOBAL attribute and will then become a global index.
 
 ```sql
 SET tidb_enable_global_index = ON;
@@ -1678,24 +1678,24 @@ CREATE TABLE t1 (
     col2 DATE NOT NULL,
     col3 INT NOT NULL,
     col4 INT NOT NULL,
-    UNIQUE KEY uidx12(col1, col2),
+    UNIQUE KEY uidx12(col1, col2) GLOBAL,
     UNIQUE KEY uidx3(col3)
 )
 PARTITION BY HASH(col3)
 PARTITIONS 4;
 ```
 
-In this example, the unique index `uidx12` will be implicitly a global index, but `uidx3` remains a regular unique index.
+In this example, the unique index `uidx12` will be a global index, but `uidx3` remains a regular unique index.
 
 Note that a **clustered index** cannot be a global index, as shown in the following example:
 
 ```sql
 SET tidb_enable_global_index = ON;
 
-CREATE TABLE t1 (
+CREATE TABLE t2 (
     col1 INT NOT NULL,
     col2 DATE NOT NULL,
-    PRIMARY KEY (col2) clustered
+    PRIMARY KEY (col2) CLUSTERED GLOBAL
 ) PARTITION BY HASH(col1) PARTITIONS 5;
 ```
 
@@ -1705,7 +1705,27 @@ ERROR 1503 (HY000): A CLUSTERED INDEX must include all columns in the table's pa
 
 The reason is that if the clustered index is a global index, the table will no longer be partitioned. This is because the key of the clustered index is also the record key, which means it should be on partition level. But the global index is on table level, which causes a conflict.
 
-You can identify a global index by querying the [`information_schema.tidb_indexes`](/information-schema/information-schema-tidb-indexes.md) table and checking the table structure.
+You can identify a global index by the GLOBAL IndexOption in the [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md) output.
+
+```sql
+SHOW CREATE TABLE t1\G
+```
+
+```
+       Table: t1
+Create Table: CREATE TABLE `t1` (
+  `col1` int(11) NOT NULL,
+  `col2` date NOT NULL,
+  `col3` int(11) NOT NULL,
+  `col4` int(11) NOT NULL,
+  UNIQUE KEY `uidx12` (`col1`,`col2`) /*T![global_index] GLOBAL */,
+  UNIQUE KEY `uidx3` (`col3`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
+PARTITION BY HASH (`col3`) PARTITIONS 4
+1 row in set (0.00 sec)
+```
+
+Or querying the [`information_schema.tidb_indexes`](/information-schema/information-schema-tidb-indexes.md) table and checking the table structure.
 
 ```sql
 SELECT * FROM information_schema.tidb_indexes WHERE table_name='t1';
@@ -1720,6 +1740,11 @@ SELECT * FROM information_schema.tidb_indexes WHERE table_name='t1';
 | test         | t1         |          0 | uidx3    |            1 | col3        |     NULL |               | NULL       |        2 | YES        | NO        |         0 |
 +--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
 3 rows in set (0.00 sec)
+```
+
+When partitioning a non-partitioned table or re-partitioning an already partitioned table it is possible to update the indexes to be [global index](#global-indexes) or default local indexes.
+```sql
+ALTER TABLE t1 PARTITION BY HASH (col1) PARTITIONS 3 UPDATE INDEXES (uidx12 LOCAL, uidx3 GLOBAL);
 ```
 
 ### Partitioning limitations relating to functions
