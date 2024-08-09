@@ -40,11 +40,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.1/quick-start-with-
         - (dup): release-8.2.0.md > Improvements> Tools> Backup & Restore (BR) - Support encryption of temporary files generated during log backup [#15083](https://github.com/tikv/tikv/issues/15083) @[YuJuncen](https://github.com/YuJuncen)
         - (dup): release-7.5.3.md > Improvements> Tools> Backup & Restore (BR) - Except for the `br log restore` subcommand, all other `br log` subcommands support skipping the loading of the TiDB `domain` data structure to reduce memory consumption [#52088](https://github.com/pingcap/tidb/issues/52088) @[Leavrth](https://github.com/Leavrth)
         - (dup): release-7.5.3.md > Improvements> Tools> Backup & Restore (BR) - Support setting Alibaba Cloud access credentials through environment variables [#45551](https://github.com/pingcap/tidb/issues/45551) @[RidRisR](https://github.com/RidRisR)
-        - 在 tikv 下载 sst 文件之前，增加剩余空间是否够用的检查 [#17224](https://github.com/tikv/tikv/issues/17224) @[RidRisR](https://github.com/RidRisR)
+        - Support checking whether the disk space in TiKV is sufficient before TiKV downloads SST files. If the space is insufficient, BR terminates the restore and returns an error [#17224](https://github.com/tikv/tikv/issues/17224) @[RidRisR](https://github.com/RidRisR)
 
     + TiCDC <!--tw:qiancai 1 条-->
 
-        - 支持 simple protocol 在 changefeed 启动时一次性发送所有表的 Bootstrap 消息 [#11315](https://github.com/pingcap/tiflow/issues/11315) @[asddongmen](https://github.com/asddongmen)
+        - Support sending BOOTSTRAP messages of all tables to the downstream in one go when a changefeed using Simple Protocol starts [#11315](https://github.com/pingcap/tiflow/issues/11315) @[asddongmen](https://github.com/asddongmen)
         - (dup): release-6.5.10.md > Improvements> Tools> TiCDC - Support directly outputting raw events when the downstream is a Message Queue (MQ) or cloud storage [#11211](https://github.com/pingcap/tiflow/issues/11211) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
 ## Bug fixes
@@ -120,7 +120,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.1/quick-start-with-
     - (dup): release-8.2.0.md > Bug fixes> TiKV - Fix the issue that the output of the `raft region` command in tikv-ctl does not include the Region status information [#17037](https://github.com/tikv/tikv/issues/17037) @[glorv](https://github.com/glorv)
     - (dup): release-8.2.0.md > Bug fixes> TiKV - Fix the issue that changing the `raftstore.periodic-full-compact-start-times` configuration item online might cause TiKV to panic [#17066](https://github.com/tikv/tikv/issues/17066) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
     - (dup): release-7.5.3.md > Bug fixes> TiKV - Fix the issue that TiKV might repeatedly panic when applying a corrupted Raft data snapshot [#15292](https://github.com/tikv/tikv/issues/15292) @[LykxSassinator](https://github.com/LykxSassinator)
-    - 修复 evict 未被持久化 entries 的问题 [#17040](https://github.com/tikv/tikv/issues/17040) @[glorv](https://github.com/glorv)
+    - Fix the issue that releasing cache entries before they are persisted causes TiKV to panic [#17040](https://github.com/tikv/tikv/issues/17040) @[glorv](https://github.com/glorv)
 
 + PD <!--tw:Oreoxmt 9 条-->
 
@@ -148,7 +148,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.1/quick-start-with-
 
 + TiFlash <!--tw:qiancai 1 条-->
 
-    - 修复 TiFlash 与任意 PD 发生网络分区后，可能导致读请求超时报错的问题 [#9243](https://github.com/pingcap/tiflash/issues/9243) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    - Fix the issue that a network partition (network disconnection) between TiFlash and any PD might cause read request timeout errors [#9243](https://github.com/pingcap/tiflash/issues/9243) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - (dup): release-6.5.10.md > Bug fixes> TiFlash - Fix the issue that the `SUBSTRING_INDEX()` function might cause TiFlash to crash in some corner cases [#9116](https://github.com/pingcap/tiflash/issues/9116) @[wshwsh12](https://github.com/wshwsh12)
     - (dup): release-7.5.3.md > Bug fixes> TiFlash - Fix the issue that a large number of duplicate rows might be read in FastScan mode after importing data via BR or TiDB Lightning [#9118](https://github.com/pingcap/tiflash/issues/9118) @[JinheLin](https://github.com/JinheLin)
     - (dup): release-7.5.3.md > Bug fixes> TiFlash - Fix the issue that TiFlash might panic when a database is deleted shortly after creation [#9266](https://github.com/pingcap/tiflash/issues/9266) @[JaySon-Huang](https://github.com/JaySon-Huang)
@@ -173,8 +173,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.1/quick-start-with-
 
     + TiCDC <!--tw:qiancai 2 条-->
 
-        - 修复 region 变更导致下游 panic 的问题 [#17233](https://github.com/tikv/tikv/issues/17233) @[hicqu](https://github.com/hicqu)
-        - 修复 当上游未启用新的排序规则时，TiCDC 无法正确解码具有聚集索引的表的主键的问题 [#11371](https://github.com/pingcap/tiflow/issues/11371)@[lidezhu](https://github.com/lidezhu)
+        - Fix the issue that Region changes cause downstream panic [#17233](https://github.com/tikv/tikv/issues/17233) @[hicqu](https://github.com/hicqu)
+        - Fix the issue that TiCDC fails to decode primary keys in clustered index tables correctly when the new collation is disabled in the upstream  [#11371](https://github.com/pingcap/tiflow/issues/11371)@[lidezhu](https://github.com/lidezhu)
         - (dup): release-7.5.3.md > Bug fixes> Tools> TiCDC - Fix the issue that the checksum is not correctly set to `0` after splitting `UPDATE` events [#11402](https://github.com/pingcap/tiflow/issues/11402) @[3AceShowHand](https://github.com/3AceShowHand)
         - (dup): release-8.2.0.md > Bug fixes> Tools> TiCDC - Fix the issue that data inconsistency might occur when restarting Changefeed repeatedly when performing a large number of `UPDATE` operations in a multi-node environment [#11219](https://github.com/pingcap/tiflow/issues/11219) @[lidezhu](https://github.com/lidezhu)
         - (dup): release-7.5.3.md > Bug fixes> Tools> TiCDC - Fix the issue that the Processor module might get stuck when the downstream Kafka is inaccessible [#11340](https://github.com/pingcap/tiflow/issues/11340) @[asddongmen](https://github.com/asddongmen)
@@ -183,13 +183,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.1/quick-start-with-
 
         - (dup): release-8.2.0.md > Bug fixes> Tools> TiDB Data Migration (DM) - Fix the issue that `SET` statements cause DM to panic during the migration of MariaDB data [#10206](https://github.com/pingcap/tiflow/issues/10206) @[dveeden](https://github.com/dveeden)
         - (dup): release-8.2.0.md > Bug fixes> Tools> TiDB Data Migration (DM) - Fix the connection blocking issue by upgrading `go-mysql` [#11041](https://github.com/pingcap/tiflow/issues/11041) @[D3Hunter](https://github.com/D3Hunter)
-        - 修复当索引长度超过默认 max-index-length 时导致同步中断的问题 [#11459](https://github.com/pingcap/tiflow/issues/11459) @[michaelmdeng](https://github.com/michaelmdeng)
-        - 修复 schema tracker 无法正确处理 LIST 分区表的问题 [#11408](https://github.com/pingcap/tiflow/issues/11408) @[lance6716](https://github.com/lance6716)"
+        - Fix the issue that data replication is interrupted when the index length exceeds the default value of `max-index-length` [#11459](https://github.com/pingcap/tiflow/issues/11459) @[michaelmdeng](https://github.com/michaelmdeng)
+        - Fix the issue that schema tracker incorrectly handles LIST partition tables, causing DM errors [#11408](https://github.com/pingcap/tiflow/issues/11408) @[lance6716](https://github.com/lance6716)"
 
     + TiDB Lightning  <!--tw:qiancai 1 条-->
 
         - (dup): release-6.5.10.md > Bug fixes> Tools> TiDB Lightning - Fix the issue that the Region fetched from PD does not have a Leader when restoring data using BR or importing data using TiDB Lightning in physical import mode [#51124](https://github.com/pingcap/tidb/issues/51124) [#50501](https://github.com/pingcap/tidb/issues/50501) @[Leavrth](https://github.com/Leavrth)
-        - 修复 lightning 获取 keyspace name 时输出的 WARN 日志可能引起混淆的问题 [#54232](https://github.com/pingcap/tidb/issues/54232) @[kennytm](https://github.com/kennytm)
+        - Fix the issue that TiDB Lightning outputs a confusing `WARN` log when the keyspace name is empty [#54232](https://github.com/pingcap/tidb/issues/54232) @[kennytm](https://github.com/kennytm)
 
     + Dumpling
 
