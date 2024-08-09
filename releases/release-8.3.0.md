@@ -88,9 +88,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
     更多信息，请参考[用户文档](/statistics.md#收集部分列的统计信息)。
 
-* Improve the query performance of some system tables  [#50305](https://github.com/pingcap/tidb/issues/50305) @[tangenta](https://github.com/tangenta) **tw@hfxsd** <!--1865-->
+* Improve the query performance of some system tables [#50305](https://github.com/pingcap/tidb/issues/50305) @[tangenta](https://github.com/tangenta) **tw@hfxsd** <!--1865-->
 
-    In previous versions, querying system tables has slow performance when the cluster size becomes large and the number of tables is high.
+    In previous versions, querying system tables has slow performance when the cluster size becomes large and there are a large number of tables.
 
     In v8.0.0, query performance is optimized for the following four system tables.
     
@@ -112,17 +112,17 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
     - INFORMATION_SCHEMA.TIDB_INDEX_USAGE
     - INFORMATION_SCHEMA.VIEWS
 
-* Support for partition pruning when partition expressions use the `EXTRACT(YEAR_MONTH...)` function to support partition pruning and improve query performance [#54209](https://github.com/pingcap/tidb/pull/54209) @[mjonss](https://github.com/mjonss) **tw@hfxsd** <!--1885-->
+* Support for partition pruning when partition expressions use the `EXTRACT(YEAR_MONTH...)` function to improve query performance [#54209](https://github.com/pingcap/tidb/pull/54209) @[mjonss](https://github.com/mjonss) **tw@hfxsd** <!--1885-->
 
-    In previous versions, when partition expressions used the `EXTRACT(YEAR_MONTH...)` function, partition pruning is not supported, resulting in poor query performance. Starting from v8.3.0, partition pruning is supported when partition expressions use the `EXTRACT(YEAR_MONTH...)` function, which improves query performance.
+    In previous versions, when partition expressions use the `EXTRACT(YEAR_MONTH...)` function, partition pruning is not supported, resulting in poor query performance. Starting from v8.3.0, partition pruning is supported when partition expressions use the `EXTRACT(YEAR_MONTH...)` function, which improves query performance.
 
     For more information, see [documentation](/partition-pruning.md#scenario-three).
     
-* The performance of `CREATE TABLE` is improved by 1.4 times, `CREATE DATABASE` is improved by 2.1 times, and `ADD COLUMN` is improved by 2 times [#54436](https://github.com/pingcap/tidb/issues/54436) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd** <!--1863-->
+* The performance of `CREATE TABLE` is improved by 1.4 times, `CREATE DATABASE` by 2.1 times, and `ADD COLUMN` by 2 times [#54436](https://github.com/pingcap/tidb/issues/54436) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd** <!--1863-->
 
     TiDB v8.0.0 introduces the system variable [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800) to improve table creation performance in batch table creation scenarios. In v8.3.0, when submitting the DDL statements for table creation concurrently through 10 sessions in a single database, the performance is improved by 1.4 times compared with v8.2.0.
    
-    In v8.3.0, the performance of general DDLs in batch execution has improved compared to v8.2.0. The performance of `CREATE DATABASE` for 10 sessions concurrently improves by 19 times compared to v8.1.0 and 2.1 times compared to v8.2.0. The performance of using10 sessions for adding columns (`ADD COLUMN`) to multiple tables in the same database in batch has improved by 10 times compared to v8.1.0, and 2.1 times compared to v8.2.0. The performance of `ADD COLUMN` with 10 sessions on multiple tables in the same database is 10 times better than v8.1.0 and 2 times better than v8.2.0.
+    In v8.3.0, the performance of general DDLs in batch execution has improved compared to v8.2.0. The performance of `CREATE DATABASE` for 10 sessions concurrently improves by 19 times compared with v8.1.0 and 2.1 times compared with v8.2.0. The performance of using 10 sessions to add columns (`ADD COLUMN`) to multiple tables in the same database in batch has improved by 10 times compared with v8.1.0, and 2.1 times compared with v8.2.0. The performance of `ADD COLUMN` with 10 sessions on multiple tables in the same database has improved by 10 times compared with v8.1.0 and 2 times compared with v8.2.0.
 
     For more information, see [documentation](/system-variables.md#tidb_enable_fast_create_table-new-in-v800).    
 
@@ -164,9 +164,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
 * Partitioned tables support global indexes (experimental) [#45133](https://github.com/pingcap/tidb/issues/45133) @[mjonss](https://github.com/mjonss) **tw@hfxsd** <!--1531-->
 
-    In previous versions of partitioned tables, there are more limitations because global indexes are not supported, for example, the unique key must contain a partition key, and if the query condition does not have a partition key, the query will scan all partitions, resulting in poor performance. Starting from v7.6.0, the system variable [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) is introduced to enable the global index feature. But this feature is under development at that time and it is not recommended to enable it.
+    In previous versions of partitioned tables, there are some limitations because global indexes are not supported. For example, the unique key must contain a partition key. If the query condition does not have a partition key, the query will scan all partitions, resulting in poor performance. Starting from v7.6.0, the system variable [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) is introduced to enable the global index feature. But this feature was under development at that time and it is not recommended to enable it.
     
-    Starting with v8.3.0, the global indexes feature has been released as an experimental feature. When you create a unique key that does not contain all partition keys, TiDB implicitly creates a global index, removing the restriction that the unique key must contain all partition keys, to meet flexible business needs. Global indexes also improve the query performance of indexes without partitioned keys.
+    Starting with v8.3.0, the global index feature has been released as an experimental feature. When you create a unique key that does not contain all partition keys, TiDB implicitly creates a global index, removing the restriction that the unique key must contain all partition keys, to meet flexible business needs. Global indexes also improve the query performance of indexes without partitioned keys.
 
     For more information, see [documentation](/partitioned-table.md#global-indexes).
 
@@ -192,7 +192,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
     TiDB v8.0.0 enhances log redaction and supports marking user data in TiDB logs with single-angle quotation marks `‹›`. Based on the marked logs, you can decide whether to redact the marked information when displaying the logs, thus increasing the flexibility of log redaction. In v8.2.0, TiFlash implements a similar log redaction enhancement.
     
-    In v8.3.0, TiKV implements a similar log redaction enhancement. To use this feature, you can set the value of the PD configuration item `security.redact-info-log` to `marker`.
+    In v8.3.0, TiKV implements a similar log redaction enhancement. To use this feature, you can set the value of the TiKV configuration item `security.redact-info-log` to `marker`.
+
     For more information, see [documentation](/log-redaction.md#log-redaction-in-tikv-side).
 
 ### Data migration
