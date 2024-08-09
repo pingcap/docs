@@ -101,14 +101,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.1/quick-start-with-
     - Fix the issue that the performance is unstable when adding indexes using global sorting [#54147](https://github.com/pingcap/tidb/issues/54147) @[tangenta](https://github.com/tangenta)
     - Fix the issue that `SHOW IMPORT JOBS` reports an error `Unknow column `summary`` after upgrading from v7.1 [#54241](https://github.com/pingcap/tidb/issues/54241) @[tangenta](https://github.com/tangenta)
     - Fix the issue that `root` user cannot query `tidb_mdl_view` [#53292](https://github.com/pingcap/tidb/issues/53292) @[tangenta](https://github.com/tangenta) <!--tw:lilin90 以下 8 条-->
-    - 修复使用分布式框架添加索引期间出现网络分区可能导致数据索引不一致的问题 [#54897](https://github.com/pingcap/tidb/issues/54897) @[tangenta](https://github.com/tangenta)
-    - 修复 local backend 初始化期间报错可能导致资源泄露的问题 [#53659](https://github.com/pingcap/tidb/issues/53659) @[D3Hunter](https://github.com/D3Hunter)
-    - 修复当 view 定义中使用子查询作为列定义时，无法通过 information_schema.columns 获取列信息的问题 [#54343](https://github.com/pingcap/tidb/issues/54343) @[lance6716](https://github.com/lance6716)
-    - 修复使用索引加速添加唯一索引在遇到 owner 切换时可能导致 duplicate entry 的问题 [#49233](https://github.com/pingcap/tidb/issues/49233) @[lance6716](https://github.com/lance6716)
-    - 修复设置 global.tidb_cloud_storage_uri 报错信息不清晰的问题 [#54096](https://github.com/pingcap/tidb/issues/54096) @[lance6716](https://github.com/lance6716)
-    - 支持在多值索引的 `IndexRangeScan` 上生成 `Selection [#55012](https://github.com/pingcap/tidb/issues/55012)@[time-and-fate](https://github.com/time-and-fate)
-    - 修复 sync load 监控不正确的问题 [#53558](https://github.com/pingcap/tidb/issues/53558)@[hawkingrei](https://github.com/hawkingrei)
-    - 修复 concurrency init stats 可能遗漏加载的问题 [#53607](https://github.com/pingcap/tidb/issues/53607) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that the network partition during adding indexes using the Distributed eXecution Framework (DXF) might cause inconsistent data indexes [#54897](https://github.com/pingcap/tidb/issues/54897) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that error occurred during initialization of the local backend might cause resource leaks [#53659](https://github.com/pingcap/tidb/issues/53659) @[D3Hunter](https://github.com/D3Hunter)
+    - Fix the issue that column information cannot be obtained using `information_schema.columns` when a subquery is used as a column definition in a view definition [#54343](https://github.com/pingcap/tidb/issues/54343) @[lance6716](https://github.com/lance6716)
+    - Fix the issue that using index acceleration to add a unique index might cause a `Duplicate entry` error when the owner is switched [#49233](https://github.com/pingcap/tidb/issues/49233) @[lance6716](https://github.com/lance6716)
+    - Fix the unclear error message when setting `global.tidb_cloud_storage_uri` [#54096](https://github.com/pingcap/tidb/issues/54096) @[lance6716](https://github.com/lance6716)
+    - Fix the issue that `IndexRangeScan` on multi-value indexes does not support generating `Selection` [#55012](https://github.com/pingcap/tidb/issues/55012)@[time-and-fate](https://github.com/time-and-fate)
+    - Fix the issue that the Sync Load QPS monitoring metric is displayed incorrectly [#53558](https://github.com/pingcap/tidb/issues/53558)@[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that some statistics information might be missed when loading initial statistics concurrently [#53607](https://github.com/pingcap/tidb/issues/53607) @[hawkingrei](https://github.com/hawkingrei)
     - (dup): release-7.5.3.md > Bug fixes> TiDB - Fix the issue of reusing wrong point get plans for `SELECT ... FOR UPDATE` [#54652](https://github.com/pingcap/tidb/issues/54652) @[qw4990](https://github.com/qw4990)
 
 + TiKV <!--tw:qiancai 1 条-->
