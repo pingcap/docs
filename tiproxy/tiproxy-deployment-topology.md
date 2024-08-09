@@ -16,7 +16,7 @@ TiProxy is a L7 proxy server for TiDB, which can balance connections and migrate
 | TiDB | 3 | 16 VCore 32GB * 3 | 10.0.1.4 <br/> 10.0.1.5 <br/> 10.0.1.6 | Default port <br/> Global directory configuration |
 | PD | 3 | 4 VCore 8GB * 3 | 10.0.1.1 <br/> 10.0.1.2 <br/> 10.0.1.3 | Default port <br/> Global directory configuration |
 | TiKV | 3 | 16 VCore 32GB 2TB (nvme ssd) * 3 | 10.0.1.7 <br/> 10.0.1.8 <br/> 10.0.1.9 | Default port <br/> Global directory configuration |
-| TiProxy | 1 | 4 VCore 8 GB * 1  | 10.0.1.11 | Default port <br/> Global directory configuration |
+| TiProxy | 2 | 4 VCore 8 GB * 1  | 10.0.1.11 <br/> 10.0.1.12 | Default port <br/> Global directory configuration |
 | Monitoring & Grafana | 1 | 4 VCore 8GB * 1 500GB (ssd) | 10.0.1.13 | Default port <br/> Global directory configuration |
 
 ### Topology templates

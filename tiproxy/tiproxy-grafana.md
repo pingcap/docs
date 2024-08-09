@@ -38,6 +38,9 @@ TiProxy has four panel groups. The metrics on these panels indicate the current 
     - backend network break: fails to read from or write to the TiDB. This may be caused by a network problem or the TiDB server shutting down
     - backend handshake fail: TiProxy fails to handshake with the TiDB server
 - Goroutine Count: the number of Goroutines on each TiProxy instance
+- Owner: the TiProxy instance that executes various tasks. For example, `10.24.31.1:3080 - vip` indicates that the TiProxy instance at `10.24.31.1:3080` is bound to a virtual IP. The tasks include the following:
+    - vip: binds a virtual IP
+    - metric_reader: reads monitoring data from TiDB servers
 
 ## Query-Summary
 
