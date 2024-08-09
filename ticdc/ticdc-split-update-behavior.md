@@ -7,12 +7,16 @@ summary: Introduce the behavior changes about whether TiCDC splits `UPDATE` even
 
 ## Split `UPDATE` events for MySQL sinks
 
-In v8.1.0, when using the MySQL sink, TiCDC fetches the current timestamp `thresholdTS` from PD at startup and decides whether to split `UPDATE` events based on the value of this timestamp:
+Starting from v6.5.10, v7.5.2, and v8.1.1, when using the MySQL sink, any TiCDC node that receives a request for replicating a table will fetch the current timestamp `thresholdTS` from PD before starting the replication to the downstream. Based on the value of this timestamp, TiCDC decides whether to split `UPDATE` events:
 
 - For transactions containing one or multiple `UPDATE` changes, if the transaction `commitTS` is less than `thresholdTS`, TiCDC splits the `UPDATE` event into a `DELETE` event and an `INSERT` event before writing them to the Sorter module.
 - For `UPDATE` events with the transaction `commitTS` greater than or equal to `thresholdTS`, TiCDC does not split them. For more information, see GitHub issue [#10918](https://github.com/pingcap/tiflow/issues/10918).
 
-This behavior change addresses the issue of downstream data inconsistencies caused by the potentially incorrect order of `UPDATE` events received by TiCDC, which can lead to an incorrect order of split `DELETE` and `INSERT` events.
+> **Note:**
+>
+> In v8.1.0, when using MySQL Sink, TiCDC also decides whether to split `UPDATE` events based on the value of `thresholdTS`, but `thresholdTS` is obtained differently. Specifically, in v8.1.0, `thresholdTS` is the current timestamp fetched from PD at TiCDC startup, but this way might cause data inconsistency issues in multi-node scenarios. For more information, see GitHub issue [#11219](https://github.com/pingcap/tiflow/issues/11219).
+
+This behavior change (that is, deciding whether to split `UPDATE` events based on `thresholdTS`) addresses the issue of downstream data inconsistencies caused by the potentially incorrect order of `UPDATE` events received by TiCDC, which can lead to an incorrect order of split `DELETE` and `INSERT` events.
 
 Take the following SQL statements as an example:
 
@@ -49,7 +53,7 @@ UPDATE t SET a = 3 WHERE a = 2;
 
     After the downstream executes the transaction, the records in the database are `(3, 2)`, which are different from the records in the upstream database (`(2, 1)` and `(3, 2)`), indicating a data inconsistency issue.
 
-- After this behavior change, if the transaction `commitTS` is less than the `thresholdTS` obtained by TiCDC at startup, TiCDC splits these `UPDATE` events into `DELETE` and `INSERT` events before writing them to the Sorter module. After the sorting by the Sorter module, the actual execution order of these events in the downstream is as follows:
+- After this behavior change, if the transaction `commitTS` is less than the `thresholdTS` fetched from PD when TiCDC starts replicating the corresponding table to the downstream, TiCDC splits these `UPDATE` events into `DELETE` and `INSERT` events before writing them to the Sorter module. After the sorting by the Sorter module, the actual execution order of these events in the downstream is as follows:
 
     ```sql
     BEGIN;
@@ -145,11 +149,11 @@ Starting from v6.5.10, v7.1.6, v7.5.3, and v8.1.1, when using a non-MySQL sink, 
 | Version | Protocol | Split UK/PK `UPDATE` events | Not split UK/PK `UPDATE` events  | Comments |
 | -- | -- | -- | -- | -- |
 | <= v7.5.2 | ALL | ✓ | ✗ |
-| \>= v7.5.3 (not released yet) | ALL | ✓ (Default value:`output-raw-change-event = false`) | ✓  (Optional: `output-raw-change-event = true`) | |
+| \>= v7.5.3 | ALL | ✓ (Default value:`output-raw-change-event = false`) | ✓  (Optional: `output-raw-change-event = true`) | |
 
 #### Release 8.1 compatibility
 
 | Version | Protocol | Split UK/PK `UPDATE` events | Not split UK/PK `UPDATE` events  | Comments |
 | -- | -- | -- | -- | -- |
 | v8.1.0 | ALL | ✓ | ✗ |
-| \>= v8.1.1 (not released yet) | ALL | ✓ (Default value:`output-raw-change-event = false`) | ✓  (Optional: `output-raw-change-event = true`) | |
+| \>= v8.1.1 | ALL | ✓ (Default value:`output-raw-change-event = false`) | ✓  (Optional: `output-raw-change-event = true`) | |
