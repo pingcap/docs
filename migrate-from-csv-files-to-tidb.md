@@ -62,6 +62,8 @@ data-source-dir = "${data-path}" # A local path or S3 path. For example, 's3://m
 separator = ','
 # Delimiter. Can be zero or multiple characters.
 delimiter = '"'
+# Line terminator. By default, \r, \n, and \r\n are all treated as line terminators.
+# terminator = "\r\n"
 # Configures whether the CSV file has a table header.
 # If this item is set to true, TiDB Lightning uses the first line of the CSV file to parse the corresponding relationship of fields.
 header = true
@@ -102,6 +104,8 @@ In a strict-format CSV file, each field only takes up one line. It must meet the
 
 - The delimiter is empty.
 - Each field does not contain CR (`\r`) or LF (`\n`).
+
+You need to explicitly specify the line terminator `terminator` for a `strict-format` CSV file.
 
 If your CSV file meets the above requirements, you can speed up the import by enabling the `strict-format` mode as follows:
 
