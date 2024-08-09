@@ -189,7 +189,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.1/quick-start-with-
     + TiDB Lightning  <!--tw:qiancai 1 条-->
 
         - (dup): release-6.5.10.md > Bug fixes> Tools> TiDB Lightning - Fix the issue that the Region fetched from PD does not have a Leader when restoring data using BR or importing data using TiDB Lightning in physical import mode [#51124](https://github.com/pingcap/tidb/issues/51124) [#50501](https://github.com/pingcap/tidb/issues/50501) @[Leavrth](https://github.com/Leavrth)
-        - Fix the issue that TiDB Lightning outputs a confusing `WARN` log when the keyspace name is empty [#54232](https://github.com/pingcap/tidb/issues/54232) @[kennytm](https://github.com/kennytm)
+        - Fix the issue that TiDB Lightning outputs a confusing `WARN` log when it fails to obtain the keyspace name [#54232](https://github.com/pingcap/tidb/issues/54232) @[kennytm](https://github.com/kennytm)
 
     + Dumpling
 
