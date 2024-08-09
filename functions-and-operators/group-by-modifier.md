@@ -36,11 +36,21 @@ Aggregating and summarizing data from multiple columns is commonly used in OLAP 
 
 ## Prerequisites
 
-In versions prior to v8.3.0, TiDB only supports generating valid execution plans for the `WITH ROLLUP` syntax in [TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md). Therefore, your TiDB cluster needs to contain TiFlash nodes, and the target analysis table must be configured with the correct TiFlash replica. For more information, please refer to [Expanding TiFlash Node](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
+<CustomContent platform="tidb">
 
-Starting with v8.3.0, the above restrictions have been removed. Regardless of whether the TiDB cluster contains TiFlash nodes or not, TiDB supports generating valid execution plans for the `WITH ROLLUP` syntax.
+Before v8.3.0, TiDB only supports generating valid execution plans for the `WITH ROLLUP` syntax in [TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md). Therefore, your TiDB cluster needs to contain TiFlash nodes, and the target table must be configured with the correct TiFlash replica. For more information, see [Scale out a TiFlash cluster](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
 
-You can tell the storage engine that executes the `Expand` operator through the `task` attribute of the `Expand` operator in the execution plan. For more information, please refer to [How to interpret the ROLLUP execution plan](#how-to-interpret-the-rollup-execution-plan).
+</CustomContent>
+
+<CustomContent platform="tidb">
+
+Before v8.3.0, TiDB only supports generating valid execution plans for the `WITH ROLLUP` syntax in [TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md). Therefore, your TiDB cluster needs to contain TiFlash nodes, and the target table must be configured with the correct TiFlash replica. For more information, see [Scale out a TiFlash cluster](https://docs.pingcap.com/tidb/stable/scale-tidb-using-tiup#scale-out-a-tiflash-cluster).
+
+</CustomContent>
+
+Starting from v8.3.0, the preceding limitation is removed. Regardless of whether the TiDB cluster contains TiFlash nodes, TiDB supports generating valid execution plans for the `WITH ROLLUP` syntax.
+
+You can determine the storage engine that executes the `Expand` operator by checking the `task` attribute of the `Expand` operator in the execution plan. For more information, see [How to interpret the ROLLUP execution plan](#how-to-interpret-the-rollup-execution-plan).
 
 ## Examples
 
@@ -55,7 +65,7 @@ CREATE TABLE bank
     profit  DECIMAL(13, 7)
 );
 
-ALTER TABLE bank SET TIFLASH REPLICA 1; -- 在 TiFlash MPP 模式下，为该表添加一个 TiFlash 副本
+ALTER TABLE bank SET TIFLASH REPLICA 1; -- Add a TiFlash replica for the table in TiFlash MPP mode.
 
 INSERT INTO bank VALUES(2000, "Jan", 1, 10.3),(2001, "Feb", 2, 22.4),(2000,"Mar", 3, 31.6)
 ```
@@ -164,8 +174,8 @@ To meet the requirements of multidimensional grouping, multidimensional data agg
 
 The implementation of the `Expand` operator is similar to that of the `Projection` operator. The difference is that `Expand` is a multi-level `Projection`, which contains multiple levels of projection operation expressions. For each row of the raw data, the `Projection` operator generates only one row in results, whereas the `Expand` operator generates multiple rows in results (the number of rows is equal to the number of levels in projection operation expressions).
 
+The following example shows the execution plan for a TiDB cluster that does not contain TiFlash nodes, where the `task` of the `Expand` operator is `root`, indicating that the `Expand` operator is executed in TiDB:
 
-The following is an example of an execution plan for a TiDB cluster that does not contain TiFlash nodes. The `task` of the `Expand` operator is `root`, which means that the `Expand` operator is executed in TiDB:
 ```sql
 EXPLAIN SELECT year, month, grouping(year), grouping(month), SUM(profit) AS profit FROM bank GROUP BY year, month WITH ROLLUP;
 +--------------------------------+---------+-----------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -181,7 +191,7 @@ EXPLAIN SELECT year, month, grouping(year), grouping(month), SUM(profit) AS prof
 6 rows in set (0.00 sec)
 ```
 
-The following is an example of the execution plan via TiFlash MPP mode, in which the `task` of the `Expand` operator is `mpp[tiflash]`, which means that the `Expand` operator is executed in TiFlash:
+The following example shows the execution plan in TiFlash MPP mode, where the `task` of the `Expand` operator is `mpp[tiflash]`, indicating that the `Expand` operator is executed in TiFlash:
 
 ```sql
 EXPLAIN SELECT year, month, grouping(year), grouping(month), SUM(profit) AS profit FROM bank GROUP BY year, month WITH ROLLUP;
