@@ -15,7 +15,7 @@ TiDB allows you to identify expensive queries during SQL execution, so you can d
 ## Expensive query log example
 
 ```sql
-[2020/02/05 15:32:25.096 +08:00] [WARN] [expensivequery.go:167] [expensive_query] [cost_time=60.008338935s] [wait_time=0s] [request_count=1] [total_keys=70] [process_keys=65] [num_cop_tasks=1] [process_avg_time=0s] [process_p90_time=0s] [process_max_time=0s] [process_max_addr=10.0.1.9:20160] [wait_avg_time=0.002s] [wait_p90_time=0.002s] [wait_max_time=0.002s] [wait_max_addr=10.0.1.9:20160] [stats=t:pseudo] [conn_id=60026] [user=root] [database=test] [table_ids="[122]"] [txn_start_ts=414420273735139329] [mem_max="1035 Bytes (1.0107421875 KB)"] [sql="insert into t select sleep(1) from t"]
+[expensivequery.go:145] [expensive_query] [cost_time=60.021998785s] [cop_time=0.022540151s] [process_time=28.448316643s] [wait_time=0.045507163s] [request_count=430] [total_keys=3538276] [process_keys=3537846] [num_cop_tasks=430] [process_avg_time=0.066158875s] [process_p90_time=0.140427865s] [process_max_time=0.27903656s] [process_max_addr=tikv-1-peer:20160] [wait_avg_time=0.00010583s] [wait_p90_time=0.000358794s] [wait_max_time=0.001218721s] [wait_max_addr=tikv-1-peer:20160] [stats=usertable:451469035823955972] [conn=1621098504] [user=root] [database=test] [table_ids="[104]"] [txn_start_ts=451469037501677571] [mem_max="621043469 Bytes (592.3 MB)"] [sql="insert /*+ SET_VAR(tidb_dml_type=bulk) */ into usertable_2 select * from usertable limit 5000000"] [session_alias=] ["affected rows"=3505282]]
 ```
 
 ## Fields description
@@ -27,6 +27,8 @@ Basic fields:
 * `table_ids`: The IDs of the tables involved in a statement.
 * `txn_start_ts`: The start timestamp and the unique ID of a transaction. You can use this value to search for the transaction-related logs.
 * `sql`: The sql statement.
+* `session_alias`: The alias of the current session.
+* `affected rows`: The number of rows currently affected by the statement.
 
 Memory usage related fields:
 
