@@ -4952,6 +4952,8 @@ SHOW WARNINGS;
 - Type: Boolean
 - Default value: Before v7.2.0, the default value is `OFF`. Starting from v7.2.0, the default value is `ON`.
 - Specifies whether to remove `ORDER BY` clause in a subquery.
+- In the ISO/IEC SQL standard, `ORDER BY` is mainly used to sort the results of top-level queries. For subqueries, the standard does not require that the results be sorted by `ORDER BY`. 
+- To sort subquery results, you can usually handle it in the outer query, such as using the window function or using `ORDER BY` again in the outer query. Doing so ensures the order of the final result set.
 
 ### tidb_replica_read <span class="version-mark">New in v4.0</span>
 
