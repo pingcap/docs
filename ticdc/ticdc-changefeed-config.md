@@ -261,7 +261,7 @@ sasl-oauth-grant-type = "client_credentials"
 # The audience in the Kafka SASL OAUTHBEARER authentication. The default value is empty. This parameter is optional when the OAUTHBEARER authentication is used.
 sasl-oauth-audience = "kafka"
 
-# The following configuration item controls whether to output the original data change event. The default value is false, which means that for a non-MySQL sink when the primary key or the non-null unique key is changed in an `UPDATE` event, TiCDC splits the event into two events, `DELETE` and `INSERT`, and ensures that all events are sorted in the order in which the `DELETE` event precedes the `INSERT` event. Setting it to true means that the original event is output directly without splitting.
+# The following configuration item controls whether to output the original data change event. The default value is false. For more information, see https://docs.pingcap.com/tidb/v7.5/ticdc-split-update-behavior#control-whether-to-split-primary-or-unique-key-update-events.
 # output-raw-change-event = false
 
 # The following configuration is only required when using Avro as the protocol and AWS Glue Schema Registry:
@@ -314,7 +314,7 @@ batching-max-publish-delay=10
 # The timeout for a Pulsar producer to send a message. The value is 30 seconds by default.
 send-timeout=30
 
-# The following configuration item controls whether to output the original data change event. The default value is false, which means that for a non-MySQL sink when the primary key or the non-null unique key is changed in an `UPDATE` event, TiCDC splits the event into two events, `DELETE` and `INSERT`, and ensures that all events are sorted in the order in which the `DELETE` event precedes the `INSERT` event. Setting it to true means that the original event is output directly without splitting.
+# The following configuration item controls whether to output the original data change event. The default value is false. For more information, see https://docs.pingcap.com/tidb/v7.5/ticdc-split-update-behavior#control-whether-to-split-primary-or-unique-key-update-events.
 # output-raw-change-event = false
 
 [sink.cloud-storage-config]
@@ -336,6 +336,6 @@ file-cleanup-cron-spec = "0 0 2 * * *"
 # The concurrency for uploading a single file.
 # The default value is 1, which means concurrency is disabled.
 flush-concurrency = 1
-# The following configuration item controls whether to output the original data change event. The default value is false, which means that for a non-MySQL sink when the primary key or the non-null unique key is changed in an `UPDATE` event, TiCDC splits the event into two events, `DELETE` and `INSERT`, and ensures that all events are sorted in the order in which the `DELETE` event precedes the `INSERT` event. Setting it to true means that the original event is output directly without splitting.
+# The following configuration item controls whether to output the original data change event. The default value is false. For more information, see https://docs.pingcap.com/tidb/v7.5/ticdc-split-update-behavior#control-whether-to-split-primary-or-unique-key-update-events.
 output-raw-change-event = false
 ```
