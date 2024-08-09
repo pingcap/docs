@@ -36,11 +36,11 @@ Aggregating and summarizing data from multiple columns is commonly used in OLAP 
 
 ## Prerequisites
 
-In versions prior to v8.3.0, TiDB only supports generating valid execution plans for the `WITH ROLLUP` syntax in [TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md). Therefore, your TiDB cluster needs to contain TiFlash nodes, and the target analysis table must be configured with the correct TiFlash replica. For more information, please refer to [Expanding TiFlash Node](/scale-tidb-using-tiup.md#Scale-out-a-TiFlash-cluster).
+In versions prior to v8.3.0, TiDB only supports generating valid execution plans for the `WITH ROLLUP` syntax in [TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md). Therefore, your TiDB cluster needs to contain TiFlash nodes, and the target analysis table must be configured with the correct TiFlash replica. For more information, please refer to [Expanding TiFlash Node](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
 
 Starting with v8.3.0, the above restrictions have been removed. Regardless of whether the TiDB cluster contains TiFlash nodes or not, TiDB supports generating valid execution plans for the `WITH ROLLUP` syntax.
 
-You can tell the storage engine that executes the `Expand` operator through the `task` attribute of the `Expand` operator in the execution plan. For more information, please refer to [How to interpret the ROLLUP execution plan](#How-to-interpret-the-ROLLUP-execution-plan).
+You can tell the storage engine that executes the `Expand` operator through the `task` attribute of the `Expand` operator in the execution plan. For more information, please refer to [How to interpret the ROLLUP execution plan](#how-to-interpret-the-rollup-execution-plan).
 
 ## Examples
 
