@@ -25,11 +25,11 @@ GlobalScope ::=
 BindableStmt ::=
     ( SelectStmt | UpdateStmt | InsertIntoStmt | ReplaceIntoStmt | DeleteStmt )
 
-StringLiteralOrUserVariableList:
-    (StringLitOrUserVariable | StringLiteralOrUserVariableList ',' StringLitOrUserVariable)
+StringLiteralOrUserVariableList ::=
+    ( StringLitOrUserVariable | StringLiteralOrUserVariableList ',' StringLitOrUserVariable )
 
-StringLiteralOrUserVariable:
-    stringLiteral | UserVariable
+StringLiteralOrUserVariable ::=
+    ( stringLiteral | UserVariable )
 ```
 
 ****

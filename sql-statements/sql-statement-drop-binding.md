@@ -15,7 +15,7 @@ A `BINDING` can be on either a `GLOBAL` or `SESSION` basis. The default is `SESS
 ```ebnf+diagram
 DropBindingStmt ::=
     'DROP' GlobalScope 'BINDING' 'FOR' ( BindableStmt ( 'USING' BindableStmt )?
-|   'SQL' 'DIGEST' StringLiteralOrUserVariableList)
+|   'SQL' 'DIGEST' StringLiteralOrUserVariableList )
 
 GlobalScope ::=
     ( 'GLOBAL' | 'SESSION' )?
@@ -23,11 +23,11 @@ GlobalScope ::=
 BindableStmt ::=
     ( SelectStmt | UpdateStmt | InsertIntoStmt | ReplaceIntoStmt | DeleteStmt )
 
-StringLiteralOrUserVariableList:
-    (StringLitOrUserVariable | StringLiteralOrUserVariableList ',' StringLitOrUserVariable)
+StringLiteralOrUserVariableList ::=
+    ( StringLitOrUserVariable | StringLiteralOrUserVariableList ',' StringLitOrUserVariable )
 
-StringLiteralOrUserVariable:
-    stringLiteral | UserVariable
+StringLiteralOrUserVariable ::=
+    ( stringLiteral | UserVariable )
 ```
 
 ## Examples
