@@ -256,8 +256,8 @@ delta_index_cache_size = 0
 
 ## Security settings take effect starting from v4.0.5.
 [security]
-    ## New in v5.0. This configuration item enables or disables log redaction. Value options: `true`, `false`, `"on"`, `"off"` and `"marker"`. The `"on"`, `"off"` and `"marker"` options are introduced in v8.2.0.
-    ## The default value is `false` or `"off"`, which means that log redaction is disabled.
+    ## New in v5.0. This configuration item enables or disables log redaction. Value options: `true`, `false`, `"on"`, `"off"`, and `"marker"`. The `"on"`, `"off"`, and `"marker"` options are introduced in v8.2.0.
+    ## If the configuration item is set to `false` or `"off"`, log redaction is disabled.
     ## If the configuration item is set to `true` or `"on"`, all user data in the log is replaced by `?`.
     ## If the configuration item is set to `"marker"`, all user data in the log is wrapped in `‹ ›`. If user data contains `‹` or `›`, `‹` is escaped as `‹‹`, and `›` is escaped as `››`. Based on the marked logs, you can decide whether to desensitize the marked information when the logs are displayed.
     ## The default value is `false`.
@@ -308,7 +308,7 @@ The parameters in `tiflash-learner.toml` are basically the same as those in TiKV
     snap-handle-pool-size = 2
 
 [security]
-    ## New in v5.0. This configuration item enables or disables log redaction. Value options: `true`, `false`, `"on"`, `"off"` and `"marker"`. The `"on"`, `"off"` and `"marker"` options are introduced in v8.3.0.
+    ## New in v5.0. This configuration item enables or disables log redaction. Value options: `true`, `false`, `"on"`, `"off"`, and `"marker"`. The `"on"`, `"off"`, and `"marker"` options are introduced in v8.3.0.
     ## If the configuration item is set to `false` or `"off"`, log redaction is disabled.
     ## If the configuration item is set to `true` or `"on"`, all user data in the log is replaced by `?`.
     ## If the configuration item is set to `"marker"`, all user data in the log is wrapped in `‹ ›`. If user data contains `‹` or `›`, `‹` is escaped as `‹‹`, and `›` is escaped as `››`. Based on the marked logs, you can decide whether to desensitize the marked information when the logs are displayed.
