@@ -103,11 +103,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.1/quick-start-with-
     - Fix the issue that `root` user cannot query `tidb_mdl_view` [#53292](https://github.com/pingcap/tidb/issues/53292) @[tangenta](https://github.com/tangenta) <!--tw:lilin90 以下 8 条-->
     - Fix the issue that the network partition during adding indexes using the Distributed eXecution Framework (DXF) might cause inconsistent data indexes [#54897](https://github.com/pingcap/tidb/issues/54897) @[tangenta](https://github.com/tangenta)
     - Fix the issue that error occurred during initialization of the local backend might cause resource leaks [#53659](https://github.com/pingcap/tidb/issues/53659) @[D3Hunter](https://github.com/D3Hunter)
-    - Fix the issue that column information cannot be obtained using `information_schema.columns` when a subquery is used as a column definition in a view definition [#54343](https://github.com/pingcap/tidb/issues/54343) @[lance6716](https://github.com/lance6716)
+    - Fix the issue that obtaining the column information using `information_schema.columns` returns warning 1356 when a subquery is used as a column definition in a view definition [#54343](https://github.com/pingcap/tidb/issues/54343) @[lance6716](https://github.com/lance6716)
     - Fix the issue that using index acceleration to add a unique index might cause a `Duplicate entry` error when the owner is switched [#49233](https://github.com/pingcap/tidb/issues/49233) @[lance6716](https://github.com/lance6716)
     - Fix the unclear error message when setting `global.tidb_cloud_storage_uri` [#54096](https://github.com/pingcap/tidb/issues/54096) @[lance6716](https://github.com/lance6716)
     - Fix the issue that `IndexRangeScan` on multi-value indexes does not support generating `Selection` [#55012](https://github.com/pingcap/tidb/issues/55012)@[time-and-fate](https://github.com/time-and-fate)
-    - Fix the issue that the Sync Load QPS monitoring metric is displayed incorrectly [#53558](https://github.com/pingcap/tidb/issues/53558)@[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that the Sync Load QPS monitoring metric is incorrect [#53558](https://github.com/pingcap/tidb/issues/53558)@[hawkingrei](https://github.com/hawkingrei)
     - Fix the issue that some statistics information might be missed when loading initial statistics concurrently [#53607](https://github.com/pingcap/tidb/issues/53607) @[hawkingrei](https://github.com/hawkingrei)
     - (dup): release-7.5.3.md > Bug fixes> TiDB - Fix the issue of reusing wrong point get plans for `SELECT ... FOR UPDATE` [#54652](https://github.com/pingcap/tidb/issues/54652) @[qw4990](https://github.com/qw4990)
 
