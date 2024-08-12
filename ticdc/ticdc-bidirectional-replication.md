@@ -94,10 +94,6 @@ To solve the problem of replicable DDLs and non-replicable DDLs, TiDB introduces
 
 When no BDR role is set, you can execute any DDL. But after you set `bdr_mode=true` on TiCDC, the executed DDL will not be replicated by TiCDC.
 
-> **Warning:**
->
-> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 ### Replication scenarios of replicable DDLs
 
 1. Choose a TiDB cluster and execute `ADMIN SET BDR ROLE PRIMARY` to set it as the primary cluster.
