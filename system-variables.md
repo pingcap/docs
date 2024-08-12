@@ -4492,7 +4492,7 @@ EXPLAIN FORMAT='brief' SELECT COUNT(1) FROM t WHERE a = 1 AND b IS NOT NULL;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `ON`. Before v8.3.0, the default value is `OFF`.
-- Specifies whether to allow the optimizer to push `Projection` down to the TiKV coprocessor. When enabled, the optimizer might push the following three types of `Projection` `Projection` operators down to TiKV:
+- Specifies whether to allow the optimizer to push the `Projection` operator down to the TiKV coprocessor. When enabled, the optimizer might push the following three types of `Projection` operators down to TiKV:
     - The top-level expressions of the operator are all [JSON query functions](/functions-and-operators/json-functions/json-functions-search.md) or [JSON value attribute functions](/functions-and-operators/json-functions/json-functions-return.md). For example: `SELECT JSON_EXTRACT(data, '$.name') FROM users;`.
     - The top-level expressions of the operator include a mix of JSON query functions or JSON value attribute functions, and direct column reads. For example: `SELECT JSON_DEPTH(data), name FROM users;`.
     - The top-level expressions of the operator are all direct column reads, and the number of output columns is less than the number of input columns. For example: `SELECT name FROM users;`.
