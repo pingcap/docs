@@ -1743,6 +1743,7 @@ SELECT * FROM information_schema.tidb_indexes WHERE table_name='t1';
 ```
 
 When partitioning a non-partitioned table or re-partitioning an already partitioned table it is possible to update the indexes to be [global index](#global-indexes) or default local indexes.
+
 ```sql
 ALTER TABLE t1 PARTITION BY HASH (col1) PARTITIONS 3 UPDATE INDEXES (uidx12 LOCAL, uidx3 GLOBAL);
 ```
