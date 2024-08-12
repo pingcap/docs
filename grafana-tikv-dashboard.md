@@ -480,7 +480,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Initial Scanning Trigger Reason: The reason for triggering incremental scanning
 - Region Checkpoint Key Putting: The number of checkpoint operations logged to the PD
 
-### Snapshot restore 
+### Import & Snapshot restore
 
 - Import CPU Utilization: CPU utilization aggregated by sst importer.
 - Import Thread Count: number of threads used by sst importer.
@@ -496,7 +496,6 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Import Ingest SST Duration: time spent on ingesting SST into RocksDB.
 - Import Ingest SST Bytes: number of bytes ingested.
 - Import Download SST Throughput: SST download throughput in bytes per second.
-- TTL Expired: number of expired items after TTL in backup files.
 - cloud request: number of request to cloud providers. 
 
 ### Point-in-Time Restore
