@@ -133,7 +133,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
     - Use a single SQL statement to create SQL execution plan bindings from multiple historical execution plans to improve the efficiency of creating bindings.
     - The SQL execution plan binding supports more optimizer hints, and optimizes the conversion method for complex execution plans, making the binding more stable in restoring the execution plan.
 
-    For more information, see [documentation](/sql-plan-management.md).
+  For more information, see [documentation](/sql-plan-management.md).
 
 ### Availability
 
