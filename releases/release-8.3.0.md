@@ -265,8 +265,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
     + Backup & Restore (BR)
     
         - Support checking whether a full backup exists before starting point-in-time recovery (PITR) for the first time. If the full backup is not found, BR terminates the restore and returns an error [#54418](https://github.com/pingcap/tidb/issues/54418) @[Leavrth](https://github.com/Leavrth) **tw@qiancai** <!--1915-->
-        - Support checking whether the disk space in TiKV is sufficient before restoring snapshot backups. If the space is insufficient, BR terminates the restore and returns an error [#54316](https://github.com/pingcap/tidb/issues/54316) @[RidRisR](https://github.com/RidRisR) **tw@qiancai** <!--1890-->
-        - Support checking whether the disk space in TiKV is sufficient before TiKV downloads SST files. If the space is insufficient, BR terminates the restore and returns an error [#17224](https://github.com/tikv/tikv/issues/17224) @[RidRisR](https://github.com/RidRisR) **tw@qiancai** <!--1890-->
+        - Support checking whether the disk space in TiKV and TiFlash is sufficient before restoring snapshot backups. If the space is insufficient, BR terminates the restore and returns an error [#54316](https://github.com/pingcap/tidb/issues/54316) @[RidRisR](https://github.com/RidRisR) **tw@qiancai** <!--1890-->
+        - Support checking whether the disk space in TiKV is sufficient before TiKV downloads each SST file. If the space is insufficient, BR terminates the restore and returns an error [#17224](https://github.com/tikv/tikv/issues/17224) @[RidRisR](https://github.com/RidRisR) **tw@qiancai** <!--1890-->
 
         + TiCDC
 
