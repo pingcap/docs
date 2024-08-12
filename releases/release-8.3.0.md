@@ -32,7 +32,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
     <td>Pushing the <code>Projection</code> operator down to the storage engine can distribute the load across storage nodes while reducing data transfer between nodes. This optimization helps to reduce the execution time for certain SQL queries and improves the overall database performance.</td>
   </tr>
   <tr>
-    <td>Ignoring unnecessary columns when collecting statistics</td>**tw@lilin90** <!--1753-->
+    <td><a href="https://docs.pingcap.com/tidb/v8.3/statistics#collect-statistics-on-some-columns">Ignoring unnecessary columns when collecting statistics</a></td>**tw@lilin90** <!--1753-->
     <td>Under the premise of ensuring that the optimizer can obtain the necessary information, TiDB speeds up statistics collection, improves the timeliness of statistics, and thus ensures that the optimal execution plan is selected, improving the performance of the cluster. Meanwhile, TiDB also reduces the system overhead and improves the resource utilization.</td>
   </tr>
   <tr>
