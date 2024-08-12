@@ -174,7 +174,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.1/quick-start-with-
     + TiCDC <!--tw:qiancai 2 条-->
 
         - Fix the issue that Region changes cause downstream panic [#17233](https://github.com/tikv/tikv/issues/17233) @[hicqu](https://github.com/hicqu)
-        - Fix the issue that TiCDC fails to decode primary keys in clustered index tables correctly when the new collation is disabled in the upstream  [#11371](https://github.com/pingcap/tiflow/issues/11371)@[lidezhu](https://github.com/lidezhu)
+        - Fix the issue that TiCDC fails to decode primary keys in clustered index tables correctly when the new collation is disabled in the upstream [#11371](https://github.com/pingcap/tiflow/issues/11371) @[lidezhu](https://github.com/lidezhu)
         - (dup): release-7.5.3.md > Bug fixes> Tools> TiCDC - Fix the issue that the checksum is not correctly set to `0` after splitting `UPDATE` events [#11402](https://github.com/pingcap/tiflow/issues/11402) @[3AceShowHand](https://github.com/3AceShowHand)
         - (dup): release-8.2.0.md > Bug fixes> Tools> TiCDC - Fix the issue that data inconsistency might occur when restarting Changefeed repeatedly when performing a large number of `UPDATE` operations in a multi-node environment [#11219](https://github.com/pingcap/tiflow/issues/11219) @[lidezhu](https://github.com/lidezhu)
         - (dup): release-7.5.3.md > Bug fixes> Tools> TiCDC - Fix the issue that the Processor module might get stuck when the downstream Kafka is inaccessible [#11340](https://github.com/pingcap/tiflow/issues/11340) @[asddongmen](https://github.com/asddongmen)
