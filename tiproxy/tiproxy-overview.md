@@ -91,7 +91,7 @@ This section describes how to deploy and change TiProxy using TiUP. For how to d
 
 3. Configure the TiProxy instances.
 
-    To ensure the high availability of TiProxy, it is recommended to deploy at least two TiProxy instances and configure the virtual IP by setting [`ha.virtual-ip`](/tiproxy/tiproxy-configuration.md#virtual-ip) and [`ha.interface`](/tiproxy/tiproxy-configuration.md#interface) to route the traffic to the available TiProxy instance.
+    To ensure the high availability of TiProxy, it is recommended to deploy at least two TiProxy instances and configure a virtual IP by setting [`ha.virtual-ip`](/tiproxy/tiproxy-configuration.md#virtual-ip) and [`ha.interface`](/tiproxy/tiproxy-configuration.md#interface) to route the traffic to the available TiProxy instance.
 
     When selecting the model and number of TiProxy instances, consider the following factors:
 
