@@ -13,7 +13,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.1/quick-start-with-
 
 ## Compatibility changes
 
-- (dup): release-6.5.10.md > Compatibility changes - Must set the line terminator when using TiDB Lightning `strict-format` to import CSV files [#37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
+- (dup): release-8.2.0.md > Compatibility changes - When using TiDB Lightning to import a CSV file, if you set `strict-format = true` to split a large CSV file into multiple small CSV files to improve concurrency and import performance, you need to explicitly specify `terminator`. The values can be `\r`, `\n` or `\r\n`. Failure to specify a line terminator might result in an exception when parsing the CSV file data. [#37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
+- (dup): release-8.2.0.md > Compatibility changes - When using [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) to import a CSV file, if you specify the `SPLIT_FILE` parameter to split a large CSV file into multiple small CSV files to improve concurrency and import performance, you need to explicitly specify the line terminator `LINES_TERMINATED_BY`. The values can be `\r`, `\n` or `\r\n`. Failure to specify a line terminator might result in an exception when parsing the CSV file data. [#37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
 
 ## Improvements
 
