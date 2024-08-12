@@ -116,6 +116,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
     For more information, see [documentation](/system-variables.md#tidb_enable_fast_create_table-new-in-v800).    
 
+* Partitioned tables support global indexes (experimental) [#45133](https://github.com/pingcap/tidb/issues/45133) @[mjonss](https://github.com/mjonss) **tw@hfxsd** <!--1531-->
+
+    In previous versions of partitioned tables, there are some limitations because global indexes are not supported. For example, the unique key must contain a partition key. If the query condition does not have a partition key, the query will scan all partitions, resulting in poor performance. Starting from v7.6.0, the system variable [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) is introduced to enable the global index feature. But this feature was under development at that time and it is not recommended to enable it.
+    
+    Starting with v8.3.0, the global index feature is released as an experimental feature. You can explicitly create a global index for a partitioned table with the keyword `Global` to remove the restriction that the unique key must contain all partition keys, to meet flexible business needs. Global indexes also improve the query performance of unique indexes without partition keys.
+
+    For more information, see [documentation](/partitioned-table.md#global-indexes).
+ 
 ### Reliability
 
 * Support streaming cursor result sets (experimental) [#54526](https://github.com/pingcap/tidb/issues/54526) @[YangKeao](https://github.com/YangKeao) **tw@lilin90** <!--1891-->
@@ -152,14 +160,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
     TiDB does not support `SELECT LOCK IN SHARE MODE` yet. Starting from v8.3.0, TiDB supports upgrading `SELECT LOCK IN SHARE MODE` to exclusive locks to enable support for `SELECT LOCK IN SHARE MODE`. You can control whether to enable this feature by the new variable [`tidb_enable_shared_lock_promotion`](/system-variables.md#tidb_enable_shared_lock_promotion-new-in-v830).
 
     For more information, see [documentation](/system-variables.md#tidb_enable_shared_lock_promotion-new-in-v830).
-
-* Partitioned tables support global indexes (experimental) [#45133](https://github.com/pingcap/tidb/issues/45133) @[mjonss](https://github.com/mjonss) **tw@hfxsd** <!--1531-->
-
-    In previous versions of partitioned tables, there are some limitations because global indexes are not supported. For example, the unique key must contain a partition key. If the query condition does not have a partition key, the query will scan all partitions, resulting in poor performance. Starting from v7.6.0, the system variable [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) is introduced to enable the global index feature. But this feature was under development at that time and it is not recommended to enable it.
-    
-    Starting with v8.3.0, the global index feature has been released as an experimental feature. When you create a unique key that does not contain all partition keys, TiDB implicitly creates a global index, removing the restriction that the unique key must contain all partition keys, to meet flexible business needs. Global indexes also improve the query performance of unique indexes without partitioned keys.
-
-    For more information, see [documentation](/partitioned-table.md#global-indexes).
 
 ### DB operations
 
