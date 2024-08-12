@@ -40,7 +40,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.1/quick-start-with-
         - (dup): release-8.2.0.md > Improvements> Tools> Backup & Restore (BR) - Support encryption of temporary files generated during log backup [#15083](https://github.com/tikv/tikv/issues/15083) @[YuJuncen](https://github.com/YuJuncen)
         - (dup): release-7.5.3.md > Improvements> Tools> Backup & Restore (BR) - Except for the `br log restore` subcommand, all other `br log` subcommands support skipping the loading of the TiDB `domain` data structure to reduce memory consumption [#52088](https://github.com/pingcap/tidb/issues/52088) @[Leavrth](https://github.com/Leavrth)
         - (dup): release-7.5.3.md > Improvements> Tools> Backup & Restore (BR) - Support setting Alibaba Cloud access credentials through environment variables [#45551](https://github.com/pingcap/tidb/issues/45551) @[RidRisR](https://github.com/RidRisR)
-        - Support checking whether the disk space in TiKV is sufficient before TiKV downloads SST files. If the space is insufficient, BR terminates the restore and returns an error [#17224](https://github.com/tikv/tikv/issues/17224) @[RidRisR](https://github.com/RidRisR)
+        - Support checking whether the disk space in TiKV is sufficient before TiKV downloads each SST file. If the space is insufficient, BR terminates the restore and returns an error [#17224](https://github.com/tikv/tikv/issues/17224) @[RidRisR](https://github.com/RidRisR)
 
     + TiCDC <!--tw:qiancai 1 条-->
 
