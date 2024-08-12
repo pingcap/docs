@@ -2406,8 +2406,8 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
-- Default value: `ON`
-- This variable controls whether TiDB supports disk spill for the parallel HashAgg algorithm. When it is `ON`, disk spill can be triggered for the parallel HashAgg algorithm. This variable will be deprecated after this feature is generally available in a future release.
+- Default value: `OFF`
+- This variable controls whether TiDB supports disk spill for the parallel HashAgg algorithm. When it is `ON`, disk spill can be triggered for the parallel HashAgg algorithm. The default value of this variable in v8.1.0 is `ON` and is changed to `OFF` from v8.1.1. This variable will be deprecated after this feature is generally available in a future release.
 
 ### tidb_enable_pipelined_window_function
 
