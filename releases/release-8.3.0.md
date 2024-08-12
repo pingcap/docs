@@ -23,7 +23,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 </thead>
 <tbody>
   <tr>
-    <td rowspan="4">Scalability and Performance</td>
+    <td rowspan="3">Scalability and Performance</td>
     <td> <a href="https://docs.pingcap.com/tidb/v8.3/partitioned-table#global-indexes">Global indexes for partitioned tables (experimental)</a></td> **tw@hfxsd** <!--1531-->
     <td>Global indexes can effectively improve the efficiency of retrieving non-partitioned keys, and remove the restriction that partitioned keys must contain a unique key. This feature extends the usage scenarios of TiDB partitioned tables and avoids some of the application modification work that might be required for data migration.</td>
   </tr>
