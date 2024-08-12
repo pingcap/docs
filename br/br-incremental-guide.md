@@ -17,6 +17,8 @@ Because restoring the incremental backup relies on the snapshot of the database 
 
 The incremental backup does not support batch renaming of tables. If batch renaming of tables occurs during the incremental backup process, the data restore might fail. It is recommended to perform a full backup after batch renaming tables, and use the latest full backup to replace the incremental data during restore.
 
+In v8.3.0, a new configuration parameter `--allow-pitr-from-incremental` is added to control whether incremental backups and subsequent log backups are compatible. The default value is `true`, which means that incremental backups are compatible with subsequent log backups. In the case of compatibility, the DDL to be played back is scrutinized before the incremental restore begins. This mode does not yet support `ADD INDEX`, `MODIFY COLUMN`, or `REORG PARTITION`. To use incremental backups with log backups, you need to make sure that the incremental backups do not have any of the above mentioned DDLs in them. If you want to use incremental restores without log backups for the whole recovery process, you can set `--allow- pitr-from-incremental` to `false` to skip the checks in the incremental recovery phase.
+
 ## Back up incremental data
 
 To back up incremental data, run the `tiup br backup` command with **the last backup timestamp** `--lastbackupts` specified. In this way, br command-line tool automatically backs up incremental data generated between `lastbackupts` and the current time. To get `--lastbackupts`, run the `validate` command. The following is an example:
