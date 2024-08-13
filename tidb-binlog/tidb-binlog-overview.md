@@ -10,7 +10,7 @@ TiDB Binlog is a tool used to collect binlog data from TiDB and provide near rea
 
 > **Warning:**
 >
-> - Starting from TiDB v8.3.0, [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) is deprecated, and is planned to be removed in a future release. Use [TiCDC](/ticdc/ticdc-overview.md) instead for incremental data replication as an alternative. Use [Point-in-Time Recovery (PITR)](/br/br-pitr-guide.md) for the PITR scenario needs.
+> - Starting from TiDB v8.3.0, TiDB Binlog is deprecated, and is planned to be removed in a future release. Use [TiCDC](/ticdc/ticdc-overview.md) instead for incremental data replication as an alternative. Use [Point-in-Time Recovery (PITR)](/br/br-pitr-guide.md) for the PITR scenario needs.
 > - TiDB Binlog is not compatible with some features introduced in TiDB v5.0 and they cannot be used together. For details, see [Notes](#notes).
 
 TiDB Binlog has the following features:
@@ -64,7 +64,7 @@ The TiDB Binlog cluster is composed of Pump and Drainer.
     - TiDB system variable [tidb_enable_async_commit](/system-variables.md#tidb_enable_async_commit-new-in-v50): After TiDB Binlog is enabled, performance cannot be improved by enabling this option. It is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead of TiDB Binlog.
     - TiDB system variable [tidb_enable_1pc](/system-variables.md#tidb_enable_1pc-new-in-v50): After TiDB Binlog is enabled, performance cannot be improved by enabling this option. It is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead of TiDB Binlog.
 
-* Drainer supports replicating binlogs to MySQL, TiDB, Kafka or local files. If you need to replicate binlogs to other Drainer unsuppored destinations, you can set Drainer to replicate the binlog to Kafka and read the data in Kafka for customized processing according to binlog consumer protocol. See [Binlog Consumer Client User Guide](/tidb-binlog/binlog-consumer-client.md).
+* Drainer supports replicating binlogs to MySQL, TiDB, Kafka or local files. If you need to replicate binlogs to other Drainer unsupported destinations, you can set Drainer to replicate the binlog to Kafka and read the data in Kafka for customized processing according to binlog consumer protocol. See [Binlog Consumer Client User Guide](/tidb-binlog/binlog-consumer-client.md).
 
 * To use TiDB Binlog for recovering incremental data, set the config `db-type` to `file` (local files in the proto buffer format). Drainer converts the binlog to data in the specified [proto buffer format](https://github.com/pingcap/tidb-binlog/blob/master/proto/pb_binlog.proto) and writes the data to local files. In this way, you can use [Reparo](/tidb-binlog/tidb-binlog-reparo.md) to recover data incrementally.
 
