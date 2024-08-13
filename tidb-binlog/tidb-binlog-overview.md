@@ -6,20 +6,17 @@ aliases: ['/docs/dev/tidb-binlog/tidb-binlog-overview/','/docs/dev/reference/tid
 
 # TiDB Binlog Cluster Overview
 
-This document introduces the architecture and the deployment of the cluster version of TiDB Binlog.
+TiDB Binlog is a tool used to collect binlog data from TiDB and provide near real-time backup and replication to downstream platforms. This document introduces the architecture and the deployment of the cluster version of TiDB Binlog.
 
-TiDB Binlog is a tool used to collect binlog data from TiDB and provide near real-time backup and replication to downstream platforms.
+> **Warning:**
+>
+> - Starting from TiDB v8.3.0, [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) is deprecated, and is planned to be removed in a future release. Use [TiCDC](/ticdc/ticdc-overview.md) instead for incremental data replication as an alternative. Use [Point-in-Time Recovery (PITR)](/br/br-pitr-guide.md) for the PITR scenario needs.
+> - TiDB Binlog is not compatible with some features introduced in TiDB v5.0 and they cannot be used together. For details, see [Notes](#notes).
 
 TiDB Binlog has the following features:
 
 * **Data replication:** replicate the data in the TiDB cluster to other databases
 * **Real-time backup and restoration:** back up the data in the TiDB cluster and restore the TiDB cluster when the cluster fails
-
-> **Note:**
->
-> - TiDB Binlog is not compatible with some features introduced in TiDB v5.0 and they cannot be used together. For details, see [Notes](#notes).
-> - Starting from TiDB v7.5.0, technical support for the data replication feature of TiDB Binlog is no longer provided. It is strongly recommended to use [TiCDC](/ticdc/ticdc-overview.md) as an alternative solution for data replication.
-> - Although TiDB v7.5.0 still supports the real-time backup and restoration feature of TiDB Binlog, this component will be completely deprecated in future versions. It is recommended to use [PITR](/br/br-pitr-guide.md) as an alternative solution for data recovery.
 
 ## TiDB Binlog architecture
 
