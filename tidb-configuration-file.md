@@ -728,12 +728,13 @@ Configuration items related to opentracing.reporter.
 
 ### `batch-policy` <span class="version-mark">New in v8.3.0</span>
 
-- Controls the batching strategy for requests from TiDB to TiKV.
+- Controls the batching strategy for requests from TiDB to TiKV. When sending requests to TiKV, TiDB always encapsulates the requests in the current waiting queue into a `BatchCommandsRequest` and sends it to TiKV as a package. This is the basic batching strategy. When the load throughput is high, TiDB decides whether to wait for an extra period after the basic batching based on the `batch-policy` configuration item. This additional batching allows more requests to be encapsulated in a single `BatchCommandsRequest`.
 - Default value: `"standard"`
 - Value options:
     - `"basic"`: the behavior is consistent with versions before v8.3.0, where TiDB performs additional batching only if [`tikv-client.max-batch-wait-time`](#max-batch-wait-time) is greater than 0 and the load of TiKV exceeds the value of [`tikv-client.overload-threshold`](#overload-threshold).
     - `"standard"`: TiDB dynamically batches requests based the arrival time intervals of recent requests, suitable for high-throughput scenarios.
     - `"positive"`: TiDB always performs additional batching, suitable for high-throughput testing scenarios to achieve optimal performance. However, in low-load scenarios, this strategy might introduce unnecessary batching wait time, potentially reducing performance.
+    - `"custom{...}"`: you can customize the batching strategy parameters. It is not recommended to set this value option.
 
 ### `max-batch-size`
 
