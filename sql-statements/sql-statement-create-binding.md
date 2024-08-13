@@ -38,7 +38,7 @@ StringLiteralOrUserVariable ::=
 
 You can create a binding according to a SQL statement or a historical execution plan.
 
-When you want to create a binding according to a historical execution plan, you need to specify the corresponding Plan Digest. You can use string literals or user variables of string type to specify Plan Digests. You can specify multiple Plan Digests to create bindings for multiple statements at the same time. In this cases, you can specify multiple string values, and each string value can also contain multiple digests, and they should be separated by comma.  
+When you create a binding according to a historical execution plan, you need to specify the corresponding Plan Digest using either string literals or user variables of the string type. You can specify multiple Plan Digests to create bindings for multiple statements at the same time. In this case, you can specify multiple strings, and include multiple digests in each string. Note that the strings or digests need to be separated by commas.
 
 The following example shows how to create a binding according to a SQL statement.
 

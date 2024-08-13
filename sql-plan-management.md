@@ -231,7 +231,7 @@ The original SQL statement and the bound statement must have the same text after
 
 #### Create a binding according to a historical execution plan
 
-To make the execution plan of a SQL statement fixed to a historical execution plan, you can use Plan Digest to bind that historical execution plan to the SQL statement, which is more convenient than binding it according to a SQL statement. Besides, you can create bindings for multiple SQL statements at once. For more detailed introductions and more examples, refer to [CREATE [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-create-binding.md).
+To make the execution plan of a SQL statement fixed to a historical execution plan, you can use Plan Digest to bind that historical execution plan to the SQL statement, which is more convenient than binding it according to a SQL statement. In addition, you can bind the execution plan for multiple SQL statements at once. For more details and examples, see [`CREATE [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md).
 
 When using this feature, note the following:
 
@@ -245,7 +245,7 @@ The SQL statement of this binding method is as follows:
 CREATE [GLOBAL | SESSION] BINDING FROM HISTORY USING PLAN DIGEST StringLiteralOrUserVariableList;
 ```
 
-This statement binds an execution plan to a SQL statement using Plan Digest. The default scope is SESSION. The applicable SQL statements, priorities, scopes, and effective conditions of the created bindings are the same as that of [bindings created according to SQL statements](#create-a-binding-according-to-a-sql-statement).
+The preceding statement binds an execution plan to a SQL statement using Plan Digest. The default scope is SESSION. The applicable SQL statements, priorities, scopes, and effective conditions of the created bindings are the same as that of [bindings created according to SQL statements](#create-a-binding-according-to-a-sql-statement).
 
 To use this binding method, you need to first get the Plan Digest corresponding to the target historical execution plan in `statements_summary`, and then create a binding using the Plan Digest. The detailed steps are as follows:
 
@@ -345,7 +345,7 @@ In the example above, the dropped binding in the SESSION scope shields the corre
 
 #### Remove a binding according to SQL Digest
 
-In addition to removing a binding according to a SQL statement, you can also remove a binding according to SQL Digest. For more detailed introductions and more examples, refer to [DROP [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-drop-binding.md).
+In addition to removing a binding according to a SQL statement, you can also remove a binding according to SQL Digest. For more details and examples, see [`DROP [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-drop-binding.md).
 
 ```sql
 DROP [GLOBAL | SESSION] BINDING FOR SQL DIGEST StringLiteralOrUserVariableList;
