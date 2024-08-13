@@ -125,7 +125,7 @@ High availability configurations for TiProxy.
 
 #### `virtual-ip`
 
-+ Default value: ``
++ Default value: `""`
 + Support hot-reload: no
 + Specifies the virtual IP address in the CIDR format, such as `10.0.1.10/24`. In a cluster with multiple TiProxy instances, only one instance binds to the virtual IP. If this instance goes offline, another TiProxy instance will automatically bind to the IP, ensuring clients can always connect to an available TiProxy through the virtual IP.
 
@@ -137,7 +137,7 @@ High availability configurations for TiProxy.
 
 #### `interface`
 
-+ Default value: ``
++ Default value: `""`
 + Support hot-reload: no
 + Specifies the network interface to bind the virtual IP to, such as `eth0`. The virtual IP will be bound to a TiProxy instance only when both [`ha.virtual-ip`](#virtual-ip) and `ha.interface` are set.
 
