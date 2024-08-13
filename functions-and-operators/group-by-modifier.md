@@ -50,7 +50,7 @@ Before v8.3.0, TiDB only supports generating valid execution plans for the `WITH
 
 Starting from v8.3.0, the preceding limitation is removed. Regardless of whether the TiDB cluster contains TiFlash nodes, TiDB supports generating valid execution plans for the `WITH ROLLUP` syntax.
 
-You can determine the storage engine that executes the `Expand` operator by checking the `task` attribute of the `Expand` operator in the execution plan. For more information, see [How to interpret the ROLLUP execution plan](#how-to-interpret-the-rollup-execution-plan).
+You can determine the execution engine that executes the `Expand` operator by checking the `task` attribute of the `Expand` operator in the execution plan. For more information, see [How to interpret the ROLLUP execution plan](#how-to-interpret-the-rollup-execution-plan).
 
 ## Examples
 
@@ -170,7 +170,7 @@ SELECT year, month, SUM(profit) AS profit, grouping(year) as grp_year, grouping(
 
 ## How to interpret the ROLLUP execution plan
 
-To meet the requirements of multidimensional grouping, multidimensional data aggregation uses the `Expand` operator to replicate data. Each replica corresponds to a group at a specific dimension. With the data shuffling capability of MPP, the `Expand` operator can rapidly reorganize and calculate a large volume of data between multiple TiFlash nodes, fully utilizing the computational power of each node.
+Multidimensional data aggregation uses the `Expand` operator to copy data to meet the needs of multidimensional grouping. Each copied data copy corresponds to a grouping of a specific dimension. Especially in MPP mode, the `Expand` operator can facilitate data shuffle to quickly reorganize and calculate a large amount of data between multiple nodes, making full use of the computing power of each node; while in TiDB mode, `Expand` Because the operator is only executed on a single TiDB node, data redundancy will expand according to the number of `Grouping Sets`.
 
 The implementation of the `Expand` operator is similar to that of the `Projection` operator. The difference is that `Expand` is a multi-level `Projection`, which contains multiple levels of projection operation expressions. For each row of the raw data, the `Projection` operator generates only one row in results, whereas the `Expand` operator generates multiple rows in results (the number of rows is equal to the number of levels in projection operation expressions).
 
