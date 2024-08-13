@@ -355,7 +355,7 @@ You can specify the partition to be split.
 
 ## pre_split_regions
 
-For tables with the `AUTO_RANDOM` or `SHARD_ROW_ID_BITS` attribute, it is recommended that you use `PRE_SPLIT_REGIONS` to evenly split the table into Regions during table creation. When a table is created successfully, `PRE_SPLIT_REGIONS` pre-spilts tables into the number of Regions as specified by `2^(PRE_SPLIT_REGIONS)`.
+When creating a table with the `AUTO_RANDOM` or `SHARD_ROW_ID_BITS` attribute, you can also specify the `PRE_SPLIT_REGIONS` option if you want to evenly pre-split the table into Regions immediately after the table is created. The number of pre-split Regions for a table is `2^(PRE_SPLIT_REGIONS)`.
 
 > **Note:**
 >
