@@ -94,7 +94,7 @@ To solve the problem of replicable DDLs and non-replicable DDLs, TiDB introduces
 
 When not setting the BDR role, you can execute any DDL. However, the changefeed in BDR mode will not replicate any DDL on that cluster.
 
-In general, in BDR mode, TiCDC will only replicate replicable DDL on the Primary cluster to the downstream.
+In general, in BDR mode, TiCDC will only replicate replicable DDL on the PRIMARY cluster to the downstream.
 
 ### Replication scenarios of replicable DDLs
 
