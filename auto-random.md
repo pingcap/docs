@@ -124,7 +124,7 @@ The structure of an `AUTO_RANDOM` value without a signed bit is as follows:
 - The content of the shard bits is obtained by calculating the hash value of the starting time of the current transaction. To use a different length of shard bits (such as 10), you can specify `AUTO_RANDOM(10)` when creating the table.
 - The value of the auto-increment bits is stored in the storage engine and allocated sequentially. Each time a new value is allocated, the value is incremented by 1. The auto-increment bits ensure that the values of `AUTO_RANDOM` are unique globally. When the auto-increment bits are exhausted, an error `Failed to read auto-increment value from storage engine` is reported when the value is allocated again.
 - Value range: the maximum number of bits for the final generated value = shard bits + auto-increment bits. The range of a signed column is `[-(2^(R-1))+1, (2^(R-1))-1]`, and the range of an unsigned column is `[0, (2^R)-1]`.
-- You can use `AUTO_RANDOM` with `PRE_SPLIT_REGIONS`. When a table is created successfully, `PRE_SPLIT_REGIONS` pre-spilts tables into the number of Regions as specified by `2^(PRE_SPLIT_REGIONS)`.
+- You can use `AUTO_RANDOM` with `PRE_SPLIT_REGIONS`. When a table is created successfully, `PRE_SPLIT_REGIONS` pre-splits data in the table into the number of Regions as specified by `2^(PRE_SPLIT_REGIONS)`.
 
 > **Note:**
 >
