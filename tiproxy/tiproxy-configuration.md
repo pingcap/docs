@@ -79,10 +79,10 @@ Configuration for SQL port.
 
 #### `proxy-protocol`
 
-+ Default value: ``
++ Default value: `""`
 + Support hot-reload: yes, but only for new connections
-+ Possible values: ``, `v2`
-+ Enable the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) on the port. By enabling the PROXY protocol, TiProxy can pass the real client IP address to TiDB. `v2` indicates using the PROXY protocol version 2, and `` indicates disabling the PROXY protocol. If the PROXY protocol is enabled on TiProxy, you need to also enable the [PROXY protocol](/tidb-configuration-file.md#proxy-protocol) on the TiDB server.
++ Possible values: `""`, `"v2"`
++ Enable the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) on the port. By enabling the PROXY protocol, TiProxy can pass the real client IP address to TiDB. `"v2"` indicates using the PROXY protocol version 2, and `""` indicates disabling the PROXY protocol. If the PROXY protocol is enabled on TiProxy, you need to also enable the [PROXY protocol](/tidb-configuration-file.md#proxy-protocol) on the TiDB server.
 
 ### api
 
@@ -96,10 +96,10 @@ Configurations for HTTP gateway.
 
 #### `proxy-protocol`
 
-+ Default value: ``
++ Default value: `""`
 + Support hot-reload: no
-+ Possible values: ``, `v2`
-+ Enable the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) on the port. `v2` indicates using the PROXY protocol version 2, and `` indicates disabling the PROXY protocol.
++ Possible values: `""`, `"v2"`
++ Enable the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) on the port. `"v2"` indicates using the PROXY protocol version 2, and `""` indicates disabling the PROXY protocol.
 
 ### log
 
@@ -123,7 +123,7 @@ Configurations for HTTP gateway.
 
 #### `filename`
 
-+ Default value: ``
++ Default value: `""`
 + Support hot-reload: yes
 + Log file path. Non empty value will enable logging to file. When TiProxy is deployed with TiUP, the filename is set automatically.
 
