@@ -255,7 +255,7 @@ In the preceding code, the request body is a JSON object with the following prop
 
 - `cluster_id`: _string_. A unique identifier of the TiDB cluster.
 - `database`: _string_. The name of the database.
-- `data_summary_id`: _integer_. The ID of the data summary you want to use for generate SQL. If you do not provide this parameter, the API will use the default data summary. Only works if `cluster_id` and `database` not provided.
+- `data_summary_id`: _integer_. The ID of the data summary used to generate SQL. This property only takes effect if `cluster_id` and `database` are not provided. If you do not specify `cluster_id`, `database`, and this property, the API uses the default data summary.
 - `question`: _string_. A question in natural language describing the query you want.
 - `sql_generate_mode`: _string_. The mode to generate SQL statements. The value can be `direct` or `auto_breakdown`. If you set it to `direct`, the API will generate SQL statements directly based on the `question` you provided. If you set it to `auto_breakdown`, the API will break down the `question` into multiple tasks and generate SQL statements for each task.
 
