@@ -56,7 +56,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
     For more information, see [documentation](/system-variables.md#tidb_opt_projection_push_down-new-in-v610).
 
-* Optimize batch processing strategy for KV requests [#55206](https://github.com/pingcap/tidb/issues/55206) @[zyguan](https://github.com/zyguan) **tw@Oreoxmt** <!--1897-->
+* Optimize batch processing strategy for KV (key-value) requests [#55206](https://github.com/pingcap/tidb/issues/55206) @[zyguan](https://github.com/zyguan) **tw@Oreoxmt** <!--1897-->
 
     TiDB fetches data by sending KV requests. Batching and processing KV requests in bulk can significantly improve execution performance. Before v8.3.0, the batch processing strategy in TiDB is less efficient. Starting from v8.3.0, TiDB introduces a more efficient batch strategy on top of the existing one. You can configure different batch processing strategies using the [`tikv-client.batch-policy`](/tidb-configuration-file.md#batch-policy-new-in-v830) configuration item to accommodate various workloads.
 
