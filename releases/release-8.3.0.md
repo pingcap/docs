@@ -236,10 +236,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 | TiKV  | [`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size)  | Modified | Change the default value from `96` MiB to `256` MiB. This change helps reduce management pressure caused by an excessive number of Regions as the cluster size grows. |
 | TiKV  | [`coprocessor.region-max-size`](/tikv-configuration-file.md#region-max-size)  | Modified | Change the default value from `144` MiB to `384` MiB to accommodate the increase in `coprocessor.region-split-size` to `256` MiB. |
 | TiKV  | [`backup.sst-max-size`](/tikv-configuration-file.md#sst-max-size)  | Modified | Change the default value from `144` MiB to `384` MiB to accommodate the increase in `coprocessor.region-max-size` to `384` MiB. |
-
 | TiFlash   | [`security.redact-info-log`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) | Modified |  Support setting the value of the TiFlash Learner configuration item `security.redact-info-log' to `marker` to mark sensitive information in the log with single-angle quotation marks `‹›` instead of shielding it directly. With the `marker` option, you can customize the redaction rules  |
-|  BR  |  [`--allow-pitr-from-incremental`](/br/br-incremental-guide.md#limitations)
-) | Newly added  |   Controls whether incremental backups are compatible with subsequent log backups. The default value is `true`, which means that incremental backups are compatible with subsequent log backups. In the case of compatibility, the DDL to be played back is scrutinized before the incremental restore starts. |
+|  BR  |  [`--allow-pitr-from-incremental`](/br/br-incremental-guide.md#limitations) | Newly added  |   Controls whether incremental backups are compatible with subsequent log backups. The default value is `true`, which means that incremental backups are compatible with subsequent log backups. In the case of compatibility, the DDL to be played back is scrutinized before the incremental restore starts. |
 
 ### System tables
 
