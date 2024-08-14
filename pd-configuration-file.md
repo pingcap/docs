@@ -279,6 +279,11 @@ Configuration items related to scheduling
 + Controls the time interval between the `split` and `merge` operations on the same Region. That means a newly split Region will not be merged for a while.
 + Default value: `1h`
 
+### `switch-witness-interval` <span class="version-mark">New in v7.0.0</span>
+
++ Controls the time interval in switching between [Witness](/glossary.md#witness) and non-Witness operations on the same Region. That means a Region newly switched to non-Witness cannot be switched to Witness for a while.
++ Default value: `1h`
+
 ### `max-snapshot-count`
 
 + Controls the maximum number of snapshots that a single store receives or sends at the same time. PD schedulers depend on this configuration to prevent the resources used for normal traffic from being preempted.
@@ -333,6 +338,21 @@ Configuration items related to scheduling
 
 + The number of the `Region Merge` scheduling tasks performed at the same time. Set this parameter to `0` to disable `Region Merge`.
 + Default value: `8`
+
+### `witness-schedule-limit` <span class="version-mark">New in v7.0.0</span>
+
++ Controls the concurrency of Witness scheduling tasks.
++ Default value: `4`
++ Minimum value: `1`
++ Maximum value: `9`
+
+### `enable-witness` <span class="version-mark">New in v7.0.0</span>
+
++ Controls whether to enable the Witness replica feature.
++ Witness replicas are applicable to the following scenarios:
+    - Save costs in a highly reliable storage environment. For more details, see [Use Witness replicas to save costs](/use-witness-to-save-costs.md).
+    - Quickly recover from any failure to improve system availability. For more details, see [Use Witness replicas to speed up failover](/use-witness-to-speed-up-failover.md).
++ Default value: `false`
 
 ### `high-space-ratio`
 
