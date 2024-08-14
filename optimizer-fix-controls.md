@@ -71,6 +71,13 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 - This variable sets the threshold for the optimizer's heuristic strategy to select access paths. If the estimated rows for an access path (such as `Index_A`) is much smaller than that of other access paths (default `1000` times), the optimizer skips the cost comparison and directly selects `Index_A`.
 - `0` means to disable this heuristic strategy.
 
+### [`47400`](https://github.com/pingcap/tidb/issues/47400) <span class="version-mark">New in v8.3.0</span>
+
+- Default value: `OFF`
+- Possible values: `ON`, `OFF`
+- This variable sets the minimum row estimate that the optimizer will allow. Due to challenges that all optimizers face in accuracy in estimating the number of qualified rows for each plan step in a query plan, it is common that an optimizer will set a lower limit. The default implemented in TiDB is consistent with other databases, and this variable allows a customer to enable the prior behavior.
+
+
 ### [`52869`](https://github.com/pingcap/tidb/issues/52869) <span class="version-mark">New in v8.1.0</span>
 
 - Default value: `OFF`
