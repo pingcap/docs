@@ -42,15 +42,15 @@ Before v8.3.0, TiDB only supports generating valid execution plans for the `WITH
 
 </CustomContent>
 
-<CustomContent platform="tidb">
+<CustomContent platform="tidb-cloud">
 
-Before v8.3.0, TiDB only supports generating valid execution plans for the `WITH ROLLUP` syntax in [TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md). Therefore, your TiDB cluster needs to contain TiFlash nodes, and the target table must be configured with the correct TiFlash replica. For more information, see [Scale out a TiFlash cluster](https://docs.pingcap.com/tidb/stable/scale-tidb-using-tiup#scale-out-a-tiflash-cluster).
+Before v8.3.0, TiDB only supports generating valid execution plans for the `WITH ROLLUP` syntax in [TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md). Therefore, your TiDB cluster needs to contain TiFlash nodes, and the target table must be configured with the correct TiFlash replica. For more information, see [Change node number](/tidb-cloud/scale-tidb-cluster.md#change-node-number).
 
 </CustomContent>
 
-Starting from v8.3.0, the preceding limitation is removed. Regardless of whether the TiDB cluster contains TiFlash nodes, TiDB supports generating valid execution plans for the `WITH ROLLUP` syntax.
+Starting from v8.3.0, the preceding limitation is removed. Regardless of whether your TiDB cluster contains TiFlash nodes, TiDB supports generating valid execution plans for the `WITH ROLLUP` syntax.
 
-You can determine the execution engine that executes the `Expand` operator by checking the `task` attribute of the `Expand` operator in the execution plan. For more information, see [How to interpret the ROLLUP execution plan](#how-to-interpret-the-rollup-execution-plan).
+To identify whether TiDB or TiFlash executes the `Expand` operator, you can check the `task` attribute of the `Expand` operator in the execution plan. For more information, see [How to interpret the ROLLUP execution plan](#how-to-interpret-the-rollup-execution-plan).
 
 ## Examples
 
@@ -170,11 +170,11 @@ SELECT year, month, SUM(profit) AS profit, grouping(year) as grp_year, grouping(
 
 ## How to interpret the ROLLUP execution plan
 
-Multidimensional data aggregation uses the `Expand` operator to copy data to meet the needs of multidimensional grouping. Each copied data copy corresponds to a grouping of a specific dimension. In MPP mode, the `Expand` operator can facilitate data shuffle to quickly reorganize and calculate a large amount of data between multiple nodes, making full use of the computing power of each node; In a TiDB cluster that does not contain TiFlash nodes, because the `Expand` operator is only executed on a single TiDB node, data redundancy will increase as the number of dimension groupings (`grouping set`) increases.
+Multidimensional data aggregation uses the `Expand` operator to copy data to meet the needs of multidimensional grouping. Each data copy corresponds to a grouping of a specific dimension. In MPP mode, the `Expand` operator can facilitate data shuffle to quickly reorganize and calculate a large amount of data between multiple nodes, making full use of the computing capacity of each node; In a TiDB cluster without TiFlash nodes, because the `Expand` operator is only executed on a single TiDB node, data redundancy will increase as the number of dimension groupings (`grouping set`) increases.
 
 The implementation of the `Expand` operator is similar to that of the `Projection` operator. The difference is that `Expand` is a multi-level `Projection`, which contains multiple levels of projection operation expressions. For each row of the raw data, the `Projection` operator generates only one row in results, whereas the `Expand` operator generates multiple rows in results (the number of rows is equal to the number of levels in projection operation expressions).
 
-The following example shows the execution plan for a TiDB cluster that does not contain TiFlash nodes, where the `task` of the `Expand` operator is `root`, indicating that the `Expand` operator is executed in TiDB:
+The following example shows the execution plan for a TiDB cluster without TiFlash nodes, where the `task` of the `Expand` operator is `root`, indicating that the `Expand` operator is executed in TiDB:
 
 ```sql
 EXPLAIN SELECT year, month, grouping(year), grouping(month), SUM(profit) AS profit FROM bank GROUP BY year, month WITH ROLLUP;
