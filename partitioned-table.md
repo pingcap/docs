@@ -1749,6 +1749,7 @@ When partitioning a non-partitioned table or re-partitioning an already partitio
 ```sql
 ALTER TABLE t1 PARTITION BY HASH (col1) PARTITIONS 3 UPDATE INDEXES (uidx12 LOCAL, uidx3 GLOBAL);
 ```
+
 ##### Limitations of global indexes
 
 - If the `GLOBAL` keyword is not explicitly specified, a local index will be created by default.
