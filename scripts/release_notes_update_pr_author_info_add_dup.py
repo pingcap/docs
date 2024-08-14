@@ -146,7 +146,7 @@ def update_pr_author_and_release_notes(excel_path):
                 formated_release_note_cell = sheet.cell(row=row_index, column=pr_formated_rn_index+1, value = updated_formated_rn) # Fill in the formated_release_note_cell
                 current_pr_author = actual_pr_author
             else:
-                print (f"Failed to get the original PR author for this cherry-pick PR: {row[pr_link_index]}")
+                print (f"\nRow {str(row_index)}: Failed to get the original PR author for this cherry-pick PR: {row[pr_link_index]}")
         else:
             pass
 
@@ -236,12 +236,12 @@ def create_release_file(version, dup_notes_levels, dup_notes):
         file.seek(0)
         file.write(content)
         file.truncate()
-        print(f'The v{version} release note is now created in the following directory: \n {release_file}')
+        print(f'\nThe v{version} release note is now created in the following directory: \n {release_file}')
 
 if __name__ == '__main__':
     note_pairs = store_exst_rn(ext_path, version)
     dup_notes, dup_notes_levels = update_pr_author_and_release_notes(release_note_excel)
-    print ("The bot author info in the excel is now replaced with the actual authors.")
+    print ("\nThe bot author info in the excel is now replaced with the actual authors.")
     version_parts = version.split('.')
     if len(version_parts) >= 2:
         create_release_file(version, dup_notes_levels, dup_notes)
