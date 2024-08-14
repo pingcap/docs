@@ -1664,11 +1664,9 @@ ERROR 1503 (HY000): A UNIQUE INDEX must include all columns in the table's parti
 
 #### Global indexes
 
-Before the introduction of global indexes, TiDB created a local index for each partition. Therefore, primary keys and unique keys had to include the partition key to ensure uniqueness of the data. Additionally, when querying data that spans multiple partitions, the system needed to scan the data of each partition to return results.
+Before the introduction of global indexes, TiDB created a local index for each partition. Therefore, there was [a limitation](#partitioning-keys-primary-keys-and-unique-keys) that primary keys and unique keys had to include the partition key to ensure uniqueness of the data. Additionally, when querying data that spans multiple partitions, the system needed to scan the data of each partition to return results.
 
 To address these issues, TiDB introduces the global indexes feature in v8.3.0. Global indexes cover the data of the entire table with a single index, allowing primary keys and unique keys to maintain global uniqueness without including the partition key. At the same time, global indexes can access data spanning multiple partitions in a single operation, significantly improving query performance for non-partitioned keys.
-
-Previously an index on partitioned tables are created for each partition, which is the reason for [the limitation](#partitioning-keys-primary-keys-and-unique-keys) that every unique key on the table must use every column in the table's partitioning expression. The uniqueness can only be enforced within each partition. A global index will be created on table level, so it can enforce uniqueness regardless of partitioning. 
 
 If you need to create unique indexes that **do not include all the columns used in the partition expressions**, you can achieve this by enabling the [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) system variable. After enabling this variable, any unique index that does not meet the preceding constraint will need the `GLOBAL` attribute to be created as a global index.
 
