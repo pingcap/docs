@@ -1,13 +1,46 @@
 ---
 title: TiDB Best Practices on Public Cloud
-summary: Learn about the best practices for deploying TiDB on public cloud.
+summary: パブリック クラウドに TiDB を導入するためのベスト プラクティスについて説明します。
 ---
 
 # パブリッククラウドにおける TiDB のベストプラクティス {#tidb-best-practices-on-public-cloud}
 
 パブリック クラウド インフラストラクチャは、TiDB の導入と管理の選択肢としてますます人気が高まっています。ただし、パブリック クラウドに TiDB を導入するには、パフォーマンス チューニング、コストの最適化、信頼性、スケーラビリティなど、いくつかの重要な要素を慎重に考慮する必要があります。
 
-このドキュメントでは、 Raft Engine専用ディスクの使用、KV RocksDB での圧縮 I/O フローの削減、AZ 間トラフィックのコストの最適化、Google Cloud ライブ マイグレーション イベントの緩和、大規模クラスタでの PDサーバーの微調整など、パブリック クラウドに TiDB をデプロイするためのさまざまな重要なベスト プラクティスについて説明します。これらのベスト プラクティスに従うことで、パブリック クラウドでの TiDB デプロイのパフォーマンス、コスト効率、信頼性、スケーラビリティを最大限に高めることができます。
+このドキュメントでは、KV RocksDB での圧縮 I/O フローの削減、 Raft Engine専用のディスクの使用、AZ 間トラフィックのコストの最適化、Google Cloud ライブ マイグレーション イベントの緩和、大規模クラスタでの PDサーバーの微調整など、パブリック クラウドに TiDB をデプロイするためのさまざまな重要なベスト プラクティスについて説明します。これらのベスト プラクティスに従うことで、パブリック クラウドでの TiDB デプロイのパフォーマンス、コスト効率、信頼性、スケーラビリティを最大限に高めることができます。
+
+## KV RocksDB の圧縮 I/O フローを削減 {#reduce-compaction-i-o-flow-in-kv-rocksdb}
+
+TiKV のstorageエンジンとして、 [ロックスDB](https://rocksdb.org/)ユーザー データの保存に使用されます。クラウド EBS にプロビジョニングされた IO スループットは、通常、コスト上の理由から制限されるため、RocksDB は高い書き込み増幅を示し、ディスク スループットがワークロードのボトルネックになる可能性があります。その結果、保留中の圧縮バイトの総数は時間の経過とともに増加し、フロー制御がトリガーされます。これは、TiKV にフォアグラウンド書き込みフローに対応するのに十分なディスク帯域幅がないことを示しています。
+
+ディスク スループットの制限によって生じるボトルネックを軽減するには、パフォーマンスを[Titanを有効にする](#enable-titan)向上させることができます。平均行サイズが 512 バイト未満の場合、Titan は適用できません。この場合、パフォーマンスを[すべての圧縮レベルを上げる](#increase-all-the-compression-levels)向上させることができます。
+
+### タイタンを有効にする {#enable-titan}
+
+[タイタン](/storage-engine/titan-overview.md) 、キーと値の分離のための高性能な[ロックスDB](https://github.com/facebook/rocksdb)プラグインであり、大きな値が使用される場合に RocksDB での書き込み増幅を減らすことができます。
+
+平均行サイズが 512 バイトより大きい場合は、次のように`min-blob-size` `"512B"`または`"1KB"`に設定し、 `blob-file-compression`を`"zstd"`に設定して、Titan を有効にして圧縮 I/O フローを削減できます。
+
+```toml
+[rocksdb.titan]
+enabled = true
+[rocksdb.defaultcf.titan]
+min-blob-size = "1KB"
+blob-file-compression = "zstd"
+```
+
+> **注記：**
+>
+> Titan を有効にすると、主キーの範囲スキャンのパフォーマンスが若干低下する可能性があります。詳細については、 [`min-blob-size`がパフォーマンスに与える影響](https://docs.pingcap.com/tidb/stable/titan-overview#impact-of-min-blob-size-on-performance)参照してください。
+
+### すべての圧縮レベルを上げる {#increase-all-the-compression-levels}
+
+平均行サイズが 512 バイト未満の場合は、次のようにして、デフォルトのカラムファミリーのすべての圧縮レベルを`"zstd"`に増やすことができます。
+
+```toml
+[rocksdb.defaultcf]
+compression-per-level = ["zstd", "zstd", "zstd", "zstd", "zstd", "zstd", "zstd"]
+```
 
 ## Raft Engine専用のディスクを使用する {#use-a-dedicated-disk-for-raft-engine}
 
@@ -33,7 +66,7 @@ TiKV の[Raft Engine](/glossary.md#raft-engine) 、従来のデータベース�
 
 -   Google Cloud では、 [pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/)が推奨されています。IOPS と MBPS は、割り当てられたディスク サイズによって異なります。パフォーマンス要件を満たすには、 Raft Engineに 200 GB を割り当てることをお勧めします。Raft Raft Engine はそれほど大きなスペースを必要としませんが、最適なパフォーマンスを保証します。
 
--   Azure では、 [プレミアム SSD v2](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2)が推奨されます。AWS gp3 と同様に、Premium SSD v2 はボリューム サイズに関係なく、3000 IOPS と 125 MB/秒のスループットの無料割り当てを提供し、通常はRaft Engineには十分です。
+-   Azure では、 [プレミアム SSD v2](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2)が推奨されます。AWS gp3 と同様に、Premium SSD v2 は、ボリューム サイズに関係なく、3000 IOPS と 125 MB/秒のスループットの無料割り当てを提供し、通常はRaft Engineには十分です。
 
 #### ハイエンドディスク {#high-end-disk}
 
@@ -93,18 +126,9 @@ Azure 上のRaft Engineに専用の 32 GB [ウルトラディスク](https://lea
           name: raft-pv-ssd
           storageSize: 512Gi
 
-## KV RocksDB の圧縮 I/O フローを削減 {#reduce-compaction-i-o-flow-in-kv-rocksdb}
-
-TiKV のstorageエンジンとして、 [ロックスDB](https://rocksdb.org/)ユーザー データの保存に使用されます。クラウド EBS にプロビジョニングされた IO スループットは、通常、コスト上の理由から制限されるため、RocksDB は高い書き込み増幅を示し、ディスク スループットがワークロードのボトルネックになる可能性があります。その結果、保留中の圧縮バイトの総数は時間の経過とともに増加し、フロー制御がトリガーされます。これは、TiKV がフォアグラウンド書き込みフローに対応するのに十分なディスク帯域幅を持っていないことを示しています。
-
-ディスク スループットの制限によって発生するボトルネックを軽減するには、RocksDB の圧縮レベルを上げてディスク スループットを下げることでパフォーマンスを向上させることができます。たとえば、次の例を参考にして、デフォルトのカラムファミリーのすべての圧縮レベルを`zstd`に上げることができます。
-
-    [rocksdb.defaultcf]
-    compression-per-level = ["zstd", "zstd", "zstd", "zstd", "zstd", "zstd", "zstd"]
-
 ## AZ間ネットワークトラフィックのコストを最適化する {#optimize-cost-for-cross-az-network-traffic}
 
-複数のアベイラビリティ ゾーン (AZ) にまたがって TiDB を展開すると、AZ 間のデータ転送料金によりコストが増加する可能性があります。コストを最適化するには、AZ 間のネットワーク トラフィックを削減することが重要です。
+複数のアベイラビリティ ゾーン (AZ) にわたって TiDB を展開すると、AZ 間のデータ転送料金によりコストが増加する可能性があります。コストを最適化するには、AZ 間のネットワーク トラフィックを削減することが重要です。
 
 AZ 間の読み取りトラフィックを削減するには、 [Follower Read機能](/follower-read.md)を有効にします。これにより、TiDB は同じアベイラビリティーゾーン内のレプリカの選択を優先できます。この機能を有効にするには、 [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)変数を`closest-replicas`または`closest-adaptive`に設定します。
 
@@ -128,7 +152,7 @@ Google Cloud によって開始されたライブ マイグレーション イ�
 
 この監視スクリプトは、Kubernetes 環境での TiDB の強化された管理機能を提供する[TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/tidb-operator-overview)を使用してデプロイされた TiDB クラスター用に特別に設計されていることに注意してください。
 
-監視スクリプトを活用し、メンテナンス イベント中に必要なアクションを実行することで、TiDB クラスタは Google Cloud 上のライブ マイグレーション イベントをより適切に処理し、クエリ処理と応答時間への影響を最小限に抑えながら、よりスムーズな操作を実現できます。
+監視スクリプトを活用し、メンテナンス イベント中に必要なアクションを実行することで、TiDB クラスタは Google Cloud 上のライブ マイグレーション イベントをより適切に処理し、クエリ処理と応答時間への影響を最小限に抑えながら、よりスムーズな操作を保証できます。
 
 ## 高QPSの大規模TiDBクラスタのPDをチューニングする {#tune-pd-for-a-large-scale-tidb-cluster-with-high-qps}
 
@@ -136,7 +160,7 @@ TiDB クラスターでは、TSO (Timestamp Oracle) の提供やリクエスト�
 
 ### PD制限の症状 {#symptoms-of-pd-limitation}
 
-次の図は、それぞれ 56 個の CPU を搭載した 3 台の PD サーバーで構成された大規模 TiDB クラスターの症状を示しています。これらの図から、1 秒あたりのクエリ (QPS) が 100 万を超え、1 秒あたりの TSO (Timestamp Oracle) リクエストが 162,000 を超えると、CPU 使用率が約 4,600% に達することがわかります。この高い CPU 使用率は、PD リーダーに大きな負荷がかかっており、利用可能な CPU リソースが不足していることを示しています。
+次の図は、それぞれ 56 個の CPU を搭載した 3 台の PD サーバーで構成された大規模 TiDB クラスターの症状を示しています。これらの図から、1 秒あたりのクエリ (QPS) が 100 万を超え、1 秒あたりの TSO (Timestamp Oracle) リクエストが 162,000 を超えると、CPU 使用率が約 4,600% に達することがわかります。この高い CPU 使用率は、PD リーダーに大きな負荷がかかっており、使用可能な CPU リソースが不足していることを示しています。
 
 ![pd-server-cpu](/media/performance/public-cloud-best-practice/baseline_cpu.png) ![pd-server-metrics](/media/performance/public-cloud-best-practice/baseline_metrics.png)
 

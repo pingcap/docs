@@ -335,7 +335,7 @@ mysql> SELECT * FROM t1;
 -   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `utf8mb4`
--   この変数は、使用中のデフォルト データベースの文字セットを示します。**この変数を設定することはお勧めしません**。新しいデフォルト データベースが選択されると、サーバーは変数値を変更します。
+-   この変数は、使用中のデフォルト データベースの文字セットを示します。**この変数を設定することは推奨されません**。新しいデフォルト データベースが選択されると、サーバーは変数値を変更します。
 
 ### 文字セットの結果 {#character-set-results}
 
@@ -1323,7 +1323,7 @@ MPP はTiFlashエンジンが提供する分散コンピューティング フ�
 
 ### tidb_build_sampling_stats_concurrency <span class="version-mark">v7.5.0 の新機能</span> {#tidb-build-sampling-stats-concurrency-span-class-version-mark-new-in-v7-5-0-span}
 
--   範囲: グローバル
+-   範囲: セッション | グローバル
 -   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: 整数
@@ -1689,7 +1689,7 @@ MPP はTiFlashエンジンが提供する分散コンピューティング フ�
 
     値を`OFF`に設定すると、TiDB は自動的にトランザクションを再試行し、 `COMMIT`ステートメントからのエラーが少なくなります。この変更を行うときは、更新が失われる可能性があるため注意してください。
 
-    この変数は、TiDB で自動的にコミットされた暗黙的なトランザクションや内部的に実行されたトランザクションには影響しません。これらのトランザクションの最大再試行回数は、値`tidb_retry_limit`によって決まります。
+    この変数は、TiDB で自動的にコミットされた暗黙的なトランザクションや内部的に実行されたトランザクションには影響しません。これらのトランザクションの最大再試行回数は、 `tidb_retry_limit`の値によって決まります。
 
     詳細については[再試行の制限](/optimistic-transaction.md#limits-of-retry)参照してください。
 
@@ -3290,7 +3290,7 @@ v5.0 以降では、上記のシステム変数を個別に変更することが
 -   この変数は、次のシナリオで特定のキーをロックするかどうかを制御するために使用されます。値が`ON`に設定されている場合、これらのキーはロックされます。値が`OFF`に設定されている場合、これらのキーはロックされません。
     -   `INSERT IGNORE`および`REPLACE`ステートメントに重複キーがあります。v6.1.6 より前では、これらのキーはロックされていませんでした。この問題は[＃42121](https://github.com/pingcap/tidb/issues/42121)で修正されました。
     -   キーの値が変更されていない場合の`UPDATE`ステートメント内の一意のキー。v6.5.2 より前では、これらのキーはロックされていませんでした。この問題は[＃36438](https://github.com/pingcap/tidb/issues/36438)で修正されました。
--   トランザクションの一貫性と合理性を維持するために、この値を変更することは推奨されません。TiDB のアップグレードにより、これら 2 つの修正により重大なパフォーマンスの問題が発生し、ロックなしの動作が許容される場合 (前述の問題を参照)、この変数を`OFF`に設定できます。
+-   トランザクションの一貫性と合理性を維持するために、この値を変更することは推奨されません。TiDB のアップグレードにより、これら 2 つの修正により重大なパフォーマンスの問題が発生し、ロックなしの動作が許容できる場合 (前述の問題を参照)、この変数を`OFF`に設定できます。
 
 ### tidb_log_file_max_days <span class="version-mark">v5.3.0 の新</span>機能 {#tidb-log-file-max-days-span-class-version-mark-new-in-v5-3-0-span}
 
@@ -3317,7 +3317,7 @@ v5.0 以降では、上記のシステム変数を個別に変更することが
 
 </CustomContent>
 
-### tidb_low_resolution_tso {#tidb-low-resolution-tso}
+### 低解像度tso {#tidb-low-resolution-tso}
 
 -   スコープ: セッション
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
@@ -3360,7 +3360,7 @@ v5.0 以降では、上記のシステム変数を個別に変更することが
 
 > **注記：**
 >
-> -   TiDB クラスターに複数のTiFlashノードがある場合、通常、集計は複数のTiFlashノードで分散して実行されます。この変数は、単一のTiFlashノード上の集計演算子の最大メモリ使用量を制御します。
+> -   TiDB クラスターに複数のTiFlashノードがある場合、集計は通常、複数のTiFlashノードで分散して実行されます。この変数は、単一のTiFlashノード上の集計演算子の最大メモリ使用量を制御します。
 > -   この変数が`-1`に設定されている場合、 TiFlash は独自の構成項目`max_bytes_before_external_group_by`の値に基づいて集計演算子の最大メモリ使用量を決定します。
 
 </CustomContent>
@@ -3379,7 +3379,7 @@ v5.0 以降では、上記のシステム変数を個別に変更することが
 
 > **注記：**
 >
-> -   TiDB クラスターに複数のTiFlashノードがある場合、結合は通常、複数のTiFlashノードで分散して実行されます。この変数は、単一のTiFlashノード上の結合演算子の最大メモリ使用量を制御します。
+> -   TiDB クラスターに複数のTiFlashノードがある場合、結合は通常、複数のTiFlashノードで分散して実行されます。この変数は、単一のTiFlashノードでの結合演算子の最大メモリ使用量を制御します。
 > -   この変数が`-1`に設定されている場合、 TiFlash は独自の構成項目[`max_bytes_before_external_join`](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters)の値に基づいて結合演算子の最大メモリ使用量を決定します。
 
 </CustomContent>
@@ -3388,7 +3388,7 @@ v5.0 以降では、上記のシステム変数を個別に変更することが
 
 > **注記：**
 >
-> -   TiDB クラスターに複数のTiFlashノードがある場合、結合は通常、複数のTiFlashノードで分散して実行されます。この変数は、単一のTiFlashノード上の結合演算子の最大メモリ使用量を制御します。
+> -   TiDB クラスターに複数のTiFlashノードがある場合、結合は通常、複数のTiFlashノードで分散して実行されます。この変数は、単一のTiFlashノードでの結合演算子の最大メモリ使用量を制御します。
 > -   この変数が`-1`に設定されている場合、 TiFlash は独自の構成項目`max_bytes_before_external_join`の値に基づいて結合演算子の最大メモリ使用量を決定します。
 
 </CustomContent>
@@ -4033,7 +4033,7 @@ mysql> desc select count(distinct a) from test.t;
 -   タイプ: 整数
 -   デフォルト値: `100`
 -   範囲: `[0, 2147483647]`
--   この変数は、Limit 演算子または TopN 演算子を TiKV まで押し下げるかどうかを決定するしきい値を設定するために使用されます。
+-   この変数は、Limit または TopN 演算子を TiKV まで押し下げるかどうかを決定するしきい値を設定するために使用されます。
 -   Limit または TopN 演算子の値がこのしきい値以下の場合、これらの演算子は強制的に TiKV にプッシュダウンされます。この変数は、誤った推定により Limit または TopN 演算子を TiKV にプッシュダウンできない問題を解決します。
 
 ### tidb_opt_メモリ係数 {#tidb-opt-memory-factor}
@@ -4487,7 +4487,7 @@ SHOW WARNINGS;
 -   この変数は、関連するテーブルの統計が更新されたときにプラン キャッシュを自動的に無効にするかどうかを制御します。
 -   この変数を有効にすると、プラン キャッシュは統計をより十分に活用して実行プランを生成できるようになります。例:
     -   統計が利用可能になる前に実行プランが生成された場合、統計が利用可能になるとプラン キャッシュは実行プランを再生成します。
-    -   テーブルのデータ分布が変更され、以前は最適だった実行プランが最適でなくなった場合、プラン キャッシュは統計が再収集された後に実行プランを再生成します。
+    -   テーブルのデータ分布が変更され、以前は最適だった実行プランが最適でなくなった場合、統計が再収集された後、プラン キャッシュは実行プランを再生成します。
 -   この変数は、v7.1.0 より前のバージョンから v7.1.0 以降にアップグレードされた TiDB クラスターではデフォルトで無効になっています。
 
 ### <code>tidb_plan_cache_max_plan_size</code> <span class="version-mark">v7.1.0 の新機能</span> {#code-tidb-plan-cache-max-plan-size-code-span-class-version-mark-new-in-v7-1-0-span}
@@ -5456,7 +5456,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `0`
 -   範囲: `[0, 9223372036854775807]`
--   この変数は、各 TiDB ノードの TTL ジョブにおける`DELETE`ステートメントのレート制限に使用されます。この値は、TTL ジョブの単一ノードで 1 秒あたりに許可される`DELETE`ステートメントの最大数を表します。この変数を`0`に設定すると、制限は適用されません。詳細については、 [有効期間](/time-to-live.md)を参照してください。
+-   この変数は、各 TiDB ノードの TTL ジョブにおける`DELETE`ステートメントのレート制限に使用されます。この値は、TTL ジョブの単一ノードで 1 秒あたりに許可される`DELETE`ステートメントの最大数を表します。この変数を`0`に設定すると、制限は適用されません。詳細については、 [生きる時間](/time-to-live.md)を参照してください。
 
 ### tidb_ttl_delete_batch_size <span class="version-mark">v6.5.0 の新</span>機能 {#tidb-ttl-delete-batch-size-span-class-version-mark-new-in-v6-5-0-span}
 
@@ -5469,7 +5469,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `100`
 -   範囲: `[1, 10240]`
--   この変数は、TTL ジョブの単一`DELETE`トランザクションで削除できる行の最大数を設定するために使用されます。詳細については、 [有効期間](/time-to-live.md)を参照してください。
+-   この変数は、TTL ジョブ内の単一`DELETE`トランザクションで削除できる行の最大数を設定するために使用されます。詳細については、 [生きる時間](/time-to-live.md)を参照してください。
 
 ### tidb_ttl_delete_worker_count <span class="version-mark">v6.5.0 の新</span>機能 {#tidb-ttl-delete-worker-count-span-class-version-mark-new-in-v6-5-0-span}
 
@@ -5482,7 +5482,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `4`
 -   範囲: `[1, 256]`
--   この変数は、各 TiDB ノード上の TTL ジョブの最大同時実行数を設定するために使用されます。詳細については、 [有効期間](/time-to-live.md)を参照してください。
+-   この変数は、各 TiDB ノード上の TTL ジョブの最大同時実行数を設定するために使用されます。詳細については、 [生きる時間](/time-to-live.md)を参照してください。
 
 ### tidb_ttl_job_enable <span class="version-mark">v6.5.0 の新</span>機能 {#tidb-ttl-job-enable-span-class-version-mark-new-in-v6-5-0-span}
 
@@ -5495,7 +5495,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `ON`
 -   タイプ: ブール値
--   この変数は、TTL ジョブを有効にするかどうかを制御するために使用されます。 `OFF`に設定すると、TTL 属性を持つすべてのテーブルで期限切れのデータのクリーンアップが自動的に停止されます。詳細については、 [有効期間](/time-to-live.md)を参照してください。
+-   この変数は、TTL ジョブを有効にするかどうかを制御するために使用されます。 `OFF`に設定すると、TTL 属性を持つすべてのテーブルで期限切れのデータのクリーンアップが自動的に停止されます。詳細については、 [生きる時間](/time-to-live.md)を参照してください。
 
 ### tidb_ttl_scan_batch_size <span class="version-mark">v6.5.0 の新</span>機能 {#tidb-ttl-scan-batch-size-span-class-version-mark-new-in-v6-5-0-span}
 
@@ -5508,7 +5508,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `500`
 -   範囲: `[1, 10240]`
--   この変数は、TTL ジョブで期限切れのデータをスキャンするために使用される各`SELECT`ステートメントの`LIMIT`値を設定するために使用されます。詳細については、 [有効期間](/time-to-live.md)を参照してください。
+-   この変数は、TTL ジョブで期限切れのデータをスキャンするために使用される各`SELECT`ステートメントの`LIMIT`値を設定するために使用されます。詳細については、 [生きる時間](/time-to-live.md)を参照してください。
 
 ### tidb_ttl_scan_worker_count <span class="version-mark">v6.5.0 の新</span>機能 {#tidb-ttl-scan-worker-count-span-class-version-mark-new-in-v6-5-0-span}
 
@@ -5521,7 +5521,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `4`
 -   範囲: `[1, 256]`
--   この変数は、各 TiDB ノード上の TTL スキャン ジョブの最大同時実行数を設定するために使用されます。詳細については、 [有効期間](/time-to-live.md)を参照してください。
+-   この変数は、各 TiDB ノード上の TTL スキャン ジョブの最大同時実行数を設定するために使用されます。詳細については、 [生きる時間](/time-to-live.md)を参照してください。
 
 ### tidb_ttl_job_schedule_window_start_time <span class="version-mark">v6.5.0 の新</span>機能 {#tidb-ttl-job-schedule-window-start-time-span-class-version-mark-new-in-v6-5-0-span}
 
@@ -5534,7 +5534,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   タイプ: 時間
 -   クラスターに存続: はい
 -   デフォルト値: `00:00 +0000`
--   この変数は、バックグラウンドでの TTL ジョブのスケジュール ウィンドウの開始時間を制御するために使用されます。この変数の値を変更する場合、ウィンドウが小さいと期限切れのデータのクリーンアップが失敗する可能性があるので注意してください。詳細については、 [有効期間](/time-to-live.md)を参照してください。
+-   この変数は、バックグラウンドでの TTL ジョブのスケジュール ウィンドウの開始時間を制御するために使用されます。この変数の値を変更する場合、ウィンドウが小さいと期限切れのデータのクリーンアップが失敗する可能性があるので注意してください。詳細については、 [生きる時間](/time-to-live.md)を参照してください。
 
 ### tidb_ttl_job_schedule_window_end_time <span class="version-mark">v6.5.0 の新機能</span> {#tidb-ttl-job-schedule-window-end-time-span-class-version-mark-new-in-v6-5-0-span}
 
@@ -5547,7 +5547,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   タイプ: 時間
 -   クラスターに存続: はい
 -   デフォルト値: `23:59 +0000`
--   この変数は、バックグラウンドでの TTL ジョブのスケジュール ウィンドウの終了時間を制御するために使用されます。この変数の値を変更する場合、ウィンドウが小さいと期限切れのデータのクリーンアップが失敗する可能性があるので注意してください。詳細については、 [有効期間](/time-to-live.md)を参照してください。
+-   この変数は、バックグラウンドでの TTL ジョブのスケジュール ウィンドウの終了時間を制御するために使用されます。この変数の値を変更する場合、ウィンドウが小さいと期限切れのデータのクリーンアップが失敗する可能性があるので注意してください。詳細については、 [生きる時間](/time-to-live.md)を参照してください。
 
 ### tidb_ttl_running_tasks <span class="version-mark">v7.0.0 の新</span>機能 {#tidb-ttl-running-tasks-span-class-version-mark-new-in-v7-0-0-span}
 
@@ -5561,7 +5561,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   タイプ: 整数
 -   デフォルト値: `-1`
 -   範囲: `-1` ～ `[1, 256]`
--   クラスター全体で実行中の TTL タスクの最大数を指定します。1 `-1` 、TTL タスクの数が TiKV ノードの数と等しいことを意味します。詳細については、 [有効期間](/time-to-live.md)を参照してください。
+-   クラスター全体で実行中の TTL タスクの最大数を指定します。1 `-1` 、TTL タスクの数が TiKV ノードの数と等しいことを意味します。詳細については、 [生きる時間](/time-to-live.md)を参照してください。
 
 ### tidb_txn_assertion_level <span class="version-mark">v6.0.0 の新</span>機能 {#tidb-txn-assertion-level-span-class-version-mark-new-in-v6-0-0-span}
 
@@ -5577,7 +5577,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 -   可能`FAST` `STRICT` : `OFF`
 
--   この変数はアサーション レベルを制御するために使用されます。アサーションは、データとインデックス間の一貫性チェックであり、書き込まれるキーがトランザクション コミット プロセス内に存在するかどうかをチェックします。詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)を参照してください。
+-   この変数はアサーション レベルを制御するために使用されます。アサーションは、データとインデックス間の一貫性チェックであり、書き込まれるキーがトランザクション コミット プロセスに存在するかどうかをチェックします。詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)参照してください。
 
     -   `OFF` : このチェックを無効にします。
     -   `FAST` : ほとんどのチェック項目を有効にしますが、パフォーマンスにはほとんど影響しません。
