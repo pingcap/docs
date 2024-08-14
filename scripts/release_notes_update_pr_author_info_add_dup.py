@@ -70,7 +70,7 @@ def store_exst_rn(ext_path, version):
     else:
         return 0
 
-def get_pr_info_from_github(cp_pr_link,cp_pr_title, current_pr_author):
+def get_pr_info_from_github(row_number, cp_pr_link,cp_pr_title, current_pr_author):
 
     g = Github(access_token, timeout=30)# Create a Github object with the access token
     target_pr_number_existence = 1
@@ -103,9 +103,10 @@ def get_pr_info_from_github(cp_pr_link,cp_pr_title, current_pr_author):
             pr_obj = repo_obj.get_pull(int(target_pr_number))# Get the pull request object
             pr_author = pr_obj.user.login # Get the author of the pull request
         except:
-            print("Failed to get the original PR information for this PR: " + cp_pr_link)
+            print(f"Row {row_number}: failed to find the non-bot author for this PR ({cp_pr_link}) created by {current_pr_author}.\n")
     else:
         pr_author = current_pr_author # Use the current author if the cherry-pick PR cannot be found
+        print(f"Row {row_number}: failed to find the non-bot author for this PR ({cp_pr_link}) created by {current_pr_author}.\n")
 
     return(pr_author)
 
@@ -137,16 +138,22 @@ def update_pr_author_and_release_notes(excel_path):
         current_formated_rn= row[pr_formated_rn_index]
 
         if (current_pr_author in ['ti-chi-bot', 'ti-srebot']):
-            pr_response = requests.get(row[pr_link_index])
-            if pr_response.status_code == 200:
-                print ("Replacing the author info for row " + str(row_index) + ".")
-                actual_pr_author = get_pr_info_from_github(row[pr_link_index], row[pr_title_index], current_pr_author) # Get the PR author according to the cherry-pick PR
-                pr_author_cell = sheet.cell(row=row_index, column=pr_author_index+1, value = actual_pr_author)#Fill in the pr_author_cell
-                updated_formated_rn = current_formated_rn.replace("[{}](https://github.com/{}".format(current_pr_author, current_pr_author),"[{}](https://github.com/{}".format(actual_pr_author, actual_pr_author))
-                formated_release_note_cell = sheet.cell(row=row_index, column=pr_formated_rn_index+1, value = updated_formated_rn) # Fill in the formated_release_note_cell
-                current_pr_author = actual_pr_author
-            else:
-                print (f"\nRow {str(row_index)}: Failed to get the original PR author for this cherry-pick PR: {row[pr_link_index]}")
+            try:
+                actual_pr_author = get_pr_info_from_github(str(row_index), row[pr_link_index], row[pr_title_index], current_pr_author) # Get the PR author according to the cherry-pick PR
+                if actual_pr_author != current_pr_author:
+                    print ("Replacing the author info for row " + str(row_index) + ".")
+                    pr_author_cell = sheet.cell(row=row_index, column=pr_author_index+1, value = actual_pr_author)#Fill in the pr_author_cell
+                    updated_formated_rn = current_formated_rn.replace("[{}](https://github.com/{}".format(current_pr_author, current_pr_author),"[{}](https://github.com/{}".format(actual_pr_author, actual_pr_author))
+                    formated_release_note_cell = sheet.cell(row=row_index, column=pr_formated_rn_index+1, value = updated_formated_rn) # Fill in the formated_release_note_cell
+                    current_pr_author = actual_pr_author
+                else: # Do nothing if non-bot author is not found.
+                    pass
+            except:
+                pr_response = requests.get(row[pr_link_index])
+                if pr_response.status_code != 200:
+                    print (f"\nRow {str(row_index)}: failed to find the non-bot author for this PR ({row[pr_link_index]}) because this link cannot be accessed now.")
+                else:
+                    print (f"\nRow {str(row_index)}: failed to find the non-bot author for this PR ({row[pr_link_index]}).")
         else:
             pass
 
