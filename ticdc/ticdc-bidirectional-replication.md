@@ -89,7 +89,7 @@ Non-replicable DDLs include:
 
 To solve the problem of replicable DDLs and non-replicable DDLs, TiDB introduces the following BDR roles:
 
-- `PRIMARY`: You can execute replicable DDLs, but not non-replicable DDLs. Replicable DDLs will be sent to the downstream by TiCDC.
+- `PRIMARY`: You can execute replicable DDLs, but not non-replicable DDLs. Replicable DDLs executed in a PRIMARY cluster will be replicated to the downstream by TiCDC.
 - `SECONDARY`: You cannot execute replicable DDLs or non-replicable DDLs. However, DDLs executed in a PRIMARY cluster can be replicated to a SECONDARY cluster by TiCDC.
 
 When no BDR role is set, you can execute any DDL. However, the changefeed in BDR mode does not replicate any DDL on that cluster.
