@@ -89,7 +89,7 @@ mysql> SELECT * FROM t1;
 * Adding a new column and setting it to the `PRIMARY KEY` is not supported.
 * Adding a new column and setting it to `AUTO_INCREMENT` is not supported.
 * There are limitations on adding generated columns, refer to: [generated column limitations](/generated-columns.md#limitations).
-* Adding a new column and setting it to `KEY` with `GLOBAL` ColumnOption is a TiDB extension for [global indexes](/partitioned-table.md#global-indexes) and is not compatible with MySQL.
+* Setting a global index by setting `PRIMARY KEY` or `UNIQUE INDEX` to `GLOBAL` when you add a new column is a TiDB extension for [global indexes](/partitioned-table.md#global-indexes) and is not compatible with MySQL.
 
 ## See also
 

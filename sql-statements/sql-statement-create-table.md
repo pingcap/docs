@@ -243,7 +243,7 @@ mysql> DESC t1;
 * All of the data types except spatial types are supported.
 * TiDB accepts index types such as `HASH`, `BTREE` and `RTREE` in syntax for compatibility with MySQL, but ignores them.
 * TiDB supports parsing the `FULLTEXT` syntax but does not support using the `FULLTEXT` indexes.
-* Creating a `PRIMARY KEY` or `UNIQUE INDEX` with `GLOBAL` IndexOption is a TiDB extension for [global indexes](/partitioned-table.md#global-indexes) and is not compatible with MySQL.
+* Setting a `PRIMARY KEY` or `UNIQUE INDEX` as a global index with `GLOBAL` IndexOption is a TiDB extension for [global indexes](/partitioned-table.md#global-indexes) and is not compatible with MySQL.
 
 <CustomContent platform="tidb">
 
