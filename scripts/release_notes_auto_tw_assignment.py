@@ -69,7 +69,7 @@ def insert_assignment_info(release_notes_file, assignments, tasks, line_numbers)
         lines[line_index] = lines[line_index].rstrip() + comment_a + "\n"
         subtask_count = 0
         for i in range(line_index + 1, len(lines)):
-            if lines[i].strip().startswith('-') and '(dup):' not in lines[i].strip() and 'note [#issue]' not in lines[i].strip():
+            if lines[i].strip().startswith('-') and all(substring not in lines[i] for substring in ignored_lines):
                 subtask_count += 1
             if subtask_count == tasks[f'{most_subtasks_task} - part 1']:
                 comment_b = f" <!--tw@{tw[1]}: the following {tasks[f'{most_subtasks_task} - part 2']} notes-->"
