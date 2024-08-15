@@ -1112,6 +1112,22 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `OFF`
 - This variable is used to set whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
 
+### tidb_analyze_column_options <span class="version-mark">New in v8.3.0</span>
+
+> **Note:**
+>
+> - This variable only works when [`tidb_analyze_version`](#tidb_analyze_version-new-in-v510) is set to `2`.
+> - If you upgrade your TiDB cluster from a version earlier than v8.3.0 to v8.3.0 or later, this variable is set to `ALL` by default to keep the original behavior.
+> - Starting from v8.3.0, for a newly deployed TiDB cluster, this variable is set to `PREDICATE` by default.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Enumeration
+- Default value: `PREDICATE`
+- Value options:`ALL`, `PREDICATE`
+- This variable controls the behavior of the `ANALYZE TABLE` statement. Setting it to `PREDICATE` means only collecting statistics for [predicate columns](/statistics.md#collect-statistics-on-some-columns); setting it to `ALL` means collecting statistics for all columns. In scenarios where OLAP queries are used, it is recommended to set it to `ALL`, otherwise collecting statistics can result in a significant drop in query performance.
+
 ### tidb_analyze_distsql_scan_concurrency <span class="version-mark">New in v7.6.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -2003,7 +2019,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Warning:**
 >
-> Currently, collecting statistics on `PREDICATE COLUMNS` is an experimental feature. It is not recommended that you use it in production environments.
+> Starting from v8.3.0, this variable is deprecated. TiDB tracks predicate columns by default. For more information, see [`tidb_analyze_column_options`](#tidb_analyze_column_options-new-in-v830).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -2138,6 +2154,50 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `OFF`
 - Possible values: `OFF`, `ON`
 - This variable controls whether to support creating `Global indexes` for partitioned tables. `Global index` is currently in the development stage. **It is not recommended to modify the value of this system variable**.
+
+### tidb_enable_lazy_cursor_fetch <span class="version-mark">New in v8.3.0</span>
+
+> **Warning:**
+>
+> The feature controlled by this variable is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+<CustomContent platform="tidb">
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- Possible values: `OFF`, `ON`
+- This variable controls the behavior of the [Cursor Fetch](/develop/dev-guide-connection-parameters.md#use-streamingresult-to-get-the-execution-result) feature.
+    - When Cursor Fetch is enabled and this variable is set to `OFF`, TiDB reads all the data at the start of statement execution, stores the data into TiDB's memory, and returns it to the client based on the client's specified `FetchSize` for subsequent client reads. If the result set is too large, TiDB might temporarily write the result to the hard disk.
+    - When Cursor Fetch is enabled and this variable is set to `ON`, TiDB does not read all the data into the TiDB node at once, but reads data into the TiDB node incrementally as the client fetches it.
+- The feature controlled by this variable has the following limitations:
+    - It does not support statements within explicit transactions.
+    - It only supports execution plans that contain and only contain `TableReader`, `IndexReader`, `IndexLookUp`, `Projection`, and `Selection` operators.
+    - For statements using Lazy Cursor Fetch, execution information does not appear in the [statements summary](/statement-summary-tables.md) and [slow query log](/identify-slow-queries.md).
+- For unsupported scenarios, its behavior is the same as when setting this variable to `OFF`.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- Possible values: `OFF`, `ON`
+- This variable controls the behavior of the [Cursor Fetch](/develop/dev-guide-connection-parameters.md#use-streamingresult-to-get-the-execution-result) feature.
+    - When Cursor Fetch is enabled and this variable is set to `OFF`, TiDB reads all the data at the start of statement execution, stores the data into TiDB's memory, and returns it to the client based on the client's specified `FetchSize` for subsequent client reads. If the result set is too large, TiDB might temporarily write the result to the hard disk.
+    - When Cursor Fetch is enabled and this variable is set to `ON`, TiDB does not read all the data into the TiDB node at once, but reads data into the TiDB node incrementally as the client fetches it.
+- The feature controlled by this variable has the following limitations:
+    - It does not support statements within explicit transactions.
+    - It only supports execution plans that contain and only contain `TableReader`, `IndexReader`, `IndexLookUp`, `Projection`, and `Selection` operators.
+    - For statements using Lazy Cursor Fetch, execution information does not appear in the [statements summary](/statement-summary-tables.md) and [slow query log](https://docs.pingcap.com/tidb/stable/identify-slow-queries).
+- For unsupported scenarios, its behavior is the same as when setting this variable to `OFF`.
+
+</CustomContent>
 
 ### tidb_enable_non_prepared_plan_cache
 

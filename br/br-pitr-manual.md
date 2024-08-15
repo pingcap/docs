@@ -341,6 +341,10 @@ Expected output:
 
 ## Restore to a specified point in time (PITR)
 
+> **Note:**
+>
+> If you specify `--full-backup-storage` as the incremental backup address for `restore point`, for restores of this backup and any previous incremental backups, you need to set the parameter `--allow-pitr-from-incremental` to `true` to make the incremental backups compatible with the subsequent log backups.
+
 You can run the `tiup br restore point` command to perform a PITR on a new cluster or just restore the log backup data.
 
 Run `tiup br restore point --help` to see the help information:
