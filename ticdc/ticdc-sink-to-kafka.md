@@ -355,7 +355,7 @@ The message format with handle keys only is as follows:
     ],
     "old": null,
     "_tidb": {     // TiDB extension fields
-        "commitTs": 163963314122145239,
+        "commitTs": 429918007904436226, // A TiDB TSO timestamp
         "onlyHandleKey": true
     }
 }
