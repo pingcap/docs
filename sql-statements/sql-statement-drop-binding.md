@@ -34,7 +34,10 @@ StringLiteralOrUserVariable ::=
 
 You can remove a binding according to a SQL statement or SQL Digest.
 
-When you remove a binding according to SQL Digest, you need to specify the corresponding SQL Digest using either string literals or user variables of the string type. You can specify multiple string values, and include multiple digests in each string. Note that the strings or digests need to be separated by commas.
+When you remove a binding according to SQL Digest, you need to specify the corresponding SQL Digest:
+
+- You can use either the string literal or user variable of the string type to specify the Plan Digest.
+- You can specify multiple string values, and include multiple digests in each string. Note that the strings or digests need to be separated by commas.
 
 The following example shows how to remove a binding according to a SQL statement.
 
