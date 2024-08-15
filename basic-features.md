@@ -77,6 +77,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | `UNION`, `UNION ALL` | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [`EXCEPT` and `INTERSECT` operators](/functions-and-operators/set-operators.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | `GROUP BY`, `ORDER BY` | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [`GROUP BY` modifier](/functions-and-operators/group-by-modifier.md) | Y | Y | Y | Y | N | N | N | N | N | N | N |
 | [Window Functions](/functions-and-operators/window-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Common Table Expressions (CTE)](/sql-statements/sql-statement-with.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | `START TRANSACTION`, `COMMIT`, `ROLLBACK` | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
