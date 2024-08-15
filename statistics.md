@@ -123,13 +123,13 @@ When `IndexNameList` is empty, this syntax collects statistics on all indexes in
 
 > **Note:**
 >
-> To ensure that the statistical information before and after the collection is consistent, when `tidb_analyze_version` is `2`, this syntax collects statistics on the entire table (including all columns and indexes), instead of only on indexes.
+> To ensure that the statistical information before and after the collection is consistent, when `tidb_analyze_version` is `2`, this syntax collects statistics on the indexed columns and all indexes.
 
 ### Collect statistics on some columns
 
-In most cases, the optimizer only uses statistics on columns in the `WHERE`, `JOIN`, `ORDER BY`, and `GROUP BY` statements. These columns can be referred to as `PREDICATE COLUMNS`.
+When TiDB executes SQL statements, the optimizer uses statistics for only a subset of columns in most cases. For example, columns that appear in the `WHERE`, `JOIN`, `ORDER BY`, and `GROUP BY` clauses. These columns are referred to as predicate columns.
 
-If a table has many columns, collecting statistics on all the columns can cause a large overhead. To reduce the overhead, you can collect statistics on only specific columns (that you choose) or `PREDICATE COLUMNS` to be used by the optimizer. To persist the column list of any subset of columns for reuse in future, see [Persist column configurations](#persist-column-configurations).
+If a table has many columns, collecting statistics on all the columns can cause a large overhead. To reduce the overhead, you can collect statistics for only specific columns (that you choose) or `PREDICATE COLUMNS` to be used by the optimizer. To persist the column list of any subset of columns for reuse in future, see [Persist column configurations](#persist-column-configurations).
 
 > **Note:**
 >
@@ -144,38 +144,30 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
     In the syntax, `ColumnNameList` specifies the name list of the target columns. If you need to specify more than one column, use comma `,` to separate the column names. For example, `ANALYZE table t columns a, b`. Besides collecting statistics on the specific columns in a specific table, this syntax collects statistics on the indexed columns and all indexes in that table at the same time.
 
-- To collect statistics on `PREDICATE COLUMNS`, do the following:
+- To collect statistics on `PREDICATE COLUMNS`, use the following syntax:
 
-    > **Warning:**
+    ```sql
+    ANALYZE TABLE TableName PREDICATE COLUMNS [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
+    ```
+
+    <CustomContent platform="tidb">
+
+    TiDB always writes the `PREDICATE COLUMNS` information to the [`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables) system table every 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease).
+
+    </CustomContent>
+
+    <CustomContent platform="tidb-cloud">
+
+    TiDB always writes the `PREDICATE COLUMNS` information to the [`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables) system table every 300 seconds.
+
+    </CustomContent>
+
+    In addition to collecting statistics on `PREDICATE COLUMNS` in a specific table, this syntax collects statistics on indexed columns and all indexes in that table at the same time.
+
+    > **Note:**
     >
-    > Currently, collecting statistics on `PREDICATE COLUMNS` is an experimental feature. It is not recommended that you use it in production environments.
-
-    1. Set the value of the [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540) system variable to `ON` to enable TiDB to collect `PREDICATE COLUMNS`.
-
-        <CustomContent platform="tidb">
-
-        After the setting, TiDB writes the `PREDICATE COLUMNS` information to the [`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables) system table every 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease).
-
-        </CustomContent>
-
-        <CustomContent platform="tidb-cloud">
-
-        After the setting, TiDB writes the `PREDICATE COLUMNS` information to the [`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables) system table every 300 seconds.
-
-        </CustomContent>
-
-    2. After the query pattern of your business is relatively stable, collect statistics on `PREDICATE COLUMNS` by using the following syntax:
-
-        ```sql
-        ANALYZE TABLE TableName PREDICATE COLUMNS [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
-        ```
-
-        Besides collecting statistics on `PREDICATE COLUMNS` in a specific table, this syntax collects statistics on indexed columns and all indexes in that table at the same time.
-
-        > **Note:**
-        >
-        > - If the [`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables) system table does not contain any `PREDICATE COLUMNS` recorded for that table, the preceding syntax collects statistics on all columns and all indexes in that table.
-        > - Any columns excluded from collection (either by manually listing columns or using `PREDICATE COLUMNS`) will not have their statistics overwritten. When executing a new type of SQL query, the optimizer will use the old statistics for such columns if it exists or pseudo column statistics if columns never had statistics collected. The next ANALYZE using `PREDICATE COLUMNS` will collect the statistics on those columns.
+    > - If the [`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables) system table does not contain any `PREDICATE COLUMNS` recorded for that table, the preceding syntax collects statistics on indexed columns and all indexes in that table.
+    > - Any columns excluded from collection (either by manually listing columns or using `PREDICATE COLUMNS`) will not have their statistics overwritten. When executing a new type of SQL query, the optimizer will use the old statistics for such columns if it exists, or pseudo column statistics if columns never had statistics collected. The next ANALYZE using `PREDICATE COLUMNS` will collect the statistics on those columns.
 
 - To collect statistics on all columns and indexes, use the following syntax:
 
@@ -329,9 +321,6 @@ To locate `PREDICATE COLUMNS` and columns on which statistics have been collecte
 In the following example, after executing `ANALYZE TABLE t PREDICATE COLUMNS;`, TiDB collects statistics on columns `b`, `c`, and `d`, where column `b` is a `PREDICATE COLUMN` and columns `c` and `d` are index columns.
 
 ```sql
-SET GLOBAL tidb_enable_column_tracking = ON;
-Query OK, 0 rows affected (0.00 sec)
-
 CREATE TABLE t (a INT, b INT, c INT, d INT, INDEX idx_c_d(c, d));
 Query OK, 0 rows affected (0.00 sec)
 
