@@ -1,5 +1,6 @@
 # This script aims to assign editorial and translation tasks of "Improvements" and "Bug Fixes" in release notes among technical writers evenly based on the number of release note items for each component.
 # For a component with most release note items, if its count exceeds the average count by two or more, the script splits it into two parts and assign the first two writers to these parts accordingly.
+# After the assignment, this script inserts the assignment info "<!--tw@xxx: xxx notes-->" as comments to the release notes file.
 
 release_notes_file = r'/Users/userid/Documents/GitHub/docs-cn/releases/release-8.3.0.md'
 ignored_lines = ['(dup):', 'note [#issue]', 'tw@', '贡献者',]
