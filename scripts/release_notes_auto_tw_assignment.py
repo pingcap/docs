@@ -22,6 +22,7 @@ def get_task_info(release_notes_file):
             section_match = re.match(r'^## (.+)$', line)
             if section_match:
                 current_section = section_match.group(1).strip()
+                current_component = None
                 continue
 
             # Detect component headers
