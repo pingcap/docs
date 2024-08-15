@@ -129,7 +129,7 @@ The following are the basics of TiCDC:
 
 > **Warning:**
 >
-> Starting from TiDB v8.3.0, TiDB Binlog is deprecated, and is planned to be removed in a future release. Use [TiCDC](/ticdc/ticdc-overview.md) instead for incremental data replication.
+> Starting from v7.5.0, [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) replication is deprecated. Starting from v8.3.0, TiDB Binlog is fully deprecated, with removal planned for a future release. Use [TiCDC](/ticdc/ticdc-overview.md) instead for incremental data replication.
 
 The following are the basics of TiDB Binlog:
 
