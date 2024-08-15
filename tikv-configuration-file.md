@@ -2041,8 +2041,12 @@ Configuration items related to security.
 
 ### `redact-info-log` <span class="version-mark">New in v4.0.8</span>
 
-+ This configuration item enables or disables log redaction. If the configuration value is set to `true`, all user data in the log will be replaced by `?`.
++ This configuration item enables or disables log redaction. Value options: `true`, `false`, `"on"`, `"off"`, and `"marker"`. The `"on"`, `"off"`, and `"marker"` options are introduced in v8.3.0.
++ If the configuration item is set to `false` or `"off"`, log redaction is disabled.
++ If the configuration item is set to `true` or `"on"`, all user data in the log is replaced by `?`.
++ If the configuration item is set to `"marker"`, all user data in the log is wrapped in `‹ ›`. If user data contains `‹` or `›`, `‹` is escaped as `‹‹`, and `›` is escaped as `››`. Based on the marked logs, you can decide whether to desensitize the marked information when the logs are displayed.
 + Default value: `false`
++ For details on how to use it, see [Log redaction in TiKV side](/log-redaction.md#log-redaction-in-tikv-side).
 
 ## security.encryption
 

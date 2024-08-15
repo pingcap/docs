@@ -1670,7 +1670,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 >
 > This variable is read-only for [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
 
-- Scope: GLOBAL
+- Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
@@ -1701,7 +1701,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 >
 > This variable is read-only for [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
 
-- Scope: GLOBAL
+- Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
@@ -2566,6 +2566,16 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `ON`
 - Value options: `OFF`, `ON`
 - This variable controls whether TiDB enables chunk objects cache. If the value is `ON`, TiDB prefers to use the cached chunk object and only requests from the system if the requested object is not in the cache. If the value is `OFF`, TiDB requests chunk objects from the system directly.
+
+### tidb_enable_shared_lock_promotion <span class="version-mark">New in v8.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to enable the feature of upgrading shared locks to exclusive locks. TiDB does not support `SELECT LOCK IN SHARE MODE` by default. When the variable value is `ON`, TiDB tries to upgrade the `SELECT LOCK IN SHARE MODE` statement to `SELECT FOR UPDATE` and add a pessimistic lock. The default value of this variable is `OFF`, which means that the feature of upgrading shared locks to exclusive locks is disabled.
+- Enabling this variable takes effect on the `SELECT LOCK IN SHARE MODE` statement, regardless of whether [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40) is enabled or not.
 
 ### tidb_enable_slow_log
 
@@ -3464,12 +3474,13 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_low_resolution_tso
 
-- Scope: SESSION
+- Scope: SESSION | GLOBAL
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to set whether to enable the low-precision TSO feature. After this feature is enabled, TiDB uses the cached timestamp to read data. The cached timestamp is updated every 2 seconds by default. Starting from v8.0.0, you can configure the update interval by [`tidb_low_resolution_tso_update_interval`](#tidb_low_resolution_tso_update_interval-new-in-v800).
 - The main applicable scenario is to reduce the overhead of acquiring TSO for small read-only transactions when reading old data is acceptable.
+- Starting from v8.3.0, this variable supports the GLOBAL scope.
 
 ### `tidb_low_resolution_tso_update_interval` <span class="version-mark">New in v8.0.0</span>
 
