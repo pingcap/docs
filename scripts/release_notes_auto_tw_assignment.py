@@ -3,7 +3,7 @@
 # After the assignment, this script inserts the assignment info "<!--tw@xxx: xxx notes-->" as comments to the release notes file.
 
 release_notes_file = r'/Users/userid/Documents/GitHub/docs-cn/releases/release-8.3.0.md'
-ignored_lines = ['(dup):', 'note [#issue]', 'tw@', '贡献者',]
+ignored_lines = ['(dup):', 'note [#issue]', 'tw@', '贡献者']
 tw = ["lilin90","hfxsd","Oreoxmt","qiancai"]
 
 from collections import OrderedDict
