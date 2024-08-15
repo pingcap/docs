@@ -66,7 +66,7 @@ TiCDC encodes a DDL Event into the following Canal-JSON format.
     "data": null,
     "old": null,
     "_tidb": {     // TiDB extension field
-        "commitTs": 163963309467037594
+        "commitTs": 429918007904436226  // A TiDB TSO timestamp
     }
 }
 ```
@@ -135,7 +135,7 @@ TiCDC encodes a row of DML data change event as follows:
     ],
     "old": null,
     "_tidb": {     // TiDB extension field
-        "commitTs": 163963314122145239
+        "commitTs": 429918007904436226  // A TiDB TSO timestamp
     }
 }
 ```
@@ -164,7 +164,7 @@ The following is an example of the WATERMARK Event.
     "data": null,
     "old": null,
     "_tidb": {     // TiDB extension field
-        "watermarkTs": 429918007904436226
+        "watermarkTs": 429918007904436226  // A TiDB TSO timestamp
     }
 }
 ```
