@@ -134,7 +134,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
     For more information, see [documentation](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830).
 
-* Enhance SQL execution plan binding [#55280](https://github.com/pingcap/tidb/issues/55280) [#issue2](to-be-added) @[time-and-fate](https://github.com/time-and-fate) **tw@lilin90** <!--1760-->
+* Enhance SQL execution plan binding [#55280](https://github.com/pingcap/tidb/issues/55280) [#55343](https://github.com/pingcap/tidb/issues/55343) @[time-and-fate](https://github.com/time-and-fate) **tw@lilin90** <!--1760-->
 
     In OLTP scenarios, the optimal execution plan for most SQL statements is fixed. Implementing SQL execution plan binding for important SQL statements in the application can reduce the probability of the execution plan becoming worse and improve system stability. To meet the requirements of creating a large number of SQL execution plan bindings, TiDB enhances the capability and experience of SQL binding, including:
 
@@ -171,9 +171,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
     Starting from v8.3.0, TiDB prints the progress of loading initial statistics in stages in the log, so you can understand the running status. To provide formatted results to external tools, TiDB adds the additional [monitoring API](/tidb-monitoring-api.md) so you can obtain the progress of loading initial statistics at any time during the startup phase.
 
+* Display metrics about resource groups [#8444](https://github.com/tikv/pd/issues/8444) @[nolouch](https://github.com/nolouch)
+
 ### Security
 
-* Enhance PD log redaction [#51306](https://github.com/pingcap/tidb/issues/51306) @[xhe](https://github.com/xhebox) **tw@hfxsd** <!--1861-->
+* Enhance PD log redaction [#8305](https://github.com/tikv/pd/issues/8305) @[JmPotato](https://github.com/JmPotato) **tw@hfxsd** <!--1861-->
 
     TiDB v8.0.0 enhances log redaction and supports marking user data in TiDB logs with single-angle quotation marks `‹›`. Based on the marked logs, you can decide whether to redact the marked information when displaying the logs, thus increasing the flexibility of log redaction. In v8.2.0, TiFlash implements a similar log redaction enhancement.
     
@@ -206,6 +208,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 > This section provides compatibility changes you need to know when you upgrade from v8.2.0 to the current version (v8.3.0). If you are upgrading from v8.1.0 or earlier versions to the current version, you might also need to check the compatibility changes introduced in intermediate versions.
 
 ### Behavior changes
+
+* To avoid incorrect use of commands, pd-ctl cancels the prefix matching mechanism. For example, `store remove-tombstone` cannot be called via `store remove` [#8413](https://github.com/tikv/pd/issues/8413) @[lhy1024](https://github.com/lhy1024)
 
 ### MySQL compatibility
 
@@ -266,6 +270,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
 + PD
 
++ TiKV <!--tw@hfxsd: 5 notes-->
+
+    - Optimize `async-io` batching mechanism to reduce I/O bandwidth usage [#16907](https://github.com/tikv/tikv/issues/16907) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Redesigned TiCDC's delegate and downstream modules to better support partial subscription [#16362](https://github.com/tikv/tikv/issues/16362) @[hicqu](https://github.com/hicqu)
+    - Reduce the size of a single slow log [#17294](https://github.com/tikv/tikv/issues/17294) @(Connor1996)[https://github.com/Connor1996]
+    - Add a new monitoring metric `min safe ts` [#17307](https://github.com/tikv/tikv/issues/17307) @[mittalrishabh](https://github.com/mittalrishabh)
+    - Reduce the memory usage of the peer message channel [#16229](https://github.com/tikv/tikv/issues/16229) @[Connor1996](https://github.com/Connor1996)
+
 + TiFlash
 
 + Tools
@@ -311,18 +323,18 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
     - 修复了 `ADMIN CANCEL DDL JOBS` 可能导致 DDL 失败的问题 [#54687](https://github.com/pingcap/tidb/issues/54687) @[lance6716](https://github.com/lance6716)
     - 修复了库数量较多情况下 `FLASHBACK DATABASE` 死循环的问题 [#54915](https://github.com/pingcap/tidb/issues/54915) @[lance6716](https://github.com/lance6716)
     - 修复了来自 DM 同步的超过索引列最大长度的表时同步失败的问题 [#55138](https://github.com/pingcap/tidb/issues/55138) @[lance6716](https://github.com/lance6716) <!--tw@hfxsd: the following 12 notes-->
-    - 修复打开 `tidb_enable_inl_join_inner_multi_pattern` 时，执行 SQL 语句可能报错 `runtime error: index out of range` 的问题 [#54535](https://github.com/pingcap/tidb/issues/54535) @[joechenrh](https://github.com/joechenrh)
-    - 修复 TiDB 在统计信息初始化的过程中，无法通过 `CTRL+C` 的方式退出 TiDB 的问题 [#54589](https://github.com/pingcap/tidb/issues/54589) @[tiancaiamao](https://github.com/tiancaiamao)
-    - 废弃 `inl_merge_join` Optimizer Hint. [#54064](https://github.com/pingcap/tidb/issues/54064) @[AilinKid](https://github.com/AilinKid)
-    - 修复关联子查询中包含 `WITH ROLLUP` 时可能 panic 并报错 `runtime error: index out of range` 的问题 [#54983](https://github.com/pingcap/tidb/issues/54983) @[AilinKid](https://github.com/AilinKid)
-    - 修复当 SQL 查询的过滤条件中包含虚拟列，且执行条件中包含 `UnionScan` 时，谓词无法正常下推的问题 [#54870](https://github.com/pingcap/tidb/issues/54870) @[qw4990](https://github.com/qw4990)
-    - 修复打开 `tidb_enable_inl_join_inner_multi_pattern` 时，执行 SQL 语句可能报错 `runtime error: invalid memory address or nil pointer dereference` 的问题 [#55169](https://github.com/pingcap/tidb/issues/55169) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复包含 `UNION` 的查询语句结果可能错误的问题 [#52985](https://github.com/pingcap/tidb/issues/52985) @[XuHuaiyu](https://github.com/XuHuaiyu)
-    - 修复 `mysql.stats_histograms` 表的 `tot_col_size` 列可能为负数的潜在风险 [#55126](https://github.com/pingcap/tidb/issues/55126) @[qw4990](https://github.com/qw4990)
-    - 修复 `columnEvaluator` 无法识别输入 chunk 中的列引用，导致执行 SQL 报错 `runtime error: index out of range` 的问题。 [#53713](https://github.com/pingcap/tidb/issues/53713) @[AilinKid](https://github.com/AilinKid)
-    - `STATS_EXTENDED` 不再是保留关键字 [#39573](https://github.com/pingcap/tidb/issues/39573) @[wddevries](https://github.com/wddevries)
-    - 修复 `tidb_low_resolution` 开启时，`select for update` 可以被执行的问题 [#54684](https://github.com/pingcap/tidb/issues/54684) @[cfzjywxk](https://github.com/cfzjywxk)
-    - 修复 `tidb_redact_log` 开启时，内部 SQL 在慢日志里无法显示的问题 [#54190](https://github.com/pingcap/tidb/issues/54190) @[lcwangchao](https://github.com/lcwangchao)
+    - Fix the issue that the error `runtime error: index out of range` might occur when executing SQL statements with `tidb_enable_inl_join_inner_multi_pattern` enabled [#54535](https://github.com/pingcap/tidb/issues/54535) @[joechenrh](https://github.com/joechenrh)
+    - Fix the issue that you cannot exit TiDB by `CTRL+C` during statistics initialization in TiDB [#54589](https://github.com/pingcap/tidb/issues/54589) @[tiancaiamao](https://github.com/tiancaiamao)
+    - Fix the issue that the `INL_MERGE_JOIN` optimizer hint returns incorrect results by deprecating it [#54064](https://github.com/pingcap/tidb/issues/54064) @[AilinKid](https://github.com/AilinKid)
+    - Fix the issue that a correlated subquery that contains `WITH ROLLUP` might cause TiDB to panic and return an error `runtime error: index out of range` [#54983](https://github.com/pingcap/tidb/issues/54983) @[AilinKid](https://github.com/AilinKid)
+    - Fix the issue that predicates cannot be pushed down properly when the filter condition of a SQL query contains virtual columns and the execution condition contains `UnionScan` [#54870](https://github.com/pingcap/tidb/issues/54870) @[qw4990](https://github.com/qw4990)
+    - Fix the issue that the error `runtime error: invalid memory address or nil pointer dereference` might occur when executing SQL statements with `tidb_enable_inl_join_inner_multi_pattern` enabled [#55169](https://github.com/pingcap/tidb/issues/55169) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that a query statement that contains `UNION` might return incorrect results [#52985](https://github.com/pingcap/tidb/issues/52985) @[XuHuaiyu](https://github.com/XuHuaiyu)
+    - Fix the issue that `tot_col_size` column in the `mysql.stats_histograms` table might be a negative number [#55126](https://github.com/pingcap/tidb/issues/55126) @[qw4990](https://github.com/qw4990)
+    - Fix the issue that `columnEvaluator` cannot identify the column references in the input chunk, which leads to `runtime error: index out of range` when executing SQL [#53713](https://github.com/pingcap/tidb/issues/53713) @[AilinKid](https://github.com/AilinKid)
+    - Fix the issue that `STATS_EXTENDED` becomes a reserved keyword [#39573](https://github.com/pingcap/tidb/issues/39573) @[wddevries](https://github.com/wddevries)
+    - Fix the issue that when `tidb_low_resolution` is enabled, `select for update` can be executed [#54684](https://github.com/pingcap/tidb/issues/54684) @[cfzjywxk](https://github.com/cfzjywxk)
+    - Fix the issue that internal SQL cannot be displayed in the slow log when `tidb_redact_log` is enabled [#54190](https://github.com/pingcap/tidb/issues/54190) @[lcwangchao](https://github.com/lcwangchao)
     - (dup): release-7.5.3.md > 错误修复> TiDB - 修复事务占用的内存可能被多次重复统计的问题 [#53984](https://github.com/pingcap/tidb/issues/53984) @[ekexium](https://github.com/ekexium)
     - (dup): release-7.5.3.md > 错误修复> TiDB - 修复使用 `SHOW WARNINGS;` 获取警告时可能导致 panic 的问题 [#48756](https://github.com/pingcap/tidb/issues/48756) @[xhebox](https://github.com/xhebox)
     - (dup): release-7.5.3.md > 错误修复> TiDB - 修复加载索引统计信息可能会造成内存泄漏的问题 [#54022](https://github.com/pingcap/tidb/issues/54022) @[hi-rustin](https://github.com/hi-rustin)
@@ -361,18 +373,25 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
     
 + TiFlash <!--tw@hfxsd: 4 notes-->
 
-    - 修复使用 `CAST()` 函数将字符串转换为带时区或非法字符的日期时间时结果错误的问题 [#8754](https://github.com/pingcap/tiflash/issues/8754) @[solotzg](https://github.com/solotzg)
-    - 修复 TiFlash 与任意 PD 发生网络分区后，可能导致读请求超时报错的问题 [#9243](https://github.com/pingcap/tiflash/issues/9243) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    - note [#issue](https://github.com/pingcap/tiflash/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+    - Fix the issue that when using the `CAST()` function to convert a string to a datetime with a time zone or invalid characters, the result is incorrect [#8754](https://github.com/pingcap/tiflash/issues/8754) @[solotzg](https://github.com/solotzg)
+    - Fix the issue that when TiFlash is network partitioned with any PD, read request timeout errors might occur [#9243](https://github.com/pingcap/tiflash/issues/9243) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - (dup): release-7.5.3.md > 错误修复> TiFlash - 修复跨数据库对含空分区的分区表执行 `RENAME TABLE ... TO ...` 后，TiFlash 可能 panic 的问题 [#9132](https://github.com/pingcap/tiflash/issues/9132) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - (dup): release-7.5.3.md > 错误修复> TiFlash - 修复开启延迟物化后，部分查询在执行时可能报列类型不匹配错误的问题 [#9175](https://github.com/pingcap/tiflash/issues/9175) @[JinheLin](https://github.com/JinheLin)
     - (dup): release-7.5.3.md > 错误修复> TiFlash - 修复开启延迟物化后，带有虚拟生成列的查询可能返回错误结果的问题 [#9188](https://github.com/pingcap/tiflash/issues/9188) @[JinheLin](https://github.com/JinheLin)
     - (dup): release-7.5.3.md > 错误修复> TiFlash - 修复将 TiFlash 中 SSL 证书配置项设置为空字符串会错误开启 TLS 并导致 TiFlash 启动失败的问题 [#9235](https://github.com/pingcap/tiflash/issues/9235) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - (dup): release-7.5.3.md > 错误修复> TiFlash - 修复数据库创建后短时间内被删除时，TiFlash 可能 panic 的问题 [#9266](https://github.com/pingcap/tiflash/issues/9266) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - (dup): release-8.1.1.md > 错误修复> TiFlash - 修复 TiFlash 与任意 PD 之间发生网络分区（即网络连接断开），可能导致读请求超时报错的问题 [#9243](https://github.com/pingcap/tiflash/issues/9243) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    - 修复在存算分离架构下，TiFlash 写节点可能重启失败的问题 [#9282](https://github.com/pingcap/tiflash/issues/9282) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 修复在存算分离架构下，TiFlash 写节点的读快照可能没有被及时释放的问题 [#9298](https://github.com/pingcap/tiflash/issues/9298) @[JinheLin](https://github.com/JinheLin)
+    - Fix the issue that TiFlash write nodes might fail to restart in the disaggregated storage and compute architecture [#9282](https://github.com/pingcap/tiflash/issues/9282) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix the issue that read snapshots of TiFlash write nodes are not released in a timely manner in the disaggregated storage and compute architecture [#9298](https://github.com/pingcap/tiflash/issues/9298) @[JinheLin](https://github.com/JinheLin)
 
++ TiKV <!--tw@hfxsd: 5 notes-->
+
+    - Fix the issue that 'Ingestion picked level` and `Compaction Job Size(files)` are displayed incorrectly in the Grafana TiKV component [#15990](https://github.com/tikv/tikv/issues/15990) @[Connor1996](https://github.com/Connor1996)
+    - Fix the issue that `cancel_generating_snap` incorrectly updating `snap_tried_cnt` causes TiKV to panic [#17226](https://github.com/tikv/tikv/issues/17226) @[hbisheng](https://github.com/hbisheng)
+    - Fix the issue that the information of `Ingest SST duration seconds` in correct [#17239](https://github.com/tikv/tikv/issues/17239) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Fix the issue that CPU profiling flag is not reset correctly in case of an error [#17234](https://github.com/tikv/tikv/issues/17234) @[Connor1996](https://github.com/Connor1996)
+    - Fix the incompatibility issue of the bloom filter in earlier versions (earlier than v7.1) and later versions [#17272](https://github.com/tikv/tikv/issues/17272) @[v01dstar](https://github.com/v01dstar)
+    
 + Tools
 
     + Backup & Restore (BR)
@@ -387,7 +406,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
         - (dup): release-8.1.1.md > 错误修复> Tools> TiDB Data Migration (DM) - 修复 schema tracker 无法正确处理 LIST 分区表导致 DM 报错的问题 [#11408](https://github.com/pingcap/tiflow/issues/11408) @[lance6716](https://github.com/lance6716)
         - (dup): release-8.1.1.md > 错误修复> Tools> TiDB Data Migration (DM) - 修复当索引长度超过 `max-index-length` 默认值时数据同步中断的问题 [#11459](https://github.com/pingcap/tiflow/issues/11459) @[michaelmdeng](https://github.com/michaelmdeng)
-        - 修复了 DM 对 FAKE_ROTATE_EVENT 处理不正确的问题 [#11381](https://github.com/pingcap/tiflow/issues/11381) @[lance6716](https://github.com/lance6716)
+        - Fix the issue that DM cannot handle `FAKE_ROTATE_EVENT` correctly [#11381](https://github.com/pingcap/tiflow/issues/11381) @[lance6716](https://github.com/lance6716)
 
     + TiDB Lightning <!--tw@Oreoxmt: 3 notes-->
 
