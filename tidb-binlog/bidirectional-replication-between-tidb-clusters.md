@@ -8,7 +8,6 @@ aliases: ['/docs/dev/tidb-binlog/bidirectional-replication-between-tidb-clusters
 
 > **Warning:**
 >
-> - Currently, bidirectional replication is still an experimental feature. It is **NOT** recommended to use it in the production environment.
 > - TiDB Binlog is not compatible with some features introduced in TiDB v5.0 and they cannot be used together. For details, see [Notes](/tidb-binlog/tidb-binlog-overview.md#notes).
 > - Starting from TiDB v7.5.0, technical support for the data replication feature of TiDB Binlog is no longer provided. It is strongly recommended to use [TiCDC](/ticdc/ticdc-overview.md) as an alternative solution for data replication.
 > - Although TiDB v7.5.0 still supports the real-time backup and restoration feature of TiDB Binlog, this component will be completely deprecated in future versions. It is recommended to use [PITR](/br/br-pitr-guide.md) as an alternative solution for data recovery.
