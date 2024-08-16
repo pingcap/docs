@@ -231,25 +231,25 @@ The original SQL statement and the bound statement must have the same text after
 
 #### Create a binding according to a historical execution plan
 
-To make the execution plan of a SQL statement fixed to a historical execution plan, you can use `plan_digest` to bind that historical execution plan to the SQL statement, which is more convenient than binding it according to a SQL statement.
+To make the execution plan of a SQL statement fixed to a historical execution plan, you can use Plan Digest to bind that historical execution plan to the SQL statement, which is more convenient than binding it according to a SQL statement. In addition, you can bind the execution plan for multiple SQL statements at once. For more details and examples, see [`CREATE [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md).
 
 When using this feature, note the following:
 
 - The feature generates hints according to historical execution plans and uses the generated hints for binding. Because historical execution plans are stored in [Statement Summary Tables](/statement-summary-tables.md), before using this feature, you need to enable the [`tidb_enable_stmt_summary`](/system-variables.md#tidb_enable_stmt_summary-new-in-v304) system variable first.
 - For TiFlash queries, Join queries with three or more tables, and queries that contain subqueries, the auto-generated hints are not adequate, which might result in the plan not being fully bound. In such cases, a warning will occur when creating a binding.
-- If a historical execution plan is for a SQL statement with hints, the hints will be added to the binding. For example, after executing `SELECT /*+ max_execution_time(1000) */ * FROM t`, the binding created with its `plan_digest` will include `max_execution_time(1000)`.
+- If a historical execution plan is for a SQL statement with hints, the hints will be added to the binding. For example, after executing `SELECT /*+ max_execution_time(1000) */ * FROM t`, the binding created with its Plan Digest will include `max_execution_time(1000)`.
 
 The SQL statement of this binding method is as follows:
 
 ```sql
-CREATE [GLOBAL | SESSION] BINDING FROM HISTORY USING PLAN DIGEST 'plan_digest';
+CREATE [GLOBAL | SESSION] BINDING FROM HISTORY USING PLAN DIGEST StringLiteralOrUserVariableList;
 ```
 
-This statement binds an execution plan to a SQL statement using `plan_digest`. The default scope is SESSION. The applicable SQL statements, priorities, scopes, and effective conditions of the created bindings are the same as that of [bindings created according to SQL statements](#create-a-binding-according-to-a-sql-statement).
+The preceding statement binds an execution plan to a SQL statement using Plan Digest. The default scope is SESSION. The applicable SQL statements, priorities, scopes, and effective conditions of the created bindings are the same as that of [bindings created according to SQL statements](#create-a-binding-according-to-a-sql-statement).
 
-To use this binding method, you need to first get the `plan_digest` corresponding to the target historical execution plan in `statements_summary`, and then create a binding using the `plan_digest`. The detailed steps are as follows:
+To use this binding method, you need to first get the Plan Digest corresponding to the target historical execution plan in `statements_summary`, and then create a binding using the Plan Digest. The detailed steps are as follows:
 
-1. Get the `plan_digest` corresponding to the target execution plan in `statements_summary`.
+1. Get the Plan Digest corresponding to the target execution plan in `statements_summary`.
 
     For example:
 
@@ -274,9 +274,9 @@ To use this binding method, you need to first get the `plan_digest` correspondin
           BINARY_PLAN: 6QOYCuQDCg1UYWJsZVJlYWRlcl83Ev8BCgtTZWxlY3Rpb25fNhKOAQoPBSJQRnVsbFNjYW5fNSEBAAAAOA0/QSkAAQHwW4jDQDgCQAJKCwoJCgR0ZXN0EgF0Uh5rZWVwIG9yZGVyOmZhbHNlLCBzdGF0czpwc2V1ZG9qInRpa3ZfdGFzazp7dGltZTo1NjAuOMK1cywgbG9vcHM6MH1w////CQMEAXgJCBD///8BIQFzCDhVQw19BAAkBX0QUg9lcSgBfCAudC5hLCAxKWrmYQAYHOi0gc6hBB1hJAFAAVIQZGF0YTo9GgRaFAW4HDQuMDVtcywgCbYcMWKEAWNvcF8F2agge251bTogMSwgbWF4OiA1OTguNsK1cywgcHJvY19rZXlzOiAwLCBycGNfBSkAMgkMBVcQIDYwOS4pEPBDY29wcl9jYWNoZV9oaXRfcmF0aW86IDAuMDAsIGRpc3RzcWxfY29uY3VycmVuY3k6IDE1fXCwAXj///////////8BGAE=
     ```
 
-    In this example, you can see that the execution plan corresponding to `plan_digest` is `4e3159169cc63c14b139a4e7d72eae1759875c9a9581f94bb2079aae961189cb`.
+    In this example, you can see that the execution plan corresponding to Plan Digest is `4e3159169cc63c14b139a4e7d72eae1759875c9a9581f94bb2079aae961189cb`.
 
-2. Use `plan_digest` to create a binding:
+2. Use Plan Digest to create a binding:
 
     ```sql
     CREATE BINDING FROM HISTORY USING PLAN DIGEST '4e3159169cc63c14b139a4e7d72eae1759875c9a9581f94bb2079aae961189cb';
@@ -317,7 +317,7 @@ SELECT @@LAST_PLAN_FROM_BINDING;
 
 ### Remove a binding
 
-You can remove a binding according to a SQL statement or `sql_digest`.
+You can remove a binding according to a SQL statement or SQL Digest.
 
 #### Remove a binding according to a SQL statement
 
@@ -343,15 +343,15 @@ explain SELECT * FROM t1,t2 WHERE t1.id = t2.id;
 
 In the example above, the dropped binding in the SESSION scope shields the corresponding binding in the GLOBAL scope. The optimizer does not add the `sm_join(t1, t2)` hint to the statement. The top node of the execution plan in the `explain` result is not fixed to MergeJoin by this hint. Instead, the top node is independently selected by the optimizer according to the cost estimation.
 
-#### Remove a binding according to `sql_digest`
+#### Remove a binding according to SQL Digest
 
-In addition to removing a binding according to a SQL statement, you can also remove a binding according to `sql_digest`.
+In addition to removing a binding according to a SQL statement, you can also remove a binding according to SQL Digest. For more details and examples, see [`DROP [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-drop-binding.md).
 
 ```sql
-DROP [GLOBAL | SESSION] BINDING FOR SQL DIGEST 'sql_digest';
+DROP [GLOBAL | SESSION] BINDING FOR SQL DIGEST StringLiteralOrUserVariableList;
 ```
 
-This statement removes an execution plan binding corresponding to `sql_digest` at the GLOBAL or SESSION level. The default scope is SESSION. You can get the `sql_digest` by [viewing bindings](#view-bindings).
+This statement removes an execution plan binding corresponding to SQL Digest at the GLOBAL or SESSION level. The default scope is SESSION. You can get the SQL Digest by [viewing bindings](#view-bindings).
 
 > **Note:**
 >
