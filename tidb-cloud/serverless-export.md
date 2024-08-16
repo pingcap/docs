@@ -36,14 +36,19 @@ Exporting data to local file has the following limitations:
 
 ### Amazon S3
 
-To export data to Amazon S3, you need to provide one of the following access methods for your Amazon S3 bucket:
+To export data to Amazon S3, you need to provide the following information:
 
-- [Access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): make sure the access key has these permissions: `s3:PutObject` and `s3:ListBucket`.
-- [Role arn](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role arn has these permissions: `s3:PutObject` and `s3:ListBucket`.
+- uri: `s3://<bucket-name>/<file-path>`
+- one of the following access methods:
+  - [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): make sure the access key has the `s3:PutObject` and `s3:ListBucket` permissions.
+  - [role arn](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role arn has the `s3:PutObject` and `s3:ListBucket` permissions.
 
 ### Google Cloud Storage
 
-To export data to Google Cloud Storage, you need to provide a **base64 encoded** [service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for your Google Cloud Storage bucket. Make sure the service account key has these permissions: `storage.objects.create`. You may also need `storage.objects.delete` permission when you export to a non-empty folder.
+To export data to Google Cloud Storage, you need to provide the following information:
+
+- uri: `gs://<bucket-name>/<file-path>`
+- access method: a **base64 encoded** [service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for your bucket. Make sure the service account key has the `storage.objects.create` permission.
 
 > **Note:**
 >
@@ -51,7 +56,10 @@ To export data to Google Cloud Storage, you need to provide a **base64 encoded**
 
 ### Azure Blob Storage
 
-To export data to Azure Blob Storage, you need to provide a [shared access signature (SAS) token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) for your Azure Blob Storage container. Make sure the SAS token has the `Read` and `Write` permissions on the `Container` and `Object` resources.
+To export data to Azure Blob Storage, you need to provide the following information:
+
+- uri: `azure://<account-name>.blob.core.windows.net/<container-name>/<file-path>`
+- access method: a [shared access signature (SAS) token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) for your Azure Blob Storage container. Make sure the SAS token has the `Read` and `Write` permissions on the `Container` and `Object` resources.
 
 > **Note:**
 >
@@ -177,7 +185,7 @@ You can compress the exported parquet data using the following algorithms:
     - **Exported data**: choose the databases and tables you want to export.
     - **Data format**: choose one of the **SQL File** and **CSV**.
     - **Compression**: choose one of the **Gzip**, **Snappy**, **Zstd**, and **None**.
-    - **File URI**: enter the URI of the Amazon S3.
+    - **File URI**: enter the URI of the Amazon S3 with the `s3://<bucket-name>/<file-path>` format.
     - **Bucket Access**
       - **AWS Role Arn**: enter the ARN of the role that has the permission to access the bucket.
       - **AWS Access Key ID**: enter the access key ID and access key secret that has the permission to access the bucket.
@@ -194,7 +202,7 @@ You can compress the exported parquet data using the following algorithms:
 ticloud serverless export create -c <cluster-id> --s3.uri <uri> --s3.access-key-id <access-key-id> --s3.secret-access-key <secret-access-key> --filter "database.table"
 ```
 
-- s3.uri: The URI of the Amazon S3 bucket with the `s3://<bucket-name>/path` format.
+- s3.uri: The Amazon S3 URI with the `s3://<bucket-name>/<file-path>` format.
 - s3.access-key-id: The access key ID of the user who has the permission to access the bucket.
 - s3.secret-access-key: The access key secret of the user who has the permission to access the bucket.
 
@@ -202,7 +210,7 @@ ticloud serverless export create -c <cluster-id> --s3.uri <uri> --s3.access-key-
 ticloud serverless export create -c <cluster-id> --s3.uri <uri> --s3.role-arn <role-arn> --filter "database.table"
 ```
 
-- s3.uri: The URI of the Amazon S3 bucket with the `s3://<bucket-name>/path` format.
+- s3.uri: The URI of the Amazon S3 bucket with the `s3://<bucket-name>/<file-path>` format.
 - s3.role-arn: The ARN of the role that has the permission to access the bucket.
 
 </div>
@@ -216,7 +224,7 @@ You can only export data to Google Cloud Storage using the TiDB Cloud CLI now.
 ticloud serverless export create -c <cluster-id> --gcs.uri <uri> --gcs.service-account-key <service-account-key> --filter "database.table"
 ```
 
-- gcs.uri: The URI of the Google Cloud Storage bucket with the `gs://<bucket-name>/path` format.
+- gcs.uri: The URI of the Google Cloud Storage bucket with the `gs://<bucket-name>/<file-path>` format.
 - gcs.service-account-key: The base64 encoded service account key.
 
 ### Export data to Azure Blob Storage
@@ -227,7 +235,7 @@ You can only export data to Azure Blob Storage using the TiDB Cloud CLI now.
 ticloud serverless export create -c <cluster-id> --azblob.uri <uri> --azblob.sas-token <sas-token> --filter "database.table"
 ```
 
-- azblob.uri: The URI of the Azure Blob Storage with the `azure://<account-name>.blob.core.windows.net/<container-name>/path` format.
+- azblob.uri: The URI of the Azure Blob Storage with the `azure://<account-name>.blob.core.windows.net/<container-name>/<file-path>` format.
 - azblob.sas-token: The account SAS token of the Azure Blob Storage.
 
 ### Cancel an export task
