@@ -46,7 +46,7 @@ In most scenarios, it is recommended that you use private endpoint connection ov
 To connect to your TiDB Dedicated cluster via a private endpoint, complete the [prerequisites](#prerequisites) and follow these steps:
 
 1. [Choose a TiDB cluster](#step-1-choose-a-tidb-cluster)
-2. [Provide the information for creating an endpoint](#step-2-provide-the-information-for-creating-an-endpoint)
+2. [Create a Google Cloud endpoint](#step-2-create-a-google-cloud-endpoint)
 3. [Accept endpoint access](#step-3-accept-endpoint-access)
 4. [Connect to your TiDB cluster](#step-4-connect-to-your-tidb-cluster)
 
@@ -75,11 +75,11 @@ Perform the following steps to go to the **Google Cloud Private Endpoint** page:
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
 3. On the **Project Settings** page of your project, click **Network Access** in the left navigation pane, and click the **Private Endpoint** tab.
-4. Click **Create Private Endpoint** in the upper-right corner, and then select **Google Cloud Private Endpoint**.
+4. Click **Google Cloud** to view the Google Cloud private endpoints, and then select **Create Google Cloud Private Endpoint Connection**.
 
 ### Step 1. Choose a TiDB cluster
 
-Click the drop-down list and choose an available TiDB Dedicated cluster.
+Select an TiDB Dedicated cluster from the drop-down list for which you wish to establish a private endpoint connection.
 
 You can select a cluster with any of the following statuses:
 
@@ -88,7 +88,7 @@ You can select a cluster with any of the following statuses:
 - **Modifying**
 - **Importing**
 
-### Step 2. Provide the information for creating an endpoint
+### Step 2. Create a Google Cloud endpoint
 
 1. Provide the following information to generate the command for private endpoint creation:
     - **Google Cloud Project ID**: the Project ID associated with your Google Cloud account. You can find the ID on the [Google Cloud **Dashboard** page](https://console.cloud.google.com/home/dashboard).
@@ -97,7 +97,7 @@ You can select a cluster with any of the following statuses:
     - **Private Service Connect Endpoint Name**: enter a unique name for the private endpoint that will be created.
 2. After entering the information, click **Generate Command**.
 3. Copy the command.
-4. Go to [Google Cloud Shell](https://console.cloud.google.com/home/dashboard) to execute the command.
+4. Go to [Google Cloud Shell](https://console.cloud.google.com/home/dashboard) to execute the command to create an endpoint.
 
 ### Step 3. Accept endpoint access
 
