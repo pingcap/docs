@@ -420,4 +420,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
 We would like to thank the following contributors from the TiDB community:
 
-- [贡献者 GitHub ID](链接)
+- [ari-e](https://github.com/ari-e)
+- [ei-sugimoto](https://github.com/ei-sugimoto)
+- [HaoW30](https://github.com/HaoW30)
+- [JackL9u](https://github.com/JackL9u)
+- [michaelmdeng](https://github.com/michaelmdeng)
+- [mittalrishabh](https://github.com/mittalrishabh)
+- [qingfeng777](https://github.com/qingfeng777)
+- [renovate](https://github.com/apps/renovate)
+- [SandeepPadhi](https://github.com/SandeepPadhi)
+- [yzhan1](https://github.com/yzhan1)
