@@ -40,7 +40,7 @@ In most scenarios, you are recommended to use private endpoint connection over V
 
 To connect to your TiDB Dedicated cluster via a private endpoint, complete the [prerequisites](#prerequisites) and follow these steps:
 
-1. [Choose a TiDB cluster](#step-1-choose-a-tidb-cluster)
+1. [Select a TiDB cluster](#step-1-select-a-tidb-cluster)
 2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
 3. [Fill in your endpoint ID](#step-3-fill-in-your-endpoint-id)
 4. [Enable private DNS and create connection](#step-4-enable-private-dns-and-create-connection)
@@ -52,12 +52,12 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
-3. On the **Project Settings** page of your project, click **Network Access** in the left navigation pane, and click the **Private Endpoint** tab.
-4. Click **Create Private Endpoint Connection** in the upper-right corner.
+3. On the **Project Settings** page of your project, click **Network Access** in the left navigation pane, and click the **Private Endpoint** > **AWS** tab to view the AWS private endpoints.
+4. In the upper-right corner, click **Create Private Endpoint Connection**.
 
-### Step 1. Choose a TiDB cluster
+### Step 1. Select a TiDB cluster
 
-1. Select an available TiDB Dedicated cluster from the drop-down list for which you wish to establish a private endpoint connection.
+In the **Cluster** list, select the TiDB Dedicated cluster that you want to establish a private endpoint connection.
 
 ### Step 2. Create an AWS interface endpoint
 
@@ -65,16 +65,16 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 >
 > For each TiDB Dedicated cluster created after March 28, 2023, the corresponding endpoint service is automatically created 3 to 4 minutes after the cluster creation.
 
-If you see the `TiDB Private Link Service is ready` message, the corresponding endpoint service is ready and you cancollect information needed for creating the endpoint.
+If you see the `TiDB Private Link Service is ready` message, the corresponding endpoint service is ready. You can provide the following information to create the endpoint.
 
-1. Fill in the **VPC ID** and **Subnet IDs** fields on the private endpoint creation page. You can get the IDs from your AWS Management Console.
+1. On the **Create AWS Private Endpoint Connection** page, fill in the **Your VPC ID** and **Your Subnet IDs** fields. You can get the IDs from your [AWS Management Console](https://console.aws.amazon.com/).
 2. Click **Generate Command** to get the following endpoint creation command.
 
-```bash
-aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${your_region} --service-name ${your_endpoint_service_name} --vpc-endpoint-type Interface --subnet-ids ${your_application_subnet_ids}
-```
+    ```bash
+    aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${your_region} --service-name ${your_endpoint_service_name} --vpc-endpoint-type Interface --subnet-ids ${your_application_subnet_ids}
+    ```
 
-Then you can create an AWS interface endpoint either using the AWS Management Console or using the AWS CLI. 
+Then, you can create an AWS interface endpoint either using the [AWS Management Console](https://aws.amazon.com/console/) or using the AWS CLI.
 
 <SimpleTab>
 <div label="Use AWS Console">
@@ -89,7 +89,7 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
     ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
 
 3. Select **Other endpoint services**.
-4. Enter the service name that you found in the generated command from "--service-name ${your_endpoint_service_name}" part.
+4. Enter the service name `${your_endpoint_service_name}` from the generated command (`--service-name ${your_endpoint_service_name}`).
 5. Click **Verify service**.
 6. Select your VPC in the drop-down list.
 7. Select the availability zones where your TiDB cluster is located in the **Subnets** area.
@@ -102,7 +102,7 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
 
     > **Note:**
     >
-    >  Make sure the selected security group allows inbound access from your EC2 instances on Port 4000 or a customer-defined port.
+    > Make sure the selected security group allows inbound access from your EC2 instances on Port 4000 or a customer-defined port.
 
 9. Click **Create endpoint**.
 
@@ -111,8 +111,8 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
 
 To use the AWS CLI to create a VPC interface endpoint, perform the following steps:
 
-1. Copy the generated command in the lower area of the page and run it in your terminal. 
-2. Record the VPC endpoint ID you just created. 
+1. Copy the generated command and run it in your terminal.
+2. Record the VPC endpoint ID you just created.
 
 > **Tip:**
 >
@@ -120,15 +120,13 @@ To use the AWS CLI to create a VPC interface endpoint, perform the following ste
 >
 > - If your service is spanning across more than three availability zones (AZs), you will get an error message indicating that the VPC endpoint service does not support the AZ of the subnet. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your TiDB cluster is located. In this case, you can contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
 
-
 </div>
 </SimpleTab>
 
 ### Step 3. Fill in your endpoint ID
 
 1. Go back to the TiDB Cloud console.
-2. Fill in the box with your VPC endpoint ID on the **Create AWS Private Endpoint Connection** page.
-
+2. On the **Create AWS Private Endpoint Connection** page, enter your VPC endpoint ID.
 
 ### Step 4. Enable private DNS and create connection
 
@@ -168,8 +166,8 @@ After you have enabled the private DNS, go back to the TiDB Cloud console and ta
 
 1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click **...** in the **Action** column.
 2. Click **Connect**. A connection dialog is displayed.
-3. Select the **Private Endpoint** tab. The private endpoint you just created is displayed under **Step 1: Create Private Endpoint**.
-4. Under **Step 2: Connect your connection**, click **Connect**, click the tab of your preferred connection method, and then connect to your cluster with the connection string. The placeholders `<cluster_endpoint_name>:<port>` in the connection string are automatically replaced with the real values.
+3. In the **Connection Type** tab, select **Private Endpoint** and then select the private endpoint you just created from **Endpoint ID**.
+4. Select your preferred connection method to get the corresponding connection string.
 
 > **Tip:**
 >
