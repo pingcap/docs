@@ -1457,7 +1457,7 @@ This section discusses the relationship of partitioning keys with primary keys a
 
 > **Note:**
 > 
-> This rule only applies to the scenarios where [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) is not enabled.
+> This rule only applies to the scenarios where the [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) system variable is not enabled. When it is enabled, unique keys in partitioned tables are not required to include all the columns used in the partition expressions. For more information, see [global indexes](#global-indexes).
 
 For example, the following table creation statements are invalid:
 
@@ -1670,11 +1670,11 @@ ERROR 1503 (HY000): A UNIQUE INDEX must include all columns in the table's parti
 
 Before the introduction of global indexes, TiDB created a local index for each partition, leading to [a limitation](#partitioning-keys-primary-keys-and-unique-keys) that primary keys and unique keys had to include the partition key to ensure data uniqueness. Additionally, when querying data across multiple partitions, TiDB needed to scan the data of each partition to return results.
 
-To address these issues, TiDB introduces the global indexes feature in v8.3.0. A global index covers the data of the entire table with a single index, allowing primary keys and unique keys to maintain global uniqueness without including the partition key. Moreover, global indexes can access data across multiple partitions in a single operation, significantly improving query performance for non-partitioned keys.
+To address these issues, TiDB introduces the global indexes feature in v8.3.0. A global index covers the data of the entire table with a single index, allowing primary keys and unique keys to maintain global uniqueness without including all partition keys. Moreover, global indexes can access data across multiple partitions in a single operation, significantly improving query performance for non-partitioned keys.
 
 > **Warning:**
 >
-> The feature controlled by this variable is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> The global indexes feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 To create a global index for a primary key or unique key that **does not include all the columns used in the partition expressions**, you can enable the [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) system variable and add the `GLOBAL` keyword in the index definition. 
 
