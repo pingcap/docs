@@ -213,7 +213,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Dumpling logical dumper](/dumpling-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Transactional `LOAD DATA`](/sql-statements/sql-statement-load-data.md) [^5] | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Database migration toolkit (DM)](/migration-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) [^6] | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) [^6] | Deprecated | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Change data capture (CDC)](/ticdc/ticdc-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Stream data to Amazon S3, GCS, Azure Blob Storage, and NFS through TiCDC](/ticdc/ticdc-sink-to-cloud-storage.md) | Y | Y | Y | Y | Y | E | N | N | N | N | N |
 | [TiCDC supports bidirectional replication between two TiDB clusters](/ticdc/ticdc-bidirectional-replication.md) | Y | Y | Y | Y | Y | Y | N | N | N | N | N |
