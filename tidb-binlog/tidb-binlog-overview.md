@@ -10,7 +10,7 @@ TiDB Binlog is a tool used to collect binlog data from TiDB and provide near rea
 
 > **Warning:**
 >
-> - Starting from v7.5.0, TiDB Binlog replication is deprecated. Starting from v8.3.0, TiDB Binlog is fully deprecated, with removal planned for a future release. Use [TiCDC](/ticdc/ticdc-overview.md) instead for incremental data replication as an alternative. Use [Point-in-Time Recovery (PITR)](/br/br-pitr-guide.md) for the PITR scenario needs.
+> - Starting from v7.5.0, TiDB Binlog replication is deprecated. Starting from v8.3.0, TiDB Binlog is fully deprecated, with removal planned for a future release. For incremental data replication, use [TiCDC](/ticdc/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [TiDB Log Backup and PITR](/br/br-pitr-guide.md).
 > - TiDB Binlog is not compatible with some features introduced in TiDB v5.0 and they cannot be used together. For details, see [Notes](#notes).
 
 TiDB Binlog has the following features:

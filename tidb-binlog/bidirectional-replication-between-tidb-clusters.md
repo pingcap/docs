@@ -8,7 +8,7 @@ aliases: ['/docs/dev/tidb-binlog/bidirectional-replication-between-tidb-clusters
 
 > **Warning:**
 >
-> - Starting from v7.5.0, [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) replication is deprecated. Starting from v8.3.0, TiDB Binlog is fully deprecated, with removal planned for a future release. Use [TiCDC](/ticdc/ticdc-overview.md) instead for incremental data replication. Use [Point-in-Time Recovery (PITR)](/br/br-pitr-guide.md) for the PITR scenario needs.
+> - Starting from v7.5.0, [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) replication is deprecated. Starting from v8.3.0, TiDB Binlog is fully deprecated, with removal planned for a future release. For incremental data replication, use [TiCDC](/ticdc/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [TiDB Log Backup and PITR](/br/br-pitr-guide.md).
 > - TiDB Binlog is not compatible with some features introduced in TiDB v5.0 and they cannot be used together. For details, see [Notes](/tidb-binlog/tidb-binlog-overview.md#notes).
 
 This document describes the bidirectional replication between two TiDB clusters, how the replication works, how to enable it, and how to replicate DDL operations.
