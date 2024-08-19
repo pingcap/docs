@@ -284,15 +284,15 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
 + PD <!--tw@qiancai: 9 notes-->
 
-- Support modifying the `batch` configuration of the `evict-leader-scheduler` via `pd-ctl` to accelerate the leader eviction process [#8265](https://github.com/tikv/pd/issues/8265) @[rleungx](https://github.com/rleungx)
-- Add the `store_id` monitoring metric to the `Label distribution` pane in Grafana to display store IDs corresponding to different labels [#8337](https://github.com/tikv/pd/issues/8337) @[HuSharp](https://github.com/HuSharp)
-- Support fallback to the default resource group when the specified resource group does not exist [#8388](https://github.com/tikv/pd/issues/8388) @[JmPotato](https://github.com/JmPotato)
-- Add the `approximate_kv_size` field to the Region information output by the `region` command in `pd-ctl` [#8412](https://github.com/tikv/pd/issues/8412) @[zeminzhou](https://github.com/zeminzhou)
-- Optimize the message that returns when you call the API to delete the TTL configuration [#8450](https://github.com/tikv/pd/issues/8450) @[lhy1024](https://github.com/lhy1024)
-- Optimize the RU consumption behavior of large query read requests to reduce the impact on other requests [#8457](https://github.com/tikv/pd/issues/8457) @[nolouch](https://github.com/nolouch)
-- Optimize the error message that returns when you misconfigure PD microservices [#52912](https://github.com/pingcap/tidb/issues/52912) @[rleungx](https://github.com/rleungx)
-- Add the `--name` startup parameter to PD microservices to more accurately display the service name during deployment [#7995](https://github.com/tikv/pd/issues/7995) @[HuSharp](https://github.com/HuSharp)
-- Support dynamically adjusting `PatrolRegionScanLimit` based on the number of Regions to reduce Region scan time [#7963](https://github.com/tikv/pd/issues/7963) @[lhy1024](https://github.com/lhy1024)
+    - Support modifying the `batch` configuration of the `evict-leader-scheduler` via `pd-ctl` to accelerate the leader eviction process [#8265](https://github.com/tikv/pd/issues/8265) @[rleungx](https://github.com/rleungx)
+    - Add the `store_id` monitoring metric to the **Cluster > Label distribution** panel in Grafana to display store IDs corresponding to different labels [#8337](https://github.com/tikv/pd/issues/8337) @[HuSharp](https://github.com/HuSharp)
+    - Support fallback to the default resource group when the specified resource group does not exist [#8388](https://github.com/tikv/pd/issues/8388) @[JmPotato](https://github.com/JmPotato)
+    - Add the `approximate_kv_size` field to the Region information returned by the `pd-ctl region` command [#8412](https://github.com/tikv/pd/issues/8412) @[zeminzhou](https://github.com/zeminzhou)
+    - Optimize the message that returns when you call the PD API to delete the TTL configuration [#8450](https://github.com/tikv/pd/issues/8450) @[lhy1024](https://github.com/lhy1024)
+    - Optimize the RU consumption behavior of large query read requests to reduce the impact on other requests [#8457](https://github.com/tikv/pd/issues/8457) @[nolouch](https://github.com/nolouch)
+    - Optimize the error message that returns when you misconfigure PD microservices [#52912](https://github.com/pingcap/tidb/issues/52912) @[rleungx](https://github.com/rleungx)
+    - Add the `--name` startup parameter to PD microservices to more accurately display the service name during deployment [#7995](https://github.com/tikv/pd/issues/7995) @[HuSharp](https://github.com/HuSharp)
+    - Support dynamically adjusting `PatrolRegionScanLimit` based on the number of Regions to reduce Region scan time [#7963](https://github.com/tikv/pd/issues/7963) @[lhy1024](https://github.com/lhy1024)
 
 + TiKV <!--tw@hfxsd: 5 notes-->
 
