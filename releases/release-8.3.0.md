@@ -291,35 +291,41 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
     - Add a new monitoring metric `min safe ts` [#17307](https://github.com/tikv/tikv/issues/17307) @[mittalrishabh](https://github.com/mittalrishabh)
     - Reduce the memory usage of the peer message channel [#16229](https://github.com/tikv/tikv/issues/16229) @[Connor1996](https://github.com/Connor1996)
 
-+ TiFlash
++ TiFlash <!--tw@lilin90: 1 note-->
+
+    - Support generating adhoc heap profiling in SVG format [#9320](https://github.com/pingcap/tiflash/issues/9320) @[CalvinNeo](https://github.com/CalvinNeo)
 
 + Tools
 
     + Backup & Restore (BR)
-    
+
         - Support checking whether a full backup exists before starting point-in-time recovery (PITR) for the first time. If the full backup is not found, BR terminates the restore and returns an error [#54418](https://github.com/pingcap/tidb/issues/54418) @[Leavrth](https://github.com/Leavrth) **tw@qiancai** <!--1915-->
         - Support checking whether the disk space in TiKV and TiFlash is sufficient before restoring snapshot backups. If the space is insufficient, BR terminates the restore and returns an error [#54316](https://github.com/pingcap/tidb/issues/54316) @[RidRisR](https://github.com/RidRisR) **tw@qiancai** <!--1890-->
         - Support checking whether the disk space in TiKV is sufficient before TiKV downloads each SST file. If the space is insufficient, BR terminates the restore and returns an error [#17224](https://github.com/tikv/tikv/issues/17224) @[RidRisR](https://github.com/RidRisR) **tw@qiancai** <!--1890-->
+        - (dup): release-7.5.3.md > 改进提升> Tools> Backup & Restore (BR) - 支持通过环境变量设置阿里云访问身份 [#45551](https://github.com/pingcap/tidb/issues/45551) @[RidRisR](https://github.com/RidRisR)
+        - (dup): release-8.2.0.md > 改进提升> Tools> Backup & Restore (BR) - 优化备份功能，提升在大量表备份过程中遇到节点重启、扩容或网络抖动时的备份性能和稳定性 [#52534](https://github.com/pingcap/tidb/issues/52534) @[3pointer](https://github.com/3pointer)<!--tw@lilin90: the following 2 notes-->
+        - Automatically set the environment variable `GOMEMLIMIT` based on the available memory of the BR process to avoid OOM when using BR for backup and restore [#53777](https://github.com/pingcap/tidb/issues/53777) @[Leavrth](https://github.com/Leavrth)
+        - Make incremental backups compatible with point-in-time recovery (PITR) [#54474](https://github.com/pingcap/tidb/issues/54474) @[3pointer](https://github.com/3pointer)
 
-        + TiCDC
+    + TiCDC
 
-            - note [#issue](链接) @[贡献者 GitHub ID](链接)
-            - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
-        + TiDB Data Migration (DM)
+    + TiDB Data Migration (DM)
 
-            - note [#issue](链接) @[贡献者 GitHub ID](链接)
-            - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
-        + TiDB Lightning
+    + TiDB Lightning
 
-            - note [#issue](链接) @[贡献者 GitHub ID](链接)
-            - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
-        + TiUP
+    + TiUP
 
-            - note [#issue](链接) @[贡献者 GitHub ID](链接)
-            - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 ## Bug fixes
 
