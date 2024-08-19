@@ -10,7 +10,7 @@ This document describes how to [deploy TiDB Binlog using a Binary package](#depl
 
 > **Warning:**
 >
-> Starting from TiDB v8.3.0, TiDB Binlog is deprecated, and is planned to be removed in a future release. For incremental data replication, use [TiCDC](/ticdc/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [TiDB Log Backup and PITR](/br/br-pitr-guide.md).
+> Starting from TiDB v8.3.0, TiDB Binlog is deprecated, and is planned to be removed in a future release. For incremental data replication, use [TiCDC](/ticdc/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [PITR](/br/br-pitr-guide.md).
 
 ## Hardware requirements
 
