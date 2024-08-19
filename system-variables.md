@@ -6158,6 +6158,19 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 </CustomContent>
 
+### tiflash_hashagg_preaggregation_mode <span class="version-mark">New in v8.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Enumeration
+- Default value: `force_preagg`
+- Value options: `force_preagg`, `force_streaming`, `auto`
+- This variable controls the pre-aggregation strategy used during the first stage of two-stage or three-stage HashAgg operations pushed down to TiFlash:
+    - `force_preagg`: TiFlash forces pre-aggregation during the first stage of HashAgg. This behavior is consistent with the behavior before v8.3.0.
+    - `force_streaming`: TiFlash directly sends data to the next stage of HashAgg without pre-aggregation.
+    - `auto`: TiFlash automatically chooses whether to perform pre-aggregation based on the current workload's aggregation degree.
+
 ### tikv_client_read_timeout <span class="version-mark">New in v7.4.0</span>
 
 - Scope: SESSION | GLOBAL
