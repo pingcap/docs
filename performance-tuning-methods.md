@@ -216,34 +216,65 @@ In this workload, only `ANALYZE` statements are running in the cluster:
 - The total number of KV requests per second is 35.5 and the number of Cop requests per second is 9.3.
 - Most of the KV processing time is spent on `Cop-internal_stats`, which indicates that the most time-consuming KV request is `Cop` from internal `ANALYZE` operations.
 
-#### TiDB CPU, TiKV CPU, and IO usage
+#### CPU and Memory usage
 
-In the TiDB CPU and TiKV CPU/IO MBps panels, you can observe the logical CPU usage and IO throughput of TiDB and TiKV, including average, maximum, and delta (maximum CPU usage minus minimum CPU usage), based on which you can determine the overall CPU usage of TiDB and TiKV.
+In the CPU and Memory panels, you can observe the logical CPU and memory of TiDB, TiKV and PD. For CPU usage, average, maximum, and delta (maximum CPU usage minus minimum CPU usage) are included, so as the CPU quota, based on which you can determine the overall CPU usage of TiDB, TiKV and PD. For Memory usage, the maximum memory usage are showed.
 
-- Based on the `delta` value, you can determine if CPU usage in TiDB is unbalanced (usually accompanied by unbalanced application connections) and if there are read/write hot spots among the cluster.
-- With an overview of TiDB and TiKV resource usage, you can quickly determine if there are resource bottlenecks in your cluster and whether TiKV or TiDB needs scale-out.
+- Based on the `delta` value, you can determine if CPU usage in TiDB or TiKV is unbalanced. For TiDB, high `delta` usually means unbalanced application connections among the TiDB instances; For TiKV, it usually means there are read/write hot spots among the cluster.
+- With an overview of TiDB, TiKV and PD resource usage, you can quickly determine if there are resource bottlenecks in your cluster and whether TiKV, TiDB or PD needs scale-out or scale-up.
 
-**Example 1: High TiDB resource usage**
+**Example 1: High TiKV resource usage**
 
-In this workload, each TiDB and TiKV is configured with 8 CPUs.
+In the TPC-C workload below, each TiDB and TiKV is configured with 16 CPUs. PD is configured with 4 CPUs.
 
-![TPC-C](/media/performance/tidb_high_cpu.png)
+![TPC-C](/media/performance/tpcc_cpu_memory.png)
 
-- The average, maximum, and delta CPU usage of TiDB are 575%, 643%, and 136%, respectively.
-- The average, maximum, and delta CPU usage of TiKV are 146%, 215%, and 118%, respectively. The average, maximum, and delta I/O throughput of TiKV are 9.06 MB/s, 19.7 MB/s, and 17.1 MB/s, respectively.
-
-Obviously, TiDB consumes more CPU, which is near the bottleneck threshold of 8 CPUs. It is recommended that you scale out the TiDB.
-
-**Example 2: High TiKV resource usage**
-
-In the TPC-C workload below, each TiDB and TiKV is configured with 16 CPUs.
-
-![TPC-C](/media/performance/tpcc_cpu_io.png)
-
-- The average, maximum, and delta CPU usage of TiDB are 883%, 962%, and 153%, respectively.
-- The average, maximum, and delta CPU usage of TiKV are 1288%, 1360%, and 126%, respectively. The average, maximum, and delta I/O throughput of TiKV are 130 MB/s, 153 MB/s, and 53.7 MB/s, respectively.
+- The average, maximum, and delta CPU usage of TiDB are 761%, 934%, and 322%, respectively. The maximum memory usage is 6.86GB.
+- The average, maximum, and delta CPU usage of TiKV are 1343%, 1505%, and 283%, respectively. The maximum memory usage is 27.1GB. 
+- The maximum CPU usage of PD are 59.1%. The maximum memory usage is 221MB. 
 
 Obviously, TiKV consumes more CPU, which is expected because TPC-C is a write-heavy scenario. It is recommended that you scale out the TiKV to improve performance.
+
+#### Data Traffic
+
+The read and write panels provide insights into the traffic patterns within your TiDB cluster. These panels help in monitoring both read and write traffic, offering a comprehensive view of data flow from clients to the database and between internal components.
+
+##### Read Traffic
+- TiDB -> Client: This metric displays the outbound traffic statistics from TiDB to the client.
+- Rocksdb -> TiKV: This metric tracks the data flow TiKV retriving from RocksDB during read operations within the storage layer.
+
+###### Write Traffic
+- Client -> TiDB: This metric displays the inbound traffic statistics from the client to TiDB.
+- TiDB -> TiKV: general: This metric reflects the rate at which forground transactions are written from TiDB to TiKV.
+- TiDB -> TiKV: internal: This metric reflects the rate at which internal transactions are written from TiDB to TiKV.
+- TiKV -> Rocksdb: This metric monitors the flow of write operations from TiKV to RocksDB
+- RocksDB Compaction: The total read and write I/O flow from RocksDB Compaction operations. If RocksDB Compaction is significantly higher than `TiKV -> Rocksdb`, and your average row size is larger than 512 bytes, you can enable Titan to reduce the compaction I/O flow as follows, with min-blob-size set to "512B" or "1KB" and blob-file-compression set to "zstd".
+
+```toml
+[rocksdb.titan]
+enabled = true
+[rocksdb.defaultcf.titan]
+min-blob-size = "1KB"
+blob-file-compression = "zstd"
+```
+
+**Example 1: read and write traffic in TPCC workload**
+
+The read write traffic In the TPC-C workload as below:
+##### Read Traffic
+- TiDB -> Client: 14.2 MB/s
+- Rocksdb -> TiKV: 469 MB/s, be noted not only the select statement need to read from Rocksdb to TiKV, the insert, update and delete statement also need to read data Rocksdb to TiKV, before commit the trasaction.
+
+###### Write Traffic
+- Client -> TiDB: 5.05 MB/s
+- TiDB -> TiKV: general: 13.1 MB/s
+- TiDB -> TiKV: internal: 5.07 KB/s
+- TiKV -> Rocksdb: 109 MB/s
+- RocksDB Compaction: 567 MB/s
+
+![TPC-C](/media/performance/tpcc_read_write_traffic.png)
+
+
 
 ### Query latency breakdown and key latency metrics
 
