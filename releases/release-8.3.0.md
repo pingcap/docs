@@ -283,15 +283,15 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
 + PD <!--tw@qiancai: 9 notes-->
 
-    - 支持通过 `pd-ctl` 修改 `evict-leader-scheduler` 的 `batch` 配置，以提升驱逐 Leader 的速度 [#8265](https://github.com/tikv/pd/issues/8265) @[rleungx](https://github.com/rleungx)
-    -  Grafana 上的 `Label distribution` 面板新增 ` store_id` 监控指标，用于显示不同的 label 对应的 store ID [#8337](https://github.com/tikv/pd/issues/8337) @[HuSharp](https://github.com/HuSharp)
-    - 当指定的资源组不存在时，支持回退到默认资源组 [#8388](https://github.com/tikv/pd/issues/8388) @[JmPotato](https://github.com/JmPotato)
-    - 使用 `pd-ctl` 的 `region` 命令显示 Region 信息时，输出中新增 `approximate_kv_size` 信息 [#8412](https://github.com/tikv/pd/issues/8412) @[zeminzhou](https://github.com/zeminzhou)
-    - 优化调用 API 删除 TTL 配置时的输出信息 [#8450](https://github.com/tikv/pd/issues/8450) @[lhy1024](https://github.com/lhy1024)
-    - 优化大查询读请求消耗 RU 的行为，以减少对其他请求的影响 [#8457](https://github.com/tikv/pd/issues/8457) @[nolouch](https://github.com/nolouch)
-    - 优化了 PD 微服务设置错误时返回的报错信息 [#52912](https://github.com/pingcap/tidb/issues/52912) @[rleungx](https://github.com/rleungx)
-    - PD 微服务新增 `--name` 启动参数，以便部署时更精确地显示服务名称 [#7995](https://github.com/tikv/pd/issues/7995) @[HuSharp](https://github.com/HuSharp)
-    - 支持通过 Region 数量动态调整 `PatrolRegionScanLimit`，以减少扫描 Region 所需的时间 [#7963](https://github.com/tikv/pd/issues/7963) @[lhy1024](https://github.com/lhy1024)
+- Support modifying the `batch` configuration of the `evict-leader-scheduler` via `pd-ctl` to accelerate the leader eviction process [#8265](https://github.com/tikv/pd/issues/8265) @[rleungx](https://github.com/rleungx)
+- Add the `store_id` monitoring metric to the `Label distribution` pane in Grafana to display store IDs corresponding to different labels [#8337](https://github.com/tikv/pd/issues/8337) @[HuSharp](https://github.com/HuSharp)
+- Support fallback to the default resource group when the specified resource group does not exist [#8388](https://github.com/tikv/pd/issues/8388) @[JmPotato](https://github.com/JmPotato)
+- Add the `approximate_kv_size` field to the Region information output by the `region` command in `pd-ctl` [#8412](https://github.com/tikv/pd/issues/8412) @[zeminzhou](https://github.com/zeminzhou)
+- Optimize the message that returns when you call the API to delete the TTL configuration [#8450](https://github.com/tikv/pd/issues/8450) @[lhy1024](https://github.com/lhy1024)
+- Optimize the RU consumption behavior of large query read requests to reduce the impact on other requests [#8457](https://github.com/tikv/pd/issues/8457) @[nolouch](https://github.com/nolouch)
+- Optimize the error message that returns when you misconfigure PD microservices [#52912](https://github.com/pingcap/tidb/issues/52912) @[rleungx](https://github.com/rleungx)
+- Add the `--name` startup parameter to PD microservices to more accurately display the service name during deployment [#7995](https://github.com/tikv/pd/issues/7995) @[HuSharp](https://github.com/HuSharp)
+- Support dynamically adjusting `PatrolRegionScanLimit` based on the number of Regions to reduce Region scan time [#7963](https://github.com/tikv/pd/issues/7963) @[lhy1024](https://github.com/lhy1024)
 
 + TiKV <!--tw@hfxsd: 5 notes-->
 
@@ -393,12 +393,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
     - (dup): release-8.1.1.md > 错误修复> PD - 修复开启 `scheduling` 微服务后，扩缩容进度显示错误的问题 [#8331](https://github.com/tikv/pd/issues/8331) @[rleungx](https://github.com/rleungx)
     - (dup): release-8.1.1.md > 错误修复> PD - 修复加密管理器在使用前未初始化的问题 [#8384](https://github.com/tikv/pd/issues/8384) @[rleungx](https://github.com/rleungx)
     - (dup): release-8.1.1.md > 错误修复> PD - 修复部分日志未脱敏的问题 [#8419](https://github.com/tikv/pd/issues/8419) @[rleungx](https://github.com/rleungx)
-    - 修复开启 PD 微服务时，重定向可能 panic 的问题 [#8406](https://github.com/tikv/pd/issues/8406) @[HuSharp](https://github.com/HuSharp)
-    - 修复反复修改 `split-merge-interval` 的值（例如从 `1s` 改为 `1h`，再改回 `1s`）可能导致该配置不生效的问题 [#8404](https://github.com/tikv/pd/issues/8404) @[lhy1024](https://github.com/lhy1024)
-    - 修复设置 `replication.strictly-match-label` 为 `true` 导致 TiFlash 启动失败的问题 [#8480](https://github.com/tikv/pd/issues/8480) @[rleungx](https://github.com/rleungx)
-    - 修复在 `ANALYZE` 大规模分区表时获取 TSO 慢导致 `ANALYZE` 性能下降的问题 [#8500](https://github.com/tikv/pd/issues/8500) @[rleungx](https://github.com/rleungx)
-    - 修复了大规模集群下可能发生数据竞争的问题 [#8386](https://github.com/tikv/pd/issues/8386) @[rleungx](https://github.com/rleungx)
-    - 修复 TiDB 在判断查询是否为 Runaway Queries 时，只统计了 Coprocessor 侧的时间消耗但未统计 TiDB 侧的时间消耗，导致一些查询未被识别为 Runaway Queries 的问题 [#51325](https://github.com/pingcap/tidb/issues/51325) @[HuSharp](https://github.com/HuSharp)
+    - Fix the issue that redirection might panic during the startup of PD microservices [#8406](https://github.com/tikv/pd/issues/8406) @[HuSharp](https://github.com/HuSharp)
+    - Fix the issue that the `split-merge-interval` configuration item might not take effect when you modify its value repeatedly (such as changing it from `1s` to `1h` and back to `1s`) [#8404](https://github.com/tikv/pd/issues/8404) @[lhy1024](https://github.com/lhy1024)
+    - Fix the issue that setting `replication.strictly-match-label` to `true` causes TiFlash to fail to start [#8480](https://github.com/tikv/pd/issues/8480) @[rleungx](https://github.com/rleungx)
+    - Fix the issue that fetching TSO is slow when analyzing large partitioned tables, causing `ANALYZE` performance degradation [#8500](https://github.com/tikv/pd/issues/8500) @[rleungx](https://github.com/rleungx)
+    - Fix the potential data races in large clusters [#8386](https://github.com/tikv/pd/issues/8386) @[rleungx](https://github.com/rleungx)
+    - Fix the issue that when determining whether queries are Runaway Queries, TiDB only counts time consumption spent on the Coprocessor side while missing time consumption spent on the TiDB side, resulting in some queries not being identified as Runaway Queries [#51325](https://github.com/pingcap/tidb/issues/51325) @[HuSharp](https://github.com/HuSharp)
     
 + TiFlash <!--tw@hfxsd: 4 notes-->
 
