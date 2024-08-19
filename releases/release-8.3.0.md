@@ -24,20 +24,20 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 <tbody>
   <tr>
     <td rowspan="3">Scalability and Performance</td>
-    <td> <a href="https://docs.pingcap.com/tidb/v8.3/partitioned-table#global-indexes">Global indexes for partitioned tables (experimental)</a></td> **tw@hfxsd** <!--1531-->
+    <td> <a href="https://docs.pingcap.com/tidb/v8.3/partitioned-table#global-indexes">Global indexes for partitioned tables (experimental)</a></td>
     <td>Global indexes can effectively improve the efficiency of retrieving non-partitioned keys, and remove the restriction that partitioned keys must contain a unique key. This feature extends the usage scenarios of TiDB partitioned tables and avoids some of the application modification work that might be required for data migration.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v8.3/system-variables#tidb_opt_projection_push_down-new-in-v610">Default pushdown of the <code>Projection</code> operator to the storage engine</a></td>**tw@Oreoxmt** <!--1872-->
+    <td><a href="https://docs.pingcap.com/tidb/v8.3/system-variables#tidb_opt_projection_push_down-new-in-v610">Default pushdown of the <code>Projection</code> operator to the storage engine</a></td>
     <td>Pushing the <code>Projection</code> operator down to the storage engine can distribute the load across storage nodes while reducing data transfer between nodes. This optimization helps to reduce the execution time for certain SQL queries and improves the overall database performance.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v8.3/statistics#collect-statistics-on-some-columns">Ignoring unnecessary columns when collecting statistics</a></td>**tw@lilin90** <!--1753-->
+    <td><a href="https://docs.pingcap.com/tidb/v8.3/statistics#collect-statistics-on-some-columns">Ignoring unnecessary columns when collecting statistics</a></td>
     <td>Under the premise of ensuring that the optimizer can obtain the necessary information, TiDB speeds up statistics collection, improves the timeliness of statistics, and thus ensures that the optimal execution plan is selected, improving the performance of the cluster. Meanwhile, TiDB also reduces the system overhead and improves the resource utilization.</td>
   </tr>
   <tr>
     <td rowspan="1">Reliability and Availability</td>
-    <td><a href="https://docs.pingcap.com/tidb/v8.3/tiproxy-overview">Built-in virtual IP management in TiProxy</a></td>**tw@Oreoxmt** <!--1887-->
+    <td><a href="https://docs.pingcap.com/tidb/v8.3/tiproxy-overview">Built-in virtual IP management in TiProxy</a></td>
     <td>TiProxy introduces built-in virtual IP management. When configured, it supports automatic virtual IP switching without relying on external platforms or tools. This feature simplifies TiProxy deployment and reduces the complexity of the database access layer.</td>
   </tr>
 </tbody>
@@ -89,7 +89,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
     - INFORMATION_SCHEMA.KEY_COLUMN_USAGE
     - INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS
 
-    The following query performance of system tables has been optimized in v8.3.0, resulting in a multi-fold performance improvement compared to v8.2.0.
+  The following query performance of system tables has been optimized in v8.3.0, resulting in a multi-fold performance improvement compared to v8.2.0.
 
     - INFORMATION_SCHEMA.CHECK_CONSTRAINTS
     - INFORMATION_SCHEMA.COLUMNS
@@ -171,13 +171,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
     Starting from v8.3.0, TiDB prints the progress of loading initial statistics in stages in the log, so you can understand the running status. To provide formatted results to external tools, TiDB adds the additional [monitoring API](/tidb-monitoring-api.md) so you can obtain the progress of loading initial statistics at any time during the startup phase.
 
-* Display metrics about resource groups [#8444](https://github.com/tikv/pd/issues/8444) @[nolouch](https://github.com/nolouch)
+* Add metrics about Request Unit (RU) settings [#8444](https://github.com/tikv/pd/issues/8444) @[nolouch](https://github.com/nolouch)
 
 ### Security
 
 * Enhance PD log redaction [#8305](https://github.com/tikv/pd/issues/8305) @[JmPotato](https://github.com/JmPotato) **tw@hfxsd** <!--1861-->
 
-    TiDB v8.0.0 enhances log redaction and supports marking user data in TiDB logs with single-angle quotation marks `‹›`. Based on the marked logs, you can decide whether to redact the marked information when displaying the logs, thus increasing the flexibility of log redaction. In v8.2.0, TiFlash implements a similar log redaction enhancement.
+    TiDB v8.0.0 enhances log redaction and supports marking user data in TiDB logs with `‹›`. Based on the marked logs, you can decide whether to redact the marked information when displaying the logs, thus increasing the flexibility of log redaction. In v8.2.0, TiFlash implements a similar log redaction enhancement.
     
     In v8.3.0, PD implements a similar log redaction enhancement. To use this feature, you can set the value of the PD configuration item `security.redact-info-log` to `marker`.
 
@@ -185,7 +185,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
 * Enhance TiKV log redaction [#17206](https://github.com/tikv/tikv/issues/17206) @[lucasliang](https://github.com/LykxSassinator) **tw@hfxsd** <!--1862-->
 
-    TiDB v8.0.0 enhances log redaction and supports marking user data in TiDB logs with single-angle quotation marks `‹›`. Based on the marked logs, you can decide whether to redact the marked information when displaying the logs, thus increasing the flexibility of log redaction. In v8.2.0, TiFlash implements a similar log redaction enhancement.
+    TiDB v8.0.0 enhances log redaction and supports marking user data in TiDB logs with `‹›`. Based on the marked logs, you can decide whether to redact the marked information when displaying the logs, thus increasing the flexibility of log redaction. In v8.2.0, TiFlash implements a similar log redaction enhancement.
     
     In v8.3.0, TiKV implements a similar log redaction enhancement. To use this feature, you can set the value of the TiKV configuration item `security.redact-info-log` to `marker`.
 
@@ -285,8 +285,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
 + TiKV <!--tw@hfxsd: 5 notes-->
 
-    - Optimize `async-io` batching mechanism to reduce I/O bandwidth usage [#16907](https://github.com/tikv/tikv/issues/16907) @[LykxSassinator](https://github.com/LykxSassinator)
-    - Redesigned TiCDC's delegate and downstream modules to better support partial subscription [#16362](https://github.com/tikv/tikv/issues/16362) @[hicqu](https://github.com/hicqu)
+    - Optimize the batching policy for writing Raft entries when `async-io` is enabled to reduce the consumption of disk I/O bandwidth resources [#16907](https://github.com/tikv/tikv/issues/16907) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Redesigned TiCDC delegate and downstream modules to better support Region partial subscription [#16362](https://github.com/tikv/tikv/issues/16362) @[hicqu](https://github.com/hicqu)
     - Reduce the size of a single slow log [#17294](https://github.com/tikv/tikv/issues/17294) @(Connor1996)[https://github.com/Connor1996]
     - Add a new monitoring metric `min safe ts` [#17307](https://github.com/tikv/tikv/issues/17307) @[mittalrishabh](https://github.com/mittalrishabh)
     - Reduce the memory usage of the peer message channel [#16229](https://github.com/tikv/tikv/issues/16229) @[Connor1996](https://github.com/Connor1996)
