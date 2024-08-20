@@ -1,7 +1,6 @@
 ---
 title: Deploy Data Migration Using DM Binary
 summary: Learn how to deploy a Data Migration cluster using DM binary.
-aliases: ['/docs/tidb-data-migration/dev/deploy-a-dm-cluster-using-binary/']
 ---
 
 # Deploy Data Migration Using DM Binary
