@@ -865,7 +865,7 @@ Configuration items related to read isolation.
 - Default value: `300`
 - Range: `[-1, 9223372036854775807]`
 - Unit: Milliseconds
-- When the time consumed by a query is larger than this value, this query is considered as a slow query and its log is output to the slow query log. Note that when the output level of [`log.level`](#level) is `"debug"`, all queries are recorded in the slow query log, regardless of the setting of this parameter.
+- When the time consumed by a query is larger than this value, this query is considered as a slow query and its log is output to the slow query log. Note that when the output level of [`log.level`](#level) is `"debug"`, all queries are recorded in the slow query log, regardless of the setting of this parameter. 
 - Before v6.1.0, this configuration is set by `slow-threshold`.
 
 ### `in-mem-slow-query-topn-num` <span class="version-mark">New in v7.3.0</span>
