@@ -54,11 +54,11 @@ Take the following steps to configure a service account key:
 
    ![img.png](../media/tidb-cloud/serverless-external-storage/gcs-service-account.png)
 
-2. Click the service account and then click the `ADD KEY` button in the `KEYS` page to create a service account key. 
+2. Click the service account and then click the **ADD KEY** button in the `KEYS` page to create a service account key. 
 
     ![img.png](../media/tidb-cloud/serverless-external-storage/gcs-service-account-key.png)
 
-3. Choose the default `JSON` key type and click the `CREATE` button to download the service account key.
+3. Choose the default `JSON` key type and click the **CREATE** button to download the service account key.
 
 4. Open the downloaded JSON file and encode the content with base64. For example, you can use the following command to encode the content in the macOS terminal:
 
@@ -73,17 +73,17 @@ To allow TiDB Cloud Serverless to access your Azure Blob container, you need to 
 Take the following steps to configure a service SAS token:
 
 1. Click your storage account where the container belong to in the [Azure storage account](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts) page.
-2. In your `storage account` page, click the `Security+network` and then click the `Shared access signature`.
+2. In your `storage account` page, click the **Security+network** and then click the **Shared access signature**.
 
     ![img.png](../media/tidb-cloud/serverless-external-storage/azure-sas.png)
 
 3. In the `Shared access signature` page, create a service SAS token with needed permission. For more information, see [Create a service SAS token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview).
    1. Choose the `Blob` service under the `Allowed services` section.
    2. Choose the `Container` and `Object` under the `Allowed Resource types` section.
-   3. Choose the permission under the `Allowed permissions` section as you needed. For example: TiDB Cloud Serverless exports needs `Write` permission.
+   3. Choose the permission under the `Allowed permissions` section as you needed. For example: TiDB Cloud Serverless exports needs `Read` and `Write` permission.
    4. Adjust the `Start and expiry date/time` as you needed.
-   5. You can keep other settings as default and click the `Generate SAS and connection string` button.
+   5. You can keep other settings as default.
 
    ![img.png](../media/tidb-cloud/serverless-external-storage/azure-create-sas.png)
 
-4. The SAS token will be generated, and you can use it to configure the Azure Blob access.
+4. Click the **Generate SAS and connection string** button to generate the SAS token.

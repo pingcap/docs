@@ -31,8 +31,9 @@ You can export data to:
 
 Exporting data to local file has the following limitations:
 
+- You can only download the exported data with the [TiDB Cloud CLI](/tidb-cloud/cli-reference.md), download on the console is not supported.
 - Exported data is saved in the stashing area and will expire after two days. You need to download the exported data in time.
-- If the storage space of stashing area is full, you will not be able to export data to local file.
+- If the storage space of stashing area is full, you will not be able to export data to the local file.
 
 ### Amazon S3
 
@@ -56,7 +57,7 @@ See [Configure TiDB Cloud Serverless external storage access](/tidb-cloud/server
 
 > **Note:**
 >
-> Only supported in TiDB Cloud CLI now.
+> You can only export to Google Cloud Storage with TiDB Cloud CLI now.
 
 ### Azure Blob Storage
 
@@ -69,7 +70,7 @@ See [Configure TiDB Cloud Serverless external storage access](/tidb-cloud/server
 
 > **Note:**
 >
-> Only supported in TiDB Cloud CLI now.
+> You can only export to Azure Blob Storage with TiDB Cloud CLI now.
 
 ## Export options
 
