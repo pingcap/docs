@@ -282,7 +282,7 @@ Configuration items related to log.
 - Outputs the threshold value of consumed time in the slow log.
 - Default value: `300`
 - Unit: Milliseconds
-- If the value in a query is larger than the default value, it is a slow query and is output to the slow log.
+- When the time consumed by a query is larger than this value, this query is considered as a slow query and its log is output to the slow query log. Note that when the output level of [`log.level`](#level) is `"debug"`, all queries are recorded in the slow query log, regardless of the setting of this parameter.
 - Since v6.1.0, the threshold value of consumed time in the slow log is specified by the TiDB configuration item [`instance.tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold) or the system variable [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold). `slow-threshold` still takes effect. But if `slow-threshold` and `instance.tidb_slow_log_threshold` are set at the same time, the latter takes effect.
 
 ### `record-plan-in-slow-log`
@@ -839,10 +839,11 @@ Configuration items related to read isolation.
 
 ### `tidb_slow_log_threshold`
 
-- This configuration is used to output the threshold value of the time consumed by the slow log. When the time consumed by a query is larger than this value, this query is considered as a slow log and its log is output to the slow query log.
+- Outputs the threshold value of the time consumed by the slow log.
 - Default value: `300`
 - Range: `[-1, 9223372036854775807]`
 - Unit: Milliseconds
+- When the time consumed by a query is larger than this value, this query is considered as a slow query and its log is output to the slow query log. Note that when the output level of [`log.level`](#level) is `"debug"`, all queries are recorded in the slow query log, regardless of the setting of this parameter.
 - Before v6.1.0, this configuration is set by `slow-threshold`.
 
 ### `tidb_expensive_query_time_threshold`
