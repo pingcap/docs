@@ -493,6 +493,44 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Get Region Operation Count: The number of times the coordinator requests Region information from the PD
 - Try Advance Trigger Time: The time taken for the coordinator to attempt to advance the checkpoint
 
+### Backup & Import
+
+- Import CPU Utilization: The CPU utilization aggregated by SST importer.
+- Import Thread Count: The number of threads used by SST importer.
+- Import Errors: The number of errors encountered during SST import.
+- Import RPC Duration: The time spent on various RPC calls in SST importer.
+- Import RPC Ops: The total number of RPC calls in SST importer.
+- Import RPC Count: The number of RPC calls being processed by SST importer.
+- Import Write/Download RPC Duration: The RPC time for write or download operations in SST importer.
+- Import Wait Duration: The time spent waiting in queue for download task execution.
+- Import Read SST Duration: The time spent reading an SST file from external storage and downloading it to TiKV.
+- Import Rewrite SST Duration: The time spent rewriting the SST file based on rewrite rules.
+- Import Ingest RPC Duration: The time spent handling ingest RPC requests on TiKV.
+- Import Ingest SST Duration: The time spent ingesting the SST file into RocksDB.
+- Import Ingest SST Bytes: The number of bytes ingested.
+- Import Download SST Throughput: The SST download throughput in bytes per second.
+- cloud request: The number of requests to cloud providers.
+
+### Point In Time Restore
+
+- CPU Usage: The CPU utilization by point-in-time recovery (PITR).
+- P99 RPC Duration: The 99th percentile of RPC request duration.
+- Import RPC Ops: The total number of RPC calls in SST importer.
+- Import RPC Count: The number of RPC calls being processed by SST importer.
+- Cache Events: The number of events in the file cache during SST import.
+- Overall RPC Duration: The time spent on RPC calls.
+- Read File into Memory Duration: The time spent downloading files from external storage and loading them into memory.
+- Queuing Time: The time spent waiting to be scheduled on a thread.
+- Apply Request Throughput: The rate of applying requests in bytes.
+- Downloaded File Size: The size of downloaded file in bytes.
+- Apply Batch Size: The number of bytes for applying to Raft store in one batch.
+- Blocked by Concurrency Time: The time spent waiting for execution due to concurrency constraints.
+- Apply Request Speed: The speed of applying request to Raft store.
+- Cached File in Memory: The files cached by the applying requests of SST importer.
+- Engine Requests Unfinished: The number of pending requests to Raft store.
+- Apply Time: The time spent writing data to Raft store.
+- Raft Store Memory Usage: The memory usage for Raft store.
+
 ### Explanation of Common Parameters
 
 #### gRPC Message Type
