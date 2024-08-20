@@ -209,7 +209,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
 ### Behavior changes
 
-* To avoid incorrect use of commands, pd-ctl cancels the prefix matching mechanism. For example, `store remove-tombstone` cannot be called via `store remove` [#8413](https://github.com/tikv/pd/issues/8413) @[lhy1024](https://github.com/lhy1024)
+* To avoid incorrect use of commands, `pd-ctl` cancels the prefix matching mechanism. For example, `store remove-tombstone` cannot be called via `store remove` [#8413](https://github.com/tikv/pd/issues/8413) @[lhy1024](https://github.com/lhy1024)
 
 ### MySQL compatibility
 
@@ -240,10 +240,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 ### System tables
 
 * The [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md) and [`INFORMATION_SCHEMA.CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md#cluster_processlist) system tables add the `SESSION_ALIAS` field to show the number of rows currently affected by the DML statement [#46889](https://github.com/pingcap/tidb/issues/46889) @[lcwangchao](https://github.com/lcwangchao) **tw@qiancai** <!--1903-->
-
-### Other changes
-
-## Offline package changes
 
 ## Deprecated features **tw@hfxsd**
 
@@ -317,26 +313,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
         - (dup): release-8.2.0.md > 改进提升> Tools> Backup & Restore (BR) - 优化备份功能，提升在大量表备份过程中遇到节点重启、扩容或网络抖动时的备份性能和稳定性 [#52534](https://github.com/pingcap/tidb/issues/52534) @[3pointer](https://github.com/3pointer)<!--tw@lilin90: the following 2 notes-->
         - Automatically set the environment variable `GOMEMLIMIT` based on the available memory of the BR process to avoid OOM when using BR for backup and restore [#53777](https://github.com/pingcap/tidb/issues/53777) @[Leavrth](https://github.com/Leavrth)
         - Make incremental backups compatible with point-in-time recovery (PITR) [#54474](https://github.com/pingcap/tidb/issues/54474) @[3pointer](https://github.com/3pointer)
-
-    + TiCDC
-
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-
-    + TiDB Data Migration (DM)
-
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-
-    + TiDB Lightning
-
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-
-    + TiUP
-
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 ## Bug fixes
 
