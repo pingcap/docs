@@ -63,6 +63,12 @@ The TSO node is used for providing the `tso` microservice for PD. You can config
 - Default: `"info"`
 - Optional values: `"debug"`, `"info"`, `"warn"`, `"error"`, `"fatal"`
 
+## `--name` <span class="version-mark">New in v8.3.0</span>
+
++ The name of the current TSO node.
++ Default: `"TSO-hostname"`
++ If you need to start multiple TSO nodes, it is recommended to configure different names for different nodes for easier identification.
+
 ## `-V`, `--version`
 
 - Output the version information and exit.
