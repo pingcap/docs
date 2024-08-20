@@ -41,7 +41,9 @@ To export data to Amazon S3, you need to provide the following information:
 - uri: `s3://<bucket-name>/<file-path>`
 - one of the following access methods:
   - [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): make sure the access key has the `s3:PutObject` and `s3:ListBucket` permissions.
-  - [role arn](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role arn has the `s3:PutObject` and `s3:ListBucket` permissions.
+  - [role arn](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role arn has the `s3:PutObject` and `s3:ListBucket` permissions. 
+
+See [Configure TiDB Cloud Serverless external storage access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access) to learn how to configure the Amazon S3 access.
 
 ### Google Cloud Storage
 
@@ -49,6 +51,8 @@ To export data to Google Cloud Storage, you need to provide the following inform
 
 - uri: `gs://<bucket-name>/<file-path>`
 - access method: a **base64 encoded** [service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for your bucket. Make sure the service account key has the `storage.objects.create` permission.
+
+See [Configure TiDB Cloud Serverless external storage access](/tidb-cloud/serverless-external-storage.md#configure-gcs-access) to learn how to configure the Google Cloud Storage access.
 
 > **Note:**
 >
@@ -60,6 +64,8 @@ To export data to Azure Blob Storage, you need to provide the following informat
 
 - uri: `azure://<account-name>.blob.core.windows.net/<container-name>/<file-path>`
 - access method: a [shared access signature (SAS) token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) for your Azure Blob Storage container. Make sure the SAS token has the `Read` and `Write` permissions on the `Container` and `Object` resources.
+
+See [Configure TiDB Cloud Serverless external storage access](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-access) to learn how to configure the Azure Blob Storage access.       
 
 > **Note:**
 >
