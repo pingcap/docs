@@ -63,6 +63,12 @@ The Scheduling node is used for providing the `scheduling` microservice for PD. 
 - Default: `"info"`
 - Optional values: `"debug"`, `"info"`, `"warn"`, `"error"`, `"fatal"`
 
+## `--name` <span class="version-mark">New in v8.3.0</span>
+
++ The name of the current Scheduling node.
++ Default: `"Scheduling-hostname"`
++ If you need to start multiple Scheduling nodes, it is recommended to configure different names for different nodes for easier identification.
+
 ## `-V`, `--version`
 
 - Output the version information and exit.
