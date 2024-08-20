@@ -498,13 +498,13 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Import Errors: The number of errors encountered during SST import.
 - Import RPC Duration: The time spent on various RPC calls in SST importer.
 - Import RPC Ops: The total number of RPC calls in SST importer.
-- Import RPC Count: The number of in-flight RPC calls in SST importer.
+- Import RPC Count: The number of RPC calls being processed by SST importer.
 - Import Write/Download RPC Duration: The RPC time for write or download operations in SST importer.
 - Import Wait Duration: The time spent waiting in queue for download task execution.
-- Import Read SST Duration: The time spent reading a file from external storage and downloading it to TiKV.
-- Import Rewrite SST Duration: The time spent rewriting SST based on rewrite rules.
+- Import Read SST Duration: The time spent reading an SST file from external storage and downloading it to TiKV.
+- Import Rewrite SST Duration: The time spent rewriting the SST file based on rewrite rules.
 - Import Ingest RPC Duration: The time spent handling ingest RPC requests on TiKV.
-- Import Ingest SST Duration: The time spent ingesting SST into RocksDB.
+- Import Ingest SST Duration: The time spent ingesting the SST file into RocksDB.
 - Import Ingest SST Bytes: The number of bytes ingested.
 - Import Download SST Throughput: The SST download throughput in bytes per second.
 - cloud request: The number of requests to cloud providers.
@@ -512,10 +512,10 @@ This section provides a detailed description of these key metrics on the **TiKV-
 ### Point In Time Restore
 
 - CPU Usage: The CPU utilization by point-in-time recovery (PITR).
-- P99 RPC Duration: The 99th percentile of RPC request time.
+- P99 RPC Duration: The 99th percentile of RPC request duration.
 - Import RPC Ops: The total number of RPC calls in SST importer.
-- Import RPC Count: The number of inf-light RPC calls in SST importer.
-- Cache Events: The number of events on file cache during SST import.
+- Import RPC Count: The number of RPC calls being processed by SST importer.
+- Cache Events: The number of events in the file cache during SST import.
 - Overall RPC Duration: The time spent on RPC calls.
 - Read File into Memory Duration: The time spent downloading files from external storage and loading them into memory.
 - Queuing Time: The time spent waiting to be scheduled on a thread.
@@ -524,7 +524,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Apply Batch Size: The number of bytes for applying to Raft store in one batch.
 - Blocked by Concurrency Time: The time spent waiting for execution due to concurrency constraints.
 - Apply Request Speed: The speed of applying request to Raft store.
-- Cached File in Memory: The files cached by the applying requests of importer.
+- Cached File in Memory: The files cached by the applying requests of SST importer.
 - Engine Requests Unfinished: The number of pending requests to Raft store.
 - Apply Time: The time spent writing data to the Raft store.
 - Raft Store Memory Usage: The memory usage for Raft store.
