@@ -111,8 +111,7 @@ After you have accepted the endpoint connection, take the following steps to con
 
 1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click **...** in the **Action** column.
 2. Click **Connect**. A connection dialog is displayed.
-3. In the **Connection Type** tab, select **Private Endpoint** and then select the private endpoint you just created from **Endpoint ID**.
-4. Select your preferred connection method to get the corresponding connection string.
+3. Select the **Private Endpoint** tab. The private endpoint you just created is displayed. Copy the command to connect to the TiDB cluster.
 
 ### Private endpoint status reference
 

@@ -63,11 +63,11 @@ This section describes how to set up VPC peering connections on AWS. For Google 
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
-3. On the **Project Settings** page of your project, click **Network Access** in the left navigation pane, and then click the **VPC Peering** tab.
+3. On the **Project Settings** page of your project, click **Network Access** in the left navigation pane, and click the **VPC Peering** > **AWS** tab.
 
     The **VPC Peering** configuration is displayed by default.
 
-4. Click **Create VPC Peering**, choose **AWS VPC Peering**, choose the **TiDB Cloud VPC Region**, and then fill in the required information of your existing AWS VPC:
+4. In the upper-right corner, click **Create VPC Peering**, select the **TiDB Cloud VPC Region**, and then fill in the required information of your existing AWS VPC:
 
     - Your VPC Region
     - AWS Account ID
@@ -78,7 +78,7 @@ This section describes how to set up VPC peering connections on AWS. For Google 
 
     ![VPC peering](/media/tidb-cloud/vpc-peering/vpc-peering-creating-infos.png)
 
-5. Click **Create** to send the VPC peering request, and then view the VPC peering information on the **VPC Peering** tab. The status of the newly created VPC peering is **System Checking**.
+5. Click **Create** to send the VPC peering request, and then view the VPC peering information on the **VPC Peering** > **AWS** tab. The status of the newly created VPC peering is **System Checking**.
 
 6. To view detailed information about your newly created VPC peering, click **...** > **View** in the **Action** column. The **VPC Peering Details** page is displayed.
 
@@ -211,11 +211,11 @@ Now you have successfully set up the VPC peering connection. Next, [connect to t
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
-3. On the **Project Settings** page of your project, click **Network Access** in the left navigation pane, and then click the **VPC Peering** tab.
+3. On the **Project Settings** page of your project, click **Network Access** in the left navigation pane, and click the **VPC Peering** > **Google Cloud** tab.
 
     The **VPC Peering** configuration is displayed by default.
 
-4. Click **Create VPC Peering**, choose **Google Cloud VPC Peering**, choose the **TiDB Cloud VPC Region**, and then fill in the required information of your existing Google Cloud VPC:
+4. In the upper-right corner, click **Create VPC Peering**, select the **TiDB Cloud VPC Region**, and then fill in the required information of your existing Google Cloud VPC:
 
     > **Tip:**
     >
@@ -225,7 +225,7 @@ Now you have successfully set up the VPC peering connection. Next, [connect to t
     - VPC Network Name
     - VPC CIDR
 
-5. Click **Create** to send the VPC peering request, and then view the VPC peering information on the **VPC Peering** tab. The status of the newly created VPC peering is **System Checking**.
+5. Click **Create** to send the VPC peering request, and then view the VPC peering information on the **VPC Peering** > **Google Cloud** tab. The status of the newly created VPC peering is **System Checking**.
 
 6. To view detailed information about your newly created VPC peering, click **...** > **View** in the **Action** column. The **VPC Peering Details** page is displayed.
 
