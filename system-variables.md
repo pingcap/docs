@@ -4563,11 +4563,17 @@ EXPLAIN FORMAT='brief' SELECT COUNT(1) FROM t WHERE a = 1 AND b IS NOT NULL;
 
 ### tidb_opt_projection_push_down <span class="version-mark">New in v6.1.0</span>
 
-- Scope: SESSION
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
-- Default value: `OFF`
-- Specifies whether to allow the optimizer to push `Projection` down to the TiKV or TiFlash coprocessor.
+- Default value: `ON`. Before v8.3.0, the default value is `OFF`.
+- Specifies whether to allow the optimizer to push the `Projection` operator down to the TiKV coprocessor. When enabled, the optimizer might push the following three types of `Projection` operators down to TiKV:
+    - The top-level expressions of the operator are all [JSON query functions](/functions-and-operators/json-functions/json-functions-search.md) or [JSON value attribute functions](/functions-and-operators/json-functions/json-functions-return.md). For example: `SELECT JSON_EXTRACT(data, '$.name') FROM users;`.
+    - The top-level expressions of the operator include a mix of JSON query functions or JSON value attribute functions, and direct column reads. For example: `SELECT JSON_DEPTH(data), name FROM users;`.
+    - The top-level expressions of the operator are all direct column reads, and the number of output columns is less than the number of input columns. For example: `SELECT name FROM users;`.
+- The final decision to push down a `Projection` operator also depends on the optimizer's comprehensive evaluation of query cost.
+- For TiDB clusters that are upgraded from a version earlier than v8.3.0 to v8.3.0 or later, the default value of this variable is `OFF`.
 
 ### tidb_opt_range_max_size <span class="version-mark">New in v6.4.0</span>
 
