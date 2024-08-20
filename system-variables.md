@@ -1677,7 +1677,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Unit: Rows
 - This variable is used to set the batch size during the `re-organize` phase of the DDL operation. For example, when TiDB executes the `ADD INDEX` operation, the index data needs to backfilled by `tidb_ddl_reorg_worker_cnt` (the number) concurrent workers. Each worker backfills the index data in batches.
     - If `tidb_ddl_enable_fast_reorg` is set to `Off`, `ADD INDEX` is executed as a transactional. If there are many updating operations such as `UPDATE` and `REPLACE` exist during the `ADD INDEX` operation, a larger batch size indicates a larger probability of transaction conflicts. In this case, you need to adjust the batch size to a smaller value. The minimum value is 32.
-    - If the transaction conflict does not exist, or if `tidb_ddl_enable_fast_reorg` is set to `On`, you can set the batch size to a large value (consider the worker count. See [Interaction Test on Online Workloads and `ADD INDEX` Operations](https://docs.pingcap.com/tidb/stable/online-workloads-and-add-index-operations) for reference). This can increase the speed of the backfilling data, but the write pressure on TiKV also becomes higher.
+    - If the transaction conflict does not exist, or if `tidb_ddl_enable_fast_reorg` is set to `ON`, you can set the batch size to a large value. In this case, consider the worker count. See [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/online-workloads-and-add-index-operations.md) for reference). This can increase the speed of the backfilling data, but the write pressure on TiKV also becomes higher.
 
 ### tidb_ddl_reorg_priority
 
