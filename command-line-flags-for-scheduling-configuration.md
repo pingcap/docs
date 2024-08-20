@@ -57,17 +57,17 @@ The Scheduling node is used for providing the `scheduling` microservice for PD. 
 - Default: `""`
 - If this flag is not set, logs are output to "stderr". If this flag is set, logs are output to the corresponding file.
 
-## `-L`
-
-- The log level.
-- Default: `"info"`
-- Optional values: `"debug"`, `"info"`, `"warn"`, `"error"`, `"fatal"`
-
 ## `--name` <span class="version-mark">New in v8.3.0</span>
 
 + The name of the current Scheduling node.
 + Default: `"Scheduling-hostname"`
 + If you need to start multiple Scheduling nodes, it is recommended to configure different names for different nodes for easier identification.
+
+## `-L`
+
+- The log level.
+- Default: `"info"`
+- Optional values: `"debug"`, `"info"`, `"warn"`, `"error"`, `"fatal"`
 
 ## `-V`, `--version`
 
