@@ -77,50 +77,50 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
 * Improve the query performance of some system tables [#50305](https://github.com/pingcap/tidb/issues/50305) @[tangenta](https://github.com/tangenta) **tw@hfxsd** <!--1865-->
 
-    In previous versions, querying system tables has slow performance when the cluster size becomes large and there are a large number of tables.
+    In previous versions, querying system tables has poor performance when the cluster size becomes large and there are a large number of tables.
 
     In v8.0.0, query performance is optimized for the following four system tables.
-    
-    - INFORMATION_SCHEMA.TABLES
-    - INFORMATION_SCHEMA.STATISTICS
-    - INFORMATION_SCHEMA.KEY_COLUMN_USAGE
-    - INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS
+
+    - `INFORMATION_SCHEMA.TABLES`
+    - `INFORMATION_SCHEMA.STATISTICS`
+    - `INFORMATION_SCHEMA.KEY_COLUMN_USAGE`
+    - `INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS`
 
   The following query performance of system tables has been optimized in v8.3.0, resulting in a multi-fold performance improvement compared to v8.2.0.
 
-    - INFORMATION_SCHEMA.CHECK_CONSTRAINTS
-    - INFORMATION_SCHEMA.COLUMNS
-    - INFORMATION_SCHEMA.PARTITIONS
-    - INFORMATION_SCHEMA.SCHEMATA
-    - INFORMATION_SCHEMA.SEQUENCES
-    - INFORMATION_SCHEMA.TABLE_CONSTRAINTS
-    - INFORMATION_SCHEMA.TIDB_CHECK_CONSTRAINTS
-    - INFORMATION_SCHEMA.TiDB_INDEXES
-    - INFORMATION_SCHEMA.TIDB_INDEX_USAGE
-    - INFORMATION_SCHEMA.VIEWS
+    - `INFORMATION_SCHEMA.CHECK_CONSTRAINTS`
+    - `INFORMATION_SCHEMA.COLUMNS`
+    - `INFORMATION_SCHEMA.PARTITIONS`
+    - `INFORMATION_SCHEMA.SCHEMATA`
+    - `INFORMATION_SCHEMA.SEQUENCES`
+    - `INFORMATION_SCHEMA.TABLE_CONSTRAINTS`
+    - `INFORMATION_SCHEMA.TIDB_CHECK_CONSTRAINTS`
+    - `INFORMATION_SCHEMA.TiDB_INDEXES`
+    - `INFORMATION_SCHEMA.TIDB_INDEX_USAGE`
+    - `INFORMATION_SCHEMA.VIEWS`
 
 * Support for partition pruning when partition expressions use the `EXTRACT(YEAR_MONTH...)` function to improve query performance [#54209](https://github.com/pingcap/tidb/pull/54209) @[mjonss](https://github.com/mjonss) **tw@hfxsd** <!--1885-->
 
     In previous versions, when partition expressions use the `EXTRACT(YEAR_MONTH...)` function, partition pruning is not supported, resulting in poor query performance. Starting from v8.3.0, partition pruning is supported when partition expressions use the `EXTRACT(YEAR_MONTH...)` function, which improves query performance.
 
     For more information, see [documentation](/partition-pruning.md#scenario-three).
-    
+
 * The performance of `CREATE TABLE` is improved by 1.4 times, `CREATE DATABASE` by 2.1 times, and `ADD COLUMN` by 2 times [#54436](https://github.com/pingcap/tidb/issues/54436) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd** <!--1863-->
 
     TiDB v8.0.0 introduces the system variable [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800) to improve table creation performance in batch table creation scenarios. In v8.3.0, when submitting the DDL statements for table creation concurrently through 10 sessions in a single database, the performance is improved by 1.4 times compared with v8.2.0.
-   
+
     In v8.3.0, the performance of general DDLs in batch execution has improved compared to v8.2.0. The performance of `CREATE DATABASE` for 10 sessions concurrently improves by 19 times compared with v8.1.0 and 2.1 times compared with v8.2.0. The performance of using 10 sessions to add columns (`ADD COLUMN`) to multiple tables in the same database in batch has improved by 10 times compared with v8.1.0, and 2.1 times compared with v8.2.0. The performance of `ADD COLUMN` with 10 sessions on multiple tables in the same database has improved by 10 times compared with v8.1.0 and 2 times compared with v8.2.0.
 
-    For more information, see [documentation](/system-variables.md#tidb_enable_fast_create_table-new-in-v800).    
+    For more information, see [documentation](/system-variables.md#tidb_enable_fast_create_table-new-in-v800).
 
 * Partitioned tables support global indexes (experimental) [#45133](https://github.com/pingcap/tidb/issues/45133) @[mjonss](https://github.com/mjonss) **tw@hfxsd** <!--1531-->
 
     In previous versions of partitioned tables, there are some limitations because global indexes are not supported. For example, the unique key must use every column in the table's partitioning expression. If the query condition does not use every column, the query will scan all partitions, resulting in poor performance. Starting from v7.6.0, the system variable [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) is introduced to enable the global index feature. But this feature was under development at that time and it is not recommended to enable it.
-    
+
     Starting with v8.3.0, the global index feature is released as an experimental feature. You can explicitly create a global index for a partitioned table with the keyword `Global` to remove the restriction that the unique key must use every column in the table's partitioning expression, to meet flexible business needs. Global indexes also improve the query performance of unique indexes without partition keys.
 
     For more information, see [documentation](/partitioned-table.md#global-indexes).
- 
+
 ### Reliability
 
 * Support streaming cursor result sets (experimental) [#54526](https://github.com/pingcap/tidb/issues/54526) @[YangKeao](https://github.com/YangKeao) **tw@lilin90** <!--1891-->
@@ -175,7 +175,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 * Enhance PD log redaction [#8305](https://github.com/tikv/pd/issues/8305) @[JmPotato](https://github.com/JmPotato) **tw@hfxsd** <!--1861-->
 
     TiDB v8.0.0 enhances log redaction and supports marking user data in TiDB logs with `‹›`. Based on the marked logs, you can decide whether to redact the marked information when displaying the logs, thus increasing the flexibility of log redaction. In v8.2.0, TiFlash implements a similar log redaction enhancement.
-    
+
     In v8.3.0, PD implements a similar log redaction enhancement. To use this feature, you can set the value of the PD configuration item `security.redact-info-log` to `marker`.
 
     For more information, see [documentation](/log-redaction.md#log-redaction-in-pd-side).
@@ -183,7 +183,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 * Enhance TiKV log redaction [#17206](https://github.com/tikv/tikv/issues/17206) @[lucasliang](https://github.com/LykxSassinator) **tw@hfxsd** <!--1862-->
 
     TiDB v8.0.0 enhances log redaction and supports marking user data in TiDB logs with `‹›`. Based on the marked logs, you can decide whether to redact the marked information when displaying the logs, thus increasing the flexibility of log redaction. In v8.2.0, TiFlash implements a similar log redaction enhancement.
-    
+
     In v8.3.0, TiKV implements a similar log redaction enhancement. To use this feature, you can set the value of the TiKV configuration item `security.redact-info-log` to `marker`.
 
     For more information, see [documentation](/log-redaction.md#log-redaction-in-tikv-side).
@@ -193,7 +193,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 * TiCDC supports replicating DDL statements in bi-directional replication (BDR) mode (GA) [#10301](https://github.com/pingcap/tiflow/issues/10301) [#48519](https://github.com/pingcap/tidb/issues/48519) @okJiang @asddongmen **tw@hfxsd** <!--1689-->
 
     TiCDC v7.6.0 introduced the replication of DDL statements with bi-directional replication configured. Previously, bi-directional replication of DDL statements was not supported by TiCDC, so users of TiCDC's bi-directional replication had to execute DDL statements on both TiDB clusters separately. With this feature, after assigning a `PRIMARY` BDR role to a cluster, TiCDC can replicate the DDL statements from that cluster to the `SECONDARY` cluster.
-    
+
     In v8.3.0, this feature becomes generally available (GA).
 
     For more information, see [documentation](/ticdc-bidirectional-replication.md).
@@ -243,7 +243,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 * The following features are deprecated starting from v8.3.0:
 
     * Starting from v7.5.0, [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) replication is deprecated. Starting from v8.3.0, TiDB Binlog is fully deprecated, with removal planned for a future release. For incremental data replication, use [TiCDC](/ticdc/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [PITR](/br/br-pitr-guide.md).
-    * Starting from v8.3.0, the [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540) system variable is deprecated. TiDB tracks predicate columns by default. For more information, see [`tidb_analyze_column_options`](#tidb_analyze_column_options-new-in-v830).
+    * Starting from v8.3.0, the [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540) system variable is deprecated. TiDB tracks predicate columns by default. For more information, see [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830).
 
 * The following features are planned for deprecation in future versions:
 
@@ -266,7 +266,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
     - Adjust estimation results from 0 to 1 for equality conditions that do not hit TopN when statistics are entirely composed of TopN and the modified row count in the corresponding table statistics is non-zero [#47400](https://github.com/pingcap/tidb/issues/47400) @[terry1purcell](https://github.com/terry1purcell)
     - The TopN operator supports disk spill [#47733](https://github.com/pingcap/tidb/issues/47733) @[xzhangxian1008](https://github.com/xzhangxian1008) **tw@Oreoxmt** <!--1715-->
     - TiDB node supports executing queries with the `WITH ROLLUP` modifier and the `GROUPING` function [#42631](https://github.com/pingcap/tidb/issues/42631) @[Arenatlx](https://github.com/Arenatlx) **tw@Oreoxmt** <!--1714-->
-    - The system variable [`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso-new-in-v830) supports `GLOBAL` scope [#55022](https://github.com/pingcap/tidb/issues/55022) @[cfzjywxk](https://github.com/cfzjywxk) **tw@hfxsd** <!--1857-->
+    - The system variable [`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso) supports the `GLOBAL` scope [#55022](https://github.com/pingcap/tidb/issues/55022) @[cfzjywxk](https://github.com/cfzjywxk) **tw@hfxsd** <!--1857-->
     - Improve GC (Garbage Collection) efficiency by supporting concurrent range deletion. You can control the number of concurrent threads using [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50) [#54570](https://github.com/pingcap/tidb/issues/54570) @[ekexium](https://github.com/ekexium) **tw@qiancai** <!--1890-->
     - Improve the performance of bulk DML execution mode (`tidb_dml_type = "bulk"`) [#50215](https://github.com/pingcap/tidb/issues/50215) @[ekexium](https://github.com/ekexium)
     - Improve the performance of schema information cache-related interface `SchemaByID` [#54074](https://github.com/pingcap/tidb/issues/54074) @[ywqzzy](https://github.com/ywqzzy)
@@ -389,9 +389,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
 + TiKV <!--tw@hfxsd: 5 notes-->
 
-    - Fix the issue that 'Ingestion picked level` and `Compaction Job Size(files)` are displayed incorrectly in the Grafana TiKV component [#15990](https://github.com/tikv/tikv/issues/15990) @[Connor1996](https://github.com/Connor1996)
+    - Fix the issue that `Ingestion picked level` and `Compaction Job Size(files)` are displayed incorrectly in the Grafana TiKV component [#15990](https://github.com/tikv/tikv/issues/15990) @[Connor1996](https://github.com/Connor1996)
     - Fix the issue that `cancel_generating_snap` incorrectly updating `snap_tried_cnt` causes TiKV to panic [#17226](https://github.com/tikv/tikv/issues/17226) @[hbisheng](https://github.com/hbisheng)
-    - Fix the issue that the information of `Ingest SST duration seconds` in correct [#17239](https://github.com/tikv/tikv/issues/17239) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Fix the issue that the information of `Ingest SST duration seconds` is correct [#17239](https://github.com/tikv/tikv/issues/17239) @[LykxSassinator](https://github.com/LykxSassinator)
     - Fix the issue that CPU profiling flag is not reset correctly in case of an error [#17234](https://github.com/tikv/tikv/issues/17234) @[Connor1996](https://github.com/Connor1996)
     - Fix the incompatibility issue of the bloom filter in earlier versions (earlier than v7.1) and later versions [#17272](https://github.com/tikv/tikv/issues/17272) @[v01dstar](https://github.com/v01dstar)
 
