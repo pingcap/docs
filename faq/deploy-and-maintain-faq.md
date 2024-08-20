@@ -27,7 +27,7 @@ If the resources are adequate, it is recommended to use RAID 10 for SSD. If the 
 
 ### What's the recommended configuration of TiDB components?
 
-- TiDB has a high requirement on CPU and memory. If you need to enable TiDB Binlog, the local disk space should be increased based on the service volume estimation and the time requirement for the GC operation. But the SSD disk is not a must.
+- TiDB has a high requirement on CPU and memory. If you need to enable TiDB Binlog (deprecated), the local disk space should be increased based on the service volume estimation and the time requirement for the GC operation. But the SSD disk is not a must.
 - PD stores the cluster metadata and has frequent Read and Write requests. It demands a high I/O disk. A disk of low performance will affect the performance of the whole cluster. It is recommended to use SSD disks. In addition, a larger number of Regions has a higher requirement on CPU and memory.
 - TiKV has a high requirement on CPU, memory and disk. It is required to use SSD.
 
