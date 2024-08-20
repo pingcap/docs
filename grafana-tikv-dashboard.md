@@ -530,7 +530,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Apply Request Speed: The speed of applying request to Raft store.
 - Cached File in Memory: The files cached by the applying requests of SST importer.
 - Engine Requests Unfinished: The number of pending requests to Raft store.
-- Apply Time: The time spent writing data to the Raft store.
+- Apply Time: The time spent writing data to Raft store.
 - Raft Store Memory Usage: The memory usage for Raft store.
 
 ### Explanation of Common Parameters
