@@ -604,7 +604,7 @@
     - [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
     - [FAQs](/ticdc/ticdc-faq.md)
     - [Glossary](/ticdc/ticdc-glossary.md)
-  - TiDB Binlog
+  - TiDB Binlog (Deprecated)
     - [Overview](/tidb-binlog/tidb-binlog-overview.md)
     - [Quick Start](/tidb-binlog/get-started-with-tidb-binlog.md)
     - [Deploy](/tidb-binlog/deploy-tidb-binlog.md)

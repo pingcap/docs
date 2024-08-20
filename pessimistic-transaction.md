@@ -111,7 +111,9 @@ Pessimistic transactions in TiDB behave similarly to those in MySQL. See the min
 
 2. TiDB does not support `SELECT LOCK IN SHARE MODE`.
 
-    When `SELECT LOCK IN SHARE MODE` is executed, it has the same effect as that without the lock, so the read or write operation of other transactions is not blocked.
+    TiDB does not support the `SELECT LOCK IN SHARE MODE` syntax by default. You can enable [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40) to make TiDB compatible with the `SELECT LOCK IN SHARE MODE` syntax. Executing `SELECT LOCK IN SHARE MODE` has the same effect as that without the lock, so it does not block read or write operations of other transactions.
+
+    Starting from v8.3.0, TiDB supports using the [`tidb_enable_shared_lock_promotion`](/system-variables.md#tidb_enable_shared_lock_promotion-new-in-v830) system variable to enable the `SELECT LOCK IN SHARE MODE` statement to add locks. However, note that the lock added at this time is not a true shared lock, but an exclusive lock, which is consistent with `SELECT FOR UPDATE`. If you want to block writes to prevent data from being modified by write transactions in parallel during reads while keeping TiDB compatible with the `SELECT LOCK IN SHARE MODE` syntax, you can enable this variable. Enabling this variable takes effect on the `SELECT LOCK IN SHARE MODE` statement, regardless of whether [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40) is enabled or not.
 
 3. DDL may result in failure of the pessimistic transaction commit.
 
