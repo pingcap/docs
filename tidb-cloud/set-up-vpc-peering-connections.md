@@ -29,7 +29,7 @@ You can set the CIDR when creating the first TiDB Dedicated cluster. If you want
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
-3. On the **Project Settings** page of your project, click **Network Access** in the left navigation pane, click the **Project CIDR** tab and then select **AWS** or **Google Cloud** according to your cloud provider.
+3. On the **Project Settings** page of your project, click **Network Access** in the left navigation pane, click the **Project CIDR** tab, and then select **AWS** or **Google Cloud** according to your cloud provider.
 4. In the upper-right corner, click **Create CIDR**. Specify the region and CIDR value in the **Create AWS CIDR** or **Create Google Cloud CIDR** dialog, and then click **Confirm**.
 
     ![Project-CIDR4](/media/tidb-cloud/Project-CIDR4.png)
