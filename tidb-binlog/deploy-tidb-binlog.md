@@ -341,7 +341,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         # to the kafka address in zookeeper
         # zookeeper-addrs = "127.0.0.1:2181"
         # kafka-addrs = "127.0.0.1:9092"
-        # kafka-version = "0.8.2.0"
+        # kafka-version = "0.8.3.0"
         # The maximum number of messages (number of binlogs) in a broker request. If it is left blank or a value smaller than 0 is configured, the default value 1024 is used.
         # kafka-max-messages = 1024
         # The maximum size of a broker request (unit: byte). The default value is 1 GiB and the maximum value is 2 GiB.
