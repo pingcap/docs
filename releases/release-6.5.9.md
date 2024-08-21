@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.5.9 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 6.5.9.
+summary: TiDB 6.5.9 の互換性の変更、改善、バグ修正について説明します。
 ---
 
 # TiDB 6.5.9 リリースノート {#tidb-6-5-9-release-notes}
@@ -43,12 +43,11 @@ TiDB バージョン: 6.5.9
         -   ログバックアップ中にログとメトリックのグローバルチェックポイントの進行に影響を与える最も遅いリージョンの情報を出力します[＃51046](https://github.com/pingcap/tidb/issues/51046) @ [ユジュンセン](https://github.com/YuJuncen)
         -   BR例外処理メカニズムをリファクタリングして、未知のエラーに対する許容度を高める[＃47656](https://github.com/pingcap/tidb/issues/47656) @ [3ポインター](https://github.com/3pointer)
 
-## バグの修正 {#bug-fixes}
+## バグ修正 {#bug-fixes}
 
 -   ティビ
 
-    -   多数のテーブルを作成した後、新しく作成されたテーブルに`stats_meta`情報が欠落し、後続のクエリ推定で正確な行数情報[＃36004](https://github.com/pingcap/tidb/issues/36004) @ [翻訳者](https://github.com/xuyifangreeneyes)を取得できない問題を修正しました。
-    -   ドロップされたテーブルがGrafana `Stats Healthy Distribution`パネル[＃39349](https://github.com/pingcap/tidb/issues/39349) @ [翻訳者](https://github.com/xuyifangreeneyes)でまだカウントされる問題を修正
+    -   削除されたテーブルが Grafana `Stats Healthy Distribution`パネル[＃39349](https://github.com/pingcap/tidb/issues/39349) @ [翻訳者](https://github.com/xuyifangreeneyes)でカウントされ続ける問題を修正
     -   TiDB が SQL ステートメントのクエリに`MemTableScan`演算子[＃40937](https://github.com/pingcap/tidb/issues/40937) @ [中文](https://github.com/zhongzc)が含まれている場合に、SQL ステートメントの`WHERE <column_name>`フィルタリング条件を処理しない問題を修正しました。
     -   サブクエリの`HAVING`句に相関列[＃51107](https://github.com/pingcap/tidb/issues/51107) @ [ホーキングレイ](https://github.com/hawkingrei)が含まれている場合にクエリ結果が正しくない可能性がある問題を修正しました。
     -   共通テーブル式 (CTE) を使用して統計情報が欠落しているパーティション テーブルにアクセスすると、クエリ結果が正しくなくなる可能性がある問題を修正しました[＃51873](https://github.com/pingcap/tidb/issues/51873) @ [qw4990](https://github.com/qw4990)
@@ -57,7 +56,7 @@ TiDB バージョン: 6.5.9
     -   Grafana の監視メトリック`tidb_statistics_auto_analyze_total`が整数[＃51051](https://github.com/pingcap/tidb/issues/51051) @ [ホーキングレイ](https://github.com/hawkingrei)として表示されない問題を修正しました。
     -   パーティションテーブル[＃48713](https://github.com/pingcap/tidb/issues/48713) @ [ホーキングレイ](https://github.com/hawkingrei)のグローバル統計の同時マージ中にエラーが返される可能性がある問題を修正しました。
     -   列のデフォルト値が削除されている場合、列のデフォルト値を取得するとエラーが返される問題を修正[＃50043](https://github.com/pingcap/tidb/issues/50043) [＃51324](https://github.com/pingcap/tidb/issues/51324) @ [クレイジーcs520](https://github.com/crazycs520)
-    -   列が書き込み専用の場合に`INSERT ignore`ステートメントでデフォルト値を入力できない問題を修正[＃40192](https://github.com/pingcap/tidb/issues/40192) @ [ヤンケオ](https://github.com/YangKeao)
+    -   列が書き込み専用の場合、 `INSERT ignore`ステートメントでデフォルト値を入力できない問題を修正[＃40192](https://github.com/pingcap/tidb/issues/40192) @ [ヤンケオ](https://github.com/YangKeao)
     -   `shuffleExec`予期せず終了すると TiDB がクラッシュする問題を修正[＃48230](https://github.com/pingcap/tidb/issues/48230) @ [うわー](https://github.com/wshwsh12)
     -   `HashJoin`演算子がディスク[＃50841](https://github.com/pingcap/tidb/issues/50841) @ [うわー](https://github.com/wshwsh12)にスピルできない場合に発生する可能性のある goroutine リークの問題を修正しました。
     -   トランザクション[＃39664](https://github.com/pingcap/tidb/issues/39664) @ [天菜まお](https://github.com/tiancaiamao)で複数のステートメントをコミットするときにテーブル名の変更が有効にならない問題を修正しました
@@ -69,7 +68,7 @@ TiDB バージョン: 6.5.9
     -   自動統計更新の時間枠を設定した後、その時間枠外でも統計が更新される可能性がある問題を修正[＃49552](https://github.com/pingcap/tidb/issues/49552) @ [ホーキングレイ](https://github.com/hawkingrei)
     -   `approx_percentile`関数が TiDBpanic[＃40463](https://github.com/pingcap/tidb/issues/40463) @ [翻訳者](https://github.com/xzhangxian1008)を引き起こす可能性がある問題を修正
     -   `BIT`型の列が一部の関数の計算に関係する場合にデコード失敗によりクエリ エラーが発生する可能性がある問題を修正しました[＃49566](https://github.com/pingcap/tidb/issues/49566) [＃50850](https://github.com/pingcap/tidb/issues/50850) [＃50855](https://github.com/pingcap/tidb/issues/50855) @ [ジフハウス](https://github.com/jiyfhust)
-    -   CTE クエリのメモリ使用量が制限[＃50337](https://github.com/pingcap/tidb/issues/50337) @ [グオシャオゲ](https://github.com/guo-shaoge)を超えた場合に発生する goroutine リークの問題を修正しました。
+    -   CTE クエリのメモリ使用量が制限[＃50337](https://github.com/pingcap/tidb/issues/50337) @ [グオシャオゲ](https://github.com/guo-shaoge)を超えた場合に発生する goroutine リークの問題を修正しました
     -   `force-init-stats` [＃51473](https://github.com/pingcap/tidb/issues/51473) @ [ホーキングレイ](https://github.com/hawkingrei)に設定されている場合に TiDB が対応するポートをリッスンしない問題を修正
     -   主キータイプが`VARCHAR` [＃51810](https://github.com/pingcap/tidb/issues/51810) @ [そよ風のような](https://github.com/breezewish)の場合に`ALTER TABLE ... COMPACT TIFLASH REPLICA`が誤って終了する可能性がある問題を修正しました
     -   `tidb_server_memory_limit`変数が変更された後に`tidb_gogc_tuner_threshold`システム変数がそれに応じて調整されない問題を修正[＃48180](https://github.com/pingcap/tidb/issues/48180) @ [ホーキングレイ](https://github.com/hawkingrei)
@@ -111,9 +110,9 @@ TiDB バージョン: 6.5.9
 
     -   バックアップと復元 (BR)
 
-        -   フルバックアップが失敗したときにログが多すぎるという問題を修正[＃51572](https://github.com/pingcap/tidb/issues/51572) @ [リーヴルス](https://github.com/Leavrth)
+        -   フルバックアップが失敗したときにログが多すぎる問題を修正[＃51572](https://github.com/pingcap/tidb/issues/51572) @ [リーヴルス](https://github.com/Leavrth)
         -   ログバックアップタスクを一時停止後に削除しても、GCセーフポイント[＃52082](https://github.com/pingcap/tidb/issues/52082) @ [3ポインター](https://github.com/3pointer)がすぐに復元されない問題を修正しました。
-        -   BR が`AUTO_RANDOM`列[＃52255](https://github.com/pingcap/tidb/issues/52255) @ [リーヴルス](https://github.com/Leavrth)を含むユニオン クラスター化インデックスの`AUTO_RANDOM` ID 割り当ての進行状況をバックアップできない問題を修正しました。
+        -   `AUTO_RANDOM`列[＃52255](https://github.com/pingcap/tidb/issues/52255) @ [リーヴルス](https://github.com/Leavrth)を含むユニオンクラスター化インデックスの`AUTO_RANDOM` ID割り当ての進行状況をBRがバックアップできない問題を修正
         -   ログバックアップタスクを停止すると TiDB がクラッシュする問題を修正[＃50839](https://github.com/pingcap/tidb/issues/50839) @ [ユジュンセン](https://github.com/YuJuncen)
         -   極端なケースでフルバックアップがピアを見つけられなかった場合に TiKV がパニックになる問題を修正[＃16394](https://github.com/tikv/tikv/issues/16394) @ [リーヴルス](https://github.com/Leavrth)
 
@@ -124,7 +123,7 @@ TiDB バージョン: 6.5.9
         -   同期ポイントテーブルが誤って複製される可能性がある問題を修正[＃10576](https://github.com/pingcap/tiflow/issues/10576) @ [アズドンメン](https://github.com/asddongmen)
         -   テーブルレプリケーションタスク[＃10613](https://github.com/pingcap/tiflow/issues/10613) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)をスケジュールするときに TiCDC がパニックになる問題を修正
         -   KV クライアントでのデータ競合により TiCDC がpanic[＃10718](https://github.com/pingcap/tiflow/issues/10718) @ [アズドンメン](https://github.com/asddongmen)になる問題を修正
-        -   storageシンク[＃10352](https://github.com/pingcap/tiflow/issues/10352) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)の使用時に、storageサービスによって生成されたファイルシーケンス番号が正しく増加しない可能性がある問題を修正しました。
+        -   storageシンク[＃10352](https://github.com/pingcap/tiflow/issues/10352) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)を使用すると、storageサービスによって生成されたファイルシーケンス番号が正しく増加しない可能性がある問題を修正しました。
         -   storageシンク シナリオ[＃10592](https://github.com/pingcap/tiflow/issues/10592) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)で TiCDC が Azure および GCS に正しくアクセスできない問題を修正
         -   `open-protocol`の古い値部分が、実際のタイプ[＃10803](https://github.com/pingcap/tiflow/issues/10803) @ [3エースショーハンド](https://github.com/3AceShowHand)ではなく、タイプ`STRING`に従ってデフォルト値を誤って出力する問題を修正しました。
         -   オブジェクトstorageシンクで一時的な障害が発生した場合に、結果整合性が有効になっている変更フィードが失敗する可能性がある問題を修正しました[＃10710](https://github.com/pingcap/tiflow/issues/10710) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)

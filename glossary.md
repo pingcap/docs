@@ -132,7 +132,7 @@ TiCDC が出力する増分変更ログ内の「元の値」。TiCDC が出力�
 
 ### Raft Engine {#raft-engine}
 
-Raft Engineは、ログ構造設計の組み込み永続storageエンジンです。TiKV が複数の Raft ログを保存できるように構築されています。v5.4 以降、TiDB はログstorageエンジンとしてRaft Engineの使用をサポートしています。詳細については、 [Raft Engine](/tikv-configuration-file.md#raft-engine)参照してください。
+Raft Engineは、ログ構造設計の組み込み永続storageエンジンです。これは、TiKV が複数の Raft ログを保存するために構築されています。v5.4 以降、TiDB はログstorageエンジンとしてRaft Engineの使用をサポートしています。詳細については、 [Raft Engine](/tikv-configuration-file.md#raft-engine)参照してください。
 
 ### リージョン/ ピア /Raftグループ {#region-peer-raft-group}
 
@@ -148,7 +148,7 @@ Raft Engineは、ログ構造設計の組み込み永続storageエンジンで�
 
 復元はバックアップ操作の逆です。準備されたバックアップからデータを取得して、システムを以前の状態に戻すプロセスです。
 
-## S {#s}
+## ス {#s}
 
 ### スケジューラ {#scheduler}
 
@@ -172,7 +172,3 @@ Top SQL は、指定された時間範囲内で TiDB または TiKV ノードの
 ### TSO {#tso}
 
 TiKV は分散storageシステムであるため、単調に増加するタイムスタンプを割り当てるには、グローバル タイミング サービスである Timestamp Oracle (TSO) が必要です。TiKV では、このような機能は PD によって提供され、Google [スパナ](http://static.googleusercontent.com/media/research.google.com/en//archive/spanner-osdi2012.pdf)では、この機能は複数のアトミック時計と GPS によって提供されます。
-
-### 10 ... {#ttl}
-
-[存続時間 (TTL)](/time-to-live.md) 、TiDB データの有効期間を行レベルで管理できる機能です。TTL 属性を持つテーブルの場合、TiDB は自動的にデータの有効期間をチェックし、期限切れのデータを行レベルで削除します。

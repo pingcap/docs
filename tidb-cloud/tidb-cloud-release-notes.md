@@ -8,6 +8,14 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2024 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2024年8月20日 {#august-20-2024}
+
+**コンソールの変更**
+
+-   **プライベート エンドポイント接続の作成**ページのレイアウトを調整し、 [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターで新しいプライベート エンドポイント接続を作成する際のユーザー エクスペリエンスを向上させます。
+
+    詳細については[AWS のプライベートエンドポイント経由で TiDB 専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)および[Google Cloud Private Service Connect 経由で TiDB 専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
+
 ## 2024年8月6日 {#august-6-2024}
 
 **一般的な変更**
@@ -16,7 +24,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     2024 年 8 月 1 日より、TiDB 専用料金には、 [AWS の料金変更は 2024 年 2 月 1 日より有効になります](https://aws.amazon.com/blogs/aws/new-aws-public-ipv4-address-charge-public-ip-insights/)に合わせたパブリック IPv4 アドレスの新しい AWS 料金が含まれます。パブリック IPv4 アドレスごとの料金は 1 時間あたり 0.005 ドルで、AWS でホストされる TiDB 専用クラスターごとに月額約 10 ドルになります。
 
-    この料金は、 [支払明細](/tidb-cloud/tidb-cloud-billing.md#billing-details)の既存の**TiDB 専用データ転送負荷分散**サービスの下に表示されます。
+    この料金は、 [請求の詳細](/tidb-cloud/tidb-cloud-billing.md#billing-details)の既存の**TiDB 専用データ転送負荷分散**サービスの下に表示されます。
 
 -   新しい[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン7.5.2](https://docs.pingcap.com/tidb/v7.5/release-7.5.2)から[バージョン7.5.3](https://docs.pingcap.com/tidb/v7.5/release-7.5.3)にアップグレードします。
 

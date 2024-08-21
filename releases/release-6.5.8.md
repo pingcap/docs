@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.5.8 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 6.5.8.
+summary: TiDB 6.5.8 の互換性の変更、改善、バグ修正について説明します。
 ---
 
 # TiDB 6.5.8 リリースノート {#tidb-6-5-8-release-notes}
@@ -19,7 +19,7 @@ TiDB バージョン: 6.5.8
 
 -   TiFlash
 
-    -   バックグラウンドGCタスクによる読み取りおよび書き込みタスクのレイテンシーへの影響を軽減する[＃8650](https://github.com/pingcap/tiflash/issues/8650) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)
+    -   バックグラウンドGCタスクが読み取りおよび書き込みタスクのレイテンシーに与える影響を軽減する[＃8650](https://github.com/pingcap/tiflash/issues/8650) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)
 
 -   ツール
 
@@ -31,7 +31,7 @@ TiDB バージョン: 6.5.8
 
         -   多数の小さなテーブルをインポートする際の`ALTER TABLE`を向上[＃50105](https://github.com/pingcap/tidb/issues/50105) @ [D3ハンター](https://github.com/D3Hunter)
 
-## バグの修正 {#bug-fixes}
+## バグ修正 {#bug-fixes}
 
 -   ティビ
 
@@ -48,7 +48,6 @@ TiDB バージョン: 6.5.8
     -   `PREPARE`メソッドを使用して`SELECT INTO OUTFILE`を実行すると、エラー[＃49166](https://github.com/pingcap/tidb/issues/49166) @ [qw4990](https://github.com/qw4990)ではなく、誤って成功メッセージが返される問題を修正しました。
     -   `ORDER BY`句で`UNIQUE`インデックス検索を実行するとエラー[＃49920](https://github.com/pingcap/tidb/issues/49920) @ [ジャッキー](https://github.com/jackysp)が発生する可能性がある問題を修正しました
     -   `tidb_multi_statement_mode`モードが有効になっている場合に、インデックス検索を使用する`DELETE`および`UPDATE`ステートメントでエラーが報告される可能性がある問題を修正しました[＃50012](https://github.com/pingcap/tidb/issues/50012) @ [タンジェンタ](https://github.com/tangenta)
-    -   短時間に多数の`CREATE TABLE`ステートメントを実行すると、TiDB が新しい統計メタデータを同時に確立しない可能性がある問題を修正[＃36004](https://github.com/pingcap/tidb/issues/36004) @ [翻訳者](https://github.com/xuyifangreeneyes)
     -   `LEADING`ヒントが`UNION ALL`ステートメント[＃50067](https://github.com/pingcap/tidb/issues/50067) @ [ホーキングレイ](https://github.com/hawkingrei)で有効にならない問題を修正
     -   古いインターフェースを使用するとテーブル[＃49751](https://github.com/pingcap/tidb/issues/49751) @ [ホーキングレイ](https://github.com/hawkingrei)のメタデータに不整合が生じる可能性がある問題を修正しました。
     -   共通ヒントが`UNION ALL`文[＃50068](https://github.com/pingcap/tidb/issues/50068) @ [ホーキングレイ](https://github.com/hawkingrei)で有効にならない問題を修正
@@ -67,7 +66,7 @@ TiDB バージョン: 6.5.8
 -   TiFlash
 
     -   `lowerUTF8`と`upperUTF8`関数で、大文字と小文字が異なるバイト[＃8484](https://github.com/pingcap/tiflash/issues/8484) @ [ゲンリキ](https://github.com/gengliqi)を占めることができない問題を修正しました。
-    -   `ALTER TABLE ... MODIFY COLUMN ... NOT NULL`を実行した後にTiFlash がパニックを起こし、null 許容列が[＃8419](https://github.com/pingcap/tiflash/issues/8419) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)に非 null 許容列に変更される問題を修正しました。
+    -   `ALTER TABLE ... MODIFY COLUMN ... NOT NULL`を実行した後にTiFlash がパニックを起こし、null 許容列が[＃8419](https://github.com/pingcap/tiflash/issues/8419) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)に非許容列に変更される問題を修正しました。
     -   クエリを終了した後、 TiFlash上の多数のタスクが同時にキャンセルされると、同時データの競合によりTiFlashがクラッシュする問題を修正[＃7432](https://github.com/pingcap/tiflash/issues/7432) @ [シーライズ](https://github.com/SeaRise)
 
 -   ツール

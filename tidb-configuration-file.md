@@ -300,7 +300,7 @@ TiDB 構成ファイルは、コマンドライン パラメータよりも多�
 -   消費時間のしきい値をスローログに出力します。
 -   デフォルト値: `300`
 -   単位: ミリ秒
--   クエリ内の値がデフォルト値より大きい場合、それは遅いクエリであり、スロー ログに出力されます。
+-   クエリの消費時間がこの値より大きい場合、このクエリはスロークエリとみなされ、そのログはスロークエリログに出力されます。出力レベル[`log.level`](#level)が`"debug"`の場合、このパラメータの設定に関係なく、すべてのクエリがスロークエリログに記録されることに注意してください。
 -   v6.1.0 以降、スロー ログの消費時間のしきい値は、TiDB 構成項目[`instance.tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold)またはシステム変数[`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)で指定されます。5 `slow-threshold`引き続き有効です。ただし、 `slow-threshold`と`instance.tidb_slow_log_threshold`同時に設定されている場合、後者が有効になります。
 
 ### <code>record-plan-in-slow-log</code> {#code-record-plan-in-slow-log-code}
@@ -663,7 +663,7 @@ opentracing.reporter に関連するコンフィグレーション項目。
 -   レポーターが jaeger エージェントにスパンを送信するアドレス。
 -   デフォルト値: `""`
 
-## tikvクライアント {#tikv-client}
+## tikv クライアント {#tikv-client}
 
 ### <code>grpc-connection-count</code> {#code-grpc-connection-count-code}
 
@@ -825,7 +825,7 @@ TiDB サービスのステータスに関連するコンフィグレーション
 
 ### pessimistic-auto-commit<span class="version-mark">v6.0.0 の新</span>機能 {#pessimistic-auto-commit-span-class-version-mark-new-in-v6-0-0-span}
 
--   ペシ悲観的トランザクション モードがグローバルに有効になっている場合 ( `tidb_txn_mode='pessimistic'` ) に、自動コミット トランザクションが使用するトランザクション モードを決定します。デフォルトでは、悲観的トランザクション モードがグローバルに有効になっている場合でも、自動コミット トランザクションは引き続き楽観的トランザクション モードを使用します。 `pessimistic-auto-commit`を有効にすると ( `true`に設定)、自動コミット トランザクションも悲観的モードを使用します。これは、他の明示的にコミットされた悲観的トランザクションと一致します。
+-   ペシ悲観的トランザクション モードがグローバルに有効になっている場合 ( `tidb_txn_mode='pessimistic'` ) に、自動コミット トランザクションが使用するトランザクション モードを決定します。デフォルトでは、悲観的トランザクション モードがグローバルに有効になっている場合でも、自動コミット トランザクションは楽観的トランザクション モードを使用します。 `pessimistic-auto-commit`を有効にすると ( `true`に設定)、自動コミット トランザクションも悲観的モードを使用します。これは、他の明示的にコミットされた悲観的トランザクションと一致します。
 -   競合が発生するシナリオでは、この構成を有効にすると、TiDB は自動コミット トランザクションをグローバル ロック待機管理に組み込み、デッドロックを回避し、デッドロックの原因となる競合によって生じるレイテンシーの急増を軽減します。
 -   競合のないシナリオでは、自動コミット トランザクションが多数あり (具体的な数は実際のシナリオによって決まります。たとえば、自動コミット トランザクションの数がアプリケーションの総数の半分以上を占める場合など)、単一のトランザクションで大量のデータを操作する場合は、この構成を有効にするとパフォーマンスが低下します。たとえば、auto-commit `INSERT INTO SELECT`ステートメントなどです。
 -   デフォルト値: `false`
@@ -862,10 +862,11 @@ TiDB サービスのステータスに関連するコンフィグレーション
 
 ### <code>tidb_slow_log_threshold</code> {#code-tidb-slow-log-threshold-code}
 
--   この設定は、スロー ログに消費される時間のしきい値を出力するために使用されます。クエリの消費時間がこの値より大きい場合、このクエリはスロー ログとみなされ、そのログがスロー クエリ ログに出力されます。
+-   スローログで消費された時間のしきい値を出力します。
 -   デフォルト値: `300`
 -   範囲: `[-1, 9223372036854775807]`
 -   単位: ミリ秒
+-   クエリの消費時間がこの値より大きい場合、このクエリはスロークエリとみなされ、そのログはスロークエリログに出力されます。出力レベル[`log.level`](#level)が`"debug"`の場合、このパラメータの設定に関係なく、すべてのクエリがスロークエリログに記録されることに注意してください。
 -   v6.1.0 より前では、この構成は`slow-threshold`で設定されます。
 
 ### <code>in-mem-slow-query-topn-num</code> <span class="version-mark">v7.3.0 の新機能</span> {#code-in-mem-slow-query-topn-num-code-span-class-version-mark-new-in-v7-3-0-span}
