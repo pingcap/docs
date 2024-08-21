@@ -194,7 +194,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
     In v8.3.0, this feature becomes generally available (GA).
 
-    For more information, see [documentation](/ticdc-bidirectional-replication.md).
+    For more information, see [documentation](/ticdc/ticdc-bidirectional-replication.md).
 
 ## Compatibility changes
 
@@ -228,7 +228,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 | PD   |  [`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50) |  Modified | Support setting the value of the PD configuration item `security.redact-info-log' to `"marker"` to mark sensitive information in the log with `‹›` instead of shielding it directly. With the `"marker"` option, you can customize the redaction rules.  |
 | TiKV  | [`security.redact-info-log`](/tikv-configuration-file.md#redact-info-log-new-in-v408)  | Modified | Support setting the value of the TiKV configuration item `security.redact-info-log' to `"marker"` to mark sensitive information in the log with `‹›` instead of shielding it directly. With the `"marker"` option, you can customize the redaction rules.  |
 | TiFlash   | [`security.redact-info-log`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) | Modified |  Support setting the value of the TiFlash Learner configuration item `security.redact-info-log' to `"marker"` to mark sensitive information in the log with `‹›` instead of shielding it directly. With the `"marker"` option, you can customize the redaction rules.  |
-| BR  |  [`--allow-pitr-from-incremental`](/br/br-incremental-guide.md#limitations) | Newly added  | Controls whether incremental backups are compatible with subsequent log backups. The default value is `true`, which means that incremental backups are compatible with subsequent log backups. When you keep the default value `true`, the DDLs that need to be replayed are strictly checked before the incremental restore begins. |
+| BR  | [`--allow-pitr-from-incremental`](/br/br-incremental-guide.md#limitations) | Newly added  | Controls whether incremental backups are compatible with subsequent log backups. The default value is `true`, which means that incremental backups are compatible with subsequent log backups. When you keep the default value `true`, the DDLs that need to be replayed are strictly checked before the incremental restore begins. |
 
 ### System tables
 
@@ -300,8 +300,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
         - Support checking whether a full backup exists before starting point-in-time recovery (PITR) for the first time. If the full backup is not found, BR terminates the restore and returns an error [#54418](https://github.com/pingcap/tidb/issues/54418) @[Leavrth](https://github.com/Leavrth)
         - Support checking whether the disk space in TiKV and TiFlash is sufficient before restoring snapshot backups. If the space is insufficient, BR terminates the restore and returns an error [#54316](https://github.com/pingcap/tidb/issues/54316) @[RidRisR](https://github.com/RidRisR)
         - Support checking whether the disk space in TiKV is sufficient before TiKV downloads each SST file. If the space is insufficient, BR terminates the restore and returns an error [#17224](https://github.com/tikv/tikv/issues/17224) @[RidRisR](https://github.com/RidRisR)
-        - (dup): release-7.5.3.md > Improvements> Tools> Backup & Restore (BR) - Support setting Alibaba Cloud access credentials through environment variables [#45551](https://github.com/pingcap/tidb/issues/45551) @[RidRisR](https://github.com/RidRisR)
-        - (dup): release-8.2.0.md > Improvements> Tools> Backup & Restore (BR) - Optimize the backup feature, improving backup performance and stability during node restarts, cluster scaling-out, and network jitter when backing up large numbers of tables [#52534](https://github.com/pingcap/tidb/issues/52534) @[3pointer](https://github.com/3pointer)
+        - Support setting Alibaba Cloud access credentials through environment variables [#45551](https://github.com/pingcap/tidb/issues/45551) @[RidRisR](https://github.com/RidRisR)
+        - Optimize the backup feature, improving backup performance and stability during node restarts, cluster scaling-out, and network jitter when backing up large numbers of tables [#52534](https://github.com/pingcap/tidb/issues/52534) @[3pointer](https://github.com/3pointer)
         - Automatically set the environment variable `GOMEMLIMIT` based on the available memory of the BR process to avoid OOM when using BR for backup and restore [#53777](https://github.com/pingcap/tidb/issues/53777) @[Leavrth](https://github.com/Leavrth)
         - Make incremental backups compatible with point-in-time recovery (PITR) [#54474](https://github.com/pingcap/tidb/issues/54474) @[3pointer](https://github.com/3pointer)
 
@@ -403,8 +403,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
     + TiDB Data Migration (DM)
 
-        - (dup): release-8.1.1.md > Bug fixes> Tools> TiDB Data Migration (DM) - Fix the issue that schema tracker incorrectly handles LIST partition tables, causing DM errors [#11408](https://github.com/pingcap/tiflow/issues/11408) @[lance6716](https://github.com/lance6716)
-        - (dup): release-8.1.1.md > Bug fixes> Tools> TiDB Data Migration (DM) - Fix the issue that data replication is interrupted when the index length exceeds the default value of `max-index-length` [#11459](https://github.com/pingcap/tiflow/issues/11459) @[michaelmdeng](https://github.com/michaelmdeng)
+        - Fix the issue that schema tracker incorrectly handles LIST partition tables, causing DM errors [#11408](https://github.com/pingcap/tiflow/issues/11408) @[lance6716](https://github.com/lance6716)
+        - Fix the issue that data replication is interrupted when the index length exceeds the default value of `max-index-length` [#11459](https://github.com/pingcap/tiflow/issues/11459) @[michaelmdeng](https://github.com/michaelmdeng)
         - Fix the issue that DM cannot handle `FAKE_ROTATE_EVENT` correctly [#11381](https://github.com/pingcap/tiflow/issues/11381) @[lance6716](https://github.com/lance6716)
 
     + TiDB Lightning
