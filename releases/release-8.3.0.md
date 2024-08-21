@@ -5,7 +5,7 @@ summary: Learn about the new features, compatibility changes, improvements, and 
 
 # TiDB 8.3.0 Release Notes
 
-Release date: xx xx, 2024
+Release date: August 22, 2024
 
 TiDB version: 8.3.0
 
