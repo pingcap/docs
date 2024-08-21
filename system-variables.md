@@ -3007,9 +3007,14 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `-1`
-- Range: `[1, 256]`
+- Range: `-1` or `[1, 256]`
 - Unit: Threads
-- Specifies the number of threads in the [Resolve Locks](/garbage-collection-overview.md#resolve-locks) step of GC. A value of `-1` means that TiDB will automatically decide the number of garbage collection threads to use.
+- This variable controls the number of concurrent threads during the [Resolve Locks](/garbage-collection-overview.md#resolve-locks) step of the [Garbage Collection (GC)](/garbage-collection-overview.md) process.
+- Starting from v8.3.0, this variable also controls the number of concurrent threads during the [Delete Ranges](/garbage-collection-overview.md#delete-ranges) step of the GC process.
+- By default, this variable is `-1`, allowing TiDB to automatically determine the appropriate number of threads based on workloads.
+- When this variable is set to a number in the range of `[1, 256]`:
+    - Resolve Locks directly uses the value set for this variable as the number of threads.
+    - Delete Range uses one-fourth of the value set for this variable as the number of threads.
 
 ### tidb_gc_enable <span class="version-mark">New in v5.0</span>
 
@@ -5347,7 +5352,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - Default value: `300`
 - Range: `[-1, 9223372036854775807]`
 - Unit: Milliseconds
-- This variable is used to output the threshold value of the time consumed by the slow log. When the time consumed by a query is larger than this value, this query is considered as a slow log and its log is output to the slow query log.
+- This variable outputs the threshold value of the time consumed by the slow log, and is set to 300 milliseconds by default. When the time consumed by a query is larger than this value, this query is considered as a slow query and its log is output to the slow query log. Note that when the output level of [`log.level`](https://docs.pingcap.com/tidb/dev/tidb-configuration-file#level) is `"debug"`, all queries are recorded in the slow query log, regardless of the setting of this variable.
 
 ### tidb_slow_query_file
 
