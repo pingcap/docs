@@ -6,9 +6,11 @@ aliases: ['/docs/dev/tidb-binlog-deployment-topology/']
 
 # TiDB Binlog Deployment Topology
 
-This document describes the deployment topology of [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) based on the minimal TiDB topology.
+This document describes the deployment topology of [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) based on the minimal TiDB topology. TiDB Binlog provides near real-time backup and replication.
 
-TiDB Binlog is the widely used component for replicating incremental data. It provides near real-time backup and replication.
+> **Warning:**
+>
+> Starting from v7.5.0, [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) replication is deprecated. Starting from v8.3.0, TiDB Binlog is fully deprecated, with removal planned for a future release. For incremental data replication, use [TiCDC](/ticdc/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [PITR](/br/br-pitr-guide.md).
 
 ## Topology information
 

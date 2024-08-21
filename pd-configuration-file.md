@@ -198,8 +198,9 @@ Configuration items related to security
 ### `redact-info-log` <span class="version-mark">New in v5.0</span>
 
 + Controls whether to enable log redaction in the PD log
-+ When you set the configuration value to `true`, user data is redacted in the PD log.
++ Optional value: `false`, `true`, `"marker"`
 + Default value: `false`
++ For details on how to use it, see [Log redaction in PD side](/log-redaction.md#log-redaction-in-pd-side).
 
 ## `log`
 

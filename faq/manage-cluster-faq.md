@@ -29,7 +29,7 @@ TiKV data is located in the [`--data-dir`](/command-line-flags-for-tikv-configur
 
 ### What are the system tables in TiDB?
 
-Similar to MySQL, TiDB includes system tables as well, used to store the information required by the server when it runs. See [TiDB system table](/mysql-schema.md).
+Similar to MySQL, TiDB includes system tables as well, used to store the information required by the server when it runs. See [TiDB system table](/mysql-schema/mysql-schema.md).
 
 ### Where are the TiDB/PD/TiKV logs?
 

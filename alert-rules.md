@@ -66,21 +66,6 @@ This section gives the alert rules for the TiDB component.
 
     Same as [`TiDB_schema_error`](#tidb_schema_error).
 
-#### `TiDB_monitor_keep_alive`
-
-* Alert rule:
-
-    `increase(tidb_monitor_keep_alive_total[10m]) < 100`
-
-* Description:
-
-    Indicates whether the TiDB process still exists. If the number of times for `tidb_monitor_keep_alive_total` increases less than 100 in 10 minutes, the TiDB process might already exit and an alert is triggered.
-
-* Solution:
-
-    * Check whether the TiDB process is out of memory.
-    * Check whether the machine has restarted.
-
 ### Critical-level alerts
 
 #### `TiDB_server_panic_total`

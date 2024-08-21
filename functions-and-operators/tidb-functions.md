@@ -11,21 +11,21 @@ The following functions are TiDB extensions, and are not present in MySQL:
 
 | Function name | Function description |
 | :-------------- | :------------------------------------- |
-| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | Returns the resource group name that the current session is bound to. See also: [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md). |
-| [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | Instructs TiDB to read the data as new as possible within the time range. See also: [Read Historical Data Using the `AS OF TIMESTAMP` Clause](/as-of-timestamp.md). |
-| [`TIDB_CURRENT_TSO()`](#tidb_current_tso) | Returns the current [TSO](/tso.md). |
+| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | Returns the name of the resource group that the current session is bound to. See [using resource control to achieve resource isolation](/tidb-resource-control.md). |
+| [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | Instructs TiDB to read the most recent data within a specified time range. See [reading historical data using the `AS OF TIMESTAMP` clause](/as-of-timestamp.md). |
+| [`TIDB_CURRENT_TSO()`](#tidb_current_tso) | Returns the current [TimeStamp Oracle (TSO) in TiDB](/tso.md). |
 | [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | Decodes binary plans. |
 | [`TIDB_DECODE_KEY()`](#tidb_decode_key) | Decodes a TiDB-encoded key entry into a JSON structure containing `_tidb_rowid` and `table_id`. These encoded keys can be found in some system tables and logging outputs. |
 | [`TIDB_DECODE_PLAN()`](#tidb_decode_plan) | Decodes a TiDB execution plan. |
-| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | Queries the normalized SQL statements (a form without formats and arguments) corresponding to the set of SQL digests in the cluster. |
+| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | Queries the normalized SQL statements (a form without formats and arguments) corresponding to a set of SQL digests in the cluster. |
 | [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest) | Gets a digest for a query string. |
-| [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner) | Checks whether or not the TiDB instance you are connected to is the one that is the DDL Owner. The DDL Owner is the TiDB instance that is tasked with executing DDL statements on behalf of all other nodes in the cluster. |
+| [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner) | Checks whether or not the TiDB instance you are connected to is the DDL Owner. The DDL Owner is the TiDB instance that is tasked with executing DDL statements on behalf of all other nodes in the cluster. |
 | [`TIDB_PARSE_TSO()`](#tidb_parse_tso) | Extracts the physical timestamp from a TiDB TSO timestamp. See also: [`tidb_current_ts`](/system-variables.md#tidb_current_ts). |
 | [`TIDB_PARSE_TSO_LOGICAL()`](#tidb_parse_tso_logical) | Extracts the logical timestamp from a TiDB TSO timestamp. |
 | [`TIDB_ROW_CHECKSUM()`](#tidb_row_checksum) | Queries the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`. See also: [Data integrity validation for single-row data](/ticdc/ticdc-integrity-check.md). |
 | [`TIDB_SHARD()`](#tidb_shard) | Creates a shard index to scatter the index hotspot. A shard index is an expression index with a `TIDB_SHARD` function as the prefix.|
 | [`TIDB_VERSION()`](#tidb_version) | Returns the TiDB version with additional build information. |
-| [`VITESS_HASH()`](#vitess_hash) | Returns the hash of a number that is compatible with Vitess' `HASH` function. This is intended to help the data migration from Vitess. |
+| [`VITESS_HASH()`](#vitess_hash) | Returns the hash of a number. This function is compatible with the `HASH` function of Vitess, and is intended to help the data migration from Vitess. |
 
 </CustomContent>
 
@@ -33,27 +33,27 @@ The following functions are TiDB extensions, and are not present in MySQL:
 
 | Function name | Function description |
 | :-------------- | :------------------------------------- |
-| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | Returns the resource group name that the current session is bound to. See also: [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md). |
-| [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | Instructs TiDB to read the data as new as possible within the time range. See also: [Read Historical Data Using the `AS OF TIMESTAMP` Clause](/as-of-timestamp.md). |
-| [`TIDB_CURRENT_TSO()`](#tidb_current_tso) | Returns the current [TSO](/tso.md). |
+| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | Returns the resource group name that the current session is bound to. See [using resource control to achieve resource isolation](/tidb-resource-control.md). |
+| [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | Instructs TiDB to read most recent data within a specified time range. See [reading historical data using the `AS OF TIMESTAMP` clause](/as-of-timestamp.md). |
+| [`TIDB_CURRENT_TSO()`](#tidb_current_tso) | Returns the current [TimeStamp Oracle (TSO) in TiDB](/tso.md). |
 | [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | Decodes binary plans. |
-| [`TIDB_DECODE_KEY()`](#tidb_decode_key) | Decodes a TiDB-encoded key entry into a JSON structure containing `_tidb_rowid` and `table_id`. These encoded keys can be found in some system tables and in logging outputs. |
+| [`TIDB_DECODE_KEY()`](#tidb_decode_key) | Decodes a TiDB-encoded key entry into a JSON structure containing `_tidb_rowid` and `table_id`. These encoded keys can be found in some system tables and logging outputs. |
 | [`TIDB_DECODE_PLAN()`](#tidb_decode_plan) | Decodes a TiDB execution plan. |
-| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | Queries the normalized SQL statements (a form without formats and arguments) corresponding to the set of SQL digests in the cluster. |
+| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | Queries the normalized SQL statements (a form without formats and arguments) corresponding to a set of SQL digests in the cluster. |
 | [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest) | Gets a digest for a query string. |
-| [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner) | Checks whether or not the TiDB instance you are connected to is the one that is the DDL Owner. The DDL Owner is the TiDB instance that is tasked with executing DDL statements on behalf of all other nodes in the cluster. |
+| [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner) | Checks whether or not the TiDB instance you are connected to is the DDL Owner. The DDL Owner is the TiDB instance that is tasked with executing DDL statements on behalf of all other nodes in the cluster. |
 | [`TIDB_PARSE_TSO()`](#tidb_parse_tso) | Extracts the physical timestamp from a TiDB TSO timestamp. See also: [`tidb_current_ts`](/system-variables.md#tidb_current_ts). |
 | [`TIDB_PARSE_TSO_LOGICAL()`](#tidb_parse_tso_logical) | Extracts the logical timestamp from a TiDB TSO timestamp. |
 | [`TIDB_ROW_CHECKSUM()`](#tidb_row_checksum) | Queries the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`. See also: [Data integrity validation for single-row data](https://docs.pingcap.com/tidb/stable/ticdc-integrity-check). |
 | [`TIDB_SHARD()`](#tidb_shard) | Creates a shard index to scatter the index hotspot. A shard index is an expression index with a `TIDB_SHARD` function as the prefix.|
 | [`TIDB_VERSION()`](#tidb_version) | Returns the TiDB version with additional build information. |
-| [`VITESS_HASH()`](#vitess_hash) | Returns the hash of a number that is compatible with Vitess' `HASH` function. This is intended to help the data migration from Vitess. |
+| [`VITESS_HASH()`](#vitess_hash) | Returns the hash of a number. This function is compatible with the `HASH` function of Vitess, and is intended to help the data migration from Vitess. |
 
 </CustomContent>
 
 ## CURRENT_RESOURCE_GROUP
 
-The `CURRENT_RESOURCE_GROUP` function is used to show the resource group name that the current session is bound to. When the [Resource control](/tidb-resource-control.md) feature is enabled, the available resources that can be used by SQL statements are restricted by the resource quota of the bound resource group.
+The `CURRENT_RESOURCE_GROUP()` function is used to show the resource group name that the current session is bound to. When the [Resource control](/tidb-resource-control.md) feature is enabled, the available resources that can be used by SQL statements are restricted by the resource quota of the bound resource group.
 
 When a session is established, TiDB binds the session to the resource group that the login user is bound to by default. If the user is not bound to any resource groups, the session is bound to the `default` resource group. Once the session is established, the bound resource group will not change by default, even if the bound resource group of the user is changed via [modifying the resource group bound to the user](/sql-statements/sql-statement-alter-user.md#modify-basic-user-information). To change the bound resource group of the current session, you can use [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md).
 
@@ -63,8 +63,8 @@ Create a user `user1`, create two resource groups `rg1` and `rg2`, and bind the 
 
 ```sql
 CREATE USER 'user1';
-CREATE RESOURCE GROUP 'rg1' RU_PER_SEC = 1000;
-CREATE RESOURCE GROUP 'rg2' RU_PER_SEC = 2000;
+CREATE RESOURCE GROUP rg1 RU_PER_SEC = 1000;
+CREATE RESOURCE GROUP rg2 RU_PER_SEC = 2000;
 ALTER USER 'user1' RESOURCE GROUP `rg1`;
 ```
 
@@ -105,7 +105,7 @@ The `TIDB_BOUNDED_STALENESS()` function is used as part of [`AS OF TIMESTAMP`](/
 
 ## TIDB_CURRENT_TSO
 
-The `TIDB_CURRENT_TSO()` function returns the [TSO](/tso.md) for the current transaction. This is similar to the [`tidb_current_ts`](/system-variables.md#tidb_current_ts) variable.
+The `TIDB_CURRENT_TSO()` function returns the [TSO](/tso.md) for the current transaction. This is similar to the [`tidb_current_ts`](/system-variables.md#tidb_current_ts) system variable.
 
 ```sql
 BEGIN;
@@ -303,14 +303,14 @@ This function returns a string, which is in the format of a JSON string array. T
 >     * This function has a high overhead because every time it is called, it internally queries the `STATEMENTS_SUMMARY`, `STATEMENTS_SUMMARY_HISTORY`, `CLUSTER_STATEMENTS_SUMMARY`, and `CLUSTER_STATEMENTS_SUMMARY_HISTORY` tables, and the query involves the `UNION` operation. This function currently does not support vectorization, that is, when calling this function for multiple rows of data, the above query is performed separately for each row.
 
 ```sql
-set @digests = '["e6f07d43b5c21db0fbb9a31feac2dc599787763393dd5acbfad80e247eb02ad5","38b03afa5debbdf0326a014dbe5012a62c51957f1982b3093e748460f8b00821","e5796985ccafe2f71126ed6c0ac939ffa015a8c0744a24b7aee6d587103fd2f7"]';
+SET @digests = '["e6f07d43b5c21db0fbb9a31feac2dc599787763393dd5acbfad80e247eb02ad5","38b03afa5debbdf0326a014dbe5012a62c51957f1982b3093e748460f8b00821","e5796985ccafe2f71126ed6c0ac939ffa015a8c0744a24b7aee6d587103fd2f7"]';
 
-select tidb_decode_sql_digests(@digests);
+SELECT TIDB_DECODE_SQL_DIGESTS(@digests);
 ```
 
 ```sql
 +------------------------------------+
-| tidb_decode_sql_digests(@digests)  |
+| TIDB_DECODE_SQL_DIGESTS(@digests)  |
 +------------------------------------+
 | ["begin",null,"select * from `t`"] |
 +------------------------------------+
@@ -320,12 +320,12 @@ select tidb_decode_sql_digests(@digests);
 In the above example, the parameter is a JSON array containing 3 SQL digests, and the corresponding SQL statements are the three items in the query results. But the SQL statement corresponding to the second SQL digest cannot be found from the cluster, so the second item in the result is `null`.
 
 ```sql
-select tidb_decode_sql_digests(@digests, 10);
+SELECT TIDB_DECODE_SQL_DIGESTS(@digests, 10);
 ```
 
 ```sql
 +---------------------------------------+
-| tidb_decode_sql_digests(@digests, 10) |
+| TIDB_DECODE_SQL_DIGESTS(@digests, 10) |
 +---------------------------------------+
 | ["begin",null,"select * f..."]        |
 +---------------------------------------+
@@ -336,7 +336,7 @@ The above call specifies the second parameter (that is, the truncation length) a
 
 See also:
 
-- [`Statement Summary Tables`](/statement-summary-tables.md)
+- [Statement summary tables](/statement-summary-tables.md)
 - [`INFORMATION_SCHEMA.TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
 
 ## TIDB_ENCODE_SQL_DIGEST
@@ -461,7 +461,7 @@ Create table `t` and insert data:
 ```sql
 USE test;
 CREATE TABLE t (id INT PRIMARY KEY, k INT, c CHAR(1));
-INSERT INTO t values (1, 10, 'a');
+INSERT INTO t VALUES (1, 10, 'a');
 ```
 
 The following statement shows how to query the checksum value of the row where `id = 1` in table `t`:
@@ -544,15 +544,15 @@ SELECT TIDB_VERSION()\G
 
 ```sql
 *************************** 1. row ***************************
-TIDB_VERSION(): Release Version: v5.1.0-alpha-13-gd5e0ed0aa-dirty
+TIDB_VERSION(): Release Version: v8.2.0
 Edition: Community
-Git Commit Hash: d5e0ed0aaed72d2f2dfe24e9deec31cb6cb5fdf0
-Git Branch: master
-UTC Build Time: 2021-05-24 14:39:20
-GoVersion: go1.13
+Git Commit Hash: 821e491a20fbab36604b36b647b5bae26a2c1418
+Git Branch: HEAD
+UTC Build Time: 2024-07-11 19:16:25
+GoVersion: go1.21.10
 Race Enabled: false
-TiKV Min Version: v3.0.0-60965b006877ca7234adaced7890d7b029ed1306
 Check Table Before Drop: false
+Store: tikv
 1 row in set (0.00 sec)
 ```
 

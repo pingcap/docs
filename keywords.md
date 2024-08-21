@@ -48,7 +48,7 @@ CREATE TABLE test.select (BEGIN int, END int);
 Query OK, 0 rows affected (0.08 sec)
 ```
 
-Starting from v7.6.0, TiDB provides a full list of keywords in the [`INFORMATION_SCHEMA.KEYWORDS`](/information-schema/information-schema-keywords.md) table.
+Starting from v7.5.3 and v7.6.0, TiDB provides a full list of keywords in the [`INFORMATION_SCHEMA.KEYWORDS`](/information-schema/information-schema-keywords.md) table.
 
 ## Keyword list
 
@@ -500,7 +500,6 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - PER_DB
 - PER_TABLE
 - PESSIMISTIC
-- PLACEMENT (S)
 - PLUGINS
 - POINT
 - POLICY
@@ -648,7 +647,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - STATS_BUCKETS
 - STATS_COL_CHOICE
 - STATS_COL_LIST
-- STATS_EXTENDED (R)
+- STATS_EXTENDED
 - STATS_HEALTHY
 - STATS_HISTOGRAMS
 - STATS_LOCKED
