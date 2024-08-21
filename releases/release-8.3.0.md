@@ -256,7 +256,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
     - Use index order to avoid extra sorting operations for SQL queries like `WHERE idx_col_1 IS NULL ORDER BY idx_col_2` [#54188](https://github.com/pingcap/tidb/issues/54188) @[ari-e](https://github.com/ari-e)
     - Display analyzed indexes in the `mysql.analyze_jobs` system table [#53567](https://github.com/pingcap/tidb/issues/53567) @[hi-rustin](https://github.com/hi-rustin)
     - Support applying the `tidb_redact_log` setting to the output of `EXPLAIN` statements [#54565](https://github.com/pingcap/tidb/issues/54565) @[hawkingrei](https://github.com/hawkingrei)
-    - Support backing up and restoring the `mysql.column_stats_usage` table [#53567](https://github.com/pingcap/tidb/issues/53567) @[hi-rustin](https://github.com/hi-rustin)
     - Support generating the `Selection` operator on `IndexRangeScan` for multi-valued indexes to improve query efficiency [#54876](https://github.com/pingcap/tidb/issues/54876) @[time-and-fate](https://github.com/time-and-fate)
     - Support killing automatic `ANALYZE` tasks that are running outside the set time window [#55283](https://github.com/pingcap/tidb/issues/55283) @[hawkingrei](https://github.com/hawkingrei)
     - Adjust estimation results from 0 to 1 for equality conditions that do not hit TopN when statistics are entirely composed of TopN and the modified row count in the corresponding table statistics is non-zero [#47400](https://github.com/pingcap/tidb/issues/47400) @[terry1purcell](https://github.com/terry1purcell)
@@ -304,6 +303,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
         - Optimize the backup feature, improving backup performance and stability during node restarts, cluster scaling-out, and network jitter when backing up large numbers of tables [#52534](https://github.com/pingcap/tidb/issues/52534) @[3pointer](https://github.com/3pointer)
         - Automatically set the environment variable `GOMEMLIMIT` based on the available memory of the BR process to avoid OOM when using BR for backup and restore [#53777](https://github.com/pingcap/tidb/issues/53777) @[Leavrth](https://github.com/Leavrth)
         - Make incremental backups compatible with point-in-time recovery (PITR) [#54474](https://github.com/pingcap/tidb/issues/54474) @[3pointer](https://github.com/3pointer)
+    - Support backing up and restoring the `mysql.column_stats_usage` table [#53567](https://github.com/pingcap/tidb/issues/53567) @[hi-rustin](https://github.com/hi-rustin)
 
 ## Bug fixes
 
