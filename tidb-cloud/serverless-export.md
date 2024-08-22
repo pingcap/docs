@@ -19,9 +19,9 @@ You can export data to:
 
 - Local file 
 - External storage
-  - [Amazon S3](https://aws.amazon.com/s3/)
-  - [Google Cloud Storage](https://cloud.google.com/storage)
-  - [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
+    - [Amazon S3](https://aws.amazon.com/s3/)
+    - [Google Cloud Storage](https://cloud.google.com/storage)
+    - [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
 
 > **Note:**
 >
@@ -41,8 +41,8 @@ To export data to Amazon S3, you need to provide the following information:
 
 - uri: `s3://<bucket-name>/<file-path>`
 - one of the following access methods:
-  - [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): make sure the access key has the `s3:PutObject` and `s3:ListBucket` permissions.
-  - [role arn](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role arn has the `s3:PutObject` and `s3:ListBucket` permissions. 
+    - [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): make sure the access key has the `s3:PutObject` and `s3:ListBucket` permissions.
+    - [role arn](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role arn has the `s3:PutObject` and `s3:ListBucket` permissions. 
 
 See [Configure TiDB Cloud Serverless external storage access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access) to learn how to configure the Amazon S3 access.
 
@@ -85,10 +85,10 @@ You can export data in the following formats:
 
 - `SQL`: export data in SQL format.
 - `CSV`: export data in CSV format, you can specify the following options:
-  - `delimiter`: specify the delimiter used in the exported data. The default delimiter is `"`.
-  - `separator`: specify the character used to separate fields in the exported data. The default separator is `,`.
-  - `header`: specify whether to include a header row in the exported data. The default value is `true`.
-  - `null-value`: specify the string that represents a NULL value in the exported data. The default value is `\N`.
+    - `delimiter`: specify the delimiter used in the exported data. The default delimiter is `"`.
+    - `separator`: specify the character used to separate fields in the exported data. The default separator is `,`.
+    - `header`: specify whether to include a header row in the exported data. The default value is `true`.
+    - `null-value`: specify the string that represents a NULL value in the exported data. The default value is `\N`.
 - `Parquet`: export data in Parquet format.(Only supported in TiDB Cloud CLI now)
 
 The schema and data are exported according to the following naming conventions:
@@ -109,6 +109,7 @@ You can compress the exported csv and sql data using the following algorithms:
 - `none`: do not compress the exported data.
 
 You can compress the exported parquet data using the following algorithms:
+
 - `zstd`(default): compress the parquet file with zstd.
 - `gzip`: compress the parquet file with gzip.
 - `snappy`: compress the parquet file with snappy.
