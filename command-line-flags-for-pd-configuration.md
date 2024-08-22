@@ -82,11 +82,7 @@ PD is configurable using command-line flags and environment variables.
 ## `--name`
 
 - The human-readable unique name for this PD member
-<<<<<<< HEAD
-- Default: "pd"
-=======
 - Default: `"pd-${hostname}"`
->>>>>>> dd95725bea (pd: Fix the default name of the configuration (#18653))
 - If you want to start multiply PDs, you must use different name for each one.
 
 ## `--cacert`
