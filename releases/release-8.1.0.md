@@ -190,10 +190,6 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 | TiCDC | [`sink.debezium.output-old-value`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | Controls whether to output the value before the row data changes. The default value is `true`. When it is disabled, the `UPDATE` event does not output the "before" field. |
 | TiCDC | [`sink.open.output-old-value`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | Controls whether to output the value before the row data changes. The default value is `true`. When it is disabled, the `UPDATE` event does not output the "p" field. |
 
-## Offline package changes
-
-In v8.1.0, `arbiter` is removed from the `TiDB-community-toolkit` [binary package](/binary-package.md).
-
 ## Deprecated features
 
 * It is planned to redesign [the auto-evolution of execution plan bindings](/sql-plan-management.md#baseline-evolution) in subsequent releases, and the related variables and behavior will change.
