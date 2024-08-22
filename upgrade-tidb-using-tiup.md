@@ -8,11 +8,14 @@ aliases: ['/docs/dev/upgrade-tidb-using-tiup/','/docs/dev/how-to/upgrade/using-t
 
 This document is targeted for the following upgrade paths:
 
-- Upgrade from TiDB 4.0 versions to TiDB 8.2.
-- Upgrade from TiDB 5.0-5.4 versions to TiDB 8.2.
-- Upgrade from TiDB 6.0-6.6 to TiDB 8.2.
-- Upgrade from TiDB 7.0-7.6 to TiDB 8.2.
-- Upgrade from TiDB 8.0-8.1 to TiDB 8.2.
+- For LTS verions:
+    - Upgrade from TiDB v6.1 to TiDB v6.5 or TiDB v7.1
+    - Upgrade from TiDB v6.5 to TiDB v7.1 or TiDB v7.5 
+    - Upgrade from TiDB v7.1 to TiDB v7.5 or TiDB v8.1 
+    - Upgrade from TiDB v7.5 to TiDB v8.1 
+
+- For DRM versions:
+    - Only support upgrading to the next version, for example, upgrade from TiDB 6.1 to TiDB 6.2.
 
 > **Warning:**
 >
