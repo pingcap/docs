@@ -647,7 +647,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - STATS_BUCKETS
 - STATS_COL_CHOICE
 - STATS_COL_LIST
-- STATS_EXTENDED (R)
+- STATS_EXTENDED
 - STATS_HEALTHY
 - STATS_HISTOGRAMS
 - STATS_LOCKED

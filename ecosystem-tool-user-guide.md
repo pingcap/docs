@@ -127,6 +127,10 @@ The following are the basics of TiCDC:
 
 [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) is a tool that collects binlog for TiDB clusters and provides nearly real-time data replication and backup. You can use it for incremental data replication between TiDB clusters, such as making a TiDB cluster the secondary cluster of the primary TiDB cluster.
 
+> **Warning:**
+>
+> Starting from v7.5.0, [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) replication is deprecated. Starting from v8.3.0, TiDB Binlog is fully deprecated, with removal planned for a future release. For incremental data replication, use [TiCDC](/ticdc/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [PITR](/br/br-pitr-guide.md).
+
 The following are the basics of TiDB Binlog:
 
 - Source: TiDB clusters
