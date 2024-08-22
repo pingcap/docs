@@ -18,7 +18,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.1/quick-start-with-
 
 ## Offline package changes
 
-In v8.1.0, `arbiter` is removed from the `TiDB-community-toolkit` [binary package](/binary-package.md).
+In v8.1.1, `arbiter` is removed from the `TiDB-community-toolkit` [binary package](/binary-package.md).
 
 ## Improvements
 
