@@ -806,7 +806,7 @@ SELECT INSTR(0123, "12");
 
 ### [`LCASE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lcase)
 
-The `LCASE(str)` function is a synonym for [`LOWER(str)`](#lower), which returns the lowercase of the given argument. 
+The `LCASE(str)` function is a synonym for [`LOWER(str)`](#lower), which returns the lowercase of the given argument.
 
 ### [`LEFT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_left)
 
@@ -818,10 +818,10 @@ Syntax:
 LEFT(`str`, `len`)
 ```
 
-- `str`: the original string to extract characters. If `str` contains a multibyte character, the function counts it as a single code point. 
-- `len`: the length of characters to be returned. 
+- `str`: the original string to extract characters. If `str` contains a multibyte character, the function counts it as a single code point.
+- `len`: the length of characters to be returned.
     - If `len` is equal to or less than 0, the function returns an empty string.
-    - If `len` is equal to or greater than the length of `str`, the function returns the original `str`. 
+    - If `len` is equal to or greater than the length of `str`, the function returns the original `str`.
 - If any argument is `NULL`, the function returns `NULL`.
 
 Examples:
@@ -1445,11 +1445,9 @@ SELECT MAKE_SET(b'111','foo','bar','baz');
 
 ### [`MID()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_mid)
 
-The `MID(str, pos, len)` function returns a substring starting from the specified `pos` position with the `len` length.
+The `MID(str, pos, [len])` function returns a substring starting from the specified `pos` position with the `len` length.
 
 If any of the arguments are `NULL`, the function returns `NULL`.
-
-TiDB does not support the two-argument variant of this function. For more information, see [#52420](https://github.com/pingcap/tidb/issues/52420).
 
 Examples:
 
@@ -1598,7 +1596,7 @@ SELECT CHAR(97), CHAR(65);
 1 row in set (0.01 sec)
 ```
 
-The following example shows how `ORD()` handles multibyte characters. Here, both `101` and `0x65` are the UTF-8 encoded values for the `e` character, but in different formats. And both `50091` and `0xC3AB` represent the same values, but for the `ë` character. 
+The following example shows how `ORD()` handles multibyte characters. Here, both `101` and `0x65` are the UTF-8 encoded values for the `e` character, but in different formats. And both `50091` and `0xC3AB` represent the same values, but for the `ë` character.
 
 ```sql
 SELECT ORD('e'), ORD('ë'), HEX('e'), HEX('ë');
@@ -1652,7 +1650,7 @@ In this example a number of strings are matched against two regular expressions.
 
 ```sql
 WITH vals AS (
-    SELECT 'TiDB' AS v 
+    SELECT 'TiDB' AS v
     UNION ALL
     SELECT 'Titanium'
     UNION ALL
@@ -1660,7 +1658,7 @@ WITH vals AS (
     UNION ALL
     SELECT 'Rust'
 )
-SELECT 
+SELECT
     v,
     v REGEXP '^Ti' AS 'starts with "Ti"',
     v REGEXP '^.{4}$' AS 'Length is 4 characters'
@@ -2018,8 +2016,8 @@ The following example generates a sequence of numbers from 1 to 20 using a [recu
 
 ```sql
 WITH RECURSIVE nr(n) AS (
-    SELECT 1 AS n 
-    UNION ALL 
+    SELECT 1 AS n
+    UNION ALL
     SELECT n+1 FROM nr WHERE n<20
 )
 SELECT n, REPEAT('x',n) FROM nr;
