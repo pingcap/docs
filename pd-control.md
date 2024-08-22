@@ -979,6 +979,12 @@ Use this command to view and manage the configuration of the `evict-leader-sched
 
     If all store configurations of an `evict-leader-scheduler` are removed, the scheduler itself is automatically removed.
 
+- When an `evict-leader-scheduler` already exists, use the `set batch` subcommand to modify the `batch` value. `batch` controls the number of Operators generated during a single scheduling process. The default value is `3`, and the range is `[1, 10]`. The larger the `batch` value, the faster the scheduling speed.
+
+    ```bash
+    scheduler config evict-leader-scheduler set batch 10 // Set the batch value to 10
+    ```
+
 ### `service-gc-safepoint`
 
 Use this command to query the current GC safepoint and service GC safepoint. The output is as follows:
