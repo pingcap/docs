@@ -187,7 +187,7 @@ date-separator = 'day'
 # Note: This configuration item only takes effect if the downstream is a storage service.
 enable-partition-separator = true
 
-# Whether to disable the output of schema information. The default value is false, which means enabling the output of schema information.
+# Controls wether to disable the output of schema information. The default value is false, which means enabling the output of schema information.
 # Note: This parameter only takes effect when the sink type is MQ and the output protocol is Debezium.
 debezium-disable-schema = false
 
