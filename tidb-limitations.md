@@ -52,7 +52,17 @@ This document describes the common usage limitations of TiDB, including the maxi
 |:----------|:----------|
 | Size       | 6 MB by default. You can adjust the size limit via the [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) configuration item. |
 
+<<<<<<< HEAD
 ## Limitations on string types
+=======
+<CustomContent platform="tidb">
+
+You can adjust the size limit via the [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500) configuration item.
+
+</CustomContent>
+
+## Limitations on data types
+>>>>>>> e65145aa85 (Make the introduced version clear for "txn-entry-size-limit" (#18672))
 
 | Type       | Upper limit   |
 |:----------|:----------|
