@@ -138,7 +138,7 @@ After setting up the environment, you can use the backup and restore functions o
 
     > **Note:**
     >
-    > TiCDC `gc-ttl` is 24 hours by default. If the backup and restore takes a long time, the default `gc-ttl` might not be sufficient, which could cause the subsequent [incremental replication task](/update-migrate-from-tidb-to-tidb/migrate-from-tidb-to-tidb.md#step-3-migrate-incremental-data) to fail. To avoid this situation, adjust the `gc-ttl` value according to your specific needs when starting the TiCDC server. For more information, see [What is `gc-ttl` in TiCDC](/ticdc/ticdc-faq.md#what-is-gc-ttl-in-ticdc).
+    > TiCDC `gc-ttl` is 24 hours by default. If the backup and restore takes a long time, the default `gc-ttl` might not be sufficient, which could cause the subsequent [incremental replication task](#step-3-migrate-incremental-data) to fail. To avoid this situation, adjust the `gc-ttl` value according to your specific needs when starting the TiCDC server. For more information, see [What is `gc-ttl` in TiCDC](/ticdc/ticdc-faq.md#what-is-gc-ttl-in-ticdc).
 
 2. Back up data.
 
