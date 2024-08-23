@@ -86,9 +86,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
     + TiCDC
 
         - Fix the issue that the cdc server might panic if it receives an HTTP request before the cdc server fully starts [#6838](https://github.com/pingcap/tiflow/issues/6838) @[asddongmen](https://github.com/asddongmen)
-        - Fix the log flooding issue during upgrade [#7235](https://github.com/pingcap/tiflow/issues/7235) @[hi-rustin](https://github.com/hi-rustin)
-        - Fix the issue that changefeed's redo log files might be deleted by mistake [#6413](https://github.com/pingcap/tiflow/issues/6413) @[hi-rustin](https://github.com/hi-rustin)
-        - Fix the issue that TiCDC might become unavailable when too many operations in an etcd transaction are committed [#7131](https://github.com/pingcap/tiflow/issues/7131) @[hi-rustin](https://github.com/hi-rustin)
+        - Fix the log flooding issue during upgrade [#7235](https://github.com/pingcap/tiflow/issues/7235) @[hi-rustin](https://github.com/Rustin170506)
+        - Fix the issue that changefeed's redo log files might be deleted by mistake [#6413](https://github.com/pingcap/tiflow/issues/6413) @[hi-rustin](https://github.com/Rustin170506)
+        - Fix the issue that TiCDC might become unavailable when too many operations in an etcd transaction are committed [#7131](https://github.com/pingcap/tiflow/issues/7131) @[hi-rustin](https://github.com/Rustin170506)
         - Fix the issue that data inconsistency might occur when non-reentrant DDL statements in redo logs are executed twice [#6927](https://github.com/pingcap/tiflow/issues/6927) @[hicqu](https://github.com/hicqu)
 
     + Backup & Restore (BR)
