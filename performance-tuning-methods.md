@@ -274,7 +274,27 @@ The read write traffic In the TPC-C workload as below:
 
 ![TPC-C](/media/performance/tpcc_read_write_traffic.png)
 
+**Example 2: write traffic before and after Titan**
 
+For an insert workload with a 6KB record size, Titan significantly reduces the write traffic and compaction I/O flow. Titan reduces compaction traffic significantly, which in turn boosts the overall performance and resource utilization of TiKV. Here are the changes:
+
+###### Write Traffic before titan
+- Client -> TiDB: 510 MB/s
+- TiDB -> TiKV: general: 187 MB/s
+- TiDB -> TiKV: internal: 3.2 KB/s
+- TiKV -> Rocksdb: 753 MB/s
+- RocksDB Compaction: 10.6 GB/s
+
+![Titan Disable](/media/performance/titan_disable.png)
+
+###### Write Traffic after titan
+- Client -> TiDB: 586 MB/s
+- TiDB -> TiKV: general: 295 MB/s
+- TiDB -> TiKV: internal: 3.66 KB/s
+- TiKV -> Rocksdb: 1.21 GB/s
+- RocksDB Compaction: 4.68 MB/s
+
+![Titan Enable](/media/performance/titan_enable.png)
 
 ### Query latency breakdown and key latency metrics
 
