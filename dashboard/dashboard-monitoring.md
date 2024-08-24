@@ -81,20 +81,38 @@ Generally, dividing `tso - cmd` by `tso - request` yields the average batch size
 - active connections: Number of active connections to all TiDB instances
 - Number of connections to each TiDB instance
 
-### TiDB CPU
+### TiDB CPU/Memory
 
-- avg: Average CPU utilization across all TiDB instances
-- delta: Maximum CPU utilization of all TiDB instances minus minimum CPU utilization of all TiDB instances
-- max: Maximum CPU utilization across all TiDB instances
+- CPU-Avg: Average CPU utilization across all TiDB instances
+- CPU-Delta: Maximum CPU utilization of all TiDB instances minus minimum CPU utilization of all TiDB instances
+- CPU-Max: Maximum CPU utilization across all TiDB instances
+- CPU-Quota: TiDB CPU quota
+- Mem-Max: Maximum memory utilization across all TiDB instances
 
-### TiKV CPU/IO MBps
+### TiKV CPU/Memory
 
-- CPU-Avg: Average CPU utilization of all TiKV instances
+- CPU-Avg: Average CPU utilization across all TiKV instances
 - CPU-Delta: Maximum CPU utilization of all TiKV instances minus minimum CPU utilization of all TiKV instances
-- CPU-MAX: Maximum CPU utilization among all TiKV instances
-- IO-Avg: Average MBps of all TiKV instances
-- IO-Delt: Maximum MBps of all TiKV instances minus minimum MBps of all TiKV instances
-- IO-MAX: Maximum MBps of all TiKV instances
+- CPU-Max: Maximum CPU utilization across all TiKV instances
+- CPU-Quota: TiKV CPU quota
+- Mem-Max: Maximum memory utilization across all TiKV instances
+
+### PD CPU/Memory
+
+- CPU-Max: Maximum CPU utilization across all PD instances
+- CPU-Quota: PD CPU quota
+- Mem-Max: Maximum memory utilization across all PD instances
+
+### Read Traffic
+- TiDB -> Client: This metric displays the outbound traffic statistics from TiDB to the client.
+- Rocksdb -> TiKV: This metric tracks the data flow TiKV retriving from RocksDB during read operations within the storage layer.
+
+### Write Traffic
+- Client -> TiDB: This metric displays the inbound traffic statistics from the client to TiDB.
+- TiDB -> TiKV: general: This metric reflects the rate at which forground transactions are written from TiDB to TiKV.
+- TiDB -> TiKV: internal: This metric reflects the rate at which internal transactions are written from TiDB to TiKV.
+- TiKV -> Rocksdb: This metric monitors the flow of write operations from TiKV to RocksDB
+- RocksDB Compaction: The total read and write I/O flow from RocksDB Compaction operations.
 
 ### Duration
 

@@ -243,7 +243,7 @@ The read and write panels provide insights into the traffic patterns within your
 - TiDB -> Client: This metric displays the outbound traffic statistics from TiDB to the client.
 - Rocksdb -> TiKV: This metric tracks the data flow TiKV retriving from RocksDB during read operations within the storage layer.
 
-###### Write Traffic
+##### Write Traffic
 - Client -> TiDB: This metric displays the inbound traffic statistics from the client to TiDB.
 - TiDB -> TiKV: general: This metric reflects the rate at which forground transactions are written from TiDB to TiKV.
 - TiDB -> TiKV: internal: This metric reflects the rate at which internal transactions are written from TiDB to TiKV.
@@ -261,7 +261,7 @@ blob-file-compression = "zstd"
 **Example 1: read and write traffic in TPCC workload**
 
 The read write traffic In the TPC-C workload as below:
-##### Read Traffic
+###### Read Traffic
 - TiDB -> Client: 14.2 MB/s
 - Rocksdb -> TiKV: 469 MB/s, be noted not only the select statement need to read from Rocksdb to TiKV, the insert, update and delete statement also need to read data Rocksdb to TiKV, before commit the trasaction.
 
