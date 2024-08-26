@@ -118,7 +118,7 @@ This section lists the object limitations on identifier length, a single table, 
 
 <CustomContent platform="tidb">
 
-You can adjust the size limit of a single line via the [**txn-entry-size-limit**](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) configuration item.
+You can adjust the size limit of a single line via the [**txn-entry-size-limit**](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500) configuration item.
 
 </CustomContent>
 
